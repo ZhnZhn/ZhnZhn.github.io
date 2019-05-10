@@ -46,8 +46,6 @@ var _ChartActions = require('../actions/ChartActions');
 
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
-var _AppAction = require('../actions/AppAction');
-
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
@@ -122,7 +120,7 @@ var _crDialogComp = function _crDialogComp(dType, browserType, dConf) {
       loadFn = _RouterLoadFn2.default.getFn(loadFnType, dialogType),
       proxy = isProxy ? _ChartStore2.default.getProxy() : void 0,
       getKey = isGetKey && _ChartStore2.default.getKey,
-      onError = isGetKey && _AppAction.showErrDialog,
+      onError = isGetKey && _ComponentActions2.default.showAlert,
       onLoad = onLoadChart.bind(null, {
     chartType: itemKey,
     browserType: browserType, conf: conf

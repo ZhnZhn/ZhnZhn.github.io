@@ -36,6 +36,18 @@ var _zhEnableDataLabels = require('./zhEnableDataLabels');
 
 var _zhEnableDataLabels2 = _interopRequireDefault(_zhEnableDataLabels);
 
+var _zhGetId = require('./zhGetId');
+
+var _zhGetId2 = _interopRequireDefault(_zhGetId);
+
+var _zhGetFromToDates = require('./zhGetFromToDates');
+
+var _zhGetFromToDates2 = _interopRequireDefault(_zhGetFromToDates);
+
+var _zhZoomX = require('./zhZoomX');
+
+var _zhZoomX2 = _interopRequireDefault(_zhZoomX);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HighchartsZhn = function HighchartsZhn(Highcharts) {
@@ -43,13 +55,18 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
       Chart = Highcharts.Chart;
 
   (0, _wrapExportChartLocal2.default)(wrap, Chart);
-  (0, _zhRemoveCategory2.default)(Chart);
   (0, _zhCaption2.default)(Chart);
-  (0, _zhAddSeriaToYAxis2.default)(Chart);
-  (0, _zhToggleSeria2.default)(Chart);
   (0, _zhTogglePlotLines2.default)(Chart);
-  (0, _zhToggle2H2.default)(Chart);
-  (0, _zhEnableDataLabels2.default)(Chart);
+  Object.assign(Chart.prototype, {
+    zhRemoveCategory: _zhRemoveCategory2.default,
+    zhAddSeriaToYAxis: _zhAddSeriaToYAxis2.default,
+    zhToggleSeria: _zhToggleSeria2.default,
+    zhToggle2H: _zhToggle2H2.default,
+    zhEnableDataLabels: _zhEnableDataLabels2.default,
+    zhGetId: _zhGetId2.default,
+    zhGetFromToDates: _zhGetFromToDates2.default,
+    zhZoomX: _zhZoomX2.default
+  });
 };
 
 exports.default = HighchartsZhn;

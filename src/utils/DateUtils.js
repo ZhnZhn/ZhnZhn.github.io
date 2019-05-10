@@ -79,8 +79,8 @@ const DateUtils = {
 
  isDmy(str){
 	 const _str = str || ''
-			 , [ d=10, m=10, y=1970 ] = _str.toString().split('-');
-		return DateUtils.isYmd(`${y}-${m}-${d}`);
+	 , [ d=10, m=10, y=MIN_YEAR-1 ] = _str.toString().split('-');
+	 return DateUtils.isYmd(`${y}-${m}-${d}`);
  },
 
  ymdToUTC: (str) => {

@@ -116,6 +116,7 @@ var ChartToolbar = function (_Component) {
           onCopy = _props.onCopy,
           onPasteTo = _props.onPasteTo,
           onMinMax = _props.onMinMax,
+          onZoom = _props.onZoom,
           onClickInfo = _props.onClickInfo,
           _config$zhConfig = config.zhConfig,
           zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
@@ -185,6 +186,7 @@ var ChartToolbar = function (_Component) {
             config: config,
             onX2H: onClick2H,
             onMinMax: onMinMax,
+            onZoom: onZoom,
             onCopy: onCopy,
             onPasteTo: onPasteTo
           })

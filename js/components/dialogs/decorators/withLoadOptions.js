@@ -16,13 +16,10 @@ var _ComponentActions = require('../../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
-var _Type = require('../../../constants/Type');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _fnShowAlertDialog = function _fnShowAlertDialog(alertCaption, alertDescr) {
-  var modalDialogType = _Type.ModalDialog.ALERT;
-  _ComponentActions2.default.showModalDialog(_Type.ModalDialog.ALERT, { alertCaption: alertCaption, alertDescr: alertDescr, modalDialogType: modalDialogType });
+var showAlertDialog = function showAlertDialog(alertCaption, alertDescr) {
+  _ComponentActions2.default.showAlert({ alertCaption: alertCaption, alertDescr: alertDescr });
 };
 
 var _loadOptions = function _loadOptions(option) {
@@ -46,7 +43,7 @@ var _loadOptions = function _loadOptions(option) {
     if (status >= 200 && status < 400) {
       return response.json();
     } else if (status >= 400 && status < 500) {
-      _fnShowAlertDialog('Client Error:', status + ' ' + statusText);
+      showAlertDialog('Client Error:', status + ' ' + statusText);
       fnOnFailed(target, { isLoadingProp: isLoadingProp, isLoadingFailedProp: isLoadingFailedProp });
       return null;
     } else if (status >= 500 && status < 600) {
@@ -54,7 +51,7 @@ var _loadOptions = function _loadOptions(option) {
         option.retryServer = retryServer - 1;
         target._loadOptionsID = setTimeout(_loadOptions(option), 3E3);
       } else {
-        _fnShowAlertDialog('Server Error:', status + ' ' + statusText);
+        showAlertDialog('Server Error:', status + ' ' + statusText);
         fnOnFailed(target, { isLoadingProp: isLoadingProp, isLoadingFailedProp: isLoadingFailedProp });
       }
       return null;
@@ -102,7 +99,7 @@ var _onLoadOptionsFailed = function _onLoadOptionsFailed(target, _ref2) {
 
   target.setState((_target$setState3 = {}, (0, _defineProperty3.default)(_target$setState3, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState3, isLoadingFailedProp, true), _target$setState3));
   if (error instanceof TypeError) {
-    _fnShowAlertDialog(_Msg2.default.Alert.NETWORK_ERROR.caption, _Msg2.default.Alert.NETWORK_ERROR.descr);
+    showAlertDialog(_Msg2.default.Alert.NETWORK_ERROR.caption, _Msg2.default.Alert.NETWORK_ERROR.descr);
   }
 };
 

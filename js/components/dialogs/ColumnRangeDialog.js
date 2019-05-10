@@ -38,10 +38,6 @@ var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
 var _DialogCell = require('./DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
@@ -119,7 +115,7 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
 
     _initialiseProps.call(_this);
 
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Flat, {
       key: 'yes',
       caption: 'Yes, Connect'
       //accessKey="y"
@@ -260,11 +256,8 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
       color: _this2._color,
       index: 0
     }, _crSeriaOptions(_this2._pointWidth));
-    console.log(_this2._pointWidth);
-    console.log(_crSeriaOptions(_this2._pointWidth));
-    console.log(_this2._refW.current.getValue());
-    chart.zhEnableDataLables();
 
+    chart.zhEnableDataLables();
     onClose();
   };
 

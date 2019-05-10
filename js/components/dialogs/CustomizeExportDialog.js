@@ -24,6 +24,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -64,69 +66,79 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var S = {
   GAP_BETWEEN_GROUP: {
-    marginTop: '10px'
+    marginTop: 10
   },
   LABEL_WIDTH: {
-    color: '#1B75BB',
     display: 'inline-block',
+    color: '#1b75bb',
+    width: 100,
+    paddingRight: 5,
     textAlign: 'right',
-    width: '100px',
-    paddingRight: '5px',
     fontSize: '16px',
     fontWeight: 'bold'
   },
   LABEL_HEIGHT: {
-    color: '#1B75BB',
     display: 'inline-block',
-    paddingRight: '5px',
-    paddingLeft: '3px',
+    color: '#1b75bb',
+    paddingRight: 5,
+    paddingLeft: 3,
     fontSize: '16px',
     fontWeight: 'bold'
   },
   INPUT_NUMBER: {
-    marginLeft: '0px',
-    height: '30px'
+    height: 30,
+    marginLeft: 0
   },
   INPUT_TEXT: {
-    width: '250px',
-    marginLeft: '0px',
-    height: '30px'
+    width: 250,
+    height: 30,
+    marginLeft: 0
   }
 };
 
-var CustomizeExportDialog = function (_Component) {
+var CustomizeExportDialog = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(CustomizeExportDialog, _Component);
 
   function CustomizeExportDialog(props) {
     (0, _classCallCheck3.default)(this, CustomizeExportDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (CustomizeExportDialog.__proto__ || Object.getPrototypeOf(CustomizeExportDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (CustomizeExportDialog.__proto__ || Object.getPrototypeOf(CustomizeExportDialog)).call(this, props));
 
-    _this._handleClickDimension = function () {
-      _this.setState({ isShowDimension: !_this.state.isShowDimension });
+    _this._hClickDimension = function () {
+      _this.setState(function (prevState) {
+        return {
+          isShowDimension: !prevState.isShowDimension
+        };
+      });
     };
 
-    _this._handleClickTitle = function () {
-      _this.setState({ isShowTitle: !_this.state.isShowTitle });
+    _this._hClickTitle = function () {
+      _this.setState(function (prevState) {
+        return {
+          isShowTitle: !prevState.isShowTitle
+        };
+      });
     };
 
-    _this._handleClickStyle = function () {
-      _this.setState({ isShowStyle: !_this.state.isShowStyle });
+    _this._hClickStyle = function () {
+      _this.setState(function (prevState) {
+        return {
+          isShowStyle: !prevState.isShowStyle
+        };
+      });
     };
 
-    _this._handleSelectStyle = function (item) {
-      _this.exportStyle = item.value;
+    _this._hSelectStyle = function (item) {
+      _this.exportStyle = item && item.value || {};
     };
 
-    _this._handleExport = function () {
+    _this._hExport = function () {
       var _this$props = _this.props,
           data = _this$props.data,
           onClose = _this$props.onClose,
           chart = data.chart,
-          fn = data.fn;
-
-
-      var _inputOption = {
+          fn = data.fn,
+          _customOption = _ChartExportConfig2.default.merge(true, {
         chart: {
           width: _this.inputWidth.getValue(),
           height: _this.inputHeight.getValue()
@@ -137,22 +149,37 @@ var CustomizeExportDialog = function (_Component) {
         subtitle: {
           text: _this.inputSubtitle.getValue()
         }
-        //const _customOption = merge(_inputOption, this.exportStyle);
-      };var _customOption = _ChartExportConfig2.default.merge(true, _inputOption, _this.exportStyle);
+      }, _this.exportStyle);
 
       fn.apply(chart, [null, _customOption]);
       onClose();
     };
 
+    _this._refInputWidth = function (c) {
+      return _this.inputWidth = c;
+    };
+
+    _this._refInputHeight = function (c) {
+      return _this.inputHeight = c;
+    };
+
+    _this._refInputTitle = function (c) {
+      return _this.inputTitle = c;
+    };
+
+    _this._refInputSubtitle = function (c) {
+      return _this.inputSubtitle = c;
+    };
+
     _this.exportStyle = {};
-    _this.toolbarButtons = [{ caption: 'D', onClick: _this._handleClickDimension }, { caption: 'T', onClick: _this._handleClickTitle }, { caption: 'S', onClick: _this._handleClickStyle }];
+    _this.toolbarButtons = [{ caption: 'D', onClick: _this._hClickDimension }, { caption: 'T', onClick: _this._hClickTitle }, { caption: 'S', onClick: _this._hClickStyle }];
     _this.optionStyles = _ChartExportConfig2.default.createOptionStyles();
     _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
       key: 'export',
       caption: 'Export'
       //accessKey="x"
       , isPrimary: true,
-      onClick: _this._handleExport
+      onClick: _this._hExport
     })];
     _this.state = {
       isShowDimension: true,
@@ -173,8 +200,6 @@ var CustomizeExportDialog = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           isShow = _props.isShow,
           data = _props.data,
@@ -219,9 +244,7 @@ var CustomizeExportDialog = function (_Component) {
               'Width:'
             ),
             _react2.default.createElement(_InputText2.default, {
-              ref: function ref(c) {
-                return _this2.inputWidth = c;
-              },
+              ref: this._refInputWidth,
               initValue: chartWidth,
               style: S.INPUT_NUMBER
             }),
@@ -231,9 +254,7 @@ var CustomizeExportDialog = function (_Component) {
               'Height:'
             ),
             _react2.default.createElement(_InputText2.default, {
-              ref: function ref(c) {
-                return _this2.inputHeight = c;
-              },
+              ref: this._refInputHeight,
               initValue: chartHeight,
               style: S.INPUT_NUMBER
             })
@@ -251,9 +272,7 @@ var CustomizeExportDialog = function (_Component) {
               'Title:'
             ),
             _react2.default.createElement(_InputText2.default, {
-              ref: function ref(c) {
-                return _this2.inputTitle = c;
-              },
+              ref: this._refInputTitle,
               initValue: title,
               style: S.INPUT_TEXT
             })
@@ -267,9 +286,7 @@ var CustomizeExportDialog = function (_Component) {
               'Subtitle:'
             ),
             _react2.default.createElement(_InputText2.default, {
-              ref: function ref(c) {
-                return _this2.inputSubtitle = c;
-              },
+              ref: this._refInputSubtitle,
               initValue: subtitle,
               style: S.INPUT_TEXT
             })
@@ -290,7 +307,7 @@ var CustomizeExportDialog = function (_Component) {
               width: '250',
               options: this.optionStyles,
               placeholder: 'Default',
-              onSelect: this._handleSelectStyle
+              onSelect: this._hSelectStyle
             })
           )
         )
@@ -298,7 +315,8 @@ var CustomizeExportDialog = function (_Component) {
     }
   }]);
   return CustomizeExportDialog;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  data: {}
+}, _temp);
 exports.default = CustomizeExportDialog;
 //# sourceMappingURL=CustomizeExportDialog.js.map

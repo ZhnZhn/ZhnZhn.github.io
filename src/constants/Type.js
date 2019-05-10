@@ -55,7 +55,8 @@ export const ModalDialog = {
   STOCKS_BY_SECTOR : 'STOCKS_BY_SECTOR',
   EDIT_WATCH_GROUP : 'editWatchGroup',
   EDIT_WATCH_LIST : 'editWatchList',
-  PASTE_TO: 'pasteTo'
+  PASTE_TO: 'pasteTo',
+  ZOOM: 'zoom'
 }
 
 export const ChartType = {

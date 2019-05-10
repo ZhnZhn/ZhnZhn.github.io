@@ -51,11 +51,19 @@ var SubMenuItem = (_temp = _class = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (SubMenuItem.__proto__ || Object.getPrototypeOf(SubMenuItem)).call(this, props));
 
     _this._hClick = function () {
-      _this.props.onClick();
+      var _this$props = _this.props,
+          onClick = _this$props.onClick,
+          onClose = _this$props.onClose;
+
+      onClick();
       _this.setState(function (prev) {
         return {
           isActive: !prev.isActive
         };
+      }, function () {
+        if (_isFn(onClose)) {
+          onClose();
+        }
       });
     };
 
@@ -69,7 +77,8 @@ var SubMenuItem = (_temp = _class = function (_Component) {
     caption: PropTypes.string,
     initialIsActive: PropTypes.bool,
     isNotActive: PropTypes.bool,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    onClose: PropTypes.func
   }
   */
 

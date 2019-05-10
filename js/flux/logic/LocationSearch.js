@@ -8,7 +8,9 @@ var _queryString = require('query-string');
 
 var _queryString2 = _interopRequireDefault(_queryString);
 
-var _Type = require('../../constants/Type');
+var _ComponentActions = require('../actions/ComponentActions');
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
 var _LocationQuery = require('./LocationQuery');
 
@@ -24,28 +26,23 @@ var _isQuery = function _isQuery(obj) {
 };
 
 var _trSearchToOptions = function _trSearchToOptions() {
-  var search = window.location ? window.location.search : null;
   try {
-    var obj = _queryString2.default.parse(search);
-    if (_isQuery(obj)) {
-      return _LocationQuery2.default.toOptions(obj);
-    } else {
-      return undefined;
-    }
+    var search = window.location ? window.location.search : null,
+        obj = _queryString2.default.parse(search);
+    return _isQuery(obj) ? _LocationQuery2.default.toOptions(obj) : undefined;
   } catch (err) {
     return undefined;
   }
 };
 
 var LocationSearch = {
-  load: function load(Action) {
+  load: function load() {
     var options = _trSearchToOptions();
-
     if (options) {
-      Action.showModalDialog(_Type.ModalDialog.ASK, { options: options });
+      _ComponentActions2.default.showAsk({ options: options });
     }
   }
 };
 
 exports.default = LocationSearch;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LocationSearch.js.map
+//# sourceMappingURL=LocationSearch.js.map

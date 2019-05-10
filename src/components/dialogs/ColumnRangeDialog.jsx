@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import fn from '../../charts/seriaFns'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import Button from './Button'
 import D from './DialogCell'
 
 const S = {
@@ -74,7 +73,7 @@ class ColumnRangeDialog extends Component {
     super(props)
 
     this._commandButtons = [
-      <Button.Flat
+      <D.Button.Flat
          key="yes"
          caption="Yes, Connect"
          //accessKey="y"
@@ -95,7 +94,8 @@ class ColumnRangeDialog extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+    if (nextProps !== this.props
+        && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
@@ -122,12 +122,8 @@ class ColumnRangeDialog extends Component {
        color: this._color,
        index: 0
      }, _crSeriaOptions(this._pointWidth))
-     console.log(this._pointWidth)
-     console.log(_crSeriaOptions(this._pointWidth))
-     console.log(this._refW.current.getValue())
+
      chart.zhEnableDataLables()
-
-
      onClose()
   }
 

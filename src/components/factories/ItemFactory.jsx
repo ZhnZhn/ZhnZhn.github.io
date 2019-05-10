@@ -29,6 +29,7 @@ const _crAreaChart = function({
        onToTop={CHA.toTop.bind(null, chartType, id)}
        onCopy={CHA.copy}
        onPasteToDialog={CA.showPasteTo}
+       onZoom={CA.zoom}
        getCopyFromChart={store.getCopyFromChart.bind(store)}
        ChartFn={ChartFn}
     />

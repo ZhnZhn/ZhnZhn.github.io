@@ -9,7 +9,7 @@ import Decor from '../dialogs/decorators/Decorators';
 import withForDate from './withForDate'
 
 import RouterOptions from './RouterOptions';
-import PaneOptions from './PaneOptions'
+import ModalOptions from './ModalOptions'
 
 const  MAP_FREQUENCY_DF = 'M';
 
@@ -236,7 +236,7 @@ class DialogEurostat3A extends Component {
                isShow={isToolbar}
                buttons={this.toolbarButtons}
              />
-             <PaneOptions
+             <ModalOptions
                isShow={isOptions}
                toggleOption={this._toggleOptionWithToolbar}
                onClose={this._hideOptionsWithToolbar}

@@ -20,7 +20,7 @@ export const ComponentActionTypes = {
 };
 const A = ComponentActionTypes;
 
-const ComponentActions = Reflux.createActions({
+const CA = Reflux.createActions({
   [A.SHOW_ABOUT]: {},
 
   [A.SHOW_DIALOG]: {},
@@ -36,22 +36,18 @@ const ComponentActions = Reflux.createActions({
   [A.CHANGE_THEME]: {}
 });
 
-ComponentActions.showDescription = ComponentActions
-  .showModalDialog
-  .bind(null, MD.DESCRIPTION)
-ComponentActions.showSettings = ComponentActions
-  .showModalDialog
-  .bind(null, MD.SETTINGS)
-ComponentActions.showPasteTo = ComponentActions
-  .showModalDialog
-  .bind(null, MD.PASTE_TO)
-ComponentActions.showAddToWatch = ComponentActions
-  .showModalDialog
-  .bind(null, MD.ADD_TO_WATCH)
+const _showMd = CA.showModalDialog;
+CA.showDescription = _showMd.bind(null, MD.DESCRIPTION)
+CA.showSettings = _showMd.bind(null, MD.SETTINGS)
+CA.showPasteTo = _showMd.bind(null, MD.PASTE_TO)
+CA.zoom = _showMd.bind(null, MD.ZOOM)
+CA.showReload = _showMd.bind(null, MD.RELOAD)
+CA.showAlert = _showMd.bind(null, MD.ALERT)
+CA.showAsk = _showMd.bind(null, MD.ASK)
+CA.showCustomizeExport = _showMd.bind(null, MD.CUSTOMIZE_EXPORT)
+CA.showAddToWatch = _showMd.bind(null, MD.ADD_TO_WATCH)
 
-ComponentActions.showConfigChart = ComponentActions
-  .showOptionDialog
-  .bind(null, 'ChartConfigDialog')
+const _showOd = CA.showOptionDialog;
+CA.showConfigChart = _showOd.bind(null, 'ChartConfigDialog')
 
-
-export default ComponentActions
+export default CA

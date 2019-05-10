@@ -12,46 +12,50 @@ import InputText from '../zhn/InputText';
 import InputSelect from '../zhn-select/InputSelect';
 
 const S = {
-  GAP_BETWEEN_GROUP : {
-    marginTop: '10px'
+  GAP_BETWEEN_GROUP: {
+    marginTop: 10
   },
   LABEL_WIDTH : {
-    color: '#1B75BB',
     display: 'inline-block',
+    color: '#1b75bb',
+    width: 100,
+    paddingRight: 5,
     textAlign: 'right',
-    width: '100px',
-    paddingRight: '5px',
     fontSize: '16px',
     fontWeight: 'bold'
   },
   LABEL_HEIGHT : {
-    color: '#1B75BB',
     display: 'inline-block',
-    paddingRight: '5px',
-    paddingLeft: '3px',
+    color: '#1b75bb',
+    paddingRight: 5,
+    paddingLeft: 3,
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  INPUT_NUMBER : {
-    marginLeft: '0px',
-    height : '30px'
+  INPUT_NUMBER: {
+    height: 30,
+    marginLeft: 0,
   },
-  INPUT_TEXT : {
-    width: '250px',
-    marginLeft: '0px',
-    height : '30px'
+  INPUT_TEXT: {
+    width: 250,
+    height: 30,
+    marginLeft: 0
   }
-}
+};
 
 class CustomizeExportDialog extends Component {
 
+  static defaultProps = {
+    data: {}
+  }
+
   constructor(props){
-    super()
+    super(props)
     this.exportStyle = {}
     this.toolbarButtons = [
-      { caption: 'D', onClick: this._handleClickDimension },
-      { caption: 'T', onClick: this._handleClickTitle },
-      { caption: 'S', onClick: this._handleClickStyle }
+      { caption: 'D', onClick: this._hClickDimension },
+      { caption: 'T', onClick: this._hClickTitle },
+      { caption: 'S', onClick: this._hClickStyle }
     ]
     this.optionStyles = ChartExportConfig.createOptionStyles()
     this._commandButtons = [
@@ -60,71 +64,81 @@ class CustomizeExportDialog extends Component {
             caption="Export"
             //accessKey="x"
             isPrimary={true}
-            onClick={this._handleExport}
+            onClick={this._hExport}
          />
     ];
     this.state = {
-      isShowDimension : true,
-      isShowTitle : true,
-      isShowStyle : true
+      isShowDimension: true,
+      isShowTitle: true,
+      isShowStyle: true
     }
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+    if (nextProps !== this.props
+        && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
   }
 
-  _handleClickDimension = () => {
-    this.setState({ isShowDimension: !this.state.isShowDimension });
+  _hClickDimension = () => {
+    this.setState(prevState => ({
+      isShowDimension: !prevState.isShowDimension
+    }))
   }
-  _handleClickTitle = () => {
-    this.setState({ isShowTitle: !this.state.isShowTitle });
+  _hClickTitle = () => {
+    this.setState(prevState => ({
+      isShowTitle: !prevState.isShowTitle
+    }))
   }
-  _handleClickStyle = () => {
-    this.setState({ isShowStyle: !this.state.isShowStyle });
+  _hClickStyle = () => {
+    this.setState(prevState => ({
+      isShowStyle: !prevState.isShowStyle
+    }))
   }
 
-  _handleSelectStyle = (item) => {
-    this.exportStyle = item.value;
+  _hSelectStyle = (item) => {
+    this.exportStyle = item
+      && item.value || {};
   }
 
-  _handleExport = () => {
+  _hExport = () => {
     const { data, onClose } = this.props
-        , { chart, fn } = data
-
-    const _inputOption = {
-      chart : {
-        width : this.inputWidth.getValue(),
-        height : this.inputHeight.getValue()
-      },
-      title : {
-        text : this.inputTitle.getValue()
-      },
-      subtitle : {
-        text : this.inputSubtitle.getValue()
-      }
-    }
-    //const _customOption = merge(_inputOption, this.exportStyle);
-    const _customOption = ChartExportConfig.merge(
-      true, _inputOption, this.exportStyle
+    , { chart, fn } = data
+    , _customOption = ChartExportConfig.merge(
+      true, {
+        chart: {
+          width: this.inputWidth.getValue(),
+          height: this.inputHeight.getValue()
+        },
+        title: {
+          text: this.inputTitle.getValue()
+        },
+        subtitle: {
+          text: this.inputSubtitle.getValue()
+        }
+      }, this.exportStyle
     );
 
     fn.apply(chart, [null, _customOption]);
     onClose();
   }
 
+  _refInputWidth = c => this.inputWidth = c
+  _refInputHeight = c => this.inputHeight = c
+  _refInputTitle = c => this.inputTitle = c
+  _refInputSubtitle = c => this.inputSubtitle = c
+
   render(){
     const {isShow, data, onClose} = this.props
-        , { chart } = data
-        , { chartWidth, chartHeight, options } = chart
-        , title = options.title.text
-        , subtitle = options.subtitle.text
-        , {
-            isShowDimension, isShowTitle, isShowStyle
-          } = this.state;
+    , { chart } = data
+    , { chartWidth, chartHeight, options } = chart
+    , title = options.title.text
+    , subtitle = options.subtitle.text
+    , {
+        isShowDimension, isShowTitle, isShowStyle
+      } = this.state;
 
     return (
       <ModalDialog
@@ -141,13 +155,13 @@ class CustomizeExportDialog extends Component {
               <span style={S.LABEL_WIDTH}>Dimension:</span>
               <span style={S.LABEL_HEIGHT}>Width:</span>
               <InputText
-                ref={ c => this.inputWidth = c }
+                ref={this._refInputWidth}
                 initValue={chartWidth}
                 style={S.INPUT_NUMBER}
               />
               <span style={S.LABEL_HEIGHT}>Height:</span>
               <InputText
-                ref={ c => this.inputHeight = c }
+                ref={this._refInputHeight}
                 initValue={chartHeight}
                 style={S.INPUT_NUMBER}
               />
@@ -157,7 +171,7 @@ class CustomizeExportDialog extends Component {
            <div style={{ ...STYLE.rowDiv, ...S.GAP_BETWEEN_GROUP }}>
              <span style={S.LABEL_WIDTH}>Title:</span>
              <InputText
-               ref={ c => this.inputTitle = c }
+               ref={this._refInputTitle}
                initValue={title}
                style={S.INPUT_TEXT}
              />
@@ -165,7 +179,7 @@ class CustomizeExportDialog extends Component {
            <div style={STYLE.rowDiv}>
              <span style={S.LABEL_WIDTH}>Subtitle:</span>
              <InputText
-               ref={ c => this.inputSubtitle = c }
+               ref={this._refInputSubtitle}
                initValue={subtitle}
                style={S.INPUT_TEXT}
              />
@@ -178,12 +192,12 @@ class CustomizeExportDialog extends Component {
                width="250"
                options={this.optionStyles}
                placeholder="Default"
-               onSelect={this._handleSelectStyle}
+               onSelect={this._hSelectStyle}
              />
            </div>
          </ShowHide>
       </ModalDialog>
-    )
+    );
   }
 }
 

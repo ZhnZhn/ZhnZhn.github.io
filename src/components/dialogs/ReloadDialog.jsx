@@ -6,14 +6,14 @@ import ModalDialog from '../zhn-moleculs/ModalDialog';
 const S = {
   MODAL: {
     position: 'static',
-    width: '350px',
-    height: '190px',
+    width: 350,
+    height: 190,
     margin: '70px auto'
   },
   ROOT: {
     color: 'gray',
-    paddingTop: '16px',
-    paddingLeft: '16px',
+    paddingTop: 16,
+    paddingLeft: 16,
     fontWeight: 'bold',
     lineHeight: 1.4
   },
@@ -28,14 +28,13 @@ const S = {
 class ReloadDialog extends Component {
 
   constructor(props){
-    super()
-    this._handleReload = this._handleReload.bind(this)
+    super(props)
     this._commandButtons = [
       <Button.Flat
         key="reload"
-        caption="Yes, Reload"        
+        caption="Yes, Reload"
         isPrimary={true}
-        onClick={this._handleReload}
+        onClick={this._hReload}
       />,
       <Button.Flat
         key="no"
@@ -46,7 +45,7 @@ class ReloadDialog extends Component {
     ]
   }
 
-  _handleReload(){
+  _hReload = () => {
     document.cookie="erc=1"
     window.location.reload(true)
   }
@@ -60,7 +59,7 @@ class ReloadDialog extends Component {
 
   render(){
     const { isShow, onClose, data } = this.props
-        , { prevDate, nextDate} = data;
+        , { prevDate, nextDate } = data;
     return (
       <ModalDialog
         style={S.MODAL}
@@ -78,7 +77,7 @@ class ReloadDialog extends Component {
             {prevDate}
           </p>
           <p>
-            A new build exists. Is Reload App?
+            A new build exists. Is Reload app?
           </p>
           <p style={S.DATE}>
             {nextDate}

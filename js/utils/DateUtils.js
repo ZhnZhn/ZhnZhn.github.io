@@ -107,7 +107,7 @@ var DateUtils = {
 		    _str$toString$split4$2 = _str$toString$split4[1],
 		    m = _str$toString$split4$2 === undefined ? 10 : _str$toString$split4$2,
 		    _str$toString$split4$3 = _str$toString$split4[2],
-		    y = _str$toString$split4$3 === undefined ? 1970 : _str$toString$split4$3;
+		    y = _str$toString$split4$3 === undefined ? MIN_YEAR - 1 : _str$toString$split4$3;
 
 		return DateUtils.isYmd(y + '-' + m + '-' + d);
 	},

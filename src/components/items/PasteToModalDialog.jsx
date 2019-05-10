@@ -7,19 +7,18 @@ import SeriesPane from './SeriesPane'
 
 
 const S = {
-  MODAL : {
-    position : 'static',
-    width: '365px',
-    height: '340px',
-    //minHeight: '200px',
+  MODAL: {
+    position: 'static',
+    width: 365,
+    height: 340,
     margin: '70px auto 0px'
   },
   SCROLL_PANE: {
     overflowY: 'auto',
-    height: '250px',
-    paddingRight: '10px'
+    height: 250,
+    paddingRight: 10
   }
-}
+};
 
 class PasteToModalDialog extends Component {
   constructor(){

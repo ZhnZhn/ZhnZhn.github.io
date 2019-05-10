@@ -10,33 +10,34 @@ import About from './about/About';
 import CompContainer from './zhn-containers/CompContainer';
 import DialogContainer from './dialogs/DialogContainer';
 
-import ComponentActions, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
+import CA, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
 import { BrowserActionTypes as BAT } from '../flux/actions/BrowserActions';
 import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
 
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const PREV_BUILD = '08-05-2019';
+const B = {
+  PR: '08-05-2019',
+  CR: '10-05-2019'
+};
 
 const _checkBuild = () => {
   if (window.fetch) {
-  fetch('./data/build.json', {cache: "no-cache"})
-    .then(res => res.json())
-    .then(json => {
-      const { build='' } = json;
-      if (build !== PREV_BUILD && document.cookie.indexOf('erc') === -1) {
-        ComponentActions.showModalDialog(
-           "RELOAD", {
-             prevDate: PREV_BUILD,
-             nextDate: build
-           }
-        )
-      }
-    })
-    .catch(err => {
-      console.log(err.message)
-    })
+    fetch('./data/build.json', {cache: "no-cache"})
+      .then(res => res.json())
+      .then(json => {
+        const { build='' } = json;
+        if (build !== B.CR && document.cookie.indexOf('erc') === -1) {
+          CA.showReload({
+            prevDate: B.PR,
+            nextDate: build
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
   }
 }
 
@@ -47,7 +48,7 @@ class AppErc extends Component {
 
   componentDidMount(){
     this.unsubsribe = ChartStore.listen(this._onStore)
-    LocationSearch.load(ComponentActions);
+    LocationSearch.load();
     _checkBuild()
   }
   componentWillUnmout(){
@@ -74,7 +75,7 @@ class AppErc extends Component {
               store={ChartStore}
               initBrowserAction={BAT.INIT_BROWSER_DYNAMIC}
               showDialogAction={CAT.SHOW_DIALOG}
-              onCloseDialog={ComponentActions.closeDialog}
+              onCloseDialog={CA.closeDialog}
            />
            <About store={ChartStore} isShow={true} />
            <CompContainer

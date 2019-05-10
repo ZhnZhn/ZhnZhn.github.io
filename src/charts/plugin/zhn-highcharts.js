@@ -6,17 +6,25 @@ import zhToggleSeria from './zhToggleSeria'
 import zhTogglePlotLines from './zhTogglePlotLines'
 import zhToggle2H from './zhToggle2H'
 import zhEnableDataLabels from './zhEnableDataLabels'
+import zhGetId from './zhGetId'
+import zhGetFromToDates from './zhGetFromToDates'
+import zhZoomX from './zhZoomX'
 
 const HighchartsZhn = (Highcharts) => {
   const { wrap, Chart } = Highcharts;
   wrapExportChartLocal(wrap, Chart)
-  zhRemoveCategory(Chart)
   zhCaption(Chart)
-  zhAddSeriaToYAxis(Chart)
-  zhToggleSeria(Chart)
   zhTogglePlotLines(Chart)
-  zhToggle2H(Chart)
-  zhEnableDataLabels(Chart)
+  Object.assign(Chart.prototype, {
+    zhRemoveCategory,
+    zhAddSeriaToYAxis,
+    zhToggleSeria,
+    zhToggle2H,
+    zhEnableDataLabels,
+    zhGetId,
+    zhGetFromToDates,
+    zhZoomX
+  })
 };
 
 export default HighchartsZhn

@@ -17,7 +17,8 @@ class SubMenuItem extends Component{
     caption: PropTypes.string,
     initialIsActive: PropTypes.bool,
     isNotActive: PropTypes.bool,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    onClose: PropTypes.func
   }
   */
   static defaultProps = {
@@ -32,10 +33,15 @@ class SubMenuItem extends Component{
   }
 
   _hClick = () => {
-    this.props.onClick()
+    const { onClick, onClose } = this.props;
+    onClick()
     this.setState(prev => ({
       isActive: !prev.isActive
-    }))
+    }), () => {
+      if (_isFn(onClose)) {
+        onClose()
+      }
+    })
   }
 
   render(){

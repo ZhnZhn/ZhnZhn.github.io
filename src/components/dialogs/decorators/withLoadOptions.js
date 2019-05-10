@@ -1,13 +1,9 @@
 
 import Msg from '../../../constants/Msg';
-import ComponentActions from '../../../flux/actions/ComponentActions';
-import {ModalDialog} from '../../../constants/Type';
+import CA from '../../../flux/actions/ComponentActions';
 
-const _fnShowAlertDialog = function(alertCaption, alertDescr){
-  const modalDialogType = ModalDialog.ALERT;
-  ComponentActions.showModalDialog(
-    ModalDialog.ALERT, { alertCaption, alertDescr, modalDialogType }
-  )
+const showAlertDialog = function(alertCaption, alertDescr){
+  CA.showAlert({ alertCaption, alertDescr })
 };
 
 const _loadOptions = function(option){
@@ -23,7 +19,7 @@ const _loadOptions = function(option){
        if (status>=200 && status<400){
           return response.json();
        } else if (status>=400 && status<500){
-          _fnShowAlertDialog('Client Error:', status + ' ' + statusText)
+          showAlertDialog('Client Error:', status + ' ' + statusText)
           fnOnFailed(target, {isLoadingProp, isLoadingFailedProp})
           return null;
        } else if (status>=500 && status<600) {
@@ -31,7 +27,7 @@ const _loadOptions = function(option){
            option.retryServer = retryServer - 1
            target._loadOptionsID = setTimeout( _loadOptions(option), 3E3)
          } else {
-            _fnShowAlertDialog('Server Error:', status + ' ' + statusText)
+            showAlertDialog('Server Error:', status + ' ' + statusText)
             fnOnFailed(target, { isLoadingProp, isLoadingFailedProp })
          }
          return null;
@@ -80,7 +76,7 @@ const _onLoadOptionsFailed = function(
      [isLoadingFailedProp] : true
   })
   if (error instanceof TypeError){
-    _fnShowAlertDialog(
+    showAlertDialog(
        Msg.Alert.NETWORK_ERROR.caption,
        Msg.Alert.NETWORK_ERROR.descr
      );

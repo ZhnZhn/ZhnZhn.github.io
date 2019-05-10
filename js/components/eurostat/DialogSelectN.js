@@ -59,13 +59,13 @@ var _RouterOptions = require('./RouterOptions');
 
 var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
 
-var _PaneOptions = require('./PaneOptions');
+var _ModalOptions = require('./ModalOptions');
 
-var _PaneOptions2 = _interopRequireDefault(_PaneOptions);
+var _ModalOptions2 = _interopRequireDefault(_ModalOptions);
 
-var _PaneToggle = require('./PaneToggle');
+var _ModalToggle = require('./ModalToggle');
 
-var _PaneToggle2 = _interopRequireDefault(_PaneToggle);
+var _ModalToggle2 = _interopRequireDefault(_ModalToggle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -319,12 +319,12 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
           isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_PaneOptions2.default, {
+        _react2.default.createElement(_ModalOptions2.default, {
           isShow: isOptions,
           toggleOption: this._toggleOptionWithToolbar,
           onClose: this._hideOptionsWithToolbar
         }),
-        _react2.default.createElement(_PaneToggle2.default, {
+        _react2.default.createElement(_ModalToggle2.default, {
           isShow: isToggle,
           selectProps: selectProps,
           isShowDate: isShowDate,

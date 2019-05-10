@@ -26,7 +26,7 @@ const C_GROW = '#90ed7d';
 
 const STYLE = {
   PANE: {
-    width: 220,
+    width: 230,
     margin: 8
   },
   CAPTION: {

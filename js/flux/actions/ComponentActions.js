@@ -37,14 +37,21 @@ var ComponentActionTypes = exports.ComponentActionTypes = {
 };
 var A = ComponentActionTypes;
 
-var ComponentActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_ABOUT, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_OPTION_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART_CONTAINER, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART_CONTAINER_2, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SET_ACTIVE_CONTAINER, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SET_ACTIVE_CHECKBOX, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_MODAL_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CHANGE_THEME, {}), _Reflux$createActions));
+var CA = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_ABOUT, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_OPTION_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART_CONTAINER, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART_CONTAINER_2, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SET_ACTIVE_CONTAINER, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SET_ACTIVE_CHECKBOX, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_MODAL_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CHANGE_THEME, {}), _Reflux$createActions));
 
-ComponentActions.showDescription = ComponentActions.showModalDialog.bind(null, _Type.ModalDialog.DESCRIPTION);
-ComponentActions.showSettings = ComponentActions.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS);
-ComponentActions.showPasteTo = ComponentActions.showModalDialog.bind(null, _Type.ModalDialog.PASTE_TO);
-ComponentActions.showAddToWatch = ComponentActions.showModalDialog.bind(null, _Type.ModalDialog.ADD_TO_WATCH);
+var _showMd = CA.showModalDialog;
+CA.showDescription = _showMd.bind(null, _Type.ModalDialog.DESCRIPTION);
+CA.showSettings = _showMd.bind(null, _Type.ModalDialog.SETTINGS);
+CA.showPasteTo = _showMd.bind(null, _Type.ModalDialog.PASTE_TO);
+CA.zoom = _showMd.bind(null, _Type.ModalDialog.ZOOM);
+CA.showReload = _showMd.bind(null, _Type.ModalDialog.RELOAD);
+CA.showAlert = _showMd.bind(null, _Type.ModalDialog.ALERT);
+CA.showAsk = _showMd.bind(null, _Type.ModalDialog.ASK);
+CA.showCustomizeExport = _showMd.bind(null, _Type.ModalDialog.CUSTOMIZE_EXPORT);
+CA.showAddToWatch = _showMd.bind(null, _Type.ModalDialog.ADD_TO_WATCH);
 
-ComponentActions.showConfigChart = ComponentActions.showOptionDialog.bind(null, 'ChartConfigDialog');
+var _showOd = CA.showOptionDialog;
+CA.showConfigChart = _showOd.bind(null, 'ChartConfigDialog');
 
-exports.default = ComponentActions;
+exports.default = CA;
 //# sourceMappingURL=ComponentActions.js.map

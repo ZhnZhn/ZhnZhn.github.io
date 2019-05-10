@@ -32,6 +32,7 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
       config = _ref.config,
       onX2H = _ref.onX2H,
       onMinMax = _ref.onMinMax,
+      onZoom = _ref.onZoom,
       onCopy = _ref.onCopy,
       onPasteTo = _ref.onPasteTo;
   return _react2.default.createElement(
@@ -54,6 +55,12 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
         onClick: onMinMax
       }),
       _react2.default.createElement(_SubMenuItem2.default, {
+        caption: 'Zoom',
+        isNotActive: true,
+        onClick: onZoom,
+        onClose: onClose
+      }),
+      _react2.default.createElement(_SubMenuItem2.default, {
         caption: 'Copy',
         isNotActive: true,
         onClick: onCopy
@@ -61,7 +68,8 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
       _react2.default.createElement(_SubMenuItem2.default, {
         caption: 'PasteTo',
         isNotActive: true,
-        onClick: onPasteTo
+        onClick: onPasteTo,
+        onClose: onClose
       })
     )
   );

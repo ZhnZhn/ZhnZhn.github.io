@@ -65,6 +65,7 @@ var _crAreaChart = function _crAreaChart(_ref) {
     onToTop: _ChartActions2.default.toTop.bind(null, chartType, id),
     onCopy: _ChartActions2.default.copy,
     onPasteToDialog: _ComponentActions2.default.showPasteTo,
+    onZoom: _ComponentActions2.default.zoom,
     getCopyFromChart: store.getCopyFromChart.bind(store),
     ChartFn: _ChartFn2.default
   }));

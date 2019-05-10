@@ -5,6 +5,8 @@ import D from '../dialogs/DialogCell';
 import A from '../zhn/A'
 
 const INITIAL_COLOR = '#d2b772';
+//const OC_COLOR = '#1b2836';
+const OC_COLOR = 'black';
 const DF_PERIOD = 1;
 
 const S = {
@@ -13,24 +15,14 @@ const S = {
   },
   OC: {
     width: 'auto',
-    paddingRight: 8,
-    marginRight: 8
+    paddingRight: 8
   },
   CAPTION: {
-    color: 'black'
-  },
-  PERIOD_CAPTION: {
-    display: 'inline-block',
-    color: 'black',
-    paddingLeft: 5,
-    fontSize: 16,
-    fontWeight: 'bold'
+    color: OC_COLOR
   },
   PERIOD_INPUT: {
-    width: 56
-  },
-  PL_4: {
-    paddingLeft: 4
+    width: 56,
+    marginRight: 12
   },
   PL_6: {
     paddingLeft: 6
@@ -54,6 +46,22 @@ const S = {
     display: 'none'
   }
 };
+
+const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
+  <React.Fragment>
+    <A.InputText
+      style={S.PERIOD_INPUT}
+      type="number"
+      initValue={initValue}
+      min={1}
+      max={999}
+      maxLength={3}
+      onInputChange={onChangePeriod}
+      onEnter={onPlus}
+    />
+    <A.SvgPlus style={S.INLINE} onClick={onPlus} />
+  </React.Fragment>
+);
 
 const RowGrowthRate = ({
   is,
@@ -83,46 +91,40 @@ const RowGrowthRate = ({
     ocStyle={S.OC}
     caption="Growth Rate"
     captionStyle={S.CAPTION}
-    openColor="black"
+    openColor={OC_COLOR}
     CompAfter={
-       is ? <A.SvgMinus style={S.INLINE} onClick={onMinus} />
-          : <A.SvgPlus style={S.INLINE} onClick={_onPlus} />}
+      is ? <A.SvgMinus
+             style={S.INLINE}
+             onClick={onMinus}
+           />
+         : <InputPlus
+             initValue={_refPeriod.current}
+             onChangePeriod={_onChangePeriod}
+             onPlus={_onPlus}
+           />
+    }
   >
     <div style={S.PL_8}>
+      <D.RowInputColor
+        styleCaption={S.NONE}
+        initValue={INITIAL_COLOR}
+        onEnter={_onColor}
+      />
       <div>
-        <D.RowInputColor
-          styleRoot={S.INLINE}
-          styleCaption={S.NONE}
-          initValue={INITIAL_COLOR}
-          onEnter={_onColor}
-        />
         <D.RowCheckBox
           caption="Column"
-          rootStyle={{ ...S.INLINE, ...S.PL_8 }}
+          rootStyle={{ ...S.INLINE, ...S.PL_6 }}
           styleCaption={S.PL_6}
+          checkedColor={OC_COLOR}
           initValue={true}
           onCheck={_onCheckColumn}
           onUnCheck={_onUnCheckColumn}
         />
-      </div>
-      <div>
-        <D.RowInputText
-          styleRoot={S.INLINE}
-          captionStyle={S.PERIOD_CAPTION}
-          caption="Period"
-          inputStyle={S.PERIOD_INPUT}
-          type="number"
-          initValue={1}
-          min={1}
-          max={999}
-          maxLength={3}
-          onInputChange={_onChangePeriod}
-          onEnter={_onPlus}
-        />
         <D.RowCheckBox
           caption="OnTop"
-          rootStyle={{ ...S.INLINE, ...S.PL_4 }}
+          rootStyle={{ ...S.INLINE, ...S.PL_24 }}
           styleCaption={S.PL_6}
+          checkedColor={OC_COLOR}
           initValue={false}
           onCheck={_onCheckTop}
           onUnCheck={_onUnCheckTop}

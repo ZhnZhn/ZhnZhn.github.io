@@ -24,11 +24,13 @@ const CL = {
 const S = {
   ...STYLE,
   ROOT_DIV_MODAL: {
+    display: 'block',
     position: 'absolute',
     top: '20%',
-    left: '30%',
+    //left: '30%',
+    left: '50%',
     width: 380,
-    display: 'block',
+    marginLeft: -190,    
     zIndex: 10
   },
   HIDE_POPUP: {
@@ -188,7 +190,7 @@ class ModalDialog extends Component {
           onClick={this._hClick}
           onKeyDown={this._hKeyDown}
        >
-      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}        
+      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
            <div style={{...S.CAPTION_DIV, ...TS.EL}}>
               <span style={styleCaption}>{caption}</span>
               <SvgClose

@@ -99,6 +99,10 @@ var S = {
   }
 };
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var AreaChartItem = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(AreaChartItem, _Component);
 
@@ -125,7 +129,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       PropTypes.func,
       PropTypes.bool
     ]),
-    crValueMoving: PropTypes.func
+    crValueMoving: PropTypes.func,
+    onZoom: PropTypes.func
   }
   */
 
@@ -355,6 +360,14 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     _this2.mainChart.zhToggle2H();
   };
 
+  this._handleZoom = function () {
+    var onZoom = _this2.props.onZoom;
+
+    if (_isFn(onZoom)) {
+      onZoom({ chart: _this2.mainChart });
+    }
+  };
+
   this._handleAddToWatch = function () {
     var _props2 = _this2.props,
         caption = _props2.caption,
@@ -475,7 +488,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         onClickConfig: _this2._handleClickConfig,
         onCopy: _this2._handleCopy,
         onPasteTo: _this2._handlePasteTo,
-        onMinMax: _this2._toggleMinMax
+        onMinMax: _this2._toggleMinMax,
+        onZoom: _this2._handleZoom
       })
     );
   };

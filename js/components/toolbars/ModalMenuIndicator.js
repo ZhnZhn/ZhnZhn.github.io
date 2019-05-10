@@ -74,7 +74,7 @@ var C_GROW = '#90ed7d';
 
 var STYLE = {
   PANE: {
-    width: 220,
+    width: 230,
     margin: 8
   },
   CAPTION: {

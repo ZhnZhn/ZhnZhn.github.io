@@ -1,7 +1,7 @@
 
 import queryString from 'query-string';
 
-import { ModalDialog } from '../../constants/Type'
+import CA from '../actions/ComponentActions'
 import LocationQuery from './LocationQuery'
 
 const ARR_B = [ 'UN', 'QE', 'FAO' ];
@@ -17,28 +17,24 @@ const _isQuery = (obj) => obj &&
     ARR_B.indexOf(obj.bT) !== -1;
 
 const _trSearchToOptions = () => {
-  const search = (window.location)
-           ? window.location.search
-           : null;
   try {
-    const obj = queryString.parse(search);
-    if (_isQuery(obj)){
-      return LocationQuery
-        .toOptions(obj);
-    } else {
-      return undefined;
-    }
+    const search = window.location
+      ? window.location.search
+      : null
+    , obj = queryString.parse(search);
+    return _isQuery(obj)
+      ? LocationQuery.toOptions(obj)
+      : undefined;
   } catch(err) {
     return undefined;
   }
-}
+};
 
 const LocationSearch = {
-  load : (Action) => {
+  load: () => {
     const options = _trSearchToOptions();
-
     if (options) {
-      Action.showModalDialog(ModalDialog.ASK, { options })
+      CA.showAsk({ options })
     }
   }
 }

@@ -20,20 +20,13 @@ var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
+var _Modal = require('./Modal.Style');
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CL = 'popup-menu';
-
-var S = {
-  ROOT: {
-    left: 8,
-    zIndex: 100,
-    padding: 12
-  },
-  ROW_CB: {
-    paddingLeft: 0
-  }
-};
+var CHECKED_COLOR = '#1b75bb';
 
 var CheckBoxList = function CheckBoxList(_ref) {
   var selectProps = _ref.selectProps,
@@ -42,8 +35,9 @@ var CheckBoxList = function CheckBoxList(_ref) {
   return selectProps.map(function (item) {
     return _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
       key: item.id,
-      initValue: false,
-      rootStyle: S.ROW_CB,
+      initValue: true,
+      rootStyle: _Modal2.default.ROW_CB,
+      checkedColor: CHECKED_COLOR,
       caption: item.caption,
       onToggle: function onToggle() {
         return _onToggle(crIsId(item.id));
@@ -52,11 +46,11 @@ var CheckBoxList = function CheckBoxList(_ref) {
   });
 };
 
-var PaneToggle = function PaneToggle(_ref2) {
+var ModalToggle = function ModalToggle(_ref2) {
   var isShow = _ref2.isShow,
       style = _ref2.style,
       _ref2$className = _ref2.className,
-      className = _ref2$className === undefined ? CL : _ref2$className,
+      className = _ref2$className === undefined ? _Modal2.default.CL : _ref2$className,
       _ref2$selectProps = _ref2.selectProps,
       selectProps = _ref2$selectProps === undefined ? [] : _ref2$selectProps,
       isShowDate = _ref2.isShowDate,
@@ -67,30 +61,27 @@ var PaneToggle = function PaneToggle(_ref2) {
     _ModalPopup2.default,
     {
       isShow: isShow,
-      style: (0, _extends3.default)({}, S.ROOT, style),
+      style: (0, _extends3.default)({}, _Modal2.default.ROOT, style),
       className: className,
       onClose: onClose
     },
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(CheckBoxList, {
-        selectProps: selectProps,
-        crIsId: crIsId,
-        onToggle: _onToggle2
-      }),
-      _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-        key: 'isForDate',
-        value: isShowDate,
-        rootStyle: S.ROW_CB,
-        caption: 'For Date',
-        onToggle: function onToggle() {
-          return _onToggle2('isShowDate');
-        }
-      })
-    )
+    _react2.default.createElement(CheckBoxList, {
+      selectProps: selectProps,
+      crIsId: crIsId,
+      onToggle: _onToggle2
+    }),
+    _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
+      key: 'isForDate',
+      value: isShowDate,
+      rootStyle: _Modal2.default.ROW_CB,
+      checkedColor: CHECKED_COLOR,
+      caption: 'For Date',
+      onToggle: function onToggle() {
+        return _onToggle2('isShowDate');
+      }
+    })
   );
 };
 
-exports.default = PaneToggle;
-//# sourceMappingURL=PaneToggle.js.map
+exports.default = ModalToggle;
+//# sourceMappingURL=ModalToggle.js.map

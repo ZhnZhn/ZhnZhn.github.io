@@ -63,6 +63,7 @@ class ChartToolbar extends Component {
             onCopy,
             onPasteTo,
             onMinMax,
+            onZoom,
             onClickInfo
           } = this.props
         , { zhConfig={}, info, zhMiniConfigs } = config
@@ -132,6 +133,7 @@ class ChartToolbar extends Component {
              config={config}
              onX2H={onClick2H}
              onMinMax={onMinMax}
+             onZoom={onZoom}
              onCopy={onCopy}
              onPasteTo={onPasteTo}
            />

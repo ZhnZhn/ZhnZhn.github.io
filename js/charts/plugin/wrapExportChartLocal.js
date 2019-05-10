@@ -4,7 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AppAction = require('../../flux/actions/AppAction');
+var _ComponentActions = require('../../flux/actions/ComponentActions');
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var wrapExportChartLocal = function wrapExportChartLocal(wrap, Chart) {
   wrap(Chart.prototype, 'exportChartLocal', function (fn) {
@@ -13,7 +17,7 @@ var wrapExportChartLocal = function wrapExportChartLocal(wrap, Chart) {
     }
 
     if (args.length === 0) {
-      (0, _AppAction.showCustomizeExportDialog)({ fn: fn, chart: this });
+      _ComponentActions2.default.showCustomizeExport({ fn: fn, chart: this });
     } else {
       fn.apply(this, args);
     }

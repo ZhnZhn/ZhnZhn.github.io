@@ -55,9 +55,9 @@ var _RouterOptions = require('./RouterOptions');
 
 var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
 
-var _PaneOptions = require('./PaneOptions');
+var _ModalOptions = require('./ModalOptions');
 
-var _PaneOptions2 = _interopRequireDefault(_PaneOptions);
+var _ModalOptions2 = _interopRequireDefault(_ModalOptions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -283,7 +283,7 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
           isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_PaneOptions2.default, {
+        _react2.default.createElement(_ModalOptions2.default, {
           isShow: isOptions,
           toggleOption: this._toggleOptionWithToolbar,
           onClose: this._hideOptionsWithToolbar

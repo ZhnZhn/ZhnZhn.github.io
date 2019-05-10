@@ -21,7 +21,7 @@ const _crLoadQueryDynamic = option => {
 };
 
 const FactoryAction = {
-   crLoadQuery: (option) => {
+   crLoadQuery: (option) => {     
      return _crLoadQueryDynamic(option);
    }
 };

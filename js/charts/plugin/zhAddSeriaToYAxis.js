@@ -53,29 +53,27 @@ var _crSeria = function _crSeria(_ref, options) {
   }, options);
 };
 
-var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(Chart) {
-  Chart.prototype.zhAddSeriaToYAxis = function (options, seriaOptions) {
-    try {
-      var data = options.data,
-          color = options.color,
-          _options$index = options.index,
-          index = _options$index === undefined ? -1 : _options$index;
+var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
+  try {
+    var data = options.data,
+        color = options.color,
+        _options$index = options.index,
+        index = _options$index === undefined ? -1 : _options$index;
 
-      var _checkYAxis2 = _checkYAxis(index, this),
-          id = _checkYAxis2.id,
-          isNewYAxis = _checkYAxis2.isNewYAxis;
+    var _checkYAxis2 = _checkYAxis(index, this),
+        id = _checkYAxis2.id,
+        isNewYAxis = _checkYAxis2.isNewYAxis;
 
-      if (isNewYAxis) {
-        this.addAxis(_crAxis(id, color), false, true);
-      }
-      var _seria = this.addSeries(_crSeria({
-        id: id, color: color, data: data }, seriaOptions), false);
-      this.redraw();
-      return _seria;
-    } catch (err) {
-      console.log(err.message);
+    if (isNewYAxis) {
+      this.addAxis(_crAxis(id, color), false, true);
     }
-  };
+    var _seria = this.addSeries(_crSeria({
+      id: id, color: color, data: data }, seriaOptions), false);
+    this.redraw();
+    return _seria;
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
 exports.default = zhAddSeriaToYAxis;

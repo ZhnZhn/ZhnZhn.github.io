@@ -44,6 +44,10 @@ var _ColumnRangeDialog = require('./ColumnRangeDialog');
 
 var _ColumnRangeDialog2 = _interopRequireDefault(_ColumnRangeDialog);
 
+var _ZoomDialog = require('./ZoomDialog');
+
+var _ZoomDialog2 = _interopRequireDefault(_ZoomDialog);
+
 var _UsStocksBySectorDialog = require('./UsStocksBySectorDialog');
 
 var _UsStocksBySectorDialog2 = _interopRequireDefault(_UsStocksBySectorDialog);
@@ -68,7 +72,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MSG_OFFLINE = 'It seems you are offline';
 
-var _router = (_router2 = {}, (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ASK, _AskDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.RELOAD, _ReloadDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.INFO, _InfoDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ALERT, _AlertDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.DESCRIPTION, _DescriptionDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.CUSTOMIZE_EXPORT, _CustomizeExportDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.COLUMN_RANGE, _ColumnRangeDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.SETTINGS, _SettingsDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ADD_TO_WATCH, _AddToWatchDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.US_STOCK_BY_SECTOR, _UsStocksBySectorDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.STOCKS_BY_SECTOR, _StocksBySectorDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.PASTE_TO, _PasteToModalDialog2.default), (0, _defineProperty3.default)(_router2, '_loadWL', function _loadWL() {
+var _router = (_router2 = {}, (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ASK, _AskDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.RELOAD, _ReloadDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.INFO, _InfoDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ALERT, _AlertDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.DESCRIPTION, _DescriptionDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.CUSTOMIZE_EXPORT, _CustomizeExportDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.COLUMN_RANGE, _ColumnRangeDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ZOOM, _ZoomDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.SETTINGS, _SettingsDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ADD_TO_WATCH, _AddToWatchDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.US_STOCK_BY_SECTOR, _UsStocksBySectorDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.STOCKS_BY_SECTOR, _StocksBySectorDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.PASTE_TO, _PasteToModalDialog2.default), (0, _defineProperty3.default)(_router2, '_loadWL', function _loadWL() {
   /*eslint-disable no-undef */
   if (process.env.NODE_ENV === 'development') {
     this.WL = System.import("js/components/watch-browser/ModalDialogs.js").then(function (module) {

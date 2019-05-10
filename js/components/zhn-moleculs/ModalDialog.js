@@ -61,11 +61,13 @@ var CL = {
 
 var S = (0, _extends3.default)({}, _Dialog2.default, {
   ROOT_DIV_MODAL: {
+    display: 'block',
     position: 'absolute',
     top: '20%',
-    left: '30%',
+    //left: '30%',
+    left: '50%',
     width: 380,
-    display: 'block',
+    marginLeft: -190,
     zIndex: 10
   },
   HIDE_POPUP: {

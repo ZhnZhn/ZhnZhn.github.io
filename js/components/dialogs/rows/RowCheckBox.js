@@ -43,6 +43,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var TH_ID = 'ROW_CHECKBOX';
 
+var CHECKED_COLOR = '#1b2836';
+
 var S = {
   ROOT: {
     paddingTop: 6,
@@ -58,7 +60,7 @@ var S = {
     cursor: 'pointer'
   },
   CHECKED: {
-    color: 'black'
+    color: CHECKED_COLOR
   }
 };
 
@@ -67,6 +69,12 @@ var _isFn = function _isFn(fn) {
 };
 var _isUndefined = function _isUndefined(v) {
   return typeof v === 'undefined';
+};
+
+var _crCheckedStyle = function _crCheckedStyle(color) {
+  return {
+    color: color
+  };
 };
 
 var RowCheckBox = (_temp = _class = function (_Component) {
@@ -126,7 +134,10 @@ var RowCheckBox = (_temp = _class = function (_Component) {
   /*
   static propTypes = {
     rootStyle : PropTypes.object,
+    checkedRestStroke: PropTypes.string,
+    checkedRestFill: PropTypes.string,
     caption: PropTypes.string,
+    styleCheckedCaption: PropTypes.object,
     initValue: PropTypes.bool,
     value: PropTypes.bool,
     onCheck: PropTypes.func,
@@ -142,22 +153,21 @@ var RowCheckBox = (_temp = _class = function (_Component) {
       var _props = this.props,
           theme = _props.theme,
           rootStyle = _props.rootStyle,
+          checkedColor = _props.checkedColor,
           caption = _props.caption,
           styleCaption = _props.styleCaption,
           value = _props.value,
-          checkedRestStroke = _props.checkedRestStroke,
-          checkedRestFill = _props.checkedRestFill,
           TS = theme.getStyle(TH_ID),
           _value = this.state ? this.state.isChecked : value,
-          _style = _value ? (0, _extends3.default)({}, styleCaption, S.CHECKED) : styleCaption;
+          _style = _value ? (0, _extends3.default)({}, styleCaption, _crCheckedStyle(checkedColor)) : styleCaption;
 
       return _react2.default.createElement(
         'div',
         { style: (0, _extends3.default)({}, S.ROOT, rootStyle) },
         _react2.default.createElement(_SvgCheckBox2.default, {
           value: _value,
-          checkedRestStroke: checkedRestStroke,
-          checkedRestFill: checkedRestFill,
+          checkedRestStroke: checkedColor,
+          checkedRestFill: checkedColor,
           checkedColor: TS.CHECKED_COLOR,
           onCheck: this._hCheck,
           onUnCheck: this._hUnCheck
@@ -175,8 +185,7 @@ var RowCheckBox = (_temp = _class = function (_Component) {
   }]);
   return RowCheckBox;
 }(_react.Component), _class.defaultProps = {
-  checkedRestStroke: 'black',
-  checkedRestFill: 'black'
+  checkedColor: CHECKED_COLOR
 }, _temp);
 exports.default = (0, _withTheme2.default)(RowCheckBox);
 //# sourceMappingURL=RowCheckBox.js.map

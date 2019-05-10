@@ -37,14 +37,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var S = {
   MODAL: {
     position: 'static',
-    width: '350px',
-    height: '190px',
+    width: 350,
+    height: 190,
     margin: '70px auto'
   },
   ROOT: {
     color: 'gray',
-    paddingTop: '16px',
-    paddingLeft: '16px',
+    paddingTop: 16,
+    paddingLeft: 16,
     fontWeight: 'bold',
     lineHeight: 1.4
   },
@@ -62,14 +62,18 @@ var ReloadDialog = function (_Component) {
   function ReloadDialog(props) {
     (0, _classCallCheck3.default)(this, ReloadDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ReloadDialog.__proto__ || Object.getPrototypeOf(ReloadDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ReloadDialog.__proto__ || Object.getPrototypeOf(ReloadDialog)).call(this, props));
 
-    _this._handleReload = _this._handleReload.bind(_this);
+    _this._hReload = function () {
+      document.cookie = "erc=1";
+      window.location.reload(true);
+    };
+
     _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
       key: 'reload',
       caption: 'Yes, Reload',
       isPrimary: true,
-      onClick: _this._handleReload
+      onClick: _this._hReload
     }), _react2.default.createElement(_Button2.default.Flat, {
       key: 'no',
       rootStyle: S.CLOSE,
@@ -80,12 +84,6 @@ var ReloadDialog = function (_Component) {
   }
 
   (0, _createClass3.default)(ReloadDialog, [{
-    key: '_handleReload',
-    value: function _handleReload() {
-      document.cookie = "erc=1";
-      window.location.reload(true);
-    }
-  }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
@@ -129,7 +127,7 @@ var ReloadDialog = function (_Component) {
           _react2.default.createElement(
             'p',
             null,
-            'A new build exists. Is Reload App?'
+            'A new build exists. Is Reload app?'
           ),
           _react2.default.createElement(
             'p',

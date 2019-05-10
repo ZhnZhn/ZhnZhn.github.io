@@ -40,10 +40,6 @@ var _RouterBrowserItem2 = _interopRequireDefault(_RouterBrowserItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _showModalDialogDescription = function _showModalDialogDescription(option) {
-  _ComponentActions2.default.showModalDialog(_Type.ModalDialog.DESCRIPTION, option);
-};
-
 var _crBrowserWatchList = function _crBrowserWatchList(Comp) {
   return _react2.default.createElement(Comp, {
     key: _Type.BrowserType.WATCH_LIST,
@@ -70,7 +66,7 @@ var _crBrowserDynamic = function _crBrowserDynamic(Comp, option) {
       dfProps = option.dfProps,
       ItemOptionComp = itemOptionType ? _RouterItemOption2.default[itemOptionType] || _RouterBrowserItem2.default.DEFAULT : _RouterBrowserItem2.default.DEFAULT,
       ItemComp = itemType ? _RouterBrowserItem2.default[itemType] || _RouterBrowserItem2.default.DEFAULT : undefined,
-      onClickInfo = typeof ItemComp !== "undefined" ? _showModalDialogDescription : undefined,
+      onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions2.default.showDescription : undefined,
       onShowContainer = _ChartActions2.default.showChart.bind(null, chartContainerType, browserType);
 
   return _react2.default.createElement(Comp, {

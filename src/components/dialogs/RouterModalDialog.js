@@ -11,6 +11,7 @@ import AlertDialog from './AlertDialog';
 import DescriptionDialog from './DescriptionDialog';
 import CustomizeExportDialog from './CustomizeExportDialog';
 import ColumnRangeDialog from './ColumnRangeDialog'
+import ZoomDialog from './ZoomDialog'
 import UsStocksBySectorDialog from './UsStocksBySectorDialog';
 import StocksBySectorDialog from './StocksBySectorDialog';
 import SettingsDialog from '../header/SettingsDialog';
@@ -28,6 +29,7 @@ const _router = {
   [M.DESCRIPTION] : DescriptionDialog,
   [M.CUSTOMIZE_EXPORT] : CustomizeExportDialog,
   [M.COLUMN_RANGE] : ColumnRangeDialog,
+  [M.ZOOM]: ZoomDialog,
   [M.SETTINGS] : SettingsDialog,
   [M.ADD_TO_WATCH] : AddToWatchDialog,
   [M.US_STOCK_BY_SECTOR] : UsStocksBySectorDialog,

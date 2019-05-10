@@ -2,22 +2,15 @@ import React from 'react'
 
 import ChartStore from '../stores/ChartStore';
 
-import ComponentActions from '../actions/ComponentActions';
-import ChartActions from '../actions/ChartActions';
-import BrowserActions, { BrowserActionTypes as BAT } from '../actions/BrowserActions';
-import {
-  ModalDialog,
-  BrowserType as BT
-} from '../../constants/Type';
+import CA from '../actions/ComponentActions';
+import CHA from '../actions/ChartActions';
+import BA, { BrowserActionTypes as BAT } from '../actions/BrowserActions';
+import { BrowserType as BT } from '../../constants/Type';
 
 import RouterBrowser from './RouterBrowser';
 
 import RouterItemOption from '../../components/zhn-select/RouterItemOption';
 import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
-
-const _showModalDialogDescription = function(option){
-  ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, option);
-}
 
 
 const _crBrowserWatchList = (Comp) => React.createElement(Comp, {
@@ -45,9 +38,9 @@ const _crBrowserDynamic = (Comp, option) => {
              ? ( RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT )
              : undefined
        , onClickInfo = (typeof ItemComp !== "undefined")
-            ? _showModalDialogDescription
+            ? CA.showDescription
             : undefined
-       , onShowContainer = ChartActions.showChart.bind(null, chartContainerType, browserType);
+       , onShowContainer = CHA.showChart.bind(null, chartContainerType, browserType);
 
    return React.createElement(Comp , {
      dfProps,
@@ -68,8 +61,8 @@ const _crBrowserDynamic = (Comp, option) => {
      showAction : BAT.SHOW_BROWSER_DYNAMIC,
      loadCompletedAction : BAT.LOAD_BROWSER_DYNAMIC_COMPLETED,
      updateAction : BAT.UPDATE_BROWSER_MENU,  //for Type
-     onLoadMenu : BrowserActions.loadBrowserDynamic,
-     onShowLoadDialog : ComponentActions.showModalDialog  //for Type2
+     onLoadMenu : BA.loadBrowserDynamic,
+     onShowLoadDialog : CA.showModalDialog  //for Type2
 
    });
  }

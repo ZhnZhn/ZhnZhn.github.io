@@ -23,6 +23,8 @@ var _A2 = _interopRequireDefault(_A);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var INITIAL_COLOR = '#d2b772';
+//const OC_COLOR = '#1b2836';
+var OC_COLOR = 'black';
 var DF_PERIOD = 1;
 
 var S = {
@@ -31,24 +33,14 @@ var S = {
   },
   OC: {
     width: 'auto',
-    paddingRight: 8,
-    marginRight: 8
+    paddingRight: 8
   },
   CAPTION: {
-    color: 'black'
-  },
-  PERIOD_CAPTION: {
-    display: 'inline-block',
-    color: 'black',
-    paddingLeft: 5,
-    fontSize: 16,
-    fontWeight: 'bold'
+    color: OC_COLOR
   },
   PERIOD_INPUT: {
-    width: 56
-  },
-  PL_4: {
-    paddingLeft: 4
+    width: 56,
+    marginRight: 12
   },
   PL_6: {
     paddingLeft: 6
@@ -73,10 +65,31 @@ var S = {
   }
 };
 
-var RowGrowthRate = function RowGrowthRate(_ref) {
-  var is = _ref.is,
-      onMinus = _ref.onMinus,
+var InputPlus = function InputPlus(_ref) {
+  var initValue = _ref.initValue,
+      onChangePeriod = _ref.onChangePeriod,
       onPlus = _ref.onPlus;
+  return _react2.default.createElement(
+    _react2.default.Fragment,
+    null,
+    _react2.default.createElement(_A2.default.InputText, {
+      style: S.PERIOD_INPUT,
+      type: 'number',
+      initValue: initValue,
+      min: 1,
+      max: 999,
+      maxLength: 3,
+      onInputChange: onChangePeriod,
+      onEnter: onPlus
+    }),
+    _react2.default.createElement(_A2.default.SvgPlus, { style: S.INLINE, onClick: onPlus })
+  );
+};
+
+var RowGrowthRate = function RowGrowthRate(_ref2) {
+  var is = _ref2.is,
+      onMinus = _ref2.onMinus,
+      onPlus = _ref2.onPlus;
 
   var _refColor = (0, _react.useRef)(INITIAL_COLOR),
       _refPeriod = (0, _react.useRef)(DF_PERIOD),
@@ -116,50 +129,41 @@ var RowGrowthRate = function RowGrowthRate(_ref) {
       ocStyle: S.OC,
       caption: 'Growth Rate',
       captionStyle: S.CAPTION,
-      openColor: 'black',
-      CompAfter: is ? _react2.default.createElement(_A2.default.SvgMinus, { style: S.INLINE, onClick: onMinus }) : _react2.default.createElement(_A2.default.SvgPlus, { style: S.INLINE, onClick: _onPlus })
+      openColor: OC_COLOR,
+      CompAfter: is ? _react2.default.createElement(_A2.default.SvgMinus, {
+        style: S.INLINE,
+        onClick: onMinus
+      }) : _react2.default.createElement(InputPlus, {
+        initValue: _refPeriod.current,
+        onChangePeriod: _onChangePeriod,
+        onPlus: _onPlus
+      })
     },
     _react2.default.createElement(
       'div',
       { style: S.PL_8 },
+      _react2.default.createElement(_DialogCell2.default.RowInputColor, {
+        styleCaption: S.NONE,
+        initValue: INITIAL_COLOR,
+        onEnter: _onColor
+      }),
       _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_DialogCell2.default.RowInputColor, {
-          styleRoot: S.INLINE,
-          styleCaption: S.NONE,
-          initValue: INITIAL_COLOR,
-          onEnter: _onColor
-        }),
         _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           caption: 'Column',
-          rootStyle: (0, _extends3.default)({}, S.INLINE, S.PL_8),
+          rootStyle: (0, _extends3.default)({}, S.INLINE, S.PL_6),
           styleCaption: S.PL_6,
+          checkedColor: OC_COLOR,
           initValue: true,
           onCheck: _onCheckColumn,
           onUnCheck: _onUnCheckColumn
-        })
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_DialogCell2.default.RowInputText, {
-          styleRoot: S.INLINE,
-          captionStyle: S.PERIOD_CAPTION,
-          caption: 'Period',
-          inputStyle: S.PERIOD_INPUT,
-          type: 'number',
-          initValue: 1,
-          min: 1,
-          max: 999,
-          maxLength: 3,
-          onInputChange: _onChangePeriod,
-          onEnter: _onPlus
         }),
         _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           caption: 'OnTop',
-          rootStyle: (0, _extends3.default)({}, S.INLINE, S.PL_4),
+          rootStyle: (0, _extends3.default)({}, S.INLINE, S.PL_24),
           styleCaption: S.PL_6,
+          checkedColor: OC_COLOR,
           initValue: false,
           onCheck: _onCheckTop,
           onUnCheck: _onUnCheckTop

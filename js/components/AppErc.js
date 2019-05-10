@@ -74,7 +74,10 @@ var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '08-05-2019';
+var B = {
+  PR: '08-05-2019',
+  CR: '10-05-2019'
+};
 
 var _checkBuild = function _checkBuild() {
   if (window.fetch) {
@@ -84,9 +87,9 @@ var _checkBuild = function _checkBuild() {
       var _json$build = json.build,
           build = _json$build === undefined ? '' : _json$build;
 
-      if (build !== PREV_BUILD && document.cookie.indexOf('erc') === -1) {
-        _ComponentActions2.default.showModalDialog("RELOAD", {
-          prevDate: PREV_BUILD,
+      if (build !== B.CR && document.cookie.indexOf('erc') === -1) {
+        _ComponentActions2.default.showReload({
+          prevDate: B.PR,
           nextDate: build
         });
       }
@@ -130,7 +133,7 @@ var AppErc = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.unsubsribe = _ChartStore2.default.listen(this._onStore);
-      _LocationSearch2.default.load(_ComponentActions2.default);
+      _LocationSearch2.default.load();
       _checkBuild();
     }
   }, {

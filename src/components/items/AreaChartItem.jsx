@@ -38,6 +38,8 @@ const S = {
   }
 };
 
+const _isFn = fn => typeof fn === 'function';
+
 class AreaChartItem extends Component {
   /*
   static propTypes = {
@@ -62,7 +64,8 @@ class AreaChartItem extends Component {
       PropTypes.func,
       PropTypes.bool
     ]),
-    crValueMoving: PropTypes.func
+    crValueMoving: PropTypes.func,
+    onZoom: PropTypes.func
   }
   */
 
@@ -175,6 +178,13 @@ class AreaChartItem extends Component {
     this.mainChart.zhToggle2H()
   }
 
+  _handleZoom = () => {
+    const { onZoom } = this.props;
+    if (_isFn(onZoom)) {
+      onZoom({ chart: this.mainChart })
+    }
+  }
+
   _handleAddToWatch = () => {
     const { caption, config, onAddToWatch } = this.props;
     onAddToWatch( {caption, config} )
@@ -282,6 +292,7 @@ class AreaChartItem extends Component {
              onCopy={this._handleCopy}
              onPasteTo={this._handlePasteTo}
              onMinMax={this._toggleMinMax}
+             onZoom={this._handleZoom}
             />
          </ShowHide>
       );

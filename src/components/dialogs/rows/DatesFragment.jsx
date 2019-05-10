@@ -11,17 +11,26 @@ class DatesFragment extends Component {
   /*
   static propTypes = {
     isShowLabels: PropTypes.bool,
+    placeholder: PropTypes.string,
     initFromDate: PropTypes.string,
     initToDate: PropTypes.string,
+    fromCaption: PropTypes.string,
+    toCaption: PropTypes.string,
+    errMsg: PropTypes.string,
     nForecastDate: PropTypes.number,
     onTestDate: PropTypes.func,
-    msgOnNotValidFormat: PropTypes.func
+    msgOnNotValidFormat: PropTypes.func,
+    onEnter: PropTypes.func
   }
   */
 
   static defaultProps = {
     isShowLabels: true,
-    msgOnNotValidFormat: (item='Date') => `${item} is not in valid format`
+    fromCaption: 'From Date:',
+    toCaption: 'To Date:',
+    errMsg: FORMAT_ERR_MSG,
+    msgOnNotValidFormat: (item='Date') => `${item} is not in valid format`,
+    isPeriodValid: (from, to) => from<=to
   }
 
   _refFromDate = c => this.fromDate = c
@@ -30,8 +39,14 @@ class DatesFragment extends Component {
   render(){
     const {
         isShowLabels,
-        initFromDate, initToDate,
-        nForecastDate, onTestDate
+        placeholder,
+        fromCaption, initFromDate,
+        toCaption, initToDate,
+        dateStyle,
+        nForecastDate,
+        errMsg,
+        onTestDate,
+        onEnter
       } = this.props
     , {
         rowStyle, labelStyle
@@ -41,25 +56,31 @@ class DatesFragment extends Component {
         <div>
           <div style={rowStyle}>
             <span style={labelStyle}>
-               From Date:
+               {fromCaption}
             </span>
             <DateField
                ref={this._refFromDate}
+               rootStyle={dateStyle}
+               placeholder={placeholder}
                initValue={initFromDate}
-               errorMsg={FORMAT_ERR_MSG}
+               errorMsg={errMsg}
                onTest={onTestDate}
+               onEnter={onEnter}
             />
          </div>
          <div style={rowStyle}>
             <span style={labelStyle}>
-              To Date:
+              {toCaption}
             </span>
             <DateField
-                 ref={this._refToDate}
-                 initValue={initToDate}
-                 nForecastDate={nForecastDate}
-                 errorMsg={FORMAT_ERR_MSG}
-                 onTest={onTestDate}
+               ref={this._refToDate}
+               rootStyle={dateStyle}
+               placeholder={placeholder}
+               initValue={initToDate}
+               nForecastDate={nForecastDate}
+               errorMsg={errMsg}
+               onTest={onTestDate}
+               onEnter={onEnter}
             />
          </div>
        </div>
@@ -74,19 +95,30 @@ class DatesFragment extends Component {
   }
 
   getValidation() {
-    const { msgOnNotValidFormat } = this.props
-        , datesMsg = [];
-    if (!this.fromDate.isValid()) { datesMsg.push(msgOnNotValidFormat('From Date')); }
-    if (!this.toDate.isValid())   { datesMsg.push(msgOnNotValidFormat('To Date')); }
+    const {
+      fromDate,
+      toDate
+    } = this
+    , {
+      msgOnNotValidFormat,
+      isPeriodValid
+    } = this.props
+    , datesMsg = [];
 
-    if (this.fromDate.getValue().trim() > this.toDate.getValue().trim() ) {
+    if (!fromDate.isValid()) { datesMsg.push(msgOnNotValidFormat('From Date')); }
+    if (!toDate.isValid())   { datesMsg.push(msgOnNotValidFormat('To Date')); }
+
+    if (datesMsg.length === 0 && !isPeriodValid(
+          fromDate.getValue().trim(),
+          toDate.getValue().trim()
+        )) {
       datesMsg.push(NEAR_ERR_MSG);
     }
 
     if (datesMsg.length>0){
-      return { isValid: false, datesMsg }
+      return { isValid: false, datesMsg };
     }
-    return { isValid : true}
+    return { isValid: true };
   }
 
   focusInput() {

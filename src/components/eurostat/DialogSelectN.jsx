@@ -5,12 +5,12 @@ import crDateConfig from './crDateConfig'
 
 import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
-import Decor from '../dialogs/decorators/Decorators';
+import Decor from '../dialogs/decorators/Decorators'
 import withForDate from './withForDate'
 
-import RouterOptions from './RouterOptions';
-import PaneOptions from './PaneOptions'
-import PaneToggle from './PaneToggle'
+import RouterOptions from './RouterOptions'
+import ModalOptions from './ModalOptions'
+import ModalToggle from './ModalToggle'
 
 const  DF_MAP_FREQUENCY = 'M';
 
@@ -266,12 +266,12 @@ class DialogSelectN extends Component {
              isShow={isToolbar}
              buttons={this.toolbarButtons}
            />
-           <PaneOptions
+           <ModalOptions
              isShow={isOptions}
              toggleOption={this._toggleOptionWithToolbar}
              onClose={this._hideOptionsWithToolbar}
            />
-           <PaneToggle
+           <ModalToggle
              isShow={isToggle}
              selectProps={selectProps}
              isShowDate={isShowDate}

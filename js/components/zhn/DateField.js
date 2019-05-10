@@ -139,6 +139,8 @@ var DateField = (_temp = _class = function (_Component) {
      inputStyle: PropTypes.object,
      initValue: PropTypes.string,
      placeholder: PropTypes.string,
+     inpumode: PropTypes.string,
+     maxLength: PropTypes.number,
      errorMsg: PropTypes.string,
      nForecastDate: PropTypes.number,
      onTest: PropTypes.func,
@@ -153,7 +155,9 @@ var DateField = (_temp = _class = function (_Component) {
           rootStyle = _props.rootStyle,
           inputStyle = _props.inputStyle,
           placeholder = _props.placeholder,
+          inputmode = _props.inputmode,
           name = _props.name,
+          maxLength = _props.maxLength,
           _state = this.state,
           value = _state.value,
           errorInput = _state.errorInput,
@@ -174,7 +178,9 @@ var DateField = (_temp = _class = function (_Component) {
           spellCheck: false,
           type: 'text',
           placeholder: placeholder,
+          inputmode: inputmode,
           value: value,
+          maxLength: maxLength,
           onChange: this._handleChangeValue,
           onBlur: this._handleBlurValue,
           onKeyDown: this._handleKeyDown
@@ -191,7 +197,9 @@ var DateField = (_temp = _class = function (_Component) {
   return DateField;
 }(_react.Component), _class.defaultProps = {
   placeholder: 'YYYY-MM-DD',
+  inputmode: 'numeric',
   name: 'text-date',
+  maxLength: 10,
   onTest: function onTest() {
     return true;
   }

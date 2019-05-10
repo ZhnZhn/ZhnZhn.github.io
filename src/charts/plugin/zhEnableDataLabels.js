@@ -9,23 +9,25 @@ const DATA_LABELS = {
   }
 };
 
-const  zhEnableDataLables = (Chart) => {
-  Chart.prototype.zhEnableDataLables = function(seriaType='columnrange', options) {
-    try {
-      this.update({
-        plotOptions: {
-          [seriaType]: {
-            dataLabels: {
-              ...options,
-              ...DATA_LABELS
-            }
+const  zhEnableDataLables = function(
+  seriaType='columnrange',
+  options
+) {
+  try {
+    this.update({
+      plotOptions: {
+        [seriaType]: {
+          dataLabels: {
+            ...options,
+            ...DATA_LABELS
           }
         }
-      })
-    } catch(err) {
-      console.log(err)
-    }
+      }
+    })
+  } catch(err) {
+    console.log(err)
   }
 };
+
 
 export default zhEnableDataLables

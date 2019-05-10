@@ -63,11 +63,16 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
   /*
   static propTypes = {
     isShowLabels: PropTypes.bool,
+    placeholder: PropTypes.string,
     initFromDate: PropTypes.string,
     initToDate: PropTypes.string,
+    fromCaption: PropTypes.string,
+    toCaption: PropTypes.string,
+    errMsg: PropTypes.string,
     nForecastDate: PropTypes.number,
     onTestDate: PropTypes.func,
-    msgOnNotValidFormat: PropTypes.func
+    msgOnNotValidFormat: PropTypes.func,
+    onEnter: PropTypes.func
   }
   */
 
@@ -76,10 +81,16 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
     value: function render() {
       var _props = this.props,
           isShowLabels = _props.isShowLabels,
+          placeholder = _props.placeholder,
+          fromCaption = _props.fromCaption,
           initFromDate = _props.initFromDate,
+          toCaption = _props.toCaption,
           initToDate = _props.initToDate,
+          dateStyle = _props.dateStyle,
           nForecastDate = _props.nForecastDate,
+          errMsg = _props.errMsg,
           onTestDate = _props.onTestDate,
+          onEnter = _props.onEnter,
           _useRowStyle = (0, _useRowStyle3.default)({ isShowLabels: isShowLabels }),
           rowStyle = _useRowStyle.rowStyle,
           labelStyle = _useRowStyle.labelStyle;
@@ -93,13 +104,16 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
           _react2.default.createElement(
             'span',
             { style: labelStyle },
-            'From Date:'
+            fromCaption
           ),
           _react2.default.createElement(_DateField2.default, {
             ref: this._refFromDate,
+            rootStyle: dateStyle,
+            placeholder: placeholder,
             initValue: initFromDate,
-            errorMsg: FORMAT_ERR_MSG,
-            onTest: onTestDate
+            errorMsg: errMsg,
+            onTest: onTestDate,
+            onEnter: onEnter
           })
         ),
         _react2.default.createElement(
@@ -108,14 +122,17 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
           _react2.default.createElement(
             'span',
             { style: labelStyle },
-            'To Date:'
+            toCaption
           ),
           _react2.default.createElement(_DateField2.default, {
             ref: this._refToDate,
+            rootStyle: dateStyle,
+            placeholder: placeholder,
             initValue: initToDate,
             nForecastDate: nForecastDate,
-            errorMsg: FORMAT_ERR_MSG,
-            onTest: onTestDate
+            errorMsg: errMsg,
+            onTest: onTestDate,
+            onEnter: onEnter
           })
         )
       );
@@ -131,17 +148,22 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
   }, {
     key: 'getValidation',
     value: function getValidation() {
-      var msgOnNotValidFormat = this.props.msgOnNotValidFormat,
+      var fromDate = this.fromDate,
+          toDate = this.toDate,
+          _props2 = this.props,
+          msgOnNotValidFormat = _props2.msgOnNotValidFormat,
+          isPeriodValid = _props2.isPeriodValid,
           datesMsg = [];
 
-      if (!this.fromDate.isValid()) {
+
+      if (!fromDate.isValid()) {
         datesMsg.push(msgOnNotValidFormat('From Date'));
       }
-      if (!this.toDate.isValid()) {
+      if (!toDate.isValid()) {
         datesMsg.push(msgOnNotValidFormat('To Date'));
       }
 
-      if (this.fromDate.getValue().trim() > this.toDate.getValue().trim()) {
+      if (datesMsg.length === 0 && !isPeriodValid(fromDate.getValue().trim(), toDate.getValue().trim())) {
         datesMsg.push(NEAR_ERR_MSG);
       }
 
@@ -172,9 +194,15 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
   return DatesFragment;
 }(_react.Component), _class.defaultProps = {
   isShowLabels: true,
+  fromCaption: 'From Date:',
+  toCaption: 'To Date:',
+  errMsg: FORMAT_ERR_MSG,
   msgOnNotValidFormat: function msgOnNotValidFormat() {
     var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Date';
     return item + ' is not in valid format';
+  },
+  isPeriodValid: function isPeriodValid(from, to) {
+    return from <= to;
   }
 }, _temp2);
 exports.default = DatesFragment;

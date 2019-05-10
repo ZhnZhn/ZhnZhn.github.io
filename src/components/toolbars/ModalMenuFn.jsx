@@ -14,7 +14,7 @@ const _isMinMax = config => config.yAxis
 const ModalMenuFn = ({
   isShow, onClose,
   config,
-  onX2H, onMinMax,
+  onX2H, onMinMax, onZoom,
   onCopy, onPasteTo
 }) => (
   <ModalPopup
@@ -34,6 +34,12 @@ const ModalMenuFn = ({
          />
       }
       <SubMenuItem
+        caption="Zoom"
+        isNotActive={true}
+        onClick={onZoom}
+        onClose={onClose}
+      />
+      <SubMenuItem
         caption="Copy"
         isNotActive={true}
         onClick={onCopy}
@@ -42,6 +48,7 @@ const ModalMenuFn = ({
         caption="PasteTo"
         isNotActive={true}
         onClick={onPasteTo}
+        onClose={onClose}
       />
     </div>
   </ModalPopup>

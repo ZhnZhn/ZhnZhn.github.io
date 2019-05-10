@@ -12,6 +12,8 @@ class DateField extends Component {
      inputStyle: PropTypes.object,
      initValue: PropTypes.string,
      placeholder: PropTypes.string,
+     inpumode: PropTypes.string,
+     maxLength: PropTypes.number,
      errorMsg: PropTypes.string,
      nForecastDate: PropTypes.number,
      onTest: PropTypes.func,
@@ -21,7 +23,9 @@ class DateField extends Component {
 
    static defaultProps = {
      placeholder: 'YYYY-MM-DD',
+     inputmode: 'numeric',
      name: 'text-date',
+     maxLength: 10,
      onTest: () => true
    }
 
@@ -93,12 +97,14 @@ class DateField extends Component {
     const {
             rootStyle, inputStyle,
             placeholder,
-            name
+            inputmode,
+            name,
+            maxLength
           } = this.props
         , { value, errorInput, isValid } = this.state
         , _styleHr = isValid
             ? STYLE.HR_VALID
-            : STYLE.HR_NOT_VALID;
+            : STYLE.HR_NOT_VALID;    
     return (
       <div style={{...STYLE.ROOT, ...rootStyle}}>
         <input
@@ -112,7 +118,9 @@ class DateField extends Component {
            spellCheck={false}
            type="text"
            placeholder={placeholder}
+           inputmode={inputmode}
            value={value}
+           maxLength={maxLength}
            onChange={this._handleChangeValue}
            onBlur={this._handleBlurValue}
            onKeyDown={this._handleKeyDown}

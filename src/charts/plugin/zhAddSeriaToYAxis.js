@@ -41,23 +41,21 @@ const _crSeria = ({ id, color, data }, options) => ({
   ...options
 });
 
-const zhAddSeriaToYAxis = (Chart) => {
-  Chart.prototype.zhAddSeriaToYAxis = function(options, seriaOptions) {
-    try {
-      const { data, color, index=-1 } = options;
-      const { id, isNewYAxis } = _checkYAxis(index, this);
-      if (isNewYAxis) {
-        this.addAxis(_crAxis(id, color), false, true)
-      }
-      const _seria = this.addSeries(_crSeria({
-        id, color, data }, seriaOptions), false
-      );
-      this.redraw();
-      return _seria;
-    } catch(err) {
-      console.log(err.message)
+const zhAddSeriaToYAxis = function(options, seriaOptions) {
+  try {
+    const { data, color, index=-1 } = options;
+    const { id, isNewYAxis } = _checkYAxis(index, this);
+    if (isNewYAxis) {
+      this.addAxis(_crAxis(id, color), false, true)
     }
+    const _seria = this.addSeries(_crSeria({
+      id, color, data }, seriaOptions), false
+    );
+    this.redraw();
+    return _seria;
+  } catch(err) {
+    console.log(err.message)
   }
-}
+};
 
 export default zhAddSeriaToYAxis

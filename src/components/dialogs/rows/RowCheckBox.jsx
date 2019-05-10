@@ -7,6 +7,8 @@ import SvgCheckBox from '../../zhn/SvgCheckBox'
 
 const TH_ID = 'ROW_CHECKBOX';
 
+const CHECKED_COLOR = '#1b2836';
+
 const S = {
   ROOT: {
     paddingTop: 6,
@@ -21,19 +23,26 @@ const S = {
     userSelect: 'none',
     cursor: 'pointer'
   },
-  CHECKED : {
-    color: 'black'
+  CHECKED: {
+    color: CHECKED_COLOR
   }
 };
 
 const _isFn = fn => typeof fn == 'function';
 const _isUndefined = v => typeof v === 'undefined';
 
+const _crCheckedStyle = color => ({
+  color
+});
+
 class RowCheckBox extends Component {
   /*
   static propTypes = {
     rootStyle : PropTypes.object,
+    checkedRestStroke: PropTypes.string,
+    checkedRestFill: PropTypes.string,
     caption: PropTypes.string,
+    styleCheckedCaption: PropTypes.object,
     initValue: PropTypes.bool,
     value: PropTypes.bool,
     onCheck: PropTypes.func,
@@ -42,8 +51,7 @@ class RowCheckBox extends Component {
   }
   */
   static defaultProps = {
-    checkedRestStroke: 'black',
-    checkedRestFill: 'black'
+    checkedColor: CHECKED_COLOR
   }
 
   constructor(props){
@@ -92,25 +100,24 @@ class RowCheckBox extends Component {
     const {
       theme,
       rootStyle,
+      checkedColor,
       caption,
       styleCaption,
-      value,
-      checkedRestStroke,
-      checkedRestFill
+      value
     } = this.props
     , TS = theme.getStyle(TH_ID)
     , _value = this.state
          ? this.state.isChecked
          : value
     , _style = _value
-        ? { ...styleCaption, ...S.CHECKED }
+        ? { ...styleCaption, ..._crCheckedStyle(checkedColor) }
         : styleCaption;
     return (
       <div style={{...S.ROOT, ...rootStyle}}>
         <SvgCheckBox
           value={_value}
-          checkedRestStroke={checkedRestStroke}
-          checkedRestFill={checkedRestFill}
+          checkedRestStroke={checkedColor}
+          checkedRestFill={checkedColor}
           checkedColor={TS.CHECKED_COLOR}
           onCheck={this._hCheck}
           onUnCheck={this._hUnCheck}

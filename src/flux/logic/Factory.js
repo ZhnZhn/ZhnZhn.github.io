@@ -14,9 +14,8 @@ import {  LoadType } from '../../constants/Type';
 
 import CA from '../actions/ComponentActions';
 import CHA from '../actions/ChartActions';
-import { showErrDialog } from '../actions/AppAction'
-import DateUtils from '../../utils/DateUtils';
 
+import DateUtils from '../../utils/DateUtils';
 import BrowserConfig from '../../constants/BrowserConfig';
 
 import ChartStore from '../stores/ChartStore';
@@ -92,8 +91,8 @@ const _crDialogComp = function (dType, browserType, dConf){
        , proxy = isProxy
             ? ChartStore.getProxy()
             : void 0
-       , getKey = isGetKey && ChartStore.getKey                        
-       , onError = isGetKey && showErrDialog
+       , getKey = isGetKey && ChartStore.getKey
+       , onError = isGetKey && CA.showAlert
 
        , onLoad = onLoadChart
           .bind(null, {
