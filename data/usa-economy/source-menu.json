@@ -473,7 +473,7 @@
       "chartContainerCaption" : "Quandl: U.S. Energy Information Administration",
       "dialogType" : "DialogType5",
       "dialogProps" : {
-        "descrUrl": "./data/usa-economy/eia.html",
+        "descrUrl": "./data/usa-economy/eia-coal-mining-via-quandl.html",
         "nInitFromDate" : 12,
         "oneCaption" : "Area",
         "oneURI" : "./data/usa-economy/eia-coal-areas.json",

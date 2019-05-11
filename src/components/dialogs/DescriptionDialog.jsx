@@ -5,17 +5,18 @@ import { fetchTxt } from '../../utils/fnFetch';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 
 const DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
-const STYLE = {
-  DIALOG : {
-    top: '10%',
-    left: '10%',
+const S = {
+  DIALOG: {
+    top: 54,
+    left: 20,
     width: 'auto',
+    marginLeft: 0,
     maxWidth: '89%'
   },
-  DIV : {
-    padding: '16px'
+  DIV: {
+    padding: 16
   }
-}
+};
 
 const _isUpdateDescr = (
   prevProps, props
@@ -46,13 +47,18 @@ class DescriptionDialog extends Component {
 
   componentDidUpdate(prevProps) {
     if ( _isUpdateDescr(prevProps, this.props) ) {
-      this._loadDescr(this.props.data.descrUrl)
+      const { data } = this.props
+      , { descrUrl } = data;
+      this._loadDescr(descrUrl)
     }
   }
 
-  _loadDescr = ( descrUrl='' ) => {
-     if ( descrUrl ) {
-       fetchTxt({ uri: descrUrl, onFetch: this._setDescrHtml})
+  _loadDescr = (descrUrl='') => {
+     if (descrUrl) {
+       fetchTxt({
+         uri: descrUrl,
+         onFetch: this._setDescrHtml
+       })
      } else {
        this._setDescrHtml();
      }
@@ -69,11 +75,11 @@ class DescriptionDialog extends Component {
        <ModalDialog
          caption="Description for Datasource"
          isShow={isShow}
-         style={STYLE.DIALOG}
+         style={S.DIALOG}
          onClose={onClose}
        >
          <div
-           style={STYLE.DIV}
+           style={S.DIV}
            dangerouslySetInnerHTML={{ __html: _html }}
          />
        </ModalDialog>

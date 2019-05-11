@@ -16,10 +16,14 @@ const S = {
     color: "#ffa200",
   },
   WHITE: {
-    color: 'white'
+    //color: 'white'
+    //color: '#4f5c8e'
+    color: '#009ae5'
   },
   DBNOMICS: {
-    color: '#abd9bf'
+    //color: '#abd9bf'
+    //color: '#4f7061'
+    color: '#12323d'
   },
   COMPARE: {
     color: '#49d87c'
@@ -53,7 +57,7 @@ const _crLinkProps = (title, dfStyle, href) => ({
 });
 
 const Links = {
-  CryptoCompare: () =>
+  CryptoCompare: () => (
     <BaseComponent
       className={CL_LINK}
       href="https://www.cryptocompare.com/"
@@ -62,6 +66,7 @@ const Links = {
     >
       <span style={S.COMPARE}>Compare</span>
     </BaseComponent>
+  )
 };
 
 LINK_CONFIGS.forEach(conf => {

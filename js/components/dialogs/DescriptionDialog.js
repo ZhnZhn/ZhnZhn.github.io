@@ -39,15 +39,16 @@ var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
-var STYLE = {
+var S = {
   DIALOG: {
-    top: '10%',
-    left: '10%',
+    top: 54,
+    left: 20,
     width: 'auto',
+    marginLeft: 0,
     maxWidth: '89%'
   },
   DIV: {
-    padding: '16px'
+    padding: 16
   }
 };
 
@@ -75,7 +76,10 @@ var DescriptionDialog = (_temp2 = _class = function (_Component) {
       var descrUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
       if (descrUrl) {
-        (0, _fnFetch.fetchTxt)({ uri: descrUrl, onFetch: _this._setDescrHtml });
+        (0, _fnFetch.fetchTxt)({
+          uri: descrUrl,
+          onFetch: _this._setDescrHtml
+        });
       } else {
         _this._setDescrHtml();
       }
@@ -105,7 +109,10 @@ var DescriptionDialog = (_temp2 = _class = function (_Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       if (_isUpdateDescr(prevProps, this.props)) {
-        this._loadDescr(this.props.data.descrUrl);
+        var data = this.props.data,
+            descrUrl = data.descrUrl;
+
+        this._loadDescr(descrUrl);
       }
     }
   }, {
@@ -122,11 +129,11 @@ var DescriptionDialog = (_temp2 = _class = function (_Component) {
         {
           caption: 'Description for Datasource',
           isShow: isShow,
-          style: STYLE.DIALOG,
+          style: S.DIALOG,
           onClose: onClose
         },
         _react2.default.createElement('div', {
-          style: STYLE.DIV,
+          style: S.DIV,
           dangerouslySetInnerHTML: { __html: _html }
         })
       );
