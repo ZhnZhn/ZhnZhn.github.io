@@ -62,6 +62,11 @@ var S = {
   },
   NONE: {
     display: 'none'
+  },
+  fnSpan: function fnSpan(color) {
+    return {
+      color: color, paddingLeft: 8
+    };
   }
 };
 
@@ -85,11 +90,29 @@ var InputPlus = function InputPlus(_ref) {
     _react2.default.createElement(_A2.default.SvgPlus, { style: S.INLINE, onClick: onPlus })
   );
 };
+var MinusPeriod = function MinusPeriod(_ref2) {
+  var color = _ref2.color,
+      period = _ref2.period,
+      onMinus = _ref2.onMinus;
+  return _react2.default.createElement(
+    _react2.default.Fragment,
+    null,
+    _react2.default.createElement(_A2.default.SvgMinus, {
+      style: S.INLINE,
+      onClick: onMinus
+    }),
+    _react2.default.createElement(
+      'span',
+      { style: S.fnSpan(color) },
+      period
+    )
+  );
+};
 
-var RowGrowthRate = function RowGrowthRate(_ref2) {
-  var is = _ref2.is,
-      onMinus = _ref2.onMinus,
-      onPlus = _ref2.onPlus;
+var RowGrowthRate = function RowGrowthRate(_ref3) {
+  var is = _ref3.is,
+      onMinus = _ref3.onMinus,
+      onPlus = _ref3.onPlus;
 
   var _refColor = (0, _react.useRef)(INITIAL_COLOR),
       _refPeriod = (0, _react.useRef)(DF_PERIOD),
@@ -130,9 +153,10 @@ var RowGrowthRate = function RowGrowthRate(_ref2) {
       caption: 'Growth Rate',
       captionStyle: S.CAPTION,
       openColor: OC_COLOR,
-      CompAfter: is ? _react2.default.createElement(_A2.default.SvgMinus, {
-        style: S.INLINE,
-        onClick: onMinus
+      CompAfter: is ? _react2.default.createElement(MinusPeriod, {
+        color: _refColor.current,
+        period: _refPeriod.current,
+        onMinus: onMinus
       }) : _react2.default.createElement(InputPlus, {
         initValue: _refPeriod.current,
         onChangePeriod: _onChangePeriod,

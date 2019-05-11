@@ -1,0 +1,32 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/checkBuild.js"
+ ],
+ "file": "../../src/components/checkBuild.js",
+ "names": [
+  "checkBuild",
+  "BUILD_DATE",
+  "reload",
+  "window",
+  "fetch",
+  "cache",
+  "then",
+  "res",
+  "ok",
+  "json",
+  "Error",
+  "status",
+  "build",
+  "document",
+  "cookie",
+  "indexOf",
+  "buildDate",
+  "catch",
+  "console",
+  "log",
+  "err",
+  "message"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,aAAa,SAAbA,UAAa,CAACC,UAAD,EAAaC,MAAb,EAAwB;AACzC,MAAIC,OAAOC,KAAX,EAAkB;AAChBA,UAAM,mBAAN,EAA2B,EAACC,OAAO,UAAR,EAA3B,EACGC,IADH,CACQ,eAAO;AACX,UAAIC,IAAIC,EAAR,EAAY;AACV,eAAOD,IAAIE,IAAJ,EAAP;AACD,OAFD,MAEO;AACL,cAAM,IAAIC,KAAJ,4BAAmCH,IAAII,MAAvC,CAAN;AACD;AACF,KAPH,EAQGL,IARH,CAQQ,gBAAQ;AAAA,wBACSG,IADT,CACJG,KADI;AAAA,UACJA,KADI,+BACE,EADF;;AAEZ,UAAIA,UAAUX,UAAV,IAAwBY,SAASC,MAAT,CAAgBC,OAAhB,CAAwB,KAAxB,MAAmC,CAAC,CAAhE,EAAmE;AACjEb,eAAO,EAAEc,WAAWf,UAAb,EAAP;AACD;AACF,KAbH,EAcGgB,KAdH,CAcS,eAAO;AACZC,cAAQC,GAAR,CAAYC,IAAIC,OAAhB;AACD,KAhBH;AAiBD;AACF,CApBD;;kBAsBerB,U"
+}

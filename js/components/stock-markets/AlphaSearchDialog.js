@@ -48,6 +48,11 @@ var _MenuMore2 = _interopRequireDefault(_MenuMore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var C = {
+  ERR_DESCR: 'API key from Alpha Vantage is required',
+  ERR_CAPTION: "Without API Key"
+};
+
 var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec(_class = function (_Component) {
   (0, _inherits3.default)(AlphaIntradayDialog, _Component);
 
@@ -64,7 +69,7 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec(_class 
 
       var apiKey = getKey(loadId);
       if (!apiKey) {
-        onError('API key from Alpha Vantage is required.', 'Without API Key');
+        onError(C.ERR_DESCR, C.ERR_CAPTION);
         return void 0;
       }
       return { apiKey: apiKey };

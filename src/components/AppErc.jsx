@@ -17,29 +17,10 @@ import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const B = {
-  PR: '08-05-2019',
-  CR: '10-05-2019'
-};
+import checkBuild from './checkBuild'
 
-const _checkBuild = () => {
-  if (window.fetch) {
-    fetch('./data/build.json', {cache: "no-cache"})
-      .then(res => res.json())
-      .then(json => {
-        const { build='' } = json;
-        if (build !== B.CR && document.cookie.indexOf('erc') === -1) {
-          CA.showReload({
-            prevDate: B.PR,
-            nextDate: build
-          })
-        }
-      })
-      .catch(err => {
-        console.log(err.message)
-      })
-  }
-}
+const BUILD_DATE = '11-05-2019';
+const CL = "component-container"
 
 class AppErc extends Component {
   state = {
@@ -49,7 +30,7 @@ class AppErc extends Component {
   componentDidMount(){
     this.unsubsribe = ChartStore.listen(this._onStore)
     LocationSearch.load();
-    _checkBuild()
+    checkBuild(BUILD_DATE, CA.showReload)
   }
   componentWillUnmout(){
     this.unsubsribe()
@@ -70,7 +51,7 @@ class AppErc extends Component {
     return (
       <ThemeContext.Provider value={theme}>
         <HeaderBar store={ChartStore} />
-        <div className="component-container">
+        <div className={CL}>
            <BrowserContainer
               store={ChartStore}
               initBrowserAction={BAT.INIT_BROWSER_DYNAMIC}

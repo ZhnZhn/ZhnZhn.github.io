@@ -69,7 +69,8 @@ var S = {
     height: 30,
     paddingLeft: 10,
     marginLeft: 0,
-    borderRadius: 15
+    borderRadius: 15,
+    boxShadow: 'none'
   }
 };
 

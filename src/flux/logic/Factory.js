@@ -65,6 +65,10 @@ const _crDateProps = (nInitFromDate, isContinious) => {
   }
 };
 
+const _onError = (alertDescr, alertCaption='Request Error') => {
+  CA.showAlert({ alertDescr, alertCaption })
+};
+
 const _crDialogComp = function (dType, browserType, dConf){
    const conf = _getDialogConf(dConf, dType);
    const {
@@ -92,7 +96,7 @@ const _crDialogComp = function (dType, browserType, dConf){
             ? ChartStore.getProxy()
             : void 0
        , getKey = isGetKey && ChartStore.getKey
-       , onError = isGetKey && CA.showAlert
+       , onError = isGetKey && _onError
 
        , onLoad = onLoadChart
           .bind(null, {

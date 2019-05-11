@@ -44,7 +44,10 @@ const S = {
   },
   NONE: {
     display: 'none'
-  }
+  },
+  fnSpan: color => ({
+    color, paddingLeft: 8
+  })
 };
 
 const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
@@ -60,6 +63,17 @@ const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
       onEnter={onPlus}
     />
     <A.SvgPlus style={S.INLINE} onClick={onPlus} />
+  </React.Fragment>
+);
+const MinusPeriod = ({ color, period, onMinus }) => (
+  <React.Fragment>
+    <A.SvgMinus
+       style={S.INLINE}
+       onClick={onMinus}
+    />
+    <span style={S.fnSpan(color)}>
+      {period}
+    </span>
   </React.Fragment>
 );
 
@@ -93,10 +107,11 @@ const RowGrowthRate = ({
     captionStyle={S.CAPTION}
     openColor={OC_COLOR}
     CompAfter={
-      is ? <A.SvgMinus
-             style={S.INLINE}
-             onClick={onMinus}
-           />
+      is ? <MinusPeriod
+              color={_refColor.current}
+              period={_refPeriod.current}
+              onMinus={onMinus}
+            />
          : <InputPlus
              initValue={_refPeriod.current}
              onChangePeriod={_onChangePeriod}

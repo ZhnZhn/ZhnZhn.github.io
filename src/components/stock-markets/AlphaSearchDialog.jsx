@@ -6,6 +6,11 @@ import D from '../dialogs/DialogCell'
 import Decor from '../dialogs/decorators/Decorators'
 import crMenuMore from '../dialogs/MenuMore'
 
+const C = {
+  ERR_DESCR: 'API key from Alpha Vantage is required',
+  ERR_CAPTION: "Without API Key"
+};
+
 @Decor.withToolbar
 class AlphaIntradayDialog extends Component {
 
@@ -38,7 +43,7 @@ class AlphaIntradayDialog extends Component {
     const { getKey, loadId, onError } = this.props;
     const apiKey = getKey(loadId);
     if (!apiKey) {
-      onError('API key from Alpha Vantage is required.', 'Without API Key')
+      onError(C.ERR_DESCR, C.ERR_CAPTION)
       return void 0;
     }
     return { apiKey };

@@ -7,21 +7,21 @@ const S = {
   MODAL: {
     position: 'static',
     width: 350,
-    height: 190,
+    height: 175,
     margin: '70px auto'
   },
   ROOT: {
     color: 'gray',
-    paddingTop: 16,
+    paddingTop: 8,
     paddingLeft: 16,
-    fontWeight: 'bold',
-    lineHeight: 1.4
+    lineHeight: 1.7,
+    fontWeight: 'bold'
   },
   DATE: {
     color: '#80c040'
   },
   CLOSE: {
-    color: 'rgb(35, 47, 59)'
+    color: '#232f3b'
   }
 }
 
@@ -59,11 +59,11 @@ class ReloadDialog extends Component {
 
   render(){
     const { isShow, onClose, data } = this.props
-        , { prevDate, nextDate } = data;
+        , { buildDate='' } = data;
     return (
       <ModalDialog
         style={S.MODAL}
-        caption="Reload"
+        caption="Reload Web App"
         isShow={isShow}
         commandButtons={this._commandButtons}
         withoutClose={true}
@@ -71,16 +71,13 @@ class ReloadDialog extends Component {
       >
         <div style={S.ROOT}>
           <p>
-            You browser open ERC from a cache.
-          </p>
-          <p style={S.DATE}>
-            {prevDate}
+            Browser has loaded ERC from a cache.
           </p>
           <p>
-            A new build exists. Is Reload app?
+            Reload web app ERC to the new build?
           </p>
           <p style={S.DATE}>
-            {nextDate}
+            {`New build ${buildDate} is available.`}
           </p>
         </div>
       </ModalDialog>

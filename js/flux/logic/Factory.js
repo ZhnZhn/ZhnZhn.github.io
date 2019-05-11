@@ -95,6 +95,12 @@ var _crDateProps = function _crDateProps(nInitFromDate, isContinious) {
   }, _props);
 };
 
+var _onError = function _onError(alertDescr) {
+  var alertCaption = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Request Error';
+
+  _ComponentActions2.default.showAlert({ alertDescr: alertDescr, alertCaption: alertCaption });
+};
+
 var _crDialogComp = function _crDialogComp(dType, browserType, dConf) {
   var conf = _getDialogConf(dConf, dType);
 
@@ -120,7 +126,7 @@ var _crDialogComp = function _crDialogComp(dType, browserType, dConf) {
       loadFn = _RouterLoadFn2.default.getFn(loadFnType, dialogType),
       proxy = isProxy ? _ChartStore2.default.getProxy() : void 0,
       getKey = isGetKey && _ChartStore2.default.getKey,
-      onError = isGetKey && _ComponentActions2.default.showAlert,
+      onError = isGetKey && _onError,
       onLoad = onLoadChart.bind(null, {
     chartType: itemKey,
     browserType: browserType, conf: conf

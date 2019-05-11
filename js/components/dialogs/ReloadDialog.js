@@ -38,21 +38,21 @@ var S = {
   MODAL: {
     position: 'static',
     width: 350,
-    height: 190,
+    height: 175,
     margin: '70px auto'
   },
   ROOT: {
     color: 'gray',
-    paddingTop: 16,
+    paddingTop: 8,
     paddingLeft: 16,
-    fontWeight: 'bold',
-    lineHeight: 1.4
+    lineHeight: 1.7,
+    fontWeight: 'bold'
   },
   DATE: {
     color: '#80c040'
   },
   CLOSE: {
-    color: 'rgb(35, 47, 59)'
+    color: '#232f3b'
   }
 };
 
@@ -98,14 +98,14 @@ var ReloadDialog = function (_Component) {
           isShow = _props.isShow,
           onClose = _props.onClose,
           data = _props.data,
-          prevDate = data.prevDate,
-          nextDate = data.nextDate;
+          _data$buildDate = data.buildDate,
+          buildDate = _data$buildDate === undefined ? '' : _data$buildDate;
 
       return _react2.default.createElement(
         _ModalDialog2.default,
         {
           style: S.MODAL,
-          caption: 'Reload',
+          caption: 'Reload Web App',
           isShow: isShow,
           commandButtons: this._commandButtons,
           withoutClose: true,
@@ -117,22 +117,17 @@ var ReloadDialog = function (_Component) {
           _react2.default.createElement(
             'p',
             null,
-            'You browser open ERC from a cache.'
-          ),
-          _react2.default.createElement(
-            'p',
-            { style: S.DATE },
-            prevDate
+            'Browser has loaded ERC from a cache.'
           ),
           _react2.default.createElement(
             'p',
             null,
-            'A new build exists. Is Reload app?'
+            'Reload web app ERC to the new build?'
           ),
           _react2.default.createElement(
             'p',
             { style: S.DATE },
-            nextDate
+            'New build ' + buildDate + ' is available.'
           )
         )
       );

@@ -72,32 +72,14 @@ var _ThemeContext = require('./hoc/ThemeContext');
 
 var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
+var _checkBuild = require('./checkBuild');
+
+var _checkBuild2 = _interopRequireDefault(_checkBuild);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var B = {
-  PR: '08-05-2019',
-  CR: '10-05-2019'
-};
-
-var _checkBuild = function _checkBuild() {
-  if (window.fetch) {
-    fetch('./data/build.json', { cache: "no-cache" }).then(function (res) {
-      return res.json();
-    }).then(function (json) {
-      var _json$build = json.build,
-          build = _json$build === undefined ? '' : _json$build;
-
-      if (build !== B.CR && document.cookie.indexOf('erc') === -1) {
-        _ComponentActions2.default.showReload({
-          prevDate: B.PR,
-          nextDate: build
-        });
-      }
-    }).catch(function (err) {
-      console.log(err.message);
-    });
-  }
-};
+var BUILD_DATE = '11-05-2019';
+var CL = "component-container";
 
 var AppErc = function (_Component) {
   (0, _inherits3.default)(AppErc, _Component);
@@ -134,7 +116,7 @@ var AppErc = function (_Component) {
     value: function componentDidMount() {
       this.unsubsribe = _ChartStore2.default.listen(this._onStore);
       _LocationSearch2.default.load();
-      _checkBuild();
+      (0, _checkBuild2.default)(BUILD_DATE, _ComponentActions2.default.showReload);
     }
   }, {
     key: 'componentWillUnmout',
@@ -152,7 +134,7 @@ var AppErc = function (_Component) {
         _react2.default.createElement(_HeaderBar2.default, { store: _ChartStore2.default }),
         _react2.default.createElement(
           'div',
-          { className: 'component-container' },
+          { className: CL },
           _react2.default.createElement(_BrowserContainer2.default, {
             store: _ChartStore2.default,
             initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
