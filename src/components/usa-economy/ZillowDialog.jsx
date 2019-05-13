@@ -4,10 +4,12 @@ import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
+const DATA_NOTE = '*Data present not for all zip codes';
+
 const S = {
   TIP: {
-    margin: '10px',
-    marginTop: '16px',
+    margin: 10,
+    marginTop: 16,
     fontWeight: 'bold'
   }
 };
@@ -213,7 +215,7 @@ class  ZillowDialog extends Component {
              </D.ShowHide>
              <D.ShowHide isShow={isShowPattern}>
                <div style={S.TIP}>
-                 *Not for all Zip Codes data is available
+                 {DATA_NOTE}
                </div>
              </D.ShowHide>
              <D.ValidationMessages

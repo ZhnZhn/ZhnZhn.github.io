@@ -12,11 +12,10 @@ import TwitterLink from './TwitterLink'
 import DataProviders from './DataProviders'
 import StepTitle from './StepTitle'
 import Link from '../links/ProviderLinks';
-import IconLogoBar from './IconLogoBar';
+import LogosBar from './LogosBar';
 
 import C from '../styles/Color'
 import S from './About.Style'
-
 
 const TH_ID = 'ABOUT';
 
@@ -47,7 +46,7 @@ class About extends Component {
   }
   */
   constructor(props){
-    super();
+    super(props);
     this.state = {
       isCloseProviders: this._calcIsProviders(),
       isShow: props.isShow
@@ -72,34 +71,31 @@ class About extends Component {
   }
   _onStore = (actionType, data) => {
     if (actionType === CAT.SHOW_ABOUT){
-      this.setState({isShow : true});
+      this.setState({ isShow: true });
     } else if (actionType === CHAT.INIT_AND_SHOW_CHART){
-      this.setState({isShow : false});
+      this.setState({ isShow: false });
     } else if (actionType === CHAT.SHOW_CHART){
-      this.setState({isShow : false});
+      this.setState({ isShow: false });
     }
   }
 
   _handleClose = () => {
-    this.setState({ isShow : false });
+    this.setState({ isShow: false });
   }
 
   render(){
     const { theme } = this.props
-        , TS = theme.getStyle(TH_ID)
-        , { isShow, isCloseProviders } = this.state
-        ,  _clOpen = isShow ? CL.SHOW : ''
-        , _clRoot = `${CL.ABOUT} ${_clOpen}`
-        , _styleOpen = isShow
-              ? S.BLOCK
-              : S.NONE;
+    , TS = theme.getStyle(TH_ID)
+    , { isShow, isCloseProviders } = this.state
+    ,  _clOpen = isShow ? CL.SHOW : ''
+    , _clRoot = `${CL.ABOUT} ${_clOpen}`
+    , _styleOpen = isShow
+          ? S.BLOCK
+          : S.NONE;
     return (
       <div
         className={_clRoot}
-        style={{
-          //...styles.aboutRootDiv,
-          ..._styleOpen, ...TS.ROOT
-        }}
+        style={{..._styleOpen, ...TS.ROOT}}
        >
          <BrowserCaption
             caption="About"
@@ -187,7 +183,7 @@ class About extends Component {
               There is three UI theme in the web app ERC: <span style={S.BLACK}>Dark, Light, and Sand</span> can be set on <span style={S.BLACK}>tab Options, dialog Settings [s]</span>. All user's settings keep in browser's memory only for a current web session.
             </p>
          </OpenClose>
-         <IconLogoBar />
+         <LogosBar />
          <p>
            <span style={S.BLACK}>
              *Logos Fair Use.

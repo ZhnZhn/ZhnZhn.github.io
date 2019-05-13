@@ -13,7 +13,9 @@
   "ELEMENT",
   "Element",
   "ROW_CHECKBOX",
-  "RowCheckBox"
+  "RowCheckBox",
+  "LOGOS",
+  "Logos"
  ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,SAAS;AACbC,MAAIC,uBADS;AAEb;;;;;;;;;AASAC,cAAYC,yBAXC;AAYb;;;;;AAKAC,WAASC,uBAjBI;AAkBbC,gBAAcC;AAlBD,CAAf;;kBAqBeR,M"
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,SAAS;AACbC,MAAIC,uBADS;AAEb;;;;;;;;;AASAC,cAAYC,yBAXC;AAYb;;;;;AAKAC,WAASC,uBAjBI;AAkBbC,gBAAcC,2BAlBD;AAmBbC,SAAOC;AAnBM,CAAf;;kBAsBeV,M"
 }

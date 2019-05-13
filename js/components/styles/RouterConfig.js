@@ -20,6 +20,10 @@ var _ConfigRowCheckBox = require('./ConfigRowCheckBox');
 
 var _ConfigRowCheckBox2 = _interopRequireDefault(_ConfigRowCheckBox);
 
+var _ConfigLogos = require('./ConfigLogos');
+
+var _ConfigLogos2 = _interopRequireDefault(_ConfigLogos);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = {
@@ -40,7 +44,8 @@ var router = {
   */
 
   ELEMENT: _ConfigElement2.default,
-  ROW_CHECKBOX: _ConfigRowCheckBox2.default
+  ROW_CHECKBOX: _ConfigRowCheckBox2.default,
+  LOGOS: _ConfigLogos2.default
 };
 
 exports.default = router;

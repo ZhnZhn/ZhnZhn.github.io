@@ -17,7 +17,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var UnComtradeLink = function UnComtradeLink(_ref) {
    var item = _ref.item;
    return _react2.default.createElement(_Link2.default, {
-      className: 'native-link',
       href: item,
       caption: 'UN Comtrade Link'
    });

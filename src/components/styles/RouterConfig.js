@@ -3,6 +3,7 @@ import HeaderBar from './ConfigHeaderBar'
 
 import Element from './ConfigElement'
 import RowCheckBox from './ConfigRowCheckBox'
+import Logos from './ConfigLogos'
 
 const router = {
   DF: General,
@@ -22,7 +23,8 @@ const router = {
   */
 
   ELEMENT: Element,
-  ROW_CHECKBOX: RowCheckBox  
+  ROW_CHECKBOX: RowCheckBox,
+  LOGOS: Logos
 };
 
 export default router

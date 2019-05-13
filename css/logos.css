@@ -1,0 +1,98 @@
+.icon__erc {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  cursor: default;
+}
+
+.logo-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  padding-top: 4px;
+  padding-bottom: 8px;
+}
+
+.logo-item {
+  height: 64px;
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: inherit;
+  text-decoration: none;
+  transition: color, border-color, fill, stroke 300ms ease-out;
+}
+.logo-item:hover {
+  border-color: #2f7ed8;    
+  color: #f1d600;  
+}
+
+.logo-quandl {
+  display: inline-block;
+  width: 150px;
+  margin-right: 24px;
+  margin-left: 0;  
+  padding: 14px 16px 10px;  
+  stroke: #e95424;
+  fill: #e95424;
+}
+.logo-quandl:hover {  
+  fill: #f1d600;
+}
+
+.logo-github {
+  width: 72px;
+  height: 72px;
+  background-color: black;
+  border-width: 4px;
+  border-radius: 50%;      
+  transition: background-color 300ms ease-out; 
+  fill: inherit;
+}
+.logo-github:hover {
+  background-color: #f1d600;
+  stroke: #f1d600;
+}
+
+.logo-react {
+  width: 72px;
+  height: 72px;
+  padding: 6px;  
+  margin-left: 26px;
+  margin-right: 0;
+  border-width: 4px;
+  border-radius: 50%;  
+  fill: #00d8ff;
+  stroke: #00d8ff;
+  stroke-width: 12;
+}
+.logo-react:hover {  
+  fill: #f1d600;
+  stroke: #f1d600;  
+}
+
+
+.logo-highcharts {
+  display: inline-block;
+  width: 180px;
+  margin-left: 22px;      
+  fill: #6d6dac;
+}
+.logo-highcharts:hover {
+  fill: #f1d600;
+}
+
+.data-provider-logo {
+  display: inline-block;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: normal;
+  font-size: 32px;
+  color: #009ae5;
+  padding: 6px 16px; 
+}
+
+

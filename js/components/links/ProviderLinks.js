@@ -18,24 +18,16 @@ var _Link2 = _interopRequireDefault(_Link);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CL_LINK = "descr__quandl-link";
+var CL_LINK = "data-provider-link";
 
 var S = {
-  BLUE: {
-    color: "#009ae5"
-  },
   ORANGE: {
     color: "#e05927"
   },
   SUNNY: {
     color: "#ffa200"
   },
-  WHITE: {
-    //color: 'white'
-    //color: '#4f5c8e'
-    color: '#009ae5'
-  },
-  DBNOMICS: {
+  DARK_GREEN: {
     //color: '#abd9bf'
     //color: '#4f7061'
     color: '#12323d'
@@ -45,12 +37,12 @@ var S = {
   }
 };
 
-var LINK_CONFIGS = [["Quandl", "Quandl", S.ORANGE, "https://www.quandl.com/"], ["DbNomics", "DB NOMICS", S.DBNOMICS, "https://db.nomics.world/"], ["Iex", "IEX Platform", S.SUNNY, "https://iextrading.com/developer/"], ["Cmc", "CoinMarketCap", S.BLUE, "https://coinmarketcap.com/"], ["Barchart", "Barchart Market Data", S.BLUE, "https://www.barchartmarketdata.com"], ["AlphaVantage", "Alpha Vantage", S.BLUE, "https://www.alphavantage.co"], ["Eurostat", "Eurostat", S.BLUE, "http://ec.europa.eu/eurostat"], ["UnComtrade", "UN Comtrade", S.BLUE, "https://comtrade.un.org"], ["WorldBank", "World Bank", S.BLUE, "https://data.worldbank.org/"], ["FaoStat", "FAOSTAT", S.BLUE, "http://www.fao.org/faostat/en/#data"], ["Bea", "U.S. Bureau of Economic Analysis", S.WHITE, "https://www.bea.gov/index.htm"], ["Bsl", "U.S. Bureau of Labor Statistics", S.WHITE, "https://www.bls.gov/home.htm"], ["Eia", "U.S. EIA", S.WHITE, "https://www.eia.gov/"], ["Intrinio", 'Intrinio', S.WHITE, "https://intrinio.com"], ["Insee", "Insee: France Statistics", S.BLUE, "https://www.insee.fr/en/accueil"], ["StatNorway", "Statistics Norway", S.BLUE, "https://www.ssb.no/en"], ["StatSweden", "Statistics Sweden", S.BLUE, "https://www.scb.se/en/"], ["StatFinland", "Statistics Finland", S.BLUE, "https://www.stat.fi/index_en.html"]];
+var LINK_CONFIGS = [["Quandl", "Quandl", "https://www.quandl.com/", S.ORANGE], ["DbNomics", "DB NOMICS", "https://db.nomics.world/", S.DARK_GREEN], ["Iex", "IEX Platform", "https://iextrading.com/developer/", S.SUNNY], ["Cmc", "CoinMarketCap", "https://coinmarketcap.com/"], ["Barchart", "Barchart Market Data", "https://www.barchartmarketdata.com"], ["AlphaVantage", "Alpha Vantage", "https://www.alphavantage.co"], ["Eurostat", "Eurostat", "http://ec.europa.eu/eurostat"], ["UnComtrade", "UN Comtrade", "https://comtrade.un.org"], ["WorldBank", "World Bank", "https://data.worldbank.org/"], ["FaoStat", "FAOSTAT", "http://www.fao.org/faostat/en/#data"], ["Bea", "U.S. Bureau of Economic Analysis", "https://www.bea.gov/index.htm"], ["Bsl", "U.S. Bureau of Labor Statistics", "https://www.bls.gov/home.htm"], ["Eia", "U.S. EIA", "https://www.eia.gov/"], ["Intrinio", 'Intrinio', "https://intrinio.com"], ["Insee", "Insee: France Statistics", "https://www.insee.fr/en/accueil"], ["StatNorway", "Statistics Norway", "https://www.ssb.no/en"], ["StatSweden", "Statistics Sweden", "https://www.scb.se/en/"], ["StatFinland", "Statistics Finland", "https://www.stat.fi/index_en.html"]];
 
-var _crLinkProps = function _crLinkProps(title, dfStyle, href) {
+var _crLinkProps = function _crLinkProps(title, href, dfStyle) {
   return {
     className: CL_LINK,
-    title: title, dfStyle: dfStyle, href: href
+    title: title, href: href, dfStyle: dfStyle
   };
 };
 
@@ -61,7 +53,6 @@ var Links = {
       {
         className: CL_LINK,
         href: 'https://www.cryptocompare.com/',
-        dfStyle: S.WHITE,
         title: 'Crypto'
       },
       _react2.default.createElement(

@@ -1,0 +1,24 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/Load.js"
+ ],
+ "file": "../../../src/components/zhn/Load.js",
+ "names": [
+  "FAILED_COLOR",
+  "S",
+  "LOADING",
+  "margin",
+  "LOAD_FAILED",
+  "borderColor",
+  "ERR_MSG",
+  "color",
+  "paddingLeft",
+  "fontWeight",
+  "Loading",
+  "LoadFailed",
+  "errMsg",
+  "Load"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,eAAe,SAArB;AACA,IAAMC,IAAI;AACRC,WAAS;AACPC,YAAQ;AADD,GADD;AAIRC,eAAa;AACXC,iBAAaL;AADF,GAJL;AAORM,WAAS;AACPC,WAAOP,YADA;AAEPQ,iBAAa,EAFN;AAGPC,gBAAY;AAHL;AAPD,CAAV;;AAcA,IAAMC,UAAU,SAAVA,OAAU;AAAA,SACd;AACE,mBAAY,QADd;AAEE,WAAOT,EAAEC;AAFX,IADc;AAAA,CAAhB;AAMA,IAAMS,aAAa,SAAbA,UAAa;AAAA,yBAAGC,MAAH;AAAA,MAAGA,MAAH,+BAAU,EAAV;AAAA,SACjB;AAAC,mBAAD,CAAO,QAAP;AAAA;AACE;AACE,qBAAY,eADd;AAEE,wCAAWX,EAAEC,OAAb,EAAyBD,EAAEG,WAA3B;AAFF,MADF;AAKE;AAAA;AAAA,QAAG,OAAOH,EAAEK,OAAZ;AACMM,YADN;AAAA;AALF,GADiB;AAAA,CAAnB;;AAYA,IAAMC,OAAO;AACXH,kBADW;AAEXC;AAFW,CAAb;;kBAKeE,I"
+}

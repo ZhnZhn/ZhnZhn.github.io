@@ -3,8 +3,7 @@ import React from 'react'
 import Link from './Link'
 
 const UnComtradeLink = ({ item }) => (
-  <Link
-     className="native-link"
+  <Link     
      href={item}
      caption="UN Comtrade Link"
   />

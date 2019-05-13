@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/about/LogoGitHub.js"
+ ],
+ "file": "../../../src/components/about/LogoGitHub.js",
+ "names": [
+  "C",
+  "CL",
+  "TITLE",
+  "LogoGitHub",
+  "className",
+  "title",
+  "href"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,MAAI,aADI;AAERC,SAAO;AAFC,CAAV;;AAKA,IAAMC,aAAa,SAAbA,UAAa;AAAA,4BACjBC,SADiB;AAAA,MACjBA,SADiB,kCACP,EADO;AAAA,wBAEjBC,KAFiB;AAAA,MAEjBA,KAFiB,8BAEXL,EAAEE,KAFS;AAAA,MAGjBI,IAHiB,QAGjBA,IAHiB;AAAA,SAKjB;AAAA;AAAA;AACE,iBAAcF,SAAd,SAA2BJ,EAAEC,EAD/B;AAEE,aAAOI,KAFT;AAGE,YAAMC;AAHR;AAKE;AAAA;AAAA,QAAK,SAAQ,WAAb,EAAyB,OAAM,4BAA/B;AACK,kBAAS,SADd,EACwB,UAAS,SADjC;AAEK,wBAAe,OAFpB;AAGK,0BAAiB;AAHtB;AAKE;AAAA;AAAA;AAAQD;AAAR,OALF;AAME,8CAAM,GAAE,yqBAAR;AANF;AALF,GALiB;AAAA,CAAnB;;kBAsBeF,U"
+}

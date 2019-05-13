@@ -64,9 +64,9 @@ var _ProviderLinks = require('../links/ProviderLinks');
 
 var _ProviderLinks2 = _interopRequireDefault(_ProviderLinks);
 
-var _IconLogoBar = require('./IconLogoBar');
+var _LogosBar = require('./LogosBar');
 
-var _IconLogoBar2 = _interopRequireDefault(_IconLogoBar);
+var _LogosBar2 = _interopRequireDefault(_LogosBar);
 
 var _Color = require('../styles/Color');
 
@@ -111,7 +111,7 @@ var About = function (_Component) {
   function About(props) {
     (0, _classCallCheck3.default)(this, About);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this, props));
 
     _this._calcIsProviders = function () {
       var strWidth = window.getComputedStyle(document.body, ':after').getPropertyValue('content');
@@ -395,7 +395,7 @@ var About = function (_Component) {
                 '. All user\'s settings keep in browser\'s memory only for a current web session.'
               )
             ),
-            _react2.default.createElement(_IconLogoBar2.default, null),
+            _react2.default.createElement(_LogosBar2.default, null),
             _react2.default.createElement(
               'p',
               null,

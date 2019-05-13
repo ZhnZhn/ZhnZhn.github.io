@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/styles/ConfigLogos.js"
+ ],
+ "file": "../../../src/components/styles/ConfigLogos.js",
+ "names": [
+  "styleConfig",
+  "createStyle",
+  "CSS_RULE",
+  "themeName",
+  "borderColor",
+  "ROOT",
+  "borderWidth",
+  "fill",
+  "BG",
+  "backgroundColor"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,cAAc;AAClBC,eAAa,qBAACC,QAAD,EAAWC,SAAX,EAAyB;AACpC,QAAMC,cAAcD,cAAc,MAAd,GAChB,SADgB,GAEhB,MAFJ;AAGA,WAAO;AACLE,YAAM;AACJC,qBAAa,CADT;AAEJF,gCAFI;AAGJG,cAAML,SAASM,EAAT,CAAYC;AAHd;AADD,KAAP;AAOD;AAZiB,CAApB;;kBAeeT,W"
+}

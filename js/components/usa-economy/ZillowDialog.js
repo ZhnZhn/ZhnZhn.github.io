@@ -40,10 +40,12 @@ var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var DATA_NOTE = '*Data present not for all zip codes';
+
 var S = {
   TIP: {
-    margin: '10px',
-    marginTop: '16px',
+    margin: 10,
+    marginTop: 16,
     fontWeight: 'bold'
   }
 };
@@ -307,7 +309,7 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           _react2.default.createElement(
             'div',
             { style: S.TIP },
-            '*Not for all Zip Codes data is available'
+            DATA_NOTE
           )
         ),
         _react2.default.createElement(_DialogCell2.default.ValidationMessages, {

@@ -1,24 +1,12 @@
 
-.info__descr a {
-  color: #0b8fff;
-  font-weight: bold;
-  border-bottom: thin solid;
-  text-decoration: none;
-}
-.info__descr a:hover {
-  border-bottom-width: medium;
-}
-
 .native-link {
   color: #0b8fff;
   font-weight: bold;
   border-bottom: 1px solid;
   text-decoration: none;
-  margin-bottom: 2px;
 }
 .native-link:hover {
-  border-bottom-width: 3px;
-  margin-bottom: 0;
+  border-bottom-width: 3px;  
 }
 
 .descr-datasource h1 {
@@ -33,28 +21,31 @@
   line-height: 1.4;
   white-space: pre-line;
 }
-.descr-datasource a,
-.descr__quandl-link {
-  color: #e05927;
-  font-weight: bold;
-  border-bottom: thin solid;
-  text-decoration: none;
-}
-.descr-datasource a:hover,
-.descr__quandl-link:hover {
-  border-bottom-width: medium;
-}
-
 .descr-datasource span {
   color: black;
 }
 
-.descr-datasource__link {
-  color: #0b8fff;
+/* Provider Links */
+.descr-datasource a,
+.info__descr a,
+.data-provider-link {
+  /*color: #0b8fff;*/
+  color: #009ae5;
   font-weight: bold;
-  border-bottom: thin solid;
+  padding-bottom: 2px;
+  border-bottom: 1px solid;
   text-decoration: none;
 }
-.descr-datasource__link:hover {
-  border-bottom-width: medium;
+.descr-datasource a:hover,
+.info__descr a:hover,
+.data-provider-link:hover {
+  border-bottom-width: 3px;
+}
+@media screen and (max-width: 600px) {
+  .descr-datasource a,
+  .info__descr a,
+  .native-link
+  .data-provider-link {
+     border-bottom: 2px solid;
+  }
 }

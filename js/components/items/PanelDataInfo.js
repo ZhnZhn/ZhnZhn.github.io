@@ -48,23 +48,23 @@ var S = {
   ROOT_SHOW: {
     position: 'relative',
     display: 'block',
-    paddingTop: '34px',
-    paddingRight: '20px',
-    paddingLeft: '8px'
+    paddingTop: 34,
+    paddingRight: 20,
+    paddingLeft: 8
   },
   ROOT_HIDE: {
     position: 'relative',
     display: 'none'
   },
   INFO_ROOT: {
-    marginTop: '4px'
+    marginTop: 4
   },
   INFO_CAPTION: {
     display: 'inline-block',
     color: '#1b75bb',
-    width: '110px',
+    width: 110,
     textAlign: 'right',
-    paddingRight: '5px',
+    paddingRight: 5,
     fontWeight: 'bold'
   },
   INFO_TEXT: {
@@ -73,10 +73,10 @@ var S = {
     textTransform: 'capitalize'
   },
   DESCR_OC: {
-    paddingTop: '12px'
+    paddingTop: 12
   },
   DESCR_ROOT: {
-    marginTop: '10px'
+    marginTop: 10
   },
   DESCR_TEXT: {
     color: 'gray',
@@ -87,14 +87,9 @@ var S = {
 var _isWithoutLink = function _isWithoutLink() {
   var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var _item$id = item.id,
-      id = _item$id === undefined ? '' : _item$id,
-      arr = id.split('/');
+      id = _item$id === undefined ? '' : _item$id;
 
-
-  if (arr[0] === 'LSE') {
-    return true;
-  }
-  return false;
+  return id.split('/')[0] === 'LSE' ? true : false;
 };
 
 var PanelDataInfo = function (_Component) {
@@ -122,13 +117,8 @@ var PanelDataInfo = function (_Component) {
       if (_isWithoutLink(item)) {
         return null;
       }
-
       var Comp = _RouterNativeLink2.default[linkFn];
-      if (typeof Comp !== 'undefined') {
-        return _react2.default.createElement(Comp, { item: item });
-      } else {
-        return null;
-      }
+      return typeof Comp !== 'undefined' ? _react2.default.createElement(Comp, { item: item }) : null;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 

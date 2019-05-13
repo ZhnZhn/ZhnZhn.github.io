@@ -2,15 +2,20 @@ import React from 'react';
 
 import Link from './Link'
 
-const QUANDL_DATA_BASE = 'https://www.quandl.com/data/'
-    , CAPTION = 'Quandl Data Link';
+const C = {
+  ROOT_URI: 'https://www.quandl.com/data/',
+  CAPTION: 'Quandl Data Link',
+  STYLE: {
+    color: '#e05927'
+  }
+};
 
-const QuandlLink = ({ dbCode='', dsCode='', caption=CAPTION }) =>
+const QuandlLink = ({ dbCode='', dsCode='', caption=C.CAPTION }) => (
   <Link
-    className="descr__quandl-link"
-    href={`${QUANDL_DATA_BASE}${dbCode}/${dsCode}`}
+    style={C.STYLE}
+    href={`${C.ROOT_URI}${dbCode}/${dsCode}`}
     caption={`${caption} ${dbCode}/${dsCode}`}
   />
-
+);
 
 export default QuandlLink

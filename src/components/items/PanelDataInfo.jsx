@@ -13,24 +13,24 @@ const S = {
   ROOT_SHOW: {
     position: 'relative',
     display: 'block',
-    paddingTop : '34px',
-    paddingRight : '20px',
-    paddingLeft : '8px'
+    paddingTop: 34,
+    paddingRight: 20,
+    paddingLeft: 8
   },
   ROOT_HIDE: {
     position: 'relative',
     display: 'none'
   },
   INFO_ROOT: {
-    marginTop: '4px'
+    marginTop: 4
   },
   INFO_CAPTION: {
-    display : 'inline-block',
-    color : '#1b75bb',
-    width : '110px',
-    textAlign : 'right',
-    paddingRight : '5px',
-    fontWeight : 'bold'
+    display: 'inline-block',
+    color: '#1b75bb',
+    width: 110,
+    textAlign: 'right',
+    paddingRight: 5,
+    fontWeight: 'bold'
   },
   INFO_TEXT: {
     fontWeight: 'bold',
@@ -38,25 +38,22 @@ const S = {
     textTransform: 'capitalize'
   },
   DESCR_OC: {
-    paddingTop : '12px'
+    paddingTop: 12
   },
   DESCR_ROOT: {
-    marginTop: '10px'
+    marginTop: 10
   },
   DESCR_TEXT: {
-    color : 'gray',
-    fontWeight : 'bold'
+    color: 'gray',
+    fontWeight: 'bold'
   }
 };
 
 const _isWithoutLink = (item={}) => {
-  const { id='' } = item
-      , arr = id.split('/');
-
-  if (arr[0] === 'LSE') {
-    return true;
-  }
-  return false;
+  const { id='' } = item;
+  return id.split('/')[0] === 'LSE'
+    ? true
+    : false;
 };
 
 class PanelDataInfo extends Component {
@@ -74,13 +71,10 @@ class PanelDataInfo extends Component {
     if (_isWithoutLink(item)) {
       return null;
     }
-
     const Comp = RouterNativeLink[linkFn];
-    if (typeof Comp !== 'undefined') {
-      return (<Comp item={item} />);
-    } else {
-      return null;
-    }
+    return typeof Comp !== 'undefined'
+      ? <Comp item={item} />
+      : null;
   }
 
   render(){

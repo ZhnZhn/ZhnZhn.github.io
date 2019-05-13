@@ -1,5 +1,9 @@
 
 .with-scroll {
+  /*Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #8bc34a #1b2836;
+
   overscroll-behavior-y: contain;
 
   -webkit-overflow-scrolling: touch;
@@ -26,11 +30,20 @@
   background-color: #1b2836;  
   width: 2px; 
 }
+.with-scroll--grey {
+  scrollbar-color: #8bc34a #1b2836;
+}
 .with-scroll--grey::-webkit-scrollbar-track-piece {  
   background-color: #1b2836;  
 }
+.with-scroll--white {
+  scrollbar-color: #8bc34a #bcd8f5;
+}
 .with-scroll--white::-webkit-scrollbar-track-piece {
   background-color: #bcd8f5;  
+}
+.with-scroll--sand {
+  scrollbar-color: #8bc34a #795548;
 }
 .with-scroll--sand::-webkit-scrollbar-track-piece {
   background-color: #795548;  

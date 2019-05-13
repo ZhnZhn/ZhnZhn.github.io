@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/components/native-links/QuandlLink.jsx"],"names":["QUANDL_DATA_BASE","CAPTION","QuandlLink","dbCode","dsCode","caption"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,mBAAmB,8BAAzB;AAAA,IACMC,UAAU,kBADhB;;AAGA,IAAMC,aAAa,SAAbA,UAAa;AAAA,yBAAGC,MAAH;AAAA,MAAGA,MAAH,+BAAU,EAAV;AAAA,yBAAcC,MAAd;AAAA,MAAcA,MAAd,+BAAqB,EAArB;AAAA,0BAAyBC,OAAzB;AAAA,MAAyBA,OAAzB,gCAAiCJ,OAAjC;AAAA,SACjB;AACE,eAAU,oBADZ;AAEE,eAASD,gBAAT,GAA4BG,MAA5B,SAAsCC,MAFxC;AAGE,aAAYC,OAAZ,SAAuBF,MAAvB,SAAiCC;AAHnC,IADiB;AAAA,CAAnB;;kBAQeF,U","file":"QuandlLink.js","sourcesContent":["import React from 'react';\r\n\r\nimport Link from './Link'\r\n\r\nconst QUANDL_DATA_BASE = 'https://www.quandl.com/data/'\r\n    , CAPTION = 'Quandl Data Link';\r\n\r\nconst QuandlLink = ({ dbCode='', dsCode='', caption=CAPTION }) =>\r\n  <Link\r\n    className=\"descr__quandl-link\"\r\n    href={`${QUANDL_DATA_BASE}${dbCode}/${dsCode}`}\r\n    caption={`${caption} ${dbCode}/${dsCode}`}\r\n  />\r\n\r\n\r\nexport default QuandlLink\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/QuandlLink.js"
+ ],
+ "file": "../../../src/components/native-links/QuandlLink.js",
+ "names": [
+  "C",
+  "ROOT_URI",
+  "CAPTION",
+  "STYLE",
+  "color",
+  "QuandlLink",
+  "dbCode",
+  "dsCode",
+  "caption"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,YAAU,8BADF;AAERC,WAAS,kBAFD;AAGRC,SAAO;AACLC,WAAO;AADF;AAHC,CAAV;;AAQA,IAAMC,aAAa,SAAbA,UAAa;AAAA,yBAAGC,MAAH;AAAA,MAAGA,MAAH,+BAAU,EAAV;AAAA,yBAAcC,MAAd;AAAA,MAAcA,MAAd,+BAAqB,EAArB;AAAA,0BAAyBC,OAAzB;AAAA,MAAyBA,OAAzB,gCAAiCR,EAAEE,OAAnC;AAAA,SACjB,8BAAC,cAAD;AACE,WAAOF,EAAEG,KADX;AAEE,eAASH,EAAEC,QAAX,GAAsBK,MAAtB,SAAgCC,MAFlC;AAGE,aAAYC,OAAZ,SAAuBF,MAAvB,SAAiCC;AAHnC,IADiB;AAAA,CAAnB;;kBAQeF,U"
+}

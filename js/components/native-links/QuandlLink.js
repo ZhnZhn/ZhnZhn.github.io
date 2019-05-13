@@ -14,8 +14,13 @@ var _Link2 = _interopRequireDefault(_Link);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var QUANDL_DATA_BASE = 'https://www.quandl.com/data/',
-    CAPTION = 'Quandl Data Link';
+var C = {
+  ROOT_URI: 'https://www.quandl.com/data/',
+  CAPTION: 'Quandl Data Link',
+  STYLE: {
+    color: '#e05927'
+  }
+};
 
 var QuandlLink = function QuandlLink(_ref) {
   var _ref$dbCode = _ref.dbCode,
@@ -23,10 +28,10 @@ var QuandlLink = function QuandlLink(_ref) {
       _ref$dsCode = _ref.dsCode,
       dsCode = _ref$dsCode === undefined ? '' : _ref$dsCode,
       _ref$caption = _ref.caption,
-      caption = _ref$caption === undefined ? CAPTION : _ref$caption;
+      caption = _ref$caption === undefined ? C.CAPTION : _ref$caption;
   return _react2.default.createElement(_Link2.default, {
-    className: 'descr__quandl-link',
-    href: '' + QUANDL_DATA_BASE + dbCode + '/' + dsCode,
+    style: C.STYLE,
+    href: '' + C.ROOT_URI + dbCode + '/' + dsCode,
     caption: caption + ' ' + dbCode + '/' + dsCode
   });
 };
