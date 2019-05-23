@@ -18,7 +18,7 @@ var crHeader = _tpFn2.default.crHeader,
     crRow = _tpFn2.default.crRow,
     crSpan = _tpFn2.default.crSpan,
     toNumberFormatAll = _tpFn2.default.toNumberFormatAll,
-    fHide = _tpFn2.default.fHide;
+    addHideHandler = _tpFn2.default.addHideHandler;
 
 
 var _crSimple = function _crSimple(_ref) {
@@ -47,17 +47,10 @@ var _crRemove = function _crRemove(_ref2) {
 };
 
 var _addCategoryHandlersImpl = function _addCategoryHandlersImpl(id, point) {
-  var _n = document.getElementById(id);
-  if (_n) {
-    _n.addEventListener('click', fHide(id, point));
-  }
-  var _bt = document.getElementById(id + '_R');
-  if (_bt) {
-    _bt.addEventListener('click', function () {
-      fHide(id, point)();
-      point.series.chart.zhRemoveCategory(point.category);
-    });
-  }
+  addHideHandler(id, point);
+  addHideHandler(id + '_R', point, function (_point) {
+    return _point.series.chart.zhRemoveCategory(point.category);
+  });
 };
 var _addCategoryHandlers = function _addCategoryHandlers(id, point) {
   setTimeout(function () {

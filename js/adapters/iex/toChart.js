@@ -54,9 +54,11 @@ var toChart = {
   toConfig: function toConfig(json, option) {
     var title = option.title,
         isNotZoomToMinMax = option.isNotZoomToMinMax,
+        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
         _id = _crId(option),
         dataOption = toSeriesData(_id, json, {
-      isNotZoomToMinMax: isNotZoomToMinMax
+      isNotZoomToMinMax: isNotZoomToMinMax,
+      isDrawDeltaExtrems: isDrawDeltaExtrems
     }),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,

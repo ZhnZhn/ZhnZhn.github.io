@@ -236,17 +236,13 @@ var AlphaIntradayAdapter = {
       id: _chartId,
       data: dataDaily,
       dataSource: dataSource
-    }))).checkThreshold().setMinMax(minClose, maxClose).addDividend({ dataDividend: dataDividend, minClose: minClose, maxClose: maxClose }).addMiniVolume({
+    }))).checkThreshold().addMinMax(dataDaily, option).addDividend({ dataDividend: dataDividend, minClose: minClose, maxClose: maxClose }).addMiniVolume({
       id: _chartId,
       dVolume: dVolume, dColumn: dColumn,
       tooltipColumn: _Chart2.default.fTooltip(volumeTooltip)
     }).toConfig();
 
-    return {
-      config: config,
-      isDrawDeltaExtrems: false,
-      isNotZoomToMinMax: false
-    };
+    return { config: config };
   },
   toSeries: function toSeries(json, option) {
     throw new Error('ZH_1000');

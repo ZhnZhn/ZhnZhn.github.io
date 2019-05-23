@@ -12,13 +12,17 @@ var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
 
+var _big = require('big.js');
+
+var _big2 = _interopRequireDefault(_big);
+
 var _mathFn = require('../math/mathFn');
 
 var _mathFn2 = _interopRequireDefault(_mathFn);
 
-var _formatNumber = require('../utils/formatNumber');
+var _formatNumber2 = require('../utils/formatNumber');
 
-var _formatNumber2 = _interopRequireDefault(_formatNumber);
+var _formatNumber3 = _interopRequireDefault(_formatNumber2);
 
 var _formatAllNumber = require('../utils/formatAllNumber');
 
@@ -53,7 +57,8 @@ var _calcDeltaYAxis2 = _interopRequireDefault(_calcDeltaYAxis);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _crValueMoving = _mathFn2.default.crValueMoving,
-    toFixedNumber = _mathFn2.default.toFixedNumber;
+    toFixedNumber = _mathFn2.default.toFixedNumber,
+    calcPercent = _mathFn2.default.calcPercent;
 
 
 var _fnFindIndex = _fnArr2.default.findIndexByProp('x');
@@ -171,9 +176,16 @@ var _updateYAxisMin = function _updateYAxisMin(_ref3) {
   }
 };
 
+var _formatNumber = function _formatNumber(n) {
+  return (0, _formatAllNumber2.default)(toFixedNumber(n));
+};
 var _setPlotLine = function _setPlotLine(plotLine, value) {
-  plotLine.value = value;
-  plotLine.label.text = (0, _formatAllNumber2.default)(toFixedNumber(value));
+  var delta = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+  if (plotLine) {
+    plotLine.value = value;
+    plotLine.label.text = '' + _formatNumber(value) + delta;
+  }
 };
 
 var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
@@ -240,7 +252,7 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
   },
 
 
-  toNumberFormat: _formatNumber2.default,
+  toNumberFormat: _formatNumber3.default,
   toNumberFormatAll: _formatAllNumber2.default,
 
   crTpId: function crTpId() {
@@ -262,10 +274,35 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
       _setPlotLine(plotLines[1], min);
     }
   },
+  setPlotLinesDeltas: function setPlotLinesDeltas(_ref5) {
+    var plotLines = _ref5.plotLines,
+        min = _ref5.min,
+        max = _ref5.max,
+        value = _ref5.value;
 
-  calcMinY: function calcMinY(_ref5) {
-    var min = _ref5.min,
-        max = _ref5.max;
+    var _bMax = max !== Number.NEGATIVE_INFINITY ? (0, _big2.default)(max) : (0, _big2.default)(0),
+        _bMin = min !== Number.POSITIVE_INFINITY ? (0, _big2.default)(min) : (0, _big2.default)(0),
+        _bValue = value !== null ? (0, _big2.default)(value) : (0, _big2.default)(0),
+        perToMax = calcPercent({
+      bValue: _bMax.minus(_bValue),
+      bTotal: _bValue
+    }),
+        perToMin = calcPercent({
+      bValue: _bValue.minus(_bMin),
+      bTotal: _bValue
+    }),
+        _deltaMax = '\xA0\xA0\u0394 ' + perToMax + '%',
+        _deltaMin = '\xA0\xA0\u0394 ' + perToMin + '%',
+        _maxPoint = parseFloat(_bMax.round(4).toString(), 10),
+        _minPoint = parseFloat(_bMin.round(4).toString(), 10);
+
+    _setPlotLine(plotLines[0], _maxPoint, _deltaMax);
+    _setPlotLine(plotLines[1], _minPoint, _deltaMin);
+  },
+
+  calcMinY: function calcMinY(_ref6) {
+    var min = _ref6.min,
+        max = _ref6.max;
     return max > Number.NEGATIVE_INFINITY && min < Number.POSITIVE_INFINITY ? min - (max - min) * 1 / 6 : void 0;
   },
 

@@ -39,6 +39,8 @@ const toHdConfig = {
         , config = Builder()
             .area2Config(_title, _subtitle)
             .addSeries(seria)
+            .checkThreshold()
+            .addMinMax(data, option)
             .add({
                ...crConfigOption({ option, data })
             })

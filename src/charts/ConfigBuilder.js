@@ -11,6 +11,7 @@ import SeriaBuilder from './SeriaBuilder'
 const { findMinY, findMaxY } = seriaFns;
 const {
   setPlotLinesMinMax,
+  setPlotLinesDeltas,
   calcMinY,
   setYToPoints,
 } = ChartFn;
@@ -46,6 +47,14 @@ const C = {
   }
 };
 
+const _assign = Object.assign;
+const _isObj = obj => obj && typeof obj === 'object';
+const _isStr = str => typeof str === 'string';
+
+const _getY = (point) => Array.isArray(point)
+ ? point[1]
+ : point && point.y || 0;
+
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
     return (new ConfigBuilder(config));
@@ -53,7 +62,7 @@ const ConfigBuilder = function(config={}) {
   this.config = config;
 };
 
-ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
+ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   ...SeriaBuilder,
 
   init(config={}) {
@@ -72,11 +81,13 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
   },
   stockConfig(id, dataOption){
     const {
-            dataVolumeColumn, dataVolume,
-            dataATH,
-            minClose, maxClose, isNotZoomToMinMax,
-            data, dataHigh, dataLow, dataOpen
-          } = dataOption;
+      dataVolumeColumn, dataVolume,
+      dataATH,
+      minClose, maxClose,
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      data, dataHigh, dataLow, dataOpen
+    } = dataOption;
     this.areaConfig({ spacingTop: 25 })
       .addTooltip(Tooltip.fnBasePointFormatter)
       .addMiniVolume({
@@ -88,6 +99,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
         id, data: dataATH
       })
       .setMinMax(minClose, maxClose, isNotZoomToMinMax)
+      .setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems)
       .setStockSerias(id, data, dataHigh, dataLow, dataOpen)
     return this;
   },
@@ -120,7 +132,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
   },
 
   alignButtonExport(){
-    Object.assign(
+    _assign(
       this.config.navigation.buttonOptions, { x: -10, y: -20 }
     )
     return this;
@@ -129,7 +141,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
 
   addTitle(title) {
     const _to = this.config.title || {};
-    this.config.title = Object.assign(_to,
+    this.config.title = _assign(_to,
       Chart.fTitle({
         text: title,
         y: Chart.STACKED_TITLE_Y
@@ -139,7 +151,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
   },
   addSubtitle(subtitle) {
     const _to = this.config.subtitle || {};
-    this.config.subtitle = Object.assign(_to,
+    this.config.subtitle = _assign(_to,
        Chart.fSubtitle({
          text: subtitle,
          y: Chart.STACKED_SUBTITLE_Y
@@ -164,20 +176,20 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
   },
 
   add(propName, option){
-    if (typeof propName === 'string'){
+    if (_isStr(propName)){
       const _to = this.config[propName];
-      if (_to && typeof _to === 'object') {
-        Object.assign(this.config[propName], option)
+      if (_isObj(_to)) {
+        _assign(_to, option)
       } else {
         this.config[propName] = option
       }
-    } else if (propName && typeof propName === 'object'){
+    } else if (_isObj(propName)){
       let _propName;
       for (_propName in propName){
         const _to = this.config[_propName]
             , _from = propName[_propName];
         if (_to) {
-          Object.assign(_to, _from)
+          _assign(_to, _from)
         } else {
           this.config[_propName] = _from
         }
@@ -236,17 +248,33 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
   },
 
   addMinMax(data, option){
-    return this.setMinMax(
-      findMinY(data),
-      findMaxY(data),
-      option.isNotZoomToMinMax
-    );
+    const {
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems
+    } = option
+    , min = findMinY(data)
+    , max = findMaxY(data);
+    return this.setMinMax(min, max, isNotZoomToMinMax)
+      .setMinMaxDeltas(min, max, data, isDrawDeltaExtrems);
   },
 
-  setMinMax(min, max, noZoom){
-    const plotLines = this.config.yAxis.plotLines;
-    setPlotLinesMinMax({ plotLines, min, max })
 
+  setMinMaxDeltas(min, max, data, isDrawDeltaExtrems){
+    if (isDrawDeltaExtrems) {
+      const _recentIndex = data.length-1;
+      if (_recentIndex > 0) {
+        setPlotLinesDeltas({
+          plotLines: this.config.yAxis.plotLines,
+          min, max,
+          value: _getY(data[_recentIndex])
+        })
+      }
+    }
+    return this;
+  },
+
+
+  _setYAxisMin(min, max, noZoom){
     const _min = noZoom && min > 0
       ? 0
       : Chart.calcMinY({
@@ -260,7 +288,14 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
       endOnTick: false,
       startOnTick: false
     })
+  },
 
+  setMinMax(min, max, noZoom){
+    setPlotLinesMinMax({
+      plotLines: this.config.yAxis.plotLines,
+      min, max
+    })
+    this._setYAxisMin(min, max, noZoom)
     return this;
   },
   setStockSerias(id, d, dH, dL, dO){
@@ -274,7 +309,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     const config = this.config
     , data = config.series[seriaIndex].data;
     if (data.length > 1000) {
-      config.plotOptions = Object.assign(
+      config.plotOptions = _assign(
         config.plotOptions || {}, {
           series: {
             turboThreshold: 0

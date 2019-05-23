@@ -29,7 +29,7 @@ const _crZhConfig = (id, value) => ({
   legend: AdapterFn.stockSeriesLegend()
 });
 
-const fnAdapter = {  
+const fnAdapter = {
   toSeriesData: toSeriesData,
 
   crTitle: (option) => ({
@@ -43,11 +43,15 @@ const fnAdapter = {
   },
 
   crData: (json, option, chartId) => {
-    const { isNotZoomToMinMax } = option
+    const {
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems
+    } = option;
     return toSeriesData(chartId, json.results, {
        pnDate: 'tradingDay',
        chartId,
-       isNotZoomToMinMax
+       isNotZoomToMinMax,
+       isDrawDeltaExtrems
     });
   },
 

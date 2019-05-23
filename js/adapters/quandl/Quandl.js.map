@@ -6,8 +6,9 @@
  "file": "../../../src/adapters/quandl/Quandl.js",
  "names": [
   "Quandl",
+  "id",
   "api",
   "adapter"
  ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,SAAS;AACbC,0BADa,EACRC;AADQ,CAAf;;kBAIeF,M"
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,SAAS;AACbC,MAAI,GADS;AAEbC,0BAFa,EAERC;AAFQ,CAAf;;kBAKeH,M"
 }

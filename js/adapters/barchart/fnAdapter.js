@@ -65,12 +65,14 @@ var fnAdapter = {
   },
 
   crData: function crData(json, option, chartId) {
-    var isNotZoomToMinMax = option.isNotZoomToMinMax;
+    var isNotZoomToMinMax = option.isNotZoomToMinMax,
+        isDrawDeltaExtrems = option.isDrawDeltaExtrems;
 
     return toSeriesData(chartId, json.results, {
       pnDate: 'tradingDay',
       chartId: chartId,
-      isNotZoomToMinMax: isNotZoomToMinMax
+      isNotZoomToMinMax: isNotZoomToMinMax,
+      isDrawDeltaExtrems: isDrawDeltaExtrems
     });
   },
 

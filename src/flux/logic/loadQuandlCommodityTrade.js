@@ -31,12 +31,14 @@ const _fnFailedLoadMeta = function(option, onFailed, optionFailed){
 
 const _loadToChartComp = function(option, onCompleted, onFailed){
    const { isLoadMeta } = option
-       , _onFetch = (isLoadMeta)
-            ? _fnFetchToChartComp
-            : LoadImpl.Quandl.fnFetchToChartComp
-       , _onFailed = (isLoadMeta)
-            ? _fnFailedLoadMeta.bind(null, option, onFailed)
-            : onFailed;
+   , _onFetch = (isLoadMeta)
+        ? _fnFetchToChartComp
+        //: LoadImpl.Quandl.loadItem
+        : LoadImpl.Quandl.fnFetchToChartComp
+   , _onFailed = (isLoadMeta)
+        ? _fnFailedLoadMeta.bind(null, option, onFailed)
+        : onFailed;
+
    fetchJson({
      uri : QuandlApi.getRequestUrl(option),
      option : option,

@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/isSupportOptions.js"
+ ],
+ "file": "../../src/utils/isSupportOptions.js",
+ "names": [
+  "_isUndef",
+  "v",
+  "_isSupportOptions",
+  "onceOptions",
+  "once",
+  "isSupportOptions",
+  "window",
+  "addEventListener",
+  "removeEventListener",
+  "err"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,WAAW,SAAXA,QAAW;AAAA,SAAK,OAAOC,CAAP,KAAa,WAAlB;AAAA,CAAjB;AACA,IAAIC,0BAAJ;AACA,IAAMC,cAAc;AAChB,MAAIC,IAAJ,GAAU;AACRF,wBAAoB,IAApB;AACA,WAAO,IAAP;AACD;AAJe,CAApB;;AAOA,IAAMG,mBAAmB,SAAnBA,gBAAmB,GAAM;AAC7B,MAAI,CAACL,SAASK,gBAAT,CAAL,EAAgC;AAC9B,WAAOH,iBAAP;AACD;AACD,MAAI;AACFI,WAAOC,gBAAP,CAAwB,MAAxB,EAAgCJ,WAAhC,EAA6CA,WAA7C;AACAG,WAAOE,mBAAP,CAA2B,MAA3B,EAAmCL,WAAnC,EAAgDA,WAAhD;AACD,GAHD,CAGE,OAAMM,GAAN,EAAW;AACXP,wBAAoB,KAApB;AACD;AACD,SAAOA,iBAAP;AACD,CAXD;;kBAaeG,gB"
+}

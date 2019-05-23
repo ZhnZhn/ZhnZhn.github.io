@@ -1,15 +1,19 @@
 import AdapterFn from './AdapterFn'
 
 const {
-        ymdToUTC, volumeColumnPoint, athPoint
-      } = AdapterFn;
+  ymdToUTC,
+  volumeColumnPoint,
+  athPoint
+} = AdapterFn;
 
 const AdapterStockFn = {
   toSeriesData: (id, arr=[], option) => {
     const {
             isAllSeries=true,
             pnDate='date',
-            isNotZoomToMinMax
+            ...restOption
+            //isNotZoomToMinMax,
+            //isDrawDeltaExtrems
           } = option || {};
     const data = []
         , dataOpen = [], dataHigh = [], dataLow = []
@@ -46,7 +50,9 @@ const AdapterStockFn = {
         if (typeof _prevClose !== 'undefined'){
           dataATH.push(
              athPoint({
-               date: _date, prevClose: _prevClose, open
+               date: _date,
+               prevClose: _prevClose,
+               open
              })
           )
         }
@@ -56,10 +62,11 @@ const AdapterStockFn = {
 
     return {
       data,
-      minClose, maxClose, isNotZoomToMinMax,
+      minClose, maxClose,
       dataOpen, dataHigh, dataLow,
       dataVolume, dataVolumeColumn,
-      dataATH, dataMfi
+      dataATH, dataMfi,
+      ...restOption
     };
   }
 };

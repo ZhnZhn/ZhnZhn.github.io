@@ -47,7 +47,7 @@ class PaneOptions extends Component {
   */
 
   constructor(props){
-    super()
+    super(props)
     const { data } = props;
 
     this._setProxy = safeFn(data, SET.PROXY)
@@ -69,7 +69,6 @@ class PaneOptions extends Component {
     ) {
       theme.setThemeName(item.value)
       onChangeTheme(item.value)
-      //this.forceUpdate()
     }
   }
 
@@ -110,7 +109,7 @@ class PaneOptions extends Component {
        />
        <D.RowCheckBox
           initValue={_isDrawDeltaExtrems}
-          caption="Draw Delta Extrems"
+          caption="Draw Deltas to Min-Max"
           onCheck={this._hMode.bind(null, MODE_DELTA, true)}
           onUnCheck={this._hMode.bind(null, MODE_DELTA, false)}
        />

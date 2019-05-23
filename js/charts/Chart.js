@@ -357,11 +357,7 @@ var Chart = {
     var minPoint = _ref3.minPoint,
         maxPoint = _ref3.maxPoint;
 
-    if (maxPoint > Number.NEGATIVE_INFINITY && minPoint < Number.POSITIVE_INFINITY) {
-      return minPoint - (maxPoint - minPoint) * 1 / 6;
-    } else {
-      return undefined;
-    }
+    return maxPoint > Number.NEGATIVE_INFINITY && minPoint < Number.POSITIVE_INFINITY ? minPoint - (maxPoint - minPoint) / 6 : void 0;
   },
   fPlotOptionsArea: function fPlotOptionsArea() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};

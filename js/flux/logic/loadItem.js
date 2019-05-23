@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _fnFetch = require('../../utils/fnFetch');
 
 var _ChartStore = require('../stores/ChartStore');
@@ -134,20 +138,26 @@ var _loadItem = function _loadItem(objImpl, option, onCompleted, onAdded, onFail
   }
 };
 
+var _crLoadFns = function _crLoadFns(objImpl) {
+  return objImpl.id === 'Q' ? {
+    fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
+    fnFetchToChart: _fetchToChart.bind(null, objImpl)
+  } : void 0;
+};
+
 var fLoadItem = function fLoadItem(objImpl) {
   var _objImpl$fnFetch = objImpl.fnFetch,
       fnFetch = _objImpl$fnFetch === undefined ? _fnFetch.fetchJson : _objImpl$fnFetch,
       api = objImpl.api,
-      adapter = objImpl.adapter;
+      adapter = objImpl.adapter,
+      _loadFns = _crLoadFns(objImpl);
 
   objImpl.fnFetch = fnFetch;
-  return {
+  return (0, _extends3.default)({
     loadItem: _loadItem.bind(null, objImpl),
-    //fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
-    //fnFetchToChart: _fetchToChart.bind(null, objImpl),
     addPropsTo: api.addPropsTo,
     crKey: adapter.crKey
-  };
+  }, _loadFns);
 };
 
 exports.default = fLoadItem;

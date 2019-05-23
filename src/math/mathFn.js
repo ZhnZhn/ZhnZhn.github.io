@@ -7,7 +7,7 @@ const MAX_TO_ROUND = '1000000';
 const _isNumber = n => typeof n === 'number'
  && !Number.isNaN(n);
 
-const _formatedToBig = (v='0.0', dfR) => {
+const _formatedToBig = (v=0, dfR) => {
   const _b = Big(v.toString().replace(/\s/g,''));
   return _isNumber(dfR)
     ? _b.round(dfR)
@@ -22,12 +22,27 @@ const _roundBig = (bValue) => {
   return _bValue;
 };
 
+
+const _toBig = (bValue, dfValue=0) => {
+  if (bValue instanceof Big) {
+    return bValue;
+  }
+  try {
+    bValue = new Big(bValue)
+    return bValue;
+  } catch(err) {
+    return new Big(dfValue);
+  }
+};
+
 const mathFn = {
 
-  calcPercent: ({ bValue=Big('0.0'), bTotal=Big('0.0') }) => {
-    return !bTotal.eq(Big(0.0))
+  calcPercent: ({ bValue=Big(0), bTotal=Big(0) }) => {
+    bValue = _toBig(bValue)
+    bTotal = _toBig(bTotal)
+    return !bTotal.eq(Big(0))
       ? bValue.times(100).div(bTotal).abs().toFixed(2)
-      : Big(0.0).toFixed(2);
+      : Big(0).toFixed(2);
   },
 
   crValueMoving: (option) => {

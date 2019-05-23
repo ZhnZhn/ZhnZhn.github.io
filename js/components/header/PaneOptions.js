@@ -93,7 +93,7 @@ var PaneOptions = (_temp = _class = function (_Component) {
   function PaneOptions(props) {
     (0, _classCallCheck3.default)(this, PaneOptions);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (PaneOptions.__proto__ || Object.getPrototypeOf(PaneOptions)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (PaneOptions.__proto__ || Object.getPrototypeOf(PaneOptions)).call(this, props));
 
     _initialiseProps.call(_this);
 
@@ -142,7 +142,7 @@ var PaneOptions = (_temp = _class = function (_Component) {
         }),
         _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           initValue: _isDrawDeltaExtrems,
-          caption: 'Draw Delta Extrems',
+          caption: 'Draw Deltas to Min-Max',
           onCheck: this._hMode.bind(null, MODE_DELTA, true),
           onUnCheck: this._hMode.bind(null, MODE_DELTA, false)
         }),
@@ -193,7 +193,6 @@ var PaneOptions = (_temp = _class = function (_Component) {
     if (item && theme.getThemeName() !== item.value) {
       theme.setThemeName(item.value);
       onChangeTheme(item.value);
-      //this.forceUpdate()
     }
   };
 

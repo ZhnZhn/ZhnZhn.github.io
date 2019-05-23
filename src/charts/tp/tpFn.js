@@ -1,4 +1,5 @@
 
+import isSupportOptions from '../../utils/isSupportOptions'
 import ChartFn from '../ChartFn'
 
 const {
@@ -18,6 +19,25 @@ const C = {
 
 const TITLE_STYLE = `style="color:${C.TITLE_C};"`;
 const FONT_STYLE = 'font-size:16px;font-weight:bold';
+
+const _isFn = fn => typeof fn === 'function';
+
+const _fHideTooltip = (point={}, fn) => () => {
+  if (point.series) {
+     point.series.chart.zhTooltip.hide();
+  }
+  if (_isFn(fn)) {
+    fn(point)
+  }
+};
+const _addClickOnceById = (id, listener) => {
+  const node = document.getElementById(id);
+  if (node) {
+    node.addEventListener('click', listener,
+      isSupportOptions ? { once: true } : false
+    )
+  }
+};
 
 const tpFn = {
   crSpan: (t='', v='', { color=C.VALUE_C }={}) => {
@@ -45,13 +65,10 @@ const tpFn = {
   toDateFormatDMY,
   toDateFormatDMYT,
 
-  fHide: (id, point) => function _fnHide() {
-    document.getElementById(id)
-      .removeEventListener('click', _fnHide);
-    if (point.series) {
-       point.series.chart.zhTooltip.hide();
-    }
+  addHideHandler: (id, point, fn) => {
+    _addClickOnceById(id, _fHideTooltip(point, fn))
   }
+
 };
 
 export default tpFn

@@ -40,30 +40,21 @@ var _tpDonut = require('./tp/tpDonut');
 
 var _tpDonut2 = _interopRequireDefault(_tpDonut);
 
+var _tpFn = require('./tp/tpFn');
+
+var _tpFn2 = _interopRequireDefault(_tpFn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var crTpId = _ChartFn2.default.crTpId,
     toNumberFormat = _ChartFn2.default.toNumberFormat,
     toDateFormatDMY = _ChartFn2.default.toDateFormatDMY;
+var addHideHandler = _tpFn2.default.addHideHandler;
 
 
-var _fHide = function _fHide(id, point) {
-  return function _fnHide() {
-    document.getElementById(id).removeEventListener('click', _fnHide);
-    if (point.series) {
-      point.series.chart.zhTooltip.hide();
-    }
-  };
-};
-var _addHideHandler = function _addHideHandler(id, point) {
-  var _n = document.getElementById(id);
-  if (_n) {
-    _n.addEventListener('click', _fHide(id, point));
-  }
-};
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {
   setTimeout(function () {
-    _addHideHandler(id, point);
+    return addHideHandler(id, point);
   }, 1);
 };
 
@@ -91,7 +82,12 @@ var _fFormatter = function _fFormatter(option) {
 
     onAfterRender(_id, point);
 
-    return fnTemplate({ id: _id, date: date, color: color, valueText: valueText, value: value, point: point });
+    return fnTemplate({
+      id: _id,
+      date: date, color: color,
+      valueText: valueText, value: value,
+      point: point
+    });
   };
 };
 

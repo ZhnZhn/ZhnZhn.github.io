@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
+//import PropTypes from "prop-types";
 
 import DialogContainer from '../zhn-containers/DialogContainer';
 
 const CL_ROOT = "hrz-container";
 
 class BrowserContainer extends Component {
-  constructor(props){
-    super()
-    this.state = {
-      elBrowsers : []
-    }
+  /*
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func
+    }),
+    initBrowserAction: PropTypes.string,
+    showDialogAction: PropTypes.string,
+    onCloseDialog: PropTypes.func
+  }
+  */
+
+  state = {
+    elBrowsers: []
   }
 
   componentDidMount(){
@@ -23,30 +32,25 @@ class BrowserContainer extends Component {
 
   _onStore = (actionType, data) => {
      if (actionType === this.props.initBrowserAction){
-       this.setState(prevState => {
-         prevState.elBrowsers.unshift(data)
-         return prevState;
-       })
+       this.setState(prevState => ({
+         elBrowsers: [data, ...prevState.elBrowsers]
+       }))
      }
-  }
-
-  _renderBrowsers = (elBrowsers) => {
-    return elBrowsers.map(Comp => React.cloneElement(Comp));
   }
 
   render(){
     const {
-            store,
-            showDialogAction,
-            onCloseDialog
-          } = this.props
-        , {
-            elBrowsers
-          } = this.state;
+      store,
+      showDialogAction,
+      onCloseDialog
+    } = this.props
+    , {
+      elBrowsers
+    } = this.state;
 
     return (
       <div className={CL_ROOT}>
-         {this._renderBrowsers(elBrowsers)}
+         {elBrowsers.map(Comp => React.cloneElement(Comp))}
          <DialogContainer
             maxDialog={3}
             store={store}

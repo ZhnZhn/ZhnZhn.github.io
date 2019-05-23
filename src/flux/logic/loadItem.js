@@ -102,18 +102,25 @@ const _loadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
   }
 };
 
+const _crLoadFns = (objImpl) => objImpl.id === 'Q'
+  ? {
+      fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
+      fnFetchToChart: _fetchToChart.bind(null, objImpl),
+    }
+  : void 0;
+
 const fLoadItem = (objImpl) => {
    const {
-           fnFetch=fetchJson,
-           api, adapter
-         } = objImpl;
+     fnFetch=fetchJson,
+     api, adapter
+   } = objImpl
+   , _loadFns = _crLoadFns(objImpl);
    objImpl.fnFetch = fnFetch
    return {
      loadItem: _loadItem.bind(null, objImpl),
-     //fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
-     //fnFetchToChart: _fetchToChart.bind(null, objImpl),
      addPropsTo: api.addPropsTo,
-     crKey: adapter.crKey
+     crKey: adapter.crKey,
+     ..._loadFns
    };
 }
 

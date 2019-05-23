@@ -44,10 +44,7 @@ var fn = {
         i = _rt;
     for (; i < max; i++) {
       pNext = d[i];
-      _d.push({
-        x: pNext.x,
-        y: _calcY(pPrev, pNext)
-      });
+      _d.push([pNext.x, _calcY(pPrev, pNext)]);
       pPrev = d[i - prevStep];
     }
     return _d;
@@ -64,10 +61,7 @@ var fn = {
       return [];
     }
     for (var i = 0; i < _max; i++) {
-      _d.push({
-        x: d[i].x,
-        y: parseFloat((0, _big2.default)(d[i].y / _y0).times(100).toFixed(2))
-      });
+      _d.push([d[i].x, parseFloat((0, _big2.default)(d[i].y / _y0).times(100).toFixed(2))]);
     }
 
     return _d;

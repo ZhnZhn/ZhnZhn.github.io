@@ -1,5 +1,7 @@
 import Highcharts from 'highcharts';
 
+import Big from 'big.js';
+
 import mathFn from '../math/mathFn'
 import formatNumber from '../utils/formatNumber'
 import formatAllNumber from '../utils/formatAllNumber'
@@ -16,7 +18,11 @@ import { Direction } from '../constants/Type';
 import WithAreaChartFn from './WithAreaChartFn'
 import calcDeltaYAxis from './calcDeltaYAxis'
 
-const { crValueMoving, toFixedNumber } = mathFn;
+const {
+  crValueMoving,
+  toFixedNumber,
+  calcPercent
+} = mathFn;
 
 const _fnFindIndex = fnArr.findIndexByProp('x');
 
@@ -116,12 +122,15 @@ const _updateYAxisMin = ({ hasSecondYAxis, series, options={}, chart }) => {
   }
 };
 
-const _setPlotLine = (plotLine, value) => {
-  plotLine.value = value;
-  plotLine.label.text = formatAllNumber(
-    toFixedNumber(value)
-  );
+
+const _formatNumber = n => formatAllNumber(toFixedNumber(n));
+const _setPlotLine = (plotLine, value, delta='') => {
+  if (plotLine) {
+    plotLine.value = value
+    plotLine.label.text = `${_formatNumber(value)}${delta}`
+  }
 };
+
 
 const ChartFn = {
   ...WithAreaChartFn,
@@ -213,6 +222,32 @@ const ChartFn = {
     if ( min<Number.POSITIVE_INFINITY ){
       _setPlotLine(plotLines[1], min)
     }
+  },
+  setPlotLinesDeltas: ({ plotLines, min, max, value }) => {
+    const _bMax = max !== Number.NEGATIVE_INFINITY
+        ? Big(max)
+        : Big(0)
+    , _bMin = min !== Number.POSITIVE_INFINITY
+        ? Big(min)
+        : Big(0)
+    , _bValue = value !== null
+        ? Big(value)
+        : Big(0)
+    , perToMax = calcPercent({
+       bValue: _bMax.minus(_bValue),
+       bTotal: _bValue
+    })
+    , perToMin = calcPercent({
+      bValue: _bValue.minus(_bMin),
+      bTotal: _bValue
+    })
+    , _deltaMax = `\u00A0\u00A0Δ ${perToMax}%`
+    , _deltaMin = `\u00A0\u00A0Δ ${perToMin}%`
+    , _maxPoint = parseFloat(_bMax.round(4).toString(), 10)
+    , _minPoint = parseFloat(_bMin.round(4).toString(), 10);
+
+    _setPlotLine(plotLines[0], _maxPoint, _deltaMax)
+    _setPlotLine(plotLines[1], _minPoint, _deltaMin)
   },
 
   calcMinY: ({ min, max }) => max>Number.NEGATIVE_INFINITY

@@ -8,7 +8,7 @@ const C = {
   CODE_429: '429'
 };
 
-const _fnAddAlert = (option, msg) => {
+const _addErrMsg = (option, msg) => {
   const { caption, descr } = msg;
   Object.assign(option, {
     alertCaption: caption,
@@ -33,23 +33,28 @@ const _crAlertDescr = (error)  => {
   }
 }
 
-const _fnAddDfAlert = (option, error) => {
+const _addDfErrMsg = (option, error) => {
   const _obj = _crAlertDescr(error);
-  _fnAddAlert(option, _obj)
+  _addErrMsg(option, _obj)
 }
+
+const _isMsgByCode = (err, code) => err
+ .message.indexOf(code) !== -1;
 
 export const fnCatch = function({ error, option, onFailed }){
   if (error instanceof TypeError){
-    if (error.message.indexOf(C.CODE_429) !== -1) {
-       _fnAddAlert(option, M.TOO_MANY_REQUEST)
-    } else if (error.message.indexOf(C.FETCH) !== -1) {
-       _fnAddAlert(option, M.NETWORK_ERROR)
+    if (_isMsgByCode(error, C.CODE_429)) {
+       _addErrMsg(option, M.TOO_MANY_REQUEST)
+    } else if (_isMsgByCode(error, C.FETCH)) {
+       _addErrMsg(option, M.NETWORK_ERROR)
     } else {
-       _fnAddDfAlert(option, error)
+       _addDfErrMsg(option, error)
     }
   } else {
-     _fnAddDfAlert(option, error)
+     _addDfErrMsg(option, error)
   }
 
-  onFailed(option)
+  if (typeof onFailed === 'function') {
+    onFailed(option)
+  }
 }

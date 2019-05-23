@@ -333,11 +333,9 @@ fCrosshair(){
   },
 
   calcMinY({ minPoint, maxPoint }){
-    if ( maxPoint>Number.NEGATIVE_INFINITY && minPoint<Number.POSITIVE_INFINITY){
-       return minPoint - ((maxPoint-minPoint)*1/6)
-    } else {
-      return undefined;
-    }
+    return maxPoint>Number.NEGATIVE_INFINITY && minPoint<Number.POSITIVE_INFINITY
+      ? minPoint - ((maxPoint-minPoint)/6)
+      : void 0;
   },
 
   fPlotOptionsArea(option={}){

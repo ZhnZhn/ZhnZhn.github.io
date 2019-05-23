@@ -23,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var crHeader = _tpFn2.default.crHeader,
     crRow = _tpFn2.default.crRow,
     toNumberFormat = _tpFn2.default.toNumberFormat,
-    fHide = _tpFn2.default.fHide;
+    addHideHandler = _tpFn2.default.addHideHandler;
 
 
 var SPARKLINES_SUFFIX_ID = 'sparklines',
@@ -54,13 +54,6 @@ var _fnTooltipSparkType4 = function _fnTooltipSparkType4(_ref) {
   return '<div class="tp__body">\n  <div class="tp__body__part1" style="width:' + fullWidth + 'px;" >\n    <div ' + _style + '>\n      ' + crRow('Year', year, { color: _tpConfig2.default.YEAR_C }) + '\n      ' + crRow('Value', value) + '\n    </div>\n    <div id="' + id + '_' + SPARKLINES_SUFFIX_ID + '" class="tp__body__sparklines">\n    </div>\n  </div>\n  <div class="tp__body__part1" style="width:' + fullWidth + 'px;" >\n    <div ' + _style + '>\n      ' + crRow('Total', total) + '\n      ' + crRow('Percent', percent) + '\n    </div>\n    <div id="' + id + '_' + SPARKLINES_BAR_SUFFIX_ID + '" class="tp__body__sparklines">\n    </div>\n  </div>';
 };
 
-var _addHideHandler = function _addHideHandler(id, point) {
-  var _n = document.getElementById(id);
-  if (_n) {
-    _n.addEventListener('click', fHide(id, point));
-  }
-};
-
 var _crSparkData = function _crSparkData(point) {
   var sparkvalues = point.sparkvalues,
       sparkpercent = point.sparkpercent;
@@ -86,7 +79,7 @@ var _crSparkData = function _crSparkData(point) {
 
 var _onAfterRender = function _onAfterRender(id, point) {
   setTimeout(function () {
-    _addHideHandler(id, point);
+    addHideHandler(id, point);
 
     var _crSparkData2 = _crSparkData(point),
         sparkLinesData = _crSparkData2.sparkLinesData,

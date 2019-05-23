@@ -49,7 +49,7 @@ const _loadOptions = function(option){
 }
 
 const _onLoadOptionsCompleted = function(
-   target, {toStateProp, isLoadingProp, json, optionJsonProp}
+   target, { toStateProp, isLoadingProp, json, optionJsonProp }
  ){
   if (toStateProp && optionJsonProp) {
      if (!json.dfColumns) {
@@ -62,7 +62,7 @@ const _onLoadOptionsCompleted = function(
        target.setState({
          [isLoadingProp]: false,
          [toStateProp]: json[optionJsonProp],
-         childOptions: json.dfColumns
+         twoOptions: json.dfColumns
        });
      }
   }

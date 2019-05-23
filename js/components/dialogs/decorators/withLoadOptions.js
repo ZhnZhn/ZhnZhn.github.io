@@ -85,7 +85,7 @@ var _onLoadOptionsCompleted = function _onLoadOptionsCompleted(target, _ref) {
       var _target$setState2;
 
       target._isDfColumns = true;
-      target.setState((_target$setState2 = {}, (0, _defineProperty3.default)(_target$setState2, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState2, toStateProp, json[optionJsonProp]), (0, _defineProperty3.default)(_target$setState2, 'childOptions', json.dfColumns), _target$setState2));
+      target.setState((_target$setState2 = {}, (0, _defineProperty3.default)(_target$setState2, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState2, toStateProp, json[optionJsonProp]), (0, _defineProperty3.default)(_target$setState2, 'twoOptions', json.dfColumns), _target$setState2));
     }
   }
 };

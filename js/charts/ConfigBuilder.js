@@ -4,13 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
 var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
+
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
 
 var _seriaFn = require('../math/seriaFn');
 
@@ -45,6 +45,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var findMinY = _seriaFn2.default.findMinY,
     findMaxY = _seriaFn2.default.findMaxY;
 var setPlotLinesMinMax = _ChartFn2.default.setPlotLinesMinMax,
+    setPlotLinesDeltas = _ChartFn2.default.setPlotLinesDeltas,
     calcMinY = _ChartFn2.default.calcMinY,
     setYToPoints = _ChartFn2.default.setYToPoints;
 var crDividendSeria = _ChartConfig2.default.crDividendSeria;
@@ -80,6 +81,18 @@ var C = {
   }
 };
 
+var _assign = Object.assign;
+var _isObj = function _isObj(obj) {
+  return obj && (typeof obj === 'undefined' ? 'undefined' : (0, _typeof3.default)(obj)) === 'object';
+};
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
+
+var _getY = function _getY(point) {
+  return Array.isArray(point) ? point[1] : point && point.y || 0;
+};
+
 var ConfigBuilder = function ConfigBuilder() {
   var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -89,7 +102,7 @@ var ConfigBuilder = function ConfigBuilder() {
   this.config = config;
 };
 
-ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.default)({}, _SeriaBuilder2.default, {
+ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default)({}, _SeriaBuilder2.default, {
   init: function init() {
     var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -111,6 +124,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
         minClose = dataOption.minClose,
         maxClose = dataOption.maxClose,
         isNotZoomToMinMax = dataOption.isNotZoomToMinMax,
+        isDrawDeltaExtrems = dataOption.isDrawDeltaExtrems,
         data = dataOption.data,
         dataHigh = dataOption.dataHigh,
         dataLow = dataOption.dataLow,
@@ -122,7 +136,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
       dVolume: dataVolume
     }).addMiniATH({
       id: id, data: dataATH
-    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
+    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
     return this;
   },
   categoryConfig: function categoryConfig() {
@@ -164,12 +178,12 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     return this;
   },
   alignButtonExport: function alignButtonExport() {
-    Object.assign(this.config.navigation.buttonOptions, { x: -10, y: -20 });
+    _assign(this.config.navigation.buttonOptions, { x: -10, y: -20 });
     return this;
   },
   addTitle: function addTitle(title) {
     var _to = this.config.title || {};
-    this.config.title = Object.assign(_to, _Chart2.default.fTitle({
+    this.config.title = _assign(_to, _Chart2.default.fTitle({
       text: title,
       y: _Chart2.default.STACKED_TITLE_Y
     }));
@@ -177,7 +191,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
   },
   addSubtitle: function addSubtitle(subtitle) {
     var _to = this.config.subtitle || {};
-    this.config.subtitle = Object.assign(_to, _Chart2.default.fSubtitle({
+    this.config.subtitle = _assign(_to, _Chart2.default.fSubtitle({
       text: subtitle,
       y: _Chart2.default.STACKED_SUBTITLE_Y
     }));
@@ -198,20 +212,20 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     return this;
   },
   add: function add(propName, option) {
-    if (typeof propName === 'string') {
+    if (_isStr(propName)) {
       var _to = this.config[propName];
-      if (_to && (typeof _to === 'undefined' ? 'undefined' : (0, _typeof3.default)(_to)) === 'object') {
-        Object.assign(this.config[propName], option);
+      if (_isObj(_to)) {
+        _assign(_to, option);
       } else {
         this.config[propName] = option;
       }
-    } else if (propName && (typeof propName === 'undefined' ? 'undefined' : (0, _typeof3.default)(propName)) === 'object') {
+    } else if (_isObj(propName)) {
       var _propName = void 0;
       for (_propName in propName) {
         var _to2 = this.config[_propName],
             _from = propName[_propName];
         if (_to2) {
-          Object.assign(_to2, _from);
+          _assign(_to2, _from);
         } else {
           this.config[_propName] = _from;
         }
@@ -257,12 +271,27 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     });
   },
   addMinMax: function addMinMax(data, option) {
-    return this.setMinMax(findMinY(data), findMaxY(data), option.isNotZoomToMinMax);
-  },
-  setMinMax: function setMinMax(min, max, noZoom) {
-    var plotLines = this.config.yAxis.plotLines;
-    setPlotLinesMinMax({ plotLines: plotLines, min: min, max: max });
+    var isNotZoomToMinMax = option.isNotZoomToMinMax,
+        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
+        min = findMinY(data),
+        max = findMaxY(data);
 
+    return this.setMinMax(min, max, isNotZoomToMinMax).setMinMaxDeltas(min, max, data, isDrawDeltaExtrems);
+  },
+  setMinMaxDeltas: function setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
+    if (isDrawDeltaExtrems) {
+      var _recentIndex = data.length - 1;
+      if (_recentIndex > 0) {
+        setPlotLinesDeltas({
+          plotLines: this.config.yAxis.plotLines,
+          min: min, max: max,
+          value: _getY(data[_recentIndex])
+        });
+      }
+    }
+    return this;
+  },
+  _setYAxisMin: function _setYAxisMin(min, max, noZoom) {
     var _min = noZoom && min > 0 ? 0 : _Chart2.default.calcMinY({
       minPoint: min,
       maxPoint: max
@@ -274,7 +303,13 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
       endOnTick: false,
       startOnTick: false
     });
-
+  },
+  setMinMax: function setMinMax(min, max, noZoom) {
+    setPlotLinesMinMax({
+      plotLines: this.config.yAxis.plotLines,
+      min: min, max: max
+    });
+    this._setYAxisMin(min, max, noZoom);
     return this;
   },
   setStockSerias: function setStockSerias(id, d, dH, dL, dO) {
@@ -287,7 +322,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     var config = this.config,
         data = config.series[seriaIndex].data;
     if (data.length > 1000) {
-      config.plotOptions = Object.assign(config.plotOptions || {}, {
+      config.plotOptions = _assign(config.plotOptions || {}, {
         series: {
           turboThreshold: 0
         }

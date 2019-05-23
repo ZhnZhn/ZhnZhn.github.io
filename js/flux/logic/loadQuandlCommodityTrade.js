@@ -52,8 +52,11 @@ var _fnFailedLoadMeta = function _fnFailedLoadMeta(option, onFailed, optionFaile
 
 var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) {
   var isLoadMeta = option.isLoadMeta,
-      _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl2.default.Quandl.fnFetchToChartComp,
+      _onFetch = isLoadMeta ? _fnFetchToChartComp
+  //: LoadImpl.Quandl.loadItem
+  : _LoadImpl2.default.Quandl.fnFetchToChartComp,
       _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
+
 
   (0, _fnFetch.fetchJson)({
     uri: _QuandlApi2.default.getRequestUrl(option),

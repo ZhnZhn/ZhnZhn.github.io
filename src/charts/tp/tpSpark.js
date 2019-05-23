@@ -8,7 +8,7 @@ import C from './tpConfig'
 const {
   crHeader, crRow,
   toNumberFormat,
-  fHide
+  addHideHandler
 } = fn;
 
 const SPARKLINES_SUFFIX_ID = 'sparklines'
@@ -49,13 +49,6 @@ const _fnTooltipSparkType4 = function({
   </div>`;
 }
 
-const _addHideHandler = (id, point) => {
-  const _n = document.getElementById(id);
-  if (_n){
-    _n.addEventListener('click', fHide(id, point))
-  }
-}
-
 const _crSparkData = (point) => {
   const { sparkvalues, sparkpercent } = point;
   let  sparkLinesData = []
@@ -81,7 +74,7 @@ const _crSparkData = (point) => {
 
 const _onAfterRender = function(id, point){
   setTimeout( function(){
-          _addHideHandler(id, point)
+          addHideHandler(id, point)
           const {
                   sparkLinesData, sparkBarsData,
                   pointIndex

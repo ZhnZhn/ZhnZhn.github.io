@@ -189,7 +189,10 @@ const _crChartOptions = (dfT, data) => {
 const AlphaIntradayAdapter = {
   toConfig(json, option){
     const baseConfig = ChartConfig.fBaseAreaConfig()
-    , { value, interval, dfT, dataSource } = option
+    , {
+      value, interval, dfT,
+      dataSource
+    } = option
     , _chartId = value
     , {
         data, minClose, maxClose,
@@ -214,7 +217,7 @@ const AlphaIntradayAdapter = {
         })
       })
       .checkThreshold()
-      .setMinMax(minClose, maxClose)
+      .addMinMax(dataDaily, option)
       .addDividend({ dataDividend, minClose, maxClose })
       .addMiniVolume({
         id: _chartId,
@@ -223,11 +226,7 @@ const AlphaIntradayAdapter = {
       })
       .toConfig();
 
-    return {
-      config,
-      isDrawDeltaExtrems: false,
-      isNotZoomToMinMax: false
-    };
+    return { config };
   },
 
   toSeries(json, option){

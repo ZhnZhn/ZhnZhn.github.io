@@ -4,6 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
 var _AdapterFn = require('./AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
@@ -25,7 +33,7 @@ var AdapterStockFn = {
         isAllSeries = _ref$isAllSeries === undefined ? true : _ref$isAllSeries,
         _ref$pnDate = _ref.pnDate,
         pnDate = _ref$pnDate === undefined ? 'date' : _ref$pnDate,
-        isNotZoomToMinMax = _ref.isNotZoomToMinMax;
+        restOption = (0, _objectWithoutProperties3.default)(_ref, ['isAllSeries', 'pnDate']);
 
     var data = [],
         dataOpen = [],
@@ -68,20 +76,22 @@ var AdapterStockFn = {
         dataMfi.push([date, close, high, low, close, volume]);
         if (typeof _prevClose !== 'undefined') {
           dataATH.push(athPoint({
-            date: _date, prevClose: _prevClose, open: open
+            date: _date,
+            prevClose: _prevClose,
+            open: open
           }));
         }
         _prevClose = close;
       }
     });
 
-    return {
+    return (0, _extends3.default)({
       data: data,
-      minClose: minClose, maxClose: maxClose, isNotZoomToMinMax: isNotZoomToMinMax,
+      minClose: minClose, maxClose: maxClose,
       dataOpen: dataOpen, dataHigh: dataHigh, dataLow: dataLow,
       dataVolume: dataVolume, dataVolumeColumn: dataVolumeColumn,
       dataATH: dataATH, dataMfi: dataMfi
-    };
+    }, restOption);
   }
 };
 

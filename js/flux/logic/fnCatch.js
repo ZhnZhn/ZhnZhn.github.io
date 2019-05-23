@@ -18,7 +18,7 @@ var C = {
   CODE_429: '429'
 };
 
-var _fnAddAlert = function _fnAddAlert(option, msg) {
+var _addErrMsg = function _addErrMsg(option, msg) {
   var caption = msg.caption,
       descr = msg.descr;
 
@@ -48,9 +48,13 @@ var _crAlertDescr = function _crAlertDescr(error) {
   }
 };
 
-var _fnAddDfAlert = function _fnAddDfAlert(option, error) {
+var _addDfErrMsg = function _addDfErrMsg(option, error) {
   var _obj = _crAlertDescr(error);
-  _fnAddAlert(option, _obj);
+  _addErrMsg(option, _obj);
+};
+
+var _isMsgByCode = function _isMsgByCode(err, code) {
+  return err.message.indexOf(code) !== -1;
 };
 
 var fnCatch = exports.fnCatch = function fnCatch(_ref) {
@@ -59,17 +63,19 @@ var fnCatch = exports.fnCatch = function fnCatch(_ref) {
       onFailed = _ref.onFailed;
 
   if (error instanceof TypeError) {
-    if (error.message.indexOf(C.CODE_429) !== -1) {
-      _fnAddAlert(option, M.TOO_MANY_REQUEST);
-    } else if (error.message.indexOf(C.FETCH) !== -1) {
-      _fnAddAlert(option, M.NETWORK_ERROR);
+    if (_isMsgByCode(error, C.CODE_429)) {
+      _addErrMsg(option, M.TOO_MANY_REQUEST);
+    } else if (_isMsgByCode(error, C.FETCH)) {
+      _addErrMsg(option, M.NETWORK_ERROR);
     } else {
-      _fnAddDfAlert(option, error);
+      _addDfErrMsg(option, error);
     }
   } else {
-    _fnAddDfAlert(option, error);
+    _addDfErrMsg(option, error);
   }
 
-  onFailed(option);
+  if (typeof onFailed === 'function') {
+    onFailed(option);
+  }
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\fnCatch.js.map
+//# sourceMappingURL=fnCatch.js.map

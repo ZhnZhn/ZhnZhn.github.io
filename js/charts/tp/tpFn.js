@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _isSupportOptions = require('../../utils/isSupportOptions');
+
+var _isSupportOptions2 = _interopRequireDefault(_isSupportOptions);
+
 var _ChartFn = require('../ChartFn');
 
 var _ChartFn2 = _interopRequireDefault(_ChartFn);
@@ -26,6 +30,29 @@ var C = {
 
 var TITLE_STYLE = 'style="color:' + C.TITLE_C + ';"';
 var FONT_STYLE = 'font-size:16px;font-weight:bold';
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
+var _fHideTooltip = function _fHideTooltip() {
+  var point = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var fn = arguments[1];
+  return function () {
+    if (point.series) {
+      point.series.chart.zhTooltip.hide();
+    }
+    if (_isFn(fn)) {
+      fn(point);
+    }
+  };
+};
+var _addClickOnceById = function _addClickOnceById(id, listener) {
+  var node = document.getElementById(id);
+  if (node) {
+    node.addEventListener('click', listener, _isSupportOptions2.default ? { once: true } : false);
+  }
+};
 
 var tpFn = {
   crSpan: function crSpan() {
@@ -63,14 +90,10 @@ var tpFn = {
   toDateFormatDMY: toDateFormatDMY,
   toDateFormatDMYT: toDateFormatDMYT,
 
-  fHide: function fHide(id, point) {
-    return function _fnHide() {
-      document.getElementById(id).removeEventListener('click', _fnHide);
-      if (point.series) {
-        point.series.chart.zhTooltip.hide();
-      }
-    };
+  addHideHandler: function addHideHandler(id, point, fn) {
+    _addClickOnceById(id, _fHideTooltip(point, fn));
   }
+
 };
 
 exports.default = tpFn;

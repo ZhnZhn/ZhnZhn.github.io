@@ -5,11 +5,10 @@ import C from './tpConfig'
 const {
    crHeader, crRow, crSpan,
    toNumberFormatAll,
-   fHide
+   addHideHandler   
  } = fns;
 
-
- const _crSimple = function({ id, point }){
+const _crSimple = function({ id, point }){
    const { y, category, c, series={}} = point
    , { name, color } = series;
    return `${crHeader(category || c, id)}
@@ -32,17 +31,10 @@ const _crRemove = function({ id, point }){
 };
 
 const _addCategoryHandlersImpl = (id, point) => {
-  const _n = document.getElementById(id);
-  if (_n){
-    _n.addEventListener('click', fHide(id, point))
-  }
-  const _bt = document.getElementById(id+'_R');
-  if (_bt) {
-    _bt.addEventListener('click', function(){
-       fHide(id, point)()
-       point.series.chart.zhRemoveCategory(point.category)
-    })
-  }
+  addHideHandler(id, point)
+  addHideHandler(id+'_R', point, _point => _point
+    .series.chart.zhRemoveCategory(point.category)
+  )
 };
 const _addCategoryHandlers = (id, point) => {
   setTimeout(() => _addCategoryHandlersImpl(id, point), 1)

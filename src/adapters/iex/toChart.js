@@ -30,10 +30,15 @@ const _crId = ({ value }) => value;
 
 const toChart = {
   toConfig(json, option){
-    const { title, isNotZoomToMinMax } = option
+    const {
+      title,
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems
+    } = option
     , _id = _crId(option)
     , dataOption = toSeriesData(_id, json, {
-        isNotZoomToMinMax
+        isNotZoomToMinMax,
+        isDrawDeltaExtrems 
       })
     , { data, dataMfi } = dataOption
     , config = Builder()
@@ -42,7 +47,7 @@ const toChart = {
         .add({
            valueMoving: valueMoving(data),
            info: _crInfo(title),
-           zhConfig: _crZhConfig(_id, option)           
+           zhConfig: _crZhConfig(_id, option)
          })
          .addZhPoints(dataMfi)
          .toConfig();

@@ -15,6 +15,7 @@ var _QuandlAdapter2 = _interopRequireDefault(_QuandlAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Quandl = {
+  id: 'Q',
   api: _QuandlApi2.default, adapter: _QuandlAdapter2.default
 };
 

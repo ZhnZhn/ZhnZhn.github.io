@@ -21,7 +21,7 @@ var _isNumber = function _isNumber(n) {
 };
 
 var _formatedToBig = function _formatedToBig() {
-  var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '0.0';
+  var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var dfR = arguments[1];
 
   var _b = (0, _big2.default)(v.toString().replace(/\s/g, ''));
@@ -36,15 +36,31 @@ var _roundBig = function _roundBig(bValue) {
   return _bValue;
 };
 
+var _toBig = function _toBig(bValue) {
+  var dfValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+  if (bValue instanceof _big2.default) {
+    return bValue;
+  }
+  try {
+    bValue = new _big2.default(bValue);
+    return bValue;
+  } catch (err) {
+    return new _big2.default(dfValue);
+  }
+};
+
 var mathFn = {
 
   calcPercent: function calcPercent(_ref) {
     var _ref$bValue = _ref.bValue,
-        bValue = _ref$bValue === undefined ? (0, _big2.default)('0.0') : _ref$bValue,
+        bValue = _ref$bValue === undefined ? (0, _big2.default)(0) : _ref$bValue,
         _ref$bTotal = _ref.bTotal,
-        bTotal = _ref$bTotal === undefined ? (0, _big2.default)('0.0') : _ref$bTotal;
+        bTotal = _ref$bTotal === undefined ? (0, _big2.default)(0) : _ref$bTotal;
 
-    return !bTotal.eq((0, _big2.default)(0.0)) ? bValue.times(100).div(bTotal).abs().toFixed(2) : (0, _big2.default)(0.0).toFixed(2);
+    bValue = _toBig(bValue);
+    bTotal = _toBig(bTotal);
+    return !bTotal.eq((0, _big2.default)(0)) ? bValue.times(100).div(bTotal).abs().toFixed(2) : (0, _big2.default)(0).toFixed(2);
   },
 
   crValueMoving: function crValueMoving(option) {
