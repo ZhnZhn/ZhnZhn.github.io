@@ -122,7 +122,7 @@
     "jspm": "^0.16.53",
     "react-test-renderer": "^16.8.6",
     "webpack": "^3.10.0",
-    "webpack-bundle-analyzer": "^2.2.1"
+    "webpack-bundle-analyzer": "^3.3.2"
   },
   "jest": {
     "roots": [
