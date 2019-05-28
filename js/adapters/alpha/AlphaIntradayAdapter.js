@@ -236,7 +236,7 @@ var AlphaIntradayAdapter = {
       id: _chartId,
       data: dataDaily,
       dataSource: dataSource
-    }))).checkThreshold().addMinMax(dataDaily, option).addDividend({ dataDividend: dataDividend, minClose: minClose, maxClose: maxClose }).addMiniVolume({
+    }))).addMinMax(dataDaily, option).addDividend({ dataDividend: dataDividend, minClose: minClose, maxClose: maxClose }).addMiniVolume({
       id: _chartId,
       dVolume: dVolume, dColumn: dColumn,
       tooltipColumn: _Chart2.default.fTooltip(volumeTooltip)

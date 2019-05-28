@@ -41,6 +41,15 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
+var _crValueState = function _crValueState() {
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  return {
+    value: value,
+    errorInput: null,
+    isValid: true
+  };
+};
+
 var DateField = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(DateField, _Component);
 
@@ -61,11 +70,7 @@ var DateField = (_temp = _class = function (_Component) {
           isValid: false
         });
       } else {
-        _this.setState({
-          value: value,
-          isValid: true,
-          errorInput: undefined
-        });
+        _this.setState(_crValueState(value));
       }
     };
 
@@ -83,7 +88,7 @@ var DateField = (_temp = _class = function (_Component) {
         });
       } else {
         _this.setState({
-          errorInput: undefined,
+          errorInput: null,
           isValid: true
         });
       }
@@ -98,11 +103,7 @@ var DateField = (_temp = _class = function (_Component) {
           break;
         case 27:case 46:
           event.preventDefault();
-          _this.setState({
-            value: _this.props.initValue || '',
-            errorInput: undefined,
-            isValid: true
-          });
+          _this.setState(_crValueState(_this.props.initValue));
           break;
         default:
           return;
@@ -126,11 +127,7 @@ var DateField = (_temp = _class = function (_Component) {
     };
 
     _this.isOnEnter = _isFn(props.onEnter);
-    _this.state = {
-      value: props.initValue || '',
-      errorInput: undefined,
-      isValid: true
-    };
+    _this.state = _crValueState(props.initValue);
     return _this;
   }
   /*
@@ -192,6 +189,13 @@ var DateField = (_temp = _class = function (_Component) {
           errorInput
         )
       );
+    }
+  }, {
+    key: 'setValue',
+    value: function setValue(value) {
+      if (this.props.onTest(value)) {
+        this.setState(_crValueState(value));
+      }
     }
   }]);
   return DateField;

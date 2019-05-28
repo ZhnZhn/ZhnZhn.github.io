@@ -53,6 +53,9 @@ const C = {
     }
 };
 
+const _isArr = Array.isArray;
+const _isObj = obj => obj && typeof obj === 'object';
+
 const _crLegendItem = ({ index, color, name, is=false }) => ({
   index, color, name,
   isVisible: is
@@ -76,7 +79,7 @@ const SeriaBuilder = {
     this._type = 'S'
     this.config = Object.assign(ChartConfig.fSeries(), option)
     return this;
-  },  
+  },
   splineSeria(option){
     return this.initSeria({ ...C.SPLINE, ...option });
   },
@@ -135,7 +138,7 @@ const SeriaBuilder = {
 
   _addPointsToConfig(id, points){
     if (points[0]
-        && Array.isArray(points[0])
+        && _isArr(points[0])
         && points[0][0]
         && typeof points[0][0] !== 'number'
     ) {
@@ -168,16 +171,16 @@ const SeriaBuilder = {
   },
 
   addSeries(series, isWithoutLegend=false){
-    const _to = Array.isArray(this.config.series)
-             ? this.config.series
-             : this.config.series = [];
-    if (Array.isArray(series)){
+    const _to =_isArr(this.config.series)
+       ? this.config.series
+       : this.config.series = [];
+    if (_isArr(series)){
       const _legend = _addSeriesImpl(_to, series);
       if (!isWithoutLegend) {
         this.addLegend(_legend)
       }
-    } else if (typeof series === 'object') {
-      _to[0] = series
+    } else if (_isObj(series)) {
+      _to[0] = series      
     }
     return this;
   },

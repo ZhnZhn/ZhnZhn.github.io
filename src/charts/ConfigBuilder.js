@@ -48,6 +48,7 @@ const C = {
 };
 
 const _assign = Object.assign;
+//const _isArr = Array.isArray;
 const _isObj = obj => obj && typeof obj === 'object';
 const _isStr = str => typeof str === 'string';
 
@@ -305,10 +306,14 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
 
+  /*
   checkThreshold(seriaIndex=0){
     const config = this.config
-    , data = config.series[seriaIndex].data;
-    if (data.length > 1000) {
+    , { series=[] } = config
+    , seria = series[seriaIndex] || {}
+    , data = seria.data || [];
+    /*
+    if (_isArr(data) && data.length > 1000) {
       config.plotOptions = _assign(
         config.plotOptions || {}, {
           series: {
@@ -319,6 +324,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     }
     return this;
   },
+  */
 
   addDividend({ dataDividend, minClose, maxClose }) {
     if (dataDividend.length > 0) {

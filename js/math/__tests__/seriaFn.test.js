@@ -16,7 +16,7 @@ var _crInArr = function _crInArr(arr) {
 };
 var _crOutArr = function _crOutArr(arr) {
   return arr.map(function (v, i) {
-    return { x: i + 2, y: v };
+    return [i + 2, v];
   });
 };
 

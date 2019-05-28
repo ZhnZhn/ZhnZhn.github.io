@@ -1,7 +1,7 @@
 
 import Big from 'big.js';
 
-import DateUtils from '../utils/DateUtils';
+import dt from '../utils/DateUtils';
 import formatAllNumber from '../utils/formatAllNumber'
 
 import { Direction } from '../constants/Type';
@@ -18,6 +18,8 @@ const M = ['january', 'february',
   'september', 'october', 'november',
   'december'
 ];
+
+const { mlsToDmy } = dt;
 
 const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
@@ -184,11 +186,11 @@ const AdapterFn = {
           , bPrevValue = Big(_prevValue)
           , _nowDate = _getDate(_pointNow)
           , date = len>0
-               ? DateUtils.formatTo(_nowDate)
+               ? mlsToDmy(_nowDate)
                : EMPTY
           , _prevDate = _getDate(_pointPrev)
           , dateTo = len>1 && _prevDate
-               ? DateUtils.formatTo(_prevDate)
+               ? mlsToDmy(_prevDate)
                : EMPTY;
 
       return  {
@@ -226,7 +228,7 @@ const AdapterFn = {
   ),
 
   findMinY: seriaFns.findMinY,
-  findMaxY: seriaFns.findMaxY  
+  findMaxY: seriaFns.findMaxY
 }
 
 export default AdapterFn

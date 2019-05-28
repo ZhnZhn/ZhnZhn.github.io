@@ -176,6 +176,7 @@ const ChartTheme = {
       pointPlacement: 0
     },
     series : {
+      turboThreshold: 0,
       marker: {
         radius: 3,
         symbol: "circle",
@@ -203,7 +204,7 @@ const ChartTheme = {
 
       stickyTracking : false,
       events : {
-        click : function(event) {          
+        click : function(event) {
           const tooltip = this.chart.zhTooltip;
 
           tooltip.options.enabled = true

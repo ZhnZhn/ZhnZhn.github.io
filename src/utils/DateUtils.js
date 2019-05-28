@@ -52,7 +52,7 @@ const DateUtils = {
 		return DateUtils.getFromDate(0);
 	},
 
-	formatTo(mlsUTC){
+	mlsToDmy(mlsUTC){
 		if (typeof mlsUTC !== 'number'
 		    || !isFinite(mlsUTC)
 		) {
@@ -94,6 +94,22 @@ const DateUtils = {
    }
    const _d = new Date(ms);
    return `${_pad2(_d.getUTCHours())}:${_pad2(_d.getUTCMinutes())}`;
+ },
+
+  addToDmy: (dmy, month) => {
+	 if (!DateUtils.isDmy(dmy))	{
+		 return new Date(0);
+	 }
+	 if (!Number.isInteger(month))	{
+		 return new Date(DateUtils.dmyToUTC(dmy));
+	 }
+   const _to = new Date(DateUtils.dmyToUTC(dmy));
+   return new Date(_to.setUTCMonth(_to.getUTCMonth()+month));
+ },
+
+ getYTDfromDmy: (dmy) => {
+	 const _year = dmy.split('-')[2];
+	 return DateUtils.dmyToUTC(`01-01-${_year}`)
  }
 
 };

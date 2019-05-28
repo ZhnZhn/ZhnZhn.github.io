@@ -4,13 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
 var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
+
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
 
 var _Chart = require('./Chart');
 
@@ -69,6 +69,11 @@ var C = {
   SCATTER: {
     type: 'scatter'
   }
+};
+
+var _isArr = Array.isArray;
+var _isObj = function _isObj(obj) {
+  return obj && (typeof obj === 'undefined' ? 'undefined' : (0, _typeof3.default)(obj)) === 'object';
 };
 
 var _crLegendItem = function _crLegendItem(_ref) {
@@ -168,7 +173,7 @@ var SeriaBuilder = {
     return this;
   },
   _addPointsToConfig: function _addPointsToConfig(id, points) {
-    if (points[0] && Array.isArray(points[0]) && points[0][0] && typeof points[0][0] !== 'number') {
+    if (points[0] && _isArr(points[0]) && points[0][0] && typeof points[0][0] !== 'number') {
       this.addSeriaPoints(id, points);
     } else {
       this.addSeriaBy(0, {
@@ -197,13 +202,13 @@ var SeriaBuilder = {
   addSeries: function addSeries(series) {
     var isWithoutLegend = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-    var _to = Array.isArray(this.config.series) ? this.config.series : this.config.series = [];
-    if (Array.isArray(series)) {
+    var _to = _isArr(this.config.series) ? this.config.series : this.config.series = [];
+    if (_isArr(series)) {
       var _legend = _addSeriesImpl(_to, series);
       if (!isWithoutLegend) {
         this.addLegend(_legend);
       }
-    } else if ((typeof series === 'undefined' ? 'undefined' : (0, _typeof3.default)(series)) === 'object') {
+    } else if (_isObj(series)) {
       _to[0] = series;
     }
     return this;

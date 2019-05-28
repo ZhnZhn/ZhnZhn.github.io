@@ -215,6 +215,14 @@ const ChartFn = {
   toDateFormatDMYT: Highcharts
      .dateFormat.bind(null, '%A, %b %d, %Y, %H:%M'),
 
+  setMinMaxPlotLines({ plotLines, min, max, value, isDrawDeltaExtrems}){
+    if (isDrawDeltaExtrems) {
+      ChartFn.setPlotLinesDeltas({ plotLines, min, max, value })
+    } else {
+      ChartFn.setPlotLinesMinMax({ plotLines, min, max})
+    }
+  },
+
   setPlotLinesMinMax: ({ plotLines, min, max }) => {
     if ( max>Number.NEGATIVE_INFINITY ){
       _setPlotLine(plotLines[0], max)

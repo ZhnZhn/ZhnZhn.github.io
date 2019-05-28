@@ -5,6 +5,12 @@ import STYLE from './InputStyle';
 
 const _isFn = fn => typeof(fn) === 'function';
 
+const _crValueState = (value='') => ({
+  value,
+  errorInput: null,
+  isValid: true
+});
+
 class DateField extends Component {
   /*
    static propTypes = {
@@ -32,11 +38,7 @@ class DateField extends Component {
    constructor(props){
      super(props)
      this.isOnEnter = _isFn(props.onEnter)
-     this.state = {
-       value: props.initValue || '',
-       errorInput: undefined,
-       isValid: true
-     };
+     this.state = _crValueState(props.initValue)
    }
 
   _handleChangeValue = (event) => {
@@ -44,15 +46,11 @@ class DateField extends Component {
          , value = event.target.value;
     if (!onTest(value, nForecastDate)){
       this.setState({
-         value : value,
-         isValid : false
+         value: value,
+         isValid: false
       })
     } else {
-      this.setState({
-         value : value,
-         isValid : true,
-         errorInput : undefined
-      })
+      this.setState(_crValueState(value))
     }
   }
 
@@ -61,13 +59,13 @@ class DateField extends Component {
         , { value } = this.state;
     if (!onTest(value, nForecastDate)){
       this.setState({
-        errorInput : errorMsg,
-        isValid : false
+        errorInput: errorMsg,
+        isValid: false
       })
     } else {
       this.setState({
-        errorInput : undefined,
-        isValid : true
+        errorInput: null,
+        isValid: true
       })
     }
   }
@@ -81,11 +79,9 @@ class DateField extends Component {
         break;
       case 27: case 46:
         event.preventDefault()
-        this.setState({
-          value: this.props.initValue || '',
-          errorInput: undefined,
-          isValid: true
-        })
+        this.setState(
+          _crValueState(this.props.initValue)
+        )
         break;
       default: return;
     }
@@ -104,7 +100,7 @@ class DateField extends Component {
         , { value, errorInput, isValid } = this.state
         , _styleHr = isValid
             ? STYLE.HR_VALID
-            : STYLE.HR_NOT_VALID;    
+            : STYLE.HR_NOT_VALID;
     return (
       <div style={{...STYLE.ROOT, ...rootStyle}}>
         <input
@@ -135,6 +131,11 @@ class DateField extends Component {
 
   getValue = () => {
     return this.state.value;
+  }
+  setValue(value) {
+    if (this.props.onTest(value)) {
+      this.setState(_crValueState(value))
+    }
   }
   isValid = () => {
     return this.state.isValid;

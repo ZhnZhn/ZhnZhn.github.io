@@ -24,6 +24,10 @@ var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
+var _ChartFn = require('../../charts/ChartFn');
+
+var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
 var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
@@ -66,7 +70,9 @@ var getData = _QuandlFn2.default.getData,
     getColumnNames = _QuandlFn2.default.getColumnNames;
 var crDividendSeria = _ChartConfig2.default.crDividendSeria,
     crSplitRatioSeria = _ChartConfig2.default.crSplitRatioSeria;
+var setMinMaxPlotLines = _ChartFn2.default.setMinMaxPlotLines;
 
+var _assign = Object.assign;
 
 var C = {
   OPEN: "Open",
@@ -127,7 +133,7 @@ var _fnAddSplitRatio = function _fnAddSplitRatio(splitRationIndex, result) {
         splitRatio = parseFloat(point[splitRationIndex].toFixed(2)),
         price = point[yPointIndex];
 
-    dataSplitRatio.push(Object.assign(_ChartConfig2.default.fMarkerSplitRatio(), { x: x, splitRatio: splitRatio, price: price }));
+    dataSplitRatio.push(_assign(_ChartConfig2.default.fMarkerSplitRatio(), { x: x, splitRatio: splitRatio, price: price }));
   }
   return result;
 };
@@ -145,7 +151,7 @@ var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
     ,
         exValue = point[exDividendIndex],
         price = point[yPointIndex],
-        marker = Object.assign(_ChartConfig2.default.fMarkerExDividend(), { x: x, exValue: exValue, price: price });
+        marker = _assign(_ChartConfig2.default.fMarkerExDividend(), { x: x, exValue: exValue, price: price });
     if (!_QuandlFn2.default.isPrevDateAfter(dataExDividend, x, 14)) {
       marker.dataLabels.y = 0;
     }
@@ -352,7 +358,7 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex, option) {
     fnPointsFlow(points[i], result);
   }
 
-  Object.assign(result, {
+  _assign(result, {
     zhPoints: points,
     minY: _Chart2.default.calcMinY(result)
   });
@@ -387,7 +393,7 @@ var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chart
 var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
   var names = getColumnNames(json);
   if (names[2] === C.HIGH && names[3] === C.LOW && names[4] === C.CLOSE && names[5] === C.VOLUME) {
-    Object.assign(config, {
+    _assign(config, {
       zhPoints: zhPoints,
       zhIsMfi: true
     });
@@ -396,7 +402,7 @@ var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
 var _fnCheckIsMomAth = function _fnCheckIsMomAth(config, json, zhPoints) {
   var names = getColumnNames(json);
   if (names[1] === C.OPEN && names[4] === C.CLOSE) {
-    Object.assign(config, {
+    _assign(config, {
       zhPoints: zhPoints,
       zhIsMomAth: true
     });
@@ -526,28 +532,6 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   };
 };
 
-var _setPlotLinesExtremValues = function _setPlotLinesExtremValues(plotLines, minPoint, maxPoint, value, isDrawDeltaExtrems) {
-  var _bMax = maxPoint !== Number.NEGATIVE_INFINITY ? (0, _big2.default)(maxPoint) : (0, _big2.default)('0.0'),
-      _bMin = minPoint !== Number.POSITIVE_INFINITY ? (0, _big2.default)(minPoint) : (0, _big2.default)('0.0'),
-      _bValue = value !== null ? (0, _big2.default)(value) : (0, _big2.default)(0),
-      _maxPoint = parseFloat(_bMax.round(4).toString(), 10),
-      _minPoint = parseFloat(_bMin.round(4).toString(), 10);
-
-  var _deltaMax = '',
-      _deltaMin = '';
-  if (isDrawDeltaExtrems) {
-    var perToMax = _QuandlFn2.default.createPercent({ bValue: _bMax.minus(_bValue), bTotal: _bValue });
-    var perToMin = _QuandlFn2.default.createPercent({ bValue: _bValue.minus(_bMin), bTotal: _bValue });
-    _deltaMax = '\xA0\xA0\u0394 ' + perToMax + '%';
-    _deltaMin = '\xA0\xA0\u0394 ' + perToMin + '%';
-  }
-
-  plotLines[0].value = _maxPoint;
-  plotLines[0].label.text = '' + _ChartConfig2.default.fnNumberFormat(_maxPoint) + _deltaMax;
-  plotLines[1].value = _minPoint;
-  plotLines[1].label.text = '' + _ChartConfig2.default.fnNumberFormat(_minPoint) + _deltaMin;
-};
-
 var fnConfigAxes = function fnConfigAxes(result) {
   var config = result.config,
       minPoint = result.minPoint,
@@ -560,8 +544,11 @@ var fnConfigAxes = function fnConfigAxes(result) {
       _maxIndex = _data.length - 1,
       _recentValue = _maxIndex > -1 ? _data[_maxIndex][1] : 0;
 
-  _setPlotLinesExtremValues(plotLines, minPoint, maxPoint, _recentValue, isDrawDeltaExtrems);
-
+  setMinMaxPlotLines({ plotLines: plotLines,
+    min: minPoint, max: maxPoint,
+    value: _recentValue,
+    isDrawDeltaExtrems: isDrawDeltaExtrems
+  });
   if (!isNotZoomToMinMax) {
     config.yAxis.min = minY;
   }
@@ -611,7 +598,7 @@ var _toSeria = function _toSeria(json, option) {
       parentId = option.parentId,
       yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option),
       data = _crSeriaData(getData(json), yPointIndex),
-      seria = Object.assign(_ChartConfig2.default.fSeries(), {
+      seria = _assign(_ChartConfig2.default.fSeries(), {
     zhSeriaId: parentId + '_' + chartId,
     zhValueText: chartId.substring(0, 12),
     data: data,

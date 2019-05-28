@@ -9,10 +9,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var isYmd = _DateUtils2.default.isYmd,
     isYmdOrEmpty = _DateUtils2.default.isYmdOrEmpty,
     dmyToUTC = _DateUtils2.default.dmyToUTC,
-    formatTo = _DateUtils2.default.formatTo,
+    mlsToDmy = _DateUtils2.default.mlsToDmy,
     isDmy = _DateUtils2.default.isDmy,
-    getUTCTime = _DateUtils2.default.getUTCTime;
+    getUTCTime = _DateUtils2.default.getUTCTime,
+    addToDmy = _DateUtils2.default.addToDmy;
 
+
+var _compose = function _compose(fns) {
+  return fns.reduce(function (f, g) {
+    return function () {
+      return f(g.apply(undefined, arguments));
+    };
+  });
+};
 
 describe('isYmd YYYY-MM-DD', function () {
   var fn = isYmd;
@@ -76,7 +85,7 @@ describe('dmyToUTC', function () {
 });
 
 describe('formatTo', function () {
-  var fn = formatTo;
+  var fn = mlsToDmy;
   var EMPTY = '';
   test('should format to DD-MM-YYYY from ms', function () {
     expect(fn(1514764800000)).toBe('01-01-2018');
@@ -129,6 +138,28 @@ describe('getUTCTime', function () {
     expect(fn('str')).toBe('');
     expect(fn(NaN)).toBe('');
     expect(fn({})).toBe('');
+  });
+});
+
+describe('addToDmy', function () {
+  var fn = addToDmy,
+      _fn = _compose([mlsToDmy, function (date) {
+    return date.getTime();
+  }, addToDmy]);
+  test('should return Date instance', function () {
+    expect(fn('01-02-2019', -1)).toBeInstanceOf(Date);
+    expect(fn('01-02-2019', 1)).toBeInstanceOf(Date);
+    expect(fn('01-02-2019')).toBeInstanceOf(Date);
+    expect(fn('01-02-2019', 'str')).toBeInstanceOf(Date);
+    expect(fn('01-02-2019', null)).toBeInstanceOf(Date);
+    expect(fn('str', null)).toBeInstanceOf(Date);
+  });
+  test('should return dmy with added month to dmy format', function () {
+    expect(_fn('01-02-2019', -1)).toBe('01-01-2019');
+    expect(_fn('01-02-2019', -2)).toBe('01-12-2018');
+    expect(_fn('01-02-2019', -3)).toBe('01-11-2018');
+    expect(_fn('01-02-2019', -6)).toBe('01-08-2018');
+    expect(_fn('01-02-2019', -12)).toBe('01-02-2018');
   });
 });
 //# sourceMappingURL=DateUtils.test.js.map

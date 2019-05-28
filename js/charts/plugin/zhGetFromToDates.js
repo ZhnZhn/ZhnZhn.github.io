@@ -4,8 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var zhGetFromToDates = function zhGetFromToDates(_ref) {
-  var _ref$seriaIndex = _ref.seriaIndex,
+var zhGetFromToDates = function zhGetFromToDates() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$seriaIndex = _ref.seriaIndex,
       seriaIndex = _ref$seriaIndex === undefined ? 0 : _ref$seriaIndex,
       _ref$format = _ref.format,
       format = _ref$format === undefined ? function (a) {

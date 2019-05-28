@@ -38,8 +38,7 @@ const toHdConfig = {
         , _btTitleTo = _crBtTitleTo(json)
         , config = Builder()
             .area2Config(_title, _subtitle)
-            .addSeries(seria)
-            .checkThreshold()
+            .addSeries(seria)            
             .addMinMax(data, option)
             .add({
                ...crConfigOption({ option, data })

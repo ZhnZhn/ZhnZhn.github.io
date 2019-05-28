@@ -12,14 +12,17 @@ var zhZoomX = function zhZoomX(_ref) {
 
   try {
     var xAxis = this.xAxis[seriaIndex];
-    if (xAxis) {
+    if (xAxis && from <= to) {
       xAxis.setExtremes(from, to);
       if (!this.resetZoomButton) {
         this.showResetZoom();
       }
+      return true;
     }
+    return false;
   } catch (err) {
     console.log(err);
+    return false;
   }
 };
 

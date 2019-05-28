@@ -48,25 +48,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var S = {
   TAB_INDICATOR: {
-    left: '10px'
+    left: 10
   },
   PANE_INDICATOR: {
-    width: '240px'
+    width: 240
   },
   BT_LEGEND: {
-    left: '115px'
+    left: 115
   },
   TAB_MINI: {
-    left: '350px'
+    left: 350
   },
   TAB_FN: {
-    left: '190px'
+    left: 190
   },
   BT_ADD: {
-    left: '250px'
+    left: 250
   },
   BT_CONF: {
-    left: '430px'
+    left: 430
   }
 };
 //import PropTypes from "prop-types";
@@ -184,6 +184,7 @@ var ChartToolbar = function (_Component) {
           },
           _react2.default.createElement(_ModalMenuFn2.default, {
             config: config,
+            getChart: getChart,
             onX2H: onClick2H,
             onMinMax: onMinMax,
             onZoom: onZoom,

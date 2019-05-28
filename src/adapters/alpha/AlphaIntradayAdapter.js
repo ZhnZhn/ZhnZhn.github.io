@@ -216,7 +216,6 @@ const AlphaIntradayAdapter = {
           dataSource
         })
       })
-      .checkThreshold()
       .addMinMax(dataDaily, option)
       .addDividend({ dataDividend, minClose, maxClose })
       .addMiniVolume({

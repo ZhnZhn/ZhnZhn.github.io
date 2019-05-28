@@ -2,7 +2,7 @@
 const zhGetFromToDates = function({
   seriaIndex=0,
   format=a=>a
-}){
+}={}){
   try {
     const pArr = this.series
       && this.series[seriaIndex].points

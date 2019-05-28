@@ -39,6 +39,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var EMPTY = '';
 var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
+var mlsToDmy = _DateUtils2.default.mlsToDmy;
+
+
 var _fIsNumber = function _fIsNumber(pn) {
   return function (p) {
     return typeof p[pn] === 'number' && isFinite(p[pn]);
@@ -195,9 +198,9 @@ var AdapterFn = {
         _prevValue = _getValue(_pointPrev),
         bPrevValue = (0, _big2.default)(_prevValue),
         _nowDate = _getDate(_pointNow),
-        date = len > 0 ? _DateUtils2.default.formatTo(_nowDate) : EMPTY,
+        date = len > 0 ? mlsToDmy(_nowDate) : EMPTY,
         _prevDate = _getDate(_pointPrev),
-        dateTo = len > 1 && _prevDate ? _DateUtils2.default.formatTo(_prevDate) : EMPTY;
+        dateTo = len > 1 && _prevDate ? mlsToDmy(_prevDate) : EMPTY;
 
     return (0, _extends3.default)({}, AdapterFn.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue, dfR: dfR }), {
       valueTo: AdapterFn.numberFormat(bPrevValue),

@@ -136,6 +136,21 @@ class DatesFragment extends Component {
     }
     return false;
   }
+  setFromTo(fromStr, toStr){
+    this._setFromDate(fromStr)
+    this._setToDate(toStr)
+  }
+
+  _setFromDate(dateStr) {
+    if (this.fromDate){
+      this.fromDate.setValue(dateStr)
+    }
+  }
+  _setToDate(dateStr) {
+    if (this.toDate){
+      this.toDate.setValue(dateStr)
+    }
+  }
 }
 
 export default DatesFragment

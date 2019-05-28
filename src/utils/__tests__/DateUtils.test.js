@@ -4,10 +4,13 @@ const {
   isYmd,
   isYmdOrEmpty,
   dmyToUTC,
-  formatTo,
+  mlsToDmy,
   isDmy,
-  getUTCTime
+  getUTCTime,
+  addToDmy
 } = DateUtils;
+
+const _compose = fns => fns.reduce((f, g) => (...args) => f(g(...args)));
 
 describe('isYmd YYYY-MM-DD', () => {
   const fn = isYmd;
@@ -71,7 +74,7 @@ describe('dmyToUTC', ()=>{
 })
 
 describe('formatTo', ()=>{
-  const fn = formatTo;
+  const fn = mlsToDmy;
   const EMPTY = '';
   test('should format to DD-MM-YYYY from ms', ()=>{
     expect(fn(1514764800000)).toBe('01-01-2018')
@@ -124,5 +127,29 @@ describe('getUTCTime', ()=>{
     expect(fn('str')).toBe('')
     expect(fn(NaN)).toBe('')
     expect(fn({})).toBe('')
+  })
+})
+
+describe('addToDmy', ()=>{
+  const fn = addToDmy
+  , _fn = _compose([
+    mlsToDmy,
+    (date) => date.getTime(),
+    addToDmy
+  ]);
+  test('should return Date instance', ()=>{
+    expect(fn('01-02-2019', -1)).toBeInstanceOf(Date)
+    expect(fn('01-02-2019', 1)).toBeInstanceOf(Date)
+    expect(fn('01-02-2019')).toBeInstanceOf(Date)
+    expect(fn('01-02-2019', 'str')).toBeInstanceOf(Date)
+    expect(fn('01-02-2019', null)).toBeInstanceOf(Date)
+    expect(fn('str', null)).toBeInstanceOf(Date)
+  })
+  test('should return dmy with added month to dmy format', ()=>{
+    expect(_fn('01-02-2019', -1)).toBe('01-01-2019')
+    expect(_fn('01-02-2019', -2)).toBe('01-12-2018')
+    expect(_fn('01-02-2019', -3)).toBe('01-11-2018')
+    expect(_fn('01-02-2019', -6)).toBe('01-08-2018')
+    expect(_fn('01-02-2019', -12)).toBe('01-02-2018')
   })
 })

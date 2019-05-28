@@ -23,8 +23,7 @@ const DbNomicsAdapter = {
         .toSeria()
     , config = Builder()
        .area2Config(title, subtitle)
-       .addSeries(seria)
-       .checkThreshold()
+       .addSeries(seria)       
        .addMinMax(data, option)
        .add({
         ...crConfigOption({ json, option, data })

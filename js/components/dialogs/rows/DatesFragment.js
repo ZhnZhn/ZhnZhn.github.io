@@ -190,6 +190,26 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
       }
       return false;
     }
+  }, {
+    key: 'setFromTo',
+    value: function setFromTo(fromStr, toStr) {
+      this._setFromDate(fromStr);
+      this._setToDate(toStr);
+    }
+  }, {
+    key: '_setFromDate',
+    value: function _setFromDate(dateStr) {
+      if (this.fromDate) {
+        this.fromDate.setValue(dateStr);
+      }
+    }
+  }, {
+    key: '_setToDate',
+    value: function _setToDate(dateStr) {
+      if (this.toDate) {
+        this.toDate.setValue(dateStr);
+      }
+    }
   }]);
   return DatesFragment;
 }(_react.Component), _class.defaultProps = {

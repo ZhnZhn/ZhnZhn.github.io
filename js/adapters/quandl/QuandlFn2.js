@@ -28,6 +28,9 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var mlsToDmy = _DateUtils2.default.mlsToDmy;
+
+
 var _isArr = Array.isArray;
 var _isStr = function _isStr(str) {
   return typeof str === 'string';
@@ -168,10 +171,9 @@ var QuandlFn2 = {
         dataset = _json$dataset3 === undefined ? {} : _json$dataset3,
         _dataset$frequency2 = dataset.frequency,
         frequency = _dataset$frequency2 === undefined ? '' : _dataset$frequency2,
-        millisUTC = len > 0 && seria[len - 1][0] && _isNumber(seria[len - 1][0]) ? seria[len - 1][0] : '',
-        d = millisUTC ? frequency.toLowerCase() === 'annual' ? new Date(millisUTC).getUTCFullYear() : _DateUtils2.default.formatTo(millisUTC) : '';
+        mlsUTC = len > 0 && seria[len - 1][0] && _isNumber(seria[len - 1][0]) ? seria[len - 1][0] : '';
 
-    return d;
+    return mlsUTC ? frequency.toLowerCase() === 'annual' ? new Date(mlsUTC).getUTCFullYear() : mlsToDmy(mlsUTC) : '';
   },
   setTitleToConfig: function setTitleToConfig(config) {
     var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -194,7 +196,7 @@ var QuandlFn2 = {
         }
       }
     }
-    return undefined;
+    return void 0;
   },
   getDataColumnIndex: function getDataColumnIndex(json, option) {
     var columnName = option.columnName,

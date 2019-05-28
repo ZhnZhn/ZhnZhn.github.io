@@ -183,6 +183,7 @@ var ChartTheme = {
       pointPlacement: 0
     },
     series: {
+      turboThreshold: 0,
       marker: {
         radius: 3,
         symbol: "circle",

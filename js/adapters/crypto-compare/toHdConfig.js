@@ -62,7 +62,7 @@ var toHdConfig = {
         _title = _crTitle(title),
         _subtitle = _crSubtitle(json, value),
         _btTitleTo = _crBtTitleTo(json),
-        config = (0, _ConfigBuilder2.default)().area2Config(_title, _subtitle).addSeries(seria).checkThreshold().addMinMax(data, option).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).addMiniVolume({
+        config = (0, _ConfigBuilder2.default)().area2Config(_title, _subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).addMiniVolume({
       btTitle: 'Volume ' + value,
       title: value,
       dColumn: dColumn, dVolume: dVolume

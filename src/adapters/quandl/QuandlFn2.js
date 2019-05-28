@@ -3,9 +3,11 @@ import DOMPurify from 'dompurify';
 
 import mathFn from '../../math/mathFn';
 
-import DateUtils from '../../utils/DateUtils';
+import dt from '../../utils/DateUtils';
 import { Direction } from '../../constants/Type';
 import ChartConfig from '../../charts/ChartConfig';
+
+const { mlsToDmy } = dt
 
 const _isArr = Array.isArray;
 const _isStr = str => typeof(str) === 'string';
@@ -110,15 +112,14 @@ const QuandlFn2 = {
      const len = seria.length
          , { dataset={} } = json
          , { frequency='' } = dataset
-         , millisUTC = (len>0 && seria[len-1][0] && _isNumber(seria[len-1][0]) )
+         , mlsUTC = (len>0 && seria[len-1][0] && _isNumber(seria[len-1][0]) )
               ? seria[len-1][0]
-              : ''
-         , d = (millisUTC)
-              ? (frequency.toLowerCase() === 'annual')
-                   ? new Date(millisUTC).getUTCFullYear()
-                   : DateUtils.formatTo(millisUTC)
               : '';
-      return d
+      return mlsUTC
+         ? frequency.toLowerCase() === 'annual'
+              ? new Date(mlsUTC).getUTCFullYear()
+              : mlsToDmy(mlsUTC)
+         : '';
   },
 
   setTitleToConfig(config, option={}){
@@ -140,7 +141,7 @@ const QuandlFn2 = {
        }
       }
      }
-     return undefined;
+     return void 0;
   },
 
   getDataColumnIndex(json, option){

@@ -262,10 +262,25 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
   toDateFormatDMY: _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y'),
   toDateFormatDMYT: _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M'),
 
-  setPlotLinesMinMax: function setPlotLinesMinMax(_ref4) {
+  setMinMaxPlotLines: function setMinMaxPlotLines(_ref4) {
     var plotLines = _ref4.plotLines,
         min = _ref4.min,
-        max = _ref4.max;
+        max = _ref4.max,
+        value = _ref4.value,
+        isDrawDeltaExtrems = _ref4.isDrawDeltaExtrems;
+
+    if (isDrawDeltaExtrems) {
+      ChartFn.setPlotLinesDeltas({ plotLines: plotLines, min: min, max: max, value: value });
+    } else {
+      ChartFn.setPlotLinesMinMax({ plotLines: plotLines, min: min, max: max });
+    }
+  },
+
+
+  setPlotLinesMinMax: function setPlotLinesMinMax(_ref5) {
+    var plotLines = _ref5.plotLines,
+        min = _ref5.min,
+        max = _ref5.max;
 
     if (max > Number.NEGATIVE_INFINITY) {
       _setPlotLine(plotLines[0], max);
@@ -274,11 +289,11 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
       _setPlotLine(plotLines[1], min);
     }
   },
-  setPlotLinesDeltas: function setPlotLinesDeltas(_ref5) {
-    var plotLines = _ref5.plotLines,
-        min = _ref5.min,
-        max = _ref5.max,
-        value = _ref5.value;
+  setPlotLinesDeltas: function setPlotLinesDeltas(_ref6) {
+    var plotLines = _ref6.plotLines,
+        min = _ref6.min,
+        max = _ref6.max,
+        value = _ref6.value;
 
     var _bMax = max !== Number.NEGATIVE_INFINITY ? (0, _big2.default)(max) : (0, _big2.default)(0),
         _bMin = min !== Number.POSITIVE_INFINITY ? (0, _big2.default)(min) : (0, _big2.default)(0),
@@ -300,9 +315,9 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
     _setPlotLine(plotLines[1], _minPoint, _deltaMin);
   },
 
-  calcMinY: function calcMinY(_ref6) {
-    var min = _ref6.min,
-        max = _ref6.max;
+  calcMinY: function calcMinY(_ref7) {
+    var min = _ref7.min,
+        max = _ref7.max;
     return max > Number.NEGATIVE_INFINITY && min < Number.POSITIVE_INFINITY ? min - (max - min) * 1 / 6 : void 0;
   },
 

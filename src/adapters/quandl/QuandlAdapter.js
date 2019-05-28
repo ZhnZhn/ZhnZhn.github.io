@@ -5,6 +5,7 @@ import pipe from '../../utils/pipe'
 
 import {ChartType} from '../../constants/Type';
 import Chart from '../../charts/Chart';
+import ChartFn from '../../charts/ChartFn'
 import ChartConfig from '../../charts/ChartConfig';
 import ChartLegend from '../../charts/ChartLegend';
 import ConfigBuilder from '../../charts/ConfigBuilder';
@@ -25,6 +26,10 @@ const {
   crDividendSeria,
   crSplitRatioSeria
 } = ChartConfig;
+const {
+  setMinMaxPlotLines
+} = ChartFn;
+const _assign = Object.assign;
 
 const C = {
   OPEN : "Open",
@@ -74,7 +79,7 @@ const _fnAddSplitRatio = function(splitRationIndex, result){
         , splitRatio = parseFloat(point[splitRationIndex].toFixed(2))
         , price = point[yPointIndex];
 
-    dataSplitRatio.push(Object.assign(ChartConfig.fMarkerSplitRatio(), {x, splitRatio, price}));
+    dataSplitRatio.push(_assign(ChartConfig.fMarkerSplitRatio(), {x, splitRatio, price}));
   }
   return result;
 }
@@ -87,7 +92,7 @@ const _fnAddExDividend = function(exDividendIndex, result){
            //, exValue = parseFloat(point[exDividendIndex].toFixed(2))
            , exValue = point[exDividendIndex]
            , price = point[yPointIndex]
-           , marker = Object.assign(
+           , marker = _assign(
                 ChartConfig.fMarkerExDividend(),
                 { x, exValue, price }
              );
@@ -268,7 +273,7 @@ const _fnSeriesPipe = function(json, yPointIndex, option){
     fnPointsFlow(points[i], result)
   }
 
-  Object.assign(result, {
+  _assign(result, {
     zhPoints: points,
     minY: Chart.calcMinY(result)
   })
@@ -303,7 +308,7 @@ const _fnCheckIsMfi = function(config, json, zhPoints){
   const names = getColumnNames(json);
   if ( names[2] === C.HIGH && names[3] === C.LOW  &&
        names[4] === C.CLOSE && names[5] === C.VOLUME) {
-    Object.assign(config, {
+    _assign(config, {
       zhPoints: zhPoints,
       zhIsMfi: true
     })
@@ -312,7 +317,7 @@ const _fnCheckIsMfi = function(config, json, zhPoints){
 const _fnCheckIsMomAth = function(config, json, zhPoints) {
   const names = getColumnNames(json)
   if ( names[1] === C.OPEN && names[4] === C.CLOSE) {
-    Object.assign(config, {
+    _assign(config, {
       zhPoints: zhPoints,
       zhIsMomAth: true
     })
@@ -434,32 +439,6 @@ const fnGetSeries = function(config, json, option){
    };
 }
 
-const _setPlotLinesExtremValues = function(plotLines, minPoint, maxPoint, value, isDrawDeltaExtrems){
-  const _bMax = maxPoint !== Number.NEGATIVE_INFINITY
-          ? Big(maxPoint)
-          : Big('0.0')
-      , _bMin = minPoint !== Number.POSITIVE_INFINITY
-          ? Big(minPoint)
-          : Big('0.0')
-      , _bValue = (value !== null) ? Big(value) : Big(0)
-      , _maxPoint = parseFloat(_bMax.round(4).toString(), 10)
-      , _minPoint = parseFloat(_bMin.round(4).toString(), 10);
-
-  let _deltaMax='', _deltaMin='';
-  if (isDrawDeltaExtrems){
-    const perToMax = QuandlFn2.createPercent({ bValue: _bMax.minus(_bValue), bTotal: _bValue })
-    const perToMin = QuandlFn2.createPercent({ bValue: _bValue.minus(_bMin), bTotal: _bValue })
-    _deltaMax = `\u00A0\u00A0Δ ${perToMax}%`
-    _deltaMin = `\u00A0\u00A0Δ ${perToMin}%`
-  }
-
-  plotLines[0].value = _maxPoint;
-  plotLines[0].label.text = `${ChartConfig.fnNumberFormat(_maxPoint)}${_deltaMax}`;
-  plotLines[1].value = _minPoint;
-  plotLines[1].label.text = `${ChartConfig.fnNumberFormat(_minPoint)}${_deltaMin}`;
-
-}
-
 const fnConfigAxes = function(result){
   const {
           config, minPoint, maxPoint, minY,
@@ -472,11 +451,11 @@ const fnConfigAxes = function(result){
            ? _data[_maxIndex][1]
            : 0;
 
-  _setPlotLinesExtremValues(
-    plotLines, minPoint, maxPoint,
-    _recentValue, isDrawDeltaExtrems
-  )
-
+  setMinMaxPlotLines({ plotLines,
+    min: minPoint, max: maxPoint,
+    value: _recentValue,
+    isDrawDeltaExtrems
+  })
   if (!isNotZoomToMinMax){
     config.yAxis.min = minY
   }
@@ -532,7 +511,7 @@ const _toSeria = (json, option) => {
   const { value:chartId, parentId } = option
       , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
       , data = _crSeriaData(getData(json), yPointIndex)
-      , seria = Object.assign(
+      , seria = _assign(
            ChartConfig.fSeries(), {
              zhSeriaId: parentId + '_' + chartId,
              zhValueText: chartId.substring(0,12),

@@ -5,7 +5,7 @@ const { growthRate } = seriaFn;
 const _crInArr = (arr) => arr
   .map((v, i) => ({ x: i+1, y: v }));
 const _crOutArr = (arr) => arr
-  .map((v, i) => ({ x: i+2, y: v}));
+  .map((v, i) => ([ i+2, v]));
 
 describe('calc seria growRate', ()=>{
   const fn = growthRate;

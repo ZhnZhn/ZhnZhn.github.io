@@ -34,7 +34,7 @@ var DbNomicsAdapter = {
       color: seriaColor,
       data: data
     }).toSeria(),
-        config = (0, _ConfigBuilder2.default)().area2Config(title, subtitle).addSeries(seria).checkThreshold().addMinMax(data, option).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
+        config = (0, _ConfigBuilder2.default)().area2Config(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
 
 
     return { config: config };

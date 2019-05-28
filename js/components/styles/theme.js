@@ -43,7 +43,8 @@ var P_SAND = {
   BG_BODY: '#9e9e9e',
   BG: '#e8e0cb',
 
-  EL_BG: '#795548',
+  //EL_BG: '#795548',
+  EL_BG: '#64473d',
   EL_C: 'silver',
 
   BG_HEADER: 'rgb(0, 150, 200)',

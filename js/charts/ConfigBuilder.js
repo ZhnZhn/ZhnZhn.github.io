@@ -82,6 +82,7 @@ var C = {
 };
 
 var _assign = Object.assign;
+//const _isArr = Array.isArray;
 var _isObj = function _isObj(obj) {
   return obj && (typeof obj === 'undefined' ? 'undefined' : (0, _typeof3.default)(obj)) === 'object';
 };
@@ -316,20 +317,28 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default
     _ChartConfig2.default.setStockSerias(this.config, d, dH, d, dO, id);
     return this;
   },
-  checkThreshold: function checkThreshold() {
-    var seriaIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
-    var config = this.config,
-        data = config.series[seriaIndex].data;
-    if (data.length > 1000) {
-      config.plotOptions = _assign(config.plotOptions || {}, {
-        series: {
-          turboThreshold: 0
+
+  /*
+  checkThreshold(seriaIndex=0){
+    const config = this.config
+    , { series=[] } = config
+    , seria = series[seriaIndex] || {}
+    , data = seria.data || [];
+    /*
+    if (_isArr(data) && data.length > 1000) {
+      config.plotOptions = _assign(
+        config.plotOptions || {}, {
+          series: {
+            turboThreshold: 0
+          }
         }
-      });
+      )
     }
     return this;
   },
+  */
+
   addDividend: function addDividend(_ref) {
     var dataDividend = _ref.dataDividend,
         minClose = _ref.minClose,

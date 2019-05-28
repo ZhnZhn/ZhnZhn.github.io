@@ -1,9 +1,15 @@
 import React from 'react'
 
+import dt from '../../utils/DateUtils'
+
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SubMenuItem from './SubMenuItem'
 
 import STYLE from './ModalMenu.Style'
+
+const { mlsToDmy } = dt;
+
+const _isFn = fn => typeof fn === 'function';
 
 const _isMinMax = config => config.yAxis
  && config.yAxis.plotLines
@@ -11,9 +17,28 @@ const _isMinMax = config => config.yAxis
    ? true
    : false;
 
+const EPOCH_DMY = '01-01-1970';
+const _isZoom = (getChart) => {
+  if (!_isFn(getChart)) {
+    return false;
+  }
+  const chart = getChart();
+  if (!chart || !_isFn(chart.zhGetFromToDates)) {
+    return false;
+  }
+  const { from, to } = chart.zhGetFromToDates({
+    format: mlsToDmy
+  });
+  return (from === to) && to === EPOCH_DMY
+    ? false
+    : true;
+};
+
+
 const ModalMenuFn = ({
   isShow, onClose,
   config,
+  getChart,
   onX2H, onMinMax, onZoom,
   onCopy, onPasteTo
 }) => (
@@ -33,16 +58,18 @@ const ModalMenuFn = ({
            onClick={onMinMax}
          />
       }
-      <SubMenuItem
-        caption="Zoom"
-        isNotActive={true}
-        onClick={onZoom}
-        onClose={onClose}
-      />
+      { _isZoom(getChart) && <SubMenuItem
+          caption="Zoom"
+          isNotActive={true}
+          onClick={onZoom}
+          onClose={onClose}
+        />
+      }
       <SubMenuItem
         caption="Copy"
         isNotActive={true}
         onClick={onCopy}
+        onClose={onClose}
       />
       <SubMenuItem
         caption="PasteTo"
