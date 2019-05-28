@@ -19,8 +19,9 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number' ? n - n === 0 : false;
 };
 
+// not: 0, null, undefined
 var _calcY = function _calcY(pPrev, pNext) {
-  return pPrev.y !== 0 ? parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(pPrev.y).times(100).toFixed(2)) : null;
+  return pPrev.y ? parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(pPrev.y).times(100).toFixed(2)) : null;
 };
 
 var _isDataArr = function _isDataArr(data) {

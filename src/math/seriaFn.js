@@ -7,7 +7,8 @@ const _isNumber = n => typeof n === 'number'
   ? (n - n === 0)
   : false;
 
-const _calcY = (pPrev, pNext) => pPrev.y !== 0
+// not: 0, null, undefined
+const _calcY = (pPrev, pNext) => pPrev.y
   ? parseFloat(
       Big(pNext.y - pPrev.y)
        .div(pPrev.y)
