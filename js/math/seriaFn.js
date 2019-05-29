@@ -19,9 +19,12 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number' ? n - n === 0 : false;
 };
 
-// not: 0, null, undefined
 var _calcY = function _calcY(pPrev, pNext) {
-  return pPrev.y ? parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(pPrev.y).times(100).toFixed(2)) : null;
+  // not: 0, null, undefined
+  if (!pPrev.y || pNext.y == null) {
+    return null;
+  }
+  return parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(Math.abs(pPrev.y)).times(100).toFixed(2));
 };
 
 var _isDataArr = function _isDataArr(data) {

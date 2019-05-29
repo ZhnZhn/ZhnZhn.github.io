@@ -7,15 +7,18 @@ const _isNumber = n => typeof n === 'number'
   ? (n - n === 0)
   : false;
 
-// not: 0, null, undefined
-const _calcY = (pPrev, pNext) => pPrev.y
-  ? parseFloat(
-      Big(pNext.y - pPrev.y)
-       .div(pPrev.y)
-       .times(100)
-       .toFixed(2)
-    )
-  : null;
+const _calcY = (pPrev, pNext) => {
+  // not: 0, null, undefined
+  if (!pPrev.y || pNext.y == null) {
+    return null;
+  }
+  return parseFloat(
+    Big(pNext.y - pPrev.y)
+      .div(Math.abs(pPrev.y))
+      .times(100)
+      .toFixed(2)
+    );
+};
 
 const _isDataArr = data => _isArr(data)
   && data.length > 1
