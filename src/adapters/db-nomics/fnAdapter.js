@@ -2,6 +2,8 @@ import AdapterFn from '../AdapterFn'
 import fnSelector from './fnSelector'
 
 const {
+  crError,
+  crItemLink,
   ymdToUTC,
   valueMoving
 } = AdapterFn;
@@ -21,12 +23,12 @@ const _getId = ({ dfProvider, dfCode, seriaId }) => _isId(seriaId)
   ? seriaId
   : `${dfProvider}/${dfCode}/${seriaId}`;
 
+const _crItemLink = crItemLink
+  .bind(null, 'DB Nomics Chart');
 const _crDescr = (option) => {
   const _id = _getId(option);
-  return`
-   <p>SeriaId: ${_id}</p>
-   <p><a href="${C.CHART_URL}/${_id}" style="padding-top: 4px;">DB Nomics Chart</a></p>
-  `;
+  return`<p>SeriaId: ${_id}</p>
+   ${_crItemLink(C.CHART_URL+'/'+_id)}`;
 };
 
 const _crZhConfig = ({ dataSource, _itemKey, seriaId }) => ({
@@ -46,7 +48,7 @@ const _isNumber = n => typeof(n) === 'number'
 
 
 const fnAdapter = {
-
+  crError,
   crTitle: ({ title, subtitle }, json) => {
     const _ = getSubtitle(json)
     , _subtitle = _.length > C.SUBT_MAX

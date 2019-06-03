@@ -1,0 +1,22 @@
+{
+  "items":[
+    {"caption":"Gross Profit Growth"},
+    {"caption":"EBIT Growth"},
+    {"caption":"Operating Income Growth"},
+    {"caption":"Net Income Growth"},
+    {"caption":"EPS Growth"},
+    {"caption":"EPS Diluted Growth"},
+    {"caption":"Weighted Average Shares Growth"},
+    {"caption":"Weighted Average Shares Diluted Growth"},
+    {"caption":"Dividends per Share Growth"},
+    {"caption":"Operating Cash Flow growth"},
+    {"caption":"Free Cash Flow growth"},
+    {"caption":"Receivables growth"},
+    {"caption":"Inventory Growth"},
+    {"caption":"Asset Growth"},
+    {"caption":"Book Value per Share Growth"},
+    {"caption":"Debt Growth"},
+    {"caption":"R&D Expense Growth"},
+    {"caption":"SG&A Expenses Growth"}
+  ]
+}

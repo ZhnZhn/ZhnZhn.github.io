@@ -10,9 +10,13 @@ const createrFns = {
   crItemKey: (items, seriaType, date) => {
     const _prefix = items
       .filter(Boolean)
-      .map(item => item.value || item)
+      .map(item => item.value || item.caption || item)
       .join('_');
-    return `${_prefix}_${seriaType || ''}_${date || ''}`;
+    return [
+      _prefix,
+      seriaType || '',
+      date || ''
+    ].join('_');    
   },
 
   crCaption: items => {
@@ -28,7 +32,7 @@ const createrFns = {
       _caption = _crC(oneC, `${twoC}: ${threeC}`)
     } else if (twoC) {
       _caption = _crC(oneC, twoC )
-    }    
+    }
     return {
       oneC, twoC, threeC, fourC,
       ..._caption

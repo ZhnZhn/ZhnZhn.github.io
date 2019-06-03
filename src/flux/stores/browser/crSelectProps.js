@@ -11,7 +11,8 @@ const _crIdItem = (item, rootUri) => ({
   id: item[0],
   caption: item[0],
   uri: `${rootUri}${item[1]}.json`,
-  jsonProp: item[2]
+  jsonProp: item[2],
+  isWithInput: Boolean(item[3])
 });
 
 const _rFns = {

@@ -54,8 +54,12 @@ var ModalToggle = function ModalToggle(_ref2) {
       _ref2$selectProps = _ref2.selectProps,
       selectProps = _ref2$selectProps === undefined ? [] : _ref2$selectProps,
       isShowDate = _ref2.isShowDate,
+      isShowChart = _ref2.isShowChart,
+      noForDate = _ref2.noForDate,
       crIsId = _ref2.crIsId,
-      _onToggle2 = _ref2.onToggle,
+      onToggle = _ref2.onToggle,
+      toggleChart = _ref2.toggleChart,
+      toggleDate = _ref2.toggleDate,
       onClose = _ref2.onClose;
   return _react2.default.createElement(
     _ModalPopup2.default,
@@ -68,17 +72,23 @@ var ModalToggle = function ModalToggle(_ref2) {
     _react2.default.createElement(CheckBoxList, {
       selectProps: selectProps,
       crIsId: crIsId,
-      onToggle: _onToggle2
+      onToggle: onToggle
     }),
     _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
+      key: 'isShowChart',
+      value: isShowChart,
+      rootStyle: _Modal2.default.ROW_CB,
+      checkedColor: CHECKED_COLOR,
+      caption: 'Chart',
+      onToggle: toggleChart
+    }),
+    !noForDate && _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
       key: 'isForDate',
       value: isShowDate,
       rootStyle: _Modal2.default.ROW_CB,
       checkedColor: CHECKED_COLOR,
       caption: 'For Date',
-      onToggle: function onToggle() {
-        return _onToggle2('isShowDate');
-      }
+      onToggle: toggleDate
     })
   );
 };

@@ -79,6 +79,10 @@ class DialogSelectN extends Component {
       toggleToolBar: this._toggleWithToolbar,
       onAbout: this._clickInfoWithToolbar
     })
+    this._toggleChart = this._toggleStateBy
+      .bind(this, 'isShowChart')
+    this._toggleDate = this._toggleStateBy
+      .bind(this, 'isShowDate')
 
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true, isOptions: true, isToggle: true }
@@ -91,6 +95,7 @@ class DialogSelectN extends Component {
       isOptions: false,
       isToggle: false,
       isShowLabels: true,
+      isShowChart: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
       validationMessages: [],
@@ -220,17 +225,19 @@ class DialogSelectN extends Component {
 
   _renderSelects = (selectProps, isShow, isShowLabels) => {
       return selectProps.map((item, index) => {
-        const { id, uri, jsonProp, caption } = item;
+        const {
+          id,
+          //uri, jsonProp, caption, isWithInput
+          ...restItem
+        } = item;
         const _isShow = this.state[_crIsId(id)];
         return (
           <D.ShowHide key={id} isShow={_isShow}>
             <D.SelectWithLoad
+              {...restItem}
               ref={this._refSelect.bind(null, id)}
               isShow={isShow}
               isShowLabels={isShowLabels}
-              caption={caption}
-              uri={uri}
-              jsonProp={jsonProp}
               onSelect={this._hSelect.bind(null, id, index)}
             />
           </D.ShowHide>
@@ -243,11 +250,12 @@ class DialogSelectN extends Component {
       caption, isShow,
       onShow, onFront,
       selectProps,
-      noDate
+      noDate, noForDate
     } = this.props
     , {
       isToolbar, isOptions, isToggle,
-      isShowLabels, isShowDate,
+      isShowLabels,
+      isShowChart, isShowDate,
       dateDefault, dateOptions,
       validationMessages
     } = this.state;
@@ -273,19 +281,25 @@ class DialogSelectN extends Component {
            />
            <ModalToggle
              isShow={isToggle}
+             noForDate={noForDate}
              selectProps={selectProps}
+             isShowChart={isShowChart}
              isShowDate={isShowDate}
              crIsId={_crIsId}
              onToggle={this._toggleStateBy}
+             toggleChart={this._toggleChart}
+             toggleDate={this._toggleDate}
              onClose={this._hideToggleWithToolbar}
            />
            {this._renderSelects(selectProps, isShow, isShowLabels)}
-           <D.RowChart
-             isShowLabels={isShowLabels}
-             options={this._chartOptions}
-             onSelectChart={this._hSelectChartType}
-             onRegColor={this._onRegColor}
-           />
+           <D.ShowHide isShow={isShowChart}>
+             <D.RowChart
+               isShowLabels={isShowLabels}
+               options={this._chartOptions}
+               onSelectChart={this._hSelectChartType}
+               onRegColor={this._onRegColor}
+             />
+           </D.ShowHide>
            {
              !noDate &&
              <D.ShowHide isShow={isShowDate}>

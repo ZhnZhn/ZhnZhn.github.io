@@ -7,14 +7,29 @@ const _isNumber = n => typeof n === 'number'
   ? (n - n === 0)
   : false;
 
-const _calcY = (pPrev, pNext) => {
-  // not: 0, null, undefined
-  if (!pPrev.y || pNext.y == null) {
+const _calcY = (yPrev, yNext) => {
+
+  if (!_isNumber(yNext)) {
     return null;
   }
+
+  if (yNext === 0) {
+    if (_isNumber(yPrev)) {
+      return yPrev === 0
+        ? 0
+        : yPrev > 0 ? -100 : 100;
+    } else {
+      return null;
+    }
+  }
+
+  if (yPrev === 0) {
+    return null;
+  }
+
   return parseFloat(
-    Big(pNext.y - pPrev.y)
-      .div(Math.abs(pPrev.y))
+    Big(yNext - yPrev)
+      .div(Math.abs(yPrev))
       .times(100)
       .toFixed(2)
     );
@@ -41,7 +56,7 @@ const fn = {
       pNext = d[i];
       _d.push([
         pNext.x,
-        _calcY(pPrev, pNext)
+        _calcY(pPrev.y, pNext.y)
       ])
       pPrev = d[i-prevStep]
     }

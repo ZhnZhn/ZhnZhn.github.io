@@ -9,6 +9,7 @@ import StatFinland from './stat-finland/StatFinland'
 import AlphaVantage from './alpha/AlphaVantage'
 import Barchart from './barchart/Barchart'
 import Iex from './iex/Iex'
+import Fmp from './fmp/Fmp'
 import Insee from './insee/Insee'
 import Bea from './bea/Bea'
 import Bls from './bls/Bls'
@@ -32,6 +33,7 @@ const RouterAdapter = {
   AlphaVantage,
   Barchart,
   Iex,
+  Fmp,
   Insee,
   Bea,
   Bls,

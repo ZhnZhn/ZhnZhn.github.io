@@ -19,8 +19,14 @@ const M = ['january', 'february',
   'december'
 ];
 
-const { mlsToDmy } = dt;
+const {
+  ymdToUTC,
+  ymdtToUTC,
+  ymdhmsToUTC,
+  mlsToDmy
+} = dt;
 
+const _isArr = Array.isArray;
 const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
     && isFinite(p[pn]);
@@ -39,53 +45,28 @@ const _compareByTwoProp = (propName1, propName2) => (a, b) => {
   else return 0;
 }
 
-const _getDate = (point) => {
-  return Array.isArray(point)
-    ? point[0]
-    : point.x;
-}
+const _getDate = point =>_isArr(point)
+  ? point[0]
+  : point.x;
+
 const _getValue = (point) => {
-  if (Array.isArray(point)){
+  if (_isArr(point)){
     return point[1] != null
        ? point[1]
        : '0.0';
   } else {
-    return point && point.y != null
-       ? point.y
-       : '0.0';
+    return point
+      && point.y != null
+      && !Number.isNaN(point.y)
+        ? point.y
+        : '0.0';
   }
 }
 
 const AdapterFn = {
-  ymdToUTC(date) {
-    const _arr = date.split('-')
-        , _len = _arr.length;
-    if (_len === 3) {
-      return Date.UTC( _arr[0], (parseInt(_arr[1], 10)-1), _arr[2] );
-    } else if ( _len === 2 && _arr[1] !== ''){
-      const _m = parseInt(_arr[1], 10)
-          , _d = (new Date(_arr[0], _m, 0)).getDate();
-      return Date.UTC( _arr[0], _m - 1, _d );
-    } else if ( _len === 1) {
-      return Date.UTC( _arr[0], 11, 31 );
-    }
-  },
-  ymdtToUTC(date) {
-    const _arr = date.split('-')
-        , _d = _arr[2].split(' ')[0];
-    return Date.UTC(
-      _arr[0], (parseInt(_arr[1], 10)-1), _d
-    );
-  },
-  ymdhmsToUTC(date) {
-    const _dtArr = date.split(' ')
-    , _ymdArr = _dtArr[0].split('-')
-    , _hmsArr = _dtArr[1].split(':');
-    return Date.UTC(
-      _ymdArr[0], (parseInt(_ymdArr[1], 10)-1), _ymdArr[2],
-      _hmsArr[0], _hmsArr[1], _hmsArr[2]
-    );
-  },
+  ymdToUTC,
+  ymdtToUTC,
+  ymdhmsToUTC,
 
   volumeColumnPoint({ date, open, close, volume, option }) {
     let _color;
@@ -169,7 +150,7 @@ const AdapterFn = {
   },
 
   valueMoving(data, dfR){
-    if (!Array.isArray(data)) {
+    if (!_isArr(data)) {
       return { date: data, direction: 'empty' };
     }
 
@@ -228,7 +209,16 @@ const AdapterFn = {
   ),
 
   findMinY: seriaFns.findMinY,
-  findMaxY: seriaFns.findMaxY
+  findMaxY: seriaFns.findMaxY,
+
+
+  crError: (errCaption='', message='') => ({
+    errCaption,
+    message
+  }),
+  crItemLink: (caption, itemUrl) => `<p>
+    <a href="${itemUrl}" style="padding-top: 4px;">${caption}</a>
+  </p>`
 }
 
 export default AdapterFn

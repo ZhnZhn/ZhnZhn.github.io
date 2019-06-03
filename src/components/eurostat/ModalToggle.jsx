@@ -22,8 +22,11 @@ const CheckBoxList = ({
 
 const ModalToggle = ({
   isShow, style, className=STYLE.CL,
-  selectProps=[], isShowDate,
-  crIsId, onToggle,
+  selectProps=[],
+  isShowDate, isShowChart,
+  noForDate,
+  crIsId,
+  onToggle, toggleChart, toggleDate,
   onClose
 }) => (
   <ModalPopup
@@ -38,13 +41,22 @@ const ModalToggle = ({
       onToggle={onToggle}
     />
     <D.RowCheckBox
-      key="isForDate"
-      value={isShowDate}
+      key="isShowChart"
+      value={isShowChart}
       rootStyle={STYLE.ROW_CB}
       checkedColor={CHECKED_COLOR}
-      caption="For Date"
-      onToggle={() => onToggle('isShowDate')}
+      caption="Chart"
+      onToggle={toggleChart}
     />
+    { !noForDate && <D.RowCheckBox
+        key="isForDate"
+        value={isShowDate}
+        rootStyle={STYLE.ROW_CB}
+        checkedColor={CHECKED_COLOR}
+        caption="For Date"
+        onToggle={toggleDate}
+      />
+    }
   </ModalPopup>
 );
 

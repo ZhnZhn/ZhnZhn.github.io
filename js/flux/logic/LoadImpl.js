@@ -29,13 +29,14 @@ var Quandl = _RouterAdapter2.default.Quandl,
     StatNorway = _RouterAdapter2.default.StatNorway,
     StatSweden = _RouterAdapter2.default.StatSweden,
     StatFinland = _RouterAdapter2.default.StatFinland,
+    Insee = _RouterAdapter2.default.Insee,
     AlphaVantage = _RouterAdapter2.default.AlphaVantage,
     Barchart = _RouterAdapter2.default.Barchart,
     Intrinio = _RouterAdapter2.default.Intrinio,
     Crc = _RouterAdapter2.default.Crc,
     Cmc = _RouterAdapter2.default.Cmc,
     Iex = _RouterAdapter2.default.Iex,
-    Insee = _RouterAdapter2.default.Insee,
+    Fmp = _RouterAdapter2.default.Fmp,
     Bea = _RouterAdapter2.default.Bea,
     Bls = _RouterAdapter2.default.Bls,
     Eia = _RouterAdapter2.default.Eia;
@@ -63,6 +64,7 @@ var LoadImpl = {
     fnFetch: _fnFetch.fetchJsonp
   }, Barchart)),
   Iex: (0, _loadItem2.default)((0, _extends3.default)({}, Iex)),
+  Fmp: (0, _loadItem2.default)((0, _extends3.default)({}, Fmp)),
   Intrinio: (0, _loadItem2.default)((0, _extends3.default)({}, Intrinio)),
 
   Crc: (0, _loadItem2.default)((0, _extends3.default)({}, Crc)),

@@ -24,9 +24,9 @@ var createrFns = {
 
   crItemKey: function crItemKey(items, seriaType, date) {
     var _prefix = items.filter(Boolean).map(function (item) {
-      return item.value || item;
+      return item.value || item.caption || item;
     }).join('_');
-    return _prefix + '_' + (seriaType || '') + '_' + (date || '');
+    return [_prefix, seriaType || '', date || ''].join('_');
   },
 
   crCaption: function crCaption(items) {

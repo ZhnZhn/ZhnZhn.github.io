@@ -11,24 +11,24 @@ const CL = {
 const S = {
   CAPTION : {
     display : 'inline-block',
-    width : '400px',
-    paddingLeft : '10px',
+    width : 380,
+    paddingLeft : 10,
     color : '#F44336',
     fontSize: '18px',
     fontWeight : 'bold',
     lineHeight : 2
   },
   ITEM_ID : {
-    width: '120px',
+    width: 120,
     color: '#a487d4',
     fontWeight : 'bold',
     verticalAlign: 'bottom'
   },
   DESCR: {
     color: 'gray',
-    width: '400px',
-    paddingLeft: '10px',
-    paddingRight: '8px',
+    width: 380,
+    paddingLeft: 10,
+    paddingRight: 8,
     fontWeight: 'bold',
     lineHeight: 1.4,
     whiteSpace: 'pre-line',
@@ -46,7 +46,7 @@ class AlertDialog extends Component{
       alertDescr: PropTypes.string
     }),
     onClose: PropTypes.func
-  }  
+  }
   */
 
   shouldComponentUpdate(nextProps, nextState){

@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
 var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
@@ -198,23 +202,18 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
     _this._renderSelects = function (selectProps, isShow, isShowLabels) {
       return selectProps.map(function (item, index) {
         var id = item.id,
-            uri = item.uri,
-            jsonProp = item.jsonProp,
-            caption = item.caption;
+            restItem = (0, _objectWithoutProperties3.default)(item, ['id']);
 
         var _isShow = _this.state[_crIsId(id)];
         return _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { key: id, isShow: _isShow },
-          _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
+          _react2.default.createElement(_DialogCell2.default.SelectWithLoad, (0, _extends3.default)({}, restItem, {
             ref: _this._refSelect.bind(null, id),
             isShow: isShow,
             isShowLabels: isShowLabels,
-            caption: caption,
-            uri: uri,
-            jsonProp: jsonProp,
             onSelect: _this._hSelect.bind(null, id, index)
-          })
+          }))
         );
       });
     };
@@ -228,6 +227,8 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
+    _this._toggleChart = _this._toggleStateBy.bind(_this, 'isShowChart');
+    _this._toggleDate = _this._toggleStateBy.bind(_this, 'isShowDate');
 
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true, isOptions: true, isToggle: true });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
@@ -238,6 +239,7 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
       isOptions: false,
       isToggle: false,
       isShowLabels: true,
+      isShowChart: true,
       isShowDate: false
     }, (0, _crDateConfig2.default)('EMPTY'), {
       validationMessages: []
@@ -293,11 +295,13 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
           onFront = _props.onFront,
           selectProps = _props.selectProps,
           noDate = _props.noDate,
+          noForDate = _props.noForDate,
           _state = this.state,
           isToolbar = _state.isToolbar,
           isOptions = _state.isOptions,
           isToggle = _state.isToggle,
           isShowLabels = _state.isShowLabels,
+          isShowChart = _state.isShowChart,
           isShowDate = _state.isShowDate,
           dateDefault = _state.dateDefault,
           dateOptions = _state.dateOptions,
@@ -326,19 +330,27 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
         }),
         _react2.default.createElement(_ModalToggle2.default, {
           isShow: isToggle,
+          noForDate: noForDate,
           selectProps: selectProps,
+          isShowChart: isShowChart,
           isShowDate: isShowDate,
           crIsId: _crIsId,
           onToggle: this._toggleStateBy,
+          toggleChart: this._toggleChart,
+          toggleDate: this._toggleDate,
           onClose: this._hideToggleWithToolbar
         }),
         this._renderSelects(selectProps, isShow, isShowLabels),
-        _react2.default.createElement(_DialogCell2.default.RowChart, {
-          isShowLabels: isShowLabels,
-          options: this._chartOptions,
-          onSelectChart: this._hSelectChartType,
-          onRegColor: this._onRegColor
-        }),
+        _react2.default.createElement(
+          _DialogCell2.default.ShowHide,
+          { isShow: isShowChart },
+          _react2.default.createElement(_DialogCell2.default.RowChart, {
+            isShowLabels: isShowLabels,
+            options: this._chartOptions,
+            onSelectChart: this._hSelectChartType,
+            onRegColor: this._onRegColor
+          })
+        ),
         !noDate && _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },

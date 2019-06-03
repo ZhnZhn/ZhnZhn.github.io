@@ -18,6 +18,7 @@ const LoadConfig = {
   [LT.AL_S]: LoadImpl.AlphaSector,
   [LT.AL_I]: LoadImpl.AlphaIntraday,
   [LT.IEX]: LoadImpl.Iex,
+  [LT.FMP]: LoadImpl.Fmp,
 
   [LT.EU_STAT]: LoadImpl.EuroStat,
   [LT.NST]: LoadImpl.StatNorway,

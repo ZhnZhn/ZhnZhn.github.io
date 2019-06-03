@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
+
+var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+
 var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
@@ -11,17 +15,6 @@ var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var T = {
-  T1: 't1',
-  T2: 't2',
-  T3: 't3',
-  T3B: 't3b',
-  T3A: 't3a',
-  T3A2: 't3a2',
-  T4: 't4',
-  DF3: 'df3'
-};
 
 var V = {
   A: 'AREA',
@@ -49,92 +42,97 @@ var C = {
   EMPTY: ''
 };
 
+var _crItem = function _crItem(confArr) {
+  return {
+    caption: confArr[0],
+    value: confArr[1],
+    dim: confArr[2],
+    compType: confArr[3]
+  };
+};
+var _crItems = function _crItems(arr) {
+  return arr.map(_crItem);
+};
+
 var _crDF = function _crDF() {
-  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Area', value: V.A }, { caption: 'Column', value: V.S_C }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Bar+Labels: All Countries', value: V.B_L }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Dots: All Countries', value: V.D }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
+  return _crItems([['Default: Spline', V.S], ['Area', V.A], ['Column', V.S_C], ['Bar: All Countries', V.B], ['Bar+Labels: All Countries', V.B_L], ['Column: All Countries', V.C], ['Dots: All Countries', V.D], ['Map: All Countries', V.M, void 0, _Type.CompItemType.EUROSTAT_MAP]]);
 };
 
 var _crDF3 = function _crDF3() {
-  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Column', value: V.S_C }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Dots: All Countries', value: V.D }];
+  return _crItems([['Default: Spline', V.S], ['Column', V.S_C], ['Bar: All Countries', V.B], ['Column: All Countries', V.C], ['Dots: All Countries', V.D]]);
 };
 
 var _crT1 = function _crT1() {
-  return [{ caption: 'Default: Spline', value: V.S }];
+  return [_crItem(['Default: Spline', V.S])];
 };
 
 var _crT2 = function _crT2() {
-  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Column', value: V.S_C }, { caption: 'Yearly by Months', value: V.A_Y }];
+  return [_crItem(['Default: Spline', V.S]), _crItem(['Column', V.S_C])];
+};
+
+var _crT2A = function _crT2A() {
+  return [].concat((0, _toConsumableArray3.default)(_crT2()), [_crItem(['Yearly by Months', V.A_Y])]);
 };
 
 var _crT3All = function _crT3All(oneCaption) {
-  return [{
-    caption: 'Column: By ' + oneCaption,
-    value: V.C,
-    dim: oneCaption
-  }, {
-    caption: 'Column: By ' + oneCaption + ': Cluster',
-    value: V.C_C,
-    dim: oneCaption
-  }, {
-    caption: 'Bar: By ' + oneCaption,
-    value: V.B,
-    dim: oneCaption
-  }, {
-    caption: 'Bar: By ' + oneCaption + ': Cluster',
-    value: V.B_C,
-    dim: oneCaption
-  }];
+  return _crItems([['Column: By ' + oneCaption, V.C, oneCaption], ['Column: By ' + oneCaption + ': Cluster', V.C_C, oneCaption], ['Bar: By ' + oneCaption, V.B, oneCaption], ['Bar: By ' + oneCaption + ': Cluster', V.B_C, oneCaption]]);
 };
 
-var _crT3 = function _crT3(oneCaption) {
-  return [{ caption: 'Default: Spline', value: V.A }].concat((0, _toConsumableArray3.default)(_crT3All(oneCaption)));
+var _crT3 = function _crT3(_ref) {
+  var _ref2 = (0, _slicedToArray3.default)(_ref, 1),
+      oneCaption = _ref2[0];
+
+  return [_crItem(['Default: Spline', V.A])].concat((0, _toConsumableArray3.default)(_crT3All(oneCaption)));
 };
 
-var _crT3B = function _crT3B(oneCaption) {
-  return [{ caption: 'Default: Spline', value: V.A }, { caption: 'Yearly by Months', value: V.A_Y }].concat((0, _toConsumableArray3.default)(_crT3All(oneCaption)));
+var _crT3B = function _crT3B(_ref3) {
+  var _ref4 = (0, _slicedToArray3.default)(_ref3, 1),
+      oneCaption = _ref4[0];
+
+  return [_crItem(['Default: Spline', V.A]), _crItem(['Yearly by Months', V.A_Y])].concat((0, _toConsumableArray3.default)(_crT3All(oneCaption)));
 };
 
-var _crT3A = function _crT3A(oneCaption) {
-  return [].concat((0, _toConsumableArray3.default)(_crT3(oneCaption)), [{
-    caption: 'TreeMap: By ' + oneCaption,
-    value: V.TM,
-    dim: oneCaption
-  }, {
-    caption: 'TreeMap: By ' + oneCaption + ': Cluster',
-    value: V.TM_C,
-    dim: oneCaption
-  }]);
+var _crT3A = function _crT3A(_ref5) {
+  var _ref6 = (0, _slicedToArray3.default)(_ref5, 1),
+      oneCaption = _ref6[0];
+
+  return [].concat((0, _toConsumableArray3.default)(_crT3([oneCaption])), [_crItem(['TreeMap: By ' + oneCaption, V.TM, oneCaption]), _crItem(['TreeMap: By ' + oneCaption + ': Cluster', V.TM_C, oneCaption])]);
 };
 
-var _crT3A2 = function _crT3A2(oneCaption) {
-  return [].concat((0, _toConsumableArray3.default)(_crT3A(oneCaption)), [{
-    caption: 'TreeMap: By ' + oneCaption + ': Depth 2',
-    value: V.TM_2,
-    dim: oneCaption
-  }, {
-    caption: 'TreeMap: By ' + oneCaption + ': Depth 2: Cluster',
-    value: V.TM_2_C,
-    dim: oneCaption
-  }]);
+var _crT3A2 = function _crT3A2(_ref7) {
+  var _ref8 = (0, _slicedToArray3.default)(_ref7, 1),
+      oneCaption = _ref8[0];
+
+  return [].concat((0, _toConsumableArray3.default)(_crT3A([oneCaption])), [_crItem(['TreeMap: By ' + oneCaption + ': Depth 2', V.TM_2, oneCaption]), _crItem(['TreeMap: By ' + oneCaption + ': Depth 2: Cluster', V.TM_2_C, oneCaption])]);
 };
 
-var _crT4 = function _crT4(oneCaption, twoCaption) {
-  return [].concat((0, _toConsumableArray3.default)(_crT3(oneCaption)), [{
-    caption: 'Column: By ' + twoCaption,
-    value: V.C_2,
-    dim: twoCaption
-  }, {
-    caption: 'Bar: By ' + twoCaption,
-    value: V.B_2,
-    dim: twoCaption
-  }]);
+var _crT4 = function _crT4(_ref9) {
+  var _ref10 = (0, _slicedToArray3.default)(_ref9, 2),
+      oneCaption = _ref10[0],
+      twoCaption = _ref10[1];
+
+  return [].concat((0, _toConsumableArray3.default)(_crT3([oneCaption])), [_crItem(['Column: By ' + twoCaption, V.C_2, twoCaption]), _crItem(['Bar: By ' + twoCaption, V.B_2, twoCaption])]);
 };
 
-var _crCaptions = function _crCaptions(_ref) {
-  var dims = _ref.dims,
-      _ref$oneCaption = _ref.oneCaption,
-      oneCaption = _ref$oneCaption === undefined ? C.EMPTY : _ref$oneCaption,
-      _ref$twoCaption = _ref.twoCaption,
-      twoCaption = _ref$twoCaption === undefined ? C.EMPTY : _ref$twoCaption;
+var _r = {
+  DF: _crDF,
+  t1: _crT1,
+  t2: _crT2,
+  t2a: _crT2A,
+  t3: _crT3,
+  t3b: _crT3B,
+  t3a: _crT3A,
+  t3a2: _crT3A2,
+  t4: _crT4,
+  df3: _crDF3
+};
+
+var _crCaptions = function _crCaptions(_ref11) {
+  var dims = _ref11.dims,
+      _ref11$oneCaption = _ref11.oneCaption,
+      oneCaption = _ref11$oneCaption === undefined ? C.EMPTY : _ref11$oneCaption,
+      _ref11$twoCaption = _ref11.twoCaption,
+      twoCaption = _ref11$twoCaption === undefined ? C.EMPTY : _ref11$twoCaption;
   return Array.isArray(dims) ? dims.map(function (dim) {
     return dim.c || C.EMPTY;
   }) : [oneCaption, twoCaption];
@@ -143,28 +141,10 @@ var _crCaptions = function _crCaptions(_ref) {
 var RouterOptions = {
   crOptions: function crOptions(option) {
     var chartsType = option.chartsType,
-        _captions = _crCaptions(option);
+        _captions = _crCaptions(option),
+        _crOptions = _r[chartsType] || _r.DF;
 
-    switch (chartsType) {
-      case T.T1:
-        return _crT1();
-      case T.T2:
-        return _crT2();
-      case T.T3:
-        return _crT3(_captions[0]);
-      case T.T3B:
-        return _crT3B(_captions[0]);
-      case T.T3A:
-        return _crT3A(_captions[0]);
-      case T.T3A2:
-        return _crT3A2(_captions[0]);
-      case T.T4:
-        return _crT4(_captions[0], _captions[1]);
-      case T.DF3:
-        return _crDF3();
-      default:
-        return _crDF();
-    }
+    return _crOptions(_captions);
   },
   isCategory: function isCategory(chartType) {
     if (!chartType) {

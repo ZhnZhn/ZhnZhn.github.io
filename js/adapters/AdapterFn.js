@@ -39,9 +39,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var EMPTY = '';
 var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
-var mlsToDmy = _DateUtils2.default.mlsToDmy;
+var ymdToUTC = _DateUtils2.default.ymdToUTC,
+    ymdtToUTC = _DateUtils2.default.ymdtToUTC,
+    ymdhmsToUTC = _DateUtils2.default.ymdhmsToUTC,
+    mlsToDmy = _DateUtils2.default.mlsToDmy;
 
 
+var _isArr = Array.isArray;
 var _fIsNumber = function _fIsNumber(pn) {
   return function (p) {
     return typeof p[pn] === 'number' && isFinite(p[pn]);
@@ -60,41 +64,22 @@ var _compareByTwoProp = function _compareByTwoProp(propName1, propName2) {
 };
 
 var _getDate = function _getDate(point) {
-  return Array.isArray(point) ? point[0] : point.x;
+  return _isArr(point) ? point[0] : point.x;
 };
+
 var _getValue = function _getValue(point) {
-  if (Array.isArray(point)) {
+  if (_isArr(point)) {
     return point[1] != null ? point[1] : '0.0';
   } else {
-    return point && point.y != null ? point.y : '0.0';
+    return point && point.y != null && !Number.isNaN(point.y) ? point.y : '0.0';
   }
 };
 
 var AdapterFn = {
-  ymdToUTC: function ymdToUTC(date) {
-    var _arr = date.split('-'),
-        _len = _arr.length;
-    if (_len === 3) {
-      return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _arr[2]);
-    } else if (_len === 2 && _arr[1] !== '') {
-      var _m = parseInt(_arr[1], 10),
-          _d = new Date(_arr[0], _m, 0).getDate();
-      return Date.UTC(_arr[0], _m - 1, _d);
-    } else if (_len === 1) {
-      return Date.UTC(_arr[0], 11, 31);
-    }
-  },
-  ymdtToUTC: function ymdtToUTC(date) {
-    var _arr = date.split('-'),
-        _d = _arr[2].split(' ')[0];
-    return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _d);
-  },
-  ymdhmsToUTC: function ymdhmsToUTC(date) {
-    var _dtArr = date.split(' '),
-        _ymdArr = _dtArr[0].split('-'),
-        _hmsArr = _dtArr[1].split(':');
-    return Date.UTC(_ymdArr[0], parseInt(_ymdArr[1], 10) - 1, _ymdArr[2], _hmsArr[0], _hmsArr[1], _hmsArr[2]);
-  },
+  ymdToUTC: ymdToUTC,
+  ymdtToUTC: ymdtToUTC,
+  ymdhmsToUTC: ymdhmsToUTC,
+
   volumeColumnPoint: function volumeColumnPoint(_ref) {
     var date = _ref.date,
         open = _ref.open,
@@ -186,7 +171,7 @@ var AdapterFn = {
     });
   },
   valueMoving: function valueMoving(data, dfR) {
-    if (!Array.isArray(data)) {
+    if (!_isArr(data)) {
       return { date: data, direction: 'empty' };
     }
 
@@ -218,7 +203,7 @@ var AdapterFn = {
   },
 
   appendWithColon: function appendWithColon() {
-    for (var _len2 = arguments.length, args = Array(_len2), _key = 0; _key < _len2; _key++) {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
@@ -236,7 +221,19 @@ var AdapterFn = {
   },
 
   findMinY: _seriaFn2.default.findMinY,
-  findMaxY: _seriaFn2.default.findMaxY
+  findMaxY: _seriaFn2.default.findMaxY,
+
+  crError: function crError() {
+    var errCaption = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    return {
+      errCaption: errCaption,
+      message: message
+    };
+  },
+  crItemLink: function crItemLink(caption, itemUrl) {
+    return '<p>\n    <a href="' + itemUrl + '" style="padding-top: 4px;">' + caption + '</a>\n  </p>';
+  }
 };
 
 exports.default = AdapterFn;

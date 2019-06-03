@@ -1,3 +1,7 @@
+import fnAdapter from './fnAdapter'
+
+const { crError } = fnAdapter;
+
 const C = {
   URL: 'https://api.db.nomics.world/v22/series',
   TAIL: 'observations=1&format=json&metadata=false',
@@ -7,11 +11,8 @@ const C = {
 };
 
 const _isArr = Array.isArray;
+const _crErr = crError.bind(null, C.ERR_CAPTION);
 
-const _crErr = message => ({
-    errCaption: C.ERR_CAPTION,
-    message: message || ''
-});
 const _getValue = obj => obj && obj.value
    ? obj.value
    : '';

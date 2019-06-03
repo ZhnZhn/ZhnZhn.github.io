@@ -3,6 +3,16 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _fnAdapter = require('./fnAdapter');
+
+var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var crError = _fnAdapter2.default.crError;
+
+
 var C = {
   URL: 'https://api.db.nomics.world/v22/series',
   TAIL: 'observations=1&format=json&metadata=false',
@@ -12,13 +22,8 @@ var C = {
 };
 
 var _isArr = Array.isArray;
+var _crErr = crError.bind(null, C.ERR_CAPTION);
 
-var _crErr = function _crErr(message) {
-  return {
-    errCaption: C.ERR_CAPTION,
-    message: message || ''
-  };
-};
 var _getValue = function _getValue(obj) {
   return obj && obj.value ? obj.value : '';
 };

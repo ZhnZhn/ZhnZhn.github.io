@@ -19,12 +19,25 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number' ? n - n === 0 : false;
 };
 
-var _calcY = function _calcY(pPrev, pNext) {
-  // not: 0, null, undefined
-  if (!pPrev.y || pNext.y == null) {
+var _calcY = function _calcY(yPrev, yNext) {
+
+  if (!_isNumber(yNext)) {
     return null;
   }
-  return parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(Math.abs(pPrev.y)).times(100).toFixed(2));
+
+  if (yNext === 0) {
+    if (_isNumber(yPrev)) {
+      return yPrev === 0 ? 0 : yPrev > 0 ? -100 : 100;
+    } else {
+      return null;
+    }
+  }
+
+  if (yPrev === 0) {
+    return null;
+  }
+
+  return parseFloat((0, _big2.default)(yNext - yPrev).div(Math.abs(yPrev)).times(100).toFixed(2));
 };
 
 var _isDataArr = function _isDataArr(data) {
@@ -48,7 +61,7 @@ var fn = {
         i = _rt;
     for (; i < max; i++) {
       pNext = d[i];
-      _d.push([pNext.x, _calcY(pPrev, pNext)]);
+      _d.push([pNext.x, _calcY(pPrev.y, pNext.y)]);
       pPrev = d[i - prevStep];
     }
     return _d;

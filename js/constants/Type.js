@@ -85,6 +85,7 @@ var LoadType = exports.LoadType = {
    AL_S: 'AL_S',
    AL_I: 'AL_I',
    IEX: 'IEX',
+   FMP: 'FMP',
    QCT: 'QCT',
    DBN: 'DBN',
    EU_STAT: 'EU_STAT',

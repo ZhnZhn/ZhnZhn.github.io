@@ -46,7 +46,7 @@ const ST = {
 const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 19):"
+     caption="Data Providers (All 20):"
      captionStyle={ocCaptionStyle}
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM }}
      childStyle={ST.ROOT_CHILD}
@@ -83,6 +83,9 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Iex />
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.Fmp/>
         </span>
         <span style={S.PROVIDER}>
           <Link.CryptoCompare/>

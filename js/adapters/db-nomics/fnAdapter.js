@@ -14,7 +14,9 @@ var _fnSelector2 = _interopRequireDefault(_fnSelector);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ymdToUTC = _AdapterFn2.default.ymdToUTC,
+var crError = _AdapterFn2.default.crError,
+    crItemLink = _AdapterFn2.default.crItemLink,
+    ymdToUTC = _AdapterFn2.default.ymdToUTC,
     valueMoving = _AdapterFn2.default.valueMoving;
 var getPeriodAndValue = _fnSelector2.default.getPeriodAndValue,
     getTitle = _fnSelector2.default.getTitle,
@@ -36,9 +38,10 @@ var _getId = function _getId(_ref) {
   return _isId(seriaId) ? seriaId : dfProvider + '/' + dfCode + '/' + seriaId;
 };
 
+var _crItemLink = crItemLink.bind(null, 'DB Nomics Chart');
 var _crDescr = function _crDescr(option) {
   var _id = _getId(option);
-  return '\n   <p>SeriaId: ' + _id + '</p>\n   <p><a href="' + C.CHART_URL + '/' + _id + '" style="padding-top: 4px;">DB Nomics Chart</a></p>\n  ';
+  return '<p>SeriaId: ' + _id + '</p>\n   ' + _crItemLink(C.CHART_URL + '/' + _id);
 };
 
 var _crZhConfig = function _crZhConfig(_ref2) {
@@ -65,7 +68,7 @@ var _isNumber = function _isNumber(n) {
 };
 
 var fnAdapter = {
-
+  crError: crError,
   crTitle: function crTitle(_ref3, json) {
     var title = _ref3.title,
         subtitle = _ref3.subtitle;

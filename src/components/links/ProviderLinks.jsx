@@ -26,6 +26,7 @@ const LINK_CONFIGS = [
  ["Quandl", "Quandl", "https://www.quandl.com/", S.ORANGE],
  ["DbNomics", "DB NOMICS", "https://db.nomics.world/", S.DARK_GREEN],
  ["Iex", "IEX Platform", "https://iextrading.com/developer/", S.SUNNY],
+ ["Fmp", "Financial Modeling Prep", "https://financialmodelingprep.com"],
  ["Cmc", "CoinMarketCap", "https://coinmarketcap.com/"],
  ["Barchart", "Barchart Market Data", "https://www.barchartmarketdata.com"],
  ["AlphaVantage", "Alpha Vantage", "https://www.alphavantage.co"],

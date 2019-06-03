@@ -8,9 +8,10 @@ const {
   DbNomics,
   UnComtrade, FaoStat, WorldBank,
   EuroStat, StatNorway, StatSweden, StatFinland,
+  Insee,
   AlphaVantage, Barchart, Intrinio,
   Crc, Cmc,
-  Iex, Insee,
+  Iex, Fmp,
   Bea, Bls, Eia
 } = Adapter;
 
@@ -37,6 +38,7 @@ const LoadImpl = {
     ...Barchart
   }),
   Iex: f({ ...Iex }),
+  Fmp: f({ ...Fmp}),
   Intrinio: f({ ...Intrinio }),
 
 

@@ -62,7 +62,16 @@ describe('calc seria growRate', ()=>{
 
   test('should fill to null for zero old values', ()=>{
     const _dIn = _crInArr([0, 0, 1, 1])
-        , _dOut = _crOutArr([null, null, 0])
+        , _dOut = _crOutArr([0, null, 0])
+        , _dR = fn(_dIn)
+    _dR.forEach((p, i) => {
+      expect(p).toEqual(_dOut[i])
+    })
+  })
+
+  test('should calc growth rate from 0 to values as 0, 100, -100 or null', ()=>{
+    const _dIn = _crInArr([0, 2, 0, 0, -3, 0])
+        , _dOut = _crOutArr([null, -100, 0, null, 100])
         , _dR = fn(_dIn)
     _dR.forEach((p, i) => {
       expect(p).toEqual(_dOut[i])

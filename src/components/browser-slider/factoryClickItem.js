@@ -4,7 +4,7 @@ const conf = {
   dialogConf: true,
   dialogType: "DialogStatN",
   dialogProps: {
-    chartsType: "t2",
+    chartsType: "t2a",
     dfProps: { },
     isProxy: true
   }

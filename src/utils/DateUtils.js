@@ -83,9 +83,34 @@ const DateUtils = {
 	 return DateUtils.isYmd(`${y}-${m}-${d}`);
  },
 
- ymdToUTC: (str) => {
-    const arrDate = str.split('-');
-    return  Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]);
+ ymdToUTC: (dateStr) => {
+	 const _arr = dateStr.split('-')
+			 , _len = _arr.length;
+	 if (_len === 3) {
+		 return Date.UTC( _arr[0], (parseInt(_arr[1], 10)-1), _arr[2] );
+	 } else if ( _len === 2 && _arr[1] !== ''){
+		 const _m = parseInt(_arr[1], 10)
+				 , _d = (new Date(_arr[0], _m, 0)).getDate();
+		 return Date.UTC( _arr[0], _m - 1, _d );
+	 } else if ( _len === 1) {
+		 return Date.UTC( _arr[0], 11, 31 );
+	 }
+ },
+ ymdtToUTC(dateStr) {
+	 const _arr = dateStr.split('-')
+			 , _d = _arr[2].split(' ')[0];
+	 return Date.UTC(
+		 _arr[0], (parseInt(_arr[1], 10)-1), _d
+	 );
+ },
+ ymdhmsToUTC(dateStr) {
+	 const _dtArr = dateStr.split(' ')
+	 , _ymdArr = _dtArr[0].split('-')
+	 , _hmsArr = _dtArr[1].split(':');
+	 return Date.UTC(
+		 _ymdArr[0], (parseInt(_ymdArr[1], 10)-1), _ymdArr[2],
+		 _hmsArr[0], _hmsArr[1], _hmsArr[2]
+	 );
  },
 
  getUTCTime: (ms) => {
