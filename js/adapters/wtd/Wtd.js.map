@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/wtd/Wtd.js"
+ ],
+ "file": "../../../src/adapters/wtd/Wtd.js",
+ "names": [
+  "Wdt",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,uBADU;AAEVC;AAFU,CAAZ;;kBAKeF,G"
+}

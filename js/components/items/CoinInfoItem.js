@@ -50,32 +50,35 @@ var _CrcLink2 = _interopRequireDefault(_CrcLink);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL_TOPIC = 'ci-topic';
+
 var S = {
   ROOT: {
-    marginBottom: '8px'
+    marginBottom: 8
   },
   SHOW_HIDE: {
-    paddingTop: '8px'
+    paddingTop: 8
   },
-  DIV: {
-    paddingLeft: '24px',
-    paddingRight: '24px',
-    lineHeight: 1.6
+  TOPIC: {
+    paddingLeft: 24,
+    paddingRight: 24,
+    lineHeight: 1.6,
+    fontWeight: 600
   },
   FIELD: {
     display: 'inline-block',
-    paddingLeft: '24px',
-    fontWeight: 'bold'
+    paddingLeft: 24,
+    fontWeight: 600
   },
   TITLE: {
     color: '#1b75bb'
   },
   TWITTER: {
     top: 0,
-    marginLeft: '24px'
+    marginLeft: 24
   },
   N_LINK: {
-    marginLeft: '16px'
+    marginLeft: 16
   }
 };
 
@@ -125,7 +128,8 @@ var RowField = function RowField(_ref2) {
 };
 
 var Topic = function Topic(_ref3) {
-  var title = _ref3.title,
+  var className = _ref3.className,
+      title = _ref3.title,
       str = _ref3.str;
 
   var __html = _dompurify2.default.sanitize(str);
@@ -139,37 +143,44 @@ var Topic = function Topic(_ref3) {
       isClose: true
     },
     _react2.default.createElement('div', {
-      style: S.DIV,
+      className: className,
+      style: S.TOPIC,
       dangerouslySetInnerHTML: { __html: __html }
     })
   );
 };
 
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && !Number.isNaN(n);
+};
+
 var _crUpdateTS = function _crUpdateTS(n) {
-  if (typeof n === 'number' && !Number.isNaN(n)) {
-    return new Date(n * 1000).toISOString().split('T')[0];
-  }
-  return '';
+  return _isNumber(n) ? new Date(n * 1000).toISOString().split('T')[0] : '';
 };
 
 var CoinInfoItem = function (_Component) {
   (0, _inherits3.default)(CoinInfoItem, _Component);
 
-  function CoinInfoItem(props) {
+  function CoinInfoItem() {
+    var _ref4;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, CoinInfoItem);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (CoinInfoItem.__proto__ || Object.getPrototypeOf(CoinInfoItem)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this._hToggle = function () {
-      _this.setState({
-        isOpen: !_this.state.isOpen
-      });
-    };
-
-    _this.state = {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref4 = CoinInfoItem.__proto__ || Object.getPrototypeOf(CoinInfoItem)).call.apply(_ref4, [this].concat(args))), _this), _this.state = {
       isOpen: true
-    };
-    return _this;
+    }, _this._hToggle = function () {
+      _this.setState(function (prevState) {
+        return {
+          isOpen: !prevState.isOpen
+        };
+      });
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(CoinInfoItem, [{
@@ -235,10 +246,12 @@ var CoinInfoItem = function (_Component) {
             )
           ),
           _react2.default.createElement(Topic, {
+            className: CL_TOPIC,
             title: 'Description',
             str: Description
           }),
           _react2.default.createElement(Topic, {
+            className: CL_TOPIC,
             title: 'Features',
             str: Features
           }),
@@ -258,4 +271,4 @@ var CoinInfoItem = function (_Component) {
 }(_react.Component);
 
 exports.default = CoinInfoItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\CoinInfoItem.js.map
+//# sourceMappingURL=CoinInfoItem.js.map

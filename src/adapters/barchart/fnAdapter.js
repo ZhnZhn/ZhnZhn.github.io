@@ -1,5 +1,5 @@
 
-import DateUtils from '../../utils/DateUtils'
+import dt from '../../utils/DateUtils'
 
 import AdapterFn from '../AdapterFn'
 import AdapterStockFn from '../AdapterStockFn'
@@ -15,8 +15,8 @@ const _crInfo = (caption) => ({
   description: DESCR,
   frequency: "Daily",
   name: caption,
-  newest_available_date: DateUtils.getFromDate(0),
-  oldest_available_date: DateUtils.getFromDate(1)
+  toDate: dt.getFromDate(0),
+  fromDate: dt.getFromDate(1)
 });
 
 const _crZhConfig = (id, value) => ({
@@ -24,6 +24,7 @@ const _crZhConfig = (id, value) => ({
   dataSource: "Barchart Market Data Solutions",
   id: id,
   key: value,
+  item: value,
   linkFn: "NASDAQ",
   isWithLegend: true,
   legend: AdapterFn.stockSeriesLegend()

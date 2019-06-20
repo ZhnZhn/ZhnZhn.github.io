@@ -54,21 +54,24 @@ const QuandlFn2 = {
 
   createDatasetInfo(json){
      const { dataset={} } = json
-         , {
-           name='', description='',
-           newest_available_date='', oldest_available_date='',
-           frequency='',
-           database_code='', dataset_code=''
-          } = dataset
-         , _description = DOMPurify.sanitize(description)                                   ;
+     , {
+       name='', description='',
+       newest_available_date='',
+       oldest_available_date='',
+       frequency='',
+       database_code='',
+       dataset_code=''
+      } = dataset
+     , _description = DOMPurify.sanitize(description);
 
      return  {
        name,
-       newest_available_date,
-       oldest_available_date,
+       toDate: newest_available_date,
+       fromDate: oldest_available_date,
        frequency,
-       database_code, dataset_code,
-       description : _description
+       database_code,
+       dataset_code,
+       description: _description
     };
   },
 

@@ -11,7 +11,7 @@ const {
   Insee,
   AlphaVantage, Barchart, Intrinio,
   Crc, Cmc,
-  Iex, Fmp,
+  Iex, Wtd, Fmp,
   Bea, Bls, Eia
 } = Adapter;
 
@@ -38,6 +38,7 @@ const LoadImpl = {
     ...Barchart
   }),
   Iex: f({ ...Iex }),
+  Wtd: f({ ...Wtd}),
   Fmp: f({ ...Fmp}),
   Intrinio: f({ ...Intrinio }),
 

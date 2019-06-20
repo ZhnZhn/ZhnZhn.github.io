@@ -258,9 +258,9 @@ const EuroStatFn = {
     return {
       name: label,
       description: _crDescr(extension),
-      newest_available_date: updated,
-      oldest_available_date: '1996-01-30',
-    }
+      toDate: updated,
+      fromDate: '1996-01-30'
+    };
   },
 
   findMinY: findMinY,

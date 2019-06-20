@@ -44,6 +44,10 @@ var _Iex = require('./iex/Iex');
 
 var _Iex2 = _interopRequireDefault(_Iex);
 
+var _Wtd = require('./wtd/Wtd');
+
+var _Wtd2 = _interopRequireDefault(_Wtd);
+
 var _Fmp = require('./fmp/Fmp');
 
 var _Fmp2 = _interopRequireDefault(_Fmp);
@@ -99,6 +103,7 @@ var RouterAdapter = {
   AlphaVantage: _AlphaVantage2.default,
   Barchart: _Barchart2.default,
   Iex: _Iex2.default,
+  Wtd: _Wtd2.default,
   Fmp: _Fmp2.default,
   Insee: _Insee2.default,
   Bea: _Bea2.default,

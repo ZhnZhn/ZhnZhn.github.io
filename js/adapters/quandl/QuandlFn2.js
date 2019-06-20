@@ -108,10 +108,11 @@ var QuandlFn2 = {
 
     return {
       name: name,
-      newest_available_date: newest_available_date,
-      oldest_available_date: oldest_available_date,
+      toDate: newest_available_date,
+      fromDate: oldest_available_date,
       frequency: frequency,
-      database_code: database_code, dataset_code: dataset_code,
+      database_code: database_code,
+      dataset_code: dataset_code,
       description: _description
     };
   },

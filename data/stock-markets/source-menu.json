@@ -34,6 +34,11 @@
         { "id": "SM_IEX_DIVIDENDS_2Y"}
       ]
     },{
+      "caption": "World Trading Data", "isInitClose": true,
+      "items": [
+        { "id": "SM_WTD_STOCK" }
+      ]
+    },{
       "caption": "Financial Modeling Prep",
       "items": [
         { "id": "SM_FMP_FS" },
@@ -376,6 +381,24 @@
              "dfType": "dividends",
              "dfPeriod": "2y"
            }
+         }
+     },
+
+     "SM_WTD_STOCK" : {
+         "type" : "SM_WTD_STOCK",
+         "menuTitle" : "History Prices",
+         "dialogCaption" : "WTD Stock Prices",
+         "chartContainerCaption" : "World Trading Data: History Prices",
+         "dialogProps" : {
+           "nInitFromDate" : 2,
+           "descrUrl" : "./data/stock-markets/world-trading-data.html",
+           "optionURI" : "./data/stock-markets/wiki.json",
+           "optionsJsonProp" : "tickets",
+           "isWithInputStock": true,
+           "valueFn" : "ROne",
+           "linkFn" : "NASDAQ",
+           "loadId" : "WTD",
+           "dataSource" : "World Trading Data"
          }
      },
 

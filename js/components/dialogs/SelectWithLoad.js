@@ -63,7 +63,7 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
           uri = _this$props.uri,
           jsonProp = _this$props.jsonProp;
 
-      _this._handlerWithLoadOptions('options', 'isLoading', 'isLoadingFailed', uri, jsonProp);
+      _this._handlerWithLoadOptions('options', uri, jsonProp);
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 

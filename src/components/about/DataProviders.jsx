@@ -16,27 +16,27 @@ const OPEN_COLOR_L2 = C.GREEN;
 const ST = {
   ROOT_CHILD: {
     borderLeft: `1px dashed ${C.YELLOW}`,
-    marginLeft: '-5px',
-    paddingLeft: '8px'
+    marginLeft: -5,
+    paddingLeft: 8
   },
   OPEN_CLOSE: {
-    paddingTop: '6px',
+    paddingTop: 6,
     lineHeight: 1.8
   },
   CHILD_STYLE: {
     borderLeft: `1px dotted ${C.GREEN}`,
-    marginLeft: '2px',
-    paddingLeft: '6px'
+    marginLeft: 2,
+    paddingLeft: 6
   },
   P4: {
-    paddingTop: '4px'
+    paddingTop: 4
   },
   NOTE: {
     padding: '8px 4px 4px 6px',
     lineHeight: 1.4
   },
   MAX_WIDTH: {
-    maxWidth: '450px'
+    maxWidth: 450
   },
   SETTINGS: {
     color: '#607d8b'
@@ -46,7 +46,7 @@ const ST = {
 const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 20):"
+     caption="Data Providers (All 21):"
      captionStyle={ocCaptionStyle}
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM }}
      childStyle={ST.ROOT_CHILD}
@@ -95,7 +95,7 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
       </p>
       <OpenClose
-        caption="(6) Required API key:"
+        caption="(7) Required API key:"
         captionStyle={ocCaptionStyle}
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
@@ -123,6 +123,9 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Intrinio/>
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.Wtd/>
         </span>
       </p>
       <div style={ST.NOTE}>

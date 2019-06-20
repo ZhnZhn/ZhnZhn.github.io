@@ -11,22 +11,18 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _renderText = function _renderText(text, classText, styleText, isHtml) {
-  if (!isHtml) {
-    return _react2.default.createElement(
-      'span',
-      {
-        className: classText,
-        style: styleText
-      },
-      text
-    );
-  } else {
-    return _react2.default.createElement('span', {
+  return !isHtml ? _react2.default.createElement(
+    'span',
+    {
       className: classText,
-      style: styleText,
-      dangerouslySetInnerHTML: { __html: text }
-    });
-  }
+      style: styleText
+    },
+    text
+  ) : _react2.default.createElement('span', {
+    className: classText,
+    style: styleText,
+    dangerouslySetInnerHTML: { __html: text }
+  });
 };
 
 var InfoPart = function InfoPart(props) {

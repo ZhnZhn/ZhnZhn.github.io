@@ -30,7 +30,7 @@ const _crSetUrl = (option) => {
 };
 
 
-const _crTableUrl = (option) => {  
+const _crTableUrl = (option) => {
   const {
           proxy,
           dfTable,

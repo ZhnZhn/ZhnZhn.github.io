@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _class2, _temp;
+var _class, _class2, _temp2;
 
 var _react = require('react');
 
@@ -44,37 +44,37 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var SelectOneTwo = (0, _withLoadOptions2.default)(_class = (_temp = _class2 = function (_Component) {
+var SelectOneTwo = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 = function (_Component) {
   (0, _inherits3.default)(SelectOneTwo, _Component);
 
-  function SelectOneTwo(props) {
+  function SelectOneTwo() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, SelectOneTwo);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (SelectOneTwo.__proto__ || Object.getPrototypeOf(SelectOneTwo)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = SelectOneTwo.__proto__ || Object.getPrototypeOf(SelectOneTwo)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       isLoading: false,
       isLoadingFailed: false,
       oneOptions: [],
       twoOptions: []
-    };
-
-    _this._loadOptions = function () {
+    }, _this.one = null, _this.two = null, _this._loadOptions = function () {
       var _this$props = _this.props,
           uri = _this$props.uri,
           oneJsonProp = _this$props.oneJsonProp;
 
-      _this._handlerWithLoadOptions('oneOptions', 'isLoading', 'isLoadingFailed', uri, oneJsonProp);
-    };
-
-    _this._setTwoOptions = function () {
+      _this._handlerWithLoadOptions('oneOptions', uri, oneJsonProp);
+    }, _this._setTwoOptions = function () {
       var twoOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
       _this.two = null;
       _this.setState({ twoOptions: twoOptions });
-    };
-
-    _this._hSelectOne = function (one) {
+    }, _this._hSelectOne = function (one) {
       var onSelectOne = _this.props.onSelectOne;
 
       _this.one = one;
@@ -90,19 +90,23 @@ var SelectOneTwo = (0, _withLoadOptions2.default)(_class = (_temp = _class2 = fu
       if (_isFn(onSelectOne)) {
         onSelectOne(one);
       }
-    };
-
-    _this._hSelectTwo = function (two) {
+    }, _this._hSelectTwo = function (two) {
       _this.two = two;
-    };
-
-    _this.one = null;
-    _this.two = null;
-    return _this;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(SelectOneTwo, [{
     key: 'componentDidMount',
+
+
+    /*
+    constructor(props){
+      super(props);
+      this.one = null;
+      this.two = null;
+    }
+    */
+
     value: function componentDidMount() {
       this._loadOptions();
     }
@@ -198,7 +202,7 @@ var SelectOneTwo = (0, _withLoadOptions2.default)(_class = (_temp = _class2 = fu
   msgOnNotSelected: function msgOnNotSelected(item) {
     return item + ' is not selected';
   }
-}, _temp)) || _class;
+}, _temp2)) || _class;
 
 exports.default = SelectOneTwo;
 //# sourceMappingURL=SelectOneTwo.js.map

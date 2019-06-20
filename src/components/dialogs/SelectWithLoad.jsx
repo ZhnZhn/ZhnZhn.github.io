@@ -13,9 +13,9 @@ class SelectWithLoad extends Component {
      }
 
     state = {
-      options : [],
-      isLoading : false,
-      isLoadingFailed : false
+      options: [],
+      isLoading: false,
+      isLoadingFailed: false
     }
 
     componentDidMount(){
@@ -35,8 +35,7 @@ class SelectWithLoad extends Component {
     _handlerLoadOptions = () => {
       const { uri, jsonProp } = this.props;
       this._handlerWithLoadOptions(
-            'options', 'isLoading', 'isLoadingFailed',
-            uri, jsonProp
+        'options', uri, jsonProp
       );
     }
 

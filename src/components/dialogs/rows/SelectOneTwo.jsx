@@ -22,12 +22,16 @@ class SelectOneTwo extends Component {
     oneOptions: [],
     twoOptions: []
   }
+  one = null
+  two = null
 
+  /*
   constructor(props){
     super(props);
     this.one = null;
     this.two = null;
   }
+  */
 
   componentDidMount(){
     this._loadOptions();
@@ -46,8 +50,7 @@ class SelectOneTwo extends Component {
   _loadOptions = () => {
     const { uri, oneJsonProp } = this.props;
     this._handlerWithLoadOptions(
-      'oneOptions', 'isLoading', 'isLoadingFailed',
-       uri, oneJsonProp
+      'oneOptions', uri, oneJsonProp
     );
   }
 

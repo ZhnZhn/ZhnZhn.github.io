@@ -15,11 +15,11 @@ var _Type = require('../../constants/Type');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _settings = {};
-var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR];
+var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR, _Type.LoadType.WTD];
 var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.BLS, _Type.LoadType.CRC];
 var _apiTitle = (_apiTitle2 = {
   DF: 'API'
-}, (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.B, 'Barchart Market Data'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_S, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_I, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.BEA, 'BEA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.EIA, 'EIA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.INTR, 'Intrinio'), _apiTitle2);
+}, (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.B, 'Barchart Market Data'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_S, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_I, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.BEA, 'BEA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.EIA, 'EIA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.INTR, 'Intrinio'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.WTD, 'World Trading Data'), _apiTitle2);
 
 var _isUndef = function _isUndef(v) {
   return typeof v === 'undefined';
@@ -38,9 +38,10 @@ var SettingSlice = {
       key1: this.fSetKey([_Type.LoadType.AL]),
       key2: this.fSetKey([_Type.LoadType.B]),
       key3: this.fSetKey([_Type.LoadType.BEA]),
-      key4: this.fSetKey([_Type.LoadType.INTR]),
-      key5: this.fSetKey([_Type.LoadType.Q]),
-      key6: this.fSetKey([_Type.LoadType.EIA]),
+      key4: this.fSetKey([_Type.LoadType.EIA]),
+      key5: this.fSetKey([_Type.LoadType.INTR]),
+      key6: this.fSetKey([_Type.LoadType.Q]),
+      key7: this.fSetKey([_Type.LoadType.WTD]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this, _Type.LoadType.FAO),
       isAdminMode: this.isAdminMode.bind(this),

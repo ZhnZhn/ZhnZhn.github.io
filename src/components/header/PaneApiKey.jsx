@@ -7,6 +7,8 @@ import RowSecret from '../dialogs/RowSecret'
 import FlatButton from '../zhn-m/FlatButton'
 import RowButtons from './RowButtons'
 
+const MAX_KEY = 8;
+
 class PaneApiKey extends Component {
   /*
   static propTypes = {
@@ -18,11 +20,11 @@ class PaneApiKey extends Component {
   */
 
   constructor(props){
-    super()
+    super(props)
     const { data } = props;
 
     let i = 1;
-    for(; i<7; i++){
+    for(; i<MAX_KEY; i++){
       this['_setKey'+i] = safeFn(data, 'key'+i)
     }
   }
@@ -30,30 +32,20 @@ class PaneApiKey extends Component {
   _hSetAll = () => {
     const { onClose } = this.props;
 
-    this._setKey1(this.iComp1.getValue())
-    this._setKey2(this.iComp2.getValue())
-    this._setKey3(this.iComp3.getValue())
-    this._setKey4(this.iComp4.getValue())
-    this._setKey5(this.iComp5.getValue())
-    this._setKey6(this.iComp6.getValue())
+    let i = 1;
+    for(; i<MAX_KEY; i++) {
+      this['_setKey'+i](this['iComp'+i].getValue())
+    }
 
     onClose()
   }
 
   _hClearAll = () => {
-    this._setKey1('')
-    this._setKey2('')
-    this._setKey3('')
-    this._setKey4('')
-    this._setKey5('')
-    this._setKey6('')
-
-    this.iComp1.clear()
-    this.iComp2.clear()
-    this.iComp3.clear()
-    this.iComp4.clear()
-    this.iComp5.clear()
-    this.iComp6.clear()
+    let i = 1;
+    for(i; i<MAX_KEY; i++) {
+      this['_setKey'+i]('')
+      this['iComp'+i].clear()
+    }
   }
 
   _ref1 = n => this.iComp1 = n
@@ -62,6 +54,7 @@ class PaneApiKey extends Component {
   _ref4 = n => this.iComp4 = n
   _ref5 = n => this.iComp5 = n
   _ref6 = n => this.iComp6 = n
+  _ref7 = n => this.iComp7 = n
 
   render(){
     const { titleStyle, btStyle, onClose } = this.props;
@@ -92,25 +85,33 @@ class PaneApiKey extends Component {
         <RowSecret
            ref={this._ref4}
            titleStyle={titleStyle}
-           title="Intrinio:"
-           placeholder="Intrinio API Key"
+           title="EIA:"
+           placeholder="EIA API Key"
            maxLength="32"
            onEnter={this._setKey4}
         />
         <RowSecret
            ref={this._ref5}
            titleStyle={titleStyle}
-           title="Quandl:"
-           placeholder="Quandl API Key"
+           title="Intrinio:"
+           placeholder="Intrinio API Key"
+           maxLength="32"
            onEnter={this._setKey5}
         />
         <RowSecret
            ref={this._ref6}
            titleStyle={titleStyle}
-           title="EIA:"
-           placeholder="EIA API Key"
-           maxLength="32"
+           title="Quandl:"
+           placeholder="Quandl API Key"
            onEnter={this._setKey6}
+        />
+        <RowSecret
+           ref={this._ref7}
+           titleStyle={titleStyle}
+           title="WDT:"
+           placeholder="World Trading Data API Key"
+           maxLength="60"
+           onEnter={this._setKey7}
         />
         <RowButtons btStyle={btStyle} onClose={onClose}>
           <FlatButton

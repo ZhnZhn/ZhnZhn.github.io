@@ -7,32 +7,35 @@ import OpenClose from '../zhn/OpenClose'
 import TwitterLink from '../about/TwitterLink'
 import CrcLink from '../native-links/CrcLink'
 
+const CL_TOPIC = 'ci-topic';
+
 const S = {
   ROOT: {
-    marginBottom: '8px'
+    marginBottom: 8
   },
   SHOW_HIDE: {
-    paddingTop: '8px'
+    paddingTop: 8
   },
-  DIV: {
-    paddingLeft: '24px',
-    paddingRight: '24px',
-    lineHeight: 1.6
+  TOPIC: {
+    paddingLeft: 24,
+    paddingRight: 24,
+    lineHeight: 1.6,
+    fontWeight: 600,
   },
   FIELD: {
     display: 'inline-block',
-    paddingLeft: '24px',
-    fontWeight: 'bold'
+    paddingLeft: 24,
+    fontWeight: 600
   },
   TITLE: {
     color: '#1b75bb'
   },
   TWITTER: {
     top: 0,
-    marginLeft: '24px'
+    marginLeft: 24
   },
   N_LINK: {
-    marginLeft: '16px'
+    marginLeft: 16
   }
 };
 
@@ -68,7 +71,7 @@ const RowField = ({ items, children }) => {
   );
 }
 
-const Topic = ({ title, str }) => {
+const Topic = ({ className, title, str }) => {
   const __html = DOMPurify.sanitize(str);
   if (!__html){
     return null;
@@ -79,34 +82,32 @@ const Topic = ({ title, str }) => {
       isClose={true}
     >
       <div
-        style={S.DIV}
+        className={className}
+        style={S.TOPIC}
         dangerouslySetInnerHTML={{ __html }}
       />
     </OpenClose>
   );
 }
 
-const _crUpdateTS = (n) => {
-  if (typeof n === 'number' && !Number.isNaN(n)) {
-    return (new Date(n*1000))
-       .toISOString()
-       .split('T')[0]
-  }
-  return '';
-}
+const _isNumber = n => typeof n === 'number'
+  && !Number.isNaN(n);
+
+const _crUpdateTS = (n) => _isNumber(n)
+  ? (new Date(n*1000))
+      .toISOString()
+      .split('T')[0]
+  : '';
 
 class CoinInfoItem extends Component {
-  constructor(props){
-    super()
-    this.state = {
-      isOpen: true
-    }
+  state = {
+    isOpen: true
   }
 
   _hToggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
+    }))
   }
 
   render(){
@@ -167,10 +168,12 @@ class CoinInfoItem extends Component {
             </RowField>
           </OpenClose>
           <Topic
+            className={CL_TOPIC}
             title="Description"
             str={Description}
           />
           <Topic
+            className={CL_TOPIC}
             title="Features"
             str={Features}
           />

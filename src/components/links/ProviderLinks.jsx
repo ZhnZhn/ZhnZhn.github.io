@@ -30,6 +30,7 @@ const LINK_CONFIGS = [
  ["Cmc", "CoinMarketCap", "https://coinmarketcap.com/"],
  ["Barchart", "Barchart Market Data", "https://www.barchartmarketdata.com"],
  ["AlphaVantage", "Alpha Vantage", "https://www.alphavantage.co"],
+ ["Wtd", "Wordl Trading Data", "https://www.worldtradingdata.com/"],
  ["Eurostat", "Eurostat", "http://ec.europa.eu/eurostat"],
  ["UnComtrade", "UN Comtrade", "https://comtrade.un.org"],
  ["WorldBank","World Bank", "https://data.worldbank.org/"],

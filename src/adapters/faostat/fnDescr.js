@@ -40,8 +40,8 @@ const fnDescr = {
       description: _descr,
       frequency: "Annual",
       name: title + ': ' + subtitle,
-      newest_available_date: _dateNewest,
-      oldest_available_date: _dateOldest
+      toDate: _dateNewest,
+      fromDate: _dateOldest
     };
    }
 }

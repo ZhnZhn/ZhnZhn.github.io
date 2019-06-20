@@ -18,15 +18,15 @@ var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var showAlertDialog = function showAlertDialog(alertCaption, alertDescr) {
+var NETWORK_ERROR = _Msg2.default.Alert.NETWORK_ERROR;
+
+var _showMsgErr = function _showMsgErr(alertCaption, alertDescr) {
   _ComponentActions2.default.showAlert({ alertCaption: alertCaption, alertDescr: alertDescr });
 };
 
 var _loadOptions = function _loadOptions(option) {
   var target = option.target,
       toStateProp = option.toStateProp,
-      isLoadingProp = option.isLoadingProp,
-      isLoadingFailedProp = option.isLoadingFailedProp,
       uri = option.uri,
       optionJsonProp = option.optionJsonProp,
       fnOnCompleted = option.fnOnCompleted,
@@ -43,26 +43,26 @@ var _loadOptions = function _loadOptions(option) {
     if (status >= 200 && status < 400) {
       return response.json();
     } else if (status >= 400 && status < 500) {
-      showAlertDialog('Client Error:', status + ' ' + statusText);
-      fnOnFailed(target, { isLoadingProp: isLoadingProp, isLoadingFailedProp: isLoadingFailedProp });
+      _showMsgErr('Client Error:', status + ' ' + statusText);
+      fnOnFailed(target);
       return null;
     } else if (status >= 500 && status < 600) {
       if (retryServer !== 0) {
         option.retryServer = retryServer - 1;
         target._loadOptionsID = setTimeout(_loadOptions(option), 3E3);
       } else {
-        showAlertDialog('Server Error:', status + ' ' + statusText);
-        fnOnFailed(target, { isLoadingProp: isLoadingProp, isLoadingFailedProp: isLoadingFailedProp });
+        _showMsgErr('Server Error:', status + ' ' + statusText);
+        fnOnFailed(target);
       }
       return null;
     }
   }).then(function (json) {
     if (json) {
-      fnOnCompleted(target, { toStateProp: toStateProp, isLoadingProp: isLoadingProp, json: json, optionJsonProp: optionJsonProp });
+      fnOnCompleted(target, { toStateProp: toStateProp, json: json, optionJsonProp: optionJsonProp });
     }
   }).catch(function (error) {
     if (retryNetwork === 0) {
-      fnOnFailed(target, { error: error, isLoadingProp: isLoadingProp, isLoadingFailedProp: isLoadingFailedProp });
+      fnOnFailed(target, error);
     } else {
       option.retryNetwork = retryNetwork - 1;
       target._loadOptionsID = setTimeout(_loadOptions(option), 2E3);
@@ -72,51 +72,45 @@ var _loadOptions = function _loadOptions(option) {
 
 var _onLoadOptionsCompleted = function _onLoadOptionsCompleted(target, _ref) {
   var toStateProp = _ref.toStateProp,
-      isLoadingProp = _ref.isLoadingProp,
       json = _ref.json,
       optionJsonProp = _ref.optionJsonProp;
 
   if (toStateProp && optionJsonProp) {
     if (!json.dfColumns) {
-      var _target$setState;
-
-      target.setState((_target$setState = {}, (0, _defineProperty3.default)(_target$setState, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState, toStateProp, json[optionJsonProp]), _target$setState));
+      target.setState((0, _defineProperty3.default)({
+        isLoading: false
+      }, toStateProp, json[optionJsonProp]));
     } else {
       var _target$setState2;
 
       target._isDfColumns = true;
-      target.setState((_target$setState2 = {}, (0, _defineProperty3.default)(_target$setState2, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState2, toStateProp, json[optionJsonProp]), (0, _defineProperty3.default)(_target$setState2, 'twoOptions', json.dfColumns), _target$setState2));
+      target.setState((_target$setState2 = {
+        isLoading: false
+      }, (0, _defineProperty3.default)(_target$setState2, toStateProp, json[optionJsonProp]), (0, _defineProperty3.default)(_target$setState2, 'twoOptions', json.dfColumns), _target$setState2));
     }
   }
 };
 
-var _onLoadOptionsFailed = function _onLoadOptionsFailed(target, _ref2) {
-  var _target$setState3;
-
-  var error = _ref2.error,
-      isLoadingProp = _ref2.isLoadingProp,
-      isLoadingFailedProp = _ref2.isLoadingFailedProp;
-
-  target.setState((_target$setState3 = {}, (0, _defineProperty3.default)(_target$setState3, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState3, isLoadingFailedProp, true), _target$setState3));
+var _onLoadOptionsFailed = function _onLoadOptionsFailed(target, error) {
+  target.setState({
+    isLoading: false,
+    isLoadingFailed: true
+  });
   if (error instanceof TypeError) {
-    showAlertDialog(_Msg2.default.Alert.NETWORK_ERROR.caption, _Msg2.default.Alert.NETWORK_ERROR.descr);
+    _showMsgErr(NETWORK_ERROR.caption, NETWORK_ERROR.descr);
   }
 };
 
-var _handlerWithLoadOptions = function _handlerWithLoadOptions(toStateProp) {
-  var isLoadingProp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'isLoading';
-  var isLoadingFailedProp = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'isLoadingFailed';
-  var optionURI = arguments[3];
-  var optionJsonProp = arguments[4];
-
-  if (this.props.optionURI || optionURI) {
-    var _setState;
-
-    var _uri = optionURI ? optionURI : this.props.optionURI,
-        _jsonProp = optionJsonProp ? optionJsonProp : this.props.optionsJsonProp;
-    this.setState((_setState = {}, (0, _defineProperty3.default)(_setState, isLoadingProp, true), (0, _defineProperty3.default)(_setState, isLoadingFailedProp, false), _setState), _loadOptions({
+var _handlerWithLoadOptions = function _handlerWithLoadOptions(toStateProp, optionURI, optionJsonProp) {
+  var _uri = optionURI || this.props.optionURI;
+  if (_uri) {
+    var _jsonProp = optionJsonProp || this.props.optionsJsonProp;
+    this.setState({
+      isLoading: true,
+      isLoadingFailed: false
+    }, _loadOptions({
       target: this,
-      toStateProp: toStateProp, isLoadingProp: isLoadingProp, isLoadingFailedProp: isLoadingFailedProp,
+      toStateProp: toStateProp,
       uri: _uri,
       optionJsonProp: _jsonProp,
       fnOnCompleted: _onLoadOptionsCompleted,

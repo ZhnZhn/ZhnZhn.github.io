@@ -30,8 +30,8 @@ var _crInfo = function _crInfo(caption) {
     description: DESCR,
     frequency: "Daily",
     name: caption,
-    newest_available_date: _DateUtils2.default.getFromDate(0),
-    oldest_available_date: _DateUtils2.default.getFromDate(1)
+    toDate: _DateUtils2.default.getFromDate(0),
+    fromDate: _DateUtils2.default.getFromDate(1)
   };
 };
 
@@ -41,6 +41,7 @@ var _crZhConfig = function _crZhConfig(id, value) {
     dataSource: "Barchart Market Data Solutions",
     id: id,
     key: value,
+    item: value,
     linkFn: "NASDAQ",
     isWithLegend: true,
     legend: _AdapterFn2.default.stockSeriesLegend()

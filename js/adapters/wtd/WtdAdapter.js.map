@@ -1,0 +1,28 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/wtd/WtdAdapter.js"
+ ],
+ "file": "../../../src/adapters/wtd/WtdAdapter.js",
+ "names": [
+  "crData",
+  "fns",
+  "crConfigOption",
+  "WdtAdapter",
+  "toConfig",
+  "json",
+  "option",
+  "title",
+  "subtitle",
+  "value",
+  "dataOption",
+  "config",
+  "stockConfig",
+  "addCaption",
+  "add",
+  "data",
+  "toSeries",
+  "series"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AAEA;;;;;;IAIEA,M,GAEEC,mB,CAFFD,M;IACAE,c,GACED,mB,CADFC,c;;;AAIF,IAAMC,aAAa;AACjBC,UADiB,oBACRC,IADQ,EACFC,MADE,EACK;AAAA,QACZC,KADY,GACeD,MADf,CACZC,KADY;AAAA,QACLC,QADK,GACeF,MADf,CACLE,QADK;AAAA,QACKC,KADL,GACeH,MADf,CACKG,KADL;AAAA,QAElBC,UAFkB,GAELV,OAAOK,IAAP,EAAaC,MAAb,CAFK;AAAA,QAGlBK,MAHkB,GAGT,+BACPC,WADO,CACKH,KADL,EACYC,UADZ,EAEPG,UAFO,CAEIN,KAFJ,EAEWC,QAFX,EAGPM,GAHO,4BAIHZ,eAAe;AACda,YAAML,WAAWK,IADH;AAEdT;AAFc,KAAf,CAJG;AASP;AATO,KAUNF,QAVM,EAHS;;AAcpB,WAAO,EAAEO,cAAF,EAAP;AACD,GAhBgB;AAiBjBK,UAjBiB,oBAiBRX,IAjBQ,EAiBFC,MAjBE,EAiBK;AAAA,+BACDH,WAAWC,QAAX,CAAoBC,IAApB,EAA0BC,MAA1B,CADC;AAAA,QACZK,MADY,wBACZA,MADY;;AAEpB,WAAOA,OAAOM,MAAP,CAAc,CAAd,CAAP;AACD;AApBgB,CAAnB;;kBAuBed,U"
+}

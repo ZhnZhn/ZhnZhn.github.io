@@ -133,8 +133,8 @@ var PanelDataInfo = function (_Component) {
           zhInfo = _props$zhInfo === undefined ? {} : _props$zhInfo,
           onClickChart = _props.onClickChart,
           name = info.name,
-          newest_available_date = info.newest_available_date,
-          oldest_available_date = info.oldest_available_date,
+          toDate = info.toDate,
+          fromDate = info.fromDate,
           frequency = info.frequency,
           database_code = info.database_code,
           dataset_code = info.dataset_code,
@@ -158,15 +158,15 @@ var PanelDataInfo = function (_Component) {
           styleText: S.INFO_TEXT
         }),
         _react2.default.createElement(_InfoPart2.default, {
-          caption: 'Newest Date:',
-          text: newest_available_date,
-          rootStyle: S.INFO_ROOT,
+          caption: 'From Date:',
+          text: fromDate,
           styleCaption: S.INFO_CAPTION,
           styleText: S.INFO_TEXT
         }),
         _react2.default.createElement(_InfoPart2.default, {
-          caption: 'Oldest Date:',
-          text: oldest_available_date,
+          caption: 'To Date:',
+          text: toDate,
+          rootStyle: S.INFO_ROOT,
           styleCaption: S.INFO_CAPTION,
           styleText: S.INFO_TEXT
         }),

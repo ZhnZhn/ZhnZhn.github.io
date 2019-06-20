@@ -2,26 +2,21 @@
 import React from 'react';
 
 const _renderText = (text, classText, styleText, isHtml) => {
-  if (!isHtml){
-    return (
-      <span
+  return !isHtml
+    ? (<span
          className={classText}
          style={styleText}
-      >
+       >
         {text}
-      </span>
+       </span>
+      )
+   :  (<span
+        className={classText}
+        style={styleText}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
     );
-  } else {
-    return (
-      <span
-         className={classText}
-         style={styleText}
-         dangerouslySetInnerHTML={{ __html: text }}
-      >
-      </span>
-    );
-  }
-}
+};
 
 const InfoPart = (props) => {
     const {

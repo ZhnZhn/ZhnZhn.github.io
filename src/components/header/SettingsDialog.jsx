@@ -13,14 +13,14 @@ const S = {
   MODAL: {
     position : 'static',
     width: 380,
-    height: 345,
+    height: 375,
     margin: '70px auto 0px'
   },
   TITLE_API: {
-    width: '80px'
+    width: 80
   },
   TITLE_OPTION: {
-    width: '110px'
+    width: 110
   },
   BT: {
     color: '#232f3b'

@@ -36,6 +36,7 @@ var Quandl = _RouterAdapter2.default.Quandl,
     Crc = _RouterAdapter2.default.Crc,
     Cmc = _RouterAdapter2.default.Cmc,
     Iex = _RouterAdapter2.default.Iex,
+    Wtd = _RouterAdapter2.default.Wtd,
     Fmp = _RouterAdapter2.default.Fmp,
     Bea = _RouterAdapter2.default.Bea,
     Bls = _RouterAdapter2.default.Bls,
@@ -64,6 +65,7 @@ var LoadImpl = {
     fnFetch: _fnFetch.fetchJsonp
   }, Barchart)),
   Iex: (0, _loadItem2.default)((0, _extends3.default)({}, Iex)),
+  Wtd: (0, _loadItem2.default)((0, _extends3.default)({}, Wtd)),
   Fmp: (0, _loadItem2.default)((0, _extends3.default)({}, Fmp)),
   Intrinio: (0, _loadItem2.default)((0, _extends3.default)({}, Intrinio)),
 

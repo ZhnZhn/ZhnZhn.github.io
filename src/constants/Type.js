@@ -81,6 +81,7 @@ export const LoadType = {
   AL_S: 'AL_S',
   AL_I: 'AL_I',
   IEX: 'IEX',
+  WTD: 'WTD',
   FMP: 'FMP',
   QCT: 'QCT',
   DBN: 'DBN',

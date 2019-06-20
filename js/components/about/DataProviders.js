@@ -39,27 +39,27 @@ var OPEN_COLOR_L2 = _Color2.default.GREEN;
 var ST = {
   ROOT_CHILD: {
     borderLeft: '1px dashed ' + _Color2.default.YELLOW,
-    marginLeft: '-5px',
-    paddingLeft: '8px'
+    marginLeft: -5,
+    paddingLeft: 8
   },
   OPEN_CLOSE: {
-    paddingTop: '6px',
+    paddingTop: 6,
     lineHeight: 1.8
   },
   CHILD_STYLE: {
     borderLeft: '1px dotted ' + _Color2.default.GREEN,
-    marginLeft: '2px',
-    paddingLeft: '6px'
+    marginLeft: 2,
+    paddingLeft: 6
   },
   P4: {
-    paddingTop: '4px'
+    paddingTop: 4
   },
   NOTE: {
     padding: '8px 4px 4px 6px',
     lineHeight: 1.4
   },
   MAX_WIDTH: {
-    maxWidth: '450px'
+    maxWidth: 450
   },
   SETTINGS: {
     color: '#607d8b'
@@ -73,7 +73,7 @@ var DataProviders = function DataProviders(_ref) {
     _OpenClose2.default,
     {
       isClose: isClose,
-      caption: 'Data Providers (All 20):',
+      caption: 'Data Providers (All 21):',
       captionStyle: ocCaptionStyle,
       rootStyle: (0, _extends3.default)({}, _About2.default.LINE_HEIGHT, _About2.default.P_BOTTOM),
       childStyle: ST.ROOT_CHILD,
@@ -154,7 +154,7 @@ var DataProviders = function DataProviders(_ref) {
       _react2.default.createElement(
         _OpenClose2.default,
         {
-          caption: '(6) Required API key:',
+          caption: '(7) Required API key:',
           captionStyle: ocCaptionStyle,
           rootStyle: ST.OPEN_CLOSE,
           childStyle: ST.CHILD_STYLE,
@@ -198,6 +198,11 @@ var DataProviders = function DataProviders(_ref) {
             'span',
             { style: _About2.default.PROVIDER },
             _react2.default.createElement(_ProviderLinks2.default.Intrinio, null)
+          ),
+          _react2.default.createElement(
+            'span',
+            { style: _About2.default.PROVIDER },
+            _react2.default.createElement(_ProviderLinks2.default.Wtd, null)
           )
         ),
         _react2.default.createElement(

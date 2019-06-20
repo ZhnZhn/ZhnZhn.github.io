@@ -81,8 +81,8 @@ class PanelDataInfo extends Component {
     const {isShow, info={}, zhInfo={}, onClickChart } = this.props
         , {
              name,
-             newest_available_date,
-             oldest_available_date,
+             toDate,
+             fromDate,
              frequency,
              database_code, dataset_code,
              description
@@ -107,15 +107,15 @@ class PanelDataInfo extends Component {
             styleText={S.INFO_TEXT}
          />
          <InfoPart
-            caption="Newest Date:"
-            text={newest_available_date}
-            rootStyle={S.INFO_ROOT}
+            caption="From Date:"
+            text={fromDate}
             styleCaption={S.INFO_CAPTION}
             styleText={S.INFO_TEXT}
          />
          <InfoPart
-            caption="Oldest Date:"
-            text={oldest_available_date}
+            caption="To Date:"
+            text={toDate}
+            rootStyle={S.INFO_ROOT}
             styleCaption={S.INFO_CAPTION}
             styleText={S.INFO_TEXT}
          />

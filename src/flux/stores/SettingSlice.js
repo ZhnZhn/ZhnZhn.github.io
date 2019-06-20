@@ -3,7 +3,7 @@ import { LoadType as LT } from '../../constants/Type'
 const _settings = {};
 const _withApiKey = [
   LT.B, LT.AL, LT.AL_S, LT.AL_I,
-  LT.BEA, LT.EIA, LT.INTR
+  LT.BEA, LT.EIA, LT.INTR, LT.WTD
 ];
 const _withProxy = [
   LT.FS,
@@ -19,7 +19,8 @@ const _apiTitle = {
   [LT.AL_I]: 'Alpha Vantage',
   [LT.BEA]: 'BEA',
   [LT.EIA]: 'EIA',
-  [LT.INTR]: 'Intrinio'
+  [LT.INTR]: 'Intrinio',
+  [LT.WTD]: 'World Trading Data'
 };
 
 const _isUndef = v => typeof(v) === 'undefined';
@@ -37,9 +38,10 @@ const SettingSlice = {
       key1: this.fSetKey([LT.AL]),
       key2: this.fSetKey([LT.B]),
       key3: this.fSetKey([LT.BEA]),
-      key4: this.fSetKey([LT.INTR]),
-      key5: this.fSetKey([LT.Q]),
-      key6: this.fSetKey([LT.EIA]),
+      key4: this.fSetKey([LT.EIA]),
+      key5: this.fSetKey([LT.INTR]),
+      key6: this.fSetKey([LT.Q]),
+      key7: this.fSetKey([LT.WTD]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this, LT.FAO),
       isAdminMode: this.isAdminMode.bind(this),

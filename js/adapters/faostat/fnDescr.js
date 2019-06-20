@@ -58,11 +58,11 @@ var fnDescr = {
       description: _descr,
       frequency: "Annual",
       name: title + ': ' + subtitle,
-      newest_available_date: _dateNewest,
-      oldest_available_date: _dateOldest
+      toDate: _dateNewest,
+      fromDate: _dateOldest
     };
   }
 };
 
 exports.default = fnDescr;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\faostat\fnDescr.js.map
+//# sourceMappingURL=fnDescr.js.map
