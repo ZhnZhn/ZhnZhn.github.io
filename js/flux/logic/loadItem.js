@@ -61,12 +61,15 @@ var _fetchToChartComp = function _fetchToChartComp(objImpl, _ref2) {
 var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, onFailed) {
   var fnFetch = objImpl.fnFetch,
       api = objImpl.api,
+      _ref3 = api || {},
+      getLimitRemaiming = _ref3.getLimitRemaiming,
       optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri: api.getRequestUrl(option),
     option: option,
     optionFetch: optionFetch,
+    getLimitRemaiming: getLimitRemaiming,
     onCheckResponse: api.checkResponse,
     onFetch: _fetchToChartComp.bind(null, objImpl),
     onCompleted: onCompleted,
@@ -78,12 +81,15 @@ var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, o
 var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
   var fnFetch = objImpl.fnFetch,
       api = objImpl.api,
+      _ref4 = api || {},
+      getLimitRemaiming = _ref4.getLimitRemaiming,
       optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri: api.getRequestUrl(option),
     option: option,
     optionFetch: optionFetch,
+    getLimitRemaiming: getLimitRemaiming,
     onCheckResponse: api.checkResponse,
     onFetch: _fetchToChart.bind(null, objImpl),
     onCompleted: onAdded,
@@ -92,20 +98,20 @@ var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
   });
 };
 
-var _fetchToChart = function _fetchToChart(objImpl, _ref3) {
-  var json = _ref3.json,
-      option = _ref3.option,
-      onCompleted = _ref3.onCompleted;
+var _fetchToChart = function _fetchToChart(objImpl, _ref5) {
+  var json = _ref5.json,
+      option = _ref5.option,
+      onCompleted = _ref5.onCompleted;
   var adapter = objImpl.adapter,
       itemCaption = option.itemCaption,
       value = option.value,
       hasSecondYAxis = option.hasSecondYAxis,
       chart = _ChartStore2.default.getActiveChart(),
       series = adapter.toSeries(json, option, chart),
-      _ref4 = series || {},
-      zhItemCaption = _ref4.zhItemCaption,
-      color = _ref4.color,
-      zhColor = _ref4.zhColor;
+      _ref6 = series || {},
+      zhItemCaption = _ref6.zhItemCaption,
+      color = _ref6.color,
+      zhColor = _ref6.zhColor;
 
 
   _ChartFn2.default.addSeriaWithRenderLabel({
@@ -117,8 +123,8 @@ var _fetchToChart = function _fetchToChart(objImpl, _ref3) {
   onCompleted(option);
 };
 
-var _isAddCategoryToSpline = function _isAddCategoryToSpline(_ref5) {
-  var seriaType = _ref5.seriaType;
+var _isAddCategoryToSpline = function _isAddCategoryToSpline(_ref7) {
+  var seriaType = _ref7.seriaType;
 
   var chart = _ChartStore2.default.getActiveChart();
   return seriaType && seriaType.indexOf('_SET') !== -1 && chart && _isArr(chart.xAxis) && !_isArr(chart.xAxis[0].categories);

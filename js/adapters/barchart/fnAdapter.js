@@ -65,13 +65,12 @@ var fnAdapter = {
     return 'B/' + value;
   },
 
-  crData: function crData(json, option, chartId) {
+  crData: function crData(json, option) {
     var isNotZoomToMinMax = option.isNotZoomToMinMax,
         isDrawDeltaExtrems = option.isDrawDeltaExtrems;
 
-    return toSeriesData(chartId, json.results, {
+    return toSeriesData(json.results, {
       pnDate: 'tradingDay',
-      chartId: chartId,
       isNotZoomToMinMax: isNotZoomToMinMax,
       isDrawDeltaExtrems: isDrawDeltaExtrems
     });

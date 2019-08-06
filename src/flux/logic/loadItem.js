@@ -13,7 +13,7 @@ const ALERT = {
 };
 
 const _isArr = Array.isArray;
-const _isFn = fn => typeof(fn) === 'function';
+const _isFn = fn => typeof fn === 'function';
 
 const _crOptionFetch = ({ optionFetch }, option) => _isFn(optionFetch)
   ? optionFetch(option)
@@ -35,12 +35,14 @@ const _fetchToChartComp = function(objImpl ,{json, option, onCompleted}){
 
 const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
   const { fnFetch, api } = objImpl
-      , optionFetch = _crOptionFetch(objImpl, option);
+  , { getLimitRemaiming } = api || {}
+  , optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri : api.getRequestUrl(option),
     option : option,
     optionFetch: optionFetch,
+    getLimitRemaiming,
     onCheckResponse : api.checkResponse,
     onFetch : _fetchToChartComp.bind(null, objImpl),
     onCompleted : onCompleted,
@@ -51,18 +53,20 @@ const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
 
 const _loadToChart = function(objImpl, option, onAdded, onFailed){
   const { fnFetch, api } = objImpl
-      , optionFetch = _crOptionFetch(objImpl, option);
+  , { getLimitRemaiming } = api || {}
+  , optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
     uri : api.getRequestUrl(option),
     option : option,
     optionFetch: optionFetch,
+    getLimitRemaiming,
     onCheckResponse : api.checkResponse,
     onFetch : _fetchToChart.bind(null, objImpl),
     onCompleted : onAdded,
     onCatch : fnCatch,
     onFailed : onFailed
   })
-}
+};
 
 const _fetchToChart = function(objImpl, { json, option, onCompleted }){
   const { adapter } = objImpl

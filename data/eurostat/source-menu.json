@@ -43,7 +43,9 @@
       "caption" : "Finance",
       "items" : [
         { "id" : "ES_F_LRATE" },
-        { "id" : "ES_F_SRATE" }
+        { "id" : "ES_F_SRATE" },
+        { "id" : "ES_F_HSRATE"}
+
       ]
     },{
       "caption" : "Agriculture",
@@ -679,6 +681,22 @@
         "dfProps": {
           "dfTable": "irt_st_m",
           "dfParams": [ "geo" , "intrt" ]
+        }
+      }
+    },
+    "ES_F_HSRATE" : {
+      "type" : "ES_F_HSRATE",
+      "menuTitle" : "Household Saving Rates",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps":[
+          [ "s_adj","Adj","adjust-2.json"]
+        ],
+        "dfProps": {
+          "mapFrequency" : "Q",
+          "mapDateDf" : 1,
+          "dfTable": "teina500"
         }
       }
     },

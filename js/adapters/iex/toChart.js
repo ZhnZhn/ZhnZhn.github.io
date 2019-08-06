@@ -56,7 +56,7 @@ var toChart = {
         isNotZoomToMinMax = option.isNotZoomToMinMax,
         isDrawDeltaExtrems = option.isDrawDeltaExtrems,
         _id = _crId(option),
-        dataOption = toSeriesData(_id, json, {
+        dataOption = toSeriesData(json, {
       isNotZoomToMinMax: isNotZoomToMinMax,
       isDrawDeltaExtrems: isDrawDeltaExtrems
     }),
@@ -72,7 +72,7 @@ var toChart = {
   },
   toSeries: function toSeries(json, option) {
     var _id = _crId(option),
-        _toSeriesData = toSeriesData(_id, json, {
+        _toSeriesData = toSeriesData(json, {
       isAllSeries: false
     }),
         data = _toSeriesData.data;

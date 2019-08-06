@@ -1,19 +1,22 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AdapterFn = require("../AdapterFn");
+var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
+var _AdapterStockFn = require('../AdapterStockFn');
+
+var _AdapterStockFn2 = _interopRequireDefault(_AdapterStockFn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ymdtToUTC = _AdapterFn2.default.ymdtToUTC,
-    volumeColumnPoint = _AdapterFn2.default.volumeColumnPoint,
-    athPoint = _AdapterFn2.default.athPoint,
+var toFloatOrNull = _AdapterFn2.default.toFloatOrNull,
     valueMoving = _AdapterFn2.default.valueMoving;
+var toSeriesData = _AdapterStockFn2.default.toSeriesData;
 
 
 var _crZhConfig = function _crZhConfig(_ref) {
@@ -43,19 +46,23 @@ var _crInfo = function _crInfo(_ref2) {
   };
 };
 
-var _parseToFloat = function _parseToFloat(item) {
-  var open = item.open,
-      close = item.close,
-      high = item.high,
-      low = item.low,
-      volume = item.volume;
+var _crPoint = function _crPoint() {
+  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      open = _ref3.open,
+      close = _ref3.close,
+      high = _ref3.high,
+      low = _ref3.low,
+      volume = _ref3.volume;
 
-  item.open = parseFloat(open);
-  item.close = parseFloat(close);
-  item.high = parseFloat(high);
-  item.low = parseFloat(low);
-  item.volume = parseFloat(volume);
-  return item;
+  var date = arguments[1];
+  return {
+    date: date,
+    open: toFloatOrNull(open),
+    close: toFloatOrNull(close),
+    high: toFloatOrNull(high),
+    low: toFloatOrNull(low),
+    volume: toFloatOrNull(volume)
+  };
 };
 
 var fnAdapter = {
@@ -65,72 +72,23 @@ var fnAdapter = {
         isDrawDeltaExtrems = option.isDrawDeltaExtrems,
         history = json.history,
         keys = Object.keys(history),
-        data = [],
-        dataHigh = [],
-        dataLow = [],
-        dataOpen = [],
-        dataVolumeColumn = [],
-        dataVolume = [],
-        dataATH = [],
+        arrPoint = [],
         max = keys.length;
 
-    var minClose = Number.POSITIVE_INFINITY,
-        maxClose = Number.NEGATIVE_INFINITY,
-        _prevClose = void 0,
-        i = 0;
+    var i = 0;
     for (i; i < max; i++) {
-      var _dateKey = keys[i],
-          _item = history[_dateKey],
-          _parseToFloat2 = _parseToFloat(_item),
-          open = _parseToFloat2.open,
-          close = _parseToFloat2.close,
-          high = _parseToFloat2.high,
-          low = _parseToFloat2.low,
-          volume = _parseToFloat2.volume,
-          date = ymdtToUTC(_dateKey);
-
-      data.push([date, close]);
-      dataHigh.push([date, high]);
-      dataLow.push([date, low]);
-      dataOpen.push([date, open]);
-      dataVolume.push([date, volume]);
-      dataVolumeColumn.push(volumeColumnPoint({
-        open: open, close: close, volume: volume, date: date,
-        option: { _high: high, _low: low }
-      }));
-      if (typeof _prevClose !== 'undefined') {
-        dataATH.push(athPoint({
-          date: date, prevClose: _prevClose, open: open
-        }));
-      }
-      _prevClose = close;
-
-      if (minClose > close) {
-        minClose = close;
-      }
-      if (maxClose < close) {
-        maxClose = close;
-      }
+      var _dateKey = keys[i];
+      arrPoint.push(_crPoint(history[_dateKey], _dateKey));
     }
-
-    return {
+    return toSeriesData(arrPoint, {
       isNotZoomToMinMax: isNotZoomToMinMax,
-      isDrawDeltaExtrems: isDrawDeltaExtrems,
-      data: data,
-      dataHigh: dataHigh,
-      dataLow: dataLow,
-      dataOpen: dataOpen,
-      dataVolumeColumn: dataVolumeColumn,
-      dataVolume: dataVolume,
-      dataATH: dataATH,
-      minClose: minClose,
-      maxClose: maxClose
-    };
+      isDrawDeltaExtrems: isDrawDeltaExtrems
+    });
   },
 
-  crConfigOption: function crConfigOption(_ref3) {
-    var data = _ref3.data,
-        option = _ref3.option;
+  crConfigOption: function crConfigOption(_ref4) {
+    var data = _ref4.data,
+        option = _ref4.option;
     return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),

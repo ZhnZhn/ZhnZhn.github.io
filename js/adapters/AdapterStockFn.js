@@ -24,11 +24,11 @@ var ymdToUTC = _AdapterFn2.default.ymdToUTC,
 
 
 var AdapterStockFn = {
-  toSeriesData: function toSeriesData(id) {
-    var arr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-    var option = arguments[2];
+  toSeriesData: function toSeriesData() {
+    var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var seriaOption = arguments[1];
 
-    var _ref = option || {},
+    var _ref = seriaOption || {},
         _ref$isAllSeries = _ref.isAllSeries,
         isAllSeries = _ref$isAllSeries === undefined ? true : _ref$isAllSeries,
         _ref$pnDate = _ref.pnDate,

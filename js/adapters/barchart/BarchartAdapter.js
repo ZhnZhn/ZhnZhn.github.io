@@ -46,7 +46,7 @@ var BarchartAdapter = {
     var option = arguments[1];
     var parentId = option.parentId,
         _id = parentId + '_' + crChartId(option),
-        _toSeriesData = toSeriesData(_id, json.results, {
+        _toSeriesData = toSeriesData(json.results, {
       isAllSeries: false,
       pnDate: 'tradingDay'
     }),

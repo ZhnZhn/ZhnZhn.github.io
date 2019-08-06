@@ -16,8 +16,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MIN_YEAR = 1990;
 
+var _isNaN = Number.isNaN || isNaN;
+var _isStr = function _isStr(str) {
+	return typeof str === 'string';
+};
 var _pad2 = function _pad2(n) {
 	return n < 10 ? '0' + n : '' + n;
+};
+
+var _isLikelyQuarter = function _isLikelyQuarter(str) {
+	return _isStr(str) && str[0].toUpperCase() === 'Q';
 };
 
 var DateUtils = {
@@ -119,9 +127,17 @@ var DateUtils = {
 		if (_len === 3) {
 			return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _arr[2]);
 		} else if (_len === 2 && _arr[1] !== '') {
-			var _m = parseInt(_arr[1], 10),
-			    _d = new Date(_arr[0], _m, 0).getDate();
-			return Date.UTC(_arr[0], _m - 1, _d);
+			var _m = parseInt(_arr[1], 10);
+			if (!_isNaN(_m)) {
+				var _d = new Date(_arr[0], _m, 0).getDate();
+				return Date.UTC(_arr[0], _m - 1, _d);
+				// YYYY-Q format
+			} else if (_isLikelyQuarter(_arr[1])) {
+				var _q = parseInt(_arr[1][1], 10);
+				return !_isNaN(_q) ? Date.UTC(_arr[0], _q * 3 - 1, 30) : _q;
+			} else {
+				return _m;
+			}
 		} else if (_len === 1) {
 			return Date.UTC(_arr[0], 11, 31);
 		}

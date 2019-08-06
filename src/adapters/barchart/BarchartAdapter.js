@@ -7,7 +7,7 @@ const {
   crTitle,
   crChartId,
   crData,
-  crConfigOption,  
+  crConfigOption,
   toSeriesData
 } = fnAdapter;
 
@@ -34,7 +34,7 @@ const BarchartAdapter = {
   toSeries(json={}, option) {
     const { parentId } = option
         , _id = `${parentId}_${crChartId(option)}`
-        , { data } = toSeriesData(_id, json.results, {
+        , { data } = toSeriesData(json.results, {
              isAllSeries: false,
              pnDate: 'tradingDay'
           });

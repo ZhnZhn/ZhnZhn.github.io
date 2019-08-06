@@ -36,9 +36,9 @@ const toChart = {
       isDrawDeltaExtrems
     } = option
     , _id = _crId(option)
-    , dataOption = toSeriesData(_id, json, {
+    , dataOption = toSeriesData(json, {
         isNotZoomToMinMax,
-        isDrawDeltaExtrems 
+        isDrawDeltaExtrems
       })
     , { data, dataMfi } = dataOption
     , config = Builder()
@@ -57,7 +57,7 @@ const toChart = {
 
   toSeries(json, option){
     const _id = _crId(option)
-        , { data } = toSeriesData(_id, json, {
+        , { data } = toSeriesData(json, {
              isAllSeries: false,
           });
     return Builder()

@@ -43,14 +43,13 @@ const fnAdapter = {
     return `B/${value}`;
   },
 
-  crData: (json, option, chartId) => {
+  crData: (json, option) => {
     const {
       isNotZoomToMinMax,
       isDrawDeltaExtrems
     } = option;
-    return toSeriesData(chartId, json.results, {
+    return toSeriesData(json.results, {
        pnDate: 'tradingDay',
-       chartId,
        isNotZoomToMinMax,
        isDrawDeltaExtrems
     });

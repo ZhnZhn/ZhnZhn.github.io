@@ -26,6 +26,7 @@ const {
   mlsToDmy
 } = dt;
 
+const _isNaN = Number && Number.isNaN || isNaN;
 const _isArr = Array.isArray;
 const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
@@ -57,7 +58,7 @@ const _getValue = (point) => {
   } else {
     return point
       && point.y != null
-      && !Number.isNaN(point.y)
+      && !_isNaN(point.y)
         ? point.y
         : '0.0';
   }
@@ -131,8 +132,11 @@ const AdapterFn = {
   isNumberOrNull: v => (typeof v === 'number' && !isNaN(v))
      || v === null
   ,
-
   isYNumber: _fIsNumber('y'),
+  toFloatOrNull: str => {
+    const _v = parseFloat(str);
+    return _isNaN(_v) ? null : _v;
+  },
 
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),

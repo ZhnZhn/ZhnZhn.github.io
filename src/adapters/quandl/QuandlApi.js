@@ -3,6 +3,8 @@ const C = {
   ROOT_URL: "https://www.quandl.com/api/v3/datasets/",
   TABLE_URL: "https://www.quandl.com/api/v3/datatables/",
 
+  LIMIT_REMAINING: 'X-RateLimit-Remaining',
+
   REQUEST_ERROR: 'Request Error',
   DATASET_EMPTY: 'Dataset Empty'
 }
@@ -76,12 +78,15 @@ const QuandlApi = {
       : _crTableUrl(option);
   },
 
+  // headers && headers.get existed
+  getLimitRemaiming: headers => headers.get(C.LIMIT_REMAINING),          
+
   checkResponse(json) {
     const {
-            quandl_error
-            , dataset
-            , datatable
-          } = json;
+      quandl_error
+      , dataset
+      , datatable
+    } = json;
 
     _checkErr(quandl_error)
     _checkDataEmpty(dataset, datatable)

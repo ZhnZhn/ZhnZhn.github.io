@@ -7,14 +7,14 @@ const {
 } = AdapterFn;
 
 const AdapterStockFn = {
-  toSeriesData: (id, arr=[], option) => {
+  toSeriesData: (arr=[], seriaOption) => {
     const {
             isAllSeries=true,
             pnDate='date',
             ...restOption
             //isNotZoomToMinMax,
             //isDrawDeltaExtrems
-          } = option || {};
+          } = seriaOption || {};
     const data = []
         , dataOpen = [], dataHigh = [], dataLow = []
         , dataVolume = [], dataVolumeColumn = []

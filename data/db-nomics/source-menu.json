@@ -1,6 +1,13 @@
 {
   "menu": [
     {
+      "caption": "BIS",
+      "items": [
+        { "id": "DBN_BIS_DSRP" },
+        { "id": "DBN_BIS_PPSS" }
+      ]
+    },
+    {
       "caption": "ECB",
       "items": [
         { "id": "DBN_ECB_CURRENCY" },
@@ -12,7 +19,9 @@
       "items": [
         { "id": "DBN_FED_H15" },
         { "id": "DBN_FED_CPRATES" },
-        { "id": "DBN_FED_IPMAJOR" }
+        { "id": "DBN_FED_IPMAJOR" },
+        { "id": "DBN_FED_CAP" },
+        { "id": "DBN_FED_CAPUTL"}
       ]
     },{
       "caption": "NBB",
@@ -91,6 +100,48 @@
         ]
       }
     },
+    "DBN_BIS_DSRP": {
+      "type": "DBN_BIS_DSRP",
+      "menuTitle" : "Debt Service Ratio, Q",
+      "chartContainerCaption" : "DB Nomics: BIS: Debt Service Ratio",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Country", "bis-dsrp-country" ],
+          [ "Borrows", "bis-dsrp-borrows" ]
+        ],
+        "dataSource" : "DB Nomics: BIS: Debt Service Ratio",
+        "dfProps": {
+          "dfProvider": "BIS",
+          "dfCode": "DSRP",
+          "dfFnUrl": "s12",
+          "dfPrefix": "Q"
+        }
+      }
+    },
+    "DBN_BIS_PPSS": {
+      "type": "DBN_BIS_PPSS",
+      "menuTitle" : "Selected Property Prices, Q",
+      "chartContainerCaption" : "DB Nomics: BIS: Selected Property Prices",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Ref. Area", "bis-ppss-ref-area" ],
+          [ "Index", "bis-ppss-index" ]
+        ],
+        "dataSource" : "DB Nomics: BIS: Selected Property Prices",
+        "dfProps": {
+          "dfProvider": "BIS",
+          "dfCode": "PP-SS",
+          "dfFnUrl": "s12",
+          "dfPrefix": "Q",
+          "dfSufix": "628"
+        }
+      }
+    },
+
     "DBN_ECB_CURRENCY": {
       "type" : "DBN_ECB_CURRENCY",
       "menuTitle" : "Exchange Rates, D",
@@ -379,6 +430,46 @@
         "dfProps": {
           "dfProvider": "FED",
           "dfCode": "G17_IP_MAJOR_INDUSTRY_GROUPS",
+          "dfFnUrl": "s123"
+        }
+      }
+    },
+    "DBN_FED_CAP": {
+      "type": "DBN_FED_CAP",
+      "menuTitle" : "Industrial Capacity",
+      "chartContainerCaption" : "DB Nomics: The Fed: Industrial Capacity",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Frequency", "fed-freq" ],
+          [ "Industry", "fed-industry-major" ],
+          [ "Adjustment", "fed-adjustment-sa" ]
+        ],
+        "dataSource" : "DB Nomics: The Fed: Industrial Capacity",
+        "dfProps": {
+          "dfProvider": "FED",
+          "dfCode": "G17_CAP",
+          "dfFnUrl": "s123"
+        }
+      }
+    },
+    "DBN_FED_CAPUTL": {
+      "type": "DBN_FED_CAPUTL",
+      "menuTitle" : "Capacity Utilization",
+      "chartContainerCaption" : "DB Nomics: The Fed: Capacity Utilization",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Frequency", "fed-freq" ],
+          [ "Industry", "fed-industry-major" ],
+          [ "Adjustment", "fed-adjustment-sa" ]
+        ],
+        "dataSource" : "DB Nomics: The Fed: Capacity Utilization",
+        "dfProps": {
+          "dfProvider": "FED",
+          "dfCode": "G17_CAPUTL",
           "dfFnUrl": "s123"
         }
       }

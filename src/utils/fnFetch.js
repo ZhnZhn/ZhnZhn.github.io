@@ -1,7 +1,7 @@
 import fetchJsonpImpl from 'fetch-jsonp'
 
 const C = {
-  LIMIT_REMAINING: 'X-RateLimit-Remaining',
+  //LIMIT_REMAINING: 'X-RateLimit-Remaining',
   REQ_ERR: 'Request Error',
   RESP_ERR: 'Response Error',
 
@@ -27,14 +27,19 @@ const _throwIfNotStatus = (errStatus, status, msg) => {
   }
 };
 
-const _promiseAll = (res, propName, status) => {
-  const headers = res.headers
-  , _limitRemaining = headers && _isFn(headers.get)
-      ? headers.get(C.LIMIT_REMAINING)
-      : undefined;
+const _promiseAll = ({
+  response, propName, status,
+  getLimitRemaiming
+}) => {
+  const headers = response.headers
+  , _limitRemaining = headers
+       && _isFn(headers.get)
+       && _isFn(getLimitRemaiming)
+        ? getLimitRemaiming(headers)
+        : void 0;
   return Promise.all([
     Promise.resolve(_limitRemaining),
-    res[propName](),
+    response[propName](),
     Promise.resolve(status)
   ]);
 };
@@ -42,29 +47,33 @@ const _promiseAll = (res, propName, status) => {
 const _fFetch = (propName, type) => function({
    uri, option={},
    optionFetch,
+   getLimitRemaiming,
    onCheckResponse,
    onFetch, onCompleted,
    onFailed, onCatch
  }){
-  const _fnFetch = (type !== 'jsonp')
-          ? fetch
-          : fetchJsonpImpl;
+  const _fnFetch = type !== 'jsonp'
+    ? fetch
+    : fetchJsonpImpl;
   _fnFetch(uri, optionFetch)
     .then(response => {
       const { status, statusText, ok } = response
           , { resErrStatus} = option;
       if ((status>=200 && status<400) || ok) {
-         return _promiseAll(response, propName);
+         return _promiseAll({
+           response, propName,
+           getLimitRemaiming
+         });
       } else if (status === 400) {
          _throwIfNotStatus(resErrStatus, status, C.MSG_400)
-         return _promiseAll(response, propName, status);
+         return _promiseAll({ response, propName, status });
       } else if (status === 404) {
          throw _crErr(C.MSG_404);
       } else if (status === 429) {
          throw _crErr(C.MSG_429);
       } else if (status>400 && status<500){
          _throwIfNotStatus(resErrStatus, status, `${status}: ${statusText}`)
-         return _promiseAll(response, propName, status);
+         return _promiseAll({ response, propName, status });
       } else if (status === 503) {
          throw _crErr(C.MSG_503);
       } else if (status>=500 && status<600){

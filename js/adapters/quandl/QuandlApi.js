@@ -8,6 +8,8 @@ var C = {
   ROOT_URL: "https://www.quandl.com/api/v3/datasets/",
   TABLE_URL: "https://www.quandl.com/api/v3/datatables/",
 
+  LIMIT_REMAINING: 'X-RateLimit-Remaining',
+
   REQUEST_ERROR: 'Request Error',
   DATASET_EMPTY: 'Dataset Empty'
 };
@@ -81,6 +83,13 @@ var QuandlApi = {
 
     return !option.dfTable ? _crSetUrl(option) : _crTableUrl(option);
   },
+
+
+  // headers && headers.get existed
+  getLimitRemaiming: function getLimitRemaiming(headers) {
+    return headers.get(C.LIMIT_REMAINING);
+  },
+
   checkResponse: function checkResponse(json) {
     var quandl_error = json.quandl_error,
         dataset = json.dataset,

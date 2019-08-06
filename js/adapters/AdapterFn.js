@@ -45,6 +45,7 @@ var ymdToUTC = _DateUtils2.default.ymdToUTC,
     mlsToDmy = _DateUtils2.default.mlsToDmy;
 
 
+var _isNaN = Number && Number.isNaN || isNaN;
 var _isArr = Array.isArray;
 var _fIsNumber = function _fIsNumber(pn) {
   return function (p) {
@@ -71,7 +72,7 @@ var _getValue = function _getValue(point) {
   if (_isArr(point)) {
     return point[1] != null ? point[1] : '0.0';
   } else {
-    return point && point.y != null && !Number.isNaN(point.y) ? point.y : '0.0';
+    return point && point.y != null && !_isNaN(point.y) ? point.y : '0.0';
   }
 };
 
@@ -149,6 +150,10 @@ var AdapterFn = {
   },
 
   isYNumber: _fIsNumber('y'),
+  toFloatOrNull: function toFloatOrNull(str) {
+    var _v = parseFloat(str);
+    return _isNaN(_v) ? null : _v;
+  },
 
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
