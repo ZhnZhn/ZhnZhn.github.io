@@ -188,7 +188,7 @@
       "dialogProps" : {
         "selectProps": [
           [ "Country", "ecb-countries"],
-          [ "Index", "ecb-car-registration" ]
+          [ "Value", "ecb-car-registration" ]
         ],
         "dataSource" : "DB Nomics: ECB: Car registration (STS), WSA, M",
         "dfProps": {

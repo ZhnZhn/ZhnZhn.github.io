@@ -4,28 +4,30 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var fnSelector = {
-  _getDocs: function _getDocs(json) {
-    return json.series.docs;
-  },
-  _getPropBy: function _getPropBy(json, propName) {
-    return fnSelector._getDocs(json)[0][propName] || '';
-  },
+var _getDocs = function _getDocs(json) {
+  return ((json || {}).series || {}).docs || {};
+};
+var _getByPropName = function _getByPropName(json, propName) {
+  return _getDocs(json)[0][propName] || '';
+};
 
+var _fGetByPropName = function _fGetByPropName(propName) {
+  return function (json) {
+    return _getByPropName(json, propName);
+  };
+};
+
+var fnSelector = {
   getPeriodAndValue: function getPeriodAndValue(json) {
-    var docs = fnSelector._getDocs(json);
     return {
-      period: docs[0].period,
-      value: docs[0].value
+      period: _getByPropName(json, 'period'),
+      value: _getByPropName(json, 'value')
     };
   },
 
-  getTitle: function getTitle(json) {
-    return fnSelector._getPropBy(json, 'dataset_name');
-  },
-  getSubtitle: function getSubtitle(json) {
-    return fnSelector._getPropBy(json, 'series_name');
-  }
+  getTitle: _fGetByPropName('dataset_name'),
+  getSubtitle: _fGetByPropName('series_name'),
+  getInexedAt: _fGetByPropName('indexed_at')
 };
 
 exports.default = fnSelector;

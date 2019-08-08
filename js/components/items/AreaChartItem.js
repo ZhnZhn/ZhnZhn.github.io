@@ -219,7 +219,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
           isShowAbs = _state.isShowAbs,
           miniTitles = _state.miniTitles,
           isCaption = _state.isCaption;
-
+      //console.log(config)
 
       return _react2.default.createElement(
         'div',

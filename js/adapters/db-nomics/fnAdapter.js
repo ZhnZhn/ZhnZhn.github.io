@@ -20,7 +20,8 @@ var crError = _AdapterFn2.default.crError,
     valueMoving = _AdapterFn2.default.valueMoving;
 var getPeriodAndValue = _fnSelector2.default.getPeriodAndValue,
     getTitle = _fnSelector2.default.getTitle,
-    getSubtitle = _fnSelector2.default.getSubtitle;
+    getSubtitle = _fnSelector2.default.getSubtitle,
+    getInexedAt = _fnSelector2.default.getInexedAt;
 
 
 var C = {
@@ -39,9 +40,13 @@ var _getId = function _getId(_ref) {
 };
 
 var _crItemLink = crItemLink.bind(null, 'DB Nomics Chart');
-var _crDescr = function _crDescr(option) {
+var _crUpdatedDate = function _crUpdatedDate(json) {
+  var _date = getInexedAt(json).split('T')[0];
+  return _date ? '<p>Updated by DBnomics on ' + _date + '</p>' : '';
+};
+var _crDescr = function _crDescr(json, option) {
   var _id = _getId(option);
-  return '<p>SeriaId: ' + _id + '</p>\n   ' + _crItemLink(C.CHART_URL + '/' + _id);
+  return '<p>SeriaId: ' + _id + '</p>\n   ' + _crUpdatedDate(json) + '\n   ' + _crItemLink(C.CHART_URL + '/' + _id);
 };
 
 var _crZhConfig = function _crZhConfig(_ref2) {
@@ -59,7 +64,7 @@ var _crZhConfig = function _crZhConfig(_ref2) {
 var _crInfo = function _crInfo(json, option) {
   return {
     name: getSubtitle(json),
-    description: _crDescr(option)
+    description: _crDescr(json, option)
   };
 };
 

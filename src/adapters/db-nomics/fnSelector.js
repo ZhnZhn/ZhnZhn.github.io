@@ -1,21 +1,21 @@
 
-const fnSelector = {
-  _getDocs: json => json.series.docs,
-  _getPropBy: (json, propName) => fnSelector
-     ._getDocs(json)[0][propName] || '',
+const _getDocs = json =>
+  ((json || {}).series || {}).docs || {};
+const _getByPropName = (json, propName) =>
+  _getDocs(json)[0][propName] || '';
 
-  getPeriodAndValue: json => {
-    const docs = fnSelector._getDocs(json);
-    return {
-      period: docs[0].period,
-      value: docs[0].value
-    };
-  },
+const _fGetByPropName = propName =>
+  json => _getByPropName(json, propName);
+
+const fnSelector = {
+  getPeriodAndValue: json => ({
+    period: _getByPropName(json, 'period'),
+    value: _getByPropName(json, 'value')
+  }),
   
-  getTitle: json => fnSelector
-    ._getPropBy(json, 'dataset_name'),
-  getSubtitle: json => fnSelector
-    ._getPropBy(json, 'series_name')
+  getTitle: _fGetByPropName('dataset_name'),
+  getSubtitle: _fGetByPropName('series_name'),
+  getInexedAt: _fGetByPropName('indexed_at')
 };
 
 export default fnSelector

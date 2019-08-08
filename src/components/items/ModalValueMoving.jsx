@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import DateUtils from '../../utils/DateUtils'
+import formatAllNumber from '../../utils/formatAllNumber'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SpanValue from '../zhn-span/SpanValue'
@@ -64,7 +65,7 @@ const _isNotAdminMode = (isAdminMode, isDenyToChange) => {
 
 const RowValueDate = ({ value, date }) => (
   <div style={S.ROW}>
-    <SpanValue value={value} />
+    <SpanValue value={formatAllNumber(value)} />
     <SpanDate date={date} style={S.DATE} />
   </div>
 );

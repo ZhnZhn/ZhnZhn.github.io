@@ -1,15 +1,36 @@
 import Big from 'big.js'
 
-const MIN_STR = String(Number.MIN_SAFE_INTEGER);
+import { Direction as D } from '../../../constants/Type'
 
-const fCompareBy = (propName) => (aC, bC) => {
-  const aVm = aC.valueMoving || {}
-      , a = Big(aVm[propName] || MIN_STR)
-      , bVm = bC.valueMoving || {}
-      , b = Big(bVm[propName] || MIN_STR);
-  if (a.gt(b)) return 1;
-  if (b.gt(a)) return -1;
-  return 0;
-}
+const MIN_STR = String(Number.MIN_SAFE_INTEGER);
+const ABS_PROP = 'Abs';
+
+const _getValueMoving = item =>
+  (item || {}).valueMoving || {};
+
+const _crBigForValue = (item, propName) =>
+  Big(_getValueMoving(item)[propName] || MIN_STR);
+
+const _crBigForAbsValue = (item, propName) => {
+  const _b = _crBigForValue(item, propName)
+  , { direction } = _getValueMoving(item);
+  return direction === D.DOWN
+    ? _b.times(-1)
+    : _b;
+};
+
+const fCompareBy = (propName) => {
+  const _crBig = propName.indexOf(ABS_PROP) !== -1
+    ? _crBigForAbsValue
+    : _crBigForValue;
+  return (aC, bC) => {
+    const a = _crBig(aC, propName)
+    , b = _crBig(bC, propName);
+
+    if (a.gt(b)) return 1;
+    if (b.gt(a)) return -1;
+    return 0;
+  }
+};
 
 export default fCompareBy

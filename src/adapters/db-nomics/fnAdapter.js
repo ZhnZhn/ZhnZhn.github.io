@@ -10,7 +10,8 @@ const {
 const {
   getPeriodAndValue,
   getTitle,
-  getSubtitle
+  getSubtitle,
+  getInexedAt
  } = fnSelector;
 
 const C = {
@@ -25,9 +26,16 @@ const _getId = ({ dfProvider, dfCode, seriaId }) => _isId(seriaId)
 
 const _crItemLink = crItemLink
   .bind(null, 'DB Nomics Chart');
-const _crDescr = (option) => {
+const _crUpdatedDate = json => {
+  const _date = getInexedAt(json).split('T')[0]
+  return _date
+    ? `<p>Updated by DBnomics on ${_date}</p>`
+    : '';
+};
+const _crDescr = (json, option) => {
   const _id = _getId(option);
   return`<p>SeriaId: ${_id}</p>
+   ${_crUpdatedDate(json)}
    ${_crItemLink(C.CHART_URL+'/'+_id)}`;
 };
 
@@ -40,7 +48,7 @@ const _crZhConfig = ({ dataSource, _itemKey, seriaId }) => ({
 });
 const _crInfo = (json, option) => ({
   name: getSubtitle(json),
-  description: _crDescr(option)
+  description: _crDescr(json, option)
 })
 
 const _isNumber = n => typeof(n) === 'number'

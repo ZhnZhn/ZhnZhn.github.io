@@ -332,7 +332,7 @@ class AreaChartItem extends Component {
             miniTitles,
             isCaption
         } = this.state;
-
+    //console.log(config)
     return (
       <div className={CL.ROOT}>
          { isCaption && <Header

@@ -77,13 +77,13 @@ var crModelMore = function crModelMore(_ref) {
       isClose: true
     }, {
       cn: CL_ROW,
-      name: 'Abs Delta',
-      onClick: sortBy.bind(null, chartType, '_deltaAbs'),
+      name: 'Percent',
+      onClick: sortBy.bind(null, chartType, '_percentAbs'),
       isClose: true
     }, {
       cn: CL_ROW,
-      name: 'Abs Percent',
-      onClick: sortBy.bind(null, chartType, '_percentAbs'),
+      name: 'Delta',
+      onClick: sortBy.bind(null, chartType, '_deltaAbs'),
       isClose: true
     }, {
       cn: CL_ROW,

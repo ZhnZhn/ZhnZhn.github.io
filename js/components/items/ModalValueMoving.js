@@ -28,6 +28,10 @@ var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
+var _formatAllNumber = require('../../utils/formatAllNumber');
+
+var _formatAllNumber2 = _interopRequireDefault(_formatAllNumber);
+
 var _ModalPopup = require('../zhn-moleculs/ModalPopup');
 
 var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
@@ -50,10 +54,8 @@ var _DateField2 = _interopRequireDefault(_DateField);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import PropTypes from "prop-types";
-
 var isDmy = _DateUtils2.default.isDmy;
-
+//import PropTypes from "prop-types";
 
 var S = {
   ROOT: {
@@ -108,7 +110,7 @@ var RowValueDate = function RowValueDate(_ref) {
   return _react2.default.createElement(
     'div',
     { style: S.ROW },
-    _react2.default.createElement(_SpanValue2.default, { value: value }),
+    _react2.default.createElement(_SpanValue2.default, { value: (0, _formatAllNumber2.default)(value) }),
     _react2.default.createElement(_SpanDate2.default, { date: date, style: S.DATE })
   );
 };
