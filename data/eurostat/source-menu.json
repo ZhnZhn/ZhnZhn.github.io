@@ -29,7 +29,7 @@
         { "id" : "ES_E_EFFICIENCY" },
         { "id" : "ES_E_RENEWABLE_SHARE" },
         { "id" : "ES_E_INDIC" },
-        { "id" : "ES_I_ENERGY" },        
+        { "id" : "ES_I_ENERGY" },
         { "id" : "ES_I_ELECTRICITY_GENERATION" },
         { "id" : "ES_E_STC_ELECTRICITY" },
         { "id" : "ES_E_STAT_PR" },
@@ -114,6 +114,8 @@
     },{
       "caption": "Education",
       "items": [
+        { "id": "ES_EDU_RATIO" },
+        { "id": "ES_EDU_STAFFTOTAL" },
         { "id": "ES_EDU_LEVEL" }
       ]
     },{
@@ -1370,9 +1372,46 @@
       }
     },
 
+
+    "ES_EDU_RATIO" : {
+      "type" : "ES_EDU_RATIO",
+      "menuTitle" : "Ratio of Students to Academic",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [
+          [ "isced11","Level","education-by-level-all.json" ]
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "educ_uoe_perp04",
+          "dfTail": "unit=RT"
+        }
+      }
+    },
+    "ES_EDU_STAFFTOTAL" : {
+      "type" : "ES_EDU_STAFFTOTAL",
+      "menuTitle" : "Academic by Level",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [
+          [ "isced11","Level","education-by-level-all.json" ],
+          [ "age", "Age", "education-staff-age.json" ],
+          [ "sex", "Sex", "by-sex.json" ]
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "educ_uoe_perp01",
+          "dfTail": "unit=NR"
+        }
+      }
+    },
     "ES_EDU_LEVEL" : {
       "type" : "ES_EDU_LEVEL",
-      "menuTitle" : "Attainment Level By, %",
+      "menuTitle" : "Attainment by Level, %",
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
