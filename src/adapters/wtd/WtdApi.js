@@ -8,7 +8,7 @@ const _addItemId = (option, value) => {
   option._itemId = value
 };
 
-const WdtApi = {
+const WtdApi = {
   getRequestUrl(option){
     const {
       fromDate,
@@ -30,4 +30,4 @@ const WdtApi = {
   }
 }
 
-export default WdtApi
+export default WtdApi

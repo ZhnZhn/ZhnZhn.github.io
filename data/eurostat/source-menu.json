@@ -125,7 +125,8 @@
         { "id": "ES_TR_CARS_MOTOR" },
         { "id": "ES_TR_CARS_AGE" },
         { "id": "ES_TR_CARS_INH" },
-        { "id": "ES_TR_CARS_AFFORD" }
+        { "id": "ES_TR_CARS_AFFORD" },
+        { "id": "ES_TR_INLAND_PKM" }
       ]
     }
   ],
@@ -408,7 +409,7 @@
         "threeCaption": "Item",
         "dfProps": {
           "dfTable": "prc_ppp_ind",
-          "dfParams": [ "geo", "aggreg", "na_item" ],
+          "dfParams": [ "geo", "ppp_cat", "na_item" ],
           "mapType" : "V",
           "mapFrequency" : "Y",
           "mapDateDf" : 1
@@ -1508,6 +1509,23 @@
           "mapFrequency" : "Y",
           "mapDateDf": 2,
           "dfTable": "ilc_mddu05",
+          "dfTail": "unit=PC"
+        }
+      }
+    },
+    "ES_TR_INLAND_PKM" : {
+      "type" : "ES_TR_INLAND_PKM",
+      "menuTitle" : "Inland in pkm as % of Total",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [
+          ["vehicle", "Vehicle", "transport-inland-vehicle.json" ]
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "tran_hv_psmod",
           "dfTail": "unit=PC"
         }
       }

@@ -9,7 +9,7 @@ const {
 } = fns
 
 
-const WdtAdapter = {
+const WtdAdapter = {
   toConfig(json, option){
     const { title, subtitle, value } = option
     , dataOption = crData(json, option)
@@ -27,9 +27,9 @@ const WdtAdapter = {
     return { config };
   },
   toSeries(json, option){
-    const { config } = WdtAdapter.toConfig(json, option);
+    const { config } = WtdAdapter.toConfig(json, option);
     return config.series[0];
   }
 };
 
-export default WdtAdapter
+export default WtdAdapter

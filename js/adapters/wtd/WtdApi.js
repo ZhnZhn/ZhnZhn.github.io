@@ -13,7 +13,7 @@ var _addItemId = function _addItemId(option, value) {
   option._itemId = value;
 };
 
-var WdtApi = {
+var WtdApi = {
   getRequestUrl: function getRequestUrl(option) {
     var fromDate = option.fromDate,
         toDate = option.toDate,
@@ -37,5 +37,5 @@ var WdtApi = {
   }
 };
 
-exports.default = WdtApi;
+exports.default = WtdApi;
 //# sourceMappingURL=WtdApi.js.map

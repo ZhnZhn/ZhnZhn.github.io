@@ -8,7 +8,7 @@
   "crData",
   "fns",
   "crConfigOption",
-  "WdtAdapter",
+  "WtdAdapter",
   "toConfig",
   "json",
   "option",

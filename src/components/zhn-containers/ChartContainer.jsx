@@ -48,25 +48,19 @@ const S = {
   }
 };
 
-const isInArray = function(array=[], value){
-  const len=array.length;
-  let i=0;
-  for (; i<len; i++){
-    if (array[i] === value){
-      return true;
-    }
-  }
-  return false;
-};
-
-const compActions = [
+const COMP_ACTIONS = [
   CHAT.SHOW_CHART,
   CHAT.LOAD_STOCK_COMPLETED,
   CHAT.CLOSE_CHART
 ];
 
+const _isInArray = (arr=[], value) => Boolean(~arr.indexOf(value))
+
 const _getWidth = style => parseInt(style.width, 10)
   || RESIZE_INIT_WIDTH;
+const _toStyleWidth = width => width + 'px';
+
+const _isFn = fn => typeof fn === "function";
 
 
 class ChartContainer extends Component {
@@ -117,7 +111,7 @@ class ChartContainer extends Component {
   }
   _onStore = (actionType, data) => {
      if ( this._isDataForContainer(data) ) {
-       if (isInArray(compActions, actionType)) {
+       if (_isInArray(COMP_ACTIONS, actionType)) {
          if (actionType !== CHAT.CLOSE_CHART) {
            this.spComp.scrollTop()
          }
@@ -150,7 +144,7 @@ class ChartContainer extends Component {
        , _propName;
      for (; i<max; i++) {
         _propName = this._crChartPropName(i)
-        if (this[_propName] && typeof this[_propName].reflowChart === 'function'){
+        if (this[_propName] && _isFn(this[_propName].reflowChart)){
           this[_propName].reflowChart(parentWidth - this.childMargin)
         }
      }
@@ -162,7 +156,7 @@ class ChartContainer extends Component {
        , _propName;
      for (; i<max; i++) {
         _propName = this._crChartPropName(i)
-        if (this[_propName] && typeof this[_propName].showCaption === 'function'){
+        if (this[_propName] && _isFn(this[_propName].showCaption)){
           this[_propName].showCaption()
         }
      }
@@ -183,7 +177,7 @@ class ChartContainer extends Component {
    _renderCharts = () => {
      const { chartType, browserType, onCloseItem } = this.props
          , { configs=[] } = this.state
-         , _isAdminMode = (typeof ChartStore.isAdminMode == 'function')
+         , _isAdminMode = _isFn(ChartStore.isAdminMode)
               ? ChartStore.isAdminMode.bind(ChartStore)
               : false ;
      return configs.map((config, index) => {
@@ -202,25 +196,29 @@ class ChartContainer extends Component {
      });
    }
 
+   _getRootNodeStyle = () => {
+     const { _rootNode } = this
+     , { style={} } = _rootNode || {};
+     return style;
+   }
+
    _resizeTo = (width) => {
-     this._rootNode.style.width = width + 'px';
+     this._getRootNodeStyle().width = _toStyleWidth(width);
      this._hResizeAfter(width)
    }
 
    _plusToWidth = () => {
-     const { _rootNode={} } = this
-         , { style={} } = _rootNode
+     const style = this._getRootNodeStyle()
          , w = _getWidth(style) + DELTA;
      if (w < RESIZE_MAX_WIDTH) {
-        style.width = w + 'px'
+        style.width = _toStyleWidth(w)
      }
    }
    _minusToWidth = () => {
-     const { _rootNode={} } = this
-         , { style={} } = _rootNode
+     const style = this._getRootNodeStyle()
          , w = _getWidth(style) - DELTA;
      if (w > RESIZE_MIN_WIDTH) {
-       style.width = w  + 'px'
+       style.width = _toStyleWidth(w)
      }
    }
    _fitToWidth = () => {
@@ -238,10 +236,10 @@ class ChartContainer extends Component {
      } = this.props
      , TS = theme.getStyle(TH_ID)
      , { isShow, isMore } = this.state
-     , _styleIsShow = (isShow)
+     , _styleIsShow = isShow
           ? S.INLINE
           : S.NONE
-     , _classIsShow = (isShow)
+     , _classIsShow = isShow
           ? `${CL.ROOT} ${CL.SHOW}`
           : CL.ROOT;
      return(

@@ -100,24 +100,23 @@ var S = {
   }
 };
 
-var isInArray = function isInArray() {
-  var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+var COMP_ACTIONS = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, _ChartActions.ChartActionTypes.CLOSE_CHART];
+
+var _isInArray = function _isInArray() {
+  var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var value = arguments[1];
-
-  var len = array.length;
-  var i = 0;
-  for (; i < len; i++) {
-    if (array[i] === value) {
-      return true;
-    }
-  }
-  return false;
+  return Boolean(~arr.indexOf(value));
 };
-
-var compActions = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, _ChartActions.ChartActionTypes.CLOSE_CHART];
 
 var _getWidth = function _getWidth(style) {
   return parseInt(style.width, 10) || RESIZE_INIT_WIDTH;
+};
+var _toStyleWidth = function _toStyleWidth(width) {
+  return width + 'px';
+};
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === "function";
 };
 
 var ChartContainer = (_temp = _class = function (_Component) {
@@ -242,7 +241,7 @@ var ChartContainer = (_temp = _class = function (_Component) {
 
   this._onStore = function (actionType, data) {
     if (_this2._isDataForContainer(data)) {
-      if (isInArray(compActions, actionType)) {
+      if (_isInArray(COMP_ACTIONS, actionType)) {
         if (actionType !== _ChartActions.ChartActionTypes.CLOSE_CHART) {
           _this2.spComp.scrollTop();
         }
@@ -280,7 +279,7 @@ var ChartContainer = (_temp = _class = function (_Component) {
         _propName = void 0;
     for (; i < max; i++) {
       _propName = _this2._crChartPropName(i);
-      if (_this2[_propName] && typeof _this2[_propName].reflowChart === 'function') {
+      if (_this2[_propName] && _isFn(_this2[_propName].reflowChart)) {
         _this2[_propName].reflowChart(parentWidth - _this2.childMargin);
       }
     }
@@ -292,7 +291,7 @@ var ChartContainer = (_temp = _class = function (_Component) {
         _propName = void 0;
     for (; i < max; i++) {
       _propName = _this2._crChartPropName(i);
-      if (_this2[_propName] && typeof _this2[_propName].showCaption === 'function') {
+      if (_this2[_propName] && _isFn(_this2[_propName].showCaption)) {
         _this2[_propName].showCaption();
       }
     }
@@ -325,7 +324,7 @@ var ChartContainer = (_temp = _class = function (_Component) {
         onCloseItem = _props4.onCloseItem,
         _state$configs = _this2.state.configs,
         configs = _state$configs === undefined ? [] : _state$configs,
-        _isAdminMode = typeof _ChartStore2.default.isAdminMode == 'function' ? _ChartStore2.default.isAdminMode.bind(_ChartStore2.default) : false;
+        _isAdminMode = _isFn(_ChartStore2.default.isAdminMode) ? _ChartStore2.default.isAdminMode.bind(_ChartStore2.default) : false;
 
     return configs.map(function (config, index) {
       var _config$zhConfig = config.zhConfig,
@@ -345,32 +344,33 @@ var ChartContainer = (_temp = _class = function (_Component) {
     });
   };
 
+  this._getRootNodeStyle = function () {
+    var _rootNode = _this2._rootNode,
+        _ref = _rootNode || {},
+        _ref$style = _ref.style,
+        style = _ref$style === undefined ? {} : _ref$style;
+
+    return style;
+  };
+
   this._resizeTo = function (width) {
-    _this2._rootNode.style.width = width + 'px';
+    _this2._getRootNodeStyle().width = _toStyleWidth(width);
     _this2._hResizeAfter(width);
   };
 
   this._plusToWidth = function () {
-    var _rootNode2 = _this2._rootNode,
-        _rootNode = _rootNode2 === undefined ? {} : _rootNode2,
-        _rootNode$style = _rootNode.style,
-        style = _rootNode$style === undefined ? {} : _rootNode$style,
+    var style = _this2._getRootNodeStyle(),
         w = _getWidth(style) + DELTA;
-
     if (w < RESIZE_MAX_WIDTH) {
-      style.width = w + 'px';
+      style.width = _toStyleWidth(w);
     }
   };
 
   this._minusToWidth = function () {
-    var _rootNode3 = _this2._rootNode,
-        _rootNode = _rootNode3 === undefined ? {} : _rootNode3,
-        _rootNode$style2 = _rootNode.style,
-        style = _rootNode$style2 === undefined ? {} : _rootNode$style2,
+    var style = _this2._getRootNodeStyle(),
         w = _getWidth(style) - DELTA;
-
     if (w > RESIZE_MIN_WIDTH) {
-      style.width = w + 'px';
+      style.width = _toStyleWidth(w);
     }
   };
 

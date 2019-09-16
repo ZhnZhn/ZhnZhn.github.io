@@ -108,7 +108,7 @@ class PaneApiKey extends Component {
         <RowSecret
            ref={this._ref7}
            titleStyle={titleStyle}
-           title="WDT:"
+           title="WTD:"
            placeholder="World Trading Data API Key"
            maxLength="60"
            onEnter={this._setKey7}

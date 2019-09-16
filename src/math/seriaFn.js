@@ -9,18 +9,14 @@ const _isNumber = n => typeof n === 'number'
 
 const _calcY = (yPrev, yNext) => {
 
-  if (!_isNumber(yNext)) {
+  if (!_isNumber(yPrev) || !_isNumber(yNext)) {
     return null;
   }
 
   if (yNext === 0) {
-    if (_isNumber(yPrev)) {
-      return yPrev === 0
-        ? 0
-        : yPrev > 0 ? -100 : 100;
-    } else {
-      return null;
-    }
+    return yPrev === 0
+      ? 0
+      : yPrev > 0 ? -100 : 100;
   }
 
   if (yPrev === 0) {

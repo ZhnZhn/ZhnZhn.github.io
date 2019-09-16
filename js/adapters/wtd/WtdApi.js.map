@@ -12,7 +12,7 @@
   "option",
   "value",
   "_itemId",
-  "WdtApi",
+  "WtdApi",
   "getRequestUrl",
   "fromDate",
   "toDate",

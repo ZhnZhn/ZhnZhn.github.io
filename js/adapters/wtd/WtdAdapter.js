@@ -22,7 +22,7 @@ var crData = _fnAdapter2.default.crData,
     crConfigOption = _fnAdapter2.default.crConfigOption;
 
 
-var WdtAdapter = {
+var WtdAdapter = {
   toConfig: function toConfig(json, option) {
     var title = option.title,
         subtitle = option.subtitle,
@@ -38,12 +38,12 @@ var WdtAdapter = {
     return { config: config };
   },
   toSeries: function toSeries(json, option) {
-    var _WdtAdapter$toConfig = WdtAdapter.toConfig(json, option),
-        config = _WdtAdapter$toConfig.config;
+    var _WtdAdapter$toConfig = WtdAdapter.toConfig(json, option),
+        config = _WtdAdapter$toConfig.config;
 
     return config.series[0];
   }
 };
 
-exports.default = WdtAdapter;
+exports.default = WtdAdapter;
 //# sourceMappingURL=WtdAdapter.js.map

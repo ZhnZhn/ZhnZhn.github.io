@@ -136,7 +136,7 @@ var PaneApiKey = (_temp = _class = function (_Component) {
         _react2.default.createElement(_RowSecret2.default, {
           ref: this._ref7,
           titleStyle: titleStyle,
-          title: 'WDT:',
+          title: 'WTD:',
           placeholder: 'World Trading Data API Key',
           maxLength: '60',
           onEnter: this._setKey7

@@ -1,9 +1,9 @@
 import api from './WtdApi'
 import adapter from './WtdAdapter'
 
-const Wdt = {
+const Wtd = {
   api,
   adapter
 };
 
-export default Wdt
+export default Wtd
