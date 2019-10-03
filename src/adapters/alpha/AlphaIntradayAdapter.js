@@ -204,6 +204,9 @@ const AlphaIntradayAdapter = {
         seriaTooltip, volumeTooltip
       } = _crChartOptions(dfT, data);
 
+    option.minY = minClose
+    option.maxY = maxClose
+
     const config = ConfigBuilder()
       .init(baseConfig)
       .add('chart', { spacingTop: 25 })

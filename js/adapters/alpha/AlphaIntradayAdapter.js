@@ -232,6 +232,9 @@ var AlphaIntradayAdapter = {
         volumeTooltip = _crChartOptions2.volumeTooltip;
 
 
+    option.minY = minClose;
+    option.maxY = maxClose;
+
     var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(seriaTooltip).add((0, _extends3.default)({}, crIntradayConfigOption({
       id: _chartId,
       data: dataDaily,

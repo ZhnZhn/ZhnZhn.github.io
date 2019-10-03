@@ -83,11 +83,15 @@ var C = {
 
 var _assign = Object.assign;
 //const _isArr = Array.isArray;
+
 var _isObj = function _isObj(obj) {
   return obj && (typeof obj === 'undefined' ? 'undefined' : (0, _typeof3.default)(obj)) === 'object';
 };
 var _isStr = function _isStr(str) {
   return typeof str === 'string';
+};
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
 };
 
 var _getY = function _getY(point) {
@@ -274,8 +278,10 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default
   addMinMax: function addMinMax(data, option) {
     var isNotZoomToMinMax = option.isNotZoomToMinMax,
         isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        min = findMinY(data),
-        max = findMaxY(data);
+        minY = option.minY,
+        maxY = option.maxY,
+        min = _isNumber(minY) ? minY : findMinY(data),
+        max = _isNumber(maxY) ? maxY : findMaxY(data);
 
     return this.setMinMax(min, max, isNotZoomToMinMax).setMinMaxDeltas(min, max, data, isDrawDeltaExtrems);
   },

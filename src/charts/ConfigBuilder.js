@@ -49,8 +49,11 @@ const C = {
 
 const _assign = Object.assign;
 //const _isArr = Array.isArray;
+
 const _isObj = obj => obj && typeof obj === 'object';
 const _isStr = str => typeof str === 'string';
+const _isNumber = n => typeof n === 'number'
+  && n - n === 0;
 
 const _getY = (point) => Array.isArray(point)
  ? point[1]
@@ -251,10 +254,15 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   addMinMax(data, option){
     const {
       isNotZoomToMinMax,
-      isDrawDeltaExtrems
+      isDrawDeltaExtrems,
+      minY, maxY
     } = option
-    , min = findMinY(data)
-    , max = findMaxY(data);
+    , min = _isNumber(minY)
+       ? minY
+       : findMinY(data)
+    , max = _isNumber(maxY)
+       ? maxY
+       : findMaxY(data);
     return this.setMinMax(min, max, isNotZoomToMinMax)
       .setMinMaxDeltas(min, max, data, isDrawDeltaExtrems);
   },
