@@ -40,13 +40,9 @@ var _IconLogoErc = require('./IconLogoErc');
 
 var _IconLogoErc2 = _interopRequireDefault(_IconLogoErc);
 
-var _FlatButton = require('../zhn-m/FlatButton');
+var _Comp = require('../Comp');
 
-var _FlatButton2 = _interopRequireDefault(_FlatButton);
-
-var _ModalButton = require('../zhn-m/ModalButton');
-
-var _ModalButton2 = _interopRequireDefault(_ModalButton);
+var _Comp2 = _interopRequireDefault(_Comp);
 
 var _HotBar = require('./HotBar');
 
@@ -78,6 +74,14 @@ var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import FlatButton from '../zhn-m/FlatButton'
+//import ModalButton from '../zhn-m/ModalButton'
+var FlatButton = _Comp2.default.FlatButton,
+    ModalButton = _Comp2.default.ModalButton,
+    SvgSettings = _Comp2.default.SvgSettings,
+    SvgInfo = _Comp2.default.SvgInfo;
+
+
 var LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
     CAPTION = "ERC v0.17.0";
 
@@ -93,10 +97,20 @@ var CL = {
   QUANDL: "header__bt-quandl",
   EUROSTAT: "header__bt-eurostat",
   WATCH: "header__bt-watch",
-  SETTINGS: "header__bt-settins",
+  BTS_RIGHT: "header__bts-right",
   ABOUT: "header__bt-about",
 
   BROWSER_MENU: "popup-menu header__panel-browser"
+};
+
+var STYLE = {
+  SVG_BT: {
+    position: 'relative',
+    top: -1,
+    verticalAlign: 'middle',
+    marginLeft: 8,
+    marginRight: 8
+  }
 };
 
 var MODEL = (0, _BrowserModel2.default)();
@@ -159,7 +173,7 @@ var HeaderBar = function (_Component) {
           caption: CAPTION
         }),
         _react2.default.createElement(
-          _ModalButton2.default,
+          ModalButton,
           {
             className: CL.TOPICS,
             rootStyle: S.BT,
@@ -171,7 +185,7 @@ var HeaderBar = function (_Component) {
           },
           _react2.default.createElement('span', { className: CL.ARROW })
         ),
-        _react2.default.createElement(_FlatButton2.default, {
+        _react2.default.createElement(FlatButton, {
           className: CL.QUANDL,
           rootStyle: S.BT,
           caption: 'Quandl',
@@ -179,7 +193,7 @@ var HeaderBar = function (_Component) {
           accessKey: 'q',
           onClick: this._hShowEconomic
         }),
-        _react2.default.createElement(_FlatButton2.default, {
+        _react2.default.createElement(FlatButton, {
           className: CL.EUROSTAT,
           rootStyle: S.BT,
           caption: 'Eurostat',
@@ -187,7 +201,7 @@ var HeaderBar = function (_Component) {
           accessKey: 'u',
           onClick: this._hShowEurostat
         }),
-        _react2.default.createElement(_FlatButton2.default, {
+        _react2.default.createElement(FlatButton, {
           className: CL.WATCH,
           rootStyle: S.BT,
           caption: 'Watch',
@@ -200,27 +214,35 @@ var HeaderBar = function (_Component) {
           closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
           onShowDialog: _ComponentActions2.default.showDialog
         }),
-        _react2.default.createElement(_FlatButton2.default, {
-          className: CL.SETTINGS,
-          rootStyle: S.BT,
-          isPrimary: true,
-          caption: 'Settings',
-          title: 'User Settings Dialog',
-          accessKey: 's',
-          onClick: this._hDialogSettings
-        }),
-        _react2.default.createElement(_FlatButton2.default, {
-          className: CL.ABOUT,
-          rootStyle: S.BT,
-          caption: 'About',
-          title: 'About Web Application ERC',
-          accessKey: 'a',
-          onClick: _ComponentActions2.default.showAbout
-        }),
-        _react2.default.createElement(_LimitRemainingLabel2.default, {
-          store: store,
-          style: S.LIMIT
-        }),
+        _react2.default.createElement(
+          'div',
+          { className: CL.BTS_RIGHT },
+          _react2.default.createElement(_LimitRemainingLabel2.default, {
+            store: store
+          }),
+          _react2.default.createElement(
+            FlatButton,
+            {
+              rootStyle: S.BT,
+              isPrimary: true,
+              title: 'User Settings Dialog',
+              accessKey: 's',
+              onClick: this._hDialogSettings
+            },
+            _react2.default.createElement(SvgSettings, { style: STYLE.SVG_BT })
+          ),
+          _react2.default.createElement(
+            FlatButton,
+            {
+              className: CL.ABOUT,
+              rootStyle: S.BT,
+              title: 'About Web Application ERC',
+              accessKey: 'a',
+              onClick: _ComponentActions2.default.showAbout
+            },
+            _react2.default.createElement(SvgInfo, { style: STYLE.SVG_BT })
+          )
+        ),
         _react2.default.createElement(_ModalSlider2.default, {
           isShow: isDS,
           className: CL.BROWSER_MENU,

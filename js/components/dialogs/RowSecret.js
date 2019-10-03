@@ -72,16 +72,20 @@ var RowSecret = (_temp2 = _class = function (_Component) {
           rest = (0, _objectWithoutProperties3.default)(_props, ['title', 'titleStyle']);
 
       return _react2.default.createElement(
-        'label',
-        { style: _DialogStyles2.default.rowDiv },
+        'form',
+        null,
         _react2.default.createElement(
-          'span',
-          { style: (0, _extends3.default)({}, _DialogStyles2.default.labelSpan, titleStyle) },
-          title
-        ),
-        _react2.default.createElement(_InputSecret2.default, (0, _extends3.default)({
-          ref: this._refInput
-        }, rest))
+          'label',
+          { style: _DialogStyles2.default.rowDiv },
+          _react2.default.createElement(
+            'span',
+            { style: (0, _extends3.default)({}, _DialogStyles2.default.labelSpan, titleStyle) },
+            title
+          ),
+          _react2.default.createElement(_InputSecret2.default, (0, _extends3.default)({
+            ref: this._refInput
+          }, rest))
+        )
       );
     }
   }, {

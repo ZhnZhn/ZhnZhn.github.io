@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn/svg/SvgIcons.js"
+ ],
+ "file": "../../../../src/components/zhn/svg/SvgIcons.js",
+ "names": [
+  "SvgIcons",
+  "SvgInfo",
+  "SvgSettings"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,WAAW;AACfC,4BADe;AAEfC;AAFe,CAAjB;;kBAKeF,Q"
+}

@@ -6,7 +6,15 @@ const S = {
   }
 };
 
-const CaptionInput = ({ className, rootStyle, caption='', accessKey, children }) => {
+const CaptionInput = ({
+  className,
+  rootStyle,
+  caption,
+  accessKey,
+  children
+}) => {
+  if (!caption) { return null; }
+
   const _index = caption.toLowerCase().indexOf(accessKey);
   if (accessKey && _index !== -1) {
     const _before = caption.substring(0, _index)

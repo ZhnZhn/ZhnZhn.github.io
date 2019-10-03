@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn/svg/SvgIcon.js"
+ ],
+ "file": "../../../../src/components/zhn/svg/SvgIcon.js",
+ "names": [
+  "SvgIcon",
+  "color",
+  "size",
+  "children",
+  "restProps",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,UAAU,SAAVA,OAAU;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,IAAV,QAAUA,IAAV;AAAA,MAAgBC,QAAhB,QAAgBA,QAAhB;AAAA,MAA6BC,SAA7B;AAAA,SACZ;AAAA;AAAA;AACE,aAAM,4BADR;AAEE,aAAOF,IAFT;AAGE,cAAQA,IAHV;AAIE,eAAQ,WAJV;AAKE,YAAK,MALP;AAME,cAAQD,KANV;AAOE,mBAAY,GAPd;AAQE,qBAAc,OARhB;AASE,sBAAe;AATjB,OAUMG,SAVN;AAYGD;AAZH,GADY;AAAA,CAAhB;;AAkBAH,QAAQK,YAAR,GAAuB;AACrBJ,SAAO,cADc;AAErBC,QAAM;AAFe,CAAvB;;kBAKeF,O"
+}

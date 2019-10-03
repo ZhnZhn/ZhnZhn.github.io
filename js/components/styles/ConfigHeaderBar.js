@@ -13,10 +13,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var S = {
   BT: {
     color: '#1b2836'
-  },
-  LIMIT: {
-    float: 'right',
-    paddingTop: '9px'
   }
 };
 
@@ -24,8 +20,8 @@ var S = {
 //0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.3)
 
 var styleConfig = {
-  themeName: undefined,
-  style: undefined,
+  themeName: void 0,
+  style: void 0,
 
   createStyle: function createStyle(CSS_RULE) {
     return (0, _extends3.default)({}, S, {

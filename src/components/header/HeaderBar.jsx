@@ -5,8 +5,9 @@ import withTheme from '../hoc/withTheme'
 import ProgressLoading from './ProgressLoading'
 import AppLabel from './AppLabel'
 import IconLogoErc from './IconLogoErc'
-import FlatButton from '../zhn-m/FlatButton'
-import ModalButton from '../zhn-m/ModalButton'
+import C from '../Comp'
+//import FlatButton from '../zhn-m/FlatButton'
+//import ModalButton from '../zhn-m/ModalButton'
 import HotBar from './HotBar'
 import LimitRemainingLabel from './LimitRemainingLabel'
 
@@ -18,6 +19,11 @@ import BA from '../../flux/actions/BrowserActions'
 import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 
 import { BrowserType as BT } from '../../constants/Type'
+
+const {
+  FlatButton, ModalButton,
+  SvgSettings, SvgInfo
+} = C;
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
     , CAPTION = "ERC v0.17.0";
@@ -34,10 +40,20 @@ const CL = {
   QUANDL: "header__bt-quandl",
   EUROSTAT: "header__bt-eurostat",
   WATCH: "header__bt-watch",
-  SETTINGS: "header__bt-settins",
+  BTS_RIGHT: "header__bts-right",  
   ABOUT: "header__bt-about",
 
   BROWSER_MENU: "popup-menu header__panel-browser"
+};
+
+const STYLE = {
+  SVG_BT: {
+    position: 'relative',
+    top: -1,
+    verticalAlign: 'middle',
+    marginLeft: 8,
+    marginRight: 8
+  }
 };
 
 const MODEL = crBrowserModel();
@@ -130,28 +146,29 @@ class HeaderBar extends Component {
             closeDialogAction={CAT.CLOSE_DIALOG}
             onShowDialog={CA.showDialog}
           />
-
-           <FlatButton
-             className={CL.SETTINGS}
-             rootStyle={S.BT}
-             isPrimary={true}
-             caption="Settings"
-             title="User Settings Dialog"
-             accessKey="s"
-             onClick={this._hDialogSettings}
-           />
-           <FlatButton
-             className={CL.ABOUT}
-             rootStyle={S.BT}
-             caption="About"
-             title="About Web Application ERC"
-             accessKey="a"
-             onClick={CA.showAbout}
-           />
-           <LimitRemainingLabel
-              store={store}
-              style={S.LIMIT}
-           />
+          <div className={CL.BTS_RIGHT}>
+            <LimitRemainingLabel
+               store={store}
+            />
+            <FlatButton
+               rootStyle={S.BT}
+               isPrimary={true}
+               title="User Settings Dialog"
+               accessKey="s"
+               onClick={this._hDialogSettings}
+             >
+               <SvgSettings style={STYLE.SVG_BT} />
+             </FlatButton>
+             <FlatButton
+               className={CL.ABOUT}
+               rootStyle={S.BT}
+               title="About Web Application ERC"
+               accessKey="a"
+               onClick={CA.showAbout}
+             >
+               <SvgInfo style={STYLE.SVG_BT} />
+             </FlatButton>
+          </div>
 
            <ModalSlider
              isShow={isDS}

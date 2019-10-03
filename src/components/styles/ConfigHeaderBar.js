@@ -2,10 +2,6 @@
 const S = {
   BT: {
     color: '#1b2836'
-  },
-  LIMIT: {
-    float: 'right',
-    paddingTop: '9px'
   }
 };
 
@@ -13,11 +9,11 @@ const S = {
 //0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.3)
 
 const styleConfig = {
-  themeName: undefined,
-  style: undefined,
+  themeName: void 0,
+  style: void 0,
 
   createStyle: (CSS_RULE) => {
-    return {      
+    return {
       ...S,
       ROOT: {
         ...CSS_RULE.BG

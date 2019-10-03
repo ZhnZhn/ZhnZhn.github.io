@@ -59,7 +59,7 @@ class PaneApiKey extends Component {
   render(){
     const { titleStyle, btStyle, onClose } = this.props;
     return (
-      <div>
+      <div>        
         <RowSecret
            ref={ this._ref1}
            titleStyle={titleStyle}

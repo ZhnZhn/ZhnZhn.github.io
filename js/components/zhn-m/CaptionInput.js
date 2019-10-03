@@ -19,10 +19,13 @@ var S = {
 var CaptionInput = function CaptionInput(_ref) {
   var className = _ref.className,
       rootStyle = _ref.rootStyle,
-      _ref$caption = _ref.caption,
-      caption = _ref$caption === undefined ? '' : _ref$caption,
+      caption = _ref.caption,
       accessKey = _ref.accessKey,
       children = _ref.children;
+
+  if (!caption) {
+    return null;
+  }
 
   var _index = caption.toLowerCase().indexOf(accessKey);
   if (accessKey && _index !== -1) {

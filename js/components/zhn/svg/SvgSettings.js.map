@@ -1,0 +1,12 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn/svg/SvgSettings.js"
+ ],
+ "file": "../../../../src/components/zhn/svg/SvgSettings.js",
+ "names": [
+  "SvgSettings",
+  "props"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,cAAc,SAAdA,WAAc,CAACC,KAAD;AAAA,UACjB;AAAC,uBAAD;AAAaA,WAAb;AACG,gDAAQ,IAAG,IAAX,EAAgB,IAAG,IAAnB,EAAwB,GAAE,GAA1B,GADH;AAEG,8CAAM,GAAE,guBAAR;AAFH,IADiB;AAAA,CAApB;;kBAOeD,W"
+}

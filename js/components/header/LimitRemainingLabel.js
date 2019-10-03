@@ -34,7 +34,7 @@ var S = {
   LABEL: {
     display: 'inline-block',
     color: '#2f7ed8',
-    paddingRight: '10px',
+    paddingRight: 8,
     fontSize: '16px',
     fontWeight: 'bold'
   }
@@ -92,4 +92,4 @@ var LimitRemainingLabel = function (_Component) {
 }(_react.Component);
 
 exports.default = LimitRemainingLabel;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\LimitRemainingLabel.js.map
+//# sourceMappingURL=LimitRemainingLabel.js.map

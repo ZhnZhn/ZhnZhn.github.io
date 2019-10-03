@@ -4,11 +4,11 @@ const S = {
   LABEL : {
     display: 'inline-block',
     color:'#2f7ed8',
-    paddingRight: '10px',
+    paddingRight: 8,
     fontSize: '16px',
     fontWeight: 'bold'
   }
-}
+};
 
 class LimitRemainingLabel extends Component {
   state = {

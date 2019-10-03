@@ -14,15 +14,17 @@ class RowSecret extends Component {
   render() {
     const { title, titleStyle, ...rest } = this.props;
     return (
-      <label style={STYLE.rowDiv}>
-         <span style={{...STYLE.labelSpan, ...titleStyle}}>
-           {title}
-         </span>
-         <InputSecret
-            ref={this._refInput}
-            {...rest}
-         />
-      </label>
+      <form>
+        <label style={STYLE.rowDiv}>
+           <span style={{...STYLE.labelSpan, ...titleStyle}}>
+             {title}
+           </span>
+           <InputSecret
+              ref={this._refInput}
+              {...rest}
+           />
+        </label>
+      </form>
     );
   }
 
