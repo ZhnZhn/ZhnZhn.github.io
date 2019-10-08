@@ -36,7 +36,7 @@ class TabPane extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
+  UNSAFE_componentWillReceiveProps(nextProps){
     if (this.isUpdateInit && this.props !== nextProps){
       const components = nextProps.children.map((tab, index) => {
          return  React.cloneElement(tab.props.children, { key : 'comp' + index });

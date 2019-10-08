@@ -100,18 +100,17 @@ var SOURCE_OPTIONS = [{
   }
 }];
 
+var DF_SOURCE = SOURCE_OPTIONS[0];
+
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
-
 var _getItemId = function _getItemId(props) {
-  return props && props.data && props.data.item && props.data.item.id;
+  return ((props.data || {}).item || {}).id;
 };
-
 var _createInitialState = function _createInitialState(props) {
-  var itemId = _getItemId(props);
   return {
-    itemId: itemId,
+    itemId: _getItemId(props),
     isShowLink: false
   };
 };
@@ -162,7 +161,7 @@ var StocksBySectorDialog = function (_Component) {
     };
 
     _this._getDataSource = function () {
-      return _this._dataSource || SOURCE_OPTIONS[2];
+      return _this._dataSource || DF_SOURCE;
     };
 
     _this._hLoad = function () {
@@ -231,12 +230,12 @@ var StocksBySectorDialog = function (_Component) {
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,
-          _props$data = _props.data,
-          data = _props$data === undefined ? {} : _props$data,
+          data = _props.data,
           onClose = _props.onClose,
-          _data$item2 = data.item,
-          item = _data$item2 === undefined ? {} : _data$item2,
-          text = item.text,
+          _ref = data || {},
+          item = _ref.item,
+          _ref2 = item || {},
+          text = _ref2.text,
           _state = this.state,
           isShowLabels = _state.isShowLabels,
           isShowLink = _state.isShowLink,
@@ -259,7 +258,7 @@ var StocksBySectorDialog = function (_Component) {
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
           isShowLabels: isShowLabels,
           caption: 'Source',
-          placeholder: 'IEX Platform: 2 Years',
+          placeholder: DF_SOURCE.caption,
           options: SOURCE_OPTIONS,
           onSelect: this._hSelectDataSource
         }),

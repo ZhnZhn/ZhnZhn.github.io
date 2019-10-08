@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 
-import withTheme from '../hoc/withTheme'
+import withTheme from '../hoc/withTheme';
 
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 
-import ScrollPane from '../zhn/ScrollPane'
-import BrowserCaption from '../zhn/BrowserCaption'
-import OpenClose from '../zhn/OpenClose'
-import TwitterLink from './TwitterLink'
-import DataProviders from './DataProviders'
-import StepTitle from './StepTitle'
+import A from '../Comp';
+import TwitterLink from './TwitterLink';
+import DataProviders from './DataProviders';
+import StepTitle from './StepTitle';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
 
-import C from '../styles/Color'
-import S from './About.Style'
+import C from '../styles/Color';
+import S from './About.Style';
 
 const TH_ID = 'ABOUT';
 
@@ -35,7 +33,7 @@ const STEP = {
 
 const OC_CAPTION_STYLE = {
   color: C.TITLE
-}
+};
 
 class About extends Component {
   /*
@@ -97,24 +95,24 @@ class About extends Component {
         className={_clRoot}
         style={{..._styleOpen, ...TS.ROOT}}
        >
-         <BrowserCaption
+         <A.BrowserCaption
             caption="About"
             onClose={this._handleClose}
          >
            <TwitterLink
               rootStyle={S.BT_TWITTER}
               account="webapperc"
-              title="Twitter page @wepapperc with examples"
+              title="Twitter page @wepapperc with chart examples"
            />
-         </BrowserCaption>
+         </A.BrowserCaption>
 
-         <ScrollPane
+         <A.ScrollPane
              className={CL.SCROLL}
              style={S.SCROLL_DIV}
           >
 
          <div style={{...S.DIV_WRAPPER, ...S.GREY}}>
-         <p style={S.M_B_4}>
+         <p style={S.MB_4}>
            <span style={S.GREEN}>
              ERC (Economic RESTful Client)&nbsp;
            </span>
@@ -135,34 +133,34 @@ class About extends Component {
           <p style={S.MARGIN_TOP}>
             The result will be shown in a chart in a resizebale container.
           </p>
-          <p style={S.P_BOTTOM}>
-            Also you can export chart to PNG, JPG, SVG, print to PDF.
+          <p style={S.MB_8EM}>
+            Also it's possible to export the chart to PNG, JPG, SVG or print to PDF.
           </p>
-          <p style={S.P_BOTTOM}>
+          <p style={S.MB_6EM}>
             <span style={S.RED}>
                Attention:&nbsp;
             </span>
             <span>
               For one item from <span style={S.BLACK}>Dialog</span> can be only one <span style={S.BLACK}>Chart item</span> in a container.
-              If you want to change a date period, please, use <span style={S.BLACK}>Highcharts zoom option</span> or close the chart in the container and load data again.
-              More information about data can be found on a <span style={S.BLACK}>tab Info, Chart item</span>.
+              More information about a dataset can be found on a <span style={S.BLACK}>tab Info of Chart item.</span>
             </span>
          </p>
-          <OpenClose
+          <A.OpenClose
             isClose={true}
             caption="More..."
+            ocStyle={S.LH_18}
             captionStyle={OC_CAPTION_STYLE}
-            rootStyle={S.MORE}
+            rootStyle={S.LH_14}
             openColor={C.YELLOW}
           >
-            <p style={S.P_BOTTOM}>
+            <p style={S.MB_8EM}>
               After clicking a <span style={S.BLACK}>button Show</span> in a Dialog will be an opened up <span style={S.BLACK}>Chart container</span> with charts or empty.
               After closing a <span style={S.BLACK}>Chart container</span> all charts remains. In one time max three <span style={S.BLACK}>Dialogs</span> can be opened.
             </p>
-            <p style={S.P_BOTTOM}>
+            <p style={S.MB_8EM}>
               Some open and private data providers require user's <span style={S.BLACK}>API Key</span>.
             </p>
-            <p style={S.P_BOTTOM}>
+            <p style={S.MB_8EM}>
               <span>For example, for loading data from&nbsp;</span>
               <Link.Quandl/>
               <span>
@@ -172,17 +170,17 @@ class About extends Component {
               It's free of charge to receive.
               </span>
             </p>
-            <p style={S.P_BOTTOM}>
+            <p style={S.MB_8EM}>
               Data providers API Keys can be set on the <span style={S.BLACK}>tab ApiKeys, dialog Settings [s]</span>.
             </p>
-            <p style={S.P_BOTTOM}>
+            <p style={S.MB_8EM}>
               Also for loading data from data providers with HTTP protocol required <span style={S.BLACK}>HTTPS proxy server</span>,
               by default settled in the <span style={S.BLACK}>tab Options, dialog Settings [s]</span>.
             </p>
-            <p style={S.P_BOTTOM}>
+            <p style={S.MB_8EM}>
               There is three UI theme in the web app ERC: <span style={S.BLACK}>Dark, Light, and Sand</span> can be set on <span style={S.BLACK}>tab Options, dialog Settings [s]</span>. All user's settings keep in browser's memory only for a current web session.
             </p>
-         </OpenClose>
+         </A.OpenClose>
          <LogosBar />
          <p>
            <span style={S.BLACK}>
@@ -190,7 +188,7 @@ class About extends Component {
            </span>
          </p>
         </div>
-        </ScrollPane>
+      </A.ScrollPane>
       </div>
     );
   }

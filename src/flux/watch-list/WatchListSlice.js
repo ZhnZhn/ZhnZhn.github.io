@@ -1,8 +1,8 @@
 import LocalForage from 'localforage';
 
-import { BrowserActionTypes } from '../actions/BrowserActions';
-import { WatchActionTypes } from '../actions/WatchActions';
-import WatchDefault from '../../constants/WatchDefault';
+import { BrowserActionTypes as BAT } from '../actions/BrowserActions';
+import { WatchActionTypes as WAT } from '../actions/WatchActions';
+import DF_WATCH_LIST from '../../constants/WatchDefault';
 import { ModalDialog }  from '../../constants/Type';
 import Msg from '../../constants/MsgWatch';
 
@@ -15,19 +15,19 @@ const STORAGE_KEY = 'WATCH_LIST_ERC'
 
 const WatchListSlice = {
 
-  watchList: WatchDefault,
+  watchList: DF_WATCH_LIST,
   isWatchEdited: false,
 
   initWatchList(){
-    LocalForage.getItem(STORAGE_KEY).then((value) => {
-      this.watchList = (value)
-              ? value
-              : WatchDefault;
-      this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
-    })
-    .catch(() => {
-      this.watchList = WatchDefault;
-      this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+    LocalForage
+     .getItem(STORAGE_KEY)
+     .then(value => {
+       this.watchList = value || DF_WATCH_LIST;
+       this.trigger(BAT.UPDATE_WATCH_BROWSER, this.watchList);
+     })
+     .catch(() => {
+       this.watchList = DF_WATCH_LIST;
+       this.trigger(BAT.UPDATE_WATCH_BROWSER, this.watchList);
     })
   },
   getWatchList(){
@@ -44,20 +44,24 @@ const WatchListSlice = {
 
   onAddItem(item){
     this._onEditWatch(
-      Logic.addItem(this.watchList, item), WatchActionTypes.ADD_ITEM
+      Logic.addItem(this.watchList, item),
+      WAT.ADD_ITEM
     );
   },
   onRemoveItem(option){
     Logic.removeItem(this.watchList, option);
+    this._triggerUpdateWL()
+  },
+
+  _triggerUpdateWL(){
     this.isWatchEdited = true;
-    this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+    this.trigger(BAT.UPDATE_WATCH_BROWSER, this.watchList);
   },
 
 
   _onDragDrop(result){
     if (result.isDone){
-       this.isWatchEdited = true;
-       this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+       this._triggerUpdateWL()
     } else {
       this.showAlertDialog(result);
     }
@@ -98,11 +102,10 @@ const WatchListSlice = {
 
   _onEditWatch(result, forActionType){
     if (result.isDone){
-      this.isWatchEdited = true;
-      this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
-      this.trigger(WatchActionTypes.EDIT_WATCH_COMPLETED, {forActionType});
+      this._triggerUpdateWL()
+      this.trigger(WAT.EDIT_WATCH_COMPLETED, { forActionType });
     } else {
-      this.trigger(WatchActionTypes.EDIT_WATCH_FAILED, {
+      this.trigger(WAT.EDIT_WATCH_FAILED, {
           messages:[result.message],
           forActionType
       });
@@ -111,38 +114,38 @@ const WatchListSlice = {
   onAddGroup(option){
     this._onEditWatch(
       Logic.addGroup(this.watchList, option),
-      WatchActionTypes.ADD_GROUP
+      WAT.ADD_GROUP
     );
   },
   onRenameGroup(option){
     this._onEditWatch(
       Logic.renameGroup(this.watchList, option),
-      WatchActionTypes.RENAME_GROUP
+      WAT.RENAME_GROUP
     );
   },
   onDeleteGroup(option){
     this._onEditWatch(
       Logic.deleteGroup(this.watchList, option),
-      WatchActionTypes.DELETE_GROUP
+      WAT.DELETE_GROUP
     );
   },
 
   onCreateList(option){
     this._onEditWatch(
       Logic.createList(this.watchList, option),
-      WatchActionTypes.CREATE_LIST
+      WAT.CREATE_LIST
     );
   },
   onRenameList(option){
     this._onEditWatch(
       Logic.renameList(this.watchList, option),
-      WatchActionTypes.RENAME_LIST
+      WAT.RENAME_LIST
     );
   },
   onDeleteList(option){
     this._onEditWatch(
       Logic.deleteList(this.watchList, option),
-      WatchActionTypes.DELETE_LIST
+      WAT.DELETE_LIST
     );
   }
 

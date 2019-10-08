@@ -25,12 +25,10 @@ Data providers API Keys can be set on the **tab ApiKeys, dialog Settings**. Also
 
 There is three UI theme in the web app ERC: **Dark**, **Light**, and **Sand** can be set on **tab Options, dialog Settings**. All user's settings keep in browser's memory only for a current web session.  
 
-More details and requirements about data providers can be found in the [web app ERC](https://zhnzhn.github.io) **pane About** and provider's websites.  
+More details and requirements about data providers can be found in the [web app ERC](https://zhnzhn.github.io) **pane About** and provider's websites. More information about data can be found on a **tab Info of Chart item**.  
 
 ### Attention
 For one item from **Dialog** can be only one **Chart item** in a container.
-If you want to change a date period, please, use **Highcharts zoom option** or close the chart in the container and load data again.
-More information about data can be found a **tab Info, Chart item**.
 
 ## License
 This project is licensed under [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause). Copyright (c) 2016-present, Yevhenii Molodyi.

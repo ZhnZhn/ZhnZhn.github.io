@@ -7,10 +7,12 @@
  "names": [
   "A",
   "SvgIcons",
+  "ScrollPane",
+  "BrowserCaption",
   "InputText",
   "OpenClose",
   "SvgPlus",
   "SvgMinus"
  ],
- "mappings": ";;;;;;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,+BACDC,kBADC;AAEJC,gCAFI;AAGJC,gCAHI;AAIJC,4BAJI;AAKJC;AALI,EAAN;;kBAQeL,C"
+ "mappings": ";;;;;;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,+BACDC,kBADC;AAEJC,kCAFI;AAGJC,0CAHI;AAIJC,gCAJI;AAKJC,gCALI;AAMJC,4BANI;AAOJC;AAPI,EAAN;;kBAUeP,C"
 }

@@ -107,8 +107,8 @@ class InputText extends Component {
              ? C.ON
              : C.OFF
         , _spellCheck = spellCheck
-             ? true
-             : false;
+             ? "true"
+             : "false";
     return (
       <input
         ref={this._refInput}
@@ -119,7 +119,7 @@ class InputText extends Component {
         autoComplete={C.OFF}
         autoCorrect={_autoCorrect}
         spellCheck={_spellCheck}
-        translate={false}
+        translate="false"
         value={value}
         placeholder={placeholder}
         maxLength={maxLength}

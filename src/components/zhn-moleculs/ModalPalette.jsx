@@ -7,25 +7,25 @@ const S = {
     SHOW_HIDE: {
       zIndex: 1010,
       position: 'absolute',
-      top: '35px',
-      left: '-10px',
+      top: 35,
+      left: -10,
       backgroundColor: 'rgba(77, 77, 77, 1)',
       borderBottom: '4px solid green',
-      borderRadius: '5px',
+      borderRadius: 5,
       boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
    },
    ROOT_PANE: {
-     margin: '10px'
+     margin: 10
    },
    ROW: {
-     width: '120px'
+     width: 120
    },
    COLOR: {
      display: 'inline-block',
-     height: '32px',
-     width: '32px',
-     margin: '4px',
-     borderRadius: '2px',
+     height: 32,
+     width: 32,
+     margin: 4,
+     borderRadius: 2,
      verticalAlign: 'bottom',
      boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
    }
@@ -41,12 +41,13 @@ class ModalPalette extends Component {
      let r=0, c=0
        , _color, _idPrefix;
      for(; r<rows; r++){
-       let _elCells = []
+       let _elCells = [];
        _idPrefix = colors[r*cols]
        for(c=0; c<cols; c++){
          _color = colors[r*cols + c]
          _elCells.push((
            <CellColor
+             key={_color}
              id={_color}
              style={S.COLOR}
              color={_color}
@@ -56,6 +57,7 @@ class ModalPalette extends Component {
        }
        _elRows.push((
          <div
+           key={_idPrefix + r}
            id={_idPrefix + r}
            style={S.ROW}
          >
@@ -74,11 +76,9 @@ class ModalPalette extends Component {
         style={S.SHOW_HIDE}
         onClose={onClose}
       >
-          <div
-            style={S.ROOT_PANE}
-          >
-            {this._renderColors(model, onClickCell)}
-          </div>
+        <div style={S.ROOT_PANE}>
+           {this._renderColors(model, onClickCell)}
+        </div>
       </ModalPopup>
     );
   }

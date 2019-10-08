@@ -11,6 +11,9 @@ var _highcharts2 = _interopRequireDefault(_highcharts);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var formatNumber = function formatNumber(value) {
+  if (value == null) {
+    return '0.00';
+  }
   if (typeof value === 'number' && value > -0.01 && value < 0.01) {
     return '' + value;
   }

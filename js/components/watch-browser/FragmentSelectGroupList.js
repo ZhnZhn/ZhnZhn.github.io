@@ -77,8 +77,8 @@ var FragmentSelectGroupList = function (_Component) {
   }
 
   (0, _createClass3.default)(FragmentSelectGroupList, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
+    key: 'UNSAFE_componentWillReceiveProps',
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps !== this.props) {
         if (nextProps.groupOptions !== this.props.groupOptions) {
           this.groupCaption = null;

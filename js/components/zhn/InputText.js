@@ -150,7 +150,7 @@ var InputText = (_temp = _class = function (_Component) {
           step = _props.step,
           value = this.state.value,
           _autoCorrect = spellCheck ? C.ON : C.OFF,
-          _spellCheck = spellCheck ? true : false;
+          _spellCheck = spellCheck ? "true" : "false";
 
       return _react2.default.createElement('input', {
         ref: this._refInput,
@@ -161,7 +161,7 @@ var InputText = (_temp = _class = function (_Component) {
         autoComplete: C.OFF,
         autoCorrect: _autoCorrect,
         spellCheck: _spellCheck,
-        translate: false,
+        translate: 'false',
         value: value,
         placeholder: placeholder,
         maxLength: maxLength,

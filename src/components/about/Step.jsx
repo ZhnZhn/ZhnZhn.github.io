@@ -7,12 +7,12 @@ const S = {
     border: '2px solid #80c040',
     borderRadius: '50%',
     lineHeight: '24px',
-    width: '26px',
-    height: '26px',
+    width: 26,
+    height: 26,
     textAlign: 'center',
     textTransform: 'uppercase'
   }
-}
+};
 
 const Step = ({ step='0' }) => (
   <span style={S.STEP}>

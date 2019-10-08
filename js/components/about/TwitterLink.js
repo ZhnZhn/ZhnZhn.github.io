@@ -20,12 +20,12 @@ var S = {
   LINK: {
     display: 'inline-block',
     position: 'relative',
-    top: '-2px',
-    height: '28px',
-    borderRadius: '4px',
+    top: -2,
+    height: 28,
+    borderRadius: 4,
     padding: '1px 10px 1px 9px',
     color: COLOR,
-    outline: '0px',
+    outline: 0,
     textDecoration: 'none',
     userSelect: 'none',
     cursor: 'pointer'
@@ -33,12 +33,12 @@ var S = {
   ICON: {
     display: 'inline-block',
     position: 'relative',
-    top: '4px',
-    width: '18px',
-    height: '18px',
+    top: 4,
+    width: 18,
+    height: 18,
     fill: COLOR,
     stroke: COLOR,
-    marginRight: '8px'
+    marginRight: 8
   }
 };
 

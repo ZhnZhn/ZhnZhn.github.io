@@ -175,7 +175,7 @@ var DateField = (_temp = _class = function (_Component) {
           spellCheck: false,
           type: 'text',
           placeholder: placeholder,
-          inputmode: inputmode,
+          inputMode: inputmode,
           value: value,
           maxLength: maxLength,
           onChange: this._handleChangeValue,

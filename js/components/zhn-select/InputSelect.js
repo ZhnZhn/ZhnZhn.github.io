@@ -165,8 +165,8 @@ var InputSelect = (_temp = _class = function (_Component) {
   */
 
   (0, _createClass3.default)(InputSelect, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
+    key: 'UNSAFE_componentWillReceiveProps',
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (this.props !== nextProps) {
         if (this.props.options !== nextProps.options) {
           //New options come from Parent - Clear domCache, Init State

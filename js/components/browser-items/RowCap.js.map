@@ -1,1 +1,31 @@
-{"version":3,"sources":["../../../src/components/browser-items/RowCap.jsx"],"names":["NA","STYLE","CAP","paddingRight","SALE_PRICE","display","color","width","float","IPO","RowCap","cap","salePrice","ipo","_cap","formatMoney","_salePrice"],"mappings":";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,KAAK,KAAX;;AAEA,IAAMC,QAAQ;AACZC,OAAM;AACJC,kBAAc;AADV,GADM;AAIZC,cAAa;AACXC,aAAS,gBADE;AAEXC,WAAO,mBAFI;AAGXH,kBAAc,KAHH;AAIXI,WAAO,MAJI;AAKXC,WAAO;AALI,GAJD;AAWZC,OAAM;AACJJ,aAAS,gBADL;AAEJC,WAAO,mBAFH;AAGJ;AACAC,WAAO,MAJH;AAKJC,WAAO;AALH;AAXM,CAAd;;AAoBA,IAAME,SAAS,SAATA,MAAS,OAA6B;AAAA,MAA1BC,GAA0B,QAA1BA,GAA0B;AAAA,MAArBC,SAAqB,QAArBA,SAAqB;AAAA,MAAVC,GAAU,QAAVA,GAAU;;AAC1C,MAAMC,OAAQH,QAAQ,CAAT,GACFX,EADE,GAEF,qBAAWe,WAAX,CAAuBJ,GAAvB,CAFX;AAAA,MAGMK,aAAcL,QAAQX,EAAR,IAAcW,QAAQ,CAAvB,GACR,qBAAWI,WAAX,CAAuBH,SAAvB,CADQ,GAERZ,EALX;AAMA,SACE;AAAA;AAAA;AACG;AAAA;AAAA,QAAM,OAAOC,MAAMC,GAAnB;AACGY;AADH,KADH;AAIG;AAAA;AAAA,QAAM,OAAOb,MAAMQ,GAAnB;AAAA,eACUI;AADV,KAJH;AAOG;AAAA;AAAA,QAAM,OAAOZ,MAAMG,UAAnB;AACGY;AADH;AAPH,GADF;AAaD,CApBD;;kBAsBeN,M","file":"RowCap.js","sourcesContent":["import React from 'react';\r\nimport accounting from 'accounting';\r\n\r\nconst NA = 'n/a';\r\n\r\nconst STYLE = {\r\n  CAP : {\r\n    paddingRight: '8px'\r\n  },\r\n  SALE_PRICE : {\r\n    display: 'display-inline',\r\n    color: 'rgb(47, 126, 216)',\r\n    paddingRight: '8px',\r\n    width: '90px',\r\n    float: 'right'\r\n  },\r\n  IPO : {\r\n    display: 'display-inline',\r\n    color: 'rgb(253, 179, 22)',\r\n    //paddingRight: '8px',\r\n    width: '70px',\r\n    float: 'right'\r\n  }\r\n}\r\n\r\nconst RowCap = ({ cap, salePrice, ipo }) => {\r\n  const _cap = (cap === 0)\r\n           ? NA\r\n           : accounting.formatMoney(cap)\r\n      , _salePrice = (cap !== NA && cap !== 0)\r\n           ? accounting.formatMoney(salePrice)\r\n           : NA\r\n  return (\r\n    <div>\r\n       <span style={STYLE.CAP}>\r\n         {_cap}\r\n       </span>\r\n       <span style={STYLE.IPO}>\r\n         {`ipo ${ipo}`}\r\n       </span>\r\n       <span style={STYLE.SALE_PRICE}>\r\n         {_salePrice}\r\n       </span>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default RowCap\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-items/RowCap.js"
+ ],
+ "file": "../../../src/components/browser-items/RowCap.js",
+ "names": [
+  "NA",
+  "STYLE",
+  "CAP",
+  "paddingRight",
+  "SALE_PRICE",
+  "display",
+  "color",
+  "width",
+  "float",
+  "IPO",
+  "_capFormatter",
+  "minimumFractionDigits",
+  "maximumFractionDigits",
+  "_formatter",
+  "RowCap",
+  "cap",
+  "salePrice",
+  "ipo",
+  "_cap",
+  "format",
+  "_salePrice"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,KAAK,KAAX;;AAEA,IAAMC,QAAQ;AACZC,OAAM;AACJC,kBAAc;AADV,GADM;AAIZC,cAAa;AACXC,aAAS,gBADE;AAEXC,WAAO,mBAFI;AAGXH,kBAAc,CAHH;AAIXI,WAAO,EAJI;AAKXC,WAAO;AALI,GAJD;AAWZC,OAAM;AACJJ,aAAS,gBADL;AAEJC,WAAO,mBAFH;AAGJC,WAAO,EAHH;AAIJC,WAAO;AAJH;AAXM,CAAd;;AAmBA,IAAME,gBAAgB,mCAAoB;AACxCC,yBAAuB,CADiB;AAExCC,yBAAuB;AAFiB,CAApB,CAAtB;AAIA,IAAMC,aAAa,oCAAnB;;AAEA,IAAMC,SAAS,SAATA,MAAS,OAA6B;AAAA,MAA1BC,GAA0B,QAA1BA,GAA0B;AAAA,MAArBC,SAAqB,QAArBA,SAAqB;AAAA,MAAVC,GAAU,QAAVA,GAAU;;AAC1C,MAAMC,OAAQH,QAAQ,CAAT,GACFf,EADE,GAEFU,cAAcS,MAAd,CAAqBJ,GAArB,CAFX;AAAA,MAGMK,aAAcL,QAAQf,EAAR,IAAce,QAAQ,CAAvB,GACRF,WAAWM,MAAX,CAAkBH,SAAlB,CADQ,GAERhB,EALX;AAMA,SACE;AAAA;AAAA;AACG;AAAA;AAAA,QAAM,OAAOC,MAAMC,GAAnB;AACGgB;AADH,KADH;AAIG;AAAA;AAAA,QAAM,OAAOjB,MAAMQ,GAAnB;AAAA,eACUQ;AADV,KAJH;AAOG;AAAA;AAAA,QAAM,OAAOhB,MAAMG,UAAnB;AACGgB;AADH;AAPH,GADF;AAaD,CApBD;;kBAsBeN,M"
+}

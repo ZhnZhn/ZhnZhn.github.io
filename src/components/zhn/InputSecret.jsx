@@ -4,15 +4,15 @@ const S = {
   ROOT: {
     position: 'relative',
     display: 'inline-block',
-    backgroundColor: '#E1E1CB',
-    width: '250px'
+    backgroundColor: '#e1e1cb',
+    width: 250
   },
   INPUT: {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
+    height: 30,
+    paddingLeft: 10,
     color: 'green',
     width: '100%',
     fontSize: '16px',
@@ -20,8 +20,10 @@ const S = {
   }
 };
 
+const _isFn = fn => typeof fn === 'function';
+
 const _maskValue = (len=0) => {
-  let i=0, str = ''
+  let i=0, str = '';
   for (i; i<len; i++){
     str = str + 'X'
   }
@@ -49,12 +51,12 @@ class InputSecret extends Component {
     }
     switch(event.keyCode){
       case 13:
-        if (typeof this.props.onEnter === 'function') {
+        if (_isFn(this.props.onEnter)) {
           this.props.onEnter(this.secret)
         }
         break;
       case 27: case 46:
-        if (typeof this.props.onEnter === 'function') {
+        if (_isFn(this.props.onEnter)) {
           this.props.onEnter('')
         }
         this.clear();
@@ -76,15 +78,14 @@ class InputSecret extends Component {
            autoComplete="off"
            autoCorrect="off"
            autoCapitalize="off"
-           spellCheck={false}
-           translate={false}
+           spellCheck="false"
+           translate="false"
            placeholder={placeholder}
            maxLength={maxLength}
            value={value}
            onChange={this._handleChangeValue}
            onKeyDown={this._handleKeyDown}
-        >
-        </input>
+        />
       </div>
     )
   }

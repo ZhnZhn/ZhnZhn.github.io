@@ -30,20 +30,24 @@ var S = {
   ROOT: {
     position: 'relative',
     display: 'inline-block',
-    backgroundColor: '#E1E1CB',
-    width: '250px'
+    backgroundColor: '#e1e1cb',
+    width: 250
   },
   INPUT: {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
+    height: 30,
+    paddingLeft: 10,
     color: 'green',
     width: '100%',
     fontSize: '16px',
     fontWeight: 'bold'
   }
+};
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
 };
 
 var _maskValue = function _maskValue() {
@@ -85,12 +89,12 @@ var InputSecret = function (_Component) {
       }
       switch (event.keyCode) {
         case 13:
-          if (typeof _this.props.onEnter === 'function') {
+          if (_isFn(_this.props.onEnter)) {
             _this.props.onEnter(_this.secret);
           }
           break;
         case 27:case 46:
-          if (typeof _this.props.onEnter === 'function') {
+          if (_isFn(_this.props.onEnter)) {
             _this.props.onEnter('');
           }
           _this.clear();
@@ -121,8 +125,8 @@ var InputSecret = function (_Component) {
           , autoComplete: 'off',
           autoCorrect: 'off',
           autoCapitalize: 'off',
-          spellCheck: false,
-          translate: false,
+          spellCheck: 'false',
+          translate: 'false',
           placeholder: placeholder,
           maxLength: maxLength,
           value: value,

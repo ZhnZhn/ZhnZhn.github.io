@@ -1,5 +1,6 @@
 import React from 'react';
-import accounting from 'accounting';
+
+import crCurrencyFormatter from '../../utils/crCurrencyFormatter';
 
 import Item from './Item';
 
@@ -8,28 +9,33 @@ const NA = 'n/a'
 
 const STYLE = {
   CAP : {
-    paddingRight: '8px'
+    paddingRight: 8
   },
   COUNTRY : {
     display: 'display-inline',
     color: 'gray',
-    width: '35px',
+    width: 35,
     float: 'right'
   },
   DATE : {
     display: 'display-inline',
     color: 'rgb(253, 179, 22)',
-    width: '85px',
+    width: 85,
     float: 'right'
   }
-}
+};
+
+const _formatter = crCurrencyFormatter({
+  currency: 'GBP',
+  minimumFractionDigits: 3
+});
 
 const ItemLse = (props) => {
   const { item } = props
-      , { cap, c, date } = item
+      , { cap, c, date } = item || {}
       , _cap = (cap === 0)
           ? NA
-          : accounting.formatMoney(cap, "£") + ML
+          : _formatter.format(cap) + ML;
   return (
     <Item {...props}>
     <div>

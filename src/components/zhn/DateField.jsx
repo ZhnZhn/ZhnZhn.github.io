@@ -114,7 +114,7 @@ class DateField extends Component {
            spellCheck={false}
            type="text"
            placeholder={placeholder}
-           inputmode={inputmode}
+           inputMode={inputmode}
            value={value}
            maxLength={maxLength}
            onChange={this._handleChangeValue}

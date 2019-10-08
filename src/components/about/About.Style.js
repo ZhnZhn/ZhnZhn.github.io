@@ -5,34 +5,37 @@ const S = {
   },
 
   DIV_WRAPPER : {
-    paddingLeft: '12px',
-    paddingRight: '5px',
+    paddingLeft: 12,
+    paddingRight: 5,
     lineHeight : 1.4,
     color: 'gray',
     fontWeight: 'bold'
   },
   PROVIDER: {
     display: 'inline-block',
-    paddingRight: '8px',
-    paddingLeft: '8px'
+    paddingRight: 8,
+    paddingLeft: 8
   },
-  LINE_HEIGHT: {
+  LH_18: {
     lineHeight: 1.8
   },
-  MORE : {
+  LH_14 : {
     lineHeight: 1.4
   },
-  P_BOTTOM : {
+  MB_8EM: {
     marginBottom: '0.8em'
   },
-  M_B_4: {
-    marginBottom: '4px'
+  MB_6EM: {
+    marginBottom: '0.6em'
+  },
+  MB_4: {
+    marginBottom: 4
   },
   MARGIN_TOP : {
-    marginTop: '8px'
+    marginTop: 8
   },
   BT_TWITTER : {
-    marginLeft: '12px'
+    marginLeft: 12
   },
   GREEN: {
     color: '#80c040'

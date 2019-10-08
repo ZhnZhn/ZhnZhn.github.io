@@ -40,7 +40,7 @@ const CL = {
   QUANDL: "header__bt-quandl",
   EUROSTAT: "header__bt-eurostat",
   WATCH: "header__bt-watch",
-  BTS_RIGHT: "header__bts-right",  
+  BTS_RIGHT: "header__bts-right",
   ABOUT: "header__bt-about",
 
   BROWSER_MENU: "popup-menu header__panel-browser"

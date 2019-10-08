@@ -12,6 +12,14 @@ var _SvgIcons = require('./svg/SvgIcons');
 
 var _SvgIcons2 = _interopRequireDefault(_SvgIcons);
 
+var _ScrollPane = require('./ScrollPane');
+
+var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
+
+var _BrowserCaption = require('./BrowserCaption');
+
+var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
+
 var _InputText = require('./InputText');
 
 var _InputText2 = _interopRequireDefault(_InputText);
@@ -31,6 +39,8 @@ var _SvgMinus2 = _interopRequireDefault(_SvgMinus);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var A = (0, _extends3.default)({}, _SvgIcons2.default, {
+  ScrollPane: _ScrollPane2.default,
+  BrowserCaption: _BrowserCaption2.default,
   InputText: _InputText2.default,
   OpenClose: _OpenClose2.default,
   SvgPlus: _SvgPlus2.default,

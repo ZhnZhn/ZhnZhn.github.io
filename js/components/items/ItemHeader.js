@@ -57,7 +57,7 @@ var S = {
     borderTopRightRadius: '2px',
     borderBottomRightRadius: '2px',
     position: 'relative',
-    'box-shadow': '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
+    boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
   },
   CAPTION: {
     display: 'inline-block',

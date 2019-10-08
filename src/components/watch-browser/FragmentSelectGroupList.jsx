@@ -26,7 +26,7 @@ class FragmentSelectGroupList extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
+  UNSAFE_componentWillReceiveProps(nextProps){
     if (nextProps !== this.props){
       if (nextProps.groupOptions !== this.props.groupOptions){
           this.groupCaption = null;

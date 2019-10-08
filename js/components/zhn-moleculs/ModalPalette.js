@@ -38,25 +38,25 @@ var S = {
   SHOW_HIDE: {
     zIndex: 1010,
     position: 'absolute',
-    top: '35px',
-    left: '-10px',
+    top: 35,
+    left: -10,
     backgroundColor: 'rgba(77, 77, 77, 1)',
     borderBottom: '4px solid green',
-    borderRadius: '5px',
+    borderRadius: 5,
     boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
   },
   ROOT_PANE: {
-    margin: '10px'
+    margin: 10
   },
   ROW: {
-    width: '120px'
+    width: 120
   },
   COLOR: {
     display: 'inline-block',
-    height: '32px',
-    width: '32px',
-    margin: '4px',
-    borderRadius: '2px',
+    height: 32,
+    width: 32,
+    margin: 4,
+    borderRadius: 2,
     verticalAlign: 'bottom',
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
@@ -93,6 +93,7 @@ var ModalPalette = function (_Component) {
         for (c = 0; c < cols; c++) {
           _color = colors[r * cols + c];
           _elCells.push(_react2.default.createElement(_CellColor2.default, {
+            key: _color,
             id: _color,
             style: S.COLOR,
             color: _color,
@@ -102,6 +103,7 @@ var ModalPalette = function (_Component) {
         _elRows.push(_react2.default.createElement(
           'div',
           {
+            key: _idPrefix + r,
             id: _idPrefix + r,
             style: S.ROW
           },
@@ -130,9 +132,7 @@ var ModalPalette = function (_Component) {
         },
         _react2.default.createElement(
           'div',
-          {
-            style: S.ROOT_PANE
-          },
+          { style: S.ROOT_PANE },
           this._renderColors(model, onClickCell)
         )
       );

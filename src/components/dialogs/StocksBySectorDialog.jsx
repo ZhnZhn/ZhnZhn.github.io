@@ -61,20 +61,15 @@ const SOURCE_OPTIONS = [
   }
 ];
 
+const DF_SOURCE = SOURCE_OPTIONS[0];
+
 const _isFn = fn => typeof fn === 'function';
+const _getItemId = props => ((props.data || {}).item || {}).id;
+const _createInitialState = props => ({
+  itemId: _getItemId(props),
+  isShowLink: false,
+});
 
-const _getItemId = (props) => props
-  && props.data
-  && props.data.item
-  && props.data.item.id;
-
-const _createInitialState = (props) => {
-   const itemId = _getItemId(props);
-    return {
-      itemId: itemId,
-      isShowLink: false,
-    };
-};
 
 class StocksBySectorDialog extends Component {
   /*
@@ -151,7 +146,7 @@ class StocksBySectorDialog extends Component {
   _hSelectDataSource = (item) => {
     this._dataSource = item
   }
-  _getDataSource = () => this._dataSource || SOURCE_OPTIONS[2]
+  _getDataSource = () => this._dataSource || DF_SOURCE
 
   _hLoad = () => {
     const { data, onClose } = this.props
@@ -179,9 +174,9 @@ class StocksBySectorDialog extends Component {
   }
 
   render(){
-    const { isShow, data={}, onClose } = this.props
-    , { item={} } = data
-    , { text } = item
+    const { isShow, data, onClose } = this.props
+    , { item } = data || {}
+    , { text } = item || {}
     , {
         isShowLabels,
         isShowLink,
@@ -208,7 +203,7 @@ class StocksBySectorDialog extends Component {
         <D.RowInputSelect
            isShowLabels={isShowLabels}
            caption="Source"
-           placeholder="IEX Platform: 2 Years"
+           placeholder={DF_SOURCE.caption}
            options={SOURCE_OPTIONS}
            onSelect={this._hSelectDataSource}
         />

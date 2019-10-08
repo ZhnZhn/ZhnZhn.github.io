@@ -1,35 +1,41 @@
 import React from 'react';
-import accounting from 'accounting';
+
+import crCurrencyFormatter from '../../utils/crCurrencyFormatter'
 
 const NA = 'n/a';
 
 const STYLE = {
   CAP : {
-    paddingRight: '8px'
+    paddingRight: 8
   },
   SALE_PRICE : {
     display: 'display-inline',
     color: 'rgb(47, 126, 216)',
-    paddingRight: '8px',
-    width: '90px',
+    paddingRight: 8,
+    width: 90,
     float: 'right'
   },
   IPO : {
     display: 'display-inline',
     color: 'rgb(253, 179, 22)',
-    //paddingRight: '8px',
-    width: '70px',
+    width: 70,
     float: 'right'
   }
 }
 
+const _capFormatter = crCurrencyFormatter({
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0
+});
+const _formatter = crCurrencyFormatter();
+
 const RowCap = ({ cap, salePrice, ipo }) => {
   const _cap = (cap === 0)
            ? NA
-           : accounting.formatMoney(cap)
+           : _capFormatter.format(cap)
       , _salePrice = (cap !== NA && cap !== 0)
-           ? accounting.formatMoney(salePrice)
-           : NA
+           ? _formatter.format(salePrice)
+           : NA;
   return (
     <div>
        <span style={STYLE.CAP}>

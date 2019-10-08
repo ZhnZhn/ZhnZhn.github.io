@@ -44,7 +44,7 @@ var WatchListSlice = {
     var _this = this;
 
     _localforage2.default.getItem(STORAGE_KEY).then(function (value) {
-      _this.watchList = value ? value : _WatchDefault2.default;
+      _this.watchList = value || _WatchDefault2.default;
       _this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER, _this.watchList);
     }).catch(function () {
       _this.watchList = _WatchDefault2.default;
@@ -69,13 +69,15 @@ var WatchListSlice = {
   },
   onRemoveItem: function onRemoveItem(option) {
     _Logic2.default.removeItem(this.watchList, option);
+    this._triggerUpdateWL();
+  },
+  _triggerUpdateWL: function _triggerUpdateWL() {
     this.isWatchEdited = true;
     this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
   },
   _onDragDrop: function _onDragDrop(result) {
     if (result.isDone) {
-      this.isWatchEdited = true;
-      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+      this._triggerUpdateWL();
     } else {
       this.showAlertDialog(result);
     }
@@ -111,8 +113,7 @@ var WatchListSlice = {
   },
   _onEditWatch: function _onEditWatch(result, forActionType) {
     if (result.isDone) {
-      this.isWatchEdited = true;
-      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+      this._triggerUpdateWL();
       this.trigger(_WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED, { forActionType: forActionType });
     } else {
       this.trigger(_WatchActions.WatchActionTypes.EDIT_WATCH_FAILED, {
@@ -142,4 +143,4 @@ var WatchListSlice = {
 };
 
 exports.default = WatchListSlice;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WatchListSlice.js.map
+//# sourceMappingURL=WatchListSlice.js.map

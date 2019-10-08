@@ -180,8 +180,8 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
       this.unsubscribe();
     }
   }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
+    key: 'UNSAFE_componentWillReceiveProps',
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps !== this.props && nextProps.isShow !== this.props.isShow) {
         var groups = nextProps.store.getWatchGroups();
         if (groups !== this.state.groupOptions) {

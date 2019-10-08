@@ -66,8 +66,8 @@ var ButtonTab = function (_Component) {
   }
 
   (0, _createClass3.default)(ButtonTab, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
+    key: 'UNSAFE_componentWillReceiveProps',
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (this.props !== nextProps && nextProps.isShow !== this.state.isShow) {
         this.setState({ isShow: nextProps.isShow });
       }

@@ -8,9 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _accounting = require('accounting');
+var _crCurrencyFormatter = require('../../utils/crCurrencyFormatter');
 
-var _accounting2 = _interopRequireDefault(_accounting);
+var _crCurrencyFormatter2 = _interopRequireDefault(_crCurrencyFormatter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18,31 +18,36 @@ var NA = 'n/a';
 
 var STYLE = {
   CAP: {
-    paddingRight: '8px'
+    paddingRight: 8
   },
   SALE_PRICE: {
     display: 'display-inline',
     color: 'rgb(47, 126, 216)',
-    paddingRight: '8px',
-    width: '90px',
+    paddingRight: 8,
+    width: 90,
     float: 'right'
   },
   IPO: {
     display: 'display-inline',
     color: 'rgb(253, 179, 22)',
-    //paddingRight: '8px',
-    width: '70px',
+    width: 70,
     float: 'right'
   }
 };
+
+var _capFormatter = (0, _crCurrencyFormatter2.default)({
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0
+});
+var _formatter = (0, _crCurrencyFormatter2.default)();
 
 var RowCap = function RowCap(_ref) {
   var cap = _ref.cap,
       salePrice = _ref.salePrice,
       ipo = _ref.ipo;
 
-  var _cap = cap === 0 ? NA : _accounting2.default.formatMoney(cap),
-      _salePrice = cap !== NA && cap !== 0 ? _accounting2.default.formatMoney(salePrice) : NA;
+  var _cap = cap === 0 ? NA : _capFormatter.format(cap),
+      _salePrice = cap !== NA && cap !== 0 ? _formatter.format(salePrice) : NA;
   return _react2.default.createElement(
     'div',
     null,

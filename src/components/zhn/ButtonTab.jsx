@@ -22,11 +22,11 @@ class ButtonTab extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
+  UNSAFE_componentWillReceiveProps(nextProps){
     if ( this.props !== nextProps &&
          nextProps.isShow !== this.state.isShow )
     {
-      this.setState({isShow : nextProps.isShow})
+      this.setState({ isShow : nextProps.isShow })
     }
   }
 

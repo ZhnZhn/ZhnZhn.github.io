@@ -72,8 +72,8 @@ var TabPane = (_temp = _class = function (_Component) {
   }
 
   (0, _createClass3.default)(TabPane, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
+    key: 'UNSAFE_componentWillReceiveProps',
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (this.isUpdateInit && this.props !== nextProps) {
         var components = nextProps.children.map(function (tab, index) {
           return _react2.default.cloneElement(tab.props.children, { key: 'comp' + index });

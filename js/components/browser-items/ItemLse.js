@@ -8,9 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _accounting = require('accounting');
+var _crCurrencyFormatter = require('../../utils/crCurrencyFormatter');
 
-var _accounting2 = _interopRequireDefault(_accounting);
+var _crCurrencyFormatter2 = _interopRequireDefault(_crCurrencyFormatter);
 
 var _Item = require('./Item');
 
@@ -23,28 +23,34 @@ var NA = 'n/a',
 
 var STYLE = {
   CAP: {
-    paddingRight: '8px'
+    paddingRight: 8
   },
   COUNTRY: {
     display: 'display-inline',
     color: 'gray',
-    width: '35px',
+    width: 35,
     float: 'right'
   },
   DATE: {
     display: 'display-inline',
     color: 'rgb(253, 179, 22)',
-    width: '85px',
+    width: 85,
     float: 'right'
   }
 };
 
+var _formatter = (0, _crCurrencyFormatter2.default)({
+  currency: 'GBP',
+  minimumFractionDigits: 3
+});
+
 var ItemLse = function ItemLse(props) {
   var item = props.item,
-      cap = item.cap,
-      c = item.c,
-      date = item.date,
-      _cap = cap === 0 ? NA : _accounting2.default.formatMoney(cap, "£") + ML;
+      _ref = item || {},
+      cap = _ref.cap,
+      c = _ref.c,
+      date = _ref.date,
+      _cap = cap === 0 ? NA : _formatter.format(cap) + ML;
 
   return _react2.default.createElement(
     _Item2.default,

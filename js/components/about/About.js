@@ -36,17 +36,9 @@ var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ChartActions = require('../../flux/actions/ChartActions');
 
-var _ScrollPane = require('../zhn/ScrollPane');
+var _Comp = require('../Comp');
 
-var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
-
-var _BrowserCaption = require('../zhn/BrowserCaption');
-
-var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
-
-var _OpenClose = require('../zhn/OpenClose');
-
-var _OpenClose2 = _interopRequireDefault(_OpenClose);
+var _Comp2 = _interopRequireDefault(_Comp);
 
 var _TwitterLink = require('./TwitterLink');
 
@@ -173,7 +165,7 @@ var About = function (_Component) {
           style: (0, _extends3.default)({}, _styleOpen, TS.ROOT)
         },
         _react2.default.createElement(
-          _BrowserCaption2.default,
+          _Comp2.default.BrowserCaption,
           {
             caption: 'About',
             onClose: this._handleClose
@@ -181,11 +173,11 @@ var About = function (_Component) {
           _react2.default.createElement(_TwitterLink2.default, {
             rootStyle: _About2.default.BT_TWITTER,
             account: 'webapperc',
-            title: 'Twitter page @wepapperc with examples'
+            title: 'Twitter page @wepapperc with chart examples'
           })
         ),
         _react2.default.createElement(
-          _ScrollPane2.default,
+          _Comp2.default.ScrollPane,
           {
             className: CL.SCROLL,
             style: _About2.default.SCROLL_DIV
@@ -195,7 +187,7 @@ var About = function (_Component) {
             { style: (0, _extends3.default)({}, _About2.default.DIV_WRAPPER, _About2.default.GREY) },
             _react2.default.createElement(
               'p',
-              { style: _About2.default.M_B_4 },
+              { style: _About2.default.MB_4 },
               _react2.default.createElement(
                 'span',
                 { style: _About2.default.GREEN },
@@ -226,12 +218,12 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: _About2.default.P_BOTTOM },
-              'Also you can export chart to PNG, JPG, SVG, print to PDF.'
+              { style: _About2.default.MB_8EM },
+              'Also it\'s possible to export the chart to PNG, JPG, SVG or print to PDF.'
             ),
             _react2.default.createElement(
               'p',
-              { style: _About2.default.P_BOTTOM },
+              { style: _About2.default.MB_6EM },
               _react2.default.createElement(
                 'span',
                 { style: _About2.default.RED },
@@ -252,33 +244,27 @@ var About = function (_Component) {
                   { style: _About2.default.BLACK },
                   'Chart item'
                 ),
-                ' in a container. If you want to change a date period, please, use ',
+                ' in a container. More information about a dataset can be found on a ',
                 _react2.default.createElement(
                   'span',
                   { style: _About2.default.BLACK },
-                  'Highcharts zoom option'
-                ),
-                ' or close the chart in the container and load data again. More information about data can be found on a ',
-                _react2.default.createElement(
-                  'span',
-                  { style: _About2.default.BLACK },
-                  'tab Info, Chart item'
-                ),
-                '.'
+                  'tab Info of Chart item.'
+                )
               )
             ),
             _react2.default.createElement(
-              _OpenClose2.default,
+              _Comp2.default.OpenClose,
               {
                 isClose: true,
                 caption: 'More...',
+                ocStyle: _About2.default.LH_18,
                 captionStyle: OC_CAPTION_STYLE,
-                rootStyle: _About2.default.MORE,
+                rootStyle: _About2.default.LH_14,
                 openColor: _Color2.default.YELLOW
               },
               _react2.default.createElement(
                 'p',
-                { style: _About2.default.P_BOTTOM },
+                { style: _About2.default.MB_8EM },
                 'After clicking a ',
                 _react2.default.createElement(
                   'span',
@@ -307,7 +293,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: _About2.default.P_BOTTOM },
+                { style: _About2.default.MB_8EM },
                 'Some open and private data providers require user\'s ',
                 _react2.default.createElement(
                   'span',
@@ -318,7 +304,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: _About2.default.P_BOTTOM },
+                { style: _About2.default.MB_8EM },
                 _react2.default.createElement(
                   'span',
                   null,
@@ -351,7 +337,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: _About2.default.P_BOTTOM },
+                { style: _About2.default.MB_8EM },
                 'Data providers API Keys can be set on the ',
                 _react2.default.createElement(
                   'span',
@@ -362,7 +348,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: _About2.default.P_BOTTOM },
+                { style: _About2.default.MB_8EM },
                 'Also for loading data from data providers with HTTP protocol required ',
                 _react2.default.createElement(
                   'span',
@@ -379,7 +365,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: _About2.default.P_BOTTOM },
+                { style: _About2.default.MB_8EM },
                 'There is three UI theme in the web app ERC: ',
                 _react2.default.createElement(
                   'span',

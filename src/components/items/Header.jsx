@@ -24,7 +24,7 @@ const S = {
     width: '100%',
     borderTopRightRadius: '2px',
     borderBottomRightRadius: '2px',
-    'box-shadow': '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
+    boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
   },
   SVG_MORE: {
     stroke: '#777777',
@@ -134,7 +134,7 @@ class Header extends Component {
       <div style={{...S.ROOT, ...TS.ROOT }}>
         { this._renderMore(moreModel, TS) }
         <SvgCheckBox
-           style={S.CHECK_BOX}           
+           style={S.CHECK_BOX}
            onCheck={onCheck}
            onUnCheck={onUnCheck}
         />
