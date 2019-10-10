@@ -11,6 +11,15 @@ var _RouterAdapter2 = _interopRequireDefault(_RouterAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var IexAdapter = {
+  crKey: function crKey() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$one = _ref.one,
+        one = _ref$one === undefined ? '' : _ref$one,
+        _ref$two = _ref.two,
+        two = _ref$two === undefined ? '' : _ref$two;
+
+    return one + '_' + two;
+  },
   toConfig: function toConfig(json, option) {
     var config = _RouterAdapter2.default.getAdapter(option).toConfig(json, option);
     return { config: config };
@@ -22,4 +31,4 @@ var IexAdapter = {
 };
 
 exports.default = IexAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\IexAdapter.js.map
+//# sourceMappingURL=IexAdapter.js.map

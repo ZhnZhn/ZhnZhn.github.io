@@ -9,14 +9,16 @@ const {
 const { toSeriesData } = AdapterStockFn;
 
 const _crZhConfig = (id, option) => {
-  const { value, dataSource } = option;
+  const { one, dataSource } = option;
   return {
     dataSource,
     id: id,
-    key: value,
+    key: id,
     linkFn: "NASDAQ",
-    item: value,
+    item: one,
+    itemCaption: one,
     isWithLegend: true,
+    isWithoutAdd: true,
     legend: stockSeriesLegend()
   };
 }
@@ -26,7 +28,7 @@ const _crInfo = (title) => ({
   frequency: "Daily",
 });
 
-const _crId = ({ value }) => value;
+const _crId = ({ one, two }) => one+'_'+two;
 
 const toChart = {
   toConfig(json, option){

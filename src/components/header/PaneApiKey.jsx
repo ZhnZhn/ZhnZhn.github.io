@@ -7,7 +7,7 @@ import RowSecret from '../dialogs/RowSecret'
 import FlatButton from '../zhn-m/FlatButton'
 import RowButtons from './RowButtons'
 
-const MAX_KEY = 8;
+const MAX_KEY = 9;
 
 class PaneApiKey extends Component {
   /*
@@ -55,11 +55,12 @@ class PaneApiKey extends Component {
   _ref5 = n => this.iComp5 = n
   _ref6 = n => this.iComp6 = n
   _ref7 = n => this.iComp7 = n
+  _ref8 = n => this.iComp8 = n
 
   render(){
     const { titleStyle, btStyle, onClose } = this.props;
     return (
-      <div>        
+      <div>
         <RowSecret
            ref={ this._ref1}
            titleStyle={titleStyle}
@@ -101,17 +102,25 @@ class PaneApiKey extends Component {
         <RowSecret
            ref={this._ref6}
            titleStyle={titleStyle}
-           title="Quandl:"
-           placeholder="Quandl API Key"
+           title="IEX:"
+           placeholder="IEX Cloud API Key"
+           maxLength="35"
            onEnter={this._setKey6}
         />
         <RowSecret
            ref={this._ref7}
            titleStyle={titleStyle}
+           title="Quandl:"
+           placeholder="Quandl API Key"
+           onEnter={this._setKey7}
+        />
+        <RowSecret
+           ref={this._ref8}
+           titleStyle={titleStyle}
            title="WTD:"
            placeholder="World Trading Data API Key"
            maxLength="60"
-           onEnter={this._setKey7}
+           onEnter={this._setKey8}
         />
         <RowButtons btStyle={btStyle} onClose={onClose}>
           <FlatButton

@@ -96,6 +96,7 @@ class ChartToolbar extends Component {
       <ButtonTab
         style={S.BT_ADD}
         caption="Add"
+        isUpdatable={false}
         onClick={onAddToWatch}
       />
     ) : null;
@@ -141,7 +142,7 @@ class ChartToolbar extends Component {
          </MenuTabItem>
          {_btAdd}
          {_btInfo}
-         {_btTabMini}
+         {_btTabMini}    
       </div>
     );
   }

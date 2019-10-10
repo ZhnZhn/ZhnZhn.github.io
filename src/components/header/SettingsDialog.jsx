@@ -13,7 +13,7 @@ const S = {
   MODAL: {
     position : 'static',
     width: 380,
-    height: 375,
+    height: 410,
     margin: '70px auto 0px'
   },
   TITLE_API: {

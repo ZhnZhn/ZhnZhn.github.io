@@ -12,7 +12,8 @@ const {
   sortBy,
   removeAll,
   checkBrowserChartTypes,
-  scanPostAdded
+  scanPostAdded,
+  setAlertItemIdTo
 } = ChartLogic;
 
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
@@ -31,7 +32,7 @@ const ChartSlice = {
   },
   isChartExist(option){
     checkBrowserChartTypes(this, option)
-    const { chartType, key } = option;
+    const { chartType, key } = option;    
     return isChartExist(this.charts, chartType, key);
   },
 
@@ -64,8 +65,13 @@ const ChartSlice = {
   },
   onLoadStockFailed(option){
     this.triggerLoadingProgress(LPA.LOADING_FAILED)
+    setAlertItemIdTo(option)
+    /*
     const { alertItemId, value } = option;
-    option.alertItemId = alertItemId || value;
+    option.alertItemId = _isStr(alertItemId)
+      ? alertItemId
+      : _isStr(value) ? value : void 0;
+    */
     this.showAlertDialog(option);
     _fnLogLoadError(option);
   },

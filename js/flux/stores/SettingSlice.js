@@ -15,14 +15,14 @@ var _Type = require('../../constants/Type');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _settings = {};
-var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR, _Type.LoadType.WTD];
-var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.BLS, _Type.LoadType.CRC];
+var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.WTD, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR, _Type.LoadType.IEX];
+var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.BLS, _Type.LoadType.CRC, _Type.LoadType.Q_T];
 var _apiTitle = (_apiTitle2 = {
   DF: 'API'
-}, (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.B, 'Barchart Market Data'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_S, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_I, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.BEA, 'BEA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.EIA, 'EIA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.INTR, 'Intrinio'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.WTD, 'World Trading Data'), _apiTitle2);
+}, (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.B, 'Barchart Market Data'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_S, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_I, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.WTD, 'World Trading Data'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.BEA, 'BEA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.EIA, 'EIA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.INTR, 'Intrinio'), _apiTitle2);
 
-var _isUndef = function _isUndef(v) {
-  return typeof v === 'undefined';
+var _isUndef = function _isUndef(value) {
+  return typeof value === 'undefined';
 };
 
 var SettingSlice = {
@@ -40,8 +40,9 @@ var SettingSlice = {
       key3: this.fSetKey([_Type.LoadType.BEA]),
       key4: this.fSetKey([_Type.LoadType.EIA]),
       key5: this.fSetKey([_Type.LoadType.INTR]),
-      key6: this.fSetKey([_Type.LoadType.Q]),
-      key7: this.fSetKey([_Type.LoadType.WTD]),
+      key6: this.fSetKey([_Type.LoadType.IEX]),
+      key7: this.fSetKey([_Type.LoadType.Q]),
+      key8: this.fSetKey([_Type.LoadType.WTD]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this, _Type.LoadType.FAO),
       isAdminMode: this.isAdminMode.bind(this),
@@ -61,9 +62,7 @@ var SettingSlice = {
     switch (id) {
       case _Type.LoadType.AL_I:case _Type.LoadType.AL_S:
         return _settings[_Type.LoadType.AL];
-      case _Type.LoadType.EIA:
-        return _settings[_Type.LoadType.EIA];
-      case _Type.LoadType.WL:
+      case _Type.LoadType.WL:case _Type.LoadType.Q_T:
         return _settings[_Type.LoadType.Q];
       default:
         return _settings[id];

@@ -35,14 +35,14 @@ const WatchItem = (props) => {
            onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop
          } = props
       , { caption } = item
-      , _btClose = (isModeEdit)
+      , _btClose = isModeEdit
           ? (
              <SvgClose
                style={STYLE.SVG_CLOSE}
                onClose={onClose.bind(null, option)}
              />
             )
-          : undefined;
+          : null;
 return (
      <div
        className={className}
@@ -50,11 +50,11 @@ return (
        onClick={onClick.bind(null, item)}
        //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
        draggable={isModeEdit}
-       onDragStart={isModeEdit && onDragStart.bind(null, option)}
-       onDrop={isModeEdit && onDrop.bind(null, option)}
-       onDragOver={isModeEdit && onDragOver}
-       onDragEnter={isModeEdit && onDragEnter}
-       onDragLeave={isModeEdit && onDragLeave}
+       onDragStart={isModeEdit ? onDragStart.bind(null, option) : void 0}
+       onDrop={isModeEdit ? onDrop.bind(null, option) : void 0}
+       onDragOver={isModeEdit ? onDragOver : void 0}
+       onDragEnter={isModeEdit ? onDragEnter : void 0}
+       onDragLeave={isModeEdit ? onDragLeave: void 0}
      >
        <span style={STYLE.ITEM_SPAN}>
          {caption}

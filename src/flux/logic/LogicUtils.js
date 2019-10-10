@@ -31,7 +31,7 @@ const _crKey = (option) => {
   const { loadId, value } = option
       , loadConfig = LoadConfig[loadId] || {}
       , { crKey } = loadConfig;  
-  return typeof(crKey) === 'function'
+  return typeof crKey === 'function'
     ? crKey(option)
     : value || 'key';
 };

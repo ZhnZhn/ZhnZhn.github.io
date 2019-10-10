@@ -137,7 +137,6 @@ var MapChartItem = function (_Component) {
         { style: S.TAB_DIV },
         _react2.default.createElement(_ButtonTab2.default, {
           caption: 'Info',
-          isShow: false,
           onClick: _this._handleClickInfo
         })
       );

@@ -2,8 +2,9 @@
 import CT from './ChartType'
 
 const C = {
-  BASE_URL: 'https://api.iextrading.com/1.0/stock',
-  DF_PERIOD: '1y'
+  //BASE_URL: 'https://api.iextrading.com/1.0/stock',
+  BASE_URL: 'https://cloud.iexapis.com/stable/stock',
+  DF_PERIOD: '1m'
 };
 
 const _urlEarnings = (option) => {
@@ -21,10 +22,10 @@ const _urlDividends = (option) => {
 
 const _urlChart = (option) => {
   const {
-    value='',
-    dfPeriod=C.DF_PERIOD
+    one,
+    two=C.DF_PERIOD,
   } = option;
-  return `${C.BASE_URL}/${value}/chart/${dfPeriod}`;
+  return `${C.BASE_URL}/${one}/chart/${two}`;
 };
 
 const _rUrl = {
@@ -36,11 +37,11 @@ const _rUrl = {
 
 const IexApi = {
   getRequestUrl(option){
-    const { dfType } = option
+    const { dfType, apiKey } = option
         , _toUrl = _rUrl[dfType] || _rUrl.DF;
-    return _toUrl(option);
+    return _toUrl(option)+`?token=${apiKey}`;
   },
-
+  
   checkResponse(){
     return true;
   }

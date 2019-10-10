@@ -8,6 +8,7 @@ import fCompareBy from './fCompareBy'
 const { createChartContainer } = Factory;
 
 const _isArr = Array.isArray;
+const _isStr = str => typeof str === 'string';
 
 const _getSlice = (slice, chartType) => {
   const { activeContChb } = slice
@@ -38,7 +39,7 @@ const ChartLogic = {
     }
   },
 
-  isChartExist(slice, chartType, key){
+  isChartExist(slice, chartType, key){    
     const {
             chartSlice, configs
           } = _getSlice(slice, chartType)
@@ -144,6 +145,13 @@ const ChartLogic = {
         chart
       });
     }
+  },
+
+  setAlertItemIdTo(option){
+    const { alertItemId, value } = option;
+    option.alertItemId = _isStr(alertItemId)
+      ? alertItemId
+      : _isStr(value) ? value : void 0;
   }
 };
 

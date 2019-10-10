@@ -66,12 +66,12 @@ class Table extends Component {
   }
 
   constructor(props){
-    super()
+    super(props)
     this.state = {
       isGridLine: true,
       rows: props.rows,
-      sortBy: undefined,
-      sortTo: undefined,
+      sortBy: void 0,
+      sortTo: void 0,
       isMoreStyle: false
     }
   }
@@ -140,6 +140,7 @@ class Table extends Component {
 
       return (
         <th
+          key={h.name}
           style={{...S.TH, ..._thStyle, ...style }}
           rowSpan="1"
           colSpan="1"
@@ -166,17 +167,18 @@ class Table extends Component {
          , { rows } = this.state;
 
     return rows.map((r, rIndex) => {
-      const _elTd = headers.map(h => {
+      const _elTd = headers.map((h, hIndex) => {
         const { pn, style, isR, isHref } = h
+            , _key = r.id+hIndex
             , v = r[pn]
             , _v = FN.toFormatValue({ TOKEN_NAN, h, v, fn: numberFormat })
             , _tdStyle = FN.crTdStyle({ S, v, isR })
-            , _elValueOrTitle = (isHref)
+            , _elValueOrTitle = isHref
                   ? _crLinkEl(r.id, _v, valueToHref)
                   : _v;
         return (
           <td
-            key={rIndex}
+            key={_key}
             style={{...S.TD, ...style, ..._tdStyle}}
           >
             {_elValueOrTitle}
@@ -184,7 +186,7 @@ class Table extends Component {
         );
       })
       return (
-        <tr role="row">
+        <tr key={r.id} role="row">
           {_elTd}
         </tr>
       );
@@ -203,7 +205,7 @@ class Table extends Component {
         id={gridId}
         style={S.ROOT}
         role="grid"
-      >
+      >        
         <thead style={S.THEAD}>
            <tr>
              {this._renderHeader()}

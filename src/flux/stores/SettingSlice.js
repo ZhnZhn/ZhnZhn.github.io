@@ -2,14 +2,15 @@ import { LoadType as LT } from '../../constants/Type'
 
 const _settings = {};
 const _withApiKey = [
-  LT.B, LT.AL, LT.AL_S, LT.AL_I,
-  LT.BEA, LT.EIA, LT.INTR, LT.WTD
+  LT.B, LT.AL, LT.AL_S, LT.AL_I, LT.WTD,
+  LT.BEA, LT.EIA, LT.INTR, LT.IEX
 ];
 const _withProxy = [
   LT.FS,
   LT.FAO,
   LT.BLS,
-  LT.CRC
+  LT.CRC,
+  LT.Q_T
 ];
 const _apiTitle = {
   DF: 'API',
@@ -17,13 +18,13 @@ const _apiTitle = {
   [LT.AL]: 'Alpha Vantage',
   [LT.AL_S]: 'Alpha Vantage',
   [LT.AL_I]: 'Alpha Vantage',
+  [LT.WTD]: 'World Trading Data',
   [LT.BEA]: 'BEA',
   [LT.EIA]: 'EIA',
-  [LT.INTR]: 'Intrinio',
-  [LT.WTD]: 'World Trading Data'
+  [LT.INTR]: 'Intrinio'
 };
 
-const _isUndef = v => typeof(v) === 'undefined';
+const _isUndef = value => typeof value === 'undefined';
 
 const SettingSlice = {
   setting: {
@@ -40,8 +41,9 @@ const SettingSlice = {
       key3: this.fSetKey([LT.BEA]),
       key4: this.fSetKey([LT.EIA]),
       key5: this.fSetKey([LT.INTR]),
-      key6: this.fSetKey([LT.Q]),
-      key7: this.fSetKey([LT.WTD]),
+      key6: this.fSetKey([LT.IEX]),
+      key7: this.fSetKey([LT.Q]),
+      key8: this.fSetKey([LT.WTD]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this, LT.FAO),
       isAdminMode: this.isAdminMode.bind(this),
@@ -50,7 +52,7 @@ const SettingSlice = {
     };
   },
 
-  fSetKey: (propName) => (value) => {
+  fSetKey: (propName) => (value) => {    
     _settings[propName] = value
   },
 
@@ -58,9 +60,7 @@ const SettingSlice = {
     switch(id){
       case LT.AL_I: case LT.AL_S:
          return _settings[LT.AL];
-      case LT.EIA:
-         return _settings[LT.EIA];
-      case LT.WL:
+      case LT.WL: case LT.Q_T:
          return _settings[LT.Q];
       default:
          return _settings[id];
@@ -78,14 +78,14 @@ const SettingSlice = {
     return this.setting.proxy;
   },
   isSetting(propName, value){
-    if ( _isUndef(value) ){
+    if (_isUndef(value)){
       return this.setting[propName];
     }
     this.setting[propName] = !!value
   },
 
   isAdminMode(value){
-    if ( _isUndef(value) ){
+    if (_isUndef(value)){
       return this.setting.isAdminMode;
     }
     this.setting.isAdminMode = !!value

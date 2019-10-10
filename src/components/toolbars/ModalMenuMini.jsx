@@ -10,6 +10,7 @@ const _renderItems = (configs, onClickItem) => {
     const { btTitle } = c;
     return (
       <SubMenuItem
+        key={btTitle}
         caption={btTitle}
         onClick={onClickItem.bind(null, btTitle)}
       />

@@ -109,8 +109,7 @@ class MapChartItem extends Component {
      return (
       <div style={S.TAB_DIV}>
          <ButtonTab
-            caption={'Info'}
-            isShow={false}
+            caption="Info"            
             onClick={this._handleClickInfo}
          />
       </div>

@@ -83,7 +83,7 @@ var Table = (_temp = _class = function (_Component) {
   function Table(props) {
     (0, _classCallCheck3.default)(this, Table);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this, props));
 
     _this._hSort = function (pn) {
       _this.setState(function (prevState) {
@@ -159,6 +159,7 @@ var Table = (_temp = _class = function (_Component) {
         return _react2.default.createElement(
           'th',
           {
+            key: h.name,
             style: (0, _extends3.default)({}, _Style2.default.TH, _thStyle, style),
             rowSpan: '1',
             colSpan: '1',
@@ -185,11 +186,12 @@ var Table = (_temp = _class = function (_Component) {
 
 
       return rows.map(function (r, rIndex) {
-        var _elTd = headers.map(function (h) {
+        var _elTd = headers.map(function (h, hIndex) {
           var pn = h.pn,
               style = h.style,
               isR = h.isR,
               isHref = h.isHref,
+              _key = r.id + hIndex,
               v = r[pn],
               _v = _tableFn2.default.toFormatValue({ TOKEN_NAN: TOKEN_NAN, h: h, v: v, fn: numberFormat }),
               _tdStyle = _tableFn2.default.crTdStyle({ S: _Style2.default, v: v, isR: isR }),
@@ -198,7 +200,7 @@ var Table = (_temp = _class = function (_Component) {
           return _react2.default.createElement(
             'td',
             {
-              key: rIndex,
+              key: _key,
               style: (0, _extends3.default)({}, _Style2.default.TD, style, _tdStyle)
             },
             _elValueOrTitle
@@ -206,7 +208,7 @@ var Table = (_temp = _class = function (_Component) {
         });
         return _react2.default.createElement(
           'tr',
-          { role: 'row' },
+          { key: r.id, role: 'row' },
           _elTd
         );
       });
@@ -215,8 +217,8 @@ var Table = (_temp = _class = function (_Component) {
     _this.state = {
       isGridLine: true,
       rows: props.rows,
-      sortBy: undefined,
-      sortTo: undefined,
+      sortBy: void 0,
+      sortTo: void 0,
       isMoreStyle: false
     };
     return _this;
@@ -295,4 +297,4 @@ var Table = (_temp = _class = function (_Component) {
   tableFn: {}
 }, _temp);
 exports.default = Table;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-table\Table.js.map
+//# sourceMappingURL=Table.js.map

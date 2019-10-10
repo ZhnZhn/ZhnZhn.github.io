@@ -24,16 +24,18 @@ var toSeriesData = _AdapterStockFn2.default.toSeriesData;
 
 
 var _crZhConfig = function _crZhConfig(id, option) {
-  var value = option.value,
+  var one = option.one,
       dataSource = option.dataSource;
 
   return {
     dataSource: dataSource,
     id: id,
-    key: value,
+    key: id,
     linkFn: "NASDAQ",
-    item: value,
+    item: one,
+    itemCaption: one,
     isWithLegend: true,
+    isWithoutAdd: true,
     legend: stockSeriesLegend()
   };
 };
@@ -46,8 +48,9 @@ var _crInfo = function _crInfo(title) {
 };
 
 var _crId = function _crId(_ref) {
-  var value = _ref.value;
-  return value;
+  var one = _ref.one,
+      two = _ref.two;
+  return one + '_' + two;
 };
 
 var toChart = {

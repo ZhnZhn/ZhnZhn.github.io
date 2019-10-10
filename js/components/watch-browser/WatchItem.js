@@ -54,7 +54,7 @@ var WatchItem = function WatchItem(props) {
       _btClose = isModeEdit ? _react2.default.createElement(_SvgClose2.default, {
     style: STYLE.SVG_CLOSE,
     onClose: onClose.bind(null, option)
-  }) : undefined;
+  }) : null;
 
   return _react2.default.createElement(
     'div',
@@ -64,11 +64,11 @@ var WatchItem = function WatchItem(props) {
       onClick: onClick.bind(null, item)
       //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
       , draggable: isModeEdit,
-      onDragStart: isModeEdit && onDragStart.bind(null, option),
-      onDrop: isModeEdit && onDrop.bind(null, option),
-      onDragOver: isModeEdit && onDragOver,
-      onDragEnter: isModeEdit && onDragEnter,
-      onDragLeave: isModeEdit && onDragLeave
+      onDragStart: isModeEdit ? onDragStart.bind(null, option) : void 0,
+      onDrop: isModeEdit ? onDrop.bind(null, option) : void 0,
+      onDragOver: isModeEdit ? onDragOver : void 0,
+      onDragEnter: isModeEdit ? onDragEnter : void 0,
+      onDragLeave: isModeEdit ? onDragLeave : void 0
     },
     _react2.default.createElement(
       'span',

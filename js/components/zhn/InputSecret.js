@@ -77,11 +77,21 @@ var InputSecret = function (_Component) {
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = InputSecret.__proto__ || Object.getPrototypeOf(InputSecret)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       value: ''
-    }, _this._handleChangeValue = function (event) {
-      _this.secret = event.target.value;
-      _this.setState(function (prevState) {
-        prevState.value = _maskValue(_this.secret.length);
-        return prevState;
+    }, _this.secret = '', _this._handleChangeValue = function (event) {
+      var _value = event.target.value,
+          _length = _value.length,
+          _nowLength = _this.secret.length;
+      if (_length === _nowLength + 1) {
+        _this.secret = _this.secret + _value[_length - 1];
+      } else if (_length === _nowLength - 1) {
+        _this.secret = _this.secret.substring(0, _nowLength - 1);
+      } else if (_nowLength === 0) {
+        _this.secret = _value;
+      } else if (_length === 0) {
+        _this.secret = '';
+      }
+      _this.setState({
+        value: _maskValue(_this.secret.length)
       });
     }, _this._handleKeyDown = function (event) {
       if (event.keyCode !== 27) {
@@ -90,6 +100,7 @@ var InputSecret = function (_Component) {
       switch (event.keyCode) {
         case 13:
           if (_isFn(_this.props.onEnter)) {
+            event.preventDefault();
             _this.props.onEnter(_this.secret);
           }
           break;

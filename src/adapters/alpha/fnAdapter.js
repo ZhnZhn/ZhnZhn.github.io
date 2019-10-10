@@ -10,6 +10,7 @@ const _crZhConfig = (id, dataSource) => ({
   id: id,
   key: id,
   isWithLegend: true,
+  isWithoutAdd: true,
   legend: stockSeriesLegend(),
   dataSource: dataSource || "Alpha Vantage"
 });

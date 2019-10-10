@@ -26,6 +26,9 @@ var createChartContainer = _Factory2.default.createChartContainer;
 
 
 var _isArr = Array.isArray;
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
 
 var _getSlice = function _getSlice(slice, chartType) {
   var activeContChb = slice.activeContChb,
@@ -169,6 +172,12 @@ var ChartLogic = {
         chart: chart
       });
     }
+  },
+  setAlertItemIdTo: function setAlertItemIdTo(option) {
+    var alertItemId = option.alertItemId,
+        value = option.value;
+
+    option.alertItemId = _isStr(alertItemId) ? alertItemId : _isStr(value) ? value : void 0;
   }
 };
 

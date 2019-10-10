@@ -24,6 +24,9 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp;
+//import PropTypes from "prop-types";
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -35,41 +38,65 @@ var _withTheme2 = _interopRequireDefault(_withTheme);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TH_ID = 'ELEMENT';
-//import PropTypes from "prop-types";
 
-var ButtonTab = function (_Component) {
+var ButtonTab = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(ButtonTab, _Component);
+
+  function ButtonTab(props) {
+    (0, _classCallCheck3.default)(this, ButtonTab);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ButtonTab.__proto__ || Object.getPrototypeOf(ButtonTab)).call(this, props));
+
+    _this._hClick = function () {
+      var _this$props = _this.props,
+          isUpdatable = _this$props.isUpdatable,
+          onClick = _this$props.onClick;
+
+      onClick();
+      if (isUpdatable) {
+        _this.setState(function (prevState) {
+          return {
+            isShow: !prevState.isShow
+          };
+        });
+      }
+    };
+
+    _this.state = {
+      isShow: !!props.isShow
+    };
+    return _this;
+  }
+
+  /*
+  componentDidUpdate(prevProps){
+     if (prevProps !== this.props) {
+       const _isShow = !!this.props.isShow;
+       if ( _isShow !== this.state.isShow ) {
+         this.setState({ isShow: _isShow })
+       }
+     }
+  }
+  */
 
   /*
   static propTypes = {
     style : PropTypes.object,
     isShow : PropTypes.bool,
+    notUpdatable : PropTypes.bool
     caption : PropTypes.string,
     onClick : PropTypes.func
   }
   */
 
-  function ButtonTab(props) {
-    (0, _classCallCheck3.default)(this, ButtonTab);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ButtonTab.__proto__ || Object.getPrototypeOf(ButtonTab)).call(this));
-
-    _this._handleClick = function () {
-      _this.props.onClick();
-      _this.setState({ isShow: !_this.state.isShow });
-    };
-
-    _this.state = {
-      isShow: props.isShow
-    };
-    return _this;
-  }
-
   (0, _createClass3.default)(ButtonTab, [{
     key: 'UNSAFE_componentWillReceiveProps',
     value: function UNSAFE_componentWillReceiveProps(nextProps) {
-      if (this.props !== nextProps && nextProps.isShow !== this.state.isShow) {
-        this.setState({ isShow: nextProps.isShow });
+      if (nextProps.isUpdatable && this.props !== nextProps) {
+        var _isShow = !!nextProps.isShow;
+        if (_isShow !== this.state.isShow) {
+          this.setState({ isShow: _isShow });
+        }
       }
     }
   }, {
@@ -88,7 +115,7 @@ var ButtonTab = function (_Component) {
         {
           className: _rootClass,
           style: (0, _extends3.default)({}, style, TS.BG),
-          onClick: this._handleClick
+          onClick: this._hClick
         },
         caption,
         children
@@ -96,7 +123,8 @@ var ButtonTab = function (_Component) {
     }
   }]);
   return ButtonTab;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  isUpdatable: true
+}, _temp);
 exports.default = (0, _withTheme2.default)(ButtonTab);
 //# sourceMappingURL=ButtonTab.js.map

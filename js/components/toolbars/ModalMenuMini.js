@@ -27,6 +27,7 @@ var _renderItems = function _renderItems(configs, onClickItem) {
     var btTitle = c.btTitle;
 
     return _react2.default.createElement(_SubMenuItem2.default, {
+      key: btTitle,
       caption: btTitle,
       onClick: onClickItem.bind(null, btTitle)
     });

@@ -150,7 +150,6 @@ var PanelDataInfo = function (_Component) {
         { style: _rootStyle },
         _react2.default.createElement(_ButtonTab2.default, {
           caption: 'Chart',
-          isShow: false,
           onClick: onClickChart
         }),
         _react2.default.createElement(_InfoPart2.default, {

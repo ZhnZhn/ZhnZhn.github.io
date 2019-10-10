@@ -35,13 +35,24 @@ class InputSecret extends Component {
   state = {
     value: ''
   }
+  secret = ''
 
 
   _handleChangeValue = (event) => {
-    this.secret = event.target.value;
-    this.setState(prevState => {
-      prevState.value = _maskValue(this.secret.length)
-      return prevState;
+    const _value = event.target.value
+    , _length = _value.length
+    , _nowLength = this.secret.length;
+    if (_length === _nowLength + 1) {
+      this.secret = this.secret + _value[_length-1]
+    } else if ( _length === _nowLength - 1) {
+      this.secret = this.secret.substring(0, _nowLength-1)
+    } else if (_nowLength === 0) {
+      this.secret = _value
+    } else if (_length === 0) {
+      this.secret = ''
+    }    
+    this.setState({
+      value: _maskValue(this.secret.length)
     });
   }
 
@@ -52,6 +63,7 @@ class InputSecret extends Component {
     switch(event.keyCode){
       case 13:
         if (_isFn(this.props.onEnter)) {
+          event.preventDefault()
           this.props.onEnter(this.secret)
         }
         break;

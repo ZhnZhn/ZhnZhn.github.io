@@ -2,6 +2,10 @@
 import Router from './RouterAdapter'
 
 const IexAdapter = {
+  crKey({ one='', two=''}={}){
+    return one + '_' + two;
+  },
+
   toConfig(json, option){
     const config = Router
             .getAdapter(option)

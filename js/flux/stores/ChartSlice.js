@@ -24,7 +24,8 @@ var _isChartExist = _ChartLogic2.default.isChartExist,
     sortBy = _ChartLogic2.default.sortBy,
     removeAll = _ChartLogic2.default.removeAll,
     checkBrowserChartTypes = _ChartLogic2.default.checkBrowserChartTypes,
-    scanPostAdded = _ChartLogic2.default.scanPostAdded;
+    scanPostAdded = _ChartLogic2.default.scanPostAdded,
+    setAlertItemIdTo = _ChartLogic2.default.setAlertItemIdTo;
 
 
 var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
@@ -82,10 +83,13 @@ var ChartSlice = {
   },
   onLoadStockFailed: function onLoadStockFailed(option) {
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_FAILED);
-    var alertItemId = option.alertItemId,
-        value = option.value;
-
-    option.alertItemId = alertItemId || value;
+    setAlertItemIdTo(option);
+    /*
+    const { alertItemId, value } = option;
+    option.alertItemId = _isStr(alertItemId)
+      ? alertItemId
+      : _isStr(value) ? value : void 0;
+    */
     this.showAlertDialog(option);
     _fnLogLoadError(option);
   },

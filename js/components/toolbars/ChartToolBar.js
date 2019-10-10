@@ -151,6 +151,7 @@ var ChartToolbar = function (_Component) {
       var _btAdd = !isWithoutAdd ? _react2.default.createElement(_ButtonTab2.default, {
         style: S.BT_ADD,
         caption: 'Add',
+        isUpdatable: false,
         onClick: onAddToWatch
       }) : null;
 

@@ -46,7 +46,7 @@ var _RowButtons2 = _interopRequireDefault(_RowButtons);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var MAX_KEY = 8;
+var MAX_KEY = 9;
 
 var PaneApiKey = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(PaneApiKey, _Component);
@@ -129,17 +129,25 @@ var PaneApiKey = (_temp = _class = function (_Component) {
         _react2.default.createElement(_RowSecret2.default, {
           ref: this._ref6,
           titleStyle: titleStyle,
-          title: 'Quandl:',
-          placeholder: 'Quandl API Key',
+          title: 'IEX:',
+          placeholder: 'IEX Cloud API Key',
+          maxLength: '35',
           onEnter: this._setKey6
         }),
         _react2.default.createElement(_RowSecret2.default, {
           ref: this._ref7,
           titleStyle: titleStyle,
+          title: 'Quandl:',
+          placeholder: 'Quandl API Key',
+          onEnter: this._setKey7
+        }),
+        _react2.default.createElement(_RowSecret2.default, {
+          ref: this._ref8,
+          titleStyle: titleStyle,
           title: 'WTD:',
           placeholder: 'World Trading Data API Key',
           maxLength: '60',
-          onEnter: this._setKey7
+          onEnter: this._setKey8
         }),
         _react2.default.createElement(
           _RowButtons2.default,
@@ -208,6 +216,10 @@ var PaneApiKey = (_temp = _class = function (_Component) {
 
   this._ref7 = function (n) {
     return _this2.iComp7 = n;
+  };
+
+  this._ref8 = function (n) {
+    return _this2.iComp8 = n;
   };
 }, _temp);
 exports.default = PaneApiKey;

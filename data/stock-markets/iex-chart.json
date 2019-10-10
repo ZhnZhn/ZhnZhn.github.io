@@ -1,0 +1,11 @@
+{
+  "items":[
+    { "caption": "1 Month (220)", "value": "1m" },
+    { "caption": "3 Months (650)", "value": "3m" },
+    { "caption": "6 Months (1270)", "value": "6m" },
+    { "caption": "Year-to-Day", "value": "ytd" },
+    { "caption": "1 Year (2510)", "value": "1y" },
+    { "caption": "2 Years (5030)", "value": "2y" },
+    { "caption": "5 Years (12580)", "value": "5y" }
+  ]
+}

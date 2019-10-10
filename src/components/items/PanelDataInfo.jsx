@@ -99,7 +99,6 @@ class PanelDataInfo extends Component {
        <div style={_rootStyle}>
          <ButtonTab
            caption="Chart"
-           isShow={false}
            onClick={onClickChart}
          />
          <InfoPart
