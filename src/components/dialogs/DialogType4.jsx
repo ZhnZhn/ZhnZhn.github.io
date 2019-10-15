@@ -11,6 +11,7 @@ const CAPTION_YAXIS = 'Add Seria with Second YAxis';
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class DialogType4 extends Component {
   /*
   static propTypes = {
@@ -41,9 +42,7 @@ class DialogType4 extends Component {
   */
 
   constructor(props){
-    super();
-    this.one = undefined;
-    this.two = undefined;
+    super(props);
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -61,13 +60,10 @@ class DialogType4 extends Component {
       })
     }
     this._commandButtons = this._crCommandsWithLoad(this)
-    
+
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      isShowDate : true,
-      isShowOptions: false,
-      validationMessages: []
+      ...this._isWithInitialState(),
+      isShowOptions: false      
     }
   }
 

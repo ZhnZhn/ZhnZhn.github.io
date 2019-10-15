@@ -42,6 +42,7 @@ var COLORS2 = ['#f1d600', '#008b8b', '#2f7ed8', '#673ab7', '#000000', '#607d8b',
 
 var S = {
   ROOT: {
+    paddingTop: 6,
     paddingBottom: 4
   },
   ROW2: {
@@ -74,7 +75,7 @@ var SeriaColor = function (_Component) {
   function SeriaColor(props) {
     (0, _classCallCheck3.default)(this, SeriaColor);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (SeriaColor.__proto__ || Object.getPrototypeOf(SeriaColor)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (SeriaColor.__proto__ || Object.getPrototypeOf(SeriaColor)).call(this, props));
 
     _this._hInit = function () {
       _this.setState({
@@ -146,7 +147,7 @@ var SeriaColor = function (_Component) {
     value: function getColor() {
       var color = this.state.color;
 
-      return color !== C_TRANSPARENT ? color : undefined;
+      return color !== C_TRANSPARENT ? color : void 0;
     }
   }]);
   return SeriaColor;

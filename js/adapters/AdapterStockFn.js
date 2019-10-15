@@ -80,6 +80,12 @@ var AdapterStockFn = {
             prevClose: _prevClose,
             open: open
           }));
+        } else {
+          dataATH.push(athPoint({
+            date: _date,
+            prevClose: close,
+            open: close
+          }));
         }
         _prevClose = close;
       }

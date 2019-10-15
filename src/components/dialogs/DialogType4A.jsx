@@ -9,10 +9,12 @@ const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class DialogType4A extends Component {
 
   constructor(props){
-    super()
+    super(props)
+
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
       onAbout: this._clickInfoWithToolbar
@@ -26,12 +28,10 @@ class DialogType4A extends Component {
     this[HAS_SECOND_Y_AXIS] = false
     this._commandButtons = this._crCommandsWithLoad(this)
 
+
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      isShowDate: true,
-      isShowOptions: false,
-      validationMessages: []
+      ...this._isWithInitialState(),
+      isShowOptions: false      
     }
   }
 

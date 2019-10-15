@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class, _class2, _temp;
+var _dec, _dec2, _dec3, _dec4, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -41,13 +45,16 @@ var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (_temp = _class2 = function (_Component) {
+var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogEurostat, _Component);
 
   function DialogEurostat(props) {
     (0, _classCallCheck3.default)(this, DialogEurostat);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogEurostat.__proto__ || Object.getPrototypeOf(DialogEurostat)).call(this));
+    //this.one = undefined;
+    //this.two = undefined;
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogEurostat.__proto__ || Object.getPrototypeOf(DialogEurostat)).call(this, props));
 
     _this._handleSelectOne = function (one) {
       _this.one = one;
@@ -87,9 +94,6 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
       _this._handleWithValidationClose();
     };
 
-    _this.one = undefined;
-    _this.two = undefined;
-
     _this._menuMore = (0, _MenuMore2.default)(_this, {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
@@ -98,11 +102,7 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      validationMessages: []
-    };
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState());
     return _this;
   }
   /*
@@ -196,6 +196,6 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
   oneJsonProp: 'items',
   twoCaption: 'Metric',
   twoJsonProp: 'metrics'
-}, _temp)) || _class) || _class) || _class);
+}, _temp)) || _class) || _class) || _class) || _class);
 exports.default = DialogEurostat;
 //# sourceMappingURL=DialogEurostat.js.map

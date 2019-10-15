@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class;
+var _dec, _dec2, _dec3, _dec4, _class;
 
 var _react = require('react');
 
@@ -42,13 +46,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var typeOptions = [{ caption: 'Continuous Contract #1', value: 1 }, { caption: 'Continuous Contract #2', value: 2 }, { caption: 'Continuous Contract #3', value: 3 }, { caption: 'Continuous Contract #4', value: 4 }, { caption: 'Continuous Contract #5', value: 5 }];
 
-var FuturesWikiDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
+var FuturesWikiDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
   (0, _inherits3.default)(FuturesWikiDialog, _Component);
 
   function FuturesWikiDialog(props) {
     (0, _classCallCheck3.default)(this, FuturesWikiDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (FuturesWikiDialog.__proto__ || Object.getPrototypeOf(FuturesWikiDialog)).call(this));
+    //this.type = undefined
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (FuturesWikiDialog.__proto__ || Object.getPrototypeOf(FuturesWikiDialog)).call(this, props));
 
     _this._handleSelectType = function (type) {
       _this.type = type;
@@ -108,8 +114,6 @@ var FuturesWikiDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decor
       return _this.fromDate = c;
     };
 
-    _this.type = undefined;
-
     _this._menuMore = (0, _MenuMore2.default)(_this, {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
@@ -118,11 +122,7 @@ var FuturesWikiDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decor
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      validationMessages: []
-    };
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState());
     return _this;
   }
 
@@ -203,6 +203,6 @@ var FuturesWikiDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decor
     }
   }]);
   return FuturesWikiDialog;
-}(_react.Component)) || _class) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class) || _class);
 exports.default = FuturesWikiDialog;
 //# sourceMappingURL=FuturesWikiDialog.js.map

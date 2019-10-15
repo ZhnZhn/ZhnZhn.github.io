@@ -80,6 +80,7 @@ const _crLoadOptions = (key, input) => {
 
 @Decor.withToolbar
 @Decor.withLoad
+@Decor.withInitialState
 class AlphaIntradayDialog extends Component {
 
   constructor(props){
@@ -101,10 +102,8 @@ class AlphaIntradayDialog extends Component {
     )
     this._commandButtons = this._crCommandsWithLoad(this)
 
-
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+      ...this._isWithInitialState(),
       isToggleOptions: false
     }
   }

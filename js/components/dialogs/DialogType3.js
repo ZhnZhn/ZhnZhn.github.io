@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class, _class2, _temp;
+var _dec, _dec2, _dec3, _dec4, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -45,17 +49,21 @@ var DF_TIMEOUT = 4000;
 
 var transformOptions = [{ caption: "NO EFFECT: z[t]=y[t]", value: "none" }, { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" }, { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" }, { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" }, { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }];
 
-var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (_temp = _class2 = function (_Component) {
+var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogType3, _Component);
 
   function DialogType3(props) {
     (0, _classCallCheck3.default)(this, DialogType3);
 
+    //this.one = undefined
+    //this.transform = undefined
     var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType3.__proto__ || Object.getPrototypeOf(DialogType3)).call(this, props));
 
     _this._handleClickTransform = function () {
       _this.setState(function (prevState) {
-        return { isShowTransform: !prevState.isShowTransform };
+        return {
+          isShowTransform: !prevState.isShowTransform
+        };
       });
     };
 
@@ -127,8 +135,6 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       _this._handleWithValidationClose();
     };
 
-    _this.one = undefined;
-    _this.transform = undefined;
     _this.isLoaded = false;
 
     _this._menuMore = (0, _MenuMore2.default)(_this, {
@@ -147,13 +153,9 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      isShowDate: true,
-      isShowTransform: false,
-      validationMessages: []
-    };
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
+      isShowTransform: false
+    });
     return _this;
   }
   /*
@@ -278,6 +280,6 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 }(_react.Component), _class2.defaultProps = {
   itemCaption: 'Stock',
   optionNames: 'Stocks'
-}, _temp)) || _class) || _class) || _class);
+}, _temp)) || _class) || _class) || _class) || _class);
 exports.default = DialogType3;
 //# sourceMappingURL=DialogType3.js.map

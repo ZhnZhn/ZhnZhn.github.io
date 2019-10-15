@@ -32,7 +32,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class, _class2, _temp;
+var _dec, _dec2, _dec3, _dec4, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -87,7 +87,7 @@ var _crIsToggleInit = function _crIsToggleInit(selectProps) {
   return _isToggleInit;
 };
 
-var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (0, _withForDate2.default)(_class = (_temp = _class2 = function (_Component) {
+var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = (0, _withForDate2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogSelectN, _Component);
 
   function DialogSelectN(props) {
@@ -106,7 +106,7 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
     };
 
     _this._updateForDate = function () {
-      _this.date = undefined;
+      _this.date = void 0;
 
       var _this$props$dfProps = _this.props.dfProps,
           dfProps = _this$props$dfProps === undefined ? {} : _this$props$dfProps,
@@ -164,7 +164,7 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
       var chartType = _this.chartType,
           colorComp = _this.colorComp,
           dialogOptions = _this.dialogOptions,
-          seriaColor = colorComp ? colorComp.getColor() : undefined,
+          seriaColor = colorComp ? colorComp.getColor() : void 0,
           date = _this._getDateWithForDate(),
           isCategory = _RouterOptions2.default.isCategory(chartType),
           items = isCategory ? _this._items.slice(1) : _this._items;
@@ -220,8 +220,8 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
 
     _this._items = [];
     _this._compSelect = {};
-    _this.date = undefined;
-    _this.chartType = undefined;
+    //this.date = undefined;
+    //this.chartType = undefined;
 
     _this._menuMore = (0, _MenuMore2.default)(_this, {
       toggleToolBar: _this._toggleWithToolbar,
@@ -234,16 +234,12 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
     _this._commandButtons = _this._crCommandsWithLoad(_this);
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
-    _this.state = (0, _extends3.default)({
-      isToolbar: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isOptions: false,
       isToggle: false,
-      isShowLabels: true,
       isShowChart: true,
       isShowDate: false
-    }, (0, _crDateConfig2.default)('EMPTY'), {
-      validationMessages: []
-    }, _crIsToggleInit(props.selectProps));
+    }, (0, _crDateConfig2.default)('EMPTY'), _crIsToggleInit(props.selectProps));
     return _this;
   }
   /*
@@ -371,6 +367,6 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
   return DialogSelectN;
 }(_react.Component), _class2.defaultProps = {
   selectProps: []
-}, _temp)) || _class) || _class) || _class) || _class);
+}, _temp)) || _class) || _class) || _class) || _class) || _class);
 exports.default = DialogSelectN;
 //# sourceMappingURL=DialogSelectN.js.map

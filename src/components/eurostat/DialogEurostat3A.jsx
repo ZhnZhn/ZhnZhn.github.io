@@ -16,6 +16,7 @@ const  MAP_FREQUENCY_DF = 'M';
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 @withForDate
 class DialogEurostat3A extends Component {
   /*
@@ -56,12 +57,12 @@ class DialogEurostat3A extends Component {
   }
 
   constructor(props){
-    super();
-    this.one = undefined;
-    this.two = undefined;
-    this.three = undefined;
-    this.date = undefined;
-    this.chartType = undefined;
+    super(props);
+    //this.one = undefined;
+    //this.two = undefined;
+    //this.three = undefined;
+    //this.date = undefined;
+    //this.chartType = undefined;
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -75,12 +76,10 @@ class DialogEurostat3A extends Component {
     this._chartOptions = RouterOptions.crOptions(props)
 
     this.state = {
-      isToolbar: true,
+      ...this._isWithInitialState(),
       isOptions: false,
-      isShowLabels: true,
       isShowDate: false,
-      ...crDateConfig('EMPTY'),
-      validationMessages: []
+      ...crDateConfig('EMPTY')      
     }
   }
 

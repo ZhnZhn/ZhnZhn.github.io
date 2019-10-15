@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _dec3, _class;
 
 var _react = require('react');
 
@@ -48,11 +52,7 @@ var DF = {
 var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 var _testTicket = function _testTicket(value) {
-  if (String(value).trim() === '') {
-    return false;
-  } else {
-    return true;
-  }
+  return String(value).trim() === '' ? false : true;
 };
 
 var _testInRangeOrEmpty = function _testInRangeOrEmpty(min, max) {
@@ -83,13 +83,13 @@ var _crValue = function _crValue(indicator, period) {
   }
 };
 
-var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = function (_Component) {
+var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withLoad, _dec3 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
   (0, _inherits3.default)(AlphaIndicatorDialog, _Component);
 
   function AlphaIndicatorDialog(props) {
     (0, _classCallCheck3.default)(this, AlphaIndicatorDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AlphaIndicatorDialog.__proto__ || Object.getPrototypeOf(AlphaIndicatorDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AlphaIndicatorDialog.__proto__ || Object.getPrototypeOf(AlphaIndicatorDialog)).call(this, props));
 
     _this._handleClickOptions = function () {
       _this.setState({ isShowOptions: !_this.state.isShowOptions });
@@ -149,11 +149,9 @@ var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _De
     });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isShowOptions: false
-    };
+    });
     return _this;
   }
 
@@ -246,6 +244,6 @@ var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _De
     }
   }]);
   return AlphaIndicatorDialog;
-}(_react.Component)) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class);
 exports.default = AlphaIndicatorDialog;
 //# sourceMappingURL=AlphaIndicatorDialog.js.map

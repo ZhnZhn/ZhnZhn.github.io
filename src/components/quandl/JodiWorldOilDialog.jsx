@@ -20,15 +20,17 @@ const chartTypes = [
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class JodiWorldOilDialog extends Component {
 
    constructor(props){
-     super()
-     this.country = null
-     this.product = null
-     this.flow = null
-     this.units = null
-     this.chartType = undefined
+     super(props)
+
+     //this.country = null
+     //this.product = null
+     //this.flow = null
+     //this.units = null
+     //this.chartType = undefined
 
      this._menuMore = crMenuMore(this, {
        toggleToolBar: this._toggleWithToolbar,
@@ -43,11 +45,9 @@ class JodiWorldOilDialog extends Component {
      this._commandButtons = this._crCommandsWithLoad(this)
 
      this.state = {
-       isToolbar: true,
-       isShowLabels: true,
+       ...this._isWithInitialState(),
        isShowDate: false,
-       isShowOptions: false,
-       validationMessages : []
+       isShowOptions: false
      }
    }
 
@@ -61,7 +61,9 @@ class JodiWorldOilDialog extends Component {
    }
 
    _hClickOptions = () => {
-     this.setState({ isShowOptions: !this.state.isShowOptions })
+     this.setState(prevState => ({
+       isShowOptions: !prevState.isShowOptions 
+     }))
    }
 
    _hSelectCountry = (country) => {
@@ -102,7 +104,9 @@ class JodiWorldOilDialog extends Component {
    _createLoadOption = () => {
       const { one:product, two:flow } = this.productFlow.getValues()
           , { fromDate, toDate } = this.datesFragment.getValues()
-          , seriaType = this.chartType ? this.chartType.value: undefined
+          , seriaType = this.chartType
+              ? this.chartType.value
+              : void 0
           , { fnValue, dataColumn, loadId, dataSource } = this.props;
       return {
         value : fnValue(this.country.value, product.value, flow.value, this.units.value),

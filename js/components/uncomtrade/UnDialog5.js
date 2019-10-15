@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class;
+var _dec, _dec2, _dec3, _dec4, _class;
 
 var _react = require('react');
 
@@ -42,13 +46,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var TRADE_FLOW = [{ caption: "Export Value", value: { rg: 2, measure: "TradeValue" } }, { caption: "Export Weight or Quantity", value: { rg: 2, measure: "NetWeight" } }, { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } }, { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } }, { caption: "Import Weight or Quantity", value: { rg: 1, measure: "NetWeight" } }, { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }];
 
-var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
+var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
   (0, _inherits3.default)(UnDialog5, _Component);
 
   function UnDialog5(props) {
     (0, _classCallCheck3.default)(this, UnDialog5);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (UnDialog5.__proto__ || Object.getPrototypeOf(UnDialog5)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (UnDialog5.__proto__ || Object.getPrototypeOf(UnDialog5)).call(this, props));
 
     _this._handleClickOptions = function () {
       _this.setState({
@@ -130,13 +134,10 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
     });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isShowDate: false,
-      isShowOptions: false,
-      validationMessages: []
-    };
+      isShowOptions: false
+    });
     return _this;
   }
 
@@ -244,6 +245,6 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
     }
   }]);
   return UnDialog5;
-}(_react.Component)) || _class) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class) || _class);
 exports.default = UnDialog5;
 //# sourceMappingURL=UnDialog5.js.map

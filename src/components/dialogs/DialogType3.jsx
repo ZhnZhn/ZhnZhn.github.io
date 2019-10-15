@@ -5,7 +5,6 @@ import D from './DialogCell'
 import crMenuMore from './MenuMore'
 import Decor from './decorators/Decorators'
 
-
 const DF_TIMEOUT = 4000;
 
 const transformOptions = [
@@ -20,6 +19,7 @@ const transformOptions = [
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class DialogType3 extends Component {
   /*
   static propTypes = {
@@ -50,8 +50,8 @@ class DialogType3 extends Component {
   constructor(props){
     super(props);
 
-    this.one = undefined
-    this.transform = undefined
+    //this.one = undefined
+    //this.transform = undefined
     this.isLoaded = false
 
     this._menuMore = crMenuMore(this, {
@@ -70,12 +70,10 @@ class DialogType3 extends Component {
     }
     this._commandButtons = this._crCommandsWithLoad(this)
 
+
     this.state = {
-       isToolbar: true,
-       isShowLabels: true,
-       isShowDate: true,
-       isShowTransform: false,
-       validationMessages: []
+       ...this._isWithInitialState(),
+       isShowTransform: false       
     }
   }
 
@@ -89,9 +87,9 @@ class DialogType3 extends Component {
   }
 
   _handleClickTransform = () => {
-    this.setState(prevState => {
-      return { isShowTransform: !prevState.isShowTransform };
-    })
+    this.setState(prevState => ({
+      isShowTransform: !prevState.isShowTransform
+    }))
   }
   _handleSelectTransform = (option) => {
     this.transform = option
@@ -111,7 +109,6 @@ class DialogType3 extends Component {
       this.one = one
       this.isLoaded = false
     }
-
   }
 
   _handleLoad = () => {

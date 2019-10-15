@@ -11,13 +11,9 @@ const DF = {
 };
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
-const _testTicket = (value) => {
-  if (String(value).trim() === '') {
-    return false;
-  } else {
-    return true;
-  }
-}
+const _testTicket = value => String(value).trim() === ''
+  ? false
+  : true;
 
 const _testInRangeOrEmpty = (min, max) => (value) => {
   if (String(value).trim() === ''){
@@ -44,10 +40,11 @@ const _crValue = (indicator, period) => {
 
 @Decor.withToolbar
 @Decor.withLoad
+@Decor.withInitialState
 class AlphaIndicatorDialog extends Component {
 
   constructor(props){
-    super()
+    super(props)
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -64,8 +61,7 @@ class AlphaIndicatorDialog extends Component {
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+      ...this._isWithInitialState(),
       isShowOptions: false
     }
   }

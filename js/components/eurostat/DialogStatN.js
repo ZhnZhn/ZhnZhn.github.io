@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class;
+var _dec, _dec2, _dec3, _dec4, _class;
 
 var _react = require('react');
 
@@ -69,8 +69,8 @@ var S = {
     display: 'block',
     textAlign: 'middle',
     margin: '16px auto 32px',
-    width: '32px',
-    height: '32px'
+    width: 32,
+    height: 32
   },
   SPINNER_FAILED: {
     borderColor: '#f44336',
@@ -102,13 +102,13 @@ const _notTimeDimension = config => {
 };
 */
 
-var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
+var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
   (0, _inherits3.default)(DialogStatN, _Component);
 
   function DialogStatN(props) {
     (0, _classCallCheck3.default)(this, DialogStatN);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogStatN.__proto__ || Object.getPrototypeOf(DialogStatN)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogStatN.__proto__ || Object.getPrototypeOf(DialogStatN)).call(this, props));
 
     _this._loadDims = function () {
       var _this$props = _this.props,
@@ -262,15 +262,11 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     _this._items = [];
     _this._selectOptions = [];
 
-    _this.state = (0, _extends3.default)({
-      isToolbar: true,
-      isShowLabels: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isLoading: true,
       isLoadFailed: false,
       isShowDate: false
-    }, (0, _crDateConfig2.default)('EMPTY'), {
-      validationMessages: []
-    });
+    }, (0, _crDateConfig2.default)('EMPTY'));
     return _this;
   }
 
@@ -362,6 +358,6 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
   }]);
   return DialogStatN;
-}(_react.Component)) || _class) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class) || _class);
 exports.default = DialogStatN;
 //# sourceMappingURL=DialogStatN.js.map

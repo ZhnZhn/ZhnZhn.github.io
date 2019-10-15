@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class;
+var _dec, _dec2, _dec3, _dec4, _class;
 
 var _react = require('react');
 
@@ -46,16 +50,20 @@ var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 var CHART_TYPE_OPTIONS = [{ caption: 'Default: Area', value: _Type.ChartType.AREA }, { caption: 'Scatter: Label Up', value: _Type.ChartType.SCATTER_UP }, { caption: 'Scatter: Label Down', value: _Type.ChartType.SCATTER_DOWN }];
 
-var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
+var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
   (0, _inherits3.default)(DialogType5, _Component);
 
   function DialogType5(props) {
     (0, _classCallCheck3.default)(this, DialogType5);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType5.__proto__ || Object.getPrototypeOf(DialogType5)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType5.__proto__ || Object.getPrototypeOf(DialogType5)).call(this, props));
 
     _this._handleClickOptions = function () {
-      _this.setState({ isShowOptions: !_this.state.isShowOptions });
+      _this.setState(function (prevState) {
+        return {
+          isShowOptions: !prevState.isShowOptions
+        };
+      });
     };
 
     _this._handleSelectOne = function (one) {
@@ -143,13 +151,10 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isShowDate: false,
-      isShowOptions: false,
-      validationMessages: []
-    };
+      isShowOptions: false
+    });
     return _this;
   }
 
@@ -263,6 +268,6 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
   }]);
   return DialogType5;
-}(_react.Component)) || _class) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class) || _class);
 exports.default = DialogType5;
 //# sourceMappingURL=DialogType5.js.map

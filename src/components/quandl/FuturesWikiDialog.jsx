@@ -15,10 +15,11 @@ const typeOptions = [
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class FuturesWikiDialog extends Component {
   constructor(props){
-    super()
-    this.type = undefined
+    super(props)
+    //this.type = undefined
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -31,9 +32,7 @@ class FuturesWikiDialog extends Component {
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      validationMessages : []
+      ...this._isWithInitialState()
     }
   }
 

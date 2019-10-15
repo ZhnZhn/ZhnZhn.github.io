@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _dec3, _class;
 
 var _react = require('react');
 
@@ -66,17 +70,24 @@ var TRADE_FILTER_OPTIONS = [{ caption: 'Default : Empty Filter', value: Filter.D
 
 var CHART_TYPE_OPTIONS = [{ caption: 'Default : Area', value: _Type.ChartType.AREA }, { caption: 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: _Type.ChartType.SEMI_DONUT }, { caption: 'Stacked Area : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_AREA }, { caption: 'Stacked Area Percent : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_AREA_PERCENT }, { caption: 'Stacked Column : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_COLUMN }, { caption: 'Stacked Column Percent : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_COLUMN_PERCENT }, { caption: 'Tree Map : On Recent Year', value: _Type.ChartType.TREE_MAP }];
 
-var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
+var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
   (0, _inherits3.default)(UNCommodityTradeDialog, _Component);
 
   function UNCommodityTradeDialog(props) {
     (0, _classCallCheck3.default)(this, UNCommodityTradeDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (UNCommodityTradeDialog.__proto__ || Object.getPrototypeOf(UNCommodityTradeDialog)).call(this));
+    //this.country = null
+    //this.chapter = null
+    //this.tradeFilter = null
+    //this.subheading = null
+    //this.optionTrades = null
+    //this.chartType = null
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (UNCommodityTradeDialog.__proto__ || Object.getPrototypeOf(UNCommodityTradeDialog)).call(this, props));
 
     _this._initTrade = function () {
-      _this.subheading = null;
-      _this.optionTrades = null;
+      _this.subheading = void 0;
+      _this.optionTrades = void 0;
       _this.setState({
         optionTrades: [],
         placeholderTrade: Placeholder.TRADE.INIT,
@@ -228,7 +239,10 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
     };
 
     _this._loadMetaOptionFailed = function () {
-      _this.setState({ isLoadingTrade: false, isLoadingTradeFailed: true });
+      _this.setState({
+        isLoadingTrade: false,
+        isLoadingTradeFailed: true
+      });
     };
 
     _this._handlerLoadData = function () {
@@ -266,7 +280,7 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
           dataSource = _this$props2.dataSource,
           _chartType = _this.chartType ? _this.chartType.value : _Type.ChartType.AREA,
           _title = _this.tradeFilter ? _this.country.caption + ':' + _this.tradeFilter.caption : '' + _this.country.caption,
-          _sliceItems = !(!_this.chartType || _this.chartType.value === _Type.ChartType.AREA) ? _this._createSpliceItems() : undefined;
+          _sliceItems = !(!_this.chartType || _this.chartType.value === _Type.ChartType.AREA) ? _this._createSpliceItems() : void 0;
 
       return {
         value: fnValue(_this.chapter.value, _this.country.value),
@@ -301,13 +315,6 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
       return _this.datesFragment = c;
     };
 
-    _this.country = null;
-    _this.chapter = null;
-    _this.tradeFilter = null;
-    _this.subheading = null;
-    _this.optionTrades = null;
-    _this.chartType = null;
-
     _this._menuMore = (0, _MenuMore2.default)(_this, {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
@@ -337,18 +344,14 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
       key: 'load',
       onClick: _this._handlerLoadData
     })];
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isShowFilter: false,
-      isShowDate: true,
       isShowChartType: false,
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
       optionTrades: [],
-      placeholderTrade: Placeholder.TRADE.INIT,
-      validationMessages: []
-    };
+      placeholderTrade: Placeholder.TRADE.INIT
+    });
     return _this;
   }
 
@@ -474,6 +477,6 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
     }
   }]);
   return UNCommodityTradeDialog;
-}(_react.Component)) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class);
 exports.default = UNCommodityTradeDialog;
 //# sourceMappingURL=UNCommodityTradeDialog.js.map

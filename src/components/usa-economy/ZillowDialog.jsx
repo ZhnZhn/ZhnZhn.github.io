@@ -46,6 +46,7 @@ const _isZipCode = value => _reZipCode.test(value.trim());
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class  ZillowDialog extends Component {
 
   constructor(props){
@@ -60,11 +61,8 @@ class  ZillowDialog extends Component {
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      isShowDate: true,
-      isShowPattern: false,
-      validationMessages: []
+      ...this._isWithInitialState(),
+      isShowPattern: false      
     }
   }
 

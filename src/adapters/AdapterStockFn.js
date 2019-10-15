@@ -55,6 +55,14 @@ const AdapterStockFn = {
                open
              })
           )
+        } else {
+          dataATH.push(
+             athPoint({
+               date: _date,
+               prevClose: close,
+               open: close
+             })
+          )
         }
         _prevClose = close
        }

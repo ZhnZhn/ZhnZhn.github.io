@@ -19,8 +19,8 @@ const S = {
     display: 'block',
     textAlign: 'middle',
     margin: '16px auto 32px',
-    width: '32px',
-    height: '32px'
+    width: 32,
+    height: 32
   },
   SPINNER_FAILED: {
     borderColor: '#f44336',
@@ -54,10 +54,11 @@ const _notTimeDimension = config => {
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class DialogStatN extends Component {
 
   constructor(props){
-    super()
+    super(props)
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -71,13 +72,11 @@ class DialogStatN extends Component {
     this._selectOptions = []
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+      ...this._isWithInitialState(),
       isLoading: true,
       isLoadFailed: false,
       isShowDate: false,
-      ...crDateConfig('EMPTY'),
-      validationMessages: []
+      ...crDateConfig('EMPTY')
     }
   }
 

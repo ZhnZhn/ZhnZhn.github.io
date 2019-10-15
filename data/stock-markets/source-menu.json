@@ -87,6 +87,15 @@
         "chartsType": "t2"
       }
     },
+    "SM_BASE_Q": {
+      "dialogProps": {
+        "noForDate": true,
+        "loadId" : "Q",
+        "rootUri" : "./data/stock-markets/",
+        "spT": "id",
+        "chartsType": "t2"
+      }
+    },
     "SM_BASE_IEX": {
       "dialogProps": {
         "descrUrl" : "./data/stock-markets/iex.html",
@@ -197,7 +206,7 @@
     "SM_UNICORN_RESEARCH" : {
       "type" : "SM_UNICORN_RESEARCH",
       "menuTitle" : "Unicorn Research",
-      "dialogCaption" : "Unicorn Research Corporation",
+      "dialogCaption" : "Unicorn Research Corp.",
       "chartContainerCaption" : "Quandl: Unicorn Research Corporation",
       "dialogType" : "DialogType4A",
       "dialogProps" : {

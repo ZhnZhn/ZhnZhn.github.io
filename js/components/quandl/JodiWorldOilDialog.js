@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class;
+var _dec, _dec2, _dec3, _dec4, _class;
 
 var _react = require('react');
 
@@ -44,16 +48,26 @@ var unitOptions = [{ "caption": "Thousand Barrels per day (kb/d)", "value": "KD"
 
 var chartTypes = [{ caption: "AreaSpline", value: "AREA" }, { caption: "Yearly by Month", value: "YEARLY" }];
 
-var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
+var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
   (0, _inherits3.default)(JodiWorldOilDialog, _Component);
 
   function JodiWorldOilDialog(props) {
     (0, _classCallCheck3.default)(this, JodiWorldOilDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (JodiWorldOilDialog.__proto__ || Object.getPrototypeOf(JodiWorldOilDialog)).call(this));
+    //this.country = null
+    //this.product = null
+    //this.flow = null
+    //this.units = null
+    //this.chartType = undefined
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (JodiWorldOilDialog.__proto__ || Object.getPrototypeOf(JodiWorldOilDialog)).call(this, props));
 
     _this._hClickOptions = function () {
-      _this.setState({ isShowOptions: !_this.state.isShowOptions });
+      _this.setState(function (prevState) {
+        return {
+          isShowOptions: !prevState.isShowOptions
+        };
+      });
     };
 
     _this._hSelectCountry = function (country) {
@@ -112,7 +126,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
           _this$datesFragment$g2 = _this.datesFragment.getValues(),
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate,
-          seriaType = _this.chartType ? _this.chartType.value : undefined,
+          seriaType = _this.chartType ? _this.chartType.value : void 0,
           _this$props = _this.props,
           fnValue = _this$props.fnValue,
           dataColumn = _this$props.dataColumn,
@@ -141,12 +155,6 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
       return _this.datesFragment = c;
     };
 
-    _this.country = null;
-    _this.product = null;
-    _this.flow = null;
-    _this.units = null;
-    _this.chartType = undefined;
-
     _this._menuMore = (0, _MenuMore2.default)(_this, {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
@@ -159,13 +167,10 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
     });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isShowDate: false,
-      isShowOptions: false,
-      validationMessages: []
-    };
+      isShowOptions: false
+    });
     return _this;
   }
 
@@ -277,6 +282,6 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
     }
   }]);
   return JodiWorldOilDialog;
-}(_react.Component)) || _class) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class) || _class);
 exports.default = JodiWorldOilDialog;
 //# sourceMappingURL=JodiWorldOilDialog.js.map

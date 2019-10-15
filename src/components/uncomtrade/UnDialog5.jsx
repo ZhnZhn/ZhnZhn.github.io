@@ -16,10 +16,11 @@ const TRADE_FLOW = [
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class  UnDialog5 extends Component {
 
   constructor(props){
-    super()
+    super(props)
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -34,11 +35,9 @@ class  UnDialog5 extends Component {
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+      ...this._isWithInitialState(),
       isShowDate: false,
-      isShowOptions: false,
-      validationMessages: []
+      isShowOptions: false      
     }
   }
 

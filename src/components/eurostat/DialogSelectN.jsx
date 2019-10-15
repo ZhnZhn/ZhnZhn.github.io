@@ -17,7 +17,7 @@ const  DF_MAP_FREQUENCY = 'M';
 const _crIsId = id => `is${id}Select`;
 
 const _crIsToggleInit = (selectProps) => {
-  let _isToggleInit = {};
+  const _isToggleInit = {};
   selectProps.forEach(item => {
     _isToggleInit[_crIsId(item.id)] = true
   })
@@ -27,6 +27,7 @@ const _crIsToggleInit = (selectProps) => {
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 @withForDate
 class DialogSelectN extends Component {
   /*
@@ -72,8 +73,8 @@ class DialogSelectN extends Component {
 
     this._items = []
     this._compSelect = {}
-    this.date = undefined;
-    this.chartType = undefined;
+    //this.date = undefined;
+    //this.chartType = undefined;
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -91,14 +92,12 @@ class DialogSelectN extends Component {
     this._chartOptions = RouterOptions.crOptions(props)
 
     this.state = {
-      isToolbar: true,
+      ...this._isWithInitialState(),
       isOptions: false,
       isToggle: false,
-      isShowLabels: true,
       isShowChart: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
-      validationMessages: [],
       ..._crIsToggleInit(props.selectProps)
     }
   }
@@ -123,7 +122,7 @@ class DialogSelectN extends Component {
   }
 
   _updateForDate = () => {
-    this.date = undefined;
+    this.date = void 0;
     const { dfProps={} } = this.props
     , { mapFrequency, mapDateDf } = dfProps
     , _frequency = mapFrequency || DF_MAP_FREQUENCY
@@ -186,7 +185,7 @@ class DialogSelectN extends Component {
     } = this
     , seriaColor = colorComp
         ? colorComp.getColor()
-        : undefined
+        : void 0
     , date = this._getDateWithForDate()
     , isCategory = RouterOptions.isCategory(chartType)
     , items = isCategory

@@ -13,16 +13,17 @@ const yearOptions = [
   { caption: '2014', value: 2014 },
   { caption: '2013', value: 2013 },
   { caption: '2012', value: 2012 }
-]
+];
 
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class Futures3Dialog extends Component {
 
   constructor(props){
-    super()
-    this.year = undefined
+    super(props)
+    //this.year = undefined
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -35,9 +36,7 @@ class Futures3Dialog extends Component {
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      validationMessages : []
+      ...this._isWithInitialState()
     }
   }
 

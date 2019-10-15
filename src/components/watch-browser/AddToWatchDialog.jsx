@@ -33,7 +33,7 @@ class AddToWatchDialog extends Component {
   */
 
   constructor(props){
-    super()
+    super(props)
     this.groupCaption = null
     this.listCaption = null
     this._commandButtons = [

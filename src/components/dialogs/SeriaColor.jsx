@@ -17,6 +17,7 @@ const COLORS2 = [
 
 const S = {
   ROOT: {
+    paddingTop: 6,
     paddingBottom: 4
   },
   ROW2: {
@@ -43,7 +44,7 @@ const _initColor = (props) => props.initColor || C_TRANSPARENT;
 
 class SeriaColor extends Component {
   constructor(props){
-    super()
+    super(props)
     this.state = {
       color: _initColor(props)
     }
@@ -103,10 +104,10 @@ class SeriaColor extends Component {
   }
 
   getColor(){
-    const { color } = this.state
+    const { color } = this.state;
     return color !== C_TRANSPARENT
       ? color
-      : undefined;
+      : void 0;
   }
 }
 

@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class;
+var _dec, _dec2, _dec3, _dec4, _class;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -44,7 +48,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 var CAPTION_YAXIS = 'Add Seria with Second YAxis';
 
-var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
+var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
   (0, _inherits3.default)(DialogType4, _Component);
 
   /*
@@ -73,7 +77,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   function DialogType4(props) {
     (0, _classCallCheck3.default)(this, DialogType4);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType4.__proto__ || Object.getPrototypeOf(DialogType4)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType4.__proto__ || Object.getPrototypeOf(DialogType4)).call(this, props));
 
     _this._handleClickOptions = function () {
       _this.setState(function (prevState) {
@@ -159,9 +163,6 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       return _this.datesFragment = c;
     };
 
-    _this.one = undefined;
-    _this.two = undefined;
-
     _this._menuMore = (0, _MenuMore2.default)(_this, {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
@@ -179,13 +180,9 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      isShowDate: true,
-      isShowOptions: false,
-      validationMessages: []
-    };
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
+      isShowOptions: false
+    });
     return _this;
   }
 
@@ -310,6 +307,6 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
   }]);
   return DialogType4;
-}(_react.Component)) || _class) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class) || _class);
 exports.default = DialogType4;
 //# sourceMappingURL=DialogType4.js.map

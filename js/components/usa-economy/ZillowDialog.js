@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class;
+var _dec, _dec2, _dec3, _dec4, _class;
 
 var _react = require('react');
 
@@ -90,7 +94,7 @@ var _isZipCode = function _isZipCode(value) {
   return _reZipCode.test(value.trim());
 };
 
-var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
+var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
   (0, _inherits3.default)(ZillowDialog, _Component);
 
   function ZillowDialog(props) {
@@ -193,13 +197,9 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     _this.toolbarButtons = _this._createType2WithToolbar(props);
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      isShowDate: true,
-      isShowPattern: false,
-      validationMessages: []
-    };
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
+      isShowPattern: false
+    });
     return _this;
   }
 
@@ -319,6 +319,6 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     }
   }]);
   return ZillowDialog;
-}(_react.Component)) || _class) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class) || _class);
 exports.default = ZillowDialog;
 //# sourceMappingURL=ZillowDialog.js.map

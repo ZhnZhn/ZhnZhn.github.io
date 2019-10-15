@@ -12,6 +12,7 @@ const C = {
 };
 
 @Decor.withToolbar
+@Decor.withInitialState
 class AlphaIntradayDialog extends Component {
 
   constructor(props){
@@ -34,8 +35,7 @@ class AlphaIntradayDialog extends Component {
     }
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true
+      ...this._isWithInitialState()      
     }
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { ChartType } from '../../constants/Type';
+import { ChartType as CH } from '../../constants/Type';
 
 import D from './DialogCell'
 import crMenuMore from './MenuMore'
@@ -9,19 +9,20 @@ import Decor from './decorators/Decorators'
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 const CHART_TYPE_OPTIONS = [
-  { caption : 'Default: Area', value: ChartType.AREA },
-  { caption : 'Scatter: Label Up', value: ChartType.SCATTER_UP },
-  { caption : 'Scatter: Label Down', value: ChartType.SCATTER_DOWN }
+  { caption: 'Default: Area', value: CH.AREA },
+  { caption: 'Scatter: Label Up', value: CH.SCATTER_UP },
+  { caption: 'Scatter: Label Down', value: CH.SCATTER_DOWN }
 ];
-
 
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class  DialogType5 extends Component {
 
   constructor(props){
-    super()
+    super(props)
+
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
       onAbout: this._clickInfoWithToolbar
@@ -35,11 +36,9 @@ class  DialogType5 extends Component {
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      isShowDate : false,
-      isShowOptions: false,
-      validationMessages: []
+      ...this._isWithInitialState(),
+      isShowDate: false,
+      isShowOptions: false
     }
   }
 
@@ -53,7 +52,9 @@ class  DialogType5 extends Component {
   }
 
   _handleClickOptions = () => {
-    this.setState({ isShowOptions: !this.state.isShowOptions })
+    this.setState(prevState => ({
+      isShowOptions: !prevState.isShowOptions
+    }))
   }
 
   _handleSelectOne = (one) => {

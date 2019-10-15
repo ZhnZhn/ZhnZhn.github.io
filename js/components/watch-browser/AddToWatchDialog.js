@@ -83,7 +83,7 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
   function AddToWatchDialog(props) {
     (0, _classCallCheck3.default)(this, AddToWatchDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AddToWatchDialog.__proto__ || Object.getPrototypeOf(AddToWatchDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AddToWatchDialog.__proto__ || Object.getPrototypeOf(AddToWatchDialog)).call(this, props));
 
     _this._onStore = function (actionType, data) {
       if (actionType === actionCompleted && data.forActionType === forActionType) {

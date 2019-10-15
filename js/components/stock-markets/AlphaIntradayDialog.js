@@ -24,7 +24,7 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _dec, _dec2, _class, _class2, _temp, _initialiseProps;
+var _dec, _dec2, _dec3, _class, _class2, _temp, _initialiseProps;
 
 var _react = require('react');
 
@@ -114,7 +114,7 @@ var _crLoadOptions = function _crLoadOptions(key, input) {
   });
 };
 
-var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = (_temp = _class2 = function (_Component) {
+var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withLoad, _dec3 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(AlphaIntradayDialog, _Component);
 
   function AlphaIntradayDialog(props) {
@@ -139,11 +139,9 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Dec
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true, isToggleOptions: _this._isDaily });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isToggleOptions: false
-    };
+    });
     return _this;
   }
 
@@ -263,6 +261,6 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Dec
   this._refTicket = function (comp) {
     _this2.ticketComp = comp;
   };
-}, _temp)) || _class) || _class);
+}, _temp)) || _class) || _class) || _class);
 exports.default = AlphaIntradayDialog;
 //# sourceMappingURL=AlphaIntradayDialog.js.map

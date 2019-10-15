@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class, _class2, _temp;
+var _dec, _dec2, _dec3, _dec4, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -63,13 +63,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MAP_FREQUENCY_DF = 'M';
 
-var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (0, _withForDate2.default)(_class = (_temp = _class2 = function (_Component) {
+var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = (0, _withForDate2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogEurostat3A, _Component);
 
   function DialogEurostat3A(props) {
     (0, _classCallCheck3.default)(this, DialogEurostat3A);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogEurostat3A.__proto__ || Object.getPrototypeOf(DialogEurostat3A)).call(this));
+    //this.one = undefined;
+    //this.two = undefined;
+    //this.three = undefined;
+    //this.date = undefined;
+    //this.chartType = undefined;
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogEurostat3A.__proto__ || Object.getPrototypeOf(DialogEurostat3A)).call(this, props));
 
     _this._isCategory = function () {
       return _RouterOptions2.default.isCategory(_this.chartType);
@@ -184,12 +190,6 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
       _this.compSelect2 = comp;
     };
 
-    _this.one = undefined;
-    _this.two = undefined;
-    _this.three = undefined;
-    _this.date = undefined;
-    _this.chartType = undefined;
-
     _this._menuMore = (0, _MenuMore2.default)(_this, {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
@@ -199,14 +199,10 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
     _this._commandButtons = _this._crCommandsWithLoad(_this);
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
-    _this.state = (0, _extends3.default)({
-      isToolbar: true,
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
       isOptions: false,
-      isShowLabels: true,
       isShowDate: false
-    }, (0, _crDateConfig2.default)('EMPTY'), {
-      validationMessages: []
-    });
+    }, (0, _crDateConfig2.default)('EMPTY'));
     return _this;
   }
   /*
@@ -348,6 +344,6 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
   twoJsonProp: 'items',
   threeCaption: 'Metric',
   threeJsonProp: 'items'
-}, _temp)) || _class) || _class) || _class) || _class);
+}, _temp)) || _class) || _class) || _class) || _class) || _class);
 exports.default = DialogEurostat3A;
 //# sourceMappingURL=DialogEurostat3A.js.map

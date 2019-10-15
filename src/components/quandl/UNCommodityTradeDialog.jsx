@@ -48,16 +48,17 @@ const CHART_TYPE_OPTIONS = [
 
 @Decor.withToolbar
 @Decor.withValidationLoad
+@Decor.withInitialState
 class UNCommodityTradeDialog extends Component {
 
   constructor(props){
-    super()
-    this.country = null
-    this.chapter = null
-    this.tradeFilter = null
-    this.subheading = null
-    this.optionTrades = null
-    this.chartType = null
+    super(props)
+    //this.country = null
+    //this.chapter = null
+    //this.tradeFilter = null
+    //this.subheading = null
+    //this.optionTrades = null
+    //this.chartType = null
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -94,16 +95,13 @@ class UNCommodityTradeDialog extends Component {
        />
     ]
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      isShowFilter : false,
-      isShowDate : true,
-      isShowChartType : false,
-      isLoadingTrade : false,
-      isLoadingTradeFailed : false,
-      optionTrades : [],
-      placeholderTrade : Placeholder.TRADE.INIT,
-      validationMessages: []
+      ...this._isWithInitialState(),
+      isShowFilter: false,
+      isShowChartType: false,
+      isLoadingTrade: false,
+      isLoadingTradeFailed: false,
+      optionTrades: [],
+      placeholderTrade: Placeholder.TRADE.INIT,
     }
   }
 
@@ -117,8 +115,8 @@ class UNCommodityTradeDialog extends Component {
   }
 
   _initTrade = () => {
-    this.subheading = null
-    this.optionTrades = null
+    this.subheading = void 0
+    this.optionTrades = void 0
     this.setState({
       optionTrades: [],
       placeholderTrade: Placeholder.TRADE.INIT,
@@ -241,7 +239,10 @@ class UNCommodityTradeDialog extends Component {
     })
   }
   _loadMetaOptionFailed = () => {
-    this.setState({ isLoadingTrade:false, isLoadingTradeFailed:true })
+    this.setState({
+      isLoadingTrade: false,
+      isLoadingTradeFailed: true
+    })
   }
   _handlerLoadData = () => {
     this._handleWithValidationLoad(
@@ -269,15 +270,19 @@ class UNCommodityTradeDialog extends Component {
   }
   _createLoadDataOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues()
-        , _dataColumn = (this.subheading) ? this.subheading.value : this.props.dataColumn
+        , _dataColumn = this.subheading
+              ? this.subheading.value
+              : this.props.dataColumn
         , { loadId, fnValue, dataSource } = this.props
-        , _chartType = (this.chartType) ? this.chartType.value : ChartType.AREA
-        , _title = (this.tradeFilter) ?
-                   `${this.country.caption}:${this.tradeFilter.caption}` :
-                   `${this.country.caption}`
+        , _chartType = this.chartType
+             ? this.chartType.value
+             : ChartType.AREA
+        , _title = this.tradeFilter
+             ? `${this.country.caption}:${this.tradeFilter.caption}`
+             : `${this.country.caption}`
         , _sliceItems = ( !(!this.chartType || this.chartType.value === ChartType.AREA) )
               ? this._createSpliceItems()
-              : undefined;
+              : void 0;
     return {
        value : fnValue(this.chapter.value, this.country.value),
        fromDate: fromDate,

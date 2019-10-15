@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _class;
+var _dec, _dec2, _class;
 
 var _react = require('react');
 
@@ -53,7 +53,7 @@ var C = {
   ERR_CAPTION: "Without API Key"
 };
 
-var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec(_class = function (_Component) {
+var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(AlphaIntradayDialog, _Component);
 
   function AlphaIntradayDialog(props) {
@@ -91,10 +91,7 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec(_class 
       onError: _this.props.onError
     });
 
-    _this.state = {
-      isToolbar: true,
-      isShowLabels: true
-    };
+    _this.state = (0, _extends3.default)({}, _this._isWithInitialState());
     return _this;
   }
 
@@ -142,6 +139,6 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec(_class 
     }
   }]);
   return AlphaIntradayDialog;
-}(_react.Component)) || _class);
+}(_react.Component)) || _class) || _class);
 exports.default = AlphaIntradayDialog;
 //# sourceMappingURL=AlphaSearchDialog.js.map

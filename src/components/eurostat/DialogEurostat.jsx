@@ -8,6 +8,7 @@ import Decor from '../dialogs/decorators/Decorators'
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@Decor.withInitialState
 class DialogEurostat extends Component {
   /*
   static propTypes = {
@@ -36,9 +37,9 @@ class DialogEurostat extends Component {
   }
 
   constructor(props){
-    super();
-    this.one = undefined;
-    this.two = undefined;
+    super(props);
+    //this.one = undefined;
+    //this.two = undefined;
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -51,9 +52,7 @@ class DialogEurostat extends Component {
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
-      isToolbar: true,
-      isShowLabels: true,
-      validationMessages: []
+      ...this._isWithInitialState()      
     }
   }
 
