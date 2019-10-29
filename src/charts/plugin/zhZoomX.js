@@ -4,6 +4,7 @@ const zhZoomX = function({ seriaIndex=0, from, to }){
     const xAxis = this.xAxis[seriaIndex];
     if (xAxis && from<=to ) {
       xAxis.setExtremes(from, to)
+
       if (!this.resetZoomButton) {
         this.showResetZoom()
       }

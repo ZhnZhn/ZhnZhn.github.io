@@ -54,8 +54,6 @@ var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import RowCheckBox from '../dialogs/RowCheckBox'
-
 var DF = {
   COLOR: '#7cb5ec'
 };
@@ -64,16 +62,16 @@ var CL = {
 };
 var S = {
   ROOT: {
-    paddingLeft: '16px',
-    paddingBottom: '16px'
+    paddingLeft: 16,
+    paddingBottom: 16
   },
   TITLE: {
     verticalAlign: 'middle',
     color: 'rgb(27, 117, 187)',
     textAlign: 'right',
-    width: '100px',
-    paddingLeft: '4px',
-    paddingRight: '16px',
+    width: 100,
+    paddingLeft: 4,
+    paddingRight: 16,
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
@@ -81,9 +79,9 @@ var S = {
   COLOR: {
     position: 'relative',
     display: 'inline-block',
-    height: '32px',
-    width: '32px',
-    borderRadius: '2px',
+    height: 32,
+    width: 32,
+    borderRadius: 2,
     verticalAlign: 'middle',
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   },
@@ -94,10 +92,10 @@ var S = {
   },
   SELECT: {
     verticalAlign: 'middle',
-    marginLeft: '24px'
+    marginLeft: 24
   },
   SELECT_OPTIONS: {
-    minHeight: '100px'
+    minHeight: 100
   }
 };
 
@@ -129,7 +127,7 @@ var SeriaRow = function (_Component) {
 
     _this.state = {
       isShowPallete: false,
-      colorEntered: undefined
+      colorEntered: void 0
     };
     return _this;
   }
@@ -215,7 +213,7 @@ var SeriaRow = function (_Component) {
       return {
         isChecked: this.isChecked,
         color: this._getColor(),
-        toYAxis: this.toYAxis,
+        yIndex: this.toYAxis ? this.toYAxis.value : void 0,
         data: this.props.seria.userOptions.data
       };
     }

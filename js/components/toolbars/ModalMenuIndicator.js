@@ -187,7 +187,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
           this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
             data: seriaData,
             color: seriaOptions.color || color,
-            index: -1
+            yIndex: -1
           }, seriaOptions);
         }
         this.setState((0, _defineProperty3.default)({}, statePropName, true));

@@ -20,6 +20,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -52,44 +54,38 @@ var S = {
   }
 };
 
-var PasteToModalDialog = function (_Component) {
+var PasteToModalDialog = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(PasteToModalDialog, _Component);
 
-  function PasteToModalDialog() {
+  function PasteToModalDialog(props) {
     (0, _classCallCheck3.default)(this, PasteToModalDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (PasteToModalDialog.__proto__ || Object.getPrototypeOf(PasteToModalDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (PasteToModalDialog.__proto__ || Object.getPrototypeOf(PasteToModalDialog)).call(this, props));
 
-    _this._handlePasteTo = function () {
+    _this._hPasteTo = function () {
       var _this$props = _this.props,
-          dData = _this$props.data,
+          data = _this$props.data,
           onClose = _this$props.onClose,
-          _ref = dData || {},
-          toChart = _ref.toChart;
+          toChart = data.toChart;
 
-      _this.seriesPaneComp.getValues().forEach(function (conf) {
-        var color = conf.color,
-            _conf$toYAxis = conf.toYAxis,
-            toYAxis = _conf$toYAxis === undefined ? {} : _conf$toYAxis,
-            data = conf.data;
-
-        toChart.zhAddSeriaToYAxis({
-          data: data, color: color, index: toYAxis.value
+      if (toChart) {
+        _this._compSeries.getValues().forEach(function (conf) {
+          //color, data, userMin, userMax, yIndex
+          toChart.zhAddSeriaToYAxis(conf);
         });
-      });
-
+      }
       onClose();
     };
 
-    _this._refSeriesPaneComp = function (comp) {
-      return _this.seriesPaneComp = comp;
+    _this._refCompSeries = function (comp) {
+      return _this._compSeries = comp;
     };
 
     _this._commandButtons = [_react2.default.createElement(_FlatButton2.default, {
       key: 'paste',
       caption: 'Paste & Close',
       isPrimary: true,
-      onClick: _this._handlePasteTo
+      onClick: _this._hPasteTo
     })];
     return _this;
   }
@@ -107,8 +103,7 @@ var PasteToModalDialog = function (_Component) {
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,
-          _props$data = _props.data,
-          data = _props$data === undefined ? {} : _props$data,
+          data = _props.data,
           onClose = _props.onClose,
           fromChart = data.fromChart,
           toChart = data.toChart;
@@ -123,7 +118,7 @@ var PasteToModalDialog = function (_Component) {
           onClose: onClose
         },
         _react2.default.createElement(_SeriesPane2.default, {
-          ref: this._refSeriesPaneComp,
+          ref: this._refCompSeries,
           rootStyle: S.SCROLL_PANE,
           fromChart: fromChart,
           toChart: toChart
@@ -132,7 +127,8 @@ var PasteToModalDialog = function (_Component) {
     }
   }]);
   return PasteToModalDialog;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  data: {}
+}, _temp);
 exports.default = PasteToModalDialog;
 //# sourceMappingURL=PasteToModalDialog.js.map

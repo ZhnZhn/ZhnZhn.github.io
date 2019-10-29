@@ -120,7 +120,7 @@ class ColumnRangeDialog extends Component {
      chart.zhAddSeriaToYAxis({
        data: _d,
        color: this._color,
-       index: 0
+       yIndex: 0,
      }, _crSeriaOptions(this._pointWidth))
 
      chart.zhEnableDataLables()

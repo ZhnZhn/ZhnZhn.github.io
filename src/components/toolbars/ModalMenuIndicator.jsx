@@ -124,7 +124,7 @@ class ModalMenuIndicator extends Component {
         this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
           data: seriaData,
           color: seriaOptions.color || color,
-          index: -1,
+          yIndex: -1
         }, seriaOptions)
       }
       this.setState({ [statePropName]: true })

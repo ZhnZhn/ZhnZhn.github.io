@@ -1,8 +1,10 @@
 
 const YAXIS = 'yAxis';
 
+const _isArr = Array.isArray;
+
 const _crYAxisId = indexOrChart => indexOrChart
-  && Array.isArray(indexOrChart.yAxis)
+  && _isArr(indexOrChart.yAxis)
     ? YAXIS + indexOrChart.yAxis.length
     : YAXIS + indexOrChart;
 
@@ -11,10 +13,10 @@ const _checkYAxis = (index, chart) => {
   , id = isNewYAxis
       ? _crYAxisId(chart)
       : index === 0
-          ? undefined
+          ? void 0
           : _crYAxisId(index);
   return { id, isNewYAxis };
-}
+};
 
 const _crAxis = (id, color) => ({
     id: id,
@@ -41,15 +43,38 @@ const _crSeria = ({ id, color, data }, options) => ({
   ...options
 });
 
-const zhAddSeriaToYAxis = function(options, seriaOptions) {
+const _findDataIndex = (data, v) => {
+  const _max = data.length;
+  let i = 0;
+  for (i; i<_max; i++) {
+    if (data[i][0] === v) {
+      return i;
+    }
+  }
+  return i;
+};
+
+const _crData = ({ data, userMin, userMax }) => {
+  if (!_isArr(data) || !_isArr(data[0])
+        || !userMin || !userMax) {    
+    return data;
+  }
+  const _fromIndex = _findDataIndex(data, userMin)
+  , _toIndex = _findDataIndex(data, userMax);
+  return _fromIndex <= _toIndex
+    ? data.slice(_fromIndex, _toIndex+1)
+    : data;
+};
+
+const zhAddSeriaToYAxis = function(options={}, seriaOptions) {
   try {
-    const { data, color, index=-1 } = options;
-    const { id, isNewYAxis } = _checkYAxis(index, this);
+    const { color, yIndex=-1 } = options
+    , { id, isNewYAxis } = _checkYAxis(yIndex, this);
     if (isNewYAxis) {
       this.addAxis(_crAxis(id, color), false, true)
     }
     const _seria = this.addSeries(_crSeria({
-      id, color, data }, seriaOptions), false
+      id, color, data: _crData(options) }, seriaOptions), false
     );
     this.redraw();
     return _seria;

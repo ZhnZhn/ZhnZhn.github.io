@@ -9,27 +9,38 @@ const CL = {
 
 const S = {
   ROOT_DIV: {
-    paddingTop: '8px'
+    paddingTop: 8
   },
   TITLE: {
-    paddingBottom: '4px',
-    marginLeft: '16px',
-    marginBottom: '8px',
+    paddingBottom: 4,
+    marginLeft: 16,
+    marginBottom: 8,
     fontWeight: 'bold',
     borderBottom: '2px solid black'
   },
   CHART_ID: {
-    width: '200px',
+    width: 200,
     verticalAlign: 'bottom',
     color: 'rgb(164, 135, 212)',
   }
 };
 
+/*
+const DF_FROM_CHART = {
+  userOptions: {
+    zhConfig: {
+      id: 'id'
+    }
+  },
+  series: []
+};
+*/
+
 const _crYAxisOption = (toChart) => {
   const options = [{
     caption: 'withYAxis',
     value: -1
-  }]
+  }];
   toChart.yAxis.forEach((yAxis, index) => {
     options.push ({
       caption: `toYAxis${index+1}`,
@@ -41,17 +52,14 @@ const _crYAxisOption = (toChart) => {
 
 class SeriesPane extends Component {
 
-   constructor(){
-     super()
-     this.compSeries = []
-   }
+   compSeries = []
 
   _regSeriaRow = (comp) => {
-    const compIndex = comp.props.compIndex
+    const compIndex = comp.props.compIndex;
     this.compSeries[compIndex] = comp
   }
   _unregSeriaRow = (comp) => {
-    const compIndex = comp.props.compIndex
+    const compIndex = comp.props.compIndex;
     this.compSeries[compIndex] = null
   }
 
@@ -78,6 +86,7 @@ class SeriesPane extends Component {
         , { userOptions={}, series=[] } = fromChart
         , { zhConfig={} } = userOptions
         , { id:chartId='id' } = zhConfig;
+
     return (
       <ScrollPane style={rootStyle}>
         <div style={S.ROOT_DIV}>
@@ -99,10 +108,23 @@ class SeriesPane extends Component {
   }
 
   getValues(){
+    const {
+      fromChart={}
+    } = this.props
+    , {
+      dataMin, dataMax,
+      userMin, userMax
+    } = (fromChart.xAxis
+      && fromChart.xAxis[0].getExtremes()) || {};
     return this.compSeries
       .filter(comp => comp !== null )
       .map(comp => comp.getValue())
-      .filter(config => config.isChecked);
+      .filter(config => config.isChecked)
+      .map(config => {
+        config.userMin = userMin || dataMin
+        config.userMax = userMax || dataMax
+        return config;
+      });
   }
 }
 

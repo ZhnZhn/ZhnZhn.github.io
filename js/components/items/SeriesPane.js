@@ -40,21 +40,32 @@ var CL = {
 
 var S = {
   ROOT_DIV: {
-    paddingTop: '8px'
+    paddingTop: 8
   },
   TITLE: {
-    paddingBottom: '4px',
-    marginLeft: '16px',
-    marginBottom: '8px',
+    paddingBottom: 4,
+    marginLeft: 16,
+    marginBottom: 8,
     fontWeight: 'bold',
     borderBottom: '2px solid black'
   },
   CHART_ID: {
-    width: '200px',
+    width: 200,
     verticalAlign: 'bottom',
     color: 'rgb(164, 135, 212)'
   }
 };
+
+/*
+const DF_FROM_CHART = {
+  userOptions: {
+    zhConfig: {
+      id: 'id'
+    }
+  },
+  series: []
+};
+*/
 
 var _crYAxisOption = function _crYAxisOption(toChart) {
   var options = [{
@@ -74,21 +85,23 @@ var SeriesPane = function (_Component) {
   (0, _inherits3.default)(SeriesPane, _Component);
 
   function SeriesPane() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, SeriesPane);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (SeriesPane.__proto__ || Object.getPrototypeOf(SeriesPane)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this._regSeriaRow = function (comp) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = SeriesPane.__proto__ || Object.getPrototypeOf(SeriesPane)).call.apply(_ref, [this].concat(args))), _this), _this.compSeries = [], _this._regSeriaRow = function (comp) {
       var compIndex = comp.props.compIndex;
       _this.compSeries[compIndex] = comp;
-    };
-
-    _this._unregSeriaRow = function (comp) {
+    }, _this._unregSeriaRow = function (comp) {
       var compIndex = comp.props.compIndex;
       _this.compSeries[compIndex] = null;
-    };
-
-    _this._renderSeries = function (chartId, series, options) {
+    }, _this._renderSeries = function (chartId, series, options) {
       return series.filter(function (seria) {
         return seria.visible;
       }).map(function (seria, index) {
@@ -101,10 +114,7 @@ var SeriesPane = function (_Component) {
           onUnReg: _this._unregSeriaRow
         });
       });
-    };
-
-    _this.compSeries = [];
-    return _this;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(SeriesPane, [{
@@ -159,12 +169,24 @@ var SeriesPane = function (_Component) {
   }, {
     key: 'getValues',
     value: function getValues() {
+      var _props$fromChart2 = this.props.fromChart,
+          fromChart = _props$fromChart2 === undefined ? {} : _props$fromChart2,
+          _ref2 = fromChart.xAxis && fromChart.xAxis[0].getExtremes() || {},
+          dataMin = _ref2.dataMin,
+          dataMax = _ref2.dataMax,
+          userMin = _ref2.userMin,
+          userMax = _ref2.userMax;
+
       return this.compSeries.filter(function (comp) {
         return comp !== null;
       }).map(function (comp) {
         return comp.getValue();
       }).filter(function (config) {
         return config.isChecked;
+      }).map(function (config) {
+        config.userMin = userMin || dataMin;
+        config.userMax = userMax || dataMax;
+        return config;
       });
     }
   }]);

@@ -21,15 +21,19 @@ const S = {
 };
 
 class PasteToModalDialog extends Component {
-  constructor(){
-    super()
+  static defaultProps = {
+    data: {}
+  }
+
+  constructor(props){
+    super(props)
 
     this._commandButtons = [
       <FlatButton
         key="paste"
         caption="Paste & Close"
         isPrimary={true}
-        onClick={this._handlePasteTo}
+        onClick={this._hPasteTo}
       />
     ]
   }
@@ -43,27 +47,25 @@ class PasteToModalDialog extends Component {
     return true;
   }
 
-  _handlePasteTo = () => {
-    const { data:dData, onClose } = this.props
-    , { toChart } = dData || {};
-
-    this.seriesPaneComp
-      .getValues()
-      .forEach(conf => {
-         const { color, toYAxis={}, data } = conf;
-         toChart.zhAddSeriaToYAxis({
-             data, color, index: toYAxis.value
-         })
-      })
-
+  _hPasteTo = () => {
+    const { data, onClose } = this.props
+    , { toChart } = data;
+    if (toChart) {
+      this._compSeries
+        .getValues()
+        .forEach(conf => {
+          //color, data, userMin, userMax, yIndex
+          toChart.zhAddSeriaToYAxis(conf)
+        })
+    }
     onClose()
   }
 
-  _refSeriesPaneComp = comp => this.seriesPaneComp = comp
+  _refCompSeries = comp => this._compSeries = comp
 
   render(){
     const {
-        isShow, data={}, onClose
+        isShow, data, onClose
       } = this.props
     , { fromChart, toChart } = data;
     return (
@@ -75,7 +77,7 @@ class PasteToModalDialog extends Component {
         onClose={onClose}
       >
         <SeriesPane
-           ref={this._refSeriesPaneComp}
+           ref={this._refCompSeries}
            rootStyle={S.SCROLL_PANE}
            fromChart={fromChart}
            toChart={toChart}

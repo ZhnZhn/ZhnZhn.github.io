@@ -254,7 +254,7 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
     chart.zhAddSeriaToYAxis({
       data: _d,
       color: _this2._color,
-      index: 0
+      yIndex: 0
     }, _crSeriaOptions(_this2._pointWidth));
 
     chart.zhEnableDataLables();

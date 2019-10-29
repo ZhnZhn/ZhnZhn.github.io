@@ -78,7 +78,7 @@ var _checkBuild2 = _interopRequireDefault(_checkBuild);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BUILD_DATE = '15-10-2019';
+var BUILD_DATE = '29-10-2019';
 var CL = "component-container";
 
 var AppErc = function (_Component) {

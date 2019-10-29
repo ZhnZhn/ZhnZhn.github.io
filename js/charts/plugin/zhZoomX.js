@@ -14,6 +14,7 @@ var zhZoomX = function zhZoomX(_ref) {
     var xAxis = this.xAxis[seriaIndex];
     if (xAxis && from <= to) {
       xAxis.setExtremes(from, to);
+
       if (!this.resetZoomButton) {
         this.showResetZoom();
       }
