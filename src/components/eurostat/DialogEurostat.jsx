@@ -5,10 +5,7 @@ import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class DialogEurostat extends Component {
   /*
   static propTypes = {
@@ -52,7 +49,7 @@ class DialogEurostat extends Component {
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
-      ...this._isWithInitialState()      
+      ...this._isWithInitialState()
     }
   }
 

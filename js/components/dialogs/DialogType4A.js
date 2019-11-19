@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _dec4, _class;
+var _dec, _class;
 
 var _react = require('react');
 
@@ -46,7 +46,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
-var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
+var DialogType4A = (_dec = _Decorators2.default.dialog, _dec(_class = function (_Component) {
   (0, _inherits3.default)(DialogType4A, _Component);
 
   function DialogType4A(props) {
@@ -223,6 +223,6 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     }
   }]);
   return DialogType4A;
-}(_react.Component)) || _class) || _class) || _class) || _class);
+}(_react.Component)) || _class);
 exports.default = DialogType4A;
 //# sourceMappingURL=DialogType4A.js.map

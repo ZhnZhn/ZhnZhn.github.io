@@ -41,10 +41,9 @@ var CrcApi = {
   },
   checkResponse: function checkResponse(json) {
     if (!(json && json.Response !== 'Error')) {
-      var message = json ? json.Message || '' : C.RESPONSE_EMPTY;
       throw {
         errCaption: C.REQUEST_ERROR,
-        message: message
+        message: json ? json.Message || '' : C.RESPONSE_EMPTY
       };
     }
     return true;
@@ -52,4 +51,4 @@ var CrcApi = {
 };
 
 exports.default = CrcApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\crypto-compare\CrcApi.js.map
+//# sourceMappingURL=CrcApi.js.map

@@ -88,6 +88,10 @@ var C = {
   COLOR_BLUE: '#2f7ed8'
 };
 
+var _notNull2 = function _notNull2(a, b) {
+  return a !== null && b !== null;
+};
+
 var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
   var arrDate = point[0].split('-');
   result.dateUTC = Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]);
@@ -215,15 +219,13 @@ var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
       dateUTC = result.dateUTC,
       yPointIndex = result.yPointIndex,
       point = result.point,
-      dataHighLow = result.dataHighLow;
-
-
-  var _closeValue = point[yPointIndex],
-      _openValue = point[open] ? point[open] : C.UNKNOWN,
-      _bHigh = point[high] ? (0, _big2.default)(point[high]).minus(_closeValue) : (0, _big2.default)('0.0'),
-      _bLow = point[low] ? (0, _big2.default)(point[low]).minus(_closeValue) : (0, _big2.default)('0.0'),
-      _dayHigh = point[high] ? point[high] : C.UNKNOWN,
-      _dayLow = point[low] ? point[low] : C.UNKNOWN;
+      dataHighLow = result.dataHighLow,
+      _closeValue = point[yPointIndex],
+      _openValue = _notNull2(point[open], _closeValue) ? point[open] : C.UNKNOWN,
+      _bHigh = _notNull2(point[high], _closeValue) ? (0, _big2.default)(point[high]).minus(_closeValue) : (0, _big2.default)('0.0'),
+      _bLow = _notNull2(point[low], _closeValue) ? (0, _big2.default)(point[low]).minus(_closeValue) : (0, _big2.default)('0.0'),
+      _dayHigh = point[high] || C.UNKNOWN,
+      _dayLow = point[low] || C.UNKNOWN;
 
   dataHighLow.push({
     x: dateUTC,

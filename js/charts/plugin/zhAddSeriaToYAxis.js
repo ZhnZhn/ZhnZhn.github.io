@@ -59,7 +59,7 @@ var _findDataIndex = function _findDataIndex(data, v) {
   var _max = data.length;
   var i = 0;
   for (i; i < _max; i++) {
-    if (data[i][0] === v) {
+    if (data[i][0] >= v) {
       return i;
     }
   }

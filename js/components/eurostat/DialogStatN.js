@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _dec4, _class;
+var _dec, _class;
 
 var _react = require('react');
 
@@ -82,27 +82,13 @@ var _isOpenAndPrevLoadFailed = function _isOpenAndPrevLoadFailed(prevProps, prop
   return props !== prevProps && !prevProps.isShow && props.isShow && state.isLoadFailed;
 };
 
-//const _isArr = Array.isArray;
-
 var _fNotTimeDimension = function _fNotTimeDimension(timeId) {
   return function (config) {
     return config.id !== timeId;
   };
 };
 
-/*
-const _notTimeDimension = config => {
-  console.log(config)
-  if ( config.caption === 'Month'
-    && _isArr(config.options)
-    && config.options.length > 12
-  ) { return false; }
-  return config.caption.indexOf('Year') === -1
-     &&  config.caption.indexOf('Vuosi') === -1;
-};
-*/
-
-var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
+var DialogStatN = (_dec = _Decorators2.default.dialog, _dec(_class = function (_Component) {
   (0, _inherits3.default)(DialogStatN, _Component);
 
   function DialogStatN(props) {
@@ -358,6 +344,6 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
   }]);
   return DialogStatN;
-}(_react.Component)) || _class) || _class) || _class) || _class);
+}(_react.Component)) || _class);
 exports.default = DialogStatN;
 //# sourceMappingURL=DialogStatN.js.map

@@ -6,10 +6,7 @@ import Decor from './decorators/Decorators'
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class DialogType4A extends Component {
 
   constructor(props){
@@ -31,7 +28,7 @@ class DialogType4A extends Component {
 
     this.state = {
       ...this._isWithInitialState(),
-      isShowOptions: false      
+      isShowOptions: false
     }
   }
 

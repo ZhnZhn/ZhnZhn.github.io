@@ -4,6 +4,7 @@ import CT from './ChartType'
 const C = {
   //BASE_URL: 'https://api.iextrading.com/1.0/stock',
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
+  DF_TICKET: 'AAPL',
   DF_PERIOD: '1m'
 };
 
@@ -22,10 +23,14 @@ const _urlDividends = (option) => {
 
 const _urlChart = (option) => {
   const {
-    one,
-    two=C.DF_PERIOD,
-  } = option;
-  return `${C.BASE_URL}/${one}/chart/${two}`;
+    one, ticket,
+    two, dfPeriod
+  } = option
+  , _ticket = one || ticket || C.DF_TICKET
+  , _period = two || dfPeriod || C.DF_PERIOD;
+  option.one = _ticket
+  option.two = _period
+  return `${C.BASE_URL}/${_ticket}/chart/${_period}`;
 };
 
 const _rUrl = {
@@ -41,7 +46,7 @@ const IexApi = {
         , _toUrl = _rUrl[dfType] || _rUrl.DF;
     return _toUrl(option)+`?token=${apiKey}`;
   },
-  
+
   checkResponse(){
     return true;
   }

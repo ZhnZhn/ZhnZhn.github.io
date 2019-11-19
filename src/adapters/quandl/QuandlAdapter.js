@@ -46,6 +46,8 @@ const C = {
 }
 
 
+const _notNull2 = (a, b) => a !== null && b !== null;
+
 const _fnConvertToUTC = function(point, result){
    const arrDate = point[0].split('-');
    result.dateUTC = Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]);
@@ -136,14 +138,19 @@ const _fnAddATH = function(optionIndex, result){
 
 const _fnAddHighLow = function(optionIndex, result){
   const { open=1, high=2, low=3 } = optionIndex
-      , { dateUTC, yPointIndex, point, dataHighLow } = result;
-
-  const _closeValue = point[yPointIndex]
-      , _openValue = (point[open]) ? point[open] : C.UNKNOWN
-      , _bHigh = (point[high]) ? Big(point[high]).minus(_closeValue) : Big('0.0')
-      , _bLow = (point[low]) ? Big(point[low]).minus(_closeValue) : Big('0.0')
-      , _dayHigh = (point[high]) ? point[high] : C.UNKNOWN
-      , _dayLow = (point[low]) ? point[low] : C.UNKNOWN;
+  , { dateUTC, yPointIndex, point, dataHighLow } = result
+  , _closeValue = point[yPointIndex]
+  , _openValue = _notNull2(point[open], _closeValue)
+       ? point[open]
+       : C.UNKNOWN
+  , _bHigh = _notNull2(point[high], _closeValue)
+       ? Big(point[high]).minus(_closeValue)
+       : Big('0.0')
+  , _bLow = _notNull2(point[low], _closeValue)
+       ? Big(point[low]).minus(_closeValue)
+       : Big('0.0')
+  , _dayHigh = point[high] || C.UNKNOWN
+  , _dayLow = point[low] || C.UNKNOWN;
 
   dataHighLow.push({
     x : dateUTC,

@@ -12,10 +12,7 @@ const typeOptions = [
   { caption: 'Continuous Contract #5', value: 5 }
 ]
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class FuturesWikiDialog extends Component {
   constructor(props){
     super(props)

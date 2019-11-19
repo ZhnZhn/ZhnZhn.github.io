@@ -13,10 +13,7 @@ const TRADE_FLOW = [
   { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }
 ];
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class  UnDialog5 extends Component {
 
   constructor(props){
@@ -37,7 +34,7 @@ class  UnDialog5 extends Component {
     this.state = {
       ...this._isWithInitialState(),
       isShowDate: false,
-      isShowOptions: false      
+      isShowOptions: false
     }
   }
 

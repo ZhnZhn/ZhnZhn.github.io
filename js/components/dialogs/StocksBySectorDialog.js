@@ -24,6 +24,10 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -64,7 +68,7 @@ var S = {
     marginBottom: 10
   },
   LINK_ROOT: {
-    marginTop: 0,
+    marginTop: 8,
     marginBottom: 0,
     lineHeight: 1.5,
     fontWeight: 'bold'
@@ -77,10 +81,25 @@ var S = {
     paddingRight: 5,
     fontSize: '16px'
   },
+  LINK: {
+    paddingTop: 0
+  },
   LINK_NOT_LABELS: {
     marginLeft: 8
   }
 };
+
+var IEX_SOURCES = [{ a: '1 Month', b: '1m' }, { a: '3 Months', b: '3m' }, { a: '6 Months', b: '6m' }, { a: '1 Year', b: '1y' }, { a: '2 Years', b: '2y' }].map(function (_ref) {
+  var a = _ref.a,
+      b = _ref.b;
+  return {
+    caption: 'IEX Cloud: ' + a, value: 'IEX',
+    dfProps: {
+      dfType: 'chart',
+      dfPeriod: b
+    }
+  };
+});
 
 var SOURCE_OPTIONS = [{
   caption: 'Alpha Vantage: Daily (100)',
@@ -92,13 +111,7 @@ var SOURCE_OPTIONS = [{
   }
 }, {
   caption: 'Barchart: 6 Months', value: 'B'
-}, {
-  caption: 'IEX Platform: 2 Years', value: 'IEX',
-  dfProps: {
-    dfType: "chart",
-    dfPeriod: "2y"
-  }
-}];
+}].concat((0, _toConsumableArray3.default)(IEX_SOURCES));
 
 var DF_SOURCE = SOURCE_OPTIONS[0];
 
@@ -232,15 +245,15 @@ var StocksBySectorDialog = function (_Component) {
           isShow = _props.isShow,
           data = _props.data,
           onClose = _props.onClose,
-          _ref = data || {},
-          item = _ref.item,
-          _ref2 = item || {},
-          text = _ref2.text,
+          _ref2 = data || {},
+          item = _ref2.item,
+          _ref3 = item || {},
+          text = _ref3.text,
           _state = this.state,
           isShowLabels = _state.isShowLabels,
           isShowLink = _state.isShowLink,
           _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
-          _linkStyle = isShowLabels ? null : S.LINK_NOT_LABELS;
+          _linkStyle = isShowLabels ? S.LINK : (0, _extends3.default)({}, S.LINK, S.LINK_NOT_LABELS);
 
       return _react2.default.createElement(
         _ModalDialog2.default,

@@ -16,10 +16,7 @@ const transformOptions = [
 ];
 
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class DialogType3 extends Component {
   /*
   static propTypes = {
@@ -73,7 +70,7 @@ class DialogType3 extends Component {
 
     this.state = {
        ...this._isWithInitialState(),
-       isShowTransform: false       
+       isShowTransform: false
     }
   }
 

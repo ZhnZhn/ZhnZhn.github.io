@@ -47,7 +47,7 @@ const _findDataIndex = (data, v) => {
   const _max = data.length;
   let i = 0;
   for (i; i<_max; i++) {
-    if (data[i][0] === v) {
+    if (data[i][0] >= v) {
       return i;
     }
   }
@@ -56,7 +56,7 @@ const _findDataIndex = (data, v) => {
 
 const _crData = ({ data, userMin, userMax }) => {
   if (!_isArr(data) || !_isArr(data[0])
-        || !userMin || !userMax) {    
+        || !userMin || !userMax) {
     return data;
   }
   const _fromIndex = _findDataIndex(data, userMin)

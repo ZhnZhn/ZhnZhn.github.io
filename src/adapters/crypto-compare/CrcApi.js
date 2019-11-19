@@ -30,12 +30,11 @@ const CrcApi = {
   },
   checkResponse(json){
     if ( !(json && json.Response !== 'Error') ){
-      const message = json
-               ? json.Message || ''
-               : C.RESPONSE_EMPTY
       throw {
         errCaption: C.REQUEST_ERROR,
-        message: message
+        message: json
+            ? json.Message || ''
+            : C.RESPONSE_EMPTY
       };
     }
     return true;

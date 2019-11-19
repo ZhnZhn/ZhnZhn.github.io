@@ -1,11 +1,13 @@
 
 .native-link {
   color: #0b8fff;
-  font-weight: bold;
+  margin-bottom: 2px;
   border-bottom: 1px solid;
+  font-weight: bold;
   text-decoration: none;
 }
 .native-link:hover {
+  margin-bottom: 0;
   border-bottom-width: 3px;  
 }
 

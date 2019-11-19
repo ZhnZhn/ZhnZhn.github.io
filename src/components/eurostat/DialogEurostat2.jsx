@@ -13,10 +13,7 @@ import ModalOptions from './ModalOptions'
 
 const  MAP_FREQUENCY_DF = 'M';
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 @withForDate
 class DialogEurostat2 extends Component {
   /*
@@ -70,7 +67,7 @@ class DialogEurostat2 extends Component {
       ...this._isWithInitialState(),
       isOptions: false,
       isShowDate: false,
-      ...crDateConfig('EMPTY')      
+      ...crDateConfig('EMPTY')
     }
   }
 

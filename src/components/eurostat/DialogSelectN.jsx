@@ -24,10 +24,8 @@ const _crIsToggleInit = (selectProps) => {
   return _isToggleInit;
 };
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+
+@Decor.dialog
 @withForDate
 class DialogSelectN extends Component {
   /*

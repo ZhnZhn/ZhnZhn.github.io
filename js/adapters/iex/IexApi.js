@@ -19,6 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var C = {
   //BASE_URL: 'https://api.iextrading.com/1.0/stock',
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
+  DF_TICKET: 'AAPL',
   DF_PERIOD: '1m'
 };
 
@@ -39,10 +40,15 @@ var _urlDividends = function _urlDividends(option) {
 
 var _urlChart = function _urlChart(option) {
   var one = option.one,
-      _option$two = option.two,
-      two = _option$two === undefined ? C.DF_PERIOD : _option$two;
+      ticket = option.ticket,
+      two = option.two,
+      dfPeriod = option.dfPeriod,
+      _ticket = one || ticket || C.DF_TICKET,
+      _period = two || dfPeriod || C.DF_PERIOD;
 
-  return C.BASE_URL + '/' + one + '/chart/' + two;
+  option.one = _ticket;
+  option.two = _period;
+  return C.BASE_URL + '/' + _ticket + '/chart/' + _period;
 };
 
 var _rUrl = (_rUrl2 = {

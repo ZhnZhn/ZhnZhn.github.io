@@ -23,7 +23,7 @@ const S = {
     marginBottom: 10
   },
   LINK_ROOT: {
-    marginTop: 0,
+    marginTop: 8,
     marginBottom : 0,
     lineHeight: 1.5,
     fontWeight: 'bold'
@@ -36,10 +36,27 @@ const S = {
     paddingRight: 5,
     fontSize: '16px'
   },
+  LINK: {
+    paddingTop: 0
+  },
   LINK_NOT_LABELS: {
     marginLeft: 8
   }
 };
+
+const IEX_SOURCES = [
+  { a: '1 Month', b: '1m'},
+  { a: '3 Months', b: '3m'},
+  { a: '6 Months', b: '6m'},
+  { a: '1 Year', b: '1y'},
+  { a: '2 Years', b: '2y'}
+].map(({a, b}) => ({
+  caption: 'IEX Cloud: ' + a , value: 'IEX',
+  dfProps: {
+    dfType: 'chart',
+    dfPeriod: b
+  }
+}));
 
 const SOURCE_OPTIONS = [
   {
@@ -52,13 +69,8 @@ const SOURCE_OPTIONS = [
     }
   },{
     caption: 'Barchart: 6 Months' , value: 'B'
-  },{
-    caption: 'IEX Platform: 2 Years' , value: 'IEX',
-    dfProps: {
-      dfType: "chart",
-      dfPeriod: "2y"
-    }
-  }
+  },
+  ...IEX_SOURCES
 ];
 
 const DF_SOURCE = SOURCE_OPTIONS[0];
@@ -185,8 +197,8 @@ class StocksBySectorDialog extends Component {
          ? null
          : S.ROOT_NOT_LABELS
     , _linkStyle = isShowLabels
-         ? null
-         : S.LINK_NOT_LABELS;
+         ? S.LINK
+         : { ...S.LINK, ...S.LINK_NOT_LABELS };
 
     return (
       <ModalDialog

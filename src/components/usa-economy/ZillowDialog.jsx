@@ -43,10 +43,7 @@ const _loadFn = (props, options) => {
 const _reZipCode = /^\d{5}$/;
 const _isZipCode = value => _reZipCode.test(value.trim());
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class  ZillowDialog extends Component {
 
   constructor(props){
@@ -62,7 +59,7 @@ class  ZillowDialog extends Component {
 
     this.state = {
       ...this._isWithInitialState(),
-      isShowPattern: false      
+      isShowPattern: false
     }
   }
 

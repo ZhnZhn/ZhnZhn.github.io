@@ -6,11 +6,13 @@
  "file": "../../../../src/components/dialogs/decorators/Decorators.js",
  "names": [
   "Decorators",
+  "dialog",
+  "target",
   "withLoadOptions",
   "withToolbar",
   "withValidationLoad",
   "withLoad",
   "withInitialState"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,4CADiB;AAEjBC,oCAFiB;AAGjBC,kDAHiB;AAIjBC,8BAJiB;AAKjBC;AALiB,CAAnB;;kBAQeL,U"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,UAAQ,gBAACC,MAAD,EAAY;AAClB,+BAAYA,MAAZ;AACA,sCAAmBA,MAAnB;AACA,4BAASA,MAAT;AACA,oCAAiBA,MAAjB;AACD,GANgB;AAOjBC,4CAPiB;AAQjBC,oCARiB;AASjBC,kDATiB;AAUjBC,8BAViB;AAWjBC;AAXiB,CAAnB;;kBAceP,U"
 }

@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _dec4, _class;
+var _dec, _class;
 
 var _react = require('react');
 
@@ -44,9 +44,9 @@ var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var yearOptions = [{ caption: '2019', value: 2019 }, { caption: '2018', value: 2018 }, { caption: '2017', value: 2017 }, { caption: '2016', value: 2016 }, { caption: '2015', value: 2015 }, { caption: '2014', value: 2014 }, { caption: '2013', value: 2013 }, { caption: '2012', value: 2012 }];
+var yearOptions = [{ caption: '2020', value: 2020 }, { caption: '2019', value: 2019 }, { caption: '2018', value: 2018 }, { caption: '2017', value: 2017 }, { caption: '2016', value: 2016 }, { caption: '2015', value: 2015 }, { caption: '2014', value: 2014 }, { caption: '2013', value: 2013 }, { caption: '2012', value: 2012 }];
 
-var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
+var Futures3Dialog = (_dec = _Decorators2.default.dialog, _dec(_class = function (_Component) {
   (0, _inherits3.default)(Futures3Dialog, _Component);
 
   function Futures3Dialog(props) {
@@ -203,6 +203,6 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
     }
   }]);
   return Futures3Dialog;
-}(_react.Component)) || _class) || _class) || _class) || _class);
+}(_react.Component)) || _class);
 exports.default = Futures3Dialog;
 //# sourceMappingURL=Futures3Dialog.js.map

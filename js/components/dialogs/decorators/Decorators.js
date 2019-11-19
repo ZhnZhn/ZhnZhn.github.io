@@ -27,6 +27,12 @@ var _withInitialState2 = _interopRequireDefault(_withInitialState);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Decorators = {
+  dialog: function dialog(target) {
+    (0, _withToolbar2.default)(target);
+    (0, _withValidationLoad2.default)(target);
+    (0, _withLoad2.default)(target);
+    (0, _withInitialState2.default)(target);
+  },
   withLoadOptions: _withLoadOptions2.default,
   withToolbar: _withToolbar2.default,
   withValidationLoad: _withValidationLoad2.default,

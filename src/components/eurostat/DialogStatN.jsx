@@ -35,26 +35,9 @@ const _isOpenAndPrevLoadFailed = (
   && props.isShow
   && state.isLoadFailed;
 
-//const _isArr = Array.isArray;
-
 const _fNotTimeDimension = timeId => config => config.id !== timeId;
 
-/*
-const _notTimeDimension = config => {
-  console.log(config)
-  if ( config.caption === 'Month'
-    && _isArr(config.options)
-    && config.options.length > 12
-  ) { return false; }
-  return config.caption.indexOf('Year') === -1
-     &&  config.caption.indexOf('Vuosi') === -1;
-};
-*/
-
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class DialogStatN extends Component {
 
   constructor(props){

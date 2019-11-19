@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _dec4, _class, _class2, _temp;
+var _dec, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -49,7 +49,7 @@ var DF_TIMEOUT = 4000;
 
 var transformOptions = [{ caption: "NO EFFECT: z[t]=y[t]", value: "none" }, { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" }, { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" }, { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" }, { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }];
 
-var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec4 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = (_temp = _class2 = function (_Component) {
+var DialogType3 = (_dec = _Decorators2.default.dialog, _dec(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogType3, _Component);
 
   function DialogType3(props) {
@@ -280,6 +280,6 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 }(_react.Component), _class2.defaultProps = {
   itemCaption: 'Stock',
   optionNames: 'Stocks'
-}, _temp)) || _class) || _class) || _class) || _class);
+}, _temp)) || _class);
 exports.default = DialogType3;
 //# sourceMappingURL=DialogType3.js.map

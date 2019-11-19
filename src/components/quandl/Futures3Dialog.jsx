@@ -5,6 +5,7 @@ import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 const yearOptions = [
+  { caption: '2020', value: 2020 },
   { caption: '2019', value: 2019 },
   { caption: '2018', value: 2018 },
   { caption: '2017', value: 2017 },
@@ -15,10 +16,7 @@ const yearOptions = [
   { caption: '2012', value: 2012 }
 ];
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class Futures3Dialog extends Component {
 
   constructor(props){

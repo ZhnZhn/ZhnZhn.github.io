@@ -17,10 +17,7 @@ const chartTypes = [
   { caption: "Yearly by Month", value: "YEARLY" }
 ];
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class JodiWorldOilDialog extends Component {
 
    constructor(props){
@@ -62,7 +59,7 @@ class JodiWorldOilDialog extends Component {
 
    _hClickOptions = () => {
      this.setState(prevState => ({
-       isShowOptions: !prevState.isShowOptions 
+       isShowOptions: !prevState.isShowOptions
      }))
    }
 

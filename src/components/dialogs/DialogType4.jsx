@@ -8,10 +8,8 @@ import Decor from './decorators/Decorators'
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 const CAPTION_YAXIS = 'Add Seria with Second YAxis';
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+
+@Decor.dialog
 class DialogType4 extends Component {
   /*
   static propTypes = {
@@ -63,7 +61,7 @@ class DialogType4 extends Component {
 
     this.state = {
       ...this._isWithInitialState(),
-      isShowOptions: false      
+      isShowOptions: false
     }
   }
 

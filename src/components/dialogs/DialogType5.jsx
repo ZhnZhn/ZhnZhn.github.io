@@ -14,10 +14,7 @@ const CHART_TYPE_OPTIONS = [
   { caption: 'Scatter: Label Down', value: CH.SCATTER_DOWN }
 ];
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withLoad
-@Decor.withInitialState
+@Decor.dialog
 class  DialogType5 extends Component {
 
   constructor(props){
