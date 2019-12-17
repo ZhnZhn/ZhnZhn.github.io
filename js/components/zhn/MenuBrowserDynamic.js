@@ -1,66 +1,42 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _Browser = _interopRequireDefault(require("./Browser"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Browser = require('./Browser');
-
-var _Browser2 = _interopRequireDefault(_Browser);
-
-var _BrowserCaption = require('./BrowserCaption');
-
-var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
-
-var _ScrollPane = require('./ScrollPane');
-
-var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
-
-var _MenuPart = require('./MenuPart');
-
-var _MenuPart2 = _interopRequireDefault(_MenuPart);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _MenuPart = _interopRequireDefault(require("./MenuPart"));
 
 var CL_SCROLL = 'scroll-container-y scroll-menu';
-
 var S = {
   BROWSER: {
     paddingRight: '0'
   }
 };
 
-var MenuBrowserDynamic = function (_Component) {
-  (0, _inherits3.default)(MenuBrowserDynamic, _Component);
+var MenuBrowserDynamic =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuBrowserDynamic, _Component);
 
   function MenuBrowserDynamic(props) {
-    (0, _classCallCheck3.default)(this, MenuBrowserDynamic);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (MenuBrowserDynamic.__proto__ || Object.getPrototypeOf(MenuBrowserDynamic)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._loadMenu = function () {
       var _this$props = _this.props,
@@ -68,8 +44,11 @@ var MenuBrowserDynamic = function (_Component) {
           caption = _this$props.caption,
           sourceMenuUrl = _this$props.sourceMenuUrl,
           onLoadMenu = _this$props.onLoadMenu;
-
-      onLoadMenu({ browserType: browserType, caption: caption, sourceMenuUrl: sourceMenuUrl });
+      onLoadMenu({
+        browserType: browserType,
+        caption: caption,
+        sourceMenuUrl: sourceMenuUrl
+      });
     };
 
     _this._onStore = function (actionType, data) {
@@ -83,25 +62,38 @@ var MenuBrowserDynamic = function (_Component) {
       if (actionType === showAction && data === browserType) {
         _this._handleShow();
       } else if (actionType === loadCompletedAction && data.browserType === browserType) {
-        _this.setState({ menuItems: data.menuItems, isLoaded: true });
+        _this.setState({
+          menuItems: data.menuItems,
+          isLoaded: true
+        });
       } else if (actionType === updateAction && data === browserType) {
-        _this.setState({ menuItems: store.getBrowserMenu(browserType) });
+        _this.setState({
+          menuItems: store.getBrowserMenu(browserType)
+        });
       }
     };
 
     _this._handleHide = function () {
-      _this.setState({ isShow: false });
+      _this.setState({
+        isShow: false
+      });
     };
 
     _this._handleShow = function () {
-      _this.setState({ isShow: true });
+      _this.setState({
+        isShow: true
+      });
     };
 
-    _this._renderMenuParts = function () {
-      var menuItems = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    _this._renderMenuParts = function (menuItems) {
+      if (menuItems === void 0) {
+        menuItems = [];
+      }
 
       return menuItems.map(function (menuPart, index) {
-        return _react2.default.createElement(_MenuPart2.default, (0, _extends3.default)({ key: index }, menuPart));
+        return _react["default"].createElement(_MenuPart["default"], (0, _extends2["default"])({
+          key: index
+        }, menuPart));
       });
     };
 
@@ -113,57 +105,49 @@ var MenuBrowserDynamic = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(MenuBrowserDynamic, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
+  var _proto = MenuBrowserDynamic.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+
+    this._loadMenu();
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate() {
+    var _this$state = this.state,
+        isLoaded = _this$state.isLoaded,
+        isShow = _this$state.isShow;
+
+    if (!isLoaded && isShow) {
       this._loadMenu();
     }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      var _state = this.state,
-          isLoaded = _state.isLoaded,
-          isShow = _state.isShow;
+  };
 
-      if (!isLoaded && isShow) {
-        this._loadMenu();
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          caption = _props.caption,
-          children = _props.children,
-          _state2 = this.state,
-          menuItems = _state2.menuItems,
-          isShow = _state2.isShow;
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
 
+  _proto.render = function render() {
+    var _this$props3 = this.props,
+        caption = _this$props3.caption,
+        children = _this$props3.children,
+        _this$state2 = this.state,
+        menuItems = _this$state2.menuItems,
+        isShow = _this$state2.isShow;
+    return _react["default"].createElement(_Browser["default"], {
+      isShow: isShow,
+      style: S.BROWSER
+    }, _react["default"].createElement(_BrowserCaption["default"], {
+      caption: caption,
+      onClose: this._handleHide
+    }), _react["default"].createElement(_ScrollPane["default"], {
+      className: CL_SCROLL
+    }, this._renderMenuParts(menuItems), children));
+  };
 
-      return _react2.default.createElement(
-        _Browser2.default,
-        { isShow: isShow, style: S.BROWSER },
-        _react2.default.createElement(_BrowserCaption2.default, {
-          caption: caption,
-          onClose: this._handleHide
-        }),
-        _react2.default.createElement(
-          _ScrollPane2.default,
-          { className: CL_SCROLL },
-          this._renderMenuParts(menuItems),
-          children
-        )
-      );
-    }
-  }]);
   return MenuBrowserDynamic;
 }(_react.Component);
 
-exports.default = MenuBrowserDynamic;
+var _default = MenuBrowserDynamic;
+exports["default"] = _default;
 //# sourceMappingURL=MenuBrowserDynamic.js.map

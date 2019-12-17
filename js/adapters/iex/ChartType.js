@@ -1,14 +1,12 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var ChartType = {
   CHART: 'chart',
   ERN: 'earnings',
   DIV: 'dividends'
 };
-
-exports.default = ChartType;
+var _default = ChartType;
+exports["default"] = _default;
 //# sourceMappingURL=ChartType.js.map

@@ -1,68 +1,62 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Chart = require('./Chart');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _Chart2 = _interopRequireDefault(_Chart);
+var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _Tooltip = require('./Tooltip');
-
-var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
 var WithStackedColumnConfig = {
   fBaseStackedColumnConfig: function fBaseStackedColumnConfig(_ref) {
     var _ref$stacking = _ref.stacking,
-        stacking = _ref$stacking === undefined ? 'normal' : _ref$stacking;
-
+        stacking = _ref$stacking === void 0 ? 'normal' : _ref$stacking;
     return {
       zhSeries: {
         count: 0
       },
       zhDetailCharts: [],
-
-      credits: _Chart2.default.fCreditsRightBottom(),
+      credits: _Chart["default"].fCreditsRightBottom(),
       chart: {
         type: 'column',
-        spacingTop: _Chart2.default.STACKED_SPACING_TOP,
-        spacingBottom: _Chart2.default.SPACING_BOTTOM,
-
+        spacingTop: _Chart["default"].STACKED_SPACING_TOP,
+        spacingBottom: _Chart["default"].SPACING_BOTTOM,
         zoomType: 'xy',
-        resetZoomButton: _Chart2.default.fResetZoomButton()
+        resetZoomButton: _Chart["default"].fResetZoomButton()
       },
-
-      title: _Chart2.default.fTitle({ y: _Chart2.default.STACKED_TITLE_Y }),
-      subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.STACKED_SUBTITLE_Y }),
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.sparkStackedArea),
-
-      xAxis: _Chart2.default.fXAxisOpposite({
+      title: _Chart["default"].fTitle({
+        y: _Chart["default"].STACKED_TITLE_Y
+      }),
+      subtitle: _Chart["default"].fSubtitle({
+        y: _Chart["default"].STACKED_SUBTITLE_Y
+      }),
+      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].sparkStackedArea),
+      xAxis: _Chart["default"].fXAxisOpposite({
         categories: [],
         type: "category",
         startOnTick: false,
         min: 1,
-        crosshair: _Chart2.default.fCrosshair()
+        crosshair: _Chart["default"].fCrosshair()
       }),
-      yAxis: _Chart2.default.fYAxisOpposite(),
-
+      yAxis: _Chart["default"].fYAxisOpposite(),
       plotOptions: {
-        column: _Chart2.default.fPlotOptionsColumn({ stacking: stacking }),
-        series: _Chart2.default.fPlotOptionsSeries()
+        column: _Chart["default"].fPlotOptionsColumn({
+          stacking: stacking
+        }),
+        series: _Chart["default"].fPlotOptionsSeries()
       },
-      legend: _Chart2.default.fLegend()
+      legend: _Chart["default"].fLegend()
     };
   },
   fStackedColumnSeria: function fStackedColumnSeria(_ref2) {
     var zhSeriaId = _ref2.zhSeriaId,
         name = _ref2.name,
         _ref2$data = _ref2.data,
-        data = _ref2$data === undefined ? [] : _ref2$data,
+        data = _ref2$data === void 0 ? [] : _ref2$data,
         _ref2$color = _ref2.color,
-        color = _ref2$color === undefined ? 'gray' : _ref2$color;
-
+        color = _ref2$color === void 0 ? 'gray' : _ref2$color;
     return {
       zhSeriaId: zhSeriaId,
       name: name,
@@ -94,6 +88,6 @@ var WithStackedColumnConfig = {
     };
   }
 };
-
-exports.default = WithStackedColumnConfig;
+var _default = WithStackedColumnConfig;
+exports["default"] = _default;
 //# sourceMappingURL=WithStackedColumnConfig.js.map

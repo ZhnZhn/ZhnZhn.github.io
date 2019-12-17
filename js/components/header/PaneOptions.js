@@ -1,70 +1,51 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _safeFn = _interopRequireDefault(require("../../utils/safeFn"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _class, _temp, _initialiseProps;
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
+
+var _RowButtons = _interopRequireDefault(require("./RowButtons"));
+
 //import PropTypes from 'prop-types'
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _highcharts = require('highcharts');
-
-var _highcharts2 = _interopRequireDefault(_highcharts);
-
-var _safeFn = require('../../utils/safeFn');
-
-var _safeFn2 = _interopRequireDefault(_safeFn);
-
-var _withTheme = require('../hoc/withTheme');
-
-var _withTheme2 = _interopRequireDefault(_withTheme);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _FlatButton = require('../zhn-m/FlatButton');
-
-var _FlatButton2 = _interopRequireDefault(_FlatButton);
-
-var _RowButtons = require('./RowButtons');
-
-var _RowButtons2 = _interopRequireDefault(_RowButtons);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var UI_THEME_OPTIONS = [{ caption: 'Dark', value: 'GREY' }, { caption: 'Light', value: 'WHITE' }, { caption: 'Sand', value: 'SAND' }];
-
+var UI_THEME_OPTIONS = [{
+  caption: 'Dark',
+  value: 'GREY'
+}, {
+  caption: 'Light',
+  value: 'WHITE'
+}, {
+  caption: 'Sand',
+  value: 'SAND'
+}];
 var SET = {
   PROXY: 'setProxy'
 };
-
 var MODE_ADMIN = 'isAdminMode';
 var MODE_DELTA = 'isDrawDeltaExtrems';
 var MODE_ZOOM = 'isNotZoomToMinMax';
 
-var _crHaloOption = function _crHaloOption() {
-  var is = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+var _crHaloOption = function _crHaloOption(is) {
+  if (is === void 0) {
+    is = false;
+  }
+
   return {
     plotOptions: {
       series: {
@@ -78,8 +59,10 @@ var _crHaloOption = function _crHaloOption() {
   };
 };
 
-var PaneOptions = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(PaneOptions, _Component);
+var PaneOptions =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(PaneOptions, _Component);
 
   /*
   static propTypes = {
@@ -89,120 +72,104 @@ var PaneOptions = (_temp = _class = function (_Component) {
     onClose: PropTypes.func
   }
   */
-
   function PaneOptions(props) {
-    (0, _classCallCheck3.default)(this, PaneOptions);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (PaneOptions.__proto__ || Object.getPrototypeOf(PaneOptions)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
-    _initialiseProps.call(_this);
+    _this._hMode = function (fnName, mode) {
+      var data = _this.props.data,
+          fnMode = (0, _safeFn["default"])(data, fnName);
+      fnMode(mode);
+    };
 
-    var data = props.data;
+    _this._hSetProxy = function () {
+      _this._setProxy(_this.proxyComp.getValue());
+    };
 
+    _this._hSelectTheme = function (item) {
+      var _this$props = _this.props,
+          theme = _this$props.theme,
+          onChangeTheme = _this$props.onChangeTheme;
 
-    _this._setProxy = (0, _safeFn2.default)(data, SET.PROXY);
+      if (item && theme.getThemeName() !== item.value) {
+        theme.setThemeName(item.value);
+        onChangeTheme(item.value);
+      }
+    };
+
+    _this._setHalo = function (is) {
+      _highcharts["default"].setOptions(_crHaloOption(is));
+    };
+
+    _this._refProxy = function (n) {
+      return _this.proxyComp = n;
+    };
+
+    var _data = props.data;
+    _this._setProxy = (0, _safeFn["default"])(_data, SET.PROXY);
     return _this;
   }
 
-  (0, _createClass3.default)(PaneOptions, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          titleStyle = _props.titleStyle,
-          btStyle = _props.btStyle,
-          data = _props.data,
-          onClose = _props.onClose,
-          _proxy = data.getProxy(),
-          _isAdminMode = (0, _safeFn2.default)(data, MODE_ADMIN, false)(),
-          _isDrawDeltaExtrems = (0, _safeFn2.default)(data, MODE_DELTA, false)(),
-          _isNotZoomToMinMax = (0, _safeFn2.default)(data, MODE_ZOOM, false)();
+  var _proto = PaneOptions.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_DialogCell2.default.RowPattern, {
-          ref: this._refProxy,
-          captionStyle: titleStyle,
-          caption: 'Https Proxy:',
-          placeholder: 'Https Proxy for CORS',
-          initValue: _proxy,
-          onEnter: this._setProxy
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-          caption: 'UI Theme',
-          captionStyle: titleStyle,
-          options: UI_THEME_OPTIONS,
-          onSelect: this._hSelectTheme
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-          initValue: _isAdminMode,
-          caption: 'View in Admin Mode',
-          onCheck: this._hMode.bind(null, MODE_ADMIN, true),
-          onUnCheck: this._hMode.bind(null, MODE_ADMIN, false)
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-          initValue: _isDrawDeltaExtrems,
-          caption: 'Draw Deltas to Min-Max',
-          onCheck: this._hMode.bind(null, MODE_DELTA, true),
-          onUnCheck: this._hMode.bind(null, MODE_DELTA, false)
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-          initValue: _isNotZoomToMinMax,
-          caption: 'Not Zoom to Min-Max',
-          onCheck: this._hMode.bind(null, MODE_ZOOM, true),
-          onUnCheck: this._hMode.bind(null, MODE_ZOOM, false)
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-          initValue: false,
-          caption: 'Without Points Halo',
-          onCheck: this._setHalo.bind(null, false),
-          onUnCheck: this._setHalo.bind(null, true)
-        }),
-        _react2.default.createElement(
-          _RowButtons2.default,
-          { btStyle: btStyle, onClose: onClose },
-          _react2.default.createElement(_FlatButton2.default, {
-            caption: 'SET PROXY',
-            isPrimary: true,
-            onClick: this._hSetProxy
-          })
-        )
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        titleStyle = _this$props2.titleStyle,
+        btStyle = _this$props2.btStyle,
+        data = _this$props2.data,
+        onClose = _this$props2.onClose,
+        _proxy = data.getProxy(),
+        _isAdminMode = (0, _safeFn["default"])(data, MODE_ADMIN, false)(),
+        _isDrawDeltaExtrems = (0, _safeFn["default"])(data, MODE_DELTA, false)(),
+        _isNotZoomToMinMax = (0, _safeFn["default"])(data, MODE_ZOOM, false)();
+
+    return _react["default"].createElement("div", null, _react["default"].createElement(_DialogCell["default"].RowPattern, {
+      ref: this._refProxy,
+      captionStyle: titleStyle,
+      caption: "Https Proxy:",
+      placeholder: "Https Proxy for CORS",
+      initValue: _proxy,
+      onEnter: this._setProxy
+    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+      caption: "UI Theme",
+      captionStyle: titleStyle,
+      options: UI_THEME_OPTIONS,
+      onSelect: this._hSelectTheme
+    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      initValue: _isAdminMode,
+      caption: "View in Admin Mode",
+      onCheck: this._hMode.bind(null, MODE_ADMIN, true),
+      onUnCheck: this._hMode.bind(null, MODE_ADMIN, false)
+    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      initValue: _isDrawDeltaExtrems,
+      caption: "Draw Deltas to Min-Max",
+      onCheck: this._hMode.bind(null, MODE_DELTA, true),
+      onUnCheck: this._hMode.bind(null, MODE_DELTA, false)
+    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      initValue: _isNotZoomToMinMax,
+      caption: "Not Zoom to Min-Max",
+      onCheck: this._hMode.bind(null, MODE_ZOOM, true),
+      onUnCheck: this._hMode.bind(null, MODE_ZOOM, false)
+    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      initValue: false,
+      caption: "Without Points Halo",
+      onCheck: this._setHalo.bind(null, false),
+      onUnCheck: this._setHalo.bind(null, true)
+    }), _react["default"].createElement(_RowButtons["default"], {
+      btStyle: btStyle,
+      onClose: onClose
+    }, _react["default"].createElement(_FlatButton["default"], {
+      caption: "SET PROXY",
+      isPrimary: true,
+      onClick: this._hSetProxy
+    })));
+  };
+
   return PaneOptions;
-}(_react.Component), _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
+}(_react.Component);
 
-  this._hMode = function (fnName, mode) {
-    var data = _this2.props.data,
-        fnMode = (0, _safeFn2.default)(data, fnName);
+var _default = (0, _withTheme["default"])(PaneOptions);
 
-    fnMode(mode);
-  };
-
-  this._hSetProxy = function () {
-    _this2._setProxy(_this2.proxyComp.getValue());
-  };
-
-  this._hSelectTheme = function (item) {
-    var _props2 = _this2.props,
-        theme = _props2.theme,
-        onChangeTheme = _props2.onChangeTheme;
-
-    if (item && theme.getThemeName() !== item.value) {
-      theme.setThemeName(item.value);
-      onChangeTheme(item.value);
-    }
-  };
-
-  this._setHalo = function (is) {
-    _highcharts2.default.setOptions(_crHaloOption(is));
-  };
-
-  this._refProxy = function (n) {
-    return _this2.proxyComp = n;
-  };
-}, _temp);
-exports.default = (0, _withTheme2.default)(PaneOptions);
+exports["default"] = _default;
 //# sourceMappingURL=PaneOptions.js.map

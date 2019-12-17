@@ -1,18 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ZillowDialog = require('./ZillowDialog');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ZillowDialog2 = _interopRequireDefault(_ZillowDialog);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ZillowDialog = _interopRequireDefault(require("./ZillowDialog"));
 
 var Dialogs = {
-  Zillow: _ZillowDialog2.default
+  Zillow: _ZillowDialog["default"]
 };
-
-exports.default = Dialogs;
+var _default = Dialogs;
+exports["default"] = _default;
 //# sourceMappingURL=UsaeDialogs.js.map

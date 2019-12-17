@@ -1,29 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _highcharts = require('highcharts');
+var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var _highcharts2 = _interopRequireDefault(_highcharts);
+var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var _Color = require('../constants/Color');
+var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
-var _Color2 = _interopRequireDefault(_Color);
-
-var _Tooltip = require('./Tooltip');
-
-var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var merge = _highcharts2.default.merge;
-
+var merge = _highcharts["default"].merge;
 var S = {
   TITLE_BASE: {
     stroke: 'transparent',
@@ -33,28 +23,31 @@ var S = {
   }
 };
 
-var _addMonoColorsTo = function _addMonoColorsTo() {
-  var colors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var base = arguments[1];
+var _addMonoColorsTo = function _addMonoColorsTo(colors, base) {
+  if (colors === void 0) {
+    colors = [];
+  }
 
-  var i = void 0;
+  var i;
+
   for (i = 0; i < 4; i++) {
     // Start out with a darkened base color (negative brighten), and end
     // up with a much brighter color
-    colors.push(_highcharts2.default.Color(base).brighten((i - 3) / 7).setOpacity(0.75).get());
+    colors.push(_highcharts["default"].Color(base).brighten((i - 3) / 7).setOpacity(0.75).get());
   }
 };
 
-var _fMonoColors = function _fMonoColors() {
-  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+var _fMonoColors = function _fMonoColors(_temp) {
+  var _ref = _temp === void 0 ? {} : _temp,
       _ref$base = _ref.base1,
-      base1 = _ref$base === undefined ? _Color2.default.MONO_BASE1 : _ref$base,
+      base1 = _ref$base === void 0 ? _Color["default"].MONO_BASE1 : _ref$base,
       _ref$base2 = _ref.base2,
-      base2 = _ref$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref$base2;
+      base2 = _ref$base2 === void 0 ? _Color["default"].MONO_BASE2 : _ref$base2;
 
   var colors = [];
 
   _addMonoColorsTo(colors, base1);
+
   _addMonoColorsTo(colors, base2);
 
   return colors;
@@ -68,43 +61,48 @@ var Chart = {
   COLOR_PERIOD: 4 / 7,
   COLOR_LOW_LEVEL: -3 / 7,
   COLOR_OPACITY: 0.75,
-  COLOR_BASE1: _Color2.default.MONO_BASE1,
-  COLOR_BASE2: _Color2.default.MONO_BASE2,
-
+  COLOR_BASE1: _Color["default"].MONO_BASE1,
+  COLOR_BASE2: _Color["default"].MONO_BASE2,
   HEIGHT: 300,
   MARGIN_RIGHT: 50,
   STACKED_HEIGHT: 500,
   LEGEND_ROW_HEIGHT: 32,
-
   THEME_SPACING_TOP: 5,
   SPACING_TOP: 20,
   STACKED_SPACING_TOP: 25,
   SPACING_BOTTOM: 24,
   MARGIN_TOP: 60,
   TREEMAP_MARGIN_TOP: 50,
-
   STACKED_TITLE_Y: -10,
   STACKED_SUBTITLE_Y: 10,
   TREEMAP_TITLE_Y: 15,
   TREEMAP_SUBTITLE_Y: 35,
   SEMIDONUT_TITLE_Y: 15,
   SEMIDONUT_SUBTITLE_Y: 35,
-
   _monoColors: _fMonoColors(),
+  fCreateMonoColor: function fCreateMonoColor(base, deltaColor, opacity) {
+    if (base === void 0) {
+      base = _Color["default"].MONO_BASE1;
+    }
 
-  fCreateMonoColor: function fCreateMonoColor() {
-    var base = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _Color2.default.MONO_BASE1;
-    var deltaColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-    var opacity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.75;
+    if (deltaColor === void 0) {
+      deltaColor = 0;
+    }
 
-    return _highcharts2.default.Color(base).brighten(this.COLOR_LOW_LEVEL + deltaColor).setOpacity(opacity).get();
+    if (opacity === void 0) {
+      opacity = 0.75;
+    }
+
+    return _highcharts["default"].Color(base).brighten(this.COLOR_LOW_LEVEL + deltaColor).setOpacity(opacity).get();
   },
   fnGetMonoColor: function fnGetMonoColor(index) {
     var colorIndex = index % 8;
     return this._monoColors[colorIndex];
   },
-  fCreditsRightBottom: function fCreditsRightBottom() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fCreditsRightBottom: function fCreditsRightBottom(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
       enabled: true,
@@ -116,8 +114,10 @@ var Chart = {
       }
     }, option);
   },
-  fResetZoomButton: function fResetZoomButton() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fResetZoomButton: function fResetZoomButton(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
       position: {
@@ -127,19 +127,19 @@ var Chart = {
         y: 0
       },
       theme: {
-        fill: _Color2.default.BG_TITLE,
-        stroke: _Color2.default.BG_TITLE,
+        fill: _Color["default"].BG_TITLE,
+        stroke: _Color["default"].BG_TITLE,
         r: 4,
         style: {
-          color: _Color2.default.TITLE_SHOW
+          color: _Color["default"].TITLE_SHOW
         },
         states: {
           hover: {
-            fill: _Color2.default.BG_TITLE,
-            stroke: _Color2.default.HOVER,
+            fill: _Color["default"].BG_TITLE,
+            stroke: _Color["default"].HOVER,
             'stroke-width': 2,
             style: {
-              color: _Color2.default.HOVER
+              color: _Color["default"].HOVER
             }
           }
         }
@@ -158,8 +158,10 @@ var Chart = {
       y: this.STACKED_SUBTITLE_Y
     });
   },
-  fTitle: function fTitle() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fTitle: function fTitle(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
       text: '',
@@ -167,14 +169,16 @@ var Chart = {
       align: 'left',
       x: 25,
       y: 25,
-      style: (0, _extends3.default)({}, S.TITLE_BASE, {
-        color: _Color2.default.CHART_TITLE,
-        fill: _Color2.default.CHART_TITLE
+      style: (0, _extends2["default"])({}, S.TITLE_BASE, {
+        color: _Color["default"].CHART_TITLE,
+        fill: _Color["default"].CHART_TITLE
       })
     }, option);
   },
-  fSubtitle: function fSubtitle() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fSubtitle: function fSubtitle(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
       text: '',
@@ -182,9 +186,9 @@ var Chart = {
       align: 'left',
       x: 25,
       y: 45,
-      style: (0, _extends3.default)({}, S.TITLE_BASE, {
-        color: _Color2.default.CHART_SUBTITLE,
-        fill: _Color2.default.CHART_SUBTITLE
+      style: (0, _extends2["default"])({}, S.TITLE_BASE, {
+        color: _Color["default"].CHART_SUBTITLE,
+        fill: _Color["default"].CHART_SUBTITLE
       })
     }, option);
   },
@@ -192,7 +196,7 @@ var Chart = {
     return {
       text: text,
       style: {
-        color: _Color2.default.METRIC_TITLE,
+        color: _Color["default"].METRIC_TITLE,
         fontSize: '16px',
         fontWeight: 'bold'
       },
@@ -210,14 +214,14 @@ var Chart = {
       }
     };
   },
-  fBaseConfig: function fBaseConfig() {
-    var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+  fBaseConfig: function fBaseConfig(_temp2) {
+    var _ref2 = _temp2 === void 0 ? {} : _temp2,
         _ref2$seriaType = _ref2.seriaType,
-        seriaType = _ref2$seriaType === undefined ? 'area' : _ref2$seriaType,
+        seriaType = _ref2$seriaType === void 0 ? 'area' : _ref2$seriaType,
         seriaColor = _ref2.seriaColor,
         spacingTop = _ref2.spacingTop,
         _ref2$isCrosshair = _ref2.isCrosshair,
-        isCrosshair = _ref2$isCrosshair === undefined ? true : _ref2$isCrosshair;
+        isCrosshair = _ref2$isCrosshair === void 0 ? true : _ref2$isCrosshair;
 
     return {
       zhSeries: {
@@ -255,7 +259,7 @@ var Chart = {
         turboThreshold: 20000,
         type: seriaType,
         color: seriaColor,
-        tooltip: Chart.fTooltip(_Tooltip2.default.fnBasePointFormatter),
+        tooltip: Chart.fTooltip(_Tooltip["default"].fnBasePointFormatter),
         lineWidth: 1,
         states: {
           hover: {
@@ -280,7 +284,7 @@ var Chart = {
   },
   fCrosshair: function fCrosshair() {
     return {
-      color: _Color2.default.CROSSHAIR,
+      color: _Color["default"].CROSSHAIR,
       width: 1,
       zIndex: 2
     };
@@ -304,8 +308,10 @@ var Chart = {
       }
     };
   },
-  fXAxisOpposite: function fXAxisOpposite() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fXAxisOpposite: function fXAxisOpposite(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
       opposite: true,
@@ -316,8 +322,10 @@ var Chart = {
       }
     }, option);
   },
-  fYAxisOpposite: function fYAxisOpposite() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fYAxisOpposite: function fYAxisOpposite(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
       opposite: true,
@@ -330,14 +338,11 @@ var Chart = {
     return {
       //crosshair : Chart.fCrosshair(),
       id: name,
-
       gridLineWidth: 0,
-
       endOnTick: false,
       maxPadding: 0.15,
       startOnTick: false,
       minPadding: 0.15,
-
       title: {
         text: ''
       },
@@ -356,19 +361,20 @@ var Chart = {
   calcMinY: function calcMinY(_ref3) {
     var minPoint = _ref3.minPoint,
         maxPoint = _ref3.maxPoint;
-
     return maxPoint > Number.NEGATIVE_INFINITY && minPoint < Number.POSITIVE_INFINITY ? minPoint - (maxPoint - minPoint) / 6 : void 0;
   },
-  fPlotOptionsArea: function fPlotOptionsArea() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fPlotOptionsArea: function fPlotOptionsArea(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
-      lineColor: _Color2.default.AREA_HOVER_LINE,
+      lineColor: _Color["default"].AREA_HOVER_LINE,
       lineWidth: 0,
       marker: {
         enabled: false,
         lineWidth: 1,
-        lineColor: _Color2.default.AREA_MARKER_LINE
+        lineColor: _Color["default"].AREA_MARKER_LINE
       },
       state: {
         hover: {
@@ -377,16 +383,18 @@ var Chart = {
       }
     }, option);
   },
-  fPlotOptionsColumn: function fPlotOptionsColumn() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fPlotOptionsColumn: function fPlotOptionsColumn(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
-      lineColor: _Color2.default.COLUMN_HOVER_LINE,
+      lineColor: _Color["default"].COLUMN_HOVER_LINE,
       lineWidth: 0,
       marker: {
         enabled: false,
         lineWidth: 1,
-        lineColor: _Color2.default.COLUMN_MARKER_LINE
+        lineColor: _Color["default"].COLUMN_MARKER_LINE
       },
       state: {
         hover: {
@@ -395,15 +403,17 @@ var Chart = {
       }
     }, option);
   },
-  fPlotOptionsSeries: function fPlotOptionsSeries() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fPlotOptionsSeries: function fPlotOptionsSeries(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
       states: {
         hover: {
           halo: {
             attributes: {
-              fill: _Color2.default.HALO_BASE
+              fill: _Color["default"].HALO_BASE
             },
             opacity: 0.35,
             size: 16
@@ -412,8 +422,10 @@ var Chart = {
       }
     }, option);
   },
-  fLegend: function fLegend() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  fLegend: function fLegend(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     return merge(false, {
       symbolHeight: 14,
@@ -421,7 +433,7 @@ var Chart = {
       symbolRadius: 7,
       useHTML: true,
       itemStyle: {
-        color: _Color2.default.LEGEND_ITEM,
+        color: _Color["default"].LEGEND_ITEM,
         cursor: 'pointer',
         fontSize: '16px',
         fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
@@ -433,14 +445,13 @@ var Chart = {
   fSeriaMarker: function fSeriaMarker(_ref4) {
     var color = _ref4.color,
         symbol = _ref4.symbol;
-
     return {
       radius: 4,
       symbol: symbol,
       states: {
         hover: {
-          fillColor: _Color2.default.MARKER_HOVER_FILL,
-          lineColor: _Color2.default.MARKER_HOVER_LINE,
+          fillColor: _Color["default"].MARKER_HOVER_FILL,
+          lineColor: _Color["default"].MARKER_HOVER_LINE,
           lineWidth: 1,
           lineWidthPlus: 0,
           enabled: true,
@@ -451,6 +462,6 @@ var Chart = {
     };
   }
 };
-
-exports.default = Chart;
+var _default = Chart;
+exports["default"] = _default;
 //# sourceMappingURL=Chart.js.map

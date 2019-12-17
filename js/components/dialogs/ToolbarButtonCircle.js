@@ -1,38 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DialogCell = require('./DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _ButtonCircle = require('../zhn/ButtonCircle');
-
-var _ButtonCircle2 = _interopRequireDefault(_ButtonCircle);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 
 //import Row from './Row';
 var STYLE = {
@@ -45,29 +26,30 @@ var STYLE = {
   }
 };
 
-var ToolbarButtonCircle = function (_Component) {
-  (0, _inherits3.default)(ToolbarButtonCircle, _Component);
+var ToolbarButtonCircle =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ToolbarButtonCircle, _Component);
 
   function ToolbarButtonCircle() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, ToolbarButtonCircle);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ToolbarButtonCircle.__proto__ || Object.getPrototypeOf(ToolbarButtonCircle)).call.apply(_ref, [this].concat(args))), _this), _this._renderButtons = function () {
-      var buttons = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._renderButtons = function (buttons) {
+      if (buttons === void 0) {
+        buttons = [];
+      }
 
       return buttons.map(function (button, index) {
         var caption = button.caption,
             title = button.title,
             onClick = button.onClick;
-
-        return _react2.default.createElement(_ButtonCircle2.default, {
+        return _react["default"].createElement(_ButtonCircle["default"], {
           key: caption + index,
           caption: caption,
           title: title,
@@ -75,31 +57,31 @@ var ToolbarButtonCircle = function (_Component) {
           onClick: onClick
         });
       });
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(ToolbarButtonCircle, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps.buttons === this.props.buttons) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var buttons = this.props.buttons;
+  var _proto = ToolbarButtonCircle.prototype;
 
-      return _react2.default.createElement(
-        _DialogCell2.default.Row.Plain,
-        { style: STYLE.ROW },
-        this._renderButtons(buttons)
-      );
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.buttons === this.props.buttons) {
+      return false;
     }
-  }]);
+
+    return true;
+  };
+
+  _proto.render = function render() {
+    var buttons = this.props.buttons;
+    return _react["default"].createElement(_DialogCell["default"].Row.Plain, {
+      style: STYLE.ROW
+    }, this._renderButtons(buttons));
+  };
+
   return ToolbarButtonCircle;
 }(_react.Component);
 
-exports.default = ToolbarButtonCircle;
+var _default = ToolbarButtonCircle;
+exports["default"] = _default;
 //# sourceMappingURL=ToolbarButtonCircle.js.map

@@ -1,23 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _QuandlApi = require('./QuandlApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _QuandlApi2 = _interopRequireDefault(_QuandlApi);
+var _QuandlApi = _interopRequireDefault(require("./QuandlApi"));
 
-var _QuandlAdapter = require('./QuandlAdapter');
-
-var _QuandlAdapter2 = _interopRequireDefault(_QuandlAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _QuandlAdapter = _interopRequireDefault(require("./QuandlAdapter"));
 
 var Quandl = {
   id: 'Q',
-  api: _QuandlApi2.default, adapter: _QuandlAdapter2.default
+  api: _QuandlApi["default"],
+  adapter: _QuandlAdapter["default"]
 };
-
-exports.default = Quandl;
+var _default = Quandl;
+exports["default"] = _default;
 //# sourceMappingURL=Quandl.js.map

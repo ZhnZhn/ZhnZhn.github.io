@@ -1,64 +1,37 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _throttleOnce = _interopRequireDefault(require("../../utils/throttleOnce"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _factoryClickItem = _interopRequireDefault(require("./factoryClickItem"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _loadItems = _interopRequireDefault(require("./loadItems"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _Frame = _interopRequireDefault(require("./Frame"));
 
-var _react = require('react');
+var _MenuItem = _interopRequireDefault(require("./MenuItem"));
 
-var _react2 = _interopRequireDefault(_react);
-
-var _throttleOnce = require('../../utils/throttleOnce');
-
-var _throttleOnce2 = _interopRequireDefault(_throttleOnce);
-
-var _factoryClickItem = require('./factoryClickItem');
-
-var _factoryClickItem2 = _interopRequireDefault(_factoryClickItem);
-
-var _loadItems = require('./loadItems');
-
-var _loadItems2 = _interopRequireDefault(_loadItems);
-
-var _Frame = require('./Frame');
-
-var _Frame2 = _interopRequireDefault(_Frame);
-
-var _MenuItem = require('./MenuItem');
-
-var _MenuItem2 = _interopRequireDefault(_MenuItem);
-
-var _ErrMsg = require('./ErrMsg');
-
-var _ErrMsg2 = _interopRequireDefault(_ErrMsg);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
 
 var S = {
   ROOT: {
     width: '300px',
-    overflow: 'hidden'
-    //border: '1px solid green'
+    overflow: 'hidden' //border: '1px solid green'
+
   },
   PAGES: {
     width: '1500px',
@@ -75,31 +48,38 @@ var S = {
 
 var _getTranslateX = function _getTranslateX(node) {
   var _prevStr = node.style.transform.substr(11).replace('px', '').replace(')', '');
+
   return parseInt(_prevStr, 10);
 };
 
-var MenuSlider = function (_Component) {
-  (0, _inherits3.default)(MenuSlider, _Component);
+var MenuSlider =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuSlider, _Component);
 
   function MenuSlider(props) {
-    (0, _classCallCheck3.default)(this, MenuSlider);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (MenuSlider.__proto__ || Object.getPrototypeOf(MenuSlider)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._loadItems = function () {
       var _this$props = _this.props,
           _this$props$dfProps = _this$props.dfProps,
-          dfProps = _this$props$dfProps === undefined ? {} : _this$props$dfProps,
+          dfProps = _this$props$dfProps === void 0 ? {} : _this$props$dfProps,
           store = _this$props.store,
           lT = dfProps.lT,
           proxy = store.getProxy(lT);
-
-      (0, _loadItems2.default)(dfProps.rootUrl, proxy).then(function (model) {
+      (0, _loadItems["default"])(dfProps.rootUrl, proxy).then(function (model) {
         if (Array.isArray(model)) {
-          _this.setState({ model: model, errMsg: undefined });
+          _this.setState({
+            model: model,
+            errMsg: undefined
+          });
         }
-      }).catch(function (err) {
-        _this.setState({ errMsg: err.message });
+      })["catch"](function (err) {
+        _this.setState({
+          errMsg: err.message
+        });
       });
     };
 
@@ -115,8 +95,7 @@ var MenuSlider = function (_Component) {
       var _this$props2 = _this.props,
           dfProps = _this$props2.dfProps,
           store = _this$props2.store;
-
-      pages.push(_react2.default.createElement(_Frame2.default, {
+      pages.push(_react["default"].createElement(_Frame["default"], {
         key: id,
         id: id,
         rootStyle: S.PAGE,
@@ -125,8 +104,8 @@ var MenuSlider = function (_Component) {
         dfProps: dfProps,
         onClickPrev: _this.hPrevPage,
         onClickNext: _this.hNextPage,
-        loadItems: _loadItems2.default,
-        fOnClickItem: _factoryClickItem2.default
+        loadItems: _loadItems["default"],
+        fOnClickItem: _factoryClickItem["default"]
       }));
     };
 
@@ -135,7 +114,6 @@ var MenuSlider = function (_Component) {
         var pages = prevState.pages,
             _max = pages.length - 1;
 
-
         if (_max + 1 > pageNumber) {
           if (pages[pageNumber] && pages[pageNumber].key !== id) {
             if (pageNumber > 0) {
@@ -143,6 +121,7 @@ var MenuSlider = function (_Component) {
             } else {
               prevState.pages = [];
             }
+
             _this._addPage(prevState.pages, id, title);
           }
         } else {
@@ -168,30 +147,26 @@ var MenuSlider = function (_Component) {
             id = item.id,
             _ref = index === 0 ? _this._refFirst : void 0;
 
-        return _react2.default.createElement(_MenuItem2.default, {
+        return _react["default"].createElement(_MenuItem["default"], {
           ref: _ref,
           key: id,
           item: item,
           onClick: _this.hNextPage.bind(null, id, text, 0)
         });
       });
-
-
-      return _react2.default.createElement(
-        'div',
-        { style: S.PAGE },
-        items,
-        _react2.default.createElement(_ErrMsg2.default, { errMsg: errMsg })
-      );
+      return _react["default"].createElement("div", {
+        style: S.PAGE
+      }, items, _react["default"].createElement(_ErrMsg["default"], {
+        errMsg: errMsg
+      }));
     };
 
     _this._renderPages = function () {
       var _this$state2 = _this.state,
           pages = _this$state2.pages,
           pageCurrent = _this$state2.pageCurrent;
-
       return pages.map(function (page, index) {
-        return _react2.default.cloneElement(page, {
+        return _react["default"].cloneElement(page, {
           pageCurrent: pageCurrent,
           pageNumber: index + 1
         });
@@ -200,19 +175,24 @@ var MenuSlider = function (_Component) {
 
     _this._crTransform = function () {
       var dX = '0';
+
       if (_this._direction !== 0 && _this._menuNode) {
         var _prevInt = _getTranslateX(_this._menuNode);
+
         if (_this._direction === 1) {
           dX = _prevInt - 300;
         } else {
           dX = _prevInt + 300;
         }
+
         _this._direction = 0;
       } else if (_this._direction === 0 && _this._menuNode) {
         dX = _getTranslateX(_this._menuNode);
       }
 
-      return { transform: 'translateX(' + dX + 'px)' };
+      return {
+        transform: "translateX(" + dX + "px)"
+      };
     };
 
     _this._refMenu = function (n) {
@@ -225,8 +205,8 @@ var MenuSlider = function (_Component) {
       }
     };
 
-    _this.hNextPage = (0, _throttleOnce2.default)(_this.hNextPage.bind(_this));
-    _this.hPrevPage = (0, _throttleOnce2.default)(_this.hPrevPage.bind(_this));
+    _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
+    _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this._direction = 0;
     _this.state = {
       model: [],
@@ -236,43 +216,35 @@ var MenuSlider = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(MenuSlider, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this._loadItems();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _transform = this._crTransform(),
-          _pagesStyle = (0, _extends3.default)({}, S.PAGES, _transform);
+  var _proto = MenuSlider.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        { style: S.ROOT },
-        _react2.default.createElement(
-          'div',
-          {
-            ref: this._refMenu,
-            style: _pagesStyle
-          },
-          this._renderMenu(),
-          this._renderPages()
-        )
-      );
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      var pageCurrent = this.state.pageCurrent;
+  _proto.componentDidMount = function componentDidMount() {
+    this._loadItems();
+  };
 
-      if (pageCurrent === 0) {
-        setTimeout(this.focusFirst, 1000);
-      }
+  _proto.render = function render() {
+    var _transform = this._crTransform(),
+        _pagesStyle = (0, _extends2["default"])({}, S.PAGES, {}, _transform);
+
+    return _react["default"].createElement("div", {
+      style: S.ROOT
+    }, _react["default"].createElement("div", {
+      ref: this._refMenu,
+      style: _pagesStyle
+    }, this._renderMenu(), this._renderPages()));
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate() {
+    var pageCurrent = this.state.pageCurrent;
+
+    if (pageCurrent === 0) {
+      setTimeout(this.focusFirst, 1000);
     }
-  }]);
+  };
+
   return MenuSlider;
 }(_react.Component);
 
-exports.default = MenuSlider;
+var _default = MenuSlider;
+exports["default"] = _default;
 //# sourceMappingURL=MenuSlider.js.map

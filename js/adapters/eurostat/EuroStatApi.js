@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _api = require('./api/api');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _api2 = _interopRequireDefault(_api);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _api = _interopRequireDefault(require("./api/api"));
 
 var REQUEST_ERROR = 'Request Error',
     MESSAGE_HEADER = '400: Bad Request\n',
@@ -17,11 +14,10 @@ var REQUEST_ERROR = 'Request Error',
 
 var _crDetailMsg = function _crDetailMsg(label, option) {
   var _option$alertGeo = option.alertGeo,
-      alertGeo = _option$alertGeo === undefined ? '' : _option$alertGeo,
+      alertGeo = _option$alertGeo === void 0 ? '' : _option$alertGeo,
       _option$alertMetric = option.alertMetric,
-      alertMetric = _option$alertMetric === undefined ? '' : _option$alertMetric;
-
-  return MESSAGE_HEADER + label + ('\n\nIt seems country-dataset doesn\'t exsist.\n' + alertGeo + ':' + alertMetric + '\n\nIf you use For Date input field in Dialog\ntry to use more late date.');
+      alertMetric = _option$alertMetric === void 0 ? '' : _option$alertMetric;
+  return MESSAGE_HEADER + label + ("\n\nIt seems country-dataset doesn't exsist.\n" + alertGeo + ":" + alertMetric + "\n\nIf you use For Date input field in Dialog\ntry to use more late date.");
 };
 
 var _crErr = function _crErr(errCaption, message) {
@@ -43,12 +39,14 @@ var _isRouteUrlN = function _isRouteUrlN(_ref) {
 var EuroStatApi = {
   getRequestUrl: function getRequestUrl(option) {
     _addPropTo(option);
-    return _isRouteUrlN(option) ? _api2.default.crUrlN(option) : option.dfParams ? _api2.default.crUrlWithParams(option) : _api2.default.crUrl(option);
+
+    return _isRouteUrlN(option) ? _api["default"].crUrlN(option) : option.dfParams ? _api["default"].crUrlWithParams(option) : _api["default"].crUrl(option);
   },
   checkResponse: function checkResponse(json, option, status) {
     if (status === 400) {
       throw _crErr(REQUEST_ERROR, MSG_400);
     }
+
     var error = json.error;
 
     if (error) {
@@ -60,9 +58,10 @@ var EuroStatApi = {
         throw _crErr(REQUEST_ERROR, '');
       }
     }
+
     return true;
   }
 };
-
-exports.default = EuroStatApi;
+var _default = EuroStatApi;
+exports["default"] = _default;
 //# sourceMappingURL=EuroStatApi.js.map

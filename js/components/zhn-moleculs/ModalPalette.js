@@ -1,38 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _CellColor = _interopRequireDefault(require("./CellColor"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _CellColor = require('./CellColor');
-
-var _CellColor2 = _interopRequireDefault(_CellColor);
-
-var _ModalPopup = require('./ModalPopup');
-
-var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ModalPopup = _interopRequireDefault(require("./ModalPopup"));
 
 var S = {
   SHOW_HIDE: {
@@ -62,37 +43,39 @@ var S = {
   }
 };
 
-var ModalPalette = function (_Component) {
-  (0, _inherits3.default)(ModalPalette, _Component);
+var ModalPalette =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ModalPalette, _Component);
 
   function ModalPalette() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, ModalPalette);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ModalPalette.__proto__ || Object.getPrototypeOf(ModalPalette)).call.apply(_ref, [this].concat(args))), _this), _this._renderColors = function (model, onClickCell) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._renderColors = function (model, onClickCell) {
       var rows = model.rows,
           cols = model.cols,
           colors = model.colors,
           _elRows = [];
 
-
       var r = 0,
           c = 0,
-          _color = void 0,
-          _idPrefix = void 0;
+          _color,
+          _idPrefix;
+
       for (; r < rows; r++) {
         var _elCells = [];
         _idPrefix = colors[r * cols];
+
         for (c = 0; c < cols; c++) {
           _color = colors[r * cols + c];
-          _elCells.push(_react2.default.createElement(_CellColor2.default, {
+
+          _elCells.push(_react["default"].createElement(_CellColor["default"], {
             key: _color,
             id: _color,
             style: S.COLOR,
@@ -100,46 +83,40 @@ var ModalPalette = function (_Component) {
             onClick: onClickCell.bind(null, _color)
           }));
         }
-        _elRows.push(_react2.default.createElement(
-          'div',
-          {
-            key: _idPrefix + r,
-            id: _idPrefix + r,
-            style: S.ROW
-          },
-          _elCells
-        ));
+
+        _elRows.push(_react["default"].createElement("div", {
+          key: _idPrefix + r,
+          id: _idPrefix + r,
+          style: S.ROW
+        }, _elCells));
       }
+
       return _elRows;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(ModalPalette, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          model = _props.model,
-          onClickCell = _props.onClickCell,
-          onClose = _props.onClose;
+  var _proto = ModalPalette.prototype;
 
-      return _react2.default.createElement(
-        _ModalPopup2.default,
-        {
-          isShow: isShow,
-          style: S.SHOW_HIDE,
-          onClose: onClose
-        },
-        _react2.default.createElement(
-          'div',
-          { style: S.ROOT_PANE },
-          this._renderColors(model, onClickCell)
-        )
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShow = _this$props.isShow,
+        model = _this$props.model,
+        onClickCell = _this$props.onClickCell,
+        onClose = _this$props.onClose;
+    return _react["default"].createElement(_ModalPopup["default"], {
+      isShow: isShow,
+      style: S.SHOW_HIDE,
+      onClose: onClose
+    }, _react["default"].createElement("div", {
+      style: S.ROOT_PANE
+    }, this._renderColors(model, onClickCell)));
+  };
+
   return ModalPalette;
 }(_react.Component);
 
-exports.default = ModalPalette;
+var _default = ModalPalette;
+exports["default"] = _default;
 //# sourceMappingURL=ModalPalette.js.map

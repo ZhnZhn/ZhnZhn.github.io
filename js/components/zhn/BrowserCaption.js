@@ -1,44 +1,28 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
-var _withTheme = require('../hoc/withTheme');
+var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 
-var _withTheme2 = _interopRequireDefault(_withTheme);
+var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
 
-var _SvgMore = require('./SvgMore');
-
-var _SvgMore2 = _interopRequireDefault(_SvgMore);
-
-var _SvgCheckBox = require('./SvgCheckBox');
-
-var _SvgCheckBox2 = _interopRequireDefault(_SvgCheckBox);
-
-var _SvgClose = require('./SvgClose');
-
-var _SvgClose2 = _interopRequireDefault(_SvgClose);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _SvgClose = _interopRequireDefault(require("./SvgClose"));
 
 //import PropTypes from "prop-types";
-
 var TH_ID = 'ELEMENT';
-
 var CL = {
   ROOT: 'gap-right',
   NOT_SELECTED: 'not-selected'
 };
-
 var S = {
   ROOT: {
     position: 'relative',
@@ -64,9 +48,9 @@ var S = {
   },
   SVG_MORE: {
     fill: 'inherit',
-    stroke: 'inherit'
-    //fill: 'silver',
+    stroke: 'inherit' //fill: 'silver',
     //stroke: 'silver'
+
   },
   CHECK_BOX: {
     marginLeft: 10,
@@ -91,34 +75,24 @@ var BrowserCaption = function BrowserCaption(_ref) {
       caption = _ref.caption,
       children = _ref.children,
       onClose = _ref.onClose;
-
   var TS = theme.getStyle(TH_ID);
-  return _react2.default.createElement(
-    'div',
-    { className: CL.ROOT, style: (0, _extends3.default)({}, S.ROOT, TS.ROOT) },
-    _isFn(onMore) && _react2.default.createElement(_SvgMore2.default, {
-      svgStyle: S.SVG_MORE,
-      onClick: onMore
-    }),
-    _isFn(onCheck) && _isFn(onUnCheck) && _react2.default.createElement(_SvgCheckBox2.default, {
-      style: S.CHECK_BOX,
-      onCheck: onCheck,
-      onUnCheck: onUnCheck
-    }),
-    _react2.default.createElement(
-      'span',
-      {
-        className: CL.NOT_SELECTED,
-        style: S.CAPTION
-      },
-      caption
-    ),
-    children,
-    _react2.default.createElement(_SvgClose2.default, {
-      style: S.SVG_CLOSE,
-      onClose: onClose
-    })
-  );
+  return _react["default"].createElement("div", {
+    className: CL.ROOT,
+    style: (0, _extends2["default"])({}, S.ROOT, {}, TS.ROOT)
+  }, _isFn(onMore) && _react["default"].createElement(_SvgMore["default"], {
+    svgStyle: S.SVG_MORE,
+    onClick: onMore
+  }), _isFn(onCheck) && _isFn(onUnCheck) && _react["default"].createElement(_SvgCheckBox["default"], {
+    style: S.CHECK_BOX,
+    onCheck: onCheck,
+    onUnCheck: onUnCheck
+  }), _react["default"].createElement("span", {
+    className: CL.NOT_SELECTED,
+    style: S.CAPTION
+  }, caption), children, _react["default"].createElement(_SvgClose["default"], {
+    style: S.SVG_CLOSE,
+    onClose: onClose
+  }));
 };
 /*
 BrowserCaption.propTypes = {
@@ -130,5 +104,8 @@ BrowserCaption.propTypes = {
 }
 */
 
-exports.default = (0, _withTheme2.default)(BrowserCaption);
+
+var _default = (0, _withTheme["default"])(BrowserCaption);
+
+exports["default"] = _default;
 //# sourceMappingURL=BrowserCaption.js.map

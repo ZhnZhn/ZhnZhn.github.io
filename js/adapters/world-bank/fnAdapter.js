@@ -1,45 +1,39 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _AdapterFn = require('../AdapterFn');
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    valueMoving = _AdapterFn2.default.valueMoving;
-
+var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    valueMoving = _AdapterFn["default"].valueMoving;
 
 var _crInfo = function _crInfo(_ref) {
   var title = _ref.title,
       subtitle = _ref.subtitle,
       two = _ref.two;
   return {
-    name: title + ': ' + subtitle + ' (' + two + ')'
+    name: title + ": " + subtitle + " (" + two + ")"
   };
 };
 
 var fnAdapter = {
   crId: function crId(option) {
     var _option$one = option.one,
-        one = _option$one === undefined ? '' : _option$one,
+        one = _option$one === void 0 ? '' : _option$one,
         _option$two = option.two,
-        two = _option$two === undefined ? '' : _option$two;
-
-    return one + '_' + two;
+        two = _option$two === void 0 ? '' : _option$two;
+    return one + "_" + two;
   },
   crData: function crData(arrIn) {
     if (!Array.isArray(arrIn)) {
       return [];
     }
+
     var d = [];
     arrIn.forEach(function (p) {
       if (p && p.value != null && p.date) {
@@ -51,7 +45,6 @@ var fnAdapter = {
     });
     return d.reverse();
   },
-
   crConfigOptions: function crConfigOptions(option, data) {
     var title = option.title,
         linkItem = option.linkItem,
@@ -66,13 +59,13 @@ var fnAdapter = {
         itemCaption: title,
         isWithoutAdd: true,
         linkFn: 'DF',
-        item: (0, _extends3.default)({}, linkItem),
+        item: (0, _extends2["default"])({}, linkItem),
         dataSource: dataSource
       },
       valueMoving: valueMoving(data)
     };
   }
 };
-
-exports.default = fnAdapter;
+var _default = fnAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=fnAdapter.js.map

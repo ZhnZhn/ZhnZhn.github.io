@@ -1,25 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ItemOption = require('./ItemOption');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ItemOption2 = _interopRequireDefault(_ItemOption);
+var _ItemOption = _interopRequireDefault(require("./ItemOption"));
 
-var _ItemTopicOption = require('./ItemTopicOption');
-
-var _ItemTopicOption2 = _interopRequireDefault(_ItemTopicOption);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ItemTopicOption = _interopRequireDefault(require("./ItemTopicOption"));
 
 var RouterItemOption = {
-  DEFAULT: _ItemOption2.default,
-
-  ItemOption: _ItemOption2.default,
-  ItemTopicOption: _ItemTopicOption2.default
+  DEFAULT: _ItemOption["default"],
+  ItemOption: _ItemOption["default"],
+  ItemTopicOption: _ItemTopicOption["default"]
 };
-
-exports.default = RouterItemOption;
+var _default = RouterItemOption;
+exports["default"] = _default;
 //# sourceMappingURL=RouterItemOption.js.map

@@ -1,34 +1,26 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _ShowHide = require('../zhn/ShowHide');
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
-
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ToolbarButtonCircle = _interopRequireDefault(require("./ToolbarButtonCircle"));
 
 var Toolbar = function Toolbar(_ref) {
   var isShow = _ref.isShow,
       buttons = _ref.buttons;
-  return _react2.default.createElement(
-    _ShowHide2.default,
-    { isShow: isShow },
-    _react2.default.createElement(_ToolbarButtonCircle2.default, {
-      buttons: buttons
-    })
-  );
+  return _react["default"].createElement(_ShowHide["default"], {
+    isShow: isShow
+  }, _react["default"].createElement(_ToolbarButtonCircle["default"], {
+    buttons: buttons
+  }));
 };
 
-exports.default = Toolbar;
+var _default = Toolbar;
+exports["default"] = _default;
 //# sourceMappingURL=Toolbar.js.map

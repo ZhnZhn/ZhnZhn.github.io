@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/zhn/SvgUp.js"
- ],
- "file": "../../../src/components/zhn/SvgUp.js",
- "names": [
-  "CL",
-  "ROOT",
-  "SVG",
-  "SvgUp"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,KAAK;AACTC,QAAM,UADG;AAETC,OAAK;AAFI,CAAX;;AAKA,IAAMC,QAAQ,SAARA,KAAQ;AAAA,SACX;AAAA;AAAA,MAAM,WAAWH,GAAGC,IAApB;AACE;AAAA;AAAA,QAAK,SAAQ,WAAb,EAAyB,OAAM,MAA/B,EAAsC,QAAO,MAA7C;AACK,mBAAWD,GAAGE,GADnB;AAEK,6BAAoB,MAFzB,EAEgC,OAAM;AAFtC;AAIG,8CAAM,GAAE,6BAAR;AAJH;AADF,GADW;AAAA,CAAd;;kBAWeC,K"
-}
+{"version":3,"sources":["../../../src/components/zhn/SvgUp.jsx"],"names":["CL","ROOT","SVG","SvgUp"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,IAAI,EAAE,UADG;AAETC,EAAAA,GAAG,EAAE;AAFI,CAAX;;AAKA,IAAMC,KAAK,GAAG,SAARA,KAAQ;AAAA,SACX;AAAM,IAAA,SAAS,EAAEH,EAAE,CAACC;AAApB,KACE;AAAK,IAAA,OAAO,EAAC,WAAb;AAAyB,IAAA,KAAK,EAAC,MAA/B;AAAsC,IAAA,MAAM,EAAC,MAA7C;AACK,IAAA,SAAS,EAAED,EAAE,CAACE,GADnB;AAEK,IAAA,mBAAmB,EAAC,MAFzB;AAEgC,IAAA,KAAK,EAAC;AAFtC,KAIG;AAAM,IAAA,CAAC,EAAC;AAAR,IAJH,CADF,CADW;AAAA,CAAd;;eAWeC,K","sourcesContent":["import React from 'react'\r\n\r\nconst CL = {\r\n  ROOT: 'svg-move',\r\n  SVG: 'svg-move__svg svg-up'\r\n};\r\n\r\nconst SvgUp = () => (\r\n   <span className={CL.ROOT}>\r\n     <svg viewBox=\"0 0 12 12\" width=\"100%\" height=\"100%\"\r\n          className={CL.SVG}\r\n          preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\"\r\n      >\r\n        <path d=\"M 0,12 L 6,8 11,12 6,0 0,12\" />\r\n     </svg>\r\n   </span>\r\n)\r\n\r\nexport default SvgUp\r\n"],"file":"SvgUp.js"}

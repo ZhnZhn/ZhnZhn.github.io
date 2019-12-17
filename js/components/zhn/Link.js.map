@@ -1,16 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\Link.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\Link.js",
- "sourceRoot": "",
- "names": [
-  "Link",
-  "title",
-  "dfStyle",
-  "style",
-  "children",
-  "rest"
- ],
- "mappings": ";;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,OAAO,SAAPA,IAAO;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,OAAV,QAAUA,OAAV;AAAA,MAAmBC,KAAnB,QAAmBA,KAAnB;AAAA,MAA0BC,QAA1B,QAA0BA,QAA1B;AAAA,MAAuCC,IAAvC;AAAA,SACZ;AAAA;AAAA;AACE,cAAO,QADT;AAEE,iBAAU,MAFZ;AAGE,wCAAWH,OAAX,EAAuBC,KAAvB;AAHF,OAIME,IAJN;AAMIJ,SANJ;AAOIG;AAPJ,GADY;AAAA,CAAb;;kBAWeJ,I"
-}
+{"version":3,"sources":["../../../src/components/zhn/Link.jsx"],"names":["Link","title","dfStyle","style","children","rest"],"mappings":";;;;;;;;;;;AAAA;;AAEA,IAAMA,IAAI,GAAG,SAAPA,IAAO;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,OAAV,QAAUA,OAAV;AAAA,MAAmBC,KAAnB,QAAmBA,KAAnB;AAAA,MAA0BC,QAA1B,QAA0BA,QAA1B;AAAA,MAAuCC,IAAvC;AAAA,SACZ;AACE,IAAA,MAAM,EAAC,QADT;AAEE,IAAA,SAAS,EAAC,MAFZ;AAGE,IAAA,KAAK,gCAAMH,OAAN,MAAkBC,KAAlB;AAHP,KAIME,IAJN,GAMIJ,KANJ,EAOIG,QAPJ,CADY;AAAA,CAAb;;eAWeJ,I","sourcesContent":["import React from 'react'\r\n\r\nconst Link = ({ title, dfStyle, style, children, ...rest }) =>\r\n <a\r\n   target=\"_blank\"\r\n   className=\"link\"\r\n   style={{...dfStyle, ...style}}\r\n   {...rest}\r\n >\r\n    {title}\r\n    {children}\r\n </a>\r\n\r\nexport default Link\r\n"],"file":"Link.js"}

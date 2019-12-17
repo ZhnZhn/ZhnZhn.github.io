@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/fmp/Fmp.js"
- ],
- "file": "../../../src/adapters/fmp/Fmp.js",
- "names": [
-  "Fmp",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,uBADU;AAEVC;AAFU,CAAZ;;kBAKeF,G"
-}
+{"version":3,"sources":["../../../src/adapters/fmp/Fmp.js"],"names":["Fmp","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,GAAG,GAAG;AACVC,EAAAA,GAAG,EAAHA,kBADU;AAEVC,EAAAA,OAAO,EAAPA;AAFU,CAAZ;eAKeF,G","sourcesContent":["import api from './FmpApi'\r\nimport adapter from './FmpAdapter'\r\n\r\nconst Fmp = {\r\n  api,\r\n  adapter\r\n};\r\n\r\nexport default Fmp\r\n"],"file":"Fmp.js"}

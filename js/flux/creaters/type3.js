@@ -1,56 +1,62 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-      value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
 
-var createLoadOptions = function createLoadOptions() {
-      var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  if (options === void 0) {
+    options = {};
+  }
 
-      var columnName = props.columnName,
-          dataColumn = props.dataColumn,
-          seriaColumnNames = props.seriaColumnNames,
-          loadId = props.loadId,
-          fnValue = props.fnValue,
-          fnItemCaption = props.fnItemCaption,
-          linkFn = props.linkFn,
-          dataSource = props.dataSource,
-          dfProps = props.dfProps,
-          one = options.one,
-          fromDate = options.fromDate,
-          toDate = options.toDate,
-          transform = options.transform,
-          value = one.value,
-          caption = one.caption,
-          _value = typeof fnValue === 'function' ? fnValue(value) : value,
-          _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(value) : undefined,
-          _transform = transform ? transform.value : undefined,
-          _subtitle = transform ? transform.caption : undefined;
+  var _props = props,
+      columnName = _props.columnName,
+      dataColumn = _props.dataColumn,
+      seriaColumnNames = _props.seriaColumnNames,
+      loadId = _props.loadId,
+      fnValue = _props.fnValue,
+      fnItemCaption = _props.fnItemCaption,
+      linkFn = _props.linkFn,
+      dataSource = _props.dataSource,
+      dfProps = _props.dfProps,
+      _options = options,
+      one = _options.one,
+      fromDate = _options.fromDate,
+      toDate = _options.toDate,
+      transform = _options.transform,
+      value = one.value,
+      caption = one.caption,
+      _value = typeof fnValue === 'function' ? fnValue(value) : value,
+      _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(value) : undefined,
+      _transform = transform ? transform.value : undefined,
+      _subtitle = transform ? transform.caption : undefined;
 
-      return (0, _extends3.default)({
-            value: _value,
-            transform: _transform,
-            title: caption,
-            subtitle: _subtitle,
-            item: one,
-            oneCaption: caption,
-            fromDate: fromDate,
-            toDate: toDate,
-            columnName: columnName,
-            dataColumn: dataColumn,
-            itemCaption: _itemCaption,
-            loadId: loadId,
-            linkFn: linkFn,
-            seriaColumnNames: seriaColumnNames, dataSource: dataSource
-      }, dfProps);
+  return (0, _extends2["default"])({
+    value: _value,
+    transform: _transform,
+    title: caption,
+    subtitle: _subtitle,
+    item: one,
+    oneCaption: caption,
+    fromDate: fromDate,
+    toDate: toDate,
+    columnName: columnName,
+    dataColumn: dataColumn,
+    itemCaption: _itemCaption,
+    loadId: loadId,
+    linkFn: linkFn,
+    seriaColumnNames: seriaColumnNames,
+    dataSource: dataSource
+  }, dfProps);
 };
 
-exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type3.js.map
+var _default = createLoadOptions;
+exports["default"] = _default;
+//# sourceMappingURL=type3.js.map

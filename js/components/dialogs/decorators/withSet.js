@@ -1,17 +1,12 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var _setStateByWithSet = function _setStateByWithSet(propName, value) {
-  this.setState((0, _defineProperty3.default)({}, propName, value));
+  var _this$setState;
+
+  this.setState((_this$setState = {}, _this$setState[propName] = value, _this$setState));
 };
 
 var withSet = function withSet(target) {
@@ -22,5 +17,6 @@ var withSet = function withSet(target) {
   }
 };
 
-exports.default = withSet;
+var _default = withSet;
+exports["default"] = _default;
 //# sourceMappingURL=withSet.js.map

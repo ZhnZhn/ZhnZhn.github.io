@@ -1,65 +1,61 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _defineEnumerableProperties2 = require('babel-runtime/helpers/defineEnumerableProperties');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _defineEnumerableProperties3 = _interopRequireDefault(_defineEnumerableProperties2);
+var _defineEnumerableProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/defineEnumerableProperties"));
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+var _interopRequireWildcard2 = _interopRequireDefault(require("@babel/runtime/helpers/interopRequireWildcard"));
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+var _Type = require("../../constants/Type");
+
+var _SourceBrowserDynamic = _interopRequireDefault(require("../../components/browser-container/SourceBrowserDynamic"));
+
+var _SourceBrowserDynamic2 = _interopRequireDefault(require("../../components/browser-container/SourceBrowserDynamic2"));
 
 var _BT$WATCH_LIST, _BrowserSlider, _STAT_ALL, _RouterBrowser, _mutatorMap;
 
-var _Type = require('../../constants/Type');
-
-var _SourceBrowserDynamic = require('../../components/browser-container/SourceBrowserDynamic');
-
-var _SourceBrowserDynamic2 = _interopRequireDefault(_SourceBrowserDynamic);
-
-var _SourceBrowserDynamic3 = require('../../components/browser-container/SourceBrowserDynamic2');
-
-var _SourceBrowserDynamic4 = _interopRequireDefault(_SourceBrowserDynamic3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var RouterBrowser = (_RouterBrowser = {
-  DEFAULT: _SourceBrowserDynamic2.default
+  DEFAULT: _SourceBrowserDynamic["default"]
+}, _RouterBrowser[_Type.BrowserType.US_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.NYSE_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.NASDAQ_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.LONDON_STOCKS] = _SourceBrowserDynamic2["default"], _BT$WATCH_LIST = _Type.BrowserType.WATCH_LIST, _mutatorMap = {}, _mutatorMap[_BT$WATCH_LIST] = _mutatorMap[_BT$WATCH_LIST] || {}, _mutatorMap[_BT$WATCH_LIST].get = function () {
+  /*eslint-disable no-undef */
+  if (process.env.NODE_ENV === 'development') {
+    return Promise.resolve().then(function () {
+      return (0, _interopRequireWildcard2["default"])(require("js/components/watch-browser/WatchBrowser.js"));
+    }).then(function (module) {
+      return module["default"];
+    });
+  }
+  /*eslint-enable no-undef */
 
-}, (0, _defineProperty3.default)(_RouterBrowser, _Type.BrowserType.US_STOCKS, _SourceBrowserDynamic4.default), (0, _defineProperty3.default)(_RouterBrowser, _Type.BrowserType.NYSE_STOCKS, _SourceBrowserDynamic4.default), (0, _defineProperty3.default)(_RouterBrowser, _Type.BrowserType.NASDAQ_STOCKS, _SourceBrowserDynamic4.default), (0, _defineProperty3.default)(_RouterBrowser, _Type.BrowserType.LONDON_STOCKS, _SourceBrowserDynamic4.default), _BT$WATCH_LIST = _Type.BrowserType.WATCH_LIST, _mutatorMap = {}, _mutatorMap[_BT$WATCH_LIST] = _mutatorMap[_BT$WATCH_LIST] || {}, _mutatorMap[_BT$WATCH_LIST].get = function () {
+
+  return Promise.resolve().then(function () {
+    return (0, _interopRequireWildcard2["default"])(require("../../components/watch-browser/WatchBrowser"));
+  }).then(function (module) {
+    return module["default"];
+  });
+}, _BrowserSlider = "_BrowserSlider", _mutatorMap[_BrowserSlider] = _mutatorMap[_BrowserSlider] || {}, _mutatorMap[_BrowserSlider].get = function () {
   /*eslint-disable no-undef */
   if (process.env.NODE_ENV === 'development') {
-    return System.import("js/components/watch-browser/WatchBrowser.js").then(function (module) {
-      return module.default;
+    return Promise.resolve().then(function () {
+      return (0, _interopRequireWildcard2["default"])(require("js/components/browser-slider/BrowserSlider.js"));
+    }).then(function (module) {
+      return module["default"];
     });
   }
   /*eslint-enable no-undef */
-  return System.import(
-  /* webpackChunkName: "watch-browser" */
-  /* webpackMode: "lazy" */
-  "../../components/watch-browser/WatchBrowser").then(function (module) {
-    return module.default;
+
+
+  return Promise.resolve().then(function () {
+    return (0, _interopRequireWildcard2["default"])(require("../../components/browser-slider/BrowserSlider"));
+  }).then(function (module) {
+    return module["default"];
   });
-}, _BrowserSlider = '_BrowserSlider', _mutatorMap[_BrowserSlider] = _mutatorMap[_BrowserSlider] || {}, _mutatorMap[_BrowserSlider].get = function () {
-  /*eslint-disable no-undef */
-  if (process.env.NODE_ENV === 'development') {
-    return System.import("js/components/browser-slider/BrowserSlider.js").then(function (module) {
-      return module.default;
-    });
-  }
-  /*eslint-enable no-undef */
-  return System.import(
-  /* webpackChunkName: "browser-slider" */
-  /* webpackMode: "lazy" */
-  "../../components/browser-slider/BrowserSlider").then(function (module) {
-    return module.default;
-  });
-}, _STAT_ALL = 'STAT_ALL', _mutatorMap[_STAT_ALL] = _mutatorMap[_STAT_ALL] || {}, _mutatorMap[_STAT_ALL].get = function () {
+}, _STAT_ALL = "STAT_ALL", _mutatorMap[_STAT_ALL] = _mutatorMap[_STAT_ALL] || {}, _mutatorMap[_STAT_ALL].get = function () {
   return this._BrowserSlider;
-}, (0, _defineEnumerableProperties3.default)(_RouterBrowser, _mutatorMap), _RouterBrowser);
-
-exports.default = RouterBrowser;
+}, (0, _defineEnumerableProperties2["default"])(_RouterBrowser, _mutatorMap), _RouterBrowser);
+var _default = RouterBrowser;
+exports["default"] = _default;
 //# sourceMappingURL=RouterBrowser.js.map

@@ -1,9 +1,7 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var _isArray = Array.isArray;
 
 var findItem = function findItem(menu, chartType) {
@@ -11,59 +9,44 @@ var findItem = function findItem(menu, chartType) {
     return;
   }
 
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+  for (var _iterator = menu, _isArray2 = Array.isArray(_iterator), _i = 0, _iterator = _isArray2 ? _iterator : _iterator[Symbol.iterator]();;) {
+    var _ref;
 
-  try {
-    for (var _iterator = menu[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var topics = _step.value;
-
-      var items = topics.items;
-      if (_isArray(items)) {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var item = _step2.value;
-
-            if (item.id === chartType) {
-              return item;
-            }
-          }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
-        }
-      }
+    if (_isArray2) {
+      if (_i >= _iterator.length) break;
+      _ref = _iterator[_i++];
+    } else {
+      _i = _iterator.next();
+      if (_i.done) break;
+      _ref = _i.value;
     }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
+
+    var topics = _ref;
+    var items = topics.items;
+
+    if (_isArray(items)) {
+      for (var _iterator2 = items, _isArray3 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray3 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+        var _ref2;
+
+        if (_isArray3) {
+          if (_i2 >= _iterator2.length) break;
+          _ref2 = _iterator2[_i2++];
+        } else {
+          _i2 = _iterator2.next();
+          if (_i2.done) break;
+          _ref2 = _i2.value;
+        }
+
+        var item = _ref2;
+
+        if (item.id === chartType) {
+          return item;
+        }
       }
     }
   }
 };
 
-exports.default = findItem;
+var _default = findItem;
+exports["default"] = _default;
 //# sourceMappingURL=findItem.js.map

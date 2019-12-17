@@ -1,96 +1,82 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Style = require('./Style');
-
-var _Style2 = _interopRequireDefault(_Style);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Style = _interopRequireDefault(require("./Style"));
 
 var CL = {
   ITEM: 'menu-item'
 };
 
-var MenuItem = function (_Component) {
-  (0, _inherits3.default)(MenuItem, _Component);
+var MenuItem =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuItem, _Component);
 
   function MenuItem() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, MenuItem);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuItem.__proto__ || Object.getPrototypeOf(MenuItem)).call.apply(_ref, [this].concat(args))), _this), _this._hKeyPress = function (evt) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._hKeyPress = function (evt) {
       evt.preventDefault();
       var which = evt.which;
 
       if (which === 13 || which === 32) {
         _this.props.onClick();
       }
-    }, _this._ref = function (n) {
+    };
+
+    _this._ref = function (n) {
       return _this._node = n;
-    }, _this.focus = function () {
+    };
+
+    _this.focus = function () {
       if (_this._node) {
         _this._node.focus();
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(MenuItem, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          item = _props.item,
-          onClick = _props.onClick,
-          text = item.text,
-          type = item.type,
-          _style = type === 'l' ? _Style2.default.ITEM_L : _Style2.default.ITEM_T;
+  var _proto = MenuItem.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        {
-          ref: this._ref,
-          className: CL.ITEM,
-          style: _style,
-          tabIndex: '0',
-          role: 'menuitem',
-          onClick: onClick,
-          onKeyPress: this._hKeyPress
-        },
-        text
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        item = _this$props.item,
+        onClick = _this$props.onClick,
+        text = item.text,
+        type = item.type,
+        _style = type === 'l' ? _Style["default"].ITEM_L : _Style["default"].ITEM_T;
+
+    return _react["default"].createElement("div", {
+      ref: this._ref,
+      className: CL.ITEM,
+      style: _style,
+      tabIndex: "0",
+      role: "menuitem",
+      onClick: onClick,
+      onKeyPress: this._hKeyPress
+    }, text);
+  };
+
   return MenuItem;
 }(_react.Component);
 
-exports.default = MenuItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\MenuItem.js.map
+var _default = MenuItem;
+exports["default"] = _default;
+//# sourceMappingURL=MenuItem.js.map

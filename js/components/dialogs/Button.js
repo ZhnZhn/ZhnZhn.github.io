@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _FlatButton = require('../zhn-m/FlatButton');
-
-var _FlatButton2 = _interopRequireDefault(_FlatButton);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var S = {
   LOAD: {
@@ -25,25 +20,30 @@ var S = {
 
 var Load = function Load(_ref) {
   var onClick = _ref.onClick;
-  return _react2.default.createElement(_FlatButton2.default, {
+  return _react["default"].createElement(_FlatButton["default"], {
     rootStyle: S.LOAD,
-    caption: 'Load',
-    title: 'Load Item to Pane Container'
-    //accessKey="l"
-    , onClick: onClick
+    caption: "Load",
+    title: "Load Item to Pane Container" //accessKey="l"
+    ,
+    onClick: onClick
   });
 };
 
 var Show = function Show(_ref2) {
   var onClick = _ref2.onClick;
-  return _react2.default.createElement(_FlatButton2.default, {
+  return _react["default"].createElement(_FlatButton["default"], {
     rootStyle: S.SHOW,
-    caption: 'Show',
-    title: 'Show Pane Container'
-    //accessKey="s"
-    , onClick: onClick
+    caption: "Show",
+    title: "Show Pane Container" //accessKey="s"
+    ,
+    onClick: onClick
   });
 };
 
-exports.default = { Load: Load, Show: Show, Flat: _FlatButton2.default };
+var _default = {
+  Load: Load,
+  Show: Show,
+  Flat: _FlatButton["default"]
+};
+exports["default"] = _default;
 //# sourceMappingURL=Button.js.map

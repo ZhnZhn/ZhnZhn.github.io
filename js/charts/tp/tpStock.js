@@ -1,20 +1,16 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _tpFn = require('./tpFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _tpFn2 = _interopRequireDefault(_tpFn);
+var _tpFn = _interopRequireDefault(require("./tpFn"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crHeader = _tpFn2.default.crHeader,
-    crRow = _tpFn2.default.crRow,
-    crSpan = _tpFn2.default.crSpan,
-    toDateFormatDMYT = _tpFn2.default.toDateFormatDMYT;
-
+var crHeader = _tpFn["default"].crHeader,
+    crRow = _tpFn["default"].crRow,
+    crSpan = _tpFn["default"].crSpan,
+    toDateFormatDMYT = _tpFn["default"].toDateFormatDMYT;
 
 var _crVolume = function _crVolume(_ref) {
   var date = _ref.date,
@@ -23,15 +19,15 @@ var _crVolume = function _crVolume(_ref) {
       point = _ref.point;
 
   var _point$_open = point._open,
-      _open = _point$_open === undefined ? 'NoData' : _point$_open,
+      _open = _point$_open === void 0 ? 'NoData' : _point$_open,
       _point$_close = point._close,
-      _close = _point$_close === undefined ? '' : _point$_close,
+      _close = _point$_close === void 0 ? '' : _point$_close,
       _point$_low = point._low,
-      _low = _point$_low === undefined ? '' : _point$_low,
+      _low = _point$_low === void 0 ? '' : _point$_low,
       _point$_high = point._high,
-      _high = _point$_high === undefined ? '' : _point$_high;
+      _high = _point$_high === void 0 ? '' : _point$_high;
 
-  return crHeader(date, id) + '\n  <div class="tp__body">\n    ' + crRow('Volume', value) + '\n    <div>\n      ' + crSpan('Open', _open) + '\n      ' + crSpan('Close', _close) + '\n    </div>\n    <div>\n      ' + crSpan('Low', _low) + '\n      ' + crSpan('High', _high) + '\n    </div>\n  </div>';
+  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Volume', value) + "\n    <div>\n      " + crSpan('Open', _open) + "\n      " + crSpan('Close', _close) + "\n    </div>\n    <div>\n      " + crSpan('Low', _low) + "\n      " + crSpan('High', _high) + "\n    </div>\n  </div>";
 };
 
 var _crAtn = function _crAtn(_ref2) {
@@ -43,8 +39,9 @@ var _crAtn = function _crAtn(_ref2) {
       y = point.y,
       close = point.close,
       open = point.open;
-
-  return crHeader(date, id) + '\n    <div class="tp__body">\n      ' + crRow('ATH', y + '%', { color: color }) + '\n      ' + crRow('Prev Close', close) + '\n      ' + crRow('Next Open', open) + '\n    </div>';
+  return crHeader(date, id) + "\n    <div class=\"tp__body\">\n      " + crRow('ATH', y + '%', {
+    color: color
+  }) + "\n      " + crRow('Prev Close', close) + "\n      " + crRow('Next Open', open) + "\n    </div>";
 };
 
 var _crHl = function _crHl(_ref3) {
@@ -56,8 +53,7 @@ var _crHl = function _crHl(_ref3) {
       dayHigh = point.dayHigh,
       dayLow = point.dayLow,
       close = point.close;
-
-  return crHeader(date, id) + '\n  <div class="tp__body">\n    ' + crRow('Open', open) + '\n    ' + crRow('High', dayHigh) + '\n    ' + crRow('Low', dayLow) + '\n    ' + crRow('Close', close) + '\n  </div>';
+  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Open', open) + "\n    " + crRow('High', dayHigh) + "\n    " + crRow('Low', dayLow) + "\n    " + crRow('Close', close) + "\n  </div>";
 };
 
 var tpStock = {
@@ -77,6 +73,6 @@ var tpStock = {
     fnTemplate: _crHl
   }
 };
-
-exports.default = tpStock;
+var _default = tpStock;
+exports["default"] = _default;
 //# sourceMappingURL=tpStock.js.map

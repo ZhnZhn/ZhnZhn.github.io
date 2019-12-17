@@ -1,93 +1,63 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp2;
 //import PropTypes from "prop-types";
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DialogStyles = require('../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ValidationMessages = (_temp2 = _class = function (_Component) {
-  (0, _inherits3.default)(ValidationMessages, _Component);
+var ValidationMessages =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ValidationMessages, _Component);
 
   function ValidationMessages() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, ValidationMessages);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ValidationMessages.__proto__ || Object.getPrototypeOf(ValidationMessages)).call.apply(_ref, [this].concat(args))), _this), _this._renderValidationMessages = function (validationMessages) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._renderValidationMessages = function (validationMessages) {
       return validationMessages.map(function (msg, index) {
-        return _react2.default.createElement(
-          'div',
-          { key: msg },
-          _react2.default.createElement(
-            'div',
-            { style: _DialogStyles2.default.VM_MSG_NUMBER },
-            index + 1
-          ),
-          _react2.default.createElement(
-            'span',
-            { style: _DialogStyles2.default.VM_MSG },
-            msg
-          )
-        );
+        return _react["default"].createElement("div", {
+          key: msg
+        }, _react["default"].createElement("div", {
+          style: _DialogStyles["default"].VM_MSG_NUMBER
+        }, index + 1), _react["default"].createElement("span", {
+          style: _DialogStyles["default"].VM_MSG
+        }, msg));
       });
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
-  /*
-   static propTypes = {
-     validationMessages : PropTypes.array
-   }
-  */
 
+  var _proto = ValidationMessages.prototype;
 
-  (0, _createClass3.default)(ValidationMessages, [{
-    key: 'render',
-    value: function render() {
-      var validationMessages = this.props.validationMessages;
+  _proto.render = function render() {
+    var validationMessages = this.props.validationMessages;
+    return _react["default"].createElement("div", {
+      style: _DialogStyles["default"].VM_CONT
+    }, this._renderValidationMessages(validationMessages));
+  };
 
-      return _react2.default.createElement(
-        'div',
-        { style: _DialogStyles2.default.VM_CONT },
-        this._renderValidationMessages(validationMessages)
-      );
-    }
-  }]);
   return ValidationMessages;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+ValidationMessages.defaultProps = {
   validationMessages: []
-}, _temp2);
-exports.default = ValidationMessages;
+};
+var _default = ValidationMessages;
+exports["default"] = _default;
 //# sourceMappingURL=ValidationMessages.js.map

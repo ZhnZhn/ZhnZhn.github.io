@@ -1,57 +1,32 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _Color = _interopRequireDefault(require("../styles/Color"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _isKeyEnter = _interopRequireDefault(require("./isKeyEnter"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp;
 //import PropTypes from 'prop-types'
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Color = require('../styles/Color');
-
-var _Color2 = _interopRequireDefault(_Color);
-
-var _isKeyEnter = require('./isKeyEnter');
-
-var _isKeyEnter2 = _interopRequireDefault(_isKeyEnter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var CL = {
   ROOT: 'zhn-oc',
   SHOW_POPUP: 'show-popup',
   NOT_SELECTED: 'not-selected'
 };
-
 var DF = {
-  OPEN_COLOR: _Color2.default.TITLE,
-  CLOSE_COLOR: _Color2.default.BLANK
+  OPEN_COLOR: _Color["default"].TITLE,
+  CLOSE_COLOR: _Color["default"].BLANK
 };
-
 var S = {
   ROOT_DIV: {
     lineHeight: 2
@@ -63,7 +38,7 @@ var S = {
     marginLeft: 8
   },
   CAPTION: {
-    color: _Color2.default.TITLE,
+    color: _Color["default"].TITLE,
     paddingLeft: 4,
     verticalAlign: 'top',
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
@@ -71,7 +46,6 @@ var S = {
     fontSize: '16px',
     cursor: 'pointer'
   },
-
   INLINE_BLOCK: {
     display: 'inline-block'
   },
@@ -82,7 +56,6 @@ var S = {
     display: 'none'
   }
 };
-
 var PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
 var PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
@@ -103,35 +76,11 @@ var _crConf = function _crConf(_ref) {
   };
 };
 
-var OpenClose = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(OpenClose, _Component);
+var OpenClose =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(OpenClose, _Component);
 
-  function OpenClose(props) {
-    (0, _classCallCheck3.default)(this, OpenClose);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (OpenClose.__proto__ || Object.getPrototypeOf(OpenClose)).call(this, props));
-
-    _this._hClick = function () {
-      _this.setState(function (prev) {
-        return {
-          isOpen: !prev.isOpen
-        };
-      });
-    };
-
-    _this._hKeyDown = function (event) {
-      if ((0, _isKeyEnter2.default)(event)) {
-        _this._hClick();
-      }
-    };
-
-    var isClose = props.isClose;
-
-    _this.state = {
-      isOpen: isClose ? false : true
-    };
-    return _this;
-  }
   /*
   static propTypes = {
     isClose: PropTypes.bool,
@@ -145,84 +94,96 @@ var OpenClose = (_temp = _class = function (_Component) {
     childStyle: PropTypes.object
   }
   */
+  function OpenClose(props) {
+    var _this;
 
-  (0, _createClass3.default)(OpenClose, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          rootStyle = _props.rootStyle,
-          ocStyle = _props.ocStyle,
-          caption = _props.caption,
-          captionStyle = _props.captionStyle,
-          openColor = _props.openColor,
-          closeColor = _props.closeColor,
-          CompAfter = _props.CompAfter,
-          childStyle = _props.childStyle,
-          children = _props.children,
-          isOpen = this.state.isOpen,
-          _crConf2 = _crConf({ isOpen: isOpen, openColor: openColor, closeColor: closeColor }),
-          _pathV = _crConf2._pathV,
-          _fillV = _crConf2._fillV,
-          _rootChildStyle = _crConf2._rootChildStyle,
-          _rootChildCl = _crConf2._rootChildCl;
+    _this = _Component.call(this, props) || this;
 
-      return _react2.default.createElement(
-        'div',
-        { style: (0, _extends3.default)({}, S.ROOT_DIV, rootStyle) },
-        _react2.default.createElement(
-          'div',
-          { className: CL.NOT_SELECTED },
-          _react2.default.createElement(
-            'div',
-            {
-              role: 'menuitem',
-              tabIndex: '0',
-              className: CL.ROOT,
-              style: ocStyle,
-              onClick: this._hClick,
-              onKeyDown: this._hKeyDown
-            },
-            _react2.default.createElement(
-              'div',
-              { style: S.ROOT_SVG },
-              _react2.default.createElement(
-                'svg',
-                {
-                  viewBox: '0 0 16 16', width: '100%', height: '100%',
-                  preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg',
-                  style: S.INLINE_BLOCK
-                },
-                _react2.default.createElement('path', {
-                  fill: _fillV,
-                  strokeWidth: '1',
-                  stroke: openColor,
-                  d: _pathV
-                })
-              )
-            ),
-            _react2.default.createElement(
-              'span',
-              { style: (0, _extends3.default)({}, S.CAPTION, captionStyle) },
-              caption
-            )
-          ),
-          CompAfter
-        ),
-        _react2.default.createElement(
-          'div',
-          {
-            className: _rootChildCl,
-            style: (0, _extends3.default)({}, childStyle, _rootChildStyle)
-          },
-          children
-        )
-      );
-    }
-  }]);
+    _this._hClick = function () {
+      _this.setState(function (prev) {
+        return {
+          isOpen: !prev.isOpen
+        };
+      });
+    };
+
+    _this._hKeyDown = function (event) {
+      if ((0, _isKeyEnter["default"])(event)) {
+        _this._hClick();
+      }
+    };
+
+    var isClose = props.isClose;
+    _this.state = {
+      isOpen: isClose ? false : true
+    };
+    return _this;
+  }
+
+  var _proto = OpenClose.prototype;
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        rootStyle = _this$props.rootStyle,
+        ocStyle = _this$props.ocStyle,
+        caption = _this$props.caption,
+        captionStyle = _this$props.captionStyle,
+        openColor = _this$props.openColor,
+        closeColor = _this$props.closeColor,
+        CompAfter = _this$props.CompAfter,
+        childStyle = _this$props.childStyle,
+        children = _this$props.children,
+        isOpen = this.state.isOpen,
+        _crConf2 = _crConf({
+      isOpen: isOpen,
+      openColor: openColor,
+      closeColor: closeColor
+    }),
+        _pathV = _crConf2._pathV,
+        _fillV = _crConf2._fillV,
+        _rootChildStyle = _crConf2._rootChildStyle,
+        _rootChildCl = _crConf2._rootChildCl;
+
+    return _react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.ROOT_DIV, {}, rootStyle)
+    }, _react["default"].createElement("div", {
+      className: CL.NOT_SELECTED
+    }, _react["default"].createElement("div", {
+      role: "menuitem",
+      tabIndex: "0",
+      className: CL.ROOT,
+      style: ocStyle,
+      onClick: this._hClick,
+      onKeyDown: this._hKeyDown
+    }, _react["default"].createElement("div", {
+      style: S.ROOT_SVG
+    }, _react["default"].createElement("svg", {
+      viewBox: "0 0 16 16",
+      width: "100%",
+      height: "100%",
+      preserveAspectRatio: "none",
+      xmlns: "http://www.w3.org/2000/svg",
+      style: S.INLINE_BLOCK
+    }, _react["default"].createElement("path", {
+      fill: _fillV,
+      strokeWidth: "1",
+      stroke: openColor,
+      d: _pathV
+    }))), _react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle)
+    }, caption)), CompAfter), _react["default"].createElement("div", {
+      className: _rootChildCl,
+      style: (0, _extends2["default"])({}, childStyle, {}, _rootChildStyle)
+    }, children));
+  };
+
   return OpenClose;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+OpenClose.defaultProps = {
   openColor: DF.OPEN_COLOR,
   closeColor: DF.CLOSE_COLOR
-}, _temp);
-exports.default = OpenClose;
+};
+var _default = OpenClose;
+exports["default"] = _default;
 //# sourceMappingURL=OpenClose.js.map

@@ -1,18 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\fnObj.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\fnObj.js",
- "sourceRoot": "",
- "names": [
-  "fnObj",
-  "findInPropArrayByProp",
-  "propArrName",
-  "propName",
-  "obj",
-  "propValue",
-  "find",
-  "item"
- ],
- "mappings": ";;;;;;AACA,IAAMA,QAAQ;;AAEZC,yBAAwB,+BAACC,WAAD,EAAcC,QAAd;AAAA,WAA2B,UAACC,GAAD,EAAMC,SAAN,EAAoB;AACrE,aAAOD,IAAIF,WAAJ,EAAiBI,IAAjB,CACL;AAAA,eAAQC,KAAKJ,QAAL,MAAmBE,SAA3B;AAAA,OADK,CAAP;AAGD,KAJuB;AAAA;;AAFZ,CAAd;;kBAUeL,K"
-}
+{"version":3,"sources":["../../src/utils/fnObj.js"],"names":["fnObj","findInPropArrayByProp","propArrName","propName","obj","propValue","find","item"],"mappings":";;;;AACA,IAAMA,KAAK,GAAG;AAEZC,EAAAA,qBAAqB,EAAG,+BAACC,WAAD,EAAcC,QAAd;AAAA,WAA2B,UAACC,GAAD,EAAMC,SAAN,EAAoB;AACrE,aAAOD,GAAG,CAACF,WAAD,CAAH,CAAiBI,IAAjB,CACL,UAAAC,IAAI;AAAA,eAAIA,IAAI,CAACJ,QAAD,CAAJ,KAAmBE,SAAvB;AAAA,OADC,CAAP;AAGD,KAJuB;AAAA;AAFZ,CAAd;eAUeL,K","sourcesContent":["\r\nconst fnObj = {\r\n\r\n  findInPropArrayByProp : (propArrName, propName) => (obj, propValue) => {\r\n    return obj[propArrName].find(\r\n      item => item[propName] === propValue\r\n    );\r\n  }\r\n\r\n};\r\n\r\nexport default fnObj\r\n"],"file":"fnObj.js"}

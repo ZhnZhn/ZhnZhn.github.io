@@ -1,15 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../src/constants/DataWL.js"
- ],
- "file": "../../src/constants/DataWL.js",
- "names": [
-  "DataWL",
-  "WL_WATCH_LIST",
-  "type",
-  "menuTitle",
-  "dialogCaption"
- ],
- "mappings": ";;;;;;AACA,IAAMA,SAAS;AACXC,mBAAe;AACXC,cAAM,eADK;AAEXC,mBAAW,YAFA;AAGXC,uBAAe;AAHJ;AADJ,CAAf;;kBAQeJ,M"
-}
+{"version":3,"sources":["../../src/constants/DataWL.js"],"names":["DataWL","WL_WATCH_LIST","type","menuTitle","dialogCaption"],"mappings":";;;;AACA,IAAMA,MAAM,GAAG;AACXC,EAAAA,aAAa,EAAE;AACXC,IAAAA,IAAI,EAAE,eADK;AAEXC,IAAAA,SAAS,EAAE,YAFA;AAGXC,IAAAA,aAAa,EAAE;AAHJ;AADJ,CAAf;eAQeJ,M","sourcesContent":["\r\nconst DataWL = {\r\n    WL_WATCH_LIST: {\r\n        type: 'WL_WATCH_LIST',\r\n        menuTitle: 'Watch List',\r\n        dialogCaption: 'Watch List'\r\n    }\r\n};\r\n\r\nexport default DataWL\r\n"],"file":"DataWL.js"}

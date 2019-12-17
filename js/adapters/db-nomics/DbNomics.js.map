@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/db-nomics/DbNomics.js"
- ],
- "file": "../../../src/adapters/db-nomics/DbNomics.js",
- "names": [
-  "DbNomics",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,WAAW;AACfC,4BADe;AAEfC;AAFe,CAAjB;;kBAKeF,Q"
-}
+{"version":3,"sources":["../../../src/adapters/db-nomics/DbNomics.js"],"names":["DbNomics","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,QAAQ,GAAG;AACfC,EAAAA,GAAG,EAAHA,uBADe;AAEfC,EAAAA,OAAO,EAAPA;AAFe,CAAjB;eAKeF,Q","sourcesContent":["import api from './DbNomicsApi'\r\nimport adapter from './DbNomicsAdapter'\r\n\r\nconst DbNomics = {\r\n  api,\r\n  adapter\r\n};\r\n\r\nexport default DbNomics\r\n"],"file":"DbNomics.js"}

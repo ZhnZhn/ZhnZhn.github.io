@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/native-links/Link.js"
- ],
- "file": "../../../src/components/native-links/Link.js",
- "names": [
-  "Link",
-  "className",
-  "style",
-  "href",
-  "caption",
-  "STYLE",
-  "LINK"
- ],
- "mappings": ";;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,OAAO,SAAPA,IAAO,OAKP;AAAA,4BAJJC,SAII;AAAA,MAJJA,SAII,kCAJM,aAIN;AAAA,MAHJC,KAGI,QAHJA,KAGI;AAAA,MAFJC,IAEI,QAFJA,IAEI;AAAA,0BADJC,OACI;AAAA,MADJA,OACI,gCADI,aACJ;;AACJ,MAAI,CAACD,IAAL,EAAW;AACT,WAAO,IAAP;AACD;;AAED,SACE;AAAA;AAAA;AACE,iBAAWF,SADb;AAEE,wCAAYI,eAAMC,IAAlB,EAA2BJ,KAA3B,CAFF;AAGE,YAAMC;AAHR;AAKGC;AALH,GADF;AASD,CAnBD;;kBAqBeJ,I"
-}
+{"version":3,"sources":["../../../src/components/native-links/Link.js"],"names":["Link","className","style","href","caption","STYLE","LINK"],"mappings":";;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,IAAI,GAAG,SAAPA,IAAO,OAKP;AAAA,4BAJJC,SAII;AAAA,MAJJA,SAII,+BAJM,aAIN;AAAA,MAHJC,KAGI,QAHJA,KAGI;AAAA,MAFJC,IAEI,QAFJA,IAEI;AAAA,0BADJC,OACI;AAAA,MADJA,OACI,6BADI,aACJ;;AACJ,MAAI,CAACD,IAAL,EAAW;AACT,WAAO,IAAP;AACD;;AAED,SACE;AACE,IAAA,SAAS,EAAEF,SADb;AAEE,IAAA,KAAK,gCAAOI,iBAAMC,IAAb,MAAsBJ,KAAtB,CAFP;AAGE,IAAA,IAAI,EAAEC;AAHR,KAKGC,OALH,CADF;AASD,CAnBD;;eAqBeJ,I","sourcesContent":["import React from 'react'\r\n\r\nimport STYLE from './Link.Style'\r\n\r\nconst Link = ({\r\n  className='native-link',\r\n  style,\r\n  href,\r\n  caption='Native Link'\r\n}) => {\r\n  if (!href) {\r\n    return null;\r\n  }\r\n\r\n  return (\r\n    <a\r\n      className={className}\r\n      style={{ ...STYLE.LINK, ...style }}\r\n      href={href}\r\n    >\r\n      {caption}\r\n    </a>\r\n  )\r\n}\r\n\r\nexport default Link\r\n"],"file":"Link.js"}

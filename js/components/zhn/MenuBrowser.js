@@ -1,149 +1,120 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _Browser = _interopRequireDefault(require("./Browser"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp, _initialiseProps;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Browser = require('./Browser');
-
-var _Browser2 = _interopRequireDefault(_Browser);
-
-var _BrowserCaption = require('./BrowserCaption');
-
-var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
-
-var _ScrollPane = require('./ScrollPane');
-
-var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
-
-var _MenuPart = require('./MenuPart');
-
-var _MenuPart2 = _interopRequireDefault(_MenuPart);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _MenuPart = _interopRequireDefault(require("./MenuPart"));
 
 var CL_SCROLL = 'scroll-container-y scroll-menu';
-
 var S = {
   BROWSER: {
     paddingRight: '0px'
   }
 };
 
-var MenuBrowser = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(MenuBrowser, _Component);
+var MenuBrowser =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuBrowser, _Component);
 
   function MenuBrowser(props) {
-    (0, _classCallCheck3.default)(this, MenuBrowser);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (MenuBrowser.__proto__ || Object.getPrototypeOf(MenuBrowser)).call(this));
+    _this = _Component.call(this) || this;
 
-    _initialiseProps.call(_this);
+    _this._onStore = function (actionType, data) {
+      var _this$props = _this.props,
+          browserType = _this$props.browserType,
+          store = _this$props.store,
+          showAction = _this$props.showAction,
+          updateAction = _this$props.updateAction;
 
-    var store = props.store,
-        browserType = props.browserType,
+      if (actionType === showAction && data === browserType) {
+        _this._handleShow();
+      } else if (actionType === updateAction && data === browserType) {
+        _this.setState({
+          menuItems: store.getBrowserMenu(browserType)
+        });
+      }
+    };
+
+    _this._handleHide = function () {
+      _this.setState({
+        isShow: false
+      });
+    };
+
+    _this._handleShow = function () {
+      _this.setState({
+        isShow: true
+      });
+    };
+
+    _this._renderMenuParts = function (menuItems) {
+      return menuItems.map(function (menuPart, index) {
+        return _react["default"].createElement(_MenuPart["default"], (0, _extends2["default"])({
+          key: index
+        }, menuPart));
+      });
+    };
+
+    var _store = props.store,
+        _browserType = props.browserType,
         isShow = props.isShow;
-
     _this.state = {
       isShow: isShow ? true : false,
-      menuItems: store.getBrowserMenu(browserType)
+      menuItems: _store.getBrowserMenu(_browserType)
     };
     return _this;
   }
 
-  (0, _createClass3.default)(MenuBrowser, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          caption = _props.caption,
-          children = _props.children,
-          _state = this.state,
-          menuItems = _state.menuItems,
-          isShow = _state.isShow;
+  var _proto = MenuBrowser.prototype;
 
-      return _react2.default.createElement(
-        _Browser2.default,
-        { isShow: isShow, style: S.BROWSER },
-        _react2.default.createElement(_BrowserCaption2.default, {
-          caption: caption,
-          onClose: this._handleHide
-        }),
-        _react2.default.createElement(
-          _ScrollPane2.default,
-          { className: CL_SCROLL },
-          this._renderMenuParts(menuItems),
-          children
-        )
-      );
-    }
-  }]);
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
+
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        caption = _this$props2.caption,
+        children = _this$props2.children,
+        _this$state = this.state,
+        menuItems = _this$state.menuItems,
+        isShow = _this$state.isShow;
+    return _react["default"].createElement(_Browser["default"], {
+      isShow: isShow,
+      style: S.BROWSER
+    }, _react["default"].createElement(_BrowserCaption["default"], {
+      caption: caption,
+      onClose: this._handleHide
+    }), _react["default"].createElement(_ScrollPane["default"], {
+      className: CL_SCROLL
+    }, this._renderMenuParts(menuItems), children));
+  };
+
   return MenuBrowser;
-}(_react.Component), _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
+}(_react.Component);
 
-  this._onStore = function (actionType, data) {
-    var _props2 = _this2.props,
-        browserType = _props2.browserType,
-        store = _props2.store,
-        showAction = _props2.showAction,
-        updateAction = _props2.updateAction;
-
-    if (actionType === showAction && data === browserType) {
-      _this2._handleShow();
-    } else if (actionType === updateAction && data === browserType) {
-      _this2.setState({ menuItems: store.getBrowserMenu(browserType) });
-    }
-  };
-
-  this._handleHide = function () {
-    _this2.setState({ isShow: false });
-  };
-
-  this._handleShow = function () {
-    _this2.setState({ isShow: true });
-  };
-
-  this._renderMenuParts = function (menuItems) {
-    return menuItems.map(function (menuPart, index) {
-      return _react2.default.createElement(_MenuPart2.default, (0, _extends3.default)({ key: index }, menuPart));
-    });
-  };
-}, _temp);
-exports.default = MenuBrowser;
+var _default = MenuBrowser;
+exports["default"] = _default;
 //# sourceMappingURL=MenuBrowser.js.map

@@ -1,50 +1,25 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp2;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _withTheme = require('../hoc/withTheme');
-
-var _withTheme2 = _interopRequireDefault(_withTheme);
-
-var _SvgClose = require('../zhn/SvgClose');
-
-var _SvgClose2 = _interopRequireDefault(_SvgClose);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 
 var TH_ID = 'ELEMENT';
-
 var CL = "not-selected shadow-right";
 var MAX_LENGTH = 45;
-
 var S = {
   ROOT: {
     backgroundColor: '#1b2836',
@@ -82,74 +57,73 @@ var S = {
   }
 };
 
-var ItemHeader = (_temp2 = _class = function (_Component) {
-  (0, _inherits3.default)(ItemHeader, _Component);
+var ItemHeader =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ItemHeader, _Component);
 
   function ItemHeader() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, ItemHeader);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ItemHeader.__proto__ || Object.getPrototypeOf(ItemHeader)).call.apply(_ref, [this].concat(args))), _this), _this._hKeyPress = function (evt) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._hKeyPress = function (evt) {
       evt.preventDefault();
       var which = evt.which;
 
       if (which === 13 || which === 32) {
         _this.props.onClick();
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(ItemHeader, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          theme = _props.theme,
-          isOpen = _props.isOpen,
-          rootStyle = _props.rootStyle,
-          captionStyle = _props.captionStyle,
-          caption = _props.caption,
-          title = _props.title,
-          children = _props.children,
-          onClick = _props.onClick,
-          onClose = _props.onClose,
-          TS = theme.getStyle(TH_ID),
-          _title = title || caption.length > MAX_LENGTH ? caption : undefined,
-          _styleCaption = isOpen ? (0, _extends3.default)({}, S.CAPTION, captionStyle, S.OPEN) : (0, _extends3.default)({}, S.CAPTION, captionStyle, S.CLOSE);
+  var _proto = ItemHeader.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        { style: (0, _extends3.default)({}, S.ROOT, rootStyle, TS.ROOT) },
-        _react2.default.createElement(
-          'span',
-          {
-            className: CL,
-            title: _title,
-            style: _styleCaption,
-            onClick: onClick,
-            tabIndex: '0',
-            role: 'button',
-            onKeyPress: this._hKeyPress
-          },
-          caption
-        ),
-        children,
-        _react2.default.createElement(_SvgClose2.default, {
-          style: S.SVG_CLOSE,
-          onClose: onClose
-        })
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        theme = _this$props.theme,
+        isOpen = _this$props.isOpen,
+        rootStyle = _this$props.rootStyle,
+        captionStyle = _this$props.captionStyle,
+        caption = _this$props.caption,
+        title = _this$props.title,
+        children = _this$props.children,
+        onClick = _this$props.onClick,
+        onClose = _this$props.onClose,
+        TS = theme.getStyle(TH_ID),
+        _title = title || caption.length > MAX_LENGTH ? caption : undefined,
+        _styleCaption = isOpen ? (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle, {}, S.OPEN) : (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle, {}, S.CLOSE);
+
+    return _react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.ROOT, {}, rootStyle, {}, TS.ROOT)
+    }, _react["default"].createElement("span", {
+      className: CL,
+      title: _title,
+      style: _styleCaption,
+      onClick: onClick,
+      tabIndex: "0",
+      role: "button",
+      onKeyPress: this._hKeyPress
+    }, caption), children, _react["default"].createElement(_SvgClose["default"], {
+      style: S.SVG_CLOSE,
+      onClose: onClose
+    }));
+  };
+
   return ItemHeader;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+ItemHeader.defaultProps = {
   caption: ''
-}, _temp2);
-exports.default = (0, _withTheme2.default)(ItemHeader);
+};
+
+var _default = (0, _withTheme["default"])(ItemHeader);
+
+exports["default"] = _default;
 //# sourceMappingURL=ItemHeader.js.map

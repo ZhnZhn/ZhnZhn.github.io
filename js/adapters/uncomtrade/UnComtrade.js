@@ -1,20 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Api = require('./Api');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _Api2 = _interopRequireDefault(_Api);
+var _Api = _interopRequireDefault(require("./Api"));
 
-var _UnComtradeAdapter = require('./UnComtradeAdapter');
+var _UnComtradeAdapter = _interopRequireDefault(require("./UnComtradeAdapter"));
 
-var _UnComtradeAdapter2 = _interopRequireDefault(_UnComtradeAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var UnComtrade = { api: _Api2.default, adapter: _UnComtradeAdapter2.default };
-
-exports.default = UnComtrade;
+var UnComtrade = {
+  api: _Api["default"],
+  adapter: _UnComtradeAdapter["default"]
+};
+var _default = UnComtrade;
+exports["default"] = _default;
 //# sourceMappingURL=UnComtrade.js.map

@@ -1,20 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _EuroStatApi = require('./EuroStatApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _EuroStatApi2 = _interopRequireDefault(_EuroStatApi);
+var _EuroStatApi = _interopRequireDefault(require("./EuroStatApi"));
 
-var _EuroStatAdapter = require('./EuroStatAdapter');
+var _EuroStatAdapter = _interopRequireDefault(require("./EuroStatAdapter"));
 
-var _EuroStatAdapter2 = _interopRequireDefault(_EuroStatAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var EuroStat = { api: _EuroStatApi2.default, adapter: _EuroStatAdapter2.default };
-
-exports.default = EuroStat;
+var EuroStat = {
+  api: _EuroStatApi["default"],
+  adapter: _EuroStatAdapter["default"]
+};
+var _default = EuroStat;
+exports["default"] = _default;
 //# sourceMappingURL=EuroStat.js.map

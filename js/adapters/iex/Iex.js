@@ -1,20 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _IexApi = require('./IexApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _IexApi2 = _interopRequireDefault(_IexApi);
+var _IexApi = _interopRequireDefault(require("./IexApi"));
 
-var _IexAdapter = require('./IexAdapter');
+var _IexAdapter = _interopRequireDefault(require("./IexAdapter"));
 
-var _IexAdapter2 = _interopRequireDefault(_IexAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Iex = { api: _IexApi2.default, adapter: _IexAdapter2.default };
-
-exports.default = Iex;
+var Iex = {
+  api: _IexApi["default"],
+  adapter: _IexAdapter["default"]
+};
+var _default = Iex;
+exports["default"] = _default;
 //# sourceMappingURL=Iex.js.map

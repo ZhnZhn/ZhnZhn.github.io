@@ -1,22 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _queryString = require('query-string');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _queryString2 = _interopRequireDefault(_queryString);
+var _queryString = _interopRequireDefault(require("query-string"));
 
-var _ComponentActions = require('../actions/ComponentActions');
+var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
 
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-var _LocationQuery = require('./LocationQuery');
-
-var _LocationQuery2 = _interopRequireDefault(_LocationQuery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _LocationQuery = _interopRequireDefault(require("./LocationQuery"));
 
 var ARR_B = ['UN', 'QE', 'FAO'];
 var ARR_C = ['SM_WIKI', 'SM_IEX_CHART_5Y', 'SM_IEX_CHART_2Y', 'USAE_BLS_1', 'BC_HD'];
@@ -28,8 +21,9 @@ var _isQuery = function _isQuery(obj) {
 var _trSearchToOptions = function _trSearchToOptions() {
   try {
     var search = window.location ? window.location.search : null,
-        obj = _queryString2.default.parse(search);
-    return _isQuery(obj) ? _LocationQuery2.default.toOptions(obj) : undefined;
+        obj = _queryString["default"].parse(search);
+
+    return _isQuery(obj) ? _LocationQuery["default"].toOptions(obj) : undefined;
   } catch (err) {
     return undefined;
   }
@@ -38,11 +32,14 @@ var _trSearchToOptions = function _trSearchToOptions() {
 var LocationSearch = {
   load: function load() {
     var options = _trSearchToOptions();
+
     if (options) {
-      _ComponentActions2.default.showAsk({ options: options });
+      _ComponentActions["default"].showAsk({
+        options: options
+      });
     }
   }
 };
-
-exports.default = LocationSearch;
+var _default = LocationSearch;
+exports["default"] = _default;
 //# sourceMappingURL=LocationSearch.js.map

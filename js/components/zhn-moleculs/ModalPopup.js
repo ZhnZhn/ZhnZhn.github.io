@@ -1,30 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
-var _ShowHide = require('../zhn/ShowHide');
+var _ModalPane = _interopRequireDefault(require("./ModalPane"));
 
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _ModalPane = require('./ModalPane');
-
-var _ModalPane2 = _interopRequireDefault(_ModalPane);
-
-var _withTheme = require('../hoc/withTheme');
-
-var _withTheme2 = _interopRequireDefault(_withTheme);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
 var TH_ID = 'ELEMENT';
 
@@ -35,25 +24,18 @@ var ModalPopup = function ModalPopup(_ref) {
       style = _ref.style,
       children = _ref.children,
       onClose = _ref.onClose;
-
   var TS = theme.getStyle(TH_ID);
-  return _react2.default.createElement(
-    _ModalPane2.default,
-    {
-      isShow: isShow,
-      onClose: onClose
-    },
-    _react2.default.createElement(
-      _ShowHide2.default,
-      {
-        className: className,
-        style: (0, _extends3.default)({}, style, TS.BORDER),
-        isShow: isShow
-      },
-      children
-    )
-  );
+  return _react["default"].createElement(_ModalPane["default"], {
+    isShow: isShow,
+    onClose: onClose
+  }, _react["default"].createElement(_ShowHide["default"], {
+    className: className,
+    style: (0, _extends2["default"])({}, style, {}, TS.BORDER),
+    isShow: isShow
+  }, children));
 };
 
-exports.default = (0, _withTheme2.default)(ModalPopup);
+var _default = (0, _withTheme["default"])(ModalPopup);
+
+exports["default"] = _default;
 //# sourceMappingURL=ModalPopup.js.map

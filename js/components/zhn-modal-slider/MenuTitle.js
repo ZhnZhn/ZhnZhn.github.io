@@ -1,34 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _MenuAriaItem = require('./MenuAriaItem');
-
-var _MenuAriaItem2 = _interopRequireDefault(_MenuAriaItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 
 var S = {
   ITEM: {
@@ -44,61 +27,53 @@ var S = {
   }
 };
 
-var MenuTitle = function (_Component) {
-  (0, _inherits3.default)(MenuTitle, _Component);
+var MenuTitle =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuTitle, _Component);
 
   function MenuTitle() {
-    (0, _classCallCheck3.default)(this, MenuTitle);
-    return (0, _possibleConstructorReturn3.default)(this, (MenuTitle.__proto__ || Object.getPrototypeOf(MenuTitle)).apply(this, arguments));
+    return _Component.apply(this, arguments) || this;
   }
 
-  (0, _createClass3.default)(MenuTitle, [{
-    key: 'render',
+  var _proto = MenuTitle.prototype;
 
-    /*
-    static propTypes = {
-      baseTitleCl: PropTypes.string,
-      title: PropTypes.string,
-      pageNumber: PropTypes.number,
-      onPrevPage: PropTypes.func,
-      onReg: PropTypes.func
+  /*
+  static propTypes = {
+    baseTitleCl: PropTypes.string,
+    title: PropTypes.string,
+    pageNumber: PropTypes.number,
+    onPrevPage: PropTypes.func,
+    onReg: PropTypes.func
+  }
+  */
+  _proto.render = function render() {
+    var _this$props = this.props,
+        baseTitleCl = _this$props.baseTitleCl,
+        title = _this$props.title,
+        pageNumber = _this$props.pageNumber,
+        onPrevPage = _this$props.onPrevPage,
+        onReg = _this$props.onReg;
+
+    if (!title) {
+      return null;
     }
-    */
 
-    value: function render() {
-      var _props = this.props,
-          baseTitleCl = _props.baseTitleCl,
-          title = _props.title,
-          pageNumber = _props.pageNumber,
-          onPrevPage = _props.onPrevPage,
-          onReg = _props.onReg;
+    return _react["default"].createElement(_MenuAriaItem["default"], {
+      className: baseTitleCl,
+      style: S.ITEM,
+      onClick: onPrevPage.bind(null, pageNumber),
+      onReg: onReg
+    }, _react["default"].createElement("span", {
+      style: S.PREV_PAGE
+    }, '<'), _react["default"].createElement("span", {
+      style: S.TITLE
+    }, title));
+  };
 
-      if (!title) {
-        return null;
-      }
-      return _react2.default.createElement(
-        _MenuAriaItem2.default,
-        {
-          className: baseTitleCl,
-          style: S.ITEM,
-          onClick: onPrevPage.bind(null, pageNumber),
-          onReg: onReg
-        },
-        _react2.default.createElement(
-          'span',
-          { style: S.PREV_PAGE },
-          '<'
-        ),
-        _react2.default.createElement(
-          'span',
-          { style: S.TITLE },
-          title
-        )
-      );
-    }
-  }]);
   return MenuTitle;
 }(_react.Component);
 
-exports.default = MenuTitle;
+var _default = MenuTitle;
+exports["default"] = _default;
 //# sourceMappingURL=MenuTitle.js.map

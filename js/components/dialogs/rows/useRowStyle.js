@@ -1,26 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _DialogStyles = require('../../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DialogStyles = _interopRequireDefault(require("../../styles/DialogStyles"));
 
 var useRowStyle = function useRowStyle(_ref, isOc) {
   var isShowLabels = _ref.isShowLabels,
       captionStyle = _ref.captionStyle;
 
-  var _style = isOc ? _DialogStyles2.default.crRowOcSelectStyle(isShowLabels, captionStyle) : _DialogStyles2.default.crRowLabelStyle(isShowLabels, captionStyle);
-  return (0, _extends3.default)({}, _style);
+  var _style = isOc ? _DialogStyles["default"].crRowOcSelectStyle(isShowLabels, captionStyle) : _DialogStyles["default"].crRowLabelStyle(isShowLabels, captionStyle);
+
+  return (0, _extends2["default"])({}, _style);
 };
 
-exports.default = useRowStyle;
+var _default = useRowStyle;
+exports["default"] = _default;
 //# sourceMappingURL=useRowStyle.js.map

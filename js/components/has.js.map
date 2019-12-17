@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../src/components/has.js"
- ],
- "file": "../../src/components/has.js",
- "names": [
-  "has",
-  "wideWidth",
-  "window",
-  "innerWidth"
- ],
- "mappings": ";;;;;;AACA,IAAMA,MAAM;AACVC,aAAW;AAAA,WAAMC,OAAOC,UAAP,GACbD,OAAOC,UAAP,GAAoB,GADP,GAEb,IAFO;AAAA;AADD,CAAZ;;kBAMeH,G"
-}
+{"version":3,"sources":["../../src/components/has.js"],"names":["has","wideWidth","window","innerWidth"],"mappings":";;;;AACA,IAAMA,GAAG,GAAG;AACVC,EAAAA,SAAS,EAAE;AAAA,WAAMC,MAAM,CAACC,UAAP,GACbD,MAAM,CAACC,UAAP,GAAoB,GADP,GAEb,IAFO;AAAA;AADD,CAAZ;eAMeH,G","sourcesContent":["\r\nconst has = {\r\n  wideWidth: () => window.innerWidth\r\n    ? window.innerWidth > 700\r\n    : true\r\n};\r\n\r\nexport default has\r\n"],"file":"has.js"}

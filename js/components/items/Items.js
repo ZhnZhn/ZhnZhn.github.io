@@ -1,33 +1,26 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AreaChartItem = require('./AreaChartItem');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AreaChartItem2 = _interopRequireDefault(_AreaChartItem);
+var _AreaChartItem = _interopRequireDefault(require("./AreaChartItem"));
 
-var _MapChartItem = require('./MapChartItem');
+var _MapChartItem = _interopRequireDefault(require("./MapChartItem"));
 
-var _MapChartItem2 = _interopRequireDefault(_MapChartItem);
+var _CoinInfoItem = _interopRequireDefault(require("./CoinInfoItem"));
 
-var _CoinInfoItem = require('./CoinInfoItem');
+var _TableItem = _interopRequireDefault(require("./TableItem"));
 
-var _CoinInfoItem2 = _interopRequireDefault(_CoinInfoItem);
+var _AlphaPerfItem = _interopRequireDefault(require("./AlphaPerfItem"));
 
-var _TableItem = require('./TableItem');
-
-var _TableItem2 = _interopRequireDefault(_TableItem);
-
-var _AlphaPerfItem = require('./AlphaPerfItem');
-
-var _AlphaPerfItem2 = _interopRequireDefault(_AlphaPerfItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  AreaChart: _AreaChartItem2.default, MapChart: _MapChartItem2.default,
-  CoinInfo: _CoinInfoItem2.default, Table: _TableItem2.default, AlphaPerf: _AlphaPerfItem2.default
+var _default = {
+  AreaChart: _AreaChartItem["default"],
+  MapChart: _MapChartItem["default"],
+  CoinInfo: _CoinInfoItem["default"],
+  Table: _TableItem["default"],
+  AlphaPerf: _AlphaPerfItem["default"]
 };
+exports["default"] = _default;
 //# sourceMappingURL=Items.js.map

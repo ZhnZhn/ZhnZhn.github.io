@@ -1,79 +1,62 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _MenuItem = _interopRequireDefault(require("./MenuItem"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _MenuTitle = require('./MenuTitle');
-
-var _MenuTitle2 = _interopRequireDefault(_MenuTitle);
-
-var _MenuItem = require('./MenuItem');
-
-var _MenuItem2 = _interopRequireDefault(_MenuItem);
-
-var _ErrMsg = require('./ErrMsg');
-
-var _ErrMsg2 = _interopRequireDefault(_ErrMsg);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
 
 var T_O_FOCUS_FIRST = 1000;
 
-var Frame = function (_Component) {
-  (0, _inherits3.default)(Frame, _Component);
+var Frame =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(Frame, _Component);
 
   function Frame(props) {
-    (0, _classCallCheck3.default)(this, Frame);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (Frame.__proto__ || Object.getPrototypeOf(Frame)).call(this));
+    _this = _Component.call(this) || this;
 
     _this.loadMenu = function (id) {
       var _this$props = _this.props,
           _this$props$dfProps = _this$props.dfProps,
-          dfProps = _this$props$dfProps === undefined ? {} : _this$props$dfProps,
+          dfProps = _this$props$dfProps === void 0 ? {} : _this$props$dfProps,
           loadItems = _this$props.loadItems,
           store = _this$props.store,
           lT = dfProps.lT,
           proxy = store.getProxy(lT);
-
-      loadItems(dfProps.rootUrl + '/' + id, proxy).then(function (model) {
+      loadItems(dfProps.rootUrl + "/" + id, proxy).then(function (model) {
         if (Array.isArray(model)) {
-          _this.setState({ model: model, errMsg: undefined });
+          _this.setState({
+            model: model,
+            errMsg: undefined
+          });
         }
-      }).catch(function (err) {
-        _this.setState({ errMsg: err.message });
+      })["catch"](function (err) {
+        _this.setState({
+          errMsg: err.message
+        });
       });
     };
 
     _this._renderMenu = function () {
       var _this$props2 = _this.props,
           _this$props2$dfProps = _this$props2.dfProps,
-          dfProps = _this$props2$dfProps === undefined ? {} : _this$props2$dfProps,
+          dfProps = _this$props2$dfProps === void 0 ? {} : _this$props2$dfProps,
           pageNumber = _this$props2.pageNumber,
           store = _this$props2.store,
           lT = dfProps.lT,
@@ -87,25 +70,19 @@ var Frame = function (_Component) {
         var text = item.text,
             id = item.id,
             type = item.type,
-            _onClick = type === 'l' ? onClickNext.bind(null, rootId + '/' + id, text, pageNumber) : fOnClickItem((0, _extends3.default)({
-          id: rootId + '/' + id
+            _onClick = type === 'l' ? onClickNext.bind(null, rootId + "/" + id, text, pageNumber) : fOnClickItem((0, _extends2["default"])({
+          id: rootId + "/" + id
         }, dfProps, {
           proxy: proxy
         }));
 
-        return _react2.default.createElement(_MenuItem2.default, {
+        return _react["default"].createElement(_MenuItem["default"], {
           key: id,
           item: item,
           onClick: _onClick
         });
       });
-
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        items
-      );
+      return _react["default"].createElement("div", null, items);
     };
 
     _this._refFirst = function (n) {
@@ -124,54 +101,49 @@ var Frame = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(Frame, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _props = this.props,
-          title = _props.title,
-          id = _props.id;
+  var _proto = Frame.prototype;
 
-      if (title) {
-        this.loadMenu(id);
-      }
+  _proto.componentDidMount = function componentDidMount() {
+    var _this$props4 = this.props,
+        title = _this$props4.title,
+        id = _this$props4.id;
+
+    if (title) {
+      this.loadMenu(id);
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props2 = this.props,
-          title = _props2.title,
-          rootStyle = _props2.rootStyle,
-          pageNumber = _props2.pageNumber,
-          onClickPrev = _props2.onClickPrev,
-          errMsg = this.state.errMsg;
+  };
 
+  _proto.render = function render() {
+    var _this$props5 = this.props,
+        title = _this$props5.title,
+        rootStyle = _this$props5.rootStyle,
+        pageNumber = _this$props5.pageNumber,
+        onClickPrev = _this$props5.onClickPrev,
+        errMsg = this.state.errMsg;
+    return _react["default"].createElement("div", {
+      style: rootStyle
+    }, _react["default"].createElement(_MenuTitle["default"], {
+      ref: this._refFirst,
+      title: title,
+      onClick: onClickPrev.bind(null, pageNumber)
+    }), this._renderMenu(), _react["default"].createElement(_ErrMsg["default"], {
+      errMsg: errMsg
+    }));
+  };
 
-      return _react2.default.createElement(
-        'div',
-        { style: rootStyle },
-        _react2.default.createElement(_MenuTitle2.default, {
-          ref: this._refFirst,
-          title: title,
-          onClick: onClickPrev.bind(null, pageNumber)
-        }),
-        this._renderMenu(),
-        _react2.default.createElement(_ErrMsg2.default, { errMsg: errMsg })
-      );
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    var _this$props6 = this.props,
+        pageNumber = _this$props6.pageNumber,
+        pageCurrent = _this$props6.pageCurrent;
+
+    if (pageNumber === pageCurrent) {
+      setTimeout(this.focusFirst, T_O_FOCUS_FIRST);
     }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      var _props3 = this.props,
-          pageNumber = _props3.pageNumber,
-          pageCurrent = _props3.pageCurrent;
+  };
 
-      if (pageNumber === pageCurrent) {
-        setTimeout(this.focusFirst, T_O_FOCUS_FIRST);
-      }
-    }
-  }]);
   return Frame;
 }(_react.Component);
 
-exports.default = Frame;
+var _default = Frame;
+exports["default"] = _default;
 //# sourceMappingURL=Frame.js.map

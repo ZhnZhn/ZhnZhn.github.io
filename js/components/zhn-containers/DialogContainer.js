@@ -1,36 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _class, _temp;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireWildcard(require("react"));
 
 var S = {
   ROOT: {
@@ -48,12 +29,14 @@ var _findCompIndex = function _findCompIndex(arr, key) {
       return i;
     }
   }
+
   return undefined;
 };
 
 var _doVisible = function _doVisible(arr, keyValue) {
   var _index = _findCompIndex(arr, keyValue) || 0;
-  return [].concat((0, _toConsumableArray3.default)(arr.slice(0, _index)), (0, _toConsumableArray3.default)(arr.slice(_index + 1)), [arr[_index]]);
+
+  return [].concat(arr.slice(0, _index), arr.slice(_index + 1), [arr[_index]]);
 };
 
 var _updateVisible = function _updateVisible(state, key, maxDialog) {
@@ -64,8 +47,10 @@ var _updateVisible = function _updateVisible(state, key, maxDialog) {
   if (_keyIndex !== -1) {
     visibleDialogs.splice(_keyIndex, 1);
   }
+
   visibleDialogs.push(key);
   hmIs[key] = true;
+
   if (visibleDialogs.length > maxDialog) {
     hmIs[visibleDialogs[0]] = false;
     visibleDialogs.splice(0, 1);
@@ -74,16 +59,19 @@ var _updateVisible = function _updateVisible(state, key, maxDialog) {
 
 var _findCompByKey = function _findCompByKey(comps, key) {
   var index = _findCompIndex(comps, key);
+
   return typeof index !== 'undefined' ? comps[index] : undefined;
 };
 
-var DialogContainer = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(DialogContainer, _Component);
+var DialogContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(DialogContainer, _Component);
 
   function DialogContainer(props) {
-    (0, _classCallCheck3.default)(this, DialogContainer);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogContainer.__proto__ || Object.getPrototypeOf(DialogContainer)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._onStore = function (actionType, option) {
       var showAction = _this.props.showAction;
@@ -98,12 +86,15 @@ var DialogContainer = (_temp = _class = function (_Component) {
           if (Comp && typeof _findCompIndex(prevState.compDialogs, key) !== 'undefined') {
             return null;
           }
+
           _updateVisible(prevState, key, maxDialog);
+
           if (!Comp) {
             prevState.compDialogs = _doVisible(prevState.compDialogs, key);
           } else {
             prevState.compDialogs.push(Comp);
           }
+
           prevState.hmData[key] = data;
           return prevState;
         });
@@ -126,14 +117,16 @@ var DialogContainer = (_temp = _class = function (_Component) {
 
       _this.setState(function (prevState) {
         var hmIs = prevState.hmIs;
-
         hmIs[key] = !hmIs[key];
+
         if (!hmIs[key]) {
           var visibleDialogs = prevState.visibleDialogs,
               _keyIndex = visibleDialogs.indexOf(key);
+
           visibleDialogs.splice(_keyIndex, 1);
           _this.elHtml.style.cursor = '';
         }
+
         return prevState;
       });
     };
@@ -144,8 +137,10 @@ var DialogContainer = (_temp = _class = function (_Component) {
       if (visibleDialogs[visibleDialogs.length - 1] !== key) {
         _this.setState(function (prevState) {
           prevState.compDialogs = _doVisible(prevState.compDialogs, key);
+
           var visibleDialogs = prevState.visibleDialogs,
               _keyIndex = visibleDialogs.indexOf(key);
+
           visibleDialogs.splice(_keyIndex, 1);
           visibleDialogs.push(key);
           return prevState;
@@ -158,15 +153,14 @@ var DialogContainer = (_temp = _class = function (_Component) {
           hmIs = _this$state2.hmIs,
           compDialogs = _this$state2.compDialogs,
           hmData = _this$state2.hmData;
-
       return compDialogs.map(function (Comp) {
         var key = Comp.key;
-        return _react2.default.cloneElement(Comp, {
+        return _react["default"].cloneElement(Comp, {
           key: key,
           isShow: hmIs[key],
           optionData: hmData[key],
-          onFront: _this._handleToFront.bind(_this, key),
-          onClose: _this._handleToggleDialog.bind(_this, key)
+          onFront: _this._handleToFront.bind((0, _assertThisInitialized2["default"])(_this), key),
+          onClose: _this._handleToggleDialog.bind((0, _assertThisInitialized2["default"])(_this), key)
         });
       });
     };
@@ -181,37 +175,35 @@ var DialogContainer = (_temp = _class = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(DialogContainer, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'componentDidCatch',
-    value: function componentDidCatch(error, info) {
-      /*
-      console.log(error)
-      console.log(info)
-      */
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { style: S.ROOT },
-        this._renderDialogs()
-      );
-    }
-  }]);
+  var _proto = DialogContainer.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
+
+  _proto.componentDidCatch = function componentDidCatch(error, info) {
+    /*
+    console.log(error)
+    console.log(info)
+    */
+  };
+
+  _proto.render = function render() {
+    return _react["default"].createElement("div", {
+      style: S.ROOT
+    }, this._renderDialogs());
+  };
+
   return DialogContainer;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+DialogContainer.defaultProps = {
   maxDialog: 3
-}, _temp);
-exports.default = DialogContainer;
+};
+var _default = DialogContainer;
+exports["default"] = _default;
 //# sourceMappingURL=DialogContainer.js.map

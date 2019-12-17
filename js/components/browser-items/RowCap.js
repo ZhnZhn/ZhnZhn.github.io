@@ -1,21 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _crCurrencyFormatter = require('../../utils/crCurrencyFormatter');
-
-var _crCurrencyFormatter2 = _interopRequireDefault(_crCurrencyFormatter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _crCurrencyFormatter = _interopRequireDefault(require("../../utils/crCurrencyFormatter"));
 
 var NA = 'n/a';
-
 var STYLE = {
   CAP: {
     paddingRight: 8
@@ -25,21 +19,22 @@ var STYLE = {
     color: 'rgb(47, 126, 216)',
     paddingRight: 8,
     width: 90,
-    float: 'right'
+    "float": 'right'
   },
   IPO: {
     display: 'display-inline',
     color: 'rgb(253, 179, 22)',
     width: 70,
-    float: 'right'
+    "float": 'right'
   }
 };
 
-var _capFormatter = (0, _crCurrencyFormatter2.default)({
+var _capFormatter = (0, _crCurrencyFormatter["default"])({
   minimumFractionDigits: 0,
   maximumFractionDigits: 0
 });
-var _formatter = (0, _crCurrencyFormatter2.default)();
+
+var _formatter = (0, _crCurrencyFormatter["default"])();
 
 var RowCap = function RowCap(_ref) {
   var cap = _ref.cap,
@@ -48,26 +43,16 @@ var RowCap = function RowCap(_ref) {
 
   var _cap = cap === 0 ? NA : _capFormatter.format(cap),
       _salePrice = cap !== NA && cap !== 0 ? _formatter.format(salePrice) : NA;
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      'span',
-      { style: STYLE.CAP },
-      _cap
-    ),
-    _react2.default.createElement(
-      'span',
-      { style: STYLE.IPO },
-      'ipo ' + ipo
-    ),
-    _react2.default.createElement(
-      'span',
-      { style: STYLE.SALE_PRICE },
-      _salePrice
-    )
-  );
+
+  return _react["default"].createElement("div", null, _react["default"].createElement("span", {
+    style: STYLE.CAP
+  }, _cap), _react["default"].createElement("span", {
+    style: STYLE.IPO
+  }, "ipo " + ipo), _react["default"].createElement("span", {
+    style: STYLE.SALE_PRICE
+  }, _salePrice));
 };
 
-exports.default = RowCap;
+var _default = RowCap;
+exports["default"] = _default;
 //# sourceMappingURL=RowCap.js.map

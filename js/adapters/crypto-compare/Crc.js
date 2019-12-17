@@ -1,22 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _CrcAdapter = require('./CrcAdapter');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _CrcAdapter2 = _interopRequireDefault(_CrcAdapter);
+var _CrcAdapter = _interopRequireDefault(require("./CrcAdapter"));
 
-var _CrcApi = require('./CrcApi');
-
-var _CrcApi2 = _interopRequireDefault(_CrcApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _CrcApi = _interopRequireDefault(require("./CrcApi"));
 
 var Crc = {
-  api: _CrcApi2.default, adapter: _CrcAdapter2.default
+  api: _CrcApi["default"],
+  adapter: _CrcAdapter["default"]
 };
-
-exports.default = Crc;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\crypto-compare\Crc.js.map
+var _default = Crc;
+exports["default"] = _default;
+//# sourceMappingURL=Crc.js.map

@@ -1,30 +1,35 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
 
-var createLoadOptions = function createLoadOptions() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  if (options === void 0) {
+    options = {};
+  }
 
-  var fnValue = props.fnValue,
-      columnName = props.columnName,
-      dataColumn = props.dataColumn,
-      seriaColumnNames = props.seriaColumnNames,
-      loadId = props.loadId,
-      dataSource = props.dataSource,
-      exchange = options.exchange,
-      item = options.item,
-      type = options.type,
-      fromDate = options.fromDate,
+  var _props = props,
+      fnValue = _props.fnValue,
+      columnName = _props.columnName,
+      dataColumn = _props.dataColumn,
+      seriaColumnNames = _props.seriaColumnNames,
+      loadId = _props.loadId,
+      dataSource = _props.dataSource,
+      _options = options,
+      exchange = _options.exchange,
+      item = _options.item,
+      type = _options.type,
+      fromDate = _options.fromDate,
       _value = typeof fnValue === 'function' ? fnValue(exchange.value, item.value, type.value) : undefined,
-      _subtitle = columnName ? type.caption + ':' + columnName : '' + type.caption;
+      _subtitle = columnName ? type.caption + ":" + columnName : "" + type.caption;
 
   return {
     value: _value,
-    title: exchange.caption + ':' + item.caption,
+    title: exchange.caption + ":" + item.caption,
     subtitle: _subtitle,
     columnName: columnName,
     seriaColumnNames: seriaColumnNames,
@@ -35,5 +40,6 @@ var createLoadOptions = function createLoadOptions() {
   };
 };
 
-exports.default = createLoadOptions;
+var _default = createLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=futuresWiki.js.map

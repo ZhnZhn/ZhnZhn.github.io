@@ -1,26 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _fnArr = require('./fnArr');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _fnArr2 = _interopRequireDefault(_fnArr);
+var _fnArr = _interopRequireDefault(require("./fnArr"));
 
-var _fnImArr = require('./fnImArr');
+var _fnImArr = _interopRequireDefault(require("./fnImArr"));
 
-var _fnImArr2 = _interopRequireDefault(_fnImArr);
-
-var _fnObj = require('./fnObj');
-
-var _fnObj2 = _interopRequireDefault(_fnObj);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _fnObj = _interopRequireDefault(require("./fnObj"));
 
 var fnUtil = {
-  arr: _fnArr2.default, imArr: _fnImArr2.default, obj: _fnObj2.default
+  arr: _fnArr["default"],
+  imArr: _fnImArr["default"],
+  obj: _fnObj["default"]
 };
-
-exports.default = fnUtil;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\fnUtil.js.map
+var _default = fnUtil;
+exports["default"] = _default;
+//# sourceMappingURL=fnUtil.js.map

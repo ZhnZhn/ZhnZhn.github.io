@@ -1,75 +1,68 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+var _Type = require("./Type");
 
 var _BrowserConfig;
 
-var _Type = require('./Type');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.STOCK_MARKETS, {
+var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK_MARKETS] = {
   browserType: _Type.BrowserType.STOCK_MARKETS,
   isDynamic: true,
   caption: 'Stock Markets',
   sourceMenuUrl: './data/stock-markets/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
+}, _BrowserConfig[_Type.BrowserType.EUROSTAT] = {
   browserType: _Type.BrowserType.EUROSTAT,
   isDynamic: true,
   caption: 'Eurostat Statistics',
   sourceMenuUrl: './data/eurostat/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.UN_COMTRADE, {
+}, _BrowserConfig[_Type.BrowserType.UN_COMTRADE] = {
   browserType: _Type.BrowserType.UN_COMTRADE,
   isDynamic: true,
   caption: 'UN Comtrade',
   sourceMenuUrl: './data/uncomtrade/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.FAOSTAT, {
+}, _BrowserConfig[_Type.BrowserType.FAOSTAT] = {
   browserType: _Type.BrowserType.FAOSTAT,
   isDynamic: true,
   caption: 'FAOSTAT',
   sourceMenuUrl: './data/faostat/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.WORLD_BANK, {
+}, _BrowserConfig[_Type.BrowserType.WORLD_BANK] = {
   browserType: _Type.BrowserType.WORLD_BANK,
   isDynamic: true,
   caption: 'World Bank',
   sourceMenuUrl: './data/world-bank/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.ECONOMIC, {
+}, _BrowserConfig[_Type.BrowserType.ECONOMIC] = {
   browserType: _Type.BrowserType.ECONOMIC,
   isDynamic: true,
   caption: 'Quandl: World Economy',
   sourceMenuUrl: './data/quandl/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.DB_NOMICS, {
+}, _BrowserConfig[_Type.BrowserType.DB_NOMICS] = {
   browserType: _Type.BrowserType.DB_NOMICS,
   isDynamic: true,
   caption: 'DB Nomics',
   sourceMenuUrl: './data/db-nomics/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.BLOCKCHAIN, {
+}, _BrowserConfig[_Type.BrowserType.BLOCKCHAIN] = {
   browserType: _Type.BrowserType.BLOCKCHAIN,
   isDynamic: true,
   caption: 'Blockchain',
   sourceMenuUrl: './data/blockchain/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.PREMIUM_SAMPLE, {
+}, _BrowserConfig[_Type.BrowserType.PREMIUM_SAMPLE] = {
   browserType: _Type.BrowserType.PREMIUM_SAMPLE,
   isDynamic: true,
   caption: 'Quandl Premium Sample',
   sourceMenuUrl: './data/quandl-sample/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.FRANCE_STATISTICS, {
+}, _BrowserConfig[_Type.BrowserType.FRANCE_STATISTICS] = {
   browserType: _Type.BrowserType.FRANCE_STATISTICS,
   isDynamic: true,
   caption: 'Insee: France Statistics',
   sourceMenuUrl: './data/statistics-france/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NORWAY_STATISTICS, {
+}, _BrowserConfig[_Type.BrowserType.NORWAY_STATISTICS] = {
   browserType: _Type.BrowserType.NORWAY_STATISTICS,
   isDynamic: true,
   caption: 'Statistics Norway',
   sourceMenuUrl: './data/statistics-norway/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NORWAY_STAT_ALL, {
+}, _BrowserConfig[_Type.BrowserType.NORWAY_STAT_ALL] = {
   browserType: _Type.BrowserType.NORWAY_STAT_ALL,
   isDynamic: true,
   caption: 'Statistics Norway All',
@@ -81,12 +74,12 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
     dS: 'Statistics Norway',
     rootUrl: 'https://data.ssb.no/api/v0/en/table'
   }
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.SWEDEN_STAT, {
+}, _BrowserConfig[_Type.BrowserType.SWEDEN_STAT] = {
   browserType: _Type.BrowserType.SWEDEN_STAT,
   isDynamic: true,
   caption: 'Statistics Sweden',
   sourceMenuUrl: './data/statistics-sweden/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.SWEDEN_STAT_ALL, {
+}, _BrowserConfig[_Type.BrowserType.SWEDEN_STAT_ALL] = {
   browserType: _Type.BrowserType.SWEDEN_STAT_ALL,
   isDynamic: true,
   caption: 'Statistics Sweden All',
@@ -98,7 +91,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
     dS: 'Statistics Sweden',
     rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
   }
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.FINLAND_STAT_ALL, {
+}, _BrowserConfig[_Type.BrowserType.FINLAND_STAT_ALL] = {
   browserType: _Type.BrowserType.FINLAND_STAT_ALL,
   isDynamic: true,
   caption: 'Statistics Finland All',
@@ -111,17 +104,17 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
     noTime: true,
     rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
   }
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NBSC, {
+}, _BrowserConfig[_Type.BrowserType.NBSC] = {
   browserType: _Type.BrowserType.NBSC,
   isDynamic: true,
   caption: 'NBS China (Monthly)',
   sourceMenuUrl: './data/nbsc/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_ECONOMY, {
+}, _BrowserConfig[_Type.BrowserType.US_ECONOMY] = {
   browserType: _Type.BrowserType.US_ECONOMY,
   isDynamic: true,
   caption: 'USA Economy',
   sourceMenuUrl: './data/usa-economy/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
+}, _BrowserConfig[_Type.BrowserType.US_STOCKS] = {
   browserType: _Type.BrowserType.US_STOCKS,
   isDynamic: true,
   caption: '1000 Stocks by Sectors',
@@ -133,7 +126,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   itemOptionType: 'ItemTopicOption',
   itemType: 'Item',
   descrUrl: './data/us-stocks/description.html'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NYSE_STOCKS, {
+}, _BrowserConfig[_Type.BrowserType.NYSE_STOCKS] = {
   browserType: _Type.BrowserType.NYSE_STOCKS,
   isDynamic: true,
   caption: 'NYSE by Sectors',
@@ -145,7 +138,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nyse-stocks/nyse-stocks.html'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NASDAQ_STOCKS, {
+}, _BrowserConfig[_Type.BrowserType.NASDAQ_STOCKS] = {
   browserType: _Type.BrowserType.NASDAQ_STOCKS,
   isDynamic: true,
   caption: 'NASDAQ by Sectors',
@@ -157,7 +150,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.LONDON_STOCKS, {
+}, _BrowserConfig[_Type.BrowserType.LONDON_STOCKS] = {
   browserType: _Type.BrowserType.LONDON_STOCKS,
   isDynamic: true,
   caption: 'London Stocks by Sectors',
@@ -169,11 +162,11 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemLse',
   descrUrl: './data/london-stocks/lse-stocks.html'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.WATCH_LIST, {
+}, _BrowserConfig[_Type.BrowserType.WATCH_LIST] = {
   browserType: _Type.BrowserType.WATCH_LIST,
   //isDynamic : false,
   withoutItemCounter: true
-}), _BrowserConfig);
-
-exports.default = BrowserConfig;
+}, _BrowserConfig);
+var _default = BrowserConfig;
+exports["default"] = _default;
 //# sourceMappingURL=BrowserConfig.js.map

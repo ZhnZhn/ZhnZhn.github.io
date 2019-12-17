@@ -1,20 +1,16 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AdapterFn = require('../AdapterFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crError = _AdapterFn2.default.crError,
-    ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    valueMoving = _AdapterFn2.default.valueMoving,
-    crItemLink = _AdapterFn2.default.crItemLink;
-
+var crError = _AdapterFn["default"].crError,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    valueMoving = _AdapterFn["default"].valueMoving,
+    crItemLink = _AdapterFn["default"].crItemLink;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
@@ -22,7 +18,8 @@ var _crZhConfig = function _crZhConfig(_ref) {
       _propName = _ref._propName,
       dataSource = _ref.dataSource;
   return {
-    id: _itemKey, key: _itemKey,
+    id: _itemKey,
+    key: _itemKey,
     itemCaption: _symbol + '_' + _propName,
     isWithoutAdd: true,
     dataSource: dataSource
@@ -34,6 +31,7 @@ var _crName = function _crName(items) {
     return item.caption;
   }).join(': ');
 };
+
 var _crDescription = crItemLink.bind(null, 'Financial Modeling Prep');
 
 var _crInfo = function _crInfo(_ref2) {
@@ -55,7 +53,6 @@ var fnAdapter = {
   crError: crError,
   getCaption: _fGetByPropName('caption'),
   getValue: _fGetByPropName('value'),
-
   crData: function crData(metrics, propName) {
     return metrics.map(function (item) {
       return {
@@ -64,7 +61,6 @@ var fnAdapter = {
       };
     }).reverse();
   },
-
   crCaption: function crCaption(_ref3) {
     var items = _ref3.items;
     return {
@@ -75,7 +71,6 @@ var fnAdapter = {
   crSeriaType: function crSeriaType(seriaType) {
     return seriaType === 'COLUMN' ? 'column' : 'spline';
   },
-
   crConfigOption: function crConfigOption(_ref4) {
     var json = _ref4.json,
         option = _ref4.option,
@@ -87,6 +82,6 @@ var fnAdapter = {
     };
   }
 };
-
-exports.default = fnAdapter;
+var _default = fnAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=fnAdapter.js.map

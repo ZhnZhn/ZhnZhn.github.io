@@ -1,8 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 var CL_ROW = 'row__pane-topic not-selected';
 
 var _addItemTo = function _addItemTo(arr, comp, _ref) {
@@ -14,7 +13,8 @@ var _addItemTo = function _addItemTo(arr, comp, _ref) {
     arr.push({
       cn: CL_ROW,
       onClick: onClick.bind(comp),
-      name: name, isClose: isClose
+      name: name,
+      isClose: isClose
     });
   }
 };
@@ -22,13 +22,14 @@ var _addItemTo = function _addItemTo(arr, comp, _ref) {
 var crMenuMore = function crMenuMore(comp, _ref2) {
   var toggleToolBar = _ref2.toggleToolBar,
       onAbout = _ref2.onAbout;
-
   var p0 = [];
+
   _addItemTo(p0, comp, {
     name: 'Toggle ToolBar',
     onClick: toggleToolBar,
     isClose: true
   });
+
   _addItemTo(p0, comp, {
     name: 'About',
     onClick: onAbout,
@@ -43,5 +44,6 @@ var crMenuMore = function crMenuMore(comp, _ref2) {
   };
 };
 
-exports.default = crMenuMore;
+var _default = crMenuMore;
+exports["default"] = _default;
 //# sourceMappingURL=MenuMore.js.map

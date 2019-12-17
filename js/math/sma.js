@@ -1,18 +1,16 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _big = require('big.js');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _big2 = _interopRequireDefault(_big);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _big = _interopRequireDefault(require("big.js"));
 
 var _isNumber = function _isNumber(v) {
   return typeof v === 'number' && !Number.isNaN(v);
 };
+
 var _isUndef = function _isUndef(v) {
   return typeof v === 'undefined';
 };
@@ -28,16 +26,20 @@ var _crPointGetter = function _crPointGetter(data) {
   } : function (p) {
     return p.y;
   };
-  return { getX: getX, getY: getY };
+  return {
+    getX: getX,
+    getY: getY
+  };
 };
 
 var sma = function sma(data, period, plus) {
   var dataSma = [];
+
   if (!Array.isArray(data) || data.length === 0) {
     return dataSma;
   }
 
-  var _period = plus ? parseFloat((0, _big2.default)(period).plus(plus).minus(1).toFixed(0)) : parseFloat((0, _big2.default)(period).minus(1).toFixed(0));
+  var _period = plus ? parseFloat((0, _big["default"])(period).plus(plus).minus(1).toFixed(0)) : parseFloat((0, _big["default"])(period).minus(1).toFixed(0));
 
   var _crPointGetter2 = _crPointGetter(data),
       getX = _crPointGetter2.getX,
@@ -47,10 +49,12 @@ var sma = function sma(data, period, plus) {
   }),
       max = _data.length;
 
-  var bSum = (0, _big2.default)('0.0'),
-      point = void 0;
+  var bSum = (0, _big["default"])('0.0'),
+      point;
+
   for (var i = 0; i < max; i++) {
     point = _data[i];
+
     if (i > _period) {
       bSum = bSum.plus(getY(point)).minus(getY(_data[i - period]));
       dataSma.push([getX(point), parseFloat(bSum.div(period).toFixed(2))]);
@@ -58,8 +62,10 @@ var sma = function sma(data, period, plus) {
       bSum = bSum.plus(getY(point));
     }
   }
+
   return dataSma;
 };
 
-exports.default = sma;
+var _default = sma;
+exports["default"] = _default;
 //# sourceMappingURL=sma.js.map

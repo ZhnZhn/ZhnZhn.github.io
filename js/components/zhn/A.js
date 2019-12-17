@@ -1,51 +1,34 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports["default"] = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _SvgIcons = _interopRequireDefault(require("./svg/SvgIcons"));
+
+var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
+
+var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
+
+var _InputText = _interopRequireDefault(require("./InputText"));
+
+var _OpenClose = _interopRequireDefault(require("./OpenClose"));
+
+var _SvgPlus = _interopRequireDefault(require("./SvgPlus"));
+
+var _SvgMinus = _interopRequireDefault(require("./SvgMinus"));
+
+var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
+  ScrollPane: _ScrollPane["default"],
+  BrowserCaption: _BrowserCaption["default"],
+  InputText: _InputText["default"],
+  OpenClose: _OpenClose["default"],
+  SvgPlus: _SvgPlus["default"],
+  SvgMinus: _SvgMinus["default"]
 });
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _SvgIcons = require('./svg/SvgIcons');
-
-var _SvgIcons2 = _interopRequireDefault(_SvgIcons);
-
-var _ScrollPane = require('./ScrollPane');
-
-var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
-
-var _BrowserCaption = require('./BrowserCaption');
-
-var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
-
-var _InputText = require('./InputText');
-
-var _InputText2 = _interopRequireDefault(_InputText);
-
-var _OpenClose = require('./OpenClose');
-
-var _OpenClose2 = _interopRequireDefault(_OpenClose);
-
-var _SvgPlus = require('./SvgPlus');
-
-var _SvgPlus2 = _interopRequireDefault(_SvgPlus);
-
-var _SvgMinus = require('./SvgMinus');
-
-var _SvgMinus2 = _interopRequireDefault(_SvgMinus);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var A = (0, _extends3.default)({}, _SvgIcons2.default, {
-  ScrollPane: _ScrollPane2.default,
-  BrowserCaption: _BrowserCaption2.default,
-  InputText: _InputText2.default,
-  OpenClose: _OpenClose2.default,
-  SvgPlus: _SvgPlus2.default,
-  SvgMinus: _SvgMinus2.default
-});
-
-exports.default = A;
+var _default = A;
+exports["default"] = _default;
 //# sourceMappingURL=A.js.map

@@ -1,37 +1,41 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
 
-var createLoadOptions = function createLoadOptions() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  if (options === void 0) {
+    options = {};
+  }
 
-  var fnValue = props.fnValue,
-      dataColumn = props.dataColumn,
-      loadId = props.loadId,
-      dataSource = props.dataSource,
-      isPremium = props.isPremium,
-      linkFn = props.linkFn,
-      _props$dfProps = props.dfProps,
-      dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
-      one = options.one,
-      two = options.two,
-      _options$three = options.three,
-      three = _options$three === undefined ? {} : _options$three,
-      fromDate = options.fromDate,
-      toDate = options.toDate,
-      hasSecondYAxis = options.hasSecondYAxis,
+  var _props = props,
+      fnValue = _props.fnValue,
+      dataColumn = _props.dataColumn,
+      loadId = _props.loadId,
+      dataSource = _props.dataSource,
+      isPremium = _props.isPremium,
+      linkFn = _props.linkFn,
+      _props$dfProps = _props.dfProps,
+      dfProps = _props$dfProps === void 0 ? {} : _props$dfProps,
+      _options = options,
+      one = _options.one,
+      two = _options.two,
+      _options$three = _options.three,
+      three = _options$three === void 0 ? {} : _options$three,
+      fromDate = _options.fromDate,
+      toDate = _options.toDate,
+      hasSecondYAxis = _options.hasSecondYAxis,
       _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : one.value;
 
-  return (0, _extends3.default)({}, dfProps, {
+  return (0, _extends2["default"])({}, dfProps, {
     value: _value,
     fromDate: fromDate,
     toDate: toDate,
@@ -53,5 +57,6 @@ var createLoadOptions = function createLoadOptions() {
   });
 };
 
-exports.default = createLoadOptions;
+var _default = createLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=type4.js.map

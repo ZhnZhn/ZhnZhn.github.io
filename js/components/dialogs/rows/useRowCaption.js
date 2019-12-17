@@ -1,21 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _DialogStyles = require('../../styles/DialogStyles');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
+var _DialogStyles = _interopRequireDefault(require("../../styles/DialogStyles"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var useRowCaption = function useRowCaption(caption) {
+  if (caption === void 0) {
+    caption = '';
+  }
 
-var useRowCaption = function useRowCaption() {
-  var caption = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   return {
-    caption: _DialogStyles2.default.crRowCaption(caption)
+    caption: _DialogStyles["default"].crRowCaption(caption)
   };
 };
 
-exports.default = useRowCaption;
+var _default = useRowCaption;
+exports["default"] = _default;
 //# sourceMappingURL=useRowCaption.js.map

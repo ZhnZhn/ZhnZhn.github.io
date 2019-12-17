@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _DateUtils = require('../../utils/DateUtils');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
 var _renamePropName = function _renamePropName(obj) {
   var bT = obj.bT,
@@ -17,7 +14,6 @@ var _renamePropName = function _renamePropName(obj) {
       cN = obj.cN,
       fD = obj.fD,
       tD = obj.tD;
-
   return {
     browserType: bT,
     chartType: cT,
@@ -30,11 +26,11 @@ var _renamePropName = function _renamePropName(obj) {
 
 var _crOptions = function _crOptions(obj) {
   var options = _renamePropName(obj);
+
   var toDate = options.toDate,
       value = options.value;
-
   return Object.assign({}, options, obj, {
-    toDate: toDate || _DateUtils2.default.getToDate(),
+    toDate: toDate || _DateUtils["default"].getToDate(),
     title: value,
     key: value
   });
@@ -43,9 +39,10 @@ var _crOptions = function _crOptions(obj) {
 var LocationQuery = {
   toOptions: function toOptions(obj) {
     var options = _crOptions(obj);
+
     return options;
   }
 };
-
-exports.default = LocationQuery;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LocationQuery.js.map
+var _default = LocationQuery;
+exports["default"] = _default;
+//# sourceMappingURL=LocationQuery.js.map

@@ -1,17 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var YAXIS = 'yAxis';
-
 var _isArr = Array.isArray;
 
 var _crYAxisId = function _crYAxisId(indexOrChart) {
@@ -21,7 +17,10 @@ var _crYAxisId = function _crYAxisId(indexOrChart) {
 var _checkYAxis = function _checkYAxis(index, chart) {
   var isNewYAxis = index === -1,
       id = isNewYAxis ? _crYAxisId(chart) : index === 0 ? void 0 : _crYAxisId(index);
-  return { id: id, isNewYAxis: isNewYAxis };
+  return {
+    id: id,
+    isNewYAxis: isNewYAxis
+  };
 };
 
 var _crAxis = function _crAxis(id, color) {
@@ -47,7 +46,7 @@ var _crSeria = function _crSeria(_ref, options) {
   var id = _ref.id,
       color = _ref.color,
       data = _ref.data;
-  return (0, _extends3.default)({
+  return (0, _extends2["default"])({
     type: 'spline',
     yAxis: id,
     color: color,
@@ -58,11 +57,13 @@ var _crSeria = function _crSeria(_ref, options) {
 var _findDataIndex = function _findDataIndex(data, v) {
   var _max = data.length;
   var i = 0;
+
   for (i; i < _max; i++) {
     if (data[i][0] >= v) {
       return i;
     }
   }
+
   return i;
 };
 
@@ -74,19 +75,23 @@ var _crData = function _crData(_ref2) {
   if (!_isArr(data) || !_isArr(data[0]) || !userMin || !userMax) {
     return data;
   }
+
   var _fromIndex = _findDataIndex(data, userMin),
       _toIndex = _findDataIndex(data, userMax);
+
   return _fromIndex <= _toIndex ? data.slice(_fromIndex, _toIndex + 1) : data;
 };
 
-var zhAddSeriaToYAxis = function zhAddSeriaToYAxis() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var seriaOptions = arguments[1];
+var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
+  if (options === void 0) {
+    options = {};
+  }
 
   try {
-    var color = options.color,
-        _options$yIndex = options.yIndex,
-        yIndex = _options$yIndex === undefined ? -1 : _options$yIndex,
+    var _options = options,
+        color = _options.color,
+        _options$yIndex = _options.yIndex,
+        yIndex = _options$yIndex === void 0 ? -1 : _options$yIndex,
         _checkYAxis2 = _checkYAxis(yIndex, this),
         id = _checkYAxis2.id,
         isNewYAxis = _checkYAxis2.isNewYAxis;
@@ -94,8 +99,13 @@ var zhAddSeriaToYAxis = function zhAddSeriaToYAxis() {
     if (isNewYAxis) {
       this.addAxis(_crAxis(id, color), false, true);
     }
+
     var _seria = this.addSeries(_crSeria({
-      id: id, color: color, data: _crData(options) }, seriaOptions), false);
+      id: id,
+      color: color,
+      data: _crData(options)
+    }, seriaOptions), false);
+
     this.redraw();
     return _seria;
   } catch (err) {
@@ -103,5 +113,6 @@ var zhAddSeriaToYAxis = function zhAddSeriaToYAxis() {
   }
 };
 
-exports.default = zhAddSeriaToYAxis;
+var _default = zhAddSeriaToYAxis;
+exports["default"] = _default;
 //# sourceMappingURL=zhAddSeriaToYAxis.js.map

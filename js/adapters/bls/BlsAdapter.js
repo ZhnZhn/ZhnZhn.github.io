@@ -1,27 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ConfigBuilder = require('../../charts/ConfigBuilder');
+var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _fnAdapter = require('./fnAdapter');
-
-var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crData = _fnAdapter2.default.crData,
-    crConfigOption = _fnAdapter2.default.crConfigOption;
-
-
+var crData = _fnAdapter["default"].crData,
+    crConfigOption = _fnAdapter["default"].crConfigOption;
 var BlsAdapter = {
   toConfig: function toConfig(json, option) {
     var dfTitle = option.dfTitle,
@@ -29,10 +20,18 @@ var BlsAdapter = {
         title = option.title,
         _dfTitle = dfTitle || subtitle,
         data = crData(json),
-        seria = (0, _ConfigBuilder2.default)().splineSeria({ data: data }).toSeria(),
-        config = (0, _ConfigBuilder2.default)().area2Config(_dfTitle, title).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
+        seria = (0, _ConfigBuilder["default"])().splineSeria({
+      data: data
+    }).toSeria(),
+        config = (0, _ConfigBuilder["default"])().area2Config(_dfTitle, title).addSeries(seria).add((0, _extends2["default"])({}, crConfigOption({
+      json: json,
+      option: option,
+      data: data
+    }))).toConfig();
 
-    return { config: config };
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(json, option) {
     var _BlsAdapter$toConfig = BlsAdapter.toConfig(json, option),
@@ -41,6 +40,6 @@ var BlsAdapter = {
     return config.series[0];
   }
 };
-
-exports.default = BlsAdapter;
+var _default = BlsAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=BlsAdapter.js.map

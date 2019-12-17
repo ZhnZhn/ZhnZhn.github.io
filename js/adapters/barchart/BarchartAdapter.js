@@ -1,30 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ConfigBuilder = require('../../charts/ConfigBuilder');
+var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _fnAdapter = require('./fnAdapter');
-
-var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crTitle = _fnAdapter2.default.crTitle,
-    crChartId = _fnAdapter2.default.crChartId,
-    crData = _fnAdapter2.default.crData,
-    crConfigOption = _fnAdapter2.default.crConfigOption,
-    toSeriesData = _fnAdapter2.default.toSeriesData;
-
-
+var crTitle = _fnAdapter["default"].crTitle,
+    crChartId = _fnAdapter["default"].crChartId,
+    crData = _fnAdapter["default"].crData,
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    toSeriesData = _fnAdapter["default"].toSeriesData;
 var BarchartAdapter = {
   toConfig: function toConfig(json, option) {
     var chartId = crChartId(option),
@@ -34,27 +25,32 @@ var BarchartAdapter = {
         dataOption = crData(json, option),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
-        config = (0, _ConfigBuilder2.default)().stockConfig(chartId, dataOption).addCaption(title, subtitle).add((0, _extends3.default)({}, crConfigOption({
-      chartId: chartId, option: option, data: data
+        config = (0, _ConfigBuilder["default"])().stockConfig(chartId, dataOption).addCaption(title, subtitle).add((0, _extends2["default"])({}, crConfigOption({
+      chartId: chartId,
+      option: option,
+      data: data
     }))).addZhPoints(dataMfi).toConfig();
 
-
-    return { config: config };
+    return {
+      config: config
+    };
   },
-  toSeries: function toSeries() {
-    var json = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var option = arguments[1];
+  toSeries: function toSeries(json, option) {
+    if (json === void 0) {
+      json = {};
+    }
+
     var parentId = option.parentId,
-        _id = parentId + '_' + crChartId(option),
+        _id = parentId + "_" + crChartId(option),
         _toSeriesData = toSeriesData(json.results, {
       isAllSeries: false,
       pnDate: 'tradingDay'
     }),
         data = _toSeriesData.data;
 
-    return (0, _ConfigBuilder2.default)().initSeria().addPoints(_id, data).toSeria();
+    return (0, _ConfigBuilder["default"])().initSeria().addPoints(_id, data).toSeria();
   }
 };
-
-exports.default = BarchartAdapter;
+var _default = BarchartAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=BarchartAdapter.js.map

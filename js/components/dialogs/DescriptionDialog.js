@@ -1,46 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _dompurify = _interopRequireDefault(require("dompurify"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _fnFetch = require("../../utils/fnFetch");
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp2;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _dompurify = require('dompurify');
-
-var _dompurify2 = _interopRequireDefault(_dompurify);
-
-var _fnFetch = require('../../utils/fnFetch');
-
-var _ModalDialog = require('../zhn-moleculs/ModalDialog');
-
-var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
-
-var _Load = require('../zhn/Load');
-
-var _Load2 = _interopRequireDefault(_Load);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Load = _interopRequireDefault(require("../zhn/Load"));
 
 var DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
 var S = {
@@ -58,9 +35,11 @@ var S = {
 
 var Description = function Description(_ref) {
   var _html = _ref._html;
-  return _react2.default.createElement('div', {
+  return _react["default"].createElement("div", {
     style: S.DIV,
-    dangerouslySetInnerHTML: { __html: _html }
+    dangerouslySetInnerHTML: {
+      __html: _html
+    }
   });
 };
 
@@ -72,30 +51,34 @@ var _isUpdateDescr = function _isUpdateDescr(prevProps, props, state) {
   if (_isNewShow(prevProps, props) && props.isShow && state.isLoadFailed) {
     return true;
   }
+
   return _isNewShow(prevProps, props) && prevProps.data.descrUrl !== props.data.descrUrl;
 };
 
-var DescriptionDialog = (_temp2 = _class = function (_Component) {
-  (0, _inherits3.default)(DescriptionDialog, _Component);
+var DescriptionDialog =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(DescriptionDialog, _Component);
 
   function DescriptionDialog() {
-    var _ref2;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, DescriptionDialog);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = DescriptionDialog.__proto__ || Object.getPrototypeOf(DescriptionDialog)).call.apply(_ref2, [this].concat(args))), _this), _this.state = {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
       isLoading: false,
       isLoadFailed: false,
       errMsg: '',
       descrHtml: ''
-    }, _this._loadDescr = function () {
-      var descrUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    };
+
+    _this._loadDescr = function (descrUrl) {
+      if (descrUrl === void 0) {
+        descrUrl = '';
+      }
 
       if (descrUrl) {
         _this.setState({
@@ -110,10 +93,12 @@ var DescriptionDialog = (_temp2 = _class = function (_Component) {
       } else {
         _this._setDescrHtml();
       }
-    }, _this._setDescrHtml = function () {
-      var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          _ref3$json = _ref3.json,
-          text = _ref3$json === undefined ? DESCR_EMPTY : _ref3$json;
+    };
+
+    _this._setDescrHtml = function (_temp) {
+      var _ref2 = _temp === void 0 ? {} : _temp,
+          _ref2$json = _ref2.json,
+          text = _ref2$json === void 0 ? DESCR_EMPTY : _ref2$json;
 
       _this.setState({
         isLoading: false,
@@ -121,70 +106,75 @@ var DescriptionDialog = (_temp2 = _class = function (_Component) {
         errMsg: '',
         descrHtml: text
       });
-    }, _this._onFailed = function () {
-      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          error = _ref4.error;
+    };
+
+    _this._onFailed = function (_temp2) {
+      var _ref3 = _temp2 === void 0 ? {} : _temp2,
+          error = _ref3.error;
 
       _this.setState({
         isLoading: false,
         isLoadFailed: true,
         errMsg: error.message
       });
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(DescriptionDialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this._loadDescr(this.props.data.descrUrl);
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      if (_isUpdateDescr(prevProps, this.props, this.state)) {
-        var data = this.props.data,
-            descrUrl = data.descrUrl;
+  var _proto = DescriptionDialog.prototype;
 
-        this._loadDescr(descrUrl);
-      }
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          onClose = _props.onClose,
-          _state = this.state,
-          isLoading = _state.isLoading,
-          isLoadFailed = _state.isLoadFailed,
-          errMsg = _state.errMsg,
-          descrHtml = _state.descrHtml,
-          _html = _dompurify2.default.sanitize(descrHtml),
-          _el = isLoading ? _react2.default.createElement(_Load2.default.Loading, null) : isLoadFailed ? _react2.default.createElement(_Load2.default.LoadFailed, { errMsg: errMsg }) : _react2.default.createElement(Description, { _html: _html });
 
-      return _react2.default.createElement(
-        _ModalDialog2.default,
-        {
-          caption: 'Description for Datasource',
-          isShow: isShow,
-          style: S.DIALOG,
-          onClose: onClose
-        },
-        _el
-      );
+    return true;
+  };
+
+  _proto.componentDidMount = function componentDidMount() {
+    this._loadDescr(this.props.data.descrUrl);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (_isUpdateDescr(prevProps, this.props, this.state)) {
+      var data = this.props.data,
+          descrUrl = data.descrUrl;
+
+      this._loadDescr(descrUrl);
     }
-  }]);
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShow = _this$props.isShow,
+        onClose = _this$props.onClose,
+        _this$state = this.state,
+        isLoading = _this$state.isLoading,
+        isLoadFailed = _this$state.isLoadFailed,
+        errMsg = _this$state.errMsg,
+        descrHtml = _this$state.descrHtml,
+        _html = _dompurify["default"].sanitize(descrHtml),
+        _el = isLoading ? _react["default"].createElement(_Load["default"].Loading, null) : isLoadFailed ? _react["default"].createElement(_Load["default"].LoadFailed, {
+      errMsg: errMsg
+    }) : _react["default"].createElement(Description, {
+      _html: _html
+    });
+
+    return _react["default"].createElement(_ModalDialog["default"], {
+      caption: "Description for Datasource",
+      isShow: isShow,
+      style: S.DIALOG,
+      onClose: onClose
+    }, _el);
+  };
+
   return DescriptionDialog;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+DescriptionDialog.defaultProps = {
   data: {}
-}, _temp2);
-exports.default = DescriptionDialog;
+};
+var _default = DescriptionDialog;
+exports["default"] = _default;
 //# sourceMappingURL=DescriptionDialog.js.map

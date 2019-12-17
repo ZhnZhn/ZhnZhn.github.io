@@ -1,54 +1,66 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toSpline = require('./toSpline');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _toSpline2 = _interopRequireDefault(_toSpline);
+var _toSpline = _interopRequireDefault(require("./toSpline"));
 
-var _toYearly = require('./toYearly');
+var _toYearly = _interopRequireDefault(require("./toYearly"));
 
-var _toYearly2 = _interopRequireDefault(_toYearly);
+var _toColumn = _interopRequireDefault(require("./toColumn"));
 
-var _toColumn = require('./toColumn');
-
-var _toColumn2 = _interopRequireDefault(_toColumn);
-
-var _toTreeMap = require('./toTreeMap');
-
-var _toTreeMap2 = _interopRequireDefault(_toTreeMap);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _toTreeMap = _interopRequireDefault(require("./toTreeMap"));
 
 var _r = {
-  DF: _toSpline2.default.crConfig,
-  AREA: _toSpline2.default.crConfig,
-  SPLINE: _toSpline2.default.crConfig,
-  COLUMN: _toSpline2.default.crConfig,
-  AREA_YEARLY: _toYearly2.default.crConfig,
-  COLUMN_SET: _toColumn2.default.fCrConfig({ seriaType: 'COLUMN' }),
-  BAR_SET: _toColumn2.default.fCrConfig({ seriaType: 'BAR' }),
-  COLUMN_CLUSTER: _toColumn2.default.fCrConfig({
-    isCluster: true, seriaType: 'COLUMN'
+  DF: _toSpline["default"].crConfig,
+  AREA: _toSpline["default"].crConfig,
+  SPLINE: _toSpline["default"].crConfig,
+  COLUMN: _toSpline["default"].crConfig,
+  AREA_YEARLY: _toYearly["default"].crConfig,
+  COLUMN_SET: _toColumn["default"].fCrConfig({
+    seriaType: 'COLUMN'
   }),
-  BAR_CLUSTER: _toColumn2.default.fCrConfig({
-    isCluster: true, seriaType: 'BAR'
+  BAR_SET: _toColumn["default"].fCrConfig({
+    seriaType: 'BAR'
   }),
-  COLUMN_BY_2: _toColumn2.default.fCrConfig({ seriaType: 'COLUMN' }, { by: '2' }),
-  BAR_BY_2: _toColumn2.default.fCrConfig({ seriaType: 'BAR' }, { by: '2' }),
-  TREE_MAP: _toTreeMap2.default.fCrConfig(),
-  TREE_MAP_CLUSTER: _toTreeMap2.default.fCrConfig({ isCluster: true }),
-  TREE_MAP_2: _toTreeMap2.default.fCrConfig({}, { depth: "d2" }),
-  TREE_MAP_2_CLUSTER: _toTreeMap2.default.fCrConfig({ isCluster: true }, { depth: "d2" })
+  COLUMN_CLUSTER: _toColumn["default"].fCrConfig({
+    isCluster: true,
+    seriaType: 'COLUMN'
+  }),
+  BAR_CLUSTER: _toColumn["default"].fCrConfig({
+    isCluster: true,
+    seriaType: 'BAR'
+  }),
+  COLUMN_BY_2: _toColumn["default"].fCrConfig({
+    seriaType: 'COLUMN'
+  }, {
+    by: '2'
+  }),
+  BAR_BY_2: _toColumn["default"].fCrConfig({
+    seriaType: 'BAR'
+  }, {
+    by: '2'
+  }),
+  TREE_MAP: _toTreeMap["default"].fCrConfig(),
+  TREE_MAP_CLUSTER: _toTreeMap["default"].fCrConfig({
+    isCluster: true
+  }),
+  TREE_MAP_2: _toTreeMap["default"].fCrConfig({}, {
+    depth: "d2"
+  }),
+  TREE_MAP_2_CLUSTER: _toTreeMap["default"].fCrConfig({
+    isCluster: true
+  }, {
+    depth: "d2"
+  })
 };
-
 var RouterConfig = {
   getCrConfig: function getCrConfig(seriaType) {
     return _r[seriaType] || _r.DF;
   }
 };
-
-exports.default = RouterConfig;
+var _default = RouterConfig;
+exports["default"] = _default;
 //# sourceMappingURL=RouterConfig.js.map

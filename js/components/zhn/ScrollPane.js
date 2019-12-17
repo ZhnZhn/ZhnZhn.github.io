@@ -1,89 +1,72 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp2;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _withThemeRef = require('../hoc/withThemeRef');
-
-var _withThemeRef2 = _interopRequireDefault(_withThemeRef);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _withThemeRef = _interopRequireDefault(require("../hoc/withThemeRef"));
 
 var TH_ID = 'SCROLL_PANE';
 var CL = 'with-scroll';
 
-var ScrollPane = (_temp2 = _class = function (_Component) {
-  (0, _inherits3.default)(ScrollPane, _Component);
+var ScrollPane =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ScrollPane, _Component);
 
   function ScrollPane() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, ScrollPane);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ScrollPane.__proto__ || Object.getPrototypeOf(ScrollPane)).call.apply(_ref, [this].concat(args))), _this), _this._refRootNode = function (node) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._refRootNode = function (node) {
       return _this.rootNode = node;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(ScrollPane, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          theme = _props.theme,
-          className = _props.className,
-          style = _props.style,
-          children = _props.children,
-          TS = theme.getStyle(TH_ID),
-          _cl = CL + ' ' + TS.CL_SCROLL + ' ' + className;
+  var _proto = ScrollPane.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        {
-          ref: this._refRootNode,
-          className: _cl,
-          style: style
-        },
-        children
-      );
-    }
-  }, {
-    key: 'scrollTop',
-    value: function scrollTop() {
-      this.rootNode.scrollTop = 0;
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        theme = _this$props.theme,
+        className = _this$props.className,
+        style = _this$props.style,
+        children = _this$props.children,
+        TS = theme.getStyle(TH_ID),
+        _cl = CL + " " + TS.CL_SCROLL + " " + className;
+
+    return _react["default"].createElement("div", {
+      ref: this._refRootNode,
+      className: _cl,
+      style: style
+    }, children);
+  };
+
+  _proto.scrollTop = function scrollTop() {
+    this.rootNode.scrollTop = 0;
+  };
+
   return ScrollPane;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+ScrollPane.defaultProps = {
   className: ''
-}, _temp2);
-exports.default = (0, _withThemeRef2.default)(ScrollPane);
+};
+
+var _default = (0, _withThemeRef["default"])(ScrollPane);
+
+exports["default"] = _default;
 //# sourceMappingURL=ScrollPane.js.map

@@ -1,118 +1,83 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _DialogContainer = _interopRequireDefault(require("../zhn-containers/DialogContainer"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DialogContainer = require('../zhn-containers/DialogContainer');
-
-var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CL_ROOT = "hrz-container";
 //import PropTypes from "prop-types";
+var CL_ROOT = "hrz-container";
 
-var BrowserContainer = function (_Component) {
-  (0, _inherits3.default)(BrowserContainer, _Component);
+var BrowserContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(BrowserContainer, _Component);
 
   function BrowserContainer() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, BrowserContainer);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = BrowserContainer.__proto__ || Object.getPrototypeOf(BrowserContainer)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
       elBrowsers: []
-    }, _this._onStore = function (actionType, data) {
+    };
+
+    _this._onStore = function (actionType, data) {
       if (actionType === _this.props.initBrowserAction) {
         _this.setState(function (prevState) {
           return {
-            elBrowsers: [data].concat((0, _toConsumableArray3.default)(prevState.elBrowsers))
+            elBrowsers: [data].concat(prevState.elBrowsers)
           };
         });
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func
-    }),
-    initBrowserAction: PropTypes.string,
-    showDialogAction: PropTypes.string,
-    onCloseDialog: PropTypes.func
-  }
-  */
 
-  (0, _createClass3.default)(BrowserContainer, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var store = this.props.store;
+  var _proto = BrowserContainer.prototype;
 
-      this.unsubscribe = store.listen(this._onStore);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          store = _props.store,
-          showDialogAction = _props.showDialogAction,
-          onCloseDialog = _props.onCloseDialog,
-          elBrowsers = this.state.elBrowsers;
+  _proto.componentDidMount = function componentDidMount() {
+    var store = this.props.store;
+    this.unsubscribe = store.listen(this._onStore);
+  };
 
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
 
-      return _react2.default.createElement(
-        'div',
-        { className: CL_ROOT },
-        elBrowsers.map(function (Comp) {
-          return _react2.default.cloneElement(Comp);
-        }),
-        _react2.default.createElement(_DialogContainer2.default, {
-          maxDialog: 3,
-          store: store,
-          showAction: showDialogAction,
-          onCloseDialog: onCloseDialog
-        })
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        store = _this$props.store,
+        showDialogAction = _this$props.showDialogAction,
+        onCloseDialog = _this$props.onCloseDialog,
+        elBrowsers = this.state.elBrowsers;
+    return _react["default"].createElement("div", {
+      className: CL_ROOT
+    }, elBrowsers.map(function (Comp) {
+      return _react["default"].cloneElement(Comp);
+    }), _react["default"].createElement(_DialogContainer["default"], {
+      maxDialog: 3,
+      store: store,
+      showAction: showDialogAction,
+      onCloseDialog: onCloseDialog
+    }));
+  };
+
   return BrowserContainer;
 }(_react.Component);
 
-exports.default = BrowserContainer;
+var _default = BrowserContainer;
+exports["default"] = _default;
 //# sourceMappingURL=BrowserContainer.js.map

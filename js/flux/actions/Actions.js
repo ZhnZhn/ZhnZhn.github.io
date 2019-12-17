@@ -1,28 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ChartActions = require('./ChartActions');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
+var _ChartActions = _interopRequireDefault(require("./ChartActions"));
 
-var _ComponentActions = require('./ComponentActions');
+var _ComponentActions = _interopRequireDefault(require("./ComponentActions"));
 
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+var _BrowserActions = _interopRequireDefault(require("./BrowserActions"));
 
-var _BrowserActions = require('./BrowserActions');
+var _WatchActions = _interopRequireDefault(require("./WatchActions"));
 
-var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
-
-var _WatchActions = require('./WatchActions');
-
-var _WatchActions2 = _interopRequireDefault(_WatchActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Actions = [_ChartActions2.default, _ComponentActions2.default, _BrowserActions2.default, _WatchActions2.default];
-
-exports.default = Actions;
+var Actions = [_ChartActions["default"], _ComponentActions["default"], _BrowserActions["default"], _WatchActions["default"]];
+var _default = Actions;
+exports["default"] = _default;
 //# sourceMappingURL=Actions.js.map

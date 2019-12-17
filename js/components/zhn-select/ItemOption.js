@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireDefault(require("react"));
 
 var S = {
   CAPTION: {
@@ -21,14 +18,13 @@ var S = {
 
 var ItemOption = function ItemOption(_ref) {
   var _ref$item = _ref.item,
-      item = _ref$item === undefined ? {} : _ref$item,
+      item = _ref$item === void 0 ? {} : _ref$item,
       propCaption = _ref.propCaption;
-  return _react2.default.createElement(
-    'div',
-    { style: S.CAPTION },
-    item[propCaption]
-  );
+  return _react["default"].createElement("div", {
+    style: S.CAPTION
+  }, item[propCaption]);
 };
 
-exports.default = ItemOption;
+var _default = ItemOption;
+exports["default"] = _default;
 //# sourceMappingURL=ItemOption.js.map

@@ -1,14 +1,13 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var fns = {
   columnRange: function columnRange(d1, d2) {
     var d3 = [];
     d1.forEach(function (p1, index) {
       var p2 = d2[index];
+
       if (Boolean(p1.y) && Boolean(p2.y)) {
         d3.push({
           name: p1.category,
@@ -20,6 +19,6 @@ var fns = {
     return d3;
   }
 };
-
-exports.default = fns;
+var _default = fns;
+exports["default"] = _default;
 //# sourceMappingURL=seriaFns.js.map

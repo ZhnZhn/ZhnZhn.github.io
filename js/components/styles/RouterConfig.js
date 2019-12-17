@@ -1,33 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ConfigGeneral = require('./ConfigGeneral');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ConfigGeneral2 = _interopRequireDefault(_ConfigGeneral);
+var _ConfigGeneral = _interopRequireDefault(require("./ConfigGeneral"));
 
-var _ConfigHeaderBar = require('./ConfigHeaderBar');
+var _ConfigHeaderBar = _interopRequireDefault(require("./ConfigHeaderBar"));
 
-var _ConfigHeaderBar2 = _interopRequireDefault(_ConfigHeaderBar);
+var _ConfigElement = _interopRequireDefault(require("./ConfigElement"));
 
-var _ConfigElement = require('./ConfigElement');
+var _ConfigRowCheckBox = _interopRequireDefault(require("./ConfigRowCheckBox"));
 
-var _ConfigElement2 = _interopRequireDefault(_ConfigElement);
-
-var _ConfigRowCheckBox = require('./ConfigRowCheckBox');
-
-var _ConfigRowCheckBox2 = _interopRequireDefault(_ConfigRowCheckBox);
-
-var _ConfigLogos = require('./ConfigLogos');
-
-var _ConfigLogos2 = _interopRequireDefault(_ConfigLogos);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ConfigLogos = _interopRequireDefault(require("./ConfigLogos"));
 
 var router = {
-  DF: _ConfigGeneral2.default,
+  DF: _ConfigGeneral["default"],
+
   /*
   ABOUT: General,
   BROWSER: General,
@@ -37,16 +27,16 @@ var router = {
   CHART_CONTAINER: General,
   SCROLL_PANE: General,
   */
-  HEADER_BAR: _ConfigHeaderBar2.default,
+  HEADER_BAR: _ConfigHeaderBar["default"],
+
   /*
     BrowserCaption, ButtonTab, MenuBadge, Tab,
     MenuTab, ModalPopup
   */
-
-  ELEMENT: _ConfigElement2.default,
-  ROW_CHECKBOX: _ConfigRowCheckBox2.default,
-  LOGOS: _ConfigLogos2.default
+  ELEMENT: _ConfigElement["default"],
+  ROW_CHECKBOX: _ConfigRowCheckBox["default"],
+  LOGOS: _ConfigLogos["default"]
 };
-
-exports.default = router;
+var _default = router;
+exports["default"] = _default;
 //# sourceMappingURL=RouterConfig.js.map

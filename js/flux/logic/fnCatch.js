@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fnCatch = undefined;
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Msg = require('../../constants/Msg');
+exports.__esModule = true;
+exports.fnCatch = void 0;
 
-var _Msg2 = _interopRequireDefault(_Msg);
+var _Msg = _interopRequireDefault(require("../../constants/Msg"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var M = _Msg2.default.Alert;
-
+var M = _Msg["default"].Alert;
 var C = {
   FETCH: 'fetch',
   CODE_429: '429'
@@ -21,7 +16,6 @@ var C = {
 var _addErrMsg = function _addErrMsg(option, msg) {
   var caption = msg.caption,
       descr = msg.descr;
-
   Object.assign(option, {
     alertCaption: caption,
     alertDescr: descr
@@ -31,7 +25,7 @@ var _addErrMsg = function _addErrMsg(option, msg) {
 var _crAlertDescr = function _crAlertDescr(error) {
   var errCaption = error.errCaption,
       _error$message = error.message,
-      message = _error$message === undefined ? '' : _error$message;
+      message = _error$message === void 0 ? '' : _error$message;
 
   if (error.errCaption) {
     return {
@@ -50,6 +44,7 @@ var _crAlertDescr = function _crAlertDescr(error) {
 
 var _addDfErrMsg = function _addDfErrMsg(option, error) {
   var _obj = _crAlertDescr(error);
+
   _addErrMsg(option, _obj);
 };
 
@@ -57,7 +52,7 @@ var _isMsgByCode = function _isMsgByCode(err, code) {
   return err.message.indexOf(code) !== -1;
 };
 
-var fnCatch = exports.fnCatch = function fnCatch(_ref) {
+var fnCatch = function fnCatch(_ref) {
   var error = _ref.error,
       option = _ref.option,
       onFailed = _ref.onFailed;
@@ -78,4 +73,6 @@ var fnCatch = exports.fnCatch = function fnCatch(_ref) {
     onFailed(option);
   }
 };
+
+exports.fnCatch = fnCatch;
 //# sourceMappingURL=fnCatch.js.map

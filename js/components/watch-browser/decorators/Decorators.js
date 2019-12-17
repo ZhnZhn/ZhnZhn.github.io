@@ -1,33 +1,24 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _withDnDStyle = require('./withDnDStyle');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _withDnDStyle2 = _interopRequireDefault(_withDnDStyle);
+var _withDnDStyle = _interopRequireDefault(require("./withDnDStyle"));
 
-var _withDnDGroup = require('./withDnDGroup');
+var _withDnDGroup = _interopRequireDefault(require("./withDnDGroup"));
 
-var _withDnDGroup2 = _interopRequireDefault(_withDnDGroup);
+var _withDnDList = _interopRequireDefault(require("./withDnDList"));
 
-var _withDnDList = require('./withDnDList');
-
-var _withDnDList2 = _interopRequireDefault(_withDnDList);
-
-var _withDnDItem = require('./withDnDItem');
-
-var _withDnDItem2 = _interopRequireDefault(_withDnDItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _withDnDItem = _interopRequireDefault(require("./withDnDItem"));
 
 var Decorators = {
-  withDnDStyle: _withDnDStyle2.default,
-  withDnDGroup: _withDnDGroup2.default,
-  withDnDList: _withDnDList2.default,
-  withDnDItem: _withDnDItem2.default
+  withDnDStyle: _withDnDStyle["default"],
+  withDnDGroup: _withDnDGroup["default"],
+  withDnDList: _withDnDList["default"],
+  withDnDItem: _withDnDItem["default"]
 };
-
-exports.default = Decorators;
+var _default = Decorators;
+exports["default"] = _default;
 //# sourceMappingURL=Decorators.js.map

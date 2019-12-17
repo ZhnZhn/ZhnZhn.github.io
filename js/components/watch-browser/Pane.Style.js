@@ -1,18 +1,16 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-   value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var STYLE = {
-   COMMAND_DIV: {
-      cursor: 'default',
-      float: 'right',
-      marginTop: '8px',
-      marginBottom: '10px',
-      marginRight: '4px'
-   }
+  COMMAND_DIV: {
+    cursor: 'default',
+    "float": 'right',
+    marginTop: '8px',
+    marginBottom: '10px',
+    marginRight: '4px'
+  }
 };
-
-exports.default = STYLE;
+var _default = STYLE;
+exports["default"] = _default;
 //# sourceMappingURL=Pane.Style.js.map

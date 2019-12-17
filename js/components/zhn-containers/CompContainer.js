@@ -1,96 +1,70 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require("babel-runtime/helpers/createClass");
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require("babel-runtime/helpers/possibleConstructorReturn");
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require("babel-runtime/helpers/inherits");
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp2;
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireWildcard(require("react"));
 
 //import PropTypes from 'prop-types';
-
 var CL = "hrz-container";
 
-var CompContainer = (_temp2 = _class = function (_Component) {
-  (0, _inherits3.default)(CompContainer, _Component);
+var CompContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(CompContainer, _Component);
 
   function CompContainer() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, CompContainer);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = CompContainer.__proto__ || Object.getPrototypeOf(CompContainer)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
       containers: []
-    }, _this._onStore = function (actionType, Comp) {
+    };
+
+    _this._onStore = function (actionType, Comp) {
       if (actionType === _this.props.addAction) {
         _this.setState(function (prevState) {
           prevState.containers.unshift(Comp);
           return prevState;
         });
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
-  }
-  /*
-  static propTypes = {
-    className: PropTypes.string,
-    store: PropTypes.shape({
-      listen: PropTypes.func
-    }),
-    addAction: PropTypes.string
-  }
-  */
+    };
 
+    return _this;
+  }
 
-  (0, _createClass3.default)(CompContainer, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: this.props.className },
-        this.state.containers
-      );
-    }
-  }]);
+  var _proto = CompContainer.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
+
+  _proto.render = function render() {
+    return _react["default"].createElement("div", {
+      className: this.props.className
+    }, this.state.containers);
+  };
+
   return CompContainer;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+CompContainer.defaultProps = {
   className: CL
-}, _temp2);
-exports.default = CompContainer;
+};
+var _default = CompContainer;
+exports["default"] = _default;
 //# sourceMappingURL=CompContainer.js.map

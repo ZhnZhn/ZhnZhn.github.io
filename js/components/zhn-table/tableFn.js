@@ -1,11 +1,10 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var _crThAriaLabel = function _crThAriaLabel(name, order) {
-  return name + ': activate to sort column ' + order;
+  return name + ": activate to sort column " + order;
 };
 
 var tableFn = {
@@ -13,8 +12,8 @@ var tableFn = {
     var S = _ref.S,
         v = _ref.v,
         isR = _ref.isR;
+    var style;
 
-    var style = void 0;
     if (isR) {
       if (Number.isNaN(v)) {
         style = S.NAN;
@@ -22,9 +21,9 @@ var tableFn = {
         style = v > 0 ? S.UP : S.DOWN;
       }
     }
+
     return style;
   },
-
   toFormatValue: function toFormatValue(_ref2) {
     var TOKEN_NAN = _ref2.TOKEN_NAN,
         h = _ref2.h,
@@ -34,12 +33,13 @@ var tableFn = {
     if (h.isR && Number.isNaN(v)) {
       return TOKEN_NAN;
     }
+
     if (h.isF && typeof fn === 'function') {
       return fn(v);
     }
+
     return v;
   },
-
   crAppearance: function crAppearance(_ref3) {
     var S = _ref3.S,
         C = _ref3.C,
@@ -47,10 +47,8 @@ var tableFn = {
         name = _ref3.name,
         sortBy = _ref3.sortBy,
         sortTo = _ref3.sortTo;
+    var style, ariaSort, ariaLabel;
 
-    var style = void 0,
-        ariaSort = void 0,
-        ariaLabel = void 0;
     if (pn === sortBy) {
       if (sortTo === C.UP) {
         style = S.TH_UP;
@@ -64,10 +62,14 @@ var tableFn = {
     } else {
       ariaLabel = _crThAriaLabel(name, C.ASC);
     }
-    return { style: style, ariaSort: ariaSort, ariaLabel: ariaLabel };
+
+    return {
+      style: style,
+      ariaSort: ariaSort,
+      ariaLabel: ariaLabel
+    };
   }
-
 };
-
-exports.default = tableFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-table\tableFn.js.map
+var _default = tableFn;
+exports["default"] = _default;
+//# sourceMappingURL=tableFn.js.map

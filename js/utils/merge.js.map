@@ -1,11 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../src/utils/merge.js"
- ],
- "file": "../../src/utils/merge.js",
- "names": [
-  "merge"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ,qBAAWA,KAAzB;;kBAEeA,K"
-}
+{"version":3,"sources":["../../src/utils/merge.js"],"names":["merge","Highcharts"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,KAAK,GAAGC,uBAAWD,KAAzB;eAEeA,K","sourcesContent":["import Highcharts from 'highcharts'\r\n\r\nconst merge = Highcharts.merge;\r\n\r\nexport default merge\r\n"],"file":"merge.js"}

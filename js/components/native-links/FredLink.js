@@ -1,25 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _react2 = _interopRequireDefault(_react);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _Link = require('./Link');
+var _react = _interopRequireWildcard(require("react"));
 
-var _Link2 = _interopRequireDefault(_Link);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Link = _interopRequireDefault(require("./Link"));
 
 var ROOT = 'https://fred.stlouisfed.org/';
 var C = {
-  URL_SEARCH: ROOT + 'search?st=',
-  URL_GRAPH: ROOT + 'series/'
+  URL_SEARCH: ROOT + "search?st=",
+  URL_GRAPH: ROOT + "series/"
 };
-
 var S = {
   DELIMETER: {
     display: 'inline-block',
@@ -28,39 +24,29 @@ var S = {
 };
 
 var Delimeter = function Delimeter() {
-  return _react2.default.createElement(
-    'span',
-    { style: S.DELIMETER },
-    '\xA0'
-  );
+  return _react["default"].createElement("span", {
+    style: S.DELIMETER
+  }, "\xA0");
 };
 
 var FredLink = function FredLink(_ref) {
   var _ref$item = _ref.item,
-      item = _ref$item === undefined ? {} : _ref$item;
+      item = _ref$item === void 0 ? {} : _ref$item;
   var _item$id = item.id,
-      id = _item$id === undefined ? '' : _item$id,
+      id = _item$id === void 0 ? '' : _item$id,
       article = item.article;
-
-  return _react2.default.createElement(
-    _react.Fragment,
-    null,
-    _react2.default.createElement(_Link2.default, {
-      caption: 'FRED Search',
-      href: C.URL_SEARCH + id
-    }),
-    _react2.default.createElement(Delimeter, null),
-    _react2.default.createElement(_Link2.default, {
-      caption: 'FRED Graph',
-      href: C.URL_GRAPH + id
-    }),
-    _react2.default.createElement(Delimeter, null),
-    article && _react2.default.createElement(_Link2.default, {
-      caption: 'FRED Article',
-      href: article
-    })
-  );
+  return _react["default"].createElement(_react.Fragment, null, _react["default"].createElement(_Link["default"], {
+    caption: "FRED Search",
+    href: C.URL_SEARCH + id
+  }), _react["default"].createElement(Delimeter, null), _react["default"].createElement(_Link["default"], {
+    caption: "FRED Graph",
+    href: C.URL_GRAPH + id
+  }), _react["default"].createElement(Delimeter, null), article && _react["default"].createElement(_Link["default"], {
+    caption: "FRED Article",
+    href: article
+  }));
 };
 
-exports.default = FredLink;
+var _default = FredLink;
+exports["default"] = _default;
 //# sourceMappingURL=FredLink.js.map

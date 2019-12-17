@@ -1,29 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AdapterFn = require('../AdapterFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _fnSelector = require('./fnSelector');
+var _fnSelector = _interopRequireDefault(require("./fnSelector"));
 
-var _fnSelector2 = _interopRequireDefault(_fnSelector);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crError = _AdapterFn2.default.crError,
-    crItemLink = _AdapterFn2.default.crItemLink,
-    ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    valueMoving = _AdapterFn2.default.valueMoving;
-var getPeriodAndValue = _fnSelector2.default.getPeriodAndValue,
-    getTitle = _fnSelector2.default.getTitle,
-    getSubtitle = _fnSelector2.default.getSubtitle,
-    getInexedAt = _fnSelector2.default.getInexedAt;
-
-
+var crError = _AdapterFn["default"].crError,
+    crItemLink = _AdapterFn["default"].crItemLink,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    valueMoving = _AdapterFn["default"].valueMoving;
+var getPeriodAndValue = _fnSelector["default"].getPeriodAndValue,
+    getTitle = _fnSelector["default"].getTitle,
+    getSubtitle = _fnSelector["default"].getSubtitle,
+    getInexedAt = _fnSelector["default"].getInexedAt;
 var C = {
   CHART_URL: 'https://db.nomics.world',
   SUBT_MAX: 60
@@ -32,21 +25,25 @@ var C = {
 var _isId = function _isId(id) {
   return id && id.indexOf('/') !== -1;
 };
+
 var _getId = function _getId(_ref) {
   var dfProvider = _ref.dfProvider,
       dfCode = _ref.dfCode,
       seriaId = _ref.seriaId;
-  return _isId(seriaId) ? seriaId : dfProvider + '/' + dfCode + '/' + seriaId;
+  return _isId(seriaId) ? seriaId : dfProvider + "/" + dfCode + "/" + seriaId;
 };
 
 var _crItemLink = crItemLink.bind(null, 'DB Nomics Chart');
+
 var _crUpdatedDate = function _crUpdatedDate(json) {
   var _date = getInexedAt(json).split('T')[0];
-  return _date ? '<p>Updated by DBnomics on ' + _date + '</p>' : '';
+  return _date ? "<p>Updated by DBnomics on " + _date + "</p>" : '';
 };
+
 var _crDescr = function _crDescr(json, option) {
   var _id = _getId(option);
-  return '<p>SeriaId: ' + _id + '</p>\n   ' + _crUpdatedDate(json) + '\n   ' + _crItemLink(C.CHART_URL + '/' + _id);
+
+  return "<p>SeriaId: " + _id + "</p>\n   " + _crUpdatedDate(json) + "\n   " + _crItemLink(C.CHART_URL + '/' + _id);
 };
 
 var _crZhConfig = function _crZhConfig(_ref2) {
@@ -61,6 +58,7 @@ var _crZhConfig = function _crZhConfig(_ref2) {
     dataSource: dataSource
   };
 };
+
 var _crInfo = function _crInfo(json, option) {
   return {
     name: getSubtitle(json),
@@ -79,13 +77,13 @@ var fnAdapter = {
         subtitle = _ref3.subtitle;
 
     var _ = getSubtitle(json),
-        _subtitle = _.length > C.SUBT_MAX ? (title || '') + ': ' + (subtitle || '') : _;
+        _subtitle = _.length > C.SUBT_MAX ? (title || '') + ": " + (subtitle || '') : _;
+
     return {
       title: getTitle(json),
       subtitle: _subtitle
     };
   },
-
   crData: function crData(json) {
     var data = [],
         _getPeriodAndValue = getPeriodAndValue(json),
@@ -99,7 +97,6 @@ var fnAdapter = {
     });
     return data;
   },
-
   crConfigOption: function crConfigOption(_ref4) {
     var json = _ref4.json,
         option = _ref4.option,
@@ -111,6 +108,6 @@ var fnAdapter = {
     };
   }
 };
-
-exports.default = fnAdapter;
+var _default = fnAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=fnAdapter.js.map

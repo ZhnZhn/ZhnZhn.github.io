@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _ItemOption = require('./ItemOption');
-
-var _ItemOption2 = _interopRequireDefault(_ItemOption);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ItemOption = _interopRequireDefault(require("./ItemOption"));
 
 var S = {
   TOPIC: {
@@ -26,18 +21,11 @@ var S = {
 
 var ItemTopicOption = function ItemTopicOption(props) {
   var item = props.item;
-
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(_ItemOption2.default, props),
-    _react2.default.createElement(
-      'div',
-      { style: S.TOPIC },
-      item.topic
-    )
-  );
+  return _react["default"].createElement("div", null, _react["default"].createElement(_ItemOption["default"], props), _react["default"].createElement("div", {
+    style: S.TOPIC
+  }, item.topic));
 };
 
-exports.default = ItemTopicOption;
+var _default = ItemTopicOption;
+exports["default"] = _default;
 //# sourceMappingURL=ItemTopicOption.js.map

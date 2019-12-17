@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-sparklines\\dataProcessing\\__tests__\\mean.test.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-sparklines\\dataProcessing\\__tests__\\mean.test.js",
- "sourceRoot": "",
- "names": [
-  "describe",
-  "test",
-  "expect",
-  "toBe"
- ],
- "mappings": ";;AAAA;;;;;;AAEA;;AAEAA,SAAS,MAAT,EAAiB,YAAM;AACrBC,OAAK,iCAAL,EAAwC,YAAM;AAC5CC,WAAO,oBAAK,CAAC,CAAD,CAAL,CAAP,EAAkBC,IAAlB,CAAuB,CAAvB;AACAD,WAAO,oBAAK,CAAC,CAAD,EAAI,CAAJ,CAAL,CAAP,EAAqBC,IAArB,CAA0B,GAA1B;AACAD,WAAO,oBAAK,CAAC,CAAD,EAAI,CAAJ,CAAL,CAAP,EAAqBC,IAArB,CAA0B,IAAE,CAA5B;AACAD,WAAO,oBAAK,CAAC,CAAD,EAAI,CAAJ,EAAO,CAAP,CAAL,CAAP,EAAwBC,IAAxB,CAA6B,CAA7B;AACD,GALD;AAMD,CAPD"
-}
+{"version":3,"sources":["../../../../../src/components/zhn-sparklines/dataProcessing/__tests__/mean.test.js"],"names":["describe","test","expect","toBe"],"mappings":";;;;AAAA;;AAEA;AAEAA,QAAQ,CAAC,MAAD,EAAS,YAAM;AACrBC,EAAAA,IAAI,CAAC,iCAAD,EAAoC,YAAM;AAC5CC,IAAAA,MAAM,CAAC,sBAAK,CAAC,CAAD,CAAL,CAAD,CAAN,CAAkBC,IAAlB,CAAuB,CAAvB;AACAD,IAAAA,MAAM,CAAC,sBAAK,CAAC,CAAD,EAAI,CAAJ,CAAL,CAAD,CAAN,CAAqBC,IAArB,CAA0B,GAA1B;AACAD,IAAAA,MAAM,CAAC,sBAAK,CAAC,CAAD,EAAI,CAAJ,CAAL,CAAD,CAAN,CAAqBC,IAArB,CAA0B,IAAE,CAA5B;AACAD,IAAAA,MAAM,CAAC,sBAAK,CAAC,CAAD,EAAI,CAAJ,EAAO,CAAP,CAAL,CAAD,CAAN,CAAwBC,IAAxB,CAA6B,CAA7B;AACD,GALG,CAAJ;AAMD,CAPO,CAAR","sourcesContent":["import mean from '../mean'\r\n\r\n//fork https://github.com/borisyankov/react-sparklines/blob/master/__tests__/mean.js\r\n\r\ndescribe('mean', () => {\r\n  test('should return average of values', () => {\r\n    expect(mean([0])).toBe(0)\r\n    expect(mean([0, 1])).toBe(0.5)\r\n    expect(mean([1, 2])).toBe(3/2)\r\n    expect(mean([0, 1, 2])).toBe(1)\r\n  })\r\n})\r\n"],"file":"mean.test.js"}

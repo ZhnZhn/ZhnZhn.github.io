@@ -1,23 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _FlatButton = require('./FlatButton');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var _FlatButton = _interopRequireDefault(require("./FlatButton"));
 
-var _ModalButton = require('./ModalButton');
-
-var _ModalButton2 = _interopRequireDefault(_ModalButton);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ModalButton = _interopRequireDefault(require("./ModalButton"));
 
 var ZhnM = {
-  FlatButton: _FlatButton2.default,
-  ModalButton: _ModalButton2.default
+  FlatButton: _FlatButton["default"],
+  ModalButton: _ModalButton["default"]
 };
-
-exports.default = ZhnM;
+var _default = ZhnM;
+exports["default"] = _default;
 //# sourceMappingURL=ZhnM.js.map

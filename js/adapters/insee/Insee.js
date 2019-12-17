@@ -1,20 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _InseeApi = require('./InseeApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _InseeApi2 = _interopRequireDefault(_InseeApi);
+var _InseeApi = _interopRequireDefault(require("./InseeApi"));
 
-var _InseeAdapter = require('./InseeAdapter');
+var _InseeAdapter = _interopRequireDefault(require("./InseeAdapter"));
 
-var _InseeAdapter2 = _interopRequireDefault(_InseeAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Insee = { api: _InseeApi2.default, adapter: _InseeAdapter2.default };
-
-exports.default = Insee;
+var Insee = {
+  api: _InseeApi["default"],
+  adapter: _InseeAdapter["default"]
+};
+var _default = Insee;
+exports["default"] = _default;
 //# sourceMappingURL=Insee.js.map

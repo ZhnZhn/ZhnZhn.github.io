@@ -1,73 +1,50 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _wrapExportChartLocal = require('./wrapExportChartLocal');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _wrapExportChartLocal2 = _interopRequireDefault(_wrapExportChartLocal);
+var _wrapExportChartLocal = _interopRequireDefault(require("./wrapExportChartLocal"));
 
-var _zhRemoveCategory = require('./zhRemoveCategory');
+var _zhRemoveCategory = _interopRequireDefault(require("./zhRemoveCategory"));
 
-var _zhRemoveCategory2 = _interopRequireDefault(_zhRemoveCategory);
+var _zhCaption = _interopRequireDefault(require("./zhCaption"));
 
-var _zhCaption = require('./zhCaption');
+var _zhAddSeriaToYAxis = _interopRequireDefault(require("./zhAddSeriaToYAxis"));
 
-var _zhCaption2 = _interopRequireDefault(_zhCaption);
+var _zhToggleSeria = _interopRequireDefault(require("./zhToggleSeria"));
 
-var _zhAddSeriaToYAxis = require('./zhAddSeriaToYAxis');
+var _zhTogglePlotLines = _interopRequireDefault(require("./zhTogglePlotLines"));
 
-var _zhAddSeriaToYAxis2 = _interopRequireDefault(_zhAddSeriaToYAxis);
+var _zhToggle2H = _interopRequireDefault(require("./zhToggle2H"));
 
-var _zhToggleSeria = require('./zhToggleSeria');
+var _zhEnableDataLabels = _interopRequireDefault(require("./zhEnableDataLabels"));
 
-var _zhToggleSeria2 = _interopRequireDefault(_zhToggleSeria);
+var _zhGetId = _interopRequireDefault(require("./zhGetId"));
 
-var _zhTogglePlotLines = require('./zhTogglePlotLines');
+var _zhGetFromToDates = _interopRequireDefault(require("./zhGetFromToDates"));
 
-var _zhTogglePlotLines2 = _interopRequireDefault(_zhTogglePlotLines);
-
-var _zhToggle2H = require('./zhToggle2H');
-
-var _zhToggle2H2 = _interopRequireDefault(_zhToggle2H);
-
-var _zhEnableDataLabels = require('./zhEnableDataLabels');
-
-var _zhEnableDataLabels2 = _interopRequireDefault(_zhEnableDataLabels);
-
-var _zhGetId = require('./zhGetId');
-
-var _zhGetId2 = _interopRequireDefault(_zhGetId);
-
-var _zhGetFromToDates = require('./zhGetFromToDates');
-
-var _zhGetFromToDates2 = _interopRequireDefault(_zhGetFromToDates);
-
-var _zhZoomX = require('./zhZoomX');
-
-var _zhZoomX2 = _interopRequireDefault(_zhZoomX);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _zhZoomX = _interopRequireDefault(require("./zhZoomX"));
 
 var HighchartsZhn = function HighchartsZhn(Highcharts) {
   var wrap = Highcharts.wrap,
       Chart = Highcharts.Chart;
-
-  (0, _wrapExportChartLocal2.default)(wrap, Chart);
-  (0, _zhCaption2.default)(Chart);
-  (0, _zhTogglePlotLines2.default)(Chart);
+  (0, _wrapExportChartLocal["default"])(wrap, Chart);
+  (0, _zhCaption["default"])(Chart);
+  (0, _zhTogglePlotLines["default"])(Chart);
   Object.assign(Chart.prototype, {
-    zhRemoveCategory: _zhRemoveCategory2.default,
-    zhAddSeriaToYAxis: _zhAddSeriaToYAxis2.default,
-    zhToggleSeria: _zhToggleSeria2.default,
-    zhToggle2H: _zhToggle2H2.default,
-    zhEnableDataLabels: _zhEnableDataLabels2.default,
-    zhGetId: _zhGetId2.default,
-    zhGetFromToDates: _zhGetFromToDates2.default,
-    zhZoomX: _zhZoomX2.default
+    zhRemoveCategory: _zhRemoveCategory["default"],
+    zhAddSeriaToYAxis: _zhAddSeriaToYAxis["default"],
+    zhToggleSeria: _zhToggleSeria["default"],
+    zhToggle2H: _zhToggle2H["default"],
+    zhEnableDataLabels: _zhEnableDataLabels["default"],
+    zhGetId: _zhGetId["default"],
+    zhGetFromToDates: _zhGetFromToDates["default"],
+    zhZoomX: _zhZoomX["default"]
   });
 };
 
-exports.default = HighchartsZhn;
+var _default = HighchartsZhn;
+exports["default"] = _default;
 //# sourceMappingURL=zhn-highcharts.js.map

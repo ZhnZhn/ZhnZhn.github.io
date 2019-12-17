@@ -1,40 +1,44 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var DF_CAPTION = 'EU';
 
-var createLoadOptions = function createLoadOptions() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
 
-  var loadId = props.loadId,
-      dataSource = props.dataSource,
-      _props$dfProps = props.dfProps,
-      dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
-      one = options.one,
-      _options$two = options.two,
-      two = _options$two === undefined ? {} : _options$two,
-      dialogOptions = options.dialogOptions,
-      _options$chartType = options.chartType,
-      chartType = _options$chartType === undefined ? {} : _options$chartType,
-      seriaColor = options.seriaColor,
-      date = options.date,
-      selectOptions = options.selectOptions,
+  if (options === void 0) {
+    options = {};
+  }
+
+  var _props = props,
+      loadId = _props.loadId,
+      dataSource = _props.dataSource,
+      _props$dfProps = _props.dfProps,
+      dfProps = _props$dfProps === void 0 ? {} : _props$dfProps,
+      _options = options,
+      one = _options.one,
+      _options$two = _options.two,
+      two = _options$two === void 0 ? {} : _options$two,
+      dialogOptions = _options.dialogOptions,
+      _options$chartType = _options.chartType,
+      chartType = _options$chartType === void 0 ? {} : _options$chartType,
+      seriaColor = _options.seriaColor,
+      date = _options.date,
+      selectOptions = _options.selectOptions,
       _seriaType = chartType.value,
       _zhCompType = chartType.compType,
       _oneV = one ? one.value : DF_CAPTION,
       _oneC = one ? one.caption : dfProps.dfSliceTitle || DF_CAPTION;
 
-  return (0, _extends3.default)({}, dfProps, dialogOptions, {
+  return (0, _extends2["default"])({}, dfProps, {}, dialogOptions, {
     itemMap: two,
     geo: _oneV,
     metric: two.value,
@@ -42,7 +46,7 @@ var createLoadOptions = function createLoadOptions() {
     itemCaption: _oneC,
     title: _oneC,
     subtitle: two.caption,
-    alertItemId: _oneC + ':' + two.caption,
+    alertItemId: _oneC + ":" + two.caption,
     alertGeo: _oneC,
     alertMetric: two.caption,
     seriaType: _seriaType,
@@ -55,5 +59,6 @@ var createLoadOptions = function createLoadOptions() {
   });
 };
 
-exports.default = createLoadOptions;
+var _default = createLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=eurostat2.js.map

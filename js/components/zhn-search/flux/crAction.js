@@ -1,60 +1,57 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _memoizeOne = require('memoize-one');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _memoizeOne2 = _interopRequireDefault(_memoizeOne);
+var _memoizeOne = _interopRequireDefault(require("memoize-one"));
 
-var _enumSearch = require('./enumSearch');
-
-var _enumSearch2 = _interopRequireDefault(_enumSearch);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _enumSearch = _interopRequireDefault(require("./enumSearch"));
 
 var crAction = function crAction(dispatch) {
   return {
     loading: function loading() {
       return dispatch({
-        type: _enumSearch2.default.LOADING
+        type: _enumSearch["default"].LOADING
       });
     },
     loadingFailed: function loadingFailed() {
       return dispatch({
-        type: _enumSearch2.default.LOADING_FAILED
+        type: _enumSearch["default"].LOADING_FAILED
       });
     },
     loaded: function loaded(options) {
       return dispatch({
-        type: _enumSearch2.default.LOADED, options: options
+        type: _enumSearch["default"].LOADED,
+        options: options
       });
     },
-
     setTicket: function setTicket(ticket) {
       return dispatch({
-        type: _enumSearch2.default.SET_TICKET, ticket: ticket
+        type: _enumSearch["default"].SET_TICKET,
+        ticket: ticket
       });
     },
-
     showOptions: function showOptions() {
       return dispatch({
-        type: _enumSearch2.default.SHOW_OPTIONS
+        type: _enumSearch["default"].SHOW_OPTIONS
       });
     },
     hideOptions: function hideOptions() {
       return dispatch({
-        type: _enumSearch2.default.HIDE_OPTIONS
+        type: _enumSearch["default"].HIDE_OPTIONS
       });
     },
     toggleOptions: function toggleOptions() {
       return dispatch({
-        type: _enumSearch2.default.TOGGLE_OPTIONS
+        type: _enumSearch["default"].TOGGLE_OPTIONS
       });
     }
   };
 };
 
-exports.default = (0, _memoizeOne2.default)(crAction);
+var _default = (0, _memoizeOne["default"])(crAction);
+
+exports["default"] = _default;
 //# sourceMappingURL=crAction.js.map

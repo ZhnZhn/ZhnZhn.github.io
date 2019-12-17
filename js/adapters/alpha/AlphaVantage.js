@@ -1,32 +1,32 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Api = require('./Api');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _Api2 = _interopRequireDefault(_Api);
+var _Api = _interopRequireDefault(require("./Api"));
 
-var _AlphaAdapter = require('./AlphaAdapter');
+var _AlphaAdapter = _interopRequireDefault(require("./AlphaAdapter"));
 
-var _AlphaAdapter2 = _interopRequireDefault(_AlphaAdapter);
+var _AlphaIntradayAdapter = _interopRequireDefault(require("./AlphaIntradayAdapter"));
 
-var _AlphaIntradayAdapter = require('./AlphaIntradayAdapter');
-
-var _AlphaIntradayAdapter2 = _interopRequireDefault(_AlphaIntradayAdapter);
-
-var _AlphaSectorAdapter = require('./AlphaSectorAdapter');
-
-var _AlphaSectorAdapter2 = _interopRequireDefault(_AlphaSectorAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _AlphaSectorAdapter = _interopRequireDefault(require("./AlphaSectorAdapter"));
 
 var AlphaVantage = {
-  Indicator: { api: _Api2.default, adapter: _AlphaAdapter2.default },
-  Intraday: { api: _Api2.default, adapter: _AlphaIntradayAdapter2.default },
-  Sector: { api: _Api2.default, adapter: _AlphaSectorAdapter2.default }
+  Indicator: {
+    api: _Api["default"],
+    adapter: _AlphaAdapter["default"]
+  },
+  Intraday: {
+    api: _Api["default"],
+    adapter: _AlphaIntradayAdapter["default"]
+  },
+  Sector: {
+    api: _Api["default"],
+    adapter: _AlphaSectorAdapter["default"]
+  }
 };
-
-exports.default = AlphaVantage;
+var _default = AlphaVantage;
+exports["default"] = _default;
 //# sourceMappingURL=AlphaVantage.js.map

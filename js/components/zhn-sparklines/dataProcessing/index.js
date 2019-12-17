@@ -1,33 +1,24 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.hm = undefined;
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _max = require('./max');
+exports.__esModule = true;
+exports.hm = void 0;
 
-var _max2 = _interopRequireDefault(_max);
+var _max = _interopRequireDefault(require("./max"));
 
-var _min = require('./min');
+var _min = _interopRequireDefault(require("./min"));
 
-var _min2 = _interopRequireDefault(_min);
+var _mean = _interopRequireDefault(require("./mean"));
 
-var _mean = require('./mean');
+var _median = _interopRequireDefault(require("./median"));
 
-var _mean2 = _interopRequireDefault(_mean);
-
-var _median = require('./median');
-
-var _median2 = _interopRequireDefault(_median);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var hm = exports.hm = {
-  max: _max2.default,
-  min: _min2.default,
-  mean: _mean2.default,
-  avg: _mean2.default,
-  median: _median2.default
+var hm = {
+  max: _max["default"],
+  min: _min["default"],
+  mean: _mean["default"],
+  avg: _mean["default"],
+  median: _median["default"]
 };
+exports.hm = hm;
 //# sourceMappingURL=index.js.map

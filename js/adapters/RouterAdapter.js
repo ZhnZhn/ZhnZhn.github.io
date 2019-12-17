@@ -1,118 +1,75 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _EuroStat = require('./eurostat/EuroStat');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _EuroStat2 = _interopRequireDefault(_EuroStat);
+var _EuroStat = _interopRequireDefault(require("./eurostat/EuroStat"));
 
-var _UnComtrade = require('./uncomtrade/UnComtrade');
+var _UnComtrade = _interopRequireDefault(require("./uncomtrade/UnComtrade"));
 
-var _UnComtrade2 = _interopRequireDefault(_UnComtrade);
+var _FaoStat = _interopRequireDefault(require("./faostat/FaoStat"));
 
-var _FaoStat = require('./faostat/FaoStat');
+var _WorldBank = _interopRequireDefault(require("./world-bank/WorldBank"));
 
-var _FaoStat2 = _interopRequireDefault(_FaoStat);
+var _StatNorway = _interopRequireDefault(require("./stat-norway/StatNorway"));
 
-var _WorldBank = require('./world-bank/WorldBank');
+var _StatSweden = _interopRequireDefault(require("./stat-sweden/StatSweden"));
 
-var _WorldBank2 = _interopRequireDefault(_WorldBank);
+var _StatFinland = _interopRequireDefault(require("./stat-finland/StatFinland"));
 
-var _StatNorway = require('./stat-norway/StatNorway');
+var _AlphaVantage = _interopRequireDefault(require("./alpha/AlphaVantage"));
 
-var _StatNorway2 = _interopRequireDefault(_StatNorway);
+var _Barchart = _interopRequireDefault(require("./barchart/Barchart"));
 
-var _StatSweden = require('./stat-sweden/StatSweden');
+var _Iex = _interopRequireDefault(require("./iex/Iex"));
 
-var _StatSweden2 = _interopRequireDefault(_StatSweden);
+var _Wtd = _interopRequireDefault(require("./wtd/Wtd"));
 
-var _StatFinland = require('./stat-finland/StatFinland');
+var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
 
-var _StatFinland2 = _interopRequireDefault(_StatFinland);
+var _Insee = _interopRequireDefault(require("./insee/Insee"));
 
-var _AlphaVantage = require('./alpha/AlphaVantage');
+var _Bea = _interopRequireDefault(require("./bea/Bea"));
 
-var _AlphaVantage2 = _interopRequireDefault(_AlphaVantage);
+var _Bls = _interopRequireDefault(require("./bls/Bls"));
 
-var _Barchart = require('./barchart/Barchart');
+var _Eia = _interopRequireDefault(require("./eia/Eia"));
 
-var _Barchart2 = _interopRequireDefault(_Barchart);
+var _Intrinio = _interopRequireDefault(require("./intrinio/Intrinio"));
 
-var _Iex = require('./iex/Iex');
+var _Quandl = _interopRequireDefault(require("./quandl/Quandl"));
 
-var _Iex2 = _interopRequireDefault(_Iex);
+var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
 
-var _Wtd = require('./wtd/Wtd');
+var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 
-var _Wtd2 = _interopRequireDefault(_Wtd);
-
-var _Fmp = require('./fmp/Fmp');
-
-var _Fmp2 = _interopRequireDefault(_Fmp);
-
-var _Insee = require('./insee/Insee');
-
-var _Insee2 = _interopRequireDefault(_Insee);
-
-var _Bea = require('./bea/Bea');
-
-var _Bea2 = _interopRequireDefault(_Bea);
-
-var _Bls = require('./bls/Bls');
-
-var _Bls2 = _interopRequireDefault(_Bls);
-
-var _Eia = require('./eia/Eia');
-
-var _Eia2 = _interopRequireDefault(_Eia);
-
-var _Intrinio = require('./intrinio/Intrinio');
-
-var _Intrinio2 = _interopRequireDefault(_Intrinio);
-
-var _Quandl = require('./quandl/Quandl');
-
-var _Quandl2 = _interopRequireDefault(_Quandl);
-
-var _DbNomics = require('./db-nomics/DbNomics');
-
-var _DbNomics2 = _interopRequireDefault(_DbNomics);
-
-var _Crc = require('./crypto-compare/Crc');
-
-var _Crc2 = _interopRequireDefault(_Crc);
-
-var _Cmc = require('./coin-market-cap/Cmc');
-
-var _Cmc2 = _interopRequireDefault(_Cmc);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Cmc = _interopRequireDefault(require("./coin-market-cap/Cmc"));
 
 var RouterAdapter = {
-  Quandl: _Quandl2.default,
-  DbNomics: _DbNomics2.default,
-  EuroStat: _EuroStat2.default,
-  UnComtrade: _UnComtrade2.default,
-  FaoStat: _FaoStat2.default,
-  WorldBank: _WorldBank2.default,
-  StatNorway: _StatNorway2.default,
-  StatSweden: _StatSweden2.default,
-  StatFinland: _StatFinland2.default,
-  AlphaVantage: _AlphaVantage2.default,
-  Barchart: _Barchart2.default,
-  Iex: _Iex2.default,
-  Wtd: _Wtd2.default,
-  Fmp: _Fmp2.default,
-  Insee: _Insee2.default,
-  Bea: _Bea2.default,
-  Bls: _Bls2.default,
-  Eia: _Eia2.default,
-  Intrinio: _Intrinio2.default,
-  Crc: _Crc2.default,
-  Cmc: _Cmc2.default
+  Quandl: _Quandl["default"],
+  DbNomics: _DbNomics["default"],
+  EuroStat: _EuroStat["default"],
+  UnComtrade: _UnComtrade["default"],
+  FaoStat: _FaoStat["default"],
+  WorldBank: _WorldBank["default"],
+  StatNorway: _StatNorway["default"],
+  StatSweden: _StatSweden["default"],
+  StatFinland: _StatFinland["default"],
+  AlphaVantage: _AlphaVantage["default"],
+  Barchart: _Barchart["default"],
+  Iex: _Iex["default"],
+  Wtd: _Wtd["default"],
+  Fmp: _Fmp["default"],
+  Insee: _Insee["default"],
+  Bea: _Bea["default"],
+  Bls: _Bls["default"],
+  Eia: _Eia["default"],
+  Intrinio: _Intrinio["default"],
+  Crc: _Crc["default"],
+  Cmc: _Cmc["default"]
 };
-
-exports.default = RouterAdapter;
+var _default = RouterAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=RouterAdapter.js.map

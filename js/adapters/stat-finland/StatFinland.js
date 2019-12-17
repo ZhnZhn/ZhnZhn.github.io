@@ -1,26 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ApiTable = require('./ApiTable');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ApiTable2 = _interopRequireDefault(_ApiTable);
+var _ApiTable = _interopRequireDefault(require("./ApiTable"));
 
-var _StatNorwayAdapter = require('../stat-norway/StatNorwayAdapter');
-
-var _StatNorwayAdapter2 = _interopRequireDefault(_StatNorwayAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _StatNorwayAdapter = _interopRequireDefault(require("../stat-norway/StatNorwayAdapter"));
 
 var StatFinland = {
   Table: {
-    api: _ApiTable2.default,
-    optionFetch: _ApiTable2.default.crOptionFetch,
-    adapter: _StatNorwayAdapter2.default
+    api: _ApiTable["default"],
+    optionFetch: _ApiTable["default"].crOptionFetch,
+    adapter: _StatNorwayAdapter["default"]
   }
 };
-
-exports.default = StatFinland;
+var _default = StatFinland;
+exports["default"] = _default;
 //# sourceMappingURL=StatFinland.js.map

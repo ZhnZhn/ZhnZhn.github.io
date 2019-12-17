@@ -1,34 +1,28 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var S = {
   BT: {
     color: '#1b2836'
   }
-};
-
-//for light
+}; //for light
 //0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.3)
 
 var styleConfig = {
   themeName: void 0,
   style: void 0,
-
   createStyle: function createStyle(CSS_RULE) {
-    return (0, _extends3.default)({}, S, {
-      ROOT: (0, _extends3.default)({}, CSS_RULE.BG)
+    return (0, _extends2["default"])({}, S, {
+      ROOT: (0, _extends2["default"])({}, CSS_RULE.BG)
     });
   }
 };
-
-exports.default = styleConfig;
+var _default = styleConfig;
+exports["default"] = _default;
 //# sourceMappingURL=ConfigHeaderBar.js.map

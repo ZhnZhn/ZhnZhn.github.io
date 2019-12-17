@@ -1,28 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _crUrlN = require('./crUrlN');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _crUrlN2 = _interopRequireDefault(_crUrlN);
+var _crUrlN = _interopRequireDefault(require("./crUrlN"));
 
-var _crUrlWithParams = require('./crUrlWithParams');
+var _crUrlWithParams = _interopRequireDefault(require("./crUrlWithParams"));
 
-var _crUrlWithParams2 = _interopRequireDefault(_crUrlWithParams);
-
-var _crUrl = require('./crUrl');
-
-var _crUrl2 = _interopRequireDefault(_crUrl);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _crUrl = _interopRequireDefault(require("./crUrl"));
 
 var api = {
-  crUrlN: _crUrlN2.default,
-  crUrlWithParams: _crUrlWithParams2.default,
-  crUrl: _crUrl2.default
+  crUrlN: _crUrlN["default"],
+  crUrlWithParams: _crUrlWithParams["default"],
+  crUrl: _crUrl["default"]
 };
-
-exports.default = api;
+var _default = api;
+exports["default"] = _default;
 //# sourceMappingURL=api.js.map

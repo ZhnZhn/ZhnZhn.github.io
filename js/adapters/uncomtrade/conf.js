@@ -1,23 +1,16 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var C = {
   MAX_SHOW: 6,
-
   WORLD: 'World',
   ALL: 'all',
-
   NET_WEIGHT: 'NetWeight',
-
   DESCR_EMPTY: 'Dataset is empty.',
-
   MM_DD: '-12-31',
   AVG_PRICE: 'avgPrice',
   WORLD_COLOR: '#7cb5ec',
-
   CHART: {
     spacingTop: 24,
     marginTop: 42,
@@ -27,7 +20,8 @@ var C = {
     type: 'spline'
   },
   SPLINE_NOT_VISIBLE: {
-    type: 'spline', visible: false
+    type: 'spline',
+    visible: false
   },
   X_AXIS: {
     type: 'category',
@@ -55,8 +49,7 @@ var C = {
       x: 3
     }
   }
-
 };
-
-exports.default = C;
+var _default = C;
+exports["default"] = _default;
 //# sourceMappingURL=conf.js.map

@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/hoc/withTheme.js"
- ],
- "file": "../../../src/components/hoc/withTheme.js",
- "names": [
-  "withTheme",
-  "props",
-  "theme"
- ],
- "mappings": ";;;;;;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,YAAY,SAAZA,SAAY;AAAA,SAAW;AAAA,WAC3B;AAAC,4BAAD,CAAc,QAAd;AAAA;AACI;AAAA,eAAS,8BAAC,OAAD,6BAAaC,KAAb,IAAoB,OAAOC,KAA3B,IAAT;AAAA;AADJ,KAD2B;AAAA,GAAX;AAAA,CAAlB;;kBAMeF,S"
-}
+{"version":3,"sources":["../../../src/components/hoc/withTheme.jsx"],"names":["withTheme","Wrapper","props","theme"],"mappings":";;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAAAC,OAAO;AAAA,SAAI,UAAAC,KAAK;AAAA,WAChC,gCAAC,wBAAD,CAAc,QAAd,QACI,UAAAC,KAAK;AAAA,aAAI,gCAAC,OAAD,gCAAaD,KAAb;AAAoB,QAAA,KAAK,EAAEC;AAA3B,SAAJ;AAAA,KADT,CADgC;AAAA,GAAT;AAAA,CAAzB;;eAMeH,S","sourcesContent":["import React from 'react'\r\nimport ThemeContext from './ThemeContext'\r\n\r\nconst withTheme = Wrapper => props => (\r\n  <ThemeContext.Consumer>\r\n    { theme => <Wrapper {...props} theme={theme} /> }\r\n  </ThemeContext.Consumer>\r\n);\r\n\r\nexport default withTheme\r\n"],"file":"withTheme.js"}

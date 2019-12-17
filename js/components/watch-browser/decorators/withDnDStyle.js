@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var BORDER = 'border' // dragStart
 ,
     BORDER_BOTTOM = 'border-bottom' // backup
@@ -13,22 +11,17 @@ var BORDER = 'border' // dragStart
 ,
     ENTER_BORDER_LEFT_STYLE = "4px solid green",
     ENTER_BORDER_LEFT_STYLE_DENY = "4px solid red";
-
-var sourcePermissions = void 0,
-    nodeDragTarget = void 0,
-    borderBottom = void 0,
-    borderLeftEnter = void 0;
+var sourcePermissions, nodeDragTarget, borderBottom, borderLeftEnter;
 
 var dragStartWithDnDStyle = function dragStartWithDnDStyle(ev, permissions) {
   ev.persist();
   nodeDragTarget = ev.currentTarget;
-
   var style = ev.currentTarget.style;
-  borderBottom = style.getPropertyValue(BORDER_BOTTOM);
-  //style.setProperty(BORDER, START_BORDER_STYLE);
+  borderBottom = style.getPropertyValue(BORDER_BOTTOM); //style.setProperty(BORDER, START_BORDER_STYLE);
 
   sourcePermissions = permissions;
 };
+
 var dropWithDnDStyle = function dropWithDnDStyle(ev) {
   var styleTarget = nodeDragTarget.style,
       styleSource = ev.currentTarget.style;
@@ -36,6 +29,7 @@ var dropWithDnDStyle = function dropWithDnDStyle(ev) {
   styleTarget.removeProperty(BORDER);
   styleTarget.setProperty(BORDER_BOTTOM, borderBottom);
 };
+
 var dragEnterWithDnDStyle = function dragEnterWithDnDStyle(ev, sourceType) {
   var style = ev.currentTarget.style;
   borderLeftEnter = style.getPropertyValue(BORDER_LEFT);
@@ -46,6 +40,7 @@ var dragEnterWithDnDStyle = function dragEnterWithDnDStyle(ev, sourceType) {
     style.setProperty(BORDER_LEFT, ENTER_BORDER_LEFT_STYLE_DENY);
   }
 };
+
 var dragLeaveWithDnDStyle = function dragLeaveWithDnDStyle(ev) {
   var style = ev.currentTarget.style;
   style.removeProperty(BORDER_LEFT);
@@ -61,5 +56,6 @@ var withDnDStyle = function withDnDStyle(target) {
   });
 };
 
-exports.default = withDnDStyle;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDStyle.js.map
+var _default = withDnDStyle;
+exports["default"] = _default;
+//# sourceMappingURL=withDnDStyle.js.map

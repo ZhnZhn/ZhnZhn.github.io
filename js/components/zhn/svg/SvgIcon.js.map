@@ -1,16 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/zhn/svg/SvgIcon.js"
- ],
- "file": "../../../../src/components/zhn/svg/SvgIcon.js",
- "names": [
-  "SvgIcon",
-  "color",
-  "size",
-  "children",
-  "restProps",
-  "defaultProps"
- ],
- "mappings": ";;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,UAAU,SAAVA,OAAU;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,IAAV,QAAUA,IAAV;AAAA,MAAgBC,QAAhB,QAAgBA,QAAhB;AAAA,MAA6BC,SAA7B;AAAA,SACZ;AAAA;AAAA;AACE,aAAM,4BADR;AAEE,aAAOF,IAFT;AAGE,cAAQA,IAHV;AAIE,eAAQ,WAJV;AAKE,YAAK,MALP;AAME,cAAQD,KANV;AAOE,mBAAY,GAPd;AAQE,qBAAc,OARhB;AASE,sBAAe;AATjB,OAUMG,SAVN;AAYGD;AAZH,GADY;AAAA,CAAhB;;AAkBAH,QAAQK,YAAR,GAAuB;AACrBJ,SAAO,cADc;AAErBC,QAAM;AAFe,CAAvB;;kBAKeF,O"
-}
+{"version":3,"sources":["../../../../src/components/zhn/svg/SvgIcon.jsx"],"names":["SvgIcon","color","size","children","restProps","defaultProps"],"mappings":";;;;;;;;;;;AAAA;;AAEA,IAAMA,OAAO,GAAG,SAAVA,OAAU;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,IAAV,QAAUA,IAAV;AAAA,MAAgBC,QAAhB,QAAgBA,QAAhB;AAAA,MAA6BC,SAA7B;AAAA,SACZ;AACE,IAAA,KAAK,EAAC,4BADR;AAEE,IAAA,KAAK,EAAEF,IAFT;AAGE,IAAA,MAAM,EAAEA,IAHV;AAIE,IAAA,OAAO,EAAC,WAJV;AAKE,IAAA,IAAI,EAAC,MALP;AAME,IAAA,MAAM,EAAED,KANV;AAOE,IAAA,WAAW,EAAC,GAPd;AAQE,IAAA,aAAa,EAAC,OARhB;AASE,IAAA,cAAc,EAAC;AATjB,KAUMG,SAVN,GAYGD,QAZH,CADY;AAAA,CAAhB;;AAkBAH,OAAO,CAACK,YAAR,GAAuB;AACrBJ,EAAAA,KAAK,EAAE,cADc;AAErBC,EAAAA,IAAI,EAAE;AAFe,CAAvB;eAKeF,O","sourcesContent":["import React from 'react'\r\n\r\nconst SvgIcon = ({ color, size, children, ...restProps }) => (\r\n    <svg\r\n      xmlns=\"http://www.w3.org/2000/svg\"\r\n      width={size}\r\n      height={size}\r\n      viewBox=\"0 0 24 24\"\r\n      fill=\"none\"\r\n      stroke={color}\r\n      strokeWidth=\"2\"\r\n      strokeLinecap=\"round\"\r\n      strokeLinejoin=\"round\"\r\n      {...restProps}\r\n    >\r\n      {children}\r\n    </svg>\r\n);\r\n\r\n\r\nSvgIcon.defaultProps = {\r\n  color: 'currentColor',\r\n  size: '24',\r\n};\r\n\r\nexport default SvgIcon\r\n"],"file":"SvgIcon.js"}

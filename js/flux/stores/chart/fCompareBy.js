@@ -1,16 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _big = require('big.js');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _big2 = _interopRequireDefault(_big);
+var _big = _interopRequireDefault(require("big.js"));
 
-var _Type = require('../../../constants/Type');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Type = require("../../../constants/Type");
 
 var MIN_STR = String(Number.MIN_SAFE_INTEGER);
 var ABS_PROP = 'Abs';
@@ -20,7 +17,7 @@ var _getValueMoving = function _getValueMoving(item) {
 };
 
 var _crBigForValue = function _crBigForValue(item, propName) {
-  return (0, _big2.default)(_getValueMoving(item)[propName] || MIN_STR);
+  return (0, _big["default"])(_getValueMoving(item)[propName] || MIN_STR);
 };
 
 var _crBigForAbsValue = function _crBigForAbsValue(item, propName) {
@@ -33,6 +30,7 @@ var _crBigForAbsValue = function _crBigForAbsValue(item, propName) {
 
 var fCompareBy = function fCompareBy(propName) {
   var _crBig = propName.indexOf(ABS_PROP) !== -1 ? _crBigForAbsValue : _crBigForValue;
+
   return function (aC, bC) {
     var a = _crBig(aC, propName),
         b = _crBig(bC, propName);
@@ -43,5 +41,6 @@ var fCompareBy = function fCompareBy(propName) {
   };
 };
 
-exports.default = fCompareBy;
+var _default = fCompareBy;
+exports["default"] = _default;
 //# sourceMappingURL=fCompareBy.js.map

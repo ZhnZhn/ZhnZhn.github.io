@@ -1,24 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _fnAdapter = require('./fnAdapter');
-
-var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var getCaption = _fnAdapter2.default.getCaption,
-    getValue = _fnAdapter2.default.getValue,
-    crError = _fnAdapter2.default.crError;
-
-
+var getCaption = _fnAdapter["default"].getCaption,
+    getValue = _fnAdapter["default"].getValue,
+    crError = _fnAdapter["default"].crError;
 var C = {
   URI: 'https://financialmodelingprep.com/api/v3',
   ERR_EMPTY: 'Response is empty'
@@ -27,25 +18,25 @@ var C = {
 var _configOption = function _configOption(option) {
   var dfT = option.dfT,
       _option$items = option.items,
-      items = _option$items === undefined ? [] : _option$items,
+      items = _option$items === void 0 ? [] : _option$items,
       dataSource = option.dataSource,
       _option$conf = option.conf,
-      conf = _option$conf === undefined ? {} : _option$conf,
+      conf = _option$conf === void 0 ? {} : _option$conf,
       _conf$chartContainerC = conf.chartContainerCaption,
-      chartContainerCaption = _conf$chartContainerC === undefined ? '' : _conf$chartContainerC,
-      _items = (0, _slicedToArray3.default)(items, 3),
-      it1 = _items[0],
-      it2 = _items[1],
-      it3 = _items[2],
+      chartContainerCaption = _conf$chartContainerC === void 0 ? '' : _conf$chartContainerC,
+      it1 = items[0],
+      it2 = items[1],
+      it3 = items[2],
       _symbol = getValue(it1),
       _period = getValue(it3),
       _propName = getCaption(it2),
-      _query = _period ? '?period=' + _period : '',
-      _itemUrl = C.URI + '/' + dfT + '/' + _symbol + _query;
+      _query = _period ? "?period=" + _period : '',
+      _itemUrl = C.URI + "/" + dfT + "/" + _symbol + _query;
 
   Object.assign(option, {
     _itemUrl: _itemUrl,
-    _symbol: _symbol, _period: _period,
+    _symbol: _symbol,
+    _period: _period,
     _propName: _propName,
     dataSource: dataSource || chartContainerCaption
   });
@@ -54,6 +45,7 @@ var _configOption = function _configOption(option) {
 var FmpApi = {
   getRequestUrl: function getRequestUrl(option) {
     _configOption(option);
+
     return option._itemUrl;
   },
   checkResponse: function checkResponse(json, options) {
@@ -66,9 +58,10 @@ var FmpApi = {
       json._values = _values;
       return true;
     }
+
     throw crError(_symbol, json.Error || C.ERR_EMPTY);
   }
 };
-
-exports.default = FmpApi;
+var _default = FmpApi;
+exports["default"] = _default;
 //# sourceMappingURL=FmpApi.js.map

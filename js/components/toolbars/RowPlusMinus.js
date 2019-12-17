@@ -1,22 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
-
-var _A = require('../zhn/A');
-
-var _A2 = _interopRequireDefault(_A);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _A = _interopRequireDefault(require("../zhn/A"));
 
 var S = {
   CAPTION: {
@@ -34,17 +27,15 @@ var RowPlusMinus = function RowPlusMinus(_ref) {
       caption = _ref.caption,
       onMinus = _ref.onMinus,
       onPlus = _ref.onPlus;
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      'span',
-      { style: (0, _extends3.default)({}, S.CAPTION, styleCaption) },
-      caption
-    ),
-    is ? _react2.default.createElement(_A2.default.SvgMinus, { onClick: onMinus }) : _react2.default.createElement(_A2.default.SvgPlus, { onClick: onPlus })
-  );
+  return _react["default"].createElement("div", null, _react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, S.CAPTION, {}, styleCaption)
+  }, caption), is ? _react["default"].createElement(_A["default"].SvgMinus, {
+    onClick: onMinus
+  }) : _react["default"].createElement(_A["default"].SvgPlus, {
+    onClick: onPlus
+  }));
 };
 
-exports.default = RowPlusMinus;
+var _default = RowPlusMinus;
+exports["default"] = _default;
 //# sourceMappingURL=RowPlusMinus.js.map

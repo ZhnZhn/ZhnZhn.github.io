@@ -1,26 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _highcharts = require('highcharts');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _highcharts2 = _interopRequireDefault(_highcharts);
+var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var _handleMouseOver = require('./handleMouseOver');
+var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
-var _handleMouseOver2 = _interopRequireDefault(_handleMouseOver);
+var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var _Color = require('../constants/Color');
-
-var _Color2 = _interopRequireDefault(_Color);
-
-var _conf = require('./conf');
-
-var _conf2 = _interopRequireDefault(_conf);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _conf = _interopRequireDefault(require("./conf"));
 
 var ChartTheme = {
   credits: {
@@ -33,29 +24,28 @@ var ChartTheme = {
     },
     style: {
       fontSize: '11px',
-      color: _conf2.default.CREDITS_COLOR,
-      fill: _conf2.default.CREDITS_COLOR,
+      color: _conf["default"].CREDITS_COLOR,
+      fill: _conf["default"].CREDITS_COLOR,
       textDecoration: 'underline'
     }
   },
   chart: {
     alignTicks: false,
-    height: _conf2.default.HEIGHT,
-    spacingTop: _conf2.default.THEME_SPACING_TOP,
-    spacingBottom: _conf2.default.SPACING_BOTTOM,
-    marginRight: _conf2.default.MARGIN_RIGHT,
+    height: _conf["default"].HEIGHT,
+    spacingTop: _conf["default"].THEME_SPACING_TOP,
+    spacingBottom: _conf["default"].SPACING_BOTTOM,
+    marginRight: _conf["default"].MARGIN_RIGHT,
     plotBackgroundColor: 'transparent',
     backgroundColor: 'transparent',
     reflow: false,
-
     panning: true,
     panKey: 'shift',
-
     events: {
       load: function load() {
-        this.zhTooltip = new _highcharts2.default.Tooltip(this, this.options.tooltip);
+        this.zhTooltip = new _highcharts["default"].Tooltip(this, this.options.tooltip);
+
         this.credits.element.onclick = function () {
-          window.open(_conf2.default.CREDITS_URL, '_blank');
+          window.open(_conf["default"].CREDITS_URL, '_blank');
         };
       }
     }
@@ -75,8 +65,8 @@ var ChartTheme = {
     fallbackToExportServer: false,
     chartOptions: {
       chart: {
-        plotBackgroundColor: _Color2.default.PLOT_PRINT,
-        backgroundColor: _Color2.default.CHART_PRINT
+        plotBackgroundColor: _Color["default"].PLOT_PRINT,
+        backgroundColor: _Color["default"].CHART_PRINT
       },
       title: {
         x: 0,
@@ -88,21 +78,21 @@ var ChartTheme = {
       },
       plotOptions: {
         area: {
-          fillColor: _Color2.default.AREA_FILL_PRINT
+          fillColor: _Color["default"].AREA_FILL_PRINT
         },
         arearange: {
-          fillColor: _Color2.default.AREA_FILL_PRINT
+          fillColor: _Color["default"].AREA_FILL_PRINT
         }
       },
       xAxis: {
         lineWidth: 2,
-        lineColor: _Color2.default.LINE_PRINT,
-        gridLineColor: _Color2.default.GRID_LINE_PRINT
+        lineColor: _Color["default"].LINE_PRINT,
+        gridLineColor: _Color["default"].GRID_LINE_PRINT
       },
       yAxis: {
         lineWidth: 2,
-        lineColor: _Color2.default.LINE_PRINT,
-        gridLineColor: _Color2.default.GRID_LINE_PRINT
+        lineColor: _Color["default"].LINE_PRINT,
+        gridLineColor: _Color["default"].GRID_LINE_PRINT
       },
       labels: {
         items: [{
@@ -110,7 +100,7 @@ var ChartTheme = {
           style: {
             left: '0px',
             top: '-70px',
-            color: _Color2.default.LABEL_LINK,
+            color: _Color["default"].LABEL_LINK,
             'font-size': '9px'
           }
         }]
@@ -127,11 +117,11 @@ var ChartTheme = {
         states: {
           hover: {
             'stroke-width': 2,
-            stroke: _Color2.default.HOVER
+            stroke: _Color["default"].HOVER
           },
           select: {
             'stroke-width': 3,
-            stroke: _Color2.default.HOVER
+            stroke: _Color["default"].HOVER
           }
         }
       }
@@ -139,40 +129,45 @@ var ChartTheme = {
     menuItemStyle: {
       'font-size': '16px',
       'font-weight': 'bold',
-      color: _Color2.default.ITEM,
+      color: _Color["default"].ITEM,
       'line-height': '1.6',
       cursor: 'pointer'
     },
     menuItemHoverStyle: {
-      color: _Color2.default.HOVER,
-      background: _Color2.default.BG_ITEM_HOVER
+      color: _Color["default"].HOVER,
+      background: _Color["default"].BG_ITEM_HOVER
     },
     menuStyle: {
       position: 'relative',
       top: '8px',
       border: '2px solid',
-      'border-color': _Color2.default.BG_TITLE,
+      'border-color': _Color["default"].BG_TITLE,
       'border-radius': '5px',
       'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-      background: _Color2.default.CHART
+      background: _Color["default"].CHART
     }
   },
   plotOptions: {
     area: {
       fillColor: {
-        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-        stops: [[0, _Color2.default.PLOT_G1], [1, _Color2.default.PLOT_G2]]
+        linearGradient: {
+          x1: 0,
+          x2: 0,
+          y1: 0,
+          y2: 1
+        },
+        stops: [[0, _Color["default"].PLOT_G1], [1, _Color["default"].PLOT_G2]]
       },
       point: {
         events: {
-          mouseOver: _handleMouseOver2.default
+          mouseOver: _handleMouseOver["default"]
         }
       }
     },
     spline: {
       point: {
         events: {
-          mouseOver: _handleMouseOver2.default
+          mouseOver: _handleMouseOver["default"]
         }
       }
     },
@@ -196,26 +191,22 @@ var ChartTheme = {
           }
         }
       },
-
       states: {
         hover: {
           //lineWidthPlus: 1,
           halo: {
             opacity: 0.35,
             //opacity : 0.05,
-            size: 16
-            //size : 2
+            size: 16 //size : 2
+
           }
         }
       },
-
       stickyTracking: false,
       events: {
         click: function click(event) {
           var tooltip = this.chart.zhTooltip;
-
           tooltip.options.enabled = true;
-
           tooltip.hide(false);
           tooltip.refresh(event.point, event);
           tooltip.options.enabled = false;
@@ -223,7 +214,7 @@ var ChartTheme = {
       }
     },
     pie: {
-      colors: _conf2.default.fMonoPieColors()
+      colors: _conf["default"].fMonoPieColors()
     }
   },
   tooltip: {
@@ -233,49 +224,47 @@ var ChartTheme = {
     hideDelay: 100,
     followPointer: false,
     shared: false,
-
-    backgroundColor: _Color2.default.TOOLTIP,
+    backgroundColor: _Color["default"].TOOLTIP,
     borderWidth: 2,
     borderRadius: 10,
-
     headerFormat: '<span style="font-weight:bold;font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
     pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
   },
   xAxis: {
-    lineColor: _Color2.default.X_LINE,
+    lineColor: _Color["default"].X_LINE,
     lineWidth: 3,
-    tickColor: _Color2.default.X_TICK,
+    tickColor: _Color["default"].X_TICK,
     tickWidth: 3,
     tickLenght: 5,
-    gridLineColor: _Color2.default.X_GRID_LINE,
+    gridLineColor: _Color["default"].X_GRID_LINE,
     gridLineDashStyle: "Dot",
     //gridLineDashStyle: "ShortDashDotDot",
     gridLineWidth: 1,
     labels: {
       style: {
-        color: _Color2.default.X_LABEL,
+        color: _Color["default"].X_LABEL,
         fontWeight: "bold",
         fontSize: "15px"
       }
     }
   },
   yAxis: {
-    lineColor: _Color2.default.Y_LINE,
+    lineColor: _Color["default"].Y_LINE,
     lineWidth: 3,
-    tickColor: _Color2.default.Y_TICK,
+    tickColor: _Color["default"].Y_TICK,
     tickWidth: 3,
     tickLenght: 5,
-    gridLineColor: _Color2.default.Y_GRID_LINE,
+    gridLineColor: _Color["default"].Y_GRID_LINE,
     gridLineDashStyle: "Dot",
     labels: {
       style: {
-        color: _Color2.default.Y_LABEL,
+        color: _Color["default"].Y_LABEL,
         fontWeight: "bold",
         fontSize: "14px"
       }
     }
   }
 };
-
-exports.default = ChartTheme;
+var _default = ChartTheme;
+exports["default"] = _default;
 //# sourceMappingURL=ChartTheme.js.map

@@ -1,8 +1,7 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var _compareByText = function _compareByText(a, b) {
   if (a.text < b.text) return -1;
@@ -12,15 +11,20 @@ var _compareByText = function _compareByText(a, b) {
 
 var loadItems = function loadItems(url, proxy) {
   var _url = proxy ? proxy + url : url;
-  return fetch(_url, { cache: "default" }).then(function (res) {
+
+  return fetch(_url, {
+    cache: "default"
+  }).then(function (res) {
     return res.json();
   }).then(function (json) {
     if (Array.isArray(json)) {
       json.sort(_compareByText);
     }
+
     return json;
   });
 };
 
-exports.default = loadItems;
+var _default = loadItems;
+exports["default"] = _default;
 //# sourceMappingURL=loadItems.js.map

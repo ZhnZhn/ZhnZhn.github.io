@@ -1,21 +1,18 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _fnDnD = require("./fnDnD");
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _fnDnD2 = _interopRequireDefault(_fnDnD);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _fnDnD = _interopRequireDefault(require("./fnDnD"));
 
 var _crDragStartGroup = function _crDragStartGroup(DRAG) {
   return function (_ref, ev) {
     var caption = _ref.caption;
-
     this.dragStartWithDnDStyle(ev, [DRAG.GROUP]);
-    _fnDnD2.default.setTransferTo({
+
+    _fnDnD["default"].setTransferTo({
       event: ev,
       dragId: caption + ";",
       xType: DRAG.GROUP
@@ -26,13 +23,11 @@ var _crDragStartGroup = function _crDragStartGroup(DRAG) {
 var _crDropGroup = function _crDropGroup(DRAG, WatchActions) {
   return function (_ref2, ev) {
     var caption = _ref2.caption;
-
     this.dropWithDnDStyle(ev);
     var data = JSON.parse(ev.dataTransfer.getData("text")),
         xType = data.xType,
         dragId = data.dragId,
         dropId = caption + ";";
-
 
     if (xType === DRAG.GROUP) {
       if (dragId !== dropId) {
@@ -82,5 +77,6 @@ var withDnDGroup = function withDnDGroup(DRAG, WatchActions) {
   };
 };
 
-exports.default = withDnDGroup;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDGroup.js.map
+var _default = withDnDGroup;
+exports["default"] = _default;
+//# sourceMappingURL=withDnDGroup.js.map

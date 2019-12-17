@@ -1,21 +1,14 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _compose = require('./compose');
-
-var _compose2 = _interopRequireDefault(_compose);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _compose = _interopRequireDefault(require("./compose"));
 
 var pipe = function pipe() {
-  for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
+  for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
     fns[_key] = arguments[_key];
   }
 
@@ -24,11 +17,14 @@ var pipe = function pipe() {
       return arg;
     };
   }
+
   if (fns.length === 1) {
     return fns[0];
   }
-  return _compose2.default.apply(undefined, (0, _toConsumableArray3.default)(fns.slice().reverse()));
+
+  return _compose["default"].apply(void 0, fns.slice().reverse());
 };
 
-exports.default = pipe;
+var _default = pipe;
+exports["default"] = _default;
 //# sourceMappingURL=pipe.js.map

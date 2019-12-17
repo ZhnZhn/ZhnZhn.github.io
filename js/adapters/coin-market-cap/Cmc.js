@@ -1,22 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _CmcApi = require('./CmcApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _CmcApi2 = _interopRequireDefault(_CmcApi);
+var _CmcApi = _interopRequireDefault(require("./CmcApi"));
 
-var _CmcAdapter = require('./CmcAdapter');
-
-var _CmcAdapter2 = _interopRequireDefault(_CmcAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _CmcAdapter = _interopRequireDefault(require("./CmcAdapter"));
 
 var Cmc = {
-  api: _CmcApi2.default, adapter: _CmcAdapter2.default
+  api: _CmcApi["default"],
+  adapter: _CmcAdapter["default"]
 };
-
-exports.default = Cmc;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\coin-market-cap\Cmc.js.map
+var _default = Cmc;
+exports["default"] = _default;
+//# sourceMappingURL=Cmc.js.map

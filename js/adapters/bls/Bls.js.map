@@ -1,13 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\bls\\Bls.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\bls\\Bls.js",
- "sourceRoot": "",
- "names": [
-  "Bls",
-  "adapter",
-  "api"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,+BADU,EACDC;AADC,CAAZ;;kBAIeF,G"
-}
+{"version":3,"sources":["../../../src/adapters/bls/Bls.js"],"names":["Bls","adapter","api"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,GAAG,GAAG;AACVC,EAAAA,OAAO,EAAPA,sBADU;AACDC,EAAAA,GAAG,EAAHA;AADC,CAAZ;eAIeF,G","sourcesContent":["import adapter from './BlsAdapter'\r\nimport api from './BlsApi'\r\n\r\nconst Bls = {  \r\n  adapter, api\r\n};\r\n\r\nexport default Bls\r\n"],"file":"Bls.js"}

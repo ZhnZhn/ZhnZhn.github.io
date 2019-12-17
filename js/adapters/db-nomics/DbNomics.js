@@ -1,23 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _DbNomicsApi = require('./DbNomicsApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _DbNomicsApi2 = _interopRequireDefault(_DbNomicsApi);
+var _DbNomicsApi = _interopRequireDefault(require("./DbNomicsApi"));
 
-var _DbNomicsAdapter = require('./DbNomicsAdapter');
-
-var _DbNomicsAdapter2 = _interopRequireDefault(_DbNomicsAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DbNomicsAdapter = _interopRequireDefault(require("./DbNomicsAdapter"));
 
 var DbNomics = {
-  api: _DbNomicsApi2.default,
-  adapter: _DbNomicsAdapter2.default
+  api: _DbNomicsApi["default"],
+  adapter: _DbNomicsAdapter["default"]
 };
-
-exports.default = DbNomics;
+var _default = DbNomics;
+exports["default"] = _default;
 //# sourceMappingURL=DbNomics.js.map

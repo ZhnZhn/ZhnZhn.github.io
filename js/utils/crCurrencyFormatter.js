@@ -1,37 +1,30 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+var _formatNumber = _interopRequireDefault(require("./formatNumber"));
 
-var _formatNumber = require('./formatNumber');
-
-var _formatNumber2 = _interopRequireDefault(_formatNumber);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var LOCALE = void 0;
+var LOCALE;
 
 var _getLocale = function _getLocale() {
   return LOCALE || (LOCALE = Array.isArray(navigator.languages) ? navigator.languages[0] : navigator.language || 'en', LOCALE);
 };
 
-var _crCurrencyFormatter = function _crCurrencyFormatter() {
-  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var _crCurrencyFormatter = function _crCurrencyFormatter(_temp) {
+  var _ref = _temp === void 0 ? {} : _temp,
+      _ref$currency = _ref.currency,
+      currency = _ref$currency === void 0 ? 'USD' : _ref$currency,
+      restProps = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["currency"]);
 
-  var _ref$currency = _ref.currency,
-      currency = _ref$currency === undefined ? 'USD' : _ref$currency,
-      restProps = (0, _objectWithoutProperties3.default)(_ref, ['currency']);
   return {
-    _f: new Intl.NumberFormat(_getLocale(), (0, _extends3.default)({
+    _f: new Intl.NumberFormat(_getLocale(), (0, _extends2["default"])({
       style: 'currency',
       currency: currency
     }, restProps)),
@@ -42,8 +35,11 @@ var _crCurrencyFormatter = function _crCurrencyFormatter() {
 };
 
 var crCurrencyFormatter = function crCurrencyFormatter(options) {
-  return Intl && Intl.NumberFormat ? _crCurrencyFormatter(options) : { format: _formatNumber2.default };
+  return Intl && Intl.NumberFormat ? _crCurrencyFormatter(options) : {
+    format: _formatNumber["default"]
+  };
 };
 
-exports.default = crCurrencyFormatter;
+var _default = crCurrencyFormatter;
+exports["default"] = _default;
 //# sourceMappingURL=crCurrencyFormatter.js.map

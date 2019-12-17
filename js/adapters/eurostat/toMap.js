@@ -1,39 +1,38 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ChartConfig = require('../../charts/ChartConfig');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _EuroStatFn = require('./EuroStatFn');
-
-var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
 var toMap = {
   createConfig: function createConfig(json, option) {
     var timeIndex = json.dimension.time.category.index,
         value = json.value,
-        _EuroStatFn$createDat = _EuroStatFn2.default.createData(timeIndex, value),
+        _EuroStatFn$createDat = _EuroStatFn["default"].createData(timeIndex, value),
         data = _EuroStatFn$createDat.data,
-        config = _ChartConfig2.default.fBaseAreaConfig();
+        config = _ChartConfig["default"].fBaseAreaConfig();
 
+    _EuroStatFn["default"].setDataAndInfo({
+      config: config,
+      data: data,
+      json: json,
+      option: option
+    });
 
-    _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
     Object.assign(config, {
       zhDialog: option,
       json: json,
       zhMapSlice: option.zhMapSlice
     });
     config.zhDialog.apiKey = '';
-
     return config;
   }
 };
-
-exports.default = toMap;
+var _default = toMap;
+exports["default"] = _default;
 //# sourceMappingURL=toMap.js.map

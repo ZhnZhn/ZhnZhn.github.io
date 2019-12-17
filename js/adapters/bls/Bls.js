@@ -1,22 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _BlsAdapter = require('./BlsAdapter');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _BlsAdapter2 = _interopRequireDefault(_BlsAdapter);
+var _BlsAdapter = _interopRequireDefault(require("./BlsAdapter"));
 
-var _BlsApi = require('./BlsApi');
-
-var _BlsApi2 = _interopRequireDefault(_BlsApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _BlsApi = _interopRequireDefault(require("./BlsApi"));
 
 var Bls = {
-  adapter: _BlsAdapter2.default, api: _BlsApi2.default
+  adapter: _BlsAdapter["default"],
+  api: _BlsApi["default"]
 };
-
-exports.default = Bls;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\bls\Bls.js.map
+var _default = Bls;
+exports["default"] = _default;
+//# sourceMappingURL=Bls.js.map

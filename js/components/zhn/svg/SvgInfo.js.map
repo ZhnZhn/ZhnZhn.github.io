@@ -1,12 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/zhn/svg/SvgInfo.js"
- ],
- "file": "../../../../src/components/zhn/svg/SvgInfo.js",
- "names": [
-  "SvgInfo",
-  "props"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,UAAU,SAAVA,OAAU,CAACC,KAAD;AAAA,SACd;AAAC,qBAAD;AAAaA,SAAb;AACE,8CAAQ,IAAG,IAAX,EAAgB,IAAG,IAAnB,EAAwB,GAAE,IAA1B,GADF;AAEE,4CAAM,IAAG,IAAT,EAAc,IAAG,IAAjB,EAAsB,IAAG,IAAzB,EAA8B,IAAG,IAAjC,GAFF;AAGE,4CAAM,IAAG,IAAT,EAAc,IAAG,GAAjB,EAAqB,IAAG,IAAxB,EAA6B,IAAG,GAAhC;AAHF,GADc;AAAA,CAAhB;;kBAQeD,O"
-}
+{"version":3,"sources":["../../../../src/components/zhn/svg/SvgInfo.jsx"],"names":["SvgInfo","props"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,OAAO,GAAG,SAAVA,OAAU,CAACC,KAAD;AAAA,SACd,gCAAC,mBAAD,EAAaA,KAAb,EACE;AAAQ,IAAA,EAAE,EAAC,IAAX;AAAgB,IAAA,EAAE,EAAC,IAAnB;AAAwB,IAAA,CAAC,EAAC;AAA1B,IADF,EAEE;AAAM,IAAA,EAAE,EAAC,IAAT;AAAc,IAAA,EAAE,EAAC,IAAjB;AAAsB,IAAA,EAAE,EAAC,IAAzB;AAA8B,IAAA,EAAE,EAAC;AAAjC,IAFF,EAGE;AAAM,IAAA,EAAE,EAAC,IAAT;AAAc,IAAA,EAAE,EAAC,GAAjB;AAAqB,IAAA,EAAE,EAAC,IAAxB;AAA6B,IAAA,EAAE,EAAC;AAAhC,IAHF,CADc;AAAA,CAAhB;;eAQeD,O","sourcesContent":["import React from 'react'\r\n\r\nimport SvgIcon from './SvgIcon'\r\n\r\nconst SvgInfo = (props) => (\r\n  <SvgIcon {...props}>\r\n    <circle cx=\"12\" cy=\"12\" r=\"10\" />\r\n    <line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\" />\r\n    <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"8\" />\r\n  </SvgIcon>\r\n);\r\n\r\nexport default SvgInfo\r\n"],"file":"SvgInfo.js"}

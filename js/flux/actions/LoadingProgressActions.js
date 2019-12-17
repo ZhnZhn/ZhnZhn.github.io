@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var T = exports.T = {
+exports.__esModule = true;
+exports.T = void 0;
+var T = {
   LOADING: 'loadingProgress',
   LOADING_COMPLETE: 'loadingProgressComplete',
   LAODING_FAILED: 'loadingProgressFailed'
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\LoadingProgressActions.js.map
+exports.T = T;
+//# sourceMappingURL=LoadingProgressActions.js.map

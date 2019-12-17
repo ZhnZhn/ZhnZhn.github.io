@@ -1,12 +1,12 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var zhToggleSeria = function zhToggleSeria(index) {
   try {
     var seria = this.series[index];
+
     if (seria) {
       if (seria.visible) {
         seria.hide();
@@ -19,5 +19,6 @@ var zhToggleSeria = function zhToggleSeria(index) {
   }
 };
 
-exports.default = zhToggleSeria;
+var _default = zhToggleSeria;
+exports["default"] = _default;
 //# sourceMappingURL=zhToggleSeria.js.map

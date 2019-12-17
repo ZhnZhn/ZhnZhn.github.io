@@ -1,15 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../src/utils/throttleOnce.js"
- ],
- "file": "../../src/utils/throttleOnce.js",
- "names": [
-  "DF_WAIT",
-  "throttleOnce",
-  "fn",
-  "wait",
-  "trailing"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,UAAU,GAAhB;AACA,IAAMC,eAAe,SAAfA,YAAe,CAACC,EAAD;AAAA,MAAKC,IAAL,uEAAUH,OAAV;AAAA,SAAsB,wBAASE,EAAT,EAAaC,IAAb,EAAmB,EAAEC,UAAU,KAAZ,EAAnB,CAAtB;AAAA,CAArB;;kBAEeH,Y"
-}
+{"version":3,"sources":["../../src/utils/throttleOnce.js"],"names":["DF_WAIT","throttleOnce","fn","wait","trailing"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,OAAO,GAAG,GAAhB;;AACA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAACC,EAAD,EAAKC,IAAL;AAAA,MAAKA,IAAL;AAAKA,IAAAA,IAAL,GAAUH,OAAV;AAAA;;AAAA,SAAsB,0BAASE,EAAT,EAAaC,IAAb,EAAmB;AAAEC,IAAAA,QAAQ,EAAE;AAAZ,GAAnB,CAAtB;AAAA,CAArB;;eAEeH,Y","sourcesContent":["import throttle from './throttle'\r\n\r\nconst DF_WAIT = 800;\r\nconst throttleOnce = (fn, wait=DF_WAIT) => throttle(fn, wait, { trailing: false });\r\n\r\nexport default throttleOnce\r\n"],"file":"throttleOnce.js"}

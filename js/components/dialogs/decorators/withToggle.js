@@ -1,18 +1,13 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var _toggleStateByWithToggle = function _toggleStateByWithToggle(propName) {
   this.setState(function (prevState) {
-    return (0, _defineProperty3.default)({}, propName, !prevState[propName]);
+    var _ref;
+
+    return _ref = {}, _ref[propName] = !prevState[propName], _ref;
   });
 };
 
@@ -24,5 +19,6 @@ var withToggle = function withToggle(target) {
   }
 };
 
-exports.default = withToggle;
+var _default = withToggle;
+exports["default"] = _default;
 //# sourceMappingURL=withToggle.js.map

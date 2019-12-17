@@ -1,13 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\StepTitle.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\StepTitle.js",
- "sourceRoot": "",
- "names": [
-  "StepTitle",
-  "step",
-  "title"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,YAAY,SAAZA,SAAY;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SAChB;AAAA;AAAA;AACE,oDAAM,MAAMD,IAAZ,GADF;AAEE;AAAA;AAAA;AAAA;AACUC,WADV;AAAA;AAAA;AAFF,GADgB;AAAA,CAAlB;;kBASeF,S"
-}
+{"version":3,"sources":["../../../src/components/about/StepTitle.jsx"],"names":["StepTitle","step","title"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SAChB,2CACE,gCAAC,gBAAD;AAAM,IAAA,IAAI,EAAED;AAAZ,IADF,EAEE,sDACUC,KADV,MAFF,CADgB;AAAA,CAAlB;;eASeF,S","sourcesContent":["import React from 'react'\r\n\r\nimport Step from './Step'\r\n\r\nconst StepTitle = ({ step, title }) => (\r\n  <p>\r\n    <Step step={step} />\r\n    <span>\r\n       &nbsp;{title}.       \r\n    </span>\r\n  </p>\r\n);\r\n\r\nexport default StepTitle\r\n"],"file":"StepTitle.js"}

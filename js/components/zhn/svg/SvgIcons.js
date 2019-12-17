@@ -1,23 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _SvgInfo = require('./SvgInfo');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _SvgInfo2 = _interopRequireDefault(_SvgInfo);
+var _SvgInfo = _interopRequireDefault(require("./SvgInfo"));
 
-var _SvgSettings = require('./SvgSettings');
-
-var _SvgSettings2 = _interopRequireDefault(_SvgSettings);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _SvgSettings = _interopRequireDefault(require("./SvgSettings"));
 
 var SvgIcons = {
-  SvgInfo: _SvgInfo2.default,
-  SvgSettings: _SvgSettings2.default
+  SvgInfo: _SvgInfo["default"],
+  SvgSettings: _SvgSettings["default"]
 };
-
-exports.default = SvgIcons;
+var _default = SvgIcons;
+exports["default"] = _default;
 //# sourceMappingURL=SvgIcons.js.map

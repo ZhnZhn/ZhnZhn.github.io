@@ -1,16 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _highcharts = require('highcharts');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _highcharts2 = _interopRequireDefault(_highcharts);
+var _highcharts = _interopRequireDefault(require("highcharts"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var merge = _highcharts2.default.merge;
-
-exports.default = merge;
+var merge = _highcharts["default"].merge;
+var _default = merge;
+exports["default"] = _default;
 //# sourceMappingURL=merge.js.map

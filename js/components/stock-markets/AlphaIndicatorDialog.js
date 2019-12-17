@@ -1,48 +1,27 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _dec, _dec2, _dec3, _class;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _Decorators = require('../dialogs/decorators/Decorators');
-
-var _Decorators2 = _interopRequireDefault(_Decorators);
-
-var _MenuMore = require('../dialogs/MenuMore');
-
-var _MenuMore2 = _interopRequireDefault(_MenuMore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _dec, _dec2, _dec3, _class, _temp;
 
 var DF = {
   INDICATOR: 'SMA',
@@ -60,7 +39,9 @@ var _testInRangeOrEmpty = function _testInRangeOrEmpty(min, max) {
     if (String(value).trim() === '') {
       return true;
     }
+
     var n = parseInt(String(value).trim(), 10);
+
     if (!Number.isNaN(n) && n > min && n < max) {
       return true;
     } else {
@@ -70,29 +51,36 @@ var _testInRangeOrEmpty = function _testInRangeOrEmpty(min, max) {
 };
 
 var _testPeriod = _testInRangeOrEmpty(0, 201);
+
 var _testForDays = _testInRangeOrEmpty(250, 2500);
 
 var _crValue = function _crValue(indicator, period) {
   switch (indicator) {
     case 'MACD':
       return 'MACD(12, 24, 9)';
+
     case 'STOCH':
       return 'STOCH(5, 3, 3, SMA)';
+
     default:
-      return indicator + ' (' + period + ')';
+      return indicator + " (" + period + ")";
   }
 };
 
-var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withLoad, _dec3 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
-  (0, _inherits3.default)(AlphaIndicatorDialog, _Component);
+var AlphaIndicatorDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(AlphaIndicatorDialog, _Component);
 
   function AlphaIndicatorDialog(props) {
-    (0, _classCallCheck3.default)(this, AlphaIndicatorDialog);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AlphaIndicatorDialog.__proto__ || Object.getPrototypeOf(AlphaIndicatorDialog)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._handleClickOptions = function () {
-      _this.setState({ isShowOptions: !_this.state.isShowOptions });
+      _this.setState({
+        isShowOptions: !_this.state.isShowOptions
+      });
     };
 
     _this._handleSelectOne = function (item) {
@@ -104,15 +92,18 @@ var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _De
           _forDays = _this.forDaysComp.isValid() ? _this.forDaysComp.getValue() !== '' ? _this.forDaysComp.getValue() : DF.FOR_DAYS : DF.FOR_DAYS,
           _ticket = _this.ticketComp.isValid() ? _this.ticketComp.getValue() : undefined,
           _indicator = _this.indicator ? _this.indicator.value : DF.INDICATOR;
+
       var option = {
         loadId: 'AL',
         indicator: _indicator,
         ticket: _ticket,
         period: _period,
         forDays: _forDays,
-        value: _crValue(_indicator, _period), //for label
+        value: _crValue(_indicator, _period),
+        //for label
         hasSecondYAxis: _this[HAS_SECOND_Y_AXIS]
       };
+
       _this.props.onLoad(option);
     };
 
@@ -137,113 +128,104 @@ var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _De
       _this[propName] = value;
     };
 
-    _this._menuMore = (0, _MenuMore2.default)(_this, {
+    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
+    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+      noDate: true
+    });
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this.toolbarButtons.push({
-      caption: 'O', title: 'Toggle Options Input',
+      caption: 'O',
+      title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
-    _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
+    _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
+    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isShowOptions: false
     });
     return _this;
   }
 
-  (0, _createClass3.default)(AlphaIndicatorDialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.props !== nextProps) {
-        if (this.props.isShow === nextProps.isShow) {
-          return false;
-        }
+  var _proto = AlphaIndicatorDialog.prototype;
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps) {
+      if (this.props.isShow === nextProps.isShow) {
+        return false;
       }
-      return true;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          caption = _props.caption,
-          oneURI = _props.oneURI,
-          oneJsonProp = _props.oneJsonProp,
-          oneCaption = _props.oneCaption,
-          onShow = _props.onShow,
-          onFront = _props.onFront,
-          _state = this.state,
-          isToolbar = _state.isToolbar,
-          isShowLabels = _state.isShowLabels,
-          isShowOptions = _state.isShowOptions;
 
+    return true;
+  };
 
-      return _react2.default.createElement(
-        _DialogCell2.default.DraggableDialog,
-        {
-          isShow: isShow,
-          caption: caption,
-          menuModel: this._menuMore,
-          commandButtons: this._commandButtons,
-          onShowChart: onShow,
-          onFront: onFront,
-          onClose: this._handleClose
-        },
-        _react2.default.createElement(_DialogCell2.default.Toolbar, {
-          isShow: isToolbar,
-          buttons: this.toolbarButtons
-        }),
-        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
-          isShow: isShow,
-          isShowLabels: isShowLabels,
-          uri: oneURI,
-          jsonProp: oneJsonProp,
-          caption: oneCaption,
-          optionNames: 'Items',
-          onSelect: this._handleSelectOne
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowPattern, {
-          ref: this._refTicket,
-          isShowLabels: isShowLabels,
-          caption: 'Ticket',
-          placeholder: 'Nyse or Nasdaq Ticket',
-          onTest: _testTicket,
-          errorMsg: 'Not Empty'
-        }),
-        _react2.default.createElement(
-          _DialogCell2.default.ShowHide,
-          { isShow: isShowOptions },
-          _react2.default.createElement(_DialogCell2.default.RowPattern, {
-            ref: this._refPeriod,
-            isShowLabels: isShowLabels,
-            caption: 'Period',
-            placeholder: 'Default: ' + DF.PERIOD,
-            onTest: _testPeriod,
-            errorMsg: 'Number in range 1-200'
-          }),
-          _react2.default.createElement(_DialogCell2.default.RowPattern, {
-            ref: this._refForDays,
-            isShowLabels: isShowLabels,
-            caption: 'For Days',
-            placeholder: 'Default: ' + DF.FOR_DAYS + ' (2 Years)',
-            onTest: _testForDays,
-            errorMsg: 'Number in range 250-2500'
-          })
-        ),
-        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-          initValue: false,
-          caption: 'Add Seria with Second YAxis',
-          onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
-          onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
-        })
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShow = _this$props.isShow,
+        caption = _this$props.caption,
+        oneURI = _this$props.oneURI,
+        oneJsonProp = _this$props.oneJsonProp,
+        oneCaption = _this$props.oneCaption,
+        onShow = _this$props.onShow,
+        onFront = _this$props.onFront,
+        _this$state = this.state,
+        isToolbar = _this$state.isToolbar,
+        isShowLabels = _this$state.isShowLabels,
+        isShowOptions = _this$state.isShowOptions;
+    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+      isShow: isShow,
+      caption: caption,
+      menuModel: this._menuMore,
+      commandButtons: this._commandButtons,
+      onShowChart: onShow,
+      onFront: onFront,
+      onClose: this._handleClose
+    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+      isShow: isToolbar,
+      buttons: this.toolbarButtons
+    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+      isShow: isShow,
+      isShowLabels: isShowLabels,
+      uri: oneURI,
+      jsonProp: oneJsonProp,
+      caption: oneCaption,
+      optionNames: "Items",
+      onSelect: this._handleSelectOne
+    }), _react["default"].createElement(_DialogCell["default"].RowPattern, {
+      ref: this._refTicket,
+      isShowLabels: isShowLabels,
+      caption: "Ticket",
+      placeholder: "Nyse or Nasdaq Ticket",
+      onTest: _testTicket,
+      errorMsg: "Not Empty"
+    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+      isShow: isShowOptions
+    }, _react["default"].createElement(_DialogCell["default"].RowPattern, {
+      ref: this._refPeriod,
+      isShowLabels: isShowLabels,
+      caption: "Period",
+      placeholder: "Default: " + DF.PERIOD,
+      onTest: _testPeriod,
+      errorMsg: "Number in range 1-200"
+    }), _react["default"].createElement(_DialogCell["default"].RowPattern, {
+      ref: this._refForDays,
+      isShowLabels: isShowLabels,
+      caption: "For Days",
+      placeholder: "Default: " + DF.FOR_DAYS + " (2 Years)",
+      onTest: _testForDays,
+      errorMsg: "Number in range 250-2500"
+    })), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      initValue: false,
+      caption: "Add Seria with Second YAxis",
+      onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
+      onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
+    }));
+  };
+
   return AlphaIndicatorDialog;
-}(_react.Component)) || _class) || _class) || _class);
-exports.default = AlphaIndicatorDialog;
+}(_react.Component), _temp)) || _class) || _class) || _class);
+var _default = AlphaIndicatorDialog;
+exports["default"] = _default;
 //# sourceMappingURL=AlphaIndicatorDialog.js.map

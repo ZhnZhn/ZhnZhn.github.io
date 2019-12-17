@@ -1,55 +1,43 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _BrowserConfig = require('../../../constants/BrowserConfig');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _BrowserConfig2 = _interopRequireDefault(_BrowserConfig);
+var _BrowserConfig = _interopRequireDefault(require("../../../constants/BrowserConfig"));
 
-var _crMenu = require('./crMenu');
+var _crMenu = _interopRequireDefault(require("./crMenu"));
 
-var _crMenu2 = _interopRequireDefault(_crMenu);
+var _addDialogPropsTo = _interopRequireDefault(require("./addDialogPropsTo"));
 
-var _addDialogPropsTo = require('./addDialogPropsTo');
-
-var _addDialogPropsTo2 = _interopRequireDefault(_addDialogPropsTo);
-
-var _findItem = require('./findItem');
-
-var _findItem2 = _interopRequireDefault(_findItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _findItem = _interopRequireDefault(require("./findItem"));
 
 var _findItemCounter = function _findItemCounter(appMenu, bT, cT) {
-  return BrowserLogic.isWithItemCounter(bT) ? (0, _findItem2.default)(appMenu[bT], cT) : void 0;
+  return BrowserLogic.isWithItemCounter(bT) ? (0, _findItem["default"])(appMenu[bT], cT) : void 0;
 };
 
 var BrowserLogic = {
-  crMenu: _crMenu2.default,
-
+  crMenu: _crMenu["default"],
   isWithItemCounter: function isWithItemCounter(browserType) {
-    var _config = _BrowserConfig2.default[browserType];
+    var _config = _BrowserConfig["default"][browserType];
     return typeof _config === 'undefined' ? false : !_config.withoutItemCounter;
   },
-
   initBrowseMenu: function initBrowseMenu(slice, option) {
     var json = option.json,
         browserType = option.browserType,
         menu = json.menu,
         items = json.items,
-        elMenu = (0, _crMenu2.default)(menu, items, browserType);
-
-    (0, _addDialogPropsTo2.default)(items);
+        elMenu = (0, _crMenu["default"])(menu, items, browserType);
+    (0, _addDialogPropsTo["default"])(items);
     slice.routeDialog[browserType] = items;
     slice.browserMenu[browserType] = elMenu;
     return elMenu;
   },
-
   setIsOpen: function setIsOpen(value, appMenu, bT, cT) {
     if (BrowserLogic.isWithItemCounter(bT)) {
-      var item = (0, _findItem2.default)(appMenu[bT], cT);
+      var item = (0, _findItem["default"])(appMenu[bT], cT);
+
       if (item) {
         item.isOpen = value;
       }
@@ -57,6 +45,7 @@ var BrowserLogic = {
   },
   plusCounter: function plusCounter(value, appMenu, bT, cT) {
     var item = _findItemCounter(appMenu, bT, cT);
+
     if (item) {
       item.counter += value;
       item.isOpen = true;
@@ -64,11 +53,12 @@ var BrowserLogic = {
   },
   resetCounter: function resetCounter(appMenu, bT, cT) {
     var item = _findItemCounter(appMenu, bT, cT);
+
     if (item) {
       item.counter = 0;
     }
   }
 };
-
-exports.default = BrowserLogic;
+var _default = BrowserLogic;
+exports["default"] = _default;
 //# sourceMappingURL=BrowserLogic.js.map

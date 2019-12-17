@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/zhn/ButtonCircle2.js"
- ],
- "file": "../../../src/components/zhn/ButtonCircle2.js",
- "names": [
-  "CL",
-  "ButtonCircle2",
-  "className",
-  "style",
-  "caption",
-  "onClick",
-  "rest"
- ],
- "mappings": ";;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,KAAK,gBAAX;;AAEA,IAAMC,gBAAgB,SAAhBA,aAAgB;AAAA,4BAAGC,SAAH;AAAA,MAAGA,SAAH,kCAAa,EAAb;AAAA,MAAiBC,KAAjB,QAAiBA,KAAjB;AAAA,0BAAwBC,OAAxB;AAAA,MAAwBA,OAAxB,gCAAgC,EAAhC;AAAA,MAAoCC,OAApC,QAAoCA,OAApC;AAAA,MAAgDC,IAAhD;AAAA,SACpB;AAAA;AAAA;AACG,iBAAcN,EAAd,SAAoBE,SADvB;AAEG,aAAOC,KAFV;AAGG,eAASE;AAHZ,OAIOC,IAJP;AAME;AAAA;AAAA;AACGF;AADH;AANF,GADoB;AAAA,CAAtB;;kBAYeH,a"
-}
+{"version":3,"sources":["../../../src/components/zhn/ButtonCircle2.jsx"],"names":["CL","ButtonCircle2","className","style","caption","onClick","rest"],"mappings":";;;;;;;;;;;AAAA;;AAEA,IAAMA,EAAE,GAAG,gBAAX;;AAEA,IAAMC,aAAa,GAAG,SAAhBA,aAAgB;AAAA,4BAAGC,SAAH;AAAA,MAAGA,SAAH,+BAAa,EAAb;AAAA,MAAiBC,KAAjB,QAAiBA,KAAjB;AAAA,0BAAwBC,OAAxB;AAAA,MAAwBA,OAAxB,6BAAgC,EAAhC;AAAA,MAAoCC,OAApC,QAAoCA,OAApC;AAAA,MAAgDC,IAAhD;AAAA,SACpB;AACG,IAAA,SAAS,EAAKN,EAAL,SAAWE,SADvB;AAEG,IAAA,KAAK,EAAEC,KAFV;AAGG,IAAA,OAAO,EAAEE;AAHZ,KAIOC,IAJP,GAME,6CACGF,OADH,CANF,CADoB;AAAA,CAAtB;;eAYeH,a","sourcesContent":["import React from 'react'\r\n\r\nconst CL = 'zhn-bt-circle2';\r\n\r\nconst ButtonCircle2 = ({ className='', style, caption='', onClick, ...rest }) =>\r\n  <button\r\n     className={`${CL} ${className}`}\r\n     style={style}\r\n     onClick={onClick}\r\n     {...rest}\r\n  >\r\n    <div>\r\n      {caption}\r\n    </div>\r\n  </button>\r\n\r\nexport default ButtonCircle2\r\n"],"file":"ButtonCircle2.js"}

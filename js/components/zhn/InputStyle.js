@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var STYLE = {
   ROOT: {
     position: 'relative',
@@ -31,9 +29,9 @@ var STYLE = {
     marginLeft: '10px',
     marginRight: '10px',
     marginBottom: '5px',
-    width: 'auto'
-    //width: '90%'
+    width: 'auto' //width: '90%'
     //width: '230px'
+
   },
   HR_VALID: {
     borderColor: '#1B75BB'
@@ -49,6 +47,6 @@ var STYLE = {
     fontWeight: 'bold'
   }
 };
-
-exports.default = STYLE;
+var _default = STYLE;
+exports["default"] = _default;
 //# sourceMappingURL=InputStyle.js.map

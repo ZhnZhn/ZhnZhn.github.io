@@ -1,46 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp2;
 //import PropTypes from "prop-types";
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _InputText = require('../zhn/InputText');
-
-var _InputText2 = _interopRequireDefault(_InputText);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var S = {
   ROOT: {
     paddingTop: 6,
@@ -61,83 +38,66 @@ var S = {
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
 };
-
 var COLLON = ':';
 
-var RowInputText = (_temp2 = _class = function (_Component) {
-  (0, _inherits3.default)(RowInputText, _Component);
+var RowInputText =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(RowInputText, _Component);
 
   function RowInputText() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, RowInputText);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RowInputText.__proto__ || Object.getPrototypeOf(RowInputText)).call.apply(_ref, [this].concat(args))), _this), _this._refInput = function (node) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._refInput = function (node) {
       return _this._inputComp = node;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
-  /*
-  static propTypes={
-    styleRoot: PropTypes.object,
-    styleCaption: PropTypes.object,
-    styleInput: PropTypes.object,
-    caption: PropTypes.string,
-    initValue: PropTypes.string,
-    onEnter: PropTypes.func
-  }
-  */
 
+  var _proto = RowInputText.prototype;
 
-  (0, _createClass3.default)(RowInputText, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          styleRoot = _props.styleRoot,
-          rootStyle = _props.rootStyle,
-          captionStyle = _props.captionStyle,
-          styleCaption = _props.styleCaption,
-          caption = _props.caption,
-          inputStyle = _props.inputStyle,
-          styleInput = _props.styleInput,
-          rest = (0, _objectWithoutProperties3.default)(_props, ['styleRoot', 'rootStyle', 'captionStyle', 'styleCaption', 'caption', 'inputStyle', 'styleInput']),
-          _rootStyle = rootStyle || (0, _extends3.default)({}, S.ROOT, styleRoot),
-          _captionStyle = captionStyle || (0, _extends3.default)({}, S.CAPTION, styleCaption),
-          _inputStyle = inputStyle || (0, _extends3.default)({}, S.INPUT_TEXT, styleInput),
-          _caption = caption.indexOf(COLLON) === -1 ? caption + COLLON : caption;
+  _proto.render = function render() {
+    var _this$props = this.props,
+        styleRoot = _this$props.styleRoot,
+        rootStyle = _this$props.rootStyle,
+        captionStyle = _this$props.captionStyle,
+        styleCaption = _this$props.styleCaption,
+        caption = _this$props.caption,
+        inputStyle = _this$props.inputStyle,
+        styleInput = _this$props.styleInput,
+        rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["styleRoot", "rootStyle", "captionStyle", "styleCaption", "caption", "inputStyle", "styleInput"]),
+        _rootStyle = rootStyle || (0, _extends2["default"])({}, S.ROOT, {}, styleRoot),
+        _captionStyle = captionStyle || (0, _extends2["default"])({}, S.CAPTION, {}, styleCaption),
+        _inputStyle = inputStyle || (0, _extends2["default"])({}, S.INPUT_TEXT, {}, styleInput),
+        _caption = caption.indexOf(COLLON) === -1 ? caption + COLLON : caption;
 
-      return _react2.default.createElement(
-        'div',
-        { style: _rootStyle },
-        _react2.default.createElement(
-          'label',
-          null,
-          _react2.default.createElement(
-            'span',
-            { style: _captionStyle },
-            _caption
-          ),
-          _react2.default.createElement(_InputText2.default, (0, _extends3.default)({
-            ref: this._refInput,
-            style: _inputStyle
-          }, rest))
-        )
-      );
-    }
-  }, {
-    key: 'getValue',
-    value: function getValue() {
-      return this._inputComp.getValue();
-    }
-  }]);
+    return _react["default"].createElement("div", {
+      style: _rootStyle
+    }, _react["default"].createElement("label", null, _react["default"].createElement("span", {
+      style: _captionStyle
+    }, _caption), _react["default"].createElement(_InputText["default"], (0, _extends2["default"])({
+      ref: this._refInput,
+      style: _inputStyle
+    }, rest))));
+  };
+
+  _proto.getValue = function getValue() {
+    return this._inputComp.getValue();
+  };
+
   return RowInputText;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+RowInputText.defaultProps = {
   caption: 'Input'
-}, _temp2);
-exports.default = RowInputText;
+};
+var _default = RowInputText;
+exports["default"] = _default;
 //# sourceMappingURL=RowInputText.js.map

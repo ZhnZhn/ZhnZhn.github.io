@@ -1,30 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireWildcard(require("react"));
 
 var S = {
   ROOT: {
@@ -50,37 +35,44 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var _maskValue = function _maskValue() {
-  var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+var _maskValue = function _maskValue(len) {
+  if (len === void 0) {
+    len = 0;
+  }
 
   var i = 0,
       str = '';
+
   for (i; i < len; i++) {
     str = str + 'X';
   }
+
   return str;
 };
 
-var InputSecret = function (_Component) {
-  (0, _inherits3.default)(InputSecret, _Component);
+var InputSecret =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(InputSecret, _Component);
 
   function InputSecret() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, InputSecret);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = InputSecret.__proto__ || Object.getPrototypeOf(InputSecret)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
       value: ''
-    }, _this.secret = '', _this._handleChangeValue = function (event) {
+    };
+    _this.secret = '';
+
+    _this._handleChangeValue = function (event) {
       var _value = event.target.value,
           _length = _value.length,
           _nowLength = _this.secret.length;
+
       if (_length === _nowLength + 1) {
         _this.secret = _this.secret + _value[_length - 1];
       } else if (_length === _nowLength - 1) {
@@ -90,76 +82,87 @@ var InputSecret = function (_Component) {
       } else if (_length === 0) {
         _this.secret = '';
       }
+
       _this.setState({
         value: _maskValue(_this.secret.length)
       });
-    }, _this._handleKeyDown = function (event) {
+    };
+
+    _this._handleKeyDown = function (event) {
       if (event.keyCode !== 27) {
         event.stopPropagation();
       }
+
       switch (event.keyCode) {
         case 13:
           if (_isFn(_this.props.onEnter)) {
             event.preventDefault();
+
             _this.props.onEnter(_this.secret);
           }
+
           break;
-        case 27:case 46:
+
+        case 27:
+        case 46:
           if (_isFn(_this.props.onEnter)) {
             _this.props.onEnter('');
           }
+
           _this.clear();
+
           break;
+
         default:
           return;
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(InputSecret, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          placeholder = _props.placeholder,
-          _props$maxLength = _props.maxLength,
-          maxLength = _props$maxLength === undefined ? "32" : _props$maxLength,
-          value = this.state.value;
+  var _proto = InputSecret.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        { style: S.ROOT },
-        _react2.default.createElement('input', {
-          style: S.INPUT,
-          type: 'password',
-          name: 'secret'
-          //autoComplete="new-secret"
-          , autoComplete: 'off',
-          autoCorrect: 'off',
-          autoCapitalize: 'off',
-          spellCheck: 'false',
-          translate: 'false',
-          placeholder: placeholder,
-          maxLength: maxLength,
-          value: value,
-          onChange: this._handleChangeValue,
-          onKeyDown: this._handleKeyDown
-        })
-      );
-    }
-  }, {
-    key: 'getValue',
-    value: function getValue() {
-      return this.secret;
-    }
-  }, {
-    key: 'clear',
-    value: function clear() {
-      this.secret = '';
-      this.setState({ value: '' });
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        placeholder = _this$props.placeholder,
+        _this$props$maxLength = _this$props.maxLength,
+        maxLength = _this$props$maxLength === void 0 ? "32" : _this$props$maxLength,
+        value = this.state.value;
+    return _react["default"].createElement("div", {
+      style: S.ROOT
+    }, _react["default"].createElement("input", {
+      style: S.INPUT,
+      type: "password",
+      name: "secret" //autoComplete="new-secret"
+      ,
+      autoComplete: "off",
+      autoCorrect: "off",
+      autoCapitalize: "off",
+      spellCheck: "false",
+      translate: "false",
+      placeholder: placeholder,
+      maxLength: maxLength,
+      value: value,
+      onChange: this._handleChangeValue,
+      onKeyDown: this._handleKeyDown
+    }));
+  };
+
+  _proto.getValue = function getValue() {
+    return this.secret;
+  };
+
+  _proto.clear = function clear() {
+    this.secret = '';
+    this.setState({
+      value: ''
+    });
+  };
+
   return InputSecret;
 }(_react.Component);
 
-exports.default = InputSecret;
+var _default = InputSecret;
+exports["default"] = _default;
 //# sourceMappingURL=InputSecret.js.map

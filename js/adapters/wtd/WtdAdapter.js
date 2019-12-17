@@ -1,41 +1,32 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ConfigBuilder = require('../../charts/ConfigBuilder');
+var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _fnAdapter = require('./fnAdapter');
-
-var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crData = _fnAdapter2.default.crData,
-    crConfigOption = _fnAdapter2.default.crConfigOption;
-
-
+var crData = _fnAdapter["default"].crData,
+    crConfigOption = _fnAdapter["default"].crConfigOption;
 var WtdAdapter = {
   toConfig: function toConfig(json, option) {
     var title = option.title,
         subtitle = option.subtitle,
         value = option.value,
         dataOption = crData(json, option),
-        config = (0, _ConfigBuilder2.default)().stockConfig(value, dataOption).addCaption(title, subtitle).add((0, _extends3.default)({}, crConfigOption({
+        config = (0, _ConfigBuilder["default"])().stockConfig(value, dataOption).addCaption(title, subtitle).add((0, _extends2["default"])({}, crConfigOption({
       data: dataOption.data,
       option: option
-    })))
-    //.addZhPoints(dataMfi)
+    }))) //.addZhPoints(dataMfi)
     .toConfig();
-
-    return { config: config };
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(json, option) {
     var _WtdAdapter$toConfig = WtdAdapter.toConfig(json, option),
@@ -44,6 +35,6 @@ var WtdAdapter = {
     return config.series[0];
   }
 };
-
-exports.default = WtdAdapter;
+var _default = WtdAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=WtdAdapter.js.map

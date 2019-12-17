@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireDefault(require("react"));
 
 var STYLE = {
   ITEM_DIV: {
@@ -37,22 +34,15 @@ var Item = function Item(props) {
       item = props.item,
       onClickItem = props.onClickItem,
       children = props.children;
-
-  return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: STYLE.ITEM_DIV,
-      onClick: onClickItem.bind(null, item)
-    },
-    _react2.default.createElement(
-      'span',
-      { style: STYLE.ITEM_SPAN },
-      caption
-    ),
-    children
-  );
+  return _react["default"].createElement("div", {
+    className: className,
+    style: STYLE.ITEM_DIV,
+    onClick: onClickItem.bind(null, item)
+  }, _react["default"].createElement("span", {
+    style: STYLE.ITEM_SPAN
+  }, caption), children);
 };
 
-exports.default = Item;
+var _default = Item;
+exports["default"] = _default;
 //# sourceMappingURL=Item.js.map

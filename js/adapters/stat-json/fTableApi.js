@@ -1,8 +1,7 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var _crTidTop = function _crTidTop(v) {
   return {
@@ -24,20 +23,18 @@ var fTableApi = function fTableApi(ROOT_URL) {
   return {
     getRequestUrl: function getRequestUrl(option) {
       var _option$proxy = option.proxy,
-          proxy = _option$proxy === undefined ? '' : _option$proxy,
+          proxy = _option$proxy === void 0 ? '' : _option$proxy,
           metric = option.metric,
           dfId = option.dfId,
           id = dfId || metric;
-
       return "" + proxy + ROOT_URL + "/" + id;
     },
     crOptionFetch: function crOptionFetch(option) {
       var _option$items = option.items,
-          items = _option$items === undefined ? [] : _option$items,
+          items = _option$items === void 0 ? [] : _option$items,
           isTop12 = option.isTop12,
           isTop6 = option.isTop6,
           arrQuery = [];
-
       items.forEach(function (item) {
         var _ref = item || {},
             slice = _ref.slice;
@@ -47,15 +44,16 @@ var fTableApi = function fTableApi(ROOT_URL) {
             code: propName,
             selection: {
               filter: 'item',
-              values: [slice[propName]]
-              //filter: 'all',
+              values: [slice[propName]] //filter: 'all',
               //values: ['*']
+
             }
           });
         }
       });
 
       _checkTop(isTop12, '12', arrQuery);
+
       _checkTop(isTop6, '6', arrQuery);
 
       return {
@@ -74,5 +72,6 @@ var fTableApi = function fTableApi(ROOT_URL) {
   };
 };
 
-exports.default = fTableApi;
+var _default = fTableApi;
+exports["default"] = _default;
 //# sourceMappingURL=fTableApi.js.map

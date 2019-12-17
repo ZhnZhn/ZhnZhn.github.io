@@ -1,12 +1,12 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var useRefInit = function useRefInit(ref, crValue) {
   return ref.current ? ref.current : ref.current = crValue();
 };
 
-exports.default = useRefInit;
+var _default = useRefInit;
+exports["default"] = _default;
 //# sourceMappingURL=useRefInit.js.map

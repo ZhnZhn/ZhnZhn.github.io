@@ -1,11 +1,8 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var CHANNEL = 'WITH_LOADING_PROGRESS';
-
 var WithLoadingProgress = {
   listenLoadingProgress: function listenLoadingProgress(fnHandle) {
     var _this = this;
@@ -19,6 +16,6 @@ var WithLoadingProgress = {
     this.emitter.emit(CHANNEL, actionType);
   }
 };
-
-exports.default = WithLoadingProgress;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\WithLoadingProgress.js.map
+var _default = WithLoadingProgress;
+exports["default"] = _default;
+//# sourceMappingURL=WithLoadingProgress.js.map

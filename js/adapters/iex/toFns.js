@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AdapterFn = require('../AdapterFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _ChartType = require('./ChartType');
-
-var _ChartType2 = _interopRequireDefault(_ChartType);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ChartType = _interopRequireDefault(require("./ChartType"));
 
 var _calcScatterY = function _calcScatterY(chart, isMin) {
   var _chart$yAxis$ = chart.yAxis[0],
@@ -20,7 +15,6 @@ var _calcScatterY = function _calcScatterY(chart, isMin) {
       min = _chart$yAxis$.min,
       all = max - min,
       one = all / 100;
-
   return isMin ? min + one : max - 7 * one;
 };
 
@@ -28,17 +22,17 @@ var toFns = {
   crZhConfig: function crZhConfig(option) {
     var value = option.value,
         dataSource = option.dataSource,
-        id = _AdapterFn2.default.crId();
+        id = _AdapterFn["default"].crId();
 
     return {
-      id: id, key: id,
+      id: id,
+      key: id,
       itemCaption: value || id,
       isWithoutAdd: true,
       isWithLegend: false,
       dataSource: dataSource
     };
   },
-
   crToSeria: function crToSeria(_ref) {
     var chart = _ref.chart,
         seria = _ref.seria,
@@ -46,8 +40,7 @@ var toFns = {
         color = _ref.color,
         option = _ref.option;
     var dfType = option.dfType;
-
-    var y = dfType === _ChartType2.default.ERN ? _calcScatterY(chart) : _calcScatterY(chart, true);
+    var y = dfType === _ChartType["default"].ERN ? _calcScatterY(chart) : _calcScatterY(chart, true);
     seria.data.forEach(function (p) {
       return p.y = y;
     });
@@ -58,6 +51,6 @@ var toFns = {
     return seria;
   }
 };
-
-exports.default = toFns;
+var _default = toFns;
+exports["default"] = _default;
 //# sourceMappingURL=toFns.js.map

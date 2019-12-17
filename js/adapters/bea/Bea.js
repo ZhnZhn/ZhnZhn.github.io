@@ -1,22 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _BeaApi = require('./BeaApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _BeaApi2 = _interopRequireDefault(_BeaApi);
+var _BeaApi = _interopRequireDefault(require("./BeaApi"));
 
-var _BeaAdapter = require('./BeaAdapter');
-
-var _BeaAdapter2 = _interopRequireDefault(_BeaAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _BeaAdapter = _interopRequireDefault(require("./BeaAdapter"));
 
 var Bea = {
-  api: _BeaApi2.default, adapter: _BeaAdapter2.default
+  api: _BeaApi["default"],
+  adapter: _BeaAdapter["default"]
 };
-
-exports.default = Bea;
+var _default = Bea;
+exports["default"] = _default;
 //# sourceMappingURL=Bea.js.map

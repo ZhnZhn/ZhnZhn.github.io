@@ -1,58 +1,31 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _Model = _interopRequireDefault(require("../../constants/Model"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _HandleF = _interopRequireDefault(require("../f-handle/HandleF"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette"));
 
-var _react = require('react');
+var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 
-var _react2 = _interopRequireDefault(_react);
-
-var _Model = require('../../constants/Model');
-
-var _Model2 = _interopRequireDefault(_Model);
-
-var _HandleF = require('../f-handle/HandleF');
-
-var _HandleF2 = _interopRequireDefault(_HandleF);
-
-var _CellColor = require('../zhn-moleculs/CellColor');
-
-var _CellColor2 = _interopRequireDefault(_CellColor);
-
-var _ModalPalette = require('../zhn-moleculs/ModalPalette');
-
-var _ModalPalette2 = _interopRequireDefault(_ModalPalette);
-
-var _InputSelect = require('../zhn-select/InputSelect');
-
-var _InputSelect2 = _interopRequireDefault(_InputSelect);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
 var DF = {
   COLOR: '#7cb5ec'
@@ -99,32 +72,30 @@ var S = {
   }
 };
 
-var SeriaRow = function (_Component) {
-  (0, _inherits3.default)(SeriaRow, _Component);
+var SeriaRow =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(SeriaRow, _Component);
 
   function SeriaRow() {
-    (0, _classCallCheck3.default)(this, SeriaRow);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (SeriaRow.__proto__ || Object.getPrototypeOf(SeriaRow)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._getColor = function () {
       var colorEntered = _this.state.colorEntered,
           color = _this.props.seria.options.color;
-
       return colorEntered || color || DF.COLOR;
     };
 
     _this.isChecked = false;
-    _this._hCheck = _HandleF2.default.set('isChecked', true).bind(_this);
-    _this._hUnCheck = _HandleF2.default.set('isChecked', false).bind(_this);
-
-    _this._hSelectYAxis = _HandleF2.default.reg('toYAxis').bind(_this);
-
-    _this._hRegCellColor = _HandleF2.default.reg('cellColorNode').bind(_this);
-    _this._hEnterColor = _HandleF2.default.enterTo('colorEntered').bind(_this);
-    _this._hClosePalette = _HandleF2.default.closeTo('isShowPallete').bind(_this);
-    _this._hClickPallete = _HandleF2.default.toggleModalTo('isShowPallete', 'cellColorNode').bind(_this);
-
+    _this._hCheck = _HandleF["default"].set('isChecked', true).bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hUnCheck = _HandleF["default"].set('isChecked', false).bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hSelectYAxis = _HandleF["default"].reg('toYAxis').bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hRegCellColor = _HandleF["default"].reg('cellColorNode').bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hEnterColor = _HandleF["default"].enterTo('colorEntered').bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hClosePalette = _HandleF["default"].closeTo('isShowPallete').bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hClickPallete = _HandleF["default"].toggleModalTo('isShowPallete', 'cellColorNode').bind((0, _assertThisInitialized2["default"])(_this));
     _this.state = {
       isShowPallete: false,
       colorEntered: void 0
@@ -132,94 +103,80 @@ var SeriaRow = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(SeriaRow, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var onReg = this.props.onReg;
+  var _proto = SeriaRow.prototype;
 
-      if (typeof onReg === 'function') {
-        onReg(this);
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      var onUnReg = this.props.onUnReg;
+  _proto.componentDidMount = function componentDidMount() {
+    var onReg = this.props.onReg;
 
-      if (typeof onUnReg === 'function') {
-        onUnReg(this);
-      }
+    if (typeof onReg === 'function') {
+      onReg(this);
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var isShowPallete = this.state.isShowPallete,
-          _props = this.props,
-          _props$seria = _props.seria,
-          seria = _props$seria === undefined ? {} : _props$seria,
-          yAxisOptions = _props.yAxisOptions,
-          name = seria.name,
-          _seria$options = seria.options,
-          options = _seria$options === undefined ? {} : _seria$options,
-          zhValueText = options.zhValueText,
-          _name = zhValueText || name,
-          _bgColor = { backgroundColor: this._getColor() };
+  };
 
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    var onUnReg = this.props.onUnReg;
 
-      return _react2.default.createElement(
-        'div',
-        { style: S.ROOT },
-        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-          rootStyle: S.ROW_CHECK_BOX,
-          caption: '',
-          onCheck: this._hCheck,
-          onUnCheck: this._hUnCheck
-        }),
-        _react2.default.createElement(
-          'span',
-          {
-            className: CL.ELL,
-            style: S.TITLE
-          },
-          _name
-        ),
-        _react2.default.createElement(
-          _CellColor2.default,
-          {
-            style: (0, _extends3.default)({}, S.COLOR, _bgColor),
-            onReg: this._hRegCellColor,
-            onClick: this._hClickPallete
-          },
-          _react2.default.createElement(_ModalPalette2.default, {
-            isShow: isShowPallete,
-            model: _Model2.default.palette,
-            onClickCell: this._hEnterColor,
-            onClose: this._hClosePalette
-          })
-        ),
-        _react2.default.createElement(_InputSelect2.default, {
-          placeholder: 'withYAxis',
-          width: '150',
-          rootStyle: S.SELECT,
-          rootOptionsStyle: S.SELECT_OPTIONS,
-          options: yAxisOptions,
-          onSelect: this._hSelectYAxis
-        })
-      );
+    if (typeof onUnReg === 'function') {
+      onUnReg(this);
     }
-  }, {
-    key: 'getValue',
-    value: function getValue() {
-      return {
-        isChecked: this.isChecked,
-        color: this._getColor(),
-        yIndex: this.toYAxis ? this.toYAxis.value : void 0,
-        data: this.props.seria.userOptions.data
-      };
-    }
-  }]);
+  };
+
+  _proto.render = function render() {
+    var isShowPallete = this.state.isShowPallete,
+        _this$props = this.props,
+        _this$props$seria = _this$props.seria,
+        seria = _this$props$seria === void 0 ? {} : _this$props$seria,
+        yAxisOptions = _this$props.yAxisOptions,
+        name = seria.name,
+        _seria$options = seria.options,
+        options = _seria$options === void 0 ? {} : _seria$options,
+        zhValueText = options.zhValueText,
+        _name = zhValueText || name,
+        _bgColor = {
+      backgroundColor: this._getColor()
+    };
+
+    return _react["default"].createElement("div", {
+      style: S.ROOT
+    }, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      rootStyle: S.ROW_CHECK_BOX,
+      caption: "",
+      onCheck: this._hCheck,
+      onUnCheck: this._hUnCheck
+    }), _react["default"].createElement("span", {
+      className: CL.ELL,
+      style: S.TITLE
+    }, _name), _react["default"].createElement(_CellColor["default"], {
+      style: (0, _extends2["default"])({}, S.COLOR, {}, _bgColor),
+      onReg: this._hRegCellColor,
+      onClick: this._hClickPallete
+    }, _react["default"].createElement(_ModalPalette["default"], {
+      isShow: isShowPallete,
+      model: _Model["default"].palette,
+      onClickCell: this._hEnterColor,
+      onClose: this._hClosePalette
+    })), _react["default"].createElement(_InputSelect["default"], {
+      placeholder: "withYAxis",
+      width: "150",
+      rootStyle: S.SELECT,
+      rootOptionsStyle: S.SELECT_OPTIONS,
+      options: yAxisOptions,
+      onSelect: this._hSelectYAxis
+    }));
+  };
+
+  _proto.getValue = function getValue() {
+    return {
+      isChecked: this.isChecked,
+      color: this._getColor(),
+      yIndex: this.toYAxis ? this.toYAxis.value : void 0,
+      data: this.props.seria.userOptions.data
+    };
+  };
+
   return SeriaRow;
 }(_react.Component);
 
-exports.default = SeriaRow;
+var _default = SeriaRow;
+exports["default"] = _default;
 //# sourceMappingURL=SeriaRow.js.map

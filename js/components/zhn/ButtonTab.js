@@ -1,58 +1,48 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp;
 //import PropTypes from "prop-types";
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _withTheme = require('../hoc/withTheme');
-
-var _withTheme2 = _interopRequireDefault(_withTheme);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var TH_ID = 'ELEMENT';
 
-var ButtonTab = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(ButtonTab, _Component);
+var ButtonTab =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ButtonTab, _Component);
 
+  /*
+  static propTypes = {
+    style : PropTypes.object,
+    isShow : PropTypes.bool,
+    notUpdatable : PropTypes.bool
+    caption : PropTypes.string,
+    onClick : PropTypes.func
+  }
+  */
   function ButtonTab(props) {
-    (0, _classCallCheck3.default)(this, ButtonTab);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ButtonTab.__proto__ || Object.getPrototypeOf(ButtonTab)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._hClick = function () {
       var _this$props = _this.props,
           isUpdatable = _this$props.isUpdatable,
           onClick = _this$props.onClick;
-
       onClick();
+
       if (isUpdatable) {
         _this.setState(function (prevState) {
           return {
@@ -67,7 +57,6 @@ var ButtonTab = (_temp = _class = function (_Component) {
     };
     return _this;
   }
-
   /*
   componentDidUpdate(prevProps){
      if (prevProps !== this.props) {
@@ -79,52 +68,45 @@ var ButtonTab = (_temp = _class = function (_Component) {
   }
   */
 
-  /*
-  static propTypes = {
-    style : PropTypes.object,
-    isShow : PropTypes.bool,
-    notUpdatable : PropTypes.bool
-    caption : PropTypes.string,
-    onClick : PropTypes.func
-  }
-  */
 
-  (0, _createClass3.default)(ButtonTab, [{
-    key: 'UNSAFE_componentWillReceiveProps',
-    value: function UNSAFE_componentWillReceiveProps(nextProps) {
-      if (nextProps.isUpdatable && this.props !== nextProps) {
-        var _isShow = !!nextProps.isShow;
-        if (_isShow !== this.state.isShow) {
-          this.setState({ isShow: _isShow });
-        }
+  var _proto = ButtonTab.prototype;
+
+  _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.isUpdatable && this.props !== nextProps) {
+      var _isShow = !!nextProps.isShow;
+
+      if (_isShow !== this.state.isShow) {
+        this.setState({
+          isShow: _isShow
+        });
       }
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          theme = _props.theme,
-          caption = _props.caption,
-          style = _props.style,
-          children = _props.children,
-          TS = theme.getStyle(TH_ID),
-          _rootClass = this.state.isShow ? 'button-tab button-tab--show not-selected' : 'button-tab not-selected';
+  };
 
-      return _react2.default.createElement(
-        'div',
-        {
-          className: _rootClass,
-          style: (0, _extends3.default)({}, style, TS.BG),
-          onClick: this._hClick
-        },
-        caption,
-        children
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        theme = _this$props2.theme,
+        caption = _this$props2.caption,
+        style = _this$props2.style,
+        children = _this$props2.children,
+        TS = theme.getStyle(TH_ID),
+        _rootClass = this.state.isShow ? 'button-tab button-tab--show not-selected' : 'button-tab not-selected';
+
+    return _react["default"].createElement("div", {
+      className: _rootClass,
+      style: (0, _extends2["default"])({}, style, {}, TS.BG),
+      onClick: this._hClick
+    }, caption, children);
+  };
+
   return ButtonTab;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+ButtonTab.defaultProps = {
   isUpdatable: true
-}, _temp);
-exports.default = (0, _withTheme2.default)(ButtonTab);
+};
+
+var _default = (0, _withTheme["default"])(ButtonTab);
+
+exports["default"] = _default;
 //# sourceMappingURL=ButtonTab.js.map

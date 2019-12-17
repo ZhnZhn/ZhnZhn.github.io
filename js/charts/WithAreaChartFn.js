@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var CHART = {
   SCATTER_MARGIN_BOTTOM: 24,
   LONG_FORM: {
@@ -19,17 +17,22 @@ var CHART = {
 var _checkIsWithScatter = function _checkIsWithScatter(chart) {
   var max = chart.series.length;
   var i = 0;
+
   for (; i < max; i++) {
     var seria = chart.series[i];
+
     if (seria.visible && seria.options.type === 'scatter' && seria.options.data && seria.options.data.length > 0) {
       return true;
     }
   }
+
   return false;
 };
 
-var _fOptionShortForm = function _fOptionShortForm() {
-  var marginBottom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+var _fOptionShortForm = function _fOptionShortForm(marginBottom) {
+  if (marginBottom === void 0) {
+    marginBottom = 0;
+  }
 
   return {
     chart: {
@@ -55,6 +58,6 @@ var WithAreaChartFn = {
     }
   }
 };
-
-exports.default = WithAreaChartFn;
+var _default = WithAreaChartFn;
+exports["default"] = _default;
 //# sourceMappingURL=WithAreaChartFn.js.map

@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var _getDocs = function _getDocs(json) {
   return ((json || {}).series || {}).docs || {};
 };
+
 var _getByPropName = function _getByPropName(json, propName) {
   return _getDocs(json)[0][propName] || '';
 };
@@ -24,11 +24,10 @@ var fnSelector = {
       value: _getByPropName(json, 'value')
     };
   },
-
   getTitle: _fGetByPropName('dataset_name'),
   getSubtitle: _fGetByPropName('series_name'),
   getInexedAt: _fGetByPropName('indexed_at')
 };
-
-exports.default = fnSelector;
+var _default = fnSelector;
+exports["default"] = _default;
 //# sourceMappingURL=fnSelector.js.map

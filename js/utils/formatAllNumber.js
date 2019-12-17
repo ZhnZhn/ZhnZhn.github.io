@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _highcharts = require('highcharts');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _highcharts2 = _interopRequireDefault(_highcharts);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _highcharts = _interopRequireDefault(require("highcharts"));
 
 var REG_BLANKS = /\s/g;
 var DF_VALUE = '0';
@@ -22,8 +19,10 @@ var formatAllNumber = function formatAllNumber(value) {
   var _value = ('' + value).replace(REG_BLANKS, ''),
       arrSplit = _value.split('.'),
       decimal = arrSplit[1] ? arrSplit[1].length : 0;
-  return _highcharts2.default.numberFormat(_value, decimal, '.', DELIMETER);
+
+  return _highcharts["default"].numberFormat(_value, decimal, '.', DELIMETER);
 };
 
-exports.default = formatAllNumber;
+var _default = formatAllNumber;
+exports["default"] = _default;
 //# sourceMappingURL=formatAllNumber.js.map

@@ -1,18 +1,14 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AdapterFn = require("../AdapterFn");
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var stockSeriesLegend = _AdapterFn2.default.stockSeriesLegend,
-    valueMoving = _AdapterFn2.default.valueMoving;
-
+var stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend,
+    valueMoving = _AdapterFn["default"].valueMoving;
 
 var _crZhConfig = function _crZhConfig(id, dataSource) {
   return {
@@ -36,6 +32,6 @@ var fnAdapter = {
     };
   }
 };
-
-exports.default = fnAdapter;
+var _default = fnAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=fnAdapter.js.map

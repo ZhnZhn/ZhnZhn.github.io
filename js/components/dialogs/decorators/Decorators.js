@@ -1,44 +1,33 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _withLoadOptions = require('./withLoadOptions');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _withLoadOptions2 = _interopRequireDefault(_withLoadOptions);
+var _withLoadOptions = _interopRequireDefault(require("./withLoadOptions"));
 
-var _withToolbar = require('./withToolbar');
+var _withToolbar = _interopRequireDefault(require("./withToolbar"));
 
-var _withToolbar2 = _interopRequireDefault(_withToolbar);
+var _withValidationLoad = _interopRequireDefault(require("./withValidationLoad"));
 
-var _withValidationLoad = require('./withValidationLoad');
+var _withLoad = _interopRequireDefault(require("./withLoad"));
 
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
-
-var _withLoad = require('./withLoad');
-
-var _withLoad2 = _interopRequireDefault(_withLoad);
-
-var _withInitialState = require('./withInitialState');
-
-var _withInitialState2 = _interopRequireDefault(_withInitialState);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _withInitialState = _interopRequireDefault(require("./withInitialState"));
 
 var Decorators = {
   dialog: function dialog(target) {
-    (0, _withToolbar2.default)(target);
-    (0, _withValidationLoad2.default)(target);
-    (0, _withLoad2.default)(target);
-    (0, _withInitialState2.default)(target);
+    (0, _withToolbar["default"])(target);
+    (0, _withValidationLoad["default"])(target);
+    (0, _withLoad["default"])(target);
+    (0, _withInitialState["default"])(target);
   },
-  withLoadOptions: _withLoadOptions2.default,
-  withToolbar: _withToolbar2.default,
-  withValidationLoad: _withValidationLoad2.default,
-  withLoad: _withLoad2.default,
-  withInitialState: _withInitialState2.default
+  withLoadOptions: _withLoadOptions["default"],
+  withToolbar: _withToolbar["default"],
+  withValidationLoad: _withValidationLoad["default"],
+  withLoad: _withLoad["default"],
+  withInitialState: _withInitialState["default"]
 };
-
-exports.default = Decorators;
+var _default = Decorators;
+exports["default"] = _default;
 //# sourceMappingURL=Decorators.js.map

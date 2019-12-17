@@ -1,150 +1,128 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SparklinesMaxLabel = exports.SparklinesMinLabel = exports.SparklinesReferenceLine = exports.SparklinesBars = exports.SparklinesSpot = exports.SparklinesSpots = exports.SparklinesLine = exports.Sparklines = undefined;
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports.Sparklines = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _SparklinesLine = _interopRequireDefault(require("./SparklinesLine"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+exports.SparklinesLine = _SparklinesLine["default"];
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _SparklinesSpots = _interopRequireDefault(require("./SparklinesSpots"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+exports.SparklinesSpots = _SparklinesSpots["default"];
 
-var _react = require('react');
+var _SparklinesSpot = _interopRequireDefault(require("./SparklinesSpot"));
 
-var _react2 = _interopRequireDefault(_react);
+exports.SparklinesSpot = _SparklinesSpot["default"];
 
-var _SparklinesLine = require('./SparklinesLine');
+var _SparklinesBars = _interopRequireDefault(require("./SparklinesBars"));
 
-var _SparklinesLine2 = _interopRequireDefault(_SparklinesLine);
+exports.SparklinesBars = _SparklinesBars["default"];
 
-var _SparklinesSpots = require('./SparklinesSpots');
+var _SparklinesReferenceLine = _interopRequireDefault(require("./SparklinesReferenceLine"));
 
-var _SparklinesSpots2 = _interopRequireDefault(_SparklinesSpots);
+exports.SparklinesReferenceLine = _SparklinesReferenceLine["default"];
 
-var _SparklinesSpot = require('./SparklinesSpot');
+var _SparklinesMinLabel = _interopRequireDefault(require("./SparklinesMinLabel"));
 
-var _SparklinesSpot2 = _interopRequireDefault(_SparklinesSpot);
+exports.SparklinesMinLabel = _SparklinesMinLabel["default"];
 
-var _SparklinesBars = require('./SparklinesBars');
+var _SparklinesMaxLabel = _interopRequireDefault(require("./SparklinesMaxLabel"));
 
-var _SparklinesBars2 = _interopRequireDefault(_SparklinesBars);
+exports.SparklinesMaxLabel = _SparklinesMaxLabel["default"];
 
-var _SparklinesReferenceLine = require('./SparklinesReferenceLine');
-
-var _SparklinesReferenceLine2 = _interopRequireDefault(_SparklinesReferenceLine);
-
-var _SparklinesMinLabel = require('./SparklinesMinLabel');
-
-var _SparklinesMinLabel2 = _interopRequireDefault(_SparklinesMinLabel);
-
-var _SparklinesMaxLabel = require('./SparklinesMaxLabel');
-
-var _SparklinesMaxLabel2 = _interopRequireDefault(_SparklinesMaxLabel);
-
-var _dataToPoints = require('./dataProcessing/dataToPoints');
-
-var _dataToPoints2 = _interopRequireDefault(_dataToPoints);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//fork https://github.com/borisyankov/react-sparklines
+var _dataToPoints = _interopRequireDefault(require("./dataProcessing/dataToPoints"));
 
 //import PropTypes from 'prop-types';
+//fork https://github.com/borisyankov/react-sparklines
 var DEFAULT_DATA = [],
     DEFAULT_WIDTH = 240,
     DEFAULT_HEIGHT = 60,
     DEFAULT_RATIO = 'none',
     DEFAULT_MARGIN = 2;
 
-var Sparklines = function (_PureComponent) {
-  (0, _inherits3.default)(Sparklines, _PureComponent);
+var Sparklines =
+/*#__PURE__*/
+function (_PureComponent) {
+  (0, _inheritsLoose2["default"])(Sparklines, _PureComponent);
 
   function Sparklines() {
-    (0, _classCallCheck3.default)(this, Sparklines);
-    return (0, _possibleConstructorReturn3.default)(this, (Sparklines.__proto__ || Object.getPrototypeOf(Sparklines)).apply(this, arguments));
+    return _PureComponent.apply(this, arguments) || this;
   }
 
-  (0, _createClass3.default)(Sparklines, [{
-    key: 'render',
+  var _proto = Sparklines.prototype;
 
-    /*
-      static propTypes = {
-         data: PropTypes.array,
-         limit: PropTypes.number,
-         width: PropTypes.number,
-         height: PropTypes.number,
-         svgWidth: PropTypes.number,
-         svgHeight: PropTypes.number,
-         preserveAspectRatio: PropTypes.string,
-         margin: PropTypes.number,
-         style: PropTypes.object,
-         min: PropTypes.number,
-         max: PropTypes.number
-      }
-    */
-
-    value: function render() {
-      var _props = this.props,
-          _props$data = _props.data,
-          data = _props$data === undefined ? DEFAULT_DATA : _props$data,
-          limit = _props.limit,
-          _props$width = _props.width,
-          width = _props$width === undefined ? DEFAULT_WIDTH : _props$width,
-          _props$height = _props.height,
-          height = _props$height === undefined ? DEFAULT_HEIGHT : _props$height,
-          svgWidth = _props.svgWidth,
-          svgHeight = _props.svgHeight,
-          _props$preserveAspect = _props.preserveAspectRatio,
-          preserveAspectRatio = _props$preserveAspect === undefined ? DEFAULT_RATIO : _props$preserveAspect,
-          _props$margin = _props.margin,
-          margin = _props$margin === undefined ? DEFAULT_MARGIN : _props$margin,
-          style = _props.style,
-          max = _props.max,
-          min = _props.min;
-
-
-      if (data.length === 0) return null;
-
-      var points = (0, _dataToPoints2.default)({ data: data, limit: limit, width: width, height: height, margin: margin, max: max, min: min }),
-          svgOpts = {
-        style: style,
-        viewBox: '0 0 ' + width + ' ' + height,
-        preserveAspectRatio: preserveAspectRatio
-      };
-
-      if (svgWidth > 0) svgOpts.width = svgWidth;
-      if (svgHeight > 0) svgOpts.height = svgHeight;
-
-      return _react2.default.createElement(
-        'svg',
-        svgOpts,
-        _react2.default.Children.map(this.props.children, function (child) {
-          return _react2.default.cloneElement(child, { data: data, points: points, width: width, height: height, margin: margin });
-        })
-      );
+  /*
+    static propTypes = {
+       data: PropTypes.array,
+       limit: PropTypes.number,
+       width: PropTypes.number,
+       height: PropTypes.number,
+       svgWidth: PropTypes.number,
+       svgHeight: PropTypes.number,
+       preserveAspectRatio: PropTypes.string,
+       margin: PropTypes.number,
+       style: PropTypes.object,
+       min: PropTypes.number,
+       max: PropTypes.number
     }
-  }]);
+  */
+  _proto.render = function render() {
+    var _this$props = this.props,
+        _this$props$data = _this$props.data,
+        data = _this$props$data === void 0 ? DEFAULT_DATA : _this$props$data,
+        limit = _this$props.limit,
+        _this$props$width = _this$props.width,
+        width = _this$props$width === void 0 ? DEFAULT_WIDTH : _this$props$width,
+        _this$props$height = _this$props.height,
+        height = _this$props$height === void 0 ? DEFAULT_HEIGHT : _this$props$height,
+        svgWidth = _this$props.svgWidth,
+        svgHeight = _this$props.svgHeight,
+        _this$props$preserveA = _this$props.preserveAspectRatio,
+        preserveAspectRatio = _this$props$preserveA === void 0 ? DEFAULT_RATIO : _this$props$preserveA,
+        _this$props$margin = _this$props.margin,
+        margin = _this$props$margin === void 0 ? DEFAULT_MARGIN : _this$props$margin,
+        style = _this$props.style,
+        max = _this$props.max,
+        min = _this$props.min;
+    if (data.length === 0) return null;
+    var points = (0, _dataToPoints["default"])({
+      data: data,
+      limit: limit,
+      width: width,
+      height: height,
+      margin: margin,
+      max: max,
+      min: min
+    }),
+        svgOpts = {
+      style: style,
+      viewBox: "0 0 " + width + " " + height,
+      preserveAspectRatio: preserveAspectRatio
+    };
+    if (svgWidth > 0) svgOpts.width = svgWidth;
+    if (svgHeight > 0) svgOpts.height = svgHeight;
+    return _react["default"].createElement("svg", svgOpts, _react["default"].Children.map(this.props.children, function (child) {
+      return _react["default"].cloneElement(child, {
+        data: data,
+        points: points,
+        width: width,
+        height: height,
+        margin: margin
+      });
+    }));
+  };
+
   return Sparklines;
 }(_react.PureComponent);
 
 exports.Sparklines = Sparklines;
-exports.SparklinesLine = _SparklinesLine2.default;
-exports.SparklinesSpots = _SparklinesSpots2.default;
-exports.SparklinesSpot = _SparklinesSpot2.default;
-exports.SparklinesBars = _SparklinesBars2.default;
-exports.SparklinesReferenceLine = _SparklinesReferenceLine2.default;
-exports.SparklinesMinLabel = _SparklinesMinLabel2.default;
-exports.SparklinesMaxLabel = _SparklinesMaxLabel2.default;
 //# sourceMappingURL=Sparklines.js.map

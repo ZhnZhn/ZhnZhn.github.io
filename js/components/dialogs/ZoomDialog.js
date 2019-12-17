@@ -1,44 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DateUtils = require('../../utils/DateUtils');
-
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
-var _ModalDialog = require('../zhn-moleculs/ModalDialog');
-
-var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
-
-var _DialogCell = require('./DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
 var S = {
   DIALOG: {
@@ -56,41 +35,53 @@ var S = {
     color: '#1b2836'
   }
 };
-
-var isDmy = _DateUtils2.default.isDmy,
-    dmyToUTC = _DateUtils2.default.dmyToUTC,
-    mlsToDmy = _DateUtils2.default.mlsToDmy,
-    addToDmy = _DateUtils2.default.addToDmy,
-    getYTDfromDmy = _DateUtils2.default.getYTDfromDmy;
-
+var isDmy = _DateUtils["default"].isDmy,
+    dmyToUTC = _DateUtils["default"].dmyToUTC,
+    mlsToDmy = _DateUtils["default"].mlsToDmy,
+    addToDmy = _DateUtils["default"].addToDmy,
+    getYTDfromDmy = _DateUtils["default"].getYTDfromDmy;
 
 var _isPeriodValid = function _isPeriodValid(from, to) {
   return dmyToUTC(from) <= dmyToUTC(to);
 };
+
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
 var _getFromToDates = function _getFromToDates(chart) {
-  return _isFn(chart.zhGetFromToDates) ? chart.zhGetFromToDates({ format: mlsToDmy }) : {};
+  return _isFn(chart.zhGetFromToDates) ? chart.zhGetFromToDates({
+    format: mlsToDmy
+  }) : {};
 };
 
-var ZoomDialog = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(ZoomDialog, _Component);
+var ZoomDialog =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ZoomDialog, _Component);
 
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    data: PropTypes.object,
+    onClose: PropTypes.func
+  }
+  */
   function ZoomDialog(props) {
-    (0, _classCallCheck3.default)(this, ZoomDialog);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ZoomDialog.__proto__ || Object.getPrototypeOf(ZoomDialog)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._getChart = function () {
       var _this$props = _this.props,
           data = _this$props.data,
           onClose = _this$props.onClose,
           _data$chart = data.chart,
-          chart = _data$chart === undefined ? {} : _data$chart;
-
-      return { chart: chart, onClose: onClose };
+          chart = _data$chart === void 0 ? {} : _data$chart;
+      return {
+        chart: chart,
+        onClose: onClose
+      };
     };
 
     _this._hZoom = function () {
@@ -108,6 +99,7 @@ var ZoomDialog = (_temp = _class = function (_Component) {
           to: dmyToUTC(toDate)
         });
       }
+
       onClose();
     };
 
@@ -151,110 +143,94 @@ var ZoomDialog = (_temp = _class = function (_Component) {
       return _this._dates = c;
     };
 
-    _this._hZoomBy1M = _this._hZoomBy.bind(_this, -1);
-    _this._hZoomBy3M = _this._hZoomBy.bind(_this, -3);
-    _this._hZoomBy6M = _this._hZoomBy.bind(_this, -6);
-    _this._hZoomBy1Y = _this._hZoomBy.bind(_this, -12);
-
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Flat, {
-      key: 'zoom',
-      caption: 'Zoom',
+    _this._hZoomBy1M = _this._hZoomBy.bind((0, _assertThisInitialized2["default"])(_this), -1);
+    _this._hZoomBy3M = _this._hZoomBy.bind((0, _assertThisInitialized2["default"])(_this), -3);
+    _this._hZoomBy6M = _this._hZoomBy.bind((0, _assertThisInitialized2["default"])(_this), -6);
+    _this._hZoomBy1Y = _this._hZoomBy.bind((0, _assertThisInitialized2["default"])(_this), -12);
+    _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Flat, {
+      key: "zoom",
+      caption: "Zoom",
       isPrimary: true,
       onClick: _this._hZoom
     })];
     return _this;
   }
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    data: PropTypes.object,
-    onClose: PropTypes.func
-  }
-  */
 
-  (0, _createClass3.default)(ZoomDialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          data = _props.data,
-          onClose = _props.onClose,
-          _data$chart2 = data.chart,
-          chart = _data$chart2 === undefined ? {} : _data$chart2,
-          _getFromToDates4 = _getFromToDates(chart),
-          from = _getFromToDates4.from,
-          to = _getFromToDates4.to,
-          id = _isFn(chart.zhGetId) ? chart.zhGetId() : void 0;
+  var _proto = ZoomDialog.prototype;
 
-      return _react2.default.createElement(
-        _ModalDialog2.default,
-        {
-          caption: 'Zoom Chart',
-          style: S.DIALOG,
-          isShow: isShow,
-          commandButtons: this._commandButtons,
-          onClose: onClose
-        },
-        _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-          key: id,
-          ref: this._refDates,
-          dateStyle: S.DATE,
-          placeholder: 'DD-MM-YYYY',
-          initFromDate: from,
-          initToDate: to,
-          errMsg: 'DD-MM-YYYY format must be, min 01-01-1990',
-          isPeriodValid: _isPeriodValid,
-          onTestDate: isDmy,
-          onEnter: this._hZoom
-        }),
-        _react2.default.createElement(
-          'div',
-          { style: S.PERIOD_BTS },
-          _react2.default.createElement(_DialogCell2.default.Button.Flat, {
-            rootStyle: S.BT,
-            key: '1M',
-            caption: '1M',
-            onClick: this._hZoomBy1M
-          }),
-          _react2.default.createElement(_DialogCell2.default.Button.Flat, {
-            rootStyle: S.BT,
-            key: '3M',
-            caption: '3M',
-            onClick: this._hZoomBy3M
-          }),
-          _react2.default.createElement(_DialogCell2.default.Button.Flat, {
-            rootStyle: S.BT,
-            key: '6M',
-            caption: '6M',
-            onClick: this._hZoomBy6M
-          }),
-          _react2.default.createElement(_DialogCell2.default.Button.Flat, {
-            rootStyle: S.BT,
-            key: 'YTD',
-            caption: 'YTD',
-            onClick: this._hZoomYTD
-          }),
-          _react2.default.createElement(_DialogCell2.default.Button.Flat, {
-            rootStyle: S.BT,
-            key: '1Y',
-            caption: '1Y',
-            onClick: this._hZoomBy1Y
-          })
-        )
-      );
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
     }
-  }]);
+
+    return true;
+  };
+
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        data = _this$props2.data,
+        onClose = _this$props2.onClose,
+        _data$chart2 = data.chart,
+        chart = _data$chart2 === void 0 ? {} : _data$chart2,
+        _getFromToDates4 = _getFromToDates(chart),
+        from = _getFromToDates4.from,
+        to = _getFromToDates4.to,
+        id = _isFn(chart.zhGetId) ? chart.zhGetId() : void 0;
+
+    return _react["default"].createElement(_ModalDialog["default"], {
+      caption: "Zoom Chart",
+      style: S.DIALOG,
+      isShow: isShow,
+      commandButtons: this._commandButtons,
+      onClose: onClose
+    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+      key: id,
+      ref: this._refDates,
+      dateStyle: S.DATE,
+      placeholder: "DD-MM-YYYY",
+      initFromDate: from,
+      initToDate: to,
+      errMsg: "DD-MM-YYYY format must be, min 01-01-1990",
+      isPeriodValid: _isPeriodValid,
+      onTestDate: isDmy,
+      onEnter: this._hZoom
+    }), _react["default"].createElement("div", {
+      style: S.PERIOD_BTS
+    }, _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+      rootStyle: S.BT,
+      key: "1M",
+      caption: "1M",
+      onClick: this._hZoomBy1M
+    }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+      rootStyle: S.BT,
+      key: "3M",
+      caption: "3M",
+      onClick: this._hZoomBy3M
+    }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+      rootStyle: S.BT,
+      key: "6M",
+      caption: "6M",
+      onClick: this._hZoomBy6M
+    }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+      rootStyle: S.BT,
+      key: "YTD",
+      caption: "YTD",
+      onClick: this._hZoomYTD
+    }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+      rootStyle: S.BT,
+      key: "1Y",
+      caption: "1Y",
+      onClick: this._hZoomBy1Y
+    })));
+  };
+
   return ZoomDialog;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+ZoomDialog.defaultProps = {
   data: {}
-}, _temp);
-exports.default = ZoomDialog;
+};
+var _default = ZoomDialog;
+exports["default"] = _default;
 //# sourceMappingURL=ZoomDialog.js.map

@@ -1,158 +1,120 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _LocationSearch = _interopRequireDefault(require("../flux/logic/LocationSearch"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _ChartStore = _interopRequireDefault(require("../flux/stores/ChartStore"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _HeaderBar = _interopRequireDefault(require("./header/HeaderBar"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _BrowserContainer = _interopRequireDefault(require("./browser-container/BrowserContainer"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _About = _interopRequireDefault(require("./about/About"));
 
-var _react = require('react');
+var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContainer"));
 
-var _react2 = _interopRequireDefault(_react);
+var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 
-var _LocationSearch = require('../flux/logic/LocationSearch');
+var _ComponentActions = _interopRequireWildcard(require("../flux/actions/ComponentActions"));
 
-var _LocationSearch2 = _interopRequireDefault(_LocationSearch);
+var _BrowserActions = require("../flux/actions/BrowserActions");
 
-var _ChartStore = require('../flux/stores/ChartStore');
+var _ChartActions = require("../flux/actions/ChartActions");
 
-var _ChartStore2 = _interopRequireDefault(_ChartStore);
+var _theme = _interopRequireDefault(require("./styles/theme"));
 
-var _HeaderBar = require('./header/HeaderBar');
+var _ThemeContext = _interopRequireDefault(require("./hoc/ThemeContext"));
 
-var _HeaderBar2 = _interopRequireDefault(_HeaderBar);
-
-var _BrowserContainer = require('./browser-container/BrowserContainer');
-
-var _BrowserContainer2 = _interopRequireDefault(_BrowserContainer);
-
-var _About = require('./about/About');
-
-var _About2 = _interopRequireDefault(_About);
-
-var _CompContainer = require('./zhn-containers/CompContainer');
-
-var _CompContainer2 = _interopRequireDefault(_CompContainer);
-
-var _DialogContainer = require('./dialogs/DialogContainer');
-
-var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
-
-var _ComponentActions = require('../flux/actions/ComponentActions');
-
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-var _BrowserActions = require('../flux/actions/BrowserActions');
-
-var _ChartActions = require('../flux/actions/ChartActions');
-
-var _theme = require('./styles/theme');
-
-var _theme2 = _interopRequireDefault(_theme);
-
-var _ThemeContext = require('./hoc/ThemeContext');
-
-var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
-
-var _checkBuild = require('./checkBuild');
-
-var _checkBuild2 = _interopRequireDefault(_checkBuild);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
 var BUILD_DATE = '19-11-2019';
 var CL = "component-container";
 
-var AppErc = function (_Component) {
-  (0, _inherits3.default)(AppErc, _Component);
+var AppErc =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(AppErc, _Component);
 
   function AppErc() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, AppErc);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = AppErc.__proto__ || Object.getPrototypeOf(AppErc)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      theme: _theme2.default
-    }, _this._onStore = function (actionType, themeName) {
-      if (actionType === _ComponentActions.ComponentActionTypes.CHANGE_THEME) {
-        _this.setState(function (_ref2) {
-          var theme = _ref2.theme;
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
+      theme: _theme["default"]
+    };
 
+    _this._onStore = function (actionType, themeName) {
+      if (actionType === _ComponentActions.ComponentActionTypes.CHANGE_THEME) {
+        _this.setState(function (_ref) {
+          var theme = _ref.theme;
           theme.setThemeName(themeName);
           return {
-            theme: (0, _extends3.default)({}, theme)
+            theme: (0, _extends2["default"])({}, theme)
           };
         });
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(AppErc, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubsribe = _ChartStore2.default.listen(this._onStore);
-      _LocationSearch2.default.load();
-      (0, _checkBuild2.default)(BUILD_DATE, _ComponentActions2.default.showReload);
-    }
-  }, {
-    key: 'componentWillUnmout',
-    value: function componentWillUnmout() {
-      this.unsubsribe();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var theme = this.state.theme;
+  var _proto = AppErc.prototype;
 
-      return _react2.default.createElement(
-        _ThemeContext2.default.Provider,
-        { value: theme },
-        _react2.default.createElement(_HeaderBar2.default, { store: _ChartStore2.default }),
-        _react2.default.createElement(
-          'div',
-          { className: CL },
-          _react2.default.createElement(_BrowserContainer2.default, {
-            store: _ChartStore2.default,
-            initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
-            showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
-            onCloseDialog: _ComponentActions2.default.closeDialog
-          }),
-          _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
-          _react2.default.createElement(_CompContainer2.default, {
-            store: _ChartStore2.default,
-            addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
-          })
-        ),
-        _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default })
-      );
-    }
-  }]);
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubsribe = _ChartStore["default"].listen(this._onStore);
+
+    _LocationSearch["default"].load();
+
+    (0, _checkBuild["default"])(BUILD_DATE, _ComponentActions["default"].showReload);
+  };
+
+  _proto.componentWillUnmout = function componentWillUnmout() {
+    this.unsubsribe();
+  };
+
+  _proto.render = function render() {
+    var theme = this.state.theme;
+    return _react["default"].createElement(_ThemeContext["default"].Provider, {
+      value: theme
+    }, _react["default"].createElement(_HeaderBar["default"], {
+      store: _ChartStore["default"]
+    }), _react["default"].createElement("div", {
+      className: CL
+    }, _react["default"].createElement(_BrowserContainer["default"], {
+      store: _ChartStore["default"],
+      initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+      showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+      onCloseDialog: _ComponentActions["default"].closeDialog
+    }), _react["default"].createElement(_About["default"], {
+      store: _ChartStore["default"],
+      isShow: true
+    }), _react["default"].createElement(_CompContainer["default"], {
+      store: _ChartStore["default"],
+      addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
+    })), _react["default"].createElement(_DialogContainer["default"], {
+      store: _ChartStore["default"]
+    }));
+  };
+
   return AppErc;
 }(_react.Component);
 
-exports.default = AppErc;
+var _default = AppErc;
+exports["default"] = _default;
 //# sourceMappingURL=AppErc.js.map

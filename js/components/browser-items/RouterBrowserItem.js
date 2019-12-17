@@ -1,30 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Item = require('./Item');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _Item2 = _interopRequireDefault(_Item);
+var _Item = _interopRequireDefault(require("./Item"));
 
-var _ItemWithCap = require('./ItemWithCap');
+var _ItemWithCap = _interopRequireDefault(require("./ItemWithCap"));
 
-var _ItemWithCap2 = _interopRequireDefault(_ItemWithCap);
-
-var _ItemLse = require('./ItemLse');
-
-var _ItemLse2 = _interopRequireDefault(_ItemLse);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ItemLse = _interopRequireDefault(require("./ItemLse"));
 
 var RouterBrowserItem = {
-  DEFAULT: _Item2.default,
-
-  Item: _Item2.default,
-  ItemWithCap: _ItemWithCap2.default,
-  ItemLse: _ItemLse2.default
+  DEFAULT: _Item["default"],
+  Item: _Item["default"],
+  ItemWithCap: _ItemWithCap["default"],
+  ItemLse: _ItemLse["default"]
 };
-
-exports.default = RouterBrowserItem;
+var _default = RouterBrowserItem;
+exports["default"] = _default;
 //# sourceMappingURL=RouterBrowserItem.js.map

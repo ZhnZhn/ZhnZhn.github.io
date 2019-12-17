@@ -1,26 +1,31 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
 
-var createLoadOptions = function createLoadOptions() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  if (options === void 0) {
+    options = {};
+  }
 
-  var fnValue = props.fnValue,
-      columnName = props.columnName,
-      dataColumn = props.dataColumn,
-      seriaColumnNames = props.seriaColumnNames,
-      loadId = props.loadId,
-      dataSource = props.dataSource,
-      item = options.item,
-      month = options.month,
-      year = options.year,
-      fromDate = options.fromDate,
+  var _props = props,
+      fnValue = _props.fnValue,
+      columnName = _props.columnName,
+      dataColumn = _props.dataColumn,
+      seriaColumnNames = _props.seriaColumnNames,
+      loadId = _props.loadId,
+      dataSource = _props.dataSource,
+      _options = options,
+      item = _options.item,
+      month = _options.month,
+      year = _options.year,
+      fromDate = _options.fromDate,
       _value = typeof fnValue === 'function' ? fnValue(item.value, month.value, year.value) : undefined,
-      _subtitle = columnName ? month.caption + ':' + year.caption + ':' + columnName : month.caption + ':' + year.caption;
+      _subtitle = columnName ? month.caption + ":" + year.caption + ":" + columnName : month.caption + ":" + year.caption;
 
   return {
     value: _value,
@@ -35,5 +40,6 @@ var createLoadOptions = function createLoadOptions() {
   };
 };
 
-exports.default = createLoadOptions;
+var _default = createLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=futures3.js.map

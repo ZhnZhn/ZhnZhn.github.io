@@ -1,16 +1,14 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var S = {
   ROOT: 'style="display:inline-block;padding-right:8px;"',
   TITLE: 'style="color:#1b75bb;"'
 };
 
 var _crSpan = function _crSpan(title, value) {
-  return '\n   <span ' + S.ROOT + '>\n     <span ' + S.TITLE + '>' + title + ':&nbsp;</span>\n     <span>' + value + '</span>\n   </span>\n  ';
+  return "\n   <span " + S.ROOT + ">\n     <span " + S.TITLE + ">" + title + ":&nbsp;</span>\n     <span>" + value + "</span>\n   </span>\n  ";
 };
 
 var fnDescr = {
@@ -23,8 +21,7 @@ var fnDescr = {
           frequency = seria.frequency,
           unitMeasure = seria.unitMeasure,
           unitMult = seria.unitMult;
-
-      strDom += '\n        <div style="color:black;">' + title + '</div>\n        <div>\n          ' + _crSpan('IDBANK', id) + '\n          ' + _crSpan('Frequency', frequency) + '\n          ' + _crSpan('UpdatedOn', updatedOn) + '\n        </div>\n        <div>\n          ' + _crSpan('UnitMeasure', unitMeasure) + '\n          ' + _crSpan('UnitMult', unitMult) + '\n        </div>\n        <div>\n          <a href="https://www.insee.fr/en/statistiques/serie/' + id + '">INSEE Data Link</a>\n        </div>\n        <br/>\n      ';
+      strDom += "\n        <div style=\"color:black;\">" + title + "</div>\n        <div>\n          " + _crSpan('IDBANK', id) + "\n          " + _crSpan('Frequency', frequency) + "\n          " + _crSpan('UpdatedOn', updatedOn) + "\n        </div>\n        <div>\n          " + _crSpan('UnitMeasure', unitMeasure) + "\n          " + _crSpan('UnitMult', unitMult) + "\n        </div>\n        <div>\n          <a href=\"https://www.insee.fr/en/statistiques/serie/" + id + "\">INSEE Data Link</a>\n        </div>\n        <br/>\n      ";
     });
     return {
       name: title,
@@ -32,6 +29,6 @@ var fnDescr = {
     };
   }
 };
-
-exports.default = fnDescr;
+var _default = fnDescr;
+exports["default"] = _default;
 //# sourceMappingURL=fnDescr.js.map

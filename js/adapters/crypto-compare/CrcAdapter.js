@@ -1,28 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toHdConfig = require('./toHdConfig');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _toHdConfig2 = _interopRequireDefault(_toHdConfig);
+var _toHdConfig = _interopRequireDefault(require("./toHdConfig"));
 
-var _toInfoConfig = require('./toInfoConfig');
-
-var _toInfoConfig2 = _interopRequireDefault(_toInfoConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _toInfoConfig = _interopRequireDefault(require("./toInfoConfig"));
 
 var _rAdapter = {
-  DF: _toHdConfig2.default,
-  HD: _toHdConfig2.default,
-  CI: _toInfoConfig2.default
+  DF: _toHdConfig["default"],
+  HD: _toHdConfig["default"],
+  CI: _toInfoConfig["default"]
 };
 
 var _getAdapter = function _getAdapter(option) {
   var dfSubLoadId = option.dfSubLoadId;
-
   return _rAdapter[dfSubLoadId] || _rAdapter.DF;
 };
 
@@ -34,6 +28,6 @@ var CrcAdapter = {
     return _getAdapter(option).toSeries(json, option);
   }
 };
-
-exports.default = CrcAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\crypto-compare\CrcAdapter.js.map
+var _default = CrcAdapter;
+exports["default"] = _default;
+//# sourceMappingURL=CrcAdapter.js.map

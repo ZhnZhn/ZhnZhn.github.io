@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _memoizeOne = require('memoize-one');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _memoizeOne2 = _interopRequireDefault(_memoizeOne);
+var _memoizeOne = _interopRequireDefault(require("memoize-one"));
 
-var _throttle = require('../../../utils/throttle');
-
-var _throttle2 = _interopRequireDefault(_throttle);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _throttle = _interopRequireDefault(require("../../../utils/throttle"));
 
 var DF_MS = 5000;
 
@@ -23,6 +18,7 @@ var _isFn = function _isFn(fn) {
 var _isLoading = function _isLoading(value) {
   return value && value.length > 1;
 };
+
 var _crOptions = function _crOptions(api) {
   return _isFn(api.crUrlOptions) ? api.crUrlOptions() : true;
 };
@@ -42,8 +38,9 @@ var _fetchUrl = function _fetchUrl(_ref) {
     }
   }).then(function (json) {
     action.loaded(api.crOptions(json));
-  }).catch(function (err) {
+  })["catch"](function (err) {
     action.loadingFailed();
+
     if (_isFn(api.onError)) {
       api.onError(err.message);
     } else {
@@ -52,20 +49,35 @@ var _fetchUrl = function _fetchUrl(_ref) {
   });
 };
 
-var _crInputChange = function _crInputChange(action, api) {
-  var ms = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DF_MS;
-  return (0, _throttle2.default)(function (value) {
+var _crInputChange = function _crInputChange(action, api, ms) {
+  if (ms === void 0) {
+    ms = DF_MS;
+  }
+
+  return (0, _throttle["default"])(function (value) {
     if (_isLoading(value)) {
       action.loading();
+
       var options = _crOptions(api);
+
       if (!options) {
         action.loadingFailed();
       } else {
-        _fetchUrl({ api: api, action: action, value: value, options: options });
+        _fetchUrl({
+          api: api,
+          action: action,
+          value: value,
+          options: options
+        });
       }
     }
-  }, ms, { trailing: true, leading: false });
+  }, ms, {
+    trailing: true,
+    leading: false
+  });
 };
 
-exports.default = (0, _memoizeOne2.default)(_crInputChange);
+var _default = (0, _memoizeOne["default"])(_crInputChange);
+
+exports["default"] = _default;
 //# sourceMappingURL=crInputChange.js.map

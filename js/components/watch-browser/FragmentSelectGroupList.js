@@ -1,37 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _RowInputSelect = require('./RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var FragmentSelectGroupList = function (_Component) {
-  (0, _inherits3.default)(FragmentSelectGroupList, _Component);
+//import PropTypes from "prop-types";
+var FragmentSelectGroupList =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(FragmentSelectGroupList, _Component);
 
   /*
   static propTypes = {
@@ -44,19 +30,23 @@ var FragmentSelectGroupList = function (_Component) {
     listCaption: PropTypes.string
   }
   */
-
   function FragmentSelectGroupList(props) {
-    (0, _classCallCheck3.default)(this, FragmentSelectGroupList);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (FragmentSelectGroupList.__proto__ || Object.getPrototypeOf(FragmentSelectGroupList)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._handleSelectGroup = function (item) {
       if (item && item.caption) {
         _this.groupCaption = item.caption;
+
         if (item.lists) {
-          _this.setState({ listOptions: item.lists });
+          _this.setState({
+            listOptions: item.lists
+          });
         } else {
-          _this.setState({ listOptions: [] });
+          _this.setState({
+            listOptions: []
+          });
         }
       } else {
         _this.groupCaption = null;
@@ -69,72 +59,66 @@ var FragmentSelectGroupList = function (_Component) {
 
     _this.groupCaption = null;
     _this.listCaption = null;
-
     _this.state = {
       listOptions: []
     };
     return _this;
   }
 
-  (0, _createClass3.default)(FragmentSelectGroupList, [{
-    key: 'UNSAFE_componentWillReceiveProps',
-    value: function UNSAFE_componentWillReceiveProps(nextProps) {
-      if (nextProps !== this.props) {
-        if (nextProps.groupOptions !== this.props.groupOptions) {
-          this.groupCaption = null;
-          this.listCaption = null;
-          this.setState({ listOptions: [] });
-        } else {
-          if (this.groupCaption) {
-            var listOptions = this.props.store.getWatchListsByGroup(this.groupCaption);
-            if (listOptions !== this.state.listOptions) this.listCaption = null;
-            this.setState({ listOptions: listOptions });
-          }
+  var _proto = FragmentSelectGroupList.prototype;
+
+  _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
+      if (nextProps.groupOptions !== this.props.groupOptions) {
+        this.groupCaption = null;
+        this.listCaption = null;
+        this.setState({
+          listOptions: []
+        });
+      } else {
+        if (this.groupCaption) {
+          var listOptions = this.props.store.getWatchListsByGroup(this.groupCaption);
+          if (listOptions !== this.state.listOptions) this.listCaption = null;
+          this.setState({
+            listOptions: listOptions
+          });
         }
       }
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          groupCaption = _props.groupCaption,
-          groupOptions = _props.groupOptions,
-          listCaption = _props.listCaption,
-          listOptions = this.state.listOptions;
+  };
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_RowInputSelect2.default, {
-          caption: groupCaption,
-          options: groupOptions,
-          onSelect: this._handleSelectGroup
-        }),
-        _react2.default.createElement(_RowInputSelect2.default, {
-          caption: listCaption,
-          options: listOptions,
-          onSelect: this._handleSelectList
-        })
-      );
-    }
-  }, {
-    key: 'getValue',
-    value: function getValue() {
-      return {
-        captionGroup: this.groupCaption,
-        captionList: this.listCaption
-      };
-    }
-  }, {
-    key: 'setValueNull',
-    value: function setValueNull() {
-      this.groupCaption = null;
-      this.listCaption = null;
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        groupCaption = _this$props.groupCaption,
+        groupOptions = _this$props.groupOptions,
+        listCaption = _this$props.listCaption,
+        listOptions = this.state.listOptions;
+    return _react["default"].createElement("div", null, _react["default"].createElement(_RowInputSelect["default"], {
+      caption: groupCaption,
+      options: groupOptions,
+      onSelect: this._handleSelectGroup
+    }), _react["default"].createElement(_RowInputSelect["default"], {
+      caption: listCaption,
+      options: listOptions,
+      onSelect: this._handleSelectList
+    }));
+  };
+
+  _proto.getValue = function getValue() {
+    return {
+      captionGroup: this.groupCaption,
+      captionList: this.listCaption
+    };
+  };
+
+  _proto.setValueNull = function setValueNull() {
+    this.groupCaption = null;
+    this.listCaption = null;
+  };
+
   return FragmentSelectGroupList;
 }(_react.Component);
-//import PropTypes from "prop-types";
 
-exports.default = FragmentSelectGroupList;
+var _default = FragmentSelectGroupList;
+exports["default"] = _default;
 //# sourceMappingURL=FragmentSelectGroupList.js.map

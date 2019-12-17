@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/utils/__tests__/formatNumber.test.js"
- ],
- "file": "../../../src/utils/__tests__/formatNumber.test.js",
- "names": [
-  "describe",
-  "test",
-  "str1",
-  "expect",
-  "toBe",
-  "str2",
-  "str"
- ],
- "mappings": ";;;;;;AACA;;;;;;AAEAA,SAAS,cAAT,EAAyB,YAAI;AAC3BC,OAAK,gDAAL,EAAuD,YAAI;AACzD,QAAMC,OAAO,4BAAG,KAAH,CAAb;AACAC,WAAOD,IAAP,EAAaE,IAAb,CAAkB,OAAlB;AACAD,kBAAcD,IAAd,uDAAcA,IAAd,GAAoBE,IAApB,CAAyB,QAAzB;AACA,QAAMC,OAAO,4BAAG,CAAC,KAAJ,CAAb;AACAF,WAAOE,IAAP,EAAaD,IAAb,CAAkB,QAAlB;AACAD,kBAAcE,IAAd,uDAAcA,IAAd,GAAoBD,IAApB,CAAyB,QAAzB;AACD,GAPD;;AASAH,OAAK,yDAAL,EAAgE,YAAI;AAClE,QAAMK,MAAM,4BAAG,KAAH,CAAZ;AACAH,WAAOG,GAAP,EAAYF,IAAZ,CAAiB,MAAjB;AACAD,kBAAcG,GAAd,uDAAcA,GAAd,GAAmBF,IAAnB,CAAwB,QAAxB;AACD,GAJD;AAKD,CAfD"
-}
+{"version":3,"sources":["../../../src/utils/__tests__/formatNumber.test.js"],"names":["describe","test","str1","expect","toBe","str2","str"],"mappings":";;;;AACA;;AAEAA,QAAQ,CAAC,cAAD,EAAiB,YAAI;AAC3BC,EAAAA,IAAI,CAAC,gDAAD,EAAmD,YAAI;AACzD,QAAMC,IAAI,GAAG,8BAAG,KAAH,CAAb;AACAC,IAAAA,MAAM,CAACD,IAAD,CAAN,CAAaE,IAAb,CAAkB,OAAlB;AACAD,IAAAA,MAAM,CAAC,OAAOD,IAAR,CAAN,CAAoBE,IAApB,CAAyB,QAAzB;AACA,QAAMC,IAAI,GAAG,8BAAG,CAAC,KAAJ,CAAb;AACAF,IAAAA,MAAM,CAACE,IAAD,CAAN,CAAaD,IAAb,CAAkB,QAAlB;AACAD,IAAAA,MAAM,CAAC,OAAOE,IAAR,CAAN,CAAoBD,IAApB,CAAyB,QAAzB;AACD,GAPG,CAAJ;AASAH,EAAAA,IAAI,CAAC,yDAAD,EAA4D,YAAI;AAClE,QAAMK,GAAG,GAAG,8BAAG,KAAH,CAAZ;AACAH,IAAAA,MAAM,CAACG,GAAD,CAAN,CAAYF,IAAZ,CAAiB,MAAjB;AACAD,IAAAA,MAAM,CAAC,OAAOG,GAAR,CAAN,CAAmBF,IAAnB,CAAwB,QAAxB;AACD,GAJG,CAAJ;AAKD,CAfO,CAAR","sourcesContent":["\r\nimport fn from '../formatNumber'\r\n\r\ndescribe('formatNumber', ()=>{\r\n  test('for -0.01<value<0.01 should return same as str', ()=>{\r\n    const str1 = fn(0.009)\r\n    expect(str1).toBe('0.009')\r\n    expect(typeof str1).toBe('string')\r\n    const str2 = fn(-0.009)\r\n    expect(str2).toBe('-0.009')\r\n    expect(typeof str2).toBe('string')    \r\n  })\r\n\r\n  test('for value>0.01 should return round by 2 decimals as str', ()=>{\r\n    const str = fn(1.009)\r\n    expect(str).toBe('1.01')\r\n    expect(typeof str).toBe('string')\r\n  })\r\n})\r\n"],"file":"formatNumber.test.js"}

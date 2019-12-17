@@ -1,71 +1,44 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _WatchActions = _interopRequireWildcard(require("../../flux/actions/WatchActions"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _MsgWatch = _interopRequireDefault(require("../../constants/MsgWatch"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _class;
-//import PropTypes from "prop-types";
+var _Button = _interopRequireDefault(require("./Button"));
 
-var _react = require('react');
+var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
 
-var _react2 = _interopRequireDefault(_react);
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _WatchActions = require('../../flux/actions/WatchActions');
+var _withValidationLoad = _interopRequireDefault(require("../dialogs/decorators/withValidationLoad"));
 
-var _WatchActions2 = _interopRequireDefault(_WatchActions);
+var _class, _temp;
 
-var _MsgWatch = require('../../constants/MsgWatch');
-
-var _MsgWatch2 = _interopRequireDefault(_MsgWatch);
-
-var _ModalDialog = require('../zhn-moleculs/ModalDialog');
-
-var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
-
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var addItem = _WatchActions2.default.addItem;
-
+var addItem = _WatchActions["default"].addItem;
 var actionCompleted = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
     actionFailed = _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
     forActionType = _WatchActions.WatchActionTypes.ADD_ITEM;
-var notSelected = _MsgWatch2.default.notSelected;
+var notSelected = _MsgWatch["default"].notSelected;
 
-var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Component) {
-  (0, _inherits3.default)(AddToWatchDialog, _Component);
+var AddToWatchDialog = (0, _withValidationLoad["default"])(_class = (_temp =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(AddToWatchDialog, _Component);
 
   /*
   static propTypes = {
@@ -79,30 +52,39 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
     onClose : PropTypes.func
   }
   */
-
   function AddToWatchDialog(props) {
-    (0, _classCallCheck3.default)(this, AddToWatchDialog);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AddToWatchDialog.__proto__ || Object.getPrototypeOf(AddToWatchDialog)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._onStore = function (actionType, data) {
       if (actionType === actionCompleted && data.forActionType === forActionType) {
         if (_this.state.validationMessages.length > 0) {
-          _this.setState({ validationMessages: [] });
+          _this.setState({
+            validationMessages: []
+          });
         }
+
         _this.props.onClose();
       } else if (actionType === actionFailed && data.forActionType === forActionType) {
-        _this.setState({ validationMessages: data.messages });
+        _this.setState({
+          validationMessages: data.messages
+        });
       }
     };
 
     _this._handleSelectGroup = function (group) {
       if (group && group.caption) {
         _this.groupCaption = group.caption;
+
         if (group.lists) {
-          _this.setState({ listOptions: group.lists });
+          _this.setState({
+            listOptions: group.lists
+          });
         } else {
-          _this.setState({ listOptions: [] });
+          _this.setState({
+            listOptions: []
+          });
         }
       } else {
         _this.groupCaption = null;
@@ -119,15 +101,21 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
 
     _this._handleAdd = function () {
       var validationMessages = _this._getValidationMessages();
+
       if (validationMessages.isValid) {
         var data = _this.props.data,
             caption = data.caption,
             config = data.config,
-            groupCaption = _this.groupCaption,
-            listCaption = _this.listCaption;
+            _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
+            groupCaption = _assertThisInitialize.groupCaption,
+            listCaption = _assertThisInitialize.listCaption;
 
-
-        addItem({ caption: caption, groupCaption: groupCaption, listCaption: listCaption, config: config });
+        addItem({
+          caption: caption,
+          groupCaption: groupCaption,
+          listCaption: listCaption,
+          config: config
+        });
       } else {
         _this._updateValidationMessages(validationMessages);
       }
@@ -135,29 +123,35 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
 
     _this._getValidationMessages = function () {
       var msg = [];
+
       if (!_this.groupCaption) {
         msg.push(notSelected('Group'));
       }
+
       if (!_this.listCaption) {
         msg.push(notSelected('List'));
       }
+
       msg.isValid = msg.length === 0 ? true : false;
       return msg;
     };
 
     _this._handleClose = function () {
       if (_this.state.validationMessages.length > 0) {
-        _this.setState({ validationMessages: [] });
+        _this.setState({
+          validationMessages: []
+        });
       }
+
       _this.props.onClose();
     };
 
     _this.groupCaption = null;
     _this.listCaption = null;
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
-      key: 'add',
-      caption: 'Add',
-      title: 'Add Item To Watch List',
+    _this._commandButtons = [_react["default"].createElement(_Button["default"].Flat, {
+      key: "add",
+      caption: "Add",
+      title: "Add Item To Watch List",
       isPrimary: true,
       onClick: _this._handleAdd
     })];
@@ -169,85 +163,81 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
     return _this;
   }
 
-  (0, _createClass3.default)(AddToWatchDialog, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
-    }
-  }, {
-    key: 'componetWillUnmount',
-    value: function componetWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'UNSAFE_componentWillReceiveProps',
-    value: function UNSAFE_componentWillReceiveProps(nextProps) {
-      if (nextProps !== this.props && nextProps.isShow !== this.props.isShow) {
-        var groups = nextProps.store.getWatchGroups();
-        if (groups !== this.state.groupOptions) {
-          this.groupCaption = null;
+  var _proto = AddToWatchDialog.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+  };
+
+  _proto.componetWillUnmount = function componetWillUnmount() {
+    this.unsubscribe();
+  };
+
+  _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props && nextProps.isShow !== this.props.isShow) {
+      var groups = nextProps.store.getWatchGroups();
+
+      if (groups !== this.state.groupOptions) {
+        this.groupCaption = null;
+        this.listCaption = null;
+        this.setState({
+          groupOptions: groups,
+          listOptions: []
+        });
+      } else if (this.groupCaption) {
+        var lists = nextProps.store.getWatchListsByGroup(this.groupCaption);
+
+        if (lists !== this.state.listOptions) {
           this.listCaption = null;
-          this.setState({ groupOptions: groups, listOptions: [] });
-        } else if (this.groupCaption) {
-          var lists = nextProps.store.getWatchListsByGroup(this.groupCaption);
-          if (lists !== this.state.listOptions) {
-            this.listCaption = null;
-            this.setState({ listOptions: lists });
-          }
+          this.setState({
+            listOptions: lists
+          });
         }
       }
     }
-  }, {
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          data = _props.data,
-          caption = data.caption,
-          _state = this.state,
-          groupOptions = _state.groupOptions,
-          listOptions = _state.listOptions,
-          validationMessages = _state.validationMessages;
+  };
 
-
-      return _react2.default.createElement(
-        _ModalDialog2.default,
-        {
-          caption: 'Add To Watch List',
-          isShow: isShow,
-          commandButtons: this._commandButtons,
-          onClose: this._handleClose
-        },
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-          caption: 'Group:',
-          options: groupOptions,
-          onSelect: this._handleSelectGroup
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-          caption: 'List:',
-          onSelect: this._handleSelectList,
-          options: listOptions
-        }),
-        _react2.default.createElement(_DialogCell2.default.Row.Text, {
-          caption: 'Item:',
-          text: caption
-        }),
-        _react2.default.createElement(_ValidationMessages2.default, {
-          validationMessages: validationMessages
-        })
-      );
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
     }
-  }]);
+
+    return true;
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShow = _this$props.isShow,
+        data = _this$props.data,
+        caption = data.caption,
+        _this$state = this.state,
+        groupOptions = _this$state.groupOptions,
+        listOptions = _this$state.listOptions,
+        validationMessages = _this$state.validationMessages;
+    return _react["default"].createElement(_ModalDialog["default"], {
+      caption: "Add To Watch List",
+      isShow: isShow,
+      commandButtons: this._commandButtons,
+      onClose: this._handleClose
+    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+      caption: "Group:",
+      options: groupOptions,
+      onSelect: this._handleSelectGroup
+    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+      caption: "List:",
+      onSelect: this._handleSelectList,
+      options: listOptions
+    }), _react["default"].createElement(_DialogCell["default"].Row.Text, {
+      caption: "Item:",
+      text: caption
+    }), _react["default"].createElement(_ValidationMessages["default"], {
+      validationMessages: validationMessages
+    }));
+  };
+
   return AddToWatchDialog;
-}(_react.Component)) || _class;
+}(_react.Component), _temp)) || _class;
 
-exports.default = AddToWatchDialog;
+var _default = AddToWatchDialog;
+exports["default"] = _default;
 //# sourceMappingURL=AddToWatchDialog.js.map

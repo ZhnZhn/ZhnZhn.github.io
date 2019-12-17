@@ -1,49 +1,25 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _Browser = _interopRequireDefault(require("../zhn/Browser"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Browser = require('../zhn/Browser');
-
-var _Browser2 = _interopRequireDefault(_Browser);
-
-var _BrowserCaption = require('../zhn/BrowserCaption');
-
-var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
-
-var _ScrollPane = require('../zhn/ScrollPane');
-
-var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
-
-var _MenuSlider = require('./MenuSlider');
-
-var _MenuSlider2 = _interopRequireDefault(_MenuSlider);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _MenuSlider = _interopRequireDefault(require("./MenuSlider"));
 
 var CL_SCROLL = 'scroll-container-y';
-
 var S = {
   BROWSER: {
     paddingRight: '0'
@@ -53,13 +29,15 @@ var S = {
   }
 };
 
-var BrowserSlider = function (_Component) {
-  (0, _inherits3.default)(BrowserSlider, _Component);
+var BrowserSlider =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(BrowserSlider, _Component);
 
   function BrowserSlider(props) {
-    (0, _classCallCheck3.default)(this, BrowserSlider);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (BrowserSlider.__proto__ || Object.getPrototypeOf(BrowserSlider)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._onStore = function (actionType, data) {
       var _this$props = _this.props,
@@ -72,11 +50,15 @@ var BrowserSlider = function (_Component) {
     };
 
     _this._handleHide = function () {
-      _this.setState({ isShow: false });
+      _this.setState({
+        isShow: false
+      });
     };
 
     _this._handleShow = function () {
-      _this.setState({ isShow: true });
+      _this.setState({
+        isShow: true
+      });
     };
 
     _this.state = {
@@ -85,50 +67,42 @@ var BrowserSlider = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(BrowserSlider, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
-    }
-  }, {
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.state.isShow === nextState.isShow) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var caption = this.props.caption,
-          isShow = this.state.isShow;
+  var _proto = BrowserSlider.prototype;
 
-      return _react2.default.createElement(
-        _Browser2.default,
-        { isShow: isShow, style: S.BROWSER },
-        _react2.default.createElement(_BrowserCaption2.default, {
-          caption: caption,
-          onClose: this._handleHide
-        }),
-        _react2.default.createElement(
-          _ScrollPane2.default,
-          {
-            className: CL_SCROLL,
-            style: S.SCROLL_DIV
-          },
-          _react2.default.createElement(_MenuSlider2.default, this.props)
-        )
-      );
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+  };
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.isShow === nextState.isShow) {
+      return false;
     }
-  }]);
+
+    return true;
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
+
+  _proto.render = function render() {
+    var caption = this.props.caption,
+        isShow = this.state.isShow;
+    return _react["default"].createElement(_Browser["default"], {
+      isShow: isShow,
+      style: S.BROWSER
+    }, _react["default"].createElement(_BrowserCaption["default"], {
+      caption: caption,
+      onClose: this._handleHide
+    }), _react["default"].createElement(_ScrollPane["default"], {
+      className: CL_SCROLL,
+      style: S.SCROLL_DIV
+    }, _react["default"].createElement(_MenuSlider["default"], this.props)));
+  };
+
   return BrowserSlider;
 }(_react.Component);
 
-exports.default = BrowserSlider;
+var _default = BrowserSlider;
+exports["default"] = _default;
 //# sourceMappingURL=BrowserSlider.js.map

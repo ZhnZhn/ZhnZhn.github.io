@@ -1,42 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _withTheme = require('../hoc/withTheme');
-
-var _withTheme2 = _interopRequireDefault(_withTheme);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var TH_ID = 'BROWSER';
 //import PropTypes from "prop-types";
-
+var TH_ID = 'BROWSER';
 var CL = {
   BROWSER: 'browser-container',
   SHOW: 'show-popup'
@@ -50,47 +30,45 @@ var S = {
   }
 };
 
-var Browser = function (_Component) {
-  (0, _inherits3.default)(Browser, _Component);
+var Browser =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(Browser, _Component);
 
   function Browser() {
-    (0, _classCallCheck3.default)(this, Browser);
-    return (0, _possibleConstructorReturn3.default)(this, (Browser.__proto__ || Object.getPrototypeOf(Browser)).apply(this, arguments));
+    return _Component.apply(this, arguments) || this;
   }
 
-  (0, _createClass3.default)(Browser, [{
-    key: 'render',
+  var _proto = Browser.prototype;
 
-    /*
-    static propTypes = {
-      theme: PropTypes.object
-      isShow: PropTypes.bool,
-      style: PropTypes.object
-    }
-    */
-    value: function render() {
-      var _props = this.props,
-          theme = _props.theme,
-          isShow = _props.isShow,
-          style = _props.style,
-          children = _props.children,
-          TS = theme.getStyle(TH_ID),
-          _styleOpen = isShow ? S.BLOCK : S.NONE,
-          _clOpen = isShow ? CL.SHOW : '',
-          _clRoot = CL.BROWSER + ' ' + _clOpen;
+  /*
+  static propTypes = {
+    theme: PropTypes.object
+    isShow: PropTypes.bool,
+    style: PropTypes.object
+  }
+  */
+  _proto.render = function render() {
+    var _this$props = this.props,
+        theme = _this$props.theme,
+        isShow = _this$props.isShow,
+        style = _this$props.style,
+        children = _this$props.children,
+        TS = theme.getStyle(TH_ID),
+        _styleOpen = isShow ? S.BLOCK : S.NONE,
+        _clOpen = isShow ? CL.SHOW : '',
+        _clRoot = CL.BROWSER + " " + _clOpen;
 
-      return _react2.default.createElement(
-        'div',
-        {
-          className: _clRoot,
-          style: (0, _extends3.default)({}, style, _styleOpen, TS.ROOT)
-        },
-        children
-      );
-    }
-  }]);
+    return _react["default"].createElement("div", {
+      className: _clRoot,
+      style: (0, _extends2["default"])({}, style, {}, _styleOpen, {}, TS.ROOT)
+    }, children);
+  };
+
   return Browser;
 }(_react.Component);
 
-exports.default = (0, _withTheme2.default)(Browser);
+var _default = (0, _withTheme["default"])(Browser);
+
+exports["default"] = _default;
 //# sourceMappingURL=Browser.js.map

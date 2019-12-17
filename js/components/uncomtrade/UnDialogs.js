@@ -1,18 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _UnDialog = require('./UnDialog5');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _UnDialog2 = _interopRequireDefault(_UnDialog);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _UnDialog = _interopRequireDefault(require("./UnDialog5"));
 
 var Dialogs = {
-  UnDialog5: _UnDialog2.default
+  UnDialog5: _UnDialog["default"]
 };
-
-exports.default = Dialogs;
+var _default = Dialogs;
+exports["default"] = _default;
 //# sourceMappingURL=UnDialogs.js.map

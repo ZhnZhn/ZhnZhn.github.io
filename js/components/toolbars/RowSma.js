@@ -1,49 +1,30 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
+var _react = _interopRequireWildcard(require("react"));
 
-var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 
-var _react = require('react');
+var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
 
-var _react2 = _interopRequireDefault(_react);
+var _RowCaptionInput = _interopRequireDefault(require("./RowCaptionInput"));
 
-var _useRefInit = require('../hooks/useRefInit');
+var _SeriaConfigs = _interopRequireDefault(require("./SeriaConfigs"));
 
-var _useRefInit2 = _interopRequireDefault(_useRefInit);
-
-var _IndicatorBuilder = require('../../charts/IndicatorBuilder');
-
-var _IndicatorBuilder2 = _interopRequireDefault(_IndicatorBuilder);
-
-var _RowCaptionInput = require('./RowCaptionInput');
-
-var _RowCaptionInput2 = _interopRequireDefault(_RowCaptionInput);
-
-var _SeriaConfigs = require('./SeriaConfigs');
-
-var _SeriaConfigs2 = _interopRequireDefault(_SeriaConfigs);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var addSmaTo = _IndicatorBuilder2.default.addSmaTo,
-    removeSeriaFrom = _IndicatorBuilder2.default.removeSeriaFrom;
-
-
+var addSmaTo = _IndicatorBuilder["default"].addSmaTo,
+    removeSeriaFrom = _IndicatorBuilder["default"].removeSeriaFrom;
 var _isArray = Array.isArray;
-
 var SMA = {
   MONTH: '12',
   YEAR: '50'
 };
+
 var _findInitSma = function _findInitSma(config) {
   var _d = (((config || {}).series || [])[0] || {}).data;
   return !_isArray(_d) ? '0' : _d.length > 150 ? SMA.YEAR : SMA.MONTH;
@@ -56,36 +37,44 @@ var _isInArrObjWithId = function _isInArrObjWithId(arrObj, id) {
 };
 
 var _crId = function _crId(period) {
-  return 'SMA(' + period + ')';
+  return "SMA(" + period + ")";
 };
 
 var RowSma = function RowSma(_ref) {
   var config = _ref.config,
       getChart = _ref.getChart;
+
   var _refInitialSma = (0, _react.useRef)(null),
-      _initialSma = (0, _useRefInit2.default)(_refInitialSma, function () {
+      _initialSma = (0, _useRefInit["default"])(_refInitialSma, function () {
     return _findInitSma(config);
   }),
       _refPeriod = (0, _react.useRef)(),
       _useState = (0, _react.useState)([]),
-      _useState2 = (0, _slicedToArray3.default)(_useState, 2),
-      smaConfs = _useState2[0],
-      setSmaConfs = _useState2[1],
+      smaConfs = _useState[0],
+      setSmaConfs = _useState[1],
       _onAddSma = function _onAddSma() {
     var period = _refPeriod.current.getValue(),
         id = _crId(period);
+
     if (!_isInArrObjWithId(smaConfs, id)) {
       var chart = getChart(),
           color = addSmaTo(chart, {
-        id: id, period: period, isPlus: false
+        id: id,
+        period: period,
+        isPlus: false
       });
+
       if (color) {
-        setSmaConfs([].concat((0, _toConsumableArray3.default)(smaConfs), [{ id: id, color: color }]));
+        setSmaConfs([].concat(smaConfs, [{
+          id: id,
+          color: color
+        }]));
       }
     }
   },
       _onRemoveSma = function _onRemoveSma(id) {
     var chart = getChart();
+
     if (removeSeriaFrom(chart, id)) {
       setSmaConfs(smaConfs.filter(function (d) {
         return d.id !== id;
@@ -93,22 +82,17 @@ var RowSma = function RowSma(_ref) {
     }
   };
 
-
-  return _react2.default.createElement(
-    _react2.default.Fragment,
-    null,
-    _react2.default.createElement(_RowCaptionInput2.default, {
-      caption: 'SMA',
-      forwardRef: _refPeriod,
-      initValue: _initialSma,
-      onAdd: _onAddSma
-    }),
-    _react2.default.createElement(_SeriaConfigs2.default, {
-      configs: smaConfs,
-      onRemove: _onRemoveSma
-    })
-  );
+  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_RowCaptionInput["default"], {
+    caption: "SMA",
+    forwardRef: _refPeriod,
+    initValue: _initialSma,
+    onAdd: _onAddSma
+  }), _react["default"].createElement(_SeriaConfigs["default"], {
+    configs: smaConfs,
+    onRemove: _onRemoveSma
+  }));
 };
 
-exports.default = RowSma;
+var _default = RowSma;
+exports["default"] = _default;
 //# sourceMappingURL=RowSma.js.map

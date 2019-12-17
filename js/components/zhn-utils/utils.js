@@ -1,27 +1,32 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var isFn = exports.isFn = function isFn(fn) {
+exports.__esModule = true;
+exports["default"] = exports.focusNode = exports.isKeyEscape = exports.isFn = void 0;
+
+var isFn = function isFn(fn) {
   return typeof fn === 'function';
 };
 
-var isKeyEscape = exports.isKeyEscape = function isKeyEscape(evt) {
+exports.isFn = isFn;
+
+var isKeyEscape = function isKeyEscape(evt) {
   return evt.keyCode === 27 || evt.key === 'Escape';
 };
 
-var focusNode = exports.focusNode = function focusNode(n) {
+exports.isKeyEscape = isKeyEscape;
+
+var focusNode = function focusNode(n) {
   if (n && isFn(n.focus)) {
     n.focus();
   }
 };
 
+exports.focusNode = focusNode;
 var utils = {
   isFn: isFn,
   isKeyEscape: isKeyEscape,
   focusNode: focusNode
 };
-
-exports.default = utils;
+var _default = utils;
+exports["default"] = _default;
 //# sourceMappingURL=utils.js.map

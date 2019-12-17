@@ -1,24 +1,29 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _handleWithValidationLoad = function _handleWithValidationLoad(validationMessages, fnCreateOption) {
-  var onLoad = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.props.onLoad;
+var _handleWithValidationLoad = function _handleWithValidationLoad(validationMessages, fnCreateOption, onLoad) {
+  if (onLoad === void 0) {
+    onLoad = this.props.onLoad;
+  }
 
   if (validationMessages.isValid) {
     onLoad(fnCreateOption());
   }
+
   this._updateValidationMessages(validationMessages);
 };
 
-var _handleWithValidationClose = function _handleWithValidationClose() {
-  var onClose = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.props.onClose;
+var _handleWithValidationClose = function _handleWithValidationClose(onClose) {
+  if (onClose === void 0) {
+    onClose = this.props.onClose;
+  }
 
   if (typeof onClose === 'function') {
     onClose();
   }
+
   this.setState(function (prevState) {
     prevState.validationMessages = [];
     return prevState;
@@ -28,10 +33,14 @@ var _handleWithValidationClose = function _handleWithValidationClose() {
 var _updateValidationMessages = function _updateValidationMessages(validationMessages) {
   if (validationMessages.isValid) {
     if (this.state.validationMessages.length > 0) {
-      this.setState({ validationMessages: validationMessages });
+      this.setState({
+        validationMessages: validationMessages
+      });
     }
   } else {
-    this.setState({ validationMessages: validationMessages });
+    this.setState({
+      validationMessages: validationMessages
+    });
   }
 };
 
@@ -43,5 +52,6 @@ var withValidationLoad = function withValidationLoad(target) {
   });
 };
 
-exports.default = withValidationLoad;
+var _default = withValidationLoad;
+exports["default"] = _default;
 //# sourceMappingURL=withValidationLoad.js.map

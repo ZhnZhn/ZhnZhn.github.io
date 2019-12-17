@@ -1,26 +1,20 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _tsIndicators = require('../math/tsIndicators');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _tsIndicators2 = _interopRequireDefault(_tsIndicators);
+var _tsIndicators = _interopRequireDefault(require("../math/tsIndicators"));
 
-var _ChartConfig = require('./ChartConfig');
+var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var sma = _tsIndicators2.default.sma,
-    mfi = _tsIndicators2.default.mfi,
-    momAth = _tsIndicators2.default.momAth;
-
+var sma = _tsIndicators["default"].sma,
+    mfi = _tsIndicators["default"].mfi,
+    momAth = _tsIndicators["default"].momAth;
 
 var _addDataAsSeriaToChart = function _addDataAsSeriaToChart(chart, option) {
-  var seria = Object.assign(_ChartConfig2.default.fSeries(), option);
+  var seria = Object.assign(_ChartConfig["default"].fSeries(), option);
   chart.addSeries(seria, true, true);
   return chart.options.colors[seria['_colorIndex']];
 };
@@ -28,15 +22,16 @@ var _addDataAsSeriaToChart = function _addDataAsSeriaToChart(chart, option) {
 var IndicatorBuilder = {
   removeSeriaFrom: function removeSeriaFrom(chart, zhValueText) {
     var series = chart.series;
+
     for (var i = 0, max = series.length; i < max; i++) {
       if (series[i].userOptions.zhValueText === zhValueText) {
         series[i].remove(true);
         return true;
       }
     }
+
     return false;
   },
-
   addSmaTo: function addSmaTo(chart, option) {
     var id = option.id,
         period = option.period,
@@ -44,7 +39,6 @@ var IndicatorBuilder = {
         parentId = chart.options.zhConfig.id,
         data = chart.series[0].data,
         dataSma = sma(data, period, plus);
-
 
     if (dataSma.length > 0) {
       return _addDataAsSeriaToChart(chart, {
@@ -58,7 +52,6 @@ var IndicatorBuilder = {
       return undefined;
     }
   },
-
   crMfiConfig: function crMfiConfig(chart, period, id) {
     var data = chart.options.zhPoints,
         parentId = chart.options.zhConfig.id,
@@ -67,9 +60,8 @@ var IndicatorBuilder = {
         nNotFullPoint = _mfi.nNotFullPoint,
         titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
 
-    return _ChartConfig2.default.fIndicatorMfiConfig(id, parentId, id + titleNotFullPoint, dataMfi);
+    return _ChartConfig["default"].fIndicatorMfiConfig(id, parentId, id + titleNotFullPoint, dataMfi);
   },
-
   crMomAthConfig: function crMomAthConfig(chart, id) {
     var data = chart.options.zhPoints,
         _momAth = momAth(data),
@@ -77,10 +69,9 @@ var IndicatorBuilder = {
         dataAth = _momAth.dataAth,
         dataSum = _momAth.dataSum;
 
-    return _ChartConfig2.default.fnMomAthConfig(dataMom, dataAth, dataSum, id);
+    return _ChartConfig["default"].fnMomAthConfig(dataMom, dataAth, dataSum, id);
   }
-
 };
-
-exports.default = IndicatorBuilder;
+var _default = IndicatorBuilder;
+exports["default"] = _default;
 //# sourceMappingURL=IndicatorBuilder.js.map

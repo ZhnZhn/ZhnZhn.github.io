@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var C = {
   URL: 'https://api.worldbank.org/v2',
   NATIVE_URL: 'https://data.worldbank.org/indicator'
@@ -12,11 +10,10 @@ var C = {
 var _addNativeLinkTo = function _addNativeLinkTo(option) {
   var one = option.one,
       two = option.two;
-
   Object.assign(option, {
     linkItem: {
       caption: 'World Bank',
-      href: C.NATIVE_URL + '/' + two + '?locations=' + one
+      href: C.NATIVE_URL + "/" + two + "?locations=" + one
     }
   });
 };
@@ -27,12 +24,13 @@ var api = {
         two = option.two;
 
     _addNativeLinkTo(option);
-    return C.URL + '/countries/' + one + '/indicators/' + two + '?date=1990:2018&format=json';
+
+    return C.URL + "/countries/" + one + "/indicators/" + two + "?date=1990:2018&format=json";
   },
   checkResponse: function checkResponse(json) {
     return Array.isArray(json);
   }
 };
-
-exports.default = api;
+var _default = api;
+exports["default"] = _default;
 //# sourceMappingURL=api.js.map

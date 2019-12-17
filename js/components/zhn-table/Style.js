@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var S = {
   ROOT: {
     position: 'relative',
@@ -62,6 +60,6 @@ var S = {
     fontWeight: 'bold'
   }
 };
-
-exports.default = S;
+var _default = S;
+exports["default"] = _default;
 //# sourceMappingURL=Style.js.map

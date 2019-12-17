@@ -1,27 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _jsonstat = require('jsonstat');
-
-var _jsonstat2 = _interopRequireDefault(_jsonstat);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
 var MSG_STILL_LOADING = "Another dims are still loading";
 var MSG_403 = 'HTTP Code 403: Forbitten.\nMaybe, require API key.';
 var MSG_HTTP_CODE = 'HTTP Code';
-
 var C = {
   SELECTION_ALL: {
     selection: {
@@ -40,13 +30,16 @@ var C = {
 
 var _crUrl = function _crUrl(proxy, baseMeta, id) {
   if (proxy) {
-    return '' + proxy + baseMeta + '/' + id;
+    return "" + proxy + baseMeta + "/" + id;
   }
-  return baseMeta + '/' + id;
+
+  return baseMeta + "/" + id;
 };
 
 var _crSelectDim = function _crSelectDim(code) {
-  return (0, _extends3.default)({ code: code }, C.SELECTION_ALL);
+  return (0, _extends2["default"])({
+    code: code
+  }, C.SELECTION_ALL);
 };
 
 var _crOption = function _crOption(dims, noTime) {
@@ -75,18 +68,23 @@ var _crSelectOptions = function _crSelectOptions(ds, dim) {
       c = ds.Dimension(_id),
       len = c.length;
   var i = 0;
+
   for (; i < len; i++) {
+    var _slice;
+
     arr.push({
       caption: c.Category(i).label,
-      slice: (0, _defineProperty3.default)({}, _id, c.id[i])
+      slice: (_slice = {}, _slice[_id] = c.id[i], _slice)
     });
   }
+
   return arr;
 };
 
 var IS_LOADING = false;
-var URL_LOADING = void 0;
-var ID_TIMEOUT = void 0;
+var URL_LOADING;
+var ID_TIMEOUT;
+
 var _fClearLoading = function _fClearLoading(url) {
   return function () {
     if (url === URL_LOADING) {
@@ -94,11 +92,13 @@ var _fClearLoading = function _fClearLoading(url) {
     }
   };
 };
+
 var _markStartLoading = function _markStartLoading(url) {
   URL_LOADING = url;
   ID_TIMEOUT = setTimeout(_fClearLoading(url), 5000);
   IS_LOADING = true;
 };
+
 var _markStopLoading = function _markStopLoading() {
   IS_LOADING = false;
   clearTimeout(ID_TIMEOUT);
@@ -114,7 +114,9 @@ var loadDims = function loadDims(_ref) {
   if (!IS_LOADING) {
     var _url = _crUrl(proxy, baseMeta, id),
         _option = _crOption(dims, noTime);
+
     _markStartLoading(_url);
+
     return fetch(_url, _option).then(function (res) {
       var status = res.status;
 
@@ -124,10 +126,11 @@ var loadDims = function loadDims(_ref) {
         if (status === 403) {
           throw Error(MSG_403);
         }
-        throw Error(MSG_HTTP_CODE + ': ' + status);
+
+        throw Error(MSG_HTTP_CODE + ": " + status);
       }
     }).then(function (json) {
-      var _ds = (0, _jsonstat2.default)(json).Dataset(0),
+      var _ds = (0, _jsonstat["default"])(json).Dataset(0),
           configs = dims.map(function (dim) {
         return {
           id: dim.v,
@@ -135,16 +138,26 @@ var loadDims = function loadDims(_ref) {
           options: _crSelectOptions(_ds, dim)
         };
       });
+
       _markStopLoading();
-      return { configs: configs };
-    }).catch(function (err) {
+
+      return {
+        configs: configs
+      };
+    })["catch"](function (err) {
       _markStopLoading();
-      return { errMsg: err.message };
+
+      return {
+        errMsg: err.message
+      };
     });
   } else {
-    return Promise.resolve({ errMsg: MSG_STILL_LOADING });
+    return Promise.resolve({
+      errMsg: MSG_STILL_LOADING
+    });
   }
 };
 
-exports.default = loadDims;
+var _default = loadDims;
+exports["default"] = _default;
 //# sourceMappingURL=loadDims.js.map

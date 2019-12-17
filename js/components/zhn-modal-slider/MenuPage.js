@@ -1,64 +1,51 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _MenuItemList = _interopRequireDefault(require("./MenuItemList"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp2;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _MenuTitle = require('./MenuTitle');
-
-var _MenuTitle2 = _interopRequireDefault(_MenuTitle);
-
-var _MenuItemList = require('./MenuItemList');
-
-var _MenuItemList2 = _interopRequireDefault(_MenuItemList);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var MenuPage = (_temp2 = _class = function (_Component) {
-  (0, _inherits3.default)(MenuPage, _Component);
+var MenuPage =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuPage, _Component);
 
   function MenuPage() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, MenuPage);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuPage.__proto__ || Object.getPrototypeOf(MenuPage)).call.apply(_ref, [this].concat(args))), _this), _this._onRegTitle = function (n) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._onRegTitle = function (n) {
       return _this._titleNode = n;
-    }, _this._onRegFirst = function (n) {
+    };
+
+    _this._onRegFirst = function (n) {
       return _this._firstNode = n;
-    }, _this._focusTitle = function () {
+    };
+
+    _this._focusTitle = function () {
       return _this._titleNode.focus();
-    }, _this._focusFirst = function () {
+    };
+
+    _this._focusFirst = function () {
       return _this._firstNode.focus();
-    }, _this._focus = function () {
+    };
+
+    _this._focus = function () {
       var _this$props = _this.props,
           pageCurrent = _this$props.pageCurrent,
           pageNumber = _this$props.pageNumber;
@@ -70,78 +57,59 @@ var MenuPage = (_temp2 = _class = function (_Component) {
           setTimeout(_this._focusFirst, 1000);
         }
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
-  }
-  /*
-  static propTypes = {
-    title: PropTypes.string,
-    pageNumber: PropTypes.number,
-    items: PropTypes.arrayOf(
-       PropTypes.shapeOf({
-          name: PropTypes.string,
-          type: PropTypes.string,
-          id: PropTypes.string,
-          onClick: PropTypes.func
-       })
-    ),
-    onNextPage: PropTypes.func,
-    onPrevPage: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
+    };
 
-  (0, _createClass3.default)(MenuPage, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    return _this;
+  }
+
+  var _proto = MenuPage.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this._focus();
+  };
+
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        style = _this$props2.style,
+        title = _this$props2.title,
+        items = _this$props2.items,
+        baseTitleCl = _this$props2.baseTitleCl,
+        itemCl = _this$props2.itemCl,
+        pageNumber = _this$props2.pageNumber,
+        onNextPage = _this$props2.onNextPage,
+        onPrevPage = _this$props2.onPrevPage,
+        onClose = _this$props2.onClose,
+        children = _this$props2.children;
+    return _react["default"].createElement("div", {
+      style: style
+    }, _react["default"].createElement(_MenuTitle["default"], {
+      baseTitleCl: baseTitleCl,
+      title: title,
+      pageNumber: pageNumber,
+      onPrevPage: onPrevPage,
+      onReg: this._onRegTitle
+    }), _react["default"].createElement(_MenuItemList["default"], {
+      items: items,
+      itemCl: itemCl || baseTitleCl,
+      pageNumber: pageNumber,
+      onNextPage: onNextPage,
+      onReg: this._onRegFirst,
+      onClose: onClose
+    }), children);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
       this._focus();
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          style = _props.style,
-          title = _props.title,
-          items = _props.items,
-          baseTitleCl = _props.baseTitleCl,
-          itemCl = _props.itemCl,
-          pageNumber = _props.pageNumber,
-          onNextPage = _props.onNextPage,
-          onPrevPage = _props.onPrevPage,
-          onClose = _props.onClose,
-          children = _props.children;
+  };
 
-      return _react2.default.createElement(
-        'div',
-        { style: style },
-        _react2.default.createElement(_MenuTitle2.default, {
-          baseTitleCl: baseTitleCl,
-          title: title,
-          pageNumber: pageNumber,
-          onPrevPage: onPrevPage,
-          onReg: this._onRegTitle
-        }),
-        _react2.default.createElement(_MenuItemList2.default, {
-          items: items,
-          itemCl: itemCl || baseTitleCl,
-          pageNumber: pageNumber,
-          onNextPage: onNextPage,
-          onReg: this._onRegFirst,
-          onClose: onClose
-        }),
-        children
-      );
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      if (this.props !== prevProps) {
-        this._focus();
-      }
-    }
-  }]);
   return MenuPage;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+MenuPage.defaultProps = {
   items: []
-}, _temp2);
-exports.default = MenuPage;
+};
+var _default = MenuPage;
+exports["default"] = _default;
 //# sourceMappingURL=MenuPage.js.map

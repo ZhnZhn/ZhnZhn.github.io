@@ -1,12 +1,13 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
-exports.default = function (data) {
-    return data.reduce(function (a, b) {
-        return a + b;
-    }) / data.length;
+var _default = function _default(data) {
+  return data.reduce(function (a, b) {
+    return a + b;
+  }) / data.length;
 };
+
+exports["default"] = _default;
 //# sourceMappingURL=mean.js.map

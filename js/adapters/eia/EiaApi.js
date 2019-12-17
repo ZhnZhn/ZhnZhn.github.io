@@ -1,8 +1,7 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 var C = {
   URL: "https://api.eia.gov/category/",
   S_URL: "https://api.eia.gov/series/"
@@ -29,7 +28,7 @@ var _getValue = function _getValue(obj) {
 var _crSeriaDf = function _crSeriaDf(option) {
   var sufix = option.sufix,
       _option$items = option.items,
-      items = _option$items === undefined ? [] : _option$items,
+      items = _option$items === void 0 ? [] : _option$items,
       _one = _getValue(items[0]),
       _two = _getValue(items[1]),
       _three = _getValue(items[2]),
@@ -37,19 +36,21 @@ var _crSeriaDf = function _crSeriaDf(option) {
 
   return "" + _two + _one + _sufix;
 };
+
 var _crSeriaPI2 = function _crSeriaPI2(option) {
   var prefix = option.prefix,
       _option$items2 = option.items,
-      items = _option$items2 === undefined ? [] : _option$items2,
+      items = _option$items2 === void 0 ? [] : _option$items2,
       _one = _getValue(items[0]),
       _two = _getValue(items[1]);
 
   return "" + prefix + _one + _two;
 };
+
 var _crSeriaPI321S = function _crSeriaPI321S(option) {
   var prefix = option.prefix,
       _option$items3 = option.items,
-      items = _option$items3 === undefined ? [] : _option$items3,
+      items = _option$items3 === void 0 ? [] : _option$items3,
       sufix = option.sufix,
       _one = _getValue(items[0]),
       _two = _getValue(items[1]),
@@ -67,7 +68,6 @@ var _rSeriaId = {
 var _crSeriaId = function _crSeriaId(option) {
   var dfSeriaType = option.dfSeriaType,
       fn = _rSeriaId[dfSeriaType] || _rSeriaId.DF;
-
   return fn(option);
 };
 
@@ -76,29 +76,32 @@ var EiaApi = {
     var apiKey = option.apiKey,
         _seria_id = _crSeriaId(option);
 
-
     return C.S_URL + "?api_key=" + apiKey + "&series_id=" + _seria_id;
   },
   checkResponse: function checkResponse(json) {
     if (!json) {
       throw _crErr(CAPTION, MSG.EMPTY);
     }
+
     var _json$data = json.data,
-        data = _json$data === undefined ? {} : _json$data,
+        data = _json$data === void 0 ? {} : _json$data,
         msgErr = data.error;
 
     if (msgErr) {
       if (msgErr.indexOf(MSG.ERR) !== -1) {
         throw _crErr(CAPTION, MSG.NOT_EXIST);
       }
+
       throw _crErr(CAPTION, msgErr);
     }
+
     if (!json.series || !json.series[0]) {
       throw _crErr(CAPTION, MSG.DATA_EMPTY);
     }
+
     return true;
   }
 };
-
-exports.default = EiaApi;
+var _default = EiaApi;
+exports["default"] = _default;
 //# sourceMappingURL=EiaApi.js.map

@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/zhn/svg/SvgIcons.js"
- ],
- "file": "../../../../src/components/zhn/svg/SvgIcons.js",
- "names": [
-  "SvgIcons",
-  "SvgInfo",
-  "SvgSettings"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,WAAW;AACfC,4BADe;AAEfC;AAFe,CAAjB;;kBAKeF,Q"
-}
+{"version":3,"sources":["../../../../src/components/zhn/svg/SvgIcons.jsx"],"names":["SvgIcons","SvgInfo","SvgSettings"],"mappings":";;;;;;;AACA;;AACA;;AAEA,IAAMA,QAAQ,GAAG;AACfC,EAAAA,OAAO,EAAPA,mBADe;AAEfC,EAAAA,WAAW,EAAXA;AAFe,CAAjB;eAKeF,Q","sourcesContent":["\r\nimport SvgInfo from './SvgInfo'\r\nimport SvgSettings from './SvgSettings'\r\n\r\nconst SvgIcons = {\r\n  SvgInfo,\r\n  SvgSettings\r\n};\r\n\r\nexport default SvgIcons\r\n"],"file":"SvgIcons.js"}

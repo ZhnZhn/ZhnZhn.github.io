@@ -1,22 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _EiaApi = require('./EiaApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _EiaApi2 = _interopRequireDefault(_EiaApi);
+var _EiaApi = _interopRequireDefault(require("./EiaApi"));
 
-var _EiaAdapter = require('./EiaAdapter');
-
-var _EiaAdapter2 = _interopRequireDefault(_EiaAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _EiaAdapter = _interopRequireDefault(require("./EiaAdapter"));
 
 var Eia = {
-  api: _EiaApi2.default, adapter: _EiaAdapter2.default
+  api: _EiaApi["default"],
+  adapter: _EiaAdapter["default"]
 };
-
-exports.default = Eia;
+var _default = Eia;
+exports["default"] = _default;
 //# sourceMappingURL=Eia.js.map

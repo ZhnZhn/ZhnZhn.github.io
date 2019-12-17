@@ -1,29 +1,26 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _tpFn = require('./tpFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _tpFn2 = _interopRequireDefault(_tpFn);
+var _tpFn = _interopRequireDefault(require("./tpFn"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crHeader = _tpFn2.default.crHeader,
-    crRow = _tpFn2.default.crRow,
-    toDateFormatDMYT = _tpFn2.default.toDateFormatDMYT;
-
+var crHeader = _tpFn["default"].crHeader,
+    crRow = _tpFn["default"].crRow,
+    toDateFormatDMYT = _tpFn["default"].toDateFormatDMYT;
 
 var _crValue = function _crValue(_ref) {
   var date = _ref.date,
       id = _ref.id,
       color = _ref.color,
       _ref$valueText = _ref.valueText,
-      valueText = _ref$valueText === undefined ? 'Value' : _ref$valueText,
+      valueText = _ref$valueText === void 0 ? 'Value' : _ref$valueText,
       value = _ref.value;
-
-  return crHeader(date, id) + '\n  <div class="tp__body">\n    ' + crRow(valueText, value, { color: color }) + '\n  </div>';
+  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow(valueText, value, {
+    color: color
+  }) + "\n  </div>";
 };
 
 var tpSpline = {
@@ -41,6 +38,6 @@ var tpSpline = {
     isWithValue: true
   }
 };
-
-exports.default = tpSpline;
+var _default = tpSpline;
+exports["default"] = _default;
 //# sourceMappingURL=tpSpline.js.map

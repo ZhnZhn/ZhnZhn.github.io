@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var Style = {
   MSG_ERR: {
     paddingLeft: '12px',
@@ -47,6 +45,6 @@ var Style = {
     cursor: 'pointer'
   }
 };
-
-exports.default = Style;
+var _default = Style;
+exports["default"] = _default;
 //# sourceMappingURL=Style.js.map

@@ -1,30 +1,24 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var Msg = {
   setAlertMsg: function setAlertMsg(option, msg) {
     var caption = msg.caption,
         descr = msg.descr;
-
     option.alertCaption = caption;
     option.alertDescr = descr;
   },
-
   IS_EMPTY_NAME: function IS_EMPTY_NAME(item) {
-    return item + ' name can not be empty.';
+    return item + " name can not be empty.";
   },
   NOT_SELECTED: function NOT_SELECTED(item) {
-    return item + ' is not selected.';
+    return item + " is not selected.";
   },
-
   NOT_VALID_FORMAT: function NOT_VALID_FORMAT(item) {
-    return item + ' is not in valid format.';
+    return item + " is not in valid format.";
   },
   TEST_DATE_OR_EMPTY: "YYYY-MM-DD format must be OR Empty",
-
   Alert: {
     ALREADY_EXIST: {
       caption: 'Check Error',
@@ -49,7 +43,7 @@ var Msg = {
     withoutApiKey: function withoutApiKey(providerName) {
       return {
         caption: 'Without API Key',
-        descr: 'For this type of request required a ' + providerName + ' API key. Please register for a free ' + providerName + ' account, more top button I in Dialog, and then enter your API key in dialog SETTINGS [s].'
+        descr: "For this type of request required a " + providerName + " API key. Please register for a free " + providerName + " account, more top button I in Dialog, and then enter your API key in dialog SETTINGS [s]."
       };
     },
     RUNTIME_ERROR: {
@@ -70,6 +64,6 @@ var Msg = {
     }
   }
 };
-
-exports.default = Msg;
+var _default = Msg;
+exports["default"] = _default;
 //# sourceMappingURL=Msg.js.map

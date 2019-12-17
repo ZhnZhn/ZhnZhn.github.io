@@ -1,55 +1,29 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _throttleOnce = _interopRequireDefault(require("../../utils/throttleOnce"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp, _initialiseProps;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _throttleOnce = require('../../utils/throttleOnce');
-
-var _throttleOnce2 = _interopRequireDefault(_throttleOnce);
-
-var _ModalPane = require('../zhn-moleculs/ModalPane');
-
-var _ModalPane2 = _interopRequireDefault(_ModalPane);
-
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _MenuPage = require('./MenuPage');
-
-var _MenuPage2 = _interopRequireDefault(_MenuPage);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _MenuPage = _interopRequireDefault(require("./MenuPage"));
 
 var PERIOD_MS = 750;
-
 var S = {
   SHOW_HIDE: {
     position: 'absolute',
@@ -60,63 +34,21 @@ var S = {
     flexFlow: 'row nowrap',
     alignItems: 'flex-start',
     overflowX: 'hidden',
-    transition: 'all ' + PERIOD_MS + 'ms ease-out'
+    transition: "all " + PERIOD_MS + "ms ease-out"
   }
 };
 
 var _getTranslateX = function _getTranslateX(node) {
   var _prevStr = node.style.transform.substr(11).replace('px', '').replace(')', '');
+
   return parseInt(_prevStr, 10);
 };
 
-var ModalSlider = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(ModalSlider, _Component);
+var ModalSlider =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ModalSlider, _Component);
 
-  function ModalSlider(props) {
-    (0, _classCallCheck3.default)(this, ModalSlider);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ModalSlider.__proto__ || Object.getPrototypeOf(ModalSlider)).call(this));
-
-    _initialiseProps.call(_this);
-
-    var INIT_ID = props.INIT_ID,
-        pageWidth = props.pageWidth,
-        maxPages = props.maxPages,
-        model = props.model,
-        onClose = props.onClose,
-        _pW = model.pageWidth || pageWidth,
-        _maxP = model.maxPages || maxPages,
-        pages = [];
-
-    _this.hNextPage = (0, _throttleOnce2.default)(_this.hNextPage.bind(_this));
-    _this.hPrevPage = (0, _throttleOnce2.default)(_this.hPrevPage.bind(_this));
-
-    _this._PAGE_WIDTH = _pW;
-    _this._pagesStyle = {
-      width: _maxP * _pW + 'px'
-    };
-    _this._pageStyle = {
-      width: _pW + 'px'
-    };
-
-    pages.push(_react2.default.createElement(_MenuPage2.default, {
-      key: INIT_ID,
-      style: _this._pageStyle,
-      items: model[INIT_ID],
-      baseTitleCl: model.baseTitleCl,
-      itemCl: model.itemCl,
-      onNextPage: _this.hNextPage,
-      onClose: onClose
-    }));
-
-    _this._direction = 0;
-
-    _this.state = {
-      pageCurrent: 1,
-      pages: pages
-    };
-    return _this;
-  }
   /*
   static propTypes = {
     rootStyle: PropTypes.object,
@@ -128,141 +60,173 @@ var ModalSlider = (_temp = _class = function (_Component) {
       onClose: PropTypes.func
   }
   */
+  function ModalSlider(props) {
+    var _this;
 
-  (0, _createClass3.default)(ModalSlider, [{
-    key: 'render',
-    value: function render() {
-      var _pagesStyle = this._pagesStyle,
-          _pageStyle = this._pageStyle,
-          _props = this.props,
-          isShow = _props.isShow,
-          className = _props.className,
-          rootStyle = _props.rootStyle,
-          style = _props.style,
-          onClose = _props.onClose,
-          _transform = this._crTransform(),
-          _showHideStyle = (0, _extends3.default)({}, style, S.SHOW_HIDE, _pageStyle),
-          _divStyle = (0, _extends3.default)({}, S.PAGES, _pagesStyle, _transform);
+    _this = _Component.call(this) || this;
 
-      return _react2.default.createElement(
-        _ModalPane2.default,
-        {
-          isShow: isShow,
-          style: rootStyle,
-          onClose: onClose
-        },
-        _react2.default.createElement(
-          _ShowHide2.default,
-          {
-            className: className,
-            style: _showHideStyle,
-            isShow: isShow
-          },
-          _react2.default.createElement(
-            'div',
-            {
-              ref: this._refPages,
-              style: _divStyle
-            },
-            this._renderPages()
-          )
-        )
-      );
-    }
-  }]);
+    _this.hPrevPage = function (pageNumber) {
+      _this.setState(function (prevState) {
+        prevState.pageCurrent = pageNumber - 1;
+        _this._direction = -1;
+        return prevState;
+      });
+    };
+
+    _this._addPage = function (pages, id, title) {
+      var _this$props = _this.props,
+          model = _this$props.model,
+          onClose = _this$props.onClose;
+      pages.push(_react["default"].createElement(_MenuPage["default"], {
+        key: id,
+        style: _this._pageStyle,
+        title: title,
+        items: model[id],
+        baseTitleCl: model.baseTitleCl,
+        itemCl: model.itemCl,
+        onPrevPage: _this.hPrevPage,
+        onClose: onClose
+      }));
+    };
+
+    _this.hNextPage = function (id, title, pageNumber) {
+      _this.setState(function (prevState) {
+        var pages = prevState.pages,
+            _max = pages.length - 1;
+
+        if (_max + 1 > pageNumber) {
+          if (pages[pageNumber] && pages[pageNumber].key !== id) {
+            if (pageNumber > 0) {
+              prevState.pages.splice(pageNumber);
+            } else {
+              prevState.pages = [];
+            }
+
+            _this._addPage(prevState.pages, id, title);
+          }
+        } else {
+          _this._addPage(pages, id, title);
+        }
+
+        prevState.pageCurrent = pageNumber + 1; //prevState.direction = 1
+
+        _this._direction = 1;
+        return prevState;
+      });
+    };
+
+    _this._crTransform = function () {
+      var _WIDTH = _this._PAGE_WIDTH;
+      var dX = '0';
+
+      if (_this._direction !== 0 && _this._pagesNode) {
+        var _prevInt = _getTranslateX(_this._pagesNode);
+
+        dX = _this._direction === 1 ? _prevInt - _WIDTH : _prevInt + _WIDTH;
+        _this._direction = 0;
+      } else if (_this._direction === 0 && _this._pagesNode) {
+        dX = _getTranslateX(_this._pagesNode);
+      }
+
+      return {
+        transform: "translateX(" + dX + "px)"
+      };
+    };
+
+    _this._refPages = function (n) {
+      return _this._pagesNode = n;
+    };
+
+    _this._renderPages = function () {
+      var _this$state = _this.state,
+          pages = _this$state.pages,
+          pageCurrent = _this$state.pageCurrent;
+      return pages.map(function (Page, index) {
+        return _react["default"].cloneElement(Page, {
+          pageCurrent: pageCurrent,
+          //pageNumber: index,
+          pageNumber: index + 1
+        });
+      });
+    };
+
+    var INIT_ID = props.INIT_ID,
+        pageWidth = props.pageWidth,
+        maxPages = props.maxPages,
+        _model = props.model,
+        _onClose = props.onClose,
+        _pW = _model.pageWidth || pageWidth,
+        _maxP = _model.maxPages || maxPages,
+        _pages = [];
+
+    _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
+    _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
+    _this._PAGE_WIDTH = _pW;
+    _this._pagesStyle = {
+      width: _maxP * _pW + "px"
+    };
+    _this._pageStyle = {
+      width: _pW + "px"
+    };
+
+    _pages.push(_react["default"].createElement(_MenuPage["default"], {
+      key: INIT_ID,
+      style: _this._pageStyle,
+      items: _model[INIT_ID],
+      baseTitleCl: _model.baseTitleCl,
+      itemCl: _model.itemCl,
+      onNextPage: _this.hNextPage,
+      onClose: _onClose
+    }));
+
+    _this._direction = 0;
+    _this.state = {
+      pageCurrent: 1,
+      pages: _pages
+    };
+    return _this;
+  }
+
+  var _proto = ModalSlider.prototype;
+
+  _proto.render = function render() {
+    var _pagesStyle = this._pagesStyle,
+        _pageStyle = this._pageStyle,
+        _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        className = _this$props2.className,
+        rootStyle = _this$props2.rootStyle,
+        style = _this$props2.style,
+        onClose = _this$props2.onClose,
+        _transform = this._crTransform(),
+        _showHideStyle = (0, _extends2["default"])({}, style, {}, S.SHOW_HIDE, {}, _pageStyle),
+        _divStyle = (0, _extends2["default"])({}, S.PAGES, {}, _pagesStyle, {}, _transform);
+
+    return _react["default"].createElement(_ModalPane["default"], {
+      isShow: isShow,
+      style: rootStyle,
+      onClose: onClose
+    }, _react["default"].createElement(_ShowHide["default"], {
+      className: className,
+      style: _showHideStyle,
+      isShow: isShow
+    }, _react["default"].createElement("div", {
+      ref: this._refPages,
+      style: _divStyle
+    }, this._renderPages())));
+  };
+
   return ModalSlider;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+ModalSlider.defaultProps = {
   INIT_ID: 'p0',
   model: {
     pageWidth: 100,
     maxPages: 2,
     p0: []
   }
-}, _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
-
-  this.hPrevPage = function (pageNumber) {
-    _this2.setState(function (prevState) {
-      prevState.pageCurrent = pageNumber - 1;
-      _this2._direction = -1;
-      return prevState;
-    });
-  };
-
-  this._addPage = function (pages, id, title) {
-    var _props2 = _this2.props,
-        model = _props2.model,
-        onClose = _props2.onClose;
-
-    pages.push(_react2.default.createElement(_MenuPage2.default, {
-      key: id,
-      style: _this2._pageStyle,
-      title: title,
-      items: model[id],
-      baseTitleCl: model.baseTitleCl,
-      itemCl: model.itemCl,
-      onPrevPage: _this2.hPrevPage,
-      onClose: onClose
-    }));
-  };
-
-  this.hNextPage = function (id, title, pageNumber) {
-    _this2.setState(function (prevState) {
-      var pages = prevState.pages,
-          _max = pages.length - 1;
-
-
-      if (_max + 1 > pageNumber) {
-        if (pages[pageNumber] && pages[pageNumber].key !== id) {
-          if (pageNumber > 0) {
-            prevState.pages.splice(pageNumber);
-          } else {
-            prevState.pages = [];
-          }
-          _this2._addPage(prevState.pages, id, title);
-        }
-      } else {
-        _this2._addPage(pages, id, title);
-      }
-
-      prevState.pageCurrent = pageNumber + 1;
-      //prevState.direction = 1
-      _this2._direction = 1;
-      return prevState;
-    });
-  };
-
-  this._crTransform = function () {
-    var _WIDTH = _this2._PAGE_WIDTH;
-    var dX = '0';
-    if (_this2._direction !== 0 && _this2._pagesNode) {
-      var _prevInt = _getTranslateX(_this2._pagesNode);
-      dX = _this2._direction === 1 ? _prevInt - _WIDTH : _prevInt + _WIDTH;
-      _this2._direction = 0;
-    } else if (_this2._direction === 0 && _this2._pagesNode) {
-      dX = _getTranslateX(_this2._pagesNode);
-    }
-
-    return { transform: 'translateX(' + dX + 'px)' };
-  };
-
-  this._refPages = function (n) {
-    return _this2._pagesNode = n;
-  };
-
-  this._renderPages = function () {
-    var _state = _this2.state,
-        pages = _state.pages,
-        pageCurrent = _state.pageCurrent;
-
-    return pages.map(function (Page, index) {
-      return _react2.default.cloneElement(Page, {
-        pageCurrent: pageCurrent,
-        //pageNumber: index,
-        pageNumber: index + 1
-      });
-    });
-  };
-}, _temp);
-exports.default = ModalSlider;
+};
+var _default = ModalSlider;
+exports["default"] = _default;
 //# sourceMappingURL=ModalSlider.js.map

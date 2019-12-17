@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var S = {
   //Dialogs, DatesFragments
@@ -47,33 +44,37 @@ var S = {
     display: 'none'
   }
 };
-
 var DialogStyles = {
   //Dialogs, DatesFragments
-  rowDiv: (0, _extends3.default)({}, S.ROW),
-  labelSpan: (0, _extends3.default)({}, S.LABEL),
-
+  rowDiv: (0, _extends2["default"])({}, S.ROW),
+  labelSpan: (0, _extends2["default"])({}, S.LABEL),
   crRowCaption: function crRowCaption(caption) {
-    return caption.indexOf(':') === -1 && caption !== '' ? caption + ':' : caption;
+    return caption.indexOf(':') === -1 && caption !== '' ? caption + ":" : caption;
   },
-  crRowLabelStyle: function crRowLabelStyle() {
-    var isShowLabels = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-    var captionStyle = arguments[1];
+  crRowLabelStyle: function crRowLabelStyle(isShowLabels, captionStyle) {
+    if (isShowLabels === void 0) {
+      isShowLabels = true;
+    }
 
-    var rowStyle = isShowLabels ? (0, _extends3.default)({}, S.ROW) : (0, _extends3.default)({}, S.ROW, S.ROW_SHORT),
-        labelStyle = isShowLabels ? (0, _extends3.default)({}, S.LABEL, captionStyle) : (0, _extends3.default)({}, S.LABEL, S.NONE);
-    return { rowStyle: rowStyle, labelStyle: labelStyle };
+    var rowStyle = isShowLabels ? (0, _extends2["default"])({}, S.ROW) : (0, _extends2["default"])({}, S.ROW, {}, S.ROW_SHORT),
+        labelStyle = isShowLabels ? (0, _extends2["default"])({}, S.LABEL, {}, captionStyle) : (0, _extends2["default"])({}, S.LABEL, {}, S.NONE);
+    return {
+      rowStyle: rowStyle,
+      labelStyle: labelStyle
+    };
   },
+  crRowOcSelectStyle: function crRowOcSelectStyle(isShowLabels, captionStyle) {
+    if (isShowLabels === void 0) {
+      isShowLabels = true;
+    }
 
-  crRowOcSelectStyle: function crRowOcSelectStyle() {
-    var isShowLabels = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-    var captionStyle = arguments[1];
-
-    var rowStyle = isShowLabels ? (0, _extends3.default)({}, S.ROW_OC) : (0, _extends3.default)({}, S.ROW_OC, S.ROW_SHORT),
-        labelStyle = isShowLabels ? (0, _extends3.default)({}, S.LABEL, captionStyle) : (0, _extends3.default)({}, S.LABEL, S.NONE);
-    return { rowStyle: rowStyle, labelStyle: labelStyle };
+    var rowStyle = isShowLabels ? (0, _extends2["default"])({}, S.ROW_OC) : (0, _extends2["default"])({}, S.ROW_OC, {}, S.ROW_SHORT),
+        labelStyle = isShowLabels ? (0, _extends2["default"])({}, S.LABEL, {}, captionStyle) : (0, _extends2["default"])({}, S.LABEL, {}, S.NONE);
+    return {
+      rowStyle: rowStyle,
+      labelStyle: labelStyle
+    };
   },
-
   //ValidationMessagesFragment
   VM_CONT: {
     paddingLeft: 10,
@@ -93,8 +94,7 @@ var DialogStyles = {
     whiteSpace: 'pre',
     fontWeight: 'bold'
   }
-
 };
-
-exports.default = DialogStyles;
+var _default = DialogStyles;
+exports["default"] = _default;
 //# sourceMappingURL=DialogStyles.js.map

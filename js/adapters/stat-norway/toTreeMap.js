@@ -1,44 +1,30 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _jsonstat = require('jsonstat');
+var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
-var _jsonstat2 = _interopRequireDefault(_jsonstat);
+var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
-var _Chart = require('../../charts/Chart');
+var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _Chart2 = _interopRequireDefault(_Chart);
+var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
-var _ConfigBuilder = require('../../charts/ConfigBuilder');
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
-
-var _Tooltip = require('../../charts/Tooltip');
-
-var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
-var _fnAdapter = require('./fnAdapter');
-
-var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crTitle = _fnAdapter2.default.crTitle,
-    crTid = _fnAdapter2.default.crTid,
-    crChartOption = _fnAdapter2.default.crChartOption,
-    numberFormat = _fnAdapter2.default.numberFormat;
-
-
+var crTitle = _fnAdapter["default"].crTitle,
+    crTid = _fnAdapter["default"].crTid,
+    crChartOption = _fnAdapter["default"].crChartOption,
+    numberFormat = _fnAdapter["default"].numberFormat;
 var NUMBER_STYLE = 'style="color:#333;"';
+
 var _crPointName = function _crPointName(label, value) {
-  return label + ' <br/>\n  <span ' + NUMBER_STYLE + '>' + numberFormat(value) + '</span>';
+  return label + " <br/>\n  <span " + NUMBER_STYLE + ">" + numberFormat(value) + "</span>";
 };
 
 var _fCrTreeMapPoint = function _fCrTreeMapPoint(c, title) {
@@ -47,7 +33,9 @@ var _fCrTreeMapPoint = function _fCrTreeMapPoint(c, title) {
         value = v.value;
     return {
       name: _crPointName(label, value),
-      value: value, label: label, title: title
+      value: value,
+      label: label,
+      title: title
     };
   };
 };
@@ -65,23 +53,31 @@ var _fIsPoint = function _fIsPoint(dfT, hm, depth) {
     if (dfT && p.label === dfT) {
       return false;
     }
+
     if (hm[p.label].d !== depth) {
       return false;
     }
+
     return p.y !== null && p.y !== 0;
   };
 };
 
 var _findLevelBy = function _findLevelBy(data, from, sum, stopSum) {
   var _maxIndex = data.length;
+
   if (from >= _maxIndex) {
-    return { index: _maxIndex, sum: sum };
+    return {
+      index: _maxIndex,
+      sum: sum
+    };
   }
 
   var index = _maxIndex,
       i = from;
+
   for (; i < _maxIndex; i++) {
     sum += data[i].value;
+
     if (sum >= stopSum) {
       index = i;
       break;
@@ -91,7 +87,11 @@ var _findLevelBy = function _findLevelBy(data, from, sum, stopSum) {
   if (index < _maxIndex) {
     index += 1;
   }
-  return { index: index, sum: sum };
+
+  return {
+    index: index,
+    sum: sum
+  };
 };
 
 var _findLevelIndex = function _findLevelIndex(data, level1, level2) {
@@ -106,8 +106,10 @@ var _findLevelIndex = function _findLevelIndex(data, level1, level2) {
       _findLevelBy3 = _findLevelBy(data, index1, sum1, _v2),
       index2 = _findLevelBy3.index;
 
-
-  return { index1: index1, index2: index2 };
+  return {
+    index1: index1,
+    index2: index2
+  };
 };
 
 var _compareByValue = function _compareByValue(a, b) {
@@ -116,7 +118,7 @@ var _compareByValue = function _compareByValue(a, b) {
 
 var _crCategory = function _crCategory(option, by, depth) {
   var _option$items = option.items,
-      items = _option$items === undefined ? [] : _option$items,
+      items = _option$items === void 0 ? [] : _option$items,
       dfC = option.dfC,
       dfT = option.dfT,
       dfC2 = option.dfC2,
@@ -130,6 +132,7 @@ var _crCategory = function _crCategory(option, by, depth) {
         itemSlice: items[0].slice,
         depth: depth
       };
+
     default:
       return {
         category: dfC,
@@ -145,29 +148,31 @@ var _addPercent = function _addPercent(data) {
     return acc + item.value;
   }, 0),
       _onePercent = _total / 100;
+
   return data.map(function (p) {
-    return (0, _extends3.default)({}, p, {
+    return (0, _extends2["default"])({}, p, {
       percent: parseFloat((p.value / _onePercent).toFixed(2))
     });
   });
 };
 
 var _addColor = function _addColor(data, level60, level90) {
-  var period = _Chart2.default.COLOR_PERIOD,
-      base1 = _Chart2.default.COLOR_BASE1,
-      base2 = _Chart2.default.COLOR_BASE2;
+  var period = _Chart["default"].COLOR_PERIOD,
+      base1 = _Chart["default"].COLOR_BASE1,
+      base2 = _Chart["default"].COLOR_BASE2;
 
   var _level90 = level90 - level60;
-  var deltaColor = void 0;
+
+  var deltaColor;
   data.forEach(function (point, pointIndex) {
     if (pointIndex < level60) {
       deltaColor = pointIndex * (period / level60);
-      point.color = _Chart2.default.fCreateMonoColor(base1, deltaColor);
+      point.color = _Chart["default"].fCreateMonoColor(base1, deltaColor);
     } else if (pointIndex < level60 + _level90) {
       deltaColor = (pointIndex - level60) * (period / _level90);
-      point.color = _Chart2.default.fCreateMonoColor(base2, deltaColor);
+      point.color = _Chart["default"].fCreateMonoColor(base2, deltaColor);
     } else {
-      point.color = _Chart2.default.fnGetMonoColor(pointIndex - level60 - _level90);
+      point.color = _Chart["default"].fnGetMonoColor(pointIndex - level60 - _level90);
     }
   });
 };
@@ -180,6 +185,7 @@ var _crData = function _crData(values, categories, Tid, option) {
   if (!Array.isArray(values)) {
     return [];
   }
+
   return values.map(_fCrTreeMapPoint(categories, Tid)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth)).sort(_compareByValue).reverse();
 };
 
@@ -192,13 +198,15 @@ var toTreeMap = {
         seriaType = option.seriaType,
         isCluster = option.isCluster,
         _option$items2 = option.items,
-        items = _option$items2 === undefined ? [] : _option$items2,
-        ds = (0, _jsonstat2.default)(json).Dataset(0),
+        items = _option$items2 === void 0 ? [] : _option$items2,
+        ds = (0, _jsonstat["default"])(json).Dataset(0),
         categories = ds.Dimension(category),
         Tid = crTid(time, ds),
         _title = crTitle(option),
-        _subtitle = (items[1].caption || '') + ': ' + Tid,
-        values = ds.Data((0, _extends3.default)({ Tid: Tid }, itemSlice, dfTSlice)),
+        _subtitle = (items[1].caption || '') + ": " + Tid,
+        values = ds.Data((0, _extends2["default"])({
+      Tid: Tid
+    }, itemSlice, {}, dfTSlice)),
         _d1 = _crData(values, categories, Tid, option),
         _c = _d1.map(function (item) {
       return item.c;
@@ -212,13 +220,13 @@ var toTreeMap = {
       _addColor(_data, index1, index2);
     }
 
-    var _seria = (0, _ConfigBuilder2.default)().treeMapSeria(_Tooltip2.default.treeMap, {
-      zhSeriaId: _fnAdapter2.default.crId(),
+    var _seria = (0, _ConfigBuilder["default"])().treeMapSeria(_Tooltip["default"].treeMap, {
+      zhSeriaId: _fnAdapter["default"].crId(),
       data: _data
     }).toSeria();
-    var config = (0, _ConfigBuilder2.default)().treeMapConfig(_c, seriaType)
-    //.addCaption(C.TITLE, _subtitle)
-    .addCaption(_title, _subtitle).addSeries(_seria).add((0, _extends3.default)({
+
+    var config = (0, _ConfigBuilder["default"])().treeMapConfig(_c, seriaType) //.addCaption(C.TITLE, _subtitle)
+    .addCaption(_title, _subtitle).addSeries(_seria).add((0, _extends2["default"])({
       chart: {
         spacingTop: 25,
         marginTop: 50,
@@ -226,19 +234,22 @@ var toTreeMap = {
         height: 500
       }
     }, crChartOption(ds, Tid, option))).alignButtonExport().toConfig();
-
     return config;
   },
+  fCrConfig: function fCrConfig(param, config) {
+    if (param === void 0) {
+      param = {};
+    }
 
-  fCrConfig: function fCrConfig() {
-    var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    if (config === void 0) {
+      config = {};
+    }
 
     return function (json, option) {
-      return toTreeMap.crConfig(json, (0, _extends3.default)({}, option, param, _crCategory(option, config.by, config.depth)));
+      return toTreeMap.crConfig(json, (0, _extends2["default"])({}, option, {}, param, {}, _crCategory(option, config.by, config.depth)));
     };
   }
 };
-
-exports.default = toTreeMap;
+var _default = toTreeMap;
+exports["default"] = _default;
 //# sourceMappingURL=toTreeMap.js.map

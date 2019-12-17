@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 var S = {
-
   SCROLL_DIV: {
     height: '94%'
   },
-
   DIV_WRAPPER: {
     paddingLeft: 12,
     paddingRight: 5,
@@ -64,6 +61,6 @@ var S = {
     display: 'none'
   }
 };
-
-exports.default = S;
+var _default = S;
+exports["default"] = _default;
 //# sourceMappingURL=About.Style.js.map

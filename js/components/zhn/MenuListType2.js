@@ -1,49 +1,28 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _Color = _interopRequireDefault(require("../styles/Color"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _OpenClose = _interopRequireDefault(require("./OpenClose2"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Color = require('../styles/Color');
-
-var _Color2 = _interopRequireDefault(_Color);
-
-var _OpenClose = require('./OpenClose2');
-
-var _OpenClose2 = _interopRequireDefault(_OpenClose);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var C_FILL_OPEN = _Color2.default.GREEN;
-var C_LEFT_BORDER = _Color2.default.YELLOW;
-
+var C_FILL_OPEN = _Color["default"].GREEN;
+var C_LEFT_BORDER = _Color["default"].YELLOW;
 var MODEL_PROP = {
   CAPTION: 'caption',
   GROUPS: 'groups',
   LISTS: 'lists',
   ITEMS: 'items'
 };
-
 var STYLE = {
   GROUP_DIV: {
     lineHeight: 2
@@ -52,7 +31,7 @@ var STYLE = {
     marginLeft: '8px',
     paddingLeft: '12px',
     //borderLeft : '1px solid yellow',
-    borderLeft: '1px solid ' + C_LEFT_BORDER,
+    borderLeft: "1px solid " + C_LEFT_BORDER,
     lineHeight: 2
   },
   LIST_DIV_NOT_SELECTED: {
@@ -78,31 +57,33 @@ var STYLE = {
   }
 };
 
-var MenuListType2 = function (_Component) {
-  (0, _inherits3.default)(MenuListType2, _Component);
+var MenuListType2 =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuListType2, _Component);
 
   function MenuListType2() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, MenuListType2);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuListType2.__proto__ || Object.getPrototypeOf(MenuListType2)).call.apply(_ref, [this].concat(args))), _this), _this.state = {}, _this._renderLevel3 = function () {
-      var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var captionProp = arguments[1];
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {};
+
+    _this._renderLevel3 = function (items, captionProp) {
+      if (items === void 0) {
+        items = [];
+      }
+
       var _this$props = _this.props,
           itemClassName = _this$props.itemClassName,
           ItemComp = _this$props.ItemComp,
           onClickItem = _this$props.onClickItem;
-
       return items.map(function (item, index) {
         var caption = item[captionProp];
-        return _react2.default.createElement(ItemComp, {
+        return _react["default"].createElement(ItemComp, {
           key: index,
           className: itemClassName,
           caption: caption,
@@ -110,32 +91,35 @@ var MenuListType2 = function (_Component) {
           onClickItem: onClickItem
         });
       });
-    }, _this._renderLevel2 = function () {
-      var lists = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var captionProp = arguments[1];
-      var itemsProp = arguments[2];
+    };
+
+    _this._renderLevel2 = function (lists, captionProp, itemsProp) {
+      if (lists === void 0) {
+        lists = [];
+      }
 
       return lists.map(function (list, index) {
         var caption = list[captionProp],
             items = list[itemsProp];
-        return _react2.default.createElement(
-          _OpenClose2.default,
-          {
-            key: index,
-            fillOpen: C_FILL_OPEN,
-            style: STYLE.LIST_DIV,
-            styleNotSelected: STYLE.LIST_DIV_NOT_SELECTED,
-            isClose: true,
-            caption: caption
-          },
-          _this._renderLevel3(items, captionProp)
-        );
+        return _react["default"].createElement(_OpenClose["default"], {
+          key: index,
+          fillOpen: C_FILL_OPEN,
+          style: STYLE.LIST_DIV,
+          styleNotSelected: STYLE.LIST_DIV_NOT_SELECTED,
+          isClose: true,
+          caption: caption
+        }, _this._renderLevel3(items, captionProp));
       });
-    }, _this._renderLevel1 = function () {
-      var model = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    };
 
-      var _model$meta = model.meta,
-          meta = _model$meta === undefined ? {} : _model$meta,
+    _this._renderLevel1 = function (model) {
+      if (model === void 0) {
+        model = {};
+      }
+
+      var _model = model,
+          _model$meta = _model.meta,
+          meta = _model$meta === void 0 ? {} : _model$meta,
           caption = meta.caption,
           level1 = meta.level1,
           level2 = meta.level2,
@@ -149,42 +133,36 @@ var MenuListType2 = function (_Component) {
       return groups.map(function (group, index) {
         var caption = group[_captionProp],
             lists = group[_listsProp];
-        return _react2.default.createElement(
-          _OpenClose2.default,
-          {
-            key: index,
-            style: STYLE.GROUP_DIV,
-            isClose: true,
-            caption: caption
-          },
-          _this._renderLevel2(lists, _captionProp, _itemsProp)
-        );
+        return _react["default"].createElement(_OpenClose["default"], {
+          key: index,
+          style: STYLE.GROUP_DIV,
+          isClose: true,
+          caption: caption
+        }, _this._renderLevel2(lists, _captionProp, _itemsProp));
       });
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(MenuListType2, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.state === nextState && this.props.model === nextProps.model) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var model = this.props.model;
+  var _proto = MenuListType2.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        this._renderLevel1(model)
-      );
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (this.state === nextState && this.props.model === nextProps.model) {
+      return false;
     }
-  }]);
+
+    return true;
+  };
+
+  _proto.render = function render() {
+    var model = this.props.model;
+    return _react["default"].createElement("div", null, this._renderLevel1(model));
+  };
+
   return MenuListType2;
 }(_react.Component);
 
-exports.default = MenuListType2;
+var _default = MenuListType2;
+exports["default"] = _default;
 //# sourceMappingURL=MenuListType2.js.map

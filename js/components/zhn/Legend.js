@@ -1,38 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _LegendItem = require('./LegendItem');
-
-var _LegendItem2 = _interopRequireDefault(_LegendItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _LegendItem = _interopRequireDefault(require("./LegendItem"));
 
 var C = {
   CL_SCROLL: "with-scroll",
@@ -40,7 +21,6 @@ var C = {
   MORE: 'MORE',
   LESS: 'LESS'
 };
-
 var S = {
   ROOT_MORE: {
     overflowY: 'auto',
@@ -55,7 +35,6 @@ var S = {
   DIV: {
     transform: 'scaleX(-1)'
   },
-
   BT_MORE: {
     display: 'inline-block',
     marginTop: '10px',
@@ -70,30 +49,29 @@ var BtMore = function BtMore(_ref) {
   var isMore = _ref.isMore,
       legend = _ref.legend,
       onClick = _ref.onClick;
-
   var _len = legend.length;
+
   if (_len > C.MORE_MAX) {
     var _caption = isMore ? C.LESS + ': ' + C.MORE_MAX : C.MORE + ': +' + (_len - C.MORE_MAX);
-    return _react2.default.createElement(
-      'button',
-      {
-        style: S.BT_MORE,
-        onClick: onClick
-      },
-      _caption
-    );
+
+    return _react["default"].createElement("button", {
+      style: S.BT_MORE,
+      onClick: onClick
+    }, _caption);
   } else {
     return null;
   }
 };
 
-var Legend = function (_Component) {
-  (0, _inherits3.default)(Legend, _Component);
+var Legend =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(Legend, _Component);
 
   function Legend(props) {
-    (0, _classCallCheck3.default)(this, Legend);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (Legend.__proto__ || Object.getPrototypeOf(Legend)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._handleMore = function () {
       _this.setState({
@@ -101,18 +79,20 @@ var Legend = function (_Component) {
       });
     };
 
-    _this._renderLegend = function () {
-      var legend = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var isMore = arguments[1];
-      var onClickItem = arguments[2];
+    _this._renderLegend = function (legend, isMore, onClickItem) {
+      if (legend === void 0) {
+        legend = [];
+      }
 
       var _legend = [],
           max = legend.length;
       var i = 0;
+
       for (; i < max; i++) {
         if (isMore || !isMore && i < C.MORE_MAX) {
           var item = legend[i];
-          _legend.push(_react2.default.createElement(_LegendItem2.default, {
+
+          _legend.push(_react["default"].createElement(_LegendItem["default"], {
             key: item.name,
             item: item,
             onClickItem: onClickItem
@@ -121,6 +101,7 @@ var Legend = function (_Component) {
           break;
         }
       }
+
       return _legend;
     };
 
@@ -130,42 +111,39 @@ var Legend = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(Legend, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps.legend === this.props.legend && nextState.isMore === this.state.isMore) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          _props$legend = _props.legend,
-          legend = _props$legend === undefined ? [] : _props$legend,
-          onClickItem = _props.onClickItem,
-          isMore = this.state.isMore,
-          _rootStyle = isMore ? S.ROOT_MORE : (0, _extends3.default)({}, S.ROOT_MORE, S.ROOT_LESS);
+  var _proto = Legend.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        { className: C.CL_SCROLL, style: _rootStyle },
-        _react2.default.createElement(
-          'div',
-          { style: S.DIV },
-          this._renderLegend(legend, isMore, onClickItem),
-          _react2.default.createElement(BtMore, {
-            isMore: isMore,
-            legend: legend,
-            onClick: this._handleMore
-          })
-        )
-      );
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.legend === this.props.legend && nextState.isMore === this.state.isMore) {
+      return false;
     }
-  }]);
+
+    return true;
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        _this$props$legend = _this$props.legend,
+        legend = _this$props$legend === void 0 ? [] : _this$props$legend,
+        onClickItem = _this$props.onClickItem,
+        isMore = this.state.isMore,
+        _rootStyle = isMore ? S.ROOT_MORE : (0, _extends2["default"])({}, S.ROOT_MORE, {}, S.ROOT_LESS);
+
+    return _react["default"].createElement("div", {
+      className: C.CL_SCROLL,
+      style: _rootStyle
+    }, _react["default"].createElement("div", {
+      style: S.DIV
+    }, this._renderLegend(legend, isMore, onClickItem), _react["default"].createElement(BtMore, {
+      isMore: isMore,
+      legend: legend,
+      onClick: this._handleMore
+    })));
+  };
+
   return Legend;
 }(_react.Component);
 
-exports.default = Legend;
+var _default = Legend;
+exports["default"] = _default;
 //# sourceMappingURL=Legend.js.map

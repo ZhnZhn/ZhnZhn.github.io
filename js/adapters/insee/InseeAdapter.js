@@ -1,26 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AdapterFn = require('../AdapterFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _ConfigBuilder = require('../../charts/ConfigBuilder');
+var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+var _fnDescr = _interopRequireDefault(require("./fnDescr"));
 
-var _fnDescr = require('./fnDescr');
+var _parser = new window.DOMParser(); //€
 
-var _fnDescr2 = _interopRequireDefault(_fnDescr);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _parser = new window.DOMParser();
-
-//€
 
 var _crZhConfig = function _crZhConfig(id) {
   return {
@@ -36,10 +28,11 @@ var _toData = function _toData(str) {
       series = xml.getElementsByTagName('Series'),
       data = [],
       info = [];
+
   var i = 0,
       max = series.length,
-      _seria = void 0,
-      _v = void 0;
+      _seria,
+      _v;
 
   for (i; i < max; i++) {
     _seria = series[i];
@@ -54,14 +47,15 @@ var _toData = function _toData(str) {
 
     _seria.childNodes.forEach(function (node) {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
+
       if (!Number.isNaN(_v)) {
-        data.push([_AdapterFn2.default.ymdToUTC(node.getAttribute('TIME_PERIOD')), _v]);
+        data.push([_AdapterFn["default"].ymdToUTC(node.getAttribute('TIME_PERIOD')), _v]);
       }
     });
   }
 
   return {
-    data: data.sort(_AdapterFn2.default.compareByDate),
+    data: data.sort(_AdapterFn["default"].compareByDate),
     info: info
   };
 };
@@ -74,13 +68,17 @@ var InseeAdapter = {
         _toData2 = _toData(str),
         data = _toData2.data,
         info = _toData2.info,
-        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).addMinMax(data, option).add({
-      info: _fnDescr2.default.toInfo(info, title),
-      valueMoving: _AdapterFn2.default.valueMoving(data),
+        config = (0, _ConfigBuilder["default"])().areaConfig({
+      spacingTop: 25
+    }).addCaption(title, subtitle).addPoints(value, data).addMinMax(data, option).add({
+      info: _fnDescr["default"].toInfo(info, title),
+      valueMoving: _AdapterFn["default"].valueMoving(data),
       zhConfig: _crZhConfig(value)
     }).toConfig();
 
-    return { config: config };
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(str, option) {
     var value = option.value,
@@ -90,9 +88,9 @@ var InseeAdapter = {
         _toData3 = _toData(str),
         data = _toData3.data;
 
-    return (0, _ConfigBuilder2.default)().initSeria().addPoints(value, data, _text).toSeria();
+    return (0, _ConfigBuilder["default"])().initSeria().addPoints(value, data, _text).toSeria();
   }
 };
-
-exports.default = InseeAdapter;
+var _default = InseeAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=InseeAdapter.js.map

@@ -1,8 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 var CL_ROW = 'row__pane-topic not-selected';
 
 var crModel = function crModel(comp, _ref) {
@@ -29,5 +28,6 @@ var crModel = function crModel(comp, _ref) {
   };
 };
 
-exports.default = crModel;
+var _default = crModel;
+exports["default"] = _default;
 //# sourceMappingURL=AreaMore.js.map

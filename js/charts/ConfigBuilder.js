@@ -1,56 +1,33 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
+var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
-var _typeof3 = _interopRequireDefault(_typeof2);
+var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _seriaFn = require('../math/seriaFn');
+var _ChartFn = _interopRequireDefault(require("./ChartFn"));
 
-var _seriaFn2 = _interopRequireDefault(_seriaFn);
+var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
-var _Chart = require('./Chart');
+var _ChartFactory = _interopRequireDefault(require("./ChartFactory"));
 
-var _Chart2 = _interopRequireDefault(_Chart);
+var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
-var _ChartFn = require('./ChartFn');
+var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 
-var _ChartFn2 = _interopRequireDefault(_ChartFn);
-
-var _ChartConfig = require('./ChartConfig');
-
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
-
-var _ChartFactory = require('./ChartFactory');
-
-var _ChartFactory2 = _interopRequireDefault(_ChartFactory);
-
-var _Tooltip = require('./Tooltip');
-
-var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
-var _SeriaBuilder = require('./SeriaBuilder');
-
-var _SeriaBuilder2 = _interopRequireDefault(_SeriaBuilder);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var findMinY = _seriaFn2.default.findMinY,
-    findMaxY = _seriaFn2.default.findMaxY;
-var setPlotLinesMinMax = _ChartFn2.default.setPlotLinesMinMax,
-    setPlotLinesDeltas = _ChartFn2.default.setPlotLinesDeltas,
-    calcMinY = _ChartFn2.default.calcMinY,
-    setYToPoints = _ChartFn2.default.setYToPoints;
-var crDividendSeria = _ChartConfig2.default.crDividendSeria;
-
-
+var findMinY = _seriaFn["default"].findMinY,
+    findMaxY = _seriaFn["default"].findMaxY;
+var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax,
+    setPlotLinesDeltas = _ChartFn["default"].setPlotLinesDeltas,
+    calcMinY = _ChartFn["default"].calcMinY,
+    setYToPoints = _ChartFn["default"].setYToPoints;
+var crDividendSeria = _ChartConfig["default"].crDividendSeria;
 var C = {
   CATEGORIES_X_AXIS: {
     type: "category",
@@ -66,7 +43,6 @@ var C = {
     tickPosition: "outside",
     gridLineWidth: 0
   },
-
   CATEGORIES_Y_AXIS: {
     lineWidth: 0,
     tickLength: 0,
@@ -80,16 +56,16 @@ var C = {
     }
   }
 };
-
-var _assign = Object.assign;
-//const _isArr = Array.isArray;
+var _assign = Object.assign; //const _isArr = Array.isArray;
 
 var _isObj = function _isObj(obj) {
-  return obj && (typeof obj === 'undefined' ? 'undefined' : (0, _typeof3.default)(obj)) === 'object';
+  return obj && typeof obj === 'object';
 };
+
 var _isStr = function _isStr(str) {
   return typeof str === 'string';
 };
+
 var _isNumber = function _isNumber(n) {
   return typeof n === 'number' && n - n === 0;
 };
@@ -98,28 +74,35 @@ var _getY = function _getY(point) {
   return Array.isArray(point) ? point[1] : point && point.y || 0;
 };
 
-var ConfigBuilder = function ConfigBuilder() {
-  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var ConfigBuilder = function ConfigBuilder(config) {
+  if (config === void 0) {
+    config = {};
+  }
 
   if (!(this instanceof ConfigBuilder)) {
     return new ConfigBuilder(config);
   }
+
   this.config = config;
 };
 
-ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default)({}, _SeriaBuilder2.default, {
-  init: function init() {
-    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["default"])({}, _SeriaBuilder["default"], {
+  init: function init(config) {
+    if (config === void 0) {
+      config = {};
+    }
 
     this.config = config;
     return this;
   },
   areaConfig: function areaConfig(option) {
-    this.config = _ChartConfig2.default.fBaseAreaConfig(option);
+    this.config = _ChartConfig["default"].fBaseAreaConfig(option);
     return this;
   },
   area2Config: function area2Config(title, subtitle) {
-    this.areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries();
+    this.areaConfig({
+      spacingTop: 25
+    }).addCaption(title, subtitle).clearSeries();
     return this;
   },
   stockConfig: function stockConfig(id, dataOption) {
@@ -134,101 +117,131 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default
         dataHigh = dataOption.dataHigh,
         dataLow = dataOption.dataLow,
         dataOpen = dataOption.dataOpen;
-
-    this.areaConfig({ spacingTop: 25 }).addTooltip(_Tooltip2.default.fnBasePointFormatter).addMiniVolume({
+    this.areaConfig({
+      spacingTop: 25
+    }).addTooltip(_Tooltip["default"].fnBasePointFormatter).addMiniVolume({
       id: id,
       dColumn: dataVolumeColumn,
       dVolume: dataVolume
     }).addMiniATH({
-      id: id, data: dataATH
+      id: id,
+      data: dataATH
     }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
     return this;
   },
-  categoryConfig: function categoryConfig() {
-    var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  categoryConfig: function categoryConfig(categories) {
+    if (categories === void 0) {
+      categories = [];
+    }
 
-    this.config = _ChartConfig2.default.fBaseAreaConfig();
-    var xAxis = (0, _extends3.default)({}, C.CATEGORIES_X_AXIS, { categories: categories });
+    this.config = _ChartConfig["default"].fBaseAreaConfig();
+    var xAxis = (0, _extends2["default"])({}, C.CATEGORIES_X_AXIS, {}, {
+      categories: categories
+    });
     this.add('xAxis', xAxis);
     this.add('yAxis', C.CATEGORIES_Y_AXIS);
     return this;
   },
-  _columnConfig: function _columnConfig() {
-    var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var option = arguments[1];
+  _columnConfig: function _columnConfig(categories, option) {
+    if (categories === void 0) {
+      categories = [];
+    }
 
-    this.config = _ChartFactory2.default.crColumnConfig(option);
-    this.add('xAxis', { categories: categories });
+    this.config = _ChartFactory["default"].crColumnConfig(option);
+    this.add('xAxis', {
+      categories: categories
+    });
     return this;
   },
-  _barConfig: function _barConfig() {
-    var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var option = arguments[1];
+  _barConfig: function _barConfig(categories, option) {
+    if (categories === void 0) {
+      categories = [];
+    }
 
-    this.config = _ChartFactory2.default.crBarConfig(option);
-    this.add('xAxis', { categories: categories });
+    this.config = _ChartFactory["default"].crBarConfig(option);
+    this.add('xAxis', {
+      categories: categories
+    });
     return this;
   },
-  barOrColumnConfig: function barOrColumnConfig(type) {
-    var categories = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-    var option = arguments[2];
+  barOrColumnConfig: function barOrColumnConfig(type, categories, option) {
+    if (categories === void 0) {
+      categories = [];
+    }
 
     if (type === 'BAR') {
       return this._barConfig(categories, option);
     }
+
     return this._columnConfig(categories, option);
   },
   treeMapConfig: function treeMapConfig() {
-    this.config = _ChartConfig2.default.fBaseTreeMapConfig();
+    this.config = _ChartConfig["default"].fBaseTreeMapConfig();
     return this;
   },
   alignButtonExport: function alignButtonExport() {
-    _assign(this.config.navigation.buttonOptions, { x: -10, y: -20 });
+    _assign(this.config.navigation.buttonOptions, {
+      x: -10,
+      y: -20
+    });
+
     return this;
   },
   addTitle: function addTitle(title) {
     var _to = this.config.title || {};
-    this.config.title = _assign(_to, _Chart2.default.fTitle({
+
+    this.config.title = _assign(_to, _Chart["default"].fTitle({
       text: title,
-      y: _Chart2.default.STACKED_TITLE_Y
+      y: _Chart["default"].STACKED_TITLE_Y
     }));
     return this;
   },
   addSubtitle: function addSubtitle(subtitle) {
     var _to = this.config.subtitle || {};
-    this.config.subtitle = _assign(_to, _Chart2.default.fSubtitle({
+
+    this.config.subtitle = _assign(_to, _Chart["default"].fSubtitle({
       text: subtitle,
-      y: _Chart2.default.STACKED_SUBTITLE_Y
+      y: _Chart["default"].STACKED_SUBTITLE_Y
     }));
     return this;
   },
-  addCaption: function addCaption() {
-    var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var subtitle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  addCaption: function addCaption(title, subtitle) {
+    if (title === void 0) {
+      title = '';
+    }
+
+    if (subtitle === void 0) {
+      subtitle = '';
+    }
 
     return this.addTitle(title).addSubtitle(subtitle);
   },
   addTooltip: function addTooltip(tooltip) {
-    this.config.tooltip = _Chart2.default.fTooltip(tooltip);
+    this.config.tooltip = _Chart["default"].fTooltip(tooltip);
     return this;
   },
   addXAxisCrosshair: function addXAxisCrosshair() {
-    this.add('xAxis', { crosshair: _Chart2.default.fCrosshair() });
+    this.add('xAxis', {
+      crosshair: _Chart["default"].fCrosshair()
+    });
     return this;
   },
   add: function add(propName, option) {
     if (_isStr(propName)) {
       var _to = this.config[propName];
+
       if (_isObj(_to)) {
         _assign(_to, option);
       } else {
         this.config[propName] = option;
       }
     } else if (_isObj(propName)) {
-      var _propName = void 0;
+      var _propName;
+
       for (_propName in propName) {
         var _to2 = this.config[_propName],
             _from = propName[_propName];
+
         if (_to2) {
           _assign(_to2, _from);
         } else {
@@ -236,43 +249,44 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default
         }
       }
     }
+
     return this;
   },
   addZhMiniConfig: function addZhMiniConfig(config) {
     var _configs = this.config.zhMiniConfigs;
+
     if (_configs) {
       _configs.push(config);
     } else {
       this.config.zhMiniConfigs = [config];
     }
+
     return this;
   },
   addMiniVolume: function addMiniVolume(option) {
     var dVolume = option.dVolume;
-
-    return dVolume && dVolume.length > 0 ? this.addZhMiniConfig(_ChartConfig2.default.fMiniVolumeConfig(option)) : this;
+    return dVolume && dVolume.length > 0 ? this.addZhMiniConfig(_ChartConfig["default"].fMiniVolumeConfig(option)) : this;
   },
   addMiniATH: function addMiniATH(option) {
     var data = option.data;
-
-    return data && data.length > 0 ? this.addZhMiniConfig(_ChartConfig2.default.fMiniATHConfig(option)) : this;
+    return data && data.length > 0 ? this.addZhMiniConfig(_ChartConfig["default"].fMiniATHConfig(option)) : this;
   },
   addMiniHL: function addMiniHL(option) {
     var data = option.data;
-
-    return data && data.length > 0 ? this.addZhMiniConfig(_ChartConfig2.default.fMiniHLConfig(option)) : this;
+    return data && data.length > 0 ? this.addZhMiniConfig(_ChartConfig["default"].fMiniHLConfig(option)) : this;
   },
   addZhPoints: function addZhPoints(data, fn) {
     this.add({
       zhPoints: data,
-      zhIsMfi: true
-      //zhFnGetMfiConfig: fn
+      zhIsMfi: true //zhFnGetMfiConfig: fn
+
     });
     return this;
   },
   addLegend: function addLegend(legend) {
     return this.add('zhConfig', {
-      legend: legend, isWithLegend: true
+      legend: legend,
+      isWithLegend: true
     });
   },
   addMinMax: function addMinMax(data, option) {
@@ -282,27 +296,30 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default
         maxY = option.maxY,
         min = _isNumber(minY) ? minY : findMinY(data),
         max = _isNumber(maxY) ? maxY : findMaxY(data);
-
     return this.setMinMax(min, max, isNotZoomToMinMax).setMinMaxDeltas(min, max, data, isDrawDeltaExtrems);
   },
   setMinMaxDeltas: function setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
     if (isDrawDeltaExtrems) {
       var _recentIndex = data.length - 1;
+
       if (_recentIndex > 0) {
         setPlotLinesDeltas({
           plotLines: this.config.yAxis.plotLines,
-          min: min, max: max,
+          min: min,
+          max: max,
           value: _getY(data[_recentIndex])
         });
       }
     }
+
     return this;
   },
   _setYAxisMin: function _setYAxisMin(min, max, noZoom) {
-    var _min = noZoom && min > 0 ? 0 : _Chart2.default.calcMinY({
+    var _min = noZoom && min > 0 ? 0 : _Chart["default"].calcMinY({
       minPoint: min,
       maxPoint: max
     });
+
     this.add('yAxis', {
       min: _min,
       maxPadding: 0.15,
@@ -314,16 +331,19 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default
   setMinMax: function setMinMax(min, max, noZoom) {
     setPlotLinesMinMax({
       plotLines: this.config.yAxis.plotLines,
-      min: min, max: max
+      min: min,
+      max: max
     });
+
     this._setYAxisMin(min, max, noZoom);
+
     return this;
   },
   setStockSerias: function setStockSerias(id, d, dH, dL, dO) {
-    _ChartConfig2.default.setStockSerias(this.config, d, dH, d, dO, id);
+    _ChartConfig["default"].setStockSerias(this.config, d, dH, d, dO, id);
+
     return this;
   },
-
 
   /*
   checkThreshold(seriaIndex=0){
@@ -344,23 +364,26 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends3.default
     return this;
   },
   */
-
   addDividend: function addDividend(_ref) {
     var dataDividend = _ref.dataDividend,
         minClose = _ref.minClose,
         maxClose = _ref.maxClose;
 
     if (dataDividend.length > 0) {
-      setYToPoints(dataDividend, calcMinY({ min: minClose, max: maxClose }));
+      setYToPoints(dataDividend, calcMinY({
+        min: minClose,
+        max: maxClose
+      }));
       this.config.series.push(crDividendSeria(dataDividend, 'exDividend'));
       this.config.chart.spacingBottom = 40;
     }
+
     return this;
   },
   toConfig: function toConfig() {
     return this.config;
   }
 }));
-
-exports.default = ConfigBuilder;
+var _default = ConfigBuilder;
+exports["default"] = _default;
 //# sourceMappingURL=ConfigBuilder.js.map

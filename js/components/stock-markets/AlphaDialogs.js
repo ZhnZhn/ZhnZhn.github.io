@@ -1,32 +1,24 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AlphaIndicatorDialog = require('./AlphaIndicatorDialog');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AlphaIndicatorDialog2 = _interopRequireDefault(_AlphaIndicatorDialog);
+var _AlphaIndicatorDialog = _interopRequireDefault(require("./AlphaIndicatorDialog"));
 
-var _AlphaIntradayDialog = require('./AlphaIntradayDialog');
+var _AlphaIntradayDialog = _interopRequireDefault(require("./AlphaIntradayDialog"));
 
-var _AlphaIntradayDialog2 = _interopRequireDefault(_AlphaIntradayDialog);
+var _AlphaSectorDialog = _interopRequireDefault(require("./AlphaSectorDialog"));
 
-var _AlphaSectorDialog = require('./AlphaSectorDialog');
-
-var _AlphaSectorDialog2 = _interopRequireDefault(_AlphaSectorDialog);
-
-var _AlphaSearchDialog = require('./AlphaSearchDialog');
-
-var _AlphaSearchDialog2 = _interopRequireDefault(_AlphaSearchDialog);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _AlphaSearchDialog = _interopRequireDefault(require("./AlphaSearchDialog"));
 
 var AlphaDialog = {
-  Indicator: _AlphaIndicatorDialog2.default, Intraday: _AlphaIntradayDialog2.default,
-  Sector: _AlphaSectorDialog2.default,
-  Search: _AlphaSearchDialog2.default
+  Indicator: _AlphaIndicatorDialog["default"],
+  Intraday: _AlphaIntradayDialog["default"],
+  Sector: _AlphaSectorDialog["default"],
+  Search: _AlphaSearchDialog["default"]
 };
-
-exports.default = AlphaDialog;
+var _default = AlphaDialog;
+exports["default"] = _default;
 //# sourceMappingURL=AlphaDialogs.js.map

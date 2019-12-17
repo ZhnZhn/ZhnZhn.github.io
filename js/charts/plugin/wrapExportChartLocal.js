@@ -1,28 +1,29 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ComponentActions = require('../../flux/actions/ComponentActions');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
 var wrapExportChartLocal = function wrapExportChartLocal(wrap, Chart) {
   wrap(Chart.prototype, 'exportChartLocal', function (fn) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       args[_key - 1] = arguments[_key];
     }
 
     if (args.length === 0) {
-      _ComponentActions2.default.showCustomizeExport({ fn: fn, chart: this });
+      _ComponentActions["default"].showCustomizeExport({
+        fn: fn,
+        chart: this
+      });
     } else {
       fn.apply(this, args);
     }
   });
 };
 
-exports.default = wrapExportChartLocal;
+var _default = wrapExportChartLocal;
+exports["default"] = _default;
 //# sourceMappingURL=wrapExportChartLocal.js.map

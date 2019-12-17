@@ -1,56 +1,27 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _TabPane = _interopRequireDefault(require("../zhn/TabPane"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _Tab = _interopRequireDefault(require("../zhn/Tab"));
 
-var _react = require('react');
+var _PaneApiKey = _interopRequireDefault(require("./PaneApiKey"));
 
-var _react2 = _interopRequireDefault(_react);
-
-var _ComponentActions = require('../../flux/actions/ComponentActions');
-
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-var _ModalDialog = require('../zhn-moleculs/ModalDialog');
-
-var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
-
-var _TabPane = require('../zhn/TabPane');
-
-var _TabPane2 = _interopRequireDefault(_TabPane);
-
-var _Tab = require('../zhn/Tab');
-
-var _Tab2 = _interopRequireDefault(_Tab);
-
-var _PaneApiKey = require('./PaneApiKey');
-
-var _PaneApiKey2 = _interopRequireDefault(_PaneApiKey);
-
-var _PaneOptions = require('./PaneOptions');
-
-var _PaneOptions2 = _interopRequireDefault(_PaneOptions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//import PropTypes from 'prop-types'
+var _PaneOptions = _interopRequireDefault(require("./PaneOptions"));
 
 var S = {
   MODAL: {
@@ -74,98 +45,90 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var SettingsDialog = function (_Component) {
-  (0, _inherits3.default)(SettingsDialog, _Component);
+var SettingsDialog =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(SettingsDialog, _Component);
 
   function SettingsDialog() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, SettingsDialog);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = SettingsDialog.__proto__ || Object.getPrototypeOf(SettingsDialog)).call.apply(_ref, [this].concat(args))), _this), _this._hClose = function () {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._hClose = function () {
       _this.props.onClose();
+
       if (_this._modal && _isFn(_this._modal.focusPrev)) {
         _this._modal.focusPrev();
       }
-    }, _this._refModal = function (n) {
+    };
+
+    _this._refModal = function (n) {
       return _this._modal = n;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(SettingsDialog, [{
-    key: 'shouldComponentUpdate',
+  var _proto = SettingsDialog.prototype;
 
-    /*
-    static propTypes = {
-      isShow: PropTypes.bool,
-      data: PropTypes.shape({
-        setQuandlKey: PropTypes.func,
-        isAdminMode: PropTypes.func,
-        isDrawDeltaExtrems: PropTypes.func
-      }),
-      onClose: PropTypes.func
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    data: PropTypes.shape({
+      setQuandlKey: PropTypes.func,
+      isAdminMode: PropTypes.func,
+      isDrawDeltaExtrems: PropTypes.func
+    }),
+    onClose: PropTypes.func
+  }
+  */
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
     }
-    */
 
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          data = _props.data;
+    return true;
+  };
 
-      return _react2.default.createElement(
-        _ModalDialog2.default,
-        {
-          ref: this._refModal,
-          caption: 'User Settings',
-          style: S.MODAL,
-          isWithButton: false,
-          isShow: isShow,
-          onClose: this._hClose
-        },
-        _react2.default.createElement(
-          _TabPane2.default,
-          { isUpdateInit: true },
-          _react2.default.createElement(
-            _Tab2.default,
-            { title: 'ApiKeys' },
-            _react2.default.createElement(_PaneApiKey2.default, {
-              titleStyle: S.TITLE_API,
-              btStyle: S.BT,
-              data: data,
-              onClose: this._hClose
-            })
-          ),
-          _react2.default.createElement(
-            _Tab2.default,
-            { title: 'Options' },
-            _react2.default.createElement(_PaneOptions2.default, {
-              titleStyle: S.TITLE_OPTION,
-              btStyle: S.BT,
-              data: data,
-              onChangeTheme: _ComponentActions2.default.changeTheme,
-              onClose: this._hClose
-            })
-          )
-        )
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShow = _this$props.isShow,
+        data = _this$props.data;
+    return _react["default"].createElement(_ModalDialog["default"], {
+      ref: this._refModal,
+      caption: "User Settings",
+      style: S.MODAL,
+      isWithButton: false,
+      isShow: isShow,
+      onClose: this._hClose
+    }, _react["default"].createElement(_TabPane["default"], {
+      isUpdateInit: true
+    }, _react["default"].createElement(_Tab["default"], {
+      title: "ApiKeys"
+    }, _react["default"].createElement(_PaneApiKey["default"], {
+      titleStyle: S.TITLE_API,
+      btStyle: S.BT,
+      data: data,
+      onClose: this._hClose
+    })), _react["default"].createElement(_Tab["default"], {
+      title: "Options"
+    }, _react["default"].createElement(_PaneOptions["default"], {
+      titleStyle: S.TITLE_OPTION,
+      btStyle: S.BT,
+      data: data,
+      onChangeTheme: _ComponentActions["default"].changeTheme,
+      onClose: this._hClose
+    }))));
+  };
+
   return SettingsDialog;
 }(_react.Component);
 
-exports.default = SettingsDialog;
+var _default = SettingsDialog;
+exports["default"] = _default;
 //# sourceMappingURL=SettingsDialog.js.map

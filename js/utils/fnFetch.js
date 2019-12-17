@@ -1,25 +1,16 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchJsonp = exports.fetchTxt = exports.fetchJson = undefined;
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
+exports.__esModule = true;
+exports.fetchJsonp = exports.fetchTxt = exports.fetchJson = void 0;
 
-var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
-
-var _fetchJsonp = require('fetch-jsonp');
-
-var _fetchJsonp2 = _interopRequireDefault(_fetchJsonp);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _fetchJsonp = _interopRequireDefault(require("fetch-jsonp"));
 
 var C = {
   //LIMIT_REMAINING: 'X-RateLimit-Remaining',
   REQ_ERR: 'Request Error',
   RESP_ERR: 'Response Error',
-
   MSG_400: '400: Bad request.',
   MSG_404: '404: Resource is not existed.',
   MSG_429: '429: Too many request in a given amount of time (rate limiting).',
@@ -34,8 +25,11 @@ var _isInArrValue = function _isInArrValue(arr, value) {
   return Array.isArray(arr) && arr.indexOf(value) !== -1;
 };
 
-var _crErr = function _crErr(message) {
-  var errCaption = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : C.REQ_ERR;
+var _crErr = function _crErr(message, errCaption) {
+  if (errCaption === void 0) {
+    errCaption = C.REQ_ERR;
+  }
+
   return {
     errCaption: errCaption,
     message: message
@@ -56,6 +50,7 @@ var _promiseAll = function _promiseAll(_ref) {
 
   var headers = response.headers,
       _limitRemaining = headers && _isFn(headers.get) && _isFn(getLimitRemaiming) ? getLimitRemaiming(headers) : void 0;
+
   return Promise.all([Promise.resolve(_limitRemaining), response[propName](), Promise.resolve(status)]);
 };
 
@@ -63,7 +58,7 @@ var _fFetch = function _fFetch(propName, type) {
   return function (_ref2) {
     var uri = _ref2.uri,
         _ref2$option = _ref2.option,
-        option = _ref2$option === undefined ? {} : _ref2$option,
+        option = _ref2$option === void 0 ? {} : _ref2$option,
         optionFetch = _ref2.optionFetch,
         getLimitRemaiming = _ref2.getLimitRemaiming,
         onCheckResponse = _ref2.onCheckResponse,
@@ -72,7 +67,8 @@ var _fFetch = function _fFetch(propName, type) {
         onFailed = _ref2.onFailed,
         onCatch = _ref2.onCatch;
 
-    var _fnFetch = type !== 'jsonp' ? fetch : _fetchJsonp2.default;
+    var _fnFetch = type !== 'jsonp' ? fetch : _fetchJsonp["default"];
+
     _fnFetch(uri, optionFetch).then(function (response) {
       var status = response.status,
           statusText = response.statusText,
@@ -81,44 +77,66 @@ var _fFetch = function _fFetch(propName, type) {
 
       if (status >= 200 && status < 400 || ok) {
         return _promiseAll({
-          response: response, propName: propName,
+          response: response,
+          propName: propName,
           getLimitRemaiming: getLimitRemaiming
         });
       } else if (status === 400) {
         _throwIfNotStatus(resErrStatus, status, C.MSG_400);
-        return _promiseAll({ response: response, propName: propName, status: status });
+
+        return _promiseAll({
+          response: response,
+          propName: propName,
+          status: status
+        });
       } else if (status === 404) {
         throw _crErr(C.MSG_404);
       } else if (status === 429) {
         throw _crErr(C.MSG_429);
       } else if (status > 400 && status < 500) {
-        _throwIfNotStatus(resErrStatus, status, status + ': ' + statusText);
-        return _promiseAll({ response: response, propName: propName, status: status });
+        _throwIfNotStatus(resErrStatus, status, status + ": " + statusText);
+
+        return _promiseAll({
+          response: response,
+          propName: propName,
+          status: status
+        });
       } else if (status === 503) {
         throw _crErr(C.MSG_503);
       } else if (status >= 500 && status < 600) {
-        throw _crErr(status + ': ' + statusText, C.RESP_ERR);
+        throw _crErr(status + ": " + statusText, C.RESP_ERR);
       } else {
         return [undefined, {}, status];
       }
     }).then(function (_ref3) {
-      var _ref4 = (0, _slicedToArray3.default)(_ref3, 3),
-          limitRemaining = _ref4[0],
-          json = _ref4[1],
-          status = _ref4[2];
+      var limitRemaining = _ref3[0],
+          json = _ref3[1],
+          status = _ref3[2];
 
       if (_isFn(onCheckResponse)) {
         if (onCheckResponse(json, option, status)) {
           option.limitRemaining = limitRemaining;
-          onFetch({ json: json, option: option, onCompleted: onCompleted });
+          onFetch({
+            json: json,
+            option: option,
+            onCompleted: onCompleted
+          });
         }
       } else {
         option.limitRemaining = limitRemaining;
-        onFetch({ json: json, option: option, onCompleted: onCompleted });
+        onFetch({
+          json: json,
+          option: option,
+          onCompleted: onCompleted
+        });
       }
-    }).catch(function (error) {
+    })["catch"](function (error) {
       if (_isFn(onCatch)) {
-        onCatch({ error: error, option: option, onFailed: onFailed });
+        onCatch({
+          error: error,
+          option: option,
+          onFailed: onFailed
+        });
       } else {
         console.log(error);
       }
@@ -126,7 +144,15 @@ var _fFetch = function _fFetch(propName, type) {
   };
 };
 
-var fetchJson = exports.fetchJson = _fFetch('json');
-var fetchTxt = exports.fetchTxt = _fFetch('text');
-var fetchJsonp = exports.fetchJsonp = _fFetch('json', 'jsonp');
+var fetchJson = _fFetch('json');
+
+exports.fetchJson = fetchJson;
+
+var fetchTxt = _fFetch('text');
+
+exports.fetchTxt = fetchTxt;
+
+var fetchJsonp = _fFetch('json', 'jsonp');
+
+exports.fetchJsonp = fetchJsonp;
 //# sourceMappingURL=fnFetch.js.map

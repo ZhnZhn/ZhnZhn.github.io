@@ -1,30 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ChartConfig = require('../../charts/ChartConfig');
+var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
-var _Tooltip = require('../../charts/Tooltip');
+var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
-var _ConfigBuilder = require('../../charts/ConfigBuilder');
-
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
-
-var _AdapterFn = require('../AdapterFn');
-
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var C = {
   CAPTION: 'EPS 4Q',
@@ -40,28 +29,28 @@ var _markerColor = function _markerColor(p) {
 var toEarningsImpl = {
   caption: C.CAPTION,
   color: C.COLOR,
-
   crSubtitle: function crSubtitle(_ref) {
     var value = _ref.value;
-
-    return value + ' ' + C.CAPTION;
+    return value + " " + C.CAPTION;
   },
   crSeria: function crSeria(json, option) {
     var dfType = option.dfType,
         data = [];
 
-
     if (json && Array.isArray(json[dfType])) {
       json[dfType].forEach(function (p) {
-        data.push(Object.assign(_ChartConfig2.default.fMarkerExDividend(_markerColor(p), 0), (0, _extends3.default)({
-          x: _AdapterFn2.default.ymdToUTC(p.EPSReportDate),
+        data.push(Object.assign(_ChartConfig["default"].fMarkerExDividend(_markerColor(p), 0), (0, _extends2["default"])({
+          x: _AdapterFn["default"].ymdToUTC(p.EPSReportDate),
           exValue: p.actualEPS
         }, p)));
       });
     }
-    return (0, _ConfigBuilder2.default)().scatterSeria(_Tooltip2.default.eps, { data: data }).toSeria();
+
+    return (0, _ConfigBuilder["default"])().scatterSeria(_Tooltip["default"].eps, {
+      data: data
+    }).toSeria();
   }
 };
-
-exports.default = toEarningsImpl;
+var _default = toEarningsImpl;
+exports["default"] = _default;
 //# sourceMappingURL=toEarningsImpl.js.map

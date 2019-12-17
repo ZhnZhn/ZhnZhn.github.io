@@ -1,34 +1,32 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+var _useRow = _interopRequireDefault(require("./useRow"));
 
-var _useRow = require('./useRow');
-
-var _useRow2 = _interopRequireDefault(_useRow);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var useRowOptions = function useRowOptions(_ref) {
-  var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      isOc = _ref2.isOc;
-
+var useRowOptions = function useRowOptions(_ref, _temp) {
   var isShowLabels = _ref.isShowLabels,
       _ref$caption = _ref.caption,
-      caption = _ref$caption === undefined ? '' : _ref$caption,
+      caption = _ref$caption === void 0 ? '' : _ref$caption,
       captionStyle = _ref.captionStyle,
-      rest = (0, _objectWithoutProperties3.default)(_ref, ['isShowLabels', 'caption', 'captionStyle']);
-  return (0, _extends3.default)({}, (0, _useRow2.default)({ isShowLabels: isShowLabels, caption: caption, captionStyle: captionStyle }, isOc), {
-    options: (0, _extends3.default)({
+      rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["isShowLabels", "caption", "captionStyle"]);
+
+  var _ref2 = _temp === void 0 ? {} : _temp,
+      isOc = _ref2.isOc;
+
+  return (0, _extends2["default"])({}, (0, _useRow["default"])({
+    isShowLabels: isShowLabels,
+    caption: caption,
+    captionStyle: captionStyle
+  }, isOc), {
+    options: (0, _extends2["default"])({
       width: "250"
     }, rest, {
       optionName: isShowLabels ? '' : caption.replace(':', '')
@@ -36,5 +34,6 @@ var useRowOptions = function useRowOptions(_ref) {
   });
 };
 
-exports.default = useRowOptions;
+var _default = useRowOptions;
+exports["default"] = _default;
 //# sourceMappingURL=useRowOptions.js.map

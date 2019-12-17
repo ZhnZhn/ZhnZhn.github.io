@@ -1,38 +1,29 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _BrowserConfig = require('../../constants/BrowserConfig');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _BrowserConfig2 = _interopRequireDefault(_BrowserConfig);
+var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 
-var _Type = require('../../constants/Type');
+var _Type = require("../../constants/Type");
 
-var _DataWL = require('../../constants/DataWL');
+var _DataWL = _interopRequireDefault(require("../../constants/DataWL"));
 
-var _DataWL2 = _interopRequireDefault(_DataWL);
+var _BrowserActions = require("../actions/BrowserActions");
 
-var _BrowserActions = require('../actions/BrowserActions');
-
-var _BrowserLogic = require('./browser/BrowserLogic');
-
-var _BrowserLogic2 = _interopRequireDefault(_BrowserLogic);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _BrowserLogic = _interopRequireDefault(require("./browser/BrowserLogic"));
 
 //import Factory from '../logic/Factory';
 var C = {
   FAILED: 'Failed'
 };
-
-var isWithItemCounter = _BrowserLogic2.default.isWithItemCounter,
-    initBrowseMenu = _BrowserLogic2.default.initBrowseMenu,
-    setIsOpen = _BrowserLogic2.default.setIsOpen,
-    plusCounter = _BrowserLogic2.default.plusCounter,
-    resetCounter = _BrowserLogic2.default.resetCounter;
-
+var isWithItemCounter = _BrowserLogic["default"].isWithItemCounter,
+    initBrowseMenu = _BrowserLogic["default"].initBrowseMenu,
+    setIsOpen = _BrowserLogic["default"].setIsOpen,
+    plusCounter = _BrowserLogic["default"].plusCounter,
+    resetCounter = _BrowserLogic["default"].resetCounter;
 
 var _setItemOpen = setIsOpen.bind(null, true),
     _setItemClose = setIsOpen.bind(null, false),
@@ -42,9 +33,8 @@ var _setItemOpen = setIsOpen.bind(null, true),
 var BrowserSlice = {
   browserMenu: {},
   routeDialog: {
-    WL: _DataWL2.default
+    WL: _DataWL["default"]
   },
-
   isWithItemCounter: isWithItemCounter,
   getBrowserMenu: function getBrowserMenu(browserType) {
     return this.browserMenu[browserType];
@@ -66,19 +56,18 @@ var BrowserSlice = {
   },
   getSourceConfig: function getSourceConfig(browserId, sourceId) {
     if (sourceId.indexOf(_Type.BrowserType.STOCKS_BY_SECTORS) > 0) {
-      return _BrowserConfig2.default[browserId];
+      return _BrowserConfig["default"][browserId];
     }
+
     var _r = this.routeDialog[browserId];
     return _r ? _r[sourceId] : undefined;
   },
   onShowBrowserDynamicDone: function onShowBrowserDynamicDone(_ref) {
     var browserType = _ref.browserType;
-
     this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC, browserType);
   },
   onShowBrowserDynamicInit: function onShowBrowserDynamicInit(elBrowser, option) {
     var browserType = option.browserType;
-
     this.browserMenu[browserType] = [];
     this.trigger(_BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC, elBrowser);
   },
@@ -93,22 +82,23 @@ var BrowserSlice = {
     if (isWithItemCounter(browserType)) {
       var elMenu = initBrowseMenu(this, option);
       this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-        menuItems: elMenu, browserType: browserType
+        menuItems: elMenu,
+        browserType: browserType
       });
     } else {
       this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-        json: json, browserType: browserType
+        json: json,
+        browserType: browserType
       });
     }
   },
   onLoadBrowserDynamicFailed: function onLoadBrowserDynamicFailed(option) {
     var alertItemId = option.alertItemId,
         caption = option.caption;
-
     option.alertItemId = alertItemId || caption;
     this.showAlertDialog(option);
   }
 };
-
-exports.default = BrowserSlice;
+var _default = BrowserSlice;
+exports["default"] = _default;
 //# sourceMappingURL=BrowserSlice.js.map

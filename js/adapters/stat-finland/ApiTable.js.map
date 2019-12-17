@@ -1,12 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/stat-finland/ApiTable.js"
- ],
- "file": "../../../src/adapters/stat-finland/ApiTable.js",
- "names": [
-  "ROOT_URL",
-  "TableApi"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,WAAW,gDAAjB;AACA,IAAMC,WAAW,yBAAUD,QAAV,CAAjB;;kBAEeC,Q"
-}
+{"version":3,"sources":["../../../src/adapters/stat-finland/ApiTable.js"],"names":["ROOT_URL","TableApi"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,QAAQ,GAAG,gDAAjB;AACA,IAAMC,QAAQ,GAAG,2BAAUD,QAAV,CAAjB;eAEeC,Q","sourcesContent":["import fTableApi from '../stat-json/fTableApi'\r\n\r\nconst ROOT_URL = 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'\r\nconst TableApi = fTableApi(ROOT_URL);\r\n\r\nexport default TableApi\r\n"],"file":"ApiTable.js"}

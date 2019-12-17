@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var styleConfig = {
   createStyle: function createStyle(CSS_RULE, themeName) {
     var borderColor = themeName === 'GREY' ? '#1b2836' : 'grey';
@@ -16,6 +14,6 @@ var styleConfig = {
     };
   }
 };
-
-exports.default = styleConfig;
+var _default = styleConfig;
+exports["default"] = _default;
 //# sourceMappingURL=ConfigLogos.js.map

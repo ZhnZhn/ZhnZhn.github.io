@@ -1,37 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _Atoms = _interopRequireDefault(require("./Atoms"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Atoms = require('./Atoms');
-
-var _Atoms2 = _interopRequireDefault(_Atoms);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var GroupDeletePane = function (_Component) {
-  (0, _inherits3.default)(GroupDeletePane, _Component);
+//import PropTypes from "prop-types";
+var GroupDeletePane =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(GroupDeletePane, _Component);
 
   /*
   static propTypes = {
@@ -46,11 +32,10 @@ var GroupDeletePane = function (_Component) {
     onClose: PropTypes.func
   }
   */
-
   function GroupDeletePane(props) {
-    (0, _classCallCheck3.default)(this, GroupDeletePane);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (GroupDeletePane.__proto__ || Object.getPrototypeOf(GroupDeletePane)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._onStore = function (actionType, data) {
       var _this$props = _this.props,
@@ -62,7 +47,10 @@ var GroupDeletePane = function (_Component) {
         if (data.forActionType === forActionType) {
           _this._handleClear();
         }
-        _this.setState({ groupOptions: store.getWatchGroups() });
+
+        _this.setState({
+          groupOptions: store.getWatchGroups()
+        });
       }
     };
 
@@ -72,7 +60,9 @@ var GroupDeletePane = function (_Component) {
 
     _this._handleClear = function () {
       if (_this.state.validationMessages.length > 0) {
-        _this.setState({ validationMessages: [] });
+        _this.setState({
+          validationMessages: []
+        });
       }
     };
 
@@ -82,7 +72,9 @@ var GroupDeletePane = function (_Component) {
           msgOnNotSelect = _this$props2.msgOnNotSelect;
 
       if (_this.caption) {
-        onDelete({ caption: _this.caption });
+        onDelete({
+          caption: _this.caption
+        });
       } else {
         _this.setState({
           validationMessages: [msgOnNotSelect('Group')]
@@ -91,9 +83,9 @@ var GroupDeletePane = function (_Component) {
     };
 
     _this.caption = null;
-    _this._primaryBt = _react2.default.createElement(_Atoms2.default.Button.Primary, {
-      caption: 'Delete',
-      title: 'Delete Group',
+    _this._primaryBt = _react["default"].createElement(_Atoms["default"].Button.Primary, {
+      caption: "Delete",
+      title: "Delete Group",
       onClick: _this._handleDeleteGroup
     });
     _this.state = {
@@ -103,47 +95,37 @@ var GroupDeletePane = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(GroupDeletePane, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var onClose = this.props.onClose,
-          _state = this.state,
-          groupOptions = _state.groupOptions,
-          validationMessages = _state.validationMessages;
+  var _proto = GroupDeletePane.prototype;
 
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+  };
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Atoms2.default.RowInputSelect, {
-          caption: 'Group:',
-          options: groupOptions,
-          onSelect: this._handleSelectGroup
-        }),
-        _react2.default.createElement(_Atoms2.default.ValidationMessages, {
-          validationMessages: validationMessages
-        }),
-        _react2.default.createElement(_Atoms2.default.RowButtons, {
-          Primary: this._primaryBt,
-          withoutClear: true,
-          onClose: onClose
-        })
-      );
-    }
-  }]);
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
+
+  _proto.render = function render() {
+    var onClose = this.props.onClose,
+        _this$state = this.state,
+        groupOptions = _this$state.groupOptions,
+        validationMessages = _this$state.validationMessages;
+    return _react["default"].createElement("div", null, _react["default"].createElement(_Atoms["default"].RowInputSelect, {
+      caption: "Group:",
+      options: groupOptions,
+      onSelect: this._handleSelectGroup
+    }), _react["default"].createElement(_Atoms["default"].ValidationMessages, {
+      validationMessages: validationMessages
+    }), _react["default"].createElement(_Atoms["default"].RowButtons, {
+      Primary: this._primaryBt,
+      withoutClear: true,
+      onClose: onClose
+    }));
+  };
+
   return GroupDeletePane;
 }(_react.Component);
-//import PropTypes from "prop-types";
 
-exports.default = GroupDeletePane;
+var _default = GroupDeletePane;
+exports["default"] = _default;
 //# sourceMappingURL=GroupDeletePane.js.map

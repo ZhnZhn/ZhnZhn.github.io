@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var STYLE = {
   SHOW: {
     display: 'block'
@@ -30,7 +28,7 @@ var STYLE = {
   },
   COMMAND_DIV: {
     cursor: 'default',
-    float: 'right',
+    "float": 'right',
     marginTop: '8px',
     marginBottom: '10px',
     marginRight: '4px'
@@ -45,6 +43,6 @@ var STYLE = {
     marginRight: '6px'
   }
 };
-
-exports.default = STYLE;
+var _default = STYLE;
+exports["default"] = _default;
 //# sourceMappingURL=Dialog.Style.js.map

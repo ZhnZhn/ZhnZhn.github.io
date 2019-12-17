@@ -1,25 +1,17 @@
-'use strict';
+"use strict";
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _reactTestRenderer = _interopRequireDefault(require("react-test-renderer"));
 
-var _reactTestRenderer = require('react-test-renderer');
-
-var _reactTestRenderer2 = _interopRequireDefault(_reactTestRenderer);
-
-var _FlatButton = require('../FlatButton');
-
-var _FlatButton2 = _interopRequireDefault(_FlatButton);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _FlatButton = _interopRequireDefault(require("../FlatButton"));
 
 var _crDfProps = function _crDfProps(option) {
-  return (0, _extends3.default)({
+  return (0, _extends2["default"])({
     isPrimary: true,
     caption: "Load",
     title: "Click to load",
@@ -30,11 +22,17 @@ var _crDfProps = function _crDfProps(option) {
 
 describe('FlatButton Snap', function () {
   test('should renders correctly with isPrimary true', function () {
-    var tree = _reactTestRenderer2.default.create(_react2.default.createElement(_FlatButton2.default, _crDfProps({ isPrimary: true }))).toJSON();
+    var tree = _reactTestRenderer["default"].create(_react["default"].createElement(_FlatButton["default"], _crDfProps({
+      isPrimary: true
+    }))).toJSON();
+
     expect(tree).toMatchSnapshot();
   });
   test('should renders correctly with isPrimary false', function () {
-    var tree = _reactTestRenderer2.default.create(_react2.default.createElement(_FlatButton2.default, _crDfProps({ isPrimary: false }))).toJSON();
+    var tree = _reactTestRenderer["default"].create(_react["default"].createElement(_FlatButton["default"], _crDfProps({
+      isPrimary: false
+    }))).toJSON();
+
     expect(tree).toMatchSnapshot();
   });
 });

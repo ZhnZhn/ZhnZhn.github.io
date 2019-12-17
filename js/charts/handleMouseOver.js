@@ -1,27 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _highcharts = require('highcharts');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _highcharts2 = _interopRequireDefault(_highcharts);
+var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var _formatNumber = require('../utils/formatNumber');
+var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
 
-var _formatNumber2 = _interopRequireDefault(_formatNumber);
-
-var _calcDeltaYAxis = require('./calcDeltaYAxis');
-
-var _calcDeltaYAxis2 = _interopRequireDefault(_calcDeltaYAxis);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _calcDeltaYAxis = _interopRequireDefault(require("./calcDeltaYAxis"));
 
 var C = {
   DATE_PATTERN: '%d-%m-%Y',
   DATE_EMPTY: '01-01-1970',
-
   ATTR_LABEL: {
     zIndex: 100
   },
@@ -31,17 +23,15 @@ var C = {
     fontWeight: 'bold',
     fontSize: '14px'
   },
-
   CL_DY: -1,
-
   DX_CATEGORY: 40,
   DY_CATEGORY: 32,
-
   DX_DELTA_Y_AXIS: 10
 };
 
 var _crCrossParam = function _crCrossParam(point, chart) {
-  var _d = _highcharts2.default.dateFormat(C.DATE_PATTERN, point.x);
+  var _d = _highcharts["default"].dateFormat(C.DATE_PATTERN, point.x);
+
   return {
     y: point.y,
     date: _d !== C.DATE_EMPTY ? _d : '',
@@ -52,7 +42,7 @@ var _crCrossParam = function _crCrossParam(point, chart) {
 
 var _crCategoryCrossParam = function _crCategoryCrossParam(point, chart) {
   return {
-    y: (0, _formatNumber2.default)(point.y),
+    y: (0, _formatNumber["default"])(point.y),
     date: point.x,
     dX: chart.options.chart.xDeltaCrossLabel - C.DX_CATEGORY,
     dY: chart.options.chart.yDeltaCrossLabel - C.DY_CATEGORY
@@ -62,6 +52,7 @@ var _crCategoryCrossParam = function _crCategoryCrossParam(point, chart) {
 var _crYCrossLabelX = function _crYCrossLabelX(chart, dX) {
   return chart.yAxis[0].width + chart.plotLeft + dX;
 };
+
 var _crYCrossLabelY = function _crYCrossLabelY(chart, plotY) {
   return plotY + chart.plotTop + C.CL_DY;
 };
@@ -80,19 +71,27 @@ var handleMouserOverPoint = function handleMouserOverPoint(event) {
       date = _ref.date,
       dX = _ref.dX,
       dY = _ref.dY,
-      deltaYAxis = (0, _calcDeltaYAxis2.default)(chart),
+      deltaYAxis = (0, _calcDeltaYAxis["default"])(chart),
       xLX = deltaYAxis ? plotX + deltaYAxis - C.DX_DELTA_Y_AXIS : plotX,
       xLY = _crYCrossLabelX(chart, dX),
       yLY = _crYCrossLabelY(chart, plotY);
 
   if (xCrossLabel) {
-    xCrossLabel.attr({ x: xLX, text: date });
-    yCrossLabel.attr({ x: xLY, y: yLY, text: y });
+    xCrossLabel.attr({
+      x: xLX,
+      text: date
+    });
+    yCrossLabel.attr({
+      x: xLY,
+      y: yLY,
+      text: y
+    });
   } else {
     chart.xCrossLabel = chart.renderer.text(date, xLX, chart.plotTop - dY).attr(C.ATTR_LABEL).css(C.CSS_LABEL).add();
     chart.yCrossLabel = chart.renderer.text(y, xLY, yLY).attr(C.ATTR_LABEL).css(C.CSS_LABEL).add();
   }
 };
 
-exports.default = handleMouserOverPoint;
+var _default = handleMouserOverPoint;
+exports["default"] = _default;
 //# sourceMappingURL=handleMouseOver.js.map

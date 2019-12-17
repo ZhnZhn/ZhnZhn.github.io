@@ -1,29 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 
-var _InputSelect = require('../zhn-select/InputSelect');
-
-var _InputSelect2 = _interopRequireDefault(_InputSelect);
-
-var _DialogStyles = require('../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 
 //import PropTypes from "prop-types";
-
 var S = {
   CAPTION: {
     width: '120px'
@@ -34,22 +24,16 @@ var RowInputSelect = function RowInputSelect(_ref) {
   var caption = _ref.caption,
       options = _ref.options,
       onSelect = _ref.onSelect;
-  return _react2.default.createElement(
-    'div',
-    { style: _DialogStyles2.default.rowDiv },
-    _react2.default.createElement(
-      'span',
-      { style: (0, _extends3.default)({}, _DialogStyles2.default.labelSpan, S.CAPTION) },
-      caption
-    ),
-    _react2.default.createElement(_InputSelect2.default, {
-      width: '250',
-      options: options,
-      onSelect: onSelect
-    })
-  );
+  return _react["default"].createElement("div", {
+    style: _DialogStyles["default"].rowDiv
+  }, _react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, {}, S.CAPTION)
+  }, caption), _react["default"].createElement(_InputSelect["default"], {
+    width: "250",
+    options: options,
+    onSelect: onSelect
+  }));
 };
-
 /*
 RowInputSelect.propTypes = {
   caption: PropTypes.string,
@@ -58,5 +42,7 @@ RowInputSelect.propTypes = {
 }
 */
 
-exports.default = RowInputSelect;
+
+var _default = RowInputSelect;
+exports["default"] = _default;
 //# sourceMappingURL=RowInputSelect.js.map

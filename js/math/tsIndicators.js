@@ -1,26 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _sma = require('./sma');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _sma2 = _interopRequireDefault(_sma);
+var _sma = _interopRequireDefault(require("./sma"));
 
-var _mfi = require('./mfi');
+var _mfi = _interopRequireDefault(require("./mfi"));
 
-var _mfi2 = _interopRequireDefault(_mfi);
-
-var _momAth = require('./momAth');
-
-var _momAth2 = _interopRequireDefault(_momAth);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _momAth = _interopRequireDefault(require("./momAth"));
 
 var tsIndicators = {
-  sma: _sma2.default, mfi: _mfi2.default, momAth: _momAth2.default
+  sma: _sma["default"],
+  mfi: _mfi["default"],
+  momAth: _momAth["default"]
 };
-
-exports.default = tsIndicators;
+var _default = tsIndicators;
+exports["default"] = _default;
 //# sourceMappingURL=tsIndicators.js.map

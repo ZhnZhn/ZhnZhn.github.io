@@ -1,32 +1,25 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-var _extends3 = require("babel-runtime/helpers/extends");
-
-var _extends4 = _interopRequireDefault(_extends3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends3 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _typeI = {
   createMapValue: function createMapValue(props, item) {
     var _props$mapPropName = props.mapPropName,
-        mapPropName = _props$mapPropName === undefined ? "indic" : _props$mapPropName;
-
+        mapPropName = _props$mapPropName === void 0 ? "indic" : _props$mapPropName;
     return "?" + mapPropName + "=" + item.value;
   },
   createMapSlice: function createMapSlice(props, item) {
+    var _extends2;
+
     var mapSlice = props.mapSlice,
         _props$mapPropName2 = props.mapPropName,
-        mapPropName = _props$mapPropName2 === undefined ? "indic" : _props$mapPropName2;
-
-    return (0, _extends4.default)({}, mapSlice, (0, _defineProperty3.default)({}, mapPropName, item.value));
+        mapPropName = _props$mapPropName2 === void 0 ? "indic" : _props$mapPropName2;
+    return (0, _extends3["default"])({}, mapSlice, (_extends2 = {}, _extends2[mapPropName] = item.value, _extends2));
   }
 };
 var _typeZ = {
@@ -48,17 +41,17 @@ var _typeV = {
     if (typeof value !== 'string' || value.indexOf('?') === -1) {
       return mapSlice;
     }
+
     value.substr(value.indexOf('?')).split('&').forEach(function (pStr) {
       var _arr = pStr.split('=');
+
       if (_arr[0] && _arr[1]) {
         mapSlice[_arr[0]] = _arr[1];
       }
     });
-
     return mapSlice;
   }
 };
-
 var R_MAP_VALUE = {
   "I": _typeI.createMapValue,
   "Z": _typeZ.createMapValue,
@@ -82,50 +75,56 @@ var mapFn = {
 
     var _q = '',
         i = 0,
-        _v = void 0;
+        _v;
+
     for (; i < dfParams.length; i++) {
       _v = items[i] && items[i].value || '';
+
       if (_v) {
         _q = _addParamTo(_q, dfParams[i] + "=" + _v);
       }
     }
+
     return dfTail ? _addParamTo(_q, dfTail) : _q;
   },
-
   toMapSlice: function toMapSlice(tail, option) {
     var dfParams = option.dfParams,
         items = option.items,
         time = option.time,
         dfSlice = option.dfSlice,
         dfTail = option.dfTail,
-        zhMapSlice = (0, _extends4.default)({}, dfSlice, { time: time });
-
-
+        zhMapSlice = (0, _extends3["default"])({}, dfSlice, {
+      time: time
+    });
     var query = '',
-        i = void 0;
+        i;
+
     for (i = 1; i < dfParams.length; i++) {
       query = _addParamTo(query, dfParams[i] + "=" + items[i].value);
       zhMapSlice[dfParams[i]] = items[i].value;
     }
-    var _tail = _addParamTo(dfTail, tail);
-    query = _addParamTo(query, _tail);
 
+    var _tail = _addParamTo(dfTail, tail);
+
+    query = _addParamTo(query, _tail);
     return {
-      query: query, zhMapSlice: zhMapSlice
+      query: query,
+      zhMapSlice: zhMapSlice
     };
   },
-
   createMapValue: function createMapValue(props, item) {
     var _mapType = props.mapType || item.mapType,
         _fnCreate = R_MAP_VALUE[_mapType];
+
     return _fnCreate ? _fnCreate(props, item) : undefined;
   },
   createMapSlice: function createMapSlice(props, item) {
     var _mapType = props.mapType || item.mapType,
         _fnCreate = R_MAP_SLICE[_mapType];
+
     return _fnCreate ? _fnCreate(props, item) : undefined;
   }
 };
-
-exports.default = mapFn;
+var _default = mapFn;
+exports["default"] = _default;
 //# sourceMappingURL=mapFn.js.map

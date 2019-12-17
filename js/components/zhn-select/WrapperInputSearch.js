@@ -1,97 +1,78 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _TransformFn = _interopRequireDefault(require("./TransformFn"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _InputSelect = _interopRequireDefault(require("./InputSelect"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _TransformFn = require('./TransformFn');
-
-var _TransformFn2 = _interopRequireDefault(_TransformFn);
-
-var _InputSelect = require('./InputSelect');
-
-var _InputSelect2 = _interopRequireDefault(_InputSelect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var WrapperInputSearch = function (_Component) {
-  (0, _inherits3.default)(WrapperInputSearch, _Component);
+var WrapperInputSearch =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(WrapperInputSearch, _Component);
 
   function WrapperInputSearch() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, WrapperInputSearch);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = WrapperInputSearch.__proto__ || Object.getPrototypeOf(WrapperInputSearch)).call.apply(_ref, [this].concat(args))), _this), _this._handleSelectItem = function (item) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._handleSelectItem = function (item) {
       if (item) {
         _this.props.onSelect(item);
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(WrapperInputSearch, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate() {
-      return false;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          style = _props.style,
-          _props$placeholder = _props.placeholder,
-          placeholder = _props$placeholder === undefined ? '' : _props$placeholder,
-          _props$data = _props.data,
-          data = _props$data === undefined ? {} : _props$data,
-          ItemOptionComp = _props.ItemOptionComp,
-          meta = data.meta,
-          _meta$caption = meta.caption,
-          caption = _meta$caption === undefined ? {} : _meta$caption,
-          _options = _TransformFn2.default.fromLevel3(data);
+  var _proto = WrapperInputSearch.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        { style: style },
-        _react2.default.createElement(_InputSelect2.default, {
-          width: '100%',
-          isShowOptionAnim: true,
-          placeholder: placeholder,
-          propCaption: caption,
-          options: _options,
-          ItemOptionComp: ItemOptionComp,
-          onSelect: this._handleSelectItem
-        })
-      );
-    }
-  }]);
+  _proto.shouldComponentUpdate = function shouldComponentUpdate() {
+    return false;
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        style = _this$props.style,
+        _this$props$placehold = _this$props.placeholder,
+        placeholder = _this$props$placehold === void 0 ? '' : _this$props$placehold,
+        _this$props$data = _this$props.data,
+        data = _this$props$data === void 0 ? {} : _this$props$data,
+        ItemOptionComp = _this$props.ItemOptionComp,
+        meta = data.meta,
+        _meta$caption = meta.caption,
+        caption = _meta$caption === void 0 ? {} : _meta$caption,
+        _options = _TransformFn["default"].fromLevel3(data);
+
+    return _react["default"].createElement("div", {
+      style: style
+    }, _react["default"].createElement(_InputSelect["default"], {
+      width: "100%",
+      isShowOptionAnim: true,
+      placeholder: placeholder,
+      propCaption: caption,
+      options: _options,
+      ItemOptionComp: ItemOptionComp,
+      onSelect: this._handleSelectItem
+    }));
+  };
+
   return WrapperInputSearch;
 }(_react.Component);
 
-exports.default = WrapperInputSearch;
+var _default = WrapperInputSearch;
+exports["default"] = _default;
 //# sourceMappingURL=WrapperInputSearch.js.map

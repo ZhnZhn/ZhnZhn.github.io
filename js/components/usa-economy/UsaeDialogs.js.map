@@ -1,12 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/usa-economy/UsaeDialogs.js"
- ],
- "file": "../../../src/components/usa-economy/UsaeDialogs.js",
- "names": [
-  "Dialogs",
-  "Zillow"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,UAAU;AACdC;AADc,CAAhB;;kBAIeD,O"
-}
+{"version":3,"sources":["../../../src/components/usa-economy/UsaeDialogs.js"],"names":["Dialogs","Zillow"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,OAAO,GAAG;AACdC,EAAAA,MAAM,EAANA;AADc,CAAhB;eAIeD,O","sourcesContent":["import Zillow from './ZillowDialog'\r\n\r\nconst Dialogs = {\r\n  Zillow\r\n};\r\n\r\nexport default Dialogs\r\n"],"file":"UsaeDialogs.js"}

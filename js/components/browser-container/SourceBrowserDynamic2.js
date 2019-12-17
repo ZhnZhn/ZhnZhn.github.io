@@ -1,56 +1,40 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _MenuBrowserDynamic = _interopRequireDefault(require("../zhn/MenuBrowserDynamic2"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _MenuBrowserDynamic = require('../zhn/MenuBrowserDynamic2');
-
-var _MenuBrowserDynamic2 = _interopRequireDefault(_MenuBrowserDynamic);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var SourceBrowserDynamic2 = function (_Component) {
-  (0, _inherits3.default)(SourceBrowserDynamic2, _Component);
+var SourceBrowserDynamic2 =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(SourceBrowserDynamic2, _Component);
 
   function SourceBrowserDynamic2() {
-    (0, _classCallCheck3.default)(this, SourceBrowserDynamic2);
-    return (0, _possibleConstructorReturn3.default)(this, (SourceBrowserDynamic2.__proto__ || Object.getPrototypeOf(SourceBrowserDynamic2)).apply(this, arguments));
+    return _Component.apply(this, arguments) || this;
   }
 
-  (0, _createClass3.default)(SourceBrowserDynamic2, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate() {
-      return false;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(_MenuBrowserDynamic2.default, this.props);
-    }
-  }]);
+  var _proto = SourceBrowserDynamic2.prototype;
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate() {
+    return false;
+  };
+
+  _proto.render = function render() {
+    return _react["default"].createElement(_MenuBrowserDynamic["default"], this.props);
+  };
+
   return SourceBrowserDynamic2;
 }(_react.Component);
 
-exports.default = SourceBrowserDynamic2;
+var _default = SourceBrowserDynamic2;
+exports["default"] = _default;
 //# sourceMappingURL=SourceBrowserDynamic2.js.map

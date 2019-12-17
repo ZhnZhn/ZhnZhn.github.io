@@ -1,16 +1,22 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var _getExtremes = function _getExtremes(v1, v2) {
-  return v1 >= v2 ? { min: v2, max: v1 } : { min: v1, max: v2 };
+  return v1 >= v2 ? {
+    min: v2,
+    max: v1
+  } : {
+    min: v1,
+    max: v2
+  };
 };
 
 var zhRemoveCategory = function zhRemoveCategory(id) {
   try {
     var _c = this.xAxis[0].categories;
+
     if (_c) {
       var _newC = _c.filter(function (str) {
         return str !== id;
@@ -18,6 +24,7 @@ var zhRemoveCategory = function zhRemoveCategory(id) {
           _newData = this.options.series[0].data.filter(function (p) {
         return p.c !== id && p.name !== id && p.id !== id;
       });
+
       if (_newC.length < _c.length) {
         if (!this.yAxis[0].userOptions.zhNotZoomToMinMax) {
           var _len = _newData.length,
@@ -27,8 +34,11 @@ var zhRemoveCategory = function zhRemoveCategory(id) {
 
           this.yAxis[0].setExtremes(min, max, false);
         }
+
         this.xAxis[0].setCategories(_newC, false);
-        this.series[0].update({ data: _newData }, true);
+        this.series[0].update({
+          data: _newData
+        }, true);
       }
     }
   } catch (err) {
@@ -36,5 +46,6 @@ var zhRemoveCategory = function zhRemoveCategory(id) {
   }
 };
 
-exports.default = zhRemoveCategory;
+var _default = zhRemoveCategory;
+exports["default"] = _default;
 //# sourceMappingURL=zhRemoveCategory.js.map

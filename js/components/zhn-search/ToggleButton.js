@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _ArrowCell = require('./ArrowCell');
-
-var _ArrowCell2 = _interopRequireDefault(_ArrowCell);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ArrowCell = _interopRequireDefault(require("./ArrowCell"));
 
 var CL = {
   SPINNER: 'zhn-search__spinner',
@@ -24,13 +19,14 @@ var S = {
   }
 };
 
-var _loadingEl = _react2.default.createElement('span', {
+var _loadingEl = _react["default"].createElement("span", {
   className: CL.SPINNER,
-  'data-loader': 'circle'
+  "data-loader": "circle"
 });
-var _loadingFailedEl = _react2.default.createElement('span', {
+
+var _loadingFailedEl = _react["default"].createElement("span", {
   className: CL.SPINNER_FAILED,
-  'data-loader': 'circle-failed'
+  "data-loader": "circle-failed"
 });
 
 var ToggleButton = function ToggleButton(_ref) {
@@ -45,13 +41,15 @@ var ToggleButton = function ToggleButton(_ref) {
   } else if (isLoadingFailed) {
     return _loadingFailedEl;
   } else if (options && options.length > 0) {
-    return _react2.default.createElement(_ArrowCell2.default, {
+    return _react["default"].createElement(_ArrowCell["default"], {
       arrowStyle: isOptions ? S.ARROW_SHOW : null,
       onClick: toggleOptions
     });
   }
+
   return null;
 };
 
-exports.default = ToggleButton;
+var _default = ToggleButton;
+exports["default"] = _default;
 //# sourceMappingURL=ToggleButton.js.map

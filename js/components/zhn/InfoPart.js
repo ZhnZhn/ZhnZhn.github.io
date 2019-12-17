@@ -1,27 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireDefault(require("react"));
 
 var _renderText = function _renderText(text, classText, styleText, isHtml) {
-  return !isHtml ? _react2.default.createElement(
-    'span',
-    {
-      className: classText,
-      style: styleText
-    },
-    text
-  ) : _react2.default.createElement('span', {
+  return !isHtml ? _react["default"].createElement("span", {
+    className: classText,
+    style: styleText
+  }, text) : _react["default"].createElement("span", {
     className: classText,
     style: styleText,
-    dangerouslySetInnerHTML: { __html: text }
+    dangerouslySetInnerHTML: {
+      __html: text
+    }
   });
 };
 
@@ -37,17 +32,14 @@ var InfoPart = function InfoPart(props) {
   if (!text) {
     return null;
   }
-  return _react2.default.createElement(
-    'div',
-    { style: rootStyle },
-    caption && _react2.default.createElement(
-      'span',
-      { style: styleCaption },
-      caption
-    ),
-    _renderText(text, classText, styleText, isHtml)
-  );
+
+  return _react["default"].createElement("div", {
+    style: rootStyle
+  }, caption && _react["default"].createElement("span", {
+    style: styleCaption
+  }, caption), _renderText(text, classText, styleText, isHtml));
 };
 
-exports.default = InfoPart;
+var _default = InfoPart;
+exports["default"] = _default;
 //# sourceMappingURL=InfoPart.js.map

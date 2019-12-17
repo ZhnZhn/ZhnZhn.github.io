@@ -1,25 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _BarchartApi = require('./BarchartApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _BarchartApi2 = _interopRequireDefault(_BarchartApi);
+var _BarchartApi = _interopRequireDefault(require("./BarchartApi"));
 
-var _BarchartAdapter = require('./BarchartAdapter');
-
-var _BarchartAdapter2 = _interopRequireDefault(_BarchartAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _BarchartAdapter = _interopRequireDefault(require("./BarchartAdapter"));
 
 var Barchart = {
   optionFetch: {
     jsonpCallbackFunction: 'BarchartAPIcallback'
   },
-  api: _BarchartApi2.default, adapter: _BarchartAdapter2.default
+  api: _BarchartApi["default"],
+  adapter: _BarchartAdapter["default"]
 };
-
-exports.default = Barchart;
+var _default = Barchart;
+exports["default"] = _default;
 //# sourceMappingURL=Barchart.js.map

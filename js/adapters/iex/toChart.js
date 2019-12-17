@@ -1,32 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ConfigBuilder = require('../../charts/ConfigBuilder');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _AdapterFn = require('../AdapterFn');
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterStockFn = _interopRequireDefault(require("../AdapterStockFn"));
 
-var _AdapterStockFn = require('../AdapterStockFn');
-
-var _AdapterStockFn2 = _interopRequireDefault(_AdapterStockFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var valueMoving = _AdapterFn2.default.valueMoving,
-    stockSeriesLegend = _AdapterFn2.default.stockSeriesLegend;
-var toSeriesData = _AdapterStockFn2.default.toSeriesData;
-
+var valueMoving = _AdapterFn["default"].valueMoving,
+    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend;
+var toSeriesData = _AdapterStockFn["default"].toSeriesData;
 
 var _crZhConfig = function _crZhConfig(id, option) {
   var one = option.one,
       dataSource = option.dataSource;
-
   return {
     dataSource: dataSource,
     id: id,
@@ -65,7 +56,7 @@ var toChart = {
     }),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
-        config = (0, _ConfigBuilder2.default)().stockConfig(_id, dataOption).addCaption(title).add({
+        config = (0, _ConfigBuilder["default"])().stockConfig(_id, dataOption).addCaption(title).add({
       valueMoving: valueMoving(data),
       info: _crInfo(title),
       zhConfig: _crZhConfig(_id, option)
@@ -80,9 +71,9 @@ var toChart = {
     }),
         data = _toSeriesData.data;
 
-    return (0, _ConfigBuilder2.default)().initSeria().addPoints(_id, data).toSeria();
+    return (0, _ConfigBuilder["default"])().initSeria().addPoints(_id, data).toSeria();
   }
 };
-
-exports.default = toChart;
+var _default = toChart;
+exports["default"] = _default;
 //# sourceMappingURL=toChart.js.map

@@ -1,29 +1,26 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _useRowStyle = require('./useRowStyle');
+var _useRowStyle = _interopRequireDefault(require("./useRowStyle"));
 
-var _useRowStyle2 = _interopRequireDefault(_useRowStyle);
-
-var _useRowCaption = require('./useRowCaption');
-
-var _useRowCaption2 = _interopRequireDefault(_useRowCaption);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _useRowCaption = _interopRequireDefault(require("./useRowCaption"));
 
 var useRow = function useRow(_ref, isOc) {
   var isShowLabels = _ref.isShowLabels,
       caption = _ref.caption,
       captionStyle = _ref.captionStyle;
-  return (0, _extends3.default)({}, (0, _useRowStyle2.default)({ isShowLabels: isShowLabels, captionStyle: captionStyle }, isOc), (0, _useRowCaption2.default)(caption));
+  return (0, _extends2["default"])({}, (0, _useRowStyle["default"])({
+    isShowLabels: isShowLabels,
+    captionStyle: captionStyle
+  }, isOc), {}, (0, _useRowCaption["default"])(caption));
 };
 
-exports.default = useRow;
+var _default = useRow;
+exports["default"] = _default;
 //# sourceMappingURL=useRow.js.map

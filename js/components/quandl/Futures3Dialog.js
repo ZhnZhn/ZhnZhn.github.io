@@ -1,60 +1,65 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _dec, _class, _temp;
 
-var _dec, _class;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _MenuMore = require('../dialogs/MenuMore');
-
-var _MenuMore2 = _interopRequireDefault(_MenuMore);
-
-var _Decorators = require('../dialogs/decorators/Decorators');
-
-var _Decorators2 = _interopRequireDefault(_Decorators);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var yearOptions = [{ caption: '2020', value: 2020 }, { caption: '2019', value: 2019 }, { caption: '2018', value: 2018 }, { caption: '2017', value: 2017 }, { caption: '2016', value: 2016 }, { caption: '2015', value: 2015 }, { caption: '2014', value: 2014 }, { caption: '2013', value: 2013 }, { caption: '2012', value: 2012 }];
-
-var Futures3Dialog = (_dec = _Decorators2.default.dialog, _dec(_class = function (_Component) {
-  (0, _inherits3.default)(Futures3Dialog, _Component);
+var yearOptions = [{
+  caption: '2020',
+  value: 2020
+}, {
+  caption: '2019',
+  value: 2019
+}, {
+  caption: '2018',
+  value: 2018
+}, {
+  caption: '2017',
+  value: 2017
+}, {
+  caption: '2016',
+  value: 2016
+}, {
+  caption: '2015',
+  value: 2015
+}, {
+  caption: '2014',
+  value: 2014
+}, {
+  caption: '2013',
+  value: 2013
+}, {
+  caption: '2012',
+  value: 2012
+}];
+var Futures3Dialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(Futures3Dialog, _Component);
 
   function Futures3Dialog(props) {
-    (0, _classCallCheck3.default)(this, Futures3Dialog);
+    var _this;
 
-    //this.year = undefined
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (Futures3Dialog.__proto__ || Object.getPrototypeOf(Futures3Dialog)).call(this, props));
+    _this = _Component.call(this, props) || this; //this.year = undefined
 
     _this._handleSelectYear = function (year) {
       _this.year = year;
@@ -69,7 +74,6 @@ var Futures3Dialog = (_dec = _Decorators2.default.dialog, _dec(_class = function
           msgOnNotSelected = _this$props.msgOnNotSelected,
           msgOnNotValidFormat = _this$props.msgOnNotValidFormat,
           isContinious = _this$props.isContinious;
-
       var msg = [];
 
       var _this$itemMonth$getVa = _this.itemMonth.getValidation(),
@@ -99,7 +103,12 @@ var Futures3Dialog = (_dec = _Decorators2.default.dialog, _dec(_class = function
           isContinious = _this.props.isContinious,
           fromDate = isContinious ? _this.fromDate.getValue() : undefined;
 
-      return _this.props.loadFn(_this.props, { item: item, month: month, year: _this.year, fromDate: fromDate });
+      return _this.props.loadFn(_this.props, {
+        item: item,
+        month: month,
+        year: _this.year,
+        fromDate: fromDate
+      });
     };
 
     _this._handleClose = function () {
@@ -114,95 +123,86 @@ var Futures3Dialog = (_dec = _Decorators2.default.dialog, _dec(_class = function
       return _this.fromDate = c;
     };
 
-    _this._menuMore = (0, _MenuMore2.default)(_this, {
+    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
-
-    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
-    _this._commandButtons = _this._crCommandsWithLoad(_this);
-
-    _this.state = (0, _extends3.default)({}, _this._isWithInitialState());
+    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+      noDate: true
+    });
+    _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
+    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState());
     return _this;
   }
 
-  (0, _createClass3.default)(Futures3Dialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.props !== nextProps) {
-        if (this.props.isShow === nextProps.isShow) {
-          return false;
-        }
+  var _proto = Futures3Dialog.prototype;
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps) {
+      if (this.props.isShow === nextProps.isShow) {
+        return false;
       }
-      return true;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          caption = _props.caption,
-          onShow = _props.onShow,
-          onFront = _props.onFront,
-          futuresURI = _props.futuresURI,
-          msgOnNotSelected = _props.msgOnNotSelected,
-          isContinious = _props.isContinious,
-          initFromDate = _props.initFromDate,
-          onTestDateOrEmpty = _props.onTestDateOrEmpty,
-          msgTestDateOrEmpty = _props.msgTestDateOrEmpty,
-          _state = this.state,
-          isToolbar = _state.isToolbar,
-          isShowLabels = _state.isShowLabels,
-          validationMessages = _state.validationMessages;
 
+    return true;
+  };
 
-      return _react2.default.createElement(
-        _DialogCell2.default.DraggableDialog,
-        {
-          isShow: isShow,
-          caption: caption,
-          menuModel: this._menuMore,
-          commandButtons: this._commandButtons,
-          onShowChart: onShow,
-          onFront: onFront,
-          onClose: this._handleClose
-        },
-        _react2.default.createElement(_DialogCell2.default.Toolbar, {
-          isShow: isToolbar,
-          buttons: this.toolbarButtons
-        }),
-        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
-          ref: this._refItemMonth,
-          isShow: isShow,
-          isShowLabels: isShowLabels,
-          uri: futuresURI,
-          oneCaption: 'Futures',
-          oneOptionNames: 'Futures',
-          oneJsonProp: 'futures',
-          twoCaption: 'Month',
-          msgOnNotSelected: msgOnNotSelected
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-          isShowLabels: isShowLabels,
-          caption: 'Year',
-          options: yearOptions,
-          onSelect: this._handleSelectYear
-        }),
-        isContinious && _react2.default.createElement(_DialogCell2.default.RowDate, {
-          ref: this._refFromDate,
-          isShowLabels: isShowLabels,
-          labelTitle: 'From Date:',
-          initValue: initFromDate,
-          errorMsg: msgTestDateOrEmpty,
-          onTestDate: onTestDateOrEmpty
-        }),
-        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
-          validationMessages: validationMessages
-        })
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        caption = _this$props2.caption,
+        onShow = _this$props2.onShow,
+        onFront = _this$props2.onFront,
+        futuresURI = _this$props2.futuresURI,
+        msgOnNotSelected = _this$props2.msgOnNotSelected,
+        isContinious = _this$props2.isContinious,
+        initFromDate = _this$props2.initFromDate,
+        onTestDateOrEmpty = _this$props2.onTestDateOrEmpty,
+        msgTestDateOrEmpty = _this$props2.msgTestDateOrEmpty,
+        _this$state = this.state,
+        isToolbar = _this$state.isToolbar,
+        isShowLabels = _this$state.isShowLabels,
+        validationMessages = _this$state.validationMessages;
+    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+      isShow: isShow,
+      caption: caption,
+      menuModel: this._menuMore,
+      commandButtons: this._commandButtons,
+      onShowChart: onShow,
+      onFront: onFront,
+      onClose: this._handleClose
+    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+      isShow: isToolbar,
+      buttons: this.toolbarButtons
+    }), _react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
+      ref: this._refItemMonth,
+      isShow: isShow,
+      isShowLabels: isShowLabels,
+      uri: futuresURI,
+      oneCaption: "Futures",
+      oneOptionNames: "Futures",
+      oneJsonProp: "futures",
+      twoCaption: "Month",
+      msgOnNotSelected: msgOnNotSelected
+    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+      isShowLabels: isShowLabels,
+      caption: "Year",
+      options: yearOptions,
+      onSelect: this._handleSelectYear
+    }), isContinious && _react["default"].createElement(_DialogCell["default"].RowDate, {
+      ref: this._refFromDate,
+      isShowLabels: isShowLabels,
+      labelTitle: "From Date:",
+      initValue: initFromDate,
+      errorMsg: msgTestDateOrEmpty,
+      onTestDate: onTestDateOrEmpty
+    }), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+      validationMessages: validationMessages
+    }));
+  };
+
   return Futures3Dialog;
-}(_react.Component)) || _class);
-exports.default = Futures3Dialog;
+}(_react.Component), _temp)) || _class);
+var _default = Futures3Dialog;
+exports["default"] = _default;
 //# sourceMappingURL=Futures3Dialog.js.map

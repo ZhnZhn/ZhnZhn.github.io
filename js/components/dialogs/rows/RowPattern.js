@@ -1,116 +1,83 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _InputPattern = _interopRequireDefault(require("../../zhn/InputPattern"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _InputPattern = require('../../zhn/InputPattern');
-
-var _InputPattern2 = _interopRequireDefault(_InputPattern);
-
-var _useRow2 = require('./useRow');
-
-var _useRow3 = _interopRequireDefault(_useRow2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _useRow2 = _interopRequireDefault(require("./useRow"));
 
 //import PropTypes from "prop-types";
-
-var RowPattern = function (_Component) {
-  (0, _inherits3.default)(RowPattern, _Component);
+var RowPattern =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(RowPattern, _Component);
 
   function RowPattern() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, RowPattern);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RowPattern.__proto__ || Object.getPrototypeOf(RowPattern)).call.apply(_ref, [this].concat(args))), _this), _this._refInput = function (c) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._refInput = function (c) {
       return _this.inputPattern = c;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
-  }
-  /*
-  static propTypes = {
-     isShowLabels: PropTypes.bool,
-     caption : PropTypes.string
-     captionStyle: PropTypes.object
-  }
-  */
+    };
 
-  (0, _createClass3.default)(RowPattern, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShowLabels = _props.isShowLabels,
-          caption = _props.caption,
-          captionStyle = _props.captionStyle,
-          rest = (0, _objectWithoutProperties3.default)(_props, ['isShowLabels', 'caption', 'captionStyle']),
-          _useRow = (0, _useRow3.default)({
-        isShowLabels: isShowLabels, caption: caption, captionStyle: captionStyle
-      }),
-          rowStyle = _useRow.rowStyle,
-          labelStyle = _useRow.labelStyle,
-          _caption = _useRow.caption;
+    return _this;
+  }
 
-      return _react2.default.createElement(
-        'div',
-        { style: rowStyle },
-        _react2.default.createElement(
-          'span',
-          { style: labelStyle },
-          _caption
-        ),
-        _react2.default.createElement(_InputPattern2.default, (0, _extends3.default)({
-          ref: this._refInput
-        }, rest))
-      );
-    }
-  }, {
-    key: 'getValue',
-    value: function getValue() {
-      return this.inputPattern.getValue();
-    }
-  }, {
-    key: 'isValid',
-    value: function isValid() {
-      return this.inputPattern.isValid();
-    }
-  }]);
+  var _proto = RowPattern.prototype;
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShowLabels = _this$props.isShowLabels,
+        caption = _this$props.caption,
+        captionStyle = _this$props.captionStyle,
+        rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["isShowLabels", "caption", "captionStyle"]),
+        _useRow = (0, _useRow2["default"])({
+      isShowLabels: isShowLabels,
+      caption: caption,
+      captionStyle: captionStyle
+    }),
+        rowStyle = _useRow.rowStyle,
+        labelStyle = _useRow.labelStyle,
+        _caption = _useRow.caption;
+
+    return _react["default"].createElement("div", {
+      style: rowStyle
+    }, _react["default"].createElement("span", {
+      style: labelStyle
+    }, _caption), _react["default"].createElement(_InputPattern["default"], (0, _extends2["default"])({
+      ref: this._refInput
+    }, rest)));
+  };
+
+  _proto.getValue = function getValue() {
+    return this.inputPattern.getValue();
+  };
+
+  _proto.isValid = function isValid() {
+    return this.inputPattern.isValid();
+  };
+
   return RowPattern;
 }(_react.Component);
 
-exports.default = RowPattern;
+var _default = RowPattern;
+exports["default"] = _default;
 //# sourceMappingURL=RowPattern.js.map

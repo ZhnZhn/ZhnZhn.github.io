@@ -1,8 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var calcDeltaYAxis = function calcDeltaYAxis(chart) {
   var delta = 0;
@@ -20,5 +19,6 @@ var calcDeltaYAxis = function calcDeltaYAxis(chart) {
   return delta;
 };
 
-exports.default = calcDeltaYAxis;
+var _default = calcDeltaYAxis;
+exports["default"] = _default;
 //# sourceMappingURL=calcDeltaYAxis.js.map

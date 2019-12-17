@@ -1,13 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\crypto-compare\\Crc.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\crypto-compare\\Crc.js",
- "sourceRoot": "",
- "names": [
-  "Crc",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,uBADU,EACLC;AADK,CAAZ;;kBAIeF,G"
-}
+{"version":3,"sources":["../../../src/adapters/crypto-compare/Crc.js"],"names":["Crc","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,GAAG,GAAG;AACVC,EAAAA,GAAG,EAAHA,kBADU;AACLC,EAAAA,OAAO,EAAPA;AADK,CAAZ;eAIeF,G","sourcesContent":["import adapter from './CrcAdapter'\r\nimport api from './CrcApi'\r\n\r\nconst Crc = {\r\n  api, adapter\r\n};\r\n\r\nexport default Crc\r\n"],"file":"Crc.js"}

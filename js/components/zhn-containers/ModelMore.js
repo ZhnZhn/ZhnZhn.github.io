@@ -1,19 +1,14 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ChartActions = require('../../flux/actions/ChartActions');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ChartActions = _interopRequireDefault(require("../../flux/actions/ChartActions"));
 
 var CL_ROW = 'row__pane-topic not-selected';
-
-var sortBy = _ChartActions2.default.sortBy;
-
+var sortBy = _ChartActions["default"].sortBy;
 
 var crModelMore = function crModelMore(_ref) {
   var chartType = _ref.chartType,
@@ -24,7 +19,6 @@ var crModelMore = function crModelMore(_ref) {
       onFit = _ref.onFit,
       onShowCaptions = _ref.onShowCaptions,
       onRemoveAll = _ref.onRemoveAll;
-
   return {
     baseTitleCl: CL_ROW,
     pageWidth: 180,
@@ -94,5 +88,6 @@ var crModelMore = function crModelMore(_ref) {
   };
 };
 
-exports.default = crModelMore;
+var _default = crModelMore;
+exports["default"] = _default;
 //# sourceMappingURL=ModelMore.js.map

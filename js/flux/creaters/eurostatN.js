@@ -1,28 +1,20 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _createrFns = require('./createrFns');
+var _createrFns = _interopRequireDefault(require("./createrFns"));
 
-var _createrFns2 = _interopRequireDefault(_createrFns);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crCaption = _createrFns2.default.crCaption,
-    crItemKey = _createrFns2.default.crItemKey;
-
-
+var crCaption = _createrFns["default"].crCaption,
+    crItemKey = _createrFns["default"].crItemKey;
 var COUNTRY_CAPTION_DF = 'EU';
 
 var _toIds = function _toIds(_ref, items) {
   var dfId = _ref.dfId;
-
   var _arr = [dfId];
   items.forEach(function (_ref2) {
     var slice = _ref2.slice;
@@ -34,23 +26,30 @@ var _toIds = function _toIds(_ref, items) {
   return _arr;
 };
 
-var createLoadOptions = function createLoadOptions() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
 
-  var loadId = props.loadId,
-      group = props.group,
-      dataSource = props.dataSource,
-      dfProps = props.dfProps,
-      timeId = props.timeId,
-      _options$items = options.items,
-      items = _options$items === undefined ? [] : _options$items,
-      _options$chartType = options.chartType,
-      chartType = _options$chartType === undefined ? {} : _options$chartType,
-      seriaColor = options.seriaColor,
-      date = options.date,
-      dateDefault = options.dateDefault,
-      selectOptions = options.selectOptions,
+  if (options === void 0) {
+    options = {};
+  }
+
+  var _props = props,
+      loadId = _props.loadId,
+      group = _props.group,
+      dataSource = _props.dataSource,
+      dfProps = _props.dfProps,
+      timeId = _props.timeId,
+      _options = options,
+      _options$items = _options.items,
+      items = _options$items === void 0 ? [] : _options$items,
+      _options$chartType = _options.chartType,
+      chartType = _options$chartType === void 0 ? {} : _options$chartType,
+      seriaColor = _options.seriaColor,
+      date = _options.date,
+      dateDefault = _options.dateDefault,
+      selectOptions = _options.selectOptions,
       seriaType = chartType.value,
       zhCompType = chartType.compType,
       _countryValue = items[0] ? items[0].value : COUNTRY_CAPTION_DF,
@@ -63,7 +62,7 @@ var createLoadOptions = function createLoadOptions() {
       _items = _toIds(dfProps, items),
       _itemKey = crItemKey(_items, seriaType, time);
 
-  return (0, _extends3.default)({}, dfProps, {
+  return (0, _extends2["default"])({}, dfProps, {
     _itemKey: _itemKey,
     geo: _countryValue,
     group: group,
@@ -71,15 +70,19 @@ var createLoadOptions = function createLoadOptions() {
     itemCaption: oneC,
     alertGeo: oneC,
     loadId: loadId,
-    title: title, subtitle: subtitle,
-    seriaType: seriaType, seriaColor: seriaColor,
+    title: title,
+    subtitle: subtitle,
+    seriaType: seriaType,
+    seriaColor: seriaColor,
     zhCompType: zhCompType,
-    time: time, timeId: timeId,
+    time: time,
+    timeId: timeId,
     dataSource: dataSource,
     items: items,
     selectOptions: selectOptions
   });
 };
 
-exports.default = createLoadOptions;
+var _default = createLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=eurostatN.js.map

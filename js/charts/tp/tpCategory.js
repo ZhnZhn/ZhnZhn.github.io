@@ -1,25 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _tpFn = require('./tpFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _tpFn2 = _interopRequireDefault(_tpFn);
+var _tpFn = _interopRequireDefault(require("./tpFn"));
 
-var _tpConfig = require('./tpConfig');
+var _tpConfig = _interopRequireDefault(require("./tpConfig"));
 
-var _tpConfig2 = _interopRequireDefault(_tpConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crHeader = _tpFn2.default.crHeader,
-    crRow = _tpFn2.default.crRow,
-    crSpan = _tpFn2.default.crSpan,
-    toNumberFormatAll = _tpFn2.default.toNumberFormatAll,
-    addHideHandler = _tpFn2.default.addHideHandler;
-
+var crHeader = _tpFn["default"].crHeader,
+    crRow = _tpFn["default"].crRow,
+    crSpan = _tpFn["default"].crSpan,
+    toNumberFormatAll = _tpFn["default"].toNumberFormatAll,
+    addHideHandler = _tpFn["default"].addHideHandler;
 
 var _crSimple = function _crSimple(_ref) {
   var id = _ref.id,
@@ -28,22 +22,22 @@ var _crSimple = function _crSimple(_ref) {
       category = point.category,
       c = point.c,
       _point$series = point.series,
-      series = _point$series === undefined ? {} : _point$series,
+      series = _point$series === void 0 ? {} : _point$series,
       name = series.name,
       color = series.color;
+  return crHeader(category || c, id) + "\n   <div class=\"tp__body\">\n     " + crRow('Value', toNumberFormatAll(y)) + "\n     " + crRow('Seria', name, {
+    color: color
+  }) + "\n   </div>";
+}; //style='cursor:pointer;pointer-events:visible;color:cadetblue;'
 
-  return crHeader(category || c, id) + '\n   <div class="tp__body">\n     ' + crRow('Value', toNumberFormatAll(y)) + '\n     ' + crRow('Seria', name, { color: color }) + '\n   </div>';
-};
 
-//style='cursor:pointer;pointer-events:visible;color:cadetblue;'
 var _crRemove = function _crRemove(_ref2) {
   var id = _ref2.id,
       point = _ref2.point;
   var y = point.y,
       c = point.c,
       category = point.category;
-
-  return crHeader(c || category, id) + '\n  <div class="tp__body">\n    ' + crRow('Value', toNumberFormatAll(y)) + '\n    <div class=\'tp__bt\' id=' + (id + '_R') + '>\n         Remove\n    </div>\n  </div>';
+  return crHeader(c || category, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Value', toNumberFormatAll(y)) + "\n    <div class='tp__bt' id=" + (id + '_R') + ">\n         Remove\n    </div>\n  </div>";
 };
 
 var _addCategoryHandlersImpl = function _addCategoryHandlersImpl(id, point) {
@@ -52,6 +46,7 @@ var _addCategoryHandlersImpl = function _addCategoryHandlersImpl(id, point) {
     return _point.series.chart.zhRemoveCategory(point.category);
   });
 };
+
 var _addCategoryHandlers = function _addCategoryHandlers(id, point) {
   setTimeout(function () {
     return _addCategoryHandlersImpl(id, point);
@@ -66,8 +61,11 @@ var _fnCategoryRHLY = function _fnCategoryRHLY(_ref3) {
       low = point.low,
       yLow = point.yLow,
       c = point.c;
-
-  return crHeader(c, id) + '\n  <div class="tp__body">\n    <div>\n      ' + crSpan('High', high) + '\n      ' + crSpan('', yHigh, { color: _tpConfig2.default.YEAR_C }) + '\n    </div>\n    <div>\n      ' + crSpan('&nbsp;Low', low) + '\n      ' + crSpan('', yLow, { color: _tpConfig2.default.YEAR_C }) + '\n    </div>\n  </div>';
+  return crHeader(c, id) + "\n  <div class=\"tp__body\">\n    <div>\n      " + crSpan('High', high) + "\n      " + crSpan('', yHigh, {
+    color: _tpConfig["default"].YEAR_C
+  }) + "\n    </div>\n    <div>\n      " + crSpan('&nbsp;Low', low) + "\n      " + crSpan('', yLow, {
+    color: _tpConfig["default"].YEAR_C
+  }) + "\n    </div>\n  </div>";
 };
 
 var tpCategory = {
@@ -82,6 +80,6 @@ var tpCategory = {
     fnTemplate: _fnCategoryRHLY
   }
 };
-
-exports.default = tpCategory;
+var _default = tpCategory;
+exports["default"] = _default;
 //# sourceMappingURL=tpCategory.js.map

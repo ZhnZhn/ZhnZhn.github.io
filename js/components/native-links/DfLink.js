@@ -1,23 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _Link = require('./Link');
-
-var _Link2 = _interopRequireDefault(_Link);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Link = _interopRequireDefault(require("./Link"));
 
 var DfLink = function DfLink(_ref) {
   var item = _ref.item;
-  return _react2.default.createElement(_Link2.default, item);
+  return _react["default"].createElement(_Link["default"], item);
 };
 
-exports.default = DfLink;
+var _default = DfLink;
+exports["default"] = _default;
 //# sourceMappingURL=DfLink.js.map

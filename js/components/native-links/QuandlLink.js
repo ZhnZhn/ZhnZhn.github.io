@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _Link = require('./Link');
-
-var _Link2 = _interopRequireDefault(_Link);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Link = _interopRequireDefault(require("./Link"));
 
 var C = {
   ROOT_URI: 'https://www.quandl.com/data/',
@@ -24,17 +19,18 @@ var C = {
 
 var QuandlLink = function QuandlLink(_ref) {
   var _ref$dbCode = _ref.dbCode,
-      dbCode = _ref$dbCode === undefined ? '' : _ref$dbCode,
+      dbCode = _ref$dbCode === void 0 ? '' : _ref$dbCode,
       _ref$dsCode = _ref.dsCode,
-      dsCode = _ref$dsCode === undefined ? '' : _ref$dsCode,
+      dsCode = _ref$dsCode === void 0 ? '' : _ref$dsCode,
       _ref$caption = _ref.caption,
-      caption = _ref$caption === undefined ? C.CAPTION : _ref$caption;
-  return _react2.default.createElement(_Link2.default, {
+      caption = _ref$caption === void 0 ? C.CAPTION : _ref$caption;
+  return _react["default"].createElement(_Link["default"], {
     style: C.STYLE,
-    href: '' + C.ROOT_URI + dbCode + '/' + dsCode,
-    caption: caption + ' ' + dbCode + '/' + dsCode
+    href: "" + C.ROOT_URI + dbCode + "/" + dsCode,
+    caption: caption + " " + dbCode + "/" + dsCode
   });
 };
 
-exports.default = QuandlLink;
+var _default = QuandlLink;
+exports["default"] = _default;
 //# sourceMappingURL=QuandlLink.js.map

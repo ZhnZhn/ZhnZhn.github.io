@@ -1,10 +1,11 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
-exports.default = function (data) {
-    return Math.max.apply(Math, data);
+var _default = function _default(data) {
+  return Math.max.apply(Math, data);
 };
+
+exports["default"] = _default;
 //# sourceMappingURL=max.js.map

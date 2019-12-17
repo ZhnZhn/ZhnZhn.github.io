@@ -1,57 +1,27 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _ChartActions = _interopRequireDefault(require("../../flux/actions/ChartActions"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _ChartActions = require('../../flux/actions/ChartActions');
-
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
-
-var _DialogCell = require('./DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _ModalDialog = require('../zhn-moleculs/ModalDialog');
-
-var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
-
-var _NasdaqLink = require('../native-links/NasdaqLink');
-
-var _NasdaqLink2 = _interopRequireDefault(_NasdaqLink);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _NasdaqLink = _interopRequireDefault(require("../native-links/NasdaqLink"));
 
 //import PropTypes from "prop-types";
-
 var S = {
   ROOT_NOT_LABELS: {
     width: 280
@@ -88,19 +58,33 @@ var S = {
     marginLeft: 8
   }
 };
-
-var IEX_SOURCES = [{ a: '1 Month', b: '1m' }, { a: '3 Months', b: '3m' }, { a: '6 Months', b: '6m' }, { a: '1 Year', b: '1y' }, { a: '2 Years', b: '2y' }].map(function (_ref) {
+var IEX_SOURCES = [{
+  a: '1 Month',
+  b: '1m'
+}, {
+  a: '3 Months',
+  b: '3m'
+}, {
+  a: '6 Months',
+  b: '6m'
+}, {
+  a: '1 Year',
+  b: '1y'
+}, {
+  a: '2 Years',
+  b: '2y'
+}].map(function (_ref) {
   var a = _ref.a,
       b = _ref.b;
   return {
-    caption: 'IEX Cloud: ' + a, value: 'IEX',
+    caption: 'IEX Cloud: ' + a,
+    value: 'IEX',
     dfProps: {
       dfType: 'chart',
       dfPeriod: b
     }
   };
 });
-
 var SOURCE_OPTIONS = [{
   caption: 'Alpha Vantage: Daily (100)',
   value: 'AL_I',
@@ -110,17 +94,19 @@ var SOURCE_OPTIONS = [{
     outputsize: 'compact'
   }
 }, {
-  caption: 'Barchart: 6 Months', value: 'B'
-}].concat((0, _toConsumableArray3.default)(IEX_SOURCES));
-
+  caption: 'Barchart: 6 Months',
+  value: 'B'
+}].concat(IEX_SOURCES);
 var DF_SOURCE = SOURCE_OPTIONS[0];
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
+
 var _getItemId = function _getItemId(props) {
   return ((props.data || {}).item || {}).id;
 };
+
 var _createInitialState = function _createInitialState(props) {
   return {
     itemId: _getItemId(props),
@@ -128,8 +114,10 @@ var _createInitialState = function _createInitialState(props) {
   };
 };
 
-var StocksBySectorDialog = function (_Component) {
-  (0, _inherits3.default)(StocksBySectorDialog, _Component);
+var StocksBySectorDialog =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(StocksBySectorDialog, _Component);
 
   /*
    static propTypes = {
@@ -139,11 +127,10 @@ var StocksBySectorDialog = function (_Component) {
      onClose: PropTypes.func
    }
   */
-
   function StocksBySectorDialog(props) {
-    (0, _classCallCheck3.default)(this, StocksBySectorDialog);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (StocksBySectorDialog.__proto__ || Object.getPrototypeOf(StocksBySectorDialog)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._hClickLabels = function () {
       _this.setState(function (prevState) {
@@ -182,7 +169,7 @@ var StocksBySectorDialog = function (_Component) {
           data = _this$props.data,
           onClose = _this$props.onClose,
           _data$item = data.item,
-          item = _data$item === undefined ? {} : _data$item,
+          item = _data$item === void 0 ? {} : _data$item,
           browserType = data.browserType,
           chartContainerType = data.chartContainerType,
           dialogProps = data.dialogProps,
@@ -193,9 +180,10 @@ var StocksBySectorDialog = function (_Component) {
           value = _this$_getDataSource.value,
           dfProps = _this$_getDataSource.dfProps;
 
-      _ChartActions2.default.loadStock({
-        chartType: chartContainerType, browserType: browserType
-      }, (0, _extends3.default)({
+      _ChartActions["default"].loadStock({
+        chartType: chartContainerType,
+        browserType: browserType
+      }, (0, _extends2["default"])({
         title: text,
         value: id,
         ticket: id,
@@ -204,7 +192,8 @@ var StocksBySectorDialog = function (_Component) {
         id: id,
         linkFn: 'NASDAQ',
         dataSource: caption
-      }, dialogProps, dfProps));
+      }, dialogProps, {}, dfProps));
+
       onClose();
     };
 
@@ -217,95 +206,84 @@ var StocksBySectorDialog = function (_Component) {
       title: 'Click to toggle options',
       onClick: _this._hClickLink
     }];
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, {
-      key: 'load',
+    _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Load, {
+      key: "load",
       onClick: _this._hLoad
-    }), _react2.default.createElement(_DialogCell2.default.Button.Show, {
-      key: 'show',
+    }), _react["default"].createElement(_DialogCell["default"].Button.Show, {
+      key: "show",
       onClick: _this._hShow
     })];
-    _this.state = (0, _extends3.default)({}, _createInitialState(props), {
+    _this.state = (0, _extends2["default"])({}, _createInitialState(props), {
       isShowLabels: true
     });
     return _this;
   }
 
-  (0, _createClass3.default)(StocksBySectorDialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-        return false;
-      }
-      return true;
+  StocksBySectorDialog.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    if (_getItemId(nextProps) !== prevState.itemId) {
+      return _createInitialState(nextProps);
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          data = _props.data,
-          onClose = _props.onClose,
-          _ref2 = data || {},
-          item = _ref2.item,
-          _ref3 = item || {},
-          text = _ref3.text,
-          _state = this.state,
-          isShowLabels = _state.isShowLabels,
-          isShowLink = _state.isShowLink,
-          _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
-          _linkStyle = isShowLabels ? S.LINK : (0, _extends3.default)({}, S.LINK, S.LINK_NOT_LABELS);
 
-      return _react2.default.createElement(
-        _ModalDialog2.default,
-        {
-          caption: text,
-          style: _style,
-          styleCaption: S.CAPTION_SPAN,
-          isShow: isShow,
-          commandButtons: this._commandButtons,
-          onClose: onClose
-        },
-        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
-          buttons: this.toolbarButtons
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-          isShowLabels: isShowLabels,
-          caption: 'Source',
-          placeholder: DF_SOURCE.caption,
-          options: SOURCE_OPTIONS,
-          onSelect: this._hSelectDataSource
-        }),
-        _react2.default.createElement(
-          _DialogCell2.default.ShowHide,
-          { isShow: isShowLink, style: S.LINK_SHOW_HIDE },
-          _react2.default.createElement(
-            _DialogCell2.default.Row.Plain,
-            { style: S.LINK_ROOT },
-            isShowLabels && _react2.default.createElement(
-              'span',
-              { style: S.LINK_CAPTION },
-              'Link:'
-            ),
-            _react2.default.createElement(_NasdaqLink2.default, {
-              style: _linkStyle,
-              item: item,
-              caption: 'NASDAQ'
-            })
-          )
-        )
-      );
+    return null;
+  };
+
+  var _proto = StocksBySectorDialog.prototype;
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
     }
-  }], [{
-    key: 'getDerivedStateFromProps',
-    value: function getDerivedStateFromProps(nextProps, prevState) {
-      if (_getItemId(nextProps) !== prevState.itemId) {
-        return _createInitialState(nextProps);
-      }
-      return null;
-    }
-  }]);
+
+    return true;
+  };
+
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        data = _this$props2.data,
+        onClose = _this$props2.onClose,
+        _ref2 = data || {},
+        item = _ref2.item,
+        _ref3 = item || {},
+        text = _ref3.text,
+        _this$state = this.state,
+        isShowLabels = _this$state.isShowLabels,
+        isShowLink = _this$state.isShowLink,
+        _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
+        _linkStyle = isShowLabels ? S.LINK : (0, _extends2["default"])({}, S.LINK, {}, S.LINK_NOT_LABELS);
+
+    return _react["default"].createElement(_ModalDialog["default"], {
+      caption: text,
+      style: _style,
+      styleCaption: S.CAPTION_SPAN,
+      isShow: isShow,
+      commandButtons: this._commandButtons,
+      onClose: onClose
+    }, _react["default"].createElement(_DialogCell["default"].ToolbarButtonCircle, {
+      buttons: this.toolbarButtons
+    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+      isShowLabels: isShowLabels,
+      caption: "Source",
+      placeholder: DF_SOURCE.caption,
+      options: SOURCE_OPTIONS,
+      onSelect: this._hSelectDataSource
+    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+      isShow: isShowLink,
+      style: S.LINK_SHOW_HIDE
+    }, _react["default"].createElement(_DialogCell["default"].Row.Plain, {
+      style: S.LINK_ROOT
+    }, isShowLabels && _react["default"].createElement("span", {
+      style: S.LINK_CAPTION
+    }, "Link:"), _react["default"].createElement(_NasdaqLink["default"], {
+      style: _linkStyle,
+      item: item,
+      caption: "NASDAQ"
+    }))));
+  };
+
   return StocksBySectorDialog;
 }(_react.Component);
 
-exports.default = StocksBySectorDialog;
+var _default = StocksBySectorDialog;
+exports["default"] = _default;
 //# sourceMappingURL=StocksBySectorDialog.js.map

@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/eia/Eia.js"
- ],
- "file": "../../../src/adapters/eia/Eia.js",
- "names": [
-  "Eia",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,uBADU,EACLC;AADK,CAAZ;;kBAIeF,G"
-}
+{"version":3,"sources":["../../../src/adapters/eia/Eia.js"],"names":["Eia","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,GAAG,GAAG;AACVC,EAAAA,GAAG,EAAHA,kBADU;AACLC,EAAAA,OAAO,EAAPA;AADK,CAAZ;eAIeF,G","sourcesContent":["import api from './EiaApi'\r\nimport adapter from './EiaAdapter'\r\n\r\nconst Eia = {\r\n  api, adapter\r\n};\r\n\r\nexport default Eia\r\n"],"file":"Eia.js"}

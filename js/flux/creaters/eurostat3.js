@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _isThreeTable = function _isThreeTable(dfProps, _items, metric) {
   if (dfProps.dfT !== 'three') {
@@ -31,42 +28,50 @@ var _isDfParams = function _isDfParams(dfProps, groupV, metricV) {
   }
 };
 
-var createLoadOptions = function createLoadOptions() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var loadId = props.loadId,
-      dataSource = props.dataSource,
-      _props$dfProps = props.dfProps,
-      dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
-      _options$one = options.one,
-      one = _options$one === undefined ? {} : _options$one,
-      _options$group = options.group,
-      group = _options$group === undefined ? {} : _options$group,
-      _options$metric = options.metric,
-      metric = _options$metric === undefined ? {} : _options$metric,
-      _options$chartType = options.chartType,
-      chartType = _options$chartType === undefined ? {} : _options$chartType,
-      seriaColor = options.seriaColor,
-      date = options.date,
-      dialogOptions = options.dialogOptions,
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
+
+  if (options === void 0) {
+    options = {};
+  }
+
+  var _props = props,
+      loadId = _props.loadId,
+      dataSource = _props.dataSource,
+      _props$dfProps = _props.dfProps,
+      dfProps = _props$dfProps === void 0 ? {} : _props$dfProps,
+      _options = options,
+      _options$one = _options.one,
+      one = _options$one === void 0 ? {} : _options$one,
+      _options$group = _options.group,
+      group = _options$group === void 0 ? {} : _options$group,
+      _options$metric = _options.metric,
+      metric = _options$metric === void 0 ? {} : _options$metric,
+      _options$chartType = _options.chartType,
+      chartType = _options$chartType === void 0 ? {} : _options$chartType,
+      seriaColor = _options.seriaColor,
+      date = _options.date,
+      dialogOptions = _options.dialogOptions,
       _one$caption = one.caption,
-      oneC = _one$caption === undefined ? '' : _one$caption,
+      oneC = _one$caption === void 0 ? '' : _one$caption,
       oneV = one.value,
       _group$caption = group.caption,
-      groupC = _group$caption === undefined ? '' : _group$caption,
+      groupC = _group$caption === void 0 ? '' : _group$caption,
       groupV = group.value,
       _metric$caption = metric.caption,
-      metricC = _metric$caption === undefined ? '' : _metric$caption,
+      metricC = _metric$caption === void 0 ? '' : _metric$caption,
       metricV = metric.value,
       seriaType = chartType.value,
       compType = chartType.compType,
       _items = [one, group];
 
-
   _isThreeTable(dfProps, _items, metric);
+
   _isDfParams(dfProps, groupV, metricV);
 
-  return (0, _extends3.default)({}, dfProps, dialogOptions, {
+  return (0, _extends2["default"])({}, dfProps, {}, dialogOptions, {
     geo: oneV,
     group: groupV,
     metric: metricV,
@@ -79,13 +84,14 @@ var createLoadOptions = function createLoadOptions() {
     loadId: loadId,
     itemCaption: oneC,
     title: oneC,
-    subtitle: groupC + ': ' + metricC,
-    alertItemId: oneC + ': ' + metricC,
+    subtitle: groupC + ": " + metricC,
+    alertItemId: oneC + ": " + metricC,
     alertGeo: oneC,
     alertMetric: metricC,
     dataSource: dataSource
   });
 };
 
-exports.default = createLoadOptions;
+var _default = createLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=eurostat3.js.map

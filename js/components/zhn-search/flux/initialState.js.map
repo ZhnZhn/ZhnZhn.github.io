@@ -1,16 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/zhn-search/flux/initialState.js"
- ],
- "file": "../../../../src/components/zhn-search/flux/initialState.js",
- "names": [
-  "initialState",
-  "isLoadingFailed",
-  "isLoading",
-  "isOptions",
-  "ticket",
-  "options"
- ],
- "mappings": ";;;;;;AACA,IAAMA,eAAe;AACnBC,mBAAiB,KADE;AAEnBC,aAAW,KAFQ;AAGnBC,aAAW,KAHQ;AAInBC,UAAQ,EAJW;AAKnBC,WAAS;AALU,CAArB;;kBAQeL,Y"
-}
+{"version":3,"sources":["../../../../src/components/zhn-search/flux/initialState.js"],"names":["initialState","isLoadingFailed","isLoading","isOptions","ticket","options"],"mappings":";;;;AACA,IAAMA,YAAY,GAAG;AACnBC,EAAAA,eAAe,EAAE,KADE;AAEnBC,EAAAA,SAAS,EAAE,KAFQ;AAGnBC,EAAAA,SAAS,EAAE,KAHQ;AAInBC,EAAAA,MAAM,EAAE,EAJW;AAKnBC,EAAAA,OAAO,EAAE;AALU,CAArB;eAQeL,Y","sourcesContent":["\r\nconst initialState = {\r\n  isLoadingFailed: false,\r\n  isLoading: false,\r\n  isOptions: false,\r\n  ticket: '',\r\n  options: []\r\n};\r\n\r\nexport default initialState\r\n"],"file":"initialState.js"}

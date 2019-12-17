@@ -1,9 +1,9 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var Box = exports.Box = function Box(x) {
+exports.__esModule = true;
+exports.getFromNullable = exports.Box = void 0;
+
+var Box = function Box(x) {
   return {
     map: function map(f) {
       return Box(f(x));
@@ -14,9 +14,15 @@ var Box = exports.Box = function Box(x) {
   };
 };
 
-var getFromNullable = exports.getFromNullable = function getFromNullable(x) {
-  var df = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+exports.Box = Box;
+
+var getFromNullable = function getFromNullable(x, df) {
+  if (df === void 0) {
+    df = {};
+  }
 
   return x != null ? x : df;
 };
+
+exports.getFromNullable = getFromNullable;
 //# sourceMappingURL=fnStyle.js.map

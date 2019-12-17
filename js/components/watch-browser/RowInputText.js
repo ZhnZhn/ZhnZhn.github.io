@@ -1,45 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _InputText = require('../zhn/InputText');
-
-var _InputText2 = _interopRequireDefault(_InputText);
-
-var _DialogStyles = require('../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 
 //import PropTypes from "prop-types";
-
 var S = {
   ROOT: {
     lineHeight: 2
@@ -56,63 +34,52 @@ var S = {
   }
 };
 
-var RowInputText = function (_Component) {
-  (0, _inherits3.default)(RowInputText, _Component);
+var RowInputText =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(RowInputText, _Component);
 
   function RowInputText() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, RowInputText);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RowInputText.__proto__ || Object.getPrototypeOf(RowInputText)).call.apply(_ref, [this].concat(args))), _this), _this._refInputText = function (c) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._refInputText = function (c) {
       return _this.inputText = c;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
-  /*
-  static propTypes = {
-    caption: PropTypes.string
-  }
-  */
 
+  var _proto = RowInputText.prototype;
 
-  (0, _createClass3.default)(RowInputText, [{
-    key: 'render',
-    value: function render() {
-      var caption = this.props.caption;
+  _proto.render = function render() {
+    var caption = this.props.caption;
+    return _react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, {}, S.ROOT)
+    }, _react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, {}, S.CAPTION)
+    }, caption), _react["default"].createElement(_InputText["default"], {
+      ref: this._refInputText,
+      style: S.INPUT_TEXT
+    }));
+  };
 
-      return _react2.default.createElement(
-        'div',
-        { style: (0, _extends3.default)({}, _DialogStyles2.default.rowDiv, S.ROOT) },
-        _react2.default.createElement(
-          'span',
-          { style: (0, _extends3.default)({}, _DialogStyles2.default.labelSpan, S.CAPTION) },
-          caption
-        ),
-        _react2.default.createElement(_InputText2.default, {
-          ref: this._refInputText,
-          style: S.INPUT_TEXT
-        })
-      );
-    }
-  }, {
-    key: 'getValue',
-    value: function getValue() {
-      return this.inputText.getValue().trim();
-    }
-  }, {
-    key: 'setValue',
-    value: function setValue(value) {
-      this.inputText.setValue(value);
-    }
-  }]);
+  _proto.getValue = function getValue() {
+    return this.inputText.getValue().trim();
+  };
+
+  _proto.setValue = function setValue(value) {
+    this.inputText.setValue(value);
+  };
+
   return RowInputText;
 }(_react.Component);
 
-exports.default = RowInputText;
+var _default = RowInputText;
+exports["default"] = _default;
 //# sourceMappingURL=RowInputText.js.map

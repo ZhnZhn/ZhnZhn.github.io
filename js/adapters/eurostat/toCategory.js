@@ -1,26 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _FactoryChart = require('./FactoryChart');
+var _FactoryChart = _interopRequireDefault(require("./FactoryChart"));
 
-var _FactoryChart2 = _interopRequireDefault(_FactoryChart);
+var _JsonStatFn = _interopRequireDefault(require("./JsonStatFn"));
 
-var _JsonStatFn = require('./JsonStatFn');
-
-var _JsonStatFn2 = _interopRequireDefault(_JsonStatFn);
-
-var _EuroStatFn = require('./EuroStatFn');
-
-var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
 var _crScatterProps = function _crScatterProps(seriaColor) {
   return {
@@ -36,43 +27,47 @@ var _crScatterProps = function _crScatterProps(seriaColor) {
 var toCategory = {
   createConfig: function createConfig(json, option) {
     var configSlice = option.zhMapSlice;
-
-    return _JsonStatFn2.default.trJsonToCategory(json, configSlice).then(function (_ref) {
+    return _JsonStatFn["default"].trJsonToCategory(json, configSlice).then(function (_ref) {
       var categories = _ref.categories,
           data = _ref.data,
           min = _ref.min;
 
-      var config = _FactoryChart2.default.createConfig(option);
-      _EuroStatFn2.default.addToCategoryConfig(config, {
-        json: json, option: option, data: data, categories: categories, min: min
+      var config = _FactoryChart["default"].createConfig(option);
+
+      _EuroStatFn["default"].addToCategoryConfig(config, {
+        json: json,
+        option: option,
+        data: data,
+        categories: categories,
+        min: min
       });
+
       return config;
     });
   },
-
   createSeria: function createSeria(json, option, chart) {
     var categories = chart.options.xAxis[0].categories;
 
     var _option$zhMapSlice = option.zhMapSlice,
-        configSlice = _option$zhMapSlice === undefined ? {} : _option$zhMapSlice,
+        configSlice = _option$zhMapSlice === void 0 ? {} : _option$zhMapSlice,
         time = option.time,
         seriaColor = option.seriaColor,
         seriaType = option.seriaType,
         _name = configSlice.time || time,
-        data = _JsonStatFn2.default.trJsonToSeria(json, configSlice, categories),
+        data = _JsonStatFn["default"].trJsonToSeria(json, configSlice, categories),
         _seriaProps = seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
 
-    return (0, _extends3.default)({
+    return (0, _extends2["default"])({
       zhSeriaId: 'optionKey',
       zhValueText: 'Value',
-      minY: _EuroStatFn2.default.findMinY(data),
+      minY: _EuroStatFn["default"].findMinY(data),
       name: _name,
       color: seriaColor,
       data: data,
-      tooltip: _EuroStatFn2.default.crCategoryTooltip()
+      tooltip: _EuroStatFn["default"].crCategoryTooltip()
     }, _seriaProps);
   }
 };
-
-exports.default = toCategory;
+var _default = toCategory;
+exports["default"] = _default;
 //# sourceMappingURL=toCategory.js.map

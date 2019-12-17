@@ -1,71 +1,40 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _Browser = _interopRequireDefault(require("./Browser"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _ToolbarButtonCircle = _interopRequireDefault(require("../dialogs/ToolbarButtonCircle"));
 
-var _react = require('react');
+var _ShowHide = _interopRequireDefault(require("./ShowHide"));
 
-var _react2 = _interopRequireDefault(_react);
+var _WrapperInputSearch = _interopRequireDefault(require("../zhn-select/WrapperInputSearch"));
 
-var _Browser = require('./Browser');
+var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
 
-var _Browser2 = _interopRequireDefault(_Browser);
+var _SpinnerLoading = _interopRequireDefault(require("./SpinnerLoading"));
 
-var _BrowserCaption = require('./BrowserCaption');
-
-var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
-
-var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
-
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _ShowHide = require('./ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _WrapperInputSearch = require('../zhn-select/WrapperInputSearch');
-
-var _WrapperInputSearch2 = _interopRequireDefault(_WrapperInputSearch);
-
-var _ScrollPane = require('./ScrollPane');
-
-var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
-
-var _SpinnerLoading = require('./SpinnerLoading');
-
-var _SpinnerLoading2 = _interopRequireDefault(_SpinnerLoading);
-
-var _MenuListType = require('./MenuListType2');
-
-var _MenuListType2 = _interopRequireDefault(_MenuListType);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _MenuListType = _interopRequireDefault(require("./MenuListType2"));
 
 var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
-
 var CL = {
   BROWSER: "scroll-browser-by",
   BROWSER_WITH_SEARCH: "scroll-browser-by--search",
   ROW_ITEM: 'row__type2-topic not-selected'
 };
-
 var STYLE = {
   BROWSER: {
     paddingRight: '0',
@@ -88,13 +57,15 @@ var STYLE = {
   }
 };
 
-var MenuBrowserDynamic2 = function (_Component) {
-  (0, _inherits3.default)(MenuBrowserDynamic2, _Component);
+var MenuBrowserDynamic2 =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuBrowserDynamic2, _Component);
 
   function MenuBrowserDynamic2(props) {
-    (0, _classCallCheck3.default)(this, MenuBrowserDynamic2);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (MenuBrowserDynamic2.__proto__ || Object.getPrototypeOf(MenuBrowserDynamic2)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._loadMenu = function () {
       var _this$props = _this.props,
@@ -102,8 +73,11 @@ var MenuBrowserDynamic2 = function (_Component) {
           caption = _this$props.caption,
           sourceMenuUrl = _this$props.sourceMenuUrl,
           onLoadMenu = _this$props.onLoadMenu;
-
-      onLoadMenu({ browserType: browserType, caption: caption, sourceMenuUrl: sourceMenuUrl });
+      onLoadMenu({
+        browserType: browserType,
+        caption: caption,
+        sourceMenuUrl: sourceMenuUrl
+      });
     };
 
     _this._onStore = function (actionType, data) {
@@ -115,24 +89,32 @@ var MenuBrowserDynamic2 = function (_Component) {
       if (actionType === showAction && data === browserType) {
         _this._handleShow();
       } else if (actionType === loadCompletedAction && data.browserType === browserType) {
-        _this.setState({ menuItems: data.json, isLoaded: true });
+        _this.setState({
+          menuItems: data.json,
+          isLoaded: true
+        });
       }
     };
 
     _this._handleHide = function () {
-      _this.setState({ isShow: false });
+      _this.setState({
+        isShow: false
+      });
     };
 
     _this._handleShow = function () {
-      _this.setState({ isShow: true });
+      _this.setState({
+        isShow: true
+      });
     };
 
     _this._handleClickInfo = function () {
       var _this$props3 = _this.props,
           descrUrl = _this$props3.descrUrl,
           onClickInfo = _this$props3.onClickInfo;
-
-      onClickInfo({ descrUrl: descrUrl });
+      onClickInfo({
+        descrUrl: descrUrl
+      });
     };
 
     _this._handleClickSearch = function () {
@@ -156,17 +138,22 @@ var MenuBrowserDynamic2 = function (_Component) {
           chartContainerType = _this$props4.chartContainerType,
           onShowLoadDialog = _this$props4.onShowLoadDialog,
           onShowContainer = _this$props4.onShowContainer;
-
-
       onShowLoadDialog(modalDialogType, {
-        item: item, browserType: browserType, chartContainerType: chartContainerType,
+        item: item,
+        browserType: browserType,
+        chartContainerType: chartContainerType,
         onShow: onShowContainer
       });
     };
 
     var isInitShow = props.isInitShow;
-
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._handleClickInfo.bind(_this) }, { caption: 'S', onClick: _this._handleClickSearch.bind(_this) }];
+    _this.toolbarButtons = [{
+      caption: 'I',
+      onClick: _this._handleClickInfo.bind((0, _assertThisInitialized2["default"])(_this))
+    }, {
+      caption: 'S',
+      onClick: _this._handleClickSearch.bind((0, _assertThisInitialized2["default"])(_this))
+    }];
     _this.state = {
       isShow: isInitShow ? true : false,
       isShowSearch: false,
@@ -177,82 +164,73 @@ var MenuBrowserDynamic2 = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(MenuBrowserDynamic2, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
+  var _proto = MenuBrowserDynamic2.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+
+    this._loadMenu();
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate() {
+    var _this$state = this.state,
+        isLoaded = _this$state.isLoaded,
+        isShow = _this$state.isShow;
+
+    if (!isLoaded && isShow) {
       this._loadMenu();
     }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      var _state = this.state,
-          isLoaded = _state.isLoaded,
-          isShow = _state.isShow;
+  };
 
-      if (!isLoaded && isShow) {
-        this._loadMenu();
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          caption = _props.caption,
-          children = _props.children,
-          ItemOptionComp = _props.ItemOptionComp,
-          ItemComp = _props.ItemComp,
-          _state2 = this.state,
-          menuItems = _state2.menuItems,
-          isShow = _state2.isShow,
-          isShowSearch = _state2.isShowSearch,
-          scrollClass = _state2.scrollClass,
-          _wrapperSearch = menuItems.length !== 0 ? _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isShowSearch },
-        _react2.default.createElement(_WrapperInputSearch2.default, {
-          style: STYLE.WRAPPER_SEARCH,
-          placeholder: SEARCH_PLACEHOLDER,
-          data: menuItems,
-          ItemOptionComp: ItemOptionComp,
-          onSelect: this._handleClickItem
-        })
-      ) : null,
-          _spinnerLoading = menuItems.length === 0 ? _react2.default.createElement(_SpinnerLoading2.default, { style: STYLE.SPINNER_LOADING }) : null;
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
 
-      return _react2.default.createElement(
-        _Browser2.default,
-        { isShow: isShow, style: STYLE.BROWSER },
-        _react2.default.createElement(_BrowserCaption2.default, {
-          caption: caption,
-          onClose: this._handleHide
-        }),
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
-          buttons: this.toolbarButtons
-        }),
-        _wrapperSearch,
-        _react2.default.createElement(
-          _ScrollPane2.default,
-          { className: scrollClass },
-          _spinnerLoading,
-          _react2.default.createElement(_MenuListType2.default, {
-            model: menuItems,
-            ItemComp: ItemComp,
-            itemClassName: CL.ROW_ITEM,
-            onClickItem: this._handleClickItem
-          }),
-          children
-        )
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props5 = this.props,
+        caption = _this$props5.caption,
+        children = _this$props5.children,
+        ItemOptionComp = _this$props5.ItemOptionComp,
+        ItemComp = _this$props5.ItemComp,
+        _this$state2 = this.state,
+        menuItems = _this$state2.menuItems,
+        isShow = _this$state2.isShow,
+        isShowSearch = _this$state2.isShowSearch,
+        scrollClass = _this$state2.scrollClass,
+        _wrapperSearch = menuItems.length !== 0 ? _react["default"].createElement(_ShowHide["default"], {
+      isShow: isShowSearch
+    }, _react["default"].createElement(_WrapperInputSearch["default"], {
+      style: STYLE.WRAPPER_SEARCH,
+      placeholder: SEARCH_PLACEHOLDER,
+      data: menuItems,
+      ItemOptionComp: ItemOptionComp,
+      onSelect: this._handleClickItem
+    })) : null,
+        _spinnerLoading = menuItems.length === 0 ? _react["default"].createElement(_SpinnerLoading["default"], {
+      style: STYLE.SPINNER_LOADING
+    }) : null;
+
+    return _react["default"].createElement(_Browser["default"], {
+      isShow: isShow,
+      style: STYLE.BROWSER
+    }, _react["default"].createElement(_BrowserCaption["default"], {
+      caption: caption,
+      onClose: this._handleHide
+    }), _react["default"].createElement(_ToolbarButtonCircle["default"], {
+      buttons: this.toolbarButtons
+    }), _wrapperSearch, _react["default"].createElement(_ScrollPane["default"], {
+      className: scrollClass
+    }, _spinnerLoading, _react["default"].createElement(_MenuListType["default"], {
+      model: menuItems,
+      ItemComp: ItemComp,
+      itemClassName: CL.ROW_ITEM,
+      onClickItem: this._handleClickItem
+    }), children));
+  };
+
   return MenuBrowserDynamic2;
 }(_react.Component);
 
-exports.default = MenuBrowserDynamic2;
+var _default = MenuBrowserDynamic2;
+exports["default"] = _default;
 //# sourceMappingURL=MenuBrowserDynamic2.js.map

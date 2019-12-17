@@ -1,144 +1,118 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _Adapter = _interopRequireDefault(require("../../adapters/alpha/Adapter"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
 
-var _dec, _dec2, _class;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Adapter = require('../../adapters/alpha/Adapter');
-
-var _Adapter2 = _interopRequireDefault(_Adapter);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _Decorators = require('../dialogs/decorators/Decorators');
-
-var _Decorators2 = _interopRequireDefault(_Decorators);
-
-var _MenuMore = require('../dialogs/MenuMore');
-
-var _MenuMore2 = _interopRequireDefault(_MenuMore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _dec, _dec2, _class, _temp;
 
 var C = {
   ERR_DESCR: 'API key from Alpha Vantage is required',
   ERR_CAPTION: "Without API Key"
 };
-
-var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = function (_Component) {
-  (0, _inherits3.default)(AlphaIntradayDialog, _Component);
+var AlphaIntradayDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = (_temp =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(AlphaIntradayDialog, _Component);
 
   function AlphaIntradayDialog(props) {
-    (0, _classCallCheck3.default)(this, AlphaIntradayDialog);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AlphaIntradayDialog.__proto__ || Object.getPrototypeOf(AlphaIntradayDialog)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._crUrlOptions = function () {
       var _this$props = _this.props,
           getKey = _this$props.getKey,
           loadId = _this$props.loadId,
           onError = _this$props.onError;
-
       var apiKey = getKey(loadId);
+
       if (!apiKey) {
         onError(C.ERR_DESCR, C.ERR_CAPTION);
         return void 0;
       }
-      return { apiKey: apiKey };
+
+      return {
+        apiKey: apiKey
+      };
     };
 
     _this._handleClose = function () {
       _this.props.onClose();
     };
 
-    _this._menuMore = (0, _MenuMore2.default)(_this, {
+    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
-
-    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
-
-    _this._searchApi = (0, _extends3.default)({}, _Adapter2.default.Search, {
+    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+      noDate: true
+    });
+    _this._searchApi = (0, _extends2["default"])({}, _Adapter["default"].Search, {
       crUrlOptions: _this._crUrlOptions,
       onError: _this.props.onError
     });
-
-    _this.state = (0, _extends3.default)({}, _this._isWithInitialState());
+    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState());
     return _this;
   }
 
-  (0, _createClass3.default)(AlphaIntradayDialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.props !== nextProps) {
-        if (this.props.isShow === nextProps.isShow) {
-          return false;
-        }
+  var _proto = AlphaIntradayDialog.prototype;
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps) {
+      if (this.props.isShow === nextProps.isShow) {
+        return false;
       }
-      return true;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          caption = _props.caption,
-          onFront = _props.onFront,
-          _state = this.state,
-          isToolbar = _state.isToolbar,
-          isShowLabels = _state.isShowLabels;
 
+    return true;
+  };
 
-      return _react2.default.createElement(
-        _DialogCell2.default.DraggableDialog,
-        {
-          isShow: isShow,
-          caption: caption,
-          menuModel: this._menuMore,
-          onFront: onFront,
-          onClose: this._handleClose
-        },
-        _react2.default.createElement(_DialogCell2.default.Toolbar, {
-          isShow: isToolbar,
-          buttons: this.toolbarButtons
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowInputSearch, {
-          isShowLabels: isShowLabels,
-          caption: 'Token',
-          searchApi: this._searchApi
-        })
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        caption = _this$props2.caption,
+        onFront = _this$props2.onFront,
+        _this$state = this.state,
+        isToolbar = _this$state.isToolbar,
+        isShowLabels = _this$state.isShowLabels;
+    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+      isShow: isShow,
+      caption: caption,
+      menuModel: this._menuMore,
+      onFront: onFront,
+      onClose: this._handleClose
+    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+      isShow: isToolbar,
+      buttons: this.toolbarButtons
+    }), _react["default"].createElement(_DialogCell["default"].RowInputSearch, {
+      isShowLabels: isShowLabels,
+      caption: "Token",
+      searchApi: this._searchApi
+    }));
+  };
+
   return AlphaIntradayDialog;
-}(_react.Component)) || _class) || _class);
-exports.default = AlphaIntradayDialog;
+}(_react.Component), _temp)) || _class) || _class);
+var _default = AlphaIntradayDialog;
+exports["default"] = _default;
 //# sourceMappingURL=AlphaSearchDialog.js.map

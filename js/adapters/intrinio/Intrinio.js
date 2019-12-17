@@ -1,24 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _IntrinioApi = require('./IntrinioApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _IntrinioApi2 = _interopRequireDefault(_IntrinioApi);
+var _IntrinioApi = _interopRequireDefault(require("./IntrinioApi"));
 
-var _IntrinioAdapter = require('./IntrinioAdapter');
-
-var _IntrinioAdapter2 = _interopRequireDefault(_IntrinioAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _IntrinioAdapter = _interopRequireDefault(require("./IntrinioAdapter"));
 
 var Intrinio = {
-  optionFetch: _IntrinioApi2.default.crOptionFetch,
-  api: _IntrinioApi2.default,
-  adapter: _IntrinioAdapter2.default
+  optionFetch: _IntrinioApi["default"].crOptionFetch,
+  api: _IntrinioApi["default"],
+  adapter: _IntrinioAdapter["default"]
 };
-
-exports.default = Intrinio;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\intrinio\Intrinio.js.map
+var _default = Intrinio;
+exports["default"] = _default;
+//# sourceMappingURL=Intrinio.js.map

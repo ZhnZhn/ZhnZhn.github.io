@@ -1,67 +1,40 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _reflux = _interopRequireDefault(require("reflux"));
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _Actions = _interopRequireDefault(require("../actions/Actions"));
 
-var _reflux = require('reflux');
+var _ChartActions = _interopRequireDefault(require("../actions/ChartActions"));
 
-var _reflux2 = _interopRequireDefault(_reflux);
+var _ChartSlice = _interopRequireDefault(require("./ChartSlice"));
 
-var _Actions = require('../actions/Actions');
+var _BrowserSlice = _interopRequireDefault(require("./BrowserSlice"));
 
-var _Actions2 = _interopRequireDefault(_Actions);
+var _ComponentSlice = _interopRequireDefault(require("./ComponentSlice"));
 
-var _ChartActions = require('../actions/ChartActions');
+var _SettingSlice = _interopRequireDefault(require("./SettingSlice"));
 
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
+var _WatchListSlice = _interopRequireDefault(require("../watch-list/WatchListSlice"));
 
-var _ChartSlice = require('./ChartSlice');
+var _WithLimitRemaining = _interopRequireDefault(require("./WithLimitRemaining"));
 
-var _ChartSlice2 = _interopRequireDefault(_ChartSlice);
+var _WithLoadingProgress = _interopRequireDefault(require("./WithLoadingProgress"));
 
-var _BrowserSlice = require('./BrowserSlice');
-
-var _BrowserSlice2 = _interopRequireDefault(_BrowserSlice);
-
-var _ComponentSlice = require('./ComponentSlice');
-
-var _ComponentSlice2 = _interopRequireDefault(_ComponentSlice);
-
-var _SettingSlice = require('./SettingSlice');
-
-var _SettingSlice2 = _interopRequireDefault(_SettingSlice);
-
-var _WatchListSlice = require('../watch-list/WatchListSlice');
-
-var _WatchListSlice2 = _interopRequireDefault(_WatchListSlice);
-
-var _WithLimitRemaining = require('./WithLimitRemaining');
-
-var _WithLimitRemaining2 = _interopRequireDefault(_WithLimitRemaining);
-
-var _WithLoadingProgress = require('./WithLoadingProgress');
-
-var _WithLoadingProgress2 = _interopRequireDefault(_WithLoadingProgress);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
-  listenables: [].concat((0, _toConsumableArray3.default)(_Actions2.default)),
-
+var ChartStore = _reflux["default"].createStore((0, _extends2["default"])({
+  listenables: [].concat(_Actions["default"]),
   init: function init() {
     this.initWatchList();
-    this.listenLoadingProgress(_ChartActions2.default.fnOnChangeStore);
+    this.listenLoadingProgress(_ChartActions["default"].fnOnChangeStore);
   }
-}, _ChartSlice2.default, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default, _WithLoadingProgress2.default));
+}, _ChartSlice["default"], {}, _BrowserSlice["default"], {}, _ComponentSlice["default"], {}, _SettingSlice["default"], {}, _WatchListSlice["default"], {}, _WithLimitRemaining["default"], {}, _WithLoadingProgress["default"]));
 
-exports.default = ChartStore;
+var _default = ChartStore;
+exports["default"] = _default;
 //# sourceMappingURL=ChartStore.js.map

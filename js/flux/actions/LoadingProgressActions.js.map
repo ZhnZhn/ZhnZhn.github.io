@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\LoadingProgressActions.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\LoadingProgressActions.js",
- "sourceRoot": "",
- "names": [
-  "T",
-  "LOADING",
-  "LOADING_COMPLETE",
-  "LAODING_FAILED"
- ],
- "mappings": ";;;;;AACO,IAAMA,gBAAI;AACfC,WAAS,iBADM;AAEfC,oBAAkB,yBAFH;AAGfC,kBAAgB;AAHD,CAAV"
-}
+{"version":3,"sources":["../../../src/flux/actions/LoadingProgressActions.js"],"names":["T","LOADING","LOADING_COMPLETE","LAODING_FAILED"],"mappings":";;;;AACO,IAAMA,CAAC,GAAG;AACfC,EAAAA,OAAO,EAAE,iBADM;AAEfC,EAAAA,gBAAgB,EAAE,yBAFH;AAGfC,EAAAA,cAAc,EAAE;AAHD,CAAV","sourcesContent":["\r\nexport const T = {\r\n  LOADING: 'loadingProgress',\r\n  LOADING_COMPLETE: 'loadingProgressComplete',\r\n  LAODING_FAILED: 'loadingProgressFailed'\r\n};\r\n"],"file":"LoadingProgressActions.js"}

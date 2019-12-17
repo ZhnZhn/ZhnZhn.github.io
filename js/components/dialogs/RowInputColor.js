@@ -1,54 +1,27 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _Model = _interopRequireDefault(require("../../constants/Model"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp;
 //import PropTypes from "prop-types";
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Model = require('../../constants/Model');
-
-var _Model2 = _interopRequireDefault(_Model);
-
-var _InputText = require('../zhn/InputText');
-
-var _InputText2 = _interopRequireDefault(_InputText);
-
-var _CellColor = require('../zhn-moleculs/CellColor');
-
-var _CellColor2 = _interopRequireDefault(_CellColor);
-
-var _ModalPalette = require('../zhn-moleculs/ModalPalette');
-
-var _ModalPalette2 = _interopRequireDefault(_ModalPalette);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var S = {
   ROOT: {
     paddingTop: 6,
@@ -79,17 +52,32 @@ var S = {
   }
 };
 
-var RowInputColor = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(RowInputColor, _Component);
+var RowInputColor =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(RowInputColor, _Component);
 
+  /*
+  static propTypes = {
+    styleRoot: PropTypes.object,
+    styleCaption: PropTypes.object,
+    styleInput: PropTypes.object,
+    caption: PropTypes.string,
+    initValue: PropTypes.string,
+    onEnter: PropTypes.func
+  }
+  */
   function RowInputColor(props) {
-    (0, _classCallCheck3.default)(this, RowInputColor);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (RowInputColor.__proto__ || Object.getPrototypeOf(RowInputColor)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._hEnter = function (value) {
       _this.props.onEnter(value);
-      _this.setState({ value: value });
+
+      _this.setState({
+        value: value
+      });
     };
 
     _this._hRegCellColor = function (node) {
@@ -107,11 +95,12 @@ var RowInputColor = (_temp = _class = function (_Component) {
     };
 
     _this._hClosePalette = function (event) {
-      _this.setState({ isShowPallete: false });
+      _this.setState({
+        isShowPallete: false
+      });
     };
 
     var initValue = props.initValue;
-
     _this.state = {
       initValue: initValue,
       value: initValue,
@@ -119,78 +108,60 @@ var RowInputColor = (_temp = _class = function (_Component) {
     };
     return _this;
   }
-  /*
-  static propTypes = {
-    styleRoot: PropTypes.object,
-    styleCaption: PropTypes.object,
-    styleInput: PropTypes.object,
-    caption: PropTypes.string,
-    initValue: PropTypes.string,
-    onEnter: PropTypes.func
-  }
-  */
 
-  (0, _createClass3.default)(RowInputColor, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          styleRoot = _props.styleRoot,
-          styleCaption = _props.styleCaption,
-          styleInput = _props.styleInput,
-          caption = _props.caption,
-          _state = this.state,
-          isShowPallete = _state.isShowPallete,
-          value = _state.value,
-          _caption = caption.indexOf(':') !== -1 ? caption : caption + ':',
-          _bgColor = { backgroundColor: value };
+  RowInputColor.getDerivedStateFromProps = function getDerivedStateFromProps(_ref, state) {
+    var initValue = _ref.initValue;
+    return initValue !== state.initValue ? {
+      initValue: initValue,
+      value: initValue
+    } : null;
+  };
 
-      return _react2.default.createElement(
-        'div',
-        { style: (0, _extends3.default)({}, S.ROOT, styleRoot) },
-        _react2.default.createElement(
-          'label',
-          null,
-          _react2.default.createElement(
-            'span',
-            { style: (0, _extends3.default)({}, S.CAPTION, styleCaption) },
-            _caption
-          ),
-          _react2.default.createElement(_InputText2.default, {
-            style: (0, _extends3.default)({}, S.INPUT_TEXT, styleInput),
-            initValue: value,
-            maxLength: 20,
-            onEnter: this._hEnter
-          })
-        ),
-        _react2.default.createElement(
-          _CellColor2.default,
-          {
-            style: (0, _extends3.default)({}, S.COLOR, _bgColor),
-            onReg: this._hRegCellColor,
-            onClick: this._hClickPallete
-          },
-          _react2.default.createElement(_ModalPalette2.default, {
-            isShow: isShowPallete,
-            model: _Model2.default.palette,
-            onClickCell: this._hEnter,
-            onClose: this._hClosePalette
-          })
-        )
-      );
-    }
-  }], [{
-    key: 'getDerivedStateFromProps',
-    value: function getDerivedStateFromProps(_ref, state) {
-      var initValue = _ref.initValue;
+  var _proto = RowInputColor.prototype;
 
-      return initValue !== state.initValue ? { initValue: initValue, value: initValue } : null;
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        styleRoot = _this$props.styleRoot,
+        styleCaption = _this$props.styleCaption,
+        styleInput = _this$props.styleInput,
+        caption = _this$props.caption,
+        _this$state = this.state,
+        isShowPallete = _this$state.isShowPallete,
+        value = _this$state.value,
+        _caption = caption.indexOf(':') !== -1 ? caption : caption + ":",
+        _bgColor = {
+      backgroundColor: value
+    };
+
+    return _react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.ROOT, {}, styleRoot)
+    }, _react["default"].createElement("label", null, _react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.CAPTION, {}, styleCaption)
+    }, _caption), _react["default"].createElement(_InputText["default"], {
+      style: (0, _extends2["default"])({}, S.INPUT_TEXT, {}, styleInput),
+      initValue: value,
+      maxLength: 20,
+      onEnter: this._hEnter
+    })), _react["default"].createElement(_CellColor["default"], {
+      style: (0, _extends2["default"])({}, S.COLOR, {}, _bgColor),
+      onReg: this._hRegCellColor,
+      onClick: this._hClickPallete
+    }, _react["default"].createElement(_ModalPalette["default"], {
+      isShow: isShowPallete,
+      model: _Model["default"].palette,
+      onClickCell: this._hEnter,
+      onClose: this._hClosePalette
+    })));
+  };
+
   return RowInputColor;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+RowInputColor.defaultProps = {
   caption: 'Color:',
   initValue: '#90ed7d',
   onEnter: function onEnter() {}
-}, _temp);
-exports.default = RowInputColor;
+};
+var _default = RowInputColor;
+exports["default"] = _default;
 //# sourceMappingURL=RowInputColor.js.map

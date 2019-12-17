@@ -1,37 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireWildcard(require("react"));
 
 //import PropTypes from "prop-types";
-
 var CL = "bt-sub-item";
-
 var S = {
   ACTIVE: {
     fontWeight: 'bold'
@@ -42,20 +23,31 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var SubMenuItem = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(SubMenuItem, _Component);
+var SubMenuItem =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(SubMenuItem, _Component);
 
+  /*
+  static propTypes = {
+    caption: PropTypes.string,
+    initialIsActive: PropTypes.bool,
+    isNotActive: PropTypes.bool,
+    onClick: PropTypes.func,
+    onClose: PropTypes.func
+  }
+  */
   function SubMenuItem(props) {
-    (0, _classCallCheck3.default)(this, SubMenuItem);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (SubMenuItem.__proto__ || Object.getPrototypeOf(SubMenuItem)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._hClick = function () {
       var _this$props = _this.props,
           onClick = _this$props.onClick,
           onClose = _this$props.onClose;
-
       onClick();
+
       _this.setState(function (prev) {
         return {
           isActive: !prev.isActive
@@ -72,47 +64,35 @@ var SubMenuItem = (_temp = _class = function (_Component) {
     };
     return _this;
   }
-  /*
-  static propTypes = {
-    caption: PropTypes.string,
-    initialIsActive: PropTypes.bool,
-    isNotActive: PropTypes.bool,
-    onClick: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
 
+  var _proto = SubMenuItem.prototype;
 
-  (0, _createClass3.default)(SubMenuItem, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          caption = _props.caption,
-          isNotActive = _props.isNotActive,
-          onClick = _props.onClick;
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        caption = _this$props2.caption,
+        isNotActive = _this$props2.isNotActive,
+        onClick = _this$props2.onClick;
 
-      if (!_isFn(onClick)) {
-        return null;
-      }
-
-      var isActive = this.state.isActive,
-          _style = isActive && !isNotActive ? S.ACTIVE : null;
-
-
-      return _react2.default.createElement(
-        'button',
-        {
-          className: CL,
-          style: _style,
-          onClick: this._hClick
-        },
-        caption
-      );
+    if (!_isFn(onClick)) {
+      return null;
     }
-  }]);
+
+    var isActive = this.state.isActive,
+        _style = isActive && !isNotActive ? S.ACTIVE : null;
+
+    return _react["default"].createElement("button", {
+      className: CL,
+      style: _style,
+      onClick: this._hClick
+    }, caption);
+  };
+
   return SubMenuItem;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+SubMenuItem.defaultProps = {
   initialIsActive: false
-}, _temp);
-exports.default = SubMenuItem;
+};
+var _default = SubMenuItem;
+exports["default"] = _default;
 //# sourceMappingURL=SubMenuItem.js.map

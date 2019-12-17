@@ -1,31 +1,27 @@
-'use strict';
+"use strict";
 
-var _DateUtils = require('../DateUtils');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
+var _DateUtils = _interopRequireDefault(require("../DateUtils"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var isYmd = _DateUtils2.default.isYmd,
-    isYmdOrEmpty = _DateUtils2.default.isYmdOrEmpty,
-    dmyToUTC = _DateUtils2.default.dmyToUTC,
-    mlsToDmy = _DateUtils2.default.mlsToDmy,
-    isDmy = _DateUtils2.default.isDmy,
-    getUTCTime = _DateUtils2.default.getUTCTime,
-    addToDmy = _DateUtils2.default.addToDmy;
-
+var isYmd = _DateUtils["default"].isYmd,
+    isYmdOrEmpty = _DateUtils["default"].isYmdOrEmpty,
+    dmyToUTC = _DateUtils["default"].dmyToUTC,
+    mlsToDmy = _DateUtils["default"].mlsToDmy,
+    isDmy = _DateUtils["default"].isDmy,
+    getUTCTime = _DateUtils["default"].getUTCTime,
+    addToDmy = _DateUtils["default"].addToDmy;
 
 var _compose = function _compose(fns) {
   return fns.reduce(function (f, g) {
     return function () {
-      return f(g.apply(undefined, arguments));
+      return f(g.apply(void 0, arguments));
     };
   });
 };
 
 describe('isYmd YYYY-MM-DD', function () {
   var fn = isYmd;
-
   test('should return true for valid YYYY-MM-DD', function () {
     expect(fn("2010-01-10")).toBe(true);
     expect(fn("2010-10-01")).toBe(true);
@@ -40,7 +36,6 @@ describe('isYmd YYYY-MM-DD', function () {
   });
   test('should year be not future', function () {
     expect(fn('2030-01-01')).toBe(false);
-
     expect(fn('2030-01-01', 1)).toBe(false);
     expect(fn('2030-01-01', 2)).toBe(false);
     expect(fn('2030-01-01', 3)).toBe(false);
@@ -53,14 +48,12 @@ describe('isYmd YYYY-MM-DD', function () {
     expect(fn(undefined)).toBe(false);
   });
 });
-
 describe('isYmdOrEmty YYYY-MM-DD', function () {
   var fn = isYmdOrEmpty;
   test('should return is valid date or empty', function () {
     expect(fn('')).toBe(true);
     expect(fn("2010-01-10")).toBe(true);
     expect(fn("2010-10-01")).toBe(true);
-
     expect(fn(null)).toBe(false);
     expect(fn({})).toBe(false);
     expect(fn([])).toBe(false);
@@ -69,7 +62,6 @@ describe('isYmdOrEmty YYYY-MM-DD', function () {
     expect(fn("2010-40-40")).toBe(false);
   });
 });
-
 describe('dmyToUTC', function () {
   var fn = dmyToUTC;
   test('should return UTC from DD-MM-YYYY', function () {
@@ -83,7 +75,6 @@ describe('dmyToUTC', function () {
     expect(fn(undefined)).toBe(0);
   });
 });
-
 describe('formatTo', function () {
   var fn = mlsToDmy;
   var EMPTY = '';
@@ -102,7 +93,6 @@ describe('formatTo', function () {
     expect(fn(function () {})).toBe(EMPTY);
   });
 });
-
 describe('isDmy', function () {
   var fn = isDmy;
   test('should return true for str in format DD-MM-YYY', function () {
@@ -125,7 +115,6 @@ describe('isDmy', function () {
     expect(fn(fn)).toBe(false);
   });
 });
-
 describe('getUTCTime', function () {
   var fn = getUTCTime;
   test('should return correct str from ms', function () {
@@ -140,12 +129,12 @@ describe('getUTCTime', function () {
     expect(fn({})).toBe('');
   });
 });
-
 describe('addToDmy', function () {
   var fn = addToDmy,
       _fn = _compose([mlsToDmy, function (date) {
     return date.getTime();
   }, addToDmy]);
+
   test('should return Date instance', function () {
     expect(fn('01-02-2019', -1)).toBeInstanceOf(Date);
     expect(fn('01-02-2019', 1)).toBeInstanceOf(Date);

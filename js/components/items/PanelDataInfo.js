@@ -1,49 +1,25 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNativeLink"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _InfoPart = _interopRequireDefault(require("../zhn/InfoPart"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _RouterNativeLink = require('../native-links/RouterNativeLink');
-
-var _RouterNativeLink2 = _interopRequireDefault(_RouterNativeLink);
-
-var _ButtonTab = require('../zhn/ButtonTab');
-
-var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
-
-var _InfoPart = require('../zhn/InfoPart');
-
-var _InfoPart2 = _interopRequireDefault(_InfoPart);
-
-var _OpenClose = require('../zhn/OpenClose2');
-
-var _OpenClose2 = _interopRequireDefault(_OpenClose);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose2"));
 
 var CL_DESCR = 'info__descr';
-
 var S = {
   ROOT_SHOW: {
     position: 'relative',
@@ -84,119 +60,120 @@ var S = {
   }
 };
 
-var _isWithoutLink = function _isWithoutLink() {
-  var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var _item$id = item.id,
-      id = _item$id === undefined ? '' : _item$id;
+var _isWithoutLink = function _isWithoutLink(item) {
+  if (item === void 0) {
+    item = {};
+  }
 
+  var _item = item,
+      _item$id = _item.id,
+      id = _item$id === void 0 ? '' : _item$id;
   return id.split('/')[0] === 'LSE' ? true : false;
 };
 
-var PanelDataInfo = function (_Component) {
-  (0, _inherits3.default)(PanelDataInfo, _Component);
+var PanelDataInfo =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(PanelDataInfo, _Component);
 
   function PanelDataInfo() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, PanelDataInfo);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = PanelDataInfo.__proto__ || Object.getPrototypeOf(PanelDataInfo)).call.apply(_ref, [this].concat(args))), _this), _this._renderQuandlLink = function (dbCode, dsCode) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._renderQuandlLink = function (dbCode, dsCode) {
       if (!dbCode || !dsCode) {
         return null;
       } else {
-        var Comp = _RouterNativeLink2.default['QUANDL'];
-        return _react2.default.createElement(Comp, { dbCode: dbCode, dsCode: dsCode });
+        var Comp = _RouterNativeLink["default"]['QUANDL'];
+        return _react["default"].createElement(Comp, {
+          dbCode: dbCode,
+          dsCode: dsCode
+        });
       }
-    }, _this._renderNativeLink = function (linkFn, item) {
+    };
+
+    _this._renderNativeLink = function (linkFn, item) {
       if (_isWithoutLink(item)) {
         return null;
       }
-      var Comp = _RouterNativeLink2.default[linkFn];
-      return typeof Comp !== 'undefined' ? _react2.default.createElement(Comp, { item: item }) : null;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+
+      var Comp = _RouterNativeLink["default"][linkFn];
+      return typeof Comp !== 'undefined' ? _react["default"].createElement(Comp, {
+        item: item
+      }) : null;
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(PanelDataInfo, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          _props$info = _props.info,
-          info = _props$info === undefined ? {} : _props$info,
-          _props$zhInfo = _props.zhInfo,
-          zhInfo = _props$zhInfo === undefined ? {} : _props$zhInfo,
-          onClickChart = _props.onClickChart,
-          name = info.name,
-          toDate = info.toDate,
-          fromDate = info.fromDate,
-          frequency = info.frequency,
-          database_code = info.database_code,
-          dataset_code = info.dataset_code,
-          description = info.description,
-          item = zhInfo.item,
-          linkFn = zhInfo.linkFn,
-          _rootStyle = isShow ? S.ROOT_SHOW : S.ROOT_HIDE,
-          _isDescr = description ? true : false,
-          _isDescrClose = _isDescr && description.length > 200 ? true : false;
+  var _proto = PanelDataInfo.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        { style: _rootStyle },
-        _react2.default.createElement(_ButtonTab2.default, {
-          caption: 'Chart',
-          onClick: onClickChart
-        }),
-        _react2.default.createElement(_InfoPart2.default, {
-          text: name,
-          styleText: S.INFO_TEXT
-        }),
-        _react2.default.createElement(_InfoPart2.default, {
-          caption: 'From Date:',
-          text: fromDate,
-          styleCaption: S.INFO_CAPTION,
-          styleText: S.INFO_TEXT
-        }),
-        _react2.default.createElement(_InfoPart2.default, {
-          caption: 'To Date:',
-          text: toDate,
-          rootStyle: S.INFO_ROOT,
-          styleCaption: S.INFO_CAPTION,
-          styleText: S.INFO_TEXT
-        }),
-        _react2.default.createElement(_InfoPart2.default, {
-          caption: 'Frequency:',
-          text: frequency,
-          styleCaption: S.INFO_CAPTION,
-          styleText: S.INFO_TEXT
-        }),
-        this._renderQuandlLink(database_code, dataset_code),
-        _isDescr && _react2.default.createElement(
-          _OpenClose2.default,
-          {
-            caption: 'Description',
-            isClose: _isDescrClose,
-            style: S.DESCR_OC
-          },
-          _react2.default.createElement(_InfoPart2.default, {
-            text: description,
-            isHtml: true,
-            classText: CL_DESCR,
-            rootStyle: S.DESCR_ROOT,
-            styleText: S.DESCR_TEXT
-          })
-        ),
-        this._renderNativeLink(linkFn, item)
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShow = _this$props.isShow,
+        _this$props$info = _this$props.info,
+        info = _this$props$info === void 0 ? {} : _this$props$info,
+        _this$props$zhInfo = _this$props.zhInfo,
+        zhInfo = _this$props$zhInfo === void 0 ? {} : _this$props$zhInfo,
+        onClickChart = _this$props.onClickChart,
+        name = info.name,
+        toDate = info.toDate,
+        fromDate = info.fromDate,
+        frequency = info.frequency,
+        database_code = info.database_code,
+        dataset_code = info.dataset_code,
+        description = info.description,
+        item = zhInfo.item,
+        linkFn = zhInfo.linkFn,
+        _rootStyle = isShow ? S.ROOT_SHOW : S.ROOT_HIDE,
+        _isDescr = description ? true : false,
+        _isDescrClose = _isDescr && description.length > 200 ? true : false;
+
+    return _react["default"].createElement("div", {
+      style: _rootStyle
+    }, _react["default"].createElement(_ButtonTab["default"], {
+      caption: "Chart",
+      onClick: onClickChart
+    }), _react["default"].createElement(_InfoPart["default"], {
+      text: name,
+      styleText: S.INFO_TEXT
+    }), _react["default"].createElement(_InfoPart["default"], {
+      caption: "From Date:",
+      text: fromDate,
+      styleCaption: S.INFO_CAPTION,
+      styleText: S.INFO_TEXT
+    }), _react["default"].createElement(_InfoPart["default"], {
+      caption: "To Date:",
+      text: toDate,
+      rootStyle: S.INFO_ROOT,
+      styleCaption: S.INFO_CAPTION,
+      styleText: S.INFO_TEXT
+    }), _react["default"].createElement(_InfoPart["default"], {
+      caption: "Frequency:",
+      text: frequency,
+      styleCaption: S.INFO_CAPTION,
+      styleText: S.INFO_TEXT
+    }), this._renderQuandlLink(database_code, dataset_code), _isDescr && _react["default"].createElement(_OpenClose["default"], {
+      caption: "Description",
+      isClose: _isDescrClose,
+      style: S.DESCR_OC
+    }, _react["default"].createElement(_InfoPart["default"], {
+      text: description,
+      isHtml: true,
+      classText: CL_DESCR,
+      rootStyle: S.DESCR_ROOT,
+      styleText: S.DESCR_TEXT
+    })), this._renderNativeLink(linkFn, item));
+  };
+
   return PanelDataInfo;
 }(_react.Component);
 
-exports.default = PanelDataInfo;
+var _default = PanelDataInfo;
+exports["default"] = _default;
 //# sourceMappingURL=PanelDataInfo.js.map

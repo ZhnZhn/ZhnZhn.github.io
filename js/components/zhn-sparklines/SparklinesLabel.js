@@ -1,28 +1,20 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireDefault(require("react"));
 
 var SparklinesLabel = function SparklinesLabel(_ref) {
   var title = _ref.title,
-      rest = (0, _objectWithoutProperties3.default)(_ref, ['title']);
-  return _react2.default.createElement(
-    'text',
-    rest,
-    title
-  );
+      rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["title"]);
+  return _react["default"].createElement("text", rest, title);
 };
 
-exports.default = SparklinesLabel;
+var _default = SparklinesLabel;
+exports["default"] = _default;
 //# sourceMappingURL=SparklinesLabel.js.map

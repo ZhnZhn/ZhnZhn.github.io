@@ -1,63 +1,49 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
-var _ModalPopup = require('../zhn-moleculs/ModalPopup');
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _Modal = require('./Modal.Style');
-
-var _Modal2 = _interopRequireDefault(_Modal);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Modal = _interopRequireDefault(require("./Modal.Style"));
 
 var ModalOptions = function ModalOptions(_ref) {
   var isShow = _ref.isShow,
       style = _ref.style,
       _ref$className = _ref.className,
-      className = _ref$className === undefined ? _Modal2.default.CL : _ref$className,
+      className = _ref$className === void 0 ? _Modal["default"].CL : _ref$className,
       toggleOption = _ref.toggleOption,
       onClose = _ref.onClose;
 
   var _toggleZoomMinMax = toggleOption.bind(null, 'isNotZoomToMinMax'),
       _toggleFilterZero = toggleOption.bind(null, 'isFilterZero');
-  return _react2.default.createElement(
-    _ModalPopup2.default,
-    {
-      isShow: isShow,
-      style: (0, _extends3.default)({}, _Modal2.default.ROOT, style),
-      className: className,
-      onClose: onClose
-    },
-    _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-      initValue: false,
-      rootStyle: _Modal2.default.ROW_CB,
-      caption: 'Not Zoom to Min-Max',
-      onToggle: _toggleZoomMinMax
-    }),
-    _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-      initValue: false,
-      rootStyle: _Modal2.default.ROW_CB,
-      caption: 'Filter Zero Values',
-      onToggle: _toggleFilterZero
-    })
-  );
+
+  return _react["default"].createElement(_ModalPopup["default"], {
+    isShow: isShow,
+    style: (0, _extends2["default"])({}, _Modal["default"].ROOT, {}, style),
+    className: className,
+    onClose: onClose
+  }, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    initValue: false,
+    rootStyle: _Modal["default"].ROW_CB,
+    caption: "Not Zoom to Min-Max",
+    onToggle: _toggleZoomMinMax
+  }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    initValue: false,
+    rootStyle: _Modal["default"].ROW_CB,
+    caption: "Filter Zero Values",
+    onToggle: _toggleFilterZero
+  }));
 };
 
-exports.default = ModalOptions;
+var _default = ModalOptions;
+exports["default"] = _default;
 //# sourceMappingURL=ModalOptions.js.map

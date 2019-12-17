@@ -1,32 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
-var _DateUtils = require('../../utils/DateUtils');
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
-var _AdapterFn = require('../AdapterFn');
-
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var getUTCTime = _DateUtils2.default.getUTCTime;
-var numberFormat = _AdapterFn2.default.numberFormat;
-
-
+var getUTCTime = _DateUtils["default"].getUTCTime;
+var numberFormat = _AdapterFn["default"].numberFormat;
 var HEADERS = [{
   name: 'Rank',
   pn: 'rank',
   isToN: true,
-  style: { textAlign: 'center' }
+  style: {
+    textAlign: 'center'
+  }
 }, {
   name: 'Coin',
   pn: 'symbol',
@@ -70,20 +61,25 @@ var _getCellValue = function _getCellValue(r, h) {
   var pn = h.pn,
       isToN = h.isToN,
       isToFixed = h.isToFixed;
-
   return isToN ? isToFixed ? parseFloat(parseFloat(r[pn]).toFixed(0)) : parseFloat(r[pn]) : r[pn];
 };
 
-var _toRows = function _toRows() {
-  var headers = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var rows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+var _toRows = function _toRows(headers, rows) {
+  if (headers === void 0) {
+    headers = [];
+  }
 
-  var _rows = [].concat((0, _toConsumableArray3.default)(rows)).map(function (r) {
+  if (rows === void 0) {
+    rows = [];
+  }
+
+  var _rows = [].concat(rows).map(function (r) {
     headers.forEach(function (h) {
       r[h.pn] = _getCellValue(r, h);
     });
     return r;
   });
+
   return _rows;
 };
 
@@ -95,7 +91,8 @@ var _crUpdatedTime = function _crUpdatedTime(json) {
       _maxMs = Math.min.apply(Math, _seconds) * 1000,
       _fromTime = getUTCTime(_minMs),
       _toTime = getUTCTime(_maxMs);
-  return _fromTime !== _toTime ? _fromTime + ' - ' + _toTime : _fromTime;
+
+  return _fromTime !== _toTime ? _fromTime + " - " + _toTime : _fromTime;
 };
 
 var _crTitle = function _crTitle(_ref, json) {
@@ -105,19 +102,21 @@ var _crTitle = function _crTitle(_ref, json) {
   var _two = parseFloat(two) - 1,
       _one = parseFloat(one) + 1,
       _updatedTime = _crUpdatedTime(json);
-  return _one + ' - ' + (_one + _two) + ': Values in USD: Updated ' + _updatedTime + ' UTC';
+
+  return _one + " - " + (_one + _two) + ": Values in USD: Updated " + _updatedTime + " UTC";
 };
 
 var BASE_URL = 'https://coinmarketcap.com/currencies/';
+
 var valueToHref = function valueToHref(id) {
-  return '' + BASE_URL + id;
+  return "" + BASE_URL + id;
 };
 
 var CmcAdapter = {
   toConfig: function toConfig(json, option) {
     var one = option.one,
         two = option.two,
-        _id = one + '_' + two,
+        _id = one + "_" + two,
         config = {
       id: _id,
       title: _crTitle(option, json),
@@ -129,16 +128,19 @@ var CmcAdapter = {
       rows: _toRows(HEADERS, json),
       zhCompType: 'TABLE',
       zhConfig: {
-        id: _id, key: _id
+        id: _id,
+        key: _id
       }
     };
 
-    return { config: config };
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(json, option) {
     throw new Error('ZH_1000');
   }
 };
-
-exports.default = CmcAdapter;
+var _default = CmcAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=CmcAdapter.js.map

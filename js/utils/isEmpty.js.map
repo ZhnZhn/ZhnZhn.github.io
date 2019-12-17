@@ -1,15 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../src/utils/isEmpty.js"
- ],
- "file": "../../src/utils/isEmpty.js",
- "names": [
-  "isEmpty",
-  "obj",
-  "Object",
-  "keys",
-  "length"
- ],
- "mappings": ";;;;;;AACA,IAAMA,UAAU,SAAVA,OAAU,CAACC,GAAD;AAAA,SACdA,OAAO,IAAP,IAAeC,OAAOC,IAAP,CAAYF,GAAZ,EAAiBG,MAAjB,KAA4B,CAD7B;AAAA,CAAhB;;kBAGeJ,O"
-}
+{"version":3,"sources":["../../src/utils/isEmpty.js"],"names":["isEmpty","obj","Object","keys","length"],"mappings":";;;;;AACA,IAAMA,OAAO,GAAG,SAAVA,OAAU,CAACC,GAAD;AAAA,SACdA,GAAG,IAAI,IAAP,IAAeC,MAAM,CAACC,IAAP,CAAYF,GAAZ,EAAiBG,MAAjB,KAA4B,CAD7B;AAAA,CAAhB;;eAGeJ,O","sourcesContent":["\r\nconst isEmpty = (obj) =>\r\n  obj == null || Object.keys(obj).length === 0;\r\n\r\nexport default isEmpty\r\n"],"file":"isEmpty.js"}

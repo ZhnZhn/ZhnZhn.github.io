@@ -1,31 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+var _Type = require("../../../constants/Type");
 
-var _Type = require('../../../constants/Type');
+var _ComponentActions = require("../../actions/ComponentActions");
 
-var _ComponentActions = require('../../actions/ComponentActions');
+var _Factory = _interopRequireDefault(require("../../logic/Factory"));
 
-var _Factory = require('../../logic/Factory');
+var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
 
-var _Factory2 = _interopRequireDefault(_Factory);
-
-var _fCompareBy = require('./fCompareBy');
-
-var _fCompareBy2 = _interopRequireDefault(_fCompareBy);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var createChartContainer = _Factory2.default.createChartContainer;
-
-
+var createChartContainer = _Factory["default"].createChartContainer;
 var _isArr = Array.isArray;
+
 var _isStr = function _isStr(str) {
   return typeof str === 'string';
 };
@@ -37,7 +27,10 @@ var _getSlice = function _getSlice(slice, chartType) {
       _ref = chartSlice || {},
       configs = _ref.configs;
 
-  return { chartSlice: chartSlice, configs: configs };
+  return {
+    chartSlice: chartSlice,
+    configs: configs
+  };
 };
 
 var _notConfById = function _notConfById(id) {
@@ -45,6 +38,7 @@ var _notConfById = function _notConfById(id) {
     return c.zhConfig.id !== id;
   };
 };
+
 var _confById = function _confById(id) {
   return function (c) {
     return c.zhConfig.id === id;
@@ -74,13 +68,16 @@ var ChartLogic = {
     if (!chartSlice) {
       return false;
     }
+
     var _max = configs.length;
     var i = 0;
+
     for (; i < _max; i++) {
       if (configs[i].zhConfig.key === key) {
         return true;
       }
     }
+
     return false;
   },
   loadConfig: function loadConfig(slice, config, option) {
@@ -92,9 +89,12 @@ var ChartLogic = {
     if (chartSlice) {
       configs.unshift(config);
       chartSlice.isShow = true;
-      return { chartSlice: chartSlice };
+      return {
+        chartSlice: chartSlice
+      };
     } else {
       ChartLogic._initChartSlice(slice, chartType, config);
+
       return {
         Comp: createChartContainer(option)
       };
@@ -106,11 +106,18 @@ var ChartLogic = {
 
     if (chartSlice) {
       chartSlice.isShow = true;
-      return { chartSlice: chartSlice };
+      return {
+        chartSlice: chartSlice
+      };
     } else {
       ChartLogic._initChartSlice(slice, chartType);
+
       return {
-        Comp: createChartContainer({ chartType: chartType, browserType: browserType, conf: conf })
+        Comp: createChartContainer({
+          chartType: chartType,
+          browserType: browserType,
+          conf: conf
+        })
       };
     }
   },
@@ -120,7 +127,6 @@ var ChartLogic = {
         configs = _getSlice5.configs;
 
     chartSlice.configs = configs.filter(_notConfById(id));
-
     return {
       chartSlice: chartSlice,
       isRemoved: configs.length > chartSlice.configs.length
@@ -134,7 +140,7 @@ var ChartLogic = {
 
     if (_conf) {
       var withoutArr = configs.filter(_notConfById(id));
-      chartSlice.configs = [_conf].concat((0, _toConsumableArray3.default)(withoutArr));
+      chartSlice.configs = [_conf].concat(withoutArr);
     }
 
     return chartSlice;
@@ -145,14 +151,16 @@ var ChartLogic = {
         configs = _getSlice7.configs;
 
     if (by) {
-      configs.sort((0, _fCompareBy2.default)(by));
+      configs.sort((0, _fCompareBy["default"])(by));
     } else {
       configs.reverse();
     }
+
     return chartSlice;
   },
   removeAll: function removeAll(slice, chartType) {
     var _slice = slice[chartType] || {};
+
     _slice.configs = [];
     return _slice;
   },
@@ -166,6 +174,7 @@ var ChartLogic = {
   },
   scanPostAdded: function scanPostAdded(store, option) {
     var chart = store.getActiveChart();
+
     if (chart && _isSecondDotCase(chart.series, option)) {
       store.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
         modalDialogType: _Type.ModalDialog.COLUMN_RANGE,
@@ -176,10 +185,9 @@ var ChartLogic = {
   setAlertItemIdTo: function setAlertItemIdTo(option) {
     var alertItemId = option.alertItemId,
         value = option.value;
-
     option.alertItemId = _isStr(alertItemId) ? alertItemId : _isStr(value) ? value : void 0;
   }
 };
-
-exports.default = ChartLogic;
+var _default = ChartLogic;
+exports["default"] = _default;
 //# sourceMappingURL=ChartLogic.js.map

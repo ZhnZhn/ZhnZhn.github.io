@@ -1,12 +1,13 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
-exports.default = function (data) {
-    return data.sort(function (a, b) {
-        return a - b;
-    })[Math.floor(data.length / 2)];
+var _default = function _default(data) {
+  return data.sort(function (a, b) {
+    return a - b;
+  })[Math.floor(data.length / 2)];
 };
+
+exports["default"] = _default;
 //# sourceMappingURL=median.js.map

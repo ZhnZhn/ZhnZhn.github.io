@@ -1,52 +1,29 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _Button = _interopRequireDefault(require("./Button"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _MathCaptcha = _interopRequireDefault(require("../zhn-moleculs/MathCaptcha"));
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _ModalDialog = require('../zhn-moleculs/ModalDialog');
-
-var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
-
-var _MathCaptcha = require('../zhn-moleculs/MathCaptcha');
-
-var _MathCaptcha2 = _interopRequireDefault(_MathCaptcha);
-
-var _FactoryAction = require('../../flux/actions/FactoryAction');
-
-var _FactoryAction2 = _interopRequireDefault(_FactoryAction);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _FactoryAction = _interopRequireDefault(require("../../flux/actions/FactoryAction"));
 
 //import PropTypes from "prop-types";
-
 var MSG_PREFIX = "Would you like load item";
 var MSG_SUFFIX = "from url?";
-
 var S = {
   MODAL: {
     position: 'static',
@@ -78,8 +55,10 @@ var S = {
   }
 };
 
-var AskDialog = function (_Component) {
-  (0, _inherits3.default)(AskDialog, _Component);
+var AskDialog =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(AskDialog, _Component);
 
   /*
   static propTypes = {
@@ -93,100 +72,85 @@ var AskDialog = function (_Component) {
     onClose: PropTypes.func
   }
   */
-
   function AskDialog(props) {
-    (0, _classCallCheck3.default)(this, AskDialog);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AskDialog.__proto__ || Object.getPrototypeOf(AskDialog)).call(this));
-
-    _this._handleLoad = _this._handleLoad.bind(_this);
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
-      caption: 'Yes, Load'
-      //accessKey="s"
-      , isPrimary: true,
+    _this = _Component.call(this) || this;
+    _this._handleLoad = _this._handleLoad.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._commandButtons = [_react["default"].createElement(_Button["default"].Flat, {
+      caption: "Yes, Load" //accessKey="s"
+      ,
+      isPrimary: true,
       onClick: _this._handleLoad
-    }), _react2.default.createElement(_Button2.default.Flat, {
-      caption: 'No, Close'
-      //accessKey="c"
-      , onClick: props.onClose
+    }), _react["default"].createElement(_Button["default"].Flat, {
+      caption: "No, Close" //accessKey="c"
+      ,
+      onClick: props.onClose
     })];
     return _this;
   }
 
-  (0, _createClass3.default)(AskDialog, [{
-    key: '_handleLoad',
-    value: function _handleLoad() {
-      var _props = this.props,
-          _props$data = _props.data,
-          data = _props$data === undefined ? {} : _props$data,
-          onClose = _props.onClose,
-          _data$options = data.options,
-          options = _data$options === undefined ? {} : _data$options;
+  var _proto = AskDialog.prototype;
 
-      if (this.captchaComp.isOk()) {
-        _FactoryAction2.default.crLoadQuery(options).run();
-        onClose();
-      }
-    }
-  }, {
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-        return false;
-      }
-      return true;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
+  _proto._handleLoad = function _handleLoad() {
+    var _this$props = this.props,
+        _this$props$data = _this$props.data,
+        data = _this$props$data === void 0 ? {} : _this$props$data,
+        onClose = _this$props.onClose,
+        _data$options = data.options,
+        options = _data$options === void 0 ? {} : _data$options;
 
-      var _props2 = this.props,
-          isShow = _props2.isShow,
-          _props2$data = _props2.data,
-          data = _props2$data === undefined ? {} : _props2$data,
-          onClose = _props2.onClose,
-          _data$options2 = data.options,
-          options = _data$options2 === undefined ? {} : _data$options2,
-          _options$name = options.name,
-          name = _options$name === undefined ? '' : _options$name;
+    if (this.captchaComp.isOk()) {
+      _FactoryAction["default"].crLoadQuery(options).run();
 
-      return _react2.default.createElement(
-        _ModalDialog2.default,
-        {
-          style: S.MODAL,
-          caption: 'Confirm Load',
-          isShow: isShow,
-          commandButtons: this._commandButtons,
-          withoutClose: true,
-          onClose: onClose
-        },
-        _react2.default.createElement(
-          'div',
-          { style: S.ROOT_DIV },
-          _react2.default.createElement(
-            'p',
-            { style: S.DESCR },
-            MSG_PREFIX,
-            _react2.default.createElement(
-              'span',
-              { style: S.NAME },
-              name
-            ),
-            MSG_SUFFIX
-          ),
-          _react2.default.createElement(_MathCaptcha2.default, {
-            ref: function ref(c) {
-              return _this2.captchaComp = c;
-            },
-            rootStyle: S.CAPTCHA
-          })
-        )
-      );
+      onClose();
     }
-  }]);
+  };
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
+    }
+
+    return true;
+  };
+
+  _proto.render = function render() {
+    var _this2 = this;
+
+    var _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        _this$props2$data = _this$props2.data,
+        data = _this$props2$data === void 0 ? {} : _this$props2$data,
+        onClose = _this$props2.onClose,
+        _data$options2 = data.options,
+        options = _data$options2 === void 0 ? {} : _data$options2,
+        _options$name = options.name,
+        name = _options$name === void 0 ? '' : _options$name;
+    return _react["default"].createElement(_ModalDialog["default"], {
+      style: S.MODAL,
+      caption: "Confirm Load",
+      isShow: isShow,
+      commandButtons: this._commandButtons,
+      withoutClose: true,
+      onClose: onClose
+    }, _react["default"].createElement("div", {
+      style: S.ROOT_DIV
+    }, _react["default"].createElement("p", {
+      style: S.DESCR
+    }, MSG_PREFIX, _react["default"].createElement("span", {
+      style: S.NAME
+    }, name), MSG_SUFFIX), _react["default"].createElement(_MathCaptcha["default"], {
+      ref: function ref(c) {
+        return _this2.captchaComp = c;
+      },
+      rootStyle: S.CAPTCHA
+    })));
+  };
+
   return AskDialog;
 }(_react.Component);
 
-exports.default = AskDialog;
+var _default = AskDialog;
+exports["default"] = _default;
 //# sourceMappingURL=AskDialog.js.map

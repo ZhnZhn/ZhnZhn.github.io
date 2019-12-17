@@ -1,18 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var DATA_LABELS = {
   enabled: true,
@@ -24,20 +17,24 @@ var DATA_LABELS = {
   }
 };
 
-var zhEnableDataLables = function zhEnableDataLables() {
-  var seriaType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'columnrange';
-  var options = arguments[1];
+var zhEnableDataLables = function zhEnableDataLables(seriaType, options) {
+  if (seriaType === void 0) {
+    seriaType = 'columnrange';
+  }
 
   try {
+    var _plotOptions;
+
     this.update({
-      plotOptions: (0, _defineProperty3.default)({}, seriaType, {
-        dataLabels: (0, _extends3.default)({}, options, DATA_LABELS)
-      })
+      plotOptions: (_plotOptions = {}, _plotOptions[seriaType] = {
+        dataLabels: (0, _extends2["default"])({}, options, {}, DATA_LABELS)
+      }, _plotOptions)
     });
   } catch (err) {
     console.log(err);
   }
 };
 
-exports.default = zhEnableDataLables;
+var _default = zhEnableDataLables;
+exports["default"] = _default;
 //# sourceMappingURL=zhEnableDataLabels.js.map

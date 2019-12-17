@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireDefault(require("react"));
 
 var FAILED_COLOR = '#f44336';
 var S = {
@@ -30,33 +25,27 @@ var S = {
 };
 
 var Loading = function Loading() {
-  return _react2.default.createElement('div', {
-    'data-loader': 'circle',
+  return _react["default"].createElement("div", {
+    "data-loader": "circle",
     style: S.LOADING
   });
 };
+
 var LoadFailed = function LoadFailed(_ref) {
   var _ref$errMsg = _ref.errMsg,
-      errMsg = _ref$errMsg === undefined ? '' : _ref$errMsg;
-  return _react2.default.createElement(
-    _react2.default.Fragment,
-    null,
-    _react2.default.createElement('div', {
-      'data-loader': 'circle-failed',
-      style: (0, _extends3.default)({}, S.LOADING, S.LOAD_FAILED)
-    }),
-    _react2.default.createElement(
-      'p',
-      { style: S.ERR_MSG },
-      errMsg + ': Network error.'
-    )
-  );
+      errMsg = _ref$errMsg === void 0 ? '' : _ref$errMsg;
+  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement("div", {
+    "data-loader": "circle-failed",
+    style: (0, _extends2["default"])({}, S.LOADING, {}, S.LOAD_FAILED)
+  }), _react["default"].createElement("p", {
+    style: S.ERR_MSG
+  }, errMsg + ": Network error."));
 };
 
 var Load = {
   Loading: Loading,
   LoadFailed: LoadFailed
 };
-
-exports.default = Load;
+var _default = Load;
+exports["default"] = _default;
 //# sourceMappingURL=Load.js.map

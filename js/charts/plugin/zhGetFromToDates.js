@@ -1,15 +1,14 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var zhGetFromToDates = function zhGetFromToDates() {
-  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+var zhGetFromToDates = function zhGetFromToDates(_temp) {
+  var _ref = _temp === void 0 ? {} : _temp,
       _ref$seriaIndex = _ref.seriaIndex,
-      seriaIndex = _ref$seriaIndex === undefined ? 0 : _ref$seriaIndex,
+      seriaIndex = _ref$seriaIndex === void 0 ? 0 : _ref$seriaIndex,
       _ref$format = _ref.format,
-      format = _ref$format === undefined ? function (a) {
+      format = _ref$format === void 0 ? function (a) {
     return a;
   } : _ref$format;
 
@@ -26,5 +25,6 @@ var zhGetFromToDates = function zhGetFromToDates() {
   }
 };
 
-exports.default = zhGetFromToDates;
+var _default = zhGetFromToDates;
+exports["default"] = _default;
 //# sourceMappingURL=zhGetFromToDates.js.map

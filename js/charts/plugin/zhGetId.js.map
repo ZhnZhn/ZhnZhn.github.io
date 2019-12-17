@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/charts/plugin/zhGetId.js"
- ],
- "file": "../../../src/charts/plugin/zhGetId.js",
- "names": [
-  "zhGetId",
-  "options",
-  "zhConfig",
-  "id"
- ],
- "mappings": ";;;;;;AACA,IAAMA,UAAU,SAAVA,OAAU,GAAW;AACzB,SAAO,CAAC,CAAC,KAAKC,OAAL,IAAgB,EAAjB,EAAqBC,QAArB,IAAiC,EAAlC,EAAsCC,EAA7C;AACD,CAFD;;kBAKeH,O"
-}
+{"version":3,"sources":["../../../src/charts/plugin/zhGetId.js"],"names":["zhGetId","options","zhConfig","id"],"mappings":";;;;;AACA,IAAMA,OAAO,GAAG,SAAVA,OAAU,GAAW;AACzB,SAAO,CAAC,CAAC,KAAKC,OAAL,IAAgB,EAAjB,EAAqBC,QAArB,IAAiC,EAAlC,EAAsCC,EAA7C;AACD,CAFD;;eAKeH,O","sourcesContent":["\r\nconst zhGetId = function() {\r\n  return ((this.options || {}).zhConfig || {}).id;\r\n};\r\n\r\n\r\nexport default zhGetId\r\n"],"file":"zhGetId.js"}

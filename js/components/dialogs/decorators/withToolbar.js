@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _withSet = require('./withSet');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _withSet2 = _interopRequireDefault(_withSet);
+var _withSet = _interopRequireDefault(require("./withSet"));
 
-var _withToggle = require('./withToggle');
-
-var _withToggle2 = _interopRequireDefault(_withToggle);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _withToggle = _interopRequireDefault(require("./withToggle"));
 
 var C = {
   BT_I: {
@@ -68,10 +63,10 @@ var _addToggleBt = function _addToggleBt(_ref) {
   var inst = _ref.inst,
       buttons = _ref.buttons,
       key = _ref.key;
-
   var _toggle = inst._toggleStateByWithToggle,
       CONF = C[key];
   inst[CONF.M_T] = _toggle.bind(inst, CONF.PN);
+
   _addBtTo(buttons, CONF, inst[CONF.M_T]);
 };
 
@@ -82,15 +77,17 @@ var _addShowHideBt = function _addShowHideBt(_ref2) {
 
   var _set = inst._setStateByWithSet,
       CONF = C[key],
-      _hidePn = '_hide' + CONF.M + 'WithToolbar',
-      _showPn = '_show' + CONF.M + 'WithToolbar';
+      _hidePn = "_hide" + CONF.M + "WithToolbar",
+      _showPn = "_show" + CONF.M + "WithToolbar";
+
   inst[_hidePn] = _set.bind(inst, CONF.PN, false);
   inst[_showPn] = _set.bind(inst, CONF.PN, true);
+
   _addBtTo(buttons, CONF, inst[_showPn]);
 };
 
-var _createType2WithToolbar = function _createType2WithToolbar(props) {
-  var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+var _createType2WithToolbar = function _createType2WithToolbar(props, _temp) {
+  var _ref3 = _temp === void 0 ? {} : _temp,
       noDate = _ref3.noDate,
       noLabels = _ref3.noLabels,
       isOptions = _ref3.isOptions,
@@ -102,22 +99,48 @@ var _createType2WithToolbar = function _createType2WithToolbar(props) {
   if (_isFn(props.onClickInfo)) {
     _addBtTo(buttons, C.BT_I, this._clickInfoWithToolbar.bind(this));
   }
+
   if (!noLabels) {
-    _addToggleBt({ inst: this, buttons: buttons, key: 'BT_L' });
+    _addToggleBt({
+      inst: this,
+      buttons: buttons,
+      key: 'BT_L'
+    });
   }
+
   if (!props.noDate && !noDate) {
-    _addToggleBt({ inst: this, buttons: buttons, key: 'BT_D' });
+    _addToggleBt({
+      inst: this,
+      buttons: buttons,
+      key: 'BT_D'
+    });
   }
+
   if (isOptions) {
-    _addShowHideBt({ inst: this, buttons: buttons, key: 'BT_O' });
+    _addShowHideBt({
+      inst: this,
+      buttons: buttons,
+      key: 'BT_O'
+    });
+
     this.dialogOptions = {};
     this._toggleOptionWithToolbar = this._toggleOptionWithToolbar.bind(this);
   }
+
   if (isToggle) {
-    _addShowHideBt({ inst: this, buttons: buttons, key: 'BT_T' });
+    _addShowHideBt({
+      inst: this,
+      buttons: buttons,
+      key: 'BT_T'
+    });
   }
+
   if (isToggleOptions) {
-    _addToggleBt({ inst: this, buttons: buttons, key: 'BT_TO' });
+    _addToggleBt({
+      inst: this,
+      buttons: buttons,
+      key: 'BT_TO'
+    });
   }
 
   return buttons;
@@ -132,11 +155,12 @@ var _toggleWithToolbar = function _toggleWithToolbar() {
 };
 
 var _clickInfoWithToolbar = function _clickInfoWithToolbar() {
-  var _props = this.props,
-      descrUrl = _props.descrUrl,
-      onClickInfo = _props.onClickInfo;
-
-  onClickInfo({ descrUrl: descrUrl });
+  var _this$props = this.props,
+      descrUrl = _this$props.descrUrl,
+      onClickInfo = _this$props.onClickInfo;
+  onClickInfo({
+    descrUrl: descrUrl
+  });
 };
 
 var _toggleOptionWithToolbar = function _toggleOptionWithToolbar(propName) {
@@ -144,8 +168,8 @@ var _toggleOptionWithToolbar = function _toggleOptionWithToolbar(propName) {
 };
 
 var withToolbar = function withToolbar(target) {
-  (0, _withSet2.default)(target);
-  (0, _withToggle2.default)(target);
+  (0, _withSet["default"])(target);
+  (0, _withToggle["default"])(target);
   Object.assign(target.prototype, {
     _toggleWithToolbar: _toggleWithToolbar,
     _createType2WithToolbar: _createType2WithToolbar,
@@ -154,5 +178,6 @@ var withToolbar = function withToolbar(target) {
   });
 };
 
-exports.default = withToolbar;
+var _default = withToolbar;
+exports["default"] = _default;
 //# sourceMappingURL=withToolbar.js.map

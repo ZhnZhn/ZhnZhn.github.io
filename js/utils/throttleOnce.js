@@ -1,20 +1,24 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _throttle = require('./throttle');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _throttle2 = _interopRequireDefault(_throttle);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _throttle = _interopRequireDefault(require("./throttle"));
 
 var DF_WAIT = 800;
-var throttleOnce = function throttleOnce(fn) {
-  var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DF_WAIT;
-  return (0, _throttle2.default)(fn, wait, { trailing: false });
+
+var throttleOnce = function throttleOnce(fn, wait) {
+  if (wait === void 0) {
+    wait = DF_WAIT;
+  }
+
+  return (0, _throttle["default"])(fn, wait, {
+    trailing: false
+  });
 };
 
-exports.default = throttleOnce;
+var _default = throttleOnce;
+exports["default"] = _default;
 //# sourceMappingURL=throttleOnce.js.map

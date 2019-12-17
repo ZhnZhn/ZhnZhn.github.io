@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/quandl/Quandl.js"
- ],
- "file": "../../../src/adapters/quandl/Quandl.js",
- "names": [
-  "Quandl",
-  "id",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,SAAS;AACbC,MAAI,GADS;AAEbC,0BAFa,EAERC;AAFQ,CAAf;;kBAKeH,M"
-}
+{"version":3,"sources":["../../../src/adapters/quandl/Quandl.js"],"names":["Quandl","id","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,MAAM,GAAG;AACbC,EAAAA,EAAE,EAAE,GADS;AAEbC,EAAAA,GAAG,EAAHA,qBAFa;AAERC,EAAAA,OAAO,EAAPA;AAFQ,CAAf;eAKeH,M","sourcesContent":["import api from './QuandlApi'\r\nimport adapter from './QuandlAdapter'\r\n\r\nconst Quandl = {\r\n  id: 'Q',\r\n  api, adapter\r\n};\r\n\r\nexport default Quandl\r\n"],"file":"Quandl.js"}

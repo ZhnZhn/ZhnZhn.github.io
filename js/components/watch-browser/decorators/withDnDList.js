@@ -1,22 +1,19 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _fnDnD = require("./fnDnD");
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _fnDnD2 = _interopRequireDefault(_fnDnD);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _fnDnD = _interopRequireDefault(require("./fnDnD"));
 
 var _crDragStartList = function _crDragStartList(DRAG) {
   return function (_ref, ev) {
     var groupCaption = _ref.groupCaption,
         caption = _ref.caption;
-
     this.dragStartWithDnDStyle(ev, [DRAG.GROUP, DRAG.LIST]);
-    _fnDnD2.default.setTransferTo({
+
+    _fnDnD["default"].setTransferTo({
       event: ev,
       dragId: groupCaption + ";" + caption,
       xType: DRAG.LIST
@@ -28,15 +25,12 @@ var _crDropList = function _crDropList(DRAG, WatchActions) {
   return function (_ref2, ev) {
     var groupCaption = _ref2.groupCaption,
         caption = _ref2.caption;
-
-    this.dropWithDnDStyle(ev);
-    //ev.currentTarget.style.borderLeft = "";
+    this.dropWithDnDStyle(ev); //ev.currentTarget.style.borderLeft = "";
 
     var data = JSON.parse(ev.dataTransfer.getData("text")),
         xType = data.xType,
         dragId = data.dragId,
         dropId = groupCaption + ";" + caption + ";";
-
 
     if (xType === DRAG.LIST) {
       if (dragId !== dropId) {
@@ -86,5 +80,6 @@ var withDnDList = function withDnDList(DRAG, WatchActions) {
   };
 };
 
-exports.default = withDnDList;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDList.js.map
+var _default = withDnDList;
+exports["default"] = _default;
+//# sourceMappingURL=withDnDList.js.map

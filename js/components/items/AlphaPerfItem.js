@@ -1,34 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _TableItem = require('./TableItem');
-
-var _TableItem2 = _interopRequireDefault(_TableItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _TableItem = _interopRequireDefault(require("./TableItem"));
 
 var S = {
   TH_MORE: {
@@ -37,39 +20,35 @@ var S = {
   }
 };
 
-var AlphaPerfItem = function (_Component) {
-  (0, _inherits3.default)(AlphaPerfItem, _Component);
+var AlphaPerfItem =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(AlphaPerfItem, _Component);
 
   function AlphaPerfItem() {
-    (0, _classCallCheck3.default)(this, AlphaPerfItem);
-    return (0, _possibleConstructorReturn3.default)(this, (AlphaPerfItem.__proto__ || Object.getPrototypeOf(AlphaPerfItem)).apply(this, arguments));
+    return _Component.apply(this, arguments) || this;
   }
 
-  (0, _createClass3.default)(AlphaPerfItem, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          config = _props.config,
-          onCloseItem = _props.onCloseItem;
+  var _proto = AlphaPerfItem.prototype;
 
-      return _react2.default.createElement(
-        _react.Fragment,
-        null,
-        _react2.default.createElement(_TableItem2.default, {
-          thMoreStyle: S.TH_MORE,
-          config: config.m,
-          onCloseItem: onCloseItem
-        }),
-        _react2.default.createElement(_TableItem2.default, {
-          thMoreStyle: S.TH_MORE,
-          config: config.y,
-          onCloseItem: onCloseItem
-        })
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props = this.props,
+        config = _this$props.config,
+        onCloseItem = _this$props.onCloseItem;
+    return _react["default"].createElement(_react.Fragment, null, _react["default"].createElement(_TableItem["default"], {
+      thMoreStyle: S.TH_MORE,
+      config: config.m,
+      onCloseItem: onCloseItem
+    }), _react["default"].createElement(_TableItem["default"], {
+      thMoreStyle: S.TH_MORE,
+      config: config.y,
+      onCloseItem: onCloseItem
+    }));
+  };
+
   return AlphaPerfItem;
 }(_react.Component);
 
-exports.default = AlphaPerfItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\AlphaPerfItem.js.map
+var _default = AlphaPerfItem;
+exports["default"] = _default;
+//# sourceMappingURL=AlphaPerfItem.js.map

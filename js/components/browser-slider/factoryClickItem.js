@@ -1,14 +1,11 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ComponentActions = require("../../flux/actions/ComponentActions");
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
 var conf = {
   dialogConf: true,
@@ -20,8 +17,10 @@ var conf = {
   }
 };
 
-var _toFirstUpperCase = function _toFirstUpperCase() {
-  var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+var _toFirstUpperCase = function _toFirstUpperCase(str) {
+  if (str === void 0) {
+    str = '';
+  }
 
   return str.charAt(0).toUpperCase() + str.substr(1);
 };
@@ -29,10 +28,9 @@ var _toFirstUpperCase = function _toFirstUpperCase() {
 var _getFrequencyAndDims = function _getFrequencyAndDims(json) {
   var dims = [],
       _json$variables = json.variables,
-      variables = _json$variables === undefined ? [] : _json$variables;
-
+      variables = _json$variables === void 0 ? [] : _json$variables;
   var mapFrequency = 'Y';
-  var timeId = void 0;
+  var timeId;
   variables.forEach(function (item) {
     var code = item.code,
         text = item.text,
@@ -41,6 +39,7 @@ var _getFrequencyAndDims = function _getFrequencyAndDims(json) {
     if (time) {
       timeId = code;
     }
+
     if (code !== 'Tid') {
       dims.push({
         c: _toFirstUpperCase(text),
@@ -54,7 +53,11 @@ var _getFrequencyAndDims = function _getFrequencyAndDims(json) {
       }
     }
   });
-  return { mapFrequency: mapFrequency, dims: dims, timeId: timeId };
+  return {
+    mapFrequency: mapFrequency,
+    dims: dims,
+    timeId: timeId
+  };
 };
 
 var _fOnClickTable = function _fOnClickTable(dfProps) {
@@ -86,7 +89,7 @@ var _fOnClickTable = function _fOnClickTable(dfProps) {
           dims = _getFrequencyAndDims2.dims,
           timeId = _getFrequencyAndDims2.timeId,
           _json$title = json.title,
-          title = _json$title === undefined ? '' : _json$title,
+          title = _json$title === void 0 ? '' : _json$title,
           _title = title.length > 35 ? title.substr(0, 35) + '...' : title,
           _conf = Object.assign({}, conf, {
         type: bT + "_" + id,
@@ -102,17 +105,20 @@ var _fOnClickTable = function _fOnClickTable(dfProps) {
         timeId: timeId,
         descrUrl: dU,
         dataSource: dS,
-        dfProps: { dfId: id },
+        dfProps: {
+          dfId: id
+        },
         noTime: noTime,
         proxy: proxy
       });
 
-      _ComponentActions2.default.showDialog(bT + "_" + id, bT, _conf);
-    }).catch(function (err) {
+      _ComponentActions["default"].showDialog(bT + "_" + id, bT, _conf);
+    })["catch"](function (err) {
       console.log(err.message);
     });
   };
 };
 
-exports.default = _fOnClickTable;
+var _default = _fOnClickTable;
+exports["default"] = _default;
 //# sourceMappingURL=factoryClickItem.js.map

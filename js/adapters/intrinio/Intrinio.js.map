@@ -1,15 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\intrinio\\Intrinio.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\intrinio\\Intrinio.js",
- "sourceRoot": "",
- "names": [
-  "Intrinio",
-  "optionFetch",
-  "crOptionFetch",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,WAAW;AACfC,eAAa,sBAAIC,aADF;AAEfC,4BAFe;AAGfC;AAHe,CAAjB;;kBAMeJ,Q"
-}
+{"version":3,"sources":["../../../src/adapters/intrinio/Intrinio.js"],"names":["Intrinio","optionFetch","api","crOptionFetch","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,QAAQ,GAAG;AACfC,EAAAA,WAAW,EAAEC,wBAAIC,aADF;AAEfD,EAAAA,GAAG,EAAHA,uBAFe;AAGfE,EAAAA,OAAO,EAAPA;AAHe,CAAjB;eAMeJ,Q","sourcesContent":["import api from './IntrinioApi'\r\nimport adapter from './IntrinioAdapter'\r\n\r\nconst Intrinio = {\r\n  optionFetch: api.crOptionFetch,\r\n  api,\r\n  adapter\r\n}\r\n\r\nexport default Intrinio\r\n"],"file":"Intrinio.js"}

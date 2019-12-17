@@ -1,97 +1,43 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _ChartActions = _interopRequireDefault(require("../../flux/actions/ChartActions"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _Type = require("../../constants/Type");
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _ChartType = _interopRequireDefault(require("../../constants/ChartType"));
 
-var _class, _class2, _temp, _initialiseProps;
-//import PropTypes from "prop-types";
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _react = require('react');
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _react2 = _interopRequireDefault(_react);
+var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
 
-var _DateUtils = require('../../utils/DateUtils');
+var _withValidationLoad = _interopRequireDefault(require("../dialogs/decorators/withValidationLoad"));
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
+var _class, _class2, _temp;
 
-var _ChartActions = require('../../flux/actions/ChartActions');
+var getFromDate = _DateUtils["default"].getFromDate,
+    getToDate = _DateUtils["default"].getToDate,
+    isYmd = _DateUtils["default"].isYmd;
 
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
+var LoadItemDialog = (0, _withValidationLoad["default"])(_class = (_temp = _class2 =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(LoadItemDialog, _Component);
 
-var _Type = require('../../constants/Type');
-
-var _ChartType = require('../../constants/ChartType');
-
-var _ChartType2 = _interopRequireDefault(_ChartType);
-
-var _ModalDialog = require('../zhn-moleculs/ModalDialog');
-
-var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
-
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var getFromDate = _DateUtils2.default.getFromDate,
-    getToDate = _DateUtils2.default.getToDate,
-    isYmd = _DateUtils2.default.isYmd;
-
-var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
-  (0, _inherits3.default)(LoadItemDialog, _Component);
-
-  function LoadItemDialog(props) {
-    (0, _classCallCheck3.default)(this, LoadItemDialog);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (LoadItemDialog.__proto__ || Object.getPrototypeOf(LoadItemDialog)).call(this));
-
-    _initialiseProps.call(_this);
-
-    var _props$data = props.data,
-        fromDate = _props$data.fromDate,
-        initToDate = _props$data.initToDate,
-        onTestDate = _props$data.onTestDate;
-
-
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, {
-      key: 'load',
-      onClick: _this._handleLoad
-    })];
-
-    _this.state = {
-      initFromDate: fromDate || getFromDate(2),
-      initToDate: initToDate || getToDate(),
-      onTestDate: onTestDate || isYmd,
-      validationMessages: []
-    };
-    return _this;
-  }
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -104,121 +50,138 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
     onClose: PropTypes.func
   }
   */
+  function LoadItemDialog(props) {
+    var _this;
 
-  (0, _createClass3.default)(LoadItemDialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-        return false;
+    _this = _Component.call(this) || this;
+
+    _this._handleLoad = function () {
+      var validationMessages = _this._createValidationMessages();
+
+      if (validationMessages.isValid) {
+        var _this$props = _this.props,
+            data = _this$props.data,
+            onClose = _this$props.onClose,
+            id = data.id,
+            title = data.title,
+            subtitle = data.subtitle,
+            caption = data.caption,
+            columnName = data.columnName,
+            dataColumn = data.dataColumn,
+            seriaColumnNames = data.seriaColumnNames,
+            _this$datesFragment$g = _this.datesFragment.getValues(),
+            fromDate = _this$datesFragment$g.fromDate,
+            toDate = _this$datesFragment$g.toDate,
+            option = {
+          title: title,
+          subtitle: subtitle,
+          value: caption,
+          item: caption,
+          fromDate: fromDate,
+          toDate: toDate,
+          loadId: _Type.LoadType.WL,
+          id: id,
+          columnName: columnName,
+          dataColumn: dataColumn,
+          seriaColumnNames: seriaColumnNames
+        };
+
+        _ChartActions["default"].loadStock({
+          chartType: _ChartType["default"].WATCH_LIST,
+          browserType: _Type.BrowserType.WATCH_LIST
+        }, option);
+
+        onClose();
       }
-      return true;
+
+      _this._updateValidationMessages(validationMessages);
+    };
+
+    _this._createValidationMessages = function () {
+      var msg = [];
+
+      var _this$datesFragment$g2 = _this.datesFragment.getValidation(),
+          isValid = _this$datesFragment$g2.isValid,
+          datesMsg = _this$datesFragment$g2.datesMsg;
+
+      if (!isValid) {
+        msg = msg.concat(datesMsg);
+      }
+
+      msg.isValid = msg.length === 0 ? true : false;
+      return msg;
+    };
+
+    _this._handleClose = function () {
+      _this._handleWithValidationClose(_this._createValidationMessages);
+
+      _this.props.onClose();
+    };
+
+    var _props$data = props.data,
+        _fromDate = _props$data.fromDate,
+        initToDate = _props$data.initToDate,
+        onTestDate = _props$data.onTestDate;
+    _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Load, {
+      key: "load",
+      onClick: _this._handleLoad
+    })];
+    _this.state = {
+      initFromDate: _fromDate || getFromDate(2),
+      initToDate: initToDate || getToDate(),
+      onTestDate: onTestDate || isYmd,
+      validationMessages: []
+    };
+    return _this;
+  }
+
+  var _proto = LoadItemDialog.prototype;
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
 
-      var _props = this.props,
-          isShow = _props.isShow,
-          data = _props.data,
-          caption = data.caption,
-          _state = this.state,
-          initFromDate = _state.initFromDate,
-          initToDate = _state.initToDate,
-          onTestDate = _state.onTestDate,
-          validationMessages = _state.validationMessages;
+    return true;
+  };
 
+  _proto.render = function render() {
+    var _this2 = this;
 
-      return _react2.default.createElement(
-        _ModalDialog2.default,
-        {
-          caption: 'Load Item',
-          isShow: isShow,
-          commandButtons: this._commandButtons,
-          onClose: this._handleClose
-        },
-        _react2.default.createElement(_DialogCell2.default.Row.Text, {
-          caption: 'Item:',
-          text: caption
-        }),
-        _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-          ref: function ref(c) {
-            return _this2.datesFragment = c;
-          },
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          onTestDate: onTestDate
-        }),
-        _react2.default.createElement(_ValidationMessages2.default, {
-          validationMessages: validationMessages
-        })
-      );
-    }
-  }]);
+    var _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        data = _this$props2.data,
+        caption = data.caption,
+        _this$state = this.state,
+        initFromDate = _this$state.initFromDate,
+        initToDate = _this$state.initToDate,
+        onTestDate = _this$state.onTestDate,
+        validationMessages = _this$state.validationMessages;
+    return _react["default"].createElement(_ModalDialog["default"], {
+      caption: "Load Item",
+      isShow: isShow,
+      commandButtons: this._commandButtons,
+      onClose: this._handleClose
+    }, _react["default"].createElement(_DialogCell["default"].Row.Text, {
+      caption: "Item:",
+      text: caption
+    }), _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+      ref: function ref(c) {
+        return _this2.datesFragment = c;
+      },
+      initFromDate: initFromDate,
+      initToDate: initToDate,
+      onTestDate: onTestDate
+    }), _react["default"].createElement(_ValidationMessages["default"], {
+      validationMessages: validationMessages
+    }));
+  };
+
   return LoadItemDialog;
 }(_react.Component), _class2.defaultProps = {
   data: {}
-}, _initialiseProps = function _initialiseProps() {
-  var _this3 = this;
-
-  this._handleLoad = function () {
-    var validationMessages = _this3._createValidationMessages();
-    if (validationMessages.isValid) {
-      var _props2 = _this3.props,
-          data = _props2.data,
-          onClose = _props2.onClose,
-          id = data.id,
-          title = data.title,
-          subtitle = data.subtitle,
-          caption = data.caption,
-          columnName = data.columnName,
-          dataColumn = data.dataColumn,
-          seriaColumnNames = data.seriaColumnNames,
-          _datesFragment$getVal = _this3.datesFragment.getValues(),
-          fromDate = _datesFragment$getVal.fromDate,
-          toDate = _datesFragment$getVal.toDate,
-          option = {
-        title: title,
-        subtitle: subtitle,
-        value: caption,
-        item: caption,
-        fromDate: fromDate,
-        toDate: toDate,
-        loadId: _Type.LoadType.WL,
-        id: id,
-        columnName: columnName,
-        dataColumn: dataColumn,
-        seriaColumnNames: seriaColumnNames
-      };
-
-      _ChartActions2.default.loadStock({
-        chartType: _ChartType2.default.WATCH_LIST,
-        browserType: _Type.BrowserType.WATCH_LIST
-      }, option);
-      onClose();
-    }
-    _this3._updateValidationMessages(validationMessages);
-  };
-
-  this._createValidationMessages = function () {
-    var msg = [];
-
-    var _datesFragment$getVal2 = _this3.datesFragment.getValidation(),
-        isValid = _datesFragment$getVal2.isValid,
-        datesMsg = _datesFragment$getVal2.datesMsg;
-
-    if (!isValid) {
-      msg = msg.concat(datesMsg);
-    }
-    msg.isValid = msg.length === 0 ? true : false;
-    return msg;
-  };
-
-  this._handleClose = function () {
-    _this3._handleWithValidationClose(_this3._createValidationMessages);
-    _this3.props.onClose();
-  };
 }, _temp)) || _class;
 
-exports.default = LoadItemDialog;
+var _default = LoadItemDialog;
+exports["default"] = _default;
 //# sourceMappingURL=LoadItemDialog.js.map

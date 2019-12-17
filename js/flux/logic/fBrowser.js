@@ -1,52 +1,37 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _react = require('react');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react2 = _interopRequireDefault(_react);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ChartStore = require('../stores/ChartStore');
+var _react = _interopRequireDefault(require("react"));
 
-var _ChartStore2 = _interopRequireDefault(_ChartStore);
+var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
-var _ComponentActions = require('../actions/ComponentActions');
+var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
 
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+var _ChartActions = _interopRequireDefault(require("../actions/ChartActions"));
 
-var _ChartActions = require('../actions/ChartActions');
+var _BrowserActions = _interopRequireWildcard(require("../actions/BrowserActions"));
 
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
+var _Type = require("../../constants/Type");
 
-var _BrowserActions = require('../actions/BrowserActions');
+var _RouterBrowser = _interopRequireDefault(require("./RouterBrowser"));
 
-var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
+var _RouterItemOption = _interopRequireDefault(require("../../components/zhn-select/RouterItemOption"));
 
-var _Type = require('../../constants/Type');
-
-var _RouterBrowser = require('./RouterBrowser');
-
-var _RouterBrowser2 = _interopRequireDefault(_RouterBrowser);
-
-var _RouterItemOption = require('../../components/zhn-select/RouterItemOption');
-
-var _RouterItemOption2 = _interopRequireDefault(_RouterItemOption);
-
-var _RouterBrowserItem = require('../../components/browser-items/RouterBrowserItem');
-
-var _RouterBrowserItem2 = _interopRequireDefault(_RouterBrowserItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _RouterBrowserItem = _interopRequireDefault(require("../../components/browser-items/RouterBrowserItem"));
 
 var _crBrowserWatchList = function _crBrowserWatchList(Comp) {
-  return _react2.default.createElement(Comp, {
+  return _react["default"].createElement(Comp, {
     key: _Type.BrowserType.WATCH_LIST,
     browserType: _Type.BrowserType.WATCH_LIST,
     caption: "Watch List",
     isInitShow: true,
-    store: _ChartStore2.default,
+    store: _ChartStore["default"],
     //showAction: BAT.SHOW_BROWSER,
     showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
     updateAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER
@@ -56,7 +41,7 @@ var _crBrowserWatchList = function _crBrowserWatchList(Comp) {
 var _crBrowserDynamic = function _crBrowserDynamic(Comp, option) {
   var browserType = option.browserType,
       _option$caption = option.caption,
-      caption = _option$caption === undefined ? 'Source Browser' : _option$caption,
+      caption = _option$caption === void 0 ? 'Source Browser' : _option$caption,
       sourceMenuUrl = option.sourceMenuUrl,
       chartContainerType = option.chartContainerType,
       modalDialogType = option.modalDialogType,
@@ -64,16 +49,16 @@ var _crBrowserDynamic = function _crBrowserDynamic(Comp, option) {
       itemType = option.itemType,
       descrUrl = option.descrUrl,
       dfProps = option.dfProps,
-      ItemOptionComp = itemOptionType ? _RouterItemOption2.default[itemOptionType] || _RouterBrowserItem2.default.DEFAULT : _RouterBrowserItem2.default.DEFAULT,
-      ItemComp = itemType ? _RouterBrowserItem2.default[itemType] || _RouterBrowserItem2.default.DEFAULT : undefined,
-      onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions2.default.showDescription : undefined,
-      onShowContainer = _ChartActions2.default.showChart.bind(null, chartContainerType, browserType);
+      ItemOptionComp = itemOptionType ? _RouterItemOption["default"][itemOptionType] || _RouterBrowserItem["default"].DEFAULT : _RouterBrowserItem["default"].DEFAULT,
+      ItemComp = itemType ? _RouterBrowserItem["default"][itemType] || _RouterBrowserItem["default"].DEFAULT : undefined,
+      onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions["default"].showDescription : undefined,
+      onShowContainer = _ChartActions["default"].showChart.bind(null, chartContainerType, browserType);
 
-  return _react2.default.createElement(Comp, {
+  return _react["default"].createElement(Comp, {
     dfProps: dfProps,
     key: browserType,
     browserType: browserType,
-    store: _ChartStore2.default,
+    store: _ChartStore["default"],
     isInitShow: true,
     caption: caption,
     sourceMenuUrl: sourceMenuUrl,
@@ -84,12 +69,12 @@ var _crBrowserDynamic = function _crBrowserDynamic(Comp, option) {
     descrUrl: descrUrl,
     onClickInfo: onClickInfo,
     onShowContainer: onShowContainer,
-
     showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
     loadCompletedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
-    updateAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, //for Type
-    onLoadMenu: _BrowserActions2.default.loadBrowserDynamic,
-    onShowLoadDialog: _ComponentActions2.default.showModalDialog //for Type2
+    updateAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
+    //for Type
+    onLoadMenu: _BrowserActions["default"].loadBrowserDynamic,
+    onShowLoadDialog: _ComponentActions["default"].showModalDialog //for Type2
 
   });
 };
@@ -100,20 +85,20 @@ var fBrowser = {
 
     switch (browserType) {
       case _Type.BrowserType.WATCH_LIST:
-        return _RouterBrowser2.default[_Type.BrowserType.WATCH_LIST].then(_crBrowserWatchList);
+        return _RouterBrowser["default"][_Type.BrowserType.WATCH_LIST].then(_crBrowserWatchList);
 
       case _Type.BrowserType.SWEDEN_STAT_ALL:
       case _Type.BrowserType.NORWAY_STAT_ALL:
       case _Type.BrowserType.FINLAND_STAT_ALL:
-        return _RouterBrowser2.default.STAT_ALL.then(function (Comp) {
+        return _RouterBrowser["default"].STAT_ALL.then(function (Comp) {
           return _crBrowserDynamic(Comp, option);
         });
 
       default:
-        return Promise.resolve(_crBrowserDynamic(_RouterBrowser2.default[browserType] || _RouterBrowser2.default.DEFAULT, option));
+        return Promise.resolve(_crBrowserDynamic(_RouterBrowser["default"][browserType] || _RouterBrowser["default"].DEFAULT, option));
     }
   }
 };
-
-exports.default = fBrowser;
+var _default = fBrowser;
+exports["default"] = _default;
 //# sourceMappingURL=fBrowser.js.map

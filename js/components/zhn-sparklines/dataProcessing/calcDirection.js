@@ -1,10 +1,9 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
-exports.default = function (points, pointIndex) {
+var _default = function _default(points, pointIndex) {
   /*
   Math.sign = Math.sign || function(x) { return x > 0 ? 1 : -1; }
     return ( points.length < 2  || pointIndex === 0)
@@ -14,7 +13,9 @@ exports.default = function (points, pointIndex) {
   if (points.length < 2 || pointIndex === 0) {
     return 0;
   }
+
   var _diff = points[pointIndex - 1].y - points[pointIndex].y;
+
   if (_diff === 0) {
     return 0;
   } else if (_diff > 0) {
@@ -23,4 +24,6 @@ exports.default = function (points, pointIndex) {
     return -1;
   }
 };
+
+exports["default"] = _default;
 //# sourceMappingURL=calcDirection.js.map

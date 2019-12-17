@@ -1,97 +1,67 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _defineEnumerableProperties2 = require('babel-runtime/helpers/defineEnumerableProperties');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _defineEnumerableProperties3 = _interopRequireDefault(_defineEnumerableProperties2);
+var _defineEnumerableProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/defineEnumerableProperties"));
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+var _interopRequireWildcard2 = _interopRequireDefault(require("@babel/runtime/helpers/interopRequireWildcard"));
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+var _Type = require("../../constants/Type");
+
+var _AskDialog = _interopRequireDefault(require("./AskDialog"));
+
+var _ReloadDialog = _interopRequireDefault(require("./ReloadDialog"));
+
+var _InfoDialog = _interopRequireDefault(require("./InfoDialog"));
+
+var _AlertDialog = _interopRequireDefault(require("./AlertDialog"));
+
+var _DescriptionDialog = _interopRequireDefault(require("./DescriptionDialog"));
+
+var _CustomizeExportDialog = _interopRequireDefault(require("./CustomizeExportDialog"));
+
+var _ColumnRangeDialog = _interopRequireDefault(require("./ColumnRangeDialog"));
+
+var _ZoomDialog = _interopRequireDefault(require("./ZoomDialog"));
+
+var _UsStocksBySectorDialog = _interopRequireDefault(require("./UsStocksBySectorDialog"));
+
+var _StocksBySectorDialog = _interopRequireDefault(require("./StocksBySectorDialog"));
+
+var _SettingsDialog = _interopRequireDefault(require("../header/SettingsDialog"));
+
+var _AddToWatchDialog = _interopRequireDefault(require("../watch-browser/AddToWatchDialog"));
+
+var _PasteToModalDialog = _interopRequireDefault(require("../items/PasteToModalDialog"));
 
 var _M$LOAD_ITEM, _M$EDIT_WATCH_GROUP, _M$EDIT_WATCH_LIST, _router2, _mutatorMap;
 
-var _Type = require('../../constants/Type');
-
-var _AskDialog = require('./AskDialog');
-
-var _AskDialog2 = _interopRequireDefault(_AskDialog);
-
-var _ReloadDialog = require('./ReloadDialog');
-
-var _ReloadDialog2 = _interopRequireDefault(_ReloadDialog);
-
-var _InfoDialog = require('./InfoDialog');
-
-var _InfoDialog2 = _interopRequireDefault(_InfoDialog);
-
-var _AlertDialog = require('./AlertDialog');
-
-var _AlertDialog2 = _interopRequireDefault(_AlertDialog);
-
-var _DescriptionDialog = require('./DescriptionDialog');
-
-var _DescriptionDialog2 = _interopRequireDefault(_DescriptionDialog);
-
-var _CustomizeExportDialog = require('./CustomizeExportDialog');
-
-var _CustomizeExportDialog2 = _interopRequireDefault(_CustomizeExportDialog);
-
-var _ColumnRangeDialog = require('./ColumnRangeDialog');
-
-var _ColumnRangeDialog2 = _interopRequireDefault(_ColumnRangeDialog);
-
-var _ZoomDialog = require('./ZoomDialog');
-
-var _ZoomDialog2 = _interopRequireDefault(_ZoomDialog);
-
-var _UsStocksBySectorDialog = require('./UsStocksBySectorDialog');
-
-var _UsStocksBySectorDialog2 = _interopRequireDefault(_UsStocksBySectorDialog);
-
-var _StocksBySectorDialog = require('./StocksBySectorDialog');
-
-var _StocksBySectorDialog2 = _interopRequireDefault(_StocksBySectorDialog);
-
-var _SettingsDialog = require('../header/SettingsDialog');
-
-var _SettingsDialog2 = _interopRequireDefault(_SettingsDialog);
-
-var _AddToWatchDialog = require('../watch-browser/AddToWatchDialog');
-
-var _AddToWatchDialog2 = _interopRequireDefault(_AddToWatchDialog);
-
-var _PasteToModalDialog = require('../items/PasteToModalDialog');
-
-var _PasteToModalDialog2 = _interopRequireDefault(_PasteToModalDialog);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var MSG_OFFLINE = 'It seems you are offline';
 
-var _router = (_router2 = {}, (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ASK, _AskDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.RELOAD, _ReloadDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.INFO, _InfoDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ALERT, _AlertDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.DESCRIPTION, _DescriptionDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.CUSTOMIZE_EXPORT, _CustomizeExportDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.COLUMN_RANGE, _ColumnRangeDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ZOOM, _ZoomDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.SETTINGS, _SettingsDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.ADD_TO_WATCH, _AddToWatchDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.US_STOCK_BY_SECTOR, _UsStocksBySectorDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.STOCKS_BY_SECTOR, _StocksBySectorDialog2.default), (0, _defineProperty3.default)(_router2, _Type.ModalDialog.PASTE_TO, _PasteToModalDialog2.default), (0, _defineProperty3.default)(_router2, '_loadWL', function _loadWL() {
+var _router = (_router2 = {}, _router2[_Type.ModalDialog.ASK] = _AskDialog["default"], _router2[_Type.ModalDialog.RELOAD] = _ReloadDialog["default"], _router2[_Type.ModalDialog.INFO] = _InfoDialog["default"], _router2[_Type.ModalDialog.ALERT] = _AlertDialog["default"], _router2[_Type.ModalDialog.DESCRIPTION] = _DescriptionDialog["default"], _router2[_Type.ModalDialog.CUSTOMIZE_EXPORT] = _CustomizeExportDialog["default"], _router2[_Type.ModalDialog.COLUMN_RANGE] = _ColumnRangeDialog["default"], _router2[_Type.ModalDialog.ZOOM] = _ZoomDialog["default"], _router2[_Type.ModalDialog.SETTINGS] = _SettingsDialog["default"], _router2[_Type.ModalDialog.ADD_TO_WATCH] = _AddToWatchDialog["default"], _router2[_Type.ModalDialog.US_STOCK_BY_SECTOR] = _UsStocksBySectorDialog["default"], _router2[_Type.ModalDialog.STOCKS_BY_SECTOR] = _StocksBySectorDialog["default"], _router2[_Type.ModalDialog.PASTE_TO] = _PasteToModalDialog["default"], _router2._loadWL = function _loadWL() {
   /*eslint-disable no-undef */
   if (process.env.NODE_ENV === 'development') {
-    this.WL = System.import("js/components/watch-browser/ModalDialogs.js").then(function (module) {
-      return module.default;
-    }).catch(function (err) {
+    this.WL = Promise.resolve().then(function () {
+      return (0, _interopRequireWildcard2["default"])(require("js/components/watch-browser/ModalDialogs.js"));
+    }).then(function (module) {
+      return module["default"];
+    })["catch"](function (err) {
       return console.log(MSG_OFFLINE);
     });
     /*eslint-enable no-undef */
   } else {
-    this.WL = System.import(
-    /* webpackChunkName: "watch-dialogs" */
-    /* webpackMode: "lazy" */
-    "../../components/watch-browser/ModalDialogs").then(function (module) {
-      return module.default;
-    }).catch(function (err) {
+    this.WL = Promise.resolve().then(function () {
+      return (0, _interopRequireWildcard2["default"])(require("../../components/watch-browser/ModalDialogs"));
+    }).then(function (module) {
+      return module["default"];
+    })["catch"](function (err) {
       return console.log(MSG_OFFLINE);
     });
   }
-}), _M$LOAD_ITEM = _Type.ModalDialog.LOAD_ITEM, _mutatorMap = {}, _mutatorMap[_M$LOAD_ITEM] = _mutatorMap[_M$LOAD_ITEM] || {}, _mutatorMap[_M$LOAD_ITEM].get = function () {
+}, _M$LOAD_ITEM = _Type.ModalDialog.LOAD_ITEM, _mutatorMap = {}, _mutatorMap[_M$LOAD_ITEM] = _mutatorMap[_M$LOAD_ITEM] || {}, _mutatorMap[_M$LOAD_ITEM].get = function () {
   return this.WL.then(function (D) {
     return D.LoadItem;
   });
@@ -103,14 +73,17 @@ var _router = (_router2 = {}, (0, _defineProperty3.default)(_router2, _Type.Moda
   return this.WL.then(function (D) {
     return D.EditList;
   });
-}, (0, _defineProperty3.default)(_router2, 'loadDialogs', function loadDialogs(id) {
+}, _router2.loadDialogs = function loadDialogs(id) {
   switch (id) {
     case _Type.BrowserType.WATCH_LIST:
-      this._loadWL();break;
+      this._loadWL();
+
+      break;
+
     default:
       return undefined;
   }
-}), (0, _defineEnumerableProperties3.default)(_router2, _mutatorMap), _router2);
+}, (0, _defineEnumerableProperties2["default"])(_router2, _mutatorMap), _router2);
 
 var RouterModalDialog = {
   getDialog: function getDialog(id) {
@@ -120,6 +93,6 @@ var RouterModalDialog = {
     _router.loadDialogs(id);
   }
 };
-
-exports.default = RouterModalDialog;
+var _default = RouterModalDialog;
+exports["default"] = _default;
 //# sourceMappingURL=RouterModalDialog.js.map

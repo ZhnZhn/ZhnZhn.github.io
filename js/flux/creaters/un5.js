@@ -1,37 +1,47 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var C = {
-  DF_ONE: { caption: 'All', value: 'all' },
+  DF_ONE: {
+    caption: 'All',
+    value: 'all'
+  },
   COLLON: ': ',
   DOTS: '...',
   MAX_SUBTITLE: 60,
   TRADE_FLOW: {
     caption: 'Export Value',
-    value: { rg: 2, measure: "TradeValue" }
+    value: {
+      rg: 2,
+      measure: "TradeValue"
+    }
   }
 };
 
-var createLoadOptions = function createLoadOptions() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
 
-  var fnValue = props.fnValue,
-      loadId = props.loadId,
-      dataSource = props.dataSource,
-      one = options.one,
-      two = options.two,
-      three = options.three,
-      tradeFlow = options.tradeFlow,
+  if (options === void 0) {
+    options = {};
+  }
+
+  var _props = props,
+      fnValue = _props.fnValue,
+      loadId = _props.loadId,
+      dataSource = _props.dataSource,
+      _options = options,
+      one = _options.one,
+      two = _options.two,
+      three = _options.three,
+      tradeFlow = _options.tradeFlow,
       _one = one || C.DF_ONE,
       _tradeFlow = tradeFlow || C.TRADE_FLOW,
       _two = three.value ? three.value : two.value,
@@ -39,7 +49,7 @@ var createLoadOptions = function createLoadOptions() {
       _title = _one.caption + C.COLLON + _tradeFlow.caption,
       _subtitle = three.caption.length > C.MAX_SUBTITLE ? three.caption.substr(0, C.MAX_SUBTITLE) + C.DOTS : three.caption;
 
-  return (0, _extends3.default)({
+  return (0, _extends2["default"])({
     value: _value,
     loadId: loadId,
     title: _title,
@@ -50,5 +60,6 @@ var createLoadOptions = function createLoadOptions() {
   }, _tradeFlow.value);
 };
 
-exports.default = createLoadOptions;
+var _default = createLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=un5.js.map

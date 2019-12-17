@@ -1,21 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _Link = require('./Link');
-
-var _Link2 = _interopRequireDefault(_Link);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Link = _interopRequireDefault(require("./Link"));
 
 var URL = 'http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=';
-
 var S = {
   ROOT: {
     listStyle: 'none'
@@ -28,27 +22,18 @@ var EsLink = function EsLink(_ref) {
   if (!item) {
     return null;
   }
-  return _react2.default.createElement(
-    'ul',
-    { style: S.ROOT },
-    item.href && _react2.default.createElement(
-      'li',
-      null,
-      _react2.default.createElement(_Link2.default, {
-        caption: 'Eurostat Raw Data Link',
-        href: item.href
-      })
-    ),
-    item.dataset && _react2.default.createElement(
-      'li',
-      null,
-      _react2.default.createElement(_Link2.default, {
-        caption: 'Eurostat Dataset Viewer (Http)',
-        href: '' + URL + item.dataset
-      })
-    )
-  );
+
+  return _react["default"].createElement("ul", {
+    style: S.ROOT
+  }, item.href && _react["default"].createElement("li", null, _react["default"].createElement(_Link["default"], {
+    caption: "Eurostat Raw Data Link",
+    href: item.href
+  })), item.dataset && _react["default"].createElement("li", null, _react["default"].createElement(_Link["default"], {
+    caption: "Eurostat Dataset Viewer (Http)",
+    href: "" + URL + item.dataset
+  })));
 };
 
-exports.default = EsLink;
+var _default = EsLink;
+exports["default"] = _default;
 //# sourceMappingURL=EsLink.js.map

@@ -1,29 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _Style = require('./Style');
-
-var _Style2 = _interopRequireDefault(_Style);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Style = _interopRequireDefault(require("./Style"));
 
 var ErrMsg = function ErrMsg(_ref) {
   var errMsg = _ref.errMsg;
-
   if (!errMsg) return null;
-  return _react2.default.createElement(
-    'div',
-    { style: _Style2.default.MSG_ERR },
-    errMsg
-  );
+  return _react["default"].createElement("div", {
+    style: _Style["default"].MSG_ERR
+  }, errMsg);
 };
 
-exports.default = ErrMsg;
+var _default = ErrMsg;
+exports["default"] = _default;
 //# sourceMappingURL=ErrMsg.js.map

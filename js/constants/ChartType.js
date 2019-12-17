@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
+
 var _crChartType = function _crChartType() {
   return {
     WATCH_LIST: 'WL_WATCH_LIST'
@@ -11,5 +11,6 @@ var _crChartType = function _crChartType() {
 
 var ChartType = _crChartType();
 
-exports.default = ChartType;
+var _default = ChartType;
+exports["default"] = _default;
 //# sourceMappingURL=ChartType.js.map

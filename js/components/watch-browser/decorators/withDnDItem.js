@@ -1,23 +1,20 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _fnDnD = require("./fnDnD");
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _fnDnD2 = _interopRequireDefault(_fnDnD);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _fnDnD = _interopRequireDefault(require("./fnDnD"));
 
 var _crDragStartItem = function _crDragStartItem(DRAG) {
   return function (_ref, ev) {
     var groupCaption = _ref.groupCaption,
         listCaption = _ref.listCaption,
         caption = _ref.caption;
-
     this.dragStartWithDnDStyle(ev, [DRAG.LIST, DRAG.ITEM]);
-    _fnDnD2.default.setTransferTo({
+
+    _fnDnD["default"].setTransferTo({
       event: ev,
       dragId: groupCaption + ";" + listCaption + ";" + caption,
       xType: DRAG.ITEM
@@ -30,13 +27,11 @@ var _crDropItem = function _crDropItem(DRAG, WatchActions) {
     var groupCaption = _ref2.groupCaption,
         listCaption = _ref2.listCaption,
         caption = _ref2.caption;
-
     this.dropWithDnDStyle(ev);
     var data = JSON.parse(ev.dataTransfer.getData("text")),
         xType = data.xType,
         dragId = data.dragId,
         dropId = groupCaption + ";" + listCaption + ";" + caption;
-
 
     if (xType === DRAG.ITEM) {
       if (dragId !== dropId) {
@@ -80,5 +75,6 @@ var withDnDItem = function withDnDItem(DRAG, WatchActions) {
   };
 };
 
-exports.default = withDnDItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDItem.js.map
+var _default = withDnDItem;
+exports["default"] = _default;
+//# sourceMappingURL=withDnDItem.js.map

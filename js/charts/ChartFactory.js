@@ -1,17 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var DF_COLOR = '#8085e9';
-
 var ChartFactory = {
-  crColumnConfig: function crColumnConfig() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+  crColumnConfig: function crColumnConfig(_temp) {
+    var _ref = _temp === void 0 ? {} : _temp,
         seriaColor = _ref.seriaColor;
 
     var _color = seriaColor || DF_COLOR;
+
     return {
       chart: {
         type: "column",
@@ -72,7 +70,9 @@ var ChartFactory = {
           shadow: false
         }
       },
-      series: [{ name: 'Column' }]
+      series: [{
+        name: 'Column'
+      }]
     };
   },
   crBarConfig: function crBarConfig(option) {
@@ -82,17 +82,19 @@ var ChartFactory = {
       //marginTop: 75,
       marginTop: 50,
       height: 450
-    });
-    //config.yAxis.labels = { x: 0, y: -7 }
+    }); //config.yAxis.labels = { x: 0, y: -7 }
+
     Object.assign(config.yAxis, {
-      labels: { x: 0, y: 14 },
+      labels: {
+        x: 0,
+        y: 14
+      },
       opposite: false,
       gridLineDashStyle: 'ShortDot'
     });
-
     return config;
   }
 };
-
-exports.default = ChartFactory;
+var _default = ChartFactory;
+exports["default"] = _default;
 //# sourceMappingURL=ChartFactory.js.map

@@ -1,33 +1,25 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _SeqActions = require('./SeqActions');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _SeqActions2 = _interopRequireDefault(_SeqActions);
+var _SeqActions = _interopRequireDefault(require("./SeqActions"));
 
-var _BrowserActions = require('./BrowserActions');
+var _BrowserActions = _interopRequireDefault(require("./BrowserActions"));
 
-var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
-
-var _ChartActions = require('./ChartActions');
-
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ChartActions = _interopRequireDefault(require("./ChartActions"));
 
 var _crLoadQueryDynamic = function _crLoadQueryDynamic(option) {
   var browserType = option.browserType;
-
-  return new _SeqActions2.default([{
-    action: _BrowserActions2.default.showBrowserDynamic,
+  return new _SeqActions["default"]([{
+    action: _BrowserActions["default"].showBrowserDynamic,
     type: 'loadBrowserDynamicCompleted',
     typeFail: 'showBrowserDynamicFailed',
     args: [browserType]
   }, {
-    action: _ChartActions2.default.loadStockByQuery,
+    action: _ChartActions["default"].loadStockByQuery,
     type: 'loadStockCompleted',
     args: [option]
   }]);
@@ -38,6 +30,6 @@ var FactoryAction = {
     return _crLoadQueryDynamic(option);
   }
 };
-
-exports.default = FactoryAction;
+var _default = FactoryAction;
+exports["default"] = _default;
 //# sourceMappingURL=FactoryAction.js.map

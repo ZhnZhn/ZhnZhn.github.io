@@ -1,26 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _crCurrencyFormatter = require('../../utils/crCurrencyFormatter');
+var _crCurrencyFormatter = _interopRequireDefault(require("../../utils/crCurrencyFormatter"));
 
-var _crCurrencyFormatter2 = _interopRequireDefault(_crCurrencyFormatter);
-
-var _Item = require('./Item');
-
-var _Item2 = _interopRequireDefault(_Item);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Item = _interopRequireDefault(require("./Item"));
 
 var NA = 'n/a',
     ML = ' ml';
-
 var STYLE = {
   CAP: {
     paddingRight: 8
@@ -29,17 +21,17 @@ var STYLE = {
     display: 'display-inline',
     color: 'gray',
     width: 35,
-    float: 'right'
+    "float": 'right'
   },
   DATE: {
     display: 'display-inline',
     color: 'rgb(253, 179, 22)',
     width: 85,
-    float: 'right'
+    "float": 'right'
   }
 };
 
-var _formatter = (0, _crCurrencyFormatter2.default)({
+var _formatter = (0, _crCurrencyFormatter["default"])({
   currency: 'GBP',
   minimumFractionDigits: 3
 });
@@ -52,30 +44,15 @@ var ItemLse = function ItemLse(props) {
       date = _ref.date,
       _cap = cap === 0 ? NA : _formatter.format(cap) + ML;
 
-  return _react2.default.createElement(
-    _Item2.default,
-    props,
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(
-        'span',
-        { style: STYLE.CAP },
-        _cap
-      ),
-      _react2.default.createElement(
-        'span',
-        { style: STYLE.DATE },
-        date
-      ),
-      _react2.default.createElement(
-        'span',
-        { style: STYLE.COUNTRY },
-        c
-      )
-    )
-  );
+  return _react["default"].createElement(_Item["default"], props, _react["default"].createElement("div", null, _react["default"].createElement("span", {
+    style: STYLE.CAP
+  }, _cap), _react["default"].createElement("span", {
+    style: STYLE.DATE
+  }, date), _react["default"].createElement("span", {
+    style: STYLE.COUNTRY
+  }, c)));
 };
 
-exports.default = ItemLse;
+var _default = ItemLse;
+exports["default"] = _default;
 //# sourceMappingURL=ItemLse.js.map

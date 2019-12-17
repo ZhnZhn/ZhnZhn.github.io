@@ -1,37 +1,27 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _DialogEurostat = require('./DialogEurostat');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _DialogEurostat2 = _interopRequireDefault(_DialogEurostat);
+var _DialogEurostat = _interopRequireDefault(require("./DialogEurostat"));
 
-var _DialogEurostat3 = require('./DialogEurostat2');
+var _DialogEurostat2 = _interopRequireDefault(require("./DialogEurostat2"));
 
-var _DialogEurostat4 = _interopRequireDefault(_DialogEurostat3);
+var _DialogEurostat3A = _interopRequireDefault(require("./DialogEurostat3A"));
 
-var _DialogEurostat3A = require('./DialogEurostat3A');
+var _DialogSelectN = _interopRequireDefault(require("./DialogSelectN"));
 
-var _DialogEurostat3A2 = _interopRequireDefault(_DialogEurostat3A);
-
-var _DialogSelectN = require('./DialogSelectN');
-
-var _DialogSelectN2 = _interopRequireDefault(_DialogSelectN);
-
-var _DialogStatN = require('./DialogStatN');
-
-var _DialogStatN2 = _interopRequireDefault(_DialogStatN);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DialogStatN = _interopRequireDefault(require("./DialogStatN"));
 
 var EurostatDialogs = {
-  Eurostat: _DialogEurostat2.default, Eurostat2: _DialogEurostat4.default,
-  Eurostat3A: _DialogEurostat3A2.default,
-  SelectN: _DialogSelectN2.default,
-  StatN: _DialogStatN2.default
+  Eurostat: _DialogEurostat["default"],
+  Eurostat2: _DialogEurostat2["default"],
+  Eurostat3A: _DialogEurostat3A["default"],
+  SelectN: _DialogSelectN["default"],
+  StatN: _DialogStatN["default"]
 };
-
-exports.default = EurostatDialogs;
+var _default = EurostatDialogs;
+exports["default"] = _default;
 //# sourceMappingURL=EurostatDialogs.js.map

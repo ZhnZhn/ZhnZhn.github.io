@@ -1,14 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireDefault(require("react"));
 
 var CL = {
   ROOT: 'svg-move',
@@ -16,19 +13,20 @@ var CL = {
 };
 
 var SvgEqual = function SvgEqual() {
-  return _react2.default.createElement(
-    'span',
-    { className: CL.ROOT },
-    _react2.default.createElement(
-      'svg',
-      { viewBox: '0 0 12 12', width: '100%', height: '100%',
-        className: CL.SVG,
-        preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg'
-      },
-      _react2.default.createElement('path', { d: 'M 0,3 L 12,3 M 0,7 L 12,7' })
-    )
-  );
+  return _react["default"].createElement("span", {
+    className: CL.ROOT
+  }, _react["default"].createElement("svg", {
+    viewBox: "0 0 12 12",
+    width: "100%",
+    height: "100%",
+    className: CL.SVG,
+    preserveAspectRatio: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, _react["default"].createElement("path", {
+    d: "M 0,3 L 12,3 M 0,7 L 12,7"
+  })));
 };
 
-exports.default = SvgEqual;
+var _default = SvgEqual;
+exports["default"] = _default;
 //# sourceMappingURL=SvgEqual.js.map

@@ -1,8 +1,7 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 /**
  * from redux compose
@@ -15,9 +14,8 @@ Object.defineProperty(exports, "__esModule", {
  * (...args) => f(g(h(...args))).
  *
  */
-
 var compose = function compose() {
-  for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
+  for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
     fns[_key] = arguments[_key];
   }
 
@@ -26,16 +24,18 @@ var compose = function compose() {
       return arg;
     };
   }
+
   if (fns.length === 1) {
     return fns[0];
   }
 
   return fns.reduce(function (a, b) {
     return function () {
-      return a(b.apply(undefined, arguments));
+      return a(b.apply(void 0, arguments));
     };
   });
 };
 
-exports.default = compose;
+var _default = compose;
+exports["default"] = _default;
 //# sourceMappingURL=compose.js.map

@@ -1,23 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AdapterFn = require('../AdapterFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _AdapterStockFn = require('../AdapterStockFn');
+var _AdapterStockFn = _interopRequireDefault(require("../AdapterStockFn"));
 
-var _AdapterStockFn2 = _interopRequireDefault(_AdapterStockFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var toFloatOrNull = _AdapterFn2.default.toFloatOrNull,
-    valueMoving = _AdapterFn2.default.valueMoving;
-var toSeriesData = _AdapterStockFn2.default.toSeriesData;
-
+var toFloatOrNull = _AdapterFn["default"].toFloatOrNull,
+    valueMoving = _AdapterFn["default"].valueMoving;
+var toSeriesData = _AdapterStockFn["default"].toSeriesData;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemId = _ref._itemId,
@@ -31,7 +25,7 @@ var _crZhConfig = function _crZhConfig(_ref) {
     linkFn: "NASDAQ",
     isWithLegend: true,
     isWithoutAdd: true,
-    legend: _AdapterFn2.default.stockSeriesLegend()
+    legend: _AdapterFn["default"].stockSeriesLegend()
   };
 };
 
@@ -42,19 +36,19 @@ var _crInfo = function _crInfo(_ref2) {
   return {
     frequency: "Daily",
     name: title,
-    toDate: toDate, fromDate: fromDate
+    toDate: toDate,
+    fromDate: fromDate
   };
 };
 
-var _crPoint = function _crPoint() {
-  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+var _crPoint = function _crPoint(_temp, date) {
+  var _ref3 = _temp === void 0 ? {} : _temp,
       open = _ref3.open,
       close = _ref3.close,
       high = _ref3.high,
       low = _ref3.low,
       volume = _ref3.volume;
 
-  var date = arguments[1];
   return {
     date: date,
     open: toFloatOrNull(open),
@@ -66,7 +60,6 @@ var _crPoint = function _crPoint() {
 };
 
 var fnAdapter = {
-
   crData: function crData(json, option) {
     var isNotZoomToMinMax = option.isNotZoomToMinMax,
         isDrawDeltaExtrems = option.isDrawDeltaExtrems,
@@ -74,18 +67,18 @@ var fnAdapter = {
         keys = Object.keys(history),
         arrPoint = [],
         max = keys.length;
-
     var i = 0;
+
     for (i; i < max; i++) {
       var _dateKey = keys[i];
       arrPoint.push(_crPoint(history[_dateKey], _dateKey));
     }
+
     return toSeriesData(arrPoint, {
       isNotZoomToMinMax: isNotZoomToMinMax,
       isDrawDeltaExtrems: isDrawDeltaExtrems
     });
   },
-
   crConfigOption: function crConfigOption(_ref4) {
     var data = _ref4.data,
         option = _ref4.option;
@@ -96,6 +89,6 @@ var fnAdapter = {
     };
   }
 };
-
-exports.default = fnAdapter;
+var _default = fnAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=fnAdapter.js.map

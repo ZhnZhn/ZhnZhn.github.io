@@ -1,23 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _Color = require('../styles/Color');
+var _Color = _interopRequireDefault(require("../styles/Color"));
 
-var _Color2 = _interopRequireDefault(_Color);
+var _Sparklines = require("../zhn-sparklines/Sparklines");
 
-var _Sparklines = require('../zhn-sparklines/Sparklines');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var C_YELLOW = _Color2.default.YELLOW;
-
+var C_YELLOW = _Color["default"].YELLOW;
 var S = {
   REF_LINE: {
     stroke: 'red',
@@ -31,46 +25,38 @@ var S = {
     fillOpacity: "0.9"
   }
 };
-
 var SparkFactory = {
   createSparklines: function createSparklines(data, pointIndex) {
-    return _react2.default.createElement(
-      _Sparklines.Sparklines,
-      {
-        height: 45,
-        width: 100,
-        svgHeight: 45,
-        svgWidth: 100,
-        data: data
-      },
-      _react2.default.createElement(_Sparklines.SparklinesLine, { color: C_YELLOW }),
-      _react2.default.createElement(_Sparklines.SparklinesReferenceLine, {
-        style: S.REF_LINE,
-        type: 'avg'
-      }),
-      _react2.default.createElement(_Sparklines.SparklinesSpots, null),
-      _react2.default.createElement(_Sparklines.SparklinesSpot, { pointIndex: pointIndex })
-    );
+    return _react["default"].createElement(_Sparklines.Sparklines, {
+      height: 45,
+      width: 100,
+      svgHeight: 45,
+      svgWidth: 100,
+      data: data
+    }, _react["default"].createElement(_Sparklines.SparklinesLine, {
+      color: C_YELLOW
+    }), _react["default"].createElement(_Sparklines.SparklinesReferenceLine, {
+      style: S.REF_LINE,
+      type: "avg"
+    }), _react["default"].createElement(_Sparklines.SparklinesSpots, null), _react["default"].createElement(_Sparklines.SparklinesSpot, {
+      pointIndex: pointIndex
+    }));
   },
   createSparkbars: function createSparkbars(data, pointIndex) {
-    return _react2.default.createElement(
-      _Sparklines.Sparklines,
-      {
-        height: 45,
-        width: 100,
-        svgHeight: 45,
-        svgWidth: 100,
-        data: data,
-        min: 0,
-        max: 100
-      },
-      _react2.default.createElement(_Sparklines.SparklinesBars, {
-        style: S.BARS,
-        pointIndex: pointIndex
-      })
-    );
+    return _react["default"].createElement(_Sparklines.Sparklines, {
+      height: 45,
+      width: 100,
+      svgHeight: 45,
+      svgWidth: 100,
+      data: data,
+      min: 0,
+      max: 100
+    }, _react["default"].createElement(_Sparklines.SparklinesBars, {
+      style: S.BARS,
+      pointIndex: pointIndex
+    }));
   }
 };
-
-exports.default = SparkFactory;
+var _default = SparkFactory;
+exports["default"] = _default;
 //# sourceMappingURL=SparkFactory.js.map

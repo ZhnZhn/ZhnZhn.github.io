@@ -1,39 +1,28 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _Item = require('./Item');
+var _Item = _interopRequireDefault(require("./Item"));
 
-var _Item2 = _interopRequireDefault(_Item);
-
-var _RowCap = require('./RowCap');
-
-var _RowCap2 = _interopRequireDefault(_RowCap);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _RowCap = _interopRequireDefault(require("./RowCap"));
 
 var ItemWithCap = function ItemWithCap(props) {
   var item = props.item,
       cap = item.cap,
       salePrice = item.salePrice,
       ipo = item.ipo;
-
-  return _react2.default.createElement(
-    _Item2.default,
-    props,
-    _react2.default.createElement(_RowCap2.default, {
-      cap: cap,
-      salePrice: salePrice,
-      ipo: ipo
-    })
-  );
+  return _react["default"].createElement(_Item["default"], props, _react["default"].createElement(_RowCap["default"], {
+    cap: cap,
+    salePrice: salePrice,
+    ipo: ipo
+  }));
 };
 
-exports.default = ItemWithCap;
+var _default = ItemWithCap;
+exports["default"] = _default;
 //# sourceMappingURL=ItemWithCap.js.map

@@ -1,52 +1,37 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _big = require('big.js');
+var _big = _interopRequireDefault(require("big.js"));
 
-var _big2 = _interopRequireDefault(_big);
+var _DateUtils = _interopRequireDefault(require("../utils/DateUtils"));
 
-var _DateUtils = require('../utils/DateUtils');
+var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
+var _Type = require("../constants/Type");
 
-var _formatAllNumber = require('../utils/formatAllNumber');
+var _mathFn = _interopRequireDefault(require("../math/mathFn"));
 
-var _formatAllNumber2 = _interopRequireDefault(_formatAllNumber);
+var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
-var _Type = require('../constants/Type');
-
-var _mathFn = require('../math/mathFn');
-
-var _mathFn2 = _interopRequireDefault(_mathFn);
-
-var _seriaFn = require('../math/seriaFn');
-
-var _seriaFn2 = _interopRequireDefault(_seriaFn);
-
-var _Color = require('../constants/Color');
-
-var _Color2 = _interopRequireDefault(_Color);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Color = _interopRequireDefault(require("../constants/Color"));
 
 var EMPTY = '';
 var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-
-var ymdToUTC = _DateUtils2.default.ymdToUTC,
-    ymdtToUTC = _DateUtils2.default.ymdtToUTC,
-    ymdhmsToUTC = _DateUtils2.default.ymdhmsToUTC,
-    mlsToDmy = _DateUtils2.default.mlsToDmy;
-
+var ymdToUTC = _DateUtils["default"].ymdToUTC,
+    ymdtToUTC = _DateUtils["default"].ymdtToUTC,
+    ymdhmsToUTC = _DateUtils["default"].ymdhmsToUTC,
+    mlsToDmy = _DateUtils["default"].mlsToDmy;
 
 var _isNaN = Number && Number.isNaN || isNaN;
+
 var _isArr = Array.isArray;
+
 var _fIsNumber = function _fIsNumber(pn) {
   return function (p) {
     return typeof p[pn] === 'number' && isFinite(p[pn]);
@@ -58,6 +43,7 @@ var _compareArrByIndex = function _compareArrByIndex(index) {
     if (arrA[index] < arrB[index]) return -1;else if (arrA[index] === arrB[index]) return 0;else return 1;
   };
 };
+
 var _compareByTwoProp = function _compareByTwoProp(propName1, propName2) {
   return function (a, b) {
     if (a[propName1] < b[propName1]) return -1;else if (a[propName1] > b[propName1]) return 1;else if (a[propName2] < b[propName2]) return -1;else if (a[propName2] > a[propName2]) return 1;else return 0;
@@ -80,7 +66,6 @@ var AdapterFn = {
   ymdToUTC: ymdToUTC,
   ymdtToUTC: ymdtToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
-
   volumeColumnPoint: function volumeColumnPoint(_ref) {
     var date = _ref.date,
         open = _ref.open,
@@ -88,18 +73,22 @@ var AdapterFn = {
         volume = _ref.volume,
         option = _ref.option;
 
-    var _color = void 0;
+    var _color;
+
     if (open && close > open) {
-      _color = _Color2.default.GREEN;
+      _color = _Color["default"].GREEN;
     } else if (open && close < open) {
-      _color = _Color2.default.RED;
+      _color = _Color["default"].RED;
     } else {
-      _color = _Color2.default.GRAY;
+      _color = _Color["default"].GRAY;
     }
 
     return Object.assign({
-      x: date, y: volume, color: _color,
-      _open: open, _close: close
+      x: date,
+      y: volume,
+      color: _color,
+      _open: open,
+      _close: close
     }, option);
   },
   athPoint: function athPoint(_ref2) {
@@ -107,16 +96,17 @@ var AdapterFn = {
         prevClose = _ref2.prevClose,
         open = _ref2.open;
 
-    var _bDelta = open && prevClose ? (0, _big2.default)(prevClose).minus(open) : (0, _big2.default)('0.0'),
-        _bPercent = prevClose ? _bDelta.times(100).div(prevClose).abs().toFixed(2) : (0, _big2.default)('0.0');
+    var _bDelta = open && prevClose ? (0, _big["default"])(prevClose).minus(open) : (0, _big["default"])('0.0'),
+        _bPercent = prevClose ? _bDelta.times(100).div(prevClose).abs().toFixed(2) : (0, _big["default"])('0.0');
 
-    var _color = void 0;
+    var _color;
+
     if (_bDelta.gt(0.0)) {
-      _color = _Color2.default.RED;
+      _color = _Color["default"].RED;
     } else if (!_bDelta.gte(0.0)) {
-      _color = _Color2.default.GREEN;
+      _color = _Color["default"].GREEN;
     } else {
-      _color = open ? _Color2.default.GRAY : _Color2.default.WHITE;
+      _color = open ? _Color["default"].GRAY : _Color["default"].WHITE;
     }
 
     return {
@@ -127,119 +117,123 @@ var AdapterFn = {
       color: _color
     };
   },
+  legendItem: function legendItem(index, color, name, is) {
+    if (is === void 0) {
+      is = false;
+    }
 
-
-  legendItem: function legendItem(index, color, name) {
-    var is = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     return {
-      index: index, color: color, name: name,
+      index: index,
+      color: color,
+      name: name,
       isVisible: is
     };
   },
-
   stockSeriesLegend: function stockSeriesLegend() {
-    return [AdapterFn.legendItem(0, _Color2.default.S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color2.default.S_HIGH, 'High'), AdapterFn.legendItem(2, _Color2.default.S_LOW, 'Low'), AdapterFn.legendItem(3, _Color2.default.S_OPEN, 'Open')];
+    return [AdapterFn.legendItem(0, _Color["default"].S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color["default"].S_HIGH, 'High'), AdapterFn.legendItem(2, _Color["default"].S_LOW, 'Low'), AdapterFn.legendItem(3, _Color["default"].S_OPEN, 'Open')];
   },
-
-
-  formatAllNumber: _formatAllNumber2.default,
-  numberFormat: _formatAllNumber2.default,
-
+  formatAllNumber: _formatAllNumber["default"],
+  numberFormat: _formatAllNumber["default"],
   isNumberOrNull: function isNumberOrNull(v) {
     return typeof v === 'number' && !isNaN(v) || v === null;
   },
-
   isYNumber: _fIsNumber('y'),
   toFloatOrNull: function toFloatOrNull(str) {
     var _v = parseFloat(str);
+
     return _isNaN(_v) ? null : _v;
   },
-
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
   compareByValueId: _compareByTwoProp('value', 'id'),
-
   crValueMoving: function crValueMoving(_ref3) {
     var _ref3$bNowValue = _ref3.bNowValue,
-        bNowValue = _ref3$bNowValue === undefined ? (0, _big2.default)('0.0') : _ref3$bNowValue,
+        bNowValue = _ref3$bNowValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bNowValue,
         _ref3$bPrevValue = _ref3.bPrevValue,
-        bPrevValue = _ref3$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref3$bPrevValue,
+        bPrevValue = _ref3$bPrevValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bPrevValue,
         dfR = _ref3.dfR;
-
-    return _mathFn2.default.crValueMoving({
+    return _mathFn["default"].crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: _Type.Direction,
-      fnFormat: _formatAllNumber2.default,
+      fnFormat: _formatAllNumber["default"],
       dfR: dfR
     });
   },
   valueMoving: function valueMoving(data, dfR) {
     if (!_isArr(data)) {
-      return { date: data, direction: 'empty' };
+      return {
+        date: data,
+        direction: 'empty'
+      };
     }
 
     var len = data.length,
         _pointNow = len > 0 && data[len - 1] ? data[len - 1] : [EMPTY, 0],
         _nowValue = _getValue(_pointNow),
-        bNowValue = (0, _big2.default)(_nowValue),
+        bNowValue = (0, _big["default"])(_nowValue),
         _pointPrev = len > 1 && data[len - 2] ? data[len - 2] : _pointNow,
         _prevValue = _getValue(_pointPrev),
-        bPrevValue = (0, _big2.default)(_prevValue),
+        bPrevValue = (0, _big["default"])(_prevValue),
         _nowDate = _getDate(_pointNow),
         date = len > 0 ? mlsToDmy(_nowDate) : EMPTY,
         _prevDate = _getDate(_pointPrev),
         dateTo = len > 1 && _prevDate ? mlsToDmy(_prevDate) : EMPTY;
 
-    return (0, _extends3.default)({}, AdapterFn.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue, dfR: dfR }), {
+    return (0, _extends2["default"])({}, AdapterFn.crValueMoving({
+      bNowValue: bNowValue,
+      bPrevValue: bPrevValue,
+      dfR: dfR
+    }), {
       valueTo: AdapterFn.numberFormat(bPrevValue),
-      date: date, dateTo: dateTo
+      date: date,
+      dateTo: dateTo
     });
   },
-
-
   crId: function crId() {
     return (Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();
   },
-
   toUpperCaseFirst: function toUpperCaseFirst(str) {
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
   },
-
   appendWithColon: function appendWithColon() {
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    var str = '';
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    var str = '';
     args.forEach(function (s) {
       if (s) {
-        str = str ? str + ': ' + s : s;
+        str = str ? str + ": " + s : s;
       }
     });
     return str;
   },
-
   monthIndex: function monthIndex(str) {
     return M.indexOf(String(str).toLowerCase());
   },
+  findMinY: _seriaFn["default"].findMinY,
+  findMaxY: _seriaFn["default"].findMaxY,
+  crError: function crError(errCaption, message) {
+    if (errCaption === void 0) {
+      errCaption = '';
+    }
 
-  findMinY: _seriaFn2.default.findMinY,
-  findMaxY: _seriaFn2.default.findMaxY,
+    if (message === void 0) {
+      message = '';
+    }
 
-  crError: function crError() {
-    var errCaption = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     return {
       errCaption: errCaption,
       message: message
     };
   },
   crItemLink: function crItemLink(caption, itemUrl) {
-    return '<p>\n    <a href="' + itemUrl + '" style="padding-top: 4px;">' + caption + '</a>\n  </p>';
+    return "<p>\n    <a href=\"" + itemUrl + "\" style=\"padding-top: 4px;\">" + caption + "</a>\n  </p>";
   }
 };
-
-exports.default = AdapterFn;
+var _default = AdapterFn;
+exports["default"] = _default;
 //# sourceMappingURL=AdapterFn.js.map

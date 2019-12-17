@@ -1,38 +1,35 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ConfigBuilder = require('../../charts/ConfigBuilder');
+var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _fnAdapter = require('./fnAdapter');
-
-var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crSubtitle = _fnAdapter2.default.crSubtitle,
-    crData = _fnAdapter2.default.crData,
-    crConfigOption = _fnAdapter2.default.crConfigOption;
-
-
+var crSubtitle = _fnAdapter["default"].crSubtitle,
+    crData = _fnAdapter["default"].crData,
+    crConfigOption = _fnAdapter["default"].crConfigOption;
 var IntrinioAdapter = {
   toConfig: function toConfig(json, option) {
     var data = crData(json, option),
-        seria = (0, _ConfigBuilder2.default)().splineSeria({ data: data }).toSeria(),
+        seria = (0, _ConfigBuilder["default"])().splineSeria({
+      data: data
+    }).toSeria(),
         _subtitle = crSubtitle(option),
         title = option.title,
-        config = (0, _ConfigBuilder2.default)().area2Config(title, _subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).toConfig();
+        config = (0, _ConfigBuilder["default"])().area2Config(title, _subtitle).addSeries(seria).add((0, _extends2["default"])({}, crConfigOption({
+      option: option,
+      data: data
+    }))).toConfig();
 
-
-    return { config: config };
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(json, option) {
     var _IntrinioAdapter$toCo = IntrinioAdapter.toConfig(json, option),
@@ -41,6 +38,6 @@ var IntrinioAdapter = {
     return config.series[0];
   }
 };
-
-exports.default = IntrinioAdapter;
+var _default = IntrinioAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=IntrinioAdapter.js.map

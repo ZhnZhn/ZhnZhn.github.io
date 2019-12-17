@@ -1,27 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+var _Msg = _interopRequireDefault(require("../../../constants/Msg"));
 
-var _Msg = require('../../../constants/Msg');
+var _ComponentActions = _interopRequireDefault(require("../../../flux/actions/ComponentActions"));
 
-var _Msg2 = _interopRequireDefault(_Msg);
-
-var _ComponentActions = require('../../../flux/actions/ComponentActions');
-
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NETWORK_ERROR = _Msg2.default.Alert.NETWORK_ERROR;
+var NETWORK_ERROR = _Msg["default"].Alert.NETWORK_ERROR;
 
 var _showMsgErr = function _showMsgErr(alertCaption, alertDescr) {
-  _ComponentActions2.default.showAlert({ alertCaption: alertCaption, alertDescr: alertDescr });
+  _ComponentActions["default"].showAlert({
+    alertCaption: alertCaption,
+    alertDescr: alertDescr
+  });
 };
 
 var _loadOptions = function _loadOptions(option) {
@@ -32,10 +26,9 @@ var _loadOptions = function _loadOptions(option) {
       fnOnCompleted = option.fnOnCompleted,
       fnOnFailed = option.fnOnFailed,
       _option$retryServer = option.retryServer,
-      retryServer = _option$retryServer === undefined ? 3 : _option$retryServer,
+      retryServer = _option$retryServer === void 0 ? 3 : _option$retryServer,
       _option$retryNetwork = option.retryNetwork,
-      retryNetwork = _option$retryNetwork === undefined ? 1 : _option$retryNetwork;
-
+      retryNetwork = _option$retryNetwork === void 0 ? 1 : _option$retryNetwork;
   fetch(uri).then(function (response) {
     var status = response.status,
         statusText = response.statusText;
@@ -44,6 +37,7 @@ var _loadOptions = function _loadOptions(option) {
       return response.json();
     } else if (status >= 400 && status < 500) {
       _showMsgErr('Client Error:', status + ' ' + statusText);
+
       fnOnFailed(target);
       return null;
     } else if (status >= 500 && status < 600) {
@@ -52,15 +46,21 @@ var _loadOptions = function _loadOptions(option) {
         target._loadOptionsID = setTimeout(_loadOptions(option), 3E3);
       } else {
         _showMsgErr('Server Error:', status + ' ' + statusText);
+
         fnOnFailed(target);
       }
+
       return null;
     }
   }).then(function (json) {
     if (json) {
-      fnOnCompleted(target, { toStateProp: toStateProp, json: json, optionJsonProp: optionJsonProp });
+      fnOnCompleted(target, {
+        toStateProp: toStateProp,
+        json: json,
+        optionJsonProp: optionJsonProp
+      });
     }
-  }).catch(function (error) {
+  })["catch"](function (error) {
     if (retryNetwork === 0) {
       fnOnFailed(target, error);
     } else {
@@ -77,16 +77,18 @@ var _onLoadOptionsCompleted = function _onLoadOptionsCompleted(target, _ref) {
 
   if (toStateProp && optionJsonProp) {
     if (!json.dfColumns) {
-      target.setState((0, _defineProperty3.default)({
+      var _target$setState;
+
+      target.setState((_target$setState = {
         isLoading: false
-      }, toStateProp, json[optionJsonProp]));
+      }, _target$setState[toStateProp] = json[optionJsonProp], _target$setState));
     } else {
       var _target$setState2;
 
       target._isDfColumns = true;
       target.setState((_target$setState2 = {
         isLoading: false
-      }, (0, _defineProperty3.default)(_target$setState2, toStateProp, json[optionJsonProp]), (0, _defineProperty3.default)(_target$setState2, 'twoOptions', json.dfColumns), _target$setState2));
+      }, _target$setState2[toStateProp] = json[optionJsonProp], _target$setState2.twoOptions = json.dfColumns, _target$setState2));
     }
   }
 };
@@ -96,6 +98,7 @@ var _onLoadOptionsFailed = function _onLoadOptionsFailed(target, error) {
     isLoading: false,
     isLoadingFailed: true
   });
+
   if (error instanceof TypeError) {
     _showMsgErr(NETWORK_ERROR.caption, NETWORK_ERROR.descr);
   }
@@ -103,8 +106,10 @@ var _onLoadOptionsFailed = function _onLoadOptionsFailed(target, error) {
 
 var _handlerWithLoadOptions = function _handlerWithLoadOptions(toStateProp, optionURI, optionJsonProp) {
   var _uri = optionURI || this.props.optionURI;
+
   if (_uri) {
     var _jsonProp = optionJsonProp || this.props.optionsJsonProp;
+
     this.setState({
       isLoading: true,
       isLoadingFailed: false
@@ -118,6 +123,7 @@ var _handlerWithLoadOptions = function _handlerWithLoadOptions(toStateProp, opti
     }));
   }
 };
+
 var _unmountWithLoadOptions = function _unmountWithLoadOptions() {
   if (this._loadOptionsID) {
     clearTimeout(this._loadOptionsID);
@@ -131,5 +137,6 @@ var withLoadOptions = function withLoadOptions(target) {
   });
 };
 
-exports.default = withLoadOptions;
+var _default = withLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=withLoadOptions.js.map

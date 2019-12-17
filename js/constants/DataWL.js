@@ -1,16 +1,14 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var DataWL = {
-    WL_WATCH_LIST: {
-        type: 'WL_WATCH_LIST',
-        menuTitle: 'Watch List',
-        dialogCaption: 'Watch List'
-    }
+  WL_WATCH_LIST: {
+    type: 'WL_WATCH_LIST',
+    menuTitle: 'Watch List',
+    dialogCaption: 'Watch List'
+  }
 };
-
-exports.default = DataWL;
+var _default = DataWL;
+exports["default"] = _default;
 //# sourceMappingURL=DataWL.js.map

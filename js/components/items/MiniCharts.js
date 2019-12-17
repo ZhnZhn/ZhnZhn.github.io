@@ -1,22 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _ShowHide = require('../zhn/ShowHide');
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _HighchartWrapper = require('../zhn/HighchartWrapper');
-
-var _HighchartWrapper2 = _interopRequireDefault(_HighchartWrapper);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _HighchartWrapper = _interopRequireDefault(require("../zhn/HighchartWrapper"));
 
 var _fIsTitle = function _fIsTitle(title, idPropName) {
   return function (c) {
@@ -26,12 +19,15 @@ var _fIsTitle = function _fIsTitle(title, idPropName) {
 
 var _arrangeBy = function _arrangeBy(titles, configs, idPropName) {
   var _configs = [];
+
   if (!titles || !titles.length) {
     return _configs;
   }
+
   titles.forEach(function (title) {
     var _isTitle = _fIsTitle(title, idPropName),
         _c = configs.find(_isTitle);
+
     if (_c) {
       _configs.push(_c);
     }
@@ -52,45 +48,42 @@ var MiniCharts = function MiniCharts(_ref) {
   }
 
   var _configs = Array.isArray(ids) ? _arrangeBy(ids, configs, idPropName) : configs;
+
   if (_configs.length === 0) {
     return null;
   }
 
-  return _react2.default.createElement(
-    'div',
-    null,
-    _configs.map(function (c) {
-      return _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: true, key: c[idPropName] },
-        _react2.default.createElement(_HighchartWrapper2.default, {
-          isShow: true,
-          config: c.config,
-          absComp: absComp,
-          onLoaded: onLoaded,
-          onWillUnLoaded: onWillUnLoaded
-        })
-      );
-    })
-  );
+  return _react["default"].createElement("div", null, _configs.map(function (c) {
+    return _react["default"].createElement(_ShowHide["default"], {
+      isShow: true,
+      key: c[idPropName]
+    }, _react["default"].createElement(_HighchartWrapper["default"], {
+      isShow: true,
+      config: c.config,
+      absComp: absComp,
+      onLoaded: onLoaded,
+      onWillUnLoaded: onWillUnLoaded
+    }));
+  }));
 };
 
 MiniCharts.defaultProps = {
   idPropName: 'id'
+};
+/*
+MiniCharts.propTypes = {
+  configs: PropTypes.arrayOf(
+    PropTypes.shape({
+      config: PropTypes.object
+  })),
+  idPropName: PropTypes.string,
+  ids: PropTypes.arrayOf(PropTypes.string),
+  absComp: PropTypes.node,
+  onLoaded: PropTypes.func,
+  onWillUnLoaded: PropTypes.func
+}
+*/
 
-  /*
-  MiniCharts.propTypes = {
-    configs: PropTypes.arrayOf(
-      PropTypes.shape({
-        config: PropTypes.object
-    })),
-    idPropName: PropTypes.string,
-    ids: PropTypes.arrayOf(PropTypes.string),
-    absComp: PropTypes.node,
-    onLoaded: PropTypes.func,
-    onWillUnLoaded: PropTypes.func
-  }
-  */
-
-};exports.default = MiniCharts;
+var _default = MiniCharts;
+exports["default"] = _default;
 //# sourceMappingURL=MiniCharts.js.map

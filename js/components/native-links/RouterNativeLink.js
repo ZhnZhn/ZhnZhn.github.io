@@ -1,63 +1,42 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _DfLink = require('./DfLink');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _DfLink2 = _interopRequireDefault(_DfLink);
+var _DfLink = _interopRequireDefault(require("./DfLink"));
 
-var _QuandlLink = require('./QuandlLink');
+var _QuandlLink = _interopRequireDefault(require("./QuandlLink"));
 
-var _QuandlLink2 = _interopRequireDefault(_QuandlLink);
+var _EuronextLink = _interopRequireDefault(require("./EuronextLink"));
 
-var _EuronextLink = require('./EuronextLink');
+var _NasdaqLink = _interopRequireDefault(require("./NasdaqLink"));
 
-var _EuronextLink2 = _interopRequireDefault(_EuronextLink);
+var _LmeLink = _interopRequireDefault(require("./LmeLink"));
 
-var _NasdaqLink = require('./NasdaqLink');
+var _UnComtradeLink = _interopRequireDefault(require("./UnComtradeLink"));
 
-var _NasdaqLink2 = _interopRequireDefault(_NasdaqLink);
+var _FaoStatLink = _interopRequireDefault(require("./FaoStatLink"));
 
-var _LmeLink = require('./LmeLink');
+var _FredLink = _interopRequireDefault(require("./FredLink"));
 
-var _LmeLink2 = _interopRequireDefault(_LmeLink);
+var _CrcLink = _interopRequireDefault(require("./CrcLink"));
 
-var _UnComtradeLink = require('./UnComtradeLink');
-
-var _UnComtradeLink2 = _interopRequireDefault(_UnComtradeLink);
-
-var _FaoStatLink = require('./FaoStatLink');
-
-var _FaoStatLink2 = _interopRequireDefault(_FaoStatLink);
-
-var _FredLink = require('./FredLink');
-
-var _FredLink2 = _interopRequireDefault(_FredLink);
-
-var _CrcLink = require('./CrcLink');
-
-var _CrcLink2 = _interopRequireDefault(_CrcLink);
-
-var _EsLink = require('./EsLink');
-
-var _EsLink2 = _interopRequireDefault(_EsLink);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _EsLink = _interopRequireDefault(require("./EsLink"));
 
 var RouterNativeLink = {
-  DF: _DfLink2.default,
-  QUANDL: _QuandlLink2.default,
-  EURONEXT: _EuronextLink2.default,
-  NASDAQ: _NasdaqLink2.default,
-  LME: _LmeLink2.default,
-  UN_COMTRADE: _UnComtradeLink2.default,
-  FAO_STAT: _FaoStatLink2.default,
-  FRED: _FredLink2.default,
-  CRC: _CrcLink2.default,
-  ES: _EsLink2.default
+  DF: _DfLink["default"],
+  QUANDL: _QuandlLink["default"],
+  EURONEXT: _EuronextLink["default"],
+  NASDAQ: _NasdaqLink["default"],
+  LME: _LmeLink["default"],
+  UN_COMTRADE: _UnComtradeLink["default"],
+  FAO_STAT: _FaoStatLink["default"],
+  FRED: _FredLink["default"],
+  CRC: _CrcLink["default"],
+  ES: _EsLink["default"]
 };
-
-exports.default = RouterNativeLink;
+var _default = RouterNativeLink;
+exports["default"] = _default;
 //# sourceMappingURL=RouterNativeLink.js.map

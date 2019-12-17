@@ -1,10 +1,8 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 var CHANNEL = 'WITH_LIMIT_REMAINING';
-
 var WithLimitRemaining = {
   listenLimitRemaining: function listenLimitRemaining(fnHandler) {
     var _this = this;
@@ -18,6 +16,6 @@ var WithLimitRemaining = {
     this.emitter.emit(CHANNEL, limitRemaining);
   }
 };
-
-exports.default = WithLimitRemaining;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\WithLimitRemaining.js.map
+var _default = WithLimitRemaining;
+exports["default"] = _default;
+//# sourceMappingURL=WithLimitRemaining.js.map

@@ -1,108 +1,82 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DateField = require('../../zhn/DateField');
-
-var _DateField2 = _interopRequireDefault(_DateField);
-
-var _useRowStyle2 = require('./useRowStyle');
-
-var _useRowStyle3 = _interopRequireDefault(_useRowStyle2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _useRowStyle2 = _interopRequireDefault(require("./useRowStyle"));
 
 //import PropTypes from "prop-types";
-
-var RowDate = function (_Component) {
-  (0, _inherits3.default)(RowDate, _Component);
+var RowDate =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(RowDate, _Component);
 
   function RowDate() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, RowDate);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RowDate.__proto__ || Object.getPrototypeOf(RowDate)).call.apply(_ref, [this].concat(args))), _this), _this._refInpuDate = function (c) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._refInpuDate = function (c) {
       return _this.inputDate = c;
-    }, _this.getValue = function () {
+    };
+
+    _this.getValue = function () {
       return _this.inputDate.getValue();
-    }, _this.isValid = function () {
+    };
+
+    _this.isValid = function () {
       return _this.inputDate.isValid();
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
-  /*
-  static propTypes = {
-     labelTitle : PropTypes.string,
-     initValue : PropTypes.string,
-     errorMsg : PropTypes.string,
-     onTestDate : PropTypes.func
-  }
-  */
+
+  var _proto = RowDate.prototype;
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShowLabels = _this$props.isShowLabels,
+        _this$props$labelTitl = _this$props.labelTitle,
+        labelTitle = _this$props$labelTitl === void 0 ? '' : _this$props$labelTitl,
+        initValue = _this$props.initValue,
+        errorMsg = _this$props.errorMsg,
+        onTestDate = _this$props.onTestDate,
+        _useRowStyle = (0, _useRowStyle2["default"])({
+      isShowLabels: isShowLabels
+    }),
+        rowStyle = _useRowStyle.rowStyle,
+        labelStyle = _useRowStyle.labelStyle; //STYLE.crRowLabelStyle(isShowLabels);
 
 
-  (0, _createClass3.default)(RowDate, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShowLabels = _props.isShowLabels,
-          _props$labelTitle = _props.labelTitle,
-          labelTitle = _props$labelTitle === undefined ? '' : _props$labelTitle,
-          initValue = _props.initValue,
-          errorMsg = _props.errorMsg,
-          onTestDate = _props.onTestDate,
-          _useRowStyle = (0, _useRowStyle3.default)({ isShowLabels: isShowLabels }),
-          rowStyle = _useRowStyle.rowStyle,
-          labelStyle = _useRowStyle.labelStyle;
-      //STYLE.crRowLabelStyle(isShowLabels);
+    return _react["default"].createElement("div", {
+      style: rowStyle
+    }, _react["default"].createElement("span", {
+      style: labelStyle
+    }, labelTitle), _react["default"].createElement(_DateField["default"], {
+      ref: this._refInpuDate,
+      initValue: initValue,
+      errorMsg: errorMsg,
+      onTest: onTestDate
+    }));
+  };
 
-
-      return _react2.default.createElement(
-        'div',
-        { style: rowStyle },
-        _react2.default.createElement(
-          'span',
-          { style: labelStyle },
-          labelTitle
-        ),
-        _react2.default.createElement(_DateField2.default, {
-          ref: this._refInpuDate,
-          initValue: initValue,
-          errorMsg: errorMsg,
-          onTest: onTestDate
-        })
-      );
-    }
-  }]);
   return RowDate;
 }(_react.Component);
 
-exports.default = RowDate;
+var _default = RowDate;
+exports["default"] = _default;
 //# sourceMappingURL=RowDate.js.map

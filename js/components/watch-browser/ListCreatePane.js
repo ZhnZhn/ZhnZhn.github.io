@@ -1,37 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _Atoms = _interopRequireDefault(require("./Atoms"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Atoms = require('./Atoms');
-
-var _Atoms2 = _interopRequireDefault(_Atoms);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ListCreatePane = function (_Component) {
-  (0, _inherits3.default)(ListCreatePane, _Component);
+//import PropTypes from "prop-types";
+var ListCreatePane =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ListCreatePane, _Component);
 
   /*
   static propTypes = {
@@ -48,11 +34,10 @@ var ListCreatePane = function (_Component) {
     onClose: PropTypes.func
   }
   */
-
   function ListCreatePane(props) {
-    (0, _classCallCheck3.default)(this, ListCreatePane);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ListCreatePane.__proto__ || Object.getPrototypeOf(ListCreatePane)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._onStore = function (actionType, data) {
       var _this$props = _this.props,
@@ -65,6 +50,7 @@ var ListCreatePane = function (_Component) {
         if (data.forActionType === forActionType) {
           _this._handleClear();
         }
+
         _this.setState({
           groupOptions: store.getWatchGroups()
         });
@@ -81,6 +67,7 @@ var ListCreatePane = function (_Component) {
 
     _this._handleClear = function () {
       _this.inputText.setValue('');
+
       if (_this.state.validationMessages.length > 0) {
         _this.setState({
           validationMessages: []
@@ -102,12 +89,15 @@ var ListCreatePane = function (_Component) {
         });
       } else {
         var msg = [];
+
         if (!_this.captionGroup) {
           msg.push(msgOnNotSelect('In Group'));
         }
+
         if (!captionList) {
           msg.push(msgOnIsEmptyName('List'));
         }
+
         _this.setState({
           validationMessages: msg
         });
@@ -119,9 +109,9 @@ var ListCreatePane = function (_Component) {
     };
 
     _this.captionGroup = null;
-    _this._primaryBt = _react2.default.createElement(_Atoms2.default.Button.Primary, {
-      caption: 'Create',
-      title: 'Create New List',
+    _this._primaryBt = _react["default"].createElement(_Atoms["default"].Button.Primary, {
+      caption: "Create",
+      title: "Create New List",
       onClick: _this._handleCreate
     });
     _this.state = {
@@ -131,50 +121,40 @@ var ListCreatePane = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(ListCreatePane, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var onClose = this.props.onClose,
-          _state = this.state,
-          groupOptions = _state.groupOptions,
-          validationMessages = _state.validationMessages;
+  var _proto = ListCreatePane.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Atoms2.default.RowInputSelect, {
-          caption: 'In Group:',
-          options: groupOptions,
-          onSelect: this._handleSelectGroup
-        }),
-        _react2.default.createElement(_Atoms2.default.RowInputText, {
-          ref: this._refInputText,
-          caption: 'List:'
-        }),
-        _react2.default.createElement(_Atoms2.default.ValidationMessages, {
-          validationMessages: validationMessages
-        }),
-        _react2.default.createElement(_Atoms2.default.RowButtons, {
-          Primary: this._primaryBt,
-          onClear: this._handleClear,
-          onClose: onClose
-        })
-      );
-    }
-  }]);
+  _proto.componentDidMount = function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.unsubscribe();
+  };
+
+  _proto.render = function render() {
+    var onClose = this.props.onClose,
+        _this$state = this.state,
+        groupOptions = _this$state.groupOptions,
+        validationMessages = _this$state.validationMessages;
+    return _react["default"].createElement("div", null, _react["default"].createElement(_Atoms["default"].RowInputSelect, {
+      caption: "In Group:",
+      options: groupOptions,
+      onSelect: this._handleSelectGroup
+    }), _react["default"].createElement(_Atoms["default"].RowInputText, {
+      ref: this._refInputText,
+      caption: "List:"
+    }), _react["default"].createElement(_Atoms["default"].ValidationMessages, {
+      validationMessages: validationMessages
+    }), _react["default"].createElement(_Atoms["default"].RowButtons, {
+      Primary: this._primaryBt,
+      onClear: this._handleClear,
+      onClose: onClose
+    }));
+  };
+
   return ListCreatePane;
 }(_react.Component);
-//import PropTypes from "prop-types";
 
-exports.default = ListCreatePane;
+var _default = ListCreatePane;
+exports["default"] = _default;
 //# sourceMappingURL=ListCreatePane.js.map

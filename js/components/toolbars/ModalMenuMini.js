@@ -1,32 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _ModalPopup = require('../zhn-moleculs/ModalPopup');
+var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
-var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
+var _SubMenuItem = _interopRequireDefault(require("./SubMenuItem"));
 
-var _SubMenuItem = require('./SubMenuItem');
-
-var _SubMenuItem2 = _interopRequireDefault(_SubMenuItem);
-
-var _ModalMenu = require('./ModalMenu.Style');
-
-var _ModalMenu2 = _interopRequireDefault(_ModalMenu);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ModalMenu = _interopRequireDefault(require("./ModalMenu.Style"));
 
 var _renderItems = function _renderItems(configs, onClickItem) {
   return configs.map(function (c) {
     var btTitle = c.btTitle;
-
-    return _react2.default.createElement(_SubMenuItem2.default, {
+    return _react["default"].createElement(_SubMenuItem["default"], {
       key: btTitle,
       caption: btTitle,
       onClick: onClickItem.bind(null, btTitle)
@@ -39,20 +29,15 @@ var ModalMenuMini = function ModalMenuMini(_ref) {
       onClose = _ref.onClose,
       configs = _ref.configs,
       onClickItem = _ref.onClickItem;
-  return _react2.default.createElement(
-    _ModalPopup2.default,
-    {
-      isShow: isShow,
-      style: _ModalMenu2.default.ROOT,
-      onClose: onClose
-    },
-    _react2.default.createElement(
-      'div',
-      { style: _ModalMenu2.default.PANE },
-      configs && _renderItems(configs, onClickItem)
-    )
-  );
+  return _react["default"].createElement(_ModalPopup["default"], {
+    isShow: isShow,
+    style: _ModalMenu["default"].ROOT,
+    onClose: onClose
+  }, _react["default"].createElement("div", {
+    style: _ModalMenu["default"].PANE
+  }, configs && _renderItems(configs, onClickItem)));
 };
 
-exports.default = ModalMenuMini;
+var _default = ModalMenuMini;
+exports["default"] = _default;
 //# sourceMappingURL=ModalMenuMini.js.map

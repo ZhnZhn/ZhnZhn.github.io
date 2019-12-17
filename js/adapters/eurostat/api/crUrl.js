@@ -1,29 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _apiFn = require('./apiFn');
+var _apiFn = _interopRequireDefault(require("./apiFn"));
 
-var _apiFn2 = _interopRequireDefault(_apiFn);
+var _mapFn = _interopRequireDefault(require("./mapFn"));
 
-var _mapFn = require('./mapFn');
-
-var _mapFn2 = _interopRequireDefault(_mapFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var URL = _apiFn2.default.URL,
-    QUERY_TAIL = _apiFn2.default.QUERY_TAIL,
-    isCategory = _apiFn2.default.isCategory;
-var createMapValue = _mapFn2.default.createMapValue,
-    createMapSlice = _mapFn2.default.createMapSlice;
-
+var URL = _apiFn["default"].URL,
+    QUERY_TAIL = _apiFn["default"].QUERY_TAIL,
+    isCategory = _apiFn["default"].isCategory;
+var createMapValue = _mapFn["default"].createMapValue,
+    createMapSlice = _mapFn["default"].createMapSlice;
 
 var crUrl = function crUrl(option) {
   var seriaType = option.seriaType,
@@ -32,12 +24,11 @@ var crUrl = function crUrl(option) {
       itemMap = option.itemMap,
       time = option.time;
 
-
   if (!isCategory(seriaType)) {
-    var _geo = 'geo=' + geo,
-        _metric = metric.indexOf('?') === -1 ? metric + '?' : metric;
+    var _geo = "geo=" + geo,
+        _metric = metric.indexOf('?') === -1 ? metric + "?" : metric;
 
-    return '' + URL + _metric + '&' + _geo + QUERY_TAIL;
+    return "" + URL + _metric + "&" + _geo + QUERY_TAIL;
   }
 
   var mapValue = itemMap.mapValue,
@@ -45,12 +36,17 @@ var crUrl = function crUrl(option) {
       _mapValue = mapValue || createMapValue(option, itemMap);
 
   if (seriaType === 'MAP') {
-    option.zhMapSlice = mapSlice ? (0, _extends3.default)({}, mapSlice, { time: time }) : (0, _extends3.default)({}, createMapSlice(option, itemMap), { time: time });
-    return '' + URL + _mapValue;
+    option.zhMapSlice = mapSlice ? (0, _extends2["default"])({}, mapSlice, {
+      time: time
+    }) : (0, _extends2["default"])({}, createMapSlice(option, itemMap), {
+      time: time
+    });
+    return "" + URL + _mapValue;
   } else {
-    return '' + URL + _mapValue + '&time=' + time;
+    return "" + URL + _mapValue + "&time=" + time;
   }
 };
 
-exports.default = crUrl;
+var _default = crUrl;
+exports["default"] = _default;
 //# sourceMappingURL=crUrl.js.map

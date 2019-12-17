@@ -1,12 +1,13 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var isKeyEnter = function isKeyEnter(_ref) {
   var keyCode = _ref.keyCode;
   return keyCode === 13 || keyCode === 32;
 };
-exports.default = isKeyEnter;
+
+var _default = isKeyEnter;
+exports["default"] = _default;
 //# sourceMappingURL=isKeyEnter.js.map

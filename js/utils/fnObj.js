@@ -1,11 +1,8 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var fnObj = {
-
   findInPropArrayByProp: function findInPropArrayByProp(propArrName, propName) {
     return function (obj, propValue) {
       return obj[propArrName].find(function (item) {
@@ -13,8 +10,7 @@ var fnObj = {
       });
     };
   }
-
 };
-
-exports.default = fnObj;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\fnObj.js.map
+var _default = fnObj;
+exports["default"] = _default;
+//# sourceMappingURL=fnObj.js.map

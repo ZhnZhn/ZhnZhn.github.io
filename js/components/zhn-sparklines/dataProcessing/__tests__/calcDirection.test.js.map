@@ -1,17 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-sparklines\\dataProcessing\\__tests__\\calcDirection.test.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-sparklines\\dataProcessing\\__tests__\\calcDirection.test.js",
- "sourceRoot": "",
- "names": [
-  "describe",
-  "points",
-  "x",
-  "y",
-  "test",
-  "expect",
-  "toBe"
- ],
- "mappings": ";;AAAA;;;;;;AAEAA,SAAS,eAAT,EAA0B,YAAI;AAC5B,MAAMC,SAAS,CACP,EAAEC,GAAG,CAAL,EAAQC,GAAE,CAAV,EADO,EAEP,EAAED,GAAG,CAAL,EAAQC,GAAE,CAAV,EAFO,EAGP,EAAED,GAAG,CAAL,EAAQC,GAAE,CAAV,EAHO,EAIP,EAAED,GAAG,CAAL,EAAQC,GAAE,CAAV,EAJO,CAAf;AAMAC,OAAK,2BAAL,EAAkC,YAAI;AACpCC,WAAO,6BAAcJ,MAAd,EAAsB,CAAtB,CAAP,EAAiCK,IAAjC,CAAsC,CAAC,CAAvC;AACAD,WAAO,6BAAcJ,MAAd,EAAsB,CAAtB,CAAP,EAAiCK,IAAjC,CAAsC,CAAtC;AACAD,WAAO,6BAAcJ,MAAd,EAAsB,CAAtB,CAAP,EAAiCK,IAAjC,CAAsC,CAAtC;AACD,GAJD;;AAMAF,OAAK,6BAAL,EAAoC,YAAI;AACtCC,WAAO,6BAAcJ,MAAd,EAAsB,CAAtB,CAAP,EAAiCK,IAAjC,CAAsC,CAAtC;AACD,GAFD;;AAIAF,OAAK,0CAAL,EAAiD,YAAI;AACnDC,WAAO,6BAAc,CAAC,EAAEH,GAAG,CAAL,EAAQC,GAAE,CAAV,EAAD,CAAd,EAA8B,CAA9B,CAAP,EAAyCG,IAAzC,CAA8C,CAA9C;AACD,GAFD;AAGD,CApBD"
-}
+{"version":3,"sources":["../../../../../src/components/zhn-sparklines/dataProcessing/__tests__/calcDirection.test.js"],"names":["describe","points","x","y","test","expect","toBe"],"mappings":";;;;AAAA;;AAEAA,QAAQ,CAAC,eAAD,EAAkB,YAAI;AAC5B,MAAMC,MAAM,GAAG,CACP;AAAEC,IAAAA,CAAC,EAAE,CAAL;AAAQC,IAAAA,CAAC,EAAC;AAAV,GADO,EAEP;AAAED,IAAAA,CAAC,EAAE,CAAL;AAAQC,IAAAA,CAAC,EAAC;AAAV,GAFO,EAGP;AAAED,IAAAA,CAAC,EAAE,CAAL;AAAQC,IAAAA,CAAC,EAAC;AAAV,GAHO,EAIP;AAAED,IAAAA,CAAC,EAAE,CAAL;AAAQC,IAAAA,CAAC,EAAC;AAAV,GAJO,CAAf;AAMAC,EAAAA,IAAI,CAAC,2BAAD,EAA8B,YAAI;AACpCC,IAAAA,MAAM,CAAC,+BAAcJ,MAAd,EAAsB,CAAtB,CAAD,CAAN,CAAiCK,IAAjC,CAAsC,CAAC,CAAvC;AACAD,IAAAA,MAAM,CAAC,+BAAcJ,MAAd,EAAsB,CAAtB,CAAD,CAAN,CAAiCK,IAAjC,CAAsC,CAAtC;AACAD,IAAAA,MAAM,CAAC,+BAAcJ,MAAd,EAAsB,CAAtB,CAAD,CAAN,CAAiCK,IAAjC,CAAsC,CAAtC;AACD,GAJG,CAAJ;AAMAF,EAAAA,IAAI,CAAC,6BAAD,EAAgC,YAAI;AACtCC,IAAAA,MAAM,CAAC,+BAAcJ,MAAd,EAAsB,CAAtB,CAAD,CAAN,CAAiCK,IAAjC,CAAsC,CAAtC;AACD,GAFG,CAAJ;AAIAF,EAAAA,IAAI,CAAC,0CAAD,EAA6C,YAAI;AACnDC,IAAAA,MAAM,CAAC,+BAAc,CAAC;AAAEH,MAAAA,CAAC,EAAE,CAAL;AAAQC,MAAAA,CAAC,EAAC;AAAV,KAAD,CAAd,EAA8B,CAA9B,CAAD,CAAN,CAAyCG,IAAzC,CAA8C,CAA9C;AACD,GAFG,CAAJ;AAGD,CApBO,CAAR","sourcesContent":["import calcDirection from '../calcDirection'\r\n\r\ndescribe('calcDirection', ()=>{\r\n  const points = [\r\n          { x: 1, y:1 },\r\n          { x: 2, y:2 },\r\n          { x: 3, y:0 },\r\n          { x: 4, y:0 }\r\n        ]\r\n  test('should return y direction', ()=>{\r\n    expect(calcDirection(points, 1)).toBe(-1)\r\n    expect(calcDirection(points, 2)).toBe(1)\r\n    expect(calcDirection(points, 3)).toBe(0)\r\n  })\r\n\r\n  test('should return 0 for index 0', ()=>{\r\n    expect(calcDirection(points, 0)).toBe(0)\r\n  })\r\n\r\n  test('should return 0 for array with one point', ()=>{\r\n    expect(calcDirection([{ x: 1, y:1}], 2)).toBe(0)\r\n  })\r\n})\r\n"],"file":"calcDirection.test.js"}

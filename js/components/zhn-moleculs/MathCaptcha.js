@@ -1,38 +1,20 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _InputSlider = _interopRequireDefault(require("../zhn/InputSlider"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _InputSlider = require('../zhn/InputSlider');
-
-var _InputSlider2 = _interopRequireDefault(_InputSlider);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var MSG = 'Before loading, please, enter sum using slider';
 //import PropTypes from "prop-types";
-
+var MSG = 'Before loading, please, enter sum using slider';
 var S = {
   MSG: {
     color: 'grey',
@@ -51,29 +33,36 @@ var S = {
   }
 };
 
-var _crRandomNumber = function _crRandomNumber() {
-  var m = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-  var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
+var _crRandomNumber = function _crRandomNumber(m, n) {
+  if (m === void 0) {
+    m = 0;
+  }
+
+  if (n === void 0) {
+    n = 10;
+  }
 
   return m + Math.floor((n - m + 1) * Math.random());
 };
 
-var MatchCaptcha = function (_Component) {
-  (0, _inherits3.default)(MatchCaptcha, _Component);
+var MatchCaptcha =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MatchCaptcha, _Component);
 
   /*
   static propTypes = {
     rootStyle: PropTypes.object
   }
   */
-
   function MatchCaptcha(props) {
-    (0, _classCallCheck3.default)(this, MatchCaptcha);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (MatchCaptcha.__proto__ || Object.getPrototypeOf(MatchCaptcha)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
     _this._hChangeSlider = function (event, value) {
       var _isOk = _this.firstNumber + _this.secondNumber === value ? true : false;
+
       _this.setState({
         isOk: _isOk,
         resultSum: value
@@ -89,50 +78,35 @@ var MatchCaptcha = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(MatchCaptcha, [{
-    key: 'render',
-    value: function render() {
-      var rootStyle = this.props.rootStyle,
-          _state = this.state,
-          isOk = _state.isOk,
-          resultSum = _state.resultSum,
-          _sumStyle = isOk ? S.SUM_OK : S.SUM_NOT_OK;
+  var _proto = MatchCaptcha.prototype;
 
-      return _react2.default.createElement(
-        'div',
-        { style: rootStyle },
-        _react2.default.createElement(
-          'p',
-          { style: S.MSG },
-          MSG
-        ),
-        _react2.default.createElement(
-          'p',
-          { style: S.P_SUM },
-          _react2.default.createElement(
-            'span',
-            null,
-            this.firstNumber + ' + ' + this.secondNumber + ' = '
-          ),
-          _react2.default.createElement(
-            'span',
-            { style: _sumStyle },
-            resultSum
-          )
-        ),
-        _react2.default.createElement(_InputSlider2.default, {
-          onChange: this._hChangeSlider
-        })
-      );
-    }
-  }, {
-    key: 'isOk',
-    value: function isOk() {
-      return this.state.isOk;
-    }
-  }]);
+  _proto.render = function render() {
+    var rootStyle = this.props.rootStyle,
+        _this$state = this.state,
+        isOk = _this$state.isOk,
+        resultSum = _this$state.resultSum,
+        _sumStyle = isOk ? S.SUM_OK : S.SUM_NOT_OK;
+
+    return _react["default"].createElement("div", {
+      style: rootStyle
+    }, _react["default"].createElement("p", {
+      style: S.MSG
+    }, MSG), _react["default"].createElement("p", {
+      style: S.P_SUM
+    }, _react["default"].createElement("span", null, this.firstNumber + " + " + this.secondNumber + " = "), _react["default"].createElement("span", {
+      style: _sumStyle
+    }, resultSum)), _react["default"].createElement(_InputSlider["default"], {
+      onChange: this._hChangeSlider
+    }));
+  };
+
+  _proto.isOk = function isOk() {
+    return this.state.isOk;
+  };
+
   return MatchCaptcha;
 }(_react.Component);
 
-exports.default = MatchCaptcha;
+var _default = MatchCaptcha;
+exports["default"] = _default;
 //# sourceMappingURL=MathCaptcha.js.map

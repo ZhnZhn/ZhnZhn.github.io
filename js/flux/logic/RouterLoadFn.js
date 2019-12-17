@@ -1,86 +1,55 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _eurostat = require('../creaters/eurostat');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _eurostat2 = _interopRequireDefault(_eurostat);
+var _eurostat = _interopRequireDefault(require("../creaters/eurostat"));
 
-var _eurostat3 = require('../creaters/eurostat2');
+var _eurostat2 = _interopRequireDefault(require("../creaters/eurostat2"));
 
-var _eurostat4 = _interopRequireDefault(_eurostat3);
+var _eurostat3 = _interopRequireDefault(require("../creaters/eurostat3"));
 
-var _eurostat5 = require('../creaters/eurostat3');
+var _selectN = _interopRequireDefault(require("../creaters/selectN"));
 
-var _eurostat6 = _interopRequireDefault(_eurostat5);
+var _eurostatN = _interopRequireDefault(require("../creaters/eurostatN"));
 
-var _selectN = require('../creaters/selectN');
+var _type = _interopRequireDefault(require("../creaters/type3"));
 
-var _selectN2 = _interopRequireDefault(_selectN);
+var _type2 = _interopRequireDefault(require("../creaters/type4"));
 
-var _eurostatN = require('../creaters/eurostatN');
+var _type3 = _interopRequireDefault(require("../creaters/type5"));
 
-var _eurostatN2 = _interopRequireDefault(_eurostatN);
+var _un = _interopRequireDefault(require("../creaters/un5"));
 
-var _type = require('../creaters/type3');
+var _futures = _interopRequireDefault(require("../creaters/futures3"));
 
-var _type2 = _interopRequireDefault(_type);
+var _futuresWiki = _interopRequireDefault(require("../creaters/futuresWiki"));
 
-var _type3 = require('../creaters/type4');
-
-var _type4 = _interopRequireDefault(_type3);
-
-var _type5 = require('../creaters/type5');
-
-var _type6 = _interopRequireDefault(_type5);
-
-var _un = require('../creaters/un5');
-
-var _un2 = _interopRequireDefault(_un);
-
-var _futures = require('../creaters/futures3');
-
-var _futures2 = _interopRequireDefault(_futures);
-
-var _futuresWiki = require('../creaters/futuresWiki');
-
-var _futuresWiki2 = _interopRequireDefault(_futuresWiki);
-
-var _bigMac = require('../creaters/bigMac');
-
-var _bigMac2 = _interopRequireDefault(_bigMac);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _bigMac = _interopRequireDefault(require("../creaters/bigMac"));
 
 var noopFn = function noopFn() {};
 
 var _r = {
-  BigMac: _bigMac2.default,
-
-  DEFAULT: _type2.default,
-  DialogType3: _type2.default,
-  DialogType4: _type4.default,
-  DialogType4A: _type4.default,
-  DialogType5: _type6.default,
-  DialogQuery: _type2.default,
-
-  DialogType5A: _type6.default,
-
-  Futures3Dialog: _futures2.default,
-  FuturesWikiDialog: _futuresWiki2.default,
-
-  DialogEurostat: _eurostat2.default,
-  DialogEurostat2: _eurostat4.default,
-  DialogEurostat3: _eurostat6.default,
-  DialogEurostat3A: _eurostat6.default,
-  DialogSelectN: _selectN2.default,
-  DialogStatN: _eurostatN2.default,
-
-  UnDialog5: _un2.default
+  BigMac: _bigMac["default"],
+  DEFAULT: _type["default"],
+  DialogType3: _type["default"],
+  DialogType4: _type2["default"],
+  DialogType4A: _type2["default"],
+  DialogType5: _type3["default"],
+  DialogQuery: _type["default"],
+  DialogType5A: _type3["default"],
+  Futures3Dialog: _futures["default"],
+  FuturesWikiDialog: _futuresWiki["default"],
+  DialogEurostat: _eurostat["default"],
+  DialogEurostat2: _eurostat2["default"],
+  DialogEurostat3: _eurostat3["default"],
+  DialogEurostat3A: _eurostat3["default"],
+  DialogSelectN: _selectN["default"],
+  DialogStatN: _eurostatN["default"],
+  UnDialog5: _un["default"]
 };
-
 var RouterLoadFn = {
   getFn: function getFn(loadFnType, dialogType) {
     if (loadFnType) {
@@ -96,6 +65,6 @@ var RouterLoadFn = {
     }
   }
 };
-
-exports.default = RouterLoadFn;
+var _default = RouterLoadFn;
+exports["default"] = _default;
 //# sourceMappingURL=RouterLoadFn.js.map

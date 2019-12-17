@@ -1,21 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _DialogCell = require('../DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DialogCell = _interopRequireDefault(require("../DialogCell"));
 
 var _crCommandsWithLoad = function _crCommandsWithLoad(comp) {
-  return [_react2.default.createElement(_DialogCell2.default.Button.Load, { key: 'load', onClick: comp._handleLoad })];
+  return [_react["default"].createElement(_DialogCell["default"].Button.Load, {
+    key: "load",
+    onClick: comp._handleLoad
+  })];
 };
 
 var withLoad = function withLoad(target) {
@@ -24,5 +22,6 @@ var withLoad = function withLoad(target) {
   });
 };
 
-exports.default = withLoad;
+var _default = withLoad;
+exports["default"] = _default;
 //# sourceMappingURL=withLoad.js.map

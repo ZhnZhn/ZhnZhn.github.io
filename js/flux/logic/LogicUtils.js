@@ -1,16 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Type = require('../../constants/Type');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _LoadConfig = require('./LoadConfig');
+var _Type = require("../../constants/Type");
 
-var _LoadConfig2 = _interopRequireDefault(_LoadConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _LoadConfig = _interopRequireDefault(require("./LoadConfig"));
 
 var _crQuandlKey = function _crQuandlKey(option) {
   var loadId = option.loadId,
@@ -19,32 +16,30 @@ var _crQuandlKey = function _crQuandlKey(option) {
       dataColumn = option.dataColumn,
       seriaType = option.seriaType,
       viewKey = option.viewKey;
-
-  return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _Type.ChartType.AREA ? value + '_' + _Type.ChartType.AREA + '_' + dataColumn : value + '_' + seriaType : viewKey ? viewKey : value;
+  return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _Type.ChartType.AREA ? value + "_" + _Type.ChartType.AREA + "_" + dataColumn : value + "_" + seriaType : viewKey ? viewKey : value;
 };
 
 var _crEurostatKey = function _crEurostatKey(option) {
   var _option$geo = option.geo,
-      geo = _option$geo === undefined ? '' : _option$geo,
+      geo = _option$geo === void 0 ? '' : _option$geo,
       _option$group = option.group,
-      group = _option$group === undefined ? '' : _option$group,
+      group = _option$group === void 0 ? '' : _option$group,
       _option$metric = option.metric,
-      metric = _option$metric === undefined ? '' : _option$metric,
+      metric = _option$metric === void 0 ? '' : _option$metric,
       _option$seriaType = option.seriaType,
-      seriaType = _option$seriaType === undefined ? 'AREA' : _option$seriaType,
+      seriaType = _option$seriaType === void 0 ? 'AREA' : _option$seriaType,
       _option$time = option.time,
-      time = _option$time === undefined ? '' : _option$time,
+      time = _option$time === void 0 ? '' : _option$time,
       _metric = metric.replace('?', '_');
 
-  return geo + '_' + group + '_' + _metric + '_' + seriaType + '_' + time;
+  return geo + "_" + group + "_" + _metric + "_" + seriaType + "_" + time;
 };
 
 var _crKey = function _crKey(option) {
   var loadId = option.loadId,
       value = option.value,
-      loadConfig = _LoadConfig2.default[loadId] || {},
+      loadConfig = _LoadConfig["default"][loadId] || {},
       crKey = loadConfig.crKey;
-
   return typeof crKey === 'function' ? crKey(option) : value || 'key';
 };
 
@@ -53,17 +48,22 @@ var LogicUtils = {
     var loadId = option.loadId;
 
     switch (loadId) {
-      case _Type.LoadType.Q:case _Type.LoadType.QCT:
+      case _Type.LoadType.Q:
+      case _Type.LoadType.QCT:
         return _crQuandlKey(option);
-      case _Type.LoadType.EU_STAT:case _Type.LoadType.EIA:
+
+      case _Type.LoadType.EU_STAT:
+      case _Type.LoadType.EIA:
         return _crEurostatKey(option);
+
       case _Type.LoadType.WL:
         return option.id;
+
       default:
         return _crKey(option);
     }
   }
 };
-
-exports.default = LogicUtils;
+var _default = LogicUtils;
+exports["default"] = _default;
 //# sourceMappingURL=LogicUtils.js.map

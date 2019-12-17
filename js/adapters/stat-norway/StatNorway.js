@@ -1,31 +1,27 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ApiDataset = require('./ApiDataset');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ApiDataset2 = _interopRequireDefault(_ApiDataset);
+var _ApiDataset = _interopRequireDefault(require("./ApiDataset"));
 
-var _ApiTable = require('./ApiTable');
+var _ApiTable = _interopRequireDefault(require("./ApiTable"));
 
-var _ApiTable2 = _interopRequireDefault(_ApiTable);
-
-var _StatNorwayAdapter = require('./StatNorwayAdapter');
-
-var _StatNorwayAdapter2 = _interopRequireDefault(_StatNorwayAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _StatNorwayAdapter = _interopRequireDefault(require("./StatNorwayAdapter"));
 
 var StatNorway = {
-  Dataset: { api: _ApiDataset2.default, adapter: _StatNorwayAdapter2.default },
+  Dataset: {
+    api: _ApiDataset["default"],
+    adapter: _StatNorwayAdapter["default"]
+  },
   Table: {
-    api: _ApiTable2.default,
-    optionFetch: _ApiTable2.default.crOptionFetch,
-    adapter: _StatNorwayAdapter2.default
+    api: _ApiTable["default"],
+    optionFetch: _ApiTable["default"].crOptionFetch,
+    adapter: _StatNorwayAdapter["default"]
   }
 };
-
-exports.default = StatNorway;
+var _default = StatNorway;
+exports["default"] = _default;
 //# sourceMappingURL=StatNorway.js.map

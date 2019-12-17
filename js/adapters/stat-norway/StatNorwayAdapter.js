@@ -1,32 +1,30 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _RouterConfig = require('./RouterConfig');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _RouterConfig2 = _interopRequireDefault(_RouterConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _RouterConfig = _interopRequireDefault(require("./RouterConfig"));
 
 var StatNorwayAdapter = {
   toConfig: function toConfig(json, option) {
     var seriaType = option.seriaType,
-        crConfig = _RouterConfig2.default.getCrConfig(seriaType),
+        crConfig = _RouterConfig["default"].getCrConfig(seriaType),
         config = crConfig(json, option);
 
-
-    return { config: config };
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(json, option) {
     var seriaType = option.seriaType,
-        crConfig = _RouterConfig2.default.getCrConfig(seriaType),
+        crConfig = _RouterConfig["default"].getCrConfig(seriaType),
         config = crConfig(json, option);
 
     return config.series[0];
   }
 };
-
-exports.default = StatNorwayAdapter;
+var _default = StatNorwayAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=StatNorwayAdapter.js.map

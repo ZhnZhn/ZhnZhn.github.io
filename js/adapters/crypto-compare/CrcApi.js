@@ -1,8 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 var C = {
   URL: 'https://min-api.cryptocompare.com/',
   HD: 'data/histoday',
@@ -13,17 +12,15 @@ var C = {
 
 var _hdUrl = function _hdUrl(option) {
   var _option$value = option.value,
-      value = _option$value === undefined ? '' : _option$value;
-
-  return '' + C.URL + C.HD + '?fsym=' + value + '&tsym=USD&limit=600';
+      value = _option$value === void 0 ? '' : _option$value;
+  return "" + C.URL + C.HD + "?fsym=" + value + "&tsym=USD&limit=600";
 };
 
 var _ciUrl = function _ciUrl(option) {
   var proxy = option.proxy,
       _option$value2 = option.value,
-      value = _option$value2 === undefined ? '' : _option$value2;
-
-  return '' + proxy + C.URL_CI + '?id=' + value;
+      value = _option$value2 === void 0 ? '' : _option$value2;
+  return "" + proxy + C.URL_CI + "?id=" + value;
 };
 
 var _rUrl = {
@@ -31,7 +28,6 @@ var _rUrl = {
   HD: _hdUrl,
   CI: _ciUrl
 };
-
 var CrcApi = {
   getRequestUrl: function getRequestUrl(option) {
     var dfSubLoadId = option.dfSubLoadId,
@@ -46,9 +42,10 @@ var CrcApi = {
         message: json ? json.Message || '' : C.RESPONSE_EMPTY
       };
     }
+
     return true;
   }
 };
-
-exports.default = CrcApi;
+var _default = CrcApi;
+exports["default"] = _default;
 //# sourceMappingURL=CrcApi.js.map

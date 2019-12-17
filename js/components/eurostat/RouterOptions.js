@@ -1,20 +1,9 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
-
-var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
-
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _Type = require('../../constants/Type');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Type = require("../../constants/Type");
 
 var V = {
   A: 'AREA',
@@ -35,9 +24,7 @@ var V = {
   TM_2: 'TREE_MAP_2',
   TM_2_C: 'TREE_MAP_2_CLUSTER'
 };
-
 var CATEGORY_TYPES = [V.M, V.C, V.C_C, V.C_2, V.B, V.B_C, V.B_2, V.B_L, V.D, V.TM, V.TM_C, V.TM_2, V.TM_2_C];
-
 var C = {
   EMPTY: ''
 };
@@ -50,6 +37,7 @@ var _crItem = function _crItem(confArr) {
     compType: confArr[3]
   };
 };
+
 var _crItems = function _crItems(arr) {
   return arr.map(_crItem);
 };
@@ -71,47 +59,37 @@ var _crT2 = function _crT2() {
 };
 
 var _crT2A = function _crT2A() {
-  return [].concat((0, _toConsumableArray3.default)(_crT2()), [_crItem(['Yearly by Months', V.A_Y])]);
+  return [].concat(_crT2(), [_crItem(['Yearly by Months', V.A_Y])]);
 };
 
 var _crT3All = function _crT3All(oneCaption) {
-  return _crItems([['Column: By ' + oneCaption, V.C, oneCaption], ['Column: By ' + oneCaption + ': Cluster', V.C_C, oneCaption], ['Bar: By ' + oneCaption, V.B, oneCaption], ['Bar: By ' + oneCaption + ': Cluster', V.B_C, oneCaption]]);
+  return _crItems([["Column: By " + oneCaption, V.C, oneCaption], ["Column: By " + oneCaption + ": Cluster", V.C_C, oneCaption], ["Bar: By " + oneCaption, V.B, oneCaption], ["Bar: By " + oneCaption + ": Cluster", V.B_C, oneCaption]]);
 };
 
 var _crT3 = function _crT3(_ref) {
-  var _ref2 = (0, _slicedToArray3.default)(_ref, 1),
-      oneCaption = _ref2[0];
-
-  return [_crItem(['Default: Spline', V.A])].concat((0, _toConsumableArray3.default)(_crT3All(oneCaption)));
+  var oneCaption = _ref[0];
+  return [_crItem(['Default: Spline', V.A])].concat(_crT3All(oneCaption));
 };
 
-var _crT3B = function _crT3B(_ref3) {
-  var _ref4 = (0, _slicedToArray3.default)(_ref3, 1),
-      oneCaption = _ref4[0];
-
-  return [_crItem(['Default: Spline', V.A]), _crItem(['Yearly by Months', V.A_Y])].concat((0, _toConsumableArray3.default)(_crT3All(oneCaption)));
+var _crT3B = function _crT3B(_ref2) {
+  var oneCaption = _ref2[0];
+  return [_crItem(['Default: Spline', V.A]), _crItem(['Yearly by Months', V.A_Y])].concat(_crT3All(oneCaption));
 };
 
-var _crT3A = function _crT3A(_ref5) {
-  var _ref6 = (0, _slicedToArray3.default)(_ref5, 1),
-      oneCaption = _ref6[0];
-
-  return [].concat((0, _toConsumableArray3.default)(_crT3([oneCaption])), [_crItem(['TreeMap: By ' + oneCaption, V.TM, oneCaption]), _crItem(['TreeMap: By ' + oneCaption + ': Cluster', V.TM_C, oneCaption])]);
+var _crT3A = function _crT3A(_ref3) {
+  var oneCaption = _ref3[0];
+  return [].concat(_crT3([oneCaption]), [_crItem(["TreeMap: By " + oneCaption, V.TM, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Cluster", V.TM_C, oneCaption])]);
 };
 
-var _crT3A2 = function _crT3A2(_ref7) {
-  var _ref8 = (0, _slicedToArray3.default)(_ref7, 1),
-      oneCaption = _ref8[0];
-
-  return [].concat((0, _toConsumableArray3.default)(_crT3A([oneCaption])), [_crItem(['TreeMap: By ' + oneCaption + ': Depth 2', V.TM_2, oneCaption]), _crItem(['TreeMap: By ' + oneCaption + ': Depth 2: Cluster', V.TM_2_C, oneCaption])]);
+var _crT3A2 = function _crT3A2(_ref4) {
+  var oneCaption = _ref4[0];
+  return [].concat(_crT3A([oneCaption]), [_crItem(["TreeMap: By " + oneCaption + ": Depth 2", V.TM_2, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2: Cluster", V.TM_2_C, oneCaption])]);
 };
 
-var _crT4 = function _crT4(_ref9) {
-  var _ref10 = (0, _slicedToArray3.default)(_ref9, 2),
-      oneCaption = _ref10[0],
-      twoCaption = _ref10[1];
-
-  return [].concat((0, _toConsumableArray3.default)(_crT3([oneCaption])), [_crItem(['Column: By ' + twoCaption, V.C_2, twoCaption]), _crItem(['Bar: By ' + twoCaption, V.B_2, twoCaption])]);
+var _crT4 = function _crT4(_ref5) {
+  var oneCaption = _ref5[0],
+      twoCaption = _ref5[1];
+  return [].concat(_crT3([oneCaption]), [_crItem(["Column: By " + twoCaption, V.C_2, twoCaption]), _crItem(["Bar: By " + twoCaption, V.B_2, twoCaption])]);
 };
 
 var _r = {
@@ -127,12 +105,12 @@ var _r = {
   df3: _crDF3
 };
 
-var _crCaptions = function _crCaptions(_ref11) {
-  var dims = _ref11.dims,
-      _ref11$oneCaption = _ref11.oneCaption,
-      oneCaption = _ref11$oneCaption === undefined ? C.EMPTY : _ref11$oneCaption,
-      _ref11$twoCaption = _ref11.twoCaption,
-      twoCaption = _ref11$twoCaption === undefined ? C.EMPTY : _ref11$twoCaption;
+var _crCaptions = function _crCaptions(_ref6) {
+  var dims = _ref6.dims,
+      _ref6$oneCaption = _ref6.oneCaption,
+      oneCaption = _ref6$oneCaption === void 0 ? C.EMPTY : _ref6$oneCaption,
+      _ref6$twoCaption = _ref6.twoCaption,
+      twoCaption = _ref6$twoCaption === void 0 ? C.EMPTY : _ref6$twoCaption;
   return Array.isArray(dims) ? dims.map(function (dim) {
     return dim.c || C.EMPTY;
   }) : [oneCaption, twoCaption];
@@ -150,9 +128,10 @@ var RouterOptions = {
     if (!chartType) {
       return false;
     }
+
     return CATEGORY_TYPES.indexOf(chartType.value) !== -1;
   }
 };
-
-exports.default = RouterOptions;
+var _default = RouterOptions;
+exports["default"] = _default;
 //# sourceMappingURL=RouterOptions.js.map

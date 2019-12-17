@@ -1,23 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _WtdApi = require('./WtdApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _WtdApi2 = _interopRequireDefault(_WtdApi);
+var _WtdApi = _interopRequireDefault(require("./WtdApi"));
 
-var _WtdAdapter = require('./WtdAdapter');
-
-var _WtdAdapter2 = _interopRequireDefault(_WtdAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _WtdAdapter = _interopRequireDefault(require("./WtdAdapter"));
 
 var Wtd = {
-  api: _WtdApi2.default,
-  adapter: _WtdAdapter2.default
+  api: _WtdApi["default"],
+  adapter: _WtdAdapter["default"]
 };
-
-exports.default = Wtd;
+var _default = Wtd;
+exports["default"] = _default;
 //# sourceMappingURL=Wtd.js.map

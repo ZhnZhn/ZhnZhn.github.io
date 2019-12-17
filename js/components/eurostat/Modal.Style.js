@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var STYLE = {
   CL: 'popup-menu',
   ROOT: {
@@ -16,6 +14,6 @@ var STYLE = {
     paddingLeft: 0
   }
 };
-
-exports.default = STYLE;
+var _default = STYLE;
+exports["default"] = _default;
 //# sourceMappingURL=Modal.Style.js.map

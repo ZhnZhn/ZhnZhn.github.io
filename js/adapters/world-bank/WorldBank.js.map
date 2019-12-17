@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/world-bank/WorldBank.js"
- ],
- "file": "../../../src/adapters/world-bank/WorldBank.js",
- "names": [
-  "WorldBank",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,YAAY,EAAEC,kBAAF,EAAOC,0BAAP,EAAlB;;kBAEeF,S"
-}
+{"version":3,"sources":["../../../src/adapters/world-bank/WorldBank.js"],"names":["WorldBank","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAAEC,EAAAA,GAAG,EAAHA,eAAF;AAAOC,EAAAA,OAAO,EAAPA;AAAP,CAAlB;eAEeF,S","sourcesContent":["import api from './api'\r\nimport adapter from './adapter'\r\n\r\nconst WorldBank = { api, adapter };\r\n\r\nexport default WorldBank\r\n"],"file":"WorldBank.js"}

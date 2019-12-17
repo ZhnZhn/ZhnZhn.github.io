@@ -1,31 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _reactDom = require('react-dom');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _SparkFactory = require('../../components/factories/SparkFactory');
+var _reactDom = require("react-dom");
 
-var _SparkFactory2 = _interopRequireDefault(_SparkFactory);
+var _SparkFactory = _interopRequireDefault(require("../../components/factories/SparkFactory"));
 
-var _tpFn = require('./tpFn');
+var _tpFn = _interopRequireDefault(require("./tpFn"));
 
-var _tpFn2 = _interopRequireDefault(_tpFn);
+var _tpConfig = _interopRequireDefault(require("./tpConfig"));
 
-var _tpConfig = require('./tpConfig');
-
-var _tpConfig2 = _interopRequireDefault(_tpConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crHeader = _tpFn2.default.crHeader,
-    crRow = _tpFn2.default.crRow,
-    toNumberFormat = _tpFn2.default.toNumberFormat,
-    addHideHandler = _tpFn2.default.addHideHandler;
-
-
+var crHeader = _tpFn["default"].crHeader,
+    crRow = _tpFn["default"].crRow,
+    toNumberFormat = _tpFn["default"].toNumberFormat,
+    addHideHandler = _tpFn["default"].addHideHandler;
 var SPARKLINES_SUFFIX_ID = 'sparklines',
     SPARKLINES_BAR_SUFFIX_ID = 'sparklines_bar',
     WIDTH_CHAR = 10,
@@ -38,7 +29,11 @@ var _fnCalcWidthSparkType4 = function _fnCalcWidthSparkType4(value, total) {
       _width2 = WIDTH_TOTAL + total.length * WIDTH_CHAR,
       width = _width1 > _width2 ? _width1 : _width2,
       fullWidth = width + WIDTH_SPARK;
-  return { fullWidth: fullWidth, width: width };
+
+  return {
+    fullWidth: fullWidth,
+    width: width
+  };
 };
 
 var _fnTooltipSparkType4 = function _fnTooltipSparkType4(_ref) {
@@ -50,17 +45,19 @@ var _fnTooltipSparkType4 = function _fnTooltipSparkType4(_ref) {
       percent = _ref.percent,
       id = _ref.id;
 
-  var _style = 'style="float:left;padding-right:10px;width:' + width + 'px;"';
-  return '<div class="tp__body">\n  <div class="tp__body__part1" style="width:' + fullWidth + 'px;" >\n    <div ' + _style + '>\n      ' + crRow('Year', year, { color: _tpConfig2.default.YEAR_C }) + '\n      ' + crRow('Value', value) + '\n    </div>\n    <div id="' + id + '_' + SPARKLINES_SUFFIX_ID + '" class="tp__body__sparklines">\n    </div>\n  </div>\n  <div class="tp__body__part1" style="width:' + fullWidth + 'px;" >\n    <div ' + _style + '>\n      ' + crRow('Total', total) + '\n      ' + crRow('Percent', percent) + '\n    </div>\n    <div id="' + id + '_' + SPARKLINES_BAR_SUFFIX_ID + '" class="tp__body__sparklines">\n    </div>\n  </div>';
+  var _style = "style=\"float:left;padding-right:10px;width:" + width + "px;\"";
+
+  return "<div class=\"tp__body\">\n  <div class=\"tp__body__part1\" style=\"width:" + fullWidth + "px;\" >\n    <div " + _style + ">\n      " + crRow('Year', year, {
+    color: _tpConfig["default"].YEAR_C
+  }) + "\n      " + crRow('Value', value) + "\n    </div>\n    <div id=\"" + id + "_" + SPARKLINES_SUFFIX_ID + "\" class=\"tp__body__sparklines\">\n    </div>\n  </div>\n  <div class=\"tp__body__part1\" style=\"width:" + fullWidth + "px;\" >\n    <div " + _style + ">\n      " + crRow('Total', total) + "\n      " + crRow('Percent', percent) + "\n    </div>\n    <div id=\"" + id + "_" + SPARKLINES_BAR_SUFFIX_ID + "\" class=\"tp__body__sparklines\">\n    </div>\n  </div>";
 };
 
 var _crSparkData = function _crSparkData(point) {
   var sparkvalues = point.sparkvalues,
       sparkpercent = point.sparkpercent;
-
   var sparkLinesData = [],
       sparkBarsData = [],
-      pointIndex = void 0;
+      pointIndex;
 
   if (sparkvalues) {
     sparkLinesData = sparkvalues;
@@ -74,7 +71,12 @@ var _crSparkData = function _crSparkData(point) {
     });
     pointIndex = point.index;
   }
-  return { sparkLinesData: sparkLinesData, sparkBarsData: sparkBarsData, pointIndex: pointIndex };
+
+  return {
+    sparkLinesData: sparkLinesData,
+    sparkBarsData: sparkBarsData,
+    pointIndex: pointIndex
+  };
 };
 
 var _onAfterRender = function _onAfterRender(id, point) {
@@ -85,11 +87,11 @@ var _onAfterRender = function _onAfterRender(id, point) {
         sparkLinesData = _crSparkData2.sparkLinesData,
         sparkBarsData = _crSparkData2.sparkBarsData,
         pointIndex = _crSparkData2.pointIndex,
-        sparklines = _SparkFactory2.default.createSparklines(sparkLinesData, pointIndex),
-        sparkbars = _SparkFactory2.default.createSparkbars(sparkBarsData, pointIndex);
+        sparklines = _SparkFactory["default"].createSparklines(sparkLinesData, pointIndex),
+        sparkbars = _SparkFactory["default"].createSparkbars(sparkBarsData, pointIndex);
 
-    (0, _reactDom.render)(sparklines, document.getElementById(id + '_' + SPARKLINES_SUFFIX_ID));
-    (0, _reactDom.render)(sparkbars, document.getElementById(id + '_' + SPARKLINES_BAR_SUFFIX_ID));
+    (0, _reactDom.render)(sparklines, document.getElementById(id + "_" + SPARKLINES_SUFFIX_ID));
+    (0, _reactDom.render)(sparkbars, document.getElementById(id + "_" + SPARKLINES_BAR_SUFFIX_ID));
   }, 1);
 };
 
@@ -101,16 +103,22 @@ var _crStackedArea = function _crStackedArea(_ref2) {
   var nameFull = point.nameFull,
       category = point.category,
       _point$percent = point.percent,
-      percent = _point$percent === undefined ? '0.0' : _point$percent,
+      percent = _point$percent === void 0 ? '0.0' : _point$percent,
       _point$total = point.total,
-      total = _point$total === undefined ? 0 : _point$total,
+      total = _point$total === void 0 ? 0 : _point$total,
       _total = toNumberFormat(total),
       _fnCalcWidthSparkType = _fnCalcWidthSparkType4(value, _total),
       fullWidth = _fnCalcWidthSparkType.fullWidth,
       width = _fnCalcWidthSparkType.width;
 
   return crHeader(nameFull, id) + _fnTooltipSparkType4({
-    fullWidth: fullWidth, width: width, year: category, value: value, total: _total, percent: percent, id: id
+    fullWidth: fullWidth,
+    width: width,
+    year: category,
+    value: value,
+    total: _total,
+    percent: percent,
+    id: id
   });
 };
 
@@ -121,11 +129,11 @@ var _crTreeMap = function _crTreeMap(_ref3) {
   var nameFull = point.nameFull,
       year = point.year,
       _point$value = point.value,
-      value = _point$value === undefined ? '0.0' : _point$value,
+      value = _point$value === void 0 ? '0.0' : _point$value,
       _point$percent2 = point.percent,
-      percent = _point$percent2 === undefined ? '0.0' : _point$percent2,
+      percent = _point$percent2 === void 0 ? '0.0' : _point$percent2,
       _point$total2 = point.total,
-      total = _point$total2 === undefined ? 0 : _point$total2,
+      total = _point$total2 === void 0 ? 0 : _point$total2,
       _value = toNumberFormat(value),
       _total = toNumberFormat(total),
       _fnCalcWidthSparkType2 = _fnCalcWidthSparkType4(_value, _total),
@@ -133,7 +141,13 @@ var _crTreeMap = function _crTreeMap(_ref3) {
       width = _fnCalcWidthSparkType2.width;
 
   return crHeader(nameFull, id) + _fnTooltipSparkType4({
-    fullWidth: fullWidth, width: width, year: year, value: _value, total: _total, percent: percent, id: id
+    fullWidth: fullWidth,
+    width: width,
+    year: year,
+    value: _value,
+    total: _total,
+    percent: percent,
+    id: id
   });
 };
 
@@ -149,6 +163,6 @@ var tpSpark = {
     isWithValue: true
   }
 };
-
-exports.default = tpSpark;
+var _default = tpSpark;
+exports["default"] = _default;
 //# sourceMappingURL=tpSpark.js.map

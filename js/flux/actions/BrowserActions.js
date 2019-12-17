@@ -1,111 +1,99 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.BrowserActionTypes = undefined;
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = exports.BrowserActionTypes = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+var _reflux = _interopRequireDefault(require("reflux"));
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
+
+var _Factory = _interopRequireDefault(require("../logic/Factory"));
+
+var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
+
+var _RouterModalDialog = _interopRequireDefault(require("../../components/dialogs/RouterModalDialog"));
+
+var _RouterDialog = _interopRequireDefault(require("../logic/RouterDialog"));
+
+var _fnFetch = require("../../utils/fnFetch");
+
+var _fnCatch = require("../logic/fnCatch");
 
 var _Reflux$createActions;
 
-var _reflux = require('reflux');
-
-var _reflux2 = _interopRequireDefault(_reflux);
-
-var _ChartStore = require('../stores/ChartStore');
-
-var _ChartStore2 = _interopRequireDefault(_ChartStore);
-
-var _Factory = require('../logic/Factory');
-
-var _Factory2 = _interopRequireDefault(_Factory);
-
-var _BrowserConfig = require('../../constants/BrowserConfig');
-
-var _BrowserConfig2 = _interopRequireDefault(_BrowserConfig);
-
-var _RouterModalDialog = require('../../components/dialogs/RouterModalDialog');
-
-var _RouterModalDialog2 = _interopRequireDefault(_RouterModalDialog);
-
-var _RouterDialog = require('../logic/RouterDialog');
-
-var _RouterDialog2 = _interopRequireDefault(_RouterDialog);
-
-var _fnFetch = require('../../utils/fnFetch');
-
-var _fnCatch = require('../logic/fnCatch');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var BrowserActionTypes = exports.BrowserActionTypes = {
+var BrowserActionTypes = {
   SHOW_BROWSER_DYNAMIC: 'showBrowserDynamic',
-
   INIT_BROWSER_DYNAMIC: 'initBrowserDynamic',
   LOAD_BROWSER_DYNAMIC: 'loadBrowserDynamic',
   LOAD_BROWSER_DYNAMIC_COMPLETED: 'loadBrowserDynamicCompleted',
-
   UPDATE_WATCH_BROWSER: 'updateWatchBrowser'
 };
+exports.BrowserActionTypes = BrowserActionTypes;
 var A = BrowserActionTypes;
 
-var BrowserActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_BROWSER_DYNAMIC, {
+var BrowserActions = _reflux["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.SHOW_BROWSER_DYNAMIC] = {
   children: ['done', 'init', 'failed']
-}), (0, _defineProperty3.default)(_Reflux$createActions, A.INIT_BROWSER_DYNAMIC, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_BROWSER_DYNAMIC, {
+}, _Reflux$createActions[A.INIT_BROWSER_DYNAMIC] = {}, _Reflux$createActions[A.LOAD_BROWSER_DYNAMIC] = {
   children: ['completed', 'failed']
-}), (0, _defineProperty3.default)(_Reflux$createActions, A.UPDATE_WATCH_BROWSER, {}), _Reflux$createActions));
+}, _Reflux$createActions[A.UPDATE_WATCH_BROWSER] = {}, _Reflux$createActions));
 
 var _fnFetchSourceMenu = function _fnFetchSourceMenu(_ref) {
   var json = _ref.json,
       option = _ref.option,
       onCompleted = _ref.onCompleted;
   var browserType = option.browserType;
-
-  onCompleted({ json: json, browserType: browserType });
+  onCompleted({
+    json: json,
+    browserType: browserType
+  });
 };
+
 var ERR = {
   LOAD: "Failed to load browser.",
   FOUND: "Browser hasn't found.",
   ITEM: "Browser"
 };
+
 var _crErr = function _crErr(alertDescr, alertItemId) {
   return {
-    alertDescr: alertDescr, alertItemId: alertItemId
+    alertDescr: alertDescr,
+    alertItemId: alertItemId
   };
 };
 
-BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function () {
+BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function (option) {
   var _this = this;
 
-  var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var _option = typeof option === 'string' ? { browserType: option } : option,
+  if (option === void 0) {
+    option = {};
+  }
+
+  var _option = typeof option === 'string' ? {
+    browserType: option
+  } : option,
       bT = _option.browserType,
-      config = _BrowserConfig2.default[bT];
+      config = _BrowserConfig["default"][bT];
 
   if (bT && config) {
-    if (_ChartStore2.default.getBrowserMenu(bT)) {
+    if (_ChartStore["default"].getBrowserMenu(bT)) {
       this.done(_option);
     } else {
-      Promise.all([_RouterModalDialog2.default.loadDialogs(bT), _RouterDialog2.default.loadDialogs(bT)]).then(function () {
-        return _Factory2.default.crAsyncBrowser(config);
+      Promise.all([_RouterModalDialog["default"].loadDialogs(bT), _RouterDialog["default"].loadDialogs(bT)]).then(function () {
+        return _Factory["default"].crAsyncBrowser(config);
       }).then(function (elBrowser) {
         _this.init(elBrowser, config);
-      }).catch(function () {
-        _this.failed((0, _extends3.default)({}, _option, _crErr(ERR.LOAD, config.caption)));
+      })["catch"](function () {
+        _this.failed((0, _extends2["default"])({}, _option, {}, _crErr(ERR.LOAD, config.caption)));
       });
     }
   } else {
-    this.failed((0, _extends3.default)({}, _option, _crErr(ERR.FOUND, ERR.ITEM)));
+    this.failed((0, _extends2["default"])({}, _option, {}, _crErr(ERR.FOUND, ERR.ITEM)));
   }
 });
-
 BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {
   (0, _fnFetch.fetchJson)({
     uri: option.sourceMenuUrl,
@@ -116,6 +104,6 @@ BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {
     onFailed: this.failed
   });
 });
-
-exports.default = BrowserActions;
+var _default = BrowserActions;
+exports["default"] = _default;
 //# sourceMappingURL=BrowserActions.js.map

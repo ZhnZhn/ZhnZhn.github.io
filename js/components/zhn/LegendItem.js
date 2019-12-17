@@ -1,36 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireWildcard(require("react"));
 
 var S = {
   ROOT: {
@@ -61,21 +42,25 @@ var S = {
   }
 };
 
-var LegendItem = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(LegendItem, _Component);
+var LegendItem =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(LegendItem, _Component);
 
   function LegendItem(props) {
-    (0, _classCallCheck3.default)(this, LegendItem);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (LegendItem.__proto__ || Object.getPrototypeOf(LegendItem)).call(this));
+    _this = _Component.call(this) || this;
 
     _this._handleClickItem = function () {
       var _this$props = _this.props,
           item = _this$props.item,
           onClickItem = _this$props.onClickItem;
-
       onClickItem(item);
-      _this.setState({ isVisible: !_this.state.isVisible });
+
+      _this.setState({
+        isVisible: !_this.state.isVisible
+      });
     };
 
     _this.state = {
@@ -84,36 +69,48 @@ var LegendItem = (_temp = _class = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(LegendItem, [{
-    key: 'render',
-    value: function render() {
-      var item = this.props.item,
-          color = item.color,
-          name = item.name,
-          isVisible = this.state.isVisible,
-          _styleRoot = isVisible ? { color: color, borderColor: color, borderWidth: '2px', fontWeight: 'bold' } : { color: color, borderColor: 'gray', borderWidth: '1px', fontWeight: 'normal' },
-          _styleCircle = isVisible ? { backgroundColor: color, borderColor: color } : { backgroundColor: 'gray', borderColor: 'gray' };
+  var _proto = LegendItem.prototype;
 
-      return _react2.default.createElement(
-        'span',
-        {
-          style: (0, _extends3.default)({}, S.ROOT, _styleRoot),
-          onClick: this._handleClickItem
-        },
-        _react2.default.createElement('span', { style: (0, _extends3.default)({}, S.CIRCLE, _styleCircle) }),
-        _react2.default.createElement(
-          'span',
-          {
-            style: S.ITEM
-          },
-          name
-        )
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var item = this.props.item,
+        color = item.color,
+        name = item.name,
+        isVisible = this.state.isVisible,
+        _styleRoot = isVisible ? {
+      color: color,
+      borderColor: color,
+      borderWidth: '2px',
+      fontWeight: 'bold'
+    } : {
+      color: color,
+      borderColor: 'gray',
+      borderWidth: '1px',
+      fontWeight: 'normal'
+    },
+        _styleCircle = isVisible ? {
+      backgroundColor: color,
+      borderColor: color
+    } : {
+      backgroundColor: 'gray',
+      borderColor: 'gray'
+    };
+
+    return _react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.ROOT, {}, _styleRoot),
+      onClick: this._handleClickItem
+    }, _react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.CIRCLE, {}, _styleCircle)
+    }), _react["default"].createElement("span", {
+      style: S.ITEM
+    }, name));
+  };
+
   return LegendItem;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+LegendItem.defaultProps = {
   item: {}
-}, _temp);
-exports.default = LegendItem;
+};
+var _default = LegendItem;
+exports["default"] = _default;
 //# sourceMappingURL=LegendItem.js.map

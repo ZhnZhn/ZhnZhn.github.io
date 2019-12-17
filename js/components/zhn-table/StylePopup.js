@@ -1,22 +1,15 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _SvgCheckBox = require('../zhn/SvgCheckBox');
+var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
 
-var _SvgCheckBox2 = _interopRequireDefault(_SvgCheckBox);
-
-var _ModalPopup = require('../zhn-moleculs/ModalPopup');
-
-var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
 var S = {
   STRIP: {
@@ -32,26 +25,19 @@ var StylePopup = function StylePopup(_ref) {
       isGridLine = _ref.isGridLine,
       onCheck = _ref.onCheck,
       onUnCheck = _ref.onUnCheck;
-
-  return _react2.default.createElement(
-    _ModalPopup2.default,
-    {
-      style: style,
-      isShow: isShow,
-      onClose: onClose
-    },
-    _react2.default.createElement(_SvgCheckBox2.default, {
-      value: isGridLine,
-      onCheck: onCheck,
-      onUnCheck: onUnCheck
-    }),
-    _react2.default.createElement(
-      'span',
-      { style: S.STRIP },
-      'withStripLines'
-    )
-  );
+  return _react["default"].createElement(_ModalPopup["default"], {
+    style: style,
+    isShow: isShow,
+    onClose: onClose
+  }, _react["default"].createElement(_SvgCheckBox["default"], {
+    value: isGridLine,
+    onCheck: onCheck,
+    onUnCheck: onUnCheck
+  }), _react["default"].createElement("span", {
+    style: S.STRIP
+  }, "withStripLines"));
 };
 
-exports.default = StylePopup;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-table\StylePopup.js.map
+var _default = StylePopup;
+exports["default"] = _default;
+//# sourceMappingURL=StylePopup.js.map

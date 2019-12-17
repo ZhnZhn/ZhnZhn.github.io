@@ -1,32 +1,36 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var createLoadOptions = function createLoadOptions(props, options) {
+  if (props === void 0) {
+    props = {};
+  }
 
-var createLoadOptions = function createLoadOptions() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var loadId = props.loadId,
-      dataSource = props.dataSource,
-      dfProps = props.dfProps,
-      one = options.one,
-      two = options.two,
+  if (options === void 0) {
+    options = {};
+  }
+
+  var _props = props,
+      loadId = _props.loadId,
+      dataSource = _props.dataSource,
+      dfProps = _props.dfProps,
+      _options = options,
+      one = _options.one,
+      two = _options.two,
       oneValue = one.value,
       _one$caption = one.caption,
-      oneCaption = _one$caption === undefined ? '' : _one$caption,
+      oneCaption = _one$caption === void 0 ? '' : _one$caption,
       twoValue = two.value,
       _two$caption = two.caption,
-      twoCaption = _two$caption === undefined ? '' : _two$caption,
+      twoCaption = _two$caption === void 0 ? '' : _two$caption,
       mapSlice = two.mapSlice;
-
-  return (0, _extends3.default)({}, dfProps, {
+  return (0, _extends2["default"])({}, dfProps, {
     seriaType: 'AREA',
     geo: oneValue,
     metric: twoValue,
@@ -34,13 +38,15 @@ var createLoadOptions = function createLoadOptions() {
     itemCaption: oneCaption,
     title: oneCaption,
     subtitle: twoCaption,
-    alertItemId: oneCaption + ':' + twoCaption,
+    alertItemId: oneCaption + ":" + twoCaption,
     alertGeo: oneCaption,
     alertMetric: twoCaption,
-    dataSource: dataSource, mapSlice: mapSlice,
+    dataSource: dataSource,
+    mapSlice: mapSlice,
     items: [one, two]
   });
 };
 
-exports.default = createLoadOptions;
+var _default = createLoadOptions;
+exports["default"] = _default;
 //# sourceMappingURL=eurostat.js.map

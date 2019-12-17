@@ -1,34 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _typeof3 = _interopRequireDefault(_typeof2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _fnDescr = _interopRequireDefault(require("./fnDescr"));
 
-var _AdapterFn = require('../AdapterFn');
-
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
-
-var _fnDescr = require('./fnDescr');
-
-var _fnDescr2 = _interopRequireDefault(_fnDescr);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var isYNumber = _AdapterFn2.default.isYNumber,
-    toUpperCaseFirst = _AdapterFn2.default.toUpperCaseFirst,
-    monthIndex = _AdapterFn2.default.monthIndex,
-    ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    valueMoving = _AdapterFn2.default.valueMoving;
-
-
+var isYNumber = _AdapterFn["default"].isYNumber,
+    toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
+    monthIndex = _AdapterFn["default"].monthIndex,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    valueMoving = _AdapterFn["default"].valueMoving;
 var C = {
   DATASET_EMPTY: 'Dataset is empty',
   ENPTY: '',
@@ -39,7 +26,7 @@ var C = {
 
 var _crUnit = function _crUnit(json) {
   var _json$data = json.data,
-      data = _json$data === undefined ? [] : _json$data,
+      data = _json$data === void 0 ? [] : _json$data,
       item = data[data.length - 1] || {},
       _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit || C.BLANK;
 
@@ -50,9 +37,8 @@ var _crPoint = function _crPoint(_ref) {
   var Year = _ref.Year,
       Months = _ref.Months,
       Value = _ref.Value;
-
   var m = Months ? monthIndex(Months) + 1 : 0,
-      Tail = m !== 0 ? '-' + m : C.MM_DD;
+      Tail = m !== 0 ? "-" + m : C.MM_DD;
   return {
     x: ymdToUTC('' + Year + Tail),
     y: Value
@@ -61,10 +47,8 @@ var _crPoint = function _crPoint(_ref) {
 
 var _crHm = function _crHm(json) {
   var _json$data2 = json.data,
-      data = _json$data2 === undefined ? [] : _json$data2,
+      data = _json$data2 === void 0 ? [] : _json$data2,
       hm = Object.create(null);
-
-
   data.forEach(function (item) {
     var Area = item.Area;
 
@@ -72,6 +56,7 @@ var _crHm = function _crHm(json) {
       hm[Area] = [];
       hm[Area].seriaName = Area;
     }
+
     hm[Area].push(_crPoint(item));
   });
   return hm;
@@ -83,13 +68,15 @@ var _compareByY = function _compareByY(a, b) {
 
 var _crRefLegend = function _crRefLegend(hm) {
   var legend = [];
-  var propName = void 0;
+  var propName;
+
   for (propName in hm) {
     var _arr = hm[propName];
-    legend.push((0, _extends3.default)({}, _arr[_arr.length - 1], {
+    legend.push((0, _extends2["default"])({}, _arr[_arr.length - 1], {
       Area: propName
     }));
   }
+
   return legend.filter(isYNumber).sort(_compareByY).reverse();
 };
 
@@ -112,8 +99,7 @@ var _compareByX = function _compareByX(a, b) {
 
 var _crSeriaData = function _crSeriaData(json, option) {
   var _json$data3 = json.data,
-      data = _json$data3 === undefined ? [] : _json$data3;
-
+      data = _json$data3 === void 0 ? [] : _json$data3;
   return data.map(_crPoint).sort(_compareByX);
 };
 
@@ -123,7 +109,8 @@ var fnAdapter = {
         value = _ref2.value;
 
     var _v = value || 'faoId';
-    return three ? _v + '_' + three : _v;
+
+    return three ? _v + "_" + three : _v;
   },
   crTitle: function crTitle(json, option) {
     var title = option.title,
@@ -132,24 +119,25 @@ var fnAdapter = {
         subtitle = option.subtitle;
 
     if (dfSubtitle) {
-      return subtitle + ' ' + _crUnit(json) + ': ' + title;
+      return subtitle + " " + _crUnit(json) + ": " + title;
     }
+
     if (title) {
-      return dfTitle ? dfTitle + ': ' + title : title;
+      return dfTitle ? dfTitle + ": " + title : title;
     }
+
     var _json$data4 = json.data,
-        data = _json$data4 === undefined ? [] : _json$data4,
+        data = _json$data4 === void 0 ? [] : _json$data4,
         p = data[data.length - 1];
 
-    if (p && (typeof p === 'undefined' ? 'undefined' : (0, _typeof3.default)(p)) === 'object') {
+    if (p && typeof p === 'object') {
       var _p$Area = p.Area,
-          Area = _p$Area === undefined ? '' : _p$Area,
+          Area = _p$Area === void 0 ? '' : _p$Area,
           _p$Item = p.Item,
-          Item = _p$Item === undefined ? '' : _p$Item,
+          Item = _p$Item === void 0 ? '' : _p$Item,
           _p$Element = p.Element,
-          Element = _p$Element === undefined ? '' : _p$Element;
-
-      return Area + ' ' + Item + ' ' + Element;
+          Element = _p$Element === void 0 ? '' : _p$Element;
+      return Area + " " + Item + " " + Element;
     } else {
       return C.DF_TITLE;
     }
@@ -157,16 +145,14 @@ var fnAdapter = {
   crSubtitle: function crSubtitle(json, option) {
     var dfSubtitle = option.dfSubtitle,
         subtitle = option.subtitle;
-
-    return dfSubtitle ? dfSubtitle : subtitle + ': ' + _crUnit(json);
+    return dfSubtitle ? dfSubtitle : subtitle + ": " + _crUnit(json);
   },
   crSeriaData: _crSeriaData,
   toDataPoints: function toDataPoints(json, option) {
     var one = option.one;
-
     return ('' + one).indexOf('>') === -1 ? _crSeriaData(json, option) : _crSeriesData(json, option);
   },
-  toInfo: _fnDescr2.default.toInfo,
+  toInfo: _fnDescr["default"].toInfo,
   crZhConfig: function crZhConfig(id, _ref3) {
     var dfDomain = _ref3.dfDomain,
         oneCaption = _ref3.oneCaption;
@@ -186,10 +172,9 @@ var fnAdapter = {
   },
   checkToSeries: function checkToSeries(_ref4) {
     var one = _ref4.one;
-
     return ('' + one).indexOf('>') === -1 ? true : false;
   }
 };
-
-exports.default = fnAdapter;
+var _default = fnAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=fnAdapter.js.map

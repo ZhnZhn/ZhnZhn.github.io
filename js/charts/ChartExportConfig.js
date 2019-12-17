@@ -1,19 +1,14 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _highcharts = require('highcharts');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _highcharts2 = _interopRequireDefault(_highcharts);
+var _highcharts = _interopRequireDefault(require("highcharts"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var merge = _highcharts2.default.merge;
-
+var merge = _highcharts["default"].merge;
 var ChartExportConfig = {
-
   DEFAULT: {
     chart: {
       plotBackgroundColor: 'white',
@@ -38,7 +33,6 @@ var ChartExportConfig = {
       gridLineColor: 'gray'
     }
   },
-
   BLACK_AXIS: {
     xAxis: {
       labels: {
@@ -56,7 +50,6 @@ var ChartExportConfig = {
       }
     }
   },
-
   BLACK_TITLE: {
     title: {
       style: {
@@ -64,7 +57,6 @@ var ChartExportConfig = {
       }
     }
   },
-
   BLACK_SERIES: {
     plotOptions: {
       area: {
@@ -81,9 +73,7 @@ var ChartExportConfig = {
       }
     }
   },
-
   merge: merge,
-
   fDefault: function fDefault() {
     return this.DEFAULT;
   },
@@ -97,14 +87,21 @@ var ChartExportConfig = {
     return merge(false, {}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);
   },
   createOptionStyles: function createOptionStyles() {
-    return [{ caption: 'Default', value: {} }, {
+    return [{
+      caption: 'Default',
+      value: {}
+    }, {
       caption: 'Default + Black Axis',
-      value: this.fBlackAxis() }, {
+      value: this.fBlackAxis()
+    }, {
       caption: 'Default + Black Axis + Black Title',
       value: this.fBlackAxisTitle()
-    }, { caption: 'All Black', value: this.fBlackAll() }];
+    }, {
+      caption: 'All Black',
+      value: this.fBlackAll()
+    }];
   }
 };
-
-exports.default = ChartExportConfig;
+var _default = ChartExportConfig;
+exports["default"] = _default;
 //# sourceMappingURL=ChartExportConfig.js.map

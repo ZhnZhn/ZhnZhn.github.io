@@ -1,18 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _fnAdapter = require('./fnAdapter');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crError = _fnAdapter2.default.crError;
-
-
+var crError = _fnAdapter["default"].crError;
 var C = {
   URL: 'https://api.db.nomics.world/v22/series',
   TAIL: 'observations=1&format=json&metadata=false',
@@ -20,8 +15,8 @@ var C = {
   ERR_CAPTION: 'Server Response',
   MSG_EMPTY: 'Dataset is empty'
 };
-
 var _isArr = Array.isArray;
+
 var _crErr = crError.bind(null, C.ERR_CAPTION);
 
 var _getValue = function _getValue(obj) {
@@ -30,15 +25,15 @@ var _getValue = function _getValue(obj) {
 
 var _crUrlImpl = function _crUrlImpl(dfProvider, dfCode, seriaId) {
   if (!dfProvider || !dfCode || !seriaId) {
-    return C.URL + '?series_ids=' + C.DF_ID + '&' + C.TAIL;
+    return C.URL + "?series_ids=" + C.DF_ID + "&" + C.TAIL;
   }
-  return C.URL + '?series_ids=' + dfProvider + '/' + dfCode + '/' + seriaId + '&' + C.TAIL;
+
+  return C.URL + "?series_ids=" + dfProvider + "/" + dfCode + "/" + seriaId + "&" + C.TAIL;
 };
 
 var _crUrl = function _crUrl(seriaId, option) {
   var dfProvider = option.dfProvider,
       dfCode = option.dfCode;
-
   option.seriaId = seriaId;
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
@@ -50,10 +45,12 @@ var _dfFnUrl = function _dfFnUrl(option) {
 var _crIdUrl = function _crIdUrl(option, dfProvider, dfCode, seriaId) {
   Object.assign(option, {
     seriaId: option.value,
-    dfProvider: dfProvider, dfCode: dfCode
+    dfProvider: dfProvider,
+    dfCode: dfCode
   });
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
+
 var _idFnUrl = function _idFnUrl(option) {
   var _ref = option || '',
       value = _ref.value,
@@ -63,12 +60,13 @@ var _idFnUrl = function _idFnUrl(option) {
 };
 
 var _crSeriaId = function _crSeriaId(_ref2) {
-  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+  var dfPrefix = _ref2.dfPrefix,
+      dfSufix = _ref2.dfSufix;
+
+  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
   }
 
-  var dfPrefix = _ref2.dfPrefix,
-      dfSufix = _ref2.dfSufix;
   return [dfPrefix].concat(args, [dfSufix]).filter(Boolean).join('.');
 };
 
@@ -86,6 +84,7 @@ var _s21FnUrl = function _s21FnUrl(option) {
 
   return _crUrl(_seriaId, option);
 };
+
 var _s12FnUrl = function _s12FnUrl(option) {
   var items = option.items,
       df2Prefix = option.df2Prefix,
@@ -93,6 +92,7 @@ var _s12FnUrl = function _s12FnUrl(option) {
 
   return _crUrl(_seriaId, option);
 };
+
 var _s123AFnUrl = function _s123AFnUrl(option) {
   var items = option.items,
       df3Prefix = option.df3Prefix,
@@ -100,6 +100,7 @@ var _s123AFnUrl = function _s123AFnUrl(option) {
 
   return _crUrl(_seriaId, option);
 };
+
 var _s123BFnUrl = function _s123BFnUrl(option) {
   var items = option.items,
       df2Prefix = option.df2Prefix,
@@ -125,7 +126,6 @@ var _rFnUrl = {
   s123B: _s123BFnUrl,
   s123: _s123FnUrl
 };
-
 var DbNomicsApi = {
   getRequestUrl: function getRequestUrl(option) {
     var dfFnUrl = option.dfFnUrl,
@@ -137,13 +137,16 @@ var DbNomicsApi = {
     if (json && _isArr(json.errors)) {
       throw _crErr(json.errors[0].message);
     }
+
     var docs = json && json.series && json.series.docs;
+
     if (!_isArr(docs) || !docs[0] || !_isArr(docs[0].period) || !_isArr(docs[0].value)) {
       throw _crErr(C.MSG_EMPTY);
     }
+
     return true;
   }
 };
-
-exports.default = DbNomicsApi;
+var _default = DbNomicsApi;
+exports["default"] = _default;
 //# sourceMappingURL=DbNomicsApi.js.map

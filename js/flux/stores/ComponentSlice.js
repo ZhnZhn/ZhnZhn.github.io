@@ -1,20 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ComponentActions = require('../actions/ComponentActions');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _BrowserActions = require('../actions/BrowserActions');
+var _ComponentActions = require("../actions/ComponentActions");
 
-var _Factory = require('../logic/Factory');
+var _BrowserActions = require("../actions/BrowserActions");
 
-var _Factory2 = _interopRequireDefault(_Factory);
+var _Factory = _interopRequireDefault(require("../logic/Factory"));
 
-var _Type = require('../../constants/Type');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Type = require("../../constants/Type");
 
 var ItemDialogLogic = {
   showItemDialog: function showItemDialog(slice, itemConf) {
@@ -23,11 +20,16 @@ var ItemDialogLogic = {
         conf = itemConf.conf;
 
     if (slice[type]) {
-      return Promise.resolve({ key: type });
+      return Promise.resolve({
+        key: type
+      });
     } else {
-      return _Factory2.default.createDialog(type, browserType, conf).then(function (Comp) {
+      return _Factory["default"].createDialog(type, browserType, conf).then(function (Comp) {
         slice[type] = true;
-        return { key: type, Comp: Comp };
+        return {
+          key: type,
+          Comp: Comp
+        };
       });
     }
   },
@@ -36,17 +38,23 @@ var ItemDialogLogic = {
         data = options.data;
 
     if (slice[type]) {
-      return Promise.resolve({ key: type, data: data });
+      return Promise.resolve({
+        key: type,
+        data: data
+      });
     } else {
       options.dialogType = type;
-      return _Factory2.default.createOptionDialog(options).then(function (Comp) {
+      return _Factory["default"].createOptionDialog(options).then(function (Comp) {
         slice[type] = true;
-        return { key: type, Comp: Comp, data: data };
+        return {
+          key: type,
+          Comp: Comp,
+          data: data
+        };
       });
     }
   }
 };
-
 var CheckBoxChartLogic = {
   toggle: function toggle(slice, options) {
     var isCheck = options.isCheck,
@@ -55,9 +63,11 @@ var CheckBoxChartLogic = {
 
     if (isCheck) {
       var activeCheckbox = slice.activeCheckbox;
+
       if (activeCheckbox && activeCheckbox !== checkBox) {
         activeCheckbox.setUnchecked();
       }
+
       slice.activeCheckbox = checkBox;
       slice.activeChart = chart;
     } else {
@@ -67,6 +77,7 @@ var CheckBoxChartLogic = {
   },
   uncheckActive: function uncheckActive(slice, chartType) {
     var activeCheckbox = slice.activeCheckbox;
+
     if (activeCheckbox && (!chartType || activeCheckbox.chartType === chartType)) {
       activeCheckbox.setUnchecked();
       slice.activeCheckbox = null;
@@ -74,12 +85,12 @@ var CheckBoxChartLogic = {
     }
   }
 };
-
 var ChbContLogic = {
   _check: function _check(slice, checkBox) {
     if (slice.activeContChb) {
       slice.activeContChb.setUnchecked();
     }
+
     slice.activeContChb = checkBox;
   },
   _uncheck: function _uncheck(slice) {
@@ -102,12 +113,12 @@ var ChbContLogic = {
     }
   }
 };
-
 var ComponentSlice = {
   dialogInit: {},
-
-  showAlertDialog: function showAlertDialog() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  showAlertDialog: function showAlertDialog(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     option.modalDialogType = _Type.ModalDialog.ALERT;
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
@@ -118,7 +129,11 @@ var ComponentSlice = {
   onShowDialog: function onShowDialog(type, browserType, conf) {
     var _this = this;
 
-    ItemDialogLogic.showItemDialog(this.dialogInit, { type: type, browserType: browserType, conf: conf }).then(function (r) {
+    ItemDialogLogic.showItemDialog(this.dialogInit, {
+      type: type,
+      browserType: browserType,
+      conf: conf
+    }).then(function (r) {
       _this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
     });
   },
@@ -131,9 +146,12 @@ var ComponentSlice = {
   onShowOptionDialog: function onShowOptionDialog(type, option) {
     var _this2 = this;
 
-    ItemDialogLogic.showOptionDialog(this.dialogInit, { type: type, data: option }).then(function (r) {
+    ItemDialogLogic.showOptionDialog(this.dialogInit, {
+      type: type,
+      data: option
+    }).then(function (r) {
       _this2.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
-    }).catch(function (err) {
+    })["catch"](function (err) {
       _this2.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
         modalDialogType: 'alert',
         alertCaption: 'Failed Load',
@@ -144,6 +162,7 @@ var ComponentSlice = {
   onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
     this.uncheckActiveContChb(chartType);
     this.uncheckActiveCheckbox(chartType);
+
     if (this.isWithItemCounter(browserType)) {
       this.setMenuItemClose(chartType, browserType);
       this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
@@ -153,7 +172,10 @@ var ComponentSlice = {
     this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
   },
   onSetActiveContainer: function onSetActiveContainer(isCheck, checkBox) {
-    ChbContLogic.toggle(this, { isCheck: isCheck, checkBox: checkBox });
+    ChbContLogic.toggle(this, {
+      isCheck: isCheck,
+      checkBox: checkBox
+    });
   },
   uncheckActiveContChb: function uncheckActiveContChb(chartType) {
     ChbContLogic.uncheckActive(this, chartType);
@@ -169,13 +191,19 @@ var ComponentSlice = {
     return this.activeChart;
   },
   onSetActiveCheckbox: function onSetActiveCheckbox(isCheck, checkBox, chart) {
-    CheckBoxChartLogic.toggle(this, { isCheck: isCheck, checkBox: checkBox, chart: chart });
+    CheckBoxChartLogic.toggle(this, {
+      isCheck: isCheck,
+      checkBox: checkBox,
+      chart: chart
+    });
   },
   uncheckActiveCheckbox: function uncheckActiveCheckbox(chartType) {
     CheckBoxChartLogic.uncheckActive(this, chartType);
   },
-  onShowModalDialog: function onShowModalDialog(modalDialogType) {
-    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  onShowModalDialog: function onShowModalDialog(modalDialogType, option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     option.modalDialogType = modalDialogType;
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
@@ -184,6 +212,6 @@ var ComponentSlice = {
     this.trigger(_ComponentActions.ComponentActionTypes.CHANGE_THEME, themeName);
   }
 };
-
-exports.default = ComponentSlice;
+var _default = ComponentSlice;
+exports["default"] = _default;
 //# sourceMappingURL=ComponentSlice.js.map

@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/flux/stores/ChartStore.js"
- ],
- "file": "../../../src/flux/stores/ChartStore.js",
- "names": [
-  "ChartStore",
-  "createStore",
-  "listenables",
-  "init",
-  "initWatchList",
-  "listenLoadingProgress",
-  "fnOnChangeStore"
- ],
- "mappings": ";;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa,iBAAOC,WAAP;AACjBC,6EADiB;;AAGjBC,MAHiB,kBAGX;AACJ,SAAKC,aAAL;AACA,SAAKC,qBAAL,CAA2B,uBAAaC,eAAxC;AACD;AANgB,0LAAnB;;kBAmBeN,U"
-}
+{"version":3,"sources":["../../../src/flux/stores/ChartStore.js"],"names":["ChartStore","Reflux","createStore","listenables","Actions","init","initWatchList","listenLoadingProgress","ChartActions","fnOnChangeStore","ChartSlice","BrowserSlice","ComponentSlice","SettingSlice","WatchListSlice","WithLimitRemaining","WithLoadingProgress"],"mappings":";;;;;;;;;AAAA;;AAEA;;AACA;;AAEA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,UAAU,GAAGC,mBAAOC,WAAP;AACjBC,EAAAA,WAAW,YAAOC,mBAAP,CADM;AAGjBC,EAAAA,IAHiB,kBAGX;AACJ,SAAKC,aAAL;AACA,SAAKC,qBAAL,CAA2BC,yBAAaC,eAAxC;AACD;AANgB,GAQfC,sBARe,MASfC,wBATe,MAUfC,0BAVe,MAWfC,wBAXe,MAYfC,0BAZe,MAcfC,8BAde,MAefC,+BAfe,EAAnB;;eAmBehB,U","sourcesContent":["import Reflux from 'reflux';\r\n\r\nimport Actions from '../actions/Actions'\r\nimport ChartActions from '../actions/ChartActions';\r\n\r\nimport ChartSlice from './ChartSlice';\r\nimport BrowserSlice from './BrowserSlice';\r\nimport ComponentSlice from './ComponentSlice';\r\nimport SettingSlice from './SettingSlice';\r\nimport WatchListSlice from '../watch-list/WatchListSlice';\r\nimport WithLimitRemaining from './WithLimitRemaining';\r\nimport WithLoadingProgress from './WithLoadingProgress'\r\n\r\nconst ChartStore = Reflux.createStore({\r\n  listenables: [ ...Actions ],\r\n\r\n  init(){\r\n    this.initWatchList();\r\n    this.listenLoadingProgress(ChartActions.fnOnChangeStore);\r\n  },\r\n\r\n ...ChartSlice,\r\n ...BrowserSlice,\r\n ...ComponentSlice,\r\n ...SettingSlice, \r\n ...WatchListSlice,\r\n\r\n ...WithLimitRemaining,\r\n ...WithLoadingProgress\r\n\r\n})\r\n\r\nexport default ChartStore\r\n"],"file":"ChartStore.js"}

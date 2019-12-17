@@ -1,25 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var C = {
   ROOT_URL: 'https://data.ssb.no/api/v0/dataset'
 };
-
 var DatasetApi = {
   getRequestUrl: function getRequestUrl(option) {
     var metric = option.metric,
         dfId = option.dfId,
         id = dfId ? dfId : metric;
-
-    return C.ROOT_URL + '/' + id + '.json?lang=en';
+    return C.ROOT_URL + "/" + id + ".json?lang=en";
   },
   checkResponse: function checkResponse() {
     return true;
   }
 };
-
-exports.default = DatasetApi;
+var _default = DatasetApi;
+exports["default"] = _default;
 //# sourceMappingURL=ApiDataset.js.map

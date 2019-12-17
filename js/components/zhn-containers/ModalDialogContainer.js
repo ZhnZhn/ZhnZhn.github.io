@@ -1,42 +1,22 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _class, _temp2;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireWildcard(require("react"));
 
 //import PropTypes from 'prop-types'
-
-
 var CL = {
   INIT: 'modal-root',
   SHOWING: 'modal-root show-modal',
   HIDING: 'modal-root hide-modal'
 };
-
 var STYLE = {
   SHOW: {
     display: 'block'
@@ -49,74 +29,69 @@ var STYLE = {
   }
 };
 
-var ModalDialogContainer = (_temp2 = _class = function (_Component) {
-  (0, _inherits3.default)(ModalDialogContainer, _Component);
+var ModalDialogContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(ModalDialogContainer, _Component);
 
   function ModalDialogContainer() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, ModalDialogContainer);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ModalDialogContainer.__proto__ || Object.getPrototypeOf(ModalDialogContainer)).call.apply(_ref, [this].concat(args))), _this), _this.wasClosing = true, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.wasClosing = true;
+    return _this;
   }
-  /*
-  static propTypes = {
-    isShow  : PropTypes.bool,
-    timeout : PropTypes.number,
-    onClose : PropTypes.func
-  }
-  */
 
+  var _proto = ModalDialogContainer.prototype;
 
-  (0, _createClass3.default)(ModalDialogContainer, [{
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      var _this2 = this;
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+    var _this2 = this;
 
-      if (this.wasClosing) {
-        setTimeout(function () {
-          _this2.setState({});
-        }, this.props.timeout);
+    if (this.wasClosing) {
+      setTimeout(function () {
+        _this2.setState({});
+      }, this.props.timeout);
+    }
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        isShow = _this$props.isShow,
+        children = _this$props.children,
+        onClose = _this$props.onClose;
+
+    var _className, _style;
+
+    if (this.wasClosing) {
+      _className = CL.INIT;
+      _style = STYLE.HIDE;
+      this.wasClosing = false;
+    } else {
+      _className = isShow ? CL.SHOWING : CL.HIDING;
+      _style = isShow ? STYLE.SHOW : STYLE.HIDE_BACKGROUND;
+
+      if (!isShow) {
+        this.wasClosing = true;
       }
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          children = _props.children,
-          onClose = _props.onClose;
 
-      var _className = void 0,
-          _style = void 0;
-      if (this.wasClosing) {
-        _className = CL.INIT;
-        _style = STYLE.HIDE;
-        this.wasClosing = false;
-      } else {
-        _className = isShow ? CL.SHOWING : CL.HIDING;
-        _style = isShow ? STYLE.SHOW : STYLE.HIDE_BACKGROUND;
-        if (!isShow) {
-          this.wasClosing = true;
-        }
-      }
+    return _react["default"].createElement("div", {
+      className: _className,
+      style: _style,
+      onClick: onClose
+    }, children);
+  };
 
-      return _react2.default.createElement(
-        'div',
-        { className: _className, style: _style, onClick: onClose },
-        children
-      );
-    }
-  }]);
   return ModalDialogContainer;
-}(_react.Component), _class.defaultProps = {
+}(_react.Component);
+
+ModalDialogContainer.defaultProps = {
   timeout: 450
-}, _temp2);
-exports.default = ModalDialogContainer;
+};
+var _default = ModalDialogContainer;
+exports["default"] = _default;
 //# sourceMappingURL=ModalDialogContainer.js.map

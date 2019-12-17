@@ -1,29 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ConfigBuilder = require('../charts/ConfigBuilder');
+var _ConfigBuilder = _interopRequireDefault(require("../charts/ConfigBuilder"));
 
-var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+var _Tooltip = _interopRequireDefault(require("../charts/Tooltip"));
 
-var _Tooltip = require('../charts/Tooltip');
-
-var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
-var _AdapterFn = require('./AdapterFn');
-
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
 var CATEGORIES = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-
 var C = {
   NOW: {
     index: 3,
@@ -47,27 +37,38 @@ var C = {
 var _getYear = function _getYear(str) {
   return str.split("-")[0];
 };
+
 var _getMonth = function _getMonth(str) {
   return str.split("-")[1];
 };
 
 var _crSeria = function _crSeria(name, _ref) {
   var _ref$type = _ref.type,
-      type = _ref$type === undefined ? 'spline' : _ref$type,
+      type = _ref$type === void 0 ? 'spline' : _ref$type,
       data = _ref.data,
       color = _ref.color,
       _ref$isVisible = _ref.isVisible,
-      isVisible = _ref$isVisible === undefined ? true : _ref$isVisible;
-
-  return { type: type, name: name, data: data, color: color, visible: isVisible };
+      isVisible = _ref$isVisible === void 0 ? true : _ref$isVisible;
+  return {
+    type: type,
+    name: name,
+    data: data,
+    color: color,
+    visible: isVisible
+  };
 };
+
 var _crItem = function _crItem(name, _ref2) {
   var index = _ref2.index,
       color = _ref2.color,
       _ref2$isVisible = _ref2.isVisible,
-      isVisible = _ref2$isVisible === undefined ? true : _ref2$isVisible;
-
-  return { name: name, index: index, color: color, isVisible: isVisible };
+      isVisible = _ref2$isVisible === void 0 ? true : _ref2$isVisible;
+  return {
+    name: name,
+    index: index,
+    color: color,
+    isVisible: isVisible
+  };
 };
 
 var _crPoint = function _crPoint(item) {
@@ -76,36 +77,50 @@ var _crPoint = function _crPoint(item) {
     y: item[1]
   };
 };
+
 var _crValuePoint = function _crValuePoint(item) {
   return item[1];
 };
+
 var _crValueYearPoint = function _crValueYearPoint(item) {
   return {
     v: item[1],
     y: _getYear(item[0])
   };
 };
+
 var _findHighLow = function _findHighLow(arr) {
-  var h = { v: Number.NEGATIVE_INFINITY, y: '' },
-      l = { v: Number.POSITIVE_INFINITY, y: '' };
+  var h = {
+    v: Number.NEGATIVE_INFINITY,
+    y: ''
+  },
+      l = {
+    v: Number.POSITIVE_INFINITY,
+    y: ''
+  };
   arr.forEach(function (item) {
     if (item.v > h.v) {
       h = item;
     }
+
     if (item.v < l.v) {
       l = item;
     }
   });
   return {
-    high: h.v, yHigh: h.y,
-    low: l.v, yLow: l.y
+    high: h.v,
+    yHigh: h.y,
+    low: l.v,
+    yLow: l.y
   };
 };
+
 var _crHighLowPoint = function _crHighLowPoint(key, arr) {
-  return (0, _extends3.default)({
+  return (0, _extends2["default"])({
     c: key
   }, _findHighLow(arr));
 };
+
 var _calcAvg = function _calcAvg(arr) {
   var sum = arr.reduce(function (acc, a) {
     return acc + a;
@@ -113,6 +128,7 @@ var _calcAvg = function _calcAvg(arr) {
       avg = arr.length !== 0 ? parseFloat((sum / arr.length).toFixed(4)) : 0;
   return avg;
 };
+
 var _crAvgPoint = function _crAvgPoint(key, arr) {
   return {
     y: _calcAvg(arr),
@@ -120,19 +136,28 @@ var _crAvgPoint = function _crAvgPoint(key, arr) {
   };
 };
 
-var _crSeriaData = function _crSeriaData(data, i, year) {
-  var crPoint = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _crPoint;
+var _crSeriaData = function _crSeriaData(data, i, year, crPoint) {
+  if (crPoint === void 0) {
+    crPoint = _crPoint;
+  }
 
   var arr = [],
       max = data.length;
+
   for (; i < max; i++) {
     var item = data[i];
+
     if (_getYear(item[0]) !== year) {
       break;
     }
+
     arr.push(crPoint(item));
   }
-  return { i: i, arr: arr.reverse() };
+
+  return {
+    i: i,
+    arr: arr.reverse()
+  };
 };
 
 var _crSeries = function _crSeries(data) {
@@ -146,11 +171,14 @@ var _crSeries = function _crSeries(data) {
       _crSeriaData3 = _crSeriaData(data, i, _yearPrev),
       _dPrev = _crSeriaData3.arr;
 
-
   return {
-    nowSeria: _crSeria(_yearNow, (0, _extends3.default)({}, C.NOW, { data: _dNow })),
+    nowSeria: _crSeria(_yearNow, (0, _extends2["default"])({}, C.NOW, {}, {
+      data: _dNow
+    })),
     nowItem: _crItem(_yearNow, C.NOW),
-    prevSeria: _crSeria(_yearPrev, (0, _extends3.default)({}, C.PREV, { data: _dPrev })),
+    prevSeria: _crSeria(_yearPrev, (0, _extends2["default"])({}, C.PREV, {}, {
+      data: _dPrev
+    })),
     prevItem: _crItem(_yearPrev, C.PREV)
   };
 };
@@ -170,25 +198,36 @@ var _crBaseHm = function _crBaseHm() {
   });
   return hm;
 };
-var _crMonthHm = function _crMonthHm(i, data, stopYear) {
-  var crPoint = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _crValuePoint;
+
+var _crMonthHm = function _crMonthHm(i, data, stopYear, crPoint) {
+  if (crPoint === void 0) {
+    crPoint = _crValuePoint;
+  }
 
   var hm = _crBaseHm(),
       max = data.length;
+
   var isBreaked = false;
+
   for (; i < max; i++) {
     var _item = data[i],
         _y = _item[0];
+
     if (_y === stopYear) {
       isBreaked = true;
       break;
     }
-    var _m = _getMonth(_item[0]);
-    //hm[_m].push(_item[1])
+
+    var _m = _getMonth(_item[0]); //hm[_m].push(_item[1])
+
+
     hm[_m].push(crPoint(_item));
   }
 
-  return { hm: hm, isBreaked: isBreaked };
+  return {
+    hm: hm,
+    isBreaked: isBreaked
+  };
 };
 
 var _crRangeSeria = function _crRangeSeria(data) {
@@ -199,30 +238,11 @@ var _crRangeSeria = function _crRangeSeria(data) {
       isBreaked = _crMonthHm2.isBreaked,
       max = data.length,
       _stopYear = isBreaked ? stopYear : _getYear(data[max - 1][0]),
-      name = 'Range ' + refYear + ':' + _stopYear,
+      name = "Range " + refYear + ":" + _stopYear,
       _data = _hmToSeriaData(hm, _crHighLowPoint);
 
-
-  try {
-    var _b = new _ConfigBuilder2.default();
-    console.log(_b);
-    /*
-    const _seria = _b
-      .areaRangeSeria(
-         Tooltip.categoryRHLY, {
-           data: _data,
-           name: name,
-           point: {}
-         }
-       ).toSeria()
-    */
-    //console.log(_seria)
-  } catch (e) {
-    console.log(e);
-  }
-
   return {
-    rangeSeria: (0, _ConfigBuilder2.default)().areaRangeSeria(_Tooltip2.default.categoryRHLY, {
+    rangeSeria: (0, _ConfigBuilder["default"])().areaRangeSeria(_Tooltip["default"].categoryRHLY, {
       data: _data,
       name: name,
       point: {}
@@ -234,11 +254,13 @@ var _crRangeSeria = function _crRangeSeria(data) {
 var _findStartYearIndex = function _findStartYearIndex(data, yearStop) {
   var max = data.length;
   var i = 0;
+
   for (; i < max; i++) {
     if (_getYear(data[i][0]) !== yearStop) {
       break;
     }
   }
+
   return i;
 };
 
@@ -253,11 +275,12 @@ var _crAvgSeria = function _crAvgSeria(data) {
       isBreaked = _crMonthHm3.isBreaked,
       _stopYear = isBreaked ? stopYear : _getYear(data[max - 1][0]),
       _data = _hmToSeriaData(hm, _crAvgPoint),
-      name = 'Avg ' + fromYear + ':' + _stopYear;
-
+      name = "Avg " + fromYear + ":" + _stopYear;
 
   return {
-    avgSeria: _crSeria(name, (0, _extends3.default)({}, C.AVG, { data: _data })),
+    avgSeria: _crSeria(name, (0, _extends2["default"])({}, C.AVG, {}, {
+      data: _data
+    })),
     avgItem: _crItem(name, C.AVG)
   };
 };
@@ -284,20 +307,20 @@ var _crZhConfig = function _crZhConfig(option, _ref3) {
 
 var _crValueAndDate = function _crValueAndDate(seria, index) {
   var _seria$data = seria.data,
-      data = _seria$data === undefined ? [] : _seria$data,
+      data = _seria$data === void 0 ? [] : _seria$data,
       name = seria.name,
       _data$index = data[index],
       value = _data$index.y,
       c = _data$index.c;
-
   return {
     value: value,
-    date: c + '-' + name
+    date: c + "-" + name
   };
 };
+
 var _crValueMoving = function _crValueMoving(nowSeria, prevSeria) {
   var _nowSeria$data = nowSeria.data,
-      data = _nowSeria$data === undefined ? [] : _nowSeria$data,
+      data = _nowSeria$data === void 0 ? [] : _nowSeria$data,
       max = data.length - 1,
       _crValueAndDate2 = _crValueAndDate(nowSeria, max),
       bNowValue = _crValueAndDate2.value,
@@ -305,13 +328,15 @@ var _crValueMoving = function _crValueMoving(nowSeria, prevSeria) {
       _crValueAndDate3 = _crValueAndDate(prevSeria, max),
       bPrevValue = _crValueAndDate3.value,
       dateTo = _crValueAndDate3.date,
-      moving = _AdapterFn2.default.crValueMoving({
+      moving = _AdapterFn["default"].crValueMoving({
     bNowValue: bNowValue,
     bPrevValue: bPrevValue
   });
 
-  return (0, _extends3.default)({}, moving, { date: date, dateTo: dateTo,
-    valueTo: _AdapterFn2.default.numberFormat(bPrevValue),
+  return (0, _extends2["default"])({}, moving, {
+    date: date,
+    dateTo: dateTo,
+    valueTo: _AdapterFn["default"].numberFormat(bPrevValue),
     isDenyToChange: true
   });
 };
@@ -332,15 +357,20 @@ var toYearly = {
         avgSeria = _crAvgSeria2.avgSeria,
         avgItem = _crAvgSeria2.avgItem,
         legend = [nowItem, prevItem, rangeItem, avgItem],
-        config = (0, _ConfigBuilder2.default)().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, rangeSeria).addSeriaBy(1, avgSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addTooltip(_Tooltip2.default.categorySimple).add({
-      chart: { spacingTop: 25, marginTop: 45 },
-      zhConfig: _crZhConfig(option, { legend: legend }),
+        config = (0, _ConfigBuilder["default"])().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, rangeSeria).addSeriaBy(1, avgSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addTooltip(_Tooltip["default"].categorySimple).add({
+      chart: {
+        spacingTop: 25,
+        marginTop: 45
+      },
+      zhConfig: _crZhConfig(option, {
+        legend: legend
+      }),
       valueMoving: _crValueMoving(nowSeria, prevSeria)
     }).toConfig();
 
     return config;
   }
 };
-
-exports.default = toYearly;
-//# sourceMappingURL=toYearly.js.map
+var _default = toYearly;
+exports["default"] = _default;
+//# sourceMappingURL=ToYearly.js.map

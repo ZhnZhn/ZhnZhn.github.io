@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 var PN_ID = 'zhIs2H';
 
 var zhToggle2H = function zhToggle2H() {
   try {
     var _height = this[PN_ID] ? this.chartHeight / 2 : this.chartHeight * 2;
+
     this.setSize(undefined, _height, true);
     this[PN_ID] = !this[PN_ID];
   } catch (err) {
@@ -15,5 +15,6 @@ var zhToggle2H = function zhToggle2H() {
   }
 };
 
-exports.default = zhToggle2H;
+var _default = zhToggle2H;
+exports["default"] = _default;
 //# sourceMappingURL=zhToggle2H.js.map

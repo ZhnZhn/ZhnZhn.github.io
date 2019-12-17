@@ -1,33 +1,28 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ChartConfig = require('../../charts/ChartConfig');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _fnAdapter = require('./fnAdapter');
-
-var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var UnComtradeAdapter = {
-  crKey: _fnAdapter2.default.crChartId,
-
+  crKey: _fnAdapter["default"].crChartId,
   toConfig: function toConfig(json, option) {
-    var config = _fnAdapter2.default.toConfig(json, option);
+    var config = _fnAdapter["default"].toConfig(json, option);
 
     return {
-      config: config
-      //isDrawDeltaExtrems: false,
+      config: config //isDrawDeltaExtrems: false,
       //isNotZoomToMinMax: false
+
     };
   },
   toSeries: function toSeries(json, option) {
-    var seria = _ChartConfig2.default.fSeries();
+    var seria = _ChartConfig["default"].fSeries();
+
     Object.assign(seria, {
       zhSeriaId: 'Empty_Seria',
       zhValueText: 'Empty Seria'
@@ -35,6 +30,6 @@ var UnComtradeAdapter = {
     return seria;
   }
 };
-
-exports.default = UnComtradeAdapter;
+var _default = UnComtradeAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=UnComtradeAdapter.js.map

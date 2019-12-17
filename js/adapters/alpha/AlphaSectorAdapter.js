@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var C = {
   PN_RT: 'Rank A: Real-Time Performance',
   PN_MD: 'Meta Data',
@@ -11,27 +9,64 @@ var C = {
   TITLE: 'S&P 500 Performance by Sector',
   ID: 'alp_perf'
 };
+var M_PERIOD = [{
+  t: 'Real-Time',
+  r: 'RT'
+}, {
+  t: '1 Day',
+  r: '1D'
+}, {
+  t: '5 Day',
+  r: '5D'
+}, {
+  t: '1 Month',
+  r: '1M'
+}, {
+  t: '3 Month',
+  r: '3M'
+}, {
+  t: 'YTD',
+  r: 'YTD'
+}, {
+  t: '1 Year',
+  r: '1Y'
+}];
+var Y_PERIOD = [{
+  t: '1 Year',
+  r: '1Y'
+}, {
+  t: '3 Year',
+  r: '3Y'
+}, {
+  t: '5 Year',
+  r: '5Y'
+}, {
+  t: '10 Year',
+  r: '10Y'
+}];
 
-var M_PERIOD = [{ t: 'Real-Time', r: 'RT' }, { t: '1 Day', r: '1D' }, { t: '5 Day', r: '5D' }, { t: '1 Month', r: '1M' }, { t: '3 Month', r: '3M' }, { t: 'YTD', r: 'YTD' }, { t: '1 Year', r: '1Y' }];
-var Y_PERIOD = [{ t: '1 Year', r: '1Y' }, { t: '3 Year', r: '3Y' }, { t: '5 Year', r: '5Y' }, { t: '10 Year', r: '10Y' }];
-
-var _isInArray = function _isInArray() {
-  var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var value = arguments[1];
+var _isInArray = function _isInArray(arr, value) {
+  if (arr === void 0) {
+    arr = [];
+  }
 
   var max = arr.length;
   var i = 0;
+
   for (; i < max; i++) {
     if (value.indexOf(arr[i].t) !== -1) {
       return arr[i].r;
     }
   }
+
   return false;
 };
 
 var _initRows = function _initRows(sectors) {
   return sectors.map(function (str) {
-    return { Sector: str };
+    return {
+      Sector: str
+    };
   });
 };
 
@@ -47,17 +82,24 @@ var _crConfig = function _crConfig(json) {
       slices = Object.keys(json),
       mRows = _initRows(sectors),
       yRows = _initRows(sectors);
+
   slices.forEach(function (k) {
     var mPropName = _isInArray(M_PERIOD, k);
+
     if (mPropName) {
       _addToRows(mRows, json[k], mPropName);
     }
+
     var yPropName = _isInArray(Y_PERIOD, k);
+
     if (yPropName) {
       _addToRows(yRows, json[k], yPropName);
     }
   });
-  return { mRows: mRows, yRows: yRows };
+  return {
+    mRows: mRows,
+    yRows: yRows
+  };
 };
 
 var M_HEADERS = [{
@@ -122,7 +164,7 @@ var Y_HEADERS = [{
 var _crTitle = function _crTitle(json) {
   var md = json[C.PN_MD] || {},
       lr = md[C.PN_LR] || '';
-  return C.TITLE + ' ' + lr;
+  return C.TITLE + " " + lr;
 };
 
 var AlphaSectorAdapter = {
@@ -135,29 +177,31 @@ var AlphaSectorAdapter = {
       id: id,
       zhCompType: 'ALPHA_PERF',
       zhConfig: {
-        id: id, key: id
+        id: id,
+        key: id
       },
       m: {
-        id: id + '_m',
+        id: id + "_m",
         title: _crTitle(json),
         headers: M_HEADERS,
         rows: mRows
       },
       y: {
-        id: id + '_y',
-        title: C.TITLE + ' Yearly',
+        id: id + "_y",
+        title: C.TITLE + " Yearly",
         headers: Y_HEADERS,
         rows: yRows
       }
     };
 
-
-    return { config: config };
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(json, option) {
     throw new Error('ZH_1000');
   }
 };
-
-exports.default = AlphaSectorAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\AlphaSectorAdapter.js.map
+var _default = AlphaSectorAdapter;
+exports["default"] = _default;
+//# sourceMappingURL=AlphaSectorAdapter.js.map

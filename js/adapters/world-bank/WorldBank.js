@@ -1,20 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _api = require('./api');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _api2 = _interopRequireDefault(_api);
+var _api = _interopRequireDefault(require("./api"));
 
-var _adapter = require('./adapter');
+var _adapter = _interopRequireDefault(require("./adapter"));
 
-var _adapter2 = _interopRequireDefault(_adapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var WorldBank = { api: _api2.default, adapter: _adapter2.default };
-
-exports.default = WorldBank;
+var WorldBank = {
+  api: _api["default"],
+  adapter: _adapter["default"]
+};
+var _default = WorldBank;
+exports["default"] = _default;
 //# sourceMappingURL=WorldBank.js.map

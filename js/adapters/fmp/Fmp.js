@@ -1,23 +1,18 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _FmpApi = require('./FmpApi');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _FmpApi2 = _interopRequireDefault(_FmpApi);
+var _FmpApi = _interopRequireDefault(require("./FmpApi"));
 
-var _FmpAdapter = require('./FmpAdapter');
-
-var _FmpAdapter2 = _interopRequireDefault(_FmpAdapter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _FmpAdapter = _interopRequireDefault(require("./FmpAdapter"));
 
 var Fmp = {
-  api: _FmpApi2.default,
-  adapter: _FmpAdapter2.default
+  api: _FmpApi["default"],
+  adapter: _FmpAdapter["default"]
 };
-
-exports.default = Fmp;
+var _default = Fmp;
+exports["default"] = _default;
 //# sourceMappingURL=Fmp.js.map

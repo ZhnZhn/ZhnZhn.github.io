@@ -1,29 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
-var _withTheme = require('../hoc/withTheme');
-
-var _withTheme2 = _interopRequireDefault(_withTheme);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var TH_ID = 'ELEMENT';
 //import PropTypes from "prop-types";
-
+var TH_ID = 'ELEMENT';
 var S = {
   LI: {
-    float: 'left',
+    "float": 'left',
     display: 'inline-block',
     backgroundColor: '#1b2836',
     color: 'gray',
@@ -34,11 +26,9 @@ var S = {
     borderTopLeftRadius: '8px',
     borderTopRightRadius: '8px',
     cursor: 'pointer',
-
     fontWeight: 'bold',
     border: '2px solid gray',
     borderBottom: 'none'
-
   },
   SELECTED: {
     borderColor: 'rgba(164, 135, 212, 1)',
@@ -51,23 +41,15 @@ var Tab = function Tab(_ref) {
       title = _ref.title,
       isSelected = _ref.isSelected,
       onClick = _ref.onClick;
-
   var TS = theme.getStyle(TH_ID);
-  var _selectedStyle = isSelected ? S.SELECTED : null;
-  return _react2.default.createElement(
-    'li',
-    {
-      style: (0, _extends3.default)({}, S.LI, TS.BG, _selectedStyle),
-      onClick: onClick
-    },
-    _react2.default.createElement(
-      'span',
-      null,
-      title
-    )
-  );
-};
 
+  var _selectedStyle = isSelected ? S.SELECTED : null;
+
+  return _react["default"].createElement("li", {
+    style: (0, _extends2["default"])({}, S.LI, {}, TS.BG, {}, _selectedStyle),
+    onClick: onClick
+  }, _react["default"].createElement("span", null, title));
+};
 /*
 Tab.propTypes = {
   title: PropTypes.string,
@@ -76,5 +58,8 @@ Tab.propTypes = {
 }
 */
 
-exports.default = (0, _withTheme2.default)(Tab);
+
+var _default = (0, _withTheme["default"])(Tab);
+
+exports["default"] = _default;
 //# sourceMappingURL=Tab.js.map

@@ -1,35 +1,29 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Type = require('../../constants/Type');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _ComponentActions = require('../../flux/actions/ComponentActions');
+var _Type = require("../../constants/Type");
 
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
-var _BrowserActions = require('../../flux/actions/BrowserActions');
-
-var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _BrowserActions = _interopRequireDefault(require("../../flux/actions/BrowserActions"));
 
 var CL_ROW = 'row__pane-topic';
-
 var CL = {
-  BR: CL_ROW + ' item__browser',
-  Q: CL_ROW + ' item__quandl',
-  DBN: CL_ROW + ' item__dbnomics',
-  EU: CL_ROW + ' item__eurostat',
-  W: CL_ROW + ' item__watch',
-  AB: CL_ROW + ' item__about'
+  BR: CL_ROW + " item__browser",
+  Q: CL_ROW + " item__quandl",
+  DBN: CL_ROW + " item__dbnomics",
+  EU: CL_ROW + " item__eurostat",
+  W: CL_ROW + " item__watch",
+  AB: CL_ROW + " item__about"
 };
 
 var _fBD = function _fBD(id) {
   return function () {
-    _BrowserActions2.default.showBrowserDynamic(id);
+    _BrowserActions["default"].showBrowserDynamic(id);
   };
 };
 
@@ -81,7 +75,7 @@ var crBrowserModel = function crBrowserModel() {
     }, {
       cn: CL.AB,
       name: 'About',
-      onClick: _ComponentActions2.default.showAbout,
+      onClick: _ComponentActions["default"].showAbout,
       isClose: true
     }],
     page_01: [{
@@ -160,5 +154,6 @@ var crBrowserModel = function crBrowserModel() {
   };
 };
 
-exports.default = crBrowserModel;
+var _default = crBrowserModel;
+exports["default"] = _default;
 //# sourceMappingURL=BrowserModel.js.map

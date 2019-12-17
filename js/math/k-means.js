@@ -1,21 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var C = {
   N: 6,
   ITERATION: 100
-};
+}; // convenience functions
 
-// convenience functions
 var getterSetter = function getterSetter(initialValue, validator) {
   var thingToGetSet = initialValue;
+
   var _fnIsValid = validator || function (val) {
     return true;
   };
+
   return function (newValue) {
     if (typeof newValue === 'undefined') return thingToGetSet;
     if (_fnIsValid(newValue)) thingToGetSet = newValue;
@@ -54,18 +52,17 @@ var averageLocation = function averageLocation(points) {
       vectorSum = locations.reduce(function (a, b) {
     return sumVectors(a, b);
   }, zeroVector);
-
   return vectorSum.map(function (val) {
     return val / points.length;
   });
-};
+}; // objects
 
-// objects
+
 var Point = function Point(location) {
   var self = this;
   this.location = getterSetter(location);
-
   this.label = getterSetter();
+
   this.updateLabel = function (centroids) {
     var distancesSquared = centroids.map(function (centroid) {
       return sumOfSquareDiffs(self.location(), centroid.location());
@@ -78,6 +75,7 @@ var Centroid = function Centroid(initialLocation, label) {
   var self = this;
   this.location = getterSetter(initialLocation);
   this.label = getterSetter(label);
+
   this.updateLocation = function (points) {
     var pointsWithThisCentroid = points.filter(function (point) {
       return point.label() == self.label();
@@ -89,22 +87,22 @@ var Centroid = function Centroid(initialLocation, label) {
 var kmeans = function kmeans(data, config) {
   // default k
   var k = config.k || Math.round(Math.sqrt(data.length / 2)),
-      iterations = config.iterations;
+      iterations = config.iterations; // initialize point objects with data
 
-  // initialize point objects with data
   var points = data.map(function (vector) {
     return new Point(vector);
-  });
+  }); // intialize centroids randomly
 
-  // intialize centroids randomly
   var centroids = [];
-  var i = void 0;
+  var i;
+
   for (i = 0; i < k; i++) {
     centroids.push(new Centroid(points[i % points.length].location(), i));
-  }
+  } // update labels and centroid locations until convergence
 
-  // update labels and centroid locations until convergence
-  var iter = void 0;
+
+  var iter;
+
   for (iter = 0; iter < iterations; iter++) {
     points.forEach(function (point) {
       point.updateLabel(centroids);
@@ -112,41 +110,45 @@ var kmeans = function kmeans(data, config) {
     centroids.forEach(function (centroid) {
       centroid.updateLocation(points);
     });
-  }
+  } // return points and centroids
 
-  // return points and centroids
+
   return {
     points: points,
     centroids: centroids
   };
-};
+}; //fn for sort clusters
 
-//fn for sort clusters
+
 var compareUnaryCentroid = function compareUnaryCentroid(a, b) {
   if (a.centroid[0] < b.centroid[0]) {
     return -1;
   }
+
   if (a.centroid[0] > b.centroid[0]) {
     return 1;
   }
+
   if (a.centroid[0] === b.centroid[0]) {
     return 0;
   }
 };
+
 var compareUnaryPoint = function compareUnaryPoint(a, b) {
   if (a[0] < b[0]) {
     return -1;
   }
+
   if (a[0] > b[0]) {
     return 1;
   }
+
   if (a[0] === b[0]) {
     return 0;
   }
 };
 
 var clusterMaker = {
-
   data: getterSetter([], function (arrayOfArrays) {
     var n = arrayOfArrays[0].length;
     return arrayOfArrays.map(function (array) {
@@ -155,12 +157,13 @@ var clusterMaker = {
       return boolA & boolB;
     }, true);
   }),
-
   clusters: function clusters() {
-    var pointsAndCentroids = kmeans(this.data(), { k: this.k(), iterations: this.iterations() }),
+    var pointsAndCentroids = kmeans(this.data(), {
+      k: this.k(),
+      iterations: this.iterations()
+    }),
         points = pointsAndCentroids.points,
         centroids = pointsAndCentroids.centroids;
-
     return centroids.map(function (centroid) {
       return {
         centroid: centroid.location(),
@@ -172,26 +175,30 @@ var clusterMaker = {
       };
     });
   },
-
-
   k: getterSetter(undefined, function (value) {
     return value % 1 == 0 & value > 0;
   }),
-
   iterations: getterSetter(Math.pow(10, 3), function (value) {
     return value % 1 == 0 & value > 0;
   }),
-
   unarySortedClusters: function unarySortedClusters() {
     return this.clusters().sort(compareUnaryCentroid).map(function (cluster) {
       cluster.points = cluster.points.sort(compareUnaryPoint);
       return cluster;
     });
   },
-  crUnarySortedCluster: function crUnarySortedCluster() {
-    var points = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : C.N;
-    var iteration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : C.ITERATION;
+  crUnarySortedCluster: function crUnarySortedCluster(points, n, iteration) {
+    if (points === void 0) {
+      points = [];
+    }
+
+    if (n === void 0) {
+      n = C.N;
+    }
+
+    if (iteration === void 0) {
+      iteration = C.ITERATION;
+    }
 
     this.k(n);
     this.iterations(iteration);
@@ -199,6 +206,6 @@ var clusterMaker = {
     return this.unarySortedClusters();
   }
 };
-
-exports.default = clusterMaker;
+var _default = clusterMaker;
+exports["default"] = _default;
 //# sourceMappingURL=k-means.js.map

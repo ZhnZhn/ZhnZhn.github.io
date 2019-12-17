@@ -1,38 +1,19 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireWildcard(require("react"));
 
 var _fKeyPressed = function _fKeyPressed(onClick) {
   return function (evt) {
@@ -45,67 +26,61 @@ var _fKeyPressed = function _fKeyPressed(onClick) {
   };
 };
 
-var MenuAriaItem = function (_Component) {
-  (0, _inherits3.default)(MenuAriaItem, _Component);
+var MenuAriaItem =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(MenuAriaItem, _Component);
 
   function MenuAriaItem() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, MenuAriaItem);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuAriaItem.__proto__ || Object.getPrototypeOf(MenuAriaItem)).call.apply(_ref, [this].concat(args))), _this), _this._ref = function (n) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+    _this._ref = function (n) {
       return _this._node = n;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(MenuAriaItem, [{
-    key: 'componentDidMount',
+  var _proto = MenuAriaItem.prototype;
 
+  /*
+  static propTypes = {
+    onClick: PropTypes.func,
+    onReg: PropTypes.func
+  }
+  */
+  _proto.componentDidMount = function componentDidMount() {
+    var onReg = this.props.onReg;
 
-    /*
-    static propTypes = {
-      onClick: PropTypes.func,
-      onReg: PropTypes.func
+    if (this._node && typeof onReg === 'function') {
+      onReg(this._node);
     }
-    */
+  };
 
-    value: function componentDidMount() {
-      var onReg = this.props.onReg;
+  _proto.render = function render() {
+    var _this$props = this.props,
+        children = _this$props.children,
+        onClick = _this$props.onClick,
+        onReg = _this$props.onReg,
+        rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["children", "onClick", "onReg"]);
+    return _react["default"].createElement("div", (0, _extends2["default"])({}, rest, {
+      ref: onReg ? this._ref : void 0,
+      role: "menuitem",
+      tabIndex: "0",
+      onClick: onClick,
+      onKeyPress: _fKeyPressed(onClick)
+    }), children);
+  };
 
-      if (this._node && typeof onReg === 'function') {
-        onReg(this._node);
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          children = _props.children,
-          onClick = _props.onClick,
-          onReg = _props.onReg,
-          rest = (0, _objectWithoutProperties3.default)(_props, ['children', 'onClick', 'onReg']);
-
-      return _react2.default.createElement(
-        'div',
-        (0, _extends3.default)({}, rest, {
-          ref: onReg ? this._ref : void 0,
-          role: 'menuitem',
-          tabIndex: '0',
-          onClick: onClick,
-          onKeyPress: _fKeyPressed(onClick)
-        }),
-        children
-      );
-    }
-  }]);
   return MenuAriaItem;
 }(_react.Component);
 
-exports.default = MenuAriaItem;
+var _default = MenuAriaItem;
+exports["default"] = _default;
 //# sourceMappingURL=MenuAriaItem.js.map

@@ -1,16 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/styles/Color.js"
- ],
- "file": "../../../src/components/styles/Color.js",
- "names": [
-  "COLOR",
-  "YELLOW",
-  "GREEN",
-  "SIREN",
-  "TITLE",
-  "BLANK"
- ],
- "mappings": ";;;;;AAAA,IAAMA,QAAQ;AACZC,UAAQ,SADI;AAEZC,SAAO,SAFK;AAGZC,SAAO,SAHK;AAIZC,SAAO,SAJK;AAKZ;AACAC,SAAO;AANK,CAAd;;kBASeL,K"
-}
+{"version":3,"sources":["../../../src/components/styles/Color.js"],"names":["COLOR","YELLOW","GREEN","SIREN","TITLE","BLANK"],"mappings":";;;;AAAA,IAAMA,KAAK,GAAG;AACZC,EAAAA,MAAM,EAAE,SADI;AAEZC,EAAAA,KAAK,EAAE,SAFK;AAGZC,EAAAA,KAAK,EAAE,SAHK;AAIZC,EAAAA,KAAK,EAAE,SAJK;AAKZ;AACAC,EAAAA,KAAK,EAAE;AANK,CAAd;eASeL,K","sourcesContent":["const COLOR = {  \r\n  YELLOW: '#f1d600',\r\n  GREEN: '#80c040',\r\n  SIREN: '#a487d4',\r\n  TITLE: '#1b2836',\r\n  //BLANK: 'transparent',\r\n  BLANK: 'rgba(0, 0, 0, 0)'\r\n};\r\n\r\nexport default COLOR\r\n"],"file":"Color.js"}

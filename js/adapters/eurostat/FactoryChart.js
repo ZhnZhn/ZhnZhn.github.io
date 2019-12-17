@@ -1,18 +1,14 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var DF_COLOR = '#7cb5ec';
 var _assign = Object.assign;
-
 var BAR_CHART = {
   type: 'bar',
   marginTop: 75,
@@ -37,7 +33,7 @@ var SCATTER_CHART = {
 
 var _crColumnConfig = function _crColumnConfig(_ref) {
   var _ref$seriaColor = _ref.seriaColor,
-      seriaColor = _ref$seriaColor === undefined ? DF_COLOR : _ref$seriaColor;
+      seriaColor = _ref$seriaColor === void 0 ? DF_COLOR : _ref$seriaColor;
   return {
     chart: {
       type: 'column',
@@ -100,21 +96,29 @@ var _crColumnConfig = function _crColumnConfig(_ref) {
         shadow: false
       }
     },
-    series: [{ name: 'Column' }]
+    series: [{
+      name: 'Column'
+    }]
   };
 };
+
 var _crBarConfig = function _crBarConfig(option) {
   var config = _crColumnConfig(option);
+
   _assign(config.chart, BAR_CHART);
+
   if (option.seriaType === 'BAR_WITH_LABELS') {
-    config.plotOptions.bar.dataLabels = (0, _extends3.default)({}, DATA_LABELS);
+    config.plotOptions.bar.dataLabels = (0, _extends2["default"])({}, DATA_LABELS);
   }
+
   return config;
 };
+
 var _crDotConfig = function _crDotConfig(option) {
   var seriaColor = option.seriaColor;
 
   var config = _crColumnConfig(option);
+
   _assign(config.chart, SCATTER_CHART);
   /*
   _assign(config.xAxis, {
@@ -122,6 +126,8 @@ var _crDotConfig = function _crDotConfig(option) {
     gridLineWidth: 1
   })
   */
+
+
   _assign(config.series[0], {
     //color: hexToRgba(seriaColor),
     color: seriaColor,
@@ -130,6 +136,7 @@ var _crDotConfig = function _crDotConfig(option) {
       radius: 5
     }
   });
+
   return config;
 };
 
@@ -139,15 +146,16 @@ var _r = {
   BAR_WITH_LABELS: _crBarConfig,
   DOT_SET: _crDotConfig
 };
-
 var FactoryChart = {
-  createConfig: function createConfig() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  createConfig: function createConfig(option) {
+    if (option === void 0) {
+      option = {};
+    }
 
     var _crConfig = _r[option.seriaType];
     return _crConfig ? _crConfig(option) : {};
   }
 };
-
-exports.default = FactoryChart;
+var _default = FactoryChart;
+exports["default"] = _default;
 //# sourceMappingURL=FactoryChart.js.map

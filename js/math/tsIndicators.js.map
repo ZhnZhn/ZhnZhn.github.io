@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../src/math/tsIndicators.js"
- ],
- "file": "../../src/math/tsIndicators.js",
- "names": [
-  "tsIndicators",
-  "sma",
-  "mfi",
-  "momAth"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,eAAe;AACnBC,oBADmB,EACdC,kBADc,EACTC;AADS,CAArB;;kBAIeH,Y"
-}
+{"version":3,"sources":["../../src/math/tsIndicators.js"],"names":["tsIndicators","sma","mfi","momAth"],"mappings":";;;;;;;AACA;;AACA;;AACA;;AAEA,IAAMA,YAAY,GAAG;AACnBC,EAAAA,GAAG,EAAHA,eADmB;AACdC,EAAAA,GAAG,EAAHA,eADc;AACTC,EAAAA,MAAM,EAANA;AADS,CAArB;eAIeH,Y","sourcesContent":["\r\nimport sma from './sma'\r\nimport mfi from './mfi'\r\nimport momAth from './momAth'\r\n\r\nconst tsIndicators = {\r\n  sma, mfi, momAth\r\n};\r\n\r\nexport default tsIndicators\r\n"],"file":"tsIndicators.js"}

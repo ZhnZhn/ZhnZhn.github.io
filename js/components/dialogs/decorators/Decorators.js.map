@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/dialogs/decorators/Decorators.js"
- ],
- "file": "../../../../src/components/dialogs/decorators/Decorators.js",
- "names": [
-  "Decorators",
-  "dialog",
-  "target",
-  "withLoadOptions",
-  "withToolbar",
-  "withValidationLoad",
-  "withLoad",
-  "withInitialState"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,UAAQ,gBAACC,MAAD,EAAY;AAClB,+BAAYA,MAAZ;AACA,sCAAmBA,MAAnB;AACA,4BAASA,MAAT;AACA,oCAAiBA,MAAjB;AACD,GANgB;AAOjBC,4CAPiB;AAQjBC,oCARiB;AASjBC,kDATiB;AAUjBC,8BAViB;AAWjBC;AAXiB,CAAnB;;kBAceP,U"
-}
+{"version":3,"sources":["../../../../src/components/dialogs/decorators/Decorators.js"],"names":["Decorators","dialog","target","withLoadOptions","withToolbar","withValidationLoad","withLoad","withInitialState"],"mappings":";;;;;;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,UAAU,GAAG;AACjBC,EAAAA,MAAM,EAAE,gBAACC,MAAD,EAAY;AAClB,iCAAYA,MAAZ;AACA,wCAAmBA,MAAnB;AACA,8BAASA,MAAT;AACA,sCAAiBA,MAAjB;AACD,GANgB;AAOjBC,EAAAA,eAAe,EAAfA,2BAPiB;AAQjBC,EAAAA,WAAW,EAAXA,uBARiB;AASjBC,EAAAA,kBAAkB,EAAlBA,8BATiB;AAUjBC,EAAAA,QAAQ,EAARA,oBAViB;AAWjBC,EAAAA,gBAAgB,EAAhBA;AAXiB,CAAnB;eAceP,U","sourcesContent":["\r\nimport withLoadOptions from './withLoadOptions'\r\nimport withToolbar from './withToolbar'\r\nimport withValidationLoad from './withValidationLoad'\r\nimport withLoad from './withLoad'\r\nimport withInitialState from './withInitialState'\r\n\r\nconst Decorators = {\r\n  dialog: (target) => {\r\n    withToolbar(target)\r\n    withValidationLoad(target)\r\n    withLoad(target)\r\n    withInitialState(target)\r\n  },\r\n  withLoadOptions,\r\n  withToolbar,\r\n  withValidationLoad,\r\n  withLoad,\r\n  withInitialState\r\n};\r\n\r\nexport default Decorators\r\n"],"file":"Decorators.js"}

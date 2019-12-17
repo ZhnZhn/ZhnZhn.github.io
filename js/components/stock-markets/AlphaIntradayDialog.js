@@ -1,48 +1,27 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _dec, _dec2, _dec3, _class, _class2, _temp, _initialiseProps;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _Decorators = require('../dialogs/decorators/Decorators');
-
-var _Decorators2 = _interopRequireDefault(_Decorators);
-
-var _MenuMore = require('../dialogs/MenuMore');
-
-var _MenuMore2 = _interopRequireDefault(_MenuMore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _dec, _dec2, _dec3, _class, _temp;
 
 var DAILY = 'DAILY';
 var D_ADJ = 'DAILY_ADJUSTED';
@@ -50,6 +29,7 @@ var D_ADJ = 'DAILY_ADJUSTED';
 var _isDaily = function _isDaily(dfT) {
   return dfT.indexOf(DAILY) !== -1;
 };
+
 var _isDailyAdj = function _isDailyAdj(dfT) {
   return dfT === D_ADJ;
 };
@@ -63,10 +43,29 @@ var _testTicket = function _testTicket(value) {
   return Boolean(('' + value).trim());
 };
 
-var _intervalOptions = [{ caption: '1 min', value: '1min' }, { caption: '5 min', value: '5min' }, { caption: '15 min', value: '15min' }, { caption: '30 min', value: '30min' }, { caption: '60 min', value: '60min' }];
-
-var _periodOptions = [{ caption: 'Compact (100 days)', value: 'compact' }, { caption: 'Full (of 20+ years, about 1MB)', value: 'full' }];
-
+var _intervalOptions = [{
+  caption: '1 min',
+  value: '1min'
+}, {
+  caption: '5 min',
+  value: '5min'
+}, {
+  caption: '15 min',
+  value: '15min'
+}, {
+  caption: '30 min',
+  value: '30min'
+}, {
+  caption: '60 min',
+  value: '60min'
+}];
+var _periodOptions = [{
+  caption: 'Compact (100 days)',
+  value: 'compact'
+}, {
+  caption: 'Full (of 20+ years, about 1MB)',
+  value: 'full'
+}];
 var _r = {
   INTRADAY: {
     caption: "Interval",
@@ -79,7 +78,6 @@ var _r = {
     options: _periodOptions
   }
 };
-
 var _rDaily = {
   DAILY: {
     indicator: 'TIME_SERIES_DAILY',
@@ -87,8 +85,8 @@ var _rDaily = {
   },
   DAILY_ADJUSTED: {
     indicator: 'TIME_SERIES_DAILY_ADJUSTED',
-    interval: 'Daily'
-    //interval: 'Daily Adjusted'
+    interval: 'Daily' //interval: 'Daily Adjusted'
+
   }
 };
 
@@ -99,6 +97,7 @@ var _getConf = function _getConf(key) {
 var _getInterval = function _getInterval(input, df) {
   return input ? input.value : df;
 };
+
 var _crLoadOptions = function _crLoadOptions(key, input) {
   if (key === 'INTRADAY') {
     return {
@@ -107,160 +106,149 @@ var _crLoadOptions = function _crLoadOptions(key, input) {
       dfT: key
     };
   }
+
   var _conf = _rDaily[key] || _rDaily.DAILY;
-  return (0, _extends3.default)({}, _conf, {
+
+  return (0, _extends2["default"])({}, _conf, {
     outputsize: _getInterval(input, DF.PERIOD),
     dfT: key
   });
 };
 
-var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withLoad, _dec3 = _Decorators2.default.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = _class2 = function (_Component) {
-  (0, _inherits3.default)(AlphaIntradayDialog, _Component);
+var AlphaIntradayDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(AlphaIntradayDialog, _Component);
 
   function AlphaIntradayDialog(props) {
-    (0, _classCallCheck3.default)(this, AlphaIntradayDialog);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AlphaIntradayDialog.__proto__ || Object.getPrototypeOf(AlphaIntradayDialog)).call(this, props));
+    _this = _Component.call(this, props) || this;
 
-    _initialiseProps.call(_this);
+    _this._handleSelectInterval = function (item) {
+      _this.interval = item;
+    };
 
-    var dfT = props.dfT;
+    _this._handleLoad = function () {
+      var _this$props = _this.props,
+          dfT = _this$props.dfT,
+          dataSource = _this$props.dataSource,
+          loadId = _this$props.loadId,
+          _ticket = _this.ticketComp.isValid() ? _this.ticketComp.getValue() : undefined,
+          _options = _crLoadOptions(dfT, _this.interval),
+          _value = (_ticket || '') + " (" + _options.interval + ")";
 
-    _this._isDaily = _isDaily(dfT);
-    _this._isDailyAdj = _isDailyAdj(dfT);
+      _this.props.onLoad((0, _extends2["default"])({
+        loadId: loadId
+      }, _options, {
+        ticket: _ticket,
+        value: _value,
+        //for label
+        hasDividend: _this._hasDividend,
+        hasFilterZero: _this._hasFilterZero,
+        dataSource: dataSource
+      }));
+    };
+
+    _this._toggleDividend = function () {
+      _this._hasDividend = !_this._hasDividend;
+    };
+
+    _this._toggleFilterZero = function () {
+      _this._hasFilterZero = !_this._hasFilterZero;
+    };
+
+    _this._handleClose = function () {
+      _this.props.onClose();
+    };
+
+    _this._refTicket = function (comp) {
+      _this.ticketComp = comp;
+    };
+
+    var _dfT = props.dfT;
+    _this._isDaily = _isDaily(_dfT);
+    _this._isDailyAdj = _isDailyAdj(_dfT);
     _this._hasDividend = false;
     _this._hasFilterZero = false;
-
-    _this._menuMore = (0, _MenuMore2.default)(_this, {
+    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
-
-    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true, isToggleOptions: _this._isDaily });
-    _this._commandButtons = _this._crCommandsWithLoad(_this);
-
-    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
+    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+      noDate: true,
+      isToggleOptions: _this._isDaily
+    });
+    _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
+    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isToggleOptions: false
     });
     return _this;
   }
 
-  (0, _createClass3.default)(AlphaIntradayDialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.props !== nextProps) {
-        if (this.props.isShow === nextProps.isShow) {
-          return false;
-        }
+  var _proto = AlphaIntradayDialog.prototype;
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps) {
+      if (this.props.isShow === nextProps.isShow) {
+        return false;
       }
-      return true;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          isShow = _props.isShow,
-          caption = _props.caption,
-          onShow = _props.onShow,
-          onFront = _props.onFront,
-          dfT = _props.dfT,
-          _state = this.state,
-          isToolbar = _state.isToolbar,
-          isShowLabels = _state.isShowLabels,
-          isToggleOptions = _state.isToggleOptions;
 
+    return true;
+  };
 
-      return _react2.default.createElement(
-        _DialogCell2.default.DraggableDialog,
-        {
-          isShow: isShow,
-          caption: caption,
-          menuModel: this._menuMore,
-          commandButtons: this._commandButtons,
-          onShowChart: onShow,
-          onFront: onFront,
-          onClose: this._handleClose
-        },
-        _react2.default.createElement(_DialogCell2.default.Toolbar, {
-          isShow: isToolbar,
-          buttons: this.toolbarButtons
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowPattern, {
-          ref: this._refTicket,
-          isShowLabels: isShowLabels,
-          caption: 'Ticket',
-          placeholder: 'Nyse or Nasdaq Ticket',
-          onTest: _testTicket,
-          errorMsg: 'Not Empty'
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, (0, _extends3.default)({
-          isShowLabels: isShowLabels
-        }, _getConf(dfT), {
-          //caption="Interval"
-          //placeholder="Default: 15min"
-          //options={_intervalOptions}
-          onSelect: this._handleSelectInterval
-        })),
-        this._isDaily && _react2.default.createElement(
-          _DialogCell2.default.ShowHide,
-          { isShow: isToggleOptions },
-          this._isDailyAdj && _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-            initValue: false,
-            caption: "With Dividend History",
-            onToggle: this._toggleDividend
-          }),
-          _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
-            initValue: false,
-            caption: "Filter Zero Values",
-            onToggle: this._toggleFilterZero
-          })
-        )
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        caption = _this$props2.caption,
+        onShow = _this$props2.onShow,
+        onFront = _this$props2.onFront,
+        dfT = _this$props2.dfT,
+        _this$state = this.state,
+        isToolbar = _this$state.isToolbar,
+        isShowLabels = _this$state.isShowLabels,
+        isToggleOptions = _this$state.isToggleOptions;
+    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+      isShow: isShow,
+      caption: caption,
+      menuModel: this._menuMore,
+      commandButtons: this._commandButtons,
+      onShowChart: onShow,
+      onFront: onFront,
+      onClose: this._handleClose
+    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+      isShow: isToolbar,
+      buttons: this.toolbarButtons
+    }), _react["default"].createElement(_DialogCell["default"].RowPattern, {
+      ref: this._refTicket,
+      isShowLabels: isShowLabels,
+      caption: "Ticket",
+      placeholder: "Nyse or Nasdaq Ticket",
+      onTest: _testTicket,
+      errorMsg: "Not Empty"
+    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, (0, _extends2["default"])({
+      isShowLabels: isShowLabels
+    }, _getConf(dfT), {
+      //caption="Interval"
+      //placeholder="Default: 15min"
+      //options={_intervalOptions}
+      onSelect: this._handleSelectInterval
+    })), this._isDaily && _react["default"].createElement(_DialogCell["default"].ShowHide, {
+      isShow: isToggleOptions
+    }, this._isDailyAdj && _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      initValue: false,
+      caption: "With Dividend History",
+      onToggle: this._toggleDividend
+    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      initValue: false,
+      caption: "Filter Zero Values",
+      onToggle: this._toggleFilterZero
+    })));
+  };
+
   return AlphaIntradayDialog;
-}(_react.Component), _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
-
-  this._handleSelectInterval = function (item) {
-    _this2.interval = item;
-  };
-
-  this._handleLoad = function () {
-    var _props2 = _this2.props,
-        dfT = _props2.dfT,
-        dataSource = _props2.dataSource,
-        loadId = _props2.loadId,
-        _ticket = _this2.ticketComp.isValid() ? _this2.ticketComp.getValue() : undefined,
-        _options = _crLoadOptions(dfT, _this2.interval),
-        _value = (_ticket || '') + ' (' + _options.interval + ')';
-
-    _this2.props.onLoad((0, _extends3.default)({
-      loadId: loadId
-    }, _options, {
-      ticket: _ticket,
-      value: _value, //for label
-      hasDividend: _this2._hasDividend,
-      hasFilterZero: _this2._hasFilterZero,
-      dataSource: dataSource
-    }));
-  };
-
-  this._toggleDividend = function () {
-    _this2._hasDividend = !_this2._hasDividend;
-  };
-
-  this._toggleFilterZero = function () {
-    _this2._hasFilterZero = !_this2._hasFilterZero;
-  };
-
-  this._handleClose = function () {
-    _this2.props.onClose();
-  };
-
-  this._refTicket = function (comp) {
-    _this2.ticketComp = comp;
-  };
-}, _temp)) || _class) || _class) || _class);
-exports.default = AlphaIntradayDialog;
+}(_react.Component), _temp)) || _class) || _class) || _class);
+var _default = AlphaIntradayDialog;
+exports["default"] = _default;
 //# sourceMappingURL=AlphaIntradayDialog.js.map

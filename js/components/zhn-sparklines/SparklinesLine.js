@@ -1,63 +1,59 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = _interopRequireDefault(require("react"));
 
 //import PropTypes from 'prop-types';
-
 var SparklinesLine = function SparklinesLine(props) {
-    var _props$points = props.points,
-        points = _props$points === undefined ? [] : _props$points,
-        height = props.height,
-        margin = props.margin,
-        color = props.color,
-        style = props.style,
-        linePoints = points.map(function (p) {
-        return [p.x, p.y];
-    }).reduce(function (a, b) {
-        return a.concat(b);
-    }),
-        closePolyPoints = [points[points.length - 1].x, height - margin, margin, height - margin, margin, points[0].y],
-        fillPoints = linePoints.concat(closePolyPoints),
-        lineStyle = {
-        stroke: color || style.stroke || 'slategray',
-        strokeWidth: style.strokeWidth || '1',
-        strokeLinejoin: style.strokeLinejoin || 'round',
-        strokeLinecap: style.strokeLinecap || 'round',
-        fill: 'none'
-    },
-        fillStyle = {
-        stroke: style.stroke || 'none',
-        strokeWidth: '0',
-        fillOpacity: style.fillOpacity || '.1',
-        fill: style.fill || color || 'slategray'
-    };
-
-
-    return _react2.default.createElement(
-        'g',
-        null,
-        _react2.default.createElement('polyline', { points: fillPoints.join(' '), style: fillStyle }),
-        _react2.default.createElement('polyline', { points: linePoints.join(' '), style: lineStyle })
-    );
+  var _props$points = props.points,
+      points = _props$points === void 0 ? [] : _props$points,
+      height = props.height,
+      margin = props.margin,
+      color = props.color,
+      style = props.style,
+      linePoints = points.map(function (p) {
+    return [p.x, p.y];
+  }).reduce(function (a, b) {
+    return a.concat(b);
+  }),
+      closePolyPoints = [points[points.length - 1].x, height - margin, margin, height - margin, margin, points[0].y],
+      fillPoints = linePoints.concat(closePolyPoints),
+      lineStyle = {
+    stroke: color || style.stroke || 'slategray',
+    strokeWidth: style.strokeWidth || '1',
+    strokeLinejoin: style.strokeLinejoin || 'round',
+    strokeLinecap: style.strokeLinecap || 'round',
+    fill: 'none'
+  },
+      fillStyle = {
+    stroke: style.stroke || 'none',
+    strokeWidth: '0',
+    fillOpacity: style.fillOpacity || '.1',
+    fill: style.fill || color || 'slategray'
+  };
+  return _react["default"].createElement("g", null, _react["default"].createElement("polyline", {
+    points: fillPoints.join(' '),
+    style: fillStyle
+  }), _react["default"].createElement("polyline", {
+    points: linePoints.join(' '),
+    style: lineStyle
+  }));
 };
-
 /*
 SparklinesLine.propTypes = {
     color: PropTypes.string,
     style: PropTypes.object
 };
 */
-SparklinesLine.defaultProps = {
-    style: {}
-};
 
-exports.default = SparklinesLine;
+
+SparklinesLine.defaultProps = {
+  style: {}
+};
+var _default = SparklinesLine;
+exports["default"] = _default;
 //# sourceMappingURL=SparklinesLine.js.map

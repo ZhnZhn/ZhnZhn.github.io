@@ -1,35 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fCreateTreeMapConfig = undefined;
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _big = require('big.js');
+exports.__esModule = true;
+exports.fCreateTreeMapConfig = void 0;
 
-var _big2 = _interopRequireDefault(_big);
+var _big = _interopRequireDefault(require("big.js"));
 
-var _AdapterFn = require('../AdapterFn');
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _Type = require("../../constants/Type");
 
-var _Type = require('../../constants/Type');
+var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
-var _Chart = require('../../charts/Chart');
+var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _Chart2 = _interopRequireDefault(_Chart);
+var _StackedFn = require("./StackedFn");
 
-var _ChartConfig = require('../../charts/ChartConfig');
-
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
-
-var _StackedFn = require('./StackedFn');
-
-var _QuandlFn = require('./QuandlFn2');
-
-var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _QuandlFn = _interopRequireDefault(require("./QuandlFn2"));
 
 var _fnCreateYearTotals = function _fnCreateYearTotals(jsonData, items) {
   return jsonData.map(function (year) {
@@ -37,16 +25,24 @@ var _fnCreateYearTotals = function _fnCreateYearTotals(jsonData, items) {
   });
 };
 
-var _fnCreateDataAndTotal = function _fnCreateDataAndTotal() {
-  var jsonData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var items = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  var bYearTotals = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+var _fnCreateDataAndTotal = function _fnCreateDataAndTotal(jsonData, items, bYearTotals) {
+  if (jsonData === void 0) {
+    jsonData = [];
+  }
+
+  if (items === void 0) {
+    items = [];
+  }
+
+  if (bYearTotals === void 0) {
+    bYearTotals = [];
+  }
 
   var yearData = jsonData[0],
       _year = yearData[0] ? yearData[0].split('-')[0] : '',
-      bTotal = bYearTotals[0] ? bYearTotals[0] : (0, _big2.default)('0.0');
-  var data = [];
+      bTotal = bYearTotals[0] ? bYearTotals[0] : (0, _big["default"])('0.0');
 
+  var data = [];
   items.forEach(function (item, itemIndex) {
     var value = item.value,
         caption = item.caption,
@@ -67,28 +63,31 @@ var _fnCreateDataAndTotal = function _fnCreateDataAndTotal() {
       });
     }
   });
-
-  data.sort(_AdapterFn2.default.compareByValue).reverse();
-
-  return { data: data, bTotal: bTotal };
+  data.sort(_AdapterFn["default"].compareByValue).reverse();
+  return {
+    data: data,
+    bTotal: bTotal
+  };
 };
 
 var _fnCalcLevelAndSetPercent = function _fnCalcLevelAndSetPercent(data, bTotal) {
-  var _bLevel = (0, _big2.default)('0.0'),
+  var _bLevel = (0, _big["default"])('0.0'),
       level60 = 0,
       level90 = 0;
 
   data.forEach(function (point, pointIndex) {
     var value = point.value,
         name = point.name,
-        percent = _QuandlFn2.default.createPercent({
-      bValue: (0, _big2.default)(value), bTotal: bTotal
+        percent = _QuandlFn["default"].createPercent({
+      bValue: (0, _big["default"])(value),
+      bTotal: bTotal
     }).toString();
 
     point.total = bTotal.toString();
     point.percent = percent;
+
     if (!_bLevel.gte('60.0')) {
-      point.name = percent + ' ' + name;
+      point.name = percent + " " + name;
       point.dataLabels = {
         style: {
           fontSize: '16px'
@@ -96,43 +95,45 @@ var _fnCalcLevelAndSetPercent = function _fnCalcLevelAndSetPercent(data, bTotal)
       };
       level60 += 1;
     } else if (!_bLevel.gte('90.0')) {
-      point.name = percent + ' ' + name.split(';')[0].substring(0, 9);
+      point.name = percent + " " + name.split(';')[0].substring(0, 9);
       level90 += 1;
     } else {
       point.name = percent;
     }
+
     _bLevel = _bLevel.plus(percent);
   });
-
-  return { level60: level60, level90: level90 };
+  return {
+    level60: level60,
+    level90: level90
+  };
 };
 
 var _fnSetColorToPoint = function _fnSetColorToPoint(data, level60, level90) {
-  var period = _Chart2.default.COLOR_PERIOD,
-      base1 = _Chart2.default.COLOR_BASE1,
-      base2 = _Chart2.default.COLOR_BASE2;
-
-  var deltaColor = void 0;
+  var period = _Chart["default"].COLOR_PERIOD,
+      base1 = _Chart["default"].COLOR_BASE1,
+      base2 = _Chart["default"].COLOR_BASE2;
+  var deltaColor;
   data.forEach(function (point, pointIndex) {
     if (pointIndex < level60) {
       deltaColor = pointIndex * (period / level60);
-      point.color = _Chart2.default.fCreateMonoColor(base1, deltaColor);
+      point.color = _Chart["default"].fCreateMonoColor(base1, deltaColor);
     } else if (pointIndex < level60 + level90) {
       deltaColor = (pointIndex - level60) * (period / level90);
-      point.color = _Chart2.default.fCreateMonoColor(base2, deltaColor);
+      point.color = _Chart["default"].fCreateMonoColor(base2, deltaColor);
     } else {
-      point.color = _Chart2.default.fnGetMonoColor(pointIndex - level60 - level90);
+      point.color = _Chart["default"].fnGetMonoColor(pointIndex - level60 - level90);
     }
   });
 };
 
-var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMapConfig(json, option) {
-  var config = _ChartConfig2.default.fBaseTreeMapConfig(),
+var fCreateTreeMapConfig = function fCreateTreeMapConfig(json, option) {
+  var config = _ChartConfig["default"].fBaseTreeMapConfig(),
       _option$sliceItems = option.sliceItems,
-      items100 = _option$sliceItems === undefined ? [] : _option$sliceItems,
+      items100 = _option$sliceItems === void 0 ? [] : _option$sliceItems,
       _option$value = option.value,
-      value = _option$value === undefined ? '' : _option$value,
-      zhSeriaId = value + '_' + _Type.ChartType.TREE_MAP,
+      value = _option$value === void 0 ? '' : _option$value,
+      zhSeriaId = value + "_" + _Type.ChartType.TREE_MAP,
       jsonData = json.dataset && json.dataset.data ? json.dataset.data : [],
       bYearTotals = _fnCreateYearTotals(jsonData, items100),
       _fnCreateDataAndTotal2 = _fnCreateDataAndTotal(jsonData, items100, bYearTotals),
@@ -144,22 +145,24 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
       bPrevTotal = (0, _StackedFn.fnCalcTotal)(jsonData[1], items100),
       dateTo = jsonData[1][0] ? jsonData[1][0] : '';
 
-
   _fnSetColorToPoint(data, level60, level90);
 
-  config.chart.height = _Chart2.default.STACKED_HEIGHT;
-
+  config.chart.height = _Chart["default"].STACKED_HEIGHT;
   var yearTitle = jsonData[0] && jsonData[0][0] ? jsonData[0][0].split('-')[0] : '';
-  option.title = yearTitle + ':' + option.title;
-  _QuandlFn2.default.setTitleToConfig(config, option);
+  option.title = yearTitle + ":" + option.title;
+
+  _QuandlFn["default"].setTitleToConfig(config, option);
 
   Object.assign(config, {
-    series: [_ChartConfig2.default.fCreateTreeMapSeria(zhSeriaId, data)],
+    series: [_ChartConfig["default"].fCreateTreeMapSeria(zhSeriaId, data)],
     valueMoving: (0, _StackedFn.crValueMoving)(bTotal, yearTitle, bPrevTotal, dateTo),
     zhConfig: (0, _StackedFn.crZhConfig)(option, zhSeriaId),
-    info: _QuandlFn2.default.createDatasetInfo(json)
+    info: _QuandlFn["default"].createDatasetInfo(json)
   });
-
-  return { config: config };
+  return {
+    config: config
+  };
 };
+
+exports.fCreateTreeMapConfig = fCreateTreeMapConfig;
 //# sourceMappingURL=QuandlToTreeMap.js.map

@@ -1,56 +1,34 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ChartFn = require('./ChartFn');
+var _ChartFn = _interopRequireDefault(require("./ChartFn"));
 
-var _ChartFn2 = _interopRequireDefault(_ChartFn);
+var _tpSpline = _interopRequireDefault(require("./tp/tpSpline"));
 
-var _tpSpline = require('./tp/tpSpline');
+var _tpCategory = _interopRequireDefault(require("./tp/tpCategory"));
 
-var _tpSpline2 = _interopRequireDefault(_tpSpline);
+var _tpScatter = _interopRequireDefault(require("./tp/tpScatter"));
 
-var _tpCategory = require('./tp/tpCategory');
+var _tpStock = _interopRequireDefault(require("./tp/tpStock"));
 
-var _tpCategory2 = _interopRequireDefault(_tpCategory);
+var _tpSpark = _interopRequireDefault(require("./tp/tpSpark"));
 
-var _tpScatter = require('./tp/tpScatter');
+var _tpTreeMap = _interopRequireDefault(require("./tp/tpTreeMap"));
 
-var _tpScatter2 = _interopRequireDefault(_tpScatter);
+var _tpDonut = _interopRequireDefault(require("./tp/tpDonut"));
 
-var _tpStock = require('./tp/tpStock');
+var _tpFn = _interopRequireDefault(require("./tp/tpFn"));
 
-var _tpStock2 = _interopRequireDefault(_tpStock);
-
-var _tpSpark = require('./tp/tpSpark');
-
-var _tpSpark2 = _interopRequireDefault(_tpSpark);
-
-var _tpTreeMap = require('./tp/tpTreeMap');
-
-var _tpTreeMap2 = _interopRequireDefault(_tpTreeMap);
-
-var _tpDonut = require('./tp/tpDonut');
-
-var _tpDonut2 = _interopRequireDefault(_tpDonut);
-
-var _tpFn = require('./tp/tpFn');
-
-var _tpFn2 = _interopRequireDefault(_tpFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var crTpId = _ChartFn2.default.crTpId,
-    toNumberFormat = _ChartFn2.default.toNumberFormat,
-    toDateFormatDMY = _ChartFn2.default.toDateFormatDMY;
-var addHideHandler = _tpFn2.default.addHideHandler;
-
+var crTpId = _ChartFn["default"].crTpId,
+    toNumberFormat = _ChartFn["default"].toNumberFormat,
+    toDateFormatDMY = _ChartFn["default"].toDateFormatDMY;
+var addHideHandler = _tpFn["default"].addHideHandler;
 
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {
   setTimeout(function () {
@@ -62,9 +40,9 @@ var _fFormatter = function _fFormatter(option) {
   return function () {
     var fnTemplate = option.fnTemplate,
         _option$onAfterRender = option.onAfterRender,
-        onAfterRender = _option$onAfterRender === undefined ? _fnAddHandlerClose : _option$onAfterRender,
+        onAfterRender = _option$onAfterRender === void 0 ? _fnAddHandlerClose : _option$onAfterRender,
         _option$fnDateFormat = option.fnDateFormat,
-        fnDateFormat = _option$fnDateFormat === undefined ? toDateFormatDMY : _option$fnDateFormat,
+        fnDateFormat = _option$fnDateFormat === void 0 ? toDateFormatDMY : _option$fnDateFormat,
         isWithColor = option.isWithColor,
         isWithValueText = option.isWithValueText,
         isWithValue = option.isWithValue,
@@ -75,47 +53,42 @@ var _fFormatter = function _fFormatter(option) {
         _series$userOptions = series.userOptions,
         zhValueText = _series$userOptions.zhValueText,
         _series$userOptions$n = _series$userOptions.name,
-        name = _series$userOptions$n === undefined ? 'Value' : _series$userOptions$n,
+        name = _series$userOptions$n === void 0 ? 'Value' : _series$userOptions$n,
         _id = crTpId(),
         valueText = isWithValueText ? zhValueText || name : 'Value',
         value = isWithValue ? toNumberFormat(point.y) : null;
 
     onAfterRender(_id, point);
-
     return fnTemplate({
       id: _id,
-      date: date, color: color,
-      valueText: valueText, value: value,
+      date: date,
+      color: color,
+      valueText: valueText,
+      value: value,
       point: point
     });
   };
 };
 
 var Tooltip = {
-  fnBasePointFormatter: _fFormatter((0, _extends3.default)({}, _tpSpline2.default.value)),
-  fnBasePointFormatterT: _fFormatter((0, _extends3.default)({}, _tpSpline2.default.valueDmyt)),
-
-  categorySimple: _fFormatter((0, _extends3.default)({}, _tpCategory2.default.simple)),
-  category: _fFormatter((0, _extends3.default)({}, _tpCategory2.default.remove)),
-  categoryRHLY: _fFormatter((0, _extends3.default)({}, _tpCategory2.default.rhly)),
-
-  exDividend: _fFormatter((0, _extends3.default)({}, _tpScatter2.default.exDividend)),
-  splitRatio: _fFormatter((0, _extends3.default)({}, _tpScatter2.default.splitRatio)),
-  exValue: _fFormatter((0, _extends3.default)({}, _tpScatter2.default.exValue)),
-  eps: _fFormatter((0, _extends3.default)({}, _tpScatter2.default.eps)),
-
-  volume: _fFormatter((0, _extends3.default)({}, _tpStock2.default.volume)),
-  volumeDmyt: _fFormatter((0, _extends3.default)({}, _tpStock2.default.volumeDmyt)),
-  ath: _fFormatter((0, _extends3.default)({}, _tpStock2.default.ath)),
-  hl: _fFormatter((0, _extends3.default)({}, _tpStock2.default.hl)),
-
-  donut: _fFormatter((0, _extends3.default)({}, _tpDonut2.default.value)),
-
-  sparkStackedArea: _fFormatter((0, _extends3.default)({}, _tpSpark2.default.stackedArea)),
-  sparkTreeMap: _fFormatter((0, _extends3.default)({}, _tpSpark2.default.treeMap)),
-
-  treeMap: _fFormatter((0, _extends3.default)({}, _tpTreeMap2.default.value))
+  fnBasePointFormatter: _fFormatter((0, _extends2["default"])({}, _tpSpline["default"].value)),
+  fnBasePointFormatterT: _fFormatter((0, _extends2["default"])({}, _tpSpline["default"].valueDmyt)),
+  categorySimple: _fFormatter((0, _extends2["default"])({}, _tpCategory["default"].simple)),
+  category: _fFormatter((0, _extends2["default"])({}, _tpCategory["default"].remove)),
+  categoryRHLY: _fFormatter((0, _extends2["default"])({}, _tpCategory["default"].rhly)),
+  exDividend: _fFormatter((0, _extends2["default"])({}, _tpScatter["default"].exDividend)),
+  splitRatio: _fFormatter((0, _extends2["default"])({}, _tpScatter["default"].splitRatio)),
+  exValue: _fFormatter((0, _extends2["default"])({}, _tpScatter["default"].exValue)),
+  eps: _fFormatter((0, _extends2["default"])({}, _tpScatter["default"].eps)),
+  volume: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volume)),
+  volumeDmyt: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volumeDmyt)),
+  ath: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].ath)),
+  hl: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].hl)),
+  donut: _fFormatter((0, _extends2["default"])({}, _tpDonut["default"].value)),
+  sparkStackedArea: _fFormatter((0, _extends2["default"])({}, _tpSpark["default"].stackedArea)),
+  sparkTreeMap: _fFormatter((0, _extends2["default"])({}, _tpSpark["default"].treeMap)),
+  treeMap: _fFormatter((0, _extends2["default"])({}, _tpTreeMap["default"].value))
 };
-
-exports.default = Tooltip;
+var _default = Tooltip;
+exports["default"] = _default;
 //# sourceMappingURL=Tooltip.js.map

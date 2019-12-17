@@ -1,17 +1,13 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _conf = require('./conf');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _conf2 = _interopRequireDefault(_conf);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _conf = _interopRequireDefault(require("./conf"));
 
 var fnDescr = {
-
   toDescr: function toDescr(json) {
     var dataset = json.dataset,
         _firtsItem = dataset[0];
@@ -19,6 +15,7 @@ var fnDescr = {
     if (Array.isArray(dataset) && _firtsItem) {
       var i = 0,
           max = dataset.length;
+
       for (; i < max; i++) {
         var _dataset$i = dataset[i],
             cmdDescE = _dataset$i.cmdDescE,
@@ -29,13 +26,13 @@ var fnDescr = {
           return cmdDescE + ' ' + qtDesc + '.';
         }
       }
-      return _firtsItem.cmdDescE ? _firtsItem.cmdDescE + ' ' + _firtsItem.qtDesc + '.' : _conf2.default.DESCR_EMPTY;
+
+      return _firtsItem.cmdDescE ? _firtsItem.cmdDescE + ' ' + _firtsItem.qtDesc + '.' : _conf["default"].DESCR_EMPTY;
     } else {
-      return _conf2.default.DESCR_EMPTY;
+      return _conf["default"].DESCR_EMPTY;
     }
   }
-
 };
-
-exports.default = fnDescr;
+var _default = fnDescr;
+exports["default"] = _default;
 //# sourceMappingURL=fnDescr.js.map

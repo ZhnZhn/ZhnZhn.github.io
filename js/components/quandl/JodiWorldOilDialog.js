@@ -1,66 +1,64 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _extends3 = _interopRequireDefault(_extends2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _dec, _class, _temp;
 
-var _dec, _class;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _DialogCell = require('../dialogs/DialogCell');
-
-var _DialogCell2 = _interopRequireDefault(_DialogCell);
-
-var _MenuMore = require('../dialogs/MenuMore');
-
-var _MenuMore2 = _interopRequireDefault(_MenuMore);
-
-var _Decorators = require('../dialogs/decorators/Decorators');
-
-var _Decorators2 = _interopRequireDefault(_Decorators);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var unitOptions = [{ "caption": "Thousand Barrels per day (kb/d)", "value": "KD" }, { "caption": "Thousand Barrels (kbbl)", "value": "KB" }, { "caption": "Thousand Kilolitres (kl)", "value": "KL" }, { "caption": "Thousand Metric Tons (kmt)", "value": "KT" }, { "caption": "Conversion factor barrels/ktons", "value": "BK" }];
-
-var chartTypes = [{ caption: "AreaSpline", value: "AREA" }, { caption: "Yearly by Month", value: "YEARLY" }];
-
-var JodiWorldOilDialog = (_dec = _Decorators2.default.dialog, _dec(_class = function (_Component) {
-  (0, _inherits3.default)(JodiWorldOilDialog, _Component);
+var unitOptions = [{
+  "caption": "Thousand Barrels per day (kb/d)",
+  "value": "KD"
+}, {
+  "caption": "Thousand Barrels (kbbl)",
+  "value": "KB"
+}, {
+  "caption": "Thousand Kilolitres (kl)",
+  "value": "KL"
+}, {
+  "caption": "Thousand Metric Tons (kmt)",
+  "value": "KT"
+}, {
+  "caption": "Conversion factor barrels/ktons",
+  "value": "BK"
+}];
+var chartTypes = [{
+  caption: "AreaSpline",
+  value: "AREA"
+}, {
+  caption: "Yearly by Month",
+  value: "YEARLY"
+}];
+var JodiWorldOilDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(JodiWorldOilDialog, _Component);
 
   function JodiWorldOilDialog(props) {
-    (0, _classCallCheck3.default)(this, JodiWorldOilDialog);
+    var _this;
 
-    //this.country = null
+    _this = _Component.call(this, props) || this; //this.country = null
     //this.product = null
     //this.flow = null
     //this.units = null
     //this.chartType = undefined
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (JodiWorldOilDialog.__proto__ || Object.getPrototypeOf(JodiWorldOilDialog)).call(this, props));
 
     _this._hClickOptions = function () {
       _this.setState(function (prevState) {
@@ -88,7 +86,6 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.dialog, _dec(_class = func
 
     _this._createValidationMessages = function () {
       var msgOnNotSelected = _this.props.msgOnNotSelected;
-
       var msg = [];
 
       if (!_this.country) {
@@ -135,10 +132,13 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.dialog, _dec(_class = func
 
       return {
         value: fnValue(_this.country.value, product.value, flow.value, _this.units.value),
-        title: _this.country.caption + ': ' + product.caption,
-        subtitle: flow.caption + ': ' + _this.units.caption,
-        fromDate: fromDate, toDate: toDate,
-        dataColumn: dataColumn, seriaType: seriaType, loadId: loadId,
+        title: _this.country.caption + ": " + product.caption,
+        subtitle: flow.caption + ": " + _this.units.caption,
+        fromDate: fromDate,
+        toDate: toDate,
+        dataColumn: dataColumn,
+        seriaType: seriaType,
+        loadId: loadId,
         dataSource: dataSource
       };
     };
@@ -155,133 +155,119 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.dialog, _dec(_class = func
       return _this.datesFragment = c;
     };
 
-    _this._menuMore = (0, _MenuMore2.default)(_this, {
+    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
-
     _this.toolbarButtons = _this._createType2WithToolbar(props);
+
     _this.toolbarButtons.push({
-      caption: 'O', title: 'Toggle Options Input',
+      caption: 'O',
+      title: 'Toggle Options Input',
       onClick: _this._hClickOptions
     });
-    _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this.state = (0, _extends3.default)({}, _this._isWithInitialState(), {
+    _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
+    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isShowDate: false,
       isShowOptions: false
     });
     return _this;
   }
 
-  (0, _createClass3.default)(JodiWorldOilDialog, [{
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.props !== nextProps) {
-        if (this.props.isShow === nextProps.isShow) {
-          return false;
-        }
+  var _proto = JodiWorldOilDialog.prototype;
+
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps) {
+      if (this.props.isShow === nextProps.isShow) {
+        return false;
       }
-      return true;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          caption = _props.caption,
-          isShow = _props.isShow,
-          onShow = _props.onShow,
-          onFront = _props.onFront,
-          oneCaption = _props.oneCaption,
-          oneURI = _props.oneURI,
-          oneJsonProp = _props.oneJsonProp,
-          parentCaption = _props.parentCaption,
-          parentChildURI = _props.parentChildURI,
-          parentJsonProp = _props.parentJsonProp,
-          childCaption = _props.childCaption,
-          msgOnNotSelected = _props.msgOnNotSelected,
-          initFromDate = _props.initFromDate,
-          initToDate = _props.initToDate,
-          msgOnNotValidFormat = _props.msgOnNotValidFormat,
-          onTestDate = _props.onTestDate,
-          _state = this.state,
-          isToolbar = _state.isToolbar,
-          isShowLabels = _state.isShowLabels,
-          isShowDate = _state.isShowDate,
-          isShowOptions = _state.isShowOptions,
-          validationMessages = _state.validationMessages;
 
+    return true;
+  };
 
-      return _react2.default.createElement(
-        _DialogCell2.default.DraggableDialog,
-        {
-          isShow: isShow,
-          caption: caption,
-          menuModel: this._menuMore,
-          commandButtons: this._commandButtons,
-          onShowChart: onShow,
-          onFront: onFront,
-          onClose: this._handleClose
-        },
-        _react2.default.createElement(_DialogCell2.default.Toolbar, {
-          isShow: isToolbar,
-          buttons: this.toolbarButtons
-        }),
-        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
-          isShow: isShow,
-          isShowLabels: isShowLabels,
-          uri: oneURI,
-          jsonProp: oneJsonProp,
-          caption: oneCaption,
-          optionNames: 'Items',
-          onSelect: this._hSelectCountry
-        }),
-        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
-          ref: this._refProductFlow,
-          isShow: isShow,
-          isShowLabels: isShowLabels,
-          uri: parentChildURI,
-          oneCaption: parentCaption,
-          oneJsonProp: parentJsonProp,
-          twoCaption: childCaption,
-          msgOnNotSelected: msgOnNotSelected
-        }),
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-          isShowLabels: isShowLabels,
-          caption: 'Units',
-          options: unitOptions,
-          onSelect: this._hSelectUnits
-        }),
-        _react2.default.createElement(
-          _DialogCell2.default.ShowHide,
-          { isShow: isShowDate },
-          _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-            ref: this._refDates,
-            isShowLabels: isShowLabels,
-            initFromDate: initFromDate,
-            initToDate: initToDate,
-            msgOnNotValidFormat: msgOnNotValidFormat,
-            onTestDate: onTestDate
-          })
-        ),
-        _react2.default.createElement(
-          _DialogCell2.default.ShowHide,
-          { isShow: isShowOptions },
-          _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-            isShowLabels: isShowLabels,
-            caption: 'Chart Type',
-            placeholder: 'Default: AreaSpline',
-            options: chartTypes,
-            onSelect: this._hSelectChartType
-          })
-        ),
-        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
-          validationMessages: validationMessages
-        })
-      );
-    }
-  }]);
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        caption = _this$props2.caption,
+        isShow = _this$props2.isShow,
+        onShow = _this$props2.onShow,
+        onFront = _this$props2.onFront,
+        oneCaption = _this$props2.oneCaption,
+        oneURI = _this$props2.oneURI,
+        oneJsonProp = _this$props2.oneJsonProp,
+        parentCaption = _this$props2.parentCaption,
+        parentChildURI = _this$props2.parentChildURI,
+        parentJsonProp = _this$props2.parentJsonProp,
+        childCaption = _this$props2.childCaption,
+        msgOnNotSelected = _this$props2.msgOnNotSelected,
+        initFromDate = _this$props2.initFromDate,
+        initToDate = _this$props2.initToDate,
+        msgOnNotValidFormat = _this$props2.msgOnNotValidFormat,
+        onTestDate = _this$props2.onTestDate,
+        _this$state = this.state,
+        isToolbar = _this$state.isToolbar,
+        isShowLabels = _this$state.isShowLabels,
+        isShowDate = _this$state.isShowDate,
+        isShowOptions = _this$state.isShowOptions,
+        validationMessages = _this$state.validationMessages;
+    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+      isShow: isShow,
+      caption: caption,
+      menuModel: this._menuMore,
+      commandButtons: this._commandButtons,
+      onShowChart: onShow,
+      onFront: onFront,
+      onClose: this._handleClose
+    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+      isShow: isToolbar,
+      buttons: this.toolbarButtons
+    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+      isShow: isShow,
+      isShowLabels: isShowLabels,
+      uri: oneURI,
+      jsonProp: oneJsonProp,
+      caption: oneCaption,
+      optionNames: "Items",
+      onSelect: this._hSelectCountry
+    }), _react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
+      ref: this._refProductFlow,
+      isShow: isShow,
+      isShowLabels: isShowLabels,
+      uri: parentChildURI,
+      oneCaption: parentCaption,
+      oneJsonProp: parentJsonProp,
+      twoCaption: childCaption,
+      msgOnNotSelected: msgOnNotSelected
+    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+      isShowLabels: isShowLabels,
+      caption: "Units",
+      options: unitOptions,
+      onSelect: this._hSelectUnits
+    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+      isShow: isShowDate
+    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+      ref: this._refDates,
+      isShowLabels: isShowLabels,
+      initFromDate: initFromDate,
+      initToDate: initToDate,
+      msgOnNotValidFormat: msgOnNotValidFormat,
+      onTestDate: onTestDate
+    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+      isShow: isShowOptions
+    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+      isShowLabels: isShowLabels,
+      caption: "Chart Type",
+      placeholder: "Default: AreaSpline",
+      options: chartTypes,
+      onSelect: this._hSelectChartType
+    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+      validationMessages: validationMessages
+    }));
+  };
+
   return JodiWorldOilDialog;
-}(_react.Component)) || _class);
-exports.default = JodiWorldOilDialog;
+}(_react.Component), _temp)) || _class);
+var _default = JodiWorldOilDialog;
+exports["default"] = _default;
 //# sourceMappingURL=JodiWorldOilDialog.js.map

@@ -1,9 +1,8 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = safeFn;
+exports.__esModule = true;
+exports["default"] = safeFn;
+
 function safeFn(obj, propName, dfValue) {
   if (!obj) {
     return function () {

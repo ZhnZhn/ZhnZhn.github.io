@@ -1,14 +1,10 @@
-'use strict';
+"use strict";
 
-var _AdapterFn = require('../AdapterFn');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var toFloatOrNull = _AdapterFn2.default.toFloatOrNull;
-
-
+var toFloatOrNull = _AdapterFn["default"].toFloatOrNull;
 describe('toFloatOrNull', function () {
   var fn = toFloatOrNull;
   test('should return float from str', function () {
@@ -18,7 +14,6 @@ describe('toFloatOrNull', function () {
     expect(fn('0.22')).toBe(0.22);
     expect(fn('0.222')).toBe(0.222);
   });
-
   test('should return null for not float case (NaN)', function () {
     expect(fn()).toBe(null);
     expect(fn(null)).toBe(null);

@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/stat-finland/StatFinland.js"
- ],
- "file": "../../../src/adapters/stat-finland/StatFinland.js",
- "names": [
-  "StatFinland",
-  "Table",
-  "api",
-  "tableApi",
-  "optionFetch",
-  "crOptionFetch",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,cAAc;AAClBC,SAAO;AACLC,SAAKC,kBADA;AAELC,iBAAaD,mBAASE,aAFjB;AAGLC;AAHK;AADW,CAApB;;kBAQeN,W"
-}
+{"version":3,"sources":["../../../src/adapters/stat-finland/StatFinland.js"],"names":["StatFinland","Table","api","tableApi","optionFetch","crOptionFetch","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,KAAK,EAAE;AACLC,IAAAA,GAAG,EAAEC,oBADA;AAELC,IAAAA,WAAW,EAAED,qBAASE,aAFjB;AAGLC,IAAAA,OAAO,EAAPA;AAHK;AADW,CAApB;eAQeN,W","sourcesContent":["import tableApi from './ApiTable'\r\nimport adapter from '../stat-norway/StatNorwayAdapter'\r\n\r\nconst StatFinland = {\r\n  Table: {\r\n    api: tableApi,\r\n    optionFetch: tableApi.crOptionFetch,\r\n    adapter\r\n  }\r\n};\r\n\r\nexport default StatFinland\r\n"],"file":"StatFinland.js"}

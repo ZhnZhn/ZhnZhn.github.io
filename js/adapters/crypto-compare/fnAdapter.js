@@ -1,31 +1,28 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _AdapterFn = require('../AdapterFn');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var valueMoving = _AdapterFn2.default.valueMoving,
-    volumeColumnPoint = _AdapterFn2.default.volumeColumnPoint;
-
+var valueMoving = _AdapterFn["default"].valueMoving,
+    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint;
 
 var _crZhConfig = function _crZhConfig(option) {
   var title = option.title,
       dataSource = option.dataSource,
       value = option.value,
       linkFn = option.linkFn;
-
   return {
-    id: value, key: value,
+    id: value,
+    key: value,
     itemCaption: title,
     isWithoutAdd: true,
     isWithLegend: false,
-    linkFn: linkFn, item: value,
+    linkFn: linkFn,
+    item: value,
     dataSource: dataSource
   };
 };
@@ -47,9 +44,13 @@ var _isHLOC = function _isHLOC(p) {
 
 var _addPointTo = function _addPointTo(arr, d, value) {
   if (_isNumber(value)) {
-    arr.push({ x: d, y: value });
+    arr.push({
+      x: d,
+      y: value
+    });
   }
 };
+
 var _addColumnPointTo = function _addColumnPointTo(arr, d, p, volume) {
   if (_isNumber(volume)) {
     arr.push(volumeColumnPoint({
@@ -64,6 +65,7 @@ var _addColumnPointTo = function _addColumnPointTo(arr, d, p, volume) {
     }));
   }
 };
+
 var _addHLPointTo = function _addHLPointTo(arr, d, p) {
   arr.push({
     x: d,
@@ -86,24 +88,28 @@ var fnAdapter = {
     json.Data.forEach(function (p) {
       if (_isNumber(p.time)) {
         var _date = p.time * 1000;
+
         _addPointTo(data, _date, p.close);
+
         _addPointTo(dVolume, _date, p.volumefrom);
+
         _addPointTo(dToVolume, _date, p.volumeto);
 
         if (_isHLOC(p)) {
           _addColumnPointTo(dColumn, _date, p, p.volumefrom);
+
           _addHLPointTo(dHL, _date, p);
         }
       }
     });
     return {
       data: data,
-      dVolume: dVolume, dColumn: dColumn,
+      dVolume: dVolume,
+      dColumn: dColumn,
       dToVolume: dToVolume,
       dHL: dHL
     };
   },
-
   crConfigOption: function crConfigOption(_ref2) {
     var option = _ref2.option,
         data = _ref2.data;
@@ -114,6 +120,6 @@ var fnAdapter = {
     };
   }
 };
-
-exports.default = fnAdapter;
+var _default = fnAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=fnAdapter.js.map

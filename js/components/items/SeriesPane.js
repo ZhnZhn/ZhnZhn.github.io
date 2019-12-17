@@ -1,43 +1,23 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _ScrollPane = require('../zhn/ScrollPane');
-
-var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
-
-var _SeriaRow = require('./SeriaRow');
-
-var _SeriaRow2 = _interopRequireDefault(_SeriaRow);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _SeriaRow = _interopRequireDefault(require("./SeriaRow"));
 
 var CL = {
   ELL: 'ellipsis'
 };
-
 var S = {
   ROOT_DIV: {
     paddingTop: 8
@@ -55,7 +35,6 @@ var S = {
     color: 'rgb(164, 135, 212)'
   }
 };
-
 /*
 const DF_FROM_CHART = {
   userOptions: {
@@ -74,38 +53,43 @@ var _crYAxisOption = function _crYAxisOption(toChart) {
   }];
   toChart.yAxis.forEach(function (yAxis, index) {
     options.push({
-      caption: 'toYAxis' + (index + 1),
+      caption: "toYAxis" + (index + 1),
       value: index
     });
   });
   return options;
 };
 
-var SeriesPane = function (_Component) {
-  (0, _inherits3.default)(SeriesPane, _Component);
+var SeriesPane =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inheritsLoose2["default"])(SeriesPane, _Component);
 
   function SeriesPane() {
-    var _ref;
+    var _this;
 
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, SeriesPane);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = SeriesPane.__proto__ || Object.getPrototypeOf(SeriesPane)).call.apply(_ref, [this].concat(args))), _this), _this.compSeries = [], _this._regSeriaRow = function (comp) {
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.compSeries = [];
+
+    _this._regSeriaRow = function (comp) {
       var compIndex = comp.props.compIndex;
       _this.compSeries[compIndex] = comp;
-    }, _this._unregSeriaRow = function (comp) {
+    };
+
+    _this._unregSeriaRow = function (comp) {
       var compIndex = comp.props.compIndex;
       _this.compSeries[compIndex] = null;
-    }, _this._renderSeries = function (chartId, series, options) {
+    };
+
+    _this._renderSeries = function (chartId, series, options) {
       return series.filter(function (seria) {
         return seria.visible;
       }).map(function (seria, index) {
-        return _react2.default.createElement(_SeriaRow2.default, {
+        return _react["default"].createElement(_SeriaRow["default"], {
           key: chartId + index,
           seria: seria,
           compIndex: index,
@@ -114,84 +98,66 @@ var SeriesPane = function (_Component) {
           onUnReg: _this._unregSeriaRow
         });
       });
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    return _this;
   }
 
-  (0, _createClass3.default)(SeriesPane, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          rootStyle = _props.rootStyle,
-          toChart = _props.toChart,
-          _props$fromChart = _props.fromChart,
-          fromChart = _props$fromChart === undefined ? {} : _props$fromChart,
-          _yAxisOption = _crYAxisOption(toChart),
-          _fromChart$userOption = fromChart.userOptions,
-          userOptions = _fromChart$userOption === undefined ? {} : _fromChart$userOption,
-          _fromChart$series = fromChart.series,
-          series = _fromChart$series === undefined ? [] : _fromChart$series,
-          _userOptions$zhConfig = userOptions.zhConfig,
-          zhConfig = _userOptions$zhConfig === undefined ? {} : _userOptions$zhConfig,
-          _zhConfig$id = zhConfig.id,
-          chartId = _zhConfig$id === undefined ? 'id' : _zhConfig$id;
+  var _proto = SeriesPane.prototype;
 
-      return _react2.default.createElement(
-        _ScrollPane2.default,
-        { style: rootStyle },
-        _react2.default.createElement(
-          'div',
-          { style: S.ROOT_DIV },
-          _react2.default.createElement(
-            'div',
-            { style: S.TITLE },
-            _react2.default.createElement(
-              'span',
-              null,
-              'From Chart:\xA0'
-            ),
-            _react2.default.createElement(
-              'span',
-              {
-                className: CL.ELL,
-                style: S.CHART_ID
-              },
-              chartId
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            this._renderSeries(chartId, series, _yAxisOption)
-          )
-        )
-      );
-    }
-  }, {
-    key: 'getValues',
-    value: function getValues() {
-      var _props$fromChart2 = this.props.fromChart,
-          fromChart = _props$fromChart2 === undefined ? {} : _props$fromChart2,
-          _ref2 = fromChart.xAxis && fromChart.xAxis[0].getExtremes() || {},
-          dataMin = _ref2.dataMin,
-          dataMax = _ref2.dataMax,
-          userMin = _ref2.userMin,
-          userMax = _ref2.userMax;
+  _proto.render = function render() {
+    var _this$props = this.props,
+        rootStyle = _this$props.rootStyle,
+        toChart = _this$props.toChart,
+        _this$props$fromChart = _this$props.fromChart,
+        fromChart = _this$props$fromChart === void 0 ? {} : _this$props$fromChart,
+        _yAxisOption = _crYAxisOption(toChart),
+        _fromChart$userOption = fromChart.userOptions,
+        userOptions = _fromChart$userOption === void 0 ? {} : _fromChart$userOption,
+        _fromChart$series = fromChart.series,
+        series = _fromChart$series === void 0 ? [] : _fromChart$series,
+        _userOptions$zhConfig = userOptions.zhConfig,
+        zhConfig = _userOptions$zhConfig === void 0 ? {} : _userOptions$zhConfig,
+        _zhConfig$id = zhConfig.id,
+        chartId = _zhConfig$id === void 0 ? 'id' : _zhConfig$id;
 
-      return this.compSeries.filter(function (comp) {
-        return comp !== null;
-      }).map(function (comp) {
-        return comp.getValue();
-      }).filter(function (config) {
-        return config.isChecked;
-      }).map(function (config) {
-        config.userMin = userMin || dataMin;
-        config.userMax = userMax || dataMax;
-        return config;
-      });
-    }
-  }]);
+    return _react["default"].createElement(_ScrollPane["default"], {
+      style: rootStyle
+    }, _react["default"].createElement("div", {
+      style: S.ROOT_DIV
+    }, _react["default"].createElement("div", {
+      style: S.TITLE
+    }, _react["default"].createElement("span", null, "From Chart:\xA0"), _react["default"].createElement("span", {
+      className: CL.ELL,
+      style: S.CHART_ID
+    }, chartId)), _react["default"].createElement("div", null, this._renderSeries(chartId, series, _yAxisOption))));
+  };
+
+  _proto.getValues = function getValues() {
+    var _this$props$fromChart2 = this.props.fromChart,
+        fromChart = _this$props$fromChart2 === void 0 ? {} : _this$props$fromChart2,
+        _ref = fromChart.xAxis && fromChart.xAxis[0].getExtremes() || {},
+        dataMin = _ref.dataMin,
+        dataMax = _ref.dataMax,
+        userMin = _ref.userMin,
+        userMax = _ref.userMax;
+
+    return this.compSeries.filter(function (comp) {
+      return comp !== null;
+    }).map(function (comp) {
+      return comp.getValue();
+    }).filter(function (config) {
+      return config.isChecked;
+    }).map(function (config) {
+      config.userMin = userMin || dataMin;
+      config.userMax = userMax || dataMax;
+      return config;
+    });
+  };
+
   return SeriesPane;
 }(_react.Component);
 
-exports.default = SeriesPane;
+var _default = SeriesPane;
+exports["default"] = _default;
 //# sourceMappingURL=SeriesPane.js.map

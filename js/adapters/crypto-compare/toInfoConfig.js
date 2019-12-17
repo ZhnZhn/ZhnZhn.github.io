@@ -1,32 +1,32 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var toInfoConfig = {
   toConfig: function toConfig(json, option) {
     var value = option.value,
         _json$Data$General = json.Data.General,
-        General = _json$Data$General === undefined ? {} : _json$Data$General,
+        General = _json$Data$General === void 0 ? {} : _json$Data$General,
         _General$Symbol = General.Symbol,
-        id = _General$Symbol === undefined ? value : _General$Symbol,
+        id = _General$Symbol === void 0 ? value : _General$Symbol,
         config = {
-      id: id, General: General,
+      id: id,
+      General: General,
       zhCompType: 'COIN_INFO',
       zhConfig: {
         //id: value, key: value
-        id: id, key: id
+        id: id,
+        key: id
       }
     };
-
-    return { config: config };
+    return {
+      config: config
+    };
   },
-
   toSeries: function toSeries() {
     throw new Error('ZH_1000');
   }
 };
-
-exports.default = toInfoConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\crypto-compare\toInfoConfig.js.map
+var _default = toInfoConfig;
+exports["default"] = _default;
+//# sourceMappingURL=toInfoConfig.js.map

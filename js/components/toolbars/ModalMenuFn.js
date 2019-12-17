@@ -1,33 +1,21 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _react = require('react');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _DateUtils = require('../../utils/DateUtils');
+var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
+var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
-var _ModalPopup = require('../zhn-moleculs/ModalPopup');
+var _SubMenuItem = _interopRequireDefault(require("./SubMenuItem"));
 
-var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
+var _ModalMenu = _interopRequireDefault(require("./ModalMenu.Style"));
 
-var _SubMenuItem = require('./SubMenuItem');
-
-var _SubMenuItem2 = _interopRequireDefault(_SubMenuItem);
-
-var _ModalMenu = require('./ModalMenu.Style');
-
-var _ModalMenu2 = _interopRequireDefault(_ModalMenu);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mlsToDmy = _DateUtils2.default.mlsToDmy;
-
+var mlsToDmy = _DateUtils["default"].mlsToDmy;
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
@@ -38,11 +26,14 @@ var _isMinMax = function _isMinMax(config) {
 };
 
 var EPOCH_DMY = '01-01-1970';
+
 var _isZoom = function _isZoom(getChart) {
   if (!_isFn(getChart)) {
     return false;
   }
+
   var chart = getChart();
+
   if (!chart || !_isFn(chart.zhGetFromToDates)) {
     return false;
   }
@@ -66,46 +57,37 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
       onZoom = _ref.onZoom,
       onCopy = _ref.onCopy,
       onPasteTo = _ref.onPasteTo;
-  return _react2.default.createElement(
-    _ModalPopup2.default,
-    {
-      isShow: isShow,
-      style: _ModalMenu2.default.ROOT,
-      onClose: onClose
-    },
-    _react2.default.createElement(
-      'div',
-      { style: _ModalMenu2.default.PANE },
-      _react2.default.createElement(_SubMenuItem2.default, {
-        caption: 'x2H',
-        onClick: onX2H
-      }),
-      _isMinMax(config) && _react2.default.createElement(_SubMenuItem2.default, {
-        caption: 'MinMax',
-        initialIsActive: true,
-        onClick: onMinMax
-      }),
-      _isZoom(getChart) && _react2.default.createElement(_SubMenuItem2.default, {
-        caption: 'Zoom',
-        isNotActive: true,
-        onClick: onZoom,
-        onClose: onClose
-      }),
-      _react2.default.createElement(_SubMenuItem2.default, {
-        caption: 'Copy',
-        isNotActive: true,
-        onClick: onCopy,
-        onClose: onClose
-      }),
-      _react2.default.createElement(_SubMenuItem2.default, {
-        caption: 'PasteTo',
-        isNotActive: true,
-        onClick: onPasteTo,
-        onClose: onClose
-      })
-    )
-  );
+  return _react["default"].createElement(_ModalPopup["default"], {
+    isShow: isShow,
+    style: _ModalMenu["default"].ROOT,
+    onClose: onClose
+  }, _react["default"].createElement("div", {
+    style: _ModalMenu["default"].PANE
+  }, _react["default"].createElement(_SubMenuItem["default"], {
+    caption: "x2H",
+    onClick: onX2H
+  }), _isMinMax(config) && _react["default"].createElement(_SubMenuItem["default"], {
+    caption: "MinMax",
+    initialIsActive: true,
+    onClick: onMinMax
+  }), _isZoom(getChart) && _react["default"].createElement(_SubMenuItem["default"], {
+    caption: "Zoom",
+    isNotActive: true,
+    onClick: onZoom,
+    onClose: onClose
+  }), _react["default"].createElement(_SubMenuItem["default"], {
+    caption: "Copy",
+    isNotActive: true,
+    onClick: onCopy,
+    onClose: onClose
+  }), _react["default"].createElement(_SubMenuItem["default"], {
+    caption: "PasteTo",
+    isNotActive: true,
+    onClick: onPasteTo,
+    onClose: onClose
+  })));
 };
 
-exports.default = ModalMenuFn;
+var _default = ModalMenuFn;
+exports["default"] = _default;
 //# sourceMappingURL=ModalMenuFn.js.map

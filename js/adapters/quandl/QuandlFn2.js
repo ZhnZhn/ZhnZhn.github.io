@@ -1,40 +1,29 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _big = require('big.js');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _big2 = _interopRequireDefault(_big);
+var _big = _interopRequireDefault(require("big.js"));
 
-var _dompurify = require('dompurify');
+var _dompurify = _interopRequireDefault(require("dompurify"));
 
-var _dompurify2 = _interopRequireDefault(_dompurify);
+var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
 
-var _mathFn = require('../../math/mathFn');
+var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
-var _mathFn2 = _interopRequireDefault(_mathFn);
+var _Type = require("../../constants/Type");
 
-var _DateUtils = require('../../utils/DateUtils');
+var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
-var _Type = require('../../constants/Type');
-
-var _ChartConfig = require('../../charts/ChartConfig');
-
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mlsToDmy = _DateUtils2.default.mlsToDmy;
-
-
+var mlsToDmy = _DateUtils["default"].mlsToDmy;
 var _isArr = Array.isArray;
+
 var _isStr = function _isStr(str) {
   return typeof str === 'string';
 };
+
 var _isNumber = function _isNumber(n) {
   return typeof n === 'number' && !Number.isNaN(n);
 };
@@ -53,13 +42,11 @@ var _isStrEqTo = function _isStrEqTo(str, strTo) {
 var QuandlFn2 = {
   getData: function getData(json) {
     var _json$dataset = json.dataset,
-        dataset = _json$dataset === undefined ? {} : _json$dataset,
+        dataset = _json$dataset === void 0 ? {} : _json$dataset,
         _json$datatable = json.datatable,
-        datatable = _json$datatable === undefined ? {} : _json$datatable;
-
+        datatable = _json$datatable === void 0 ? {} : _json$datatable;
     return dataset.data || datatable.data || [];
   },
-
   getColumnNames: function getColumnNames(json) {
     var dataset = json.dataset,
         datatable = json.datatable;
@@ -67,20 +54,24 @@ var QuandlFn2 = {
     if (dataset) {
       return dataset.column_names || [];
     }
+
     if (datatable && _isArr(datatable.columns)) {
       return datatable.columns.map(function (c) {
         return c.name;
       });
     }
+
     return [];
   },
-
   isPrevDateAfter: function isPrevDateAfter(arr, checkedDate, predicate) {
     var length = arr.length;
+
     if (length === 0) {
       return true;
     }
+
     var prevDate = arr[length - 1].x;
+
     if (Math.abs((checkedDate.valueOf() - prevDate.valueOf()) / (24 * 60 * 60 * 1000)) < predicate) {
       return false;
     } else {
@@ -89,22 +80,22 @@ var QuandlFn2 = {
   },
   createDatasetInfo: function createDatasetInfo(json) {
     var _json$dataset2 = json.dataset,
-        dataset = _json$dataset2 === undefined ? {} : _json$dataset2,
+        dataset = _json$dataset2 === void 0 ? {} : _json$dataset2,
         _dataset$name = dataset.name,
-        name = _dataset$name === undefined ? '' : _dataset$name,
+        name = _dataset$name === void 0 ? '' : _dataset$name,
         _dataset$description = dataset.description,
-        description = _dataset$description === undefined ? '' : _dataset$description,
+        description = _dataset$description === void 0 ? '' : _dataset$description,
         _dataset$newest_avail = dataset.newest_available_date,
-        newest_available_date = _dataset$newest_avail === undefined ? '' : _dataset$newest_avail,
+        newest_available_date = _dataset$newest_avail === void 0 ? '' : _dataset$newest_avail,
         _dataset$oldest_avail = dataset.oldest_available_date,
-        oldest_available_date = _dataset$oldest_avail === undefined ? '' : _dataset$oldest_avail,
+        oldest_available_date = _dataset$oldest_avail === void 0 ? '' : _dataset$oldest_avail,
         _dataset$frequency = dataset.frequency,
-        frequency = _dataset$frequency === undefined ? '' : _dataset$frequency,
+        frequency = _dataset$frequency === void 0 ? '' : _dataset$frequency,
         _dataset$database_cod = dataset.database_code,
-        database_code = _dataset$database_cod === undefined ? '' : _dataset$database_cod,
+        database_code = _dataset$database_cod === void 0 ? '' : _dataset$database_cod,
         _dataset$dataset_code = dataset.dataset_code,
-        dataset_code = _dataset$dataset_code === undefined ? '' : _dataset$dataset_code,
-        _description = _dompurify2.default.sanitize(description);
+        dataset_code = _dataset$dataset_code === void 0 ? '' : _dataset$dataset_code,
+        _description = _dompurify["default"].sanitize(description);
 
     return {
       name: name,
@@ -120,7 +111,7 @@ var QuandlFn2 = {
     var item = option.item,
         title = option.title,
         _option$subtitle = option.subtitle,
-        subtitle = _option$subtitle === undefined ? '' : _option$subtitle,
+        subtitle = _option$subtitle === void 0 ? '' : _option$subtitle,
         id = option.value,
         key = option.key,
         columnName = option.columnName,
@@ -129,15 +120,19 @@ var QuandlFn2 = {
         seriaColumnNames = option.seriaColumnNames,
         linkFn = option.linkFn,
         dataSource = option.dataSource,
-        _dataSource = dataSource ? 'Quandl: ' + dataSource : 'Quandl',
+        _dataSource = dataSource ? "Quandl: " + dataSource : 'Quandl',
         _itemCaption = _crItemCaption(option);
 
     return {
       item: item,
-      title: title, subtitle: subtitle,
-      id: id, key: key,
-      columnName: columnName, dataColumn: dataColumn,
-      fromDate: fromDate, seriaColumnNames: seriaColumnNames,
+      title: title,
+      subtitle: subtitle,
+      id: id,
+      key: key,
+      columnName: columnName,
+      dataColumn: dataColumn,
+      fromDate: fromDate,
+      seriaColumnNames: seriaColumnNames,
       linkFn: linkFn,
       itemCaption: _itemCaption,
       dataSource: _dataSource
@@ -145,47 +140,54 @@ var QuandlFn2 = {
   },
   createPercent: function createPercent(_ref2) {
     var _ref2$bValue = _ref2.bValue,
-        bValue = _ref2$bValue === undefined ? (0, _big2.default)('0.0') : _ref2$bValue,
+        bValue = _ref2$bValue === void 0 ? (0, _big["default"])('0.0') : _ref2$bValue,
         _ref2$bTotal = _ref2.bTotal,
-        bTotal = _ref2$bTotal === undefined ? (0, _big2.default)('0.0') : _ref2$bTotal;
-
-    return _mathFn2.default.calcPercent({ bValue: bValue, bTotal: bTotal });
+        bTotal = _ref2$bTotal === void 0 ? (0, _big["default"])('0.0') : _ref2$bTotal;
+    return _mathFn["default"].calcPercent({
+      bValue: bValue,
+      bTotal: bTotal
+    });
   },
   createValueMoving: function createValueMoving(_ref3) {
     var _ref3$bNowValue = _ref3.bNowValue,
-        bNowValue = _ref3$bNowValue === undefined ? (0, _big2.default)('0.0') : _ref3$bNowValue,
+        bNowValue = _ref3$bNowValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bNowValue,
         _ref3$bPrevValue = _ref3.bPrevValue,
-        bPrevValue = _ref3$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref3$bPrevValue;
-
-    return _mathFn2.default.crValueMoving({
+        bPrevValue = _ref3$bPrevValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bPrevValue;
+    return _mathFn["default"].crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: _Type.Direction,
-      fnFormat: _ChartConfig2.default.fnNumberFormat
+      fnFormat: _ChartConfig["default"].fnNumberFormat
     });
   },
-  getRecentDate: function getRecentDate() {
-    var seria = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var json = arguments[1];
+  getRecentDate: function getRecentDate(seria, json) {
+    if (seria === void 0) {
+      seria = [];
+    }
+
     var len = seria.length,
         _json$dataset3 = json.dataset,
-        dataset = _json$dataset3 === undefined ? {} : _json$dataset3,
+        dataset = _json$dataset3 === void 0 ? {} : _json$dataset3,
         _dataset$frequency2 = dataset.frequency,
-        frequency = _dataset$frequency2 === undefined ? '' : _dataset$frequency2,
+        frequency = _dataset$frequency2 === void 0 ? '' : _dataset$frequency2,
         mlsUTC = len > 0 && seria[len - 1][0] && _isNumber(seria[len - 1][0]) ? seria[len - 1][0] : '';
-
     return mlsUTC ? frequency.toLowerCase() === 'annual' ? new Date(mlsUTC).getUTCFullYear() : mlsToDmy(mlsUTC) : '';
   },
-  setTitleToConfig: function setTitleToConfig(config) {
-    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    var title = option.title,
-        subtitle = option.subtitle;
+  setTitleToConfig: function setTitleToConfig(config, option) {
+    if (option === void 0) {
+      option = {};
+    }
 
+    var _option = option,
+        title = _option.title,
+        subtitle = _option.subtitle;
     config.title.text = title || '';
-    config.subtitle.text = subtitle ? subtitle + ':' : '';
+    config.subtitle.text = subtitle ? subtitle + ":" : '';
   },
-  findColumnIndex: function findColumnIndex(obj) {
-    var columnName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  findColumnIndex: function findColumnIndex(obj, columnName) {
+    if (columnName === void 0) {
+      columnName = '';
+    }
 
     var column_names = _isArr(obj) ? obj : QuandlFn2.getColumnNames(obj),
         _columnName = columnName.toLowerCase();
@@ -197,6 +199,7 @@ var QuandlFn2 = {
         }
       }
     }
+
     return void 0;
   },
   getDataColumnIndex: function getDataColumnIndex(json, option) {
@@ -207,6 +210,6 @@ var QuandlFn2 = {
     return _dataColumn || dataColumn || 1;
   }
 };
-
-exports.default = QuandlFn2;
+var _default = QuandlFn2;
+exports["default"] = _default;
 //# sourceMappingURL=QuandlFn2.js.map

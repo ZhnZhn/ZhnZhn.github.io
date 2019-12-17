@@ -1,23 +1,17 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = require('babel-runtime/helpers/extends');
+exports.__esModule = true;
+exports["default"] = void 0;
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _AdapterFn = require('../AdapterFn');
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var valueMoving = _AdapterFn2.default.valueMoving,
-    ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    appendWithColon = _AdapterFn2.default.appendWithColon;
-
+var valueMoving = _AdapterFn["default"].valueMoving,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    appendWithColon = _AdapterFn["default"].appendWithColon;
 
 var _crZhConfig = function _crZhConfig(option) {
   var title = option.title,
@@ -25,10 +19,10 @@ var _crZhConfig = function _crZhConfig(option) {
       dfTitle = option.dfTitle,
       value = option.value,
       linkItem = option.linkItem;
-
   return {
-    id: value, key: value,
-    item: (0, _extends3.default)({}, linkItem),
+    id: value,
+    key: value,
+    item: (0, _extends2["default"])({}, linkItem),
     linkFn: 'DF',
     itemCaption: title,
     isWithoutAdd: true,
@@ -51,20 +45,19 @@ var fnAdapter = {
     data.forEach(function (p) {
       var year = p.year,
           _p$period = p.period,
-          period = _p$period === undefined ? '' : _p$period,
+          period = _p$period === void 0 ? '' : _p$period,
           value = p.value,
           _m = parseInt(('' + period).replace('M', ''), 10);
 
       if (typeof _m === 'number' && _m > 0 && _m < 13) {
         _data.push({
-          x: ymdToUTC(year + '-' + _m),
+          x: ymdToUTC(year + "-" + _m),
           y: parseFloat(value)
         });
       }
     });
     return _data.reverse();
   },
-
   crConfigOption: function crConfigOption(_ref2) {
     var json = _ref2.json,
         option = _ref2.option,
@@ -75,8 +68,7 @@ var fnAdapter = {
       info: _crInfo(option)
     };
   }
-
 };
-
-exports.default = fnAdapter;
+var _default = fnAdapter;
+exports["default"] = _default;
 //# sourceMappingURL=fnAdapter.js.map

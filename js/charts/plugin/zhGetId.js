@@ -1,12 +1,12 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
+exports["default"] = void 0;
 
 var zhGetId = function zhGetId() {
   return ((this.options || {}).zhConfig || {}).id;
 };
 
-exports.default = zhGetId;
+var _default = zhGetId;
+exports["default"] = _default;
 //# sourceMappingURL=zhGetId.js.map

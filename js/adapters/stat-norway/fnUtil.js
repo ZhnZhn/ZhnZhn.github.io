@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+exports.__esModule = true;
+exports["default"] = void 0;
 var fnUtil = {
   toUTC: function toUTC(str) {
     if (str.indexOf('M') !== -1) {
@@ -26,13 +24,12 @@ var fnUtil = {
       return Date.UTC(str, 11, 31);
     }
   },
-
   toYMD: function toYMD(str) {
     var ms = fnUtil.toUTC(str),
         d = new Date(ms);
     return d.getUTCFullYear() + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
   }
 };
-
-exports.default = fnUtil;
+var _default = fnUtil;
+exports["default"] = _default;
 //# sourceMappingURL=fnUtil.js.map
