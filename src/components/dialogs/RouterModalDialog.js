@@ -38,7 +38,7 @@ const _router = {
 
   _loadWL(){
     /*eslint-disable no-undef */
-    if ( process.env.NODE_ENV === 'development') {
+    if ( process.env.NODE_ENV === '_development') {
       this.WL = import("js/components/watch-browser/ModalDialogs.js")
         .then(module => module.default )
         .catch(err => console.log(MSG_OFFLINE))

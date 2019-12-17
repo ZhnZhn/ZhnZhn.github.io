@@ -16,7 +16,7 @@ const _router = {
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */
-    if ( process.env.NODE_ENV === 'development' ) {
+    if ( process.env.NODE_ENV === '_development' ) {
       return import("js/components/chart-config/ChartConfigDialog.js")
         .then(module => module.default);
     }
@@ -30,7 +30,7 @@ const _router = {
 
   _loadUN() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === 'development' ) {
+     if ( process.env.NODE_ENV === '_development' ) {
        return this.UN = import("js/components/uncomtrade/UnDialogs.js")
          .then(module => module.default )
          .catch(err => console.log(MSG_OFFLINE));
@@ -52,7 +52,7 @@ const _router = {
 
   _loadSM() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === 'development' ) {
+     if ( process.env.NODE_ENV === '_development' ) {
        return this.SM = import("js/components/stock-markets/AlphaDialogs.js")
          .then(module => module.default )
          .catch(err => console.log(MSG_OFFLINE));
@@ -81,7 +81,7 @@ const _router = {
 
   _loadES() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === 'development' ) {
+     if ( process.env.NODE_ENV === '_development' ) {
        return this.ES = import("js/components/eurostat/EurostatDialogs.js")
          .then(module => module.default )
          .catch(err => console.log(MSG_OFFLINE));
@@ -105,7 +105,7 @@ const _router = {
   get DialogEurostat2() {
     return this.getES()
       .then(D => D.Eurostat2);
-  },  
+  },
   get DialogEurostat3A() {
     return this.getES()
       .then(D => D.Eurostat3A);
@@ -121,7 +121,7 @@ const _router = {
 
   _loadUSAE() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === 'development' ) {
+     if ( process.env.NODE_ENV === '_development' ) {
        return this.USAE = import("js/components/usa-economy/UsaeDialogs.js")
          .then(module => module.default )
          .catch(err => console.log(MSG_OFFLINE));
@@ -143,7 +143,7 @@ const _router = {
 
   _loadQE() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === 'development' ) {
+     if ( process.env.NODE_ENV === '_development' ) {
        return this.QE = import("js/components/quandl/QuandlDialogs.js")
          .then(module => module.default )
          .catch(err => console.log(MSG_OFFLINE));

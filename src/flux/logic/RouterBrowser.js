@@ -13,7 +13,7 @@ const RouterBrowser = {
 
   get [BT.WATCH_LIST]() {
     /*eslint-disable no-undef */
-    if ( process.env.NODE_ENV === 'development') {
+    if ( process.env.NODE_ENV === '_development') {
       return import("js/components/watch-browser/WatchBrowser.js")
         .then(module => module.default)
     }
@@ -27,7 +27,7 @@ const RouterBrowser = {
 
   get _BrowserSlider() {
     /*eslint-disable no-undef */
-    if ( process.env.NODE_ENV === 'development') {
+    if ( process.env.NODE_ENV === '_development') {
       return import("js/components/browser-slider/BrowserSlider.js")
         .then(module => module.default)
     }
@@ -41,7 +41,7 @@ const RouterBrowser = {
 
   get STAT_ALL() {
     return this._BrowserSlider;
-  }  
+  }
 
 };
 

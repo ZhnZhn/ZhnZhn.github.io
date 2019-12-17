@@ -21,7 +21,7 @@ var RouterBrowser = (_RouterBrowser = {
   DEFAULT: _SourceBrowserDynamic["default"]
 }, _RouterBrowser[_Type.BrowserType.US_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.NYSE_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.NASDAQ_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.LONDON_STOCKS] = _SourceBrowserDynamic2["default"], _BT$WATCH_LIST = _Type.BrowserType.WATCH_LIST, _mutatorMap = {}, _mutatorMap[_BT$WATCH_LIST] = _mutatorMap[_BT$WATCH_LIST] || {}, _mutatorMap[_BT$WATCH_LIST].get = function () {
   /*eslint-disable no-undef */
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === '_development') {
     return Promise.resolve().then(function () {
       return (0, _interopRequireWildcard2["default"])(require("js/components/watch-browser/WatchBrowser.js"));
     }).then(function (module) {
@@ -38,7 +38,7 @@ var RouterBrowser = (_RouterBrowser = {
   });
 }, _BrowserSlider = "_BrowserSlider", _mutatorMap[_BrowserSlider] = _mutatorMap[_BrowserSlider] || {}, _mutatorMap[_BrowserSlider].get = function () {
   /*eslint-disable no-undef */
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === '_development') {
     return Promise.resolve().then(function () {
       return (0, _interopRequireWildcard2["default"])(require("js/components/browser-slider/BrowserSlider.js"));
     }).then(function (module) {

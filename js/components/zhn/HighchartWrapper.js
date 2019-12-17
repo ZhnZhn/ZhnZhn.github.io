@@ -79,7 +79,7 @@ function (_Component) {
       this.chart = null;
     } catch (err) {
       /*eslint-disable no-undef */
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === '_development') {
         console.log('Exception during destroy chart');
         console.log(err);
       }

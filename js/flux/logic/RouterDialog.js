@@ -22,7 +22,7 @@ var _router = {
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === '_development') {
       return Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/chart-config/ChartConfigDialog.js"));
       }).then(function (module) {
@@ -41,7 +41,7 @@ var _router = {
 
   _loadUN: function _loadUN() {
     /*eslint-disable no-undef */
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === '_development') {
       return this.UN = Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/uncomtrade/UnDialogs.js"));
       }).then(function (module) {
@@ -69,7 +69,7 @@ var _router = {
 
   _loadSM: function _loadSM() {
     /*eslint-disable no-undef */
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === '_development') {
       return this.SM = Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/stock-markets/AlphaDialogs.js"));
       }).then(function (module) {
@@ -115,7 +115,7 @@ var _router = {
 
   _loadES: function _loadES() {
     /*eslint-disable no-undef */
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === '_development') {
       return this.ES = Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/eurostat/EurostatDialogs.js"));
       }).then(function (module) {
@@ -170,7 +170,7 @@ var _router = {
 
   _loadUSAE: function _loadUSAE() {
     /*eslint-disable no-undef */
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === '_development') {
       return this.USAE = Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/usa-economy/UsaeDialogs.js"));
       }).then(function (module) {
@@ -200,7 +200,7 @@ var _router = {
 
   _loadQE: function _loadQE() {
     /*eslint-disable no-undef */
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === '_development') {
       return this.QE = Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/quandl/QuandlDialogs.js"));
       }).then(function (module) {
