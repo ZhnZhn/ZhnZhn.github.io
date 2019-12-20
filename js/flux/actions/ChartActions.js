@@ -26,12 +26,14 @@ var _Reflux$createActions;
 var C = {
   DESR_LOADER: "Loader for this item hasn't found."
 };
-var META = '_Meta';
 
-var _fnNoop = function _fnNoop() {};
-
-var _isFn = function _isFn(fn) {
+var META = '_Meta',
+    _fnNoop = function _fnNoop() {},
+    _isFn = function _isFn(fn) {
   return typeof fn === 'function';
+},
+    _isUndef = function _isUndef(v) {
+  return typeof v === 'undefined';
 };
 
 var ChartActionTypes = {
@@ -74,7 +76,7 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
 };
 
 var _addBoolOptionTo = function _addBoolOptionTo(options, propName) {
-  if (typeof options[propName] === 'undefined') {
+  if (_isUndef(options[propName])) {
     options[propName] = _ChartStore["default"].isSetting(propName);
   }
 };
@@ -110,11 +112,11 @@ ChartActions.fnOnChangeStore = _fnOnChangeStore;
 var isApiKeyRequired = _SettingSlice["default"].isApiKeyRequired,
     getApiTitle = _SettingSlice["default"].getApiTitle;
 
-var _checkMsgApiKey = function _checkMsgApiKey(option) {
-  var apiKey = option.apiKey,
-      loadId = option.loadId,
-      isKeyFeature = option.isKeyFeature,
-      isPremium = option.isPremium;
+var _checkMsgApiKey = function _checkMsgApiKey(_ref) {
+  var apiKey = _ref.apiKey,
+      loadId = _ref.loadId,
+      isKeyFeature = _ref.isKeyFeature,
+      isPremium = _ref.isPremium;
 
   if (!apiKey) {
     if (isApiKeyRequired(loadId)) {
@@ -130,7 +132,7 @@ var _checkMsgApiKey = function _checkMsgApiKey(option) {
     }
   }
 
-  return false;
+  return '';
 };
 
 ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
@@ -166,7 +168,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
     }
   }
 
-  return undefined;
+  return;
 };
 
 ChartActions[A.LOAD_STOCK].shouldEmit = function () {
@@ -188,8 +190,8 @@ var SUBTITLE = 'Loaded from URL Query';
 var _addDialogPropsTo = function _addDialogPropsTo(option) {
   var chartType = option.chartType,
       browserType = option.browserType,
-      _ref = _ChartStore["default"].getSourceConfig(browserType, chartType) || {},
-      dialogProps = _ref.dialogProps;
+      _ref2 = _ChartStore["default"].getSourceConfig(browserType, chartType) || {},
+      dialogProps = _ref2.dialogProps;
 
   Object.assign(option, dialogProps, dialogProps.dfProps, {
     subtitle: SUBTITLE

@@ -12,9 +12,10 @@ const C = {
   DESR_LOADER: "Loader for this item hasn't found."
 };
 
-const META = '_Meta';
-const _fnNoop = () => {};
-const _isFn = fn => typeof fn === 'function';
+const META = '_Meta'
+, _fnNoop = () => {}
+, _isFn = fn => typeof fn === 'function'
+, _isUndef = v => typeof v === 'undefined';
 
 
 export const ChartActionTypes = {
@@ -44,28 +45,28 @@ const M = Msg.Alert;
 const _fnOnChangeStore = function(actionType, data){
   if (actionType === LPA.LOADING_COMPLETE ||
       actionType === LPA.LOADING_FAILED
-  ){
+  ) {
     ChartActions[A.LOAD_STOCK].isLoading = false;
   }
-}
+};
 
 const _fnCancelLoad = function(option, alertMsg, isWithFailed){
   Msg.setAlertMsg(option, alertMsg);
   this.failed(option);
   this.isShouldEmit = false;
 
-  if ( _isFn(option.onCancel) ){
+  if (_isFn(option.onCancel)) {
     option.onCancel();
-  } else if (isWithFailed && _isFn(option.onFailed)){
+  } else if (isWithFailed && _isFn(option.onFailed)) {
     option.onFailed();
   }
-}
+};
 
 const _addBoolOptionTo = (options, propName) => {
-  if (typeof options[propName] === 'undefined') {
+  if (_isUndef(options[propName])) {
     options[propName] = ChartStore.isSetting(propName)
   }
-}
+};
 
 const _addSettingsTo = (options, ...args) => {
   const { loadId } = options;
@@ -105,16 +106,15 @@ const {
   getApiTitle
 } = SettingSlice;
 
-const _checkMsgApiKey = (option) => {
-  const {
-    apiKey, loadId,
-    isKeyFeature, isPremium
-  } = option;
+const _checkMsgApiKey = ({
+  apiKey,
+  loadId,
+  isKeyFeature,
+  isPremium
+}) => {
   if (!apiKey){
-    if ( isApiKeyRequired(loadId) ) {
-      return M.withoutApiKey(
-        getApiTitle(loadId)
-      );
+    if (isApiKeyRequired(loadId)) {
+      return M.withoutApiKey(getApiTitle(loadId));
     }
     if (isKeyFeature) {
       return M.FEATURE_WITHOUT_KEY;
@@ -123,13 +123,13 @@ const _checkMsgApiKey = (option) => {
       return M.PREMIUM_WITHOUT_KEY;
     }
   }
-  return false;
-}
+  return '';
+};
 
 ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
   const key = option._itemKey || LogicUtils.createKeyForConfig(option)
   , isDoublingLoad = this.isLoading && key === this.idLoading
-  , isDoublLoadMeta = (option.isLoadMeta)
+  , isDoublLoadMeta = option.isLoadMeta
       ? (key + META === this.idLoading)
       : false;
 
@@ -144,12 +144,12 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta){
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
-  } else if (!ChartStore.isLoadToChart()){
+  } else if (!ChartStore.isLoadToChart()){    
     if (ChartStore.isChartExist(option)){
       this.cancelLoad(option, M.ALREADY_EXIST, true);
     }
   }
-  return undefined;
+  return;
 }
 
 ChartActions[A.LOAD_STOCK].shouldEmit = function(){

@@ -8,7 +8,8 @@ const C = {
   DF_PERIOD: '1m'
 };
 
-const _urlEarnings = (option) => {
+//earning, company, stats : symbol/suffix
+const _crUrlType1 = option => {
   const { value='' } = option;
   return `${C.BASE_URL}/${value}`;
 };
@@ -35,9 +36,11 @@ const _urlChart = (option) => {
 
 const _rUrl = {
   DF: _urlChart,
-  [CT.ERN]: _urlEarnings,
+  [CT.ERN]: _crUrlType1,
   [CT.DIV]: _urlDividends,
-  [CT.CHART]: _urlChart
+  [CT.CHART]: _urlChart,
+  [CT.COM]: _crUrlType1,
+  [CT.STA]: _crUrlType1
 };
 
 const IexApi = {
@@ -47,7 +50,13 @@ const IexApi = {
     return _toUrl(option)+`?token=${apiKey}`;
   },
 
-  checkResponse(){
+  checkResponse(json){
+    if (!json) {
+      throw {
+        errCaption: "Error",
+        message: 'Response is empty.'
+      };
+    }
     return true;
   }
 }

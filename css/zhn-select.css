@@ -38,6 +38,11 @@
   cursor: pointer;
 }
 
+.zhn-select__bt-arrow:hover,
+.zhn-select__bt-arrow:focus {
+  outline: 0;
+}
+
 .zhn-select__input__hr {
   border-width: medium medium 1px;
   border-style: none none solid;

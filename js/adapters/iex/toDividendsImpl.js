@@ -17,6 +17,18 @@ var C = {
   CAPTION: 'Dividends',
   COLOR: '#4caf50'
 };
+var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    toFloatOrEmpty = _AdapterFn["default"].toFloatOrEmpty;
+var _isArr = Array.isArray,
+    _assign = Object.assign;
+
+var _crPoint = function _crPoint(p) {
+  return _assign(_ChartConfig["default"].crMarkerExDividend(C.COLOR, 0), {
+    x: ymdToUTC(p.paymentDate),
+    exValue: toFloatOrEmpty(p.amount)
+  });
+};
+
 var toDividendsImpl = {
   caption: C.CAPTION,
   color: C.COLOR,
@@ -26,17 +38,7 @@ var toDividendsImpl = {
     return value + " Dividends " + dfPeriod;
   },
   crSeria: function crSeria(json, option) {
-    var data = [];
-
-    if (Array.isArray(json)) {
-      json.reverse().forEach(function (p) {
-        data.push(Object.assign(_ChartConfig["default"].fMarkerExDividend(C.COLOR, 0), {
-          x: _AdapterFn["default"].ymdToUTC(p.paymentDate),
-          exValue: p.amount
-        }));
-      });
-    }
-
+    var data = _isArr(json) ? json.reverse().map(_crPoint) : [];
     return (0, _ConfigBuilder["default"])().scatterSeria(_Tooltip["default"].exValue, {
       data: data
     }).toSeria();

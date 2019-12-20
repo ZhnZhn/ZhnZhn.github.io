@@ -9,13 +9,13 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _dompurify = _interopRequireDefault(require("dompurify"));
 
+var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
+
 var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
 var _Type = require("../../constants/Type");
-
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var mlsToDmy = _DateUtils["default"].mlsToDmy;
 var _isArr = Array.isArray;
@@ -157,7 +157,7 @@ var QuandlFn2 = {
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: _Type.Direction,
-      fnFormat: _ChartConfig["default"].fnNumberFormat
+      fnFormat: _formatAllNumber["default"]
     });
   },
   getRecentDate: function getRecentDate(seria, json) {

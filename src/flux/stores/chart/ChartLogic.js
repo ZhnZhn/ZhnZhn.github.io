@@ -39,10 +39,10 @@ const ChartLogic = {
     }
   },
 
-  isChartExist(slice, chartType, key){    
+  isChartExist(slice, chartType, key){
     const {
-            chartSlice, configs
-          } = _getSlice(slice, chartType)
+      chartSlice, configs
+    } = _getSlice(slice, chartType);
     if (!chartSlice){
       return false;
     }

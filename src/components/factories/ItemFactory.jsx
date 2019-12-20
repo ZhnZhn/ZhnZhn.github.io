@@ -66,18 +66,17 @@ const _rCrItem = {
   [CIT.EUROSTAT_MAP]: _crMapChart,
   [CIT.COIN_INFO]: _fItem(Item.CoinInfo),
   [CIT.TABLE]: _fItem(Item.Table),
-  [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf)
+  [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf),
+  [CIT.FLEX_TOKENS]: _fItem(Item.FlexTokens)
 };
 
 const ItemFactory = {
-  createItem({ store, config, index, option, props }){
-    const {
-      zhCompType
-    } = config || {}
-    , _fnCreate = _rCrItem[zhCompType] || _rCrItem.DF;
-    return _fnCreate({
-      store, config, index, option, props
-    });
+  /* { store, config, index, option, props } */
+  createItem(itemOptions){
+    const { config } = itemOptions
+    , { zhCompType } = config || {}
+    , _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
+    return _crItem(itemOptions);
   }
 };
 

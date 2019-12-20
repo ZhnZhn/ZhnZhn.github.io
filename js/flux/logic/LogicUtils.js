@@ -9,6 +9,10 @@ var _Type = require("../../constants/Type");
 
 var _LoadConfig = _interopRequireDefault(require("./LoadConfig"));
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var _crQuandlKey = function _crQuandlKey(option) {
   var loadId = option.loadId,
       isLoadMeta = option.isLoadMeta,
@@ -16,7 +20,7 @@ var _crQuandlKey = function _crQuandlKey(option) {
       dataColumn = option.dataColumn,
       seriaType = option.seriaType,
       viewKey = option.viewKey;
-  return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _Type.ChartType.AREA ? value + "_" + _Type.ChartType.AREA + "_" + dataColumn : value + "_" + seriaType : viewKey ? viewKey : value;
+  return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _Type.ChartType.AREA ? value + "_" + _Type.ChartType.AREA + "_" + dataColumn : value + "_" + seriaType : viewKey || value;
 };
 
 var _crEurostatKey = function _crEurostatKey(option) {
@@ -40,7 +44,7 @@ var _crKey = function _crKey(option) {
       value = option.value,
       loadConfig = _LoadConfig["default"][loadId] || {},
       crKey = loadConfig.crKey;
-  return typeof crKey === 'function' ? crKey(option) : value || 'key';
+  return _isFn(crKey) ? crKey(option) : value || 'key';
 };
 
 var LogicUtils = {

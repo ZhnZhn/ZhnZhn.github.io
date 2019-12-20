@@ -75,7 +75,7 @@ const _addDividendPointTo = (arr, dateMs, p) => {
     && parseFloat(p[PN_DIVIDENT]);
   if (_exValue) {
     arr.push({
-      ...ChartConfig.fMarkerExDividend(), ...{
+      ...ChartConfig.crMarkerExDividend(), ...{
          x: dateMs,
          exValue: _exValue,
          price: parseFloat(p[PN_ADJ_CLOSE])

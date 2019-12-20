@@ -1,51 +1,53 @@
 import React, { Component } from 'react';
 
-const STYLE = {
+import CL from './CL';
+
+const S = {
   ARROW_CELL : {
     position: 'absolute',
-    top: '10px',
-    right: '0px',
-    cursor: 'pointer',
+    top: 10,
+    right: 0,
+    width: 35,
+    paddingRight: 5,
     textAlign: 'center',
     verticalAlign: 'middle',
-    width: '35px',
-    paddingRight: '5px'
+    cursor: 'pointer'
   },
   ARROW : {
     position: 'relative',
     top: '2px',
+    display: 'inline-block',
+    height: 0,
+    width: 0,
     borderColor: '#999 transparent transparent',
     borderStyle: 'solid',
-    //borderWidth: '5px 5px 2.5px',
-    borderWidth: '10px 8px 4px',
-    display: 'inline-block',
-    height: '0px',
-    width: '0px'
+    borderWidth: '10px 8px 4px'
   }
-}
+};
 
 const C = {
   ANIMATION_CIRCLE : "circle infinite 1.25s linear",
-  BORDER_COLOR : "rgb(27, 117, 187) transparent transparent"
-}
+  BORDER_COLOR : "#1b75bb transparent transparent"
+};
 
 
 class ArrowCell extends Component {
-  _refArrowCell = (n) => this.arrowCell = n
-  _refArrow = (n) => this.arrow = n
+  _refArrowCell = n => this.arrowCell = n
+  _refArrow = n => this.arrow = n
   render(){
-    const { arrowStyle, onClick } = this.props
+    const { arrowStyle, onClick } = this.props;
     return (
-      <span
+      <button
          ref={this._refArrowCell}
-         style={STYLE.ARROW_CELL}
+         className={CL.BT_ARROW}
+         style={S.ARROW_CELL}
+         tabIndex="-1"
          onClick={onClick}>
         <span
            ref={this._refArrow}
-           style={{ ...STYLE.ARROW, ...arrowStyle}}
-        >
-        </span>
-      </span>
+           style={{...S.ARROW, ...arrowStyle}}
+        />
+      </button>
     );
   }
 

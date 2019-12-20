@@ -105,7 +105,7 @@ var _fnAddSplitRatio = function _fnAddSplitRatio(splitRationIndex, result) {
     var x = dateUTC,
         splitRatio = parseFloat(point[splitRationIndex].toFixed(2)),
         price = point[yPointIndex];
-    dataSplitRatio.push(_assign(_ChartConfig["default"].fMarkerSplitRatio(), {
+    dataSplitRatio.push(_assign(_ChartConfig["default"].crMarkerSplitRatio(), {
       x: x,
       splitRatio: splitRatio,
       price: price
@@ -126,7 +126,7 @@ var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
     ,
         exValue = point[exDividendIndex],
         price = point[yPointIndex],
-        marker = _assign(_ChartConfig["default"].fMarkerExDividend(), {
+        marker = _assign(_ChartConfig["default"].crMarkerExDividend(), {
       x: x,
       exValue: exValue,
       price: price

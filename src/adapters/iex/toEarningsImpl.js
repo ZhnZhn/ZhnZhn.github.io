@@ -12,12 +12,23 @@ const C = {
   COLOR_MINUS: '#f44336'
 };
 
-const _markerColor = (p) => {
-  return typeof p.EPSSurpriseDollar === 'number'
-    && p.EPSSurpriseDollar < 0
+const { ymdToUTC, toFloatOrEmpty } = AdapterFn
+
+const _isArr = Array.isArray;
+const _assign = Object.assign;
+const _isNumber = n => typeof n === 'number';
+
+const _markerColor = (p) => _isNumber(p.EPSSurpriseDollar)
+   && p.EPSSurpriseDollar < 0
       ? C.COLOR_MINUS
       : C.COLOR_PLUS;
-};
+
+const _crPoint = p => _assign(
+   ChartConfig.crMarkerExDividend(_markerColor(p), 0), {
+   x: ymdToUTC(p.EPSReportDate),
+   exValue: toFloatOrEmpty(p.actualEPS),
+   ...p
+});
 
 const toEarningsImpl = {
   caption: C.CAPTION,
@@ -28,19 +39,10 @@ const toEarningsImpl = {
   },
   crSeria: (json, option) => {
     const { dfType } = option
-        , data = [];
-
-    if (json && Array.isArray(json[dfType])) {
-      json[dfType].forEach(p => {
-        data.push(
-          Object.assign(
-             ChartConfig.fMarkerExDividend(_markerColor(p), 0), {
-             x: AdapterFn.ymdToUTC(p.EPSReportDate),
-             exValue: p.actualEPS,
-             ...p
-          }))
-      })
-    }    
+    , _jsonData = json && json[dfType]
+    , data = _isArr(_jsonData)
+       ? _jsonData.map(_crPoint)
+       : [];
     return Builder()
       .scatterSeria(Tooltip.eps, { data })
       .toSeria();

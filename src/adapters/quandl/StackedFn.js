@@ -3,6 +3,7 @@ import Big from 'big.js';
 import AdapterFn from '../AdapterFn'
 
 import {ChartType} from '../../constants/Type';
+import formatAllNumber from '../../utils/formatAllNumber'
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
@@ -188,7 +189,7 @@ export const crValueMoving = function(bNowTotal, date, bPrevTotal, dateTo){
       {
         date: date,
         dateTo: dateTo.split('-')[0],
-        valueTo: ChartConfig.fnNumberFormat(bPrevTotal),
+        valueTo: formatAllNumber(bPrevTotal),
         isDenyToChange: true
       }
    );

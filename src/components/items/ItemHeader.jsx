@@ -11,38 +11,37 @@ const MAX_LENGTH = 45;
 
 const S = {
   ROOT: {
+    position: 'relative',
     backgroundColor: '#1b2836',
-    paddingTop: '6px',
-    paddingLeft: '10px',
-    paddingRight: '42px',
-    paddingBottom: '6px',
     height: 'auto',
     width: '100%',
-    borderTopRightRadius: '2px',
-    borderBottomRightRadius: '2px',
-    position: 'relative',
+    paddingTop: 6,
+    paddingLeft: 10,
+    paddingRight: 42,
+    paddingBottom: 6,
+    borderTopRightRadius: 2,
+    borderBottomRightRadius: 2,
     boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
   },
   CAPTION: {
     display: 'inline-block',
-    cursor: 'pointer',
-    width: '380px',
+    width: 380,
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'clip',
-    //overflow: 'inherit'
-    overflow: 'hidden'
+    overflow: 'hidden',
+    cursor: 'pointer'
   },
   OPEN: {
-    color: 'rgba(164, 135, 212, 1)',
+    color: '#a487d4',
   },
   CLOSE: {
-    color : 'gray'
+    color: 'gray'
   },
   SVG_CLOSE: {
     position: 'absolute',
     right: 0,
-    top: '4px'
+    top: 4
   }
 };
 
@@ -71,7 +70,7 @@ class ItemHeader extends Component {
         , TS = theme.getStyle(TH_ID)
         , _title = title || caption.length > MAX_LENGTH
               ? caption
-              : undefined
+              : void 0
         , _styleCaption = isOpen
             ? { ...S.CAPTION, ...captionStyle, ...S.OPEN }
             : { ...S.CAPTION, ...captionStyle, ...S.CLOSE };

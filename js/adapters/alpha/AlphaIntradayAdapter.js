@@ -87,7 +87,7 @@ var _addDividendPointTo = function _addDividendPointTo(arr, dateMs, p) {
   var _exValue = p[PN_DIVIDENT] && parseFloat(p[PN_DIVIDENT]);
 
   if (_exValue) {
-    arr.push((0, _extends2["default"])({}, _ChartConfig["default"].fMarkerExDividend(), {}, {
+    arr.push((0, _extends2["default"])({}, _ChartConfig["default"].crMarkerExDividend(), {}, {
       x: dateMs,
       exValue: _exValue,
       price: parseFloat(p[PN_ADJ_CLOSE])

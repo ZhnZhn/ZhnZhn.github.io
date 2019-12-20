@@ -1,17 +1,17 @@
 import Big from 'big.js';
 import DOMPurify from 'dompurify';
 
+import formatAllNumber from '../../utils/formatAllNumber'
 import mathFn from '../../math/mathFn';
 
 import dt from '../../utils/DateUtils';
 import { Direction } from '../../constants/Type';
-import ChartConfig from '../../charts/ChartConfig';
 
-const { mlsToDmy } = dt
+const { mlsToDmy } = dt;
 
 const _isArr = Array.isArray;
-const _isStr = str => typeof(str) === 'string';
-const _isNumber = n => typeof(n) === 'number'
+const _isStr = str => typeof str === 'string';
+const _isNumber = n => typeof n === 'number'
   && !Number.isNaN(n);
 
 const _crItemCaption = ({ dfItemCaption, items, itemCaption }) => _isNumber(dfItemCaption)
@@ -107,7 +107,7 @@ const QuandlFn2 = {
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: Direction,
-      fnFormat: ChartConfig.fnNumberFormat
+      fnFormat: formatAllNumber
     });
   },
 

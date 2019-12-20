@@ -9,6 +9,17 @@ const C = {
   COLOR: '#4caf50'
 };
 
+const { ymdToUTC, toFloatOrEmpty } = AdapterFn
+
+const _isArr = Array.isArray
+, _assign = Object.assign;
+
+const _crPoint = p => _assign(
+  ChartConfig.crMarkerExDividend(C.COLOR, 0), {
+  x: ymdToUTC(p.paymentDate),
+  exValue: toFloatOrEmpty(p.amount)
+});
+
 const toDividendsImpl = {
   caption: C.CAPTION,
   color: C.COLOR,
@@ -18,17 +29,9 @@ const toDividendsImpl = {
   },
 
   crSeria: (json, option) => {
-    const data = [];
-    if (Array.isArray(json)) {
-      json.reverse()
-        .forEach(p => {
-          data.push(Object.assign(
-            ChartConfig.fMarkerExDividend(C.COLOR, 0), {
-            x: AdapterFn.ymdToUTC(p.paymentDate),
-            exValue: p.amount
-          }))
-        });
-    }
+    const data = _isArr(json)
+      ? json.reverse().map(_crPoint)
+      : [];
     return Builder()
       .scatterSeria(Tooltip.exValue, { data })
       .toSeria();

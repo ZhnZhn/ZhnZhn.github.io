@@ -65,7 +65,7 @@ var _crSeria = function _crSeria(arr, option) {
     var date = p[0],
         v = p[1],
         _color = v >= 0 ? C.COLOR_PLUS : C.COLOR_MINUS,
-        _p = _ChartConfig["default"].fMarkerExDividend(_color);
+        _p = _ChartConfig["default"].crMarkerExDividend(_color);
 
     _updateLabelY(_p, seriaType);
 

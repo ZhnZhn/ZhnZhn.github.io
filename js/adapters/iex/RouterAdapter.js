@@ -5,7 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _Scatter = _interopRequireDefault(require("./Scatter"));
+var _TemplateScatter = _interopRequireDefault(require("./TemplateScatter"));
+
+var _TemplateTokens = _interopRequireDefault(require("./TemplateTokens"));
+
+var _toCompanyImpl = _interopRequireDefault(require("./toCompanyImpl"));
+
+var _toStatsImpl = _interopRequireDefault(require("./toStatsImpl"));
 
 var _toEarningsImpl = _interopRequireDefault(require("./toEarningsImpl"));
 
@@ -19,7 +25,7 @@ var _r2;
 
 var _r = (_r2 = {
   DF: _toChart["default"]
-}, _r2[_ChartType["default"].ERN] = (0, _Scatter["default"])(_toEarningsImpl["default"]), _r2[_ChartType["default"].DIV] = (0, _Scatter["default"])(_toDividendsImpl["default"]), _r2[_ChartType["default"].CHART] = _toChart["default"], _r2);
+}, _r2[_ChartType["default"].ERN] = (0, _TemplateScatter["default"])(_toEarningsImpl["default"]), _r2[_ChartType["default"].DIV] = (0, _TemplateScatter["default"])(_toDividendsImpl["default"]), _r2[_ChartType["default"].CHART] = _toChart["default"], _r2[_ChartType["default"].COM] = (0, _TemplateTokens["default"])(_toCompanyImpl["default"]), _r2[_ChartType["default"].STA] = (0, _TemplateTokens["default"])(_toStatsImpl["default"]), _r2);
 
 var RouterAdapter = {
   getAdapter: function getAdapter(option) {

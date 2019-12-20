@@ -20,12 +20,15 @@ import ChartTheme from './ChartTheme'
 import handleMouseOver from './handleMouseOver'
 
 import WithIndicator from './WithIndicatorConfig';
+import WithMarkers from './WithMarkers';
 import WithPie from './WithPieConfig';
 import WithStackedArea from './WithStackedAreaConfig';
 import WithStackedColumn from './WithStackedColumnConfig';
 import WithTreeMap from './WithTreeMapConfig';
 
-const merge = Highcharts.merge;
+const _merge = Highcharts.merge;
+const _assign = Object.assign;
+const _isStr = str => typeof str === 'string';
 
 const _crScatterSeria = (color, pointFormatter, data, zhSeriaId) => ({
   type: 'scatter',
@@ -37,6 +40,7 @@ const _crScatterSeria = (color, pointFormatter, data, zhSeriaId) => ({
 
 const ChartConfig = {
   ...WithIndicator,
+  ...WithMarkers,
   ...WithPie,
   ...WithStackedArea,
   ...WithStackedColumn,
@@ -54,7 +58,7 @@ const ChartConfig = {
   },
 
   seriaOption(color, option) {
-    return Object.assign({
+    return _assign({
       type: 'line', visible: false, color,
       marker: {
         radius: 3,
@@ -64,7 +68,7 @@ const ChartConfig = {
   },
 
   setSerieData(config, data, index, name, options) {
-    config.series[index] = Object.assign({
+    config.series[index] = _assign({
       type: 'area',
       name: name,
       data: data,
@@ -116,17 +120,8 @@ const ChartConfig = {
 
 };
 
-ChartConfig.fnNumberFormat = function(value){
-  const arrSplit = (value+'').split('.')
-      , decimal = ( arrSplit[1] )
-          ? arrSplit[1].length
-          : 0;
-
-  return Highcharts.numberFormat(value, decimal, '.', ' ');
-}
-
 ChartConfig.fBaseAreaConfig = function(options) {
-  const config = Highcharts.merge(
+  const config = _merge(
     Chart.fBaseConfig(options), {
     chart: {
       zoomType: 'xy',
@@ -139,12 +134,12 @@ ChartConfig.fBaseAreaConfig = function(options) {
     zhDetailCharts: []
   });
 
-  config.xAxis = Object.assign( Chart.fXAxisOpposite(config.xAxis), {
+  config.xAxis = _assign( Chart.fXAxisOpposite(config.xAxis), {
     events: {
       afterSetExtremes : ChartFn.zoomIndicatorCharts
     }
   })
-  config.yAxis = Object.assign(config.yAxis, {
+  config.yAxis = _assign(config.yAxis, {
     lineWidth: 0,
     tickLength: 0,
     offset: 4,
@@ -166,96 +161,14 @@ ChartConfig.fBaseAreaConfig = function(options) {
   return config;
 };
 
-ChartConfig.fMarkerExDividend = function(
-  color=COLOR.EX_DIVIDEND,
-  dataLabelsY=32
-){
-  return {
-    y: 0,
-    exValue: 0.5,
-    marker : {
-      symbol: 'circle',
-      fillColor : color,
-      lineColor: color,
-      radius: 6,
-      states: {
-        hover: {
-          enable: true,
-          fillColor: COLOR.PLOT,
-          lineColor: color,
-          lineWidth: 2,
-          radius: 6
-        }
-      }
-    },
-    dataLabels : {
-      enabled: true,
-      inside: true,
-      color: color,
-      style : {
-        fill: color,
-        stroke: color,
-        color: color,
-        fontSize: '12px',
-        fontWeight: 'normal',
-        textShadow: 'none',
-        textOutline: '0px transparent'
-      },
-      crop: false,
-      overflow: 'none',
-      y: dataLabelsY,
-      formatter : function(){
-        return this.point.exValue;
-      }
-    }
-  }
-};
-
-ChartConfig.fMarkerSplitRatio = function(){
-  const point = ChartConfig.fMarkerExDividend(COLOR.SPLIT_RATIO);
-  point.dataLabels.formatter = function() { return this.point.splitRatio};
-  return point;
-}
-
-/*
-const _fScatterSeria = function(color, pointFormatter, data, zhSeriaId){
-  return {
-    type: 'scatter',
-    color: color,
-    tooltip : Chart.fTooltip(pointFormatter),
-    data : data,
-    zhSeriaId : zhSeriaId
-  }
-}
-*/
-/*
-ChartConfig.fExDividendSeria = function(data, chartId){
-  return _fScatterSeria(
-    COLOR.EX_DIVIDEND,
-    Tooltip.exDividend,
-    data,
-    chartId + '_ExDivident'
-  );
-}
-ChartConfig.fSplitRatioSeria = function(data, chartId){
-  return _fScatterSeria(
-    COLOR.SPLIT_RATIO,
-    Tooltip.splitRatio,
-    data,
-    chartId + '_SplitRatio'
-  );
-}
-*/
-
 ChartConfig.fSeries = function(option={}){
   const { seriaType } = option
-  , _type = typeof seriaType === 'string'
+  , _type = _isStr(seriaType)
       ? seriaType.toLowerCase()
       : 'spline';
-  return merge(
+  return _merge(
     false, {
       type: _type,
-      //type: 'spline',
       lineWidth: 1,
       tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter)
     }, option

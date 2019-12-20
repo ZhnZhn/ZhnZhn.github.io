@@ -1,4 +1,6 @@
 
+const _isFn = fn => typeof fn === 'function';
+
 const createLoadOptions = (props={}, options={}) => {
   const {
           columnName, dataColumn, seriaColumnNames, loadId,
@@ -8,24 +10,24 @@ const createLoadOptions = (props={}, options={}) => {
         } = props
       , { one, fromDate, toDate, transform } = options
       , { value, caption } = one
-      , _value = (typeof fnValue === 'function')
+      , _value = _isFn(fnValue)
             ? fnValue(value)
             : value
-      , _itemCaption = (typeof fnItemCaption === 'function')
+      , _itemCaption = _isFn(fnItemCaption)
             ? fnItemCaption(value)
-            : undefined
-      , _transform = (transform)
+            : void 0
+      , _transform = transform
             ? transform.value
-            : undefined
-      , _subtitle = (transform)
+            : void 0
+      , _subtitle = transform
             ? transform.caption
-            : undefined;
+            : void 0;  
   return {
     value : _value,
     transform: _transform,
     title: caption,
     subtitle: _subtitle,
-    item: one,    
+    item: one,
     oneCaption: caption,
     fromDate: fromDate,
     toDate: toDate,

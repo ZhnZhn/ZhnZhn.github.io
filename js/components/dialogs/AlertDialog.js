@@ -13,35 +13,32 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
-
 //import PropTypes from "prop-types";
-var CL = {
-  ELL: 'ellipsis'
-};
+var CL_ELL = 'ellipsis';
 var S = {
+  ROW_CAPTION: {
+    display: 'flex',
+    margin: 5,
+    lineHeight: 2,
+    fontSize: '18px',
+    fontWeight: 'bold'
+  },
   CAPTION: {
     display: 'inline-block',
-    width: 380,
-    paddingLeft: 10,
-    color: '#F44336',
-    fontSize: '18px',
-    fontWeight: 'bold',
-    lineHeight: 2
+    color: '#f44336',
+    paddingLeft: 8,
+    paddingRight: 10
   },
   ITEM_ID: {
-    width: 120,
     color: '#a487d4',
-    fontWeight: 'bold',
-    verticalAlign: 'bottom'
+    width: 140
   },
   DESCR: {
     color: 'gray',
-    width: 380,
-    paddingLeft: 10,
+    paddingLeft: 12,
     paddingRight: 8,
-    fontWeight: 'bold',
     lineHeight: 1.4,
+    fontWeight: 'bold',
     whiteSpace: 'pre-line',
     wordWrap: 'break-word'
   }
@@ -94,18 +91,16 @@ function (_Component) {
       isShow: isShow,
       onClose: onClose
     }, _react["default"].createElement("div", {
-      style: _DialogStyles["default"].rowDiv
+      style: S.ROW_CAPTION
     }, _react["default"].createElement("span", {
       style: S.CAPTION
-    }, _caption, _react["default"].createElement("span", {
-      className: CL.ELL,
+    }, _caption), _react["default"].createElement("span", {
+      className: CL_ELL,
       style: S.ITEM_ID,
       title: alertItemId
-    }, alertItemId))), _react["default"].createElement("div", {
-      style: _DialogStyles["default"].rowDiv
-    }, _react["default"].createElement("p", {
+    }, alertItemId)), _react["default"].createElement("p", {
       style: S.DESCR
-    }, alertDescr)));
+    }, alertDescr));
   };
 
   return AlertDialog;

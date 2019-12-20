@@ -48,7 +48,7 @@ const _crSeria = (arr, option) => {
     const date = p[0]
         , v = p[1]
         , _color = v >= 0 ? C.COLOR_PLUS : C.COLOR_MINUS
-        , _p = ChartConfig.fMarkerExDividend(_color);
+        , _p = ChartConfig.crMarkerExDividend(_color);
 
     _updateLabelY(_p, seriaType)
     return Object.assign(_p, {

@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/components/items/Items.js"],"names":["AreaChart","MapChart","CoinInfo","Table","AlphaPerf"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;eAEe;AACbA,EAAAA,SAAS,EAATA,yBADa;AACFC,EAAAA,QAAQ,EAARA,wBADE;AAEbC,EAAAA,QAAQ,EAARA,wBAFa;AAEHC,EAAAA,KAAK,EAALA,qBAFG;AAEIC,EAAAA,SAAS,EAATA;AAFJ,C","sourcesContent":["import AreaChart from './AreaChartItem';\r\nimport MapChart from './MapChartItem';\r\nimport CoinInfo from './CoinInfoItem';\r\nimport Table from './TableItem';\r\nimport AlphaPerf from './AlphaPerfItem';\r\n\r\nexport default {\r\n  AreaChart, MapChart,\r\n  CoinInfo, Table, AlphaPerf\r\n}\r\n"],"file":"Items.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/Items.js"
+ ],
+ "file": "../../../src/components/items/Items.js",
+ "names": [
+  "AreaChart",
+  "MapChart",
+  "CoinInfo",
+  "Table",
+  "AlphaPerf",
+  "FlexTokens"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;AACA;;eAEe;AACbA,EAAAA,SAAS,EAATA,yBADa;AACFC,EAAAA,QAAQ,EAARA,wBADE;AAEbC,EAAAA,QAAQ,EAARA,wBAFa;AAEHC,EAAAA,KAAK,EAALA,qBAFG;AAEIC,EAAAA,SAAS,EAATA,yBAFJ;AAGbC,EAAAA,UAAU,EAAVA;AAHa,C"
+}

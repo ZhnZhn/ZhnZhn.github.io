@@ -1,1 +1,45 @@
-{"version":3,"sources":["../../../src/adapters/iex/toDividendsImpl.js"],"names":["C","CAPTION","COLOR","toDividendsImpl","caption","color","crSubtitle","value","dfPeriod","crSeria","json","option","data","Array","isArray","reverse","forEach","p","push","Object","assign","ChartConfig","fMarkerExDividend","x","AdapterFn","ymdToUTC","paymentDate","exValue","amount","scatterSeria","Tooltip","toSeria"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE,WADD;AAERC,EAAAA,KAAK,EAAE;AAFC,CAAV;AAKA,IAAMC,eAAe,GAAG;AACtBC,EAAAA,OAAO,EAAEJ,CAAC,CAACC,OADW;AAEtBI,EAAAA,KAAK,EAAEL,CAAC,CAACE,KAFa;AAItBI,EAAAA,UAAU,EAAE,0BAAyB;AAAA,QAAtBC,KAAsB,QAAtBA,KAAsB;AAAA,QAAfC,QAAe,QAAfA,QAAe;AACnC,WAAUD,KAAV,mBAA6BC,QAA7B;AACD,GANqB;AAQtBC,EAAAA,OAAO,EAAE,iBAACC,IAAD,EAAOC,MAAP,EAAkB;AACzB,QAAMC,IAAI,GAAG,EAAb;;AACA,QAAIC,KAAK,CAACC,OAAN,CAAcJ,IAAd,CAAJ,EAAyB;AACvBA,MAAAA,IAAI,CAACK,OAAL,GACGC,OADH,CACW,UAAAC,CAAC,EAAI;AACZL,QAAAA,IAAI,CAACM,IAAL,CAAUC,MAAM,CAACC,MAAP,CACRC,wBAAYC,iBAAZ,CAA8BtB,CAAC,CAACE,KAAhC,EAAuC,CAAvC,CADQ,EACmC;AAC3CqB,UAAAA,CAAC,EAAEC,sBAAUC,QAAV,CAAmBR,CAAC,CAACS,WAArB,CADwC;AAE3CC,UAAAA,OAAO,EAAEV,CAAC,CAACW;AAFgC,SADnC,CAAV;AAKD,OAPH;AAQD;;AACD,WAAO,iCACJC,YADI,CACSC,oBAAQH,OADjB,EAC0B;AAAEf,MAAAA,IAAI,EAAJA;AAAF,KAD1B,EAEJmB,OAFI,EAAP;AAGD;AAvBqB,CAAxB;eA0Be5B,e","sourcesContent":["import ChartConfig from '../../charts/ChartConfig'\r\nimport Tooltip from '../../charts/Tooltip'\r\nimport Builder from '../../charts/ConfigBuilder'\r\n\r\nimport AdapterFn from '../AdapterFn'\r\n\r\nconst C = {\r\n  CAPTION: 'Dividends',\r\n  COLOR: '#4caf50'\r\n};\r\n\r\nconst toDividendsImpl = {\r\n  caption: C.CAPTION,\r\n  color: C.COLOR,\r\n\r\n  crSubtitle: ({ value, dfPeriod }) => {\r\n    return `${value} Dividends ${dfPeriod}`;\r\n  },\r\n\r\n  crSeria: (json, option) => {\r\n    const data = [];\r\n    if (Array.isArray(json)) {\r\n      json.reverse()\r\n        .forEach(p => {\r\n          data.push(Object.assign(\r\n            ChartConfig.fMarkerExDividend(C.COLOR, 0), {\r\n            x: AdapterFn.ymdToUTC(p.paymentDate),\r\n            exValue: p.amount\r\n          }))\r\n        });\r\n    }\r\n    return Builder()\r\n      .scatterSeria(Tooltip.exValue, { data })\r\n      .toSeria();\r\n  }\r\n};\r\n\r\nexport default toDividendsImpl\r\n"],"file":"toDividendsImpl.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/iex/toDividendsImpl.js"
+ ],
+ "file": "../../../src/adapters/iex/toDividendsImpl.js",
+ "names": [
+  "C",
+  "CAPTION",
+  "COLOR",
+  "ymdToUTC",
+  "AdapterFn",
+  "toFloatOrEmpty",
+  "_isArr",
+  "Array",
+  "isArray",
+  "_assign",
+  "Object",
+  "assign",
+  "_crPoint",
+  "p",
+  "ChartConfig",
+  "crMarkerExDividend",
+  "x",
+  "paymentDate",
+  "exValue",
+  "amount",
+  "toDividendsImpl",
+  "caption",
+  "color",
+  "crSubtitle",
+  "value",
+  "dfPeriod",
+  "crSeria",
+  "json",
+  "option",
+  "data",
+  "reverse",
+  "map",
+  "scatterSeria",
+  "Tooltip",
+  "toSeria"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE,WADD;AAERC,EAAAA,KAAK,EAAE;AAFC,CAAV;IAKQC,Q,GAA6BC,qB,CAA7BD,Q;IAAUE,c,GAAmBD,qB,CAAnBC,c;AAElB,IAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;AAAA,IACEC,OAAO,GAAGC,MAAM,CAACC,MADnB;;AAGA,IAAMC,QAAQ,GAAG,SAAXA,QAAW,CAAAC,CAAC;AAAA,SAAIJ,OAAO,CAC3BK,wBAAYC,kBAAZ,CAA+Bf,CAAC,CAACE,KAAjC,EAAwC,CAAxC,CAD2B,EACiB;AAC5Cc,IAAAA,CAAC,EAAEb,QAAQ,CAACU,CAAC,CAACI,WAAH,CADiC;AAE5CC,IAAAA,OAAO,EAAEb,cAAc,CAACQ,CAAC,CAACM,MAAH;AAFqB,GADjB,CAAX;AAAA,CAAlB;;AAMA,IAAMC,eAAe,GAAG;AACtBC,EAAAA,OAAO,EAAErB,CAAC,CAACC,OADW;AAEtBqB,EAAAA,KAAK,EAAEtB,CAAC,CAACE,KAFa;AAItBqB,EAAAA,UAAU,EAAE,0BAAyB;AAAA,QAAtBC,KAAsB,QAAtBA,KAAsB;AAAA,QAAfC,QAAe,QAAfA,QAAe;AACnC,WAAUD,KAAV,mBAA6BC,QAA7B;AACD,GANqB;AAQtBC,EAAAA,OAAO,EAAE,iBAACC,IAAD,EAAOC,MAAP,EAAkB;AACzB,QAAMC,IAAI,GAAGvB,MAAM,CAACqB,IAAD,CAAN,GACTA,IAAI,CAACG,OAAL,GAAeC,GAAf,CAAmBnB,QAAnB,CADS,GAET,EAFJ;AAGA,WAAO,iCACJoB,YADI,CACSC,oBAAQf,OADjB,EAC0B;AAAEW,MAAAA,IAAI,EAAJA;AAAF,KAD1B,EAEJK,OAFI,EAAP;AAGD;AAfqB,CAAxB;eAkBed,e"
+}

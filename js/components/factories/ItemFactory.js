@@ -87,27 +87,17 @@ var _fItem = function _fItem(Comp) {
 
 var _rCrItem = (_rCrItem2 = {
   DF: _crAreaChart
-}, _rCrItem2[_Type.CompItemType.EUROSTAT_MAP] = _crMapChart, _rCrItem2[_Type.CompItemType.COIN_INFO] = _fItem(_Items["default"].CoinInfo), _rCrItem2[_Type.CompItemType.TABLE] = _fItem(_Items["default"].Table), _rCrItem2[_Type.CompItemType.ALPHA_PERF] = _fItem(_Items["default"].AlphaPerf), _rCrItem2);
+}, _rCrItem2[_Type.CompItemType.EUROSTAT_MAP] = _crMapChart, _rCrItem2[_Type.CompItemType.COIN_INFO] = _fItem(_Items["default"].CoinInfo), _rCrItem2[_Type.CompItemType.TABLE] = _fItem(_Items["default"].Table), _rCrItem2[_Type.CompItemType.ALPHA_PERF] = _fItem(_Items["default"].AlphaPerf), _rCrItem2[_Type.CompItemType.FLEX_TOKENS] = _fItem(_Items["default"].FlexTokens), _rCrItem2);
 
 var ItemFactory = {
-  createItem: function createItem(_ref4) {
-    var store = _ref4.store,
-        config = _ref4.config,
-        index = _ref4.index,
-        option = _ref4.option,
-        props = _ref4.props;
+  /* { store, config, index, option, props } */
+  createItem: function createItem(itemOptions) {
+    var config = itemOptions.config,
+        _ref4 = config || {},
+        zhCompType = _ref4.zhCompType,
+        _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
 
-    var _ref5 = config || {},
-        zhCompType = _ref5.zhCompType,
-        _fnCreate = _rCrItem[zhCompType] || _rCrItem.DF;
-
-    return _fnCreate({
-      store: store,
-      config: config,
-      index: index,
-      option: option,
-      props: props
-    });
+    return _crItem(itemOptions);
   }
 };
 var _default = ItemFactory;

@@ -2,16 +2,21 @@
 import Builder from '../../charts/ConfigBuilder'
 import fns from './toFns'
 
-const TITLE = "Source: IEX Platform";
+const TITLE = "Source: IEX Cloud";
 
-const Scatter = function(impl) {
-  if (!(this instanceof Scatter)) {
-    return (new Scatter(impl));
+const TemplateScatter = function(impl) {
+  if (!(this instanceof TemplateScatter)) {
+    return (new TemplateScatter(impl));
   }
   this.impl = impl
 };
 
-Scatter.prototype = Object.assign(Scatter.prototype, {
+Object.assign(TemplateScatter.prototype, {
+  crKey(option){
+    option.key = option.value
+    return option.value;
+  },
+
   toConfig(json, option){
     const { crSubtitle, crSeria } = this.impl;
     return Builder()
@@ -37,4 +42,4 @@ Scatter.prototype = Object.assign(Scatter.prototype, {
   }
 });
 
-export default Scatter
+export default TemplateScatter

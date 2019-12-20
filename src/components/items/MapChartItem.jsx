@@ -3,43 +3,40 @@ import React, { Component } from 'react';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
-import ButtonTab from '../zhn/ButtonTab';
-import ShowHide from '../zhn/ShowHide';
-import SpinnerLoading from '../zhn/SpinnerLoading';
+import A from '../Comp'
 import ItemHeader from './ItemHeader'
 import PanelDataInfo from './PanelDataInfo';
 
 const S = {
   ROOT_DIV: {
     position: 'relative',
-    //lineHeight: 1.5,
-    marginBottom: '10px',
-    marginRight: '25px',
+    marginBottom: 10,
+    marginRight: 25,
   },
   TIME_SPAN: {
     position: 'absolute',
     display: 'inline-block',
     color: 'rgb(253, 179, 22)',
-    fontWeight: 'bold',
-    paddingLeft: '16px',
+    paddingLeft: 16,
+    fontWeight: 'bold'
   },
   TAB_DIV: {
     position: 'relative',
-    height: '30px',
+    height: 30,
     backgroundColor: 'transparent',
     zIndex: 2
   },
   MAP_DIV: {
-    height : '400px'
+    height : 400
   },
   SPINNER_LOADING: {
     position: 'relative',
     display: 'block',
-    textAlign: 'middle',
+    width: 32,
+    height: 32,
     margin: '0 auto',
-    marginTop: '64px',
-    width: '32px',
-    height: '32px'
+    marginTop: 64,
+    textAlign: 'middle'
   },
   BLOCK: {
     display: 'block'
@@ -48,6 +45,18 @@ const S = {
     display: 'none'
   }
 }
+
+const BtTabInfo = ({ isShow, onClick }) => {
+  if (!isShow) { return null; }
+  return (
+    <div style={S.TAB_DIV}>
+       <A.ButtonTab
+          caption="Info"
+          onClick={onClick}
+       />
+    </div>
+  );
+};
 
 class MapChartItem extends Component {
   /*
@@ -65,76 +74,61 @@ class MapChartItem extends Component {
   }
   */
 
-  constructor(props){
-    super()
-    this.map = undefined
-    this.state = {
-      isLoading: true,
-      isOpen: true,
-      isShowInfo: false,
-      time: ''
-    }
+  //map = void 0
+  state = {
+    isLoading: true,
+    isOpen: true,
+    isShowInfo: false,
+    time: ''
   }
 
   componentDidMount(){
     const { caption, config } = this.props
         , { json:jsonCube, zhMapSlice } = config;
-
     ChoroplethMap.draw(`map_${caption}`, jsonCube, zhMapSlice)
-                 .then( (option) => {
-                    this.map = option.map
-                    this.setState({
-                      isLoading: false,
-                      time: option.time
-                    })
-                    return undefined;
-                 })
-                 .catch(err => {
-                   this.setState({ isLoading: false })
-                 });
+       .then(option => {
+          this.map = option.map
+          this.setState({
+            isLoading: false,
+            time: option.time
+          })
+       })
+       .catch(err => {
+         this.setState({ isLoading: false })
+       });
   }
 
-  _handleToggle = () => {
-     this.setState({ isOpen: !this.state.isOpen })
+  _hToggle = () => {
+     this.setState(prevState => ({
+       isOpen: !prevState.isOpen
+     }))
   }
 
-  _handleClickInfo = () => {
+  _hClickInfo = () => {
     this.setState({ isShowInfo: true });
   }
-  _handleClickChart = () => {
+  _hClickChart = () => {
     this.setState({ isShowInfo: false });
-  }
-
-  _renderTabToolbar = () => {
-     return (
-      <div style={S.TAB_DIV}>
-         <ButtonTab
-            caption="Info"            
-            onClick={this._handleClickInfo}
-         />
-      </div>
-    );
   }
 
   render(){
     const { caption, config, onCloseItem } = this.props
-        , { zhDialog={} } = config
-        , { subtitle='' } = zhDialog
-        , {
-            isLoading, isOpen, isShowInfo,
-            time
-          } = this.state
-        , _styleMap = isShowInfo
-              ? S.NONE
-              : S.BLOCK;
+    , { zhDialog={} } = config
+    , { subtitle='' } = zhDialog
+    , {
+        isLoading, isOpen, isShowInfo,
+        time
+      } = this.state
+    , _styleMap = isShowInfo
+          ? S.NONE
+          : S.BLOCK;
 
     return (
       <div style={S.ROOT_DIV}>
-
         <ItemHeader
           isOpen={isOpen}
           caption={subtitle}
-          onClick={this._handleToggle}
+          onClick={this._hToggle}
           onClose={onCloseItem}
         >
           <span style={S.TIME_SPAN}>
@@ -142,25 +136,27 @@ class MapChartItem extends Component {
           </span>
         </ItemHeader>
 
-        <ShowHide isShow={isOpen}>
-           {!isShowInfo && this._renderTabToolbar()}
+        <A.ShowHide isShow={isOpen}>
+           <BtTabInfo
+             isShow={!isShowInfo}
+             onClick={this._hClickInfo}
+           />
            <div
               id={`map_${caption}`}
               style={{ ...S.MAP_DIV, ..._styleMap }}
            >
              {
-               isLoading && <SpinnerLoading
-                  style={S.SPINNER_LOADING} />
+               isLoading && <A.SpinnerLoading style={S.SPINNER_LOADING} />
              }
            </div>
            <PanelDataInfo
               isShow={isShowInfo}
               info={config.info}
-              onClickChart={this._handleClickChart}
+              onClickChart={this._hClickChart}
            />
-        </ShowHide>
+        </A.ShowHide>
       </div>
-    )
+    );
   }
 }
 

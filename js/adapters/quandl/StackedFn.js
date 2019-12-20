@@ -11,6 +11,8 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _Type = require("../../constants/Type");
 
+var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
+
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
@@ -263,7 +265,7 @@ var crValueMoving = function crValueMoving(bNowTotal, date, bPrevTotal, dateTo) 
   }), {
     date: date,
     dateTo: dateTo.split('-')[0],
-    valueTo: _ChartConfig["default"].fnNumberFormat(bPrevTotal),
+    valueTo: (0, _formatAllNumber["default"])(bPrevTotal),
     isDenyToChange: true
   });
 };

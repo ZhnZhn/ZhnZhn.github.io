@@ -32,6 +32,7 @@ const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
     && isFinite(p[pn]);
 }
+const _isFn = fn => typeof fn === 'function';
 
 const _compareArrByIndex = index => (arrA, arrB) => {
   if (arrA[index] < arrB[index]) return -1;
@@ -63,6 +64,11 @@ const _getValue = (point) => {
         : '0.0';
   }
 }
+
+const _fToFloatOr = dfValue => str => {
+  const _v = parseFloat(str);
+  return _isNaN(_v) ? dfValue : _v;
+};
 
 const AdapterFn = {
   ymdToUTC,
@@ -133,10 +139,8 @@ const AdapterFn = {
      || v === null
   ,
   isYNumber: _fIsNumber('y'),
-  toFloatOrNull: str => {
-    const _v = parseFloat(str);
-    return _isNaN(_v) ? null : _v;
-  },
+  toFloatOrNull: _fToFloatOr(null),
+  toFloatOrEmpty: _fToFloatOr(''),
 
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
@@ -222,7 +226,16 @@ const AdapterFn = {
   }),
   crItemLink: (caption, itemUrl) => `<p>
     <a href="${itemUrl}" style="padding-top: 4px;">${caption}</a>
-  </p>`
-}
+  </p>`,
+
+  throwIfSeriesNotSupported: adapter => {
+    if (!_isFn(adapter.toSeries)) {
+      throw ({
+        errCaption: "Action Error",
+        message: "Load to series for this type isn't supported."
+      });
+    }
+  }
+};
 
 export default AdapterFn

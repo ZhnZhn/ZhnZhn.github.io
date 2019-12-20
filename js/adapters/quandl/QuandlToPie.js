@@ -11,6 +11,8 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _Type = require("../../constants/Type");
 
+var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
+
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
@@ -145,7 +147,7 @@ var fCreatePieConfig = function fCreatePieConfig(json, option) {
   config.series = [_ChartConfig["default"].fInnerPieSeria({
     center: ['20%', '80%'],
     year: _year1,
-    bTotal: _ChartConfig["default"].fnNumberFormat(_bTotal1)
+    bTotal: (0, _formatAllNumber["default"])(_bTotal1)
   }), _ChartConfig["default"].fOuterPieSeria({
     zhSeriaId: zhSeriaId,
     center: ['20%', '80%'],
@@ -154,7 +156,7 @@ var fCreatePieConfig = function fCreatePieConfig(json, option) {
   }), _ChartConfig["default"].fInnerPieSeria({
     center: ['70%', '80%'],
     year: _year2,
-    bTotal: _ChartConfig["default"].fnNumberFormat(_bTotal2)
+    bTotal: (0, _formatAllNumber["default"])(_bTotal2)
   }), _ChartConfig["default"].fOuterPieSeria({
     zhSeriaId: zhSeriaId,
     center: ['70%', '80%'],

@@ -13,32 +13,33 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var STYLE = {
+var _CL = _interopRequireDefault(require("./CL"));
+
+var S = {
   ARROW_CELL: {
     position: 'absolute',
-    top: '10px',
-    right: '0px',
-    cursor: 'pointer',
+    top: 10,
+    right: 0,
+    width: 35,
+    paddingRight: 5,
     textAlign: 'center',
     verticalAlign: 'middle',
-    width: '35px',
-    paddingRight: '5px'
+    cursor: 'pointer'
   },
   ARROW: {
     position: 'relative',
     top: '2px',
+    display: 'inline-block',
+    height: 0,
+    width: 0,
     borderColor: '#999 transparent transparent',
     borderStyle: 'solid',
-    //borderWidth: '5px 5px 2.5px',
-    borderWidth: '10px 8px 4px',
-    display: 'inline-block',
-    height: '0px',
-    width: '0px'
+    borderWidth: '10px 8px 4px'
   }
 };
 var C = {
   ANIMATION_CIRCLE: "circle infinite 1.25s linear",
-  BORDER_COLOR: "rgb(27, 117, 187) transparent transparent"
+  BORDER_COLOR: "#1b75bb transparent transparent"
 };
 
 var ArrowCell =
@@ -81,13 +82,15 @@ function (_Component) {
     var _this$props = this.props,
         arrowStyle = _this$props.arrowStyle,
         onClick = _this$props.onClick;
-    return _react["default"].createElement("span", {
+    return _react["default"].createElement("button", {
       ref: this._refArrowCell,
-      style: STYLE.ARROW_CELL,
+      className: _CL["default"].BT_ARROW,
+      style: S.ARROW_CELL,
+      tabIndex: "-1",
       onClick: onClick
     }, _react["default"].createElement("span", {
       ref: this._refArrow,
-      style: (0, _extends2["default"])({}, STYLE.ARROW, {}, arrowStyle)
+      style: (0, _extends2["default"])({}, S.ARROW, {}, arrowStyle)
     }));
   };
 

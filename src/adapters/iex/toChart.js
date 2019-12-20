@@ -8,27 +8,24 @@ const {
       } = AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
-const _crZhConfig = (id, option) => {
-  const { one, dataSource } = option;
-  return {
-    dataSource,
-    id: id,
-    key: id,
-    linkFn: "NASDAQ",
-    item: one,
-    itemCaption: one,
-    isWithLegend: true,
-    isWithoutAdd: true,
-    legend: stockSeriesLegend()
-  };
-}
+const _crZhConfig = (id, { one, dataSource }) => ({
+  dataSource,
+  id: id,
+  key: id,
+  linkFn: "NASDAQ",
+  item: one,
+  itemCaption: one,
+  isWithLegend: true,
+  isWithoutAdd: true,
+  legend: stockSeriesLegend()
+});
 
 const _crInfo = (title) => ({
   name: title,
   frequency: "Daily",
 });
 
-const _crId = ({ one, two }) => one+'_'+two;
+const _crId = ({ one, two }) => one + '_' + two;
 
 const toChart = {
   toConfig(json, option){
@@ -59,9 +56,7 @@ const toChart = {
 
   toSeries(json, option){
     const _id = _crId(option)
-        , { data } = toSeriesData(json, {
-             isAllSeries: false,
-          });
+    , { data } = toSeriesData(json, { isAllSeries: false });
     return Builder()
       .initSeria()
       .addPoints(_id, data)

@@ -5,9 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
-
 var _ChartType = _interopRequireDefault(require("./ChartType"));
+
+var _LOCALE = (navigator || {}).language;
+
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number';
+};
 
 var _calcScatterY = function _calcScatterY(chart, isMin) {
   var _chart$yAxis$ = chart.yAxis[0],
@@ -19,26 +23,34 @@ var _calcScatterY = function _calcScatterY(chart, isMin) {
 };
 
 var toFns = {
-  crZhConfig: function crZhConfig(option) {
-    var value = option.value,
-        dataSource = option.dataSource,
-        id = _AdapterFn["default"].crId();
-
+  toStr: function toStr(n) {
+    return _isNumber(n) ? n.toLocaleString(_LOCALE) : '';
+  },
+  toPerc: function toPerc(n) {
+    return _isNumber(n) ? n.toLocaleString(_LOCALE, {
+      style: 'percent',
+      minimumFractionDigits: 2
+    }) : '';
+  },
+  crZhConfig: function crZhConfig(_ref) {
+    var key = _ref.key,
+        value = _ref.value,
+        dataSource = _ref.dataSource;
     return {
-      id: id,
-      key: id,
-      itemCaption: value || id,
+      key: key,
+      id: key,
+      itemCaption: value || key,
       isWithoutAdd: true,
       isWithLegend: false,
       dataSource: dataSource
     };
   },
-  crToSeria: function crToSeria(_ref) {
-    var chart = _ref.chart,
-        seria = _ref.seria,
-        caption = _ref.caption,
-        color = _ref.color,
-        option = _ref.option;
+  crToSeria: function crToSeria(_ref2) {
+    var chart = _ref2.chart,
+        seria = _ref2.seria,
+        caption = _ref2.caption,
+        color = _ref2.color,
+        option = _ref2.option;
     var dfType = option.dfType;
     var y = dfType === _ChartType["default"].ERN ? _calcScatterY(chart) : _calcScatterY(chart, true);
     seria.data.forEach(function (p) {

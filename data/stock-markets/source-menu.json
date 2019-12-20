@@ -27,6 +27,8 @@
     },{
       "caption": "IEX Cloud",
       "items": [
+        { "id": "SM_IEX_COMPANY" },
+        { "id": "SM_IEX_STATS" },
         { "id": "SM_IEX_CHART" },
         { "id": "SM_IEX_EARNINGS_4Q" },
         { "id": "SM_IEX_DIVIDENDS_5Y"},
@@ -105,7 +107,7 @@
         "noDate": true,
         "linkFn" : "NASDAQ",
         "loadId" : "IEX",
-        "dataSource" : "IEX Platform"
+        "dataSource" : "IEX Cloud"
       }
     },
 
@@ -326,6 +328,32 @@
          }
      },
 
+     "SM_IEX_COMPANY" : {
+         "type" : "SM_IEX_COMPANY",
+         "menuTitle" : "Company",
+         "chartContainerCaption" : "IEX: Company",
+         "addProps": "SM_BASE_IEX",
+         "dialogProps" : {
+           "valueFn" : "ROneSufix",
+           "valueFnPrefix": "company",
+           "dfProps": {
+             "dfType": "company"
+           }
+         }
+     },
+     "SM_IEX_STATS" : {
+         "type" : "SM_IEX_STATS",
+         "menuTitle" : "Stats",
+         "chartContainerCaption" : "IEX: Stats",
+         "addProps": "SM_BASE_IEX",
+         "dialogProps" : {
+           "valueFn" : "ROneSufix",
+           "valueFnPrefix": "stats",
+           "dfProps": {
+             "dfType": "stats"
+           }
+         }
+     },
      "SM_IEX_CHART" : {
          "type" : "SM_IEX_CHART",
          "menuTitle" : "Historical Prices",

@@ -3,6 +3,7 @@ import Big from 'big.js';
 
 import AdapterFn from '../AdapterFn';
 import { ChartType } from '../../constants/Type';
+import formatAllNumber from '../../utils/formatAllNumber'
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
@@ -106,7 +107,7 @@ export const fCreatePieConfig = function(json, option){
       ChartConfig.fInnerPieSeria({
        center : ['20%', '80%'],
        year : _year1,
-       bTotal : ChartConfig.fnNumberFormat(_bTotal1)
+       bTotal : formatAllNumber(_bTotal1)
       })
     , ChartConfig.fOuterPieSeria({
         zhSeriaId : zhSeriaId,
@@ -117,7 +118,7 @@ export const fCreatePieConfig = function(json, option){
     , ChartConfig.fInnerPieSeria({
         center : ['70%', '80%'],
         year : _year2,
-        bTotal : ChartConfig.fnNumberFormat(_bTotal2)
+        bTotal : formatAllNumber(_bTotal2)
       })
     , ChartConfig.fOuterPieSeria({
         zhSeriaId : zhSeriaId,

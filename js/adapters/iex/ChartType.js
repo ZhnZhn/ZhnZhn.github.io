@@ -5,7 +5,9 @@ exports["default"] = void 0;
 var ChartType = {
   CHART: 'chart',
   ERN: 'earnings',
-  DIV: 'dividends'
+  DIV: 'dividends',
+  COM: 'company',
+  STA: 'stats'
 };
 var _default = ChartType;
 exports["default"] = _default;

@@ -14,9 +14,9 @@ var C = {
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
   DF_TICKET: 'AAPL',
   DF_PERIOD: '1m'
-};
+}; //earning, company, stats : symbol/suffix
 
-var _urlEarnings = function _urlEarnings(option) {
+var _crUrlType1 = function _crUrlType1(option) {
   var _option$value = option.value,
       value = _option$value === void 0 ? '' : _option$value;
   return C.BASE_URL + "/" + value;
@@ -44,7 +44,7 @@ var _urlChart = function _urlChart(option) {
 
 var _rUrl = (_rUrl2 = {
   DF: _urlChart
-}, _rUrl2[_ChartType["default"].ERN] = _urlEarnings, _rUrl2[_ChartType["default"].DIV] = _urlDividends, _rUrl2[_ChartType["default"].CHART] = _urlChart, _rUrl2);
+}, _rUrl2[_ChartType["default"].ERN] = _crUrlType1, _rUrl2[_ChartType["default"].DIV] = _urlDividends, _rUrl2[_ChartType["default"].CHART] = _urlChart, _rUrl2[_ChartType["default"].COM] = _crUrlType1, _rUrl2[_ChartType["default"].STA] = _crUrlType1, _rUrl2);
 
 var IexApi = {
   getRequestUrl: function getRequestUrl(option) {
@@ -54,7 +54,14 @@ var IexApi = {
 
     return _toUrl(option) + ("?token=" + apiKey);
   },
-  checkResponse: function checkResponse() {
+  checkResponse: function checkResponse(json) {
+    if (!json) {
+      throw {
+        errCaption: "Error",
+        message: 'Response is empty.'
+      };
+    }
+
     return true;
   }
 };

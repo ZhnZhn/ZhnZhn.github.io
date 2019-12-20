@@ -104,7 +104,8 @@ var CompItemType = {
   //SECTOR: 'SECTOR',
   COIN_INFO: 'COIN_INFO',
   TABLE: 'TABLE',
-  ALPHA_PERF: 'ALPHA_PERF'
+  ALPHA_PERF: 'ALPHA_PERF',
+  FLEX_TOKENS: 'FLEX_TOKENS'
 };
 exports.CompItemType = CompItemType;
 //# sourceMappingURL=Type.js.map

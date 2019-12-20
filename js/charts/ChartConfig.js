@@ -33,6 +33,8 @@ var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
 var _WithIndicatorConfig = _interopRequireDefault(require("./WithIndicatorConfig"));
 
+var _WithMarkers = _interopRequireDefault(require("./WithMarkers"));
+
 var _WithPieConfig = _interopRequireDefault(require("./WithPieConfig"));
 
 var _WithStackedAreaConfig = _interopRequireDefault(require("./WithStackedAreaConfig"));
@@ -45,7 +47,12 @@ var _WithTreeMapConfig = _interopRequireDefault(require("./WithTreeMapConfig"));
 //import HighchartsTreemap from 'highcharts/lib/modules/treemap';
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
-var merge = _highcharts["default"].merge;
+var _merge = _highcharts["default"].merge;
+var _assign = Object.assign;
+
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
 
 var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data, zhSeriaId) {
   return {
@@ -57,7 +64,7 @@ var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data, zhSe
   };
 };
 
-var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], {}, _WithPieConfig["default"], {}, _WithStackedAreaConfig["default"], {}, _WithStackedColumnConfig["default"], {}, _WithTreeMapConfig["default"], {
+var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], {}, _WithMarkers["default"], {}, _WithPieConfig["default"], {}, _WithStackedAreaConfig["default"], {}, _WithStackedColumnConfig["default"], {}, _WithTreeMapConfig["default"], {
   init: function init() {
     (0, _highchartsMore["default"])(_highcharts["default"]);
     (0, _treemap["default"])(_highcharts["default"]);
@@ -68,7 +75,7 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
     _highcharts["default"].setOptions(_ChartTheme["default"]);
   },
   seriaOption: function seriaOption(color, option) {
-    return Object.assign({
+    return _assign({
       type: 'line',
       visible: false,
       color: color,
@@ -79,7 +86,7 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
     }, option);
   },
   setSerieData: function setSerieData(config, data, index, name, options) {
-    config.series[index] = Object.assign({
+    config.series[index] = _assign({
       type: 'area',
       name: name,
       data: data,
@@ -110,14 +117,8 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
   }
 });
 
-ChartConfig.fnNumberFormat = function (value) {
-  var arrSplit = (value + '').split('.'),
-      decimal = arrSplit[1] ? arrSplit[1].length : 0;
-  return _highcharts["default"].numberFormat(value, decimal, '.', ' ');
-};
-
 ChartConfig.fBaseAreaConfig = function (options) {
-  var config = _highcharts["default"].merge(_Chart["default"].fBaseConfig(options), {
+  var config = _merge(_Chart["default"].fBaseConfig(options), {
     chart: {
       zoomType: 'xy',
       resetZoomButton: _Chart["default"].fResetZoomButton({
@@ -131,12 +132,12 @@ ChartConfig.fBaseAreaConfig = function (options) {
     zhDetailCharts: []
   });
 
-  config.xAxis = Object.assign(_Chart["default"].fXAxisOpposite(config.xAxis), {
+  config.xAxis = _assign(_Chart["default"].fXAxisOpposite(config.xAxis), {
     events: {
       afterSetExtremes: _ChartFn["default"].zoomIndicatorCharts
     }
   });
-  config.yAxis = Object.assign(config.yAxis, {
+  config.yAxis = _assign(config.yAxis, {
     lineWidth: 0,
     tickLength: 0,
     offset: 4,
@@ -152,97 +153,6 @@ ChartConfig.fBaseAreaConfig = function (options) {
   return config;
 };
 
-ChartConfig.fMarkerExDividend = function (color, dataLabelsY) {
-  if (color === void 0) {
-    color = _Color["default"].EX_DIVIDEND;
-  }
-
-  if (dataLabelsY === void 0) {
-    dataLabelsY = 32;
-  }
-
-  return {
-    y: 0,
-    exValue: 0.5,
-    marker: {
-      symbol: 'circle',
-      fillColor: color,
-      lineColor: color,
-      radius: 6,
-      states: {
-        hover: {
-          enable: true,
-          fillColor: _Color["default"].PLOT,
-          lineColor: color,
-          lineWidth: 2,
-          radius: 6
-        }
-      }
-    },
-    dataLabels: {
-      enabled: true,
-      inside: true,
-      color: color,
-      style: {
-        fill: color,
-        stroke: color,
-        color: color,
-        fontSize: '12px',
-        fontWeight: 'normal',
-        textShadow: 'none',
-        textOutline: '0px transparent'
-      },
-      crop: false,
-      overflow: 'none',
-      y: dataLabelsY,
-      formatter: function formatter() {
-        return this.point.exValue;
-      }
-    }
-  };
-};
-
-ChartConfig.fMarkerSplitRatio = function () {
-  var point = ChartConfig.fMarkerExDividend(_Color["default"].SPLIT_RATIO);
-
-  point.dataLabels.formatter = function () {
-    return this.point.splitRatio;
-  };
-
-  return point;
-};
-/*
-const _fScatterSeria = function(color, pointFormatter, data, zhSeriaId){
-  return {
-    type: 'scatter',
-    color: color,
-    tooltip : Chart.fTooltip(pointFormatter),
-    data : data,
-    zhSeriaId : zhSeriaId
-  }
-}
-*/
-
-/*
-ChartConfig.fExDividendSeria = function(data, chartId){
-  return _fScatterSeria(
-    COLOR.EX_DIVIDEND,
-    Tooltip.exDividend,
-    data,
-    chartId + '_ExDivident'
-  );
-}
-ChartConfig.fSplitRatioSeria = function(data, chartId){
-  return _fScatterSeria(
-    COLOR.SPLIT_RATIO,
-    Tooltip.splitRatio,
-    data,
-    chartId + '_SplitRatio'
-  );
-}
-*/
-
-
 ChartConfig.fSeries = function (option) {
   if (option === void 0) {
     option = {};
@@ -250,11 +160,10 @@ ChartConfig.fSeries = function (option) {
 
   var _option = option,
       seriaType = _option.seriaType,
-      _type = typeof seriaType === 'string' ? seriaType.toLowerCase() : 'spline';
+      _type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline';
 
-  return merge(false, {
+  return _merge(false, {
     type: _type,
-    //type: 'spline',
     lineWidth: 1,
     tooltip: _Chart["default"].fTooltip(_Tooltip["default"].fnBasePointFormatter)
   }, option);

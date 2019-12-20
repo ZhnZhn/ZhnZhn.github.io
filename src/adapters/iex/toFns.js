@@ -1,5 +1,7 @@
-import AdapterFn from '../AdapterFn'
 import CT from './ChartType'
+
+const _LOCALE = (navigator || {}).language;
+const _isNumber = n => typeof n === 'number';
 
 const _calcScatterY = (chart, isMin) => {
   const { max, min } = chart.yAxis[0]
@@ -11,17 +13,20 @@ const _calcScatterY = (chart, isMin) => {
 };
 
 const toFns = {
-  crZhConfig: (option) => {
-    const { value, dataSource } = option
-        , id = AdapterFn.crId();
-    return {
-      id, key: id,
-      itemCaption: value || id,
-      isWithoutAdd: true,
-      isWithLegend: false,
-      dataSource
-    };
-  },
+  toStr: n => _isNumber(n)
+    ? n.toLocaleString(_LOCALE)
+    : '',
+  toPerc: n => _isNumber(n)
+     ? n.toLocaleString(_LOCALE, { style: 'percent', minimumFractionDigits: 2})
+     : '',
+
+  crZhConfig: ({ key, value, dataSource }) => ({
+    key, id: key,
+    itemCaption: value || key,
+    isWithoutAdd: true,
+    isWithLegend: false,
+    dataSource
+  }),
 
   crToSeria: ({ chart, seria, caption, color, option }) => {
     const { dfType } = option;

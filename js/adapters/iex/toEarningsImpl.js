@@ -21,9 +21,24 @@ var C = {
   COLOR_PLUS: '#4caf50',
   COLOR_MINUS: '#f44336'
 };
+var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    toFloatOrEmpty = _AdapterFn["default"].toFloatOrEmpty;
+var _isArr = Array.isArray;
+var _assign = Object.assign;
+
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number';
+};
 
 var _markerColor = function _markerColor(p) {
-  return typeof p.EPSSurpriseDollar === 'number' && p.EPSSurpriseDollar < 0 ? C.COLOR_MINUS : C.COLOR_PLUS;
+  return _isNumber(p.EPSSurpriseDollar) && p.EPSSurpriseDollar < 0 ? C.COLOR_MINUS : C.COLOR_PLUS;
+};
+
+var _crPoint = function _crPoint(p) {
+  return _assign(_ChartConfig["default"].crMarkerExDividend(_markerColor(p), 0), (0, _extends2["default"])({
+    x: ymdToUTC(p.EPSReportDate),
+    exValue: toFloatOrEmpty(p.actualEPS)
+  }, p));
 };
 
 var toEarningsImpl = {
@@ -35,16 +50,8 @@ var toEarningsImpl = {
   },
   crSeria: function crSeria(json, option) {
     var dfType = option.dfType,
-        data = [];
-
-    if (json && Array.isArray(json[dfType])) {
-      json[dfType].forEach(function (p) {
-        data.push(Object.assign(_ChartConfig["default"].fMarkerExDividend(_markerColor(p), 0), (0, _extends2["default"])({
-          x: _AdapterFn["default"].ymdToUTC(p.EPSReportDate),
-          exValue: p.actualEPS
-        }, p)));
-      });
-    }
+        _jsonData = json && json[dfType],
+        data = _isArr(_jsonData) ? _jsonData.map(_crPoint) : [];
 
     return (0, _ConfigBuilder["default"])().scatterSeria(_Tooltip["default"].eps, {
       data: data

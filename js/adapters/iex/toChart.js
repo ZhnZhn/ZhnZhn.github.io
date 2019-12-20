@@ -15,9 +15,9 @@ var valueMoving = _AdapterFn["default"].valueMoving,
     stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend;
 var toSeriesData = _AdapterStockFn["default"].toSeriesData;
 
-var _crZhConfig = function _crZhConfig(id, option) {
-  var one = option.one,
-      dataSource = option.dataSource;
+var _crZhConfig = function _crZhConfig(id, _ref) {
+  var one = _ref.one,
+      dataSource = _ref.dataSource;
   return {
     dataSource: dataSource,
     id: id,
@@ -38,9 +38,9 @@ var _crInfo = function _crInfo(title) {
   };
 };
 
-var _crId = function _crId(_ref) {
-  var one = _ref.one,
-      two = _ref.two;
+var _crId = function _crId(_ref2) {
+  var one = _ref2.one,
+      two = _ref2.two;
   return one + '_' + two;
 };
 

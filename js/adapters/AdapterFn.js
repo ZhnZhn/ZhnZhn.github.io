@@ -38,6 +38,10 @@ var _fIsNumber = function _fIsNumber(pn) {
   };
 };
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var _compareArrByIndex = function _compareArrByIndex(index) {
   return function (arrA, arrB) {
     if (arrA[index] < arrB[index]) return -1;else if (arrA[index] === arrB[index]) return 0;else return 1;
@@ -60,6 +64,14 @@ var _getValue = function _getValue(point) {
   } else {
     return point && point.y != null && !_isNaN(point.y) ? point.y : '0.0';
   }
+};
+
+var _fToFloatOr = function _fToFloatOr(dfValue) {
+  return function (str) {
+    var _v = parseFloat(str);
+
+    return _isNaN(_v) ? dfValue : _v;
+  };
 };
 
 var AdapterFn = {
@@ -138,11 +150,8 @@ var AdapterFn = {
     return typeof v === 'number' && !isNaN(v) || v === null;
   },
   isYNumber: _fIsNumber('y'),
-  toFloatOrNull: function toFloatOrNull(str) {
-    var _v = parseFloat(str);
-
-    return _isNaN(_v) ? null : _v;
-  },
+  toFloatOrNull: _fToFloatOr(null),
+  toFloatOrEmpty: _fToFloatOr(''),
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
@@ -232,6 +241,14 @@ var AdapterFn = {
   },
   crItemLink: function crItemLink(caption, itemUrl) {
     return "<p>\n    <a href=\"" + itemUrl + "\" style=\"padding-top: 4px;\">" + caption + "</a>\n  </p>";
+  },
+  throwIfSeriesNotSupported: function throwIfSeriesNotSupported(adapter) {
+    if (!_isFn(adapter.toSeries)) {
+      throw {
+        errCaption: "Action Error",
+        message: "Load to series for this type isn't supported."
+      };
+    }
   }
 };
 var _default = AdapterFn;

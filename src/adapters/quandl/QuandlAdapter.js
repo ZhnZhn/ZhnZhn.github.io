@@ -81,7 +81,7 @@ const _fnAddSplitRatio = function(splitRationIndex, result){
         , splitRatio = parseFloat(point[splitRationIndex].toFixed(2))
         , price = point[yPointIndex];
 
-    dataSplitRatio.push(_assign(ChartConfig.fMarkerSplitRatio(), {x, splitRatio, price}));
+    dataSplitRatio.push(_assign(ChartConfig.crMarkerSplitRatio(), {x, splitRatio, price}));
   }
   return result;
 }
@@ -95,7 +95,7 @@ const _fnAddExDividend = function(exDividendIndex, result){
            , exValue = point[exDividendIndex]
            , price = point[yPointIndex]
            , marker = _assign(
-                ChartConfig.fMarkerExDividend(),
+                ChartConfig.crMarkerExDividend(),
                 { x, exValue, price }
              );
        if (!QuandlFn2.isPrevDateAfter(dataExDividend, x , 14)) {

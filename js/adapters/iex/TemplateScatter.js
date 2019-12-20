@@ -9,17 +9,21 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _toFns = _interopRequireDefault(require("./toFns"));
 
-var TITLE = "Source: IEX Platform";
+var TITLE = "Source: IEX Cloud";
 
-var Scatter = function Scatter(impl) {
-  if (!(this instanceof Scatter)) {
-    return new Scatter(impl);
+var TemplateScatter = function TemplateScatter(impl) {
+  if (!(this instanceof TemplateScatter)) {
+    return new TemplateScatter(impl);
   }
 
   this.impl = impl;
 };
 
-Scatter.prototype = Object.assign(Scatter.prototype, {
+Object.assign(TemplateScatter.prototype, {
+  crKey: function crKey(option) {
+    option.key = option.value;
+    return option.value;
+  },
   toConfig: function toConfig(json, option) {
     var _this$impl = this.impl,
         crSubtitle = _this$impl.crSubtitle,
@@ -46,6 +50,6 @@ Scatter.prototype = Object.assign(Scatter.prototype, {
     });
   }
 });
-var _default = Scatter;
+var _default = TemplateScatter;
 exports["default"] = _default;
-//# sourceMappingURL=Scatter.js.map
+//# sourceMappingURL=TemplateScatter.js.map

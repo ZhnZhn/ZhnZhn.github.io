@@ -2,39 +2,37 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import STYLE from '../styles/DialogStyles'
 
-const CL = {
-  ELL: 'ellipsis'
-};
+const CL_ELL =  'ellipsis';
 
 const S = {
-  CAPTION : {
-    display : 'inline-block',
-    width : 380,
-    paddingLeft : 10,
-    color : '#F44336',
+  ROW_CAPTION: {
+    display: 'flex',
+    margin: 5,
+    lineHeight: 2,
     fontSize: '18px',
-    fontWeight : 'bold',
-    lineHeight : 2
+    fontWeight : 'bold'
   },
-  ITEM_ID : {
-    width: 120,
+  CAPTION: {
+    display: 'inline-block',
+    color: '#f44336',
+    paddingLeft: 8,
+    paddingRight: 10
+  },
+  ITEM_ID: {
     color: '#a487d4',
-    fontWeight : 'bold',
-    verticalAlign: 'bottom'
+    width: 140
   },
   DESCR: {
     color: 'gray',
-    width: 380,
-    paddingLeft: 10,
+    paddingLeft: 12,
     paddingRight: 8,
-    fontWeight: 'bold',
     lineHeight: 1.4,
+    fontWeight: 'bold',
     whiteSpace: 'pre-line',
     wordWrap: 'break-word'
   }
-}
+};
 
 class AlertDialog extends Component{
   /*
@@ -66,23 +64,21 @@ class AlertDialog extends Component{
         isShow={isShow}
         onClose={onClose}
       >
-         <div style={STYLE.rowDiv}>
+         <div style={S.ROW_CAPTION}>
             <span style={S.CAPTION}>
               {_caption}
-              <span
-                className={CL.ELL}
-                style={S.ITEM_ID}
-                title={alertItemId}
-              >
-                {alertItemId}
-              </span>
+            </span>
+            <span
+              className={CL_ELL}
+              style={S.ITEM_ID}
+              title={alertItemId}
+            >
+              {alertItemId}
             </span>
          </div>
-         <div style={STYLE.rowDiv}>
-            <p style={S.DESCR}>
-              {alertDescr}
-            </p>
-         </div>
+         <p style={S.DESCR}>
+           {alertDescr}
+         </p>
       </ModalDialog>
     );
   }

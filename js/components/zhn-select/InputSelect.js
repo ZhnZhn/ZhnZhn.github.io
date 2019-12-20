@@ -7,8 +7,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
@@ -19,25 +17,14 @@ var _ArrowCell = _interopRequireDefault(require("./ArrowCell"));
 
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
 
+var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
+
+var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
+
+var _CL = _interopRequireDefault(require("./CL"));
+
 //import PropTypes from 'prop-types'
 var MAX_WITHOUT_ANIMATION = 800;
-var CL_ROOT = 'zhn-select';
-var CL = {
-  ROOT: CL_ROOT,
-  INPUT: CL_ROOT + "__input",
-  SPINNER: CL_ROOT + "__spinner",
-  SPINNER_FAILED: CL_ROOT + "__spinner--failed",
-  INPUT_HR: CL_ROOT + "__input__hr",
-  OPTIONS: CL_ROOT + "__options",
-  OPTIONS_DIV: CL_ROOT + "__options__div",
-  OPTIONS_ROW: CL_ROOT + "__row",
-  OPTIONS_ROW_ACTIVE: CL_ROOT + "__row--active",
-  FOOTER: CL_ROOT + "__footer",
-  FOOTER_INDEX: CL_ROOT + "__footer__index",
-  FOOTER_BTS: CL_ROOT + "__footer__bts",
-  FOOTER_MARGIN: CL_ROOT + "__footer--margin",
-  NOT_SELECTED: 'not-selected'
-};
 var INPUT_PREFIX = 'From input:';
 
 var _fnNoItem = function _fnNoItem(propCaption, inputValue, isWithInput) {
@@ -55,12 +42,21 @@ var _toItem = function _toItem(item, propCaption) {
   return _ref2 = {}, _ref2[propCaption] = 'From Input', _ref2.value = item.inputValue, _ref2;
 };
 
-var _crWidth = function _crWidth(width, style) {
+var _crWidthStyle = function _crWidthStyle(width, style) {
   return width ? ('' + width).indexOf('%') !== -1 ? (0, _extends2["default"])({}, style, {
     width: width
   }) : (0, _extends2["default"])({}, style, {
     width: width + 'px'
   }) : null;
+};
+
+var _crFooterIndex = function _crFooterIndex(_ref3) {
+  var options = _ref3.options,
+      initialOptions = _ref3.initialOptions;
+  return {
+    _nFiltered: options[0] && options[0].value !== 'noresult' ? options.length : 0,
+    _nAll: initialOptions ? initialOptions.length : 0
+  };
 };
 
 var S = {
@@ -71,14 +67,23 @@ var S = {
     display: 'none'
   },
   ARROW_SHOW: {
-    borderColor: '#1B75BB transparent transparent'
+    borderColor: '#1b75bb transparent transparent'
   }
 };
 
-var ItemOptionDf = function ItemOptionDf(_ref3) {
-  var item = _ref3.item,
-      propCaption = _ref3.propCaption;
-  return _react["default"].createElement("span", null, item[propCaption]);
+var _crInitialStateFromProps = function _crInitialStateFromProps(_ref4) {
+  var optionName = _ref4.optionName,
+      optionNames = _ref4.optionNames,
+      options = _ref4.options;
+  return {
+    value: '',
+    isShowOption: false,
+    initialOptions: options,
+    options: options,
+    optionNames: optionNames || optionName || '',
+    isValidDomOptionsCache: false,
+    isLocalMode: false
+  };
 };
 
 var InputSelect =
@@ -110,20 +115,22 @@ function (_Component) {
      onLoadOption: PropTypes.func
   }
   */
-  function InputSelect(props) {
+  function InputSelect(_props) {
     var _this;
 
-    _this = _Component.call(this, props) || this;
+    _this = _Component.call(this, _props) || this;
 
-    _this._setStateToInit = function (options) {
+    _this._initFromProps = function (_ref5) {
+      var propCaption = _ref5.propCaption;
+      _this.domOptionsCache = null;
       _this.indexActiveOption = 0;
+      _this.propCaption = propCaption;
+    };
 
-      _this.setState({
-        value: '',
-        isShowOption: false,
-        options: options,
-        isValidDomOptionsCache: false
-      });
+    _this._setStateToInit = function (props) {
+      _this._initFromProps(props);
+
+      _this.setState(_crInitialStateFromProps(props));
     };
 
     _this._getActiveItemComp = function () {
@@ -132,7 +139,7 @@ function (_Component) {
 
     _this._decorateActiveRowComp = function (comp) {
       if (comp) {
-        comp.classList.add(CL.OPTIONS_ROW_ACTIVE);
+        comp.classList.add(_CL["default"].OPTIONS_ROW_ACTIVE);
       }
 
       if (_this.indexNode) {
@@ -141,17 +148,17 @@ function (_Component) {
     };
 
     _this._undecorateActiveRowComp = function (comp) {
-      var _comp = !comp ? _this._getActiveItemComp() : comp;
+      var _comp = comp || _this._getActiveItemComp();
 
       if (_comp) {
-        _comp.classList.remove(CL.OPTIONS_ROW_ACTIVE);
+        _comp.classList.remove(_CL["default"].OPTIONS_ROW_ACTIVE);
       }
     };
 
     _this._makeVisibleActiveRowComp = function (comp) {
       if (comp) {
-        var offsetTop = comp.offsetTop;
-        var scrollTop = _this.optionsComp.scrollTop;
+        var offsetTop = comp.offsetTop,
+            scrollTop = _this.optionsComp.scrollTop;
 
         if (offsetTop - scrollTop > 70) {
           _this.optionsComp.scrollTop += offsetTop - scrollTop - 70;
@@ -166,29 +173,32 @@ function (_Component) {
     _this._filterOptions = function (options, value) {
       var valueFor = value.toLowerCase(),
           _caption = _this.propCaption;
-      return options.filter(function (option, i) {
+      return options.filter(function (option) {
         return option[_caption].toLowerCase().indexOf(valueFor) !== -1;
       });
     };
 
-    _this._handleInputChange = function (event) {
+    _this._crFilterOptions = function (token, tokenLn, valueLn) {
+      var _this$state = _this.state,
+          options = _this$state.options,
+          initialOptions = _this$state.initialOptions,
+          _options = tokenLn > valueLn ? options : initialOptions,
+          _arr = _this._filterOptions(_options, token);
+
+      if (_arr.length === 0) {
+        _arr.push(_fnNoItem(_this.propCaption, token, _this.props.isWithInput));
+      }
+
+      return _arr;
+    };
+
+    _this._hInputChange = function (event) {
       var token = event.target.value,
           tokenLn = token.length,
           value = _this.state.value,
           valueLn = value.length;
-      var arr = [];
 
       if (tokenLn !== valueLn) {
-        if (tokenLn > valueLn) {
-          arr = _this._filterOptions(_this.state.options, token);
-        } else if (tokenLn < valueLn) {
-          arr = _this._filterOptions(_this.props.options, token);
-        }
-
-        if (arr.length === 0) {
-          arr.push(_fnNoItem(_this.propCaption, token, _this.props.isWithInput));
-        }
-
         _this._undecorateActiveRowComp();
 
         _this.indexActiveOption = 0;
@@ -197,7 +207,7 @@ function (_Component) {
           value: token,
           isShowOption: true,
           isValidDomOptionsCache: false,
-          options: arr
+          options: _this._crFilterOptions(token, tokenLn, valueLn)
         });
       }
     };
@@ -274,8 +284,7 @@ function (_Component) {
 
         var nextComp = _this._getActiveItemComp();
 
-        _this._decorateActiveRowComp(nextComp); //this.indexNode.innerHTML = this.indexActiveOption
-
+        _this._decorateActiveRowComp(nextComp);
 
         var offsetTop = nextComp.offsetTop;
         var scrollTop = _this.optionsComp.scrollTop;
@@ -286,13 +295,7 @@ function (_Component) {
       }
     };
 
-    _this._handleInputKeyDown = function (event) {
-      //tab && isShowOptions
-      if (event.keyCode === 9 && _this.state.isShowOption) {
-        event.preventDefault();
-        return;
-      }
-
+    _this._hInputKeyDown = function (event) {
       switch (event.keyCode) {
         // enter
         case 13:
@@ -309,11 +312,9 @@ function (_Component) {
               if (item.value !== 'noresult') {
                 _this.props.onSelect(item);
               } else {
-                if (!_this.props.isWithInput) {
-                  _this.props.onSelect(undefined);
-                } else {
-                  _this.props.onSelect(_toItem(item, _this.propCaption));
-                }
+                var _item = _this.props.isWithInput ? _toItem(item, _this.propCaption) : void 0;
+
+                _this.props.onSelect(_item);
               }
             }
 
@@ -333,9 +334,9 @@ function (_Component) {
             } else {
               _this._undecorateActiveRowComp();
 
-              _this._setStateToInit(_this.props.options);
+              _this._setStateToInit(_this.props);
 
-              _this.props.onSelect(undefined);
+              _this.props.onSelect(void 0);
             }
 
             break;
@@ -364,12 +365,11 @@ function (_Component) {
           break;
 
         default:
-          return undefined;
+          return;
       }
     };
 
-    _this._handleToggleOptions = function () {
-      //this.setState({ isShowOption: !this.state.isShowOption });
+    _this._hToggleOptions = function () {
       if (_this.state.isShowOption) {
         _this.setState({
           isShowOption: false
@@ -379,7 +379,7 @@ function (_Component) {
       }
     };
 
-    _this._handleClickItem = function (item, index, event) {
+    _this._hClickItem = function (item, index) {
       _this._undecorateActiveRowComp();
 
       _this.indexActiveOption = index;
@@ -392,88 +392,82 @@ function (_Component) {
       _this.props.onSelect(item);
     };
 
-    _this._refIndexNode = function (n) {
-      return _this.indexNode = n;
-    };
-
-    _this._renderOptionsFooter = function (nFiltered, nAll) {
-      return _react["default"].createElement("div", {
-        className: CL.FOOTER + " " + CL.NOT_SELECTED
-      }, _react["default"].createElement("span", {
-        className: CL.FOOTER_INDEX
-      }, _react["default"].createElement("span", {
-        ref: _this._refIndexNode
-      }, _this.indexActiveOption), _react["default"].createElement("span", null, ": ", nFiltered, ": ", nAll)), _react["default"].createElement("span", {
-        className: CL.FOOTER_BTS
-      }, _react["default"].createElement(_ButtonCircle["default"], {
-        className: CL.FOOTER_MARGIN,
-        caption: "Dn",
-        onClick: _this._stepDownOption
-      }), _react["default"].createElement(_ButtonCircle["default"], {
-        className: CL.FOOTER_MARGIN,
-        caption: "Up",
-        onClick: _this._stepUpOption
-      }), _react["default"].createElement(_ButtonCircle["default"], {
-        caption: "CL",
-        onClick: _this.clearInput
-      })));
-    };
-
     _this._refOptionsComp = function (c) {
       return _this.optionsComp = c;
     };
 
-    _this.renderOptions = function () {
-      var _this$props = _this.props,
-          rootOptionsStyle = _this$props.rootOptionsStyle,
-          ItemOptionComp = _this$props.ItemOptionComp,
-          _this$state = _this.state,
-          isShowOption = _this$state.isShowOption,
-          options = _this$state.options,
-          isValidDomOptionsCache = _this$state.isValidDomOptionsCache,
+    _this._refIndexNode = function (n) {
+      return _this.indexNode = n;
+    };
+
+    _this._createDomOptionsWithCache = function () {
+      var ItemOptionComp = _this.props.ItemOptionComp,
+          _this$state2 = _this.state,
+          options = _this$state2.options,
+          isValidDomOptionsCache = _this$state2.isValidDomOptionsCache,
           _propCaption = _this.propCaption;
 
       var _domOptions;
 
       if (options) {
         if (!isValidDomOptionsCache) {
+          /*eslint-disable jsx-a11y/click-events-have-key-events*/
           _domOptions = options.map(function (item, index) {
             return _react["default"].createElement("div", {
-              //role="option"
-              //aria-selected={this.indexActiveOption === index}
-              //tabIndex="0"
+              role: "option",
+              "aria-selected": _this.indexActiveOption === index,
+              tabIndex: "0",
               key: index,
-              className: CL.OPTIONS_ROW,
+              className: _CL["default"].OPTIONS_ROW,
               ref: function ref(c) {
                 return _this["v" + index] = c;
               },
-              onClick: _this._handleClickItem.bind((0, _assertThisInitialized2["default"])(_this), item, index)
+              onClick: _this._hClickItem.bind(null, item, index)
             }, _react["default"].createElement(ItemOptionComp, {
               item: item,
               propCaption: _propCaption
             }));
           });
+          /*eslint-enable jsx-a11y/click-events-have-key-events*/
+
           _this.domOptionsCache = _domOptions;
         } else {
           _domOptions = _this.domOptionsCache;
         }
       }
 
-      var width = _this.props.width,
+      return _domOptions;
+    };
+
+    _this.renderOptions = function () {
+      var _this$props = _this.props,
+          rootOptionsStyle = _this$props.rootOptionsStyle,
+          width = _this$props.width,
+          isShowOption = _this.state.isShowOption,
+          _domOptions = _this._createDomOptionsWithCache(),
           _styleOptions = isShowOption ? S.BLOCK : S.NONE,
-          _rootWidthStyle = _crWidth(width, _styleOptions),
-          _nFiltered = options[0] && options[0].value !== 'noresult' ? options.length : 0,
-          _nAll = _this.props.options ? _this.props.options.length : 0;
+          _rootWidthStyle = _crWidthStyle(width, _styleOptions),
+          _crFooterIndex2 = _crFooterIndex(_this.state),
+          _nFiltered = _crFooterIndex2._nFiltered,
+          _nAll = _crFooterIndex2._nAll;
 
       return _react["default"].createElement("div", {
-        className: CL.OPTIONS,
+        className: _CL["default"].OPTIONS,
         style: _rootWidthStyle,
         "data-scrollable": true
       }, _react["default"].createElement("div", {
         ref: _this._refOptionsComp,
-        className: CL.OPTIONS_DIV,
+        className: _CL["default"].OPTIONS_DIV,
         style: (0, _extends2["default"])({}, rootOptionsStyle, {}, _rootWidthStyle)
-      }, _domOptions), _this._renderOptionsFooter(_nFiltered, _nAll));
+      }, _domOptions), _react["default"].createElement(_OptionsFooter["default"], {
+        ref: _this._refIndexNode,
+        indexActiveOption: _this.indexActiveOption,
+        nAll: _nAll,
+        nFiltered: _nFiltered,
+        onStepUp: _this._stepUpOption,
+        onStepDown: _this._stepDownOption,
+        onClear: _this.clearInput
+      }));
     };
 
     _this._refArrowCell = function (c) {
@@ -487,31 +481,29 @@ function (_Component) {
           placeholder = _this$props2.placeholder,
           optionName = _this$props2.optionName,
           onLoadOption = _this$props2.onLoadOption,
-          _this$state2 = _this.state,
-          isShowOption = _this$state2.isShowOption,
-          optionNames = _this$state2.optionNames;
+          _this$state3 = _this.state,
+          isShowOption = _this$state3.isShowOption,
+          optionNames = _this$state3.optionNames;
 
       var _placeholder, _afterInputEl;
 
       if (!isLoading && !isLoadingFailed) {
-        var _arrowStyle = isShowOption ? S.ARROW_SHOW : null;
-
-        _placeholder = placeholder ? placeholder : "Select " + optionName + "...";
+        _placeholder = placeholder || "Select " + optionName + "...";
         _afterInputEl = _react["default"].createElement(_ArrowCell["default"], {
           ref: _this._refArrowCell,
-          arrowStyle: _arrowStyle,
-          onClick: _this._handleToggleOptions
+          arrowStyle: isShowOption ? S.ARROW_SHOW : void 0,
+          onClick: _this._hToggleOptions
         });
       } else if (isLoading) {
         _placeholder = "Loading " + optionNames + "...";
         _afterInputEl = _react["default"].createElement("span", {
-          className: CL.SPINNER,
+          className: _CL["default"].SPINNER,
           "data-loader": "circle"
         });
       } else if (isLoadingFailed) {
         _placeholder = "Loading " + optionNames + " Failed";
         _afterInputEl = _react["default"].createElement(_ButtonCircle["default"], {
-          className: CL.SPINNER_FAILED,
+          className: _CL["default"].SPINNER_FAILED,
           "data-loader": "circle-failed",
           onClick: onLoadOption
         });
@@ -528,61 +520,39 @@ function (_Component) {
     };
 
     _this.clearInput = function () {
-      var _this$props3 = _this.props,
-          options = _this$props3.options,
-          onSelect = _this$props3.onSelect;
+      var onSelect = _this.props.onSelect;
 
       _this._undecorateActiveRowComp();
 
-      onSelect(undefined);
+      onSelect(void 0);
 
-      _this._setStateToInit(options);
-
-      _this.setState({
-        isShowOption: false
-      });
+      _this._setStateToInit(_this.props);
     };
 
-    _this.domOptionsCache = null;
-    _this.indexActiveOption = 0;
-    _this.propCaption = props.propCaption;
-    var _optionName = props.optionName,
-        _optionNames = props.optionNames,
-        _options = props.options;
-    _this.state = {
-      value: '',
-      isShowOption: false,
-      options: _options,
-      optionNames: _optionNames || _optionName || '',
-      isValidDomOptionsCache: false,
-      isLocalMode: false
-    };
+    _this._initFromProps(_props);
+
+    _this.state = _crInitialStateFromProps(_props);
     return _this;
   }
 
+  InputSelect.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
+    //Init state for new options from props
+    if (props.options !== state.initialOptions) {
+      return _crInitialStateFromProps(props);
+    }
+
+    return null;
+  };
+
   var _proto = InputSelect.prototype;
 
-  _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) {
-      if (this.props.options !== nextProps.options) {
-        //New options come from Parent - Clear domCache, Init State
-        this._setStateToInit(nextProps.options);
-      }
-    }
-  };
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+    // Init from props for new options from props
+    if (prevState.initialOptions !== this.state.initialOptions) {
+      this._initFromProps(this.props);
+    } //Decorate Active Option
 
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps) {
-      nextState.isLocalMode = false;
-    } else {
-      nextState.isLocalMode = true;
-    }
 
-    return true;
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate() {
-    //Decorate Active Option
     if (this.state.isShowOption) {
       var comp = this._getActiveItemComp();
 
@@ -593,39 +563,37 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this$props4 = this.props,
-        rootStyle = _this$props4.rootStyle,
-        width = _this$props4.width,
-        _this$state3 = this.state,
-        value = _this$state3.value,
-        isLocalMode = _this$state3.isLocalMode,
-        isShowOption = _this$state3.isShowOption,
-        _rootWidthStyle = _crWidth(width, rootStyle),
+    var _this$props3 = this.props,
+        rootStyle = _this$props3.rootStyle,
+        width = _this$props3.width,
+        _this$state4 = this.state,
+        value = _this$state4.value,
+        isLocalMode = _this$state4.isLocalMode,
+        isShowOption = _this$state4.isShowOption,
+        _rootWidthStyle = _crWidthStyle(width, rootStyle),
         _this$_crAfterInputEl = this._crAfterInputEl(),
         afterInputEl = _this$_crAfterInputEl.afterInputEl,
-        placeholder = _this$_crAfterInputEl.placeholder,
-        _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
+        placeholder = _this$_crAfterInputEl.placeholder;
 
     return _react["default"].createElement("div", {
-      className: CL.ROOT,
+      className: _CL["default"].ROOT,
       style: _rootWidthStyle
     }, _react["default"].createElement("input", {
       ref: this._refDomInputText,
+      className: _CL["default"].INPUT,
       type: "text",
-      name: "select" //autoComplete="new-select"
-      ,
+      name: "select",
       autoComplete: "off",
       autoCorrect: "off",
       autoCapitalize: "off",
       spellCheck: false,
       value: value,
-      className: CL.INPUT,
       placeholder: placeholder,
-      onChange: this._handleInputChange,
-      onKeyDown: this._handleInputKeyDown
+      onChange: this._hInputChange,
+      onKeyDown: this._hInputKeyDown
     }), afterInputEl, _react["default"].createElement("hr", {
-      className: CL.INPUT_HR
-    }), _domOptions);
+      className: _CL["default"].INPUT_HR
+    }), (isLocalMode || isShowOption) && this.renderOptions());
   };
 
   _proto.focusInput = function focusInput() {
@@ -641,7 +609,7 @@ function (_Component) {
 
 InputSelect.defaultProps = {
   propCaption: 'caption',
-  ItemOptionComp: ItemOptionDf,
+  ItemOptionComp: _ItemOptionDf["default"],
   options: [],
   optionName: '',
   optionNames: '',
