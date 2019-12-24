@@ -8,9 +8,11 @@ var _mathFn = _interopRequireDefault(require("../mathFn"));
 
 var _Type = require("../../constants/Type");
 
-var calcPercent = _mathFn["default"].calcPercent,
+var roundBy = _mathFn["default"].roundBy,
+    calcPercent = _mathFn["default"].calcPercent,
     crValueMoving = _mathFn["default"].crValueMoving,
-    toFixed = _mathFn["default"].toFixed;
+    toFixed = _mathFn["default"].toFixed,
+    toFixedNumber = _mathFn["default"].toFixedNumber;
 var PERCENT_0 = '0.00%';
 var PERCENT_100 = '100.00%';
 
@@ -22,6 +24,16 @@ var _fValueMoving = function _fValueMoving(nowValue, prevValue) {
   };
 };
 
+describe('roundBy', function () {
+  var fn = roundBy;
+  test('should return rounded number from string or number by', function () {
+    expect(fn(1.555, 2)).toBe(1.56);
+    expect(fn('1.555', 2)).toBe(1.56);
+    expect(fn(1.005, 2)).toBe(1.01);
+    expect(fn('1.005', 2)).toBe(1.01);
+    expect(fn(0)).toBe(0);
+  });
+});
 describe('calcPercent', function () {
   var fn = calcPercent;
   test('should return str percent with Fixed 2 from Big values', function () {
@@ -108,6 +120,14 @@ describe('toFixed', function () {
     expect(fn('0.1234')).toBe(0.12);
     expect(fn(0.01234)).toBe(0.01);
     expect(fn('0.01234')).toBe(0.01);
+  });
+});
+describe('toFixedNumber', function () {
+  var fn = toFixedNumber;
+  test('should return number rounded depend of value', function () {
+    expect(fn(9.00005)).toBe(9.0001);
+    expect(fn(9000.005)).toBe(9000.01);
+    expect(fn(10000.005)).toBe(10000);
   });
 });
 //# sourceMappingURL=mathFn.test.js.map

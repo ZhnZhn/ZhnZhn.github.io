@@ -54,7 +54,16 @@ var _toBig = function _toBig(bValue, dfValue) {
   }
 };
 
+var _roundBy = function _roundBy(nOrStr, by) {
+  if (by === void 0) {
+    by = 2;
+  }
+
+  return parseFloat((0, _big["default"])(nOrStr).toFixed(by));
+};
+
 var mathFn = {
+  roundBy: _roundBy,
   calcPercent: function calcPercent(_ref) {
     var _ref$bValue = _ref.bValue,
         bValue = _ref$bValue === void 0 ? (0, _big["default"])(0) : _ref$bValue,
@@ -105,11 +114,11 @@ var mathFn = {
     }
 
     if (value < 10) {
-      return Number(value.toFixed(4));
+      return _roundBy(value, 4);
     } else if (value < 10000) {
-      return Number(value.toFixed(2));
+      return _roundBy(value, 2);
     } else {
-      return Number(value.toFixed(0));
+      return _roundBy(value, 0);
     }
   }
 };

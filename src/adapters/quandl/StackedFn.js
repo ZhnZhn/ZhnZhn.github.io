@@ -83,10 +83,13 @@ const _fnInitSeries = function({ items, zhSeriaId, chartType, fSeria }){
 }
 
 
-const _fnCalcPercent = function(bTotal=Big('0.0'), bValue=Big('0.0')){
-  return (!bTotal.eq(Big(0.0)) )
-            ? bValue.times(100).div(bTotal).abs().toFixed(2) + '%' : Big(0.0) + '%';
-}
+const _fnCalcPercent = (
+  bTotal=Big('0.0'),
+  bValue=Big('0.0')
+) => !bTotal.eq(Big(0.0))
+   ? bValue.times(100).div(bTotal).abs().toFixed(2) + '%'
+   : Big(0.0) + '%';
+
 
 const _fnCreateStackedSeries = function({
   jsonData, items100, items90, zhSeriaId, chartType, stacking
@@ -177,7 +180,7 @@ export const fnCreateSparkData = function(jsonData, itemIndex, bYearTotals){
       }
   })
 
-  return { sparkvalues, sparkpercent }
+  return { sparkvalues, sparkpercent };
 }
 
 export const crValueMoving = function(bNowTotal, date, bPrevTotal, dateTo){

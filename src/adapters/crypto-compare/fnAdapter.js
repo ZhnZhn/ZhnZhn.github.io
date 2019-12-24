@@ -2,8 +2,9 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  valueMoving,  
-  volumeColumnPoint
+  valueMoving,
+  volumeColumnPoint,
+  roundBy
 } = AdapterFn;
 
 const _crZhConfig = (option) => {
@@ -26,12 +27,10 @@ const _crInfo = ({ title }) => ({
 
 const _isNumber = v => typeof v === 'number';
 
-const _isHLOC = (p) => {
-  return _isNumber(p.open)
-     && _isNumber(p.high)
-     && _isNumber(p.low)
-     && _isNumber(p.close);
-};
+const _isHLOC = (p) => _isNumber(p.open)
+  && _isNumber(p.high)
+  && _isNumber(p.low)
+  && _isNumber(p.close);
 
 const _addPointTo = (arr, d, value) => {
   if (_isNumber(value)) {
@@ -57,8 +56,8 @@ const _addColumnPointTo = (arr, d, p, volume) => {
 const _addHLPointTo = (arr, d, p) => {
     arr.push({
       x: d,
-      high: parseFloat((p.high - p.close).toFixed(2)),
-      low: parseFloat((p.low - p.close).toFixed(2)),
+      high: roundBy(p.high - p.close, 2),
+      low: roundBy(p.low - p.close, 2),
       open: p.open,
       dayHigh: p.high,
       dayLow: p.low,

@@ -12,6 +12,7 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 var isYNumber = _AdapterFn["default"].isYNumber,
     numberFormat = _AdapterFn["default"].numberFormat,
     crId = _AdapterFn["default"].crId,
+    roundBy = _AdapterFn["default"].roundBy,
     valueMoving = _AdapterFn["default"].valueMoving;
 var TITLE = {
   NST: 'Statisctics Norway: All Items',
@@ -126,6 +127,7 @@ var fnAdapter = {
   isYNumber: isYNumber,
   numberFormat: numberFormat,
   crId: crId,
+  roundBy: roundBy,
   crValueMoving: valueMoving,
   crTitle: function crTitle(option) {
     switch (option.browserType) {

@@ -7,7 +7,10 @@ exports["default"] = void 0;
 
 var _DateUtils = _interopRequireDefault(require("../utils/DateUtils"));
 
+var _mathFn = _interopRequireDefault(require("./mathFn"));
+
 var ymdToUTC = _DateUtils["default"].ymdToUTC;
+var roundBy = _mathFn["default"].roundBy;
 var C = {
   ATH_UP: 'rgba(76, 175, 80, 0.75)',
   ATH_DOWN: 'rgba(244, 67, 54, 0.75)'
@@ -35,13 +38,13 @@ var momAth = function momAth(data) {
       x: x,
       y: mom
     });
-    ath = parseFloat((point[1] - prevPoint[4]).toFixed(4));
+    ath = roundBy(point[1] - prevPoint[4], 4);
     dataAth.push({
       x: x,
       y: ath,
       color: ath > 0 ? C.ATH_UP : C.ATH_DOWN
     });
-    co = parseFloat((point[4] - point[1]).toFixed(4));
+    co = roundBy(point[4] - point[1], 4);
     dataSum.push({
       x: x,
       y: co

@@ -1,8 +1,7 @@
 import Builder from '../charts/ConfigBuilder'
 import Tooltip from '../charts/Tooltip'
 
-import Fn from './AdapterFn'
-
+import fns from './AdapterFn'
 
 const CATEGORIES = [
   '01', '02', '03', '04', '05', '06',
@@ -29,37 +28,35 @@ const C = {
   }
 };
 
-const _getYear = (str) => {
-  return str.split("-")[0];
-}
-const _getMonth = (str) => {
-  return str.split("-")[1];
-}
+const {
+  crValueMoving,
+  roundBy,
+  numberFormat
+} = fns;
+
+const _getYear = str => str.split("-")[0];
+const _getMonth = str => str.split("-")[1];
 
 const _crSeria = (
   name, { type='spline', data, color, isVisible=true }
-) => {
-  return { type, name, data, color, visible: isVisible };
-}
+) => ({
+  type, name, data, color, visible: isVisible
+});
 const _crItem = (
   name, { index, color, isVisible=true }
-) => {
-  return { name, index, color, isVisible };
-}
+) => ({
+   name, index, color, isVisible
+});
 
-const _crPoint = (item) => {
-  return {
-    c: _getMonth(item[0]),
-    y: item[1]
-  };
-}
+const _crPoint = item => ({
+  c: _getMonth(item[0]),
+  y: item[1]
+});
 const _crValuePoint = item => item[1];
-const _crValueYearPoint = item => {
-  return {
-    v: item[1],
-    y: _getYear(item[0])
-  }
-}
+const _crValueYearPoint = item => ({
+  v: item[1],
+  y: _getYear(item[0])
+});
 const _findHighLow = (arr) => {
   let h = { v: Number.NEGATIVE_INFINITY, y: '' },
       l = { v: Number.POSITIVE_INFINITY, y: '' };
@@ -84,17 +81,14 @@ const _crHighLowPoint = (key, arr) => {
 }
 const _calcAvg = (arr) => {
   const sum = arr.reduce((acc, a) => acc + a, 0)
-      , avg = arr.length !== 0
-          ? parseFloat((sum/arr.length).toFixed(4))
-          : 0;
-  return avg;
-}
-const _crAvgPoint = (key, arr) => {
-  return {
-    y: _calcAvg(arr),
-    c: key
-  };
-}
+  return arr.length !== 0
+    ? roundBy(sum/arr.length, 4)
+    : 0;
+};
+const _crAvgPoint = (key, arr) => ({
+  y: _calcAvg(arr),
+  c: key
+});
 
 const _crSeriaData = (data, i, year, crPoint=_crPoint) => {
   const arr=[], max=data.length;
@@ -251,14 +245,14 @@ const _crValueMoving = (nowSeria, prevSeria) => {
           value:bPrevValue,
           date:dateTo
         } = _crValueAndDate(prevSeria, max)
-      , moving = Fn.crValueMoving({
+      , moving = crValueMoving({
             bNowValue,
             bPrevValue
         });
 
   return {
     ...moving, date, dateTo,
-    valueTo: Fn.numberFormat(bPrevValue),
+    valueTo: numberFormat(bPrevValue),
     isDenyToChange: true
   };
 };

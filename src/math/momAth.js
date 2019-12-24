@@ -1,7 +1,9 @@
 
 import dt from '../utils/DateUtils'
+import mathFns from './mathFn'
 
 const { ymdToUTC } = dt;
+const { roundBy }  = mathFns;
 
 const C = {
   ATH_UP: 'rgba(76, 175, 80, 0.75)',
@@ -23,12 +25,12 @@ const momAth = (data) => {
     x = ymdToUTC(point[0])
     mom = point[4] - prevPoint[4]
     dataMom.push({ x: x, y: mom })
-    ath = parseFloat((point[1] - prevPoint[4]).toFixed(4))
+    ath = roundBy(point[1] - prevPoint[4], 4)
     dataAth.push({
       x: x, y: ath,
       color: ath > 0 ? C.ATH_UP : C.ATH_DOWN
     })
-    co = parseFloat((point[4] - point[1]).toFixed(4))
+    co = roundBy(point[4] - point[1], 4)
     dataSum.push({ x: x, y: co })
   }
   return { dataMom, dataAth, dataSum };

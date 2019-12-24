@@ -1,5 +1,8 @@
 
+import compose from '../../utils/compose'
+
 const fnUtil = {
+  compose,
   toUTC: (str) => {
       if (str.indexOf('M') !== -1) {
         const arrDate = str.split('M')
@@ -27,7 +30,7 @@ const fnUtil = {
         , d = new Date(ms);
     return d.getUTCFullYear()
       + "-" + ("0" + (d.getUTCMonth() + 1) ).slice(-2)
-      + "-" + ("0" + d.getUTCDate()).slice(-2);    
+      + "-" + ("0" + d.getUTCDate()).slice(-2);
   }
 }
 

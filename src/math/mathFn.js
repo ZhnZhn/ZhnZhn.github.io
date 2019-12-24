@@ -35,7 +35,10 @@ const _toBig = (bValue, dfValue=0) => {
   }
 };
 
+const _roundBy = (nOrStr, by=2) => parseFloat(Big(nOrStr).toFixed(by));
+
 const mathFn = {
+  roundBy: _roundBy,
 
   calcPercent: ({ bValue=Big(0), bTotal=Big(0) }) => {
     bValue = _toBig(bValue)
@@ -93,11 +96,11 @@ const mathFn = {
       return value;
     }
     if ( value<10 ) {
-      return Number(value.toFixed(4));
+      return _roundBy(value, 4);
     } else if ( value<10000 ) {
-      return Number(value.toFixed(2));
+      return _roundBy(value, 2);
     } else {
-      return Number(value.toFixed(0));
+      return _roundBy(value, 0);
     }
   }
 }

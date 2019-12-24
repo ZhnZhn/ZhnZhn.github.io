@@ -15,27 +15,52 @@ var _fnUtil = _interopRequireDefault(require("./fnUtil"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _toUTC = _fnUtil["default"].toUTC;
+var toUTC = _fnUtil["default"].toUTC,
+    compose = _fnUtil["default"].compose;
 var crDsValuesTimes = _fnAdapter["default"].crDsValuesTimes,
     crChartOption = _fnAdapter["default"].crChartOption;
 var DF_TYPE = 'spline';
+var _isArr = Array.isArray;
 
-var _checkOrder = function _checkOrder(data) {
-  var _isReverse = data.length > 2 && data[0].x > data[1].x;
-
-  return _isReverse ? data.reverse() : data;
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
 };
 
-var _toData = function _toData(values, times) {
-  var _values = Array.isArray(values) ? values : [values];
+var _filterLeadingNulls = function _filterLeadingNulls(data) {
+  var _len = data.length;
+  var i = 0;
 
-  var data = times.map(function (time, i) {
+  for (i; i < _len; i++) {
+    if (data[i].y !== null) break;
+  }
+
+  return data.slice(i);
+};
+
+var _isReverse = function _isReverse(data) {
+  return data.length > 2 && data[0].x > data[1].x;
+};
+
+var _checkOrder = function _checkOrder(data) {
+  return _isReverse(data) ? data.reverse() : data;
+};
+
+var _fCrDataPoint = function _fCrDataPoint(values) {
+  return function (time, i) {
     return {
-      x: _toUTC(time),
-      y: _values[i] ? _values[i].value : null
+      x: toUTC(time),
+      y: values[i] ? values[i].value : null
     };
-  });
-  return _checkOrder(data);
+  };
+};
+
+var _postProcessData = compose(_filterLeadingNulls, _checkOrder);
+
+var _toData = function _toData(values, times) {
+  var _values = _isArr(values) ? values : [values],
+      _crPoint = _fCrDataPoint(_values);
+
+  return _isArr(times) ? _postProcessData(times.map(_crPoint)) : [];
 };
 
 var _crSplineSeria = function _crSplineSeria(data, option) {
@@ -46,7 +71,7 @@ var _crSplineSeria = function _crSplineSeria(data, option) {
   var _option = option,
       seriaType = _option.seriaType,
       seriaColor = _option.seriaColor,
-      _type = typeof seriaType === 'string' ? seriaType.toLowerCase() : DF_TYPE;
+      _type = _isStr(seriaType) ? seriaType.toLowerCase() : DF_TYPE;
 
   return Object.assign(_ChartConfig["default"].fSeries(), {
     type: _type,
@@ -70,12 +95,11 @@ var toArea = {
         values = _crDsValuesTimes.values,
         times = _crDsValuesTimes.times,
         data = _toData(values, times),
-        seria = _crSplineSeria(data, option),
-        config = (0, _ConfigBuilder["default"])().areaConfig({
+        seria = _crSplineSeria(data, option);
+
+    return (0, _ConfigBuilder["default"])().areaConfig({
       spacingTop: 25
     }).addCaption(title, subtitle).clearSeries().addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, crChartOption(ds, data, option))).toConfig();
-
-    return config;
   }
 };
 var _default = toArea;

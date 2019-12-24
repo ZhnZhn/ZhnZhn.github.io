@@ -39,7 +39,7 @@ var _ThemeContext = _interopRequireDefault(require("./hoc/ThemeContext"));
 
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
-var BUILD_DATE = '20-12-2019';
+var BUILD_DATE = '24-12-2019';
 var CL = "component-container";
 
 var AppErc =

@@ -1,4 +1,5 @@
 
+import fns from './fnAdapter'
 import C from './conf'
 
 const fnLegend = {
@@ -8,7 +9,7 @@ const fnLegend = {
         , _points = hm[name]
         , _p = _points[_points.length-1]
         , _ratio = _p
-              ? ' ' + ((_p.y/sum)*100).toFixed(1)+'%'
+              ? ' ' + fns.roundBy((_p.y/sum)*100, 1)+'%'
               : '';
     return {
        ...item,
@@ -24,7 +25,7 @@ const fnLegend = {
            && key.indexOf(C.WORLD) === -1
       ) {
         const points = hm[key];
-        sum += points[points.length-1].y        
+        sum += points[points.length-1].y
       }
     }
     return sum;

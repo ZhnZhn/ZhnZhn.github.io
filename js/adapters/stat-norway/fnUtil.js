@@ -1,8 +1,14 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _compose = _interopRequireDefault(require("../../utils/compose"));
+
 var fnUtil = {
+  compose: _compose["default"],
   toUTC: function toUTC(str) {
     if (str.indexOf('M') !== -1) {
       var arrDate = str.split('M'),

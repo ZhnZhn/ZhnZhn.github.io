@@ -5,8 +5,6 @@
         { "id": "SM_EURONEXT" },
         { "id": "SM_TOKYO" },
         { "id": "SM_WIKI" },
-        { "id": "SM_FREE_US_FUNDAMENTALS" },
-        { "id": "SM_NIKKEI" },
         { "id": "SM_UNICORN_RESEARCH" }
       ]
     },{
@@ -165,46 +163,6 @@
           "dataSource" : "Wiki EOD Stock Prices (Code: WIKI)"
         }
     },
-    "SM_FREE_US_FUNDAMENTALS": {
-        "type" : "SM_FREE_US_FUNDAMENTALS",
-        "menuTitle" : "Free US Fundamentals",
-        "dialogCaption" : "Free US Fundamentals",
-        "chartContainerCaption" : "Quandl: Free US Fundamentals",
-        "dialogType" : "DialogType5",
-        "dialogProps" : {
-          "descrUrl" : "./data/stock-markets/us-fundamentals.html",
-          "nInitFromDate" : 7,
-          "oneCaption" : "Stock",
-          "oneURI" : "./data/stock-markets/wiki.json",
-          "oneJsonProp" : "tickets",
-          "twoCaption" : "Group",
-          "twoURI" : "./data/stock-markets/us-fundamental-indicators.json",
-          "twoJsonProp" : "groups",
-          "threeCaption" : "Indicator",
-          "fnValueType" : "TreeItem",
-          "valueFn" : "RPrefixOneTwoA",
-          "valueFnPrefix" : "SF0",
-          "loadId" : "Q",
-          "isChartType": true,
-          "isPremium" : true,
-          "dataSource" : "Free US Fundamentals (Code: SF0)"
-        }
-    },
-    "SM_NIKKEI" : {
-        "type" : "SM_NIKKEI",
-        "menuTitle" : "Nikkei",
-        "dialogCaption" : "Nikkei",
-        "chartContainerCaption" : "Quandl: Nikkei",
-        "dialogProps" : {
-          "descrUrl" : "./data/stock-markets/nikkei.html",
-          "optionURI" : "./data/stock-markets/nikkei.json",
-          "optionsJsonProp" : "indexes",
-          "valueFn" : "RPrefixOne",
-          "valueFnPrefix" : "NIKKEI",
-          "loadId" : "Q",
-          "dataSource" : "Nikkei (Code: NIKKEI)"
-        }
-    },
     "SM_UNICORN_RESEARCH" : {
       "type" : "SM_UNICORN_RESEARCH",
       "menuTitle" : "Unicorn Research",
@@ -244,9 +202,9 @@
 
     "SM_A_INDICATOR" : {
         "type" : "SM_A_INDICATOR",
-        "menuTitle" : "Indicators",
-        "dialogCaption" : "Alpha Indicators",
-        "chartContainerCaption" : "Alpha Vantage: Indicators",
+        "menuTitle" : "Technical Indicators",
+        "dialogCaption" : "AV: Technical Indicators",
+        "chartContainerCaption" : "Alpha Vantage: Technical Indicators",
         "dialogType" : "AlphaIndicatorDialog",
         "dialogProps" : {
           "descrUrl" : "./data/stock-markets/alpha-vantage.html",
@@ -261,9 +219,9 @@
     },
     "SM_A_INTRADAY" : {
         "type" : "SM_A_INTRADAY",
-        "menuTitle" : "Intraday",
+        "menuTitle" : "Intraday Prices",
         "dialogCaption" : "Alpha Vantage: Intraday",
-        "chartContainerCaption" : "Alpha Vantage: Intraday",
+        "chartContainerCaption" : "Alpha Vantage: Intraday Prices",
         "dialogType" : "AlphaIntradayDialog",
         "dialogProps" : {
           "descrUrl" : "./data/stock-markets/alpha-vantage.html",
@@ -275,9 +233,9 @@
      },
      "SM_A_DAILY" : {
          "type" : "SM_A_DAILY",
-         "menuTitle" : "Daily",
-         "dialogCaption" : "Alpha Vantage: Daily",
-         "chartContainerCaption": "Alpha Vantage: Daily",
+         "menuTitle" : "Historical Prices",
+         "dialogCaption" : "Alpha Vantage: Historical",
+         "chartContainerCaption": "Alpha Vantage: Historical Prices",
          "dialogType" : "AlphaIntradayDialog",
          "dialogProps" : {
            "descrUrl" : "./data/stock-markets/alpha-vantage.html",
@@ -289,9 +247,9 @@
       },
       "SM_A_DAILYADJUSTED" : {
           "type" : "SM_A_DAILYADJUSTED",
-          "menuTitle" : "Daily Adjusted",
-          "dialogCaption" : "Alpha Vantage: Daily Adjusted",
-          "chartContainerCaption" : "Alpha Vantage: Daily Adjusted",
+          "menuTitle" : "Historical Adjusted Prices",
+          "dialogCaption" : "AV: Historical Adjusted",
+          "chartContainerCaption" : "Alpha Vantage: Historical Adjusted Prices",
           "dialogType" : "AlphaIntradayDialog",
           "dialogProps" : {
             "descrUrl" : "./data/stock-markets/alpha-vantage.html",
@@ -303,7 +261,7 @@
        },
        "SM_A_SEARCH" : {
            "type" : "SM_A_SEARCH",
-           "menuTitle" : "Search",
+           "menuTitle" : "Search Symbols or Companies",
            "dialogCaption" : "Alpha Vantage: Search",
            "dialogType" : "AlphaSearchDialog",
            "dialogProps" : {
@@ -317,9 +275,9 @@
         },
      "SM_A_SECTOR" : {
          "type" : "SM_A_SECTOR",
-         "menuTitle" : "Performance by Sector",
-         "dialogCaption" : "Alpha Sector",
-         "chartContainerCaption" : "Alpha Vantage: Sector: S&P 500",
+         "menuTitle" : "Sector Performances",
+         "dialogCaption" : "AV: Sector Performances",
+         "chartContainerCaption" : "Alpha Vantage: Sector Performances S&P 500",
          "dialogType" : "AlphaSectorDialog",
          "dialogProps" : {
            "descrUrl" : "./data/stock-markets/alpha-vantage.html",
@@ -415,9 +373,9 @@
 
      "SM_WTD_STOCK" : {
          "type" : "SM_WTD_STOCK",
-         "menuTitle" : "History Prices",
+         "menuTitle" : "Historical Prices",
          "dialogCaption" : "WTD Stock Prices",
-         "chartContainerCaption" : "World Trading Data: History Prices",
+         "chartContainerCaption" : "World Trading Data: Historical Prices",
          "dialogProps" : {
            "nInitFromDate" : 2,
            "descrUrl" : "./data/stock-markets/world-trading-data.html",

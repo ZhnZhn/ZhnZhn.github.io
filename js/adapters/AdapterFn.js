@@ -144,6 +144,7 @@ var AdapterFn = {
   stockSeriesLegend: function stockSeriesLegend() {
     return [AdapterFn.legendItem(0, _Color["default"].S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color["default"].S_HIGH, 'High'), AdapterFn.legendItem(2, _Color["default"].S_LOW, 'Low'), AdapterFn.legendItem(3, _Color["default"].S_OPEN, 'Open')];
   },
+  roundBy: _mathFn["default"].roundBy,
   formatAllNumber: _formatAllNumber["default"],
   numberFormat: _formatAllNumber["default"],
   isNumberOrNull: function isNumberOrNull(v) {

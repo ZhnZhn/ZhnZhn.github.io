@@ -33,6 +33,9 @@ var C = {
     color: '#7cb5ec'
   }
 };
+var crValueMoving = _AdapterFn["default"].crValueMoving,
+    roundBy = _AdapterFn["default"].roundBy,
+    numberFormat = _AdapterFn["default"].numberFormat;
 
 var _getYear = function _getYear(str) {
   return str.split("-")[0];
@@ -124,9 +127,8 @@ var _crHighLowPoint = function _crHighLowPoint(key, arr) {
 var _calcAvg = function _calcAvg(arr) {
   var sum = arr.reduce(function (acc, a) {
     return acc + a;
-  }, 0),
-      avg = arr.length !== 0 ? parseFloat((sum / arr.length).toFixed(4)) : 0;
-  return avg;
+  }, 0);
+  return arr.length !== 0 ? roundBy(sum / arr.length, 4) : 0;
 };
 
 var _crAvgPoint = function _crAvgPoint(key, arr) {
@@ -328,7 +330,7 @@ var _crValueMoving = function _crValueMoving(nowSeria, prevSeria) {
       _crValueAndDate3 = _crValueAndDate(prevSeria, max),
       bPrevValue = _crValueAndDate3.value,
       dateTo = _crValueAndDate3.date,
-      moving = _AdapterFn["default"].crValueMoving({
+      moving = crValueMoving({
     bNowValue: bNowValue,
     bPrevValue: bPrevValue
   });
@@ -336,7 +338,7 @@ var _crValueMoving = function _crValueMoving(nowSeria, prevSeria) {
   return (0, _extends2["default"])({}, moving, {
     date: date,
     dateTo: dateTo,
-    valueTo: _AdapterFn["default"].numberFormat(bPrevValue),
+    valueTo: numberFormat(bPrevValue),
     isDenyToChange: true
   });
 };

@@ -3,7 +3,7 @@ const C = {
   PN_RT: 'Rank A: Real-Time Performance',
   PN_MD: 'Meta Data',
   PN_LR: 'Last Refreshed',
-  TITLE: 'S&P 500 Performance by Sector',
+  TITLE: 'S&P 500 Sector Performances',
   ID: 'alp_perf'
 };
 

@@ -20,7 +20,8 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 var crTitle = _fnAdapter["default"].crTitle,
     crTid = _fnAdapter["default"].crTid,
     crChartOption = _fnAdapter["default"].crChartOption,
-    numberFormat = _fnAdapter["default"].numberFormat;
+    numberFormat = _fnAdapter["default"].numberFormat,
+    roundBy = _fnAdapter["default"].roundBy;
 var NUMBER_STYLE = 'style="color:#333;"';
 
 var _crPointName = function _crPointName(label, value) {
@@ -151,7 +152,7 @@ var _addPercent = function _addPercent(data) {
 
   return data.map(function (p) {
     return (0, _extends2["default"])({}, p, {
-      percent: parseFloat((p.value / _onePercent).toFixed(2))
+      percent: roundBy(p.value / _onePercent)
     });
   });
 };

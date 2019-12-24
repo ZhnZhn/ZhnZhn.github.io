@@ -6,6 +6,7 @@ const V = {
   A: 'AREA',
   A_Y: 'AREA_YEARLY',
   S: 'SPLINE',
+  L: 'LINE',
   S_C: 'COLUMN',
   M: 'MAP',
   C: 'COLUMN_SET',
@@ -68,6 +69,8 @@ const _crT1 = () => ([
 
 const _crT2 = () => ([
   _crItem(['Default: Spline', V.S ]),
+  _crItem(['Line', V.L]),
+  _crItem(['Area', V.A]),
   _crItem(['Column', V.S_C ]),
 ]);
 

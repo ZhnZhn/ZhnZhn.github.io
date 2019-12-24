@@ -8,7 +8,8 @@ exports["default"] = void 0;
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var valueMoving = _AdapterFn["default"].valueMoving,
-    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint;
+    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
+    roundBy = _AdapterFn["default"].roundBy;
 
 var _crZhConfig = function _crZhConfig(option) {
   var title = option.title,
@@ -69,8 +70,8 @@ var _addColumnPointTo = function _addColumnPointTo(arr, d, p, volume) {
 var _addHLPointTo = function _addHLPointTo(arr, d, p) {
   arr.push({
     x: d,
-    high: parseFloat((p.high - p.close).toFixed(2)),
-    low: parseFloat((p.low - p.close).toFixed(2)),
+    high: roundBy(p.high - p.close, 2),
+    low: roundBy(p.low - p.close, 2),
     open: p.open,
     dayHigh: p.high,
     dayLow: p.low,

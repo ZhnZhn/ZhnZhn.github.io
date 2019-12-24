@@ -24,6 +24,7 @@ var _fnLegend = _interopRequireDefault(require("./fnLegend"));
 var _conf = _interopRequireDefault(require("./conf"));
 
 var fnAdapter = {
+  roundBy: _AdapterFn["default"].roundBy,
   crChartId: function crChartId(option) {
     var value = option.value,
         _option$rg = option.rg,

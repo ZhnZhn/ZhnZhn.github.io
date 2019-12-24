@@ -3,9 +3,11 @@ import mathFn from '../mathFn'
 import { Direction } from '../../constants/Type'
 
 const {
+  roundBy,
   calcPercent,
   crValueMoving,
-  toFixed
+  toFixed,
+  toFixedNumber
 } = mathFn;
 
 const PERCENT_0 = '0.00%';
@@ -14,6 +16,18 @@ const PERCENT_100 = '100.00%';
 const _fValueMoving = (nowValue, prevValue) => ({
   nowValue, prevValue, Direction
 });
+
+describe('roundBy', () => {
+  const fn = roundBy
+  test('should return rounded number from string or number by', ()=>{
+    expect(fn(1.555, 2)).toBe(1.56)
+    expect(fn('1.555', 2)).toBe(1.56)
+    expect(fn(1.005, 2)).toBe(1.01)
+    expect(fn('1.005', 2)).toBe(1.01)
+    expect(fn(0)).toBe(0)
+
+  })
+})
 
 describe('calcPercent', ()=>{
   const fn = calcPercent
@@ -123,5 +137,14 @@ describe('toFixed', () => {
     expect(fn('0.1234')).toBe(0.12)
     expect(fn(0.01234)).toBe(0.01)
     expect(fn('0.01234')).toBe(0.01)
+  })
+})
+
+describe('toFixedNumber', ()=>{
+  const fn = toFixedNumber;
+  test('should return number rounded depend of value', ()=>{
+    expect(fn(9.00005)).toBe(9.0001)
+    expect(fn(9000.005)).toBe(9000.01)
+    expect(fn(10000.005)).toBe(10000)
   })
 })

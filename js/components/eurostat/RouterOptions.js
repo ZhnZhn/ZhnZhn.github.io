@@ -9,6 +9,7 @@ var V = {
   A: 'AREA',
   A_Y: 'AREA_YEARLY',
   S: 'SPLINE',
+  L: 'LINE',
   S_C: 'COLUMN',
   M: 'MAP',
   C: 'COLUMN_SET',
@@ -55,7 +56,7 @@ var _crT1 = function _crT1() {
 };
 
 var _crT2 = function _crT2() {
-  return [_crItem(['Default: Spline', V.S]), _crItem(['Column', V.S_C])];
+  return [_crItem(['Default: Spline', V.S]), _crItem(['Line', V.L]), _crItem(['Area', V.A]), _crItem(['Column', V.S_C])];
 };
 
 var _crT2A = function _crT2A() {

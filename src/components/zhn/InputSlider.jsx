@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import mathFns from '../../math/mathFn'
 //import PropTypes from "prop-types";
 
 /*
@@ -185,7 +187,7 @@ class InputSlider extends Component {
     let value
     value = position/positionMax * (max - min)
     value = Math.round(value / step) * step + min
-    value = parseFloat(value.toFixed(5))
+    value = mathFns.roundBy(value, 5)
 
     if (value > max) {
       value = max

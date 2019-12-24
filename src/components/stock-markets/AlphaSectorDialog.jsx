@@ -6,7 +6,7 @@ import crMenuMore from '../dialogs/MenuMore'
 
 const S = {
   ROW_TEXT: {
-    paddingRight: '16px'
+    paddingRight: 16
   }
 };
 
@@ -15,7 +15,7 @@ const S = {
 class AlphaIndicatorDialog extends Component {
 
   constructor(props){
-    super()
+    super(props)
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -78,8 +78,8 @@ class AlphaIndicatorDialog extends Component {
            />
            <D.Row.Text
              styleRoot={S.ROW_TEXT}
-             caption="Alpha:"
-             text="Performance by Sector"
+             caption="AV:"
+             text="Sector Performances"
            />
       </D.DraggableDialog>
     );

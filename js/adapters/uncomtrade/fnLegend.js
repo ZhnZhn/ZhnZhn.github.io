@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+
 var _conf = _interopRequireDefault(require("./conf"));
 
 var fnLegend = {
@@ -15,7 +17,7 @@ var fnLegend = {
       var name = item.name,
           _points = hm[name],
           _p = _points[_points.length - 1],
-          _ratio = _p ? ' ' + (_p.y / sum * 100).toFixed(1) + '%' : '';
+          _ratio = _p ? ' ' + _fnAdapter["default"].roundBy(_p.y / sum * 100, 1) + '%' : '';
 
       return (0, _extends2["default"])({}, item, {
         name: name + _ratio

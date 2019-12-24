@@ -3,7 +3,7 @@ import DateUtils from '../../utils/DateUtils'
 import AdapterFn from '../AdapterFn'
 
 const { getUTCTime } = DateUtils;
-const { numberFormat } = AdapterFn;
+const { numberFormat, roundBy } = AdapterFn;
 
 const HEADERS = [{
   name: 'Rank',
@@ -54,10 +54,10 @@ const _getCellValue = (r, h) => {
   const { pn, isToN, isToFixed } = h;
   return isToN
     ? isToFixed
-        ? parseFloat(parseFloat(r[pn]).toFixed(0))
+        ? roundBy(r[pn], 0)
         : parseFloat(r[pn])
     : r[pn];
-}
+};
 
 const _toRows = ( headers=[], rows=[] ) => {
   const _rows = [...rows].map(r => {
@@ -67,7 +67,7 @@ const _toRows = ( headers=[], rows=[] ) => {
     return r;
   })
   return _rows;
-}
+};
 
 const _crUpdatedTime = (json) => {
   const _seconds = json.map(coin => coin.last_updated)

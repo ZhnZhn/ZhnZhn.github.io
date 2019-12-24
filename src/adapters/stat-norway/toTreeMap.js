@@ -9,7 +9,7 @@ import fnAdapter from './fnAdapter'
 const {
   crTitle,
   crTid, crChartOption,
-  numberFormat
+  numberFormat, roundBy
 } = fnAdapter;
 
 const NUMBER_STYLE = 'style="color:#333;"';
@@ -110,14 +110,11 @@ const _crCategory = (option, by, depth) => {
 const _addPercent = (data) => {
   const _total = data.reduce((acc, item) => acc + item.value, 0)
      , _onePercent = _total/100;
-  return data.map(p => {
-     return {
-       ...p,
-       percent: parseFloat((p.value/_onePercent).toFixed(2))
-     }
-  });
-}
-
+  return data.map(p => ({
+    ...p,
+    percent: roundBy(p.value/_onePercent)
+  }));
+};
 
 const _addColor = function(data, level60, level90){
   const period = Chart.COLOR_PERIOD

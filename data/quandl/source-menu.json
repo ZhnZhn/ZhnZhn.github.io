@@ -219,7 +219,7 @@
         "type": "QE_PETROLEUM_PRICES",
         "menuTitle": "Petroleum Price Changes",
         "dialogCaption": "Petroleum Prices Changes",
-        "chartContainerCaption": "Global Petroleum Prices",
+        "chartContainerCaption": "Global Petroleum Prices Changes",
         "dialogProps": {
             "descrUrl": "./data/quandl/gpp.html",
             "optionURI": "./data/quandl/gpp.json",

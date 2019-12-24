@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/components/items/AlphaPerfItem.jsx"],"names":["S","TH_MORE","textAlign","paddingLeft","AlphaPerfItem","render","props","config","onCloseItem","m","y","Component"],"mappings":";;;;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,SAAS,EAAE,MADJ;AAEPC,IAAAA,WAAW,EAAE;AAFN;AADD,CAAV;;IAOMC,a;;;;;;;;;;;SACJC,M,GAAA,kBAAQ;AAAA,sBAC0B,KAAKC,KAD/B;AAAA,QACEC,MADF,eACEA,MADF;AAAA,QACUC,WADV,eACUA,WADV;AAEN,WACE,gCAAC,eAAD,QACE,gCAAC,qBAAD;AACE,MAAA,WAAW,EAAER,CAAC,CAACC,OADjB;AAEE,MAAA,MAAM,EAAEM,MAAM,CAACE,CAFjB;AAGE,MAAA,WAAW,EAAED;AAHf,MADF,EAME,gCAAC,qBAAD;AACE,MAAA,WAAW,EAAER,CAAC,CAACC,OADjB;AAEE,MAAA,MAAM,EAAEM,MAAM,CAACG,CAFjB;AAGE,MAAA,WAAW,EAAEF;AAHf,MANF,CADF;AAcD,G;;;EAjByBG,gB;;eAoBbP,a","sourcesContent":["import React, { Component, Fragment } from 'react'\r\n\r\nimport TableItem from './TableItem'\r\n\r\nconst S = {\r\n  TH_MORE: {\r\n    textAlign: 'left',\r\n    paddingLeft: '12px'\r\n  }\r\n};\r\n\r\nclass AlphaPerfItem extends Component {\r\n  render(){\r\n    const { config, onCloseItem } = this.props;\r\n    return (\r\n      <Fragment>\r\n        <TableItem\r\n          thMoreStyle={S.TH_MORE}\r\n          config={config.m}\r\n          onCloseItem={onCloseItem}\r\n        />\r\n        <TableItem\r\n          thMoreStyle={S.TH_MORE}\r\n          config={config.y}\r\n          onCloseItem={onCloseItem}\r\n        />\r\n      </Fragment>\r\n    );\r\n  }\r\n}\r\n\r\nexport default AlphaPerfItem\r\n"],"file":"AlphaPerfItem.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/AlphaPerfItem.js"
+ ],
+ "file": "../../../src/components/items/AlphaPerfItem.js",
+ "names": [
+  "S",
+  "TH_MORE",
+  "paddingLeft",
+  "textAlign",
+  "AlphaPerfItem",
+  "config",
+  "onCloseItem",
+  "m",
+  "y"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,WAAW,EAAE,EADN;AAEPC,IAAAA,SAAS,EAAE;AAFJ;AADD,CAAV;;AAOA,IAAMC,aAAa,GAAG,SAAhBA,aAAgB;AAAA,MAAGC,MAAH,QAAGA,MAAH;AAAA,MAAWC,WAAX,QAAWA,WAAX;AAAA,SACpB,kEACE,gCAAC,qBAAD;AACE,IAAA,WAAW,EAAEN,CAAC,CAACC,OADjB;AAEE,IAAA,MAAM,EAAEI,MAAM,CAACE,CAFjB;AAGE,IAAA,WAAW,EAAED;AAHf,IADF,EAME,gCAAC,qBAAD;AACE,IAAA,WAAW,EAAEN,CAAC,CAACC,OADjB;AAEE,IAAA,MAAM,EAAEI,MAAM,CAACG,CAFjB;AAGE,IAAA,WAAW,EAAEF;AAHf,IANF,CADoB;AAAA,CAAtB;;eAeeF,a"
+}

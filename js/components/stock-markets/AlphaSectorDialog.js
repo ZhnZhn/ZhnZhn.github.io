@@ -23,7 +23,7 @@ var _dec, _dec2, _class, _temp;
 
 var S = {
   ROW_TEXT: {
-    paddingRight: '16px'
+    paddingRight: 16
   }
 };
 var AlphaIndicatorDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec(_class = _dec2(_class = (_temp =
@@ -34,7 +34,7 @@ function (_Component) {
   function AlphaIndicatorDialog(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._handleLoad = function () {
       var _this$props = _this.props,
@@ -99,8 +99,8 @@ function (_Component) {
       buttons: this.toolbarButtons
     }), _react["default"].createElement(_DialogCell["default"].Row.Text, {
       styleRoot: S.ROW_TEXT,
-      caption: "Alpha:",
-      text: "Performance by Sector"
+      caption: "AV:",
+      text: "Sector Performances"
     }));
   };
 

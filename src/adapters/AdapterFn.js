@@ -132,6 +132,8 @@ const AdapterFn = {
     ];
   },
 
+  roundBy: mathFn.roundBy,
+
   formatAllNumber: formatAllNumber,
   numberFormat: formatAllNumber,
 
@@ -147,15 +149,18 @@ const AdapterFn = {
   compareByValue: _compareArrByIndex('value'),
   compareByValueId: _compareByTwoProp('value', 'id'),
 
-  crValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0'), dfR }){
-    return mathFn.crValueMoving({
-      nowValue: bNowValue,
-      prevValue: bPrevValue,
-      Direction: Direction,
-      fnFormat: formatAllNumber,
-      dfR: dfR
-    })
-  },
+  crValueMoving: ({
+    bNowValue=Big('0.0'),
+    bPrevValue=Big('0.0'),
+    dfR
+  }) => mathFn.crValueMoving({
+    nowValue: bNowValue,
+    prevValue: bPrevValue,
+    Direction: Direction,
+    fnFormat: formatAllNumber,
+    dfR: dfR
+  }),
+
 
   valueMoving(data, dfR){
     if (!_isArr(data)) {

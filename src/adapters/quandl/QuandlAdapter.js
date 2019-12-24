@@ -78,8 +78,8 @@ const _fnAddSplitRatio = function(splitRationIndex, result){
   const { point, dateUTC, yPointIndex, dataSplitRatio } = result;
   if (point[splitRationIndex] !== 1){
     const x = dateUTC
-        , splitRatio = parseFloat(point[splitRationIndex].toFixed(2))
-        , price = point[yPointIndex];
+    , splitRatio = AdapterFn.roundBy(point[splitRationIndex])
+    , price = point[yPointIndex];
 
     dataSplitRatio.push(_assign(ChartConfig.crMarkerSplitRatio(), {x, splitRatio, price}));
   }
@@ -91,7 +91,6 @@ const _fnAddExDividend = function(exDividendIndex, result){
 
      if (point[exDividendIndex] !== 0){
        const x = dateUTC
-           //, exValue = parseFloat(point[exDividendIndex].toFixed(2))
            , exValue = point[exDividendIndex]
            , price = point[yPointIndex]
            , marker = _assign(

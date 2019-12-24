@@ -11,6 +11,7 @@ import fnLegend from './fnLegend'
 import C from './conf'
 
 const fnAdapter = {
+   roundBy: AdapterFn.roundBy,
 
   crChartId: option => {
     const { value, rg=2, measure="A" } = option;

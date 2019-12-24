@@ -1,4 +1,5 @@
 
+import fns from './fnAdapter'
 import C from './conf'
 
 const _toSortedArr = obj => {
@@ -31,8 +32,8 @@ const _crAvgPricePoint = item => {
     NetWeight, TradeQuantity
   } = item
   , _NetWeight = NetWeight || TradeQuantity
-  , _y = (_NetWeight && TradeValue != null)
-       ? parseFloat((TradeValue/_NetWeight).toFixed(2))
+  , _y = _NetWeight && TradeValue != null
+       ? fns.roundBy(TradeValue/_NetWeight, 2)
        : undefined;
   return _crPoint(_y, _NetWeight);
 };
@@ -91,7 +92,7 @@ const fnHm = {
     , _crPoint = _fPoint(pnValue);
 
     let _point
-    dataset.forEach(item => {      
+    dataset.forEach(item => {
       _point = _crPoint(item)
       if (_point.y != null) {
         const ptTitle = item[pnCountry];

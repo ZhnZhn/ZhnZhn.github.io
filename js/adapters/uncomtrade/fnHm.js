@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+
 var _conf = _interopRequireDefault(require("./conf"));
 
 var _rFnCrPoint2;
@@ -46,7 +48,7 @@ var _crAvgPricePoint = function _crAvgPricePoint(item) {
       NetWeight = item.NetWeight,
       TradeQuantity = item.TradeQuantity,
       _NetWeight = NetWeight || TradeQuantity,
-      _y = _NetWeight && TradeValue != null ? parseFloat((TradeValue / _NetWeight).toFixed(2)) : undefined;
+      _y = _NetWeight && TradeValue != null ? _fnAdapter["default"].roundBy(TradeValue / _NetWeight, 2) : undefined;
 
   return _crPoint(_y, _NetWeight);
 };

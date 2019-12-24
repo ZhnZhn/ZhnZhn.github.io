@@ -6,11 +6,14 @@ import ItemHeader from './ItemHeader'
 
 const S = {
   ROOT: {
-    paddingBottom: '8px'
+    paddingBottom: 8
+  },
+  CAPTION: {
+    width: 385
   },
   SHOW_HIDE: {
-    paddingTop: '8px',
-    paddingBottom: '8px'
+    paddingTop: 8,
+    paddingBottom: 8
   }
 };
 
@@ -35,6 +38,7 @@ class TableItem extends Component {
         <ItemHeader
           isOpen={isOpen}
           caption={title}
+          captionStyle={S.CAPTION}
           onClick={this._hToggle}
           onClose={onCloseItem}
         />

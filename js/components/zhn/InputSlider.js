@@ -13,6 +13,8 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
+
 //import PropTypes from "prop-types";
 
 /*
@@ -218,7 +220,7 @@ function (_Component) {
       var value;
       value = position / positionMax * (max - min);
       value = Math.round(value / step) * step + min;
-      value = parseFloat(value.toFixed(5));
+      value = _mathFn["default"].roundBy(value, 5);
 
       if (value > max) {
         value = max;

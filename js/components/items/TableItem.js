@@ -19,11 +19,14 @@ var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 
 var S = {
   ROOT: {
-    paddingBottom: '8px'
+    paddingBottom: 8
+  },
+  CAPTION: {
+    width: 385
   },
   SHOW_HIDE: {
-    paddingTop: '8px',
-    paddingBottom: '8px'
+    paddingTop: 8,
+    paddingBottom: 8
   }
 };
 
@@ -75,6 +78,7 @@ function (_Component) {
     }, _react["default"].createElement(_ItemHeader["default"], {
       isOpen: isOpen,
       caption: title,
+      captionStyle: S.CAPTION,
       onClick: this._hToggle,
       onClose: onCloseItem
     }), _react["default"].createElement(_ShowHide["default"], {

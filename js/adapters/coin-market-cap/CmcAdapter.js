@@ -10,7 +10,8 @@ var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var getUTCTime = _DateUtils["default"].getUTCTime;
-var numberFormat = _AdapterFn["default"].numberFormat;
+var numberFormat = _AdapterFn["default"].numberFormat,
+    roundBy = _AdapterFn["default"].roundBy;
 var HEADERS = [{
   name: 'Rank',
   pn: 'rank',
@@ -61,7 +62,7 @@ var _getCellValue = function _getCellValue(r, h) {
   var pn = h.pn,
       isToN = h.isToN,
       isToFixed = h.isToFixed;
-  return isToN ? isToFixed ? parseFloat(parseFloat(r[pn]).toFixed(0)) : parseFloat(r[pn]) : r[pn];
+  return isToN ? isToFixed ? roundBy(r[pn], 0) : parseFloat(r[pn]) : r[pn];
 };
 
 var _toRows = function _toRows(headers, rows) {

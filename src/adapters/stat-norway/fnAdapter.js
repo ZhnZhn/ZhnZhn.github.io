@@ -3,8 +3,11 @@ import JSONstat from 'jsonstat';
 import AdapterFn from '../AdapterFn';
 
 const {
-  isYNumber, numberFormat, crId,
-  valueMoving  
+  isYNumber,
+  numberFormat,
+  crId,
+  roundBy,
+  valueMoving
 } = AdapterFn;
 
 const TITLE = {
@@ -107,7 +110,7 @@ const _getTimeDimension = (ds, timeId) => {
 }
 
 const fnAdapter = {
-  isYNumber, numberFormat, crId,
+  isYNumber, numberFormat, crId, roundBy,  
   crValueMoving: valueMoving,
 
   crTitle: (option) => {
