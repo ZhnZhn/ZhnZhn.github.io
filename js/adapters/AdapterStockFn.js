@@ -14,6 +14,11 @@ var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
     athPoint = _AdapterFn["default"].athPoint;
+
+var _isUndef = function _isUndef(v) {
+  return typeof v === 'undefined';
+};
+
 var AdapterStockFn = {
   toSeriesData: function toSeriesData(arr, seriaOption) {
     if (arr === void 0) {
@@ -76,7 +81,7 @@ var AdapterStockFn = {
         }));
         dataMfi.push([date, close, high, low, close, volume]);
 
-        if (typeof _prevClose !== 'undefined') {
+        if (!_isUndef(_prevClose)) {
           dataATH.push(athPoint({
             date: _date,
             prevClose: _prevClose,

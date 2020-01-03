@@ -5,28 +5,34 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _WtdHistorical = _interopRequireDefault(require("./WtdHistorical"));
 
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _WtdIntraday = _interopRequireDefault(require("./WtdIntraday"));
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _rAdapter = {
+  DF: _WtdHistorical["default"],
+  intraday: _WtdIntraday["default"]
+};
 
-var crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+var _getAdapter = function _getAdapter(_ref) {
+  var dfType = _ref.dfType;
+  return _rAdapter[dfType] || _rAdapter.DF;
+};
+
 var WtdAdapter = {
+  crKey: function crKey(option) {
+    if (option === void 0) {
+      option = {};
+    }
+
+    return _getAdapter(option).crKey(option);
+  },
   toConfig: function toConfig(json, option) {
-    var title = option.title,
-        subtitle = option.subtitle,
-        value = option.value,
-        dataOption = crData(json, option),
-        config = (0, _ConfigBuilder["default"])().stockConfig(value, dataOption).addCaption(title, subtitle).add((0, _extends2["default"])({}, crConfigOption({
-      data: dataOption.data,
-      option: option
-    }))) //.addZhPoints(dataMfi)
-    .toConfig();
-    return {
-      config: config
-    };
+    if (option === void 0) {
+      option = {};
+    }
+
+    return _getAdapter(option).toConfig(json, option);
   },
   toSeries: function toSeries(json, option) {
     var _WtdAdapter$toConfig = WtdAdapter.toConfig(json, option),

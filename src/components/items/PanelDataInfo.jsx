@@ -27,9 +27,9 @@ const S = {
   INFO_CAPTION: {
     display: 'inline-block',
     color: '#1b75bb',
-    width: 110,
-    textAlign: 'right',
+    width: 90,
     paddingRight: 5,
+    textAlign: 'right',    
     fontWeight: 'bold'
   },
   INFO_TEXT: {

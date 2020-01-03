@@ -9,7 +9,7 @@ const _parser = new window.DOMParser();
 const _crZhConfig = id => ({
   id: id,
   key: id,
-  isWithLegend: false,
+  isWithoutAdd: true,
   dataSource: "INSEE"
 });
 

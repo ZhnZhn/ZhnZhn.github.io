@@ -6,6 +6,8 @@ const {
   athPoint
 } = AdapterFn;
 
+const _isUndef = v => typeof v === 'undefined';
+
 const AdapterStockFn = {
   toSeriesData: (arr=[], seriaOption) => {
     const {
@@ -47,7 +49,7 @@ const AdapterStockFn = {
             })
         )
         dataMfi.push([date, close, high, low, close, volume])
-        if (typeof _prevClose !== 'undefined'){
+        if (!_isUndef(_prevClose)){
           dataATH.push(
              athPoint({
                date: _date,
@@ -66,8 +68,7 @@ const AdapterStockFn = {
         }
         _prevClose = close
        }
-    })
-
+    })    
     return {
       data,
       minClose, maxClose,

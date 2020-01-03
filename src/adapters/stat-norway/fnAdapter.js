@@ -110,7 +110,7 @@ const _getTimeDimension = (ds, timeId) => {
 }
 
 const fnAdapter = {
-  isYNumber, numberFormat, crId, roundBy,  
+  isYNumber, numberFormat, crId, roundBy,
   crValueMoving: valueMoving,
 
   crTitle: (option) => {
@@ -154,8 +154,7 @@ const fnAdapter = {
     return {
       id: key, key,
       itemCaption,
-      isWithoutAdd: true,
-      isWithLegend: false,
+      isWithoutAdd: true,      
       dataSource
     };
   },

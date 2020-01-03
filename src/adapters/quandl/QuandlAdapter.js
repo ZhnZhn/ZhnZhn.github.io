@@ -435,7 +435,6 @@ const fnGetSeries = function(config, json, option){
 
     if (legendSeries){
       _fnSetLegendSeriesToConfig(legendSeries, config, chartId)
-      config.zhConfig.isWithLegend = true
     }
 
    return {

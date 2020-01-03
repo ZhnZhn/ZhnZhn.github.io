@@ -211,7 +211,7 @@ const AdapterFn = {
     let str='';
     args.forEach(s => {
       if (s) {
-        str = str ? `${str}: ${s}`: s
+        str = str ? `${str}: ${s}` : s
       }
     })
     return str;

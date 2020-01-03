@@ -96,8 +96,8 @@ function (_Component) {
         info = config.info,
         zhMiniConfigs = config.zhMiniConfigs,
         isWithoutIndicator = zhConfig.isWithoutIndicator,
-        isWithLegend = zhConfig.isWithLegend,
-        isWithoutAdd = zhConfig.isWithoutAdd;
+        isWithoutAdd = zhConfig.isWithoutAdd,
+        legend = zhConfig.legend;
 
     var _btTabIndicator = _isIndicatorTab(config, isWithoutIndicator) ? _react["default"].createElement(_MenuTabItem["default"], {
       style: S.TAB_INDICATOR,
@@ -110,7 +110,7 @@ function (_Component) {
       onRemoveMfi: onRemoveMfi
     })) : null;
 
-    var _btLegend = isWithLegend ? _react["default"].createElement(_ButtonTab["default"], {
+    var _btLegend = legend ? _react["default"].createElement(_ButtonTab["default"], {
       style: S.BT_LEGEND,
       caption: "Legend",
       onClick: onClickLegend

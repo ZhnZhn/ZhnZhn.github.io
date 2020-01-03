@@ -39,9 +39,7 @@ var toYearly = {
         data = _toData(values, times),
         config = (0, _ConfigBuilder["default"])().init(_toYearly["default"].toConfig(data, option)).add('chart', {
       spacingTop: 25
-    }).addCaption(title, subtitle).add('info', crInfo(ds, option)).add('zhConfig', crZhConfig(option)).add('zhConfig', {
-      isWithLegend: true
-    }).toConfig();
+    }).addCaption(title, subtitle).add('info', crInfo(ds, option)).add('zhConfig', crZhConfig(option)).toConfig();
 
     return config;
   }

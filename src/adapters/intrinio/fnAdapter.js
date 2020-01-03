@@ -33,8 +33,7 @@ const _crZhConfig = (option) => {
   return {
     id: id, key: id,
     itemCaption: title,
-    isWithoutAdd: true,
-    isWithLegend: false,
+    isWithoutAdd: true,    
     linkFn, item, dataSource
   };
 };
@@ -68,7 +67,7 @@ const fnAdapter = {
   crConfigOption: ({ option, data }) => ({
     zhConfig: _crZhConfig(option),
     valueMoving: valueMoving(data),
-    info: _crInfo(option)    
+    info: _crInfo(option)
   })
 
 };

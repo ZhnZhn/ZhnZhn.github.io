@@ -13,6 +13,8 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
+var _IntradayFns = _interopRequireDefault(require("../IntradayFns"));
+
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
 var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
@@ -22,45 +24,12 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
     volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint;
+var crMarkerColor = _IntradayFns["default"].crMarkerColor,
+    crDataDaily = _IntradayFns["default"].crDataDaily;
 var crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption; //const DAILY = 'Daily';
 
 var INTRADAY = 'INTRADAY';
 var DAILY_ADJUSTED = 'DAILY_ADJUSTED';
-var C = {
-  TIME_START_DAY: '09:30:00',
-  TIME_CLOSE_DAY: '16:00:00',
-  START_DAY: "#90ed7d",
-  CLOSE_DAY: "#f7a35c",
-  CLOSE: "#2f7ed8",
-  HIGH: "#4caf50",
-  LOW: "#f44336",
-  OPEN: "#90ed7d"
-};
-
-var _fMarker = function _fMarker(color) {
-  return {
-    radius: 3,
-    enabled: true,
-    fillColor: color
-  };
-};
-
-var _fMarkerColor = function _fMarkerColor(date) {
-  var marker, color;
-
-  if (date.indexOf(C.TIME_START_DAY) !== -1) {
-    marker = _fMarker(C.START_DAY);
-    color = C.START_DAY;
-  } else if (date.indexOf(C.TIME_CLOSE_DAY) !== -1) {
-    marker = _fMarker(C.CLOSE_DAY);
-    color = C.CLOSE_DAY;
-  }
-
-  return {
-    marker: marker,
-    color: color
-  };
-};
 
 var _crSeriaOptions = function _crSeriaOptions(_ref) {
   var dfT = _ref.dfT,
@@ -148,7 +117,7 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
       _data.push((0, _extends2["default"])({
         x: _dateMs,
         y: _close
-      }, _fMarkerColor(_date)));
+      }, crMarkerColor(_date)));
 
       _dataHigh.push([_dateMs, _high]);
 
@@ -195,17 +164,11 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
   };
 };
 
-var _toDataDaily = function _toDataDaily(data) {
-  return data.filter(function (p) {
-    return p.color === C.CLOSE_DAY;
-  });
-};
-
 var _crChartOptions = function _crChartOptions(dfT, data) {
   var _isIntraday = dfT === INTRADAY;
 
   return {
-    dataDaily: _isIntraday ? _toDataDaily(data) : data,
+    dataDaily: _isIntraday ? crDataDaily(data) : data,
     seriaTooltip: _isIntraday ? _Tooltip["default"].fnBasePointFormatterT : _Tooltip["default"].fnBasePointFormatter,
     volumeTooltip: _isIntraday ? _Tooltip["default"].volumeDmyt : _Tooltip["default"].volume
   };

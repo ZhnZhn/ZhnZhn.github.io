@@ -181,7 +181,6 @@ var fnAdapter = {
       key: key,
       itemCaption: itemCaption,
       isWithoutAdd: true,
-      isWithLegend: false,
       dataSource: dataSource
     };
   },

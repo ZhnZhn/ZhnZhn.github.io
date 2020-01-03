@@ -30,7 +30,6 @@ var _crZhConfig = function _crZhConfig(option) {
     id: id,
     key: id,
     isWithoutAdd: true,
-    isWithLegend: false,
     dataSource: dataSource
   };
 };

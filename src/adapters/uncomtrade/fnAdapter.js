@@ -43,8 +43,7 @@ const fnAdapter = {
     return {
       id: _id,
       key: _id,
-      isWithoutAdd: true,
-      isWithLegend: true,
+      isWithoutAdd: true,      
       legend: [],
       dataSource: dataSource,
       linkFn: "UN_COMTRADE",

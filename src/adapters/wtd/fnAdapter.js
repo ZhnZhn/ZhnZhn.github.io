@@ -12,8 +12,7 @@ const _crZhConfig = ({ _itemId, value, dataSource }) => ({
   id: _itemId,
   key: _itemId,
   item: value,
-  linkFn: "NASDAQ",
-  isWithLegend: true,
+  linkFn: "NASDAQ",  
   isWithoutAdd: true,
   legend: AdapterFn.stockSeriesLegend()
 });

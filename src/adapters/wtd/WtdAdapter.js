@@ -1,32 +1,22 @@
-import Builder from '../../charts/ConfigBuilder'
+import WtdHistorical from './WtdHistorical'
+import WtdIntraday from './WtdIntraday'
 
-import fns from './fnAdapter'
+const _rAdapter = {
+  DF: WtdHistorical,
+  intraday: WtdIntraday
+};
 
-
-const {
-  crData,
-  crConfigOption
-} = fns
-
+const _getAdapter = ({ dfType }) => _rAdapter[dfType]
+ || _rAdapter.DF;
 
 const WtdAdapter = {
-  toConfig(json, option){
-    const { title, subtitle, value } = option
-    , dataOption = crData(json, option)
-    , config = Builder()
-       .stockConfig(value, dataOption)
-       .addCaption(title, subtitle)
-       .add({
-         ...crConfigOption({
-             data: dataOption.data,
-             option
-         })
-        })
-        //.addZhPoints(dataMfi)
-        .toConfig();
-    return { config };
-  },
-  toSeries(json, option){
+  crKey: (option={}) => _getAdapter(option)
+    .crKey(option),
+
+  toConfig: (json, option={}) => _getAdapter(option)
+    .toConfig(json, option),
+
+  toSeries: (json, option) => {
     const { config } = WtdAdapter.toConfig(json, option);
     return config.series[0];
   }

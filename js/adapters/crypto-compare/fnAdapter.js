@@ -11,25 +11,24 @@ var valueMoving = _AdapterFn["default"].valueMoving,
     volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
     roundBy = _AdapterFn["default"].roundBy;
 
-var _crZhConfig = function _crZhConfig(option) {
-  var title = option.title,
-      dataSource = option.dataSource,
-      value = option.value,
-      linkFn = option.linkFn;
+var _crZhConfig = function _crZhConfig(_ref) {
+  var title = _ref.title,
+      dataSource = _ref.dataSource,
+      value = _ref.value,
+      linkFn = _ref.linkFn;
   return {
     id: value,
     key: value,
     itemCaption: title,
     isWithoutAdd: true,
-    isWithLegend: false,
     linkFn: linkFn,
     item: value,
     dataSource: dataSource
   };
 };
 
-var _crInfo = function _crInfo(_ref) {
-  var title = _ref.title;
+var _crInfo = function _crInfo(_ref2) {
+  var title = _ref2.title;
   return {
     name: title
   };
@@ -111,9 +110,9 @@ var fnAdapter = {
       dHL: dHL
     };
   },
-  crConfigOption: function crConfigOption(_ref2) {
-    var option = _ref2.option,
-        data = _ref2.data;
+  crConfigOption: function crConfigOption(_ref3) {
+    var option = _ref3.option,
+        data = _ref3.data;
     return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),

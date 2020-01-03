@@ -145,9 +145,7 @@ var SeriaBuilder = {
 
     var _ref2 = _temp === void 0 ? {} : _temp,
         _ref2$maxVisible = _ref2.maxVisible,
-        maxVisible = _ref2$maxVisible === void 0 ? 6 : _ref2$maxVisible,
-        _ref2$isWithLegend = _ref2.isWithLegend,
-        isWithLegend = _ref2$isWithLegend === void 0 ? false : _ref2$isWithLegend;
+        maxVisible = _ref2$maxVisible === void 0 ? 6 : _ref2$maxVisible;
 
     var _legend = [];
     points.forEach(function (data, index) {
@@ -172,7 +170,7 @@ var SeriaBuilder = {
       });
     });
 
-    if (!isWithLegend) {
+    if (_legend.length !== 0) {
       this.addLegend(_legend);
     }
 

@@ -67,7 +67,7 @@ class ChartToolbar extends Component {
             onClickInfo
           } = this.props
         , { zhConfig={}, info, zhMiniConfigs } = config
-        , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;
+        , { isWithoutIndicator, isWithoutAdd, legend } = zhConfig;
 
     const _btTabIndicator = _isIndicatorTab(config, isWithoutIndicator) ? (
       <MenuTabItem
@@ -84,7 +84,7 @@ class ChartToolbar extends Component {
       </MenuTabItem>
      ) : null;
 
-    const _btLegend = isWithLegend ? (
+    const _btLegend = legend ? (
       <ButtonTab
         style={S.BT_LEGEND}
         caption="Legend"
@@ -142,7 +142,7 @@ class ChartToolbar extends Component {
          </MenuTabItem>
          {_btAdd}
          {_btInfo}
-         {_btTabMini}    
+         {_btTabMini}
       </div>
     );
   }

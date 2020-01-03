@@ -19,20 +19,20 @@ const CL = {
 const S = {
   TAB_DIV: {
     position: 'relative',
-    height: '30px',
     backgroundColor: 'transparent',
-    zIndex: 2
+    zIndex: 2,
+    height: 30
   },
   SHOW_HIDE: {
-    marginLeft: '8px'
+    marginLeft: 8
   },
   WRAPPER: {
-    marginTop: '6px'
+    marginTop: 6
   },
   DATA_SOURCE: {
     position: 'absolute',
-    left: '5px',
-    bottom: '0px',
+    left: 5,
+    bottom: 0,
     color: '#909090',
     fontSize: '11px'
   }
@@ -301,8 +301,8 @@ class AreaChartItem extends Component {
   _renderLegend = (config={}) => {
     const { isShowLegend } = this.state
         , { zhConfig={} } = config
-        , { isWithLegend, legend } = zhConfig;
-    const _compLegend = isWithLegend ? (
+        , { legend } = zhConfig;
+    return legend ? (
       <ShowHide isShow={isShowLegend}>
         <Legend
            legend={legend}
@@ -310,8 +310,6 @@ class AreaChartItem extends Component {
         />
       </ShowHide>
     ) : null;
-
-    return _compLegend;
   }
 
   _refChartComp = comp => this.chartComp = comp

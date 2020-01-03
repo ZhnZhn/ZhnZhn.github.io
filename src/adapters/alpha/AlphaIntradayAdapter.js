@@ -2,6 +2,7 @@
 import ChartConfig from '../../charts/ChartConfig'
 import ConfigBuilder from '../../charts/ConfigBuilder'
 import AdapterFn from '../AdapterFn'
+import IntradayFns from '../IntradayFns'
 
 import Chart from '../../charts/Chart'
 import Tooltip from '../../charts/Tooltip'
@@ -13,42 +14,13 @@ const {
    ymdhmsToUTC,
    volumeColumnPoint
 } = AdapterFn;
+const { crMarkerColor, crDataDaily } = IntradayFns
 
 const { crIntradayConfigOption } = fnAdapter;
 
 //const DAILY = 'Daily';
 const INTRADAY = 'INTRADAY'
 const DAILY_ADJUSTED = 'DAILY_ADJUSTED'
-
-const C = {
-  TIME_START_DAY: '09:30:00',
-  TIME_CLOSE_DAY: '16:00:00',
-
-  START_DAY: "#90ed7d",
-  CLOSE_DAY: "#f7a35c",
-  CLOSE: "#2f7ed8",
-  HIGH: "#4caf50",
-  LOW: "#f44336",
-  OPEN: "#90ed7d"
-}
-
-const _fMarker = color => ({
-  radius: 3,
-  enabled: true,
-  fillColor: color
-});
-
-const _fMarkerColor = (date) => {
-  let marker, color;
-  if (date.indexOf(C.TIME_START_DAY) !== -1) {
-    marker = _fMarker(C.START_DAY)
-    color = C.START_DAY
-  } else if (date.indexOf(C.TIME_CLOSE_DAY) !== -1) {
-    marker = _fMarker(C.CLOSE_DAY)
-    color = C.CLOSE_DAY
-  }
-  return { marker, color };
-}
 
 const _crSeriaOptions = ({ dfT, hasFilterZero, hasDividend }) => {
   const _isIntraday = dfT === INTRADAY;
@@ -121,7 +93,9 @@ const _crSeriaData = (json, option, config, chartId) => {
 
       _dateMs = toUTC(_date)
       _data.push({
-        x: _dateMs, y: _close, ..._fMarkerColor(_date)
+        x: _dateMs,
+        y: _close,
+        ...crMarkerColor(_date)
       })
 
       _dataHigh.push([_dateMs, _high])
@@ -167,15 +141,11 @@ const _crSeriaData = (json, option, config, chartId) => {
   };
 }
 
-const _toDataDaily = (data) => {
-  return data.filter(p => p.color === C.CLOSE_DAY);
-}
-
 const _crChartOptions = (dfT, data) => {
   const _isIntraday = dfT === INTRADAY;
   return {
     dataDaily: _isIntraday
-       ? _toDataDaily(data)
+       ? crDataDaily(data)
        : data,
     seriaTooltip: _isIntraday
       ? Tooltip.fnBasePointFormatterT

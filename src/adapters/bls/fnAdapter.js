@@ -3,7 +3,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
   valueMoving,
-  ymdToUTC,  
+  ymdToUTC,
   appendWithColon
 } = AdapterFn;
 
@@ -19,8 +19,7 @@ const _crZhConfig = (option) => {
     item: { ...linkItem },
     linkFn: 'DF',
     itemCaption: title,
-    isWithoutAdd: true,
-    isWithLegend: false,
+    isWithoutAdd: true,    
     dataSource: appendWithColon(dataSource, dfTitle)
   };
 };

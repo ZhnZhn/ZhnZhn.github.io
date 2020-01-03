@@ -25,7 +25,6 @@ var _crZhConfig = function _crZhConfig(id, _ref) {
     linkFn: "NASDAQ",
     item: one,
     itemCaption: one,
-    isWithLegend: true,
     isWithoutAdd: true,
     legend: stockSeriesLegend()
   };

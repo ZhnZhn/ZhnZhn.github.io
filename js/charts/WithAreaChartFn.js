@@ -2,16 +2,20 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-var CHART = {
-  SCATTER_MARGIN_BOTTOM: 24,
-  LONG_FORM: {
+//scatter_short_form_margin_bottom
+var SCATTER_SF_MB = 24,
+    LF_MB = 20,
+    SCATTER_LF_MB = 40;
+
+var _crLongFormConfig = function _crLongFormConfig(marginBottom) {
+  return {
     chart: {
-      marginBottom: 40
+      marginBottom: marginBottom
     },
     credits: {
       enabled: true
     }
-  }
+  };
 };
 
 var _checkIsWithScatter = function _checkIsWithScatter(chart) {
@@ -29,7 +33,7 @@ var _checkIsWithScatter = function _checkIsWithScatter(chart) {
   return false;
 };
 
-var _fOptionShortForm = function _fOptionShortForm(marginBottom) {
+var _crShortFormConfig = function _crShortFormConfig(marginBottom) {
   if (marginBottom === void 0) {
     marginBottom = 0;
   }
@@ -48,13 +52,9 @@ var _fOptionShortForm = function _fOptionShortForm(marginBottom) {
 var WithAreaChartFn = {
   arMetricOption: function arMetricOption(chart, isShow) {
     if (!isShow) {
-      if (!_checkIsWithScatter(chart)) {
-        return _fOptionShortForm();
-      } else {
-        return _fOptionShortForm(CHART.SCATTER_MARGIN_BOTTOM);
-      }
+      return _checkIsWithScatter(chart) ? _crShortFormConfig(SCATTER_SF_MB) : _crShortFormConfig();
     } else {
-      return CHART.LONG_FORM;
+      return _checkIsWithScatter(chart) ? _crLongFormConfig(SCATTER_LF_MB) : _crLongFormConfig(LF_MB);
     }
   }
 };

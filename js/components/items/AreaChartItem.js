@@ -38,20 +38,20 @@ var CL = {
 var S = {
   TAB_DIV: {
     position: 'relative',
-    height: '30px',
     backgroundColor: 'transparent',
-    zIndex: 2
+    zIndex: 2,
+    height: 30
   },
   SHOW_HIDE: {
-    marginLeft: '8px'
+    marginLeft: 8
   },
   WRAPPER: {
-    marginTop: '6px'
+    marginTop: 6
   },
   DATA_SOURCE: {
     position: 'absolute',
-    left: '5px',
-    bottom: '0px',
+    left: 5,
+    bottom: 0,
     color: '#909090',
     fontSize: '11px'
   }
@@ -314,17 +314,13 @@ function (_Component) {
           _config2 = config,
           _config2$zhConfig = _config2.zhConfig,
           zhConfig = _config2$zhConfig === void 0 ? {} : _config2$zhConfig,
-          isWithLegend = zhConfig.isWithLegend,
           legend = zhConfig.legend;
-
-      var _compLegend = isWithLegend ? _react["default"].createElement(_ShowHide["default"], {
+      return legend ? _react["default"].createElement(_ShowHide["default"], {
         isShow: isShowLegend
       }, _react["default"].createElement(_Legend["default"], {
         legend: legend,
         onClickItem: _this._handleToggleSeria
       })) : null;
-
-      return _compLegend;
     };
 
     _this._refChartComp = function (comp) {

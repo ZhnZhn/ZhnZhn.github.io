@@ -24,9 +24,9 @@ var C = {
 var S = {
   ROOT_MORE: {
     overflowY: 'auto',
-    height: '250px',
-    marginLeft: '-8px',
-    paddingRight: '4px',
+    height: 250,
+    marginLeft: -8,
+    paddingRight: 4,
     transform: 'scaleX(-1)'
   },
   ROOT_LESS: {
@@ -37,8 +37,8 @@ var S = {
   },
   BT_MORE: {
     display: 'inline-block',
-    marginTop: '10px',
-    marginLeft: '8px',
+    marginTop: 10,
+    marginLeft: 8,
     color: '#1b2836',
     fontWeight: 'bold',
     cursor: 'pointer'
@@ -68,22 +68,27 @@ var Legend =
 function (_Component) {
   (0, _inheritsLoose2["default"])(Legend, _Component);
 
-  function Legend(props) {
+  function Legend() {
     var _this;
 
-    _this = _Component.call(this) || this;
+    for (var _len2 = arguments.length, args = new Array(_len2), _key = 0; _key < _len2; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
+      isMore: false
+    };
 
     _this._handleMore = function () {
-      _this.setState({
-        isMore: !_this.state.isMore
+      _this.setState(function (prevState) {
+        return {
+          isMore: !prevState.isMore
+        };
       });
     };
 
     _this._renderLegend = function (legend, isMore, onClickItem) {
-      if (legend === void 0) {
-        legend = [];
-      }
-
       var _legend = [],
           max = legend.length;
       var i = 0;
@@ -105,9 +110,6 @@ function (_Component) {
       return _legend;
     };
 
-    _this.state = {
-      isMore: false
-    };
     return _this;
   }
 
@@ -123,8 +125,7 @@ function (_Component) {
 
   _proto.render = function render() {
     var _this$props = this.props,
-        _this$props$legend = _this$props.legend,
-        legend = _this$props$legend === void 0 ? [] : _this$props$legend,
+        legend = _this$props.legend,
         onClickItem = _this$props.onClickItem,
         isMore = this.state.isMore,
         _rootStyle = isMore ? S.ROOT_MORE : (0, _extends2["default"])({}, S.ROOT_MORE, {}, S.ROOT_LESS);
@@ -144,6 +145,9 @@ function (_Component) {
   return Legend;
 }(_react.Component);
 
+Legend.defaultProps = {
+  legend: []
+};
 var _default = Legend;
 exports["default"] = _default;
 //# sourceMappingURL=Legend.js.map

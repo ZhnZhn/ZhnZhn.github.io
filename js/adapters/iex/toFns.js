@@ -41,7 +41,6 @@ var toFns = {
       id: key,
       itemCaption: value || key,
       isWithoutAdd: true,
-      isWithLegend: false,
       dataSource: dataSource
     };
   },

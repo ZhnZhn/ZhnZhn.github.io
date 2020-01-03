@@ -7,19 +7,18 @@ const {
   roundBy
 } = AdapterFn;
 
-const _crZhConfig = (option) => {
-  const {
-          title, dataSource, value, linkFn
-        } = option;
-  return {
+const _crZhConfig = ({
+  title,
+  dataSource,
+  value,
+  linkFn
+}) => ({
     id: value, key: value,
     itemCaption: title,
     isWithoutAdd: true,
-    isWithLegend: false,
     linkFn, item: value,
     dataSource
-  };
-};
+});
 
 const _crInfo = ({ title }) => ({
   name: title

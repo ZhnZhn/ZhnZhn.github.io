@@ -23,8 +23,7 @@ const toFns = {
   crZhConfig: ({ key, value, dataSource }) => ({
     key, id: key,
     itemCaption: value || key,
-    isWithoutAdd: true,
-    isWithLegend: false,
+    isWithoutAdd: true,    
     dataSource
   }),
 

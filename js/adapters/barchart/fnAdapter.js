@@ -34,7 +34,6 @@ var _crZhConfig = function _crZhConfig(id, value) {
     key: value,
     item: value,
     linkFn: "NASDAQ",
-    isWithLegend: true,
     legend: _AdapterFn["default"].stockSeriesLegend()
   };
 };

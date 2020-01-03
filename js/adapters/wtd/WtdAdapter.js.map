@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../../src/adapters/wtd/WtdAdapter.js"],"names":["crData","fns","crConfigOption","WtdAdapter","toConfig","json","option","title","subtitle","value","dataOption","config","stockConfig","addCaption","add","data","toSeries","series"],"mappings":";;;;;;;;;AAAA;;AAEA;;IAIEA,M,GAEEC,qB,CAFFD,M;IACAE,c,GACED,qB,CADFC,c;AAIF,IAAMC,UAAU,GAAG;AACjBC,EAAAA,QADiB,oBACRC,IADQ,EACFC,MADE,EACK;AAAA,QACZC,KADY,GACeD,MADf,CACZC,KADY;AAAA,QACLC,QADK,GACeF,MADf,CACLE,QADK;AAAA,QACKC,KADL,GACeH,MADf,CACKG,KADL;AAAA,QAElBC,UAFkB,GAELV,MAAM,CAACK,IAAD,EAAOC,MAAP,CAFD;AAAA,QAGlBK,MAHkB,GAGT,iCACPC,WADO,CACKH,KADL,EACYC,UADZ,EAEPG,UAFO,CAEIN,KAFJ,EAEWC,QAFX,EAGPM,GAHO,+BAIHZ,cAAc,CAAC;AACda,MAAAA,IAAI,EAAEL,UAAU,CAACK,IADH;AAEdT,MAAAA,MAAM,EAANA;AAFc,KAAD,CAJX,GASP;AATO,KAUNF,QAVM,EAHS;AAcpB,WAAO;AAAEO,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAhBgB;AAiBjBK,EAAAA,QAjBiB,oBAiBRX,IAjBQ,EAiBFC,MAjBE,EAiBK;AAAA,+BACDH,UAAU,CAACC,QAAX,CAAoBC,IAApB,EAA0BC,MAA1B,CADC;AAAA,QACZK,MADY,wBACZA,MADY;;AAEpB,WAAOA,MAAM,CAACM,MAAP,CAAc,CAAd,CAAP;AACD;AApBgB,CAAnB;eAuBed,U","sourcesContent":["import Builder from '../../charts/ConfigBuilder'\r\n\r\nimport fns from './fnAdapter'\r\n\r\n\r\nconst {\r\n  crData,\r\n  crConfigOption\r\n} = fns\r\n\r\n\r\nconst WtdAdapter = {\r\n  toConfig(json, option){\r\n    const { title, subtitle, value } = option\r\n    , dataOption = crData(json, option)\r\n    , config = Builder()\r\n       .stockConfig(value, dataOption)\r\n       .addCaption(title, subtitle)\r\n       .add({\r\n         ...crConfigOption({\r\n             data: dataOption.data,\r\n             option\r\n         })\r\n        })\r\n        //.addZhPoints(dataMfi)\r\n        .toConfig();\r\n    return { config };\r\n  },\r\n  toSeries(json, option){\r\n    const { config } = WtdAdapter.toConfig(json, option);\r\n    return config.series[0];\r\n  }\r\n};\r\n\r\nexport default WtdAdapter\r\n"],"file":"WtdAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/wtd/WtdAdapter.js"
+ ],
+ "file": "../../../src/adapters/wtd/WtdAdapter.js",
+ "names": [
+  "_rAdapter",
+  "DF",
+  "WtdHistorical",
+  "intraday",
+  "WtdIntraday",
+  "_getAdapter",
+  "dfType",
+  "WtdAdapter",
+  "crKey",
+  "option",
+  "toConfig",
+  "json",
+  "toSeries",
+  "config",
+  "series"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,yBADY;AAEhBC,EAAAA,QAAQ,EAAEC;AAFM,CAAlB;;AAKA,IAAMC,WAAW,GAAG,SAAdA,WAAc;AAAA,MAAGC,MAAH,QAAGA,MAAH;AAAA,SAAgBN,SAAS,CAACM,MAAD,CAAT,IAChCN,SAAS,CAACC,EADM;AAAA,CAApB;;AAGA,IAAMM,UAAU,GAAG;AACjBC,EAAAA,KAAK,EAAE,eAACC,MAAD;AAAA,QAACA,MAAD;AAACA,MAAAA,MAAD,GAAQ,EAAR;AAAA;;AAAA,WAAeJ,WAAW,CAACI,MAAD,CAAX,CACnBD,KADmB,CACbC,MADa,CAAf;AAAA,GADU;AAIjBC,EAAAA,QAAQ,EAAE,kBAACC,IAAD,EAAOF,MAAP;AAAA,QAAOA,MAAP;AAAOA,MAAAA,MAAP,GAAc,EAAd;AAAA;;AAAA,WAAqBJ,WAAW,CAACI,MAAD,CAAX,CAC5BC,QAD4B,CACnBC,IADmB,EACbF,MADa,CAArB;AAAA,GAJO;AAOjBG,EAAAA,QAAQ,EAAE,kBAACD,IAAD,EAAOF,MAAP,EAAkB;AAAA,+BACPF,UAAU,CAACG,QAAX,CAAoBC,IAApB,EAA0BF,MAA1B,CADO;AAAA,QAClBI,MADkB,wBAClBA,MADkB;;AAE1B,WAAOA,MAAM,CAACC,MAAP,CAAc,CAAd,CAAP;AACD;AAVgB,CAAnB;eAaeP,U"
+}

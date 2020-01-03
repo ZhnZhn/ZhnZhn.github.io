@@ -12,9 +12,9 @@ const C = {
 const S = {
   ROOT_MORE: {
     overflowY: 'auto',
-    height: '250px',
-    marginLeft: '-8px',
-    paddingRight: '4px',
+    height: 250,
+    marginLeft: -8,
+    paddingRight: 4,
     transform: 'scaleX(-1)'
   },
   ROOT_LESS: {
@@ -26,13 +26,13 @@ const S = {
 
   BT_MORE: {
     display: 'inline-block',
-    marginTop: '10px',
-    marginLeft: '8px',
+    marginTop: 10,
+    marginLeft: 8,
     color: '#1b2836',
     fontWeight: 'bold',
     cursor: 'pointer'
   }
-}
+};
 
 const BtMore = ({ isMore, legend, onClick }) => {
   const _len = legend.length;
@@ -54,11 +54,13 @@ const BtMore = ({ isMore, legend, onClick }) => {
 }
 
 class Legend extends Component {
-  constructor(props){
-    super()
-    this.state = {
-      isMore: false
-    }
+
+  static defaultProps = {
+    legend: []
+  }
+
+  state = {
+    isMore: false
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -72,12 +74,12 @@ class Legend extends Component {
   }
 
   _handleMore = () => {
-    this.setState({
-      isMore: !this.state.isMore
-    })
+    this.setState(prevState => ({
+      isMore: !prevState.isMore
+    }))
   }
 
-  _renderLegend = (legend=[], isMore, onClickItem) => {
+  _renderLegend = (legend, isMore, onClickItem) => {
      const _legend = [], max = legend.length;
      let i=0;
      for (; i<max; i++){
@@ -99,12 +101,12 @@ class Legend extends Component {
 
   render(){
     const {
-            legend=[], onClickItem
-          } = this.props
-        , { isMore } = this.state
-        , _rootStyle = isMore
-             ? S.ROOT_MORE
-             : {...S.ROOT_MORE, ...S.ROOT_LESS};
+        legend, onClickItem
+      } = this.props
+    , { isMore } = this.state
+    , _rootStyle = isMore
+         ? S.ROOT_MORE
+         : {...S.ROOT_MORE, ...S.ROOT_LESS};
     return (
       <div className={C.CL_SCROLL} style={_rootStyle}>
         <div style={S.DIV}>

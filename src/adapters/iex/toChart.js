@@ -14,8 +14,7 @@ const _crZhConfig = (id, { one, dataSource }) => ({
   key: id,
   linkFn: "NASDAQ",
   item: one,
-  itemCaption: one,
-  isWithLegend: true,
+  itemCaption: one,  
   isWithoutAdd: true,
   legend: stockSeriesLegend()
 });

@@ -285,8 +285,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
   },
   addLegend: function addLegend(legend) {
     return this.add('zhConfig', {
-      legend: legend,
-      isWithLegend: true
+      legend: legend
     });
   },
   addMinMax: function addMinMax(data, option) {
@@ -340,7 +339,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   setStockSerias: function setStockSerias(id, d, dH, dL, dO) {
-    _ChartConfig["default"].setStockSerias(this.config, d, dH, d, dO, id);
+    _ChartConfig["default"].setStockSerias(this.config, d, dH, dL, dO, id);
 
     return this;
   },

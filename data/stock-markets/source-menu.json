@@ -35,6 +35,7 @@
     },{
       "caption": "World Trading Data", "isInitClose": true,
       "items": [
+        { "id": "SM_WTD_INTRADAY" },
         { "id": "SM_WTD_STOCK" }
       ]
     },{
@@ -56,6 +57,14 @@
     }
   ],
   "items" : {
+    "SM_BASE_WTD": {
+      "dialogProps": {
+        "descrUrl" : "./data/stock-markets/world-trading-data.html",
+        "loadId" : "WTD",
+        "isWithInputStock": true,
+        "valueFn" : "ROne"
+      }
+    },
     "SM_BASE_INTR": {
       "dialogProps": {
         "descrUrl" : "./data/stock-markets/intrinio.html",
@@ -371,21 +380,38 @@
          }
      },
 
+     "SM_WTD_INTRADAY" : {
+         "type" : "SM_WTD_INTRADAY",
+         "menuTitle" : "Intraday Prices",
+         "dialogCaption" : "WTD Intraday Prices",
+         "chartContainerCaption" : "World Trading Data: Intraday Prices",
+         "dialogType": "DialogType4",
+         "addProps": "SM_BASE_WTD",
+         "dialogProps" : {
+           "oneCaption": "Stock",
+           "oneURI" : "./data/stock-markets/wiki.json",
+           "oneJsonProp": "tickets",
+           "twoCaption": "Interval",
+           "twoURI": "./data/stock-markets/wtd-intraday.json",
+           "noDate": true,
+           "dataSource" : "World Trading Data: Intraday",
+           "dfProps": {
+             "dfType": "intraday"
+           }
+         }
+     },
      "SM_WTD_STOCK" : {
          "type" : "SM_WTD_STOCK",
          "menuTitle" : "Historical Prices",
-         "dialogCaption" : "WTD Stock Prices",
+         "dialogCaption" : "WTD Historical Prices",
          "chartContainerCaption" : "World Trading Data: Historical Prices",
+         "addProps": "SM_BASE_WTD",
          "dialogProps" : {
            "nInitFromDate" : 2,
-           "descrUrl" : "./data/stock-markets/world-trading-data.html",
            "optionURI" : "./data/stock-markets/wiki.json",
            "optionsJsonProp" : "tickets",
-           "isWithInputStock": true,
-           "valueFn" : "ROne",
            "linkFn" : "NASDAQ",
-           "loadId" : "WTD",
-           "dataSource" : "World Trading Data"
+           "dataSource" : "World Trading Data: Historical"
          }
      },
 

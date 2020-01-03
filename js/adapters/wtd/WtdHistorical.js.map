@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/wtd/WtdHistorical.js"
+ ],
+ "file": "../../../src/adapters/wtd/WtdHistorical.js",
+ "names": [
+  "crData",
+  "fns",
+  "crConfigOption",
+  "WtdHistorical",
+  "crKey",
+  "option",
+  "value",
+  "toConfig",
+  "json",
+  "title",
+  "subtitle",
+  "dataOption",
+  "config",
+  "stockConfig",
+  "addCaption",
+  "add",
+  "data"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;IAGEA,M,GAEEC,qB,CAFFD,M;IACAE,c,GACED,qB,CADFC,c;AAGF,IAAMC,aAAa,GAAG;AACpBC,EAAAA,KADoB,iBACdC,MADc,EACP;AACX,WAAOA,MAAM,CAACC,KAAd;AACD,GAHmB;AAKpBC,EAAAA,QAAQ,EAAE,kBAACC,IAAD,EAAOH,MAAP,EAAkB;AAAA,QAClBI,KADkB,GACSJ,MADT,CAClBI,KADkB;AAAA,QACXC,QADW,GACSL,MADT,CACXK,QADW;AAAA,QACDJ,KADC,GACSD,MADT,CACDC,KADC;AAAA,QAExBK,UAFwB,GAEXX,MAAM,CAACQ,IAAD,EAAOH,MAAP,CAFK;AAAA,QAGxBO,MAHwB,GAGf,iCACPC,WADO,CACKP,KADL,EACYK,UADZ,EAEPG,UAFO,CAEIL,KAFJ,EAEWC,QAFX,EAGPK,GAHO,+BAIHb,cAAc,CAAC;AACdc,MAAAA,IAAI,EAAEL,UAAU,CAACK,IADH;AAEdX,MAAAA,MAAM,EAANA;AAFc,KAAD,CAJX,GASP;AATO,KAUNE,QAVM,EAHe;AAc1B,WAAO;AAAEK,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD;AApBmB,CAAtB;eAuBeT,a"
+}

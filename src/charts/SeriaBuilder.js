@@ -112,7 +112,7 @@ const SeriaBuilder = {
     return this;
   },
 
-  addSeriaPoints(id, points, { maxVisible=6, isWithLegend=false }={}){
+  addSeriaPoints(id, points, { maxVisible=6 }={}){
     const _legend = [];
     points.forEach((data, index) => {
       const is = index<maxVisible ? true : false
@@ -130,7 +130,7 @@ const SeriaBuilder = {
            visible: is
         })
     })
-    if (!isWithLegend){
+    if (_legend.length !== 0){
       this.addLegend(_legend);
     }
     return this;
@@ -180,7 +180,7 @@ const SeriaBuilder = {
         this.addLegend(_legend)
       }
     } else if (_isObj(series)) {
-      _to[0] = series      
+      _to[0] = series
     }
     return this;
   },

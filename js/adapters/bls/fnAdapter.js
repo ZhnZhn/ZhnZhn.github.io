@@ -26,7 +26,6 @@ var _crZhConfig = function _crZhConfig(option) {
     linkFn: 'DF',
     itemCaption: title,
     isWithoutAdd: true,
-    isWithLegend: false,
     dataSource: appendWithColon(dataSource, dfTitle)
   };
 };
