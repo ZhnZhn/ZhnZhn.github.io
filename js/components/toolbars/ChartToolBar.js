@@ -78,7 +78,6 @@ var _isIndicatorTab = function _isIndicatorTab(_ref, isWithoutIndicator) {
 };
 
 var _isScrolling = function _isScrolling(evt, CONFIG) {
-  console.log(evt.clientX, evt.pageX);
   return evt.clientX !== 0 && evt.clientX === evt.pageX && evt.clientX < CONFIG.X;
 };
 

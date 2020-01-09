@@ -64,12 +64,9 @@ const _isIndicatorTab = ({ series }, isWithoutIndicator) => !isWithoutIndicator
   && series[0]
   && INDICATOR_TAB_TYPES.indexOf(series[0].type) !== -1;
 
-const _isScrolling = (evt, CONFIG) => {
-  console.log(evt.clientX, evt.pageX)
-  return evt.clientX !== 0
+const _isScrolling = (evt, CONFIG) => evt.clientX !== 0
   && evt.clientX === evt.pageX
   && evt.clientX < CONFIG.X;
-}
 
 const _crModalMenuStyle = (evt, CONFIG) => _isScrolling(evt, CONFIG)
   ? { left: evt.clientX - CONFIG.D}
