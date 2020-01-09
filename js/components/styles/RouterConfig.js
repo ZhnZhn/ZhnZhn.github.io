@@ -31,7 +31,7 @@ var router = {
 
   /*
     BrowserCaption, ButtonTab, MenuBadge, Tab,
-    MenuTab, ModalPopup
+    ModalPopup
   */
   ELEMENT: _ConfigElement["default"],
   ROW_CHECKBOX: _ConfigRowCheckBox["default"],

@@ -16,9 +16,11 @@
 
   cursor: pointer;
 }
-.button-tab:hover {
+.button-tab:hover,
+.button-tab:focus {
   color: rgba(164, 135, 212, 1);
   font-weight: bold;
+  outline: 0;
 }
 
 .button-tab--show {
@@ -27,6 +29,7 @@
 .button-tab--show:hover {
   color: #a487d4;
   font-weight: bold;
+  outline: 0;
 }
 
 .bt-sub-item {

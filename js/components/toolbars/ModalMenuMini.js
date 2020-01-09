@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
@@ -26,12 +28,13 @@ var _renderItems = function _renderItems(configs, onClickItem) {
 
 var ModalMenuMini = function ModalMenuMini(_ref) {
   var isShow = _ref.isShow,
+      style = _ref.style,
       onClose = _ref.onClose,
       configs = _ref.configs,
       onClickItem = _ref.onClickItem;
   return _react["default"].createElement(_ModalPopup["default"], {
     isShow: isShow,
-    style: _ModalMenu["default"].ROOT,
+    style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, {}, style),
     onClose: onClose
   }, _react["default"].createElement("div", {
     style: _ModalMenu["default"].PANE

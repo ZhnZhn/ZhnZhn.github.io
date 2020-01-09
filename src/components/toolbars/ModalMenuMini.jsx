@@ -19,12 +19,12 @@ const _renderItems = (configs, onClickItem) => {
 };
 
 const ModalMenuMini = ({
-  isShow, onClose,
+  isShow, style, onClose,
   configs, onClickItem
 }) => (
   <ModalPopup
     isShow={isShow}
-    style={STYLE.ROOT}
+    style={{ ...STYLE.ROOT, ...style}}
     onClose={onClose}
   >
     <div style={STYLE.PANE}>

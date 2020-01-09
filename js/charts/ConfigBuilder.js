@@ -100,10 +100,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   area2Config: function area2Config(title, subtitle) {
-    this.areaConfig({
+    return this.areaConfig({
       spacingTop: 25
     }).addCaption(title, subtitle).clearSeries();
-    return this;
   },
   stockConfig: function stockConfig(id, dataOption) {
     var dataVolumeColumn = dataOption.dataVolumeColumn,
@@ -117,7 +116,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
         dataHigh = dataOption.dataHigh,
         dataLow = dataOption.dataLow,
         dataOpen = dataOption.dataOpen;
-    this.areaConfig({
+    return this.areaConfig({
       spacingTop: 25
     }).addTooltip(_Tooltip["default"].fnBasePointFormatter).addMiniVolume({
       id: id,
@@ -127,7 +126,26 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       id: id,
       data: dataATH
     }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
-    return this;
+  },
+  intradayConfig: function intradayConfig(_ref) {
+    var id = _ref.id,
+        data = _ref.data,
+        dH = _ref.dH,
+        dL = _ref.dL,
+        dO = _ref.dO,
+        minClose = _ref.minClose,
+        maxClose = _ref.maxClose,
+        dVolume = _ref.dVolume,
+        dColumn = _ref.dColumn;
+    return this.areaConfig().add('chart', {
+      spacingTop: 25,
+      marginBottom: 20
+    }).addTooltip(_Tooltip["default"].fnBasePointFormatterT).setStockSerias(id, data, dH, dL, dO).setMinMax(minClose, maxClose, false).addMiniVolume({
+      id: id,
+      dVolume: dVolume,
+      dColumn: dColumn,
+      tooltipColumn: _Chart["default"].fTooltip(_Tooltip["default"].volumeDmyt)
+    });
   },
   categoryConfig: function categoryConfig(categories) {
     if (categories === void 0) {
@@ -363,10 +381,10 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   */
-  addDividend: function addDividend(_ref) {
-    var dataDividend = _ref.dataDividend,
-        minClose = _ref.minClose,
-        maxClose = _ref.maxClose;
+  addDividend: function addDividend(_ref2) {
+    var dataDividend = _ref2.dataDividend,
+        minClose = _ref2.minClose,
+        maxClose = _ref2.maxClose;
 
     if (dataDividend.length > 0) {
       setYToPoints(dataDividend, calcMinY({

@@ -5,6 +5,12 @@ import withTheme from '../hoc/withTheme'
 
 const TH_ID = 'ELEMENT';
 
+const CL = {
+  BT_TAB: 'button-tab not-selected',
+  BT_TAB__SHOW: 'button-tab button-tab--show not-selected',
+  ARROW: 'arrow-down'
+};
+
 class ButtonTab extends Component {
   /*
   static propTypes = {
@@ -51,9 +57,9 @@ class ButtonTab extends Component {
   }
 
 
-  _hClick = () => {
-    const { isUpdatable, onClick } = this.props
-    onClick();
+  _hClick = (evt) => {
+    const { isUpdatable, onClick } = this.props;
+    onClick(evt);
     if (isUpdatable) {
       this.setState(prevState => ({
         isShow: !prevState.isShow
@@ -62,20 +68,22 @@ class ButtonTab extends Component {
   }
 
   render(){
-    const {theme, caption, style, children} = this.props
-        , TS = theme.getStyle(TH_ID)
-        , _rootClass = this.state.isShow
-             ? 'button-tab button-tab--show not-selected'
-             : 'button-tab not-selected';
+    const {theme, caption, style, isMenu, children} = this.props
+    , TS = theme.getStyle(TH_ID)
+    , _rootClass = this.state.isShow
+         ? CL.BT_TAB__SHOW
+         : CL.BT_TAB;
     return (
-      <div
+      <button
         className={_rootClass}
         style={{...style, ...TS.BG}}
         onClick={this._hClick}
+        //tabIndex="-1"
       >
          {caption}
+         {isMenu && <span className={CL.ARROW} />}
          {children}
-      </div>
+      </button>
     );
   }
 }

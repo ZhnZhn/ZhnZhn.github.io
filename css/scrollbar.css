@@ -1,4 +1,11 @@
 
+@media screen and (max-width: 450px) {
+ .with-scroll-x {
+   scrollbar-width: thin;
+   overflow-x: auto;
+ }  
+}
+
 .with-scroll {
   /*Firefox */
   scrollbar-width: thin;
@@ -12,6 +19,7 @@
 
 .with-scroll::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 .with-scroll::-webkit-scrollbar-track {
@@ -30,6 +38,10 @@
   background-color: #1b2836;
   width: 2px;
 }
+.with-scroll::-webkit-scrollbar-corner {
+  background-color: #1b2836;
+}
+
 .with-scroll--grey {
   scrollbar-width: thin;
   scrollbar-color: #8bc34a #1b2836;

@@ -14,13 +14,11 @@ var _Color = _interopRequireDefault(require("../constants/Color"));
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
 var merge = _highcharts["default"].merge;
-var S = {
-  TITLE_BASE: {
-    stroke: 'transparent',
-    fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  }
+var TITLE_STYLE = {
+  stroke: 'transparent',
+  fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
+  fontSize: '16px',
+  fontWeight: 'bold'
 };
 
 var _addMonoColorsTo = function _addMonoColorsTo(colors, base) {
@@ -169,7 +167,7 @@ var Chart = {
       align: 'left',
       x: 25,
       y: 25,
-      style: (0, _extends2["default"])({}, S.TITLE_BASE, {
+      style: (0, _extends2["default"])({}, TITLE_STYLE, {
         color: _Color["default"].CHART_TITLE,
         fill: _Color["default"].CHART_TITLE
       })
@@ -186,7 +184,7 @@ var Chart = {
       align: 'left',
       x: 25,
       y: 45,
-      style: (0, _extends2["default"])({}, S.TITLE_BASE, {
+      style: (0, _extends2["default"])({}, TITLE_STYLE, {
         color: _Color["default"].CHART_SUBTITLE,
         fill: _Color["default"].CHART_SUBTITLE
       })

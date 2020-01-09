@@ -162,7 +162,7 @@ class ModalMenuIndicator extends Component {
 
  render(){
     const {
-      isShow, config,
+      isShow, style, config,
       getChart, onClose,
       onAddMfi, onRemoveMfi
     } = this.props
@@ -175,7 +175,7 @@ class ModalMenuIndicator extends Component {
     } = this.state;
     return (
       <ModalPopup
-        style={S.ROOT}
+        style={{...S.ROOT, ...style}}
         isShow={isShow}
         onClose={onClose}
       >

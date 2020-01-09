@@ -6,13 +6,11 @@ import Tooltip from './Tooltip';
 
 const merge = Highcharts.merge;
 
-const S = {
-  TITLE_BASE: {
-    stroke: 'transparent',
-    fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  }
+const TITLE_STYLE = {
+  stroke: 'transparent',
+  fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
+  fontSize: '16px',
+  fontWeight: 'bold'
 };
 
 const _addMonoColorsTo = (colors=[], base) => {
@@ -38,7 +36,9 @@ const _fMonoColors = function({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }
   return colors;
 }
 
-const _isCrosshair = (is) => is ? Chart.fCrosshair() : undefined;
+const _isCrosshair = is => is
+  ? Chart.fCrosshair()
+  : undefined;
 
 const Chart = {
   COLOR_PERIOD : 4/7,
@@ -143,7 +143,7 @@ const Chart = {
        x: 25,
        y: 25,
        style: {
-         ...S.TITLE_BASE,
+         ...TITLE_STYLE,
          color: COLOR.CHART_TITLE,
          fill: COLOR.CHART_TITLE,
        }
@@ -157,7 +157,7 @@ const Chart = {
       x: 25,
       y: 45,
       style: {
-        ...S.TITLE_BASE,
+        ...TITLE_STYLE,
         color: COLOR.CHART_SUBTITLE,
         fill: COLOR.CHART_SUBTITLE
       }

@@ -19,7 +19,7 @@ const router = {
   HEADER_BAR: HeaderBar,
   /*
     BrowserCaption, ButtonTab, MenuBadge, Tab,
-    MenuTab, ModalPopup
+    ModalPopup
   */
 
   ELEMENT: Element,

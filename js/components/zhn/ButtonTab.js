@@ -17,6 +17,11 @@ var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
 //import PropTypes from "prop-types";
 var TH_ID = 'ELEMENT';
+var CL = {
+  BT_TAB: 'button-tab not-selected',
+  BT_TAB__SHOW: 'button-tab button-tab--show not-selected',
+  ARROW: 'arrow-down'
+};
 
 var ButtonTab =
 /*#__PURE__*/
@@ -37,11 +42,11 @@ function (_Component) {
 
     _this = _Component.call(this, props) || this;
 
-    _this._hClick = function () {
+    _this._hClick = function (evt) {
       var _this$props = _this.props,
           isUpdatable = _this$props.isUpdatable,
           onClick = _this$props.onClick;
-      onClick();
+      onClick(evt);
 
       if (isUpdatable) {
         _this.setState(function (prevState) {
@@ -88,15 +93,19 @@ function (_Component) {
         theme = _this$props2.theme,
         caption = _this$props2.caption,
         style = _this$props2.style,
+        isMenu = _this$props2.isMenu,
         children = _this$props2.children,
         TS = theme.getStyle(TH_ID),
-        _rootClass = this.state.isShow ? 'button-tab button-tab--show not-selected' : 'button-tab not-selected';
+        _rootClass = this.state.isShow ? CL.BT_TAB__SHOW : CL.BT_TAB;
 
-    return _react["default"].createElement("div", {
+    return _react["default"].createElement("button", {
       className: _rootClass,
       style: (0, _extends2["default"])({}, style, {}, TS.BG),
-      onClick: this._hClick
-    }, caption, children);
+      onClick: this._hClick //tabIndex="-1"
+
+    }, caption, isMenu && _react["default"].createElement("span", {
+      className: CL.ARROW
+    }), children);
   };
 
   return ButtonTab;

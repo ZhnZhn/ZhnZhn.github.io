@@ -3,32 +3,58 @@ import React, { Component } from 'react';
 
 import ButtonTab from '../zhn/ButtonTab'
 
-import MenuTabItem from '../zhn-moleculs/MenuTabItem'
 import ModalMenuIndicator from './ModalMenuIndicator'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
+const CL_SCROLL = "with-scroll-x";
+
 const S = {
-  TAB_INDICATOR: {
-    left: 10
+  BT_IND: {
+    left: 2
   },
-  PANE_INDICATOR: {
-     width: 240
+  M_IND: {
+    top: 60,
+    left: 6
   },
   BT_LEGEND: {
-    left: 115
+    left: 112
   },
-  TAB_MINI: {
-    left: 350
-  },
-  TAB_FN: {
+  BT_FN: {
     left: 190
+  },
+  M_FN: {
+    top: 60,
+    left: 150
   },
   BT_ADD: {
     left: 250
   },
-  BT_CONF: {
-    left: 430
+  BT_MINI: {
+    left: 354,
+    width: 68
+  },
+  M_MINI: {
+    top: 60,
+    left: 294
+  },
+  RIGHT_GAP: {
+    position: 'relative',
+    left: 430,
+    width: 30,
+    height: 10,
+    backgroundColor: 'transparent'
+  }
+};
+
+const SCR = {
+  FN: {
+    X: 180,
+    D: 40
+  },
+  MINI: {
+    X: 344,
+    D: 100
   }
 };
 
@@ -38,6 +64,17 @@ const _isIndicatorTab = ({ series }, isWithoutIndicator) => !isWithoutIndicator
   && series[0]
   && INDICATOR_TAB_TYPES.indexOf(series[0].type) !== -1;
 
+const _isScrolling = (evt, CONFIG) => {
+  console.log(evt.clientX, evt.pageX)
+  return evt.clientX !== 0
+  && evt.clientX === evt.pageX
+  && evt.clientX < CONFIG.X;
+}
+
+const _crModalMenuStyle = (evt, CONFIG) => _isScrolling(evt, CONFIG)
+  ? { left: evt.clientX - CONFIG.D}
+  : void 0;
+
 class ChartToolbar extends Component {
   /*
   static propTypes = {
@@ -45,9 +82,37 @@ class ChartToolbar extends Component {
     config: PropTypes.object
   }
   */
+  state = {
+    isShowInd: false,
+    isShowFn: false,
+    isShowMini: false
+  }
 
-  shouldComponentUpdate(){
-    return false;
+  _hShowInd = () => {
+    this.setState({ isShowInd: true })
+  }
+  _hCloseInd = () => {
+    this.setState({ isShowInd: false })
+  }
+
+  _hShowFn = (evt) => {
+    this.setState({
+      isShowFn: true,
+      fnStyle: _crModalMenuStyle(evt, SCR.FN)
+    })
+  }
+  _hCloseFn = () => {
+    this.setState({ isShowFn: false })
+  }
+
+  _hShowMini = (evt) => {
+    this.setState({
+      isShowMini: true,
+      miniStyle: _crModalMenuStyle(evt, SCR.MINI)
+    })
+  }
+  _hCloseMini = () => {
+    this.setState({ isShowMini: false })
   }
 
   render(){
@@ -67,22 +132,33 @@ class ChartToolbar extends Component {
             onClickInfo
           } = this.props
         , { zhConfig={}, info, zhMiniConfigs } = config
-        , { isWithoutIndicator, isWithoutAdd, legend } = zhConfig;
+        , { isWithoutIndicator, isWithoutAdd, legend } = zhConfig
+        , { isShowInd,
+            isShowFn, fnStyle,
+            isShowMini, miniStyle
+          } = this.state
+        , _arrModalMenu = [];
 
-    const _btTabIndicator = _isIndicatorTab(config, isWithoutIndicator) ? (
-      <MenuTabItem
-        style= {S.TAB_INDICATOR}
+    let _btTabIndicator = null;
+    if (_isIndicatorTab(config, isWithoutIndicator)) {
+      _btTabIndicator = (<ButtonTab
+        style= {S.BT_IND}
         caption="Indicator"
-      >
-        <ModalMenuIndicator
-          chartId={chartId}
-          config={config}
-          getChart={getChart}
-          onAddMfi={onAddMfi}
-          onRemoveMfi={onRemoveMfi}
-        />
-      </MenuTabItem>
-     ) : null;
+        isMenu={true}
+        onClick={this._hShowInd}
+      />)
+      _arrModalMenu.push(<ModalMenuIndicator
+        key="menu_ind"
+        isShow={isShowInd}
+        style={S.M_IND}
+        chartId={chartId}
+        config={config}
+        getChart={getChart}
+        onAddMfi={onAddMfi}
+        onRemoveMfi={onRemoveMfi}
+        onClose={this._hCloseInd}
+      />)
+    }
 
     const _btLegend = legend ? (
       <ButtonTab
@@ -108,42 +184,54 @@ class ChartToolbar extends Component {
       />
     ) : null;
 
-  const _btTabMini = zhMiniConfigs && zhMiniConfigs.length
-      ? (
-       <MenuTabItem
-         style= {S.TAB_MINI}
+    let _btTabMini = null;
+    if (zhMiniConfigs && zhMiniConfigs.length) {
+      _btTabMini = (<ButtonTab
+         style= {S.BT_MINI}
          caption="Mini"
-       >
-         <ModalMenuMini
-           configs={zhMiniConfigs}
-           onClickItem={onMiniChart}
-         />
-       </MenuTabItem>
-     ) : null;
-
+         isMenu={true}
+         onClick={this._hShowMini}
+      />)
+      _arrModalMenu.push(<ModalMenuMini
+        key="menu_mini"
+        isShow={isShowMini}
+        style={{...S.M_MINI, ...miniStyle}}
+        configs={zhMiniConfigs}
+        onClickItem={onMiniChart}
+        onClose={this._hCloseMini}
+      />)
+    }
 
     return (
-      <div style={style}>
-         {_btTabIndicator}
-         {_btLegend}
-         <MenuTabItem
-           style={S.TAB_FN}
-           caption="Fn"
-         >
-           <ModalMenuFn
-             config={config}
-             getChart={getChart}
-             onX2H={onClick2H}
-             onMinMax={onMinMax}
-             onZoom={onZoom}
-             onCopy={onCopy}
-             onPasteTo={onPasteTo}
+      <>
+        <ModalMenuFn
+          isShow={isShowFn}
+          style={{...S.M_FN, ...fnStyle}}
+          config={config}
+          getChart={getChart}
+          onX2H={onClick2H}
+          onMinMax={onMinMax}
+          onZoom={onZoom}
+          onCopy={onCopy}
+          onPasteTo={onPasteTo}
+          onClose={this._hCloseFn}
+        />
+        {_arrModalMenu}
+        <div className={CL_SCROLL} style={style}>
+           {_btTabIndicator}
+           {_btLegend}
+           <ButtonTab
+             style={S.BT_FN}
+             caption="Fn"
+             isMenu={true}
+             onClick={this._hShowFn}
            />
-         </MenuTabItem>
-         {_btAdd}
-         {_btInfo}
-         {_btTabMini}
-      </div>
+           {_btAdd}
+           {_btInfo}
+           {_btTabMini}
+           <div style={S.RIGHT_GAP} />
+        </div>
+      </>
     );
   }
 }

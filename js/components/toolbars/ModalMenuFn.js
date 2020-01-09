@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
@@ -48,7 +50,8 @@ var _isZoom = function _isZoom(getChart) {
 };
 
 var ModalMenuFn = function ModalMenuFn(_ref) {
-  var isShow = _ref.isShow,
+  var style = _ref.style,
+      isShow = _ref.isShow,
       onClose = _ref.onClose,
       config = _ref.config,
       getChart = _ref.getChart,
@@ -59,7 +62,7 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
       onPasteTo = _ref.onPasteTo;
   return _react["default"].createElement(_ModalPopup["default"], {
     isShow: isShow,
-    style: _ModalMenu["default"].ROOT,
+    style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, {}, style),
     onClose: onClose
   }, _react["default"].createElement("div", {
     style: _ModalMenu["default"].PANE

@@ -36,7 +36,7 @@ const _isZoom = (getChart) => {
 
 
 const ModalMenuFn = ({
-  isShow, onClose,
+  style, isShow, onClose,
   config,
   getChart,
   onX2H, onMinMax, onZoom,
@@ -44,7 +44,7 @@ const ModalMenuFn = ({
 }) => (
   <ModalPopup
     isShow={isShow}
-    style={STYLE.ROOT}
+    style={{ ...STYLE.ROOT, ...style}}
     onClose={onClose}
   >
     <div style={STYLE.PANE}>

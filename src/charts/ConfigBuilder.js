@@ -78,10 +78,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
   area2Config(title, subtitle){
-    this.areaConfig({ spacingTop: 25 })
+    return this.areaConfig({ spacingTop: 25 })
       .addCaption(title, subtitle)
-      .clearSeries()
-    return this;
+      .clearSeries();    
   },
   stockConfig(id, dataOption){
     const {
@@ -92,7 +91,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       isDrawDeltaExtrems,
       data, dataHigh, dataLow, dataOpen
     } = dataOption;
-    this.areaConfig({ spacingTop: 25 })
+    return this.areaConfig({ spacingTop: 25 })
       .addTooltip(Tooltip.fnBasePointFormatter)
       .addMiniVolume({
         id,
@@ -104,8 +103,23 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       })
       .setMinMax(minClose, maxClose, isNotZoomToMinMax)
       .setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems)
-      .setStockSerias(id, data, dataHigh, dataLow, dataOpen)
-    return this;
+      .setStockSerias(id, data, dataHigh, dataLow, dataOpen);
+  },
+  intradayConfig({
+    id,
+    data, dH, dL, dO,
+    minClose, maxClose,
+    dVolume, dColumn
+  }){
+    return this.areaConfig()
+      .add('chart', { spacingTop: 25, marginBottom: 20 })
+      .addTooltip(Tooltip.fnBasePointFormatterT)
+      .setStockSerias(id, data, dH, dL, dO)
+      .setMinMax(minClose, maxClose, false)
+      .addMiniVolume({
+        id, dVolume, dColumn,
+        tooltipColumn: Chart.fTooltip(Tooltip.volumeDmyt)
+      });
   },
   categoryConfig(categories=[]){
     this.config = ChartConfig.fBaseAreaConfig()

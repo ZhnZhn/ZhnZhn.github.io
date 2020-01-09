@@ -68,18 +68,22 @@ var _notZeros = function _notZeros(v1, v2) {
   return v1 !== 0 && v2 !== 0;
 };
 
-var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
+var _getObjValues = function _getObjValues(json, option) {
   var interval = option.interval,
-      _propName = "Time Series (" + interval + ")",
-      _value = json[_propName],
-      _dateKeys = _value ? Object.keys(_value).sort() : [],
-      _data = [],
-      _dataDividend = [],
-      _dataVolume = [],
-      _dataVolumeColumn = [],
-      _dataHigh = [],
-      _dataLow = [],
-      _dataOpen = [],
+      _propName = "Time Series (" + interval + ")";
+
+  return json[_propName];
+};
+
+var _crSeriaData = function _crSeriaData(objValues, option) {
+  var _dateKeys = objValues ? Object.keys(objValues).sort() : [],
+      data = [],
+      dH = [],
+      dL = [],
+      dO = [],
+      dataDividend = [],
+      dVolume = [],
+      dColumn = [],
       _crSeriaOptions2 = _crSeriaOptions(option),
       notFilterZero = _crSeriaOptions2.notFilterZero,
       isDividend = _crSeriaOptions2.isDividend,
@@ -89,8 +93,8 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
 
   var i = 0,
       _max = _dateKeys.length,
-      _minClose = Number.POSITIVE_INFINITY,
-      _maxClose = Number.NEGATIVE_INFINITY,
+      minClose = Number.POSITIVE_INFINITY,
+      maxClose = Number.NEGATIVE_INFINITY,
       _dateMs,
       _date,
       _point,
@@ -103,7 +107,7 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
 
   for (i; i < _max; i++) {
     _date = _dateKeys[i];
-    _point = _value[_date];
+    _point = objValues[_date];
     _closeV = parseFloat(_point['4. close']);
     _close = parseFloat(_point[pnClose]);
 
@@ -113,21 +117,15 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
       _low = parseFloat(_point['3. low']);
       _volume = parseFloat(_point[pnVolume]);
       _dateMs = toUTC(_date);
-
-      _data.push((0, _extends2["default"])({
+      data.push((0, _extends2["default"])({
         x: _dateMs,
         y: _close
       }, crMarkerColor(_date)));
-
-      _dataHigh.push([_dateMs, _high]);
-
-      _dataLow.push([_dateMs, _low]);
-
-      _dataOpen.push([_dateMs, _open]);
-
-      _dataVolume.push([_dateMs, _volume]);
-
-      _dataVolumeColumn.push(volumeColumnPoint({
+      dH.push([_dateMs, _high]);
+      dL.push([_dateMs, _low]);
+      dO.push([_dateMs, _open]);
+      dVolume.push([_dateMs, _volume]);
+      dColumn.push(volumeColumnPoint({
         open: _open,
         close: _closeV,
         volume: _volume,
@@ -139,28 +137,29 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
       }));
 
       if (isDividend) {
-        _addDividendPointTo(_dataDividend, _dateMs, _point);
+        _addDividendPointTo(dataDividend, _dateMs, _point);
       }
 
-      if (_minClose > _close) {
-        _minClose = _close;
+      if (minClose > _close) {
+        minClose = _close;
       }
 
-      if (_maxClose < _close) {
-        _maxClose = _close;
+      if (maxClose < _close) {
+        maxClose = _close;
       }
     }
   }
 
-  _ChartConfig["default"].setStockSerias(config, _data, _dataHigh, _dataLow, _dataOpen, chartId);
-
   return {
-    data: _data,
-    dataDividend: _dataDividend,
-    minClose: _minClose,
-    maxClose: _maxClose,
-    dVolume: _dataVolume,
-    dColumn: _dataVolumeColumn
+    data: data,
+    dH: dH,
+    dL: dL,
+    dO: dO,
+    dataDividend: dataDividend,
+    minClose: minClose,
+    maxClose: maxClose,
+    dVolume: dVolume,
+    dColumn: dColumn
   };
 };
 
@@ -176,14 +175,16 @@ var _crChartOptions = function _crChartOptions(dfT, data) {
 
 var AlphaIntradayAdapter = {
   toConfig: function toConfig(json, option) {
-    var baseConfig = _ChartConfig["default"].fBaseAreaConfig(),
-        value = option.value,
+    var _chartId = option.value,
         interval = option.interval,
         dfT = option.dfT,
         dataSource = option.dataSource,
-        _chartId = value,
-        _crSeriaData2 = _crSeriaData(json, option, baseConfig, _chartId),
+        _objValues = _getObjValues(json, option),
+        _crSeriaData2 = _crSeriaData(_objValues, option),
         data = _crSeriaData2.data,
+        dH = _crSeriaData2.dH,
+        dL = _crSeriaData2.dL,
+        dO = _crSeriaData2.dO,
         minClose = _crSeriaData2.minClose,
         maxClose = _crSeriaData2.maxClose,
         dataDividend = _crSeriaData2.dataDividend,
@@ -196,13 +197,9 @@ var AlphaIntradayAdapter = {
 
     option.minY = minClose;
     option.maxY = maxClose;
-    var config = (0, _ConfigBuilder["default"])().init(baseConfig).add('chart', {
+    var config = (0, _ConfigBuilder["default"])().areaConfig().add('chart', {
       spacingTop: 25
-    }).addCaption(value, "Time Series (" + interval + ")").addTooltip(seriaTooltip).add((0, _extends2["default"])({}, crIntradayConfigOption({
-      id: _chartId,
-      data: dataDaily,
-      dataSource: dataSource
-    }))).addMinMax(dataDaily, option).addDividend({
+    }).addCaption(_chartId, "Time Series (" + interval + ")").addTooltip(seriaTooltip).addMinMax(dataDaily, option).setStockSerias(_chartId, data, dH, dL, dO).addDividend({
       dataDividend: dataDividend,
       minClose: minClose,
       maxClose: maxClose
@@ -211,7 +208,11 @@ var AlphaIntradayAdapter = {
       dVolume: dVolume,
       dColumn: dColumn,
       tooltipColumn: _Chart["default"].fTooltip(volumeTooltip)
-    }).toConfig();
+    }).add((0, _extends2["default"])({}, crIntradayConfigOption({
+      id: _chartId,
+      data: dataDaily,
+      dataSource: dataSource
+    }))).toConfig();
     return {
       config: config
     };

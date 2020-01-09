@@ -58,30 +58,33 @@ const _addDividendPointTo = (arr, dateMs, p) => {
 
 const _notZeros = (v1, v2) => v1 !== 0 && v2 !== 0;
 
-const _crSeriaData = (json, option, config, chartId) => {
+const _getObjValues = (json, option) => {
   const { interval } = option
   , _propName = `Time Series (${interval})`
-  , _value = json[_propName]
-  , _dateKeys = ( _value)
-       ? Object.keys(_value).sort()
-       : []
-  , _data = [], _dataDividend = []
-  , _dataVolume = [], _dataVolumeColumn = []
-  , _dataHigh = [], _dataLow = [], _dataOpen = []
+  return json[_propName];
+};
+
+const _crSeriaData = (objValues, option) => {  
+  const _dateKeys = objValues
+     ? Object.keys(objValues).sort()
+     : []
+  , data = [], dH = [], dL = [], dO = []
+  , dataDividend = []
+  , dVolume = [], dColumn = []
   , {
     notFilterZero, isDividend,
     toUTC, pnClose, pnVolume
   } = _crSeriaOptions(option);
 
   let i = 0, _max = _dateKeys.length
-  , _minClose = Number.POSITIVE_INFINITY
-  , _maxClose = Number.NEGATIVE_INFINITY
+  , minClose = Number.POSITIVE_INFINITY
+  , maxClose = Number.NEGATIVE_INFINITY
   , _dateMs
   , _date, _point
   , _open, _high, _low, _closeV, _close, _volume ;
   for (i; i<_max; i++) {
     _date = _dateKeys[i]
-    _point = _value[_date]
+    _point = objValues[_date]
     _closeV = parseFloat(_point['4. close'])
     _close = parseFloat(_point[pnClose])
 
@@ -92,18 +95,18 @@ const _crSeriaData = (json, option, config, chartId) => {
       _volume = parseFloat(_point[pnVolume])
 
       _dateMs = toUTC(_date)
-      _data.push({
+      data.push({
         x: _dateMs,
         y: _close,
         ...crMarkerColor(_date)
       })
 
-      _dataHigh.push([_dateMs, _high])
-      _dataLow.push([_dateMs, _low])
-      _dataOpen.push([_dateMs, _open])
+      dH.push([_dateMs, _high])
+      dL.push([_dateMs, _low])
+      dO.push([_dateMs, _open])
 
-      _dataVolume.push([_dateMs, _volume])
-      _dataVolumeColumn.push(
+      dVolume.push([_dateMs, _volume])
+      dColumn.push(
           volumeColumnPoint({
              open: _open,
              close: _closeV,
@@ -113,31 +116,19 @@ const _crSeriaData = (json, option, config, chartId) => {
           })
       )
       if (isDividend) {
-        _addDividendPointTo(_dataDividend, _dateMs, _point)
+        _addDividendPointTo(dataDividend, _dateMs, _point)
       }
 
-      if (_minClose > _close) {
-        _minClose = _close
-      }
-      if (_maxClose < _close ) {
-        _maxClose = _close
-      }
+      if (minClose > _close ) { minClose = _close }
+      if (maxClose < _close ) { maxClose = _close }
     }
   }
 
-
-  ChartConfig.setStockSerias(
-    config, _data, _dataHigh, _dataLow, _dataOpen, chartId
-  )
-
-
   return {
-    data: _data,
-    dataDividend: _dataDividend,
-    minClose: _minClose,
-    maxClose: _maxClose,
-    dVolume: _dataVolume,
-    dColumn: _dataVolumeColumn
+    data, dH, dL, dO,
+    dataDividend,
+    minClose, maxClose,
+    dVolume, dColumn
   };
 }
 
@@ -158,17 +149,18 @@ const _crChartOptions = (dfT, data) => {
 
 const AlphaIntradayAdapter = {
   toConfig(json, option){
-    const baseConfig = ChartConfig.fBaseAreaConfig()
-    , {
-      value, interval, dfT,
+    const {
+      value:_chartId,
+      interval, dfT,
       dataSource
     } = option
-    , _chartId = value
+    , _objValues = _getObjValues(json, option)
     , {
-        data, minClose, maxClose,
+        data, dH, dL, dO,
+        minClose, maxClose,
         dataDividend,
         dColumn, dVolume
-      } = _crSeriaData(json, option, baseConfig, _chartId )
+      } = _crSeriaData(_objValues, option)
     , {
         dataDaily,
         seriaTooltip, volumeTooltip
@@ -178,23 +170,24 @@ const AlphaIntradayAdapter = {
     option.maxY = maxClose
 
     const config = ConfigBuilder()
-      .init(baseConfig)
+      .areaConfig()
       .add('chart', { spacingTop: 25 })
-      .addCaption(value, `Time Series (${interval})`)
+      .addCaption(_chartId, `Time Series (${interval})`)
       .addTooltip(seriaTooltip)
+      .addMinMax(dataDaily, option)
+      .setStockSerias(_chartId, data, dH, dL, dO)
+      .addDividend({ dataDividend, minClose, maxClose })
+      .addMiniVolume({
+        id: _chartId,
+        dVolume, dColumn,
+        tooltipColumn: Chart.fTooltip(volumeTooltip)
+      })
       .add({
         ...crIntradayConfigOption({
           id: _chartId,
           data: dataDaily,
           dataSource
         })
-      })
-      .addMinMax(dataDaily, option)
-      .addDividend({ dataDividend, minClose, maxClose })
-      .addMiniVolume({
-        id: _chartId,
-        dVolume, dColumn,
-        tooltipColumn: Chart.fTooltip(volumeTooltip)
       })
       .toConfig();
 

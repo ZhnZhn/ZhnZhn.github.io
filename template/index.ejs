@@ -129,7 +129,7 @@
 }
 </style>
   
-  <link rel="stylesheet" href="/css/app-701ff9ea22.min.css">
+  <link rel="stylesheet" href="/css/app-c3dbb33019.min.css">
   
 </head>
 <body>
@@ -176,13 +176,20 @@
       </div>
    </noscript>
 
+ <%
+ for (var index in htmlWebpackPlugin.files.js ) {
+    var fileName = htmlWebpackPlugin.files.js[index];
+    if (fileName.indexOf('runtime_') !== -1){ %>
+      <script src="<%=fileName %>" defer></script>
+    <% }
+ } %>
  <!--lib-->
  <%
  for (var index in htmlWebpackPlugin.files.js ) {
     var fileName = htmlWebpackPlugin.files.js[index];
     if (fileName.indexOf('erc_') !== -1){ %>
       <script src="<%=fileName %>" defer></script>
-    <% } 
+    <% }
  } %>
 
 </body>

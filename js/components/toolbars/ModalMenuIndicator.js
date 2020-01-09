@@ -7,6 +7,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
@@ -184,6 +186,7 @@ function (_Component) {
   _proto.render = function render() {
     var _this$props = this.props,
         isShow = _this$props.isShow,
+        style = _this$props.style,
         config = _this$props.config,
         getChart = _this$props.getChart,
         onClose = _this$props.onClose,
@@ -197,7 +200,7 @@ function (_Component) {
         isNormalize = _this$state.isNormalize,
         isMomAth = _this$state.isMomAth;
     return _react["default"].createElement(_ModalPopup["default"], {
-      style: _ModalMenu["default"].ROOT,
+      style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, {}, style),
       isShow: isShow,
       onClose: onClose
     }, _react["default"].createElement("div", {

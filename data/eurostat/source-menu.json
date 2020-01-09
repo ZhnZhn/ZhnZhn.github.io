@@ -377,7 +377,7 @@
     },
     "ES_HICP_CONST" : {
       "type" : "ES_HICP_CONST",
-      "menuTitle" : "HICP at Constant Taxes",
+      "menuTitle" : "HICP at Constant Tax Rates",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
