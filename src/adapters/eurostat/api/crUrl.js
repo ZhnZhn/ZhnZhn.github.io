@@ -1,7 +1,10 @@
 import apiFn from './apiFn'
 import mapFn from './mapFn'
 
-const { URL, QUERY_TAIL, isCategory } = apiFn;
+const {
+  URL, QUERY_TAIL,
+  isCategory, isMap
+} = apiFn;
 const { createMapValue, createMapSlice } = mapFn;
 
 const crUrl = (option) => {
@@ -23,7 +26,7 @@ const crUrl = (option) => {
 
   const { mapValue, mapSlice } = itemMap
       , _mapValue = mapValue || createMapValue(option, itemMap);
-  if (seriaType === 'MAP') {
+  if (isMap(seriaType)) {
     option.zhMapSlice = mapSlice
       ? { ...mapSlice, time }
       : { ...createMapSlice(option, itemMap), time };

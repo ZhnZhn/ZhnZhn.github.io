@@ -43,12 +43,12 @@ var _crItems = function _crItems(arr) {
   return arr.map(_crItem);
 };
 
-var _crDF = function _crDF() {
-  return _crItems([['Default: Spline', V.S], ['Area', V.A], ['Column', V.S_C], ['Bar: All Countries', V.B], ['Bar+Labels: All Countries', V.B_L], ['Column: All Countries', V.C], ['Dots: All Countries', V.D], ['Map: All Countries', V.M, void 0, _Type.CompItemType.EUROSTAT_MAP]]);
+var _crDF3 = function _crDF3() {
+  return _crItems([['Default: Spline', V.S], ['Area', V.A], ['Column', V.S_C], ['Bar: All Countries', V.B], ['Bar+Labels: All Countries', V.B_L], ['Column: All Countries', V.C], ['Dots: All Countries', V.D]]);
 };
 
-var _crDF3 = function _crDF3() {
-  return _crItems([['Default: Spline', V.S], ['Column', V.S_C], ['Bar: All Countries', V.B], ['Column: All Countries', V.C], ['Dots: All Countries', V.D]]);
+var _crDF = function _crDF() {
+  return _crDF3().concat(_crItems([['Map: All Countries', V.M, void 0, _Type.CompItemType.EUROSTAT_MAP]]));
 };
 
 var _crT1 = function _crT1() {

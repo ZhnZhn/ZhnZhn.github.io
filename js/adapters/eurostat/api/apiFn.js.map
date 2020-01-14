@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../../../src/adapters/eurostat/api/apiFn.js"],"names":["isInArrStr","fnArr","C","URL","QUERY_TAIL","DF_TAIL","CATEGORY_TYPES","apiFn","isCategory","crUrl","table","q","tail"],"mappings":";;;;;;;AACA;;IAEQA,U,GAAeC,iB,CAAfD,U;AAER,IAAME,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,4DADG;AAERC,EAAAA,UAAU,EAAE,sCAFJ;AAGRC,EAAAA,OAAO,EAAE;AAHD,CAAV;AAMA,IAAMC,cAAc,GAAG,CACrB,KADqB,EAErB,YAFqB,EAGrB,SAHqB,EAGV,iBAHU,EAIrB,SAJqB,CAAvB;AAOA,IAAMC,KAAK,GAAG;AACZJ,EAAAA,GAAG,EAAED,CAAC,CAACC,GADK;AAEZC,EAAAA,UAAU,EAAEF,CAAC,CAACE,UAFF;AAGZC,EAAAA,OAAO,EAAEH,CAAC,CAACG,OAHC;AAKZG,EAAAA,UAAU,EAAER,UAAU,CAACM,cAAD,CALV;AAMZG,EAAAA,KAAK,EAAE,eAACC,KAAD,EAAQC,CAAR,EAAWC,IAAX;AAAA,QAAWA,IAAX;AAAWA,MAAAA,IAAX,GAAgBV,CAAC,CAACE,UAAlB;AAAA;;AAAA,gBAAoCF,CAAC,CAACC,GAAtC,GAA4CO,KAA5C,SAAqDC,CAArD,GAAyDC,IAAzD;AAAA;AANK,CAAd;eASeL,K","sourcesContent":["\r\nimport fnArr from '../../../utils/fnArr';\r\n\r\nconst { isInArrStr } = fnArr;\r\n\r\nconst C = {\r\n  URL: \"https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/\",\r\n  QUERY_TAIL: \"&precision=1&sinceTimePeriod=1996M01\",\r\n  DF_TAIL: \"precision=1\"\r\n};\r\n\r\nconst CATEGORY_TYPES = [\r\n  'MAP',\r\n  'COLUMN_SET',\r\n  'BAR_SET', 'BAR_WITH_LABELS',\r\n  'DOT_SET'\r\n];\r\n\r\nconst apiFn = {\r\n  URL: C.URL,\r\n  QUERY_TAIL: C.QUERY_TAIL,\r\n  DF_TAIL: C.DF_TAIL,\r\n\r\n  isCategory: isInArrStr(CATEGORY_TYPES),\r\n  crUrl: (table, q, tail=C.QUERY_TAIL) => `${C.URL}${table}?${q}${tail}`\r\n};\r\n\r\nexport default apiFn\r\n"],"file":"apiFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/adapters/eurostat/api/apiFn.js"
+ ],
+ "file": "../../../../src/adapters/eurostat/api/apiFn.js",
+ "names": [
+  "isInArrStr",
+  "fnArr",
+  "C",
+  "URL",
+  "QUERY_TAIL",
+  "DF_TAIL",
+  "CATEGORY_TYPES",
+  "apiFn",
+  "isCategory",
+  "isMap",
+  "seriaType",
+  "crUrl",
+  "table",
+  "q",
+  "tail"
+ ],
+ "mappings": ";;;;;;;;;AACA;;IAEQA,U,GAAeC,iB,CAAfD,U;AAER,IAAME,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,4DADG;AAERC,EAAAA,UAAU,EAAE,sCAFJ;AAGRC,EAAAA,OAAO,EAAE;AAHD,CAAV;AAMA,IAAMC,cAAc,GAAG,CACrB,KADqB,EAErB,YAFqB,EAGrB,SAHqB,EAGV,iBAHU,EAIrB,SAJqB,CAAvB;AAOA,IAAMC,KAAK,iCACNL,CADM;AAETM,EAAAA,UAAU,EAAER,UAAU,CAACM,cAAD,CAFb;AAGTG,EAAAA,KAAK,EAAE,eAAAC,SAAS;AAAA,WAAIA,SAAS,KAAK,KAAlB;AAAA,GAHP;AAITC,EAAAA,KAAK,EAAE,eAACC,KAAD,EAAQC,CAAR,EAAWC,IAAX;AAAA,QAAWA,IAAX;AAAWA,MAAAA,IAAX,GAAgBZ,CAAC,CAACE,UAAlB;AAAA;;AAAA,gBAAoCF,CAAC,CAACC,GAAtC,GAA4CS,KAA5C,SAAqDC,CAArD,GAAyDC,IAAzD;AAAA;AAJE,EAAX;eAOeP,K"
+}

@@ -20,6 +20,9 @@
         { "id" : "ES_HICP" },
         { "id" : "ES_HICP_NSA" },
         { "id" : "ES_HICP_CONST" },
+        { "id" : "ES_HICP_IW" },
+        { "id" : "ES_HICP_CW" },
+        { "id" : "ES_HICP_CEA" },
         { "id" : "ES_PPP" },
         { "id" : "ES_CPI_G20" }
       ]
@@ -135,9 +138,16 @@
       "dialogProps": {
         "rootUri": "./data/eurostat/",
         "selectProps": [
-          [ "geo","Country","countries.json","countries" ]
+          [ "geo","Country","countries","countries" ]
         ],
-        "chartsType": "df3",
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "loadId" : "EU_STAT",
+        "dataSource": "Eurostat"
+      }
+    },
+    "ES_BASE_SNE": {
+      "dialogProps": {
+        "rootUri": "./data/eurostat/",
         "descrUrl": "./data/eurostat/eurostat.html",
         "loadId" : "EU_STAT",
         "dataSource": "Eurostat"
@@ -235,9 +245,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "na_item","Item","gdp-main-components.json" ],
-          [ "unit","Unit","gdp-main-components-unit.json" ],
-          [ "s_adj","Adjust","seria-adjust.json" ]
+          [ "na_item","Item","gdp-main-components" ],
+          [ "unit","Unit","gdp-main-components-unit" ],
+          [ "s_adj","Adjust","seria-adjust" ]
         ],
         "dfProps": {
           "mapFrequency" : "Q",
@@ -253,8 +263,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          [ "indic","Metric","unemployment.json" ],
-          [ "s_adj","Adjust","adjust.json" ]
+          [ "indic","Metric","unemployment" ],
+          [ "s_adj","Adjust","adjust" ]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -317,19 +327,17 @@
       "type" : "ES_HICP_NSA",
       "menuTitle" : "HICP (2015=100), NSA",
       "contCaption" : "Harmonised Index of Consumer Prices, NSA",
-      "dialogType" : "DialogEurostat3A",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoCaption" : "HICP",
-        "twoURI" : "./data/eurostat/cpi.json",
-        "twoJsonProp": "metrics",
-        "threeCaption": "Unit",
-        "threeURI": "./data/eurostat/cpi-units.json",
+        "selectProps": [
+          ["indic", "HICP", "hicp-nsa"],
+          ["unit", "Unit", "hicp-units-nsa"]
+        ],
         "dfProps": {
           "mapFrequency" : "M",
           "mapDateDf" : 1,
           "dfTable": "ei_cphi_m",
-          "dfParams": [ "geo", "indic", "unit" ],
           "dfTail": "s_adj=NSA",
           "dfSlice" : {
              "s_adj": "NSA"
@@ -364,9 +372,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          [ "coicop","Item","hicp-items.json"],
-          [ "release","Release","hicp-release.json"],
-          [ "unit","Unit","hicp-units.json"]
+          [ "coicop","Item","hicp-items"],
+          [ "release","Release","hicp-release"],
+          [ "unit","Unit","hicp-units"]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -395,21 +403,73 @@
         }
       }
     },
+    "ES_HICP_IW" : {
+      "type" : "ES_HICP_IW",
+      "menuTitle" : "HICP Item Weights",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [
+          ["coicop", "Item" , "hicp-items"]
+        ],
+        "dfProps": {
+          "dfTable": "prc_hicp_inw",
+          "mapType" : "V",
+          "mapFrequency" : "Y",
+          "mapDateDf" : 1
+        }
+      }
+    },
+    "ES_HICP_CW" : {
+      "type" : "ES_HICP_CW",
+      "menuTitle" : "HICP Country Weights",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [
+          ["statinfo", "For HICP" , "hicp-cw"]
+        ],
+        "dfProps": {
+          "dfTable": "prc_hicp_cow",
+          "mapType" : "V",
+          "mapFrequency" : "Y",
+          "mapDateDf" : 1
+        }
+      }
+    },
+    "ES_HICP_CEA" : {
+      "type" : "ES_HICP_CEA",
+      "menuTitle" : "Contr. to EA inflation",
+      "contCaption" : "Contributions to EA annual inflation (% points)",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SNE",
+      "dialogProps" : {
+        "selectProps": [
+          ["coicop", "Item" , "hicp-items"]
+        ],
+        "chartsType": "t2",
+        "dfProps": {
+          "dfTable": "prc_hicp_ctrb",
+          "dfTail": "geo=EA",
+          "mapType" : "V",
+          "mapFrequency" : "M",
+          "mapDateDf" : 2
+        }
+      }
+    },
     "ES_PPP" : {
       "type" : "ES_PPP",
       "menuTitle" : "PPP, Price Indices, Expend.",
       "contCaption" : "PPP, Price Indices, Expenditures",
-      "dialogType" : "DialogEurostat3A",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/ppp-aggregators.json",
-        "twoCaption": "Aggregator",
-        "twoJsonProp": "items",
-        "threeURI": "./data/eurostat/ppp-items.json",
-        "threeCaption": "Item",
+        "selectProps": [
+          ["ppp_cat", "Aggregator", "ppp-aggregators"],
+          ["na_item", "Item", "ppp-items"]
+        ],
         "dfProps": {
           "dfTable": "prc_ppp_ind",
-          "dfParams": [ "geo", "ppp_cat", "na_item" ],
           "mapType" : "V",
           "mapFrequency" : "Y",
           "mapDateDf" : 1
@@ -421,14 +481,16 @@
       "menuTitle" : "CPI G20 All Items",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SNE",
       "dialogProps" : {
-        "oneURI": "./data/eurostat/cpi-g20-countries.json",
-        "twoURI" : "./data/eurostat/cpi-g20-units.json",
-        "twoCaption": "Unit",
-        "twoJsonProp": "items",
+        "selectProps": [
+          ["geo","Country","cpi-g20-countries"],
+          ["unit","Unit","cpi-g20-units"]
+        ],
+        "chartsType": "df3",
         "dfProps": {
-          "dfTable": "prc_ipc_g20",
-          "dfParams": [ "geo", "unit" ]
+          "dfTable": "prc_ipc_g20"
         }
       }
     },
@@ -461,7 +523,7 @@
         "addProps": "ES_BASE_SN",
         "dialogProps" : {
           "selectProps": [
-            ["nrg_bal","Share","energy-renewable-shares.json"]
+            ["nrg_bal","Share","energy-renewable-shares"]
           ],
           "dfProps": {
             "mapFrequency" : "Y",
@@ -626,9 +688,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "consom","Band","electricity-hh-band.json" ],
-          [ "tax","Tax","electricity-hh-tax.json" ],
-          [ "currency","Currency","currency.json" ]
+          [ "consom","Band","electricity-hh-band" ],
+          [ "tax","Tax","electricity-hh-tax" ],
+          [ "currency","Currency","currency" ]
         ],
         "dfProps": {
           "mapFrequency" : "S",
@@ -694,7 +756,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          [ "s_adj","Adj","adjust-2.json"]
+          [ "s_adj","Adj","adjust-2"]
         ],
         "dfProps": {
           "mapFrequency" : "Q",
@@ -776,9 +838,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "crops","Crop","agri-organic-crop.json"],
-          [ "agprdmet","Method","agri-organic-method.json"],
-          [ "unit","Unit","agri-organic-unit.json"]
+          [ "crops","Crop","agri-organic-crop"],
+          [ "agprdmet","Method","agri-organic-method"],
+          [ "unit","Unit","agri-organic-unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -976,7 +1038,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "incgrp","Income","income-group.json" ]
+          [ "incgrp","Income","income-group" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1361,9 +1423,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "isco08", "Nurse", "healthcare-nurse.json" ],
-          [ "wstatus", "Status", "healthcare-nurse-status.json" ],
-          [ "unit", "Unit", "healthcare-ph-unit.json" ]
+          [ "isco08", "Nurse", "healthcare-nurse" ],
+          [ "wstatus", "Status", "healthcare-nurse-status" ],
+          [ "unit", "Unit", "healthcare-ph-unit" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1381,7 +1443,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "isced11","Level","education-by-level-all.json" ]
+          [ "isced11","Level","education-by-level-all" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1398,9 +1460,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "isced11","Level","education-by-level-all.json" ],
-          [ "age", "Age", "education-staff-age.json" ],
-          [ "sex", "Sex", "by-sex.json" ]
+          [ "isced11","Level","education-by-level-all" ],
+          [ "age", "Age", "education-staff-age" ],
+          [ "sex", "Sex", "by-sex" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1417,9 +1479,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "isced11", "Level", "education-by-level.json" ],
-          [ "age", "Age", "education-by-age.json"],
-          [ "sex", "Sex", "by-sex.json"]
+          [ "isced11", "Level", "education-by-level" ],
+          [ "age", "Age", "education-by-age"],
+          [ "sex", "Sex", "by-sex"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1435,7 +1497,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["mot_nrg","Type","transport-motor-energy.json"]
+          ["mot_nrg","Type","transport-motor-energy"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1452,8 +1514,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["mot_nrg","Type","transport-motor-type.json"],
-          ["engine","Volume","transport-motor-volume.json"]
+          ["mot_nrg","Type","transport-motor-type"],
+          ["engine","Volume","transport-motor-volume"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1470,7 +1532,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["age","Age","transport-car-age.json"]
+          ["age","Age","transport-car-age"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1502,8 +1564,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "hhtyp","Status","household-type.json" ],
-          [ "incgrp","Income","income-group.json" ]
+          [ "hhtyp","Status","household-type" ],
+          [ "incgrp","Income","income-group" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1520,7 +1582,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["vehicle", "Vehicle", "transport-inland-vehicle.json" ]
+          ["vehicle", "Vehicle", "transport-inland-vehicle" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",

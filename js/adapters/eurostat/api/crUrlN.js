@@ -9,10 +9,11 @@ var _apiFn = _interopRequireDefault(require("./apiFn"));
 
 var DF_TAIL = _apiFn["default"].DF_TAIL,
     isCategory = _apiFn["default"].isCategory,
+    isMap = _apiFn["default"].isMap,
     crUrl = _apiFn["default"].crUrl;
 
 var _isStrNotEmpty = function _isStrNotEmpty(str) {
-  return typeof str === 'string' && str;
+  return str && typeof str === 'string';
 };
 
 var _addDfTailTo = function _addDfTailTo(mapSlice, dfTail) {
@@ -43,7 +44,7 @@ var _crItems = function _crItems(_ref2) {
   var seriaType = _ref2.seriaType,
       items = _ref2.items,
       time = _ref2.time;
-  return isCategory(seriaType) ? [].concat(items.filter(Boolean), [{
+  return isCategory(seriaType) ? isMap(seriaType) ? items.filter(Boolean) : items.filter(Boolean).concat([{
     id: 'time',
     value: time
   }]) : items;

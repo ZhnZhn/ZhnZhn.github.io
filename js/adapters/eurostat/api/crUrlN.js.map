@@ -1,1 +1,45 @@
-{"version":3,"sources":["../../../../src/adapters/eurostat/api/crUrlN.js"],"names":["DF_TAIL","apiFn","isCategory","crUrl","_isStrNotEmpty","str","_addDfTailTo","mapSlice","dfTail","split","forEach","param","_arr","_crMapSlice","items","item","id","value","_crItems","seriaType","time","filter","Boolean","_crQuery","map","join","_updateOptionsIf","options","zhMapSlice","crUrlN","dfTable","_items","_q"],"mappings":";;;;;;;AAAA;;IAGEA,O,GAEEC,iB,CAFFD,O;IACAE,U,GACED,iB,CADFC,U;IAAYC,K,GACVF,iB,CADUE,K;;AAGd,IAAMC,cAAc,GAAG,SAAjBA,cAAiB,CAAAC,GAAG;AAAA,SAAI,OAAOA,GAAP,KAAe,QAAf,IAA2BA,GAA/B;AAAA,CAA1B;;AAEA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAACC,QAAD,EAAWC,MAAX,EAAsB;AACzCA,EAAAA,MAAM,CAACC,KAAP,CAAa,GAAb,EAAkBC,OAAlB,CAA0B,UAAAC,KAAK,EAAI;AACjC,QAAMC,IAAI,GAAGD,KAAK,CAACF,KAAN,CAAY,GAAZ,CAAb;;AACA,QAAIG,IAAI,CAAC,CAAD,CAAJ,IAAWA,IAAI,CAAC,CAAD,CAAnB,EAAwB;AACtBL,MAAAA,QAAQ,CAACK,IAAI,CAAC,CAAD,CAAL,CAAR,GAAoBA,IAAI,CAAC,CAAD,CAAxB;AACD;AACF,GALD;AAMD,CAPD;;AASA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAACC,KAAD,QAAuB;AAAA,MAAbN,MAAa,QAAbA,MAAa;AACzC,MAAMD,QAAQ,GAAG,EAAjB;AACAO,EAAAA,KAAK,CAACJ,OAAN,CAAc,UAAAK,IAAI,EAAI;AACpBR,IAAAA,QAAQ,CAACQ,IAAI,CAACC,EAAN,CAAR,GAAoBD,IAAI,CAACE,KAAzB;AACD,GAFD;;AAGA,MAAIb,cAAc,CAACI,MAAD,CAAlB,EAA4B;AAC1BF,IAAAA,YAAY,CAACC,QAAD,EAAWC,MAAX,CAAZ;AACD;;AACD,SAAOD,QAAP;AACD,CATD;;AAWA,IAAMW,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,SAAH,SAAGA,SAAH;AAAA,MAAcL,KAAd,SAAcA,KAAd;AAAA,MAAqBM,IAArB,SAAqBA,IAArB;AAAA,SAAgClB,UAAU,CAACiB,SAAD,CAAV,aACxCL,KAAK,CAACO,MAAN,CAAaC,OAAb,CADwC,GACjB;AAACN,IAAAA,EAAE,EAAE,MAAL;AAAaC,IAAAA,KAAK,EAAEG;AAApB,GADiB,KAE7CN,KAFa;AAAA,CAAjB;;AAIA,IAAMS,QAAQ,GAAG,SAAXA,QAAW,CAACT,KAAD;AAAA,SAAWA,KAAK,CAC9BU,GADyB,CACrB,UAAAT,IAAI;AAAA,WAAOA,IAAI,CAACC,EAAZ,SAAkBD,IAAI,CAACE,KAAvB;AAAA,GADiB,EAEzBQ,IAFyB,CAEpB,GAFoB,CAAX;AAAA,CAAjB;;AAIA,IAAMC,gBAAgB,GAAG,SAAnBA,gBAAmB,CAACP,SAAD,EAAYL,KAAZ,EAAmBa,OAAnB,EAA+B;AACtD,MAAIzB,UAAU,CAACiB,SAAD,CAAd,EAA2B;AACzBQ,IAAAA,OAAO,CAACC,UAAR,GAAqBf,WAAW,CAACC,KAAD,EAAQa,OAAR,CAAhC;AACD;AACF,CAJD;;AAMA,IAAME,MAAM,GAAG,SAATA,MAAS,CAACF,OAAD,EAAa;AAAA,MAExBR,SAFwB,GAItBQ,OAJsB,CAExBR,SAFwB;AAAA,MAGxBW,OAHwB,GAItBH,OAJsB,CAGxBG,OAHwB;AAAA,MAKxBC,MALwB,GAKfb,QAAQ,CAACS,OAAD,CALO;AAAA,MAMxBK,EANwB,GAMnBT,QAAQ,CAACQ,MAAD,CANW;;AAQ1BL,EAAAA,gBAAgB,CAACP,SAAD,EAAYY,MAAZ,EAAoBJ,OAApB,CAAhB;;AAEA,SAAOzB,UAAU,CAACiB,SAAD,CAAV,GACHhB,KAAK,CAAC2B,OAAD,EAAUE,EAAV,QAAkBhC,OAAlB,CADF,GAEHG,KAAK,CAAC2B,OAAD,EAAUE,EAAV,CAFT;AAGD,CAbD;;eAeeH,M","sourcesContent":["import apiFn from './apiFn'\r\n\r\nconst {\r\n  DF_TAIL,\r\n  isCategory, crUrl\r\n} = apiFn;\r\n\r\nconst _isStrNotEmpty = str => typeof str === 'string' && str;\r\n\r\nconst _addDfTailTo = (mapSlice, dfTail) => {\r\n  dfTail.split('&').forEach(param => {\r\n    const _arr = param.split('=');\r\n    if (_arr[0] && _arr[1]) {\r\n      mapSlice[_arr[0]] = _arr[1]\r\n    }\r\n  })\r\n};\r\n\r\nconst _crMapSlice = (items, { dfTail }) => {\r\n  const mapSlice = {};\r\n  items.forEach(item => {\r\n    mapSlice[item.id] = item.value\r\n  })\r\n  if (_isStrNotEmpty(dfTail)) {\r\n    _addDfTailTo(mapSlice, dfTail)\r\n  }  \r\n  return mapSlice;\r\n};\r\n\r\nconst _crItems = ({ seriaType, items, time }) => isCategory(seriaType)\r\n  ? [ ...items.filter(Boolean), {id: 'time', value: time} ]\r\n  : items;\r\n\r\nconst _crQuery = (items) => items\r\n  .map(item => `${item.id}=${item.value}`)\r\n  .join('&');\r\n\r\nconst _updateOptionsIf = (seriaType, items, options) => {\r\n  if (isCategory(seriaType)) {\r\n    options.zhMapSlice = _crMapSlice(items, options)\r\n  }\r\n};\r\n\r\nconst crUrlN = (options) => {\r\n  const {\r\n    seriaType,\r\n    dfTable\r\n  } = options\r\n  , _items = _crItems(options)\r\n  , _q = _crQuery(_items);\r\n\r\n  _updateOptionsIf(seriaType, _items, options)\r\n\r\n  return isCategory(seriaType)\r\n    ? crUrl(dfTable, _q, `&${DF_TAIL}`)\r\n    : crUrl(dfTable, _q);\r\n};\r\n\r\nexport default crUrlN\r\n"],"file":"crUrlN.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/adapters/eurostat/api/crUrlN.js"
+ ],
+ "file": "../../../../src/adapters/eurostat/api/crUrlN.js",
+ "names": [
+  "DF_TAIL",
+  "apiFn",
+  "isCategory",
+  "isMap",
+  "crUrl",
+  "_isStrNotEmpty",
+  "str",
+  "_addDfTailTo",
+  "mapSlice",
+  "dfTail",
+  "split",
+  "forEach",
+  "param",
+  "_arr",
+  "_crMapSlice",
+  "items",
+  "item",
+  "id",
+  "value",
+  "_crItems",
+  "seriaType",
+  "time",
+  "filter",
+  "Boolean",
+  "concat",
+  "_crQuery",
+  "map",
+  "join",
+  "_updateOptionsIf",
+  "options",
+  "zhMapSlice",
+  "crUrlN",
+  "dfTable",
+  "_items",
+  "_q"
+ ],
+ "mappings": "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"
+}

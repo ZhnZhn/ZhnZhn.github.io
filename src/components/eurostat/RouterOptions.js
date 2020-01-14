@@ -43,24 +43,20 @@ const _crItem = confArr => ({
 });
 const _crItems = arr => arr.map(_crItem);
 
-const _crDF = () => _crItems([
+const _crDF3 = () => _crItems([
   ['Default: Spline', V.S ],
   ['Area', V.A ],
   ['Column', V.S_C ],
   ['Bar: All Countries', V.B ],
   ['Bar+Labels: All Countries', V.B_L ],
   ['Column: All Countries', V.C ],
-  ['Dots: All Countries', V.D ],
-  ['Map: All Countries' , V.M, void 0, CompItemType.EUROSTAT_MAP ],
-]);
-
-const _crDF3 = () => _crItems([
-  ['Default: Spline', V.S ],
-  ['Column', V.S_C ],
-  ['Bar: All Countries', V.B ],
-  ['Column: All Countries', V.C ],
   ['Dots: All Countries', V.D ]
 ]);
+
+const _crDF = () => _crDF3()
+ .concat(_crItems([
+   ['Map: All Countries' , V.M, void 0, CompItemType.EUROSTAT_MAP ]
+ ]));
 
 const _crT1 = () => ([
   _crItem(['Default: Spline', V.S ])

@@ -13,7 +13,8 @@ var _mapFn = _interopRequireDefault(require("./mapFn"));
 
 var URL = _apiFn["default"].URL,
     QUERY_TAIL = _apiFn["default"].QUERY_TAIL,
-    isCategory = _apiFn["default"].isCategory;
+    isCategory = _apiFn["default"].isCategory,
+    isMap = _apiFn["default"].isMap;
 var createMapValue = _mapFn["default"].createMapValue,
     createMapSlice = _mapFn["default"].createMapSlice;
 
@@ -35,7 +36,7 @@ var crUrl = function crUrl(option) {
       mapSlice = itemMap.mapSlice,
       _mapValue = mapValue || createMapValue(option, itemMap);
 
-  if (seriaType === 'MAP') {
+  if (isMap(seriaType)) {
     option.zhMapSlice = mapSlice ? (0, _extends2["default"])({}, mapSlice, {
       time: time
     }) : (0, _extends2["default"])({}, createMapSlice(option, itemMap), {

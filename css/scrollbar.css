@@ -1,8 +1,15 @@
 
+.with-scroll-x__bt-r {
+  display: none;
+}
+
 @media screen and (max-width: 450px) {
  .with-scroll-x {
    scrollbar-width: thin;
    overflow-x: auto;
+ }
+ .with-scroll-x__bt-r {
+   display: inline-block;
  }  
 }
 

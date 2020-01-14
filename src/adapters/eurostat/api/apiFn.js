@@ -17,11 +17,9 @@ const CATEGORY_TYPES = [
 ];
 
 const apiFn = {
-  URL: C.URL,
-  QUERY_TAIL: C.QUERY_TAIL,
-  DF_TAIL: C.DF_TAIL,
-
+  ...C,
   isCategory: isInArrStr(CATEGORY_TYPES),
+  isMap: seriaType => seriaType === 'MAP',
   crUrl: (table, q, tail=C.QUERY_TAIL) => `${C.URL}${table}?${q}${tail}`
 };
 

@@ -14,6 +14,7 @@ const CL = {
 class ButtonTab extends Component {
   /*
   static propTypes = {
+    className : PropTypes.string,
     style : PropTypes.object,
     isShow : PropTypes.bool,
     notUpdatable : PropTypes.bool
@@ -25,7 +26,6 @@ class ButtonTab extends Component {
   static defaultProps = {
     isUpdatable: true
   }
-
 
   constructor(props){
     super(props);
@@ -68,17 +68,24 @@ class ButtonTab extends Component {
   }
 
   render(){
-    const {theme, caption, style, isMenu, children} = this.props
+    const {
+      theme,
+      className, style,
+      caption, isMenu,
+      children
+    } = this.props
     , TS = theme.getStyle(TH_ID)
     , _rootClass = this.state.isShow
          ? CL.BT_TAB__SHOW
-         : CL.BT_TAB;
+         : CL.BT_TAB
+    , _btClass = className
+         ? `${_rootClass} ${className}`
+         : _rootClass;
     return (
       <button
-        className={_rootClass}
+        className={_btClass}
         style={{...style, ...TS.BG}}
         onClick={this._hClick}
-        //tabIndex="-1"
       >
          {caption}
          {isMenu && <span className={CL.ARROW} />}

@@ -8,7 +8,7 @@ var _crDfItem = function _crDfItem(item, rootUri) {
   return {
     id: item[0],
     caption: item[1],
-    uri: "" + rootUri + item[2],
+    uri: "" + rootUri + item[2] + ".json",
     jsonProp: item[3]
   };
 };

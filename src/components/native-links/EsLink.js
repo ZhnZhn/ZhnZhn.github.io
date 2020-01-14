@@ -2,7 +2,7 @@ import React from 'react'
 
 import Link from './Link'
 
-const URL = 'http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=';
+const URL = 'https://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=';
 
 const S = {
   ROOT: {
@@ -25,7 +25,7 @@ const EsLink = ({ item }) => {
       }
       { item.dataset && <li>
           <Link
-           caption="Eurostat Dataset Viewer (Http)"
+           caption="Eurostat Dataset Viewer"
            href={`${URL}${item.dataset}`}
          />
        </li>

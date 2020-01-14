@@ -2,10 +2,12 @@ import apiFn from './apiFn'
 
 const {
   DF_TAIL,
-  isCategory, crUrl
+  isCategory, isMap,
+  crUrl
 } = apiFn;
 
-const _isStrNotEmpty = str => typeof str === 'string' && str;
+const _isStrNotEmpty = str => str &&
+  typeof str === 'string';
 
 const _addDfTailTo = (mapSlice, dfTail) => {
   dfTail.split('&').forEach(param => {
@@ -23,12 +25,14 @@ const _crMapSlice = (items, { dfTail }) => {
   })
   if (_isStrNotEmpty(dfTail)) {
     _addDfTailTo(mapSlice, dfTail)
-  }  
+  }
   return mapSlice;
 };
 
 const _crItems = ({ seriaType, items, time }) => isCategory(seriaType)
-  ? [ ...items.filter(Boolean), {id: 'time', value: time} ]
+  ? isMap(seriaType)
+      ? items.filter(Boolean)
+      : items.filter(Boolean).concat([{ id: 'time', value: time }])
   : items;
 
 const _crQuery = (items) => items

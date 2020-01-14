@@ -7,18 +7,21 @@ import ModalMenuIndicator from './ModalMenuIndicator'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
-const CL_SCROLL = "with-scroll-x";
+const CL = {
+  SCROLL: "with-scroll-x",
+  BT_R: "with-scroll-x__bt-r"
+};
 
 const S = {
   BT_IND: {
-    left: 2
+    left: 8
   },
   M_IND: {
     top: 60,
-    left: 6
+    left: 5
   },
   BT_LEGEND: {
-    left: 112
+    left: 115
   },
   BT_FN: {
     left: 190
@@ -31,30 +34,34 @@ const S = {
     left: 250
   },
   BT_MINI: {
-    left: 354,
+    left: 350,
     width: 68
   },
   M_MINI: {
     top: 60,
-    left: 294
+    left: 290
   },
-  RIGHT_GAP: {
-    position: 'relative',
-    left: 430,
-    width: 30,
-    height: 10,
-    backgroundColor: 'transparent'
+  BT_CONF: {
+    left: 430
+  },
+  BT_R: {
+    left: 440
   }
 };
 
-const SCR = {
-  FN: {
-    X: 180,
-    D: 40
-  },
-  MINI: {
-    X: 344,
-    D: 100
+const _isFn = fn => typeof fn === 'function';
+const _isNumber = n => typeof n === 'number';
+
+const _isHrzScrollable = node  => node
+  && node.scrollWidth > node.clientWidth;
+
+const _scrollNodeToLeft = (node, left) => {
+  if ( _isHrzScrollable(node) ) {
+   if (_isFn(node.scroll)) {
+     node.scroll({ left, behavior: 'smooth'})
+   } else {
+     node.scrollLeft = left
+   }
   }
 };
 
@@ -64,13 +71,13 @@ const _isIndicatorTab = ({ series }, isWithoutIndicator) => !isWithoutIndicator
   && series[0]
   && INDICATOR_TAB_TYPES.indexOf(series[0].type) !== -1;
 
-const _isScrolling = (evt, CONFIG) => evt.clientX !== 0
-  && evt.clientX === evt.pageX
-  && evt.clientX < CONFIG.X;
 
-const _crModalMenuStyle = (evt, CONFIG) => _isScrolling(evt, CONFIG)
-  ? { left: evt.clientX - CONFIG.D}
-  : void 0;
+const _crModalMenuStyle = (node, left) => {
+  if (node && _isNumber(node.scrollLeft)) {
+    return { left: left - node.scrollLeft };
+  }
+  return void 0;
+};
 
 class ChartToolbar extends Component {
   /*
@@ -92,25 +99,36 @@ class ChartToolbar extends Component {
     this.setState({ isShowInd: false })
   }
 
-  _hShowFn = (evt) => {
+  _hShowFn = () => {
     this.setState({
       isShowFn: true,
-      fnStyle: _crModalMenuStyle(evt, SCR.FN)
+      fnStyle: _crModalMenuStyle(this._nodeToolbar, S.BT_FN.left)
     })
   }
   _hCloseFn = () => {
     this.setState({ isShowFn: false })
   }
 
-  _hShowMini = (evt) => {
+  _hShowMini = () => {
     this.setState({
       isShowMini: true,
-      miniStyle: _crModalMenuStyle(evt, SCR.MINI)
+      miniStyle: _crModalMenuStyle(this._nodeToolbar, S.M_MINI.left)
     })
   }
   _hCloseMini = () => {
     this.setState({ isShowMini: false })
   }
+
+  _hClickR = () => {
+    _scrollNodeToLeft(this._nodeToolbar, 0)
+  }
+
+  /*
+  shouldComponentUpdate(){
+    return false;
+  }
+  */
+  _refToolbar = node => this._nodeToolbar = node
 
   render(){
     const {
@@ -214,7 +232,11 @@ class ChartToolbar extends Component {
           onClose={this._hCloseFn}
         />
         {_arrModalMenu}
-        <div className={CL_SCROLL} style={style}>
+        <div
+           ref={this._refToolbar}
+           className={CL.SCROLL}
+           style={style}
+        >
            {_btTabIndicator}
            {_btLegend}
            <ButtonTab
@@ -226,7 +248,13 @@ class ChartToolbar extends Component {
            {_btAdd}
            {_btInfo}
            {_btTabMini}
-           <div style={S.RIGHT_GAP} />
+           {_btTabMini && <ButtonTab
+              className={CL.BT_R}
+              style={S.BT_R}
+              caption=">"
+              onClick={this._hClickR}
+            />
+           }
         </div>
       </>
     );

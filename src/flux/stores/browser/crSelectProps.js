@@ -4,7 +4,7 @@ const _isArr = Array.isArray;
 const _crDfItem = (item, rootUri) => ({
   id: item[0],
   caption: item[1],
-  uri: `${rootUri}${item[2]}`,
+  uri: `${rootUri}${item[2]}.json`,
   jsonProp: item[3]
 })
 const _crIdItem = (item, rootUri) => ({

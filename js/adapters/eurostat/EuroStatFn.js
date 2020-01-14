@@ -33,8 +33,8 @@ var _crDescr = function _crDescr(extension) {
   var _ext = extension || {},
       datasetId = _ext.datasetId,
       subTitle = _ext.subTitle,
-      _id = appendWithColon('DatasetId', datasetId),
-      _sub = appendWithColon('Metric', subTitle),
+      _id = "DatasetId: " + datasetId,
+      _sub = subTitle ? "Metric: " + subTitle : '',
       _d = _ext.description || '';
 
   return (_d + " " + _id + " " + _sub).trim();

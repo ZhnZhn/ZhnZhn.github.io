@@ -150,10 +150,11 @@ function (_Component) {
         caption = _this$props2.caption,
         config = _this$props2.config,
         onCloseItem = _this$props2.onCloseItem,
-        _config$zhDialog = config.zhDialog,
-        zhDialog = _config$zhDialog === void 0 ? {} : _config$zhDialog,
-        _zhDialog$subtitle = zhDialog.subtitle,
-        subtitle = _zhDialog$subtitle === void 0 ? '' : _zhDialog$subtitle,
+        zhDialog = config.zhDialog,
+        _ref2 = zhDialog || {},
+        itemCaption = _ref2.itemCaption,
+        subtitle = _ref2.subtitle,
+        _itemCaption = itemCaption || subtitle || '',
         _this$state = this.state,
         isLoading = _this$state.isLoading,
         isOpen = _this$state.isOpen,
@@ -165,7 +166,7 @@ function (_Component) {
       style: S.ROOT_DIV
     }, _react["default"].createElement(_ItemHeader["default"], {
       isOpen: isOpen,
-      caption: subtitle,
+      caption: _itemCaption,
       onClick: this._hToggle,
       onClose: onCloseItem
     }, _react["default"].createElement("span", {

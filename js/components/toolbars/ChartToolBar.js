@@ -22,17 +22,20 @@ var _ModalMenuFn = _interopRequireDefault(require("./ModalMenuFn"));
 var _ModalMenuMini = _interopRequireDefault(require("./ModalMenuMini"));
 
 //import PropTypes from "prop-types";
-var CL_SCROLL = "with-scroll-x";
+var CL = {
+  SCROLL: "with-scroll-x",
+  BT_R: "with-scroll-x__bt-r"
+};
 var S = {
   BT_IND: {
-    left: 2
+    left: 8
   },
   M_IND: {
     top: 60,
-    left: 6
+    left: 5
   },
   BT_LEGEND: {
-    left: 112
+    left: 115
   },
   BT_FN: {
     left: 190
@@ -45,31 +48,46 @@ var S = {
     left: 250
   },
   BT_MINI: {
-    left: 354,
+    left: 350,
     width: 68
   },
   M_MINI: {
     top: 60,
-    left: 294
+    left: 290
   },
-  RIGHT_GAP: {
-    position: 'relative',
-    left: 430,
-    width: 30,
-    height: 10,
-    backgroundColor: 'transparent'
+  BT_CONF: {
+    left: 430
+  },
+  BT_R: {
+    left: 440
   }
 };
-var SCR = {
-  FN: {
-    X: 180,
-    D: 40
-  },
-  MINI: {
-    X: 344,
-    D: 100
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number';
+};
+
+var _isHrzScrollable = function _isHrzScrollable(node) {
+  return node && node.scrollWidth > node.clientWidth;
+};
+
+var _scrollNodeToLeft = function _scrollNodeToLeft(node, left) {
+  if (_isHrzScrollable(node)) {
+    if (_isFn(node.scroll)) {
+      node.scroll({
+        left: left,
+        behavior: 'smooth'
+      });
+    } else {
+      node.scrollLeft = left;
+    }
   }
 };
+
 var INDICATOR_TAB_TYPES = ['area', 'spline', 'line'];
 
 var _isIndicatorTab = function _isIndicatorTab(_ref, isWithoutIndicator) {
@@ -77,14 +95,14 @@ var _isIndicatorTab = function _isIndicatorTab(_ref, isWithoutIndicator) {
   return !isWithoutIndicator && Array.isArray(series) && series[0] && INDICATOR_TAB_TYPES.indexOf(series[0].type) !== -1;
 };
 
-var _isScrolling = function _isScrolling(evt, CONFIG) {
-  return evt.clientX !== 0 && evt.clientX === evt.pageX && evt.clientX < CONFIG.X;
-};
+var _crModalMenuStyle = function _crModalMenuStyle(node, left) {
+  if (node && _isNumber(node.scrollLeft)) {
+    return {
+      left: left - node.scrollLeft
+    };
+  }
 
-var _crModalMenuStyle = function _crModalMenuStyle(evt, CONFIG) {
-  return _isScrolling(evt, CONFIG) ? {
-    left: evt.clientX - CONFIG.D
-  } : void 0;
+  return void 0;
 };
 
 var ChartToolbar =
@@ -118,10 +136,10 @@ function (_Component) {
       });
     };
 
-    _this._hShowFn = function (evt) {
+    _this._hShowFn = function () {
       _this.setState({
         isShowFn: true,
-        fnStyle: _crModalMenuStyle(evt, SCR.FN)
+        fnStyle: _crModalMenuStyle(_this._nodeToolbar, S.BT_FN.left)
       });
     };
 
@@ -131,10 +149,10 @@ function (_Component) {
       });
     };
 
-    _this._hShowMini = function (evt) {
+    _this._hShowMini = function () {
       _this.setState({
         isShowMini: true,
-        miniStyle: _crModalMenuStyle(evt, SCR.MINI)
+        miniStyle: _crModalMenuStyle(_this._nodeToolbar, S.M_MINI.left)
       });
     };
 
@@ -142,6 +160,14 @@ function (_Component) {
       _this.setState({
         isShowMini: false
       });
+    };
+
+    _this._hClickR = function () {
+      _scrollNodeToLeft(_this._nodeToolbar, 0);
+    };
+
+    _this._refToolbar = function (node) {
+      return _this._nodeToolbar = node;
     };
 
     return _this;
@@ -254,15 +280,19 @@ function (_Component) {
       onPasteTo: onPasteTo,
       onClose: this._hCloseFn
     }), _arrModalMenu, _react["default"].createElement("div", {
-      className: CL_SCROLL,
+      ref: this._refToolbar,
+      className: CL.SCROLL,
       style: style
     }, _btTabIndicator, _btLegend, _react["default"].createElement(_ButtonTab["default"], {
       style: S.BT_FN,
       caption: "Fn",
       isMenu: true,
       onClick: this._hShowFn
-    }), _btAdd, _btInfo, _btTabMini, _react["default"].createElement("div", {
-      style: S.RIGHT_GAP
+    }), _btAdd, _btInfo, _btTabMini, _btTabMini && _react["default"].createElement(_ButtonTab["default"], {
+      className: CL.BT_R,
+      style: S.BT_R,
+      caption: ">",
+      onClick: this._hClickR
     })));
   };
 

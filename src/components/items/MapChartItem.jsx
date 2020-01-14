@@ -113,8 +113,9 @@ class MapChartItem extends Component {
 
   render(){
     const { caption, config, onCloseItem } = this.props
-    , { zhDialog={} } = config
-    , { subtitle='' } = zhDialog
+    , { zhDialog } = config
+    , { itemCaption, subtitle } = zhDialog || {}
+    , _itemCaption = itemCaption || subtitle || ''
     , {
         isLoading, isOpen, isShowInfo,
         time
@@ -127,7 +128,7 @@ class MapChartItem extends Component {
       <div style={S.ROOT_DIV}>
         <ItemHeader
           isOpen={isOpen}
-          caption={subtitle}
+          caption={_itemCaption}
           onClick={this._hToggle}
           onClose={onCloseItem}
         >

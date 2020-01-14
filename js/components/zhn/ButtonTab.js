@@ -30,6 +30,7 @@ function (_Component) {
 
   /*
   static propTypes = {
+    className : PropTypes.string,
     style : PropTypes.object,
     isShow : PropTypes.bool,
     notUpdatable : PropTypes.bool
@@ -91,18 +92,19 @@ function (_Component) {
   _proto.render = function render() {
     var _this$props2 = this.props,
         theme = _this$props2.theme,
-        caption = _this$props2.caption,
+        className = _this$props2.className,
         style = _this$props2.style,
+        caption = _this$props2.caption,
         isMenu = _this$props2.isMenu,
         children = _this$props2.children,
         TS = theme.getStyle(TH_ID),
-        _rootClass = this.state.isShow ? CL.BT_TAB__SHOW : CL.BT_TAB;
+        _rootClass = this.state.isShow ? CL.BT_TAB__SHOW : CL.BT_TAB,
+        _btClass = className ? _rootClass + " " + className : _rootClass;
 
     return _react["default"].createElement("button", {
-      className: _rootClass,
+      className: _btClass,
       style: (0, _extends2["default"])({}, style, {}, TS.BG),
-      onClick: this._hClick //tabIndex="-1"
-
+      onClick: this._hClick
     }, caption, isMenu && _react["default"].createElement("span", {
       className: CL.ARROW
     }), children);
