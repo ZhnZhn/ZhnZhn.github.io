@@ -7,9 +7,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -18,6 +18,13 @@ var _InputStyle = _interopRequireDefault(require("./InputStyle"));
 //import PropTypes from "prop-types";
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
+};
+
+var _crInitialState = function _crInitialState(_ref) {
+  var initialValue = _ref.initialValue;
+  return (0, _extends2["default"])({
+    initialValue: initialValue
+  }, _crValueState(initialValue));
 };
 
 var _crValueState = function _crValueState(value) {
@@ -41,7 +48,7 @@ function (_Component) {
    static propTypes = {
      rootStyle: PropTypes.object,
      inputStyle: PropTypes.object,
-     initValue: PropTypes.string,
+     initialValue: PropTypes.string,
      placeholder: PropTypes.string,
      inpumode: PropTypes.string,
      maxLength: PropTypes.number,
@@ -74,12 +81,13 @@ function (_Component) {
 
     _this._handleBlurValue = function () {
       var _this$props2 = _this.props,
+          initialValue = _this$props2.initialValue,
           onTest = _this$props2.onTest,
           nForecastDate = _this$props2.nForecastDate,
           errorMsg = _this$props2.errorMsg,
           value = _this.state.value;
 
-      if (!onTest(value, nForecastDate)) {
+      if (value !== initialValue && !onTest(value, nForecastDate)) {
         _this.setState({
           errorInput: errorMsg,
           isValid: false
@@ -105,7 +113,7 @@ function (_Component) {
         case 46:
           event.preventDefault();
 
-          _this.setState(_crValueState(_this.props.initValue));
+          _this.setState(_crValueState(_this.props.initialValue));
 
           break;
 
@@ -131,9 +139,13 @@ function (_Component) {
     };
 
     _this.isOnEnter = _isFn(props.onEnter);
-    _this.state = _crValueState(props.initValue);
+    _this.state = _crInitialState(props);
     return _this;
   }
+
+  DateField.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    return nextProps.initialValue !== prevState.initialValue ? _crInitialState(nextProps) : null;
+  };
 
   var _proto = DateField.prototype;
 
@@ -187,6 +199,7 @@ function (_Component) {
 }(_react.Component);
 
 DateField.defaultProps = {
+  initialValue: '',
   placeholder: 'YYYY-MM-DD',
   inputmode: 'numeric',
   name: 'text-date',

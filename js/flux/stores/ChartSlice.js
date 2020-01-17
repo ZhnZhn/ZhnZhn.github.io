@@ -18,6 +18,7 @@ var _isChartExist = _ChartLogic["default"].isChartExist,
     showChart = _ChartLogic["default"].showChart,
     removeConfig = _ChartLogic["default"].removeConfig,
     toTop = _ChartLogic["default"].toTop,
+    updateMovingValues = _ChartLogic["default"].updateMovingValues,
     sortBy = _ChartLogic["default"].sortBy,
     removeAll = _ChartLogic["default"].removeAll,
     checkBrowserChartTypes = _ChartLogic["default"].checkBrowserChartTypes,
@@ -78,13 +79,6 @@ var ChartSlice = {
   onLoadStockFailed: function onLoadStockFailed(option) {
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_FAILED);
     setAlertItemIdTo(option);
-    /*
-    const { alertItemId, value } = option;
-    option.alertItemId = _isStr(alertItemId)
-      ? alertItemId
-      : _isStr(value) ? value : void 0;
-    */
-
     this.showAlertDialog(option);
 
     _fnLogLoadError(option);
@@ -139,6 +133,9 @@ var ChartSlice = {
   },
   getCopyFromChart: function getCopyFromChart() {
     return this.fromChart;
+  },
+  onUpdateMovingValues: function onUpdateMovingValues(chartType, movingValues) {
+    updateMovingValues(this.charts, chartType, movingValues);
   },
   onSortBy: function onSortBy(chartType, by) {
     var chartSlice = sortBy(this.charts, chartType, by);

@@ -55,11 +55,9 @@ var S = {
     top: 60,
     left: 290
   },
-  BT_CONF: {
-    left: 430
-  },
   BT_R: {
-    left: 440
+    left: 440,
+    width: 36
   }
 };
 

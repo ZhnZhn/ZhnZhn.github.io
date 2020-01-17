@@ -62,7 +62,7 @@ class DatesFragment extends Component {
                ref={this._refFromDate}
                rootStyle={dateStyle}
                placeholder={placeholder}
-               initValue={initFromDate}
+               initialValue={initFromDate}
                errorMsg={errMsg}
                onTest={onTestDate}
                onEnter={onEnter}
@@ -76,7 +76,7 @@ class DatesFragment extends Component {
                ref={this._refToDate}
                rootStyle={dateStyle}
                placeholder={placeholder}
-               initValue={initToDate}
+               initialValue={initToDate}
                nForecastDate={nForecastDate}
                errorMsg={errMsg}
                onTest={onTestDate}

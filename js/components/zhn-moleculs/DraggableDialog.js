@@ -127,7 +127,7 @@ function (_Component) {
         key: "show",
         rootStyle: S.BT_ROOT,
         caption: "Show",
-        title: "Show Pane Container" //accessKey="s"
+        title: "Show Item Container" //accessKey="s"
         ,
         onClick: onShowChart
       }), _react["default"].createElement(_FlatButton["default"], {
@@ -153,20 +153,6 @@ function (_Component) {
 
   var _proto = DraggableDialog.prototype;
 
-  /*
-  constructor(props){
-    super(props)
-      //this.rootDiv = null
-    //this._refRootDiv = this._refRootDiv.bind(this)
-    //this.btMore = null
-    //this._refBtMore = this._refBtMore.bind(this)
-      //this._hKeyDown = this._hKeyDown.bind(this)
-    //this._hClose = this._hClose.bind(this)
-      this.state = {
-      isMore: false
-    }
-  }
-  */
   _proto.componentDidMount = function componentDidMount() {
     _Interact["default"].makeDragable(this.rootDiv);
 

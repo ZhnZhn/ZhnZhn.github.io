@@ -68,7 +68,7 @@ function (_Component) {
       style: labelStyle
     }, labelTitle), _react["default"].createElement(_DateField["default"], {
       ref: this._refInpuDate,
-      initValue: initValue,
+      initialValue: initValue,
       errorMsg: errorMsg,
       onTest: onTestDate
     }));

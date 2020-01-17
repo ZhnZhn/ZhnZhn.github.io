@@ -84,7 +84,8 @@ class ValueMovingBadge extends Component {
       PropTypes.func,
       PropTypes.bool
     ]),
-    crValueMoving: PropTypes.func
+    crValueMoving: PropTypes.func,
+    regCompVm: PropTypes.func
   }
   */
 
@@ -95,7 +96,8 @@ class ValueMovingBadge extends Component {
       percent: 0,
       direction: D.EQUAL,
       date: ''
-    }
+    },
+    regCompVm: () => {}
   }
 
   constructor(props){
@@ -104,6 +106,10 @@ class ValueMovingBadge extends Component {
       isShowModal : false,
       valueMoving : props.valueMoving
     }
+  }
+
+  componentDidMount(){
+    this.props.regCompVm(this)
   }
 
   _hClickBt = () => {
@@ -117,10 +123,10 @@ class ValueMovingBadge extends Component {
 
 
   _updateDateTo = (dateTo) => {
-    const valueMoving = this.props.crValueMoving(this.state.valueMoving, dateTo)
+    const valueMoving = this.props.crValueMoving(this.state.valueMoving, dateTo)    
     if (valueMoving) {
       this.setState({ valueMoving })
-      return true;
+      return valueMoving;
     } else {
       return false;
     }

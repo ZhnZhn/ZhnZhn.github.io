@@ -7,8 +7,7 @@ import formatAllNumber from '../../utils/formatAllNumber'
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
-import SpanLabel from '../zhn-span/SpanLabel'
-import DateField from '../zhn/DateField'
+import DivCompareTo from '../modals/DivCompareTo'
 
 const { isDmy } = DateUtils;
 
@@ -37,20 +36,6 @@ const S = {
     display: 'inline-block',
     paddingLeft: 16,
     whiteSpace: 'nowrap'
-  },
-  ROW_INPUT : {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: 8
-  },
-  DATE_FIELD: {
-    width: 120,
-    marginLeft: 8,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  },
-  MSG: {
-    color: '#f44336',
-    fontWeight: 'bold'
   }
 };
 
@@ -91,15 +76,19 @@ class ModalValueMoving extends Component {
   state = {
     msgDateTo: ''
   }
+  _refInput = React.createRef()
 
   componentDidUpdate(prevProps){
+    if (this.props.isShow && this._refInput.current) {
+      this._refInput.current.focusInput()
+    }
     if (this.props !== prevProps) {
       this.setState({ msgDateTo: '' })
     }
   }
 
   _handleEnterDate = (dateTo) => {
-    if (this.dateToComp.isValid()){
+    if (isDmy(dateTo)){
       const isUpdated = this.props.updateDateTo(dateTo)
       if (isUpdated){
         this.setState({ msgDateTo: ''})
@@ -109,33 +98,6 @@ class ModalValueMoving extends Component {
     }
   }
 
-  _refDateToComp = comp => this.dateToComp = comp
-
-  _renderAdmin = (date, msgDateTo) => {
-    return (
-     <div>
-      {/* eslint-disable jsx-a11y/label-has-associated-control */ }
-      <label style={S.ROW_INPUT} >
-        <SpanLabel label="CompareTo:" />
-        <DateField
-          ref={this._refDateToComp}
-          rootStyle={S.DATE_FIELD}
-          initValue={date}
-          placeholder="DD-MM-YYYY"
-          errorMsg="DD-MM-YYYY"
-          onTest={isDmy}
-          onEnter={this._handleEnterDate}
-        />
-      </label>
-      {/* eslint-enable jsx-a11y/label-has-associated-control */ }
-      <div>
-        <span style={S.MSG}>
-          {msgDateTo}
-        </span>
-      </div>
-    </div>
-   );
-  }
 
   render(){
     const {
@@ -156,10 +118,14 @@ class ModalValueMoving extends Component {
       >
         <RowValueDate value={value} date={date} />
         <RowValueDate value={valueTo} date={dateTo} />
-        { _isNotAdminMode(isAdminMode, isDenyToChange)
-           ? null
-           : this._renderAdmin(date, msgDateTo)
-         }
+        { !_isNotAdminMode(isAdminMode, isDenyToChange)
+          && <DivCompareTo
+           ref={this._refInput}
+           initialValue={dateTo}
+           msgErr={msgDateTo}
+           onTest={isDmy}
+           onEnter={this._handleEnterDate}
+        />}
       </ModalPopup>
     );
   }

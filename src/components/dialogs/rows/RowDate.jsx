@@ -32,7 +32,7 @@ class RowDate extends Component {
         </span>
         <DateField
            ref={this._refInpuDate}
-           initValue={initValue}
+           initialValue={initValue}
            errorMsg={errorMsg}
            onTest={onTestDate}
         />

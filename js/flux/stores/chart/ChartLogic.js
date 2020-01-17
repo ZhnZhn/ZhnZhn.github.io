@@ -25,7 +25,8 @@ var _getSlice = function _getSlice(slice, chartType) {
       _cT = activeContChb ? activeContChb.chartType || chartType : chartType,
       chartSlice = slice[_cT],
       _ref = chartSlice || {},
-      configs = _ref.configs;
+      _ref$configs = _ref.configs,
+      configs = _ref$configs === void 0 ? [] : _ref$configs;
 
   return {
     chartSlice: chartSlice,
@@ -145,10 +146,23 @@ var ChartLogic = {
 
     return chartSlice;
   },
-  sortBy: function sortBy(slice, chartType, by) {
+  updateMovingValues: function updateMovingValues(slice, chartType, movingValues) {
     var _getSlice7 = _getSlice(slice, chartType),
-        chartSlice = _getSlice7.chartSlice,
-        configs = _getSlice7.configs;
+        configs = _getSlice7.configs,
+        _maxConfigs = configs.length;
+
+    if (_maxConfigs === movingValues.length) {
+      var i = 0;
+
+      for (; i < _maxConfigs; i++) {
+        configs.valueMoving = movingValues[i];
+      }
+    }
+  },
+  sortBy: function sortBy(slice, chartType, by) {
+    var _getSlice8 = _getSlice(slice, chartType),
+        chartSlice = _getSlice8.chartSlice,
+        configs = _getSlice8.configs;
 
     if (by) {
       configs.sort((0, _fCompareBy["default"])(by));

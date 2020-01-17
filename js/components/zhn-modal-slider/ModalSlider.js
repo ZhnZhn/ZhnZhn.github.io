@@ -23,7 +23,6 @@ var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _MenuPage = _interopRequireDefault(require("./MenuPage"));
 
-var PERIOD_MS = 750;
 var S = {
   SHOW_HIDE: {
     position: 'absolute',
@@ -34,14 +33,21 @@ var S = {
     flexFlow: 'row nowrap',
     alignItems: 'flex-start',
     overflowX: 'hidden',
-    transition: "all " + PERIOD_MS + "ms ease-out"
+    transition: 'all 750ms ease-out'
   }
 };
 
-var _getTranslateX = function _getTranslateX(node) {
-  var _prevStr = node.style.transform.substr(11).replace('px', '').replace(')', '');
-
-  return parseInt(_prevStr, 10);
+var _crInitialState = function _crInitialState(model, INIT_ID) {
+  return {
+    pageCurrent: 1,
+    pages: [_react["default"].createElement(_MenuPage["default"], {
+      key: INIT_ID,
+      items: model[INIT_ID],
+      baseTitleCl: model.baseTitleCl,
+      itemCl: model.itemCl
+    })],
+    model: model
+  };
 };
 
 var ModalSlider =
@@ -63,29 +69,23 @@ function (_Component) {
   function ModalSlider(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this.hPrevPage = function (pageNumber) {
       _this.setState(function (prevState) {
         prevState.pageCurrent = pageNumber - 1;
-        _this._direction = -1;
         return prevState;
       });
     };
 
     _this._addPage = function (pages, id, title) {
-      var _this$props = _this.props,
-          model = _this$props.model,
-          onClose = _this$props.onClose;
+      var model = _this.props.model;
       pages.push(_react["default"].createElement(_MenuPage["default"], {
         key: id,
-        style: _this._pageStyle,
         title: title,
         items: model[id],
         baseTitleCl: model.baseTitleCl,
-        itemCl: model.itemCl,
-        onPrevPage: _this.hPrevPage,
-        onClose: onClose
+        itemCl: model.itemCl
       }));
     };
 
@@ -108,28 +108,17 @@ function (_Component) {
           _this._addPage(pages, id, title);
         }
 
-        prevState.pageCurrent = pageNumber + 1; //prevState.direction = 1
-
-        _this._direction = 1;
+        prevState.pageCurrent = pageNumber + 1;
         return prevState;
       });
     };
 
     _this._crTransform = function () {
-      var _WIDTH = _this._PAGE_WIDTH;
-      var dX = '0';
-
-      if (_this._direction !== 0 && _this._pagesNode) {
-        var _prevInt = _getTranslateX(_this._pagesNode);
-
-        dX = _this._direction === 1 ? _prevInt - _WIDTH : _prevInt + _WIDTH;
-        _this._direction = 0;
-      } else if (_this._direction === 0 && _this._pagesNode) {
-        dX = _getTranslateX(_this._pagesNode);
-      }
+      var pageCurrent = _this.state.pageCurrent,
+          _dX = -1 * _this._PAGE_WIDTH * (pageCurrent - 1) + 0;
 
       return {
-        transform: "translateX(" + dX + "px)"
+        transform: "translateX(" + _dX + "px)"
       };
     };
 
@@ -138,14 +127,18 @@ function (_Component) {
     };
 
     _this._renderPages = function () {
-      var _this$state = _this.state,
+      var onClose = _this.props.onClose,
+          _this$state = _this.state,
           pages = _this$state.pages,
           pageCurrent = _this$state.pageCurrent;
       return pages.map(function (Page, index) {
         return _react["default"].cloneElement(Page, {
           pageCurrent: pageCurrent,
-          //pageNumber: index,
-          pageNumber: index + 1
+          style: _this._pageStyle,
+          pageNumber: index + 1,
+          onNextPage: index === 0 ? _this.hNextPage : void 0,
+          onPrevPage: index !== 0 ? _this.hPrevPage : void 0,
+          onClose: onClose
         });
       });
     };
@@ -154,13 +147,9 @@ function (_Component) {
         pageWidth = props.pageWidth,
         maxPages = props.maxPages,
         _model = props.model,
-        _onClose = props.onClose,
         _pW = _model.pageWidth || pageWidth,
-        _maxP = _model.maxPages || maxPages,
-        _pages = [];
+        _maxP = _model.maxPages || maxPages;
 
-    _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
-    _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this._PAGE_WIDTH = _pW;
     _this._pagesStyle = {
       width: _maxP * _pW + "px"
@@ -168,36 +157,29 @@ function (_Component) {
     _this._pageStyle = {
       width: _pW + "px"
     };
-
-    _pages.push(_react["default"].createElement(_MenuPage["default"], {
-      key: INIT_ID,
-      style: _this._pageStyle,
-      items: _model[INIT_ID],
-      baseTitleCl: _model.baseTitleCl,
-      itemCl: _model.itemCl,
-      onNextPage: _this.hNextPage,
-      onClose: _onClose
-    }));
-
-    _this._direction = 0;
-    _this.state = {
-      pageCurrent: 1,
-      pages: _pages
-    };
+    _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
+    _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
+    _this.state = _crInitialState(_model, INIT_ID);
     return _this;
   }
+
+  ModalSlider.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var model = nextProps.model,
+        INIT_ID = nextProps.INIT_ID;
+    return model !== prevState.model ? _crInitialState(model, INIT_ID) : null;
+  };
 
   var _proto = ModalSlider.prototype;
 
   _proto.render = function render() {
     var _pagesStyle = this._pagesStyle,
         _pageStyle = this._pageStyle,
-        _this$props2 = this.props,
-        isShow = _this$props2.isShow,
-        className = _this$props2.className,
-        rootStyle = _this$props2.rootStyle,
-        style = _this$props2.style,
-        onClose = _this$props2.onClose,
+        _this$props = this.props,
+        isShow = _this$props.isShow,
+        className = _this$props.className,
+        rootStyle = _this$props.rootStyle,
+        style = _this$props.style,
+        onClose = _this$props.onClose,
         _transform = this._crTransform(),
         _showHideStyle = (0, _extends2["default"])({}, style, {}, S.SHOW_HIDE, {}, _pageStyle),
         _divStyle = (0, _extends2["default"])({}, S.PAGES, {}, _pagesStyle, {}, _transform);

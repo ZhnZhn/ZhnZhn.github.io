@@ -108,7 +108,8 @@ function (_Component) {
       PropTypes.func,
       PropTypes.bool
     ]),
-    crValueMoving: PropTypes.func
+    crValueMoving: PropTypes.func,
+    regCompVm: PropTypes.func
   }
   */
   function ValueMovingBadge(props) {
@@ -138,7 +139,7 @@ function (_Component) {
           valueMoving: valueMoving
         });
 
-        return true;
+        return valueMoving;
       } else {
         return false;
       }
@@ -152,6 +153,10 @@ function (_Component) {
   }
 
   var _proto = ValueMovingBadge.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.props.regCompVm(this);
+  };
 
   _proto.render = function render() {
     var isAdminMode = this.props.isAdminMode,
@@ -202,7 +207,8 @@ ValueMovingBadge.defaultProps = {
     percent: 0,
     direction: _Type.Direction.EQUAL,
     date: ''
-  }
+  },
+  regCompVm: function regCompVm() {}
 };
 var _default = ValueMovingBadge;
 exports["default"] = _default;

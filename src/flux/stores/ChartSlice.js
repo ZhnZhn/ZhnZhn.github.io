@@ -9,6 +9,7 @@ const {
   loadConfig, showChart,
   removeConfig,
   toTop,
+  updateMovingValues,
   sortBy,
   removeAll,
   checkBrowserChartTypes,
@@ -32,7 +33,7 @@ const ChartSlice = {
   },
   isChartExist(option){
     checkBrowserChartTypes(this, option)
-    const { chartType, key } = option;    
+    const { chartType, key } = option;
     return isChartExist(this.charts, chartType, key);
   },
 
@@ -48,8 +49,8 @@ const ChartSlice = {
       this.addMenuItemCounter(chartType, browserType);
 
       const {
-              chartSlice, Comp
-            } = loadConfig(this.charts, config, option);
+        chartSlice, Comp
+      } = loadConfig(this.charts, config, option);
       if (chartSlice){
         this.trigger(CHAT.LOAD_STOCK_COMPLETED, chartSlice);
       } else {
@@ -66,12 +67,6 @@ const ChartSlice = {
   onLoadStockFailed(option){
     this.triggerLoadingProgress(LPA.LOADING_FAILED)
     setAlertItemIdTo(option)
-    /*
-    const { alertItemId, value } = option;
-    option.alertItemId = _isStr(alertItemId)
-      ? alertItemId
-      : _isStr(value) ? value : void 0;
-    */
     this.showAlertDialog(option);
     _fnLogLoadError(option);
   },
@@ -132,6 +127,10 @@ const ChartSlice = {
   },
   getCopyFromChart(){
     return this.fromChart;
+  },
+
+  onUpdateMovingValues(chartType, movingValues){
+    updateMovingValues(this.charts, chartType, movingValues)
   },
 
   onSortBy(chartType, by){

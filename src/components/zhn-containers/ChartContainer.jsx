@@ -4,11 +4,11 @@ import withTheme from '../hoc/withTheme'
 
 import ChartStore from '../../flux/stores/ChartStore';
 import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
-
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 
 import ModalSlider from '../zhn-modal-slider/ModalSlider'
 import crModelMore from './ModelMore'
+import ModalCompareTo from './ModalCompareTo'
 
 import BrowserCaption from '../zhn/BrowserCaption';
 import SvgHrzResize from '../zhn/SvgHrzResize';
@@ -33,13 +33,6 @@ const CHILD_MARGIN = 36
     , DELTA = 10;
 
 const S = {
-  /*
-  transitionOption : {
-    transitionName : "scaleY",
-    transitionEnterTimeout : 400,
-    transitionLeave : false
-  },
-  */
   INLINE: {
     display: 'inline-block'
   },
@@ -54,14 +47,16 @@ const COMP_ACTIONS = [
   CHAT.CLOSE_CHART
 ];
 
+
+const _isFn = fn => typeof fn === "function";
+const _isBool = bool => typeof bool === 'boolean';
 const _isInArray = (arr=[], value) => Boolean(~arr.indexOf(value))
 
 const _getWidth = style => parseInt(style.width, 10)
   || RESIZE_INIT_WIDTH;
 const _toStyleWidth = width => width + 'px';
 
-const _isFn = fn => typeof fn === "function";
-
+const _crItemRefPropName = index => 'chart' + index;
 
 class ChartContainer extends Component {
 
@@ -71,26 +66,37 @@ class ChartContainer extends Component {
 
   constructor(props){
     super(props);
-    const { chartType, onRemoveAll } = props;
     this.childMargin = CHILD_MARGIN;
+    this._MODEL = this._crModelMore()
 
-    this._MODEL = crModelMore({
-      chartType,
+    this._hSetActive = this._toggleChb.bind(this, true)
+    this._hSetNotActive = this._toggleChb.bind(this, false)
+
+    this.state = {
+      isMore: false,
+      isCompareTo: false
+    };
+  }
+
+  _crModelMore = (isAdminMode) => {
+    this._isAdminMode = _isBool(isAdminMode)
+      ? isAdminMode
+      : ChartStore.isAdminMode()
+    const {
+      onRemoveAll, onSortBy
+    } = this.props;
+    return crModelMore({
       onMinWidth: this._resizeTo.bind(this, RESIZE_MIN_WIDTH),
       onInitWidth: this._resizeTo.bind(this, RESIZE_INIT_WIDTH),
       onPlusWidth: this._plusToWidth,
       onMinusWidth: this._minusToWidth,
       onFit: this._fitToWidth,
       onShowCaptions: this._onShowCaptions,
-      onRemoveAll
-    })
-
-    this._hSetActive = this._toggleChb.bind(this, true)
-    this._hSetNotActive = this._toggleChb.bind(this, false)
-
-    this.state = {
-      isMore: false
-    };
+      onSortBy,
+      onRemoveAll,
+      isAdminMode: this._isAdminMode,
+      onCompareTo: this._onCompareTo
+    });
   }
 
   componentDidMount(){
@@ -138,26 +144,43 @@ class ChartContainer extends Component {
       this.setState({ isShow: false });
    }
 
+   _getItemMax = () => this.state.configs.length
+
    _hResizeAfter = (parentWidth) => {
-     let i=0
-       , max = this.state.configs.length
-       , _propName;
+     const max = this._getItemMax();
+     let i=0, _refItem;
      for (; i<max; i++) {
-        _propName = this._crChartPropName(i)
-        if (this[_propName] && _isFn(this[_propName].reflowChart)){
-          this[_propName].reflowChart(parentWidth - this.childMargin)
+        _refItem = this[_crItemRefPropName(i)]
+        if (_refItem && _isFn(_refItem.reflowChart)){
+          _refItem.reflowChart(parentWidth - this.childMargin)
         }
      }
    }
 
-   _onShowCaptions = (parentWidth) => {
-     let i=0
-       , max = this.state.configs.length
-       , _propName;
+   _compareTo = (dateTo) => {
+     const _arrR = []
+     , max = this._getItemMax();
+     let i=0, _refItem;
      for (; i<max; i++) {
-        _propName = this._crChartPropName(i)
-        if (this[_propName] && _isFn(this[_propName].showCaption)){
-          this[_propName].showCaption()
+        _refItem = this[_crItemRefPropName(i)]
+        if (_refItem && _isFn(_refItem.compareTo)){
+          _arrR.push(_refItem.compareTo(dateTo))
+        }
+     }
+     const _r = max - _arrR.filter(Boolean).length;
+     if (max > 0 && _r === 0) {
+       this.props.updateMovingValues(_arrR)
+     }
+     return _r;
+   }
+
+   _onShowCaptions = (parentWidth) => {
+     const max = this._getItemMax()
+     let i=0, _refItem;
+     for (; i<max; i++) {
+        _refItem = this[_crItemRefPropName(i)]
+        if (_refItem && _isFn(_refItem.showCaption)){
+          _refItem.showCaption()
         }
      }
    }
@@ -171,15 +194,14 @@ class ChartContainer extends Component {
      }))
    }
 
-  _crChartPropName = (index) => 'chart' + index
-  _refChart = (index, comp) => this[this._crChartPropName(index)] = comp
+  _refChart = (index, comp) => this[_crItemRefPropName(index)] = comp
 
-   _renderCharts = () => {
+  _renderCharts = () => {
      const { chartType, browserType, onCloseItem } = this.props
-         , { configs=[] } = this.state
-         , _isAdminMode = _isFn(ChartStore.isAdminMode)
-              ? ChartStore.isAdminMode.bind(ChartStore)
-              : false ;
+     , { configs=[] } = this.state
+     , _isAdminMode = _isFn(ChartStore.isAdminMode)
+           ? ChartStore.isAdminMode.bind(ChartStore)
+           : false ;
      return configs.map((config, index) => {
        const { zhConfig={} } = config
            , { id } = zhConfig;
@@ -227,6 +249,20 @@ class ChartContainer extends Component {
      ))
    }
 
+   _onCompareTo = () => {
+     this.setState({ isCompareTo: true })
+   }
+   _closeCompareTo = () => {
+     this.setState({ isCompareTo: false })
+   }
+
+   _getModelMore = () => {
+     const _isAdminMode = ChartStore.isAdminMode();
+     return this._isAdminMode === _isAdminMode
+       ? this._MODEL
+       : (this._MODEL = this._crModelMore(_isAdminMode));
+   }
+
    _refRootNode = node => this._rootNode = node
    _refSpComp = node => this.spComp = node
 
@@ -235,13 +271,14 @@ class ChartContainer extends Component {
        theme, caption
      } = this.props
      , TS = theme.getStyle(TH_ID)
-     , { isShow, isMore } = this.state
+     , { isShow, isMore, isCompareTo } = this.state
      , _styleIsShow = isShow
           ? S.INLINE
           : S.NONE
      , _classIsShow = isShow
           ? `${CL.ROOT} ${CL.SHOW}`
-          : CL.ROOT;
+          : CL.ROOT
+     , _modelMore = this._getModelMore();
      return(
         <div
            ref={this._refRootNode}
@@ -252,9 +289,15 @@ class ChartContainer extends Component {
             isShow={isMore}
             className={CL.MENU_MORE}
             style={TS.EL_BORDER}
-            model={this._MODEL}
+            model={_modelMore}
             onClose={this._hToggleMore}
           />
+          { this._isAdminMode && <ModalCompareTo
+              isShow={isCompareTo}
+              onClose={this._closeCompareTo}
+              onCompareTo={this._compareTo}
+            />
+          }
           <BrowserCaption
              onMore={this._showMore}
              onCheck={this._hSetActive}

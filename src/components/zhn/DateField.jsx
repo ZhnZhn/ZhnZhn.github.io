@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 
 import STYLE from './InputStyle';
 
-const _isFn = fn => typeof(fn) === 'function';
+const _isFn = fn => typeof fn === 'function';
+
+const _crInitialState = ({ initialValue }) => ({
+  initialValue,
+  ..._crValueState(initialValue)
+});
 
 const _crValueState = (value='') => ({
   value,
@@ -16,7 +21,7 @@ class DateField extends Component {
    static propTypes = {
      rootStyle: PropTypes.object,
      inputStyle: PropTypes.object,
-     initValue: PropTypes.string,
+     initialValue: PropTypes.string,
      placeholder: PropTypes.string,
      inpumode: PropTypes.string,
      maxLength: PropTypes.number,
@@ -28,6 +33,7 @@ class DateField extends Component {
    */
 
    static defaultProps = {
+     initialValue: '',
      placeholder: 'YYYY-MM-DD',
      inputmode: 'numeric',
      name: 'text-date',
@@ -38,7 +44,13 @@ class DateField extends Component {
    constructor(props){
      super(props)
      this.isOnEnter = _isFn(props.onEnter)
-     this.state = _crValueState(props.initValue)
+     this.state = _crInitialState(props)
+   }
+
+   static getDerivedStateFromProps(nextProps, prevState){
+     return nextProps.initialValue !== prevState.initialValue
+       ? _crInitialState(nextProps)
+       : null;
    }
 
   _handleChangeValue = (event) => {
@@ -55,9 +67,12 @@ class DateField extends Component {
   }
 
   _handleBlurValue = () => {
-    const { onTest, nForecastDate, errorMsg } = this.props
-        , { value } = this.state;
-    if (!onTest(value, nForecastDate)){
+    const {
+      initialValue,
+      onTest, nForecastDate, errorMsg
+    } = this.props
+    , { value } = this.state;
+    if (value !== initialValue && !onTest(value, nForecastDate)){
       this.setState({
         errorInput: errorMsg,
         isValid: false
@@ -80,7 +95,7 @@ class DateField extends Component {
       case 27: case 46:
         event.preventDefault()
         this.setState(
-          _crValueState(this.props.initValue)
+          _crValueState(this.props.initialValue)
         )
         break;
       default: return;

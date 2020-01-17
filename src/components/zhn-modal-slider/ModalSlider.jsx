@@ -7,8 +7,6 @@ import ShowHide from '../zhn/ShowHide'
 
 import MenuPage from './MenuPage'
 
-const PERIOD_MS = 750;
-
 const S = {
   SHOW_HIDE: {
     position: 'absolute',
@@ -19,18 +17,22 @@ const S = {
     flexFlow: 'row nowrap',
     alignItems: 'flex-start',
     overflowX: 'hidden',
-    transition: `all ${PERIOD_MS}ms ease-out`
+    transition: 'all 750ms ease-out'
   }
 };
 
-const _getTranslateX = (node) => {
-  const _prevStr = node
-    .style.transform
-    .substr(11)
-    .replace('px', '')
-    .replace(')', '');
-  return parseInt(_prevStr, 10);
-}
+const _crInitialState = (model, INIT_ID) => ({
+  pageCurrent: 1,
+  pages: [
+    <MenuPage
+      key={INIT_ID}
+      items={model[INIT_ID]}
+      baseTitleCl={model.baseTitleCl}
+      itemCl={model.itemCl}
+    />
+  ],
+  model
+});
 
 class ModalSlider extends Component {
   /*
@@ -57,23 +59,14 @@ class ModalSlider extends Component {
   }
 
   constructor(props){
-    super()
+    super(props)
     const {
-            INIT_ID,
-            pageWidth, maxPages,
-            model,
-            onClose
-          } = props
-          , _pW = model.pageWidth || pageWidth
-          , _maxP = model.maxPages || maxPages
-          , pages = [];
-
-    this.hNextPage = throttleOnce(
-      this.hNextPage.bind(this)
-    )
-    this.hPrevPage = throttleOnce(
-      this.hPrevPage.bind(this)
-    )
+      INIT_ID,
+      pageWidth, maxPages,
+      model
+    } = props
+    , _pW = model.pageWidth || pageWidth
+    , _maxP = model.maxPages || maxPages;
 
     this._PAGE_WIDTH = _pW
     this._pagesStyle = {
@@ -83,50 +76,39 @@ class ModalSlider extends Component {
       width: `${_pW}px`,
     }
 
-    pages.push((
-      <MenuPage
-        key={INIT_ID}
-        style={this._pageStyle}
-        items={model[INIT_ID]}
-        baseTitleCl={model.baseTitleCl}
-        itemCl={model.itemCl}
-        onNextPage={this.hNextPage}
-        onClose={onClose}
-      />
-    ))
+    this.hNextPage = throttleOnce(
+      this.hNextPage.bind(this)
+    )
+    this.hPrevPage = throttleOnce(
+      this.hPrevPage.bind(this)
+    )
 
-    this._direction = 0
-
-    this.state = {
-      pageCurrent: 1,
-      pages
-    }
+    this.state = _crInitialState(model, INIT_ID)
   }
 
+  static getDerivedStateFromProps(nextProps, prevState){
+    const { model, INIT_ID } = nextProps;
+    return model !== prevState.model
+      ? _crInitialState(model, INIT_ID)
+      : null;
+  }
 
   hPrevPage = (pageNumber) => {
     this.setState(prevState => {
       prevState.pageCurrent = pageNumber - 1
-      this._direction = -1
       return prevState;
     })
   }
 
   _addPage = (pages, id, title) => {
-    const {
-            model,
-            onClose
-          } = this.props;
+    const { model } = this.props;
     pages.push((
       <MenuPage
         key={id}
-        style={this._pageStyle}
         title={title}
         items={model[id]}
         baseTitleCl={model.baseTitleCl}
         itemCl={model.itemCl}
-        onPrevPage={this.hPrevPage}
-        onClose={onClose}
       />
     ))
   }
@@ -150,55 +132,49 @@ class ModalSlider extends Component {
       }
 
       prevState.pageCurrent = pageNumber + 1
-      //prevState.direction = 1
-      this._direction = 1
       return prevState;
     })
   }
 
   _crTransform = () => {
-    const _WIDTH = this._PAGE_WIDTH;
-    let dX = '0';
-    if (this._direction !== 0 && this._pagesNode) {
-      const _prevInt = _getTranslateX(this._pagesNode);
-      dX = this._direction === 1
-         ? _prevInt-_WIDTH
-         : _prevInt+_WIDTH
-      this._direction = 0
-    } else if ( this._direction === 0 && this._pagesNode) {
-      dX = _getTranslateX(this._pagesNode)
-    }
-
-    return { transform: `translateX(${dX}px)` };
+    const { pageCurrent } = this.state
+    , _dX = -1*this._PAGE_WIDTH*(pageCurrent - 1)+0;
+    return { transform: `translateX(${_dX}px)` };
   }
 
   _refPages = n => this._pagesNode = n
 
   _renderPages = () => {
-    const { pages, pageCurrent } = this.state;
-    return pages.map((Page, index) => {
-      return React.cloneElement(Page, {
-        pageCurrent,
-        //pageNumber: index,
-        pageNumber: index + 1,
-      });
-    })
+    const { onClose } = this.props
+    , { pages, pageCurrent } = this.state;
+    return pages.map((Page, index) => React.cloneElement(Page, {
+      pageCurrent,
+      style: this._pageStyle,
+      pageNumber: index + 1,
+      onNextPage: index === 0 ? this.hNextPage : void 0,
+      onPrevPage: index !== 0 ? this.hPrevPage : void 0,
+      onClose
+    }));
   }
 
   render(){
     const { _pagesStyle, _pageStyle } = this
-        , { isShow, className, rootStyle, style, onClose } = this.props
-        , _transform = this._crTransform()
-        , _showHideStyle = {
-            ...style,
-            ...S.SHOW_HIDE,
-            ..._pageStyle
-          }
-        , _divStyle = {
-             ...S.PAGES,
-             ..._pagesStyle,
-             ..._transform
-           };
+    , {
+        isShow, className,
+        rootStyle, style,
+        onClose
+      } = this.props
+    , _transform = this._crTransform()
+    , _showHideStyle = {
+        ...style,
+        ...S.SHOW_HIDE,
+        ..._pageStyle
+      }
+    , _divStyle = {
+        ...S.PAGES,
+        ..._pagesStyle,
+        ..._transform
+      };
     return (
       <ModalPane
         isShow={isShow}

@@ -4,10 +4,10 @@ import FlatButton from '../zhn-m/FlatButton'
 
 const S = {
   LOAD: {
-    color: '#607D8B'
+    color: '#607d8b'
   },
   SHOW: {
-    color: 'rgb(35, 47, 59)'
+    color: '##232f3b'
   }
 };
 
@@ -15,7 +15,7 @@ const Load = ({ onClick }) => (
   <FlatButton
     rootStyle={S.LOAD}
     caption="Load"
-    title="Load Item to Pane Container"
+    title="Load Item to Container"
     //accessKey="l"
     onClick={onClick}
   />
@@ -25,7 +25,7 @@ const Show = ({ onClick }) => (
   <FlatButton
     rootStyle={S.SHOW}
     caption="Show"
-    title="Show Pane Container"
+    title="Show Item Container"
     //accessKey="s"
     onClick={onClick}
   />

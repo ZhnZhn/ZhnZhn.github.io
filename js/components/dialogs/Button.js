@@ -11,10 +11,10 @@ var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var S = {
   LOAD: {
-    color: '#607D8B'
+    color: '#607d8b'
   },
   SHOW: {
-    color: 'rgb(35, 47, 59)'
+    color: '##232f3b'
   }
 };
 
@@ -23,7 +23,7 @@ var Load = function Load(_ref) {
   return _react["default"].createElement(_FlatButton["default"], {
     rootStyle: S.LOAD,
     caption: "Load",
-    title: "Load Item to Pane Container" //accessKey="l"
+    title: "Load Item to Container" //accessKey="l"
     ,
     onClick: onClick
   });
@@ -34,7 +34,7 @@ var Show = function Show(_ref2) {
   return _react["default"].createElement(_FlatButton["default"], {
     rootStyle: S.SHOW,
     caption: "Show",
-    title: "Show Pane Container" //accessKey="s"
+    title: "Show Item Container" //accessKey="s"
     ,
     onClick: onClick
   });

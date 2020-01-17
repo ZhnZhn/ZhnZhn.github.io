@@ -36,6 +36,7 @@ export const ChartActionTypes = {
 
   COPY: 'copy',
 
+  UPDATE_MOVING_VALUES: 'updateMovingValues',
   SORT_BY: 'sortBy',
   REMOVE_ALL:'removeAll'
 };
@@ -95,6 +96,7 @@ const ChartActions =  Reflux.createActions({
 
       [A.TO_TOP]: {},
       [A.COPY]: {},
+      [A.UPDATE_MOVING_VALUES]: {},
       [A.SORT_BY]: {},
       [A.REMOVE_ALL]: {}
 });
@@ -144,7 +146,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta){
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
-  } else if (!ChartStore.isLoadToChart()){    
+  } else if (!ChartStore.isLoadToChart()){
     if (ChartStore.isChartExist(option)){
       this.cancelLoad(option, M.ALREADY_EXIST, true);
     }

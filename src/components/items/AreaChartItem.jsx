@@ -5,10 +5,10 @@ import safeGet from '../../utils/safeGet'
 
 import ShowHide from '../zhn/ShowHide';
 import HighchartWrapper from '../zhn/HighchartWrapper';
-import Legend from '../zhn/Legend';
 import ChartToolBar from '../toolbars/ChartToolBar';
 import crModelMore from './AreaMore'
 import Header from './Header';
+import ChartLegend from './ChartLegend'
 import MiniCharts from './MiniCharts';
 import PanelDataInfo from './PanelDataInfo';
 
@@ -253,6 +253,15 @@ class AreaChartItem extends Component {
      return this.props.crValueMoving(this.mainChart, prev, dateTo);
   }
 
+  _regCompVm = (comp) => {
+    this._compVm = comp
+  }
+  compareTo(dateTo){
+    if (this._compVm) {
+      return this._compVm._updateDateTo(dateTo);
+    }
+  }
+
  _handleMiniChart = (btTitle) => {
    const { ChartFn } = this.props;
    this.setState(prevState => {
@@ -298,44 +307,28 @@ class AreaChartItem extends Component {
       );
    }
 
-  _renderLegend = (config={}) => {
-    const { isShowLegend } = this.state
-        , { zhConfig={} } = config
-        , { legend } = zhConfig;
-    return legend ? (
-      <ShowHide isShow={isShowLegend}>
-        <Legend
-           legend={legend}
-           onClickItem={this._handleToggleSeria}
-        />
-      </ShowHide>
-    ) : null;
-  }
-
   _refChartComp = comp => this.chartComp = comp
 
   render(){
     const {
-            //chartType,
-            caption, config={},
-            onCloseItem, isAdminMode
-          } = this.props
-        , { zhConfig={}, zhMiniConfigs } = config
-        , { itemTime } = zhConfig
-        , {
-            isOpen, isShowChart, isShowInfo,
-            itemCaption,
-            mfiConfigs,
-            isShowAbs,
-            miniTitles,
-            isCaption
-        } = this.state;
-    //console.log(config)
+        caption, config={},
+        onCloseItem, isAdminMode
+      } = this.props
+    , { zhConfig={}, zhMiniConfigs } = config
+    , { itemTime, legend } = zhConfig
+    , {
+        isOpen, isShowChart, isShowInfo,
+        isShowLegend,
+        itemCaption,
+        mfiConfigs,
+        isShowAbs,
+        miniTitles,
+        isCaption
+    } = this.state;
     return (
       <div className={CL.ROOT}>
          { isCaption && <Header
             isOpen={isOpen}
-            //chartType={chartType}
             moreModel={this._moreModel}
             onCheck={this._fnOnCheck}
             onUnCheck={this._fnOnUnCheck}
@@ -347,6 +340,7 @@ class AreaChartItem extends Component {
             onClose={onCloseItem}
             isAdminMode={isAdminMode}
             crValueMoving={this._crValueMoving}
+            regCompVm={this._regCompVm}
          />
         }
         <ShowHide isShow={isOpen} style={S.SHOW_HIDE}>
@@ -365,21 +359,25 @@ class AreaChartItem extends Component {
               zhInfo={config.zhConfig}
               onClickChart={this._handleClickChart}
            />
-          {this._renderLegend(config)}
-          <MiniCharts
-            configs={mfiConfigs}
-            absComp={this._dataSourceEl}
-            onLoaded={this._handleLoadedMiniChart}
-            onWillUnLoaded={this._handleUnLoadedMiniChart}
-          />
-          <MiniCharts
-            configs={zhMiniConfigs}
-            idPropName="btTitle"
-            ids={miniTitles}
-            absComp={this._dataSourceEl}
-            onLoaded={this._handleLoadedMiniChart}
-            onWillUnLoaded={this._handleUnLoadedMiniChart}
-          />
+           <ChartLegend
+             isShow={isShowLegend}
+             legend={legend}
+             onClickItem={this._handleToggleSeria}
+           />
+           <MiniCharts
+              configs={mfiConfigs}
+              absComp={this._dataSourceEl}
+              onLoaded={this._handleLoadedMiniChart}
+              onWillUnLoaded={this._handleUnLoadedMiniChart}
+           />
+           <MiniCharts
+              configs={zhMiniConfigs}
+              idPropName="btTitle"
+              ids={miniTitles}
+              absComp={this._dataSourceEl}
+              onLoaded={this._handleLoadedMiniChart}
+              onWillUnLoaded={this._handleUnLoadedMiniChart}
+           />
         </ShowHide>
       </div>
     )

@@ -47,7 +47,12 @@ module.exports = {
     new webpack.DllReferencePlugin({
       context: '.',
       manifest: require('./dll/lib-manifest.json')
-    }),    
+    }), 
+    /*
+    new webpack.ids.DeterministicModuleIdsPlugin({
+      maxLength: 5
+    }),
+    */   
     new HtmlWebpackPlugin({
         filename: path.resolve('index.html'),
         template: path.resolve('template', 'index.ejs'),
@@ -57,6 +62,8 @@ module.exports = {
     new HtmlProcessingWebpackPlugin()
   ],
   optimization: {
+    //moduleIds: false,
+    moduleIds: 'hashed',
     runtimeChunk: 'single',
     minimize: true,
     minimizer: [new TerserPlugin()]

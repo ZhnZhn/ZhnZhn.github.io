@@ -180,6 +180,8 @@ const _crChartContainerComp = function({ chartType, browserType, conf }){
     onSetActive: CA.setActiveContainer,
     onCloseContainer: CA.closeChartContainer
       .bind(null, _type, browserType),
+    onSortBy: CHA.sortBy.bind(null, _type),
+    updateMovingValues: CHA.updateMovingValues.bind(null, _type),  
     onCloseItem: CHA.closeChart,
     onRemoveAll: CHA.removeAll.bind(null, _type, browserType)
   });

@@ -1,43 +1,50 @@
-import CA from '../../flux/actions/ChartActions';
-
 const CL_ROW = 'row__pane-topic not-selected';
 
-const { sortBy } = CA;
-
 const crModelMore = ({
-  chartType,
   onMinWidth, onInitWidth,
   onPlusWidth, onMinusWidth,
   onFit,
   onShowCaptions,
-  onRemoveAll
+  onRemoveAll,
+  onSortBy,
+  isAdminMode,
+  onCompareTo
 }) => {
+  const p0 = [
+    {
+      id: 'p1',
+      type: 'sub',
+      cn: CL_ROW,
+      name: 'Resize'
+    },{
+      id: 'p2',
+      type: 'sub',
+      cn: CL_ROW,
+      name: 'Sort By, ASC'
+    },{
+      cn: CL_ROW,
+      name: 'Show Captions',
+      onClick: onShowCaptions
+    },{
+      cn: CL_ROW,
+      name: 'Remove All Items',
+      onClick: onRemoveAll,
+      isClose: true
+    }
+  ];
+  if (isAdminMode) {
+    p0.push({
+      cn: CL_ROW,
+      name: 'CompareTo',
+      onClick: onCompareTo,
+      isClose: true
+    })
+  }
   return {
     baseTitleCl: CL_ROW,
     pageWidth: 180,
     maxPages: 2,
-    p0: [
-      {
-        id: 'p1',
-        type: 'sub',
-        cn: CL_ROW,
-        name: 'Resize'
-      },{
-        id: 'p2',
-        type: 'sub',
-        cn: CL_ROW,
-        name: 'Sort By, ASC'
-      },{
-        cn: CL_ROW,
-        name: 'Show Captions',
-        onClick: onShowCaptions
-      },{
-        cn: CL_ROW,
-        name: 'Remove All Items',
-        onClick: onRemoveAll,
-        isClose: true
-      }
-    ],
+    p0: p0,
     p1: [
       {
         cn: CL_ROW,
@@ -65,22 +72,22 @@ const crModelMore = ({
       {
         cn: CL_ROW,
         name: 'Value',
-        onClick: sortBy.bind(null, chartType, '_value'),
+        onClick: onSortBy.bind(null, '_value'),
         isClose: true
       },{
         cn: CL_ROW,
         name: 'Percent',
-        onClick: sortBy.bind(null, chartType, '_percentAbs'),
+        onClick: onSortBy.bind(null, '_percentAbs'),
         isClose: true
       },{
         cn: CL_ROW,
         name: 'Delta',
-        onClick: sortBy.bind(null, chartType, '_deltaAbs'),
+        onClick: onSortBy.bind(null, '_deltaAbs'),
         isClose: true
       },{
         cn: CL_ROW,
         name: 'Reverse',
-        onClick: sortBy.bind(null, chartType),
+        onClick: onSortBy,
         isClose: true
       }
     ]

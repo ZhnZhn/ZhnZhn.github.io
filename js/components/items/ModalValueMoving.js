@@ -21,9 +21,7 @@ var _SpanValue = _interopRequireDefault(require("../zhn-span/SpanValue"));
 
 var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 
-var _SpanLabel = _interopRequireDefault(require("../zhn-span/SpanLabel"));
-
-var _DateField = _interopRequireDefault(require("../zhn/DateField"));
+var _DivCompareTo = _interopRequireDefault(require("../modals/DivCompareTo"));
 
 //import PropTypes from "prop-types";
 var isDmy = _DateUtils["default"].isDmy;
@@ -51,20 +49,6 @@ var S = {
     display: 'inline-block',
     paddingLeft: 16,
     whiteSpace: 'nowrap'
-  },
-  ROW_INPUT: {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: 8
-  },
-  DATE_FIELD: {
-    width: 120,
-    marginLeft: 8,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  },
-  MSG: {
-    color: '#f44336',
-    fontWeight: 'bold'
   }
 };
 
@@ -103,9 +87,10 @@ function (_Component) {
     _this.state = {
       msgDateTo: ''
     };
+    _this._refInput = _react["default"].createRef();
 
     _this._handleEnterDate = function (dateTo) {
-      if (_this.dateToComp.isValid()) {
+      if (isDmy(dateTo)) {
         var isUpdated = _this.props.updateDateTo(dateTo);
 
         if (isUpdated) {
@@ -120,34 +105,16 @@ function (_Component) {
       }
     };
 
-    _this._refDateToComp = function (comp) {
-      return _this.dateToComp = comp;
-    };
-
-    _this._renderAdmin = function (date, msgDateTo) {
-      return _react["default"].createElement("div", null, _react["default"].createElement("label", {
-        style: S.ROW_INPUT
-      }, _react["default"].createElement(_SpanLabel["default"], {
-        label: "CompareTo:"
-      }), _react["default"].createElement(_DateField["default"], {
-        ref: _this._refDateToComp,
-        rootStyle: S.DATE_FIELD,
-        initValue: date,
-        placeholder: "DD-MM-YYYY",
-        errorMsg: "DD-MM-YYYY",
-        onTest: isDmy,
-        onEnter: _this._handleEnterDate
-      })), _react["default"].createElement("div", null, _react["default"].createElement("span", {
-        style: S.MSG
-      }, msgDateTo)));
-    };
-
     return _this;
   }
 
   var _proto = ModalValueMoving.prototype;
 
   _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (this.props.isShow && this._refInput.current) {
+      this._refInput.current.focusInput();
+    }
+
     if (this.props !== prevProps) {
       this.setState({
         msgDateTo: ''
@@ -177,7 +144,13 @@ function (_Component) {
     }), _react["default"].createElement(RowValueDate, {
       value: valueTo,
       date: dateTo
-    }), _isNotAdminMode(isAdminMode, isDenyToChange) ? null : this._renderAdmin(date, msgDateTo));
+    }), !_isNotAdminMode(isAdminMode, isDenyToChange) && _react["default"].createElement(_DivCompareTo["default"], {
+      ref: this._refInput,
+      initialValue: dateTo,
+      msgErr: msgDateTo,
+      onTest: isDmy,
+      onEnter: this._handleEnterDate
+    }));
   };
 
   return ModalValueMoving;

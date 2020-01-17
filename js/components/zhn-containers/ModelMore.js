@@ -1,48 +1,55 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _ChartActions = _interopRequireDefault(require("../../flux/actions/ChartActions"));
-
 var CL_ROW = 'row__pane-topic not-selected';
-var sortBy = _ChartActions["default"].sortBy;
 
 var crModelMore = function crModelMore(_ref) {
-  var chartType = _ref.chartType,
-      onMinWidth = _ref.onMinWidth,
+  var onMinWidth = _ref.onMinWidth,
       onInitWidth = _ref.onInitWidth,
       onPlusWidth = _ref.onPlusWidth,
       onMinusWidth = _ref.onMinusWidth,
       onFit = _ref.onFit,
       onShowCaptions = _ref.onShowCaptions,
-      onRemoveAll = _ref.onRemoveAll;
+      onRemoveAll = _ref.onRemoveAll,
+      onSortBy = _ref.onSortBy,
+      isAdminMode = _ref.isAdminMode,
+      onCompareTo = _ref.onCompareTo;
+  var p0 = [{
+    id: 'p1',
+    type: 'sub',
+    cn: CL_ROW,
+    name: 'Resize'
+  }, {
+    id: 'p2',
+    type: 'sub',
+    cn: CL_ROW,
+    name: 'Sort By, ASC'
+  }, {
+    cn: CL_ROW,
+    name: 'Show Captions',
+    onClick: onShowCaptions
+  }, {
+    cn: CL_ROW,
+    name: 'Remove All Items',
+    onClick: onRemoveAll,
+    isClose: true
+  }];
+
+  if (isAdminMode) {
+    p0.push({
+      cn: CL_ROW,
+      name: 'CompareTo',
+      onClick: onCompareTo,
+      isClose: true
+    });
+  }
+
   return {
     baseTitleCl: CL_ROW,
     pageWidth: 180,
     maxPages: 2,
-    p0: [{
-      id: 'p1',
-      type: 'sub',
-      cn: CL_ROW,
-      name: 'Resize'
-    }, {
-      id: 'p2',
-      type: 'sub',
-      cn: CL_ROW,
-      name: 'Sort By, ASC'
-    }, {
-      cn: CL_ROW,
-      name: 'Show Captions',
-      onClick: onShowCaptions
-    }, {
-      cn: CL_ROW,
-      name: 'Remove All Items',
-      onClick: onRemoveAll,
-      isClose: true
-    }],
+    p0: p0,
     p1: [{
       cn: CL_ROW,
       name: 'to MinWidth',
@@ -67,22 +74,22 @@ var crModelMore = function crModelMore(_ref) {
     p2: [{
       cn: CL_ROW,
       name: 'Value',
-      onClick: sortBy.bind(null, chartType, '_value'),
+      onClick: onSortBy.bind(null, '_value'),
       isClose: true
     }, {
       cn: CL_ROW,
       name: 'Percent',
-      onClick: sortBy.bind(null, chartType, '_percentAbs'),
+      onClick: onSortBy.bind(null, '_percentAbs'),
       isClose: true
     }, {
       cn: CL_ROW,
       name: 'Delta',
-      onClick: sortBy.bind(null, chartType, '_deltaAbs'),
+      onClick: onSortBy.bind(null, '_deltaAbs'),
       isClose: true
     }, {
       cn: CL_ROW,
       name: 'Reverse',
-      onClick: sortBy.bind(null, chartType),
+      onClick: onSortBy,
       isClose: true
     }]
   };

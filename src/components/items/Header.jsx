@@ -118,7 +118,7 @@ class Header extends Component {
             //chartType,
             onCheck, onUnCheck,
             itemCaption, itemTitle, itemTime, onToggle,
-            valueMoving, isAdminMode, crValueMoving,
+            valueMoving, isAdminMode, crValueMoving, regCompVm,
             moreModel,
             onClose
           } = this.props
@@ -152,6 +152,7 @@ class Header extends Component {
                 valueMoving={valueMoving}
                 isAdminMode={isAdminMode}
                 crValueMoving={crValueMoving}
+                regCompVm={regCompVm}
               />
             : <ItemTime
                 itemType={itemTime}

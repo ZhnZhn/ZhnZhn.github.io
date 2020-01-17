@@ -27,6 +27,8 @@ var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlid
 
 var _ModelMore = _interopRequireDefault(require("./ModelMore"));
 
+var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
+
 var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
 
 var _SvgHrzResize = _interopRequireDefault(require("../zhn/SvgHrzResize"));
@@ -48,13 +50,6 @@ var CHILD_MARGIN = 36,
     RESIZE_MAX_WIDTH = 1200,
     DELTA = 10;
 var S = {
-  /*
-  transitionOption : {
-    transitionName : "scaleY",
-    transitionEnterTimeout : 400,
-    transitionLeave : false
-  },
-  */
   INLINE: {
     display: 'inline-block'
   },
@@ -63,6 +58,14 @@ var S = {
   }
 };
 var COMP_ACTIONS = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, _ChartActions.ChartActionTypes.CLOSE_CHART];
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === "function";
+};
+
+var _isBool = function _isBool(bool) {
+  return typeof bool === 'boolean';
+};
 
 var _isInArray = function _isInArray(arr, value) {
   if (arr === void 0) {
@@ -80,8 +83,8 @@ var _toStyleWidth = function _toStyleWidth(width) {
   return width + 'px';
 };
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === "function";
+var _crItemRefPropName = function _crItemRefPropName(index) {
+  return 'chart' + index;
 };
 
 var ChartContainer =
@@ -93,6 +96,25 @@ function (_Component) {
     var _this;
 
     _this = _Component.call(this, props) || this;
+
+    _this._crModelMore = function (isAdminMode) {
+      _this._isAdminMode = _isBool(isAdminMode) ? isAdminMode : _ChartStore["default"].isAdminMode();
+      var _this$props = _this.props,
+          onRemoveAll = _this$props.onRemoveAll,
+          onSortBy = _this$props.onSortBy;
+      return (0, _ModelMore["default"])({
+        onMinWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), RESIZE_MIN_WIDTH),
+        onInitWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), RESIZE_INIT_WIDTH),
+        onPlusWidth: _this._plusToWidth,
+        onMinusWidth: _this._minusToWidth,
+        onFit: _this._fitToWidth,
+        onShowCaptions: _this._onShowCaptions,
+        onSortBy: onSortBy,
+        onRemoveAll: onRemoveAll,
+        isAdminMode: _this._isAdminMode,
+        onCompareTo: _this._onCompareTo
+      });
+    };
 
     _this._isDataForContainer = function (data) {
       var chartType = _this.props.chartType;
@@ -114,20 +136,20 @@ function (_Component) {
     };
 
     _this._toggleChb = function (isCheck, checkBox) {
-      var _this$props = _this.props,
-          onSetActive = _this$props.onSetActive,
-          chartType = _this$props.chartType,
-          browserType = _this$props.browserType;
+      var _this$props2 = _this.props,
+          onSetActive = _this$props2.onSetActive,
+          chartType = _this$props2.chartType,
+          browserType = _this$props2.browserType;
       checkBox.chartType = chartType;
       checkBox.browserType = browserType;
       onSetActive(isCheck, checkBox);
     };
 
     _this._hHide = function () {
-      var _this$props2 = _this.props,
-          chartType = _this$props2.chartType,
-          browserType = _this$props2.browserType,
-          onCloseContainer = _this$props2.onCloseContainer;
+      var _this$props3 = _this.props,
+          chartType = _this$props3.chartType,
+          browserType = _this$props3.browserType,
+          onCloseContainer = _this$props3.onCloseContainer;
       onCloseContainer(chartType, browserType);
 
       _this.setState({
@@ -135,30 +157,60 @@ function (_Component) {
       });
     };
 
+    _this._getItemMax = function () {
+      return _this.state.configs.length;
+    };
+
     _this._hResizeAfter = function (parentWidth) {
+      var max = _this._getItemMax();
+
       var i = 0,
-          max = _this.state.configs.length,
-          _propName;
+          _refItem;
 
       for (; i < max; i++) {
-        _propName = _this._crChartPropName(i);
+        _refItem = _this[_crItemRefPropName(i)];
 
-        if (_this[_propName] && _isFn(_this[_propName].reflowChart)) {
-          _this[_propName].reflowChart(parentWidth - _this.childMargin);
+        if (_refItem && _isFn(_refItem.reflowChart)) {
+          _refItem.reflowChart(parentWidth - _this.childMargin);
         }
       }
     };
 
-    _this._onShowCaptions = function (parentWidth) {
+    _this._compareTo = function (dateTo) {
+      var _arrR = [],
+          max = _this._getItemMax();
+
       var i = 0,
-          max = _this.state.configs.length,
-          _propName;
+          _refItem;
 
       for (; i < max; i++) {
-        _propName = _this._crChartPropName(i);
+        _refItem = _this[_crItemRefPropName(i)];
 
-        if (_this[_propName] && _isFn(_this[_propName].showCaption)) {
-          _this[_propName].showCaption();
+        if (_refItem && _isFn(_refItem.compareTo)) {
+          _arrR.push(_refItem.compareTo(dateTo));
+        }
+      }
+
+      var _r = max - _arrR.filter(Boolean).length;
+
+      if (max > 0 && _r === 0) {
+        _this.props.updateMovingValues(_arrR);
+      }
+
+      return _r;
+    };
+
+    _this._onShowCaptions = function (parentWidth) {
+      var max = _this._getItemMax();
+
+      var i = 0,
+          _refItem;
+
+      for (; i < max; i++) {
+        _refItem = _this[_crItemRefPropName(i)];
+
+        if (_refItem && _isFn(_refItem.showCaption)) {
+          _refItem.showCaption();
         }
       }
     };
@@ -177,19 +229,15 @@ function (_Component) {
       });
     };
 
-    _this._crChartPropName = function (index) {
-      return 'chart' + index;
-    };
-
     _this._refChart = function (index, comp) {
-      return _this[_this._crChartPropName(index)] = comp;
+      return _this[_crItemRefPropName(index)] = comp;
     };
 
     _this._renderCharts = function () {
-      var _this$props3 = _this.props,
-          chartType = _this$props3.chartType,
-          browserType = _this$props3.browserType,
-          onCloseItem = _this$props3.onCloseItem,
+      var _this$props4 = _this.props,
+          chartType = _this$props4.chartType,
+          browserType = _this$props4.browserType,
+          onCloseItem = _this$props4.onCloseItem,
           _this$state$configs = _this.state.configs,
           configs = _this$state$configs === void 0 ? [] : _this$state$configs,
           _isAdminMode = _isFn(_ChartStore["default"].isAdminMode) ? _ChartStore["default"].isAdminMode.bind(_ChartStore["default"]) : false;
@@ -252,6 +300,24 @@ function (_Component) {
       _this._hResizeAfter(parseInt(_this._rootNode.style.width, 10));
     };
 
+    _this._onCompareTo = function () {
+      _this.setState({
+        isCompareTo: true
+      });
+    };
+
+    _this._closeCompareTo = function () {
+      _this.setState({
+        isCompareTo: false
+      });
+    };
+
+    _this._getModelMore = function () {
+      var _isAdminMode = _ChartStore["default"].isAdminMode();
+
+      return _this._isAdminMode === _isAdminMode ? _this._MODEL : _this._MODEL = _this._crModelMore(_isAdminMode);
+    };
+
     _this._refRootNode = function (node) {
       return _this._rootNode = node;
     };
@@ -260,23 +326,13 @@ function (_Component) {
       return _this.spComp = node;
     };
 
-    var _chartType = props.chartType,
-        onRemoveAll = props.onRemoveAll;
     _this.childMargin = CHILD_MARGIN;
-    _this._MODEL = (0, _ModelMore["default"])({
-      chartType: _chartType,
-      onMinWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), RESIZE_MIN_WIDTH),
-      onInitWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), RESIZE_INIT_WIDTH),
-      onPlusWidth: _this._plusToWidth,
-      onMinusWidth: _this._minusToWidth,
-      onFit: _this._fitToWidth,
-      onShowCaptions: _this._onShowCaptions,
-      onRemoveAll: onRemoveAll
-    });
+    _this._MODEL = _this._crModelMore();
     _this._hSetActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), true);
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);
     _this.state = {
-      isMore: false
+      isMore: false,
+      isCompareTo: false
     };
     return _this;
   }
@@ -298,15 +354,17 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this$props4 = this.props,
-        theme = _this$props4.theme,
-        caption = _this$props4.caption,
+    var _this$props5 = this.props,
+        theme = _this$props5.theme,
+        caption = _this$props5.caption,
         TS = theme.getStyle(TH_ID),
         _this$state = this.state,
         isShow = _this$state.isShow,
         isMore = _this$state.isMore,
+        isCompareTo = _this$state.isCompareTo,
         _styleIsShow = isShow ? S.INLINE : S.NONE,
-        _classIsShow = isShow ? CL.ROOT + " " + CL.SHOW : CL.ROOT;
+        _classIsShow = isShow ? CL.ROOT + " " + CL.SHOW : CL.ROOT,
+        _modelMore = this._getModelMore();
 
     return _react["default"].createElement("div", {
       ref: this._refRootNode,
@@ -316,8 +374,12 @@ function (_Component) {
       isShow: isMore,
       className: CL.MENU_MORE,
       style: TS.EL_BORDER,
-      model: this._MODEL,
+      model: _modelMore,
       onClose: this._hToggleMore
+    }), this._isAdminMode && _react["default"].createElement(_ModalCompareTo["default"], {
+      isShow: isCompareTo,
+      onClose: this._closeCompareTo,
+      onCompareTo: this._compareTo
     }), _react["default"].createElement(_BrowserCaption["default"], {
       onMore: this._showMore,
       onCheck: this._hSetActive,

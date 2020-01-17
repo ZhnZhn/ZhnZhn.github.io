@@ -19,13 +19,13 @@ var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _HighchartWrapper = _interopRequireDefault(require("../zhn/HighchartWrapper"));
 
-var _Legend = _interopRequireDefault(require("../zhn/Legend"));
-
 var _ChartToolBar = _interopRequireDefault(require("../toolbars/ChartToolBar"));
 
 var _AreaMore = _interopRequireDefault(require("./AreaMore"));
 
 var _Header = _interopRequireDefault(require("./Header"));
+
+var _ChartLegend = _interopRequireDefault(require("./ChartLegend"));
 
 var _MiniCharts = _interopRequireDefault(require("./MiniCharts"));
 
@@ -261,6 +261,10 @@ function (_Component) {
       return _this.props.crValueMoving(_this.mainChart, prev, dateTo);
     };
 
+    _this._regCompVm = function (comp) {
+      _this._compVm = comp;
+    };
+
     _this._handleMiniChart = function (btTitle) {
       var ChartFn = _this.props.ChartFn;
 
@@ -305,24 +309,6 @@ function (_Component) {
       }));
     };
 
-    _this._renderLegend = function (config) {
-      if (config === void 0) {
-        config = {};
-      }
-
-      var isShowLegend = _this.state.isShowLegend,
-          _config2 = config,
-          _config2$zhConfig = _config2.zhConfig,
-          zhConfig = _config2$zhConfig === void 0 ? {} : _config2$zhConfig,
-          legend = zhConfig.legend;
-      return legend ? _react["default"].createElement(_ShowHide["default"], {
-        isShow: isShowLegend
-      }, _react["default"].createElement(_Legend["default"], {
-        legend: legend,
-        onClickItem: _this._handleToggleSeria
-      })) : null;
-    };
-
     _this._refChartComp = function (comp) {
       return _this.chartComp = comp;
     };
@@ -343,11 +329,11 @@ function (_Component) {
         _props$caption = props.caption,
         _caption = _props$caption === void 0 ? '' : _props$caption,
         _config$zhConfig = _config.zhConfig,
-        _zhConfig = _config$zhConfig === void 0 ? {} : _config$zhConfig,
-        _zhConfig$dataSource = _zhConfig.dataSource,
+        zhConfig = _config$zhConfig === void 0 ? {} : _config$zhConfig,
+        _zhConfig$dataSource = zhConfig.dataSource,
         dataSource = _zhConfig$dataSource === void 0 ? '' : _zhConfig$dataSource,
-        itemCaption = _zhConfig.itemCaption,
-        _id = _zhConfig.id,
+        itemCaption = zhConfig.itemCaption,
+        _id = zhConfig.id,
         _itemCaption = itemCaption || _caption;
 
     _this._chartId = _id;
@@ -375,6 +361,12 @@ function (_Component) {
     this.mainChart = this.chartComp.getChart();
   };
 
+  _proto.compareTo = function compareTo(dateTo) {
+    if (this._compVm) {
+      return this._compVm._updateDateTo(dateTo);
+    }
+  };
+
   _proto.render = function render() {
     var _this$props4 = this.props,
         caption = _this$props4.caption,
@@ -386,21 +378,21 @@ function (_Component) {
         zhConfig = _config$zhConfig2 === void 0 ? {} : _config$zhConfig2,
         zhMiniConfigs = config.zhMiniConfigs,
         itemTime = zhConfig.itemTime,
+        legend = zhConfig.legend,
         _this$state = this.state,
         isOpen = _this$state.isOpen,
         isShowChart = _this$state.isShowChart,
         isShowInfo = _this$state.isShowInfo,
+        isShowLegend = _this$state.isShowLegend,
         itemCaption = _this$state.itemCaption,
         mfiConfigs = _this$state.mfiConfigs,
         isShowAbs = _this$state.isShowAbs,
         miniTitles = _this$state.miniTitles,
-        isCaption = _this$state.isCaption; //console.log(config)
-
+        isCaption = _this$state.isCaption;
     return _react["default"].createElement("div", {
       className: CL.ROOT
     }, isCaption && _react["default"].createElement(_Header["default"], {
-      isOpen: isOpen //chartType={chartType}
-      ,
+      isOpen: isOpen,
       moreModel: this._moreModel,
       onCheck: this._fnOnCheck,
       onUnCheck: this._fnOnUnCheck,
@@ -411,7 +403,8 @@ function (_Component) {
       valueMoving: config.valueMoving,
       onClose: onCloseItem,
       isAdminMode: isAdminMode,
-      crValueMoving: this._crValueMoving
+      crValueMoving: this._crValueMoving,
+      regCompVm: this._regCompVm
     }), _react["default"].createElement(_ShowHide["default"], {
       isShow: isOpen,
       style: S.SHOW_HIDE
@@ -427,7 +420,11 @@ function (_Component) {
       info: config.info,
       zhInfo: config.zhConfig,
       onClickChart: this._handleClickChart
-    }), this._renderLegend(config), _react["default"].createElement(_MiniCharts["default"], {
+    }), _react["default"].createElement(_ChartLegend["default"], {
+      isShow: isShowLegend,
+      legend: legend,
+      onClickItem: this._handleToggleSeria
+    }), _react["default"].createElement(_MiniCharts["default"], {
       configs: mfiConfigs,
       absComp: this._dataSourceEl,
       onLoaded: this._handleLoadedMiniChart,

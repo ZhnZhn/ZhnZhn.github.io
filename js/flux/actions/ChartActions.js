@@ -49,6 +49,7 @@ var ChartActionTypes = {
   LOAD_STOCK_BY_QUERY_F: 'loadStockByQueryF',
   TO_TOP: 'toTop',
   COPY: 'copy',
+  UPDATE_MOVING_VALUES: 'updateMovingValues',
   SORT_BY: 'sortBy',
   REMOVE_ALL: 'removeAll'
 };
@@ -106,7 +107,7 @@ var ChartActions = _reflux["default"].createActions((_Reflux$createActions = {},
   cancelLoad: _fnCancelLoad
 }, _Reflux$createActions[A.LOAD_STOCK_BY_QUERY] = {
   children: ['completed', 'failed']
-}, _Reflux$createActions[A.SHOW_CHART] = {}, _Reflux$createActions[A.CLOSE_CHART] = {}, _Reflux$createActions[A.TO_TOP] = {}, _Reflux$createActions[A.COPY] = {}, _Reflux$createActions[A.SORT_BY] = {}, _Reflux$createActions[A.REMOVE_ALL] = {}, _Reflux$createActions));
+}, _Reflux$createActions[A.SHOW_CHART] = {}, _Reflux$createActions[A.CLOSE_CHART] = {}, _Reflux$createActions[A.TO_TOP] = {}, _Reflux$createActions[A.COPY] = {}, _Reflux$createActions[A.UPDATE_MOVING_VALUES] = {}, _Reflux$createActions[A.SORT_BY] = {}, _Reflux$createActions[A.REMOVE_ALL] = {}, _Reflux$createActions));
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 var isApiKeyRequired = _SettingSlice["default"].isApiKeyRequired,

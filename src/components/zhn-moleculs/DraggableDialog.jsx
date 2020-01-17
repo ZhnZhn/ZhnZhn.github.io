@@ -71,24 +71,6 @@ class DraggableDialog extends Component {
     isMore: false
   }
 
-  /*
-  constructor(props){
-    super(props)
-
-    //this.rootDiv = null
-    //this._refRootDiv = this._refRootDiv.bind(this)
-    //this.btMore = null
-    //this._refBtMore = this._refBtMore.bind(this)
-
-    //this._hKeyDown = this._hKeyDown.bind(this)
-    //this._hClose = this._hClose.bind(this)
-
-    this.state = {
-      isMore: false
-    }
-  }
-  */
-
   componentDidMount(){
      Interact.makeDragable(this.rootDiv);
      this.focus()
@@ -151,7 +133,7 @@ class DraggableDialog extends Component {
             key="show"
             rootStyle={S.BT_ROOT}
             caption="Show"
-            title="Show Pane Container"
+            title="Show Item Container"
             //accessKey="s"
             onClick={onShowChart}
           />

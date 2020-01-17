@@ -16,7 +16,7 @@ const _getSlice = (slice, chartType) => {
      ? activeContChb.chartType || chartType
      : chartType
   , chartSlice = slice[_cT]
-  , { configs } = chartSlice || {};
+  , { configs=[] } = chartSlice || {};
   return { chartSlice, configs };
 };
 
@@ -110,6 +110,17 @@ const ChartLogic = {
     }
 
     return chartSlice;
+  },
+
+  updateMovingValues(slice, chartType, movingValues){
+    const { configs } = _getSlice(slice, chartType)
+    , _maxConfigs = configs.length;    
+    if (_maxConfigs === movingValues.length) {
+      let i = 0;
+      for(;i<_maxConfigs;i++){
+        configs.valueMoving = movingValues[i]
+      }
+    }
   },
 
   sortBy(slice, chartType, by){

@@ -149,6 +149,7 @@ function (_Component) {
         valueMoving = _this$props.valueMoving,
         isAdminMode = _this$props.isAdminMode,
         crValueMoving = _this$props.crValueMoving,
+        regCompVm = _this$props.regCompVm,
         moreModel = _this$props.moreModel,
         onClose = _this$props.onClose,
         TS = theme.getStyle(TH_ID),
@@ -169,7 +170,8 @@ function (_Component) {
     }, itemCaption), valueMoving ? _react["default"].createElement(_ValueMovingBadge["default"], {
       valueMoving: valueMoving,
       isAdminMode: isAdminMode,
-      crValueMoving: crValueMoving
+      crValueMoving: crValueMoving,
+      regCompVm: regCompVm
     }) : _react["default"].createElement(ItemTime, {
       itemType: itemTime
     }), _react["default"].createElement(_SvgClose["default"], {
