@@ -1,1 +1,21 @@
-{"version":3,"sources":["../../src/components/has.js"],"names":["has","wideWidth","window","innerWidth"],"mappings":";;;;AACA,IAAMA,GAAG,GAAG;AACVC,EAAAA,SAAS,EAAE;AAAA,WAAMC,MAAM,CAACC,UAAP,GACbD,MAAM,CAACC,UAAP,GAAoB,GADP,GAEb,IAFO;AAAA;AADD,CAAZ;eAMeH,G","sourcesContent":["\r\nconst has = {\r\n  wideWidth: () => window.innerWidth\r\n    ? window.innerWidth > 700\r\n    : true\r\n};\r\n\r\nexport default has\r\n"],"file":"has.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/has.js"
+ ],
+ "file": "../../src/components/has.js",
+ "names": [
+  "INITIAL_WIDTH",
+  "_isInnerWidth",
+  "window",
+  "innerWidth",
+  "has",
+  "wideWidth",
+  "getWidth",
+  "initialWidth",
+  "initWidthStyle",
+  "minWidth",
+  "width"
+ ],
+ "mappings": ";;;;;AACA,IAAMA,aAAa,GAAG,GAAtB;AAAA,IACEC,aAAa,GAAG,SAAhBA,aAAgB;AAAA,SAAMC,MAAM,IAAIA,MAAM,CAACC,UAAvB;AAAA,CADlB;;AAGA,IAAMC,GAAG,GAAG;AACVC,EAAAA,SAAS,EAAE;AAAA,WAAMJ,aAAa,KAC1BC,MAAM,CAACC,UAAP,GAAoB,GADM,GAE1B,IAFO;AAAA,GADD;AAIVG,EAAAA,QAAQ,EAAE,kBAACC,YAAD;AAAA,QAACA,YAAD;AAACA,MAAAA,YAAD,GAAcP,aAAd;AAAA;;AAAA,WAAgCC,aAAa,KACnDC,MAAM,CAACC,UAAP,GAAoB,EAD+B,GAEnDI,YAFM;AAAA,GAJA;AAOVC,EAAAA,cAAc,EAAE,wBAACD,YAAD,EAA6BE,QAA7B,EAA4C;AAAA,QAA3CF,YAA2C;AAA3CA,MAAAA,YAA2C,GAA9BP,aAA8B;AAAA;;AAAA,QAAfS,QAAe;AAAfA,MAAAA,QAAe,GAAN,CAAM;AAAA;;AAC1D,QAAIL,GAAG,CAACC,SAAJ,EAAJ,EAAqB;AACnB,aAAO;AAAEK,QAAAA,KAAK,EAAEH;AAAT,OAAP;AACD;;AACD,QAAMG,KAAK,GAAGN,GAAG,CAACE,QAAJ,CAAaC,YAAb,CAAd;AACA,WAAOG,KAAK,GAAGD,QAAR,GACH;AAAEC,MAAAA,KAAK,EAALA;AAAF,KADG,GAEH;AAAEA,MAAAA,KAAK,EAAED;AAAT,KAFJ;AAGD;AAfS,CAAZ;eAkBeL,G"
+}

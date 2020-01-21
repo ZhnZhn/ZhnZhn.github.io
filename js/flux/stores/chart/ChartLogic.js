@@ -5,53 +5,33 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _Type = require("../../../constants/Type");
 
 var _ComponentActions = require("../../actions/ComponentActions");
 
-var _Factory = _interopRequireDefault(require("../../logic/Factory"));
+var _fItemContainer = _interopRequireDefault(require("../../logic/fItemContainer"));
+
+var _getSlice5 = _interopRequireDefault(require("./getSlice"));
 
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
 
-var createChartContainer = _Factory["default"].createChartContainer;
+var _ChartLogicFn = _interopRequireDefault(require("./ChartLogicFn"));
+
+var crItemContainerEl = _fItemContainer["default"].crItemContainerEl;
 var _isArr = Array.isArray;
 
 var _isStr = function _isStr(str) {
   return typeof str === 'string';
 };
 
-var _getSlice = function _getSlice(slice, chartType) {
-  var activeContChb = slice.activeContChb,
-      _cT = activeContChb ? activeContChb.chartType || chartType : chartType,
-      chartSlice = slice[_cT],
-      _ref = chartSlice || {},
-      _ref$configs = _ref.configs,
-      configs = _ref$configs === void 0 ? [] : _ref$configs;
-
-  return {
-    chartSlice: chartSlice,
-    configs: configs
-  };
-};
-
-var _notConfById = function _notConfById(id) {
-  return function (c) {
-    return c.zhConfig.id !== id;
-  };
-};
-
-var _confById = function _confById(id) {
-  return function (c) {
-    return c.zhConfig.id === id;
-  };
-};
-
-var _isSecondDotCase = function _isSecondDotCase(series, _ref2) {
-  var seriaType = _ref2.seriaType;
+var _isSecondDotCase = function _isSecondDotCase(series, _ref) {
+  var seriaType = _ref.seriaType;
   return seriaType === 'DOT_SET' && _isArr(series) && series[0].type === 'scatter' && series.length === 2;
 };
 
-var ChartLogic = {
+var ChartLogic = (0, _extends2["default"])({}, _ChartLogicFn["default"], {
   _initChartSlice: function _initChartSlice(slice, chartType, config) {
     if (!slice[chartType]) {
       slice[chartType] = {
@@ -61,31 +41,12 @@ var ChartLogic = {
       };
     }
   },
-  isChartExist: function isChartExist(slice, chartType, key) {
-    var _getSlice2 = _getSlice(slice, chartType),
+  loadConfig: function loadConfig(slice, config, option, dialogConf, store) {
+    var chartType = option.chartType,
+        browserType = option.browserType,
+        _getSlice2 = (0, _getSlice5["default"])(slice, chartType),
         chartSlice = _getSlice2.chartSlice,
         configs = _getSlice2.configs;
-
-    if (!chartSlice) {
-      return false;
-    }
-
-    var _max = configs.length;
-    var i = 0;
-
-    for (; i < _max; i++) {
-      if (configs[i].zhConfig.key === key) {
-        return true;
-      }
-    }
-
-    return false;
-  },
-  loadConfig: function loadConfig(slice, config, option) {
-    var chartType = option.chartType,
-        _getSlice3 = _getSlice(slice, chartType),
-        chartSlice = _getSlice3.chartSlice,
-        configs = _getSlice3.configs;
 
     if (chartSlice) {
       configs.unshift(config);
@@ -97,13 +58,17 @@ var ChartLogic = {
       ChartLogic._initChartSlice(slice, chartType, config);
 
       return {
-        Comp: createChartContainer(option)
+        Comp: crItemContainerEl({
+          browserType: browserType,
+          dialogConf: dialogConf,
+          store: store
+        })
       };
     }
   },
-  showChart: function showChart(slice, chartType, browserType, conf) {
-    var _getSlice4 = _getSlice(slice, chartType),
-        chartSlice = _getSlice4.chartSlice;
+  showChart: function showChart(slice, chartType, browserType, dialogConf, store) {
+    var _getSlice3 = (0, _getSlice5["default"])(slice, chartType),
+        chartSlice = _getSlice3.chartSlice;
 
     if (chartSlice) {
       chartSlice.isShow = true;
@@ -114,55 +79,18 @@ var ChartLogic = {
       ChartLogic._initChartSlice(slice, chartType);
 
       return {
-        Comp: createChartContainer({
-          chartType: chartType,
+        Comp: crItemContainerEl({
           browserType: browserType,
-          conf: conf
+          dialogConf: dialogConf,
+          store: store
         })
       };
     }
   },
-  removeConfig: function removeConfig(slice, chartType, id) {
-    var _getSlice5 = _getSlice(slice, chartType),
-        chartSlice = _getSlice5.chartSlice,
-        configs = _getSlice5.configs;
-
-    chartSlice.configs = configs.filter(_notConfById(id));
-    return {
-      chartSlice: chartSlice,
-      isRemoved: configs.length > chartSlice.configs.length
-    };
-  },
-  toTop: function toTop(slice, chartType, id) {
-    var _getSlice6 = _getSlice(slice, chartType),
-        chartSlice = _getSlice6.chartSlice,
-        configs = _getSlice6.configs,
-        _conf = configs.find(_confById(id));
-
-    if (_conf) {
-      var withoutArr = configs.filter(_notConfById(id));
-      chartSlice.configs = [_conf].concat(withoutArr);
-    }
-
-    return chartSlice;
-  },
-  updateMovingValues: function updateMovingValues(slice, chartType, movingValues) {
-    var _getSlice7 = _getSlice(slice, chartType),
-        configs = _getSlice7.configs,
-        _maxConfigs = configs.length;
-
-    if (_maxConfigs === movingValues.length) {
-      var i = 0;
-
-      for (; i < _maxConfigs; i++) {
-        configs.valueMoving = movingValues[i];
-      }
-    }
-  },
   sortBy: function sortBy(slice, chartType, by) {
-    var _getSlice8 = _getSlice(slice, chartType),
-        chartSlice = _getSlice8.chartSlice,
-        configs = _getSlice8.configs;
+    var _getSlice4 = (0, _getSlice5["default"])(slice, chartType),
+        chartSlice = _getSlice4.chartSlice,
+        configs = _getSlice4.configs;
 
     if (by) {
       configs.sort((0, _fCompareBy["default"])(by));
@@ -171,12 +99,6 @@ var ChartLogic = {
     }
 
     return chartSlice;
-  },
-  removeAll: function removeAll(slice, chartType) {
-    var _slice = slice[chartType] || {};
-
-    _slice.configs = [];
-    return _slice;
   },
   checkBrowserChartTypes: function checkBrowserChartTypes(slice, option) {
     var chb = slice.activeContChb;
@@ -201,7 +123,7 @@ var ChartLogic = {
         value = option.value;
     option.alertItemId = _isStr(alertItemId) ? alertItemId : _isStr(value) ? value : void 0;
   }
-};
+});
 var _default = ChartLogic;
 exports["default"] = _default;
 //# sourceMappingURL=ChartLogic.js.map

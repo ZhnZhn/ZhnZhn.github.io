@@ -11,24 +11,6 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
-
-var _ProgressLoading = _interopRequireDefault(require("./ProgressLoading"));
-
-var _AppLabel = _interopRequireDefault(require("./AppLabel"));
-
-var _IconLogoErc = _interopRequireDefault(require("./IconLogoErc"));
-
-var _Comp = _interopRequireDefault(require("../Comp"));
-
-var _HotBar = _interopRequireDefault(require("./HotBar"));
-
-var _LimitRemainingLabel = _interopRequireDefault(require("./LimitRemainingLabel"));
-
-var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
-
-var _BrowserModel = _interopRequireDefault(require("./BrowserModel"));
-
 var _ComponentActions = _interopRequireWildcard(require("../../flux/actions/ComponentActions"));
 
 var _BrowserActions = _interopRequireDefault(require("../../flux/actions/BrowserActions"));
@@ -37,12 +19,27 @@ var _LoadingProgressActions = require("../../flux/actions/LoadingProgressActions
 
 var _Type = require("../../constants/Type");
 
-//import FlatButton from '../zhn-m/FlatButton'
-//import ModalButton from '../zhn-m/ModalButton'
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
+
+var _Comp = _interopRequireDefault(require("../Comp"));
+
+var _ProgressLoading = _interopRequireDefault(require("./ProgressLoading"));
+
+var _AppLabel = _interopRequireDefault(require("./AppLabel"));
+
+var _IconLogoErc = _interopRequireDefault(require("./IconLogoErc"));
+
+var _HotBar = _interopRequireDefault(require("./HotBar"));
+
+var _LimitRemainingLabel = _interopRequireDefault(require("./LimitRemainingLabel"));
+
+var _BrowserModel = _interopRequireDefault(require("./BrowserModel"));
+
 var FlatButton = _Comp["default"].FlatButton,
     ModalButton = _Comp["default"].ModalButton,
     SvgSettings = _Comp["default"].SvgSettings,
-    SvgInfo = _Comp["default"].SvgInfo;
+    SvgInfo = _Comp["default"].SvgInfo,
+    ModalSlider = _Comp["default"].ModalSlider;
 var LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
     CAPTION = "ERC v0.17.0";
 var ID = 'HEADER_BAR';
@@ -182,7 +179,7 @@ function (_Component) {
       onClick: _ComponentActions["default"].showAbout
     }, _react["default"].createElement(SvgInfo, {
       style: STYLE.SVG_BT
-    }))), _react["default"].createElement(_ModalSlider["default"], {
+    }))), _react["default"].createElement(ModalSlider, {
       isShow: isDS,
       className: CL.BROWSER_MENU,
       INIT_ID: "page_0",

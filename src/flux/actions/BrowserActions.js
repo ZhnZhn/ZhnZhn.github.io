@@ -1,4 +1,4 @@
-import Reflux from 'reflux';
+import Reflux from 'reflux-core';
 
 import Store from '../stores/ChartStore'
 import Factory from '../logic/Factory'
@@ -51,7 +51,7 @@ BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function(option={}){
            : option
       , { browserType:bT } = _option
       , config = BrowserConfig[bT];
-  if (bT && config) {    
+  if (bT && config) {
     if (Store.getBrowserMenu(bT)) {
       this.done(_option)
     } else {

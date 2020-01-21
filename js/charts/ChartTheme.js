@@ -96,7 +96,7 @@ var ChartTheme = {
       },
       labels: {
         items: [{
-          html: 'ERC https://zhnzhn.github.io',
+          html: 'Web app ERC https://zhnzhn.github.io',
           style: {
             left: '0px',
             top: '-70px',

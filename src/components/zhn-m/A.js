@@ -1,9 +1,9 @@
 import FlatButton from './FlatButton'
 import ModalButton from './ModalButton'
 
-const ZhnM = {
+const A = {
   FlatButton,
   ModalButton
 };
 
-export default ZhnM
+export default A

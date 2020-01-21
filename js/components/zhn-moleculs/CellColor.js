@@ -13,6 +13,7 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+//import PropTypes from 'prop-types'
 var CellColor =
 /*#__PURE__*/
 function (_Component) {

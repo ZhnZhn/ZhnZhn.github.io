@@ -15,6 +15,8 @@ var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
 
 var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
 
+var _SvgHrzResize = _interopRequireDefault(require("./SvgHrzResize"));
+
 var _ButtonTab = _interopRequireDefault(require("./ButtonTab"));
 
 var _InputText = _interopRequireDefault(require("./InputText"));
@@ -31,6 +33,7 @@ var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   SpinnerLoading: _SpinnerLoading["default"],
   ScrollPane: _ScrollPane["default"],
   BrowserCaption: _BrowserCaption["default"],
+  SvgHrzResize: _SvgHrzResize["default"],
   ButtonTab: _ButtonTab["default"],
   InputText: _InputText["default"],
   OpenClose: _OpenClose["default"],

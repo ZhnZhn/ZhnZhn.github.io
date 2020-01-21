@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = exports.ComponentActionTypes = void 0;
 
-var _reflux = _interopRequireDefault(require("reflux"));
+var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
 var _Type = require("../../constants/Type");
 
@@ -26,7 +26,7 @@ var ComponentActionTypes = {
 exports.ComponentActionTypes = ComponentActionTypes;
 var A = ComponentActionTypes;
 
-var CA = _reflux["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.SHOW_ABOUT] = {}, _Reflux$createActions[A.SHOW_DIALOG] = {}, _Reflux$createActions[A.CLOSE_DIALOG] = {}, _Reflux$createActions[A.SHOW_OPTION_DIALOG] = {}, _Reflux$createActions[A.CLOSE_CHART_CONTAINER] = {}, _Reflux$createActions[A.CLOSE_CHART_CONTAINER_2] = {}, _Reflux$createActions[A.SET_ACTIVE_CONTAINER] = {}, _Reflux$createActions[A.SET_ACTIVE_CHECKBOX] = {}, _Reflux$createActions[A.SHOW_MODAL_DIALOG] = {}, _Reflux$createActions[A.CHANGE_THEME] = {}, _Reflux$createActions));
+var CA = _refluxCore["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.SHOW_ABOUT] = {}, _Reflux$createActions[A.SHOW_DIALOG] = {}, _Reflux$createActions[A.CLOSE_DIALOG] = {}, _Reflux$createActions[A.SHOW_OPTION_DIALOG] = {}, _Reflux$createActions[A.CLOSE_CHART_CONTAINER] = {}, _Reflux$createActions[A.CLOSE_CHART_CONTAINER_2] = {}, _Reflux$createActions[A.SET_ACTIVE_CONTAINER] = {}, _Reflux$createActions[A.SET_ACTIVE_CHECKBOX] = {}, _Reflux$createActions[A.SHOW_MODAL_DIALOG] = {}, _Reflux$createActions[A.CHANGE_THEME] = {}, _Reflux$createActions));
 
 var _showMd = CA.showModalDialog;
 CA.showDescription = _showMd.bind(null, _Type.ModalDialog.DESCRIPTION);

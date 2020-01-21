@@ -15,13 +15,10 @@ export const BrowserType = {
    FINLAND_STAT_ALL: 'SFL',
    NBSC: 'NBSC',
 
-   PREMIUM_SAMPLE : 'QPS',
    ECONOMIC : 'QE',
-
-   US_STOCKS : 'QUS',
+   
    NYSE_STOCKS : 'NS',
    NASDAQ_STOCKS : 'NQS',
-   LONDON_STOCKS : 'LS',
 
    STOCKS_BY_SECTORS : 'STOCKS_BY_SECTORS',
 

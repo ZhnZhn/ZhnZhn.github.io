@@ -56,7 +56,7 @@ var crModelMore = function crModelMore(_ref) {
       onClick: onMinWidth
     }, {
       cn: CL_ROW,
-      name: 'to InitWidth',
+      name: 'to InitialWidth',
       onClick: onInitWidth
     }, {
       cn: CL_ROW,

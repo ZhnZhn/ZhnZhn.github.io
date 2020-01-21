@@ -11,28 +11,35 @@ import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
 import InputSelect from '../zhn-select/InputSelect';
 
+const _S = {
+  LABEL: {
+    display: 'inline-block',
+    color: '#1b75bb',
+    fontSize: '16px',
+    fontWeight: 'bold'
+  }
+};
+
 const S = {
   GAP_BETWEEN_GROUP: {
     marginTop: 10
   },
-  LABEL_WIDTH : {
-    display: 'inline-block',
-    color: '#1b75bb',
+  LABEL: {
+    ..._S.LABEL,
     width: 100,
     paddingRight: 5,
-    textAlign: 'right',
-    fontSize: '16px',
-    fontWeight: 'bold'
+    textAlign: 'right'
   },
-  LABEL_HEIGHT : {
-    display: 'inline-block',
-    color: '#1b75bb',
+  LABEL_WIDTH : {
+    ..._S.LABEL,
     paddingRight: 5,
-    paddingLeft: 3,
-    fontSize: '16px',
-    fontWeight: 'bold'
+    paddingLeft: 3
+  },
+  LABEL_HEIGHT: {
+    paddingLeft: 6,
   },
   INPUT_NUMBER: {
+    width: 60,
     height: 30,
     marginLeft: 0,
   },
@@ -42,6 +49,28 @@ const S = {
     marginLeft: 0
   }
 };
+
+const C = {
+  APP_HTML: 'Web app ERC https://zhnzhn.github.io',
+  DS_TOP_PADDING: 90,
+  DS_FONT_SIZE: '10px',
+  W_MIN: 351,
+  W_MAX: 2001,
+  H_MIN: 251,
+  H_MAX: 1001
+};
+
+const _inRange = (v, min, max) => v>min && v<max;
+
+const _crItemLabel = (html, top=-70, fontSize='9px') => ({
+  html: html,
+  style: {
+    left: 0,
+    top: top,
+    color: '#909090',
+    'font-size': fontSize
+  }
+});
 
 class CustomizeExportDialog extends Component {
 
@@ -103,26 +132,47 @@ class CustomizeExportDialog extends Component {
       && item.value || {};
   }
 
+  _getDimension = (chart) => {
+    const { chartWidth, chartHeight } = chart
+    , _width = this.inputWidth.getValue()
+    , _height = this.inputHeight.getValue();
+    return {
+      width: _inRange(_width, C.W_MIN, C.W_MAX)
+        ? _width
+        : chartWidth,
+      height: _inRange(_height, C.H_MIN, C.H_MAX)
+        ? _height
+        : chartHeight
+    };
+  }
+
   _hExport = () => {
     const { data, onClose } = this.props
     , { chart, fn } = data
+    , { width, height } = this._getDimension(chart)
     , _customOption = ChartExportConfig.merge(
-      true, {
-        chart: {
-          width: this.inputWidth.getValue(),
-          height: this.inputHeight.getValue()
-        },
-        title: {
-          text: this.inputTitle.getValue()
-        },
-        subtitle: {
-          text: this.inputSubtitle.getValue()
-        }
-      }, this.exportStyle
-    );
+        true, {
+          chart: { width, height },
+          title: {
+            text: this.inputTitle.getValue()
+          },
+          subtitle: {
+            text: this.inputSubtitle.getValue()
+          },
+          labels: {
+            items: [
+              _crItemLabel(C.APP_HTML),
+              _crItemLabel(
+                `DataSource: ${chart.userOptions.zhConfig?.dataSource ?? ''}`,
+                height - C.DS_TOP_PADDING, C.DS_FONT_SIZE
+              )
+            ]
+          }
+        }, this.exportStyle
+      );
 
-    fn.apply(chart, [null, _customOption]);
-    onClose();
+      fn.apply(chart, [null, _customOption]);
+      onClose();
   }
 
   _refInputWidth = c => this.inputWidth = c
@@ -152,24 +202,32 @@ class CustomizeExportDialog extends Component {
          />
          <ShowHide isShow={isShowDimension}>
            <div style={STYLE.rowDiv}>
-              <span style={S.LABEL_WIDTH}>Dimension:</span>
-              <span style={S.LABEL_HEIGHT}>Width:</span>
+              <span style={S.LABEL}>Dimension:</span>
+              <span style={S.LABEL_WIDTH}>Width:</span>
               <InputText
                 ref={this._refInputWidth}
+                type="number"
+                placeholder={chartWidth}
                 initValue={chartWidth}
                 style={S.INPUT_NUMBER}
+                min={C.W_MIN}
+                max={C.W_MAX}
               />
-              <span style={S.LABEL_HEIGHT}>Height:</span>
+              <span style={{ ...S.LABEL_WIDTH, ...S.LABEL_HEIGHT}}>Height:</span>
               <InputText
                 ref={this._refInputHeight}
+                type="number"
+                placeholder={chartHeight}
                 initValue={chartHeight}
                 style={S.INPUT_NUMBER}
+                min={C.H_MIN}
+                max={C.H_MAX}
               />
            </div>
          </ShowHide>
          <ShowHide isShow={isShowTitle}>
            <div style={{ ...STYLE.rowDiv, ...S.GAP_BETWEEN_GROUP }}>
-             <span style={S.LABEL_WIDTH}>Title:</span>
+             <span style={S.LABEL}>Title:</span>
              <InputText
                ref={this._refInputTitle}
                initValue={title}
@@ -177,7 +235,7 @@ class CustomizeExportDialog extends Component {
              />
            </div>
            <div style={STYLE.rowDiv}>
-             <span style={S.LABEL_WIDTH}>Subtitle:</span>
+             <span style={S.LABEL}>Subtitle:</span>
              <InputText
                ref={this._refInputSubtitle}
                initValue={subtitle}
@@ -187,7 +245,7 @@ class CustomizeExportDialog extends Component {
          </ShowHide>
          <ShowHide isShow={isShowStyle}>
            <div style={{ ...STYLE.rowDiv, ...S.GAP_BETWEEN_GROUP}}>
-             <span style={S.LABEL_WIDTH}>Style:</span>
+             <span style={S.LABEL}>Style:</span>
              <InputSelect
                width="250"
                options={this.optionStyles}

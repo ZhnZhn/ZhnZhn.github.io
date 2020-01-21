@@ -1,4 +1,4 @@
-import Reflux from 'reflux';
+import Reflux from 'reflux-core';
 
 export const WatchActionTypes = {
   ADD_ITEM : 'addItem',

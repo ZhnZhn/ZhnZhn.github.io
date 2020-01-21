@@ -23,6 +23,7 @@ var _tableFn = _interopRequireDefault(require("./tableFn"));
 
 var _Style = _interopRequireDefault(require("./Style"));
 
+//import PropTypes from "prop-types";
 var CL_LINK = "native-link";
 var CL_GRID = "grid";
 var TOKEN_NAN = '―';

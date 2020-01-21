@@ -1,4 +1,4 @@
-import Reflux from 'reflux';
+import Reflux from 'reflux-core';
 
 import DU from '../../utils/DateUtils';
 import Msg from '../../constants/Msg';

@@ -9,10 +9,10 @@ var _FlatButton = _interopRequireDefault(require("./FlatButton"));
 
 var _ModalButton = _interopRequireDefault(require("./ModalButton"));
 
-var ZhnM = {
+var A = {
   FlatButton: _FlatButton["default"],
   ModalButton: _ModalButton["default"]
 };
-var _default = ZhnM;
+var _default = A;
 exports["default"] = _default;
-//# sourceMappingURL=ZhnM.js.map
+//# sourceMappingURL=A.js.map

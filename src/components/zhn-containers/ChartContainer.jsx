@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 
-import withTheme from '../hoc/withTheme'
-
-import ChartStore from '../../flux/stores/ChartStore';
 import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 
-import ModalSlider from '../zhn-modal-slider/ModalSlider'
+import ItemFactory from '../factories/ItemFactory';
+
+import withTheme from '../hoc/withTheme'
+import has from '../has'
+import A from '../Comp'
 import crModelMore from './ModelMore'
 import ModalCompareTo from './ModalCompareTo'
-
-import BrowserCaption from '../zhn/BrowserCaption';
-import SvgHrzResize from '../zhn/SvgHrzResize';
-import ScrollPane from '../zhn/ScrollPane';
-
-import ItemFactory from '../factories/ItemFactory';
 
 const TH_ID = 'CHART_CONTAINER';
 
@@ -27,9 +22,9 @@ const CL = {
 };
 
 const CHILD_MARGIN = 36
-    , RESIZE_INIT_WIDTH = 635
-    , RESIZE_MIN_WIDTH = 395
-    , RESIZE_MAX_WIDTH = 1200
+    , INITIAL_WIDTH = 635
+    , MIN_WIDTH = 395
+    , MAX_WIDTH = 1200
     , DELTA = 10;
 
 const S = {
@@ -53,10 +48,15 @@ const _isBool = bool => typeof bool === 'boolean';
 const _isInArray = (arr=[], value) => Boolean(~arr.indexOf(value))
 
 const _getWidth = style => parseInt(style.width, 10)
-  || RESIZE_INIT_WIDTH;
+  || INITIAL_WIDTH;
 const _toStyleWidth = width => width + 'px';
 
 const _crItemRefPropName = index => 'chart' + index;
+
+const _crMinWidth = ({ width }) => width !== INITIAL_WIDTH
+  ? width
+  : MIN_WIDTH;
+
 
 class ChartContainer extends Component {
 
@@ -67,6 +67,8 @@ class ChartContainer extends Component {
   constructor(props){
     super(props);
     this.childMargin = CHILD_MARGIN;
+    this._initialWidthStyle = has.initWidthStyle(INITIAL_WIDTH, MIN_WIDTH)
+    this._MIN_WIDTH = _crMinWidth(this._initialWidthStyle)
     this._MODEL = this._crModelMore()
 
     this._hSetActive = this._toggleChb.bind(this, true)
@@ -79,15 +81,17 @@ class ChartContainer extends Component {
   }
 
   _crModelMore = (isAdminMode) => {
-    this._isAdminMode = _isBool(isAdminMode)
-      ? isAdminMode
-      : ChartStore.isAdminMode()
     const {
+      store,
       onRemoveAll, onSortBy
     } = this.props;
+    this._isAdminMode = _isBool(isAdminMode)
+      ? isAdminMode
+      : store.isAdminMode();
+
     return crModelMore({
-      onMinWidth: this._resizeTo.bind(this, RESIZE_MIN_WIDTH),
-      onInitWidth: this._resizeTo.bind(this, RESIZE_INIT_WIDTH),
+      onMinWidth: this._resizeTo.bind(this, this._MIN_WIDTH),
+      onInitWidth: this._resizeTo.bind(this, INITIAL_WIDTH),
       onPlusWidth: this._plusToWidth,
       onMinusWidth: this._minusToWidth,
       onFit: this._fitToWidth,
@@ -100,8 +104,9 @@ class ChartContainer extends Component {
   }
 
   componentDidMount(){
-    this.unsubscribe = ChartStore.listen(this._onStore);
-    const _initState = ChartStore.getConfigs(this.props.chartType)
+    const { store } = this.props;
+    this.unsubscribe = store.listen(this._onStore);
+    const _initState = store.getConfigs(this.props.chartType)
     if (_initState) {
        this.setState(_initState);
     }
@@ -197,16 +202,19 @@ class ChartContainer extends Component {
   _refChart = (index, comp) => this[_crItemRefPropName(index)] = comp
 
   _renderCharts = () => {
-     const { chartType, browserType, onCloseItem } = this.props
+     const {
+       chartType, browserType, onCloseItem,
+       store
+     } = this.props
      , { configs=[] } = this.state
-     , _isAdminMode = _isFn(ChartStore.isAdminMode)
-           ? ChartStore.isAdminMode.bind(ChartStore)
+     , _isAdminMode = _isFn(store.isAdminMode)
+           ? store.isAdminMode.bind(store)
            : false ;
      return configs.map((config, index) => {
        const { zhConfig={} } = config
            , { id } = zhConfig;
        return ItemFactory.createItem({
-          store: ChartStore,
+          store,
           config, index,
           option: { chartType },
           props: {
@@ -232,14 +240,14 @@ class ChartContainer extends Component {
    _plusToWidth = () => {
      const style = this._getRootNodeStyle()
          , w = _getWidth(style) + DELTA;
-     if (w < RESIZE_MAX_WIDTH) {
+     if (w < MAX_WIDTH) {
         style.width = _toStyleWidth(w)
      }
    }
    _minusToWidth = () => {
      const style = this._getRootNodeStyle()
          , w = _getWidth(style) - DELTA;
-     if (w > RESIZE_MIN_WIDTH) {
+     if (w > MIN_WIDTH) {
        style.width = _toStyleWidth(w)
      }
    }
@@ -257,7 +265,8 @@ class ChartContainer extends Component {
    }
 
    _getModelMore = () => {
-     const _isAdminMode = ChartStore.isAdminMode();
+     const { store } = this.props
+     , _isAdminMode = store.isAdminMode?.() || false;
      return this._isAdminMode === _isAdminMode
        ? this._MODEL
        : (this._MODEL = this._crModelMore(_isAdminMode));
@@ -283,9 +292,13 @@ class ChartContainer extends Component {
         <div
            ref={this._refRootNode}
            className={_classIsShow}
-           style={{ ..._styleIsShow, ...TS.ROOT }}
+           style={{
+             ...this._initialWidthStyle,
+             ..._styleIsShow,
+             ...TS.ROOT
+           }}
         >
-          <ModalSlider
+          <A.ModalSlider
             isShow={isMore}
             className={CL.MENU_MORE}
             style={TS.EL_BORDER}
@@ -298,29 +311,29 @@ class ChartContainer extends Component {
               onCompareTo={this._compareTo}
             />
           }
-          <BrowserCaption
+          <A.BrowserCaption
              onMore={this._showMore}
              onCheck={this._hSetActive}
              onUnCheck={this._hSetNotActive}
              caption={caption}
              onClose={this._hHide}
           >
-             <SvgHrzResize
-               initWidth={RESIZE_INIT_WIDTH}
-               minWidth={RESIZE_MIN_WIDTH}
-               maxWidth={RESIZE_MAX_WIDTH}
+             <A.SvgHrzResize
+               initWidth={INITIAL_WIDTH}
+               minWidth={this._MIN_WIDTH}
+               maxWidth={MAX_WIDTH}
                comp={this}
                onResizeAfter={this._hResizeAfter}
              />
-          </BrowserCaption>
-          <ScrollPane
+          </A.BrowserCaption>
+          <A.ScrollPane
              ref={this._refSpComp}
              className={CL.SCROLL}
           >
             <div>
               { this._renderCharts() }
             </div>
-          </ScrollPane>
+          </A.ScrollPane>
         </div>
      )
    }

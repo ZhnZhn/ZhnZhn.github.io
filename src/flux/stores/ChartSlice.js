@@ -43,14 +43,16 @@ const ChartSlice = {
   onLoadStockCompleted(option, config){
       const {
         chartType, browserType,
+        conf,
         limitRemaining
       } = option;
 
       this.addMenuItemCounter(chartType, browserType);
 
+      const dialogConf = this.getDialogConf(conf, chartType);
       const {
         chartSlice, Comp
-      } = loadConfig(this.charts, config, option);
+      } = loadConfig(this.charts, config, option, dialogConf, this);
       if (chartSlice){
         this.trigger(CHAT.LOAD_STOCK_COMPLETED, chartSlice);
       } else {
@@ -83,9 +85,10 @@ const ChartSlice = {
 
   onShowChart(chartType, browserType, conf){
     this.setMenuItemOpen(chartType, browserType);
+    const dialogConf = this.getDialogConf(conf, chartType);
     const {
-            chartSlice, Comp
-          } = showChart(this.charts, chartType, browserType, conf)
+      chartSlice, Comp
+    } = showChart(this.charts, chartType, browserType, dialogConf, this)
     if (chartSlice){
       this.trigger(CHAT.SHOW_CHART, chartSlice);
     } else {

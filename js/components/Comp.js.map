@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../src/components/Comp.js"],"names":["Comp","A","ZhnM"],"mappings":";;;;;;;;;AACA;;AACA;;AAEA,IAAMA,IAAI,iCACLC,aADK,MAELC,gBAFK,CAAV;eAKeF,I","sourcesContent":["\r\nimport A from './zhn/A'\r\nimport ZhnM from './zhn-m/ZhnM'\r\n\r\nconst Comp = {\r\n  ...A,\r\n  ...ZhnM\r\n};\r\n\r\nexport default Comp\r\n"],"file":"Comp.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/Comp.js"
+ ],
+ "file": "../../src/components/Comp.js",
+ "names": [
+  "Comp",
+  "A",
+  "Am",
+  "ModalSlider"
+ ],
+ "mappings": ";;;;;;;;;AACA;;AACA;;AACA;;AAEA,IAAMA,IAAI,iCACLC,aADK,MAELC,cAFK;AAGRC,EAAAA,WAAW,EAAXA;AAHQ,EAAV;eAMeH,I"
+}

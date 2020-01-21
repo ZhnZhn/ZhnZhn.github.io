@@ -10,7 +10,7 @@ module.exports = {
   entry: {
      lib: [            
             "react", "react-dom", "raven-js",
-            "reflux",
+            "reflux-core",
             "fetch-jsonp",
             "big.js", "interactjs", 
             "localforage", "query-string",            

@@ -19,8 +19,12 @@ var S = {
     display: 'inline-block'
   },
   LEFT_DIV: {
-    marginLeft: '10px'
+    marginLeft: 10
   }
+};
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
 };
 
 var SvgHrzResize =
@@ -31,7 +35,7 @@ function (_Component) {
   function SvgHrzResize(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._increaseStepValue = function () {
       _this.countStep += 1;
@@ -75,19 +79,18 @@ function (_Component) {
       }
     };
 
-    _this._hStartResize = function (fnResize, evt) {
-      evt.preventDefault();
-
+    _this._startResize = function (fnResize, evt) {
+      //evt.preventDefault()
       _this._updateDelta();
 
       if (_this.id !== null) {
-        _this._hStopResize(false);
+        _this._stopResize(false);
       }
 
       _this.id = setInterval(fnResize, 5);
     };
 
-    _this._hStopResize = function (isOnResizeAfter) {
+    _this._stopResize = function (isOnResizeAfter) {
       clearInterval(_this.id);
       _this.id = null;
       _this.step = 1;
@@ -103,7 +106,10 @@ function (_Component) {
     _this.delta = 0;
     _this.step = 1;
     _this.countStep = 0;
-    _this.isResizeAfter = typeof props.onResizeAfter === 'function' ? true : false;
+    _this.isResizeAfter = _isFn(props.onResizeAfter);
+    _this._hStartResizeLeft = _this._startResize.bind(null, _this._resizeLeft);
+    _this._hStartResizeRight = _this._startResize.bind(null, _this._resizeRight);
+    _this._hStopResize = _this._stopResize.bind(null, true);
     _this.state = {};
     return _this;
   }
@@ -130,11 +136,11 @@ function (_Component) {
     }, _react["default"].createElement("button", {
       className: CL,
       style: S.LEFT_DIV,
-      title: "Resize container horizontal left",
-      onMouseDown: this._hStartResize.bind(null, this._resizeLeft),
-      onMouseUp: this._hStopResize.bind(null, true),
-      onTouchStart: this._hStartResize.bind(null, this._resizeLeft),
-      onTouchEnd: this._hStopResize.bind(null, true)
+      title: "Resize container to left",
+      onMouseDown: this._hStartResizeLeft,
+      onMouseUp: this._hStopResize,
+      onTouchStart: this._hStartResizeLeft,
+      onTouchEnd: this._hStopResize
     }, _react["default"].createElement("svg", {
       viewBox: "0 0 12 12",
       width: "100%",
@@ -153,11 +159,11 @@ function (_Component) {
     }))), _react["default"].createElement("button", {
       className: CL,
       style: S.LEFT_DIV,
-      title: "Resize container horizontal right",
-      onMouseDown: this._hStartResize.bind(null, this._resizeRight),
-      onMouseUp: this._hStopResize.bind(null, true),
-      onTouchStart: this._hStartResize.bind(null, this._resizeRight),
-      onTouchEnd: this._hStopResize.bind(null, true)
+      title: "Resize container to right",
+      onMouseDown: this._hStartResizeRight,
+      onMouseUp: this._hStopResize,
+      onTouchStart: this._hStartResizeRight,
+      onTouchEnd: this._hStopResize
     }, _react["default"].createElement("svg", {
       viewBox: "0 0 12 12",
       width: "100%",

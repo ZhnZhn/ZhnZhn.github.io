@@ -14,6 +14,9 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 var _react = _interopRequireWildcard(require("react"));
 
 //import PropTypes from "prop-types";
+var CL = {
+  NUMBER_RANGE: 'input-minmax-number'
+};
 var S = {
   INPUT: {
     display: 'inline',
@@ -44,12 +47,23 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number';
+};
+
 var _getInitStateFrom = function _getInitStateFrom(_ref) {
   var initValue = _ref.initValue;
   return {
     initValue: initValue,
     value: initValue != null ? initValue : C.BLANK
   };
+};
+
+var _isMinMaxNumber = function _isMinMaxNumber(_ref2) {
+  var type = _ref2.type,
+      min = _ref2.min,
+      max = _ref2.max;
+  return type === 'number' && _isNumber(min) && _isNumber(max);
 };
 
 var InputText =
@@ -63,6 +77,9 @@ function (_Component) {
     initValue: PropTypes.string,
     type: PropTypes.string,
     placeholder: PropTypes.string,
+    min: PropTypes.number,
+    max: PropTypes.number,
+    step: PropTypes.number,
     onEnter: PropTypes.func
   }
   */
@@ -144,10 +161,12 @@ function (_Component) {
         step = _this$props2.step,
         value = this.state.value,
         _autoCorrect = spellCheck ? C.ON : C.OFF,
-        _spellCheck = spellCheck ? "true" : "false";
+        _spellCheck = spellCheck ? "true" : "false",
+        _className = _isMinMaxNumber(this.props) ? CL.NUMBER_RANGE : void 0;
 
     return _react["default"].createElement("input", {
       ref: this._refInput,
+      className: _className,
       style: (0, _extends2["default"])({}, S.INPUT, {}, style),
       type: type || C.TEXT,
       name: C.TEXT,

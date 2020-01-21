@@ -1,16 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/iex/ChartType.js"
- ],
- "file": "../../../src/adapters/iex/ChartType.js",
- "names": [
-  "ChartType",
-  "CHART",
-  "ERN",
-  "DIV",
-  "COM",
-  "STA"
- ],
- "mappings": ";;;;AACA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,KAAK,EAAE,OADS;AAEhBC,EAAAA,GAAG,EAAE,UAFW;AAGhBC,EAAAA,GAAG,EAAE,WAHW;AAIhBC,EAAAA,GAAG,EAAE,SAJW;AAKhBC,EAAAA,GAAG,EAAE;AALW,CAAlB;eAQeL,S"
-}
+{"version":3,"sources":["../../../src/adapters/iex/ChartType.js"],"names":["ChartType","CHART","ERN","DIV","COM","STA"],"mappings":";;;;AACA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,KAAK,EAAE,OADS;AAEhBC,EAAAA,GAAG,EAAE,UAFW;AAGhBC,EAAAA,GAAG,EAAE,WAHW;AAIhBC,EAAAA,GAAG,EAAE,SAJW;AAKhBC,EAAAA,GAAG,EAAE;AALW,CAAlB;eAQeL,S","sourcesContent":["\r\nconst ChartType = {\r\n  CHART: 'chart',\r\n  ERN: 'earnings',\r\n  DIV: 'dividends',\r\n  COM: 'company',\r\n  STA: 'stats'  \r\n};\r\n\r\nexport default ChartType\r\n"],"file":"ChartType.js"}

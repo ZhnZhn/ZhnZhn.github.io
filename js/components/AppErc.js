@@ -17,6 +17,12 @@ var _LocationSearch = _interopRequireDefault(require("../flux/logic/LocationSear
 
 var _ChartStore = _interopRequireDefault(require("../flux/stores/ChartStore"));
 
+var _ComponentActions = _interopRequireWildcard(require("../flux/actions/ComponentActions"));
+
+var _BrowserActions = require("../flux/actions/BrowserActions");
+
+var _ChartActions = require("../flux/actions/ChartActions");
+
 var _HeaderBar = _interopRequireDefault(require("./header/HeaderBar"));
 
 var _BrowserContainer = _interopRequireDefault(require("./browser-container/BrowserContainer"));
@@ -27,19 +33,13 @@ var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContai
 
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 
-var _ComponentActions = _interopRequireWildcard(require("../flux/actions/ComponentActions"));
-
-var _BrowserActions = require("../flux/actions/BrowserActions");
-
-var _ChartActions = require("../flux/actions/ChartActions");
-
 var _theme = _interopRequireDefault(require("./styles/theme"));
 
 var _ThemeContext = _interopRequireDefault(require("./hoc/ThemeContext"));
 
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
-var BUILD_DATE = '17-01-2020';
+var BUILD_DATE = '21-01-2020';
 var CL = "component-container";
 
 var AppErc =

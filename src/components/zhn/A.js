@@ -3,6 +3,7 @@ import SvgIcons from './svg/SvgIcons'
 import SpinnerLoading from './SpinnerLoading'
 import ScrollPane from './ScrollPane'
 import BrowserCaption from './BrowserCaption'
+import SvgHrzResize from './SvgHrzResize'
 import ButtonTab from './ButtonTab'
 import InputText from './InputText';
 import OpenClose from './OpenClose';
@@ -15,6 +16,7 @@ const A = {
   SpinnerLoading,
   ScrollPane,
   BrowserCaption,
+  SvgHrzResize,
   ButtonTab,
   InputText,
   OpenClose,

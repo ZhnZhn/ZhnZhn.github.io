@@ -15,27 +15,21 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
-
-var _ChartStore = _interopRequireDefault(require("../../flux/stores/ChartStore"));
-
 var _ChartActions = require("../../flux/actions/ChartActions");
 
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 
-var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
+var _ItemFactory = _interopRequireDefault(require("../factories/ItemFactory"));
+
+var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
+
+var _has = _interopRequireDefault(require("../has"));
+
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ModelMore = _interopRequireDefault(require("./ModelMore"));
 
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
-
-var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
-
-var _SvgHrzResize = _interopRequireDefault(require("../zhn/SvgHrzResize"));
-
-var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
-
-var _ItemFactory = _interopRequireDefault(require("../factories/ItemFactory"));
 
 var TH_ID = 'CHART_CONTAINER';
 var CL = {
@@ -45,9 +39,9 @@ var CL = {
   MENU_MORE: "popup-menu charts__menu-more"
 };
 var CHILD_MARGIN = 36,
-    RESIZE_INIT_WIDTH = 635,
-    RESIZE_MIN_WIDTH = 395,
-    RESIZE_MAX_WIDTH = 1200,
+    INITIAL_WIDTH = 635,
+    MIN_WIDTH = 395,
+    MAX_WIDTH = 1200,
     DELTA = 10;
 var S = {
   INLINE: {
@@ -76,7 +70,7 @@ var _isInArray = function _isInArray(arr, value) {
 };
 
 var _getWidth = function _getWidth(style) {
-  return parseInt(style.width, 10) || RESIZE_INIT_WIDTH;
+  return parseInt(style.width, 10) || INITIAL_WIDTH;
 };
 
 var _toStyleWidth = function _toStyleWidth(width) {
@@ -85,6 +79,11 @@ var _toStyleWidth = function _toStyleWidth(width) {
 
 var _crItemRefPropName = function _crItemRefPropName(index) {
   return 'chart' + index;
+};
+
+var _crMinWidth = function _crMinWidth(_ref) {
+  var width = _ref.width;
+  return width !== INITIAL_WIDTH ? width : MIN_WIDTH;
 };
 
 var ChartContainer =
@@ -98,13 +97,14 @@ function (_Component) {
     _this = _Component.call(this, props) || this;
 
     _this._crModelMore = function (isAdminMode) {
-      _this._isAdminMode = _isBool(isAdminMode) ? isAdminMode : _ChartStore["default"].isAdminMode();
       var _this$props = _this.props,
+          store = _this$props.store,
           onRemoveAll = _this$props.onRemoveAll,
           onSortBy = _this$props.onSortBy;
+      _this._isAdminMode = _isBool(isAdminMode) ? isAdminMode : store.isAdminMode();
       return (0, _ModelMore["default"])({
-        onMinWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), RESIZE_MIN_WIDTH),
-        onInitWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), RESIZE_INIT_WIDTH),
+        onMinWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), _this._MIN_WIDTH),
+        onInitWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), INITIAL_WIDTH),
         onPlusWidth: _this._plusToWidth,
         onMinusWidth: _this._minusToWidth,
         onFit: _this._fitToWidth,
@@ -238,16 +238,17 @@ function (_Component) {
           chartType = _this$props4.chartType,
           browserType = _this$props4.browserType,
           onCloseItem = _this$props4.onCloseItem,
+          store = _this$props4.store,
           _this$state$configs = _this.state.configs,
           configs = _this$state$configs === void 0 ? [] : _this$state$configs,
-          _isAdminMode = _isFn(_ChartStore["default"].isAdminMode) ? _ChartStore["default"].isAdminMode.bind(_ChartStore["default"]) : false;
+          _isAdminMode = _isFn(store.isAdminMode) ? store.isAdminMode.bind(store) : false;
 
       return configs.map(function (config, index) {
         var _config$zhConfig = config.zhConfig,
             zhConfig = _config$zhConfig === void 0 ? {} : _config$zhConfig,
             id = zhConfig.id;
         return _ItemFactory["default"].createItem({
-          store: _ChartStore["default"],
+          store: store,
           config: config,
           index: index,
           option: {
@@ -265,9 +266,9 @@ function (_Component) {
     _this._getRootNodeStyle = function () {
       var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
           _rootNode = _assertThisInitialize._rootNode,
-          _ref = _rootNode || {},
-          _ref$style = _ref.style,
-          style = _ref$style === void 0 ? {} : _ref$style;
+          _ref2 = _rootNode || {},
+          _ref2$style = _ref2.style,
+          style = _ref2$style === void 0 ? {} : _ref2$style;
 
       return style;
     };
@@ -282,7 +283,7 @@ function (_Component) {
       var style = _this._getRootNodeStyle(),
           w = _getWidth(style) + DELTA;
 
-      if (w < RESIZE_MAX_WIDTH) {
+      if (w < MAX_WIDTH) {
         style.width = _toStyleWidth(w);
       }
     };
@@ -291,7 +292,7 @@ function (_Component) {
       var style = _this._getRootNodeStyle(),
           w = _getWidth(style) - DELTA;
 
-      if (w > RESIZE_MIN_WIDTH) {
+      if (w > MIN_WIDTH) {
         style.width = _toStyleWidth(w);
       }
     };
@@ -313,7 +314,8 @@ function (_Component) {
     };
 
     _this._getModelMore = function () {
-      var _isAdminMode = _ChartStore["default"].isAdminMode();
+      var store = _this.props.store,
+          _isAdminMode = (store.isAdminMode == null ? void 0 : store.isAdminMode()) || false;
 
       return _this._isAdminMode === _isAdminMode ? _this._MODEL : _this._MODEL = _this._crModelMore(_isAdminMode);
     };
@@ -327,6 +329,8 @@ function (_Component) {
     };
 
     _this.childMargin = CHILD_MARGIN;
+    _this._initialWidthStyle = _has["default"].initWidthStyle(INITIAL_WIDTH, MIN_WIDTH);
+    _this._MIN_WIDTH = _crMinWidth(_this._initialWidthStyle);
     _this._MODEL = _this._crModelMore();
     _this._hSetActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), true);
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);
@@ -340,9 +344,10 @@ function (_Component) {
   var _proto = ChartContainer.prototype;
 
   _proto.componentDidMount = function componentDidMount() {
-    this.unsubscribe = _ChartStore["default"].listen(this._onStore);
+    var store = this.props.store;
+    this.unsubscribe = store.listen(this._onStore);
 
-    var _initState = _ChartStore["default"].getConfigs(this.props.chartType);
+    var _initState = store.getConfigs(this.props.chartType);
 
     if (_initState) {
       this.setState(_initState);
@@ -369,8 +374,8 @@ function (_Component) {
     return _react["default"].createElement("div", {
       ref: this._refRootNode,
       className: _classIsShow,
-      style: (0, _extends2["default"])({}, _styleIsShow, {}, TS.ROOT)
-    }, _react["default"].createElement(_ModalSlider["default"], {
+      style: (0, _extends2["default"])({}, this._initialWidthStyle, {}, _styleIsShow, {}, TS.ROOT)
+    }, _react["default"].createElement(_Comp["default"].ModalSlider, {
       isShow: isMore,
       className: CL.MENU_MORE,
       style: TS.EL_BORDER,
@@ -380,19 +385,19 @@ function (_Component) {
       isShow: isCompareTo,
       onClose: this._closeCompareTo,
       onCompareTo: this._compareTo
-    }), _react["default"].createElement(_BrowserCaption["default"], {
+    }), _react["default"].createElement(_Comp["default"].BrowserCaption, {
       onMore: this._showMore,
       onCheck: this._hSetActive,
       onUnCheck: this._hSetNotActive,
       caption: caption,
       onClose: this._hHide
-    }, _react["default"].createElement(_SvgHrzResize["default"], {
-      initWidth: RESIZE_INIT_WIDTH,
-      minWidth: RESIZE_MIN_WIDTH,
-      maxWidth: RESIZE_MAX_WIDTH,
+    }, _react["default"].createElement(_Comp["default"].SvgHrzResize, {
+      initWidth: INITIAL_WIDTH,
+      minWidth: this._MIN_WIDTH,
+      maxWidth: MAX_WIDTH,
       comp: this,
       onResizeAfter: this._hResizeAfter
-    })), _react["default"].createElement(_ScrollPane["default"], {
+    })), _react["default"].createElement(_Comp["default"].ScrollPane, {
       ref: this._refSpComp,
       className: CL.SCROLL
     }, _react["default"].createElement("div", null, this._renderCharts())));

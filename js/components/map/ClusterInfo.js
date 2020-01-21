@@ -17,6 +17,7 @@ var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _Sparklines = require("../zhn-sparklines/Sparklines");
 
+//import PropTypes from 'prop-types'
 var COLOR_MAX = "#8bc34a";
 var COLOR_MIN = "#f44336";
 var COLOR_EQUAL = 'black';

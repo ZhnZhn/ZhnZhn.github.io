@@ -3,23 +3,23 @@ import React, { Component } from 'react';
 
 import LocationSearch from '../flux/logic/LocationSearch';
 import ChartStore from '../flux/stores/ChartStore';
-import HeaderBar from './header/HeaderBar';
-
-import BrowserContainer from './browser-container/BrowserContainer';
-import About from './about/About';
-import CompContainer from './zhn-containers/CompContainer';
-import DialogContainer from './dialogs/DialogContainer';
 
 import CA, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
 import { BrowserActionTypes as BAT } from '../flux/actions/BrowserActions';
 import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
+
+import HeaderBar from './header/HeaderBar';
+import BrowserContainer from './browser-container/BrowserContainer';
+import About from './about/About';
+import CompContainer from './zhn-containers/CompContainer';
+import DialogContainer from './dialogs/DialogContainer';
 
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
 import checkBuild from './checkBuild'
 
-const BUILD_DATE = '17-01-2020';
+const BUILD_DATE = '21-01-2020';
 const CL = "component-container"
 
 class AppErc extends Component {

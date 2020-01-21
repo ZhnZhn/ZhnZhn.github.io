@@ -15,6 +15,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
+//import PropTypes from 'prop-types'
 var TH_ID = 'MODAL_PANE';
 
 var ModalPane =

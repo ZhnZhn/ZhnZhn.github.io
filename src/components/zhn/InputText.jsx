@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
+const CL = {
+  NUMBER_RANGE: 'input-minmax-number'
+};
+
 const S = {
   INPUT: {
     display: 'inline',
@@ -29,11 +33,16 @@ const C = {
 };
 
 const _isFn = fn => typeof fn === 'function';
+const _isNumber = n => typeof n === 'number';
 
 const _getInitStateFrom = ({ initValue }) => ({
   initValue: initValue,
   value: initValue != null ? initValue : C.BLANK
 });
+
+const _isMinMaxNumber = ({ type, min, max }) => type === 'number'
+ && _isNumber(min)
+ && _isNumber(max);
 
 class InputText extends Component {
   /*
@@ -42,6 +51,9 @@ class InputText extends Component {
     initValue: PropTypes.string,
     type: PropTypes.string,
     placeholder: PropTypes.string,
+    min: PropTypes.number,
+    max: PropTypes.number,
+    step: PropTypes.number,
     onEnter: PropTypes.func
   }
   */
@@ -97,21 +109,25 @@ class InputText extends Component {
 
   render(){
     const {
-           style, type,
-           spellCheck, placeholder,
-           maxLength,
-           min, max, step
-         } = this.props
-        , { value } = this.state
-        , _autoCorrect = spellCheck
-             ? C.ON
-             : C.OFF
-        , _spellCheck = spellCheck
-             ? "true"
-             : "false";
+       style, type,
+       spellCheck, placeholder,
+       maxLength,
+       min, max, step
+     } = this.props
+    , { value } = this.state
+    , _autoCorrect = spellCheck
+         ? C.ON
+         : C.OFF
+    , _spellCheck = spellCheck
+         ? "true"
+         : "false"
+    , _className = _isMinMaxNumber(this.props)
+         ? CL.NUMBER_RANGE
+         : void 0;
     return (
       <input
         ref={this._refInput}
+        className={_className}
         style={{ ...S.INPUT, ...style }}
         type={type || C.TEXT}
         name={C.TEXT}

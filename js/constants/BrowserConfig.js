@@ -47,11 +47,6 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
   isDynamic: true,
   caption: 'Blockchain',
   sourceMenuUrl: './data/blockchain/source-menu.json'
-}, _BrowserConfig[_Type.BrowserType.PREMIUM_SAMPLE] = {
-  browserType: _Type.BrowserType.PREMIUM_SAMPLE,
-  isDynamic: true,
-  caption: 'Quandl Premium Sample',
-  sourceMenuUrl: './data/quandl-sample/source-menu.json'
 }, _BrowserConfig[_Type.BrowserType.FRANCE_STATISTICS] = {
   browserType: _Type.BrowserType.FRANCE_STATISTICS,
   isDynamic: true,
@@ -114,18 +109,6 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
   isDynamic: true,
   caption: 'USA Economy',
   sourceMenuUrl: './data/usa-economy/source-menu.json'
-}, _BrowserConfig[_Type.BrowserType.US_STOCKS] = {
-  browserType: _Type.BrowserType.US_STOCKS,
-  isDynamic: true,
-  caption: '1000 Stocks by Sectors',
-  sourceMenuUrl: './data/us-stocks/source-menu.json',
-  withoutItemCounter: true,
-  modalDialogType: _Type.ModalDialog.US_STOCK_BY_SECTOR,
-  chartContainerType: _Type.BrowserType.US_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  contFullCaption: 'Quandl: Stocks by Sectors',
-  itemOptionType: 'ItemTopicOption',
-  itemType: 'Item',
-  descrUrl: './data/us-stocks/description.html'
 }, _BrowserConfig[_Type.BrowserType.NYSE_STOCKS] = {
   browserType: _Type.BrowserType.NYSE_STOCKS,
   isDynamic: true,
@@ -150,18 +133,6 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
-}, _BrowserConfig[_Type.BrowserType.LONDON_STOCKS] = {
-  browserType: _Type.BrowserType.LONDON_STOCKS,
-  isDynamic: true,
-  caption: 'London Stocks by Sectors',
-  sourceMenuUrl: './data/london-stocks/source-menu.json',
-  withoutItemCounter: true,
-  modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
-  chartContainerType: _Type.BrowserType.LONDON_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  contFullCaption: 'Quandl: London Stock Exchange by Sectors',
-  itemOptionType: 'ItemTopicOption',
-  itemType: 'ItemLse',
-  descrUrl: './data/london-stocks/lse-stocks.html'
 }, _BrowserConfig[_Type.BrowserType.WATCH_LIST] = {
   browserType: _Type.BrowserType.WATCH_LIST,
   //isDynamic : false,

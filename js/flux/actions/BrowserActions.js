@@ -7,7 +7,7 @@ exports["default"] = exports.BrowserActionTypes = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _reflux = _interopRequireDefault(require("reflux"));
+var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
@@ -35,7 +35,7 @@ var BrowserActionTypes = {
 exports.BrowserActionTypes = BrowserActionTypes;
 var A = BrowserActionTypes;
 
-var BrowserActions = _reflux["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.SHOW_BROWSER_DYNAMIC] = {
+var BrowserActions = _refluxCore["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.SHOW_BROWSER_DYNAMIC] = {
   children: ['done', 'init', 'failed']
 }, _Reflux$createActions[A.INIT_BROWSER_DYNAMIC] = {}, _Reflux$createActions[A.LOAD_BROWSER_DYNAMIC] = {
   children: ['completed', 'failed']

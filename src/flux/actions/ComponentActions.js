@@ -1,4 +1,4 @@
-import Reflux from 'reflux';
+import Reflux from 'reflux-core';
 
 import { ModalDialog as MD } from '../../constants/Type'
 

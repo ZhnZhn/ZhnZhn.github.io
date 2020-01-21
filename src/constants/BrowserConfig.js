@@ -49,13 +49,7 @@ const BrowserConfig = {
     caption: 'Blockchain',
     sourceMenuUrl: './data/blockchain/source-menu.json'
   },
-
-  [BT.PREMIUM_SAMPLE]: {
-    browserType: BT.PREMIUM_SAMPLE,
-    isDynamic: true,
-    caption: 'Quandl Premium Sample',
-    sourceMenuUrl: './data/quandl-sample/source-menu.json'
-  },
+  
   [BT.FRANCE_STATISTICS]: {
     browserType: BT.FRANCE_STATISTICS,
     isDynamic: true,
@@ -126,19 +120,6 @@ const BrowserConfig = {
     caption: 'USA Economy',
     sourceMenuUrl: './data/usa-economy/source-menu.json'
   },
-  [BT.US_STOCKS]: {
-    browserType: BT.US_STOCKS,
-    isDynamic: true,
-    caption: '1000 Stocks by Sectors',
-    sourceMenuUrl: './data/us-stocks/source-menu.json',
-    withoutItemCounter: true,
-    modalDialogType: MD.US_STOCK_BY_SECTOR,
-    chartContainerType: BT.US_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
-    contFullCaption: 'Quandl: Stocks by Sectors',
-    itemOptionType: 'ItemTopicOption',
-    itemType: 'Item',
-    descrUrl: './data/us-stocks/description.html'
-  },
   [BT.NYSE_STOCKS]: {
     browserType: BT.NYSE_STOCKS,
     isDynamic: true,
@@ -164,19 +145,6 @@ const BrowserConfig = {
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
     descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
-  },
-  [BT.LONDON_STOCKS]: {
-    browserType: BT.LONDON_STOCKS,
-    isDynamic: true,
-    caption: 'London Stocks by Sectors',
-    sourceMenuUrl: './data/london-stocks/source-menu.json',
-    withoutItemCounter: true,
-    modalDialogType: MD.STOCKS_BY_SECTOR,
-    chartContainerType: BT.LONDON_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
-    contFullCaption: 'Quandl: London Stock Exchange by Sectors',
-    itemOptionType: 'ItemTopicOption',
-    itemType: 'ItemLse',
-    descrUrl: './data/london-stocks/lse-stocks.html'
   },
 
   [BT.WATCH_LIST]: {

@@ -52,7 +52,7 @@ const crModelMore = ({
         onClick: onMinWidth
       },{
         cn: CL_ROW,
-        name: 'to InitWidth',
+        name: 'to InitialWidth',
         onClick: onInitWidth
       },{
         cn: CL_ROW,

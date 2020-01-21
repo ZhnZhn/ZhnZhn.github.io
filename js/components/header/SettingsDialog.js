@@ -23,6 +23,7 @@ var _PaneApiKey = _interopRequireDefault(require("./PaneApiKey"));
 
 var _PaneOptions = _interopRequireDefault(require("./PaneOptions"));
 
+//import PropTypes from 'prop-types'
 var S = {
   MODAL: {
     position: 'static',

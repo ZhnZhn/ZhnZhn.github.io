@@ -7,9 +7,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -29,28 +29,32 @@ var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 
+var _S = {
+  LABEL: {
+    display: 'inline-block',
+    color: '#1b75bb',
+    fontSize: '16px',
+    fontWeight: 'bold'
+  }
+};
 var S = {
   GAP_BETWEEN_GROUP: {
     marginTop: 10
   },
-  LABEL_WIDTH: {
-    display: 'inline-block',
-    color: '#1b75bb',
+  LABEL: (0, _extends2["default"])({}, _S.LABEL, {
     width: 100,
     paddingRight: 5,
-    textAlign: 'right',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  },
-  LABEL_HEIGHT: {
-    display: 'inline-block',
-    color: '#1b75bb',
+    textAlign: 'right'
+  }),
+  LABEL_WIDTH: (0, _extends2["default"])({}, _S.LABEL, {
     paddingRight: 5,
-    paddingLeft: 3,
-    fontSize: '16px',
-    fontWeight: 'bold'
+    paddingLeft: 3
+  }),
+  LABEL_HEIGHT: {
+    paddingLeft: 6
   },
   INPUT_NUMBER: {
+    width: 60,
     height: 30,
     marginLeft: 0
   },
@@ -59,6 +63,39 @@ var S = {
     height: 30,
     marginLeft: 0
   }
+};
+var C = {
+  APP_HTML: 'Web app ERC https://zhnzhn.github.io',
+  DS_TOP_PADDING: 90,
+  DS_FONT_SIZE: '10px',
+  W_MIN: 351,
+  W_MAX: 2001,
+  H_MIN: 251,
+  H_MAX: 1001
+};
+
+var _inRange = function _inRange(v, min, max) {
+  return v > min && v < max;
+};
+
+var _crItemLabel = function _crItemLabel(html, top, fontSize) {
+  if (top === void 0) {
+    top = -70;
+  }
+
+  if (fontSize === void 0) {
+    fontSize = '9px';
+  }
+
+  return {
+    html: html,
+    style: {
+      left: 0,
+      top: top,
+      color: '#909090',
+      'font-size': fontSize
+    }
+  };
 };
 
 var CustomizeExportDialog =
@@ -99,22 +136,42 @@ function (_Component) {
       _this.exportStyle = item && item.value || {};
     };
 
+    _this._getDimension = function (chart) {
+      var chartWidth = chart.chartWidth,
+          chartHeight = chart.chartHeight,
+          _width = _this.inputWidth.getValue(),
+          _height = _this.inputHeight.getValue();
+
+      return {
+        width: _inRange(_width, C.W_MIN, C.W_MAX) ? _width : chartWidth,
+        height: _inRange(_height, C.H_MIN, C.H_MAX) ? _height : chartHeight
+      };
+    };
+
     _this._hExport = function () {
+      var _ref, _chart$userOptions$zh;
+
       var _this$props = _this.props,
           data = _this$props.data,
           onClose = _this$props.onClose,
           chart = data.chart,
           fn = data.fn,
+          _this$_getDimension = _this._getDimension(chart),
+          width = _this$_getDimension.width,
+          height = _this$_getDimension.height,
           _customOption = _ChartExportConfig["default"].merge(true, {
         chart: {
-          width: _this.inputWidth.getValue(),
-          height: _this.inputHeight.getValue()
+          width: width,
+          height: height
         },
         title: {
           text: _this.inputTitle.getValue()
         },
         subtitle: {
           text: _this.inputSubtitle.getValue()
+        },
+        labels: {
+          items: [_crItemLabel(C.APP_HTML), _crItemLabel("DataSource: " + ((_ref = (_chart$userOptions$zh = chart.userOptions.zhConfig) == null ? void 0 : _chart$userOptions$zh.dataSource) != null ? _ref : ''), height - C.DS_TOP_PADDING, C.DS_FONT_SIZE)]
         }
       }, _this.exportStyle);
 
@@ -202,25 +259,33 @@ function (_Component) {
     }, _react["default"].createElement("div", {
       style: _DialogStyles["default"].rowDiv
     }, _react["default"].createElement("span", {
-      style: S.LABEL_WIDTH
+      style: S.LABEL
     }, "Dimension:"), _react["default"].createElement("span", {
-      style: S.LABEL_HEIGHT
+      style: S.LABEL_WIDTH
     }, "Width:"), _react["default"].createElement(_InputText["default"], {
       ref: this._refInputWidth,
+      type: "number",
+      placeholder: chartWidth,
       initValue: chartWidth,
-      style: S.INPUT_NUMBER
+      style: S.INPUT_NUMBER,
+      min: C.W_MIN,
+      max: C.W_MAX
     }), _react["default"].createElement("span", {
-      style: S.LABEL_HEIGHT
+      style: (0, _extends2["default"])({}, S.LABEL_WIDTH, {}, S.LABEL_HEIGHT)
     }, "Height:"), _react["default"].createElement(_InputText["default"], {
       ref: this._refInputHeight,
+      type: "number",
+      placeholder: chartHeight,
       initValue: chartHeight,
-      style: S.INPUT_NUMBER
+      style: S.INPUT_NUMBER,
+      min: C.H_MIN,
+      max: C.H_MAX
     }))), _react["default"].createElement(_ShowHide["default"], {
       isShow: isShowTitle
     }, _react["default"].createElement("div", {
       style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, {}, S.GAP_BETWEEN_GROUP)
     }, _react["default"].createElement("span", {
-      style: S.LABEL_WIDTH
+      style: S.LABEL
     }, "Title:"), _react["default"].createElement(_InputText["default"], {
       ref: this._refInputTitle,
       initValue: title,
@@ -228,7 +293,7 @@ function (_Component) {
     })), _react["default"].createElement("div", {
       style: _DialogStyles["default"].rowDiv
     }, _react["default"].createElement("span", {
-      style: S.LABEL_WIDTH
+      style: S.LABEL
     }, "Subtitle:"), _react["default"].createElement(_InputText["default"], {
       ref: this._refInputSubtitle,
       initValue: subtitle,
@@ -238,7 +303,7 @@ function (_Component) {
     }, _react["default"].createElement("div", {
       style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, {}, S.GAP_BETWEEN_GROUP)
     }, _react["default"].createElement("span", {
-      style: S.LABEL_WIDTH
+      style: S.LABEL
     }, "Style:"), _react["default"].createElement(_InputSelect["default"], {
       width: "250",
       options: this.optionStyles,

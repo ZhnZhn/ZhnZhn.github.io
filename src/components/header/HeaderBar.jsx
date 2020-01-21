@@ -1,28 +1,25 @@
 import React, { Component } from 'react'
 
-import withTheme from '../hoc/withTheme'
-
-import ProgressLoading from './ProgressLoading'
-import AppLabel from './AppLabel'
-import IconLogoErc from './IconLogoErc'
-import C from '../Comp'
-//import FlatButton from '../zhn-m/FlatButton'
-//import ModalButton from '../zhn-m/ModalButton'
-import HotBar from './HotBar'
-import LimitRemainingLabel from './LimitRemainingLabel'
-
-import ModalSlider from '../zhn-modal-slider/ModalSlider'
-import crBrowserModel from './BrowserModel'
-
 import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
 import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 
 import { BrowserType as BT } from '../../constants/Type'
 
+import withTheme from '../hoc/withTheme'
+import C from '../Comp'
+
+import ProgressLoading from './ProgressLoading'
+import AppLabel from './AppLabel'
+import IconLogoErc from './IconLogoErc'
+import HotBar from './HotBar'
+import LimitRemainingLabel from './LimitRemainingLabel'
+import crBrowserModel from './BrowserModel'
+
 const {
   FlatButton, ModalButton,
-  SvgSettings, SvgInfo
+  SvgSettings, SvgInfo,
+  ModalSlider
 } = C;
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"

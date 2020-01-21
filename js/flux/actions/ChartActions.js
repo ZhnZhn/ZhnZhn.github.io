@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = exports.ChartActionTypes = void 0;
 
-var _reflux = _interopRequireDefault(require("reflux"));
+var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
@@ -99,7 +99,7 @@ var _addSettingsTo = function _addSettingsTo(options) {
   _addBoolOptionTo(options, 'isNotZoomToMinMax');
 };
 
-var ChartActions = _reflux["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.LOAD_STOCK] = {
+var ChartActions = _refluxCore["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.LOAD_STOCK] = {
   children: ['completed', 'added', 'failed'],
   isLoading: false,
   idLoading: undefined,

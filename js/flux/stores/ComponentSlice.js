@@ -14,7 +14,7 @@ var _Factory = _interopRequireDefault(require("../logic/Factory"));
 var _Type = require("../../constants/Type");
 
 var ItemDialogLogic = {
-  showItemDialog: function showItemDialog(slice, itemConf) {
+  showItemDialog: function showItemDialog(slice, itemConf, store) {
     var type = itemConf.type,
         browserType = itemConf.browserType,
         conf = itemConf.conf;
@@ -24,7 +24,8 @@ var ItemDialogLogic = {
         key: type
       });
     } else {
-      return _Factory["default"].createDialog(type, browserType, conf).then(function (Comp) {
+      var dialogConf = store.getDialogConf(conf, type);
+      return _Factory["default"].createDialog(browserType, dialogConf).then(function (Comp) {
         slice[type] = true;
         return {
           key: type,
@@ -133,7 +134,7 @@ var ComponentSlice = {
       type: type,
       browserType: browserType,
       conf: conf
-    }).then(function (r) {
+    }, this).then(function (r) {
       _this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
     });
   },

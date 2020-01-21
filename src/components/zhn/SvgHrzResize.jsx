@@ -8,21 +8,26 @@ const S = {
     display: 'inline-block'
   },
   LEFT_DIV: {
-    marginLeft: '10px'
+    marginLeft: 10
   }
 };
 
+const _isFn = fn => typeof fn === 'function';
+
 class SvgHrzResize extends Component {
   constructor(props){
-    super();
+    super(props);
     this.id = null;
     this.domNode = null;
     this.delta = 0;
     this.step = 1;
     this.countStep = 0;
-    this.isResizeAfter = (typeof props.onResizeAfter === 'function')
-           ? true
-           : false;
+    this.isResizeAfter = _isFn(props.onResizeAfter)
+
+    this._hStartResizeLeft = this._startResize.bind(null, this._resizeLeft)
+    this._hStartResizeRight = this._startResize.bind(null, this._resizeRight)
+    this._hStopResize = this._stopResize.bind(null, true)
+
     this.state = {};
   }
 
@@ -72,15 +77,15 @@ class SvgHrzResize extends Component {
       this.delta = w - this.initWidth
     }
   }
-  _hStartResize = (fnResize, evt) => {
-    evt.preventDefault()
+  _startResize = (fnResize, evt) => {
+    //evt.preventDefault()
     this._updateDelta()
     if (this.id !== null){
-      this._hStopResize(false);
+      this._stopResize(false);
     }
     this.id = setInterval(fnResize, 5);
   }
-  _hStopResize = (isOnResizeAfter) => {
+  _stopResize = (isOnResizeAfter) => {
     clearInterval(this.id);
     this.id = null;
     this.step = 1;
@@ -97,11 +102,11 @@ class SvgHrzResize extends Component {
         <button
            className={CL}
            style={S.LEFT_DIV}
-           title="Resize container horizontal left"
-           onMouseDown={this._hStartResize.bind(null, this._resizeLeft)}
-           onMouseUp={this._hStopResize.bind(null, true)}
-           onTouchStart={this._hStartResize.bind(null, this._resizeLeft)}
-           onTouchEnd={this._hStopResize.bind(null, true)}
+           title="Resize container to left"
+           onMouseDown={this._hStartResizeLeft}
+           onMouseUp={this._hStopResize}
+           onTouchStart={this._hStartResizeLeft}
+           onTouchEnd={this._hStopResize}
         >
            <svg viewBox="0 0 12 12" width="100%" height="100%"
                preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
@@ -122,11 +127,11 @@ class SvgHrzResize extends Component {
       <button
          className={CL}
          style={S.LEFT_DIV}
-         title="Resize container horizontal right"
-         onMouseDown={this._hStartResize.bind(null, this._resizeRight)}
-         onMouseUp={this._hStopResize.bind(null, true)}
-         onTouchStart={this._hStartResize.bind(null, this._resizeRight)}
-         onTouchEnd={this._hStopResize.bind(null, true)}
+         title="Resize container to right"
+         onMouseDown={this._hStartResizeRight}
+         onMouseUp={this._hStopResize}
+         onTouchStart={this._hStartResizeRight}
+         onTouchEnd={this._hStopResize}
       >
         <svg viewBox="0 0 12 12" width="100%" height="100%"
              preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"

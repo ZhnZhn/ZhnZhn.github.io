@@ -51,10 +51,12 @@ var ChartSlice = {
   onLoadStockCompleted: function onLoadStockCompleted(option, config) {
     var chartType = option.chartType,
         browserType = option.browserType,
+        conf = option.conf,
         limitRemaining = option.limitRemaining;
     this.addMenuItemCounter(chartType, browserType);
+    var dialogConf = this.getDialogConf(conf, chartType);
 
-    var _loadConfig = loadConfig(this.charts, config, option),
+    var _loadConfig = loadConfig(this.charts, config, option, dialogConf, this),
         chartSlice = _loadConfig.chartSlice,
         Comp = _loadConfig.Comp;
 
@@ -94,8 +96,9 @@ var ChartSlice = {
   },
   onShowChart: function onShowChart(chartType, browserType, conf) {
     this.setMenuItemOpen(chartType, browserType);
+    var dialogConf = this.getDialogConf(conf, chartType);
 
-    var _showChart = showChart(this.charts, chartType, browserType, conf),
+    var _showChart = showChart(this.charts, chartType, browserType, dialogConf, this),
         chartSlice = _showChart.chartSlice,
         Comp = _showChart.Comp;
 
