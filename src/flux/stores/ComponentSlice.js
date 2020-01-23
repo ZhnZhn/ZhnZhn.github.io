@@ -8,12 +8,12 @@ import { ModalDialog } from '../../constants/Type';
 const ItemDialogLogic = {
 
   showItemDialog(slice, itemConf, store){
-    const { type , browserType, conf } = itemConf;
+    const { type, browserType, dialogConfOr } = itemConf;
     if (slice[type]){
       return Promise.resolve({ key: type });
     } else {
-      const dialogConf = store.getDialogConf(conf, type);      
-      return Factory.createDialog(browserType, dialogConf)
+      const _dialogConf = store.getDialogConf(dialogConfOr, type);
+      return Factory.createDialog(browserType, _dialogConf)
         .then(Comp => {
              slice[type] = true
              return { key:type, Comp };
@@ -103,9 +103,9 @@ const ComponentSlice = {
     this.trigger(CAT.SHOW_ABOUT);
   },
 
-  onShowDialog(type, browserType, conf){
+  onShowDialog(type, browserType, dialogConfOr){
     ItemDialogLogic.showItemDialog(
-      this.dialogInit, { type, browserType, conf }, this
+      this.dialogInit, { type, browserType, dialogConfOr }, this
     ).then(r => {
        this.trigger(CAT.SHOW_DIALOG, r)
     });

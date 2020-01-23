@@ -34,20 +34,31 @@ const _urlChart = (option) => {
   return `${C.BASE_URL}/${_ticket}/chart/${_period}`;
 };
 
+const _crUrlMarketList = (option) => {  
+  const { value } = option;
+  return {
+    url: `${C.BASE_URL}/market/list/${value}`,
+    q: 'listLimit=20&displayPercent=true'
+  };
+};
+
 const _rUrl = {
   DF: _urlChart,
   [CT.ERN]: _crUrlType1,
   [CT.DIV]: _urlDividends,
   [CT.CHART]: _urlChart,
   [CT.COM]: _crUrlType1,
-  [CT.STA]: _crUrlType1
+  [CT.STA]: _crUrlType1,
+  [CT.ML]: _crUrlMarketList
 };
 
 const IexApi = {
   getRequestUrl(option){
     const { dfType, apiKey } = option
-        , _toUrl = _rUrl[dfType] || _rUrl.DF;
-    return _toUrl(option)+`?token=${apiKey}`;
+    , _url = (_rUrl[dfType] || _rUrl.DF)(option);
+    return _url.q
+      ? `${_url.url}?${_url.q}&token=${apiKey}`
+      : `${_url}?token=${apiKey}`;
   },
 
   checkResponse(json){

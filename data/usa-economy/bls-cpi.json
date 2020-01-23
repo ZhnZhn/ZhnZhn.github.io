@@ -1,16 +1,23 @@
  {
    "items": [
-   { "caption": "All items, NSA, 1982-84=100", "value": "CUUR0000SA0"},
-   { "caption": "All Items Less Food and Energy, NSA, 1982-84=100", "value": "CUUR0000SA0L1E" },
-   { "caption": "Food and Beverages, NSA, 1982-84=100", "value": "CUUR0000SAF"},
-   { "caption": "Housing, NSA, 1982-84=100", "value": "CUUR0000SAH"},
-   { "caption": "Apparel, NSA, 1982-84=100", "value": "CUUR0000SAA"},
-   { "caption": "Transportation, NSA, 1982-84=100", "value": "CUUR0000SAT"},
-   { "caption": "Medical Care, NSA, 1982-84=100", "value": "CUUR0000SAM"},
-   { "caption": "Medical Care Services, NSA, 1982-84=100", "value": "CUUR0000SAM2"},
-   { "caption": "Recreation, NSA, December 1997=100", "value": "CUUR0000SAR"},
-   { "caption": "Education and Communication, NSA, December 1997=100", "value": "CUUR0000SAE"},
-   { "caption": "Other Goods and Services, NSA, 1982-84=100", "value": "CUUR0000SAG" },   
-   { "caption": "New vehicles, SA, 1982-84=100", "value": "CUSR0000SETA01" }
+   { "caption": "All items", "value": "CUUR0000SA0", "t": "NSA, 1982-84=100"},
+   { "caption": "All Items Less Food and Energy", "value": "CUUR0000SA0L1E", "t":  "NSA, 1982-84=100"},
+   { "caption": "Food and Beverages", "value": "CUUR0000SAF", "t": "NSA, 1982-84=100"},
+   { "caption": "Housing", "value": "CUUR0000SAH", "t": "NSA, 1982-84=100"},
+   { "caption": "Apparel", "value": "CUUR0000SAA", "t": "NSA, 1982-84=100"},
+   { "caption": "Transportation", "value": "CUUR0000SAT", "t": "NSA, 1982-84=100"},
+   { "caption": "Medical Care (SAM)", "value": "CUUR0000SAM", "t": "NSA, 1982-84=100"},
+   { "caption": "Medical care commodities (SAM1)", "value": "CUUR0000SAM1", "t": "NSA, 1982-84=100"},
+   { "caption": "Medical Care Services (SAM2)", "value": "CUUR0000SAM2", "t": "NSA, 1982-84=100"},
+   { "caption": "Recreation", "value": "CUUR0000SAR", "t": "NSA, December 1997=100"},
+   { "caption": "Education and Communication (SAE)", "value": "CUUR0000SAE", "t": "NSA, December 1997=100"},
+   { "caption": "Education (SAE1)", "value": "CUSR0000SAE1", "t": "SA, December 1997=100"},
+   { "caption": "Communication (SAE2)", "value": "CUSR0000SAE2", "t": "SA, December 1997=100"},
+   { "caption": "Other Goods and Services", "value": "CUUR0000SAG", "t": "NSA, 1982-84=100"},
+   { "caption": "New and used motor vehicles (SETA)", "value": "CUSR0000SETA", "t":"SA, December 1997=100"},
+   { "caption": "New vehicles (SETA01)", "value": "CUSR0000SETA01", "t": "SA, 1982-84=100" },
+   { "caption": "Used cars and trucks (SETA02)", "value": "CUSR0000SETA02", "t": "SA, 1982-84=100"},
+   { "caption": "Leased cars and trucks (SETA03)", "value": "CUSR0000SETA03", "t": "SA, December 2001=100"},
+   { "caption": "Car and truck rental (SETA04)", "value": "CUSR0000SETA04", "t": "SA, December 1997=100"}
   ]
  }

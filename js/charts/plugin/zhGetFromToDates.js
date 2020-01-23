@@ -13,7 +13,9 @@ var zhGetFromToDates = function zhGetFromToDates(_temp) {
   } : _ref$format;
 
   try {
-    var pArr = this.series && this.series[seriaIndex].points || [],
+    var _this$series$seriaInd;
+
+    var pArr = this.series && ((_this$series$seriaInd = this.series[seriaIndex]) == null ? void 0 : _this$series$seriaInd.points) || [],
         length = pArr.length;
     return Array.isArray(pArr) && length > 0 ? {
       from: format(pArr[0].x),

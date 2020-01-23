@@ -85,11 +85,11 @@ var _addBoolOptionTo = function _addBoolOptionTo(options, propName) {
 var _addSettingsTo = function _addSettingsTo(options) {
   var loadId = options.loadId;
 
-  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
+  for (var _len = arguments.length, restArgs = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    restArgs[_key - 1] = arguments[_key];
   }
 
-  Object.assign.apply(Object, [options].concat(args, [{
+  Object.assign.apply(Object, [options].concat(restArgs, [{
     apiKey: _ChartStore["default"].getKey(loadId),
     proxy: _ChartStore["default"].getProxy(loadId)
   }]));
@@ -149,7 +149,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
       isDoublingLoad = this.isLoading && key === this.idLoading,
       isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
 
-  this.isShouldEmit = true; //{ chartType, browserType, conf } = confItem
+  this.isShouldEmit = true; //{ chartType, browserType, dialogConf } = confItem
 
   _addSettingsTo(option, confItem, {
     key: key

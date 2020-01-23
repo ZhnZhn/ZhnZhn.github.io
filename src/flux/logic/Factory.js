@@ -23,10 +23,8 @@ const {
   isYmdOrEmpty
 } = DateUtils;
 
-const onLoadChart = CHA.loadStock
-    , onShowChart = CHA.showChart
-    , initFromDate = getFromDate(2)
-    , initToDate = getToDate();
+const initFromDate = getFromDate(2)
+, initToDate = getToDate();
 
 const _crFnValue = (valueFn, valueFnPrefix) => {
   return valueFn
@@ -85,12 +83,12 @@ const _crDialogComp = function (browserType, dialogConf){
        , getKey = isGetKey && ChartStore.getKey
        , onError = isGetKey && _onError
 
-       , onLoad = onLoadChart
+       , onLoad = CHA.loadStock
           .bind(null, {
              chartType: itemKey,
              browserType, dialogConf
           })
-       , onShow = onShowChart
+       , onShow = CHA.showChart
            .bind(null, itemKey, browserType, dialogConf);
 
        if (!loadId){

@@ -7,7 +7,8 @@ var ChartType = {
   ERN: 'earnings',
   DIV: 'dividends',
   COM: 'company',
-  STA: 'stats'
+  STA: 'stats',
+  ML: 'market'
 };
 var _default = ChartType;
 exports["default"] = _default;

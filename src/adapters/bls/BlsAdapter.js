@@ -1,12 +1,12 @@
 import Builder from '../../charts/ConfigBuilder'
 
 import fnAdapter from './fnAdapter'
-const { crData, crConfigOption } = fnAdapter;
+const { crTitle, crData, crConfigOption } = fnAdapter;
 
 const BlsAdapter = {
   toConfig(json, option){
-    const { dfTitle, subtitle, title } = option
-    , _dfTitle = dfTitle || subtitle
+    const { title } = option    
+    , _dfTitle = crTitle(option)
     , data = crData(json)
     , seria = Builder()
         .splineSeria({ data })

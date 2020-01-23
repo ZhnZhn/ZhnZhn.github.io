@@ -51,12 +51,13 @@ var ChartSlice = {
   onLoadStockCompleted: function onLoadStockCompleted(option, config) {
     var chartType = option.chartType,
         browserType = option.browserType,
-        conf = option.conf,
+        dialogConf = option.dialogConf,
         limitRemaining = option.limitRemaining;
     this.addMenuItemCounter(chartType, browserType);
-    var dialogConf = this.getDialogConf(conf, chartType);
 
-    var _loadConfig = loadConfig(this.charts, config, option, dialogConf, this),
+    var _dialogConf = dialogConf || this.getDialogConf(void 0, chartType);
+
+    var _loadConfig = loadConfig(this.charts, config, option, _dialogConf, this),
         chartSlice = _loadConfig.chartSlice,
         Comp = _loadConfig.Comp;
 
@@ -94,9 +95,9 @@ var ChartSlice = {
   onLoadStockByQueryFailed: function onLoadStockByQueryFailed(option) {
     this.onLoadStockFailed(option);
   },
-  onShowChart: function onShowChart(chartType, browserType, conf) {
+  onShowChart: function onShowChart(chartType, browserType, dialogConfOr) {
     this.setMenuItemOpen(chartType, browserType);
-    var dialogConf = this.getDialogConf(conf, chartType);
+    var dialogConf = this.getDialogConf(dialogConfOr, chartType);
 
     var _showChart = showChart(this.charts, chartType, browserType, dialogConf, this),
         chartSlice = _showChart.chartSlice,

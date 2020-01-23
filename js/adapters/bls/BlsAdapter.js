@@ -11,14 +11,13 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crData = _fnAdapter["default"].crData,
+var crTitle = _fnAdapter["default"].crTitle,
+    crData = _fnAdapter["default"].crData,
     crConfigOption = _fnAdapter["default"].crConfigOption;
 var BlsAdapter = {
   toConfig: function toConfig(json, option) {
-    var dfTitle = option.dfTitle,
-        subtitle = option.subtitle,
-        title = option.title,
-        _dfTitle = dfTitle || subtitle,
+    var title = option.title,
+        _dfTitle = crTitle(option),
         data = crData(json),
         seria = (0, _ConfigBuilder["default"])().splineSeria({
       data: data

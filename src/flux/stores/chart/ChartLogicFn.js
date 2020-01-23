@@ -5,7 +5,7 @@ const _notConfById = id => c => c.zhConfig.id !== id;
 const _confById = id => c => c.zhConfig.id === id;
 
 const fns = {
-  isChartExist(slice, chartType, key){
+  isChartExist(slice, chartType, key){    
     const {
       chartSlice, configs
     } = getSlice(slice, chartType);

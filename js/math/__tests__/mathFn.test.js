@@ -33,6 +33,10 @@ describe('roundBy', function () {
     expect(fn('1.005', 2)).toBe(1.01);
     expect(fn(0)).toBe(0);
   });
+  test('shoul return null for null or undefined', function () {
+    expect(fn(null)).toBe(null);
+    expect(fn()).toBe(null);
+  });
 });
 describe('calcPercent', function () {
   var fn = calcPercent;

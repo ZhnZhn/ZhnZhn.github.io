@@ -17,15 +17,16 @@ var ItemDialogLogic = {
   showItemDialog: function showItemDialog(slice, itemConf, store) {
     var type = itemConf.type,
         browserType = itemConf.browserType,
-        conf = itemConf.conf;
+        dialogConfOr = itemConf.dialogConfOr;
 
     if (slice[type]) {
       return Promise.resolve({
         key: type
       });
     } else {
-      var dialogConf = store.getDialogConf(conf, type);
-      return _Factory["default"].createDialog(browserType, dialogConf).then(function (Comp) {
+      var _dialogConf = store.getDialogConf(dialogConfOr, type);
+
+      return _Factory["default"].createDialog(browserType, _dialogConf).then(function (Comp) {
         slice[type] = true;
         return {
           key: type,
@@ -127,13 +128,13 @@ var ComponentSlice = {
   onShowAbout: function onShowAbout() {
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_ABOUT);
   },
-  onShowDialog: function onShowDialog(type, browserType, conf) {
+  onShowDialog: function onShowDialog(type, browserType, dialogConfOr) {
     var _this = this;
 
     ItemDialogLogic.showItemDialog(this.dialogInit, {
       type: type,
       browserType: browserType,
-      conf: conf
+      dialogConfOr: dialogConfOr
     }, this).then(function (r) {
       _this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
     });

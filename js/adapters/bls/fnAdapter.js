@@ -38,6 +38,12 @@ var _crInfo = function _crInfo(_ref) {
 };
 
 var fnAdapter = {
+  crTitle: function crTitle(_ref2) {
+    var dfTitle = _ref2.dfTitle,
+        item = _ref2.item,
+        subtitle = _ref2.subtitle;
+    return dfTitle ? item.t ? dfTitle + ', ' + item.t : dfTitle : subtitle;
+  },
   crData: function crData(json) {
     var data = json.Results.series[0].data,
         _data = [];
@@ -57,10 +63,10 @@ var fnAdapter = {
     });
     return _data.reverse();
   },
-  crConfigOption: function crConfigOption(_ref2) {
-    var json = _ref2.json,
-        option = _ref2.option,
-        data = _ref2.data;
+  crConfigOption: function crConfigOption(_ref3) {
+    var json = _ref3.json,
+        option = _ref3.option,
+        data = _ref3.data;
     return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),

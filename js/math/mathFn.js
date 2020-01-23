@@ -59,7 +59,7 @@ var _roundBy = function _roundBy(nOrStr, by) {
     by = 2;
   }
 
-  return parseFloat((0, _big["default"])(nOrStr).toFixed(by));
+  return nOrStr != null ? parseFloat((0, _big["default"])(nOrStr).toFixed(by)) : null;
 };
 
 var mathFn = {

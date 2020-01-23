@@ -25,7 +25,7 @@ const _crCaption = (dialogConf, browserType) => {
 };
 
 const fItemContainer = {
-  crItemContainerEl: ({ browserType, dialogConf, store }) => {
+  crItemContainerEl: ({ browserType, dialogConf={}, store }) => {    
     const Comp = dialogConf.chartContainerComp
       || ChartContainer
     , _type = dialogConf.type

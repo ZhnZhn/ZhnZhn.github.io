@@ -19,7 +19,7 @@ const _crZhConfig = (option) => {
     item: { ...linkItem },
     linkFn: 'DF',
     itemCaption: title,
-    isWithoutAdd: true,    
+    isWithoutAdd: true,
     dataSource: appendWithColon(dataSource, dfTitle)
   };
 };
@@ -29,6 +29,13 @@ const _crInfo = ({ title }) => ({
 });
 
 const fnAdapter = {
+  crTitle: ({ dfTitle, item, subtitle }) => {
+    return dfTitle
+      ? item.t
+          ? dfTitle + ', ' + item.t
+          : dfTitle
+      : subtitle ;
+  },
   crData: (json) => {
     const data = json.Results.series[0].data
        , _data = [];

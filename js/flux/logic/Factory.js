@@ -33,9 +33,7 @@ var getFromDate = _DateUtils["default"].getFromDate,
     getToDate = _DateUtils["default"].getToDate,
     isYmd = _DateUtils["default"].isYmd,
     isYmdOrEmpty = _DateUtils["default"].isYmdOrEmpty;
-var onLoadChart = _ChartActions["default"].loadStock,
-    onShowChart = _ChartActions["default"].showChart,
-    initFromDate = getFromDate(2),
+var initFromDate = getFromDate(2),
     initToDate = getToDate();
 
 var _crFnValue = function _crFnValue(valueFn, valueFnPrefix) {
@@ -90,12 +88,12 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
       proxy = isProxy ? _ChartStore["default"].getProxy() : void 0,
       getKey = isGetKey && _ChartStore["default"].getKey,
       onError = isGetKey && _onError,
-      onLoad = onLoadChart.bind(null, {
+      onLoad = _ChartActions["default"].loadStock.bind(null, {
     chartType: itemKey,
     browserType: browserType,
     dialogConf: dialogConf
   }),
-      onShow = onShowChart.bind(null, itemKey, browserType, dialogConf);
+      onShow = _ChartActions["default"].showChart.bind(null, itemKey, browserType, dialogConf);
 
   if (!loadId) {
     dialogProps.loadId = _Type.LoadType.Q;

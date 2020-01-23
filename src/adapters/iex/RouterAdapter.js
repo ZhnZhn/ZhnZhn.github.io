@@ -6,6 +6,7 @@ import toStats from './toStatsImpl'
 import toEarnings from './toEarningsImpl'
 import toDividends from './toDividendsImpl'
 import toChart from './toChart'
+import toTable from './toTable'
 import CT from './ChartType'
 
 const _r = {
@@ -14,7 +15,8 @@ const _r = {
   [CT.DIV]: Scatter(toDividends),
   [CT.CHART]: toChart,
   [CT.COM]: Tokens(toCompany),
-  [CT.STA]: Tokens(toStats)
+  [CT.STA]: Tokens(toStats),
+  [CT.ML]: toTable
 };
 
 const RouterAdapter = {

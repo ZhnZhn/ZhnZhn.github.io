@@ -69,15 +69,15 @@ const _addBoolOptionTo = (options, propName) => {
   }
 };
 
-const _addSettingsTo = (options, ...args) => {
+const _addSettingsTo = (options, ...restArgs) => {
   const { loadId } = options;
-  Object.assign(options, ...args, {
+  Object.assign(options, ...restArgs, {
     apiKey: ChartStore.getKey(loadId),
     proxy: ChartStore.getProxy(loadId)
   })
   _addBoolOptionTo(options, 'isDrawDeltaExtrems')
   _addBoolOptionTo(options, 'isNotZoomToMinMax')
-}
+};
 
 
 const ChartActions =  Reflux.createActions({
@@ -136,7 +136,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
       : false;
 
   this.isShouldEmit = true;
-  //{ chartType, browserType, conf } = confItem
+  //{ chartType, browserType, dialogConf } = confItem
   _addSettingsTo(option, confItem, { key })
 
   const _msgApiKey = _checkMsgApiKey(option);

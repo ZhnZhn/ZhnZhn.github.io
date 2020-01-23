@@ -1,4 +1,6 @@
 
+const _isNotNumber = v => Number.isNaN(v) || v == null;
+
 const _crThAriaLabel = (name, order) => {
   return `${name}: activate to sort column ${order}`;
 };
@@ -7,7 +9,7 @@ const tableFn = {
   crTdStyle: ({ S, v, isR }) => {
     let style;
     if (isR) {
-      if ( Number.isNaN(v) ) {
+      if (_isNotNumber(v)) {
         style = S.NAN
       } else {
         style = v > 0 ? S.UP : S.DOWN;
@@ -17,7 +19,7 @@ const tableFn = {
   },
 
   toFormatValue: ({ TOKEN_NAN, h, v, fn }) => {
-    if (h.isR && Number.isNaN(v)) {
+    if (h.isR && _isNotNumber(v)) {
       return TOKEN_NAN;
     }
     if (h.isF && typeof fn === 'function') {

@@ -33,7 +33,8 @@ var _crCaption = function _crCaption(dialogConf, browserType) {
 var fItemContainer = {
   crItemContainerEl: function crItemContainerEl(_ref2) {
     var browserType = _ref2.browserType,
-        dialogConf = _ref2.dialogConf,
+        _ref2$dialogConf = _ref2.dialogConf,
+        dialogConf = _ref2$dialogConf === void 0 ? {} : _ref2$dialogConf,
         store = _ref2.store;
 
     var Comp = dialogConf.chartContainerComp || _ChartContainer["default"],

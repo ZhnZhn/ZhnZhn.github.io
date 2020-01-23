@@ -390,15 +390,15 @@
     },
     "USAE_BLS_CPI": {
       "type": "USAE_BLS_CPI",
-      "menuTitle" : "Consume Price Index (CPI)",
-      "dialogCaption": "Consume Price Index (CPI)",
-      "chartContainerCaption" : "BLS: Consume Price Index (CPI)",
+      "menuTitle" : "CPI-U",
+      "dialogCaption": "Consume Price Index (CPI-U)",
+      "chartContainerCaption" : "BLS: Consume Price Index (CPI-U)",
       "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
         "optionURI" : "./data/usa-economy/bls-cpi.json",
         "dfProps": {
-          "dfTitle": "Consume Price Index (CPI)"
+          "dfTitle": "CPI-U"
         }
       }
     },

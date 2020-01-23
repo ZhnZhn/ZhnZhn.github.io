@@ -4,7 +4,8 @@ const ChartType = {
   ERN: 'earnings',
   DIV: 'dividends',
   COM: 'company',
-  STA: 'stats'  
+  STA: 'stats',
+  ML: 'market'  
 };
 
 export default ChartType

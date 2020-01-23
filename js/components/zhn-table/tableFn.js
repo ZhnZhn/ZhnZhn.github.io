@@ -3,6 +3,10 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _isNotNumber = function _isNotNumber(v) {
+  return Number.isNaN(v) || v == null;
+};
+
 var _crThAriaLabel = function _crThAriaLabel(name, order) {
   return name + ": activate to sort column " + order;
 };
@@ -15,7 +19,7 @@ var tableFn = {
     var style;
 
     if (isR) {
-      if (Number.isNaN(v)) {
+      if (_isNotNumber(v)) {
         style = S.NAN;
       } else {
         style = v > 0 ? S.UP : S.DOWN;
@@ -30,7 +34,7 @@ var tableFn = {
         v = _ref2.v,
         fn = _ref2.fn;
 
-    if (h.isR && Number.isNaN(v)) {
+    if (h.isR && _isNotNumber(v)) {
       return TOKEN_NAN;
     }
 

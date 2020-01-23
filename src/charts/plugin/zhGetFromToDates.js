@@ -5,7 +5,7 @@ const zhGetFromToDates = function({
 }={}){
   try {
     const pArr = this.series
-      && this.series[seriaIndex].points
+      && this.series[seriaIndex]?.points
       || []
     , length = pArr.length;
     return Array.isArray(pArr) && length > 0 ? {

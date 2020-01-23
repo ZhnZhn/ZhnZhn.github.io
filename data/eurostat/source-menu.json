@@ -11,7 +11,8 @@
         { "id" : "ES_UNEMP" },
         { "id" : "ES_INDIC"},
         { "id" : "ES_PRODUCTION" },
-        { "id" : "ES_PEEI" }
+        { "id" : "ES_PEEI" },
+        { "id" : "ES_PRS_DEBT" }
       ]
     },{
       "caption": "HICP",
@@ -322,7 +323,22 @@
         }
       }
     },
-
+    "ES_PRS_DEBT": {
+     "type" : "ES_PRS_DEBT",
+     "menuTitle" : "Private Sector Debt",
+     "dialogType" : "DialogSelectN",
+     "addProps": "ES_BASE_SN",
+     "dialogProps" : {
+        "selectProps": [
+          ["unit", "Unit", "prs-debt-units"]
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf" : 2,
+          "dfTable": "tipspd20"
+        }
+      }
+    },
     "ES_HICP_NSA" : {
       "type" : "ES_HICP_NSA",
       "menuTitle" : "HICP (2015=100), NSA",

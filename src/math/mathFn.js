@@ -35,7 +35,9 @@ const _toBig = (bValue, dfValue=0) => {
   }
 };
 
-const _roundBy = (nOrStr, by=2) => parseFloat(Big(nOrStr).toFixed(by));
+const _roundBy = (nOrStr, by=2) => nOrStr != null
+  ? parseFloat(Big(nOrStr).toFixed(by))
+  : null;
 
 const mathFn = {
   roundBy: _roundBy,

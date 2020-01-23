@@ -33,7 +33,7 @@ const ChartSlice = {
   },
   isChartExist(option){
     checkBrowserChartTypes(this, option)
-    const { chartType, key } = option;
+    const { chartType, key } = option;    
     return isChartExist(this.charts, chartType, key);
   },
 
@@ -43,16 +43,17 @@ const ChartSlice = {
   onLoadStockCompleted(option, config){
       const {
         chartType, browserType,
-        conf,
+        dialogConf,
         limitRemaining
       } = option;
 
       this.addMenuItemCounter(chartType, browserType);
 
-      const dialogConf = this.getDialogConf(conf, chartType);
+      const _dialogConf = dialogConf
+        || this.getDialogConf(void 0, chartType);
       const {
         chartSlice, Comp
-      } = loadConfig(this.charts, config, option, dialogConf, this);
+      } = loadConfig(this.charts, config, option, _dialogConf, this);
       if (chartSlice){
         this.trigger(CHAT.LOAD_STOCK_COMPLETED, chartSlice);
       } else {
@@ -83,12 +84,12 @@ const ChartSlice = {
     this.onLoadStockFailed(option)
   },
 
-  onShowChart(chartType, browserType, conf){
+  onShowChart(chartType, browserType, dialogConfOr){
     this.setMenuItemOpen(chartType, browserType);
-    const dialogConf = this.getDialogConf(conf, chartType);
+    const dialogConf = this.getDialogConf(dialogConfOr, chartType);
     const {
       chartSlice, Comp
-    } = showChart(this.charts, chartType, browserType, dialogConf, this)
+     } = showChart(this.charts, chartType, browserType, dialogConf, this);
     if (chartSlice){
       this.trigger(CHAT.SHOW_CHART, chartSlice);
     } else {
