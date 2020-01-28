@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/components/watch-browser/WatchItem.jsx"],"names":["STYLE","ITEM_DIV","position","paddingRight","lineHeight","paddingTop","paddingBottom","ITEM_SPAN","display","verticalAlign","width","maxWidth","textOverflow","overflow","SVG_CLOSE","right","WatchItem","props","item","className","isModeEdit","option","onClick","onClose","onDragStart","onDragEnter","onDragOver","onDragLeave","onDrop","caption","_btClose","bind"],"mappings":";;;;;;;AACA;;AAEA;;AAEA,IAAMA,KAAK,GAAG;AACZC,EAAAA,QAAQ,EAAG;AACTC,IAAAA,QAAQ,EAAE,UADD;AAETC,IAAAA,YAAY,EAAE,MAFL;AAGTC,IAAAA,UAAU,EAAG,GAHJ;AAITC,IAAAA,UAAU,EAAG,KAJJ;AAKTC,IAAAA,aAAa,EAAE;AALN,GADC;AAQZC,EAAAA,SAAS,EAAG;AACVC,IAAAA,OAAO,EAAE,cADC;AAEVC,IAAAA,aAAa,EAAG,QAFN;AAGVC,IAAAA,KAAK,EAAE,MAHG;AAIVC,IAAAA,QAAQ,EAAE,OAJA;AAKVC,IAAAA,YAAY,EAAE,UALJ;AAMVC,IAAAA,QAAQ,EAAE;AANA,GARA;AAiBZC,EAAAA,SAAS,EAAG;AACVZ,IAAAA,QAAQ,EAAE,UADA;AAEVa,IAAAA,KAAK,EAAE;AAFG;AAjBA,CAAd;;AAyBA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,KAAD,EAAW;AAAA,MAElBC,IAFkB,GAKhBD,KALgB,CAElBC,IAFkB;AAAA,MAEZC,SAFY,GAKhBF,KALgB,CAEZE,SAFY;AAAA,MAEDC,UAFC,GAKhBH,KALgB,CAEDG,UAFC;AAAA,MAEWC,MAFX,GAKhBJ,KALgB,CAEWI,MAFX;AAAA,MAGlBC,OAHkB,GAKhBL,KALgB,CAGlBK,OAHkB;AAAA,MAGTC,OAHS,GAKhBN,KALgB,CAGTM,OAHS;AAAA,MAIlBC,WAJkB,GAKhBP,KALgB,CAIlBO,WAJkB;AAAA,MAILC,WAJK,GAKhBR,KALgB,CAILQ,WAJK;AAAA,MAIQC,UAJR,GAKhBT,KALgB,CAIQS,UAJR;AAAA,MAIoBC,WAJpB,GAKhBV,KALgB,CAIoBU,WAJpB;AAAA,MAIiCC,MAJjC,GAKhBX,KALgB,CAIiCW,MAJjC;AAAA,MAMnBC,OANmB,GAMPX,IANO,CAMnBW,OANmB;AAAA,MAOrBC,QAPqB,GAOVV,UAAU,GAEhB,gCAAC,oBAAD;AACE,IAAA,KAAK,EAAEpB,KAAK,CAACc,SADf;AAEE,IAAA,OAAO,EAAES,OAAO,CAACQ,IAAR,CAAa,IAAb,EAAmBV,MAAnB;AAFX,IAFgB,GAOjB,IAdiB;;AAe7B,SACK;AACE,IAAA,SAAS,EAAEF,SADb;AAEE,IAAA,KAAK,EAAEnB,KAAK,CAACC,QAFf;AAGE,IAAA,OAAO,EAAEqB,OAAO,CAACS,IAAR,CAAa,IAAb,EAAmBb,IAAnB,CAHX,CAIE;AAJF;AAKE,IAAA,SAAS,EAAEE,UALb;AAME,IAAA,WAAW,EAAEA,UAAU,GAAGI,WAAW,CAACO,IAAZ,CAAiB,IAAjB,EAAuBV,MAAvB,CAAH,GAAoC,KAAK,CANlE;AAOE,IAAA,MAAM,EAAED,UAAU,GAAGQ,MAAM,CAACG,IAAP,CAAY,IAAZ,EAAkBV,MAAlB,CAAH,GAA+B,KAAK,CAPxD;AAQE,IAAA,UAAU,EAAED,UAAU,GAAGM,UAAH,GAAgB,KAAK,CAR7C;AASE,IAAA,WAAW,EAAEN,UAAU,GAAGK,WAAH,GAAiB,KAAK,CAT/C;AAUE,IAAA,WAAW,EAAEL,UAAU,GAAGO,WAAH,GAAgB,KAAK;AAV9C,KAYE;AAAM,IAAA,KAAK,EAAE3B,KAAK,CAACO;AAAnB,KACGsB,OADH,CAZF,EAeGC,QAfH,CADL;AAmBC,CAlCD;;eAoCed,S","sourcesContent":["\r\nimport React from 'react';\r\n\r\nimport SvgClose from '../zhn/SvgClose';\r\n\r\nconst STYLE = {\r\n  ITEM_DIV : {\r\n    position: 'relative',\r\n    paddingRight: '40px',\r\n    lineHeight : 1.4,\r\n    paddingTop : '5px',\r\n    paddingBottom: '5px'\r\n  },\r\n  ITEM_SPAN : {\r\n    display: 'inline-block',\r\n    verticalAlign : 'middle',\r\n    width: '100%',\r\n    maxWidth: '250px',\r\n    textOverflow: 'ellipsis',\r\n    overflow: 'hidden'\r\n  },\r\n\r\n  SVG_CLOSE : {\r\n    position: 'absolute',\r\n    right: 0\r\n  }\r\n\r\n}\r\n\r\n\r\nconst WatchItem = (props) => {\r\n  const {\r\n           item, className, isModeEdit, option,\r\n           onClick, onClose,\r\n           onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop\r\n         } = props\r\n      , { caption } = item\r\n      , _btClose = isModeEdit\r\n          ? (\r\n             <SvgClose\r\n               style={STYLE.SVG_CLOSE}\r\n               onClose={onClose.bind(null, option)}\r\n             />\r\n            )\r\n          : null;\r\nreturn (\r\n     <div\r\n       className={className}\r\n       style={STYLE.ITEM_DIV}\r\n       onClick={onClick.bind(null, item)}\r\n       //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}\r\n       draggable={isModeEdit}\r\n       onDragStart={isModeEdit ? onDragStart.bind(null, option) : void 0}\r\n       onDrop={isModeEdit ? onDrop.bind(null, option) : void 0}\r\n       onDragOver={isModeEdit ? onDragOver : void 0}\r\n       onDragEnter={isModeEdit ? onDragEnter : void 0}\r\n       onDragLeave={isModeEdit ? onDragLeave: void 0}\r\n     >\r\n       <span style={STYLE.ITEM_SPAN}>\r\n         {caption}\r\n       </span>\r\n       {_btClose}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default WatchItem\r\n"],"file":"WatchItem.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/watch-browser/WatchItem.js"
+ ],
+ "file": "../../../src/components/watch-browser/WatchItem.js",
+ "names": [
+  "STYLE",
+  "ITEM_DIV",
+  "position",
+  "paddingRight",
+  "paddingTop",
+  "paddingBottom",
+  "ITEM_SPAN",
+  "display",
+  "width",
+  "maxWidth",
+  "height",
+  "verticalAlign",
+  "textOverflow",
+  "overflow",
+  "SVG_CLOSE",
+  "right",
+  "WatchItem",
+  "props",
+  "item",
+  "className",
+  "isModeEdit",
+  "option",
+  "onClick",
+  "onClose",
+  "onDragStart",
+  "onDragEnter",
+  "onDragOver",
+  "onDragLeave",
+  "onDrop",
+  "caption",
+  "_btClose",
+  "bind"
+ ],
+ "mappings": ";;;;;;;AACA;;AAEA;;AAEA,IAAMA,KAAK,GAAG;AACZC,EAAAA,QAAQ,EAAG;AACTC,IAAAA,QAAQ,EAAE,UADD;AAETC,IAAAA,YAAY,EAAE,EAFL;AAGT;AACAC,IAAAA,UAAU,EAAG,CAJJ;AAKTC,IAAAA,aAAa,EAAE;AALN,GADC;AAQZC,EAAAA,SAAS,EAAG;AACVC,IAAAA,OAAO,EAAE,cADC;AAEVC,IAAAA,KAAK,EAAE,MAFG;AAGVC,IAAAA,QAAQ,EAAE,GAHA;AAIVC,IAAAA,MAAM,EAAE,EAJE;AAKVC,IAAAA,aAAa,EAAG,QALN;AAMVC,IAAAA,YAAY,EAAE,UANJ;AAOVC,IAAAA,QAAQ,EAAE;AAPA,GARA;AAiBZC,EAAAA,SAAS,EAAG;AACVZ,IAAAA,QAAQ,EAAE,UADA;AAEVa,IAAAA,KAAK,EAAE;AAFG;AAjBA,CAAd;;AAwBA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,KAAD,EAAW;AAAA,MAElBC,IAFkB,GAKhBD,KALgB,CAElBC,IAFkB;AAAA,MAEZC,SAFY,GAKhBF,KALgB,CAEZE,SAFY;AAAA,MAEDC,UAFC,GAKhBH,KALgB,CAEDG,UAFC;AAAA,MAEWC,MAFX,GAKhBJ,KALgB,CAEWI,MAFX;AAAA,MAGlBC,OAHkB,GAKhBL,KALgB,CAGlBK,OAHkB;AAAA,MAGTC,OAHS,GAKhBN,KALgB,CAGTM,OAHS;AAAA,MAIlBC,WAJkB,GAKhBP,KALgB,CAIlBO,WAJkB;AAAA,MAILC,WAJK,GAKhBR,KALgB,CAILQ,WAJK;AAAA,MAIQC,UAJR,GAKhBT,KALgB,CAIQS,UAJR;AAAA,MAIoBC,WAJpB,GAKhBV,KALgB,CAIoBU,WAJpB;AAAA,MAIiCC,MAJjC,GAKhBX,KALgB,CAIiCW,MAJjC;AAAA,MAMnBC,OANmB,GAMPX,IANO,CAMnBW,OANmB;AAAA,MAOrBC,QAPqB,GAOVV,UAAU,GAEhB,gCAAC,oBAAD;AACE,IAAA,KAAK,EAAEpB,KAAK,CAACc,SADf;AAEE,IAAA,OAAO,EAAES,OAAO,CAACQ,IAAR,CAAa,IAAb,EAAmBV,MAAnB;AAFX,IAFgB,GAOjB,IAdiB;;AAe7B,SACK;AACE,IAAA,SAAS,EAAEF,SADb;AAEE,IAAA,KAAK,EAAEnB,KAAK,CAACC,QAFf;AAGE,IAAA,OAAO,EAAEqB,OAAO,CAACS,IAAR,CAAa,IAAb,EAAmBb,IAAnB,CAHX,CAIE;AAJF;AAKE,IAAA,SAAS,EAAEE,UALb;AAME,IAAA,WAAW,EAAEA,UAAU,GAAGI,WAAW,CAACO,IAAZ,CAAiB,IAAjB,EAAuBV,MAAvB,CAAH,GAAoC,KAAK,CANlE;AAOE,IAAA,MAAM,EAAED,UAAU,GAAGQ,MAAM,CAACG,IAAP,CAAY,IAAZ,EAAkBV,MAAlB,CAAH,GAA+B,KAAK,CAPxD;AAQE,IAAA,UAAU,EAAED,UAAU,GAAGM,UAAH,GAAgB,KAAK,CAR7C;AASE,IAAA,WAAW,EAAEN,UAAU,GAAGK,WAAH,GAAiB,KAAK,CAT/C;AAUE,IAAA,WAAW,EAAEL,UAAU,GAAGO,WAAH,GAAgB,KAAK;AAV9C,KAYE;AAAM,IAAA,KAAK,EAAE3B,KAAK,CAACM;AAAnB,KACGuB,OADH,CAZF,EAeGC,QAfH,CADL;AAmBC,CAlCD;;eAoCed,S"
+}

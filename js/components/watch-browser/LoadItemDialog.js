@@ -7,6 +7,8 @@ var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWild
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -32,6 +34,16 @@ var _class, _class2, _temp;
 var getFromDate = _DateUtils["default"].getFromDate,
     getToDate = _DateUtils["default"].getToDate,
     isYmd = _DateUtils["default"].isYmd;
+var S = {
+  ITEM_TEXT: {
+    display: 'inline-block',
+    maxWidth: 200,
+    height: 32,
+    verticalAlign: 'middle',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
+  }
+};
 
 var LoadItemDialog = (0, _withValidationLoad["default"])(_class = (_temp = _class2 =
 /*#__PURE__*/
@@ -53,7 +65,7 @@ function (_Component) {
   function LoadItemDialog(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._handleLoad = function () {
       var validationMessages = _this._createValidationMessages();
@@ -69,22 +81,24 @@ function (_Component) {
             columnName = data.columnName,
             dataColumn = data.dataColumn,
             seriaColumnNames = data.seriaColumnNames,
+            _data$itemConf = data.itemConf,
+            itemConf = _data$itemConf === void 0 ? {} : _data$itemConf,
             _this$datesFragment$g = _this.datesFragment.getValues(),
             fromDate = _this$datesFragment$g.fromDate,
             toDate = _this$datesFragment$g.toDate,
-            option = {
+            option = (0, _extends2["default"])({
+          id: id,
           title: title,
           subtitle: subtitle,
           value: caption,
           item: caption,
           fromDate: fromDate,
           toDate: toDate,
-          loadId: _Type.LoadType.WL,
-          id: id,
           columnName: columnName,
           dataColumn: dataColumn,
-          seriaColumnNames: seriaColumnNames
-        };
+          seriaColumnNames: seriaColumnNames,
+          loadId: itemConf.loadId || _Type.LoadType.WL
+        }, itemConf);
 
         _ChartActions["default"].loadStock({
           chartType: _ChartType["default"].WATCH_LIST,
@@ -118,6 +132,10 @@ function (_Component) {
       _this.props.onClose();
     };
 
+    _this._refDates = function (c) {
+      return _this.datesFragment = c;
+    };
+
     var _props$data = props.data,
         _fromDate = _props$data.fromDate,
         initToDate = _props$data.initToDate,
@@ -146,8 +164,6 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this2 = this;
-
     var _this$props2 = this.props,
         isShow = _this$props2.isShow,
         data = _this$props2.data,
@@ -163,12 +179,11 @@ function (_Component) {
       commandButtons: this._commandButtons,
       onClose: this._handleClose
     }, _react["default"].createElement(_DialogCell["default"].Row.Text, {
+      styleText: S.ITEM_TEXT,
       caption: "Item:",
       text: caption
     }), _react["default"].createElement(_DialogCell["default"].DatesFragment, {
-      ref: function ref(c) {
-        return _this2.datesFragment = c;
-      },
+      ref: this._refDates,
       initFromDate: initFromDate,
       initToDate: initToDate,
       onTestDate: onTestDate

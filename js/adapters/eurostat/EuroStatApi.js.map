@@ -1,1 +1,39 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/EuroStatApi.js"],"names":["REQUEST_ERROR","MESSAGE_HEADER","RES_ERR_STATUS","MSG_400","_crDetailMsg","label","option","alertGeo","alertMetric","_crErr","errCaption","message","_addPropTo","resErrStatus","_isRouteUrlN","_type","EuroStatApi","getRequestUrl","api","crUrlN","dfParams","crUrlWithParams","crUrl","checkResponse","json","status","error"],"mappings":";;;;;;;AACA;;AAEA,IAAMA,aAAa,GAAG,eAAtB;AAAA,IACMC,cAAc,GAAG,oBADvB;AAAA,IAEMC,cAAc,GAAG,CAAE,GAAF,CAFvB;AAAA,IAGMC,OAAO,GAAG,gMAHhB;;AAKA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAASC,KAAT,EAAgBC,MAAhB,EAAuB;AAAA,yBACFA,MADE,CAClCC,QADkC;AAAA,MAClCA,QADkC,iCACzB,EADyB;AAAA,4BACFD,MADE,CACrBE,WADqB;AAAA,MACrBA,WADqB,oCACT,EADS;AAE1C,SAAOP,cAAc,GAAGI,KAAjB,uDAA0EE,QAA1E,SAAsFC,WAAtF,+EAAP;AACD,CAHD;;AAKA,IAAMC,MAAM,GAAG,SAATA,MAAS,CAACC,UAAD,EAAaC,OAAb;AAAA,SAA0B;AACvCD,IAAAA,UAAU,EAAVA,UADuC;AAEvCC,IAAAA,OAAO,EAAPA;AAFuC,GAA1B;AAAA,CAAf;;AAKA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACN,MAAD,EAAY;AAC7BA,EAAAA,MAAM,CAACO,YAAP,aAA0BX,cAA1B;AACD,CAFD;;AAIA,IAAMY,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,SAAeA,KAAK,KAAK,SAAzB;AAAA,CAArB;;AAEA,IAAMC,WAAW,GAAG;AAElBC,EAAAA,aAFkB,yBAEJX,MAFI,EAEG;AACnBM,IAAAA,UAAU,CAACN,MAAD,CAAV;;AACA,WAAOQ,YAAY,CAACR,MAAD,CAAZ,GACHY,gBAAIC,MAAJ,CAAWb,MAAX,CADG,GAEHA,MAAM,CAACc,QAAP,GACIF,gBAAIG,eAAJ,CAAoBf,MAApB,CADJ,GAEIY,gBAAII,KAAJ,CAAUhB,MAAV,CAJR;AAKD,GATiB;AAWlBiB,EAAAA,aAXkB,yBAWJC,IAXI,EAWElB,MAXF,EAWUmB,MAXV,EAWkB;AAClC,QAAIA,MAAM,KAAK,GAAf,EAAoB;AAClB,YAAMhB,MAAM,CAACT,aAAD,EAAgBG,OAAhB,CAAZ;AACD;;AAHiC,QAI1BuB,KAJ0B,GAIhBF,IAJgB,CAI1BE,KAJ0B;;AAKlC,QAAIA,KAAJ,EAAU;AAAA,UACArB,KADA,GACUqB,KADV,CACArB,KADA;;AAER,UAAIA,KAAJ,EAAW;AACT,cAAMI,MAAM,CAAET,aAAF,EAAiBI,YAAY,CAACC,KAAD,EAAQC,MAAR,CAA7B,CAAZ;AACD,OAFD,MAEO;AACL,cAAMG,MAAM,CAAET,aAAF,EAAiB,EAAjB,CAAZ;AACD;AACF;;AACD,WAAO,IAAP;AACD;AAzBiB,CAApB;eA6BegB,W","sourcesContent":["\r\nimport api from './api/api'\r\n\r\nconst REQUEST_ERROR = 'Request Error'\r\n    , MESSAGE_HEADER = '400: Bad Request\\n'\r\n    , RES_ERR_STATUS = [ 400 ]\r\n    , MSG_400 = '400: Bad request.\\nDataset contains no data. One or more filtering elements (query parameters) are probably not valid.\\nMaybe try to request this data set with older date or another country.';\r\n\r\nconst _crDetailMsg = function(label, option){\r\n  const { alertGeo='', alertMetric='' } = option;\r\n  return MESSAGE_HEADER + label + `\\n\\nIt seems country-dataset doesn't exsist.\\n${alertGeo}:${alertMetric}\\n\\nIf you use For Date input field in Dialog\\ntry to use more late date.`;\r\n};\r\n\r\nconst _crErr = (errCaption, message) => ({\r\n  errCaption,\r\n  message\r\n});\r\n\r\nconst _addPropTo = (option) => {\r\n  option.resErrStatus = [...RES_ERR_STATUS]\r\n};\r\n\r\nconst _isRouteUrlN = ({ _type }) => _type === 'selectN';\r\n\r\nconst EuroStatApi = {\r\n\r\n  getRequestUrl(option){\r\n    _addPropTo(option)\r\n    return _isRouteUrlN(option)\r\n      ? api.crUrlN(option)\r\n      : option.dfParams\r\n          ? api.crUrlWithParams(option)\r\n          : api.crUrl(option);\r\n  },\r\n\r\n  checkResponse(json, option, status) {\r\n    if (status === 400) {\r\n      throw _crErr(REQUEST_ERROR, MSG_400);\r\n    }\r\n    const { error } = json;\r\n    if (error){\r\n      const { label } = error;\r\n      if (label) {\r\n        throw _crErr( REQUEST_ERROR, _crDetailMsg(label, option));\r\n      } else {\r\n        throw _crErr( REQUEST_ERROR, '');\r\n      }\r\n    }\r\n    return true;\r\n  }\r\n\r\n};\r\n\r\nexport default EuroStatApi\r\n"],"file":"EuroStatApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/EuroStatApi.js"
+ ],
+ "file": "../../../src/adapters/eurostat/EuroStatApi.js",
+ "names": [
+  "REQUEST_ERROR",
+  "MESSAGE_HEADER",
+  "RES_ERR_STATUS",
+  "MSG_400",
+  "_crDetailMsg",
+  "label",
+  "option",
+  "alertGeo",
+  "alertMetric",
+  "_crErr",
+  "errCaption",
+  "message",
+  "_addPropTo",
+  "resErrStatus",
+  "_isRouteUrlN",
+  "_type",
+  "EuroStatApi",
+  "getRequestUrl",
+  "url",
+  "_url",
+  "api",
+  "crUrlN",
+  "dfParams",
+  "crUrlWithParams",
+  "crUrl",
+  "checkResponse",
+  "json",
+  "status",
+  "error"
+ ],
+ "mappings": ";;;;;;;AACA;;AAEA,IAAMA,aAAa,GAAG,eAAtB;AAAA,IACMC,cAAc,GAAG,oBADvB;AAAA,IAEMC,cAAc,GAAG,CAAE,GAAF,CAFvB;AAAA,IAGMC,OAAO,GAAG,gMAHhB;;AAKA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAASC,KAAT,EAAgBC,MAAhB,EAAuB;AAAA,yBACFA,MADE,CAClCC,QADkC;AAAA,MAClCA,QADkC,iCACzB,EADyB;AAAA,4BACFD,MADE,CACrBE,WADqB;AAAA,MACrBA,WADqB,oCACT,EADS;AAE1C,SAAOP,cAAc,GAAGI,KAAjB,uDAA0EE,QAA1E,SAAsFC,WAAtF,+EAAP;AACD,CAHD;;AAKA,IAAMC,MAAM,GAAG,SAATA,MAAS,CAACC,UAAD,EAAaC,OAAb;AAAA,SAA0B;AACvCD,IAAAA,UAAU,EAAVA,UADuC;AAEvCC,IAAAA,OAAO,EAAPA;AAFuC,GAA1B;AAAA,CAAf;;AAKA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACN,MAAD,EAAY;AAC7BA,EAAAA,MAAM,CAACO,YAAP,aAA0BX,cAA1B;AACD,CAFD;;AAIA,IAAMY,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,SAAeA,KAAK,KAAK,SAAzB;AAAA,CAArB;;AAEA,IAAMC,WAAW,GAAG;AAElBC,EAAAA,aAFkB,yBAEJX,MAFI,EAEG;AACnBM,IAAAA,UAAU,CAACN,MAAD,CAAV;;AACA,QAAIA,MAAM,CAACY,GAAX,EAAgB;AACd,aAAOZ,MAAM,CAACY,GAAd;AACD;;AACD,QAAMC,IAAI,GAAGL,YAAY,CAACR,MAAD,CAAZ,GACTc,gBAAIC,MAAJ,CAAWf,MAAX,CADS,GAETA,MAAM,CAACgB,QAAP,GACIF,gBAAIG,eAAJ,CAAoBjB,MAApB,CADJ,GAEIc,gBAAII,KAAJ,CAAUlB,MAAV,CAJR;;AAKA,WAAQA,MAAM,CAACY,GAAP,GAAaC,IAArB;AACD,GAbiB;AAelBM,EAAAA,aAfkB,yBAeJC,IAfI,EAeEpB,MAfF,EAeUqB,MAfV,EAekB;AAClC,QAAIA,MAAM,KAAK,GAAf,EAAoB;AAClB,YAAMlB,MAAM,CAACT,aAAD,EAAgBG,OAAhB,CAAZ;AACD;;AAHiC,QAI1ByB,KAJ0B,GAIhBF,IAJgB,CAI1BE,KAJ0B;;AAKlC,QAAIA,KAAJ,EAAU;AAAA,UACAvB,KADA,GACUuB,KADV,CACAvB,KADA;;AAER,UAAIA,KAAJ,EAAW;AACT,cAAMI,MAAM,CAAET,aAAF,EAAiBI,YAAY,CAACC,KAAD,EAAQC,MAAR,CAA7B,CAAZ;AACD,OAFD,MAEO;AACL,cAAMG,MAAM,CAAET,aAAF,EAAiB,EAAjB,CAAZ;AACD;AACF;;AACD,WAAO,IAAP;AACD;AA7BiB,CAApB;eAiCegB,W"
+}

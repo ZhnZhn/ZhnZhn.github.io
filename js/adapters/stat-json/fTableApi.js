@@ -26,15 +26,27 @@ var fTableApi = function fTableApi(ROOT_URL) {
           proxy = _option$proxy === void 0 ? '' : _option$proxy,
           metric = option.metric,
           dfId = option.dfId,
+          url = option.url,
           id = dfId || metric;
-      return "" + proxy + ROOT_URL + "/" + id;
+
+      if (url) {
+        return url;
+      }
+
+      return option.url = "" + proxy + ROOT_URL + "/" + id;
     },
     crOptionFetch: function crOptionFetch(option) {
       var _option$items = option.items,
           items = _option$items === void 0 ? [] : _option$items,
           isTop12 = option.isTop12,
           isTop6 = option.isTop6,
+          optionFetch = option.optionFetch,
           arrQuery = [];
+
+      if (optionFetch) {
+        return optionFetch;
+      }
+
       items.forEach(function (item) {
         var _ref = item || {},
             slice = _ref.slice;
@@ -56,7 +68,7 @@ var fTableApi = function fTableApi(ROOT_URL) {
 
       _checkTop(isTop6, '6', arrQuery);
 
-      return {
+      return option.optionFetch = {
         method: 'POST',
         body: JSON.stringify({
           query: arrQuery,

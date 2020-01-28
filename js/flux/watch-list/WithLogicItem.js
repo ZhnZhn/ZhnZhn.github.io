@@ -19,43 +19,37 @@ var WithLogicItem = {
         listCaption = item.listCaption,
         config = item.config,
         zhConfig = config.zhConfig,
+        id = zhConfig.id,
         title = zhConfig.title,
         subtitle = zhConfig.subtitle,
         columnName = zhConfig.columnName,
         dataColumn = zhConfig.dataColumn,
-        id = zhConfig.id,
         fromDate = zhConfig.fromDate,
         seriaColumnNames = zhConfig.seriaColumnNames,
+        itemConf = zhConfig.itemConf,
         toGroup = findGroup(watchList, groupCaption),
-        toList = findList(toGroup, listCaption),
-        items = toList.items;
+        toList = findList(toGroup, listCaption);
 
-    if (isInArraySameCaption(items, caption)) {
+    if (isInArraySameCaption(toList.items, caption)) {
       return crMsgItemExisted(caption, listCaption);
     }
 
-    if (items) {
-      toList.items.push({
-        title: title,
-        subtitle: subtitle,
-        caption: caption,
-        columnName: columnName,
-        dataColumn: dataColumn,
-        id: id,
-        fromDate: fromDate,
-        seriaColumnNames: seriaColumnNames
-      });
+    var _item = {
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      caption: caption,
+      columnName: columnName,
+      dataColumn: dataColumn,
+      fromDate: fromDate,
+      seriaColumnNames: seriaColumnNames,
+      itemConf: itemConf
+    };
+
+    if (toList.items) {
+      toList.items.push(_item);
     } else {
-      toList.items = [{
-        title: title,
-        subtitle: subtitle,
-        caption: caption,
-        columnName: columnName,
-        dataColumn: dataColumn,
-        id: id,
-        fromDate: fromDate,
-        seriaColumnNames: seriaColumnNames
-      }];
+      toList.items = [_item];
     }
 
     return {

@@ -33,12 +33,15 @@ var _crCaption = function _crCaption(dialogConf, browserType) {
 var fItemContainer = {
   crItemContainerEl: function crItemContainerEl(_ref2) {
     var browserType = _ref2.browserType,
-        _ref2$dialogConf = _ref2.dialogConf,
-        dialogConf = _ref2$dialogConf === void 0 ? {} : _ref2$dialogConf,
+        dialogConf = _ref2.dialogConf,
         store = _ref2.store;
 
-    var Comp = dialogConf.chartContainerComp || _ChartContainer["default"],
-        _type = dialogConf.type || _BrowserConfig["default"][browserType].chartContainerType,
+    var _ref3 = dialogConf || {},
+        type = _ref3.type,
+        chartContainerComp = _ref3.chartContainerComp,
+        contWidth = _ref3.contWidth,
+        Comp = chartContainerComp || _ChartContainer["default"],
+        _type = type || _BrowserConfig["default"][browserType].chartContainerType,
         _caption = _crCaption(dialogConf, browserType);
 
     return _react["default"].createElement(Comp, {
@@ -47,6 +50,7 @@ var fItemContainer = {
       caption: _caption,
       chartType: _type,
       browserType: browserType,
+      contWidth: contWidth,
       onSetActive: _ComponentActions["default"].setActiveContainer,
       onCloseContainer: _ComponentActions["default"].closeChartContainer.bind(null, _type, browserType),
       onSortBy: _ChartActions["default"].sortBy.bind(null, _type),

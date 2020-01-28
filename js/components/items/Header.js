@@ -27,18 +27,17 @@ var _ValueMovingBadge = _interopRequireDefault(require("./ValueMovingBadge"));
 
 //import PropTypes from "prop-types";
 var TH_ID = 'ELEMENT';
-var CL = 'not-selected shadow-right';
-var CL_MORE = "popup-menu charts__menu-more";
+var CL = 'not-selected shadow-right',
+    CL_MORE = "popup-menu charts__menu-more";
 var S = {
   ROOT: {
     backgroundColor: '#1b2836',
-    paddingTop: '4px',
-    paddingRight: '42px',
     height: 'auto',
     width: '100%',
-    borderTopRightRadius: '2px',
-    borderBottomRightRadius: '2px',
-    boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
+    paddingTop: 4,
+    paddingRight: 42,
+    borderTopRightRadius: 2,
+    borderBottomRightRadius: 2
   },
   SVG_MORE: {
     stroke: '#777777',
@@ -48,37 +47,36 @@ var S = {
     display: 'inline-block'
   },
   CHECK_BOX: {
-    //float: 'left',
-    marginRight: '10px',
-    marginLeft: '10px'
+    marginRight: 10,
+    marginLeft: 10
   },
   CAPTION_OPEN: {
-    textAlign: 'left',
     display: 'inline-block',
     color: 'rgba(164, 135, 212, 1)',
-    cursor: 'pointer',
-    width: '125px',
+    width: 125,
+    textAlign: 'left',
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'clip',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    cursor: 'pointer'
   },
   CAPTION_CLOSE: {
     color: 'gray'
   },
   CAPTION_WIDTH: {
-    textAlign: 'left',
-    width: '280px'
+    width: 280,
+    textAlign: 'left'
   },
   TIME: {
     color: 'rgb(253, 179, 22)',
-    fontWeight: 'bold',
-    paddingLeft: '16px'
+    paddingLeft: 16,
+    fontWeight: 'bold'
   },
   CLOSE: {
     position: 'absolute',
     right: 0,
-    top: '4px'
+    top: 4
   }
 };
 
@@ -116,7 +114,10 @@ function (_Component) {
     };
 
     _this._renderMore = function (moreModel, TS) {
-      if (!moreModel) return null;
+      if (!moreModel) {
+        return null;
+      }
+
       var isMore = _this.state.isMore;
       return _react["default"].createElement(_react.Fragment, null, _react["default"].createElement(_SvgMore["default"], {
         svgStyle: S.SVG_MORE,

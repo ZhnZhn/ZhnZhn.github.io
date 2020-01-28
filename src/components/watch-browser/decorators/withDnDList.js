@@ -43,15 +43,17 @@ const _crDropList = (DRAG, WatchActions) => {
 const _crDragEnterList = (DRAG) => {
   return function(ev){
     ev.preventDefault()
-    this.dragEnterWithDnDStyle(ev, DRAG.LIST)
+    this.dragEnterWithDnDStyle(ev,
+      DRAG.LIST, DRAG.C_LIST_ENTER
+    )
   };
 };
 
-const _handlerDragOverList = function(ev){
+const _hDragOverList = function(ev){
    ev.preventDefault()
 };
 
-const _handlerDragLeaveList = function(ev){
+const _hDragLeaveList = function(ev){
    ev.preventDefault()
    this.dragLeaveWithDnDStyle(ev)
 }
@@ -59,11 +61,11 @@ const _handlerDragLeaveList = function(ev){
 const withDnDList = (DRAG, WatchActions) => {
   return (target) => {
     Object.assign(target.prototype, {
-      _handlerDragStartList: _crDragStartList(DRAG),
-      _handlerDropList: _crDropList(DRAG, WatchActions),
-      _handlerDragEnterList: _crDragEnterList(DRAG),
-      _handlerDragOverList: _handlerDragOverList,
-      _handlerDragLeaveList: _handlerDragLeaveList,
+      _hDragStartList: _crDragStartList(DRAG),
+      _hDropList: _crDropList(DRAG, WatchActions),
+      _hDragEnterList: _crDragEnterList(DRAG),
+      _hDragOverList,
+      _hDragLeaveList
     })
   };
 }

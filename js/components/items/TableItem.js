@@ -21,8 +21,14 @@ var S = {
   ROOT: {
     paddingBottom: 8
   },
+  ROOT_HEADER: {
+    position: 'sticky',
+    top: -1,
+    zIndex: 1,
+    willChange: 'transform'
+  },
   CAPTION: {
-    width: 385
+    width: '100%'
   },
   SHOW_HIDE: {
     paddingTop: 8,
@@ -77,6 +83,7 @@ function (_Component) {
       style: S.ROOT
     }, _react["default"].createElement(_ItemHeader["default"], {
       isOpen: isOpen,
+      rootStyle: S.ROOT_HEADER,
       caption: title,
       captionStyle: S.CAPTION,
       onClick: this._hToggle,

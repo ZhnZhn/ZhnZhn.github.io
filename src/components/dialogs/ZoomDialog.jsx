@@ -4,6 +4,7 @@ import dt from '../../utils/DateUtils'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import D from './DialogCell';
+import ZoomDailyRow from './ZoomDailyRow'
 
 const S = {
   DIALOG: {
@@ -12,30 +13,26 @@ const S = {
   },
   DATE: {
     width: 120
-  },
-  PERIOD_BTS: {
-    paddingTop: 8,
-    paddingLeft: 8
-  },
-  BT: {
-    color: '#1b2836'
   }
 };
 
 const {
   isDmy,
-  dmyToUTC,
+  dmyToMls,
+  isDmyPeriod,
   mlsToDmy,
   addToDmy,
   getYTDfromDmy
 } = dt;
 
-const _isPeriodValid = (from, to) => dmyToUTC(from) <= dmyToUTC(to);
 const _isFn = fn => typeof fn === 'function';
 
-const _getFromToDates = (chart) => _isFn(chart.zhGetFromToDates)
-  ? chart.zhGetFromToDates({ format: mlsToDmy })
-  : {};
+const _getFromToDates = (chart) => chart
+  .zhGetFromToDates?.({ format: mlsToDmy })
+  ?? {};
+
+const _getMinYear = (strDmy) => strDmy.split('-')[2];
+const _crErrMsg = minYear => `DD-MM-YYYY format must be, min 01-01-${minYear}`;
 
 class ZoomDialog extends Component {
   /*
@@ -53,10 +50,10 @@ class ZoomDialog extends Component {
   constructor(props){
     super(props)
 
-    this._hZoomBy1M = this._hZoomBy.bind(this, -1)
-    this._hZoomBy3M = this._hZoomBy.bind(this, -3)
-    this._hZoomBy6M = this._hZoomBy.bind(this, -6)
-    this._hZoomBy1Y = this._hZoomBy.bind(this, -12)
+    this._hZoom1M = this._hZoomBy.bind(null, -1)
+    this._hZoom3M = this._hZoomBy.bind(null, -3)
+    this._hZoom6M = this._hZoomBy.bind(null, -6)
+    this._hZoom1Y = this._hZoomBy.bind(null, -12)
 
     this._commandButtons = [
       <D.Button.Flat
@@ -88,8 +85,8 @@ class ZoomDialog extends Component {
          && this._dates.getValidation().isValid ) {
       const { fromDate, toDate } = this._dates.getValues()
       chart.zhZoomX({
-        from: dmyToUTC(fromDate),
-        to: dmyToUTC(toDate)
+        from: dmyToMls(fromDate),
+        to: dmyToMls(toDate)
       })
     }
     onClose()
@@ -99,11 +96,10 @@ class ZoomDialog extends Component {
     const { chart } = this._getChart();
     if (_isFn(chart.zhZoomX)) {
       const { to } = _getFromToDates(chart)
-      , _fromMls = addToDmy(to, month)
-          .getTime();
+      , _fromMls = addToDmy(to, month).getTime();
       if ( chart.zhZoomX({
         from: _fromMls,
-        to: dmyToUTC(to)
+        to: dmyToMls(to)
       })) {
         this._dates.setFromTo(mlsToDmy(_fromMls), to)
       }
@@ -117,7 +113,7 @@ class ZoomDialog extends Component {
       , _fromMls = getYTDfromDmy(to);
       if ( chart.zhZoomX({
         from: _fromMls,
-        to: dmyToUTC(to)
+        to: dmyToMls(to)
       })) {
         this._dates.setFromTo(mlsToDmy(_fromMls), to)
       }
@@ -134,10 +130,11 @@ class ZoomDialog extends Component {
     } = this.props
     , { chart={} } = data
     , { from, to } = _getFromToDates(chart)
-    , id = _isFn(chart.zhGetId)
-       ? chart.zhGetId()
-       : void 0;
-
+    , _minYear = _getMinYear(from)
+    , _onTestDate = (str) => isDmy(str, _minYear)
+    , _errMsgDateFrom = _crErrMsg(_minYear)
+    , id = chart.zhGetId?.()
+    , _isDaily = chart.zhIsDaily?.();
     return (
       <ModalDialog
         caption="Zoom Chart"
@@ -153,43 +150,19 @@ class ZoomDialog extends Component {
            placeholder="DD-MM-YYYY"
            initFromDate={from}
            initToDate={to}
-           errMsg="DD-MM-YYYY format must be, min 01-01-1990"
-           isPeriodValid={_isPeriodValid}
-           onTestDate={isDmy}
+           errMsg={_errMsgDateFrom}
+           isPeriodValid={isDmyPeriod}
+           onTestDate={_onTestDate}
            onEnter={this._hZoom}
         />
-        <div style={S.PERIOD_BTS}>
-          <D.Button.Flat
-             rootStyle={S.BT}
-             key="1M"
-             caption="1M"
-             onClick={this._hZoomBy1M}
+        { _isDaily && <ZoomDailyRow
+             onZoom1M={this._hZoom1M}
+             onZoom3M={this._hZoom3M}
+             onZoom6M={this._hZoom6M}
+             onZoomYTD={this._hZoomYTD}
+             onZoom1Y={this._hZoom1Y}
           />
-          <D.Button.Flat
-             rootStyle={S.BT}
-             key="3M"
-             caption="3M"
-             onClick={this._hZoomBy3M}
-          />
-          <D.Button.Flat
-             rootStyle={S.BT}
-             key="6M"
-             caption="6M"
-             onClick={this._hZoomBy6M}
-          />
-          <D.Button.Flat
-             rootStyle={S.BT}
-             key="YTD"
-             caption="YTD"
-             onClick={this._hZoomYTD}
-          />
-          <D.Button.Flat
-             rootStyle={S.BT}
-             key="1Y"
-             caption="1Y"
-             onClick={this._hZoomBy1Y}
-          />
-        </div>
+        }
       </ModalDialog>
     );
   }

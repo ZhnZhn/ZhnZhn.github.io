@@ -9,9 +9,11 @@ var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
+var _toTableFn = _interopRequireDefault(require("../toTableFn"));
+
 var getUTCTime = _DateUtils["default"].getUTCTime;
-var numberFormat = _AdapterFn["default"].numberFormat,
-    roundBy = _AdapterFn["default"].roundBy;
+var numberFormat = _AdapterFn["default"].numberFormat;
+var crRows = _toTableFn["default"].crRows;
 var HEADERS = [{
   name: 'Rank',
   pn: 'rank',
@@ -46,6 +48,7 @@ var HEADERS = [{
   pn: '24h_volume_usd',
   isToN: true,
   isToFixed: true,
+  toFixedBy: 0,
   isR: true,
   isF: true,
   style: {
@@ -57,32 +60,6 @@ var HEADERS = [{
   isToN: true,
   isR: true
 }];
-
-var _getCellValue = function _getCellValue(r, h) {
-  var pn = h.pn,
-      isToN = h.isToN,
-      isToFixed = h.isToFixed;
-  return isToN ? isToFixed ? roundBy(r[pn], 0) : parseFloat(r[pn]) : r[pn];
-};
-
-var _toRows = function _toRows(headers, rows) {
-  if (headers === void 0) {
-    headers = [];
-  }
-
-  if (rows === void 0) {
-    rows = [];
-  }
-
-  var _rows = [].concat(rows).map(function (r) {
-    headers.forEach(function (h) {
-      r[h.pn] = _getCellValue(r, h);
-    });
-    return r;
-  });
-
-  return _rows;
-};
 
 var _crUpdatedTime = function _crUpdatedTime(json) {
   var _seconds = json.map(function (coin) {
@@ -114,10 +91,15 @@ var valueToHref = function valueToHref(id) {
 };
 
 var CmcAdapter = {
-  toConfig: function toConfig(json, option) {
+  crKey: function crKey(option) {
     var one = option.one,
-        two = option.two,
-        _id = one + "_" + two,
+        two = option.two;
+    option.key = one + "_" + two;
+    return option.key;
+  },
+  toConfig: function toConfig(json, option) {
+    var _id = option.key //_id = _crId(option)
+    ,
         config = {
       id: _id,
       title: _crTitle(option, json),
@@ -126,14 +108,14 @@ var CmcAdapter = {
         numberFormat: numberFormat,
         valueToHref: valueToHref
       },
-      rows: _toRows(HEADERS, json),
+      //rows: _toRows(HEADERS, json),
+      rows: crRows(HEADERS, json),
       zhCompType: 'TABLE',
       zhConfig: {
         id: _id,
         key: _id
       }
     };
-
     return {
       config: config
     };

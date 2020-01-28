@@ -28,29 +28,28 @@ var STYLE = {
     lineHeight: 2
   },
   LIST_DIV: {
-    marginLeft: '8px',
-    paddingLeft: '12px',
-    //borderLeft : '1px solid yellow',
-    borderLeft: "1px solid " + C_LEFT_BORDER,
-    lineHeight: 2
+    marginLeft: 8,
+    paddingLeft: 12,
+    lineHeight: 2,
+    borderLeft: "1px solid " + C_LEFT_BORDER
   },
   LIST_DIV_NOT_SELECTED: {
-    borderBottom: '1px solid rgba(128, 192, 64, 0.6)',
-    marginRight: '2px'
+    marginRight: 2,
+    borderBottom: '1px solid rgba(128, 192, 64, 0.6)'
   },
   ITEM_DIV: {
     position: 'relative',
-    paddingRight: '10px',
-    lineHeight: 1.4,
-    paddingTop: '5px',
-    paddingBottom: '5px'
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    lineHeight: 1.4
   },
   ITEM_SPAN: {
     display: 'inline-block',
-    verticalAlign: 'middle',
     width: '100%',
     //maxWidth: '250px',
     //direction: "ltr",
+    verticalAlign: 'middle',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis'
@@ -106,7 +105,6 @@ function (_Component) {
           fillOpen: C_FILL_OPEN,
           style: STYLE.LIST_DIV,
           styleNotSelected: STYLE.LIST_DIV_NOT_SELECTED,
-          isClose: true,
           caption: caption
         }, _this._renderLevel3(items, captionProp));
       });
@@ -136,7 +134,6 @@ function (_Component) {
         return _react["default"].createElement(_OpenClose["default"], {
           key: index,
           style: STYLE.GROUP_DIV,
-          isClose: true,
           caption: caption
         }, _this._renderLevel2(lists, _captionProp, _itemsProp));
       });

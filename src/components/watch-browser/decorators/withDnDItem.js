@@ -40,11 +40,11 @@ const _crDragEnterItem = (DRAG) => {
  };
 };
 
-const _handlerDragOverItem = function(ev){
+const _hDragOverItem = function(ev){
    ev.preventDefault()
 };
 
-const _handlerDragLeaveItem = function(ev){
+const _hDragLeaveItem = function(ev){
    ev.preventDefault()
    this.dragLeaveWithDnDStyle(ev)
 };
@@ -52,11 +52,11 @@ const _handlerDragLeaveItem = function(ev){
 const withDnDItem = (DRAG, WatchActions) => {
   return (target) => {
     Object.assign(target.prototype, {
-      _handlerDragStartItem: _crDragStartItem(DRAG),
-      _handlerDropItem: _crDropItem(DRAG, WatchActions),
-      _handlerDragEnterItem: _crDragEnterItem(DRAG),
-      _handlerDragOverItem: _handlerDragOverItem,
-      _handlerDragLeaveItem: _handlerDragLeaveItem,
+      _hDragStartItem: _crDragStartItem(DRAG),
+      _hDropItem: _crDropItem(DRAG, WatchActions),
+      _hDragEnterItem: _crDragEnterItem(DRAG),
+      _hDragOverItem,
+      _hDragLeaveItem
     })
   };
 }

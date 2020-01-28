@@ -12,16 +12,17 @@ var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 var STYLE = {
   ITEM_DIV: {
     position: 'relative',
-    paddingRight: '40px',
-    lineHeight: 1.4,
-    paddingTop: '5px',
-    paddingBottom: '5px'
+    paddingRight: 40,
+    //lineHeight : 1.4,
+    paddingTop: 5,
+    paddingBottom: 5
   },
   ITEM_SPAN: {
     display: 'inline-block',
-    verticalAlign: 'middle',
     width: '100%',
-    maxWidth: '250px',
+    maxWidth: 250,
+    height: 28,
+    verticalAlign: 'middle',
     textOverflow: 'ellipsis',
     overflow: 'hidden'
   },

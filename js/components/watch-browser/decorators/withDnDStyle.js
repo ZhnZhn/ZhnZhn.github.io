@@ -8,10 +8,19 @@ var BORDER = 'border' // dragStart
 ,
     BORDER_LEFT = 'border-left' // dragEnter
 //, START_BORDER_STYLE = "1px solid yellow"
+//, ENTER_BORDER_LEFT_STYLE = "4px solid #1b2836"
+//, ENTER_BORDER_LEFT_STYLE = "4px solid green"
 ,
-    ENTER_BORDER_LEFT_STYLE = "4px solid green",
     ENTER_BORDER_LEFT_STYLE_DENY = "4px solid red";
 var sourcePermissions, nodeDragTarget, borderBottom, borderLeftEnter;
+
+var _crEnterBorderLeftStyle = function _crEnterBorderLeftStyle(borderColor) {
+  if (borderColor === void 0) {
+    borderColor = "green";
+  }
+
+  return "4px solid " + borderColor;
+};
 
 var dragStartWithDnDStyle = function dragStartWithDnDStyle(ev, permissions) {
   ev.persist();
@@ -30,12 +39,13 @@ var dropWithDnDStyle = function dropWithDnDStyle(ev) {
   styleTarget.setProperty(BORDER_BOTTOM, borderBottom);
 };
 
-var dragEnterWithDnDStyle = function dragEnterWithDnDStyle(ev, sourceType) {
+var dragEnterWithDnDStyle = function dragEnterWithDnDStyle(ev, sourceType, borderColor) {
   var style = ev.currentTarget.style;
   borderLeftEnter = style.getPropertyValue(BORDER_LEFT);
 
   if (sourcePermissions.indexOf(sourceType) !== -1) {
-    style.setProperty(BORDER_LEFT, ENTER_BORDER_LEFT_STYLE);
+    //style.setProperty(BORDER_LEFT, ENTER_BORDER_LEFT_STYLE)
+    style.setProperty(BORDER_LEFT, _crEnterBorderLeftStyle(borderColor));
   } else {
     style.setProperty(BORDER_LEFT, ENTER_BORDER_LEFT_STYLE_DENY);
   }

@@ -66,9 +66,6 @@
   user-select: none;
   cursor: pointer; }
 
-.row__type2-topic:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.1); }
-
 .row__type2-topic:hover {
   border-bottom: 1px solid #1b75bb; }
 

@@ -1,9 +1,11 @@
 
 import DateUtils from '../../utils/DateUtils'
 import AdapterFn from '../AdapterFn'
+import toTableFn from '../toTableFn'
 
 const { getUTCTime } = DateUtils;
-const { numberFormat, roundBy } = AdapterFn;
+const { numberFormat } = AdapterFn;
+const { crRows } = toTableFn;
 
 const HEADERS = [{
   name: 'Rank',
@@ -37,6 +39,7 @@ const HEADERS = [{
   pn: '24h_volume_usd',
   isToN: true,
   isToFixed: true,
+  toFixedBy: 0,
   isR: true,
   isF: true,
   style: {
@@ -49,25 +52,6 @@ const HEADERS = [{
   isR: true
 }
 ];
-
-const _getCellValue = (r, h) => {
-  const { pn, isToN, isToFixed } = h;
-  return isToN
-    ? isToFixed
-        ? roundBy(r[pn], 0)
-        : parseFloat(r[pn])
-    : r[pn];
-};
-
-const _toRows = ( headers=[], rows=[] ) => {
-  const _rows = [...rows].map(r => {
-    headers.forEach(h => {
-      r[h.pn] = _getCellValue(r, h);
-    })
-    return r;
-  })
-  return _rows;
-};
 
 const _crUpdatedTime = (json) => {
   const _seconds = json.map(coin => coin.last_updated)
@@ -91,23 +75,29 @@ const BASE_URL = 'https://coinmarketcap.com/currencies/';
 const valueToHref = (id) => `${BASE_URL}${id}`;
 
 const CmcAdapter = {
+  crKey(option){
+    const {one, two} = option;
+    option.key = `${one}_${two}`
+    return option.key;
+  },
+
   toConfig(json, option){
-    const { one, two } = option
-        , _id = `${one}_${two}`
-        , config = {
-          id: _id,
-          title: _crTitle(option, json),
-          headers: HEADERS,
-          tableFn: {
-            numberFormat,
-            valueToHref
-          },
-          rows: _toRows(HEADERS, json),
-          zhCompType: 'TABLE',
-          zhConfig: {
-            id: _id, key: _id
-          }
-        };
+    const _id = option.key //_id = _crId(option)
+    , config = {
+      id: _id,
+      title: _crTitle(option, json),
+      headers: HEADERS,
+      tableFn: {
+        numberFormat,
+        valueToHref
+      },
+      //rows: _toRows(HEADERS, json),
+      rows: crRows(HEADERS, json),
+      zhCompType: 'TABLE',
+      zhConfig: {
+        id: _id, key: _id
+      }
+    };
     return { config };
   },
 

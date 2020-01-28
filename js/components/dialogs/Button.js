@@ -14,7 +14,7 @@ var S = {
     color: '#607d8b'
   },
   SHOW: {
-    color: '##232f3b'
+    color: '#232f3b'
   }
 };
 

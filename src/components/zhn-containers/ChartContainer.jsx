@@ -53,6 +53,8 @@ const _toStyleWidth = width => width + 'px';
 
 const _crItemRefPropName = index => 'chart' + index;
 
+const _isInitialWidth = contWidth => contWidth
+ && contWidth <= INITIAL_WIDTH ;
 const _crMinWidth = ({ width }) => width !== INITIAL_WIDTH
   ? width
   : MIN_WIDTH;
@@ -66,9 +68,16 @@ class ChartContainer extends Component {
 
   constructor(props){
     super(props);
+    const { contWidth } = props
+    , _isWidth = _isInitialWidth(contWidth);
+
     this.childMargin = CHILD_MARGIN;
-    this._initialWidthStyle = has.initWidthStyle(INITIAL_WIDTH, MIN_WIDTH)
-    this._MIN_WIDTH = _crMinWidth(this._initialWidthStyle)
+    this._initialWidthStyle = _isWidth
+      ? contWidth
+      : has.initWidthStyle(INITIAL_WIDTH, MIN_WIDTH)
+    this._MIN_WIDTH = _isWidth
+      ? MIN_WIDTH
+      : _crMinWidth(this._initialWidthStyle)
     this._MODEL = this._crModelMore()
 
     this._hSetActive = this._toggleChb.bind(this, true)

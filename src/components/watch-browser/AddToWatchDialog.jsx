@@ -17,6 +17,28 @@ const actionCompleted = WAT.EDIT_WATCH_COMPLETED
     , forActionType = WAT.ADD_ITEM;
 const { notSelected } = Msg;
 
+const S = {
+  DIALOG: {
+    width: 300
+  },
+  ITEM_CAPTION: {
+    width: 100
+  },
+  CAPTION: {
+    width: 70
+  },
+  ITEM_TEXT: {
+    display: 'inline-block',
+    maxWidth: 200,
+    height: 32,
+    verticalAlign: 'middle',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
+  }
+};
+
+const SELECT_WIDTH = "216";
+
 @withValidationLoad
 class AddToWatchDialog extends Component {
   /*
@@ -149,24 +171,31 @@ class AddToWatchDialog extends Component {
 
     return (
       <ModalDialog
+         style={S.DIALOG}
          caption="Add To Watch List"
          isShow={isShow}
          commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
+        <D.Row.Text
+          styleCaption={S.CAPTION}
+          styleText={S.ITEM_TEXT}
+          caption="Item:"
+          text={caption}
+        />
         <D.RowInputSelect
-          caption="Group:"
+          caption="Group"
+          captionStyle={S.CAPTION}
+          width={SELECT_WIDTH}
           options={groupOptions}
           onSelect={this._handleSelectGroup}
         />
         <D.RowInputSelect
-          caption="List:"
+          caption="List"
+          captionStyle={S.CAPTION}
+          width={SELECT_WIDTH}
           onSelect={this._handleSelectList}
           options={listOptions}
-        />
-        <D.Row.Text
-          caption="Item:"
-          text={caption}
         />
         <ValidationMessages
            validationMessages={validationMessages}

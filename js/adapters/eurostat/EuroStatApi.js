@@ -40,7 +40,13 @@ var EuroStatApi = {
   getRequestUrl: function getRequestUrl(option) {
     _addPropTo(option);
 
-    return _isRouteUrlN(option) ? _api["default"].crUrlN(option) : option.dfParams ? _api["default"].crUrlWithParams(option) : _api["default"].crUrl(option);
+    if (option.url) {
+      return option.url;
+    }
+
+    var _url = _isRouteUrlN(option) ? _api["default"].crUrlN(option) : option.dfParams ? _api["default"].crUrlWithParams(option) : _api["default"].crUrl(option);
+
+    return option.url = _url;
   },
   checkResponse: function checkResponse(json, option, status) {
     if (status === 400) {

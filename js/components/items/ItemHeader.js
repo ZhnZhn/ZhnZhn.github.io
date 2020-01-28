@@ -36,7 +36,6 @@ var S = {
   },
   CAPTION: {
     display: 'inline-block',
-    width: 380,
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'clip',

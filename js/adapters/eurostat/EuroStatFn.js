@@ -275,14 +275,29 @@ var EuroStatFn = {
         itemCaption = option.itemCaption,
         dataSource = option.dataSource,
         dfTable = option.dfTable,
-        _dataSource = dfTable ? dataSource + " (" + dfTable + ")" : dataSource;
+        url = option.url,
+        loadId = option.loadId,
+        title = option.title,
+        subtitle = option.subtitle,
+        seriaType = option.seriaType,
+        _dataSource = dfTable ? dataSource + " (" + dfTable + ")" : dataSource || "Eurostat";
 
     return {
       id: key,
       key: key,
       itemCaption: itemCaption,
+      itemConf: {
+        _itemKey: key,
+        url: url,
+        loadId: loadId,
+        title: title,
+        subtitle: subtitle,
+        itemCaption: itemCaption,
+        seriaType: seriaType,
+        dataSource: _dataSource
+      },
       //isWithoutIndicator: true,
-      isWithoutAdd: true,
+      isWithoutAdd: url ? false : true,
       dataSource: _dataSource,
       linkFn: 'ES',
       item: {

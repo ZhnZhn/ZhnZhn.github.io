@@ -7,18 +7,18 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
-
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+
 var S = {
-  STRIP: {
-    paddingLeft: '8px',
-    fontWeight: 'bold'
+  ROW: {
+    paddingLeft: 0,
+    paddingBottom: 4
   }
 };
 
-var StylePopup = function StylePopup(_ref) {
+var ModalMenu = function ModalMenu(_ref) {
   var isShow = _ref.isShow,
       style = _ref.style,
       onClose = _ref.onClose,
@@ -29,15 +29,16 @@ var StylePopup = function StylePopup(_ref) {
     style: style,
     isShow: isShow,
     onClose: onClose
-  }, _react["default"].createElement(_SvgCheckBox["default"], {
+  }, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    rootStyle: S.ROW,
+    checkedColor: "black",
+    caption: "withStripLines",
     value: isGridLine,
     onCheck: onCheck,
     onUnCheck: onUnCheck
-  }), _react["default"].createElement("span", {
-    style: S.STRIP
-  }, "withStripLines"));
+  }));
 };
 
-var _default = StylePopup;
+var _default = ModalMenu;
 exports["default"] = _default;
-//# sourceMappingURL=StylePopup.js.map
+//# sourceMappingURL=ModalMenu.js.map

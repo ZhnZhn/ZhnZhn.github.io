@@ -7,8 +7,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -19,6 +17,8 @@ var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog")
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
+var _ZoomDailyRow = _interopRequireDefault(require("./ZoomDailyRow"));
+
 var S = {
   DIALOG: {
     width: 244,
@@ -26,33 +26,33 @@ var S = {
   },
   DATE: {
     width: 120
-  },
-  PERIOD_BTS: {
-    paddingTop: 8,
-    paddingLeft: 8
-  },
-  BT: {
-    color: '#1b2836'
   }
 };
 var isDmy = _DateUtils["default"].isDmy,
-    dmyToUTC = _DateUtils["default"].dmyToUTC,
+    dmyToMls = _DateUtils["default"].dmyToMls,
+    isDmyPeriod = _DateUtils["default"].isDmyPeriod,
     mlsToDmy = _DateUtils["default"].mlsToDmy,
     addToDmy = _DateUtils["default"].addToDmy,
     getYTDfromDmy = _DateUtils["default"].getYTDfromDmy;
-
-var _isPeriodValid = function _isPeriodValid(from, to) {
-  return dmyToUTC(from) <= dmyToUTC(to);
-};
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
 var _getFromToDates = function _getFromToDates(chart) {
-  return _isFn(chart.zhGetFromToDates) ? chart.zhGetFromToDates({
+  var _ref;
+
+  return (_ref = chart.zhGetFromToDates == null ? void 0 : chart.zhGetFromToDates({
     format: mlsToDmy
-  }) : {};
+  })) != null ? _ref : {};
+};
+
+var _getMinYear = function _getMinYear(strDmy) {
+  return strDmy.split('-')[2];
+};
+
+var _crErrMsg = function _crErrMsg(minYear) {
+  return "DD-MM-YYYY format must be, min 01-01-" + minYear;
 };
 
 var ZoomDialog =
@@ -95,8 +95,8 @@ function (_Component) {
             toDate = _this$_dates$getValue.toDate;
 
         chart.zhZoomX({
-          from: dmyToUTC(fromDate),
-          to: dmyToUTC(toDate)
+          from: dmyToMls(fromDate),
+          to: dmyToMls(toDate)
         });
       }
 
@@ -114,7 +114,7 @@ function (_Component) {
 
         if (chart.zhZoomX({
           from: _fromMls,
-          to: dmyToUTC(to)
+          to: dmyToMls(to)
         })) {
           _this._dates.setFromTo(mlsToDmy(_fromMls), to);
         }
@@ -132,7 +132,7 @@ function (_Component) {
 
         if (chart.zhZoomX({
           from: _fromMls,
-          to: dmyToUTC(to)
+          to: dmyToMls(to)
         })) {
           _this._dates.setFromTo(mlsToDmy(_fromMls), to);
         }
@@ -143,10 +143,10 @@ function (_Component) {
       return _this._dates = c;
     };
 
-    _this._hZoomBy1M = _this._hZoomBy.bind((0, _assertThisInitialized2["default"])(_this), -1);
-    _this._hZoomBy3M = _this._hZoomBy.bind((0, _assertThisInitialized2["default"])(_this), -3);
-    _this._hZoomBy6M = _this._hZoomBy.bind((0, _assertThisInitialized2["default"])(_this), -6);
-    _this._hZoomBy1Y = _this._hZoomBy.bind((0, _assertThisInitialized2["default"])(_this), -12);
+    _this._hZoom1M = _this._hZoomBy.bind(null, -1);
+    _this._hZoom3M = _this._hZoomBy.bind(null, -3);
+    _this._hZoom6M = _this._hZoomBy.bind(null, -6);
+    _this._hZoom1Y = _this._hZoomBy.bind(null, -12);
     _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Flat, {
       key: "zoom",
       caption: "Zoom",
@@ -176,7 +176,13 @@ function (_Component) {
         _getFromToDates4 = _getFromToDates(chart),
         from = _getFromToDates4.from,
         to = _getFromToDates4.to,
-        id = _isFn(chart.zhGetId) ? chart.zhGetId() : void 0;
+        _minYear = _getMinYear(from),
+        _onTestDate = function _onTestDate(str) {
+      return isDmy(str, _minYear);
+    },
+        _errMsgDateFrom = _crErrMsg(_minYear),
+        id = chart.zhGetId == null ? void 0 : chart.zhGetId(),
+        _isDaily = chart.zhIsDaily == null ? void 0 : chart.zhIsDaily();
 
     return _react["default"].createElement(_ModalDialog["default"], {
       caption: "Zoom Chart",
@@ -191,38 +197,17 @@ function (_Component) {
       placeholder: "DD-MM-YYYY",
       initFromDate: from,
       initToDate: to,
-      errMsg: "DD-MM-YYYY format must be, min 01-01-1990",
-      isPeriodValid: _isPeriodValid,
-      onTestDate: isDmy,
+      errMsg: _errMsgDateFrom,
+      isPeriodValid: isDmyPeriod,
+      onTestDate: _onTestDate,
       onEnter: this._hZoom
-    }), _react["default"].createElement("div", {
-      style: S.PERIOD_BTS
-    }, _react["default"].createElement(_DialogCell["default"].Button.Flat, {
-      rootStyle: S.BT,
-      key: "1M",
-      caption: "1M",
-      onClick: this._hZoomBy1M
-    }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
-      rootStyle: S.BT,
-      key: "3M",
-      caption: "3M",
-      onClick: this._hZoomBy3M
-    }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
-      rootStyle: S.BT,
-      key: "6M",
-      caption: "6M",
-      onClick: this._hZoomBy6M
-    }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
-      rootStyle: S.BT,
-      key: "YTD",
-      caption: "YTD",
-      onClick: this._hZoomYTD
-    }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
-      rootStyle: S.BT,
-      key: "1Y",
-      caption: "1Y",
-      onClick: this._hZoomBy1Y
-    })));
+    }), _isDaily && _react["default"].createElement(_ZoomDailyRow["default"], {
+      onZoom1M: this._hZoom1M,
+      onZoom3M: this._hZoom3M,
+      onZoom6M: this._hZoom6M,
+      onZoomYTD: this._hZoomYTD,
+      onZoom1Y: this._hZoom1Y
+    }));
   };
 
   return ZoomDialog;

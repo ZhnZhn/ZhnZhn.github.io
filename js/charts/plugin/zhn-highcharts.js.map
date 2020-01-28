@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../../src/charts/plugin/zhn-highcharts.js"],"names":["HighchartsZhn","Highcharts","wrap","Chart","Object","assign","prototype","zhRemoveCategory","zhAddSeriaToYAxis","zhToggleSeria","zhToggle2H","zhEnableDataLabels","zhGetId","zhGetFromToDates","zhZoomX"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,aAAa,GAAG,SAAhBA,aAAgB,CAACC,UAAD,EAAgB;AAAA,MAC5BC,IAD4B,GACZD,UADY,CAC5BC,IAD4B;AAAA,MACtBC,KADsB,GACZF,UADY,CACtBE,KADsB;AAEpC,wCAAqBD,IAArB,EAA2BC,KAA3B;AACA,6BAAUA,KAAV;AACA,qCAAkBA,KAAlB;AACAC,EAAAA,MAAM,CAACC,MAAP,CAAcF,KAAK,CAACG,SAApB,EAA+B;AAC7BC,IAAAA,gBAAgB,EAAhBA,4BAD6B;AAE7BC,IAAAA,iBAAiB,EAAjBA,6BAF6B;AAG7BC,IAAAA,aAAa,EAAbA,yBAH6B;AAI7BC,IAAAA,UAAU,EAAVA,sBAJ6B;AAK7BC,IAAAA,kBAAkB,EAAlBA,8BAL6B;AAM7BC,IAAAA,OAAO,EAAPA,mBAN6B;AAO7BC,IAAAA,gBAAgB,EAAhBA,4BAP6B;AAQ7BC,IAAAA,OAAO,EAAPA;AAR6B,GAA/B;AAUD,CAfD;;eAiBed,a","sourcesContent":["import wrapExportChartLocal from './wrapExportChartLocal'\r\nimport zhRemoveCategory from './zhRemoveCategory'\r\nimport zhCaption from './zhCaption'\r\nimport zhAddSeriaToYAxis from './zhAddSeriaToYAxis'\r\nimport zhToggleSeria from './zhToggleSeria'\r\nimport zhTogglePlotLines from './zhTogglePlotLines'\r\nimport zhToggle2H from './zhToggle2H'\r\nimport zhEnableDataLabels from './zhEnableDataLabels'\r\nimport zhGetId from './zhGetId'\r\nimport zhGetFromToDates from './zhGetFromToDates'\r\nimport zhZoomX from './zhZoomX'\r\n\r\nconst HighchartsZhn = (Highcharts) => {\r\n  const { wrap, Chart } = Highcharts;\r\n  wrapExportChartLocal(wrap, Chart)\r\n  zhCaption(Chart)\r\n  zhTogglePlotLines(Chart)\r\n  Object.assign(Chart.prototype, {\r\n    zhRemoveCategory,\r\n    zhAddSeriaToYAxis,\r\n    zhToggleSeria,\r\n    zhToggle2H,\r\n    zhEnableDataLabels,\r\n    zhGetId,\r\n    zhGetFromToDates,\r\n    zhZoomX\r\n  })\r\n};\r\n\r\nexport default HighchartsZhn\r\n"],"file":"zhn-highcharts.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhn-highcharts.js"
+ ],
+ "file": "../../../src/charts/plugin/zhn-highcharts.js",
+ "names": [
+  "HighchartsZhn",
+  "Highcharts",
+  "wrap",
+  "Chart",
+  "Object",
+  "assign",
+  "prototype",
+  "zhRemoveCategory",
+  "zhAddSeriaToYAxis",
+  "zhToggleSeria",
+  "zhToggle2H",
+  "zhEnableDataLabels",
+  "zhIsDaily",
+  "zhGetId",
+  "zhGetFromToDates",
+  "zhZoomX"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,aAAa,GAAG,SAAhBA,aAAgB,CAACC,UAAD,EAAgB;AAAA,MAC5BC,IAD4B,GACZD,UADY,CAC5BC,IAD4B;AAAA,MACtBC,KADsB,GACZF,UADY,CACtBE,KADsB;AAEpC,wCAAqBD,IAArB,EAA2BC,KAA3B;AACA,6BAAUA,KAAV;AACA,qCAAkBA,KAAlB;AACAC,EAAAA,MAAM,CAACC,MAAP,CAAcF,KAAK,CAACG,SAApB,EAA+B;AAC7BC,IAAAA,gBAAgB,EAAhBA,4BAD6B;AAE7BC,IAAAA,iBAAiB,EAAjBA,6BAF6B;AAG7BC,IAAAA,aAAa,EAAbA,yBAH6B;AAI7BC,IAAAA,UAAU,EAAVA,sBAJ6B;AAK7BC,IAAAA,kBAAkB,EAAlBA,8BAL6B;AAM7BC,IAAAA,SAAS,EAATA,qBAN6B;AAO7BC,IAAAA,OAAO,EAAPA,mBAP6B;AAQ7BC,IAAAA,gBAAgB,EAAhBA,4BAR6B;AAS7BC,IAAAA,OAAO,EAAPA;AAT6B,GAA/B;AAWD,CAhBD;;eAkBef,a"
+}

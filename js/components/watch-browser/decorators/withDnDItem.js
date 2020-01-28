@@ -54,11 +54,11 @@ var _crDragEnterItem = function _crDragEnterItem(DRAG) {
   };
 };
 
-var _handlerDragOverItem = function _handlerDragOverItem(ev) {
+var _hDragOverItem = function _hDragOverItem(ev) {
   ev.preventDefault();
 };
 
-var _handlerDragLeaveItem = function _handlerDragLeaveItem(ev) {
+var _hDragLeaveItem = function _hDragLeaveItem(ev) {
   ev.preventDefault();
   this.dragLeaveWithDnDStyle(ev);
 };
@@ -66,11 +66,11 @@ var _handlerDragLeaveItem = function _handlerDragLeaveItem(ev) {
 var withDnDItem = function withDnDItem(DRAG, WatchActions) {
   return function (target) {
     Object.assign(target.prototype, {
-      _handlerDragStartItem: _crDragStartItem(DRAG),
-      _handlerDropItem: _crDropItem(DRAG, WatchActions),
-      _handlerDragEnterItem: _crDragEnterItem(DRAG),
-      _handlerDragOverItem: _handlerDragOverItem,
-      _handlerDragLeaveItem: _handlerDragLeaveItem
+      _hDragStartItem: _crDragStartItem(DRAG),
+      _hDropItem: _crDropItem(DRAG, WatchActions),
+      _hDragEnterItem: _crDragEnterItem(DRAG),
+      _hDragOverItem: _hDragOverItem,
+      _hDragLeaveItem: _hDragLeaveItem
     });
   };
 };

@@ -4,11 +4,8 @@ import { ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
 import WatchActions from '../../flux/actions/WatchActions';
 
-import Browser from '../zhn/Browser';
-import BrowserCaption from '../zhn/BrowserCaption';
-import ButtonCircle from '../zhn/ButtonCircle';
-import ScrollPane from '../zhn/ScrollPane';
-import OpenClose2 from '../zhn/OpenClose2';
+import A from '../Comp'
+
 import EditBar from './EditBar';
 import WatchItem from './WatchItem';
 
@@ -19,37 +16,38 @@ const CL = {
   WATCH_ITEM: 'row__type2-topic not-selected'
 };
 
-const C_FILL_OPEN = '#80c040';
-
-const DRAG = {
-  GROUP : 'GROUP',
-  LIST : 'LIST',
-  ITEM : 'ITEM'
-};
-
-
+const C_GROUP_OPEN = '#1b2836';
+const C_LIST_OPEN = '#80c040';
 const S = {
   BROWSER: {
     paddingRight: '0px'
   },
   BT_CIRCLE: {
-    marginLeft: '20px',
     position: 'relative',
-    top: '-2px'
+    top: -2,
+    marginLeft: 20
   },
   GROUP_DIV: {
     lineHeight : 2
   },
   LIST_DIV: {
-    marginLeft : '8px',
-    paddingLeft : '12px',
-    borderLeft : '1px solid yellow',
+    marginLeft : 8,
+    paddingLeft : 12,
+    borderLeft : `2px solid ${C_GROUP_OPEN}`,
     lineHeight : 2
   },
   ITEM_NOT_SELECTED: {
-    borderBottom : '1px solid rgba(128, 192, 64, 0.6)',
-    marginRight : '10px'
+    marginRight : 10,
+    borderBottom : '1px solid rgba(128, 192, 64, 0.6)'
   }
+};
+
+const DRAG = {
+  GROUP: 'GROUP',
+  C_GROUP_ENTER: C_GROUP_OPEN,
+  LIST: 'LIST',
+  C_LIST_ENTER: C_LIST_OPEN,
+  ITEM: 'ITEM'
 };
 
 @Decor.withDnDStyle
@@ -59,22 +57,22 @@ const S = {
 class WatchBrowser extends Component {
 
   constructor(props){
-    super()
+    super(props)
 
-    this._handlerDragStartGroup = this._handlerDragStartGroup.bind(this)
-    this._handlerDropGroup = this._handlerDropGroup.bind(this)
-    this._handlerDragEnterGroup = this._handlerDragEnterGroup.bind(this)
-    this._handlerDragLeaveGroup = this._handlerDragLeaveGroup.bind(this)
+    this._hDragStartGroup = this._hDragStartGroup.bind(this)
+    this._hDropGroup = this._hDropGroup.bind(this)
+    this._hDragEnterGroup = this._hDragEnterGroup.bind(this)
+    this._hDragLeaveGroup = this._hDragLeaveGroup.bind(this)
 
-    this._handlerDragStartList = this._handlerDragStartList.bind(this)
-    this._handlerDropList = this._handlerDropList.bind(this)
-    this._handlerDragEnterList = this._handlerDragEnterList.bind(this)
-    this._handlerDragLeaveList = this._handlerDragLeaveList.bind(this)
+    this._hDragStartList = this._hDragStartList.bind(this)
+    this._hDropList = this._hDropList.bind(this)
+    this._hDragEnterList = this._hDragEnterList.bind(this)
+    this._hDragLeaveList = this._hDragLeaveList.bind(this)
 
-    this._handlerDragStartItem = this._handlerDragStartItem.bind(this)
-    this._handlerDropItem = this._handlerDropItem.bind(this)
-    this._handlerDragEnterItem = this._handlerDragEnterItem.bind(this)
-    this._handlerDragLeaveItem = this._handlerDragLeaveItem.bind(this)
+    this._hDragStartItem = this._hDragStartItem.bind(this)
+    this._hDropItem = this._hDropItem.bind(this)
+    this._hDragEnterItem = this._hDragEnterItem.bind(this)
+    this._hDragLeaveItem = this._hDragLeaveItem.bind(this)
 
     this.state = {
       isShow : !!props.isInitShow,
@@ -124,21 +122,21 @@ class WatchBrowser extends Component {
      return watchList.groups.map((group, index) => {
        const {caption, lists} = group;
        return (
-               <OpenClose2
+               <A.OpenClose2
                   key={index}
                   style={S.GROUP_DIV}
+                  fillOpen={C_GROUP_OPEN}
                   caption={caption}
-                  isClose={true}
                   isDraggable={isModeEdit}
                   option={{ caption }}
-                  onDragStart={this._handlerDragStartGroup}
-                  onDragEnter={this._handlerDragEnterGroup}
-                  onDragOver={this._handlerDragOverGroup}
-                  onDragLeave={this._handlerDragLeaveGroup}
-                  onDrop={this._handlerDropGroup}
+                  onDragStart={this._hDragStartGroup}
+                  onDragEnter={this._hDragEnterGroup}
+                  onDragOver={this._hDragOverGroup}
+                  onDragLeave={this._hDragLeaveGroup}
+                  onDrop={this._hDropGroup}
                 >
                 {lists && this._renderLists(lists, caption)}
-                </OpenClose2>
+              </A.OpenClose2>
               );
      });
   }
@@ -148,23 +146,22 @@ class WatchBrowser extends Component {
     return lists.map((list, index) => {
       const {caption, items} = list;
       return (
-        <OpenClose2
+        <A.OpenClose2
            key={index}
-           fillOpen={C_FILL_OPEN}
+           fillOpen={C_LIST_OPEN}
            style={S.LIST_DIV}
            styleNotSelected={S.ITEM_NOT_SELECTED}
            caption={caption}
-           isClose={true}
            isDraggable={isModeEdit}
            option={{ groupCaption, caption }}
-           onDragStart={this._handlerDragStartList}
-           onDragEnter={this._handlerDragEnterList}
-           onDragOver={this._handlerDragOverList}
-           onDragLeave={this._handlerDragLeaveList}
-           onDrop={this._handlerDropList}
+           onDragStart={this._hDragStartList}
+           onDragEnter={this._hDragEnterList}
+           onDragOver={this._hDragOverList}
+           onDragLeave={this._hDragLeaveList}
+           onDrop={this._hDropList}
         >
          {items && this._renderItems(items, groupCaption, caption)}
-        </OpenClose2>
+       </A.OpenClose2>
       );
     });
   }
@@ -190,11 +187,11 @@ class WatchBrowser extends Component {
                option={{ groupCaption, listCaption, caption }}
                onClick={this._handlerClickItem}
                onClose={this._handlerRemoveItem}
-               onDragStart={this._handlerDragStartItem}
-               onDragOver={this._handlerDragOverItem}
-               onDragEnter={this._handlerDragEnterItem}
-               onDragLeave={this._handlerDragLeaveItem}
-               onDrop={this._handlerDropItem}
+               onDragStart={this._hDragStartItem}
+               onDragOver={this._hDragOverItem}
+               onDragEnter={this._hDragEnterItem}
+               onDragLeave={this._hDragLeaveItem}
+               onDrop={this._hDropItem}
             />
         );
       });
@@ -205,33 +202,33 @@ class WatchBrowser extends Component {
         , { isShow, isModeEdit, watchList } = this.state
         , _captionEV = isModeEdit ? 'V' : 'E';
     return (
-       <Browser isShow={isShow} style={S.BROWSER}>
-          <BrowserCaption
+       <A.Browser isShow={isShow} style={S.BROWSER}>
+          <A.BrowserCaption
             caption={caption}
             onClose={this._handlerHide}
           >
-           <ButtonCircle
+           <A.ButtonCircle
              caption="S"
              title="Save to LocalStorage"
              style={S.BT_CIRCLE}
              onClick={this._handlerSaveWatch}
            />
-           <ButtonCircle
+           <A.ButtonCircle
               caption={_captionEV}
               title="Toggle Edit Mode: E/V"
               style={S.BT_CIRCLE}
               onClick={this._handlerToggleEditMode}
            />
-         </BrowserCaption>
+         </A.BrowserCaption>
          <EditBar
             isShow={isModeEdit}
             onClickGroup={this._handlerEditGroup}
             onClickList={this._handlerEditList}
          />
-         <ScrollPane className={CL.SCROLL}>
+         <A.ScrollPane className={CL.SCROLL}>
            {watchList && this._renderWatchList(watchList)}
-         </ScrollPane>
-      </Browser>
+         </A.ScrollPane>
+      </A.Browser>
     )
   }
 }

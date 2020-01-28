@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import DateUtils from '../../utils/DateUtils'
 
 import ChartActions from '../../flux/actions/ChartActions'
-import { BrowserType, LoadType } from '../../constants/Type'
-import ChartType from '../../constants/ChartType'
+import { BrowserType as BT, LoadType as LT } from '../../constants/Type'
+import CHT from '../../constants/ChartType'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import D from '../dialogs/DialogCell'
@@ -18,6 +18,17 @@ const {
   getToDate,
   isYmd
 } = DateUtils;
+
+const S = {
+  ITEM_TEXT: {
+    display: 'inline-block',
+    maxWidth: 200,
+    height: 32,
+    verticalAlign: 'middle',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
+  }
+};
 
 @withValidationLoad
 class LoadItemDialog extends Component {
@@ -39,19 +50,19 @@ class LoadItemDialog extends Component {
    }
 
    constructor(props){
-     super()
+     super(props)
      const {
-             fromDate,
-             initToDate,
-             onTestDate
-           } = props.data;
+       fromDate,
+       initToDate,
+       onTestDate
+     } = props.data;
 
-    this._commandButtons = [
+     this._commandButtons = [
        <D.Button.Load
          key="load"
          onClick={this._handleLoad}
        />
-    ]
+     ]
 
     this.state = {
        initFromDate: fromDate || getFromDate(2),
@@ -72,28 +83,32 @@ class LoadItemDialog extends Component {
     const validationMessages = this._createValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
-          , { id, title, subtitle, caption, columnName, dataColumn, seriaColumnNames } = data
+          , {
+              id,
+              title, subtitle, caption,
+              columnName, dataColumn, seriaColumnNames,
+              itemConf={}
+              /*
+              _itemKey, url, loadId,
+              optionFetch, items,
+              itemCaption, seriaType,
+              dataSource, dfId, timeId
+              */
+             } = data
           , { fromDate, toDate } = this.datesFragment.getValues()
           , option = {
-             title : title,
-             subtitle : subtitle,
-             value : caption,
+             id, title, subtitle,
+             value: caption,
              item: caption,
-             fromDate: fromDate,
-             toDate: toDate,
-             loadId : LoadType.WL,
-             id,
-             columnName,
-             dataColumn,
-             seriaColumnNames
+             fromDate, toDate,
+             columnName, dataColumn, seriaColumnNames,
+             loadId: itemConf.loadId || LT.WL,
+             ...itemConf
            };
-      ChartActions.loadStock(
-        {
-          chartType: ChartType.WATCH_LIST,
-          browserType: BrowserType.WATCH_LIST
-        },
-        option
-      );
+      ChartActions.loadStock({
+        chartType: CHT.WATCH_LIST,
+        browserType: BT.WATCH_LIST
+      }, option);
       onClose()
     }
     this._updateValidationMessages(validationMessages)
@@ -112,6 +127,8 @@ class LoadItemDialog extends Component {
     this.props.onClose()
   }
 
+  _refDates = c => this.datesFragment = c
+
   render(){
     const { isShow, data } = this.props
         , { caption } = data
@@ -128,11 +145,12 @@ class LoadItemDialog extends Component {
          onClose={this._handleClose}
       >
         <D.Row.Text
+          styleText={S.ITEM_TEXT}
           caption="Item:"
           text={caption}
         />
         <D.DatesFragment
-            ref={c => this.datesFragment = c}
+            ref={this._refDates}
             initFromDate={initFromDate}
             initToDate={initToDate}
             onTestDate={onTestDate}

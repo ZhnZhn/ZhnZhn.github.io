@@ -48,6 +48,17 @@ const _crToken = ({ dfId }) => {
 
 const _crSearchLink = (label, option) => {
   const  _token = _crSearchToken(label);
+  switch(option.loadId){
+    case 'NST': case 'NST_2':
+      return _crLink(_token, SEARCH.NST);
+    case 'SWS':
+      return _crLink(_token, SEARCH.SWS);
+    case 'SFL':
+      return _crLink(_crToken(option), SEARCH.SFL);
+    default:
+      return '';
+  }
+  /*
   switch(option.browserType){
     case 'NST': case 'NST_ALL':
       return _crLink(_token, SEARCH.NST);
@@ -58,6 +69,7 @@ const _crSearchLink = (label, option) => {
     default:
       return '';
   }
+  */
 };
 
 const _crDescr = ({ updated='', source=DF_SOURCE, label }, option) => {
@@ -148,13 +160,29 @@ const fnAdapter = {
   }),
 
   crZhConfig: (option) => {
-    const { dataSource, _itemKey } = option
-        , key = _itemKey || crId()
-        , itemCaption = _crItemCaption(option);
+    const {
+      _itemKey, url, loadId,
+      optionFetch, items,
+      title, subtitle, itemCaption: caption,
+      seriaType,
+      dataSource, dfId, timeId
+    } = option
+    , key = _itemKey || crId()
+    , itemCaption = caption || _crItemCaption(option);
     return {
       id: key, key,
       itemCaption,
-      isWithoutAdd: true,      
+      itemConf: {
+        _itemKey: key, url, loadId,
+        optionFetch, items,
+        title, subtitle,
+        itemCaption, seriaType,
+        dataSource,
+        //sfl
+        dfId, timeId
+      },
+      isWithoutAdd: url ? false : true,
+      //isWithoutAdd: true,
       dataSource
     };
   },

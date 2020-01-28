@@ -229,17 +229,22 @@ const EuroStatFn = {
         , {
             key, itemCaption,
             dataSource,
-            dfTable
+            dfTable,
+            url, loadId, title, subtitle, seriaType
           } = option
         , _dataSource = dfTable
              ? `${dataSource} (${dfTable})`
-             : dataSource;
+             : dataSource || "Eurostat";
     return {
-      id: key,
-      key: key,
-      itemCaption: itemCaption,
+      id: key, key, itemCaption,
+      itemConf: {
+        _itemKey: key, url, loadId,
+        title, subtitle, itemCaption,
+        seriaType,
+        dataSource: _dataSource
+      },
       //isWithoutIndicator: true,
-      isWithoutAdd: true,
+      isWithoutAdd: url ? false : true,
       dataSource: _dataSource,
       linkFn: 'ES',
       item: {

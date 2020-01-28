@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../../src/components/dialogs/rows/Row.jsx"],"names":["S","ROOT_DIV","margin","lineHeight","fontWeight","LABEL_SPAN","display","color","width","paddingRight","textAlign","fontSize","Plain","style","children","STYLE","rowDiv","Text","caption","text","styleRoot"],"mappings":";;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE;AACRC,IAAAA,MAAM,EAAE,KADA;AAERC,IAAAA,UAAU,EAAE,CAFJ;AAGRC,IAAAA,UAAU,EAAE;AAHJ,GADF;AAMRC,EAAAA,UAAU,EAAG;AACXC,IAAAA,OAAO,EAAE,cADE;AAEXC,IAAAA,KAAK,EAAE,SAFI;AAGXC,IAAAA,KAAK,EAAE,OAHI;AAIXC,IAAAA,YAAY,EAAE,KAJH;AAKXC,IAAAA,SAAS,EAAE,OALA;AAMXC,IAAAA,QAAQ,EAAE;AANC;AANL,CAAV;;AAgBA,IAAMC,KAAK,GAAG,SAARA,KAAQ;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,SACZ;AAAK,IAAA,KAAK,gCAAOC,yBAAMC,MAAb,MAAwBH,KAAxB;AAAV,KACGC,QADH,CADY;AAAA,CAAd;;AAMA,IAAMG,IAAI,GAAG,SAAPA,IAAO,QAAkC;AAAA,MAA/BC,OAA+B,SAA/BA,OAA+B;AAAA,MAAtBC,IAAsB,SAAtBA,IAAsB;AAAA,MAAhBC,SAAgB,SAAhBA,SAAgB;AAC7C,SACE;AAAK,IAAA,KAAK,gCAAOpB,CAAC,CAACC,QAAT,MAAsBmB,SAAtB;AAAV,KACE;AAAM,IAAA,KAAK,EAAEpB,CAAC,CAACK;AAAf,KACGa,OADH,CADF,EAIE,8CACGC,IADH,CAJF,CADF;AAUD,CAXD;;eAee;AAAEP,EAAAA,KAAK,EAALA,KAAF;AAASK,EAAAA,IAAI,EAAJA;AAAT,C","sourcesContent":["import React from 'react'\r\n\r\nimport STYLE from '../../styles/DialogStyles'\r\n\r\nconst S = {\r\n  ROOT_DIV: {\r\n    margin: '5px',\r\n    lineHeight: 2,\r\n    fontWeight: 'bold'\r\n  },\r\n  LABEL_SPAN : {\r\n    display: 'inline-block',\r\n    color: '#1B75BB',\r\n    width: '100px',\r\n    paddingRight: '5px',\r\n    textAlign: 'right',\r\n    fontSize: '16px'\r\n  }\r\n};\r\n\r\nconst Plain = ({ style, children }) => (\r\n  <div style={{ ...STYLE.rowDiv, ...style }}>\r\n    {children}\r\n  </div>\r\n);\r\n\r\nconst Text = ({ caption, text, styleRoot }) => {\r\n  return (\r\n    <div style={{ ...S.ROOT_DIV, ...styleRoot }}>\r\n      <span style={S.LABEL_SPAN}>\r\n        {caption}\r\n      </span>\r\n      <span>\r\n        {text}\r\n      </span>\r\n    </div>\r\n  )\r\n};\r\n\r\n\r\n\r\nexport default { Plain, Text }\r\n"],"file":"Row.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/Row.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/Row.js",
+ "names": [
+  "S",
+  "ROOT_DIV",
+  "margin",
+  "lineHeight",
+  "fontWeight",
+  "LABEL_SPAN",
+  "display",
+  "color",
+  "width",
+  "paddingRight",
+  "textAlign",
+  "fontSize",
+  "Plain",
+  "style",
+  "children",
+  "STYLE",
+  "rowDiv",
+  "Text",
+  "caption",
+  "text",
+  "styleRoot",
+  "styleCaption",
+  "styleText"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE;AACRC,IAAAA,MAAM,EAAE,KADA;AAERC,IAAAA,UAAU,EAAE,CAFJ;AAGRC,IAAAA,UAAU,EAAE;AAHJ,GADF;AAMRC,EAAAA,UAAU,EAAG;AACXC,IAAAA,OAAO,EAAE,cADE;AAEXC,IAAAA,KAAK,EAAE,SAFI;AAGXC,IAAAA,KAAK,EAAE,GAHI;AAIXC,IAAAA,YAAY,EAAE,CAJH;AAKXC,IAAAA,SAAS,EAAE,OALA;AAMXC,IAAAA,QAAQ,EAAE;AANC;AANL,CAAV;;AAgBA,IAAMC,KAAK,GAAG,SAARA,KAAQ;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,SACZ;AAAK,IAAA,KAAK,gCAAOC,yBAAMC,MAAb,MAAwBH,KAAxB;AAAV,KACGC,QADH,CADY;AAAA,CAAd;;AAMA,IAAMG,IAAI,GAAG,SAAPA,IAAO,QAGP;AAAA,MAFJC,OAEI,SAFJA,OAEI;AAAA,MAFKC,IAEL,SAFKA,IAEL;AAAA,MADJC,SACI,SADJA,SACI;AAAA,MADOC,YACP,SADOA,YACP;AAAA,MADqBC,SACrB,SADqBA,SACrB;AACJ,SACE;AAAK,IAAA,KAAK,gCAAOtB,CAAC,CAACC,QAAT,MAAsBmB,SAAtB;AAAV,KACE;AAAM,IAAA,KAAK,gCAAOpB,CAAC,CAACK,UAAT,MAAwBgB,YAAxB;AAAX,KACGH,OADH,CADF,EAIE;AAAM,IAAA,KAAK,EAAEI;AAAb,KACGH,IADH,CAJF,CADF;AAUD,CAdD;;eAgBe;AAAEP,EAAAA,KAAK,EAALA,KAAF;AAASK,EAAAA,IAAI,EAAJA;AAAT,C"
+}

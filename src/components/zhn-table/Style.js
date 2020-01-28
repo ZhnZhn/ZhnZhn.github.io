@@ -1,5 +1,8 @@
 
 const S = {
+  CL_LINK: "native-link",
+  CL_GRID: "grid",
+    
   ROOT: {
     position: 'relative',
     width: '100%',
@@ -10,10 +13,13 @@ const S = {
     lineHeight: 1.8
   },
   TH: {
-    cursor: 'pointer',
-    pointerEvents: 'auto',
+    //position: 'sticky',
+    //top: 32,
+    //zIndex: 2,
     borderTop: '3px solid transparent',
-    borderBottom: '3px solid transparent'
+    borderBottom: '3px solid transparent',
+    pointerEvents: 'auto',
+    cursor: 'pointer',
   },
   TH_UP: {
     borderTop: '3px solid #f1d600'
@@ -21,24 +27,27 @@ const S = {
   TH_DOWN: {
     borderBottom: '3px solid #f1d600'
   },
+  BT_SVG_MORE: {
+    marginRight: 4
+  },
   SVG_MORE: {
-    fill: '#a487d4',
-    stroke: '#a487d4'
+    fill: 'black',
+    stroke: 'black'
   },
   STYLE_MORE: {
     position: 'absolute',
-    top: '38px',
-    left: '8px',
+    top: 38,
+    left: 8,
     zIndex: 1010,
-    backgroundColor: 'rgb(77, 77, 77)',
-    paddingTop: '4px',
-    paddingLeft: '12px',
-    paddingRight: '12px',
-    borderRadius: '5px',
+    backgroundColor: 'inherit',
+    paddingTop: 4,
+    paddingLeft: 12,
+    paddingRight: 12,
+    borderRadius: 5,
     boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px'
   },
   TD: {
-    padding: '6px',
+    padding: 6,
     verticalAlign: 'middle',
     lineHeight: 1.4,
     whiteSpace: 'nowrap',

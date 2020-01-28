@@ -11,20 +11,19 @@ import SvgClose from '../zhn/SvgClose';
 import ValueMovingBadge from './ValueMovingBadge';
 
 const TH_ID = 'ELEMENT';
-const CL = 'not-selected shadow-right';
 
-const CL_MORE = "popup-menu charts__menu-more"
+const CL = 'not-selected shadow-right'
+, CL_MORE = "popup-menu charts__menu-more"
 
 const S = {
   ROOT: {
     backgroundColor: '#1b2836',
-    paddingTop: '4px',
-    paddingRight: '42px',
     height: 'auto',
     width: '100%',
-    borderTopRightRadius: '2px',
-    borderBottomRightRadius: '2px',
-    boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
+    paddingTop: 4,
+    paddingRight: 42,
+    borderTopRightRadius: 2,
+    borderBottomRightRadius: 2
   },
   SVG_MORE: {
     stroke: '#777777',
@@ -34,38 +33,36 @@ const S = {
     display: 'inline-block'
   },
   CHECK_BOX: {
-    //float: 'left',
-    marginRight: '10px',
-    marginLeft: '10px'
+    marginRight: 10,
+    marginLeft: 10
   },
   CAPTION_OPEN : {
-    textAlign: 'left',
     display : 'inline-block',
     color: 'rgba(164, 135, 212, 1)',
-    cursor: 'pointer',
-    width: '125px',
+    width: 125,
+    textAlign: 'left',
     fontWeight : 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'clip',
-    overflow: 'hidden'
-
+    overflow: 'hidden',
+    cursor: 'pointer'
   },
   CAPTION_CLOSE: {
-    color : 'gray'
+    color: 'gray'
   },
   CAPTION_WIDTH: {
-    textAlign: 'left',
-    width: '280px'
+    width: 280,
+    textAlign: 'left'
   },
   TIME: {
     color : 'rgb(253, 179, 22)',
-    fontWeight : 'bold',
-    paddingLeft : '16px'
+    paddingLeft : 16,
+    fontWeight : 'bold'
   },
   CLOSE: {
     position: 'absolute',
     right: 0,
-    top: '4px'
+    top: 4
   }
 };
 
@@ -91,7 +88,7 @@ class Header extends Component {
   }
 
   _renderMore = (moreModel, TS) => {
-    if (!moreModel) return null;
+    if (!moreModel) { return null; }
     const { isMore } = this.state;
     return (
       <Fragment>
@@ -113,22 +110,21 @@ class Header extends Component {
 
   render() {
     const {
-            theme,
-            isOpen,
-            //chartType,
-            onCheck, onUnCheck,
-            itemCaption, itemTitle, itemTime, onToggle,
-            valueMoving, isAdminMode, crValueMoving, regCompVm,
-            moreModel,
-            onClose
-          } = this.props
-        , TS = theme.getStyle(TH_ID)
-        , _openStyle = isOpen
-               ? S.CAPTION_OPEN
-               : { ...S.CAPTION_OPEN, ...S.CAPTION_CLOSE }
-        , _captionStyle = (valueMoving)
-                ? _openStyle
-                : { ..._openStyle, ...S.CAPTION_WIDTH };
+        theme,
+        isOpen,
+        onCheck, onUnCheck,
+        itemCaption, itemTitle, itemTime, onToggle,
+        valueMoving, isAdminMode, crValueMoving, regCompVm,
+        moreModel,
+        onClose
+      } = this.props
+    , TS = theme.getStyle(TH_ID)
+    , _openStyle = isOpen
+         ? S.CAPTION_OPEN
+         : { ...S.CAPTION_OPEN, ...S.CAPTION_CLOSE }
+    , _captionStyle = (valueMoving)
+         ? _openStyle
+         : { ..._openStyle, ...S.CAPTION_WIDTH };
 
     return (
       <div style={{...S.ROOT, ...TS.ROOT }}>

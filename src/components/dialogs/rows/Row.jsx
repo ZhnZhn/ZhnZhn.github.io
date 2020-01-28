@@ -10,9 +10,9 @@ const S = {
   },
   LABEL_SPAN : {
     display: 'inline-block',
-    color: '#1B75BB',
-    width: '100px',
-    paddingRight: '5px',
+    color: '#1b75bb',
+    width: 100,
+    paddingRight: 5,
     textAlign: 'right',
     fontSize: '16px'
   }
@@ -24,19 +24,20 @@ const Plain = ({ style, children }) => (
   </div>
 );
 
-const Text = ({ caption, text, styleRoot }) => {
+const Text = ({
+  caption, text,
+  styleRoot, styleCaption, styleText
+}) => {
   return (
     <div style={{ ...S.ROOT_DIV, ...styleRoot }}>
-      <span style={S.LABEL_SPAN}>
+      <span style={{ ...S.LABEL_SPAN, ...styleCaption }}>
         {caption}
       </span>
-      <span>
+      <span style={styleText}>
         {text}
       </span>
     </div>
   )
 };
-
-
 
 export default { Plain, Text }

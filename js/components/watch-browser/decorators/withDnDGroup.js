@@ -52,15 +52,15 @@ var _crDropGroup = function _crDropGroup(DRAG, WatchActions) {
 var _crDragEnterGroup = function _crDragEnterGroup(DRAG) {
   return function (ev) {
     ev.preventDefault();
-    this.dragEnterWithDnDStyle(ev, DRAG.GROUP);
+    this.dragEnterWithDnDStyle(ev, DRAG.GROUP, DRAG.C_GROUP_ENTER);
   };
 };
 
-var _handlerDragOverGroup = function _handlerDragOverGroup(ev) {
+var _hDragOverGroup = function _hDragOverGroup(ev) {
   ev.preventDefault();
 };
 
-var _handlerDragLeaveGroup = function _handlerDragLeaveGroup(ev) {
+var _hDragLeaveGroup = function _hDragLeaveGroup(ev) {
   ev.preventDefault();
   this.dragLeaveWithDnDStyle(ev);
 };
@@ -68,11 +68,11 @@ var _handlerDragLeaveGroup = function _handlerDragLeaveGroup(ev) {
 var withDnDGroup = function withDnDGroup(DRAG, WatchActions) {
   return function (target) {
     Object.assign(target.prototype, {
-      _handlerDragStartGroup: _crDragStartGroup(DRAG),
-      _handlerDropGroup: _crDropGroup(DRAG, WatchActions),
-      _handlerDragEnterGroup: _crDragEnterGroup(DRAG),
-      _handlerDragOverGroup: _handlerDragOverGroup,
-      _handlerDragLeaveGroup: _handlerDragLeaveGroup
+      _hDragStartGroup: _crDragStartGroup(DRAG),
+      _hDropGroup: _crDropGroup(DRAG, WatchActions),
+      _hDragEnterGroup: _crDragEnterGroup(DRAG),
+      _hDragOverGroup: _hDragOverGroup,
+      _hDragLeaveGroup: _hDragLeaveGroup
     });
   };
 };

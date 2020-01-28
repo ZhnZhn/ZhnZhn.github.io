@@ -1,7 +1,6 @@
-import AdapterFn from '../AdapterFn'
+import toTableFn from '../toTableFn'
 
-const { roundBy } = AdapterFn;
-
+const { crRows } = toTableFn;
 const HEADERS = [{
   name: 'Symbol',
   pn: 'symbol',
@@ -39,33 +38,14 @@ const _crTitle = (title, json) => {
   return `${title} ${_suffix}`;
 };
 
-const _getCellValue = (r, h) => {
-  const { pn, isToN, isToFixed } = h;
-  return isToN
-    ? isToFixed
-        ? roundBy(r[pn], 2)
-        : parseFloat(r[pn])
-    : r[pn];
-};
-
-const _toRows = (headers, rows=[]) => {
-  const _rows = rows.map(r => {
-    headers.forEach(h => {
-      r[h.pn] = _getCellValue(r, h);
-    })
-    return r;
-  })
-  return _rows;
-};
-
 const toTable = {
   crKey(option){
     option.key = option.value
-    return option.value;
+    return option.key;
   },
 
   toConfig(json, option){
-    const { title, key} = option;    
+    const {title, key} = option;
     return {
       id: key,
       title: _crTitle(title, json),
@@ -76,7 +56,7 @@ const toTable = {
         valueToHref
       },
       */
-      rows: _toRows(HEADERS, json),
+      rows: crRows(HEADERS, json),
       zhCompType: 'TABLE',
       zhConfig: {
         id: key, key

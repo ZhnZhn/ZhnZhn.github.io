@@ -57,13 +57,12 @@ var _crToken = function _crToken(_ref2) {
 var _crSearchLink = function _crSearchLink(label, option) {
   var _token = _crSearchToken(label);
 
-  switch (option.browserType) {
+  switch (option.loadId) {
     case 'NST':
-    case 'NST_ALL':
+    case 'NST_2':
       return _crLink(_token, SEARCH.NST);
 
     case 'SWS':
-    case 'SWS_ALL':
       return _crLink(_token, SEARCH.SWS);
 
     case 'SFL':
@@ -72,6 +71,19 @@ var _crSearchLink = function _crSearchLink(label, option) {
     default:
       return '';
   }
+  /*
+  switch(option.browserType){
+    case 'NST': case 'NST_ALL':
+      return _crLink(_token, SEARCH.NST);
+    case 'SWS': case 'SWS_ALL':
+      return _crLink(_token, SEARCH.SWS);
+    case 'SFL':
+      return _crLink(_crToken(option), SEARCH.SFL);
+    default:
+      return '';
+  }
+  */
+
 };
 
 var _crDescr = function _crDescr(_ref3, option) {
@@ -171,16 +183,42 @@ var fnAdapter = {
     };
   },
   crZhConfig: function crZhConfig(option) {
-    var dataSource = option.dataSource,
-        _itemKey = option._itemKey,
+    var _itemKey = option._itemKey,
+        url = option.url,
+        loadId = option.loadId,
+        optionFetch = option.optionFetch,
+        items = option.items,
+        title = option.title,
+        subtitle = option.subtitle,
+        caption = option.itemCaption,
+        seriaType = option.seriaType,
+        dataSource = option.dataSource,
+        dfId = option.dfId,
+        timeId = option.timeId,
         key = _itemKey || crId(),
-        itemCaption = _crItemCaption(option);
+        itemCaption = caption || _crItemCaption(option);
 
     return {
       id: key,
       key: key,
       itemCaption: itemCaption,
-      isWithoutAdd: true,
+      itemConf: {
+        _itemKey: key,
+        url: url,
+        loadId: loadId,
+        optionFetch: optionFetch,
+        items: items,
+        title: title,
+        subtitle: subtitle,
+        itemCaption: itemCaption,
+        seriaType: seriaType,
+        dataSource: dataSource,
+        //sfl
+        dfId: dfId,
+        timeId: timeId
+      },
+      isWithoutAdd: url ? false : true,
+      //isWithoutAdd: true,
       dataSource: dataSource
     };
   },

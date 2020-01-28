@@ -11,7 +11,7 @@ const _isLikelyQuarter = (str) => _isStr(str)
 const DateUtils = {
 
   //YYYY-MM-DD valid format
-	isYmd(str, nForecastDate=0){
+	isYmd(str, nForecastDate=0, minYear=MIN_YEAR){
      if (typeof str !== 'string') {
 			 return false;
 		 }
@@ -31,11 +31,17 @@ const DateUtils = {
 		 const thisYear = new Date().getFullYear();
 
 		// YEAR CHECK
-		 if( (m[1].length < 4) || m[1] < MIN_YEAR || m[1] > thisYear + nForecastDate) { return false; }
+		 if( (m[1].length < 4) || m[1] < minYear || m[1] > thisYear + nForecastDate) {
+       return false;
+     }
 		// MONTH CHECK
-		 if( (m[2].length < 2) || m[2] < 1 || m[2] > 12) { return false;}
+		 if( (m[2].length < 2) || m[2] < 1 || m[2] > 12) {
+       return false;
+     }
 		// DAY CHECK
-		 if( (m[3].length < 2) || m[3] < 1 || m[3] > 31) { return false;}
+		 if( (m[3].length < 2) || m[3] < 1 || m[3] > 31) {
+       return false;
+     }
 
 		 return true;
 	},
@@ -82,10 +88,19 @@ const DateUtils = {
 		}
  },
 
- isDmy(str){
+ dmyToMls(str){
 	 const _str = str || ''
-	 , [ d=10, m=10, y=MIN_YEAR-1 ] = _str.toString().split('-');
-	 return DateUtils.isYmd(`${y}-${m}-${d}`);
+	 , [ d, m, y ] = _str.toString().split('-');
+	 return Date.UTC(y, (parseInt(m, 10)-1), d);
+ },
+
+ isDmyPeriod: (from, to) => DateUtils
+   .dmyToMls(from) <= DateUtils.dmyToMls(to),
+
+ isDmy(str, minYear=MIN_YEAR){
+	 const _str = str || ''
+	 , [ d=10, m=10, y=minYear-1 ] = _str.toString().split('-');
+	 return DateUtils.isYmd(`${y}-${m}-${d}`, 0, minYear);
  },
 
  ymdToUTC: (dateStr) => {

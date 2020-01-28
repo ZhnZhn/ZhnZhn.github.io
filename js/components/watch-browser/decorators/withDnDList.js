@@ -55,15 +55,15 @@ var _crDropList = function _crDropList(DRAG, WatchActions) {
 var _crDragEnterList = function _crDragEnterList(DRAG) {
   return function (ev) {
     ev.preventDefault();
-    this.dragEnterWithDnDStyle(ev, DRAG.LIST);
+    this.dragEnterWithDnDStyle(ev, DRAG.LIST, DRAG.C_LIST_ENTER);
   };
 };
 
-var _handlerDragOverList = function _handlerDragOverList(ev) {
+var _hDragOverList = function _hDragOverList(ev) {
   ev.preventDefault();
 };
 
-var _handlerDragLeaveList = function _handlerDragLeaveList(ev) {
+var _hDragLeaveList = function _hDragLeaveList(ev) {
   ev.preventDefault();
   this.dragLeaveWithDnDStyle(ev);
 };
@@ -71,11 +71,11 @@ var _handlerDragLeaveList = function _handlerDragLeaveList(ev) {
 var withDnDList = function withDnDList(DRAG, WatchActions) {
   return function (target) {
     Object.assign(target.prototype, {
-      _handlerDragStartList: _crDragStartList(DRAG),
-      _handlerDropList: _crDropList(DRAG, WatchActions),
-      _handlerDragEnterList: _crDragEnterList(DRAG),
-      _handlerDragOverList: _handlerDragOverList,
-      _handlerDragLeaveList: _handlerDragLeaveList
+      _hDragStartList: _crDragStartList(DRAG),
+      _hDropList: _crDropList(DRAG, WatchActions),
+      _hDragEnterList: _crDragEnterList(DRAG),
+      _hDragOverList: _hDragOverList,
+      _hDragLeaveList: _hDragLeaveList
     });
   };
 };

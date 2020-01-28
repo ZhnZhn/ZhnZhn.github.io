@@ -81,6 +81,10 @@ var _crItemRefPropName = function _crItemRefPropName(index) {
   return 'chart' + index;
 };
 
+var _isInitialWidth = function _isInitialWidth(contWidth) {
+  return contWidth && contWidth <= INITIAL_WIDTH;
+};
+
 var _crMinWidth = function _crMinWidth(_ref) {
   var width = _ref.width;
   return width !== INITIAL_WIDTH ? width : MIN_WIDTH;
@@ -328,9 +332,12 @@ function (_Component) {
       return _this.spComp = node;
     };
 
+    var contWidth = props.contWidth,
+        _isWidth = _isInitialWidth(contWidth);
+
     _this.childMargin = CHILD_MARGIN;
-    _this._initialWidthStyle = _has["default"].initWidthStyle(INITIAL_WIDTH, MIN_WIDTH);
-    _this._MIN_WIDTH = _crMinWidth(_this._initialWidthStyle);
+    _this._initialWidthStyle = _isWidth ? contWidth : _has["default"].initWidthStyle(INITIAL_WIDTH, MIN_WIDTH);
+    _this._MIN_WIDTH = _isWidth ? MIN_WIDTH : _crMinWidth(_this._initialWidthStyle);
     _this._MODEL = _this._crModelMore();
     _this._hSetActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), true);
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);

@@ -8,7 +8,7 @@ import InfoPart from '../zhn/InfoPart';
 import OpenClose2 from '../zhn/OpenClose2';
 
 const CL_DESCR = 'info__descr';
-
+const C_DESCR_OPEN = '#1b2836';
 const S = {
   ROOT_SHOW: {
     position: 'relative',
@@ -29,7 +29,7 @@ const S = {
     color: '#1b75bb',
     width: 90,
     paddingRight: 5,
-    textAlign: 'right',    
+    textAlign: 'right',
     fontWeight: 'bold'
   },
   INFO_TEXT: {
@@ -56,6 +56,9 @@ const _isWithoutLink = (item={}) => {
     : false;
 };
 
+const _isShortDescr = descr => descr
+ && descr.length<200;
+
 class PanelDataInfo extends Component {
 
   _renderQuandlLink = (dbCode, dsCode) => {
@@ -78,23 +81,24 @@ class PanelDataInfo extends Component {
   }
 
   render(){
-    const {isShow, info={}, zhInfo={}, onClickChart } = this.props
-        , {
-             name,
-             toDate,
-             fromDate,
-             frequency,
-             database_code, dataset_code,
-             description
-           } = info
-         , { item, linkFn } = zhInfo
-         , _rootStyle = isShow
-             ? S.ROOT_SHOW
-             : S.ROOT_HIDE
-         , _isDescr = description ? true : false
-         , _isDescrClose = (_isDescr && description.length>200)
-                ? true
-                : false;
+    const {
+        isShow,
+        info={}, zhInfo={},
+        onClickChart
+      } = this.props
+    , {
+        name,
+        toDate,
+        fromDate,
+        frequency,
+        database_code, dataset_code,
+        description
+       } = info
+     , { item, linkFn } = zhInfo
+     , _rootStyle = isShow
+         ? S.ROOT_SHOW
+         : S.ROOT_HIDE;
+
     return (
        <div style={_rootStyle}>
          <ButtonTab
@@ -125,10 +129,11 @@ class PanelDataInfo extends Component {
             styleText={S.INFO_TEXT}
          />
          {this._renderQuandlLink(database_code, dataset_code)}
-         { _isDescr && <OpenClose2
+         { description && <OpenClose2
               caption="Description"
-              isClose={_isDescrClose}
+              isInitialOpen={_isShortDescr(description)}
               style={S.DESCR_OC}
+              fillOpen={C_DESCR_OPEN}
              >
                <InfoPart
                   text={description}

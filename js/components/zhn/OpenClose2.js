@@ -13,15 +13,16 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _isKeyEnter = _interopRequireDefault(require("./isKeyEnter"));
+
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
 var CL = {
   SHOW: 'show-popup',
-  NOT_SELECTED: 'not-selected'
+  NOT_SELECTED: 'not-selected zhn-oc'
 };
 var DF = {
   FILL_OPEN: _Color["default"].YELLOW,
-  //FILL_OPEN: C.TITLE,
   FILL_CLOSE: _Color["default"].BLANK
 };
 var S = {
@@ -30,26 +31,53 @@ var S = {
   },
   DIV_SVG: {
     display: 'inline-block',
-    width: '16px',
-    height: '16px',
-    marginLeft: '8px'
+    width: 16,
+    height: 16,
+    marginLeft: 8
   },
   SVG: {
     display: 'inline-block'
   },
   CAPTION: {
-    //color: C.SIREN,
     color: _Color["default"].TITLE,
-    paddingLeft: '4px',
+    paddingLeft: 4,
     verticalAlign: 'top',
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
     cursor: 'pointer'
+  },
+  BLOCK: {
+    display: 'block'
+  },
+  NONE: {
+    display: 'none'
   }
 };
-var PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
-var PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
+var PATH = {
+  OPEN: "M 2,14 L 14,14 14,2 2,14",
+  CLOSE: "M 2,2 L 14,8 2,14 2,2"
+};
+
+var _crStyleConf = function _crStyleConf(_ref) {
+  var isOpen = _ref.isOpen,
+      fillOpen = _ref.fillOpen,
+      fillClose = _ref.fillClose,
+      styleNotSelected = _ref.styleNotSelected;
+  return isOpen ? {
+    _pathV: PATH.OPEN,
+    _fillV: fillOpen,
+    _divStyle: S.BLOCK,
+    _classShow: CL.SHOW,
+    _styleNotSelected: null
+  } : {
+    _pathV: PATH.CLOSE,
+    _fillV: fillClose,
+    _divStyle: S.NONE,
+    _classShow: null,
+    _styleNotSelected: styleNotSelected
+  };
+};
 
 var OpenClose2 =
 /*#__PURE__*/
@@ -59,19 +87,25 @@ function (_Component) {
   function OpenClose2(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
-    _this._handleClickOpenClose = function () {
-      _this.setState(function (prev) {
+    _this._hClick = function () {
+      _this.setState(function (prevState) {
         return {
-          isOpen: !prev.isOpen
+          isOpen: !prevState.isOpen
         };
       });
     };
 
-    var isClose = props.isClose;
+    _this._hKeyDown = function (event) {
+      if ((0, _isKeyEnter["default"])(event)) {
+        _this._hClick();
+      }
+    };
+
+    var isInitialOpen = props.isInitialOpen;
     _this.state = {
-      isOpen: isClose ? false : true
+      isOpen: Boolean(isInitialOpen)
     };
     return _this;
   }
@@ -102,30 +136,28 @@ function (_Component) {
       onDragEnter: onDragEnter,
       onDragOver: onDragOver,
       onDragLeave: onDragLeave
-    } : undefined;
-
-    var _pathV, _fillV, _displayDivStyle, _classShow, _styleNotSelected;
-
-    if (isOpen) {
-      _pathV = PATH_OPEN;
-      _fillV = fillOpen;
-      _displayDivStyle = 'block';
-      _classShow = CL.SHOW;
-      _styleNotSelected = null;
-    } else {
-      _pathV = PATH_CLOSE;
-      _fillV = fillClose;
-      _displayDivStyle = 'none';
-      _classShow = null;
-      _styleNotSelected = styleNotSelected;
-    }
+    } : undefined,
+        _crStyleConf2 = _crStyleConf({
+      isOpen: isOpen,
+      fillOpen: fillOpen,
+      fillClose: fillClose,
+      styleNotSelected: styleNotSelected
+    }),
+        _pathV = _crStyleConf2._pathV,
+        _fillV = _crStyleConf2._fillV,
+        _divStyle = _crStyleConf2._divStyle,
+        _classShow = _crStyleConf2._classShow,
+        _styleNotSelected = _crStyleConf2._styleNotSelected;
 
     return _react["default"].createElement("div", {
       style: (0, _extends2["default"])({}, S.ROOT, {}, style)
     }, _react["default"].createElement("div", (0, _extends2["default"])({
+      role: "menuitem",
+      tabIndex: "0",
       className: CL.NOT_SELECTED,
       style: _styleNotSelected,
-      onClick: this._handleClickOpenClose
+      onClick: this._hClick,
+      onKeyDown: this._hKeyDown
     }, _dragOption), _react["default"].createElement("div", {
       style: S.DIV_SVG
     }, _react["default"].createElement("svg", {
@@ -144,9 +176,7 @@ function (_Component) {
       style: (0, _extends2["default"])({}, S.CAPTION, {}, styleCaption)
     }, caption)), _react["default"].createElement("div", {
       className: _classShow,
-      style: {
-        display: _displayDivStyle
-      }
+      style: _divStyle
     }, children));
   };
 

@@ -12,24 +12,34 @@ const {
 const WithLogicItem = {
 
   addItem(watchList, item){
-    const {caption, groupCaption, listCaption, config} = item
-        , {zhConfig} = config
-        , { title, subtitle, columnName, dataColumn, id, fromDate, seriaColumnNames } = zhConfig
-        , toGroup = findGroup(watchList, groupCaption)
-        , toList = findList(toGroup, listCaption)
-        , items = toList.items;
+    const {
+      caption,
+      groupCaption, listCaption,
+      config
+    } = item
+    , {zhConfig} = config
+    , {
+      id, title, subtitle,
+      columnName, dataColumn,
+      fromDate, seriaColumnNames,
+      itemConf
+    } = zhConfig
+    , toGroup = findGroup(watchList, groupCaption)
+    , toList = findList(toGroup, listCaption);
 
-    if ( isInArraySameCaption(items, caption) ){
+    if ( isInArraySameCaption(toList.items, caption) ){
       return crMsgItemExisted(caption, listCaption);
     }
-    if (items){
-      toList.items.push({
-         title, subtitle, caption, columnName, dataColumn, id, fromDate, seriaColumnNames
-      });
+    const _item = {
+      id, title, subtitle, caption,
+      columnName, dataColumn,
+      fromDate, seriaColumnNames,
+      itemConf
+    };
+    if (toList.items){
+      toList.items.push(_item);
     } else {
-      toList.items = [{
-        title, subtitle, caption, columnName, dataColumn, id, fromDate, seriaColumnNames
-      }];
+      toList.items = [_item];
     }
     return { isDone: true };
   },

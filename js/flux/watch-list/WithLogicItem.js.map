@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/flux/watch-list/WithLogicItem.js"],"names":["crMsgItemExisted","LogicFn","findGroup","findList","isInArraySameCaption","filter","WithLogicItem","addItem","watchList","item","caption","groupCaption","listCaption","config","zhConfig","title","subtitle","columnName","dataColumn","id","fromDate","seriaColumnNames","toGroup","toList","items","push","isDone","removeItem","groupFrom","listFrom"],"mappings":";;;;;;;AAAA;;IAGEA,gB,GAMEC,mB,CANFD,gB;IAEAE,S,GAIED,mB,CAJFC,S;IACAC,Q,GAGEF,mB,CAHFE,Q;IACAC,oB,GAEEH,mB,CAFFG,oB;IACAC,M,GACEJ,mB,CADFI,M;AAGF,IAAMC,aAAa,GAAG;AAEpBC,EAAAA,OAFoB,mBAEZC,SAFY,EAEDC,IAFC,EAEI;AAAA,QACfC,OADe,GAC+BD,IAD/B,CACfC,OADe;AAAA,QACNC,YADM,GAC+BF,IAD/B,CACNE,YADM;AAAA,QACQC,WADR,GAC+BH,IAD/B,CACQG,WADR;AAAA,QACqBC,MADrB,GAC+BJ,IAD/B,CACqBI,MADrB;AAAA,QAEfC,QAFe,GAEHD,MAFG,CAEfC,QAFe;AAAA,QAGdC,KAHc,GAG8DD,QAH9D,CAGdC,KAHc;AAAA,QAGPC,QAHO,GAG8DF,QAH9D,CAGPE,QAHO;AAAA,QAGGC,UAHH,GAG8DH,QAH9D,CAGGG,UAHH;AAAA,QAGeC,UAHf,GAG8DJ,QAH9D,CAGeI,UAHf;AAAA,QAG2BC,EAH3B,GAG8DL,QAH9D,CAG2BK,EAH3B;AAAA,QAG+BC,QAH/B,GAG8DN,QAH9D,CAG+BM,QAH/B;AAAA,QAGyCC,gBAHzC,GAG8DP,QAH9D,CAGyCO,gBAHzC;AAAA,QAIhBC,OAJgB,GAINpB,SAAS,CAACM,SAAD,EAAYG,YAAZ,CAJH;AAAA,QAKhBY,MALgB,GAKPpB,QAAQ,CAACmB,OAAD,EAAUV,WAAV,CALD;AAAA,QAMhBY,KANgB,GAMRD,MAAM,CAACC,KANC;;AAQtB,QAAKpB,oBAAoB,CAACoB,KAAD,EAAQd,OAAR,CAAzB,EAA2C;AACzC,aAAOV,gBAAgB,CAACU,OAAD,EAAUE,WAAV,CAAvB;AACD;;AACD,QAAIY,KAAJ,EAAU;AACRD,MAAAA,MAAM,CAACC,KAAP,CAAaC,IAAb,CAAkB;AACfV,QAAAA,KAAK,EAALA,KADe;AACRC,QAAAA,QAAQ,EAARA,QADQ;AACEN,QAAAA,OAAO,EAAPA,OADF;AACWO,QAAAA,UAAU,EAAVA,UADX;AACuBC,QAAAA,UAAU,EAAVA,UADvB;AACmCC,QAAAA,EAAE,EAAFA,EADnC;AACuCC,QAAAA,QAAQ,EAARA,QADvC;AACiDC,QAAAA,gBAAgB,EAAhBA;AADjD,OAAlB;AAGD,KAJD,MAIO;AACLE,MAAAA,MAAM,CAACC,KAAP,GAAe,CAAC;AACdT,QAAAA,KAAK,EAALA,KADc;AACPC,QAAAA,QAAQ,EAARA,QADO;AACGN,QAAAA,OAAO,EAAPA,OADH;AACYO,QAAAA,UAAU,EAAVA,UADZ;AACwBC,QAAAA,UAAU,EAAVA,UADxB;AACoCC,QAAAA,EAAE,EAAFA,EADpC;AACwCC,QAAAA,QAAQ,EAARA,QADxC;AACkDC,QAAAA,gBAAgB,EAAhBA;AADlD,OAAD,CAAf;AAGD;;AACD,WAAO;AAAEK,MAAAA,MAAM,EAAE;AAAV,KAAP;AACD,GAvBmB;AAyBpBC,EAAAA,UAzBoB,sBAyBTnB,SAzBS,QAyBuC;AAAA,QAApCG,YAAoC,QAApCA,YAAoC;AAAA,QAAtBC,WAAsB,QAAtBA,WAAsB;AAAA,QAATF,OAAS,QAATA,OAAS;AACzD,QAAMkB,SAAS,GAAG1B,SAAS,CAACM,SAAD,EAAYG,YAAZ,CAA3B;AAAA,QACMkB,QAAQ,GAAG1B,QAAQ,CAACyB,SAAD,EAAYhB,WAAZ,CADzB;AAGAiB,IAAAA,QAAQ,CAACL,KAAT,GAAiBnB,MAAM,CAACwB,QAAQ,CAACL,KAAV,EAAiBd,OAAjB,CAAvB;AACD;AA9BmB,CAAtB;eAkCeJ,a","sourcesContent":["import LogicFn from './LogicFn';\r\n\r\nconst {\r\n  crMsgItemExisted,\r\n\r\n  findGroup,\r\n  findList,\r\n  isInArraySameCaption,\r\n  filter\r\n} = LogicFn;\r\n\r\nconst WithLogicItem = {\r\n\r\n  addItem(watchList, item){\r\n    const {caption, groupCaption, listCaption, config} = item\r\n        , {zhConfig} = config\r\n        , { title, subtitle, columnName, dataColumn, id, fromDate, seriaColumnNames } = zhConfig\r\n        , toGroup = findGroup(watchList, groupCaption)\r\n        , toList = findList(toGroup, listCaption)\r\n        , items = toList.items;\r\n\r\n    if ( isInArraySameCaption(items, caption) ){\r\n      return crMsgItemExisted(caption, listCaption);\r\n    }\r\n    if (items){\r\n      toList.items.push({\r\n         title, subtitle, caption, columnName, dataColumn, id, fromDate, seriaColumnNames\r\n      });\r\n    } else {\r\n      toList.items = [{\r\n        title, subtitle, caption, columnName, dataColumn, id, fromDate, seriaColumnNames\r\n      }];\r\n    }\r\n    return { isDone: true };\r\n  },\r\n\r\n  removeItem(watchList, {groupCaption, listCaption, caption}){\r\n    const groupFrom = findGroup(watchList, groupCaption)\r\n        , listFrom = findList(groupFrom, listCaption);\r\n\r\n    listFrom.items = filter(listFrom.items, caption);\r\n  }\r\n\r\n};\r\n\r\nexport default WithLogicItem\r\n"],"file":"WithLogicItem.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/watch-list/WithLogicItem.js"
+ ],
+ "file": "../../../src/flux/watch-list/WithLogicItem.js",
+ "names": [
+  "crMsgItemExisted",
+  "LogicFn",
+  "findGroup",
+  "findList",
+  "isInArraySameCaption",
+  "filter",
+  "WithLogicItem",
+  "addItem",
+  "watchList",
+  "item",
+  "caption",
+  "groupCaption",
+  "listCaption",
+  "config",
+  "zhConfig",
+  "id",
+  "title",
+  "subtitle",
+  "columnName",
+  "dataColumn",
+  "fromDate",
+  "seriaColumnNames",
+  "itemConf",
+  "toGroup",
+  "toList",
+  "items",
+  "_item",
+  "push",
+  "isDone",
+  "removeItem",
+  "groupFrom",
+  "listFrom"
+ ],
+ "mappings": ";;;;;;;AAAA;;IAGEA,gB,GAMEC,mB,CANFD,gB;IAEAE,S,GAIED,mB,CAJFC,S;IACAC,Q,GAGEF,mB,CAHFE,Q;IACAC,oB,GAEEH,mB,CAFFG,oB;IACAC,M,GACEJ,mB,CADFI,M;AAGF,IAAMC,aAAa,GAAG;AAEpBC,EAAAA,OAFoB,mBAEZC,SAFY,EAEDC,IAFC,EAEI;AAAA,QAEpBC,OAFoB,GAKlBD,IALkB,CAEpBC,OAFoB;AAAA,QAGpBC,YAHoB,GAKlBF,IALkB,CAGpBE,YAHoB;AAAA,QAGNC,WAHM,GAKlBH,IALkB,CAGNG,WAHM;AAAA,QAIpBC,MAJoB,GAKlBJ,IALkB,CAIpBI,MAJoB;AAAA,QAMnBC,QANmB,GAMPD,MANO,CAMnBC,QANmB;AAAA,QAQpBC,EARoB,GAYlBD,QAZkB,CAQpBC,EARoB;AAAA,QAQhBC,KARgB,GAYlBF,QAZkB,CAQhBE,KARgB;AAAA,QAQTC,QARS,GAYlBH,QAZkB,CAQTG,QARS;AAAA,QASpBC,UAToB,GAYlBJ,QAZkB,CASpBI,UAToB;AAAA,QASRC,UATQ,GAYlBL,QAZkB,CASRK,UATQ;AAAA,QAUpBC,QAVoB,GAYlBN,QAZkB,CAUpBM,QAVoB;AAAA,QAUVC,gBAVU,GAYlBP,QAZkB,CAUVO,gBAVU;AAAA,QAWpBC,QAXoB,GAYlBR,QAZkB,CAWpBQ,QAXoB;AAAA,QAapBC,OAboB,GAaVrB,SAAS,CAACM,SAAD,EAAYG,YAAZ,CAbC;AAAA,QAcpBa,MAdoB,GAcXrB,QAAQ,CAACoB,OAAD,EAAUX,WAAV,CAdG;;AAgBtB,QAAKR,oBAAoB,CAACoB,MAAM,CAACC,KAAR,EAAef,OAAf,CAAzB,EAAkD;AAChD,aAAOV,gBAAgB,CAACU,OAAD,EAAUE,WAAV,CAAvB;AACD;;AACD,QAAMc,KAAK,GAAG;AACZX,MAAAA,EAAE,EAAFA,EADY;AACRC,MAAAA,KAAK,EAALA,KADQ;AACDC,MAAAA,QAAQ,EAARA,QADC;AACSP,MAAAA,OAAO,EAAPA,OADT;AAEZQ,MAAAA,UAAU,EAAVA,UAFY;AAEAC,MAAAA,UAAU,EAAVA,UAFA;AAGZC,MAAAA,QAAQ,EAARA,QAHY;AAGFC,MAAAA,gBAAgB,EAAhBA,gBAHE;AAIZC,MAAAA,QAAQ,EAARA;AAJY,KAAd;;AAMA,QAAIE,MAAM,CAACC,KAAX,EAAiB;AACfD,MAAAA,MAAM,CAACC,KAAP,CAAaE,IAAb,CAAkBD,KAAlB;AACD,KAFD,MAEO;AACLF,MAAAA,MAAM,CAACC,KAAP,GAAe,CAACC,KAAD,CAAf;AACD;;AACD,WAAO;AAAEE,MAAAA,MAAM,EAAE;AAAV,KAAP;AACD,GAjCmB;AAmCpBC,EAAAA,UAnCoB,sBAmCTrB,SAnCS,QAmCuC;AAAA,QAApCG,YAAoC,QAApCA,YAAoC;AAAA,QAAtBC,WAAsB,QAAtBA,WAAsB;AAAA,QAATF,OAAS,QAATA,OAAS;AACzD,QAAMoB,SAAS,GAAG5B,SAAS,CAACM,SAAD,EAAYG,YAAZ,CAA3B;AAAA,QACMoB,QAAQ,GAAG5B,QAAQ,CAAC2B,SAAD,EAAYlB,WAAZ,CADzB;AAGAmB,IAAAA,QAAQ,CAACN,KAAT,GAAiBpB,MAAM,CAAC0B,QAAQ,CAACN,KAAV,EAAiBf,OAAjB,CAAvB;AACD;AAxCmB,CAAtB;eA4CeJ,a"
+}

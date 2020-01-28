@@ -18,34 +18,33 @@ const STYLE = {
     lineHeight : 2
   },
   LIST_DIV : {
-    marginLeft : '8px',
-    paddingLeft : '12px',
-    //borderLeft : '1px solid yellow',
+    marginLeft : 8,
+    paddingLeft : 12,
+    lineHeight : 2,
     borderLeft : `1px solid ${C_LEFT_BORDER}`,
-    lineHeight : 2
   },
   LIST_DIV_NOT_SELECTED : {
+    marginRight : 2,
     borderBottom : '1px solid rgba(128, 192, 64, 0.6)',
-    marginRight : '2px'
   },
   ITEM_DIV : {
     position: 'relative',
-    paddingRight: '10px',
-    lineHeight : 1.4,
-    paddingTop : '5px',
-    paddingBottom: '5px'
+    paddingRight: 10,
+    paddingTop : 5,
+    paddingBottom: 5,
+    lineHeight : 1.4
   },
   ITEM_SPAN : {
     display: 'inline-block',
-    verticalAlign : 'middle',
     width: '100%',
     //maxWidth: '250px',
     //direction: "ltr",
+    verticalAlign : 'middle',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   }
-}
+};
 
 
 class MenuListType2 extends Component {
@@ -84,7 +83,6 @@ class MenuListType2 extends Component {
            fillOpen={C_FILL_OPEN}
            style={STYLE.LIST_DIV}
            styleNotSelected={STYLE.LIST_DIV_NOT_SELECTED}
-           isClose={true}
            caption={caption}
         >
           {this._renderLevel3(items, captionProp)}
@@ -109,7 +107,6 @@ class MenuListType2 extends Component {
           <OpenClose2
              key={index}
              style={STYLE.GROUP_DIV}
-             isClose={true}
              caption={caption}
           >
             {this._renderLevel2(lists, _captionProp, _itemsProp)}

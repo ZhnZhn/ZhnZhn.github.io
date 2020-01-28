@@ -19,15 +19,7 @@ var _ComponentActions = _interopRequireDefault(require("../../flux/actions/Compo
 
 var _WatchActions = _interopRequireDefault(require("../../flux/actions/WatchActions"));
 
-var _Browser = _interopRequireDefault(require("../zhn/Browser"));
-
-var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
-
-var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
-
-var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
-
-var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose2"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _EditBar = _interopRequireDefault(require("./EditBar"));
 
@@ -41,34 +33,37 @@ var CL = {
   SCROLL: 'scroll-container-y scroll-watch',
   WATCH_ITEM: 'row__type2-topic not-selected'
 };
-var C_FILL_OPEN = '#80c040';
-var DRAG = {
-  GROUP: 'GROUP',
-  LIST: 'LIST',
-  ITEM: 'ITEM'
-};
+var C_GROUP_OPEN = '#1b2836';
+var C_LIST_OPEN = '#80c040';
 var S = {
   BROWSER: {
     paddingRight: '0px'
   },
   BT_CIRCLE: {
-    marginLeft: '20px',
     position: 'relative',
-    top: '-2px'
+    top: -2,
+    marginLeft: 20
   },
   GROUP_DIV: {
     lineHeight: 2
   },
   LIST_DIV: {
-    marginLeft: '8px',
-    paddingLeft: '12px',
-    borderLeft: '1px solid yellow',
+    marginLeft: 8,
+    paddingLeft: 12,
+    borderLeft: "2px solid " + C_GROUP_OPEN,
     lineHeight: 2
   },
   ITEM_NOT_SELECTED: {
-    borderBottom: '1px solid rgba(128, 192, 64, 0.6)',
-    marginRight: '10px'
+    marginRight: 10,
+    borderBottom: '1px solid rgba(128, 192, 64, 0.6)'
   }
+};
+var DRAG = {
+  GROUP: 'GROUP',
+  C_GROUP_ENTER: C_GROUP_OPEN,
+  LIST: 'LIST',
+  C_LIST_ENTER: C_LIST_OPEN,
+  ITEM: 'ITEM'
 };
 var WatchBrowser = (_dec = _Decorators["default"].withDnDStyle, _dec2 = _Decorators["default"].withDnDGroup(DRAG, _WatchActions["default"]), _dec3 = _Decorators["default"].withDnDList(DRAG, _WatchActions["default"]), _dec4 = _Decorators["default"].withDnDItem(DRAG, _WatchActions["default"]), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = (_temp =
 /*#__PURE__*/
@@ -78,7 +73,7 @@ function (_Component) {
   function WatchBrowser(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._onStore = function (actionType, data) {
       var _this$props = _this.props,
@@ -118,20 +113,20 @@ function (_Component) {
       return watchList.groups.map(function (group, index) {
         var caption = group.caption,
             lists = group.lists;
-        return _react["default"].createElement(_OpenClose["default"], {
+        return _react["default"].createElement(_Comp["default"].OpenClose2, {
           key: index,
           style: S.GROUP_DIV,
+          fillOpen: C_GROUP_OPEN,
           caption: caption,
-          isClose: true,
           isDraggable: isModeEdit,
           option: {
             caption: caption
           },
-          onDragStart: _this._handlerDragStartGroup,
-          onDragEnter: _this._handlerDragEnterGroup,
-          onDragOver: _this._handlerDragOverGroup,
-          onDragLeave: _this._handlerDragLeaveGroup,
-          onDrop: _this._handlerDropGroup
+          onDragStart: _this._hDragStartGroup,
+          onDragEnter: _this._hDragEnterGroup,
+          onDragOver: _this._hDragOverGroup,
+          onDragLeave: _this._hDragLeaveGroup,
+          onDrop: _this._hDropGroup
         }, lists && _this._renderLists(lists, caption));
       });
     };
@@ -141,23 +136,22 @@ function (_Component) {
       return lists.map(function (list, index) {
         var caption = list.caption,
             items = list.items;
-        return _react["default"].createElement(_OpenClose["default"], {
+        return _react["default"].createElement(_Comp["default"].OpenClose2, {
           key: index,
-          fillOpen: C_FILL_OPEN,
+          fillOpen: C_LIST_OPEN,
           style: S.LIST_DIV,
           styleNotSelected: S.ITEM_NOT_SELECTED,
           caption: caption,
-          isClose: true,
           isDraggable: isModeEdit,
           option: {
             groupCaption: groupCaption,
             caption: caption
           },
-          onDragStart: _this._handlerDragStartList,
-          onDragEnter: _this._handlerDragEnterList,
-          onDragOver: _this._handlerDragOverList,
-          onDragLeave: _this._handlerDragLeaveList,
-          onDrop: _this._handlerDropList
+          onDragStart: _this._hDragStartList,
+          onDragEnter: _this._hDragEnterList,
+          onDragOver: _this._hDragOverList,
+          onDragLeave: _this._hDragLeaveList,
+          onDrop: _this._hDropList
         }, items && _this._renderItems(items, groupCaption, caption));
       });
     };
@@ -179,27 +173,27 @@ function (_Component) {
           },
           onClick: _this._handlerClickItem,
           onClose: _this._handlerRemoveItem,
-          onDragStart: _this._handlerDragStartItem,
-          onDragOver: _this._handlerDragOverItem,
-          onDragEnter: _this._handlerDragEnterItem,
-          onDragLeave: _this._handlerDragLeaveItem,
-          onDrop: _this._handlerDropItem
+          onDragStart: _this._hDragStartItem,
+          onDragOver: _this._hDragOverItem,
+          onDragEnter: _this._hDragEnterItem,
+          onDragLeave: _this._hDragLeaveItem,
+          onDrop: _this._hDropItem
         });
       });
     };
 
-    _this._handlerDragStartGroup = _this._handlerDragStartGroup.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDropGroup = _this._handlerDropGroup.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDragEnterGroup = _this._handlerDragEnterGroup.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDragLeaveGroup = _this._handlerDragLeaveGroup.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDragStartList = _this._handlerDragStartList.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDropList = _this._handlerDropList.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDragEnterList = _this._handlerDragEnterList.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDragLeaveList = _this._handlerDragLeaveList.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDragStartItem = _this._handlerDragStartItem.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDropItem = _this._handlerDropItem.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDragEnterItem = _this._handlerDragEnterItem.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._handlerDragLeaveItem = _this._handlerDragLeaveItem.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragStartGroup = _this._hDragStartGroup.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDropGroup = _this._hDropGroup.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragEnterGroup = _this._hDragEnterGroup.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragLeaveGroup = _this._hDragLeaveGroup.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragStartList = _this._hDragStartList.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDropList = _this._hDropList.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragEnterList = _this._hDragEnterList.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragLeaveList = _this._hDragLeaveList.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragStartItem = _this._hDragStartItem.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDropItem = _this._hDropItem.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragEnterItem = _this._hDragEnterItem.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._hDragLeaveItem = _this._hDragLeaveItem.bind((0, _assertThisInitialized2["default"])(_this));
     _this.state = {
       isShow: !!props.isInitShow,
       isModeEdit: false,
@@ -248,18 +242,18 @@ function (_Component) {
         watchList = _this$state.watchList,
         _captionEV = isModeEdit ? 'V' : 'E';
 
-    return _react["default"].createElement(_Browser["default"], {
+    return _react["default"].createElement(_Comp["default"].Browser, {
       isShow: isShow,
       style: S.BROWSER
-    }, _react["default"].createElement(_BrowserCaption["default"], {
+    }, _react["default"].createElement(_Comp["default"].BrowserCaption, {
       caption: caption,
       onClose: this._handlerHide
-    }, _react["default"].createElement(_ButtonCircle["default"], {
+    }, _react["default"].createElement(_Comp["default"].ButtonCircle, {
       caption: "S",
       title: "Save to LocalStorage",
       style: S.BT_CIRCLE,
       onClick: this._handlerSaveWatch
-    }), _react["default"].createElement(_ButtonCircle["default"], {
+    }), _react["default"].createElement(_Comp["default"].ButtonCircle, {
       caption: _captionEV,
       title: "Toggle Edit Mode: E/V",
       style: S.BT_CIRCLE,
@@ -268,7 +262,7 @@ function (_Component) {
       isShow: isModeEdit,
       onClickGroup: this._handlerEditGroup,
       onClickList: this._handlerEditList
-    }), _react["default"].createElement(_ScrollPane["default"], {
+    }), _react["default"].createElement(_Comp["default"].ScrollPane, {
       className: CL.SCROLL
     }, watchList && this._renderWatchList(watchList)));
   };

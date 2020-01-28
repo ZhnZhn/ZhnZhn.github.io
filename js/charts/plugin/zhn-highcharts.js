@@ -21,6 +21,8 @@ var _zhToggle2H = _interopRequireDefault(require("./zhToggle2H"));
 
 var _zhEnableDataLabels = _interopRequireDefault(require("./zhEnableDataLabels"));
 
+var _zhIsDaily = _interopRequireDefault(require("./zhIsDaily"));
+
 var _zhGetId = _interopRequireDefault(require("./zhGetId"));
 
 var _zhGetFromToDates = _interopRequireDefault(require("./zhGetFromToDates"));
@@ -39,6 +41,7 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
     zhToggleSeria: _zhToggleSeria["default"],
     zhToggle2H: _zhToggle2H["default"],
     zhEnableDataLabels: _zhEnableDataLabels["default"],
+    zhIsDaily: _zhIsDaily["default"],
     zhGetId: _zhGetId["default"],
     zhGetFromToDates: _zhGetFromToDates["default"],
     zhZoomX: _zhZoomX["default"]

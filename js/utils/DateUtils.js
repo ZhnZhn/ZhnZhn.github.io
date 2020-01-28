@@ -20,9 +20,13 @@ var _isLikelyQuarter = function _isLikelyQuarter(str) {
 
 var DateUtils = {
   //YYYY-MM-DD valid format
-  isYmd: function isYmd(str, nForecastDate) {
+  isYmd: function isYmd(str, nForecastDate, minYear) {
     if (nForecastDate === void 0) {
       nForecastDate = 0;
+    }
+
+    if (minYear === void 0) {
+      minYear = MIN_YEAR;
     }
 
     if (typeof str !== 'string') {
@@ -45,7 +49,7 @@ var DateUtils = {
 
     var thisYear = new Date().getFullYear(); // YEAR CHECK
 
-    if (m[1].length < 4 || m[1] < MIN_YEAR || m[1] > thisYear + nForecastDate) {
+    if (m[1].length < 4 || m[1] < minYear || m[1] > thisYear + nForecastDate) {
       return false;
     } // MONTH CHECK
 
@@ -104,17 +108,33 @@ var DateUtils = {
       return 0;
     }
   },
-  isDmy: function isDmy(str) {
+  dmyToMls: function dmyToMls(str) {
     var _str = str || '',
         _str$toString$split2 = _str.toString().split('-'),
-        _str$toString$split2$ = _str$toString$split2[0],
-        d = _str$toString$split2$ === void 0 ? 10 : _str$toString$split2$,
-        _str$toString$split2$2 = _str$toString$split2[1],
-        m = _str$toString$split2$2 === void 0 ? 10 : _str$toString$split2$2,
-        _str$toString$split2$3 = _str$toString$split2[2],
-        y = _str$toString$split2$3 === void 0 ? MIN_YEAR - 1 : _str$toString$split2$3;
+        d = _str$toString$split2[0],
+        m = _str$toString$split2[1],
+        y = _str$toString$split2[2];
 
-    return DateUtils.isYmd(y + "-" + m + "-" + d);
+    return Date.UTC(y, parseInt(m, 10) - 1, d);
+  },
+  isDmyPeriod: function isDmyPeriod(from, to) {
+    return DateUtils.dmyToMls(from) <= DateUtils.dmyToMls(to);
+  },
+  isDmy: function isDmy(str, minYear) {
+    if (minYear === void 0) {
+      minYear = MIN_YEAR;
+    }
+
+    var _str = str || '',
+        _str$toString$split3 = _str.toString().split('-'),
+        _str$toString$split3$ = _str$toString$split3[0],
+        d = _str$toString$split3$ === void 0 ? 10 : _str$toString$split3$,
+        _str$toString$split3$2 = _str$toString$split3[1],
+        m = _str$toString$split3$2 === void 0 ? 10 : _str$toString$split3$2,
+        _str$toString$split3$3 = _str$toString$split3[2],
+        y = _str$toString$split3$3 === void 0 ? minYear - 1 : _str$toString$split3$3;
+
+    return DateUtils.isYmd(y + "-" + m + "-" + d, 0, minYear);
   },
   ymdToUTC: function ymdToUTC(dateStr) {
     var _arr = dateStr.split('-'),

@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../../../src/components/watch-browser/decorators/withDnDStyle.js"],"names":["BORDER","BORDER_BOTTOM","BORDER_LEFT","ENTER_BORDER_LEFT_STYLE","ENTER_BORDER_LEFT_STYLE_DENY","sourcePermissions","nodeDragTarget","borderBottom","borderLeftEnter","dragStartWithDnDStyle","ev","permissions","persist","currentTarget","style","getPropertyValue","dropWithDnDStyle","styleTarget","styleSource","removeProperty","setProperty","dragEnterWithDnDStyle","sourceType","indexOf","dragLeaveWithDnDStyle","withDnDStyle","target","Object","assign","prototype"],"mappings":";;;;AACA,IAAMA,MAAM,GAAG,QAAf,CAAwB;AAAxB;AAAA,IACMC,aAAa,GAAG,eADtB,CACsC;AADtC;AAAA,IAEMC,WAAW,GAAG,aAFpB,CAEkC;AAC9B;AAHJ;AAAA,IAIMC,uBAAuB,GAAG,iBAJhC;AAAA,IAKMC,4BAA4B,GAAG,eALrC;AAOA,IAAIC,iBAAJ,EACIC,cADJ,EAEIC,YAFJ,EAGIC,eAHJ;;AAKA,IAAMC,qBAAqB,GAAG,SAAxBA,qBAAwB,CAASC,EAAT,EAAaC,WAAb,EAAyB;AACrDD,EAAAA,EAAE,CAACE,OAAH;AACAN,EAAAA,cAAc,GAAGI,EAAE,CAACG,aAApB;AAEA,MAAMC,KAAK,GAAGJ,EAAE,CAACG,aAAH,CAAiBC,KAA/B;AACAP,EAAAA,YAAY,GAAGO,KAAK,CAACC,gBAAN,CAAuBd,aAAvB,CAAf,CALqD,CAMrD;;AAEAI,EAAAA,iBAAiB,GAAGM,WAApB;AACD,CATD;;AAUA,IAAMK,gBAAgB,GAAG,SAAnBA,gBAAmB,CAASN,EAAT,EAAY;AACnC,MAAMO,WAAW,GAAGX,cAAc,CAACQ,KAAnC;AAAA,MACMI,WAAW,GAAGR,EAAE,CAACG,aAAH,CAAiBC,KADrC;AAEAI,EAAAA,WAAW,CAACC,cAAZ,CAA2BjB,WAA3B;AACAe,EAAAA,WAAW,CAACE,cAAZ,CAA2BnB,MAA3B;AACAiB,EAAAA,WAAW,CAACG,WAAZ,CAAwBnB,aAAxB,EAAuCM,YAAvC;AACD,CAND;;AAOA,IAAMc,qBAAqB,GAAG,SAAxBA,qBAAwB,CAASX,EAAT,EAAaY,UAAb,EAAwB;AACpD,MAAMR,KAAK,GAAGJ,EAAE,CAACG,aAAH,CAAiBC,KAA/B;AACAN,EAAAA,eAAe,GAAGM,KAAK,CAACC,gBAAN,CAAuBb,WAAvB,CAAlB;;AAEA,MAAIG,iBAAiB,CAACkB,OAAlB,CAA0BD,UAA1B,MAA0C,CAAC,CAA/C,EAAkD;AAChDR,IAAAA,KAAK,CAACM,WAAN,CAAkBlB,WAAlB,EAA+BC,uBAA/B;AACD,GAFD,MAEO;AACLW,IAAAA,KAAK,CAACM,WAAN,CAAkBlB,WAAlB,EAA+BE,4BAA/B;AACD;AACF,CATD;;AAUA,IAAMoB,qBAAqB,GAAG,SAAxBA,qBAAwB,CAASd,EAAT,EAAY;AACxC,MAAMI,KAAK,GAAGJ,EAAE,CAACG,aAAH,CAAiBC,KAA/B;AACAA,EAAAA,KAAK,CAACK,cAAN,CAAqBjB,WAArB;AACAY,EAAAA,KAAK,CAACM,WAAN,CAAkBlB,WAAlB,EAA+BM,eAA/B;AACD,CAJD;;AAMA,IAAMiB,YAAY,GAAG,SAAfA,YAAe,CAACC,MAAD,EAAY;AAC/BC,EAAAA,MAAM,CAACC,MAAP,CAAcF,MAAM,CAACG,SAArB,EAAgC;AAC9BpB,IAAAA,qBAAqB,EAAEA,qBADO;AAE9BO,IAAAA,gBAAgB,EAAEA,gBAFY;AAG9BK,IAAAA,qBAAqB,EAAEA,qBAHO;AAI9BG,IAAAA,qBAAqB,EAAEA;AAJO,GAAhC;AAMD,CAPD;;eASeC,Y","sourcesContent":["\r\nconst BORDER = 'border' // dragStart\r\n    , BORDER_BOTTOM = 'border-bottom' // backup\r\n    , BORDER_LEFT = 'border-left' // dragEnter\r\n    //, START_BORDER_STYLE = \"1px solid yellow\"\r\n    , ENTER_BORDER_LEFT_STYLE = \"4px solid green\"\r\n    , ENTER_BORDER_LEFT_STYLE_DENY = \"4px solid red\";\r\n\r\nlet sourcePermissions\r\n  , nodeDragTarget\r\n  , borderBottom\r\n  , borderLeftEnter;\r\n\r\nconst dragStartWithDnDStyle = function(ev, permissions){\r\n  ev.persist()\r\n  nodeDragTarget = ev.currentTarget\r\n\r\n  const style = ev.currentTarget.style;\r\n  borderBottom = style.getPropertyValue(BORDER_BOTTOM)\r\n  //style.setProperty(BORDER, START_BORDER_STYLE);\r\n\r\n  sourcePermissions = permissions\r\n};\r\nconst dropWithDnDStyle = function(ev){\r\n  const styleTarget = nodeDragTarget.style\r\n      , styleSource = ev.currentTarget.style;\r\n  styleSource.removeProperty(BORDER_LEFT)\r\n  styleTarget.removeProperty(BORDER)\r\n  styleTarget.setProperty(BORDER_BOTTOM, borderBottom)\r\n};\r\nconst dragEnterWithDnDStyle = function(ev, sourceType){\r\n  const style = ev.currentTarget.style;\r\n  borderLeftEnter = style.getPropertyValue(BORDER_LEFT)\r\n\r\n  if (sourcePermissions.indexOf(sourceType) !== -1) {\r\n    style.setProperty(BORDER_LEFT, ENTER_BORDER_LEFT_STYLE)\r\n  } else {\r\n    style.setProperty(BORDER_LEFT, ENTER_BORDER_LEFT_STYLE_DENY)\r\n  }\r\n};\r\nconst dragLeaveWithDnDStyle = function(ev){\r\n  const style = ev.currentTarget.style;\r\n  style.removeProperty(BORDER_LEFT)\r\n  style.setProperty(BORDER_LEFT, borderLeftEnter)\r\n};\r\n\r\nconst withDnDStyle = (target) => {\r\n  Object.assign(target.prototype, {\r\n    dragStartWithDnDStyle: dragStartWithDnDStyle,\r\n    dropWithDnDStyle: dropWithDnDStyle,\r\n    dragEnterWithDnDStyle: dragEnterWithDnDStyle,\r\n    dragLeaveWithDnDStyle: dragLeaveWithDnDStyle,\r\n  })\r\n}\r\n\r\nexport default withDnDStyle\r\n"],"file":"withDnDStyle.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/watch-browser/decorators/withDnDStyle.js"
+ ],
+ "file": "../../../../src/components/watch-browser/decorators/withDnDStyle.js",
+ "names": [
+  "BORDER",
+  "BORDER_BOTTOM",
+  "BORDER_LEFT",
+  "ENTER_BORDER_LEFT_STYLE_DENY",
+  "sourcePermissions",
+  "nodeDragTarget",
+  "borderBottom",
+  "borderLeftEnter",
+  "_crEnterBorderLeftStyle",
+  "borderColor",
+  "dragStartWithDnDStyle",
+  "ev",
+  "permissions",
+  "persist",
+  "currentTarget",
+  "style",
+  "getPropertyValue",
+  "dropWithDnDStyle",
+  "styleTarget",
+  "styleSource",
+  "removeProperty",
+  "setProperty",
+  "dragEnterWithDnDStyle",
+  "sourceType",
+  "indexOf",
+  "dragLeaveWithDnDStyle",
+  "withDnDStyle",
+  "target",
+  "Object",
+  "assign",
+  "prototype"
+ ],
+ "mappings": ";;;;AACA,IAAMA,MAAM,GAAG,QAAf,CAAwB;AAAxB;AAAA,IACMC,aAAa,GAAG,eADtB,CACsC;AADtC;AAAA,IAEMC,WAAW,GAAG,aAFpB,CAEkC;AAC9B;AACA;AACA;AALJ;AAAA,IAMMC,4BAA4B,GAAG,eANrC;AAQA,IAAIC,iBAAJ,EACIC,cADJ,EAEIC,YAFJ,EAGIC,eAHJ;;AAKA,IAAMC,uBAAuB,GAC3B,SADIA,uBACJ,CAACC,WAAD;AAAA,MAACA,WAAD;AAACA,IAAAA,WAAD,GAAa,OAAb;AAAA;;AAAA,wBAAsCA,WAAtC;AAAA,CADF;;AAGA,IAAMC,qBAAqB,GAAG,SAAxBA,qBAAwB,CAASC,EAAT,EAAaC,WAAb,EAAyB;AACrDD,EAAAA,EAAE,CAACE,OAAH;AACAR,EAAAA,cAAc,GAAGM,EAAE,CAACG,aAApB;AAEA,MAAMC,KAAK,GAAGJ,EAAE,CAACG,aAAH,CAAiBC,KAA/B;AACAT,EAAAA,YAAY,GAAGS,KAAK,CAACC,gBAAN,CAAuBf,aAAvB,CAAf,CALqD,CAMrD;;AAEAG,EAAAA,iBAAiB,GAAGQ,WAApB;AACD,CATD;;AAUA,IAAMK,gBAAgB,GAAG,SAAnBA,gBAAmB,CAASN,EAAT,EAAY;AACnC,MAAMO,WAAW,GAAGb,cAAc,CAACU,KAAnC;AAAA,MACMI,WAAW,GAAGR,EAAE,CAACG,aAAH,CAAiBC,KADrC;AAEAI,EAAAA,WAAW,CAACC,cAAZ,CAA2BlB,WAA3B;AACAgB,EAAAA,WAAW,CAACE,cAAZ,CAA2BpB,MAA3B;AACAkB,EAAAA,WAAW,CAACG,WAAZ,CAAwBpB,aAAxB,EAAuCK,YAAvC;AACD,CAND;;AAOA,IAAMgB,qBAAqB,GAAG,SAAxBA,qBAAwB,CAASX,EAAT,EAAaY,UAAb,EAAyBd,WAAzB,EAAqC;AACjE,MAAMM,KAAK,GAAGJ,EAAE,CAACG,aAAH,CAAiBC,KAA/B;AACAR,EAAAA,eAAe,GAAGQ,KAAK,CAACC,gBAAN,CAAuBd,WAAvB,CAAlB;;AAEA,MAAIE,iBAAiB,CAACoB,OAAlB,CAA0BD,UAA1B,MAA0C,CAAC,CAA/C,EAAkD;AAChD;AACAR,IAAAA,KAAK,CAACM,WAAN,CAAkBnB,WAAlB,EAA+BM,uBAAuB,CAACC,WAAD,CAAtD;AACD,GAHD,MAGO;AACLM,IAAAA,KAAK,CAACM,WAAN,CAAkBnB,WAAlB,EAA+BC,4BAA/B;AACD;AACF,CAVD;;AAWA,IAAMsB,qBAAqB,GAAG,SAAxBA,qBAAwB,CAASd,EAAT,EAAY;AACxC,MAAMI,KAAK,GAAGJ,EAAE,CAACG,aAAH,CAAiBC,KAA/B;AACAA,EAAAA,KAAK,CAACK,cAAN,CAAqBlB,WAArB;AACAa,EAAAA,KAAK,CAACM,WAAN,CAAkBnB,WAAlB,EAA+BK,eAA/B;AACD,CAJD;;AAMA,IAAMmB,YAAY,GAAG,SAAfA,YAAe,CAACC,MAAD,EAAY;AAC/BC,EAAAA,MAAM,CAACC,MAAP,CAAcF,MAAM,CAACG,SAArB,EAAgC;AAC9BpB,IAAAA,qBAAqB,EAAEA,qBADO;AAE9BO,IAAAA,gBAAgB,EAAEA,gBAFY;AAG9BK,IAAAA,qBAAqB,EAAEA,qBAHO;AAI9BG,IAAAA,qBAAqB,EAAEA;AAJO,GAAhC;AAMD,CAPD;;eASeC,Y"
+}

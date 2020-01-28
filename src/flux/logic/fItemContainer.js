@@ -25,11 +25,10 @@ const _crCaption = (dialogConf, browserType) => {
 };
 
 const fItemContainer = {
-  crItemContainerEl: ({ browserType, dialogConf={}, store }) => {    
-    const Comp = dialogConf.chartContainerComp
-      || ChartContainer
-    , _type = dialogConf.type
-      || BrowserConfig[browserType].chartContainerType
+  crItemContainerEl: ({ browserType, dialogConf, store }) => {
+    const { type, chartContainerComp, contWidth } = dialogConf || {}
+    , Comp = chartContainerComp || ChartContainer
+    , _type = type || BrowserConfig[browserType].chartContainerType
     , _caption = _crCaption(dialogConf, browserType);
 
     return React.createElement(Comp, {
@@ -37,7 +36,7 @@ const fItemContainer = {
       store: store,
       caption: _caption,
       chartType: _type,
-      browserType: browserType,
+      browserType, contWidth,
       onSetActive: CA.setActiveContainer,
       onCloseContainer: CA.closeChartContainer
         .bind(null, _type, browserType),

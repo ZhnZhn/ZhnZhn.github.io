@@ -34,6 +34,26 @@ var actionCompleted = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
     actionFailed = _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
     forActionType = _WatchActions.WatchActionTypes.ADD_ITEM;
 var notSelected = _MsgWatch["default"].notSelected;
+var S = {
+  DIALOG: {
+    width: 300
+  },
+  ITEM_CAPTION: {
+    width: 100
+  },
+  CAPTION: {
+    width: 70
+  },
+  ITEM_TEXT: {
+    display: 'inline-block',
+    maxWidth: 200,
+    height: 32,
+    verticalAlign: 'middle',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
+  }
+};
+var SELECT_WIDTH = "216";
 
 var AddToWatchDialog = (0, _withValidationLoad["default"])(_class = (_temp =
 /*#__PURE__*/
@@ -215,21 +235,28 @@ function (_Component) {
         listOptions = _this$state.listOptions,
         validationMessages = _this$state.validationMessages;
     return _react["default"].createElement(_ModalDialog["default"], {
+      style: S.DIALOG,
       caption: "Add To Watch List",
       isShow: isShow,
       commandButtons: this._commandButtons,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      caption: "Group:",
+    }, _react["default"].createElement(_DialogCell["default"].Row.Text, {
+      styleCaption: S.CAPTION,
+      styleText: S.ITEM_TEXT,
+      caption: "Item:",
+      text: caption
+    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+      caption: "Group",
+      captionStyle: S.CAPTION,
+      width: SELECT_WIDTH,
       options: groupOptions,
       onSelect: this._handleSelectGroup
     }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      caption: "List:",
+      caption: "List",
+      captionStyle: S.CAPTION,
+      width: SELECT_WIDTH,
       onSelect: this._handleSelectList,
       options: listOptions
-    }), _react["default"].createElement(_DialogCell["default"].Row.Text, {
-      caption: "Item:",
-      text: caption
     }), _react["default"].createElement(_ValidationMessages["default"], {
       validationMessages: validationMessages
     }));

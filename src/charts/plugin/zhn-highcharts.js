@@ -6,6 +6,7 @@ import zhToggleSeria from './zhToggleSeria'
 import zhTogglePlotLines from './zhTogglePlotLines'
 import zhToggle2H from './zhToggle2H'
 import zhEnableDataLabels from './zhEnableDataLabels'
+import zhIsDaily from './zhIsDaily'
 import zhGetId from './zhGetId'
 import zhGetFromToDates from './zhGetFromToDates'
 import zhZoomX from './zhZoomX'
@@ -21,6 +22,7 @@ const HighchartsZhn = (Highcharts) => {
     zhToggleSeria,
     zhToggle2H,
     zhEnableDataLabels,
+    zhIsDaily,
     zhGetId,
     zhGetFromToDates,
     zhZoomX

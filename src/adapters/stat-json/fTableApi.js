@@ -15,14 +15,22 @@ const _checkTop = (isTop, strN, arr) => {
 
 const fTableApi = (ROOT_URL) => ({
   getRequestUrl(option){
-    const { proxy='', metric, dfId } = option
-    , id = dfId || metric;
-    return `${proxy}${ROOT_URL}/${id}`;
+    const { proxy='', metric, dfId, url } = option
+    , id = dfId || metric;    
+    if (url) { return url; }
+    return (option.url = `${proxy}${ROOT_URL}/${id}`);
   },
 
   crOptionFetch(option){
-    const { items=[], isTop12, isTop6 } = option
-        , arrQuery = [];
+    const {
+      items=[],
+      isTop12, isTop6,
+      optionFetch
+    } = option
+    , arrQuery = [];
+
+    if (optionFetch) { return optionFetch; }
+
     items.forEach(item => {
        const { slice } = item || {};
        for(const propName in slice){
@@ -41,7 +49,7 @@ const fTableApi = (ROOT_URL) => ({
     _checkTop(isTop12, '12', arrQuery)
     _checkTop(isTop6, '6', arrQuery)
 
-    return {
+    return (option.optionFetch = {
       method: 'POST',
       body: JSON.stringify({
          query: arrQuery,
@@ -49,7 +57,7 @@ const fTableApi = (ROOT_URL) => ({
             format: "json-stat"
          }
       })
-    };
+    });
   },
 
   checkResponse(){

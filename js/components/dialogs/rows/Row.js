@@ -19,9 +19,9 @@ var S = {
   },
   LABEL_SPAN: {
     display: 'inline-block',
-    color: '#1B75BB',
-    width: '100px',
-    paddingRight: '5px',
+    color: '#1b75bb',
+    width: 100,
+    paddingRight: 5,
     textAlign: 'right',
     fontSize: '16px'
   }
@@ -38,12 +38,16 @@ var Plain = function Plain(_ref) {
 var Text = function Text(_ref2) {
   var caption = _ref2.caption,
       text = _ref2.text,
-      styleRoot = _ref2.styleRoot;
+      styleRoot = _ref2.styleRoot,
+      styleCaption = _ref2.styleCaption,
+      styleText = _ref2.styleText;
   return _react["default"].createElement("div", {
     style: (0, _extends2["default"])({}, S.ROOT_DIV, {}, styleRoot)
   }, _react["default"].createElement("span", {
-    style: S.LABEL_SPAN
-  }, caption), _react["default"].createElement("span", null, text));
+    style: (0, _extends2["default"])({}, S.LABEL_SPAN, {}, styleCaption)
+  }, caption), _react["default"].createElement("span", {
+    style: styleText
+  }, text));
 };
 
 var _default = {

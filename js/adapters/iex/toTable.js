@@ -5,9 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _toTableFn = _interopRequireDefault(require("../toTableFn"));
 
-var roundBy = _AdapterFn["default"].roundBy;
+var crRows = _toTableFn["default"].crRows;
 var HEADERS = [{
   name: 'Symbol',
   pn: 'symbol',
@@ -52,32 +52,10 @@ var _crTitle = function _crTitle(title, json) {
   return title + " " + _suffix;
 };
 
-var _getCellValue = function _getCellValue(r, h) {
-  var pn = h.pn,
-      isToN = h.isToN,
-      isToFixed = h.isToFixed;
-  return isToN ? isToFixed ? roundBy(r[pn], 2) : parseFloat(r[pn]) : r[pn];
-};
-
-var _toRows = function _toRows(headers, rows) {
-  if (rows === void 0) {
-    rows = [];
-  }
-
-  var _rows = rows.map(function (r) {
-    headers.forEach(function (h) {
-      r[h.pn] = _getCellValue(r, h);
-    });
-    return r;
-  });
-
-  return _rows;
-};
-
 var toTable = {
   crKey: function crKey(option) {
     option.key = option.value;
-    return option.value;
+    return option.key;
   },
   toConfig: function toConfig(json, option) {
     var title = option.title,
@@ -93,7 +71,7 @@ var toTable = {
         valueToHref
       },
       */
-      rows: _toRows(HEADERS, json),
+      rows: crRows(HEADERS, json),
       zhCompType: 'TABLE',
       zhConfig: {
         id: key,

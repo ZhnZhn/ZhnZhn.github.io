@@ -26,11 +26,15 @@ const EuroStatApi = {
 
   getRequestUrl(option){
     _addPropTo(option)
-    return _isRouteUrlN(option)
+    if (option.url) {
+      return option.url;
+    }
+    const _url = _isRouteUrlN(option)
       ? api.crUrlN(option)
       : option.dfParams
           ? api.crUrlWithParams(option)
           : api.crUrl(option);
+    return (option.url = _url);
   },
 
   checkResponse(json, option, status) {

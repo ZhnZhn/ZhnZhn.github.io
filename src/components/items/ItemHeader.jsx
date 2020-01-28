@@ -24,8 +24,7 @@ const S = {
     boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
   },
   CAPTION: {
-    display: 'inline-block',
-    width: 380,
+    display: 'inline-block',        
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'clip',

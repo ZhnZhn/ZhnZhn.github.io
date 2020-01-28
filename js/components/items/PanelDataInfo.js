@@ -20,6 +20,7 @@ var _InfoPart = _interopRequireDefault(require("../zhn/InfoPart"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose2"));
 
 var CL_DESCR = 'info__descr';
+var C_DESCR_OPEN = '#1b2836';
 var S = {
   ROOT_SHOW: {
     position: 'relative',
@@ -69,6 +70,10 @@ var _isWithoutLink = function _isWithoutLink(item) {
       _item$id = _item.id,
       id = _item$id === void 0 ? '' : _item$id;
   return id.split('/')[0] === 'LSE' ? true : false;
+};
+
+var _isShortDescr = function _isShortDescr(descr) {
+  return descr && descr.length < 200;
 };
 
 var PanelDataInfo =
@@ -130,9 +135,7 @@ function (_Component) {
         description = info.description,
         item = zhInfo.item,
         linkFn = zhInfo.linkFn,
-        _rootStyle = isShow ? S.ROOT_SHOW : S.ROOT_HIDE,
-        _isDescr = description ? true : false,
-        _isDescrClose = _isDescr && description.length > 200 ? true : false;
+        _rootStyle = isShow ? S.ROOT_SHOW : S.ROOT_HIDE;
 
     return _react["default"].createElement("div", {
       style: _rootStyle
@@ -158,10 +161,11 @@ function (_Component) {
       text: frequency,
       styleCaption: S.INFO_CAPTION,
       styleText: S.INFO_TEXT
-    }), this._renderQuandlLink(database_code, dataset_code), _isDescr && _react["default"].createElement(_OpenClose["default"], {
+    }), this._renderQuandlLink(database_code, dataset_code), description && _react["default"].createElement(_OpenClose["default"], {
       caption: "Description",
-      isClose: _isDescrClose,
-      style: S.DESCR_OC
+      isInitialOpen: _isShortDescr(description),
+      style: S.DESCR_OC,
+      fillOpen: C_DESCR_OPEN
     }, _react["default"].createElement(_InfoPart["default"], {
       text: description,
       isHtml: true,
