@@ -43,14 +43,6 @@ var S = {
   },
   CAPTION: {
     width: 70
-  },
-  ITEM_TEXT: {
-    display: 'inline-block',
-    maxWidth: 200,
-    height: 32,
-    verticalAlign: 'middle',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
   }
 };
 var SELECT_WIDTH = "216";
@@ -242,7 +234,6 @@ function (_Component) {
       onClose: this._handleClose
     }, _react["default"].createElement(_DialogCell["default"].Row.Text, {
       styleCaption: S.CAPTION,
-      styleText: S.ITEM_TEXT,
       caption: "Item:",
       text: caption
     }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {

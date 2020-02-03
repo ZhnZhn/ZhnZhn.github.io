@@ -24,6 +24,14 @@ var S = {
     paddingRight: 5,
     textAlign: 'right',
     fontSize: '16px'
+  },
+  TEXT: {
+    display: 'inline-block',
+    maxWidth: 200,
+    height: 32,
+    verticalAlign: 'middle',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
   }
 };
 
@@ -46,7 +54,7 @@ var Text = function Text(_ref2) {
   }, _react["default"].createElement("span", {
     style: (0, _extends2["default"])({}, S.LABEL_SPAN, {}, styleCaption)
   }, caption), _react["default"].createElement("span", {
-    style: styleText
+    style: (0, _extends2["default"])({}, S.TEXT, {}, styleText)
   }, text));
 };
 

@@ -15,6 +15,14 @@ const S = {
     paddingRight: 5,
     textAlign: 'right',
     fontSize: '16px'
+  },
+  TEXT: {
+    display: 'inline-block',
+    maxWidth: 200,
+    height: 32,
+    verticalAlign: 'middle',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
   }
 };
 
@@ -33,7 +41,7 @@ const Text = ({
       <span style={{ ...S.LABEL_SPAN, ...styleCaption }}>
         {caption}
       </span>
-      <span style={styleText}>
+      <span style={{ ...S.TEXT, ...styleText }}>
         {text}
       </span>
     </div>

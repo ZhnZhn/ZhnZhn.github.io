@@ -23,7 +23,11 @@ var _zhEnableDataLabels = _interopRequireDefault(require("./zhEnableDataLabels")
 
 var _zhIsDaily = _interopRequireDefault(require("./zhIsDaily"));
 
+var _zhIsAnimation = _interopRequireDefault(require("./zhIsAnimation"));
+
 var _zhGetId = _interopRequireDefault(require("./zhGetId"));
+
+var _zhGetDetailCharts = _interopRequireDefault(require("./zhGetDetailCharts"));
 
 var _zhGetFromToDates = _interopRequireDefault(require("./zhGetFromToDates"));
 
@@ -42,7 +46,9 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
     zhToggle2H: _zhToggle2H["default"],
     zhEnableDataLabels: _zhEnableDataLabels["default"],
     zhIsDaily: _zhIsDaily["default"],
+    zhIsAnimation: _zhIsAnimation["default"],
     zhGetId: _zhGetId["default"],
+    zhGetDetailCharts: _zhGetDetailCharts["default"],
     zhGetFromToDates: _zhGetFromToDates["default"],
     zhZoomX: _zhZoomX["default"]
   });

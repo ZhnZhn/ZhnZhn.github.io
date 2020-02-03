@@ -12,6 +12,8 @@ const MAX_KEY = 9;
 class PaneApiKey extends Component {
   /*
   static propTypes = {
+    isShow: PropTypes.bool,
+    isSelected: PropTypes.bool,
     titleStyle: PropTypes.object,
     btStyle: PropTypes.object,
     data: PropTypes.object,
@@ -58,13 +60,21 @@ class PaneApiKey extends Component {
   _ref8 = n => this.iComp8 = n
 
   render(){
-    const { titleStyle, btStyle, onClose } = this.props;
+    const {
+      isShow, isSelected,
+      titleStyle, btStyle,
+      onClose
+    } = this.props;
+    if (!(isShow && isSelected)) {
+      return null;
+    }
     return (
       <div>
         <RowSecret
            ref={ this._ref1}
            titleStyle={titleStyle}
            title="Alpha:"
+           name="alpha-vantage"
            placeholder="Alpha Vantage API Key"
            onEnter={this._setKey1}
         />
@@ -72,6 +82,7 @@ class PaneApiKey extends Component {
            ref={this._ref2}
            titleStyle={titleStyle}
            title="Barchar:"
+           name="barchart"
            placeholder="Barchar API Key"
            onEnter={this._setKey2}
         />
@@ -79,6 +90,7 @@ class PaneApiKey extends Component {
            ref={this._ref3}
            titleStyle={titleStyle}
            title="BEA:"
+           name="bea"
            placeholder="BEA API Key"
            maxLength="36"
            onEnter={this._setKey3}
@@ -87,6 +99,7 @@ class PaneApiKey extends Component {
            ref={this._ref4}
            titleStyle={titleStyle}
            title="EIA:"
+           name="eia"
            placeholder="EIA API Key"
            maxLength="32"
            onEnter={this._setKey4}
@@ -95,6 +108,7 @@ class PaneApiKey extends Component {
            ref={this._ref5}
            titleStyle={titleStyle}
            title="Intrinio:"
+           name="intrinio"
            placeholder="Intrinio API Key"
            maxLength="32"
            onEnter={this._setKey5}
@@ -103,6 +117,7 @@ class PaneApiKey extends Component {
            ref={this._ref6}
            titleStyle={titleStyle}
            title="IEX:"
+           name="iex-cloud"
            placeholder="IEX Cloud API Key"
            maxLength="35"
            onEnter={this._setKey6}
@@ -111,6 +126,7 @@ class PaneApiKey extends Component {
            ref={this._ref7}
            titleStyle={titleStyle}
            title="Quandl:"
+           name="quandl"
            placeholder="Quandl API Key"
            onEnter={this._setKey7}
         />
@@ -118,6 +134,7 @@ class PaneApiKey extends Component {
            ref={this._ref8}
            titleStyle={titleStyle}
            title="WTD:"
+           name="wtd"
            placeholder="World Trading Data API Key"
            maxLength="60"
            onEnter={this._setKey8}

@@ -1,74 +1,77 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-const styles = {
-  ulStyle : {
-    listStyle : 'outside none none',
-    marginTop: '10px',
-    marginLeft: '10px',
-    marginRight: '5px',
-    borderBottom : '2px solid rgba(164, 135, 212, 1)'
+const CL = "tabpane__tabs";
+
+const S = {
+  UL: {
+    listStyle: 'outside none none',
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 5,
+    borderBottom: '2px solid rgba(164, 135, 212, 1)'
+  },
+  BLOCK: {
+    display: 'block',
+    width: "100%",
+    height: "100%"
+  },
+  NONE: {
+    display: 'none'
+  },
+  DIV: {
+    width: "100%",
+    height: "100%"
   }
 };
 
 class TabPane extends Component {
   /*
   static propTypes = {
-    isUpdateInit: PropTypes.bool,
     width: PropTypes.string,
     height: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.node)
   }
   */
-
-
   constructor(props){
     super(props);
 
-    this.isUpdateInit = props.isUpdateInit
-
-    const components = props.children.map((tab, index) => {
-       return  React.cloneElement(tab.props.children, { key : 'comp' + index });
-    })
     this.state = {
-      selectedTabIndex : 0,
-      components
+      selectedTabIndex: 0
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps){
-    if (this.isUpdateInit && this.props !== nextProps){
-      const components = nextProps.children.map((tab, index) => {
-         return  React.cloneElement(tab.props.children, { key : 'comp' + index });
-      })
-      this.setState({ components })
-    }
-  }
-
-  _handleClickTab = (index) => {
-    this.setState({selectedTabIndex : index});
+  _hClickTab = (index) => {
+    this.setState({ selectedTabIndex: index });
   }
 
   _renderTabs = (children) => {
-       const {selectedTabIndex} = this.state;
-       return children.map((tab, index) => {
-          const isSelected = (index === selectedTabIndex) ? true : false;
-          return React.cloneElement(tab, { key : index, onClick : this._handleClickTab.bind(null, index), isSelected })
-       })
+     const { selectedTabIndex } = this.state;
+     return children.map((tab, index) => {
+        const isSelected = (index === selectedTabIndex);
+        return React.cloneElement(tab, {
+          key : index,
+          onClick : this._hClickTab.bind(null, index),
+          isSelected
+        });
+     });
   }
 
   _renderComponents = () => {
-      const {selectedTabIndex, components} = this.state;
-      return components.map((comp, index) => {
-         const divStyle = (index === selectedTabIndex)
-                    ? {display: 'block', width: "100%", height : "100%"}
-                    : {display : 'none'};
-          return (
-             <div style={divStyle} key={'a'+index}>
-                {comp}
-             </div>
-           )
-      })
+    const { children } = this.props;
+    const { selectedTabIndex } = this.state;
+    return children.map((tab, index) => {
+       const _isSelected = (index === selectedTabIndex)
+       , _divStyle = _isSelected ? S.BLOCK : S.NONE
+        return (
+           <div style={_divStyle} key={'a'+index}>
+              {React.cloneElement(tab.props.children, {
+                key: 'comp'+index,
+                isSelected: _isSelected
+              })}
+           </div>
+         );
+    });
   }
 
   render(){
@@ -76,10 +79,10 @@ class TabPane extends Component {
 
     return (
       <div style={{ width, height }}>
-        <ul className="tabpane__tabs" style={styles.ulStyle}>
+        <ul className={CL} style={S.UL}>
            {this._renderTabs(children)}
         </ul>
-        <div style={ {width: "100%", height : "100%"}}>
+        <div style={S.DIV}>
            {this._renderComponents()}
         </div>
       </div>

@@ -13,11 +13,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
-var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
-
-var _TabPane = _interopRequireDefault(require("../zhn/TabPane"));
-
-var _Tab = _interopRequireDefault(require("../zhn/Tab"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _PaneApiKey = _interopRequireDefault(require("./PaneApiKey"));
 
@@ -100,23 +96,24 @@ function (_Component) {
     var _this$props = this.props,
         isShow = _this$props.isShow,
         data = _this$props.data;
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return _react["default"].createElement(_Comp["default"].ModalDialog, {
       ref: this._refModal,
       caption: "User Settings",
       style: S.MODAL,
       isWithButton: false,
       isShow: isShow,
       onClose: this._hClose
-    }, _react["default"].createElement(_TabPane["default"], {
+    }, _react["default"].createElement(_Comp["default"].TabPane, {
       isUpdateInit: true
-    }, _react["default"].createElement(_Tab["default"], {
+    }, _react["default"].createElement(_Comp["default"].Tab, {
       title: "ApiKeys"
     }, _react["default"].createElement(_PaneApiKey["default"], {
+      isShow: isShow,
       titleStyle: S.TITLE_API,
       btStyle: S.BT,
       data: data,
       onClose: this._hClose
-    })), _react["default"].createElement(_Tab["default"], {
+    })), _react["default"].createElement(_Comp["default"].Tab, {
       title: "Options"
     }, _react["default"].createElement(_PaneOptions["default"], {
       titleStyle: S.TITLE_OPTION,

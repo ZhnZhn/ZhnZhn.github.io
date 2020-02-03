@@ -80,7 +80,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   area2Config(title, subtitle){
     return this.areaConfig({ spacingTop: 25 })
       .addCaption(title, subtitle)
-      .clearSeries();    
+      .clearSeries();
   },
   stockConfig(id, dataOption){
     const {
@@ -358,7 +358,24 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
 
+  _disableAnimation(){
+    return this.add({
+      chart: { animation: false },
+      plotOptions: { series: { animation: false }},
+      zhConfig: { withoutAnimation: true }
+    });
+  },
+
+  _checkDataLength(){
+    const data = this.config?.series?.[0].data || [];
+    if (data.length > 3000){
+      this._disableAnimation()
+    }
+    return this;
+  },
+
   toConfig(){
+    this._checkDataLength()
     return this.config;
   }
 })

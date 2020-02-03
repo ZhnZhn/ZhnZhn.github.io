@@ -379,6 +379,7 @@ function (_Component) {
         zhMiniConfigs = config.zhMiniConfigs,
         itemTime = zhConfig.itemTime,
         legend = zhConfig.legend,
+        withoutAnimation = zhConfig.withoutAnimation,
         _this$state = this.state,
         isOpen = _this$state.isOpen,
         isShowChart = _this$state.isShowChart,
@@ -407,6 +408,7 @@ function (_Component) {
       regCompVm: this._regCompVm
     }), _react["default"].createElement(_ShowHide["default"], {
       isShow: isOpen,
+      withoutAnimation: withoutAnimation,
       style: S.SHOW_HIDE
     }, isShowChart && this._createChartToolBar(config), _react["default"].createElement(_HighchartWrapper["default"], {
       ref: this._refChartComp,
@@ -440,23 +442,27 @@ function (_Component) {
   };
 
   _proto.reflowChart = function reflowChart(width) {
-    var ChartFn = this.props.ChartFn,
-        spacingLeft = ChartFn.arCalcDeltaYAxis(this.mainChart),
-        zhDetailCharts = this.mainChart.options.zhDetailCharts;
-    this.mainChart.setSize(width, undefined, true);
+    if (this.mainChart) {
+      var _isAnimate = this.mainChart.zhIsAnimation(),
+          zhDetailCharts = this.mainChart.zhGetDetailCharts();
 
-    if (Array.isArray(zhDetailCharts)) {
-      zhDetailCharts.forEach(function (chart) {
-        if (spacingLeft) {
-          chart.update({
-            chart: {
-              spacingLeft: spacingLeft
-            }
-          }, false);
-        }
+      this.mainChart.setSize(width, undefined, _isAnimate);
 
-        chart.setSize(width, undefined, true);
-      });
+      if (Array.isArray(zhDetailCharts)) {
+        var ChartFn = this.props.ChartFn,
+            spacingLeft = ChartFn.arCalcDeltaYAxis(this.mainChart);
+        zhDetailCharts.forEach(function (chart) {
+          if (spacingLeft) {
+            chart.update({
+              chart: {
+                spacingLeft: spacingLeft
+              }
+            }, false);
+          }
+
+          chart.setSize(width, undefined, _isAnimate);
+        });
+      }
     }
   };
 

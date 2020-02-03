@@ -22,12 +22,13 @@ var S = {
 
 var ShowHide = function ShowHide(_ref) {
   var isShow = _ref.isShow,
+      withoutAnimation = _ref.withoutAnimation,
       className = _ref.className,
       style = _ref.style,
       children = _ref.children;
 
   var _styleShow = isShow ? S.SHOW : S.HIDE,
-      _classShow = isShow ? CL_SHOW_POPUP : '',
+      _classShow = isShow ? withoutAnimation ? '' : CL_SHOW_POPUP : '',
       _className = className ? className + " " + _classShow : _classShow || void 0;
 
   return _react["default"].createElement("div", {

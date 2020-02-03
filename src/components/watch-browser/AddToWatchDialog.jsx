@@ -26,15 +26,7 @@ const S = {
   },
   CAPTION: {
     width: 70
-  },
-  ITEM_TEXT: {
-    display: 'inline-block',
-    maxWidth: 200,
-    height: 32,
-    verticalAlign: 'middle',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
-  }
+  }  
 };
 
 const SELECT_WIDTH = "216";
@@ -179,7 +171,6 @@ class AddToWatchDialog extends Component {
       >
         <D.Row.Text
           styleCaption={S.CAPTION}
-          styleText={S.ITEM_TEXT}
           caption="Item:"
           text={caption}
         />

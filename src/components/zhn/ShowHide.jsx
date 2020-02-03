@@ -11,9 +11,15 @@ const S = {
   }
 };
 
-const ShowHide = ({ isShow, className, style, children }) => {
+const ShowHide = ({
+  isShow, withoutAnimation,
+  className, style,
+  children
+}) => {
     const _styleShow = isShow ? S.SHOW : S.HIDE
-    , _classShow = isShow ? CL_SHOW_POPUP : ''
+    , _classShow = isShow
+         ? withoutAnimation ? '' : CL_SHOW_POPUP
+         : ''
     , _className = className
         ? `${className} ${_classShow}`
         : _classShow || void 0;

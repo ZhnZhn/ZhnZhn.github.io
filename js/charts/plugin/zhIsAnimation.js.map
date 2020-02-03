@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhIsAnimation.js"
+ ],
+ "file": "../../../src/charts/plugin/zhIsAnimation.js",
+ "names": [
+  "zhIsAnimation",
+  "userOptions",
+  "zhConfig",
+  "withoutAnimation"
+ ],
+ "mappings": ";;;;;AACA,IAAMA,aAAa,GAAG,SAAhBA,aAAgB,GAAW;AAC/B,SAAO,CAAC,CAAC,KAAKC,WAAL,IAAoB,EAArB,EAAyBC,QAAzB,IAAqC,EAAtC,EAA0CC,gBAA1C,GACH,KADG,GAEH,IAFJ;AAGD,CAJD;;eAMeH,a"
+}

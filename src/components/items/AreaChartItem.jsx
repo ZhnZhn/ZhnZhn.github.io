@@ -315,7 +315,7 @@ class AreaChartItem extends Component {
         onCloseItem, isAdminMode
       } = this.props
     , { zhConfig={}, zhMiniConfigs } = config
-    , { itemTime, legend } = zhConfig
+    , { itemTime, legend, withoutAnimation } = zhConfig
     , {
         isOpen, isShowChart, isShowInfo,
         isShowLegend,
@@ -343,7 +343,11 @@ class AreaChartItem extends Component {
             regCompVm={this._regCompVm}
          />
         }
-        <ShowHide isShow={isOpen} style={S.SHOW_HIDE}>
+        <ShowHide
+           isShow={isOpen}
+           withoutAnimation={withoutAnimation}
+           style={S.SHOW_HIDE}
+        >
            {isShowChart && this._createChartToolBar(config)}
            <HighchartWrapper
               ref={this._refChartComp}
@@ -384,18 +388,21 @@ class AreaChartItem extends Component {
   }
 
   reflowChart(width){
-    const { ChartFn } = this.props
-        , spacingLeft = ChartFn.arCalcDeltaYAxis(this.mainChart)
-        , zhDetailCharts = this.mainChart.options.zhDetailCharts;
+    if (this.mainChart) {
+      const _isAnimate = this.mainChart.zhIsAnimation()
+      , zhDetailCharts = this.mainChart.zhGetDetailCharts();
 
-    this.mainChart.setSize(width, undefined, true)
-    if (Array.isArray(zhDetailCharts)) {
-      zhDetailCharts.forEach(chart => {
-        if (spacingLeft) {
-          chart.update({ chart: { spacingLeft } }, false)
-        }
-        chart.setSize(width, undefined, true)
-      })
+      this.mainChart.setSize(width, undefined, _isAnimate)
+      if (Array.isArray(zhDetailCharts)) {
+        const { ChartFn } = this.props
+        , spacingLeft = ChartFn.arCalcDeltaYAxis(this.mainChart);
+        zhDetailCharts.forEach(chart => {
+          if (spacingLeft) {
+            chart.update({ chart: { spacingLeft } }, false)
+          }
+          chart.setSize(width, undefined, _isAnimate)
+        })
+      }
     }
   }
 

@@ -397,7 +397,35 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
+  _disableAnimation: function _disableAnimation() {
+    return this.add({
+      chart: {
+        animation: false
+      },
+      plotOptions: {
+        series: {
+          animation: false
+        }
+      },
+      zhConfig: {
+        withoutAnimation: true
+      }
+    });
+  },
+  _checkDataLength: function _checkDataLength() {
+    var _this$config, _this$config$series;
+
+    var data = ((_this$config = this.config) == null ? void 0 : (_this$config$series = _this$config.series) == null ? void 0 : _this$config$series[0].data) || [];
+
+    if (data.length > 3000) {
+      this._disableAnimation();
+    }
+
+    return this;
+  },
   toConfig: function toConfig() {
+    this._checkDataLength();
+
     return this.config;
   }
 }));

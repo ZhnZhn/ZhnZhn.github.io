@@ -15,39 +15,20 @@ var S = {
   ROOT: {
     position: 'relative',
     display: 'inline-block',
-    backgroundColor: '#e1e1cb',
-    width: 250
+    width: 250,
+    backgroundColor: '#e1e1cb'
   },
   INPUT: {
+    color: 'green',
+    width: '100%',
+    height: 30,
+    paddingLeft: 10,
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
-    height: 30,
-    paddingLeft: 10,
-    color: 'green',
-    width: '100%',
     fontSize: '16px',
     fontWeight: 'bold'
   }
-};
-
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
-
-var _maskValue = function _maskValue(len) {
-  if (len === void 0) {
-    len = 0;
-  }
-
-  var i = 0,
-      str = '';
-
-  for (i; i < len; i++) {
-    str = str + 'X';
-  }
-
-  return str;
 };
 
 var InputSecret =
@@ -66,48 +47,39 @@ function (_Component) {
     _this.state = {
       value: ''
     };
-    _this.secret = '';
 
-    _this._handleChangeValue = function (event) {
-      var _value = event.target.value,
-          _length = _value.length,
-          _nowLength = _this.secret.length;
-
-      if (_length === _nowLength + 1) {
-        _this.secret = _this.secret + _value[_length - 1];
-      } else if (_length === _nowLength - 1) {
-        _this.secret = _this.secret.substring(0, _nowLength - 1);
-      } else if (_nowLength === 0) {
-        _this.secret = _value;
-      } else if (_length === 0) {
-        _this.secret = '';
-      }
-
+    _this._hInputChange = function (event) {
       _this.setState({
-        value: _maskValue(_this.secret.length)
+        value: event.target.value.trim()
       });
     };
 
-    _this._handleKeyDown = function (event) {
+    _this._clearAttrValue = function () {
+      _this._clearId = setTimeout(function () {
+        var _input = _this._input;
+
+        if (_input && _input.hasAttribute('value')) {
+          _input.removeAttribute('value');
+        }
+      });
+    };
+
+    _this._hKeyDown = function (event) {
       if (event.keyCode !== 27) {
         event.stopPropagation();
       }
 
       switch (event.keyCode) {
         case 13:
-          if (_isFn(_this.props.onEnter)) {
-            event.preventDefault();
+          event.preventDefault();
 
-            _this.props.onEnter(_this.secret);
-          }
+          _this.props.onEnter(_this.state.value);
 
           break;
 
         case 27:
         case 46:
-          if (_isFn(_this.props.onEnter)) {
-            _this.props.onEnter('');
-          }
+          _this.props.onEnter('');
 
           _this.clear();
 
@@ -118,6 +90,10 @@ function (_Component) {
       }
     };
 
+    _this._refInput = function (n) {
+      return _this._input = n;
+    };
+
     return _this;
   }
 
@@ -125,36 +101,39 @@ function (_Component) {
 
   _proto.render = function render() {
     var _this$props = this.props,
+        name = _this$props.name,
         placeholder = _this$props.placeholder,
-        _this$props$maxLength = _this$props.maxLength,
-        maxLength = _this$props$maxLength === void 0 ? "32" : _this$props$maxLength,
+        maxLength = _this$props.maxLength,
         value = this.state.value;
     return _react["default"].createElement("div", {
       style: S.ROOT
     }, _react["default"].createElement("input", {
+      hidden: true,
+      autoComplete: "username",
+      value: name,
+      readOnly: true
+    }), _react["default"].createElement("input", {
+      ref: this._refInput,
       style: S.INPUT,
       type: "password",
-      name: "secret" //autoComplete="new-secret"
-      ,
-      autoComplete: "off",
-      autoCorrect: "off",
-      autoCapitalize: "off",
-      spellCheck: "false",
-      translate: "false",
+      autoComplete: "current-password",
       placeholder: placeholder,
       maxLength: maxLength,
       value: value,
-      onChange: this._handleChangeValue,
-      onKeyDown: this._handleKeyDown
+      onChange: this._hInputChange,
+      onKeyDown: this._hKeyDown
     }));
   };
 
+  _proto.componentDidUpdate = function componentDidUpdate() {
+    this._clearAttrValue();
+  };
+
   _proto.getValue = function getValue() {
-    return this.secret;
+    return this.state.value;
   };
 
   _proto.clear = function clear() {
-    this.secret = '';
     this.setState({
       value: ''
     });
@@ -163,6 +142,10 @@ function (_Component) {
   return InputSecret;
 }(_react.Component);
 
+InputSecret.defaultProps = {
+  maxLength: "32",
+  onEnter: function onEnter() {}
+};
 var _default = InputSecret;
 exports["default"] = _default;
 //# sourceMappingURL=InputSecret.js.map

@@ -35,6 +35,10 @@ var _SvgPlus = _interopRequireDefault(require("./SvgPlus"));
 
 var _SvgMinus = _interopRequireDefault(require("./SvgMinus"));
 
+var _TabPane = _interopRequireDefault(require("./TabPane"));
+
+var _Tab = _interopRequireDefault(require("./Tab"));
+
 var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   SpinnerLoading: _SpinnerLoading["default"],
   ScrollPane: _ScrollPane["default"],
@@ -48,7 +52,9 @@ var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   OpenClose2: _OpenClose2["default"],
   ShowHide: _ShowHide["default"],
   SvgPlus: _SvgPlus["default"],
-  SvgMinus: _SvgMinus["default"]
+  SvgMinus: _SvgMinus["default"],
+  TabPane: _TabPane["default"],
+  Tab: _Tab["default"]
 });
 var _default = A;
 exports["default"] = _default;

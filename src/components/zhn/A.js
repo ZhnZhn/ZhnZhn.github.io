@@ -13,6 +13,8 @@ import OpenClose2 from './OpenClose2';
 import ShowHide from './ShowHide';
 import SvgPlus from './SvgPlus';
 import SvgMinus from './SvgMinus';
+import TabPane from './TabPane'
+import Tab from './Tab'
 
 const A = {
   ...SvgIcons,
@@ -28,7 +30,9 @@ const A = {
   OpenClose2,
   ShowHide,
   SvgPlus,
-  SvgMinus
+  SvgMinus,
+  TabPane,
+  Tab
 };
 
 export default A

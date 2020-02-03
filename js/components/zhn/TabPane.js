@@ -12,13 +12,26 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 var _react = _interopRequireWildcard(require("react"));
 
 //import PropTypes from "prop-types";
-var styles = {
-  ulStyle: {
+var CL = "tabpane__tabs";
+var S = {
+  UL: {
     listStyle: 'outside none none',
-    marginTop: '10px',
-    marginLeft: '10px',
-    marginRight: '5px',
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 5,
     borderBottom: '2px solid rgba(164, 135, 212, 1)'
+  },
+  BLOCK: {
+    display: 'block',
+    width: "100%",
+    height: "100%"
+  },
+  NONE: {
+    display: 'none'
+  },
+  DIV: {
+    width: "100%",
+    height: "100%"
   }
 };
 
@@ -29,7 +42,6 @@ function (_Component) {
 
   /*
   static propTypes = {
-    isUpdateInit: PropTypes.bool,
     width: PropTypes.string,
     height: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.node)
@@ -40,7 +52,7 @@ function (_Component) {
 
     _this = _Component.call(this, props) || this;
 
-    _this._handleClickTab = function (index) {
+    _this._hClickTab = function (index) {
       _this.setState({
         selectedTabIndex: index
       });
@@ -49,31 +61,29 @@ function (_Component) {
     _this._renderTabs = function (children) {
       var selectedTabIndex = _this.state.selectedTabIndex;
       return children.map(function (tab, index) {
-        var isSelected = index === selectedTabIndex ? true : false;
+        var isSelected = index === selectedTabIndex;
         return _react["default"].cloneElement(tab, {
           key: index,
-          onClick: _this._handleClickTab.bind(null, index),
+          onClick: _this._hClickTab.bind(null, index),
           isSelected: isSelected
         });
       });
     };
 
     _this._renderComponents = function () {
-      var _this$state = _this.state,
-          selectedTabIndex = _this$state.selectedTabIndex,
-          components = _this$state.components;
-      return components.map(function (comp, index) {
-        var divStyle = index === selectedTabIndex ? {
-          display: 'block',
-          width: "100%",
-          height: "100%"
-        } : {
-          display: 'none'
-        };
+      var children = _this.props.children;
+      var selectedTabIndex = _this.state.selectedTabIndex;
+      return children.map(function (tab, index) {
+        var _isSelected = index === selectedTabIndex,
+            _divStyle = _isSelected ? S.BLOCK : S.NONE;
+
         return _react["default"].createElement("div", {
-          style: divStyle,
+          style: _divStyle,
           key: 'a' + index
-        }, comp);
+        }, _react["default"].cloneElement(tab.props.children, {
+          key: 'comp' + index,
+          isSelected: _isSelected
+        }));
       });
     };
 
@@ -81,35 +91,13 @@ function (_Component) {
       return _this.state.selectedTabIndex;
     };
 
-    _this.isUpdateInit = props.isUpdateInit;
-
-    var _components = props.children.map(function (tab, index) {
-      return _react["default"].cloneElement(tab.props.children, {
-        key: 'comp' + index
-      });
-    });
-
     _this.state = {
-      selectedTabIndex: 0,
-      components: _components
+      selectedTabIndex: 0
     };
     return _this;
   }
 
   var _proto = TabPane.prototype;
-
-  _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.isUpdateInit && this.props !== nextProps) {
-      var components = nextProps.children.map(function (tab, index) {
-        return _react["default"].cloneElement(tab.props.children, {
-          key: 'comp' + index
-        });
-      });
-      this.setState({
-        components: components
-      });
-    }
-  };
 
   _proto.render = function render() {
     var _this$props = this.props,
@@ -122,13 +110,10 @@ function (_Component) {
         height: height
       }
     }, _react["default"].createElement("ul", {
-      className: "tabpane__tabs",
-      style: styles.ulStyle
+      className: CL,
+      style: S.UL
     }, this._renderTabs(children)), _react["default"].createElement("div", {
-      style: {
-        width: "100%",
-        height: "100%"
-      }
+      style: S.DIV
     }, this._renderComponents()));
   };
 

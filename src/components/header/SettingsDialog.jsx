@@ -3,9 +3,8 @@ import React, { Component } from 'react'
 
 import Actions from '../../flux/actions/ComponentActions'
 
-import ModalDialog from '../zhn-moleculs/ModalDialog'
-import TabPane from '../zhn/TabPane'
-import Tab from '../zhn/Tab'
+
+import A from '../Comp'
 import PaneApiKey from './PaneApiKey'
 import PaneOptions from './PaneOptions'
 
@@ -64,7 +63,7 @@ class SettingsDialog extends Component {
   render(){
     const { isShow, data } = this.props;
     return (
-         <ModalDialog
+         <A.ModalDialog
             ref={this._refModal}
             caption="User Settings"
             style={S.MODAL}
@@ -72,16 +71,17 @@ class SettingsDialog extends Component {
             isShow={isShow}
             onClose={this._hClose}
          >
-           <TabPane isUpdateInit={true}>
-             <Tab title="ApiKeys">
+           <A.TabPane isUpdateInit={true}>
+             <A.Tab title="ApiKeys">
                <PaneApiKey
+                  isShow={isShow}
                   titleStyle={S.TITLE_API}
                   btStyle={S.BT}
                   data={data}
                   onClose={this._hClose}
                 />
-             </Tab>
-             <Tab title="Options">
+             </A.Tab>
+             <A.Tab title="Options">
                <PaneOptions
                  titleStyle={S.TITLE_OPTION}
                  btStyle={S.BT}
@@ -89,9 +89,9 @@ class SettingsDialog extends Component {
                  onChangeTheme={Actions.changeTheme}
                  onClose={this._hClose}
                />
-             </Tab>
-           </TabPane>
-         </ModalDialog>
+             </A.Tab>
+           </A.TabPane>
+         </A.ModalDialog>
     );
   }
 }
