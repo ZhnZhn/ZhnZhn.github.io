@@ -42,7 +42,7 @@
     },{
       "caption": "BLS",
       "items": [
-        { "id": "USAE_BLS_1" },
+        { "id": "USAE_BLS_CAVP" },
         { "id": "USAE_BLS_CPI" },
         { "id": "USAE_BLS_PPIINDUSTRY" },
         { "id": "USAE_BLS_PPICOMMODITY" },
@@ -110,7 +110,7 @@
         "valueFn" : "ROne",
         "loadId" : "BLS",
         "isProxy": true,
-        "dataSource": "U.S. Bureau of Labor Statistics (BSL)"
+        "dataSource": "U.S. BSL"
       }
     },
 
@@ -374,17 +374,17 @@
       }
     },
 
-    "USAE_BLS_1": {
-      "type": "USAE_BLS_1",
-      "menuTitle" : "Consume Average Prices",
-      "dialogCaption": "Consume Average Prices",
-      "chartContainerCaption" : "BLS: Consume Average Prices",
+    "USAE_BLS_CAVP": {
+      "type": "USAE_BLS_CAVP",
+      "menuTitle" : "Consumer Average Prices",
+      "dialogCaption": "Consumer Average Prices",
+      "chartContainerCaption" : "BLS: Consumer Average Prices",
       "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
-        "optionURI" : "./data/usa-economy/bls-consume-avg-prices.json",
+        "optionURI" : "./data/usa-economy/bls-consumer-avg-prices.json",
         "dfProps": {
-          "dfTitle": "Consume Average Price"
+          "dfTitle": "Consumer Average Prices"
         }
       }
     },
