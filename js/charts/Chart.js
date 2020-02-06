@@ -217,6 +217,8 @@ var Chart = {
         _ref2$seriaType = _ref2.seriaType,
         seriaType = _ref2$seriaType === void 0 ? 'area' : _ref2$seriaType,
         seriaColor = _ref2.seriaColor,
+        _ref2$seriaWidth = _ref2.seriaWidth,
+        seriaWidth = _ref2$seriaWidth === void 0 ? 1 : _ref2$seriaWidth,
         spacingTop = _ref2.spacingTop,
         _ref2$isCrosshair = _ref2.isCrosshair,
         isCrosshair = _ref2$isCrosshair === void 0 ? true : _ref2$isCrosshair;
@@ -258,10 +260,10 @@ var Chart = {
         type: seriaType,
         color: seriaColor,
         tooltip: Chart.fTooltip(_Tooltip["default"].fnBasePointFormatter),
-        lineWidth: 1,
+        lineWidth: seriaWidth,
         states: {
           hover: {
-            lineWidth: 1
+            lineWidth: seriaWidth
           }
         }
       }]

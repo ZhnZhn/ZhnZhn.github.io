@@ -36,7 +36,7 @@ const _crDropItem = (DRAG, WatchActions) => {
 const _crDragEnterItem = (DRAG) => {
   return function(ev){
     ev.preventDefault()
-    this.dragEnterWithDnDStyle(ev, DRAG.ITEM)
+    this.dragEnterWithDnDStyle(ev, DRAG.ITEM, DRAG.C_LIST_ENTER)
  };
 };
 
@@ -49,16 +49,21 @@ const _hDragLeaveItem = function(ev){
    this.dragLeaveWithDnDStyle(ev)
 };
 
-const withDnDItem = (DRAG, WatchActions) => {
-  return (target) => {
+const _bindDnDItem = function(DRAG, WatchActions){
+  Object.assign(this, {
+    _hDragStartItem: _crDragStartItem(DRAG).bind(this),
+    _hDropItem: _crDropItem(DRAG, WatchActions).bind(this),
+    _hDragEnterItem: _crDragEnterItem(DRAG).bind(this),
+    _hDragOverItem,
+    _hDragLeaveItem: _hDragLeaveItem.bind(this)
+  })
+};
+
+const withDnDItem = (target) => {
     Object.assign(target.prototype, {
-      _hDragStartItem: _crDragStartItem(DRAG),
-      _hDropItem: _crDropItem(DRAG, WatchActions),
-      _hDragEnterItem: _crDragEnterItem(DRAG),
-      _hDragOverItem,
-      _hDragLeaveItem
+      _bindDnDItem
     })
-  };
-}
+};
+
 
 export default withDnDItem

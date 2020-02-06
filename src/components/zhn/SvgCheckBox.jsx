@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
+import isKeyEnter from './isKeyEnter'
+
 import C from '../styles/Color';
 
 const S = {
   DIV: {
     display: 'inline-block',
-    width: '16px',
-    height: '16px',
+    width: 16,
+    height: 16,
     cursor: 'pointer'
   },
   SVG: {
     display: 'inline-block'
   }
-};
-
-const E = {
-  KEY: " ",
-  KEY_CODE: 32
 };
 
 const C_GREY = "#777777";
@@ -92,7 +89,7 @@ class SvgCheckBox extends Component {
   }
 
   _hKeyDown = (evt) => {
-    if (evt.key === E.KEY || evt.keyCode === E.KEY_CODE) {
+    if (isKeyEnter(evt)){
       evt.preventDefault()
       this._hClick()
     }

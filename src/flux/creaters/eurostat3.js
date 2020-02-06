@@ -24,7 +24,7 @@ const createLoadOptions = (props={}, options={}) => {
   const { loadId, dataSource, dfProps={} } = props
       , {
           one={}, group={}, metric={},
-          chartType={}, seriaColor,
+          chartType={}, seriaColor, seriaWidth,
           date, dialogOptions
         } = options
       , { caption:oneC='', value:oneV } = one
@@ -43,8 +43,7 @@ const createLoadOptions = (props={}, options={}) => {
     geo: oneV,
     group: groupV,
     metric: metricV,
-    seriaType: seriaType,
-    seriaColor: seriaColor,
+    seriaType, seriaColor, seriaWidth,
     zhCompType: compType,
     //items: [ one, group, metric ],
     items: _items,
@@ -56,7 +55,7 @@ const createLoadOptions = (props={}, options={}) => {
     alertItemId: `${oneC}: ${metricC}`,
     alertGeo: oneC,
     alertMetric: metricC,
-    dataSource    
+    dataSource
   }
 };
 

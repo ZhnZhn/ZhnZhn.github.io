@@ -129,7 +129,7 @@ const RowGrowthRate = ({
         <D.RowCheckBox
           caption="Column"
           rootStyle={{ ...S.INLINE, ...S.PL_6 }}
-          styleCaption={S.PL_6}
+          captionStyle={S.PL_6}
           checkedColor={OC_COLOR}
           initValue={true}
           onCheck={_onCheckColumn}
@@ -138,7 +138,7 @@ const RowGrowthRate = ({
         <D.RowCheckBox
           caption="OnTop"
           rootStyle={{ ...S.INLINE, ...S.PL_24 }}
-          styleCaption={S.PL_6}
+          captionStyle={S.PL_6}
           checkedColor={OC_COLOR}
           initValue={false}
           onCheck={_onCheckTop}

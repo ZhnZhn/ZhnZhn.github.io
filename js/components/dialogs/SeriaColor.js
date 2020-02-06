@@ -15,6 +15,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 
+var _BtCounter = _interopRequireDefault(require("./BtCounter"));
+
 var C_TRANSPARENT = "transparent";
 var N_SHORT = 5;
 var COLORS1 = ['#8abb5d', '#f7a35c', '#795548', '#f15c80', '#f45b5b', '#d2b772', '#dda0dd', '#fffafa'];
@@ -25,8 +27,14 @@ var S = {
     paddingBottom: 4
   },
   ROW2: {
-    paddingLeft: 56,
     paddingTop: 4
+  },
+  ROW2_PADDING: {
+    paddingLeft: 56
+  },
+  BT_COUNTER: {
+    marginLeft: 14,
+    marginRight: 16
   },
   TO_CELL: {
     marginLeft: 12,
@@ -46,6 +54,17 @@ var S = {
 
 var _initColor = function _initColor(props) {
   return props.initColor || C_TRANSPARENT;
+};
+
+var _hasLineWidth = function _hasLineWidth(chartType) {
+  var _ref = chartType || {},
+      value = _ref.value;
+
+  if (!value || value === 'SPLINE' || value === 'LINE') {
+    return true;
+  }
+
+  return false;
 };
 
 var SeriaColor =
@@ -70,6 +89,10 @@ function (_Component) {
           color: color
         });
       }
+    };
+
+    _this._setWidth = function (value) {
+      _this._width = value;
     };
 
     _this._renderColors = function (colors, isLong) {
@@ -102,8 +125,14 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    var isLong = this.props.isLong,
-        color = this.state.color;
+    var _width = this._width,
+        _this$props = this.props,
+        isLong = _this$props.isLong,
+        chartType = _this$props.chartType,
+        color = this.state.color,
+        _isLineWidth = _hasLineWidth(chartType),
+        _rowStyle = _isLineWidth ? S.ROW2 : (0, _extends2["default"])({}, S.ROW2, {}, S.ROW2_PADDING);
+
     return _react["default"].createElement("div", {
       style: S.ROOT
     }, _react["default"].createElement("div", null, _react["default"].createElement(_CellColor["default"], {
@@ -111,13 +140,27 @@ function (_Component) {
       style: (0, _extends2["default"])({}, S.CELL, {}, S.TO_CELL),
       onClick: this._hInit
     }), this._renderColors(COLORS1, isLong)), _react["default"].createElement("div", {
-      style: S.ROW2
-    }, this._renderColors(COLORS2, isLong)));
+      style: _rowStyle
+    }, _isLineWidth && _react["default"].createElement(_BtCounter["default"], {
+      style: S.BT_COUNTER,
+      initialValue: _width,
+      title: "Line Width",
+      onSetValue: this._setWidth
+    }), this._renderColors(COLORS2, isLong)));
   };
 
   _proto.getColor = function getColor() {
     var color = this.state.color;
     return color !== C_TRANSPARENT ? color : void 0;
+  };
+
+  _proto.getConf = function getConf() {
+    var chartType = this.props.chartType,
+        color = this.state.color;
+    return {
+      seriaColor: color !== C_TRANSPARENT ? color : void 0,
+      seriaWidth: _hasLineWidth(chartType) ? this._width : void 0
+    };
   };
 
   return SeriaColor;

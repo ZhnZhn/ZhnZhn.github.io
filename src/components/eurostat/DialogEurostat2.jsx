@@ -13,6 +13,9 @@ import ModalOptions from './ModalOptions'
 
 const  MAP_FREQUENCY_DF = 'M';
 
+const _isCategory = (chartType) => RouterOptions
+  .isCategory(chartType);
+
 @Decor.dialog
 @withForDate
 class DialogEurostat2 extends Component {
@@ -50,7 +53,6 @@ class DialogEurostat2 extends Component {
     //this.one = undefined;
     //this.two = undefined;
     //this.date = undefined;
-    //this.chartType = undefined;
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -68,6 +70,7 @@ class DialogEurostat2 extends Component {
       isOptions: false,
       isShowDate: false,
       ...crDateConfig('EMPTY')
+      //chartType
     }
   }
 
@@ -80,11 +83,8 @@ class DialogEurostat2 extends Component {
     return true;
   }
 
-  _isCategory = () => {
-    return RouterOptions.isCategory(this.chartType)
-  }
 
-  _updateForDate = () => {
+  _updateForDate = (chartType) => {
     this.date = null;
     const frequency = (this.two)
              ? (this.props.mapFrequency)
@@ -100,7 +100,8 @@ class DialogEurostat2 extends Component {
 
     this.setState({
        isShowDate: true,
-       ...dateConfig
+       ...dateConfig,
+       chartType
     });
   }
 
@@ -110,17 +111,20 @@ class DialogEurostat2 extends Component {
 
   _handleSelectTwo = (two) => {
     this.two = two;
-    if (this._isCategory()) {
-      this._updateForDate();
+    const { chartType } = this.state
+    if (_isCategory(chartType)) {
+      this._updateForDate(chartType);
     }
   }
 
   _handleSelectChartType = (chartType) => {
-    this.chartType = chartType;
-    if (this._isCategory()) {
-      this._updateForDate();
+    if (_isCategory(chartType)) {
+      this._updateForDate(chartType);
     } else {
-      this.setState({ isShowDate : false });
+      this.setState({
+        chartType,
+        isShowDate: false
+      });
     }
   }
   _onRegColor = (comp) => {
@@ -139,9 +143,10 @@ class DialogEurostat2 extends Component {
   }
   _createValidationMessages = () => {
      const { oneCaption, twoCaption } = this.props;
+     const { chartType } = this.state;
      const msg = [];
 
-     if (!this._isCategory()) {
+     if (!_isCategory(chartType)) {
         if (!this.one) { msg.push(this.props.msgOnNotSelected(oneCaption)); }
      }
      if (!this.two) { msg.push(this.props.msgOnNotSelected(twoCaption)); }
@@ -152,18 +157,19 @@ class DialogEurostat2 extends Component {
   _createLoadOption = () => {
     const {
             one, two, dialogOptions,
-            chartType, colorComp,
+            colorComp,
             compSelect1, compSelect2
           } = this
-        , seriaColor = colorComp
-            ? colorComp.getColor()
-            : undefined
+        , { chartType } = this.state
+        , { seriaColor, seriaWidth } = colorComp
+            ? colorComp.getConf()
+            : {}
         , date = this._getDateWithForDate();
 
     return this.props.loadFn(
       this.props, {
         one, two, dialogOptions,
-        chartType, seriaColor,
+        chartType, seriaColor, seriaWidth,
         date,
         selectOptions: [
           compSelect1.getOptions(),
@@ -192,6 +198,7 @@ class DialogEurostat2 extends Component {
            twoCaption, twoURI, twoJsonProp
           } = this.props
         , {
+            chartType,
             isToolbar, isOptions,
             isShowLabels, isShowDate,
             dateDefault, dateOptions,
@@ -238,6 +245,7 @@ class DialogEurostat2 extends Component {
                onSelect={this._handleSelectTwo}
              />
              <D.RowChart
+               chartType={chartType}
                isShowLabels={isShowLabels}
                options={this._chartOptions}
                onSelectChart={this._handleSelectChartType}

@@ -9,7 +9,7 @@ const createLoadOptions = (props={}, options={}) => {
       , {
           one, two={}, dialogOptions,
           chartType={},
-          seriaColor,
+          seriaColor, seriaWidth,
           date,
           selectOptions
         } = options
@@ -38,7 +38,7 @@ const createLoadOptions = (props={}, options={}) => {
     alertGeo: _oneC,
     alertMetric: two.caption,
     seriaType: _seriaType,
-    seriaColor: seriaColor,
+    seriaColor, seriaWidth,
     zhCompType: _zhCompType,
     time: date,
     dataSource,

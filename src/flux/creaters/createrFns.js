@@ -1,9 +1,20 @@
 
+const _isArr = Array.isArray;
+
 const _getCaption = item => item && item.caption || '';
 
 const _crC = (title, subtitle) => ({
   title, subtitle
 });
+
+const _crItemCaption = (items, titles) => {
+  if (!_isArr(titles) || titles.length === 0) {
+    titles = [0]
+  }
+  return titles
+    .map(titleIndex => _getCaption(items[titleIndex]))
+    .join(': ');
+};
 
 const createrFns = {
 
@@ -16,11 +27,12 @@ const createrFns = {
       _prefix,
       seriaType || '',
       date || ''
-    ].join('_');    
+    ].join('_');
   },
 
-  crCaption: items => {
-    const oneC = _getCaption(items[0])
+  crCaption: (items, titles) => {
+    const itemCaption = _crItemCaption(items, titles)
+    , oneC = _getCaption(items[0])
     , twoC = _getCaption(items[1])
     , threeC = _getCaption(items[2])
     , fourC = _getCaption(items[3]);
@@ -34,7 +46,7 @@ const createrFns = {
       _caption = _crC(oneC, twoC )
     }
     return {
-      oneC, twoC, threeC, fourC,
+      itemCaption, threeC,
       ..._caption
     };
   },

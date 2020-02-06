@@ -33,6 +33,8 @@ var _ModalOptions = _interopRequireDefault(require("./ModalOptions"));
 
 var _ModalToggle = _interopRequireDefault(require("./ModalToggle"));
 
+var _RowChart = _interopRequireDefault(require("./RowChart"));
+
 var _dec, _class, _class2, _temp;
 
 var DF_MAP_FREQUENCY = 'M';
@@ -47,6 +49,10 @@ var _crIsToggleInit = function _crIsToggleInit(selectProps) {
     _isToggleInit[_crIsId(item.id)] = true;
   });
   return _isToggleInit;
+};
+
+var _isCategory = function _isCategory(chartType) {
+  return _RouterOptions["default"].isCategory(chartType);
 };
 
 var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _withForDate["default"])(_class = (_temp = _class2 =
@@ -79,7 +85,6 @@ function (_Component) {
     onClickInfo: PropTypes.func,
       onClose: PropTypes.func,
     onLoad: PropTypes.func
-  
   }
   */
   function DialogSelectN(props) {
@@ -95,11 +100,17 @@ function (_Component) {
       });
     };
 
-    _this._isCategory = function () {
-      return _RouterOptions["default"].isCategory(_this.chartType);
+    _this._checkCaptionBy = function (index) {
+      _this._titles.push(index);
     };
 
-    _this._updateForDate = function () {
+    _this._uncheckCaption = function (index) {
+      _this._titles = _this._titles.filter(function (v) {
+        return v !== index;
+      });
+    };
+
+    _this._updateForDate = function (chartType) {
       _this.date = void 0;
 
       var _this$props$dfProps = _this.props.dfProps,
@@ -110,17 +121,17 @@ function (_Component) {
           dateConfig = (0, _crDateConfig["default"])(_frequency, mapDateDf);
 
       _this.setState((0, _extends2["default"])({
-        isShowDate: true
+        isShowDate: true,
+        chartType: chartType
       }, dateConfig));
     };
 
     _this._hSelectChartType = function (chartType) {
-      _this.chartType = chartType;
-
-      if (_this._isCategory()) {
-        _this._updateForDate();
+      if (_isCategory(chartType)) {
+        _this._updateForDate(chartType);
       } else {
         _this.setState({
+          chartType: chartType,
           isShowDate: false
         });
       }
@@ -142,9 +153,10 @@ function (_Component) {
       var _this$props = _this.props,
           msgOnNotSelected = _this$props.msgOnNotSelected,
           selectProps = _this$props.selectProps,
+          chartType = _this.state.chartType,
           _max = selectProps.length,
           msg = [];
-      var i = _this._isCategory() ? 1 : 0;
+      var i = _isCategory(chartType) ? 1 : 0;
 
       for (; i < _max; i++) {
         if (!_this._items[i]) {
@@ -158,19 +170,23 @@ function (_Component) {
 
     _this._createLoadOption = function () {
       var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
-          chartType = _assertThisInitialize.chartType,
           colorComp = _assertThisInitialize.colorComp,
           dialogOptions = _assertThisInitialize.dialogOptions,
-          seriaColor = colorComp ? colorComp.getColor() : void 0,
+          chartType = _this.state.chartType,
+          _ref2 = colorComp ? colorComp.getConf() : {},
+          seriaColor = _ref2.seriaColor,
+          seriaWidth = _ref2.seriaWidth,
           date = _this._getDateWithForDate(),
-          isCategory = _RouterOptions["default"].isCategory(chartType),
+          isCategory = _isCategory(chartType),
           items = isCategory ? _this._items.slice(1) : _this._items;
 
       return _this.props.loadFn(_this.props, {
         items: items,
+        titles: _this._titles,
         dialogOptions: dialogOptions,
         chartType: chartType,
         seriaColor: seriaColor,
+        seriaWidth: seriaWidth,
         isCategory: isCategory,
         date: date
         /*
@@ -219,15 +235,13 @@ function (_Component) {
     };
 
     _this._items = [];
+    _this._titles = [0];
     _this._compSelect = {}; //this.date = undefined;
-    //this.chartType = undefined;
 
     _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
-    _this._toggleChart = _this._toggleStateBy.bind((0, _assertThisInitialized2["default"])(_this), 'isShowChart');
-    _this._toggleDate = _this._toggleStateBy.bind((0, _assertThisInitialized2["default"])(_this), 'isShowDate');
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       noDate: true,
       isOptions: true,
@@ -266,6 +280,7 @@ function (_Component) {
         noDate = _this$props2.noDate,
         noForDate = _this$props2.noForDate,
         _this$state = this.state,
+        chartType = _this$state.chartType,
         isToolbar = _this$state.isToolbar,
         isOptions = _this$state.isOptions,
         isToggle = _this$state.isToggle,
@@ -298,25 +313,22 @@ function (_Component) {
       isShowDate: isShowDate,
       crIsId: _crIsId,
       onToggle: this._toggleStateBy,
-      toggleChart: this._toggleChart,
-      toggleDate: this._toggleDate,
+      onCheckCaption: this._checkCaptionBy,
+      onUnCheckCaption: this._uncheckCaption,
       onClose: this._hideToggleWithToolbar
-    }), this._renderSelects(selectProps, isShow, isShowLabels), _react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowChart
-    }, _react["default"].createElement(_DialogCell["default"].RowChart, {
+    }), this._renderSelects(selectProps, isShow, isShowLabels), _react["default"].createElement(_RowChart["default"], {
+      chartType: chartType,
       isShowLabels: isShowLabels,
-      options: this._chartOptions,
+      isShowChart: isShowChart,
+      chartOptions: this._chartOptions,
       onSelectChart: this._hSelectChartType,
-      onRegColor: this._onRegColor
-    })), !noDate && _react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      isShowLabels: isShowLabels,
-      caption: "For Date",
-      placeholder: dateDefault,
-      options: dateOptions,
-      onSelect: this._hSelectDate
-    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+      onRegColor: this._onRegColor,
+      noDate: noDate,
+      isShowDate: isShowDate,
+      dateDefault: dateDefault,
+      dateOptions: dateOptions,
+      onSelecDate: this._hSelectDate
+    }), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

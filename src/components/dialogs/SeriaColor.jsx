@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import CellColor from '../zhn-moleculs/CellColor'
-
+import BtCounter from './BtCounter'
 
 const C_TRANSPARENT = "transparent";
 const N_SHORT = 5;
@@ -21,8 +21,14 @@ const S = {
     paddingBottom: 4
   },
   ROW2: {
-    paddingLeft: 56,
     paddingTop: 4
+  },
+  ROW2_PADDING: {
+    paddingLeft: 56,
+  },
+  BT_COUNTER: {
+    marginLeft: 14,
+    marginRight: 16
   },
   TO_CELL: {
     marginLeft: 12,
@@ -41,6 +47,16 @@ const S = {
 };
 
 const _initColor = (props) => props.initColor || C_TRANSPARENT;
+const _hasLineWidth = (chartType) => {
+  const { value } = chartType || {};
+  if (!value
+    || value === 'SPLINE'
+    || value === 'LINE'
+  ) {
+    return true;
+  }
+  return false;
+};
 
 class SeriaColor extends Component {
   constructor(props){
@@ -69,6 +85,10 @@ class SeriaColor extends Component {
      }
   }
 
+  _setWidth = (value) => {
+    this._width = value
+  }
+
   _renderColors = (colors, isLong) => {
     const _max = isLong ? colors.length : N_SHORT;
     return colors.map((c, i) => {
@@ -84,8 +104,13 @@ class SeriaColor extends Component {
   }
 
   render(){
-    const { isLong } = this.props
-        , { color } = this.state;
+    const { _width } = this
+    , { isLong, chartType } = this.props
+    , { color } = this.state
+    , _isLineWidth = _hasLineWidth(chartType)
+    , _rowStyle = _isLineWidth
+         ? S.ROW2
+         : {...S.ROW2, ...S.ROW2_PADDING };
     return (
       <div style={S.ROOT}>
         <div>
@@ -96,7 +121,15 @@ class SeriaColor extends Component {
           />
           {this._renderColors(COLORS1, isLong)}
         </div>
-        <div style={S.ROW2}>
+        <div style={_rowStyle}>
+          {
+           _isLineWidth && <BtCounter
+              style={S.BT_COUNTER}
+              initialValue={_width}
+              title="Line Width"
+              onSetValue={this._setWidth}
+            />
+          }
           {this._renderColors(COLORS2, isLong)}
         </div>
       </div>
@@ -108,6 +141,19 @@ class SeriaColor extends Component {
     return color !== C_TRANSPARENT
       ? color
       : void 0;
+  }
+
+  getConf(){
+    const { chartType } = this.props
+    , { color } = this.state;
+    return {
+      seriaColor: color !== C_TRANSPARENT
+         ? color
+         : void 0,
+      seriaWidth: _hasLineWidth(chartType)
+        ? this._width
+        : void 0
+    };
   }
 }
 

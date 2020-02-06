@@ -11,6 +11,7 @@ import withForDate from './withForDate'
 import RouterOptions from './RouterOptions'
 import ModalOptions from './ModalOptions'
 import ModalToggle from './ModalToggle'
+import RowChart from './RowChart'
 
 const  DF_MAP_FREQUENCY = 'M';
 
@@ -24,6 +25,8 @@ const _crIsToggleInit = (selectProps) => {
   return _isToggleInit;
 };
 
+const _isCategory = (chartType) => RouterOptions
+  .isCategory(chartType);
 
 @Decor.dialog
 @withForDate
@@ -57,8 +60,6 @@ class DialogSelectN extends Component {
 
     onClose: PropTypes.func,
     onLoad: PropTypes.func
-
-
   }
  */
 
@@ -70,19 +71,14 @@ class DialogSelectN extends Component {
     super(props)
 
     this._items = []
+    this._titles = [ 0 ]
     this._compSelect = {}
     //this.date = undefined;
-    //this.chartType = undefined;
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
       onAbout: this._clickInfoWithToolbar
     })
-    this._toggleChart = this._toggleStateBy
-      .bind(this, 'isShowChart')
-    this._toggleDate = this._toggleStateBy
-      .bind(this, 'isShowDate')
-
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true, isOptions: true, isToggle: true }
     )
@@ -97,6 +93,7 @@ class DialogSelectN extends Component {
       isShowDate: false,
       ...crDateConfig('EMPTY'),
       ..._crIsToggleInit(props.selectProps)
+      //chartType
     }
   }
 
@@ -115,11 +112,15 @@ class DialogSelectN extends Component {
     }))
   }
 
-  _isCategory = () => {
-    return RouterOptions.isCategory(this.chartType)
+  _checkCaptionBy = (index) => {
+    this._titles.push(index)
+  }
+  _uncheckCaption = (index) => {
+     this._titles = this._titles
+       .filter(v => v !== index)
   }
 
-  _updateForDate = () => {
+  _updateForDate = (chartType) => {
     this.date = void 0;
     const { dfProps={} } = this.props
     , { mapFrequency, mapDateDf } = dfProps
@@ -128,17 +129,20 @@ class DialogSelectN extends Component {
 
     this.setState({
        isShowDate: true,
+       chartType,
        ...dateConfig
     });
   }
 
 
   _hSelectChartType = (chartType) => {
-    this.chartType = chartType;
-    if (this._isCategory()) {
-      this._updateForDate();
+    if (_isCategory(chartType)) {
+      this._updateForDate(chartType);
     } else {
-      this.setState({ isShowDate: false });
+      this.setState({
+        chartType,
+        isShowDate: false
+      });
     }
   }
   _onRegColor = (comp) => {
@@ -160,10 +164,11 @@ class DialogSelectN extends Component {
       msgOnNotSelected,
       selectProps
     } = this.props
+    , { chartType } = this.state
     , _max = selectProps.length
     , msg = [];
 
-    let i = this._isCategory() ? 1 : 0;
+    let i = _isCategory(chartType) ? 1 : 0;
     for( ; i<_max; i++) {
       if (!this._items[i]) {
         msg.push(msgOnNotSelected(selectProps[i].caption))
@@ -177,15 +182,15 @@ class DialogSelectN extends Component {
 
   _createLoadOption = () => {
     const {
-      chartType,
       colorComp,
       dialogOptions
     } = this
-    , seriaColor = colorComp
-        ? colorComp.getColor()
-        : void 0
+    , { chartType } = this.state
+    , { seriaColor, seriaWidth } = colorComp
+        ? colorComp.getConf()
+        : {}
     , date = this._getDateWithForDate()
-    , isCategory = RouterOptions.isCategory(chartType)
+    , isCategory = _isCategory(chartType)
     , items = isCategory
         ? this._items.slice(1)
         : this._items;
@@ -193,8 +198,9 @@ class DialogSelectN extends Component {
     return this.props.loadFn(
       this.props, {
         items,
+        titles: this._titles,
         dialogOptions,
-        chartType, seriaColor,
+        chartType, seriaColor, seriaWidth,
         isCategory,
         date
         /*
@@ -250,6 +256,7 @@ class DialogSelectN extends Component {
       noDate, noForDate
     } = this.props
     , {
+      chartType,
       isToolbar, isOptions, isToggle,
       isShowLabels,
       isShowChart, isShowDate,
@@ -284,31 +291,24 @@ class DialogSelectN extends Component {
              isShowDate={isShowDate}
              crIsId={_crIsId}
              onToggle={this._toggleStateBy}
-             toggleChart={this._toggleChart}
-             toggleDate={this._toggleDate}
+             onCheckCaption={this._checkCaptionBy}
+             onUnCheckCaption={this._uncheckCaption}
              onClose={this._hideToggleWithToolbar}
            />
            {this._renderSelects(selectProps, isShow, isShowLabels)}
-           <D.ShowHide isShow={isShowChart}>
-             <D.RowChart
-               isShowLabels={isShowLabels}
-               options={this._chartOptions}
-               onSelectChart={this._hSelectChartType}
-               onRegColor={this._onRegColor}
-             />
-           </D.ShowHide>
-           {
-             !noDate &&
-             <D.ShowHide isShow={isShowDate}>
-               <D.RowInputSelect
-                  isShowLabels={isShowLabels}
-                  caption="For Date"
-                  placeholder={dateDefault}
-                  options={dateOptions}
-                  onSelect={this._hSelectDate}
-               />
-             </D.ShowHide>
-           }
+           <RowChart
+             chartType={chartType}
+             isShowLabels={isShowLabels}
+             isShowChart={isShowChart}
+             chartOptions={this._chartOptions}
+             onSelectChart={this._hSelectChartType}
+             onRegColor={this._onRegColor}
+             noDate={noDate}
+             isShowDate={isShowDate}
+             dateDefault={dateDefault}
+             dateOptions={dateOptions}
+             onSelecDate={this._hSelectDate}
+           />
            <D.ValidationMessages
                validationMessages={validationMessages}
            />

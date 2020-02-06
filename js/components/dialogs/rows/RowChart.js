@@ -12,7 +12,8 @@ var _RowOcSelect = _interopRequireDefault(require("./RowOcSelect"));
 var _SeriaColor = _interopRequireDefault(require("../SeriaColor"));
 
 var RowChart = function RowChart(_ref) {
-  var isShowLabels = _ref.isShowLabels,
+  var chartType = _ref.chartType,
+      isShowLabels = _ref.isShowLabels,
       placeholder = _ref.placeholder,
       options = _ref.options,
       onSelectChart = _ref.onSelectChart,
@@ -24,6 +25,7 @@ var RowChart = function RowChart(_ref) {
     options: options,
     onSelect: onSelectChart
   }, _react["default"].createElement(_SeriaColor["default"], {
+    chartType: chartType,
     isLong: isShowLabels,
     onReg: onRegColor
   }));

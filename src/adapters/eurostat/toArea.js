@@ -8,7 +8,7 @@ const toArea = {
      const { timeIndex, value } = fn.crTimeIndexAndValue(json)
          , {
              isNotZoomToMinMax,
-             seriaType, seriaColor
+             seriaType, seriaColor, seriaWidth
             } = option
          , { data, max, min } = fn.createData(timeIndex, value)
          , _type = typeof seriaType === 'string'
@@ -16,12 +16,10 @@ const toArea = {
              : 'spline'
          , config = ChartConfig.fBaseAreaConfig({
              seriaType: _type,
-             seriaColor
-           });
-
+             seriaColor, seriaWidth
+           });      
       fn.setDataAndInfo({ config, data, json, option });
       fn.setLineExtrems({ config, max, min, isNotZoomToMinMax });
-      //config.zhConfig.isWithoutIndicator = false      
 
       return config;
    },

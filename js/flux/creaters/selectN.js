@@ -31,13 +31,15 @@ var createLoadOptions = function createLoadOptions(props, options) {
       _options = options,
       _options$items = _options.items,
       items = _options$items === void 0 ? [] : _options$items,
+      titles = _options.titles,
       dialogOptions = _options.dialogOptions,
       _options$chartType = _options.chartType,
       chartType = _options$chartType === void 0 ? {} : _options$chartType,
       seriaColor = _options.seriaColor,
+      seriaWidth = _options.seriaWidth,
       date = _options.date,
-      _crCaption = crCaption(items),
-      oneC = _crCaption.oneC,
+      _crCaption = crCaption(items, titles),
+      itemCaption = _crCaption.itemCaption,
       threeC = _crCaption.threeC,
       title = _crCaption.title,
       subtitle = _crCaption.subtitle,
@@ -48,16 +50,17 @@ var createLoadOptions = function createLoadOptions(props, options) {
   return (0, _extends2["default"])({}, dfProps, {}, dialogOptions, {
     _type: TYPE,
     _itemKey: _itemKey,
-    itemCaption: oneC,
+    itemCaption: itemCaption,
     zhCompType: compType,
     time: date,
     seriaType: seriaType,
     seriaColor: seriaColor,
+    seriaWidth: seriaWidth,
     items: items,
     loadId: loadId,
     title: title,
     subtitle: subtitle
-  }, crAlertConf(oneC + ": " + threeC, oneC, threeC), {
+  }, crAlertConf(itemCaption + ": " + threeC, itemCaption, threeC), {
     dataSource: dataSource
   });
 };

@@ -5,6 +5,7 @@ import withTheme from '../../hoc/withTheme'
 
 import SvgCheckBox from '../../zhn/SvgCheckBox'
 
+const CL = "bt-chb";
 const TH_ID = 'ROW_CHECKBOX';
 
 const CHECKED_COLOR = '#1b2836';
@@ -102,7 +103,7 @@ class RowCheckBox extends Component {
       rootStyle,
       checkedColor,
       caption,
-      styleCaption,
+      captionStyle,
       value
     } = this.props
     , TS = theme.getStyle(TH_ID)
@@ -110,8 +111,8 @@ class RowCheckBox extends Component {
          ? this.state.isChecked
          : value
     , _style = _value
-        ? { ...styleCaption, ..._crCheckedStyle(checkedColor) }
-        : styleCaption;
+        ? { ...captionStyle, ..._crCheckedStyle(checkedColor) }
+        : captionStyle;
     return (
       <div style={{...S.ROOT, ...rootStyle}}>
         <SvgCheckBox
@@ -124,12 +125,14 @@ class RowCheckBox extends Component {
         />
         {
           caption && (
-            <span
+            <button
+              className={CL}
+              tabIndex="-1"
               style={{...S.CAPTION, ..._style }}
               onClick={this._hToggle}
             >
               {caption}
-            </span>
+            </button>
           )
         }
       </div>

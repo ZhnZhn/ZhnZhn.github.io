@@ -15,23 +15,21 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _isKeyEnter = _interopRequireDefault(require("./isKeyEnter"));
+
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
 //import PropTypes from "prop-types";
 var S = {
   DIV: {
     display: 'inline-block',
-    width: '16px',
-    height: '16px',
+    width: 16,
+    height: 16,
     cursor: 'pointer'
   },
   SVG: {
     display: 'inline-block'
   }
-};
-var E = {
-  KEY: " ",
-  KEY_CODE: 32
 };
 var C_GREY = "#777777";
 
@@ -103,7 +101,7 @@ function (_Component) {
     };
 
     _this._hKeyDown = function (evt) {
-      if (evt.key === E.KEY || evt.keyCode === E.KEY_CODE) {
+      if ((0, _isKeyEnter["default"])(evt)) {
         evt.preventDefault();
 
         _this._hClick();

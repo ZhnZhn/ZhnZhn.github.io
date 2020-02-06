@@ -29,6 +29,12 @@ var _RouterOptions = _interopRequireDefault(require("./RouterOptions"));
 
 var _loadDims = _interopRequireDefault(require("./loadDims"));
 
+var _ModalOptions = _interopRequireDefault(require("./ModalOptions"));
+
+var _ModalToggle = _interopRequireDefault(require("./ModalToggle"));
+
+var _RowChart = _interopRequireDefault(require("./RowChart"));
+
 var _dec, _class, _temp;
 
 var MAP_FREQUENCY_DF = 'M',
@@ -48,6 +54,10 @@ var S = {
   }
 };
 
+var _crIsId = function _crIsId(id) {
+  return "is" + id + "Select";
+};
+
 var _isOpenAndPrevLoadFailed = function _isOpenAndPrevLoadFailed(prevProps, props, state) {
   return props !== prevProps && !prevProps.isShow && props.isShow && state.isLoadFailed;
 };
@@ -56,6 +66,10 @@ var _fNotTimeDimension = function _fNotTimeDimension(timeId) {
   return function (config) {
     return config.id !== timeId;
   };
+};
+
+var _isCategory = function _isCategory(chartType) {
+  return _RouterOptions["default"].isCategory(chartType);
 };
 
 var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
@@ -67,6 +81,24 @@ function (_Component) {
     var _this;
 
     _this = _Component.call(this, props) || this;
+
+    _this._toggleStateBy = function (propName) {
+      _this.setState(function (prevState) {
+        var _ref;
+
+        return _ref = {}, _ref[propName] = !prevState[propName], _ref;
+      });
+    };
+
+    _this._checkCaptionBy = function (index) {
+      _this._titles.push(index);
+    };
+
+    _this._uncheckCaption = function (index) {
+      _this._titles = _this._titles.filter(function (v) {
+        return v !== index;
+      });
+    };
 
     _this._loadDims = function () {
       var _this$props = _this.props,
@@ -100,7 +132,15 @@ function (_Component) {
           _this.setState({
             isLoading: false,
             isLoadFailed: false,
-            configs: _configs
+            configs: _configs,
+            captions: _configs.map(function (_ref2) {
+              var id = _ref2.id,
+                  caption = _ref2.caption;
+              return {
+                id: id,
+                caption: caption
+              };
+            })
           });
         } else {
           _this.setState({
@@ -112,11 +152,7 @@ function (_Component) {
       });
     };
 
-    _this._isCategory = function () {
-      return _RouterOptions["default"].isCategory(_this.chartType);
-    };
-
-    _this._updateForDate = function () {
+    _this._updateForDate = function (chartType) {
       _this.date = null;
       var frequency = _this._items[1] ? _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : null,
           mapDateDf = _this.props.mapDateDf,
@@ -124,7 +160,9 @@ function (_Component) {
 
       _this.setState((0, _extends2["default"])({
         isShowDate: true
-      }, dateConfig));
+      }, dateConfig, {
+        chartType: chartType
+      }));
     };
 
     _this._handleLoad = function () {
@@ -133,19 +171,23 @@ function (_Component) {
       if (validationMessages.length === 0) {
         var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
             _items = _assertThisInitialize._items,
-            chartType = _assertThisInitialize.chartType,
+            dialogOptions = _assertThisInitialize.dialogOptions,
             colorComp = _assertThisInitialize.colorComp,
             date = _assertThisInitialize.date,
-            seriaColor = colorComp ? colorComp.getColor() : undefined,
-            dateDefault = _this.state.dateDefault;
-
-        var loadOpt = _this.props.loadFn(_this.props, {
-          //one, two, chartType, date, dateDefault,
+            chartType = _this.state.chartType,
+            _ref3 = colorComp ? colorComp.getConf() : {},
+            seriaColor = _ref3.seriaColor,
+            seriaWidth = _ref3.seriaWidth,
+            dateDefault = _this.state.dateDefault,
+            loadOpt = _this.props.loadFn(_this.props, {
+          dialogOptions: dialogOptions,
           chartType: chartType,
           seriaColor: seriaColor,
+          seriaWidth: seriaWidth,
           date: date,
           dateDefault: dateDefault,
           items: _items,
+          titles: _this._titles,
           selectOptions: _this._selectOptions
         });
 
@@ -183,12 +225,11 @@ function (_Component) {
     };
 
     _this._hSelectChartType = function (chartType) {
-      _this.chartType = chartType;
-
-      if (_this._isCategory()) {
-        _this._updateForDate();
+      if (_isCategory(chartType)) {
+        _this._updateForDate(chartType);
       } else {
         _this.setState({
+          chartType: chartType,
           isShowDate: false
         });
       }
@@ -220,12 +261,15 @@ function (_Component) {
           isShowLabels: isShowLabels,
           caption: caption,
           options: options
-        };
-        return _react["default"].createElement(_DialogCell["default"].RowInputSelect, (0, _extends2["default"])({
-          key: id
-        }, rest, {
+        },
+            _isShow = !_this.state[_crIsId(id)];
+
+        return _react["default"].createElement(_DialogCell["default"].ShowHide, {
+          key: id,
+          isShow: _isShow
+        }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, (0, _extends2["default"])({}, rest, {
           onSelect: _this._fSelect(index).bind((0, _assertThisInitialized2["default"])(_this))
-        }));
+        })));
       });
     };
 
@@ -233,16 +277,27 @@ function (_Component) {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
-    _this.toolbarButtons = _this._createType2WithToolbar(props);
+    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+      noDate: true,
+      isOptions: true,
+      isToggle: true
+    });
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this._chartOptions = _RouterOptions["default"].crOptions(props);
     _this._items = [];
+    _this._titles = [];
     _this._selectOptions = [];
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isLoading: true,
       isLoadFailed: false,
+      isShowChart: true,
       isShowDate: false
-    }, (0, _crDateConfig["default"])('EMPTY'));
+    }, (0, _crDateConfig["default"])('EMPTY'), {
+      isOptions: false,
+      isToggle: false,
+      captions: [] //chartType
+
+    });
     return _this;
   }
 
@@ -280,13 +335,18 @@ function (_Component) {
         onShow = _this$props2.onShow,
         onFront = _this$props2.onFront,
         _this$state3 = this.state,
+        chartType = _this$state3.chartType,
         isToolbar = _this$state3.isToolbar,
+        isOptions = _this$state3.isOptions,
+        isToggle = _this$state3.isToggle,
         isShowLabels = _this$state3.isShowLabels,
         isLoading = _this$state3.isLoading,
         isLoadFailed = _this$state3.isLoadFailed,
+        isShowChart = _this$state3.isShowChart,
         isShowDate = _this$state3.isShowDate,
         dateDefault = _this$state3.dateDefault,
         dateOptions = _this$state3.dateOptions,
+        captions = _this$state3.captions,
         validationMessages = _this$state3.validationMessages,
         _spinnerStyle = !isLoadFailed ? S.SPINNER_LOADING : (0, _extends2["default"])({}, S.SPINNER_LOADING, {}, S.SPINNER_FAILED);
 
@@ -301,22 +361,34 @@ function (_Component) {
     }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
+    }), _react["default"].createElement(_ModalOptions["default"], {
+      isShow: isOptions,
+      toggleOption: this._toggleOptionWithToolbar,
+      onClose: this._hideOptionsWithToolbar
+    }), _react["default"].createElement(_ModalToggle["default"], {
+      isShow: isToggle,
+      selectProps: captions,
+      isShowChart: isShowChart,
+      isShowDate: isShowDate,
+      crIsId: _crIsId,
+      onToggle: this._toggleStateBy,
+      onCheckCaption: this._checkCaptionBy,
+      onUnCheckCaption: this._uncheckCaption,
+      onClose: this._hideToggleWithToolbar
     }), (isLoading || isLoadFailed) && _react["default"].createElement(_SpinnerLoading["default"], {
       style: _spinnerStyle
-    }), !isLoading && !isLoadFailed && this._renderSelectInputs(), _react["default"].createElement(_DialogCell["default"].RowChart, {
+    }), !isLoading && !isLoadFailed && this._renderSelectInputs(), _react["default"].createElement(_RowChart["default"], {
+      chartType: chartType,
       isShowLabels: isShowLabels,
-      options: this._chartOptions,
+      isShowChart: isShowChart,
+      chartOptions: this._chartOptions,
       onSelectChart: this._hSelectChartType,
-      onRegColor: this._onRegColor
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      isShowLabels: isShowLabels,
-      caption: "For Date",
-      placeholder: dateDefault,
-      options: dateOptions,
-      onSelect: this._hSelectDate
-    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+      onRegColor: this._onRegColor,
+      isShowDate: isShowDate,
+      dateDefault: dateDefault,
+      dateOptions: dateOptions,
+      onSelecDate: this._hSelectDate
+    }), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

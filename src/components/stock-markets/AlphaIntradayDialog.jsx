@@ -201,13 +201,13 @@ class AlphaIntradayDialog extends Component {
           {this._isDaily && <D.ShowHide isShow={isToggleOptions}>
               { this._isDailyAdj && <D.RowCheckBox
                   initValue={false}
-                  caption={"With Dividend History"}
+                  caption="With Dividend History"
                   onToggle={this._toggleDividend}
                 />
               }
               <D.RowCheckBox
                 initValue={false}
-                caption={"Filter Zero Values"}
+                caption="Filter Zero Values"
                 onToggle={this._toggleFilterZero}
               />
            </D.ShowHide>

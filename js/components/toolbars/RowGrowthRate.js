@@ -154,7 +154,7 @@ var RowGrowthRate = function RowGrowthRate(_ref3) {
   }), _react["default"].createElement("div", null, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     caption: "Column",
     rootStyle: (0, _extends2["default"])({}, S.INLINE, {}, S.PL_6),
-    styleCaption: S.PL_6,
+    captionStyle: S.PL_6,
     checkedColor: OC_COLOR,
     initValue: true,
     onCheck: _onCheckColumn,
@@ -162,7 +162,7 @@ var RowGrowthRate = function RowGrowthRate(_ref3) {
   }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     caption: "OnTop",
     rootStyle: (0, _extends2["default"])({}, S.INLINE, {}, S.PL_24),
-    styleCaption: S.PL_6,
+    captionStyle: S.PL_6,
     checkedColor: OC_COLOR,
     initValue: false,
     onCheck: _onCheckTop,

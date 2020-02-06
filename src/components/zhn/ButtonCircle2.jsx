@@ -2,7 +2,11 @@ import React from 'react'
 
 const CL = 'zhn-bt-circle2';
 
-const ButtonCircle2 = ({ className='', style, caption='', onClick, ...rest }) =>
+const ButtonCircle2 = ({
+  className='', style,
+  caption='', onClick,
+  ...rest
+}) => (
   <button
      className={`${CL} ${className}`}
      style={style}
@@ -13,5 +17,6 @@ const ButtonCircle2 = ({ className='', style, caption='', onClick, ...rest }) =>
       {caption}
     </div>
   </button>
+);  
 
 export default ButtonCircle2

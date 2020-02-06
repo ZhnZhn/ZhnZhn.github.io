@@ -17,8 +17,8 @@
   bottom: 0;
   left: 0;
   display: block;
-  overflow-x: hidden;
-  overflow-y: auto;
+  //overflow-x: hidden;
+  //overflow-y: auto;
   opacity: 1;
   background: rgba(0, 0, 0, 0.35) none repeat scroll 0% 0%;
   outline: 0 none; }

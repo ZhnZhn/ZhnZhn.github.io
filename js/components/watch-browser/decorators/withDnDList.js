@@ -68,16 +68,20 @@ var _hDragLeaveList = function _hDragLeaveList(ev) {
   this.dragLeaveWithDnDStyle(ev);
 };
 
-var withDnDList = function withDnDList(DRAG, WatchActions) {
-  return function (target) {
-    Object.assign(target.prototype, {
-      _hDragStartList: _crDragStartList(DRAG),
-      _hDropList: _crDropList(DRAG, WatchActions),
-      _hDragEnterList: _crDragEnterList(DRAG),
-      _hDragOverList: _hDragOverList,
-      _hDragLeaveList: _hDragLeaveList
-    });
-  };
+var _bindDnDList = function _bindDnDList(DRAG, WatchActions) {
+  Object.assign(this, {
+    _hDragStartList: _crDragStartList(DRAG).bind(this),
+    _hDropList: _crDropList(DRAG, WatchActions).bind(this),
+    _hDragEnterList: _crDragEnterList(DRAG).bind(this),
+    _hDragOverList: _hDragOverList,
+    _hDragLeaveList: _hDragLeaveList.bind(this)
+  });
+};
+
+var withDnDList = function withDnDList(target) {
+  Object.assign(target.prototype, {
+    _bindDnDList: _bindDnDList
+  });
 };
 
 var _default = withDnDList;

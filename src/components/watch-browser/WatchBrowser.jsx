@@ -9,7 +9,7 @@ import A from '../Comp'
 import EditBar from './EditBar';
 import WatchItem from './WatchItem';
 
-import Decor from './decorators/Decorators';
+import withWatchDnD from './decorators/withWatchDnD';
 
 const CL = {
   SCROLL: 'scroll-container-y scroll-watch',
@@ -47,32 +47,18 @@ const DRAG = {
   C_GROUP_ENTER: C_GROUP_OPEN,
   LIST: 'LIST',
   C_LIST_ENTER: C_LIST_OPEN,
-  ITEM: 'ITEM'
+  ITEM: 'ITEM'  
 };
 
-@Decor.withDnDStyle
-@Decor.withDnDGroup(DRAG, WatchActions)
-@Decor.withDnDList(DRAG, WatchActions)
-@Decor.withDnDItem(DRAG, WatchActions)
+@withWatchDnD
 class WatchBrowser extends Component {
 
   constructor(props){
     super(props)
 
-    this._hDragStartGroup = this._hDragStartGroup.bind(this)
-    this._hDropGroup = this._hDropGroup.bind(this)
-    this._hDragEnterGroup = this._hDragEnterGroup.bind(this)
-    this._hDragLeaveGroup = this._hDragLeaveGroup.bind(this)
-
-    this._hDragStartList = this._hDragStartList.bind(this)
-    this._hDropList = this._hDropList.bind(this)
-    this._hDragEnterList = this._hDragEnterList.bind(this)
-    this._hDragLeaveList = this._hDragLeaveList.bind(this)
-
-    this._hDragStartItem = this._hDragStartItem.bind(this)
-    this._hDropItem = this._hDropItem.bind(this)
-    this._hDragEnterItem = this._hDragEnterItem.bind(this)
-    this._hDragLeaveItem = this._hDragLeaveItem.bind(this)
+    this._bindDnDGroup(DRAG, WatchActions)
+    this._bindDnDList(DRAG, WatchActions)
+    this._bindDnDItem(DRAG, WatchActions)
 
     this.state = {
       isShow : !!props.isInitShow,

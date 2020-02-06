@@ -57,16 +57,20 @@ const _hDragLeaveGroup = function(ev){
    this.dragLeaveWithDnDStyle(ev)
 };
 
-const withDnDGroup = (DRAG, WatchActions) => {
-  return (target) => {
-    Object.assign(target.prototype, {
-      _hDragStartGroup: _crDragStartGroup(DRAG),
-      _hDropGroup: _crDropGroup(DRAG, WatchActions),
-      _hDragEnterGroup: _crDragEnterGroup(DRAG),
-      _hDragOverGroup,
-      _hDragLeaveGroup
-   })
-  };
-}
+const _bindDnDGroup = function(DRAG, WatchActions){
+  Object.assign(this, {
+    _hDragStartGroup: _crDragStartGroup(DRAG).bind(this),
+    _hDropGroup: _crDropGroup(DRAG, WatchActions).bind(this),
+    _hDragEnterGroup: _crDragEnterGroup(DRAG).bind(this),
+    _hDragOverGroup,
+    _hDragLeaveGroup: _hDragLeaveGroup.bind(this)
+ })
+};
+
+const withDnDGroup = (target) => {
+  Object.assign(target.prototype, {
+    _bindDnDGroup
+  })
+};
 
 export default withDnDGroup

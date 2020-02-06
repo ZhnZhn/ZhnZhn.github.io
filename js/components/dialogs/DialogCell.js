@@ -11,6 +11,8 @@ var _Rows = _interopRequireDefault(require("./rows/Rows"));
 
 var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
 
+var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
+
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
@@ -29,6 +31,7 @@ var _Button = _interopRequireDefault(require("./Button"));
 
 var DialogCell = (0, _extends2["default"])({
   DraggableDialog: _DraggableDialog["default"],
+  ModalPopup: _ModalPopup["default"],
   ShowHide: _ShowHide["default"],
   ValidationMessages: _ValidationMessages["default"],
   ToolbarButtonCircle: _ToolbarButtonCircle["default"],

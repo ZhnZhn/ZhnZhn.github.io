@@ -1,1 +1,45 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/toArea.js"],"names":["toArea","createConfig","json","option","fn","crTimeIndexAndValue","timeIndex","value","isNotZoomToMinMax","seriaType","seriaColor","createData","data","max","min","_type","toLowerCase","config","ChartConfig","fBaseAreaConfig","setDataAndInfo","setLineExtrems","createSeria","itemCaption","seria","fSeries","Object","assign","zhSeriaId","key","zhValueText","color","minY","findMinY"],"mappings":";;;;;;;AAAA;;AAEA;;AAGA,IAAMA,MAAM,GAAG;AACZC,EAAAA,YAAY,EAAE,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AAAA,gCACDC,uBAAGC,mBAAH,CAAuBH,IAAvB,CADC;AAAA,QACtBI,SADsB,yBACtBA,SADsB;AAAA,QACXC,KADW,yBACXA,KADW;AAAA,QAGtBC,iBAHsB,GAKnBL,MALmB,CAGtBK,iBAHsB;AAAA,QAItBC,SAJsB,GAKnBN,MALmB,CAItBM,SAJsB;AAAA,QAIXC,UAJW,GAKnBP,MALmB,CAIXO,UAJW;AAAA,yBAMHN,uBAAGO,UAAH,CAAcL,SAAd,EAAyBC,KAAzB,CANG;AAAA,QAMtBK,IANsB,kBAMtBA,IANsB;AAAA,QAMhBC,GANgB,kBAMhBA,GANgB;AAAA,QAMXC,GANW,kBAMXA,GANW;AAAA,QAOxBC,KAPwB,GAOhB,OAAON,SAAP,KAAqB,QAArB,GACJA,SAAS,CAACO,WAAV,EADI,GAEJ,QAToB;AAAA,QAUxBC,MAVwB,GAUfC,wBAAYC,eAAZ,CAA4B;AACnCV,MAAAA,SAAS,EAAEM,KADwB;AAEnCL,MAAAA,UAAU,EAAVA;AAFmC,KAA5B,CAVe;;AAe7BN,2BAAGgB,cAAH,CAAkB;AAAEH,MAAAA,MAAM,EAANA,MAAF;AAAUL,MAAAA,IAAI,EAAJA,IAAV;AAAgBV,MAAAA,IAAI,EAAJA,IAAhB;AAAsBC,MAAAA,MAAM,EAANA;AAAtB,KAAlB;;AACAC,2BAAGiB,cAAH,CAAkB;AAAEJ,MAAAA,MAAM,EAANA,MAAF;AAAUJ,MAAAA,GAAG,EAAHA,GAAV;AAAeC,MAAAA,GAAG,EAAHA,GAAf;AAAoBN,MAAAA,iBAAiB,EAAjBA;AAApB,KAAlB,EAhB6B,CAiB7B;;;AAEA,WAAOS,MAAP;AACF,GArBW;AAuBZK,EAAAA,WAAW,EAAE,qBAACpB,IAAD,EAAOC,MAAP,EAAkB;AAAA,iCACAC,uBAAGC,mBAAH,CAAuBH,IAAvB,CADA;AAAA,QACrBI,SADqB,0BACrBA,SADqB;AAAA,QACVC,KADU,0BACVA,KADU;AAAA,QAErBgB,WAFqB,GAEkBpB,MAFlB,CAErBoB,WAFqB;AAAA,QAERd,SAFQ,GAEkBN,MAFlB,CAERM,SAFQ;AAAA,QAEGC,UAFH,GAEkBP,MAFlB,CAEGO,UAFH;AAAA,QAGvBc,KAHuB,GAGfN,wBAAYO,OAAZ,CAAoB;AAAEhB,MAAAA,SAAS,EAATA;AAAF,KAApB,CAHe;AAAA,0BAIZL,uBAAGO,UAAH,CAAcL,SAAd,EAAyBC,KAAzB,CAJY;AAAA,QAIrBK,IAJqB,mBAIrBA,IAJqB;;AAM7B,WAAOc,MAAM,CAACC,MAAP,CAAcH,KAAd,EAAqB;AAC1BI,MAAAA,SAAS,EAAEzB,MAAM,CAAC0B,GADQ;AAE1BC,MAAAA,WAAW,EAAEP,WAFa;AAG1BQ,MAAAA,KAAK,EAAErB,UAHmB;AAI1BE,MAAAA,IAAI,EAAEA,IAJoB;AAK1BoB,MAAAA,IAAI,EAAE5B,uBAAG6B,QAAH,CAAYrB,IAAZ;AALoB,KAArB,CAAP;AAOD;AApCW,CAAf;eAuCeZ,M","sourcesContent":["import ChartConfig from '../../charts/ChartConfig';\r\n\r\nimport fn from './EuroStatFn';\r\n\r\n\r\nconst toArea = {\r\n   createConfig: (json, option) => {\r\n     const { timeIndex, value } = fn.crTimeIndexAndValue(json)\r\n         , {\r\n             isNotZoomToMinMax,\r\n             seriaType, seriaColor\r\n            } = option\r\n         , { data, max, min } = fn.createData(timeIndex, value)\r\n         , _type = typeof seriaType === 'string'\r\n             ? seriaType.toLowerCase()\r\n             : 'spline'\r\n         , config = ChartConfig.fBaseAreaConfig({\r\n             seriaType: _type,\r\n             seriaColor\r\n           });\r\n\r\n      fn.setDataAndInfo({ config, data, json, option });\r\n      fn.setLineExtrems({ config, max, min, isNotZoomToMinMax });\r\n      //config.zhConfig.isWithoutIndicator = false      \r\n\r\n      return config;\r\n   },\r\n\r\n   createSeria: (json, option) => {\r\n     const { timeIndex, value } = fn.crTimeIndexAndValue(json)\r\n         , { itemCaption, seriaType, seriaColor } = option\r\n         , seria = ChartConfig.fSeries({ seriaType })\r\n         , { data } = fn.createData(timeIndex, value);\r\n\r\n     return Object.assign(seria, {\r\n       zhSeriaId: option.key,\r\n       zhValueText: itemCaption,\r\n       color: seriaColor,\r\n       data: data,\r\n       minY: fn.findMinY(data)\r\n     });\r\n   }\r\n};\r\n\r\nexport default toArea\r\n"],"file":"toArea.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/toArea.js"
+ ],
+ "file": "../../../src/adapters/eurostat/toArea.js",
+ "names": [
+  "toArea",
+  "createConfig",
+  "json",
+  "option",
+  "fn",
+  "crTimeIndexAndValue",
+  "timeIndex",
+  "value",
+  "isNotZoomToMinMax",
+  "seriaType",
+  "seriaColor",
+  "seriaWidth",
+  "createData",
+  "data",
+  "max",
+  "min",
+  "_type",
+  "toLowerCase",
+  "config",
+  "ChartConfig",
+  "fBaseAreaConfig",
+  "setDataAndInfo",
+  "setLineExtrems",
+  "createSeria",
+  "itemCaption",
+  "seria",
+  "fSeries",
+  "Object",
+  "assign",
+  "zhSeriaId",
+  "key",
+  "zhValueText",
+  "color",
+  "minY",
+  "findMinY"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AAGA,IAAMA,MAAM,GAAG;AACZC,EAAAA,YAAY,EAAE,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AAAA,gCACDC,uBAAGC,mBAAH,CAAuBH,IAAvB,CADC;AAAA,QACtBI,SADsB,yBACtBA,SADsB;AAAA,QACXC,KADW,yBACXA,KADW;AAAA,QAGtBC,iBAHsB,GAKnBL,MALmB,CAGtBK,iBAHsB;AAAA,QAItBC,SAJsB,GAKnBN,MALmB,CAItBM,SAJsB;AAAA,QAIXC,UAJW,GAKnBP,MALmB,CAIXO,UAJW;AAAA,QAICC,UAJD,GAKnBR,MALmB,CAICQ,UAJD;AAAA,yBAMHP,uBAAGQ,UAAH,CAAcN,SAAd,EAAyBC,KAAzB,CANG;AAAA,QAMtBM,IANsB,kBAMtBA,IANsB;AAAA,QAMhBC,GANgB,kBAMhBA,GANgB;AAAA,QAMXC,GANW,kBAMXA,GANW;AAAA,QAOxBC,KAPwB,GAOhB,OAAOP,SAAP,KAAqB,QAArB,GACJA,SAAS,CAACQ,WAAV,EADI,GAEJ,QAToB;AAAA,QAUxBC,MAVwB,GAUfC,wBAAYC,eAAZ,CAA4B;AACnCX,MAAAA,SAAS,EAAEO,KADwB;AAEnCN,MAAAA,UAAU,EAAVA,UAFmC;AAEvBC,MAAAA,UAAU,EAAVA;AAFuB,KAA5B,CAVe;;AAc7BP,2BAAGiB,cAAH,CAAkB;AAAEH,MAAAA,MAAM,EAANA,MAAF;AAAUL,MAAAA,IAAI,EAAJA,IAAV;AAAgBX,MAAAA,IAAI,EAAJA,IAAhB;AAAsBC,MAAAA,MAAM,EAANA;AAAtB,KAAlB;;AACAC,2BAAGkB,cAAH,CAAkB;AAAEJ,MAAAA,MAAM,EAANA,MAAF;AAAUJ,MAAAA,GAAG,EAAHA,GAAV;AAAeC,MAAAA,GAAG,EAAHA,GAAf;AAAoBP,MAAAA,iBAAiB,EAAjBA;AAApB,KAAlB;;AAEA,WAAOU,MAAP;AACF,GAnBW;AAqBZK,EAAAA,WAAW,EAAE,qBAACrB,IAAD,EAAOC,MAAP,EAAkB;AAAA,iCACAC,uBAAGC,mBAAH,CAAuBH,IAAvB,CADA;AAAA,QACrBI,SADqB,0BACrBA,SADqB;AAAA,QACVC,KADU,0BACVA,KADU;AAAA,QAErBiB,WAFqB,GAEkBrB,MAFlB,CAErBqB,WAFqB;AAAA,QAERf,SAFQ,GAEkBN,MAFlB,CAERM,SAFQ;AAAA,QAEGC,UAFH,GAEkBP,MAFlB,CAEGO,UAFH;AAAA,QAGvBe,KAHuB,GAGfN,wBAAYO,OAAZ,CAAoB;AAAEjB,MAAAA,SAAS,EAATA;AAAF,KAApB,CAHe;AAAA,0BAIZL,uBAAGQ,UAAH,CAAcN,SAAd,EAAyBC,KAAzB,CAJY;AAAA,QAIrBM,IAJqB,mBAIrBA,IAJqB;;AAM7B,WAAOc,MAAM,CAACC,MAAP,CAAcH,KAAd,EAAqB;AAC1BI,MAAAA,SAAS,EAAE1B,MAAM,CAAC2B,GADQ;AAE1BC,MAAAA,WAAW,EAAEP,WAFa;AAG1BQ,MAAAA,KAAK,EAAEtB,UAHmB;AAI1BG,MAAAA,IAAI,EAAEA,IAJoB;AAK1BoB,MAAAA,IAAI,EAAE7B,uBAAG8B,QAAH,CAAYrB,IAAZ;AALoB,KAArB,CAAP;AAOD;AAlCW,CAAf;eAqCeb,M"
+}

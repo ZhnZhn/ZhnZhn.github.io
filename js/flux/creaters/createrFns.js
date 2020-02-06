@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _isArr = Array.isArray;
+
 var _getCaption = function _getCaption(item) {
   return item && item.caption || '';
 };
@@ -18,6 +20,16 @@ var _crC = function _crC(title, subtitle) {
   };
 };
 
+var _crItemCaption = function _crItemCaption(items, titles) {
+  if (!_isArr(titles) || titles.length === 0) {
+    titles = [0];
+  }
+
+  return titles.map(function (titleIndex) {
+    return _getCaption(items[titleIndex]);
+  }).join(': ');
+};
+
 var createrFns = {
   crItemKey: function crItemKey(items, seriaType, date) {
     var _prefix = items.filter(Boolean).map(function (item) {
@@ -26,8 +38,9 @@ var createrFns = {
 
     return [_prefix, seriaType || '', date || ''].join('_');
   },
-  crCaption: function crCaption(items) {
-    var oneC = _getCaption(items[0]),
+  crCaption: function crCaption(items, titles) {
+    var itemCaption = _crItemCaption(items, titles),
+        oneC = _getCaption(items[0]),
         twoC = _getCaption(items[1]),
         threeC = _getCaption(items[2]),
         fourC = _getCaption(items[3]);
@@ -43,10 +56,8 @@ var createrFns = {
     }
 
     return (0, _extends2["default"])({
-      oneC: oneC,
-      twoC: twoC,
-      threeC: threeC,
-      fourC: fourC
+      itemCaption: itemCaption,
+      threeC: threeC
     }, _caption);
   },
   crAlertConf: function crAlertConf(alertItemId, alertGeo, alertMetric) {

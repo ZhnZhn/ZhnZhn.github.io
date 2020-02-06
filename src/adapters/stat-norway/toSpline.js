@@ -49,14 +49,15 @@ const _toData = (values, times) => {
 };
 
 const _crSplineSeria = (data, option={}) => {
-  const { seriaType, seriaColor } = option
+  const { seriaType, seriaColor, seriaWidth=1 } = option
   , _type = _isStr(seriaType)
       ? seriaType.toLowerCase()
       : DF_TYPE;
   return Object.assign(ChartConfig.fSeries(), {
+     visible: true,
      type: _type,
      color: seriaColor,
-     visible: true,
+     lineWidth: seriaWidth,     
      data: data,
      marker: {
        symbol: 'circle'

@@ -1,4 +1,9 @@
 
+.bt-chb:hover,
+.bt-chb:focus {
+  outline: 0
+}
+
 .button-tab {
   position: absolute;
   z-index: 10;

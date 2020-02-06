@@ -191,6 +191,7 @@ const Chart = {
 fBaseConfig({
   seriaType='area',
   seriaColor,
+  seriaWidth=1,
   spacingTop,
   isCrosshair=true
 }={}){
@@ -231,10 +232,10 @@ fBaseConfig({
       type: seriaType,
       color: seriaColor,
       tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter),
-      lineWidth: 1,
+      lineWidth: seriaWidth,
       states: {
         hover: {
-          lineWidth: 1
+          lineWidth: seriaWidth
         }
      }
     }]

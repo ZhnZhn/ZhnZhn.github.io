@@ -5,7 +5,7 @@ const { crCaption, crItemKey } = fns;
 const COUNTRY_CAPTION_DF = 'EU';
 
 const _toIds = ({ dfId }, items) => {
-  const _arr = [dfId];  
+  const _arr = [dfId];
   items.forEach(({ slice }) => {
     if (slice) {
       _arr.push(slice[Object.keys(slice)[0]])
@@ -17,8 +17,10 @@ const _toIds = ({ dfId }, items) => {
 const createLoadOptions = (props={}, options={}) => {
   const { loadId, group, dataSource, dfProps, timeId } = props
       , {
-          items=[],
-          chartType={}, seriaColor,
+          items=[], titles,
+          dialogOptions,
+          chartType={},
+          seriaColor, seriaWidth,
           date, dateDefault,
           selectOptions
         } = options
@@ -27,22 +29,23 @@ const createLoadOptions = (props={}, options={}) => {
           ? items[0].value
           : COUNTRY_CAPTION_DF
       , twoV = items[1] ? items[1].value: undefined
-      , { oneC, title, subtitle } = crCaption(items)
+      , { itemCaption, title, subtitle } = crCaption(items, titles)
       , time = date ? date.value : dateDefault
       , _items = _toIds(dfProps, items)
       , _itemKey = crItemKey(_items, seriaType, time);
 
   return {
     ...dfProps,
+    ...dialogOptions,
     _itemKey,
     geo : _countryValue,
     group : group,
     metric : twoV,
-    itemCaption: oneC,
-    alertGeo : oneC,
+    itemCaption,
+    alertGeo : itemCaption,
     loadId,
     title, subtitle,
-    seriaType, seriaColor,
+    seriaType, seriaColor, seriaWidth,
     zhCompType,
     time, timeId,
     dataSource,

@@ -2,6 +2,7 @@
 import Rows from './rows/Rows'
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog'
+import ModalPopup from '../zhn-moleculs/ModalPopup'
 import ShowHide from '../zhn/ShowHide';
 import ValidationMessages from '../zhn/ValidationMessages'
 
@@ -14,8 +15,9 @@ import Button from './Button'
 
 const DialogCell = {
   DraggableDialog,
+  ModalPopup,
   ShowHide,
-  ValidationMessages,
+  ValidationMessages,  
 
   ToolbarButtonCircle,
   Toolbar,

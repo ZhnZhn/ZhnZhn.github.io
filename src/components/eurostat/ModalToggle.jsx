@@ -1,35 +1,72 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
-import ModalPopup from '../zhn-moleculs/ModalPopup'
 import D from '../dialogs/DialogCell'
 import STYLE from './Modal.Style'
 
-const CHECKED_COLOR = '#1b75bb';
+const TOGGLE_CHECKBOX_COLOR = '#1b75bb';
+const CAPTION_CHECKBOX_COLOR = '#a487d4';
+
+const S = {
+  ROW: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  INLINE: {
+    display: 'inline-block'
+  },
+  CAPTION: {
+    maxWidth: 150
+  },
+  CHB_CAPTION: {
+    display: 'inline-block',
+    paddingLeft: 40
+  }
+};
 
 const CheckBoxList = ({
-  selectProps, crIsId, onToggle
+  selectProps,
+  crIsId,
+  onToggle,
+  onCheckCaption,
+  onUnCheckCaption
 }) => selectProps
- .map(item => (
-    <D.RowCheckBox
-      key={item.id}
-      initValue={true}
-      rootStyle={STYLE.ROW_CB}
-      checkedColor={CHECKED_COLOR}
-      caption={item.caption}
-      onToggle={() => onToggle(crIsId(item.id))}
-    />
+ .map((item, index) => (
+    <div style={S.ROW} key={item.id}>
+      <D.RowCheckBox
+        initValue={true}
+        rootStyle={{ ...STYLE.ROW_CB, ...S.INLINE}}
+        checkedColor={TOGGLE_CHECKBOX_COLOR}
+        caption={item.caption}
+        captionStyle={S.CAPTION}
+        onToggle={() => onToggle(crIsId(item.id))}
+      />
+      <D.RowCheckBox
+        initValue={index === 0}
+        rootStyle={S.CHB_CAPTION}
+        checkedColor={CAPTION_CHECKBOX_COLOR}
+        onCheck={() => onCheckCaption(index)}
+        onUnCheck={() => onUnCheckCaption(index)}
+      />
+  </div>
 ));
+
 
 const ModalToggle = ({
   isShow, style, className=STYLE.CL,
   selectProps=[],
   isShowDate, isShowChart,
-  noForDate,
+  noForDate=false,
   crIsId,
-  onToggle, toggleChart, toggleDate,
+  onToggle,
+  onCheckCaption, onUnCheckCaption,
   onClose
-}) => (
-  <ModalPopup
+}) => {
+  const _toggleChart = useCallback(
+     onToggle.bind(null, 'isShowChart'), [])
+  , _toggleDate = useCallback(
+     onToggle.bind(null, 'isShowDate'), []);
+  return (
+  <D.ModalPopup
     isShow={isShow}
     style={{...STYLE.ROOT, ...style}}
     className={className}
@@ -39,25 +76,28 @@ const ModalToggle = ({
       selectProps={selectProps}
       crIsId={crIsId}
       onToggle={onToggle}
+      onCheckCaption={onCheckCaption}
+      onUnCheckCaption={onUnCheckCaption}
     />
     <D.RowCheckBox
       key="isShowChart"
       value={isShowChart}
       rootStyle={STYLE.ROW_CB}
-      checkedColor={CHECKED_COLOR}
+      checkedColor={TOGGLE_CHECKBOX_COLOR}
       caption="Chart"
-      onToggle={toggleChart}
+      onToggle={_toggleChart}
     />
     { !noForDate && <D.RowCheckBox
         key="isForDate"
         value={isShowDate}
         rootStyle={STYLE.ROW_CB}
-        checkedColor={CHECKED_COLOR}
+        checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="For Date"
-        onToggle={toggleDate}
+        onToggle={_toggleDate}
       />
     }
-  </ModalPopup>
+  </D.ModalPopup>
 );
+}
 
 export default ModalToggle

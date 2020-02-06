@@ -65,16 +65,20 @@ var _hDragLeaveGroup = function _hDragLeaveGroup(ev) {
   this.dragLeaveWithDnDStyle(ev);
 };
 
-var withDnDGroup = function withDnDGroup(DRAG, WatchActions) {
-  return function (target) {
-    Object.assign(target.prototype, {
-      _hDragStartGroup: _crDragStartGroup(DRAG),
-      _hDropGroup: _crDropGroup(DRAG, WatchActions),
-      _hDragEnterGroup: _crDragEnterGroup(DRAG),
-      _hDragOverGroup: _hDragOverGroup,
-      _hDragLeaveGroup: _hDragLeaveGroup
-    });
-  };
+var _bindDnDGroup = function _bindDnDGroup(DRAG, WatchActions) {
+  Object.assign(this, {
+    _hDragStartGroup: _crDragStartGroup(DRAG).bind(this),
+    _hDropGroup: _crDropGroup(DRAG, WatchActions).bind(this),
+    _hDragEnterGroup: _crDragEnterGroup(DRAG).bind(this),
+    _hDragOverGroup: _hDragOverGroup,
+    _hDragLeaveGroup: _hDragLeaveGroup.bind(this)
+  });
+};
+
+var withDnDGroup = function withDnDGroup(target) {
+  Object.assign(target.prototype, {
+    _bindDnDGroup: _bindDnDGroup
+  });
 };
 
 var _default = withDnDGroup;

@@ -32,6 +32,11 @@ var _ModalOptions = _interopRequireDefault(require("./ModalOptions"));
 var _dec, _class, _class2, _temp;
 
 var MAP_FREQUENCY_DF = 'M';
+
+var _isCategory = function _isCategory(chartType) {
+  return _RouterOptions["default"].isCategory(chartType);
+};
+
 var DialogEurostat3A = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _withForDate["default"])(_class = (_temp = _class2 =
 /*#__PURE__*/
 function (_Component) {
@@ -65,25 +70,22 @@ function (_Component) {
     //this.two = undefined;
     //this.three = undefined;
     //this.date = undefined;
-    //this.chartType = undefined;
 
-    _this._isCategory = function () {
-      return _RouterOptions["default"].isCategory(_this.chartType);
-    };
-
-    _this._updateForDate = function () {
+    _this._updateForDate = function (chartType) {
       _this.date = undefined;
+
       var _this$props$dfProps = _this.props.dfProps,
           dfProps = _this$props$dfProps === void 0 ? {} : _this$props$dfProps,
           mapFrequency = dfProps.mapFrequency,
-          mapDateDf = dfProps.mapDateDf;
-
-      var _frequency = _this.two ? mapFrequency : MAP_FREQUENCY_DF,
+          mapDateDf = dfProps.mapDateDf,
+          _frequency = _this.two ? mapFrequency : MAP_FREQUENCY_DF,
           dateConfig = _frequency ? (0, _crDateConfig["default"])(_frequency, mapDateDf) : (0, _crDateConfig["default"])('EMPTY');
 
       _this.setState((0, _extends2["default"])({
         isShowDate: true
-      }, dateConfig));
+      }, dateConfig, {
+        chartType: chartType
+      }));
     };
 
     _this._handleSelectOne = function (one) {
@@ -92,9 +94,10 @@ function (_Component) {
 
     _this._handleSelectTwo = function (two) {
       _this.two = two;
+      var chartType = _this.state.chartType;
 
-      if (_this._isCategory()) {
-        _this._updateForDate();
+      if (_isCategory(chartType)) {
+        _this._updateForDate(chartType);
       }
     };
 
@@ -103,12 +106,11 @@ function (_Component) {
     };
 
     _this._handleSelectChartType = function (chartType) {
-      _this.chartType = chartType;
-
-      if (_this._isCategory()) {
-        _this._updateForDate();
+      if (_isCategory(chartType)) {
+        _this._updateForDate(chartType);
       } else {
         _this.setState({
+          chartType: chartType,
           isShowDate: false
         });
       }
@@ -131,10 +133,11 @@ function (_Component) {
           oneCaption = _this$props.oneCaption,
           twoCaption = _this$props.twoCaption,
           threeCaption = _this$props.threeCaption,
-          msgOnNotSelected = _this$props.msgOnNotSelected;
+          msgOnNotSelected = _this$props.msgOnNotSelected,
+          chartType = _this.state.chartType;
       var msg = [];
 
-      if (!_this._isCategory() && !_this.one) {
+      if (!_isCategory(chartType) && !_this.one) {
         msg.push(msgOnNotSelected(oneCaption));
       }
 
@@ -156,11 +159,13 @@ function (_Component) {
           two = _assertThisInitialize.two,
           three = _assertThisInitialize.three,
           dialogOptions = _assertThisInitialize.dialogOptions,
-          chartType = _assertThisInitialize.chartType,
           colorComp = _assertThisInitialize.colorComp,
           compSelect1 = _assertThisInitialize.compSelect1,
           compSelect2 = _assertThisInitialize.compSelect2,
-          seriaColor = colorComp ? colorComp.getColor() : undefined,
+          chartType = _this.state.chartType,
+          _ref = colorComp ? colorComp.getConf() : {},
+          seriaColor = _ref.seriaColor,
+          seriaWidth = _ref.seriaWidth,
           date = _this._getDateWithForDate();
 
       return _this.props.loadFn(_this.props, {
@@ -170,6 +175,7 @@ function (_Component) {
         dialogOptions: dialogOptions,
         chartType: chartType,
         seriaColor: seriaColor,
+        seriaWidth: seriaWidth,
         date: date,
         selectOptions: [compSelect1.getOptions(), compSelect2.getOptions()]
       });
@@ -232,6 +238,7 @@ function (_Component) {
         threeJsonProp = _this$props2.threeJsonProp,
         noDate = _this$props2.noDate,
         _this$state = this.state,
+        chartType = _this$state.chartType,
         isToolbar = _this$state.isToolbar,
         isOptions = _this$state.isOptions,
         isShowLabels = _this$state.isShowLabels,
@@ -281,6 +288,7 @@ function (_Component) {
       optionNames: "Metrics",
       onSelect: this._handleSelectThree
     }), _react["default"].createElement(_DialogCell["default"].RowChart, {
+      chartType: chartType,
       isShowLabels: isShowLabels,
       options: this._chartOptions,
       onSelectChart: this._handleSelectChartType,

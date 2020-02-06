@@ -58,16 +58,20 @@ const _hDragLeaveList = function(ev){
    this.dragLeaveWithDnDStyle(ev)
 }
 
-const withDnDList = (DRAG, WatchActions) => {
-  return (target) => {
-    Object.assign(target.prototype, {
-      _hDragStartList: _crDragStartList(DRAG),
-      _hDropList: _crDropList(DRAG, WatchActions),
-      _hDragEnterList: _crDragEnterList(DRAG),
-      _hDragOverList,
-      _hDragLeaveList
-    })
-  };
+const _bindDnDList = function(DRAG, WatchActions){
+  Object.assign(this, {
+    _hDragStartList: _crDragStartList(DRAG).bind(this),
+    _hDropList: _crDropList(DRAG, WatchActions).bind(this),
+    _hDragEnterList: _crDragEnterList(DRAG).bind(this),
+    _hDragOverList,
+    _hDragLeaveList: _hDragLeaveList.bind(this)
+  })
+}
+
+const withDnDList = (target) => {
+  Object.assign(target.prototype, {
+    _bindDnDList
+  })
 }
 
 export default withDnDList

@@ -71,12 +71,15 @@ var _crSplineSeria = function _crSplineSeria(data, option) {
   var _option = option,
       seriaType = _option.seriaType,
       seriaColor = _option.seriaColor,
+      _option$seriaWidth = _option.seriaWidth,
+      seriaWidth = _option$seriaWidth === void 0 ? 1 : _option$seriaWidth,
       _type = _isStr(seriaType) ? seriaType.toLowerCase() : DF_TYPE;
 
   return Object.assign(_ChartConfig["default"].fSeries(), {
+    visible: true,
     type: _type,
     color: seriaColor,
-    visible: true,
+    lineWidth: seriaWidth,
     data: data,
     marker: {
       symbol: 'circle'

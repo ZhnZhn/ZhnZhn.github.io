@@ -32,6 +32,11 @@ var _ModalOptions = _interopRequireDefault(require("./ModalOptions"));
 var _dec, _class, _class2, _temp;
 
 var MAP_FREQUENCY_DF = 'M';
+
+var _isCategory = function _isCategory(chartType) {
+  return _RouterOptions["default"].isCategory(chartType);
+};
+
 var DialogEurostat2 = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _withForDate["default"])(_class = (_temp = _class2 =
 /*#__PURE__*/
 function (_Component) {
@@ -60,13 +65,8 @@ function (_Component) {
     _this = _Component.call(this, props) || this; //this.one = undefined;
     //this.two = undefined;
     //this.date = undefined;
-    //this.chartType = undefined;
 
-    _this._isCategory = function () {
-      return _RouterOptions["default"].isCategory(_this.chartType);
-    };
-
-    _this._updateForDate = function () {
+    _this._updateForDate = function (chartType) {
       _this.date = null;
       var frequency = _this.two ? _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : null,
           mapDateDf = _this.props.mapDateDf,
@@ -74,7 +74,9 @@ function (_Component) {
 
       _this.setState((0, _extends2["default"])({
         isShowDate: true
-      }, dateConfig));
+      }, dateConfig, {
+        chartType: chartType
+      }));
     };
 
     _this._handleSelectOne = function (one) {
@@ -83,19 +85,19 @@ function (_Component) {
 
     _this._handleSelectTwo = function (two) {
       _this.two = two;
+      var chartType = _this.state.chartType;
 
-      if (_this._isCategory()) {
-        _this._updateForDate();
+      if (_isCategory(chartType)) {
+        _this._updateForDate(chartType);
       }
     };
 
     _this._handleSelectChartType = function (chartType) {
-      _this.chartType = chartType;
-
-      if (_this._isCategory()) {
-        _this._updateForDate();
+      if (_isCategory(chartType)) {
+        _this._updateForDate(chartType);
       } else {
         _this.setState({
+          chartType: chartType,
           isShowDate: false
         });
       }
@@ -117,9 +119,10 @@ function (_Component) {
       var _this$props = _this.props,
           oneCaption = _this$props.oneCaption,
           twoCaption = _this$props.twoCaption;
+      var chartType = _this.state.chartType;
       var msg = [];
 
-      if (!_this._isCategory()) {
+      if (!_isCategory(chartType)) {
         if (!_this.one) {
           msg.push(_this.props.msgOnNotSelected(oneCaption));
         }
@@ -138,11 +141,13 @@ function (_Component) {
           one = _assertThisInitialize.one,
           two = _assertThisInitialize.two,
           dialogOptions = _assertThisInitialize.dialogOptions,
-          chartType = _assertThisInitialize.chartType,
           colorComp = _assertThisInitialize.colorComp,
           compSelect1 = _assertThisInitialize.compSelect1,
           compSelect2 = _assertThisInitialize.compSelect2,
-          seriaColor = colorComp ? colorComp.getColor() : undefined,
+          chartType = _this.state.chartType,
+          _ref = colorComp ? colorComp.getConf() : {},
+          seriaColor = _ref.seriaColor,
+          seriaWidth = _ref.seriaWidth,
           date = _this._getDateWithForDate();
 
       return _this.props.loadFn(_this.props, {
@@ -151,6 +156,7 @@ function (_Component) {
         dialogOptions: dialogOptions,
         chartType: chartType,
         seriaColor: seriaColor,
+        seriaWidth: seriaWidth,
         date: date,
         selectOptions: [compSelect1.getOptions(), compSelect2.getOptions()]
       });
@@ -210,6 +216,7 @@ function (_Component) {
         twoURI = _this$props2.twoURI,
         twoJsonProp = _this$props2.twoJsonProp,
         _this$state = this.state,
+        chartType = _this$state.chartType,
         isToolbar = _this$state.isToolbar,
         isOptions = _this$state.isOptions,
         isShowLabels = _this$state.isShowLabels,
@@ -251,6 +258,7 @@ function (_Component) {
       optionNames: "Metrics",
       onSelect: this._handleSelectTwo
     }), _react["default"].createElement(_DialogCell["default"].RowChart, {
+      chartType: chartType,
       isShowLabels: isShowLabels,
       options: this._chartOptions,
       onSelectChart: this._handleSelectChartType,

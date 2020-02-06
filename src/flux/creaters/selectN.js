@@ -6,29 +6,33 @@ const TYPE = 'selectN';
 
 const createLoadOptions = (props={}, options={}) => {
   const { loadId, dataSource, dfProps={} } = props
-      , {
-          items=[],
-          dialogOptions,
-          chartType={},
-          seriaColor,
-          date
-        } = options
-      , { oneC, threeC, title, subtitle } = crCaption(items)
-      , { value:seriaType, compType } = chartType
-      , _itemKey = crItemKey(items, seriaType, date);
-  
+  , {
+      items=[], titles,
+      dialogOptions,
+      chartType={},
+      seriaColor,
+      seriaWidth,
+      date
+    } = options
+  , {
+      itemCaption, threeC,
+      title, subtitle
+    } = crCaption(items, titles)
+  , { value:seriaType, compType } = chartType
+  , _itemKey = crItemKey(items, seriaType, date);
+
   return {
     ...dfProps,
     ...dialogOptions,
     _type: TYPE,
     _itemKey: _itemKey,
-    itemCaption: oneC,
+    itemCaption,
     zhCompType: compType,
     time: date,
-    seriaType, seriaColor,
+    seriaType, seriaColor, seriaWidth,
     items, loadId,
     title, subtitle,
-    ...crAlertConf(`${oneC}: ${threeC}`, oneC, threeC),
+    ...crAlertConf(`${itemCaption}: ${threeC}`, itemCaption, threeC),
     dataSource
   }
 };

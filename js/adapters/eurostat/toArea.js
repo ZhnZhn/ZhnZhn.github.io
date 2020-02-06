@@ -17,6 +17,7 @@ var toArea = {
         isNotZoomToMinMax = option.isNotZoomToMinMax,
         seriaType = option.seriaType,
         seriaColor = option.seriaColor,
+        seriaWidth = option.seriaWidth,
         _fn$createData = _EuroStatFn["default"].createData(timeIndex, value),
         data = _fn$createData.data,
         max = _fn$createData.max,
@@ -24,7 +25,8 @@ var toArea = {
         _type = typeof seriaType === 'string' ? seriaType.toLowerCase() : 'spline',
         config = _ChartConfig["default"].fBaseAreaConfig({
       seriaType: _type,
-      seriaColor: seriaColor
+      seriaColor: seriaColor,
+      seriaWidth: seriaWidth
     });
 
     _EuroStatFn["default"].setDataAndInfo({
@@ -39,8 +41,7 @@ var toArea = {
       max: max,
       min: min,
       isNotZoomToMinMax: isNotZoomToMinMax
-    }); //config.zhConfig.isWithoutIndicator = false      
-
+    });
 
     return config;
   },

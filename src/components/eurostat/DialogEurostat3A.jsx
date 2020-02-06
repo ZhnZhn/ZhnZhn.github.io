@@ -13,6 +13,10 @@ import ModalOptions from './ModalOptions'
 
 const  MAP_FREQUENCY_DF = 'M';
 
+const _isCategory = (chartType) => RouterOptions
+ .isCategory(chartType);
+
+
 @Decor.dialog
 @withForDate
 class DialogEurostat3A extends Component {
@@ -59,7 +63,6 @@ class DialogEurostat3A extends Component {
     //this.two = undefined;
     //this.three = undefined;
     //this.date = undefined;
-    //this.chartType = undefined;
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -77,6 +80,7 @@ class DialogEurostat3A extends Component {
       isOptions: false,
       isShowDate: false,
       ...crDateConfig('EMPTY')
+      //chartType
     }
   }
 
@@ -89,24 +93,21 @@ class DialogEurostat3A extends Component {
     return true;
   }
 
-  _isCategory = () => {
-    return RouterOptions.isCategory(this.chartType)
-  }
-
-  _updateForDate = () => {
+  _updateForDate = (chartType) => {
     this.date = undefined;
     const { dfProps={} } = this.props
-        , { mapFrequency, mapDateDf } = dfProps;
-    const _frequency = (this.two)
-             ? mapFrequency
-             : MAP_FREQUENCY_DF
-         , dateConfig = (_frequency)
-             ? crDateConfig(_frequency, mapDateDf)
-             : crDateConfig('EMPTY')
+    , { mapFrequency, mapDateDf } = dfProps
+    , _frequency = (this.two)
+       ? mapFrequency
+       : MAP_FREQUENCY_DF
+    , dateConfig = (_frequency)
+       ? crDateConfig(_frequency, mapDateDf)
+       : crDateConfig('EMPTY')
 
     this.setState({
        isShowDate: true,
-       ...dateConfig
+       ...dateConfig,
+       chartType
     });
   }
 
@@ -115,8 +116,9 @@ class DialogEurostat3A extends Component {
   }
   _handleSelectTwo = (two) => {
     this.two = two;
-    if (this._isCategory()) {
-      this._updateForDate();
+    const { chartType } = this.state;
+    if (_isCategory(chartType)) {
+      this._updateForDate(chartType);
     }
   }
   _handleSelectThree = (three) => {
@@ -124,11 +126,13 @@ class DialogEurostat3A extends Component {
   }
 
   _handleSelectChartType = (chartType) => {
-    this.chartType = chartType;
-    if (this._isCategory()) {
-      this._updateForDate();
+    if (_isCategory(chartType)) {
+      this._updateForDate(chartType);
     } else {
-      this.setState({ isShowDate : false });
+      this.setState({
+        chartType,
+        isShowDate: false
+      });
     }
   }
   _onRegColor = (comp) => {
@@ -147,12 +151,13 @@ class DialogEurostat3A extends Component {
   }
   _createValidationMessages = () => {
      const {
-             oneCaption, twoCaption, threeCaption,
-             msgOnNotSelected
-           } = this.props;
+       oneCaption, twoCaption, threeCaption,
+       msgOnNotSelected
+     } = this.props
+     , { chartType } = this.state;
      const msg = [];
 
-     if (!this._isCategory() && !this.one) {
+     if (!_isCategory(chartType) && !this.one) {
        msg.push(msgOnNotSelected(oneCaption));
      }
      if (!this.two) {
@@ -169,12 +174,13 @@ class DialogEurostat3A extends Component {
   _createLoadOption = () => {
     const {
       one, two, three, dialogOptions,
-      chartType, colorComp,
+      colorComp,
       compSelect1, compSelect2
     } = this
-    , seriaColor = colorComp
-        ? colorComp.getColor()
-        : undefined
+    , { chartType } = this.state
+    , { seriaColor, seriaWidth } = colorComp
+        ? colorComp.getConf()
+        : {}
     , date = this._getDateWithForDate();
 
     return this.props.loadFn(
@@ -183,7 +189,7 @@ class DialogEurostat3A extends Component {
         group: two,
         metric: three,
         dialogOptions,
-        chartType, seriaColor,
+        chartType, seriaColor, seriaWidth,
         date,
         selectOptions: [
           compSelect1.getOptions(),
@@ -213,6 +219,7 @@ class DialogEurostat3A extends Component {
            noDate
           } = this.props
         , {
+            chartType,
             isToolbar, isOptions,
             isShowLabels, isShowDate,
             dateDefault, dateOptions,
@@ -267,6 +274,7 @@ class DialogEurostat3A extends Component {
                onSelect={this._handleSelectThree}
              />
              <D.RowChart
+               chartType={chartType}
                isShowLabels={isShowLabels}
                options={this._chartOptions}
                onSelectChart={this._handleSelectChartType}

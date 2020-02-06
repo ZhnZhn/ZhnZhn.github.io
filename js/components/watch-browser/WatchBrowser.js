@@ -7,8 +7,6 @@ var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWild
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -25,9 +23,9 @@ var _EditBar = _interopRequireDefault(require("./EditBar"));
 
 var _WatchItem = _interopRequireDefault(require("./WatchItem"));
 
-var _Decorators = _interopRequireDefault(require("./decorators/Decorators"));
+var _withWatchDnD = _interopRequireDefault(require("./decorators/withWatchDnD"));
 
-var _dec, _dec2, _dec3, _dec4, _class, _temp;
+var _class, _temp;
 
 var CL = {
   SCROLL: 'scroll-container-y scroll-watch',
@@ -65,7 +63,8 @@ var DRAG = {
   C_LIST_ENTER: C_LIST_OPEN,
   ITEM: 'ITEM'
 };
-var WatchBrowser = (_dec = _Decorators["default"].withDnDStyle, _dec2 = _Decorators["default"].withDnDGroup(DRAG, _WatchActions["default"]), _dec3 = _Decorators["default"].withDnDList(DRAG, _WatchActions["default"]), _dec4 = _Decorators["default"].withDnDItem(DRAG, _WatchActions["default"]), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = (_temp =
+
+var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp =
 /*#__PURE__*/
 function (_Component) {
   (0, _inheritsLoose2["default"])(WatchBrowser, _Component);
@@ -182,18 +181,12 @@ function (_Component) {
       });
     };
 
-    _this._hDragStartGroup = _this._hDragStartGroup.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDropGroup = _this._hDropGroup.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDragEnterGroup = _this._hDragEnterGroup.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDragLeaveGroup = _this._hDragLeaveGroup.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDragStartList = _this._hDragStartList.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDropList = _this._hDropList.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDragEnterList = _this._hDragEnterList.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDragLeaveList = _this._hDragLeaveList.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDragStartItem = _this._hDragStartItem.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDropItem = _this._hDropItem.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDragEnterItem = _this._hDragEnterItem.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hDragLeaveItem = _this._hDragLeaveItem.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._bindDnDGroup(DRAG, _WatchActions["default"]);
+
+    _this._bindDnDList(DRAG, _WatchActions["default"]);
+
+    _this._bindDnDItem(DRAG, _WatchActions["default"]);
+
     _this.state = {
       isShow: !!props.isInitShow,
       isModeEdit: false,
@@ -268,7 +261,8 @@ function (_Component) {
   };
 
   return WatchBrowser;
-}(_react.Component), _temp)) || _class) || _class) || _class) || _class);
+}(_react.Component), _temp)) || _class;
+
 var _default = WatchBrowser;
 exports["default"] = _default;
 //# sourceMappingURL=WatchBrowser.js.map

@@ -50,7 +50,7 @@ var _crDropItem = function _crDropItem(DRAG, WatchActions) {
 var _crDragEnterItem = function _crDragEnterItem(DRAG) {
   return function (ev) {
     ev.preventDefault();
-    this.dragEnterWithDnDStyle(ev, DRAG.ITEM);
+    this.dragEnterWithDnDStyle(ev, DRAG.ITEM, DRAG.C_LIST_ENTER);
   };
 };
 
@@ -63,16 +63,20 @@ var _hDragLeaveItem = function _hDragLeaveItem(ev) {
   this.dragLeaveWithDnDStyle(ev);
 };
 
-var withDnDItem = function withDnDItem(DRAG, WatchActions) {
-  return function (target) {
-    Object.assign(target.prototype, {
-      _hDragStartItem: _crDragStartItem(DRAG),
-      _hDropItem: _crDropItem(DRAG, WatchActions),
-      _hDragEnterItem: _crDragEnterItem(DRAG),
-      _hDragOverItem: _hDragOverItem,
-      _hDragLeaveItem: _hDragLeaveItem
-    });
-  };
+var _bindDnDItem = function _bindDnDItem(DRAG, WatchActions) {
+  Object.assign(this, {
+    _hDragStartItem: _crDragStartItem(DRAG).bind(this),
+    _hDropItem: _crDropItem(DRAG, WatchActions).bind(this),
+    _hDragEnterItem: _crDragEnterItem(DRAG).bind(this),
+    _hDragOverItem: _hDragOverItem,
+    _hDragLeaveItem: _hDragLeaveItem.bind(this)
+  });
+};
+
+var withDnDItem = function withDnDItem(target) {
+  Object.assign(target.prototype, {
+    _bindDnDItem: _bindDnDItem
+  });
 };
 
 var _default = withDnDItem;

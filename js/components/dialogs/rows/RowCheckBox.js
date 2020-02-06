@@ -18,6 +18,7 @@ var _withTheme = _interopRequireDefault(require("../../hoc/withTheme"));
 var _SvgCheckBox = _interopRequireDefault(require("../../zhn/SvgCheckBox"));
 
 //import PropTypes from "prop-types";
+var CL = "bt-chb";
 var TH_ID = 'ROW_CHECKBOX';
 var CHECKED_COLOR = '#1b2836';
 var S = {
@@ -140,11 +141,11 @@ function (_Component) {
         rootStyle = _this$props3.rootStyle,
         checkedColor = _this$props3.checkedColor,
         caption = _this$props3.caption,
-        styleCaption = _this$props3.styleCaption,
+        captionStyle = _this$props3.captionStyle,
         value = _this$props3.value,
         TS = theme.getStyle(TH_ID),
         _value = this.state ? this.state.isChecked : value,
-        _style = _value ? (0, _extends2["default"])({}, styleCaption, {}, _crCheckedStyle(checkedColor)) : styleCaption;
+        _style = _value ? (0, _extends2["default"])({}, captionStyle, {}, _crCheckedStyle(checkedColor)) : captionStyle;
 
     return _react["default"].createElement("div", {
       style: (0, _extends2["default"])({}, S.ROOT, {}, rootStyle)
@@ -155,7 +156,9 @@ function (_Component) {
       checkedColor: TS.CHECKED_COLOR,
       onCheck: this._hCheck,
       onUnCheck: this._hUnCheck
-    }), caption && _react["default"].createElement("span", {
+    }), caption && _react["default"].createElement("button", {
+      className: CL,
+      tabIndex: "-1",
       style: (0, _extends2["default"])({}, S.CAPTION, {}, _style),
       onClick: this._hToggle
     }, caption));
