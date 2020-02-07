@@ -95,7 +95,7 @@ class About extends Component {
         className={_clRoot}
         style={{..._styleOpen, ...TS.ROOT}}
        >
-         <A.BrowserCaption
+         <A.BrowserCaption            
             caption="About"
             onClose={this._handleClose}
          >

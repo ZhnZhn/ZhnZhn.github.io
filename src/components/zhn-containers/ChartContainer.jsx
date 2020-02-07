@@ -28,6 +28,9 @@ const CHILD_MARGIN = 36
     , DELTA = 10;
 
 const S = {
+  BR_CAPTION: {
+    paddingLeft: 4
+  },
   INLINE: {
     display: 'inline-block'
   },
@@ -321,6 +324,7 @@ class ChartContainer extends Component {
             />
           }
           <A.BrowserCaption
+             style={S.BR_CAPTION}
              onMore={this._showMore}
              onCheck={this._hSetActive}
              onUnCheck={this._hSetNotActive}

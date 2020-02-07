@@ -29,7 +29,12 @@ const SvgChecked = ({ stroke }) => (
   />
 );
 
+const _isBool = bool => typeof bool === 'boolean';
 const _isFn = fn => typeof fn === 'function';
+
+const _isValueFromProps = (props, state) =>
+  !_isBool(props.initValue)
+  || props.initValue !== state.initValue;
 
 const _getInitStateFrom = ({ initValue, value }) => ({
   initValue: initValue,
@@ -66,7 +71,7 @@ class SvgCheckBox extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    return props.initValue !== state.initValue
+    return _isValueFromProps(props, state)
       ? _getInitStateFrom(props)
       : null;
   }

@@ -64,7 +64,7 @@ class RowCheckBox extends Component {
     }
   }
 
-  _hCheck = () => {
+  _hCheck = () => {    
     const { onCheck, onToggle } = this.props;
     if (_isFn(onCheck)){
       onCheck()

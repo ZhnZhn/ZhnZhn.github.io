@@ -37,23 +37,23 @@ var CL = {
 };
 var STYLE = {
   BROWSER: {
-    paddingRight: '0',
-    paddingBottom: '4px',
-    minWidth: '300px'
+    paddingRight: 0,
+    paddingBottom: 4,
+    minWidth: 300
   },
   WRAPPER_SEARCH: {
-    paddingBottom: '8px',
     width: '100%',
-    paddingRight: '24px'
+    paddingBottom: 8,
+    paddingRight: 24
   },
   SPINNER_LOADING: {
     position: 'relative',
     display: 'block',
-    textAlign: 'middle',
+    width: 32,
+    height: 32,
     margin: '0 auto',
-    marginTop: '32px',
-    width: '32px',
-    height: '32px'
+    marginTop: 32,
+    textAlign: 'middle'
   }
 };
 
@@ -65,7 +65,7 @@ function (_Component) {
   function MenuBrowserDynamic2(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._loadMenu = function () {
       var _this$props = _this.props,
@@ -155,7 +155,7 @@ function (_Component) {
       onClick: _this._handleClickSearch.bind((0, _assertThisInitialized2["default"])(_this))
     }];
     _this.state = {
-      isShow: isInitShow ? true : false,
+      isShow: !!isInitShow,
       isShowSearch: false,
       scrollClass: CL.BROWSER,
       isLoaded: false,

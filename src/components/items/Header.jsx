@@ -130,6 +130,7 @@ class Header extends Component {
       <div style={{...S.ROOT, ...TS.ROOT }}>
         { this._renderMore(moreModel, TS) }
         <SvgCheckBox
+           initValue={false}
            style={S.CHECK_BOX}
            onCheck={onCheck}
            onUnCheck={onUnCheck}

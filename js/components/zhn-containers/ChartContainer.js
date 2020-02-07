@@ -44,6 +44,9 @@ var CHILD_MARGIN = 36,
     MAX_WIDTH = 1200,
     DELTA = 10;
 var S = {
+  BR_CAPTION: {
+    paddingLeft: 4
+  },
   INLINE: {
     display: 'inline-block'
   },
@@ -393,6 +396,7 @@ function (_Component) {
       onClose: this._closeCompareTo,
       onCompareTo: this._compareTo
     }), _react["default"].createElement(_Comp["default"].BrowserCaption, {
+      style: S.BR_CAPTION,
       onMore: this._showMore,
       onCheck: this._hSetActive,
       onUnCheck: this._hSetNotActive,

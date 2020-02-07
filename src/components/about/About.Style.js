@@ -2,8 +2,7 @@ const S = {
 
   SCROLL_DIV: {
     height: '94%'
-  },
-
+  },  
   DIV_WRAPPER : {
     paddingLeft: 12,
     paddingRight: 5,

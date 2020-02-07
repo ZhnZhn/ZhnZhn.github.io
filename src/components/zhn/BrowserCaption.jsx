@@ -18,24 +18,21 @@ const S = {
   ROOT: {
     position: 'relative',
     backgroundColor: '#1b2836',
-    //color: 'rgba(164, 135, 212, 1)',
-    //color: 'silver'
+    paddingTop: 4,
+    paddingLeft: 10,
+    paddingRight: 42,
+    marginBottom: 10,
     lineHeight: '1.8',
-    paddingTop: '4px',
-    paddingLeft: '4px',
-    paddingRight: '42px',
-    marginBottom: '10px',
-    borderTopLeftRadius: '4px',
-    borderTopRightRadius: '4px',
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'clip'
   },
   CAPTION: {
-    //color: 'silver',
+    paddingRight: 8,
     fontSize: '18px',
-    fontWeight: '500',
-    paddingRight: '8px'
+    fontWeight: '500'
   },
   SVG_MORE: {
     fill: 'inherit',
@@ -49,7 +46,7 @@ const S = {
   },
   SVG_CLOSE: {
     position: 'absolute',
-    top: '6px',
+    top: 6,
     right: 0
   }
 };
@@ -58,6 +55,7 @@ const _isFn = fn => typeof fn === 'function';
 
 const BrowserCaption = ({
   theme,
+  style,
   onMore,
   onCheck, onUnCheck,
   caption, children,
@@ -65,7 +63,10 @@ const BrowserCaption = ({
 }) => {
   const TS = theme.getStyle(TH_ID);
   return (
-  <div className={CL.ROOT} style={{...S.ROOT, ...TS.ROOT}}>
+  <div
+    className={CL.ROOT}
+    style={{...S.ROOT, ...style, ...TS.ROOT}}
+  >
      {
        _isFn(onMore) &&
        <SvgMore
@@ -76,6 +77,7 @@ const BrowserCaption = ({
      {
         (_isFn(onCheck) && _isFn(onUnCheck)) &&
         <SvgCheckBox
+           initValue={false}
            style={S.CHECK_BOX}
            onCheck={onCheck}
            onUnCheck={onUnCheck}

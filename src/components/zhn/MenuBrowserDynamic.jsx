@@ -9,15 +9,15 @@ const CL_SCROLL = 'scroll-container-y scroll-menu';
 
 const S = {
   BROWSER: {
-    paddingRight: '0'
+    paddingRight: 0
   }
 };
 
 class MenuBrowserDynamic extends Component{
   constructor(props){
-    super();
+    super(props);
     this.state = {
-      isShow: props.isInitShow ? true : false,
+      isShow: !!props.isInitShow,
       isLoaded: false,
       menuItems: []
     }
@@ -32,7 +32,7 @@ class MenuBrowserDynamic extends Component{
     if (!isLoaded && isShow) {
       this._loadMenu()
     }
-  }  
+  }
   componentWillUnmount(){
     this.unsubscribe();
   }
@@ -43,21 +43,32 @@ class MenuBrowserDynamic extends Component{
   }
 
   _onStore = (actionType, data) => {
-    const { browserType, store, showAction, updateAction, loadCompletedAction } = this.props;
-    if (actionType === showAction && data === browserType){
-      this._handleShow();
-    } else if (actionType === loadCompletedAction && data.browserType === browserType){
-      this.setState({ menuItems: data.menuItems, isLoaded : true });
-    } else if (actionType === updateAction && data === browserType){
-      this.setState({ menuItems: store.getBrowserMenu(browserType) });
+    const {
+      browserType, store,
+      showAction, updateAction, loadCompletedAction
+    } = this.props;
+    if (data === browserType) {
+      if (actionType === showAction) {
+        this._hShow();
+      } else if (actionType === updateAction) {
+        this.setState({
+          menuItems: store.getBrowserMenu(browserType)
+        });
+      }
+    } else if (data?.browserType === browserType
+        && actionType === loadCompletedAction) {
+      this.setState({
+        menuItems: data.menuItems,
+        isLoaded: true
+      });
     }
   }
 
-  _handleHide = () => {
-    this.setState({ isShow : false });
+  _hHide = () => {
+    this.setState({ isShow: false });
   }
-  _handleShow = () => {
-    this.setState({ isShow : true });
+  _hShow = () => {
+    this.setState({ isShow: true });
   }
 
   _renderMenuParts = (menuItems=[]) => {
@@ -74,7 +85,7 @@ class MenuBrowserDynamic extends Component{
        <Browser isShow={isShow} style={S.BROWSER}>
          <BrowserCaption
             caption={caption}
-            onClose={this._handleHide}
+            onClose={this._hHide}
          />
           <ScrollPane className={CL_SCROLL}>
             {this._renderMenuParts(menuItems)}

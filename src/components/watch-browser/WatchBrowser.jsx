@@ -38,7 +38,7 @@ const S = {
   },
   ITEM_NOT_SELECTED: {
     marginRight : 10,
-    borderBottom : '1px solid rgba(128, 192, 64, 0.6)'
+    //borderBottom : '1px solid rgba(128, 192, 64, 0.6)'
   }
 };
 
@@ -47,7 +47,7 @@ const DRAG = {
   C_GROUP_ENTER: C_GROUP_OPEN,
   LIST: 'LIST',
   C_LIST_ENTER: C_LIST_OPEN,
-  ITEM: 'ITEM'  
+  ITEM: 'ITEM'
 };
 
 @withWatchDnD

@@ -1,19 +1,24 @@
 "use strict";
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 
-var STYLE = {
+var S = {
   ITEM_DIV: {
     position: 'relative',
     paddingRight: 40,
-    //lineHeight : 1.4,
     paddingTop: 5,
     paddingBottom: 5
   },
@@ -46,23 +51,37 @@ var WatchItem = function WatchItem(props) {
       onDrop = props.onDrop,
       caption = item.caption,
       _btClose = isModeEdit ? _react["default"].createElement(_SvgClose["default"], {
-    style: STYLE.SVG_CLOSE,
+    style: S.SVG_CLOSE,
     onClose: onClose.bind(null, option)
-  }) : null;
+  }) : null,
+      _hClick = (0, _react.useCallback)(function () {
+    //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
+    onClick(item);
+  }, [item]),
+      _hKeyUp = (0, _react.useCallback)(function (evt) {
+    if ((0, _isKeyEnter["default"])(evt)) {
+      onClick(item);
+    }
+  }, [item]),
+      _dndOptions = isModeEdit ? {
+    draggable: true,
+    onDragStart: onDragStart.bind(null, option),
+    onDrop: onDrop.bind(null, option),
+    onDragOver: onDragOver,
+    onDragEnter: onDragEnter,
+    onDragLeave: onDragLeave
+  } : void 0;
 
-  return _react["default"].createElement("div", {
+  return _react["default"].createElement("div", (0, _extends2["default"])({
+    role: "menuitem",
+    tabindex: "0",
     className: className,
-    style: STYLE.ITEM_DIV,
-    onClick: onClick.bind(null, item) //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
-    ,
-    draggable: isModeEdit,
-    onDragStart: isModeEdit ? onDragStart.bind(null, option) : void 0,
-    onDrop: isModeEdit ? onDrop.bind(null, option) : void 0,
-    onDragOver: isModeEdit ? onDragOver : void 0,
-    onDragEnter: isModeEdit ? onDragEnter : void 0,
-    onDragLeave: isModeEdit ? onDragLeave : void 0
-  }, _react["default"].createElement("span", {
-    style: STYLE.ITEM_SPAN
+    style: S.ITEM_DIV,
+    onClick: _hClick
+  }, _dndOptions, {
+    onKeyUp: _hKeyUp
+  }), _react["default"].createElement("span", {
+    style: S.ITEM_SPAN
   }, caption), _btClose);
 };
 

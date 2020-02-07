@@ -27,24 +27,21 @@ var S = {
   ROOT: {
     position: 'relative',
     backgroundColor: '#1b2836',
-    //color: 'rgba(164, 135, 212, 1)',
-    //color: 'silver'
+    paddingTop: 4,
+    paddingLeft: 10,
+    paddingRight: 42,
+    marginBottom: 10,
     lineHeight: '1.8',
-    paddingTop: '4px',
-    paddingLeft: '4px',
-    paddingRight: '42px',
-    marginBottom: '10px',
-    borderTopLeftRadius: '4px',
-    borderTopRightRadius: '4px',
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'clip'
   },
   CAPTION: {
-    //color: 'silver',
+    paddingRight: 8,
     fontSize: '18px',
-    fontWeight: '500',
-    paddingRight: '8px'
+    fontWeight: '500'
   },
   SVG_MORE: {
     fill: 'inherit',
@@ -58,7 +55,7 @@ var S = {
   },
   SVG_CLOSE: {
     position: 'absolute',
-    top: '6px',
+    top: 6,
     right: 0
   }
 };
@@ -69,6 +66,7 @@ var _isFn = function _isFn(fn) {
 
 var BrowserCaption = function BrowserCaption(_ref) {
   var theme = _ref.theme,
+      style = _ref.style,
       onMore = _ref.onMore,
       onCheck = _ref.onCheck,
       onUnCheck = _ref.onUnCheck,
@@ -78,11 +76,12 @@ var BrowserCaption = function BrowserCaption(_ref) {
   var TS = theme.getStyle(TH_ID);
   return _react["default"].createElement("div", {
     className: CL.ROOT,
-    style: (0, _extends2["default"])({}, S.ROOT, {}, TS.ROOT)
+    style: (0, _extends2["default"])({}, S.ROOT, {}, style, {}, TS.ROOT)
   }, _isFn(onMore) && _react["default"].createElement(_SvgMore["default"], {
     svgStyle: S.SVG_MORE,
     onClick: onMore
   }), _isFn(onCheck) && _isFn(onUnCheck) && _react["default"].createElement(_SvgCheckBox["default"], {
+    initValue: false,
     style: S.CHECK_BOX,
     onCheck: onCheck,
     onUnCheck: onUnCheck

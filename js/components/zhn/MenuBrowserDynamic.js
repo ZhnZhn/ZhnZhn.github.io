@@ -24,7 +24,7 @@ var _MenuPart = _interopRequireDefault(require("./MenuPart"));
 var CL_SCROLL = 'scroll-container-y scroll-menu';
 var S = {
   BROWSER: {
-    paddingRight: '0'
+    paddingRight: 0
   }
 };
 
@@ -36,7 +36,7 @@ function (_Component) {
   function MenuBrowserDynamic(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._loadMenu = function () {
       var _this$props = _this.props,
@@ -59,27 +59,29 @@ function (_Component) {
           updateAction = _this$props2.updateAction,
           loadCompletedAction = _this$props2.loadCompletedAction;
 
-      if (actionType === showAction && data === browserType) {
-        _this._handleShow();
-      } else if (actionType === loadCompletedAction && data.browserType === browserType) {
+      if (data === browserType) {
+        if (actionType === showAction) {
+          _this._hShow();
+        } else if (actionType === updateAction) {
+          _this.setState({
+            menuItems: store.getBrowserMenu(browserType)
+          });
+        }
+      } else if ((data == null ? void 0 : data.browserType) === browserType && actionType === loadCompletedAction) {
         _this.setState({
           menuItems: data.menuItems,
           isLoaded: true
         });
-      } else if (actionType === updateAction && data === browserType) {
-        _this.setState({
-          menuItems: store.getBrowserMenu(browserType)
-        });
       }
     };
 
-    _this._handleHide = function () {
+    _this._hHide = function () {
       _this.setState({
         isShow: false
       });
     };
 
-    _this._handleShow = function () {
+    _this._hShow = function () {
       _this.setState({
         isShow: true
       });
@@ -98,7 +100,7 @@ function (_Component) {
     };
 
     _this.state = {
-      isShow: props.isInitShow ? true : false,
+      isShow: !!props.isInitShow,
       isLoaded: false,
       menuItems: []
     };
@@ -139,7 +141,7 @@ function (_Component) {
       style: S.BROWSER
     }, _react["default"].createElement(_BrowserCaption["default"], {
       caption: caption,
-      onClose: this._handleHide
+      onClose: this._hHide
     }), _react["default"].createElement(_ScrollPane["default"], {
       className: CL_SCROLL
     }, this._renderMenuParts(menuItems), children));

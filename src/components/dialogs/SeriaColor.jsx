@@ -61,6 +61,7 @@ const _hasLineWidth = (chartType) => {
 class SeriaColor extends Component {
   constructor(props){
     super(props)
+    this._refLineWidth = React.createRef()
     this.state = {
       color: _initColor(props)
     }
@@ -73,7 +74,7 @@ class SeriaColor extends Component {
     }
   }
 
-  _hInit = () => {
+  _hReset = () => {
     this.setState({
       color: _initColor(this.props)
     })
@@ -83,10 +84,6 @@ class SeriaColor extends Component {
      if (color) {
        this.setState({ color })
      }
-  }
-
-  _setWidth = (value) => {
-    this._width = value
   }
 
   _renderColors = (colors, isLong) => {
@@ -104,8 +101,7 @@ class SeriaColor extends Component {
   }
 
   render(){
-    const { _width } = this
-    , { isLong, chartType } = this.props
+    const { isLong, chartType } = this.props
     , { color } = this.state
     , _isLineWidth = _hasLineWidth(chartType)
     , _rowStyle = _isLineWidth
@@ -117,32 +113,23 @@ class SeriaColor extends Component {
           <CellColor
             color={color}
             style={{ ...S.CELL, ...S.TO_CELL }}
-            onClick={this._hInit}
+            onClick={this._hReset}
           />
           {this._renderColors(COLORS1, isLong)}
         </div>
         <div style={_rowStyle}>
-          {
-           _isLineWidth && <BtCounter
+           <BtCounter
+              ref={this._refLineWidth}
+              isShow={_isLineWidth}
               style={S.BT_COUNTER}
-              initialValue={_width}
               title="Line Width"
-              onSetValue={this._setWidth}
             />
-          }
           {this._renderColors(COLORS2, isLong)}
         </div>
       </div>
     );
   }
-
-  getColor(){
-    const { color } = this.state;
-    return color !== C_TRANSPARENT
-      ? color
-      : void 0;
-  }
-
+  
   getConf(){
     const { chartType } = this.props
     , { color } = this.state;
@@ -151,7 +138,7 @@ class SeriaColor extends Component {
          ? color
          : void 0,
       seriaWidth: _hasLineWidth(chartType)
-        ? this._width
+        ? this._refLineWidth.current?.getValue()
         : void 0
     };
   }

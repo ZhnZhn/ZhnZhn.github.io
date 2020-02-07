@@ -160,6 +160,7 @@ function (_Component) {
     return _react["default"].createElement("div", {
       style: (0, _extends2["default"])({}, S.ROOT, {}, TS.ROOT)
     }, this._renderMore(moreModel, TS), _react["default"].createElement(_SvgCheckBox["default"], {
+      initValue: false,
       style: S.CHECK_BOX,
       onCheck: onCheck,
       onUnCheck: onUnCheck

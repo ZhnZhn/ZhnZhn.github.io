@@ -1,37 +1,44 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+
+import isKeyEnter from '../zhn/isKeyEnter'
 
 const STYLE = {
-  ITEM_DIV : {
+  ITEM_DIV: {
     position: 'relative',
-    minWidth : '350px',
-    paddingRight: '10px',
-    lineHeight : 1.4,
-    paddingTop : '5px',
-    paddingBottom: '5px'
+    minWidth: 350,
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    lineHeight: 1.4
   },
-  ITEM_SPAN : {
+  ITEM_SPAN: {
     display: 'inline-block',
-    verticalAlign : 'middle',
-    width: '100%',
-    //maxWidth: '250px',
-    //direction: "ltr",
+    verticalAlign: 'middle',
+    width: '100%',    
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   }
-}
+};
 
-const Item = (props) => {
-  const  {
-           caption, className,
-           item, onClickItem,
-           children
-         } = props
+const Item = ({
+   caption, className,
+   item, onClickItem,
+   children
+  }) => {
+  const _hKeyDown = useCallback((evt) => {
+    if (isKeyEnter(evt)) {
+      onClickItem(item)
+    }
+  }, []);
   return (
     <div
+      role="menuitem"
+      tabindex="0"
       className={className}
       style={STYLE.ITEM_DIV}
       onClick={onClickItem.bind(null, item)}
+      onKeyDown={_hKeyDown}
     >
       <span style={STYLE.ITEM_SPAN}>
         {caption}

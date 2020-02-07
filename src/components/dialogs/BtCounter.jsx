@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useImperativeHandle } from 'react'
 
 import ButtonCircle from '../zhn/ButtonCircle'
 
@@ -12,30 +12,31 @@ const S = {
 */
 
 const BtCounter = ({
+  isShow,
   style,
   title,
   initialValue=1,
   maxValue=4,
-  onSetValue=()=>{}
-}) => {
+}, ref) => {
   const [value, setValue] = useState(initialValue)
   , _onClick = useCallback(() => {
      if (value < maxValue) {
-       onSetValue(value+1)
        setValue(v => v+1)
      } else {
-       onSetValue(1)
        setValue(1)
      }
    }, [value, maxValue]);
-  return (
+   useImperativeHandle(ref, () => ({
+     getValue: () => value
+   }), [value])  
+  return isShow ? (
     <ButtonCircle
       style={style}
       title={title}
       caption={value}
       onClick={_onClick}
     />
-  );
+  ) : null;
 }
 
-export default BtCounter
+export default React.forwardRef(BtCounter)

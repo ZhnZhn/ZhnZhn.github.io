@@ -44,8 +44,16 @@ var SvgChecked = function SvgChecked(_ref) {
   });
 };
 
+var _isBool = function _isBool(bool) {
+  return typeof bool === 'boolean';
+};
+
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
+};
+
+var _isValueFromProps = function _isValueFromProps(props, state) {
+  return !_isBool(props.initValue) || props.initValue !== state.initValue;
 };
 
 var _getInitStateFrom = function _getInitStateFrom(_ref2) {
@@ -123,7 +131,7 @@ function (_Component) {
   }
 
   SvgCheckBox.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
-    return props.initValue !== state.initValue ? _getInitStateFrom(props) : null;
+    return _isValueFromProps(props, state) ? _getInitStateFrom(props) : null;
   };
 
   var _proto = SvgCheckBox.prototype;

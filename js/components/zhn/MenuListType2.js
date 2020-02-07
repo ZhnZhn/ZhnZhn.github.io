@@ -16,7 +16,7 @@ var _Color = _interopRequireDefault(require("../styles/Color"));
 var _OpenClose = _interopRequireDefault(require("./OpenClose2"));
 
 var C_FILL_OPEN = _Color["default"].GREEN;
-var C_LEFT_BORDER = _Color["default"].YELLOW;
+var C_GROUP_OPEN = _Color["default"].TITLE;
 var MODEL_PROP = {
   CAPTION: 'caption',
   GROUPS: 'groups',
@@ -31,11 +31,7 @@ var STYLE = {
     marginLeft: 8,
     paddingLeft: 12,
     lineHeight: 2,
-    borderLeft: "1px solid " + C_LEFT_BORDER
-  },
-  LIST_DIV_NOT_SELECTED: {
-    marginRight: 2,
-    borderBottom: '1px solid rgba(128, 192, 64, 0.6)'
+    borderLeft: "2px solid " + C_GROUP_OPEN
   },
   ITEM_DIV: {
     position: 'relative',
@@ -104,7 +100,6 @@ function (_Component) {
           key: index,
           fillOpen: C_FILL_OPEN,
           style: STYLE.LIST_DIV,
-          styleNotSelected: STYLE.LIST_DIV_NOT_SELECTED,
           caption: caption
         }, _this._renderLevel3(items, captionProp));
       });
@@ -134,6 +129,7 @@ function (_Component) {
         return _react["default"].createElement(_OpenClose["default"], {
           key: index,
           style: STYLE.GROUP_DIV,
+          fillOpen: C_GROUP_OPEN,
           caption: caption
         }, _this._renderLevel2(lists, _captionProp, _itemsProp));
       });

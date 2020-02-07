@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _wrapExportChartLocal = _interopRequireDefault(require("./wrapExportChartLocal"));
 
 var _zhRemoveCategory = _interopRequireDefault(require("./zhRemoveCategory"));
@@ -21,17 +23,11 @@ var _zhToggle2H = _interopRequireDefault(require("./zhToggle2H"));
 
 var _zhEnableDataLabels = _interopRequireDefault(require("./zhEnableDataLabels"));
 
-var _zhIsDaily = _interopRequireDefault(require("./zhIsDaily"));
-
-var _zhIsAnimation = _interopRequireDefault(require("./zhIsAnimation"));
-
-var _zhGetId = _interopRequireDefault(require("./zhGetId"));
-
-var _zhGetDetailCharts = _interopRequireDefault(require("./zhGetDetailCharts"));
-
-var _zhGetFromToDates = _interopRequireDefault(require("./zhGetFromToDates"));
-
 var _zhZoomX = _interopRequireDefault(require("./zhZoomX"));
+
+var _zhIs = _interopRequireDefault(require("./zhIs"));
+
+var _zhGet = _interopRequireDefault(require("./zhGet"));
 
 var HighchartsZhn = function HighchartsZhn(Highcharts) {
   var wrap = Highcharts.wrap,
@@ -39,19 +35,14 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
   (0, _wrapExportChartLocal["default"])(wrap, Chart);
   (0, _zhCaption["default"])(Chart);
   (0, _zhTogglePlotLines["default"])(Chart);
-  Object.assign(Chart.prototype, {
-    zhRemoveCategory: _zhRemoveCategory["default"],
+  Object.assign(Chart.prototype, (0, _extends2["default"])({
     zhAddSeriaToYAxis: _zhAddSeriaToYAxis["default"],
+    zhEnableDataLabels: _zhEnableDataLabels["default"],
     zhToggleSeria: _zhToggleSeria["default"],
     zhToggle2H: _zhToggle2H["default"],
-    zhEnableDataLabels: _zhEnableDataLabels["default"],
-    zhIsDaily: _zhIsDaily["default"],
-    zhIsAnimation: _zhIsAnimation["default"],
-    zhGetId: _zhGetId["default"],
-    zhGetDetailCharts: _zhGetDetailCharts["default"],
-    zhGetFromToDates: _zhGetFromToDates["default"],
+    zhRemoveCategory: _zhRemoveCategory["default"],
     zhZoomX: _zhZoomX["default"]
-  });
+  }, _zhIs["default"], {}, _zhGet["default"]));
 };
 
 var _default = HighchartsZhn;

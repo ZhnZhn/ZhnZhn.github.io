@@ -52,8 +52,8 @@ var S = {
     lineHeight: 2
   },
   ITEM_NOT_SELECTED: {
-    marginRight: 10,
-    borderBottom: '1px solid rgba(128, 192, 64, 0.6)'
+    marginRight: 10 //borderBottom : '1px solid rgba(128, 192, 64, 0.6)'
+
   }
 };
 var DRAG = {

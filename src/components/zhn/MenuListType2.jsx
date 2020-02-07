@@ -4,7 +4,7 @@ import C from '../styles/Color'
 import OpenClose2 from './OpenClose2'
 
 const C_FILL_OPEN = C.GREEN;
-const C_LEFT_BORDER = C.YELLOW;
+const C_GROUP_OPEN = C.TITLE;
 
 const MODEL_PROP = {
   CAPTION : 'caption',
@@ -21,12 +21,8 @@ const STYLE = {
     marginLeft : 8,
     paddingLeft : 12,
     lineHeight : 2,
-    borderLeft : `1px solid ${C_LEFT_BORDER}`,
-  },
-  LIST_DIV_NOT_SELECTED : {
-    marginRight : 2,
-    borderBottom : '1px solid rgba(128, 192, 64, 0.6)',
-  },
+    borderLeft : `2px solid ${C_GROUP_OPEN}`
+  },  
   ITEM_DIV : {
     position: 'relative',
     paddingRight: 10,
@@ -82,7 +78,6 @@ class MenuListType2 extends Component {
            key={index}
            fillOpen={C_FILL_OPEN}
            style={STYLE.LIST_DIV}
-           styleNotSelected={STYLE.LIST_DIV_NOT_SELECTED}
            caption={caption}
         >
           {this._renderLevel3(items, captionProp)}
@@ -107,6 +102,7 @@ class MenuListType2 extends Component {
           <OpenClose2
              key={index}
              style={STYLE.GROUP_DIV}
+             fillOpen={C_GROUP_OPEN}
              caption={caption}
           >
             {this._renderLevel2(lists, _captionProp, _itemsProp)}

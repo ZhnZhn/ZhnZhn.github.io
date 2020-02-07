@@ -77,7 +77,7 @@ function (_Component) {
 
     _this = _Component.call(this, props) || this;
 
-    _this._hInit = function () {
+    _this._hReset = function () {
       _this.setState({
         color: _initColor(_this.props)
       });
@@ -89,10 +89,6 @@ function (_Component) {
           color: color
         });
       }
-    };
-
-    _this._setWidth = function (value) {
-      _this._width = value;
     };
 
     _this._renderColors = function (colors, isLong) {
@@ -108,6 +104,7 @@ function (_Component) {
       }).filter(Boolean);
     };
 
+    _this._refLineWidth = _react["default"].createRef();
     _this.state = {
       color: _initColor(props)
     };
@@ -125,8 +122,7 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    var _width = this._width,
-        _this$props = this.props,
+    var _this$props = this.props,
         isLong = _this$props.isLong,
         chartType = _this$props.chartType,
         color = this.state.color,
@@ -138,28 +134,25 @@ function (_Component) {
     }, _react["default"].createElement("div", null, _react["default"].createElement(_CellColor["default"], {
       color: color,
       style: (0, _extends2["default"])({}, S.CELL, {}, S.TO_CELL),
-      onClick: this._hInit
+      onClick: this._hReset
     }), this._renderColors(COLORS1, isLong)), _react["default"].createElement("div", {
       style: _rowStyle
-    }, _isLineWidth && _react["default"].createElement(_BtCounter["default"], {
+    }, _react["default"].createElement(_BtCounter["default"], {
+      ref: this._refLineWidth,
+      isShow: _isLineWidth,
       style: S.BT_COUNTER,
-      initialValue: _width,
-      title: "Line Width",
-      onSetValue: this._setWidth
+      title: "Line Width"
     }), this._renderColors(COLORS2, isLong)));
   };
 
-  _proto.getColor = function getColor() {
-    var color = this.state.color;
-    return color !== C_TRANSPARENT ? color : void 0;
-  };
-
   _proto.getConf = function getConf() {
+    var _this$_refLineWidth$c;
+
     var chartType = this.props.chartType,
         color = this.state.color;
     return {
       seriaColor: color !== C_TRANSPARENT ? color : void 0,
-      seriaWidth: _hasLineWidth(chartType) ? this._width : void 0
+      seriaWidth: _hasLineWidth(chartType) ? (_this$_refLineWidth$c = this._refLineWidth.current) == null ? void 0 : _this$_refLineWidth$c.getValue() : void 0
     };
   };
 

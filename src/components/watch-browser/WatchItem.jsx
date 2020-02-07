@@ -1,14 +1,15 @@
 
-import React from 'react';
+import React, { useCallback } from 'react';
+
+import isKeyEnter from '../zhn/isKeyEnter'
 
 import SvgClose from '../zhn/SvgClose';
 
-const STYLE = {
+const S = {
   ITEM_DIV : {
-    position: 'relative',    
+    position: 'relative',
     paddingRight: 40,
-    //lineHeight : 1.4,
-    paddingTop : 5,
+    paddingTop: 5,
     paddingBottom: 5
   },
   ITEM_SPAN : {
@@ -37,25 +38,38 @@ const WatchItem = (props) => {
       , _btClose = isModeEdit
           ? (
              <SvgClose
-               style={STYLE.SVG_CLOSE}
+               style={S.SVG_CLOSE}
                onClose={onClose.bind(null, option)}
              />
             )
-          : null;
+          : null
+     , _hClick = useCallback(() => {
+        //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
+        onClick(item)
+     }, [item])
+     , _hKeyUp = useCallback((evt) => {
+       if (isKeyEnter(evt)) {
+         onClick(item)
+       }
+     }, [item])
+     , _dndOptions = isModeEdit
+         ? {
+           draggable: true,
+           onDragStart: onDragStart.bind(null, option),
+           onDrop: onDrop.bind(null, option),
+           onDragOver, onDragEnter, onDragLeave
+         } : void 0;
 return (
      <div
+       role="menuitem"
+       tabindex="0"
        className={className}
-       style={STYLE.ITEM_DIV}
-       onClick={onClick.bind(null, item)}
-       //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
-       draggable={isModeEdit}
-       onDragStart={isModeEdit ? onDragStart.bind(null, option) : void 0}
-       onDrop={isModeEdit ? onDrop.bind(null, option) : void 0}
-       onDragOver={isModeEdit ? onDragOver : void 0}
-       onDragEnter={isModeEdit ? onDragEnter : void 0}
-       onDragLeave={isModeEdit ? onDragLeave: void 0}
+       style={S.ITEM_DIV}
+       onClick={_hClick}
+       {..._dndOptions}
+       onKeyUp={_hKeyUp}
      >
-       <span style={STYLE.ITEM_SPAN}>
+       <span style={S.ITEM_SPAN}>
          {caption}
        </span>
        {_btClose}

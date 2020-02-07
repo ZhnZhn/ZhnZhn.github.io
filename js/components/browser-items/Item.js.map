@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/components/browser-items/Item.jsx"],"names":["STYLE","ITEM_DIV","position","minWidth","paddingRight","lineHeight","paddingTop","paddingBottom","ITEM_SPAN","display","verticalAlign","width","whiteSpace","overflow","textOverflow","Item","props","caption","className","item","onClickItem","children","bind"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,KAAK,GAAG;AACZC,EAAAA,QAAQ,EAAG;AACTC,IAAAA,QAAQ,EAAE,UADD;AAETC,IAAAA,QAAQ,EAAG,OAFF;AAGTC,IAAAA,YAAY,EAAE,MAHL;AAITC,IAAAA,UAAU,EAAG,GAJJ;AAKTC,IAAAA,UAAU,EAAG,KALJ;AAMTC,IAAAA,aAAa,EAAE;AANN,GADC;AASZC,EAAAA,SAAS,EAAG;AACVC,IAAAA,OAAO,EAAE,cADC;AAEVC,IAAAA,aAAa,EAAG,QAFN;AAGVC,IAAAA,KAAK,EAAE,MAHG;AAIV;AACA;AACAC,IAAAA,UAAU,EAAE,QANF;AAOVC,IAAAA,QAAQ,EAAE,QAPA;AAQVC,IAAAA,YAAY,EAAE;AARJ;AATA,CAAd;;AAqBA,IAAMC,IAAI,GAAG,SAAPA,IAAO,CAACC,KAAD,EAAW;AAAA,MAEbC,OAFa,GAKXD,KALW,CAEbC,OAFa;AAAA,MAEJC,SAFI,GAKXF,KALW,CAEJE,SAFI;AAAA,MAGbC,IAHa,GAKXH,KALW,CAGbG,IAHa;AAAA,MAGPC,WAHO,GAKXJ,KALW,CAGPI,WAHO;AAAA,MAIbC,QAJa,GAKXL,KALW,CAIbK,QAJa;AAMtB,SACE;AACE,IAAA,SAAS,EAAEH,SADb;AAEE,IAAA,KAAK,EAAElB,KAAK,CAACC,QAFf;AAGE,IAAA,OAAO,EAAEmB,WAAW,CAACE,IAAZ,CAAiB,IAAjB,EAAuBH,IAAvB;AAHX,KAKE;AAAM,IAAA,KAAK,EAAEnB,KAAK,CAACQ;AAAnB,KACGS,OADH,CALF,EAQGI,QARH,CADF;AAYD,CAlBD;;eAoBeN,I","sourcesContent":["import React from 'react';\r\n\r\nconst STYLE = {\r\n  ITEM_DIV : {\r\n    position: 'relative',\r\n    minWidth : '350px',\r\n    paddingRight: '10px',\r\n    lineHeight : 1.4,\r\n    paddingTop : '5px',\r\n    paddingBottom: '5px'\r\n  },\r\n  ITEM_SPAN : {\r\n    display: 'inline-block',\r\n    verticalAlign : 'middle',\r\n    width: '100%',\r\n    //maxWidth: '250px',\r\n    //direction: \"ltr\",\r\n    whiteSpace: 'nowrap',\r\n    overflow: 'hidden',\r\n    textOverflow: 'ellipsis'\r\n  }\r\n}\r\n\r\nconst Item = (props) => {\r\n  const  {\r\n           caption, className,\r\n           item, onClickItem,\r\n           children\r\n         } = props\r\n  return (\r\n    <div\r\n      className={className}\r\n      style={STYLE.ITEM_DIV}\r\n      onClick={onClickItem.bind(null, item)}\r\n    >\r\n      <span style={STYLE.ITEM_SPAN}>\r\n        {caption}\r\n      </span>\r\n      {children}\r\n   </div>\r\n  );\r\n};\r\n\r\nexport default Item\r\n"],"file":"Item.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-items/Item.js"
+ ],
+ "file": "../../../src/components/browser-items/Item.js",
+ "names": [
+  "STYLE",
+  "ITEM_DIV",
+  "position",
+  "minWidth",
+  "paddingRight",
+  "paddingTop",
+  "paddingBottom",
+  "lineHeight",
+  "ITEM_SPAN",
+  "display",
+  "verticalAlign",
+  "width",
+  "whiteSpace",
+  "overflow",
+  "textOverflow",
+  "Item",
+  "caption",
+  "className",
+  "item",
+  "onClickItem",
+  "children",
+  "_hKeyDown",
+  "evt",
+  "bind"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,KAAK,GAAG;AACZC,EAAAA,QAAQ,EAAE;AACRC,IAAAA,QAAQ,EAAE,UADF;AAERC,IAAAA,QAAQ,EAAE,GAFF;AAGRC,IAAAA,YAAY,EAAE,EAHN;AAIRC,IAAAA,UAAU,EAAE,CAJJ;AAKRC,IAAAA,aAAa,EAAE,CALP;AAMRC,IAAAA,UAAU,EAAE;AANJ,GADE;AASZC,EAAAA,SAAS,EAAE;AACTC,IAAAA,OAAO,EAAE,cADA;AAETC,IAAAA,aAAa,EAAE,QAFN;AAGTC,IAAAA,KAAK,EAAE,MAHE;AAITC,IAAAA,UAAU,EAAE,QAJH;AAKTC,IAAAA,QAAQ,EAAE,QALD;AAMTC,IAAAA,YAAY,EAAE;AANL;AATC,CAAd;;AAmBA,IAAMC,IAAI,GAAG,SAAPA,IAAO,OAIL;AAAA,MAHLC,OAGK,QAHLA,OAGK;AAAA,MAHIC,SAGJ,QAHIA,SAGJ;AAAA,MAFLC,IAEK,QAFLA,IAEK;AAAA,MAFCC,WAED,QAFCA,WAED;AAAA,MADLC,QACK,QADLA,QACK;;AACN,MAAMC,SAAS,GAAG,wBAAY,UAACC,GAAD,EAAS;AACrC,QAAI,4BAAWA,GAAX,CAAJ,EAAqB;AACnBH,MAAAA,WAAW,CAACD,IAAD,CAAX;AACD;AACF,GAJiB,EAIf,EAJe,CAAlB;;AAKA,SACE;AACE,IAAA,IAAI,EAAC,UADP;AAEE,IAAA,QAAQ,EAAC,GAFX;AAGE,IAAA,SAAS,EAAED,SAHb;AAIE,IAAA,KAAK,EAAEjB,KAAK,CAACC,QAJf;AAKE,IAAA,OAAO,EAAEkB,WAAW,CAACI,IAAZ,CAAiB,IAAjB,EAAuBL,IAAvB,CALX;AAME,IAAA,SAAS,EAAEG;AANb,KAQE;AAAM,IAAA,KAAK,EAAErB,KAAK,CAACQ;AAAnB,KACGQ,OADH,CARF,EAWGI,QAXH,CADF;AAeD,CAzBD;;eA2BeL,I"
+}
