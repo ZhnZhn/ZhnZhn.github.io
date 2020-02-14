@@ -1,0 +1,29 @@
+{
+  "items":[
+  {"value":"B_100100","caption":"Primary production"},
+  {"value":"B_100110","caption":"Primary product receipts"},
+  {"value":"B_100111","caption":"Direct use (Crude Oil & NGL)"},
+  {"value":"B_100112","caption":"Direct use"},
+  {"value":"B_100113","caption":"Primary product receipts (Crude oil & NGL)"},
+  {"value":"B_100200","caption":"From Other Sources"},
+  {"value":"B_100210","caption":"Recycled products"},
+  {"value":"B_100300","caption":"Imports"},
+  {"value":"B_100500","caption":"Exports"},
+  {"value":"B_100400","caption":"Stock Changes"},
+  {"value":"B_100800","caption":"International Marine Bunkers"},
+  {"value":"B_100900","caption":"Gross inland consumption"},
+  {"value":"B_101008","caption":"Transformation input in Refineries"},
+  {"value":"B_101108","caption":"Transformation output from Refineries"},
+  {"value":"B_101210","caption":"Interproduct transfers"},
+  {"value":"B_101220","caption":"Products transferred"},
+  {"value":"B_101307","caption":"Consumption in Petroleum Refineries"},
+  {"value":"B_109013","caption":"Backflows from Petrochemical Sector to Refineries"},
+  {"value":"B_105122","caption":"Deliveries of Automotive LPG"},
+  {"value":"B_105102","caption":"Deliveries to Main Activity Producer Power Plants"},
+  {"value":"B_109010","caption":"Gross Deliveries to Petrochemical Sector"},
+  {"value":"B_105200","caption":"Gross Inland Deliveries Observed"},
+  {"value":"B_101401","caption":"Memo Item: Refinery Losses"},
+  {"value":"B_105121","caption":"Memo Items:7 Deliveries to International Aviation"},
+  {"value":"B_105000","caption":"Gross inland deliveries (calculated)"}
+  ]
+}

@@ -1,6 +1,8 @@
-{
-  "items":[
-  {"value":"PEC2020-2030","caption":"Primary energy consumption (Europe 2020-2030)"},
-	{"value":"FEC2020-2030","caption":"Final energy consumption (Europe 2020-2030)"}	
-  ]
-}
+{"items":[
+{"value":"PEC2020-2030","caption":"Primary energy consumption (Europe 2020-2030)"},
+{"value":"FEC2020-2030","caption":"Final energy consumption (Europe 2020-2030)"},
+{"value":"PEC_DT2020","caption":"Primary energy consumption - distance to 2020 target"},
+{"value":"PEC_DT2030","caption":"Primary energy consumption - distance to 2030 target"},
+{"value":"FEC_DT2020","caption":"Final energy consumption - distance to 2020 target"},
+{"value":"FEC_DT2030","caption":"Final energy consumption - distance to 2030 target"}
+]}

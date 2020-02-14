@@ -1,0 +1,7 @@
+{
+  "items":[
+  { "value":"PAR","caption":"Par yield curve"},
+	{ "value":"SPOT_RT","caption":"Spot rate yield curve"},
+	{ "value":"INS_FWD","caption":"Instantaneous forward yield curve"}
+  ]
+}

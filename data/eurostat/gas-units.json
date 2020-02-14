@@ -1,0 +1,6 @@
+{
+  "items":[
+  {"value":"MIO_M3","caption":"Million cubic metres"},
+	{"value":"TJ_GCV","caption":"Terajoule (gross calorific value - GCV)"}
+  ]
+}

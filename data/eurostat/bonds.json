@@ -1,0 +1,6 @@
+{
+  "items":[
+  {"value":"CGB_EA","caption":"All euro area central government bonds"},
+	{"value":"CGB_EA_AAA","caption":"AAA-rated euro area central government bonds"}
+  ]
+}

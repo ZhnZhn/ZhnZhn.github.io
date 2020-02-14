@@ -1,0 +1,11 @@
+{
+  "items":[
+{"value":"2111","caption":"Hard coal"},
+{"value":"2112","caption":"Patent Fuels"},
+{"value":"2121","caption":"Coke Oven Coke"},
+{"value":"2210","caption":"Lignite/Brown Coal"},
+{"value":"2230","caption":"BKB (brown coal briquettes)"},
+{"value":"2310","caption":"Peat"},
+{"value":"2410","caption":"Oil shale and oil sands"}
+  ]
+}
