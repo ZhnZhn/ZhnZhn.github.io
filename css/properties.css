@@ -25,3 +25,11 @@
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
 }
+
+.text-clip {
+  display: inline-block;
+  width: 100px;
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+}
