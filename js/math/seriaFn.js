@@ -9,10 +9,16 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _mathFn = _interopRequireDefault(require("./mathFn"));
 
+var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
+
+var isPointArr = _seriaHelperFn["default"].isPointArr,
+    fGetY = _seriaHelperFn["default"].fGetY,
+    getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
+    getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
 var _isArr = Array.isArray;
 
 var _isNumber = function _isNumber(n) {
-  return typeof n === 'number' ? n - n === 0 : false;
+  return typeof n === 'number' && n - n === 0;
 };
 
 var _calcY = function _calcY(yPrev, yNext) {
@@ -29,10 +35,6 @@ var _calcY = function _calcY(yPrev, yNext) {
   }
 
   return parseFloat((0, _big["default"])(yNext - yPrev).div(Math.abs(yPrev)).times(100).toFixed(2));
-};
-
-var _isDataArr = function _isDataArr(data) {
-  return _isArr(data) && data.length > 1 && _isArr(data[0]);
 };
 
 var fn = {
@@ -121,8 +123,33 @@ var fn = {
 
     return maxY !== Number.NEGATIVE_INFINITY ? _mathFn["default"].toFixedNumber(maxY) : undefined;
   },
+  filterTrimZero: function filterTrimZero(data) {
+    if (!_isArr(data)) {
+      return data;
+    }
+
+    var _getY = fGetY(data[0]);
+
+    if (!_getY) {
+      return data;
+    }
+
+    var _countZero = getZeroCountFromStart(data, _getY);
+
+    if (_countZero) {
+      data.splice(0, _countZero);
+    }
+
+    var _zeroIndex = getZeroIndexFromEnd(data, _getY);
+
+    if (_zeroIndex) {
+      data.splice(_zeroIndex);
+    }
+
+    return data;
+  },
   mean: function mean(data) {
-    if (!_isDataArr(data)) {
+    if (!isPointArr(data)) {
       return [];
     }
 
@@ -154,7 +181,7 @@ var fn = {
     return [[data[0][0], _avg], [data[_max][0], _avg]];
   },
   median: function median(data) {
-    if (!_isDataArr(data)) {
+    if (!isPointArr(data)) {
       return [];
     }
 

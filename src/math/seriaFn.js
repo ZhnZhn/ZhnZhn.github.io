@@ -1,11 +1,19 @@
 import Big from 'big.js'
 
 import mathFn from './mathFn'
+import fns from './seriaHelperFn'
+
+const {
+  isPointArr,
+  fGetY,
+  getZeroCountFromStart,
+  getZeroIndexFromEnd
+} = fns
 
 const _isArr = Array.isArray;
 const _isNumber = n => typeof n === 'number'
-  ? (n - n === 0)
-  : false;
+  && (n - n === 0);
+
 
 const _calcY = (yPrev, yNext) => {
 
@@ -30,10 +38,6 @@ const _calcY = (yPrev, yNext) => {
       .toFixed(2)
     );
 };
-
-const _isDataArr = data => _isArr(data)
-  && data.length > 1
-  && _isArr(data[0]);
 
 const fn = {
   growthRate: (d, rt=1) => {
@@ -114,8 +118,25 @@ const fn = {
       : undefined;
   },
 
+  filterTrimZero: (data) => {
+    if (!_isArr(data)) { return data; }
+
+    const _getY = fGetY(data[0]);
+    if (!_getY) { return data; }
+
+    const _countZero = getZeroCountFromStart(data, _getY)
+    if (_countZero) {
+      data.splice(0, _countZero)
+    }
+    const _zeroIndex = getZeroIndexFromEnd(data, _getY)
+    if (_zeroIndex){
+      data.splice(_zeroIndex)
+    }
+    return data;
+  },
+
   mean: (data) => {
-    if ( !_isDataArr(data) ) {
+    if ( !isPointArr(data) ) {
       return [];
     }
     let _sum = Big(0);
@@ -133,7 +154,7 @@ const fn = {
   },
 
   median: (data) => {
-    if ( !_isDataArr(data) ) {
+    if ( !isPointArr(data) ) {
       return [];
     }
     const _d = data
