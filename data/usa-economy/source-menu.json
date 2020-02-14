@@ -80,11 +80,13 @@
     },
     "USAE_B_EIA": {
       "dialogProps": {
-        "descrUrl" : "./data/usa-economy/eia.html",
-        "oneCaption": "State",
-        "oneURI": "./data/usa-economy/eia-states.json",
-        "oneJsonProp": "items",
+        "rootUri": "./data/usa-economy/",
+        "descr": "eia",
+        "selectProps": [
+          ["state","State","eia-states"]
+        ],
         "noDate": true,
+        "noForDate": true,
         "loadId" : "EIA",
         "dataSource": "U.S. EIA (Not endorsed or certified by EIA)"
       }
@@ -256,15 +258,13 @@
       "menuTitle": "Net Generation",
       "dialogCaption": "Net Generation",
       "chartContainerCaption" : "EIA: Electricity: Net Generation, Monthly",
-      "dialogType": "DialogEurostat3A",
+      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
-        "twoCaption": "Fuel",
-        "twoURI": "./data/usa-economy/eia-fuels.json",
-        "twoJsonProp": "items",
-        "threeCaption": "Sector",
-        "threeURI": "./data/usa-economy/eia-electricity-sectors.json",
-        "threeJsonProp": "items",
+        "selectProps": [
+          ["fuel","Fuel","eia-fuels"],
+          ["sector","Sector","eia-electricity-sectors"]
+        ],
         "chartsType": "t1",
         "dfProps": {
           "cId": "1",
@@ -277,12 +277,12 @@
       "menuTitle": "Average Retail Price",
       "dialogCaption": "Average Retail Price",
       "chartContainerCaption" : "EIA: Electricity: Average Retail Price, Monthly",
-      "dialogType": "DialogEurostat2",
+      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
-        "twoCaption": "Sector",
-        "twoURI": "./data/usa-economy/eia-retail-sectors.json",
-        "twoJsonProp": "items",
+        "selectProps": [
+          ["sector","Sector","eia-retail-sectors"]
+        ],
         "chartsType": "t1",
         "dfProps": {
           "dfSeriaType": "pi2",
@@ -296,12 +296,12 @@
       "menuTitle": "Retail Sales",
       "dialogCaption": "Retail Sales",
       "chartContainerCaption" : "EIA: Electricity: Retail Sales, Monthly",
-      "dialogType": "DialogEurostat2",
+      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
-        "twoCaption": "Sector",
-        "twoURI": "./data/usa-economy/eia-retail-sectors.json",
-        "twoJsonProp": "items",
+        "selectProps": [
+          ["sector","Sector","eia-retail-sectors"]
+        ],
         "chartsType": "t1",
         "dfProps": {
           "dfSeriaType": "pi2",
@@ -315,12 +315,12 @@
       "menuTitle": "Revenue from Retail Sales",
       "dialogCaption": "Revenue from Retail Sales",
       "chartContainerCaption" : "EIA: Electricity: Revenue from Retail Sales, Monthly",
-      "dialogType": "DialogEurostat2",
+      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
-        "twoCaption": "Sector",
-        "twoURI": "./data/usa-economy/eia-retail-sectors.json",
-        "twoJsonProp": "items",
+        "selectProps": [
+          ["sector","Sector","eia-retail-sectors"]
+        ],
         "chartsType": "t1",
         "dfProps": {
           "dfSeriaType": "pi2",
@@ -335,41 +335,19 @@
       "menuTitle": "CO2 Emissions",
       "dialogCaption": "CO2 Emissions",
       "chartContainerCaption" : "EIA: CO2 Emissions, Annual, Ml Tonnes",
-      "dialogType": "DialogEurostat3A",
+      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
-        "twoCaption": "Fuel",
-        "twoURI": "./data/usa-economy/eia-co2-emission-fuel.json",
-        "twoJsonProp": "items",
-        "threeCaption": "Sector",
-        "threeURI": "./data/usa-economy/eia-co2-emission-sectors.json",
-        "threeJsonProp": "items",
+        "selectProps": [
+          ["fuel","Fuel","eia-co2-emission-fuel"],
+          ["sector","Sector","eia-co2-emission-sectors"]
+        ],
         "chartsType": "t1",
         "dfProps": {
           "dfSeriaType": "pi231s",
           "prefix": "EMISS.CO2-TOTV-",
           "sufix": ".A",
           "dfTitle": "CO2 Emissions (million metric tonnes)"
-        }
-      }
-    },
-    "USAE_EIA_CO2_NGAS": {
-      "type": "USAE_EIA_CO2_NGAS",
-      "menuTitle": "By Natural Gas",
-      "dialogCaption": "CO2 by Natural Gas",
-      "chartContainerCaption" : "EIA: CO2 Emission by Natural Gas, Ml Tonnes",
-      "dialogType": "DialogEurostat2",
-      "addProps": "USAE_B_EIA",
-      "dialogProps": {
-        "twoCaption": "Sector",
-        "twoURI": "./data/usa-economy/eia-co2-by-coal.json",
-        "twoJsonProp": "items",
-        "chartsType": "t1",
-        "dfProps": {
-          "dfSeriaType": "pi2s",
-          "prefix": "EMISS.CO2-TOTV-",
-          "sufix": ".A",
-          "dfTitle": "CO2 Emission by Natural Gas (million metric tonnes)"
         }
       }
     },
