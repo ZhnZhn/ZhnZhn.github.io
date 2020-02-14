@@ -12,11 +12,10 @@ export const BrowserType = {
    NORWAY_STAT_ALL: 'NST_ALL',
    SWEDEN_STAT: 'SWS',
    SWEDEN_STAT_ALL: 'SWS_ALL',
-   FINLAND_STAT_ALL: 'SFL',
-   NBSC: 'NBSC',
+   FINLAND_STAT_ALL: 'SFL',   
 
    ECONOMIC : 'QE',
-   
+
    NYSE_STOCKS : 'NS',
    NASDAQ_STOCKS : 'NQS',
 

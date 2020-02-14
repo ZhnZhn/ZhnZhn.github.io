@@ -125,11 +125,6 @@ const crBrowserModel = () => {
         name: 'Statistics Finland All',
         onClick: _fBD(BT.FINLAND_STAT_ALL),
         isClose: true
-      },{
-        cn: CL.Q,
-        name: 'NBS China (Monthly)',
-        onClick: _fBD(BT.NBSC),
-        isClose: true
       }
     ],
     page_03: [

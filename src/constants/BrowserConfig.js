@@ -49,7 +49,7 @@ const BrowserConfig = {
     caption: 'Blockchain',
     sourceMenuUrl: './data/blockchain/source-menu.json'
   },
-  
+
   [BT.FRANCE_STATISTICS]: {
     browserType: BT.FRANCE_STATISTICS,
     isDynamic: true,
@@ -107,13 +107,7 @@ const BrowserConfig = {
       noTime: true,
       rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
     }
-  },
-  [BT.NBSC]: {
-    browserType: BT.NBSC,
-    isDynamic: true,
-    caption: 'NBS China (Monthly)',
-    sourceMenuUrl: './data/nbsc/source-menu.json'
-  },
+  },  
   [BT.US_ECONOMY]: {
     browserType: BT.US_ECONOMY,
     isDynamic: true,

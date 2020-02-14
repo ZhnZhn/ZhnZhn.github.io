@@ -99,11 +99,6 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
     noTime: true,
     rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
   }
-}, _BrowserConfig[_Type.BrowserType.NBSC] = {
-  browserType: _Type.BrowserType.NBSC,
-  isDynamic: true,
-  caption: 'NBS China (Monthly)',
-  sourceMenuUrl: './data/nbsc/source-menu.json'
 }, _BrowserConfig[_Type.BrowserType.US_ECONOMY] = {
   browserType: _Type.BrowserType.US_ECONOMY,
   isDynamic: true,
