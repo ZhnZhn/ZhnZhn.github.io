@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import isKeyEnter from '../zhn/isKeyEnter'
 import Style from './Style'
 
 const CL = {
@@ -8,10 +9,9 @@ const CL = {
 
 class MenuItem extends Component {
 
-  _hKeyPress = (evt) => {
-    evt.preventDefault()
-    const { which } = evt;
-    if (which === 13 || which === 32 ) {
+  _hKeyDown = (evt) => {
+    if (isKeyEnter(evt)) {
+      evt.preventDefault()
       this.props.onClick()
     }
   }
@@ -32,7 +32,7 @@ class MenuItem extends Component {
         tabIndex="0"
         role="menuitem"
         onClick={onClick}
-        onKeyPress={this._hKeyPress}
+        onKeyDown={this._hKeyDown}
      >
         {text}
       </div>

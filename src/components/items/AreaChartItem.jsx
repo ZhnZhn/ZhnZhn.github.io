@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import safeGet from '../../utils/safeGet'
-
 import ShowHide from '../zhn/ShowHide';
 import HighchartWrapper from '../zhn/HighchartWrapper';
 import ChartToolBar from '../toolbars/ChartToolBar';
@@ -156,7 +154,7 @@ class AreaChartItem extends Component {
      this.mainChart.options.zhDetailCharts.push(metricChart);
   }
   _handleUnLoadedMiniChart = (objChart) => {
-    const charts = safeGet(this.mainChart, 'options.zhDetailCharts')
+    const charts = this.mainChart?.options?.zhDetailCharts
     if (Array.isArray(charts)){
       this.mainChart.options.zhDetailCharts = charts.filter((chart) => {
         return chart !== objChart;

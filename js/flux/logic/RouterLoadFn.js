@@ -9,8 +9,6 @@ var _eurostat = _interopRequireDefault(require("../creaters/eurostat"));
 
 var _eurostat2 = _interopRequireDefault(require("../creaters/eurostat2"));
 
-var _eurostat3 = _interopRequireDefault(require("../creaters/eurostat3"));
-
 var _selectN = _interopRequireDefault(require("../creaters/selectN"));
 
 var _eurostatN = _interopRequireDefault(require("../creaters/eurostatN"));
@@ -44,8 +42,6 @@ var _r = {
   FuturesWikiDialog: _futuresWiki["default"],
   DialogEurostat: _eurostat["default"],
   DialogEurostat2: _eurostat2["default"],
-  DialogEurostat3: _eurostat3["default"],
-  DialogEurostat3A: _eurostat3["default"],
   DialogSelectN: _selectN["default"],
   DialogStatN: _eurostatN["default"],
   UnDialog5: _un["default"]

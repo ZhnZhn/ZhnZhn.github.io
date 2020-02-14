@@ -3,6 +3,32 @@ import fns from './createrFns'
 const { crCaption, crItemKey, crAlertConf } = fns;
 
 const TYPE = 'selectN';
+const TABLE_ID = 'table';
+
+const _findItemTable = (items) => {
+  let tableItem, tableIndex;
+  for (let i=0; i<items.length;i++){
+    if (items?.[i].id === TABLE_ID) {
+      tableItem = items[i];
+      tableIndex = i;
+      break;
+    }
+  }
+  return { tableItem, tableIndex };
+};
+
+const _modifyIfItemTable = (dfProps, items) => {
+  const { tableItem, tableIndex } = _findItemTable(items);  
+  if (tableItem) {
+    const { value, dfTail } = tableItem;
+    if (value && dfTail) {
+      Object.assign(dfProps, {
+        dfTable: value, dfTail
+      })
+      items.splice(tableIndex, 1);
+    }
+  }
+};
 
 const createLoadOptions = (props={}, options={}) => {
   const { loadId, dataSource, dfProps={} } = props
@@ -20,6 +46,8 @@ const createLoadOptions = (props={}, options={}) => {
     } = crCaption(items, titles)
   , { value:seriaType, compType } = chartType
   , _itemKey = crItemKey(items, seriaType, date);
+
+  _modifyIfItemTable(dfProps, items)
 
   return {
     ...dfProps,

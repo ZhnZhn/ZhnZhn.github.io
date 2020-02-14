@@ -1,9 +1,11 @@
 import JSONstat from 'jsonstat';
 
 import AdapterFn from '../AdapterFn'
-import { Box, getFromNullable } from '../../utils/fnStyle'
+import Box from '../../utils/Box'
 
 const URL_ID_COUNTRY = './data/eurostat/id-country.json';
+
+const _isArr = Array.isArray;
 
 let hmIdCountry = {};
 let isHmFetched = false;
@@ -22,7 +24,7 @@ const _fnFetchHmIdCountry = () => {
 
 const _fnIdToCountry = (id) => {
    const name = hmIdCountry[id];
-   return (name) ? name : id;
+   return name ? name : id;
 }
 
 const _combineToArr = (dGeo, sGeo) => {
@@ -76,36 +78,53 @@ const _trHmToData = (hm, categories) => {
   return data;
 }
 
+const _isEmptyGeoSlice = (_sGeo) => {
+  if (!_isArr(_sGeo)) { return true; }
+  return _sGeo
+   .filter(({ value }) => Boolean(value))
+   .length === 0
+      ? true
+      : false;
+};
+
 const JsonStatFn = {
-  createGeoSlice : (json, configSlice) => {
+  createGeoSlice : (json, configSlice={}, dfTime) => {
     const  ds = JSONstat(json).Dataset(0);
-    let _sGeo = ds.Data(configSlice)
-       , time;
-    if (!_sGeo || _sGeo.length === 0){
-      const maxIndex = getFromNullable(ds.Dimension("time").id, []).length;
+
+    // 1) Try create _sGeo with configSlice
+    let time = configSlice.time
+    , _sGeo = ds.Data(configSlice);
+
+    // 2) Try create _sGeo with configSlice and dfTime from dialog
+    if (dfTime && _isEmptyGeoSlice(_sGeo)) {
+      _sGeo = ds.Data({ ...configSlice, ...{time: dfTime}})
+      time = dfTime
+    }
+
+    // 3) Try create _sGeo with maxIndex time available in ds
+    if (_isEmptyGeoSlice(_sGeo)){
+      const maxIndex = (ds.Dimension("time").id || []).length;
       if (maxIndex>0) {
         time = ds.Dimension("time").id[maxIndex-1];
         _sGeo = ds.Data({...configSlice, ...{ time } })
       }
-    } else if (configSlice) {
-       time = configSlice.time
     }
 
     return {
-      dGeo: getFromNullable(ds.Dimension("geo"), { id : []}),
-      sGeo: getFromNullable(_sGeo, []),
+      dGeo: ds.Dimension("geo") || { id: [] },
+      sGeo: _sGeo || [],
       time
     };
   },
 
   crGeoSeria: (json, configSlice) => {
-    const ds = JSONstat(json).Dataset(0)
-        , data = getFromNullable(ds.Data(configSlice), [])
-            .map(obj => obj.value)
-            .filter(value => value !== null);
+    const ds = JSONstat(json).Dataset(0) || {}
+    , data = (ds.Data?.(configSlice) || [])
+        .map(obj => obj.value)
+        .filter(value => value !== null);
     return {
-      date: getFromNullable(ds.Dimension("time")),
-      data: data
+      date: ds.Dimension?.("time") || {},
+      data
     };
   },
 

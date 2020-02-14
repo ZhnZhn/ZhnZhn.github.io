@@ -55,6 +55,15 @@ const _onError = (alertDescr, alertCaption='Request Error') => {
   CA.showAlert({ alertDescr, alertCaption })
 };
 
+const _crClickAbout = ({ rootUri, descr, descrUrl }) => {
+  const _descrUrl = descr && rootUri
+    ? `${rootUri}/${descr}.html`
+    : descrUrl;
+  return _descrUrl
+    ? CA.showDescription.bind(null, { descrUrl: _descrUrl })
+    : void 0;
+};
+
 const _crDialogComp = function (browserType, dialogConf){
    const {
            type:itemKey,
@@ -65,17 +74,14 @@ const _crDialogComp = function (browserType, dialogConf){
          } = dialogConf
        , {
            nInitFromDate,
-           valueFn, valueFnPrefix,
-           descrUrl,
+           valueFn, valueFnPrefix,           
            loadFnType,
            isContinious,
            loadId,
            isProxy,
            isGetKey
          } = dialogProps
-       , onClickInfo = (descrUrl)
-            ? CA.showDescription
-            : void 0
+       , onClickInfo = _crClickAbout(dialogProps)
        , loadFn = RouterLoadFn.getFn(loadFnType, dialogType)
        , proxy = isProxy
             ? ChartStore.getProxy()

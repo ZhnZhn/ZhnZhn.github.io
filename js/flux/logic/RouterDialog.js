@@ -150,12 +150,6 @@ var _router = {
     });
   },
 
-  get DialogEurostat3A() {
-    return this.getES().then(function (D) {
-      return D.Eurostat3A;
-    });
-  },
-
   get DialogSelectN() {
     return this.getES().then(function (D) {
       return D.SelectN;

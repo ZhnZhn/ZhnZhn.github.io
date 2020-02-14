@@ -21,14 +21,14 @@ const crMenuMore = (comp, {
     isClose: true
   })
   _addItemTo(p0, comp, {
-    name: 'About',
+    name: 'About Datasource',
     onClick: onAbout,
     isClose: true
   })
 
   return {
       baseTitleCl: CL_ROW,
-      pageWidth: 160,
+      pageWidth: 175,
       maxPages: 1,
       p0: p0
     };

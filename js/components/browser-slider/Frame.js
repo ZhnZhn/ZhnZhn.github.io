@@ -20,16 +20,24 @@ var _MenuItem = _interopRequireDefault(require("./MenuItem"));
 var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
 
 var T_O_FOCUS_FIRST = 1000;
+var _isArr = Array.isArray;
 
 var Frame =
 /*#__PURE__*/
 function (_Component) {
   (0, _inheritsLoose2["default"])(Frame, _Component);
 
-  function Frame(props) {
+  function Frame() {
     var _this;
 
-    _this = _Component.call(this) || this;
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
+      model: []
+    };
 
     _this.loadMenu = function (id) {
       var _this$props = _this.props,
@@ -40,7 +48,7 @@ function (_Component) {
           lT = dfProps.lT,
           proxy = store.getProxy(lT);
       loadItems(dfProps.rootUrl + "/" + id, proxy).then(function (model) {
-        if (Array.isArray(model)) {
+        if (_isArr(model)) {
           _this.setState({
             model: model,
             errMsg: undefined
@@ -95,9 +103,6 @@ function (_Component) {
       }
     };
 
-    _this.state = {
-      model: []
-    };
     return _this;
   }
 

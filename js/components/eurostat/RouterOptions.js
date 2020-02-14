@@ -43,12 +43,16 @@ var _crItems = function _crItems(arr) {
   return arr.map(_crItem);
 };
 
-var _crDF3 = function _crDF3() {
-  return _crItems([['Default: Spline', V.S], ['Area', V.A], ['Column', V.S_C], ['Bar: All Countries', V.B], ['Bar+Labels: All Countries', V.B_L], ['Column: All Countries', V.C], ['Dots: All Countries', V.D]]);
+var _isMonthly = function _isMonthly(mapFrequency) {
+  return !mapFrequency || mapFrequency === 'M';
 };
 
-var _crDF = function _crDF() {
-  return _crDF3().concat(_crItems([['Map: All Countries', V.M, void 0, _Type.CompItemType.EUROSTAT_MAP]]));
+var _crDF3 = function _crDF3(mapFrequency) {
+  return _crItems([['Default: Spline', V.S], ['Line', V.L], _isMonthly(mapFrequency) && ['Yearly by Months', V.A_Y], ['Area', V.A], ['Column', V.S_C], ['Bar: All Countries', V.B], ['Bar+Labels: All Countries', V.B_L], ['Column: All Countries', V.C], ['Dots: All Countries', V.D]].filter(Boolean));
+};
+
+var _crDF = function _crDF(captions, mapFrequency) {
+  return _crDF3(mapFrequency).concat(_crItems([['Map: All Countries', V.M, void 0, _Type.CompItemType.EUROSTAT_MAP]]));
 };
 
 var _crT1 = function _crT1() {
@@ -120,10 +124,14 @@ var _crCaptions = function _crCaptions(_ref6) {
 var RouterOptions = {
   crOptions: function crOptions(option) {
     var chartsType = option.chartsType,
+        mapFrequency = option.mapFrequency,
+        _option$dfProps = option.dfProps,
+        dfProps = _option$dfProps === void 0 ? {} : _option$dfProps,
+        _mapFrequency = mapFrequency || dfProps.mapFrequency,
         _captions = _crCaptions(option),
         _crOptions = _r[chartsType] || _r.DF;
 
-    return _crOptions(_captions);
+    return _crOptions(_captions, _mapFrequency);
   },
   isCategory: function isCategory(chartType) {
     if (!chartType) {

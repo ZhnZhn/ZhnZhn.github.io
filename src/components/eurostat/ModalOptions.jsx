@@ -31,7 +31,7 @@ const ModalOptions = ({
     <D.RowCheckBox
       initValue={false}
       rootStyle={STYLE.ROW_CB}
-      caption="Filter Zero Values"
+      caption="Filter Trim Zero Values"
       onToggle={_toggleFilterZero}
     />
   </ModalPopup>

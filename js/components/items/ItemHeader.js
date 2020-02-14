@@ -9,17 +9,14 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
 
-var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
+var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
-var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var TH_ID = 'ELEMENT';
-var CL = "not-selected shadow-right";
-var MAX_LENGTH = 45;
+var CL_CAPTION = "not-selected text-clip shadow-right";
 var S = {
   ROOT: {
     position: 'relative',
@@ -31,15 +28,12 @@ var S = {
     paddingRight: 42,
     paddingBottom: 6,
     borderTopRightRadius: 2,
-    borderBottomRightRadius: 2,
-    boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
+    borderBottomRightRadius: 2
   },
   CAPTION: {
-    display: 'inline-block',
+    width: '75%',
+    textAlign: 'left',
     fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow: 'clip',
-    overflow: 'hidden',
     cursor: 'pointer'
   },
   OPEN: {
@@ -54,74 +48,41 @@ var S = {
     top: 4
   }
 };
+var MAX_LENGTH = 45;
 
-var ItemHeader =
-/*#__PURE__*/
-function (_Component) {
-  (0, _inheritsLoose2["default"])(ItemHeader, _Component);
-
-  function ItemHeader() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-
-    _this._hKeyPress = function (evt) {
-      evt.preventDefault();
-      var which = evt.which;
-
-      if (which === 13 || which === 32) {
-        _this.props.onClick();
-      }
-    };
-
-    return _this;
-  }
-
-  var _proto = ItemHeader.prototype;
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        theme = _this$props.theme,
-        isOpen = _this$props.isOpen,
-        rootStyle = _this$props.rootStyle,
-        captionStyle = _this$props.captionStyle,
-        caption = _this$props.caption,
-        title = _this$props.title,
-        children = _this$props.children,
-        onClick = _this$props.onClick,
-        onClose = _this$props.onClose,
-        TS = theme.getStyle(TH_ID),
-        _title = title || caption.length > MAX_LENGTH ? caption : void 0,
-        _styleCaption = isOpen ? (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle, {}, S.OPEN) : (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle, {}, S.CLOSE);
-
-    return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.ROOT, {}, rootStyle, {}, TS.ROOT)
-    }, _react["default"].createElement("span", {
-      className: CL,
-      title: _title,
-      style: _styleCaption,
-      onClick: onClick,
-      tabIndex: "0",
-      role: "button",
-      onKeyPress: this._hKeyPress
-    }, caption), children, _react["default"].createElement(_SvgClose["default"], {
-      style: S.SVG_CLOSE,
-      onClose: onClose
-    }));
-  };
-
-  return ItemHeader;
-}(_react.Component);
-
-ItemHeader.defaultProps = {
-  caption: ''
+var _crTitle = function _crTitle(title, caption) {
+  return title || caption.length > MAX_LENGTH ? caption : void 0;
 };
 
-var _default = (0, _withTheme["default"])(ItemHeader);
+function ItemHeader(_ref) {
+  var isOpen = _ref.isOpen,
+      rootStyle = _ref.rootStyle,
+      captionStyle = _ref.captionStyle,
+      _ref$caption = _ref.caption,
+      caption = _ref$caption === void 0 ? '' : _ref$caption,
+      title = _ref.title,
+      children = _ref.children,
+      onClick = _ref.onClick,
+      onClose = _ref.onClose;
 
+  var theme = (0, _react.useContext)(_ThemeContext["default"]),
+      TS = theme.getStyle(TH_ID),
+      _title = _crTitle(title, caption),
+      _styleCaption = isOpen ? S.OPEN : S.CLOSE;
+
+  return _react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, S.ROOT, {}, rootStyle, {}, TS.ROOT)
+  }, _react["default"].createElement("button", {
+    className: CL_CAPTION,
+    style: (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle, {}, _styleCaption),
+    title: _title,
+    onClick: onClick
+  }, caption), children, _react["default"].createElement(_Comp["default"].SvgClose, {
+    style: S.SVG_CLOSE,
+    onClose: onClose
+  }));
+}
+
+var _default = ItemHeader;
 exports["default"] = _default;
 //# sourceMappingURL=ItemHeader.js.map

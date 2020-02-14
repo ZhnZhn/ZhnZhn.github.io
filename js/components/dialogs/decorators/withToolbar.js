@@ -12,14 +12,14 @@ var _withToggle = _interopRequireDefault(require("./withToggle"));
 var C = {
   BT_I: {
     M: '_clickInfoWithToolbar',
-    BT_C: 'I',
-    BT_T: 'Click to show description about data source'
+    BT_C: 'A',
+    BT_T: 'About Datasource'
   },
   BT_L: {
     M_T: '_clickLabelWithToolbar',
     PN: 'isShowLabels',
     BT_C: 'L',
-    BT_T: "Click to toggle row's labels"
+    BT_T: "Click to toggle input labels"
   },
   BT_D: {
     M_T: '_clickDateWithToolbar',
@@ -31,19 +31,25 @@ var C = {
     M: 'Options',
     PN: 'isOptions',
     BT_C: 'O',
-    BT_T: 'Click to show options'
+    BT_T: 'Chart Options'
   },
   BT_T: {
     M: 'Toggle',
     PN: 'isToggle',
     BT_C: 'T',
-    BT_T: 'Click to show toggle options'
+    BT_T: 'Toggle Inputs'
   },
   BT_TO: {
     M_T: '_toggleOptionWithToolbar',
     PN: 'isToggleOptions',
     BT_C: 'O',
     BT_T: "Click to toggle dialog's options"
+  },
+  BT_SO: {
+    M_T: '_clickOptionsWithToolbar',
+    PN: 'isShowOptions',
+    BT_C: 'O',
+    BT_T: "Toggle Input Options"
   }
 };
 
@@ -92,19 +98,24 @@ var _createType2WithToolbar = function _createType2WithToolbar(props, _temp) {
       noLabels = _ref3.noLabels,
       isOptions = _ref3.isOptions,
       isToggle = _ref3.isToggle,
-      isToggleOptions = _ref3.isToggleOptions;
+      isToggleOptions = _ref3.isToggleOptions,
+      isShowOptions = _ref3.isShowOptions;
 
   var buttons = [];
-
-  if (_isFn(props.onClickInfo)) {
-    _addBtTo(buttons, C.BT_I, this._clickInfoWithToolbar.bind(this));
-  }
 
   if (!noLabels) {
     _addToggleBt({
       inst: this,
       buttons: buttons,
       key: 'BT_L'
+    });
+  }
+
+  if (isToggle) {
+    _addShowHideBt({
+      inst: this,
+      buttons: buttons,
+      key: 'BT_T'
     });
   }
 
@@ -125,15 +136,8 @@ var _createType2WithToolbar = function _createType2WithToolbar(props, _temp) {
 
     this.dialogOptions = {};
     this._toggleOptionWithToolbar = this._toggleOptionWithToolbar.bind(this);
-  }
+  } //AlphaIntradayDialog
 
-  if (isToggle) {
-    _addShowHideBt({
-      inst: this,
-      buttons: buttons,
-      key: 'BT_T'
-    });
-  }
 
   if (isToggleOptions) {
     _addToggleBt({
@@ -141,6 +145,18 @@ var _createType2WithToolbar = function _createType2WithToolbar(props, _temp) {
       buttons: buttons,
       key: 'BT_TO'
     });
+  }
+
+  if (isShowOptions) {
+    _addToggleBt({
+      inst: this,
+      buttons: buttons,
+      key: 'BT_SO'
+    });
+  }
+
+  if (_isFn(props.onClickInfo)) {
+    _addBtTo(buttons, C.BT_I, this._clickInfoWithToolbar.bind(this));
   }
 
   return buttons;
@@ -155,12 +171,8 @@ var _toggleWithToolbar = function _toggleWithToolbar() {
 };
 
 var _clickInfoWithToolbar = function _clickInfoWithToolbar() {
-  var _this$props = this.props,
-      descrUrl = _this$props.descrUrl,
-      onClickInfo = _this$props.onClickInfo;
-  onClickInfo({
-    descrUrl: descrUrl
-  });
+  var onClickInfo = this.props.onClickInfo;
+  onClickInfo();
 };
 
 var _toggleOptionWithToolbar = function _toggleOptionWithToolbar(propName) {

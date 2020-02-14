@@ -13,8 +13,6 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _safeGet = _interopRequireDefault(require("../../utils/safeGet"));
-
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _HighchartWrapper = _interopRequireDefault(require("../zhn/HighchartWrapper"));
@@ -141,7 +139,9 @@ function (_Component) {
     };
 
     _this._handleUnLoadedMiniChart = function (objChart) {
-      var charts = (0, _safeGet["default"])(_this.mainChart, 'options.zhDetailCharts');
+      var _this$mainChart, _this$mainChart$optio;
+
+      var charts = (_this$mainChart = _this.mainChart) == null ? void 0 : (_this$mainChart$optio = _this$mainChart.options) == null ? void 0 : _this$mainChart$optio.zhDetailCharts;
 
       if (Array.isArray(charts)) {
         _this.mainChart.options.zhDetailCharts = charts.filter(function (chart) {

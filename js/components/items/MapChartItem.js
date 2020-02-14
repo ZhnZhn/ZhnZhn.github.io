@@ -77,6 +77,10 @@ var BtTabInfo = function BtTabInfo(_ref) {
   }));
 };
 
+var _crMapId = function _crMapId(caption) {
+  return "map_" + caption;
+};
+
 var MapChartItem =
 /*#__PURE__*/
 function (_Component) {
@@ -129,14 +133,24 @@ function (_Component) {
         caption = _this$props.caption,
         config = _this$props.config,
         jsonCube = config.json,
-        zhMapSlice = config.zhMapSlice;
+        zhMapSlice = config.zhMapSlice,
+        _config$zhDialog = config.zhDialog,
+        zhDialog = _config$zhDialog === void 0 ? {} : _config$zhDialog,
+        time = zhDialog.time;
 
-    _ChoroplethMap["default"].draw("map_" + caption, jsonCube, zhMapSlice).then(function (option) {
-      _this2.map = option.map;
+    _ChoroplethMap["default"].draw({
+      id: _crMapId(caption),
+      jsonCube: jsonCube,
+      zhMapSlice: zhMapSlice,
+      time: time
+    }).then(function (_ref2) {
+      var map = _ref2.map,
+          time = _ref2.time;
+      _this2.map = map;
 
       _this2.setState({
         isLoading: false,
-        time: option.time
+        time: time
       });
     })["catch"](function (err) {
       _this2.setState({
@@ -150,10 +164,12 @@ function (_Component) {
         caption = _this$props2.caption,
         config = _this$props2.config,
         onCloseItem = _this$props2.onCloseItem,
+        _mapId = _crMapId(caption),
         zhDialog = config.zhDialog,
-        _ref2 = zhDialog || {},
-        itemCaption = _ref2.itemCaption,
-        subtitle = _ref2.subtitle,
+        info = config.info,
+        _ref3 = zhDialog || {},
+        itemCaption = _ref3.itemCaption,
+        subtitle = _ref3.subtitle,
         _itemCaption = itemCaption || subtitle || '',
         _this$state = this.state,
         isLoading = _this$state.isLoading,
@@ -177,13 +193,13 @@ function (_Component) {
       isShow: !isShowInfo,
       onClick: this._hClickInfo
     }), _react["default"].createElement("div", {
-      id: "map_" + caption,
+      id: _mapId,
       style: (0, _extends2["default"])({}, S.MAP_DIV, {}, _styleMap)
     }, isLoading && _react["default"].createElement(_Comp["default"].SpinnerLoading, {
       style: S.SPINNER_LOADING
     })), _react["default"].createElement(_PanelDataInfo["default"], {
       isShow: isShowInfo,
-      info: config.info,
+      info: info,
       onClickChart: this._hClickChart
     })));
   };

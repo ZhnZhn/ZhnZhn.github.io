@@ -17,8 +17,6 @@ var _kMeans = _interopRequireDefault(require("../../math/k-means"));
 
 var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
 
-var _safeGet = _interopRequireDefault(require("../../utils/safeGet"));
-
 var _merge = _interopRequireDefault(require("../../utils/merge"));
 
 var _MapFactory = _interopRequireDefault(require("../../components/factories/MapFactory"));
@@ -28,21 +26,23 @@ var URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
     NUMBER_OF_ITERATION = 100,
     COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
 
-var _findFeature = function _findFeature(features, value) {
+var _findFeature = function _findFeature(features, id) {
   if (!Array.isArray(features)) {
-    return undefined;
+    return void 0;
   }
 
   for (var i = 0; i < features.length; i++) {
-    if (features[i] && features[i].properties && features[i].properties.id === value) {
+    var _features$i;
+
+    if ((features == null ? void 0 : (_features$i = features[i]) == null ? void 0 : _features$i.properties.id) === id) {
       return features[i];
     }
   }
 
-  return undefined;
+  return void 0;
 };
 
-var _fnMergeGeoAndValue = function _fnMergeGeoAndValue(sGeo, dGeo, json) {
+var _mergeGeoAndValue = function _mergeGeoAndValue(sGeo, dGeo, json) {
   var points = [];
   var minValue = Number.POSITIVE_INFINITY,
       maxValue = Number.NEGATIVE_INFINITY;
@@ -79,7 +79,7 @@ var _fnMergeGeoAndValue = function _fnMergeGeoAndValue(sGeo, dGeo, json) {
   };
 };
 
-var _fnCreateHmIdCluster = function _fnCreateHmIdCluster(clusters) {
+var _crHmIdCluster = function _crHmIdCluster(clusters) {
   var hm = {};
   clusters.forEach(function (cluster, i) {
     for (var _iterator = cluster.points, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -101,7 +101,7 @@ var _fnCreateHmIdCluster = function _fnCreateHmIdCluster(clusters) {
   return hm;
 };
 
-var _fnMergeGeoJsonAndClusters = function _fnMergeGeoJsonAndClusters(geoJson, hmIdCluster, maxCluster) {
+var _mergeGeoJsonAndClusters = function _mergeGeoJsonAndClusters(geoJson, hmIdCluster, maxCluster) {
   geoJson.features.forEach(function (feature) {
     var _properties = feature.properties,
         _id = _properties.id;
@@ -115,7 +115,7 @@ var _fnMergeGeoJsonAndClusters = function _fnMergeGeoJsonAndClusters(geoJson, hm
   });
 };
 
-var _fnStyle = function _fnStyle(feature) {
+var _crStyle = function _crStyle(feature) {
   return {
     "color": 'green',
     "fillColor": COLORS[feature.properties.cluster],
@@ -125,7 +125,7 @@ var _fnStyle = function _fnStyle(feature) {
   };
 };
 
-var _fnCreateEl = function _fnCreateEl(tag, className, cssText, id) {
+var _crEl = function _crEl(tag, className, cssText, id) {
   if (className === void 0) {
     className = '';
   }
@@ -145,55 +145,54 @@ var _fnCreateEl = function _fnCreateEl(tag, className, cssText, id) {
   return el;
 };
 
-var _fnCreateInfoControl = function _fnCreateInfoControl(L, mapId) {
-  var wgInfo = L.control();
+var _crInfoControl = function _crInfoControl(L, mapId) {
+  return Object.assign(L.control(), {
+    onAdd: function onAdd(map) {
+      this.idEl = mapId + '_info-control';
+      this.divEl = _crEl('div', 'control-info', '', this.idEl);
+      return this.divEl;
+    },
+    update: function update(props) {
+      if (props) {
+        var elInfo = _MapFactory["default"].crInfo(props);
 
-  wgInfo.onAdd = function (map) {
-    this.idEl = mapId + '_info-control';
-    this.divEl = _fnCreateEl('div', 'control-info', '', this.idEl);
-    return this.divEl;
-  };
+        (0, _reactDom.render)(elInfo, document.getElementById(this.idEl));
+      }
+    },
+    updateCluster: function updateCluster(cluster, color, from, to) {
+      if (cluster) {
+        var elClusterInfo = _MapFactory["default"].crClusterInfo({
+          cluster: cluster,
+          color: color,
+          from: from,
+          to: to
+        });
 
-  wgInfo.update = function (props) {
-    if (props) {
-      var elInfo = _MapFactory["default"].crInfo(props);
-
-      (0, _reactDom.render)(elInfo, document.getElementById(this.idEl));
+        (0, _reactDom.render)(elClusterInfo, document.getElementById(this.idEl));
+      }
     }
-  };
-
-  wgInfo.updateCluster = function (cluster, color, from, to) {
-    if (cluster) {
-      var elClusterInfo = _MapFactory["default"].crClusterInfo({
-        cluster: cluster,
-        color: color,
-        from: from,
-        to: to
-      });
-
-      (0, _reactDom.render)(elClusterInfo, document.getElementById(this.idEl));
-    }
-  };
-
-  return wgInfo;
+  });
 };
 
-var _fnCalcUpper = function _fnCalcUpper(clusters, index, maxValue) {
+var _calcUpper = function _calcUpper(clusters, index, maxValue) {
+  var _ref2, _clusters$index, _ref3;
+
   if (clusters.length - 1 === index) {
     return maxValue;
   }
 
-  var arrL = (0, _safeGet["default"])(clusters, "[" + index + "].points", [[0]]),
-      arrH = (0, _safeGet["default"])(clusters, "[" + (index + 1) + "].points", [[0]]),
+  var arrL = (_ref2 = clusters == null ? void 0 : (_clusters$index = clusters[index]) == null ? void 0 : _clusters$index.points) != null ? _ref2 : [[0]],
+      arrH = (_ref3 = clusters == null ? void 0 : clusters[index + 1].points) != null ? _ref3 : [[0]],
       upLow = arrL[arrL.length - 1][0],
       upUp = arrH[0] ? arrH[0][0] : upLow;
   return upLow + (upUp - upLow) / 2;
 };
 
-var _fnCreateRowEl = function _fnCreateRowEl(color, from, to, cluster, wg) {
-  var _n = (0, _safeGet["default"])(cluster, "points.length", 0);
+var _crRowEl = function _crRowEl(color, from, to, cluster, wg) {
+  var _ref4, _cluster$points;
 
-  var el = _fnCreateEl('p', '', "opacity: 0.7; background: " + color + "; padding: 5px 6px; cursor: pointer;");
+  var _n = (_ref4 = cluster == null ? void 0 : (_cluster$points = cluster.points) == null ? void 0 : _cluster$points.length) != null ? _ref4 : 0,
+      el = _crEl('p', '', "opacity: 0.7; background: " + color + "; padding: 5px 6px; cursor: pointer;");
 
   el.addEventListener('click', function (event) {
     wg.updateCluster(cluster, color, from, to);
@@ -202,33 +201,33 @@ var _fnCreateRowEl = function _fnCreateRowEl(color, from, to, cluster, wg) {
   return el;
 };
 
-var _fnCreateFooterEl = function _fnCreateFooterEl() {
-  var el = _fnCreateEl('div');
+var _crFooterEl = function _crFooterEl() {
+  var el = _crEl('div');
 
   el.innerHTML = "<p style=\"opacity:0.65;background:green;padding: 3px 6px\">No Data</p>\n                  <p style=\"color:black;padding-top: 5px;\">Source: Eurostat</p>";
   return el;
 };
 
-var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, clusters, L, wg) {
+var _crGradeControl = function _crGradeControl(minValue, maxValue, clusters, L, wg) {
   var gradeContorl = L.control({
     position: 'bottomleft'
   });
 
   gradeContorl.onAdd = function (map) {
-    var _div = _fnCreateEl('div', 'control-grade');
+    var _div = _crEl('div', 'control-grade');
 
     var _upperPrev, _upperNext;
 
     _upperPrev = _mathFn["default"].toFixed(minValue);
     clusters.forEach(function (cluster, index) {
-      _upperNext = _mathFn["default"].toFixed(_fnCalcUpper(clusters, index, maxValue));
+      _upperNext = _mathFn["default"].toFixed(_calcUpper(clusters, index, maxValue));
 
-      _div.appendChild(_fnCreateRowEl(COLORS[index], _upperPrev, _upperNext, cluster, wg));
+      _div.appendChild(_crRowEl(COLORS[index], _upperPrev, _upperNext, cluster, wg));
 
       _upperPrev = _upperNext;
     });
 
-    _div.appendChild(_fnCreateFooterEl());
+    _div.appendChild(_crFooterEl());
 
     return _div;
   };
@@ -236,22 +235,25 @@ var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, c
   return gradeContorl;
 };
 
-var _fnOnMouseOver = function _fnOnMouseOver(infoControl, e) {
+var _onMouseOver = function _onMouseOver(infoControl, e) {
   var _layer = e.target;
   infoControl.update(_layer.feature.properties);
 };
+/*
+const  _onMouseOut = function(infoControl, e){
+  //infoControl.update()
+}
+*/
 
-var _fnOnMouseOut = function _fnOnMouseOut(infoControl, e) {//infoControl.update()
-};
 
 var _fnOnEachFeature = function _fnOnEachFeature(infoControl, feature, layer) {
   layer.on({
-    mouseover: _fnOnMouseOver.bind(null, infoControl),
-    mouseout: _fnOnMouseOut.bind(null, infoControl)
+    mouseover: _onMouseOver.bind(null, infoControl) //mouseout: _onMouseOut.bind(null, infoControl)
+
   });
 };
 
-var _fnAddGeoSeria = function _fnAddGeoSeria(points, statJson, configSlice) {
+var _addGeoSeria = function _addGeoSeria(points, statJson, configSlice) {
   /* eslint-disable no-unused-vars */
   var time = configSlice.time,
       seriaSlice = (0, _objectWithoutPropertiesLoose2["default"])(configSlice, ["time"]);
@@ -264,37 +266,38 @@ var _fnAddGeoSeria = function _fnAddGeoSeria(points, statJson, configSlice) {
   });
 };
 
-var _createChoroplethMap = function _createChoroplethMap(option) {
+var _crChoroplethMap = function _crChoroplethMap(option) {
   var statJson = option.jsonCube,
       geoJson = option.geoJson,
       configSlice = option.zhMapSlice,
       map = option.map,
       L = option.L,
       mapId = option.mapId,
-      _JsonStatFn$createGeo = _JsonStatFn["default"].createGeoSlice(statJson, configSlice),
+      dfTime = option.time,
+      _JsonStatFn$createGeo = _JsonStatFn["default"].createGeoSlice(statJson, configSlice, dfTime),
       dGeo = _JsonStatFn$createGeo.dGeo,
       sGeo = _JsonStatFn$createGeo.sGeo,
       time = _JsonStatFn$createGeo.time,
-      _fnMergeGeoAndValue2 = _fnMergeGeoAndValue(sGeo, dGeo, geoJson),
-      minValue = _fnMergeGeoAndValue2.minValue,
-      maxValue = _fnMergeGeoAndValue2.maxValue,
-      points = _fnMergeGeoAndValue2.points,
-      _points = _fnAddGeoSeria(points, statJson, configSlice),
+      _mergeGeoAndValue2 = _mergeGeoAndValue(sGeo, dGeo, geoJson),
+      minValue = _mergeGeoAndValue2.minValue,
+      maxValue = _mergeGeoAndValue2.maxValue,
+      points = _mergeGeoAndValue2.points,
+      _points = _addGeoSeria(points, statJson, configSlice),
       _clusters = _kMeans["default"].crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
-      _hmIdCluster = _fnCreateHmIdCluster(_clusters);
+      _hmIdCluster = _crHmIdCluster(_clusters);
 
-  _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
+  _mergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
 
-  var infoControl = _fnCreateInfoControl(L, mapId);
+  var infoControl = _crInfoControl(L, mapId);
 
   infoControl.addTo(map);
   L.geoJSON(geoJson, {
-    style: _fnStyle,
+    style: _crStyle,
     onEachFeature: _fnOnEachFeature.bind(null, infoControl)
   }).addTo(map);
 
   if (_points.length > 1) {
-    var gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters, L, infoControl);
+    var gradeControl = _crGradeControl(minValue, maxValue, _clusters, L, infoControl);
 
     gradeControl.addTo(map);
   }
@@ -317,7 +320,10 @@ var ChoroplethMap = {
   hmUrlGeoJson: {},
   L: undefined,
   mapOption: {
-    doubleClickZoom: false
+    doubleClickZoom: false,
+    zoomSnap: 0.5,
+    minZoom: 1,
+    maxZoom: 4
   },
   getLeaflet: function getLeaflet() {
     var _this = this;
@@ -347,9 +353,13 @@ var ChoroplethMap = {
       });
     }
   },
-  draw: function draw(id, jsonCube, zhMapSlice) {
+  draw: function draw(_ref5) {
     var _this3 = this;
 
+    var id = _ref5.id,
+        jsonCube = _ref5.jsonCube,
+        zhMapSlice = _ref5.zhMapSlice,
+        time = _ref5.time;
     return this.getLeaflet().then(function (L) {
       var map = L.map(id, _this3.mapOption).setView([58.00, 10.00], 3);
       /*
@@ -366,6 +376,7 @@ var ChoroplethMap = {
       return {
         jsonCube: jsonCube,
         zhMapSlice: zhMapSlice,
+        time: time,
         L: L,
         map: map,
         mapId: id
@@ -376,7 +387,7 @@ var ChoroplethMap = {
         return option;
       });
     }).then(function (option) {
-      return Promise.resolve(_createChoroplethMap(option));
+      return Promise.resolve(_crChoroplethMap(option));
     });
   }
 };

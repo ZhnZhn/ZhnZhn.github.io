@@ -1,6 +1,6 @@
 
 import ConfigBuilder from '../../charts/ConfigBuilder'
-import Yearly from '../toYearly'
+import Yearly from '../toYearsByMonths'
 import fnAdapter from './fnAdapter'
 import fnUtil from './fnUtil'
 
@@ -32,7 +32,7 @@ const toYearly = {
          .add('chart', { spacingTop: 25 })
          .addCaption(title, subtitle)
          .add('info', crInfo(ds, option))
-         .add('zhConfig', crZhConfig(option))         
+         .add('zhConfig', crZhConfig(option))
          .toConfig()
 
        return config;

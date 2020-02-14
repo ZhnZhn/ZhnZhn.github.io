@@ -17,14 +17,12 @@ class DialogType4A extends Component {
       onAbout: this._clickInfoWithToolbar
     })
 
-    this.toolbarButtons = this._createType2WithToolbar(props)
-    this.toolbarButtons.push({
-      caption: 'O', title: 'Toggle Options Input',
-      onClick: this._handleClickOptions
-    })
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { isShowOptions: true }
+    )
+
     this[HAS_SECOND_Y_AXIS] = false
     this._commandButtons = this._crCommandsWithLoad(this)
-
 
     this.state = {
       ...this._isWithInitialState(),
@@ -39,10 +37,6 @@ class DialogType4A extends Component {
        }
     }
     return true;
-  }
-
-  _handleClickOptions = () => {
-    this.setState({ isShowOptions: !this.state.isShowOptions })
   }
 
   _handleLoad = () => {

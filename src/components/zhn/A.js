@@ -13,6 +13,7 @@ import OpenClose2 from './OpenClose2';
 import ShowHide from './ShowHide';
 import SvgPlus from './SvgPlus';
 import SvgMinus from './SvgMinus';
+import SvgClose from './SvgClose'
 import TabPane from './TabPane'
 import Tab from './Tab'
 
@@ -31,6 +32,7 @@ const A = {
   ShowHide,
   SvgPlus,
   SvgMinus,
+  SvgClose,
   TabPane,
   Tab
 };

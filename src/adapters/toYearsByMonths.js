@@ -104,11 +104,11 @@ const _crSeriaData = (data, i, year, crPoint=_crPoint) => {
 
 const _crSeries = (data) => {
   const firtsItem = data[0][0]
-      , _yearNow = _getYear(firtsItem)
-      , { i, arr:_dNow } = _crSeriaData(data, 0, _yearNow)
-      , prevItem = data[i][0]
-      , _yearPrev = _getYear(prevItem)
-      , { arr:_dPrev } = _crSeriaData(data, i, _yearPrev);
+  , _yearNow = _getYear(firtsItem)
+  , { i, arr:_dNow } = _crSeriaData(data, 0, _yearNow)
+  , prevItem = data[i][0]
+  , _yearPrev = _getYear(prevItem)
+  , { arr:_dPrev } = _crSeriaData(data, i, _yearPrev);
 
   return {
     nowSeria: _crSeria(_yearNow, { ...C.NOW, ...{data: _dNow} } ),
@@ -209,18 +209,19 @@ const _crAvgSeria = (data) => {
   };
 }
 
-
 const _crZhConfig = (option, { legend }) => {
-  const { value, dataSource, itemCaption } = option
-      , _id = value + '_' + 'YEARLY';
+  const {
+    value, itemCaption,
+    dataSource, linkFn, item,
+  } = option
+  , _id = value + '_' + 'YEARLY';
   return {
     id: _id,
     key: _id,
     itemCaption,
     isWithoutIndicator: true,
-    isWithoutAdd: true,    
-    legend: legend,
-    dataSource: dataSource
+    isWithoutAdd: true,
+    legend, dataSource, linkFn, item
   };
 }
 
@@ -256,9 +257,19 @@ const _crValueMoving = (nowSeria, prevSeria) => {
   };
 };
 
+const _checkIfEnoughData = data => {
+  const _len = data?.length;
+  if (_len<=12) {
+    throw {
+      errCaption: "Data Error",
+      message: `Not enough data for chart (${_len})`
+    };
+  }
+};
 
-const toYearly = {
+const toMonthly = {
   toConfig(data, option) {
+    _checkIfEnoughData(data)
     const { title, subtitle } = option
     , {
         nowSeria, nowItem,
@@ -286,4 +297,4 @@ const toYearly = {
   }
 }
 
-export default toYearly
+export default toMonthly

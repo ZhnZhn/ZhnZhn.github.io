@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../src/adapters/RouterAdapter.js"],"names":["RouterAdapter","Quandl","DbNomics","EuroStat","UnComtrade","FaoStat","WorldBank","StatNorway","StatSweden","StatFinland","AlphaVantage","Barchart","Iex","Wtd","Fmp","Insee","Bea","Bls","Eia","Intrinio","Crc","Cmc"],"mappings":";;;;;;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,aAAa,GAAG;AACpBC,EAAAA,MAAM,EAANA,kBADoB;AAEpBC,EAAAA,QAAQ,EAARA,oBAFoB;AAGpBC,EAAAA,QAAQ,EAARA,oBAHoB;AAIpBC,EAAAA,UAAU,EAAVA,sBAJoB;AAKpBC,EAAAA,OAAO,EAAPA,mBALoB;AAMpBC,EAAAA,SAAS,EAATA,qBANoB;AAOpBC,EAAAA,UAAU,EAAVA,sBAPoB;AAQpBC,EAAAA,UAAU,EAAVA,sBARoB;AASpBC,EAAAA,WAAW,EAAXA,uBAToB;AAUpBC,EAAAA,YAAY,EAAZA,wBAVoB;AAWpBC,EAAAA,QAAQ,EAARA,oBAXoB;AAYpBC,EAAAA,GAAG,EAAHA,eAZoB;AAapBC,EAAAA,GAAG,EAAHA,eAboB;AAcpBC,EAAAA,GAAG,EAAHA,eAdoB;AAepBC,EAAAA,KAAK,EAALA,iBAfoB;AAgBpBC,EAAAA,GAAG,EAAHA,eAhBoB;AAiBpBC,EAAAA,GAAG,EAAHA,eAjBoB;AAkBpBC,EAAAA,GAAG,EAAHA,eAlBoB;AAmBpBC,EAAAA,QAAQ,EAARA,oBAnBoB;AAoBpBC,EAAAA,GAAG,EAAHA,eApBoB;AAqBpBC,EAAAA,GAAG,EAAHA;AArBoB,CAAtB;eAwBerB,a","sourcesContent":["\r\nimport EuroStat from './eurostat/EuroStat'\r\nimport UnComtrade from './uncomtrade/UnComtrade'\r\nimport FaoStat from './faostat/FaoStat'\r\nimport WorldBank from './world-bank/WorldBank'\r\nimport StatNorway from './stat-norway/StatNorway'\r\nimport StatSweden from './stat-sweden/StatSweden'\r\nimport StatFinland from './stat-finland/StatFinland'\r\nimport AlphaVantage from './alpha/AlphaVantage'\r\nimport Barchart from './barchart/Barchart'\r\nimport Iex from './iex/Iex'\r\nimport Wtd from './wtd/Wtd'\r\nimport Fmp from './fmp/Fmp'\r\nimport Insee from './insee/Insee'\r\nimport Bea from './bea/Bea'\r\nimport Bls from './bls/Bls'\r\nimport Eia from './eia/Eia'\r\nimport Intrinio from './intrinio/Intrinio'\r\nimport Quandl from './quandl/Quandl'\r\nimport DbNomics from './db-nomics/DbNomics'\r\nimport Crc from './crypto-compare/Crc'\r\nimport Cmc from './coin-market-cap/Cmc'\r\n\r\nconst RouterAdapter = {\r\n  Quandl,\r\n  DbNomics,\r\n  EuroStat,\r\n  UnComtrade,\r\n  FaoStat,\r\n  WorldBank,\r\n  StatNorway,\r\n  StatSweden,\r\n  StatFinland,\r\n  AlphaVantage,\r\n  Barchart,\r\n  Iex,\r\n  Wtd,\r\n  Fmp,\r\n  Insee,\r\n  Bea,\r\n  Bls,\r\n  Eia,\r\n  Intrinio,\r\n  Crc,\r\n  Cmc\r\n};\r\n\r\nexport default RouterAdapter\r\n"],"file":"RouterAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/RouterAdapter.js"
+ ],
+ "file": "../../src/adapters/RouterAdapter.js",
+ "names": [
+  "RouterAdapter",
+  "Quandl",
+  "DbNomics",
+  "EuroStat",
+  "UnComtrade",
+  "FaoStat",
+  "WorldBank",
+  "StatNorway",
+  "StatSweden",
+  "StatFinland",
+  "AlphaVantage",
+  "Barchart",
+  "Iex",
+  "Wtd",
+  "Fmp",
+  "Insee",
+  "Bea",
+  "Bls",
+  "Eia",
+  "Intrinio",
+  "Crc",
+  "Cmc"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,aAAa,GAAG;AACpBC,EAAAA,MAAM,EAANA,kBADoB;AAEpBC,EAAAA,QAAQ,EAARA,oBAFoB;AAGpBC,EAAAA,QAAQ,EAARA,oBAHoB;AAIpBC,EAAAA,UAAU,EAAVA,sBAJoB;AAKpBC,EAAAA,OAAO,EAAPA,mBALoB;AAMpBC,EAAAA,SAAS,EAATA,qBANoB;AAOpBC,EAAAA,UAAU,EAAVA,sBAPoB;AAQpBC,EAAAA,UAAU,EAAVA,sBARoB;AASpBC,EAAAA,WAAW,EAAXA,uBAToB;AAUpBC,EAAAA,YAAY,EAAZA,wBAVoB;AAWpBC,EAAAA,QAAQ,EAARA,oBAXoB;AAYpBC,EAAAA,GAAG,EAAHA,eAZoB;AAapBC,EAAAA,GAAG,EAAHA,eAboB;AAcpBC,EAAAA,GAAG,EAAHA,eAdoB;AAepBC,EAAAA,KAAK,EAALA,iBAfoB;AAgBpBC,EAAAA,GAAG,EAAHA,eAhBoB;AAiBpBC,EAAAA,GAAG,EAAHA,eAjBoB;AAkBpBC,EAAAA,GAAG,EAAHA,eAlBoB;AAmBpBC,EAAAA,QAAQ,EAARA,oBAnBoB;AAoBpBC,EAAAA,GAAG,EAAHA,eApBoB;AAqBpBC,EAAAA,GAAG,EAAHA;AArBoB,CAAtB;eAwBerB,a"
+}

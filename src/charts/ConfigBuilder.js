@@ -8,7 +8,11 @@ import Tooltip from './Tooltip'
 
 import SeriaBuilder from './SeriaBuilder'
 
-const { findMinY, findMaxY } = seriaFns;
+const {
+  findMinY,
+  findMaxY,
+  filterTrimZero
+} = seriaFns;
 const {
   setPlotLinesMinMax,
   setPlotLinesDeltas,
@@ -48,16 +52,19 @@ const C = {
 };
 
 const _assign = Object.assign;
-//const _isArr = Array.isArray;
+const _isArr = Array.isArray;
 
 const _isObj = obj => obj && typeof obj === 'object';
 const _isStr = str => typeof str === 'string';
 const _isNumber = n => typeof n === 'number'
   && n - n === 0;
 
-const _getY = (point) => Array.isArray(point)
+const _getY = (point) => _isArr(point)
  ? point[1]
  : point && point.y || 0;
+
+const _getData = obj => obj.config?.series?.[0].data
+ || [];
 
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
@@ -267,16 +274,20 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     const {
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
+      isFilterZero,
       minY, maxY
     } = option
+    , _data = isFilterZero
+        ? filterTrimZero(data)
+        : data
     , min = _isNumber(minY)
        ? minY
-       : findMinY(data)
+       : findMinY(_data)
     , max = _isNumber(maxY)
        ? maxY
-       : findMaxY(data);
+       : findMaxY(_data);
     return this.setMinMax(min, max, isNotZoomToMinMax)
-      .setMinMaxDeltas(min, max, data, isDrawDeltaExtrems);
+      .setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
   },
 
 
@@ -367,7 +378,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   _checkDataLength(){
-    const data = this.config?.series?.[0].data || [];
+    const data = _getData(this);
     if (data.length > 3000){
       this._disableAnimation()
     }

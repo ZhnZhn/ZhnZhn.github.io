@@ -34,11 +34,10 @@ class JodiWorldOilDialog extends Component {
        onAbout: this._clickInfoWithToolbar
      })
 
-     this.toolbarButtons = this._createType2WithToolbar(props)
-     this.toolbarButtons.push({
-       caption: 'O', title: 'Toggle Options Input',
-       onClick: this._hClickOptions
-     })
+     this.toolbarButtons = this._createType2WithToolbar(
+       props, { isShowOptions: true }
+     )
+
      this._commandButtons = this._crCommandsWithLoad(this)
 
      this.state = {
@@ -55,12 +54,6 @@ class JodiWorldOilDialog extends Component {
         }
      }
      return true;
-   }
-
-   _hClickOptions = () => {
-     this.setState(prevState => ({
-       isShowOptions: !prevState.isShowOptions
-     }))
    }
 
    _hSelectCountry = (country) => {

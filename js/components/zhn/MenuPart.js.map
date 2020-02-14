@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/components/zhn/MenuPart.jsx"],"names":["CL_ROW","MenuPart","hKeyDown","onClick","event","_renderMenuItems","items","map","item","index","title","counter","isNew","bind","isOpen","onBadgeClick","onBadgeClose","render","props","caption","isInitOpen","_isClose","Component"],"mappings":";;;;;;;;;;;AAAA;;AAGA;;AAEA;;AACA;;AACA;;AANA;AAQA,IAAMA,MAAM,GAAG,yBAAf;;IAEMC,Q;;;;;;;;;;;;;;UAmBJC,Q,GAAW,UAACC,OAAD,EAAUC,KAAV,EAAoB;AAC7B,UAAI,4BAAWA,KAAX,CAAJ,EAAuB;AACrBD,QAAAA,OAAO;AACR;AACF,K;;UAEDE,gB,GAAmB,UAACC,KAAD,EAAW;AAC5B,aAAOA,KAAK,CAACC,GAAN,CAAU,UAACC,IAAD,EAAOC,KAAP,EAAiB;AAAA,YAExBC,KAFwB,GAKtBF,IALsB,CAExBE,KAFwB;AAAA,YAEjBC,OAFiB,GAKtBH,IALsB,CAEjBG,OAFiB;AAAA,YAGxBC,KAHwB,GAKtBJ,IALsB,CAGxBI,KAHwB;AAAA,YAIxBT,OAJwB,GAKtBK,IALsB,CAIxBL,OAJwB;AAMhC,eACG;AACI,UAAA,GAAG,EAAEM,KADT;AAEI,UAAA,SAAS,EAAET,MAFf;AAGI,UAAA,OAAO,EAAEG,OAHb;AAII,UAAA,QAAQ,EAAC,GAJb;AAKI,UAAA,IAAI,EAAC,UALT;AAMI,UAAA,SAAS,EAAE,MAAKD,QAAL,CAAcW,IAAd,CAAmB,IAAnB,EAAyBV,OAAzB;AANf,WAQIO,KARJ,EASIC,OAAO,KAAK,CAAZ,GACI,gCAAC,qBAAD;AACC,UAAA,OAAO,EAAEA,OADV;AAEC,UAAA,MAAM,EAAEH,IAAI,CAACM,MAFd;AAGC,UAAA,OAAO,EAAEN,IAAI,CAACO,YAHf;AAIC,UAAA,YAAY,EAAEP,IAAI,CAACQ;AAJpB,UADJ,GAOI,IAhBR,EAkBIJ,KAAK,GAAG,gCAAC,oBAAD,OAAH,GAAkB,IAlB3B,CADH;AAsBD,OA5BM,CAAP;AA6BD,K;;;;;;;SAEDK,M,GAAA,kBAAQ;AAAA,sBAC+B,KAAKC,KADpC;AAAA,QACCC,OADD,eACCA,OADD;AAAA,QACUC,UADV,eACUA,UADV;AAAA,QACsBd,KADtB,eACsBA,KADtB;AAAA,QAEAe,QAFA,GAEWD,UAAU,KAAK,IAAf,GACL,KADK,GACG,IAHd;;AAIN,WACE,gCAAC,qBAAD;AACG,MAAA,OAAO,EAAED,OADZ;AAEG,MAAA,OAAO,EAAEE;AAFZ,OAIK,KAAKhB,gBAAL,CAAsBC,KAAtB,CAJL,CADF;AAQD,G;;;EArEoBgB,gB;;eAwERrB,Q","sourcesContent":["import React, { Component } from 'react';\r\n//import PropTypes from 'prop-types'\r\n\r\nimport isKeyEnter from './isKeyEnter'\r\n\r\nimport LabelNew from './LabelNew';\r\nimport MenuBadge from './MenuBadge';\r\nimport OpenClose from './OpenClose';\r\n\r\nconst CL_ROW = \"row__topic not-selected\";\r\n\r\nclass MenuPart extends Component {\r\n  /*\r\n  static propTypes = {\r\n    caption: PropTypes.string,\r\n    isOpen: PropTypes.bool,\r\n    items: PropTypes.arrayOf(\r\n       PropTypes.shape({\r\n         isOpen: PropTypes.bool,\r\n         title: PropTypes.string,\r\n         counter: PropTypes.number,\r\n         isNew: PropTypes.bool,\r\n         onClick: PropTypes.func,\r\n         onBadgeClick: PropTypes.func,\r\n         onBadgeClose: PropTypes.func\r\n       })\r\n    )\r\n  }\r\n  */\r\n\r\n  hKeyDown = (onClick, event) => {\r\n    if (isKeyEnter(event)) {\r\n      onClick()\r\n    }\r\n  }\r\n\r\n  _renderMenuItems = (items) => {\r\n    return items.map((item, index) => {\r\n      const {\r\n              title, counter,\r\n              isNew,\r\n              onClick\r\n            } = item;\r\n      return (\r\n         <div\r\n             key={index}\r\n             className={CL_ROW}\r\n             onClick={onClick}\r\n             tabIndex=\"0\"\r\n             role=\"menuitem\"\r\n             onKeyDown={this.hKeyDown.bind(null, onClick)}\r\n          >\r\n            {title}\r\n            {counter !== 0\r\n               ? <MenuBadge\r\n                  counter={counter}\r\n                  isOpen={item.isOpen}\r\n                  onClick={item.onBadgeClick}\r\n                  onBadgeClose={item.onBadgeClose}\r\n               />\r\n               : null\r\n            }\r\n            {isNew ? <LabelNew /> : null}\r\n         </div>\r\n      );\r\n    })\r\n  }\r\n\r\n  render(){\r\n    const {caption, isInitOpen, items} = this.props\r\n        , _isClose = isInitOpen === true\r\n              ? false : true;\r\n    return (\r\n      <OpenClose\r\n         caption={caption}\r\n         isClose={_isClose}\r\n      >\r\n          {this._renderMenuItems(items)}\r\n      </OpenClose>\r\n    )\r\n  }\r\n}\r\n\r\nexport default MenuPart\r\n"],"file":"MenuPart.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/MenuPart.js"
+ ],
+ "file": "../../../src/components/zhn/MenuPart.js",
+ "names": [
+  "CL_ROW",
+  "MenuPart",
+  "hKeyDown",
+  "onClick",
+  "event",
+  "_renderMenuItems",
+  "items",
+  "map",
+  "item",
+  "index",
+  "title",
+  "counter",
+  "isNew",
+  "bind",
+  "isOpen",
+  "onBadgeClick",
+  "onBadgeClose",
+  "render",
+  "props",
+  "caption",
+  "isInitOpen",
+  "_isClose",
+  "Component"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AAGA;;AAEA;;AACA;;AACA;;AANA;AAQA,IAAMA,MAAM,GAAG,yBAAf;;IAEMC,Q;;;;;;;;;;;;;;UAmBJC,Q,GAAW,UAACC,OAAD,EAAUC,KAAV,EAAoB;AAC7B,UAAI,4BAAWA,KAAX,CAAJ,EAAuB;AACrBD,QAAAA,OAAO;AACR;AACF,K;;UAEDE,gB,GAAmB,UAACC,KAAD,EAAW;AAC5B,aAAOA,KAAK,CAACC,GAAN,CAAU,UAACC,IAAD,EAAOC,KAAP,EAAiB;AAAA,YAExBC,KAFwB,GAKtBF,IALsB,CAExBE,KAFwB;AAAA,YAEjBC,OAFiB,GAKtBH,IALsB,CAEjBG,OAFiB;AAAA,YAGxBC,KAHwB,GAKtBJ,IALsB,CAGxBI,KAHwB;AAAA,YAIxBT,OAJwB,GAKtBK,IALsB,CAIxBL,OAJwB;AAMhC,eACG;AACI,UAAA,GAAG,EAAEM,KADT;AAEI,UAAA,SAAS,EAAET,MAFf;AAGI,UAAA,OAAO,EAAEG,OAHb;AAII,UAAA,QAAQ,EAAC,GAJb;AAKI,UAAA,IAAI,EAAC,UALT;AAMI,UAAA,SAAS,EAAE,MAAKD,QAAL,CAAcW,IAAd,CAAmB,IAAnB,EAAyBV,OAAzB;AANf,WAQIO,KARJ,EASIC,OAAO,KAAK,CAAZ,GACI,gCAAC,qBAAD;AACC,UAAA,OAAO,EAAEA,OADV;AAEC,UAAA,MAAM,EAAEH,IAAI,CAACM,MAFd;AAGC,UAAA,OAAO,EAAEN,IAAI,CAACO,YAHf;AAIC,UAAA,YAAY,EAAEP,IAAI,CAACQ;AAJpB,UADJ,GAOI,IAhBR,EAkBIJ,KAAK,GAAG,gCAAC,oBAAD,OAAH,GAAkB,IAlB3B,CADH;AAsBD,OA5BM,CAAP;AA6BD,K;;;;;;;SAEDK,M,GAAA,kBAAQ;AAAA,sBAC+B,KAAKC,KADpC;AAAA,QACCC,OADD,eACCA,OADD;AAAA,QACUC,UADV,eACUA,UADV;AAAA,QACsBd,KADtB,eACsBA,KADtB;AAAA,QAEAe,QAFA,GAEWD,UAAU,KAAK,IAAf,GACL,KADK,GACG,IAHd;;AAIN,WACE,gCAAC,qBAAD;AACG,MAAA,OAAO,EAAED,OADZ;AAEG,MAAA,OAAO,EAAEE;AAFZ,OAIK,KAAKhB,gBAAL,CAAsBC,KAAtB,CAJL,CADF;AAQD,G;;;EArEoBgB,gB;;eAwERrB,Q"
+}

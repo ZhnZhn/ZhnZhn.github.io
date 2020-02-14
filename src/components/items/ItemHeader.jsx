@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 
-import withTheme from '../hoc/withTheme'
-
-import SvgClose from '../zhn/SvgClose';
+import ThemeContext from '../hoc/ThemeContext'
+import A from '../Comp'
 
 const TH_ID = 'ELEMENT';
 
-const CL = "not-selected shadow-right";
-const MAX_LENGTH = 45;
+const CL_CAPTION = "not-selected text-clip shadow-right";
 
 const S = {
   ROOT: {
@@ -20,15 +18,12 @@ const S = {
     paddingRight: 42,
     paddingBottom: 6,
     borderTopRightRadius: 2,
-    borderBottomRightRadius: 2,
-    boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
+    borderBottomRightRadius: 2
   },
   CAPTION: {
-    display: 'inline-block',        
+    width: '75%',
+    textAlign: 'left',
     fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow: 'clip',
-    overflow: 'hidden',
     cursor: 'pointer'
   },
   OPEN: {
@@ -44,59 +39,50 @@ const S = {
   }
 };
 
-class ItemHeader extends Component {
-   static defaultProps = {
-     caption: ''
-   }
+const MAX_LENGTH = 45;
+const _crTitle = (title, caption) => title
+   || caption.length > MAX_LENGTH
+ ? caption
+ : void 0;
 
-  _hKeyPress = (evt) => {
-    evt.preventDefault()
-    const { which } = evt;
-    if (which === 13 || which === 32 ){
-      this.props.onClick()
-    }
-  }
-
-  render(){
-    const {
-            theme,
-            isOpen,
-            rootStyle, captionStyle,
-            caption, title,
-            children,
-            onClick, onClose
-          } = this.props
-        , TS = theme.getStyle(TH_ID)
-        , _title = title || caption.length > MAX_LENGTH
-              ? caption
-              : void 0
-        , _styleCaption = isOpen
-            ? { ...S.CAPTION, ...captionStyle, ...S.OPEN }
-            : { ...S.CAPTION, ...captionStyle, ...S.CLOSE };
-    return (
-      <div style={{
-         ...S.ROOT, ...rootStyle,
-         ...TS.ROOT
-       }}>
-        <span
-           className={CL}
-           title={_title}
-           style={_styleCaption}
-           onClick={onClick}
-           tabIndex="0"
-           role="button"
-           onKeyPress={this._hKeyPress}
-        >
-           {caption}
-        </span>
-        {children}
-        <SvgClose
-           style={S.SVG_CLOSE}
-           onClose={onClose}
-         />
-      </div>
-    );
-  }
+function ItemHeader({
+  isOpen,
+  rootStyle, captionStyle,
+  caption='', title,
+  children,
+  onClick, onClose
+}){
+  const theme = useContext(ThemeContext)
+  , TS = theme.getStyle(TH_ID)
+  , _title = _crTitle(title, caption)
+  , _styleCaption = isOpen
+      ? S.OPEN
+      : S.CLOSE;
+  return (
+    <div style={{
+       ...S.ROOT,
+       ...rootStyle,
+       ...TS.ROOT
+     }}>
+      <button
+         className={CL_CAPTION}
+         style={{
+           ...S.CAPTION,
+           ...captionStyle,
+           ..._styleCaption
+         }}
+         title={_title}
+         onClick={onClick}
+      >
+         {caption}
+      </button>
+      {children}
+      <A.SvgClose
+         style={S.SVG_CLOSE}
+         onClose={onClose}
+       />
+    </div>
+  );
 }
 
-export default withTheme(ItemHeader)
+export default ItemHeader

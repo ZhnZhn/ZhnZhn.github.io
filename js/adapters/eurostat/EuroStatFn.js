@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
 var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
@@ -268,21 +270,36 @@ var EuroStatFn = {
         dfSliceTitle = _ref7.dfSliceTitle;
     return appendWithColon(dfSliceTitle || DF_SLICE_TITLE, subtitle);
   },
-  createZhConfig: function createZhConfig(json, option) {
+  crDataSource: function crDataSource(_ref8) {
+    var dfTable = _ref8.dfTable,
+        dataSource = _ref8.dataSource;
+    return dfTable ? dataSource + " (" + dfTable + ")" : dataSource || "Eurostat";
+  },
+  crLinkConf: function crLinkConf(json, _ref9) {
+    var dfTable = _ref9.dfTable;
+
     var href = json.href,
-        _href = href && href.replace ? href.replace('http', 'https') : href,
-        key = option.key,
+        _href = href && href.replace ? href.replace('http', 'https') : href;
+
+    return {
+      linkFn: 'ES',
+      item: {
+        dataset: dfTable,
+        href: _href
+      }
+    };
+  },
+  createZhConfig: function createZhConfig(json, option) {
+    var key = option.key,
         itemCaption = option.itemCaption,
-        dataSource = option.dataSource,
-        dfTable = option.dfTable,
         url = option.url,
         loadId = option.loadId,
         title = option.title,
         subtitle = option.subtitle,
         seriaType = option.seriaType,
-        _dataSource = dfTable ? dataSource + " (" + dfTable + ")" : dataSource || "Eurostat";
+        _dataSource = EuroStatFn.crDataSource(option);
 
-    return {
+    return (0, _extends2["default"])({
       id: key,
       key: key,
       itemCaption: itemCaption,
@@ -298,13 +315,8 @@ var EuroStatFn = {
       },
       //isWithoutIndicator: true,
       isWithoutAdd: url ? false : true,
-      dataSource: _dataSource,
-      linkFn: 'ES',
-      item: {
-        dataset: dfTable,
-        href: _href
-      }
-    };
+      dataSource: _dataSource
+    }, EuroStatFn.crLinkConf(json, option));
   },
   createDatasetInfo: function createDatasetInfo(json) {
     var label = json.label,

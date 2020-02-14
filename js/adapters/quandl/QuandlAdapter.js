@@ -33,7 +33,7 @@ var _QuandlToStackedColumn = require("./QuandlToStackedColumn");
 
 var _QuandlToTreeMap = require("./QuandlToTreeMap");
 
-var _toYearly = _interopRequireDefault(require("../toYearly"));
+var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
 var _ToScatter = _interopRequireDefault(require("./ToScatter"));
 
@@ -609,7 +609,7 @@ var _fToSeria = function _fToSeria(builder) {
   };
 };
 
-var _rToConfig = (_rToConfig2 = {}, _rToConfig2[_Type.ChartType.AREA] = _fCreateAreaConfig, _rToConfig2[_Type.ChartType.SEMI_DONUT] = _QuandlToPie.fCreatePieConfig, _rToConfig2[_Type.ChartType.STACKED_AREA] = _QuandlToStackedArea.fCreateStackedAreaConfig, _rToConfig2[_Type.ChartType.STACKED_AREA_PERCENT] = _QuandlToStackedArea.fCreateStackedAreaConfig, _rToConfig2[_Type.ChartType.STACKED_COLUMN] = _QuandlToStackedColumn.fCreateStackedColumnConfig, _rToConfig2[_Type.ChartType.STACKED_COLUMN_PERCENT] = _QuandlToStackedColumn.fCreateStackedColumnConfig, _rToConfig2[_Type.ChartType.TREE_MAP] = _QuandlToTreeMap.fCreateTreeMapConfig, _rToConfig2[_Type.ChartType.YEARLY] = _fToConfig(_toYearly["default"]), _rToConfig2[_Type.ChartType.SCATTER] = _fToConfig(_ToScatter["default"]), _rToConfig2[_Type.ChartType.SCATTER_UP] = _fToConfig(_ToScatter["default"]), _rToConfig2[_Type.ChartType.SCATTER_DOWN] = _fToConfig(_ToScatter["default"]), _rToConfig2);
+var _rToConfig = (_rToConfig2 = {}, _rToConfig2[_Type.ChartType.AREA] = _fCreateAreaConfig, _rToConfig2[_Type.ChartType.SEMI_DONUT] = _QuandlToPie.fCreatePieConfig, _rToConfig2[_Type.ChartType.STACKED_AREA] = _QuandlToStackedArea.fCreateStackedAreaConfig, _rToConfig2[_Type.ChartType.STACKED_AREA_PERCENT] = _QuandlToStackedArea.fCreateStackedAreaConfig, _rToConfig2[_Type.ChartType.STACKED_COLUMN] = _QuandlToStackedColumn.fCreateStackedColumnConfig, _rToConfig2[_Type.ChartType.STACKED_COLUMN_PERCENT] = _QuandlToStackedColumn.fCreateStackedColumnConfig, _rToConfig2[_Type.ChartType.TREE_MAP] = _QuandlToTreeMap.fCreateTreeMapConfig, _rToConfig2[_Type.ChartType.YEARLY] = _fToConfig(_toYearsByMonths["default"]), _rToConfig2[_Type.ChartType.SCATTER] = _fToConfig(_ToScatter["default"]), _rToConfig2[_Type.ChartType.SCATTER_UP] = _fToConfig(_ToScatter["default"]), _rToConfig2[_Type.ChartType.SCATTER_DOWN] = _fToConfig(_ToScatter["default"]), _rToConfig2);
 
 var _crSeriaData = function _crSeriaData(data, yIndex) {
   return data.map(function (p) {

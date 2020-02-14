@@ -5,11 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
-var _toYearly = _interopRequireDefault(require("../toYearly"));
+var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
 var toAreaYearly = {
   createConfig: function createConfig(json, option) {
@@ -19,14 +21,13 @@ var toAreaYearly = {
         data = _EuroStatFn["default"].toPointArr(timeIndex, value),
         title = option.title,
         subtitle = option.subtitle,
-        dataSource = option.dataSource,
-        config = _toYearly["default"].toConfig(data.reverse(), {
+        config = _toYearsByMonths["default"].toConfig(data.reverse(), (0, _extends2["default"])({
       title: title,
       subtitle: subtitle,
       itemCaption: title + ': ' + subtitle,
       value: title + '_' + subtitle,
-      dataSource: dataSource
-    });
+      dataSource: _EuroStatFn["default"].crDataSource(option)
+    }, _EuroStatFn["default"].crLinkConf(json, option)));
 
     _EuroStatFn["default"].setInfo({
       config: config,

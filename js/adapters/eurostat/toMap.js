@@ -29,7 +29,6 @@ var toMap = {
       json: json,
       zhMapSlice: option.zhMapSlice
     });
-    config.zhDialog.apiKey = '';
     return config;
   }
 };

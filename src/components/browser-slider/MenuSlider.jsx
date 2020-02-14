@@ -11,12 +11,11 @@ import ErrMsg from './ErrMsg'
 
 const S = {
   ROOT: {
-    width: '300px',
-    overflow: 'hidden',
-    //border: '1px solid green'
+    width: 300,
+    overflow: 'hidden'
   },
   PAGES: {
-    width: '1500px',
+    width: 1500,
     overflowX: 'hidden',
     display: 'flex',
     flexFlow: 'row nowrap',
@@ -24,23 +23,23 @@ const S = {
     transition: 'all 750ms ease-out'
   },
   PAGE: {
-    width: '300px'
+    width: 300
   }
 };
 
 const _getTranslateX = (node) => {
   const _prevStr = node
-           .style.transform
-           .substr(11)
-           .replace('px', '')
-           .replace(')', '');
+     .style.transform
+     .substr(11)
+     .replace('px', '')
+     .replace(')', '');
    return parseInt(_prevStr, 10);
 }
 
 class MenuSlider extends Component {
 
   constructor(props){
-    super()
+    super(props)
     this.hNextPage = throttleOnce(
       this.hNextPage.bind(this)
     )
@@ -178,7 +177,7 @@ _refFirst = n => this._firstNode = n
      this._direction = 0
    } else if (this._direction === 0 && this._menuNode) {
      dX = _getTranslateX(this._menuNode);
-   }   
+   }
 
    return { transform: `translateX(${dX}px)` };
  }
@@ -187,10 +186,10 @@ _refFirst = n => this._firstNode = n
 
   render(){
     const _transform = this._crTransform()
-        , _pagesStyle = {
-             ...S.PAGES,
-             ..._transform
-           };
+    , _pagesStyle = {
+         ...S.PAGES,
+         ..._transform
+       };
 
     return (
       <div style={S.ROOT}>

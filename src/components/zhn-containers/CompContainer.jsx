@@ -30,7 +30,7 @@ class CompContainer extends Component {
   }
 
   _onStore = (actionType, Comp) => {
-     if (actionType === this.props.addAction){
+     if (actionType === this.props.addAction){       
        this.setState(prevState => {
          prevState.containers.unshift(Comp)
          return prevState;

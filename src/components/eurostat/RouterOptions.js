@@ -43,17 +43,22 @@ const _crItem = confArr => ({
 });
 const _crItems = arr => arr.map(_crItem);
 
-const _crDF3 = () => _crItems([
+const _isMonthly = mapFrequency => !mapFrequency
+  || mapFrequency === 'M';
+
+const _crDF3 = (mapFrequency) => _crItems([
   ['Default: Spline', V.S ],
+  ['Line', V.L],
+  _isMonthly(mapFrequency) && ['Yearly by Months', V.A_Y ],
   ['Area', V.A ],
   ['Column', V.S_C ],
   ['Bar: All Countries', V.B ],
   ['Bar+Labels: All Countries', V.B_L ],
   ['Column: All Countries', V.C ],
   ['Dots: All Countries', V.D ]
-]);
+].filter(Boolean));
 
-const _crDF = () => _crDF3()
+const _crDF = (captions, mapFrequency) => _crDF3(mapFrequency)
  .concat(_crItems([
    ['Map: All Countries' , V.M, void 0, CompItemType.EUROSTAT_MAP ]
  ]));
@@ -135,10 +140,11 @@ const _crCaptions = ({
 
 const RouterOptions = {
   crOptions(option){
-     const { chartsType } = option
+     const { chartsType, mapFrequency, dfProps={} } = option
+     , _mapFrequency = mapFrequency || dfProps.mapFrequency
      , _captions = _crCaptions(option)
      , _crOptions = _r[chartsType] || _r.DF;
-     return _crOptions(_captions);
+     return _crOptions(_captions, _mapFrequency);
   },
 
   isCategory(chartType) {

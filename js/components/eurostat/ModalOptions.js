@@ -39,7 +39,7 @@ var ModalOptions = function ModalOptions(_ref) {
   }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     initValue: false,
     rootStyle: _Modal["default"].ROW_CB,
-    caption: "Filter Zero Values",
+    caption: "Filter Trim Zero Values",
     onToggle: _toggleFilterZero
   }));
 };

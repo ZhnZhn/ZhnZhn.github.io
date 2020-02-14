@@ -24,11 +24,9 @@ class  UnDialog5 extends Component {
       onAbout: this._clickInfoWithToolbar
     })
 
-    this.toolbarButtons = this._createType2WithToolbar(props)
-    this.toolbarButtons.push({
-      caption: 'O', title: 'Toggle Options Input',
-      onClick: this._handleClickOptions
-    })
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { isShowOptions: true })
+
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
@@ -46,13 +44,7 @@ class  UnDialog5 extends Component {
     }
     return true;
   }
-
-  _handleClickOptions = () => {
-    this.setState({
-      isShowOptions: !this.state.isShowOptions
-    })
-  }
-
+  
   _handleSelectOne = (one) => {
     this.one = one;
   }

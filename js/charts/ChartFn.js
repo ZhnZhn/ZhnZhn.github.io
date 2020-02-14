@@ -21,8 +21,6 @@ var _fnArr = _interopRequireDefault(require("../utils/fnArr"));
 
 var _DateUtils = _interopRequireDefault(require("../utils/DateUtils"));
 
-var _safeGet = _interopRequireDefault(require("../utils/safeGet"));
-
 var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _Type = require("../constants/Type");
@@ -35,6 +33,10 @@ var _crValueMoving = _mathFn["default"].crValueMoving,
     toFixedNumber = _mathFn["default"].toFixedNumber,
     calcPercent = _mathFn["default"].calcPercent;
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var _fnFindIndex = _fnArr["default"].findIndexByProp('x');
 
 var C = {
@@ -46,9 +48,7 @@ var C = {
   SERIA_LABEL_Y_DELTA: 95,
   SERIA_LABEL_WIDTH: 125,
   SERIA_LABEL_HEIGHT: 20
-};
-
-var _fnNoop = function _fnNoop() {};
+}; //const _fnNoop = () => {};
 
 var _initOptionsZhSeries = function _initOptionsZhSeries(chart) {
   var options = chart.options,
@@ -147,19 +147,19 @@ var _renderSeriesLabel = function _renderSeriesLabel(_ref2) {
 };
 
 var _updateYAxisMin = function _updateYAxisMin(_ref3) {
+  var _options$yAxis, _options$yAxis$, _chart$yAxis;
+
   var hasSecondYAxis = _ref3.hasSecondYAxis,
       series = _ref3.series,
-      _ref3$options = _ref3.options,
-      options = _ref3$options === void 0 ? {} : _ref3$options,
+      options = _ref3.options,
       chart = _ref3.chart;
 
-  var minY = series.minY,
-      min = (0, _safeGet["default"])(options, 'yAxis[0].min'),
-      _yAxis = (0, _safeGet["default"])(chart, 'yAxis[0]'),
-      update = (0, _safeGet["default"])(chart, 'yAxis[0].update', _fnNoop).bind(_yAxis);
+  var minY = series == null ? void 0 : series.minY,
+      min = options == null ? void 0 : (_options$yAxis = options.yAxis) == null ? void 0 : (_options$yAxis$ = _options$yAxis[0]) == null ? void 0 : _options$yAxis$.min,
+      _yAxis = chart == null ? void 0 : (_chart$yAxis = chart.yAxis) == null ? void 0 : _chart$yAxis[0];
 
-  if (!hasSecondYAxis && minY !== undefined && min > minY) {
-    update({
+  if (!hasSecondYAxis && minY !== undefined && min > minY && _isFn(_yAxis == null ? void 0 : _yAxis.update)) {
+    _yAxis.update({
       min: minY,
       startOnTick: true
     });

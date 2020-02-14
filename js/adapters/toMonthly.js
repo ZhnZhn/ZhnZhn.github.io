@@ -291,8 +291,10 @@ var _crZhConfig = function _crZhConfig(option, _ref3) {
   var legend = _ref3.legend;
 
   var value = option.value,
-      dataSource = option.dataSource,
       itemCaption = option.itemCaption,
+      dataSource = option.dataSource,
+      linkFn = option.linkFn,
+      item = option.item,
       _id = value + '_' + 'YEARLY';
 
   return {
@@ -302,7 +304,9 @@ var _crZhConfig = function _crZhConfig(option, _ref3) {
     isWithoutIndicator: true,
     isWithoutAdd: true,
     legend: legend,
-    dataSource: dataSource
+    dataSource: dataSource,
+    linkFn: linkFn,
+    item: item
   };
 };
 
@@ -342,7 +346,7 @@ var _crValueMoving = function _crValueMoving(nowSeria, prevSeria) {
   });
 };
 
-var toYearly = {
+var toMonthly = {
   toConfig: function toConfig(data, option) {
     var title = option.title,
         subtitle = option.subtitle,
@@ -372,6 +376,6 @@ var toYearly = {
     return config;
   }
 };
-var _default = toYearly;
+var _default = toMonthly;
 exports["default"] = _default;
-//# sourceMappingURL=ToYearly.js.map
+//# sourceMappingURL=toMonthly.js.map

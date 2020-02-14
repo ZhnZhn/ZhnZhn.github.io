@@ -58,6 +58,8 @@ const BtTabInfo = ({ isShow, onClick }) => {
   );
 };
 
+const _crMapId = caption => `map_${caption}`;
+
 class MapChartItem extends Component {
   /*
   static propTypes = {
@@ -84,14 +86,15 @@ class MapChartItem extends Component {
 
   componentDidMount(){
     const { caption, config } = this.props
-        , { json:jsonCube, zhMapSlice } = config;
-    ChoroplethMap.draw(`map_${caption}`, jsonCube, zhMapSlice)
-       .then(option => {
-          this.map = option.map
-          this.setState({
-            isLoading: false,
-            time: option.time
-          })
+    , { json:jsonCube, zhMapSlice, zhDialog={} } = config
+    , { time } = zhDialog;
+
+    ChoroplethMap.draw({
+      id: _crMapId(caption),
+      jsonCube, zhMapSlice, time
+    }).then(({ map, time }) => {
+         this.map = map
+         this.setState({ isLoading: false, time })
        })
        .catch(err => {
          this.setState({ isLoading: false })
@@ -113,7 +116,8 @@ class MapChartItem extends Component {
 
   render(){
     const { caption, config, onCloseItem } = this.props
-    , { zhDialog } = config
+    , _mapId = _crMapId(caption)
+    , { zhDialog, info } = config
     , { itemCaption, subtitle } = zhDialog || {}
     , _itemCaption = itemCaption || subtitle || ''
     , {
@@ -143,7 +147,7 @@ class MapChartItem extends Component {
              onClick={this._hClickInfo}
            />
            <div
-              id={`map_${caption}`}
+              id={_mapId}
               style={{ ...S.MAP_DIV, ..._styleMap }}
            >
              {
@@ -152,7 +156,7 @@ class MapChartItem extends Component {
            </div>
            <PanelDataInfo
               isShow={isShowInfo}
-              info={config.info}
+              info={info}
               onClickChart={this._hClickChart}
            />
         </A.ShowHide>

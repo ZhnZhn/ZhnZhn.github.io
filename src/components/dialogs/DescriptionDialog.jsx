@@ -119,7 +119,7 @@ class DescriptionDialog extends Component {
         : <Description _html={_html} />
     return (
        <ModalDialog
-         caption="Description for Datasource"
+         caption="About Datasource"
          isShow={isShow}
          style={S.DIALOG}
          onClose={onClose}

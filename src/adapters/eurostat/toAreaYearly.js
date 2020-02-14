@@ -1,21 +1,21 @@
 import ChartConfig from '../../charts/ChartConfig'
 import fn from './EuroStatFn';
-import toYearly from '../toYearly'
+import toYearly from '../toYearsByMonths'
 
 const toAreaYearly = {
    createConfig: (json, option) => {
      const { timeIndex, value } = fn.crTimeIndexAndValue(json)
-         , data = fn.toPointArr(timeIndex, value)
-         , { title, subtitle, dataSource } = option
-         , config = toYearly.toConfig(
-             data.reverse(), {
-             title, subtitle,
-             itemCaption: title + ': ' + subtitle,
-             value: title + '_' + subtitle,
-             dataSource
-           })
-
-      fn.setInfo({ config, json, option });
+     , data = fn.toPointArr(timeIndex, value)
+     , { title, subtitle } = option
+     , config = toYearly.toConfig(
+         data.reverse(), {
+         title, subtitle,
+         itemCaption: title + ': ' + subtitle,
+         value: title + '_' + subtitle,
+         dataSource: fn.crDataSource(option),
+         ...fn.crLinkConf(json, option)
+       });
+      fn.setInfo({ config, json, option })
       return config;
    },
 

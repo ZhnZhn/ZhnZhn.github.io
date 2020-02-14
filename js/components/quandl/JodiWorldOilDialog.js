@@ -60,14 +60,6 @@ function (_Component) {
     //this.units = null
     //this.chartType = undefined
 
-    _this._hClickOptions = function () {
-      _this.setState(function (prevState) {
-        return {
-          isShowOptions: !prevState.isShowOptions
-        };
-      });
-    };
-
     _this._hSelectCountry = function (country) {
       _this.country = country;
     };
@@ -159,14 +151,9 @@ function (_Component) {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
-    _this.toolbarButtons = _this._createType2WithToolbar(props);
-
-    _this.toolbarButtons.push({
-      caption: 'O',
-      title: 'Toggle Options Input',
-      onClick: _this._hClickOptions
+    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+      isShowOptions: true
     });
-
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isShowDate: false,

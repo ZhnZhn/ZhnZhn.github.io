@@ -15,9 +15,7 @@ const toMap = {
        zhDialog: option,
        json: json,
        zhMapSlice: option.zhMapSlice
-     })
-     config.zhDialog.apiKey = ''
-
+     })     
      return config;
   }
 };

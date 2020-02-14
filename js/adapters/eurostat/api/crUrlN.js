@@ -50,10 +50,12 @@ var _crItems = function _crItems(_ref2) {
   }]) : items;
 };
 
-var _crQuery = function _crQuery(items) {
-  return items.map(function (item) {
+var _crQuery = function _crQuery(items, dfTail) {
+  var _q = items.map(function (item) {
     return item.id + "=" + item.value;
   }).join('&');
+
+  return dfTail ? _q + "&" + dfTail : _q;
 };
 
 var _updateOptionsIf = function _updateOptionsIf(seriaType, items, options) {
@@ -65,8 +67,9 @@ var _updateOptionsIf = function _updateOptionsIf(seriaType, items, options) {
 var crUrlN = function crUrlN(options) {
   var seriaType = options.seriaType,
       dfTable = options.dfTable,
+      dfTail = options.dfTail,
       _items = _crItems(options),
-      _q = _crQuery(_items);
+      _q = _crQuery(_items, dfTail);
 
   _updateOptionsIf(seriaType, _items, options);
 

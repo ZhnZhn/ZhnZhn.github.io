@@ -35,9 +35,14 @@ const _crItems = ({ seriaType, items, time }) => isCategory(seriaType)
       : items.filter(Boolean).concat([{ id: 'time', value: time }])
   : items;
 
-const _crQuery = (items) => items
-  .map(item => `${item.id}=${item.value}`)
-  .join('&');
+const _crQuery = (items, dfTail) => {
+  const _q = items
+    .map(item => `${item.id}=${item.value}`)
+    .join('&');
+  return dfTail
+    ? `${_q}&${dfTail}`
+    : _q;
+};
 
 const _updateOptionsIf = (seriaType, items, options) => {
   if (isCategory(seriaType)) {
@@ -48,10 +53,11 @@ const _updateOptionsIf = (seriaType, items, options) => {
 const crUrlN = (options) => {
   const {
     seriaType,
-    dfTable
+    dfTable,
+    dfTail
   } = options
   , _items = _crItems(options)
-  , _q = _crQuery(_items);
+  , _q = _crQuery(_items, dfTail);
 
   _updateOptionsIf(seriaType, _items, options)
 

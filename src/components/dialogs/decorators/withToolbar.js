@@ -5,14 +5,14 @@ import withToggle from './withToggle'
 const C = {
   BT_I: {
      M: '_clickInfoWithToolbar',
-     BT_C: 'I',
-     BT_T: 'Click to show description about data source'
+     BT_C: 'A',
+     BT_T: 'About Datasource'
   },
   BT_L: {
     M_T: '_clickLabelWithToolbar',
     PN: 'isShowLabels',
     BT_C: 'L',
-    BT_T: "Click to toggle row's labels"
+    BT_T: "Click to toggle input labels"
   },
   BT_D: {
     M_T: '_clickDateWithToolbar',
@@ -24,20 +24,26 @@ const C = {
     M: 'Options',
     PN: 'isOptions',
     BT_C: 'O',
-    BT_T: 'Click to show options'
+    BT_T: 'Chart Options'
   },
   BT_T: {
     M: 'Toggle',
     PN: 'isToggle',
     BT_C: 'T',
-    BT_T: 'Click to show toggle options'
+    BT_T: 'Toggle Inputs'
   },
   BT_TO: {
     M_T: '_toggleOptionWithToolbar',
     PN: 'isToggleOptions',
     BT_C: 'O',
     BT_T: "Click to toggle dialog's options"
-  }
+  },
+  BT_SO: {
+    M_T: '_clickOptionsWithToolbar',
+    PN: 'isShowOptions',
+    BT_C: 'O',
+    BT_T: "Toggle Input Options"
+  },
 };
 
 const _isFn = fn => typeof fn === 'function';
@@ -68,17 +74,18 @@ const _addShowHideBt = ({ inst, buttons, key }) => {
 };
 
 const _createType2WithToolbar = function(
-  props, { noDate, noLabels, isOptions, isToggle, isToggleOptions } = {}
+  props, { noDate, noLabels,
+    isOptions, isToggle,
+    isToggleOptions, isShowOptions
+  } = {}
 ){
   const buttons = [];
 
-  if ( _isFn(props.onClickInfo) ) {
-    _addBtTo(buttons, C.BT_I,
-       this._clickInfoWithToolbar.bind(this)
-     )
-  }
   if (!noLabels) {
     _addToggleBt({ inst: this, buttons, key: 'BT_L' })
+  }
+  if (isToggle){
+    _addShowHideBt({ inst: this, buttons, key: 'BT_T'})
   }
   if (!props.noDate && !noDate) {
     _addToggleBt({ inst: this, buttons, key: 'BT_D' })
@@ -88,11 +95,18 @@ const _createType2WithToolbar = function(
     this.dialogOptions = {}
     this._toggleOptionWithToolbar = this._toggleOptionWithToolbar.bind(this)
   }
-  if (isToggle){
-    _addShowHideBt({ inst: this, buttons, key: 'BT_T'})
-  }
+  //AlphaIntradayDialog
   if (isToggleOptions) {
     _addToggleBt({ inst: this, buttons, key: 'BT_TO' })
+  }
+  if (isShowOptions) {
+    _addToggleBt({ inst: this, buttons, key: 'BT_SO' })
+  }
+
+  if ( _isFn(props.onClickInfo) ) {
+    _addBtTo(buttons, C.BT_I,
+       this._clickInfoWithToolbar.bind(this)
+     )
   }
 
   return buttons;
@@ -105,8 +119,8 @@ const _toggleWithToolbar = function(){
 }
 
 const _clickInfoWithToolbar = function(){
-  const { descrUrl, onClickInfo } = this.props;
-  onClickInfo({ descrUrl })
+  const { onClickInfo } = this.props
+  onClickInfo()
 }
 
 const _toggleOptionWithToolbar = function(propName) {

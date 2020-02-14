@@ -11,6 +11,8 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
+
 var _Style = _interopRequireDefault(require("./Style"));
 
 var CL = {
@@ -31,11 +33,10 @@ function (_Component) {
 
     _this = _Component.call.apply(_Component, [this].concat(args)) || this;
 
-    _this._hKeyPress = function (evt) {
-      evt.preventDefault();
-      var which = evt.which;
+    _this._hKeyDown = function (evt) {
+      if ((0, _isKeyEnter["default"])(evt)) {
+        evt.preventDefault();
 
-      if (which === 13 || which === 32) {
         _this.props.onClick();
       }
     };
@@ -70,7 +71,7 @@ function (_Component) {
       tabIndex: "0",
       role: "menuitem",
       onClick: onClick,
-      onKeyPress: this._hKeyPress
+      onKeyDown: this._hKeyDown
     }, text);
   };
 

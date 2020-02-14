@@ -162,7 +162,7 @@ function (_Component) {
     });
 
     return _react["default"].createElement(_ModalDialog["default"], {
-      caption: "Description for Datasource",
+      caption: "About Datasource",
       isShow: isShow,
       style: S.DIALOG,
       onClose: onClose

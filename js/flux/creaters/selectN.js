@@ -13,6 +13,43 @@ var crCaption = _createrFns["default"].crCaption,
     crItemKey = _createrFns["default"].crItemKey,
     crAlertConf = _createrFns["default"].crAlertConf;
 var TYPE = 'selectN';
+var TABLE_ID = 'table';
+
+var _findItemTable = function _findItemTable(items) {
+  var tableItem, tableIndex;
+
+  for (var i = 0; i < items.length; i++) {
+    if ((items == null ? void 0 : items[i].id) === TABLE_ID) {
+      tableItem = items[i];
+      tableIndex = i;
+      break;
+    }
+  }
+
+  return {
+    tableItem: tableItem,
+    tableIndex: tableIndex
+  };
+};
+
+var _modifyIfItemTable = function _modifyIfItemTable(dfProps, items) {
+  var _findItemTable2 = _findItemTable(items),
+      tableItem = _findItemTable2.tableItem,
+      tableIndex = _findItemTable2.tableIndex;
+
+  if (tableItem) {
+    var value = tableItem.value,
+        dfTail = tableItem.dfTail;
+
+    if (value && dfTail) {
+      Object.assign(dfProps, {
+        dfTable: value,
+        dfTail: dfTail
+      });
+      items.splice(tableIndex, 1);
+    }
+  }
+};
 
 var createLoadOptions = function createLoadOptions(props, options) {
   if (props === void 0) {
@@ -46,6 +83,8 @@ var createLoadOptions = function createLoadOptions(props, options) {
       seriaType = chartType.value,
       compType = chartType.compType,
       _itemKey = crItemKey(items, seriaType, date);
+
+  _modifyIfItemTable(dfProps, items);
 
   return (0, _extends2["default"])({}, dfProps, {}, dialogOptions, {
     _type: TYPE,

@@ -64,6 +64,18 @@ var _onError = function _onError(alertDescr, alertCaption) {
   });
 };
 
+var _crClickAbout = function _crClickAbout(_ref) {
+  var rootUri = _ref.rootUri,
+      descr = _ref.descr,
+      descrUrl = _ref.descrUrl;
+
+  var _descrUrl = descr && rootUri ? rootUri + "/" + descr + ".html" : descrUrl;
+
+  return _descrUrl ? _ComponentActions["default"].showDescription.bind(null, {
+    descrUrl: _descrUrl
+  }) : void 0;
+};
+
 var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
   var itemKey = dialogConf.type,
       _dialogConf$dialogPro = dialogConf.dialogProps,
@@ -77,13 +89,12 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
       nInitFromDate = dialogProps.nInitFromDate,
       valueFn = dialogProps.valueFn,
       valueFnPrefix = dialogProps.valueFnPrefix,
-      descrUrl = dialogProps.descrUrl,
       loadFnType = dialogProps.loadFnType,
       isContinious = dialogProps.isContinious,
       loadId = dialogProps.loadId,
       isProxy = dialogProps.isProxy,
       isGetKey = dialogProps.isGetKey,
-      onClickInfo = descrUrl ? _ComponentActions["default"].showDescription : void 0,
+      onClickInfo = _crClickAbout(dialogProps),
       loadFn = _RouterLoadFn["default"].getFn(loadFnType, dialogType),
       proxy = isProxy ? _ChartStore["default"].getProxy() : void 0,
       getKey = isGetKey && _ChartStore["default"].getKey,

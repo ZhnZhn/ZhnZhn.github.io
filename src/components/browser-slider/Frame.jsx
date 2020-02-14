@@ -6,13 +6,12 @@ import ErrMsg from './ErrMsg'
 
 const T_O_FOCUS_FIRST = 1000;
 
+const _isArr = Array.isArray;
+
 class Frame extends Component {
 
-  constructor(props){
-    super()
-    this.state = {
-      model: []
-    }
+  state = {
+    model: []
   }
 
   componentDidMount(){
@@ -29,7 +28,7 @@ class Frame extends Component {
         , proxy = store.getProxy(lT);
     loadItems(`${dfProps.rootUrl}/${id}`, proxy)
       .then(model => {
-        if (Array.isArray(model)){
+        if (_isArr(model)){
            this.setState({ model, errMsg: undefined })
         }
       })

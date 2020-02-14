@@ -17,7 +17,7 @@ import {fCreatePieConfig} from './QuandlToPie';
 import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
 import {fCreateStackedColumnConfig} from './QuandlToStackedColumn';
 import {fCreateTreeMapConfig} from './QuandlToTreeMap';
-import toYearly from '../toYearly'
+import toYearly from '../toYearsByMonths'
 import ToScatter from './ToScatter'
 
 const { getData, getColumnNames } = QuandlFn2;

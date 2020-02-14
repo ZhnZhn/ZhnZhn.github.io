@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _toYearly = _interopRequireDefault(require("../toYearly"));
+var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
@@ -37,7 +37,7 @@ var toYearly = {
         values = _crDsValuesTimes.values,
         times = _crDsValuesTimes.times,
         data = _toData(values, times),
-        config = (0, _ConfigBuilder["default"])().init(_toYearly["default"].toConfig(data, option)).add('chart', {
+        config = (0, _ConfigBuilder["default"])().init(_toYearsByMonths["default"].toConfig(data, option)).add('chart', {
       spacingTop: 25
     }).addCaption(title, subtitle).add('info', crInfo(ds, option)).add('zhConfig', crZhConfig(option)).toConfig();
 

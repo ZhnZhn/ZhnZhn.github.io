@@ -221,20 +221,33 @@ const EuroStatFn = {
     );
   },
 
-  createZhConfig(json, option){
+  crDataSource: ({ dfTable, dataSource }) => dfTable
+    ? `${dataSource} (${dfTable})`
+    : dataSource || "Eurostat",
+
+  crLinkConf: (json, { dfTable }) => {
     const { href } = json
-        , _href = href && href.replace
-            ? href.replace('http', 'https')
-            : href
-        , {
-            key, itemCaption,
-            dataSource,
-            dfTable,
-            url, loadId, title, subtitle, seriaType
-          } = option
-        , _dataSource = dfTable
-             ? `${dataSource} (${dfTable})`
-             : dataSource || "Eurostat";
+    , _href = href && href.replace
+        ? href.replace('http', 'https')
+        : href;
+    return {
+      linkFn: 'ES',
+      item: {
+        dataset: dfTable,
+        href: _href
+      }
+    };
+  },
+
+  createZhConfig(json, option){
+    const {
+      key, itemCaption,
+      url, loadId,
+      title, subtitle,
+      seriaType
+    } = option
+    , _dataSource = EuroStatFn.crDataSource(option);
+
     return {
       id: key, key, itemCaption,
       itemConf: {
@@ -246,11 +259,7 @@ const EuroStatFn = {
       //isWithoutIndicator: true,
       isWithoutAdd: url ? false : true,
       dataSource: _dataSource,
-      linkFn: 'ES',
-      item: {
-        dataset: dfTable,
-        href: _href
-      }
+      ...EuroStatFn.crLinkConf(json, option)
     }
   },
 

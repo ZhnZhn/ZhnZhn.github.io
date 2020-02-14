@@ -22,7 +22,8 @@ var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 
 var findMinY = _seriaFn["default"].findMinY,
-    findMaxY = _seriaFn["default"].findMaxY;
+    findMaxY = _seriaFn["default"].findMaxY,
+    filterTrimZero = _seriaFn["default"].filterTrimZero;
 var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax,
     setPlotLinesDeltas = _ChartFn["default"].setPlotLinesDeltas,
     calcMinY = _ChartFn["default"].calcMinY,
@@ -56,7 +57,8 @@ var C = {
     }
   }
 };
-var _assign = Object.assign; //const _isArr = Array.isArray;
+var _assign = Object.assign;
+var _isArr = Array.isArray;
 
 var _isObj = function _isObj(obj) {
   return obj && typeof obj === 'object';
@@ -71,7 +73,13 @@ var _isNumber = function _isNumber(n) {
 };
 
 var _getY = function _getY(point) {
-  return Array.isArray(point) ? point[1] : point && point.y || 0;
+  return _isArr(point) ? point[1] : point && point.y || 0;
+};
+
+var _getData = function _getData(obj) {
+  var _obj$config, _obj$config$series;
+
+  return ((_obj$config = obj.config) == null ? void 0 : (_obj$config$series = _obj$config.series) == null ? void 0 : _obj$config$series[0].data) || [];
 };
 
 var ConfigBuilder = function ConfigBuilder(config) {
@@ -309,11 +317,14 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
   addMinMax: function addMinMax(data, option) {
     var isNotZoomToMinMax = option.isNotZoomToMinMax,
         isDrawDeltaExtrems = option.isDrawDeltaExtrems,
+        isFilterZero = option.isFilterZero,
         minY = option.minY,
         maxY = option.maxY,
-        min = _isNumber(minY) ? minY : findMinY(data),
-        max = _isNumber(maxY) ? maxY : findMaxY(data);
-    return this.setMinMax(min, max, isNotZoomToMinMax).setMinMaxDeltas(min, max, data, isDrawDeltaExtrems);
+        _data = isFilterZero ? filterTrimZero(data) : data,
+        min = _isNumber(minY) ? minY : findMinY(_data),
+        max = _isNumber(maxY) ? maxY : findMaxY(_data);
+
+    return this.setMinMax(min, max, isNotZoomToMinMax).setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
   },
   setMinMaxDeltas: function setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
     if (isDrawDeltaExtrems) {
@@ -413,9 +424,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     });
   },
   _checkDataLength: function _checkDataLength() {
-    var _this$config, _this$config$series;
-
-    var data = ((_this$config = this.config) == null ? void 0 : (_this$config$series = _this$config.series) == null ? void 0 : _this$config$series[0].data) || [];
+    var data = _getData(this);
 
     if (data.length > 3000) {
       this._disableAnimation();

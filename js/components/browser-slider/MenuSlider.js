@@ -29,12 +29,11 @@ var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
 
 var S = {
   ROOT: {
-    width: '300px',
-    overflow: 'hidden' //border: '1px solid green'
-
+    width: 300,
+    overflow: 'hidden'
   },
   PAGES: {
-    width: '1500px',
+    width: 1500,
     overflowX: 'hidden',
     display: 'flex',
     flexFlow: 'row nowrap',
@@ -42,7 +41,7 @@ var S = {
     transition: 'all 750ms ease-out'
   },
   PAGE: {
-    width: '300px'
+    width: 300
   }
 };
 
@@ -60,7 +59,7 @@ function (_Component) {
   function MenuSlider(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._loadItems = function () {
       var _this$props = _this.props,

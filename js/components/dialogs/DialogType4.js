@@ -57,14 +57,6 @@ function (_Component) {
 
     _this = _Component.call(this, props) || this;
 
-    _this._handleClickOptions = function () {
-      _this.setState(function (prevState) {
-        return {
-          isShowOptions: !prevState.isShowOptions
-        };
-      });
-    };
-
     _this._handleSelectOne = function (one) {
       _this.one = one;
     };
@@ -150,17 +142,9 @@ function (_Component) {
     var noDate = props.noDate,
         noOptions = props.noOptions;
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
-      noDate: noDate
+      noDate: noDate,
+      isShowOptions: !noOptions
     });
-
-    if (noOptions !== true) {
-      _this.toolbarButtons.push({
-        caption: 'O',
-        title: 'Toggle Options Input',
-        onClick: _this._handleClickOptions
-      });
-    }
-
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isShowOptions: false

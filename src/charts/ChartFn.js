@@ -8,7 +8,6 @@ import formatAllNumber from '../utils/formatAllNumber'
 
 import fnArr from '../utils/fnArr';
 import DateUtils from '../utils/DateUtils';
-import safeGet from '../utils/safeGet';
 
 import Chart from './Chart';
 
@@ -24,6 +23,8 @@ const {
   calcPercent
 } = mathFn;
 
+
+const _isFn = fn => typeof fn === 'function';
 const _fnFindIndex = fnArr.findIndexByProp('x');
 
 const C = {
@@ -37,7 +38,7 @@ const C = {
   SERIA_LABEL_HEIGHT : 20
 };
 
-const _fnNoop = () => {};
+//const _fnNoop = () => {};
 
 const _initOptionsZhSeries = (chart) => {
   const options = chart.options
@@ -112,13 +113,13 @@ const _renderSeriesLabel = ({chart, options, series, label='', color }) => {
     .add();
 };
 
-const _updateYAxisMin = ({ hasSecondYAxis, series, options={}, chart }) => {
-  const minY = series.minY
-      , min = safeGet(options, 'yAxis[0].min')
-      , _yAxis = safeGet(chart, 'yAxis[0]')
-      , update = safeGet(chart, 'yAxis[0].update', _fnNoop).bind(_yAxis);
-  if ( !hasSecondYAxis && (minY !== undefined) && min>minY ){
-      update({ min: minY, startOnTick: true });
+const _updateYAxisMin = ({ hasSecondYAxis, series, options, chart }) => {
+  const minY = series?.minY
+  , min = options?.yAxis?.[0]?.min
+  , _yAxis = chart?.yAxis?.[0];
+  if ( !hasSecondYAxis && (minY !== undefined)
+       && min>minY && _isFn(_yAxis?.update)){
+    _yAxis.update({ min: minY, startOnTick: true });
   }
 };
 

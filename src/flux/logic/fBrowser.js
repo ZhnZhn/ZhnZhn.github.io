@@ -48,15 +48,15 @@ const _crBrowserDynamic = (Comp, option) => {
      browserType : browserType,
      store : ChartStore,
      isInitShow : true,
-     caption : caption,
-     sourceMenuUrl : sourceMenuUrl,
-     modalDialogType : modalDialogType,
-     chartContainerType : chartContainerType,
-     ItemOptionComp: ItemOptionComp,
-     ItemComp : ItemComp,
-     descrUrl : descrUrl,
-     onClickInfo : onClickInfo,
-     onShowContainer : onShowContainer,
+     caption,
+     sourceMenuUrl,
+     modalDialogType,
+     chartContainerType,
+     ItemOptionComp,
+     ItemComp,
+     descrUrl,
+     onClickInfo,
+     onShowContainer,
 
      showAction : BAT.SHOW_BROWSER_DYNAMIC,
      loadCompletedAction : BAT.LOAD_BROWSER_DYNAMIC_COMPLETED,
@@ -79,7 +79,7 @@ const fBrowser = {
 
       case BT.SWEDEN_STAT_ALL:
       case BT.NORWAY_STAT_ALL:
-      case BT.FINLAND_STAT_ALL:
+      case BT.FINLAND_STAT_ALL:      
         return RouterBrowser.STAT_ALL
           .then(Comp => _crBrowserDynamic(Comp, option));
 

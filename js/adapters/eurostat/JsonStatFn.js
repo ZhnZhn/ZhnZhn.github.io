@@ -11,9 +11,10 @@ var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _fnStyle = require("../../utils/fnStyle");
+var _Box = _interopRequireDefault(require("../../utils/Box"));
 
 var URL_ID_COUNTRY = './data/eurostat/id-country.json';
+var _isArr = Array.isArray;
 var hmIdCountry = {};
 var isHmFetched = false;
 
@@ -105,15 +106,39 @@ var _trHmToData = function _trHmToData(hm, categories) {
   return data;
 };
 
+var _isEmptyGeoSlice = function _isEmptyGeoSlice(_sGeo) {
+  if (!_isArr(_sGeo)) {
+    return true;
+  }
+
+  return _sGeo.filter(function (_ref) {
+    var value = _ref.value;
+    return Boolean(value);
+  }).length === 0 ? true : false;
+};
+
 var JsonStatFn = {
-  createGeoSlice: function createGeoSlice(json, configSlice) {
-    var ds = (0, _jsonstat["default"])(json).Dataset(0);
+  createGeoSlice: function createGeoSlice(json, configSlice, dfTime) {
+    if (configSlice === void 0) {
+      configSlice = {};
+    }
 
-    var _sGeo = ds.Data(configSlice),
-        time;
+    var ds = (0, _jsonstat["default"])(json).Dataset(0); // 1) Try create _sGeo with configSlice
 
-    if (!_sGeo || _sGeo.length === 0) {
-      var maxIndex = (0, _fnStyle.getFromNullable)(ds.Dimension("time").id, []).length;
+    var time = configSlice.time,
+        _sGeo = ds.Data(configSlice); // 2) Try create _sGeo with configSlice and dfTime from dialog
+
+
+    if (dfTime && _isEmptyGeoSlice(_sGeo)) {
+      _sGeo = ds.Data((0, _extends2["default"])({}, configSlice, {}, {
+        time: dfTime
+      }));
+      time = dfTime;
+    } // 3) Try create _sGeo with maxIndex time available in ds
+
+
+    if (_isEmptyGeoSlice(_sGeo)) {
+      var maxIndex = (ds.Dimension("time").id || []).length;
 
       if (maxIndex > 0) {
         time = ds.Dimension("time").id[maxIndex - 1];
@@ -121,27 +146,25 @@ var JsonStatFn = {
           time: time
         }));
       }
-    } else if (configSlice) {
-      time = configSlice.time;
     }
 
     return {
-      dGeo: (0, _fnStyle.getFromNullable)(ds.Dimension("geo"), {
+      dGeo: ds.Dimension("geo") || {
         id: []
-      }),
-      sGeo: (0, _fnStyle.getFromNullable)(_sGeo, []),
+      },
+      sGeo: _sGeo || [],
       time: time
     };
   },
   crGeoSeria: function crGeoSeria(json, configSlice) {
-    var ds = (0, _jsonstat["default"])(json).Dataset(0),
-        data = (0, _fnStyle.getFromNullable)(ds.Data(configSlice), []).map(function (obj) {
+    var ds = (0, _jsonstat["default"])(json).Dataset(0) || {},
+        data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(function (obj) {
       return obj.value;
     }).filter(function (value) {
       return value !== null;
     });
     return {
-      date: (0, _fnStyle.getFromNullable)(ds.Dimension("time")),
+      date: (ds.Dimension == null ? void 0 : ds.Dimension("time")) || {},
       data: data
     };
   },
@@ -151,7 +174,7 @@ var JsonStatFn = {
         sGeo = _JsonStatFn$createGeo.sGeo;
 
     return _fnFetchHmIdCountry().then(function () {
-      return (0, _fnStyle.Box)(_combineToArr(dGeo.id, sGeo)).map(function (arr) {
+      return (0, _Box["default"])(_combineToArr(dGeo.id, sGeo)).map(function (arr) {
         return arr.sort(_AdapterFn["default"].compareByValueId);
       }).fold(_splitForConfig);
     });
@@ -161,7 +184,7 @@ var JsonStatFn = {
         dGeo = _JsonStatFn$createGeo2.dGeo,
         sGeo = _JsonStatFn$createGeo2.sGeo;
 
-    return (0, _fnStyle.Box)(_combineToHm(dGeo.id, sGeo)).fold(function (hm) {
+    return (0, _Box["default"])(_combineToHm(dGeo.id, sGeo)).fold(function (hm) {
       return _trHmToData(hm, categories);
     });
   }

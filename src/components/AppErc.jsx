@@ -19,7 +19,7 @@ import ThemeContext from './hoc/ThemeContext'
 
 import checkBuild from './checkBuild'
 
-const BUILD_DATE = '07-02-2020';
+const BUILD_DATE = '14-02-2020';
 const CL = "component-container"
 
 class AppErc extends Component {

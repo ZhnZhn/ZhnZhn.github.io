@@ -49,14 +49,8 @@ class DialogType4 extends Component {
 
     const { noDate, noOptions } = props;
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate }
-    );
-    if (noOptions !== true) {
-      this.toolbarButtons.push({
-        caption: 'O', title: 'Toggle Options Input',
-        onClick: this._handleClickOptions
-      })
-    }
+      props, { noDate, isShowOptions: !noOptions  }
+    );    
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
@@ -74,11 +68,6 @@ class DialogType4 extends Component {
     return true;
   }
 
-  _handleClickOptions = () => {
-    this.setState(prevState => ({
-      isShowOptions: !prevState.isShowOptions
-    }))
-  }
 
   _handleSelectOne = (one) => {
     this.one = one;
