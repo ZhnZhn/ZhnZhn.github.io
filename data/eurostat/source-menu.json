@@ -156,16 +156,6 @@
         "dataSource": "Eurostat"
       }
     },
-    "ES_COUNTRIES_BASE": {
-      "dialogProps": {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
-        "loadId" : "EU_STAT",
-        "dataSource": "Eurostat"
-      }
-    },
     "ES_BASE_SNTR": {
       "dialogProps": {
         "rootUri": "./data/eurostat/",
@@ -183,22 +173,23 @@
     "ES_8_ECONOMIC": {
       "type": "ES_8_ECONOMIC",
       "menuTitle" : "8 Indicators",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoCaption" : "Indicator",
-        "twoURI" : "./data/eurostat/8-economic-indicators.json",
-        "twoJsonProp" : "indicators",
-        "mapFrequency": "Y"
+        "selectProps":[
+          ["table","Indicator","8-economic-indicators"]
+        ]
       }
     },
     "ES_LABOUR" : {
       "type" : "ES_LABOUR",
       "menuTitle" : "Labour Cost",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/labour.json",
+        "selectProps": [
+          ["table","Item","labour"]
+        ],
         "dfProps": {
           "mapFrequency": "Y",
           "mapType" : "Z"
@@ -208,13 +199,15 @@
     "ES_SOCIAL" : {
       "type" : "ES_SOCIAL",
       "menuTitle" : "Social Protection",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/social-protection.json",
-        "mapFrequency" : "Y",
-        "mapDateDf" : 3,
+        "selectProps":[
+          ["table","Item","social-protection"]
+        ],
         "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf" : 3,
           "mapType" : "Z"
         }
       }
@@ -223,11 +216,15 @@
       "type" : "ES_GDP",
       "menuTitle" : "GDP",
       "dialogCaption" : "Gross Domestic Product",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/gdp.json",
-        "mapFrequency" : "Y"
+        "selectProps":[
+          ["table","Item","gdp"]
+        ],
+        "dfProps":{
+          "mapFrequency":"Y"
+        }
       }
     },
     "ES_GDP_MAIN" : {
@@ -267,11 +264,12 @@
     "ES_INDIC" : {
         "type" : "ES_INDIC",
         "menuTitle" : "Economic Indicators",
-        "dialogType" : "DialogEurostat2",
-        "addProps": "ES_COUNTRIES_BASE",
+        "dialogType" : "DialogSelectN",
+        "addProps": "ES_BASE_SN",
         "dialogProps" : {
-          "twoCaption" : "Indicator",
-          "twoURI" : "./data/eurostat/economic-indicators.json"
+          "selectProps":[
+            ["table","Indicator","economic-indicators"]
+          ]
         }
     },
     "ES_PRODUCTION": {
@@ -298,12 +296,12 @@
       "type": "ES_PEEI",
       "menuTitle" : "PEEIs",
       "contCaption": "Principal European Economic Indicators",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoCaption" : "Indicator",
-        "twoURI" : "./data/eurostat/peei.json",
-        "twoJsonProp" : "indicators",
+        "selectProps":[
+          ["table","Indicator","peei"]
+        ],
         "dfProps": {
           "mapType" : "V"
         }
@@ -528,25 +526,31 @@
     "ES_E_INDIC" : {
         "type" : "ES_E_INDIC",
         "menuTitle" : "Energy Indicators",
-        "dialogType" : "DialogEurostat2",
-        "addProps": "ES_COUNTRIES_BASE",
+        "dialogType" : "DialogSelectN",
+        "addProps": "ES_BASE_SN",
         "dialogProps" : {
-          "twoCaption" : "Indicators",
-          "twoURI" : "./data/eurostat/energy-indicators.json",
-          "twoJsonProp" : "indicators",
-          "mapFrequency": "Y",
-          "mapDateDf" : 2
+          "selectProps":[
+            ["table","Indicators","energy-indicators"]
+          ],
+          "dfProps":{
+            "mapFrequency": "Y",
+            "mapDateDf" : 2
+          }
         }
     },
     "ES_E_STAT_PR" : {
         "type" : "ES_E_STAT_PR",
         "menuTitle" : "Electricity, Gas Prices",
-        "dialogType" : "DialogEurostat2",
-        "addProps": "ES_COUNTRIES_BASE",
+        "dialogType" : "DialogSelectN",
+        "addProps": "ES_BASE_SN",
         "dialogProps" : {
-          "twoCaption" : "Item",
-          "twoURI" : "./data/eurostat/energy-prices.json",
-          "twoJsonProp" : "items"
+          "selectProps":[
+            ["table","Item","energy-prices"]
+          ],
+          "dfProps":{
+            "mapFrequency": "Y",
+            "mapDateDf" : 1
+          }
         }
     },
     "ES_E_CHD_DAYS_M" : {
@@ -758,10 +762,15 @@
       "type" : "ES_F_LRATE",
       "menuTitle" : "Long-Term Rates",
       "contCaption" : "Finance: Long-Term Interest Rates",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/finance-long-rates.json"
+        "selectProps": [
+          ["table","Item","finance-long-rates"]
+        ],
+        "dfProps": {
+          "mapDateDf": 1
+        }
       }
     },
     "ES_F_SRATE" : {
@@ -801,14 +810,14 @@
       "type" : "ES_AGRI_PRICES",
       "menuTitle" : "Selling Prices",
       "dialogCaption" : "Agriculture Selling Prices",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoCaption" : "Price",
-        "twoURI" : "./data/eurostat/agri-prices.json",
-        "twoJsonProp" : "prices",
-        "mapFrequency" : "Y",
+        "selectProps":[
+          ["table","Price","agri-prices"]
+        ],
         "dfProps": {
+          "mapFrequency" : "Y",
           "mapType" : "Z"
         }
       }
@@ -817,12 +826,14 @@
       "type" : "ES_AGRI_MILK",
       "menuTitle" : "Milk & Milk Products",
       "dialogCaption" : "Agriculture: Milk & Milk Products",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/agri-milk.json",
-        "mapFrequency" : "Y",
+        "selectProps": [
+          ["table","Item","agri-milk"]
+        ],
         "dfProps": {
+          "mapFrequency" : "Y",
           "mapType" : "Z"
         }
       }
@@ -850,12 +861,14 @@
       "type" : "ES_AGRI_LIVESTOCK",
       "menuTitle" : "Livestock",
       "contCaption" : "Agriculture Livestock",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/agri-livestock.json",
-        "mapFrequency" : "Y",
+        "selectProps":[
+          ["table","Item","agri-livestock"]
+        ],
         "dfProps": {
+          "mapFrequency" : "Y",
           "mapType" : "Z"
         }
       }
@@ -985,15 +998,15 @@
     "ES_HT_INDIC" : {
       "type" : "ES_HT_INDIC",
       "menuTitle" : "High-Tech Indicators",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoCaption" : "Indicator",
-        "twoURI" : "./data/eurostat/high-tech-indicators.json",
-        "twoJsonProp" : "indicators",
-        "mapFrequency": "Y",
-        "mapDateDf": 2,
+        "selectProps":[
+          ["table","Indicator","high-tech-indicators"]
+        ],
         "dfProps": {
+          "mapFrequency": "Y",
+          "mapDateDf": 2,
           "mapType" : "V"
         }
       }
@@ -1020,12 +1033,15 @@
     "ES_RE_INDIC" : {
       "type" : "ES_RE_INDIC",
       "menuTitle" : "House Price Indicators",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoCaption" : "Indicator",
-        "twoURI" : "./data/eurostat/real-estate-index.json",
-        "twoJsonProp" : "indicators"
+        "selectProps":[
+          ["table","Indicator","real-estate-index"]
+        ],
+        "dfProps":{
+          "mapFrequency": "Q"
+        }
       }
     },
     "ES_RE_OVERCROWDING": {
@@ -1308,12 +1324,15 @@
       "type" : "ES_GF_DEBT",
       "menuTitle" : "Deficit/Surplus, Debt",
       "contCaption" : "Government Finance: Deficit/Surplus, Debt",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoCaption" : "Metric",
-        "twoURI" : "./data/eurostat/gf-debt.json",
-        "twoJsonProp" : "metrics"
+        "selectProps": [
+          ["table","Item","gf-debt"]
+        ],
+        "dfProps":{
+          "mapFrequency":"Q"
+        }
       }
     },
     "ES_GF_PENSIONS": {
