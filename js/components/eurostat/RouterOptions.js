@@ -73,12 +73,12 @@ var _crT3All = function _crT3All(oneCaption) {
 
 var _crT3 = function _crT3(_ref) {
   var oneCaption = _ref[0];
-  return [_crItem(['Default: Spline', V.A])].concat(_crT3All(oneCaption));
+  return [_crItem(['Default: Spline', V.S])].concat(_crT3All(oneCaption));
 };
 
 var _crT3B = function _crT3B(_ref2) {
   var oneCaption = _ref2[0];
-  return [_crItem(['Default: Spline', V.A]), _crItem(['Yearly by Months', V.A_Y])].concat(_crT3All(oneCaption));
+  return [_crItem(['Default: Spline', V.S]), _crItem(['Yearly by Months', V.A_Y])].concat(_crT3All(oneCaption));
 };
 
 var _crT3A = function _crT3A(_ref3) {
@@ -122,13 +122,16 @@ var _crCaptions = function _crCaptions(_ref6) {
 };
 
 var RouterOptions = {
-  crOptions: function crOptions(option) {
-    var chartsType = option.chartsType,
-        mapFrequency = option.mapFrequency,
-        _option$dfProps = option.dfProps,
-        dfProps = _option$dfProps === void 0 ? {} : _option$dfProps,
-        _mapFrequency = mapFrequency || dfProps.mapFrequency,
-        _captions = _crCaptions(option),
+  crOptions: function crOptions(dialogOption, _temp) {
+    var _ref7 = _temp === void 0 ? {} : _temp,
+        mapFrequency = _ref7.mapFrequency;
+
+    var chartsType = dialogOption.chartsType,
+        mF = dialogOption.mapFrequency,
+        _dialogOption$dfProps = dialogOption.dfProps,
+        dfProps = _dialogOption$dfProps === void 0 ? {} : _dialogOption$dfProps,
+        _mapFrequency = mapFrequency || mF || dfProps.mapFrequency,
+        _captions = _crCaptions(dialogOption),
         _crOptions = _r[chartsType] || _r.DF;
 
     return _crOptions(_captions, _mapFrequency);

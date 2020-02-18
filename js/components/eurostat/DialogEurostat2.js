@@ -68,8 +68,10 @@ function (_Component) {
 
     _this._updateForDate = function (chartType) {
       _this.date = null;
-      var frequency = _this.two ? _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : null,
-          mapDateDf = _this.props.mapDateDf,
+      var _this$props = _this.props,
+          mapFrequency = _this$props.mapFrequency,
+          mapDateDf = _this$props.mapDateDf,
+          frequency = _this.two ? mapFrequency || _this.two.mapFrequency || MAP_FREQUENCY_DF : null,
           dateConfig = frequency ? (0, _crDateConfig["default"])(frequency, mapDateDf) : (0, _crDateConfig["default"])('EMPTY');
 
       _this.setState((0, _extends2["default"])({
@@ -116,9 +118,9 @@ function (_Component) {
     };
 
     _this._createValidationMessages = function () {
-      var _this$props = _this.props,
-          oneCaption = _this$props.oneCaption,
-          twoCaption = _this$props.twoCaption;
+      var _this$props2 = _this.props,
+          oneCaption = _this$props2.oneCaption,
+          twoCaption = _this$props2.twoCaption;
       var chartType = _this.state.chartType;
       var msg = [];
 
@@ -203,18 +205,18 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this$props2 = this.props,
-        noDate = _this$props2.noDate,
-        caption = _this$props2.caption,
-        isShow = _this$props2.isShow,
-        onShow = _this$props2.onShow,
-        onFront = _this$props2.onFront,
-        oneCaption = _this$props2.oneCaption,
-        oneURI = _this$props2.oneURI,
-        oneJsonProp = _this$props2.oneJsonProp,
-        twoCaption = _this$props2.twoCaption,
-        twoURI = _this$props2.twoURI,
-        twoJsonProp = _this$props2.twoJsonProp,
+    var _this$props3 = this.props,
+        noDate = _this$props3.noDate,
+        caption = _this$props3.caption,
+        isShow = _this$props3.isShow,
+        onShow = _this$props3.onShow,
+        onFront = _this$props3.onFront,
+        oneCaption = _this$props3.oneCaption,
+        oneURI = _this$props3.oneURI,
+        oneJsonProp = _this$props3.oneJsonProp,
+        twoCaption = _this$props3.twoCaption,
+        twoURI = _this$props3.twoURI,
+        twoJsonProp = _this$props3.twoJsonProp,
         _this$state = this.state,
         chartType = _this$state.chartType,
         isToolbar = _this$state.isToolbar,

@@ -13,7 +13,13 @@ import ModalOptions from './ModalOptions'
 import ModalToggle from './ModalToggle'
 import RowChart from './RowChart'
 
-const  DF_MAP_FREQUENCY = 'M';
+const DF_MAP_FREQUENCY = 'M';
+const TABLE_ID = 'table';
+
+const {
+  crOptions,
+  isCategory
+} = RouterOptions;
 
 const _crIsId = id => `is${id}Select`;
 
@@ -25,8 +31,20 @@ const _crIsToggleInit = (selectProps) => {
   return _isToggleInit;
 };
 
-const _isCategory = (chartType) => RouterOptions
-  .isCategory(chartType);
+const _getDfFrequencyConfig = (props) => {
+  const { dfProps={} } = props
+  , {
+    mapFrequency=DF_MAP_FREQUENCY,
+    mapDateDf
+  } = dfProps;
+  return { mapFrequency, mapDateDf };
+};
+
+const _isRequireChartOptionsUpdate = (
+  oldFrequency,
+  { mapFrequency }
+) => oldFrequency !== mapFrequency
+  && (oldFrequency === 'M' || mapFrequency === 'M');
 
 @Decor.dialog
 @withForDate
@@ -75,6 +93,10 @@ class DialogSelectN extends Component {
     this._compSelect = {}
     //this.date = undefined;
 
+    this._setFrequencyConfig(
+      _getDfFrequencyConfig(props)
+    )
+
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
       onAbout: this._clickInfoWithToolbar
@@ -83,7 +105,7 @@ class DialogSelectN extends Component {
       props, { noDate: true, isOptions: true, isToggle: true }
     )
     this._commandButtons = this._crCommandsWithLoad(this)
-    this._chartOptions = RouterOptions.crOptions(props)
+    this._chartOptions = crOptions(props)
 
     this.state = {
       ...this._isWithInitialState(),
@@ -95,6 +117,11 @@ class DialogSelectN extends Component {
       ..._crIsToggleInit(props.selectProps)
       //chartType
     }
+  }
+
+  _setFrequencyConfig({ mapFrequency, mapDateDf }){
+    this._mapFrequency = mapFrequency
+    this._mapDateDf = mapDateDf
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -120,23 +147,23 @@ class DialogSelectN extends Component {
        .filter(v => v !== index)
   }
 
+  _crDateConfig = () => {
+    const { _mapFrequency, _mapDateDf } = this;
+    return crDateConfig(_mapFrequency, _mapDateDf);
+  }
+
   _updateForDate = (chartType) => {
     this.date = void 0;
-    const { dfProps={} } = this.props
-    , { mapFrequency, mapDateDf } = dfProps
-    , _frequency = mapFrequency || DF_MAP_FREQUENCY
-    , dateConfig = crDateConfig(_frequency, mapDateDf);
-
     this.setState({
        isShowDate: true,
        chartType,
-       ...dateConfig
+       ...this._crDateConfig()
     });
   }
 
 
   _hSelectChartType = (chartType) => {
-    if (_isCategory(chartType)) {
+    if (isCategory(chartType)) {
       this._updateForDate(chartType);
     } else {
       this.setState({
@@ -168,7 +195,7 @@ class DialogSelectN extends Component {
     , _max = selectProps.length
     , msg = [];
 
-    let i = _isCategory(chartType) ? 1 : 0;
+    let i = isCategory(chartType) ? 1 : 0;
     for( ; i<_max; i++) {
       if (!this._items[i]) {
         msg.push(msgOnNotSelected(selectProps[i].caption))
@@ -176,7 +203,6 @@ class DialogSelectN extends Component {
     }
 
     msg.isValid = (msg.length === 0)
-       ? true : false;
     return msg;
   }
 
@@ -190,10 +216,10 @@ class DialogSelectN extends Component {
         ? colorComp.getConf()
         : {}
     , date = this._getDateWithForDate()
-    , isCategory = _isCategory(chartType)
-    , items = isCategory
+    , _isCategory = isCategory(chartType)
+    , items = _isCategory
         ? this._items.slice(1)
-        : this._items;
+        : [...this._items];
 
     return this.props.loadFn(
       this.props, {
@@ -201,7 +227,7 @@ class DialogSelectN extends Component {
         titles: this._titles,
         dialogOptions,
         chartType, seriaColor, seriaWidth,
-        isCategory,
+        isCategory: _isCategory,
         date
         /*
         selectOptions: [
@@ -218,9 +244,38 @@ class DialogSelectN extends Component {
   }
 
 
+  _crFrequencyConfig = (item) => {
+    const { mapFrequency, mapDateDf } = _getDfFrequencyConfig(this.props)
+    , _frequency = item.mapFrequency || mapFrequency
+    , _dateDf = item.mapDateDf || mapDateDf;
+    return this._mapFrequency !== _frequency
+      || this._mapDateDf !== _dateDf
+      ? {
+          mapFrequency: _frequency,
+          mapDateDf: _dateDf
+        }
+      : void 0;
+  }
+
+  _checkForTableId = (id, item) => {
+    if (id === TABLE_ID) {
+      const _conf = this._crFrequencyConfig(item);
+      if (_conf) {
+       if(_isRequireChartOptionsUpdate(this._mapFrequency, _conf)){
+         this._chartOptions = crOptions(this.props, _conf)
+       }
+       this._setFrequencyConfig(_conf)
+       this.setState(this._crDateConfig())
+      }
+    }
+  }
+
   _hSelect = (id, index, item) => {
-    if (item) { item.id = id }
     this._items[index] = item
+    if (item) {
+      item.id = id
+      this._checkForTableId(id, item)
+    }
   }
   _refSelect = (id, comp) => {
     this._compSelect[id] = comp

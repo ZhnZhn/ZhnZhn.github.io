@@ -38,6 +38,9 @@ var _RowChart = _interopRequireDefault(require("./RowChart"));
 var _dec, _class, _class2, _temp;
 
 var DF_MAP_FREQUENCY = 'M';
+var TABLE_ID = 'table';
+var crOptions = _RouterOptions["default"].crOptions,
+    isCategory = _RouterOptions["default"].isCategory;
 
 var _crIsId = function _crIsId(id) {
   return "is" + id + "Select";
@@ -51,8 +54,21 @@ var _crIsToggleInit = function _crIsToggleInit(selectProps) {
   return _isToggleInit;
 };
 
-var _isCategory = function _isCategory(chartType) {
-  return _RouterOptions["default"].isCategory(chartType);
+var _getDfFrequencyConfig = function _getDfFrequencyConfig(props) {
+  var _props$dfProps = props.dfProps,
+      dfProps = _props$dfProps === void 0 ? {} : _props$dfProps,
+      _dfProps$mapFrequency = dfProps.mapFrequency,
+      mapFrequency = _dfProps$mapFrequency === void 0 ? DF_MAP_FREQUENCY : _dfProps$mapFrequency,
+      mapDateDf = dfProps.mapDateDf;
+  return {
+    mapFrequency: mapFrequency,
+    mapDateDf: mapDateDf
+  };
+};
+
+var _isRequireChartOptionsUpdate = function _isRequireChartOptionsUpdate(oldFrequency, _ref) {
+  var mapFrequency = _ref.mapFrequency;
+  return oldFrequency !== mapFrequency && (oldFrequency === 'M' || mapFrequency === 'M');
 };
 
 var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _withForDate["default"])(_class = (_temp = _class2 =
@@ -94,9 +110,9 @@ function (_Component) {
 
     _this._toggleStateBy = function (propName) {
       _this.setState(function (prevState) {
-        var _ref;
+        var _ref2;
 
-        return _ref = {}, _ref[propName] = !prevState[propName], _ref;
+        return _ref2 = {}, _ref2[propName] = !prevState[propName], _ref2;
       });
     };
 
@@ -110,24 +126,25 @@ function (_Component) {
       });
     };
 
+    _this._crDateConfig = function () {
+      var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
+          _mapFrequency = _assertThisInitialize._mapFrequency,
+          _mapDateDf = _assertThisInitialize._mapDateDf;
+
+      return (0, _crDateConfig["default"])(_mapFrequency, _mapDateDf);
+    };
+
     _this._updateForDate = function (chartType) {
       _this.date = void 0;
-
-      var _this$props$dfProps = _this.props.dfProps,
-          dfProps = _this$props$dfProps === void 0 ? {} : _this$props$dfProps,
-          mapFrequency = dfProps.mapFrequency,
-          mapDateDf = dfProps.mapDateDf,
-          _frequency = mapFrequency || DF_MAP_FREQUENCY,
-          dateConfig = (0, _crDateConfig["default"])(_frequency, mapDateDf);
 
       _this.setState((0, _extends2["default"])({
         isShowDate: true,
         chartType: chartType
-      }, dateConfig));
+      }, _this._crDateConfig()));
     };
 
     _this._hSelectChartType = function (chartType) {
-      if (_isCategory(chartType)) {
+      if (isCategory(chartType)) {
         _this._updateForDate(chartType);
       } else {
         _this.setState({
@@ -156,7 +173,7 @@ function (_Component) {
           chartType = _this.state.chartType,
           _max = selectProps.length,
           msg = [];
-      var i = _isCategory(chartType) ? 1 : 0;
+      var i = isCategory(chartType) ? 1 : 0;
 
       for (; i < _max; i++) {
         if (!_this._items[i]) {
@@ -164,21 +181,21 @@ function (_Component) {
         }
       }
 
-      msg.isValid = msg.length === 0 ? true : false;
+      msg.isValid = msg.length === 0;
       return msg;
     };
 
     _this._createLoadOption = function () {
-      var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
-          colorComp = _assertThisInitialize.colorComp,
-          dialogOptions = _assertThisInitialize.dialogOptions,
+      var _assertThisInitialize2 = (0, _assertThisInitialized2["default"])(_this),
+          colorComp = _assertThisInitialize2.colorComp,
+          dialogOptions = _assertThisInitialize2.dialogOptions,
           chartType = _this.state.chartType,
-          _ref2 = colorComp ? colorComp.getConf() : {},
-          seriaColor = _ref2.seriaColor,
-          seriaWidth = _ref2.seriaWidth,
+          _ref3 = colorComp ? colorComp.getConf() : {},
+          seriaColor = _ref3.seriaColor,
+          seriaWidth = _ref3.seriaWidth,
           date = _this._getDateWithForDate(),
-          isCategory = _isCategory(chartType),
-          items = isCategory ? _this._items.slice(1) : _this._items;
+          _isCategory = isCategory(chartType),
+          items = _isCategory ? _this._items.slice(1) : [].concat(_this._items);
 
       return _this.props.loadFn(_this.props, {
         items: items,
@@ -187,7 +204,7 @@ function (_Component) {
         chartType: chartType,
         seriaColor: seriaColor,
         seriaWidth: seriaWidth,
-        isCategory: isCategory,
+        isCategory: _isCategory,
         date: date
         /*
         selectOptions: [
@@ -203,12 +220,43 @@ function (_Component) {
       _this._handleWithValidationClose();
     };
 
+    _this._crFrequencyConfig = function (item) {
+      var _getDfFrequencyConfig2 = _getDfFrequencyConfig(_this.props),
+          mapFrequency = _getDfFrequencyConfig2.mapFrequency,
+          mapDateDf = _getDfFrequencyConfig2.mapDateDf,
+          _frequency = item.mapFrequency || mapFrequency,
+          _dateDf = item.mapDateDf || mapDateDf;
+
+      return _this._mapFrequency !== _frequency || _this._mapDateDf !== _dateDf ? {
+        mapFrequency: _frequency,
+        mapDateDf: _dateDf
+      } : void 0;
+    };
+
+    _this._checkForTableId = function (id, item) {
+      if (id === TABLE_ID) {
+        var _conf = _this._crFrequencyConfig(item);
+
+        if (_conf) {
+          if (_isRequireChartOptionsUpdate(_this._mapFrequency, _conf)) {
+            _this._chartOptions = crOptions(_this.props, _conf);
+          }
+
+          _this._setFrequencyConfig(_conf);
+
+          _this.setState(_this._crDateConfig());
+        }
+      }
+    };
+
     _this._hSelect = function (id, index, item) {
+      _this._items[index] = item;
+
       if (item) {
         item.id = id;
-      }
 
-      _this._items[index] = item;
+        _this._checkForTableId(id, item);
+      }
     };
 
     _this._refSelect = function (id, comp) {
@@ -238,6 +286,8 @@ function (_Component) {
     _this._titles = [0];
     _this._compSelect = {}; //this.date = undefined;
 
+    _this._setFrequencyConfig(_getDfFrequencyConfig(props));
+
     _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
@@ -248,7 +298,7 @@ function (_Component) {
       isToggle: true
     });
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
-    _this._chartOptions = _RouterOptions["default"].crOptions(props);
+    _this._chartOptions = crOptions(props);
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isOptions: false,
       isToggle: false,
@@ -259,6 +309,13 @@ function (_Component) {
   }
 
   var _proto = DialogSelectN.prototype;
+
+  _proto._setFrequencyConfig = function _setFrequencyConfig(_ref4) {
+    var mapFrequency = _ref4.mapFrequency,
+        mapDateDf = _ref4.mapDateDf;
+    this._mapFrequency = mapFrequency;
+    this._mapDateDf = mapDateDf;
+  };
 
   _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {

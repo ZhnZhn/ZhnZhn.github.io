@@ -31,6 +31,8 @@ const S = {
   }
 };
 
+const { isCategory } = RouterOptions;
+
 const _crIsId = id => `is${id}Select`;
 
 const _isOpenAndPrevLoadFailed = (
@@ -41,9 +43,6 @@ const _isOpenAndPrevLoadFailed = (
   && state.isLoadFailed;
 
 const _fNotTimeDimension = timeId => config => config.id !== timeId;
-
-const _isCategory = (chartType) => RouterOptions
-  .isCategory(chartType);
 
 @Decor.dialog
 class DialogStatN extends Component {
@@ -149,17 +148,13 @@ class DialogStatN extends Component {
 
   _updateForDate = (chartType) => {
     this.date = null;
-    const frequency = (this._items[1])
-             ? (this.props.mapFrequency)
-                  ? this.props.mapFrequency
-                  : (this.two.mapFrequency)
-                       ? this.two.mapFrequency
-                       : MAP_FREQUENCY_DF
-             : null
-         , { mapDateDf } = this.props
-         , dateConfig = (frequency)
-              ? crDateConfig(frequency, mapDateDf)
-              : crDateConfig('Y', mapDateDf)
+    const frequency = this._items[1]
+       ? this.props.mapFrequency || MAP_FREQUENCY_DF
+       : null
+    , { mapDateDf } = this.props
+    , dateConfig = frequency
+         ? crDateConfig(frequency, mapDateDf)
+         : crDateConfig('Y', mapDateDf);
 
     this.setState({
        isShowDate: true,
@@ -199,12 +194,16 @@ class DialogStatN extends Component {
 
   _crValidationMessages = () => {
     const msg = []
-        , { configs, isLoadFailed } = this.state;
+    , { configs, isLoadFailed, chartType={} } = this.state
+    , _isCategory = isCategory(chartType)
+    , { dim } = chartType;
     if (!isLoadFailed) {
       configs.forEach((config, index) => {
          const { caption } = config;
-         if (!this._items[index]) {
-           msg.push(this.props.msgOnNotSelected(caption))
+         if (!(_isCategory && caption === dim)) {
+           if (!this._items[index]) {
+             msg.push(this.props.msgOnNotSelected(caption))
+           }
          }
       })
     } else {
@@ -218,8 +217,7 @@ class DialogStatN extends Component {
   }
 
   _hSelectChartType = (chartType) => {
-
-    if (_isCategory(chartType)) {
+    if (isCategory(chartType)) {
       this._updateForDate(chartType);
     } else {
       this.setState({

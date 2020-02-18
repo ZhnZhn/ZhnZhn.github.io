@@ -41,7 +41,7 @@ var _modifyIfItemTable = function _modifyIfItemTable(dfProps, items) {
     var value = tableItem.value,
         dfTail = tableItem.dfTail;
 
-    if (value && dfTail) {
+    if (value) {
       Object.assign(dfProps, {
         dfTable: value,
         dfTail: dfTail

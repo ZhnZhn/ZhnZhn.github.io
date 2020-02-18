@@ -18,10 +18,10 @@ const _findItemTable = (items) => {
 };
 
 const _modifyIfItemTable = (dfProps, items) => {
-  const { tableItem, tableIndex } = _findItemTable(items);  
+  const { tableItem, tableIndex } = _findItemTable(items);
   if (tableItem) {
     const { value, dfTail } = tableItem;
-    if (value && dfTail) {
+    if (value) {
       Object.assign(dfProps, {
         dfTable: value, dfTail
       })

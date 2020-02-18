@@ -86,18 +86,15 @@ class DialogEurostat2 extends Component {
 
   _updateForDate = (chartType) => {
     this.date = null;
-    const frequency = (this.two)
-             ? (this.props.mapFrequency)
-                  ? this.props.mapFrequency
-                  : (this.two.mapFrequency)
-                       ? this.two.mapFrequency
-                       : MAP_FREQUENCY_DF
-             : null
-         , { mapDateDf } = this.props
-         , dateConfig = (frequency)
-             ? crDateConfig(frequency, mapDateDf)
-             : crDateConfig('EMPTY')
-
+    const { mapFrequency, mapDateDf } = this.props
+     , frequency = this.two
+         ? mapFrequency
+            || this.two.mapFrequency
+            || MAP_FREQUENCY_DF
+         : null
+     , dateConfig = frequency
+         ? crDateConfig(frequency, mapDateDf)
+         : crDateConfig('EMPTY');    
     this.setState({
        isShowDate: true,
        ...dateConfig,

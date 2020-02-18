@@ -88,12 +88,12 @@ const _crT3All = (oneCaption) => _crItems([
 ]);
 
 const _crT3 = ([oneCaption]) => ([
-  _crItem(['Default: Spline', V.A]),
+  _crItem(['Default: Spline', V.S]),
   ..._crT3All(oneCaption)
 ]);
 
 const _crT3B = ([oneCaption]) => ([
-  _crItem(['Default: Spline', V.A]),
+  _crItem(['Default: Spline', V.S]),
   _crItem(['Yearly by Months', V.A_Y]),
   ..._crT3All(oneCaption)
 ]);
@@ -139,10 +139,11 @@ const _crCaptions = ({
    : [ oneCaption, twoCaption ];
 
 const RouterOptions = {
-  crOptions(option){
-     const { chartsType, mapFrequency, dfProps={} } = option
-     , _mapFrequency = mapFrequency || dfProps.mapFrequency
-     , _captions = _crCaptions(option)
+  crOptions(dialogOption, { mapFrequency }={}){
+     const { chartsType, mapFrequency:mF, dfProps={} } = dialogOption
+     , _mapFrequency = mapFrequency
+          || mF || dfProps.mapFrequency
+     , _captions = _crCaptions(dialogOption)
      , _crOptions = _r[chartsType] || _r.DF;
      return _crOptions(_captions, _mapFrequency);
   },

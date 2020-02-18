@@ -53,6 +53,7 @@ var S = {
     animation: 'none'
   }
 };
+var isCategory = _RouterOptions["default"].isCategory;
 
 var _crIsId = function _crIsId(id) {
   return "is" + id + "Select";
@@ -66,10 +67,6 @@ var _fNotTimeDimension = function _fNotTimeDimension(timeId) {
   return function (config) {
     return config.id !== timeId;
   };
-};
-
-var _isCategory = function _isCategory(chartType) {
-  return _RouterOptions["default"].isCategory(chartType);
 };
 
 var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
@@ -154,7 +151,7 @@ function (_Component) {
 
     _this._updateForDate = function (chartType) {
       _this.date = null;
-      var frequency = _this._items[1] ? _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : null,
+      var frequency = _this._items[1] ? _this.props.mapFrequency || MAP_FREQUENCY_DF : null,
           mapDateDf = _this.props.mapDateDf,
           dateConfig = frequency ? (0, _crDateConfig["default"])(frequency, mapDateDf) : (0, _crDateConfig["default"])('Y', mapDateDf);
 
@@ -203,14 +200,20 @@ function (_Component) {
       var msg = [],
           _this$state = _this.state,
           configs = _this$state.configs,
-          isLoadFailed = _this$state.isLoadFailed;
+          isLoadFailed = _this$state.isLoadFailed,
+          _this$state$chartType = _this$state.chartType,
+          chartType = _this$state$chartType === void 0 ? {} : _this$state$chartType,
+          _isCategory = isCategory(chartType),
+          dim = chartType.dim;
 
       if (!isLoadFailed) {
         configs.forEach(function (config, index) {
           var caption = config.caption;
 
-          if (!_this._items[index]) {
-            msg.push(_this.props.msgOnNotSelected(caption));
+          if (!(_isCategory && caption === dim)) {
+            if (!_this._items[index]) {
+              msg.push(_this.props.msgOnNotSelected(caption));
+            }
           }
         });
       } else {
@@ -225,7 +228,7 @@ function (_Component) {
     };
 
     _this._hSelectChartType = function (chartType) {
-      if (_isCategory(chartType)) {
+      if (isCategory(chartType)) {
         _this._updateForDate(chartType);
       } else {
         _this.setState({
