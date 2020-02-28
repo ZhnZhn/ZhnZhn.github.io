@@ -19,6 +19,54 @@ var _checkTop = function _checkTop(isTop, strN, arr) {
   }
 };
 
+var _crArrQuery = function _crArrQuery(items) {
+  var arrQuery = [];
+  items.forEach(function (item) {
+    var _ref = item || {},
+        slice = _ref.slice;
+
+    for (var propName in slice) {
+      arrQuery.push({
+        code: propName,
+        selection: {
+          filter: 'item',
+          values: [slice[propName]] //filter: 'all',
+          //values: ['*']
+
+        }
+      });
+    }
+  });
+  return arrQuery;
+};
+
+var _isCategory = function _isCategory(seriaType) {
+  return seriaType === "BAR_CLUSTER" || seriaType === "BAR_SET" || seriaType === "COLUMN_SET" || seriaType === "COLUMN_CLUSTER" || seriaType === "TREE_MAP" || seriaType === "TREE_MAP_CLUSTER" || seriaType === "TREE_MAP_2" || seriaType === "TREE_MAP_2_CLUSTER";
+};
+
+var _checkSeriaCategory = function _checkSeriaCategory(arr, _ref2) {
+  var dfC = _ref2.dfC,
+      seriaType = _ref2.seriaType;
+
+  if (dfC && _isCategory(seriaType)) {
+    var _arr = arr.filter(function (item) {
+      return item.code !== dfC;
+    });
+
+    _arr.unshift({
+      code: dfC,
+      selection: {
+        filter: "all",
+        values: ["*"]
+      }
+    });
+
+    return _arr;
+  }
+
+  return arr;
+};
+
 var fTableApi = function fTableApi(ROOT_URL) {
   return {
     getRequestUrl: function getRequestUrl(option) {
@@ -40,29 +88,13 @@ var fTableApi = function fTableApi(ROOT_URL) {
           items = _option$items === void 0 ? [] : _option$items,
           isTop12 = option.isTop12,
           isTop6 = option.isTop6,
-          optionFetch = option.optionFetch,
-          arrQuery = [];
+          optionFetch = option.optionFetch;
 
       if (optionFetch) {
         return optionFetch;
       }
 
-      items.forEach(function (item) {
-        var _ref = item || {},
-            slice = _ref.slice;
-
-        for (var propName in slice) {
-          arrQuery.push({
-            code: propName,
-            selection: {
-              filter: 'item',
-              values: [slice[propName]] //filter: 'all',
-              //values: ['*']
-
-            }
-          });
-        }
-      });
+      var arrQuery = _crArrQuery(items);
 
       _checkTop(isTop12, '12', arrQuery);
 
@@ -71,7 +103,7 @@ var fTableApi = function fTableApi(ROOT_URL) {
       return option.optionFetch = {
         method: 'POST',
         body: JSON.stringify({
-          query: arrQuery,
+          query: _checkSeriaCategory(arrQuery, option),
           response: {
             format: "json-stat"
           }

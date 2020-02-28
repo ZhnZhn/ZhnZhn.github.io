@@ -16,8 +16,9 @@ var COUNTRY_CAPTION_DF = 'EU';
 var _toIds = function _toIds(_ref, items) {
   var dfId = _ref.dfId;
   var _arr = [dfId];
-  items.forEach(function (_ref2) {
-    var slice = _ref2.slice;
+  items.forEach(function (_temp) {
+    var _ref2 = _temp === void 0 ? {} : _temp,
+        slice = _ref2.slice;
 
     if (slice) {
       _arr.push(slice[Object.keys(slice)[0]]);
@@ -39,7 +40,8 @@ var createLoadOptions = function createLoadOptions(props, options) {
       loadId = _props.loadId,
       group = _props.group,
       dataSource = _props.dataSource,
-      dfProps = _props.dfProps,
+      _props$dfProps = _props.dfProps,
+      dfProps = _props$dfProps === void 0 ? {} : _props$dfProps,
       timeId = _props.timeId,
       _options = options,
       _options$items = _options.items,

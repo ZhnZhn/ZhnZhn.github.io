@@ -6,7 +6,7 @@ const COUNTRY_CAPTION_DF = 'EU';
 
 const _toIds = ({ dfId }, items) => {
   const _arr = [dfId];
-  items.forEach(({ slice }) => {
+  items.forEach(({ slice }={}) => {
     if (slice) {
       _arr.push(slice[Object.keys(slice)[0]])
     }
@@ -15,7 +15,7 @@ const _toIds = ({ dfId }, items) => {
 };
 
 const createLoadOptions = (props={}, options={}) => {
-  const { loadId, group, dataSource, dfProps, timeId } = props
+  const { loadId, group, dataSource, dfProps={}, timeId } = props
       , {
           items=[], titles,
           dialogOptions,

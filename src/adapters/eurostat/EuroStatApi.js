@@ -20,8 +20,6 @@ const _addPropTo = (option) => {
   option.resErrStatus = [...RES_ERR_STATUS]
 };
 
-const _isRouteUrlN = ({ _type }) => _type === 'selectN';
-
 const EuroStatApi = {
 
   getRequestUrl(option){
@@ -29,11 +27,7 @@ const EuroStatApi = {
     if (option.url) {
       return option.url;
     }
-    const _url = _isRouteUrlN(option)
-      ? api.crUrlN(option)
-      : option.dfParams
-          ? api.crUrlWithParams(option)
-          : api.crUrl(option);
+    const _url = api.crUrlN(option);
     return (option.url = _url);
   },
 

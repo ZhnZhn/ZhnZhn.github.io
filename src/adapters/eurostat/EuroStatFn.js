@@ -27,7 +27,7 @@ const C = {
     "Germany", "Greece", "Hungary", "Ireland", "Italy",
     "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands",
     "Poland", "Portugal", "Romania", "Slovakia", "Slovenia",
-    "Spain", "Sweden", "United Kingdom"
+    "Spain", "Sweden"
   ]
 };
 
@@ -263,12 +263,7 @@ const EuroStatFn = {
     }
   },
 
-  createDatasetInfo(json){
-    const {
-      label,
-      updated,
-      extension
-    } = json;
+  createDatasetInfo({ label, updated, extension }){
     return {
       name: label,
       description: _crDescr(extension),

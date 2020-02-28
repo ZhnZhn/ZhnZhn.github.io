@@ -31,11 +31,6 @@ var _addPropTo = function _addPropTo(option) {
   option.resErrStatus = [].concat(RES_ERR_STATUS);
 };
 
-var _isRouteUrlN = function _isRouteUrlN(_ref) {
-  var _type = _ref._type;
-  return _type === 'selectN';
-};
-
 var EuroStatApi = {
   getRequestUrl: function getRequestUrl(option) {
     _addPropTo(option);
@@ -44,7 +39,7 @@ var EuroStatApi = {
       return option.url;
     }
 
-    var _url = _isRouteUrlN(option) ? _api["default"].crUrlN(option) : option.dfParams ? _api["default"].crUrlWithParams(option) : _api["default"].crUrl(option);
+    var _url = _api["default"].crUrlN(option);
 
     return option.url = _url;
   },

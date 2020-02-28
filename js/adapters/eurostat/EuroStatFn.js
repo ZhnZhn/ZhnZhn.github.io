@@ -28,7 +28,7 @@ var COLOR = {
 var C = {
   EU_CODES: ["EU", "EU15", "EU25", "EU27", "EU28", "EU27_2019", "G20", "Group of Twenty"],
   EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
-  EU_MEMBER: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
+  EU_MEMBER: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"]
 };
 
 var _crDescr = function _crDescr(extension) {
@@ -318,10 +318,10 @@ var EuroStatFn = {
       dataSource: _dataSource
     }, EuroStatFn.crLinkConf(json, option));
   },
-  createDatasetInfo: function createDatasetInfo(json) {
-    var label = json.label,
-        updated = json.updated,
-        extension = json.extension;
+  createDatasetInfo: function createDatasetInfo(_ref10) {
+    var label = _ref10.label,
+        updated = _ref10.updated,
+        extension = _ref10.extension;
     return {
       name: label,
       description: _crDescr(extension),
