@@ -5,6 +5,7 @@ exports["default"] = void 0;
 
 var _Type = require("../../constants/Type");
 
+var _isArr = Array.isArray;
 var V = {
   A: 'AREA',
   A_Y: 'AREA_YEARLY',
@@ -112,13 +113,25 @@ var _r = {
 
 var _crCaptions = function _crCaptions(_ref6) {
   var dims = _ref6.dims,
+      selectProps = _ref6.selectProps,
       _ref6$oneCaption = _ref6.oneCaption,
       oneCaption = _ref6$oneCaption === void 0 ? C.EMPTY : _ref6$oneCaption,
       _ref6$twoCaption = _ref6.twoCaption,
       twoCaption = _ref6$twoCaption === void 0 ? C.EMPTY : _ref6$twoCaption;
-  return Array.isArray(dims) ? dims.map(function (dim) {
-    return dim.c || C.EMPTY;
-  }) : [oneCaption, twoCaption];
+
+  if (_isArr(dims)) {
+    return dims.map(function (dim) {
+      return dim.c || C.EMPTY;
+    });
+  }
+
+  if (_isArr(selectProps)) {
+    return selectProps.map(function (props) {
+      return props.caption || C.EMPTY;
+    });
+  }
+
+  return [oneCaption, twoCaption];
 };
 
 var RouterOptions = {

@@ -7,10 +7,8 @@ var C = {
 };
 var DatasetApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var metric = option.metric,
-        dfId = option.dfId,
-        id = dfId ? dfId : metric;
-    return C.ROOT_URL + "/" + id + ".json?lang=en";
+    var dfId = option.dfId;
+    return C.ROOT_URL + "/" + dfId + ".json?lang=en";
   },
   checkResponse: function checkResponse() {
     return true;

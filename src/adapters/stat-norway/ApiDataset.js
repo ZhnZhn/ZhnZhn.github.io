@@ -5,9 +5,8 @@ const C = {
 
 const DatasetApi = {
   getRequestUrl( option ){
-    const { metric, dfId } = option
-        , id = dfId ? dfId : metric;
-    return `${C.ROOT_URL}/${id}.json?lang=en`;
+    const { dfId } = option;        
+    return `${C.ROOT_URL}/${dfId}.json?lang=en`;
   },
   checkResponse(){
     return true;

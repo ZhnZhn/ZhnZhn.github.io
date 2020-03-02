@@ -33,6 +33,7 @@ var SEARCH = {
   }
 };
 var DF_SOURCE = 'Unknown';
+var MAX_SOURCE_ID_LENGTH = 9;
 
 var _crSearchToken = function _crSearchToken(label) {
   var _arr = (label || '').toString().split(',');
@@ -71,19 +72,6 @@ var _crSearchLink = function _crSearchLink(label, option) {
     default:
       return '';
   }
-  /*
-  switch(option.browserType){
-    case 'NST': case 'NST_ALL':
-      return _crLink(_token, SEARCH.NST);
-    case 'SWS': case 'SWS_ALL':
-      return _crLink(_token, SEARCH.SWS);
-    case 'SFL':
-      return _crLink(_crToken(option), SEARCH.SFL);
-    default:
-      return '';
-  }
-  */
-
 };
 
 var _crDescr = function _crDescr(_ref3, option) {
@@ -133,6 +121,12 @@ var _getTimeDimension = function _getTimeDimension(ds, timeId) {
       times = _dim && _dim.id || _getDimensionWithouTime(ds);
 
   return times;
+};
+
+var _crDataSource = function _crDataSource(_ref4) {
+  var dataSource = _ref4.dataSource,
+      dfId = _ref4.dfId;
+  return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
 };
 
 var fnAdapter = {
@@ -219,7 +213,7 @@ var fnAdapter = {
       },
       isWithoutAdd: url ? false : true,
       //isWithoutAdd: true,
-      dataSource: dataSource
+      dataSource: _crDataSource(option)
     };
   },
   crChartOption: function crChartOption(ds, data, option) {

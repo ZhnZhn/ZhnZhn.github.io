@@ -87,7 +87,7 @@ var _crCategory = function _crCategory(option, by) {
       return {
         category: dfC2,
         cTotal: dfT2,
-        itemSlice: items[0].slice
+        itemSlice: itemSlice
       };
 
     default:

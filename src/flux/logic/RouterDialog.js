@@ -97,14 +97,6 @@ const _router = {
   },
   getES() {
     return this.ES || this._loadES();
-  },
-  get DialogEurostat() {
-    return this.getES()
-      .then(D => D.Eurostat);
-  },
-  get DialogEurostat2() {
-    return this.getES()
-      .then(D => D.Eurostat2);
   },  
   get DialogSelectN() {
     return this.getES()

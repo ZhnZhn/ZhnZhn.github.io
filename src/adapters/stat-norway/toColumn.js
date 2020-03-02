@@ -64,7 +64,7 @@ const _crCategory = (option, by) => {
       return {
         category: dfC2,
         cTotal: dfT2,
-        itemSlice: items[0].slice
+        itemSlice
       };
     default:
       for (i=1; i<items.length; i++){
@@ -123,7 +123,7 @@ const toColumn = {
              ...crChartOption(_ds, Tid, option)
             })
            .toConfig()
-
+    
     if (isCluster) {
       _setClusters(data)
     }

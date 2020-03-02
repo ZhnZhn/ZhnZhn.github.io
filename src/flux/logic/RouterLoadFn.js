@@ -1,8 +1,6 @@
 
-import fnEuroStat from '../creaters/eurostat'
-import fnEuroStat2 from '../creaters/eurostat2'
 import fnSelectN from '../creaters/selectN'
-import fnEuroStatN from '../creaters/eurostatN'
+import fnStatN from '../creaters/statN'
 
 import fnType3 from '../creaters/type3'
 import fnType4 from '../creaters/type4'
@@ -32,10 +30,8 @@ const _r = {
   Futures3Dialog: fnFutures3,
   FuturesWikiDialog: fnFuturesWiki,
 
-  DialogEurostat: fnEuroStat,
-  DialogEurostat2: fnEuroStat2,    
   DialogSelectN: fnSelectN,
-  DialogStatN: fnEuroStatN,
+  DialogStatN: fnStatN,
 
   UnDialog5: fnUn5
 };

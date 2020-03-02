@@ -6,10 +6,8 @@
  "file": "../../../src/components/eurostat/EurostatDialogs.js",
  "names": [
   "EurostatDialogs",
-  "Eurostat",
-  "Eurostat2",
   "SelectN",
   "StatN"
  ],
- "mappings": ";;;;;;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,eAAe,GAAG;AACtBC,EAAAA,QAAQ,EAARA,0BADsB;AACZC,EAAAA,SAAS,EAATA,2BADY;AAEtBC,EAAAA,OAAO,EAAPA,yBAFsB;AAGtBC,EAAAA,KAAK,EAALA;AAHsB,CAAxB;eAMeJ,e"
+ "mappings": ";;;;;;;AACA;;AACA;;AAEA,IAAMA,eAAe,GAAG;AACtBC,EAAAA,OAAO,EAAPA,yBADsB;AAEtBC,EAAAA,KAAK,EAALA;AAFsB,CAAxB;eAKeF,e"
 }

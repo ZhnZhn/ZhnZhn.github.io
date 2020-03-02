@@ -148,13 +148,10 @@ class DialogStatN extends Component {
 
   _updateForDate = (chartType) => {
     this.date = null;
-    const frequency = this._items[1]
-       ? this.props.mapFrequency || MAP_FREQUENCY_DF
-       : null
-    , { mapDateDf } = this.props
-    , dateConfig = frequency
-         ? crDateConfig(frequency, mapDateDf)
-         : crDateConfig('Y', mapDateDf);
+
+    const { mapFrequency, mapDateDf } = this.props
+    , _frequency = mapFrequency || MAP_FREQUENCY_DF
+    , dateConfig = crDateConfig(_frequency, mapDateDf);
 
     this.setState({
        isShowDate: true,
@@ -242,15 +239,16 @@ class DialogStatN extends Component {
   }
 
   _renderSelectInputs = () => {
-    const { isShowLabels, configs } = this.state
+    const { isShowLabels, configs } = this.state;
     return configs.map((conf, index) => {
       const { id, caption, options } = conf
-      , rest = { isShowLabels, caption, options }
       , _isShow = !this.state[_crIsId(id)];
       return (
         <D.ShowHide key={id} isShow={_isShow}>
           <D.RowInputSelect
-            {...rest}
+            isShowLabels={isShowLabels}
+            caption={caption}
+            options={options}
             onSelect={this._fSelect(index).bind(this)}
           />
         </D.ShowHide>

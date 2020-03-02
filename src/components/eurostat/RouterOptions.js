@@ -2,6 +2,8 @@
 import { CompItemType } from '../../constants/Type'
 
 
+const _isArr = Array.isArray;
+
 const V = {
   A: 'AREA',
   A_Y: 'AREA_YEARLY',
@@ -132,11 +134,18 @@ const _r = {
 
 const _crCaptions = ({
   dims,
+  selectProps,
   oneCaption=C.EMPTY,
   twoCaption=C.EMPTY
-}) => Array.isArray(dims)
-   ? dims.map(dim => dim.c || C.EMPTY)
-   : [ oneCaption, twoCaption ];
+}) => {  
+  if (_isArr(dims)) {
+    return dims.map(dim => dim.c || C.EMPTY);
+  }
+  if (_isArr(selectProps)) {
+    return selectProps.map(props => props.caption || C.EMPTY);
+  }
+  return [ oneCaption, twoCaption ];
+};
 
 const RouterOptions = {
   crOptions(dialogOption, { mapFrequency }={}){

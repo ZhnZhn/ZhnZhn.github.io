@@ -138,18 +138,6 @@ var _router = {
     return this.ES || this._loadES();
   },
 
-  get DialogEurostat() {
-    return this.getES().then(function (D) {
-      return D.Eurostat;
-    });
-  },
-
-  get DialogEurostat2() {
-    return this.getES().then(function (D) {
-      return D.Eurostat2;
-    });
-  },
-
   get DialogSelectN() {
     return this.getES().then(function (D) {
       return D.SelectN;

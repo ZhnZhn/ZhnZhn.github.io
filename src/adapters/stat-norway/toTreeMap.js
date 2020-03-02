@@ -41,7 +41,7 @@ const _fIsPoint = (dfT, hm, depth) => {
   return p => {
     if (dfT && p.label === dfT) {
       return false;
-    }
+    }    
     if ( hm[p.label].d !== depth) {
       return false;
     }

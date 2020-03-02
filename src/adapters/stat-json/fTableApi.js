@@ -59,10 +59,10 @@ const _checkSeriaCategory = (arr, { dfC, seriaType }) => {
 
 const fTableApi = (ROOT_URL) => ({
   getRequestUrl(option){
-    const { proxy='', metric, dfId, url } = option
-    , id = dfId || metric;
+    const { proxy='', dfId, url } = option;
+        
     if (url) { return url; }
-    return (option.url = `${proxy}${ROOT_URL}/${id}`);
+    return (option.url = `${proxy}${ROOT_URL}/${dfId}`);
   },
 
   crOptionFetch(option){

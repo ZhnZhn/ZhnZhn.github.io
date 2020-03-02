@@ -72,16 +72,14 @@ var fTableApi = function fTableApi(ROOT_URL) {
     getRequestUrl: function getRequestUrl(option) {
       var _option$proxy = option.proxy,
           proxy = _option$proxy === void 0 ? '' : _option$proxy,
-          metric = option.metric,
           dfId = option.dfId,
-          url = option.url,
-          id = dfId || metric;
+          url = option.url;
 
       if (url) {
         return url;
       }
 
-      return option.url = "" + proxy + ROOT_URL + "/" + id;
+      return option.url = "" + proxy + ROOT_URL + "/" + dfId;
     },
     crOptionFetch: function crOptionFetch(option) {
       var _option$items = option.items,

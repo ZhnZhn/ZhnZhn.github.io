@@ -31,6 +31,7 @@ const SEARCH = {
 };
 
 const DF_SOURCE = 'Unknown';
+const MAX_SOURCE_ID_LENGTH = 9;
 
 const _crSearchToken = (label) => {
   const _arr = (label || '').toString().split(',');
@@ -58,18 +59,6 @@ const _crSearchLink = (label, option) => {
     default:
       return '';
   }
-  /*
-  switch(option.browserType){
-    case 'NST': case 'NST_ALL':
-      return _crLink(_token, SEARCH.NST);
-    case 'SWS': case 'SWS_ALL':
-      return _crLink(_token, SEARCH.SWS);
-    case 'SFL':
-      return _crLink(_crToken(option), SEARCH.SFL);
-    default:
-      return '';
-  }
-  */
 };
 
 const _crDescr = ({ updated='', source=DF_SOURCE, label }, option) => {
@@ -120,6 +109,12 @@ const _getTimeDimension = (ds, timeId) => {
 
   return times;
 }
+
+const _crDataSource = ({ dataSource, dfId }) => dfId
+ && (''+dfId).length < MAX_SOURCE_ID_LENGTH
+   ? `${dataSource} (${dfId})`
+   : dataSource;
+
 
 const fnAdapter = {
   isYNumber, numberFormat, crId, roundBy,
@@ -183,7 +178,7 @@ const fnAdapter = {
       },
       isWithoutAdd: url ? false : true,
       //isWithoutAdd: true,
-      dataSource
+      dataSource: _crDataSource(option)
     };
   },
 

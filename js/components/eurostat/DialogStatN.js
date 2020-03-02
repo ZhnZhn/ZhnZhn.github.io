@@ -151,9 +151,12 @@ function (_Component) {
 
     _this._updateForDate = function (chartType) {
       _this.date = null;
-      var frequency = _this._items[1] ? _this.props.mapFrequency || MAP_FREQUENCY_DF : null,
-          mapDateDf = _this.props.mapDateDf,
-          dateConfig = frequency ? (0, _crDateConfig["default"])(frequency, mapDateDf) : (0, _crDateConfig["default"])('Y', mapDateDf);
+
+      var _this$props2 = _this.props,
+          mapFrequency = _this$props2.mapFrequency,
+          mapDateDf = _this$props2.mapDateDf,
+          _frequency = mapFrequency || MAP_FREQUENCY_DF,
+          dateConfig = (0, _crDateConfig["default"])(_frequency, mapDateDf);
 
       _this.setState((0, _extends2["default"])({
         isShowDate: true
@@ -260,19 +263,17 @@ function (_Component) {
         var id = conf.id,
             caption = conf.caption,
             options = conf.options,
-            rest = {
-          isShowLabels: isShowLabels,
-          caption: caption,
-          options: options
-        },
             _isShow = !_this.state[_crIsId(id)];
 
         return _react["default"].createElement(_DialogCell["default"].ShowHide, {
           key: id,
           isShow: _isShow
-        }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, (0, _extends2["default"])({}, rest, {
+        }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+          isShowLabels: isShowLabels,
+          caption: caption,
+          options: options,
           onSelect: _this._fSelect(index).bind((0, _assertThisInitialized2["default"])(_this))
-        })));
+        }));
       });
     };
 
@@ -332,11 +333,11 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this$props2 = this.props,
-        caption = _this$props2.caption,
-        isShow = _this$props2.isShow,
-        onShow = _this$props2.onShow,
-        onFront = _this$props2.onFront,
+    var _this$props3 = this.props,
+        caption = _this$props3.caption,
+        isShow = _this$props3.isShow,
+        onShow = _this$props3.onShow,
+        onFront = _this$props3.onFront,
         _this$state3 = this.state,
         chartType = _this$state3.chartType,
         isToolbar = _this$state3.isToolbar,

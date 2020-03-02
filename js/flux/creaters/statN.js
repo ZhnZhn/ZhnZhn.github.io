@@ -11,7 +11,6 @@ var _createrFns = _interopRequireDefault(require("./createrFns"));
 
 var crCaption = _createrFns["default"].crCaption,
     crItemKey = _createrFns["default"].crItemKey;
-var COUNTRY_CAPTION_DF = 'EU';
 
 var _toIds = function _toIds(_ref, items) {
   var dfId = _ref.dfId;
@@ -38,7 +37,6 @@ var createLoadOptions = function createLoadOptions(props, options) {
 
   var _props = props,
       loadId = _props.loadId,
-      group = _props.group,
       dataSource = _props.dataSource,
       _props$dfProps = _props.dfProps,
       dfProps = _props$dfProps === void 0 ? {} : _props$dfProps,
@@ -57,8 +55,6 @@ var createLoadOptions = function createLoadOptions(props, options) {
       selectOptions = _options.selectOptions,
       seriaType = chartType.value,
       zhCompType = chartType.compType,
-      _countryValue = items[0] ? items[0].value : COUNTRY_CAPTION_DF,
-      twoV = items[1] ? items[1].value : undefined,
       _crCaption = crCaption(items, titles),
       itemCaption = _crCaption.itemCaption,
       title = _crCaption.title,
@@ -69,11 +65,7 @@ var createLoadOptions = function createLoadOptions(props, options) {
 
   return (0, _extends2["default"])({}, dfProps, {}, dialogOptions, {
     _itemKey: _itemKey,
-    geo: _countryValue,
-    group: group,
-    metric: twoV,
     itemCaption: itemCaption,
-    alertGeo: itemCaption,
     loadId: loadId,
     title: title,
     subtitle: subtitle,
@@ -91,4 +83,4 @@ var createLoadOptions = function createLoadOptions(props, options) {
 
 var _default = createLoadOptions;
 exports["default"] = _default;
-//# sourceMappingURL=eurostatN.js.map
+//# sourceMappingURL=statN.js.map

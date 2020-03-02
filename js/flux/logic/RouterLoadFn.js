@@ -5,13 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _eurostat = _interopRequireDefault(require("../creaters/eurostat"));
-
-var _eurostat2 = _interopRequireDefault(require("../creaters/eurostat2"));
-
 var _selectN = _interopRequireDefault(require("../creaters/selectN"));
 
-var _eurostatN = _interopRequireDefault(require("../creaters/eurostatN"));
+var _statN = _interopRequireDefault(require("../creaters/statN"));
 
 var _type = _interopRequireDefault(require("../creaters/type3"));
 
@@ -40,10 +36,8 @@ var _r = {
   DialogType5A: _type3["default"],
   Futures3Dialog: _futures["default"],
   FuturesWikiDialog: _futuresWiki["default"],
-  DialogEurostat: _eurostat["default"],
-  DialogEurostat2: _eurostat2["default"],
   DialogSelectN: _selectN["default"],
-  DialogStatN: _eurostatN["default"],
+  DialogStatN: _statN["default"],
   UnDialog5: _un["default"]
 };
 var RouterLoadFn = {
