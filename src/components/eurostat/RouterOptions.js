@@ -133,18 +133,15 @@ const _r = {
 };
 
 const _crCaptions = ({
-  dims,
+  configs,  
   selectProps,
   oneCaption=C.EMPTY,
   twoCaption=C.EMPTY
-}) => {  
-  if (_isArr(dims)) {
-    return dims.map(dim => dim.c || C.EMPTY);
-  }
-  if (_isArr(selectProps)) {
-    return selectProps.map(props => props.caption || C.EMPTY);
-  }
-  return [ oneCaption, twoCaption ];
+}) => {
+  const _arr = configs || selectProps;
+  return _isArr(_arr)
+    ? _arr.map(item => item.caption || C.EMPTY)
+    : [ oneCaption, twoCaption ];
 };
 
 const RouterOptions = {

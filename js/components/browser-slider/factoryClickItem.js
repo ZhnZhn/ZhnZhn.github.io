@@ -5,9 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
-var conf = {
+var CONF = {
   dialogConf: true,
   dialogType: "DialogStatN",
   dialogProps: {
@@ -17,46 +19,23 @@ var conf = {
   }
 };
 
-var _toFirstUpperCase = function _toFirstUpperCase(str) {
-  if (str === void 0) {
-    str = '';
-  }
+var _crMetaUrl = function _crMetaUrl(_ref) {
+  var rootUrl = _ref.rootUrl,
+      id = _ref.id,
+      proxy = _ref.proxy;
 
-  return str.charAt(0).toUpperCase() + str.substr(1);
+  var _href = rootUrl + "/" + id;
+
+  return proxy ? "" + proxy + _href : _href;
 };
 
-var _getFrequencyAndDims = function _getFrequencyAndDims(json) {
-  var dims = [],
-      _json$variables = json.variables,
-      variables = _json$variables === void 0 ? [] : _json$variables;
-  var mapFrequency = 'Y';
-  var timeId;
-  variables.forEach(function (item) {
-    var code = item.code,
-        text = item.text,
-        time = item.time;
+var _crTitleAndCaption = function _crTitleAndCaption(dfProps) {
+  var _text = dfProps.text || '',
+      _caption = _text.length > 35 ? _text.substr(0, 35) + '...' : _text;
 
-    if (time) {
-      timeId = code;
-    }
-
-    if (code !== 'Tid') {
-      dims.push({
-        c: _toFirstUpperCase(text),
-        v: code
-      });
-    } else {
-      if (text === 'month') {
-        mapFrequency = 'M';
-      } else if (text === 'quarter') {
-        mapFrequency = 'K';
-      }
-    }
-  });
   return {
-    mapFrequency: mapFrequency,
-    dims: dims,
-    timeId: timeId
+    menuTitle: _text.substr(0, 27),
+    contFullCaption: dfProps.sP + ": " + _caption
   };
 };
 
@@ -67,55 +46,28 @@ var _fOnClickTable = function _fOnClickTable(dfProps) {
         proxy = dfProps.proxy,
         bT = dfProps.bT,
         lT = dfProps.lT,
-        sP = dfProps.sP,
         dU = dfProps.dU,
         noTime = dfProps.noTime,
         dS = dfProps.dS,
-        _href = rootUrl + "/" + id,
-        _url = proxy ? "" + proxy + _href : _href;
+        _metaUrl = _crMetaUrl(dfProps),
+        _conf = Object.assign({}, CONF, (0, _extends2["default"])({
+      type: bT + "_" + id
+    }, _crTitleAndCaption(dfProps)));
 
-    fetch(_url).then(function (res) {
-      var status = res.status,
-          statusText = res.statusText;
-
-      if (status >= 200 && status < 400) {
-        return res.json();
-      } else {
-        throw Error(statusText);
-      }
-    }).then(function (json) {
-      var _getFrequencyAndDims2 = _getFrequencyAndDims(json),
-          mapFrequency = _getFrequencyAndDims2.mapFrequency,
-          dims = _getFrequencyAndDims2.dims,
-          timeId = _getFrequencyAndDims2.timeId,
-          _json$title = json.title,
-          title = _json$title === void 0 ? '' : _json$title,
-          _title = title.length > 35 ? title.substr(0, 35) + '...' : title,
-          _conf = Object.assign({}, conf, {
-        type: bT + "_" + id,
-        menuTitle: title.substr(0, 27),
-        contFullCaption: sP + ": " + _title
-      });
-
-      Object.assign(_conf.dialogProps, {
+    Object.assign(_conf.dialogProps, {
+      loadId: lT,
+      descrUrl: dU,
+      dataSource: dS,
+      dfProps: {
+        metaUrl: _metaUrl,
         baseMeta: rootUrl,
-        loadId: lT,
-        mapFrequency: mapFrequency,
-        dims: dims,
-        timeId: timeId,
-        descrUrl: dU,
-        dataSource: dS,
-        dfProps: {
-          dfId: id
-        },
-        noTime: noTime,
-        proxy: proxy
-      });
-
-      _ComponentActions["default"].showDialog(bT + "_" + id, bT, _conf);
-    })["catch"](function (err) {
-      console.log(err.message);
+        dfId: id,
+        proxy: proxy,
+        noTime: noTime
+      }
     });
+
+    _ComponentActions["default"].showDialog(bT + "_" + id, bT, _conf);
   };
 };
 

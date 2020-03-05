@@ -17,6 +17,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _crDateConfig = _interopRequireDefault(require("./crDateConfig"));
 
+var _loadConfigs = _interopRequireDefault(require("./loadConfigs"));
+
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
 var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
@@ -26,8 +28,6 @@ var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorato
 var _SpinnerLoading = _interopRequireDefault(require("../zhn/SpinnerLoading"));
 
 var _RouterOptions = _interopRequireDefault(require("./RouterOptions"));
-
-var _loadDims = _interopRequireDefault(require("./loadDims"));
 
 var _ModalOptions = _interopRequireDefault(require("./ModalOptions"));
 
@@ -63,12 +63,6 @@ var _isOpenAndPrevLoadFailed = function _isOpenAndPrevLoadFailed(prevProps, prop
   return props !== prevProps && !prevProps.isShow && props.isShow && state.isLoadFailed;
 };
 
-var _fNotTimeDimension = function _fNotTimeDimension(timeId) {
-  return function (config) {
-    return config.id !== timeId;
-  };
-};
-
 var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
 /*#__PURE__*/
 function (_Component) {
@@ -97,64 +91,62 @@ function (_Component) {
       });
     };
 
-    _this._loadDims = function () {
-      var _this$props = _this.props,
-          proxy = _this$props.proxy,
-          baseMeta = _this$props.baseMeta,
-          dims = _this$props.dims,
-          timeId = _this$props.timeId,
-          _this$props$dfProps = _this$props.dfProps,
-          dfProps = _this$props$dfProps === void 0 ? {} : _this$props$dfProps,
-          noTime = _this$props.noTime,
-          dfId = dfProps.dfId;
-      (0, _loadDims["default"])({
-        id: dfId,
-        proxy: proxy,
-        baseMeta: baseMeta,
-        dims: dims,
-        noTime: noTime,
-        timeId: timeId
-      }).then(function (result) {
-        var configs = result.configs,
-            errMsg = result.errMsg;
+    _this._setConfigs = function (_ref2) {
+      var configs = _ref2.configs,
+          timeId = _ref2.timeId,
+          mF = _ref2.mapFrequency,
+          errMsg = _ref2.errMsg;
 
-        if (configs) {
-          //id
-          var _configs = configs.filter(_fNotTimeDimension(timeId));
+      if (configs) {
+        var _this$props = _this.props,
+            chartsType = _this$props.chartsType,
+            mapFrequency = _this$props.mapFrequency;
 
-          _this._selectOptions = _configs.map(function (config) {
+        _this.setState({
+          isLoading: false,
+          isLoadFailed: false,
+          timeId: timeId,
+          configs: configs,
+          mapFrequency: mF || mapFrequency,
+          selectOptions: configs.map(function (config) {
             return config.options;
-          });
+          }),
+          chartOptions: _RouterOptions["default"].crOptions({
+            configs: configs,
+            chartsType: chartsType
+          })
+        });
+      } else {
+        _this.setState({
+          isLoading: false,
+          isLoadFailed: true,
+          validationMessages: [errMsg]
+        });
+      }
+    };
 
-          _this.setState({
-            isLoading: false,
-            isLoadFailed: false,
-            configs: _configs,
-            captions: _configs.map(function (_ref2) {
-              var id = _ref2.id,
-                  caption = _ref2.caption;
-              return {
-                id: id,
-                caption: caption
-              };
-            })
-          });
-        } else {
-          _this.setState({
-            isLoading: false,
-            isLoadFailed: true,
-            validationMessages: [errMsg]
-          });
-        }
+    _this._loadDims = function () {
+      var _this$props2 = _this.props,
+          dims = _this$props2.dims,
+          proxy = _this$props2.proxy,
+          baseMeta = _this$props2.baseMeta,
+          dfProps = _this$props2.dfProps;
+      (0, _loadConfigs["default"])((0, _extends2["default"])({
+        dims: dims,
+        proxy: proxy,
+        baseMeta: baseMeta
+      }, dfProps)).then(_this._setConfigs)["catch"](function (err) {
+        _this._setConfigs({
+          errMsg: err.message
+        });
       });
     };
 
     _this._updateForDate = function (chartType) {
       _this.date = null;
 
-      var _this$props2 = _this.props,
-          mapFrequency = _this$props2.mapFrequency,
-          mapDateDf = _this$props2.mapDateDf,
+      var mapDateDf = _this.props.mapDateDf,
+          mapFrequency = _this.state.mapFrequency,
           _frequency = mapFrequency || MAP_FREQUENCY_DF,
           dateConfig = (0, _crDateConfig["default"])(_frequency, mapDateDf);
 
@@ -174,12 +166,18 @@ function (_Component) {
             dialogOptions = _assertThisInitialize.dialogOptions,
             colorComp = _assertThisInitialize.colorComp,
             date = _assertThisInitialize.date,
-            chartType = _this.state.chartType,
+            _this$state = _this.state,
+            timeId = _this$state.timeId,
+            chartType = _this$state.chartType,
+            selectOptions = _this$state.selectOptions,
             _ref3 = colorComp ? colorComp.getConf() : {},
             seriaColor = _ref3.seriaColor,
             seriaWidth = _ref3.seriaWidth,
             dateDefault = _this.state.dateDefault,
-            loadOpt = _this.props.loadFn(_this.props, {
+            _props = (0, _extends2["default"])({}, _this.props, {
+          timeId: timeId
+        }),
+            loadOpt = _this.props.loadFn(_props, {
           dialogOptions: dialogOptions,
           chartType: chartType,
           seriaColor: seriaColor,
@@ -188,7 +186,7 @@ function (_Component) {
           dateDefault: dateDefault,
           items: _items,
           titles: _this._titles,
-          selectOptions: _this._selectOptions
+          selectOptions: selectOptions
         });
 
         _this.props.onLoad(loadOpt);
@@ -201,11 +199,11 @@ function (_Component) {
 
     _this._crValidationMessages = function () {
       var msg = [],
-          _this$state = _this.state,
-          configs = _this$state.configs,
-          isLoadFailed = _this$state.isLoadFailed,
-          _this$state$chartType = _this$state.chartType,
-          chartType = _this$state$chartType === void 0 ? {} : _this$state$chartType,
+          _this$state2 = _this.state,
+          configs = _this$state2.configs,
+          isLoadFailed = _this$state2.isLoadFailed,
+          _this$state2$chartTyp = _this$state2.chartType,
+          chartType = _this$state2$chartTyp === void 0 ? {} : _this$state2$chartTyp,
           _isCategory = isCategory(chartType),
           dim = chartType.dim;
 
@@ -256,9 +254,9 @@ function (_Component) {
     };
 
     _this._renderSelectInputs = function () {
-      var _this$state2 = _this.state,
-          isShowLabels = _this$state2.isShowLabels,
-          configs = _this$state2.configs;
+      var _this$state3 = _this.state,
+          isShowLabels = _this$state3.isShowLabels,
+          configs = _this$state3.configs;
       return configs.map(function (conf, index) {
         var id = conf.id,
             caption = conf.caption,
@@ -287,10 +285,8 @@ function (_Component) {
       isToggle: true
     });
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
-    _this._chartOptions = _RouterOptions["default"].crOptions(props);
     _this._items = [];
     _this._titles = [];
-    _this._selectOptions = [];
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isLoading: true,
       isLoadFailed: false,
@@ -299,7 +295,10 @@ function (_Component) {
     }, (0, _crDateConfig["default"])('EMPTY'), {
       isOptions: false,
       isToggle: false,
-      captions: [] //chartType
+      configs: [],
+      selectOptions: [],
+      mapFrequency: props.mapFrequency,
+      chartOptions: _RouterOptions["default"].crOptions(props) //chartType
 
     });
     return _this;
@@ -338,20 +337,21 @@ function (_Component) {
         isShow = _this$props3.isShow,
         onShow = _this$props3.onShow,
         onFront = _this$props3.onFront,
-        _this$state3 = this.state,
-        chartType = _this$state3.chartType,
-        isToolbar = _this$state3.isToolbar,
-        isOptions = _this$state3.isOptions,
-        isToggle = _this$state3.isToggle,
-        isShowLabels = _this$state3.isShowLabels,
-        isLoading = _this$state3.isLoading,
-        isLoadFailed = _this$state3.isLoadFailed,
-        isShowChart = _this$state3.isShowChart,
-        isShowDate = _this$state3.isShowDate,
-        dateDefault = _this$state3.dateDefault,
-        dateOptions = _this$state3.dateOptions,
-        captions = _this$state3.captions,
-        validationMessages = _this$state3.validationMessages,
+        _this$state4 = this.state,
+        chartType = _this$state4.chartType,
+        isToolbar = _this$state4.isToolbar,
+        isOptions = _this$state4.isOptions,
+        isToggle = _this$state4.isToggle,
+        isShowLabels = _this$state4.isShowLabels,
+        isLoading = _this$state4.isLoading,
+        isLoadFailed = _this$state4.isLoadFailed,
+        isShowChart = _this$state4.isShowChart,
+        isShowDate = _this$state4.isShowDate,
+        dateDefault = _this$state4.dateDefault,
+        dateOptions = _this$state4.dateOptions,
+        configs = _this$state4.configs,
+        chartOptions = _this$state4.chartOptions,
+        validationMessages = _this$state4.validationMessages,
         _spinnerStyle = !isLoadFailed ? S.SPINNER_LOADING : (0, _extends2["default"])({}, S.SPINNER_LOADING, {}, S.SPINNER_FAILED);
 
     return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
@@ -371,7 +371,7 @@ function (_Component) {
       onClose: this._hideOptionsWithToolbar
     }), _react["default"].createElement(_ModalToggle["default"], {
       isShow: isToggle,
-      selectProps: captions,
+      selectProps: configs,
       isShowChart: isShowChart,
       isShowDate: isShowDate,
       crIsId: _crIsId,
@@ -385,7 +385,7 @@ function (_Component) {
       chartType: chartType,
       isShowLabels: isShowLabels,
       isShowChart: isShowChart,
-      chartOptions: this._chartOptions,
+      chartOptions: chartOptions,
       onSelectChart: this._hSelectChartType,
       onRegColor: this._onRegColor,
       isShowDate: isShowDate,

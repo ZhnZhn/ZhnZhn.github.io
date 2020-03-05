@@ -54,6 +54,7 @@ class Frame extends Component {
                     : fOnClickItem({
                          id: `${rootId}/${id}`,
                          ...dfProps,
+                         text,
                          proxy
                        })
              return (

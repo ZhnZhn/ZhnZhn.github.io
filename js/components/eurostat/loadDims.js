@@ -9,9 +9,11 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
+var _LoadGuard = _interopRequireDefault(require("../../utils/LoadGuard"));
+
+var _loadJson = _interopRequireDefault(require("./loadJson"));
+
 var MSG_STILL_LOADING = "Another dims are still loading";
-var MSG_403 = 'HTTP Code 403: Forbitten.\nMaybe, require API key.';
-var MSG_HTTP_CODE = 'HTTP Code';
 var C = {
   SELECTION_ALL: {
     selection: {
@@ -26,14 +28,6 @@ var C = {
       values: ["1"]
     }
   }
-};
-
-var _crUrl = function _crUrl(proxy, baseMeta, id) {
-  if (proxy) {
-    return "" + proxy + baseMeta + "/" + id;
-  }
-
-  return baseMeta + "/" + id;
 };
 
 var _crSelectDim = function _crSelectDim(code) {
@@ -81,72 +75,47 @@ var _crSelectOptions = function _crSelectOptions(ds, dim) {
   return arr;
 };
 
-var IS_LOADING = false;
-var URL_LOADING;
-var ID_TIMEOUT;
-
-var _fClearLoading = function _fClearLoading(url) {
-  return function () {
-    if (url === URL_LOADING) {
-      IS_LOADING = false;
-    }
+var _fNotTimeDimension = function _fNotTimeDimension(timeId) {
+  return function (config) {
+    return config.id !== timeId;
   };
 };
 
-var _markStartLoading = function _markStartLoading(url) {
-  URL_LOADING = url;
-  ID_TIMEOUT = setTimeout(_fClearLoading(url), 5000);
-  IS_LOADING = true;
+var _crConfigs = function _crConfigs(json, dims, timeId) {
+  var _ds = (0, _jsonstat["default"])(json).Dataset(0),
+      configs = dims.map(function (dim) {
+    return {
+      id: dim.v,
+      caption: dim.c,
+      options: _crSelectOptions(_ds, dim)
+    };
+  }).filter(_fNotTimeDimension(timeId));
+
+  return configs;
 };
 
-var _markStopLoading = function _markStopLoading() {
-  IS_LOADING = false;
-  clearTimeout(ID_TIMEOUT);
-};
+var guard = new _LoadGuard["default"]();
 
 var loadDims = function loadDims(_ref) {
-  var proxy = _ref.proxy,
-      baseMeta = _ref.baseMeta,
-      id = _ref.id,
-      dims = _ref.dims,
-      noTime = _ref.noTime;
+  var metaUrl = _ref.metaUrl,
+      _ref$dims = _ref.dims,
+      dims = _ref$dims === void 0 ? [] : _ref$dims,
+      noTime = _ref.noTime,
+      timeId = _ref.timeId;
 
-  if (!IS_LOADING) {
-    var _url = _crUrl(proxy, baseMeta, id),
-        _option = _crOption(dims, noTime);
+  if (!guard.isLoading) {
+    var _option = _crOption(dims, noTime);
 
-    _markStartLoading(_url);
+    guard.start(metaUrl);
+    return (0, _loadJson["default"])(metaUrl, _option).then(function (json) {
+      var configs = _crConfigs(json, dims, timeId);
 
-    return fetch(_url, _option).then(function (res) {
-      var status = res.status;
-
-      if (status >= 200 && status < 400) {
-        return res.json();
-      } else {
-        if (status === 403) {
-          throw Error(MSG_403);
-        }
-
-        throw Error(MSG_HTTP_CODE + ": " + status);
-      }
-    }).then(function (json) {
-      var _ds = (0, _jsonstat["default"])(json).Dataset(0),
-          configs = dims.map(function (dim) {
-        return {
-          id: dim.v,
-          caption: dim.c,
-          options: _crSelectOptions(_ds, dim)
-        };
-      });
-
-      _markStopLoading();
-
+      guard.stop();
       return {
         configs: configs
       };
     })["catch"](function (err) {
-      _markStopLoading();
-
+      guard.stop();
       return {
         errMsg: err.message
       };

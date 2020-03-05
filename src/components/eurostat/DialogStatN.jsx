@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 
 import crDateConfig from './crDateConfig'
 
+import loadConfigs from './loadConfigs'
+
 import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators';
 import SpinnerLoading from '../zhn/SpinnerLoading'
 
 import RouterOptions from './RouterOptions'
-import loadDims from './loadDims'
 import ModalOptions from './ModalOptions'
 import ModalToggle from './ModalToggle'
 import RowChart from './RowChart'
@@ -42,8 +43,6 @@ const _isOpenAndPrevLoadFailed = (
   && props.isShow
   && state.isLoadFailed;
 
-const _fNotTimeDimension = timeId => config => config.id !== timeId;
-
 @Decor.dialog
 class DialogStatN extends Component {
 
@@ -58,10 +57,8 @@ class DialogStatN extends Component {
       noDate: true, isOptions: true, isToggle: true
     })
     this._commandButtons = this._crCommandsWithLoad(this)
-    this._chartOptions = RouterOptions.crOptions(props)
     this._items = []
     this._titles = []
-    this._selectOptions = []
 
     this.state = {
       ...this._isWithInitialState(),
@@ -72,7 +69,10 @@ class DialogStatN extends Component {
       ...crDateConfig('EMPTY'),
       isOptions: false,
       isToggle: false,
-      captions: []
+      configs: [],
+      selectOptions: [],
+      mapFrequency: props.mapFrequency,
+      chartOptions: RouterOptions.crOptions(props)
       //chartType
     }
   }
@@ -115,33 +115,43 @@ class DialogStatN extends Component {
        .filter(v => v !== index)
   }
 
+  _setConfigs = ({
+    configs,
+    timeId,
+    mapFrequency:mF,
+    errMsg
+  }) => {
+    if (configs) {
+      const { chartsType, mapFrequency } = this.props;
+      this.setState({
+       isLoading: false,
+       isLoadFailed: false,
+       timeId,
+       configs,
+       mapFrequency: mF || mapFrequency,
+       selectOptions: configs
+         .map(config => config.options),
+       chartOptions: RouterOptions
+         .crOptions({ configs, chartsType })
+      })
+    } else {
+      this.setState({
+       isLoading: false,
+       isLoadFailed: true,
+       validationMessages: [errMsg]
+     })
+   }
+  }
+
  _loadDims = () => {
     const {
-      proxy, baseMeta,
-      dims, timeId, dfProps={}, noTime
-    } = this.props
-    , { dfId } = dfProps;
-    loadDims({ id: dfId, proxy, baseMeta, dims, noTime, timeId })
-      .then(result => {
-         const { configs, errMsg } = result;
-         if (configs) {
-           //id
-           const _configs = configs.filter(_fNotTimeDimension(timeId));
-           this._selectOptions = _configs
-             .map(config => config.options)
-           this.setState({
-              isLoading: false,
-              isLoadFailed: false,
-              configs: _configs,
-              captions: _configs.map(({id, caption}) => ({ id, caption }))
-            })
-        } else {
-          this.setState({
-            isLoading: false,
-            isLoadFailed: true,
-            validationMessages: [ errMsg ]
-          })
-        }
+      dims, proxy, baseMeta,
+      dfProps
+    } = this.props;
+    loadConfigs({ dims, proxy, baseMeta, ...dfProps })
+      .then(this._setConfigs)
+      .catch(err => {
+        this._setConfigs({ errMsg: err.message })
       })
   }
 
@@ -149,7 +159,8 @@ class DialogStatN extends Component {
   _updateForDate = (chartType) => {
     this.date = null;
 
-    const { mapFrequency, mapDateDf } = this.props
+    const { mapDateDf } = this.props
+    , { mapFrequency } = this.state
     , _frequency = mapFrequency || MAP_FREQUENCY_DF
     , dateConfig = crDateConfig(_frequency, mapDateDf);
 
@@ -169,19 +180,23 @@ class DialogStatN extends Component {
          colorComp,
          date
         } = this
-      , { chartType } = this.state
+      , {
+          timeId,
+          chartType, selectOptions
+        } = this.state
       , { seriaColor, seriaWidth } = colorComp
            ? colorComp.getConf()
            : {}
       , { dateDefault } = this.state
+      , _props = { ...this.props, timeId }
       , loadOpt = this.props.loadFn(
-        this.props, {
+         _props, {
           dialogOptions,
           chartType, seriaColor, seriaWidth,
           date, dateDefault,
           items: _items,
           titles: this._titles,
-          selectOptions: this._selectOptions
+          selectOptions: selectOptions
         }
       );
       this.props.onLoad(loadOpt)
@@ -268,7 +283,8 @@ class DialogStatN extends Component {
             isLoading, isLoadFailed,
             isShowChart,
             isShowDate, dateDefault, dateOptions,
-            captions,
+            configs,
+            chartOptions,
             validationMessages
           } = this.state
         , _spinnerStyle = !isLoadFailed
@@ -296,7 +312,7 @@ class DialogStatN extends Component {
          />
          <ModalToggle
            isShow={isToggle}
-           selectProps={captions}
+           selectProps={configs}
            isShowChart={isShowChart}
            isShowDate={isShowDate}
            crIsId={_crIsId}
@@ -320,7 +336,7 @@ class DialogStatN extends Component {
            chartType={chartType}
            isShowLabels={isShowLabels}
            isShowChart={isShowChart}
-           chartOptions={this._chartOptions}
+           chartOptions={chartOptions}
            onSelectChart={this._hSelectChartType}
            onRegColor={this._onRegColor}
            isShowDate={isShowDate}

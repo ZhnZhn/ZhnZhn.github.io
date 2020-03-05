@@ -81,6 +81,7 @@ function (_Component) {
             _onClick = type === 'l' ? onClickNext.bind(null, rootId + "/" + id, text, pageNumber) : fOnClickItem((0, _extends2["default"])({
           id: rootId + "/" + id
         }, dfProps, {
+          text: text,
           proxy: proxy
         }));
 
