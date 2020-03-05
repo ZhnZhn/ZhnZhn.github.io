@@ -36,6 +36,7 @@ var _crDimOptions = function _crDimOptions(_ref) {
   return _arr;
 };
 
+var TIME_IDS = ['Tid', 'Year', 'Month', 'Vuosi', 'Vuosineljännes'];
 var FREQUENCY_HM = {
   month: 'M',
   quarter: 'K'
@@ -52,7 +53,7 @@ var _crDimsConfig = function _crDimsConfig(json) {
         time = item.time,
         _text = item.text || '';
 
-    if (!time && code !== 'Tid') {
+    if (!time && TIME_IDS.indexOf(code) === -1) {
       dims.push({
         c: _toFirstUpperCase(_text),
         v: code,

@@ -23,6 +23,11 @@ const _crDimOptions = ({ values, valueTexts, code }) => {
 };
 
 
+const TIME_IDS = [
+  'Tid',
+  'Year','Month','Vuosi','Vuosineljännes'
+];
+
 const FREQUENCY_HM = {
   month: 'M',
   quarter: 'K'
@@ -35,7 +40,7 @@ const _crDimsConfig = (json) => {
   variables.forEach(item => {
     const { code, time } = item
     , _text = item.text || '';
-    if (!time && code !== 'Tid') {
+    if (!time && TIME_IDS.indexOf(code) === -1) {
      dims.push({
        c: _toFirstUpperCase(_text),
        v: code,
