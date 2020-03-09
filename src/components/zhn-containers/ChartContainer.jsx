@@ -23,7 +23,8 @@ const CL = {
 
 const CHILD_MARGIN = 36
     , INITIAL_WIDTH = 635
-    , MIN_WIDTH = 395
+    , MIN_WIDTH_WITH_TAB_MINI = 470
+    , MIN_WIDTH = 370
     , MAX_WIDTH = 1200
     , DELTA = 10;
 
@@ -56,12 +57,8 @@ const _toStyleWidth = width => width + 'px';
 
 const _crItemRefPropName = index => 'chart' + index;
 
-const _isInitialWidth = contWidth => contWidth
+const _isContWidth = contWidth => contWidth
  && contWidth <= INITIAL_WIDTH ;
-const _crMinWidth = ({ width }) => width !== INITIAL_WIDTH
-  ? width
-  : MIN_WIDTH;
-
 
 class ChartContainer extends Component {
 
@@ -71,16 +68,10 @@ class ChartContainer extends Component {
 
   constructor(props){
     super(props);
-    const { contWidth } = props
-    , _isWidth = _isInitialWidth(contWidth);
 
     this.childMargin = CHILD_MARGIN;
-    this._initialWidthStyle = _isWidth
-      ? contWidth
-      : has.initWidthStyle(INITIAL_WIDTH, MIN_WIDTH)
-    this._MIN_WIDTH = _isWidth
-      ? MIN_WIDTH
-      : _crMinWidth(this._initialWidthStyle)
+    this._initWidthProperties(props)
+
     this._MODEL = this._crModelMore()
 
     this._hSetActive = this._toggleChb.bind(this, true)
@@ -90,6 +81,18 @@ class ChartContainer extends Component {
       isMore: false,
       isCompareTo: false
     };
+  }
+
+  _initWidthProperties = (props) => {
+    const { contWidth } = props;
+
+    this._initialWidthStyle = _isContWidth(contWidth)
+      ? { width: contWidth }
+      : has.initWidthStyle(INITIAL_WIDTH, MIN_WIDTH)
+    this._INITIAL_WIDTH = this._initialWidthStyle.width
+    this._MIN_WIDTH = this._INITIAL_WIDTH > MIN_WIDTH_WITH_TAB_MINI
+      ? MIN_WIDTH_WITH_TAB_MINI
+      : MIN_WIDTH
   }
 
   _crModelMore = (isAdminMode) => {
@@ -103,7 +106,7 @@ class ChartContainer extends Component {
 
     return crModelMore({
       onMinWidth: this._resizeTo.bind(this, this._MIN_WIDTH),
-      onInitWidth: this._resizeTo.bind(this, INITIAL_WIDTH),
+      onInitWidth: this._resizeTo.bind(this, this._INITIAL_WIDTH),
       onPlusWidth: this._plusToWidth,
       onMinusWidth: this._minusToWidth,
       onFit: this._fitToWidth,
@@ -244,24 +247,22 @@ class ChartContainer extends Component {
      return style;
    }
 
-   _resizeTo = (width) => {
+   _resizeTo = (width) => {     
      this._getRootNodeStyle().width = _toStyleWidth(width);
      this._hResizeAfter(width)
    }
 
    _plusToWidth = () => {
      const style = this._getRootNodeStyle()
-         , w = _getWidth(style) + DELTA;
-     if (w < MAX_WIDTH) {
-        style.width = _toStyleWidth(w)
-     }
+     , w = _getWidth(style) + DELTA
+     , _width = w < MAX_WIDTH ? w : MAX_WIDTH;
+     style.width = _toStyleWidth(_width)
    }
    _minusToWidth = () => {
      const style = this._getRootNodeStyle()
-         , w = _getWidth(style) - DELTA;
-     if (w > MIN_WIDTH) {
-       style.width = _toStyleWidth(w)
-     }
+     , w = _getWidth(style) - DELTA
+     , _width = w > this._MIN_WIDTH ? w : this._MIN_WIDTH;
+     style.width = _toStyleWidth(_width)
    }
    _fitToWidth = () => {
      this._hResizeAfter(parseInt(

@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 //import PropTypes from "prop-types";
 
-import withTheme from '../hoc/withTheme'
+import ThemeContext from '../hoc/ThemeContext'
+
 
 const TH_ID = 'ELEMENT';
 
@@ -11,88 +12,33 @@ const CL = {
   ARROW: 'arrow-down'
 };
 
-class ButtonTab extends Component {
-  /*
-  static propTypes = {
-    className : PropTypes.string,
-    style : PropTypes.object,
-    isShow : PropTypes.bool,
-    notUpdatable : PropTypes.bool
-    caption : PropTypes.string,
-    onClick : PropTypes.func
-  }
-  */
+const _isBool = bool => typeof bool === 'boolean';
 
-  static defaultProps = {
-    isUpdatable: true
-  }
-
-  constructor(props){
-    super(props);
-    this.state = {
-      isShow: !!props.isShow
-    }
-  }
-
-  /*
-  componentDidUpdate(prevProps){
-     if (prevProps !== this.props) {
-       const _isShow = !!this.props.isShow;
-       if ( _isShow !== this.state.isShow ) {
-         this.setState({ isShow: _isShow })
-       }
-     }
-  }
-  */
-
-
-  UNSAFE_componentWillReceiveProps(nextProps){
-    if ( nextProps.isUpdatable &&
-         this.props !== nextProps) {
-        const _isShow = !!nextProps.isShow;
-        if ( _isShow !== this.state.isShow) {
-          this.setState({ isShow: _isShow })
-        }
-    }
-  }
-
-
-  _hClick = (evt) => {
-    const { isUpdatable, onClick } = this.props;
-    onClick(evt);
-    if (isUpdatable) {
-      this.setState(prevState => ({
-        isShow: !prevState.isShow
-      }));
-    }
-  }
-
-  render(){
-    const {
-      theme,
-      className, style,
-      caption, isMenu,
-      children
-    } = this.props
-    , TS = theme.getStyle(TH_ID)
-    , _rootClass = this.state.isShow
-         ? CL.BT_TAB__SHOW
-         : CL.BT_TAB
-    , _btClass = className
-         ? `${_rootClass} ${className}`
-         : _rootClass;
-    return (
-      <button
-        className={_btClass}
-        style={{...style, ...TS.BG}}
-        onClick={this._hClick}
-      >
-         {caption}
-         {isMenu && <span className={CL.ARROW} />}
-         {children}
-      </button>
-    );
-  }
+const ButtonTab = ({
+  isShow, isMenu,
+  className, style,
+  caption, children,
+  onClick
+}) => {
+  const theme = useContext(ThemeContext)
+  , TS = theme.getStyle(TH_ID)
+  , _rootClass = _isBool(isShow) & isShow
+       ? CL.BT_TAB__SHOW
+       : CL.BT_TAB
+  , _btClass = className
+       ? `${_rootClass} ${className}`
+       : _rootClass;
+  return (
+    <button
+      className={_btClass}
+      style={{...style, ...TS.BG}}
+      onClick={onClick}
+    >
+       {caption}
+       {isMenu && <span className={CL.ARROW} />}
+       {children}
+    </button>
+  );
 }
 
-export default withTheme(ButtonTab)
+export default ButtonTab

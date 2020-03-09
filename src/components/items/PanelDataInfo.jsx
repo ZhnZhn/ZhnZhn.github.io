@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
-import ButtonTab from '../zhn/ButtonTab';
-import InfoPart from '../zhn/InfoPart';
-import OpenClose2 from '../zhn/OpenClose2';
+import A from '../Comp'
 
 const CL_DESCR = 'info__descr';
 const C_DESCR_OPEN = '#1b2836';
@@ -20,6 +18,9 @@ const S = {
   ROOT_HIDE: {
     position: 'relative',
     display: 'none'
+  },
+  BT_CAPTION: {
+    left: 286
   },
   INFO_ROOT: {
     marginTop: 4
@@ -101,48 +102,49 @@ class PanelDataInfo extends Component {
 
     return (
        <div style={_rootStyle}>
-         <ButtonTab
+         <A.ButtonTab
+           style={S.BT_CAPTION}
            caption="Chart"
            onClick={onClickChart}
          />
-         <InfoPart
+         <A.InfoPart
             text={name}
             styleText={S.INFO_TEXT}
          />
-         <InfoPart
+         <A.InfoPart
             caption="From Date:"
             text={fromDate}
             styleCaption={S.INFO_CAPTION}
             styleText={S.INFO_TEXT}
          />
-         <InfoPart
+         <A.InfoPart
             caption="To Date:"
             text={toDate}
             rootStyle={S.INFO_ROOT}
             styleCaption={S.INFO_CAPTION}
             styleText={S.INFO_TEXT}
          />
-         <InfoPart
+         <A.InfoPart
             caption="Frequency:"
             text={frequency}
             styleCaption={S.INFO_CAPTION}
             styleText={S.INFO_TEXT}
          />
          {this._renderQuandlLink(database_code, dataset_code)}
-         { description && <OpenClose2
+         { description && <A.OpenClose2
               caption="Description"
               isInitialOpen={_isShortDescr(description)}
               style={S.DESCR_OC}
               fillOpen={C_DESCR_OPEN}
              >
-               <InfoPart
+               <A.InfoPart
                   text={description}
                   isHtml={true}
                   classText={CL_DESCR}
                   rootStyle={S.DESCR_ROOT}
                   styleText={S.DESCR_TEXT}
                />
-            </OpenClose2>
+            </A.OpenClose2>
          }
          {this._renderNativeLink(linkFn, item)}
        </div>

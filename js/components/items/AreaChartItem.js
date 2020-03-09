@@ -285,10 +285,11 @@ function (_Component) {
       });
     };
 
-    _this._createChartToolBar = function (config) {
+    _this._createChartToolBar = function (config, withoutAnimation) {
       var isShowToolbar = _this.state.isShowToolbar;
       return _react["default"].createElement(_ShowHide["default"], {
-        isShow: isShowToolbar
+        isShow: isShowToolbar,
+        withoutAnimation: withoutAnimation
       }, _react["default"].createElement(_ChartToolBar["default"], {
         style: S.TAB_DIV,
         chartId: _this._chartId,
@@ -410,7 +411,7 @@ function (_Component) {
       isShow: isOpen,
       withoutAnimation: withoutAnimation,
       style: S.SHOW_HIDE
-    }, isShowChart && this._createChartToolBar(config), _react["default"].createElement(_HighchartWrapper["default"], {
+    }, isShowChart && this._createChartToolBar(config, withoutAnimation), _react["default"].createElement(_HighchartWrapper["default"], {
       ref: this._refChartComp,
       isShow: isShowChart,
       rootStyle: S.WRAPPER,

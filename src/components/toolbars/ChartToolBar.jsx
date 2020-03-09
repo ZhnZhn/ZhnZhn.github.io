@@ -40,7 +40,7 @@ const S = {
   M_MINI: {
     top: 60,
     left: 290
-  },  
+  },
   BT_R: {
     left: 440,
     width: 36
@@ -157,6 +157,7 @@ class ChartToolbar extends Component {
       _btTabIndicator = (<ButtonTab
         style= {S.BT_IND}
         caption="Indicator"
+        isShow={isShowInd}
         isMenu={true}
         onClick={this._hShowInd}
       />)
@@ -185,7 +186,7 @@ class ChartToolbar extends Component {
       <ButtonTab
         style={S.BT_ADD}
         caption="Add"
-        isUpdatable={false}
+        //isUpdatable={false}
         onClick={onAddToWatch}
       />
     ) : null;
@@ -202,6 +203,7 @@ class ChartToolbar extends Component {
       _btTabMini = (<ButtonTab
          style= {S.BT_MINI}
          caption="Mini"
+         isShow={isShowMini}
          isMenu={true}
          onClick={this._hShowMini}
       />)
@@ -240,6 +242,7 @@ class ChartToolbar extends Component {
            <ButtonTab
              style={S.BT_FN}
              caption="Fn"
+             isShow={isShowFn}
              isMenu={true}
              onClick={this._hShowFn}
            />

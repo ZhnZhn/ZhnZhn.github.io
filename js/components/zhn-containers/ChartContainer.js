@@ -40,7 +40,8 @@ var CL = {
 };
 var CHILD_MARGIN = 36,
     INITIAL_WIDTH = 635,
-    MIN_WIDTH = 395,
+    MIN_WIDTH_WITH_TAB_MINI = 470,
+    MIN_WIDTH = 370,
     MAX_WIDTH = 1200,
     DELTA = 10;
 var S = {
@@ -84,13 +85,8 @@ var _crItemRefPropName = function _crItemRefPropName(index) {
   return 'chart' + index;
 };
 
-var _isInitialWidth = function _isInitialWidth(contWidth) {
+var _isContWidth = function _isContWidth(contWidth) {
   return contWidth && contWidth <= INITIAL_WIDTH;
-};
-
-var _crMinWidth = function _crMinWidth(_ref) {
-  var width = _ref.width;
-  return width !== INITIAL_WIDTH ? width : MIN_WIDTH;
 };
 
 var ChartContainer =
@@ -98,10 +94,19 @@ var ChartContainer =
 function (_Component) {
   (0, _inheritsLoose2["default"])(ChartContainer, _Component);
 
-  function ChartContainer(props) {
+  function ChartContainer(_props) {
     var _this;
 
-    _this = _Component.call(this, props) || this;
+    _this = _Component.call(this, _props) || this;
+
+    _this._initWidthProperties = function (props) {
+      var contWidth = props.contWidth;
+      _this._initialWidthStyle = _isContWidth(contWidth) ? {
+        width: contWidth
+      } : _has["default"].initWidthStyle(INITIAL_WIDTH, MIN_WIDTH);
+      _this._INITIAL_WIDTH = _this._initialWidthStyle.width;
+      _this._MIN_WIDTH = _this._INITIAL_WIDTH > MIN_WIDTH_WITH_TAB_MINI ? MIN_WIDTH_WITH_TAB_MINI : MIN_WIDTH;
+    };
 
     _this._crModelMore = function (isAdminMode) {
       var _this$props = _this.props,
@@ -111,7 +116,7 @@ function (_Component) {
       _this._isAdminMode = _isBool(isAdminMode) ? isAdminMode : store.isAdminMode();
       return (0, _ModelMore["default"])({
         onMinWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), _this._MIN_WIDTH),
-        onInitWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), INITIAL_WIDTH),
+        onInitWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), _this._INITIAL_WIDTH),
         onPlusWidth: _this._plusToWidth,
         onMinusWidth: _this._minusToWidth,
         onFit: _this._fitToWidth,
@@ -273,9 +278,9 @@ function (_Component) {
     _this._getRootNodeStyle = function () {
       var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
           _rootNode = _assertThisInitialize._rootNode,
-          _ref2 = _rootNode || {},
-          _ref2$style = _ref2.style,
-          style = _ref2$style === void 0 ? {} : _ref2$style;
+          _ref = _rootNode || {},
+          _ref$style = _ref.style,
+          style = _ref$style === void 0 ? {} : _ref$style;
 
       return style;
     };
@@ -288,20 +293,18 @@ function (_Component) {
 
     _this._plusToWidth = function () {
       var style = _this._getRootNodeStyle(),
-          w = _getWidth(style) + DELTA;
+          w = _getWidth(style) + DELTA,
+          _width = w < MAX_WIDTH ? w : MAX_WIDTH;
 
-      if (w < MAX_WIDTH) {
-        style.width = _toStyleWidth(w);
-      }
+      style.width = _toStyleWidth(_width);
     };
 
     _this._minusToWidth = function () {
       var style = _this._getRootNodeStyle(),
-          w = _getWidth(style) - DELTA;
+          w = _getWidth(style) - DELTA,
+          _width = w > _this._MIN_WIDTH ? w : _this._MIN_WIDTH;
 
-      if (w > MIN_WIDTH) {
-        style.width = _toStyleWidth(w);
-      }
+      style.width = _toStyleWidth(_width);
     };
 
     _this._fitToWidth = function () {
@@ -335,12 +338,10 @@ function (_Component) {
       return _this.spComp = node;
     };
 
-    var contWidth = props.contWidth,
-        _isWidth = _isInitialWidth(contWidth);
-
     _this.childMargin = CHILD_MARGIN;
-    _this._initialWidthStyle = _isWidth ? contWidth : _has["default"].initWidthStyle(INITIAL_WIDTH, MIN_WIDTH);
-    _this._MIN_WIDTH = _isWidth ? MIN_WIDTH : _crMinWidth(_this._initialWidthStyle);
+
+    _this._initWidthProperties(_props);
+
     _this._MODEL = _this._crModelMore();
     _this._hSetActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), true);
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);

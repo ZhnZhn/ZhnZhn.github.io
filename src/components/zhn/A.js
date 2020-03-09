@@ -7,6 +7,7 @@ import BrowserCaption from './BrowserCaption'
 import SvgHrzResize from './SvgHrzResize'
 import ButtonCircle from './ButtonCircle'
 import ButtonTab from './ButtonTab'
+import InfoPart from './InfoPart'
 import InputText from './InputText';
 import OpenClose from './OpenClose';
 import OpenClose2 from './OpenClose2';
@@ -26,6 +27,7 @@ const A = {
   SvgHrzResize,
   ButtonCircle,
   ButtonTab,
+  InfoPart,
   InputText,
   OpenClose,
   OpenClose2,

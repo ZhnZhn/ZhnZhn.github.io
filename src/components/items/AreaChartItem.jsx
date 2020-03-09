@@ -279,10 +279,13 @@ class AreaChartItem extends Component {
    })
  }
 
- _createChartToolBar = (config) => {
+ _createChartToolBar = (config, withoutAnimation) => {
    const { isShowToolbar } = this.state;
    return (
-         <ShowHide isShow={isShowToolbar}>
+         <ShowHide
+            isShow={isShowToolbar}
+            withoutAnimation={withoutAnimation}
+         >
            <ChartToolBar
              style={S.TAB_DIV}
              chartId={this._chartId}
@@ -346,7 +349,7 @@ class AreaChartItem extends Component {
            withoutAnimation={withoutAnimation}
            style={S.SHOW_HIDE}
         >
-           {isShowChart && this._createChartToolBar(config)}
+           {isShowChart && this._createChartToolBar(config, withoutAnimation)}
            <HighchartWrapper
               ref={this._refChartComp}
               isShow={isShowChart}

@@ -13,11 +13,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNativeLink"));
 
-var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
-
-var _InfoPart = _interopRequireDefault(require("../zhn/InfoPart"));
-
-var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose2"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var CL_DESCR = 'info__descr';
 var C_DESCR_OPEN = '#1b2836';
@@ -32,6 +28,9 @@ var S = {
   ROOT_HIDE: {
     position: 'relative',
     display: 'none'
+  },
+  BT_CAPTION: {
+    left: 286
   },
   INFO_ROOT: {
     marginTop: 4
@@ -139,34 +138,35 @@ function (_Component) {
 
     return _react["default"].createElement("div", {
       style: _rootStyle
-    }, _react["default"].createElement(_ButtonTab["default"], {
+    }, _react["default"].createElement(_Comp["default"].ButtonTab, {
+      style: S.BT_CAPTION,
       caption: "Chart",
       onClick: onClickChart
-    }), _react["default"].createElement(_InfoPart["default"], {
+    }), _react["default"].createElement(_Comp["default"].InfoPart, {
       text: name,
       styleText: S.INFO_TEXT
-    }), _react["default"].createElement(_InfoPart["default"], {
+    }), _react["default"].createElement(_Comp["default"].InfoPart, {
       caption: "From Date:",
       text: fromDate,
       styleCaption: S.INFO_CAPTION,
       styleText: S.INFO_TEXT
-    }), _react["default"].createElement(_InfoPart["default"], {
+    }), _react["default"].createElement(_Comp["default"].InfoPart, {
       caption: "To Date:",
       text: toDate,
       rootStyle: S.INFO_ROOT,
       styleCaption: S.INFO_CAPTION,
       styleText: S.INFO_TEXT
-    }), _react["default"].createElement(_InfoPart["default"], {
+    }), _react["default"].createElement(_Comp["default"].InfoPart, {
       caption: "Frequency:",
       text: frequency,
       styleCaption: S.INFO_CAPTION,
       styleText: S.INFO_TEXT
-    }), this._renderQuandlLink(database_code, dataset_code), description && _react["default"].createElement(_OpenClose["default"], {
+    }), this._renderQuandlLink(database_code, dataset_code), description && _react["default"].createElement(_Comp["default"].OpenClose2, {
       caption: "Description",
       isInitialOpen: _isShortDescr(description),
       style: S.DESCR_OC,
       fillOpen: C_DESCR_OPEN
-    }, _react["default"].createElement(_InfoPart["default"], {
+    }, _react["default"].createElement(_Comp["default"].InfoPart, {
       text: description,
       isHtml: true,
       classText: CL_DESCR,

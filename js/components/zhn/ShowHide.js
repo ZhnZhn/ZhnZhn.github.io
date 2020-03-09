@@ -39,6 +39,7 @@ var ShowHide = function ShowHide(_ref) {
 /*
 ShowHide.propTypes = {
   isShow: PropTypes.bool,
+  withoutAnimation: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
   children: PropTypes.oneOfType[

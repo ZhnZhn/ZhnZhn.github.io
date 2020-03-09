@@ -11,23 +11,27 @@ const S = {
     display : 'inline-block',
     backgroundColor : '#1b2836',
     color : 'gray',
-    paddingLeft : '10px',
-    paddingRight : '10px',
-    paddingTop : '6px',
-    paddingBottom : '6px',
-    borderTopLeftRadius : '8px',
-    borderTopRightRadius : '8px',
+    paddingLeft : 10,
+    paddingRight : 10,
+    paddingTop : 6,
+    paddingBottom : 6,
+    borderTopLeftRadius : 8,
+    borderTopRightRadius : 8,
     cursor : 'pointer',
 
     fontWeight : 'bold',
-    border: '2px solid gray',
+    borderTop: '2px solid gray',
+    borderLeft: '2px solid gray',
+    borderRight: '2px solid gray',
     borderBottom : 'none',
 
   },
   SELECTED : {
-    borderColor : 'rgba(164, 135, 212, 1)',
-    color : 'rgba(164, 135, 212, 1)'
-  }
+    borderTop: '2px solid #a487d4',
+    borderLeft: '2px solid #a487d4',
+    borderRight: '2px solid #a487d4',
+    color : '#a487d4'
+  }  
 }
 
 
@@ -37,7 +41,7 @@ const Tab = ({ theme, title, isSelected, onClick }) => {
                ? S.SELECTED : null;
     return (
        <li
-          style={{ ...S.LI, ...TS.BG, ..._selectedStyle }}
+           style={{ ...S.LI, ...TS.BG, ..._selectedStyle }}
           onClick={onClick}
        >
           <span>{title}</span>

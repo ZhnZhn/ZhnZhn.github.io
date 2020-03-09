@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
+
 import A from '../Comp'
 import ItemHeader from './ItemHeader'
 import PanelDataInfo from './PanelDataInfo';

@@ -23,6 +23,8 @@ var _ButtonCircle = _interopRequireDefault(require("./ButtonCircle"));
 
 var _ButtonTab = _interopRequireDefault(require("./ButtonTab"));
 
+var _InfoPart = _interopRequireDefault(require("./InfoPart"));
+
 var _InputText = _interopRequireDefault(require("./InputText"));
 
 var _OpenClose = _interopRequireDefault(require("./OpenClose"));
@@ -49,6 +51,7 @@ var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   SvgHrzResize: _SvgHrzResize["default"],
   ButtonCircle: _ButtonCircle["default"],
   ButtonTab: _ButtonTab["default"],
+  InfoPart: _InfoPart["default"],
   InputText: _InputText["default"],
   OpenClose: _OpenClose["default"],
   OpenClose2: _OpenClose2["default"],

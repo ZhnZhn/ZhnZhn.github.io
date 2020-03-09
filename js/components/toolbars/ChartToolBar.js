@@ -211,6 +211,7 @@ function (_Component) {
       _btTabIndicator = _react["default"].createElement(_ButtonTab["default"], {
         style: S.BT_IND,
         caption: "Indicator",
+        isShow: isShowInd,
         isMenu: true,
         onClick: this._hShowInd
       });
@@ -236,8 +237,8 @@ function (_Component) {
 
     var _btAdd = !isWithoutAdd ? _react["default"].createElement(_ButtonTab["default"], {
       style: S.BT_ADD,
-      caption: "Add",
-      isUpdatable: false,
+      caption: "Add" //isUpdatable={false}
+      ,
       onClick: onAddToWatch
     }) : null;
 
@@ -252,6 +253,7 @@ function (_Component) {
       _btTabMini = _react["default"].createElement(_ButtonTab["default"], {
         style: S.BT_MINI,
         caption: "Mini",
+        isShow: isShowMini,
         isMenu: true,
         onClick: this._hShowMini
       });
@@ -284,6 +286,7 @@ function (_Component) {
     }, _btTabIndicator, _btLegend, _react["default"].createElement(_ButtonTab["default"], {
       style: S.BT_FN,
       caption: "Fn",
+      isShow: isShowFn,
       isMenu: true,
       onClick: this._hShowFn
     }), _btAdd, _btInfo, _btTabMini, _btTabMini && _react["default"].createElement(_ButtonTab["default"], {
