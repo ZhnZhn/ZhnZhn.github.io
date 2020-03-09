@@ -13,8 +13,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var CL = "progress-line";
 var T = {
-  WIDTH: 'width 500ms ease-out',
-  OPACITY: 'opacity 400ms linear'
+  WIDTH: 'width 350ms linear',
+  OPACITY: 'opacity 250ms linear'
 };
 
 var _crStyle = function _crStyle(backgroundColor, opacity, width, transition) {

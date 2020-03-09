@@ -17,6 +17,7 @@ var C = {
   LOADING: '#2f7ed8',
   FAILED: '#ed5813'
 };
+var COMPLETE_TIMEOUT_MLS = 450;
 
 var ProgressLoading =
 /*#__PURE__*/
@@ -45,10 +46,12 @@ function (_Component) {
           color: C.LOADING
         });
       } else if (actionType === ACTIONS.LOADING_COMPLETE) {
-        _this.setState({
-          completed: 100,
-          color: C.LOADING
-        });
+        setTimeout(function () {
+          return _this.setState({
+            completed: 100,
+            color: C.LOADING
+          });
+        }, COMPLETE_TIMEOUT_MLS);
       } else if (actionType === ACTIONS.LOADING_FAILED) {
         _this.setState({
           completed: 100,

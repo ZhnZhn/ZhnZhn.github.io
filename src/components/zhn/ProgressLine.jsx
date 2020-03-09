@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 const CL = "progress-line";
 
-const T = {
-  WIDTH: 'width 500ms ease-out',
-  OPACITY: 'opacity 400ms linear'
+const T = {  
+  WIDTH: 'width 350ms linear',
+  OPACITY: 'opacity 250ms linear'
 };
 
 const _crStyle = (backgroundColor, opacity, width, transition) => ({

@@ -7,6 +7,8 @@ const C = {
   FAILED : '#ed5813'
 };
 
+const COMPLETE_TIMEOUT_MLS = 450;
+
 class ProgressLoading extends Component {
   state = {
     completed: 0,
@@ -25,7 +27,9 @@ class ProgressLoading extends Component {
       if (actionType === ACTIONS.LOADING){
         this.setState({ completed: 35, color: C.LOADING })
       } else if (actionType === ACTIONS.LOADING_COMPLETE){
-        this.setState({ completed: 100, color: C.LOADING })
+        setTimeout(
+          () => this.setState({ completed: 100, color: C.LOADING })
+        , COMPLETE_TIMEOUT_MLS)
       } else if (actionType === ACTIONS.LOADING_FAILED){
         this.setState({ completed: 100, color: C.FAILED })
       }
