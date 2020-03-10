@@ -56,7 +56,7 @@ var DataProviders = function DataProviders(_ref) {
       ocCaptionStyle = _ref.ocCaptionStyle;
   return _react["default"].createElement(_OpenClose["default"], {
     isClose: isClose,
-    caption: "Data Providers (All 21):",
+    caption: "Data Providers (All 20):",
     captionStyle: ocCaptionStyle,
     rootStyle: (0, _extends2["default"])({}, _About["default"].LINE_HEIGHT, {}, _About["default"].P_BOTTOM),
     childStyle: ST.ROOT_CHILD,
@@ -83,9 +83,7 @@ var DataProviders = function DataProviders(_ref) {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].Fmp, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
-  }, _react["default"].createElement(_ProviderLinks["default"].CryptoCompare, null)), _react["default"].createElement("span", {
-    style: _About["default"].PROVIDER
-  }, _react["default"].createElement(_ProviderLinks["default"].Cmc, null))), _react["default"].createElement(_OpenClose["default"], {
+  }, _react["default"].createElement(_ProviderLinks["default"].CryptoCompare, null))), _react["default"].createElement(_OpenClose["default"], {
     caption: "(8) Required API key:",
     captionStyle: ocCaptionStyle,
     rootStyle: ST.OPEN_CLOSE,

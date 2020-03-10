@@ -10,7 +10,7 @@ const {
   EuroStat, StatNorway, StatSweden, StatFinland,
   Insee,
   AlphaVantage, Barchart, Intrinio,
-  Crc, Cmc,
+  Crc,
   Iex, Wtd, Fmp,
   Bea, Bls, Eia
 } = Adapter;
@@ -42,9 +42,7 @@ const LoadImpl = {
   Fmp: f({ ...Fmp}),
   Intrinio: f({ ...Intrinio }),
 
-
   Crc: f({ ...Crc}),
-  Cmc: f({ ...Cmc}),
 
   Insee: f({
     fnFetch: fetchTxt,

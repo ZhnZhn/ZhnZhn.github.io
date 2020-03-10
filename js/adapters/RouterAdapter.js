@@ -45,8 +45,7 @@ var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
 
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 
-var _Cmc = _interopRequireDefault(require("./coin-market-cap/Cmc"));
-
+//import Cmc from './coin-market-cap/Cmc'
 var RouterAdapter = {
   Quandl: _Quandl["default"],
   DbNomics: _DbNomics["default"],
@@ -67,8 +66,8 @@ var RouterAdapter = {
   Bls: _Bls["default"],
   Eia: _Eia["default"],
   Intrinio: _Intrinio["default"],
-  Crc: _Crc["default"],
-  Cmc: _Cmc["default"]
+  Crc: _Crc["default"] //Cmc
+
 };
 var _default = RouterAdapter;
 exports["default"] = _default;

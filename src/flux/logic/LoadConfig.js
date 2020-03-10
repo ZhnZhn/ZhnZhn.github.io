@@ -32,8 +32,7 @@ const LoadConfig = {
   [LT.EIA]: LoadImpl.Eia,
   [LT.INTR]: LoadImpl.Intrinio,
 
-  [LT.CRC]: LoadImpl.Crc,
-  [LT.CMC]: LoadImpl.Cmc,
+  [LT.CRC]: LoadImpl.Crc,  
 
   [LT.FS]: LoadImpl.Insee,
   [LT.UN]: LoadImpl.UnComtrade,

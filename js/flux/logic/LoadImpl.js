@@ -27,7 +27,6 @@ var Quandl = _RouterAdapter["default"].Quandl,
     Barchart = _RouterAdapter["default"].Barchart,
     Intrinio = _RouterAdapter["default"].Intrinio,
     Crc = _RouterAdapter["default"].Crc,
-    Cmc = _RouterAdapter["default"].Cmc,
     Iex = _RouterAdapter["default"].Iex,
     Wtd = _RouterAdapter["default"].Wtd,
     Fmp = _RouterAdapter["default"].Fmp,
@@ -56,7 +55,6 @@ var LoadImpl = {
   Fmp: (0, _loadItem["default"])((0, _extends2["default"])({}, Fmp)),
   Intrinio: (0, _loadItem["default"])((0, _extends2["default"])({}, Intrinio)),
   Crc: (0, _loadItem["default"])((0, _extends2["default"])({}, Crc)),
-  Cmc: (0, _loadItem["default"])((0, _extends2["default"])({}, Cmc)),
   Insee: (0, _loadItem["default"])((0, _extends2["default"])({
     fnFetch: _fnFetch.fetchTxt
   }, Insee)),

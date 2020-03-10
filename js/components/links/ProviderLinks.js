@@ -16,22 +16,14 @@ var S = {
   ORANGE: {
     color: "#e05927"
   },
-
-  /*
-  SUNNY: {
-    color: "#ffa200",
-  },
-  */
   DARK_GREEN: {
-    //color: '#abd9bf'
-    //color: '#4f7061'
     color: '#12323d'
   },
   COMPARE: {
     color: '#49d87c'
   }
 };
-var LINK_CONFIGS = [["Quandl", "Quandl", "https://www.quandl.com/", S.ORANGE], ["DbNomics", "DB NOMICS", "https://db.nomics.world/", S.DARK_GREEN], ["Iex", "IEX Cloud", "https://iexcloud.io/"], ["Fmp", "Financial Modeling Prep", "https://financialmodelingprep.com"], ["Cmc", "CoinMarketCap", "https://coinmarketcap.com/"], ["Barchart", "Barchart Market Data", "https://www.barchartmarketdata.com"], ["AlphaVantage", "Alpha Vantage", "https://www.alphavantage.co"], ["Wtd", "Wordl Trading Data", "https://www.worldtradingdata.com/"], ["Eurostat", "Eurostat", "http://ec.europa.eu/eurostat"], ["UnComtrade", "UN Comtrade", "https://comtrade.un.org"], ["WorldBank", "World Bank", "https://data.worldbank.org/"], ["FaoStat", "FAOSTAT", "http://www.fao.org/faostat/en/#data"], ["Bea", "U.S. Bureau of Economic Analysis", "https://www.bea.gov/index.htm"], ["Bsl", "U.S. Bureau of Labor Statistics", "https://www.bls.gov/home.htm"], ["Eia", "U.S. EIA", "https://www.eia.gov/"], ["Intrinio", 'Intrinio', "https://intrinio.com"], ["Insee", "Insee: France Statistics", "https://www.insee.fr/en/accueil"], ["StatNorway", "Statistics Norway", "https://www.ssb.no/en"], ["StatSweden", "Statistics Sweden", "https://www.scb.se/en/"], ["StatFinland", "Statistics Finland", "https://www.stat.fi/index_en.html"]];
+var LINK_CONFIGS = [["Quandl", "Quandl", "https://www.quandl.com/", S.ORANGE], ["DbNomics", "DB NOMICS", "https://db.nomics.world/", S.DARK_GREEN], ["Iex", "IEX Cloud", "https://iexcloud.io/"], ["Fmp", "Financial Modeling Prep", "https://financialmodelingprep.com"], ["Barchart", "Barchart Market Data", "https://www.barchartmarketdata.com"], ["AlphaVantage", "Alpha Vantage", "https://www.alphavantage.co"], ["Wtd", "Wordl Trading Data", "https://www.worldtradingdata.com/"], ["Eurostat", "Eurostat", "http://ec.europa.eu/eurostat"], ["UnComtrade", "UN Comtrade", "https://comtrade.un.org"], ["WorldBank", "World Bank", "https://data.worldbank.org/"], ["FaoStat", "FAOSTAT", "http://www.fao.org/faostat/en/#data"], ["Bea", "U.S. Bureau of Economic Analysis", "https://www.bea.gov/index.htm"], ["Bsl", "U.S. Bureau of Labor Statistics", "https://www.bls.gov/home.htm"], ["Eia", "U.S. EIA", "https://www.eia.gov/"], ["Intrinio", 'Intrinio', "https://intrinio.com"], ["Insee", "Insee: France Statistics", "https://www.insee.fr/en/accueil"], ["StatNorway", "Statistics Norway", "https://www.ssb.no/en"], ["StatSweden", "Statistics Sweden", "https://www.scb.se/en/"], ["StatFinland", "Statistics Finland", "https://www.stat.fi/index_en.html"]];
 
 var _crLinkProps = function _crLinkProps(title, href, dfStyle) {
   return {
