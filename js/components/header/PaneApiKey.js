@@ -7,6 +7,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -21,6 +23,12 @@ var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 
 //import PropTypes from 'prop-types'
 var MAX_KEY = 9;
+var S = {
+  BT_SET: {
+    marginLeft: 8,
+    marginRight: 8
+  }
+};
 
 var PaneApiKey =
 /*#__PURE__*/
@@ -43,14 +51,11 @@ function (_Component) {
     _this = _Component.call(this, props) || this;
 
     _this._hSetAll = function () {
-      var onClose = _this.props.onClose;
       var i = 1;
 
       for (; i < MAX_KEY; i++) {
         _this['_setKey' + i](_this['iComp' + i].getValue());
       }
-
-      onClose();
     };
 
     _this._hClearAll = function () {
@@ -184,13 +189,13 @@ function (_Component) {
       btStyle: btStyle,
       onClose: onClose
     }, _react["default"].createElement(_FlatButton["default"], {
-      caption: "SET ALL & CLOSE",
-      isPrimary: true,
-      onClick: this._hSetAll
-    }), _react["default"].createElement(_FlatButton["default"], {
       rootStyle: btStyle,
       caption: "CLEAR ALL",
       onClick: this._hClearAll
+    }), _react["default"].createElement(_FlatButton["default"], {
+      rootStyle: (0, _extends2["default"])({}, btStyle, {}, S.BT_SET),
+      caption: "SET ALL",
+      onClick: this._hSetAll
     })));
   };
 

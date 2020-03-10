@@ -7,6 +7,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -24,6 +26,11 @@ var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 
 //import PropTypes from 'prop-types'
+var S = {
+  BT_PROXY: {
+    marginRight: 8
+  }
+};
 var UI_THEME_OPTIONS = [{
   caption: 'Dark',
   value: 'GREY'
@@ -160,8 +167,8 @@ function (_Component) {
       btStyle: btStyle,
       onClose: onClose
     }, _react["default"].createElement(_FlatButton["default"], {
+      rootStyle: (0, _extends2["default"])({}, btStyle, {}, S.BT_PROXY),
       caption: "SET PROXY",
-      isPrimary: true,
       onClick: this._hSetProxy
     })));
   };

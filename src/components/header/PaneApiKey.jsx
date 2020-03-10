@@ -9,6 +9,13 @@ import RowButtons from './RowButtons'
 
 const MAX_KEY = 9;
 
+const S = {
+  BT_SET: {
+    marginLeft: 8,
+    marginRight: 8
+  }
+};
+
 class PaneApiKey extends Component {
   /*
   static propTypes = {
@@ -31,15 +38,11 @@ class PaneApiKey extends Component {
     }
   }
 
-  _hSetAll = () => {
-    const { onClose } = this.props;
-
+  _hSetAll = () => {    
     let i = 1;
     for(; i<MAX_KEY; i++) {
       this['_setKey'+i](this['iComp'+i].getValue())
     }
-
-    onClose()
   }
 
   _hClearAll = () => {
@@ -141,14 +144,14 @@ class PaneApiKey extends Component {
         />
         <RowButtons btStyle={btStyle} onClose={onClose}>
           <FlatButton
-            caption="SET ALL & CLOSE"
-            isPrimary={true}
-            onClick={this._hSetAll}
-          />
-          <FlatButton
             rootStyle={btStyle}
             caption="CLEAR ALL"
             onClick={this._hClearAll}
+          />
+          <FlatButton
+            rootStyle={{...btStyle, ...S.BT_SET}}
+            caption="SET ALL"
+            onClick={this._hSetAll}
           />
         </RowButtons>
       </div>
