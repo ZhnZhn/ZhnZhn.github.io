@@ -1,1 +1,36 @@
-{"version":3,"sources":["../../../src/adapters/db-nomics/DbNomicsAdapter.js"],"names":["crData","fnAdapter","crTitle","crConfigOption","DbNomicsAdapter","toConfig","json","option","seriaColor","title","subtitle","data","seria","splineSeria","color","toSeria","config","area2Config","addSeries","addMinMax","add","toSeries","series"],"mappings":";;;;;;;;;AAAA;;AAEA;;IAGEA,M,GAGEC,qB,CAHFD,M;IACAE,O,GAEED,qB,CAFFC,O;IACAC,c,GACEF,qB,CADFE,c;AAGF,IAAMC,eAAe,GAAG;AACtBC,EAAAA,QADsB,oBACbC,IADa,EACPC,MADO,EACA;AACd,QACJC,UADI,GAEFD,MAFE,CACJC,UADI;AAAA,mBAGkBN,OAAO,CAACK,MAAD,EAASD,IAAT,CAHzB;AAAA,QAGFG,KAHE,YAGFA,KAHE;AAAA,QAGKC,QAHL,YAGKA,QAHL;AAAA,QAIJC,IAJI,GAIGX,MAAM,CAACM,IAAD,CAJT;AAAA,QAKJM,KALI,GAKI,iCACLC,WADK,CACO;AACXC,MAAAA,KAAK,EAAEN,UADI;AAEXG,MAAAA,IAAI,EAAJA;AAFW,KADP,EAKLI,OALK,EALJ;AAAA,QAWJC,MAXI,GAWK,iCACPC,WADO,CACKR,KADL,EACYC,QADZ,EAEPQ,SAFO,CAEGN,KAFH,EAGPO,SAHO,CAGGR,IAHH,EAGSJ,MAHT,EAIPa,GAJO,+BAKJjB,cAAc,CAAC;AAAEG,MAAAA,IAAI,EAAJA,IAAF;AAAQC,MAAAA,MAAM,EAANA,MAAR;AAAgBI,MAAAA,IAAI,EAAJA;AAAhB,KAAD,CALV,GAOPN,QAPO,EAXL;;AAoBN,WAAO;AAAEW,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAvBqB;AAyBtBK,EAAAA,QAzBsB,oBAyBbf,IAzBa,EAyBPC,MAzBO,EAyBA;AAAA,gCACDH,eAAe,CAACC,QAAhB,CAAyBC,IAAzB,EAA+BC,MAA/B,CADC;AAAA,QACZS,MADY,yBACZA,MADY;;AAEpB,WAAOA,MAAM,CAACM,MAAP,CAAc,CAAd,CAAP;AACD;AA5BqB,CAAxB;eA+BelB,e","sourcesContent":["import Builder from '../../charts/ConfigBuilder';\r\n\r\nimport fnAdapter from './fnAdapter';\r\n\r\nconst {\r\n  crData,\r\n  crTitle,\r\n  crConfigOption\r\n} = fnAdapter;\r\n\r\nconst DbNomicsAdapter = {\r\n  toConfig(json, option){\r\n    const {\r\n      seriaColor\r\n    } = option\r\n    , { title, subtitle } = crTitle(option, json)\r\n    , data = crData(json)\r\n    , seria = Builder()\r\n        .splineSeria({\r\n          color: seriaColor,\r\n          data\r\n        })\r\n        .toSeria()\r\n    , config = Builder()\r\n       .area2Config(title, subtitle)\r\n       .addSeries(seria)       \r\n       .addMinMax(data, option)\r\n       .add({\r\n        ...crConfigOption({ json, option, data })\r\n       })\r\n       .toConfig();\r\n\r\n    return { config };\r\n  },\r\n\r\n  toSeries(json, option){\r\n    const { config } = DbNomicsAdapter.toConfig(json, option);\r\n    return config.series[0];\r\n  }\r\n}\r\n\r\nexport default DbNomicsAdapter\r\n"],"file":"DbNomicsAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/db-nomics/DbNomicsAdapter.js"
+ ],
+ "file": "../../../src/adapters/db-nomics/DbNomicsAdapter.js",
+ "names": [
+  "crData",
+  "fnAdapter",
+  "crTitle",
+  "crConfigOption",
+  "DbNomicsAdapter",
+  "toConfig",
+  "json",
+  "option",
+  "seriaColor",
+  "seriaType",
+  "title",
+  "subtitle",
+  "data",
+  "seria",
+  "splineSeria",
+  "color",
+  "type",
+  "toLowerCase",
+  "toSeria",
+  "config",
+  "area2Config",
+  "addSeries",
+  "addMinMax",
+  "add",
+  "toSeries",
+  "series"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;IAGEA,M,GAGEC,qB,CAHFD,M;IACAE,O,GAEED,qB,CAFFC,O;IACAC,c,GACEF,qB,CADFE,c;AAGF,IAAMC,eAAe,GAAG;AACtBC,EAAAA,QADsB,oBACbC,IADa,EACPC,MADO,EACA;AAAA,QAElBC,UAFkB,GAIhBD,MAJgB,CAElBC,UAFkB;AAAA,4BAIhBD,MAJgB,CAGlBE,SAHkB;AAAA,QAGlBA,SAHkB,kCAGR,QAHQ;AAAA,mBAKIP,OAAO,CAACK,MAAD,EAASD,IAAT,CALX;AAAA,QAKhBI,KALgB,YAKhBA,KALgB;AAAA,QAKTC,QALS,YAKTA,QALS;AAAA,QAMlBC,IANkB,GAMXZ,MAAM,CAACM,IAAD,CANK;AAAA,QAOlBO,KAPkB,GAOV,iCACLC,WADK,CACO;AACXC,MAAAA,KAAK,EAAEP,UADI;AAEXQ,MAAAA,IAAI,EAAEP,SAAS,CAACQ,WAAV,EAFK;AAGXL,MAAAA,IAAI,EAAJA;AAHW,KADP,EAMLM,OANK,EAPU;AAAA,QAclBC,MAdkB,GAcT,iCACPC,WADO,CACKV,KADL,EACYC,QADZ,EAEPU,SAFO,CAEGR,KAFH,EAGPS,SAHO,CAGGV,IAHH,EAGSL,MAHT,EAIPgB,GAJO,+BAKJpB,cAAc,CAAC;AAAEG,MAAAA,IAAI,EAAJA,IAAF;AAAQC,MAAAA,MAAM,EAANA,MAAR;AAAgBK,MAAAA,IAAI,EAAJA;AAAhB,KAAD,CALV,GAOPP,QAPO,EAdS;;AAuBpB,WAAO;AAAEc,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAzBqB;AA2BtBK,EAAAA,QA3BsB,oBA2BblB,IA3Ba,EA2BPC,MA3BO,EA2BA;AAAA,gCACDH,eAAe,CAACC,QAAhB,CAAyBC,IAAzB,EAA+BC,MAA/B,CADC;AAAA,QACZY,MADY,yBACZA,MADY;;AAEpB,WAAOA,MAAM,CAACM,MAAP,CAAc,CAAd,CAAP;AACD;AA9BqB,CAAxB;eAiCerB,e"
+}

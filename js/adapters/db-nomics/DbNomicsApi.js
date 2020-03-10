@@ -79,16 +79,18 @@ var _s1FnUrl = function _s1FnUrl(option) {
 
 var _s21FnUrl = function _s21FnUrl(option) {
   var items = option.items,
+      df1Prefix = option.df1Prefix,
       df2Prefix = option.df2Prefix,
-      _seriaId = _crSeriaId(option, _getValue(items[1]), df2Prefix, _getValue(items[0]));
+      _seriaId = _crSeriaId(option, df1Prefix, _getValue(items[1]), df2Prefix, _getValue(items[0]));
 
   return _crUrl(_seriaId, option);
 };
 
 var _s12FnUrl = function _s12FnUrl(option) {
   var items = option.items,
+      df1Prefix = option.df1Prefix,
       df2Prefix = option.df2Prefix,
-      _seriaId = _crSeriaId(option, _getValue(items[0]), df2Prefix, _getValue(items[1]));
+      _seriaId = _crSeriaId(option, df1Prefix, _getValue(items[0]), df2Prefix, _getValue(items[1]));
 
   return _crUrl(_seriaId, option);
 };

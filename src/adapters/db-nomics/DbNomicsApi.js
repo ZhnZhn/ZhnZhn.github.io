@@ -61,8 +61,9 @@ const _s1FnUrl = (option) => {
 };
 
 const _s21FnUrl = (option) => {
-  const { items, df2Prefix } = option
+  const { items, df1Prefix, df2Prefix } = option
   , _seriaId = _crSeriaId(option,
+    df1Prefix,
     _getValue(items[1]),
     df2Prefix,
     _getValue(items[0]),
@@ -70,8 +71,9 @@ const _s21FnUrl = (option) => {
   return _crUrl(_seriaId, option);
 };
 const _s12FnUrl = (option) => {
-  const { items, df2Prefix } = option
+  const { items, df1Prefix, df2Prefix } = option
   , _seriaId = _crSeriaId(option,
+    df1Prefix,
     _getValue(items[0]),
     df2Prefix,
     _getValue(items[1]),
