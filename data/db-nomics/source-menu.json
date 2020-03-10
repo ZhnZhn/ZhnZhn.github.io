@@ -16,9 +16,7 @@
       ]
     },{
       "caption": "FED",
-      "items": [
-        { "id": "DBN_FED_H15" },
-        { "id": "DBN_FED_CPRATES" },
+      "items": [                
         { "id": "DBN_FED_IPMAJOR" },
         { "id": "DBN_FED_CAP" },
         { "id": "DBN_FED_CAPUTL"}
@@ -72,7 +70,7 @@
         "loadId" : "DBN",
         "rootUri": "./data/db-nomics/",
         "spT": "id",
-        "chartsType": "t1"
+        "chartsType": "t2"
       }
     },
     "DBN_B_OECD": {
@@ -332,7 +330,6 @@
           [ "Goods", "wto-goods" ]
         ],
         "dataSource" : "DB Nomics: WTO: Merchandise Trade Value in $Ml, A",
-        "chartsType": "t1",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "a2",
@@ -349,7 +346,6 @@
       "addProps": "DBN_B_WTO",
       "dialogProps": {
         "dataSource" : "DB Nomics: WTO: Merchandise Trade Value in $Ml, M",
-        "chartsType": "t1",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "m1",
@@ -365,52 +361,10 @@
       "addProps": "DBN_B_WTO",
       "dialogProps": {
         "dataSource" : "DB Nomics: WTO: Commercial Services Trade Value in $Ml, M",
-        "chartsType": "t1",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "m2",
           "dfFnUrl": "s21"
-        }
-      }
-    },
-
-    "DBN_FED_H15": {
-      "type": "DBN_FED_H15",
-      "menuTitle" : "Selected Interest Rates, H.15",
-      "chartContainerCaption" : "DB Nomics: The Fed: Selected Interest Rates",
-      "dialogType": "DialogSelectN",
-      "addProps": "DBN_B_S",
-      "dialogProps" : {
-        "selectProps": [
-          [ "Frequency", "fed-h15-freq" ],
-          [ "Instrument", "fed-h15-instrument" ],
-          [ "Maturity", "fed-h15-maturity" ]
-        ],
-        "dataSource" : "DB Nomics: The Fed: Selected Interest Rates, H.15",
-        "dfProps": {
-          "dfProvider": "FED",
-          "dfCode": "H15",
-          "dfFnUrl": "s123"
-        }
-      }
-    },
-    "DBN_FED_CPRATES": {
-      "type": "DBN_FED_CPRATES",
-      "menuTitle" : "Commercial Paper Rates",
-      "chartContainerCaption" : "DB Nomics: The Fed: Commercial Paper Rates",
-      "dialogType": "DialogSelectN",
-      "addProps": "DBN_B_S",
-      "dialogProps" : {
-        "selectProps": [
-          [ "Rate Type", "fed-cprates-type" ],
-          [ "Maturity", "fed-cprates-maturity" ]
-        ],
-        "dataSource" : "DB Nomics: The Fed: Commercial Paper Rates",
-        "dfProps": {
-          "dfProvider": "FED",
-          "dfCode": "CP_RATES",
-          "dfFnUrl": "s12",
-          "dfPrefix": "9"
         }
       }
     },
@@ -422,15 +376,16 @@
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
-          [ "Frequency", "fed-freq" ],
           [ "Industry", "fed-industry-major" ],
-          [ "Adjustment", "fed-adjustment" ]
+          [ "Frequency", "fed-freq-nsa" ],
+          [ "Adjustment", "fed-adjustment-nsa" ]
         ],
         "dataSource" : "DB Nomics: The Fed: Industrial Production",
         "dfProps": {
           "dfProvider": "FED",
           "dfCode": "G17_IP_MAJOR_INDUSTRY_GROUPS",
-          "dfFnUrl": "s123"
+          "dfFnUrl": "s12",
+          "df1Prefix": "IP"
         }
       }
     },
@@ -442,15 +397,16 @@
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
-          [ "Frequency", "fed-freq" ],
           [ "Industry", "fed-industry-major" ],
+          [ "Frequency", "fed-freq-sa" ],
           [ "Adjustment", "fed-adjustment-sa" ]
         ],
         "dataSource" : "DB Nomics: The Fed: Industrial Capacity",
         "dfProps": {
           "dfProvider": "FED",
           "dfCode": "G17_CAP",
-          "dfFnUrl": "s123"
+          "dfFnUrl": "s12",
+          "df1Prefix": "CAP"
         }
       }
     },
@@ -462,15 +418,16 @@
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
-          [ "Frequency", "fed-freq" ],
           [ "Industry", "fed-industry-major" ],
+          [ "Frequency", "fed-freq-sa" ],
           [ "Adjustment", "fed-adjustment-sa" ]
         ],
         "dataSource" : "DB Nomics: The Fed: Capacity Utilization",
         "dfProps": {
           "dfProvider": "FED",
           "dfCode": "G17_CAPUTL",
-          "dfFnUrl": "s123"
+          "dfFnUrl": "s12",
+          "df1Prefix": "CAPUTL"
         }
       }
     },
