@@ -14,15 +14,15 @@ var _AlphaIntradayAdapter = _interopRequireDefault(require("./AlphaIntradayAdapt
 var _AlphaSectorAdapter = _interopRequireDefault(require("./AlphaSectorAdapter"));
 
 var AlphaVantage = {
-  Indicator: {
+  AlphaIndicator: {
     api: _Api["default"],
     adapter: _AlphaAdapter["default"]
   },
-  Intraday: {
+  AlphaIntraday: {
     api: _Api["default"],
     adapter: _AlphaIntradayAdapter["default"]
   },
-  Sector: {
+  AlphaSector: {
     api: _Api["default"],
     adapter: _AlphaSectorAdapter["default"]
   }

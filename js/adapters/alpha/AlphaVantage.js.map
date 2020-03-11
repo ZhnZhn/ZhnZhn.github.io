@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/adapters/alpha/AlphaVantage.js"],"names":["AlphaVantage","Indicator","api","adapter","Intraday","Sector"],"mappings":";;;;;;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,YAAY,GAAG;AACnBC,EAAAA,SAAS,EAAE;AAAEC,IAAAA,GAAG,EAAHA,eAAF;AAAOC,IAAAA,OAAO,EAAEF;AAAhB,GADQ;AAEnBG,EAAAA,QAAQ,EAAE;AAAEF,IAAAA,GAAG,EAAHA,eAAF;AAAOC,IAAAA,OAAO,EAAEC;AAAhB,GAFS;AAGnBC,EAAAA,MAAM,EAAE;AAAEH,IAAAA,GAAG,EAAHA,eAAF;AAAOC,IAAAA,OAAO,EAAEE;AAAhB;AAHW,CAArB;eAMeL,Y","sourcesContent":["\r\nimport api from './Api'\r\nimport Indicator from './AlphaAdapter'\r\nimport Intraday from './AlphaIntradayAdapter'\r\nimport Sector from './AlphaSectorAdapter'\r\n\r\nconst AlphaVantage = {\r\n  Indicator: { api, adapter: Indicator },\r\n  Intraday: { api, adapter: Intraday },\r\n  Sector: { api, adapter: Sector }\r\n};\r\n\r\nexport default AlphaVantage\r\n"],"file":"AlphaVantage.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/alpha/AlphaVantage.js"
+ ],
+ "file": "../../../src/adapters/alpha/AlphaVantage.js",
+ "names": [
+  "AlphaVantage",
+  "AlphaIndicator",
+  "api",
+  "adapter",
+  "Indicator",
+  "AlphaIntraday",
+  "Intraday",
+  "AlphaSector",
+  "Sector"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,YAAY,GAAG;AACnBC,EAAAA,cAAc,EAAE;AAAEC,IAAAA,GAAG,EAAHA,eAAF;AAAOC,IAAAA,OAAO,EAAEC;AAAhB,GADG;AAEnBC,EAAAA,aAAa,EAAE;AAAEH,IAAAA,GAAG,EAAHA,eAAF;AAAOC,IAAAA,OAAO,EAAEG;AAAhB,GAFI;AAGnBC,EAAAA,WAAW,EAAE;AAAEL,IAAAA,GAAG,EAAHA,eAAF;AAAOC,IAAAA,OAAO,EAAEK;AAAhB;AAHM,CAArB;eAMeR,Y"
+}

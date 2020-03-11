@@ -1,1 +1,15 @@
-{"version":3,"sources":["../../../src/adapters/insee/Insee.js"],"names":["Insee","api","adapter"],"mappings":";;;;;;;AACA;;AACA;;AAEA,IAAMA,KAAK,GAAG;AAAEC,EAAAA,GAAG,EAAHA,oBAAF;AAAOC,EAAAA,OAAO,EAAPA;AAAP,CAAd;eAEeF,K","sourcesContent":["\r\nimport api from './InseeApi'\r\nimport adapter from './InseeAdapter'\r\n\r\nconst Insee = { api, adapter };\r\n\r\nexport default Insee\r\n"],"file":"Insee.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/insee/Insee.js"
+ ],
+ "file": "../../../src/adapters/insee/Insee.js",
+ "names": [
+  "Insee",
+  "fnFetch",
+  "fetchTxt",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,KAAK,GAAG;AACZC,EAAAA,OAAO,EAAEC,iBADG;AAEZC,EAAAA,GAAG,EAAHA,oBAFY;AAEPC,EAAAA,OAAO,EAAPA;AAFO,CAAd;eAKeJ,K"
+}

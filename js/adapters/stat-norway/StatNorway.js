@@ -12,11 +12,11 @@ var _ApiTable = _interopRequireDefault(require("./ApiTable"));
 var _StatNorwayAdapter = _interopRequireDefault(require("./StatNorwayAdapter"));
 
 var StatNorway = {
-  Dataset: {
+  StatNorway: {
     api: _ApiDataset["default"],
     adapter: _StatNorwayAdapter["default"]
   },
-  Table: {
+  StatNorway2: {
     api: _ApiTable["default"],
     optionFetch: _ApiTable["default"].crOptionFetch,
     adapter: _StatNorwayAdapter["default"]

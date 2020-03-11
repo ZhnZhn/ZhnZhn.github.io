@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/adapters/stat-sweden/StatSweden.js"],"names":["StatSweden","Table","api","tableApi","optionFetch","crOptionFetch","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,UAAU,GAAG;AACjBC,EAAAA,KAAK,EAAE;AACLC,IAAAA,GAAG,EAAEC,oBADA;AAELC,IAAAA,WAAW,EAAED,qBAASE,aAFjB;AAGLC,IAAAA,OAAO,EAAPA;AAHK;AADU,CAAnB;eAQeN,U","sourcesContent":["import tableApi from './ApiTable'\r\nimport adapter from '../stat-norway/StatNorwayAdapter'\r\n\r\nconst StatSweden = {\r\n  Table: {\r\n    api: tableApi,\r\n    optionFetch: tableApi.crOptionFetch,\r\n    adapter\r\n  }\r\n};\r\n\r\nexport default StatSweden\r\n"],"file":"StatSweden.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-sweden/StatSweden.js"
+ ],
+ "file": "../../../src/adapters/stat-sweden/StatSweden.js",
+ "names": [
+  "StatSweden",
+  "api",
+  "tableApi",
+  "optionFetch",
+  "crOptionFetch",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,UAAU,GAAG;AACjBC,EAAAA,GAAG,EAAEC,oBADY;AAEjBC,EAAAA,WAAW,EAAED,qBAASE,aAFL;AAGjBC,EAAAA,OAAO,EAAPA;AAHiB,CAAnB;eAMeL,U"
+}

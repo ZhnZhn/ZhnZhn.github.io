@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _EuroStat = _interopRequireDefault(require("./eurostat/EuroStat"));
 
 var _UnComtrade = _interopRequireDefault(require("./uncomtrade/UnComtrade"));
@@ -45,18 +47,17 @@ var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
 
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 
-//import Cmc from './coin-market-cap/Cmc'
-var RouterAdapter = {
+var RouterAdapter = (0, _extends2["default"])({
   Quandl: _Quandl["default"],
   DbNomics: _DbNomics["default"],
   EuroStat: _EuroStat["default"],
   UnComtrade: _UnComtrade["default"],
   FaoStat: _FaoStat["default"],
-  WorldBank: _WorldBank["default"],
-  StatNorway: _StatNorway["default"],
+  WorldBank: _WorldBank["default"]
+}, _StatNorway["default"], {
   StatSweden: _StatSweden["default"],
-  StatFinland: _StatFinland["default"],
-  AlphaVantage: _AlphaVantage["default"],
+  StatFinland: _StatFinland["default"]
+}, _AlphaVantage["default"], {
   Barchart: _Barchart["default"],
   Iex: _Iex["default"],
   Wtd: _Wtd["default"],
@@ -66,9 +67,8 @@ var RouterAdapter = {
   Bls: _Bls["default"],
   Eia: _Eia["default"],
   Intrinio: _Intrinio["default"],
-  Crc: _Crc["default"] //Cmc
-
-};
+  Crc: _Crc["default"]
+});
 var _default = RouterAdapter;
 exports["default"] = _default;
 //# sourceMappingURL=RouterAdapter.js.map

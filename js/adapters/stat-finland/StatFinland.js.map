@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/adapters/stat-finland/StatFinland.js"],"names":["StatFinland","Table","api","tableApi","optionFetch","crOptionFetch","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,KAAK,EAAE;AACLC,IAAAA,GAAG,EAAEC,oBADA;AAELC,IAAAA,WAAW,EAAED,qBAASE,aAFjB;AAGLC,IAAAA,OAAO,EAAPA;AAHK;AADW,CAApB;eAQeN,W","sourcesContent":["import tableApi from './ApiTable'\r\nimport adapter from '../stat-norway/StatNorwayAdapter'\r\n\r\nconst StatFinland = {\r\n  Table: {\r\n    api: tableApi,\r\n    optionFetch: tableApi.crOptionFetch,\r\n    adapter\r\n  }\r\n};\r\n\r\nexport default StatFinland\r\n"],"file":"StatFinland.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-finland/StatFinland.js"
+ ],
+ "file": "../../../src/adapters/stat-finland/StatFinland.js",
+ "names": [
+  "StatFinland",
+  "api",
+  "tableApi",
+  "optionFetch",
+  "crOptionFetch",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,GAAG,EAAEC,oBADa;AAElBC,EAAAA,WAAW,EAAED,qBAASE,aAFJ;AAGlBC,EAAAA,OAAO,EAAPA;AAHkB,CAApB;eAMeL,W"
+}

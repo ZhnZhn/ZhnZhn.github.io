@@ -1,57 +1,16 @@
-import { fetchTxt, fetchJsonp } from '../../utils/fnFetch'
 import Adapter from '../../adapters/RouterAdapter'
 
 import f from './loadItem'
 
-const {
-  Quandl,
-  DbNomics,
-  UnComtrade, FaoStat, WorldBank,
-  EuroStat, StatNorway, StatSweden, StatFinland,
-  Insee,
-  AlphaVantage, Barchart, Intrinio,
-  Crc,
-  Iex, Wtd, Fmp,
-  Bea, Bls, Eia
-} = Adapter;
-
-const LoadImpl = {
-  Quandl: f({ ...Quandl }),
-  DbNomics: f({ ...DbNomics }),
-  UnComtrade: f({ ...UnComtrade }),
-  FaoStat: f({ ...FaoStat }),
-  WorldBank: f({ ...WorldBank}),
-  EuroStat: f({ ...EuroStat }),
-
-  StatNorway: f({ ...StatNorway.Dataset }),
-  StatNorway2: f({ ...StatNorway.Table }),
-
-  StatSweden: f({ ...StatSweden.Table }),
-  StatFinland: f({ ...StatFinland.Table }),
-
-  AlphaIndicator: f({ ...AlphaVantage.Indicator }),
-  AlphaIntraday: f({ ...AlphaVantage.Intraday }),
-  AlphaSector: f({ ...AlphaVantage.Sector }),
-
-  Barchart: f({
-    fnFetch: fetchJsonp,
-    ...Barchart
-  }),
-  Iex: f({ ...Iex }),
-  Wtd: f({ ...Wtd}),
-  Fmp: f({ ...Fmp}),
-  Intrinio: f({ ...Intrinio }),
-
-  Crc: f({ ...Crc}),
-
-  Insee: f({
-    fnFetch: fetchTxt,
-    ...Insee
-  }),
-
-  Bea: f({ ...Bea }),
-  Bls: f({ ...Bls }),
-  Eia: f({ ...Eia })
-};
+const LoadImpl = (() => {
+  const _conf = {}
+  , _hasOwnProperty = Object.prototype.hasOwnProperty.bind(Adapter);
+  for (let key in Adapter) {
+    if (_hasOwnProperty(key)) {
+      _conf[key] = f(Adapter[key])
+    }
+  }
+  return _conf;
+})();
 
 export default LoadImpl

@@ -10,11 +10,9 @@ var _ApiTable = _interopRequireDefault(require("./ApiTable"));
 var _StatNorwayAdapter = _interopRequireDefault(require("../stat-norway/StatNorwayAdapter"));
 
 var StatFinland = {
-  Table: {
-    api: _ApiTable["default"],
-    optionFetch: _ApiTable["default"].crOptionFetch,
-    adapter: _StatNorwayAdapter["default"]
-  }
+  api: _ApiTable["default"],
+  optionFetch: _ApiTable["default"].crOptionFetch,
+  adapter: _StatNorwayAdapter["default"]
 };
 var _default = StatFinland;
 exports["default"] = _default;

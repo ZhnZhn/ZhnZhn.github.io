@@ -4,8 +4,8 @@ import tableApi from './ApiTable'
 import adapter from './StatNorwayAdapter'
 
 const StatNorway = {
-  Dataset: { api, adapter },
-  Table: {
+  StatNorway: { api, adapter },
+  StatNorway2: {
     api: tableApi,
     optionFetch: tableApi.crOptionFetch,
     adapter

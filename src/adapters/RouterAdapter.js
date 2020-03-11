@@ -19,7 +19,7 @@ import Intrinio from './intrinio/Intrinio'
 import Quandl from './quandl/Quandl'
 import DbNomics from './db-nomics/DbNomics'
 import Crc from './crypto-compare/Crc'
-//import Cmc from './coin-market-cap/Cmc'
+
 
 const RouterAdapter = {
   Quandl,
@@ -28,10 +28,10 @@ const RouterAdapter = {
   UnComtrade,
   FaoStat,
   WorldBank,
-  StatNorway,
+  ...StatNorway,
   StatSweden,
   StatFinland,
-  AlphaVantage,
+  ...AlphaVantage,
   Barchart,
   Iex,
   Wtd,
@@ -42,7 +42,6 @@ const RouterAdapter = {
   Eia,
   Intrinio,
   Crc
-  //Cmc
 };
 
 export default RouterAdapter

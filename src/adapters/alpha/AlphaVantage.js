@@ -5,9 +5,9 @@ import Intraday from './AlphaIntradayAdapter'
 import Sector from './AlphaSectorAdapter'
 
 const AlphaVantage = {
-  Indicator: { api, adapter: Indicator },
-  Intraday: { api, adapter: Intraday },
-  Sector: { api, adapter: Sector }
+  AlphaIndicator: { api, adapter: Indicator },
+  AlphaIntraday: { api, adapter: Intraday },
+  AlphaSector: { api, adapter: Sector }
 };
 
 export default AlphaVantage
