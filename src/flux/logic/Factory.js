@@ -34,13 +34,13 @@ const _crFnValue = (valueFn, valueFnPrefix) => {
     : undefined;
 };
 
-const _crDateProps = (nInitFromDate, isContinious) => {
-  const _props = isContinious
+const _crDateProps = ({ isFd, nInitFromDate }) => {
+  const _props = isFd
     ? {
-        msgTestDateOrEmpty: Msg.TEST_DATE_OR_EMPTY,
-        onTestDateOrEmpty: isYmdOrEmpty
+        errNotYmdOrEmpty: Msg.YMD_DATE_OR_EMPTY,
+        isYmdOrEmpty
       }
-    : undefined;
+    : void 0;
   return {
     initFromDate: nInitFromDate
       ? getFromDate(nInitFromDate)
@@ -73,10 +73,8 @@ const _crDialogComp = function (browserType, dialogConf){
            dataColumn
          } = dialogConf
        , {
-           nInitFromDate,
-           valueFn, valueFnPrefix,           
+           valueFn, valueFnPrefix,
            loadFnType,
-           isContinious,
            loadId,
            isProxy,
            isGetKey
@@ -113,8 +111,8 @@ const _crDialogComp = function (browserType, dialogConf){
               msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
               fnValue : _crFnValue(valueFn, valueFnPrefix),
               //initFromDate, initToDate, onTestDate,
-              //msgTestDateOrEmpty, onTestDateOrEmpty
-              ..._crDateProps(nInitFromDate, isContinious),
+              //errNotYmdOrEmpty, isYmdOrEmpty
+              ..._crDateProps(dialogProps),
               onLoad, onShow,
               onClickInfo,
               loadFn,

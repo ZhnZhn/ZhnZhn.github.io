@@ -37,6 +37,7 @@ var _RowChart = _interopRequireDefault(require("./RowChart"));
 
 var _dec, _class, _class2, _temp;
 
+var DF_INIT_FROM_DATE = '2010-01-01';
 var DF_MAP_FREQUENCY = 'M';
 var TABLE_ID = 'table';
 var crOptions = _RouterOptions["default"].crOptions,
@@ -138,6 +139,7 @@ function (_Component) {
       _this.date = void 0;
 
       _this.setState((0, _extends2["default"])({
+        isShowFd: false,
         isShowDate: true,
         chartType: chartType
       }, _this._crDateConfig()));
@@ -195,7 +197,9 @@ function (_Component) {
           seriaWidth = _ref3.seriaWidth,
           date = _this._getDateWithForDate(),
           _isCategory = isCategory(chartType),
-          items = _isCategory ? _this._items.slice(1) : [].concat(_this._items);
+          items = _isCategory ? _this._items.slice(1) : [].concat(_this._items),
+          _compFd = _this._refFromDate.current,
+          fromDate = _compFd && _compFd.isValid() ? _compFd.getValue() : '';
 
       return _this.props.loadFn(_this.props, {
         items: items,
@@ -205,6 +209,7 @@ function (_Component) {
         seriaColor: seriaColor,
         seriaWidth: seriaWidth,
         isCategory: _isCategory,
+        fromDate: fromDate,
         date: date
         /*
         selectOptions: [
@@ -297,11 +302,13 @@ function (_Component) {
       isOptions: true,
       isToggle: true
     });
+    _this._refFromDate = _react["default"].createRef();
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this._chartOptions = crOptions(props);
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isOptions: false,
       isToggle: false,
+      isShowFd: true,
       isShowChart: true,
       isShowDate: false
     }, (0, _crDateConfig["default"])('EMPTY'), {}, _crIsToggleInit(props.selectProps));
@@ -334,19 +341,28 @@ function (_Component) {
         onShow = _this$props2.onShow,
         onFront = _this$props2.onFront,
         selectProps = _this$props2.selectProps,
+        isFd = _this$props2.isFd,
         noDate = _this$props2.noDate,
         noForDate = _this$props2.noForDate,
+        initFromDate = _this$props2.initFromDate,
+        errNotYmdOrEmpty = _this$props2.errNotYmdOrEmpty,
+        isYmdOrEmpty = _this$props2.isYmdOrEmpty,
         _this$state = this.state,
         chartType = _this$state.chartType,
         isToolbar = _this$state.isToolbar,
         isOptions = _this$state.isOptions,
         isToggle = _this$state.isToggle,
         isShowLabels = _this$state.isShowLabels,
+        isShowFd = _this$state.isShowFd,
         isShowChart = _this$state.isShowChart,
         isShowDate = _this$state.isShowDate,
         dateDefault = _this$state.dateDefault,
         dateOptions = _this$state.dateOptions,
-        validationMessages = _this$state.validationMessages;
+        validationMessages = _this$state.validationMessages,
+        _isCategory = isCategory(chartType),
+        _isRowFd = isFd && !_isCategory,
+        _noForDate = noForDate || !_isCategory;
+
     return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
@@ -364,8 +380,10 @@ function (_Component) {
       onClose: this._hideOptionsWithToolbar
     }), _react["default"].createElement(_ModalToggle["default"], {
       isShow: isToggle,
-      noForDate: noForDate,
+      noForDate: _noForDate,
       selectProps: selectProps,
+      isFd: _isRowFd,
+      isShowFd: isShowFd,
       isShowChart: isShowChart,
       isShowDate: isShowDate,
       crIsId: _crIsId,
@@ -373,7 +391,16 @@ function (_Component) {
       onCheckCaption: this._checkCaptionBy,
       onUnCheckCaption: this._uncheckCaption,
       onClose: this._hideToggleWithToolbar
-    }), this._renderSelects(selectProps, isShow, isShowLabels), _react["default"].createElement(_RowChart["default"], {
+    }), this._renderSelects(selectProps, isShow, isShowLabels), _isRowFd && _react["default"].createElement(_DialogCell["default"].ShowHide, {
+      isShow: isShowFd
+    }, _react["default"].createElement(_DialogCell["default"].RowDate, {
+      innerRef: this._refFromDate,
+      isShowLabels: isShowLabels,
+      labelTitle: "From Date:",
+      initValue: initFromDate,
+      errorMsg: errNotYmdOrEmpty,
+      onTestDate: isYmdOrEmpty
+    })), _react["default"].createElement(_RowChart["default"], {
       chartType: chartType,
       isShowLabels: isShowLabels,
       isShowChart: isShowChart,
@@ -392,7 +419,8 @@ function (_Component) {
 
   return DialogSelectN;
 }(_react.Component), _class2.defaultProps = {
-  selectProps: []
+  selectProps: [],
+  initFromDate: DF_INIT_FROM_DATE
 }, _temp)) || _class) || _class);
 var _default = DialogSelectN;
 exports["default"] = _default;

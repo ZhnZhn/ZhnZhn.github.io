@@ -31,6 +31,8 @@ class Futures3Dialog extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
+    this._refItemMonth = React.createRef()
+    this._refFromDate = React.createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
@@ -59,31 +61,31 @@ class Futures3Dialog extends Component {
   }
 
   _createValidationMessages = () => {
-    const { msgOnNotSelected, msgOnNotValidFormat, isContinious } = this.props
+    const { msgOnNotSelected, msgOnNotValidFormat, isFd } = this.props
     let   msg = [];
 
-    const { isValid:isValid1, msg:msg1 } = this.itemMonth.getValidation();
+    const { isValid:isValid1, msg:msg1 } = this._refItemMonth.current.getValidation();
     if (!isValid1) { msg = msg.concat(msg1); }
 
     if (!this.year) { msg.push(msgOnNotSelected('Year')); }
 
-    if (isContinious && !this.fromDate.isValid()){
+    if (isFd && !this._refFromDate.current.isValid()){
       msg.push(msgOnNotValidFormat('From Date'));
     }
 
-    msg.isValid = (msg.length === 0) ? true : false;
+    msg.isValid = msg.length === 0
+       ? true : false;
     return msg;
   }
 
   _createLoadOption = () => {
-    const { one:item, two:month } = this.itemMonth.getValues()
-        , { isContinious } = this.props
-        , fromDate = (isContinious)
-              ? this.fromDate.getValue()
-              : undefined ;
+    const { one:item, two:month } = this._refItemMonth.current.getValues()
+    , fromDate = this.props.isFd
+        ? this._refFromDate.current.getValue()
+        : void 0;
     return this.props.loadFn(
       this.props,
-      { item, month, year : this.year, fromDate }
+      { item, month, year: this.year, fromDate }
     );
   }
 
@@ -91,14 +93,11 @@ class Futures3Dialog extends Component {
     this._handleWithValidationClose()
   }
 
-  _refItemMonth = c => this.itemMonth = c
-  _refFromDate  = c => this.fromDate = c
-
   render(){
     const {
             isShow, caption, onShow, onFront,
             futuresURI, msgOnNotSelected,
-            isContinious, initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty
+            isFd, initFromDate, isYmdOrEmpty, errNotYmdOrEmpty
           } = this.props
         , {
             isToolbar,
@@ -138,14 +137,14 @@ class Futures3Dialog extends Component {
               onSelect={this._handleSelectYear}
            />
            {
-              isContinious &&
+              isFd &&
               <D.RowDate
-                 ref={this._refFromDate}
+                 innerRef={this._refFromDate}
                  isShowLabels={isShowLabels}
                  labelTitle="From Date:"
                  initValue={initFromDate}
-                 errorMsg={msgTestDateOrEmpty}
-                 onTestDate={onTestDateOrEmpty}
+                 errorMsg={errNotYmdOrEmpty}
+                 onTestDate={isYmdOrEmpty}
               />
             }
            <D.ValidationMessages

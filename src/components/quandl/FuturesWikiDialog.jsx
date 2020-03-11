@@ -26,6 +26,8 @@ class FuturesWikiDialog extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
+    this._refExchangeItem = React.createRef()
+    this._refFromDate = React.createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
@@ -53,30 +55,30 @@ class FuturesWikiDialog extends Component {
     )
   }
   _createValidationMessages = () => {
-    const { msgOnNotSelected, msgOnNotValidFormat, isContinious } = this.props
+    const { msgOnNotSelected, msgOnNotValidFormat, isFd } = this.props
     let   msg = [];
 
-    const { isValid:isValid1, msg:msg1 } = this.exchangeItem.getValidation();
+    const { isValid:isValid1, msg:msg1 } = this._refExchangeItem.current.getValidation();
     if (!isValid1) { msg = msg.concat(msg1); }
 
     if (!this.type) { msg.push(msgOnNotSelected('Type')); }
 
-    if (isContinious && !this.fromDate.isValid()){
+    if (isFd && !this._refFromDate.current.isValid()){
       msg.push(msgOnNotValidFormat('From Date'));
     }
 
-    msg.isValid = (msg.length === 0) ? true : false;
+    msg.isValid = msg.length === 0
+      ? true : false;
     return msg;
   }
   _createLoadOption = () => {
-    const { one:exchange, two:item } = this.exchangeItem.getValues()
-        , { isContinious } = this.props
-        , fromDate = (isContinious)
-              ? this.fromDate.getValue()
-              : undefined ;
+    const { one:exchange, two:item } = this._refExchangeItem.current.getValues()
+    , fromDate = this.props.isFd
+        ? this._refFromDate.current.getValue()
+        : void 0;
     return this.props.loadFn(
       this.props,
-      { exchange, item , type : this.type, fromDate }
+      { exchange, item , type: this.type, fromDate }
     );
   }
 
@@ -84,14 +86,11 @@ class FuturesWikiDialog extends Component {
     this._handleWithValidationClose()
   }
 
-  _refExchangeItem = c => this.exchangeItem = c
-  _refFromDate = c => this.fromDate = c
-
   render(){
     const {
             isShow, caption, onShow, onFront,
             futuresURI, msgOnNotSelected,
-            isContinious, initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty
+            isFd, initFromDate, isYmdOrEmpty, errNotYmdOrEmpty
           } = this.props
         , {
             isToolbar,
@@ -113,7 +112,6 @@ class FuturesWikiDialog extends Component {
               isShow={isToolbar}
               buttons={this.toolbarButtons}
            />
-
            <D.SelectOneTwo
                ref={this._refExchangeItem}
                isShow={isShow}
@@ -132,14 +130,14 @@ class FuturesWikiDialog extends Component {
               onSelect={this._handleSelectType}
            />
            {
-             isContinious &&
+             isFd &&
              <D.RowDate
-                ref={this._refFromDate}
+                innerRef={this._refFromDate}
                 isShowLabels={isShowLabels}
                 labelTitle="From Date:"
                 initValue={initFromDate}
-                errorMsg={msgTestDateOrEmpty}
-                onTestDate={onTestDateOrEmpty}
+                errorMsg={errNotYmdOrEmpty}
+                onTestDate={isYmdOrEmpty}
              />
            }
            <D.ValidationMessages

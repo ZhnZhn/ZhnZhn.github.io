@@ -13,6 +13,7 @@ import ModalOptions from './ModalOptions'
 import ModalToggle from './ModalToggle'
 import RowChart from './RowChart'
 
+const DF_INIT_FROM_DATE = '2010-01-01'
 const DF_MAP_FREQUENCY = 'M';
 const TABLE_ID = 'table';
 
@@ -82,7 +83,8 @@ class DialogSelectN extends Component {
  */
 
  static defaultProps = {
-   selectProps: []
+   selectProps: [],
+   initFromDate: DF_INIT_FROM_DATE
  }
 
   constructor(props){
@@ -104,6 +106,7 @@ class DialogSelectN extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true, isOptions: true, isToggle: true }
     )
+    this._refFromDate = React.createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
     this._chartOptions = crOptions(props)
 
@@ -111,6 +114,7 @@ class DialogSelectN extends Component {
       ...this._isWithInitialState(),
       isOptions: false,
       isToggle: false,
+      isShowFd: true,
       isShowChart: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
@@ -155,6 +159,7 @@ class DialogSelectN extends Component {
   _updateForDate = (chartType) => {
     this.date = void 0;
     this.setState({
+       isShowFd: false,
        isShowDate: true,
        chartType,
        ...this._crDateConfig()
@@ -219,7 +224,11 @@ class DialogSelectN extends Component {
     , _isCategory = isCategory(chartType)
     , items = _isCategory
         ? this._items.slice(1)
-        : [...this._items];
+        : [...this._items]
+    , _compFd = this._refFromDate.current
+    , fromDate = _compFd && _compFd.isValid()
+       ? _compFd.getValue()
+       : '';
 
     return this.props.loadFn(
       this.props, {
@@ -228,7 +237,7 @@ class DialogSelectN extends Component {
         dialogOptions,
         chartType, seriaColor, seriaWidth,
         isCategory: _isCategory,
-        date
+        fromDate, date
         /*
         selectOptions: [
           compSelect1.getOptions(),
@@ -308,17 +317,22 @@ class DialogSelectN extends Component {
       caption, isShow,
       onShow, onFront,
       selectProps,
-      noDate, noForDate
+      isFd, noDate, noForDate,
+      initFromDate,
+      errNotYmdOrEmpty,
+      isYmdOrEmpty
     } = this.props
     , {
       chartType,
       isToolbar, isOptions, isToggle,
       isShowLabels,
-      isShowChart, isShowDate,
+      isShowFd, isShowChart, isShowDate,
       dateDefault, dateOptions,
       validationMessages
-    } = this.state;
-
+    } = this.state
+    , _isCategory = isCategory(chartType)
+    , _isRowFd = isFd && !_isCategory
+    , _noForDate = noForDate || !_isCategory;
     return(
       <D.DraggableDialog
          isShow={isShow}
@@ -340,8 +354,10 @@ class DialogSelectN extends Component {
            />
            <ModalToggle
              isShow={isToggle}
-             noForDate={noForDate}
+             noForDate={_noForDate}
              selectProps={selectProps}
+             isFd={_isRowFd}
+             isShowFd={isShowFd}
              isShowChart={isShowChart}
              isShowDate={isShowDate}
              crIsId={_crIsId}
@@ -351,6 +367,17 @@ class DialogSelectN extends Component {
              onClose={this._hideToggleWithToolbar}
            />
            {this._renderSelects(selectProps, isShow, isShowLabels)}
+           {_isRowFd && <D.ShowHide isShow={isShowFd}>
+               <D.RowDate
+                innerRef={this._refFromDate}
+                isShowLabels={isShowLabels}
+                labelTitle="From Date:"
+                initValue={initFromDate}
+                errorMsg={errNotYmdOrEmpty}
+                onTestDate={isYmdOrEmpty}
+               />
+             </D.ShowHide>
+           }
            <RowChart
              chartType={chartType}
              isShowLabels={isShowLabels}

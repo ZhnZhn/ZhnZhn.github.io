@@ -65,6 +65,8 @@
     },
     "DBN_B_S": {
       "dialogProps": {
+        "isFd": true,
+        "nInitFromDate": 25,  
         "noDate": true,
         "descrUrl" : "./data/db-nomics/db-nomics.html",
         "loadId" : "DBN",
@@ -147,6 +149,7 @@
       "dialogType": "DialogSelectN",
       "addProps": "DBN_B_S",
       "dialogProps" : {
+        "nInitFromDate": 3,  
         "selectProps": [
           [ "Rate", "ecb-exchange-rates" ]
         ],
@@ -456,6 +459,7 @@
       "dialogType": "DialogSelectN",
       "addProps": "DBN_B_S",
       "dialogProps" : {
+        "nInitFromDate": 5,  
         "selectProps": [
           [ "Item", "nbb-stocks-commodities" ]
         ],

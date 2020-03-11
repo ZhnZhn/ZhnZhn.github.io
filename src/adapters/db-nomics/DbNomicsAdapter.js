@@ -11,11 +11,12 @@ const {
 const DbNomicsAdapter = {
   toConfig(json, option){
     const {
+      fromDate,
       seriaColor,
       seriaType='spline'
     } = option
     , { title, subtitle } = crTitle(option, json)
-    , data = crData(json)
+    , data = crData(json, fromDate)
     , seria = Builder()
         .splineSeria({
           color: seriaColor,

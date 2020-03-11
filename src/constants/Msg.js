@@ -10,7 +10,7 @@ const Msg = {
   NOT_SELECTED : (item) => `${item} is not selected.`,
 
   NOT_VALID_FORMAT : (item) => `${item} is not in valid format.`,
-  TEST_DATE_OR_EMPTY : "YYYY-MM-DD format must be OR Empty",
+  YMD_DATE_OR_EMPTY : "YYYY-MM-DD format must be OR Empty",
 
   Alert : {
      ALREADY_EXIST : {

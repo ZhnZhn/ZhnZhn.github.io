@@ -461,7 +461,7 @@
                 "Volume",
                 "Prev. Day Open Interest"
             ],
-            "isContinious": true,
+            "isFd": true,
             "nInitFromDate": 2,
             "dataSource": "Wiki Continuous Futures (Code: CHRIS)"
         }

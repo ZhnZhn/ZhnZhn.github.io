@@ -38,6 +38,7 @@ const createLoadOptions = (props={}, options={}) => {
       chartType={},
       seriaColor,
       seriaWidth,
+      fromDate,
       date
     } = options
   , {
@@ -56,6 +57,7 @@ const createLoadOptions = (props={}, options={}) => {
     _itemKey: _itemKey,
     itemCaption,
     zhCompType: compType,
+    fromDate,
     time: date,
     seriaType, seriaColor, seriaWidth,
     items, loadId,

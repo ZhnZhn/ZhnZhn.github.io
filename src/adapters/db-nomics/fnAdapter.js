@@ -68,14 +68,19 @@ const fnAdapter = {
     };
   },
 
-  crData: (json) => {
+  crData: (json, fromDate) => {
     const data = []
-    , { period, value } = getPeriodAndValue(json);
-    period.forEach((p, i) => {
-      if (_isNumber(value[i])) {
-        data.push([ ymdToUTC(p), value[i] ])
+    , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
+    , { period, value } = getPeriodAndValue(json)
+    , _len = period.length;
+    let i = 0, _x, _y;
+    for (i; i<_len; i++){
+      _x = ymdToUTC(period[i])
+      _y = value[i]
+      if (_x > _xFrom && _isNumber(_y)) {
+        data.push([ _x, _y ])
       }
-    })
+    }        
     return data;
   },
 

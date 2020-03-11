@@ -16,13 +16,14 @@ var crData = _fnAdapter["default"].crData,
     crConfigOption = _fnAdapter["default"].crConfigOption;
 var DbNomicsAdapter = {
   toConfig: function toConfig(json, option) {
-    var seriaColor = option.seriaColor,
+    var fromDate = option.fromDate,
+        seriaColor = option.seriaColor,
         _option$seriaType = option.seriaType,
         seriaType = _option$seriaType === void 0 ? 'spline' : _option$seriaType,
         _crTitle = crTitle(option, json),
         title = _crTitle.title,
         subtitle = _crTitle.subtitle,
-        data = crData(json),
+        data = crData(json, fromDate),
         seria = (0, _ConfigBuilder["default"])().splineSeria({
       color: seriaColor,
       type: seriaType.toLowerCase(),

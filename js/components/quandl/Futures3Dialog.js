@@ -73,12 +73,12 @@ function (_Component) {
       var _this$props = _this.props,
           msgOnNotSelected = _this$props.msgOnNotSelected,
           msgOnNotValidFormat = _this$props.msgOnNotValidFormat,
-          isContinious = _this$props.isContinious;
+          isFd = _this$props.isFd;
       var msg = [];
 
-      var _this$itemMonth$getVa = _this.itemMonth.getValidation(),
-          isValid1 = _this$itemMonth$getVa.isValid,
-          msg1 = _this$itemMonth$getVa.msg;
+      var _this$_refItemMonth$c = _this._refItemMonth.current.getValidation(),
+          isValid1 = _this$_refItemMonth$c.isValid,
+          msg1 = _this$_refItemMonth$c.msg;
 
       if (!isValid1) {
         msg = msg.concat(msg1);
@@ -88,7 +88,7 @@ function (_Component) {
         msg.push(msgOnNotSelected('Year'));
       }
 
-      if (isContinious && !_this.fromDate.isValid()) {
+      if (isFd && !_this._refFromDate.current.isValid()) {
         msg.push(msgOnNotValidFormat('From Date'));
       }
 
@@ -97,11 +97,10 @@ function (_Component) {
     };
 
     _this._createLoadOption = function () {
-      var _this$itemMonth$getVa2 = _this.itemMonth.getValues(),
-          item = _this$itemMonth$getVa2.one,
-          month = _this$itemMonth$getVa2.two,
-          isContinious = _this.props.isContinious,
-          fromDate = isContinious ? _this.fromDate.getValue() : undefined;
+      var _this$_refItemMonth$c2 = _this._refItemMonth.current.getValues(),
+          item = _this$_refItemMonth$c2.one,
+          month = _this$_refItemMonth$c2.two,
+          fromDate = _this.props.isFd ? _this._refFromDate.current.getValue() : void 0;
 
       return _this.props.loadFn(_this.props, {
         item: item,
@@ -115,14 +114,6 @@ function (_Component) {
       _this._handleWithValidationClose();
     };
 
-    _this._refItemMonth = function (c) {
-      return _this.itemMonth = c;
-    };
-
-    _this._refFromDate = function (c) {
-      return _this.fromDate = c;
-    };
-
     _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
@@ -130,6 +121,8 @@ function (_Component) {
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       noDate: true
     });
+    _this._refItemMonth = _react["default"].createRef();
+    _this._refFromDate = _react["default"].createRef();
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState());
     return _this;
@@ -155,10 +148,10 @@ function (_Component) {
         onFront = _this$props2.onFront,
         futuresURI = _this$props2.futuresURI,
         msgOnNotSelected = _this$props2.msgOnNotSelected,
-        isContinious = _this$props2.isContinious,
+        isFd = _this$props2.isFd,
         initFromDate = _this$props2.initFromDate,
-        onTestDateOrEmpty = _this$props2.onTestDateOrEmpty,
-        msgTestDateOrEmpty = _this$props2.msgTestDateOrEmpty,
+        isYmdOrEmpty = _this$props2.isYmdOrEmpty,
+        errNotYmdOrEmpty = _this$props2.errNotYmdOrEmpty,
         _this$state = this.state,
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
@@ -189,13 +182,13 @@ function (_Component) {
       caption: "Year",
       options: yearOptions,
       onSelect: this._handleSelectYear
-    }), isContinious && _react["default"].createElement(_DialogCell["default"].RowDate, {
-      ref: this._refFromDate,
+    }), isFd && _react["default"].createElement(_DialogCell["default"].RowDate, {
+      innerRef: this._refFromDate,
       isShowLabels: isShowLabels,
       labelTitle: "From Date:",
       initValue: initFromDate,
-      errorMsg: msgTestDateOrEmpty,
-      onTestDate: onTestDateOrEmpty
+      errorMsg: errNotYmdOrEmpty,
+      onTestDate: isYmdOrEmpty
     }), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));

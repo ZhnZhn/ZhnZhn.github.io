@@ -84,17 +84,27 @@ var fnAdapter = {
       subtitle: _subtitle
     };
   },
-  crData: function crData(json) {
+  crData: function crData(json, fromDate) {
     var data = [],
+        _xFrom = fromDate ? ymdToUTC(fromDate) : 0,
         _getPeriodAndValue = getPeriodAndValue(json),
         period = _getPeriodAndValue.period,
-        value = _getPeriodAndValue.value;
+        value = _getPeriodAndValue.value,
+        _len = period.length;
 
-    period.forEach(function (p, i) {
-      if (_isNumber(value[i])) {
-        data.push([ymdToUTC(p), value[i]]);
+    var i = 0,
+        _x,
+        _y;
+
+    for (i; i < _len; i++) {
+      _x = ymdToUTC(period[i]);
+      _y = value[i];
+
+      if (_x > _xFrom && _isNumber(_y)) {
+        data.push([_x, _y]);
       }
-    });
+    }
+
     return data;
   },
   crConfigOption: function crConfigOption(_ref4) {

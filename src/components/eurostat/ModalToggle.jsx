@@ -54,6 +54,7 @@ const CheckBoxList = ({
 const ModalToggle = ({
   isShow, style, className=STYLE.CL,
   selectProps=[],
+  isFd, isShowFd,
   isShowDate, isShowChart,
   noForDate=false,
   crIsId,
@@ -61,10 +62,12 @@ const ModalToggle = ({
   onCheckCaption, onUnCheckCaption,
   onClose
 }) => {
-  const _toggleChart = useCallback(
-     onToggle.bind(null, 'isShowChart'), [])
+  const _toggleFd = useCallback(
+    onToggle.bind(null, 'isShowFd'), [])
+  , _toggleChart = useCallback(
+    onToggle.bind(null, 'isShowChart'), [])
   , _toggleDate = useCallback(
-     onToggle.bind(null, 'isShowDate'), []);
+    onToggle.bind(null, 'isShowDate'), []);
   return (
   <D.ModalPopup
     isShow={isShow}
@@ -79,6 +82,15 @@ const ModalToggle = ({
       onCheckCaption={onCheckCaption}
       onUnCheckCaption={onUnCheckCaption}
     />
+    { isFd && <D.RowCheckBox
+        key="isShowFd"
+        value={isShowFd}
+        rootStyle={STYLE.ROW_CB}
+        checkedColor={TOGGLE_CHECKBOX_COLOR}
+        caption="From Date"
+        onToggle={_toggleFd}
+      />
+    }
     <D.RowCheckBox
       key="isShowChart"
       value={isShowChart}

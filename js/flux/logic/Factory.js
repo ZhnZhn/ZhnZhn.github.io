@@ -40,11 +40,14 @@ var _crFnValue = function _crFnValue(valueFn, valueFnPrefix) {
   return valueFn ? valueFnPrefix ? _RouterFnValue["default"][valueFn].bind(null, valueFnPrefix) : _RouterFnValue["default"][valueFn] : undefined;
 };
 
-var _crDateProps = function _crDateProps(nInitFromDate, isContinious) {
-  var _props = isContinious ? {
-    msgTestDateOrEmpty: _Msg["default"].TEST_DATE_OR_EMPTY,
-    onTestDateOrEmpty: isYmdOrEmpty
-  } : undefined;
+var _crDateProps = function _crDateProps(_ref) {
+  var isFd = _ref.isFd,
+      nInitFromDate = _ref.nInitFromDate;
+
+  var _props = isFd ? {
+    errNotYmdOrEmpty: _Msg["default"].YMD_DATE_OR_EMPTY,
+    isYmdOrEmpty: isYmdOrEmpty
+  } : void 0;
 
   return (0, _extends2["default"])({
     initFromDate: nInitFromDate ? getFromDate(nInitFromDate) : initFromDate,
@@ -64,10 +67,10 @@ var _onError = function _onError(alertDescr, alertCaption) {
   });
 };
 
-var _crClickAbout = function _crClickAbout(_ref) {
-  var rootUri = _ref.rootUri,
-      descr = _ref.descr,
-      descrUrl = _ref.descrUrl;
+var _crClickAbout = function _crClickAbout(_ref2) {
+  var rootUri = _ref2.rootUri,
+      descr = _ref2.descr,
+      descrUrl = _ref2.descrUrl;
 
   var _descrUrl = descr && rootUri ? rootUri + "/" + descr + ".html" : descrUrl;
 
@@ -86,11 +89,9 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
       optionURI = dialogConf.optionURI,
       optionsJsonProp = dialogConf.optionsJsonProp,
       dataColumn = dialogConf.dataColumn,
-      nInitFromDate = dialogProps.nInitFromDate,
       valueFn = dialogProps.valueFn,
       valueFnPrefix = dialogProps.valueFnPrefix,
       loadFnType = dialogProps.loadFnType,
-      isContinious = dialogProps.isContinious,
       loadId = dialogProps.loadId,
       isProxy = dialogProps.isProxy,
       isGetKey = dialogProps.isGetKey,
@@ -120,7 +121,7 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
       msgOnNotSelected: _Msg["default"].NOT_SELECTED,
       msgOnNotValidFormat: _Msg["default"].NOT_VALID_FORMAT,
       fnValue: _crFnValue(valueFn, valueFnPrefix)
-    }, _crDateProps(nInitFromDate, isContinious), {
+    }, _crDateProps(dialogProps), {
       onLoad: onLoad,
       onShow: onShow,
       onClickInfo: onClickInfo,
