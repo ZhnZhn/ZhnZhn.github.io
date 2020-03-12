@@ -10,10 +10,10 @@ var _react = _interopRequireDefault(require("react"));
 var S = {
   LABEL: {
     display: 'inline-block',
-    color: '#9E9E9E',
+    color: '#9e9e9e',
     backgroundColor: 'transparent',
-    marginLeft: '16px',
-    marginRight: '16px'
+    marginLeft: 16,
+    marginRight: 16
   }
 };
 

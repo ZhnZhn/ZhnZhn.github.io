@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 //import PropTypes from "prop-types";
 
-import withTheme from '../hoc/withTheme';
+import ThemeContext from '../hoc/ThemeContext'
 
 import SvgMore from './SvgMore';
 import SvgCheckBox from './SvgCheckBox';
@@ -54,14 +54,14 @@ const S = {
 const _isFn = fn => typeof fn === 'function';
 
 const BrowserCaption = ({
-  theme,
   style,
-  onMore,
-  onCheck, onUnCheck,
   caption, children,
+  onMore,
+  onCheck, onUnCheck,  
   onClose
 }) => {
-  const TS = theme.getStyle(TH_ID);
+  const theme = useContext(ThemeContext)
+  , TS = theme.getStyle(TH_ID);
   return (
   <div
     className={CL.ROOT}
@@ -99,12 +99,14 @@ const BrowserCaption = ({
 }
 /*
 BrowserCaption.propTypes = {
+  caption: PropTypes.string,
+  style: PropTypes.object,
+  children: PropTypes.node,
   onMore: PropTypes.func,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func,
-  caption: PropTypes.string,
   onClose: PropTypes.func
 }
 */
 
-export default withTheme(BrowserCaption)
+export default BrowserCaption

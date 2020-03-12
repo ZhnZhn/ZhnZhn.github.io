@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 //import PropTypes from "prop-types";
 
-import withTheme from '../hoc/withTheme'
+import ThemeContext from '../hoc/ThemeContext'
 
 const TH_ID = 'BROWSER';
 
@@ -18,36 +18,31 @@ const S = {
   }
 };
 
-class Browser extends Component {
-  /*
-  static propTypes = {
-    theme: PropTypes.object
-    isShow: PropTypes.bool,
-    style: PropTypes.object
-  }
-  */
-  render(){
-    const {
-           theme,
-           isShow, style,
-           children
-          } = this.props
-        , TS = theme.getStyle(TH_ID)
-        , _styleOpen = isShow ? S.BLOCK : S.NONE
-        , _clOpen = isShow ? CL.SHOW : ''
-        , _clRoot = `${CL.BROWSER} ${_clOpen}`;
-    return (
-      <div
-         className={_clRoot}
-         style={{
-           ...style, ..._styleOpen,
-           ...TS.ROOT
-         }}
-       >
-         {children}
-      </div>
-    );
-  }
+const Browser = ({ isShow, style, children }) => {
+  const theme = useContext(ThemeContext)
+  , TS = theme.getStyle(TH_ID)
+  , _styleOpen = isShow ? S.BLOCK : S.NONE
+  , _clOpen = isShow ? CL.SHOW : ''
+  , _clRoot = `${CL.BROWSER} ${_clOpen}`;
+  return (
+    <div
+       className={_clRoot}
+       style={{
+         ...style, ..._styleOpen,
+         ...TS.ROOT
+       }}
+     >
+       {children}
+    </div>
+  );
 }
 
-export default withTheme(Browser)
+/*
+Browser.propTypes = {
+  isShow: PropTypes.bool,
+  style: PropTypes.object,
+  children: PropTypes.node
+}
+*/
+
+export default Browser

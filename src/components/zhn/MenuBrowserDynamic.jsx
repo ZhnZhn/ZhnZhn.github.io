@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
+import useListen from '../hooks/useListen'
 import Browser from './Browser';
 import BrowserCaption from './BrowserCaption';
 import ScrollPane from './ScrollPane';
-import MenuPart from './MenuPart';
+import MenuParts from './MenuParts'
 
 const CL_SCROLL = 'scroll-container-y scroll-menu';
 
@@ -13,87 +14,58 @@ const S = {
   }
 };
 
-class MenuBrowserDynamic extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      isShow: !!props.isInitShow,
-      isLoaded: false,
-      menuItems: []
-    }
-  }
+const _crMenu = (menuItems, isLoaded=true) => ({
+  menuItems,
+  isLoaded
+});
 
-  componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore)
-    this._loadMenu()
-  }
-  componentDidUpdate(){
-    const {isLoaded, isShow} = this.state;
-    if (!isLoaded && isShow) {
-      this._loadMenu()
-    }
-  }
-  componentWillUnmount(){
-    this.unsubscribe();
-  }
+const MenuBrowserDynamic = ({
+  isInitShow,
+  caption,
+  store,
+  browserType,
+  showAction, updateAction, loadCompletedAction,
+  sourceMenuUrl, onLoadMenu,
+  children
+}) => {
+  const [isShow, setIsShow] = useState(!!isInitShow)
+  , [menu, setMenu] = useState(_crMenu([], false))
+  , { menuItems, isLoaded } = menu
+  , _hHide = useCallback(() => setIsShow(false), [])
 
-  _loadMenu = () => {
-    const { browserType, caption, sourceMenuUrl, onLoadMenu } = this.props;
-    onLoadMenu({ browserType, caption, sourceMenuUrl });
-  }
-
-  _onStore = (actionType, data) => {
-    const {
-      browserType, store,
-      showAction, updateAction, loadCompletedAction
-    } = this.props;
+  useListen(store, (actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
-        this._hShow();
+        setIsShow(true)
       } else if (actionType === updateAction) {
-        this.setState({
-          menuItems: store.getBrowserMenu(browserType)
-        });
+        setMenu(_crMenu(
+          store.getBrowserMenu(browserType)
+        ))
       }
     } else if (data?.browserType === browserType
         && actionType === loadCompletedAction) {
-      this.setState({
-        menuItems: data.menuItems,
-        isLoaded: true
-      });
+         setMenu(_crMenu(data.menuItems))
     }
-  }
+  })
 
-  _hHide = () => {
-    this.setState({ isShow: false });
-  }
-  _hShow = () => {
-    this.setState({ isShow: true });
-  }
+  useEffect(()=>{
+    if (!isLoaded && isShow) {
+      onLoadMenu({ browserType, caption, sourceMenuUrl });
+    }
+  }, [isLoaded, isShow])
 
-  _renderMenuParts = (menuItems=[]) => {
-    return menuItems.map((menuPart, index) => {
-      return (<MenuPart key={index} {...menuPart} />)
-    });
-  }
-
-  render(){
-    const {caption, children} = this.props
-        , {menuItems, isShow} = this.state;
-
-    return (
-       <Browser isShow={isShow} style={S.BROWSER}>
-         <BrowserCaption
-            caption={caption}
-            onClose={this._hHide}
-         />
-          <ScrollPane className={CL_SCROLL}>
-            {this._renderMenuParts(menuItems)}
-            {children}
-          </ScrollPane>
-       </Browser>
-    )
-  }
+  return (
+    <Browser isShow={isShow} style={S.BROWSER}>
+      <BrowserCaption
+         caption={caption}
+         onClose={_hHide}
+      />
+       <ScrollPane className={CL_SCROLL}>
+         <MenuParts menuItems={menuItems} />
+         {children}
+       </ScrollPane>
+    </Browser>
+  );
 }
 
 export default MenuBrowserDynamic;

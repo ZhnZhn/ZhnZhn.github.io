@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 
-import Browser from '../zhn/Browser';
-import BrowserCaption from '../zhn/BrowserCaption';
-import ScrollPane from '../zhn/ScrollPane';
+import A from '../Comp'
 
 import MenuSlider from './MenuSlider'
 
@@ -58,18 +56,18 @@ class BrowserSlider extends Component {
     const { caption } = this.props
         , { isShow } = this.state;
     return (
-      <Browser isShow={isShow} style={S.BROWSER}>
-        <BrowserCaption
+      <A.Browser isShow={isShow} style={S.BROWSER}>
+        <A.BrowserCaption
            caption={caption}
            onClose={this._handleHide}
         />
-         <ScrollPane
+         <A.ScrollPane
            className={CL_SCROLL}
            style={S.SCROLL_DIV}
          >
            <MenuSlider {...this.props} />
-         </ScrollPane>
-      </Browser>
+         </A.ScrollPane>
+      </A.Browser>
     );
   }
 }

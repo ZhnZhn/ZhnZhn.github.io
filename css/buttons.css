@@ -4,6 +4,25 @@
   outline: 0
 }
 
+.bt-item {
+  display: inline-block;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-left: 12px;
+  margin-top: 10px;
+  font-weight: normal;
+  cursor: pointer;
+}
+.bt-item:hover {
+  outline: 0;
+}
+.bt-item:focus {
+  border-width: 2px;
+}
+
 .button-tab {
   position: absolute;
   z-index: 10;
@@ -19,14 +38,14 @@
 }
 
 .button-tab:hover {
-  color: #a487d4;  
+  color: #a487d4;
   outline: 0;
 }
 .button-tab:focus {
   border-bottom: 2px solid #a487d4;
 }
 .button-tab--show {
-  color: #a487d4;  
+  color: #a487d4;
   font-weight: bold;
 }
 

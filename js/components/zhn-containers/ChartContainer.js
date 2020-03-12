@@ -137,7 +137,7 @@ function (_Component) {
       if (_this._isDataForContainer(data)) {
         if (_isInArray(COMP_ACTIONS, actionType)) {
           if (actionType !== _ChartActions.ChartActionTypes.CLOSE_CHART) {
-            _this.spComp.scrollTop();
+            _this._refSpComp.current.scrollTop = 0; //this.spComp.scrollTop()
           }
 
           _this.setState(data);
@@ -276,9 +276,7 @@ function (_Component) {
     };
 
     _this._getRootNodeStyle = function () {
-      var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
-          _rootNode = _assertThisInitialize._rootNode,
-          _ref = _rootNode || {},
+      var _ref = _this._refRootNode.current || {},
           _ref$style = _ref.style,
           style = _ref$style === void 0 ? {} : _ref$style;
 
@@ -308,7 +306,12 @@ function (_Component) {
     };
 
     _this._fitToWidth = function () {
-      _this._hResizeAfter(parseInt(_this._rootNode.style.width, 10));
+      var _this$_getRootNodeSty = _this._getRootNodeStyle(),
+          width = _this$_getRootNodeSty.width;
+
+      if (width) {
+        _this._hResizeAfter(parseInt(width, 10));
+      }
     };
 
     _this._onCompareTo = function () {
@@ -330,14 +333,6 @@ function (_Component) {
       return _this._isAdminMode === _isAdminMode ? _this._MODEL : _this._MODEL = _this._crModelMore(_isAdminMode);
     };
 
-    _this._refRootNode = function (node) {
-      return _this._rootNode = node;
-    };
-
-    _this._refSpComp = function (node) {
-      return _this.spComp = node;
-    };
-
     _this.childMargin = CHILD_MARGIN;
 
     _this._initWidthProperties(_props);
@@ -345,6 +340,8 @@ function (_Component) {
     _this._MODEL = _this._crModelMore();
     _this._hSetActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), true);
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);
+    _this._refRootNode = _react["default"].createRef();
+    _this._refSpComp = _react["default"].createRef();
     _this.state = {
       isMore: false,
       isCompareTo: false
@@ -410,7 +407,7 @@ function (_Component) {
       comp: this,
       onResizeAfter: this._hResizeAfter
     })), _react["default"].createElement(_Comp["default"].ScrollPane, {
-      ref: this._refSpComp,
+      innerRef: this._refSpComp,
       className: CL.SCROLL
     }, _react["default"].createElement("div", null, this._renderCharts())));
   };

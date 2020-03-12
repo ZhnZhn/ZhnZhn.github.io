@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../src/components/zhn/MenuBrowser.jsx"],"names":["CL_SCROLL","S","BROWSER","paddingRight","MenuBrowser","props","_onStore","actionType","data","browserType","store","showAction","updateAction","_handleShow","setState","menuItems","getBrowserMenu","_handleHide","isShow","_renderMenuParts","map","menuPart","index","state","componentDidMount","unsubscribe","listen","componentWillUnmount","render","caption","children","Component"],"mappings":";;;;;;;;;;;;;AAAA;;AAEA;;AACA;;AACA;;AACA;;AAEA,IAAMA,SAAS,GAAG,gCAAlB;AAEA,IAAMC,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,YAAY,EAAE;AADP;AADD,CAAV;;IAMMC,W;;;;;AACJ,uBAAYC,KAAZ,EAAkB;AAAA;;AAChB;;AADgB,UAgBlBC,QAhBkB,GAgBP,UAACC,UAAD,EAAaC,IAAb,EAAsB;AAAA,wBAC2B,MAAKH,KADhC;AAAA,UACtBI,WADsB,eACtBA,WADsB;AAAA,UACTC,KADS,eACTA,KADS;AAAA,UACFC,UADE,eACFA,UADE;AAAA,UACUC,YADV,eACUA,YADV;;AAE9B,UAAIL,UAAU,KAAKI,UAAf,IAA6BH,IAAI,KAAKC,WAA1C,EAAuD;AACtD,cAAKI,WAAL;AACA,OAFD,MAEO,IAAIN,UAAU,KAAKK,YAAf,IAA+BJ,IAAI,KAAKC,WAA5C,EAAwD;AAC9D,cAAKK,QAAL,CAAc;AAAEC,UAAAA,SAAS,EAAEL,KAAK,CAACM,cAAN,CAAqBP,WAArB;AAAb,SAAd;AACA;AACH,KAvBiB;;AAAA,UAyBlBQ,WAzBkB,GAyBJ,YAAM;AAClB,YAAKH,QAAL,CAAc;AAAEI,QAAAA,MAAM,EAAG;AAAX,OAAd;AACD,KA3BiB;;AAAA,UA4BlBL,WA5BkB,GA4BJ,YAAM;AAClB,YAAKC,QAAL,CAAc;AAAEI,QAAAA,MAAM,EAAG;AAAX,OAAd;AACD,KA9BiB;;AAAA,UAgClBC,gBAhCkB,GAgCC,UAACJ,SAAD,EAAe;AAChC,aAAOA,SAAS,CAACK,GAAV,CAAc,UAACC,QAAD,EAAWC,KAAX,EAAqB;AACxC,eAAQ,gCAAC,oBAAD;AAAU,UAAA,GAAG,EAAEA;AAAf,WAA0BD,QAA1B,EAAR;AACD,OAFM,CAAP;AAGD,KApCiB;;AAAA,QAERX,MAFQ,GAEuBL,KAFvB,CAERK,KAFQ;AAAA,QAEDD,YAFC,GAEuBJ,KAFvB,CAEDI,WAFC;AAAA,QAEYS,MAFZ,GAEuBb,KAFvB,CAEYa,MAFZ;AAGhB,UAAKK,KAAL,GAAa;AACXL,MAAAA,MAAM,EAAEA,MAAM,GAAG,IAAH,GAAU,KADb;AAEXH,MAAAA,SAAS,EAAEL,MAAK,CAACM,cAAN,CAAqBP,YAArB;AAFA,KAAb;AAHgB;AAOjB;;;;SAEDe,iB,GAAA,6BAAmB;AACjB,SAAKC,WAAL,GAAmB,KAAKpB,KAAL,CAAWK,KAAX,CAAiBgB,MAAjB,CAAwB,KAAKpB,QAA7B,CAAnB;AACD,G;;SACDqB,oB,GAAA,gCAAsB;AACpB,SAAKF,WAAL;AACD,G;;SAwBDG,M,GAAA,kBAAQ;AAAA,uBACwB,KAAKvB,KAD7B;AAAA,QACEwB,OADF,gBACEA,OADF;AAAA,QACWC,QADX,gBACWA,QADX;AAAA,sBAEwB,KAAKP,KAF7B;AAAA,QAEER,SAFF,eAEEA,SAFF;AAAA,QAEaG,MAFb,eAEaA,MAFb;AAGN,WACG,gCAAC,mBAAD;AAAS,MAAA,MAAM,EAAEA,MAAjB;AAAyB,MAAA,KAAK,EAAEjB,CAAC,CAACC;AAAlC,OACG,gCAAC,0BAAD;AACG,MAAA,OAAO,EAAE2B,OADZ;AAEG,MAAA,OAAO,EAAE,KAAKZ;AAFjB,MADH,EAKG,gCAAC,sBAAD;AAAY,MAAA,SAAS,EAAEjB;AAAvB,OACG,KAAKmB,gBAAL,CAAsBJ,SAAtB,CADH,EAEGe,QAFH,CALH,CADH;AAYD,G;;;EAtDuBC,gB;;eAyDX3B,W","sourcesContent":["import React, { Component } from 'react';\r\n\r\nimport Browser from './Browser';\r\nimport BrowserCaption from './BrowserCaption';\r\nimport ScrollPane from './ScrollPane';\r\nimport MenuPart from './MenuPart';\r\n\r\nconst CL_SCROLL = 'scroll-container-y scroll-menu';\r\n\r\nconst S = {\r\n  BROWSER: {\r\n    paddingRight: '0px'\r\n  }\r\n};\r\n\r\nclass MenuBrowser extends Component {\r\n  constructor(props){\r\n    super()\r\n    const { store, browserType, isShow } = props;\r\n    this.state = {\r\n      isShow: isShow ? true : false,\r\n      menuItems: store.getBrowserMenu(browserType)\r\n    }\r\n  }\r\n\r\n  componentDidMount(){\r\n    this.unsubscribe = this.props.store.listen(this._onStore)\r\n  }\r\n  componentWillUnmount(){\r\n    this.unsubscribe()\r\n  }\r\n\r\n  _onStore = (actionType, data) => {\r\n     const { browserType, store, showAction, updateAction } = this.props;\r\n     if (actionType === showAction && data === browserType ){\r\n      this._handleShow()\r\n     } else if (actionType === updateAction && data === browserType){\r\n      this.setState({ menuItems: store.getBrowserMenu(browserType) })\r\n     }\r\n  }\r\n\r\n  _handleHide = () => {\r\n    this.setState({ isShow : false })\r\n  }\r\n  _handleShow = () => {\r\n    this.setState({ isShow : true })\r\n  }\r\n\r\n  _renderMenuParts = (menuItems) => {\r\n    return menuItems.map((menuPart, index) => {\r\n      return (<MenuPart key={index} {...menuPart} />);\r\n    });\r\n  }\r\n\r\n  render(){\r\n    const { caption, children } = this.props\r\n        , { menuItems, isShow } = this.state;\r\n    return (\r\n       <Browser isShow={isShow} style={S.BROWSER}>\r\n          <BrowserCaption\r\n             caption={caption}\r\n             onClose={this._handleHide}\r\n          />\r\n          <ScrollPane className={CL_SCROLL}>\r\n            {this._renderMenuParts(menuItems)}\r\n            {children}\r\n          </ScrollPane>\r\n       </Browser>\r\n    );\r\n  }\r\n}\r\n\r\nexport default MenuBrowser\r\n"],"file":"MenuBrowser.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/MenuBrowser.js"
+ ],
+ "file": "../../../src/components/zhn/MenuBrowser.js",
+ "names": [
+  "CL_SCROLL",
+  "S",
+  "BROWSER",
+  "paddingRight",
+  "MenuBrowser",
+  "caption",
+  "store",
+  "browserType",
+  "isShow",
+  "showAction",
+  "updateAction",
+  "children",
+  "is",
+  "setIs",
+  "getBrowserMenu",
+  "menuItems",
+  "setMenuItems",
+  "_hHide",
+  "actionType",
+  "data"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;AAEA;;AACA;;AACA;;AACA;;AAEA,IAAMA,SAAS,GAAG,gCAAlB;AAEA,IAAMC,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,YAAY,EAAE;AADP;AADD,CAAV;;AAMA,IAAMC,WAAW,GAAG,SAAdA,WAAc,OAKd;AAAA,MAJJC,OAII,QAJJA,OAII;AAAA,MAHJC,KAGI,QAHJA,KAGI;AAAA,MAHGC,WAGH,QAHGA,WAGH;AAAA,MAHgBC,MAGhB,QAHgBA,MAGhB;AAAA,MAFJC,UAEI,QAFJA,UAEI;AAAA,MAFQC,YAER,QAFQA,YAER;AAAA,MADJC,QACI,QADJA,QACI;;AAAA,kBACgB,qBAAS,CAAC,CAACH,MAAX,CADhB;AAAA,MACGI,EADH;AAAA,MACOC,KADP;AAAA,mBAE0B,qBAASP,KAAK,CAACQ,cAAN,CAAqBP,WAArB,CAAT,CAF1B;AAAA,MAEDQ,SAFC;AAAA,MAEUC,YAFV;AAAA,MAGFC,MAHE,GAGO,wBAAY;AAAA,WAAMJ,KAAK,CAAC,KAAD,CAAX;AAAA,GAAZ,EAAgC,EAAhC,CAHP;;AAKJ,6BAAUP,KAAV,EAAiB,UAACY,UAAD,EAAaC,IAAb,EAAsB;AACrC,QAAID,UAAU,KAAKT,UAAf,IAA6BU,IAAI,KAAKZ,WAA1C,EAAuD;AACrDM,MAAAA,KAAK,CAAC,IAAD,CAAL;AACD,KAFD,MAEO,IAAIK,UAAU,KAAKR,YAAf,IAA+BS,IAAI,KAAKZ,WAA5C,EAAwD;AAC7DS,MAAAA,YAAY,CAACV,KAAK,CAACQ,cAAN,CAAqBP,WAArB,CAAD,CAAZ;AACD;AACF,GAND;AAQA,SACE,gCAAC,mBAAD;AAAS,IAAA,MAAM,EAAEK,EAAjB;AAAqB,IAAA,KAAK,EAAEX,CAAC,CAACC;AAA9B,KACG,gCAAC,0BAAD;AACG,IAAA,OAAO,EAAEG,OADZ;AAEG,IAAA,OAAO,EAAEY;AAFZ,IADH,EAKG,gCAAC,sBAAD;AAAY,IAAA,SAAS,EAAEjB;AAAvB,KACE,gCAAC,qBAAD;AAAW,IAAA,SAAS,EAAEe;AAAtB,IADF,EAEGJ,QAFH,CALH,CADF;AAYD,CA9BD;;eAgCeP,W"
+}

@@ -5,8 +5,8 @@ const CL = 'focusable'
 const S = {
   BT: {
     verticalAlign: 'middle',
-    paddingLeft: '6px',
-    paddingRight: '6px'
+    paddingLeft: 6,
+    paddingRight: 6
   },
   SVG: {
     fill: 'black',

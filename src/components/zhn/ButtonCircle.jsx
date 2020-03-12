@@ -1,20 +1,20 @@
 import React from 'react';
+//import PropTypes from "prop-types";
 
 const CL = {
   ROOT: 'zhn-bt-circle',
   NOT: 'not-selected'
 };
 
-const ButtonCircle = (props) => {
-    const {
-           className='', style,
-           caption='', title,
-           isWithoutDefault,
-           onClick
-         } = props
-        , _className = (isWithoutDefault)
-            ? `${className} ${CL.NOT}`
-            : `${CL.ROOT} ${className} ${CL.NOT}`;
+const ButtonCircle = ({
+  className='', style,
+  caption='', title,
+  isWithoutDefault,
+  onClick
+}) => {
+   const _className = isWithoutDefault
+     ? `${className} ${CL.NOT}`
+     : `${CL.ROOT} ${className} ${CL.NOT}`;
     return (
       <button
          className={_className}
@@ -28,5 +28,16 @@ const ButtonCircle = (props) => {
       </button>
     );
 }
+
+/*
+ButtonCircle.propTypes = {
+  className: PropTypes.string,
+  style: PropTypes.object,
+  caption: PropTypes.string,
+  title: PropTypes.string,
+  isWithoutDefault: PropTypes.bool,
+  onClick: PropTypes.func
+}
+*/
 
 export default ButtonCircle

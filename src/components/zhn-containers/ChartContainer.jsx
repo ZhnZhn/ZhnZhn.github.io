@@ -77,6 +77,10 @@ class ChartContainer extends Component {
     this._hSetActive = this._toggleChb.bind(this, true)
     this._hSetNotActive = this._toggleChb.bind(this, false)
 
+    this._refRootNode = React.createRef()
+    this._refSpComp = React.createRef()
+
+
     this.state = {
       isMore: false,
       isCompareTo: false
@@ -139,7 +143,8 @@ class ChartContainer extends Component {
      if ( this._isDataForContainer(data) ) {
        if (_isInArray(COMP_ACTIONS, actionType)) {
          if (actionType !== CHAT.CLOSE_CHART) {
-           this.spComp.scrollTop()
+           this._refSpComp.current.scrollTop = 0
+           //this.spComp.scrollTop()
          }
          this.setState(data);
        } else if (actionType === CAT.CLOSE_CHART_CONTAINER_2){
@@ -242,12 +247,11 @@ class ChartContainer extends Component {
    }
 
    _getRootNodeStyle = () => {
-     const { _rootNode } = this
-     , { style={} } = _rootNode || {};
+     const { style={} } = this._refRootNode.current || {};
      return style;
    }
 
-   _resizeTo = (width) => {     
+   _resizeTo = (width) => {
      this._getRootNodeStyle().width = _toStyleWidth(width);
      this._hResizeAfter(width)
    }
@@ -265,9 +269,10 @@ class ChartContainer extends Component {
      style.width = _toStyleWidth(_width)
    }
    _fitToWidth = () => {
-     this._hResizeAfter(parseInt(
-       this._rootNode.style.width, 10
-     ))
+     const { width } = this._getRootNodeStyle();
+     if (width) {
+       this._hResizeAfter(parseInt(width, 10))
+     }
    }
 
    _onCompareTo = () => {
@@ -284,9 +289,6 @@ class ChartContainer extends Component {
        ? this._MODEL
        : (this._MODEL = this._crModelMore(_isAdminMode));
    }
-
-   _refRootNode = node => this._rootNode = node
-   _refSpComp = node => this.spComp = node
 
    render(){
      const  {
@@ -341,7 +343,7 @@ class ChartContainer extends Component {
              />
           </A.BrowserCaption>
           <A.ScrollPane
-             ref={this._refSpComp}
+             innerRef={this._refSpComp}
              className={CL.SCROLL}
           >
             <div>

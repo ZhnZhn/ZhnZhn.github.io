@@ -1,76 +1,66 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+//import PropTypes from "prop-types";
+
+const CL = 'bt-item';
 
 const S = {
-  ROOT : {
-    display : 'inline-block',
-    border : '1px solid',
-    borderRadius : '10px',
-    //marginLeft : '18px',
-    //marginLeft : '8px',
-    marginLeft : '12px',
-    marginTop : '10px',
-    cursor : 'pointer'
-  },
   ITEM : {
     display : 'inline-block',
-    paddingLeft : '5px',
-    //paddingRight : '20px'
-    paddingRight : '6px'
+    paddingLeft : 5,
+    paddingRight : 6
   },
   CIRCLE : {
     display : 'inline-block',
-    //marginLeft : '15px',
-    marginLeft : '6px',
-    backgroundColor: 'gray',
-    width : '12px',
-    height : '12px',
-    border: '1px solid gray',
+    backgroundColor : 'grey',
+    width : 12,
+    height : 12,
+    marginLeft : 6,
+    border: '1px solid grey',
     borderRadius : '50%'
   }
 }
 
-class LegendItem extends Component {
-  static defaultProps = {
-    item : {}
-  }
-  constructor(props){
-    super();
-    this.state = {
-      isVisible : props.item.isVisible
-    }
-  }
+const DF_STYLES = ['grey', {}];
+const DECOR_STYLE = { borderWidth: 2, fontWeight: 'bold' };
+const _useStyles = (is, color) => {
+  const [borderColor, _decorStyle] = is
+    ? [ color, DECOR_STYLE ]
+    : DF_STYLES;
+  return [
+    { color: color, borderColor, ..._decorStyle },
+    { backgroundColor: borderColor, borderColor}
+  ];
+};
 
-  _handleClickItem = () => {
-     const { item, onClickItem } = this.props
-     onClickItem(item);
-     this.setState({ isVisible: !this.state.isVisible })
-  }
-
-  render(){
-    const { item } = this.props
-        , { color, name } = item
-        , { isVisible } = this.state
-        , _styleRoot = (isVisible)
-            ?  { color: color, borderColor: color, borderWidth: '2px', fontWeight: 'bold'}
-            :  { color: color, borderColor: 'gray', borderWidth: '1px', fontWeight: 'normal' }
-        , _styleCircle = (isVisible)
-            ? { backgroundColor: color, borderColor: color}
-            : { backgroundColor: 'gray', borderColor: 'gray' };
-    return (
-      <span
-         style={{...S.ROOT, ..._styleRoot}}
-         onClick={this._handleClickItem}
-      >
-        <span style={{...S.CIRCLE, ..._styleCircle}}>
-        </span>
-        <span
-          style={S.ITEM}
-        >
-           {name}
-        </span>
-     </span>
-    )
-  }
+const LegendItem = ({ item={}, onClickItem }) => {
+  const { color, name, isVisible } = item
+  , [is, setIs] = useState(isVisible)
+  , [ btStyle, circleStyle ] = _useStyles(is, color)
+  , _hClick = () => {
+      onClickItem(item);
+      setIs(v => !v)
+  };
+  return (
+    <button
+       className={CL}
+       style={btStyle}
+       onClick={_hClick}
+    >
+      <span style={{...S.CIRCLE, ...circleStyle}} />
+      <span style={S.ITEM}>{name}</span>
+   </button>
+  );
 }
+
+/*
+LegendItem.propTypes = {
+  item: PropTypes.shape({
+    isVisible: PropTypes.bool,
+    color: PropTypes.string,
+    name: PropTypes.string
+  })
+  onClickItem: PropTypes.func
+}
+*/
 
 export default LegendItem

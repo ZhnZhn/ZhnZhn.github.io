@@ -11,11 +11,7 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Browser = _interopRequireDefault(require("../zhn/Browser"));
-
-var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
-
-var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _MenuSlider = _interopRequireDefault(require("./MenuSlider"));
 
@@ -88,13 +84,13 @@ function (_Component) {
   _proto.render = function render() {
     var caption = this.props.caption,
         isShow = this.state.isShow;
-    return _react["default"].createElement(_Browser["default"], {
+    return _react["default"].createElement(_Comp["default"].Browser, {
       isShow: isShow,
       style: S.BROWSER
-    }, _react["default"].createElement(_BrowserCaption["default"], {
+    }, _react["default"].createElement(_Comp["default"].BrowserCaption, {
       caption: caption,
       onClose: this._handleHide
-    }), _react["default"].createElement(_ScrollPane["default"], {
+    }), _react["default"].createElement(_Comp["default"].ScrollPane, {
       className: CL_SCROLL,
       style: S.SCROLL_DIV
     }, _react["default"].createElement(_MenuSlider["default"], this.props)));

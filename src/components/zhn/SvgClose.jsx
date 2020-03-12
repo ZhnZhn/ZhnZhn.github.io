@@ -1,14 +1,17 @@
 import React from 'react';
 //import PropTypes from "prop-types";
 
+const CL = "bt-svg-close";
+
 const STYLE = {
   COLOR: '#f44336',
   SVG: { padding: 3 }
 };
 
-const SvgClose = ({ style, onClose }) => (
-   <div
-      className="svg-close"
+const SvgClose = ({ style, onClose=()=>{} }) => (
+   <button
+      tabIndex="-1"
+      className={CL}
       style={style}
       onClick={onClose}
    >
@@ -21,7 +24,7 @@ const SvgClose = ({ style, onClose }) => (
         <path d="M 0,0 L 12,12" />
         <path d="M 12,0 L 0,12" />
      </svg>
-   </div>
+   </button>
 )
 /*
 SvgClose.propTypes = {
@@ -29,9 +32,5 @@ SvgClose.propTypes = {
   onClose: PropTypes.func
 }
 */
-SvgClose.defaultProps = {
-  onClose: () => {}
-}
-
 
 export default SvgClose
