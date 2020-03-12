@@ -3,7 +3,7 @@
     {
       "caption": "BIS",
       "items": [
-        { "id": "DBN_BIS_DSRP" },
+        { "id": "DBN_BIS_DSR" },
         { "id": "DBN_BIS_PPSS" }
       ]
     },
@@ -100,21 +100,21 @@
         ]
       }
     },
-    "DBN_BIS_DSRP": {
-      "type": "DBN_BIS_DSRP",
+    "DBN_BIS_DSR": {
+      "type": "DBN_BIS_DSR",
       "menuTitle" : "Debt Service Ratio, Q",
       "chartContainerCaption" : "DB Nomics: BIS: Debt Service Ratio",
       "dialogType": "DialogSelectN",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
-          [ "Country", "bis-dsrp-country" ],
-          [ "Borrows", "bis-dsrp-borrows" ]
+          [ "Country", "bis-dsr-country" ],
+          [ "Borrows", "bis-dsr-borrows" ]
         ],
         "dataSource" : "DB Nomics: BIS: Debt Service Ratio",
         "dfProps": {
           "dfProvider": "BIS",
-          "dfCode": "DSRP",
+          "dfCode": "dsr",
           "dfFnUrl": "s12",
           "dfPrefix": "Q"
         }
@@ -134,7 +134,7 @@
         "dataSource" : "DB Nomics: BIS: Selected Property Prices",
         "dfProps": {
           "dfProvider": "BIS",
-          "dfCode": "PP-SS",
+          "dfCode": "selected_pp",
           "dfFnUrl": "s12",
           "dfPrefix": "Q",
           "dfSufix": "628"
