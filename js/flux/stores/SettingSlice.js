@@ -9,7 +9,7 @@ var _apiTitle2;
 
 var _settings = {};
 var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.WTD, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR, _Type.LoadType.IEX];
-var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.BLS, _Type.LoadType.CRC, _Type.LoadType.Q_T];
+var _withProxy = [_Type.LoadType.FAO, _Type.LoadType.CRC];
 
 var _apiTitle = (_apiTitle2 = {
   DF: 'API'

@@ -6,11 +6,8 @@ const _withApiKey = [
   LT.BEA, LT.EIA, LT.INTR, LT.IEX
 ];
 const _withProxy = [
-  LT.FS,
   LT.FAO,
-  LT.BLS,
-  LT.CRC,
-  LT.Q_T
+  LT.CRC
 ];
 const _apiTitle = {
   DF: 'API',
@@ -52,7 +49,7 @@ const SettingSlice = {
     };
   },
 
-  fSetKey: (propName) => (value) => {    
+  fSetKey: (propName) => (value) => {
     _settings[propName] = value
   },
 

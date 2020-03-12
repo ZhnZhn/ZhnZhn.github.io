@@ -75,11 +75,15 @@ var DataProviders = function DataProviders(_ref) {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].WorldBank, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
+  }, _react["default"].createElement(_ProviderLinks["default"].Insee, null)), _react["default"].createElement("span", {
+    style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].StatNorway, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].StatSweden, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].StatFinland, null)), _react["default"].createElement("span", {
+    style: _About["default"].PROVIDER
+  }, _react["default"].createElement(_ProviderLinks["default"].Bsl, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].Fmp, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
@@ -102,15 +106,15 @@ var DataProviders = function DataProviders(_ref) {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].AlphaVantage, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
+  }, _react["default"].createElement(_ProviderLinks["default"].Iex, null)), _react["default"].createElement("span", {
+    style: _About["default"].PROVIDER
+  }, _react["default"].createElement(_ProviderLinks["default"].Wtd, null)), _react["default"].createElement("span", {
+    style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].Bea, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].Eia, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
-  }, _react["default"].createElement(_ProviderLinks["default"].Intrinio, null)), _react["default"].createElement("span", {
-    style: _About["default"].PROVIDER
-  }, _react["default"].createElement(_ProviderLinks["default"].Iex, null)), _react["default"].createElement("span", {
-    style: _About["default"].PROVIDER
-  }, _react["default"].createElement(_ProviderLinks["default"].Wtd, null))), _react["default"].createElement("div", {
+  }, _react["default"].createElement(_ProviderLinks["default"].Intrinio, null))), _react["default"].createElement("div", {
     style: ST.NOTE
   }, _react["default"].createElement("p", null, _react["default"].createElement("span", {
     style: _About["default"].BLACK
@@ -125,7 +129,7 @@ var DataProviders = function DataProviders(_ref) {
   }, _react["default"].createElement("span", {
     style: _About["default"].BLACK
   }, "Note:\xA0"), "This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA."))), _react["default"].createElement(_OpenClose["default"], {
-    caption: "(4) Required Https Proxy:",
+    caption: "(2) Required Https Proxy:",
     captionStyle: ocCaptionStyle,
     rootStyle: ST.OPEN_CLOSE,
     childStyle: ST.CHILD_STYLE,
@@ -136,10 +140,6 @@ var DataProviders = function DataProviders(_ref) {
   }, _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].FaoStat, null)), _react["default"].createElement("span", {
-    style: _About["default"].PROVIDER
-  }, _react["default"].createElement(_ProviderLinks["default"].Insee, null)), _react["default"].createElement("span", {
-    style: _About["default"].PROVIDER
-  }, _react["default"].createElement(_ProviderLinks["default"].Bsl, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].CryptoCompare, null), _react["default"].createElement("span", {
     style: _About["default"].BLACK

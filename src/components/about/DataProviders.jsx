@@ -73,6 +73,9 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
           <Link.WorldBank />
         </span>
         <span style={S.PROVIDER}>
+          <Link.Insee/>
+        </span>
+        <span style={S.PROVIDER}>
           <Link.StatNorway />
         </span>
         <span style={S.PROVIDER}>
@@ -82,11 +85,14 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
           <Link.StatFinland />
         </span>
         <span style={S.PROVIDER}>
+          <Link.Bsl/>
+        </span>
+        <span style={S.PROVIDER}>
           <Link.Fmp/>
         </span>
         <span style={S.PROVIDER}>
           <Link.CryptoCompare/>
-        </span>        
+        </span>
       </p>
       <OpenClose
         caption="(8) Required API key:"
@@ -110,6 +116,12 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
           <Link.AlphaVantage/>
         </span>
         <span style={S.PROVIDER}>
+          <Link.Iex />
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.Wtd/>
+        </span>
+        <span style={S.PROVIDER}>
           <Link.Bea/>
         </span>
         <span style={S.PROVIDER}>
@@ -117,12 +129,6 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Intrinio/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Iex />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Wtd/>
         </span>
       </p>
       <div style={ST.NOTE}>
@@ -142,7 +148,7 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
       </div>
       </OpenClose>
       <OpenClose
-        caption="(4) Required Https Proxy:"
+        caption="(2) Required Https Proxy:"
         captionStyle={ocCaptionStyle}
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
@@ -152,12 +158,6 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         <p style={ST.P4}>
           <span style={S.PROVIDER}>
            <Link.FaoStat />
-          </span>
-          <span style={S.PROVIDER}>
-            <Link.Insee/>
-          </span>
-          <span style={S.PROVIDER}>
-            <Link.Bsl/>
           </span>
           <span style={S.PROVIDER}>
             <Link.CryptoCompare/>

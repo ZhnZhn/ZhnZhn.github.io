@@ -12,7 +12,7 @@ export const BrowserType = {
    NORWAY_STAT_ALL: 'NST_ALL',
    SWEDEN_STAT: 'SWS',
    SWEDEN_STAT_ALL: 'SWS_ALL',
-   FINLAND_STAT_ALL: 'SFL',   
+   FINLAND_STAT_ALL: 'SFL',
 
    ECONOMIC : 'QE',
 
@@ -70,8 +70,7 @@ export const ChartType = {
 }
 
 export const LoadType = {
-  Q: 'Q',
-  Q_T: 'Q_T',
+  Q: 'Q',  
   B: 'B',
   AL: 'AL',
   AL_S: 'AL_S',
