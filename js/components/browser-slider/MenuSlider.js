@@ -23,9 +23,11 @@ var _loadItems = _interopRequireDefault(require("./loadItems"));
 
 var _Frame = _interopRequireDefault(require("./Frame"));
 
-var _MenuItem = _interopRequireDefault(require("./MenuItem"));
+var _MenuList = _interopRequireDefault(require("./MenuList"));
 
 var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
+
+var _PageList = _interopRequireDefault(require("./PageList"));
 
 var S = {
   ROOT: {
@@ -72,8 +74,10 @@ function (_Component) {
         if (Array.isArray(model)) {
           _this.setState({
             model: model,
-            errMsg: undefined
+            errMsg: void 0
           });
+        } else {
+          throw new Error('Response is not array');
         }
       })["catch"](function (err) {
         _this.setState({
@@ -83,10 +87,17 @@ function (_Component) {
     };
 
     _this.hPrevPage = function (pageNumber) {
-      _this.setState(function (prevState) {
-        prevState.pageCurrent = pageNumber - 1;
+      _this.setState(function (_ref) {
+        var pageCurrent = _ref.pageCurrent;
+
+        if (pageCurrent === 0 || pageCurrent !== pageNumber) {
+          return null;
+        }
+
         _this._direction = -1;
-        return prevState;
+        return {
+          pageCurrent: pageNumber - 1
+        };
       });
     };
 
@@ -109,66 +120,33 @@ function (_Component) {
     };
 
     _this.hNextPage = function (id, title, pageNumber) {
-      _this.setState(function (prevState) {
-        var pages = prevState.pages,
-            _max = pages.length - 1;
+      _this.setState(function (_ref2) {
+        var pageCurrent = _ref2.pageCurrent,
+            pages = _ref2.pages;
 
-        if (_max + 1 > pageNumber) {
+        if (pageNumber !== pageCurrent) {
+          return null;
+        }
+
+        if (pageNumber < pages.length) {
           if (pages[pageNumber] && pages[pageNumber].key !== id) {
             if (pageNumber > 0) {
-              prevState.pages.splice(pageNumber);
+              pages.splice(pageNumber);
             } else {
-              prevState.pages = [];
+              pages = [];
             }
 
-            _this._addPage(prevState.pages, id, title);
+            _this._addPage(pages, id, title);
           }
         } else {
           _this._addPage(pages, id, title);
         }
 
-        prevState.pageCurrent = pageNumber + 1;
         _this._direction = 1;
-        return prevState;
-      });
-    };
-
-    _this._refFirst = function (n) {
-      return _this._firstNode = n;
-    };
-
-    _this._renderMenu = function () {
-      var _this$state = _this.state,
-          model = _this$state.model,
-          errMsg = _this$state.errMsg,
-          items = model.map(function (item, index) {
-        var text = item.text,
-            id = item.id,
-            _ref = index === 0 ? _this._refFirst : void 0;
-
-        return _react["default"].createElement(_MenuItem["default"], {
-          ref: _ref,
-          key: id,
-          item: item,
-          onClick: _this.hNextPage.bind(null, id, text, 0)
-        });
-      });
-      return _react["default"].createElement("div", {
-        style: S.PAGE
-      }, items, _react["default"].createElement(_ErrMsg["default"], {
-        errMsg: errMsg
-      }));
-    };
-
-    _this._renderPages = function () {
-      var _this$state2 = _this.state,
-          pages = _this$state2.pages,
-          pageCurrent = _this$state2.pageCurrent;
-      return pages.map(function (page, index) {
-        return _react["default"].cloneElement(page, {
-          pageCurrent: pageCurrent,
-          pageNumber: index + 1
-        });
+        return {
+          pages: pages,
+          pageCurrent: pageNumber + 1
+        };
       });
     };
 
@@ -199,14 +177,24 @@ function (_Component) {
     };
 
     _this.focusFirst = function () {
-      if (_this._firstNode) {
-        _this._firstNode.focus();
+      var _nodeItem = _this._refFirstItem.current;
+
+      if (_nodeItem) {
+        _nodeItem.focus();
       }
     };
 
     _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this._direction = 0;
+    _this._refFirstItem = _react["default"].createRef();
+
+    _this._fOnClickItem = function (_ref3) {
+      var id = _ref3.id,
+          text = _ref3.text;
+      return _this.hNextPage.bind(null, id, text, 0);
+    };
+
     _this.state = {
       model: [],
       pageCurrent: 0,
@@ -222,6 +210,12 @@ function (_Component) {
   };
 
   _proto.render = function render() {
+    var _this$state = this.state,
+        model = _this$state.model,
+        errMsg = _this$state.errMsg,
+        pages = _this$state.pages,
+        pageCurrent = _this$state.pageCurrent;
+
     var _transform = this._crTransform(),
         _pagesStyle = (0, _extends2["default"])({}, S.PAGES, {}, _transform);
 
@@ -230,7 +224,18 @@ function (_Component) {
     }, _react["default"].createElement("div", {
       ref: this._refMenu,
       style: _pagesStyle
-    }, this._renderMenu(), this._renderPages()));
+    }, _react["default"].createElement("div", {
+      style: S.PAGE
+    }, _react["default"].createElement(_MenuList["default"], {
+      refFirstItem: this._refFirstItem,
+      model: model,
+      fOnClickItem: this._fOnClickItem
+    }), _react["default"].createElement(_ErrMsg["default"], {
+      errMsg: errMsg
+    })), _react["default"].createElement(_PageList["default"], {
+      pages: pages,
+      pageCurrent: pageCurrent
+    })));
   };
 
   _proto.componentDidUpdate = function componentDidUpdate() {

@@ -6,8 +6,9 @@ import fOnClickItem from './factoryClickItem'
 import loadItems from './loadItems'
 
 import Frame from './Frame'
-import MenuItem from './MenuItem'
+import MenuList from './MenuList'
 import ErrMsg from './ErrMsg'
+import PageList from './PageList'
 
 const S = {
   ROOT: {
@@ -47,6 +48,11 @@ class MenuSlider extends Component {
       this.hPrevPage.bind(this)
     )
     this._direction = 0
+    this._refFirstItem = React.createRef()
+
+    this._fOnClickItem = ({ id, text }) => this
+      .hNextPage.bind(null, id, text, 0)
+
     this.state = {
       model: [],
       pageCurrent: 0,
@@ -65,7 +71,9 @@ class MenuSlider extends Component {
     loadItems(dfProps.rootUrl, proxy)
       .then(model => {
          if (Array.isArray(model)) {
-            this.setState({ model, errMsg: undefined })
+            this.setState({ model, errMsg: void 0})
+         } else {
+           throw new Error('Response is not array');
          }
       })
       .catch(err => {
@@ -75,10 +83,12 @@ class MenuSlider extends Component {
 
 
   hPrevPage = (pageNumber) => {
-    this.setState(prevState => {
-      prevState.pageCurrent = pageNumber - 1
+    this.setState(({ pageCurrent }) => {
+      if (pageCurrent === 0 || pageCurrent !== pageNumber) {
+        return null;
+      }
       this._direction = -1
-      return prevState;
+      return { pageCurrent: pageNumber - 1};
     })
   }
 
@@ -102,65 +112,26 @@ class MenuSlider extends Component {
 
 
   hNextPage = (id, title, pageNumber) => {
-    this.setState(prevState => {
-       const { pages } = prevState
-          , _max = pages.length-1;
+    this.setState(({ pageCurrent, pages }) => {
+       if (pageNumber !== pageCurrent) {
+         return null;
+       }
 
-      if ( (_max+1) > pageNumber) {
+      if (pageNumber < pages.length) {
         if (pages[pageNumber] && pages[pageNumber].key !== id) {
            if (pageNumber>0) {
-             prevState.pages.splice(pageNumber)
+             pages.splice(pageNumber)
            } else {
-             prevState.pages = []
+             pages = []
            }
-           this._addPage(prevState.pages, id, title)
+           this._addPage(pages, id, title)
         }
       } else {
         this._addPage(pages, id, title)
       }
 
-      prevState.pageCurrent = pageNumber + 1
       this._direction = 1
-      return prevState;
-    })
-  }
-
-
-_refFirst = n => this._firstNode = n
-
- _renderMenu = () => {
-   const { model, errMsg } = this.state
-       , items = model.map((item, index) => {
-           const { text, id } = item
-                , _ref = index === 0
-                    ? this._refFirst
-                    : void 0;
-           return (
-             <MenuItem
-               ref={_ref}
-               key={id}
-               item={item}
-               onClick={this.hNextPage.bind(null, id, text, 0)}
-             />
-           );
-         })
-
-   return (
-     <div style={S.PAGE}>
-       {items}
-       <ErrMsg errMsg={errMsg} />
-     </div>
-   );
- }
-
-
-  _renderPages = () => {
-    const { pages, pageCurrent } = this.state;
-    return pages.map((page, index) => {
-      return React.cloneElement(page, {
-        pageCurrent,
-        pageNumber: index + 1,
-      });
+      return { pages, pageCurrent: pageNumber + 1};
     })
   }
 
@@ -185,6 +156,10 @@ _refFirst = n => this._firstNode = n
   _refMenu = n => this._menuNode = n
 
   render(){
+    const {
+      model, errMsg,
+      pages, pageCurrent
+    } = this.state
     const _transform = this._crTransform()
     , _pagesStyle = {
          ...S.PAGES,
@@ -197,16 +172,28 @@ _refFirst = n => this._firstNode = n
           ref={this._refMenu}
           style={_pagesStyle}
         >
-           {this._renderMenu()}
-           {this._renderPages()}
+          <div style={S.PAGE}>
+            <MenuList
+              refFirstItem={this._refFirstItem}
+              model={model}
+              fOnClickItem={this._fOnClickItem}
+            />
+            <ErrMsg errMsg={errMsg} />
+          </div>
+          <PageList
+            pages={pages}
+            pageCurrent={pageCurrent}
+          />
+
         </div>
       </div>
     );
   }
 
   focusFirst = () => {
-    if (this._firstNode){
-      this._firstNode.focus()
+    const _nodeItem = this._refFirstItem.current;
+    if (_nodeItem) {
+      _nodeItem.focus()
     }
   }
 

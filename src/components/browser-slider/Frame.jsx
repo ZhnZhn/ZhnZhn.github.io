@@ -1,109 +1,100 @@
-import React, { Component } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 
 import MenuTitle from './MenuTitle'
-import MenuItem from './MenuItem'
+import MenuList from './MenuList'
 import ErrMsg from './ErrMsg'
 
-const T_O_FOCUS_FIRST = 1000;
+const FOCUS_FIRST_MLS = 1000;
 
 const _isArr = Array.isArray;
 
-class Frame extends Component {
+const _getProxy = (store, dfProps) => store
+ .getProxy(dfProps.lT);
 
-  state = {
-    model: []
-  }
+const _fOnClick = (
+  proxy, rootId,
+  dfProps, pageNumber,
+  onClickNext, fOnClickItem,
+  item
+) => {
+  const { text, id, type } = item;
+  return type === 'l'
+     ? onClickNext.bind(null, `${rootId}/${id}`, text, pageNumber)
+     : fOnClickItem({
+         id: `${rootId}/${id}`,
+         ...dfProps,
+         text,
+         proxy
+       });
+};
 
-  componentDidMount(){
-    const { title, id } = this.props;
+const Frame = ({
+  store,
+  title, id, rootStyle,
+  dfProps={},
+  pageNumber, pageCurrent,
+  onClickPrev,
+  onClickNext,
+  fOnClickItem,
+  loadItems
+}) => {
+  const _refTitle = useRef()
+  , _refId = useRef()
+  , [state, setState] = useState({ model: [], errMsg: null})
+  , { model, errMsg } = state
+  , proxy = _getProxy(store, dfProps)
+  , _fOnClickItem = useCallback(
+      _fOnClick.bind(null,
+         proxy, id, dfProps, pageNumber,
+         onClickNext, fOnClickItem
+       )
+      , [proxy]);
+
+  useEffect(()=>{
     if (title) {
-      this.loadMenu(id)
+      loadItems(`${dfProps.rootUrl}/${id}`, proxy)
+        .then(model => {
+          if (_isArr(model)){
+            setState({ model, errMsg: null })
+          } else {
+            throw new Error('Response is not array')
+          }
+        })
+        .catch(err => setState({
+           model: [], errMsg: err.message
+         }))
     }
-  }
-
-  loadMenu = (id) => {
-
-    const { dfProps={}, loadItems, store } = this.props
-        , { lT } = dfProps
-        , proxy = store.getProxy(lT);
-    loadItems(`${dfProps.rootUrl}/${id}`, proxy)
-      .then(model => {
-        if (_isArr(model)){
-           this.setState({ model, errMsg: undefined })
-        }
-      })
-      .catch(err => {
-         this.setState({ errMsg: err.message })
-      })
-  }
-
-  _renderMenu = () => {
-    const { dfProps={}, pageNumber, store } = this.props
-        , { lT } = dfProps
-        , proxy = store.getProxy(lT)
-        , { model } = this.state
-        , {
-            onClickNext,
-            fOnClickItem,
-            id:rootId
-          } = this.props
-        , items = model.map(item => {
-            const { text, id, type } = item
-                , _onClick = type === 'l'
-                    ? onClickNext.bind(null, `${rootId}/${id}`, text, pageNumber)
-                    : fOnClickItem({
-                         id: `${rootId}/${id}`,
-                         ...dfProps,
-                         text,
-                         proxy
-                       })
-             return (
-               <MenuItem
-                 key={id}
-                 item={item}
-                 onClick={_onClick}
-               />
-              );
-          });
-
-    return (
-      <div>
-        {items}
-      </div>
-    );
-  }
-
- _refFirst = n => this._firstNode = n
-
-  render(){
-    const { title, rootStyle, pageNumber, onClickPrev } = this.props
-        , { errMsg } = this.state;
-
-    return (
-      <div style={rootStyle}>
-        <MenuTitle
-          ref={this._refFirst}
-          title={title}
-          onClick={onClickPrev.bind(null, pageNumber)}
-        />
-        {this._renderMenu()}
-        <ErrMsg errMsg={errMsg} />
-      </div>
-    );
-  }
-
-  focusFirst = () => {
-    if (this._firstNode) {
-      this._firstNode.focus()
+    return () => {
+      clearTimeout(_refId.current)
+      _refTitle.current = null
     }
-  }
+  }, [])
 
-  componentDidUpdate(prevProps){
-    const { pageNumber, pageCurrent } = this.props;
+  useEffect(()=>{
     if ( pageNumber === pageCurrent ) {
-      setTimeout(this.focusFirst, T_O_FOCUS_FIRST)
+      _refId.current = setTimeout(()=>{
+        const _titleNode = _refTitle.current;
+        if (_titleNode) {
+          _titleNode.focus()
+        }
+      }, FOCUS_FIRST_MLS)
     }
-  }
+  }, [pageNumber, pageCurrent])
+
+  return (
+    <div style={rootStyle}>
+      <MenuTitle
+        innerRef={_refTitle}
+        title={title}
+        onClick={onClickPrev.bind(null, pageNumber)}
+      />
+      <MenuList
+        model={model}
+        fOnClickItem={_fOnClickItem}
+      />
+      <ErrMsg errMsg={errMsg} />
+    </div>
+  );
 }
 
 export default Frame

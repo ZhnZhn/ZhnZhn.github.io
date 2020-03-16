@@ -9,146 +9,108 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
 
 var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
-var _MenuItem = _interopRequireDefault(require("./MenuItem"));
+var _MenuList = _interopRequireDefault(require("./MenuList"));
 
 var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
 
-var T_O_FOCUS_FIRST = 1000;
+var FOCUS_FIRST_MLS = 1000;
 var _isArr = Array.isArray;
 
-var Frame =
-/*#__PURE__*/
-function (_Component) {
-  (0, _inheritsLoose2["default"])(Frame, _Component);
+var _getProxy = function _getProxy(store, dfProps) {
+  return store.getProxy(dfProps.lT);
+};
 
-  function Frame() {
-    var _this;
+var _fOnClick = function _fOnClick(proxy, rootId, dfProps, pageNumber, onClickNext, fOnClickItem, item) {
+  var text = item.text,
+      id = item.id,
+      type = item.type;
+  return type === 'l' ? onClickNext.bind(null, rootId + "/" + id, text, pageNumber) : fOnClickItem((0, _extends2["default"])({
+    id: rootId + "/" + id
+  }, dfProps, {
+    text: text,
+    proxy: proxy
+  }));
+};
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+var Frame = function Frame(_ref) {
+  var store = _ref.store,
+      title = _ref.title,
+      id = _ref.id,
+      rootStyle = _ref.rootStyle,
+      _ref$dfProps = _ref.dfProps,
+      dfProps = _ref$dfProps === void 0 ? {} : _ref$dfProps,
+      pageNumber = _ref.pageNumber,
+      pageCurrent = _ref.pageCurrent,
+      onClickPrev = _ref.onClickPrev,
+      onClickNext = _ref.onClickNext,
+      fOnClickItem = _ref.fOnClickItem,
+      loadItems = _ref.loadItems;
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      model: []
-    };
+  var _refTitle = (0, _react.useRef)(),
+      _refId = (0, _react.useRef)(),
+      _useState = (0, _react.useState)({
+    model: [],
+    errMsg: null
+  }),
+      state = _useState[0],
+      setState = _useState[1],
+      model = state.model,
+      errMsg = state.errMsg,
+      proxy = _getProxy(store, dfProps),
+      _fOnClickItem = (0, _react.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy]);
 
-    _this.loadMenu = function (id) {
-      var _this$props = _this.props,
-          _this$props$dfProps = _this$props.dfProps,
-          dfProps = _this$props$dfProps === void 0 ? {} : _this$props$dfProps,
-          loadItems = _this$props.loadItems,
-          store = _this$props.store,
-          lT = dfProps.lT,
-          proxy = store.getProxy(lT);
+  (0, _react.useEffect)(function () {
+    if (title) {
       loadItems(dfProps.rootUrl + "/" + id, proxy).then(function (model) {
         if (_isArr(model)) {
-          _this.setState({
+          setState({
             model: model,
-            errMsg: undefined
+            errMsg: null
           });
+        } else {
+          throw new Error('Response is not array');
         }
       })["catch"](function (err) {
-        _this.setState({
+        return setState({
+          model: [],
           errMsg: err.message
         });
       });
-    };
-
-    _this._renderMenu = function () {
-      var _this$props2 = _this.props,
-          _this$props2$dfProps = _this$props2.dfProps,
-          dfProps = _this$props2$dfProps === void 0 ? {} : _this$props2$dfProps,
-          pageNumber = _this$props2.pageNumber,
-          store = _this$props2.store,
-          lT = dfProps.lT,
-          proxy = store.getProxy(lT),
-          model = _this.state.model,
-          _this$props3 = _this.props,
-          onClickNext = _this$props3.onClickNext,
-          fOnClickItem = _this$props3.fOnClickItem,
-          rootId = _this$props3.id,
-          items = model.map(function (item) {
-        var text = item.text,
-            id = item.id,
-            type = item.type,
-            _onClick = type === 'l' ? onClickNext.bind(null, rootId + "/" + id, text, pageNumber) : fOnClickItem((0, _extends2["default"])({
-          id: rootId + "/" + id
-        }, dfProps, {
-          text: text,
-          proxy: proxy
-        }));
-
-        return _react["default"].createElement(_MenuItem["default"], {
-          key: id,
-          item: item,
-          onClick: _onClick
-        });
-      });
-      return _react["default"].createElement("div", null, items);
-    };
-
-    _this._refFirst = function (n) {
-      return _this._firstNode = n;
-    };
-
-    _this.focusFirst = function () {
-      if (_this._firstNode) {
-        _this._firstNode.focus();
-      }
-    };
-
-    return _this;
-  }
-
-  var _proto = Frame.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    var _this$props4 = this.props,
-        title = _this$props4.title,
-        id = _this$props4.id;
-
-    if (title) {
-      this.loadMenu(id);
     }
-  };
 
-  _proto.render = function render() {
-    var _this$props5 = this.props,
-        title = _this$props5.title,
-        rootStyle = _this$props5.rootStyle,
-        pageNumber = _this$props5.pageNumber,
-        onClickPrev = _this$props5.onClickPrev,
-        errMsg = this.state.errMsg;
-    return _react["default"].createElement("div", {
-      style: rootStyle
-    }, _react["default"].createElement(_MenuTitle["default"], {
-      ref: this._refFirst,
-      title: title,
-      onClick: onClickPrev.bind(null, pageNumber)
-    }), this._renderMenu(), _react["default"].createElement(_ErrMsg["default"], {
-      errMsg: errMsg
-    }));
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
-    var _this$props6 = this.props,
-        pageNumber = _this$props6.pageNumber,
-        pageCurrent = _this$props6.pageCurrent;
-
+    return function () {
+      clearTimeout(_refId.current);
+      _refTitle.current = null;
+    };
+  }, []);
+  (0, _react.useEffect)(function () {
     if (pageNumber === pageCurrent) {
-      setTimeout(this.focusFirst, T_O_FOCUS_FIRST);
-    }
-  };
+      _refId.current = setTimeout(function () {
+        var _titleNode = _refTitle.current;
 
-  return Frame;
-}(_react.Component);
+        if (_titleNode) {
+          _titleNode.focus();
+        }
+      }, FOCUS_FIRST_MLS);
+    }
+  }, [pageNumber, pageCurrent]);
+  return _react["default"].createElement("div", {
+    style: rootStyle
+  }, _react["default"].createElement(_MenuTitle["default"], {
+    innerRef: _refTitle,
+    title: title,
+    onClick: onClickPrev.bind(null, pageNumber)
+  }), _react["default"].createElement(_MenuList["default"], {
+    model: model,
+    fOnClickItem: _fOnClickItem
+  }), _react["default"].createElement(_ErrMsg["default"], {
+    errMsg: errMsg
+  }));
+};
 
 var _default = Frame;
 exports["default"] = _default;

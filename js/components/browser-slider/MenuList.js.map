@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/MenuList.js"
+ ],
+ "file": "../../../src/components/browser-slider/MenuList.js",
+ "names": [
+  "MenuList",
+  "React",
+  "memo",
+  "refFirstItem",
+  "model",
+  "fOnClickItem",
+  "map",
+  "item",
+  "index",
+  "id"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,QAAQ,GAAGC,kBAAMC,IAAN,CAAW;AAAA,MAC1BC,YAD0B,QAC1BA,YAD0B;AAAA,wBAE1BC,KAF0B;AAAA,MAE1BA,KAF0B,2BAEpB,EAFoB;AAAA,MAG1BC,YAH0B,QAG1BA,YAH0B;AAAA,SAK3B,6CACED,KAAK,CAACE,GAAN,CAAU,UAACC,IAAD,EAAOC,KAAP;AAAA,WACR,gCAAC,oBAAD;AACE,MAAA,QAAQ,EAAEA,KAAK,KAAK,CAAV,GAAcL,YAAd,GAA6B,KAAK,CAD9C;AAEE,MAAA,GAAG,EAAEI,IAAI,CAACE,EAFZ;AAGE,MAAA,IAAI,EAAEF,IAHR;AAIE,MAAA,OAAO,EAAEF,YAAY,CAACE,IAAD;AAJvB,MADQ;AAAA,GAAV,CADF,CAL2B;AAAA,CAAX,CAAjB;AAkBA;;;;;;;;;;;;;eAYeP,Q"
+}

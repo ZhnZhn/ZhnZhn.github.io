@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/PageList.js"
+ ],
+ "file": "../../../src/components/browser-slider/PageList.js",
+ "names": [
+  "PageList",
+  "pages",
+  "pageCurrent",
+  "map",
+  "page",
+  "index",
+  "React",
+  "cloneElement",
+  "pageNumber"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,WAAV,QAAUA,WAAV;AAAA,SAA4BD,KAAK,CAChDE,GAD2C,CACvC,UAACC,IAAD,EAAOC,KAAP;AAAA,WAAiBC,kBAAMC,YAAN,CAAmBH,IAAnB,EAAyB;AAC3CF,MAAAA,WAAW,EAAXA,WAD2C;AAE3CM,MAAAA,UAAU,EAAEH,KAAK,GAAG;AAFuB,KAAzB,CAAjB;AAAA,GADuC,CAA5B;AAAA,CAAjB;;eAMeL,Q"
+}

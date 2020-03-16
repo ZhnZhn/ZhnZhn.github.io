@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { useState, useCallback } from 'react'
 
+import useListen from '../hooks/useListen'
 import A from '../Comp'
 
 import MenuSlider from './MenuSlider'
@@ -8,68 +9,41 @@ const CL_SCROLL = 'scroll-container-y';
 
 const S = {
   BROWSER: {
-    paddingRight: '0'
+    paddingRight: 0
   },
-  SCROLL_DIV: {
+  SCROLL_PANE: {
     height: '92%'
   }
 };
 
-class BrowserSlider extends Component {
-  constructor(props){
-    super();
-    this.state = {
-      isShow: props.isInitShow ? true : false,
-    }
-  }
+const BrowserSlider = React.memo((props) => {
+  const {
+    isInitShow, caption,
+    store, browserType, showAction
+  } = props
+  const [isShow, setIsShow] = useState(!!isInitShow)
+  , _hHide = useCallback(()=>{ setIsShow(false) }, []);
 
-  componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore)
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.state.isShow === nextState.isShow){
-      return false;
-    }
-    return true;
-  }
-
-  componentWillUnmount(){
-    this.unsubscribe();
-  }
-
-  _onStore = (actionType, data) => {
-    const { browserType, showAction  } = this.props;
+  useListen(store, (actionType, data) => {
     if (actionType === showAction && data === browserType){
-      this._handleShow();
+      setIsShow(true)
     }
-  }
+  })
 
-  _handleHide = () => {
-    this.setState({ isShow : false });
-  }
-  _handleShow = () => {
-    this.setState({ isShow : true });
-  }
-
-  render(){
-    const { caption } = this.props
-        , { isShow } = this.state;
-    return (
-      <A.Browser isShow={isShow} style={S.BROWSER}>
-        <A.BrowserCaption
-           caption={caption}
-           onClose={this._handleHide}
-        />
-         <A.ScrollPane
-           className={CL_SCROLL}
-           style={S.SCROLL_DIV}
-         >
-           <MenuSlider {...this.props} />
-         </A.ScrollPane>
-      </A.Browser>
-    );
-  }
-}
+  return (
+    <A.Browser isShow={isShow} style={S.BROWSER}>
+      <A.BrowserCaption
+         caption={caption}
+         onClose={_hHide}
+      />
+       <A.ScrollPane
+         className={CL_SCROLL}
+         style={S.SCROLL_PANE}
+       >
+         <MenuSlider {...props} />
+       </A.ScrollPane>
+    </A.Browser>
+  );
+})
 
 export default BrowserSlider
