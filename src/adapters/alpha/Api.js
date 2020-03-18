@@ -25,7 +25,7 @@ const AlphaApi = {
         return `${C.ROOT}?function=${indicator}&interval=${interval}&symbol=${ticket}&apikey=${apiKey}`;
       }
       case 'TIME_SERIES_DAILY': {
-        const { outputsize } = option;
+        const { outputsize='compact' } = option;
         return `${C.ROOT}?function=${indicator}&outputsize=${outputsize}&symbol=${ticket}&apikey=${apiKey}`;
       }
       case 'TIME_SERIES_DAILY_ADJUSTED': {

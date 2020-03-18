@@ -5,33 +5,42 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _AdapterStockFn = _interopRequireDefault(require("../AdapterStockFn"));
 
-var toFloatOrNull = _AdapterFn["default"].toFloatOrNull,
+var crItemConf = _AdapterFn["default"].crItemConf,
+    crValueConf = _AdapterFn["default"].crValueConf,
+    toFloatOrNull = _AdapterFn["default"].toFloatOrNull,
     valueMoving = _AdapterFn["default"].valueMoving;
 var toSeriesData = _AdapterStockFn["default"].toSeriesData;
 
-var _crZhConfig = function _crZhConfig(_ref) {
-  var _itemId = _ref._itemId,
-      value = _ref.value,
-      dataSource = _ref.dataSource;
+var _crZhConfig = function _crZhConfig(option, data) {
+  var _itemId = option._itemId,
+      value = option.value,
+      dataSource = option.dataSource;
   return {
-    dataSource: dataSource,
     id: _itemId,
     key: _itemId,
-    item: value,
+    item: _itemId,
     linkFn: "NASDAQ",
-    isWithoutAdd: true,
+    dataSource: dataSource,
+    itemConf: (0, _extends2["default"])({
+      _itemKey: _itemId
+    }, crItemConf(option), {}, crValueConf(data), {
+      symbol: value,
+      dataSource: dataSource
+    }),
     legend: _AdapterFn["default"].stockSeriesLegend()
   };
 };
 
-var _crInfo = function _crInfo(_ref2) {
-  var title = _ref2.title,
-      toDate = _ref2.toDate,
-      fromDate = _ref2.fromDate;
+var _crInfo = function _crInfo(_ref) {
+  var title = _ref.title,
+      toDate = _ref.toDate,
+      fromDate = _ref.fromDate;
   return {
     frequency: "Daily",
     name: title,
@@ -41,12 +50,12 @@ var _crInfo = function _crInfo(_ref2) {
 };
 
 var _crPoint = function _crPoint(_temp, date) {
-  var _ref3 = _temp === void 0 ? {} : _temp,
-      open = _ref3.open,
-      close = _ref3.close,
-      high = _ref3.high,
-      low = _ref3.low,
-      volume = _ref3.volume;
+  var _ref2 = _temp === void 0 ? {} : _temp,
+      open = _ref2.open,
+      close = _ref2.close,
+      high = _ref2.high,
+      low = _ref2.low,
+      volume = _ref2.volume;
 
   return {
     date: date,
@@ -78,11 +87,11 @@ var fnAdapter = {
       isDrawDeltaExtrems: isDrawDeltaExtrems
     });
   },
-  crConfigOption: function crConfigOption(_ref4) {
-    var data = _ref4.data,
-        option = _ref4.option;
+  crConfigOption: function crConfigOption(_ref3) {
+    var data = _ref3.data,
+        option = _ref3.option;
     return {
-      zhConfig: _crZhConfig(option),
+      zhConfig: _crZhConfig(option, data),
       valueMoving: valueMoving(data),
       info: _crInfo(option)
     };

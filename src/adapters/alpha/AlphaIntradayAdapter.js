@@ -64,7 +64,7 @@ const _getObjValues = (json, option) => {
   return json[_propName];
 };
 
-const _crSeriaData = (objValues, option) => {  
+const _crSeriaData = (objValues, option) => {
   const _dateKeys = objValues
      ? Object.keys(objValues).sort()
      : []
@@ -187,10 +187,9 @@ const AlphaIntradayAdapter = {
           id: _chartId,
           data: dataDaily,
           dataSource
-        })
+        }, option)
       })
-      .toConfig();
-
+      .toConfig();    
     return { config };
   },
 

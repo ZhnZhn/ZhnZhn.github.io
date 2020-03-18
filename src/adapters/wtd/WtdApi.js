@@ -6,32 +6,31 @@ const C = {
   LM_INTRADAY: 'X-DailyIntradayLimit-Remaining'
 };
 
-const _addItemId = (option, value) => {
+const _addItemIdTo = (option, value) => {
   option._itemId = value
 };
+const _addApiKey = (url, apiKey) => `${url}&api_token=${apiKey}`;
 
 const _crUrlHistory = (option) => {
   const {
-    key,
     fromDate,
     toDate,
+    //from dialog
     value,
-    apiKey
-  } = option;
-  _addItemId(option,  key)
-  return `${C.URL_H}?symbol=${value}&date_from=${fromDate}&date_to=${toDate}&sort=oldest&api_token=${apiKey}`;
+    //from watch list
+    symbol
+  } = option
+  , _symbol = value || symbol;
+  return `${C.URL_H}?symbol=${_symbol}&date_from=${fromDate}&date_to=${toDate}&sort=oldest`;
 }
 
 const _crUlrIntraday = (option) => {
   const {
-    key,
     value,
-    two,
-    apiKey
+    two
   } = option;
-  _addItemId(option, key)
   option.interval = two
-  return `${C.URL_INT}?symbol=${value}&interval=${two}&range=2&sort=desc&api_token=${apiKey}&output=json`;
+  return `${C.URL_INT}?symbol=${value}&interval=${two}&range=2&sort=desc&output=json`;
 };
 
 const _rCrUrl = {
@@ -43,17 +42,22 @@ const _rCheckResponse = {
   intraday: json => json && json.intraday
 };
 
+const _crUrl = option => {
+  const { dfType } = option;
+  return (_rCrUrl[dfType] || _rCrUrl.DF)(option);
+}
+
 const WtdApi = {
   getRequestUrl(option){
-    const { dfType } = option
-    , _crUrl = _rCrUrl[dfType] || _rCrUrl.DF;
-    return _crUrl(option);
+    const { key, apiKey } = option;
+    _addItemIdTo(option, key)
+    return _addApiKey(_crUrl(option), apiKey);
   },
 
   getLimitRemaiming: headers => headers.get(C.LIMIT_REMAINING),
 
   checkResponse(json, option){
-    const { dfType } = option
+    const { dfType }  = option
     , _checkResponse = _rCheckResponse[dfType] || _rCheckResponse.DF
     return !!_checkResponse(json);
   }

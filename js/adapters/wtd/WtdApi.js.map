@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../src/adapters/wtd/WtdApi.js"],"names":["C","URL_H","URL_INT","LIMIT_REMAINING","LM_INTRADAY","_addItemId","option","value","_itemId","_crUrlHistory","key","fromDate","toDate","apiKey","_crUlrIntraday","two","interval","_rCrUrl","DF","intraday","_rCheckResponse","json","history","WtdApi","getRequestUrl","dfType","_crUrl","getLimitRemaiming","headers","get","checkResponse","_checkResponse"],"mappings":";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAE,iDADC;AAERC,EAAAA,OAAO,EAAE,uDAFD;AAGRC,EAAAA,eAAe,EAAE,wBAHT;AAIRC,EAAAA,WAAW,EAAE;AAJL,CAAV;;AAOA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACC,MAAD,EAASC,KAAT,EAAmB;AACpCD,EAAAA,MAAM,CAACE,OAAP,GAAiBD,KAAjB;AACD,CAFD;;AAIA,IAAME,aAAa,GAAG,SAAhBA,aAAgB,CAACH,MAAD,EAAY;AAAA,MAE9BI,GAF8B,GAO5BJ,MAP4B,CAE9BI,GAF8B;AAAA,MAG9BC,QAH8B,GAO5BL,MAP4B,CAG9BK,QAH8B;AAAA,MAI9BC,MAJ8B,GAO5BN,MAP4B,CAI9BM,MAJ8B;AAAA,MAK9BL,KAL8B,GAO5BD,MAP4B,CAK9BC,KAL8B;AAAA,MAM9BM,MAN8B,GAO5BP,MAP4B,CAM9BO,MAN8B;;AAQhCR,EAAAA,UAAU,CAACC,MAAD,EAAUI,GAAV,CAAV;;AACA,SAAUV,CAAC,CAACC,KAAZ,gBAA4BM,KAA5B,mBAA+CI,QAA/C,iBAAmEC,MAAnE,+BAAmGC,MAAnG;AACD,CAVD;;AAYA,IAAMC,cAAc,GAAG,SAAjBA,cAAiB,CAACR,MAAD,EAAY;AAAA,MAE/BI,GAF+B,GAM7BJ,MAN6B,CAE/BI,GAF+B;AAAA,MAG/BH,KAH+B,GAM7BD,MAN6B,CAG/BC,KAH+B;AAAA,MAI/BQ,GAJ+B,GAM7BT,MAN6B,CAI/BS,GAJ+B;AAAA,MAK/BF,MAL+B,GAM7BP,MAN6B,CAK/BO,MAL+B;;AAOjCR,EAAAA,UAAU,CAACC,MAAD,EAASI,GAAT,CAAV;;AACAJ,EAAAA,MAAM,CAACU,QAAP,GAAkBD,GAAlB;AACA,SAAUf,CAAC,CAACE,OAAZ,gBAA8BK,KAA9B,kBAAgDQ,GAAhD,qCAAmFF,MAAnF;AACD,CAVD;;AAYA,IAAMI,OAAO,GAAG;AACdC,EAAAA,EAAE,EAAET,aADU;AAEdU,EAAAA,QAAQ,EAAEL;AAFI,CAAhB;AAIA,IAAMM,eAAe,GAAG;AACtBF,EAAAA,EAAE,EAAE,YAAAG,IAAI;AAAA,WAAIA,IAAI,IAAIA,IAAI,CAACC,OAAjB;AAAA,GADc;AAEtBH,EAAAA,QAAQ,EAAE,kBAAAE,IAAI;AAAA,WAAIA,IAAI,IAAIA,IAAI,CAACF,QAAjB;AAAA;AAFQ,CAAxB;AAKA,IAAMI,MAAM,GAAG;AACbC,EAAAA,aADa,yBACClB,MADD,EACQ;AACb,QAAEmB,MAAF,GAAanB,MAAb,CAAEmB,MAAF;AAAA,QACJC,MADI,GACKT,OAAO,CAACQ,MAAD,CAAP,IAAmBR,OAAO,CAACC,EADhC;;AAEN,WAAOQ,MAAM,CAACpB,MAAD,CAAb;AACD,GALY;AAObqB,EAAAA,iBAAiB,EAAE,2BAAAC,OAAO;AAAA,WAAIA,OAAO,CAACC,GAAR,CAAY7B,CAAC,CAACG,eAAd,CAAJ;AAAA,GAPb;AASb2B,EAAAA,aATa,yBASCT,IATD,EASOf,MATP,EASc;AACnB,QAAEmB,MAAF,GAAanB,MAAb,CAAEmB,MAAF;AAAA,QACJM,cADI,GACaX,eAAe,CAACK,MAAD,CAAf,IAA2BL,eAAe,CAACF,EADxD;;AAEN,WAAO,CAAC,CAACa,cAAc,CAACV,IAAD,CAAvB;AACD;AAbY,CAAf;eAgBeE,M","sourcesContent":["\r\nconst C = {\r\n  URL_H: 'https://api.worldtradingdata.com/api/v1/history',\r\n  URL_INT: 'https://intraday.worldtradingdata.com/api/v1/intraday',\r\n  LIMIT_REMAINING: 'X-DailyLimit-Remaining',\r\n  LM_INTRADAY: 'X-DailyIntradayLimit-Remaining'\r\n};\r\n\r\nconst _addItemId = (option, value) => {\r\n  option._itemId = value\r\n};\r\n\r\nconst _crUrlHistory = (option) => {\r\n  const {\r\n    key,\r\n    fromDate,\r\n    toDate,\r\n    value,\r\n    apiKey\r\n  } = option;\r\n  _addItemId(option,  key)\r\n  return `${C.URL_H}?symbol=${value}&date_from=${fromDate}&date_to=${toDate}&sort=oldest&api_token=${apiKey}`;\r\n}\r\n\r\nconst _crUlrIntraday = (option) => {\r\n  const {\r\n    key,\r\n    value,\r\n    two,\r\n    apiKey\r\n  } = option;\r\n  _addItemId(option, key)\r\n  option.interval = two\r\n  return `${C.URL_INT}?symbol=${value}&interval=${two}&range=2&sort=desc&api_token=${apiKey}&output=json`;\r\n};\r\n\r\nconst _rCrUrl = {\r\n  DF: _crUrlHistory,\r\n  intraday: _crUlrIntraday\r\n};\r\nconst _rCheckResponse = {\r\n  DF: json => json && json.history,\r\n  intraday: json => json && json.intraday\r\n};\r\n\r\nconst WtdApi = {\r\n  getRequestUrl(option){\r\n    const { dfType } = option\r\n    , _crUrl = _rCrUrl[dfType] || _rCrUrl.DF;\r\n    return _crUrl(option);\r\n  },\r\n\r\n  getLimitRemaiming: headers => headers.get(C.LIMIT_REMAINING),\r\n\r\n  checkResponse(json, option){\r\n    const { dfType } = option\r\n    , _checkResponse = _rCheckResponse[dfType] || _rCheckResponse.DF\r\n    return !!_checkResponse(json);\r\n  }\r\n}\r\n\r\nexport default WtdApi\r\n"],"file":"WtdApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/wtd/WtdApi.js"
+ ],
+ "file": "../../../src/adapters/wtd/WtdApi.js",
+ "names": [
+  "C",
+  "URL_H",
+  "URL_INT",
+  "LIMIT_REMAINING",
+  "LM_INTRADAY",
+  "_addItemIdTo",
+  "option",
+  "value",
+  "_itemId",
+  "_addApiKey",
+  "url",
+  "apiKey",
+  "_crUrlHistory",
+  "fromDate",
+  "toDate",
+  "symbol",
+  "_symbol",
+  "_crUlrIntraday",
+  "two",
+  "interval",
+  "_rCrUrl",
+  "DF",
+  "intraday",
+  "_rCheckResponse",
+  "json",
+  "history",
+  "_crUrl",
+  "dfType",
+  "WtdApi",
+  "getRequestUrl",
+  "key",
+  "getLimitRemaiming",
+  "headers",
+  "get",
+  "checkResponse",
+  "_checkResponse"
+ ],
+ "mappings": ";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAE,iDADC;AAERC,EAAAA,OAAO,EAAE,uDAFD;AAGRC,EAAAA,eAAe,EAAE,wBAHT;AAIRC,EAAAA,WAAW,EAAE;AAJL,CAAV;;AAOA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAACC,MAAD,EAASC,KAAT,EAAmB;AACtCD,EAAAA,MAAM,CAACE,OAAP,GAAiBD,KAAjB;AACD,CAFD;;AAGA,IAAME,UAAU,GAAG,SAAbA,UAAa,CAACC,GAAD,EAAMC,MAAN;AAAA,SAAoBD,GAApB,mBAAqCC,MAArC;AAAA,CAAnB;;AAEA,IAAMC,aAAa,GAAG,SAAhBA,aAAgB,CAACN,MAAD,EAAY;AAAA,MAE9BO,QAF8B,GAQ5BP,MAR4B,CAE9BO,QAF8B;AAAA,MAG9BC,MAH8B,GAQ5BR,MAR4B,CAG9BQ,MAH8B;AAAA,MAK9BP,KAL8B,GAQ5BD,MAR4B,CAK9BC,KAL8B;AAAA,MAO9BQ,MAP8B,GAQ5BT,MAR4B,CAO9BS,MAP8B;AAAA,MAS9BC,OAT8B,GASpBT,KAAK,IAAIQ,MATW;;AAUhC,SAAUf,CAAC,CAACC,KAAZ,gBAA4Be,OAA5B,mBAAiDH,QAAjD,iBAAqEC,MAArE;AACD,CAXD;;AAaA,IAAMG,cAAc,GAAG,SAAjBA,cAAiB,CAACX,MAAD,EAAY;AAAA,MAE/BC,KAF+B,GAI7BD,MAJ6B,CAE/BC,KAF+B;AAAA,MAG/BW,GAH+B,GAI7BZ,MAJ6B,CAG/BY,GAH+B;AAKjCZ,EAAAA,MAAM,CAACa,QAAP,GAAkBD,GAAlB;AACA,SAAUlB,CAAC,CAACE,OAAZ,gBAA8BK,KAA9B,kBAAgDW,GAAhD;AACD,CAPD;;AASA,IAAME,OAAO,GAAG;AACdC,EAAAA,EAAE,EAAET,aADU;AAEdU,EAAAA,QAAQ,EAAEL;AAFI,CAAhB;AAIA,IAAMM,eAAe,GAAG;AACtBF,EAAAA,EAAE,EAAE,YAAAG,IAAI;AAAA,WAAIA,IAAI,IAAIA,IAAI,CAACC,OAAjB;AAAA,GADc;AAEtBH,EAAAA,QAAQ,EAAE,kBAAAE,IAAI;AAAA,WAAIA,IAAI,IAAIA,IAAI,CAACF,QAAjB;AAAA;AAFQ,CAAxB;;AAKA,IAAMI,MAAM,GAAG,SAATA,MAAS,CAAApB,MAAM,EAAI;AAAA,MACfqB,MADe,GACJrB,MADI,CACfqB,MADe;AAEvB,SAAO,CAACP,OAAO,CAACO,MAAD,CAAP,IAAmBP,OAAO,CAACC,EAA5B,EAAgCf,MAAhC,CAAP;AACD,CAHD;;AAKA,IAAMsB,MAAM,GAAG;AACbC,EAAAA,aADa,yBACCvB,MADD,EACQ;AAAA,QACXwB,GADW,GACKxB,MADL,CACXwB,GADW;AAAA,QACNnB,MADM,GACKL,MADL,CACNK,MADM;;AAEnBN,IAAAA,YAAY,CAACC,MAAD,EAASwB,GAAT,CAAZ;;AACA,WAAOrB,UAAU,CAACiB,MAAM,CAACpB,MAAD,CAAP,EAAiBK,MAAjB,CAAjB;AACD,GALY;AAOboB,EAAAA,iBAAiB,EAAE,2BAAAC,OAAO;AAAA,WAAIA,OAAO,CAACC,GAAR,CAAYjC,CAAC,CAACG,eAAd,CAAJ;AAAA,GAPb;AASb+B,EAAAA,aATa,yBASCV,IATD,EASOlB,MATP,EASc;AACnB,QAAEqB,MAAF,GAAcrB,MAAd,CAAEqB,MAAF;AAAA,QACJQ,cADI,GACaZ,eAAe,CAACI,MAAD,CAAf,IAA2BJ,eAAe,CAACF,EADxD;;AAEN,WAAO,CAAC,CAACc,cAAc,CAACX,IAAD,CAAvB;AACD;AAbY,CAAf;eAgBeI,M"
+}

@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/adapters/alpha/fnAdapter.js"],"names":["stockSeriesLegend","AdapterFn","valueMoving","_crZhConfig","id","dataSource","key","isWithoutAdd","legend","fnAdapter","crIntradayConfigOption","data","zhConfig"],"mappings":";;;;;;;AACA;;IAGEA,iB,GAEEC,qB,CAFFD,iB;IACAE,W,GACED,qB,CADFC,W;;AAGF,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAACC,EAAD,EAAKC,UAAL;AAAA,SAAqB;AACvCD,IAAAA,EAAE,EAAEA,EADmC;AAEvCE,IAAAA,GAAG,EAAEF,EAFkC;AAGvCG,IAAAA,YAAY,EAAE,IAHyB;AAIvCC,IAAAA,MAAM,EAAER,iBAAiB,EAJc;AAKvCK,IAAAA,UAAU,EAAEA,UAAU,IAAI;AALa,GAArB;AAAA,CAApB;;AAQA,IAAMI,SAAS,GAAG;AAChBC,EAAAA,sBAAsB,EAAE;AAAA,QAAGN,EAAH,QAAGA,EAAH;AAAA,QAAOO,IAAP,QAAOA,IAAP;AAAA,QAAaN,UAAb,QAAaA,UAAb;AAAA,WAA+B;AACrDO,MAAAA,QAAQ,EAAET,WAAW,CAACC,EAAD,EAAKC,UAAL,CADgC;AAErDH,MAAAA,WAAW,EAAEA,WAAW,CAACS,IAAD;AAF6B,KAA/B;AAAA;AADR,CAAlB;eAOeF,S","sourcesContent":["\r\nimport AdapterFn from '../AdapterFn'\r\n\r\nconst {\r\n  stockSeriesLegend,\r\n  valueMoving\r\n} = AdapterFn;\r\n\r\nconst _crZhConfig = (id, dataSource) => ({\r\n  id: id,\r\n  key: id,\r\n  isWithoutAdd: true,\r\n  legend: stockSeriesLegend(),\r\n  dataSource: dataSource || \"Alpha Vantage\"\r\n});\r\n\r\nconst fnAdapter = {\r\n  crIntradayConfigOption: ({ id, data, dataSource }) => ({\r\n    zhConfig: _crZhConfig(id, dataSource),\r\n    valueMoving: valueMoving(data)\r\n  })\r\n}\r\n\r\nexport default fnAdapter\r\n"],"file":"fnAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/alpha/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/alpha/fnAdapter.js",
+ "names": [
+  "crItemConf",
+  "AdapterFn",
+  "crValueConf",
+  "stockSeriesLegend",
+  "valueMoving",
+  "_crItemConf",
+  "option",
+  "id",
+  "dataSource",
+  "data",
+  "indicator",
+  "ticket",
+  "dfT",
+  "interval",
+  "_itemKey",
+  "_crZhConfig",
+  "config",
+  "itemConf",
+  "key",
+  "isWithoutAdd",
+  "legend",
+  "fnAdapter",
+  "crIntradayConfigOption",
+  "zhConfig"
+ ],
+ "mappings": ";;;;;;;;;AACA;;IAGEA,U,GAIEC,qB,CAJFD,U;IACAE,W,GAGED,qB,CAHFC,W;IACAC,iB,GAEEF,qB,CAFFE,iB;IACAC,W,GACEH,qB,CADFG,W;;AAGF,IAAMC,WAAW,GAAG,SAAdA,WAAc,OAAyBC,MAAzB,EAAoC;AAAA,MAAlCC,EAAkC,QAAlCA,EAAkC;AAAA,MAA9BC,UAA8B,QAA9BA,UAA8B;AAAA,MAAlBC,IAAkB,QAAlBA,IAAkB;AAAA,MAC9CC,SAD8C,GACTJ,MADS,CAC9CI,SAD8C;AAAA,MACnCC,MADmC,GACTL,MADS,CACnCK,MADmC;AAAA,MAC3BC,GAD2B,GACTN,MADS,CAC3BM,GAD2B;AAAA,MACtBC,QADsB,GACTP,MADS,CACtBO,QADsB;AAEtD,SAAOH,SAAS,KAAK,mBAAd;AAECI,IAAAA,QAAQ,EAAEP;AAFX,KAGIP,UAAU,CAACM,MAAD,CAHd,MAIIJ,WAAW,CAACO,IAAD,CAJf;AAKCG,IAAAA,GAAG,EAAHA,GALD;AAKMC,IAAAA,QAAQ,EAARA,QALN;AAKgBH,IAAAA,SAAS,EAATA,SALhB;AAK2BC,IAAAA,MAAM,EAANA,MAL3B;AAMCH,IAAAA,UAAU,EAAVA;AAND,OAQH,KAAK,CART;AASD,CAXD;;AAaA,IAAMO,WAAW,GAAG,SAAdA,WAAc,CAACC,MAAD,EAASV,MAAT,EAAoB;AAAA,MAC9BC,EAD8B,GACXS,MADW,CAC9BT,EAD8B;AAAA,MAC1BC,UAD0B,GACXQ,MADW,CAC1BR,UAD0B;AAAA,MAEpCS,QAFoC,GAEzBZ,WAAW,CAACW,MAAD,EAASV,MAAT,CAFc;;AAGtC,SAAO;AACLC,IAAAA,EAAE,EAAEA,EADC;AAELW,IAAAA,GAAG,EAAEX,EAFA;AAGLU,IAAAA,QAAQ,EAARA,QAHK;AAILE,IAAAA,YAAY,EAAEF,QAAQ,GAAG,KAAH,GAAW,IAJ5B;AAKLG,IAAAA,MAAM,EAAEjB,iBAAiB,EALpB;AAMLK,IAAAA,UAAU,EAAEA,UAAU,IAAI;AANrB,GAAP;AAQD,CAXD;;AAaA,IAAMa,SAAS,GAAG;AAChBC,EAAAA,sBAAsB,EAAE,gCAACN,MAAD,EAASV,MAAT;AAAA,WAAqB;AAC3CiB,MAAAA,QAAQ,EAAER,WAAW,CAACC,MAAD,EAASV,MAAT,CADsB;AAE3CF,MAAAA,WAAW,EAAEA,WAAW,CAACY,MAAM,CAACP,IAAR;AAFmB,KAArB;AAAA;AADR,CAAlB;eAOeY,S"
+}

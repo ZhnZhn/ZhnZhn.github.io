@@ -9,32 +9,29 @@ var C = {
   LM_INTRADAY: 'X-DailyIntradayLimit-Remaining'
 };
 
-var _addItemId = function _addItemId(option, value) {
+var _addItemIdTo = function _addItemIdTo(option, value) {
   option._itemId = value;
 };
 
+var _addApiKey = function _addApiKey(url, apiKey) {
+  return url + "&api_token=" + apiKey;
+};
+
 var _crUrlHistory = function _crUrlHistory(option) {
-  var key = option.key,
-      fromDate = option.fromDate,
+  var fromDate = option.fromDate,
       toDate = option.toDate,
       value = option.value,
-      apiKey = option.apiKey;
+      symbol = option.symbol,
+      _symbol = value || symbol;
 
-  _addItemId(option, key);
-
-  return C.URL_H + "?symbol=" + value + "&date_from=" + fromDate + "&date_to=" + toDate + "&sort=oldest&api_token=" + apiKey;
+  return C.URL_H + "?symbol=" + _symbol + "&date_from=" + fromDate + "&date_to=" + toDate + "&sort=oldest";
 };
 
 var _crUlrIntraday = function _crUlrIntraday(option) {
-  var key = option.key,
-      value = option.value,
-      two = option.two,
-      apiKey = option.apiKey;
-
-  _addItemId(option, key);
-
+  var value = option.value,
+      two = option.two;
   option.interval = two;
-  return C.URL_INT + "?symbol=" + value + "&interval=" + two + "&range=2&sort=desc&api_token=" + apiKey + "&output=json";
+  return C.URL_INT + "?symbol=" + value + "&interval=" + two + "&range=2&sort=desc&output=json";
 };
 
 var _rCrUrl = {
@@ -49,12 +46,20 @@ var _rCheckResponse = {
     return json && json.intraday;
   }
 };
+
+var _crUrl = function _crUrl(option) {
+  var dfType = option.dfType;
+  return (_rCrUrl[dfType] || _rCrUrl.DF)(option);
+};
+
 var WtdApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var dfType = option.dfType,
-        _crUrl = _rCrUrl[dfType] || _rCrUrl.DF;
+    var key = option.key,
+        apiKey = option.apiKey;
 
-    return _crUrl(option);
+    _addItemIdTo(option, key);
+
+    return _addApiKey(_crUrl(option), apiKey);
   },
   getLimitRemaiming: function getLimitRemaiming(headers) {
     return headers.get(C.LIMIT_REMAINING);

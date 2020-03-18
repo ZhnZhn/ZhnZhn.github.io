@@ -2,20 +2,31 @@ import AdapterFn from '../AdapterFn'
 import AdapterStockFn from '../AdapterStockFn'
 
 const {
+  crItemConf,
+  crValueConf,
   toFloatOrNull,
   valueMoving
 } = AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
-const _crZhConfig = ({ _itemId, value, dataSource }) => ({
-  dataSource,
-  id: _itemId,
-  key: _itemId,
-  item: value,
-  linkFn: "NASDAQ",  
-  isWithoutAdd: true,
-  legend: AdapterFn.stockSeriesLegend()
-});
+const _crZhConfig = (option, data) => {
+  const { _itemId, value, dataSource } = option;
+  return {
+    id: _itemId,
+    key: _itemId,
+    item: _itemId,
+    linkFn: "NASDAQ",
+    dataSource,
+    itemConf: {
+      _itemKey: _itemId,
+      ...crItemConf(option),
+      ...crValueConf(data),
+      symbol: value,
+      dataSource
+    },    
+    legend: AdapterFn.stockSeriesLegend()
+  }
+};
 
 const _crInfo = ({ title, toDate, fromDate }) => ({
   frequency: "Daily",
@@ -57,7 +68,7 @@ const fnAdapter = {
   },
 
   crConfigOption: ({ data, option }) => ({
-    zhConfig: _crZhConfig(option),
+    zhConfig: _crZhConfig(option, data),
     valueMoving: valueMoving(data),
     info: _crInfo(option)
   })

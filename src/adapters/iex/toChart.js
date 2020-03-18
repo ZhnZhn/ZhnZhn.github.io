@@ -3,21 +3,33 @@ import AdapterFn from '../AdapterFn'
 import AdapterStockFn from '../AdapterStockFn'
 
 const {
-        valueMoving,
-        stockSeriesLegend,
-      } = AdapterFn;
+  crItemConf,
+  crValueConf,
+  valueMoving,
+  stockSeriesLegend
+} = AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
-const _crZhConfig = (id, { one, dataSource }) => ({
-  dataSource,
-  id: id,
-  key: id,
-  linkFn: "NASDAQ",
-  item: one,
-  itemCaption: one,  
-  isWithoutAdd: true,
-  legend: stockSeriesLegend()
-});
+const _crZhConfig = (id, option, data) => {
+  const { one, two, dataSource } = option;
+  return {
+    dataSource,
+    id: id,
+    key: id,
+    linkFn: "NASDAQ",
+    item: one,
+    itemCaption: one,
+    itemConf: {
+      _itemKey: id,
+      ...crItemConf(option),
+      ...crValueConf(data),
+      symbol: one,
+      dfPeriod: two,
+      dataSource
+    },    
+    legend: stockSeriesLegend()
+  };
+}
 
 const _crInfo = (title) => ({
   name: title,
@@ -45,7 +57,7 @@ const toChart = {
         .add({
            valueMoving: valueMoving(data),
            info: _crInfo(title),
-           zhConfig: _crZhConfig(_id, option)
+           zhConfig: _crZhConfig(_id, option, data)
          })
          .addZhPoints(dataMfi)
          .toConfig();

@@ -5,19 +5,24 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _AdapterStockFn = _interopRequireDefault(require("../AdapterStockFn"));
 
-var valueMoving = _AdapterFn["default"].valueMoving,
+var crItemConf = _AdapterFn["default"].crItemConf,
+    crValueConf = _AdapterFn["default"].crValueConf,
+    valueMoving = _AdapterFn["default"].valueMoving,
     stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend;
 var toSeriesData = _AdapterStockFn["default"].toSeriesData;
 
-var _crZhConfig = function _crZhConfig(id, _ref) {
-  var one = _ref.one,
-      dataSource = _ref.dataSource;
+var _crZhConfig = function _crZhConfig(id, option, data) {
+  var one = option.one,
+      two = option.two,
+      dataSource = option.dataSource;
   return {
     dataSource: dataSource,
     id: id,
@@ -25,7 +30,13 @@ var _crZhConfig = function _crZhConfig(id, _ref) {
     linkFn: "NASDAQ",
     item: one,
     itemCaption: one,
-    isWithoutAdd: true,
+    itemConf: (0, _extends2["default"])({
+      _itemKey: id
+    }, crItemConf(option), {}, crValueConf(data), {
+      symbol: one,
+      dfPeriod: two,
+      dataSource: dataSource
+    }),
     legend: stockSeriesLegend()
   };
 };
@@ -37,9 +48,9 @@ var _crInfo = function _crInfo(title) {
   };
 };
 
-var _crId = function _crId(_ref2) {
-  var one = _ref2.one,
-      two = _ref2.two;
+var _crId = function _crId(_ref) {
+  var one = _ref.one,
+      two = _ref.two;
   return one + '_' + two;
 };
 
@@ -58,7 +69,7 @@ var toChart = {
         config = (0, _ConfigBuilder["default"])().stockConfig(_id, dataOption).addCaption(title).add({
       valueMoving: valueMoving(data),
       info: _crInfo(title),
-      zhConfig: _crZhConfig(_id, option)
+      zhConfig: _crZhConfig(_id, option, data)
     }).addZhPoints(dataMfi).toConfig();
 
     return config;

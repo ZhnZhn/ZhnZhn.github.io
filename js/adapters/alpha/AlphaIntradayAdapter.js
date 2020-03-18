@@ -212,7 +212,7 @@ var AlphaIntradayAdapter = {
       id: _chartId,
       data: dataDaily,
       dataSource: dataSource
-    }))).toConfig();
+    }, option))).toConfig();
     return {
       config: config
     };

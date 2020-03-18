@@ -45,7 +45,8 @@ var AlphaApi = {
 
       case 'TIME_SERIES_DAILY':
         {
-          var outputsize = option.outputsize;
+          var _option$outputsize = option.outputsize,
+              outputsize = _option$outputsize === void 0 ? 'compact' : _option$outputsize;
           return C.ROOT + "?function=" + indicator + "&outputsize=" + outputsize + "&symbol=" + ticket + "&apikey=" + apiKey;
         }
 

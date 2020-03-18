@@ -10,9 +10,8 @@ var _ChartType = _interopRequireDefault(require("./ChartType"));
 var _rUrl2;
 
 var C = {
-  //BASE_URL: 'https://api.iextrading.com/1.0/stock',
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
-  DF_TICKET: 'AAPL',
+  DF_SYMBOL: 'AAPL',
   DF_PERIOD: '1m'
 }; //earning, company, stats : symbol/suffix
 
@@ -31,15 +30,15 @@ var _urlDividends = function _urlDividends(option) {
 
 var _urlChart = function _urlChart(option) {
   var one = option.one,
-      ticket = option.ticket,
       two = option.two,
+      symbol = option.symbol,
       dfPeriod = option.dfPeriod,
-      _ticket = one || ticket || C.DF_TICKET,
+      _symbol = one || symbol || C.DF_SYMBOL,
       _period = two || dfPeriod || C.DF_PERIOD;
 
-  option.one = _ticket;
+  option.one = _symbol;
   option.two = _period;
-  return C.BASE_URL + "/" + _ticket + "/chart/" + _period;
+  return C.BASE_URL + "/" + _symbol + "/chart/" + _period;
 };
 
 var _crUrlMarketList = function _crUrlMarketList(option) {

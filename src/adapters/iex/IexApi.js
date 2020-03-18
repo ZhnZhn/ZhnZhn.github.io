@@ -1,10 +1,9 @@
 
 import CT from './ChartType'
 
-const C = {
-  //BASE_URL: 'https://api.iextrading.com/1.0/stock',
+const C = {  
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
-  DF_TICKET: 'AAPL',
+  DF_SYMBOL: 'AAPL',
   DF_PERIOD: '1m'
 };
 
@@ -23,18 +22,15 @@ const _urlDividends = (option) => {
 };
 
 const _urlChart = (option) => {
-  const {
-    one, ticket,
-    two, dfPeriod
-  } = option
-  , _ticket = one || ticket || C.DF_TICKET
+  const { one, two, symbol, dfPeriod } = option
+  , _symbol = one || symbol || C.DF_SYMBOL
   , _period = two || dfPeriod || C.DF_PERIOD;
-  option.one = _ticket
+  option.one = _symbol
   option.two = _period
-  return `${C.BASE_URL}/${_ticket}/chart/${_period}`;
+  return `${C.BASE_URL}/${_symbol}/chart/${_period}`;
 };
 
-const _crUrlMarketList = (option) => {  
+const _crUrlMarketList = (option) => {
   const { value } = option;
   return {
     url: `${C.BASE_URL}/market/list/${value}`,
