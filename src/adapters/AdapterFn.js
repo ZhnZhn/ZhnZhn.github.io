@@ -11,6 +11,13 @@ import seriaFns from '../math/seriaFn'
 
 import C from '../constants/Color';
 
+const {
+  ymdToUTC,
+  ymdtToUTC,
+  ymdhmsToUTC,
+  mlsToDmy
+} = dt;
+
 const EMPTY = '';
 const M = ['january', 'february',
   'march', 'april', 'may',
@@ -19,12 +26,11 @@ const M = ['january', 'february',
   'december'
 ];
 
-const {
-  ymdToUTC,
-  ymdtToUTC,
-  ymdhmsToUTC,
-  mlsToDmy
-} = dt;
+const ITEM_CONF_PROP_NAMES = [
+ 'url', 'loadId',
+ 'title', 'subtitle', 'itemCaption',
+ 'seriaType'
+];
 
 const _isNaN = Number && Number.isNaN || isNaN;
 const _isArr = Array.isArray;
@@ -200,6 +206,26 @@ const AdapterFn = {
         Math.random().toString(36).substr(2, 9)
       )
       .toUpperCase();
+  },
+
+  crItemConf: (option) => {
+    const _itemConf = {};
+    let _value;
+    ITEM_CONF_PROP_NAMES.forEach(k => {
+      _value = option[k]
+      if (_value != null) {
+        _itemConf[k] = _value
+      }
+     })
+     return _itemConf;
+  },
+
+  crValueConf: data => {
+    const _p = data[data.length-1];
+    return {
+      y: _getValue(_p),
+      x: _getDate(_p)
+    };
   },
 
   toUpperCaseFirst: (str) => typeof str === 'string'

@@ -7,7 +7,8 @@ const {
   numberFormat,
   crId,
   roundBy,
-  valueMoving
+  valueMoving,
+  crItemConf
 } = AdapterFn;
 
 const TITLE = {
@@ -156,28 +157,24 @@ const fnAdapter = {
 
   crZhConfig: (option) => {
     const {
-      _itemKey, url, loadId,
+      _itemKey, url,
       optionFetch, items,
-      title, subtitle, itemCaption: caption,
-      seriaType,
       dataSource, dfId, timeId
     } = option
     , key = _itemKey || crId()
-    , itemCaption = caption || _crItemCaption(option);
+    , itemCaption = option.itemCaption || _crItemCaption(option);
     return {
       id: key, key,
       itemCaption,
       itemConf: {
-        _itemKey: key, url, loadId,
+        _itemKey: key,
+        ...crItemConf(option),
         optionFetch, items,
-        title, subtitle,
-        itemCaption, seriaType,
         dataSource,
         //sfl
         dfId, timeId
       },
       isWithoutAdd: url ? false : true,
-      //isWithoutAdd: true,
       dataSource: _crDataSource(option)
     };
   },

@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
@@ -13,7 +15,8 @@ var isYNumber = _AdapterFn["default"].isYNumber,
     numberFormat = _AdapterFn["default"].numberFormat,
     crId = _AdapterFn["default"].crId,
     roundBy = _AdapterFn["default"].roundBy,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    valueMoving = _AdapterFn["default"].valueMoving,
+    crItemConf = _AdapterFn["default"].crItemConf;
 var TITLE = {
   NST: 'Statisctics Norway: All Items',
   SWS: 'Statisctics Sweden: All Items'
@@ -179,40 +182,29 @@ var fnAdapter = {
   crZhConfig: function crZhConfig(option) {
     var _itemKey = option._itemKey,
         url = option.url,
-        loadId = option.loadId,
         optionFetch = option.optionFetch,
         items = option.items,
-        title = option.title,
-        subtitle = option.subtitle,
-        caption = option.itemCaption,
-        seriaType = option.seriaType,
         dataSource = option.dataSource,
         dfId = option.dfId,
         timeId = option.timeId,
         key = _itemKey || crId(),
-        itemCaption = caption || _crItemCaption(option);
+        itemCaption = option.itemCaption || _crItemCaption(option);
 
     return {
       id: key,
       key: key,
       itemCaption: itemCaption,
-      itemConf: {
-        _itemKey: key,
-        url: url,
-        loadId: loadId,
+      itemConf: (0, _extends2["default"])({
+        _itemKey: key
+      }, crItemConf(option), {
         optionFetch: optionFetch,
         items: items,
-        title: title,
-        subtitle: subtitle,
-        itemCaption: itemCaption,
-        seriaType: seriaType,
         dataSource: dataSource,
         //sfl
         dfId: dfId,
         timeId: timeId
-      },
+      }),
       isWithoutAdd: url ? false : true,
-      //isWithoutAdd: true,
       dataSource: _crDataSource(option)
     };
   },

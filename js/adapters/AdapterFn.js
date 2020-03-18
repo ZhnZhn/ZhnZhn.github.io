@@ -21,12 +21,13 @@ var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var EMPTY = '';
-var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 var ymdToUTC = _DateUtils["default"].ymdToUTC,
     ymdtToUTC = _DateUtils["default"].ymdtToUTC,
     ymdhmsToUTC = _DateUtils["default"].ymdhmsToUTC,
     mlsToDmy = _DateUtils["default"].mlsToDmy;
+var EMPTY = '';
+var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType'];
 
 var _isNaN = Number && Number.isNaN || isNaN;
 
@@ -203,6 +204,27 @@ var AdapterFn = {
   },
   crId: function crId() {
     return (Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();
+  },
+  crItemConf: function crItemConf(option) {
+    var _itemConf = {};
+
+    var _value;
+
+    ITEM_CONF_PROP_NAMES.forEach(function (k) {
+      _value = option[k];
+
+      if (_value != null) {
+        _itemConf[k] = _value;
+      }
+    });
+    return _itemConf;
+  },
+  crValueConf: function crValueConf(data) {
+    var _p = data[data.length - 1];
+    return {
+      y: _getValue(_p),
+      x: _getDate(_p)
+    };
   },
   toUpperCaseFirst: function toUpperCaseFirst(str) {
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;

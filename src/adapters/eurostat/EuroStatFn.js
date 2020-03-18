@@ -8,7 +8,8 @@ const { setPlotLinesMinMax } = ChartFn;
 
 const {
   valueMoving, findMinY,
-  appendWithColon
+  appendWithColon,
+  crItemConf
 } = AdapterFn;
 
 const DF_SLICE_TITLE = 'EU';
@@ -242,21 +243,17 @@ const EuroStatFn = {
   createZhConfig(json, option){
     const {
       key, itemCaption,
-      url, loadId,
-      title, subtitle,
-      seriaType
+      url
     } = option
     , _dataSource = EuroStatFn.crDataSource(option);
 
     return {
       id: key, key, itemCaption,
       itemConf: {
-        _itemKey: key, url, loadId,
-        title, subtitle, itemCaption,
-        seriaType,
+        _itemKey: key,
+        ...crItemConf(option),
         dataSource: _dataSource
-      },
-      //isWithoutIndicator: true,
+      },      
       isWithoutAdd: url ? false : true,
       dataSource: _dataSource,
       ...EuroStatFn.crLinkConf(json, option)

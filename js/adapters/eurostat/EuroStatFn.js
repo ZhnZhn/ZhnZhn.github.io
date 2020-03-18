@@ -18,7 +18,8 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax;
 var valueMoving = _AdapterFn["default"].valueMoving,
     findMinY = _AdapterFn["default"].findMinY,
-    appendWithColon = _AdapterFn["default"].appendWithColon;
+    appendWithColon = _AdapterFn["default"].appendWithColon,
+    crItemConf = _AdapterFn["default"].crItemConf;
 var DF_SLICE_TITLE = 'EU';
 var COLOR = {
   EU: "#0088ff",
@@ -293,27 +294,17 @@ var EuroStatFn = {
     var key = option.key,
         itemCaption = option.itemCaption,
         url = option.url,
-        loadId = option.loadId,
-        title = option.title,
-        subtitle = option.subtitle,
-        seriaType = option.seriaType,
         _dataSource = EuroStatFn.crDataSource(option);
 
     return (0, _extends2["default"])({
       id: key,
       key: key,
       itemCaption: itemCaption,
-      itemConf: {
-        _itemKey: key,
-        url: url,
-        loadId: loadId,
-        title: title,
-        subtitle: subtitle,
-        itemCaption: itemCaption,
-        seriaType: seriaType,
+      itemConf: (0, _extends2["default"])({
+        _itemKey: key
+      }, crItemConf(option), {
         dataSource: _dataSource
-      },
-      //isWithoutIndicator: true,
+      }),
       isWithoutAdd: url ? false : true,
       dataSource: _dataSource
     }, EuroStatFn.crLinkConf(json, option));
