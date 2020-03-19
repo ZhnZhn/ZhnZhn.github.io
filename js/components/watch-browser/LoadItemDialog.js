@@ -27,17 +27,24 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
 var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
 
-var _withValidationLoad = _interopRequireDefault(require("../dialogs/decorators/withValidationLoad"));
+var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
-var _class, _class2, _temp;
+var _dec, _class, _class2, _temp;
 
 var getFromDate = _DateUtils["default"].getFromDate,
     getToDate = _DateUtils["default"].getToDate,
-    isYmd = _DateUtils["default"].isYmd;
+    isYmd = _DateUtils["default"].isYmd,
+    mlsToDmy = _DateUtils["default"].mlsToDmy;
 var S = {
+  DIALOG: {
+    width: 365
+  },
+  DIALOG_SHORT: {
+    width: 265
+  },
   ITEM_TEXT: {
     display: 'inline-block',
-    maxWidth: 200,
+    maxWidth: 250,
     height: 32,
     verticalAlign: 'middle',
     textOverflow: 'ellipsis',
@@ -45,7 +52,19 @@ var S = {
   }
 };
 
-var LoadItemDialog = (0, _withValidationLoad["default"])(_class = (_temp = _class2 =
+var _crValue = function _crValue(x, y) {
+  if (x === void 0) {
+    x = '';
+  }
+
+  if (y === void 0) {
+    y = '';
+  }
+
+  return (y + " " + mlsToDmy(x)).trim();
+};
+
+var LoadItemDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = _class2 =
 /*#__PURE__*/
 function (_Component) {
   (0, _inheritsLoose2["default"])(LoadItemDialog, _Component);
@@ -139,17 +158,25 @@ function (_Component) {
     var _props$data = props.data,
         _fromDate = _props$data.fromDate,
         initToDate = _props$data.initToDate,
-        onTestDate = _props$data.onTestDate;
+        onTestDate = _props$data.onTestDate,
+        _props$data$itemConf = _props$data.itemConf,
+        _itemConf = _props$data$itemConf === void 0 ? {} : _props$data$itemConf,
+        isValue = !!_itemConf.x;
+
+    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+      isValue: isValue
+    });
     _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Load, {
       key: "load",
       onClick: _this._handleLoad
     })];
-    _this.state = {
+    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
+      isShowDate: false,
+      isValue: isValue,
       initFromDate: _fromDate || getFromDate(2),
       initToDate: initToDate || getToDate(),
-      onTestDate: onTestDate || isYmd,
-      validationMessages: []
-    };
+      onTestDate: onTestDate || isYmd
+    });
     return _this;
   }
 
@@ -168,25 +195,56 @@ function (_Component) {
         isShow = _this$props2.isShow,
         data = _this$props2.data,
         caption = data.caption,
+        _data$itemConf2 = data.itemConf,
+        itemConf = _data$itemConf2 === void 0 ? {} : _data$itemConf2,
+        dataSource = itemConf.dataSource,
+        x = itemConf.x,
+        y = itemConf.y,
         _this$state = this.state,
+        isShowLabels = _this$state.isShowLabels,
+        isShowDate = _this$state.isShowDate,
+        isValue = _this$state.isValue,
         initFromDate = _this$state.initFromDate,
         initToDate = _this$state.initToDate,
         onTestDate = _this$state.onTestDate,
-        validationMessages = _this$state.validationMessages;
+        validationMessages = _this$state.validationMessages,
+        _style = isShowLabels ? S.DIALOG : S.DIALOG_SHORT,
+        _value = _crValue(x, y);
+
     return _react["default"].createElement(_ModalDialog["default"], {
-      caption: "Load Item",
+      style: _style,
       isShow: isShow,
+      caption: "Load Item",
       commandButtons: this._commandButtons,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Row.Text, {
+    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+      isShow: true,
+      buttons: this.toolbarButtons
+    }), _react["default"].createElement(_DialogCell["default"].Row.Text, {
+      isShowLabels: isShowLabels,
       styleText: S.ITEM_TEXT,
       caption: "Item:",
       text: caption
-    }), _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+      isShow: isValue
+    }, _react["default"].createElement(_DialogCell["default"].Row.Text, {
+      isShowLabels: isShowLabels,
+      styleText: S.ITEM_TEXT,
+      caption: "Value:",
+      text: _value
+    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+      isShow: isShowDate
+    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
+      isShowLabels: isShowLabels,
       initFromDate: initFromDate,
       initToDate: initToDate,
       onTestDate: onTestDate
+    })), _react["default"].createElement(_DialogCell["default"].Row.Text, {
+      isShowLabels: isShowLabels,
+      styleText: S.ITEM_TEXT,
+      caption: "Source:",
+      text: dataSource
     }), _react["default"].createElement(_ValidationMessages["default"], {
       validationMessages: validationMessages
     }));
@@ -195,8 +253,7 @@ function (_Component) {
   return LoadItemDialog;
 }(_react.Component), _class2.defaultProps = {
   data: {}
-}, _temp)) || _class;
-
+}, _temp)) || _class);
 var _default = LoadItemDialog;
 exports["default"] = _default;
 //# sourceMappingURL=LoadItemDialog.js.map

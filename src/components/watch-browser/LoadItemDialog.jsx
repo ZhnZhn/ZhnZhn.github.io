@@ -11,18 +11,25 @@ import ModalDialog from '../zhn-moleculs/ModalDialog'
 import D from '../dialogs/DialogCell'
 import ValidationMessages from '../zhn/ValidationMessages'
 
-import withValidationLoad from '../dialogs/decorators/withValidationLoad'
+import Decor from '../dialogs/decorators/Decorators'
 
 const {
   getFromDate,
   getToDate,
-  isYmd
+  isYmd,
+  mlsToDmy
 } = DateUtils;
 
 const S = {
+  DIALOG: {
+    width: 365,
+  },
+  DIALOG_SHORT: {
+    width: 265
+  },
   ITEM_TEXT: {
     display: 'inline-block',
-    maxWidth: 200,
+    maxWidth: 250,
     height: 32,
     verticalAlign: 'middle',
     textOverflow: 'ellipsis',
@@ -30,7 +37,9 @@ const S = {
   }
 };
 
-@withValidationLoad
+const _crValue = (x='', y='') => (`${y} ${mlsToDmy(x)}`).trim();
+
+@Decor.dialog
 class LoadItemDialog extends Component {
    /*
    static propTypes = {
@@ -54,8 +63,14 @@ class LoadItemDialog extends Component {
      const {
        fromDate,
        initToDate,
-       onTestDate
-     } = props.data;
+       onTestDate,
+       itemConf={}
+     } = props.data
+     , isValue = !!itemConf.x;
+
+     this.toolbarButtons = this._createType2WithToolbar(props, {
+       isValue
+     })
 
      this._commandButtons = [
        <D.Button.Load
@@ -65,10 +80,12 @@ class LoadItemDialog extends Component {
      ]
 
     this.state = {
+       ...this._isWithInitialState(),
+       isShowDate: false,
+       isValue,
        initFromDate: fromDate || getFromDate(2),
        initToDate: initToDate || getToDate(),
-       onTestDate: onTestDate || isYmd,
-       validationMessages : []
+       onTestDate: onTestDate || isYmd
     }
    }
 
@@ -131,29 +148,56 @@ class LoadItemDialog extends Component {
 
   render(){
     const { isShow, data } = this.props
-        , { caption } = data
-        , {
-            initFromDate, initToDate,
-            onTestDate, validationMessages
-          } = this.state;
+    , { caption, itemConf={} } = data
+    , { dataSource, x, y } = itemConf
+    , {
+        isShowLabels, isShowDate, isValue,
+        initFromDate, initToDate,
+        onTestDate, validationMessages
+      } = this.state
+    , _style = isShowLabels ? S.DIALOG : S.DIALOG_SHORT
+    , _value = _crValue(x, y);
 
     return (
       <ModalDialog
-         caption="Load Item"
+         style={_style}
          isShow={isShow}
+         caption="Load Item"
          commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
+        <D.Toolbar
+          isShow={true}
+          buttons={this.toolbarButtons}
+        />
         <D.Row.Text
+          isShowLabels={isShowLabels}
           styleText={S.ITEM_TEXT}
           caption="Item:"
           text={caption}
         />
-        <D.DatesFragment
-            ref={this._refDates}
-            initFromDate={initFromDate}
-            initToDate={initToDate}
-            onTestDate={onTestDate}
+        <D.ShowHide isShow={isValue}>
+          <D.Row.Text
+            isShowLabels={isShowLabels}
+            styleText={S.ITEM_TEXT}
+            caption="Value:"
+            text={_value}
+          />
+        </D.ShowHide>
+        <D.ShowHide isShow={isShowDate}>
+          <D.DatesFragment
+              ref={this._refDates}
+              isShowLabels={isShowLabels}
+              initFromDate={initFromDate}
+              initToDate={initToDate}
+              onTestDate={onTestDate}
+          />
+        </D.ShowHide>
+        <D.Row.Text
+          isShowLabels={isShowLabels}
+          styleText={S.ITEM_TEXT}
+          caption="Source:"
+          text={dataSource}
         />
         <ValidationMessages
             validationMessages={validationMessages}
