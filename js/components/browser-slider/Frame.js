@@ -37,10 +37,12 @@ var _fOnClick = function _fOnClick(proxy, rootId, dfProps, pageNumber, onClickNe
 };
 
 var Frame = function Frame(_ref) {
-  var store = _ref.store,
+  var refFirstItem = _ref.refFirstItem,
+      style = _ref.style,
+      store = _ref.store,
       title = _ref.title,
-      id = _ref.id,
-      rootStyle = _ref.rootStyle,
+      _ref$id = _ref.id,
+      id = _ref$id === void 0 ? '' : _ref$id,
       _ref$dfProps = _ref.dfProps,
       dfProps = _ref$dfProps === void 0 ? {} : _ref$dfProps,
       pageNumber = _ref.pageNumber,
@@ -98,13 +100,17 @@ var Frame = function Frame(_ref) {
       }, FOCUS_FIRST_MLS);
     }
   }, [pageNumber, pageCurrent]);
+
+  var _isTitle = title && onClickPrev;
+
   return _react["default"].createElement("div", {
-    style: rootStyle
-  }, _react["default"].createElement(_MenuTitle["default"], {
+    style: style
+  }, _isTitle && _react["default"].createElement(_MenuTitle["default"], {
     innerRef: _refTitle,
     title: title,
     onClick: onClickPrev.bind(null, pageNumber)
   }), _react["default"].createElement(_MenuList["default"], {
+    refFirstItem: refFirstItem,
     model: model,
     fOnClickItem: _fOnClickItem
   }), _react["default"].createElement(_ErrMsg["default"], {

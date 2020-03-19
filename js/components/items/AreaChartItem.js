@@ -13,6 +13,8 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _has = _interopRequireDefault(require("../has"));
+
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _HighchartWrapper = _interopRequireDefault(require("../zhn/HighchartWrapper"));
@@ -58,6 +60,8 @@ var S = {
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
+
+var _isNarrowWidth = !_has["default"].wideWidth();
 
 var AreaChartItem =
 /*#__PURE__*/
@@ -135,18 +139,14 @@ function (_Component) {
     };
 
     _this._handleLoadedMiniChart = function (metricChart) {
-      _this.mainChart.options.zhDetailCharts.push(metricChart);
+      if (_this.mainChart) {
+        _this.mainChart.zhAddDetailChart(metricChart);
+      }
     };
 
     _this._handleUnLoadedMiniChart = function (objChart) {
-      var _this$mainChart, _this$mainChart$optio;
-
-      var charts = (_this$mainChart = _this.mainChart) == null ? void 0 : (_this$mainChart$optio = _this$mainChart.options) == null ? void 0 : _this$mainChart$optio.zhDetailCharts;
-
-      if (Array.isArray(charts)) {
-        _this.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
-          return chart !== objChart;
-        });
+      if (_this.mainChart) {
+        _this.mainChart.zhRemoveDetailChart(objChart);
       }
     };
 
@@ -358,6 +358,14 @@ function (_Component) {
 
   var _proto = AreaChartItem.prototype;
 
+  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps) {
+      return false;
+    }
+
+    return true;
+  };
+
   _proto.componentDidMount = function componentDidMount() {
     this.mainChart = this.chartComp.getChart();
   };
@@ -390,7 +398,9 @@ function (_Component) {
         mfiConfigs = _this$state.mfiConfigs,
         isShowAbs = _this$state.isShowAbs,
         miniTitles = _this$state.miniTitles,
-        isCaption = _this$state.isCaption;
+        isCaption = _this$state.isCaption,
+        _withoutAnimation = _isNarrowWidth || withoutAnimation;
+
     return _react["default"].createElement("div", {
       className: CL.ROOT
     }, isCaption && _react["default"].createElement(_Header["default"], {
@@ -409,9 +419,9 @@ function (_Component) {
       regCompVm: this._regCompVm
     }), _react["default"].createElement(_ShowHide["default"], {
       isShow: isOpen,
-      withoutAnimation: withoutAnimation,
+      withoutAnimation: _withoutAnimation,
       style: S.SHOW_HIDE
-    }, isShowChart && this._createChartToolBar(config, withoutAnimation), _react["default"].createElement(_HighchartWrapper["default"], {
+    }, isShowChart && this._createChartToolBar(config, _withoutAnimation), _react["default"].createElement(_HighchartWrapper["default"], {
       ref: this._refChartComp,
       isShow: isShowChart,
       rootStyle: S.WRAPPER,
@@ -444,7 +454,7 @@ function (_Component) {
 
   _proto.reflowChart = function reflowChart(width) {
     if (this.mainChart) {
-      var _isAnimate = this.mainChart.zhIsAnimation(),
+      var _isAnimate = !_isNarrowWidth && this.mainChart.zhIsAnimation(),
           zhDetailCharts = this.mainChart.zhGetDetailCharts();
 
       this.mainChart.setSize(width, undefined, _isAnimate);

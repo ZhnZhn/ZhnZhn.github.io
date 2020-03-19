@@ -15,14 +15,13 @@ var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 
-//import Row from './Row';
 var STYLE = {
   ROW: {
-    paddingTop: '4px',
-    paddingBottom: '8px'
+    paddingTop: 4,
+    paddingBottom: 8
   },
   BUTTON_CIRCLE: {
-    marginLeft: '20px'
+    marginLeft: 20
   }
 };
 

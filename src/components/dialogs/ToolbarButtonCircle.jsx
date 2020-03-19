@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
-//import Row from './Row';
 import D from './DialogCell'
 import ButtonCircle from '../zhn/ButtonCircle';
 
 const STYLE = {
   ROW : {
-    paddingTop: '4px',
-    paddingBottom: '8px'
+    paddingTop: 4,
+    paddingBottom: 8
   },
   BUTTON_CIRCLE : {
-    marginLeft: '20px'
+    marginLeft: 20
   }
 }
 

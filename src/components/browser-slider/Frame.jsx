@@ -29,8 +29,10 @@ const _fOnClick = (
 };
 
 const Frame = ({
+  refFirstItem,
+  style,
   store,
-  title, id, rootStyle,
+  title, id='',
   dfProps={},
   pageNumber, pageCurrent,
   onClickPrev,
@@ -81,14 +83,18 @@ const Frame = ({
     }
   }, [pageNumber, pageCurrent])
 
+  const _isTitle = title && onClickPrev;
+
   return (
-    <div style={rootStyle}>
-      <MenuTitle
-        innerRef={_refTitle}
-        title={title}
-        onClick={onClickPrev.bind(null, pageNumber)}
-      />
+    <div style={style}>
+      { _isTitle && <MenuTitle
+          innerRef={_refTitle}
+          title={title}
+          onClick={onClickPrev.bind(null, pageNumber)}
+        />
+      }
       <MenuList
+        refFirstItem={refFirstItem}
         model={model}
         fOnClickItem={_fOnClickItem}
       />

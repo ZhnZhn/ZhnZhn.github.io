@@ -65,8 +65,7 @@ var S = {
     color: 'gray'
   },
   CAPTION_WIDTH: {
-    width: 280,
-    textAlign: 'left'
+    maxWidth: 250
   },
   TIME: {
     color: 'rgb(253, 179, 22)',

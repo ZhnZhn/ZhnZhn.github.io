@@ -118,17 +118,18 @@ function (_Component) {
     };
 
     _this._handleClickSearch = function () {
-      if (_this.state.isShowSearch) {
-        _this.setState({
-          isShowSearch: false,
-          scrollClass: CL.BROWSER
-        });
-      } else {
-        _this.setState({
-          isShowSearch: true,
-          scrollClass: CL.BROWSER_WITH_SEARCH
-        });
-      }
+      _this.setState(function (_ref) {
+        var isShowSearch = _ref.isShowSearch;
+
+        var _ref2 = isShowSearch ? [false, CL.BROWSER] : [true, CL.BROWSER_WITH_SEARCH],
+            is = _ref2[0],
+            scrollClass = _ref2[1];
+
+        return {
+          isShowSearch: is,
+          scrollClass: scrollClass
+        };
+      });
     };
 
     _this._handleClickItem = function (item) {
@@ -148,11 +149,13 @@ function (_Component) {
 
     var isInitShow = props.isInitShow;
     _this.toolbarButtons = [{
-      caption: 'I',
-      onClick: _this._handleClickInfo.bind((0, _assertThisInitialized2["default"])(_this))
-    }, {
       caption: 'S',
+      title: 'Click to toggle input search',
       onClick: _this._handleClickSearch.bind((0, _assertThisInitialized2["default"])(_this))
+    }, {
+      caption: 'A',
+      title: 'About Datasources',
+      onClick: _this._handleClickInfo.bind((0, _assertThisInitialized2["default"])(_this))
     }];
     _this.state = {
       isShow: !!isInitShow,
@@ -197,18 +200,7 @@ function (_Component) {
         isShow = _this$state2.isShow,
         isShowSearch = _this$state2.isShowSearch,
         scrollClass = _this$state2.scrollClass,
-        _wrapperSearch = menuItems.length !== 0 ? _react["default"].createElement(_ShowHide["default"], {
-      isShow: isShowSearch
-    }, _react["default"].createElement(_WrapperInputSearch["default"], {
-      style: STYLE.WRAPPER_SEARCH,
-      placeholder: SEARCH_PLACEHOLDER,
-      data: menuItems,
-      ItemOptionComp: ItemOptionComp,
-      onSelect: this._handleClickItem
-    })) : null,
-        _spinnerLoading = menuItems.length === 0 ? _react["default"].createElement(_SpinnerLoading["default"], {
-      style: STYLE.SPINNER_LOADING
-    }) : null;
+        _isMenuEmpty = menuItems.length === 0;
 
     return _react["default"].createElement(_Browser["default"], {
       isShow: isShow,
@@ -218,9 +210,19 @@ function (_Component) {
       onClose: this._handleHide
     }), _react["default"].createElement(_ToolbarButtonCircle["default"], {
       buttons: this.toolbarButtons
-    }), _wrapperSearch, _react["default"].createElement(_ScrollPane["default"], {
+    }), !_isMenuEmpty && _react["default"].createElement(_ShowHide["default"], {
+      isShow: isShowSearch
+    }, _react["default"].createElement(_WrapperInputSearch["default"], {
+      style: STYLE.WRAPPER_SEARCH,
+      placeholder: SEARCH_PLACEHOLDER,
+      data: menuItems,
+      ItemOptionComp: ItemOptionComp,
+      onSelect: this._handleClickItem
+    })), _react["default"].createElement(_ScrollPane["default"], {
       className: scrollClass
-    }, _spinnerLoading, _react["default"].createElement(_MenuListType["default"], {
+    }, _isMenuEmpty && _react["default"].createElement(_SpinnerLoading["default"], {
+      style: STYLE.SPINNER_LOADING
+    }), _react["default"].createElement(_MenuListType["default"], {
       model: menuItems,
       ItemComp: ItemComp,
       itemClassName: CL.ROW_ITEM,

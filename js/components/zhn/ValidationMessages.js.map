@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/components/zhn/ValidationMessages.jsx"],"names":["ValidationMessages","_renderValidationMessages","validationMessages","map","msg","index","STYLE","VM_MSG_NUMBER","VM_MSG","render","props","VM_CONT","Component","defaultProps"],"mappings":";;;;;;;;;;;AAAA;;AAGA;;AAFA;IAIMA,kB;;;;;;;;;;;;;;UAUJC,yB,GAA4B,UAACC,kBAAD,EAAuB;AACjD,aAAOA,kBAAkB,CAACC,GAAnB,CAAuB,UAACC,GAAD,EAAMC,KAAN,EAAgB;AAC5C,eACE;AAAK,UAAA,GAAG,EAAED;AAAV,WACE;AAAK,UAAA,KAAK,EAAEE,yBAAMC;AAAlB,WAAkCF,KAAK,GAAC,CAAxC,CADF,EAEE;AAAM,UAAA,KAAK,EAAEC,yBAAME;AAAnB,WAA4BJ,GAA5B,CAFF,CADF;AAMD,OAPM,CAAP;AAQD,K;;;;;;;SAEDK,M,GAAA,kBAAQ;AAAA,QACEP,kBADF,GACyB,KAAKQ,KAD9B,CACER,kBADF;AAEN,WACE;AAAK,MAAA,KAAK,EAAEI,yBAAMK;AAAlB,OACG,KAAKV,yBAAL,CAA+BC,kBAA/B,CADH,CADF;AAKD,G;;;EA5B8BU,gB;;AAA3BZ,kB,CAMIa,Y,GAAe;AACpBX,EAAAA,kBAAkB,EAAE;AADA,C;eAyBVF,kB","sourcesContent":["import React, { Component } from 'react';\r\n//import PropTypes from \"prop-types\";\r\n\r\nimport STYLE from '../styles/DialogStyles';\r\n\r\nclass ValidationMessages extends Component {\r\n  /*\r\n   static propTypes = {\r\n     validationMessages : PropTypes.array\r\n   }\r\n  */\r\n   static defaultProps = {\r\n     validationMessages: []\r\n   }\r\n\r\n  _renderValidationMessages = (validationMessages) =>{\r\n    return validationMessages.map((msg, index) => {\r\n      return (\r\n        <div key={msg}>\r\n          <div style={STYLE.VM_MSG_NUMBER}>{index+1}</div>\r\n          <span style={STYLE.VM_MSG}>{msg}</span>\r\n        </div>\r\n      );\r\n    });\r\n  }\r\n\r\n  render(){\r\n    const { validationMessages } = this.props;\r\n    return (\r\n      <div style={STYLE.VM_CONT}>\r\n        {this._renderValidationMessages(validationMessages)}\r\n      </div>\r\n    )\r\n  }\r\n}\r\n\r\nexport default ValidationMessages\r\n"],"file":"ValidationMessages.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/ValidationMessages.js"
+ ],
+ "file": "../../../src/components/zhn/ValidationMessages.js",
+ "names": [
+  "_renderValidationMessages",
+  "validationMessages",
+  "map",
+  "msg",
+  "index",
+  "STYLE",
+  "VM_MSG_NUMBER",
+  "VM_MSG",
+  "ValidationMessages",
+  "VM_CONT"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAGA;;AAFA;AAIA,IAAMA,yBAAyB,GAAG,SAA5BA,yBAA4B,CAACC,kBAAD,EAAuB;AACvD,SAAOA,kBAAkB,CAACC,GAAnB,CAAuB,UAACC,GAAD,EAAMC,KAAN,EAAgB;AAC5C,WACE;AAAK,MAAA,GAAG,EAAED;AAAV,OACE;AAAM,MAAA,KAAK,EAAEE,yBAAMC;AAAnB,OAAmCF,KAAK,GAAC,CAAzC,CADF,EAEE;AAAM,MAAA,KAAK,EAAEC,yBAAME;AAAnB,OAA4BJ,GAA5B,CAFF,CADF;AAMD,GAPM,CAAP;AAQD,CATD;;AAWA,IAAMK,kBAAkB,GAAG,SAArBA,kBAAqB;AAAA,mCAAGP,kBAAH;AAAA,MAAGA,kBAAH,sCAAsB,EAAtB;AAAA,SAC1B;AAAK,IAAA,KAAK,EAAEI,yBAAMI;AAAlB,KACGT,yBAAyB,CAACC,kBAAD,CAD5B,CAD0B;AAAA,CAA3B;AAOA;;;;;;;;;eAQeO,kB"
+}

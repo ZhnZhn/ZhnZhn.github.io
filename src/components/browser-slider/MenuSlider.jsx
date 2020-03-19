@@ -98,7 +98,7 @@ class MenuSlider extends Component {
       <Frame
         key={id}
         id={id}
-        rootStyle={S.PAGE}
+        style={S.PAGE}
         store={store}
         title={title}
         dfProps={dfProps}
@@ -184,7 +184,6 @@ class MenuSlider extends Component {
             pages={pages}
             pageCurrent={pageCurrent}
           />
-
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
+import has from '../has'
 import ShowHide from '../zhn/ShowHide';
 import HighchartWrapper from '../zhn/HighchartWrapper';
 import ChartToolBar from '../toolbars/ChartToolBar';
@@ -37,6 +38,7 @@ const S = {
 };
 
 const _isFn = fn => typeof fn === 'function';
+const _isNarrowWidth = !has.wideWidth();
 
 class AreaChartItem extends Component {
   /*
@@ -113,6 +115,13 @@ class AreaChartItem extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps) {
+      return false;
+    }
+    return true;
+  }
+
   hideCaption = () => {
     this.mainChart.zhHideCaption()
     this.setState({
@@ -151,14 +160,13 @@ class AreaChartItem extends Component {
   }
 
   _handleLoadedMiniChart = (metricChart) => {
-     this.mainChart.options.zhDetailCharts.push(metricChart);
+     if (this.mainChart) {
+       this.mainChart.zhAddDetailChart(metricChart)
+     }
   }
   _handleUnLoadedMiniChart = (objChart) => {
-    const charts = this.mainChart?.options?.zhDetailCharts
-    if (Array.isArray(charts)){
-      this.mainChart.options.zhDetailCharts = charts.filter((chart) => {
-        return chart !== objChart;
-      })
+    if (this.mainChart) {
+      this.mainChart.zhRemoveDetailChart(objChart)
     }
   }
 
@@ -325,7 +333,9 @@ class AreaChartItem extends Component {
         isShowAbs,
         miniTitles,
         isCaption
-    } = this.state;
+    } = this.state
+    , _withoutAnimation = _isNarrowWidth || withoutAnimation;
+
     return (
       <div className={CL.ROOT}>
          { isCaption && <Header
@@ -346,10 +356,10 @@ class AreaChartItem extends Component {
         }
         <ShowHide
            isShow={isOpen}
-           withoutAnimation={withoutAnimation}
+           withoutAnimation={_withoutAnimation}
            style={S.SHOW_HIDE}
         >
-           {isShowChart && this._createChartToolBar(config, withoutAnimation)}
+           {isShowChart && this._createChartToolBar(config, _withoutAnimation)}
            <HighchartWrapper
               ref={this._refChartComp}
               isShow={isShowChart}
@@ -390,7 +400,7 @@ class AreaChartItem extends Component {
 
   reflowChart(width){
     if (this.mainChart) {
-      const _isAnimate = this.mainChart.zhIsAnimation()
+      const _isAnimate = !_isNarrowWidth && this.mainChart.zhIsAnimation()
       , zhDetailCharts = this.mainChart.zhGetDetailCharts();
 
       this.mainChart.setSize(width, undefined, _isAnimate)

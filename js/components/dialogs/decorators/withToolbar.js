@@ -21,6 +21,12 @@ var C = {
     BT_C: 'L',
     BT_T: "Click to toggle input labels"
   },
+  BT_V: {
+    M_T: '_clickValueWithToolbar',
+    PN: 'isValue',
+    BT_C: 'V',
+    BT_T: "Click to toggle row value"
+  },
   BT_D: {
     M_T: '_clickDateWithToolbar',
     PN: 'isShowDate',
@@ -96,6 +102,7 @@ var _createType2WithToolbar = function _createType2WithToolbar(props, _temp) {
   var _ref3 = _temp === void 0 ? {} : _temp,
       noDate = _ref3.noDate,
       noLabels = _ref3.noLabels,
+      isValue = _ref3.isValue,
       isOptions = _ref3.isOptions,
       isToggle = _ref3.isToggle,
       isToggleOptions = _ref3.isToggleOptions,
@@ -108,6 +115,14 @@ var _createType2WithToolbar = function _createType2WithToolbar(props, _temp) {
       inst: this,
       buttons: buttons,
       key: 'BT_L'
+    });
+  }
+
+  if (isValue) {
+    _addToggleBt({
+      inst: this,
+      buttons: buttons,
+      key: 'BT_V'
     });
   }
 

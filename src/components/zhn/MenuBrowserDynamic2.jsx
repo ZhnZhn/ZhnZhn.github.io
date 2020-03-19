@@ -46,8 +46,8 @@ class MenuBrowserDynamic2 extends Component {
     super(props);
     const { isInitShow } = props;
     this.toolbarButtons = [
-      { caption: 'I', onClick: this._handleClickInfo.bind(this) },
-      { caption: 'S', onClick: this._handleClickSearch.bind(this) }
+      { caption: 'S', title: 'Click to toggle input search', onClick: this._handleClickSearch.bind(this) },
+      { caption: 'A', title: 'About Datasources', onClick: this._handleClickInfo.bind(this) }
     ];
     this.state = {
       isShow: !!isInitShow,
@@ -98,17 +98,12 @@ class MenuBrowserDynamic2 extends Component {
     onClickInfo({ descrUrl });
   }
   _handleClickSearch = () => {
-    if (this.state.isShowSearch){
-      this.setState({
-         isShowSearch: false,
-         scrollClass: CL.BROWSER
-       });
-    } else {
-      this.setState({
-         isShowSearch: true,
-         scrollClass: CL.BROWSER_WITH_SEARCH
-       });
-    }
+    this.setState(({isShowSearch}) => {
+      const [is, scrollClass] = isShowSearch
+        ? [false, CL.BROWSER]
+        : [true, CL.BROWSER_WITH_SEARCH];
+      return { isShowSearch: is, scrollClass };
+    })
   }
 
   _handleClickItem = (item) => {
@@ -125,26 +120,16 @@ class MenuBrowserDynamic2 extends Component {
 
   render(){
     const {
-            caption, children,
-            ItemOptionComp, ItemComp
-          } = this.props
-        , { menuItems, isShow, isShowSearch, scrollClass } = this.state
-        , _wrapperSearch = (menuItems.length !== 0)
-               ? (
-                   <ShowHide isShow={isShowSearch}>
-                     <WrapperInputSearch
-                       style={STYLE.WRAPPER_SEARCH}
-                       placeholder={SEARCH_PLACEHOLDER}
-                       data={menuItems}
-                       ItemOptionComp={ItemOptionComp}
-                       onSelect={this._handleClickItem}
-                     />
-                   </ShowHide>
-                 )
-               : null
-         , _spinnerLoading = (menuItems.length === 0)
-               ? (<SpinnerLoading style={STYLE.SPINNER_LOADING}/>)
-               : null;
+        caption, children,
+        ItemOptionComp, ItemComp
+      } = this.props
+    , {
+      menuItems,
+      isShow, isShowSearch,
+      scrollClass
+    } = this.state
+    , _isMenuEmpty = menuItems.length === 0;
+
     return (
        <Browser isShow={isShow} style={STYLE.BROWSER}>
            <BrowserCaption
@@ -154,9 +139,20 @@ class MenuBrowserDynamic2 extends Component {
           <ToolbarButtonCircle
             buttons={this.toolbarButtons}
           />
-          {_wrapperSearch}
+          {!_isMenuEmpty && <ShowHide isShow={isShowSearch}>
+              <WrapperInputSearch
+                style={STYLE.WRAPPER_SEARCH}
+                placeholder={SEARCH_PLACEHOLDER}
+                data={menuItems}
+                ItemOptionComp={ItemOptionComp}
+                onSelect={this._handleClickItem}
+              />
+            </ShowHide>
+          }
           <ScrollPane className={scrollClass}>
-            {_spinnerLoading}
+            {_isMenuEmpty && <SpinnerLoading
+               style={STYLE.SPINNER_LOADING}/>
+            }
             <MenuListType2
                model={menuItems}
                ItemComp={ItemComp}

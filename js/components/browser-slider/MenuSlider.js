@@ -108,7 +108,7 @@ function (_Component) {
       pages.push(_react["default"].createElement(_Frame["default"], {
         key: id,
         id: id,
-        rootStyle: S.PAGE,
+        style: S.PAGE,
         store: store,
         title: title,
         dfProps: dfProps,

@@ -14,6 +14,12 @@ const C = {
     BT_C: 'L',
     BT_T: "Click to toggle input labels"
   },
+  BT_V: {
+    M_T: '_clickValueWithToolbar',
+    PN: 'isValue',
+    BT_C: 'V',
+    BT_T: "Click to toggle row value"
+  },
   BT_D: {
     M_T: '_clickDateWithToolbar',
     PN: 'isShowDate',
@@ -74,7 +80,7 @@ const _addShowHideBt = ({ inst, buttons, key }) => {
 };
 
 const _createType2WithToolbar = function(
-  props, { noDate, noLabels,
+  props, { noDate, noLabels, isValue,
     isOptions, isToggle,
     isToggleOptions, isShowOptions
   } = {}
@@ -83,6 +89,9 @@ const _createType2WithToolbar = function(
 
   if (!noLabels) {
     _addToggleBt({ inst: this, buttons, key: 'BT_L' })
+  }
+  if (isValue) {
+    _addToggleBt({ inst: this, buttons, key: 'BT_V' })
   }
   if (isToggle){
     _addShowHideBt({ inst: this, buttons, key: 'BT_T'})
