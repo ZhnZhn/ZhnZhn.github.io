@@ -6,9 +6,6 @@ var zhGet = {
   zhGetId: function zhGetId() {
     return ((this.options || {}).zhConfig || {}).id;
   },
-  zhGetDetailCharts: function zhGetDetailCharts() {
-    return (this.userOptions || {}).zhDetailCharts;
-  },
   zhGetFromToDates: function zhGetFromToDates(_temp) {
     var _ref = _temp === void 0 ? {} : _temp,
         _ref$seriaIndex = _ref.seriaIndex,

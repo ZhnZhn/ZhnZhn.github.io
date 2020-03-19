@@ -29,6 +29,8 @@ var _zhIs = _interopRequireDefault(require("./zhIs"));
 
 var _zhGet = _interopRequireDefault(require("./zhGet"));
 
+var _zhDetailCharts = _interopRequireDefault(require("./zhDetailCharts"));
+
 var HighchartsZhn = function HighchartsZhn(Highcharts) {
   var wrap = Highcharts.wrap,
       Chart = Highcharts.Chart;
@@ -37,12 +39,13 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
   (0, _zhTogglePlotLines["default"])(Chart);
   Object.assign(Chart.prototype, (0, _extends2["default"])({
     zhAddSeriaToYAxis: _zhAddSeriaToYAxis["default"],
+    zhDetailCharts: _zhDetailCharts["default"],
     zhEnableDataLabels: _zhEnableDataLabels["default"],
     zhToggleSeria: _zhToggleSeria["default"],
     zhToggle2H: _zhToggle2H["default"],
     zhRemoveCategory: _zhRemoveCategory["default"],
     zhZoomX: _zhZoomX["default"]
-  }, _zhIs["default"], {}, _zhGet["default"]));
+  }, _zhIs["default"], {}, _zhGet["default"], {}, _zhDetailCharts["default"]));
 };
 
 var _default = HighchartsZhn;

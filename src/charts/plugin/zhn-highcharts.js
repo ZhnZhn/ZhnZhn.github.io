@@ -9,6 +9,7 @@ import zhEnableDataLabels from './zhEnableDataLabels'
 import zhZoomX from './zhZoomX'
 import zhIs from './zhIs'
 import zhGet from './zhGet'
+import zhDetailCharts from './zhDetailCharts'
 
 const HighchartsZhn = (Highcharts) => {
   const { wrap, Chart } = Highcharts;
@@ -17,13 +18,15 @@ const HighchartsZhn = (Highcharts) => {
   zhTogglePlotLines(Chart)
   Object.assign(Chart.prototype, {
     zhAddSeriaToYAxis,
+    zhDetailCharts,
     zhEnableDataLabels,
     zhToggleSeria,
     zhToggle2H,
     zhRemoveCategory,
     zhZoomX,
     ...zhIs,
-    ...zhGet    
+    ...zhGet,
+    ...zhDetailCharts
   })
 };
 

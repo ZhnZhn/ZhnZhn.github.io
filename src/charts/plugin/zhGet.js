@@ -4,11 +4,7 @@ const zhGet = {
   zhGetId() {
     return ((this.options || {}).zhConfig || {}).id;
   },
-
-  zhGetDetailCharts() {
-    return (this.userOptions || {}).zhDetailCharts;
-  },
-
+  
   zhGetFromToDates({
     seriaIndex=0,
     format=a=>a
