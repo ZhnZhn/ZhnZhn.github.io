@@ -86,12 +86,12 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
-    "babel-eslint": "^10.0.3",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "del": "^5.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react": "^7.19.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
@@ -104,10 +104,10 @@
     "jest": "^25.1.0",
     "jspm": "^0.16.55",
     "react-test-renderer": "^16.13.0",
-    "terser-webpack-plugin": "^2.3.2",
-    "webpack": "^4.41.5",
-    "webpack-bundle-analyzer": "^3.6.0",
-    "webpack-cli": "^3.3.10"
+    "terser-webpack-plugin": "^2.3.5",
+    "webpack": "^4.42.0",
+    "webpack-bundle-analyzer": "^3.6.1",
+    "webpack-cli": "^3.3.11"
   },
   "jest": {
     "roots": [
