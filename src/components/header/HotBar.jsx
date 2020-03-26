@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import has from '../has'
 import FlatButton from '../zhn-m/FlatButton'
 
 const S = {
@@ -25,37 +26,36 @@ const _isIn = (arr, type) => {
   return false;
 }
 
+const _calcMaxButtons = (props) => {
+  switch(has.strWidth){
+    case '"W600"': return 3;
+    case '"W500"': return 2;
+    case '"W380"': return 1;
+    default: return props.maxButtons;
+  }
+};
+
 class HotBar extends Component {
   static defaultProps = {
     maxButtons: 5
   }
 
   constructor(props){
-    super()
+    super(props)
     this._btCleanEl = (
       <FlatButton
         key="BT_CLEAN"
+        timeout={0}
         rootStyle={S.BT_CL}
         caption="CL"
         title="Clean Hot Bar"
         onClick={this._hClean}
       />
     )
-    this._maxButtons = this._calcMaxButtons(props)
+    this._maxButtons = _calcMaxButtons(props)
     this.state = {
       countButtons: 0,
       hotButtons: []
-    }
-  }
-
-  _calcMaxButtons(props){
-    const strWidth = window
-           .getComputedStyle(document.body, ':after')
-           .getPropertyValue('content');
-    switch(strWidth){
-      case '"W600"': return 3;
-      case '"W500"': return 2;
-      default: return props.maxButtons;
     }
   }
 
@@ -83,7 +83,10 @@ class HotBar extends Component {
   }
 
   _hClean = () => {
-    this.setState({ countButtons: 0, hotButtons: [] })
+    this.setState({
+      countButtons: 0,
+      hotButtons: []
+    })
   }
 
   _renderHotButtons = (hotButtons, onShowDialog) => {
@@ -94,6 +97,7 @@ class HotBar extends Component {
       return (
         <FlatButton
           key={type}
+          timeout={0}
           rootStyle={S.BT_D}
           caption={_shortCaption}
           title={caption}

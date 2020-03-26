@@ -15,9 +15,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _has = _interopRequireDefault(require("../has"));
 
-var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
-
-var _HighchartWrapper = _interopRequireDefault(require("../zhn/HighchartWrapper"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ChartToolBar = _interopRequireDefault(require("../toolbars/ChartToolBar"));
 
@@ -287,7 +285,7 @@ function (_Component) {
 
     _this._createChartToolBar = function (config, withoutAnimation) {
       var isShowToolbar = _this.state.isShowToolbar;
-      return _react["default"].createElement(_ShowHide["default"], {
+      return _react["default"].createElement(_Comp["default"].ShowHide, {
         isShow: isShowToolbar,
         withoutAnimation: withoutAnimation
       }, _react["default"].createElement(_ChartToolBar["default"], {
@@ -417,14 +415,14 @@ function (_Component) {
       isAdminMode: isAdminMode,
       crValueMoving: this._crValueMoving,
       regCompVm: this._regCompVm
-    }), _react["default"].createElement(_ShowHide["default"], {
+    }), _react["default"].createElement(_Comp["default"].ShowHide, {
       isShow: isOpen,
       withoutAnimation: _withoutAnimation,
       style: S.SHOW_HIDE
-    }, isShowChart && this._createChartToolBar(config, _withoutAnimation), _react["default"].createElement(_HighchartWrapper["default"], {
+    }, isShowChart && this._createChartToolBar(config, _withoutAnimation), _react["default"].createElement(_Comp["default"].HighchartWrapper, {
       ref: this._refChartComp,
       isShow: isShowChart,
-      rootStyle: S.WRAPPER,
+      style: S.WRAPPER,
       config: config,
       isShowAbs: isShowAbs,
       absComp: this._dataSourceEl

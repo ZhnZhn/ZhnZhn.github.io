@@ -5,6 +5,8 @@ import withTheme from '../hoc/withTheme';
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 
+import has from '../has'
+
 import A from '../Comp';
 import TwitterLink from './TwitterLink';
 import DataProviders from './DataProviders';
@@ -35,6 +37,10 @@ const OC_CAPTION_STYLE = {
   color: C.TITLE
 };
 
+const _calcIsProviders = () => has.strWidth
+ ? true
+ : false;
+
 class About extends Component {
   /*
   static propsTypes = {
@@ -46,18 +52,8 @@ class About extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isCloseProviders: this._calcIsProviders(),
+      isCloseProviders: _calcIsProviders(),
       isShow: props.isShow
-    }
-  }
-
-  _calcIsProviders = () => {
-    const strWidth = window
-      .getComputedStyle(document.body, ':after')
-      .getPropertyValue('content');
-    switch(strWidth){
-      case '"W600"': case '"W500"': return true;
-      default: return false;
     }
   }
 
@@ -95,7 +91,7 @@ class About extends Component {
         className={_clRoot}
         style={{..._styleOpen, ...TS.ROOT}}
        >
-         <A.BrowserCaption            
+         <A.BrowserCaption
             caption="About"
             onClose={this._handleClose}
          >

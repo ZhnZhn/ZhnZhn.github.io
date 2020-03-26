@@ -14,6 +14,10 @@ const S = {
 };
 const POINTER_EVENTS = 'pointer-events';
 
+const _isNotZeroNumber = n => n
+ && typeof n === 'number'
+ && n-n === 0;
+
 class FlatButton extends Component {
 
   static defaultProps = {
@@ -27,9 +31,11 @@ class FlatButton extends Component {
   }
 
   _hClick = (event) => {
-    this._setPointerEvents('none')
     const { timeout, onClick } = this.props;
-    setTimeout(this._setPointerEvents, timeout)
+    if (_isNotZeroNumber(timeout)) {
+      this._setPointerEvents('none')
+      setTimeout(this._setPointerEvents, timeout)
+    }
     onClick(event)
   }
 

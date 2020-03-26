@@ -29,6 +29,10 @@ var S = {
 };
 var POINTER_EVENTS = 'pointer-events';
 
+var _isNotZeroNumber = function _isNotZeroNumber(n) {
+  return n && typeof n === 'number' && n - n === 0;
+};
+
 var FlatButton =
 /*#__PURE__*/
 function (_Component) {
@@ -54,12 +58,16 @@ function (_Component) {
     };
 
     _this._hClick = function (event) {
-      _this._setPointerEvents('none');
-
       var _this$props = _this.props,
           timeout = _this$props.timeout,
           onClick = _this$props.onClick;
-      setTimeout(_this._setPointerEvents, timeout);
+
+      if (_isNotZeroNumber(timeout)) {
+        _this._setPointerEvents('none');
+
+        setTimeout(_this._setPointerEvents, timeout);
+      }
+
       onClick(event);
     };
 

@@ -1,7 +1,6 @@
 import React from 'react'
 
-import ShowHide from '../zhn/ShowHide'
-import HighchartWrapper from '../zhn/HighchartWrapper';
+import A from '../Comp'
 
 const _fIsTitle = (title, idPropName) => c => c[idPropName] === title;
 
@@ -16,12 +15,12 @@ const _arrangeBy = (titles, configs, idPropName) => {
     if (_c) {
       _configs.push(_c)
     }
-  })  
+  })
   return _configs;
 };
 
 const MiniCharts = ({
-  configs, idPropName,
+  configs, idPropName='id',
   ids,
   absComp,
   onLoaded,
@@ -40,26 +39,19 @@ const MiniCharts = ({
 
   return (
     <div>
-        { _configs.map(c => {
-          return (
-            <ShowHide isShow={true} key={c[idPropName]}>
-              <HighchartWrapper
-                  isShow={true}
+        { _configs.map(c => (
+            <A.ShowHide isShow={true} key={c[idPropName]}>
+              <A.HighchartWrapper                  
                   config={c.config}
                   absComp={absComp}
                   onLoaded={onLoaded}
                   onWillUnLoaded={onWillUnLoaded}
               />
-           </ShowHide>
-         );
-        })
-      }
+           </A.ShowHide>
+         ))
+       }
     </div>
   );
-}
-
-MiniCharts.defaultProps = {
-  idPropName: 'id'
 }
 
 /*

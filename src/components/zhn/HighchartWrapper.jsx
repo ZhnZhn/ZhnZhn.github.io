@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import Highcharts from 'highcharts';
 
 const S = {
-  SHOW: {
+  DIV: {
     position: 'relative',
-    display: 'block',
     zIndex: 1
   },
+  SHOW: {
+    display: 'block',
+  },
   HIDE: {
-    position: 'relative',
     display: 'none'
   }
 };
@@ -17,6 +18,7 @@ const _isFn = fn => typeof fn === 'function';
 
 class HighchartWrapper extends Component {
   static defaultProps = {
+    isShow: true,
     isShowAbs: true
   }
 
@@ -62,15 +64,13 @@ class HighchartWrapper extends Component {
 
   render() {
     const {
-      isShow, rootStyle,
+      isShow, style,
       isShowAbs, absComp
     } = this.props
-   , _rootDivStyle = isShow
-        ? S.SHOW
-        : S.HIDE;
+    , _style = isShow ? S.SHOW : S.HIDE;
     return (
        <div
-         style={{...rootStyle, ..._rootDivStyle}}
+         style={{...style, ...S.DIV, ..._style}}
        >
           <div ref={this._refChart} />
           {isShowAbs && absComp}

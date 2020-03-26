@@ -125,6 +125,7 @@ function (_Component) {
         style: S.COMMAND_DIV
       }, commandButtons, _isFn(onShowChart) && _react["default"].createElement(_FlatButton["default"], {
         key: "show",
+        timeout: 0,
         rootStyle: S.BT_ROOT,
         caption: "Show",
         title: "Show Item Container" //accessKey="s"
@@ -132,6 +133,7 @@ function (_Component) {
         onClick: onShowChart
       }), _react["default"].createElement(_FlatButton["default"], {
         key: "close",
+        timeout: 0,
         rootStyle: S.BT_ROOT,
         caption: "Close",
         title: "Close Draggable Dialog" //accessKey="c"

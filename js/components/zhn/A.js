@@ -43,6 +43,8 @@ var _TabPane = _interopRequireDefault(require("./TabPane"));
 
 var _Tab = _interopRequireDefault(require("./Tab"));
 
+var _HighchartWrapper = _interopRequireDefault(require("./HighchartWrapper"));
+
 var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   SpinnerLoading: _SpinnerLoading["default"],
   ScrollPane: _ScrollPane["default"],
@@ -60,7 +62,8 @@ var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   SvgMinus: _SvgMinus["default"],
   SvgClose: _SvgClose["default"],
   TabPane: _TabPane["default"],
-  Tab: _Tab["default"]
+  Tab: _Tab["default"],
+  HighchartWrapper: _HighchartWrapper["default"]
 });
 var _default = A;
 exports["default"] = _default;

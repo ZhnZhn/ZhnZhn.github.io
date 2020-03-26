@@ -24,7 +24,7 @@ const CL = {
 const CHILD_MARGIN = 36
     , INITIAL_WIDTH = 635
     , MIN_WIDTH_WITH_TAB_MINI = 470
-    , MIN_WIDTH = 370
+    , MIN_WIDTH = 365
     , MAX_WIDTH = 1200
     , DELTA = 10;
 

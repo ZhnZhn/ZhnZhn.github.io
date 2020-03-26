@@ -19,6 +19,8 @@ var _ComponentActions = require("../../flux/actions/ComponentActions");
 
 var _ChartActions = require("../../flux/actions/ChartActions");
 
+var _has = _interopRequireDefault(require("../has"));
+
 var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
@@ -52,6 +54,10 @@ var OC_CAPTION_STYLE = {
   color: _Color["default"].TITLE
 };
 
+var _calcIsProviders = function _calcIsProviders() {
+  return _has["default"].strWidth ? true : false;
+};
+
 var About =
 /*#__PURE__*/
 function (_Component) {
@@ -68,19 +74,6 @@ function (_Component) {
     var _this;
 
     _this = _Component.call(this, props) || this;
-
-    _this._calcIsProviders = function () {
-      var strWidth = window.getComputedStyle(document.body, ':after').getPropertyValue('content');
-
-      switch (strWidth) {
-        case '"W600"':
-        case '"W500"':
-          return true;
-
-        default:
-          return false;
-      }
-    };
 
     _this._onStore = function (actionType, data) {
       if (actionType === _ComponentActions.ComponentActionTypes.SHOW_ABOUT) {
@@ -105,7 +98,7 @@ function (_Component) {
     };
 
     _this.state = {
-      isCloseProviders: _this._calcIsProviders(),
+      isCloseProviders: _calcIsProviders(),
       isShow: props.isShow
     };
     return _this;

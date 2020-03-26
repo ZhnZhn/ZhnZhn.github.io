@@ -11,6 +11,8 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _has = _interopRequireDefault(require("../has"));
+
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var S = {
@@ -38,6 +40,22 @@ var _isIn = function _isIn(arr, type) {
   return false;
 };
 
+var _calcMaxButtons = function _calcMaxButtons(props) {
+  switch (_has["default"].strWidth) {
+    case '"W600"':
+      return 3;
+
+    case '"W500"':
+      return 2;
+
+    case '"W380"':
+      return 1;
+
+    default:
+      return props.maxButtons;
+  }
+};
+
 var HotBar =
 /*#__PURE__*/
 function (_Component) {
@@ -46,7 +64,7 @@ function (_Component) {
   function HotBar(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._onStore = function (actionType, option) {
       var closeDialogAction = _this.props.closeDialogAction;
@@ -83,6 +101,7 @@ function (_Component) {
 
         return _react["default"].createElement(_FlatButton["default"], {
           key: type,
+          timeout: 0,
           rootStyle: S.BT_D,
           caption: _shortCaption,
           title: caption,
@@ -94,12 +113,13 @@ function (_Component) {
 
     _this._btCleanEl = _react["default"].createElement(_FlatButton["default"], {
       key: "BT_CLEAN",
+      timeout: 0,
       rootStyle: S.BT_CL,
       caption: "CL",
       title: "Clean Hot Bar",
       onClick: _this._hClean
     });
-    _this._maxButtons = _this._calcMaxButtons(props);
+    _this._maxButtons = _calcMaxButtons(props);
     _this.state = {
       countButtons: 0,
       hotButtons: []
@@ -108,21 +128,6 @@ function (_Component) {
   }
 
   var _proto = HotBar.prototype;
-
-  _proto._calcMaxButtons = function _calcMaxButtons(props) {
-    var strWidth = window.getComputedStyle(document.body, ':after').getPropertyValue('content');
-
-    switch (strWidth) {
-      case '"W600"':
-        return 3;
-
-      case '"W500"':
-        return 2;
-
-      default:
-        return props.maxButtons;
-    }
-  };
 
   _proto.componentDidMount = function componentDidMount() {
     var store = this.props.store;

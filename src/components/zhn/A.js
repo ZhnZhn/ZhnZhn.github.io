@@ -17,6 +17,7 @@ import SvgMinus from './SvgMinus';
 import SvgClose from './SvgClose'
 import TabPane from './TabPane'
 import Tab from './Tab'
+import HighchartWrapper from './HighchartWrapper'
 
 const A = {
   ...SvgIcons,
@@ -36,7 +37,8 @@ const A = {
   SvgMinus,
   SvgClose,
   TabPane,
-  Tab
+  Tab,
+  HighchartWrapper
 };
 
 export default A

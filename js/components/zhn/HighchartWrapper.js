@@ -16,13 +16,14 @@ var _react = _interopRequireWildcard(require("react"));
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
 var S = {
-  SHOW: {
+  DIV: {
     position: 'relative',
-    display: 'block',
     zIndex: 1
   },
+  SHOW: {
+    display: 'block'
+  },
   HIDE: {
-    position: 'relative',
     display: 'none'
   }
 };
@@ -91,13 +92,13 @@ function (_Component) {
   _proto.render = function render() {
     var _this$props2 = this.props,
         isShow = _this$props2.isShow,
-        rootStyle = _this$props2.rootStyle,
+        style = _this$props2.style,
         isShowAbs = _this$props2.isShowAbs,
         absComp = _this$props2.absComp,
-        _rootDivStyle = isShow ? S.SHOW : S.HIDE;
+        _style = isShow ? S.SHOW : S.HIDE;
 
     return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, rootStyle, {}, _rootDivStyle)
+      style: (0, _extends2["default"])({}, style, {}, S.DIV, {}, _style)
     }, _react["default"].createElement("div", {
       ref: this._refChart
     }), isShowAbs && absComp);
@@ -115,6 +116,7 @@ function (_Component) {
 }(_react.Component);
 
 HighchartWrapper.defaultProps = {
+  isShow: true,
   isShowAbs: true
 };
 var _default = HighchartWrapper;

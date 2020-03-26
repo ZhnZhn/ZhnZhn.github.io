@@ -6,9 +6,11 @@ exports["default"] = void 0;
 var INITIAL_WIDTH = 635,
     _isInnerWidth = function _isInnerWidth() {
   return window && window.innerWidth;
-};
+},
+    _strWidth = window && window.getComputedStyle(document.body, ':after').getPropertyValue('content');
 
 var has = {
+  strWidth: _strWidth,
   wideWidth: function wideWidth() {
     return _isInnerWidth() ? window.innerWidth > 700 : true;
   },

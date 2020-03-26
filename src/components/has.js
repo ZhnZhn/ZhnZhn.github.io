@@ -1,8 +1,12 @@
 
 const INITIAL_WIDTH = 635
-, _isInnerWidth = () => window && window.innerWidth;
+, _isInnerWidth = () => window && window.innerWidth
+, _strWidth = window && window
+    .getComputedStyle(document.body, ':after')
+    .getPropertyValue('content');
 
 const has = {
+  strWidth: _strWidth,
   wideWidth: () => _isInnerWidth()
     ? window.innerWidth > 700
     : true,

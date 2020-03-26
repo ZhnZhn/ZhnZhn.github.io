@@ -7,9 +7,7 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
-
-var _HighchartWrapper = _interopRequireDefault(require("../zhn/HighchartWrapper"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _fIsTitle = function _fIsTitle(title, idPropName) {
   return function (c) {
@@ -37,7 +35,8 @@ var _arrangeBy = function _arrangeBy(titles, configs, idPropName) {
 
 var MiniCharts = function MiniCharts(_ref) {
   var configs = _ref.configs,
-      idPropName = _ref.idPropName,
+      _ref$idPropName = _ref.idPropName,
+      idPropName = _ref$idPropName === void 0 ? 'id' : _ref$idPropName,
       ids = _ref.ids,
       absComp = _ref.absComp,
       onLoaded = _ref.onLoaded,
@@ -54,21 +53,16 @@ var MiniCharts = function MiniCharts(_ref) {
   }
 
   return _react["default"].createElement("div", null, _configs.map(function (c) {
-    return _react["default"].createElement(_ShowHide["default"], {
+    return _react["default"].createElement(_Comp["default"].ShowHide, {
       isShow: true,
       key: c[idPropName]
-    }, _react["default"].createElement(_HighchartWrapper["default"], {
-      isShow: true,
+    }, _react["default"].createElement(_Comp["default"].HighchartWrapper, {
       config: c.config,
       absComp: absComp,
       onLoaded: onLoaded,
       onWillUnLoaded: onWillUnLoaded
     }));
   }));
-};
-
-MiniCharts.defaultProps = {
-  idPropName: 'id'
 };
 /*
 MiniCharts.propTypes = {
@@ -83,6 +77,7 @@ MiniCharts.propTypes = {
   onWillUnLoaded: PropTypes.func
 }
 */
+
 
 var _default = MiniCharts;
 exports["default"] = _default;

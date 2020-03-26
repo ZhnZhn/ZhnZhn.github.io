@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import has from '../has'
-import ShowHide from '../zhn/ShowHide';
-import HighchartWrapper from '../zhn/HighchartWrapper';
+import A from '../Comp'
 import ChartToolBar from '../toolbars/ChartToolBar';
 import crModelMore from './AreaMore'
 import Header from './Header';
@@ -290,7 +289,7 @@ class AreaChartItem extends Component {
  _createChartToolBar = (config, withoutAnimation) => {
    const { isShowToolbar } = this.state;
    return (
-         <ShowHide
+         <A.ShowHide
             isShow={isShowToolbar}
             withoutAnimation={withoutAnimation}
          >
@@ -312,7 +311,7 @@ class AreaChartItem extends Component {
              onMinMax={this._toggleMinMax}
              onZoom={this._handleZoom}
             />
-         </ShowHide>
+         </A.ShowHide>
       );
    }
 
@@ -354,16 +353,16 @@ class AreaChartItem extends Component {
             regCompVm={this._regCompVm}
          />
         }
-        <ShowHide
+        <A.ShowHide
            isShow={isOpen}
            withoutAnimation={_withoutAnimation}
            style={S.SHOW_HIDE}
         >
            {isShowChart && this._createChartToolBar(config, _withoutAnimation)}
-           <HighchartWrapper
+           <A.HighchartWrapper
               ref={this._refChartComp}
               isShow={isShowChart}
-              rootStyle={S.WRAPPER}
+              style={S.WRAPPER}
               config={config}
               isShowAbs={isShowAbs}
               absComp={this._dataSourceEl}
@@ -393,7 +392,7 @@ class AreaChartItem extends Component {
               onLoaded={this._handleLoadedMiniChart}
               onWillUnLoaded={this._handleUnLoadedMiniChart}
            />
-        </ShowHide>
+        </A.ShowHide>
       </div>
     )
   }

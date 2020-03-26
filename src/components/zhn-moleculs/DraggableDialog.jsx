@@ -131,6 +131,7 @@ class DraggableDialog extends Component {
         {
           _isFn(onShowChart) && <FlatButton
             key="show"
+            timeout={0}
             rootStyle={S.BT_ROOT}
             caption="Show"
             title="Show Item Container"
@@ -140,6 +141,7 @@ class DraggableDialog extends Component {
         }
         <FlatButton
           key="close"
+          timeout={0}
           rootStyle={S.BT_ROOT}
           caption="Close"
           title="Close Draggable Dialog"
