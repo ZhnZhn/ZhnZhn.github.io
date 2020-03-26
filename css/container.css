@@ -16,7 +16,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  display: block;  
+  display: block;
   opacity: 1;
   background: rgba(0, 0, 0, 0.35) none repeat scroll 0% 0%;
   outline: 0 none; }
@@ -74,11 +74,9 @@
 
 .row__type2-topic:focus,
 .row__type2-topic:active {
-  background-color: rgba(0,0,0, .15);
+  background-color: rgba(0,0,0, 0.15);
   outline: 0;
 }
-
-
 
 .item__browser {
   color: #1b2836; }
@@ -166,7 +164,7 @@
   box-shadow: 1px 4px 6px 1px rgba(0, 0, 0, 0.6);
   min-height: 200px;
   max-height: calc(100vh + 36px);
-  padding: 0px 3px 35px 0px;
+  padding: 0 3px 35px 0;
   min-width: 270px;
   max-width: 400px;
   margin-left: 10px; }
@@ -178,15 +176,22 @@
   box-shadow: 1px 4px 6px 1px rgba(0, 0, 0, 0.6);
   min-height: 200px;
   max-height: calc(100vh + 36px);
-  padding: 0px;
+  padding: 0;
   padding-bottom: 35px;
   min-width: 300px;
   max-width: 682px;
   margin-left: 16px;
   margin-right: 16px; }
 
-@media (min-height: 570px) {
+@media screen and (min-height: 570px) {
   .item-container,
   .browser-container,
   .about-container {
     height: calc(100vh - 87px); } }
+
+@media screen and (max-width: 600px) {
+  .browser-container,
+  .item-container {
+    margin-left: 8px;
+  }
+}

@@ -4,12 +4,12 @@
   position: relative;
   z-index: 1050;
   width: 100%;
-  min-width: 400px;
-  margin-right: 26px;
+  min-width: 300px;
   background-color: rgba(77, 77, 77, 1);
   padding-top: 8px;
   padding-bottom: 4px;
   padding-left: 12px;
+  padding-right: 12px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
@@ -42,12 +42,7 @@
 }
 .header__bts-right {
   float: right;
-  margin-right: 16px;
 }
-
-.header__bt-about {
-}
-
 
 @media screen and (max-width: 1100px) {
   .header__bt-quandl {
@@ -67,7 +62,7 @@
   }
   .header__panel-browser {
     left: 12px;
-  }  
+  }
 }
 
 @media screen and (max-width: 770px) {
@@ -81,7 +76,6 @@
     display: none;
   }
 }
-
 
 @media screen and (max-width: 600px) {
   body::after {
@@ -101,6 +95,14 @@
   }
 }
 
+@media screen and (max-width: 380px) {
+  body::after {
+    position: absolute;
+    top: 0;
+    content: "W380";
+    font-size: 0;
+  }
+}
 
 .provider__note__br {
   display: block;

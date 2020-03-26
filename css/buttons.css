@@ -1,7 +1,7 @@
 
 .bt-chb:hover,
 .bt-chb:focus {
-  outline: 0
+  outline: 0;
 }
 
 .bt-item {
@@ -48,7 +48,6 @@
   color: #a487d4;
   font-weight: bold;
 }
-
 
 .bt-sub-item {
   width: 100%;

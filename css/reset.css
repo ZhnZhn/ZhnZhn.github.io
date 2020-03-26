@@ -4,18 +4,21 @@
   margin: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  /*-webkit-tap-highlight-color: transparent;*/
+
+  /* -webkit-tap-highlight-color: transparent; */
 }
 
 html {
-  /*font-family: sans-serif;*/
+  /* font-family: sans-serif; */
   font-size: 100%;
   scroll-behavior: smooth;
 }
 
 body {
   font-family: "Roboto", "Arial", "Lato", sans-serif;
+
   /*
+
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-weight: 400;
   font-size: 1rem;
@@ -43,5 +46,3 @@ button:hover {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
 }
-
-

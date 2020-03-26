@@ -70,10 +70,8 @@
   max-height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
-
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
 }
 
 .zhn-select__row {

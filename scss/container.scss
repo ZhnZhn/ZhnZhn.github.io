@@ -24,7 +24,7 @@
 
 .browser-container {
   @include base-cont();
-  padding: 0px 3px 35px 0px;
+  padding: 0 3px 35px 0;
   min-width: 270px;
   max-width: 400px;
   margin-left: 10px;
@@ -32,7 +32,7 @@
 
 .about-container {
   @include base-cont();
-  padding: 0px;
+  padding: 0;
   padding-bottom: 35px;
   min-width: 300px;
   max-width: 630px;
@@ -40,10 +40,17 @@
   margin-right: 16px;
 }
 
-@media (min-height: 570px) {
+@media screen and (min-height: 570px) {
    .item-container,
    .browser-container,
    .about-container {
       height: calc(100vh - 87px);
    }
+}
+
+@media screen and (max-width: 600px) {
+  .browser-container,
+  .item-container {
+    margin-left: 8px;
+  }
 }

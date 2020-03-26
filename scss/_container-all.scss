@@ -77,6 +77,11 @@
 .row__type2-topic:hover {
   border-bottom: 1px solid #1b75bb;
 }
+.row__type2-topic:focus,
+.row__type2-topic:active {
+  background-color: rgba(0,0,0, 0.15);
+  outline: 0;
+}
 
 .item__browser {
   color: #1b2836;

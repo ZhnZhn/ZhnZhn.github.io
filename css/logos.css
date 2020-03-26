@@ -27,20 +27,20 @@
   transition: color, border-color, fill, stroke 300ms ease-out;
 }
 .logo-item:hover {
-  border-color: #2f7ed8;    
-  color: #f1d600;  
+  border-color: #2f7ed8;
+  color: #f1d600;
 }
 
 .logo-quandl {
   display: inline-block;
   width: 150px;
   margin-right: 24px;
-  margin-left: 0;  
-  padding: 14px 16px 10px;  
+  margin-left: 0;
+  padding: 14px 16px 10px;
   stroke: #e95424;
   fill: #e95424;
 }
-.logo-quandl:hover {  
+.logo-quandl:hover {
   fill: #f1d600;
 }
 
@@ -49,8 +49,8 @@
   height: 72px;
   background-color: black;
   border-width: 4px;
-  border-radius: 50%;      
-  transition: background-color 300ms ease-out; 
+  border-radius: 50%;
+  transition: background-color 300ms ease-out;
   fill: inherit;
 }
 .logo-github:hover {
@@ -61,25 +61,24 @@
 .logo-react {
   width: 72px;
   height: 72px;
-  padding: 6px;  
+  padding: 6px;
   margin-left: 26px;
   margin-right: 0;
   border-width: 4px;
-  border-radius: 50%;  
+  border-radius: 50%;
   fill: #00d8ff;
   stroke: #00d8ff;
   stroke-width: 12;
 }
-.logo-react:hover {  
+.logo-react:hover {
   fill: #f1d600;
-  stroke: #f1d600;  
+  stroke: #f1d600;
 }
-
 
 .logo-highcharts {
   display: inline-block;
   width: 180px;
-  margin-left: 22px;      
+  margin-left: 22px;
   fill: #6d6dac;
 }
 .logo-highcharts:hover {
@@ -92,7 +91,5 @@
   font-weight: normal;
   font-size: 32px;
   color: #009ae5;
-  padding: 6px 16px; 
+  padding: 6px 16px;
 }
-
-
