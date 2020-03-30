@@ -4,6 +4,7 @@
   "description": "ERC: Economic RESTFul Client",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack-dev-server --config webpack.dev.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -53,8 +54,8 @@
     "memoize-one": "^5.0.5",
     "query-string": "^5.1.1",
     "raven-js": "^3.27.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "reflux-core": "^1.0.0"
   },
   "jspm": {
@@ -72,9 +73,9 @@
       "prop-types": "npm:prop-types@^15.7.2",
       "query-string": "npm:query-string@5.1.1",
       "raven-js": "npm:raven-js@^3.27.0",
-      "react": "npm:react@^16.13.0",
-      "react-dom": "npm:react-dom@^16.13.0",
-      "react-test-renderer": "npm:react-test-renderer@^16.13.0",
+      "react": "npm:react@^16.13.1",
+      "react-dom": "npm:react-dom@^16.13.1",
+      "react-test-renderer": "npm:react-test-renderer@^16.13.1",
       "reflux-core": "npm:reflux-core@^1.0.0"
     },
     "devDependencies": {}
@@ -105,11 +106,12 @@
     "html-webpack-plugin": "^3.2.0",
     "jest": "^25.1.0",
     "jspm": "^0.16.55",
-    "react-test-renderer": "^16.13.0",
+    "react-test-renderer": "^16.13.1",
     "terser-webpack-plugin": "^2.3.5",
-    "webpack": "^4.42.0",
+    "webpack": "^4.42.1",
     "webpack-bundle-analyzer": "^3.6.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
   "jest": {
     "roots": [

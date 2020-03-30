@@ -23,6 +23,8 @@ _codemods
 src/components/chart-config
 js/components/chart-config
 app/config-dialog*.js
+dev
+webpack.dev.js
 webpack.dev.dll.js
 webpack.dev.dll-jsx.js
 app/*_dev_*.js
