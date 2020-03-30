@@ -116,7 +116,7 @@ class HeaderBar extends Component {
           </ModalButton>
           <FlatButton
             className={CL.QUANDL}
-            rootStyle={S.BT}
+            style={S.BT}
             caption="Quandl"
             title="Quandl: World Economy Browser"
             accessKey="q"
@@ -124,7 +124,7 @@ class HeaderBar extends Component {
           />
           <FlatButton
             className={CL.EUROSTAT}
-            rootStyle={S.BT}
+            style={S.BT}
             caption="Eurostat"
             title="Eurostat Statistics Browser"
             accessKey="u"
@@ -132,7 +132,7 @@ class HeaderBar extends Component {
           />
           <FlatButton
              className={CL.WATCH}
-             rootStyle={S.BT}
+             style={S.BT}
              caption="Watch"
              title="Watch List Browser"
              accessKey="w"
@@ -148,7 +148,7 @@ class HeaderBar extends Component {
                store={store}
             />
             <FlatButton
-               rootStyle={S.BT}
+               style={S.BT}
                isPrimary={true}
                title="User Settings Dialog"
                accessKey="s"
@@ -158,7 +158,7 @@ class HeaderBar extends Component {
              </FlatButton>
              <FlatButton
                className={CL.ABOUT}
-               rootStyle={S.BT}
+               style={S.BT}
                title="About Web Application ERC"
                accessKey="a"
                onClick={CA.showAbout}

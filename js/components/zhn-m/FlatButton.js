@@ -83,7 +83,7 @@ function (_Component) {
   _proto.render = function render() {
     var _this$props2 = this.props,
         className = _this$props2.className,
-        rootStyle = _this$props2.rootStyle,
+        style = _this$props2.style,
         _this$props2$clDiv = _this$props2.clDiv,
         clDiv = _this$props2$clDiv === void 0 ? CL.BT_DIV : _this$props2$clDiv,
         isPrimary = _this$props2.isPrimary,
@@ -92,7 +92,7 @@ function (_Component) {
         caption = _this$props2.caption,
         accessKey = _this$props2.accessKey,
         children = _this$props2.children,
-        _style = isPrimary ? (0, _extends2["default"])({}, rootStyle, {}, S.PRIMARY) : rootStyle,
+        _style = isPrimary ? (0, _extends2["default"])({}, style, {}, S.PRIMARY) : style,
         _className = className ? CL.BT + " " + className : CL.BT,
         _title = accessKey ? title + " [" + accessKey + "]" : title;
 

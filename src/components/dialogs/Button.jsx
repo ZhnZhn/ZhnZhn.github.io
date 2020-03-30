@@ -13,7 +13,7 @@ const S = {
 
 const Load = ({ onClick }) => (
   <FlatButton
-    rootStyle={S.LOAD}
+    style={S.LOAD}
     caption="Load"
     title="Load Item to Container"
     //accessKey="l"
@@ -23,7 +23,7 @@ const Load = ({ onClick }) => (
 
 const Show = ({ onClick }) => (
   <FlatButton
-    rootStyle={S.SHOW}
+    style={S.SHOW}
     caption="Show"
     title="Show Item Container"
     //accessKey="s"

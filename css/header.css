@@ -95,11 +95,11 @@
   }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 360px) {
   body::after {
     position: absolute;
     top: 0;
-    content: "W380";
+    content: "W360";
     font-size: 0;
   }
 }

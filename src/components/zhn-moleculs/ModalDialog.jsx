@@ -30,7 +30,7 @@ const S = {
     //left: '30%',
     left: '50%',
     width: 380,
-    marginLeft: -190,    
+    marginLeft: -190,
     zIndex: 10
   },
   HIDE_POPUP: {
@@ -138,7 +138,7 @@ class ModalDialog extends Component {
         { !withoutClose &&
             <FlatButton
               key="close"
-              rootStyle={S.BT_ROOT}
+              style={S.BT}
               caption="Close"
               title="Close Modal Dialog"
               onClick={this._hClose}

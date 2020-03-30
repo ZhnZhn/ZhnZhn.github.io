@@ -38,7 +38,7 @@ class PaneApiKey extends Component {
     }
   }
 
-  _hSetAll = () => {    
+  _hSetAll = () => {
     let i = 1;
     for(; i<MAX_KEY; i++) {
       this['_setKey'+i](this['iComp'+i].getValue())
@@ -144,12 +144,12 @@ class PaneApiKey extends Component {
         />
         <RowButtons btStyle={btStyle} onClose={onClose}>
           <FlatButton
-            rootStyle={btStyle}
+            style={btStyle}
             caption="CLEAR ALL"
             onClick={this._hClearAll}
           />
           <FlatButton
-            rootStyle={{...btStyle, ...S.BT_SET}}
+            style={{...btStyle, ...S.BT_SET}}
             caption="SET ALL"
             onClick={this._hSetAll}
           />

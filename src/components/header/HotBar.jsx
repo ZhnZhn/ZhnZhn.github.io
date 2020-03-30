@@ -26,11 +26,22 @@ const _isIn = (arr, type) => {
   return false;
 }
 
+const _crBtProps = (index, caption='') => {
+  const _accessKey = has.touch
+    ? ''
+    : (index+1).toString();
+  return {
+    accessKey: _accessKey || void 0,
+    caption: _accessKey + caption.substr(0, 3),
+    title: caption
+  };
+};
+
 const _calcMaxButtons = (props) => {
   switch(has.strWidth){
     case '"W600"': return 3;
     case '"W500"': return 2;
-    case '"W380"': return 1;
+    case '"W360"': return 1;
     default: return props.maxButtons;
   }
 };
@@ -46,7 +57,7 @@ class HotBar extends Component {
       <FlatButton
         key="BT_CLEAN"
         timeout={0}
-        rootStyle={S.BT_CL}
+        style={S.BT_CL}
         caption="CL"
         title="Clean Hot Bar"
         onClick={this._hClean}
@@ -91,17 +102,13 @@ class HotBar extends Component {
 
   _renderHotButtons = (hotButtons, onShowDialog) => {
     return hotButtons.map((conf, index) => {
-      const { type, caption='' } = conf
-      , _accessKey = (index+1).toString()
-      , _shortCaption = _accessKey + caption.substr(0, 3);
+      const { type, caption } = conf;
       return (
         <FlatButton
+          {..._crBtProps(index, caption)}
           key={type}
           timeout={0}
-          rootStyle={S.BT_D}
-          caption={_shortCaption}
-          title={caption}
-          accessKey={_accessKey}
+          style={S.BT_D}
           onClick={onShowDialog.bind(null, type)}
         />
       );

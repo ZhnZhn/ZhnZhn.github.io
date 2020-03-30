@@ -43,13 +43,13 @@ class FlatButton extends Component {
 
   render() {
     const {
-           className, rootStyle, clDiv=CL.BT_DIV, isPrimary,
+           className, style, clDiv=CL.BT_DIV, isPrimary,
            title='', caption, accessKey,
            children
           } = this.props
         , _style = isPrimary
-             ? {...rootStyle, ...S.PRIMARY }
-             : rootStyle
+             ? {...style, ...S.PRIMARY }
+             : style
         , _className = className
              ? `${CL.BT} ${className}`
              : CL.BT

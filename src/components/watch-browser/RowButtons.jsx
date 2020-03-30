@@ -3,7 +3,7 @@ import React from 'react'
 import Button from './Button'
 import S from './Pane.Style'
 
-const RowButtons = ({ Primary, withoutClear, onClear, onClose }) =>
+const RowButtons = ({ Primary, withoutClear, onClear, onClose }) => (
   <div style={S.COMMAND_DIV}>
     {Primary}
     {!withoutClear &&
@@ -15,5 +15,6 @@ const RowButtons = ({ Primary, withoutClear, onClear, onClose }) =>
        onClick={onClose}
     />
   </div>
+);
 
 export default RowButtons

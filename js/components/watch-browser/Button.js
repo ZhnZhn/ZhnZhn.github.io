@@ -10,15 +10,15 @@ var _react = _interopRequireDefault(require("react"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var S = {
-  BT_ROOT: {
-    color: 'rgb(35, 47, 59)'
+  BT: {
+    color: '#232f3b'
   }
 };
 
 var Clear = function Clear(_ref) {
   var onClick = _ref.onClick;
   return _react["default"].createElement(_FlatButton["default"], {
-    rootStyle: S.BT_ROOT,
+    style: S.BT,
     caption: "Clear",
     title: "Clear Input",
     onClick: onClick
@@ -28,7 +28,7 @@ var Clear = function Clear(_ref) {
 var Close = function Close(_ref2) {
   var onClick = _ref2.onClick;
   return _react["default"].createElement(_FlatButton["default"], {
-    rootStyle: S.BT_ROOT,
+    style: S.BT,
     caption: "Close",
     title: "Close Dialog",
     onClick: onClick

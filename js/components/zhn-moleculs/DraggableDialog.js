@@ -40,8 +40,8 @@ var CL = {
 var S = (0, _extends2["default"])({}, _Dialog["default"], {
   ROOT_DIV_DRAG: {
     position: 'absolute',
-    top: '30px',
-    left: '50px',
+    top: 30,
+    left: 50,
     zIndex: 10
   },
   BT_MORE: {
@@ -126,7 +126,7 @@ function (_Component) {
       }, commandButtons, _isFn(onShowChart) && _react["default"].createElement(_FlatButton["default"], {
         key: "show",
         timeout: 0,
-        rootStyle: S.BT_ROOT,
+        style: S.BT,
         caption: "Show",
         title: "Show Item Container" //accessKey="s"
         ,
@@ -134,7 +134,7 @@ function (_Component) {
       }), _react["default"].createElement(_FlatButton["default"], {
         key: "close",
         timeout: 0,
-        rootStyle: S.BT_ROOT,
+        style: S.BT,
         caption: "Close",
         title: "Close Draggable Dialog" //accessKey="c"
         ,

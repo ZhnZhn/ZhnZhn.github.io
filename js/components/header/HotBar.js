@@ -7,6 +7,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -40,6 +42,20 @@ var _isIn = function _isIn(arr, type) {
   return false;
 };
 
+var _crBtProps = function _crBtProps(index, caption) {
+  if (caption === void 0) {
+    caption = '';
+  }
+
+  var _accessKey = _has["default"].touch ? '' : (index + 1).toString();
+
+  return {
+    accessKey: _accessKey || void 0,
+    caption: _accessKey + caption.substr(0, 3),
+    title: caption
+  };
+};
+
 var _calcMaxButtons = function _calcMaxButtons(props) {
   switch (_has["default"].strWidth) {
     case '"W600"':
@@ -48,7 +64,7 @@ var _calcMaxButtons = function _calcMaxButtons(props) {
     case '"W500"':
       return 2;
 
-    case '"W380"':
+    case '"W360"':
       return 1;
 
     default:
@@ -94,27 +110,20 @@ function (_Component) {
     _this._renderHotButtons = function (hotButtons, onShowDialog) {
       return hotButtons.map(function (conf, index) {
         var type = conf.type,
-            _conf$caption = conf.caption,
-            caption = _conf$caption === void 0 ? '' : _conf$caption,
-            _accessKey = (index + 1).toString(),
-            _shortCaption = _accessKey + caption.substr(0, 3);
-
-        return _react["default"].createElement(_FlatButton["default"], {
+            caption = conf.caption;
+        return _react["default"].createElement(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
           key: type,
           timeout: 0,
-          rootStyle: S.BT_D,
-          caption: _shortCaption,
-          title: caption,
-          accessKey: _accessKey,
+          style: S.BT_D,
           onClick: onShowDialog.bind(null, type)
-        });
+        }));
       });
     };
 
     _this._btCleanEl = _react["default"].createElement(_FlatButton["default"], {
       key: "BT_CLEAN",
       timeout: 0,
-      rootStyle: S.BT_CL,
+      style: S.BT_CL,
       caption: "CL",
       title: "Clean Hot Bar",
       onClick: _this._hClean

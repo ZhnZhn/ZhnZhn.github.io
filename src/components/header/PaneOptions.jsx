@@ -133,7 +133,7 @@ class PaneOptions extends Component {
        />
        <RowButtons btStyle={btStyle} onClose={onClose}>
          <FlatButton
-           rootStyle={{...btStyle, ...S.BT_PROXY}}
+           style={{...btStyle, ...S.BT_PROXY}}
            caption="SET PROXY"
            onClick={this._hSetProxy}
          />

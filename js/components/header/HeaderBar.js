@@ -136,21 +136,21 @@ function (_Component) {
       className: CL.ARROW
     })), _react["default"].createElement(FlatButton, {
       className: CL.QUANDL,
-      rootStyle: S.BT,
+      style: S.BT,
       caption: "Quandl",
       title: "Quandl: World Economy Browser",
       accessKey: "q",
       onClick: this._hShowEconomic
     }), _react["default"].createElement(FlatButton, {
       className: CL.EUROSTAT,
-      rootStyle: S.BT,
+      style: S.BT,
       caption: "Eurostat",
       title: "Eurostat Statistics Browser",
       accessKey: "u",
       onClick: this._hShowEurostat
     }), _react["default"].createElement(FlatButton, {
       className: CL.WATCH,
-      rootStyle: S.BT,
+      style: S.BT,
       caption: "Watch",
       title: "Watch List Browser",
       accessKey: "w",
@@ -164,7 +164,7 @@ function (_Component) {
     }, _react["default"].createElement(_LimitRemainingLabel["default"], {
       store: store
     }), _react["default"].createElement(FlatButton, {
-      rootStyle: S.BT,
+      style: S.BT,
       isPrimary: true,
       title: "User Settings Dialog",
       accessKey: "s",
@@ -173,7 +173,7 @@ function (_Component) {
       style: STYLE.SVG_BT
     })), _react["default"].createElement(FlatButton, {
       className: CL.ABOUT,
-      rootStyle: S.BT,
+      style: S.BT,
       title: "About Web Application ERC",
       accessKey: "a",
       onClick: _ComponentActions["default"].showAbout

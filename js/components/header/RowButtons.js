@@ -13,9 +13,9 @@ var S = {
   ROW: {
     cursor: 'default',
     "float": 'right',
-    marginTop: '8px',
-    marginBottom: '10px',
-    marginRight: '4px'
+    marginTop: 8,
+    marginBottom: 10,
+    marginRight: 4
   }
 };
 
@@ -26,7 +26,7 @@ var RowButtons = function RowButtons(_ref) {
   return _react["default"].createElement("div", {
     style: S.ROW
   }, children, _react["default"].createElement(_FlatButton["default"], {
-    rootStyle: btStyle,
+    style: btStyle,
     caption: "Close",
     onClick: onClose
   }));

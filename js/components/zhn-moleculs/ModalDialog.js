@@ -81,7 +81,7 @@ function (_Component) {
         style: S.COMMAND_DIV
       }, commandButtons, !withoutClose && _react["default"].createElement(_FlatButton["default"], {
         key: "close",
-        rootStyle: S.BT_ROOT,
+        style: S.BT,
         caption: "Close",
         title: "Close Modal Dialog",
         onClick: _this._hClose

@@ -30,8 +30,8 @@ const S = {
   ...STYLE,
   ROOT_DIV_DRAG: {
     position: 'absolute',
-    top: '30px',
-    left: '50px',
+    top: 30,
+    left: 50,
     zIndex: 10
   },
   BT_MORE: {
@@ -132,7 +132,7 @@ class DraggableDialog extends Component {
           _isFn(onShowChart) && <FlatButton
             key="show"
             timeout={0}
-            rootStyle={S.BT_ROOT}
+            style={S.BT}
             caption="Show"
             title="Show Item Container"
             //accessKey="s"
@@ -142,7 +142,7 @@ class DraggableDialog extends Component {
         <FlatButton
           key="close"
           timeout={0}
-          rootStyle={S.BT_ROOT}
+          style={S.BT}
           caption="Close"
           title="Close Draggable Dialog"
           //accessKey="c"

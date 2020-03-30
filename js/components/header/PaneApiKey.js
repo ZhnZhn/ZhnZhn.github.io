@@ -189,11 +189,11 @@ function (_Component) {
       btStyle: btStyle,
       onClose: onClose
     }, _react["default"].createElement(_FlatButton["default"], {
-      rootStyle: btStyle,
+      style: btStyle,
       caption: "CLEAR ALL",
       onClick: this._hClearAll
     }), _react["default"].createElement(_FlatButton["default"], {
-      rootStyle: (0, _extends2["default"])({}, btStyle, {}, S.BT_SET),
+      style: (0, _extends2["default"])({}, btStyle, {}, S.BT_SET),
       caption: "SET ALL",
       onClick: this._hSetAll
     })));

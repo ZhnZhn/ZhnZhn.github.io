@@ -167,7 +167,7 @@ function (_Component) {
       btStyle: btStyle,
       onClose: onClose
     }, _react["default"].createElement(_FlatButton["default"], {
-      rootStyle: (0, _extends2["default"])({}, btStyle, {}, S.BT_PROXY),
+      style: (0, _extends2["default"])({}, btStyle, {}, S.BT_PROXY),
       caption: "SET PROXY",
       onClick: this._hSetProxy
     })));

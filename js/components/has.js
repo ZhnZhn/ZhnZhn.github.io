@@ -7,10 +7,14 @@ var INITIAL_WIDTH = 635,
     _isInnerWidth = function _isInnerWidth() {
   return window && window.innerWidth;
 },
-    _strWidth = window && window.getComputedStyle(document.body, ':after').getPropertyValue('content');
+    _strWidth = window && window.getComputedStyle(document.body, ':after').getPropertyValue('content'),
+    _isTouchable = function _isTouchable() {
+  return document && 'ontouchstart' in document.documentElement;
+};
 
 var has = {
   strWidth: _strWidth,
+  touch: _isTouchable(),
   wideWidth: function wideWidth() {
     return _isInnerWidth() ? window.innerWidth > 700 : true;
   },
