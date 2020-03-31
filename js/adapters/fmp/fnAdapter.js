@@ -10,17 +10,17 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 var crError = _AdapterFn["default"].crError,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     valueMoving = _AdapterFn["default"].valueMoving,
-    crItemLink = _AdapterFn["default"].crItemLink;
+    crItemLink = _AdapterFn["default"].crItemLink,
+    compareByDate = _AdapterFn["default"].compareByDate;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
-      _symbol = _ref._symbol,
-      _propName = _ref._propName,
+      itemCaption = _ref.itemCaption,
       dataSource = _ref.dataSource;
   return {
     id: _itemKey,
     key: _itemKey,
-    itemCaption: _symbol + '_' + _propName,
+    itemCaption: itemCaption,
     isWithoutAdd: true,
     dataSource: dataSource
   };
@@ -55,17 +55,14 @@ var fnAdapter = {
   getValue: _fGetByPropName('value'),
   crData: function crData(metrics, propName) {
     return metrics.map(function (item) {
-      return {
-        x: ymdToUTC(item.date),
-        y: parseFloat(item[propName])
-      };
-    }).reverse();
+      return [ymdToUTC(item.date), parseFloat(item[propName])];
+    }).reverse().sort(compareByDate);
   },
   crCaption: function crCaption(_ref3) {
     var items = _ref3.items;
     return {
       title: fnAdapter.getCaption(items[0]),
-      subtitle: fnAdapter.getCaption(items[1]) + ': ' + fnAdapter.getCaption(items[2])
+      subtitle: items[1] ? fnAdapter.getCaption(items[1]) + ': ' + fnAdapter.getCaption(items[2]) : ''
     };
   },
   crSeriaType: function crSeriaType(seriaType) {

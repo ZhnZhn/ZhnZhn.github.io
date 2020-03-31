@@ -1,1 +1,38 @@
-{"version":3,"sources":["../../../src/adapters/fmp/FmpAdapter.js"],"names":["crCaption","fnAdapter","crSeriaType","crData","crConfigOption","FmpAdapter","toConfig","json","option","_propName","seriaType","seriaColor","title","subtitle","data","_values","seria","splineSeria","type","color","toSeria","config","area2Config","addSeries","addMinMax","add","toSeries","series"],"mappings":";;;;;;;;;AAAA;;AAEA;;IAGEA,S,GAIEC,qB,CAJFD,S;IACAE,W,GAGED,qB,CAHFC,W;IACAC,M,GAEEF,qB,CAFFE,M;IACAC,c,GACEH,qB,CADFG,c;AAGF,IAAMC,UAAU,GAAG;AACjBC,EAAAA,QADiB,oBACRC,IADQ,EACFC,MADE,EACK;AAAA,QAElBC,SAFkB,GAKhBD,MALgB,CAElBC,SAFkB;AAAA,QAGlBC,SAHkB,GAKhBF,MALgB,CAGlBE,SAHkB;AAAA,QAIlBC,UAJkB,GAKhBH,MALgB,CAIlBG,UAJkB;AAAA,qBAMIX,SAAS,CAACQ,MAAD,CANb;AAAA,QAMhBI,KANgB,cAMhBA,KANgB;AAAA,QAMTC,QANS,cAMTA,QANS;AAAA,QAOlBC,IAPkB,GAOXX,MAAM,CAACI,IAAI,CAACQ,OAAN,EAAeN,SAAf,CAPK;AAAA,QAQlBO,KARkB,GAQV,iCACLC,WADK,CACO;AACXC,MAAAA,IAAI,EAAEhB,WAAW,CAACQ,SAAD,CADN;AAEXS,MAAAA,KAAK,EAAER,UAFI;AAGXG,MAAAA,IAAI,EAAJA;AAHW,KADP,EAMLM,OANK,EARU;AAAA,QAelBC,MAfkB,GAeT,iCACNC,WADM,CACMV,KADN,EACaC,QADb,EAENU,SAFM,CAEIP,KAFJ,EAGNQ,SAHM,CAGIV,IAHJ,EAGUN,MAHV,EAINiB,GAJM,+BAKFrB,cAAc,CAAC;AAAEG,MAAAA,IAAI,EAAJA,IAAF;AAAQC,MAAAA,MAAM,EAANA,MAAR;AAAgBM,MAAAA,IAAI,EAAJA;AAAhB,KAAD,CALZ,GAONR,QAPM,EAfS;;AAuBpB,WAAO;AAAEe,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAzBgB;AA2BjBK,EAAAA,QA3BiB,oBA2BRnB,IA3BQ,EA2BFC,MA3BE,EA2BK;AAAA,+BACDH,UAAU,CAACC,QAAX,CAAoBC,IAApB,EAA0BC,MAA1B,CADC;AAAA,QACZa,MADY,wBACZA,MADY;;AAEpB,WAAOA,MAAM,CAACM,MAAP,CAAc,CAAd,CAAP;AACD;AA9BgB,CAAnB;eAiCetB,U","sourcesContent":["import Builder from '../../charts/ConfigBuilder';\r\n\r\nimport fnAdapter from './fnAdapter'\r\n\r\nconst {\r\n  crCaption,\r\n  crSeriaType,\r\n  crData,\r\n  crConfigOption\r\n} = fnAdapter;\r\n\r\nconst FmpAdapter = {\r\n  toConfig(json, option){\r\n    const {\r\n      _propName,\r\n      seriaType,\r\n      seriaColor\r\n    } = option        \r\n    , { title, subtitle } = crCaption(option)\r\n    , data = crData(json._values, _propName)\r\n    , seria = Builder()\r\n        .splineSeria({\r\n          type: crSeriaType(seriaType),\r\n          color: seriaColor,\r\n          data\r\n        })\r\n        .toSeria()\r\n    , config = Builder()\r\n        .area2Config(title, subtitle)\r\n        .addSeries(seria)\r\n        .addMinMax(data, option)\r\n        .add({\r\n          ...crConfigOption({ json, option, data })\r\n        })\r\n        .toConfig();\r\n    return { config };\r\n  },\r\n\r\n  toSeries(json, option){\r\n    const { config } = FmpAdapter.toConfig(json, option);\r\n    return config.series[0];\r\n  }\r\n};\r\n\r\nexport default FmpAdapter\r\n"],"file":"FmpAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/fmp/FmpAdapter.js"
+ ],
+ "file": "../../../src/adapters/fmp/FmpAdapter.js",
+ "names": [
+  "crCaption",
+  "fnAdapter",
+  "crSeriaType",
+  "crData",
+  "crConfigOption",
+  "FmpAdapter",
+  "toConfig",
+  "json",
+  "option",
+  "dfPn",
+  "_propName",
+  "seriaType",
+  "seriaColor",
+  "title",
+  "subtitle",
+  "data",
+  "seria",
+  "splineSeria",
+  "type",
+  "color",
+  "toSeria",
+  "config",
+  "area2Config",
+  "addSeries",
+  "addMinMax",
+  "add",
+  "toSeries",
+  "series"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;IAGEA,S,GAIEC,qB,CAJFD,S;IACAE,W,GAGED,qB,CAHFC,W;IACAC,M,GAEEF,qB,CAFFE,M;IACAC,c,GACEH,qB,CADFG,c;AAGF,IAAMC,UAAU,GAAG;AACjBC,EAAAA,QADiB,oBACRC,IADQ,EACFC,MADE,EACK;AAAA,QAElBC,IAFkB,GAMhBD,MANgB,CAElBC,IAFkB;AAAA,QAGlBC,SAHkB,GAMhBF,MANgB,CAGlBE,SAHkB;AAAA,QAIlBC,SAJkB,GAMhBH,MANgB,CAIlBG,SAJkB;AAAA,QAKlBC,UALkB,GAMhBJ,MANgB,CAKlBI,UALkB;AAAA,qBAOIZ,SAAS,CAACQ,MAAD,CAPb;AAAA,QAOhBK,KAPgB,cAOhBA,KAPgB;AAAA,QAOTC,QAPS,cAOTA,QAPS;AAAA,QAQlBC,IARkB,GAQXZ,MAAM,CAACI,IAAI,CAACE,IAAD,CAAL,EAAaC,SAAb,CARK;AAAA,QASlBM,KATkB,GASV,iCACLC,WADK,CACO;AACXC,MAAAA,IAAI,EAAEhB,WAAW,CAACS,SAAD,CADN;AAEXQ,MAAAA,KAAK,EAAEP,UAFI;AAGXG,MAAAA,IAAI,EAAJA;AAHW,KADP,EAMLK,OANK,EATU;AAAA,QAgBlBC,MAhBkB,GAgBT,iCACNC,WADM,CACMT,KADN,EACaC,QADb,EAENS,SAFM,CAEIP,KAFJ,EAGNQ,SAHM,CAGIT,IAHJ,EAGUP,MAHV,EAINiB,GAJM,+BAKFrB,cAAc,CAAC;AAAEG,MAAAA,IAAI,EAAJA,IAAF;AAAQC,MAAAA,MAAM,EAANA,MAAR;AAAgBO,MAAAA,IAAI,EAAJA;AAAhB,KAAD,CALZ,GAONT,QAPM,EAhBS;;AAyBpB,WAAO;AAAEe,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GA3BgB;AA6BjBK,EAAAA,QA7BiB,oBA6BRnB,IA7BQ,EA6BFC,MA7BE,EA6BK;AAAA,+BACDH,UAAU,CAACC,QAAX,CAAoBC,IAApB,EAA0BC,MAA1B,CADC;AAAA,QACZa,MADY,wBACZA,MADY;;AAEpB,WAAOA,MAAM,CAACM,MAAP,CAAc,CAAd,CAAP;AACD;AAhCgB,CAAnB;eAmCetB,U"
+}

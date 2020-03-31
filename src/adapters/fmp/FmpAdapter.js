@@ -12,12 +12,13 @@ const {
 const FmpAdapter = {
   toConfig(json, option){
     const {
+      dfPn,
       _propName,
       seriaType,
       seriaColor
-    } = option        
+    } = option
     , { title, subtitle } = crCaption(option)
-    , data = crData(json._values, _propName)
+    , data = crData(json[dfPn], _propName)
     , seria = Builder()
         .splineSeria({
           type: crSeriaType(seriaType),
@@ -33,6 +34,7 @@ const FmpAdapter = {
           ...crConfigOption({ json, option, data })
         })
         .toConfig();
+
     return { config };
   },
 

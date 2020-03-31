@@ -57,11 +57,11 @@ var _crDF = function _crDF(captions, mapFrequency) {
 };
 
 var _crT1 = function _crT1() {
-  return [_crItem(['Default: Spline', V.S])];
+  return [_crItem(['Default: Spline', V.S]), _crItem(['Line', V.L]), _crItem(['Area', V.A])];
 };
 
 var _crT2 = function _crT2() {
-  return [_crItem(['Default: Spline', V.S]), _crItem(['Line', V.L]), _crItem(['Area', V.A]), _crItem(['Column', V.S_C])];
+  return [].concat(_crT1(), [_crItem(['Column', V.S_C])]);
 };
 
 var _crT2A = function _crT2A() {

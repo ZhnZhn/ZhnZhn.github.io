@@ -4,16 +4,17 @@ const {
   crError,
   ymdToUTC,
   valueMoving,
-  crItemLink
+  crItemLink,
+  compareByDate
 } = AdapterFn;
 
 const _crZhConfig = ({
   _itemKey,
-  _symbol, _propName,
+  itemCaption,
   dataSource
 }) => ({
   id: _itemKey, key: _itemKey,
-  itemCaption: _symbol+'_'+_propName,
+  itemCaption,
   isWithoutAdd: true,
   dataSource
 });
@@ -37,15 +38,17 @@ const fnAdapter = {
   getValue: _fGetByPropName('value'),
 
   crData: (metrics, propName) => {
-    return metrics.map(item => ({
-      x: ymdToUTC(item.date),
-      y: parseFloat(item[propName])
-    })).reverse();
+    return metrics.map(item => ([
+      ymdToUTC(item.date),
+      parseFloat(item[propName])
+    ])).reverse().sort(compareByDate);
   },
 
   crCaption: ({ items }) => ({
     title: fnAdapter.getCaption(items[0]),
-    subtitle: fnAdapter.getCaption(items[1]) + ': ' + fnAdapter.getCaption(items[2])
+    subtitle: items[1]
+      ? fnAdapter.getCaption(items[1]) + ': ' + fnAdapter.getCaption(items[2])
+      : ''
   }),
   crSeriaType: seriaType => seriaType === 'COLUMN'
     ? 'column'

@@ -66,14 +66,14 @@ const _crDF = (captions, mapFrequency) => _crDF3(mapFrequency)
  ]));
 
 const _crT1 = () => ([
-  _crItem(['Default: Spline', V.S ])
+  _crItem(['Default: Spline', V.S ]),
+  _crItem(['Line', V.L]),
+  _crItem(['Area', V.A]),
 ]);
 
 
 const _crT2 = () => ([
-  _crItem(['Default: Spline', V.S ]),
-  _crItem(['Line', V.L]),
-  _crItem(['Area', V.A]),
+  ..._crT1(),
   _crItem(['Column', V.S_C ]),
 ]);
 
@@ -133,7 +133,7 @@ const _r = {
 };
 
 const _crCaptions = ({
-  configs,  
+  configs,
   selectProps,
   oneCaption=C.EMPTY,
   twoCaption=C.EMPTY

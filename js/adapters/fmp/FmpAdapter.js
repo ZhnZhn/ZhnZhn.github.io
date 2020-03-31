@@ -17,13 +17,14 @@ var crCaption = _fnAdapter["default"].crCaption,
     crConfigOption = _fnAdapter["default"].crConfigOption;
 var FmpAdapter = {
   toConfig: function toConfig(json, option) {
-    var _propName = option._propName,
+    var dfPn = option.dfPn,
+        _propName = option._propName,
         seriaType = option.seriaType,
         seriaColor = option.seriaColor,
         _crCaption = crCaption(option),
         title = _crCaption.title,
         subtitle = _crCaption.subtitle,
-        data = crData(json._values, _propName),
+        data = crData(json[dfPn], _propName),
         seria = (0, _ConfigBuilder["default"])().splineSeria({
       type: crSeriaType(seriaType),
       color: seriaColor,
