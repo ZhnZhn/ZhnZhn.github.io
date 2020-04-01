@@ -89,7 +89,9 @@ var LoadType = {
   EIA: 'EIA',
   INTR: 'INTR',
   CRC: 'CRC',
-  CMC: 'CMC',
+  CG: 'CG',
+  //CM: 'CM',
+  //CMC: 'CMC',
   WL: 'WL'
 };
 exports.LoadType = LoadType;

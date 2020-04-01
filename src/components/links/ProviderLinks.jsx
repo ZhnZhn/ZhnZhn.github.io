@@ -36,7 +36,8 @@ const LINK_CONFIGS = [
  ["Insee","Insee: France Statistics", "https://www.insee.fr/en/accueil"],
  ["StatNorway","Statistics Norway", "https://www.ssb.no/en"],
  ["StatSweden","Statistics Sweden", "https://www.scb.se/en/"],
- ["StatFinland","Statistics Finland", "https://www.stat.fi/index_en.html"]
+ ["StatFinland","Statistics Finland", "https://www.stat.fi/index_en.html"],
+ ["CoinGecko","CoinGecko", "https://www.coingecko.com/en"]
 ];
 
 const _crLinkProps = (title, href, dfStyle) => ({

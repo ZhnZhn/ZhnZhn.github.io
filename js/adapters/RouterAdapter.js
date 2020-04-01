@@ -47,6 +47,8 @@ var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
 
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 
+var _Cg = _interopRequireDefault(require("./coin-gecko/Cg"));
+
 var RouterAdapter = (0, _extends2["default"])({
   Quandl: _Quandl["default"],
   DbNomics: _DbNomics["default"],
@@ -67,7 +69,8 @@ var RouterAdapter = (0, _extends2["default"])({
   Bls: _Bls["default"],
   Eia: _Eia["default"],
   Intrinio: _Intrinio["default"],
-  Crc: _Crc["default"]
+  Crc: _Crc["default"],
+  Cg: _Cg["default"]
 });
 var _default = RouterAdapter;
 exports["default"] = _default;

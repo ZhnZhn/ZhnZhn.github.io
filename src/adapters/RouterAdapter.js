@@ -19,6 +19,7 @@ import Intrinio from './intrinio/Intrinio'
 import Quandl from './quandl/Quandl'
 import DbNomics from './db-nomics/DbNomics'
 import Crc from './crypto-compare/Crc'
+import Cg from './coin-gecko/Cg'
 
 
 const RouterAdapter = {
@@ -41,7 +42,8 @@ const RouterAdapter = {
   Bls,
   Eia,
   Intrinio,
-  Crc
+  Crc,
+  Cg  
 };
 
 export default RouterAdapter
