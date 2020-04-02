@@ -151,4 +151,13 @@ describe('addToDmy', function () {
     expect(_fn('01-02-2019', -12)).toBe('01-02-2018');
   });
 });
+/*
+describe('getDaysFromYmd', ()=>{
+  test('should return number days from ymd to now', ()=>{
+    const fn = getDaysFromYmd
+    expect(fn('2020-04-01')).toBe(2)
+    expect(fn('2020-04-02')).toBe(1)
+  })
+})
+*/
 //# sourceMappingURL=DateUtils.test.js.map

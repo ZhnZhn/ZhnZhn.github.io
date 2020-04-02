@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 var MIN_YEAR = 1990;
+var DAY_IN_MLS = 1000 * 60 * 60 * 24;
 
 var _isNaN = Number.isNaN || isNaN;
 
@@ -137,7 +138,8 @@ var DateUtils = {
     return DateUtils.isYmd(y + "-" + m + "-" + d, 0, minYear);
   },
   ymdToUTC: function ymdToUTC(dateStr) {
-    var _arr = dateStr.split('-'),
+    var _dateStr = dateStr || '',
+        _arr = _dateStr.split('-'),
         _len = _arr.length;
 
     if (_len === 3) {
@@ -198,6 +200,11 @@ var DateUtils = {
   getYTDfromDmy: function getYTDfromDmy(dmy) {
     var _year = dmy.split('-')[2];
     return DateUtils.dmyToUTC("01-01-" + _year);
+  },
+  getDaysFromYmd: function getDaysFromYmd(ymd) {
+    var _fromMls = DateUtils.ymdToUTC(ymd);
+
+    return Math.ceil((new Date().getTime() - _fromMls) / DAY_IN_MLS);
   }
 };
 var _default = DateUtils;

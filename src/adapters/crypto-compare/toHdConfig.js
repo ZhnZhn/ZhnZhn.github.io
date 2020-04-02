@@ -24,38 +24,36 @@ const _crBtTitleTo = (json) => {
 const toHdConfig = {
   toConfig: (json, option) => {
     const {
-           data,
-           dVolume, dColumn,
-           dToVolume,
-           dHL
-         } = crData(json)
-        , seria = Builder()
-            .splineSeria({ data })
-            .toSeria()
-        , { value='', title } = option
-        , _title = _crTitle(title)
-        , _subtitle = _crSubtitle(json, value)
-        , _btTitleTo = _crBtTitleTo(json)
-        , config = Builder()
-            .area2Config(_title, _subtitle)
-            .addSeries(seria)            
-            .addMinMax(data, option)
-            .add({
-               ...crConfigOption({ option, data })
-            })
-            .addMiniVolume({
-              btTitle: 'Volume ' + value,
-              title: value,
-              dColumn, dVolume
-            })
-            .addMiniVolume({
-              btTitle: 'Volume ' + _btTitleTo,
-              title: _btTitleTo,
-              dVolume: dToVolume,
-              dColumn: []
-            })
-            .addMiniHL({ data: dHL })
-            .toConfig();
+       data,
+       dVolume, dColumn,
+       dToVolume,
+       dHL
+     } = crData(json)
+    , seria = Builder()
+        .splineSeria({ data })
+        .toSeria()
+    , { value='', title } = option
+    , _title = _crTitle(title)
+    , _subtitle = _crSubtitle(json, value)
+    , _btTitleTo = _crBtTitleTo(json)
+    , config = Builder()
+        .area2Config(_title, _subtitle)
+        .addSeries(seria)
+        .addMinMax(data, option)
+        .add({
+           ...crConfigOption({ option, data })
+        })
+        .addMiniVolume({
+          btTitle: 'Volume ' + value,
+          dColumn, dVolume
+        })
+        .addMiniVolume({
+          btTitle: 'Volume ' + _btTitleTo,
+          dVolume: dToVolume,
+          dColumn: []
+        })
+        .addMiniHL({ data: dHL })
+        .toConfig();
     return { config };
   },
 

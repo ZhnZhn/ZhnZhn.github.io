@@ -58,12 +58,10 @@ var toHdConfig = {
       data: data
     }))).addMiniVolume({
       btTitle: 'Volume ' + value,
-      title: value,
       dColumn: dColumn,
       dVolume: dVolume
     }).addMiniVolume({
       btTitle: 'Volume ' + _btTitleTo,
-      title: _btTitleTo,
       dVolume: dToVolume,
       dColumn: []
     }).addMiniHL({

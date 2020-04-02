@@ -1,5 +1,6 @@
 
 const MIN_YEAR = 1990;
+const DAY_IN_MLS = 1000*60*60*24;
 
 const _isNaN = Number.isNaN || isNaN;
 const _isStr = str => typeof str === 'string';
@@ -104,8 +105,9 @@ const DateUtils = {
  },
 
  ymdToUTC: (dateStr) => {
-	 const _arr = dateStr.split('-')
-			 , _len = _arr.length;
+	 const _dateStr = dateStr || ''
+   , _arr = _dateStr.split('-')
+	 , _len = _arr.length;
 	 if (_len === 3) {
 		 return Date.UTC( _arr[0], (parseInt(_arr[1], 10)-1), _arr[2] );
 	 } else if ( _len === 2 && _arr[1] !== ''){
@@ -165,6 +167,11 @@ const DateUtils = {
  getYTDfromDmy: (dmy) => {
 	 const _year = dmy.split('-')[2];
 	 return DateUtils.dmyToUTC(`01-01-${_year}`)
+ },
+
+ getDaysFromYmd: ymd => {
+   const _fromMls = DateUtils.ymdToUTC(ymd);
+   return Math.ceil(((new Date()).getTime() - _fromMls)/DAY_IN_MLS);
  }
 
 };

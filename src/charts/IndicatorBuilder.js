@@ -3,6 +3,10 @@ import tsIndicators from '../math/tsIndicators'
 import ChartConfig from './ChartConfig';
 
 const { sma, mfi, momAth } = tsIndicators;
+const {
+  crMfiConfig,
+  crMomAthConfig
+} = ChartConfig;
 
 const _addDataAsSeriaToChart = (chart, option) => {
   const seria = Object.assign(
@@ -39,28 +43,25 @@ const IndicatorBuilder = {
       });
     } else {
       console.log('It seems, there are not enough data for SMA(' + period + ')')
-      return undefined;
+      return void 0;
     }
   },
 
   crMfiConfig: (chart, period, id) => {
     const data = chart.options.zhPoints
-         , parentId = chart.options.zhConfig.id
-         , { dataMfi, nNotFullPoint } = mfi(data, period)
-         , titleNotFullPoint = (nNotFullPoint !== 0)
-             ? ' Not Full Data HL:' + nNotFullPoint
-             : '';
-    return ChartConfig.fIndicatorMfiConfig(
+    , parentId = chart.options.zhConfig.id
+    , { dataMfi, nNotFullPoint } = mfi(data, period)
+    , titleNotFullPoint = (nNotFullPoint !== 0)
+        ? ' Not Full Data HL:' + nNotFullPoint
+        : '';
+    return crMfiConfig(
          id, parentId, id + titleNotFullPoint, dataMfi
      );
   },
 
   crMomAthConfig: (chart, id) => {
-    const data = chart.options.zhPoints
-        , { dataMom, dataAth, dataSum } = momAth(data);
-    return ChartConfig.fnMomAthConfig(
-       dataMom, dataAth, dataSum, id
-    );
+    const data = chart.options.zhPoints;
+    return crMomAthConfig(id, momAth(data));
   }
 
 };

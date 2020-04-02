@@ -12,6 +12,8 @@ var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 var sma = _tsIndicators["default"].sma,
     mfi = _tsIndicators["default"].mfi,
     momAth = _tsIndicators["default"].momAth;
+var _crMfiConfig = _ChartConfig["default"].crMfiConfig,
+    _crMomAthConfig = _ChartConfig["default"].crMomAthConfig;
 
 var _addDataAsSeriaToChart = function _addDataAsSeriaToChart(chart, option) {
   var seria = Object.assign(_ChartConfig["default"].fSeries(), option);
@@ -49,7 +51,7 @@ var IndicatorBuilder = {
       });
     } else {
       console.log('It seems, there are not enough data for SMA(' + period + ')');
-      return undefined;
+      return void 0;
     }
   },
   crMfiConfig: function crMfiConfig(chart, period, id) {
@@ -60,16 +62,11 @@ var IndicatorBuilder = {
         nNotFullPoint = _mfi.nNotFullPoint,
         titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
 
-    return _ChartConfig["default"].fIndicatorMfiConfig(id, parentId, id + titleNotFullPoint, dataMfi);
+    return _crMfiConfig(id, parentId, id + titleNotFullPoint, dataMfi);
   },
   crMomAthConfig: function crMomAthConfig(chart, id) {
-    var data = chart.options.zhPoints,
-        _momAth = momAth(data),
-        dataMom = _momAth.dataMom,
-        dataAth = _momAth.dataAth,
-        dataSum = _momAth.dataSum;
-
-    return _ChartConfig["default"].fnMomAthConfig(dataMom, dataAth, dataSum, id);
+    var data = chart.options.zhPoints;
+    return _crMomAthConfig(id, momAth(data));
   }
 };
 var _default = IndicatorBuilder;

@@ -19,7 +19,7 @@ const BrowserLogic = {
       : !_config.withoutItemCounter;
   },
 
-  initBrowseMenu: (slice, option) => {
+  initBrowserMenu: (slice, option) => {    
     const { json, browserType } = option
         , { menu, items } = json
         , elMenu = crMenu(menu, items, browserType);

@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
@@ -23,34 +25,49 @@ var C = {
     fontWeight: 'bold',
     fontSize: '14px'
   },
+  CL_DX: -4,
   CL_DY: -1,
   DX_CATEGORY: 40,
   DY_CATEGORY: 32,
   DX_DELTA_Y_AXIS: 10
 };
 
+var _crDelta = function _crDelta(chart, dX, dY) {
+  if (dX === void 0) {
+    dX = 0;
+  }
+
+  if (dY === void 0) {
+    dY = 0;
+  }
+
+  var _chart$options$chart = chart.options.chart,
+      xDeltaCrossLabel = _chart$options$chart.xDeltaCrossLabel,
+      yDeltaCrossLabel = _chart$options$chart.yDeltaCrossLabel;
+  return {
+    dX: xDeltaCrossLabel - dX,
+    dY: yDeltaCrossLabel - dY
+  };
+};
+
 var _crCrossParam = function _crCrossParam(point, chart) {
   var _d = _highcharts["default"].dateFormat(C.DATE_PATTERN, point.x);
 
-  return {
+  return (0, _extends2["default"])({
     y: point.y,
-    date: _d !== C.DATE_EMPTY ? _d : '',
-    dX: chart.options.chart.xDeltaCrossLabel,
-    dY: chart.options.chart.yDeltaCrossLabel
-  };
+    date: _d !== C.DATE_EMPTY ? _d : ''
+  }, _crDelta(chart));
 };
 
 var _crCategoryCrossParam = function _crCategoryCrossParam(point, chart) {
-  return {
+  return (0, _extends2["default"])({
     y: (0, _formatNumber["default"])(point.y),
-    date: point.x,
-    dX: chart.options.chart.xDeltaCrossLabel - C.DX_CATEGORY,
-    dY: chart.options.chart.yDeltaCrossLabel - C.DY_CATEGORY
-  };
+    date: point.x
+  }, _crDelta(chart, C.DX_CATEGORY, C.DY_CATEGORY));
 };
 
 var _crYCrossLabelX = function _crYCrossLabelX(chart, dX) {
-  return chart.yAxis[0].width + chart.plotLeft + dX;
+  return chart.yAxis[0].width + chart.plotLeft + dX + C.CL_DX;
 };
 
 var _crYCrossLabelY = function _crYCrossLabelY(chart, plotY) {

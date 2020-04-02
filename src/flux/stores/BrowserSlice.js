@@ -14,7 +14,7 @@ const C = {
 
 const {
   isWithItemCounter,
-  initBrowseMenu,
+  initBrowserMenu,
   setIsOpen,
   plusCounter,
   resetCounter
@@ -74,7 +74,7 @@ const BrowserSlice = {
   onLoadBrowserDynamicCompleted(option){
     const { json, browserType } = option;
     if ( isWithItemCounter(browserType) ){
-      const elMenu = initBrowseMenu(this, option);
+      const elMenu = initBrowserMenu(this, option);
       this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
          menuItems: elMenu, browserType
       })

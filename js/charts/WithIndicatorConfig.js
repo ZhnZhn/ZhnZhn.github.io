@@ -23,49 +23,58 @@ var C = {
   CLOSE_OPEN: 'rgba(144, 237, 125, 0.75)',
   HIGH_LOW: '#2D7474',
   MEDIAN: 'darkcyan',
-  MEAN: '#f7a35c'
+  MEAN: '#f7a35c',
+  DF_LEGEND_VOLUME_X: 84
 };
+var _assign = Object.assign;
 
-var _configCrossLabel = function _configCrossLabel(chart, option) {
-  Object.assign(chart, {
+var _assignCrossLabel = function _assignCrossLabel(chart, option) {
+  _assign(chart, {
     xDeltaCrossLabel: 4,
     yDeltaCrossLabel: -10
   }, option);
 };
 
-var _legendVolume = {
-  enabled: true,
-  align: 'left',
-  verticalAlign: 'top',
-  //x: 124,
-  x: 84,
-  y: -8,
-  floating: true,
-  symbolHeight: 12,
-  symbolWidth: 12,
-  symbolRadius: 6,
-  itemStyle: {
-    color: _Color["default"].CHART_TITLE,
-    fontSize: '16px'
-  },
-  itemHoverStyle: {
-    color: _Color["default"].LEGEND_ITEM_HOVER
-  },
-  itemHiddenStyle: {
-    color: _Color["default"].LEGEND_ITEM_HIDDEN
+var _crLegendVolume = function _crLegendVolume(titleOrX) {
+  if (titleOrX === void 0) {
+    titleOrX = C.DF_LEGEND_VOLUME_X;
   }
+
+  var _x = typeof titleOrX === 'number' ? titleOrX : titleOrX.length * 10 + 8;
+
+  return {
+    enabled: true,
+    align: 'left',
+    verticalAlign: 'top',
+    x: _x,
+    y: -8,
+    floating: true,
+    symbolHeight: 12,
+    symbolWidth: 12,
+    symbolRadius: 6,
+    itemStyle: {
+      color: _Color["default"].CHART_TITLE,
+      fontSize: '16px'
+    },
+    itemHoverStyle: {
+      color: _Color["default"].LEGEND_ITEM_HOVER
+    },
+    itemHiddenStyle: {
+      color: _Color["default"].LEGEND_ITEM_HIDDEN
+    }
+  };
 };
 
 var _addColumnSeria = function _addColumnSeria(config, option) {
   var series = config.series,
-      _seria = Object.assign({
+      _seria = _assign({
     type: "column",
     visible: true,
     tooltip: _Chart["default"].fTooltip(_Tooltip["default"].fnBasePointFormatter)
   }, option);
 
   if (!series[0].data) {
-    Object.assign(config.series[0], _seria);
+    _assign(config.series[0], _seria);
   } else {
     series.push(_seria);
   }
@@ -88,7 +97,7 @@ var _crLineSeria = function _crLineSeria(id, name, color, data) {
 };
 
 var WithIndicatorConfig = {
-  fBaseIndicatorConfig: function fBaseIndicatorConfig() {
+  crIndicatorConfig: function crIndicatorConfig() {
     var config = _Chart["default"].fBaseConfig(),
         chart = config.chart,
         yAxis = config.yAxis;
@@ -103,12 +112,14 @@ var WithIndicatorConfig = {
         left: '28px'
       }
     };
-    Object.assign(chart, {
+
+    _assign(chart, {
       height: 160,
       spacingTop: 8,
       spacingBottom: 10
     });
-    Object.assign(yAxis, {
+
+    _assign(yAxis, {
       startOnTick: true,
       endOnTick: true,
       tickPixelInterval: 60,
@@ -120,15 +131,16 @@ var WithIndicatorConfig = {
         y: 5
       }
     });
+
     return config;
   },
-  fIndicatorMfiConfig: function fIndicatorMfiConfig(id, parentId, title, data) {
-    var config = this.fBaseIndicatorConfig();
+  crMfiConfig: function crMfiConfig(id, parentId, title, data) {
+    var config = WithIndicatorConfig.crIndicatorConfig();
     config.title = _Chart["default"].fTitleIndicator(title);
 
-    _configCrossLabel(config.chart);
+    _assignCrossLabel(config.chart);
 
-    Object.assign(config.series[0], {
+    _assign(config.series[0], {
       zhSeriaId: parentId + '_' + id,
       zhValueText: id,
       data: data,
@@ -137,11 +149,13 @@ var WithIndicatorConfig = {
       color: C.MFI,
       point: _Chart["default"].fEventsMouseOver(_handleMouseOver["default"])
     });
+
     return config;
   },
-  fMiniVolumeConfig: function fMiniVolumeConfig(_ref) {
+  crMiniVolumeConfig: function crMiniVolumeConfig(_ref) {
     var _ref$btTitle = _ref.btTitle,
         btTitle = _ref$btTitle === void 0 ? 'Volume' : _ref$btTitle,
+        title = _ref.title,
         _ref$id = _ref.id,
         id = _ref$id === void 0 ? 'id' : _ref$id,
         _ref$dColumn = _ref.dColumn,
@@ -149,22 +163,24 @@ var WithIndicatorConfig = {
         dVolume = _ref.dVolume,
         tooltipColumn = _ref.tooltipColumn;
 
-    var config = this.fBaseIndicatorConfig(),
+    var _title = title || btTitle,
+        config = WithIndicatorConfig.crIndicatorConfig(),
         series = config.series,
         _hasColumn = dColumn.length !== 0;
 
-    Object.assign(config, {
-      title: _Chart["default"].fTitleIndicator('Volume:'),
-      legend: _legendVolume
+    _assign(config, {
+      title: _Chart["default"].fTitleIndicator(_title),
+      legend: _crLegendVolume(_title)
     });
 
-    _configCrossLabel(config.chart);
+    _assignCrossLabel(config.chart);
 
-    Object.assign(config.yAxis, {
+    _assign(config.yAxis, {
       endOnTick: false,
       tickPixelInterval: 40
     });
-    Object.assign(series[0], {
+
+    _assign(series[0], {
       zhSeriaId: id + '_VolumeArea',
       zhValueText: "Volume",
       data: dVolume,
@@ -201,12 +217,12 @@ var WithIndicatorConfig = {
       config: config
     };
   },
-  fMiniATHConfig: function fMiniATHConfig(_ref2) {
+  crMiniATHConfig: function crMiniATHConfig(_ref2) {
     var _ref2$btTitle = _ref2.btTitle,
         btTitle = _ref2$btTitle === void 0 ? "ATH" : _ref2$btTitle,
         id = _ref2.id,
         data = _ref2.data;
-    var config = this.fBaseIndicatorConfig();
+    var config = WithIndicatorConfig.crIndicatorConfig();
     config.title = _Chart["default"].fTitleIndicator('ATH');
 
     _addColumnSeria(config, {
@@ -225,11 +241,15 @@ var WithIndicatorConfig = {
       config: config
     };
   },
-  fnMomAthConfig: function fnMomAthConfig(dataMom, dataAth, dataSum, id) {
-    var config = this.fBaseIndicatorConfig();
-    Object.assign(config, {
+  crMomAthConfig: function crMomAthConfig(id, _ref3) {
+    var dataMom = _ref3.dataMom,
+        dataAth = _ref3.dataAth,
+        dataSum = _ref3.dataSum;
+    var config = WithIndicatorConfig.crIndicatorConfig();
+
+    _assign(config, {
       title: _Chart["default"].fTitleIndicator(''),
-      legend: _legendVolume,
+      legend: _crLegendVolume(),
       plotOptions: {
         column: {
           grouping: false,
@@ -267,22 +287,24 @@ var WithIndicatorConfig = {
       data: dataSum
     });
 
-    Object.assign(config.yAxis, {
+    _assign(config.yAxis, {
       startOnTick: false,
       endOnTick: false,
       tickPixelInterval: 20
     });
+
     return config;
   },
-  fMiniHLConfig: function fMiniHLConfig(_ref3) {
-    var _ref3$btTitle = _ref3.btTitle,
-        btTitle = _ref3$btTitle === void 0 ? "Daily HighLow" : _ref3$btTitle,
-        _ref3$id = _ref3.id,
-        id = _ref3$id === void 0 ? 'id' : _ref3$id,
-        data = _ref3.data;
-    var config = this.fBaseIndicatorConfig();
+  crMiniHLConfig: function crMiniHLConfig(_ref4) {
+    var _ref4$btTitle = _ref4.btTitle,
+        btTitle = _ref4$btTitle === void 0 ? "Daily HighLow" : _ref4$btTitle,
+        _ref4$id = _ref4.id,
+        id = _ref4$id === void 0 ? 'id' : _ref4$id,
+        data = _ref4.data;
+    var config = WithIndicatorConfig.crIndicatorConfig();
     config.title = _Chart["default"].fTitleIndicator('HighLow');
-    Object.assign(config.series[0], {
+
+    _assign(config.series[0], {
       zhSeriaId: id + '_HL',
       name: "HL",
       visible: true,
@@ -291,6 +313,7 @@ var WithIndicatorConfig = {
       data: data,
       tooltip: _Chart["default"].fTooltip(_Tooltip["default"].hl)
     });
+
     return {
       btTitle: btTitle,
       config: config

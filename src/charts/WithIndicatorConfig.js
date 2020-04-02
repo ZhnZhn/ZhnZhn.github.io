@@ -17,22 +17,29 @@ const C = {
   HIGH_LOW: '#2D7474',
 
   MEDIAN: 'darkcyan',
-  MEAN: '#f7a35c'
+  MEAN: '#f7a35c',
+
+  DF_LEGEND_VOLUME_X: 84
 }
 
-const _configCrossLabel = (chart, option) => {
-  Object.assign(chart, {
+const _assign = Object.assign;
+
+const _assignCrossLabel = (chart, option) => {
+  _assign(chart, {
     xDeltaCrossLabel: 4,
     yDeltaCrossLabel: -10
   }, option)
 }
 
-const _legendVolume = {
+const _crLegendVolume = (titleOrX=C.DF_LEGEND_VOLUME_X) => {
+  const _x = typeof titleOrX === 'number'
+     ? titleOrX
+     : titleOrX.length*10 + 8;
+  return {
    enabled: true,
    align: 'left',
    verticalAlign: 'top',
-   //x: 124,
-   x: 84,
+   x: _x,
    y: -8,
    floating: true,
 
@@ -50,17 +57,18 @@ const _legendVolume = {
    itemHiddenStyle: {
      color: COLOR.LEGEND_ITEM_HIDDEN
    }
+  }
 }
 
 const _addColumnSeria = (config, option) => {
   const { series } = config
-      , _seria = Object.assign({
-             type: "column",
-             visible: true,
-             tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter)
-         }, option);
+  , _seria = _assign({
+       type: "column",
+       visible: true,
+       tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter)
+     }, option);
   if (!series[0].data) {
-    Object.assign(config.series[0], _seria)
+    _assign(config.series[0], _seria)
   } else {
     series.push(_seria)
   }
@@ -82,7 +90,7 @@ const _crLineSeria = (id, name, color, data) => ({
 
 const WithIndicatorConfig = {
 
-  fBaseIndicatorConfig(){
+  crIndicatorConfig(){
     const config = Chart.fBaseConfig()
        , { chart, yAxis } = config;
 
@@ -96,12 +104,12 @@ const WithIndicatorConfig = {
          left: '28px'
        }
     }
-    Object.assign(chart, {
+    _assign(chart, {
       height: 160,
       spacingTop: 8,
       spacingBottom: 10
     })
-    Object.assign(yAxis, {
+    _assign(yAxis, {
       startOnTick: true,
       endOnTick: true,
       tickPixelInterval: 60,
@@ -116,11 +124,11 @@ const WithIndicatorConfig = {
     return config;
   },
 
-  fIndicatorMfiConfig(id, parentId, title, data){
-    const config = this.fBaseIndicatorConfig();
+  crMfiConfig(id, parentId, title, data){
+    const config = WithIndicatorConfig.crIndicatorConfig();
     config.title = Chart.fTitleIndicator(title)
-    _configCrossLabel(config.chart)
-    Object.assign(config.series[0], {
+    _assignCrossLabel(config.chart)
+    _assign(config.series[0], {
       zhSeriaId: parentId + '_' + id,
       zhValueText: id,
       data: data,
@@ -134,24 +142,26 @@ const WithIndicatorConfig = {
     return config;
   },
 
-  fMiniVolumeConfig({
+  crMiniVolumeConfig({
       btTitle='Volume',
+      title,
       id='id', dColumn=[], dVolume,
       tooltipColumn
     }){
-    const config = this.fBaseIndicatorConfig()
+    const _title = title || btTitle
+    , config = WithIndicatorConfig.crIndicatorConfig()
     , { series } = config
     , _hasColumn = dColumn.length !== 0;
-    Object.assign(config, {
-      title: Chart.fTitleIndicator('Volume:'),
-      legend: _legendVolume
+    _assign(config, {
+      title: Chart.fTitleIndicator(_title),
+      legend: _crLegendVolume(_title)
     })
-    _configCrossLabel(config.chart)
-    Object.assign(config.yAxis, {
+    _assignCrossLabel(config.chart)
+    _assign(config.yAxis, {
       endOnTick: false,
       tickPixelInterval: 40,
     })
-    Object.assign(series[0], {
+    _assign(series[0], {
       zhSeriaId: id + '_VolumeArea',
       zhValueText: "Volume",
       data: dVolume,
@@ -193,8 +203,8 @@ const WithIndicatorConfig = {
     };
   },
 
-  fMiniATHConfig({ btTitle="ATH", id, data }){
-    const config = this.fBaseIndicatorConfig();
+  crMiniATHConfig({ btTitle="ATH", id, data }){
+    const config = WithIndicatorConfig.crIndicatorConfig();
     config.title = Chart.fTitleIndicator('ATH');
 
     _addColumnSeria(config, {
@@ -211,11 +221,11 @@ const WithIndicatorConfig = {
     return { btTitle, config };
   },
 
-  fnMomAthConfig(dataMom, dataAth, dataSum, id){
-    const config = this.fBaseIndicatorConfig();
-    Object.assign(config, {
+  crMomAthConfig(id, { dataMom, dataAth, dataSum }){
+    const config = WithIndicatorConfig.crIndicatorConfig();
+    _assign(config, {
       title: Chart.fTitleIndicator(''),
-      legend: _legendVolume,
+      legend: _crLegendVolume(),
       plotOptions: {
         column : {
           grouping: false,
@@ -250,7 +260,7 @@ const WithIndicatorConfig = {
        data: dataSum
     })
 
-    Object.assign(config.yAxis, {
+    _assign(config.yAxis, {
        startOnTick: false,
        endOnTick: false,
        tickPixelInterval: 20
@@ -258,11 +268,11 @@ const WithIndicatorConfig = {
     return config;
   },
 
-  fMiniHLConfig({ btTitle="Daily HighLow", id='id', data }){
-    const config = this.fBaseIndicatorConfig();
+  crMiniHLConfig({ btTitle="Daily HighLow", id='id', data }){
+    const config = WithIndicatorConfig.crIndicatorConfig();
     config.title = Chart.fTitleIndicator('HighLow')
 
-    Object.assign(config.series[0], {
+    _assign(config.series[0], {
       zhSeriaId: id + '_HL',
       name: "HL",
       visible: true,

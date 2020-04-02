@@ -19,7 +19,12 @@ const {
   calcMinY,
   setYToPoints,
 } = ChartFn;
-const { crDividendSeria } = ChartConfig;
+const {
+  crDividendSeria,
+  crMiniVolumeConfig,
+  crMiniATHConfig,
+  crMiniHLConfig
+} = ChartConfig;
 
 const C = {
   CATEGORIES_X_AXIS: {
@@ -235,25 +240,19 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   addMiniVolume(option){
     const { dVolume } = option;
     return dVolume && dVolume.length > 0
-      ? this.addZhMiniConfig(
-          ChartConfig.fMiniVolumeConfig(option)
-        )
-      :this;
+     ? this.addZhMiniConfig(crMiniVolumeConfig(option))
+     : this;
   },
   addMiniATH(option){
     const { data } = option;
     return data && data.length>0
-      ? this.addZhMiniConfig(
-          ChartConfig.fMiniATHConfig(option)
-        )
-      : this;
+     ? this.addZhMiniConfig(crMiniATHConfig(option))
+     : this;
   },
   addMiniHL(option){
     const { data } = option;
     return data && data.length>0
-     ? this.addZhMiniConfig(
-         ChartConfig.fMiniHLConfig(option)
-       )
+     ? this.addZhMiniConfig(crMiniHLConfig(option))
      : this;
   },
 

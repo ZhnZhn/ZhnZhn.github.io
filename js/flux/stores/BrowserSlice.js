@@ -20,7 +20,7 @@ var C = {
   FAILED: 'Failed'
 };
 var isWithItemCounter = _BrowserLogic["default"].isWithItemCounter,
-    initBrowseMenu = _BrowserLogic["default"].initBrowseMenu,
+    initBrowserMenu = _BrowserLogic["default"].initBrowserMenu,
     setIsOpen = _BrowserLogic["default"].setIsOpen,
     plusCounter = _BrowserLogic["default"].plusCounter,
     resetCounter = _BrowserLogic["default"].resetCounter;
@@ -80,7 +80,7 @@ var BrowserSlice = {
         browserType = option.browserType;
 
     if (isWithItemCounter(browserType)) {
-      var elMenu = initBrowseMenu(this, option);
+      var elMenu = initBrowserMenu(this, option);
       this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
         menuItems: elMenu,
         browserType: browserType

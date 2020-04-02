@@ -17,6 +17,7 @@ const C = {
     fontSize: '14px'
   },
 
+  CL_DX: -4,
   CL_DY: -1,
 
   DX_CATEGORY: 40,
@@ -25,27 +26,31 @@ const C = {
   DX_DELTA_Y_AXIS: 10
 };
 
+const _crDelta = (chart, dX=0, dY=0) => {
+  const { xDeltaCrossLabel, yDeltaCrossLabel } = chart.options.chart;
+  return {
+    dX: xDeltaCrossLabel - dX,
+    dY: yDeltaCrossLabel - dY
+  };
+}
+
 const _crCrossParam = (point, chart) => {
-  const _d = Highcharts.dateFormat(C.DATE_PATTERN, point.x);  
+  const _d = Highcharts.dateFormat(C.DATE_PATTERN, point.x)
   return {
     y: point.y,
     date: _d !== C.DATE_EMPTY ? _d : '',
-    dX: chart.options.chart.xDeltaCrossLabel,
-    dY: chart.options.chart.yDeltaCrossLabel
+    ..._crDelta(chart)
   };
 };
 
-const _crCategoryCrossParam = (point, chart) => {
-  return {
-    y: formatNumber(point.y),
-    date: point.x,
-    dX: chart.options.chart.xDeltaCrossLabel - C.DX_CATEGORY,
-    dY: chart.options.chart.yDeltaCrossLabel - C.DY_CATEGORY
-  };
-};
+const _crCategoryCrossParam = (point, chart) => ({
+  y: formatNumber(point.y),
+  date: point.x,
+  ..._crDelta(chart, C.DX_CATEGORY, C.DY_CATEGORY)
+});
 
 const _crYCrossLabelX = (chart, dX) => {
-  return chart.yAxis[0].width + chart.plotLeft + dX;
+  return chart.yAxis[0].width + chart.plotLeft + dX + C.CL_DX;
 };
 const _crYCrossLabelY = (chart, plotY) => {
   return plotY + chart.plotTop + C.CL_DY;

@@ -23,7 +23,7 @@ var BrowserLogic = {
     var _config = _BrowserConfig["default"][browserType];
     return typeof _config === 'undefined' ? false : !_config.withoutItemCounter;
   },
-  initBrowseMenu: function initBrowseMenu(slice, option) {
+  initBrowserMenu: function initBrowserMenu(slice, option) {
     var json = option.json,
         browserType = option.browserType,
         menu = json.menu,

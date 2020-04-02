@@ -28,7 +28,10 @@ var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax,
     setPlotLinesDeltas = _ChartFn["default"].setPlotLinesDeltas,
     calcMinY = _ChartFn["default"].calcMinY,
     setYToPoints = _ChartFn["default"].setYToPoints;
-var crDividendSeria = _ChartConfig["default"].crDividendSeria;
+var crDividendSeria = _ChartConfig["default"].crDividendSeria,
+    crMiniVolumeConfig = _ChartConfig["default"].crMiniVolumeConfig,
+    crMiniATHConfig = _ChartConfig["default"].crMiniATHConfig,
+    crMiniHLConfig = _ChartConfig["default"].crMiniHLConfig;
 var C = {
   CATEGORIES_X_AXIS: {
     type: "category",
@@ -291,15 +294,15 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
   },
   addMiniVolume: function addMiniVolume(option) {
     var dVolume = option.dVolume;
-    return dVolume && dVolume.length > 0 ? this.addZhMiniConfig(_ChartConfig["default"].fMiniVolumeConfig(option)) : this;
+    return dVolume && dVolume.length > 0 ? this.addZhMiniConfig(crMiniVolumeConfig(option)) : this;
   },
   addMiniATH: function addMiniATH(option) {
     var data = option.data;
-    return data && data.length > 0 ? this.addZhMiniConfig(_ChartConfig["default"].fMiniATHConfig(option)) : this;
+    return data && data.length > 0 ? this.addZhMiniConfig(crMiniATHConfig(option)) : this;
   },
   addMiniHL: function addMiniHL(option) {
     var data = option.data;
-    return data && data.length > 0 ? this.addZhMiniConfig(_ChartConfig["default"].fMiniHLConfig(option)) : this;
+    return data && data.length > 0 ? this.addZhMiniConfig(crMiniHLConfig(option)) : this;
   },
   addZhPoints: function addZhPoints(data, fn) {
     this.add({

@@ -8,7 +8,7 @@ const _crInitialProps = (addProps, items) => {
   , _config = items[addProps]
   , _extends = _config.extends;
 
-  if (typeof(_extends) === 'string') {
+  if (typeof _extends === 'string') {
     _assign(initialProps, items[_extends].dialogProps)
   } else if (Array.isArray(_extends)) {
     _extends.forEach(id => {
