@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../src/utils/formatNumber.js"],"names":["formatNumber","value","_arr","split","_decimal","Highcharts","numberFormat"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,YAAY,GAAG,SAAfA,YAAe,CAASC,KAAT,EAAe;AAClC,MAAIA,KAAK,IAAI,IAAb,EAAmB;AACjB,WAAO,MAAP;AACD;;AACD,MAAI,OAAOA,KAAP,KAAiB,QAAjB,IACGA,KAAK,GAAG,CAAC,IADZ,IACoBA,KAAK,GAAG,IADhC,EACuC;AACrC,WAAO,KAAGA,KAAV;AACD;;AACD,MAAMC,IAAI,GAAG,CAAC,KAAGD,KAAJ,EAAWE,KAAX,CAAiB,GAAjB,CAAb;AAAA,MACMC,QAAQ,GAAGF,IAAI,CAAC,CAAD,CAAJ,GAAU,CAAV,GAAc,CAD/B;;AAEA,SAAOG,uBACJC,YADI,CACSL,KADT,EACgBG,QADhB,EAC0B,GAD1B,EAC+B,GAD/B,CAAP;AAED,CAZD;;eAceJ,Y","sourcesContent":["import Highcharts from 'highcharts'\r\n\r\nconst formatNumber = function(value){\r\n  if (value == null) {\r\n    return '0.00';\r\n  }\r\n  if (typeof value === 'number'\r\n      && value > -0.01 && value < 0.01 ) {\r\n    return ''+value;\r\n  }\r\n  const _arr = (''+value).split('.')\r\n      , _decimal = _arr[1] ? 2 : 0;\r\n  return Highcharts\r\n    .numberFormat(value, _decimal, '.', ' ');\r\n};\r\n\r\nexport default formatNumber\r\n"],"file":"formatNumber.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/formatNumber.js"
+ ],
+ "file": "../../src/utils/formatNumber.js",
+ "names": [
+  "_isNumber",
+  "n",
+  "_isNumberInRange",
+  "v",
+  "min",
+  "max",
+  "_crPrecision",
+  "value",
+  "_strDecimal",
+  "split",
+  "_len",
+  "length",
+  "formatNumber",
+  "_decimal",
+  "Highcharts",
+  "numberFormat"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAAAC,CAAC;AAAA,SAAI,OAAOA,CAAP,KAAa,QAAb,IAClBA,CAAC,GAAGA,CAAJ,KAAU,CADI;AAAA,CAAnB;;AAGA,IAAMC,gBAAgB,GAAG,SAAnBA,gBAAmB,CAACC,CAAD,EAAIC,GAAJ,EAASC,GAAT;AAAA,SAAiBF,CAAC,GAAGC,GAAJ,IACtCD,CAAC,GAAGE,GADiB;AAAA,CAAzB;;AAGA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAAAC,KAAK,EAAI;AAC5B,MAAMC,WAAW,GAAG,CAAC,KAAGD,KAAJ,EAAWE,KAAX,CAAiB,GAAjB,EAAsB,CAAtB,CAApB;AAAA,MACEC,IAAI,GAAGF,WAAW,GAAGA,WAAW,CAACG,MAAf,GAAwB,CAD5C;;AAEA,MAAIT,gBAAgB,CAACK,KAAD,EAAQ,CAAC,CAAT,EAAY,CAAZ,CAApB,EAAoC;AAClC,WAAOG,IAAI,GAAG,CAAP,GAAWA,IAAX,GAAkB,CAAzB;AACD;;AACD,SAAOR,gBAAgB,CAACK,KAAD,EAAQ,CAAC,MAAT,EAAiB,MAAjB,CAAhB,GACHG,IAAI,GAAG,CAAP,GAAWA,IAAX,GAAkB,CADf,GAEH,CAFJ;AAGD,CATD;;AAWA,IAAME,YAAY,GAAG,SAAfA,YAAe,CAASL,KAAT,EAAe;AAClC,MAAI,CAACP,SAAS,CAACO,KAAD,CAAd,EAAuB;AACrB,WAAO,MAAP;AACD;;AACD,MAAIL,gBAAgB,CAACK,KAAD,EAAQ,CAAC,IAAT,EAAe,IAAf,CAApB,EAA0C;AACxC,WAAO,KAAGA,KAAV;AACD;;AACD,MAAMM,QAAQ,GAAGP,YAAY,CAACC,KAAD,CAA7B;;AACA,SAAOO,uBACJC,YADI,CACSR,KADT,EACgBM,QADhB,EAC0B,GAD1B,EAC+B,GAD/B,CAAP;AAED,CAVD;;eAYeD,Y"
+}
