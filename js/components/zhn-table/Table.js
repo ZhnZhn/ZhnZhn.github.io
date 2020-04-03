@@ -13,6 +13,8 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _ModalMenu = _interopRequireDefault(require("./ModalMenu"));
+
 var _TableHead = _interopRequireDefault(require("./TableHead"));
 
 var _compFactory = _interopRequireDefault(require("./compFactory"));
@@ -35,7 +37,7 @@ var _isFn = function _isFn(fn) {
 };
 
 var _crLinkEl = function _crLinkEl(id, title, fn) {
-  var _href = _isFn(fn) ? fn(id) : undefined;
+  var _href = _isFn(fn) ? fn(id) : void 0;
 
   return _react["default"].createElement("a", {
     className: _Style["default"].CL_LINK,
@@ -52,7 +54,11 @@ function (_Component) {
   static propTypes = {
     gridId: PropTypes.string,
     thMoreStyle: PropTypes.object,
-    rows: PropTypes.array,
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string
+      })
+    ),
     headers: PropTypes.arrayOf(
        PropTypes.shape({
         name: PropTypes.string,
@@ -73,6 +79,16 @@ function (_Component) {
     var _this;
 
     _this = _Component.call(this, props) || this;
+
+    _this._hToggleMenuMore = function (evt) {
+      evt.stopPropagation();
+
+      _this.setState(function (prevState) {
+        return {
+          isMenuMore: !prevState.isMenuMore
+        };
+      });
+    };
 
     _this._hSort = function (pn) {
       _this.setState(function (prevState) {
@@ -119,12 +135,13 @@ function (_Component) {
           valueToHref = tableFn.valueToHref,
           rows = _this.state.rows;
       return rows.map(function (r, rIndex) {
-        var _elTds = headers.map(function (h, hIndex) {
+        var _id = r.id,
+            _elTds = headers.map(function (h, hIndex) {
           var pn = h.pn,
               style = h.style,
               isR = h.isR,
               isHref = h.isHref,
-              _key = r.id + hIndex,
+              _key = _id + hIndex,
               v = r[pn],
               _v = _tableFn["default"].toFormatValue({
             TOKEN_NAN: TOKEN_NAN,
@@ -146,7 +163,7 @@ function (_Component) {
         });
 
         return _react["default"].createElement("tr", {
-          key: r.id,
+          key: _id,
           role: "row"
         }, _elTds);
       });
@@ -154,6 +171,7 @@ function (_Component) {
 
     _this.state = {
       isGridLine: true,
+      isMenuMore: false,
       rows: props.rows,
       sortBy: void 0,
       sortTo: void 0
@@ -171,26 +189,34 @@ function (_Component) {
         className = _this$props2.className,
         _this$state = this.state,
         isGridLine = _this$state.isGridLine,
+        isMenuMore = _this$state.isMenuMore,
         sortBy = _this$state.sortBy,
         sortTo = _this$state.sortTo,
         _className = isGridLine ? _Style["default"].CL_GRID : '';
 
-    return _react["default"].createElement("table", {
+    return _react["default"].createElement("div", {
+      style: _Style["default"].WRAPPER_DIV
+    }, _react["default"].createElement(_ModalMenu["default"], {
+      isShow: isMenuMore,
+      style: _Style["default"].STYLE_MORE,
+      onClose: this._hToggleMenuMore,
+      isGridLine: isGridLine,
+      onCheck: this._hCheckGridLine,
+      onUnCheck: this._hUnCheckGridLine
+    }), _react["default"].createElement("table", {
       className: _className + " " + className,
       id: gridId,
-      style: _Style["default"].ROOT,
+      style: _Style["default"].TABLE,
       role: "grid"
     }, _react["default"].createElement(_TableHead["default"], {
       gridId: gridId,
       thMoreStyle: thMoreStyle,
       headers: headers,
-      isGridLine: isGridLine,
-      onCheckGridLine: this._hCheckGridLine,
-      onUnCheckGridLine: this._hUnCheckGridLine,
       sortBy: sortBy,
       sortTo: sortTo,
-      onSort: this._hSort
-    }), _react["default"].createElement("tbody", null, this._renderRows()));
+      onSort: this._hSort,
+      onMenuMore: this._hToggleMenuMore
+    }), _react["default"].createElement("tbody", null, this._renderRows())));
   };
 
   return Table;

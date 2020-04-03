@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 //import PropTypes from "prop-types";
 
+import ModalMenu from './ModalMenu'
 import TableHead from './TableHead'
 
 import F from './compFactory'
@@ -20,7 +21,7 @@ const C = {
 const _isFn = fn => typeof fn === 'function';
 
 const _crLinkEl = (id, title, fn) => {
-  const _href = _isFn(fn) ? fn(id) : undefined;
+  const _href = _isFn(fn) ? fn(id) : void 0;
   return (
     <a
       className={S.CL_LINK}
@@ -37,7 +38,11 @@ class Table extends Component {
   static propTypes = {
     gridId: PropTypes.string,
     thMoreStyle: PropTypes.object,
-    rows: PropTypes.array,
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string
+      })
+    ),
     headers: PropTypes.arrayOf(
        PropTypes.shape({
         name: PropTypes.string,
@@ -66,10 +71,18 @@ class Table extends Component {
     super(props)
     this.state = {
       isGridLine: true,
+      isMenuMore: false,
       rows: props.rows,
       sortBy: void 0,
       sortTo: void 0
     }
+  }
+
+  _hToggleMenuMore = (evt) => {
+    evt.stopPropagation()
+    this.setState(prevState => ({
+      isMenuMore: !prevState.isMenuMore
+    }))
   }
 
  _hSort = (pn) => {
@@ -110,15 +123,16 @@ class Table extends Component {
     , { rows } = this.state;
 
     return rows.map((r, rIndex) => {
-      const _elTds = headers.map((h, hIndex) => {
+      const _id = r.id
+      , _elTds = headers.map((h, hIndex) => {
         const { pn, style, isR, isHref } = h
-            , _key = r.id+hIndex
-            , v = r[pn]
-            , _v = FN.toFormatValue({ TOKEN_NAN, h, v, fn: numberFormat })
-            , _tdStyle = FN.crTdStyle({ S, v, isR })
-            , _elValueOrTitle = isHref
-                  ? _crLinkEl(r.id, _v, valueToHref)
-                  : _v;
+        , _key = _id + hIndex
+        , v = r[pn]
+        , _v = FN.toFormatValue({ TOKEN_NAN, h, v, fn: numberFormat })
+        , _tdStyle = FN.crTdStyle({ S, v, isR })
+        , _elValueOrTitle = isHref
+              ? _crLinkEl(r.id, _v, valueToHref)
+              : _v;
         return (
           <td
             key={_key}
@@ -128,8 +142,9 @@ class Table extends Component {
           </td>
         );
       })
+
       return (
-        <tr key={r.id} role="row">
+        <tr key={_id} role="row">
           {_elTds}
         </tr>
       );
@@ -145,6 +160,7 @@ class Table extends Component {
     } = this.props
     , {
       isGridLine,
+      isMenuMore,
       sortBy,
       sortTo
     } = this.state
@@ -152,27 +168,35 @@ class Table extends Component {
          ? S.CL_GRID
          : '';
     return (
-      <table
-        className={`${_className} ${className}`}
-        id={gridId}
-        style={S.ROOT}
-        role="grid"
-      >
-        <TableHead
-          gridId={gridId}
-          thMoreStyle={thMoreStyle}
-          headers={headers}
+      <div style={S.WRAPPER_DIV}>
+        <ModalMenu
+          isShow={isMenuMore}
+          style={S.STYLE_MORE}
+          onClose={this._hToggleMenuMore}
           isGridLine={isGridLine}
-          onCheckGridLine={this._hCheckGridLine}
-          onUnCheckGridLine={this._hUnCheckGridLine}
-          sortBy={sortBy}
-          sortTo={sortTo}
-          onSort={this._hSort}
+          onCheck={this._hCheckGridLine}
+          onUnCheck={this._hUnCheckGridLine}
         />
-        <tbody>
-          {this._renderRows()}
-        </tbody>
-      </table>
+        <table
+          className={`${_className} ${className}`}
+          id={gridId}
+          style={S.TABLE}
+          role="grid"
+        >
+          <TableHead
+            gridId={gridId}
+            thMoreStyle={thMoreStyle}
+            headers={headers}
+            sortBy={sortBy}
+            sortTo={sortTo}
+            onSort={this._hSort}
+            onMenuMore={this._hToggleMenuMore}
+          />
+          <tbody>
+            {this._renderRows()}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

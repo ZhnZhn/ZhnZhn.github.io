@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
+import isKeyEnter from '../zhn/isKeyEnter'
 import SvgMore from '../zhn/SvgMore'
-import ModalMenu from './ModalMenu'
 
 import S from './Style'
 import FN from './tableFn'
@@ -30,39 +30,24 @@ class TableHead extends Component {
         style: PropTypes.object
       })
     ),
-    isGridLine: PropTypes.bool
-    onCheckGridLine: PropTypes.func,
-    onUnCheckGridLine: PropTypes.func
     sortBy: PropTypes.string,
     sortTo: PropTypes.string,
-    onSort: PropTypes.func
+    onSort: PropTypes.func,
+    onMenuMore: PropTypes.func
   }
   */
 
-
-  state = {
-    isMenuMore: false
-  }
-
-  _hToggleMenuMore = (evt) => {
-    evt.stopPropagation()
-    this.setState(prevState => ({
-      isMenuMore: !prevState.isMenuMore
-    }))
-  }
-
   _hThKeyPressed = (pn, evt) => {
     evt.preventDefault()
-    const { which } = evt;
-    if ( which === 13 || which === 32) {
+    if (isKeyEnter(evt)) {
       this.props.onSort(pn)
-    }
+    }    
   }
 
   _renderHeader = () => {
     const {
       gridId, thMoreStyle, headers,
-      sortBy, sortTo, onSort
+      sortBy, sortTo, onSort, onMenuMore
     } = this.props;
     return headers.map((h, hIndex) => {
       const { name, pn } = h
@@ -77,7 +62,7 @@ class TableHead extends Component {
                <SvgMore
                  style={S.BT_SVG_MORE}
                  svgStyle={S.SVG_MORE}
-                 onClick={this._hToggleMenuMore}
+                 onClick={onMenuMore}
                />
               )
             : null
@@ -106,25 +91,11 @@ class TableHead extends Component {
   }
 
   render(){
-    const {
-      isGridLine,
-      onCheckGridLine,
-      onUnCheckGridLine
-    } = this.props
-    , { isMenuMore } = this.state;
     return (
       <thead style={S.THEAD}>
          <tr>
            {this._renderHeader()}
          </tr>
-         <ModalMenu
-           isShow={isMenuMore}
-           style={S.STYLE_MORE}
-           onClose={this._hToggleMenuMore}
-           isGridLine={isGridLine}
-           onCheck={onCheckGridLine}
-           onUnCheck={onUnCheckGridLine}
-         />
       </thead>
     );
   }

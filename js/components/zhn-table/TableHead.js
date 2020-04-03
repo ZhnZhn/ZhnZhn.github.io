@@ -13,9 +13,9 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
+var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
-var _ModalMenu = _interopRequireDefault(require("./ModalMenu"));
+var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
 
 var _Style = _interopRequireDefault(require("./Style"));
 
@@ -41,25 +41,11 @@ function (_Component) {
     }
 
     _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      isMenuMore: false
-    };
-
-    _this._hToggleMenuMore = function (evt) {
-      evt.stopPropagation();
-
-      _this.setState(function (prevState) {
-        return {
-          isMenuMore: !prevState.isMenuMore
-        };
-      });
-    };
 
     _this._hThKeyPressed = function (pn, evt) {
       evt.preventDefault();
-      var which = evt.which;
 
-      if (which === 13 || which === 32) {
+      if ((0, _isKeyEnter["default"])(evt)) {
         _this.props.onSort(pn);
       }
     };
@@ -71,7 +57,8 @@ function (_Component) {
           headers = _this$props.headers,
           sortBy = _this$props.sortBy,
           sortTo = _this$props.sortTo,
-          onSort = _this$props.onSort;
+          onSort = _this$props.onSort,
+          onMenuMore = _this$props.onMenuMore;
       return headers.map(function (h, hIndex) {
         var name = h.name,
             pn = h.pn,
@@ -89,7 +76,7 @@ function (_Component) {
             _elMore = hIndex === 0 ? _react["default"].createElement(_SvgMore["default"], {
           style: _Style["default"].BT_SVG_MORE,
           svgStyle: _Style["default"].SVG_MORE,
-          onClick: _this._hToggleMenuMore
+          onClick: onMenuMore
         }) : null,
             _thStyle = hIndex === 0 ? thMoreStyle : null;
 
@@ -114,21 +101,9 @@ function (_Component) {
   var _proto = TableHead.prototype;
 
   _proto.render = function render() {
-    var _this$props2 = this.props,
-        isGridLine = _this$props2.isGridLine,
-        onCheckGridLine = _this$props2.onCheckGridLine,
-        onUnCheckGridLine = _this$props2.onUnCheckGridLine,
-        isMenuMore = this.state.isMenuMore;
     return _react["default"].createElement("thead", {
       style: _Style["default"].THEAD
-    }, _react["default"].createElement("tr", null, this._renderHeader()), _react["default"].createElement(_ModalMenu["default"], {
-      isShow: isMenuMore,
-      style: _Style["default"].STYLE_MORE,
-      onClose: this._hToggleMenuMore,
-      isGridLine: isGridLine,
-      onCheck: onCheckGridLine,
-      onUnCheck: onUnCheckGridLine
-    }));
+    }, _react["default"].createElement("tr", null, this._renderHeader()));
   };
 
   return TableHead;

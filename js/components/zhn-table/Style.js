@@ -5,8 +5,10 @@ exports["default"] = void 0;
 var S = {
   CL_LINK: "native-link",
   CL_GRID: "grid",
-  ROOT: {
-    position: 'relative',
+  WRAPPER_DIV: {
+    position: 'relative'
+  },
+  TABLE: {
     width: '100%',
     borderCollapse: 'collapse',
     borderSpacing: 0

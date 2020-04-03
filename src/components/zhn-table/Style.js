@@ -2,9 +2,10 @@
 const S = {
   CL_LINK: "native-link",
   CL_GRID: "grid",
-    
-  ROOT: {
+  WRAPPER_DIV: {
     position: 'relative',
+  },
+  TABLE: {
     width: '100%',
     borderCollapse: 'collapse',
     borderSpacing: 0
