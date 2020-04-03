@@ -190,21 +190,6 @@ var Chart = {
       })
     }, option);
   },
-  fTitleIndicator: function fTitleIndicator(text) {
-    return {
-      text: text,
-      style: {
-        color: _Color["default"].METRIC_TITLE,
-        fontSize: '16px',
-        fontWeight: 'bold'
-      },
-      floating: true,
-      align: 'left',
-      verticalAlign: 'top',
-      x: 8,
-      y: 15
-    };
-  },
   fNavigation: function fNavigation() {
     return {
       buttonOptions: {
@@ -214,6 +199,8 @@ var Chart = {
   },
   fBaseConfig: function fBaseConfig(_temp2) {
     var _ref2 = _temp2 === void 0 ? {} : _temp2,
+        _ref2$title = _ref2.title,
+        title = _ref2$title === void 0 ? '' : _ref2$title,
         _ref2$seriaType = _ref2.seriaType,
         seriaType = _ref2$seriaType === void 0 ? 'area' : _ref2$seriaType,
         seriaColor = _ref2.seriaColor,
@@ -231,9 +218,9 @@ var Chart = {
         marginRight: Chart.MARGIN_RIGHT,
         spacingTop: spacingTop
       },
-      title: {
-        text: ''
-      },
+      title: typeof title === 'string' ? {
+        text: title
+      } : title,
       legend: {
         enabled: false
       },

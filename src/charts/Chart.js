@@ -164,22 +164,6 @@ const Chart = {
     }, option)
   },
 
- fTitleIndicator(text){
-   return {
-     text: text,
-     style: {
-       color: COLOR.METRIC_TITLE,
-       fontSize: '16px',
-       fontWeight: 'bold'
-     },
-     floating: true,
-     align: 'left',
-     verticalAlign: 'top',
-     x: 8,
-     y: 15
-    }
- },
-
  fNavigation(){
    return {
      buttonOptions: {
@@ -189,6 +173,7 @@ const Chart = {
  },
 
 fBaseConfig({
+  title='',
   seriaType='area',
   seriaColor,
   seriaWidth=1,
@@ -203,9 +188,9 @@ fBaseConfig({
       marginRight: Chart.MARGIN_RIGHT,
       spacingTop: spacingTop
     },
-    title: {
-      text: ''
-    },
+    title: typeof title === 'string'
+      ? { text: title }
+      : title,
     legend: {
       enabled: false
     },
