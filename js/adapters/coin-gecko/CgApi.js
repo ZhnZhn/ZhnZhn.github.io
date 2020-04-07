@@ -7,10 +7,18 @@ exports["default"] = void 0;
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+
 var C = {
   API_URL: 'https://api.coingecko.com/api/v3',
-  PAGE_URL: 'https://www.coingecko.com/en/coins'
+  PAGE_URL: 'https://www.coingecko.com/en/coins',
+  DF_PAGE: 1,
+  DF_PER_PAGE: 10,
+  DF_CURRENCY: 'USD'
 };
+var _assign = Object.assign;
+var _isArr = Array.isArray;
+var crPageConfig = _fnAdapter["default"].crPageConfig;
 
 var _crDays = function _crDays(_ref) {
   var fromDate = _ref.fromDate;
@@ -20,7 +28,7 @@ var _crDays = function _crDays(_ref) {
   return _d > 90 ? _d : 91;
 };
 
-var _assignTo = function _assignTo(option) {
+var _assignDf = function _assignDf(option) {
   var items = option.items,
       it1 = items[0],
       it2 = items[1],
@@ -31,7 +39,7 @@ var _assignTo = function _assignTo(option) {
       _vs = s + "/" + _currency,
       _days = _crDays(option);
 
-  Object.assign(option, {
+  _assign(option, {
     itemCaption: _vs,
     title: caption + " (" + _vs + ")",
     subtitle: 'Values on 00:00 GMT',
@@ -41,14 +49,37 @@ var _assignTo = function _assignTo(option) {
   });
 };
 
+var _assignMcl = function _assignMcl(option) {
+  var _crPageConfig = crPageConfig(option),
+      page = _crPageConfig[0],
+      perPage = _crPageConfig[1],
+      currency = _crPageConfig[2];
+
+  _assign(option, {
+    title: "By Market Cap Page: " + page + " (" + perPage + ")",
+    _itemUrl: C.API_URL + "/coins/markets?order=market_cap_desc&page=" + page + "&per_page=" + perPage + "&vs_currency=" + currency + "&price_change_percentage=1h,7d"
+  });
+};
+
+var _rAssign = {
+  DF: _assignDf,
+  MCL: _assignMcl
+};
 var CgApi = {
   getRequestUrl: function getRequestUrl(option) {
+    var dfSubId = option.dfSubId,
+        _assignTo = _rAssign[dfSubId] || _rAssign.DF;
+
     _assignTo(option);
 
     return option._itemUrl;
   },
   checkResponse: function checkResponse(json, option) {
-    if (json && Array.isArray(json.prices)) {
+    if (option.dfSubId === 'MCL' && _isArr(json) && json.length > 1) {
+      return true;
+    }
+
+    if (json && _isArr(json.prices)) {
       return true;
     }
 
