@@ -76,6 +76,8 @@ var ModalToggle = function ModalToggle(_ref2) {
       selectProps = _ref2$selectProps === void 0 ? [] : _ref2$selectProps,
       isFd = _ref2.isFd,
       isShowFd = _ref2.isShowFd,
+      _ref2$isCh = _ref2.isCh,
+      isCh = _ref2$isCh === void 0 ? true : _ref2$isCh,
       isShowDate = _ref2.isShowDate,
       isShowChart = _ref2.isShowChart,
       _ref2$noForDate = _ref2.noForDate,
@@ -108,7 +110,7 @@ var ModalToggle = function ModalToggle(_ref2) {
     checkedColor: TOGGLE_CHECKBOX_COLOR,
     caption: "From Date",
     onToggle: _toggleFd
-  }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+  }), isCh && _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     key: "isShowChart",
     value: isShowChart,
     rootStyle: _Modal["default"].ROW_CB,

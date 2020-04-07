@@ -79,6 +79,7 @@ function (_Component) {
 
   /*
   static propTypes = {
+    isCh: PropTypes.bool,
     isShow: PropTypes.bool,
     caption: PropTypes.string,
     selectProps: PropTypes.arrayOf(
@@ -299,7 +300,7 @@ function (_Component) {
     });
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       noDate: true,
-      isOptions: true,
+      isOptions: props.isCh,
       isToggle: true
     });
     _this._refFromDate = _react["default"].createRef();
@@ -342,6 +343,7 @@ function (_Component) {
         onFront = _this$props2.onFront,
         selectProps = _this$props2.selectProps,
         isFd = _this$props2.isFd,
+        isCh = _this$props2.isCh,
         noDate = _this$props2.noDate,
         noForDate = _this$props2.noForDate,
         initFromDate = _this$props2.initFromDate,
@@ -360,7 +362,7 @@ function (_Component) {
         dateOptions = _this$state.dateOptions,
         validationMessages = _this$state.validationMessages,
         _isCategory = isCategory(chartType),
-        _isRowFd = isFd && !_isCategory,
+        _isRowFd = isCh && isFd && !_isCategory,
         _noForDate = noForDate || !_isCategory;
 
     return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
@@ -384,6 +386,7 @@ function (_Component) {
       selectProps: selectProps,
       isFd: _isRowFd,
       isShowFd: isShowFd,
+      isCh: isCh,
       isShowChart: isShowChart,
       isShowDate: isShowDate,
       crIsId: _crIsId,
@@ -400,7 +403,7 @@ function (_Component) {
       initValue: initFromDate,
       errorMsg: errNotYmdOrEmpty,
       onTestDate: isYmdOrEmpty
-    })), _react["default"].createElement(_RowChart["default"], {
+    })), isCh && _react["default"].createElement(_RowChart["default"], {
       chartType: chartType,
       isShowLabels: isShowLabels,
       isShowChart: isShowChart,
@@ -419,6 +422,7 @@ function (_Component) {
 
   return DialogSelectN;
 }(_react.Component), _class2.defaultProps = {
+  isCh: true,
   selectProps: [],
   initFromDate: DF_INIT_FROM_DATE
 }, _temp)) || _class) || _class);

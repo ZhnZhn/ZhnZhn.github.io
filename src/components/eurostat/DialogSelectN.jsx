@@ -52,6 +52,7 @@ const _isRequireChartOptionsUpdate = (
 class DialogSelectN extends Component {
   /*
   static propTypes = {
+    isCh: PropTypes.bool,
     isShow: PropTypes.bool,
     caption: PropTypes.string,
     selectProps: PropTypes.arrayOf(
@@ -83,6 +84,7 @@ class DialogSelectN extends Component {
  */
 
  static defaultProps = {
+   isCh: true,
    selectProps: [],
    initFromDate: DF_INIT_FROM_DATE
  }
@@ -104,7 +106,7 @@ class DialogSelectN extends Component {
       onAbout: this._clickInfoWithToolbar
     })
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true, isOptions: true, isToggle: true }
+      props, { noDate: true, isOptions: props.isCh, isToggle: true }
     )
     this._refFromDate = React.createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
@@ -317,7 +319,7 @@ class DialogSelectN extends Component {
       caption, isShow,
       onShow, onFront,
       selectProps,
-      isFd, noDate, noForDate,
+      isFd, isCh, noDate, noForDate,
       initFromDate,
       errNotYmdOrEmpty,
       isYmdOrEmpty
@@ -331,7 +333,7 @@ class DialogSelectN extends Component {
       validationMessages
     } = this.state
     , _isCategory = isCategory(chartType)
-    , _isRowFd = isFd && !_isCategory
+    , _isRowFd = isCh && isFd && !_isCategory
     , _noForDate = noForDate || !_isCategory;
     return(
       <D.DraggableDialog
@@ -358,6 +360,7 @@ class DialogSelectN extends Component {
              selectProps={selectProps}
              isFd={_isRowFd}
              isShowFd={isShowFd}
+             isCh={isCh}
              isShowChart={isShowChart}
              isShowDate={isShowDate}
              crIsId={_crIsId}
@@ -378,19 +381,20 @@ class DialogSelectN extends Component {
                />
              </D.ShowHide>
            }
-           <RowChart
-             chartType={chartType}
-             isShowLabels={isShowLabels}
-             isShowChart={isShowChart}
-             chartOptions={this._chartOptions}
-             onSelectChart={this._hSelectChartType}
-             onRegColor={this._onRegColor}
-             noDate={noDate}
-             isShowDate={isShowDate}
-             dateDefault={dateDefault}
-             dateOptions={dateOptions}
-             onSelecDate={this._hSelectDate}
-           />
+           { isCh && <RowChart
+               chartType={chartType}
+               isShowLabels={isShowLabels}
+               isShowChart={isShowChart}
+               chartOptions={this._chartOptions}
+               onSelectChart={this._hSelectChartType}
+               onRegColor={this._onRegColor}
+               noDate={noDate}
+               isShowDate={isShowDate}
+               dateDefault={dateDefault}
+               dateOptions={dateOptions}
+               onSelecDate={this._hSelectDate}
+             />
+           }
            <D.ValidationMessages
                validationMessages={validationMessages}
            />

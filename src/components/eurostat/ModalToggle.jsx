@@ -55,7 +55,7 @@ const ModalToggle = ({
   isShow, style, className=STYLE.CL,
   selectProps=[],
   isFd, isShowFd,
-  isShowDate, isShowChart,
+  isCh=true, isShowDate, isShowChart,
   noForDate=false,
   crIsId,
   onToggle,
@@ -91,14 +91,15 @@ const ModalToggle = ({
         onToggle={_toggleFd}
       />
     }
-    <D.RowCheckBox
-      key="isShowChart"
-      value={isShowChart}
-      rootStyle={STYLE.ROW_CB}
-      checkedColor={TOGGLE_CHECKBOX_COLOR}
-      caption="Chart"
-      onToggle={_toggleChart}
-    />
+    { isCh && <D.RowCheckBox
+        key="isShowChart"
+        value={isShowChart}
+        rootStyle={STYLE.ROW_CB}
+        checkedColor={TOGGLE_CHECKBOX_COLOR}
+        caption="Chart"
+        onToggle={_toggleChart}
+      />
+    }
     { !noForDate && <D.RowCheckBox
         key="isForDate"
         value={isShowDate}
