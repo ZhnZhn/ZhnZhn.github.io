@@ -61,6 +61,7 @@ function (_Component) {
     ),
     headers: PropTypes.arrayOf(
        PropTypes.shape({
+        isHide: PropTypes.bool,
         name: PropTypes.string,
         pn: PropTypes.string,
         isR: PropTypes.bool,
@@ -90,6 +91,27 @@ function (_Component) {
       });
     };
 
+    _this._hToogleGridLine = function () {
+      _this.setState(function (prevState) {
+        return {
+          isGridLine: !prevState.isGridLine
+        };
+      });
+    };
+
+    _this._hToggleColumn = function (index) {
+      _this.setState(function (_ref) {
+        var headers = _ref.headers;
+
+        var _index = index + 1;
+
+        headers[_index].isHide = !headers[_index].isHide;
+        return {
+          headers: [].concat(headers)
+        };
+      });
+    };
+
     _this._hSort = function (pn) {
       _this.setState(function (prevState) {
         var rows = prevState.rows,
@@ -115,18 +137,6 @@ function (_Component) {
       });
     };
 
-    _this._hCheckGridLine = function () {
-      _this.setState({
-        isGridLine: true
-      });
-    };
-
-    _this._hUnCheckGridLine = function () {
-      _this.setState({
-        isGridLine: false
-      });
-    };
-
     _this._renderRows = function () {
       var _this$props = _this.props,
           headers = _this$props.headers,
@@ -137,6 +147,10 @@ function (_Component) {
       return rows.map(function (r, rIndex) {
         var _id = r.id,
             _elTds = headers.map(function (h, hIndex) {
+          if (h.isHide) {
+            return null;
+          }
+
           var pn = h.pn,
               style = h.style,
               isR = h.isR,
@@ -160,7 +174,7 @@ function (_Component) {
             key: _key,
             style: (0, _extends2["default"])({}, _Style["default"].TD, {}, style, {}, _tdStyle)
           }, _elValueOrTitle);
-        });
+        }).filter(Boolean);
 
         return _react["default"].createElement("tr", {
           key: _id,
@@ -172,6 +186,7 @@ function (_Component) {
     _this.state = {
       isGridLine: true,
       isMenuMore: false,
+      headers: props.headers,
       rows: props.rows,
       sortBy: void 0,
       sortTo: void 0
@@ -201,8 +216,9 @@ function (_Component) {
       style: _Style["default"].STYLE_MORE,
       onClose: this._hToggleMenuMore,
       isGridLine: isGridLine,
-      onCheck: this._hCheckGridLine,
-      onUnCheck: this._hUnCheckGridLine
+      onToggleGrid: this._hToogleGridLine,
+      headers: headers,
+      onToggle: this._hToggleColumn
     }), _react["default"].createElement("table", {
       className: _className + " " + className,
       id: gridId,

@@ -22,6 +22,7 @@ class TableHead extends Component {
     thMoreStyle: PropTypes.object,
     headers: PropTypes.arrayOf(
        PropTypes.shape({
+        isHide: PropTypes.bool,
         name: PropTypes.string,
         pn: PropTypes.string,
         isR: PropTypes.bool,
@@ -41,7 +42,7 @@ class TableHead extends Component {
     evt.preventDefault()
     if (isKeyEnter(evt)) {
       this.props.onSort(pn)
-    }    
+    }
   }
 
   _renderHeader = () => {
@@ -50,6 +51,9 @@ class TableHead extends Component {
       sortBy, sortTo, onSort, onMenuMore
     } = this.props;
     return headers.map((h, hIndex) => {
+      if (h.isHide) {
+        return null;
+      }
       const { name, pn } = h
       , {
           style,
@@ -58,17 +62,15 @@ class TableHead extends Component {
               S, C, pn, name, sortBy, sortTo
             })
       , _elMore = hIndex === 0
-            ? (
-               <SvgMore
-                 style={S.BT_SVG_MORE}
-                 svgStyle={S.SVG_MORE}
-                 onClick={onMenuMore}
-               />
-              )
-            : null
+           ? (<SvgMore
+                style={S.BT_SVG_MORE}
+                svgStyle={S.SVG_MORE}
+                onClick={onMenuMore}
+             />)
+           : null
       , _thStyle = hIndex === 0
-            ? thMoreStyle
-            : null;
+           ? thMoreStyle
+           : null;
 
       return (
         <th
@@ -87,7 +89,7 @@ class TableHead extends Component {
           {name}
         </th>
       );
-    });
+    }).filter(Boolean);
   }
 
   render(){

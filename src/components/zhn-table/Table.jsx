@@ -45,6 +45,7 @@ class Table extends Component {
     ),
     headers: PropTypes.arrayOf(
        PropTypes.shape({
+        isHide: PropTypes.bool,
         name: PropTypes.string,
         pn: PropTypes.string,
         isR: PropTypes.bool,
@@ -72,6 +73,7 @@ class Table extends Component {
     this.state = {
       isGridLine: true,
       isMenuMore: false,
+      headers: props.headers,
       rows: props.rows,
       sortBy: void 0,
       sortTo: void 0
@@ -83,6 +85,20 @@ class Table extends Component {
     this.setState(prevState => ({
       isMenuMore: !prevState.isMenuMore
     }))
+  }
+
+  _hToogleGridLine = () => {
+    this.setState(prevState => ({
+      isGridLine: !prevState.isGridLine
+    }))
+  }
+
+  _hToggleColumn = (index) => {
+    this.setState(({ headers }) => {
+      const _index = index + 1;
+      headers[_index].isHide = !headers[_index].isHide
+      return { headers: [...headers] };
+    })
   }
 
  _hSort = (pn) => {
@@ -104,14 +120,7 @@ class Table extends Component {
      };
    })
  }
-
- _hCheckGridLine = () => {
-   this.setState({ isGridLine: true })
- }
- _hUnCheckGridLine = () => {
-   this.setState({ isGridLine: false })
- }
-
+  
   _renderRows = () => {
     const {
       headers, tableFn
@@ -125,6 +134,9 @@ class Table extends Component {
     return rows.map((r, rIndex) => {
       const _id = r.id
       , _elTds = headers.map((h, hIndex) => {
+        if (h.isHide) {
+          return null;
+        }
         const { pn, style, isR, isHref } = h
         , _key = _id + hIndex
         , v = r[pn]
@@ -141,7 +153,7 @@ class Table extends Component {
             {_elValueOrTitle}
           </td>
         );
-      })
+      }).filter(Boolean);
 
       return (
         <tr key={_id} role="row">
@@ -174,8 +186,9 @@ class Table extends Component {
           style={S.STYLE_MORE}
           onClose={this._hToggleMenuMore}
           isGridLine={isGridLine}
-          onCheck={this._hCheckGridLine}
-          onUnCheck={this._hUnCheckGridLine}
+          onToggleGrid={this._hToogleGridLine}
+          headers={headers}
+          onToggle={this._hToggleColumn}
         />
         <table
           className={`${_className} ${className}`}

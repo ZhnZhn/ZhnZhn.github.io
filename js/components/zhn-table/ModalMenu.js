@@ -15,7 +15,32 @@ var S = {
   ROW: {
     paddingLeft: 0,
     paddingBottom: 4
+  },
+  HR: {
+    borderColor: 'black',
+    marginTop: 2,
+    marginBottom: 2
   }
+};
+
+var _renderHeaders = function _renderHeaders(headers, _onToggle) {
+  /*eslint-disable no-unused-vars*/
+  var rank = headers[0],
+      restHeader = headers.slice(1);
+  /*eslint-enable no-unused-vars*/
+
+  return restHeader.map(function (h, index) {
+    return _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+      key: h.name,
+      rootStyle: S.ROW,
+      checkedColor: "black",
+      caption: h.name,
+      value: !h.isHide,
+      onToggle: function onToggle() {
+        return _onToggle(index);
+      }
+    });
+  });
 };
 
 var ModalMenu = function ModalMenu(_ref) {
@@ -23,8 +48,9 @@ var ModalMenu = function ModalMenu(_ref) {
       style = _ref.style,
       onClose = _ref.onClose,
       isGridLine = _ref.isGridLine,
-      onCheck = _ref.onCheck,
-      onUnCheck = _ref.onUnCheck;
+      onToggleGrid = _ref.onToggleGrid,
+      headers = _ref.headers,
+      onToggle = _ref.onToggle;
   return _react["default"].createElement(_ModalPopup["default"], {
     style: style,
     isShow: isShow,
@@ -34,9 +60,10 @@ var ModalMenu = function ModalMenu(_ref) {
     checkedColor: "black",
     caption: "withStripLines",
     value: isGridLine,
-    onCheck: onCheck,
-    onUnCheck: onUnCheck
-  }));
+    onToggle: onToggleGrid
+  }), _react["default"].createElement("hr", {
+    style: S.HR
+  }), _renderHeaders(headers, onToggle));
 };
 
 var _default = ModalMenu;

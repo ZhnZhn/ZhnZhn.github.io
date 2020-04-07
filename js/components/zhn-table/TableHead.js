@@ -60,6 +60,10 @@ function (_Component) {
           onSort = _this$props.onSort,
           onMenuMore = _this$props.onMenuMore;
       return headers.map(function (h, hIndex) {
+        if (h.isHide) {
+          return null;
+        }
+
         var name = h.name,
             pn = h.pn,
             _FN$crAppearance = _tableFn["default"].crAppearance({
@@ -92,7 +96,7 @@ function (_Component) {
           onClick: onSort.bind(null, pn),
           onKeyPress: _this._hThKeyPressed.bind(null, pn)
         }, _elMore, name);
-      });
+      }).filter(Boolean);
     };
 
     return _this;
