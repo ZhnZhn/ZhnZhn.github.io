@@ -17,7 +17,7 @@ var DATA_LABELS = {
   }
 };
 
-var zhEnableDataLables = function zhEnableDataLables(seriaType, options) {
+var zhEnableDataLabels = function zhEnableDataLabels(seriaType, options) {
   if (seriaType === void 0) {
     seriaType = 'columnrange';
   }
@@ -35,6 +35,6 @@ var zhEnableDataLables = function zhEnableDataLables(seriaType, options) {
   }
 };
 
-var _default = zhEnableDataLables;
+var _default = zhEnableDataLabels;
 exports["default"] = _default;
 //# sourceMappingURL=zhEnableDataLabels.js.map

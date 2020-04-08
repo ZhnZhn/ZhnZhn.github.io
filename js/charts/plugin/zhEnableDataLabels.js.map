@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../../src/charts/plugin/zhEnableDataLabels.js"],"names":["DATA_LABELS","enabled","color","crop","overflow","style","fontSize","zhEnableDataLables","seriaType","options","update","plotOptions","dataLabels","err","console","log"],"mappings":";;;;;;;;;AACA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,OAAO,EAAE,IADS;AAElBC,EAAAA,KAAK,EAAE,OAFW;AAGlBC,EAAAA,IAAI,EAAE,KAHY;AAIlBC,EAAAA,QAAQ,EAAE,OAJQ;AAKlBC,EAAAA,KAAK,EAAE;AACLC,IAAAA,QAAQ,EAAE;AADL;AALW,CAApB;;AAUA,IAAOC,kBAAkB,GAAG,SAArBA,kBAAqB,CAC1BC,SAD0B,EAE1BC,OAF0B,EAG1B;AAAA,MAFAD,SAEA;AAFAA,IAAAA,SAEA,GAFU,aAEV;AAAA;;AACA,MAAI;AAAA;;AACF,SAAKE,MAAL,CAAY;AACVC,MAAAA,WAAW,mCACRH,SADQ,IACI;AACXI,QAAAA,UAAU,gCACLH,OADK,MAELT,WAFK;AADC,OADJ;AADD,KAAZ;AAUD,GAXD,CAWE,OAAMa,GAAN,EAAW;AACXC,IAAAA,OAAO,CAACC,GAAR,CAAYF,GAAZ;AACD;AACF,CAlBD;;eAqBeN,kB","sourcesContent":["\r\nconst DATA_LABELS = {\r\n  enabled: true,\r\n  color: 'black',\r\n  crop: false,\r\n  overflow: 'allow',\r\n  style: {\r\n    fontSize: 14\r\n  }\r\n};\r\n\r\nconst  zhEnableDataLables = function(\r\n  seriaType='columnrange',\r\n  options\r\n) {\r\n  try {\r\n    this.update({\r\n      plotOptions: {\r\n        [seriaType]: {\r\n          dataLabels: {\r\n            ...options,\r\n            ...DATA_LABELS\r\n          }\r\n        }\r\n      }\r\n    })\r\n  } catch(err) {\r\n    console.log(err)\r\n  }\r\n};\r\n\r\n\r\nexport default zhEnableDataLables\r\n"],"file":"zhEnableDataLabels.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhEnableDataLabels.js"
+ ],
+ "file": "../../../src/charts/plugin/zhEnableDataLabels.js",
+ "names": [
+  "DATA_LABELS",
+  "enabled",
+  "color",
+  "crop",
+  "overflow",
+  "style",
+  "fontSize",
+  "zhEnableDataLabels",
+  "seriaType",
+  "options",
+  "update",
+  "plotOptions",
+  "dataLabels",
+  "err",
+  "console",
+  "log"
+ ],
+ "mappings": ";;;;;;;;;AACA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,OAAO,EAAE,IADS;AAElBC,EAAAA,KAAK,EAAE,OAFW;AAGlBC,EAAAA,IAAI,EAAE,KAHY;AAIlBC,EAAAA,QAAQ,EAAE,OAJQ;AAKlBC,EAAAA,KAAK,EAAE;AACLC,IAAAA,QAAQ,EAAE;AADL;AALW,CAApB;;AAUA,IAAOC,kBAAkB,GAAG,SAArBA,kBAAqB,CAC1BC,SAD0B,EAE1BC,OAF0B,EAG1B;AAAA,MAFAD,SAEA;AAFAA,IAAAA,SAEA,GAFU,aAEV;AAAA;;AACA,MAAI;AAAA;;AACF,SAAKE,MAAL,CAAY;AACVC,MAAAA,WAAW,mCACRH,SADQ,IACI;AACXI,QAAAA,UAAU,gCACLH,OADK,MAELT,WAFK;AADC,OADJ;AADD,KAAZ;AAUD,GAXD,CAWE,OAAMa,GAAN,EAAW;AACXC,IAAAA,OAAO,CAACC,GAAR,CAAYF,GAAZ;AACD;AACF,CAlBD;;eAqBeN,kB"
+}

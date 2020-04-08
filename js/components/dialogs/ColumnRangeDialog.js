@@ -132,7 +132,7 @@ function (_Component) {
         color: _this._color,
         yIndex: 0
       }, _crSeriaOptions(_this._pointWidth));
-      chart.zhEnableDataLables();
+      chart.zhEnableDataLabels();
       onClose();
     };
 

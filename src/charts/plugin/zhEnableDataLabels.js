@@ -9,7 +9,7 @@ const DATA_LABELS = {
   }
 };
 
-const  zhEnableDataLables = function(
+const  zhEnableDataLabels = function(
   seriaType='columnrange',
   options
 ) {
@@ -30,4 +30,4 @@ const  zhEnableDataLables = function(
 };
 
 
-export default zhEnableDataLables
+export default zhEnableDataLabels

@@ -123,7 +123,7 @@ class ColumnRangeDialog extends Component {
        yIndex: 0,
      }, _crSeriaOptions(this._pointWidth))
 
-     chart.zhEnableDataLables()
+     chart.zhEnableDataLabels()
      onClose()
   }
 
