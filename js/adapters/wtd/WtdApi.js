@@ -66,9 +66,17 @@ var WtdApi = {
   },
   checkResponse: function checkResponse(json, option) {
     var dfType = option.dfType,
-        _checkResponse = _rCheckResponse[dfType] || _rCheckResponse.DF;
+        _checkResponse = _rCheckResponse[dfType] || _rCheckResponse.DF,
+        _isCorrect = !!_checkResponse(json);
 
-    return !!_checkResponse(json);
+    if (!_isCorrect) {
+      throw {
+        errCaption: "Response Error",
+        message: "Response Empty"
+      };
+    }
+
+    return _isCorrect;
   }
 };
 var _default = WtdApi;

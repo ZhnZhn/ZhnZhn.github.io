@@ -7,8 +7,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -17,32 +15,18 @@ var _ModalMenu = _interopRequireDefault(require("./ModalMenu"));
 
 var _TableHead = _interopRequireDefault(require("./TableHead"));
 
-var _compFactory = _interopRequireDefault(require("./compFactory"));
+var _TableBody = _interopRequireDefault(require("./TableBody"));
 
-var _tableFn = _interopRequireDefault(require("./tableFn"));
+var _compFactory = _interopRequireDefault(require("./compFactory"));
 
 var _Style = _interopRequireDefault(require("./Style"));
 
 //import PropTypes from "prop-types";
-var TOKEN_NAN = '―';
 var C = {
   UP: 'UP',
   DOWN: 'DOWN',
   ASC: 'ascending',
   DESC: 'descending'
-};
-
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
-
-var _crLinkEl = function _crLinkEl(id, title, fn) {
-  var _href = _isFn(fn) ? fn(id) : void 0;
-
-  return _react["default"].createElement("a", {
-    className: _Style["default"].CL_LINK,
-    href: _href
-  }, title);
 };
 
 var Table =
@@ -117,7 +101,7 @@ function (_Component) {
         var rows = prevState.rows,
             sortBy = prevState.sortBy,
             sortTo = prevState.sortTo,
-            _compBy = _compFactory["default"].compBy(TOKEN_NAN, pn);
+            _compBy = _compFactory["default"].compBy(_Style["default"].TOKEN_NAN, pn);
 
         var _rows, _sortTo;
 
@@ -137,52 +121,6 @@ function (_Component) {
       });
     };
 
-    _this._renderRows = function () {
-      var _this$props = _this.props,
-          headers = _this$props.headers,
-          tableFn = _this$props.tableFn,
-          numberFormat = tableFn.numberFormat,
-          valueToHref = tableFn.valueToHref,
-          rows = _this.state.rows;
-      return rows.map(function (r, rIndex) {
-        var _id = r.id,
-            _elTds = headers.map(function (h, hIndex) {
-          if (h.isHide) {
-            return null;
-          }
-
-          var pn = h.pn,
-              style = h.style,
-              isR = h.isR,
-              isHref = h.isHref,
-              _key = _id + hIndex,
-              v = r[pn],
-              _v = _tableFn["default"].toFormatValue({
-            TOKEN_NAN: TOKEN_NAN,
-            h: h,
-            v: v,
-            fn: numberFormat
-          }),
-              _tdStyle = _tableFn["default"].crTdStyle({
-            S: _Style["default"],
-            v: v,
-            isR: isR
-          }),
-              _elValueOrTitle = isHref ? _crLinkEl(r.id, _v, valueToHref) : _v;
-
-          return _react["default"].createElement("td", {
-            key: _key,
-            style: (0, _extends2["default"])({}, _Style["default"].TD, {}, style, {}, _tdStyle)
-          }, _elValueOrTitle);
-        }).filter(Boolean);
-
-        return _react["default"].createElement("tr", {
-          key: _id,
-          role: "row"
-        }, _elTds);
-      });
-    };
-
     _this.state = {
       isGridLine: true,
       isMenuMore: false,
@@ -197,16 +135,18 @@ function (_Component) {
   var _proto = Table.prototype;
 
   _proto.render = function render() {
-    var _this$props2 = this.props,
-        gridId = _this$props2.gridId,
-        thMoreStyle = _this$props2.thMoreStyle,
-        headers = _this$props2.headers,
-        className = _this$props2.className,
+    var _this$props = this.props,
+        gridId = _this$props.gridId,
+        thMoreStyle = _this$props.thMoreStyle,
+        className = _this$props.className,
+        tableFn = _this$props.tableFn,
         _this$state = this.state,
         isGridLine = _this$state.isGridLine,
         isMenuMore = _this$state.isMenuMore,
         sortBy = _this$state.sortBy,
         sortTo = _this$state.sortTo,
+        headers = _this$state.headers,
+        rows = _this$state.rows,
         _className = isGridLine ? _Style["default"].CL_GRID : '';
 
     return _react["default"].createElement("div", {
@@ -232,7 +172,11 @@ function (_Component) {
       sortTo: sortTo,
       onSort: this._hSort,
       onMenuMore: this._hToggleMenuMore
-    }), _react["default"].createElement("tbody", null, this._renderRows())));
+    }), _react["default"].createElement(_TableBody["default"], {
+      headers: headers,
+      rows: rows,
+      tableFn: tableFn
+    })));
   };
 
   return Table;

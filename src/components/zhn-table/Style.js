@@ -1,5 +1,6 @@
 
 const S = {
+  TOKEN_NAN: '―',
   CL_LINK: "native-link",
   CL_GRID: "grid",
   WRAPPER_DIV: {
@@ -20,6 +21,7 @@ const S = {
     borderTop: '3px solid transparent',
     borderBottom: '3px solid transparent',
     pointerEvents: 'auto',
+    userSelect: 'none',
     cursor: 'pointer',
   },
   TH_UP: {

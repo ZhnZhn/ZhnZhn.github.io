@@ -7,7 +7,13 @@ var C = {
   PN_MD: 'Meta Data',
   PN_LR: 'Last Refreshed',
   TITLE: 'S&P 500 Sector Performances',
-  ID: 'alp_perf'
+  ID: 'alp_perf',
+  DATA_SOURCE: 'Alpha Vantage'
+};
+var S = {
+  DS: {
+    paddingTop: 6
+  }
 };
 var M_PERIOD = [{
   t: 'Real-Time',
@@ -65,6 +71,7 @@ var _isInArray = function _isInArray(arr, value) {
 var _initRows = function _initRows(sectors) {
   return sectors.map(function (str) {
     return {
+      id: str,
       Sector: str
     };
   });
@@ -184,13 +191,17 @@ var AlphaSectorAdapter = {
         id: id + "_m",
         title: _crTitle(json),
         headers: M_HEADERS,
-        rows: mRows
+        rows: mRows,
+        dataSource: C.DATA_SOURCE,
+        dsStyle: S.DS
       },
       y: {
         id: id + "_y",
         title: C.TITLE + " Yearly",
         headers: Y_HEADERS,
-        rows: yRows
+        rows: yRows,
+        dataSource: C.DATA_SOURCE,
+        dsStyle: S.DS
       }
     };
 

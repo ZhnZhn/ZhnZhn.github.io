@@ -34,7 +34,8 @@ var _arrangeBy = function _arrangeBy(titles, configs, idPropName) {
 };
 
 var MiniCharts = function MiniCharts(_ref) {
-  var configs = _ref.configs,
+  var withoutAnimation = _ref.withoutAnimation,
+      configs = _ref.configs,
       _ref$idPropName = _ref.idPropName,
       idPropName = _ref$idPropName === void 0 ? 'id' : _ref$idPropName,
       ids = _ref.ids,
@@ -54,8 +55,9 @@ var MiniCharts = function MiniCharts(_ref) {
 
   return _react["default"].createElement("div", null, _configs.map(function (c) {
     return _react["default"].createElement(_Comp["default"].ShowHide, {
+      key: c[idPropName],
       isShow: true,
-      key: c[idPropName]
+      withoutAnimation: withoutAnimation
     }, _react["default"].createElement(_Comp["default"].HighchartWrapper, {
       config: c.config,
       absComp: absComp,
@@ -66,6 +68,7 @@ var MiniCharts = function MiniCharts(_ref) {
 };
 /*
 MiniCharts.propTypes = {
+  withoutAnimation: PropTypes.bool,
   configs: PropTypes.arrayOf(
     PropTypes.shape({
       config: PropTypes.object

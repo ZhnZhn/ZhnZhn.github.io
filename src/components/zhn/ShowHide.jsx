@@ -4,7 +4,7 @@ import React from 'react';
 const CL_SHOW_POPUP = 'show-popup';
 const S = {
   SHOW: {
-    display: 'block'    
+    display: 'block'
   },
   HIDE: {
     display: 'none'
@@ -12,7 +12,8 @@ const S = {
 };
 
 const ShowHide = ({
-  isShow, withoutAnimation,
+  isShow,
+  withoutAnimation=false,
   className, style,
   children
 }) => {

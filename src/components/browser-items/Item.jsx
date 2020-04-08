@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import isKeyEnter from '../zhn/isKeyEnter'
 
-const STYLE = {
+const S = {
   ITEM_DIV: {
     position: 'relative',
     minWidth: 350,
@@ -14,7 +14,7 @@ const STYLE = {
   ITEM_SPAN: {
     display: 'inline-block',
     verticalAlign: 'middle',
-    width: '100%',    
+    width: '100%',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis'
@@ -26,21 +26,23 @@ const Item = ({
    item, onClickItem,
    children
   }) => {
+  /*eslint-disable react-hooks/exhaustive-deps*/
   const _hKeyDown = useCallback((evt) => {
     if (isKeyEnter(evt)) {
       onClickItem(item)
     }
   }, []);
+  /*eslint-enable react-hooks/exhaustive-deps*/
   return (
     <div
       role="menuitem"
-      tabindex="0"
+      tabIndex="0"
       className={className}
-      style={STYLE.ITEM_DIV}
+      style={S.ITEM_DIV}
       onClick={onClickItem.bind(null, item)}
       onKeyDown={_hKeyDown}
     >
-      <span style={STYLE.ITEM_SPAN}>
+      <span style={S.ITEM_SPAN}>
         {caption}
       </span>
       {children}

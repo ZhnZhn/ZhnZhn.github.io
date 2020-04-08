@@ -258,7 +258,8 @@ function (_Component) {
       return configs.map(function (config, index) {
         var _config$zhConfig = config.zhConfig,
             zhConfig = _config$zhConfig === void 0 ? {} : _config$zhConfig,
-            id = zhConfig.id;
+            id = zhConfig.id,
+            zhCompType = zhConfig.zhCompType;
         return _ItemFactory["default"].createItem({
           store: store,
           config: config,
@@ -267,7 +268,7 @@ function (_Component) {
             chartType: chartType
           },
           props: {
-            ref: _this._refChart.bind(null, index),
+            ref: !zhCompType ? _this._refChart.bind(null, index) : void 0,
             onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
             isAdminMode: _isAdminMode
           }

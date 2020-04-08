@@ -3,12 +3,10 @@ import React, { Component } from 'react'
 
 import ModalMenu from './ModalMenu'
 import TableHead from './TableHead'
+import TableBody from './TableBody'
 
 import F from './compFactory'
-import FN from './tableFn'
 import S from './Style'
-
-const TOKEN_NAN = '―';
 
 const C = {
   UP: 'UP',
@@ -16,20 +14,6 @@ const C = {
 
   ASC: 'ascending',
   DESC: 'descending'
-};
-
-const _isFn = fn => typeof fn === 'function';
-
-const _crLinkEl = (id, title, fn) => {
-  const _href = _isFn(fn) ? fn(id) : void 0;
-  return (
-    <a
-      className={S.CL_LINK}
-      href={_href}
-    >
-      {title}
-    </a>
-  );
 };
 
 
@@ -104,7 +88,7 @@ class Table extends Component {
  _hSort = (pn) => {
    this.setState(prevState => {
      const { rows, sortBy, sortTo } = prevState
-         , _compBy = F.compBy(TOKEN_NAN, pn)
+         , _compBy = F.compBy(S.TOKEN_NAN, pn)
      let _rows, _sortTo;
      if (pn === sortBy && sortTo === C.UP) {
        _rows = rows.sort(F.opCompBy(pn, _compBy))
@@ -120,61 +104,21 @@ class Table extends Component {
      };
    })
  }
-  
-  _renderRows = () => {
-    const {
-      headers, tableFn
-    } = this.props
-    , {
-        numberFormat,
-        valueToHref
-      } = tableFn
-    , { rows } = this.state;
-
-    return rows.map((r, rIndex) => {
-      const _id = r.id
-      , _elTds = headers.map((h, hIndex) => {
-        if (h.isHide) {
-          return null;
-        }
-        const { pn, style, isR, isHref } = h
-        , _key = _id + hIndex
-        , v = r[pn]
-        , _v = FN.toFormatValue({ TOKEN_NAN, h, v, fn: numberFormat })
-        , _tdStyle = FN.crTdStyle({ S, v, isR })
-        , _elValueOrTitle = isHref
-              ? _crLinkEl(r.id, _v, valueToHref)
-              : _v;
-        return (
-          <td
-            key={_key}
-            style={{...S.TD, ...style, ..._tdStyle}}
-          >
-            {_elValueOrTitle}
-          </td>
-        );
-      }).filter(Boolean);
-
-      return (
-        <tr key={_id} role="row">
-          {_elTds}
-        </tr>
-      );
-    });
-  }
 
   render(){
     const {
       gridId,
       thMoreStyle,
-      headers,
-      className
+      className,
+      tableFn
     } = this.props
     , {
       isGridLine,
       isMenuMore,
       sortBy,
-      sortTo
+      sortTo,
+      headers,
+      rows
     } = this.state
     , _className = isGridLine
          ? S.CL_GRID
@@ -205,13 +149,16 @@ class Table extends Component {
             onSort={this._hSort}
             onMenuMore={this._hToggleMenuMore}
           />
-          <tbody>
-            {this._renderRows()}
-          </tbody>
+          <TableBody
+            headers={headers}
+            rows={rows}
+            tableFn={tableFn}
+          />
         </table>
       </div>
     );
   }
 }
+
 
 export default Table

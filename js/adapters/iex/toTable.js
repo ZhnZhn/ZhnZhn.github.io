@@ -8,6 +8,7 @@ exports["default"] = void 0;
 var _toTableFn = _interopRequireDefault(require("../toTableFn"));
 
 var crRows = _toTableFn["default"].crRows;
+var ID_PROP_NAME = 'symbol';
 var HEADERS = [{
   name: 'Symbol',
   pn: 'symbol',
@@ -31,12 +32,22 @@ var HEADERS = [{
   pn: 'latestPrice',
   isToN: true,
   isToFixed: true
-}
-/*,{
- name: 'Company',
- pn: 'companyName',
-}*/
-];
+}, {
+  isHide: true,
+  name: 'peRatio',
+  pn: 'peRatio',
+  isToN: true,
+  isToFixed: true,
+  isR: true
+}, {
+  isHide: true,
+  name: 'Company',
+  pn: 'companyName'
+}, {
+  isHide: true,
+  name: 'Exchange',
+  pn: 'primaryExchange'
+}];
 
 var _crTitle = function _crTitle(title, json) {
   var _suffix = '';
@@ -64,14 +75,8 @@ var toTable = {
       id: key,
       title: _crTitle(title, json),
       headers: HEADERS,
-
-      /*
-      tableFn: {
-        numberFormat,
-        valueToHref
-      },
-      */
-      rows: crRows(HEADERS, json),
+      rows: crRows(HEADERS, json, ID_PROP_NAME),
+      dataSource: 'IEX Cloud',
       zhCompType: 'TABLE',
       zhConfig: {
         id: key,

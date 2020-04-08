@@ -1,4 +1,6 @@
 
+import S from './Style'
+
 const _isNotNumber = v => Number.isNaN(v) || v == null;
 
 const _crThAriaLabel = (name, order) => {
@@ -18,9 +20,9 @@ const tableFn = {
     return style;
   },
 
-  toFormatValue: ({ TOKEN_NAN, h, v, fn }) => {
+  toFormatValue: ({ h, v, fn }) => {
     if (h.isR && _isNotNumber(v)) {
-      return TOKEN_NAN;
+      return S.TOKEN_NAN;
     }
     if (h.isF && typeof fn === 'function') {
       return fn(v);

@@ -232,13 +232,13 @@ class ChartContainer extends Component {
            : false ;
      return configs.map((config, index) => {
        const { zhConfig={} } = config
-           , { id } = zhConfig;
+           , { id, zhCompType } = zhConfig;
        return ItemFactory.createItem({
           store,
           config, index,
           option: { chartType },
           props: {
-            ref: this._refChart.bind(null, index),
+            ref: !zhCompType ? this._refChart.bind(null, index) : void 0,
             onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
             isAdminMode: _isAdminMode
           }

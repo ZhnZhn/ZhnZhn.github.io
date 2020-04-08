@@ -22,7 +22,8 @@ var S = {
 
 var ShowHide = function ShowHide(_ref) {
   var isShow = _ref.isShow,
-      withoutAnimation = _ref.withoutAnimation,
+      _ref$withoutAnimation = _ref.withoutAnimation,
+      withoutAnimation = _ref$withoutAnimation === void 0 ? false : _ref$withoutAnimation,
       className = _ref.className,
       style = _ref.style,
       children = _ref.children;

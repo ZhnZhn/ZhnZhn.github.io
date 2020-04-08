@@ -20,6 +20,7 @@ const _arrangeBy = (titles, configs, idPropName) => {
 };
 
 const MiniCharts = ({
+  withoutAnimation,
   configs, idPropName='id',
   ids,
   absComp,
@@ -40,8 +41,12 @@ const MiniCharts = ({
   return (
     <div>
         { _configs.map(c => (
-            <A.ShowHide isShow={true} key={c[idPropName]}>
-              <A.HighchartWrapper                  
+            <A.ShowHide
+               key={c[idPropName]}
+               isShow={true}
+               withoutAnimation={withoutAnimation}
+             >
+              <A.HighchartWrapper
                   config={c.config}
                   absComp={absComp}
                   onLoaded={onLoaded}
@@ -56,6 +61,7 @@ const MiniCharts = ({
 
 /*
 MiniCharts.propTypes = {
+  withoutAnimation: PropTypes.bool,
   configs: PropTypes.arrayOf(
     PropTypes.shape({
       config: PropTypes.object

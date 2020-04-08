@@ -1,6 +1,7 @@
 import toTableFn from '../toTableFn'
 
 const { crRows } = toTableFn;
+const ID_PROP_NAME = 'symbol'
 const HEADERS = [{
   name: 'Symbol',
   pn: 'symbol',
@@ -22,10 +23,22 @@ const HEADERS = [{
   pn: 'latestPrice',
   isToN: true,
   isToFixed: true
-}/*,{
+},{
+  isHide: true,
+  name: 'peRatio',
+  pn: 'peRatio',
+  isToN: true,
+  isToFixed: true,
+  isR: true
+},{
+  isHide: true,
   name: 'Company',
   pn: 'companyName',
-}*/];
+},{
+  isHide: true,
+  name: 'Exchange',
+  pn: 'primaryExchange',
+}];
 
 const _crTitle = (title, json) => {
   let _suffix = '';
@@ -50,13 +63,8 @@ const toTable = {
       id: key,
       title: _crTitle(title, json),
       headers: HEADERS,
-      /*
-      tableFn: {
-        numberFormat,
-        valueToHref
-      },
-      */
-      rows: crRows(HEADERS, json),
+      rows: crRows(HEADERS, json, ID_PROP_NAME),
+      dataSource: 'IEX Cloud',
       zhCompType: 'TABLE',
       zhConfig: {
         id: key, key

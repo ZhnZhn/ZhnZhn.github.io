@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 var S = {
+  TOKEN_NAN: '―',
   CL_LINK: "native-link",
   CL_GRID: "grid",
   WRAPPER_DIV: {
@@ -23,6 +24,7 @@ var S = {
     borderTop: '3px solid transparent',
     borderBottom: '3px solid transparent',
     pointerEvents: 'auto',
+    userSelect: 'none',
     cursor: 'pointer'
   },
   TH_UP: {

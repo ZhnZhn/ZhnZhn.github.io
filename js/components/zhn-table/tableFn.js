@@ -1,7 +1,11 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _Style = _interopRequireDefault(require("./Style"));
 
 var _isNotNumber = function _isNotNumber(v) {
   return Number.isNaN(v) || v == null;
@@ -29,13 +33,12 @@ var tableFn = {
     return style;
   },
   toFormatValue: function toFormatValue(_ref2) {
-    var TOKEN_NAN = _ref2.TOKEN_NAN,
-        h = _ref2.h,
+    var h = _ref2.h,
         v = _ref2.v,
         fn = _ref2.fn;
 
     if (h.isR && _isNotNumber(v)) {
-      return TOKEN_NAN;
+      return _Style["default"].TOKEN_NAN;
     }
 
     if (h.isF && typeof fn === 'function') {

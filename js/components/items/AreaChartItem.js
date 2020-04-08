@@ -436,11 +436,13 @@ function (_Component) {
       legend: legend,
       onClickItem: this._handleToggleSeria
     }), _react["default"].createElement(_MiniCharts["default"], {
+      withoutAnimation: _withoutAnimation,
       configs: mfiConfigs,
       absComp: this._dataSourceEl,
       onLoaded: this._handleLoadedMiniChart,
       onWillUnLoaded: this._handleUnLoadedMiniChart
     }), _react["default"].createElement(_MiniCharts["default"], {
+      withoutAnimation: _withoutAnimation,
       configs: zhMiniConfigs,
       idPropName: "btTitle",
       ids: miniTitles,

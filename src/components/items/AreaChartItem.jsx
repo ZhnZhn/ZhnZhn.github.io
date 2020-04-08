@@ -379,12 +379,14 @@ class AreaChartItem extends Component {
              onClickItem={this._handleToggleSeria}
            />
            <MiniCharts
+              withoutAnimation={_withoutAnimation}
               configs={mfiConfigs}
               absComp={this._dataSourceEl}
               onLoaded={this._handleLoadedMiniChart}
               onWillUnLoaded={this._handleUnLoadedMiniChart}
            />
            <MiniCharts
+              withoutAnimation={_withoutAnimation}
               configs={zhMiniConfigs}
               idPropName="btTitle"
               ids={miniTitles}

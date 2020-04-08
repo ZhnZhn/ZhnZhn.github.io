@@ -22,7 +22,7 @@ var _getCellValue = function _getCellValue(r, h) {
 };
 
 var toTableFn = {
-  crRows: function crRows(headers, rows) {
+  crRows: function crRows(headers, rows, idPropName) {
     if (headers === void 0) {
       headers = [];
     }
@@ -31,14 +31,17 @@ var toTableFn = {
       rows = [];
     }
 
-    var _rows = rows.map(function (r) {
+    if (idPropName === void 0) {
+      idPropName = 'id';
+    }
+
+    return rows.map(function (r) {
       headers.forEach(function (h) {
         r[h.pn] = _getCellValue(r, h);
       });
+      r.id = r[idPropName];
       return r;
     });
-
-    return _rows;
   }
 };
 var _default = toTableFn;

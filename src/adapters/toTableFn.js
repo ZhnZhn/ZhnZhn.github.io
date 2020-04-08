@@ -19,14 +19,14 @@ const _getCellValue = (r, h) => {
 };
 
 const toTableFn = {
-  crRows: (headers=[], rows=[]) => {
-    const _rows = rows.map(r => {
+  crRows: (headers=[], rows=[], idPropName='id') => {
+    return rows.map(r => {
       headers.forEach(h => {
         r[h.pn] = _getCellValue(r, h);
       })
+      r.id = r[idPropName]
       return r;
-    })
-    return _rows;
+    });
   }
 };
 

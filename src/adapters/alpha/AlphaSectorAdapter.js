@@ -4,7 +4,14 @@ const C = {
   PN_MD: 'Meta Data',
   PN_LR: 'Last Refreshed',
   TITLE: 'S&P 500 Sector Performances',
-  ID: 'alp_perf'
+  ID: 'alp_perf',
+  DATA_SOURCE: 'Alpha Vantage'
+};
+
+const S = {
+  DS: {
+    paddingTop: 6
+  }
 };
 
 const M_PERIOD = [
@@ -36,7 +43,7 @@ const _isInArray = function(arr=[], value){
 
 const _initRows = (sectors) => {
   return sectors.map(str => {
-    return { Sector: str };
+    return { id: str, Sector: str };
   })
 }
 
@@ -132,7 +139,7 @@ const _crTitle = (json) => {
 }
 
 const AlphaSectorAdapter = {
-  toConfig(json, option) {
+  toConfig(json, option) {    
     const id = C.ID
         , { mRows, yRows } = _crConfig(json)
         , config = {
@@ -146,15 +153,18 @@ const AlphaSectorAdapter = {
             title: _crTitle(json),
             headers: M_HEADERS,
             rows: mRows,
+            dataSource: C.DATA_SOURCE,
+            dsStyle: S.DS
           },
           y: {
             id: `${id}_y`,
             title: `${C.TITLE} Yearly`,
             headers: Y_HEADERS,
             rows: yRows,
+            dataSource: C.DATA_SOURCE,
+            dsStyle: S.DS
           }
         };
-
     return { config };
   },
 

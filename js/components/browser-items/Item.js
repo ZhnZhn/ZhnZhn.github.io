@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
-var STYLE = {
+var S = {
   ITEM_DIV: {
     position: 'relative',
     minWidth: 350,
@@ -37,21 +37,24 @@ var Item = function Item(_ref) {
       onClickItem = _ref.onClickItem,
       children = _ref.children;
 
+  /*eslint-disable react-hooks/exhaustive-deps*/
   var _hKeyDown = (0, _react.useCallback)(function (evt) {
     if ((0, _isKeyEnter["default"])(evt)) {
       onClickItem(item);
     }
   }, []);
+  /*eslint-enable react-hooks/exhaustive-deps*/
+
 
   return _react["default"].createElement("div", {
     role: "menuitem",
-    tabindex: "0",
+    tabIndex: "0",
     className: className,
-    style: STYLE.ITEM_DIV,
+    style: S.ITEM_DIV,
     onClick: onClickItem.bind(null, item),
     onKeyDown: _hKeyDown
   }, _react["default"].createElement("span", {
-    style: STYLE.ITEM_SPAN
+    style: S.ITEM_SPAN
   }, caption), children);
 };
 

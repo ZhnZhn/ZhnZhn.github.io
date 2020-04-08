@@ -7,6 +7,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -33,6 +35,12 @@ var S = {
   SHOW_HIDE: {
     paddingTop: 8,
     paddingBottom: 8
+  },
+  DATA_SOURCE: {
+    paddingTop: 2,
+    paddingLeft: 12,
+    color: '#909090',
+    fontSize: '11px'
   }
 };
 
@@ -76,7 +84,9 @@ function (_Component) {
         headers = config.headers,
         rows = config.rows,
         tableFn = config.tableFn,
-        _gridId = "coins_" + id,
+        dataSource = config.dataSource,
+        dsStyle = config.dsStyle,
+        _gridId = "tb_" + id,
         isOpen = this.state.isOpen;
 
     return _react["default"].createElement("div", {
@@ -97,7 +107,9 @@ function (_Component) {
       headers: headers,
       rows: rows,
       tableFn: tableFn
-    })));
+    }), dataSource && _react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.DATA_SOURCE, {}, dsStyle)
+    }, dataSource)));
   };
 
   return TableItem;

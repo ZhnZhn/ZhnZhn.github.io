@@ -20,6 +20,12 @@ const S = {
   SHOW_HIDE: {
     paddingTop: 8,
     paddingBottom: 8
+  },
+  DATA_SOURCE: {
+    paddingTop: 2,
+    paddingLeft: 12,
+    color: '#909090',
+    fontSize: '11px'
   }
 };
 
@@ -36,9 +42,12 @@ class TableItem extends Component {
 
   render() {
     const { thMoreStyle, config, onCloseItem } = this.props
-        , { id, title, headers, rows, tableFn } = config
-        , _gridId = `coins_${id}`
-        , { isOpen } = this.state;
+    , {
+        id, title, headers, rows, tableFn,
+        dataSource, dsStyle
+      } = config
+    , _gridId = `tb_${id}`
+    , { isOpen } = this.state;
     return (
       <div style={S.ROOT}>
         <ItemHeader
@@ -60,6 +69,9 @@ class TableItem extends Component {
             rows={rows}
             tableFn={tableFn}
           />
+          {dataSource && <div
+             style={{...S.DATA_SOURCE, ...dsStyle }}>{dataSource}
+           </div>}
         </ShowHide>
       </div>
     );

@@ -59,7 +59,14 @@ const WtdApi = {
   checkResponse(json, option){
     const { dfType }  = option
     , _checkResponse = _rCheckResponse[dfType] || _rCheckResponse.DF
-    return !!_checkResponse(json);
+    , _isCorrect = !!_checkResponse(json);
+    if (!_isCorrect) {
+      throw {
+        errCaption: "Response Error",
+        message: "Response Empty"
+      };
+    }
+    return _isCorrect;
   }
 }
 
