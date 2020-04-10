@@ -8,12 +8,13 @@ var _Type = require("../../constants/Type");
 var _apiTitle2;
 
 var _settings = {};
-var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.WTD, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR, _Type.LoadType.IEX];
+var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR, _Type.LoadType.IEX];
 var _withProxy = [_Type.LoadType.FAO, _Type.LoadType.CRC];
+var API_TITLE_AV = 'Alpha Vantage';
 
 var _apiTitle = (_apiTitle2 = {
   DF: 'API'
-}, _apiTitle2[_Type.LoadType.B] = 'Barchart Market Data', _apiTitle2[_Type.LoadType.AL] = 'Alpha Vantage', _apiTitle2[_Type.LoadType.AL_S] = 'Alpha Vantage', _apiTitle2[_Type.LoadType.AL_I] = 'Alpha Vantage', _apiTitle2[_Type.LoadType.WTD] = 'World Trading Data', _apiTitle2[_Type.LoadType.BEA] = 'BEA', _apiTitle2[_Type.LoadType.EIA] = 'EIA', _apiTitle2[_Type.LoadType.INTR] = 'Intrinio', _apiTitle2);
+}, _apiTitle2[_Type.LoadType.B] = 'Barchart Market Data', _apiTitle2[_Type.LoadType.AL] = API_TITLE_AV, _apiTitle2[_Type.LoadType.AL_S] = API_TITLE_AV, _apiTitle2[_Type.LoadType.AL_I] = API_TITLE_AV, _apiTitle2[_Type.LoadType.BEA] = 'BEA', _apiTitle2[_Type.LoadType.EIA] = 'EIA', _apiTitle2[_Type.LoadType.INTR] = 'Intrinio', _apiTitle2);
 
 var _isUndef = function _isUndef(value) {
   return typeof value === 'undefined';
@@ -35,7 +36,6 @@ var SettingSlice = {
       key5: this.fSetKey([_Type.LoadType.INTR]),
       key6: this.fSetKey([_Type.LoadType.IEX]),
       key7: this.fSetKey([_Type.LoadType.Q]),
-      key8: this.fSetKey([_Type.LoadType.WTD]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this, _Type.LoadType.FAO),
       isAdminMode: this.isAdminMode.bind(this),

@@ -22,7 +22,7 @@ var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 
 //import PropTypes from 'prop-types'
-var MAX_KEY = 9;
+var MAX_KEY = 8;
 var S = {
   BT_SET: {
     marginLeft: 8,
@@ -94,10 +94,6 @@ function (_Component) {
 
     _this._ref7 = function (n) {
       return _this.iComp7 = n;
-    };
-
-    _this._ref8 = function (n) {
-      return _this.iComp8 = n;
     };
 
     var data = props.data;
@@ -177,14 +173,6 @@ function (_Component) {
       name: "quandl",
       placeholder: "Quandl API Key",
       onEnter: this._setKey7
-    }), _react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref8,
-      titleStyle: titleStyle,
-      title: "WTD:",
-      name: "wtd",
-      placeholder: "World Trading Data API Key",
-      maxLength: "60",
-      onEnter: this._setKey8
     }), _react["default"].createElement(_RowButtons["default"], {
       btStyle: btStyle,
       onClose: onClose

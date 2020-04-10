@@ -46,7 +46,7 @@ const ST = {
 const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 21):"
+     caption="Data Providers (All 20):"
      captionStyle={ocCaptionStyle}
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM }}
      childStyle={ST.ROOT_CHILD}
@@ -98,7 +98,7 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
       </p>
       <OpenClose
-        caption="(8) Required API key:"
+        caption="(7) Required API key:"
         captionStyle={ocCaptionStyle}
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
@@ -120,9 +120,6 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Iex />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Wtd/>
         </span>
         <span style={S.PROVIDER}>
           <Link.Bea/>

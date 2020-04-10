@@ -71,7 +71,6 @@ var LoadType = {
   AL_S: 'AL_S',
   AL_I: 'AL_I',
   IEX: 'IEX',
-  WTD: 'WTD',
   FMP: 'FMP',
   QCT: 'QCT',
   DBN: 'DBN',
@@ -90,15 +89,12 @@ var LoadType = {
   INTR: 'INTR',
   CRC: 'CRC',
   CG: 'CG',
-  //CM: 'CM',
-  //CMC: 'CMC',
   WL: 'WL'
 };
 exports.LoadType = LoadType;
 var CompItemType = {
   CHART_AREA: 'CHART_AREA',
   EUROSTAT_MAP: 'EUROSTAT_MAP',
-  //SECTOR: 'SECTOR',
   COIN_INFO: 'COIN_INFO',
   TABLE: 'TABLE',
   ALPHA_PERF: 'ALPHA_PERF',

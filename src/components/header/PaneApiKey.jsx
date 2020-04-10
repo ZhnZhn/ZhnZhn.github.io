@@ -7,7 +7,7 @@ import RowSecret from '../dialogs/RowSecret'
 import FlatButton from '../zhn-m/FlatButton'
 import RowButtons from './RowButtons'
 
-const MAX_KEY = 9;
+const MAX_KEY = 8;
 
 const S = {
   BT_SET: {
@@ -60,7 +60,6 @@ class PaneApiKey extends Component {
   _ref5 = n => this.iComp5 = n
   _ref6 = n => this.iComp6 = n
   _ref7 = n => this.iComp7 = n
-  _ref8 = n => this.iComp8 = n
 
   render(){
     const {
@@ -132,15 +131,6 @@ class PaneApiKey extends Component {
            name="quandl"
            placeholder="Quandl API Key"
            onEnter={this._setKey7}
-        />
-        <RowSecret
-           ref={this._ref8}
-           titleStyle={titleStyle}
-           title="WTD:"
-           name="wtd"
-           placeholder="World Trading Data API Key"
-           maxLength="60"
-           onEnter={this._setKey8}
         />
         <RowButtons btStyle={btStyle} onClose={onClose}>
           <FlatButton

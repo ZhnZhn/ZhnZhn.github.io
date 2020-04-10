@@ -2,31 +2,31 @@
 export const BrowserType = {
    STOCK_MARKETS: 'SM',
 
-   EUROSTAT : 'ES',
+   EUROSTAT: 'ES',
    UN_COMTRADE: 'UN',
    FAOSTAT: 'FAO',
    WORLD_BANK: 'WB',
 
-   FRANCE_STATISTICS : 'FS',
+   FRANCE_STATISTICS: 'FS',
    NORWAY_STATISTICS: 'NST',
    NORWAY_STAT_ALL: 'NST_ALL',
    SWEDEN_STAT: 'SWS',
    SWEDEN_STAT_ALL: 'SWS_ALL',
    FINLAND_STAT_ALL: 'SFL',
 
-   ECONOMIC : 'QE',
+   ECONOMIC: 'QE',
 
-   NYSE_STOCKS : 'NS',
-   NASDAQ_STOCKS : 'NQS',
+   NYSE_STOCKS: 'NS',
+   NASDAQ_STOCKS: 'NQS',
 
-   STOCKS_BY_SECTORS : 'STOCKS_BY_SECTORS',
+   STOCKS_BY_SECTORS: 'STOCKS_BY_SECTORS',
 
    DB_NOMICS: 'DBN',
    US_ECONOMY: 'USAE',
 
    BLOCKCHAIN: 'BC',
 
-   WATCH_LIST : 'WL'
+   WATCH_LIST: 'WL'
 }
 
 export const Direction = {
@@ -37,20 +37,20 @@ export const Direction = {
 }
 
 export const ModalDialog = {
-  ASK : 'ASK',
+  ASK: 'ASK',
   RELOAD: 'RELOAD',
-  INFO : 'info',
-  ALERT : 'alert',
-  DESCRIPTION : 'DESCRIPTION',
-  SETTINGS : 'settings',
-  CUSTOMIZE_EXPORT : 'CUSTOMIZE_EXPORT',
+  INFO: 'info',
+  ALERT: 'alert',
+  DESCRIPTION: 'DESCRIPTION',
+  SETTINGS: 'settings',
+  CUSTOMIZE_EXPORT: 'CUSTOMIZE_EXPORT',
   COLUMN_RANGE: 'COLUMN_RANGE',
-  ADD_TO_WATCH : 'addToWatch',
-  LOAD_ITEM : 'loadItem',
-  US_STOCK_BY_SECTOR : 'US_STOCK_BY_SECTOR',
-  STOCKS_BY_SECTOR : 'STOCKS_BY_SECTOR',
-  EDIT_WATCH_GROUP : 'editWatchGroup',
-  EDIT_WATCH_LIST : 'editWatchList',
+  ADD_TO_WATCH: 'addToWatch',
+  LOAD_ITEM: 'loadItem',
+  US_STOCK_BY_SECTOR: 'US_STOCK_BY_SECTOR',
+  STOCKS_BY_SECTOR: 'STOCKS_BY_SECTOR',
+  EDIT_WATCH_GROUP: 'editWatchGroup',
+  EDIT_WATCH_LIST: 'editWatchList',
   PASTE_TO: 'pasteTo',
   ZOOM: 'zoom'
 }
@@ -76,7 +76,6 @@ export const LoadType = {
   AL_S: 'AL_S',
   AL_I: 'AL_I',
   IEX: 'IEX',
-  WTD: 'WTD',
   FMP: 'FMP',
   QCT: 'QCT',
   DBN: 'DBN',
@@ -95,15 +94,12 @@ export const LoadType = {
   INTR: 'INTR',
   CRC: 'CRC',
   CG: 'CG',
-  //CM: 'CM',
-  //CMC: 'CMC',
   WL: 'WL'
 }
 
 export const CompItemType = {
-  CHART_AREA : 'CHART_AREA',
-  EUROSTAT_MAP : 'EUROSTAT_MAP',
-  //SECTOR: 'SECTOR',
+  CHART_AREA: 'CHART_AREA',
+  EUROSTAT_MAP: 'EUROSTAT_MAP',
   COIN_INFO: 'COIN_INFO',
   TABLE: 'TABLE',
   ALPHA_PERF: 'ALPHA_PERF',

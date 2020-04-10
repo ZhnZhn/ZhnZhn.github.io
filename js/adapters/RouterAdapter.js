@@ -27,8 +27,6 @@ var _Barchart = _interopRequireDefault(require("./barchart/Barchart"));
 
 var _Iex = _interopRequireDefault(require("./iex/Iex"));
 
-var _Wtd = _interopRequireDefault(require("./wtd/Wtd"));
-
 var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
 
 var _Insee = _interopRequireDefault(require("./insee/Insee"));
@@ -62,7 +60,6 @@ var RouterAdapter = (0, _extends2["default"])({
 }, _AlphaVantage["default"], {
   Barchart: _Barchart["default"],
   Iex: _Iex["default"],
-  Wtd: _Wtd["default"],
   Fmp: _Fmp["default"],
   Insee: _Insee["default"],
   Bea: _Bea["default"],

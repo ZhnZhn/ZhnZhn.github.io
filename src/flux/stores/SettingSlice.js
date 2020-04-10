@@ -2,20 +2,20 @@ import { LoadType as LT } from '../../constants/Type'
 
 const _settings = {};
 const _withApiKey = [
-  LT.B, LT.AL, LT.AL_S, LT.AL_I, LT.WTD,
+  LT.B, LT.AL, LT.AL_S, LT.AL_I,
   LT.BEA, LT.EIA, LT.INTR, LT.IEX
 ];
 const _withProxy = [
   LT.FAO,
   LT.CRC
 ];
+const API_TITLE_AV = 'Alpha Vantage';
 const _apiTitle = {
   DF: 'API',
   [LT.B]: 'Barchart Market Data',
-  [LT.AL]: 'Alpha Vantage',
-  [LT.AL_S]: 'Alpha Vantage',
-  [LT.AL_I]: 'Alpha Vantage',
-  [LT.WTD]: 'World Trading Data',
+  [LT.AL]: API_TITLE_AV,
+  [LT.AL_S]: API_TITLE_AV,
+  [LT.AL_I]: API_TITLE_AV,
   [LT.BEA]: 'BEA',
   [LT.EIA]: 'EIA',
   [LT.INTR]: 'Intrinio'
@@ -40,7 +40,6 @@ const SettingSlice = {
       key5: this.fSetKey([LT.INTR]),
       key6: this.fSetKey([LT.IEX]),
       key7: this.fSetKey([LT.Q]),
-      key8: this.fSetKey([LT.WTD]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this, LT.FAO),
       isAdminMode: this.isAdminMode.bind(this),
