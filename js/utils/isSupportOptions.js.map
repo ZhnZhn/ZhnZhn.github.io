@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../src/utils/isSupportOptions.js"],"names":["_isUndef","v","_isSupportOptions","onceOptions","once","isSupportOptions","window","addEventListener","removeEventListener","err"],"mappings":";;;;;AACA,IAAMA,QAAQ,GAAG,SAAXA,QAAW,CAAAC,CAAC;AAAA,SAAI,OAAOA,CAAP,KAAa,WAAjB;AAAA,CAAlB;;AACA,IAAIC,iBAAJ;;AACA,IAAMC,WAAW,GAAG;AAChB,MAAIC,IAAJ,GAAU;AACRF,IAAAA,iBAAiB,GAAG,IAApB;AACA,WAAO,IAAP;AACD;;AAJe,CAApB;;AAOA,IAAMG,gBAAgB,GAAG,SAAnBA,gBAAmB,GAAM;AAC7B,MAAI,CAACL,QAAQ,CAACK,gBAAD,CAAb,EAAgC;AAC9B,WAAOH,iBAAP;AACD;;AACD,MAAI;AACFI,IAAAA,MAAM,CAACC,gBAAP,CAAwB,MAAxB,EAAgCJ,WAAhC,EAA6CA,WAA7C;AACAG,IAAAA,MAAM,CAACE,mBAAP,CAA2B,MAA3B,EAAmCL,WAAnC,EAAgDA,WAAhD;AACD,GAHD,CAGE,OAAMM,GAAN,EAAW;AACXP,IAAAA,iBAAiB,GAAG,KAApB;AACD;;AACD,SAAOA,iBAAP;AACD,CAXD;;eAaeG,gB","sourcesContent":["\r\nconst _isUndef = v => typeof v === 'undefined';\r\nlet _isSupportOptions;\r\nconst onceOptions = {\r\n    get once(){\r\n      _isSupportOptions = true\r\n      return true;\r\n    }\r\n};\r\n\r\nconst isSupportOptions = () => {\r\n  if (!_isUndef(isSupportOptions)){\r\n    return _isSupportOptions;\r\n  }\r\n  try {\r\n    window.addEventListener('test', onceOptions, onceOptions)\r\n    window.removeEventListener('test', onceOptions, onceOptions)\r\n  } catch(err) {\r\n    _isSupportOptions = false\r\n  }\r\n  return _isSupportOptions;\r\n};\r\n\r\nexport default isSupportOptions\r\n"],"file":"isSupportOptions.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/isSupportOptions.js"
+ ],
+ "file": "../../src/utils/isSupportOptions.js",
+ "names": [
+  "_isBool",
+  "v",
+  "_isSupportOptions",
+  "onceOptions",
+  "once",
+  "isSupportOptions",
+  "window",
+  "addEventListener",
+  "removeEventListener",
+  "err"
+ ],
+ "mappings": ";;;;;AACA,IAAMA,OAAO,GAAG,SAAVA,OAAU,CAAAC,CAAC;AAAA,SAAI,OAAOA,CAAP,KAAa,SAAjB;AAAA,CAAjB;;AACA,IAAIC,iBAAJ;;AACA,IAAMC,WAAW,GAAG;AAClB,MAAIC,IAAJ,GAAU;AACRF,IAAAA,iBAAiB,GAAG,IAApB;AACA,WAAO,IAAP;AACD;;AAJiB,CAApB;;AAOA,IAAMG,gBAAgB,GAAG,SAAnBA,gBAAmB,GAAM;AAC7B,MAAIL,OAAO,CAACE,iBAAD,CAAX,EAA+B;AAC7B,WAAOA,iBAAP;AACD;;AACD,MAAI;AACFI,IAAAA,MAAM,CAACC,gBAAP,CAAwB,MAAxB,EAAgCJ,WAAhC,EAA6CA,WAA7C;AACAG,IAAAA,MAAM,CAACE,mBAAP,CAA2B,MAA3B,EAAmCL,WAAnC,EAAgDA,WAAhD;AACD,GAHD,CAGE,OAAMM,GAAN,EAAW;AACXP,IAAAA,iBAAiB,GAAG,KAApB;AACD;;AACD,SAAOA,iBAAP;AACD,CAXD;;eAaeG,gB"
+}

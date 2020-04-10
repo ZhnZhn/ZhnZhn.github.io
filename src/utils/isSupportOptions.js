@@ -1,15 +1,15 @@
 
-const _isUndef = v => typeof v === 'undefined';
+const _isBool = v => typeof v === 'boolean';
 let _isSupportOptions;
 const onceOptions = {
-    get once(){
-      _isSupportOptions = true
-      return true;
-    }
+  get once(){
+    _isSupportOptions = true
+    return true;
+  }
 };
 
 const isSupportOptions = () => {
-  if (!_isUndef(isSupportOptions)){
+  if (_isBool(_isSupportOptions)){
     return _isSupportOptions;
   }
   try {

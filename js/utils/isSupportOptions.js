@@ -3,8 +3,8 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _isUndef = function _isUndef(v) {
-  return typeof v === 'undefined';
+var _isBool = function _isBool(v) {
+  return typeof v === 'boolean';
 };
 
 var _isSupportOptions;
@@ -18,7 +18,7 @@ var onceOptions = {
 };
 
 var isSupportOptions = function isSupportOptions() {
-  if (!_isUndef(isSupportOptions)) {
+  if (_isBool(_isSupportOptions)) {
     return _isSupportOptions;
   }
 
