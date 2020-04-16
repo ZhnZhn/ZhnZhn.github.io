@@ -4,6 +4,7 @@ import mathFn from './mathFn'
 import fns from './seriaHelperFn'
 
 const {
+  isNumber,
   isPointArr,
   fGetY,
   getZeroCountFromStart,
@@ -11,13 +12,10 @@ const {
 } = fns
 
 const _isArr = Array.isArray;
-const _isNumber = n => typeof n === 'number'
-  && (n - n === 0);
-
 
 const _calcY = (yPrev, yNext) => {
 
-  if (!_isNumber(yPrev) || !_isNumber(yNext)) {
+  if (!isNumber(yPrev) || !isNumber(yNext)) {
     return null;
   }
 
@@ -42,7 +40,7 @@ const _calcY = (yPrev, yNext) => {
 const fn = {
   growthRate: (d, rt=1) => {
     const _rt = parseInt(rt, 10);
-    if ( !(_isArr(d) && _isNumber(_rt)) ) {
+    if ( !(_isArr(d) && isNumber(_rt)) ) {
       return [];
     }
 
@@ -70,7 +68,7 @@ const fn = {
     const _d = []
     , _max = d.length
     , _y0 = d[0].y;
-    if (!_isNumber(_y0) || _y0 === 0 || _max === 0) {
+    if (!isNumber(_y0) || _y0 === 0 || _max === 0) {
       return [];
     }
     for(let i=0; i<_max; i++) {
@@ -92,9 +90,9 @@ const fn = {
       return undefined;
     }
     let minY = Number.POSITIVE_INFINITY;
-    const _fn = _isNumber(data[0].y)
-      ? (p, min) => _isNumber(p.y) && p.y<min ? p.y : min
-      : (arr, min) => _isNumber(arr[1]) && arr[1]<min ? arr[1] : min;
+    const _fn = isNumber(data[0].y)
+      ? (p, min) => isNumber(p.y) && p.y<min ? p.y : min
+      : (arr, min) => isNumber(arr[1]) && arr[1]<min ? arr[1] : min;
     for (let i=0, max=data.length; i<max; i++){
       minY = _fn(data[i], minY)
     }
@@ -107,9 +105,9 @@ const fn = {
       return undefined;
     }
     let maxY = Number.NEGATIVE_INFINITY;
-    const _fn = _isNumber(data[0].y)
-      ? (p, max) => _isNumber(p.y) && p.y>max ? p.y : max
-      : (arr, max) => _isNumber(arr[1]) && arr[1]>max ? arr[1] : max;
+    const _fn = isNumber(data[0].y)
+      ? (p, max) => isNumber(p.y) && p.y>max ? p.y : max
+      : (arr, max) => isNumber(arr[1]) && arr[1]>max ? arr[1] : max;
     for (let i=0, max=data.length; i<max; i++){
       maxY = _fn(data[i], maxY)
     }
@@ -141,7 +139,7 @@ const fn = {
     }
     let _sum = Big(0);
     for (const p of data) {
-      if (_isNumber(p[1])) {
+      if (isNumber(p[1])) {
         _sum = _sum.add(p[1])
       }
     }

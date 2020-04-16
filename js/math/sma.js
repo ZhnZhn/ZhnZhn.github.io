@@ -7,45 +7,34 @@ exports["default"] = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _isNumber = function _isNumber(v) {
-  return typeof v === 'number' && !Number.isNaN(v);
-};
+var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
 
-var _isUndef = function _isUndef(v) {
-  return typeof v === 'undefined';
-};
+var isNumber = _seriaHelperFn["default"].isNumber,
+    crPointGetter = _seriaHelperFn["default"].crPointGetter;
 
-var _crPointGetter = function _crPointGetter(data) {
-  var getX = _isUndef(data[0].x) ? function (p) {
-    return p[0];
-  } : function (p) {
-    return p.x;
-  },
-      getY = _isUndef(data[0].y) ? function (p) {
-    return p[1];
-  } : function (p) {
-    return p.y;
-  };
-  return {
-    getX: getX,
-    getY: getY
-  };
+var _crPeriod = function _crPeriod(period, plus) {
+  var _delta = isNumber(plus) ? 1 - plus : 1;
+
+  return parseFloat((0, _big["default"])(period).minus(_delta).toFixed(0));
 };
 
 var sma = function sma(data, period, plus) {
+  if (period === void 0) {
+    period = 1;
+  }
+
   var dataSma = [];
 
   if (!Array.isArray(data) || data.length === 0) {
     return dataSma;
   }
 
-  var _period = plus ? parseFloat((0, _big["default"])(period).plus(plus).minus(1).toFixed(0)) : parseFloat((0, _big["default"])(period).minus(1).toFixed(0));
-
-  var _crPointGetter2 = _crPointGetter(data),
-      getX = _crPointGetter2.getX,
-      getY = _crPointGetter2.getY,
+  var _period = _crPeriod(period, plus),
+      _crPointGetter = crPointGetter(data),
+      getX = _crPointGetter.getX,
+      getY = _crPointGetter.getY,
       _data = data.filter(function (p) {
-    return _isNumber(getY(p));
+    return isNumber(getY(p));
   }),
       max = _data.length;
 

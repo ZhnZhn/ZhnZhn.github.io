@@ -2,24 +2,48 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-var _isArr = Array.isArray;
 
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && n - n === 0;
+var _isArr = Array.isArray,
+    _isNumber = function _isNumber(n) {
+  return typeof n === "number" && n - n === 0;
+},
+    _isUndef = function _isUndef(v) {
+  return typeof v === "undefined";
 };
 
 var seriaHelperFn = {
+  isNumber: _isNumber,
   isPointArr: function isPointArr(data) {
     return _isArr(data) && data.length > 1 && _isArr(data[0]);
+  },
+  crPointGetter: function crPointGetter(data) {
+    var getX = _isUndef(data[0].x) ? function (p) {
+      return p[0];
+    } : function (p) {
+      return p.x;
+    },
+        getY = _isUndef(data[0].y) ? function (p) {
+      return p[1];
+    } : function (p) {
+      return p.y;
+    };
+    return {
+      getX: getX,
+      getY: getY
+    };
   },
   fGetY: function fGetY(point) {
     if (!point) {
       return;
-    } else if (_isArr(point)) {
+    }
+
+    if (_isArr(point)) {
       return function (p) {
         return p[1];
       };
-    } else if (point && _isNumber(point.y)) {
+    }
+
+    if (_isNumber(point.y)) {
       return function (p) {
         return p.y;
       };

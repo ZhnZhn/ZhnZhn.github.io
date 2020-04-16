@@ -1,18 +1,31 @@
 
-const _isArr = Array.isArray;
-const _isNumber = n => typeof n === 'number'
-  && (n - n === 0);
+const _isArr = Array.isArray
+, _isNumber = n => typeof n === "number"
+  && (n-n === 0)
+, _isUndef = v => typeof v === "undefined";
 
 const seriaHelperFn = {
+  isNumber: _isNumber,
   isPointArr: data => _isArr(data)
     && data.length > 1
     && _isArr(data[0]),
 
+  crPointGetter: data => {
+    const getX = _isUndef(data[0].x)
+      ? p => p[0]
+      : p => p.x
+    , getY = _isUndef(data[0].y)
+       ? p => p[1]
+       : p => p.y;
+    return { getX, getY };
+  },
+
   fGetY: (point) => {
     if (!point) { return; }
-    else if (_isArr(point)) {
+    if (_isArr(point)) {
       return p => p[1];
-    } else if (point && _isNumber(point.y)) {
+    }
+    if (_isNumber(point.y)) {
       return p => p.y;
     }
     return;

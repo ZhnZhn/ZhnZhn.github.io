@@ -11,18 +11,15 @@ var _mathFn = _interopRequireDefault(require("./mathFn"));
 
 var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
 
-var isPointArr = _seriaHelperFn["default"].isPointArr,
+var isNumber = _seriaHelperFn["default"].isNumber,
+    isPointArr = _seriaHelperFn["default"].isPointArr,
     fGetY = _seriaHelperFn["default"].fGetY,
     getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
     getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
 var _isArr = Array.isArray;
 
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && n - n === 0;
-};
-
 var _calcY = function _calcY(yPrev, yNext) {
-  if (!_isNumber(yPrev) || !_isNumber(yNext)) {
+  if (!isNumber(yPrev) || !isNumber(yNext)) {
     return null;
   }
 
@@ -45,7 +42,7 @@ var fn = {
 
     var _rt = parseInt(rt, 10);
 
-    if (!(_isArr(d) && _isNumber(_rt))) {
+    if (!(_isArr(d) && isNumber(_rt))) {
       return [];
     }
 
@@ -75,7 +72,7 @@ var fn = {
         _max = d.length,
         _y0 = d[0].y;
 
-    if (!_isNumber(_y0) || _y0 === 0 || _max === 0) {
+    if (!isNumber(_y0) || _y0 === 0 || _max === 0) {
       return [];
     }
 
@@ -92,10 +89,10 @@ var fn = {
 
     var minY = Number.POSITIVE_INFINITY;
 
-    var _fn = _isNumber(data[0].y) ? function (p, min) {
-      return _isNumber(p.y) && p.y < min ? p.y : min;
+    var _fn = isNumber(data[0].y) ? function (p, min) {
+      return isNumber(p.y) && p.y < min ? p.y : min;
     } : function (arr, min) {
-      return _isNumber(arr[1]) && arr[1] < min ? arr[1] : min;
+      return isNumber(arr[1]) && arr[1] < min ? arr[1] : min;
     };
 
     for (var i = 0, max = data.length; i < max; i++) {
@@ -111,10 +108,10 @@ var fn = {
 
     var maxY = Number.NEGATIVE_INFINITY;
 
-    var _fn = _isNumber(data[0].y) ? function (p, max) {
-      return _isNumber(p.y) && p.y > max ? p.y : max;
+    var _fn = isNumber(data[0].y) ? function (p, max) {
+      return isNumber(p.y) && p.y > max ? p.y : max;
     } : function (arr, max) {
-      return _isNumber(arr[1]) && arr[1] > max ? arr[1] : max;
+      return isNumber(arr[1]) && arr[1] > max ? arr[1] : max;
     };
 
     for (var i = 0, max = data.length; i < max; i++) {
@@ -169,7 +166,7 @@ var fn = {
 
       var p = _ref;
 
-      if (_isNumber(p[1])) {
+      if (isNumber(p[1])) {
         _sum = _sum.add(p[1]);
       }
     }
