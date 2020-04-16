@@ -20,7 +20,7 @@ const COLOR = {
   NOT_EU_MEMBER: '#8085e9',
 };
 const C = {
-  EU_CODES: ["EU", "EU15", "EU25", "EU27", "EU28", "EU27_2019", "G20", "Group of Twenty" ],
+  EU_CODES: ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty" ],
   EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
   EU_MEMBER: [
     "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus",
@@ -253,7 +253,7 @@ const EuroStatFn = {
         _itemKey: key,
         ...crItemConf(option),
         dataSource: _dataSource
-      },      
+      },
       isWithoutAdd: url ? false : true,
       dataSource: _dataSource,
       ...EuroStatFn.crLinkConf(json, option)
