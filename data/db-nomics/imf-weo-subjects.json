@@ -1,0 +1,12 @@
+{
+  "items":[
+{"value":"BCA_NGDPD","caption":"Current account balance - Percent of GDP"},
+{"value":"GGXCNL_NGDP","caption":"General government net lending/borrowing - Percent of GDP"},
+{"value":"NGDPRPPPPCPCH","caption":"Gross domestic product per capita, constant prices - Purchasing power parity; percent change"},
+{"value":"NGDP_RPCH","caption":"Gross domestic product, constant prices - Percent change"},
+{"value":"PPPGDP","caption":"Gross domestic product, current prices - Purchasing power parity; international dollars"},
+{"value":"PCPIPCH","caption":"Inflation, average consumer prices - Percent change"},
+{"value":"PCPIEPCH","caption":"Inflation, end of period consumer prices - Percent change"},
+{"value":"LUR","caption":"Unemployment rate - Percent of total labor force"}
+]
+}

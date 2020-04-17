@@ -16,7 +16,7 @@
       ]
     },{
       "caption": "FED",
-      "items": [                
+      "items": [
         { "id": "DBN_FED_IPMAJOR" },
         { "id": "DBN_FED_CAP" },
         { "id": "DBN_FED_CAPUTL"}
@@ -32,7 +32,9 @@
       "items": [
         { "id": "DBN_IMF_CPI" },
         { "id": "DBN_IMF_TRADE" },
-        { "id": "DBN_IMF_COFOG" }
+        { "id": "DBN_IMF_COFOG" },
+        { "id": "DBN_IMF_WEO" },
+        { "id": "DBN_IMF_WEOAGG" }
       ]
     },{
       "caption": "OECD",
@@ -66,7 +68,7 @@
     "DBN_B_S": {
       "dialogProps": {
         "isFd": true,
-        "nInitFromDate": 25,  
+        "nInitFromDate": 25,
         "noDate": true,
         "descrUrl" : "./data/db-nomics/db-nomics.html",
         "loadId" : "DBN",
@@ -149,7 +151,7 @@
       "dialogType": "DialogSelectN",
       "addProps": "DBN_B_S",
       "dialogProps" : {
-        "nInitFromDate": 3,  
+        "nInitFromDate": 3,
         "selectProps": [
           [ "Rate", "ecb-exchange-rates" ]
         ],
@@ -260,6 +262,44 @@
           "dfFnUrl": "s123B",
           "dfPrefix": "A",
           "df2Prefix": "S13"
+        }
+      }
+    },
+    "DBN_IMF_WEO": {
+      "type" : "DBN_IMF_WEO",
+      "menuTitle" : "WEO by Countries, A",
+      "chartContainerCaption" : "DB Nomics: IMF: WEO by Countries, Annual",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "imf-weo-countries" ],
+          [ "Subject", "imf-weo-subjects" ]
+        ],
+        "dataSource": "DB Nomics: IMF: WEO by Countries, A",
+        "dfProps": {
+          "dfProvider": "IMF",
+          "dfCode": "WEO",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_IMF_WEOAGG": {
+      "type" : "DBN_IMF_WEOAGG",
+      "menuTitle" : "WEO by Country Groups, A",
+      "chartContainerCaption" : "DB Nomics: IMF: WEO by Country Groups, Annual",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Entity", "imf-weo-country-groups" ],
+          [ "Subject", "imf-weo-subjects" ]
+        ],
+        "dataSource": "DB Nomics: IMF: WEO by Country Groups, A",
+        "dfProps": {
+          "dfProvider": "IMF",
+          "dfCode": "WEOAGG",
+          "dfFnUrl": "s12"
         }
       }
     },
@@ -459,7 +499,7 @@
       "dialogType": "DialogSelectN",
       "addProps": "DBN_B_S",
       "dialogProps" : {
-        "nInitFromDate": 5,  
+        "nInitFromDate": 5,
         "selectProps": [
           [ "Item", "nbb-stocks-commodities" ]
         ],

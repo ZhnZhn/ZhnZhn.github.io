@@ -1,0 +1,17 @@
+{
+  "items":[
+    {"value":"001","caption":"World"},
+    {"value":"110","caption":"Advanced economies"},
+    {"value":"511","caption":"ASEAN-5"},
+    {"value":"505","caption":"Emerging and developing Asia"},
+    {"value":"903","caption":"Emerging and developing Europe"},
+    {"value":"200","caption":"Emerging market and developing economies"},
+    {"value":"163","caption":"Euro area"},
+    {"value":"998","caption":"European Union"},
+    {"value":"205","caption":"Latin America and the Caribbean"},
+    {"value":"119","caption":"Major advanced economies (G7)"},
+    {"value":"400","caption":"Middle East and Central Asia"},
+    {"value":"123","caption":"Other advanced economies (Advanced economies excluding G7 and euro area)"},
+    {"value":"603","caption":"Sub-Saharan Africa"}
+  ]
+}
