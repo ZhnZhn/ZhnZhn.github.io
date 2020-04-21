@@ -20,10 +20,16 @@ const S = {
     backgroundColor: '#1b2836',
     height: 'auto',
     width: '100%',
-    paddingTop: 4,
+    //paddingTop: 4,
     paddingRight: 42,
+    paddingBottom: 2,
     borderTopRightRadius: 2,
     borderBottomRightRadius: 2
+  },
+  BT_MORE: {
+    position: 'relative',
+    top: 3,
+    left: 2
   },
   SVG_MORE: {
     stroke: '#777777',
@@ -34,7 +40,7 @@ const S = {
   },
   CHECK_BOX: {
     marginRight: 10,
-    marginLeft: 10
+    marginLeft: 8
   },
   CAPTION_OPEN : {
     display : 'inline-block',
@@ -51,7 +57,7 @@ const S = {
     color: 'gray'
   },
   CAPTION_WIDTH: {
-    maxWidth: 250    
+    maxWidth: 250
   },
   TIME: {
     color : 'rgb(253, 179, 22)',
@@ -92,6 +98,7 @@ class Header extends Component {
     return (
       <Fragment>
         <SvgMore
+          style={S.BT_MORE}
           svgStyle={S.SVG_MORE}
           onClick={this._toggleMore}
         />

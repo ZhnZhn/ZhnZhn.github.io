@@ -5,14 +5,7 @@ import Browser from './Browser';
 import BrowserCaption from './BrowserCaption';
 import ScrollPane from './ScrollPane';
 import MenuParts from './MenuParts'
-
-const CL_SCROLL = 'scroll-container-y scroll-menu';
-
-const S = {
-  BROWSER: {
-    paddingRight: 0
-  }
-};
+import S from './MenuBrowser.Style'
 
 const _crMenu = (menuItems, isLoaded=true) => ({
   menuItems,
@@ -60,7 +53,7 @@ const MenuBrowserDynamic = ({
          caption={caption}
          onClose={_hHide}
       />
-       <ScrollPane className={CL_SCROLL}>
+       <ScrollPane className={S.CL_SCROLL}>
          <MenuParts menuItems={menuItems} />
          {children}
        </ScrollPane>

@@ -18,11 +18,10 @@ const S = {
   ROOT: {
     position: 'relative',
     backgroundColor: '#1b2836',
-    paddingTop: 4,
+    height: 34,
     paddingLeft: 10,
     paddingRight: 42,
     marginBottom: 10,
-    lineHeight: '1.8',
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
     overflow: 'hidden',
@@ -30,18 +29,22 @@ const S = {
     textOverflow: 'clip'
   },
   CAPTION: {
+    position: 'relative',
+    top: 6,
     paddingRight: 8,
     fontSize: '18px',
     fontWeight: '500'
   },
+  BT_MORE: {
+    position: 'relative',
+    top: 3
+  },
   SVG_MORE: {
     fill: 'inherit',
     stroke: 'inherit'
-    //fill: 'silver',
-    //stroke: 'silver'
   },
   CHECK_BOX: {
-    marginLeft: 10,
+    marginLeft: 8,
     marginRight: 10
   },
   SVG_CLOSE: {
@@ -55,9 +58,10 @@ const _isFn = fn => typeof fn === 'function';
 
 const BrowserCaption = ({
   style,
-  caption, children,
+  caption, captionStyle,
+  children,
   onMore,
-  onCheck, onUnCheck,  
+  onCheck, onUnCheck,
   onClose
 }) => {
   const theme = useContext(ThemeContext)
@@ -70,6 +74,7 @@ const BrowserCaption = ({
      {
        _isFn(onMore) &&
        <SvgMore
+          style={S.BT_MORE}
           svgStyle={S.SVG_MORE}
           onClick={onMore}
        />
@@ -85,7 +90,7 @@ const BrowserCaption = ({
      }
      <span
         className={CL.NOT_SELECTED}
-        style={S.CAPTION}
+        style={{...S.CAPTION, ...captionStyle}}
      >
        {caption}
     </span>

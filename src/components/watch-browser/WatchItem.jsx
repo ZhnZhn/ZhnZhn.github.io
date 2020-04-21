@@ -23,6 +23,7 @@ const S = {
   },
   SVG_CLOSE : {
     position: 'absolute',
+    top: 10,
     right: 0
   }
 };
@@ -62,7 +63,7 @@ const WatchItem = (props) => {
 return (
      <div
        role="menuitem"
-       tabindex="0"
+       tabIndex="0"
        className={className}
        style={S.ITEM_DIV}
        onClick={_hClick}

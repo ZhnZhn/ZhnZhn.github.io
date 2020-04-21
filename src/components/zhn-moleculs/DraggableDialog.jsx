@@ -36,7 +36,8 @@ const S = {
   },
   BT_MORE: {
     position: 'absolute',
-    left: 0
+    top: 1,
+    left: 2
   },
   BT_MORE_SVG: {
     stroke: 'inherit',
@@ -188,8 +189,8 @@ class DraggableDialog extends Component {
        >
     {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
         <div style={{...S.CAPTION_DIV, ...TS.EL}}>
-          { this._renderMenuMore(menuModel, isMore, TS) }
           { this._renderBtMore(menuModel) }
+          { this._renderMenuMore(menuModel, isMore, TS) }
           <span className={CL.NOT_SELECTED}>
             {caption}
           </span>

@@ -33,6 +33,7 @@ var S = {
   },
   SVG_CLOSE: {
     position: 'absolute',
+    top: 10,
     right: 0
   }
 };
@@ -74,7 +75,7 @@ var WatchItem = function WatchItem(props) {
 
   return _react["default"].createElement("div", (0, _extends2["default"])({
     role: "menuitem",
-    tabindex: "0",
+    tabIndex: "0",
     className: className,
     style: S.ITEM_DIV,
     onClick: _hClick

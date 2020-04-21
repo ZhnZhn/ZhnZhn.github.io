@@ -15,7 +15,7 @@ var S = {
   LINK: {
     display: 'inline-block',
     position: 'relative',
-    top: -2,
+    top: 2,
     height: 28,
     borderRadius: 4,
     padding: '1px 10px 1px 9px',

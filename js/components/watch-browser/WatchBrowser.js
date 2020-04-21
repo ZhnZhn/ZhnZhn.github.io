@@ -35,11 +35,11 @@ var C_GROUP_OPEN = '#1b2836';
 var C_LIST_OPEN = '#80c040';
 var S = {
   BROWSER: {
-    paddingRight: '0px'
+    paddingRight: 0
   },
   BT_CIRCLE: {
     position: 'relative',
-    top: -2,
+    top: 3,
     marginLeft: 20
   },
   GROUP_DIV: {
@@ -52,8 +52,7 @@ var S = {
     lineHeight: 2
   },
   ITEM_NOT_SELECTED: {
-    marginRight: 10 //borderBottom : '1px solid rgba(128, 192, 64, 0.6)'
-
+    marginRight: 10
   }
 };
 var DRAG = {

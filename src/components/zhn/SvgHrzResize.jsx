@@ -5,7 +5,7 @@ const CL = "svg-resize not-selected";
 
 const S = {
   ROOT_DIV: {
-    display: 'inline-block'
+    display: 'inline-block'    
   },
   LEFT_DIV: {
     marginLeft: 10
@@ -97,11 +97,13 @@ class SvgHrzResize extends Component {
   }
 
   render(){
+    const { btStyle } = this.props
+    , _btStyle = {...S.LEFT_DIV, ...btStyle };
     return (
       <div style={S.ROOT_DIV}>
         <button
            className={CL}
-           style={S.LEFT_DIV}
+           style={_btStyle}
            title="Resize container to left"
            onMouseDown={this._hStartResizeLeft}
            onMouseUp={this._hStopResize}
@@ -126,7 +128,7 @@ class SvgHrzResize extends Component {
       </button>
       <button
          className={CL}
-         style={S.LEFT_DIV}
+         style={_btStyle}
          title="Resize container to right"
          onMouseDown={this._hStartResizeRight}
          onMouseUp={this._hStopResize}

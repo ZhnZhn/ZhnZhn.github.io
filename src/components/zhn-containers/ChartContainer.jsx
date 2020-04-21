@@ -32,6 +32,13 @@ const S = {
   BR_CAPTION: {
     paddingLeft: 4
   },
+  CAPTION: {
+    position: 'relative',
+    top: -1
+  },
+  BT_RESIZE: {
+    marginTop: 5
+  },
   INLINE: {
     display: 'inline-block'
   },
@@ -332,9 +339,11 @@ class ChartContainer extends Component {
              onCheck={this._hSetActive}
              onUnCheck={this._hSetNotActive}
              caption={caption}
+             captionStyle={S.CAPTION}
              onClose={this._hHide}
           >
              <A.SvgHrzResize
+               btStyle={S.BT_RESIZE}
                initWidth={INITIAL_WIDTH}
                minWidth={this._MIN_WIDTH}
                maxWidth={MAX_WIDTH}

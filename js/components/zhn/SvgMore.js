@@ -12,9 +12,8 @@ var _react = _interopRequireDefault(require("react"));
 var CL = 'focusable';
 var S = {
   BT: {
-    verticalAlign: 'middle',
-    paddingLeft: 6,
-    paddingRight: 6
+    height: 26,
+    padding: '2px 6px'
   },
   SVG: {
     fill: 'black',

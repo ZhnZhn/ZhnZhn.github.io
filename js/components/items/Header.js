@@ -34,10 +34,16 @@ var S = {
     backgroundColor: '#1b2836',
     height: 'auto',
     width: '100%',
-    paddingTop: 4,
+    //paddingTop: 4,
     paddingRight: 42,
+    paddingBottom: 2,
     borderTopRightRadius: 2,
     borderBottomRightRadius: 2
+  },
+  BT_MORE: {
+    position: 'relative',
+    top: 3,
+    left: 2
   },
   SVG_MORE: {
     stroke: '#777777',
@@ -48,7 +54,7 @@ var S = {
   },
   CHECK_BOX: {
     marginRight: 10,
-    marginLeft: 10
+    marginLeft: 8
   },
   CAPTION_OPEN: {
     display: 'inline-block',
@@ -119,6 +125,7 @@ function (_Component) {
 
       var isMore = _this.state.isMore;
       return _react["default"].createElement(_react.Fragment, null, _react["default"].createElement(_SvgMore["default"], {
+        style: S.BT_MORE,
         svgStyle: S.SVG_MORE,
         onClick: _this._toggleMore
       }), _react["default"].createElement(_ModalSlider["default"], {

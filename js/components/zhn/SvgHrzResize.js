@@ -7,6 +7,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -131,11 +133,14 @@ function (_Component) {
   };
 
   _proto.render = function render() {
+    var btStyle = this.props.btStyle,
+        _btStyle = (0, _extends2["default"])({}, S.LEFT_DIV, {}, btStyle);
+
     return _react["default"].createElement("div", {
       style: S.ROOT_DIV
     }, _react["default"].createElement("button", {
       className: CL,
-      style: S.LEFT_DIV,
+      style: _btStyle,
       title: "Resize container to left",
       onMouseDown: this._hStartResizeLeft,
       onMouseUp: this._hStopResize,
@@ -158,7 +163,7 @@ function (_Component) {
       fill: "none"
     }))), _react["default"].createElement("button", {
       className: CL,
-      style: S.LEFT_DIV,
+      style: _btStyle,
       title: "Resize container to right",
       onMouseDown: this._hStartResizeRight,
       onMouseUp: this._hStopResize,

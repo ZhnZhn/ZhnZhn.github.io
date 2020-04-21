@@ -19,12 +19,7 @@ var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
 
 var _MenuParts = _interopRequireDefault(require("./MenuParts"));
 
-var CL_SCROLL = 'scroll-container-y scroll-menu';
-var S = {
-  BROWSER: {
-    paddingRight: 0
-  }
-};
+var _MenuBrowser = _interopRequireDefault(require("./MenuBrowser.Style"));
 
 var _crMenu = function _crMenu(menuItems, isLoaded) {
   if (isLoaded === void 0) {
@@ -83,12 +78,12 @@ var MenuBrowserDynamic = function MenuBrowserDynamic(_ref) {
   }, [isLoaded, isShow]);
   return _react["default"].createElement(_Browser["default"], {
     isShow: isShow,
-    style: S.BROWSER
+    style: _MenuBrowser["default"].BROWSER
   }, _react["default"].createElement(_BrowserCaption["default"], {
     caption: caption,
     onClose: _hHide
   }), _react["default"].createElement(_ScrollPane["default"], {
-    className: CL_SCROLL
+    className: _MenuBrowser["default"].CL_SCROLL
   }, _react["default"].createElement(_MenuParts["default"], {
     menuItems: menuItems
   }), children));

@@ -29,11 +29,10 @@ var S = {
   ROOT: {
     position: 'relative',
     backgroundColor: '#1b2836',
-    paddingTop: 4,
+    height: 34,
     paddingLeft: 10,
     paddingRight: 42,
     marginBottom: 10,
-    lineHeight: '1.8',
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
     overflow: 'hidden',
@@ -41,18 +40,22 @@ var S = {
     textOverflow: 'clip'
   },
   CAPTION: {
+    position: 'relative',
+    top: 6,
     paddingRight: 8,
     fontSize: '18px',
     fontWeight: '500'
   },
+  BT_MORE: {
+    position: 'relative',
+    top: 3
+  },
   SVG_MORE: {
     fill: 'inherit',
-    stroke: 'inherit' //fill: 'silver',
-    //stroke: 'silver'
-
+    stroke: 'inherit'
   },
   CHECK_BOX: {
-    marginLeft: 10,
+    marginLeft: 8,
     marginRight: 10
   },
   SVG_CLOSE: {
@@ -69,6 +72,7 @@ var _isFn = function _isFn(fn) {
 var BrowserCaption = function BrowserCaption(_ref) {
   var style = _ref.style,
       caption = _ref.caption,
+      captionStyle = _ref.captionStyle,
       children = _ref.children,
       onMore = _ref.onMore,
       onCheck = _ref.onCheck,
@@ -80,6 +84,7 @@ var BrowserCaption = function BrowserCaption(_ref) {
     className: CL.ROOT,
     style: (0, _extends2["default"])({}, S.ROOT, {}, style, {}, TS.ROOT)
   }, _isFn(onMore) && _react["default"].createElement(_SvgMore["default"], {
+    style: S.BT_MORE,
     svgStyle: S.SVG_MORE,
     onClick: onMore
   }), _isFn(onCheck) && _isFn(onUnCheck) && _react["default"].createElement(_SvgCheckBox["default"], {
@@ -89,7 +94,7 @@ var BrowserCaption = function BrowserCaption(_ref) {
     onUnCheck: onUnCheck
   }), _react["default"].createElement("span", {
     className: CL.NOT_SELECTED,
-    style: S.CAPTION
+    style: (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle)
   }, caption), children, _react["default"].createElement(_SvgClose["default"], {
     style: S.SVG_CLOSE,
     onClose: onClose

@@ -20,25 +20,24 @@ const C_GROUP_OPEN = '#1b2836';
 const C_LIST_OPEN = '#80c040';
 const S = {
   BROWSER: {
-    paddingRight: '0px'
+    paddingRight: 0
   },
   BT_CIRCLE: {
     position: 'relative',
-    top: -2,
+    top: 3,
     marginLeft: 20
   },
   GROUP_DIV: {
-    lineHeight : 2
+    lineHeight: 2
   },
   LIST_DIV: {
-    marginLeft : 8,
-    paddingLeft : 12,
-    borderLeft : `2px solid ${C_GROUP_OPEN}`,
-    lineHeight : 2
+    marginLeft: 8,
+    paddingLeft: 12,
+    borderLeft: `2px solid ${C_GROUP_OPEN}`,
+    lineHeight: 2
   },
   ITEM_NOT_SELECTED: {
-    marginRight : 10,
-    //borderBottom : '1px solid rgba(128, 192, 64, 0.6)'
+    marginRight: 10
   }
 };
 

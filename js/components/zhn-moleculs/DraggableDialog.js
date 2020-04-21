@@ -46,7 +46,8 @@ var S = (0, _extends2["default"])({}, _Dialog["default"], {
   },
   BT_MORE: {
     position: 'absolute',
-    left: 0
+    top: 1,
+    left: 2
   },
   BT_MORE_SVG: {
     stroke: 'inherit',
@@ -201,7 +202,7 @@ function (_Component) {
         onKeyDown: this._hKeyDown
       }, _react["default"].createElement("div", {
         style: (0, _extends2["default"])({}, S.CAPTION_DIV, {}, TS.EL)
-      }, this._renderMenuMore(menuModel, isMore, TS), this._renderBtMore(menuModel), _react["default"].createElement("span", {
+      }, this._renderBtMore(menuModel), this._renderMenuMore(menuModel, isMore, TS), _react["default"].createElement("span", {
         className: CL.NOT_SELECTED
       }, caption), _react["default"].createElement(_SvgClose["default"], {
         style: S.SVG_CLOSE,
