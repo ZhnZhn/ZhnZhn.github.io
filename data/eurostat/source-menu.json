@@ -806,19 +806,22 @@
       }
     },
 
-    "ES_AGRI_PRICES" : {
-      "type" : "ES_AGRI_PRICES",
-      "menuTitle" : "Selling Prices",
-      "dialogCaption" : "Agriculture Selling Prices",
-      "dialogType" : "DialogSelectN",
+    "ES_AGRI_PRICES": {
+      "type": "ES_AGRI_PRICES",
+      "menuTitle": "Selling Prices, EUR",
+      "dialogCaption": "Agriculture Selling Prices, EUR",
+      "dialogType": "DialogSelectN",
       "addProps": "ES_BASE_SN",
-      "dialogProps" : {
-        "selectProps":[
-          ["table","Price","agri-prices"]
+      "dialogProps": {
+        "selectProps": [
+          ["prod_veg","Item","agri-selling-items"]
         ],
         "dfProps": {
-          "mapFrequency" : "Y",
-          "mapType" : "Z"
+          "mapFrequency": "Y",
+          "mapDateDf": 2,
+          "dfTable": "apri_ap_crpouta",
+          "dfTail": "currency=EUR",
+          "mapType": "Z"
         }
       }
     },
