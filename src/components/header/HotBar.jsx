@@ -32,7 +32,7 @@ const _crBtProps = (index, caption='') => {
     : (index+1).toString();
   return {
     accessKey: _accessKey || void 0,
-    caption: _accessKey + caption.substr(0, 3),
+    caption: _accessKey + caption.substring(0, 3),
     title: caption
   };
 };

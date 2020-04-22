@@ -14,8 +14,8 @@ var C = {
 
 var _toUTC = function _toUTC(str) {
   if (str.length === 6) {
-    var _year = str.substr(0, 4),
-        _month = parseInt(str.substr(4), 10) - 1,
+    var _year = str.substring(0, 4),
+        _month = parseInt(str.substring(4), 10) - 1,
         _day = _month === 1 ? 28 : 30;
 
     return Date.UTC(_year, _month, _day);

@@ -203,7 +203,7 @@ var AdapterFn = {
     });
   },
   crId: function crId() {
-    return (Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();
+    return (Date.now().toString(36) + Math.random().toString(36).substring(2, 9)).toUpperCase();
   },
   crItemConf: function crItemConf(option) {
     var _itemConf = {};
@@ -234,7 +234,7 @@ var AdapterFn = {
     return restItems.filter(Boolean).join(delimeter);
   },
   toUpperCaseFirst: function toUpperCaseFirst(str) {
-    return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
+    return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substring(1) : EMPTY;
   },
   appendWithColon: function appendWithColon() {
     var str = '';

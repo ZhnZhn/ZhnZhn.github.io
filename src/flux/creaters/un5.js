@@ -24,7 +24,7 @@ const createLoadOptions = (props={}, options={}) => {
            : undefined
       , _title = _one.caption + C.COLLON + _tradeFlow.caption
       , _subtitle = (three.caption.length > C.MAX_SUBTITLE)
-           ? three.caption.substr(0, C.MAX_SUBTITLE) + C.DOTS
+           ? three.caption.substring(0, C.MAX_SUBTITLE) + C.DOTS
            : three.caption;
   return {
     value : _value,

@@ -20,10 +20,10 @@ const _crMetaUrl = ({ rootUrl, id, proxy }) => {
 const _crTitleAndCaption = (dfProps) => {
   const _text = dfProps.text || ''
   , _caption = _text.length>35
-       ? _text.substr(0, 35) + '...'
+       ? _text.substring(0, 35) + '...'
        : _text;
   return {
-    menuTitle: _text.substr(0, 27),
+    menuTitle: _text.substring(0, 27),
     contFullCaption: `${dfProps.sP}: ${_caption}`
   };
 };

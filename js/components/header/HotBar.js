@@ -51,7 +51,7 @@ var _crBtProps = function _crBtProps(index, caption) {
 
   return {
     accessKey: _accessKey || void 0,
-    caption: _accessKey + caption.substr(0, 3),
+    caption: _accessKey + caption.substring(0, 3),
     title: caption
   };
 };

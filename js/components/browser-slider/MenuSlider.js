@@ -48,7 +48,7 @@ var S = {
 };
 
 var _getTranslateX = function _getTranslateX(node) {
-  var _prevStr = node.style.transform.substr(11).replace('px', '').replace(')', '');
+  var _prevStr = node.style.transform.substring(11).replace('px', '').replace(')', '');
 
   return parseInt(_prevStr, 10);
 };

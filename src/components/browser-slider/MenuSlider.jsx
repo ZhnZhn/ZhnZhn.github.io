@@ -31,7 +31,7 @@ const S = {
 const _getTranslateX = (node) => {
   const _prevStr = node
      .style.transform
-     .substr(11)
+     .substring(11)
      .replace('px', '')
      .replace(')', '');
    return parseInt(_prevStr, 10);

@@ -203,7 +203,7 @@ const AdapterFn = {
   crId: () => {
     return (
         Date.now().toString(36) +
-        Math.random().toString(36).substr(2, 9)
+        Math.random().toString(36).substring(2, 9)
       )
       .toUpperCase();
   },
@@ -234,7 +234,7 @@ const AdapterFn = {
 
   toUpperCaseFirst: (str) => typeof str === 'string'
     && str.length > 0
-      ? str[0].toUpperCase() + str.substr(1)
+      ? str[0].toUpperCase() + str.substring(1)
       : EMPTY
   ,
   appendWithColon: (...args) => {

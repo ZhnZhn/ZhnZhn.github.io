@@ -10,7 +10,7 @@ var _loadJson = _interopRequireDefault(require("./loadJson"));
 var _isArr = Array.isArray;
 
 var _toFirstUpperCase = function _toFirstUpperCase(str) {
-  return str.charAt(0).toUpperCase() + str.substr(1);
+  return str.charAt(0).toUpperCase() + str.substring(1);
 };
 
 var _crDimOptions = function _crDimOptions(_ref) {

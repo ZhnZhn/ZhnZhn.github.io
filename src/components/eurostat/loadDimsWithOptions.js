@@ -4,7 +4,7 @@ const _isArr = Array.isArray;
 
 const _toFirstUpperCase = (str) => str
   .charAt(0)
-  .toUpperCase() + str.substr(1);
+  .toUpperCase() + str.substring(1);
 
 
 const _crDimOptions = ({ values, valueTexts, code }) => {

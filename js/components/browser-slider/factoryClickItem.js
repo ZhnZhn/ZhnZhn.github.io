@@ -31,10 +31,10 @@ var _crMetaUrl = function _crMetaUrl(_ref) {
 
 var _crTitleAndCaption = function _crTitleAndCaption(dfProps) {
   var _text = dfProps.text || '',
-      _caption = _text.length > 35 ? _text.substr(0, 35) + '...' : _text;
+      _caption = _text.length > 35 ? _text.substring(0, 35) + '...' : _text;
 
   return {
-    menuTitle: _text.substr(0, 27),
+    menuTitle: _text.substring(0, 27),
     contFullCaption: dfProps.sP + ": " + _caption
   };
 };

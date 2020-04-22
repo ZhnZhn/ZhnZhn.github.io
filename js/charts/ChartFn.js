@@ -259,7 +259,7 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
   toNumberFormat: _formatNumber2["default"],
   toNumberFormatAll: _formatAllNumber["default"],
   crTpId: function crTpId() {
-    return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();
+    return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 9)).toUpperCase();
   },
   toDateFormatDMY: _highcharts["default"].dateFormat.bind(null, '%A, %b %d, %Y'),
   toDateFormatDMYT: _highcharts["default"].dateFormat.bind(null, '%A, %b %d, %Y, %H:%M'),

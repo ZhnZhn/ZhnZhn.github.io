@@ -47,7 +47,7 @@ var createLoadOptions = function createLoadOptions(props, options) {
       _two = three.value ? three.value : two.value,
       _value = typeof fnValue === 'function' ? fnValue(_one.value, _two) : undefined,
       _title = _one.caption + C.COLLON + _tradeFlow.caption,
-      _subtitle = three.caption.length > C.MAX_SUBTITLE ? three.caption.substr(0, C.MAX_SUBTITLE) + C.DOTS : three.caption;
+      _subtitle = three.caption.length > C.MAX_SUBTITLE ? three.caption.substring(0, C.MAX_SUBTITLE) + C.DOTS : three.caption;
 
   return (0, _extends2["default"])({
     value: _value,

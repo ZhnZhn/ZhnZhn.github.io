@@ -206,7 +206,7 @@ const ChartFn = {
     return (
        'TP_' +
         Date.now().toString(36) +
-        Math.random().toString(36).substr(2, 9)
+        Math.random().toString(36).substring(2, 9)
       )
       .toUpperCase();
   },
