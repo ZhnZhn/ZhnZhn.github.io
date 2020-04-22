@@ -124,9 +124,12 @@ const _rFnUrl = {
 
 const DbNomicsApi = {
   getRequestUrl(option){
+    if (option.url) {
+      return option.url;
+    }
     const { dfFnUrl } = option
     , _crUrl = _rFnUrl[dfFnUrl] || _rFnUrl.DF;
-    return _crUrl(option);
+    return (option.url = _crUrl(option));
   },
 
   checkResponse(json){

@@ -5,12 +5,16 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _fnSelector = _interopRequireDefault(require("./fnSelector"));
 
 var crError = _AdapterFn["default"].crError,
     crItemLink = _AdapterFn["default"].crItemLink,
+    crItemConf = _AdapterFn["default"].crItemConf,
+    joinBy = _AdapterFn["default"].joinBy,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     valueMoving = _AdapterFn["default"].valueMoving;
 var getPeriodAndValue = _fnSelector["default"].getPeriodAndValue,
@@ -26,11 +30,15 @@ var _isId = function _isId(id) {
   return id && id.indexOf('/') !== -1;
 };
 
-var _getId = function _getId(_ref) {
+var _crId = function _crId(_ref) {
   var dfProvider = _ref.dfProvider,
       dfCode = _ref.dfCode,
       seriaId = _ref.seriaId;
-  return _isId(seriaId) ? seriaId : dfProvider + "/" + dfCode + "/" + seriaId;
+  return joinBy('/', dfProvider, dfCode, seriaId);
+};
+
+var _getId = function _getId(option) {
+  return _isId(option.seriaId) ? option.seriaId : _crId(option);
 };
 
 var _crItemLink = crItemLink.bind(null, 'DB Nomics Chart');
@@ -46,16 +54,28 @@ var _crDescr = function _crDescr(json, option) {
   return "<p>SeriaId: " + _id + "</p>\n   " + _crUpdatedDate(json) + "\n   " + _crItemLink(C.CHART_URL + '/' + _id);
 };
 
-var _crZhConfig = function _crZhConfig(_ref2) {
-  var dataSource = _ref2.dataSource,
-      _itemKey = _ref2._itemKey,
-      seriaId = _ref2.seriaId;
+var _crZhConfig = function _crZhConfig(option) {
+  var dataSource = option.dataSource,
+      _itemKey = option._itemKey,
+      dfProvider = option.dfProvider,
+      dfCode = option.dfCode,
+      seriaId = option.seriaId,
+      title = option.title,
+      _id = _itemKey || seriaId;
+
   return {
-    id: _itemKey || seriaId,
-    key: _itemKey || seriaId,
-    //itemCaption: title,
-    isWithoutAdd: true,
-    dataSource: dataSource
+    id: _id,
+    key: _id,
+    itemCaption: title,
+    dataSource: dataSource,
+    itemConf: (0, _extends2["default"])({
+      _itemKey: _id
+    }, crItemConf(option), {
+      dataSource: dataSource,
+      dfProvider: dfProvider,
+      dfCode: dfCode,
+      seriaId: seriaId
+    })
   };
 };
 
@@ -72,12 +92,12 @@ var _isNumber = function _isNumber(n) {
 
 var fnAdapter = {
   crError: crError,
-  crTitle: function crTitle(_ref3, json) {
-    var title = _ref3.title,
-        subtitle = _ref3.subtitle;
+  crTitle: function crTitle(_ref2, json) {
+    var title = _ref2.title,
+        subtitle = _ref2.subtitle;
 
     var _ = getSubtitle(json),
-        _subtitle = _.length > C.SUBT_MAX ? (title || '') + ": " + (subtitle || '') : _;
+        _subtitle = _.length > C.SUBT_MAX ? joinBy(': ', title, subtitle) : _;
 
     return {
       title: getTitle(json),
@@ -107,10 +127,10 @@ var fnAdapter = {
 
     return data;
   },
-  crConfigOption: function crConfigOption(_ref4) {
-    var json = _ref4.json,
-        option = _ref4.option,
-        data = _ref4.data;
+  crConfigOption: function crConfigOption(_ref3) {
+    var json = _ref3.json,
+        option = _ref3.option,
+        data = _ref3.data;
     return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),

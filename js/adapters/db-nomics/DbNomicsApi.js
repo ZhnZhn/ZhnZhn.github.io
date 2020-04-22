@@ -130,10 +130,14 @@ var _rFnUrl = {
 };
 var DbNomicsApi = {
   getRequestUrl: function getRequestUrl(option) {
+    if (option.url) {
+      return option.url;
+    }
+
     var dfFnUrl = option.dfFnUrl,
         _crUrl = _rFnUrl[dfFnUrl] || _rFnUrl.DF;
 
-    return _crUrl(option);
+    return option.url = _crUrl(option);
   },
   checkResponse: function checkResponse(json) {
     if (json && _isArr(json.errors)) {

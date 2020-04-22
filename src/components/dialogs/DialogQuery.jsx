@@ -50,11 +50,12 @@ class DialogQuery extends Component {
 
   _handleLoad = () => {
     if (this._idInput && this._idInput.isValid()) {
-      const { onLoad, loadFn } = this.props;
+      const _value = this._idInput.getValue()
+      , { onLoad, loadFn } = this.props;
       onLoad(loadFn(this.props, {
         one: {
-          value: this._idInput.getValue(),
-          caption: "seriaId"
+          value: _value,
+          caption: _value
         }
       }));
     }

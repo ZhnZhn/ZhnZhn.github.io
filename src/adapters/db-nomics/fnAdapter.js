@@ -4,6 +4,8 @@ import fnSelector from './fnSelector'
 const {
   crError,
   crItemLink,
+  crItemConf,
+  joinBy,
   ymdToUTC,
   valueMoving
 } = AdapterFn;
@@ -19,10 +21,13 @@ const C = {
   SUBT_MAX: 60
 };
 
+
 const _isId = id => id && id.indexOf('/') !== -1;
-const _getId = ({ dfProvider, dfCode, seriaId }) => _isId(seriaId)
-  ? seriaId
-  : `${dfProvider}/${dfCode}/${seriaId}`;
+const _crId = ({ dfProvider, dfCode, seriaId }) =>
+  joinBy('/', dfProvider, dfCode, seriaId);
+const _getId = (option) => _isId(option.seriaId)
+  ? option.seriaId
+  : _crId(option);
 
 const _crItemLink = crItemLink
   .bind(null, 'DB Nomics Chart');
@@ -39,13 +44,25 @@ const _crDescr = (json, option) => {
    ${_crItemLink(C.CHART_URL+'/'+_id)}`;
 };
 
-const _crZhConfig = ({ dataSource, _itemKey, seriaId }) => ({
-  id: _itemKey || seriaId,
-  key: _itemKey || seriaId,
-  //itemCaption: title,
-  isWithoutAdd: true,
-  dataSource
-});
+const _crZhConfig = (option) => {
+  const {
+    dataSource, _itemKey,
+    dfProvider, dfCode, seriaId,
+    title
+  } = option
+  , _id = _itemKey || seriaId;
+  return {
+    id: _id, key: _id,
+    itemCaption: title,
+    dataSource,
+    itemConf: {
+       _itemKey: _id,
+       ...crItemConf(option),
+       dataSource,
+       dfProvider, dfCode, seriaId
+    }
+  }
+};
 const _crInfo = (json, option) => ({
   name: getSubtitle(json),
   description: _crDescr(json, option)
@@ -60,7 +77,7 @@ const fnAdapter = {
   crTitle: ({ title, subtitle }, json) => {
     const _ = getSubtitle(json)
     , _subtitle = _.length > C.SUBT_MAX
-         ? `${title || ''}: ${subtitle || ''}`
+         ? joinBy(': ', title, subtitle)
          : _;
     return {
       title: getTitle(json),
@@ -80,7 +97,7 @@ const fnAdapter = {
       if (_x > _xFrom && _isNumber(_y)) {
         data.push([ _x, _y ])
       }
-    }        
+    }
     return data;
   },
 

@@ -45,13 +45,15 @@ function (_Component) {
 
     _this._handleLoad = function () {
       if (_this._idInput && _this._idInput.isValid()) {
-        var _this$props = _this.props,
+        var _value = _this._idInput.getValue(),
+            _this$props = _this.props,
             onLoad = _this$props.onLoad,
             loadFn = _this$props.loadFn;
+
         onLoad(loadFn(_this.props, {
           one: {
-            value: _this._idInput.getValue(),
-            caption: "seriaId"
+            value: _value,
+            caption: _value
           }
         }));
       }
