@@ -226,14 +226,21 @@ var AdapterFn = {
       x: _getDate(_p)
     };
   },
+  joinBy: function joinBy(delimeter) {
+    for (var _len = arguments.length, restItems = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      restItems[_key - 1] = arguments[_key];
+    }
+
+    return restItems.filter(Boolean).join(delimeter);
+  },
   toUpperCaseFirst: function toUpperCaseFirst(str) {
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
   },
   appendWithColon: function appendWithColon() {
     var str = '';
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
     }
 
     args.forEach(function (s) {

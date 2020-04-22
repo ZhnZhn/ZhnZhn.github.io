@@ -228,6 +228,10 @@ const AdapterFn = {
     };
   },
 
+  joinBy: (delimeter, ...restItems) => restItems
+   .filter(Boolean)
+   .join(delimeter),
+
   toUpperCaseFirst: (str) => typeof str === 'string'
     && str.length > 0
       ? str[0].toUpperCase() + str.substr(1)

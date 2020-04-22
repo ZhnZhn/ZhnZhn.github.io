@@ -5,7 +5,8 @@ const {
   toUpperCaseFirst,
   isYNumber,
   findMinY,
-  findMaxY
+  findMaxY,
+  joinBy
 } = AdapterFn;
 
 const Y = [
@@ -142,5 +143,18 @@ describe('findMaxY', ()=>{
     expect(fn([])).toBe(undefined)
     expect(fn([[0]])).toBe(undefined)
     expect(fn([{x:0}])).toBe(undefined)
+  })
+})
+
+describe('joinBy', () => {
+  test('should join by delimeter', () => {
+    expect(joinBy('.')).toBe('')
+    expect(joinBy('.', 'a')).toBe('a')
+    expect(joinBy('.', 'a', 'b')).toBe('a.b')
+  })
+  test('should filter falsy values', () => {
+    expect(joinBy('.', '', 'b', 'c')).toBe('b.c')
+    expect(joinBy('.', null, 'b', 'c')).toBe('b.c')
+    expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c')
   })
 })

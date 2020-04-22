@@ -8,7 +8,8 @@ var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
     isYNumber = _AdapterFn["default"].isYNumber,
     findMinY = _AdapterFn["default"].findMinY,
-    findMaxY = _AdapterFn["default"].findMaxY;
+    findMaxY = _AdapterFn["default"].findMaxY,
+    joinBy = _AdapterFn["default"].joinBy;
 var Y = [{
   "in": '2017',
   r: 1514678400000,
@@ -221,6 +222,18 @@ describe('findMaxY', function () {
     expect(fn([{
       x: 0
     }])).toBe(undefined);
+  });
+});
+describe('joinBy', function () {
+  test('should join by delimeter', function () {
+    expect(joinBy('.')).toBe('');
+    expect(joinBy('.', 'a')).toBe('a');
+    expect(joinBy('.', 'a', 'b')).toBe('a.b');
+  });
+  test('should filter falsy values', function () {
+    expect(joinBy('.', '', 'b', 'c')).toBe('b.c');
+    expect(joinBy('.', null, 'b', 'c')).toBe('b.c');
+    expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c');
   });
 });
 //# sourceMappingURL=AdapterFn.test.js.map
