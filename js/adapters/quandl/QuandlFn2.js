@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _dompurify = _interopRequireDefault(require("dompurify"));
-
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 
 var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
@@ -94,9 +92,7 @@ var QuandlFn2 = {
         _dataset$database_cod = dataset.database_code,
         database_code = _dataset$database_cod === void 0 ? '' : _dataset$database_cod,
         _dataset$dataset_code = dataset.dataset_code,
-        dataset_code = _dataset$dataset_code === void 0 ? '' : _dataset$dataset_code,
-        _description = _dompurify["default"].sanitize(description);
-
+        dataset_code = _dataset$dataset_code === void 0 ? '' : _dataset$dataset_code;
     return {
       name: name,
       toDate: newest_available_date,
@@ -104,7 +100,7 @@ var QuandlFn2 = {
       frequency: frequency,
       database_code: database_code,
       dataset_code: dataset_code,
-      description: _description
+      description: description
     };
   },
   createZhConfig: function createZhConfig(option) {

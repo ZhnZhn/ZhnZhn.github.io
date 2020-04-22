@@ -11,14 +11,13 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _dompurify = _interopRequireDefault(require("dompurify"));
-
 var _fnFetch = require("../../utils/fnFetch");
 
-var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
-var _Load = _interopRequireDefault(require("../zhn/Load"));
-
+var ModalDialog = _Comp["default"].ModalDialog,
+    Load = _Comp["default"].Load,
+    DivHtml = _Comp["default"].DivHtml;
 var DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
 var S = {
   DIALOG: {
@@ -31,16 +30,6 @@ var S = {
   DIV: {
     padding: 16
   }
-};
-
-var Description = function Description(_ref) {
-  var _html = _ref._html;
-  return _react["default"].createElement("div", {
-    style: S.DIV,
-    dangerouslySetInnerHTML: {
-      __html: _html
-    }
-  });
 };
 
 var _isNewShow = function _isNewShow(prevProps, props) {
@@ -96,9 +85,9 @@ function (_Component) {
     };
 
     _this._setDescrHtml = function (_temp) {
-      var _ref2 = _temp === void 0 ? {} : _temp,
-          _ref2$json = _ref2.json,
-          text = _ref2$json === void 0 ? DESCR_EMPTY : _ref2$json;
+      var _ref = _temp === void 0 ? {} : _temp,
+          _ref$json = _ref.json,
+          text = _ref$json === void 0 ? DESCR_EMPTY : _ref$json;
 
       _this.setState({
         isLoading: false,
@@ -109,8 +98,8 @@ function (_Component) {
     };
 
     _this._onFailed = function (_temp2) {
-      var _ref3 = _temp2 === void 0 ? {} : _temp2,
-          error = _ref3.error;
+      var _ref2 = _temp2 === void 0 ? {} : _temp2,
+          error = _ref2.error;
 
       _this.setState({
         isLoading: false,
@@ -153,20 +142,18 @@ function (_Component) {
         isLoading = _this$state.isLoading,
         isLoadFailed = _this$state.isLoadFailed,
         errMsg = _this$state.errMsg,
-        descrHtml = _this$state.descrHtml,
-        _html = _dompurify["default"].sanitize(descrHtml),
-        _el = isLoading ? _react["default"].createElement(_Load["default"].Loading, null) : isLoadFailed ? _react["default"].createElement(_Load["default"].LoadFailed, {
-      errMsg: errMsg
-    }) : _react["default"].createElement(Description, {
-      _html: _html
-    });
-
-    return _react["default"].createElement(_ModalDialog["default"], {
+        descrHtml = _this$state.descrHtml;
+    return _react["default"].createElement(ModalDialog, {
       caption: "About Datasource",
       isShow: isShow,
       style: S.DIALOG,
       onClose: onClose
-    }, _el);
+    }, isLoading ? _react["default"].createElement(Load.Loading, null) : isLoadFailed ? _react["default"].createElement(Load.LoadFailed, {
+      errMsg: errMsg
+    }) : _react["default"].createElement(DivHtml, {
+      style: S.DIV,
+      str: descrHtml
+    }));
   };
 
   return DescriptionDialog;

@@ -26,9 +26,6 @@ var DF = {
   FILL_CLOSE: _Color["default"].BLANK
 };
 var S = {
-  ROOT: {
-    lineHeight: 1.5
-  },
   DIV_SVG: {
     display: 'inline-block',
     width: 16,
@@ -42,7 +39,7 @@ var S = {
     color: _Color["default"].TITLE,
     paddingLeft: 4,
     verticalAlign: 'top',
-    fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
+    fontFamily: 'Roboto, Arial, Lato, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
     cursor: 'pointer'
@@ -115,6 +112,7 @@ function (_Component) {
   _proto.render = function render() {
     var _this$props = this.props,
         style = _this$props.style,
+        styleItem = _this$props.styleItem,
         styleNotSelected = _this$props.styleNotSelected,
         styleCaption = _this$props.styleCaption,
         caption = _this$props.caption,
@@ -150,12 +148,12 @@ function (_Component) {
         _styleNotSelected = _crStyleConf2._styleNotSelected;
 
     return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.ROOT, {}, style)
+      style: style
     }, _react["default"].createElement("div", (0, _extends2["default"])({
       role: "menuitem",
       tabIndex: "0",
       className: CL.NOT_SELECTED,
-      style: _styleNotSelected,
+      style: (0, _extends2["default"])({}, styleItem, {}, _styleNotSelected),
       onClick: this._hClick,
       onKeyDown: this._hKeyDown
     }, _dragOption), _react["default"].createElement("div", {

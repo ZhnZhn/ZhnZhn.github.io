@@ -32,7 +32,7 @@ var S = {
   BT_CAPTION: {
     left: 286
   },
-  INFO_ROOT: {
+  TO_DATE_INFO: {
     marginTop: 4
   },
   INFO_CAPTION: {
@@ -48,10 +48,10 @@ var S = {
     color: 'black',
     textTransform: 'capitalize'
   },
-  DESCR_OC: {
-    paddingTop: 12
+  DESCR_ITEM: {
+    lineHeight: 2
   },
-  DESCR_ROOT: {
+  DESCR_INFO: {
     marginTop: 10
   },
   DESCR_TEXT: {
@@ -134,10 +134,10 @@ function (_Component) {
         description = info.description,
         item = zhInfo.item,
         linkFn = zhInfo.linkFn,
-        _rootStyle = isShow ? S.ROOT_SHOW : S.ROOT_HIDE;
+        _style = isShow ? S.ROOT_SHOW : S.ROOT_HIDE;
 
     return _react["default"].createElement("div", {
-      style: _rootStyle
+      style: _style
     }, _react["default"].createElement(_Comp["default"].ButtonTab, {
       style: S.BT_CAPTION,
       caption: "Chart",
@@ -146,31 +146,31 @@ function (_Component) {
       text: name,
       styleText: S.INFO_TEXT
     }), _react["default"].createElement(_Comp["default"].InfoPart, {
-      caption: "From Date:",
+      caption: "From Date",
+      styleCaption: S.INFO_CAPTION,
       text: fromDate,
-      styleCaption: S.INFO_CAPTION,
       styleText: S.INFO_TEXT
     }), _react["default"].createElement(_Comp["default"].InfoPart, {
-      caption: "To Date:",
+      style: S.TO_DATE_INFO,
+      caption: "To Date",
+      styleCaption: S.INFO_CAPTION,
       text: toDate,
-      rootStyle: S.INFO_ROOT,
-      styleCaption: S.INFO_CAPTION,
       styleText: S.INFO_TEXT
     }), _react["default"].createElement(_Comp["default"].InfoPart, {
-      caption: "Frequency:",
-      text: frequency,
+      caption: "Frequency",
       styleCaption: S.INFO_CAPTION,
+      text: frequency,
       styleText: S.INFO_TEXT
     }), this._renderQuandlLink(database_code, dataset_code), description && _react["default"].createElement(_Comp["default"].OpenClose2, {
-      caption: "Description",
       isInitialOpen: _isShortDescr(description),
-      style: S.DESCR_OC,
-      fillOpen: C_DESCR_OPEN
+      fillOpen: C_DESCR_OPEN,
+      styleItem: S.DESCR_ITEM,
+      caption: "Description"
     }, _react["default"].createElement(_Comp["default"].InfoPart, {
-      text: description,
+      style: S.DESCR_INFO,
       isHtml: true,
+      text: description,
       classText: CL_DESCR,
-      rootStyle: S.DESCR_ROOT,
       styleText: S.DESCR_TEXT
     })), this._renderNativeLink(linkFn, item));
   };

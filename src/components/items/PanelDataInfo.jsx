@@ -22,7 +22,7 @@ const S = {
   BT_CAPTION: {
     left: 286
   },
-  INFO_ROOT: {
+  TO_DATE_INFO: {
     marginTop: 4
   },
   INFO_CAPTION: {
@@ -38,10 +38,10 @@ const S = {
     color: 'black',
     textTransform: 'capitalize'
   },
-  DESCR_OC: {
-    paddingTop: 12
+  DESCR_ITEM: {
+    lineHeight: 2
   },
-  DESCR_ROOT: {
+  DESCR_INFO: {
     marginTop: 10
   },
   DESCR_TEXT: {
@@ -96,12 +96,12 @@ class PanelDataInfo extends Component {
         description
        } = info
      , { item, linkFn } = zhInfo
-     , _rootStyle = isShow
+     , _style = isShow
          ? S.ROOT_SHOW
          : S.ROOT_HIDE;
 
     return (
-       <div style={_rootStyle}>
+       <div style={_style}>
          <A.ButtonTab
            style={S.BT_CAPTION}
            caption="Chart"
@@ -112,36 +112,36 @@ class PanelDataInfo extends Component {
             styleText={S.INFO_TEXT}
          />
          <A.InfoPart
-            caption="From Date:"
+            caption="From Date"
+            styleCaption={S.INFO_CAPTION}
             text={fromDate}
-            styleCaption={S.INFO_CAPTION}
             styleText={S.INFO_TEXT}
          />
          <A.InfoPart
-            caption="To Date:"
+            style={S.TO_DATE_INFO}
+            caption="To Date"
+            styleCaption={S.INFO_CAPTION}
             text={toDate}
-            rootStyle={S.INFO_ROOT}
-            styleCaption={S.INFO_CAPTION}
             styleText={S.INFO_TEXT}
          />
          <A.InfoPart
-            caption="Frequency:"
-            text={frequency}
+            caption="Frequency"
             styleCaption={S.INFO_CAPTION}
+            text={frequency}
             styleText={S.INFO_TEXT}
          />
          {this._renderQuandlLink(database_code, dataset_code)}
          { description && <A.OpenClose2
-              caption="Description"
               isInitialOpen={_isShortDescr(description)}
-              style={S.DESCR_OC}
               fillOpen={C_DESCR_OPEN}
+              styleItem={S.DESCR_ITEM}
+              caption="Description"
              >
                <A.InfoPart
-                  text={description}
+                  style={S.DESCR_INFO}
                   isHtml={true}
+                  text={description}
                   classText={CL_DESCR}
-                  rootStyle={S.DESCR_ROOT}
                   styleText={S.DESCR_TEXT}
                />
             </A.OpenClose2>

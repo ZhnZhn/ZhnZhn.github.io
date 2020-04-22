@@ -1,5 +1,4 @@
 import Big from 'big.js';
-import DOMPurify from 'dompurify';
 
 import formatAllNumber from '../../utils/formatAllNumber'
 import mathFn from '../../math/mathFn';
@@ -61,9 +60,8 @@ const QuandlFn2 = {
        frequency='',
        database_code='',
        dataset_code=''
-      } = dataset
-     , _description = DOMPurify.sanitize(description);
-
+     } = dataset;
+     
      return  {
        name,
        toDate: newest_available_date,
@@ -71,7 +69,7 @@ const QuandlFn2 = {
        frequency,
        database_code,
        dataset_code,
-       description: _description
+       description
     };
   },
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import DOMPurify from 'dompurify';
 
 import { fetchTxt } from '../../utils/fnFetch';
-import ModalDialog from '../zhn-moleculs/ModalDialog';
-import Load from '../zhn/Load';
+import Comp from '../Comp'
+
+const { ModalDialog, Load, DivHtml } = Comp;
 
 const DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
 const S = {
@@ -18,13 +18,6 @@ const S = {
     padding: 16
   }
 };
-
-const Description = ({ _html }) => (
- <div
-    style={S.DIV}
-    dangerouslySetInnerHTML={{ __html: _html }}
-  />
-);
 
 const _isNewShow = (prevProps, props ) => prevProps !== props
  && prevProps.isShow !== props.isShow;
@@ -112,11 +105,7 @@ class DescriptionDialog extends Component {
       isLoadFailed,
       errMsg,
       descrHtml
-    } = this.state
-    , _html = DOMPurify.sanitize(descrHtml)
-    , _el = isLoading ? <Load.Loading />
-        : isLoadFailed ? <Load.LoadFailed errMsg={errMsg} />
-        : <Description _html={_html} />
+    } = this.state;
     return (
        <ModalDialog
          caption="About Datasource"
@@ -124,7 +113,10 @@ class DescriptionDialog extends Component {
          style={S.DIALOG}
          onClose={onClose}
        >
-         {_el}
+         {isLoading ? <Load.Loading />
+            : isLoadFailed ? <Load.LoadFailed errMsg={errMsg} />
+            : <DivHtml style={S.DIV} str={descrHtml} />
+         }
        </ModalDialog>
     );
   }

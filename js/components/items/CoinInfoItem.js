@@ -11,18 +11,20 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _dompurify = _interopRequireDefault(require("dompurify"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
-
-var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
-
-var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 
 var _TwitterLink = _interopRequireDefault(require("../about/TwitterLink"));
 
 var _CrcLink = _interopRequireDefault(require("../native-links/CrcLink"));
 
+//import ShowHide from '../zhn/ShowHide';
+//import OpenClose from '../zhn/OpenClose'
+//import DivHtml from '../zhn/DivHtml'
+var ShowHide = _Comp["default"].ShowHide,
+    OpenClose = _Comp["default"].OpenClose,
+    DivHtml = _Comp["default"].DivHtml;
 var CL_TOPIC = 'ci-topic';
 var S = {
   ROOT: {
@@ -92,28 +94,24 @@ var RowField = function RowField(_ref2) {
   return _react["default"].createElement("div", null, _elFields, children);
 };
 
-var Topic = function Topic(_ref3) {
+var Topic = (0, _react.memo)(function (_ref3) {
   var className = _ref3.className,
       title = _ref3.title,
       str = _ref3.str;
 
-  var __html = _dompurify["default"].sanitize(str);
-
-  if (!__html) {
+  if (!DivHtml.isHtml(str)) {
     return null;
   }
 
-  return _react["default"].createElement(_OpenClose["default"], {
+  return _react["default"].createElement(OpenClose, {
     caption: title,
     isClose: true
-  }, _react["default"].createElement("div", {
+  }, _react["default"].createElement(DivHtml, {
     className: className,
     style: S.TOPIC,
-    dangerouslySetInnerHTML: {
-      __html: __html
-    }
+    str: str
   }));
-};
+});
 
 var _isNumber = function _isNumber(n) {
   return typeof n === 'number' && !Number.isNaN(n);
@@ -223,10 +221,10 @@ function (_Component) {
       caption: Id,
       onClick: this._hToggle,
       onClose: onCloseItem
-    }), _react["default"].createElement(_ShowHide["default"], {
+    }), _react["default"].createElement(ShowHide, {
       isShow: isOpen,
       style: S.SHOW_HIDE
-    }, _react["default"].createElement(_OpenClose["default"], {
+    }, _react["default"].createElement(OpenClose, {
       caption: "Coin Params (" + Id + ")"
     }, _react["default"].createElement(RowField, {
       items: items1

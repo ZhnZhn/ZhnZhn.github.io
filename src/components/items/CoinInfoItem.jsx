@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
-import DOMPurify from 'dompurify'
+import React, { Component, memo } from 'react'
 
+import Comp from '../Comp'
 import ItemHeader from './ItemHeader'
-import ShowHide from '../zhn/ShowHide';
-import OpenClose from '../zhn/OpenClose'
+//import ShowHide from '../zhn/ShowHide';
+//import OpenClose from '../zhn/OpenClose'
+//import DivHtml from '../zhn/DivHtml'
 import TwitterLink from '../about/TwitterLink'
 import CrcLink from '../native-links/CrcLink'
+
+const { ShowHide, OpenClose, DivHtml } = Comp;
 
 const CL_TOPIC = 'ci-topic';
 
@@ -71,9 +74,8 @@ const RowField = ({ items, children }) => {
   );
 }
 
-const Topic = ({ className, title, str }) => {
-  const __html = DOMPurify.sanitize(str);
-  if (!__html){
+const Topic = memo(({ className, title, str }) => {  
+  if (!DivHtml.isHtml(str)) {
     return null;
   }
   return (
@@ -81,14 +83,14 @@ const Topic = ({ className, title, str }) => {
       caption={title}
       isClose={true}
     >
-      <div
+      <DivHtml
         className={className}
         style={S.TOPIC}
-        dangerouslySetInnerHTML={{ __html }}
+        str={str}
       />
     </OpenClose>
   );
-}
+})
 
 const _isNumber = n => typeof n === 'number'
   && !Number.isNaN(n);

@@ -1,39 +1,40 @@
-
 import React from 'react';
 
-const _renderText = (text, classText, styleText, isHtml) => {
-  return !isHtml
-    ? (<span
-         className={classText}
-         style={styleText}
-       >
-        {text}
-       </span>
-      )
-   :  (<span
-        className={classText}
-        style={styleText}
-        dangerouslySetInnerHTML={{ __html: text }}
-      />
-    );
+import DivHtml from './DivHtml'
+
+const S = {
+  INLINE: {
+    display: 'inline-block'
+  }
 };
 
 const InfoPart = (props) => {
     const {
-            rootStyle,
-            caption, styleCaption,
-            text, classText,
-            styleText, isHtml
-          } = props;
+      style,
+      caption, styleCaption,
+      isHtml, text, classText, styleText
+    } = props;
     if (!text) { return null; }
     return (
-      <div style={rootStyle}>
+      <div style={style}>
         { caption &&
           <span style={styleCaption}>
-            {caption}
+            {caption+":"}
           </span>
         }
-        {_renderText(text, classText, styleText, isHtml)}
+        {
+          isHtml ? <DivHtml
+              className={classText}
+              style={{...styleText, ...S.INLINE}}
+              str={text}
+            />
+          : <span
+              className={classText}
+              style={styleText}
+            >
+              {text}
+            </span>
+        }
       </div>
     );
 }

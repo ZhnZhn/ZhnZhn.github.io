@@ -14,9 +14,6 @@ const DF = {
 };
 
 const S = {
-  ROOT: {
-    lineHeight: 1.5
-  },
   DIV_SVG : {
     display: 'inline-block',
     width: 16,
@@ -30,7 +27,7 @@ const S = {
     color: C.TITLE,
     paddingLeft: 4,
     verticalAlign: 'top',
-    fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
+    fontFamily: 'Roboto, Arial, Lato, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
     cursor: 'pointer'
@@ -74,7 +71,7 @@ class OpenClose2 extends Component {
      super(props);
      const { isInitialOpen } = props;
       this.state = {
-        isOpen: Boolean(isInitialOpen) 
+        isOpen: Boolean(isInitialOpen)
       }
    }
 
@@ -92,7 +89,7 @@ class OpenClose2 extends Component {
 
   render(){
     const {
-      style, styleNotSelected, styleCaption, caption,
+      style, styleItem, styleNotSelected, styleCaption, caption,
       fillOpen, fillClose,
       isDraggable, option, onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop,
       children
@@ -112,15 +109,16 @@ class OpenClose2 extends Component {
         _pathV, _fillV,
         _divStyle, _classShow,
         _styleNotSelected
-       } = _crStyleConf({ isOpen, fillOpen, fillClose , styleNotSelected });
+       } = _crStyleConf({ isOpen, fillOpen, fillClose , styleNotSelected })
+
 
     return (
-      <div style={{...S.ROOT, ...style}}>
+      <div style={style}>
         <div
            role="menuitem"
            tabIndex="0"
            className={CL.NOT_SELECTED}
-           style={_styleNotSelected}
+           style={{...styleItem, ..._styleNotSelected}}
            onClick={this._hClick}
            onKeyDown={this._hKeyDown}
            {..._dragOption}
