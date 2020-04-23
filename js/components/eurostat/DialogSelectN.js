@@ -362,7 +362,7 @@ function (_Component) {
         dateOptions = _this$state.dateOptions,
         validationMessages = _this$state.validationMessages,
         _isCategory = isCategory(chartType),
-        _isRowFd = isCh && isFd && !_isCategory,
+        _isRowFd = isFd && !_isCategory,
         _noForDate = noForDate || !_isCategory;
 
     return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {

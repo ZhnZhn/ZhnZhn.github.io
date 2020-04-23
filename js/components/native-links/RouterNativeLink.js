@@ -13,6 +13,8 @@ var _EuronextLink = _interopRequireDefault(require("./EuronextLink"));
 
 var _NasdaqLink = _interopRequireDefault(require("./NasdaqLink"));
 
+var _BarchartLink = _interopRequireDefault(require("./BarchartLink"));
+
 var _LmeLink = _interopRequireDefault(require("./LmeLink"));
 
 var _UnComtradeLink = _interopRequireDefault(require("./UnComtradeLink"));
@@ -30,6 +32,7 @@ var RouterNativeLink = {
   QUANDL: _QuandlLink["default"],
   EURONEXT: _EuronextLink["default"],
   NASDAQ: _NasdaqLink["default"],
+  BR: _BarchartLink["default"],
   LME: _LmeLink["default"],
   UN_COMTRADE: _UnComtradeLink["default"],
   FAO_STAT: _FaoStatLink["default"],

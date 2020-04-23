@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/components/native-links/RouterNativeLink.js"],"names":["RouterNativeLink","DF","DfLink","QUANDL","QuandlLink","EURONEXT","EuronextLink","NASDAQ","NasdaqLink","LME","LmeLink","UN_COMTRADE","UnComtradeLink","FAO_STAT","FaoStatLink","FRED","FredLink","CRC","CrcLink","ES","EsLink"],"mappings":";;;;;;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,gBAAgB,GAAG;AACvBC,EAAAA,EAAE,EAAEC,kBADmB;AAEvBC,EAAAA,MAAM,EAAEC,sBAFe;AAGvBC,EAAAA,QAAQ,EAAEC,wBAHa;AAIvBC,EAAAA,MAAM,EAAEC,sBAJe;AAKvBC,EAAAA,GAAG,EAAEC,mBALkB;AAMvBC,EAAAA,WAAW,EAAEC,0BANU;AAOvBC,EAAAA,QAAQ,EAAEC,uBAPa;AAQvBC,EAAAA,IAAI,EAAEC,oBARiB;AASvBC,EAAAA,GAAG,EAAEC,mBATkB;AAUvBC,EAAAA,EAAE,EAAEC;AAVmB,CAAzB;eAaepB,gB","sourcesContent":["\r\nimport DfLink from './DfLink'\r\nimport QuandlLink from './QuandlLink'\r\nimport EuronextLink from './EuronextLink'\r\nimport NasdaqLink from './NasdaqLink'\r\nimport LmeLink from './LmeLink'\r\nimport UnComtradeLink from './UnComtradeLink'\r\nimport FaoStatLink from './FaoStatLink'\r\nimport FredLink from './FredLink'\r\nimport CrcLink from './CrcLink'\r\nimport EsLink from './EsLink'\r\n\r\nconst RouterNativeLink = {\r\n  DF: DfLink,\r\n  QUANDL: QuandlLink,\r\n  EURONEXT: EuronextLink,\r\n  NASDAQ: NasdaqLink,\r\n  LME: LmeLink,\r\n  UN_COMTRADE: UnComtradeLink,\r\n  FAO_STAT: FaoStatLink,\r\n  FRED: FredLink,  \r\n  CRC: CrcLink,\r\n  ES: EsLink\r\n};\r\n\r\nexport default RouterNativeLink\r\n"],"file":"RouterNativeLink.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/RouterNativeLink.js"
+ ],
+ "file": "../../../src/components/native-links/RouterNativeLink.js",
+ "names": [
+  "RouterNativeLink",
+  "DF",
+  "DfLink",
+  "QUANDL",
+  "QuandlLink",
+  "EURONEXT",
+  "EuronextLink",
+  "NASDAQ",
+  "NasdaqLink",
+  "BR",
+  "BarchartLink",
+  "LME",
+  "LmeLink",
+  "UN_COMTRADE",
+  "UnComtradeLink",
+  "FAO_STAT",
+  "FaoStatLink",
+  "FRED",
+  "FredLink",
+  "CRC",
+  "CrcLink",
+  "ES",
+  "EsLink"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,gBAAgB,GAAG;AACvBC,EAAAA,EAAE,EAAEC,kBADmB;AAEvBC,EAAAA,MAAM,EAAEC,sBAFe;AAGvBC,EAAAA,QAAQ,EAAEC,wBAHa;AAIvBC,EAAAA,MAAM,EAAEC,sBAJe;AAKvBC,EAAAA,EAAE,EAAEC,wBALmB;AAMvBC,EAAAA,GAAG,EAAEC,mBANkB;AAOvBC,EAAAA,WAAW,EAAEC,0BAPU;AAQvBC,EAAAA,QAAQ,EAAEC,uBARa;AASvBC,EAAAA,IAAI,EAAEC,oBATiB;AAUvBC,EAAAA,GAAG,EAAEC,mBAVkB;AAWvBC,EAAAA,EAAE,EAAEC;AAXmB,CAAzB;eAcetB,gB"
+}

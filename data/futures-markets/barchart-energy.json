@@ -1,0 +1,10 @@
+{
+  "items":[
+    {"caption": "Crude Oil WTI (NYMEX/CL)", "value": "CL" },
+    {"caption": "NY Harbor ULSD (NYMEX/HO)", "value": "HO" },
+    {"caption": "Gasoline Blendstock NY Harbor RBOB (NYMEX/RB)", "value": "RB" },
+    {"caption": "Natural Gas (NYMEX/NG)", "value": "NG"},
+    {"caption": "Brent Crude Oil Financial Futures (NYMEX/BZ)", "value": "QA"},
+    {"caption": "Ethanol (CBOT/EH)", "value": "ZK"}
+  ]
+}

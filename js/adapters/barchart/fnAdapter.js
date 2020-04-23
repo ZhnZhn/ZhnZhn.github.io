@@ -15,16 +15,21 @@ var _AdapterStockFn = _interopRequireDefault(require("../AdapterStockFn"));
 
 var crItemConf = _AdapterFn["default"].crItemConf,
     crValueConf = _AdapterFn["default"].crValueConf,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    valueMoving = _AdapterFn["default"].valueMoving,
+    joinBy = _AdapterFn["default"].joinBy;
 var toSeriesData = _AdapterStockFn["default"].toSeriesData;
 var DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.com'>market data</a> provided by Barchart Market Data Solutions.<br><br>" + "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>";
 var DATA_SOURCE = "Barchart Market Data Solutions";
 
-var _crInfo = function _crInfo(caption) {
+var _crInfo = function _crInfo(_ref) {
+  var _ref$title = _ref.title,
+      title = _ref$title === void 0 ? '' : _ref$title,
+      _ref$subtitle = _ref.subtitle,
+      subtitle = _ref$subtitle === void 0 ? '' : _ref$subtitle;
   return {
     description: DESCR,
     frequency: "Daily",
-    name: caption,
+    name: title + " " + subtitle,
     toDate: _DateUtils["default"].getFromDate(0),
     fromDate: _DateUtils["default"].getFromDate(1)
   };
@@ -32,19 +37,24 @@ var _crInfo = function _crInfo(caption) {
 
 var _crZhConfig = function _crZhConfig(id, data, option) {
   var value = option.value,
+      linkFn = option.linkFn,
+      dfT = option.dfT,
+      items = option.items,
       dataSource = DATA_SOURCE;
   return {
+    key: value,
+    item: value,
     columnName: "Close",
     dataSource: dataSource,
     id: id,
-    key: value,
-    item: value,
-    linkFn: "NASDAQ",
+    linkFn: linkFn,
     itemConf: (0, _extends2["default"])({
       _itemKey: value
     }, crItemConf(option), {}, crValueConf(data), {
       value: value,
-      dataSource: dataSource
+      dataSource: dataSource,
+      dfT: dfT,
+      items: items
     }),
     legend: _AdapterFn["default"].stockSeriesLegend()
   };
@@ -52,11 +62,7 @@ var _crZhConfig = function _crZhConfig(id, data, option) {
 
 var fnAdapter = {
   toSeriesData: toSeriesData,
-  crTitle: function crTitle(option) {
-    return {
-      title: option.title || ''
-    };
-  },
+  joinBy: joinBy,
   crChartId: function crChartId(option) {
     var _option$value = option.value,
         value = _option$value === void 0 ? '' : _option$value;
@@ -71,15 +77,13 @@ var fnAdapter = {
       isDrawDeltaExtrems: isDrawDeltaExtrems
     });
   },
-  crConfigOption: function crConfigOption(_ref) {
-    var chartId = _ref.chartId,
-        option = _ref.option,
-        data = _ref.data;
-    var _option$title = option.title,
-        title = _option$title === void 0 ? '' : _option$title;
+  crConfigOption: function crConfigOption(_ref2) {
+    var chartId = _ref2.chartId,
+        option = _ref2.option,
+        data = _ref2.data;
     return {
       valueMoving: valueMoving(data),
-      info: _crInfo(title),
+      info: _crInfo(option),
       zhConfig: _crZhConfig(chartId, data, option)
     };
   }

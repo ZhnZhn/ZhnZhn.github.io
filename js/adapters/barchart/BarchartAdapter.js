@@ -11,17 +11,57 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crTitle = _fnAdapter["default"].crTitle,
-    crChartId = _fnAdapter["default"].crChartId,
+var crChartId = _fnAdapter["default"].crChartId,
     crData = _fnAdapter["default"].crData,
     crConfigOption = _fnAdapter["default"].crConfigOption,
-    toSeriesData = _fnAdapter["default"].toSeriesData;
+    toSeriesData = _fnAdapter["default"].toSeriesData,
+    joinBy = _fnAdapter["default"].joinBy;
+
+var _getValue = function _getValue(obj) {
+  return obj && obj.value || '';
+};
+
+var _getCaption = function _getCaption(obj) {
+  return obj && obj.caption || '';
+};
+
+var _crDfKey = function _crDfKey(option) {
+  var value = option.value,
+      _option$item = option.item,
+      item = _option$item === void 0 ? {} : _option$item;
+  option.value = value === 'noresult' ? item.inputValue : value;
+  option.linkFn = "NASDAQ";
+  return option.value;
+};
+
+var _crFtKey = function _crFtKey(option) {
+  var _option$items = option.items,
+      items = _option$items === void 0 ? [] : _option$items,
+      it1 = items[0],
+      it2 = items[1],
+      it3 = items[2];
+  option.linkFn = "BR";
+  option.subtitle = joinBy(' ', _getCaption(it2), _getCaption(it3));
+  return option.value = joinBy('', _getValue(it1), _getValue(it2), _getValue(it3));
+};
+
+var _rCrKey = {
+  DF: _crDfKey,
+  FT: _crFtKey
+};
 var BarchartAdapter = {
+  crKey: function crKey(option) {
+    var dfT = option.dfT,
+        _crKey = _rCrKey[dfT] || _rCrKey.DF;
+
+    return _crKey(option);
+  },
   toConfig: function toConfig(json, option) {
     var chartId = crChartId(option),
-        _crTitle = crTitle(option),
-        title = _crTitle.title,
-        subtitle = _crTitle.subtitle,
+        _option$title = option.title,
+        title = _option$title === void 0 ? '' : _option$title,
+        _option$subtitle = option.subtitle,
+        subtitle = _option$subtitle === void 0 ? '' : _option$subtitle,
         dataOption = crData(json, option),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
@@ -30,7 +70,6 @@ var BarchartAdapter = {
       option: option,
       data: data
     }))).addZhPoints(dataMfi).toConfig();
-
     return {
       config: config
     };

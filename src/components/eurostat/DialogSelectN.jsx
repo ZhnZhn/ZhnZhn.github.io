@@ -333,7 +333,7 @@ class DialogSelectN extends Component {
       validationMessages
     } = this.state
     , _isCategory = isCategory(chartType)
-    , _isRowFd = isCh && isFd && !_isCategory
+    , _isRowFd = isFd && !_isCategory
     , _noForDate = noForDate || !_isCategory;
     return(
       <D.DraggableDialog

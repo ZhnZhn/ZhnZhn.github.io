@@ -4,21 +4,37 @@ exports.__esModule = true;
 exports["default"] = void 0;
 var C = {
   ROOT: "https://marketdata.websol.barchart.com/getHistory.jsonp",
-  DF_FROM_DATE: '20160627000000',
+  //DF_FROM_DATE: '20190627000000',
   REQUEST_ERROR: 'Request Error',
   RESPONSE_EMPTY: 'Dataset Empty'
 };
+
+var _crDfUrl = function _crDfUrl(_ref) {
+  var value = _ref.value,
+      _ref$fromDate = _ref.fromDate,
+      fromDate = _ref$fromDate === void 0 ? '' : _ref$fromDate,
+      apiKey = _ref.apiKey;
+  return C.ROOT + "?key=" + apiKey + "&symbol=" + value + "&type=daily&startDate=" + fromDate + "&dividends=0&splits=0";
+};
+
+var _crFtUrl = function _crFtUrl(_ref2) {
+  var apiKey = _ref2.apiKey,
+      value = _ref2.value,
+      _ref2$fromDate = _ref2.fromDate,
+      fromDate = _ref2$fromDate === void 0 ? '' : _ref2$fromDate;
+  return C.ROOT + "?key=" + apiKey + "&symbol=" + value + "&type=daily&startDate=" + fromDate;
+};
+
+var _rCrUrl = {
+  DF: _crDfUrl,
+  FT: _crFtUrl
+};
 var BarchartApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var value = option.value,
-        _option$fromDate = option.fromDate,
-        fromDate = _option$fromDate === void 0 ? C.DF_FROM_DATE : _option$fromDate,
-        _option$item = option.item,
-        item = _option$item === void 0 ? {} : _option$item,
-        apiKey = option.apiKey,
-        _symbol = value === 'noresult' ? option.value = item.inputValue : value;
+    var dfT = option.dfT,
+        _crUrl = _rCrUrl[dfT] || _rCrUrl.DF;
 
-    return C.ROOT + "?key=" + apiKey + "&symbol=" + _symbol + "&type=daily&startDate=" + fromDate + "&dividends=0&splits=0";
+    return _crUrl(option);
   },
   checkResponse: function checkResponse(json) {
     if (!(json && Array.isArray(json.results))) {

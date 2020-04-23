@@ -1,0 +1,14 @@
+{
+  "items":[
+    {"caption":"Corn (CBOT/ZC)","value":"ZC"},
+    {"caption":"Soybean (CBOT/ZS)","value":"ZS"},
+    {"caption":"Soybean Meal (CBOT/ZM)","value":"ZM"},
+    {"caption":"Soybean Oil (CBOT/ZL)","value":"ZL"},
+    {"caption":"Chicago Soft Red Winter Wheat (CBOT/ZW)","value":"ZW"},
+    {"caption":"KC Hard Red Winter Wheat (KCBT/KE)","value":"KE"},
+    {"caption":"Hard Red Spring Wheat (MGEX/MWE)","value":"MW"},
+    {"caption":"Oats (CBOT/ZO)","value":"ZO"},
+    {"caption":"Rough Rice (CBOT/ZR)","value":"ZR"},
+    {"caption":"Rapeseed Canola (WCE/RS)","value":"RS"}
+  ]
+}

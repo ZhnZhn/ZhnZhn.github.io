@@ -7,7 +7,8 @@ import AdapterStockFn from '../AdapterStockFn'
 const {
   crItemConf,
   crValueConf,
-  valueMoving
+  valueMoving,
+  joinBy
 } =AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
@@ -15,40 +16,38 @@ const DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.co
               "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>"
 const DATA_SOURCE = "Barchart Market Data Solutions"
 
-const _crInfo = (caption) => ({
+const _crInfo = ({ title='', subtitle='' }) => ({
   description: DESCR,
   frequency: "Daily",
-  name: caption,
+  name: `${title} ${subtitle}`,
   toDate: dt.getFromDate(0),
   fromDate: dt.getFromDate(1)
 });
 
 const _crZhConfig = (id, data, option) => {
-  const { value } = option
+  const { value, linkFn, dfT, items } = option
   , dataSource = DATA_SOURCE;
   return {
+    key: value,
+    item: value,
     columnName: "Close",
     dataSource,
     id,
-    key: value,
-    item: value,
-    linkFn: "NASDAQ",
+    linkFn,
     itemConf: {
       _itemKey: value,
       ...crItemConf(option),
       ...crValueConf(data),
-      value, dataSource
+      value, dataSource,
+      dfT, items
     },
     legend: AdapterFn.stockSeriesLegend()
   }
 };
 
 const fnAdapter = {
-  toSeriesData: toSeriesData,
-
-  crTitle: (option) => ({
-    title: option.title || ''
-  }),
+  toSeriesData,
+  joinBy,
 
   crChartId: (option) => {
     const { value='' } = option;
@@ -67,14 +66,11 @@ const fnAdapter = {
     });
   },
 
-  crConfigOption: ({ chartId, option, data }) => {
-    const { title='' } = option;
-    return {
-      valueMoving: valueMoving(data),
-      info: _crInfo(title),
-      zhConfig: _crZhConfig(chartId, data, option)
-    };
-  }
+  crConfigOption: ({ chartId, option, data }) => ({
+    valueMoving: valueMoving(data),
+    info: _crInfo(option),
+    zhConfig: _crZhConfig(chartId, data, option)
+  })
 }
 
 export default fnAdapter
