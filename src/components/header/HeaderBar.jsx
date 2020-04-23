@@ -62,7 +62,7 @@ class HeaderBar extends Component {
     this._settingFn = props.store.exportSettingFn()
 
     this._hShowEconomic = BA.showBrowserDynamic
-      .bind(null, BT.ECONOMIC)
+      .bind(null, BT.ECONOMICS)
     this._hShowEurostat = BA.showBrowserDynamic
       .bind(null, BT.EUROSTAT)
     this._hShowWatch = BA.showBrowserDynamic

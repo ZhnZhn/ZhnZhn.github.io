@@ -10,12 +10,16 @@ const C = {
 const BarchartApi = {
   getRequestUrl(option) {
     const {
-            value,
-            fromDate=C.DF_FROM_DATE,
-            apiKey
-          } = option;
+      value,
+      fromDate=C.DF_FROM_DATE,
+      item={},
+      apiKey
+    } = option
+    , _symbol = value === 'noresult'
+       ? (option.value = item.inputValue)
+       : value;
 
-    return `${C.ROOT}?key=${apiKey}&symbol=${value}&type=daily&startDate=${fromDate}&dividends=0&splits=0`;
+    return `${C.ROOT}?key=${apiKey}&symbol=${_symbol}&type=daily&startDate=${fromDate}&dividends=0&splits=0`;
   },
 
   checkResponse(json){

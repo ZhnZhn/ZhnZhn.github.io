@@ -16,7 +16,7 @@ var CL = {
   BR: CL_ROW + " item__browser",
   Q: CL_ROW + " item__quandl",
   DBN: CL_ROW + " item__dbnomics",
-  EU: CL_ROW + " item__eurostat",
+  ORG: CL_ROW + " item__org",
   W: CL_ROW + " item__watch",
   AB: CL_ROW + " item__about"
 };
@@ -48,19 +48,14 @@ var crBrowserModel = function crBrowserModel() {
       cn: CL.BR,
       name: 'Stock Markets'
     }, {
-      cn: CL.EU,
-      name: 'UN Comtrade',
-      onClick: _fBD(_Type.BrowserType.UN_COMTRADE),
-      isClose: true
+      id: 'page_04',
+      type: 'sub',
+      cn: CL.BR,
+      name: 'World Organizations'
     }, {
-      cn: CL.EU,
-      name: 'FAOSTAT',
-      onClick: _fBD(_Type.BrowserType.FAOSTAT),
-      isClose: true
-    }, {
-      cn: CL.EU,
-      name: 'World Bank',
-      onClick: _fBD(_Type.BrowserType.WORLD_BANK),
+      cn: CL.BR,
+      name: 'Futures Markets',
+      onClick: _fBD(_Type.BrowserType.FUTURES),
       isClose: true
     }, {
       cn: CL.BR,
@@ -79,53 +74,53 @@ var crBrowserModel = function crBrowserModel() {
       isClose: true
     }],
     page_01: [{
-      cn: CL.Q,
-      name: 'World Economy',
-      onClick: _fBD(_Type.BrowserType.ECONOMIC),
-      isClose: true
-    }, {
       cn: CL.DBN,
       name: 'DB Nomics',
       onClick: _fBD(_Type.BrowserType.DB_NOMICS),
       isClose: true
     }, {
       cn: CL.BR,
-      name: 'USA Economy',
-      onClick: _fBD(_Type.BrowserType.US_ECONOMY),
+      name: 'USA Economics',
+      onClick: _fBD(_Type.BrowserType.US_ECONOMICS),
+      isClose: true
+    }, {
+      cn: CL.Q,
+      name: 'World Economics',
+      onClick: _fBD(_Type.BrowserType.ECONOMICS),
       isClose: true
     }],
     page_02: [{
-      cn: CL.EU,
+      cn: CL.ORG,
       name: 'Eurostat',
       onClick: _fBD(_Type.BrowserType.EUROSTAT),
       isClose: true
     }, {
-      cn: CL.EU,
+      cn: CL.ORG,
       name: 'Insee: France Statistics',
       onClick: _fBD(_Type.BrowserType.FRANCE_STATISTICS),
       isClose: true
     }, {
-      cn: CL.EU,
+      cn: CL.ORG,
       name: 'Statistics Norway',
       onClick: _fBD(_Type.BrowserType.NORWAY_STATISTICS),
       isClose: true
     }, {
-      cn: CL.EU,
+      cn: CL.ORG,
       name: 'Statistics Norway All',
       onClick: _fBD(_Type.BrowserType.NORWAY_STAT_ALL),
       isClose: true
     }, {
-      cn: CL.EU,
+      cn: CL.ORG,
       name: 'Statistics Sweden',
       onClick: _fBD(_Type.BrowserType.SWEDEN_STAT),
       isClose: true
     }, {
-      cn: CL.EU,
+      cn: CL.ORG,
       name: 'Statistics Sweden All',
       onClick: _fBD(_Type.BrowserType.SWEDEN_STAT_ALL),
       isClose: true
     }, {
-      cn: CL.EU,
+      cn: CL.ORG,
       name: 'Statistics Finland All',
       onClick: _fBD(_Type.BrowserType.FINLAND_STAT_ALL),
       isClose: true
@@ -144,6 +139,22 @@ var crBrowserModel = function crBrowserModel() {
       cn: CL.BR,
       name: 'NASDAQ by Sectors',
       onClick: _fBD(_Type.BrowserType.NASDAQ_STOCKS),
+      isClose: true
+    }],
+    page_04: [{
+      cn: CL.ORG,
+      name: 'FAOSTAT',
+      onClick: _fBD(_Type.BrowserType.FAOSTAT),
+      isClose: true
+    }, {
+      cn: CL.ORG,
+      name: 'UN Comtrade',
+      onClick: _fBD(_Type.BrowserType.UN_COMTRADE),
+      isClose: true
+    }, {
+      cn: CL.ORG,
+      name: 'World Bank',
+      onClick: _fBD(_Type.BrowserType.WORLD_BANK),
       isClose: true
     }]
   };

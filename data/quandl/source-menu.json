@@ -6,22 +6,19 @@
         "items": [
             { "id": "QE_CURRENCY_HISTORY" }
         ]
-    },
-    {
+    },{
         "caption": "Central Banks",
         "items": [
             { "id": "QE_BANK_CANADA" },
             { "id": "QE_BANK_SWISS" }
         ]
-    },
-    {
+    },{
         "caption": "Indicators & Index",
         "items": [
             { "id": "QE_RATE_INFLATION" },
             { "id": "QE_OECD" }
         ]
-    },
-    {
+    },{
         "caption": "Commodity",
         "items": [
             { "id": "QE_COMMODITY_PRICE" },
@@ -31,16 +28,6 @@
             { "id": "QE_BP" },
             { "id": "QE_PETROLEUM_PRICES" },
             { "id": "QE_ROGERS_INDICES" }
-        ]
-    },
-    {
-        "caption": "Futures",
-        "items": [
-            { "id": "QE_CHINA_FINANCE_FUTURE" },
-            { "id": "QE_DCE_FUTURE" },
-            { "id": "QE_SHANGHAI_FUTURE" },
-            { "id": "QE_ZCE_FUTURE" },
-            { "id": "QE_WIKI_FUTURE" }
         ]
     },{
       "caption": "Miscellaneous",
@@ -338,133 +325,7 @@
             "dataColumn": 1,
             "dataSource": "The Economist - Big Mac Index (Code: ECONOMIST)"
         }
-    },
-    "QE_CHINA_FINANCE_FUTURE": {
-        "type": "QE_CHINA_FINANCE_FUTURE",
-        "menuTitle": "China Finance FE",
-        "dialogCaption": "China Finance FE",
-        "chartContainerCaption": "Quandl: China Finance Futures Exchange",
-        "dialogType": "Futures3Dialog",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/china-finance-futures.html",
-            "futuresURI": "./data/quandl/china-finance-futures.json",
-            "valueFn": "RFutures",
-            "valueFnPrefix": "CFFEX",
-            "loadId": "Q",
-            "columnName": "Settle",
-            "seriaColumnNames": [
-                "Open",
-                "High",
-                "Low",
-                "Close",
-                "Pre Settle",
-                "Volume",
-                "Open Interest",
-                "Turnover"
-            ],
-            "dataSource": "Chine Financial Futures Exchange (Code: CFFEX)"
-        }
-    },
-    "QE_DCE_FUTURE": {
-        "type": "QE_DCE_FUTURE",
-        "menuTitle": "Dalian CE",
-        "dialogCaption": "Dalian CE Futures",
-        "chartContainerCaption": "Quandl: Dalian Commodities Exchange Futures",
-        "dialogType": "Futures3Dialog",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/dce-futures.html",
-            "futuresURI": "./data/quandl/dce-futures.json",
-            "valueFn": "RFutures",
-            "valueFnPrefix": "DCE",
-            "loadId": "Q",
-            "columnName": "Settle",
-            "seriaColumnNames": [
-                "Open",
-                "High",
-                "Low",
-                "Close",
-                "Pre Settle",
-                "Volume",
-                "Open Interest",
-                "Turnover"
-            ],
-            "dataSource": "Dalian Commodities Exchange (Code: DCE)"
-        }
-    },
-    "QE_ZCE_FUTURE": {
-        "type": "QE_ZCE_FUTURE",
-        "menuTitle": "Zhengzhou CE",
-        "dialogCaption": "Zhengzhou CE Futures",
-        "chartContainerCaption": "Quandl: Zhengzhou Commodities Exchange Futures",
-        "dialogType": "Futures3Dialog",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/zce-futures.html",
-            "futuresURI": "./data/quandl/zce-futures.json",
-            "valueFn": "RFutures",
-            "valueFnPrefix": "ZCE",
-            "loadId": "Q",
-            "columnName": "Settle",
-            "seriaColumnNames": [
-                "Open",
-                "High",
-                "Low",
-                "Close",
-                "Pre Settle",
-                "Volume",
-                "Open Interest",
-                "Turnover"
-            ],
-            "dataSource": "Zhengzhou Commodities Exchange (Code: ZCE)"
-        }
-    },
-    "QE_SHANGHAI_FUTURE": {
-        "type": "QE_SHANGHAI_FUTURE",
-        "menuTitle": "Shanghai FE",
-        "dialogCaption": "Shanghai FE",
-        "chartContainerCaption": "Quandl: Shanghai Futures Exchange",
-        "dialogType": "Futures3Dialog",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/shanghai-futures.html",
-            "futuresURI": "./data/quandl/shanghai-futures.json",
-            "valueFn": "RFutures",
-            "valueFnPrefix": "SHFE",
-            "loadId": "Q",
-            "columnName": "Settle",
-            "seriaColumnNames": [
-                "Open",
-                "High",
-                "Low",
-                "Close",
-                "Pre Settle",
-                "Volume",
-                "O.I."
-            ],
-            "dataSource": "Shanghai Futures Exchange (Code: SHFE)"
-        }
-    },
-    "QE_WIKI_FUTURE": {
-        "type": "QE_WIKI_FUTURE",
-        "menuTitle": "Wiki Continuous",
-        "dialogCaption": "Wiki Continuous Futures",
-        "chartContainerCaption": "Quandl: Wiki Continuous Futures",
-        "dialogType": "FuturesWikiDialog",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/wiki-futures.html",
-            "futuresURI": "./data/quandl/wiki-futures.json",
-            "valueFn": "RWikiFutures",
-            "loadId": "Q",
-            "columnName": "Settle",
-            "seriaColumnNames": [
-                "Open",
-                "High",
-                "Low",
-                "Volume",
-                "Prev. Day Open Interest"
-            ],
-            "isFd": true,
-            "nInitFromDate": 2,
-            "dataSource": "Wiki Continuous Futures (Code: CHRIS)"
-        }
     }
+
   }
 }

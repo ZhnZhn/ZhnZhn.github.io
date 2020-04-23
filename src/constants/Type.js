@@ -14,7 +14,7 @@ export const BrowserType = {
    SWEDEN_STAT_ALL: 'SWS_ALL',
    FINLAND_STAT_ALL: 'SFL',
 
-   ECONOMIC: 'QE',
+   ECONOMICS: 'QE',
 
    NYSE_STOCKS: 'NS',
    NASDAQ_STOCKS: 'NQS',
@@ -22,9 +22,10 @@ export const BrowserType = {
    STOCKS_BY_SECTORS: 'STOCKS_BY_SECTORS',
 
    DB_NOMICS: 'DBN',
-   US_ECONOMY: 'USAE',
+   US_ECONOMICS: 'USAE',
 
    BLOCKCHAIN: 'BC',
+   FUTURES: 'FT',
 
    WATCH_LIST: 'WL'
 }

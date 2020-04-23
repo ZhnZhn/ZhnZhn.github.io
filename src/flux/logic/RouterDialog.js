@@ -97,7 +97,7 @@ const _router = {
   },
   getES() {
     return this.ES || this._loadES();
-  },  
+  },
   get DialogSelectN() {
     return this.getES()
       .then(D => D.SelectN);
@@ -150,10 +150,12 @@ const _router = {
     return this.QE.then(D => D.UNCommodityTrade);
   },
   get Futures3Dialog() {
-    return this.QE.then(D => D.Futures3);
+    const _QE = this.QE || this._loadQE();
+    return _QE.then(D => D.Futures3);
   },
   get FuturesWikiDialog() {
-    return this.QE.then(D => D.FuturesWiki);
+    const _QE = this.QE || this._loadQE();
+    return _QE.then(D => D.FuturesWiki);
   },
   get JodiWorldOilDialog() {
     return this.QE.then(D => D.JodiWorldOil);

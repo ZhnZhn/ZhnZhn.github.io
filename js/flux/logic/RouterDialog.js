@@ -209,13 +209,17 @@ var _router = {
   },
 
   get Futures3Dialog() {
-    return this.QE.then(function (D) {
+    var _QE = this.QE || this._loadQE();
+
+    return _QE.then(function (D) {
       return D.Futures3;
     });
   },
 
   get FuturesWikiDialog() {
-    return this.QE.then(function (D) {
+    var _QE = this.QE || this._loadQE();
+
+    return _QE.then(function (D) {
       return D.FuturesWiki;
     });
   },

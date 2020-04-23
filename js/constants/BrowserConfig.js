@@ -32,10 +32,10 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
   isDynamic: true,
   caption: 'World Bank',
   sourceMenuUrl: './data/world-bank/source-menu.json'
-}, _BrowserConfig[_Type.BrowserType.ECONOMIC] = {
-  browserType: _Type.BrowserType.ECONOMIC,
+}, _BrowserConfig[_Type.BrowserType.ECONOMICS] = {
+  browserType: _Type.BrowserType.ECONOMICS,
   isDynamic: true,
-  caption: 'Quandl: World Economy',
+  caption: 'Quandl: World Economics',
   sourceMenuUrl: './data/quandl/source-menu.json'
 }, _BrowserConfig[_Type.BrowserType.DB_NOMICS] = {
   browserType: _Type.BrowserType.DB_NOMICS,
@@ -47,6 +47,11 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
   isDynamic: true,
   caption: 'Blockchain',
   sourceMenuUrl: './data/blockchain/source-menu.json'
+}, _BrowserConfig[_Type.BrowserType.FUTURES] = {
+  browserType: _Type.BrowserType.FUTURES,
+  isDynamic: true,
+  caption: 'Futures Markets',
+  sourceMenuUrl: './data/futures-markets/source-menu.json'
 }, _BrowserConfig[_Type.BrowserType.FRANCE_STATISTICS] = {
   browserType: _Type.BrowserType.FRANCE_STATISTICS,
   isDynamic: true,
@@ -99,10 +104,10 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
     noTime: true,
     rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
   }
-}, _BrowserConfig[_Type.BrowserType.US_ECONOMY] = {
-  browserType: _Type.BrowserType.US_ECONOMY,
+}, _BrowserConfig[_Type.BrowserType.US_ECONOMICS] = {
+  browserType: _Type.BrowserType.US_ECONOMICS,
   isDynamic: true,
-  caption: 'USA Economy',
+  caption: 'USA Economics',
   sourceMenuUrl: './data/usa-economy/source-menu.json'
 }, _BrowserConfig[_Type.BrowserType.NYSE_STOCKS] = {
   browserType: _Type.BrowserType.NYSE_STOCKS,

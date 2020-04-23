@@ -1,1 +1,31 @@
-{"version":3,"sources":["../../../src/adapters/barchart/BarchartApi.js"],"names":["C","ROOT","DF_FROM_DATE","REQUEST_ERROR","RESPONSE_EMPTY","BarchartApi","getRequestUrl","option","value","fromDate","apiKey","checkResponse","json","Array","isArray","results","errCaption","message"],"mappings":";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE,yDADE;AAERC,EAAAA,YAAY,EAAE,gBAFN;AAIRC,EAAAA,aAAa,EAAE,eAJP;AAKRC,EAAAA,cAAc,EAAE;AALR,CAAV;AAQA,IAAMC,WAAW,GAAG;AAClBC,EAAAA,aADkB,yBACJC,MADI,EACI;AAAA,QAEZC,KAFY,GAKVD,MALU,CAEZC,KAFY;AAAA,2BAKVD,MALU,CAGZE,QAHY;AAAA,QAGZA,QAHY,iCAGHT,CAAC,CAACE,YAHC;AAAA,QAIZQ,MAJY,GAKVH,MALU,CAIZG,MAJY;AAOpB,WAAUV,CAAC,CAACC,IAAZ,aAAwBS,MAAxB,gBAAyCF,KAAzC,8BAAuEC,QAAvE;AACD,GATiB;AAWlBE,EAAAA,aAXkB,yBAWJC,IAXI,EAWC;AACjB,QAAK,EAAEA,IAAI,IAAIC,KAAK,CAACC,OAAN,CAAcF,IAAI,CAACG,OAAnB,CAAV,CAAL,EAA8C;AAC5C,YAAM;AACJC,QAAAA,UAAU,EAAEhB,CAAC,CAACG,aADV;AAEJc,QAAAA,OAAO,EAAEjB,CAAC,CAACI;AAFP,OAAN;AAID;;AACD,WAAO,IAAP;AACD;AAnBiB,CAApB;eAsBiBC,W","sourcesContent":["\r\nconst C = {\r\n  ROOT: \"https://marketdata.websol.barchart.com/getHistory.jsonp\",\r\n  DF_FROM_DATE: '20160627000000',\r\n\r\n  REQUEST_ERROR: 'Request Error',\r\n  RESPONSE_EMPTY: 'Dataset Empty'\r\n};\r\n\r\nconst BarchartApi = {\r\n  getRequestUrl(option) {\r\n    const {\r\n            value,\r\n            fromDate=C.DF_FROM_DATE,\r\n            apiKey\r\n          } = option;\r\n\r\n    return `${C.ROOT}?key=${apiKey}&symbol=${value}&type=daily&startDate=${fromDate}&dividends=0&splits=0`;\r\n  },\r\n\r\n  checkResponse(json){\r\n    if ( !(json && Array.isArray(json.results)) ) {\r\n      throw {\r\n        errCaption: C.REQUEST_ERROR,\r\n        message: C.RESPONSE_EMPTY\r\n      };\r\n    }\r\n    return true;\r\n  }\r\n};\r\n\r\n  export default BarchartApi\r\n"],"file":"BarchartApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/barchart/BarchartApi.js"
+ ],
+ "file": "../../../src/adapters/barchart/BarchartApi.js",
+ "names": [
+  "C",
+  "ROOT",
+  "DF_FROM_DATE",
+  "REQUEST_ERROR",
+  "RESPONSE_EMPTY",
+  "BarchartApi",
+  "getRequestUrl",
+  "option",
+  "value",
+  "fromDate",
+  "item",
+  "apiKey",
+  "_symbol",
+  "inputValue",
+  "checkResponse",
+  "json",
+  "Array",
+  "isArray",
+  "results",
+  "errCaption",
+  "message"
+ ],
+ "mappings": ";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE,yDADE;AAERC,EAAAA,YAAY,EAAE,gBAFN;AAIRC,EAAAA,aAAa,EAAE,eAJP;AAKRC,EAAAA,cAAc,EAAE;AALR,CAAV;AAQA,IAAMC,WAAW,GAAG;AAClBC,EAAAA,aADkB,yBACJC,MADI,EACI;AAAA,QAElBC,KAFkB,GAMhBD,MANgB,CAElBC,KAFkB;AAAA,2BAMhBD,MANgB,CAGlBE,QAHkB;AAAA,QAGlBA,QAHkB,iCAGTT,CAAC,CAACE,YAHO;AAAA,uBAMhBK,MANgB,CAIlBG,IAJkB;AAAA,QAIlBA,IAJkB,6BAIb,EAJa;AAAA,QAKlBC,MALkB,GAMhBJ,MANgB,CAKlBI,MALkB;AAAA,QAOlBC,OAPkB,GAORJ,KAAK,KAAK,UAAV,GACND,MAAM,CAACC,KAAP,GAAeE,IAAI,CAACG,UADd,GAEPL,KATe;;AAWpB,WAAUR,CAAC,CAACC,IAAZ,aAAwBU,MAAxB,gBAAyCC,OAAzC,8BAAyEH,QAAzE;AACD,GAbiB;AAelBK,EAAAA,aAfkB,yBAeJC,IAfI,EAeC;AACjB,QAAK,EAAEA,IAAI,IAAIC,KAAK,CAACC,OAAN,CAAcF,IAAI,CAACG,OAAnB,CAAV,CAAL,EAA8C;AAC5C,YAAM;AACJC,QAAAA,UAAU,EAAEnB,CAAC,CAACG,aADV;AAEJiB,QAAAA,OAAO,EAAEpB,CAAC,CAACI;AAFP,OAAN;AAID;;AACD,WAAO,IAAP;AACD;AAvBiB,CAApB;eA0BiBC,W"
+}

@@ -31,10 +31,10 @@ const BrowserConfig = {
     caption: 'World Bank',
     sourceMenuUrl: './data/world-bank/source-menu.json'
   },
-  [BT.ECONOMIC]: {
-    browserType: BT.ECONOMIC,
+  [BT.ECONOMICS]: {
+    browserType: BT.ECONOMICS,
     isDynamic: true,
-    caption: 'Quandl: World Economy',
+    caption: 'Quandl: World Economics',
     sourceMenuUrl: './data/quandl/source-menu.json'
   },
   [BT.DB_NOMICS]: {
@@ -48,6 +48,12 @@ const BrowserConfig = {
     isDynamic: true,
     caption: 'Blockchain',
     sourceMenuUrl: './data/blockchain/source-menu.json'
+  },
+  [BT.FUTURES]: {
+    browserType: BT.FUTURES,
+    isDynamic: true,
+    caption: 'Futures Markets',
+    sourceMenuUrl: './data/futures-markets/source-menu.json'
   },
 
   [BT.FRANCE_STATISTICS]: {
@@ -107,11 +113,11 @@ const BrowserConfig = {
       noTime: true,
       rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
     }
-  },  
-  [BT.US_ECONOMY]: {
-    browserType: BT.US_ECONOMY,
+  },
+  [BT.US_ECONOMICS]: {
+    browserType: BT.US_ECONOMICS,
     isDynamic: true,
-    caption: 'USA Economy',
+    caption: 'USA Economics',
     sourceMenuUrl: './data/usa-economy/source-menu.json'
   },
   [BT.NYSE_STOCKS]: {

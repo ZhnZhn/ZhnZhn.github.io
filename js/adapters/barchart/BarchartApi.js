@@ -13,8 +13,12 @@ var BarchartApi = {
     var value = option.value,
         _option$fromDate = option.fromDate,
         fromDate = _option$fromDate === void 0 ? C.DF_FROM_DATE : _option$fromDate,
-        apiKey = option.apiKey;
-    return C.ROOT + "?key=" + apiKey + "&symbol=" + value + "&type=daily&startDate=" + fromDate + "&dividends=0&splits=0";
+        _option$item = option.item,
+        item = _option$item === void 0 ? {} : _option$item,
+        apiKey = option.apiKey,
+        _symbol = value === 'noresult' ? option.value = item.inputValue : value;
+
+    return C.ROOT + "?key=" + apiKey + "&symbol=" + _symbol + "&type=daily&startDate=" + fromDate + "&dividends=0&splits=0";
   },
   checkResponse: function checkResponse(json) {
     if (!(json && Array.isArray(json.results))) {
