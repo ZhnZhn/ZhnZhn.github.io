@@ -42,26 +42,28 @@ var _crEurostatKey = function _crEurostatKey(option) {
 var _crKey = function _crKey(option) {
   var loadId = option.loadId,
       value = option.value,
+      _itemKey = option._itemKey,
       loadConfig = _LoadConfig["default"][loadId] || {},
       crKey = loadConfig.crKey;
-  return _isFn(crKey) ? crKey(option) : value || 'key';
+  return _isFn(crKey) ? crKey(option) : _itemKey || value || 'key';
 };
 
 var LogicUtils = {
   createKeyForConfig: function createKeyForConfig(option) {
-    var loadId = option.loadId;
+    var loadId = option.loadId,
+        _itemKey = option._itemKey;
 
     switch (loadId) {
       case _Type.LoadType.Q:
       case _Type.LoadType.QCT:
-        return _crQuandlKey(option);
+        return _itemKey || _crQuandlKey(option);
 
       case _Type.LoadType.EU_STAT:
       case _Type.LoadType.EIA:
-        return _crEurostatKey(option);
+        return _itemKey || _crEurostatKey(option);
 
       case _Type.LoadType.WL:
-        return option.id;
+        return _itemKey || option.id;
 
       default:
         return _crKey(option);

@@ -28,24 +28,24 @@ const _crEurostatKey = function(option){
 };
 
 const _crKey = (option) => {
-  const { loadId, value } = option
+  const { loadId, value, _itemKey } = option
       , loadConfig = LoadConfig[loadId] || {}
-      , { crKey } = loadConfig;  
+      , { crKey } = loadConfig;
   return _isFn(crKey)
     ? crKey(option)
-    : value || 'key';
+    : _itemKey || value || 'key';
 };
 
 const LogicUtils = {
   createKeyForConfig(option){
-    const { loadId } = option;
+    const { loadId, _itemKey } = option;
     switch (loadId) {
       case LT.Q: case LT.QCT:
-        return _crQuandlKey(option);
+        return _itemKey || _crQuandlKey(option);
       case LT.EU_STAT: case LT.EIA:
-         return _crEurostatKey(option);
+         return _itemKey || _crEurostatKey(option);
       case LT.WL:
-         return option.id;
+         return _itemKey || option.id;
       default:
         return _crKey(option);
     }
