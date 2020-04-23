@@ -11,12 +11,14 @@ import CL from './CL'
 const MAX_WITHOUT_ANIMATION = 800;
 
 const INPUT_PREFIX = 'From input:';
-const _fnNoItem = (propCaption, inputValue, isWithInput) => {
+const _crInputItem = (inputValue, { propCaption, isWithInput, maxInput }) => {
   const _inputValue = String(inputValue)
-    .replace(INPUT_PREFIX,'').trim()
-    , _caption = isWithInput
-           ? `${INPUT_PREFIX} ${_inputValue}`
-           : 'No results found';
+    .replace(INPUT_PREFIX,'')
+    .trim()
+    .substring(0, maxInput)
+  , _caption = isWithInput
+       ? `${INPUT_PREFIX} ${_inputValue}`
+       : 'No results found';
   return {
     [propCaption]: _caption,
     value: 'noresult',
@@ -100,6 +102,7 @@ class InputSelect extends Component {
     optionName: '',
     optionNames: '',
     isWithInput: false,
+    maxInput: 10,
     //prefixInput: 'From Input:',
     onSelect: () => {},
     onLoadOption: () => {}
@@ -189,9 +192,7 @@ class InputSelect extends Component {
         ? options : initialOptions
     , _arr = this._filterOptions(_options, token);
     if (_arr.length === 0){
-      _arr.push(_fnNoItem(
-        this.propCaption, token, this.props.isWithInput
-      ))
+      _arr.push(_crInputItem(token, this.props))
     }
     return _arr;
   }

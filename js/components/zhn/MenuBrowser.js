@@ -52,6 +52,7 @@ var MenuBrowser = function MenuBrowser(_ref) {
     style: _MenuBrowser["default"].BROWSER
   }, _react["default"].createElement(_BrowserCaption["default"], {
     caption: caption,
+    captionStyle: _MenuBrowser["default"].CAPTION,
     onClose: _hHide
   }), _react["default"].createElement(_ScrollPane["default"], {
     className: _MenuBrowser["default"].CL_SCROLL

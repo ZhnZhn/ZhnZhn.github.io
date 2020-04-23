@@ -27,19 +27,23 @@ var _CL = _interopRequireDefault(require("./CL"));
 var MAX_WITHOUT_ANIMATION = 800;
 var INPUT_PREFIX = 'From input:';
 
-var _fnNoItem = function _fnNoItem(propCaption, inputValue, isWithInput) {
-  var _ref;
+var _crInputItem = function _crInputItem(inputValue, _ref) {
+  var _ref2;
 
-  var _inputValue = String(inputValue).replace(INPUT_PREFIX, '').trim(),
+  var propCaption = _ref.propCaption,
+      isWithInput = _ref.isWithInput,
+      maxInput = _ref.maxInput;
+
+  var _inputValue = String(inputValue).replace(INPUT_PREFIX, '').trim().substring(0, maxInput),
       _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : 'No results found';
 
-  return _ref = {}, _ref[propCaption] = _caption, _ref.value = 'noresult', _ref.inputValue = _inputValue, _ref;
+  return _ref2 = {}, _ref2[propCaption] = _caption, _ref2.value = 'noresult', _ref2.inputValue = _inputValue, _ref2;
 };
 
 var _toItem = function _toItem(item, propCaption) {
-  var _ref2;
+  var _ref3;
 
-  return _ref2 = {}, _ref2[propCaption] = 'From Input', _ref2.value = item.inputValue, _ref2;
+  return _ref3 = {}, _ref3[propCaption] = 'From Input', _ref3.value = item.inputValue, _ref3;
 };
 
 var _crWidthStyle = function _crWidthStyle(width, style) {
@@ -50,9 +54,9 @@ var _crWidthStyle = function _crWidthStyle(width, style) {
   }) : null;
 };
 
-var _crFooterIndex = function _crFooterIndex(_ref3) {
-  var options = _ref3.options,
-      initialOptions = _ref3.initialOptions;
+var _crFooterIndex = function _crFooterIndex(_ref4) {
+  var options = _ref4.options,
+      initialOptions = _ref4.initialOptions;
   return {
     _nFiltered: options[0] && options[0].value !== 'noresult' ? options.length : 0,
     _nAll: initialOptions ? initialOptions.length : 0
@@ -71,10 +75,10 @@ var S = {
   }
 };
 
-var _crInitialStateFromProps = function _crInitialStateFromProps(_ref4) {
-  var optionName = _ref4.optionName,
-      optionNames = _ref4.optionNames,
-      options = _ref4.options;
+var _crInitialStateFromProps = function _crInitialStateFromProps(_ref5) {
+  var optionName = _ref5.optionName,
+      optionNames = _ref5.optionNames,
+      options = _ref5.options;
   return {
     value: '',
     isShowOption: false,
@@ -120,8 +124,8 @@ function (_Component) {
 
     _this = _Component.call(this, _props) || this;
 
-    _this._initFromProps = function (_ref5) {
-      var propCaption = _ref5.propCaption;
+    _this._initFromProps = function (_ref6) {
+      var propCaption = _ref6.propCaption;
       _this.domOptionsCache = null;
       _this.indexActiveOption = 0;
       _this.propCaption = propCaption;
@@ -186,7 +190,7 @@ function (_Component) {
           _arr = _this._filterOptions(_options, token);
 
       if (_arr.length === 0) {
-        _arr.push(_fnNoItem(_this.propCaption, token, _this.props.isWithInput));
+        _arr.push(_crInputItem(token, _this.props));
       }
 
       return _arr;
@@ -614,6 +618,7 @@ InputSelect.defaultProps = {
   optionName: '',
   optionNames: '',
   isWithInput: false,
+  maxInput: 10,
   //prefixInput: 'From Input:',
   onSelect: function onSelect() {},
   onLoadOption: function onLoadOption() {}

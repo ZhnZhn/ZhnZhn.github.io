@@ -41,6 +41,9 @@ var STYLE = {
     paddingBottom: 4,
     minWidth: 300
   },
+  CAPTION: {
+    top: 9
+  },
   WRAPPER_SEARCH: {
     width: '100%',
     paddingBottom: 8,
@@ -207,6 +210,7 @@ function (_Component) {
       style: STYLE.BROWSER
     }, _react["default"].createElement(_BrowserCaption["default"], {
       caption: caption,
+      captionStyle: STYLE.CAPTION,
       onClose: this._handleHide
     }), _react["default"].createElement(_ToolbarButtonCircle["default"], {
       buttons: this.toolbarButtons

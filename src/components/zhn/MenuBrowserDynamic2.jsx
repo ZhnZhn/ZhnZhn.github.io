@@ -25,6 +25,9 @@ const STYLE = {
     paddingBottom: 4,
     minWidth: 300
   },
+  CAPTION: {
+    top: 9
+  },
   WRAPPER_SEARCH : {
      width: '100%',
      paddingBottom: 8,
@@ -134,6 +137,7 @@ class MenuBrowserDynamic2 extends Component {
        <Browser isShow={isShow} style={STYLE.BROWSER}>
            <BrowserCaption
               caption={caption}
+              captionStyle={STYLE.CAPTION}
               onClose={this._handleHide}
            />
           <ToolbarButtonCircle

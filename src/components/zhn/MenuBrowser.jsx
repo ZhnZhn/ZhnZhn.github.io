@@ -30,6 +30,7 @@ const MenuBrowser = ({
     <Browser isShow={is} style={S.BROWSER}>
        <BrowserCaption
           caption={caption}
+          captionStyle={S.CAPTION}
           onClose={_hHide}
        />
        <ScrollPane className={S.CL_SCROLL}>
