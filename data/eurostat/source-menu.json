@@ -1,7 +1,7 @@
 {
   "menu" : [
     {
-      "caption" : "Economy",
+      "caption" : "Economics",
       "items" : [
         { "id" : "ES_8_ECONOMIC" },
         { "id" : "ES_LABOUR" },
@@ -37,13 +37,17 @@
         { "id" : "ES_E_SOLID_FUELS_SUPPLY" },
         { "id" : "ES_E_OIL_SUPPLY" },
         { "id" : "ES_E_GAS_SUPPLY" },
-        { "id" : "ES_E_ELECTRICITY_SUPPLY" },
         { "id" : "ES_E_STAT_PR" },
-        { "id" : "ES_E_ELECTRICITY_HOUSEHOLD" },
-        { "id" : "ES_E_HOUSEHOLD_ELECTRICITY" },
-        { "id" : "ES_E_NONHOUSEHOLD_ELECTRICITY" },
         { "id" : "ES_E_CHD_DAYS_M" },
         { "id" : "ES_E_CHD_DAYS_A" }
+      ]
+    },{
+      "caption": "Electricity",
+      "items":[
+        { "id" : "ES_E_ELECTRICITY_SUPPLY" },
+        { "id" : "ES_E_ELECTRICITY_HOUSEHOLD" },
+        { "id" : "ES_E_HOUSEHOLD_ELECTRICITY" },
+        { "id" : "ES_E_NONHOUSEHOLD_ELECTRICITY" }
       ]
     },{
       "caption" : "Finance",
@@ -56,10 +60,10 @@
     },{
       "caption" : "Agriculture",
       "items" : [
-        { "id" : "ES_AGRI_ORGANIC-AREA" },
-        { "id" : "ES_AGRI_ORGANIC-PROD" },
+        { "id" : "ES_AGRI_ORGANIC_AREA" },
+        { "id" : "ES_AGRI_ORGANIC_PROD" },
         { "id" : "ES_AGRI_MILK" },
-        { "id" : "ES_AGRI_MILKS-DAIRY" },
+        { "id" : "ES_AGRI_MILKS_DAIRY" },
         { "id" : "ES_AGRI_LIVESTOCK" },
         { "id" : "ES_AGRI_FERT" },
         { "id" : "ES_AGRI_ENVI" },
@@ -158,11 +162,11 @@
     },
     "ES_BASE_SNTR": {
       "dialogProps": {
-        "rootUri": "./data/eurostat/",
+        "rootUri": "./data/eurostat/trade/",
         "descr": "eurostat",
         "selectProps": [
-          ["partner","Partner","trade-partner"],
-          ["indic_et","Indicator","trade-indicator"]
+          ["partner","Partner","partner"],
+          ["indic_et","Indicator","indicator"]
         ],
         "chartsType": "t1",
         "loadId" : "EU_STAT",
@@ -331,8 +335,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["indic", "HICP", "hicp-nsa"],
-          ["unit", "Unit", "hicp-units-nsa"]
+          ["indic", "HICP", "hicp/items-nsa"],
+          ["unit", "Unit", "hicp/units-nsa"]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -353,8 +357,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["coicop","Item","hicp-items"],
-          ["table","Unit","hicp-units-t"]
+          ["coicop","Item","hicp/items"],
+          ["table","Unit","hicp/units-t"]
         ],
         "dfProps": {
           "mapType" : "V",
@@ -370,9 +374,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          [ "coicop","Item","hicp-items"],
-          [ "release","Release","hicp-release"],
-          [ "unit","Unit","hicp-units"]
+          [ "coicop","Item","hicp/items"],
+          [ "release","Release","hicp/release"],
+          [ "unit","Unit","hicp/units"]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -388,8 +392,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["coicop","Item","hicp-items"],
-          ["table","Unit","hicp-units-const-t"]
+          ["coicop","Item","hicp/items"],
+          ["table","Unit","hicp/units-const-t"]
         ],
         "dfProps": {
           "mapType" : "V",
@@ -405,7 +409,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["coicop", "Item" , "hicp-items"]
+          ["coicop", "Item" , "hicp/items"]
         ],
         "dfProps": {
           "dfTable": "prc_hicp_inw",
@@ -422,7 +426,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["statinfo", "For HICP" , "hicp-cw"]
+          ["statinfo", "For HICP" , "hicp/country-weight"]
         ],
         "dfProps": {
           "dfTable": "prc_hicp_cow",
@@ -440,7 +444,7 @@
       "addProps": "ES_BASE_SNE",
       "dialogProps" : {
         "selectProps": [
-          ["coicop", "Item" , "hicp-items"]
+          ["coicop", "Item" , "hicp/items"]
         ],
         "chartsType": "t2",
         "dfProps": {
@@ -460,8 +464,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["ppp_cat", "Aggregator", "ppp-aggregators"],
-          ["na_item", "Item", "ppp-items"]
+          ["ppp_cat", "Aggregator", "hicp/ppp-aggregators"],
+          ["na_item", "Item", "hicp/ppp-items"]
         ],
         "dfProps": {
           "dfTable": "prc_ppp_ind",
@@ -478,8 +482,8 @@
       "addProps": "ES_BASE_SNE",
       "dialogProps" : {
         "selectProps": [
-          ["geo","Country","cpi-g20-countries"],
-          ["unit","Unit","cpi-g20-units"]
+          ["geo","Country","hicp/cpi-g20-countries"],
+          ["unit","Unit","hicp/cpi-g20-units"]
         ],
         "chartsType": "df3",
         "dfProps": {
@@ -495,8 +499,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["nrg_bal","Balance","energy-balance"],
-          ["unit","Unit","energy-units"]
+          ["nrg_bal","Balance","energy/balance"],
+          ["unit","Unit","energy/units"]
         ],
         "dfProps": {
           "dfTable": "nrg_ind_eff",
@@ -513,7 +517,7 @@
         "addProps": "ES_BASE_SN",
         "dialogProps" : {
           "selectProps": [
-            ["nrg_bal","Share","energy-renewable-shares"]
+            ["nrg_bal","Share","energy/renewable-shares"]
           ],
           "dfProps": {
             "mapFrequency" : "Y",
@@ -530,7 +534,7 @@
         "addProps": "ES_BASE_SN",
         "dialogProps" : {
           "selectProps":[
-            ["table","Indicators","energy-indicators"]
+            ["table","Indicators","energy/indicators"]
           ],
           "dfProps":{
             "mapFrequency": "Y",
@@ -545,7 +549,7 @@
         "addProps": "ES_BASE_SN",
         "dialogProps" : {
           "selectProps":[
-            ["table","Item","energy-prices"]
+            ["table","Item","energy/el-gas-prices"]
           ],
           "dfProps":{
             "mapFrequency": "Y",
@@ -561,7 +565,7 @@
         "addProps": "ES_BASE_SN",
         "dialogProps" : {
           "selectProps": [
-            ["indic_nrg","Item","cooling-heating-days"]
+            ["indic_nrg","Item","energy/ch-days"]
           ],
           "dfProps": {
             "mapFrequency": "M",
@@ -580,7 +584,7 @@
         "addProps": "ES_BASE_SN",
         "dialogProps" : {
           "selectProps": [
-            ["indic_nrg","Item","cooling-heating-days"]
+            ["indic_nrg","Item","energy/ch-days"]
           ],
           "dfProps": {
             "mapFrequency": "Y",
@@ -598,7 +602,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["indic","Industry","industry-energy"]
+          ["indic","Industry","energy/industry"]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -615,8 +619,8 @@
        "addProps": "ES_BASE_SN",
        "dialogProps" : {
          "selectProps": [
-           ["product","Product","solid-fuels-product"],
-           ["indic_nrg","Indicator","solid-fuels-indicator"]
+           ["product","Product","energy/sf-product"],
+           ["indic_nrg","Indicator","energy/sf-indicator"]
          ],
          "dfProps": {
            "dfTable": "nrg_101m",
@@ -633,8 +637,8 @@
        "addProps": "ES_BASE_SN",
        "dialogProps" : {
          "selectProps": [
-           ["product","Product","oil-product"],
-           ["indic_nrg","Indicator","oil-indicator"]
+           ["product","Product","energy/oil-product"],
+           ["indic_nrg","Indicator","energy/oil-indicator"]
          ],
          "dfProps": {
            "dfTable": "nrg_102m",
@@ -651,8 +655,8 @@
        "addProps": "ES_BASE_SN",
        "dialogProps" : {
          "selectProps": [
-           ["indic_nrg","Supply","supply-of-gas"],
-           ["unit","Unit","gas-units"]
+           ["indic_nrg","Supply","energy/gas-supply"],
+           ["unit","Unit","energy/gas-units"]
          ],
          "dfProps": {
            "dfTable": "nrg_103m",
@@ -663,13 +667,13 @@
      },
    "ES_E_ELECTRICITY_SUPPLY" : {
       "type" : "ES_E_ELECTRICITY_SUPPLY",
-      "menuTitle" : "Supply of Electricity, GWh",
+      "menuTitle" : "Supply, GWh",
       "contCaption" : "Supply of Electricity, GWh, Monthly",
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["indic_nrg","Supply","supply-of-electricity"]
+          ["indic_nrg","Supply","electricity/supply"]
         ],
         "dfProps": {
           "dfTable": "nrg_105m",
@@ -680,14 +684,14 @@
     },
     "ES_E_HOUSEHOLD_ELECTRICITY" : {
       "type" : "ES_E_HOUSEHOLD_ELECTRICITY",
-      "menuTitle" : "Electr. Household Comp.",
+      "menuTitle" : "Household Prices Comp.",
       "contCaption" : "Electricity Prices Component for Household, Annual",
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["nrg_prc","Item","electricity-household-components"],
-          ["nrg_cons","Band","electricity-household"]
+          ["nrg_prc","Item","electricity/hh-components"],
+          ["nrg_cons","Band","electricity/hh"]
         ],
         "dfProps": {
           "dfTable": "nrg_pc_204_c",
@@ -700,14 +704,14 @@
     },
     "ES_E_ELECTRICITY_HOUSEHOLD" : {
       "type" : "ES_E_ELECTRICITY_HOUSEHOLD",
-      "menuTitle" : "Electr. Household Prices",
+      "menuTitle" : "Household Prices",
       "contCaption" : "Electricity Household Prices, Bi-Annual",
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "consom","Band","electricity-hh-band" ],
-          [ "tax","Tax","electricity-hh-tax" ],
+          [ "consom","Band","electricity/hh-band" ],
+          [ "tax","Tax","electricity/hh-tax" ],
           [ "currency","Currency","currency" ]
         ],
         "dfProps": {
@@ -719,14 +723,14 @@
     },
     "ES_E_NONHOUSEHOLD_ELECTRICITY" : {
       "type" : "ES_E_NONHOUSEHOLD_ELECTRICITY",
-      "menuTitle" : "Electr. Non-House Prices",
+      "menuTitle" : "Non-Household Prices",
       "contCaption" : "Electricity Non-Household Prices, Annual",
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["nrg_prc","Item","electricity-non-household-components"],
-          ["nrg_cons","Band","electricity-non-household"]
+          ["nrg_prc","Item","electricity/non-hh-components"],
+          ["nrg_cons","Band","electricity/non-hh"]
         ],
         "dfProps": {
           "dfTable": "nrg_pc_205_c",
@@ -746,9 +750,9 @@
       "addProps": "ES_BASE_SNE",
       "dialogProps" : {
         "selectProps": [
-          [ "maturity", "Maturity", "maturity" ],
-          [ "yld_curv", "Yld. Curv", "yield-curves" ],
-          [ "bonds", "Bond", "bonds" ]
+          [ "maturity", "Maturity", "finance/maturity" ],
+          [ "yld_curv", "Yld. Curv", "finance/yield-curves" ],
+          [ "bonds", "Bond", "finance/bonds" ]
         ],
         "chartsType": "t2",
         "dfProps": {
@@ -766,7 +770,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["table","Item","finance-long-rates"]
+          ["table","Item","finance/long-rates"]
         ],
         "dfProps": {
           "mapDateDf": 1
@@ -781,7 +785,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "int_rt", "Rate", "finance-short-rates" ]
+          [ "int_rt", "Rate", "finance/short-rates" ]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -796,7 +800,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          [ "s_adj","Adj","adjust-2"]
+          [ "s_adj","Adj","finance/adjust"]
         ],
         "dfProps": {
           "mapFrequency" : "Q",
@@ -814,7 +818,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["prod_veg","Item","agri-selling-items"]
+          ["prod_veg","Item","agri/selling-items"]
         ],
         "dfProps": {
           "mapFrequency": "Y",
@@ -833,7 +837,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["table","Item","agri-milk"]
+          ["table","Item","agri/milk"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -841,16 +845,16 @@
         }
       }
     },
-    "ES_AGRI_MILKS-DAIRY": {
-      "type" : "ES_AGRI_MILKS-DAIRY",
+    "ES_AGRI_MILKS_DAIRY": {
+      "type" : "ES_AGRI_MILKS_DAIRY",
       "menuTitle" : "All Milks & Dairy Products",
       "contCaption" : "Agriculture: All Milks & Dairy Products",
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          [ "dairyprod", "Product", "agri-dairy-products"],
-          [ "milkitem", "Item", "agri-dairy-items"]
+          [ "dairyprod", "Product", "agri/dairy-products"],
+          [ "milkitem", "Item", "agri/dairy-items"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -868,7 +872,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          ["table","Item","agri-livestock"]
+          ["table","Item","agri/livestock"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -876,17 +880,17 @@
         }
       }
     },
-    "ES_AGRI_ORGANIC-AREA" : {
-      "type" : "ES_AGRI_ORGANIC-AREA",
+    "ES_AGRI_ORGANIC_AREA" : {
+      "type" : "ES_AGRI_ORGANIC_AREA",
       "menuTitle" : "Organic Area",
       "contCaption" : "Agriculture: Organic Crop Area",
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "crops","Crop","agri-organic-crop"],
-          [ "agprdmet","Method","agri-organic-method"],
-          [ "unit","Unit","agri-organic-unit"]
+          [ "crops","Crop","agri/organic-crop"],
+          [ "agprdmet","Method","agri/organic-method"],
+          [ "unit","Unit","agri/organic-unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -895,15 +899,15 @@
         }
       }
     },
-    "ES_AGRI_ORGANIC-PROD" : {
-      "type" : "ES_AGRI_ORGANIC-PROD",
+    "ES_AGRI_ORGANIC_PROD" : {
+      "type" : "ES_AGRI_ORGANIC_PROD",
       "menuTitle" : "Organic Production, T",
       "contCaption" : "Agriculture: Organic Crop Production, T",
       "dialogType" : "DialogSelectN",
       "addProps" : "ES_BASE_SN",
       "dialogProps" : {
         "selectProps" : [
-          ["crops", "Crop", "agri-organic-crop"]
+          ["crops", "Crop", "agri/organic-crop"]
         ],
         "dfProps" : {
           "mapFrequency" : "Y",
@@ -919,18 +923,17 @@
     "ES_AGRI_FERT" : {
       "type" : "ES_AGRI_FERT",
       "menuTitle" : "Sales of Fertilisers, T",
-      "dialogCaption" : "Sales of Fertilisers",
-      "contCaption" : "Agriculture Sales of Fertilisers, in Tonnes",
+      "contCaption" : "Agriculture: Sales of Fertilisers, in Tonnes",
       "dialogType" : "DialogSelectN",
       "addProps" : "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-           ["nutrient", "Fertilisers", "fertilisers"]
+           ["nutrient", "Fertilizers", "agri/fertilizers"]
         ],
         "dfProps": {
           "mapFrequency": "Y",
           "mapDateDf": 2,
-          "dfTable": "tai01",
+          "dfTable": "aei_fm_manfert",
           "dfTail": "unit=T",
           "dfSlice": {
              "unit": "T"
@@ -941,18 +944,17 @@
     "ES_AGRI_ENVI" : {
       "type" : "ES_AGRI_ENVI",
       "menuTitle" : "Sales of Pesticides, Kg",
-      "dialogCaption" : "Sales of Pesticides",
-      "contCaption" : "Agriculture Sales of Pesticides, in Kg",
+      "contCaption" : "Agriculture: Pesticide Sales, in Kg",
       "dialogType" : "DialogSelectN",
       "addProps" : "ES_BASE_SN",
       "dialogProps": {
         "selectProps":[
-          ["pesticid", "Pesticide", "pesticides"]
+          ["pesticid", "Pesticide", "agri/pesticides"]
         ],
         "dfProps": {
           "mapFrequency": "Y",
           "mapDateDf": 2,
-          "dfTable": "tai02",
+          "dfTable": "aei_fm_salpest09",
           "dfTail": "unit=KG",
           "dfSlice": {
              "unit": "KG"
@@ -968,8 +970,8 @@
       "addProps" : "ES_BASE_SN",
       "dialogProps": {
         "selectProps":[
-          ["crops", "Crop", "crop-production" ],
-          ["strucpro", "Structure", "crop-structure"]
+          ["crops", "Crop", "agri/crop-production" ],
+          ["strucpro", "Structure", "agri/crop-structure"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -987,7 +989,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "species", "Species", "fish-species" ]
+          [ "species", "Species", "fishery/species" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1005,7 +1007,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          ["table","Indicator","high-tech-indicators"]
+          ["table","Indicator","high-tech/indicators"]
         ],
         "dfProps": {
           "mapFrequency": "Y",
@@ -1021,8 +1023,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["sectperf", "Sector", "high-tech-r&d-sectors"],
-          ["unit","Unit","high-tech-r&d-units"]
+          ["sectperf", "Sector", "high-tech/rd-sectors"],
+          ["unit","Unit","high-tech/rd-units"]
         ],
         "dfProps": {
           "dfTable": "rd_e_gerdtot",
@@ -1040,7 +1042,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          ["table","Indicator","real-estate-index"]
+          ["table","Indicator","real-estate/index"]
         ],
         "dfProps":{
           "mapFrequency": "Q"
@@ -1055,8 +1057,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["age", "By Age", "real-estate-overcrowding-by-age"],
-          ["incgrp", "By Metric", "real-estate-overcrowding-metric"]
+          ["age", "By Age", "real-estate/overcrowding-by-age"],
+          ["incgrp", "By Metric", "real-estate/overcrowding-metric"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1192,9 +1194,9 @@
       "addProps": "ES_BASE_SNE",
       "dialogProps": {
         "selectProps": [
-          ["sitc06", "Group", "trade-sitc6"],
-          ["partner", "Partner", "trade-partner-by"],
-          ["stk_flow", "Flow", "trade-flow-by"]
+          ["sitc06", "Group", "trade/sitc6"],
+          ["partner", "Partner", "trade/partner-by"],
+          ["stk_flow", "Flow", "trade/flow-by"]
         ],
         "chartsType": "t1",
         "dfProps": {
@@ -1214,9 +1216,9 @@
       "addProps": "ES_BASE_SNE",
       "dialogProps": {
         "selectProps": [
-          ["sitc06", "Group", "trade-sitc6"],
-          ["partner", "Partner", "trade-partner-by2"],
-          ["stk_flow", "Flow", "trade-flow-by"]
+          ["sitc06", "Group", "trade/sitc6"],
+          ["partner", "Partner", "trade/partner-by2"],
+          ["stk_flow", "Flow", "trade/flow-by"]
         ],
         "chartsType": "t1",
         "dfProps": {
@@ -1236,8 +1238,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["partner","Partner","trade-partner-by3"],
-          ["stk_flow","Flow","trade-flow-by"]
+          ["partner","Partner","trade/partner-by3"],
+          ["stk_flow","Flow","trade/flow-by"]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -1256,7 +1258,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["na_item","Flow","trade-flow"]
+          ["na_item","Flow","trade/flow"]
         ],
         "dfProps": {
           "mapFrequency": "Y",
@@ -1274,8 +1276,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["cofog99","Function","gf-cofog99"],
-          ["unit","Unit","gf-unit"]
+          ["cofog99","Function","gf/cofog99"],
+          ["unit","Unit","gf/unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1293,8 +1295,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["na_item","Tax","gf-tax"],
-          ["unit","Unit","gf-unit"]
+          ["na_item","Tax","gf/tax"],
+          ["unit","Unit","gf/unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1312,8 +1314,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["tax","Tax","gf-env-tax"],
-          ["unit","Unit","gf-env-unit"]
+          ["tax","Tax","gf/env-tax"],
+          ["unit","Unit","gf/env-unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1331,7 +1333,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["table","Item","gf-debt"]
+          ["table","Item","gf/debt"]
         ],
         "dfProps":{
           "mapFrequency":"Q"
@@ -1345,8 +1347,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["spdepb","Type","gf-pension-type"],
-          ["unit","Unit","gf-pension-unit"]
+          ["spdepb","Type","gf/pension-type"],
+          ["unit","Unit","gf/pension-unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1366,8 +1368,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["icha11_hp","Provider","healthcare-provider"],
-          ["unit","Unit","healthcare-unit"]
+          ["icha11_hp","Provider","healthcare/provider"],
+          ["unit","Unit","healthcare/unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1385,8 +1387,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["icha11_hf","Financing Scheme","healthcare-financing-scheme"],
-          ["unit","Unit","healthcare-unit"]
+          ["icha11_hf","Financing Scheme","healthcare/financing-scheme"],
+          ["unit","Unit","healthcare/unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1404,8 +1406,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps": [
-          ["icha11_hc","Function","healthcare-function"],
-          ["unit","Unit","healthcare-unit"]
+          ["icha11_hc","Function","healthcare/function"],
+          ["unit","Unit","healthcare/unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1423,8 +1425,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps": {
         "selectProps":[
-          ["med_spec","Speciality","healthcare-ph-speciality"],
-          ["unit","Unit","healthcare-ph-unit"]
+          ["med_spec","Speciality","healthcare/ph-speciality"],
+          ["unit","Unit","healthcare/ph-unit"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1442,9 +1444,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "isco08", "Nurse", "healthcare-nurse" ],
-          [ "wstatus", "Status", "healthcare-nurse-status" ],
-          [ "unit", "Unit", "healthcare-ph-unit" ]
+          [ "isco08", "Nurse", "healthcare/nurse" ],
+          [ "wstatus", "Status", "healthcare/nurse-status" ],
+          [ "unit", "Unit", "healthcare/ph-unit" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1462,7 +1464,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "isced11","Level","education-by-level-all" ]
+          [ "isced11","Level","education/by-level-all" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1479,9 +1481,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "isced11","Level","education-by-level-all" ],
-          [ "age", "Age", "education-staff-age" ],
-          [ "sex", "Sex", "by-sex" ]
+          [ "isced11","Level","education/by-level-all" ],
+          [ "age", "Age", "education/staff-age" ],
+          [ "sex", "Sex", "education/by-sex" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1498,9 +1500,9 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "isced11", "Level", "education-by-level" ],
-          [ "age", "Age", "education-by-age"],
-          [ "sex", "Sex", "by-sex"]
+          [ "isced11", "Level", "education/by-level" ],
+          [ "age", "Age", "education/by-age"],
+          [ "sex", "Sex", "education/by-sex"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1516,7 +1518,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["mot_nrg","Type","transport-motor-energy"]
+          ["mot_nrg","Type","transport/motor-energy"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1533,8 +1535,8 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["mot_nrg","Type","transport-motor-type"],
-          ["engine","Volume","transport-motor-volume"]
+          ["mot_nrg","Type","transport/motor-type"],
+          ["engine","Volume","transport/motor-volume"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1551,7 +1553,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["age","Age","transport-car-age"]
+          ["age","Age","transport/car-age"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1583,7 +1585,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          [ "hhtyp","Status","household-type" ],
+          [ "hhtyp","Status","transport/household-type" ],
           [ "incgrp","Income","income-group" ]
         ],
         "dfProps": {
@@ -1601,7 +1603,7 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [
-          ["vehicle", "Vehicle", "transport-inland-vehicle" ]
+          ["vehicle", "Vehicle", "transport/inland-vehicle" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
