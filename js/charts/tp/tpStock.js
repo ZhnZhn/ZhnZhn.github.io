@@ -9,7 +9,7 @@ var _tpFn = _interopRequireDefault(require("./tpFn"));
 
 var crHeader = _tpFn["default"].crHeader,
     crRow = _tpFn["default"].crRow,
-    crSpan = _tpFn["default"].crSpan,
+    crNotEmptySpan = _tpFn["default"].crNotEmptySpan,
     toDateFormatDMYT = _tpFn["default"].toDateFormatDMYT;
 
 var _crVolume = function _crVolume(_ref) {
@@ -27,7 +27,7 @@ var _crVolume = function _crVolume(_ref) {
       _point$_high = point._high,
       _high = _point$_high === void 0 ? '' : _point$_high;
 
-  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Volume', value) + "\n    <div>\n      " + crSpan('Open', _open) + "\n      " + crSpan('Close', _close) + "\n    </div>\n    <div>\n      " + crSpan('Low', _low) + "\n      " + crSpan('High', _high) + "\n    </div>\n  </div>";
+  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Volume', value) + "\n    <div>\n      " + crNotEmptySpan('Open', _open) + "\n      " + crNotEmptySpan('Close', _close) + "\n    </div>\n    <div>\n      " + crNotEmptySpan('Low', _low) + "\n      " + crNotEmptySpan('High', _high) + "\n    </div>\n  </div>";
 };
 
 var _crAtn = function _crAtn(_ref2) {

@@ -53,6 +53,10 @@ var _addClickOnceById = function _addClickOnceById(id, listener) {
   }
 };
 
+var _isValueEmpty = function _isValueEmpty(v) {
+  return v === 'NoData' || v === '' || v == null;
+};
+
 var tpFn = {
   crSpan: function crSpan(t, v, _temp) {
     if (t === void 0) {
@@ -72,6 +76,9 @@ var tpFn = {
         _v = v !== null ? v : '';
 
     return "\n    <span " + TITLE_STYLE + ">" + _t + "</span>\n    <span " + _vStyle + ">" + _v + "</span>";
+  },
+  crNotEmptySpan: function crNotEmptySpan(title, v) {
+    return _isValueEmpty(v) ? '' : tpFn.crSpan(title, v);
   },
   crRow: function crRow(t, v, option) {
     if (t === void 0) {

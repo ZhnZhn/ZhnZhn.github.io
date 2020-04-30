@@ -1,9 +1,10 @@
 import fn from './tpFn'
 
 const {
-  crHeader, crRow, crSpan,
+  crHeader, crRow,
+  crNotEmptySpan,
   toDateFormatDMYT
- } = fn
+} = fn;
 
 const _crVolume = function({ date, id, value, point }){
   const { _open='NoData', _close='', _low='', _high='' } = point;
@@ -11,12 +12,12 @@ const _crVolume = function({ date, id, value, point }){
   <div class="tp__body">
     ${crRow('Volume', value)}
     <div>
-      ${crSpan('Open', _open)}
-      ${crSpan('Close', _close)}
+      ${crNotEmptySpan('Open', _open)}
+      ${crNotEmptySpan('Close', _close)}
     </div>
     <div>
-      ${crSpan('Low', _low)}
-      ${crSpan('High', _high)}
+      ${crNotEmptySpan('Low', _low)}
+      ${crNotEmptySpan('High', _high)}
     </div>
   </div>`;
 };

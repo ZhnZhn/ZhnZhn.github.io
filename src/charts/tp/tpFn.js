@@ -39,6 +39,10 @@ const _addClickOnceById = (id, listener) => {
   }
 };
 
+const _isValueEmpty = v => v === 'NoData'
+ || v === ''
+ || v == null;
+
 const tpFn = {
   crSpan: (t='', v='', { color=C.VALUE_C }={}) => {
     const _vStyle = `style="color:${color};${FONT_STYLE}"`
@@ -48,6 +52,9 @@ const tpFn = {
     <span ${TITLE_STYLE}>${_t}</span>
     <span ${_vStyle}>${_v}</span>`;
   },
+  crNotEmptySpan: (title, v) => _isValueEmpty(v)
+    ? ''
+    : tpFn.crSpan(title, v),
   crRow: (t='', v='', option) => {
     return `<div>${tpFn.crSpan(t, v, option)}</div>`;
   },
