@@ -68,19 +68,19 @@ const crBrowserModel = () => {
     ],
     page_01: [
       {
-        cn: CL.DBN,
-        name: 'DB Nomics',
-        onClick: _fBD(BT.DB_NOMICS),
-        isClose: true
-      },{
         cn: CL.BR,
         name: 'USA Economics',
         onClick: _fBD(BT.US_ECONOMICS),
         isClose: true
       },{
+        cn: CL.DBN,
+        name: 'DB Nomics',
+        onClick: _fBD(BT.DB_NOMICS),
+        isClose: true
+      },{
         cn: CL.Q,
-        name: 'World Economics',
-        onClick: _fBD(BT.ECONOMICS),
+        name: 'Quandl',
+        onClick: _fBD(BT.QUANDL),
         isClose: true
       }
     ],

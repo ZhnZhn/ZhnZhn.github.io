@@ -31,10 +31,10 @@ const BrowserConfig = {
     caption: 'World Bank',
     sourceMenuUrl: './data/world-bank/source-menu.json'
   },
-  [BT.ECONOMICS]: {
-    browserType: BT.ECONOMICS,
+  [BT.QUANDL]: {
+    browserType: BT.QUANDL,
     isDynamic: true,
-    caption: 'Quandl: World Economics',
+    caption: 'Quandl',
     sourceMenuUrl: './data/quandl/source-menu.json'
   },
   [BT.DB_NOMICS]: {

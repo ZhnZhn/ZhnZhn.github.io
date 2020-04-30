@@ -14,7 +14,7 @@ export const BrowserType = {
    SWEDEN_STAT_ALL: 'SWS_ALL',
    FINLAND_STAT_ALL: 'SFL',
 
-   ECONOMICS: 'QE',
+   QUANDL: 'QE',
 
    NYSE_STOCKS: 'NS',
    NASDAQ_STOCKS: 'NQS',

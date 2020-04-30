@@ -95,7 +95,7 @@ function (_Component) {
     };
 
     _this._settingFn = props.store.exportSettingFn();
-    _this._hShowEconomic = _BrowserActions["default"].showBrowserDynamic.bind(null, _Type.BrowserType.ECONOMICS);
+    _this._hShowEconomic = _BrowserActions["default"].showBrowserDynamic.bind(null, _Type.BrowserType.QUANDL);
     _this._hShowEurostat = _BrowserActions["default"].showBrowserDynamic.bind(null, _Type.BrowserType.EUROSTAT);
     _this._hShowWatch = _BrowserActions["default"].showBrowserDynamic.bind(null, _Type.BrowserType.WATCH_LIST);
     _this.state = {

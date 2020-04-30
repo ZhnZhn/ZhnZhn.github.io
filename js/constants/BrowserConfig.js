@@ -32,10 +32,10 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
   isDynamic: true,
   caption: 'World Bank',
   sourceMenuUrl: './data/world-bank/source-menu.json'
-}, _BrowserConfig[_Type.BrowserType.ECONOMICS] = {
-  browserType: _Type.BrowserType.ECONOMICS,
+}, _BrowserConfig[_Type.BrowserType.QUANDL] = {
+  browserType: _Type.BrowserType.QUANDL,
   isDynamic: true,
-  caption: 'Quandl: World Economics',
+  caption: 'Quandl',
   sourceMenuUrl: './data/quandl/source-menu.json'
 }, _BrowserConfig[_Type.BrowserType.DB_NOMICS] = {
   browserType: _Type.BrowserType.DB_NOMICS,
