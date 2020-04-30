@@ -8,7 +8,8 @@ const {
   crItemConf,
   crValueConf,
   valueMoving,
-  joinBy
+  joinBy,
+  ymdToUTC
 } =AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
@@ -64,6 +65,16 @@ const fnAdapter = {
        isNotZoomToMinMax,
        isDrawDeltaExtrems
     });
+  },
+
+  crOpenInterest: (json, option) => {
+    if (option.dfT !== "FT") {
+      return;
+    }    
+    const { results=[] } = json;
+    return results.map(({ tradingDay, openInterest }) => [
+      ymdToUTC(tradingDay), openInterest
+    ]);
   },
 
   crConfigOption: ({ chartId, option, data }) => ({

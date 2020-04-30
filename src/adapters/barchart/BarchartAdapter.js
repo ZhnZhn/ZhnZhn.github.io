@@ -8,6 +8,7 @@ const {
   crData,
   crConfigOption,
   toSeriesData,
+  crOpenInterest,
   joinBy
 } = fnAdapter;
 
@@ -56,6 +57,7 @@ const BarchartAdapter = {
     , { title='', subtitle='' } = option
     , dataOption = crData(json, option)
     , { data, dataMfi } = dataOption
+    , dataInterest = crOpenInterest(json, option)
     , config = Builder()
        .stockConfig(chartId, dataOption)
        .addCaption(title, subtitle)
@@ -65,8 +67,14 @@ const BarchartAdapter = {
          })
         })
         .addZhPoints(dataMfi)
+        .addMiniVolume({
+          btTitle: 'OpenInterest',
+          title: 'OpenInterest',
+          dVolume: dataInterest,
+          dColumn: dataInterest
+        })
         .toConfig();
-
+              
       return { config };
   },
 

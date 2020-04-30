@@ -15,6 +15,7 @@ var crChartId = _fnAdapter["default"].crChartId,
     crData = _fnAdapter["default"].crData,
     crConfigOption = _fnAdapter["default"].crConfigOption,
     toSeriesData = _fnAdapter["default"].toSeriesData,
+    crOpenInterest = _fnAdapter["default"].crOpenInterest,
     joinBy = _fnAdapter["default"].joinBy;
 
 var _getValue = function _getValue(obj) {
@@ -65,11 +66,17 @@ var BarchartAdapter = {
         dataOption = crData(json, option),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
+        dataInterest = crOpenInterest(json, option),
         config = (0, _ConfigBuilder["default"])().stockConfig(chartId, dataOption).addCaption(title, subtitle).add((0, _extends2["default"])({}, crConfigOption({
       chartId: chartId,
       option: option,
       data: data
-    }))).addZhPoints(dataMfi).toConfig();
+    }))).addZhPoints(dataMfi).addMiniVolume({
+      btTitle: 'OpenInterest',
+      title: 'OpenInterest',
+      dVolume: dataInterest,
+      dColumn: dataInterest
+    }).toConfig();
     return {
       config: config
     };
