@@ -15,7 +15,8 @@ const {
   ymdToUTC,
   ymdtToUTC,
   ymdhmsToUTC,
-  mlsToDmy
+  mlsToDmy,
+  getFromDate
 } = dt;
 
 const EMPTY = '';
@@ -80,6 +81,7 @@ const AdapterFn = {
   ymdToUTC,
   ymdtToUTC,
   ymdhmsToUTC,
+  getFromDate,
 
   volumeColumnPoint({ date, open, close, volume, option }) {
     let _color;
@@ -237,15 +239,6 @@ const AdapterFn = {
       ? str[0].toUpperCase() + str.substring(1)
       : EMPTY
   ,
-  appendWithColon: (...args) => {
-    let str='';
-    args.forEach(s => {
-      if (s) {
-        str = str ? `${str}: ${s}` : s
-      }
-    })
-    return str;
-  },
 
   monthIndex: str => M.indexOf(
     String(str).toLowerCase()

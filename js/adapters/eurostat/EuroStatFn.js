@@ -18,9 +18,8 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax;
 var valueMoving = _AdapterFn["default"].valueMoving,
     findMinY = _AdapterFn["default"].findMinY,
-    appendWithColon = _AdapterFn["default"].appendWithColon,
+    joinBy = _AdapterFn["default"].joinBy,
     crItemConf = _AdapterFn["default"].crItemConf;
-var DF_SLICE_TITLE = 'EU';
 var COLOR = {
   EU: "#0088ff",
   EA: "#ff5800",
@@ -93,9 +92,8 @@ var _filterZeroCategories = function _filterZeroCategories(data, categories) {
 };
 
 var EuroStatFn = {
+  joinBy: joinBy,
   createData: function createData(timeIndex, value) {
-    var _this = this;
-
     var data = [];
     var max = Number.NEGATIVE_INFINITY,
         min = Number.POSITIVE_INFINITY;
@@ -103,7 +101,7 @@ var EuroStatFn = {
       var pointValue = value[timeIndex[key]];
 
       if (!(pointValue == null)) {
-        data.push([_this.convertToUTC(key), pointValue]);
+        data.push([EuroStatFn.convertToUTC(key), pointValue]);
 
         if (pointValue >= max) {
           max = pointValue;
@@ -142,8 +140,8 @@ var EuroStatFn = {
 
     _Chart["default"].setDefaultTitle(config, title, subtitle);
 
-    config.zhConfig = this.createZhConfig(json, option);
-    config.info = this.createDatasetInfo(json);
+    config.zhConfig = EuroStatFn.createZhConfig(json, option);
+    config.info = EuroStatFn.createDatasetInfo(json);
 
     if (_isLineSeria(seriaType)) {
       config.valueMoving = valueMoving(data);
@@ -156,7 +154,7 @@ var EuroStatFn = {
     var config = _ref2.config,
         json = _ref2.json,
         option = _ref2.option;
-    config.info = this.createDatasetInfo(json);
+    config.info = EuroStatFn.createDatasetInfo(json);
   },
   setCategories: function setCategories(_ref3) {
     var config = _ref3.config,
@@ -267,9 +265,8 @@ var EuroStatFn = {
     }
   },
   crItemCaption: function crItemCaption(_ref7) {
-    var subtitle = _ref7.subtitle,
-        dfSliceTitle = _ref7.dfSliceTitle;
-    return appendWithColon(dfSliceTitle || DF_SLICE_TITLE, subtitle);
+    var title = _ref7.title;
+    return joinBy(": ", "EU", title);
   },
   crDataSource: function crDataSource(_ref8) {
     var dfTable = _ref8.dfTable,

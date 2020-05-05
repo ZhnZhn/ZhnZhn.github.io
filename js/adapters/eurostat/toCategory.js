@@ -13,6 +13,10 @@ var _JsonStatFn = _interopRequireDefault(require("./JsonStatFn"));
 
 var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
+var addToCategoryConfig = _EuroStatFn["default"].addToCategoryConfig,
+    findMinY = _EuroStatFn["default"].findMinY,
+    crCategoryTooltip = _EuroStatFn["default"].crCategoryTooltip;
+
 var _crScatterProps = function _crScatterProps(seriaColor) {
   return {
     type: 'scatter',
@@ -34,14 +38,13 @@ var toCategory = {
 
       var config = _FactoryChart["default"].createConfig(option);
 
-      _EuroStatFn["default"].addToCategoryConfig(config, {
+      addToCategoryConfig(config, {
         json: json,
         option: option,
         data: data,
         categories: categories,
         min: min
       });
-
       return config;
     });
   },
@@ -60,11 +63,11 @@ var toCategory = {
     return (0, _extends2["default"])({
       zhSeriaId: 'optionKey',
       zhValueText: 'Value',
-      minY: _EuroStatFn["default"].findMinY(data),
+      minY: findMinY(data),
       name: _name,
       color: seriaColor,
       data: data,
-      tooltip: _EuroStatFn["default"].crCategoryTooltip()
+      tooltip: crCategoryTooltip()
     }, _seriaProps);
   }
 };

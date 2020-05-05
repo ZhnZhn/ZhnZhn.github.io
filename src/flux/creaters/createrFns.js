@@ -27,7 +27,8 @@ const createrFns = {
       _prefix,
       seriaType || '',
       date || ''
-    ].join('_');
+    ].filter(Boolean)
+     .join('_');
   },
 
   crCaption: (items, titles) => {

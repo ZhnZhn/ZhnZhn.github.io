@@ -28,10 +28,10 @@ var S = {
     marginBottom: 10,
     marginRight: 25
   },
-  TIME_SPAN: {
+  TIME: {
     position: 'absolute',
     display: 'inline-block',
-    color: 'rgb(253, 179, 22)',
+    color: '#fdb316',
     paddingLeft: 16,
     fontWeight: 'bold'
   },
@@ -168,9 +168,8 @@ function (_Component) {
         zhDialog = config.zhDialog,
         info = config.info,
         _ref3 = zhDialog || {},
-        itemCaption = _ref3.itemCaption,
-        subtitle = _ref3.subtitle,
-        _itemCaption = itemCaption || subtitle || '',
+        _ref3$itemCaption = _ref3.itemCaption,
+        itemCaption = _ref3$itemCaption === void 0 ? '' : _ref3$itemCaption,
         _this$state = this.state,
         isLoading = _this$state.isLoading,
         isOpen = _this$state.isOpen,
@@ -182,11 +181,11 @@ function (_Component) {
       style: S.ROOT_DIV
     }, _react["default"].createElement(_ItemHeader["default"], {
       isOpen: isOpen,
-      caption: _itemCaption,
+      caption: itemCaption,
       onClick: this._hToggle,
       onClose: onCloseItem
     }, _react["default"].createElement("span", {
-      style: S.TIME_SPAN
+      style: S.TIME
     }, time)), _react["default"].createElement(_Comp["default"].ShowHide, {
       isShow: isOpen
     }, _react["default"].createElement(BtTabInfo, {

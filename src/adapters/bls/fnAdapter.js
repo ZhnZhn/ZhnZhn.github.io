@@ -4,38 +4,32 @@ import AdapterFn from '../AdapterFn'
 const {
   valueMoving,
   ymdToUTC,
-  appendWithColon
+  joinBy
 } = AdapterFn;
 
-const _crZhConfig = (option) => {
-  const {
-          title,
-          dataSource, dfTitle,
-          value,
-          linkItem
-        } = option;
-  return {
-    id: value, key: value,
-    item: { ...linkItem },
-    linkFn: 'DF',
-    itemCaption: title,
-    isWithoutAdd: true,
-    dataSource: appendWithColon(dataSource, dfTitle)
-  };
-};
+const _crZhConfig = ({
+  title,
+  dataSource, dfTitle,
+  value,
+  linkItem
+}) => ({
+  id: value, key: value,
+  item: { ...linkItem },
+  linkFn: 'DF',
+  itemCaption: title,
+  isWithoutAdd: true,
+  dataSource: joinBy(": ", dataSource, dfTitle)
+});
 
 const _crInfo = ({ title }) => ({
   name: title
 });
 
 const fnAdapter = {
-  crTitle: ({ dfTitle, item, subtitle }) => {
-    return dfTitle
-      ? item.t
-          ? dfTitle + ', ' + item.t
-          : dfTitle
-      : subtitle ;
-  },
+  crTitle: ({ dfTitle, item={}, subtitle }) => dfTitle
+    ? joinBy(', ', dfTitle, item.t)
+    : subtitle,
+
   crData: (json) => {
     const data = json.Results.series[0].data
        , _data = [];

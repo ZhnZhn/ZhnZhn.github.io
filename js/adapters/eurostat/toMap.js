@@ -9,21 +9,31 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
+var createData = _EuroStatFn["default"].createData,
+    setDataAndInfo = _EuroStatFn["default"].setDataAndInfo;
+
+var _addItemCaptionTo = function _addItemCaptionTo(option) {
+  var itemCaption = option.itemCaption,
+      subtitle = option.subtitle;
+  option.itemCaption = itemCaption || subtitle;
+};
+
 var toMap = {
   createConfig: function createConfig(json, option) {
     var timeIndex = json.dimension.time.category.index,
         value = json.value,
-        _EuroStatFn$createDat = _EuroStatFn["default"].createData(timeIndex, value),
-        data = _EuroStatFn$createDat.data,
+        _createData = createData(timeIndex, value),
+        data = _createData.data,
         config = _ChartConfig["default"].fBaseAreaConfig();
 
-    _EuroStatFn["default"].setDataAndInfo({
+    _addItemCaptionTo(option);
+
+    setDataAndInfo({
       config: config,
       data: data,
       json: json,
       option: option
     });
-
     Object.assign(config, {
       zhDialog: option,
       json: json,

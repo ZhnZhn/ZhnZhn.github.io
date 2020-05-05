@@ -36,7 +36,7 @@ var createrFns = {
       return item.value || item.caption || item;
     }).join('_');
 
-    return [_prefix, seriaType || '', date || ''].join('_');
+    return [_prefix, seriaType || '', date || ''].filter(Boolean).join('_');
   },
   crCaption: function crCaption(items, titles) {
     var itemCaption = _crItemCaption(items, titles),

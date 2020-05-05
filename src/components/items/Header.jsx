@@ -20,7 +20,6 @@ const S = {
     backgroundColor: '#1b2836',
     height: 'auto',
     width: '100%',
-    //paddingTop: 4,
     paddingRight: 42,
     paddingBottom: 2,
     borderTopRightRadius: 2,
@@ -43,11 +42,11 @@ const S = {
     marginLeft: 8
   },
   CAPTION_OPEN : {
-    display : 'inline-block',
-    color: 'rgba(164, 135, 212, 1)',
+    display: 'inline-block',
+    color: '#a487d4',
     width: 125,
     textAlign: 'left',
-    fontWeight : 'bold',
+    fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'clip',
     overflow: 'hidden',
@@ -57,12 +56,13 @@ const S = {
     color: 'gray'
   },
   CAPTION_WIDTH: {
+    width: void 0,
     maxWidth: 250
   },
   TIME: {
-    color : 'rgb(253, 179, 22)',
-    paddingLeft : 16,
-    fontWeight : 'bold'
+    color: '#fdb316',
+    paddingLeft: 16,
+    fontWeight: 'bold'
   },
   CLOSE: {
     position: 'absolute',
@@ -128,10 +128,9 @@ class Header extends Component {
     , _openStyle = isOpen
          ? S.CAPTION_OPEN
          : { ...S.CAPTION_OPEN, ...S.CAPTION_CLOSE }
-    , _captionStyle = (valueMoving)
+    , _captionStyle = valueMoving
          ? _openStyle
          : { ..._openStyle, ...S.CAPTION_WIDTH };
-
     return (
       <div style={{...S.ROOT, ...TS.ROOT }}>
         { this._renderMore(moreModel, TS) }

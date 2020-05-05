@@ -8,11 +8,9 @@ const { setPlotLinesMinMax } = ChartFn;
 
 const {
   valueMoving, findMinY,
-  appendWithColon,
+  joinBy,
   crItemConf
 } = AdapterFn;
-
-const DF_SLICE_TITLE = 'EU';
 
 const COLOR = {
   EU: "#0088ff",
@@ -78,6 +76,7 @@ const _filterZeroCategories = (data, categories) => {
 };
 
 const EuroStatFn = {
+   joinBy,
 
   createData(timeIndex, value){
     const data = [];
@@ -88,7 +87,7 @@ const EuroStatFn = {
        const pointValue = value[timeIndex[key]];
        if ( !(pointValue == null) ){
          data.push([
-            this.convertToUTC(key),
+            EuroStatFn.convertToUTC(key),
             pointValue
           ]);
 
@@ -122,8 +121,8 @@ const EuroStatFn = {
     const { title, subtitle, seriaType } = option;
     Chart.setDefaultTitle(config, title, subtitle);
 
-    config.zhConfig = this.createZhConfig(json, option);
-    config.info = this.createDatasetInfo(json);
+    config.zhConfig = EuroStatFn.createZhConfig(json, option);
+    config.info = EuroStatFn.createDatasetInfo(json);
 
     if (_isLineSeria(seriaType)){
       config.valueMoving = valueMoving(data)
@@ -134,7 +133,7 @@ const EuroStatFn = {
   },
 
   setInfo({ config, json, option }){
-    config.info = this.createDatasetInfo(json);
+    config.info = EuroStatFn.createDatasetInfo(json);
   },
 
   setCategories({
@@ -215,12 +214,7 @@ const EuroStatFn = {
     }
   },
 
-  crItemCaption: ({ subtitle, dfSliceTitle }) => {
-    return appendWithColon(
-      dfSliceTitle || DF_SLICE_TITLE,
-      subtitle
-    );
-  },
+  crItemCaption: ({ title }) => joinBy(": ", "EU", title),
 
   crDataSource: ({ dfTable, dataSource }) => dfTable
     ? `${dataSource} (${dfTable})`

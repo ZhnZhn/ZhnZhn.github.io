@@ -13,28 +13,32 @@ var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
 var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
+var crTimeIndexAndValue = _EuroStatFn["default"].crTimeIndexAndValue,
+    toPointArr = _EuroStatFn["default"].toPointArr,
+    crDataSource = _EuroStatFn["default"].crDataSource,
+    crLinkConf = _EuroStatFn["default"].crLinkConf,
+    setInfo = _EuroStatFn["default"].setInfo;
 var toAreaYearly = {
   createConfig: function createConfig(json, option) {
-    var _fn$crTimeIndexAndVal = _EuroStatFn["default"].crTimeIndexAndValue(json),
-        timeIndex = _fn$crTimeIndexAndVal.timeIndex,
-        value = _fn$crTimeIndexAndVal.value,
-        data = _EuroStatFn["default"].toPointArr(timeIndex, value),
+    var _crTimeIndexAndValue = crTimeIndexAndValue(json),
+        timeIndex = _crTimeIndexAndValue.timeIndex,
+        value = _crTimeIndexAndValue.value,
+        data = toPointArr(timeIndex, value).reverse(),
         title = option.title,
         subtitle = option.subtitle,
-        config = _toYearsByMonths["default"].toConfig(data.reverse(), (0, _extends2["default"])({
+        config = _toYearsByMonths["default"].toConfig(data, (0, _extends2["default"])({
       title: title,
       subtitle: subtitle,
       itemCaption: title + ': ' + subtitle,
       value: title + '_' + subtitle,
-      dataSource: _EuroStatFn["default"].crDataSource(option)
-    }, _EuroStatFn["default"].crLinkConf(json, option)));
+      dataSource: crDataSource(option)
+    }, crLinkConf(json, option)));
 
-    _EuroStatFn["default"].setInfo({
+    setInfo({
       config: config,
       json: json,
       option: option
     });
-
     return config;
   },
   createSeria: function createSeria(json, option) {

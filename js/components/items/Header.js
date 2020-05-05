@@ -34,7 +34,6 @@ var S = {
     backgroundColor: '#1b2836',
     height: 'auto',
     width: '100%',
-    //paddingTop: 4,
     paddingRight: 42,
     paddingBottom: 2,
     borderTopRightRadius: 2,
@@ -58,7 +57,7 @@ var S = {
   },
   CAPTION_OPEN: {
     display: 'inline-block',
-    color: 'rgba(164, 135, 212, 1)',
+    color: '#a487d4',
     width: 125,
     textAlign: 'left',
     fontWeight: 'bold',
@@ -71,10 +70,11 @@ var S = {
     color: 'gray'
   },
   CAPTION_WIDTH: {
+    width: void 0,
     maxWidth: 250
   },
   TIME: {
-    color: 'rgb(253, 179, 22)',
+    color: '#fdb316',
     paddingLeft: 16,
     fontWeight: 'bold'
   },

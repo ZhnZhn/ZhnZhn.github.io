@@ -24,7 +24,8 @@ var _Color = _interopRequireDefault(require("../constants/Color"));
 var ymdToUTC = _DateUtils["default"].ymdToUTC,
     ymdtToUTC = _DateUtils["default"].ymdtToUTC,
     ymdhmsToUTC = _DateUtils["default"].ymdhmsToUTC,
-    mlsToDmy = _DateUtils["default"].mlsToDmy;
+    mlsToDmy = _DateUtils["default"].mlsToDmy,
+    getFromDate = _DateUtils["default"].getFromDate;
 var EMPTY = '';
 var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType'];
@@ -79,6 +80,7 @@ var AdapterFn = {
   ymdToUTC: ymdToUTC,
   ymdtToUTC: ymdtToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
+  getFromDate: getFromDate,
   volumeColumnPoint: function volumeColumnPoint(_ref) {
     var date = _ref.date,
         open = _ref.open,
@@ -235,20 +237,6 @@ var AdapterFn = {
   },
   toUpperCaseFirst: function toUpperCaseFirst(str) {
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substring(1) : EMPTY;
-  },
-  appendWithColon: function appendWithColon() {
-    var str = '';
-
-    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    args.forEach(function (s) {
-      if (s) {
-        str = str ? str + ": " + s : s;
-      }
-    });
-    return str;
   },
   monthIndex: function monthIndex(str) {
     return M.indexOf(String(str).toLowerCase());

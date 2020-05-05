@@ -3,6 +3,12 @@ import FactoryChart from './FactoryChart';
 import JsonStatFn from './JsonStatFn';
 import EuroStatFn from './EuroStatFn';
 
+const {
+  addToCategoryConfig,
+  findMinY,
+  crCategoryTooltip
+} = EuroStatFn
+
 const _crScatterProps = (seriaColor)  => ({
   type: 'scatter',
   marker: {
@@ -18,7 +24,7 @@ const toCategory = {
     return JsonStatFn.trJsonToCategory(json, configSlice)
        .then(({ categories, data, min }) => {
           const config = FactoryChart.createConfig(option)
-          EuroStatFn.addToCategoryConfig(config, {
+          addToCategoryConfig(config, {
             json, option, data, categories, min
           })
           return config;
@@ -41,11 +47,11 @@ const toCategory = {
     return {
       zhSeriaId: 'optionKey',
       zhValueText: 'Value',
-      minY: EuroStatFn.findMinY(data),
+      minY: findMinY(data),
       name: _name,
       color: seriaColor,
       data: data,
-      tooltip: EuroStatFn.crCategoryTooltip(),
+      tooltip: crCategoryTooltip(),
       ..._seriaProps
     };
   }

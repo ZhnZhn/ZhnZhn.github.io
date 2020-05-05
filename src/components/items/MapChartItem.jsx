@@ -14,10 +14,10 @@ const S = {
     marginBottom: 10,
     marginRight: 25,
   },
-  TIME_SPAN: {
+  TIME: {
     position: 'absolute',
     display: 'inline-block',
-    color: 'rgb(253, 179, 22)',
+    color: '#fdb316',
     paddingLeft: 16,
     fontWeight: 'bold'
   },
@@ -28,7 +28,7 @@ const S = {
     zIndex: 2
   },
   MAP_DIV: {
-    height : 400
+    height: 400
   },
   SPINNER_LOADING: {
     position: 'relative',
@@ -119,8 +119,7 @@ class MapChartItem extends Component {
     const { caption, config, onCloseItem } = this.props
     , _mapId = _crMapId(caption)
     , { zhDialog, info } = config
-    , { itemCaption, subtitle } = zhDialog || {}
-    , _itemCaption = itemCaption || subtitle || ''
+    , { itemCaption='' } = zhDialog || {}
     , {
         isLoading, isOpen, isShowInfo,
         time
@@ -133,11 +132,11 @@ class MapChartItem extends Component {
       <div style={S.ROOT_DIV}>
         <ItemHeader
           isOpen={isOpen}
-          caption={_itemCaption}
+          caption={itemCaption}
           onClick={this._hToggle}
           onClose={onCloseItem}
         >
-          <span style={S.TIME_SPAN}>
+          <span style={S.TIME}>
             {time}
           </span>
         </ItemHeader>

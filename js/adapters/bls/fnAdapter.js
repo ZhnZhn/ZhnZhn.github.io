@@ -11,14 +11,14 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var valueMoving = _AdapterFn["default"].valueMoving,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    appendWithColon = _AdapterFn["default"].appendWithColon;
+    joinBy = _AdapterFn["default"].joinBy;
 
-var _crZhConfig = function _crZhConfig(option) {
-  var title = option.title,
-      dataSource = option.dataSource,
-      dfTitle = option.dfTitle,
-      value = option.value,
-      linkItem = option.linkItem;
+var _crZhConfig = function _crZhConfig(_ref) {
+  var title = _ref.title,
+      dataSource = _ref.dataSource,
+      dfTitle = _ref.dfTitle,
+      value = _ref.value,
+      linkItem = _ref.linkItem;
   return {
     id: value,
     key: value,
@@ -26,23 +26,24 @@ var _crZhConfig = function _crZhConfig(option) {
     linkFn: 'DF',
     itemCaption: title,
     isWithoutAdd: true,
-    dataSource: appendWithColon(dataSource, dfTitle)
+    dataSource: joinBy(": ", dataSource, dfTitle)
   };
 };
 
-var _crInfo = function _crInfo(_ref) {
-  var title = _ref.title;
+var _crInfo = function _crInfo(_ref2) {
+  var title = _ref2.title;
   return {
     name: title
   };
 };
 
 var fnAdapter = {
-  crTitle: function crTitle(_ref2) {
-    var dfTitle = _ref2.dfTitle,
-        item = _ref2.item,
-        subtitle = _ref2.subtitle;
-    return dfTitle ? item.t ? dfTitle + ', ' + item.t : dfTitle : subtitle;
+  crTitle: function crTitle(_ref3) {
+    var dfTitle = _ref3.dfTitle,
+        _ref3$item = _ref3.item,
+        item = _ref3$item === void 0 ? {} : _ref3$item,
+        subtitle = _ref3.subtitle;
+    return dfTitle ? joinBy(', ', dfTitle, item.t) : subtitle;
   },
   crData: function crData(json) {
     var data = json.Results.series[0].data,
@@ -63,10 +64,10 @@ var fnAdapter = {
     });
     return _data.reverse();
   },
-  crConfigOption: function crConfigOption(_ref3) {
-    var json = _ref3.json,
-        option = _ref3.option,
-        data = _ref3.data;
+  crConfigOption: function crConfigOption(_ref4) {
+    var json = _ref4.json,
+        option = _ref4.option,
+        data = _ref4.data;
     return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),
