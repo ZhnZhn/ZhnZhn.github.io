@@ -64,10 +64,10 @@ var _isFn = function _isFn(fn) {
 
 var _isNarrowWidth = !_has["default"].wideWidth();
 
-var AreaChartItem =
+var ChartItem =
 /*#__PURE__*/
 function (_Component) {
-  (0, _inheritsLoose2["default"])(AreaChartItem, _Component);
+  (0, _inheritsLoose2["default"])(ChartItem, _Component);
 
   /*
   static propTypes = {
@@ -96,7 +96,7 @@ function (_Component) {
     onZoom: PropTypes.func
   }
   */
-  function AreaChartItem(props) {
+  function ChartItem(props) {
     var _this;
 
     _this = _Component.call(this, props) || this;
@@ -363,7 +363,7 @@ function (_Component) {
     return _this;
   }
 
-  var _proto = AreaChartItem.prototype;
+  var _proto = ChartItem.prototype;
 
   _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -373,7 +373,7 @@ function (_Component) {
     return true;
   };
 
-  AreaChartItem.getDerivedStateFromError = function getDerivedStateFromError(error) {
+  ChartItem.getDerivedStateFromError = function getDerivedStateFromError(error) {
     return {
       hasError: true
     };
@@ -503,9 +503,9 @@ function (_Component) {
     }
   };
 
-  return AreaChartItem;
+  return ChartItem;
 }(_react.Component);
 
-var _default = AreaChartItem;
+var _default = ChartItem;
 exports["default"] = _default;
-//# sourceMappingURL=AreaChartItem.js.map
+//# sourceMappingURL=ChartItem.js.map

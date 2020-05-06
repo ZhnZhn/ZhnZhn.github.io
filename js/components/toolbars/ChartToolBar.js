@@ -175,6 +175,7 @@ function (_Component) {
 
   _proto.render = function render() {
     var _this$props = this.props,
+        hasError = _this$props.hasError,
         style = _this$props.style,
         _this$props$config = _this$props.config,
         config = _this$props$config === void 0 ? {} : _this$props$config,
@@ -205,6 +206,20 @@ function (_Component) {
         isShowMini = _this$state.isShowMini,
         miniStyle = _this$state.miniStyle,
         _arrModalMenu = [];
+
+    var _btInfo = info ? _react["default"].createElement(_ButtonTab["default"], {
+      caption: "Info",
+      onClick: onClickInfo
+    }) : null;
+
+    if (hasError) {
+      return _react["default"].createElement("div", {
+        ref: this._refToolbar,
+        className: CL.SCROLL,
+        style: style
+      }, _btInfo);
+    }
+
     var _btTabIndicator = null;
 
     if (_isIndicatorTab(config, isWithoutIndicator)) {
@@ -240,11 +255,6 @@ function (_Component) {
       caption: "Add" //isUpdatable={false}
       ,
       onClick: onAddToWatch
-    }) : null;
-
-    var _btInfo = info ? _react["default"].createElement(_ButtonTab["default"], {
-      caption: "Info",
-      onClick: onClickInfo
     }) : null;
 
     var _btTabMini = null;

@@ -41,8 +41,10 @@ class HighchartWrapper extends Component {
       if ( _isFn(onWillUnLoaded) ){
         onWillUnLoaded(this.chart);
       }
-      this.chart.destroy()
-      this.chart = null
+      if (this.chart) {
+        this.chart.destroy()
+        this.chart = null
+      }
     } catch(err) {
       /*eslint-disable no-undef */
       if ( process.env.NODE_ENV === '_development') {
@@ -55,7 +57,7 @@ class HighchartWrapper extends Component {
 
   _renderChart = (config) => {
     if (!config){
-      throw new Error('Config must be specified for the ZhHighchart');
+      throw new Error("Chart's config must be specified.");
     }
     this.chart = new Highcharts['Chart'](
       this._refChart.current, config
@@ -80,7 +82,7 @@ class HighchartWrapper extends Component {
 
   getChart() {
     if(!this.chart){
-      throw new Error('getChart() should not called before the ZhHighchart component is mounted');
+      throw new Error('getChart() should not called before a component is mounted');
     }
     return this.chart;
   }

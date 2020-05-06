@@ -130,6 +130,7 @@ class ChartToolbar extends Component {
 
   render(){
     const {
+            hasError,
             style, config={},
             chartId,
             onMiniChart,
@@ -151,6 +152,25 @@ class ChartToolbar extends Component {
             isShowMini, miniStyle
           } = this.state
         , _arrModalMenu = [];
+
+    const _btInfo = info ? (
+      <ButtonTab
+        caption="Info"
+        onClick={onClickInfo}
+      />
+    ) : null;
+
+    if (hasError) {
+      return (
+        <div
+           ref={this._refToolbar}
+           className={CL.SCROLL}
+           style={style}
+        >
+          {_btInfo}
+        </div>
+      );
+    }
 
     let _btTabIndicator = null;
     if (_isIndicatorTab(config, isWithoutIndicator)) {
@@ -188,13 +208,6 @@ class ChartToolbar extends Component {
         caption="Add"
         //isUpdatable={false}
         onClick={onAddToWatch}
-      />
-    ) : null;
-
-    const _btInfo = info ? (
-      <ButtonTab
-        caption="Info"
-        onClick={onClickInfo}
       />
     ) : null;
 

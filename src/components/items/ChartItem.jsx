@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import has from '../has'
-import A from '../Comp'
+import Comp from '../Comp'
 import ChartToolBar from '../toolbars/ChartToolBar';
 import crModelMore from './AreaMore'
 import Header from './Header';
 import ChartLegend from './ChartLegend'
 import MiniCharts from './MiniCharts';
 import PanelDataInfo from './PanelDataInfo';
+
+const {
+  ShowHide,
+  MsgRenderErr,
+  HighchartWrapper
+} = Comp
 
 const CL = {
   ROOT: 'chart-item'
@@ -39,7 +45,7 @@ const S = {
 const _isFn = fn => typeof fn === 'function';
 const _isNarrowWidth = !has.wideWidth();
 
-class AreaChartItem extends Component {
+class ChartItem extends Component {
   /*
   static propTypes = {
     caption: PropTypes.string,
@@ -97,6 +103,7 @@ class AreaChartItem extends Component {
        </div>
     )
     this.state = {
+      hasError: false,
       isOpen: true,
       isShowToolbar: true,
       isShowLegend: false,
@@ -122,14 +129,16 @@ class AreaChartItem extends Component {
   }
 
   hideCaption = () => {
-    this.mainChart.zhHideCaption()
-    this.setState({
-      isShowToolbar: false,
-      isCaption: false
-    })
+    if (this.mainChart) {
+      this.mainChart.zhHideCaption()
+      this.setState({
+        isShowToolbar: false,
+        isCaption: false
+      })
+    }
   }
   showCaption = () => {
-    if (!this.state.isCaption) {
+    if (!this.state.isCaption && this.mainChart) {
       this.mainChart.zhShowCaption()
       this.setState({
         isShowToolbar: true,
@@ -150,8 +159,20 @@ class AreaChartItem extends Component {
     this.forceUpdate()
   }
 
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  /*
+  componentDidCatch(error, errMsg){
+  }
+  */
+
   componentDidMount(){
-    this.mainChart = this.chartComp.getChart()
+    if (this.chartComp) {
+      this.mainChart = this.chartComp.getChart()
+    }
   }
 
   getMainChart = () => {
@@ -287,13 +308,14 @@ class AreaChartItem extends Component {
  }
 
  _createChartToolBar = (config, withoutAnimation) => {
-   const { isShowToolbar } = this.state;
+   const { hasError, isShowToolbar } = this.state;
    return (
-         <A.ShowHide
+         <ShowHide
             isShow={isShowToolbar}
             withoutAnimation={withoutAnimation}
          >
            <ChartToolBar
+             hasError={hasError}
              style={S.TAB_DIV}
              chartId={this._chartId}
              config={config}
@@ -311,7 +333,7 @@ class AreaChartItem extends Component {
              onMinMax={this._toggleMinMax}
              onZoom={this._handleZoom}
             />
-         </A.ShowHide>
+         </ShowHide>
       );
    }
 
@@ -325,6 +347,7 @@ class AreaChartItem extends Component {
     , { zhConfig={}, zhMiniConfigs } = config
     , { itemTime, legend, withoutAnimation } = zhConfig
     , {
+        hasError,
         isOpen, isShowChart, isShowInfo,
         isShowLegend,
         itemCaption,
@@ -353,20 +376,26 @@ class AreaChartItem extends Component {
             regCompVm={this._regCompVm}
          />
         }
-        <A.ShowHide
+        <ShowHide
            isShow={isOpen}
            withoutAnimation={_withoutAnimation}
            style={S.SHOW_HIDE}
         >
            {isShowChart && this._createChartToolBar(config, _withoutAnimation)}
-           <A.HighchartWrapper
-              ref={this._refChartComp}
-              isShow={isShowChart}
-              style={S.WRAPPER}
-              config={config}
-              isShowAbs={isShowAbs}
-              absComp={this._dataSourceEl}
-           />
+           {hasError
+             ? <MsgRenderErr
+                 isShow={isShowChart}
+                 msg="chart"
+               />
+             : <HighchartWrapper
+                ref={this._refChartComp}
+                isShow={isShowChart}
+                style={S.WRAPPER}
+                config={config}
+                isShowAbs={isShowAbs}
+                absComp={this._dataSourceEl}
+               />
+           }
            <PanelDataInfo
               isShow={isShowInfo}
               info={config.info}
@@ -394,7 +423,7 @@ class AreaChartItem extends Component {
               onLoaded={this._handleLoadedMiniChart}
               onWillUnLoaded={this._handleUnLoadedMiniChart}
            />
-        </A.ShowHide>
+        </ShowHide>
       </div>
     )
   }
@@ -420,4 +449,4 @@ class AreaChartItem extends Component {
 
 }
 
-export default AreaChartItem
+export default ChartItem

@@ -1,4 +1,4 @@
-import AreaChart from './AreaChartItem';
+import AreaChart from './ChartItem';
 import MapChart from './MapChartItem';
 import CoinInfo from './CoinInfoItem';
 import Table from './TableItem';

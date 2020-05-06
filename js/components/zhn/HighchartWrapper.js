@@ -44,7 +44,7 @@ function (_Component) {
 
     _this._renderChart = function (config) {
       if (!config) {
-        throw new Error('Config must be specified for the ZhHighchart');
+        throw new Error("Chart's config must be specified.");
       }
 
       _this.chart = new _highcharts["default"]['Chart'](_this._refChart.current, config);
@@ -76,8 +76,10 @@ function (_Component) {
         onWillUnLoaded(this.chart);
       }
 
-      this.chart.destroy();
-      this.chart = null;
+      if (this.chart) {
+        this.chart.destroy();
+        this.chart = null;
+      }
     } catch (err) {
       /*eslint-disable no-undef */
       if (process.env.NODE_ENV === '_development') {
@@ -106,7 +108,7 @@ function (_Component) {
 
   _proto.getChart = function getChart() {
     if (!this.chart) {
-      throw new Error('getChart() should not called before the ZhHighchart component is mounted');
+      throw new Error('getChart() should not called before a component is mounted');
     }
 
     return this.chart;
