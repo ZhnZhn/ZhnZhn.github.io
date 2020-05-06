@@ -19,6 +19,7 @@ import SvgMinus from './SvgMinus';
 import SvgClose from './SvgClose'
 import TabPane from './TabPane'
 import Tab from './Tab'
+import MsgRenderErr from './MsgRenderErr'
 import HighchartWrapper from './HighchartWrapper'
 
 const A = {
@@ -42,6 +43,7 @@ const A = {
   SvgClose,
   TabPane,
   Tab,
+  MsgRenderErr,
   HighchartWrapper
 };
 
