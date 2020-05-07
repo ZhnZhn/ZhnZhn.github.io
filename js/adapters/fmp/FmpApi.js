@@ -5,19 +5,17 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
-
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var getCaption = _fnAdapter["default"].getCaption,
     getValue = _fnAdapter["default"].getValue,
-    crError = _fnAdapter["default"].crError;
+    crError = _fnAdapter["default"].crError,
+    getFromDate = _fnAdapter["default"].getFromDate;
 var C = {
   URI: 'https://financialmodelingprep.com/api/v3',
   ERR_EMPTY: 'Response is empty'
 };
-
-var DF_FROM_DATE = _DateUtils["default"].getFromDate(3);
+var _assign = Object.assign;
 
 var _crDataSource = function _crDataSource(_ref) {
   var dataSource = _ref.dataSource,
@@ -39,7 +37,7 @@ var _assignDf = function _assignDf(option) {
       _query = _period ? "?period=" + _period : '',
       _itemUrl = C.URI + "/" + dfT + "/" + _symbol + _query;
 
-  Object.assign(option, {
+  _assign(option, {
     _symbol: _symbol,
     _itemUrl: _itemUrl,
     _period: _period,
@@ -54,12 +52,12 @@ var _assignHp = function _assignHp(option) {
       _option$items2 = option.items,
       items = _option$items2 === void 0 ? [] : _option$items2,
       fromDate = option.fromDate,
-      _fromDate = fromDate || DF_FROM_DATE,
+      _fromDate = fromDate || getFromDate(3),
       it1 = items[0],
       _symbol = getValue(it1),
       _itemUrl = C.URI + "/" + dfT + "/" + _symbol + "?from=" + _fromDate + "&serietype=line";
 
-  Object.assign(option, {
+  _assign(option, {
     _symbol: _symbol,
     _itemUrl: _itemUrl,
     _propName: 'close',

@@ -1,10 +1,10 @@
-import DateUtils from '../../utils/DateUtils'
 import fnAdapter from './fnAdapter'
 
 const {
   getCaption,
   getValue,
-  crError
+  crError,
+  getFromDate
 } = fnAdapter;
 
 const C = {
@@ -12,7 +12,7 @@ const C = {
   ERR_EMPTY: 'Response is empty'
 };
 
-const DF_FROM_DATE = DateUtils.getFromDate(3);
+const _assign = Object.assign;
 
 const _crDataSource = ({ dataSource, dialogConf={} }) =>
   dataSource || dialogConf.chartContainerCaption || '';
@@ -28,7 +28,7 @@ const _assignDf = option => {
       : ''
   , _itemUrl = `${C.URI}/${dfT}/${_symbol}${_query}`;
 
-  Object.assign(option, {
+  _assign(option, {
     _symbol,
     _itemUrl, _period,
     _propName,
@@ -41,12 +41,12 @@ const _assignHp = option => {
   const {
      dfT, items=[], fromDate
   } = option
-  , _fromDate = fromDate || DF_FROM_DATE
+  , _fromDate = fromDate || getFromDate(3)
   , [ it1 ] = items
   , _symbol = getValue(it1)
   , _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
 
-  Object.assign(option, {
+  _assign(option, {
     _symbol,
     _itemUrl,
     _propName: 'close',
