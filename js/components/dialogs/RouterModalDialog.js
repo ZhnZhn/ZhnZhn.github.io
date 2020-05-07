@@ -27,8 +27,6 @@ var _ColumnRangeDialog = _interopRequireDefault(require("./ColumnRangeDialog"));
 
 var _ZoomDialog = _interopRequireDefault(require("./ZoomDialog"));
 
-var _UsStocksBySectorDialog = _interopRequireDefault(require("./UsStocksBySectorDialog"));
-
 var _StocksBySectorDialog = _interopRequireDefault(require("./StocksBySectorDialog"));
 
 var _SettingsDialog = _interopRequireDefault(require("../header/SettingsDialog"));
@@ -41,7 +39,7 @@ var _M$LOAD_ITEM, _M$EDIT_WATCH_GROUP, _M$EDIT_WATCH_LIST, _router2, _mutatorMap
 
 var MSG_OFFLINE = 'It seems you are offline';
 
-var _router = (_router2 = {}, _router2[_Type.ModalDialog.ASK] = _AskDialog["default"], _router2[_Type.ModalDialog.RELOAD] = _ReloadDialog["default"], _router2[_Type.ModalDialog.INFO] = _InfoDialog["default"], _router2[_Type.ModalDialog.ALERT] = _AlertDialog["default"], _router2[_Type.ModalDialog.DESCRIPTION] = _DescriptionDialog["default"], _router2[_Type.ModalDialog.CUSTOMIZE_EXPORT] = _CustomizeExportDialog["default"], _router2[_Type.ModalDialog.COLUMN_RANGE] = _ColumnRangeDialog["default"], _router2[_Type.ModalDialog.ZOOM] = _ZoomDialog["default"], _router2[_Type.ModalDialog.SETTINGS] = _SettingsDialog["default"], _router2[_Type.ModalDialog.ADD_TO_WATCH] = _AddToWatchDialog["default"], _router2[_Type.ModalDialog.US_STOCK_BY_SECTOR] = _UsStocksBySectorDialog["default"], _router2[_Type.ModalDialog.STOCKS_BY_SECTOR] = _StocksBySectorDialog["default"], _router2[_Type.ModalDialog.PASTE_TO] = _PasteToModalDialog["default"], _router2._loadWL = function _loadWL() {
+var _router = (_router2 = {}, _router2[_Type.ModalDialog.ASK] = _AskDialog["default"], _router2[_Type.ModalDialog.RELOAD] = _ReloadDialog["default"], _router2[_Type.ModalDialog.INFO] = _InfoDialog["default"], _router2[_Type.ModalDialog.ALERT] = _AlertDialog["default"], _router2[_Type.ModalDialog.DESCRIPTION] = _DescriptionDialog["default"], _router2[_Type.ModalDialog.CUSTOMIZE_EXPORT] = _CustomizeExportDialog["default"], _router2[_Type.ModalDialog.COLUMN_RANGE] = _ColumnRangeDialog["default"], _router2[_Type.ModalDialog.ZOOM] = _ZoomDialog["default"], _router2[_Type.ModalDialog.SETTINGS] = _SettingsDialog["default"], _router2[_Type.ModalDialog.ADD_TO_WATCH] = _AddToWatchDialog["default"], _router2[_Type.ModalDialog.STOCKS_BY_SECTOR] = _StocksBySectorDialog["default"], _router2[_Type.ModalDialog.PASTE_TO] = _PasteToModalDialog["default"], _router2._loadWL = function _loadWL() {
   /*eslint-disable no-undef */
   if (process.env.NODE_ENV === '_development') {
     this.WL = Promise.resolve().then(function () {

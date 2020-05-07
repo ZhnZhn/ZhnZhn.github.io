@@ -71,7 +71,8 @@ var S = {
   },
   CAPTION_WIDTH: {
     width: void 0,
-    maxWidth: 250
+    //maxWidth: 250,
+    maxWidth: 'calc(100% - 55px)'
   },
   TIME: {
     color: '#fdb316',

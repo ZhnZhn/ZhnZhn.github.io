@@ -93,22 +93,24 @@ var _filterZeroCategories = function _filterZeroCategories(data, categories) {
 
 var EuroStatFn = {
   joinBy: joinBy,
-  createData: function createData(timeIndex, value) {
+  createData: function createData(timeIndex, value, mapFrequency) {
     var data = [];
     var max = Number.NEGATIVE_INFINITY,
         min = Number.POSITIVE_INFINITY;
-    Object.keys(timeIndex).map(function (key) {
-      var pointValue = value[timeIndex[key]];
+    Object.keys(timeIndex).forEach(function (key) {
+      if (!mapFrequency || mapFrequency === "Y" || key.indexOf(mapFrequency) !== -1) {
+        var pointValue = value[timeIndex[key]];
 
-      if (!(pointValue == null)) {
-        data.push([EuroStatFn.convertToUTC(key), pointValue]);
+        if (pointValue != null) {
+          data.push([EuroStatFn.convertToUTC(key), pointValue]);
 
-        if (pointValue >= max) {
-          max = pointValue;
-        }
+          if (pointValue >= max) {
+            max = pointValue;
+          }
 
-        if (pointValue <= min) {
-          min = pointValue;
+          if (pointValue <= min) {
+            min = pointValue;
+          }
         }
       }
     });
@@ -222,7 +224,9 @@ var EuroStatFn = {
     return _Chart["default"].fTooltip(_Tooltip["default"].categorySimple);
   },
   convertToUTC: function convertToUTC(str) {
-    if (str.indexOf('M') !== -1) {
+    var _period = (str && str[4] || '').toUpperCase();
+
+    if (_period === 'M') {
       var arrDate = str.split('M'),
           _month = parseInt(arrDate[1], 10) - 1,
           _day = _month === 1 ? 28 : 30;
@@ -230,20 +234,20 @@ var EuroStatFn = {
       return Date.UTC(arrDate[0], _month, _day);
     }
 
-    if (str.indexOf('Q') !== -1) {
+    if (_period === 'Q') {
       var _arrDate = str.split('Q'),
           _month2 = parseInt(_arrDate[1], 10) * 3 - 1;
 
       return Date.UTC(_arrDate[0], _month2, 30);
     }
 
-    if (str.indexOf('S' !== -1)) {
+    if (_period === 'S') {
       var _arrS = str.split('S');
 
       return _arrS[1] === '1' ? Date.UTC(_arrS[0], 5, 30) : Date.UTC(_arrS[0], 11, 31);
     }
 
-    return Date.UTC(str, 11, 31);
+    return parseInt(str, 10) > 1970 ? Date.UTC(str, 11, 31) : Date.UTC(1970, 11, 31);
   },
   setLineExtrems: function setLineExtrems(_ref6) {
     var config = _ref6.config,

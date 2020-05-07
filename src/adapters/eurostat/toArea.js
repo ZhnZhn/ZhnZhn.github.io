@@ -13,18 +13,19 @@ const {
 const toArea = {
    createConfig: (json, option) => {
      const { timeIndex, value } = crTimeIndexAndValue(json)
-         , {
-             isNotZoomToMinMax,
-             seriaType, seriaColor, seriaWidth
-            } = option
-         , { data, max, min } = createData(timeIndex, value)
-         , _type = typeof seriaType === 'string'
-             ? seriaType.toLowerCase()
-             : 'spline'
-         , config = ChartConfig.fBaseAreaConfig({
-             seriaType: _type,
-             seriaColor, seriaWidth
-           });
+     , {
+         isNotZoomToMinMax,
+         seriaType, seriaColor, seriaWidth,
+         mapFrequency
+        } = option
+     , { data, max, min } = createData(timeIndex, value, mapFrequency)
+     , _type = typeof seriaType === 'string'
+         ? seriaType.toLowerCase()
+         : 'spline'
+     , config = ChartConfig.fBaseAreaConfig({
+         seriaType: _type,
+         seriaColor, seriaWidth
+       });
       setDataAndInfo({ config, data, json, option });
       setLineExtrems({ config, max, min, isNotZoomToMinMax });
 

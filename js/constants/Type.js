@@ -43,7 +43,6 @@ var ModalDialog = {
   COLUMN_RANGE: 'COLUMN_RANGE',
   ADD_TO_WATCH: 'addToWatch',
   LOAD_ITEM: 'loadItem',
-  US_STOCK_BY_SECTOR: 'US_STOCK_BY_SECTOR',
   STOCKS_BY_SECTOR: 'STOCKS_BY_SECTOR',
   EDIT_WATCH_GROUP: 'editWatchGroup',
   EDIT_WATCH_LIST: 'editWatchList',

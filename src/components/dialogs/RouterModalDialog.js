@@ -12,7 +12,6 @@ import DescriptionDialog from './DescriptionDialog';
 import CustomizeExportDialog from './CustomizeExportDialog';
 import ColumnRangeDialog from './ColumnRangeDialog'
 import ZoomDialog from './ZoomDialog'
-import UsStocksBySectorDialog from './UsStocksBySectorDialog';
 import StocksBySectorDialog from './StocksBySectorDialog';
 import SettingsDialog from '../header/SettingsDialog';
 import AddToWatchDialog from '../watch-browser/AddToWatchDialog';
@@ -22,18 +21,17 @@ import PasteToModalDialog from '../items/PasteToModalDialog'
 const MSG_OFFLINE = 'It seems you are offline';
 
 const _router = {
-  [M.ASK] : AskDialog,
-  [M.RELOAD] : ReloadDialog,
-  [M.INFO] : InfoDialog,
-  [M.ALERT] : AlertDialog,
-  [M.DESCRIPTION] : DescriptionDialog,
-  [M.CUSTOMIZE_EXPORT] : CustomizeExportDialog,
-  [M.COLUMN_RANGE] : ColumnRangeDialog,
+  [M.ASK]: AskDialog,
+  [M.RELOAD]: ReloadDialog,
+  [M.INFO]: InfoDialog,
+  [M.ALERT]: AlertDialog,
+  [M.DESCRIPTION]: DescriptionDialog,
+  [M.CUSTOMIZE_EXPORT]: CustomizeExportDialog,
+  [M.COLUMN_RANGE]: ColumnRangeDialog,
   [M.ZOOM]: ZoomDialog,
-  [M.SETTINGS] : SettingsDialog,
-  [M.ADD_TO_WATCH] : AddToWatchDialog,
-  [M.US_STOCK_BY_SECTOR] : UsStocksBySectorDialog,
-  [M.STOCKS_BY_SECTOR] : StocksBySectorDialog,
+  [M.SETTINGS]: SettingsDialog,
+  [M.ADD_TO_WATCH]: AddToWatchDialog,
+  [M.STOCKS_BY_SECTOR]: StocksBySectorDialog,
   [M.PASTE_TO]: PasteToModalDialog,
 
   _loadWL(){
