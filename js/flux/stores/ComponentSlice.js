@@ -14,10 +14,10 @@ var _Factory = _interopRequireDefault(require("../logic/Factory"));
 var _Type = require("../../constants/Type");
 
 var ItemDialogLogic = {
-  showItemDialog: function showItemDialog(slice, itemConf, store) {
-    var type = itemConf.type,
-        browserType = itemConf.browserType,
-        dialogConfOr = itemConf.dialogConfOr;
+  showItemDialog: function showItemDialog(slice, menuItemConf, store) {
+    var type = menuItemConf.type,
+        browserType = menuItemConf.browserType,
+        dialogConfOr = menuItemConf.dialogConfOr;
 
     if (slice[type]) {
       return Promise.resolve({

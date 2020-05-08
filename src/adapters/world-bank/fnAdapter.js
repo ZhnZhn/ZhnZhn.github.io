@@ -35,8 +35,7 @@ const fnAdapter = {
       zhConfig: {
         key: _id,
         id: _id,
-        itemCaption: title,
-        isWithoutAdd: true,
+        itemCaption: title,        
         linkFn: 'DF',
         item: { ...linkItem },
         dataSource

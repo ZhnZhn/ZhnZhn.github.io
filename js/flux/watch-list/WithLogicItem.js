@@ -22,11 +22,8 @@ var WithLogicItem = {
         id = zhConfig.id,
         title = zhConfig.title,
         subtitle = zhConfig.subtitle,
-        columnName = zhConfig.columnName,
-        dataColumn = zhConfig.dataColumn,
-        fromDate = zhConfig.fromDate,
-        seriaColumnNames = zhConfig.seriaColumnNames,
-        itemConf = zhConfig.itemConf,
+        _zhConfig$itemConf = zhConfig.itemConf,
+        itemConf = _zhConfig$itemConf === void 0 ? {} : _zhConfig$itemConf,
         toGroup = findGroup(watchList, groupCaption),
         toList = findList(toGroup, listCaption);
 
@@ -39,10 +36,6 @@ var WithLogicItem = {
       title: title,
       subtitle: subtitle,
       caption: caption,
-      columnName: columnName,
-      dataColumn: dataColumn,
-      fromDate: fromDate,
-      seriaColumnNames: seriaColumnNames,
       itemConf: itemConf
     };
 

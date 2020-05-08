@@ -188,23 +188,23 @@ var fnAdapter = {
         dfId = option.dfId,
         timeId = option.timeId,
         key = _itemKey || crId(),
-        itemCaption = option.itemCaption || _crItemCaption(option);
+        itemCaption = option.itemCaption || _crItemCaption(option),
+        itemConf = url ? (0, _extends2["default"])({
+      _itemKey: key
+    }, crItemConf(option), {
+      optionFetch: optionFetch,
+      items: items,
+      dataSource: dataSource,
+      //sfl
+      dfId: dfId,
+      timeId: timeId
+    }) : void 0;
 
     return {
       id: key,
       key: key,
       itemCaption: itemCaption,
-      itemConf: (0, _extends2["default"])({
-        _itemKey: key
-      }, crItemConf(option), {
-        optionFetch: optionFetch,
-        items: items,
-        dataSource: dataSource,
-        //sfl
-        dfId: dfId,
-        timeId: timeId
-      }),
-      isWithoutAdd: url ? false : true,
+      itemConf: itemConf,
       dataSource: _crDataSource(option)
     };
   },

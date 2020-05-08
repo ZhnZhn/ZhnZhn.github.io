@@ -61,7 +61,7 @@ const QuandlFn2 = {
        database_code='',
        dataset_code=''
      } = dataset;
-     
+
      return  {
        name,
        toDate: newest_available_date,
@@ -88,12 +88,15 @@ const QuandlFn2 = {
       item,
       title, subtitle,
       id, key,
-      columnName, dataColumn,
-      fromDate, seriaColumnNames,
       linkFn,
+      itemConf: {
+        _itemKey: id,
+        columnName, dataColumn,
+        fromDate, seriaColumnNames
+      },
       itemCaption: _itemCaption,
       dataSource: _dataSource
-    }
+    };
   },
 
   createPercent({ bValue=Big('0.0'), bTotal=Big('0.0') }){

@@ -40,7 +40,6 @@ const _crZhConfig = (data, option) => {
     id: _itemKey, key: _itemKey,
     itemCaption,
     itemConf,
-    isWithoutAdd: !itemConf,
     dataSource
   }
 };

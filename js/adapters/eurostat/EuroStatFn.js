@@ -295,19 +295,18 @@ var EuroStatFn = {
     var key = option.key,
         itemCaption = option.itemCaption,
         url = option.url,
-        _dataSource = EuroStatFn.crDataSource(option);
-
+        dataSource = EuroStatFn.crDataSource(option),
+        itemConf = url ? (0, _extends2["default"])({
+      _itemKey: key
+    }, crItemConf(option), {
+      dataSource: dataSource
+    }) : void 0;
     return (0, _extends2["default"])({
       id: key,
       key: key,
       itemCaption: itemCaption,
-      itemConf: (0, _extends2["default"])({
-        _itemKey: key
-      }, crItemConf(option), {
-        dataSource: _dataSource
-      }),
-      isWithoutAdd: url ? false : true,
-      dataSource: _dataSource
+      itemConf: itemConf,
+      dataSource: dataSource
     }, EuroStatFn.crLinkConf(json, option));
   },
   createDatasetInfo: function createDatasetInfo(_ref10) {

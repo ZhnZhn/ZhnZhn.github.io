@@ -146,7 +146,7 @@ class ChartToolbar extends Component {
             onClickInfo
           } = this.props
         , { zhConfig={}, info, zhMiniConfigs } = config
-        , { isWithoutIndicator, isWithoutAdd, legend } = zhConfig
+        , { isWithoutIndicator, itemConf, legend } = zhConfig
         , { isShowInd,
             isShowFn, fnStyle,
             isShowMini, miniStyle
@@ -202,7 +202,7 @@ class ChartToolbar extends Component {
       />
     ) : null;
 
-    const _btAdd = !isWithoutAdd ? (
+    const _btAdd = itemConf ? (
       <ButtonTab
         style={S.BT_ADD}
         caption="Add"

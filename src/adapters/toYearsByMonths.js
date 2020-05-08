@@ -219,8 +219,7 @@ const _crZhConfig = (option, { legend }) => {
     id: _id,
     key: _id,
     itemCaption,
-    isWithoutIndicator: true,
-    isWithoutAdd: true,
+    isWithoutIndicator: true,    
     legend, dataSource, linkFn, item
   };
 }

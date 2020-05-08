@@ -7,8 +7,8 @@ import { ModalDialog } from '../../constants/Type';
 
 const ItemDialogLogic = {
 
-  showItemDialog(slice, itemConf, store){
-    const { type, browserType, dialogConfOr } = itemConf;
+  showItemDialog(slice, menuItemConf, store){
+    const { type, browserType, dialogConfOr } = menuItemConf;
     if (slice[type]){
       return Promise.resolve({ key: type });
     } else {

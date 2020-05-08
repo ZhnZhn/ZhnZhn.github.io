@@ -47,7 +47,6 @@ var _crZhConfig = function _crZhConfig(option) {
     id: id,
     key: id,
     itemCaption: title,
-    isWithoutAdd: true,
     linkFn: linkFn,
     item: item,
     dataSource: dataSource

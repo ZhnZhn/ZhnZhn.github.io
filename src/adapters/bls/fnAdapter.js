@@ -16,8 +16,7 @@ const _crZhConfig = ({
   id: value, key: value,
   item: { ...linkItem },
   linkFn: 'DF',
-  itemCaption: title,
-  isWithoutAdd: true,
+  itemCaption: title,  
   dataSource: joinBy(": ", dataSource, dfTitle)
 });
 

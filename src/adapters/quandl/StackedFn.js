@@ -200,11 +200,9 @@ export const crValueMoving = function(bNowTotal, date, bPrevTotal, dateTo){
 
 export const crZhConfig = function(option, zhSeriaId){
   return Object.assign(
-       QuandlFn2.createZhConfig(option),
-      {
-        id:zhSeriaId,
-        isWithoutAdd:true,
-        isWithoutIndicator:true
+       QuandlFn2.createZhConfig(option), {
+         id: zhSeriaId,
+         isWithoutIndicator: true
       }
   );
 }

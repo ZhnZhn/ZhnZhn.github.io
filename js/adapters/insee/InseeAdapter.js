@@ -18,7 +18,6 @@ var _crZhConfig = function _crZhConfig(id) {
   return {
     id: id,
     key: id,
-    isWithoutAdd: true,
     dataSource: "INSEE"
   };
 };

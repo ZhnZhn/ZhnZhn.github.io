@@ -275,7 +275,6 @@ exports.crValueMoving = crValueMoving;
 var crZhConfig = function crZhConfig(option, zhSeriaId) {
   return Object.assign(_QuandlFn["default"].createZhConfig(option), {
     id: zhSeriaId,
-    isWithoutAdd: true,
     isWithoutIndicator: true
   });
 };

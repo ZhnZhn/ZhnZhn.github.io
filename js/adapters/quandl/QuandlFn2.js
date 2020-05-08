@@ -125,11 +125,14 @@ var QuandlFn2 = {
       subtitle: subtitle,
       id: id,
       key: key,
-      columnName: columnName,
-      dataColumn: dataColumn,
-      fromDate: fromDate,
-      seriaColumnNames: seriaColumnNames,
       linkFn: linkFn,
+      itemConf: {
+        _itemKey: id,
+        columnName: columnName,
+        dataColumn: dataColumn,
+        fromDate: fromDate,
+        seriaColumnNames: seriaColumnNames
+      },
       itemCaption: _itemCaption,
       dataSource: _dataSource
     };

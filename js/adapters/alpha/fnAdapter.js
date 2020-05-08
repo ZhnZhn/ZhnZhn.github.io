@@ -42,7 +42,6 @@ var _crZhConfig = function _crZhConfig(config, option) {
     id: id,
     key: id,
     itemConf: itemConf,
-    isWithoutAdd: itemConf ? false : true,
     legend: stockSeriesLegend(),
     dataSource: dataSource || "Alpha Vantage"
   };

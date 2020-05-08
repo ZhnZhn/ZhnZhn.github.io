@@ -32,8 +32,7 @@ const _crZhConfig = (option) => {
       , id = _crId(option);
   return {
     id: id, key: id,
-    itemCaption: title,
-    isWithoutAdd: true,    
+    itemCaption: title,    
     linkFn, item, dataSource
   };
 };

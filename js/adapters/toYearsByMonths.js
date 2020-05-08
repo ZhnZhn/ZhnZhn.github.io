@@ -302,7 +302,6 @@ var _crZhConfig = function _crZhConfig(option, _ref3) {
     key: _id,
     itemCaption: itemCaption,
     isWithoutIndicator: true,
-    isWithoutAdd: true,
     legend: legend,
     dataSource: dataSource,
     linkFn: linkFn,

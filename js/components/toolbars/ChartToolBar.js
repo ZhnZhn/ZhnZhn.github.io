@@ -197,7 +197,7 @@ function (_Component) {
         info = config.info,
         zhMiniConfigs = config.zhMiniConfigs,
         isWithoutIndicator = zhConfig.isWithoutIndicator,
-        isWithoutAdd = zhConfig.isWithoutAdd,
+        itemConf = zhConfig.itemConf,
         legend = zhConfig.legend,
         _this$state = this.state,
         isShowInd = _this$state.isShowInd,
@@ -250,7 +250,7 @@ function (_Component) {
       onClick: onClickLegend
     }) : null;
 
-    var _btAdd = !isWithoutAdd ? _react["default"].createElement(_ButtonTab["default"], {
+    var _btAdd = itemConf ? _react["default"].createElement(_ButtonTab["default"], {
       style: S.BT_ADD,
       caption: "Add" //isUpdatable={false}
       ,

@@ -57,7 +57,6 @@ var fnAdapter = {
         key: _id,
         id: _id,
         itemCaption: title,
-        isWithoutAdd: true,
         linkFn: 'DF',
         item: (0, _extends2["default"])({}, linkItem),
         dataSource: dataSource

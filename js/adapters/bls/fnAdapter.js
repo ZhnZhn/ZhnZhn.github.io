@@ -25,7 +25,6 @@ var _crZhConfig = function _crZhConfig(_ref) {
     item: (0, _extends2["default"])({}, linkItem),
     linkFn: 'DF',
     itemCaption: title,
-    isWithoutAdd: true,
     dataSource: joinBy(": ", dataSource, dfTitle)
   };
 };

@@ -33,8 +33,7 @@ var _crZhConfig = function _crZhConfig(json, option) {
   return {
     id: id,
     key: key,
-    //itemCaption: title,
-    isWithoutAdd: true,
+    //itemCaption: title,    
     dataSource: dataSource
   };
 };

@@ -246,19 +246,21 @@ const EuroStatFn = {
       key, itemCaption,
       url
     } = option
-    , _dataSource = EuroStatFn.crDataSource(option);
+    , dataSource = EuroStatFn.crDataSource(option)
+    , itemConf = url
+        ? {
+            _itemKey: key,
+            ...crItemConf(option),
+            dataSource
+          }
+        : void 0;
 
     return {
       id: key, key, itemCaption,
-      itemConf: {
-        _itemKey: key,
-        ...crItemConf(option),
-        dataSource: _dataSource
-      },
-      isWithoutAdd: url ? false : true,
-      dataSource: _dataSource,
+      itemConf,
+      dataSource,
       ...EuroStatFn.crLinkConf(json, option)
-    }
+    };
   },
 
   createDatasetInfo({ label, updated, extension }){

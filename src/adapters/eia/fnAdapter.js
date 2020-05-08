@@ -25,8 +25,7 @@ const _crZhConfig = (json, option) => {
   , id = json.series[0].series_id;
   return {
     id, key,
-    //itemCaption: title,
-    isWithoutAdd: true,
+    //itemCaption: title,    
     dataSource
   };
 };

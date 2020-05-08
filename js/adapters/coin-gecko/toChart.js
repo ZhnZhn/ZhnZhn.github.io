@@ -26,7 +26,6 @@ var _crZhConfig = function _crZhConfig(_ref) {
     id: _itemKey,
     key: _itemKey,
     itemCaption: itemCaption,
-    isWithoutAdd: true,
     dataSource: dataSource
   };
 };

@@ -61,7 +61,6 @@ var fnAdapter = {
     return {
       id: _id,
       key: _id,
-      isWithoutAdd: true,
       legend: [],
       dataSource: dataSource,
       linkFn: "UN_COMTRADE",

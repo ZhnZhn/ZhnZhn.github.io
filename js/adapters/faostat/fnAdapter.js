@@ -160,7 +160,6 @@ var fnAdapter = {
       id: id,
       key: id,
       isWithoutSma: true,
-      isWithoutAdd: true,
       dataSource: "FAOSTAT",
       linkFn: "FAO_STAT",
       item: dfDomain,

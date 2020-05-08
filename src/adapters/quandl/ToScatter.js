@@ -16,8 +16,7 @@ const _crZhConfig = (option) => {
   const { dataSource } = option
       , id = AdapterFn.crId();
   return {
-    id, key: id,
-    isWithoutAdd: true,    
+    id, key: id,    
     dataSource
   };
 }

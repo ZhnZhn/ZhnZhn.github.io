@@ -40,7 +40,6 @@ var toFns = {
       key: key,
       id: key,
       itemCaption: value || key,
-      isWithoutAdd: true,
       dataSource: dataSource
     };
   },

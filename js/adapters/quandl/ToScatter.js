@@ -29,7 +29,6 @@ var _crZhConfig = function _crZhConfig(option) {
   return {
     id: id,
     key: id,
-    isWithoutAdd: true,
     dataSource: dataSource
   };
 };

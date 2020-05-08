@@ -25,10 +25,8 @@ const _crZhConfig = (config, option) => {
   const { id, dataSource } = config
   , itemConf = _crItemConf(config, option);
   return {
-    id: id,
-    key: id,
+    id, key: id,
     itemConf,
-    isWithoutAdd: itemConf ? false : true,
     legend: stockSeriesLegend(),
     dataSource: dataSource || "Alpha Vantage"
   }

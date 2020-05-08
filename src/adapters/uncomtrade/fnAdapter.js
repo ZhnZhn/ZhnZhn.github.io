@@ -42,8 +42,7 @@ const fnAdapter = {
         , _id = this.crChartId(option);
     return {
       id: _id,
-      key: _id,
-      isWithoutAdd: true,      
+      key: _id,      
       legend: [],
       dataSource: dataSource,
       linkFn: "UN_COMTRADE",

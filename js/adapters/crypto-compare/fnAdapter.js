@@ -20,7 +20,6 @@ var _crZhConfig = function _crZhConfig(_ref) {
     id: value,
     key: value,
     itemCaption: title,
-    isWithoutAdd: true,
     linkFn: linkFn,
     item: value,
     dataSource: dataSource

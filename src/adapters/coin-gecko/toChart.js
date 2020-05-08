@@ -17,8 +17,7 @@ const _crSeriaType = seriaType => typeof seriaType === 'string'
     dataSource
   }) => ({
     id: _itemKey, key: _itemKey,
-    itemCaption,
-    isWithoutAdd: true,
+    itemCaption,    
     dataSource
   });
 
@@ -40,7 +39,7 @@ const toChart = {
   crKey(option){
     return option._itemKey;
   },
-  
+
   toConfig(json, option){
     const data = json.prices
      , {

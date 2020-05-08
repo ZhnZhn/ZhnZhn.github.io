@@ -2,7 +2,6 @@ import LogicFn from './LogicFn';
 
 const {
   crMsgItemExisted,
-
   findGroup,
   findList,
   isInArraySameCaption,
@@ -17,12 +16,10 @@ const WithLogicItem = {
       groupCaption, listCaption,
       config
     } = item
-    , {zhConfig} = config
+    , { zhConfig } = config
     , {
-      id, title, subtitle,
-      columnName, dataColumn,
-      fromDate, seriaColumnNames,
-      itemConf
+       id, title, subtitle,
+       itemConf={}
     } = zhConfig
     , toGroup = findGroup(watchList, groupCaption)
     , toList = findList(toGroup, listCaption);
@@ -31,11 +28,10 @@ const WithLogicItem = {
       return crMsgItemExisted(caption, listCaption);
     }
     const _item = {
-      id, title, subtitle, caption,
-      columnName, dataColumn,
-      fromDate, seriaColumnNames,
-      itemConf
-    };
+       id, title, subtitle,
+       caption,
+       itemConf
+     }
     if (toList.items){
       toList.items.push(_item);
     } else {

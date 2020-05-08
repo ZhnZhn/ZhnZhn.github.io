@@ -162,19 +162,21 @@ const fnAdapter = {
       dataSource, dfId, timeId
     } = option
     , key = _itemKey || crId()
-    , itemCaption = option.itemCaption || _crItemCaption(option);
+    , itemCaption = option.itemCaption || _crItemCaption(option)
+    , itemConf = url
+       ? {
+         _itemKey: key,
+         ...crItemConf(option),
+         optionFetch, items,
+         dataSource,
+         //sfl
+         dfId, timeId
+        }
+      : void 0;
     return {
       id: key, key,
       itemCaption,
-      itemConf: {
-        _itemKey: key,
-        ...crItemConf(option),
-        optionFetch, items,
-        dataSource,
-        //sfl
-        dfId, timeId
-      },
-      isWithoutAdd: url ? false : true,
+      itemConf,
       dataSource: _crDataSource(option)
     };
   },

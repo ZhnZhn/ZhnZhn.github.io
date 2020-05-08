@@ -48,7 +48,6 @@ var _crZhConfig = function _crZhConfig(data, option) {
     key: _itemKey,
     itemCaption: itemCaption,
     itemConf: itemConf,
-    isWithoutAdd: !itemConf,
     dataSource: dataSource
   };
 };

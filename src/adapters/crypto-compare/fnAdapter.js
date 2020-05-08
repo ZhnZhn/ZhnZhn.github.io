@@ -14,8 +14,7 @@ const _crZhConfig = ({
   linkFn
 }) => ({
     id: value, key: value,
-    itemCaption: title,
-    isWithoutAdd: true,
+    itemCaption: title,    
     linkFn, item: value,
     dataSource
 });

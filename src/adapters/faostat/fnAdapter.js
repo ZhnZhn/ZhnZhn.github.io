@@ -142,8 +142,7 @@ const fnAdapter = {
   crZhConfig: (id, { dfDomain, oneCaption }) => ({
     id: id,
     key: id,
-    isWithoutSma: true,
-    isWithoutAdd: true,
+    isWithoutSma: true,    
     dataSource: "FAOSTAT",
     linkFn: "FAO_STAT",
     item: dfDomain,
