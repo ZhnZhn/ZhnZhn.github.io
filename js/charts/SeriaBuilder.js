@@ -12,8 +12,8 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
 var C = {
-  SPLINE: {
-    type: 'spline',
+  SERIA: {
+    //type: 'spline',
     visible: true,
     marker: {
       symbol: 'circle'
@@ -106,11 +106,11 @@ var _addSeriesImpl = function _addSeriesImpl(to, series) {
 var SeriaBuilder = {
   initSeria: function initSeria(option) {
     this._type = 'S';
-    this.config = Object.assign(_ChartConfig["default"].fSeries(), option);
+    this.config = _ChartConfig["default"].crSeria(option);
     return this;
   },
   splineSeria: function splineSeria(option) {
-    return this.initSeria((0, _extends2["default"])({}, C.SPLINE, {}, option));
+    return this.initSeria((0, _extends2["default"])({}, C.SERIA, {}, option));
   },
   _seria: function _seria(CONFIG, tooltip, option) {
     this._type = 'S';

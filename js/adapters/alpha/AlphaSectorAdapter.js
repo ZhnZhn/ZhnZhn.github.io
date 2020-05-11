@@ -208,9 +208,6 @@ var AlphaSectorAdapter = {
     return {
       config: config
     };
-  },
-  toSeries: function toSeries(json, option) {
-    throw new Error('ZH_1000');
   }
 };
 var _default = AlphaSectorAdapter;

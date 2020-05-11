@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
-
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
 var _fnUtil = _interopRequireDefault(require("./fnUtil"));
@@ -19,12 +17,7 @@ var toUTC = _fnUtil["default"].toUTC,
     compose = _fnUtil["default"].compose;
 var crDsValuesTimes = _fnAdapter["default"].crDsValuesTimes,
     crChartOption = _fnAdapter["default"].crChartOption;
-var DF_TYPE = 'spline';
 var _isArr = Array.isArray;
-
-var _isStr = function _isStr(str) {
-  return typeof str === 'string';
-};
 
 var _filterLeadingNulls = function _filterLeadingNulls(data) {
   var _len = data.length;
@@ -63,42 +56,25 @@ var _toData = function _toData(values, times) {
   return _isArr(times) ? _postProcessData(times.map(_crPoint)) : [];
 };
 
-var _crSplineSeria = function _crSplineSeria(data, option) {
-  if (option === void 0) {
-    option = {};
-  }
-
-  var _option = option,
-      seriaType = _option.seriaType,
-      seriaColor = _option.seriaColor,
-      _option$seriaWidth = _option.seriaWidth,
-      seriaWidth = _option$seriaWidth === void 0 ? 1 : _option$seriaWidth,
-      _type = _isStr(seriaType) ? seriaType.toLowerCase() : DF_TYPE;
-
-  return Object.assign(_ChartConfig["default"].fSeries(), {
-    visible: true,
-    type: _type,
-    color: seriaColor,
-    lineWidth: seriaWidth,
-    data: data,
-    marker: {
-      symbol: 'circle'
-    },
-    zhSeriaId: _fnAdapter["default"].crId()
-  });
-};
-
 var toArea = {
   crConfig: function crConfig(json, option) {
     var _option$title = option.title,
         title = _option$title === void 0 ? '' : _option$title,
         subtitle = option.subtitle,
+        seriaType = option.seriaType,
+        seriaColor = option.seriaColor,
+        seriaWidth = option.seriaWidth,
         _crDsValuesTimes = crDsValuesTimes(json, option),
         ds = _crDsValuesTimes.ds,
         values = _crDsValuesTimes.values,
         times = _crDsValuesTimes.times,
         data = _toData(values, times),
-        seria = _crSplineSeria(data, option);
+        seria = (0, _ConfigBuilder["default"])().splineSeria({
+      seriaType: seriaType,
+      seriaColor: seriaColor,
+      seriaWidth: seriaWidth,
+      data: data
+    }).toSeria();
 
     return (0, _ConfigBuilder["default"])().areaConfig({
       spacingTop: 25

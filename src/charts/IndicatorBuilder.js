@@ -9,9 +9,7 @@ const {
 } = ChartConfig;
 
 const _addDataAsSeriaToChart = (chart, option) => {
-  const seria = Object.assign(
-    ChartConfig.fSeries(), option
-  );
+  const seria = ChartConfig.crSeria(option);  
   chart.addSeries(seria, true, true)
   return chart.options.colors[seria['_colorIndex']];
 };

@@ -11,6 +11,11 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _fnDescr = _interopRequireDefault(require("./fnDescr"));
 
+var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    compareByDate = _AdapterFn["default"].compareByDate,
+    valueMoving = _AdapterFn["default"].valueMoving,
+    findMinY = _AdapterFn["default"].findMinY;
+
 var _parser = new window.DOMParser(); //€
 
 
@@ -48,13 +53,13 @@ var _toData = function _toData(str) {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
 
       if (!Number.isNaN(_v)) {
-        data.push([_AdapterFn["default"].ymdToUTC(node.getAttribute('TIME_PERIOD')), _v]);
+        data.push([ymdToUTC(node.getAttribute('TIME_PERIOD')), _v]);
       }
     });
   }
 
   return {
-    data: data.sort(_AdapterFn["default"].compareByDate),
+    data: data.sort(compareByDate),
     info: info
   };
 };
@@ -71,7 +76,7 @@ var InseeAdapter = {
       spacingTop: 25
     }).addCaption(title, subtitle).addPoints(value, data).addMinMax(data, option).add({
       info: _fnDescr["default"].toInfo(info, title),
-      valueMoving: _AdapterFn["default"].valueMoving(data),
+      valueMoving: valueMoving(data),
       zhConfig: _crZhConfig(value)
     }).toConfig();
 
@@ -87,7 +92,9 @@ var InseeAdapter = {
         _toData3 = _toData(str),
         data = _toData3.data;
 
-    return (0, _ConfigBuilder["default"])().initSeria().addPoints(value, data, _text).toSeria();
+    return (0, _ConfigBuilder["default"])().initSeria({
+      minY: findMinY
+    }).addPoints(value, data, _text).toSeria();
   }
 };
 var _default = InseeAdapter;

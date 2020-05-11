@@ -12,7 +12,8 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    crSeria = _fnAdapter["default"].crSeria;
 var BeaAdapter = {
   toConfig: function toConfig(json, option) {
     var Results = json.BEAAPI.Results,
@@ -22,7 +23,7 @@ var BeaAdapter = {
     }).toSeria(),
         title = option.title,
         dfTitle = option.dfTitle,
-        config = (0, _ConfigBuilder["default"])().area2Config(dfTitle, title).addSeries(seria).add((0, _extends2["default"])({}, crConfigOption({
+        config = (0, _ConfigBuilder["default"])().area2Config(dfTitle, title).addMinMax(data, option).addSeries(seria).add((0, _extends2["default"])({}, crConfigOption({
       option: option,
       data: data,
       Results: Results
@@ -32,10 +33,11 @@ var BeaAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    var _BeaAdapter$toConfig = BeaAdapter.toConfig(json, option),
-        config = _BeaAdapter$toConfig.config;
-
-    return config.series[0];
+    return crSeria({
+      adapter: BeaAdapter,
+      json: json,
+      option: option
+    });
   }
 };
 var _default = BeaAdapter;

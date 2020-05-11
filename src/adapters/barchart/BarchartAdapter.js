@@ -9,7 +9,8 @@ const {
   crConfigOption,
   toSeriesData,
   crOpenInterest,
-  joinBy
+  joinBy,
+  findMinY
 } = fnAdapter;
 
 const _getValue = obj => obj && obj.value
@@ -74,7 +75,7 @@ const BarchartAdapter = {
           dColumn: dataInterest
         })
         .toConfig();
-              
+
       return { config };
   },
 
@@ -86,8 +87,8 @@ const BarchartAdapter = {
          pnDate: 'tradingDay'
       });
     return Builder()
-      .initSeria()
-      .addPoints(_id, data)
+      .initSeria({ minY: findMinY(data) })
+      .addPoints(_id, data)      
       .toSeria();
   }
 }

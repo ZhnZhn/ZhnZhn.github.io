@@ -1,1 +1,18 @@
-{"version":3,"sources":["../../../src/adapters/uncomtrade/UnComtradeAdapter.js"],"names":["UnComtradeAdapter","crKey","fnAdapter","crChartId","toConfig","json","option","config","toSeries","seria","ChartConfig","fSeries","Object","assign","zhSeriaId","zhValueText"],"mappings":";;;;;;;AACA;;AAEA;;AAEA,IAAMA,iBAAiB,GAAG;AACxBC,EAAAA,KAAK,EAAEC,sBAAUC,SADO;AAGxBC,EAAAA,QAHwB,oBAGfC,IAHe,EAGTC,MAHS,EAGF;AACpB,QAAMC,MAAM,GAAGL,sBAAUE,QAAV,CAAmBC,IAAnB,EAAyBC,MAAzB,CAAf;;AAEA,WAAO;AACJC,MAAAA,MAAM,EAANA,MADI,CAEJ;AACA;;AAHI,KAAP;AAKD,GAXuB;AAaxBC,EAAAA,QAbwB,oBAafH,IAbe,EAaTC,MAbS,EAaF;AACpB,QAAMG,KAAK,GAAGC,wBAAYC,OAAZ,EAAd;;AACAC,IAAAA,MAAM,CAACC,MAAP,CAAcJ,KAAd,EAAqB;AACnBK,MAAAA,SAAS,EAAE,aADQ;AAEnBC,MAAAA,WAAW,EAAE;AAFM,KAArB;AAIA,WAAON,KAAP;AACD;AApBuB,CAA1B;eAuBeT,iB","sourcesContent":["\r\nimport ChartConfig from '../../charts/ChartConfig'\r\n\r\nimport fnAdapter from './fnAdapter'\r\n\r\nconst UnComtradeAdapter = {\r\n  crKey: fnAdapter.crChartId,\r\n\r\n  toConfig(json, option){\r\n    const config = fnAdapter.toConfig(json, option);\r\n\r\n    return {\r\n       config\r\n       //isDrawDeltaExtrems: false,\r\n       //isNotZoomToMinMax: false\r\n    };\r\n  },\r\n\r\n  toSeries(json, option){\r\n    const seria = ChartConfig.fSeries()\r\n    Object.assign(seria, {\r\n      zhSeriaId: 'Empty_Seria',\r\n      zhValueText: 'Empty Seria'\r\n    })\r\n    return seria;\r\n  }\r\n};\r\n\r\nexport default UnComtradeAdapter\r\n"],"file":"UnComtradeAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/uncomtrade/UnComtradeAdapter.js"
+ ],
+ "file": "../../../src/adapters/uncomtrade/UnComtradeAdapter.js",
+ "names": [
+  "UnComtradeAdapter",
+  "crKey",
+  "fnAdapter",
+  "crChartId",
+  "toConfig",
+  "json",
+  "option",
+  "config"
+ ],
+ "mappings": ";;;;;;;AACA;;AAEA,IAAMA,iBAAiB,GAAG;AACxBC,EAAAA,KAAK,EAAEC,sBAAUC,SADO;AAGxBC,EAAAA,QAHwB,oBAGfC,IAHe,EAGTC,MAHS,EAGF;AACpB,QAAMC,MAAM,GAAGL,sBAAUE,QAAV,CAAmBC,IAAnB,EAAyBC,MAAzB,CAAf;;AACA,WAAO;AACJC,MAAAA,MAAM,EAANA,MADI,CAEJ;AACA;;AAHI,KAAP;AAKD;AAVuB,CAA1B;eAceP,iB"
+}

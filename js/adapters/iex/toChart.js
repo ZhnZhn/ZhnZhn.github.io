@@ -16,7 +16,8 @@ var _AdapterStockFn = _interopRequireDefault(require("../AdapterStockFn"));
 var crItemConf = _AdapterFn["default"].crItemConf,
     crValueConf = _AdapterFn["default"].crValueConf,
     valueMoving = _AdapterFn["default"].valueMoving,
-    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend;
+    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend,
+    findMinY = _AdapterFn["default"].findMinY;
 var toSeriesData = _AdapterStockFn["default"].toSeriesData;
 
 var _crZhConfig = function _crZhConfig(id, option, data) {
@@ -81,7 +82,9 @@ var toChart = {
     }),
         data = _toSeriesData.data;
 
-    return (0, _ConfigBuilder["default"])().initSeria().addPoints(_id, data).toSeria();
+    return (0, _ConfigBuilder["default"])().initSeria({
+      minY: findMinY(data)
+    }).addPoints(_id, data).toSeria();
   }
 };
 var _default = toChart;

@@ -13,7 +13,8 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crSubtitle = _fnAdapter["default"].crSubtitle,
     crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    crSeria = _fnAdapter["default"].crSeria;
 var IntrinioAdapter = {
   toConfig: function toConfig(json, option) {
     var data = crData(json, option),
@@ -32,10 +33,11 @@ var IntrinioAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    var _IntrinioAdapter$toCo = IntrinioAdapter.toConfig(json, option),
-        config = _IntrinioAdapter$toCo.config;
-
-    return config.series[0];
+    return crSeria({
+      adapter: IntrinioAdapter,
+      json: json,
+      option: option
+    });
   }
 };
 var _default = IntrinioAdapter;

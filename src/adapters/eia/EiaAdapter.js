@@ -5,26 +5,31 @@ import fnAdapter from './fnAdapter';
 const {
   crTitle,
   crData,
-  crConfigOption
+  crConfigOption,
+  crSeria
 } = fnAdapter;
 
 const EiaAdapter = {
   toConfig(json, option){
     const {
-      seriaColor
+      seriaType,
+      seriaColor,
+      seriaWidth
     } = option
     , { title, subtitle } = crTitle(option)
     , data = crData(json)
     , seria = Builder()
         .splineSeria({
-          color: seriaColor,
+          seriaType,
+          seriaColor,
+          seriaWidth,
           data
         })
         .toSeria()
     , config = Builder()
        .area2Config(title, subtitle)
        .addSeries(seria)
-       .addMinMax(data, option)       
+       .addMinMax(data, option)
        .add({
         ...crConfigOption({ json, option, data })
        })
@@ -33,9 +38,11 @@ const EiaAdapter = {
     return { config };
   },
 
-  toSeries(json, option){
-    const { config } = EiaAdapter.toConfig(json, option);
-    return config.series[0];
+  toSeries(json, option){    
+    return crSeria({
+      adapter: EiaAdapter,
+      json, option
+    });
   }
 };
 

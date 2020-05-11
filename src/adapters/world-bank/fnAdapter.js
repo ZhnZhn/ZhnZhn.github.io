@@ -1,12 +1,18 @@
 import AdapterFn from '../AdapterFn'
 
-const { ymdToUTC, valueMoving } = AdapterFn;
+const {
+  ymdToUTC,
+  valueMoving,
+  crSeria
+} = AdapterFn;
 
 const _crInfo = ({ title, subtitle, two }) => ({
   name: `${title}: ${subtitle} (${two})`
 });
 
 const fnAdapter = {
+  crSeria,
+  
   crId: (option) => {
     const { one='', two='' } = option;
     return `${one}_${two}`;
@@ -35,7 +41,7 @@ const fnAdapter = {
       zhConfig: {
         key: _id,
         id: _id,
-        itemCaption: title,        
+        itemCaption: title,
         linkFn: 'DF',
         item: { ...linkItem },
         dataSource

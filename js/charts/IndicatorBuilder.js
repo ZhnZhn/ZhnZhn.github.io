@@ -16,7 +16,8 @@ var _crMfiConfig = _ChartConfig["default"].crMfiConfig,
     _crMomAthConfig = _ChartConfig["default"].crMomAthConfig;
 
 var _addDataAsSeriaToChart = function _addDataAsSeriaToChart(chart, option) {
-  var seria = Object.assign(_ChartConfig["default"].fSeries(), option);
+  var seria = _ChartConfig["default"].crSeria(option);
+
   chart.addSeries(seria, true, true);
   return chart.options.colors[seria['_colorIndex']];
 };

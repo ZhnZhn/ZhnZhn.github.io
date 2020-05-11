@@ -12,7 +12,8 @@ import fnAdapter from './fnAdapter'
 const {
    ymdToUTC,
    ymdhmsToUTC,
-   volumeColumnPoint
+   volumeColumnPoint,
+   crSeria
 } = AdapterFn;
 const { crMarkerColor, crDataDaily } = IntradayFns
 
@@ -189,12 +190,16 @@ const AlphaIntradayAdapter = {
           dataSource
         }, option)
       })
-      .toConfig();    
+      .toConfig();
     return { config };
   },
 
   toSeries(json, option){
-    throw new Error('ZH_1000');
+    return crSeria({
+      adapter: AlphaIntradayAdapter,
+      json, option,
+      type: 'spline'
+    });
   }
 }
 

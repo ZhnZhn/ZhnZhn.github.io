@@ -7,7 +7,8 @@ exports["default"] = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var valueMoving = _AdapterFn["default"].valueMoving;
+var valueMoving = _AdapterFn["default"].valueMoving,
+    crSeria = _AdapterFn["default"].crSeria;
 var C = {
   CHART_URL: "https://www.eia.gov/opendata/embed.php?type=chart&series_id="
 };
@@ -33,7 +34,7 @@ var _crZhConfig = function _crZhConfig(json, option) {
   return {
     id: id,
     key: key,
-    //itemCaption: title,    
+    //itemCaption: title,
     dataSource: dataSource
   };
 };
@@ -64,9 +65,9 @@ var _getCaption = function _getCaption(obj) {
 };
 
 var fnAdapter = {
-  /*
-  [ ["201806", 1000], ... ]
-  */
+  crSeria: crSeria,
+
+  /* [ ["201806", 1000], ... ] */
   crTitle: function crTitle(option) {
     var _option$items = option.items,
         items = _option$items === void 0 ? [] : _option$items,

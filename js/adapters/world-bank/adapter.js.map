@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/adapters/world-bank/adapter.js"],"names":["crId","fnAdapter","crData","crConfigOptions","adapter","crKey","toConfig","json","option","title","subtitle","data","seria","splineSeria","toSeria","config","areaConfig","spacingTop","addCaption","addSeries","addMinMax","add","toSeries","series"],"mappings":";;;;;;;;;AAAA;;AACA;;IAEQA,I,GAAkCC,qB,CAAlCD,I;IAAME,M,GAA4BD,qB,CAA5BC,M;IAAQC,e,GAAoBF,qB,CAApBE,e;AAEtB,IAAMC,OAAO,GAAG;AACdC,EAAAA,KAAK,EAAEL,IADO;AAGdM,EAAAA,QAHc,oBAGLC,IAHK,EAGCC,MAHD,EAGQ;AAAA,QAElBC,KAFkB,GAGhBD,MAHgB,CAElBC,KAFkB;AAAA,QAEXC,QAFW,GAGhBF,MAHgB,CAEXE,QAFW;AAAA,QAIlBC,IAJkB,GAIXT,MAAM,CAACK,IAAI,CAAC,CAAD,CAAL,CAJK;AAAA,QAKlBK,KALkB,GAKV,iCACNC,WADM,CACM;AAAEF,MAAAA,IAAI,EAAJA;AAAF,KADN,EAENG,OAFM,EALU;AAAA,QAQlBC,MARkB,GAQT,iCACPC,UADO,CACI;AAAEC,MAAAA,UAAU,EAAE;AAAd,KADJ,EAEPC,UAFO,CAEIT,KAFJ,EAEWC,QAFX,EAGPS,SAHO,CAGGP,KAHH,EAIPQ,SAJO,CAIGT,IAJH,EAISH,MAJT,EAKPa,GALO,+BAMFlB,eAAe,CAACK,MAAD,EAASG,IAAT,CANb,GAQPL,QARO,EARS;AAkBpB,WAAO;AAAES,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAtBa;AAwBdO,EAAAA,QAxBc,oBAwBLf,IAxBK,EAwBCC,MAxBD,EAwBQ;AAAA,4BACDJ,OAAO,CAACE,QAAR,CAAiBC,IAAjB,EAAuBC,MAAvB,CADC;AAAA,QACZO,MADY,qBACZA,MADY;;AAEpB,WAAOA,MAAM,CAACQ,MAAP,CAAc,CAAd,CAAP;AACD;AA3Ba,CAAhB;eA8BenB,O","sourcesContent":["import Builder from '../../charts/ConfigBuilder'\r\nimport fnAdapter from './fnAdapter'\r\n\r\nconst { crId, crData, crConfigOptions } = fnAdapter;\r\n\r\nconst adapter = {\r\n  crKey: crId,\r\n\r\n  toConfig(json, option){\r\n    const {\r\n      title, subtitle\r\n    } = option\r\n    , data = crData(json[1])\r\n    , seria = Builder()\r\n       .splineSeria({ data })\r\n       .toSeria()\r\n    , config = Builder()\r\n       .areaConfig({ spacingTop: 25 })\r\n       .addCaption(title, subtitle)\r\n       .addSeries(seria)\r\n       .addMinMax(data, option)\r\n       .add({\r\n          ...crConfigOptions(option, data)\r\n       })\r\n       .toConfig();\r\n\r\n    return { config };\r\n  },\r\n\r\n  toSeries(json, option){\r\n    const { config } = adapter.toConfig(json, option);\r\n    return config.series[0];\r\n  }\r\n}\r\n\r\nexport default adapter\r\n"],"file":"adapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/world-bank/adapter.js"
+ ],
+ "file": "../../../src/adapters/world-bank/adapter.js",
+ "names": [
+  "crId",
+  "fnAdapter",
+  "crData",
+  "crConfigOptions",
+  "crSeria",
+  "adapter",
+  "crKey",
+  "toConfig",
+  "json",
+  "option",
+  "title",
+  "subtitle",
+  "data",
+  "seria",
+  "splineSeria",
+  "toSeria",
+  "config",
+  "areaConfig",
+  "spacingTop",
+  "addCaption",
+  "addSeries",
+  "addMinMax",
+  "add",
+  "toSeries"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;IAGEA,I,GAEEC,qB,CAFFD,I;IAAME,M,GAEJD,qB,CAFIC,M;IAAQC,e,GAEZF,qB,CAFYE,e;IACdC,O,GACEH,qB,CADFG,O;AAGF,IAAMC,OAAO,GAAG;AACdC,EAAAA,KAAK,EAAEN,IADO;AAGdO,EAAAA,QAHc,oBAGLC,IAHK,EAGCC,MAHD,EAGQ;AAAA,QAElBC,KAFkB,GAGhBD,MAHgB,CAElBC,KAFkB;AAAA,QAEXC,QAFW,GAGhBF,MAHgB,CAEXE,QAFW;AAAA,QAIlBC,IAJkB,GAIXV,MAAM,CAACM,IAAI,CAAC,CAAD,CAAL,CAJK;AAAA,QAKlBK,KALkB,GAKV,iCACNC,WADM,CACM;AAAEF,MAAAA,IAAI,EAAJA;AAAF,KADN,EAENG,OAFM,EALU;AAAA,QAQlBC,MARkB,GAQT,iCACPC,UADO,CACI;AAAEC,MAAAA,UAAU,EAAE;AAAd,KADJ,EAEPC,UAFO,CAEIT,KAFJ,EAEWC,QAFX,EAGPS,SAHO,CAGGP,KAHH,EAIPQ,SAJO,CAIGT,IAJH,EAISH,MAJT,EAKPa,GALO,+BAMFnB,eAAe,CAACM,MAAD,EAASG,IAAT,CANb,GAQPL,QARO,EARS;AAkBpB,WAAO;AAAES,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAtBa;AAwBdO,EAAAA,QAxBc,oBAwBLf,IAxBK,EAwBCC,MAxBD,EAwBQ;AACpB,WAAOL,OAAO,CAAC;AACbC,MAAAA,OAAO,EAAPA,OADa;AACJG,MAAAA,IAAI,EAAJA,IADI;AACEC,MAAAA,MAAM,EAANA;AADF,KAAD,CAAd;AAGD;AA5Ba,CAAhB;eA+BeJ,O"
+}

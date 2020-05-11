@@ -13,20 +13,22 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crData = _fnAdapter["default"].crData,
     crTitle = _fnAdapter["default"].crTitle,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    crSeria = _fnAdapter["default"].crSeria;
 var DbNomicsAdapter = {
   toConfig: function toConfig(json, option) {
     var fromDate = option.fromDate,
+        seriaType = option.seriaType,
         seriaColor = option.seriaColor,
-        _option$seriaType = option.seriaType,
-        seriaType = _option$seriaType === void 0 ? 'spline' : _option$seriaType,
+        seriaWidth = option.seriaWidth,
         _crTitle = crTitle(option, json),
         title = _crTitle.title,
         subtitle = _crTitle.subtitle,
         data = crData(json, fromDate),
         seria = (0, _ConfigBuilder["default"])().splineSeria({
-      color: seriaColor,
-      type: seriaType.toLowerCase(),
+      seriaType: seriaType,
+      seriaColor: seriaColor,
+      seriaWidth: seriaWidth,
       data: data
     }).toSeria(),
         config = (0, _ConfigBuilder["default"])().area2Config(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, crConfigOption({
@@ -40,10 +42,11 @@ var DbNomicsAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    var _DbNomicsAdapter$toCo = DbNomicsAdapter.toConfig(json, option),
-        config = _DbNomicsAdapter$toCo.config;
-
-    return config.series[0];
+    return crSeria({
+      adapter: DbNomicsAdapter,
+      json: json,
+      option: option
+    });
   }
 };
 var _default = DbNomicsAdapter;

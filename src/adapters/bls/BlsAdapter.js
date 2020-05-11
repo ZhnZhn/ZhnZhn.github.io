@@ -1,11 +1,14 @@
 import Builder from '../../charts/ConfigBuilder'
 
 import fnAdapter from './fnAdapter'
-const { crTitle, crData, crConfigOption } = fnAdapter;
+const {
+  crTitle, crData, crConfigOption,
+  crSeria
+} = fnAdapter;
 
 const BlsAdapter = {
   toConfig(json, option){
-    const { title } = option    
+    const { title } = option
     , _dfTitle = crTitle(option)
     , data = crData(json)
     , seria = Builder()
@@ -13,6 +16,7 @@ const BlsAdapter = {
         .toSeria()
     , config = Builder()
         .area2Config(_dfTitle, title)
+        .addMinMax(data, option)
         .addSeries(seria)
         .add({
           ...crConfigOption({ json, option, data })
@@ -22,8 +26,10 @@ const BlsAdapter = {
   },
 
   toSeries(json, option){
-     const { config } = BlsAdapter.toConfig(json, option);
-     return config.series[0];
+     return crSeria({
+       adapter: BlsAdapter,
+       json, option
+     });
   }
 }
 

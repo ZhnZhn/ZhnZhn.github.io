@@ -11,7 +11,8 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var valueMoving = _AdapterFn["default"].valueMoving,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    joinBy = _AdapterFn["default"].joinBy;
+    joinBy = _AdapterFn["default"].joinBy,
+    crSeria = _AdapterFn["default"].crSeria;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var title = _ref.title,
@@ -37,6 +38,7 @@ var _crInfo = function _crInfo(_ref2) {
 };
 
 var fnAdapter = {
+  crSeria: crSeria,
   crTitle: function crTitle(_ref3) {
     var dfTitle = _ref3.dfTitle,
         _ref3$item = _ref3.item,

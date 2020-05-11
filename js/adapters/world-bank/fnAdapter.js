@@ -10,7 +10,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    valueMoving = _AdapterFn["default"].valueMoving,
+    crSeria = _AdapterFn["default"].crSeria;
 
 var _crInfo = function _crInfo(_ref) {
   var title = _ref.title,
@@ -22,6 +23,7 @@ var _crInfo = function _crInfo(_ref) {
 };
 
 var fnAdapter = {
+  crSeria: crSeria,
   crId: function crId(option) {
     var _option$one = option.one,
         one = _option$one === void 0 ? '' : _option$one,

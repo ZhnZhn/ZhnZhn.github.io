@@ -13,11 +13,7 @@ const toInfoConfig = {
             }
           };
     return { config };
-  },
-
-  toSeries: () => {
-    throw new Error('ZH_1000');
-  }
+  }  
 };
 
 export default toInfoConfig

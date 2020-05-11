@@ -31,7 +31,9 @@ var _assignDf = function _assignDf(option) {
       it1 = items[0],
       it2 = items[1],
       it3 = items[2],
-      _symbol = getValue(it1),
+      _symbol = getValue(it1, {
+    isUpper: true
+  }),
       _period = getValue(it3),
       _propName = getCaption(it2),
       _query = _period ? "?period=" + _period : '',
@@ -53,8 +55,9 @@ var _assignHp = function _assignHp(option) {
       items = _option$items2 === void 0 ? [] : _option$items2,
       fromDate = option.fromDate,
       _fromDate = fromDate || getFromDate(3),
-      it1 = items[0],
-      _symbol = getValue(it1),
+      _symbol = getValue(items[0], {
+    isUpper: true
+  }),
       _itemUrl = C.URI + "/" + dfT + "/" + _symbol + "?from=" + _fromDate + "&serietype=line";
 
   _assign(option, {

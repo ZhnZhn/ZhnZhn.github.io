@@ -7,7 +7,8 @@ const {
   crItemConf,
   joinBy,
   ymdToUTC,
-  valueMoving
+  valueMoving,
+  crSeria
 } = AdapterFn;
 const {
   getPeriodAndValue,
@@ -34,7 +35,7 @@ const _crItemLink = crItemLink
 const _crUpdatedDate = json => {
   const _date = getInexedAt(json).split('T')[0]
   return _date
-    ? `<p>Updated by DBnomics on ${_date}</p>`
+    ? `<p>Updated by DB Nomics on ${_date}</p>`
     : '';
 };
 const _crDescr = (json, option) => {
@@ -74,6 +75,7 @@ const _isNumber = n => typeof(n) === 'number'
 
 const fnAdapter = {
   crError,
+  crSeria,
   crTitle: ({ title, subtitle }, json) => {
     const _ = getSubtitle(json)
     , _subtitle = _.length > C.SUBT_MAX

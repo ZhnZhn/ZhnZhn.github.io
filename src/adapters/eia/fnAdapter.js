@@ -1,7 +1,8 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  valueMoving
+  valueMoving,
+  crSeria
 } = AdapterFn;
 
 const C = {
@@ -25,7 +26,7 @@ const _crZhConfig = (json, option) => {
   , id = json.series[0].series_id;
   return {
     id, key,
-    //itemCaption: title,    
+    //itemCaption: title,
     dataSource
   };
 };
@@ -61,9 +62,9 @@ const _getCaption = (obj) => {
 };
 
 const fnAdapter = {
-  /*
-  [ ["201806", 1000], ... ]
-  */
+  crSeria,
+
+  /* [ ["201806", 1000], ... ] */
   crTitle: (option) => {
     const {
       items=[],

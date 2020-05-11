@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
@@ -114,61 +116,61 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
   },
   crSplitRatioSeria: function crSplitRatioSeria(data, chartId) {
     return _crScatterSeria(_Color["default"].SPLIT_RATIO, _Tooltip["default"].splitRatio, data, chartId + '_SplitRatio');
+  },
+  crSeria: function crSeria(option) {
+    if (option === void 0) {
+      option = {};
+    }
+
+    var _option = option,
+        seriaType = _option.seriaType,
+        seriaWidth = _option.seriaWidth,
+        seriaColor = _option.seriaColor,
+        restOption = (0, _objectWithoutPropertiesLoose2["default"])(_option, ["seriaType", "seriaWidth", "seriaColor"]),
+        type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline';
+    return (0, _extends2["default"])({
+      type: type,
+      lineWidth: seriaWidth != null ? seriaWidth : 1,
+      color: seriaColor,
+      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].fnBasePointFormatter)
+    }, restOption);
+  },
+  crAreaConfig: function crAreaConfig(options) {
+    var config = _merge(_Chart["default"].fBaseConfig(options), {
+      chart: {
+        zoomType: 'xy',
+        resetZoomButton: _Chart["default"].fResetZoomButton({
+          position: {
+            x: -10
+          }
+        }),
+        xDeltaCrossLabel: 4,
+        yDeltaCrossLabel: 20
+      },
+      zhDetailCharts: []
+    });
+
+    config.xAxis = _assign(_Chart["default"].fXAxisOpposite(config.xAxis), {
+      events: {
+        afterSetExtremes: _ChartFn["default"].zoomIndicatorCharts
+      }
+    });
+    config.yAxis = _assign(config.yAxis, {
+      lineWidth: 0,
+      tickLength: 0,
+      offset: 4,
+      labels: {
+        x: 8,
+        y: 5
+      },
+      events: {
+        afterSetExtremes: _ChartFn["default"].afterSetExtremesYAxis
+      }
+    });
+    config.yAxis.plotLines = [_Chart["default"].fPlotLine(_Color["default"].HIGH, 'max'), _Chart["default"].fPlotLine(_Color["default"].LOW, 'min')];
+    return config;
   }
 });
-
-ChartConfig.fBaseAreaConfig = function (options) {
-  var config = _merge(_Chart["default"].fBaseConfig(options), {
-    chart: {
-      zoomType: 'xy',
-      resetZoomButton: _Chart["default"].fResetZoomButton({
-        position: {
-          x: -10
-        }
-      }),
-      xDeltaCrossLabel: 4,
-      yDeltaCrossLabel: 20
-    },
-    zhDetailCharts: []
-  });
-
-  config.xAxis = _assign(_Chart["default"].fXAxisOpposite(config.xAxis), {
-    events: {
-      afterSetExtremes: _ChartFn["default"].zoomIndicatorCharts
-    }
-  });
-  config.yAxis = _assign(config.yAxis, {
-    lineWidth: 0,
-    tickLength: 0,
-    offset: 4,
-    labels: {
-      x: 8,
-      y: 5
-    },
-    events: {
-      afterSetExtremes: _ChartFn["default"].afterSetExtremesYAxis
-    }
-  });
-  config.yAxis.plotLines = [_Chart["default"].fPlotLine(_Color["default"].HIGH, 'max'), _Chart["default"].fPlotLine(_Color["default"].LOW, 'min')];
-  return config;
-};
-
-ChartConfig.fSeries = function (option) {
-  if (option === void 0) {
-    option = {};
-  }
-
-  var _option = option,
-      seriaType = _option.seriaType,
-      _type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline';
-
-  return _merge(false, {
-    type: _type,
-    lineWidth: 1,
-    tooltip: _Chart["default"].fTooltip(_Tooltip["default"].fnBasePointFormatter)
-  }, option);
-};
-
 var _default = ChartConfig;
 exports["default"] = _default;
 //# sourceMappingURL=ChartConfig.js.map

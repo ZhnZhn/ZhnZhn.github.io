@@ -7,16 +7,16 @@ import toEarnings from './toEarningsImpl'
 import toDividends from './toDividendsImpl'
 import toChart from './toChart'
 import toTable from './toTable'
-import CT from './ChartType'
+import IT from './ItemTypes'
 
 const _r = {
   DF: toChart,
-  [CT.ERN]: Scatter(toEarnings),
-  [CT.DIV]: Scatter(toDividends),
-  [CT.CHART]: toChart,
-  [CT.COM]: Tokens(toCompany),
-  [CT.STA]: Tokens(toStats),
-  [CT.ML]: toTable
+  [IT.ERN]: Scatter(toEarnings),
+  [IT.DIV]: Scatter(toDividends),
+  [IT.CHART]: toChart,
+  [IT.COM]: Tokens(toCompany),
+  [IT.STA]: Tokens(toStats),
+  [IT.ML]: toTable
 };
 
 const RouterAdapter = {

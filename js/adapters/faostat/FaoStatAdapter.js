@@ -19,7 +19,8 @@ var crId = _fnAdapter["default"].crId,
     toInfo = _fnAdapter["default"].toInfo,
     crValueMoving = _fnAdapter["default"].crValueMoving,
     crSeriaData = _fnAdapter["default"].crSeriaData,
-    checkToSeries = _fnAdapter["default"].checkToSeries;
+    checkToSeries = _fnAdapter["default"].checkToSeries,
+    findMinY = _fnAdapter["default"].findMinY;
 var FaoStatAdapter = {
   crKey: crId,
   toConfig: function toConfig(json, option) {
@@ -41,7 +42,7 @@ var FaoStatAdapter = {
   },
   toSeries: function toSeries(json, option) {
     if (!checkToSeries(option)) {
-      throw new Error('ZH_1000');
+      throw new Error('ERR_10');
     }
 
     var _data = crSeriaData(json, option),
@@ -51,6 +52,7 @@ var FaoStatAdapter = {
 
     return (0, _ConfigBuilder["default"])().initSeria().add({
       data: _data,
+      minY: findMinY(_data),
       zhSeriaId: parentId + '_' + _id,
       zhValueText: oneCaption,
       zhItemCaption: oneCaption

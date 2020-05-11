@@ -107,7 +107,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   areaConfig: function areaConfig(option) {
-    this.config = _ChartConfig["default"].fBaseAreaConfig(option);
+    this.config = _ChartConfig["default"].crAreaConfig(option);
     return this;
   },
   area2Config: function area2Config(title, subtitle) {
@@ -163,7 +163,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       categories = [];
     }
 
-    this.config = _ChartConfig["default"].fBaseAreaConfig();
+    this.config = _ChartConfig["default"].crAreaConfig();
     var xAxis = (0, _extends2["default"])({}, C.CATEGORIES_X_AXIS, {}, {
       categories: categories
     });

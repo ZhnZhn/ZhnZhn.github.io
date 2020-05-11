@@ -24,7 +24,7 @@ var toMap = {
         value = json.value,
         _createData = createData(timeIndex, value),
         data = _createData.data,
-        config = _ChartConfig["default"].fBaseAreaConfig();
+        config = _ChartConfig["default"].crAreaConfig();
 
     _addItemCaptionTo(option);
 

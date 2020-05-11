@@ -16,7 +16,8 @@ var crChartId = _fnAdapter["default"].crChartId,
     crConfigOption = _fnAdapter["default"].crConfigOption,
     toSeriesData = _fnAdapter["default"].toSeriesData,
     crOpenInterest = _fnAdapter["default"].crOpenInterest,
-    joinBy = _fnAdapter["default"].joinBy;
+    joinBy = _fnAdapter["default"].joinBy,
+    findMinY = _fnAdapter["default"].findMinY;
 
 var _getValue = function _getValue(obj) {
   return obj && obj.value || '';
@@ -94,7 +95,9 @@ var BarchartAdapter = {
     }),
         data = _toSeriesData.data;
 
-    return (0, _ConfigBuilder["default"])().initSeria().addPoints(_id, data).toSeria();
+    return (0, _ConfigBuilder["default"])().initSeria({
+      minY: findMinY(data)
+    }).addPoints(_id, data).toSeria();
   }
 };
 var _default = BarchartAdapter;

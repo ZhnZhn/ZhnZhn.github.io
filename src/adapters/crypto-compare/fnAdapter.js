@@ -4,7 +4,8 @@ import AdapterFn from '../AdapterFn'
 const {
   valueMoving,
   volumeColumnPoint,
-  roundBy
+  roundBy,
+  crSeria
 } = AdapterFn;
 
 const _crZhConfig = ({
@@ -14,7 +15,7 @@ const _crZhConfig = ({
   linkFn
 }) => ({
     id: value, key: value,
-    itemCaption: title,    
+    itemCaption: title,
     linkFn, item: value,
     dataSource
 });
@@ -64,6 +65,8 @@ const _addHLPointTo = (arr, d, p) => {
 };
 
 const fnAdapter = {
+  crSeria,
+  
   crData: (json) => {
     const data = []
         , dVolume = []

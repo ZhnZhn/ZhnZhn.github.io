@@ -11,12 +11,16 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var crError = _AdapterFn["default"].crError,
     getFromDate = _AdapterFn["default"].getFromDate,
+    getCaption = _AdapterFn["default"].getCaption,
+    getValue = _AdapterFn["default"].getValue,
+    joinBy = _AdapterFn["default"].joinBy,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     valueMoving = _AdapterFn["default"].valueMoving,
     crItemLink = _AdapterFn["default"].crItemLink,
     compareByDate = _AdapterFn["default"].compareByDate,
     crItemConf = _AdapterFn["default"].crItemConf,
-    crValueConf = _AdapterFn["default"].crValueConf;
+    crValueConf = _AdapterFn["default"].crValueConf,
+    crSeria = _AdapterFn["default"].crSeria;
 
 var _isHistorical = function _isHistorical(dfPn) {
   return dfPn === 'historical';
@@ -69,17 +73,12 @@ var _crInfo = function _crInfo(_ref) {
   };
 };
 
-var _fGetByPropName = function _fGetByPropName(propName) {
-  return function (obj) {
-    return obj && obj[propName] || '';
-  };
-};
-
 var fnAdapter = {
   crError: crError,
   getFromDate: getFromDate,
-  getCaption: _fGetByPropName('caption'),
-  getValue: _fGetByPropName('value'),
+  getCaption: getCaption,
+  getValue: getValue,
+  crSeria: crSeria,
   crData: function crData(metrics, propName) {
     return metrics.map(function (item) {
       return [ymdToUTC(item.date), parseFloat(item[propName])];
@@ -88,12 +87,9 @@ var fnAdapter = {
   crCaption: function crCaption(_ref2) {
     var items = _ref2.items;
     return {
-      title: fnAdapter.getCaption(items[0]),
-      subtitle: items[1] ? fnAdapter.getCaption(items[1]) + ': ' + fnAdapter.getCaption(items[2]) : ''
+      title: getCaption(items[0]),
+      subtitle: joinBy(': ', getCaption(items[1]), getCaption(items[2]))
     };
-  },
-  crSeriaType: function crSeriaType(seriaType) {
-    return seriaType === 'COLUMN' ? 'column' : 'spline';
   },
   crConfigOption: function crConfigOption(_ref3) {
     var json = _ref3.json,

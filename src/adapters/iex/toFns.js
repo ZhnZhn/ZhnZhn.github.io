@@ -1,4 +1,4 @@
-import CT from './ChartType'
+import IT from './ItemTypes'
 
 const _LOCALE = (navigator || {}).language;
 const _isNumber = n => typeof n === 'number';
@@ -22,13 +22,13 @@ const toFns = {
 
   crZhConfig: ({ key, value, dataSource }) => ({
     key, id: key,
-    itemCaption: value || key,    
+    itemCaption: value || key,
     dataSource
   }),
 
   crToSeria: ({ chart, seria, caption, color, option }) => {
     const { dfType } = option;
-    const y = (dfType === CT.ERN)
+    const y = (dfType === IT.ERN)
       ? _calcScatterY(chart)
       : _calcScatterY(chart, true);
     seria.data.forEach(p => p.y = y)

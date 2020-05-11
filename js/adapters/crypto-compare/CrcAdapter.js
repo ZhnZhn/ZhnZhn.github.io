@@ -15,6 +15,10 @@ var _rAdapter = {
   CI: _toInfoConfig["default"]
 };
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var _getAdapter = function _getAdapter(option) {
   var dfSubLoadId = option.dfSubLoadId;
   return _rAdapter[dfSubLoadId] || _rAdapter.DF;
@@ -23,6 +27,9 @@ var _getAdapter = function _getAdapter(option) {
 var CrcAdapter = {
   toConfig: function toConfig(json, option) {
     return _getAdapter(option).toConfig(json, option);
+  },
+  isAdd: function isAdd(option) {
+    return _isFn(_getAdapter(option).toSeries);
   },
   toSeries: function toSeries(json, option) {
     return _getAdapter(option).toSeries(json, option);

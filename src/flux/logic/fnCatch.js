@@ -23,8 +23,8 @@ const _crAlertDescr = (error)  => {
       caption: errCaption,
       descr: message
     };
-  } else if (message.indexOf(M.ZH_1000.token) !== -1) {
-    return M.ZH_1000;
+  } else if (message.indexOf(M.ERR_10.token) !== -1) {
+    return M.ERR_10;
   } else {
     return {
       caption: M.RUNTIME_ERROR.caption,

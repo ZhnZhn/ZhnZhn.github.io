@@ -5,23 +5,26 @@ import fnAdapter from './fnAdapter';
 const {
   crData,
   crTitle,
-  crConfigOption
+  crConfigOption,
+  crSeria
 } = fnAdapter;
 
 const DbNomicsAdapter = {
   toConfig(json, option){
     const {
       fromDate,
+      seriaType,
       seriaColor,
-      seriaType='spline'
+      seriaWidth
     } = option
     , { title, subtitle } = crTitle(option, json)
     , data = crData(json, fromDate)
     , seria = Builder()
         .splineSeria({
-          color: seriaColor,
-          type: seriaType.toLowerCase(),
-          data
+           seriaType,
+           seriaColor,
+           seriaWidth,
+           data
         })
         .toSeria()
     , config = Builder()
@@ -32,13 +35,15 @@ const DbNomicsAdapter = {
         ...crConfigOption({ json, option, data })
        })
        .toConfig();
-
+           
     return { config };
   },
 
   toSeries(json, option){
-    const { config } = DbNomicsAdapter.toConfig(json, option);
-    return config.series[0];
+    return crSeria({
+      adapter: DbNomicsAdapter,
+      json, option
+    });
   }
 }
 

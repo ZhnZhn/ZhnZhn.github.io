@@ -139,7 +139,7 @@ const _crTitle = (json) => {
 }
 
 const AlphaSectorAdapter = {
-  toConfig(json, option) {    
+  toConfig(json, option) {
     const id = C.ID
         , { mRows, yRows } = _crConfig(json)
         , config = {
@@ -166,11 +166,7 @@ const AlphaSectorAdapter = {
           }
         };
     return { config };
-  },
-
-  toSeries(json, option) {
-    throw new Error('ZH_1000');
-  }
+  }   
 }
 
 export default AlphaSectorAdapter

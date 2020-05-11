@@ -22,9 +22,6 @@ var toInfoConfig = {
     return {
       config: config
     };
-  },
-  toSeries: function toSeries() {
-    throw new Error('ZH_1000');
   }
 };
 var _default = toInfoConfig;

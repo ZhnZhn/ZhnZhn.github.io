@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _ChartType = _interopRequireDefault(require("./ChartType"));
+var _ItemTypes = _interopRequireDefault(require("./ItemTypes"));
 
 var _LOCALE = (navigator || {}).language;
 
@@ -50,7 +50,7 @@ var toFns = {
         color = _ref2.color,
         option = _ref2.option;
     var dfType = option.dfType;
-    var y = dfType === _ChartType["default"].ERN ? _calcScatterY(chart) : _calcScatterY(chart, true);
+    var y = dfType === _ItemTypes["default"].ERN ? _calcScatterY(chart) : _calcScatterY(chart, true);
     seria.data.forEach(function (p) {
       return p.y = y;
     });

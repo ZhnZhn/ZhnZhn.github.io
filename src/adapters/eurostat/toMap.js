@@ -17,7 +17,7 @@ const toMap = {
     const timeIndex = json.dimension.time.category.index
     , value = json.value
     , { data } = createData(timeIndex, value)
-    , config = ChartConfig.fBaseAreaConfig();
+    , config = ChartConfig.crAreaConfig();
 
      _addItemCaptionTo(option)
      setDataAndInfo({ config, data, json, option });

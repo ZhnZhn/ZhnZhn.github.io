@@ -5,10 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
-
 var _RouterAdapter = _interopRequireDefault(require("./RouterAdapter"));
 
+//import AdapterFn from '../AdapterFn'
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
@@ -34,10 +33,13 @@ var IexAdapter = {
       config: config
     };
   },
-  toSeries: function toSeries(json, option, chart) {
+  isAdd: function isAdd(option) {
     var _adapter = _RouterAdapter["default"].getAdapter(option);
 
-    _AdapterFn["default"].throwIfSeriesNotSupported(_adapter);
+    return _isFn(_adapter.toSeries);
+  },
+  toSeries: function toSeries(json, option, chart) {
+    var _adapter = _RouterAdapter["default"].getAdapter(option);
 
     return _adapter.toSeries(json, option, chart);
   }

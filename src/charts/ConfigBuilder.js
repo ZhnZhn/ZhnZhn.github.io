@@ -86,7 +86,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
   areaConfig(option){
-    this.config = ChartConfig.fBaseAreaConfig(option);
+    this.config = ChartConfig.crAreaConfig(option);
     return this;
   },
   area2Config(title, subtitle){
@@ -134,7 +134,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       });
   },
   categoryConfig(categories=[]){
-    this.config = ChartConfig.fBaseAreaConfig()
+    this.config = ChartConfig.crAreaConfig()
     const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}
     this.add('xAxis', xAxis)
     this.add('yAxis', C.CATEGORIES_Y_AXIS)

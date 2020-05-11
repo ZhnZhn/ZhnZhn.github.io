@@ -22,7 +22,7 @@ const toArea = {
      , _type = typeof seriaType === 'string'
          ? seriaType.toLowerCase()
          : 'spline'
-     , config = ChartConfig.fBaseAreaConfig({
+     , config = ChartConfig.crAreaConfig({
          seriaType: _type,
          seriaColor, seriaWidth
        });
@@ -34,16 +34,15 @@ const toArea = {
 
    createSeria: (json, option) => {
      const { timeIndex, value } = crTimeIndexAndValue(json)
-         , { itemCaption, seriaType, seriaColor } = option
-         , seria = ChartConfig.fSeries({ seriaType })
-         , { data } = createData(timeIndex, value);
+     , { itemCaption, seriaType, seriaColor, seriaWidth } = option
+     , { data } = createData(timeIndex, value);
 
-     return Object.assign(seria, {
+     return ChartConfig.crSeria({
+       seriaType, seriaColor, seriaWidth,
+       data,
+       minY: findMinY(data),
        zhSeriaId: option.key,
-       zhValueText: itemCaption,
-       color: seriaColor,
-       data: data,
-       minY: findMinY(data)
+       zhValueText: itemCaption
      });
    }
 };

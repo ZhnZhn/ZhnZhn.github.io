@@ -4,20 +4,17 @@ import AdapterFn from '../AdapterFn'
 
 const {
   valueMoving,
-  crItemLink
+  crItemLink,
+  crSeria
 } = AdapterFn;
 
-const _crSeriaType = seriaType => typeof seriaType === 'string'
-  ? seriaType.toLowerCase()
-  : 'spline'
-
-  const _crZhConfig = ({
+const _crZhConfig = ({
     _itemKey,
     itemCaption,
     dataSource
   }) => ({
     id: _itemKey, key: _itemKey,
-    itemCaption,    
+    itemCaption,
     dataSource
   });
 
@@ -43,13 +40,12 @@ const toChart = {
   toConfig(json, option){
     const data = json.prices
      , {
-         seriaType, seriaColor,
+         seriaType, seriaColor, seriaWidth,
          title, subtitle, _currency
        } = option
      , seria = Builder()
         .splineSeria({
-          type: _crSeriaType(seriaType),
-          color: seriaColor,
+          seriaType, seriaColor, seriaWidth,
           data
         })
         .toSeria()
@@ -75,8 +71,10 @@ const toChart = {
   },
 
   toSeries(json, option){
-    const { config } = toChart.toConfig(json, option);
-    return config.series[0];
+    return crSeria({
+      adapter: toChart,
+      json, option
+    });
   }
 }
 

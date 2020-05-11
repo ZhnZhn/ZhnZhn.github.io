@@ -23,7 +23,8 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
-    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint;
+    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
+    crSeria = _AdapterFn["default"].crSeria;
 var crMarkerColor = _IntradayFns["default"].crMarkerColor,
     crDataDaily = _IntradayFns["default"].crDataDaily;
 var crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption; //const DAILY = 'Daily';
@@ -218,7 +219,12 @@ var AlphaIntradayAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    throw new Error('ZH_1000');
+    return crSeria({
+      adapter: AlphaIntradayAdapter,
+      json: json,
+      option: option,
+      type: 'spline'
+    });
   }
 };
 var _default = AlphaIntradayAdapter;

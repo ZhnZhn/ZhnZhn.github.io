@@ -2,8 +2,8 @@ import Chart from './Chart'
 import ChartConfig from './ChartConfig'
 
 const C = {
-  SPLINE: {
-     type: 'spline',
+  SERIA: {
+     //type: 'spline',
      visible: true,
      marker: {
        symbol: 'circle'
@@ -77,11 +77,11 @@ const SeriaBuilder = {
 
   initSeria(option){
     this._type = 'S'
-    this.config = Object.assign(ChartConfig.fSeries(), option)
+    this.config = ChartConfig.crSeria(option)
     return this;
   },
   splineSeria(option){
-    return this.initSeria({ ...C.SPLINE, ...option });
+    return this.initSeria({ ...C.SERIA, ...option });
   },
   _seria(CONFIG, tooltip, option){
     this._type = 'S'

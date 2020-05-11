@@ -20,7 +20,7 @@ const _crDataSource = ({ dataSource, dialogConf={} }) =>
 const _assignDf = option => {
   const { dfT, items=[] } = option
   , [ it1, it2 , it3 ] = items
-  , _symbol = getValue(it1)
+  , _symbol = getValue(it1, {isUpper: true})
   , _period = getValue(it3)
   , _propName = getCaption(it2)
   , _query = _period
@@ -42,8 +42,7 @@ const _assignHp = option => {
      dfT, items=[], fromDate
   } = option
   , _fromDate = fromDate || getFromDate(3)
-  , [ it1 ] = items
-  , _symbol = getValue(it1)
+  , _symbol = getValue(items[0], {isUpper: true})
   , _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
 
   _assign(option, {

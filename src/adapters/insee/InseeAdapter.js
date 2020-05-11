@@ -2,13 +2,20 @@ import AdapterFn from '../AdapterFn'
 import Builder from '../../charts/ConfigBuilder'
 import fnDescr from './fnDescr'
 
+const {
+  ymdToUTC,
+  compareByDate,
+  valueMoving,
+  findMinY
+} = AdapterFn
+
 const _parser = new window.DOMParser();
 
 //€
 
 const _crZhConfig = id => ({
   id: id,
-  key: id,  
+  key: id,
   dataSource: "INSEE"
 });
 
@@ -34,7 +41,7 @@ const _toData = (str) => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'))
       if (!Number.isNaN(_v)) {
         data.push([
-          AdapterFn.ymdToUTC(node.getAttribute('TIME_PERIOD')),
+          ymdToUTC(node.getAttribute('TIME_PERIOD')),
           _v
         ])
       }
@@ -42,7 +49,7 @@ const _toData = (str) => {
   }
 
   return {
-    data: data.sort(AdapterFn.compareByDate),
+    data: data.sort(compareByDate),
     info: info
   };
 }
@@ -58,7 +65,7 @@ const InseeAdapter = {
             .addMinMax(data, option)
             .add({
               info: fnDescr.toInfo(info, title),
-              valueMoving: AdapterFn.valueMoving(data),
+              valueMoving: valueMoving(data),
               zhConfig: _crZhConfig(value)
             })
             .toConfig();
@@ -68,12 +75,12 @@ const InseeAdapter = {
 
   toSeries(str, option) {
      const { value, title, subtitle } = option
-         , _text = subtitle ? subtitle : title
-         , { data } = _toData(str);
-      return Builder()
-        .initSeria()
-        .addPoints(value, data, _text)
-        .toSeria();
+     , _text = subtitle ? subtitle : title
+     , { data } = _toData(str);
+     return Builder()
+       .initSeria({ minY: findMinY })
+       .addPoints(value, data, _text)
+       .toSeria();
   }
 }
 

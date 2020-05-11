@@ -28,12 +28,10 @@ const toAreaYearly = {
    },
 
    createSeria: (json, option) => {
-     const seria = ChartConfig.fSeries()
-     Object.assign(seria, {
+     return ChartConfig.crSeria({
        zhSeriaId: 'Empty_Seria',
        zhValueText: 'Empty Seria'
-     })
-     return seria;
+     });
    }
 
 };

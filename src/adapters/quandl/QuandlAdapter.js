@@ -353,7 +353,7 @@ const _fnSetLegendSeriesToConfig = function(legendSeries, config, chartId){
   let i=0, max=legendSeries.length;
   for (i; i<max; i++){
     const { data, name, color, symbol, isSecondAxes } = legendSeries[i]
-        , seria = ChartConfig.fSeries({
+        , seria = ChartConfig.crSeria({
              zhSeriaId : i + '_' + chartId,
              zhValueText : name,
              visible : false,
@@ -472,7 +472,7 @@ const fnConfigAxes = function(result){
 const fnQuandlFlow = pipe(fnGetSeries, fnConfigAxes);
 
 const _fCreateAreaConfig = function(json, option){
-  const config = ChartConfig.fBaseAreaConfig()
+  const config = ChartConfig.crAreaConfig()
       , { columnName } = option;
 
   option.dataColumn = QuandlFn2.getDataColumnIndex(json, option);
@@ -514,18 +514,14 @@ const _crSeriaData = (data, yIndex) => {
 
 const _toSeria = (json, option) => {
   const { value:chartId, parentId } = option
-      , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
-      , data = _crSeriaData(getData(json), yPointIndex)
-      , seria = _assign(
-           ChartConfig.fSeries(), {
-             zhSeriaId: parentId + '_' + chartId,
-             zhValueText: chartId.substring(0,12),
-             data: data,
-             minY: AdapterFn.findMinY(data)
-           }
-         );
-
-  return seria;
+  , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
+  , data = _crSeriaData(getData(json), yPointIndex);  
+  return ChartConfig.crSeria({
+      zhSeriaId: parentId + '_' + chartId,
+      zhValueText: chartId.substring(0,12),
+      data: data,
+      minY: AdapterFn.findMinY(data)
+  });
 }
 
 const _rToSeria = {

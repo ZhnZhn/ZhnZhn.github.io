@@ -11,6 +11,8 @@ import seriaFns from '../math/seriaFn'
 
 import C from '../constants/Color';
 
+const { findMinY, findMaxY } = seriaFns;
+
 const {
   ymdToUTC,
   ymdtToUTC,
@@ -39,7 +41,6 @@ const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
     && isFinite(p[pn]);
 }
-const _isFn = fn => typeof fn === 'function';
 
 const _compareArrByIndex = index => (arrA, arrB) => {
   if (arrA[index] < arrB[index]) return -1;
@@ -82,6 +83,20 @@ const AdapterFn = {
   ymdtToUTC,
   ymdhmsToUTC,
   getFromDate,
+  getCaption: item => ''+((item && item.caption) ?? ''),
+  getValue: (
+    item,
+    { isUpper, dfValue='' }={}
+  ) => {
+    const { value, inputValue } = item ?? {}
+    , _value = ''+(value === 'noresult'
+        ? inputValue ?? dfValue
+        : value ?? dfValue);
+    return isUpper
+      ? _value.toUpperCase()
+      : _value;
+  },
+
 
   volumeColumnPoint({ date, open, close, volume, option }) {
     let _color;
@@ -230,6 +245,16 @@ const AdapterFn = {
     };
   },
 
+  crSeria: ({ adapter, json, option, type }) => {
+    const { config } = adapter.toConfig(json, option)
+    , _seria = config.series[0];
+    _seria.minY = findMinY(_seria.data)
+    if (type) {
+      _seria.type = type
+    }
+    return _seria;
+  },
+
   joinBy: (delimeter, ...restItems) => restItems
    .filter(Boolean)
    .join(delimeter),
@@ -244,9 +269,8 @@ const AdapterFn = {
     String(str).toLowerCase()
   ),
 
-  findMinY: seriaFns.findMinY,
-  findMaxY: seriaFns.findMaxY,
-
+  findMinY: findMinY,
+  findMaxY: findMaxY,
 
   crError: (errCaption='', message='') => ({
     errCaption,
@@ -254,16 +278,7 @@ const AdapterFn = {
   }),
   crItemLink: (caption, itemUrl) => `<p>
     <a href="${itemUrl}" style="padding-top: 4px;">${caption}</a>
-  </p>`,
-
-  throwIfSeriesNotSupported: adapter => {
-    if (!_isFn(adapter.toSeries)) {
-      throw ({
-        errCaption: "Action Error",
-        message: "Load to series for this type isn't supported."
-      });
-    }
-  }
+  </p>`
 };
 
 export default AdapterFn

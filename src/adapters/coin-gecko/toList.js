@@ -110,11 +110,7 @@ const toList = {
       }
     };
     return { config };
-  },
-
-  toSeries(json, option){
-    throw new Error('ZH_1000');
-  }
+  }  
 }
 
 export default toList

@@ -116,63 +116,65 @@ const ChartConfig = {
     Tooltip.splitRatio,
     data,
     chartId + '_SplitRatio'
-  )
+  ),
 
+  crSeria: (option={}) => {
+    const {
+      seriaType, seriaWidth, seriaColor,
+      ...restOption
+    } = option
+    , type = _isStr(seriaType)
+        ? seriaType.toLowerCase()
+        : 'spline';
+    return {
+      type,
+      lineWidth: seriaWidth ?? 1,
+      color: seriaColor,
+      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter),
+      ...restOption
+    };
+  },
+
+  crAreaConfig: (options) => {
+    const config = _merge(
+      Chart.fBaseConfig(options), {
+      chart: {
+        zoomType: 'xy',
+        resetZoomButton: Chart.fResetZoomButton({
+          position: {x: -10}
+        }),
+        xDeltaCrossLabel: 4,
+        yDeltaCrossLabel: 20
+      },
+      zhDetailCharts: []
+    });
+
+    config.xAxis = _assign( Chart.fXAxisOpposite(config.xAxis), {
+      events: {
+        afterSetExtremes : ChartFn.zoomIndicatorCharts
+      }
+    })
+    config.yAxis = _assign(config.yAxis, {
+      lineWidth: 0,
+      tickLength: 0,
+      offset: 4,
+      labels: {
+        x: 8,
+        y: 5
+      },
+      events: {
+        afterSetExtremes: ChartFn.afterSetExtremesYAxis
+      }
+    })
+
+
+    config.yAxis.plotLines = [
+      Chart.fPlotLine(COLOR.HIGH, 'max'),
+      Chart.fPlotLine(COLOR.LOW, 'min')
+    ]
+
+    return config;
+  }
 };
-
-ChartConfig.fBaseAreaConfig = function(options) {
-  const config = _merge(
-    Chart.fBaseConfig(options), {
-    chart: {
-      zoomType: 'xy',
-      resetZoomButton: Chart.fResetZoomButton({
-        position: {x: -10}
-      }),
-      xDeltaCrossLabel: 4,
-      yDeltaCrossLabel: 20
-    },
-    zhDetailCharts: []
-  });
-
-  config.xAxis = _assign( Chart.fXAxisOpposite(config.xAxis), {
-    events: {
-      afterSetExtremes : ChartFn.zoomIndicatorCharts
-    }
-  })
-  config.yAxis = _assign(config.yAxis, {
-    lineWidth: 0,
-    tickLength: 0,
-    offset: 4,
-    labels: {
-      x: 8,
-      y: 5
-    },
-    events: {
-      afterSetExtremes: ChartFn.afterSetExtremesYAxis
-    }
-  })
-
-
-  config.yAxis.plotLines = [
-    Chart.fPlotLine(COLOR.HIGH, 'max'),
-    Chart.fPlotLine(COLOR.LOW, 'min')
-  ]
-
-  return config;
-};
-
-ChartConfig.fSeries = function(option={}){
-  const { seriaType } = option
-  , _type = _isStr(seriaType)
-      ? seriaType.toLowerCase()
-      : 'spline';
-  return _merge(
-    false, {
-      type: _type,
-      lineWidth: 1,
-      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter)
-    }, option
-  );
-}
 
 export default ChartConfig

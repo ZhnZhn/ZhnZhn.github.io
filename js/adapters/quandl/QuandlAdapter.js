@@ -451,7 +451,7 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
         color = _legendSeries$i.color,
         symbol = _legendSeries$i.symbol,
         isSecondAxes = _legendSeries$i.isSecondAxes,
-        seria = _ChartConfig["default"].fSeries({
+        seria = _ChartConfig["default"].crSeria({
       zhSeriaId: i + '_' + chartId,
       zhValueText: name,
       visible: false,
@@ -581,7 +581,7 @@ var fnConfigAxes = function fnConfigAxes(result) {
 var fnQuandlFlow = (0, _pipe["default"])(fnGetSeries, fnConfigAxes);
 
 var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
-  var config = _ChartConfig["default"].fBaseAreaConfig(),
+  var config = _ChartConfig["default"].crAreaConfig(),
       columnName = option.columnName;
 
   option.dataColumn = _QuandlFn["default"].getDataColumnIndex(json, option);
@@ -621,15 +621,14 @@ var _toSeria = function _toSeria(json, option) {
   var chartId = option.value,
       parentId = option.parentId,
       yPointIndex = _QuandlFn["default"].getDataColumnIndex(json, option),
-      data = _crSeriaData(getData(json), yPointIndex),
-      seria = _assign(_ChartConfig["default"].fSeries(), {
+      data = _crSeriaData(getData(json), yPointIndex);
+
+  return _ChartConfig["default"].crSeria({
     zhSeriaId: parentId + '_' + chartId,
     zhValueText: chartId.substring(0, 12),
     data: data,
     minY: _AdapterFn["default"].findMinY(data)
   });
-
-  return seria;
 };
 
 var _rToSeria = (_rToSeria2 = {

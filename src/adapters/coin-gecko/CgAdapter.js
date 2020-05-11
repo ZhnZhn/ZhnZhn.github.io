@@ -6,6 +6,8 @@ const _rAdapter = {
   MCL: toList
 }
 
+const _isFn = fn => typeof fn === 'function';
+
 const _getAdapter = option => {
   const { dfSubId } = option;
   return _rAdapter[dfSubId] || _rAdapter.DF;
@@ -20,6 +22,10 @@ const CgAdapter = {
   toConfig(json, option){
     return _getAdapter(option)
       .toConfig(json, option);
+  },
+
+  isAdd(option){        
+    return _isFn(_getAdapter(option).toSeries);
   },
 
   toSeries(json, option){

@@ -57,8 +57,8 @@ var Msg = {
       caption: 'Network Error',
       descr: 'Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond.'
     },
-    ZH_1000: {
-      token: 'ZH_1000',
+    ERR_10: {
+      token: 'ERR_10',
       caption: 'Not Allowed to Add',
       descr: "This type of request isn't allowed to be added to selected chart. This type of request can be loaded in his own chart."
     }

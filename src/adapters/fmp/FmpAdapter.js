@@ -4,9 +4,9 @@ import fnAdapter from './fnAdapter'
 
 const {
   crCaption,
-  crSeriaType,
   crData,
-  crConfigOption
+  crConfigOption,
+  crSeria
 } = fnAdapter;
 
 const FmpAdapter = {
@@ -15,15 +15,17 @@ const FmpAdapter = {
       dfPn,
       _propName,
       seriaType,
-      seriaColor
+      seriaColor,
+      seriaWidth
     } = option
     , { title, subtitle } = crCaption(option)
     , data = crData(json[dfPn], _propName)
     , seria = Builder()
         .splineSeria({
-          type: crSeriaType(seriaType),
-          color: seriaColor,
-          data
+           seriaType,
+           seriaColor,
+           seriaWidth,
+           data
         })
         .toSeria()
     , config = Builder()
@@ -38,9 +40,11 @@ const FmpAdapter = {
     return { config };
   },
 
-  toSeries(json, option){
-    const { config } = FmpAdapter.toConfig(json, option);
-    return config.series[0];
+  toSeries(json, option){    
+    return crSeria({
+      adapter: FmpAdapter,
+      json, option
+    });
   }
 };
 

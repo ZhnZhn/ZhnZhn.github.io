@@ -12,7 +12,7 @@ const unitOptions = [
   { "caption" : "Conversion factor barrels/ktons", "value" : "BK" }
 ];
 
-const chartTypes = [
+const chartOptions = [
   { caption: "AreaSpline", value: "AREA" },
   { caption: "Yearly by Month", value: "YEARLY" }
 ];
@@ -185,7 +185,7 @@ class JodiWorldOilDialog extends Component {
               isShowLabels={isShowLabels}
               caption="Chart Type"
               placeholder="Default: AreaSpline"
-              options={chartTypes}
+              options={chartOptions}
               onSelect={this._hSelectChartType}
             />
           </D.ShowHide>

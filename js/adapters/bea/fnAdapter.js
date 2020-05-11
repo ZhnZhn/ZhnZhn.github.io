@@ -9,7 +9,8 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var crId = _AdapterFn["default"].crId,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    valueMoving = _AdapterFn["default"].valueMoving,
+    crSeria = _AdapterFn["default"].crSeria;
 
 var _crName = function _crName(Results) {
   var _Results$Statistic = Results.Statistic,
@@ -83,6 +84,7 @@ var _crUTC = function _crUTC(item) {
 };
 
 var fnAdapter = {
+  crSeria: crSeria,
   crData: function crData(Results, option) {
     var dfFilterName = option.dfFilterName,
         two = option.two,

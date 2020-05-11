@@ -13,7 +13,8 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crId = _fnAdapter["default"].crId,
     crData = _fnAdapter["default"].crData,
-    crConfigOptions = _fnAdapter["default"].crConfigOptions;
+    crConfigOptions = _fnAdapter["default"].crConfigOptions,
+    crSeria = _fnAdapter["default"].crSeria;
 var adapter = {
   crKey: crId,
   toConfig: function toConfig(json, option) {
@@ -31,10 +32,11 @@ var adapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    var _adapter$toConfig = adapter.toConfig(json, option),
-        config = _adapter$toConfig.config;
-
-    return config.series[0];
+    return crSeria({
+      adapter: adapter,
+      json: json,
+      option: option
+    });
   }
 };
 var _default = adapter;

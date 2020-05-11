@@ -29,7 +29,7 @@ var toArea = {
         max = _createData.max,
         min = _createData.min,
         _type = typeof seriaType === 'string' ? seriaType.toLowerCase() : 'spline',
-        config = _ChartConfig["default"].fBaseAreaConfig({
+        config = _ChartConfig["default"].crAreaConfig({
       seriaType: _type,
       seriaColor: seriaColor,
       seriaWidth: seriaWidth
@@ -56,18 +56,18 @@ var toArea = {
         itemCaption = option.itemCaption,
         seriaType = option.seriaType,
         seriaColor = option.seriaColor,
-        seria = _ChartConfig["default"].fSeries({
-      seriaType: seriaType
-    }),
+        seriaWidth = option.seriaWidth,
         _createData2 = createData(timeIndex, value),
         data = _createData2.data;
 
-    return Object.assign(seria, {
-      zhSeriaId: option.key,
-      zhValueText: itemCaption,
-      color: seriaColor,
+    return _ChartConfig["default"].crSeria({
+      seriaType: seriaType,
+      seriaColor: seriaColor,
+      seriaWidth: seriaWidth,
       data: data,
-      minY: findMinY(data)
+      minY: findMinY(data),
+      zhSeriaId: option.key,
+      zhValueText: itemCaption
     });
   }
 };

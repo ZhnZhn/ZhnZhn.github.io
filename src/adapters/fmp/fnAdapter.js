@@ -3,12 +3,16 @@ import AdapterFn from '../AdapterFn'
 const {
   crError,
   getFromDate,
+  getCaption,
+  getValue,
+  joinBy,
   ymdToUTC,
   valueMoving,
   crItemLink,
   compareByDate,
   crItemConf,
-  crValueConf
+  crValueConf,
+  crSeria
 } = AdapterFn;
 
 const _isHistorical = dfPn => dfPn === 'historical';
@@ -55,13 +59,12 @@ const _crInfo = ({ items, _itemUrl }) => ({
   description: _crDescription(_itemUrl)
 });
 
-const _fGetByPropName = propName => obj => obj && obj[propName] || '';
-
 const fnAdapter = {
   crError,
   getFromDate,
-  getCaption: _fGetByPropName('caption'),
-  getValue: _fGetByPropName('value'),
+  getCaption,
+  getValue,
+  crSeria,
 
   crData: (metrics, propName) => {
     return metrics.map(item => ([
@@ -71,14 +74,12 @@ const fnAdapter = {
   },
 
   crCaption: ({ items }) => ({
-    title: fnAdapter.getCaption(items[0]),
-    subtitle: items[1]
-      ? fnAdapter.getCaption(items[1]) + ': ' + fnAdapter.getCaption(items[2])
-      : ''
+    title: getCaption(items[0]),
+    subtitle: joinBy(': ',
+       getCaption(items[1]),
+       getCaption(items[2])
+    )
   }),
-  crSeriaType: seriaType => seriaType === 'COLUMN'
-    ? 'column'
-    : 'spline',
 
   crConfigOption: ({ json, option, data }) => ({
     zhConfig: _crZhConfig(data, option),

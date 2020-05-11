@@ -12,11 +12,8 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var valueMoving = _AdapterFn["default"].valueMoving,
-    crItemLink = _AdapterFn["default"].crItemLink;
-
-var _crSeriaType = function _crSeriaType(seriaType) {
-  return typeof seriaType === 'string' ? seriaType.toLowerCase() : 'spline';
-};
+    crItemLink = _AdapterFn["default"].crItemLink,
+    crSeria = _AdapterFn["default"].crSeria;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
@@ -60,12 +57,14 @@ var toChart = {
     var data = json.prices,
         seriaType = option.seriaType,
         seriaColor = option.seriaColor,
+        seriaWidth = option.seriaWidth,
         title = option.title,
         subtitle = option.subtitle,
         _currency = option._currency,
         seria = (0, _ConfigBuilder["default"])().splineSeria({
-      type: _crSeriaType(seriaType),
-      color: seriaColor,
+      seriaType: seriaType,
+      seriaColor: seriaColor,
+      seriaWidth: seriaWidth,
       data: data
     }).toSeria(),
         config = (0, _ConfigBuilder["default"])().area2Config(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, _crConfigOption({
@@ -86,10 +85,11 @@ var toChart = {
     };
   },
   toSeries: function toSeries(json, option) {
-    var _toChart$toConfig = toChart.toConfig(json, option),
-        config = _toChart$toConfig.config;
-
-    return config.series[0];
+    return crSeria({
+      adapter: toChart,
+      json: json,
+      option: option
+    });
   }
 };
 var _default = toChart;

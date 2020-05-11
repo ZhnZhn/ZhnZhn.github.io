@@ -1,7 +1,7 @@
 
-import CT from './ChartType'
+import IT from './ItemTypes'
 
-const C = {  
+const C = {
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
   DF_SYMBOL: 'AAPL',
   DF_PERIOD: '1m'
@@ -40,12 +40,12 @@ const _crUrlMarketList = (option) => {
 
 const _rUrl = {
   DF: _urlChart,
-  [CT.ERN]: _crUrlType1,
-  [CT.DIV]: _urlDividends,
-  [CT.CHART]: _urlChart,
-  [CT.COM]: _crUrlType1,
-  [CT.STA]: _crUrlType1,
-  [CT.ML]: _crUrlMarketList
+  [IT.ERN]: _crUrlType1,
+  [IT.DIV]: _urlDividends,
+  [IT.CHART]: _urlChart,
+  [IT.COM]: _crUrlType1,
+  [IT.STA]: _crUrlType1,
+  [IT.ML]: _crUrlMarketList
 };
 
 const IexApi = {

@@ -15,7 +15,8 @@ var isYNumber = _AdapterFn["default"].isYNumber,
     toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
     monthIndex = _AdapterFn["default"].monthIndex,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    valueMoving = _AdapterFn["default"].valueMoving,
+    findMinY = _AdapterFn["default"].findMinY;
 var C = {
   DATASET_EMPTY: 'Dataset is empty',
   ENPTY: '',
@@ -104,6 +105,7 @@ var _crSeriaData = function _crSeriaData(json, option) {
 };
 
 var fnAdapter = {
+  findMinY: findMinY,
   crId: function crId(_ref2) {
     var three = _ref2.three,
         value = _ref2.value;

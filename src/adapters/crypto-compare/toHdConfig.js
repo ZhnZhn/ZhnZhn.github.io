@@ -2,7 +2,11 @@ import Builder from '../../charts/ConfigBuilder'
 
 import fnAdapter from './fnAdapter'
 
-const { crData, crConfigOption } = fnAdapter;
+const {
+  crData,
+  crConfigOption,
+  crSeria
+ } = fnAdapter;
 
 const DF_PAIR = 'USD';
 const V_ON_TIME = 'Values on 00:00 GMT';
@@ -58,8 +62,10 @@ const toHdConfig = {
   },
 
   toSeries: (json, option) => {
-    const { config } = toHdConfig.toConfig(json, option);
-    return config.series[0];
+    return crSeria({
+      adapter: toHdConfig,
+      json, option
+    })
   }
 }
 

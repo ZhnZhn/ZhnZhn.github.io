@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _ChartType = _interopRequireDefault(require("./ChartType"));
+var _ItemTypes = _interopRequireDefault(require("./ItemTypes"));
 
 var _rUrl2;
 
@@ -51,7 +51,7 @@ var _crUrlMarketList = function _crUrlMarketList(option) {
 
 var _rUrl = (_rUrl2 = {
   DF: _urlChart
-}, _rUrl2[_ChartType["default"].ERN] = _crUrlType1, _rUrl2[_ChartType["default"].DIV] = _urlDividends, _rUrl2[_ChartType["default"].CHART] = _urlChart, _rUrl2[_ChartType["default"].COM] = _crUrlType1, _rUrl2[_ChartType["default"].STA] = _crUrlType1, _rUrl2[_ChartType["default"].ML] = _crUrlMarketList, _rUrl2);
+}, _rUrl2[_ItemTypes["default"].ERN] = _crUrlType1, _rUrl2[_ItemTypes["default"].DIV] = _urlDividends, _rUrl2[_ItemTypes["default"].CHART] = _urlChart, _rUrl2[_ItemTypes["default"].COM] = _crUrlType1, _rUrl2[_ItemTypes["default"].STA] = _crUrlType1, _rUrl2[_ItemTypes["default"].ML] = _crUrlMarketList, _rUrl2);
 
 var IexApi = {
   getRequestUrl: function getRequestUrl(option) {

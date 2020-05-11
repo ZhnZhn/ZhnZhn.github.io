@@ -3,12 +3,14 @@ import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
+
 const {
-       crId, crSubtitle, crTitle,
-       toDataPoints,
-       crZhConfig, toInfo, crValueMoving,
-       crSeriaData, checkToSeries
-     } = fnAdapter;
+  crId, crSubtitle, crTitle,
+  toDataPoints,
+  crZhConfig, toInfo, crValueMoving,
+  crSeriaData, checkToSeries,
+  findMinY
+} = fnAdapter;
 
 const FaoStatAdapter = {
   crKey: crId,
@@ -35,7 +37,7 @@ const FaoStatAdapter = {
 
   toSeries(json, option){
     if (!checkToSeries(option)) {
-      throw new Error('ZH_1000');
+      throw new Error('ERR_10');
     }
     const _data = crSeriaData(json, option)
         , _id = crId(option)
@@ -44,6 +46,7 @@ const FaoStatAdapter = {
       .initSeria()
       .add({
         data: _data,
+        minY: findMinY(_data),
         zhSeriaId: parentId + '_' + _id,
         zhValueText: oneCaption,
         zhItemCaption: oneCaption

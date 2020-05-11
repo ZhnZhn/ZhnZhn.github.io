@@ -1,5 +1,3 @@
-
-import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
 
 import fnUtil from './fnUtil'
@@ -10,10 +8,7 @@ const {
   crDsValuesTimes, crChartOption
 } = fnAdapter;
 
-const DF_TYPE = 'spline';
-
 const _isArr = Array.isArray;
-const _isStr = str => typeof str === 'string';
 
 const _filterLeadingNulls = data => {
   const _len = data.length;
@@ -48,30 +43,22 @@ const _toData = (values, times) => {
     : [];
 };
 
-const _crSplineSeria = (data, option={}) => {
-  const { seriaType, seriaColor, seriaWidth=1 } = option
-  , _type = _isStr(seriaType)
-      ? seriaType.toLowerCase()
-      : DF_TYPE;
-  return Object.assign(ChartConfig.fSeries(), {
-     visible: true,
-     type: _type,
-     color: seriaColor,
-     lineWidth: seriaWidth,     
-     data: data,
-     marker: {
-       symbol: 'circle'
-     },
-     zhSeriaId: fnAdapter.crId()
-  });
-};
-
 const toArea = {
   crConfig: (json, option) => {
-    const { title='', subtitle } = option
+    const {
+      title='', subtitle,
+      seriaType, seriaColor, seriaWidth
+    } = option
     , { ds, values, times } = crDsValuesTimes(json, option)
     , data = _toData(values, times)
-    , seria = _crSplineSeria(data, option);
+    , seria = Builder()
+        .splineSeria({
+          seriaType,
+          seriaColor,
+          seriaWidth,
+          data
+        })
+        .toSeria()
     return Builder()
       .areaConfig({ spacingTop: 25 })
       .addCaption(title, subtitle)

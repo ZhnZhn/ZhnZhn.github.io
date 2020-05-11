@@ -6,7 +6,8 @@ const {
   crItemConf,
   crValueConf,
   valueMoving,
-  stockSeriesLegend
+  stockSeriesLegend,
+  findMinY
 } = AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
@@ -26,7 +27,7 @@ const _crZhConfig = (id, option, data) => {
       symbol: one,
       dfPeriod: two,
       dataSource
-    },    
+    },
     legend: stockSeriesLegend()
   };
 }
@@ -69,7 +70,7 @@ const toChart = {
     const _id = _crId(option)
     , { data } = toSeriesData(json, { isAllSeries: false });
     return Builder()
-      .initSeria()
+      .initSeria({ minY: findMinY(data) })
       .addPoints(_id, data)
       .toSeria();
   }

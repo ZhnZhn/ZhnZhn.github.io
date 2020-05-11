@@ -1,11 +1,11 @@
 
-const ChartType = {
+const ItemTypes = {
   CHART: 'chart',
   ERN: 'earnings',
   DIV: 'dividends',
   COM: 'company',
   STA: 'stats',
-  ML: 'market'  
+  ML: 'market'
 };
 
-export default ChartType
+export default ItemTypes

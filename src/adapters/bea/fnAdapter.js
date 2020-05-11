@@ -2,7 +2,10 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  crId, ymdToUTC, valueMoving
+  crId,
+  ymdToUTC,
+  valueMoving,
+  crSeria
 } = AdapterFn;
 
 const _crName = (Results) => {
@@ -28,7 +31,7 @@ const _crZhConfig = (option) => {
        , id = crId();
   return {
     id, key: id,
-    itemCaption: title,    
+    itemCaption: title,
     dataSource
   };
 };
@@ -50,6 +53,7 @@ const _crUTC = (item) => {
 };
 
 const fnAdapter = {
+  crSeria,
 
   crData: (Results, option) => {
     const { dfFilterName, two } = option

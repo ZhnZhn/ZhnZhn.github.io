@@ -21,6 +21,8 @@ var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
+var findMinY = _seriaFn["default"].findMinY,
+    findMaxY = _seriaFn["default"].findMaxY;
 var ymdToUTC = _DateUtils["default"].ymdToUTC,
     ymdtToUTC = _DateUtils["default"].ymdtToUTC,
     ymdhmsToUTC = _DateUtils["default"].ymdhmsToUTC,
@@ -38,10 +40,6 @@ var _fIsNumber = function _fIsNumber(pn) {
   return function (p) {
     return typeof p[pn] === 'number' && isFinite(p[pn]);
   };
-};
-
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
 };
 
 var _compareArrByIndex = function _compareArrByIndex(index) {
@@ -81,12 +79,30 @@ var AdapterFn = {
   ymdtToUTC: ymdtToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
   getFromDate: getFromDate,
-  volumeColumnPoint: function volumeColumnPoint(_ref) {
-    var date = _ref.date,
-        open = _ref.open,
-        close = _ref.close,
-        volume = _ref.volume,
-        option = _ref.option;
+  getCaption: function getCaption(item) {
+    var _ref;
+
+    return '' + ((_ref = item && item.caption) != null ? _ref : '');
+  },
+  getValue: function getValue(item, _temp) {
+    var _ref2 = _temp === void 0 ? {} : _temp,
+        isUpper = _ref2.isUpper,
+        _ref2$dfValue = _ref2.dfValue,
+        dfValue = _ref2$dfValue === void 0 ? '' : _ref2$dfValue;
+
+    var _ref3 = item != null ? item : {},
+        value = _ref3.value,
+        inputValue = _ref3.inputValue,
+        _value = '' + (value === 'noresult' ? inputValue != null ? inputValue : dfValue : value != null ? value : dfValue);
+
+    return isUpper ? _value.toUpperCase() : _value;
+  },
+  volumeColumnPoint: function volumeColumnPoint(_ref4) {
+    var date = _ref4.date,
+        open = _ref4.open,
+        close = _ref4.close,
+        volume = _ref4.volume,
+        option = _ref4.option;
 
     var _color;
 
@@ -106,10 +122,10 @@ var AdapterFn = {
       _close: close
     }, option);
   },
-  athPoint: function athPoint(_ref2) {
-    var date = _ref2.date,
-        prevClose = _ref2.prevClose,
-        open = _ref2.open;
+  athPoint: function athPoint(_ref5) {
+    var date = _ref5.date,
+        prevClose = _ref5.prevClose,
+        open = _ref5.open;
 
     var _bDelta = open && prevClose ? (0, _big["default"])(prevClose).minus(open) : (0, _big["default"])('0.0'),
         _bPercent = prevClose ? _bDelta.times(100).div(prevClose).abs().toFixed(2) : (0, _big["default"])('0.0');
@@ -160,12 +176,12 @@ var AdapterFn = {
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
   compareByValueId: _compareByTwoProp('value', 'id'),
-  crValueMoving: function crValueMoving(_ref3) {
-    var _ref3$bNowValue = _ref3.bNowValue,
-        bNowValue = _ref3$bNowValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bNowValue,
-        _ref3$bPrevValue = _ref3.bPrevValue,
-        bPrevValue = _ref3$bPrevValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bPrevValue,
-        dfR = _ref3.dfR;
+  crValueMoving: function crValueMoving(_ref6) {
+    var _ref6$bNowValue = _ref6.bNowValue,
+        bNowValue = _ref6$bNowValue === void 0 ? (0, _big["default"])('0.0') : _ref6$bNowValue,
+        _ref6$bPrevValue = _ref6.bPrevValue,
+        bPrevValue = _ref6$bPrevValue === void 0 ? (0, _big["default"])('0.0') : _ref6$bPrevValue,
+        dfR = _ref6.dfR;
     return _mathFn["default"].crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
@@ -228,6 +244,24 @@ var AdapterFn = {
       x: _getDate(_p)
     };
   },
+  crSeria: function crSeria(_ref7) {
+    var adapter = _ref7.adapter,
+        json = _ref7.json,
+        option = _ref7.option,
+        type = _ref7.type;
+
+    var _adapter$toConfig = adapter.toConfig(json, option),
+        config = _adapter$toConfig.config,
+        _seria = config.series[0];
+
+    _seria.minY = findMinY(_seria.data);
+
+    if (type) {
+      _seria.type = type;
+    }
+
+    return _seria;
+  },
   joinBy: function joinBy(delimeter) {
     for (var _len = arguments.length, restItems = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       restItems[_key - 1] = arguments[_key];
@@ -241,8 +275,8 @@ var AdapterFn = {
   monthIndex: function monthIndex(str) {
     return M.indexOf(String(str).toLowerCase());
   },
-  findMinY: _seriaFn["default"].findMinY,
-  findMaxY: _seriaFn["default"].findMaxY,
+  findMinY: findMinY,
+  findMaxY: findMaxY,
   crError: function crError(errCaption, message) {
     if (errCaption === void 0) {
       errCaption = '';
@@ -259,14 +293,6 @@ var AdapterFn = {
   },
   crItemLink: function crItemLink(caption, itemUrl) {
     return "<p>\n    <a href=\"" + itemUrl + "\" style=\"padding-top: 4px;\">" + caption + "</a>\n  </p>";
-  },
-  throwIfSeriesNotSupported: function throwIfSeriesNotSupported(adapter) {
-    if (!_isFn(adapter.toSeries)) {
-      throw {
-        errCaption: "Action Error",
-        message: "Load to series for this type isn't supported."
-      };
-    }
   }
 };
 var _default = AdapterFn;

@@ -16,7 +16,8 @@ var crError = _AdapterFn["default"].crError,
     crItemConf = _AdapterFn["default"].crItemConf,
     joinBy = _AdapterFn["default"].joinBy,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    valueMoving = _AdapterFn["default"].valueMoving,
+    crSeria = _AdapterFn["default"].crSeria;
 var getPeriodAndValue = _fnSelector["default"].getPeriodAndValue,
     getTitle = _fnSelector["default"].getTitle,
     getSubtitle = _fnSelector["default"].getSubtitle,
@@ -45,7 +46,7 @@ var _crItemLink = crItemLink.bind(null, 'DB Nomics Chart');
 
 var _crUpdatedDate = function _crUpdatedDate(json) {
   var _date = getInexedAt(json).split('T')[0];
-  return _date ? "<p>Updated by DBnomics on " + _date + "</p>" : '';
+  return _date ? "<p>Updated by DB Nomics on " + _date + "</p>" : '';
 };
 
 var _crDescr = function _crDescr(json, option) {
@@ -92,6 +93,7 @@ var _isNumber = function _isNumber(n) {
 
 var fnAdapter = {
   crError: crError,
+  crSeria: crSeria,
   crTitle: function crTitle(_ref2, json) {
     var title = _ref2.title,
         subtitle = _ref2.subtitle;

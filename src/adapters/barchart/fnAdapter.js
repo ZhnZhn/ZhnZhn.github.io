@@ -9,7 +9,8 @@ const {
   crValueConf,
   valueMoving,
   joinBy,
-  ymdToUTC
+  ymdToUTC,
+  findMinY
 } =AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
@@ -49,6 +50,7 @@ const _crZhConfig = (id, data, option) => {
 const fnAdapter = {
   toSeriesData,
   joinBy,
+  findMinY,
 
   crChartId: (option) => {
     const { value='' } = option;
@@ -70,7 +72,7 @@ const fnAdapter = {
   crOpenInterest: (json, option) => {
     if (option.dfT !== "FT") {
       return;
-    }    
+    }
     const { results=[] } = json;
     return results.map(({ tradingDay, openInterest }) => [
       ymdToUTC(tradingDay), openInterest

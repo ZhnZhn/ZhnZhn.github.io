@@ -39,7 +39,7 @@ var unitOptions = [{
   "caption": "Conversion factor barrels/ktons",
   "value": "BK"
 }];
-var chartTypes = [{
+var chartOptions = [{
   caption: "AreaSpline",
   value: "AREA"
 }, {
@@ -246,7 +246,7 @@ function (_Component) {
       isShowLabels: isShowLabels,
       caption: "Chart Type",
       placeholder: "Default: AreaSpline",
-      options: chartTypes,
+      options: chartOptions,
       onSelect: this._hSelectChartType
     })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages

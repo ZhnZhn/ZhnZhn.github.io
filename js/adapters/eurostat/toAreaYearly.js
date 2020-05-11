@@ -42,13 +42,10 @@ var toAreaYearly = {
     return config;
   },
   createSeria: function createSeria(json, option) {
-    var seria = _ChartConfig["default"].fSeries();
-
-    Object.assign(seria, {
+    return _ChartConfig["default"].crSeria({
       zhSeriaId: 'Empty_Seria',
       zhValueText: 'Empty Seria'
     });
-    return seria;
   }
 };
 var _default = toAreaYearly;

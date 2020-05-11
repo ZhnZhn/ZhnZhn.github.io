@@ -2,7 +2,10 @@ import Builder from '../../charts/ConfigBuilder'
 import fnAdapter from './fnAdapter'
 
 const {
-  crSubtitle, crData, crConfigOption
+  crSubtitle,
+  crData,
+  crConfigOption,
+  crSeria
 } = fnAdapter;
 
 const IntrinioAdapter = {
@@ -24,9 +27,11 @@ const IntrinioAdapter = {
     return { config };
   },
 
-  toSeries(json, option){
-    const { config } = IntrinioAdapter.toConfig(json, option);
-    return config.series[0];
+  toSeries(json, option){    
+    return crSeria({
+      adapter: IntrinioAdapter,
+      json, option
+    });
   }
 }
 

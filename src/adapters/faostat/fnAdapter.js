@@ -4,12 +4,13 @@ import AdapterFn from '../AdapterFn'
 import fnDescr from './fnDescr'
 
 const {
-       isYNumber,
-       toUpperCaseFirst,
-       monthIndex,
-       ymdToUTC,
-       valueMoving
-     } = AdapterFn;
+  isYNumber,
+  toUpperCaseFirst,
+  monthIndex,
+  ymdToUTC,
+  valueMoving,
+  findMinY
+} = AdapterFn;
 
 const C = {
   DATASET_EMPTY: 'Dataset is empty',
@@ -97,6 +98,8 @@ const _crSeriaData = (json, option) => {
 };
 
 const fnAdapter = {
+  findMinY,
+  
   crId: ({ three, value }) => {
     const _v = value || 'faoId';
     return three
@@ -142,7 +145,7 @@ const fnAdapter = {
   crZhConfig: (id, { dfDomain, oneCaption }) => ({
     id: id,
     key: id,
-    isWithoutSma: true,    
+    isWithoutSma: true,
     dataSource: "FAOSTAT",
     linkFn: "FAO_STAT",
     item: dfDomain,
