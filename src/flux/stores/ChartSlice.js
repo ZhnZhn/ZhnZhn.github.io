@@ -18,10 +18,15 @@ const {
 } = ChartLogic;
 
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
-const _fnLogLoadError = function({
-  alertCaption, alertDescr, alertItemId
+const _logErrorToConsole = function({
+  alertCaption,
+  alertItemId,
+  alertDescr,
 }){
-  console.log('%c'+ alertCaption + ':' + alertItemId, CONSOLE_LOG_STYLE);
+  const _title = [alertCaption, alertItemId]
+    .filter(Boolean)
+    .join(": ");
+  console.log('%c'+ _title, CONSOLE_LOG_STYLE);
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 }
 
@@ -71,7 +76,7 @@ const ChartSlice = {
     this.triggerLoadingProgress(LPA.LOADING_FAILED)
     setAlertItemIdTo(option)
     this.showAlertDialog(option);
-    _fnLogLoadError(option);
+    _logErrorToConsole(option);
   },
 
   onLoadStockByQuery(){

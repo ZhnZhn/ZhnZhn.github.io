@@ -26,11 +26,14 @@ var _isChartExist = _ChartLogic["default"].isChartExist,
     setAlertItemIdTo = _ChartLogic["default"].setAlertItemIdTo;
 var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 
-var _fnLogLoadError = function _fnLogLoadError(_ref) {
+var _logErrorToConsole = function _logErrorToConsole(_ref) {
   var alertCaption = _ref.alertCaption,
-      alertDescr = _ref.alertDescr,
-      alertItemId = _ref.alertItemId;
-  console.log('%c' + alertCaption + ':' + alertItemId, CONSOLE_LOG_STYLE);
+      alertItemId = _ref.alertItemId,
+      alertDescr = _ref.alertDescr;
+
+  var _title = [alertCaption, alertItemId].filter(Boolean).join(": ");
+
+  console.log('%c' + _title, CONSOLE_LOG_STYLE);
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 };
 
@@ -84,7 +87,7 @@ var ChartSlice = {
     setAlertItemIdTo(option);
     this.showAlertDialog(option);
 
-    _fnLogLoadError(option);
+    _logErrorToConsole(option);
   },
   onLoadStockByQuery: function onLoadStockByQuery() {
     this.onLoadStock();
