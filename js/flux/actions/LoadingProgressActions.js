@@ -3,9 +3,9 @@
 exports.__esModule = true;
 exports.T = void 0;
 var T = {
-  LOADING: 'loadingProgress',
-  LOADING_COMPLETE: 'loadingProgressComplete',
-  LAODING_FAILED: 'loadingProgressFailed'
+  LOADING: 'LOADING',
+  LOADING_COMPLETE: 'LOADING_COMPLETE',
+  LOADING_FAILED: 'LOADING_FAILED'
 };
 exports.T = T;
 //# sourceMappingURL=LoadingProgressActions.js.map
