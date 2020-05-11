@@ -2,6 +2,8 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
@@ -9,7 +11,9 @@ var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     isYNumber = _AdapterFn["default"].isYNumber,
     findMinY = _AdapterFn["default"].findMinY,
     findMaxY = _AdapterFn["default"].findMaxY,
-    joinBy = _AdapterFn["default"].joinBy;
+    joinBy = _AdapterFn["default"].joinBy,
+    getCaption = _AdapterFn["default"].getCaption,
+    getValue = _AdapterFn["default"].getValue;
 var Y = [{
   "in": '2017',
   r: 1514678400000,
@@ -234,6 +238,90 @@ describe('joinBy', function () {
     expect(joinBy('.', '', 'b', 'c')).toBe('b.c');
     expect(joinBy('.', null, 'b', 'c')).toBe('b.c');
     expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c');
+  });
+});
+describe('getCaption', function () {
+  test('should return string item caption', function () {
+    var fn = getCaption;
+    expect(fn({
+      caption: 'Abc'
+    })).toBe('Abc');
+    expect(fn({
+      caption: '0'
+    })).toBe('0');
+    expect(fn({
+      caption: 0
+    })).toBe('0');
+    expect(fn({})).toBe('');
+    expect(fn()).toBe('');
+    expect(fn(null)).toBe('');
+  });
+});
+describe('getValue', function () {
+  var fn = getValue;
+  test('should return string item value', function () {
+    expect(fn({
+      value: 'Abc'
+    })).toBe('Abc');
+    expect(fn({
+      value: '0'
+    })).toBe('0');
+    expect(fn({
+      value: 0
+    })).toBe('0');
+    expect(fn({})).toBe('');
+    expect(fn()).toBe('');
+    expect(fn(null)).toBe('');
+  });
+  test('should return string upperCase in case isUpper option', function () {
+    var option = {
+      isUpper: true
+    };
+    expect(fn({
+      value: 'Abc'
+    }, option)).toBe('ABC');
+    expect(fn({
+      value: '0'
+    }, option)).toBe('0');
+    expect(fn({
+      value: 0
+    }, option)).toBe('0');
+    expect(fn({}, option)).toBe('');
+    expect(fn(void 0, option)).toBe('');
+    expect(fn(null, option)).toBe('');
+  });
+  test('should return string inputValue in case value==="noresult"', function () {
+    var item = {
+      value: 'noresult'
+    };
+    expect(fn((0, _extends2["default"])({}, item, {
+      inputValue: 'Abc'
+    }))).toBe('Abc');
+    expect(fn((0, _extends2["default"])({}, item, {
+      inputValue: ''
+    }))).toBe('');
+    expect(fn((0, _extends2["default"])({}, item, {
+      inputValue: null
+    }))).toBe('');
+    expect(fn((0, _extends2["default"])({}, item))).toBe('');
+  });
+  test('should use option isUpper for inputValue in case value==="noresult"', function () {
+    var item = {
+      value: 'noresult'
+    },
+        option = {
+      isUpper: true
+    };
+    expect(fn((0, _extends2["default"])({}, item, {
+      inputValue: 'Abc'
+    }), option)).toBe('ABC');
+    expect(fn((0, _extends2["default"])({}, item, {
+      inputValue: ''
+    }), option)).toBe('');
+    expect(fn((0, _extends2["default"])({}, item, {
+      inputValue: null
+    }), option)).toBe('');
+    expect(fn((0, _extends2["default"])({}, item), option)).toBe('');
   });
 });
 //# sourceMappingURL=AdapterFn.test.js.map
