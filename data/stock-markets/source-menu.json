@@ -8,12 +8,12 @@
         { "id": "SM_UNICORN_RESEARCH" }
       ]
     },{
-      "caption": "Barchart", "isInitClose": true,
+      "caption": "Barchart",
       "items": [
         { "id": "SM_B_STOCK" }
       ]
     },{
-      "caption": "Alpha Vantage", "isInitClose": true,
+      "caption": "Alpha Vantage",
       "items": [
         { "id": "SM_A_INDICATOR" },
         { "id": "SM_A_INTRADAY" },
@@ -43,7 +43,7 @@
         { "id": "SM_FMP_FGR" }
       ]
     },{
-      "caption": "Intrinio: U.S. PC Financials", "isInitClose": true,
+      "caption": "Intrinio: U.S. PC Financials",
       "items": [
         { "id": "SM_INTR_CALC" },
         { "id": "SM_INTR_INCOME" },
