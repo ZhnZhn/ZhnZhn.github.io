@@ -25,9 +25,9 @@ var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
 
 var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
-var _SpinnerLoading = _interopRequireDefault(require("../zhn/SpinnerLoading"));
+var _ChartTypes = _interopRequireDefault(require("../dialogs/ChartTypes"));
 
-var _RouterOptions = _interopRequireDefault(require("./RouterOptions"));
+var _SpinnerLoading = _interopRequireDefault(require("../zhn/SpinnerLoading"));
 
 var _ModalOptions = _interopRequireDefault(require("./ModalOptions"));
 
@@ -53,7 +53,8 @@ var S = {
     animation: 'none'
   }
 };
-var isCategory = _RouterOptions["default"].isCategory;
+var isCategory = _ChartTypes["default"].isCategory,
+    crOptions = _ChartTypes["default"].crOptions;
 
 var _crIsId = function _crIsId(id) {
   return "is" + id + "Select";
@@ -111,7 +112,7 @@ function (_Component) {
           selectOptions: configs.map(function (config) {
             return config.options;
           }),
-          chartOptions: _RouterOptions["default"].crOptions({
+          chartOptions: crOptions({
             configs: configs,
             chartsType: chartsType
           })
@@ -298,7 +299,7 @@ function (_Component) {
       configs: [],
       selectOptions: [],
       mapFrequency: props.mapFrequency,
-      chartOptions: _RouterOptions["default"].crOptions(props) //chartType
+      chartOptions: crOptions(props) //chartType
 
     });
     return _this;

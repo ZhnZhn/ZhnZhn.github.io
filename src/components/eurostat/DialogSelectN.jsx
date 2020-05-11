@@ -6,9 +6,9 @@ import crDateConfig from './crDateConfig'
 import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
+import ChartTypes from '../dialogs/ChartTypes'
 import withForDate from './withForDate'
 
-import RouterOptions from './RouterOptions'
 import ModalOptions from './ModalOptions'
 import ModalToggle from './ModalToggle'
 import RowChart from './RowChart'
@@ -20,7 +20,7 @@ const TABLE_ID = 'table';
 const {
   crOptions,
   isCategory
-} = RouterOptions;
+} = ChartTypes;
 
 const _crIsId = id => `is${id}Select`;
 

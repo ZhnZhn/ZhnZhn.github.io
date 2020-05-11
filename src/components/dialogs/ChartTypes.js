@@ -144,7 +144,7 @@ const _crCaptions = ({
     : [ oneCaption, twoCaption ];
 };
 
-const RouterOptions = {
+const ChartTypes = {
   crOptions(dialogOption, { mapFrequency }={}){
      const { chartsType, mapFrequency:mF, dfProps={} } = dialogOption
      , _mapFrequency = mapFrequency
@@ -154,14 +154,14 @@ const RouterOptions = {
      return _crOptions(_captions, _mapFrequency);
   },
 
-  isCategory(chartType) {
-    if (!chartType) {
+  isCategory(chartItem) {
+    if (!chartItem) {
       return false;
     }
     return CATEGORY_TYPES
-      .indexOf(chartType.value) !== -1;
+      .indexOf(chartItem.value) !== -1;
   }
 
 };
 
-export default RouterOptions
+export default ChartTypes

@@ -13,6 +13,8 @@ var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
 var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
 
+var _ChartTypes = _interopRequireDefault(require("../../components/dialogs/ChartTypes"));
+
 var _fnCatch = require("./fnCatch");
 
 var ALERT = {
@@ -71,11 +73,17 @@ var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, o
   });
 };
 
+var _isNotAllowToAdd = function _isNotAllowToAdd(_ref4, option) {
+  var toSeries = _ref4.toSeries,
+      isAdd = _ref4.isAdd;
+  return !_isFn(toSeries) || _isFn(isAdd) && !isAdd(option);
+};
+
 var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
   var fnFetch = objImpl.fnFetch,
       api = objImpl.api,
-      _ref4 = api || {},
-      getLimitRemaiming = _ref4.getLimitRemaiming,
+      _ref5 = api || {},
+      getLimitRemaiming = _ref5.getLimitRemaiming,
       optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
@@ -91,10 +99,10 @@ var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
   });
 };
 
-var _fetchToChart = function _fetchToChart(objImpl, _ref5) {
-  var json = _ref5.json,
-      option = _ref5.option,
-      onCompleted = _ref5.onCompleted;
+var _fetchToChart = function _fetchToChart(objImpl, _ref6) {
+  var json = _ref6.json,
+      option = _ref6.option,
+      onCompleted = _ref6.onCompleted;
 
   var adapter = objImpl.adapter,
       itemCaption = option.itemCaption,
@@ -102,10 +110,10 @@ var _fetchToChart = function _fetchToChart(objImpl, _ref5) {
       hasSecondYAxis = option.hasSecondYAxis,
       chart = _ChartStore["default"].getActiveChart(),
       series = adapter.toSeries(json, option, chart),
-      _ref6 = series || {},
-      zhItemCaption = _ref6.zhItemCaption,
-      color = _ref6.color,
-      zhColor = _ref6.zhColor;
+      _ref7 = series || {},
+      zhItemCaption = _ref7.zhItemCaption,
+      color = _ref7.color,
+      zhColor = _ref7.zhColor;
 
   _ChartFn["default"].addSeriaWithRenderLabel({
     chart: chart,
@@ -118,12 +126,22 @@ var _fetchToChart = function _fetchToChart(objImpl, _ref5) {
   onCompleted(option);
 };
 
-var _isAddCategoryToSpline = function _isAddCategoryToSpline(_ref7) {
-  var seriaType = _ref7.seriaType;
+var _isAddCategoryToSpline = function _isAddCategoryToSpline(_ref8) {
+  var seriaType = _ref8.seriaType;
 
   var chart = _ChartStore["default"].getActiveChart();
 
-  return seriaType && seriaType.indexOf('_SET') !== -1 && chart && _isArr(chart.xAxis) && !_isArr(chart.xAxis[0].categories);
+  return seriaType && _ChartTypes["default"].isCategory({
+    value: seriaType
+  }) && chart && _isArr(chart.xAxis) && !_isArr(chart.xAxis[0].categories);
+};
+
+var _runAsync = function _runAsync(fn, mls) {
+  if (mls === void 0) {
+    mls = 500;
+  }
+
+  setTimeout(fn, mls);
 };
 
 var _loadItem = function _loadItem(objImpl, option, onCompleted, onAdded, onFailed) {
@@ -132,8 +150,18 @@ var _loadItem = function _loadItem(objImpl, option, onCompleted, onAdded, onFail
   if (!parentId) {
     _loadToChartComp(objImpl, option, onCompleted, onFailed);
   } else {
-    if (_isAddCategoryToSpline(option)) {
-      onFailed(ALERT.CATEGORY_TO_SPLINE);
+    if (_isNotAllowToAdd(objImpl.adapter, option)) {
+      _runAsync(function () {
+        (0, _fnCatch.fnCatch)({
+          error: new Error("ERR_10"),
+          option: option,
+          onFailed: onFailed
+        });
+      });
+    } else if (_isAddCategoryToSpline(option)) {
+      _runAsync(function () {
+        return onFailed(ALERT.CATEGORY_TO_SPLINE);
+      });
     } else {
       option.parentId = parentId;
 

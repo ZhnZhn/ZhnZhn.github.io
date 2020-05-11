@@ -25,9 +25,9 @@ var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
 
 var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
-var _withForDate = _interopRequireDefault(require("./withForDate"));
+var _ChartTypes = _interopRequireDefault(require("../dialogs/ChartTypes"));
 
-var _RouterOptions = _interopRequireDefault(require("./RouterOptions"));
+var _withForDate = _interopRequireDefault(require("./withForDate"));
 
 var _ModalOptions = _interopRequireDefault(require("./ModalOptions"));
 
@@ -40,8 +40,8 @@ var _dec, _class, _class2, _temp;
 var DF_INIT_FROM_DATE = '2010-01-01';
 var DF_MAP_FREQUENCY = 'M';
 var TABLE_ID = 'table';
-var crOptions = _RouterOptions["default"].crOptions,
-    isCategory = _RouterOptions["default"].isCategory;
+var crOptions = _ChartTypes["default"].crOptions,
+    isCategory = _ChartTypes["default"].isCategory;
 
 var _crIsId = function _crIsId(id) {
   return "is" + id + "Select";

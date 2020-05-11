@@ -126,7 +126,7 @@ var _crCaptions = function _crCaptions(_ref6) {
   }) : [oneCaption, twoCaption];
 };
 
-var RouterOptions = {
+var ChartTypes = {
   crOptions: function crOptions(dialogOption, _temp) {
     var _ref7 = _temp === void 0 ? {} : _temp,
         mapFrequency = _ref7.mapFrequency;
@@ -141,14 +141,14 @@ var RouterOptions = {
 
     return _crOptions(_captions, _mapFrequency);
   },
-  isCategory: function isCategory(chartType) {
-    if (!chartType) {
+  isCategory: function isCategory(chartItem) {
+    if (!chartItem) {
       return false;
     }
 
-    return CATEGORY_TYPES.indexOf(chartType.value) !== -1;
+    return CATEGORY_TYPES.indexOf(chartItem.value) !== -1;
   }
 };
-var _default = RouterOptions;
+var _default = ChartTypes;
 exports["default"] = _default;
-//# sourceMappingURL=RouterOptions.js.map
+//# sourceMappingURL=ChartTypes.js.map

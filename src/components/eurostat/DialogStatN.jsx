@@ -7,9 +7,9 @@ import loadConfigs from './loadConfigs'
 import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators';
+import ChartTypes from '../dialogs/ChartTypes'
 import SpinnerLoading from '../zhn/SpinnerLoading'
 
-import RouterOptions from './RouterOptions'
 import ModalOptions from './ModalOptions'
 import ModalToggle from './ModalToggle'
 import RowChart from './RowChart'
@@ -32,7 +32,10 @@ const S = {
   }
 };
 
-const { isCategory } = RouterOptions;
+const {
+  isCategory,
+  crOptions
+ } = ChartTypes;
 
 const _crIsId = id => `is${id}Select`;
 
@@ -72,7 +75,7 @@ class DialogStatN extends Component {
       configs: [],
       selectOptions: [],
       mapFrequency: props.mapFrequency,
-      chartOptions: RouterOptions.crOptions(props)
+      chartOptions: crOptions(props)
       //chartType
     }
   }
@@ -131,8 +134,7 @@ class DialogStatN extends Component {
        mapFrequency: mF || mapFrequency,
        selectOptions: configs
          .map(config => config.options),
-       chartOptions: RouterOptions
-         .crOptions({ configs, chartsType })
+       chartOptions: crOptions({ configs, chartsType })
       })
     } else {
       this.setState({
