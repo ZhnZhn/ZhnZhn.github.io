@@ -69,6 +69,8 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number';
 };
 
+var _isArr = Array.isArray;
+
 var _isHrzScrollable = function _isHrzScrollable(node) {
   return node && node.scrollWidth > node.clientWidth;
 };
@@ -86,11 +88,20 @@ var _scrollNodeToLeft = function _scrollNodeToLeft(node, left) {
   }
 };
 
-var INDICATOR_TAB_TYPES = ['area', 'spline', 'line'];
+var LINE_TYPES = ['area', 'spline', 'line'];
 
-var _isIndicatorTab = function _isIndicatorTab(_ref, isWithoutIndicator) {
-  var series = _ref.series;
-  return !isWithoutIndicator && Array.isArray(series) && series[0] && INDICATOR_TAB_TYPES.indexOf(series[0].type) !== -1;
+var _isColumnCategoryConfig = function _isColumnCategoryConfig(_temp) {
+  var _ref = _temp === void 0 ? {} : _temp,
+      type = _ref.type,
+      categories = _ref.categories;
+
+  return type === 'category' && _isArr(categories);
+};
+
+var _isIndicatorTab = function _isIndicatorTab(_ref2, isWithoutIndicator) {
+  var series = _ref2.series,
+      xAxis = _ref2.xAxis;
+  return !isWithoutIndicator && _isArr(series) && series[0] && (LINE_TYPES.indexOf(series[0].type) !== -1 || !_isColumnCategoryConfig(xAxis));
 };
 
 var _crModalMenuStyle = function _crModalMenuStyle(node, left) {

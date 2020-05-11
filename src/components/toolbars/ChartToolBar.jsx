@@ -49,6 +49,7 @@ const S = {
 
 const _isFn = fn => typeof fn === 'function';
 const _isNumber = n => typeof n === 'number';
+const _isArr = Array.isArray
 
 const _isHrzScrollable = node  => node
   && node.scrollWidth > node.clientWidth;
@@ -63,12 +64,16 @@ const _scrollNodeToLeft = (node, left) => {
   }
 };
 
-const INDICATOR_TAB_TYPES = [ 'area', 'spline', 'line' ];
-const _isIndicatorTab = ({ series }, isWithoutIndicator) => !isWithoutIndicator
-  && Array.isArray(series)
-  && series[0]
-  && INDICATOR_TAB_TYPES.indexOf(series[0].type) !== -1;
+const LINE_TYPES = [ 'area', 'spline', 'line' ];
+const _isColumnCategoryConfig = (
+ { type, categories }={}
+) => type === 'category' && _isArr(categories);
 
+const _isIndicatorTab = ({ series, xAxis }, isWithoutIndicator) => !isWithoutIndicator
+  && _isArr(series) && series[0]
+  && ( LINE_TYPES.indexOf(series[0].type) !== -1
+       || !_isColumnCategoryConfig(xAxis)
+     );
 
 const _crModalMenuStyle = (node, left) => {
   if (node && _isNumber(node.scrollLeft)) {
