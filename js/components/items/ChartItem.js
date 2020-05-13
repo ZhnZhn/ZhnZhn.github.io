@@ -19,7 +19,7 @@ var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ChartToolBar = _interopRequireDefault(require("../toolbars/ChartToolBar"));
 
-var _AreaMore = _interopRequireDefault(require("./AreaMore"));
+var _ChartItemMore = _interopRequireDefault(require("./ChartItemMore"));
 
 var _Header = _interopRequireDefault(require("./Header"));
 
@@ -323,7 +323,7 @@ function (_Component) {
     _this._handleToggleOpen = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isOpen');
     _this._handleClickLegend = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isShowLegend');
     _this._handleToggleToolbar = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isShowToolbar');
-    _this._moreModel = (0, _AreaMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._moreModel = (0, _ChartItemMore["default"])((0, _assertThisInitialized2["default"])(_this), {
       onToggle: _this._handleToggleToolbar,
       onToTop: props.onToTop,
       onHideCaption: _this.hideCaption

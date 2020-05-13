@@ -4,6 +4,14 @@ exports.__esModule = true;
 exports["default"] = void 0;
 var CL_ROW = 'row__pane-topic not-selected';
 
+var _crItem = function _crItem(name, onClick) {
+  return {
+    name: name,
+    onClick: onClick,
+    isClose: true
+  };
+};
+
 var crModel = function crModel(comp, _ref) {
   var onToggle = _ref.onToggle,
       onToTop = _ref.onToTop,
@@ -12,22 +20,10 @@ var crModel = function crModel(comp, _ref) {
     baseTitleCl: CL_ROW,
     pageWidth: 150,
     maxPages: 1,
-    p0: [{
-      name: 'Move to Top',
-      onClick: onToTop,
-      isClose: true
-    }, {
-      name: 'Toggle Toolbar',
-      onClick: onToggle.bind(comp),
-      isClose: true
-    }, {
-      name: 'Hide Caption',
-      onClick: onHideCaption.bind(comp),
-      isClose: true
-    }]
+    p0: [_crItem('Move to Top', onToTop), _crItem('Hide Caption', onHideCaption.bind(comp)), _crItem('Toggle Toolbar', onToggle.bind(comp))]
   };
 };
 
 var _default = crModel;
 exports["default"] = _default;
-//# sourceMappingURL=AreaMore.js.map
+//# sourceMappingURL=ChartItemMore.js.map

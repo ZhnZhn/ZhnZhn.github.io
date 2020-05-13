@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import has from '../has'
 import Comp from '../Comp'
 import ChartToolBar from '../toolbars/ChartToolBar';
-import crModelMore from './AreaMore'
+import crModelMore from './ChartItemMore'
 import Header from './Header';
 import ChartLegend from './ChartLegend'
 import MiniCharts from './MiniCharts';
