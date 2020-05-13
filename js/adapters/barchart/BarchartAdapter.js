@@ -28,10 +28,6 @@ var _getCaption = function _getCaption(obj) {
 };
 
 var _crDfKey = function _crDfKey(option) {
-  var value = option.value,
-      _option$item = option.item,
-      item = _option$item === void 0 ? {} : _option$item;
-  option.value = value === 'noresult' ? item.inputValue : value;
   option.linkFn = "NASDAQ";
   return option.value;
 };

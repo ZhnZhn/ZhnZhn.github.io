@@ -92,8 +92,7 @@ var AdapterFn = {
 
     var _ref3 = item != null ? item : {},
         value = _ref3.value,
-        inputValue = _ref3.inputValue,
-        _value = '' + (value === 'noresult' ? inputValue != null ? inputValue : dfValue : value != null ? value : dfValue);
+        _value = typeof value === 'number' ? '' + value : value != null ? value : '' + dfValue;
 
     return isUpper ? _value.toUpperCase() : _value;
   },

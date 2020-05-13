@@ -88,10 +88,10 @@ const AdapterFn = {
     item,
     { isUpper, dfValue='' }={}
   ) => {
-    const { value, inputValue } = item ?? {}
-    , _value = ''+(value === 'noresult'
-        ? inputValue ?? dfValue
-        : value ?? dfValue);
+    const { value } = item ?? {}
+    , _value = typeof value === 'number'
+         ? ''+value
+         : value ?? ''+dfValue;
     return isUpper
       ? _value.toUpperCase()
       : _value;

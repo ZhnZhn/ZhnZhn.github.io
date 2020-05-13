@@ -19,10 +19,6 @@ const _getCaption = obj => obj && obj.caption
   || '';
 
 const _crDfKey = (option) => {
-  const { value, item={} } = option;
-  option.value = value === 'noresult'
-     ? item.inputValue
-     : value;
   option.linkFn = "NASDAQ"
   return option.value;
 };
@@ -88,7 +84,7 @@ const BarchartAdapter = {
       });
     return Builder()
       .initSeria({ minY: findMinY(data) })
-      .addPoints(_id, data)      
+      .addPoints(_id, data)
       .toSeria();
   }
 }

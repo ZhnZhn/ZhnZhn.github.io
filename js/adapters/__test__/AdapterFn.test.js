@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
@@ -289,39 +287,6 @@ describe('getValue', function () {
     expect(fn({}, option)).toBe('');
     expect(fn(void 0, option)).toBe('');
     expect(fn(null, option)).toBe('');
-  });
-  test('should return string inputValue in case value==="noresult"', function () {
-    var item = {
-      value: 'noresult'
-    };
-    expect(fn((0, _extends2["default"])({}, item, {
-      inputValue: 'Abc'
-    }))).toBe('Abc');
-    expect(fn((0, _extends2["default"])({}, item, {
-      inputValue: ''
-    }))).toBe('');
-    expect(fn((0, _extends2["default"])({}, item, {
-      inputValue: null
-    }))).toBe('');
-    expect(fn((0, _extends2["default"])({}, item))).toBe('');
-  });
-  test('should use option isUpper for inputValue in case value==="noresult"', function () {
-    var item = {
-      value: 'noresult'
-    },
-        option = {
-      isUpper: true
-    };
-    expect(fn((0, _extends2["default"])({}, item, {
-      inputValue: 'Abc'
-    }), option)).toBe('ABC');
-    expect(fn((0, _extends2["default"])({}, item, {
-      inputValue: ''
-    }), option)).toBe('');
-    expect(fn((0, _extends2["default"])({}, item, {
-      inputValue: null
-    }), option)).toBe('');
-    expect(fn((0, _extends2["default"])({}, item), option)).toBe('');
   });
 });
 //# sourceMappingURL=AdapterFn.test.js.map

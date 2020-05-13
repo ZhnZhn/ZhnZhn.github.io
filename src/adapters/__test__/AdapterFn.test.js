@@ -196,22 +196,4 @@ describe('getValue', ()=>{
     expect(fn(null, option)).toBe('')
   })
 
-  test('should return string inputValue in case value==="noresult"', ()=>{
-    const item = { value: 'noresult' }
-    expect(fn({ ...item, inputValue: 'Abc' })).toBe('Abc')
-
-    expect(fn({ ...item, inputValue: '' })).toBe('')
-    expect(fn({ ...item, inputValue: null })).toBe('')
-    expect(fn({ ...item })).toBe('')
-  })
-
-  test('should use option isUpper for inputValue in case value==="noresult"', ()=>{
-    const item = { value: 'noresult' }
-    , option = { isUpper: true };
-    expect(fn({ ...item, inputValue: 'Abc' }, option)).toBe('ABC')
-
-    expect(fn({ ...item, inputValue: '' }, option)).toBe('')
-    expect(fn({ ...item, inputValue: null }, option)).toBe('')
-    expect(fn({ ...item}, option)).toBe('')
-  })
 })
