@@ -4,6 +4,30 @@ exports.__esModule = true;
 exports["default"] = void 0;
 var CL_ROW = 'row__pane-topic not-selected';
 
+var _crSubItem = function _crSubItem(id, name) {
+  return {
+    type: 'sub',
+    id: id,
+    name: name //cn
+
+  };
+};
+
+var _crItem = function _crItem(name, onClick, isClose) {
+  if (isClose === void 0) {
+    isClose = true;
+  }
+
+  return {
+    name: name,
+    onClick: onClick,
+    isClose: isClose //cn
+
+  };
+};
+
+var P0 = [_crSubItem('p1', 'Items'), _crSubItem('p2', 'Sort By, ASC'), _crSubItem('p3', 'Resize')];
+
 var crModelMore = function crModelMore(_ref) {
   var onMinWidth = _ref.onMinWidth,
       onInitWidth = _ref.onInitWidth,
@@ -15,83 +39,20 @@ var crModelMore = function crModelMore(_ref) {
       onSortBy = _ref.onSortBy,
       isAdminMode = _ref.isAdminMode,
       onCompareTo = _ref.onCompareTo;
-  var p0 = [{
-    id: 'p1',
-    type: 'sub',
-    cn: CL_ROW,
-    name: 'Resize'
-  }, {
-    id: 'p2',
-    type: 'sub',
-    cn: CL_ROW,
-    name: 'Sort By, ASC'
-  }, {
-    cn: CL_ROW,
-    name: 'Show Captions',
-    onClick: onShowCaptions
-  }, {
-    cn: CL_ROW,
-    name: 'Remove All Items',
-    onClick: onRemoveAll,
-    isClose: true
-  }];
+  var p1 = [_crItem('Remove All', onRemoveAll), _crItem('Show Caption', onShowCaptions, false)];
 
   if (isAdminMode) {
-    p0.push({
-      cn: CL_ROW,
-      name: 'CompareTo',
-      onClick: onCompareTo,
-      isClose: true
-    });
+    p1.push(_crItem('CompareTo', onCompareTo));
   }
 
   return {
     baseTitleCl: CL_ROW,
     pageWidth: 180,
     maxPages: 2,
-    p0: p0,
-    p1: [{
-      cn: CL_ROW,
-      name: 'to MinWidth',
-      onClick: onMinWidth
-    }, {
-      cn: CL_ROW,
-      name: 'to InitialWidth',
-      onClick: onInitWidth
-    }, {
-      cn: CL_ROW,
-      name: '+10px to Width',
-      onClick: onPlusWidth
-    }, {
-      cn: CL_ROW,
-      name: '-10px to Width',
-      onClick: onMinusWidth
-    }, {
-      cn: CL_ROW,
-      name: 'Fit Items to Width',
-      onClick: onFit
-    }],
-    p2: [{
-      cn: CL_ROW,
-      name: 'Value',
-      onClick: onSortBy.bind(null, '_value'),
-      isClose: true
-    }, {
-      cn: CL_ROW,
-      name: 'Percent',
-      onClick: onSortBy.bind(null, '_percentAbs'),
-      isClose: true
-    }, {
-      cn: CL_ROW,
-      name: 'Delta',
-      onClick: onSortBy.bind(null, '_deltaAbs'),
-      isClose: true
-    }, {
-      cn: CL_ROW,
-      name: 'Reverse',
-      onClick: onSortBy,
-      isClose: true
-    }]
+    p0: P0,
+    p1: p1,
+    p2: [_crItem('Value', onSortBy.bind(null, '_value')), _crItem('Percent', onSortBy.bind(null, '_percentAbs')), _crItem('Delta', onSortBy.bind(null, '_deltaAbs')), _crItem('Reverse', onSortBy)],
+    p3: [_crItem('to MinWidth', onMinWidth, false), _crItem('to InitialWidth', onInitWidth, false), _crItem('+10px to Width', onPlusWidth, false), _crItem('-10px to Width', onMinusWidth, false), _crItem('Fit Items to Width', onFit, false)]
   };
 };
 
