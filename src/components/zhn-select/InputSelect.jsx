@@ -11,36 +11,29 @@ import CL from './CL'
 const MAX_WITHOUT_ANIMATION = 800;
 
 const INPUT_PREFIX = 'From input:';
+const NO_RESULT = 'noresult';
+
 const _crInputItem = (inputValue, { propCaption, isWithInput, maxInput }) => {
-  const _inputValue = String(inputValue)
-    .replace(INPUT_PREFIX,'')
-    .trim()
-    .substring(0, maxInput)
+  const _inputValue = inputValue.substring(0, maxInput)
   , _caption = isWithInput
        ? `${INPUT_PREFIX} ${_inputValue}`
        : 'No results found';
   return {
     [propCaption]: _caption,
-    value: 'noresult',
+    value: NO_RESULT,
     inputValue: _inputValue
   };
 };
 
-const _toItem = (item, propCaption) => ({
-  [propCaption]: 'From Input',
-  value: item.inputValue
-});
+const _crWidthStyle = (width, style) => width
+  ? ((''+width).indexOf('%') !== -1)
+      ? { ...style, width: width }
+      : { ...style, width: width + 'px'}
+  : null;
 
-const _crWidthStyle = (width, style) => {
-  return width
-    ? ((''+width).indexOf('%') !== -1)
-        ? { ...style, width: width }
-        : { ...style, width: width + 'px'}
-    : null;
-};
 
 const _crFooterIndex = ({ options, initialOptions }) => ({
-  _nFiltered: (options[0] && (options[0].value !== 'noresult'))
+  _nFiltered: (options[0] && (options[0].value !== NO_RESULT))
       ? options.length : 0,
   _nAll: initialOptions ? initialOptions.length : 0
 });
@@ -66,6 +59,10 @@ const _crInitialStateFromProps = ({ optionName, optionNames, options }) => ({
   isValidDomOptionsCache: false,
   isLocalMode: false
 });
+
+const _crValue = str => str
+  .replace(INPUT_PREFIX, '')
+  .trim();
 
 class InputSelect extends Component {
   /*
@@ -103,6 +100,7 @@ class InputSelect extends Component {
     optionNames: '',
     isWithInput: false,
     maxInput: 10,
+    regInput: /[A-Za-z0-9() ]/,
     //prefixInput: 'From Input:',
     onSelect: () => {},
     onLoadOption: () => {}
@@ -198,10 +196,18 @@ class InputSelect extends Component {
   }
 
   _hInputChange = (event) => {
-    const token = event.target.value
+    const { isWithInput, regInput } = this.props
+    , token = event.target.value
     , tokenLn = token.length
     , { value } = this.state
     , valueLn = value.length;
+
+    if ( isWithInput
+         && tokenLn>0
+         && !regInput.test(token[tokenLn-1])) {
+      return;
+    }
+
     if (tokenLn !== valueLn){
       this._undecorateActiveRowComp()
       this.indexActiveOption = 0;
@@ -224,7 +230,7 @@ class InputSelect extends Component {
   }
   _setShowOptions = () => {
     this.setState(
-      { isShowOption : true },
+      { isShowOption: true },
       this._stopAfterInputAnimation
     )
   }
@@ -283,6 +289,28 @@ class InputSelect extends Component {
     }
   }
 
+  _selectItem = item => {
+    const { onSelect, isWithInput } = this.props;
+    if (!item) {
+      onSelect()
+    } else if (item.value !== NO_RESULT) {
+      onSelect(item)
+    } else if (!isWithInput) {
+      onSelect()
+    } else {
+      const _value = item.inputValue.trim();
+      if (!_value) {
+        onSelect()
+      } else {
+        onSelect({
+         caption: _value,
+         value: _value,
+         isInput: true
+       })
+      }
+    }
+  }
+
   _hInputKeyDown = (event) => {
     switch(event.keyCode){
       // enter
@@ -291,30 +319,22 @@ class InputSelect extends Component {
 
          if (item && item[this.propCaption]){
            this.setState({
-             value : item[this.propCaption],
-             isShowOption : false,
-             isValidDomOptionsCache : true
+             value: _crValue(item[this.propCaption]),
+             isShowOption: false,
+             isValidDomOptionsCache: true
            });
-
-           if (item.value !== 'noresult'){
-             this.props.onSelect(item);
-           } else {
-             const _item = this.props.isWithInput
-               ? _toItem(item, this.propCaption)
-               : void 0;
-             this.props.onSelect(_item);
-           }
+           this._selectItem(item)
          }
       break; }
       //escape, delete
       case 27: case 46: {
         event.preventDefault()
         if (this.state.isShowOption){
-          this.setState({ isShowOption : false });
+          this.setState({ isShowOption: false });
         } else {
           this._undecorateActiveRowComp();
           this._setStateToInit(this.props);
-          this.props.onSelect(void 0);
+          this._selectItem()
         }
       break;}
       case 40: //down
@@ -347,10 +367,10 @@ class InputSelect extends Component {
     this._undecorateActiveRowComp()
     this.indexActiveOption = index;
     this.setState({
-      value: item[this.propCaption],
+      value: _crValue(item[this.propCaption]),
       isShowOption: false
     });
-    this.props.onSelect(item);
+    this._selectItem(item)
   }
 
   _refOptionsComp = c => this.optionsComp = c
@@ -506,9 +526,8 @@ class InputSelect extends Component {
   }
 
   clearInput = () => {
-    const { onSelect } = this.props;
     this._undecorateActiveRowComp()
-    onSelect(void 0)
+    this._selectItem()
     this._setStateToInit(this.props)
   }
 

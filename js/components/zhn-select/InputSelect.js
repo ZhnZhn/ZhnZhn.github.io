@@ -26,6 +26,7 @@ var _CL = _interopRequireDefault(require("./CL"));
 //import PropTypes from 'prop-types'
 var MAX_WITHOUT_ANIMATION = 800;
 var INPUT_PREFIX = 'From input:';
+var NO_RESULT = 'noresult';
 
 var _crInputItem = function _crInputItem(inputValue, _ref) {
   var _ref2;
@@ -34,16 +35,10 @@ var _crInputItem = function _crInputItem(inputValue, _ref) {
       isWithInput = _ref.isWithInput,
       maxInput = _ref.maxInput;
 
-  var _inputValue = String(inputValue).replace(INPUT_PREFIX, '').trim().substring(0, maxInput),
+  var _inputValue = inputValue.substring(0, maxInput),
       _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : 'No results found';
 
-  return _ref2 = {}, _ref2[propCaption] = _caption, _ref2.value = 'noresult', _ref2.inputValue = _inputValue, _ref2;
-};
-
-var _toItem = function _toItem(item, propCaption) {
-  var _ref3;
-
-  return _ref3 = {}, _ref3[propCaption] = 'From Input', _ref3.value = item.inputValue, _ref3;
+  return _ref2 = {}, _ref2[propCaption] = _caption, _ref2.value = NO_RESULT, _ref2.inputValue = _inputValue, _ref2;
 };
 
 var _crWidthStyle = function _crWidthStyle(width, style) {
@@ -54,11 +49,11 @@ var _crWidthStyle = function _crWidthStyle(width, style) {
   }) : null;
 };
 
-var _crFooterIndex = function _crFooterIndex(_ref4) {
-  var options = _ref4.options,
-      initialOptions = _ref4.initialOptions;
+var _crFooterIndex = function _crFooterIndex(_ref3) {
+  var options = _ref3.options,
+      initialOptions = _ref3.initialOptions;
   return {
-    _nFiltered: options[0] && options[0].value !== 'noresult' ? options.length : 0,
+    _nFiltered: options[0] && options[0].value !== NO_RESULT ? options.length : 0,
     _nAll: initialOptions ? initialOptions.length : 0
   };
 };
@@ -75,10 +70,10 @@ var S = {
   }
 };
 
-var _crInitialStateFromProps = function _crInitialStateFromProps(_ref5) {
-  var optionName = _ref5.optionName,
-      optionNames = _ref5.optionNames,
-      options = _ref5.options;
+var _crInitialStateFromProps = function _crInitialStateFromProps(_ref4) {
+  var optionName = _ref4.optionName,
+      optionNames = _ref4.optionNames,
+      options = _ref4.options;
   return {
     value: '',
     isShowOption: false,
@@ -88,6 +83,10 @@ var _crInitialStateFromProps = function _crInitialStateFromProps(_ref5) {
     isValidDomOptionsCache: false,
     isLocalMode: false
   };
+};
+
+var _crValue = function _crValue(str) {
+  return str.replace(INPUT_PREFIX, '').trim();
 };
 
 var InputSelect =
@@ -124,8 +123,8 @@ function (_Component) {
 
     _this = _Component.call(this, _props) || this;
 
-    _this._initFromProps = function (_ref6) {
-      var propCaption = _ref6.propCaption;
+    _this._initFromProps = function (_ref5) {
+      var propCaption = _ref5.propCaption;
       _this.domOptionsCache = null;
       _this.indexActiveOption = 0;
       _this.propCaption = propCaption;
@@ -197,10 +196,17 @@ function (_Component) {
     };
 
     _this._hInputChange = function (event) {
-      var token = event.target.value,
+      var _this$props = _this.props,
+          isWithInput = _this$props.isWithInput,
+          regInput = _this$props.regInput,
+          token = event.target.value,
           tokenLn = token.length,
           value = _this.state.value,
           valueLn = value.length;
+
+      if (isWithInput && tokenLn > 0 && !regInput.test(token[tokenLn - 1])) {
+        return;
+      }
 
       if (tokenLn !== valueLn) {
         _this._undecorateActiveRowComp();
@@ -299,6 +305,32 @@ function (_Component) {
       }
     };
 
+    _this._selectItem = function (item) {
+      var _this$props2 = _this.props,
+          onSelect = _this$props2.onSelect,
+          isWithInput = _this$props2.isWithInput;
+
+      if (!item) {
+        onSelect();
+      } else if (item.value !== NO_RESULT) {
+        onSelect(item);
+      } else if (!isWithInput) {
+        onSelect();
+      } else {
+        var _value = item.inputValue.trim();
+
+        if (!_value) {
+          onSelect();
+        } else {
+          onSelect({
+            caption: _value,
+            value: _value,
+            isInput: true
+          });
+        }
+      }
+    };
+
     _this._hInputKeyDown = function (event) {
       switch (event.keyCode) {
         // enter
@@ -308,18 +340,12 @@ function (_Component) {
 
             if (item && item[_this.propCaption]) {
               _this.setState({
-                value: item[_this.propCaption],
+                value: _crValue(item[_this.propCaption]),
                 isShowOption: false,
                 isValidDomOptionsCache: true
               });
 
-              if (item.value !== 'noresult') {
-                _this.props.onSelect(item);
-              } else {
-                var _item = _this.props.isWithInput ? _toItem(item, _this.propCaption) : void 0;
-
-                _this.props.onSelect(_item);
-              }
+              _this._selectItem(item);
             }
 
             break;
@@ -340,7 +366,7 @@ function (_Component) {
 
               _this._setStateToInit(_this.props);
 
-              _this.props.onSelect(void 0);
+              _this._selectItem();
             }
 
             break;
@@ -389,11 +415,11 @@ function (_Component) {
       _this.indexActiveOption = index;
 
       _this.setState({
-        value: item[_this.propCaption],
+        value: _crValue(item[_this.propCaption]),
         isShowOption: false
       });
 
-      _this.props.onSelect(item);
+      _this._selectItem(item);
     };
 
     _this._refOptionsComp = function (c) {
@@ -444,9 +470,9 @@ function (_Component) {
     };
 
     _this.renderOptions = function () {
-      var _this$props = _this.props,
-          rootOptionsStyle = _this$props.rootOptionsStyle,
-          width = _this$props.width,
+      var _this$props3 = _this.props,
+          rootOptionsStyle = _this$props3.rootOptionsStyle,
+          width = _this$props3.width,
           isShowOption = _this.state.isShowOption,
           _domOptions = _this._createDomOptionsWithCache(),
           _styleOptions = isShowOption ? S.BLOCK : S.NONE,
@@ -479,12 +505,12 @@ function (_Component) {
     };
 
     _this._crAfterInputEl = function () {
-      var _this$props2 = _this.props,
-          isLoading = _this$props2.isLoading,
-          isLoadingFailed = _this$props2.isLoadingFailed,
-          placeholder = _this$props2.placeholder,
-          optionName = _this$props2.optionName,
-          onLoadOption = _this$props2.onLoadOption,
+      var _this$props4 = _this.props,
+          isLoading = _this$props4.isLoading,
+          isLoadingFailed = _this$props4.isLoadingFailed,
+          placeholder = _this$props4.placeholder,
+          optionName = _this$props4.optionName,
+          onLoadOption = _this$props4.onLoadOption,
           _this$state3 = _this.state,
           isShowOption = _this$state3.isShowOption,
           optionNames = _this$state3.optionNames;
@@ -524,11 +550,9 @@ function (_Component) {
     };
 
     _this.clearInput = function () {
-      var onSelect = _this.props.onSelect;
-
       _this._undecorateActiveRowComp();
 
-      onSelect(void 0);
+      _this._selectItem();
 
       _this._setStateToInit(_this.props);
     };
@@ -567,9 +591,9 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this$props3 = this.props,
-        rootStyle = _this$props3.rootStyle,
-        width = _this$props3.width,
+    var _this$props5 = this.props,
+        rootStyle = _this$props5.rootStyle,
+        width = _this$props5.width,
         _this$state4 = this.state,
         value = _this$state4.value,
         isLocalMode = _this$state4.isLocalMode,
@@ -619,6 +643,7 @@ InputSelect.defaultProps = {
   optionNames: '',
   isWithInput: false,
   maxInput: 10,
+  regInput: /[A-Za-z0-9() ]/,
   //prefixInput: 'From Input:',
   onSelect: function onSelect() {},
   onLoadOption: function onLoadOption() {}
