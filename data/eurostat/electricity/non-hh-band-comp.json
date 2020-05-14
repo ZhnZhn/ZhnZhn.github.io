@@ -1,0 +1,12 @@
+{
+  "items":[
+  {"value":"TOT_MWH","caption":"Consumption of MWh - all bands"},
+	{"value":"MWH_LT20","caption":"Consumption less than 20 MWh - band IA"},
+	{"value":"MWH20-499","caption":"Consumption from 20 MWh to 499 MWh - band IB"},
+	{"value":"MWH500-1999","caption":"Consumption from 500 MWh to 1 999 MWh - band IC"},
+	{"value":"MWH2000-19999","caption":"Consumption from 2 000 MWh to 19 999 MWh - band ID"},
+	{"value":"MWH20000-69999","caption":"Consumption from 20 000 MWh to 69 999 MWh - band IE"},
+	{"value":"MWH70000-149999","caption":"Consumption from 70 000 MWh to 149 999 MWh - band IF"},
+	{"value":"MWH_GE150000","caption":"Consumption 150 000 MWh or over - band IG"}
+  ]
+}

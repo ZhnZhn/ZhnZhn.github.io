@@ -1,0 +1,25 @@
+{
+  "items":[
+  {"value":"TOTAL","caption":"Total"},
+	{"value":"CF","caption":"Combustible fuels"},
+	{"value":"CF_R","caption":"Combustible fuels - renewable"},
+	{"value":"CF_NR","caption":"Combustible fuels - non-renewable"},
+	{"value":"C0000","caption":"Coal and manufactured gases"},
+	{"value":"G3000","caption":"Natural gas"},
+	{"value":"O4000XBIO","caption":"Oil and petroleum products (excluding biofuel portion)"},
+	{"value":"RA100","caption":"Hydro"},
+	{"value":"RA110","caption":"Pure hydro power"},
+	{"value":"RA120","caption":"Mixed hydro power"},
+	{"value":"RA130","caption":"Pumped hydro power"},
+	{"value":"RA200","caption":"Geothermal"},
+	{"value":"RA300","caption":"Wind"},
+	{"value":"RA310","caption":"Wind on shore"},
+	{"value":"RA320","caption":"Wind off shore"},
+	{"value":"RA400","caption":"Solar"},
+	{"value":"RA410","caption":"Solar thermal"},
+	{"value":"RA420","caption":"Solar photovoltaic"},
+	{"value":"RA500_5160","caption":"Other renewable energies"},
+	{"value":"N9000","caption":"Nuclear fuels and other fuels n.e.c."},
+	{"value":"X9900","caption":"Other fuels n.e.c."}
+  ]
+}
