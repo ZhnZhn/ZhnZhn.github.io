@@ -7,7 +7,9 @@ import AdapterFn from '../AdapterFn';
 const { setPlotLinesMinMax } = ChartFn;
 
 const {
-  valueMoving, findMinY,
+  compareByDate,
+  valueMoving,
+  findMinY,
   joinBy,
   crItemConf
 } = AdapterFn;
@@ -56,8 +58,6 @@ const _colorSeriaNotIn = (config, codes, color) => {
   })
 };
 
-const _isDataDes = d => d.length>0
-  && d[0][0]>d[d.length-1][0];
 
 const _isLineSeria = type => type
   && (type === 'AREA' || type === 'SPLINE');
@@ -75,6 +75,10 @@ const _filterZeroCategories = (data, categories) => {
   return { data: _data, categories };
 };
 
+const _isYearOrMapFrequencyKey = (key, mapFrequency) => !mapFrequency
+  || mapFrequency === "Y"
+  || key.indexOf(mapFrequency) !== -1;
+
 const EuroStatFn = {
    joinBy,
 
@@ -84,24 +88,19 @@ const EuroStatFn = {
       , min = Number.POSITIVE_INFINITY;
 
     Object.keys(timeIndex).forEach(key => {
-       if (!mapFrequency
-           || mapFrequency === "Y"
-           || key.indexOf(mapFrequency) !== -1) {
-         const pointValue = value[timeIndex[key]];
-         if (pointValue != null){
-           data.push([
-              EuroStatFn.convertToUTC(key),
-              pointValue
-            ]);
+       if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
+         const y = value[timeIndex[key]];
+         if (y != null){
+           data.push([ EuroStatFn.convertToUTC(key), y ]);
 
-            if (pointValue>=max) { max = pointValue; }
-            if (pointValue<=min) { min = pointValue; }
+           if (y>=max) { max = y; }
+           if (y<=min) { min = y; }
          }
        }
     })
 
     return {
-      data: _isDataDes(data) ? data.reverse() : data,
+      data: data.sort(compareByDate),
       max, min
     };
   },

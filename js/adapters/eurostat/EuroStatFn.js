@@ -16,7 +16,8 @@ var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax;
-var valueMoving = _AdapterFn["default"].valueMoving,
+var compareByDate = _AdapterFn["default"].compareByDate,
+    valueMoving = _AdapterFn["default"].valueMoving,
     findMinY = _AdapterFn["default"].findMinY,
     joinBy = _AdapterFn["default"].joinBy,
     crItemConf = _AdapterFn["default"].crItemConf;
@@ -60,10 +61,6 @@ var _colorSeriaNotIn = function _colorSeriaNotIn(config, codes, color) {
   });
 };
 
-var _isDataDes = function _isDataDes(d) {
-  return d.length > 0 && d[0][0] > d[d.length - 1][0];
-};
-
 var _isLineSeria = function _isLineSeria(type) {
   return type && (type === 'AREA' || type === 'SPLINE');
 };
@@ -91,6 +88,10 @@ var _filterZeroCategories = function _filterZeroCategories(data, categories) {
   };
 };
 
+var _isYearOrMapFrequencyKey = function _isYearOrMapFrequencyKey(key, mapFrequency) {
+  return !mapFrequency || mapFrequency === "Y" || key.indexOf(mapFrequency) !== -1;
+};
+
 var EuroStatFn = {
   joinBy: joinBy,
   createData: function createData(timeIndex, value, mapFrequency) {
@@ -98,24 +99,24 @@ var EuroStatFn = {
     var max = Number.NEGATIVE_INFINITY,
         min = Number.POSITIVE_INFINITY;
     Object.keys(timeIndex).forEach(function (key) {
-      if (!mapFrequency || mapFrequency === "Y" || key.indexOf(mapFrequency) !== -1) {
-        var pointValue = value[timeIndex[key]];
+      if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
+        var y = value[timeIndex[key]];
 
-        if (pointValue != null) {
-          data.push([EuroStatFn.convertToUTC(key), pointValue]);
+        if (y != null) {
+          data.push([EuroStatFn.convertToUTC(key), y]);
 
-          if (pointValue >= max) {
-            max = pointValue;
+          if (y >= max) {
+            max = y;
           }
 
-          if (pointValue <= min) {
-            min = pointValue;
+          if (y <= min) {
+            min = y;
           }
         }
       }
     });
     return {
-      data: _isDataDes(data) ? data.reverse() : data,
+      data: data.sort(compareByDate),
       max: max,
       min: min
     };
