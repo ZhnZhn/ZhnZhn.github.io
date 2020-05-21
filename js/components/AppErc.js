@@ -103,7 +103,7 @@ function (_Component) {
       onCloseDialog: _ComponentActions["default"].closeDialog
     }), _react["default"].createElement(_About["default"], {
       store: _ChartStore["default"],
-      isShow: true
+      isInitShow: true
     }), _react["default"].createElement(_CompContainer["default"], {
       store: _ChartStore["default"],
       addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART

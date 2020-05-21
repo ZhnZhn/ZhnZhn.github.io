@@ -9,6 +9,7 @@ const INITIAL_WIDTH = 635
 
 const has = {
   strWidth: _strWidth,
+  isWideWidth: _strWidth.indexOf('W') === -1,  
   touch: _isTouchable(),
   wideWidth: () => _isInnerWidth()
     ? window.innerWidth > 700

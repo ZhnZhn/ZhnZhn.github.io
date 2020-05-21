@@ -14,6 +14,7 @@ var INITIAL_WIDTH = 635,
 
 var has = {
   strWidth: _strWidth,
+  isWideWidth: _strWidth.indexOf('W') === -1,
   touch: _isTouchable(),
   wideWidth: function wideWidth() {
     return _isInnerWidth() ? window.innerWidth > 700 : true;

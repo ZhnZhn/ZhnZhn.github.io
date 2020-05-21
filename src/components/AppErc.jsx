@@ -58,7 +58,7 @@ class AppErc extends Component {
               showDialogAction={CAT.SHOW_DIALOG}
               onCloseDialog={CA.closeDialog}
            />
-           <About store={ChartStore} isShow={true} />
+           <About store={ChartStore} isInitShow={true} />
            <CompContainer
              store={ChartStore}
              addAction={CHAT.INIT_AND_SHOW_CHART}
