@@ -42,6 +42,8 @@ var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var BUILD_DATE = '15-05-2020';
 var CL = "component-container";
 
+var showSettings = _ComponentActions["default"].showSettings.bind(null, _ChartStore["default"].exportSettingFn());
+
 var AppErc =
 /*#__PURE__*/
 function (_Component) {
@@ -93,7 +95,8 @@ function (_Component) {
     return _react["default"].createElement(_ThemeContext["default"].Provider, {
       value: theme
     }, _react["default"].createElement(_HeaderBar["default"], {
-      store: _ChartStore["default"]
+      store: _ChartStore["default"],
+      showSettings: showSettings
     }), _react["default"].createElement("div", {
       className: CL
     }, _react["default"].createElement(_BrowserContainer["default"], {

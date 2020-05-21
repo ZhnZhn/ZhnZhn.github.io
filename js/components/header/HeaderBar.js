@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -17,9 +15,9 @@ var _BrowserActions = _interopRequireDefault(require("../../flux/actions/Browser
 
 var _LoadingProgressActions = require("../../flux/actions/LoadingProgressActions");
 
-var _Type = require("../../constants/Type");
+var _utils = require("../zhn-utils/utils");
 
-var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -68,130 +66,103 @@ var STYLE = {
 };
 var MODEL = (0, _BrowserModel["default"])();
 
-var HeaderBar =
-/*#__PURE__*/
-function (_Component) {
-  (0, _inheritsLoose2["default"])(HeaderBar, _Component);
+var HeaderBar = function HeaderBar(_ref) {
+  var store = _ref.store,
+      showSettings = _ref.showSettings;
 
-  function HeaderBar(props) {
-    var _this;
+  var _useState = (0, _react.useState)(false),
+      isTopics = _useState[0],
+      setIsTopics = _useState[1],
+      _refBtTopics = (0, _react.useRef)(),
+      _regBtTopics = (0, _react.useCallback)(function (btNode) {
+    return _refBtTopics.current = btNode;
+  }, []),
+      _toggleTopics = (0, _react.useCallback)(function () {
+    setIsTopics(function (is) {
+      return !is;
+    });
+    (0, _utils.focusNode)(_refBtTopics.current);
+  }, []);
 
-    _this = _Component.call(this, props) || this;
+  var TS = (0, _useTheme["default"])(ID);
+  return _react["default"].createElement("div", {
+    className: CL.HEADER,
+    style: TS.ROOT
+  }, _react["default"].createElement(_ProgressLoading["default"], {
+    store: store,
+    ACTIONS: _LoadingProgressActions.T
+  }), _react["default"].createElement(_IconLogoErc["default"], {
+    className: CL.ICON,
+    title: LOGO_TITLE
+  }), _react["default"].createElement(_AppLabel["default"], {
+    className: CL.LABEL,
+    caption: CAPTION
+  }), _react["default"].createElement(ModalButton, {
+    className: CL.TOPICS,
+    rootStyle: TS.BT,
+    caption: "Topics",
+    title: "Click to open topics menu",
+    accessKey: "t",
+    onClick: _toggleTopics,
+    onReg: _regBtTopics
+  }, _react["default"].createElement("span", {
+    className: CL.ARROW
+  })), _react["default"].createElement(FlatButton, {
+    className: CL.QUANDL,
+    style: TS.BT,
+    caption: "Quandl",
+    title: "Quandl Browser",
+    accessKey: "q",
+    onClick: _BrowserActions["default"].showQuandl
+  }), _react["default"].createElement(FlatButton, {
+    className: CL.EUROSTAT,
+    style: TS.BT,
+    caption: "Eurostat",
+    title: "Eurostat Statistics Browser",
+    accessKey: "u",
+    onClick: _BrowserActions["default"].showEurostat
+  }), _react["default"].createElement(FlatButton, {
+    className: CL.WATCH,
+    style: TS.BT,
+    caption: "Watch",
+    title: "Watch List Browser",
+    accessKey: "w",
+    onClick: _BrowserActions["default"].showWatch
+  }), _react["default"].createElement(_HotBar["default"], {
+    store: store,
+    closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
+    onShowDialog: _ComponentActions["default"].showDialog
+  }), _react["default"].createElement("div", {
+    className: CL.BTS_RIGHT
+  }, _react["default"].createElement(_LimitRemainingLabel["default"], {
+    store: store
+  }), _react["default"].createElement(FlatButton, {
+    style: TS.BT,
+    isPrimary: true,
+    title: "User Settings Dialog",
+    accessKey: "s",
+    timeout: 500,
+    onClick: showSettings
+  }, _react["default"].createElement(SvgSettings, {
+    style: STYLE.SVG_BT
+  })), _react["default"].createElement(FlatButton, {
+    className: CL.ABOUT,
+    style: TS.BT,
+    title: "About Web Application ERC",
+    accessKey: "a",
+    timeout: 0,
+    onClick: _ComponentActions["default"].showAbout
+  }, _react["default"].createElement(SvgInfo, {
+    style: STYLE.SVG_BT
+  }))), _react["default"].createElement(ModalSlider, {
+    isShow: isTopics,
+    className: CL.BROWSER_MENU,
+    INIT_ID: "page_0",
+    model: MODEL,
+    onClose: _toggleTopics
+  }));
+};
 
-    _this._onRegDS = function (dsNode) {
-      _this.dsNode = dsNode;
-    };
-
-    _this._hToggleDS = function () {
-      _this.setState(function (prevState) {
-        return {
-          isDS: !prevState.isDS
-        };
-      });
-    };
-
-    _this._hDialogSettings = function () {
-      _ComponentActions["default"].showSettings(_this._settingFn);
-    };
-
-    _this._settingFn = props.store.exportSettingFn();
-    _this._hShowEconomic = _BrowserActions["default"].showBrowserDynamic.bind(null, _Type.BrowserType.QUANDL);
-    _this._hShowEurostat = _BrowserActions["default"].showBrowserDynamic.bind(null, _Type.BrowserType.EUROSTAT);
-    _this._hShowWatch = _BrowserActions["default"].showBrowserDynamic.bind(null, _Type.BrowserType.WATCH_LIST);
-    _this.state = {
-      isDS: false
-    };
-    return _this;
-  }
-
-  var _proto = HeaderBar.prototype;
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        store = _this$props.store,
-        theme = _this$props.theme,
-        isDS = this.state.isDS,
-        S = theme.getStyle(ID);
-    return _react["default"].createElement("div", {
-      className: CL.HEADER,
-      style: S.ROOT
-    }, _react["default"].createElement(_ProgressLoading["default"], {
-      store: store,
-      ACTIONS: _LoadingProgressActions.T
-    }), _react["default"].createElement(_IconLogoErc["default"], {
-      className: CL.ICON,
-      title: LOGO_TITLE
-    }), _react["default"].createElement(_AppLabel["default"], {
-      className: CL.LABEL,
-      caption: CAPTION
-    }), _react["default"].createElement(ModalButton, {
-      className: CL.TOPICS,
-      rootStyle: S.BT,
-      caption: "Topics",
-      title: "Click to open topics menu",
-      accessKey: "t",
-      onClick: this._hToggleDS,
-      onReg: this._onRegDS
-    }, _react["default"].createElement("span", {
-      className: CL.ARROW
-    })), _react["default"].createElement(FlatButton, {
-      className: CL.QUANDL,
-      style: S.BT,
-      caption: "Quandl",
-      title: "Quandl: World Economy Browser",
-      accessKey: "q",
-      onClick: this._hShowEconomic
-    }), _react["default"].createElement(FlatButton, {
-      className: CL.EUROSTAT,
-      style: S.BT,
-      caption: "Eurostat",
-      title: "Eurostat Statistics Browser",
-      accessKey: "u",
-      onClick: this._hShowEurostat
-    }), _react["default"].createElement(FlatButton, {
-      className: CL.WATCH,
-      style: S.BT,
-      caption: "Watch",
-      title: "Watch List Browser",
-      accessKey: "w",
-      onClick: this._hShowWatch
-    }), _react["default"].createElement(_HotBar["default"], {
-      store: store,
-      closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
-      onShowDialog: _ComponentActions["default"].showDialog
-    }), _react["default"].createElement("div", {
-      className: CL.BTS_RIGHT
-    }, _react["default"].createElement(_LimitRemainingLabel["default"], {
-      store: store
-    }), _react["default"].createElement(FlatButton, {
-      style: S.BT,
-      isPrimary: true,
-      title: "User Settings Dialog",
-      accessKey: "s",
-      onClick: this._hDialogSettings
-    }, _react["default"].createElement(SvgSettings, {
-      style: STYLE.SVG_BT
-    })), _react["default"].createElement(FlatButton, {
-      className: CL.ABOUT,
-      style: S.BT,
-      title: "About Web Application ERC",
-      accessKey: "a",
-      onClick: _ComponentActions["default"].showAbout
-    }, _react["default"].createElement(SvgInfo, {
-      style: STYLE.SVG_BT
-    }))), _react["default"].createElement(ModalSlider, {
-      isShow: isDS,
-      className: CL.BROWSER_MENU,
-      INIT_ID: "page_0",
-      model: MODEL,
-      onClose: this._hToggleDS
-    }));
-  };
-
-  return HeaderBar;
-}(_react.Component);
-
-var _default = (0, _withTheme["default"])(HeaderBar);
-
+var _default = HeaderBar;
 exports["default"] = _default;
 //# sourceMappingURL=HeaderBar.js.map

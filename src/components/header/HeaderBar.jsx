@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 
 import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
 import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 
-import { BrowserType as BT } from '../../constants/Type'
+import { focusNode } from '../zhn-utils/utils'
 
-import withTheme from '../hoc/withTheme'
-import C from '../Comp'
+import useTheme from '../hooks/useTheme'
+import Comp from '../Comp'
 
 import ProgressLoading from './ProgressLoading'
 import AppLabel from './AppLabel'
@@ -20,7 +20,7 @@ const {
   FlatButton, ModalButton,
   SvgSettings, SvgInfo,
   ModalSlider
-} = C;
+} = Comp;
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
     , CAPTION = "ERC v0.17.0";
@@ -55,128 +55,103 @@ const STYLE = {
 
 const MODEL = crBrowserModel();
 
-class HeaderBar extends Component {
+const HeaderBar = ({ store, showSettings }) => {
+  const [isTopics, setIsTopics] = useState(false)
+  , _refBtTopics = useRef()
+  , _regBtTopics = useCallback(btNode => _refBtTopics.current = btNode, [])
+  , _toggleTopics = useCallback(() => {
+    setIsTopics(is => !is)
+    focusNode(_refBtTopics.current)
+  }, []);
 
-  constructor(props){
-    super(props)
-    this._settingFn = props.store.exportSettingFn()
+  const TS = useTheme(ID);
 
-    this._hShowEconomic = BA.showBrowserDynamic
-      .bind(null, BT.QUANDL)
-    this._hShowEurostat = BA.showBrowserDynamic
-      .bind(null, BT.EUROSTAT)
-    this._hShowWatch = BA.showBrowserDynamic
-      .bind(null, BT.WATCH_LIST)
+  return (
+    <div className={CL.HEADER} style={TS.ROOT} >
+       <ProgressLoading store={store} ACTIONS={LPAT} />
+       <IconLogoErc
+          className={CL.ICON}
+          title={LOGO_TITLE}
+       />
+       <AppLabel
+          className={CL.LABEL}
+          caption={CAPTION}
+       />
+       <ModalButton
+           className={CL.TOPICS}
+           rootStyle={TS.BT}
+           caption="Topics"
+           title="Click to open topics menu"
+           accessKey="t"
+           onClick={_toggleTopics}
+           onReg={_regBtTopics}
+        >
+          <span className={CL.ARROW} />
+        </ModalButton>
+        <FlatButton
+          className={CL.QUANDL}
+          style={TS.BT}
+          caption="Quandl"
+          title="Quandl Browser"
+          accessKey="q"
+          onClick={BA.showQuandl}
+        />
+        <FlatButton
+          className={CL.EUROSTAT}
+          style={TS.BT}
+          caption="Eurostat"
+          title="Eurostat Statistics Browser"
+          accessKey="u"
+          onClick={BA.showEurostat}
+        />
+        <FlatButton
+           className={CL.WATCH}
+           style={TS.BT}
+           caption="Watch"
+           title="Watch List Browser"
+           accessKey="w"
+           onClick={BA.showWatch}
+        />
+        <HotBar
+          store={store}
+          closeDialogAction={CAT.CLOSE_DIALOG}
+          onShowDialog={CA.showDialog}
+        />
+        <div className={CL.BTS_RIGHT}>
+          <LimitRemainingLabel
+             store={store}
+          />
+          <FlatButton
+             style={TS.BT}
+             isPrimary={true}
+             title="User Settings Dialog"
+             accessKey="s"
+             timeout={500}
+             onClick={showSettings}
+           >
+             <SvgSettings style={STYLE.SVG_BT} />
+           </FlatButton>
+           <FlatButton
+             className={CL.ABOUT}
+             style={TS.BT}
+             title="About Web Application ERC"
+             accessKey="a"
+             timeout={0}
+             onClick={CA.showAbout}
+           >
+             <SvgInfo style={STYLE.SVG_BT} />
+           </FlatButton>
+        </div>
 
-    this.state = {
-      isDS: false
-    }
-  }
-
-  _onRegDS = (dsNode) => {
-    this.dsNode = dsNode
-  }
-
-  _hToggleDS = () => {
-    this.setState(prevState => ({
-      isDS: !prevState.isDS
-    }))
-  }
-
-  _hDialogSettings = () => {
-    CA.showSettings(this._settingFn)
-  }
-
-  render(){
-    const { store, theme } = this.props
-        , { isDS } = this.state
-        , S = theme.getStyle(ID);
-    return (
-      <div className={CL.HEADER} style={S.ROOT} >
-         <ProgressLoading store={store} ACTIONS={LPAT} />
-         <IconLogoErc
-            className={CL.ICON}
-            title={LOGO_TITLE}
+         <ModalSlider
+           isShow={isTopics}
+           className={CL.BROWSER_MENU}
+           INIT_ID="page_0"
+           model={MODEL}
+           onClose={_toggleTopics}
          />
-         <AppLabel
-            className={CL.LABEL}
-            caption={CAPTION}
-         />
-
-         <ModalButton
-             className={CL.TOPICS}
-             rootStyle={S.BT}
-             caption="Topics"
-             title="Click to open topics menu"
-             accessKey="t"
-             onClick={this._hToggleDS}
-             onReg={this._onRegDS}
-          >
-            <span className={CL.ARROW} />
-          </ModalButton>
-          <FlatButton
-            className={CL.QUANDL}
-            style={S.BT}
-            caption="Quandl"
-            title="Quandl: World Economy Browser"
-            accessKey="q"
-            onClick={this._hShowEconomic}
-          />
-          <FlatButton
-            className={CL.EUROSTAT}
-            style={S.BT}
-            caption="Eurostat"
-            title="Eurostat Statistics Browser"
-            accessKey="u"
-            onClick={this._hShowEurostat}
-          />
-          <FlatButton
-             className={CL.WATCH}
-             style={S.BT}
-             caption="Watch"
-             title="Watch List Browser"
-             accessKey="w"
-             onClick={this._hShowWatch}
-          />
-          <HotBar
-            store={store}
-            closeDialogAction={CAT.CLOSE_DIALOG}
-            onShowDialog={CA.showDialog}
-          />
-          <div className={CL.BTS_RIGHT}>
-            <LimitRemainingLabel
-               store={store}
-            />
-            <FlatButton
-               style={S.BT}
-               isPrimary={true}
-               title="User Settings Dialog"
-               accessKey="s"
-               onClick={this._hDialogSettings}
-             >
-               <SvgSettings style={STYLE.SVG_BT} />
-             </FlatButton>
-             <FlatButton
-               className={CL.ABOUT}
-               style={S.BT}
-               title="About Web Application ERC"
-               accessKey="a"
-               onClick={CA.showAbout}
-             >
-               <SvgInfo style={STYLE.SVG_BT} />
-             </FlatButton>
-          </div>
-
-           <ModalSlider
-             isShow={isDS}
-             className={CL.BROWSER_MENU}
-             INIT_ID="page_0"
-             model={MODEL}
-             onClose={this._hToggleDS}
-           />
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default withTheme(HeaderBar)
+export default HeaderBar

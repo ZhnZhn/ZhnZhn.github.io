@@ -22,6 +22,9 @@ import checkBuild from './checkBuild'
 const BUILD_DATE = '15-05-2020';
 const CL = "component-container"
 
+const showSettings = CA.showSettings
+ .bind(null, ChartStore.exportSettingFn())
+
 class AppErc extends Component {
   state = {
     theme: initTheme
@@ -50,7 +53,7 @@ class AppErc extends Component {
     const { theme } = this.state;
     return (
       <ThemeContext.Provider value={theme}>
-        <HeaderBar store={ChartStore} />
+        <HeaderBar store={ChartStore} showSettings={showSettings} />
         <div className={CL}>
            <BrowserContainer
               store={ChartStore}
