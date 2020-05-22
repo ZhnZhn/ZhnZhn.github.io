@@ -3,6 +3,7 @@ import Reflux from 'reflux-core';
 import Store from '../stores/ChartStore'
 import Factory from '../logic/Factory'
 import BrowserConfig from '../../constants/BrowserConfig'
+import { BrowserType as BT } from '../../constants/Type'
 import RouterModalDialog from '../../components/dialogs/RouterModalDialog'
 import RouterDialog from '../logic/RouterDialog'
 
@@ -20,7 +21,7 @@ export const BrowserActionTypes = {
 };
 const A = BrowserActionTypes;
 
-const BrowserActions = Reflux.createActions({
+const BA = Reflux.createActions({
   [A.SHOW_BROWSER_DYNAMIC]: {
     children: ['done', 'init', 'failed']
   },
@@ -45,7 +46,7 @@ const _crErr = (alertDescr, alertItemId) => ({
   alertDescr, alertItemId
 });
 
-BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function(option={}){
+BA[A.SHOW_BROWSER_DYNAMIC].listen(function(option={}){
   const _option = typeof option === 'string'
            ? { browserType: option }
            : option
@@ -72,7 +73,7 @@ BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function(option={}){
   }
 })
 
-BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function(option){
+BA[A.LOAD_BROWSER_DYNAMIC].listen(function(option){
   fetchJson({
     uri: option.sourceMenuUrl,
     option: option,
@@ -83,5 +84,10 @@ BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function(option){
   })
 })
 
+const _show = BA.showBrowserDynamic;
+BA.showQuandl = _show.bind(null, BT.QUANDL)
+BA.showEurostat = _show.bind(null, BT.EUROSTAT)
+BA.showWatch = _show.bind(null, BT.WATCH_LIST)
 
-export default BrowserActions
+
+export default BA

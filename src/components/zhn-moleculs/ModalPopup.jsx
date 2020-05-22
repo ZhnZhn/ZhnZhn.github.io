@@ -1,17 +1,16 @@
 import React from 'react'
 
+import useTheme from '../hooks/useTheme'
 import ShowHide from '../zhn/ShowHide'
 import ModalPane from './ModalPane'
-
-import withTheme from '../hoc/withTheme'
 
 const TH_ID = 'ELEMENT'
 
 const ModalPopup = ({
-  theme,
-  isShow, className, style, children, onClose
+  isShow, className, style,
+  children, onClose
 }) => {
-  const TS = theme.getStyle(TH_ID);
+  const TS = useTheme(TH_ID);
   return (
     <ModalPane
       isShow={isShow}
@@ -28,4 +27,4 @@ const ModalPopup = ({
   );
 };
 
-export default withTheme(ModalPopup)
+export default ModalPopup

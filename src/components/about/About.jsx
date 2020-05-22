@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import useListen from '../hooks/useListen'
-import useTheme from '../hooks/useTheme'
+import use from '../hooks/use'
 
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
@@ -17,6 +16,8 @@ import LogosBar from './LogosBar';
 
 import C from '../styles/Color';
 import S from './About.Style';
+
+const { useListen, useTheme } = use
 
 const TH_ID = 'ABOUT';
 

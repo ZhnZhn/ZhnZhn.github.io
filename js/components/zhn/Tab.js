@@ -9,7 +9,7 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _react = _interopRequireDefault(require("react"));
 
-var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 //import PropTypes from "prop-types";
 var TH_ID = 'ELEMENT';
@@ -41,13 +41,12 @@ var S = {
 };
 
 var Tab = function Tab(_ref) {
-  var theme = _ref.theme,
+  var isSelected = _ref.isSelected,
       title = _ref.title,
-      isSelected = _ref.isSelected,
       onClick = _ref.onClick;
-  var TS = theme.getStyle(TH_ID);
 
-  var _selectedStyle = isSelected ? S.SELECTED : null;
+  var TS = (0, _useTheme["default"])(TH_ID),
+      _selectedStyle = isSelected ? S.SELECTED : null;
 
   return _react["default"].createElement("li", {
     style: (0, _extends2["default"])({}, S.LI, {}, TS.BG, {}, _selectedStyle),
@@ -63,7 +62,6 @@ Tab.propTypes = {
 */
 
 
-var _default = (0, _withTheme["default"])(Tab);
-
+var _default = Tab;
 exports["default"] = _default;
 //# sourceMappingURL=Tab.js.map

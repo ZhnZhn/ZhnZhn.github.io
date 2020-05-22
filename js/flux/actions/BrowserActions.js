@@ -15,6 +15,8 @@ var _Factory = _interopRequireDefault(require("../logic/Factory"));
 
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 
+var _Type = require("../../constants/Type");
+
 var _RouterModalDialog = _interopRequireDefault(require("../../components/dialogs/RouterModalDialog"));
 
 var _RouterDialog = _interopRequireDefault(require("../logic/RouterDialog"));
@@ -35,7 +37,7 @@ var BrowserActionTypes = {
 exports.BrowserActionTypes = BrowserActionTypes;
 var A = BrowserActionTypes;
 
-var BrowserActions = _refluxCore["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.SHOW_BROWSER_DYNAMIC] = {
+var BA = _refluxCore["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.SHOW_BROWSER_DYNAMIC] = {
   children: ['done', 'init', 'failed']
 }, _Reflux$createActions[A.INIT_BROWSER_DYNAMIC] = {}, _Reflux$createActions[A.LOAD_BROWSER_DYNAMIC] = {
   children: ['completed', 'failed']
@@ -65,7 +67,7 @@ var _crErr = function _crErr(alertDescr, alertItemId) {
   };
 };
 
-BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function (option) {
+BA[A.SHOW_BROWSER_DYNAMIC].listen(function (option) {
   var _this = this;
 
   if (option === void 0) {
@@ -94,7 +96,7 @@ BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function (option) {
     this.failed((0, _extends2["default"])({}, _option, {}, _crErr(ERR.FOUND, ERR.ITEM)));
   }
 });
-BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {
+BA[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {
   (0, _fnFetch.fetchJson)({
     uri: option.sourceMenuUrl,
     option: option,
@@ -104,6 +106,10 @@ BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {
     onFailed: this.failed
   });
 });
-var _default = BrowserActions;
+var _show = BA.showBrowserDynamic;
+BA.showQuandl = _show.bind(null, _Type.BrowserType.QUANDL);
+BA.showEurostat = _show.bind(null, _Type.BrowserType.EUROSTAT);
+BA.showWatch = _show.bind(null, _Type.BrowserType.WATCH_LIST);
+var _default = BA;
 exports["default"] = _default;
 //# sourceMappingURL=BrowserActions.js.map

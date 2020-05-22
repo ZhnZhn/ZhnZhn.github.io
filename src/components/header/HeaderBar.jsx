@@ -1,12 +1,10 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React from 'react'
 
 import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
 import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 
-import { focusNode } from '../zhn-utils/utils'
-
-import useTheme from '../hooks/useTheme'
+import use from '../hooks/use'
 import Comp from '../Comp'
 
 import ProgressLoading from './ProgressLoading'
@@ -21,6 +19,8 @@ const {
   SvgSettings, SvgInfo,
   ModalSlider
 } = Comp;
+
+const { useTheme, useToggle, useFnFocus } = use;
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
     , CAPTION = "ERC v0.17.0";
@@ -56,15 +56,9 @@ const STYLE = {
 const MODEL = crBrowserModel();
 
 const HeaderBar = ({ store, showSettings }) => {
-  const [isTopics, setIsTopics] = useState(false)
-  , _refBtTopics = useRef()
-  , _regBtTopics = useCallback(btNode => _refBtTopics.current = btNode, [])
-  , _toggleTopics = useCallback(() => {
-    setIsTopics(is => !is)
-    focusNode(_refBtTopics.current)
-  }, []);
-
-  const TS = useTheme(ID);
+  const [isTopics, toggleTopics] = useToggle(false)
+  , [refBt, _toggleTopics] = useFnFocus(toggleTopics)
+  , TS = useTheme(ID);
 
   return (
     <div className={CL.HEADER} style={TS.ROOT} >
@@ -78,13 +72,13 @@ const HeaderBar = ({ store, showSettings }) => {
           caption={CAPTION}
        />
        <ModalButton
+           refBt={refBt}
            className={CL.TOPICS}
            rootStyle={TS.BT}
            caption="Topics"
            title="Click to open topics menu"
            accessKey="t"
            onClick={_toggleTopics}
-           onReg={_regBtTopics}
         >
           <span className={CL.ARROW} />
         </ModalButton>
@@ -142,7 +136,6 @@ const HeaderBar = ({ store, showSettings }) => {
              <SvgInfo style={STYLE.SVG_BT} />
            </FlatButton>
         </div>
-
          <ModalSlider
            isShow={isTopics}
            className={CL.BROWSER_MENU}

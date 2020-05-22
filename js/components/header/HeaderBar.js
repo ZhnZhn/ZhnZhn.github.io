@@ -1,13 +1,13 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _ComponentActions = _interopRequireWildcard(require("../../flux/actions/ComponentActions"));
 
@@ -15,9 +15,7 @@ var _BrowserActions = _interopRequireDefault(require("../../flux/actions/Browser
 
 var _LoadingProgressActions = require("../../flux/actions/LoadingProgressActions");
 
-var _utils = require("../zhn-utils/utils");
-
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
+var _use = _interopRequireDefault(require("../hooks/use"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -38,6 +36,9 @@ var FlatButton = _Comp["default"].FlatButton,
     SvgSettings = _Comp["default"].SvgSettings,
     SvgInfo = _Comp["default"].SvgInfo,
     ModalSlider = _Comp["default"].ModalSlider;
+var useTheme = _use["default"].useTheme,
+    useToggle = _use["default"].useToggle,
+    useFnFocus = _use["default"].useFnFocus;
 var LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
     CAPTION = "ERC v0.17.0";
 var ID = 'HEADER_BAR';
@@ -70,21 +71,14 @@ var HeaderBar = function HeaderBar(_ref) {
   var store = _ref.store,
       showSettings = _ref.showSettings;
 
-  var _useState = (0, _react.useState)(false),
-      isTopics = _useState[0],
-      setIsTopics = _useState[1],
-      _refBtTopics = (0, _react.useRef)(),
-      _regBtTopics = (0, _react.useCallback)(function (btNode) {
-    return _refBtTopics.current = btNode;
-  }, []),
-      _toggleTopics = (0, _react.useCallback)(function () {
-    setIsTopics(function (is) {
-      return !is;
-    });
-    (0, _utils.focusNode)(_refBtTopics.current);
-  }, []);
+  var _useToggle = useToggle(false),
+      isTopics = _useToggle[0],
+      toggleTopics = _useToggle[1],
+      _useFnFocus = useFnFocus(toggleTopics),
+      refBt = _useFnFocus[0],
+      _toggleTopics = _useFnFocus[1],
+      TS = useTheme(ID);
 
-  var TS = (0, _useTheme["default"])(ID);
   return _react["default"].createElement("div", {
     className: CL.HEADER,
     style: TS.ROOT
@@ -98,13 +92,13 @@ var HeaderBar = function HeaderBar(_ref) {
     className: CL.LABEL,
     caption: CAPTION
   }), _react["default"].createElement(ModalButton, {
+    refBt: refBt,
     className: CL.TOPICS,
     rootStyle: TS.BT,
     caption: "Topics",
     title: "Click to open topics menu",
     accessKey: "t",
-    onClick: _toggleTopics,
-    onReg: _regBtTopics
+    onClick: _toggleTopics
   }, _react["default"].createElement("span", {
     className: CL.ARROW
   })), _react["default"].createElement(FlatButton, {

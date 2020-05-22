@@ -6,7 +6,8 @@
  "file": "../../../src/components/zhn-moleculs/A.js",
  "names": [
   "A",
+  "DraggableDialog",
   "ModalDialog"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,WAAW,EAAXA;AADQ,CAAV;eAIeD,C"
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,eAAe,EAAfA,2BADQ;AAERC,EAAAA,WAAW,EAAXA;AAFQ,CAAV;eAKeF,C"
 }

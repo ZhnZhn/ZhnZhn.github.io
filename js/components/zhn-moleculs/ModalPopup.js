@@ -9,22 +9,21 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _react = _interopRequireDefault(require("react"));
 
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
+
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _ModalPane = _interopRequireDefault(require("./ModalPane"));
 
-var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
-
 var TH_ID = 'ELEMENT';
 
 var ModalPopup = function ModalPopup(_ref) {
-  var theme = _ref.theme,
-      isShow = _ref.isShow,
+  var isShow = _ref.isShow,
       className = _ref.className,
       style = _ref.style,
       children = _ref.children,
       onClose = _ref.onClose;
-  var TS = theme.getStyle(TH_ID);
+  var TS = (0, _useTheme["default"])(TH_ID);
   return _react["default"].createElement(_ModalPane["default"], {
     isShow: isShow,
     onClose: onClose
@@ -35,7 +34,6 @@ var ModalPopup = function ModalPopup(_ref) {
   }, children));
 };
 
-var _default = (0, _withTheme["default"])(ModalPopup);
-
+var _default = ModalPopup;
 exports["default"] = _default;
 //# sourceMappingURL=ModalPopup.js.map

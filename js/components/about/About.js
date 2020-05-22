@@ -11,9 +11,7 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
+var _use = _interopRequireDefault(require("../hooks/use"));
 
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 
@@ -37,6 +35,8 @@ var _Color = _interopRequireDefault(require("../styles/Color"));
 
 var _About = _interopRequireDefault(require("./About.Style"));
 
+var useListen = _use["default"].useListen,
+    useTheme = _use["default"].useTheme;
 var TH_ID = 'ABOUT';
 var CL = {
   ABOUT: 'about-container',
@@ -66,7 +66,7 @@ var About = function About(_ref) {
     return setIsShow(false);
   }, []);
 
-  (0, _useListen["default"])(store, function (actionType) {
+  useListen(store, function (actionType) {
     if (actionType === _ComponentActions.ComponentActionTypes.SHOW_ABOUT) {
       setIsShow(true);
     } else if (actionType === _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART || actionType === _ChartActions.ChartActionTypes.SHOW_CHART) {
@@ -74,7 +74,7 @@ var About = function About(_ref) {
     }
   });
 
-  var TS = (0, _useTheme["default"])(TH_ID),
+  var TS = useTheme(TH_ID),
       _cn = isShow ? CL.ABOUT + " " + CL.SHOW : CL.ABOUT,
       _style = isShow ? _About["default"].BLOCK : _About["default"].NONE;
 
