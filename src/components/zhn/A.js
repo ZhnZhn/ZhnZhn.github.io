@@ -9,13 +9,15 @@ import ButtonCircle from './ButtonCircle'
 import ButtonTab from './ButtonTab'
 import DivHtml from './DivHtml'
 import InfoPart from './InfoPart'
-import InputText from './InputText';
+import InputText from './InputText'
 import Load from './Load'
-import OpenClose from './OpenClose';
-import OpenClose2 from './OpenClose2';
-import ShowHide from './ShowHide';
-import SvgPlus from './SvgPlus';
-import SvgMinus from './SvgMinus';
+import OpenClose from './OpenClose'
+import OpenClose2 from './OpenClose2'
+import ShowHide from './ShowHide'
+import SvgCheckBox from './SvgCheckBox'
+import SvgPlus from './SvgPlus'
+import SvgMinus from './SvgMinus'
+import SvgMore from './SvgMore'
 import SvgClose from './SvgClose'
 import TabPane from './TabPane'
 import Tab from './Tab'
@@ -38,8 +40,10 @@ const A = {
   OpenClose,
   OpenClose2,
   ShowHide,
+  SvgCheckBox,
   SvgPlus,
   SvgMinus,
+  SvgMore,
   SvgClose,
   TabPane,
   Tab,

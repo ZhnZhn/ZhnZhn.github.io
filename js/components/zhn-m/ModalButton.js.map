@@ -1,1 +1,27 @@
-{"version":3,"sources":["../../../src/components/zhn-m/ModalButton.jsx"],"names":["CL","BT","BT_DIV","BT_SPAN","ModalButton","_refNode","n","rootNode","componentDidMount","onReg","props","render","className","rootStyle","clDiv","title","caption","accessKey","children","onClick","_className","trim","_title","Component"],"mappings":";;;;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,EAAE,EAAE,SADK;AAETC,EAAAA,MAAM,EAAE,cAFC;AAGTC,EAAAA,OAAO,EAAE;AAHA,CAAX;;IAMMC,W;;;;;;;;;;;;;;UASJC,Q,GAAW,UAAAC,CAAC;AAAA,aAAI,MAAKC,QAAL,GAAgBD,CAApB;AAAA,K;;;;;;;SAPZE,iB,GAAA,6BAAmB;AAAA,QACTC,KADS,GACC,KAAKC,KADN,CACTD,KADS;;AAEjB,QAAI,OAAOA,KAAP,KAAiB,UAArB,EAAgC;AAC9BA,MAAAA,KAAK,CAAC,KAAKF,QAAN,CAAL;AACD;AACF,G;;SAIDI,M,GAAA,kBAAQ;AAAA,sBAQI,KAAKD,KART;AAAA,4CAEEE,SAFF;AAAA,QAEEA,SAFF,sCAEY,EAFZ;AAAA,QAEgBC,SAFhB,eAEgBA,SAFhB;AAAA,wCAGEC,KAHF;AAAA,QAGEA,KAHF,kCAGQd,EAAE,CAACE,MAHX;AAAA,wCAIEa,KAJF;AAAA,QAIEA,KAJF,kCAIQ,EAJR;AAAA,QAIYC,OAJZ,eAIYA,OAJZ;AAAA,QAKEC,SALF,eAKEA,SALF;AAAA,QAMEC,QANF,eAMEA,QANF;AAAA,QAOEC,OAPF,eAOEA,OAPF;AAAA,QASEC,UATF,GASe,CAACpB,EAAE,CAACC,EAAH,GAAQ,GAAR,GAAcW,SAAf,EAA0BS,IAA1B,EATf;AAAA,QAUEC,MAVF,GAUWL,SAAS,GACXF,KADW,UACDE,SADC,SAEdF,KAZN;;AAaN,WACE;AACE,MAAA,IAAI,EAAC,QADP;AAEE,MAAA,GAAG,EAAE,KAAKV,QAFZ;AAGE,MAAA,SAAS,EAAEe,UAHb;AAIE,MAAA,KAAK,EAAEP,SAJT;AAKE,MAAA,SAAS,EAAEI,SALb;AAME,MAAA,KAAK,EAAEK,MANT;AAOE,MAAA,QAAQ,EAAE,CAPZ;AAQE,MAAA,OAAO,EAAEH;AARX,OAUE;AAAK,MAAA,SAAS,EAAEL;AAAhB,OACE,gCAAC,wBAAD;AACE,MAAA,SAAS,EAAEd,EAAE,CAACG,OADhB;AAEE,MAAA,OAAO,EAAEa,OAFX;AAGE,MAAA,SAAS,EAAEC;AAHb,OAKIC,QALJ,CADF,CAVF,CADF;AAsBD,G;;;EA9CuBK,gB;;eAiDXnB,W","sourcesContent":["import React, { Component } from 'react'\r\n\r\nimport CaptionInput from './CaptionInput'\r\n\r\nconst CL = {\r\n  BT: 'bt-flat',\r\n  BT_DIV: 'bt-flat__div',\r\n  BT_SPAN: 'bt-flat__span'\r\n};\r\n\r\nclass ModalButton extends Component {\r\n  \r\n  componentDidMount(){\r\n    const { onReg } = this.props;\r\n    if (typeof onReg === 'function'){\r\n      onReg(this.rootNode)\r\n    }\r\n  }\r\n\r\n  _refNode = n => this.rootNode = n\r\n\r\n  render(){\r\n    const {\r\n            className='', rootStyle,\r\n            clDiv=CL.BT_DIV,\r\n            title='', caption,\r\n            accessKey,\r\n            children,\r\n            onClick\r\n          } = this.props\r\n          , _className = (CL.BT + ' ' + className).trim()\r\n          , _title = accessKey\r\n              ? `${title} [${accessKey}]`\r\n              : title;\r\n    return (\r\n      <button\r\n        type=\"button\"\r\n        ref={this._refNode}\r\n        className={_className}\r\n        style={rootStyle}\r\n        accessKey={accessKey}\r\n        title={_title}\r\n        tabIndex={0}\r\n        onClick={onClick}\r\n      >\r\n        <div className={clDiv}>\r\n          <CaptionInput\r\n            className={CL.BT_SPAN}\r\n            caption={caption}\r\n            accessKey={accessKey}\r\n          >\r\n             {children}\r\n          </CaptionInput>\r\n        </div>\r\n      </button>\r\n    );\r\n  }\r\n}\r\n\r\nexport default ModalButton\r\n"],"file":"ModalButton.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-m/ModalButton.js"
+ ],
+ "file": "../../../src/components/zhn-m/ModalButton.js",
+ "names": [
+  "CL",
+  "BT",
+  "BT_DIV",
+  "BT_SPAN",
+  "ModalButton",
+  "refBt",
+  "className",
+  "rootStyle",
+  "clDiv",
+  "title",
+  "caption",
+  "accessKey",
+  "children",
+  "onClick",
+  "_className",
+  "trim",
+  "_title"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,EAAE,EAAE,SADK;AAETC,EAAAA,MAAM,EAAE,cAFC;AAGTC,EAAAA,OAAO,EAAE;AAHA,CAAX;;AAMA,IAAMC,WAAW,GAAG,SAAdA,WAAc,OAQd;AAAA,MAPJC,KAOI,QAPJA,KAOI;AAAA,4BANJC,SAMI;AAAA,MANJA,SAMI,+BANM,EAMN;AAAA,MANUC,SAMV,QANUA,SAMV;AAAA,wBALJC,KAKI;AAAA,MALJA,KAKI,2BALER,EAAE,CAACE,MAKL;AAAA,wBAJJO,KAII;AAAA,MAJJA,KAII,2BAJE,EAIF;AAAA,MAJMC,OAIN,QAJMA,OAIN;AAAA,MAHJC,SAGI,QAHJA,SAGI;AAAA,MAFJC,QAEI,QAFJA,QAEI;AAAA,MADJC,OACI,QADJA,OACI;;AACJ,MAAMC,UAAU,GAAG,CAACd,EAAE,CAACC,EAAH,GAAQ,GAAR,GAAcK,SAAf,EAA0BS,IAA1B,EAAnB;AAAA,MACEC,MAAM,GAAGL,SAAS,GACXF,KADW,UACDE,SADC,SAEdF,KAHN;;AAIA,SACE;AACE,IAAA,GAAG,EAAEJ,KADP;AAEE,IAAA,IAAI,EAAC,QAFP;AAGE,IAAA,SAAS,EAAES,UAHb;AAIE,IAAA,KAAK,EAAEP,SAJT;AAKE,IAAA,SAAS,EAAEI,SALb;AAME,IAAA,KAAK,EAAEK,MANT;AAOE,IAAA,QAAQ,EAAE,CAPZ;AAQE,IAAA,OAAO,EAAEH;AARX,KAUE;AAAK,IAAA,SAAS,EAAEL;AAAhB,KACE,gCAAC,wBAAD;AACE,IAAA,SAAS,EAAER,EAAE,CAACG,OADhB;AAEE,IAAA,OAAO,EAAEO,OAFX;AAGE,IAAA,SAAS,EAAEC;AAHb,KAKIC,QALJ,CADF,CAVF,CADF;AAsBD,CAnCD;;eAqCeR,W"
+}

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,23 +7,23 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+var _react = _interopRequireDefault(require("react"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
-
-var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
-
-var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
-
-var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
-
-var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ValueMovingBadge = _interopRequireDefault(require("./ValueMovingBadge"));
 
 //import PropTypes from "prop-types";
+var SvgMore = _Comp["default"].SvgMore,
+    ModalSlider = _Comp["default"].ModalSlider,
+    SvgCheckBox = _Comp["default"].SvgCheckBox,
+    SvgClose = _Comp["default"].SvgClose;
+var crStyle = _use["default"].crStyle,
+    useTheme = _use["default"].useTheme,
+    useToggle = _use["default"].useToggle,
+    useFnFocus = _use["default"].useFnFocus;
 var TH_ID = 'ELEMENT';
 var CL = 'not-selected shadow-right',
     CL_MORE = "popup-menu charts__menu-more";
@@ -88,109 +86,87 @@ var S = {
 
 var ItemTime = function ItemTime(_ref) {
   var itemTime = _ref.itemTime;
-  if (!itemTime) return null;
-  return _react["default"].createElement("span", {
+  return !itemTime ? null : _react["default"].createElement("span", {
     style: S.TIME
   }, itemTime);
 };
 
-var Header =
-/*#__PURE__*/
-function (_Component) {
-  (0, _inheritsLoose2["default"])(Header, _Component);
+var MenuMore = function MenuMore(_ref2) {
+  var isMore = _ref2.isMore,
+      moreModel = _ref2.moreModel,
+      sliderStyle = _ref2.sliderStyle,
+      onToggle = _ref2.onToggle;
 
-  function Header() {
-    var _this;
+  var _useFnFocus = useFnFocus(onToggle),
+      refBtSvg = _useFnFocus[0],
+      toggleFocus = _useFnFocus[1];
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+  if (!moreModel) return null;
+  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(SvgMore, {
+    style: S.BT_MORE,
+    svgStyle: S.SVG_MORE,
+    btRef: refBtSvg,
+    onClick: onToggle
+  }), _react["default"].createElement(ModalSlider, {
+    isShow: isMore,
+    rootStyle: S.ROOT_MORE,
+    className: CL_MORE,
+    style: sliderStyle,
+    model: moreModel,
+    onClose: toggleFocus
+  }));
+};
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      isMore: false
-    };
+var Header = function Header(_ref3) {
+  var isOpen = _ref3.isOpen,
+      onCheck = _ref3.onCheck,
+      onUnCheck = _ref3.onUnCheck,
+      itemCaption = _ref3.itemCaption,
+      itemTitle = _ref3.itemTitle,
+      itemTime = _ref3.itemTime,
+      onToggle = _ref3.onToggle,
+      valueMoving = _ref3.valueMoving,
+      isAdminMode = _ref3.isAdminMode,
+      crValueMoving = _ref3.crValueMoving,
+      regCompVm = _ref3.regCompVm,
+      moreModel = _ref3.moreModel,
+      onClose = _ref3.onClose;
 
-    _this._toggleMore = function () {
-      _this.setState(function (prevState) {
-        return {
-          isMore: !prevState.isMore
-        };
-      });
-    };
+  var _useToggle = useToggle(false),
+      isMore = _useToggle[0],
+      _toggleMore = _useToggle[1],
+      TS = useTheme(TH_ID),
+      _captionStyle = crStyle([S.CAPTION_OPEN, !isOpen && S.CAPTION_CLOSE, !valueMoving && S.CAPTION_WIDTH]);
 
-    _this._renderMore = function (moreModel, TS) {
-      if (!moreModel) {
-        return null;
-      }
-
-      var isMore = _this.state.isMore;
-      return _react["default"].createElement(_react.Fragment, null, _react["default"].createElement(_SvgMore["default"], {
-        style: S.BT_MORE,
-        svgStyle: S.SVG_MORE,
-        onClick: _this._toggleMore
-      }), _react["default"].createElement(_ModalSlider["default"], {
-        isShow: isMore,
-        rootStyle: S.ROOT_MORE,
-        className: CL_MORE,
-        style: TS.BORDER,
-        model: moreModel,
-        onClose: _this._toggleMore
-      }));
-    };
-
-    return _this;
-  }
-
-  var _proto = Header.prototype;
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        theme = _this$props.theme,
-        isOpen = _this$props.isOpen,
-        onCheck = _this$props.onCheck,
-        onUnCheck = _this$props.onUnCheck,
-        itemCaption = _this$props.itemCaption,
-        itemTitle = _this$props.itemTitle,
-        itemTime = _this$props.itemTime,
-        onToggle = _this$props.onToggle,
-        valueMoving = _this$props.valueMoving,
-        isAdminMode = _this$props.isAdminMode,
-        crValueMoving = _this$props.crValueMoving,
-        regCompVm = _this$props.regCompVm,
-        moreModel = _this$props.moreModel,
-        onClose = _this$props.onClose,
-        TS = theme.getStyle(TH_ID),
-        _openStyle = isOpen ? S.CAPTION_OPEN : (0, _extends2["default"])({}, S.CAPTION_OPEN, {}, S.CAPTION_CLOSE),
-        _captionStyle = valueMoving ? _openStyle : (0, _extends2["default"])({}, _openStyle, {}, S.CAPTION_WIDTH);
-
-    return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.ROOT, {}, TS.ROOT)
-    }, this._renderMore(moreModel, TS), _react["default"].createElement(_SvgCheckBox["default"], {
-      initValue: false,
-      style: S.CHECK_BOX,
-      onCheck: onCheck,
-      onUnCheck: onUnCheck
-    }), _react["default"].createElement("button", {
-      className: CL,
-      title: itemTitle,
-      style: _captionStyle,
-      onClick: onToggle
-    }, itemCaption), valueMoving ? _react["default"].createElement(_ValueMovingBadge["default"], {
-      valueMoving: valueMoving,
-      isAdminMode: isAdminMode,
-      crValueMoving: crValueMoving,
-      regCompVm: regCompVm
-    }) : _react["default"].createElement(ItemTime, {
-      itemType: itemTime
-    }), _react["default"].createElement(_SvgClose["default"], {
-      style: S.CLOSE,
-      onClose: onClose
-    }));
-  };
-
-  return Header;
-}(_react.Component);
+  return _react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, S.ROOT, {}, TS.ROOT)
+  }, _react["default"].createElement(MenuMore, {
+    isMore: isMore,
+    moreModel: moreModel,
+    sliderStyle: TS.BORDER,
+    onToggle: _toggleMore
+  }), _react["default"].createElement(SvgCheckBox, {
+    initValue: false,
+    style: S.CHECK_BOX,
+    onCheck: onCheck,
+    onUnCheck: onUnCheck
+  }), _react["default"].createElement("button", {
+    className: CL,
+    title: itemTitle,
+    style: _captionStyle,
+    onClick: onToggle
+  }, itemCaption), valueMoving ? _react["default"].createElement(_ValueMovingBadge["default"], {
+    valueMoving: valueMoving,
+    isAdminMode: isAdminMode,
+    crValueMoving: crValueMoving,
+    regCompVm: regCompVm
+  }) : _react["default"].createElement(ItemTime, {
+    itemType: itemTime
+  }), _react["default"].createElement(SvgClose, {
+    style: S.CLOSE,
+    onClose: onClose
+  }));
+};
 /*
 Header.propTypes = {
   isOpen : PropTypes.bool.isRequired,
@@ -213,7 +189,6 @@ Header.propTypes = {
 */
 
 
-var _default = (0, _withTheme["default"])(Header);
-
+var _default = Header;
 exports["default"] = _default;
 //# sourceMappingURL=Header.js.map

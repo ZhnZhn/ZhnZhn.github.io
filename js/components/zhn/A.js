@@ -37,9 +37,13 @@ var _OpenClose2 = _interopRequireDefault(require("./OpenClose2"));
 
 var _ShowHide = _interopRequireDefault(require("./ShowHide"));
 
+var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
+
 var _SvgPlus = _interopRequireDefault(require("./SvgPlus"));
 
 var _SvgMinus = _interopRequireDefault(require("./SvgMinus"));
+
+var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 
 var _SvgClose = _interopRequireDefault(require("./SvgClose"));
 
@@ -66,8 +70,10 @@ var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   OpenClose: _OpenClose["default"],
   OpenClose2: _OpenClose2["default"],
   ShowHide: _ShowHide["default"],
+  SvgCheckBox: _SvgCheckBox["default"],
   SvgPlus: _SvgPlus["default"],
   SvgMinus: _SvgMinus["default"],
+  SvgMore: _SvgMore["default"],
   SvgClose: _SvgClose["default"],
   TabPane: _TabPane["default"],
   Tab: _Tab["default"],

@@ -1,14 +1,21 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 //import PropTypes from "prop-types";
 
-import withTheme from '../hoc/withTheme'
-
-import SvgMore from '../zhn/SvgMore'
-import ModalSlider from '../zhn-modal-slider/ModalSlider'
-
-import SvgCheckBox from '../zhn/SvgCheckBox';
-import SvgClose from '../zhn/SvgClose';
+import use from '../hooks/use'
+import Comp from '../Comp'
 import ValueMovingBadge from './ValueMovingBadge';
+
+const {
+  SvgMore,
+  ModalSlider,
+  SvgCheckBox,
+  SvgClose
+} = Comp;
+
+const {
+  crStyle,
+  useTheme, useToggle, useFnFocus
+} = use;
 
 const TH_ID = 'ELEMENT';
 
@@ -72,102 +79,95 @@ const S = {
   }
 };
 
-const ItemTime = ({ itemTime }) => {
-  if (!itemTime) return null;
-  return (
-    <span style={S.TIME}>
+const ItemTime = ({ itemTime }) => !itemTime
+  ? null
+  : (<span style={S.TIME}>
       {itemTime}
-    </span>
+     </span>
+    );
+
+
+const MenuMore = ({
+  isMore, moreModel,
+  sliderStyle, onToggle
+}) => {
+  const [refBtSvg, toggleFocus] = useFnFocus(onToggle);
+
+  if (!moreModel) return null;
+  return (<>
+      <SvgMore
+        style={S.BT_MORE}
+        svgStyle={S.SVG_MORE}
+        btRef={refBtSvg}
+        onClick={onToggle}
+      />
+      <ModalSlider
+        isShow={isMore}
+        rootStyle={S.ROOT_MORE}
+        className={CL_MORE}
+        style={sliderStyle}
+        model={moreModel}
+        onClose={toggleFocus}
+      />
+    </>);
+  }
+
+const Header = ({
+  isOpen,
+  onCheck, onUnCheck,
+  itemCaption, itemTitle, itemTime, onToggle,
+  valueMoving, isAdminMode, crValueMoving, regCompVm,
+  moreModel,
+  onClose
+}) => {
+  const [isMore, _toggleMore] = useToggle(false)
+  , TS = useTheme(TH_ID)
+  , _captionStyle = crStyle([
+     S.CAPTION_OPEN,
+     !isOpen && S.CAPTION_CLOSE,
+     !valueMoving && S.CAPTION_WIDTH
+  ]);
+
+  return (
+    <div style={{...S.ROOT, ...TS.ROOT }}>
+      <MenuMore
+        isMore={isMore}
+        moreModel={moreModel}
+        sliderStyle={TS.BORDER}
+        onToggle={_toggleMore}
+      />
+      <SvgCheckBox
+         initValue={false}
+         style={S.CHECK_BOX}
+         onCheck={onCheck}
+         onUnCheck={onUnCheck}
+      />
+      <button
+         className={CL}
+         title={itemTitle}
+         style={_captionStyle}
+         onClick={onToggle}
+      >
+         {itemCaption}
+      </button>
+      {
+        valueMoving
+          ? <ValueMovingBadge
+              valueMoving={valueMoving}
+              isAdminMode={isAdminMode}
+              crValueMoving={crValueMoving}
+              regCompVm={regCompVm}
+            />
+          : <ItemTime
+              itemType={itemTime}
+            />
+      }
+      <SvgClose
+        style={S.CLOSE}
+        onClose={onClose}
+      />
+    </div>
   );
-};
-
-
-class Header extends Component {
-  state = {
-    isMore: false
-  }
-
-  _toggleMore = () => {
-    this.setState(prevState => ({
-      isMore: !prevState.isMore
-    }))
-  }
-
-  _renderMore = (moreModel, TS) => {
-    if (!moreModel) { return null; }
-    const { isMore } = this.state;
-    return (
-      <Fragment>
-        <SvgMore
-          style={S.BT_MORE}
-          svgStyle={S.SVG_MORE}
-          onClick={this._toggleMore}
-        />
-        <ModalSlider
-          isShow={isMore}
-          rootStyle={S.ROOT_MORE}
-          className={CL_MORE}
-          style={TS.BORDER}
-          model={moreModel}
-          onClose={this._toggleMore}
-        />
-      </Fragment>
-    );
-  }
-
-  render() {
-    const {
-        theme,
-        isOpen,
-        onCheck, onUnCheck,
-        itemCaption, itemTitle, itemTime, onToggle,
-        valueMoving, isAdminMode, crValueMoving, regCompVm,
-        moreModel,
-        onClose
-      } = this.props
-    , TS = theme.getStyle(TH_ID)
-    , _openStyle = isOpen
-         ? S.CAPTION_OPEN
-         : { ...S.CAPTION_OPEN, ...S.CAPTION_CLOSE }
-    , _captionStyle = valueMoving
-         ? _openStyle
-         : { ..._openStyle, ...S.CAPTION_WIDTH };
-    return (
-      <div style={{...S.ROOT, ...TS.ROOT }}>
-        { this._renderMore(moreModel, TS) }
-        <SvgCheckBox
-           initValue={false}
-           style={S.CHECK_BOX}
-           onCheck={onCheck}
-           onUnCheck={onUnCheck}
-        />
-        <button
-           className={CL}
-           title={itemTitle}
-           style={_captionStyle}
-           onClick={onToggle}
-        >
-           {itemCaption}
-        </button>
-        {
-          valueMoving
-            ? <ValueMovingBadge
-                valueMoving={valueMoving}
-                isAdminMode={isAdminMode}
-                crValueMoving={crValueMoving}
-                regCompVm={regCompVm}
-              />
-            : <ItemTime
-                itemType={itemTime}
-              />
-        }
-        <SvgClose
-          style={S.CLOSE}
-          onClose={onClose}
-        />
-      </div>
-    );
-  }
 }
 
 /*
@@ -191,4 +191,4 @@ Header.propTypes = {
 }
 */
 
-export default withTheme(Header)
+export default Header
