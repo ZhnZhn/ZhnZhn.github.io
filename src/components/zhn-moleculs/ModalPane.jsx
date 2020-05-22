@@ -1,79 +1,65 @@
-import React, { Component } from 'react'
+import React, { useRef, useCallback, useEffect } from 'react'
 //import PropTypes from 'prop-types'
 
-import withTheme from '../hoc/withTheme'
+import useTheme from '../hooks/useTheme'
 
 const TH_ID = 'MODAL_PANE';
 
-class ModalPane extends Component {
-  /*
-  static propTypes = {
-    className: PropTypes.string,
-    style: PropTypes.object,
-    theme: PropTypes.object,
-    isShow: PropTypes.bool,
-    onClose: PropTypes.func
+const _removeClickListener = (listener, ref) => {
+  if (ref.current) {
+   document.removeEventListener('click', listener, true);
+   ref.current = null
   }
-  */
+};
 
-  static defaultProps = {
-    onClose: () => {}
-  }
-
-  _hClickOutside = (event) => {
-    if (this.rootNode
-      && this.rootNode.contains
-      && !this.rootNode.contains(event.target)
-    ){
-      event.stopPropagation()
-      this.props.onClose(event)
-    }
-  }
-
-  _addOutsideListener = () => {
-    document.addEventListener('click', this._hClickOutside, true)
-  }
-  _removeOutsideListener = () => {
-    document.removeEventListener('click', this._hClickOutside, true)
-  }
-
-  componentDidMount() {
-    if (this.props.isShow) {
-      this._addOutsideListener()
-    }
-  }
-  componentWillUnmount() {
-    this._removeOutsideListener()
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps ){
-      if (this.props.isShow){
-        this._addOutsideListener()
-      } else {
-        this._removeOutsideListener()
+/*eslint-disable react-hooks/exhaustive-deps */
+const ModalPane = ({
+  isShow, style,
+  children,
+  onClose
+}) => {
+  const _refNode = useRef(null)
+  , _refIs = useRef(null)
+  , _hClickOutside = useCallback(event => {
+      if ( _refNode?.current?.contains
+        && !_refNode.current.contains(event.target)
+      ){
+        event.stopPropagation()
+        onClose(event)
       }
+  }, []);
+
+  useEffect(() => {
+    if (isShow && !_refIs.current) {
+      document.addEventListener('click', _hClickOutside, true)
+      _refIs.current = true
+    } else if (!isShow) {
+      _removeClickListener(_hClickOutside, _refIs)
     }
-  }
+  })
+  useEffect(() => {
+    return () => _removeClickListener(_hClickOutside, _refIs)
+  }, [])
+/*eslint-enable react-hooks/exhaustive-deps */
 
-  _refRootNode = n => this.rootNode = n
-
-  render(){
-    const {
-      theme,
-      style,
-      children
-    } = this.props
-    , TS = theme.getStyle(TH_ID);
-    return (
-      <div
-         ref={this._refRootNode}
-         style={{...style, ...TS.ROOT}}
-      >
-        {children}
-      </div>
-    );
-  }
+  const TS = useTheme(TH_ID);
+  return (
+    <div
+       ref={_refNode}
+       style={{...style, ...TS.ROOT}}
+    >
+      {children}
+    </div>
+  );
 }
 
-export default withTheme(ModalPane)
+/*
+ModalPane.propTypes = {
+ className: PropTypes.string,
+ style: PropTypes.object,
+ isShow: PropTypes.bool,
+ onClose: PropTypes.func
+}
+*/
+
+export default ModalPane
