@@ -1,14 +1,20 @@
 import React from 'react';
 //import PropTypes from 'prop-types'
 
-import OpenClose from './OpenClose';
+import OpenClose from '../zhn/OpenClose';
 import MenuItems from './MenuItems'
 
-const MenuPart = ({ caption, isInitOpen, items }) => {
+const MenuTopic = ({
+  style, openColor,
+  caption, isInitOpen,
+  items
+}) => {
   const _isClose = isInitOpen === true
     ? false : true;
   return (
     <OpenClose
+       rootStyle={style}
+       openColor={openColor}
        caption={caption}
        isClose={_isClose}
     >
@@ -35,4 +41,4 @@ MenuPart.propTypes = {
 }
 */
 
-export default MenuPart
+export default MenuTopic

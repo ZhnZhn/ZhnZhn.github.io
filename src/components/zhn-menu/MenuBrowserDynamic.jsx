@@ -1,14 +1,27 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
 import useListen from '../hooks/useListen'
-import Browser from './Browser';
-import BrowserCaption from './BrowserCaption';
-import ScrollPane from './ScrollPane';
-import MenuParts from './MenuParts'
-import S from './MenuBrowser.Style'
+import Comp from '../Comp'
+import MenuTopic from './MenuTopic'
 
-const _crMenu = (menuItems, isLoaded=true) => ({
-  menuItems,
+const S = {
+  CL_SCROLL: 'scroll-container-y scroll-menu',
+  BROWSER: {
+    paddingRight: 0
+  },
+  CAPTION: {
+    top: 9
+  }
+}
+
+const {
+  Browser,
+  BrowserCaption,
+  ScrollPane
+} = Comp
+
+const _crMenu = (arrMenu=[], isLoaded=true) => ({
+  arrMenu,
   isLoaded
 });
 
@@ -22,9 +35,9 @@ const MenuBrowserDynamic = ({
   children
 }) => {
   const [isShow, setIsShow] = useState(!!isInitShow)
-  , [menu, setMenu] = useState(_crMenu([], false))
-  , { menuItems, isLoaded } = menu
-  , _hHide = useCallback(() => setIsShow(false), [])
+  , [menu, setMenu] = useState(() => _crMenu([], false))
+  , { arrMenu, isLoaded } = menu
+  , _hHide = useCallback(() => setIsShow(false), []);
 
   useListen(store, (actionType, data) => {
     if (data === browserType) {
@@ -40,12 +53,13 @@ const MenuBrowserDynamic = ({
          setMenu(_crMenu(data.menuItems))
     }
   })
-
+  /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
     if (!isLoaded && isShow) {
       onLoadMenu({ browserType, caption, sourceMenuUrl });
     }
   }, [isLoaded, isShow])
+  /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <Browser isShow={isShow} style={S.BROWSER}>
@@ -55,7 +69,10 @@ const MenuBrowserDynamic = ({
          onClose={_hHide}
       />
        <ScrollPane className={S.CL_SCROLL}>
-         <MenuParts menuItems={menuItems} />
+         {arrMenu.map(
+           (menuTopic, index) => (
+               <MenuTopic key={index} {...menuTopic} />)
+         )}
          {children}
        </ScrollPane>
     </Browser>

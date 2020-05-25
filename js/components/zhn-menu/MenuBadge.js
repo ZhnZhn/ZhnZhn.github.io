@@ -13,7 +13,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
-var _ButtonCircle = _interopRequireDefault(require("./ButtonCircle2"));
+var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
 
 var TH_ID = 'ELEMENT';
 var CL = "menu__badge";

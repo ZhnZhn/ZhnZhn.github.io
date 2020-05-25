@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 
 import ThemeContext from '../hoc/ThemeContext'
-import Button from './ButtonCircle2'
+import Button from '../zhn/ButtonCircle2'
 
 const TH_ID = 'ELEMENT'
 const CL = "menu__badge";

@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import MenuBrowserDynamic from '../zhn/MenuBrowserDynamic';
+import MenuBrowserDynamic from '../zhn-menu/MenuBrowserDynamic';
 
-class SourceBrowserDynamic extends Component {
-  shouldComponentUpdate(){
-    return false;
-  }
-
-  render(){
-    return ( <MenuBrowserDynamic {...this.props} /> );
-  }
-}
+const SourceBrowserDynamic = React.memo(
+  (props) => <MenuBrowserDynamic {...props} />,
+  () => true
+);
 
 export default SourceBrowserDynamic

@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/zhn/MenuBadge.js"
+  "../../../src/components/zhn-menu/MenuBadge.js"
  ],
- "file": "../../../src/components/zhn/MenuBadge.js",
+ "file": "../../../src/components/zhn-menu/MenuBadge.js",
  "names": [
   "TH_ID",
   "CL",

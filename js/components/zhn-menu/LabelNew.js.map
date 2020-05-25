@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/zhn/LabelNew.js"
+  "../../../src/components/zhn-menu/LabelNew.js"
  ],
- "file": "../../../src/components/zhn/LabelNew.js",
+ "file": "../../../src/components/zhn-menu/LabelNew.js",
  "names": [
   "S",
   "LABEL",

@@ -19,6 +19,33 @@ var _crItemHandlers = function _crItemHandlers(dT, bT) {
   };
 };
 
+var _crItem = function _crItem(item, menuItems, browserType) {
+  var id = item.id,
+      _item$isNew = item.isNew,
+      isNew = _item$isNew === void 0 ? false : _item$isNew;
+  return (0, _extends2["default"])({
+    id: id,
+    title: menuItems[id].menuTitle,
+    isNew: isNew,
+    counter: 0,
+    isOpen: false
+  }, _crItemHandlers(id, browserType));
+};
+
+var _crItems = function _crItems(items, menuItems, browserType) {
+  if (items === void 0) {
+    items = [];
+  }
+
+  return items.map(function (item) {
+    if (item.id) return _crItem(item, menuItems, browserType);
+    return {
+      caption: item.caption,
+      items: _crItems(item.items, menuItems, browserType)
+    };
+  });
+};
+
 var crMenu = function crMenu(menu, menuItems, browserType) {
   if (menu === void 0) {
     menu = [];
@@ -27,20 +54,8 @@ var crMenu = function crMenu(menu, menuItems, browserType) {
   return menu.map(function (menuPart) {
     var caption = menuPart.caption,
         isInitOpen = menuPart.isInitOpen,
-        _menuPart$items = menuPart.items,
-        items = _menuPart$items === void 0 ? [] : _menuPart$items,
-        _items = items.map(function (item) {
-      var id = item.id,
-          _item$isNew = item.isNew,
-          isNew = _item$isNew === void 0 ? false : _item$isNew;
-      return (0, _extends2["default"])({
-        id: id,
-        title: menuItems[id].menuTitle,
-        isNew: isNew,
-        counter: 0,
-        isOpen: false
-      }, _crItemHandlers(id, browserType));
-    });
+        items = menuPart.items,
+        _items = _crItems(items, menuItems, browserType);
 
     return {
       caption: caption,

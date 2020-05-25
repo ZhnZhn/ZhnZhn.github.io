@@ -1,1 +1,23 @@
-{"version":3,"sources":["../../../../src/flux/stores/browser/findItem.js"],"names":["_isArray","Array","isArray","findItem","menu","chartType","topics","items","item","id"],"mappings":";;;;AACA,IAAMA,QAAQ,GAAGC,KAAK,CAACC,OAAvB;;AAEA,IAAMC,QAAQ,GAAG,SAAXA,QAAW,CAACC,IAAD,EAAOC,SAAP,EAAqB;AACpC,MAAI,CAACL,QAAQ,CAACI,IAAD,CAAb,EAAqB;AAAE;AAAQ;;AAE/B,uBAAqBA,IAArB,oHAA0B;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAAA,QAAfE,MAAe;AACxB,QAAMC,KAAK,GAAGD,MAAM,CAACC,KAArB;;AACA,QAAIP,QAAQ,CAACO,KAAD,CAAZ,EAAqB;AACnB,4BAAkBA,KAAlB,yHAAwB;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAAA,YAAdC,IAAc;;AACtB,YAAIA,IAAI,CAACC,EAAL,KAAYJ,SAAhB,EAA0B;AACxB,iBAAOG,IAAP;AACD;AACF;AACF;AACF;AACF,CAbD;;eAeeL,Q","sourcesContent":["\r\nconst _isArray = Array.isArray;\r\n\r\nconst findItem = (menu, chartType) => {\r\n  if (!_isArray(menu)) { return;}\r\n\r\n  for (const topics of menu){\r\n    const items = topics.items;\r\n    if (_isArray(items)) {\r\n      for(const item of items){\r\n        if (item.id === chartType){\r\n          return item;\r\n        }\r\n      }\r\n    }\r\n  }\r\n};\r\n\r\nexport default findItem\r\n"],"file":"findItem.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/browser/findItem.js"
+ ],
+ "file": "../../../../src/flux/stores/browser/findItem.js",
+ "names": [
+  "_isArr",
+  "Array",
+  "isArray",
+  "_findOrCheckItem",
+  "item",
+  "chartType",
+  "items",
+  "subItem",
+  "id",
+  "findItem",
+  "menu",
+  "topics",
+  "_item"
+ ],
+ "mappings": ";;;;AACA,IAAMA,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAGA,IAAMC,gBAAgB,GAAG,SAAnBA,gBAAmB,CAACC,IAAD,EAAOC,SAAP,EAAqB;AAC5C,MAAIL,MAAM,CAACI,IAAI,CAACE,KAAN,CAAV,EAAwB;AACtB,yBAAqBF,IAAI,CAACE,KAA1B,kHAAiC;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAAA,UAAvBC,OAAuB;;AAC/B,UAAIA,OAAO,CAACC,EAAR,KAAeH,SAAnB,EAA8B;AAC5B,eAAOE,OAAP;AACD;AACF;AACF,GAND,MAMO,IAAIH,IAAI,CAACI,EAAL,KAAYH,SAAhB,EAA2B;AAC/B,WAAOD,IAAP;AACF;AACF,CAVD;;AAYA,IAAMK,QAAQ,GAAG,SAAXA,QAAW,CAACC,IAAD,EAAOL,SAAP,EAAqB;AACpC,MAAI,CAACL,MAAM,CAACU,IAAD,CAAX,EAAmB;AAAC;AAAQ;;AAE5B,wBAAqBA,IAArB,yHAA0B;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAAA,QAAfC,MAAe;AACxB,QAAML,KAAK,GAAGK,MAAM,CAACL,KAArB;;AACA,QAAIN,MAAM,CAACM,KAAD,CAAV,EAAmB;AACjB,4BAAkBA,KAAlB,yHAAwB;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAAA,YAAdF,IAAc;;AACtB,YAAMQ,KAAK,GAAGT,gBAAgB,CAACC,IAAD,EAAOC,SAAP,CAA9B;;AACA,YAAIO,KAAJ,EAAW;AAAC,iBAAOA,KAAP;AAAc;AAC3B;AACF;AACF;AACF,CAZD;;eAceH,Q"
+}

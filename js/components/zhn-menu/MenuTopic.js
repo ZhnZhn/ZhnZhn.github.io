@@ -7,19 +7,23 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _OpenClose = _interopRequireDefault(require("./OpenClose"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 
 var _MenuItems = _interopRequireDefault(require("./MenuItems"));
 
 //import PropTypes from 'prop-types'
-var MenuPart = function MenuPart(_ref) {
-  var caption = _ref.caption,
+var MenuTopic = function MenuTopic(_ref) {
+  var style = _ref.style,
+      openColor = _ref.openColor,
+      caption = _ref.caption,
       isInitOpen = _ref.isInitOpen,
       items = _ref.items;
 
   var _isClose = isInitOpen === true ? false : true;
 
   return _react["default"].createElement(_OpenClose["default"], {
+    rootStyle: style,
+    openColor: openColor,
     caption: caption,
     isClose: _isClose
   }, _react["default"].createElement(_MenuItems["default"], {
@@ -45,6 +49,6 @@ MenuPart.propTypes = {
 */
 
 
-var _default = MenuPart;
+var _default = MenuTopic;
 exports["default"] = _default;
-//# sourceMappingURL=MenuPart.js.map
+//# sourceMappingURL=MenuTopic.js.map

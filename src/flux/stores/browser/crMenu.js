@@ -7,20 +7,30 @@ const _crItemHandlers = (dT, bT) => ({
   onBadgeClose: CA.closeChartContainer2.bind(null, dT)
 });
 
+const _crItem = (item, menuItems, browserType) => {
+  const { id, isNew=false } = item;
+  return {
+    id: id,
+    title: menuItems[id].menuTitle,
+    isNew: isNew,
+    counter: 0,
+    isOpen: false,
+    ..._crItemHandlers(id, browserType)
+  };
+}
+
+const _crItems = (items=[], menuItems, browserType) => items.map(item => {
+   if (item.id) return _crItem(item, menuItems, browserType);
+   return {
+     caption: item.caption,
+     items: _crItems(item.items, menuItems, browserType)
+   };
+});
+
 const crMenu = (menu=[], menuItems, browserType) => {
   return menu.map(menuPart => {
-     const { caption, isInitOpen, items=[] } = menuPart
-     , _items = items.map(item => {
-          const { id, isNew=false } = item;          
-          return {
-            id: id,
-            title: menuItems[id].menuTitle,
-            isNew: isNew,
-            counter: 0,
-            isOpen: false,
-            ..._crItemHandlers(id, browserType)
-          };
-     });
+     const { caption, isInitOpen, items } = menuPart
+     , _items = _crItems(items, menuItems, browserType)
      return {
         caption, isInitOpen,
         items: _items

@@ -1,33 +1,46 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
-var _Browser = _interopRequireDefault(require("./Browser"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
-var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
+var _MenuTopic = _interopRequireDefault(require("./MenuTopic"));
 
-var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
+var S = {
+  CL_SCROLL: 'scroll-container-y scroll-menu',
+  BROWSER: {
+    paddingRight: 0
+  },
+  CAPTION: {
+    top: 9
+  }
+};
+var Browser = _Comp["default"].Browser,
+    BrowserCaption = _Comp["default"].BrowserCaption,
+    ScrollPane = _Comp["default"].ScrollPane;
 
-var _MenuParts = _interopRequireDefault(require("./MenuParts"));
+var _crMenu = function _crMenu(arrMenu, isLoaded) {
+  if (arrMenu === void 0) {
+    arrMenu = [];
+  }
 
-var _MenuBrowser = _interopRequireDefault(require("./MenuBrowser.Style"));
-
-var _crMenu = function _crMenu(menuItems, isLoaded) {
   if (isLoaded === void 0) {
     isLoaded = true;
   }
 
   return {
-    menuItems: menuItems,
+    arrMenu: arrMenu,
     isLoaded: isLoaded
   };
 };
@@ -47,10 +60,12 @@ var MenuBrowserDynamic = function MenuBrowserDynamic(_ref) {
   var _useState = (0, _react.useState)(!!isInitShow),
       isShow = _useState[0],
       setIsShow = _useState[1],
-      _useState2 = (0, _react.useState)(_crMenu([], false)),
+      _useState2 = (0, _react.useState)(function () {
+    return _crMenu([], false);
+  }),
       menu = _useState2[0],
       setMenu = _useState2[1],
-      menuItems = menu.menuItems,
+      arrMenu = menu.arrMenu,
       isLoaded = menu.isLoaded,
       _hHide = (0, _react.useCallback)(function () {
     return setIsShow(false);
@@ -67,6 +82,8 @@ var MenuBrowserDynamic = function MenuBrowserDynamic(_ref) {
       setMenu(_crMenu(data.menuItems));
     }
   });
+  /*eslint-disable react-hooks/exhaustive-deps */
+
   (0, _react.useEffect)(function () {
     if (!isLoaded && isShow) {
       onLoadMenu({
@@ -76,17 +93,21 @@ var MenuBrowserDynamic = function MenuBrowserDynamic(_ref) {
       });
     }
   }, [isLoaded, isShow]);
-  return _react["default"].createElement(_Browser["default"], {
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  return _react["default"].createElement(Browser, {
     isShow: isShow,
-    style: _MenuBrowser["default"].BROWSER
-  }, _react["default"].createElement(_BrowserCaption["default"], {
+    style: S.BROWSER
+  }, _react["default"].createElement(BrowserCaption, {
     caption: caption,
-    captionStyle: _MenuBrowser["default"].CAPTION,
+    captionStyle: S.CAPTION,
     onClose: _hHide
-  }), _react["default"].createElement(_ScrollPane["default"], {
-    className: _MenuBrowser["default"].CL_SCROLL
-  }, _react["default"].createElement(_MenuParts["default"], {
-    menuItems: menuItems
+  }), _react["default"].createElement(ScrollPane, {
+    className: S.CL_SCROLL
+  }, arrMenu.map(function (menuTopic, index) {
+    return _react["default"].createElement(_MenuTopic["default"], (0, _extends2["default"])({
+      key: index
+    }, menuTopic));
   }), children));
 };
 
