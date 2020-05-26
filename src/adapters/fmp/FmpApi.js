@@ -64,7 +64,8 @@ const FmpApi = {
     const _assignTo = _rAssign[option.dfPn]
       || _rAssign.DF;
     _assignTo(option)
-    return option._itemUrl;
+    const { apiKey } = option;
+    return `${option._itemUrl}&apikey=${apiKey}`;
   },
 
   checkResponse(json, options){

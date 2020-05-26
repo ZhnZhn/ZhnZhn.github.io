@@ -85,12 +85,10 @@ var DataProviders = function DataProviders(_ref) {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].Bsl, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
-  }, _react["default"].createElement(_ProviderLinks["default"].Fmp, null)), _react["default"].createElement("span", {
-    style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].CryptoCompare, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].CoinGecko, null))), _react["default"].createElement(_OpenClose["default"], {
-    caption: "(7) Required API key:",
+    caption: "(8) Required API key:",
     captionStyle: ocCaptionStyle,
     rootStyle: ST.OPEN_CLOSE,
     childStyle: ST.CHILD_STYLE,
@@ -113,6 +111,8 @@ var DataProviders = function DataProviders(_ref) {
   }, _react["default"].createElement(_ProviderLinks["default"].Bea, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].Eia, null)), _react["default"].createElement("span", {
+    style: _About["default"].PROVIDER
+  }, _react["default"].createElement(_ProviderLinks["default"].Fmp, null)), _react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, _react["default"].createElement(_ProviderLinks["default"].Intrinio, null))), _react["default"].createElement("div", {
     style: ST.NOTE

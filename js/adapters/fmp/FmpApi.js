@@ -79,7 +79,8 @@ var FmpApi = {
 
     _assignTo(option);
 
-    return option._itemUrl;
+    var apiKey = option.apiKey;
+    return option._itemUrl + "&apikey=" + apiKey;
   },
   checkResponse: function checkResponse(json, options) {
     var dfPn = options.dfPn,

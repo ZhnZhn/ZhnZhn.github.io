@@ -22,7 +22,7 @@ var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 
 //import PropTypes from 'prop-types'
-var MAX_KEY = 8;
+var MAX_KEY = 9;
 var S = {
   BT_SET: {
     marginLeft: 8,
@@ -96,6 +96,10 @@ function (_Component) {
       return _this.iComp7 = n;
     };
 
+    _this._ref8 = function (n) {
+      return _this.iComp8 = n;
+    };
+
     var data = props.data;
     var _i = 1;
 
@@ -153,9 +157,9 @@ function (_Component) {
     }), _react["default"].createElement(_RowSecret["default"], {
       ref: this._ref5,
       titleStyle: titleStyle,
-      title: "Intrinio:",
-      name: "intrinio",
-      placeholder: "Intrinio API Key",
+      title: "FMP:",
+      name: "fmp",
+      placeholder: "Financial Modeling Prep API Key",
       maxLength: "32",
       onEnter: this._setKey5
     }), _react["default"].createElement(_RowSecret["default"], {
@@ -169,10 +173,18 @@ function (_Component) {
     }), _react["default"].createElement(_RowSecret["default"], {
       ref: this._ref7,
       titleStyle: titleStyle,
+      title: "Intrinio:",
+      name: "intrinio",
+      placeholder: "Intrinio API Key",
+      maxLength: "32",
+      onEnter: this._setKey7
+    }), _react["default"].createElement(_RowSecret["default"], {
+      ref: this._ref8,
+      titleStyle: titleStyle,
       title: "Quandl:",
       name: "quandl",
       placeholder: "Quandl API Key",
-      onEnter: this._setKey7
+      onEnter: this._setKey8
     }), _react["default"].createElement(_RowButtons["default"], {
       btStyle: btStyle,
       onClose: onClose

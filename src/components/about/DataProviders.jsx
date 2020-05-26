@@ -86,10 +86,7 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Bsl/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Fmp/>
-        </span>
+        </span>        
         <span style={S.PROVIDER}>
           <Link.CryptoCompare/>
         </span>
@@ -98,7 +95,7 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
       </p>
       <OpenClose
-        caption="(7) Required API key:"
+        caption="(8) Required API key:"
         captionStyle={ocCaptionStyle}
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
@@ -126,6 +123,9 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Eia/>
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.Fmp/>
         </span>
         <span style={S.PROVIDER}>
           <Link.Intrinio/>
