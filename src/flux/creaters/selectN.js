@@ -20,11 +20,14 @@ const _findItemTable = (items) => {
 const _modifyIfItemTable = (dfProps, items) => {
   const { tableItem, tableIndex } = _findItemTable(items);
   if (tableItem) {
-    const { value, dfTail } = tableItem;
+    const { value, dfTail, mapFrequency } = tableItem;
     if (value) {
       Object.assign(dfProps, {
         dfTable: value, dfTail
       })
+      if (mapFrequency) {
+        dfProps.mapFrequency = mapFrequency
+      }
       items.splice(tableIndex, 1);
     }
   }

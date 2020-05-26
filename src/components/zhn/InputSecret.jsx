@@ -4,7 +4,7 @@ const S = {
   ROOT: {
     position: 'relative',
     display: 'inline-block',
-    width: 250,
+    width: 275,
     backgroundColor: '#e1e1cb'
   },
   INPUT: {

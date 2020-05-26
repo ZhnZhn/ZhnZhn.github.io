@@ -86,7 +86,7 @@ const EuroStatFn = {
     const data = [];
     let max = Number.NEGATIVE_INFINITY
       , min = Number.POSITIVE_INFINITY;
-
+   
     Object.keys(timeIndex).forEach(key => {
        if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
          const y = value[timeIndex[key]];
@@ -98,7 +98,6 @@ const EuroStatFn = {
          }
        }
     })
-
     return {
       data: data.sort(compareByDate),
       max, min

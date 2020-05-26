@@ -7,7 +7,10 @@ const TH_ID = 'ELEMENT'
 const CL = "menu__badge";
 
 const S = {
-  BADGE_OPENED : {
+  BT: {
+    marginLeft: 4
+  },
+  BADGE_OPEN : {
     color: '#a487d4'
   }
 };
@@ -19,7 +22,7 @@ const MenuBadge = ({
   const theme = useContext(ThemeContext)
   , TS = theme.getStyle(TH_ID)
   , _btStyle = isOpen
-       ? S.BADGE_OPENED
+       ? S.BADGE_OPEN
        : null
   , _hClick = useCallback((event) => {
       event.stopPropagation();

@@ -45,7 +45,7 @@ var _crMenu = function _crMenu(arrMenu, isLoaded) {
   };
 };
 
-var MenuBrowserDynamic = function MenuBrowserDynamic(_ref) {
+var BrowserMenu = function BrowserMenu(_ref) {
   var isInitShow = _ref.isInitShow,
       caption = _ref.caption,
       store = _ref.store,
@@ -111,6 +111,6 @@ var MenuBrowserDynamic = function MenuBrowserDynamic(_ref) {
   }), children));
 };
 
-var _default = MenuBrowserDynamic;
+var _default = BrowserMenu;
 exports["default"] = _default;
-//# sourceMappingURL=MenuBrowserDynamic.js.map
+//# sourceMappingURL=BrowserMenu.js.map

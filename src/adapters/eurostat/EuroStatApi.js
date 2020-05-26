@@ -27,7 +27,7 @@ const EuroStatApi = {
     if (option.url) {
       return option.url;
     }
-    const _url = api.crUrlN(option);
+    const _url = api.crUrlN(option);    
     return (option.url = _url);
   },
 

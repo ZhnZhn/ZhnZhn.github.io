@@ -7,10 +7,10 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _MenuBrowserDynamic = _interopRequireDefault(require("../zhn-menu/MenuBrowserDynamic"));
+var _BrowserMenu = _interopRequireDefault(require("../zhn-menu/BrowserMenu"));
 
 var SourceBrowserDynamic = _react["default"].memo(function (props) {
-  return _react["default"].createElement(_MenuBrowserDynamic["default"], props);
+  return _react["default"].createElement(_BrowserMenu["default"], props);
 }, function () {
   return true;
 });

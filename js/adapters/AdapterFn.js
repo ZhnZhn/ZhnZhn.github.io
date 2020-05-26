@@ -29,7 +29,20 @@ var ymdToUTC = _DateUtils["default"].ymdToUTC,
     mlsToDmy = _DateUtils["default"].mlsToDmy,
     getFromDate = _DateUtils["default"].getFromDate;
 var EMPTY = '';
-var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+var HP_MONTH = {
+  january: 0,
+  february: 1,
+  march: 2,
+  april: 3,
+  may: 4,
+  june: 5,
+  july: 6,
+  august: 7,
+  september: 8,
+  october: 9,
+  november: 10,
+  december: 11
+};
 var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType'];
 
 var _isNaN = Number && Number.isNaN || isNaN;
@@ -163,7 +176,6 @@ var AdapterFn = {
     return [AdapterFn.legendItem(0, _Color["default"].S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color["default"].S_HIGH, 'High'), AdapterFn.legendItem(2, _Color["default"].S_LOW, 'Low'), AdapterFn.legendItem(3, _Color["default"].S_OPEN, 'Open')];
   },
   roundBy: _mathFn["default"].roundBy,
-  formatAllNumber: _formatAllNumber["default"],
   numberFormat: _formatAllNumber["default"],
   isNumberOrNull: function isNumberOrNull(v) {
     return typeof v === 'number' && !isNaN(v) || v === null;
@@ -272,7 +284,7 @@ var AdapterFn = {
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substring(1) : EMPTY;
   },
   monthIndex: function monthIndex(str) {
-    return M.indexOf(String(str).toLowerCase());
+    return HP_MONTH[String(str).toLowerCase()] || -1;
   },
   findMinY: findMinY,
   findMaxY: findMaxY,

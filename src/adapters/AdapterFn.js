@@ -1,17 +1,17 @@
 
-import Big from 'big.js';
+import Big from 'big.js'
 
-import dt from '../utils/DateUtils';
+import dt from '../utils/DateUtils'
 import formatAllNumber from '../utils/formatAllNumber'
 
-import { Direction } from '../constants/Type';
+import { Direction } from '../constants/Type'
 
-import mathFn from '../math/mathFn';
-import seriaFns from '../math/seriaFn'
+import mathFn from '../math/mathFn'
+import seriaFn from '../math/seriaFn'
 
-import C from '../constants/Color';
+import C from '../constants/Color'
 
-const { findMinY, findMaxY } = seriaFns;
+const { findMinY, findMaxY } = seriaFn;
 
 const {
   ymdToUTC,
@@ -22,12 +22,13 @@ const {
 } = dt;
 
 const EMPTY = '';
-const M = ['january', 'february',
-  'march', 'april', 'may',
-  'june', 'july', 'august',
-  'september', 'october', 'november',
-  'december'
-];
+const HP_MONTH = {
+  january: 0, february: 1,
+  march: 2, april: 3, may: 4,
+  june: 5, july: 6, august: 7,
+  september: 8, october: 9, november: 10,
+  december: 11
+};
 
 const ITEM_CONF_PROP_NAMES = [
  'url', 'loadId',
@@ -156,8 +157,6 @@ const AdapterFn = {
   },
 
   roundBy: mathFn.roundBy,
-
-  formatAllNumber: formatAllNumber,
   numberFormat: formatAllNumber,
 
   isNumberOrNull: v => (typeof v === 'number' && !isNaN(v))
@@ -265,12 +264,11 @@ const AdapterFn = {
       : EMPTY
   ,
 
-  monthIndex: str => M.indexOf(
-    String(str).toLowerCase()
-  ),
+  monthIndex: str => HP_MONTH[String(str).toLowerCase()]
+    || -1,
 
-  findMinY: findMinY,
-  findMaxY: findMaxY,
+  findMinY,
+  findMaxY,
 
   crError: (errCaption='', message='') => ({
     errCaption,

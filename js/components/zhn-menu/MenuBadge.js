@@ -18,7 +18,10 @@ var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
 var TH_ID = 'ELEMENT';
 var CL = "menu__badge";
 var S = {
-  BADGE_OPENED: {
+  BT: {
+    marginLeft: 4
+  },
+  BADGE_OPEN: {
     color: '#a487d4'
   }
 };
@@ -31,7 +34,7 @@ var MenuBadge = function MenuBadge(_ref) {
 
   var theme = (0, _react.useContext)(_ThemeContext["default"]),
       TS = theme.getStyle(TH_ID),
-      _btStyle = isOpen ? S.BADGE_OPENED : null,
+      _btStyle = isOpen ? S.BADGE_OPEN : null,
       _hClick = (0, _react.useCallback)(function (event) {
     event.stopPropagation();
 

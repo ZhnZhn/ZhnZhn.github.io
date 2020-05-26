@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import MenuBrowserDynamic from '../zhn-menu/MenuBrowserDynamic';
+import BrowserMenu from '../zhn-menu/BrowserMenu'
 
 const SourceBrowserDynamic = React.memo(
-  (props) => <MenuBrowserDynamic {...props} />,
+  (props) => <BrowserMenu {...props} />,
   () => true
 );
 

@@ -25,7 +25,7 @@ const _crMenu = (arrMenu=[], isLoaded=true) => ({
   isLoaded
 });
 
-const MenuBrowserDynamic = ({
+const BrowserMenu = ({
   isInitShow,
   caption,
   store,
@@ -79,4 +79,4 @@ const MenuBrowserDynamic = ({
   );
 }
 
-export default MenuBrowserDynamic;
+export default BrowserMenu;

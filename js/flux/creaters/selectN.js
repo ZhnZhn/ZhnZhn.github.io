@@ -39,13 +39,19 @@ var _modifyIfItemTable = function _modifyIfItemTable(dfProps, items) {
 
   if (tableItem) {
     var value = tableItem.value,
-        dfTail = tableItem.dfTail;
+        dfTail = tableItem.dfTail,
+        mapFrequency = tableItem.mapFrequency;
 
     if (value) {
       Object.assign(dfProps, {
         dfTable: value,
         dfTail: dfTail
       });
+
+      if (mapFrequency) {
+        dfProps.mapFrequency = mapFrequency;
+      }
+
       items.splice(tableIndex, 1);
     }
   }
