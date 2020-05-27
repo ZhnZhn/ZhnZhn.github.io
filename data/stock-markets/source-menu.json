@@ -36,11 +36,21 @@
     },{
       "caption": "Financial Modeling Prep",
       "items": [
-        { "id": "SM_FMP_HP" },
-        { "id": "SM_FMP_FS" },
-        { "id": "SM_FMP_EV" },
-        { "id": "SM_FMP_METRICS" },
-        { "id": "SM_FMP_FGR" }
+        { "caption": "Historical Prices",
+          "items": [
+            { "id": "SM_FMP_EN" },
+            { "id": "SM_FMP_NN" }
+          ]
+        },
+        {
+          "caption": "Company Valuation",
+          "items": [
+            { "id": "SM_FMP_FS" },            
+            { "id": "SM_FMP_EV" },
+            { "id": "SM_FMP_METRICS" },
+            { "id": "SM_FMP_FGR" }
+          ]
+        }
       ]
     },{
       "caption": "Intrinio: U.S. PC Financials",
@@ -52,7 +62,7 @@
       ]
     }
   ],
-  "items" : {    
+  "items" : {
     "SM_BASE_INTR": {
       "dialogProps": {
         "descrUrl" : "./data/stock-markets/intrinio.html",
@@ -77,9 +87,6 @@
         "loadId" : "FMP",
         "descrUrl" : "./data/stock-markets/fmp.html",
         "rootUri" : "./data/stock-markets/",
-        "selectProps": [
-          ["Stock", "wiki", "tickets", true]
-        ],
         "spT": "id",
         "chartsType": "t2"
       }
@@ -388,18 +395,21 @@
              "dfType": "market"
            }
          }
-     },     
+     },
 
-     "SM_FMP_HP" : {
-         "type" : "SM_FMP_HP",
-         "menuTitle" : "Historical Prices",
-         "chartContainerCaption" : "Financial Modeling Prep: Historical Prices",
+     "SM_FMP_NN" : {
+         "type" : "SM_FMP_NN",
+         "menuTitle" : "Nyse, Nasdaq",
+         "chartContainerCaption" : "Financial Modeling Prep: Nyse, Nasdaq",
          "dialogType" : "DialogSelectN",
          "addProps" : "SM_BASE_FMP",
          "dialogProps" : {
            "isFd": true,
-           "nInitFromDate": 3,
+           "nInitFromDate": 2,
            "noDate": true,
+           "selectProps": [
+              ["Stock", "wiki", "tickets", true]
+            ],
            "chartsType": "t1",
            "dfProps": {
              "dfT": "historical-price-full",
@@ -407,6 +417,27 @@
            }
          }
      },
+     "SM_FMP_EN" : {
+         "type" : "SM_FMP_EN",
+         "menuTitle" : "Euronext",
+         "chartContainerCaption" : "Financial Modeling Prep: Euronext",
+         "dialogType" : "DialogSelectN",
+         "addProps" : "SM_BASE_FMP",
+         "dialogProps" : {
+           "isFd": true,
+           "nInitFromDate": 2,
+           "noDate": true,
+           "chartsType": "t1",
+           "selectProps": [
+              ["Equity", "fmp-euronext", "items", true]
+            ],
+           "dfProps": {
+             "dfT": "historical-price-full",
+             "dfPn": "historical"
+           }
+         }
+     },
+
      "SM_FMP_FS" : {
          "type" : "SM_FMP_FS",
          "menuTitle" : "Financial Statements",
@@ -415,6 +446,7 @@
          "addProps" : "SM_BASE_FMP",
          "dialogProps" : {
            "selectProps": [
+             ["Stock", "wiki", "tickets", true],
              ["Statement", "fmp-financial-statements"],
              ["Period", "fmp-periods"]
            ],
@@ -432,6 +464,7 @@
          "addProps" : "SM_BASE_FMP",
          "dialogProps" : {
            "selectProps": [
+             ["Stock", "wiki", "tickets", true],
              ["Statement", "fmp-enterprise-values"],
              ["Period", "fmp-periods"]
            ],
@@ -449,6 +482,7 @@
          "addProps" : "SM_BASE_FMP",
          "dialogProps" : {
            "selectProps": [
+             ["Stock", "wiki", "tickets", true],
              ["Metric", "fmp-metrics"],
              ["Period", "fmp-periods"]
            ],
@@ -466,6 +500,7 @@
          "addProps" : "SM_BASE_FMP",
          "dialogProps" : {
            "selectProps": [
+             ["Stock", "wiki", "tickets", true],
              ["Growth", "fmp-financial-growth"],
              ["Period", "fmp-periods"]
            ],
