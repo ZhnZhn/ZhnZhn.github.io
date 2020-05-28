@@ -1,0 +1,9 @@
+
+th {
+  outline: 0
+}
+
+th:hover,
+th:focus {
+  background-color: rgba(120, 120, 120, 0.2);
+}
