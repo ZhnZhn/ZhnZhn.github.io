@@ -22,6 +22,8 @@ var crError = _AdapterFn["default"].crError,
     crValueConf = _AdapterFn["default"].crValueConf,
     crSeria = _AdapterFn["default"].crSeria;
 
+var _isNaN = Number.isNaN || isNaN;
+
 var _isHistorical = function _isHistorical(dfPn) {
   return dfPn === 'historical';
 };
@@ -80,9 +82,15 @@ var fnAdapter = {
   getValue: getValue,
   crSeria: crSeria,
   crData: function crData(metrics, propName) {
-    return metrics.map(function (item) {
-      return [ymdToUTC(item.date), parseFloat(item[propName])];
-    }).reverse().sort(compareByDate);
+    var _data = [];
+    metrics.forEach(function (item) {
+      var _v = parseFloat(item[propName]);
+
+      if (!_isNaN(_v)) {
+        _data.push([ymdToUTC(item.date), _v]);
+      }
+    });
+    return _data.reverse().sort(compareByDate);
   },
   crCaption: function crCaption(_ref2) {
     var items = _ref2.items;

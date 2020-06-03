@@ -12,6 +12,7 @@ const C = {
   ERR_EMPTY: 'Response is empty'
 };
 
+const _isArr = Array.isArray
 const _assign = Object.assign;
 
 const _crDataSource = ({ dataSource, dialogConf={} }) =>
@@ -71,8 +72,7 @@ const FmpApi = {
   checkResponse(json, options){
     const { dfPn, _symbol } = options
     , _json = json || {};
-    if (Array.isArray(_json[dfPn])
-        && _json.symbol === _symbol) {
+    if (_isArr(_json[dfPn]) && _json.symbol === _symbol) {
       return true;
     }
     throw crError(

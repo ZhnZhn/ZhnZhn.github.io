@@ -15,6 +15,8 @@ const {
   crSeria
 } = AdapterFn;
 
+const _isNaN = Number.isNaN || isNaN
+
 const _isHistorical = dfPn => dfPn === 'historical';
 const _crHistoricalItemConf = (data, option) => {
   const {
@@ -67,10 +69,14 @@ const fnAdapter = {
   crSeria,
 
   crData: (metrics, propName) => {
-    return metrics.map(item => ([
-      ymdToUTC(item.date),
-      parseFloat(item[propName])
-    ])).reverse().sort(compareByDate);
+    const _data = [];
+    metrics.forEach(item => {
+      const _v = parseFloat(item[propName]);
+      if (!_isNaN(_v)) {
+        _data.push([ymdToUTC(item.date), _v])
+      }
+    })
+    return _data.reverse().sort(compareByDate);
   },
 
   crCaption: ({ items }) => ({

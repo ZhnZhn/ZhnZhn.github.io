@@ -15,6 +15,7 @@ var C = {
   URI: 'https://financialmodelingprep.com/api/v3',
   ERR_EMPTY: 'Response is empty'
 };
+var _isArr = Array.isArray;
 var _assign = Object.assign;
 
 var _crDataSource = function _crDataSource(_ref) {
@@ -87,7 +88,7 @@ var FmpApi = {
         _symbol = options._symbol,
         _json = json || {};
 
-    if (Array.isArray(_json[dfPn]) && _json.symbol === _symbol) {
+    if (_isArr(_json[dfPn]) && _json.symbol === _symbol) {
       return true;
     }
 
