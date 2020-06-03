@@ -38,8 +38,7 @@ class TableHead extends Component {
   }
   */
 
-  _hThKeyPressed = (pn, evt) => {
-    evt.preventDefault()
+  _hThKeyDown = (pn, evt) => {            
     if (isKeyEnter(evt)) {
       this.props.onSort(pn)
     }
@@ -71,7 +70,6 @@ class TableHead extends Component {
       , _thStyle = hIndex === 0
            ? thMoreStyle
            : null;
-
       return (
         <th
           key={h.name}
@@ -83,7 +81,7 @@ class TableHead extends Component {
           aria-label={ariaLabel}
           aria-sort={ariaSort}
           onClick={onSort.bind(null, pn)}
-          onKeyPress={this._hThKeyPressed.bind(null, pn)}
+          onKeyDown={this._hThKeyDown.bind(null, pn)}
         >
           {_elMore}
           {name}

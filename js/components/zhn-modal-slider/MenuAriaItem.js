@@ -15,12 +15,11 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _fKeyPressed = function _fKeyPressed(onClick) {
-  return function (evt) {
-    evt.preventDefault();
-    var which = evt.which;
+var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
-    if (which === 13 || which === 32) {
+var _fKeyDown = function _fKeyDown(onClick) {
+  return function (evt) {
+    if ((0, _isKeyEnter["default"])(evt)) {
       onClick();
     }
   };
@@ -74,7 +73,7 @@ function (_Component) {
       role: "menuitem",
       tabIndex: "0",
       onClick: onClick,
-      onKeyPress: _fKeyPressed(onClick)
+      onKeyDown: _fKeyDown(onClick)
     }), children);
   };
 

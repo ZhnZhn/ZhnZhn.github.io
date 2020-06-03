@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-const _fKeyPressed = (onClick) => (evt) => {
-  evt.preventDefault()
-  const { which } = evt;
-  if (which === 13 || which === 32) {
+import isKeyEnter from '../zhn/isKeyEnter'
+
+const _fKeyDown = (onClick) => (evt) => {
+  if (isKeyEnter(evt)) {
     onClick()
   }
 }
@@ -35,7 +35,7 @@ class MenuAriaItem extends Component {
         role="menuitem"
         tabIndex="0"
         onClick={onClick}
-        onKeyPress={_fKeyPressed(onClick)}
+        onKeyDown={_fKeyDown(onClick)}
       >
         {children}
       </div>

@@ -42,9 +42,7 @@ function (_Component) {
 
     _this = _Component.call.apply(_Component, [this].concat(args)) || this;
 
-    _this._hThKeyPressed = function (pn, evt) {
-      evt.preventDefault();
-
+    _this._hThKeyDown = function (pn, evt) {
       if ((0, _isKeyEnter["default"])(evt)) {
         _this.props.onSort(pn);
       }
@@ -94,7 +92,7 @@ function (_Component) {
           "aria-label": ariaLabel,
           "aria-sort": ariaSort,
           onClick: onSort.bind(null, pn),
-          onKeyPress: _this._hThKeyPressed.bind(null, pn)
+          onKeyDown: _this._hThKeyDown.bind(null, pn)
         }, _elMore, name);
       }).filter(Boolean);
     };
