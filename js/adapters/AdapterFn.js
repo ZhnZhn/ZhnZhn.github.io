@@ -9,25 +9,27 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _DateUtils = _interopRequireDefault(require("../utils/DateUtils"));
-
-var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
-
-var _Type = require("../constants/Type");
+var _ut = _interopRequireDefault(require("../utils/ut"));
 
 var _mathFn = _interopRequireDefault(require("../math/mathFn"));
 
 var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
+var _Type = require("../constants/Type");
+
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
+var dt = _ut["default"].dt,
+    getC = _ut["default"].getC,
+    getV = _ut["default"].getV,
+    formatAllNumber = _ut["default"].formatAllNumber;
 var findMinY = _seriaFn["default"].findMinY,
     findMaxY = _seriaFn["default"].findMaxY;
-var ymdToUTC = _DateUtils["default"].ymdToUTC,
-    ymdtToUTC = _DateUtils["default"].ymdtToUTC,
-    ymdhmsToUTC = _DateUtils["default"].ymdhmsToUTC,
-    mlsToDmy = _DateUtils["default"].mlsToDmy,
-    getFromDate = _DateUtils["default"].getFromDate;
+var ymdToUTC = dt.ymdToUTC,
+    ymdtToUTC = dt.ymdtToUTC,
+    ymdhmsToUTC = dt.ymdhmsToUTC,
+    mlsToDmy = dt.mlsToDmy,
+    getFromDate = dt.getFromDate;
 var EMPTY = '';
 var HP_MONTH = {
   january: 0,
@@ -92,29 +94,14 @@ var AdapterFn = {
   ymdtToUTC: ymdtToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
   getFromDate: getFromDate,
-  getCaption: function getCaption(item) {
-    var _ref;
-
-    return '' + ((_ref = item && item.caption) != null ? _ref : '');
-  },
-  getValue: function getValue(item, _temp) {
-    var _ref2 = _temp === void 0 ? {} : _temp,
-        isUpper = _ref2.isUpper,
-        _ref2$dfValue = _ref2.dfValue,
-        dfValue = _ref2$dfValue === void 0 ? '' : _ref2$dfValue;
-
-    var _ref3 = item != null ? item : {},
-        value = _ref3.value,
-        _value = typeof value === 'number' ? '' + value : value != null ? value : '' + dfValue;
-
-    return isUpper ? _value.toUpperCase() : _value;
-  },
-  volumeColumnPoint: function volumeColumnPoint(_ref4) {
-    var date = _ref4.date,
-        open = _ref4.open,
-        close = _ref4.close,
-        volume = _ref4.volume,
-        option = _ref4.option;
+  getCaption: getC,
+  getValue: getV,
+  volumeColumnPoint: function volumeColumnPoint(_ref) {
+    var date = _ref.date,
+        open = _ref.open,
+        close = _ref.close,
+        volume = _ref.volume,
+        option = _ref.option;
 
     var _color;
 
@@ -134,10 +121,10 @@ var AdapterFn = {
       _close: close
     }, option);
   },
-  athPoint: function athPoint(_ref5) {
-    var date = _ref5.date,
-        prevClose = _ref5.prevClose,
-        open = _ref5.open;
+  athPoint: function athPoint(_ref2) {
+    var date = _ref2.date,
+        prevClose = _ref2.prevClose,
+        open = _ref2.open;
 
     var _bDelta = open && prevClose ? (0, _big["default"])(prevClose).minus(open) : (0, _big["default"])('0.0'),
         _bPercent = prevClose ? _bDelta.times(100).div(prevClose).abs().toFixed(2) : (0, _big["default"])('0.0');
@@ -176,7 +163,7 @@ var AdapterFn = {
     return [AdapterFn.legendItem(0, _Color["default"].S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color["default"].S_HIGH, 'High'), AdapterFn.legendItem(2, _Color["default"].S_LOW, 'Low'), AdapterFn.legendItem(3, _Color["default"].S_OPEN, 'Open')];
   },
   roundBy: _mathFn["default"].roundBy,
-  numberFormat: _formatAllNumber["default"],
+  numberFormat: formatAllNumber,
   isNumberOrNull: function isNumberOrNull(v) {
     return typeof v === 'number' && !isNaN(v) || v === null;
   },
@@ -187,17 +174,17 @@ var AdapterFn = {
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
   compareByValueId: _compareByTwoProp('value', 'id'),
-  crValueMoving: function crValueMoving(_ref6) {
-    var _ref6$bNowValue = _ref6.bNowValue,
-        bNowValue = _ref6$bNowValue === void 0 ? (0, _big["default"])('0.0') : _ref6$bNowValue,
-        _ref6$bPrevValue = _ref6.bPrevValue,
-        bPrevValue = _ref6$bPrevValue === void 0 ? (0, _big["default"])('0.0') : _ref6$bPrevValue,
-        dfR = _ref6.dfR;
+  crValueMoving: function crValueMoving(_ref3) {
+    var _ref3$bNowValue = _ref3.bNowValue,
+        bNowValue = _ref3$bNowValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bNowValue,
+        _ref3$bPrevValue = _ref3.bPrevValue,
+        bPrevValue = _ref3$bPrevValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bPrevValue,
+        dfR = _ref3.dfR;
     return _mathFn["default"].crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: _Type.Direction,
-      fnFormat: _formatAllNumber["default"],
+      fnFormat: formatAllNumber,
       dfR: dfR
     });
   },
@@ -255,11 +242,11 @@ var AdapterFn = {
       x: _getDate(_p)
     };
   },
-  crSeria: function crSeria(_ref7) {
-    var adapter = _ref7.adapter,
-        json = _ref7.json,
-        option = _ref7.option,
-        type = _ref7.type;
+  crSeria: function crSeria(_ref4) {
+    var adapter = _ref4.adapter,
+        json = _ref4.json,
+        option = _ref4.option,
+        type = _ref4.type;
 
     var _adapter$toConfig = adapter.toConfig(json, option),
         config = _adapter$toConfig.config,

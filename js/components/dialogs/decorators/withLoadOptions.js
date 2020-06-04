@@ -70,6 +70,26 @@ var _loadOptions = function _loadOptions(option) {
   });
 };
 
+var _notNullOrUndef = function _notNullOrUndef(v) {
+  return v != null;
+};
+
+var _crPropCaption = function _crPropCaption(arr) {
+  if (!Array.isArray(arr) || arr.length === 0) {
+    return;
+  }
+
+  var _items = arr[0];
+
+  if (_notNullOrUndef(_items.caption)) {
+    return;
+  }
+
+  if (_notNullOrUndef(_items.c)) {
+    return 'c';
+  }
+};
+
 var _onLoadOptionsCompleted = function _onLoadOptionsCompleted(target, _ref) {
   var toStateProp = _ref.toStateProp,
       json = _ref.json,
@@ -79,9 +99,11 @@ var _onLoadOptionsCompleted = function _onLoadOptionsCompleted(target, _ref) {
     if (!json.dfColumns) {
       var _target$setState;
 
+      var _items = json[optionJsonProp];
       target.setState((_target$setState = {
-        isLoading: false
-      }, _target$setState[toStateProp] = json[optionJsonProp], _target$setState));
+        isLoading: false,
+        propCaption: _crPropCaption(_items)
+      }, _target$setState[toStateProp] = _items, _target$setState));
     } else {
       var _target$setState2;
 

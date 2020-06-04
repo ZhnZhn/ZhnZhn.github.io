@@ -1,7 +1,9 @@
 
-const _isArr = Array.isArray;
+import ut from '../../utils/ut'
 
-const _getCaption = item => item && item.caption || '';
+const { getC, getV } = ut
+
+const _isArr = Array.isArray;
 
 const _crC = (title, subtitle) => ({
   title, subtitle
@@ -12,7 +14,7 @@ const _crItemCaption = (items, titles) => {
     titles = [0]
   }
   return titles
-    .map(titleIndex => _getCaption(items[titleIndex]))
+    .map(titleIndex => getC(items[titleIndex]))
     .join(': ');
 };
 
@@ -21,7 +23,7 @@ const createrFns = {
   crItemKey: (items, seriaType, date) => {
     const _prefix = items
       .filter(Boolean)
-      .map(item => item.value || item.caption || item)
+      .map(item => getV(item) || getC(item) || item)
       .join('_');
     return [
       _prefix,
@@ -33,10 +35,10 @@ const createrFns = {
 
   crCaption: (items, titles) => {
     const itemCaption = _crItemCaption(items, titles)
-    , oneC = _getCaption(items[0])
-    , twoC = _getCaption(items[1])
-    , threeC = _getCaption(items[2])
-    , fourC = _getCaption(items[3]);
+    , oneC = getC(items[0])
+    , twoC = getC(items[1])
+    , threeC = getC(items[2])
+    , fourC = getC(items[3]);
 
     let _caption = _crC(oneC);
     if (fourC) {

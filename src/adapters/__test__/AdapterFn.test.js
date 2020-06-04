@@ -6,9 +6,7 @@ const {
   isYNumber,
   findMinY,
   findMaxY,
-  joinBy,
-  getCaption,
-  getValue
+  joinBy
 } = AdapterFn;
 
 const Y = [
@@ -159,41 +157,4 @@ describe('joinBy', () => {
     expect(joinBy('.', null, 'b', 'c')).toBe('b.c')
     expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c')
   })
-})
-
-describe('getCaption', ()=> {
-  test('should return string item caption', ()=>{
-    const fn = getCaption;
-    expect(fn({ caption: 'Abc' })).toBe('Abc')
-    expect(fn({ caption: '0' })).toBe('0')
-    expect(fn({ caption: 0 })).toBe('0')
-    expect(fn({})).toBe('')
-    expect(fn()).toBe('')
-    expect(fn(null)).toBe('')
-  })
-})
-
-describe('getValue', ()=>{
-  const fn = getValue;
-  test('should return string item value', ()=>{
-    expect(fn({ value: 'Abc'})).toBe('Abc')
-    expect(fn({ value: '0'})).toBe('0')
-    expect(fn({ value: 0})).toBe('0')
-
-    expect(fn({})).toBe('')
-    expect(fn()).toBe('')
-    expect(fn(null)).toBe('')
-  })
-
-  test('should return string upperCase in case isUpper option', ()=>{
-    const option = { isUpper: true };
-    expect(fn({ value: 'Abc'}, option)).toBe('ABC')
-    expect(fn({ value: '0'}, option)).toBe('0')
-    expect(fn({ value: 0}, option)).toBe('0')
-
-    expect(fn({}, option)).toBe('')
-    expect(fn(void 0, option)).toBe('')
-    expect(fn(null, option)).toBe('')
-  })
-
 })

@@ -1,16 +1,15 @@
 
 import Big from 'big.js'
 
-import dt from '../utils/DateUtils'
-import formatAllNumber from '../utils/formatAllNumber'
-
-import { Direction } from '../constants/Type'
+import ut from '../utils/ut'
 
 import mathFn from '../math/mathFn'
 import seriaFn from '../math/seriaFn'
 
+import { Direction } from '../constants/Type'
 import C from '../constants/Color'
 
+const { dt, getC, getV, formatAllNumber } = ut;
 const { findMinY, findMaxY } = seriaFn;
 
 const {
@@ -84,19 +83,8 @@ const AdapterFn = {
   ymdtToUTC,
   ymdhmsToUTC,
   getFromDate,
-  getCaption: item => ''+((item && item.caption) ?? ''),
-  getValue: (
-    item,
-    { isUpper, dfValue='' }={}
-  ) => {
-    const { value } = item ?? {}
-    , _value = typeof value === 'number'
-         ? ''+value
-         : value ?? ''+dfValue;
-    return isUpper
-      ? _value.toUpperCase()
-      : _value;
-  },
+  getCaption: getC,
+  getValue: getV,
 
 
   volumeColumnPoint({ date, open, close, volume, option }) {
