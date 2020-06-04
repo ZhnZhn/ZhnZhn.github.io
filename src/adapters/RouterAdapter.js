@@ -19,6 +19,7 @@ import Quandl from './quandl/Quandl'
 import DbNomics from './db-nomics/DbNomics'
 import Crc from './crypto-compare/Crc'
 import Cg from './coin-gecko/Cg'
+import Cp from './coin-paprika/Cp'
 
 
 const RouterAdapter = {
@@ -41,7 +42,8 @@ const RouterAdapter = {
   Eia,
   Intrinio,
   Crc,
-  Cg
+  Cg,
+  Cp
 };
 
 export default RouterAdapter

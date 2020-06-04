@@ -89,6 +89,7 @@ var LoadType = {
   INTR: 'INTR',
   CRC: 'CRC',
   CG: 'CG',
+  CP: 'CP',
   WL: 'WL'
 };
 exports.LoadType = LoadType;

@@ -47,7 +47,7 @@ export const ModalDialog = {
   CUSTOMIZE_EXPORT: 'CUSTOMIZE_EXPORT',
   COLUMN_RANGE: 'COLUMN_RANGE',
   ADD_TO_WATCH: 'addToWatch',
-  LOAD_ITEM: 'loadItem',  
+  LOAD_ITEM: 'loadItem',
   STOCKS_BY_SECTOR: 'STOCKS_BY_SECTOR',
   EDIT_WATCH_GROUP: 'editWatchGroup',
   EDIT_WATCH_LIST: 'editWatchList',
@@ -94,6 +94,7 @@ export const LoadType = {
   INTR: 'INTR',
   CRC: 'CRC',
   CG: 'CG',
+  CP: 'CP',
   WL: 'WL'
 }
 

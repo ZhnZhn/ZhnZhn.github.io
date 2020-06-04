@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-paprika/Cp.js"
+ ],
+ "file": "../../../src/adapters/coin-paprika/Cp.js",
+ "names": [
+  "Cp",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AACJC,EAAAA,OAAO,EAAPA;AADI,CAAX;eAIeF,E"
+}
