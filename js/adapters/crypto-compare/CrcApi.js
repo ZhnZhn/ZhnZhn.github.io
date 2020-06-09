@@ -1,25 +1,45 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+
+var getValue = _fnAdapter["default"].getValue;
 var C = {
   URL: 'https://min-api.cryptocompare.com/',
   HD: 'data/histoday',
   URL_CI: 'https://www.cryptocompare.com/api/data/coinsnapshotfullbyid/',
   REQUEST_ERROR: 'Request Error',
-  RESPONSE_EMPTY: 'Response Empty'
+  RESPONSE_EMPTY: 'Response Empty',
+  DF_ID: 'BTC'
+};
+
+var _getValue = function _getValue(items) {
+  if (items === void 0) {
+    items = [];
+  }
+
+  return getValue(items[0], {
+    dfValue: C.DF_ID
+  });
 };
 
 var _hdUrl = function _hdUrl(option) {
-  var _option$value = option.value,
-      value = _option$value === void 0 ? '' : _option$value;
+  var value = _getValue(option.items);
+
+  option.value = value;
   return "" + C.URL + C.HD + "?fsym=" + value + "&tsym=USD&limit=600";
 };
 
 var _ciUrl = function _ciUrl(option) {
   var proxy = option.proxy,
-      _option$value2 = option.value,
-      value = _option$value2 === void 0 ? '' : _option$value2;
+      items = option.items,
+      value = _getValue(items);
+
+  option.value = value;
   return "" + proxy + C.URL_CI + "?id=" + value;
 };
 

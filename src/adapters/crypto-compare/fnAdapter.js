@@ -2,6 +2,7 @@
 import AdapterFn from '../AdapterFn'
 
 const {
+  getValue,
   valueMoving,
   volumeColumnPoint,
   roundBy,
@@ -65,8 +66,9 @@ const _addHLPointTo = (arr, d, p) => {
 };
 
 const fnAdapter = {
+  getValue,
   crSeria,
-  
+
   crData: (json) => {
     const data = []
         , dVolume = []

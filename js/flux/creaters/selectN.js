@@ -68,6 +68,7 @@ var createLoadOptions = function createLoadOptions(props, options) {
 
   var _props = props,
       loadId = _props.loadId,
+      linkFn = _props.linkFn,
       dataSource = _props.dataSource,
       _props$dfProps = _props.dfProps,
       dfProps = _props$dfProps === void 0 ? {} : _props$dfProps,
@@ -105,6 +106,7 @@ var createLoadOptions = function createLoadOptions(props, options) {
     seriaWidth: seriaWidth,
     items: items,
     loadId: loadId,
+    linkFn: linkFn,
     title: title,
     subtitle: subtitle
   }, crAlertConf(itemCaption + ": " + threeC, itemCaption, threeC), {

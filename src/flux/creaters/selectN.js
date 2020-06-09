@@ -34,7 +34,7 @@ const _modifyIfItemTable = (dfProps, items) => {
 };
 
 const createLoadOptions = (props={}, options={}) => {
-  const { loadId, dataSource, dfProps={} } = props
+  const { loadId, linkFn, dataSource, dfProps={} } = props
   , {
       items=[], titles,
       dialogOptions,
@@ -63,7 +63,7 @@ const createLoadOptions = (props={}, options={}) => {
     fromDate,
     time: date,
     seriaType, seriaColor, seriaWidth,
-    items, loadId,
+    items, loadId, linkFn,
     title, subtitle,
     ...crAlertConf(`${itemCaption}: ${threeC}`, itemCaption, threeC),
     dataSource

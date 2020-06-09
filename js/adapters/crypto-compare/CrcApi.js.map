@@ -1,1 +1,40 @@
-{"version":3,"sources":["../../../src/adapters/crypto-compare/CrcApi.js"],"names":["C","URL","HD","URL_CI","REQUEST_ERROR","RESPONSE_EMPTY","_hdUrl","option","value","_ciUrl","proxy","_rUrl","DF","CI","CrcApi","getRequestUrl","dfSubLoadId","_crUrl","checkResponse","json","Response","errCaption","message","Message"],"mappings":";;;;AAAA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,oCADG;AAERC,EAAAA,EAAE,EAAE,eAFI;AAGRC,EAAAA,MAAM,EAAE,8DAHA;AAIRC,EAAAA,aAAa,EAAE,eAJP;AAKRC,EAAAA,cAAc,EAAE;AALR,CAAV;;AAQA,IAAMC,MAAM,GAAG,SAATA,MAAS,CAACC,MAAD,EAAY;AAAA,sBACJA,MADI,CACjBC,KADiB;AAAA,MACjBA,KADiB,8BACX,EADW;AAEzB,cAAUR,CAAC,CAACC,GAAZ,GAAkBD,CAAC,CAACE,EAApB,cAA+BM,KAA/B;AACD,CAHD;;AAKA,IAAMC,MAAM,GAAG,SAATA,MAAS,CAACF,MAAD,EAAY;AAAA,MACjBG,KADiB,GACGH,MADH,CACjBG,KADiB;AAAA,uBACGH,MADH,CACVC,KADU;AAAA,MACVA,KADU,+BACJ,EADI;AAEzB,cAAUE,KAAV,GAAkBV,CAAC,CAACG,MAApB,YAAiCK,KAAjC;AACD,CAHD;;AAKA,IAAMG,KAAK,GAAG;AACZC,EAAAA,EAAE,EAAEN,MADQ;AAEZJ,EAAAA,EAAE,EAAEI,MAFQ;AAGZO,EAAAA,EAAE,EAAEJ;AAHQ,CAAd;AAMA,IAAMK,MAAM,GAAG;AACbC,EAAAA,aADa,yBACCR,MADD,EACQ;AACb,QAAES,WAAF,GAAkBT,MAAlB,CAAES,WAAF;AAAA,QACAC,MADA,GACSN,KAAK,CAACK,WAAD,CAAL,IAAsBL,KAAK,CAACC,EADrC;;AAEN,WAAOK,MAAM,CAACV,MAAD,CAAb;AACD,GALY;AAMbW,EAAAA,aANa,yBAMCC,IAND,EAMM;AACjB,QAAK,EAAEA,IAAI,IAAIA,IAAI,CAACC,QAAL,KAAkB,OAA5B,CAAL,EAA2C;AACzC,YAAM;AACJC,QAAAA,UAAU,EAAErB,CAAC,CAACI,aADV;AAEJkB,QAAAA,OAAO,EAAEH,IAAI,GACPA,IAAI,CAACI,OAAL,IAAgB,EADT,GAEPvB,CAAC,CAACK;AAJJ,OAAN;AAMD;;AACD,WAAO,IAAP;AACD;AAhBY,CAAf;eAmBeS,M","sourcesContent":["const C = {\r\n  URL: 'https://min-api.cryptocompare.com/',\r\n  HD: 'data/histoday',\r\n  URL_CI: 'https://www.cryptocompare.com/api/data/coinsnapshotfullbyid/',\r\n  REQUEST_ERROR: 'Request Error',\r\n  RESPONSE_EMPTY: 'Response Empty'\r\n};\r\n\r\nconst _hdUrl = (option) => {\r\n  const { value='' } = option;\r\n  return `${C.URL}${C.HD}?fsym=${value}&tsym=USD&limit=600`;\r\n}\r\n\r\nconst _ciUrl = (option) => {\r\n  const { proxy, value='' } = option;\r\n  return `${proxy}${C.URL_CI}?id=${value}`;\r\n};\r\n\r\nconst _rUrl = {\r\n  DF: _hdUrl,\r\n  HD: _hdUrl,\r\n  CI: _ciUrl\r\n};\r\n\r\nconst CrcApi = {\r\n  getRequestUrl(option){\r\n    const { dfSubLoadId } = option\r\n        , _crUrl = _rUrl[dfSubLoadId] || _rUrl.DF;\r\n    return _crUrl(option);\r\n  },\r\n  checkResponse(json){\r\n    if ( !(json && json.Response !== 'Error') ){\r\n      throw {\r\n        errCaption: C.REQUEST_ERROR,\r\n        message: json\r\n            ? json.Message || ''\r\n            : C.RESPONSE_EMPTY\r\n      };\r\n    }\r\n    return true;\r\n  }\r\n};\r\n\r\nexport default CrcApi\r\n"],"file":"CrcApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/crypto-compare/CrcApi.js"
+ ],
+ "file": "../../../src/adapters/crypto-compare/CrcApi.js",
+ "names": [
+  "getValue",
+  "fnAdapter",
+  "C",
+  "URL",
+  "HD",
+  "URL_CI",
+  "REQUEST_ERROR",
+  "RESPONSE_EMPTY",
+  "DF_ID",
+  "_getValue",
+  "items",
+  "dfValue",
+  "_hdUrl",
+  "option",
+  "value",
+  "_ciUrl",
+  "proxy",
+  "_rUrl",
+  "DF",
+  "CI",
+  "CrcApi",
+  "getRequestUrl",
+  "dfSubLoadId",
+  "_crUrl",
+  "checkResponse",
+  "json",
+  "Response",
+  "errCaption",
+  "message",
+  "Message"
+ ],
+ "mappings": ";;;;;;;AAAA;;IAEQA,Q,GAAaC,qB,CAAbD,Q;AAER,IAAME,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,oCADG;AAERC,EAAAA,EAAE,EAAE,eAFI;AAGRC,EAAAA,MAAM,EAAE,8DAHA;AAIRC,EAAAA,aAAa,EAAE,eAJP;AAKRC,EAAAA,cAAc,EAAE,gBALR;AAMRC,EAAAA,KAAK,EAAE;AANC,CAAV;;AASA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,KAAD;AAAA,MAACA,KAAD;AAACA,IAAAA,KAAD,GAAO,EAAP;AAAA;;AAAA,SAChBV,QAAQ,CAACU,KAAK,CAAC,CAAD,CAAN,EAAW;AAAEC,IAAAA,OAAO,EAAET,CAAC,CAACM;AAAb,GAAX,CADQ;AAAA,CAAlB;;AAGA,IAAMI,MAAM,GAAG,SAATA,MAAS,CAACC,MAAD,EAAY;AACzB,MAAMC,KAAK,GAAGL,SAAS,CAACI,MAAM,CAACH,KAAR,CAAvB;;AACAG,EAAAA,MAAM,CAACC,KAAP,GAAeA,KAAf;AACA,cAAUZ,CAAC,CAACC,GAAZ,GAAkBD,CAAC,CAACE,EAApB,cAA+BU,KAA/B;AACD,CAJD;;AAMA,IAAMC,MAAM,GAAG,SAATA,MAAS,CAACF,MAAD,EAAY;AAAA,MACjBG,KADiB,GACAH,MADA,CACjBG,KADiB;AAAA,MACVN,KADU,GACAG,MADA,CACVH,KADU;AAAA,MAEvBI,KAFuB,GAEfL,SAAS,CAACC,KAAD,CAFM;;AAGzBG,EAAAA,MAAM,CAACC,KAAP,GAAeA,KAAf;AACA,cAAUE,KAAV,GAAkBd,CAAC,CAACG,MAApB,YAAiCS,KAAjC;AACD,CALD;;AAOA,IAAMG,KAAK,GAAG;AACZC,EAAAA,EAAE,EAAEN,MADQ;AAEZR,EAAAA,EAAE,EAAEQ,MAFQ;AAGZO,EAAAA,EAAE,EAAEJ;AAHQ,CAAd;AAMA,IAAMK,MAAM,GAAG;AACbC,EAAAA,aADa,yBACCR,MADD,EACQ;AACb,QAAES,WAAF,GAAkBT,MAAlB,CAAES,WAAF;AAAA,QACAC,MADA,GACSN,KAAK,CAACK,WAAD,CAAL,IAAsBL,KAAK,CAACC,EADrC;;AAEN,WAAOK,MAAM,CAACV,MAAD,CAAb;AACD,GALY;AAMbW,EAAAA,aANa,yBAMCC,IAND,EAMM;AACjB,QAAK,EAAEA,IAAI,IAAIA,IAAI,CAACC,QAAL,KAAkB,OAA5B,CAAL,EAA2C;AACzC,YAAM;AACJC,QAAAA,UAAU,EAAEzB,CAAC,CAACI,aADV;AAEJsB,QAAAA,OAAO,EAAEH,IAAI,GACPA,IAAI,CAACI,OAAL,IAAgB,EADT,GAEP3B,CAAC,CAACK;AAJJ,OAAN;AAMD;;AACD,WAAO,IAAP;AACD;AAhBY,CAAf;eAmBea,M"
+}
