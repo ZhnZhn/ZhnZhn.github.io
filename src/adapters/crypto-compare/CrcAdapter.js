@@ -1,3 +1,5 @@
+import crAdapter from '../crAdapter'
+
 import toHdConfig from './toHdConfig'
 import toInfoConfig from './toInfoConfig'
 
@@ -7,27 +9,11 @@ const _rAdapter = {
   CI: toInfoConfig
 };
 
-const _isFn = fn => typeof fn === 'function';
-
 const _getAdapter = (option) => {
   const { dfSubLoadId } = option;
   return _rAdapter[dfSubLoadId] || _rAdapter.DF;
 };
 
-const CrcAdapter = {
-  toConfig(json, option){
-    return _getAdapter(option)
-      .toConfig(json, option);
-  },
-
-  isAdd(option){
-    return _isFn(_getAdapter(option).toSeries)
-  },
-
-  toSeries(json, option){
-    return _getAdapter(option)
-      .toSeries(json, option);
-  }
-}
+const CrcAdapter = crAdapter(_getAdapter)
 
 export default CrcAdapter

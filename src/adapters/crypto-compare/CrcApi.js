@@ -1,6 +1,6 @@
 import fnAdapter from './fnAdapter'
 
-const { getValue } = fnAdapter
+const { getValue } = fnAdapter;
 
 const C = {
   URL: 'https://min-api.cryptocompare.com/',

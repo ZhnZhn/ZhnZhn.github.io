@@ -53,7 +53,7 @@ const Msg = {
      ERR_10: {
        token: 'ERR_10',
        caption: 'Not Allowed to Add',
-       descr: "This type of request isn't allowed to be added to selected chart. This type of request can be loaded in his own chart.",
+       descr: "This type of request isn't allowed to be added to selected chart. It can be loaded in his own chart or view item.",
      }
   }
 }

@@ -2,9 +2,7 @@ import React, { Component, memo } from 'react'
 
 import Comp from '../Comp'
 import ItemHeader from './ItemHeader'
-//import ShowHide from '../zhn/ShowHide';
-//import OpenClose from '../zhn/OpenClose'
-//import DivHtml from '../zhn/DivHtml'
+
 import TwitterLink from '../about/TwitterLink'
 import CrcLink from '../native-links/CrcLink'
 
@@ -74,7 +72,7 @@ const RowField = ({ items, children }) => {
   );
 }
 
-const Topic = memo(({ className, title, str }) => {  
+const Topic = memo(({ className, title, str }) => {
   if (!DivHtml.isHtml(str)) {
     return null;
   }

@@ -78,14 +78,14 @@ const _fToFloatOr = dfValue => str => {
   return _isNaN(_v) ? dfValue : _v;
 };
 
-const AdapterFn = {
+const AdapterFn = {  
   ymdToUTC,
   ymdtToUTC,
   ymdhmsToUTC,
   getFromDate,
+
   getCaption: getC,
   getValue: getV,
-
 
   volumeColumnPoint({ date, open, close, volume, option }) {
     let _color;

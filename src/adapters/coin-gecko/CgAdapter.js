@@ -1,3 +1,5 @@
+import crAdapter from '../crAdapter'
+
 import toChart from './toChart'
 import toList from './toList'
 
@@ -6,32 +8,11 @@ const _rAdapter = {
   MCL: toList
 }
 
-const _isFn = fn => typeof fn === 'function';
-
 const _getAdapter = option => {
   const { dfSubId } = option;
   return _rAdapter[dfSubId] || _rAdapter.DF;
 };
 
-const CgAdapter = {
-  crKey(option){
-    return _getAdapter(option)
-      .crKey(option);
-  },
-
-  toConfig(json, option){
-    return _getAdapter(option)
-      .toConfig(json, option);
-  },
-
-  isAdd(option){        
-    return _isFn(_getAdapter(option).toSeries);
-  },
-
-  toSeries(json, option){
-    return _getAdapter(option)
-      .toSeries(json, option);
-  }
-};
+const CgAdapter = crAdapter(_getAdapter, { isKey: true })
 
 export default CgAdapter

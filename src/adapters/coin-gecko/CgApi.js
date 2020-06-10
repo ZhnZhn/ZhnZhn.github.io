@@ -22,14 +22,14 @@ const _crDays = ({ fromDate }) => {
 const _assignDf = option => {
   const { items } = option
   , [ it1, it2 ] = items
-  , { caption, value, s } = it1
-  , { value:_currency } = it2
+  , { c, v:value, s } = it1
+  , { v:_currency } = it2
   , _vs = `${s}/${_currency}`
   , _days = _crDays(option);
 
   _assign(option, {
     itemCaption: _vs,
-    title: `${caption} (${_vs})`,
+    title: c,
     subtitle: 'Values on 00:00 GMT',
     _currency: _currency,
     _nativeUrl: `${C.PAGE_URL}/${value}`,

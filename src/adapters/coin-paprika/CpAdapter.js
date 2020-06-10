@@ -1,61 +1,16 @@
-import Builder from '../../charts/ConfigBuilder';
-import fnAdapter from './fnAdapter'
+import toChartConfig from './toChartConfig'
 
-const {
-  crSeria, getValue,
-  crData, crConfigOption
-} = fnAdapter
+import crAdapter from '../crAdapter'
 
-const SUBTITLE = 'Values on 23:59:59 UTC'
+const _rAdapter = {
+  DF: toChartConfig
+};
 
-const CpAdapter = {
-  crKey(option){
-    const { items=[], fromDate } = option;
-    return (option._itemKey = `${getValue(items[0])}_${fromDate}`);
-  },
+const _getAdapter = (option) => {
+  const { dfRoute } = option;
+  return _rAdapter[dfRoute] || _rAdapter.DF;
+};
 
-  toConfig(json, option){
-    const {
-       seriaType, seriaColor, seriaWidth,
-       title
-    } = option
-    , {
-       data, dVolume, dColumn,
-       dMarketCap
-    } = crData(json)
-    , seria = Builder()
-       .splineSeria({
-         seriaType, seriaColor, seriaWidth,
-         data
-       })
-       .toSeria()
-   , config = Builder()
-       .area2Config(title, SUBTITLE)
-       .addSeries(seria)
-       .addMinMax(data, option)
-       .add({
-         ...crConfigOption({ json, option, data })
-       })
-       .addMiniVolume({
-         btTitle: 'Volume',
-         title: 'Volume USD',
-         dVolume, dColumn
-       })
-       .addMiniVolume({
-         btTitle: 'Market Cap',
-         title: 'Market Cap USD',
-         dVolume: dMarketCap
-       })
-       .toConfig();
-   return { config };
-  },
-
-  toSeries(json, option){
-    return crSeria({
-      adapter: CpAdapter,
-      json, option
-    });
-  }
-}
+const CpAdapter = crAdapter(_getAdapter, { isKey: true });
 
 export default CpAdapter

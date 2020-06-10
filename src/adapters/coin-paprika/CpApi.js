@@ -6,6 +6,8 @@ const C = {
   URL: 'https://api.coinpaprika.com/v1',
   DF_ID: 'btc-bitcoin'
 }
+//https://api.coinpaprika.com/v1/coins/btc-bitcoin/twitter
+//status, status_link, date, user_name, retweet_count, like_count
 
 const _isArr = Array.isArray;
 
