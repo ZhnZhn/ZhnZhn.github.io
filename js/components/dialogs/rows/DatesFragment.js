@@ -19,9 +19,7 @@ var _useRowStyle2 = _interopRequireDefault(require("./useRowStyle"));
 var FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 var NEAR_ERR_MSG = "From Date is near that To Date";
 
-var DatesFragment =
-/*#__PURE__*/
-function (_Component) {
+var DatesFragment = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DatesFragment, _Component);
 
   function DatesFragment() {
@@ -65,11 +63,11 @@ function (_Component) {
         rowStyle = _useRowStyle.rowStyle,
         labelStyle = _useRowStyle.labelStyle;
 
-    return _react["default"].createElement("div", null, _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
       style: rowStyle
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: labelStyle
-    }, fromCaption), _react["default"].createElement(_DateField["default"], {
+    }, fromCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
       ref: this._refFromDate,
       rootStyle: dateStyle,
       placeholder: placeholder,
@@ -77,11 +75,11 @@ function (_Component) {
       errorMsg: errMsg,
       onTest: onTestDate,
       onEnter: onEnter
-    })), _react["default"].createElement("div", {
+    })), /*#__PURE__*/_react["default"].createElement("div", {
       style: rowStyle
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: labelStyle
-    }, toCaption), _react["default"].createElement(_DateField["default"], {
+    }, toCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
       ref: this._refToDate,
       rootStyle: dateStyle,
       placeholder: placeholder,

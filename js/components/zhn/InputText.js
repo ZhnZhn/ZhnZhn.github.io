@@ -66,9 +66,7 @@ var _isMinMaxNumber = function _isMinMaxNumber(_ref2) {
   return type === 'number' && _isNumber(min) && _isNumber(max);
 };
 
-var InputText =
-/*#__PURE__*/
-function (_Component) {
+var InputText = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(InputText, _Component);
 
   /*
@@ -129,7 +127,7 @@ function (_Component) {
       }
     };
 
-    _this._refInput = _react["default"].createRef();
+    _this._refInput = /*#__PURE__*/_react["default"].createRef();
     _this.isOnEnter = _isFn(props.onEnter) ? true : false;
     _this.state = _getInitStateFrom(props);
     return _this;
@@ -164,10 +162,10 @@ function (_Component) {
         _spellCheck = spellCheck ? "true" : "false",
         _className = _isMinMaxNumber(this.props) ? CL.NUMBER_RANGE : void 0;
 
-    return _react["default"].createElement("input", {
+    return /*#__PURE__*/_react["default"].createElement("input", {
       ref: this._refInput,
       className: _className,
-      style: (0, _extends2["default"])({}, S.INPUT, {}, style),
+      style: (0, _extends2["default"])({}, S.INPUT, style),
       type: type || C.TEXT,
       name: C.TEXT,
       autoCapitalize: C.OFF,

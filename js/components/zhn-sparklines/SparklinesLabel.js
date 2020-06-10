@@ -12,7 +12,7 @@ var _react = _interopRequireDefault(require("react"));
 var SparklinesLabel = function SparklinesLabel(_ref) {
   var title = _ref.title,
       rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["title"]);
-  return _react["default"].createElement("text", rest, title);
+  return /*#__PURE__*/_react["default"].createElement("text", rest, title);
 };
 
 var _default = SparklinesLabel;

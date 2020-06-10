@@ -12,17 +12,17 @@ var CL = "button-circle";
 var SvgPlus = function SvgPlus(_ref) {
   var style = _ref.style,
       onClick = _ref.onClick;
-  return _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("button", {
     className: CL,
     style: style,
     onClick: onClick
-  }, _react["default"].createElement("svg", {
+  }, /*#__PURE__*/_react["default"].createElement("svg", {
     width: "20px",
     height: "20px",
     viewBox: "0 0 20 20",
     preserveAspectRatio: "none",
     xmlns: "http://www.w3.org/2000/svg"
-  }, _react["default"].createElement("path", {
+  }, /*#__PURE__*/_react["default"].createElement("path", {
     strokeWidth: "2",
     strokeLinecap: "round",
     d: "M 10,4 L 10,16 M 4,10 L 16,10"

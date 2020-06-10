@@ -114,9 +114,7 @@ var _createInitialState = function _createInitialState(props) {
   };
 };
 
-var StocksBySectorDialog =
-/*#__PURE__*/
-function (_Component) {
+var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(StocksBySectorDialog, _Component);
 
   /*
@@ -192,7 +190,7 @@ function (_Component) {
         id: id,
         linkFn: 'NASDAQ',
         dataSource: caption
-      }, dialogProps, {}, dfProps));
+      }, dialogProps, dfProps));
 
       onClose();
     };
@@ -206,10 +204,10 @@ function (_Component) {
       title: 'Click to toggle options',
       onClick: _this._hClickLink
     }];
-    _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Load, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Load, {
       key: "load",
       onClick: _this._hLoad
-    }), _react["default"].createElement(_DialogCell["default"].Button.Show, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Show, {
       key: "show",
       onClick: _this._hShow
     })];
@@ -250,31 +248,31 @@ function (_Component) {
         isShowLabels = _this$state.isShowLabels,
         isShowLink = _this$state.isShowLink,
         _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
-        _linkStyle = isShowLabels ? S.LINK : (0, _extends2["default"])({}, S.LINK, {}, S.LINK_NOT_LABELS);
+        _linkStyle = isShowLabels ? S.LINK : (0, _extends2["default"])({}, S.LINK, S.LINK_NOT_LABELS);
 
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       caption: text,
       style: _style,
       styleCaption: S.CAPTION_SPAN,
       isShow: isShow,
       commandButtons: this._commandButtons,
       onClose: onClose
-    }, _react["default"].createElement(_DialogCell["default"].ToolbarButtonCircle, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ToolbarButtonCircle, {
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Source",
       placeholder: DF_SOURCE.caption,
       options: SOURCE_OPTIONS,
       onSelect: this._hSelectDataSource
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowLink,
       style: S.LINK_SHOW_HIDE
-    }, _react["default"].createElement(_DialogCell["default"].Row.Plain, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Plain, {
       style: S.LINK_ROOT
-    }, isShowLabels && _react["default"].createElement("span", {
+    }, isShowLabels && /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LINK_CAPTION
-    }, "Link:"), _react["default"].createElement(_NasdaqLink["default"], {
+    }, "Link:"), /*#__PURE__*/_react["default"].createElement(_NasdaqLink["default"], {
       style: _linkStyle,
       item: item,
       caption: "NASDAQ"

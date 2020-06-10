@@ -31,16 +31,16 @@ var S = {
   }
 };
 
-var DivCompareTo = _react["default"].forwardRef(function (_ref, ref) {
+var DivCompareTo = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
   var initialValue = _ref.initialValue,
       msgErr = _ref.msgErr,
       onTest = _ref.onTest,
       onEnter = _ref.onEnter;
-  return _react["default"].createElement("div", null, _react["default"].createElement("label", {
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("label", {
     style: S.ROW_INPUT
-  }, _react["default"].createElement(_SpanLabel["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_SpanLabel["default"], {
     label: "CompareTo:"
-  }), _react["default"].createElement(_DateField["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
     ref: ref,
     rootStyle: S.DATE_FIELD,
     initialValue: initialValue,
@@ -48,9 +48,9 @@ var DivCompareTo = _react["default"].forwardRef(function (_ref, ref) {
     errorMsg: "DD-MM-YYYY",
     onTest: onTest,
     onEnter: onEnter
-  })), msgErr && _react["default"].createElement("div", {
+  })), msgErr && /*#__PURE__*/_react["default"].createElement("div", {
     style: S.DIV_MSG
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: S.MSG
   }, msgErr)));
 });

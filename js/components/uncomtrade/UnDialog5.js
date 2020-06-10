@@ -60,9 +60,7 @@ var TRADE_FLOW = [{
     measure: "avgPrice"
   }
 }];
-var UnDialog5 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var UnDialog5 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(UnDialog5, _Component);
 
   function UnDialog5(props) {
@@ -186,7 +184,7 @@ function (_Component) {
         isShowDate = _this$state.isShowDate,
         isShowOptions = _this$state.isShowOptions,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -194,10 +192,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
@@ -205,7 +203,7 @@ function (_Component) {
       caption: oneCaption,
       placeholder: "Default: All",
       onSelect: this._handleSelectOne
-    }), _react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
       ref: this._refGroupItem,
       isShow: isShow,
       isShowLabels: isShowLabels,
@@ -214,9 +212,9 @@ function (_Component) {
       oneJsonProp: twoJsonProp,
       twoCaption: threeCaption,
       msgOnNotSelected: msgOnNotSelected
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,
@@ -224,15 +222,15 @@ function (_Component) {
       nForecastDate: nForecastDate,
       msgOnNotValidFormat: msgOnNotValidFormat,
       onTestDate: onTestDate
-    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowOptions
-    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Trade Flow",
       options: TRADE_FLOW,
       placeholder: "Default: Export Value",
       onSelect: this._handleSelectTradeFlow
-    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

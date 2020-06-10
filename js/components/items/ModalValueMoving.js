@@ -61,19 +61,17 @@ var _isNotAdminMode = function _isNotAdminMode(isAdminMode, isDenyToChange) {
 var RowValueDate = function RowValueDate(_ref) {
   var value = _ref.value,
       date = _ref.date;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.ROW
-  }, _react["default"].createElement(_SpanValue["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_SpanValue["default"], {
     value: (0, _formatAllNumber["default"])(value)
-  }), _react["default"].createElement(_SpanDate["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_SpanDate["default"], {
     date: date,
     style: S.DATE
   }));
 };
 
-var ModalValueMoving =
-/*#__PURE__*/
-function (_Component) {
+var ModalValueMoving = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ModalValueMoving, _Component);
 
   function ModalValueMoving() {
@@ -87,7 +85,7 @@ function (_Component) {
     _this.state = {
       msgDateTo: ''
     };
-    _this._refInput = _react["default"].createRef();
+    _this._refInput = /*#__PURE__*/_react["default"].createRef();
 
     _this._handleEnterDate = function (dateTo) {
       if (isDmy(dateTo)) {
@@ -134,17 +132,17 @@ function (_Component) {
         dateTo = valueMoving.dateTo,
         isDenyToChange = valueMoving.isDenyToChange,
         msgDateTo = this.state.msgDateTo;
-    return _react["default"].createElement(_ModalPopup["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
       isShow: isShow,
       style: S.ROOT,
       onClose: onClose
-    }, _react["default"].createElement(RowValueDate, {
+    }, /*#__PURE__*/_react["default"].createElement(RowValueDate, {
       value: value,
       date: date
-    }), _react["default"].createElement(RowValueDate, {
+    }), /*#__PURE__*/_react["default"].createElement(RowValueDate, {
       value: valueTo,
       date: dateTo
-    }), !_isNotAdminMode(isAdminMode, isDenyToChange) && _react["default"].createElement(_DivCompareTo["default"], {
+    }), !_isNotAdminMode(isAdminMode, isDenyToChange) && /*#__PURE__*/_react["default"].createElement(_DivCompareTo["default"], {
       ref: this._refInput,
       initialValue: dateTo,
       msgErr: msgDateTo,

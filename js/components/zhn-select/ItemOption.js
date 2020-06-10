@@ -20,7 +20,7 @@ var ItemOption = function ItemOption(_ref) {
   var _ref$item = _ref.item,
       item = _ref$item === void 0 ? {} : _ref$item,
       propCaption = _ref.propCaption;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.CAPTION
   }, item[propCaption]);
 };

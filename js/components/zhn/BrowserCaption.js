@@ -80,22 +80,22 @@ var BrowserCaption = function BrowserCaption(_ref) {
       onClose = _ref.onClose;
   var theme = (0, _react.useContext)(_ThemeContext["default"]),
       TS = theme.getStyle(TH_ID);
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: CL.ROOT,
-    style: (0, _extends2["default"])({}, S.ROOT, {}, style, {}, TS.ROOT)
-  }, _isFn(onMore) && _react["default"].createElement(_SvgMore["default"], {
+    style: (0, _extends2["default"])({}, S.ROOT, style, TS.ROOT)
+  }, _isFn(onMore) && /*#__PURE__*/_react["default"].createElement(_SvgMore["default"], {
     style: S.BT_MORE,
     svgStyle: S.SVG_MORE,
     onClick: onMore
-  }), _isFn(onCheck) && _isFn(onUnCheck) && _react["default"].createElement(_SvgCheckBox["default"], {
+  }), _isFn(onCheck) && _isFn(onUnCheck) && /*#__PURE__*/_react["default"].createElement(_SvgCheckBox["default"], {
     initValue: false,
     style: S.CHECK_BOX,
     onCheck: onCheck,
     onUnCheck: onUnCheck
-  }), _react["default"].createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     className: CL.NOT_SELECTED,
-    style: (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle)
-  }, caption), children, _react["default"].createElement(_SvgClose["default"], {
+    style: (0, _extends2["default"])({}, S.CAPTION, captionStyle)
+  }, caption), children, /*#__PURE__*/_react["default"].createElement(_SvgClose["default"], {
     style: S.SVG_CLOSE,
     onClose: onClose
   }));

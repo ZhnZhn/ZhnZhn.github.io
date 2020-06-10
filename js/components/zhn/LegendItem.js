@@ -70,13 +70,13 @@ var LegendItem = function LegendItem(_ref2) {
     });
   };
 
-  return _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("button", {
     className: CL,
     style: btStyle,
     onClick: _hClick
-  }, _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.CIRCLE, {}, circleStyle)
-  }), _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, S.CIRCLE, circleStyle)
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     style: S.ITEM
   }, name));
 };

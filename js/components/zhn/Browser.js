@@ -39,9 +39,9 @@ var Browser = function Browser(_ref) {
       _clOpen = isShow ? CL.SHOW : '',
       _clRoot = CL.BROWSER + " " + _clOpen;
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: _clRoot,
-    style: (0, _extends2["default"])({}, style, {}, _styleOpen, {}, TS.ROOT)
+    style: (0, _extends2["default"])({}, style, _styleOpen, TS.ROOT)
   }, children);
 };
 /*

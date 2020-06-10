@@ -82,12 +82,12 @@ var RowSma = function RowSma(_ref) {
     }
   };
 
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_RowCaptionInput["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_RowCaptionInput["default"], {
     caption: "SMA",
     forwardRef: _refPeriod,
     initValue: _initialSma,
     onAdd: _onAddSma
-  }), _react["default"].createElement(_SeriaConfigs["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_SeriaConfigs["default"], {
     configs: smaConfs,
     onRemove: _onRemoveSma
   }));

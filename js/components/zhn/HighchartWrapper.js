@@ -32,9 +32,7 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var HighchartWrapper =
-/*#__PURE__*/
-function (_Component) {
+var HighchartWrapper = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(HighchartWrapper, _Component);
 
   function HighchartWrapper(props) {
@@ -50,7 +48,7 @@ function (_Component) {
       _this.chart = new _highcharts["default"]['Chart'](_this._refChart.current, config);
     };
 
-    _this._refChart = _react["default"].createRef();
+    _this._refChart = /*#__PURE__*/_react["default"].createRef();
     return _this;
   }
 
@@ -99,9 +97,9 @@ function (_Component) {
         absComp = _this$props2.absComp,
         _style = isShow ? S.SHOW : S.HIDE;
 
-    return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, style, {}, S.DIV, {}, _style)
-    }, _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, style, S.DIV, _style)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       ref: this._refChart
     }), isShowAbs && absComp);
   };

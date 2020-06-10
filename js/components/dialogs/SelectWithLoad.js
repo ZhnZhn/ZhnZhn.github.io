@@ -19,9 +19,7 @@ var _withLoadOptions = _interopRequireDefault(require("./decorators/withLoadOpti
 
 var _class, _class2, _temp;
 
-var SelectWithLoad = (0, _withLoadOptions["default"])(_class = (_temp = _class2 =
-/*#__PURE__*/
-function (_Component) {
+var SelectWithLoad = (0, _withLoadOptions["default"])(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SelectWithLoad, _Component);
 
   function SelectWithLoad() {
@@ -68,7 +66,7 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    return _react["default"].createElement(_RowInputSelect["default"], (0, _extends2["default"])({}, this.props, this.state, {
+    return /*#__PURE__*/_react["default"].createElement(_RowInputSelect["default"], (0, _extends2["default"])({}, this.props, this.state, {
       onLoadOption: this._handlerLoadOptions
     }));
   };

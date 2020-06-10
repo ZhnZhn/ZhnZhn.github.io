@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/zhn-menu/LabelNew.js"
- ],
- "file": "../../../src/components/zhn-menu/LabelNew.js",
- "names": [
-  "S",
-  "LABEL",
-  "display",
-  "color",
-  "backgroundColor",
-  "marginLeft",
-  "marginRight",
-  "LabelNew"
- ],
- "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAG;AACNC,IAAAA,OAAO,EAAE,cADH;AAENC,IAAAA,KAAK,EAAE,SAFD;AAGNC,IAAAA,eAAe,EAAE,aAHX;AAINC,IAAAA,UAAU,EAAE,EAJN;AAKNC,IAAAA,WAAW,EAAE;AALP;AADA,CAAV;;AAUA,IAAMC,QAAQ,GAAG,SAAXA,QAAW;AAAA,SACf;AAAM,IAAA,KAAK,EAAEP,CAAC,CAACC;AAAf,WADe;AAAA,CAAjB;;eAMeM,Q"
-}
+{"version":3,"sources":["../../../src/components/zhn-menu/LabelNew.jsx"],"names":["S","LABEL","display","color","backgroundColor","marginLeft","marginRight","LabelNew"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAG;AACNC,IAAAA,OAAO,EAAE,cADH;AAENC,IAAAA,KAAK,EAAE,SAFD;AAGNC,IAAAA,eAAe,EAAE,aAHX;AAINC,IAAAA,UAAU,EAAE,EAJN;AAKNC,IAAAA,WAAW,EAAE;AALP;AADA,CAAV;;AAUA,IAAMC,QAAQ,GAAG,SAAXA,QAAW;AAAA,sBACf;AAAM,IAAA,KAAK,EAAEP,CAAC,CAACC;AAAf,WADe;AAAA,CAAjB;;eAMeM,Q","sourcesContent":["import React from 'react';\r\n\r\nconst S = {\r\n  LABEL : {\r\n    display: 'inline-block',\r\n    color: '#9e9e9e',\r\n    backgroundColor: 'transparent',\r\n    marginLeft: 16,\r\n    marginRight: 16\r\n  }\r\n}\r\n\r\nconst LabelNew = () => (\r\n  <span style={S.LABEL}>\r\n     New\r\n  </span>\r\n);\r\n\r\nexport default LabelNew\r\n"],"file":"LabelNew.js"}

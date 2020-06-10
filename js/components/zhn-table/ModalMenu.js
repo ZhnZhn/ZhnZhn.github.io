@@ -30,7 +30,7 @@ var _renderHeaders = function _renderHeaders(headers, _onToggle) {
   /*eslint-enable no-unused-vars*/
 
   return restHeader.map(function (h, index) {
-    return _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       key: h.name,
       rootStyle: S.ROW,
       checkedColor: "black",
@@ -51,17 +51,17 @@ var ModalMenu = function ModalMenu(_ref) {
       onToggleGrid = _ref.onToggleGrid,
       headers = _ref.headers,
       onToggle = _ref.onToggle;
-  return _react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
     style: style,
     isShow: isShow,
     onClose: onClose
-  }, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     rootStyle: S.ROW,
     checkedColor: "black",
     caption: "withStripLines",
     value: isGridLine,
     onToggle: onToggleGrid
-  }), _react["default"].createElement("hr", {
+  }), /*#__PURE__*/_react["default"].createElement("hr", {
     style: S.HR
   }), _renderHeaders(headers, onToggle));
 };

@@ -41,19 +41,19 @@ var S = {
 var BoldSpan = function BoldSpan(_ref) {
   var _ref$text = _ref.text,
       text = _ref$text === void 0 ? '' : _ref$text;
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     style: S.BOLD
   }, text);
 };
 
 var Delimeter = function Delimeter() {
-  return _react["default"].createElement("span", null, " - ");
+  return /*#__PURE__*/_react["default"].createElement("span", null, " - ");
 };
 
 var Span = function Span(_ref2) {
   var _ref2$text = _ref2.text,
       text = _ref2$text === void 0 ? '' : _ref2$text;
-  return _react["default"].createElement("span", null, text);
+  return /*#__PURE__*/_react["default"].createElement("span", null, text);
 };
 
 var Item = function Item(_ref3) {
@@ -65,19 +65,19 @@ var Item = function Item(_ref3) {
       type = item.type,
       region = item.region,
       currency = item.currency;
-  return _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("button", {
     className: CL.ITEM,
     onClick: onClick,
     onFocus: onFocus
-  }, _react["default"].createElement(BoldSpan, {
+  }, /*#__PURE__*/_react["default"].createElement(BoldSpan, {
     text: value
-  }), _react["default"].createElement(Delimeter, null), _react["default"].createElement(Span, {
+  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(Span, {
     text: name
-  }), _react["default"].createElement(Delimeter, null), _react["default"].createElement(BoldSpan, {
+  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(BoldSpan, {
     text: type
-  }), _react["default"].createElement(Delimeter, null), _react["default"].createElement(Span, {
+  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(Span, {
     text: region
-  }), _react["default"].createElement(Delimeter, null), _react["default"].createElement(BoldSpan, {
+  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(BoldSpan, {
     text: currency
   }));
 };
@@ -111,23 +111,23 @@ var SearchOptions = function SearchOptions(_ref4) {
 
   var _total = options.length || '';
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: CL.ROOT,
-    style: (0, _extends2["default"])({}, S.OPTIONS, {}, _style)
-  }, _react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, S.OPTIONS, _style)
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     className: CL.OPTIONS,
     style: S.OPTIONS
   }, options.map(function (item, index) {
-    return _react["default"].createElement(Item, {
+    return /*#__PURE__*/_react["default"].createElement(Item, {
       key: item.value + index,
       item: item,
       onClick: onClickItem.bind(null, item.value),
       onFocus: _onFocusItem.bind(null, index + 1)
     });
-  })), _react["default"].createElement("div", {
+  })), /*#__PURE__*/_react["default"].createElement("div", {
     className: CL.FOOTER,
     style: S.FOOTER
-  }, _react["default"].createElement("span", null, itemIndex, ":"), _react["default"].createElement("span", null, _total)));
+  }, /*#__PURE__*/_react["default"].createElement("span", null, itemIndex, ":"), /*#__PURE__*/_react["default"].createElement("span", null, _total)));
 };
 
 var _default = SearchOptions;

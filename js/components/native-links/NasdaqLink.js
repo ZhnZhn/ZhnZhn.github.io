@@ -27,7 +27,7 @@ var NasdaqLink = function NasdaqLink(_ref) {
       value = _ref2.value,
       _ticket = value ? value.trim() : text.split('-')[0].trim();
 
-  return _react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     style: style,
     href: "" + NASDAQ_BASE + _ticket,
     caption: caption + " " + _ticket

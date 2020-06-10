@@ -115,9 +115,7 @@ var _crLoadOptions = function _crLoadOptions(key, input) {
   });
 };
 
-var AlphaIntradayDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var AlphaIntradayDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AlphaIntradayDialog, _Component);
 
   function AlphaIntradayDialog(props) {
@@ -209,7 +207,7 @@ function (_Component) {
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
         isToggleOptions = _this$state.isToggleOptions;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -217,30 +215,30 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].RowPattern, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
       ref: this._refTicket,
       isShowLabels: isShowLabels,
       caption: "Ticket",
       placeholder: "Nyse or Nasdaq Ticket",
       onTest: _testTicket,
       errorMsg: "Not Empty"
-    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, (0, _extends2["default"])({
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, (0, _extends2["default"])({
       isShowLabels: isShowLabels
     }, _getConf(dfT), {
       //caption="Interval"
       //placeholder="Default: 15min"
       //options={_intervalOptions}
       onSelect: this._handleSelectInterval
-    })), this._isDaily && _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), this._isDaily && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isToggleOptions
-    }, this._isDailyAdj && _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }, this._isDailyAdj && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: false,
       caption: "With Dividend History",
       onToggle: this._toggleDividend
-    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: false,
       caption: "Filter Zero Values",
       onToggle: this._toggleFilterZero

@@ -114,9 +114,7 @@ var _crModalMenuStyle = function _crModalMenuStyle(node, left) {
   return void 0;
 };
 
-var ChartToolbar =
-/*#__PURE__*/
-function (_Component) {
+var ChartToolbar = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ChartToolbar, _Component);
 
   function ChartToolbar() {
@@ -218,13 +216,13 @@ function (_Component) {
         miniStyle = _this$state.miniStyle,
         _arrModalMenu = [];
 
-    var _btInfo = info ? _react["default"].createElement(_ButtonTab["default"], {
+    var _btInfo = info ? /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
       caption: "Info",
       onClick: onClickInfo
     }) : null;
 
     if (hasError) {
-      return _react["default"].createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         ref: this._refToolbar,
         className: CL.SCROLL,
         style: style
@@ -234,7 +232,7 @@ function (_Component) {
     var _btTabIndicator = null;
 
     if (_isIndicatorTab(config, isWithoutIndicator)) {
-      _btTabIndicator = _react["default"].createElement(_ButtonTab["default"], {
+      _btTabIndicator = /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
         style: S.BT_IND,
         caption: "Indicator",
         isShow: isShowInd,
@@ -242,7 +240,7 @@ function (_Component) {
         onClick: this._hShowInd
       });
 
-      _arrModalMenu.push(_react["default"].createElement(_ModalMenuIndicator["default"], {
+      _arrModalMenu.push( /*#__PURE__*/_react["default"].createElement(_ModalMenuIndicator["default"], {
         key: "menu_ind",
         isShow: isShowInd,
         style: S.M_IND,
@@ -255,13 +253,13 @@ function (_Component) {
       }));
     }
 
-    var _btLegend = legend ? _react["default"].createElement(_ButtonTab["default"], {
+    var _btLegend = legend ? /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
       style: S.BT_LEGEND,
       caption: "Legend",
       onClick: onClickLegend
     }) : null;
 
-    var _btAdd = itemConf ? _react["default"].createElement(_ButtonTab["default"], {
+    var _btAdd = itemConf ? /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
       style: S.BT_ADD,
       caption: "Add" //isUpdatable={false}
       ,
@@ -271,7 +269,7 @@ function (_Component) {
     var _btTabMini = null;
 
     if (zhMiniConfigs && zhMiniConfigs.length) {
-      _btTabMini = _react["default"].createElement(_ButtonTab["default"], {
+      _btTabMini = /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
         style: S.BT_MINI,
         caption: "Mini",
         isShow: isShowMini,
@@ -279,19 +277,19 @@ function (_Component) {
         onClick: this._hShowMini
       });
 
-      _arrModalMenu.push(_react["default"].createElement(_ModalMenuMini["default"], {
+      _arrModalMenu.push( /*#__PURE__*/_react["default"].createElement(_ModalMenuMini["default"], {
         key: "menu_mini",
         isShow: isShowMini,
-        style: (0, _extends2["default"])({}, S.M_MINI, {}, miniStyle),
+        style: (0, _extends2["default"])({}, S.M_MINI, miniStyle),
         configs: zhMiniConfigs,
         onClickItem: onMiniChart,
         onClose: this._hCloseMini
       }));
     }
 
-    return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_ModalMenuFn["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_ModalMenuFn["default"], {
       isShow: isShowFn,
-      style: (0, _extends2["default"])({}, S.M_FN, {}, fnStyle),
+      style: (0, _extends2["default"])({}, S.M_FN, fnStyle),
       config: config,
       getChart: getChart,
       onX2H: onClick2H,
@@ -300,17 +298,17 @@ function (_Component) {
       onCopy: onCopy,
       onPasteTo: onPasteTo,
       onClose: this._hCloseFn
-    }), _arrModalMenu, _react["default"].createElement("div", {
+    }), _arrModalMenu, /*#__PURE__*/_react["default"].createElement("div", {
       ref: this._refToolbar,
       className: CL.SCROLL,
       style: style
-    }, _btTabIndicator, _btLegend, _react["default"].createElement(_ButtonTab["default"], {
+    }, _btTabIndicator, _btLegend, /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
       style: S.BT_FN,
       caption: "Fn",
       isShow: isShowFn,
       isMenu: true,
       onClick: this._hShowFn
-    }), _btAdd, _btInfo, _btTabMini, _btTabMini && _react["default"].createElement(_ButtonTab["default"], {
+    }), _btAdd, _btInfo, _btTabMini, _btTabMini && /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
       className: CL.BT_R,
       style: S.BT_R,
       caption: ">",

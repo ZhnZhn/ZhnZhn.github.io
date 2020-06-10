@@ -26,9 +26,7 @@ var S = {
     paddingRight: 16
   }
 };
-var AlphaIndicatorDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec(_class = _dec2(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var AlphaIndicatorDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec(_class = _dec2(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AlphaIndicatorDialog, _Component);
 
   function AlphaIndicatorDialog(props) {
@@ -86,7 +84,7 @@ function (_Component) {
         onShow = _this$props2.onShow,
         onFront = _this$props2.onFront,
         isToolbar = this.state.isToolbar;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -94,10 +92,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].Row.Text, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
       styleRoot: S.ROW_TEXT,
       caption: "AV:",
       text: "Sector Performances"

@@ -60,30 +60,30 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
       onZoom = _ref.onZoom,
       onCopy = _ref.onCopy,
       onPasteTo = _ref.onPasteTo;
-  return _react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
     isShow: isShow,
-    style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, {}, style),
+    style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, style),
     onClose: onClose
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     style: _ModalMenu["default"].PANE
-  }, _react["default"].createElement(_SubMenuItem["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
     caption: "x2H",
     onClick: onX2H
-  }), _isMinMax(config) && _react["default"].createElement(_SubMenuItem["default"], {
+  }), _isMinMax(config) && /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
     caption: "MinMax",
     initialIsActive: true,
     onClick: onMinMax
-  }), _isZoom(getChart) && _react["default"].createElement(_SubMenuItem["default"], {
+  }), _isZoom(getChart) && /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
     caption: "Zoom",
     isNotActive: true,
     onClick: onZoom,
     onClose: onClose
-  }), _react["default"].createElement(_SubMenuItem["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
     caption: "Copy",
     isNotActive: true,
     onClick: onCopy,
     onClose: onClose
-  }), _react["default"].createElement(_SubMenuItem["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
     caption: "PasteTo",
     isNotActive: true,
     onClick: onPasteTo,

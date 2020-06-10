@@ -27,11 +27,11 @@ var RowPlusMinus = function RowPlusMinus(_ref) {
       caption = _ref.caption,
       onMinus = _ref.onMinus,
       onPlus = _ref.onPlus;
-  return _react["default"].createElement("div", null, _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.CAPTION, {}, styleCaption)
-  }, caption), is ? _react["default"].createElement(_A["default"].SvgMinus, {
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, S.CAPTION, styleCaption)
+  }, caption), is ? /*#__PURE__*/_react["default"].createElement(_A["default"].SvgMinus, {
     onClick: onMinus
-  }) : _react["default"].createElement(_A["default"].SvgPlus, {
+  }) : /*#__PURE__*/_react["default"].createElement(_A["default"].SvgPlus, {
     onClick: onPlus
   }));
 };

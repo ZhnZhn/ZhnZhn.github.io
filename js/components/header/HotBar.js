@@ -72,9 +72,7 @@ var _calcMaxButtons = function _calcMaxButtons(props) {
   }
 };
 
-var HotBar =
-/*#__PURE__*/
-function (_Component) {
+var HotBar = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(HotBar, _Component);
 
   function HotBar(props) {
@@ -111,7 +109,7 @@ function (_Component) {
       return hotButtons.map(function (conf, index) {
         var type = conf.type,
             caption = conf.caption;
-        return _react["default"].createElement(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
+        return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
           key: type,
           timeout: 0,
           style: S.BT_D,
@@ -120,7 +118,7 @@ function (_Component) {
       });
     };
 
-    _this._btCleanEl = _react["default"].createElement(_FlatButton["default"], {
+    _this._btCleanEl = /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
       key: "BT_CLEAN",
       timeout: 0,
       style: S.BT_CL,
@@ -152,7 +150,7 @@ function (_Component) {
         hotButtons = this.state.hotButtons,
         _cleanBtEl = hotButtons.length !== 0 ? this._btCleanEl : null;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
     }, this._renderHotButtons(hotButtons, onShowDialog), _cleanBtEl);
   };

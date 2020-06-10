@@ -49,9 +49,7 @@ var DEFAULT_DATA = [],
     DEFAULT_RATIO = 'none',
     DEFAULT_MARGIN = 2;
 
-var Sparklines =
-/*#__PURE__*/
-function (_PureComponent) {
+var Sparklines = /*#__PURE__*/function (_PureComponent) {
   (0, _inheritsLoose2["default"])(Sparklines, _PureComponent);
 
   function Sparklines() {
@@ -110,8 +108,8 @@ function (_PureComponent) {
     };
     if (svgWidth > 0) svgOpts.width = svgWidth;
     if (svgHeight > 0) svgOpts.height = svgHeight;
-    return _react["default"].createElement("svg", svgOpts, _react["default"].Children.map(this.props.children, function (child) {
-      return _react["default"].cloneElement(child, {
+    return /*#__PURE__*/_react["default"].createElement("svg", svgOpts, _react["default"].Children.map(this.props.children, function (child) {
+      return /*#__PURE__*/_react["default"].cloneElement(child, {
         data: data,
         points: points,
         width: width,

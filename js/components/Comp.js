@@ -15,7 +15,7 @@ var _A3 = _interopRequireDefault(require("./zhn-moleculs/A"));
 
 var _ModalSlider = _interopRequireDefault(require("./zhn-modal-slider/ModalSlider"));
 
-var Comp = (0, _extends2["default"])({}, _A["default"], {}, _A2["default"], {}, _A3["default"], {
+var Comp = (0, _extends2["default"])({}, _A["default"], _A2["default"], _A3["default"], {
   ModalSlider: _ModalSlider["default"]
 });
 var _default = Comp;

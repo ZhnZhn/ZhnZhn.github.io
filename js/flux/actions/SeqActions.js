@@ -11,9 +11,7 @@ var C = {
   TIMEOUT: 10000
 };
 
-var SeqActions =
-/*#__PURE__*/
-function () {
+var SeqActions = /*#__PURE__*/function () {
   function SeqActions(arr) {
     this.arr = arr;
     this.max = arr.length - 1;

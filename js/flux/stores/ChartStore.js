@@ -35,7 +35,7 @@ var ChartStore = _refluxCore["default"].createStore((0, _extends2["default"])({
     this.initWatchList();
     this.listenLoadingProgress(_ChartActions["default"].fnOnChangeStore);
   }
-}, _ChartSlice["default"], {}, _BrowserSlice["default"], {}, _ComponentSlice["default"], {}, _DialogSlice["default"], {}, _SettingSlice["default"], {}, _WatchListSlice["default"], {}, _WithLimitRemaining["default"], {}, _WithLoadingProgress["default"]));
+}, _ChartSlice["default"], _BrowserSlice["default"], _ComponentSlice["default"], _DialogSlice["default"], _SettingSlice["default"], _WatchListSlice["default"], _WithLimitRemaining["default"], _WithLoadingProgress["default"]));
 
 var _default = ChartStore;
 exports["default"] = _default;

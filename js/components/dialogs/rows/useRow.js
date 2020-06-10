@@ -18,7 +18,7 @@ var useRow = function useRow(_ref, isOc) {
   return (0, _extends2["default"])({}, (0, _useRowStyle["default"])({
     isShowLabels: isShowLabels,
     captionStyle: captionStyle
-  }, isOc), {}, (0, _useRowCaption["default"])(caption));
+  }, isOc), (0, _useRowCaption["default"])(caption));
 };
 
 var _default = useRow;

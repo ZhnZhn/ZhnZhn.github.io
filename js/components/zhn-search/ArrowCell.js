@@ -37,12 +37,12 @@ var ArrowCell = function ArrowCell(_ref) {
       _ref$tabIndex = _ref.tabIndex,
       tabIndex = _ref$tabIndex === void 0 ? "-1" : _ref$tabIndex,
       onClick = _ref.onClick;
-  return _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("button", {
     style: S.ARROW_CELL,
     tabIndex: tabIndex,
     onClick: onClick
-  }, _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.ARROW, {}, arrowStyle)
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, S.ARROW, arrowStyle)
   }));
 };
 

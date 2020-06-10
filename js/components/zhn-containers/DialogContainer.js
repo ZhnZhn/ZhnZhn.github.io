@@ -63,9 +63,7 @@ var _findCompByKey = function _findCompByKey(comps, key) {
   return typeof index !== 'undefined' ? comps[index] : undefined;
 };
 
-var DialogContainer =
-/*#__PURE__*/
-function (_Component) {
+var DialogContainer = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogContainer, _Component);
 
   function DialogContainer(props) {
@@ -155,7 +153,7 @@ function (_Component) {
           hmData = _this$state2.hmData;
       return compDialogs.map(function (Comp) {
         var key = Comp.key;
-        return _react["default"].cloneElement(Comp, {
+        return /*#__PURE__*/_react["default"].cloneElement(Comp, {
           key: key,
           isShow: hmIs[key],
           optionData: hmData[key],
@@ -193,7 +191,7 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
     }, this._renderDialogs());
   };

@@ -23,12 +23,12 @@ var EsLink = function EsLink(_ref) {
     return null;
   }
 
-  return _react["default"].createElement("ul", {
+  return /*#__PURE__*/_react["default"].createElement("ul", {
     style: S.ROOT
-  }, item.href && _react["default"].createElement("li", null, _react["default"].createElement(_Link["default"], {
+  }, item.href && /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     caption: "Eurostat Raw Data Link",
     href: item.href
-  })), item.dataset && _react["default"].createElement("li", null, _react["default"].createElement(_Link["default"], {
+  })), item.dataset && /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     caption: "Eurostat Dataset Viewer",
     href: "" + URL + item.dataset
   })));

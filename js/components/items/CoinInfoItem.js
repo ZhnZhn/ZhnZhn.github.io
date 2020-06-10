@@ -19,9 +19,6 @@ var _TwitterLink = _interopRequireDefault(require("../about/TwitterLink"));
 
 var _CrcLink = _interopRequireDefault(require("../native-links/CrcLink"));
 
-//import ShowHide from '../zhn/ShowHide';
-//import OpenClose from '../zhn/OpenClose'
-//import DivHtml from '../zhn/DivHtml'
 var ShowHide = _Comp["default"].ShowHide,
     OpenClose = _Comp["default"].OpenClose,
     DivHtml = _Comp["default"].DivHtml;
@@ -66,11 +63,11 @@ var Field = function Field(_ref) {
     return null;
   }
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.FIELD
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: S.TITLE
-  }, title, ":\xA0"), _react["default"].createElement("span", null, _text));
+  }, title, ":\xA0"), /*#__PURE__*/_react["default"].createElement("span", null, _text));
 };
 
 var RowField = function RowField(_ref2) {
@@ -78,7 +75,7 @@ var RowField = function RowField(_ref2) {
       children = _ref2.children;
 
   var _elFields = items.map(function (item) {
-    return _react["default"].createElement(Field, {
+    return /*#__PURE__*/_react["default"].createElement(Field, {
       key: item.t,
       title: item.t,
       text: item.v
@@ -91,10 +88,10 @@ var RowField = function RowField(_ref2) {
     return null;
   }
 
-  return _react["default"].createElement("div", null, _elFields, children);
+  return /*#__PURE__*/_react["default"].createElement("div", null, _elFields, children);
 };
 
-var Topic = (0, _react.memo)(function (_ref3) {
+var Topic = /*#__PURE__*/(0, _react.memo)(function (_ref3) {
   var className = _ref3.className,
       title = _ref3.title,
       str = _ref3.str;
@@ -103,10 +100,10 @@ var Topic = (0, _react.memo)(function (_ref3) {
     return null;
   }
 
-  return _react["default"].createElement(OpenClose, {
+  return /*#__PURE__*/_react["default"].createElement(OpenClose, {
     caption: title,
     isClose: true
-  }, _react["default"].createElement(DivHtml, {
+  }, /*#__PURE__*/_react["default"].createElement(DivHtml, {
     className: className,
     style: S.TOPIC,
     str: str
@@ -121,9 +118,7 @@ var _crUpdateTS = function _crUpdateTS(n) {
   return _isNumber(n) ? new Date(n * 1000).toISOString().split('T')[0] : '';
 };
 
-var CoinInfoItem =
-/*#__PURE__*/
-function (_Component) {
+var CoinInfoItem = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(CoinInfoItem, _Component);
 
   function CoinInfoItem() {
@@ -214,41 +209,41 @@ function (_Component) {
     }],
         isOpen = this.state.isOpen;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
-    }, _react["default"].createElement(_ItemHeader["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ItemHeader["default"], {
       isOpen: isOpen,
       caption: Id,
       onClick: this._hToggle,
       onClose: onCloseItem
-    }), _react["default"].createElement(ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(ShowHide, {
       isShow: isOpen,
       style: S.SHOW_HIDE
-    }, _react["default"].createElement(OpenClose, {
+    }, /*#__PURE__*/_react["default"].createElement(OpenClose, {
       caption: "Coin Params (" + Id + ")"
-    }, _react["default"].createElement(RowField, {
+    }, /*#__PURE__*/_react["default"].createElement(RowField, {
       items: items1
-    }), _react["default"].createElement(RowField, {
+    }), /*#__PURE__*/_react["default"].createElement(RowField, {
       items: items2
-    }), _react["default"].createElement(RowField, {
+    }), /*#__PURE__*/_react["default"].createElement(RowField, {
       items: items3
-    }), _react["default"].createElement(RowField, {
+    }), /*#__PURE__*/_react["default"].createElement(RowField, {
       items: items4
-    }, _react["default"].createElement(_TwitterLink["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_TwitterLink["default"], {
       rootStyle: S.TWITTER,
       account: _twitter
-    }))), _react["default"].createElement(Topic, {
+    }))), /*#__PURE__*/_react["default"].createElement(Topic, {
       className: CL_TOPIC,
       title: "Description",
       str: Description
-    }), _react["default"].createElement(Topic, {
+    }), /*#__PURE__*/_react["default"].createElement(Topic, {
       className: CL_TOPIC,
       title: "Features",
       str: Features
-    }), _react["default"].createElement(Topic, {
+    }), /*#__PURE__*/_react["default"].createElement(Topic, {
       title: "Technology",
       str: Technology
-    }), _react["default"].createElement(_CrcLink["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_CrcLink["default"], {
       style: S.N_LINK,
       item: Id
     })));

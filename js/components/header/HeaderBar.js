@@ -79,19 +79,19 @@ var HeaderBar = function HeaderBar(_ref) {
       _toggleTopics = _useFnFocus[1],
       TS = useTheme(ID);
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: CL.HEADER,
     style: TS.ROOT
-  }, _react["default"].createElement(_ProgressLoading["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_ProgressLoading["default"], {
     store: store,
     ACTIONS: _LoadingProgressActions.T
-  }), _react["default"].createElement(_IconLogoErc["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_IconLogoErc["default"], {
     className: CL.ICON,
     title: LOGO_TITLE
-  }), _react["default"].createElement(_AppLabel["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_AppLabel["default"], {
     className: CL.LABEL,
     caption: CAPTION
-  }), _react["default"].createElement(ModalButton, {
+  }), /*#__PURE__*/_react["default"].createElement(ModalButton, {
     refBt: refBt,
     className: CL.TOPICS,
     rootStyle: TS.BT,
@@ -99,56 +99,56 @@ var HeaderBar = function HeaderBar(_ref) {
     title: "Click to open topics menu",
     accessKey: "t",
     onClick: _toggleTopics
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     className: CL.ARROW
-  })), _react["default"].createElement(FlatButton, {
+  })), /*#__PURE__*/_react["default"].createElement(FlatButton, {
     className: CL.QUANDL,
     style: TS.BT,
     caption: "Quandl",
     title: "Quandl Browser",
     accessKey: "q",
     onClick: _BrowserActions["default"].showQuandl
-  }), _react["default"].createElement(FlatButton, {
+  }), /*#__PURE__*/_react["default"].createElement(FlatButton, {
     className: CL.EUROSTAT,
     style: TS.BT,
     caption: "Eurostat",
     title: "Eurostat Statistics Browser",
     accessKey: "u",
     onClick: _BrowserActions["default"].showEurostat
-  }), _react["default"].createElement(FlatButton, {
+  }), /*#__PURE__*/_react["default"].createElement(FlatButton, {
     className: CL.WATCH,
     style: TS.BT,
     caption: "Watch",
     title: "Watch List Browser",
     accessKey: "w",
     onClick: _BrowserActions["default"].showWatch
-  }), _react["default"].createElement(_HotBar["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_HotBar["default"], {
     store: store,
     closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
     onShowDialog: _ComponentActions["default"].showDialog
-  }), _react["default"].createElement("div", {
+  }), /*#__PURE__*/_react["default"].createElement("div", {
     className: CL.BTS_RIGHT
-  }, _react["default"].createElement(_LimitRemainingLabel["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_LimitRemainingLabel["default"], {
     store: store
-  }), _react["default"].createElement(FlatButton, {
+  }), /*#__PURE__*/_react["default"].createElement(FlatButton, {
     style: TS.BT,
     isPrimary: true,
     title: "User Settings Dialog",
     accessKey: "s",
     timeout: 500,
     onClick: showSettings
-  }, _react["default"].createElement(SvgSettings, {
+  }, /*#__PURE__*/_react["default"].createElement(SvgSettings, {
     style: STYLE.SVG_BT
-  })), _react["default"].createElement(FlatButton, {
+  })), /*#__PURE__*/_react["default"].createElement(FlatButton, {
     className: CL.ABOUT,
     style: TS.BT,
     title: "About Web Application ERC",
     accessKey: "a",
     timeout: 0,
     onClick: _ComponentActions["default"].showAbout
-  }, _react["default"].createElement(SvgInfo, {
+  }, /*#__PURE__*/_react["default"].createElement(SvgInfo, {
     style: STYLE.SVG_BT
-  }))), _react["default"].createElement(ModalSlider, {
+  }))), /*#__PURE__*/_react["default"].createElement(ModalSlider, {
     isShow: isTopics,
     className: CL.BROWSER_MENU,
     INIT_ID: "page_0",

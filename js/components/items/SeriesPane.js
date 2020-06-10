@@ -60,9 +60,7 @@ var _crYAxisOption = function _crYAxisOption(toChart) {
   return options;
 };
 
-var SeriesPane =
-/*#__PURE__*/
-function (_Component) {
+var SeriesPane = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SeriesPane, _Component);
 
   function SeriesPane() {
@@ -89,7 +87,7 @@ function (_Component) {
       return series.filter(function (seria) {
         return seria.visible;
       }).map(function (seria, index) {
-        return _react["default"].createElement(_SeriaRow["default"], {
+        return /*#__PURE__*/_react["default"].createElement(_SeriaRow["default"], {
           key: chartId + index,
           seria: seria,
           compIndex: index,
@@ -121,16 +119,16 @@ function (_Component) {
         _zhConfig$id = zhConfig.id,
         chartId = _zhConfig$id === void 0 ? 'id' : _zhConfig$id;
 
-    return _react["default"].createElement(_ScrollPane["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ScrollPane["default"], {
       style: rootStyle
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT_DIV
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.TITLE
-    }, _react["default"].createElement("span", null, "From Chart:\xA0"), _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", null, "From Chart:\xA0"), /*#__PURE__*/_react["default"].createElement("span", {
       className: CL.ELL,
       style: S.CHART_ID
-    }, chartId)), _react["default"].createElement("div", null, this._renderSeries(chartId, series, _yAxisOption))));
+    }, chartId)), /*#__PURE__*/_react["default"].createElement("div", null, this._renderSeries(chartId, series, _yAxisOption))));
   };
 
   _proto.getValues = function getValues() {

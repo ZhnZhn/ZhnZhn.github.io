@@ -25,7 +25,7 @@ var ScrollPane = function ScrollPane(_ref) {
       TS = theme.getStyle(TH_ID),
       _cl = CL + " " + TS.CL_SCROLL + " " + className;
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     ref: innerRef,
     className: _cl,
     style: style

@@ -24,15 +24,15 @@ var S = {
 var SeriaConfigs = function SeriaConfigs(_ref) {
   var configs = _ref.configs,
       onRemove = _ref.onRemove;
-  return _react["default"].createElement("div", null, configs.map(function (_ref2) {
+  return /*#__PURE__*/_react["default"].createElement("div", null, configs.map(function (_ref2) {
     var id = _ref2.id,
         color = _ref2.color;
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       key: id,
       style: S.ROW
-    }, _react["default"].createElement(_A["default"].SvgMinus, {
+    }, /*#__PURE__*/_react["default"].createElement(_A["default"].SvgMinus, {
       onClick: onRemove.bind(null, id)
-    }), _react["default"].createElement("span", {
+    }), /*#__PURE__*/_react["default"].createElement("span", {
       style: S.fnSpan(color)
     }, id));
   }));

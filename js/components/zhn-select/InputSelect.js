@@ -89,9 +89,7 @@ var _crValue = function _crValue(str) {
   return str.replace(INPUT_PREFIX, '').trim();
 };
 
-var InputSelect =
-/*#__PURE__*/
-function (_Component) {
+var InputSelect = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(InputSelect, _Component);
 
   /*
@@ -443,7 +441,7 @@ function (_Component) {
         if (!isValidDomOptionsCache) {
           /*eslint-disable jsx-a11y/click-events-have-key-events*/
           _domOptions = options.map(function (item, index) {
-            return _react["default"].createElement("div", {
+            return /*#__PURE__*/_react["default"].createElement("div", {
               role: "option",
               "aria-selected": _this.indexActiveOption === index,
               tabIndex: "0",
@@ -453,7 +451,7 @@ function (_Component) {
                 return _this["v" + index] = c;
               },
               onClick: _this._hClickItem.bind(null, item, index)
-            }, _react["default"].createElement(ItemOptionComp, {
+            }, /*#__PURE__*/_react["default"].createElement(ItemOptionComp, {
               item: item,
               propCaption: _propCaption
             }));
@@ -481,15 +479,15 @@ function (_Component) {
           _nFiltered = _crFooterIndex2._nFiltered,
           _nAll = _crFooterIndex2._nAll;
 
-      return _react["default"].createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: _CL["default"].OPTIONS,
         style: _rootWidthStyle,
         "data-scrollable": true
-      }, _react["default"].createElement("div", {
+      }, /*#__PURE__*/_react["default"].createElement("div", {
         ref: _this._refOptionsComp,
         className: _CL["default"].OPTIONS_DIV,
-        style: (0, _extends2["default"])({}, rootOptionsStyle, {}, _rootWidthStyle)
-      }, _domOptions), _react["default"].createElement(_OptionsFooter["default"], {
+        style: (0, _extends2["default"])({}, rootOptionsStyle, _rootWidthStyle)
+      }, _domOptions), /*#__PURE__*/_react["default"].createElement(_OptionsFooter["default"], {
         ref: _this._refIndexNode,
         indexActiveOption: _this.indexActiveOption,
         nAll: _nAll,
@@ -519,20 +517,20 @@ function (_Component) {
 
       if (!isLoading && !isLoadingFailed) {
         _placeholder = placeholder || "Select " + optionName + "...";
-        _afterInputEl = _react["default"].createElement(_ArrowCell["default"], {
+        _afterInputEl = /*#__PURE__*/_react["default"].createElement(_ArrowCell["default"], {
           ref: _this._refArrowCell,
           arrowStyle: isShowOption ? S.ARROW_SHOW : void 0,
           onClick: _this._hToggleOptions
         });
       } else if (isLoading) {
         _placeholder = "Loading " + optionNames + "...";
-        _afterInputEl = _react["default"].createElement("span", {
+        _afterInputEl = /*#__PURE__*/_react["default"].createElement("span", {
           className: _CL["default"].SPINNER,
           "data-loader": "circle"
         });
       } else if (isLoadingFailed) {
         _placeholder = "Loading " + optionNames + " Failed";
-        _afterInputEl = _react["default"].createElement(_ButtonCircle["default"], {
+        _afterInputEl = /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
           className: _CL["default"].SPINNER_FAILED,
           "data-loader": "circle-failed",
           onClick: onLoadOption
@@ -603,10 +601,10 @@ function (_Component) {
         afterInputEl = _this$_crAfterInputEl.afterInputEl,
         placeholder = _this$_crAfterInputEl.placeholder;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       className: _CL["default"].ROOT,
       style: _rootWidthStyle
-    }, _react["default"].createElement("input", {
+    }, /*#__PURE__*/_react["default"].createElement("input", {
       ref: this._refDomInputText,
       className: _CL["default"].INPUT,
       type: "text",
@@ -619,7 +617,7 @@ function (_Component) {
       placeholder: placeholder,
       onChange: this._hInputChange,
       onKeyDown: this._hInputKeyDown
-    }), afterInputEl, _react["default"].createElement("hr", {
+    }), afterInputEl, /*#__PURE__*/_react["default"].createElement("hr", {
       className: _CL["default"].INPUT_HR
     }), (isLocalMode || isShowOption) && this.renderOptions());
   };

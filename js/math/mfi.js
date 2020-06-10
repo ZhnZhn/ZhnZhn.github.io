@@ -67,7 +67,7 @@ var mfi = function mfi(data, period) {
           nNotFullPoint += 1;
         }
 
-        dataMfi.push((0, _extends2["default"])({}, _crMfiXy(point[0], null), {}, _crMfiDetail(false, bTp, bRmf)));
+        dataMfi.push((0, _extends2["default"])({}, _crMfiXy(point[0], null), _crMfiDetail(false, bTp, bRmf)));
       } else {
         var _getPriceAndFlow3 = _getPriceAndFlow(point),
             _bTp = _getPriceAndFlow3.bTp,
@@ -86,7 +86,7 @@ var mfi = function mfi(data, period) {
           isNegative = true;
         }
 
-        dataMfi.push((0, _extends2["default"])({}, _crMfiXy(point[0], null), {}, _crMfiDetail(isNegative, _bTp, _bRmf)));
+        dataMfi.push((0, _extends2["default"])({}, _crMfiXy(point[0], null), _crMfiDetail(isNegative, _bTp, _bRmf)));
       }
     } else {
       var _getPriceAndFlow4 = _getPriceAndFlow(point),
@@ -115,7 +115,7 @@ var mfi = function mfi(data, period) {
       var bMFR_PlusOne = bPositiveFlow.div(bNegativeFlow.toFixed(4)).plus('1'),
           bRatio = (0, _big["default"])('100').div(bMFR_PlusOne.toFixed(4)),
           bY = (0, _big["default"])('100').minus(bRatio.toFixed(4));
-      dataMfi.push((0, _extends2["default"])({}, _crMfiXy(point[0], parseFloat(bY.toFixed(2))), {}, _crMfiDetail(isNegative, _bTp2, _bRmf2, point[0])));
+      dataMfi.push((0, _extends2["default"])({}, _crMfiXy(point[0], parseFloat(bY.toFixed(2))), _crMfiDetail(isNegative, _bTp2, _bRmf2, point[0])));
     }
   }
 

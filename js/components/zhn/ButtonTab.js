@@ -39,11 +39,11 @@ var ButtonTab = function ButtonTab(_ref) {
       _rootClass = _isBool(isShow) & isShow ? CL.BT_TAB__SHOW : CL.BT_TAB,
       _btClass = className ? _rootClass + " " + className : _rootClass;
 
-  return _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("button", {
     className: _btClass,
-    style: (0, _extends2["default"])({}, style, {}, TS.BG),
+    style: (0, _extends2["default"])({}, style, TS.BG),
     onClick: onClick
-  }, caption, isMenu && _react["default"].createElement("span", {
+  }, caption, isMenu && /*#__PURE__*/_react["default"].createElement("span", {
     className: CL.ARROW
   }), children);
 };

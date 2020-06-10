@@ -43,9 +43,7 @@ var S = {
   }
 };
 
-var ModalPalette =
-/*#__PURE__*/
-function (_Component) {
+var ModalPalette = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ModalPalette, _Component);
 
   function ModalPalette() {
@@ -75,7 +73,7 @@ function (_Component) {
         for (c = 0; c < cols; c++) {
           _color = colors[r * cols + c];
 
-          _elCells.push(_react["default"].createElement(_CellColor["default"], {
+          _elCells.push( /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
             key: _color,
             id: _color,
             style: S.COLOR,
@@ -84,7 +82,7 @@ function (_Component) {
           }));
         }
 
-        _elRows.push(_react["default"].createElement("div", {
+        _elRows.push( /*#__PURE__*/_react["default"].createElement("div", {
           key: _idPrefix + r,
           id: _idPrefix + r,
           style: S.ROW
@@ -105,11 +103,11 @@ function (_Component) {
         model = _this$props.model,
         onClickCell = _this$props.onClickCell,
         onClose = _this$props.onClose;
-    return _react["default"].createElement(_ModalPopup["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
       isShow: isShow,
       style: S.SHOW_HIDE,
       onClose: onClose
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT_PANE
     }, this._renderColors(model, onClickCell)));
   };

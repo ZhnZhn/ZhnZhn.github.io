@@ -25,14 +25,14 @@ var EditBar = function EditBar(_ref) {
       onClickList = _ref.onClickList;
 
   if (isShow) {
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
-    }, _react["default"].createElement(_ButtonCircle["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
       caption: "GROUP",
       isWithoutDefault: true,
       className: CL_BT,
       onClick: onClickGroup
-    }), _react["default"].createElement(_ButtonCircle["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
       caption: "LIST",
       isWithoutDefault: true,
       className: CL_BT,

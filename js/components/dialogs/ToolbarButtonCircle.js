@@ -25,9 +25,7 @@ var STYLE = {
   }
 };
 
-var ToolbarButtonCircle =
-/*#__PURE__*/
-function (_Component) {
+var ToolbarButtonCircle = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ToolbarButtonCircle, _Component);
 
   function ToolbarButtonCircle() {
@@ -48,7 +46,7 @@ function (_Component) {
         var caption = button.caption,
             title = button.title,
             onClick = button.onClick;
-        return _react["default"].createElement(_ButtonCircle["default"], {
+        return /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
           key: caption + index,
           caption: caption,
           title: title,
@@ -73,7 +71,7 @@ function (_Component) {
 
   _proto.render = function render() {
     var buttons = this.props.buttons;
-    return _react["default"].createElement(_DialogCell["default"].Row.Plain, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Plain, {
       style: STYLE.ROW
     }, this._renderButtons(buttons));
   };

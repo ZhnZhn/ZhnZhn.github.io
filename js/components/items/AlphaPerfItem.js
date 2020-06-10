@@ -19,11 +19,11 @@ var S = {
 var AlphaPerfItem = function AlphaPerfItem(_ref) {
   var config = _ref.config,
       onCloseItem = _ref.onCloseItem;
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_TableItem["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_TableItem["default"], {
     thMoreStyle: S.TH_MORE,
     config: config.m,
     onCloseItem: onCloseItem
-  }), _react["default"].createElement(_TableItem["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_TableItem["default"], {
     thMoreStyle: S.TH_MORE,
     config: config.y,
     onCloseItem: onCloseItem

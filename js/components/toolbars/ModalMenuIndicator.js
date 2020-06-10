@@ -72,11 +72,9 @@ var FNS = {
   NORM: ['_normSeria', 'isNormalize', C_GROW, normalize, false]
 };
 
-var NORM_CAPTION_EL = _react["default"].createElement(_react.Fragment, null, "Normalize (100*y", _react["default"].createElement("sub", null, "t"), "/y", _react["default"].createElement("sub", null, "0"), ")");
+var NORM_CAPTION_EL = /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, "Normalize (100*y", /*#__PURE__*/_react["default"].createElement("sub", null, "t"), "/y", /*#__PURE__*/_react["default"].createElement("sub", null, "0"), ")");
 
-var ModalMenuIndicator =
-/*#__PURE__*/
-function (_Component) {
+var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ModalMenuIndicator, _Component);
 
   /*
@@ -199,29 +197,29 @@ function (_Component) {
         isGrowthRate = _this$state.isGrowthRate,
         isNormalize = _this$state.isNormalize,
         isMomAth = _this$state.isMomAth;
-    return _react["default"].createElement(_ModalPopup["default"], {
-      style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, {}, style),
+    return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
+      style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, style),
       isShow: isShow,
       onClose: onClose
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: STYLE.PANE
-    }, _react["default"].createElement(_RowGrowthRate["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_RowGrowthRate["default"], {
       is: isGrowthRate,
       onMinus: this._removeGrowRate,
       onPlus: this._addGrowRate
-    }), _react["default"].createElement(_RowPlusMinus["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowPlusMinus["default"], {
       is: isNormalize,
       caption: NORM_CAPTION_EL,
       onMinus: this._removeNormalize,
       onPlus: this._addNormalize
-    }), !isWithoutSma && _react["default"].createElement(_RowSma["default"], {
+    }), !isWithoutSma && /*#__PURE__*/_react["default"].createElement(_RowSma["default"], {
       config: config,
       getChart: getChart
-    }), this._isMfi && _react["default"].createElement(_RowMfi["default"], {
+    }), this._isMfi && /*#__PURE__*/_react["default"].createElement(_RowMfi["default"], {
       getChart: getChart,
       onAddMfi: onAddMfi,
       onRemoveMfi: onRemoveMfi
-    }), this._isMomAth && _react["default"].createElement(_RowPlusMinus["default"], {
+    }), this._isMomAth && /*#__PURE__*/_react["default"].createElement(_RowPlusMinus["default"], {
       is: isMomAth,
       styleCaption: _ModalMenu["default"].ROW_MOM_ATH,
       caption: "MOM(1) & ATH",

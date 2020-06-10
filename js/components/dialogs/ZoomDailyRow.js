@@ -25,29 +25,29 @@ var ZoomDailyRow = function ZoomDailyRow(_ref) {
       onZoom6M = _ref.onZoom6M,
       onZoomYTD = _ref.onZoomYTD,
       onZoom1Y = _ref.onZoom1Y;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.PERIOD_BTS
-  }, _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
     rootStyle: S.BT,
     key: "1M",
     caption: "1M",
     onClick: onZoom1M
-  }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
     rootStyle: S.BT,
     key: "3M",
     caption: "3M",
     onClick: onZoom3M
-  }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
     rootStyle: S.BT,
     key: "6M",
     caption: "6M",
     onClick: onZoom6M
-  }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
     rootStyle: S.BT,
     key: "YTD",
     caption: "YTD",
     onClick: onZoomYTD
-  }), _react["default"].createElement(_DialogCell["default"].Button.Flat, {
+  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
     rootStyle: S.BT,
     key: "1Y",
     caption: "1Y",

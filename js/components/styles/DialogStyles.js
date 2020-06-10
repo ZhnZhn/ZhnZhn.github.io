@@ -56,8 +56,8 @@ var DialogStyles = {
       isShowLabels = true;
     }
 
-    var rowStyle = isShowLabels ? (0, _extends2["default"])({}, S.ROW) : (0, _extends2["default"])({}, S.ROW, {}, S.ROW_SHORT),
-        labelStyle = isShowLabels ? (0, _extends2["default"])({}, S.LABEL, {}, captionStyle) : (0, _extends2["default"])({}, S.LABEL, {}, S.NONE);
+    var rowStyle = isShowLabels ? (0, _extends2["default"])({}, S.ROW) : (0, _extends2["default"])({}, S.ROW, S.ROW_SHORT),
+        labelStyle = isShowLabels ? (0, _extends2["default"])({}, S.LABEL, captionStyle) : (0, _extends2["default"])({}, S.LABEL, S.NONE);
     return {
       rowStyle: rowStyle,
       labelStyle: labelStyle
@@ -68,8 +68,8 @@ var DialogStyles = {
       isShowLabels = true;
     }
 
-    var rowStyle = isShowLabels ? (0, _extends2["default"])({}, S.ROW_OC) : (0, _extends2["default"])({}, S.ROW_OC, {}, S.ROW_SHORT),
-        labelStyle = isShowLabels ? (0, _extends2["default"])({}, S.LABEL, {}, captionStyle) : (0, _extends2["default"])({}, S.LABEL, {}, S.NONE);
+    var rowStyle = isShowLabels ? (0, _extends2["default"])({}, S.ROW_OC) : (0, _extends2["default"])({}, S.ROW_OC, S.ROW_SHORT),
+        labelStyle = isShowLabels ? (0, _extends2["default"])({}, S.LABEL, captionStyle) : (0, _extends2["default"])({}, S.LABEL, S.NONE);
     return {
       rowStyle: rowStyle,
       labelStyle: labelStyle

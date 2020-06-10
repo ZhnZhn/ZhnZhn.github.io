@@ -37,9 +37,7 @@ var S = {
   }
 };
 
-var ReloadDialog =
-/*#__PURE__*/
-function (_Component) {
+var ReloadDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ReloadDialog, _Component);
 
   function ReloadDialog(props) {
@@ -52,12 +50,12 @@ function (_Component) {
       window.location.reload(true);
     };
 
-    _this._commandButtons = [_react["default"].createElement(_Button["default"].Flat, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       key: "reload",
       caption: "Yes, Reload",
       isPrimary: true,
       onClick: _this._hReload
-    }), _react["default"].createElement(_Button["default"].Flat, {
+    }), /*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       key: "no",
       rootStyle: S.CLOSE,
       caption: "No",
@@ -83,16 +81,16 @@ function (_Component) {
         data = _this$props.data,
         _data$buildDate = data.buildDate,
         buildDate = _data$buildDate === void 0 ? '' : _data$buildDate;
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       style: S.MODAL,
       caption: "Reload Web App",
       isShow: isShow,
       commandButtons: this._commandButtons,
       withoutClose: true,
       onClose: onClose
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
-    }, _react["default"].createElement("p", null, "Browser has loaded ERC from a cache."), _react["default"].createElement("p", null, "Reload web app ERC to the new build?"), _react["default"].createElement("p", {
+    }, /*#__PURE__*/_react["default"].createElement("p", null, "Browser has loaded ERC from a cache."), /*#__PURE__*/_react["default"].createElement("p", null, "Reload web app ERC to the new build?"), /*#__PURE__*/_react["default"].createElement("p", {
       style: S.DATE
     }, "New build " + buildDate + " is available.")));
   };

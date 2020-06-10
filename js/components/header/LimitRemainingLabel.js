@@ -23,9 +23,7 @@ var S = {
   }
 };
 
-var LimitRemainingLabel =
-/*#__PURE__*/
-function (_Component) {
+var LimitRemainingLabel = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(LimitRemainingLabel, _Component);
 
   function LimitRemainingLabel() {
@@ -65,8 +63,8 @@ function (_Component) {
   _proto.render = function render() {
     var style = this.props.style,
         value = this.state.value;
-    return _react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.LABEL, {}, style)
+    return /*#__PURE__*/_react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.LABEL, style)
     }, value);
   };
 

@@ -21,6 +21,12 @@ var _merge = _interopRequireDefault(require("../../utils/merge"));
 
 var _MapFactory = _interopRequireDefault(require("../../components/factories/MapFactory"));
 
+function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } it = o[Symbol.iterator](); return it.next.bind(it); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
     NUMBER_OF_CLUSTERS = 6,
     NUMBER_OF_ITERATION = 100,
@@ -82,19 +88,8 @@ var _mergeGeoAndValue = function _mergeGeoAndValue(sGeo, dGeo, json) {
 var _crHmIdCluster = function _crHmIdCluster(clusters) {
   var hm = {};
   clusters.forEach(function (cluster, i) {
-    for (var _iterator = cluster.points, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
-
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref = _i.value;
-      }
-
-      var point = _ref;
+    for (var _iterator = _createForOfIteratorHelperLoose(cluster.points), _step; !(_step = _iterator()).done;) {
+      var point = _step.value;
       hm[point.id] = i;
     }
   });
@@ -175,23 +170,23 @@ var _crInfoControl = function _crInfoControl(L, mapId) {
 };
 
 var _calcUpper = function _calcUpper(clusters, index, maxValue) {
-  var _ref2, _clusters$index, _ref3;
+  var _clusters$index$point, _clusters$index, _clusters$points;
 
   if (clusters.length - 1 === index) {
     return maxValue;
   }
 
-  var arrL = (_ref2 = clusters == null ? void 0 : (_clusters$index = clusters[index]) == null ? void 0 : _clusters$index.points) != null ? _ref2 : [[0]],
-      arrH = (_ref3 = clusters == null ? void 0 : clusters[index + 1].points) != null ? _ref3 : [[0]],
+  var arrL = (_clusters$index$point = clusters == null ? void 0 : (_clusters$index = clusters[index]) == null ? void 0 : _clusters$index.points) != null ? _clusters$index$point : [[0]],
+      arrH = (_clusters$points = clusters == null ? void 0 : clusters[index + 1].points) != null ? _clusters$points : [[0]],
       upLow = arrL[arrL.length - 1][0],
       upUp = arrH[0] ? arrH[0][0] : upLow;
   return upLow + (upUp - upLow) / 2;
 };
 
 var _crRowEl = function _crRowEl(color, from, to, cluster, wg) {
-  var _ref4, _cluster$points;
+  var _cluster$points$lengt, _cluster$points;
 
-  var _n = (_ref4 = cluster == null ? void 0 : (_cluster$points = cluster.points) == null ? void 0 : _cluster$points.length) != null ? _ref4 : 0,
+  var _n = (_cluster$points$lengt = cluster == null ? void 0 : (_cluster$points = cluster.points) == null ? void 0 : _cluster$points.length) != null ? _cluster$points$lengt : 0,
       el = _crEl('p', '', "opacity: 0.7; background: " + color + "; padding: 5px 6px; cursor: pointer;");
 
   el.addEventListener('click', function (event) {
@@ -353,13 +348,13 @@ var ChoroplethMap = {
       });
     }
   },
-  draw: function draw(_ref5) {
+  draw: function draw(_ref) {
     var _this3 = this;
 
-    var id = _ref5.id,
-        jsonCube = _ref5.jsonCube,
-        zhMapSlice = _ref5.zhMapSlice,
-        time = _ref5.time;
+    var id = _ref.id,
+        jsonCube = _ref.jsonCube,
+        zhMapSlice = _ref.zhMapSlice,
+        time = _ref.time;
     return this.getLeaflet().then(function (L) {
       var map = L.map(id, _this3.mapOption).setView([58.00, 10.00], 3);
       /*

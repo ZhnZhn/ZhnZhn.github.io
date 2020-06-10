@@ -20,8 +20,8 @@ var STYLE = {
 var SpanLabel = function SpanLabel(_ref) {
   var label = _ref.label,
       style = _ref.style;
-  return _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, STYLE.ROOT, {}, style)
+  return /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, STYLE.ROOT, style)
   }, label);
 };
 

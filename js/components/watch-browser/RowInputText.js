@@ -34,9 +34,7 @@ var S = {
   }
 };
 
-var RowInputText =
-/*#__PURE__*/
-function (_Component) {
+var RowInputText = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(RowInputText, _Component);
 
   function RowInputText() {
@@ -59,11 +57,11 @@ function (_Component) {
 
   _proto.render = function render() {
     var caption = this.props.caption;
-    return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, {}, S.ROOT)
-    }, _react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, {}, S.CAPTION)
-    }, caption), _react["default"].createElement(_InputText["default"], {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, S.ROOT)
+    }, /*#__PURE__*/_react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, S.CAPTION)
+    }, caption), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
       ref: this._refInputText,
       style: S.INPUT_TEXT
     }));

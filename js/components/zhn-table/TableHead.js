@@ -28,9 +28,7 @@ var C = {
   DESC: 'descending'
 };
 
-var TableHead =
-/*#__PURE__*/
-function (_Component) {
+var TableHead = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(TableHead, _Component);
 
   function TableHead() {
@@ -75,16 +73,16 @@ function (_Component) {
             style = _FN$crAppearance.style,
             ariaSort = _FN$crAppearance.ariaSort,
             ariaLabel = _FN$crAppearance.ariaLabel,
-            _elMore = hIndex === 0 ? _react["default"].createElement(_SvgMore["default"], {
+            _elMore = hIndex === 0 ? /*#__PURE__*/_react["default"].createElement(_SvgMore["default"], {
           style: _Style["default"].BT_SVG_MORE,
           svgStyle: _Style["default"].SVG_MORE,
           onClick: onMenuMore
         }) : null,
             _thStyle = hIndex === 0 ? thMoreStyle : null;
 
-        return _react["default"].createElement("th", {
+        return /*#__PURE__*/_react["default"].createElement("th", {
           key: h.name,
-          style: (0, _extends2["default"])({}, _Style["default"].TH, {}, _thStyle, {}, style),
+          style: (0, _extends2["default"])({}, _Style["default"].TH, _thStyle, style),
           rowSpan: "1",
           colSpan: "1",
           tabIndex: "0",
@@ -103,9 +101,9 @@ function (_Component) {
   var _proto = TableHead.prototype;
 
   _proto.render = function render() {
-    return _react["default"].createElement("thead", {
+    return /*#__PURE__*/_react["default"].createElement("thead", {
       style: _Style["default"].THEAD
-    }, _react["default"].createElement("tr", null, this._renderHeader()));
+    }, /*#__PURE__*/_react["default"].createElement("tr", null, this._renderHeader()));
   };
 
   return TableHead;

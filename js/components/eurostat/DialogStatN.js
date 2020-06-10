@@ -64,9 +64,7 @@ var _isOpenAndPrevLoadFailed = function _isOpenAndPrevLoadFailed(prevProps, prop
   return props !== prevProps && !prevProps.isShow && props.isShow && state.isLoadFailed;
 };
 
-var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogStatN, _Component);
 
   function DialogStatN(props) {
@@ -264,10 +262,10 @@ function (_Component) {
             options = conf.options,
             _isShow = !_this.state[_crIsId(id)];
 
-        return _react["default"].createElement(_DialogCell["default"].ShowHide, {
+        return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
           key: id,
           isShow: _isShow
-        }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+        }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
           isShowLabels: isShowLabels,
           caption: caption,
           options: options,
@@ -353,9 +351,9 @@ function (_Component) {
         configs = _this$state4.configs,
         chartOptions = _this$state4.chartOptions,
         validationMessages = _this$state4.validationMessages,
-        _spinnerStyle = !isLoadFailed ? S.SPINNER_LOADING : (0, _extends2["default"])({}, S.SPINNER_LOADING, {}, S.SPINNER_FAILED);
+        _spinnerStyle = !isLoadFailed ? S.SPINNER_LOADING : (0, _extends2["default"])({}, S.SPINNER_LOADING, S.SPINNER_FAILED);
 
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -363,14 +361,14 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_ModalOptions["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ModalOptions["default"], {
       isShow: isOptions,
       toggleOption: this._toggleOptionWithToolbar,
       onClose: this._hideOptionsWithToolbar
-    }), _react["default"].createElement(_ModalToggle["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ModalToggle["default"], {
       isShow: isToggle,
       selectProps: configs,
       isShowChart: isShowChart,
@@ -380,9 +378,9 @@ function (_Component) {
       onCheckCaption: this._checkCaptionBy,
       onUnCheckCaption: this._uncheckCaption,
       onClose: this._hideToggleWithToolbar
-    }), (isLoading || isLoadFailed) && _react["default"].createElement(_SpinnerLoading["default"], {
+    }), (isLoading || isLoadFailed) && /*#__PURE__*/_react["default"].createElement(_SpinnerLoading["default"], {
       style: _spinnerStyle
-    }), !isLoading && !isLoadFailed && this._renderSelectInputs(), _react["default"].createElement(_RowChart["default"], {
+    }), !isLoading && !isLoadFailed && this._renderSelectInputs(), /*#__PURE__*/_react["default"].createElement(_RowChart["default"], {
       chartType: chartType,
       isShowLabels: isShowLabels,
       isShowChart: isShowChart,
@@ -393,7 +391,7 @@ function (_Component) {
       dateDefault: dateDefault,
       dateOptions: dateOptions,
       onSelecDate: this._hSelectDate
-    }), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

@@ -27,7 +27,7 @@ var MenuTitle = function MenuTitle(_ref) {
     }
   };
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     ref: innerRef,
     className: CL.ITEM,
     style: _Style["default"].TITLE,
@@ -35,7 +35,7 @@ var MenuTitle = function MenuTitle(_ref) {
     tabIndex: "0",
     onClick: onClick,
     onKeyDown: _hKeyDown
-  }, title, _react["default"].createElement("span", {
+  }, title, /*#__PURE__*/_react["default"].createElement("span", {
     style: _Style["default"].TITLE_ARROW
   }, '<'));
 };

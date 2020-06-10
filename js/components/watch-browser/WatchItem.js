@@ -51,7 +51,7 @@ var WatchItem = function WatchItem(props) {
       onDragLeave = props.onDragLeave,
       onDrop = props.onDrop,
       caption = item.caption,
-      _btClose = isModeEdit ? _react["default"].createElement(_SvgClose["default"], {
+      _btClose = isModeEdit ? /*#__PURE__*/_react["default"].createElement(_SvgClose["default"], {
     style: S.SVG_CLOSE,
     onClose: onClose.bind(null, option)
   }) : null,
@@ -73,7 +73,7 @@ var WatchItem = function WatchItem(props) {
     onDragLeave: onDragLeave
   } : void 0;
 
-  return _react["default"].createElement("div", (0, _extends2["default"])({
+  return /*#__PURE__*/_react["default"].createElement("div", (0, _extends2["default"])({
     role: "menuitem",
     tabIndex: "0",
     className: className,
@@ -81,7 +81,7 @@ var WatchItem = function WatchItem(props) {
     onClick: _hClick
   }, _dndOptions, {
     onKeyUp: _hKeyUp
-  }), _react["default"].createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     style: S.ITEM_SPAN
   }, caption), _btClose);
 };

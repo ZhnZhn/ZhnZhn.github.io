@@ -89,11 +89,11 @@ BA[A.SHOW_BROWSER_DYNAMIC].listen(function (option) {
       }).then(function (elBrowser) {
         _this.init(elBrowser, config);
       })["catch"](function () {
-        _this.failed((0, _extends2["default"])({}, _option, {}, _crErr(ERR.LOAD, config.caption)));
+        _this.failed((0, _extends2["default"])({}, _option, _crErr(ERR.LOAD, config.caption)));
       });
     }
   } else {
-    this.failed((0, _extends2["default"])({}, _option, {}, _crErr(ERR.FOUND, ERR.ITEM)));
+    this.failed((0, _extends2["default"])({}, _option, _crErr(ERR.FOUND, ERR.ITEM)));
   }
 });
 BA[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {

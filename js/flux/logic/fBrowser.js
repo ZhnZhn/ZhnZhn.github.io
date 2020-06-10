@@ -26,7 +26,7 @@ var _RouterItemOption = _interopRequireDefault(require("../../components/zhn-sel
 var _RouterBrowserItem = _interopRequireDefault(require("../../components/browser-items/RouterBrowserItem"));
 
 var _crBrowserWatchList = function _crBrowserWatchList(Comp) {
-  return _react["default"].createElement(Comp, {
+  return /*#__PURE__*/_react["default"].createElement(Comp, {
     key: _Type.BrowserType.WATCH_LIST,
     browserType: _Type.BrowserType.WATCH_LIST,
     caption: "Watch List",
@@ -54,7 +54,7 @@ var _crBrowserDynamic = function _crBrowserDynamic(Comp, option) {
       onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions["default"].showDescription : undefined,
       onShowContainer = _ChartActions["default"].showChart.bind(null, chartContainerType, browserType);
 
-  return _react["default"].createElement(Comp, {
+  return /*#__PURE__*/_react["default"].createElement(Comp, {
     dfProps: dfProps,
     key: browserType,
     browserType: browserType,

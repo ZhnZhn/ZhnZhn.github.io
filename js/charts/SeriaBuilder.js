@@ -110,11 +110,11 @@ var SeriaBuilder = {
     return this;
   },
   splineSeria: function splineSeria(option) {
-    return this.initSeria((0, _extends2["default"])({}, C.SERIA, {}, option));
+    return this.initSeria((0, _extends2["default"])({}, C.SERIA, option));
   },
   _seria: function _seria(CONFIG, tooltip, option) {
     this._type = 'S';
-    this.config = (0, _extends2["default"])({}, CONFIG, {}, option);
+    this.config = (0, _extends2["default"])({}, CONFIG, option);
     this.add('tooltip', _Chart["default"].fTooltip(tooltip));
     return this;
   },

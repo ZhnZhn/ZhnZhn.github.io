@@ -39,9 +39,7 @@ var typeOptions = [{
   caption: 'Continuous Contract #5',
   value: 5
 }];
-var FuturesWikiDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var FuturesWikiDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(FuturesWikiDialog, _Component);
 
   function FuturesWikiDialog(props) {
@@ -109,8 +107,8 @@ function (_Component) {
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       noDate: true
     });
-    _this._refExchangeItem = _react["default"].createRef();
-    _this._refFromDate = _react["default"].createRef();
+    _this._refExchangeItem = /*#__PURE__*/_react["default"].createRef();
+    _this._refFromDate = /*#__PURE__*/_react["default"].createRef();
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState());
     return _this;
@@ -144,7 +142,7 @@ function (_Component) {
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -152,10 +150,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
       ref: this._refExchangeItem,
       isShow: isShow,
       isShowLabels: isShowLabels,
@@ -165,19 +163,19 @@ function (_Component) {
       oneJsonProp: "futures",
       twoCaption: "Asset",
       msgOnNotSelected: msgOnNotSelected
-    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Type",
       options: typeOptions,
       onSelect: this._handleSelectType
-    }), isFd && _react["default"].createElement(_DialogCell["default"].RowDate, {
+    }), isFd && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowDate, {
       innerRef: this._refFromDate,
       isShowLabels: isShowLabels,
       labelTitle: "From Date:",
       initValue: initFromDate,
       errorMsg: errNotYmdOrEmpty,
       onTestDate: isYmdOrEmpty
-    }), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

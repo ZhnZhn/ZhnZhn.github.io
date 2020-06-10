@@ -61,11 +61,11 @@ var Caption = function Caption(_ref) {
       from = _ref.from,
       to = _ref.to,
       onClick = _ref.onClick;
-  return _react["default"].createElement("p", {
-    style: (0, _extends2["default"])({}, S.CAPTION, {}, {
+  return /*#__PURE__*/_react["default"].createElement("p", {
+    style: (0, _extends2["default"])({}, S.CAPTION, {
       background: color
     })
-  }, _react["default"].createElement("span", null, from, "\xA0\u2013\xA0", to), _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", null, from, "\xA0\u2013\xA0", to), /*#__PURE__*/_react["default"].createElement("span", {
     style: S.CAPTION_BT,
     onClick: onClick
   }, "*"));
@@ -75,19 +75,17 @@ var Item = function Item(_ref2) {
   var title = _ref2.title,
       value = _ref2.value,
       onClick = _ref2.onClick;
-  return _react["default"].createElement("p", {
+  return /*#__PURE__*/_react["default"].createElement("p", {
     style: S.ITEM_ROOT,
     onClick: onClick
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: S.ITEM_TITLE
-  }, title), _react["default"].createElement("span", {
+  }, title), /*#__PURE__*/_react["default"].createElement("span", {
     style: S.ITEM_VALUE
   }, value));
 };
 
-var ClusterItem =
-/*#__PURE__*/
-function (_Component) {
+var ClusterItem = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ClusterItem, _Component);
 
   /*
@@ -133,22 +131,22 @@ function (_Component) {
         color = _this$props.color,
         isShowRange = _this$props.isShowRange,
         isShowChart = this.state.isShowChart,
-        _maxLabel = isShowRange ? _react["default"].createElement(_Sparklines.SparklinesMaxLabel, {
+        _maxLabel = isShowRange ? /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesMaxLabel, {
       color: COLOR_MAX,
       fontSize: 14
-    }) : _react["default"].createElement("span", null),
-        _minLabel = isShowRange ? _react["default"].createElement(_Sparklines.SparklinesMinLabel, {
+    }) : /*#__PURE__*/_react["default"].createElement("span", null),
+        _minLabel = isShowRange ? /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesMinLabel, {
       color: COLOR_MIN,
       fontSize: 14
-    }) : _react["default"].createElement("span", null);
+    }) : /*#__PURE__*/_react["default"].createElement("span", null);
 
-    return _react["default"].createElement("div", null, _react["default"].createElement(Item, {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(Item, {
       title: point.id,
       value: point[0],
       onClick: this._handleClickItem
-    }), _react["default"].createElement(_ShowHide["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowChart
-    }, _react["default"].createElement(_Sparklines.Sparklines, {
+    }, /*#__PURE__*/_react["default"].createElement(_Sparklines.Sparklines, {
       height: 32,
       width: 140,
       svgHeight: 32,
@@ -156,9 +154,9 @@ function (_Component) {
       data: this.data,
       margin: 3 //marginLeft={20}
 
-    }, _maxLabel, _minLabel, _react["default"].createElement(_Sparklines.SparklinesLine, {
+    }, _maxLabel, _minLabel, /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesLine, {
       color: color
-    }), _react["default"].createElement(_Sparklines.SparklinesSpot, {
+    }), /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesSpot, {
       pointIndex: this.pointIndex,
       size: 3,
       spotColors: SPOT_COLORS
@@ -173,8 +171,8 @@ var Cluster = function Cluster(_ref3) {
       color = _ref3.color,
       isShowRange = _ref3.isShowRange;
   var points = cluster.points || [];
-  return _react["default"].createElement("div", null, points.map(function (point, index) {
-    return _react["default"].createElement(ClusterItem, (0, _extends2["default"])({
+  return /*#__PURE__*/_react["default"].createElement("div", null, points.map(function (point, index) {
+    return /*#__PURE__*/_react["default"].createElement(ClusterItem, (0, _extends2["default"])({
       key: point.id
     }, {
       point: point,
@@ -197,9 +195,7 @@ Cluster.propTypes = {
 */
 
 
-var ClusterInfo =
-/*#__PURE__*/
-function (_Component2) {
+var ClusterInfo = /*#__PURE__*/function (_Component2) {
   (0, _inheritsLoose2["default"])(ClusterInfo, _Component2);
 
   function ClusterInfo(props) {
@@ -230,12 +226,12 @@ function (_Component2) {
         from = _this$props2.from,
         to = _this$props2.to,
         isShowRange = this.state.isShowRange;
-    return _react["default"].createElement("div", null, _react["default"].createElement(Caption, {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(Caption, {
       color: color,
       from: from,
       to: to,
       onClick: this._handleToggleRange
-    }), _react["default"].createElement(Cluster, {
+    }), /*#__PURE__*/_react["default"].createElement(Cluster, {
       cluster: cluster,
       color: color,
       isShowRange: isShowRange

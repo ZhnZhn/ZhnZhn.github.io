@@ -27,23 +27,23 @@ var S = {
 };
 var SparkFactory = {
   createSparklines: function createSparklines(data, pointIndex) {
-    return _react["default"].createElement(_Sparklines.Sparklines, {
+    return /*#__PURE__*/_react["default"].createElement(_Sparklines.Sparklines, {
       height: 45,
       width: 100,
       svgHeight: 45,
       svgWidth: 100,
       data: data
-    }, _react["default"].createElement(_Sparklines.SparklinesLine, {
+    }, /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesLine, {
       color: C_YELLOW
-    }), _react["default"].createElement(_Sparklines.SparklinesReferenceLine, {
+    }), /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesReferenceLine, {
       style: S.REF_LINE,
       type: "avg"
-    }), _react["default"].createElement(_Sparklines.SparklinesSpots, null), _react["default"].createElement(_Sparklines.SparklinesSpot, {
+    }), /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesSpots, null), /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesSpot, {
       pointIndex: pointIndex
     }));
   },
   createSparkbars: function createSparkbars(data, pointIndex) {
-    return _react["default"].createElement(_Sparklines.Sparklines, {
+    return /*#__PURE__*/_react["default"].createElement(_Sparklines.Sparklines, {
       height: 45,
       width: 100,
       svgHeight: 45,
@@ -51,7 +51,7 @@ var SparkFactory = {
       data: data,
       min: 0,
       max: 100
-    }, _react["default"].createElement(_Sparklines.SparklinesBars, {
+    }, /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesBars, {
       style: S.BARS,
       pointIndex: pointIndex
     }));

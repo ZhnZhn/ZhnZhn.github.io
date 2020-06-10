@@ -9,13 +9,13 @@ var zhIs = {
     return ((this.userOptions || {}).zhConfig || {}).withoutAnimation ? false : true;
   },
   zhIsDaily: function zhIsDaily(seriaIndex) {
-    var _ref, _this$series;
+    var _this$series$0$data, _this$series;
 
     if (seriaIndex === void 0) {
       seriaIndex = 0;
     }
 
-    var _data = (_ref = (_this$series = this.series) == null ? void 0 : _this$series[0].data) != null ? _ref : [],
+    var _data = (_this$series$0$data = (_this$series = this.series) == null ? void 0 : _this$series[0].data) != null ? _this$series$0$data : [],
         _max = _data.length - 1;
 
     if (_max < 2) {

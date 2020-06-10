@@ -44,7 +44,7 @@ var fItemContainer = {
         _type = type || _BrowserConfig["default"][browserType].chartContainerType,
         _caption = _crCaption(dialogConf, browserType);
 
-    return _react["default"].createElement(Comp, {
+    return /*#__PURE__*/_react["default"].createElement(Comp, {
       key: _type,
       store: store,
       caption: _caption,

@@ -15,9 +15,7 @@ var _TransformFn = _interopRequireDefault(require("./TransformFn"));
 
 var _InputSelect = _interopRequireDefault(require("./InputSelect"));
 
-var WrapperInputSearch =
-/*#__PURE__*/
-function (_Component) {
+var WrapperInputSearch = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(WrapperInputSearch, _Component);
 
   function WrapperInputSearch() {
@@ -57,9 +55,9 @@ function (_Component) {
         caption = _meta$caption === void 0 ? {} : _meta$caption,
         _options = _TransformFn["default"].fromLevel3(data);
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: style
-    }, _react["default"].createElement(_InputSelect["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {
       width: "100%",
       isShowOptionAnim: true,
       placeholder: placeholder,

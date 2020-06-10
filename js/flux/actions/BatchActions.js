@@ -3,9 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var BatchActions =
-/*#__PURE__*/
-function () {
+var BatchActions = /*#__PURE__*/function () {
   function BatchActions(arr) {
     this.arr = arr;
   }

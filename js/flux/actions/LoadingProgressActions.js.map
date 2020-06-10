@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/flux/actions/LoadingProgressActions.js"
- ],
- "file": "../../../src/flux/actions/LoadingProgressActions.js",
- "names": [
-  "T",
-  "LOADING",
-  "LOADING_COMPLETE",
-  "LOADING_FAILED"
- ],
- "mappings": ";;;;AACO,IAAMA,CAAC,GAAG;AACfC,EAAAA,OAAO,EAAE,SADM;AAEfC,EAAAA,gBAAgB,EAAE,kBAFH;AAGfC,EAAAA,cAAc,EAAE;AAHD,CAAV"
-}
+{"version":3,"sources":["../../../src/flux/actions/LoadingProgressActions.js"],"names":["T","LOADING","LOADING_COMPLETE","LOADING_FAILED"],"mappings":";;;;AACO,IAAMA,CAAC,GAAG;AACfC,EAAAA,OAAO,EAAE,SADM;AAEfC,EAAAA,gBAAgB,EAAE,kBAFH;AAGfC,EAAAA,cAAc,EAAE;AAHD,CAAV","sourcesContent":["\r\nexport const T = {\r\n  LOADING: 'LOADING',\r\n  LOADING_COMPLETE: 'LOADING_COMPLETE',\r\n  LOADING_FAILED: 'LOADING_FAILED'\r\n};\r\n"],"file":"LoadingProgressActions.js"}

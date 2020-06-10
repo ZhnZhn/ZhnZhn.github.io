@@ -25,9 +25,7 @@ var _dec, _class, _temp;
 
 var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 var CAPTION_YAXIS = 'Add Seria with Second YAxis';
-var DialogType4 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var DialogType4 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogType4, _Component);
 
   /*
@@ -197,7 +195,7 @@ function (_Component) {
         isShowDate = _this$state.isShowDate,
         isShowOptions = _this$state.isShowOptions,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -205,10 +203,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
@@ -217,7 +215,7 @@ function (_Component) {
       optionNames: oneNames,
       isWithInput: isWithOneInput,
       onSelect: this._handleSelectOne
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: twoURI,
@@ -226,7 +224,7 @@ function (_Component) {
       optionNames: twoNames,
       isWithInput: isWithInputTwo,
       onSelect: this._handleSelectTwo
-    }), threeURI && _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), threeURI && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: threeURI,
@@ -235,23 +233,23 @@ function (_Component) {
       optionNames: threeNames,
       isWithInput: isWithInputThree,
       onSelect: this._handleSelectThree
-    }), noDate !== true && _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), noDate !== true && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,
       initToDate: initToDate,
       msgOnNotValidFormat: msgOnNotValidFormat,
       onTestDate: onTestDate
-    })), noOptions !== true && _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), noOptions !== true && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowOptions
-    }, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: false,
       caption: CAPTION_YAXIS,
       onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
       onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
-    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

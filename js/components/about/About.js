@@ -78,102 +78,102 @@ var About = function About(_ref) {
       _cn = isShow ? CL.ABOUT + " " + CL.SHOW : CL.ABOUT,
       _style = isShow ? _About["default"].BLOCK : _About["default"].NONE;
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: _cn,
-    style: (0, _extends2["default"])({}, _style, {}, TS.ROOT)
-  }, _react["default"].createElement(_Comp["default"].BrowserCaption, {
+    style: (0, _extends2["default"])({}, _style, TS.ROOT)
+  }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].BrowserCaption, {
     caption: "About",
     onClose: _hClose
-  }, _react["default"].createElement(_TwitterLink["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_TwitterLink["default"], {
     rootStyle: _About["default"].BT_TWITTER,
     account: "webapperc",
     title: "Twitter page @wepapperc with chart examples"
-  })), _react["default"].createElement(_Comp["default"].ScrollPane, {
+  })), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ScrollPane, {
     className: CL.SCROLL,
     style: _About["default"].SCROLL_DIV
-  }, _react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, _About["default"].DIV_WRAPPER, {}, _About["default"].GREY)
-  }, _react["default"].createElement("p", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, _About["default"].DIV_WRAPPER, _About["default"].GREY)
+  }, /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_4
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].GREEN
-  }, "ERC (Economic RESTful Client)\xA0"), _react["default"].createElement("span", null, "is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers.")), _react["default"].createElement(_DataProviders["default"], {
+  }, "ERC (Economic RESTful Client)\xA0"), /*#__PURE__*/_react["default"].createElement("span", null, "is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers.")), /*#__PURE__*/_react["default"].createElement(_DataProviders["default"], {
     isClose: IS_CLOSE_PROVIDERS,
     ocCaptionStyle: OC_CAPTION_STYLE
-  }), _react["default"].createElement("div", {
+  }), /*#__PURE__*/_react["default"].createElement("div", {
     style: _About["default"].BLACK
-  }, _react["default"].createElement(_StepTitle["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_StepTitle["default"], {
     step: "1",
     title: STEP.T1
-  }), _react["default"].createElement(_StepTitle["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_StepTitle["default"], {
     step: "2",
     title: STEP.T2
-  }), _react["default"].createElement(_StepTitle["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_StepTitle["default"], {
     step: "3",
     title: STEP.T3
-  }), _react["default"].createElement(_StepTitle["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_StepTitle["default"], {
     step: "4",
     title: STEP.T4
-  })), _react["default"].createElement("p", {
+  })), /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MARGIN_TOP
-  }, "The result will be shown in a chart in a resizebale container."), _react["default"].createElement("p", {
+  }, "The result will be shown in a chart in a resizebale container."), /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
-  }, "Also it's possible to export the chart to PNG, JPG, SVG or print to PDF."), _react["default"].createElement("p", {
+  }, "Also it's possible to export the chart to PNG, JPG, SVG or print to PDF."), /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_6EM
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].RED
-  }, "Attention:\xA0"), _react["default"].createElement("span", null, "For one item from ", _react["default"].createElement("span", {
+  }, "Attention:\xA0"), /*#__PURE__*/_react["default"].createElement("span", null, "For one item from ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "Dialog"), " can be only one ", _react["default"].createElement("span", {
+  }, "Dialog"), " can be only one ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "Chart item"), " in a container. More information about a dataset can be found on a ", _react["default"].createElement("span", {
+  }, "Chart item"), " in a container. More information about a dataset can be found on a ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "tab Info of Chart item."))), _react["default"].createElement(_Comp["default"].OpenClose, {
+  }, "tab Info of Chart item."))), /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
     isClose: true,
     caption: "More...",
     ocStyle: _About["default"].LH_18,
     captionStyle: OC_CAPTION_STYLE,
     rootStyle: _About["default"].LH_14,
     openColor: _Color["default"].YELLOW
-  }, _react["default"].createElement("p", {
+  }, /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
-  }, "After clicking a ", _react["default"].createElement("span", {
+  }, "After clicking a ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "button Show"), " in a Dialog will be an opened up ", _react["default"].createElement("span", {
+  }, "button Show"), " in a Dialog will be an opened up ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "Chart container"), " with charts or empty. After closing a ", _react["default"].createElement("span", {
+  }, "Chart container"), " with charts or empty. After closing a ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "Chart container"), " all charts remains. In one time max three ", _react["default"].createElement("span", {
+  }, "Chart container"), " all charts remains. In one time max three ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "Dialogs"), " can be opened."), _react["default"].createElement("p", {
+  }, "Dialogs"), " can be opened."), /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
-  }, "Some open and private data providers require user's ", _react["default"].createElement("span", {
+  }, "Some open and private data providers require user's ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "API Key"), "."), _react["default"].createElement("p", {
+  }, "API Key"), "."), /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
-  }, _react["default"].createElement("span", null, "For example, for loading data from\xA0"), _react["default"].createElement(_ProviderLinks["default"].Quandl, null), _react["default"].createElement("span", null, "\xA0without API Key exists some restriction on frequency and amount of queries (", _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", null, "For example, for loading data from\xA0"), /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].Quandl, null), /*#__PURE__*/_react["default"].createElement("span", null, "\xA0without API Key exists some restriction on frequency and amount of queries (", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLUE_DARK
-  }, "50 per day/1 at a time"), ") and can be deprecated, according to Quandl. With ", _react["default"].createElement("span", {
+  }, "50 per day/1 at a time"), ") and can be deprecated, according to Quandl. With ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "API Key"), " it is possible to make (", _react["default"].createElement("span", {
+  }, "API Key"), " it is possible to make (", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLUE_DARK
-  }, "50 000 per day/1 at a time"), "). It's free of charge to receive.")), _react["default"].createElement("p", {
+  }, "50 000 per day/1 at a time"), "). It's free of charge to receive.")), /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
-  }, "Data providers API Keys can be set on the ", _react["default"].createElement("span", {
+  }, "Data providers API Keys can be set on the ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "tab ApiKeys, dialog Settings [s]"), "."), _react["default"].createElement("p", {
+  }, "tab ApiKeys, dialog Settings [s]"), "."), /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
-  }, "Also for loading data from data providers with HTTP protocol required ", _react["default"].createElement("span", {
+  }, "Also for loading data from data providers with HTTP protocol required ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "HTTPS proxy server"), ", by default settled in the ", _react["default"].createElement("span", {
+  }, "HTTPS proxy server"), ", by default settled in the ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "tab Options, dialog Settings [s]"), "."), _react["default"].createElement("p", {
+  }, "tab Options, dialog Settings [s]"), "."), /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
-  }, "There is three UI theme in the web app ERC: ", _react["default"].createElement("span", {
+  }, "There is three UI theme in the web app ERC: ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "Dark, Light, and Sand"), " can be set on ", _react["default"].createElement("span", {
+  }, "Dark, Light, and Sand"), " can be set on ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
-  }, "tab Options, dialog Settings [s]"), ". All user's settings keep in browser's memory only for a current web session.")), _react["default"].createElement(_LogosBar["default"], null), _react["default"].createElement("p", null, _react["default"].createElement("span", {
+  }, "tab Options, dialog Settings [s]"), ". All user's settings keep in browser's memory only for a current web session.")), /*#__PURE__*/_react["default"].createElement(_LogosBar["default"], null), /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
   }, "*Logos Fair Use.")))));
 };

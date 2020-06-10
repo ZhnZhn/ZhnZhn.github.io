@@ -10,10 +10,10 @@ var _react = _interopRequireDefault(require("react"));
 var IconLogoErc = function IconLogoErc(_ref) {
   var className = _ref.className,
       title = _ref.title;
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     className: className,
     title: title
-  }, _react["default"].createElement("svg", {
+  }, /*#__PURE__*/_react["default"].createElement("svg", {
     viewBox: "0 0 32 32",
     xmlns: "http://www.w3.org/2000/svg",
     fillRule: "evenodd",
@@ -21,7 +21,7 @@ var IconLogoErc = function IconLogoErc(_ref) {
     strokeLinejoin: "round",
     strokeMiterlimit: "2",
     strokeWidth: "2"
-  }, _react["default"].createElement("rect", {
+  }, /*#__PURE__*/_react["default"].createElement("rect", {
     ry: "1.8825414",
     rx: "194.14471",
     y: "1.434558",
@@ -30,7 +30,7 @@ var IconLogoErc = function IconLogoErc(_ref) {
     width: "10.85316",
     fill: "#8ecc2d",
     stroke: "#8ecc2d"
-  }), _react["default"].createElement("rect", {
+  }), /*#__PURE__*/_react["default"].createElement("rect", {
     ry: "1.87537",
     rx: "204.478",
     y: "16.639841",
@@ -39,7 +39,7 @@ var IconLogoErc = function IconLogoErc(_ref) {
     width: "18.307165",
     fill: "#232f3b",
     stroke: "#232f3b"
-  }), _react["default"].createElement("rect", {
+  }), /*#__PURE__*/_react["default"].createElement("rect", {
     ry: "1.87537",
     rx: "204.478",
     y: "3.4229634",

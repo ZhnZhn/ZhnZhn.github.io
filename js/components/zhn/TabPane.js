@@ -35,9 +35,7 @@ var S = {
   }
 };
 
-var TabPane =
-/*#__PURE__*/
-function (_Component) {
+var TabPane = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(TabPane, _Component);
 
   /*
@@ -62,7 +60,7 @@ function (_Component) {
       var selectedTabIndex = _this.state.selectedTabIndex;
       return children.map(function (tab, index) {
         var isSelected = index === selectedTabIndex;
-        return _react["default"].cloneElement(tab, {
+        return /*#__PURE__*/_react["default"].cloneElement(tab, {
           key: index,
           onClick: _this._hClickTab.bind(null, index),
           isSelected: isSelected
@@ -77,10 +75,10 @@ function (_Component) {
         var _isSelected = index === selectedTabIndex,
             _divStyle = _isSelected ? S.BLOCK : S.NONE;
 
-        return _react["default"].createElement("div", {
+        return /*#__PURE__*/_react["default"].createElement("div", {
           style: _divStyle,
           key: 'a' + index
-        }, _react["default"].cloneElement(tab.props.children, {
+        }, /*#__PURE__*/_react["default"].cloneElement(tab.props.children, {
           key: 'comp' + index,
           isSelected: _isSelected
         }));
@@ -104,15 +102,15 @@ function (_Component) {
         children = _this$props.children,
         width = _this$props.width,
         height = _this$props.height;
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: {
         width: width,
         height: height
       }
-    }, _react["default"].createElement("ul", {
+    }, /*#__PURE__*/_react["default"].createElement("ul", {
       className: CL,
       style: S.UL
-    }, this._renderTabs(children)), _react["default"].createElement("div", {
+    }, this._renderTabs(children)), /*#__PURE__*/_react["default"].createElement("div", {
       style: S.DIV
     }, this._renderComponents()));
   };

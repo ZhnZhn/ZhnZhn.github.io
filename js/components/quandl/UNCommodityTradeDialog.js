@@ -87,9 +87,7 @@ var CHART_TYPE_OPTIONS = [{
   caption: 'Tree Map : On Recent Year',
   value: _Type.ChartType.TREE_MAP
 }];
-var UNCommodityTradeDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withValidationLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var UNCommodityTradeDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withValidationLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(UNCommodityTradeDialog, _Component);
 
   function UNCommodityTradeDialog(props) {
@@ -388,13 +386,13 @@ function (_Component) {
       onClick: _this._handlerClickChartType
     });
 
-    _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Flat, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
       key: "meta",
       rootStyle: S.BT_ROOT,
       caption: "Load Meta",
       title: "First Load Meta, then Load Item",
       onClick: _this._handlerLoadMeta
-    }), _react["default"].createElement(_DialogCell["default"].Button.Load, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Load, {
       key: "load",
       onClick: _this._handlerLoadData
     })];
@@ -445,7 +443,7 @@ function (_Component) {
         optionTrades = _this$state2.optionTrades,
         placeholderTrade = _this$state2.placeholderTrade,
         validationMessages = _this$state2.validationMessages;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: "United Nations Commodity Trade",
       menuModel: this._menuMore,
@@ -453,10 +451,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handlerClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: countryURI,
@@ -464,7 +462,7 @@ function (_Component) {
       caption: "Country:",
       optionNames: "Countries",
       onSelect: this._handlerSelectCountry
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: commodityURI,
@@ -472,15 +470,15 @@ function (_Component) {
       caption: "Chapter:",
       optionNames: "Chapters",
       onSelect: this._handlerSelectChapter
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowFilter
-    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Filter Trade:",
       options: TRADE_FILTER_OPTIONS,
       placeholder: "Filter...",
       onSelect: this._handlerSelectTradeFilter
-    })), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Subheading:",
       options: optionTrades,
@@ -490,23 +488,23 @@ function (_Component) {
       placeholder: placeholderTrade,
       onLoadOption: this._handlerLoadMeta,
       onSelect: this._handlerSelectTrade
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,
       initToDate: initToDate,
       msgOnNotValidFormat: msgOnNotValidFormat,
       onTestDate: onTestDate
-    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowChartType
-    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Chart Type:",
       options: CHART_TYPE_OPTIONS,
       onSelect: this._handlerSelectChartType
-    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

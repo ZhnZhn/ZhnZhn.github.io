@@ -76,9 +76,7 @@ var _crConf = function _crConf(_ref) {
   };
 };
 
-var OpenClose =
-/*#__PURE__*/
-function (_Component) {
+var OpenClose = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(OpenClose, _Component);
 
   /*
@@ -144,36 +142,36 @@ function (_Component) {
         _rootChildStyle = _crConf2._rootChildStyle,
         _rootChildCl = _crConf2._rootChildCl;
 
-    return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.ROOT_DIV, {}, rootStyle)
-    }, _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.ROOT_DIV, rootStyle)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       className: CL.NOT_SELECTED
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       role: "menuitem",
       tabIndex: "0",
       className: CL.ROOT,
       style: ocStyle,
       onClick: this._hClick,
       onKeyDown: this._hKeyDown
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT_SVG
-    }, _react["default"].createElement("svg", {
+    }, /*#__PURE__*/_react["default"].createElement("svg", {
       viewBox: "0 0 16 16",
       width: "100%",
       height: "100%",
       preserveAspectRatio: "none",
       xmlns: "http://www.w3.org/2000/svg",
       style: S.INLINE_BLOCK
-    }, _react["default"].createElement("path", {
+    }, /*#__PURE__*/_react["default"].createElement("path", {
       fill: _fillV,
       strokeWidth: "1",
       stroke: openColor,
       d: _pathV
-    }))), _react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle)
-    }, caption)), CompAfter), _react["default"].createElement("div", {
+    }))), /*#__PURE__*/_react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.CAPTION, captionStyle)
+    }, caption)), CompAfter), /*#__PURE__*/_react["default"].createElement("div", {
       className: _rootChildCl,
-      style: (0, _extends2["default"])({}, childStyle, {}, _rootChildStyle)
+      style: (0, _extends2["default"])({}, childStyle, _rootChildStyle)
     }, children));
   };
 

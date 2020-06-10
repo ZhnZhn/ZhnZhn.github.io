@@ -23,9 +23,7 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var SubMenuItem =
-/*#__PURE__*/
-function (_Component) {
+var SubMenuItem = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SubMenuItem, _Component);
 
   /*
@@ -80,7 +78,7 @@ function (_Component) {
     var isActive = this.state.isActive,
         _style = isActive && !isNotActive ? S.ACTIVE : null;
 
-    return _react["default"].createElement("button", {
+    return /*#__PURE__*/_react["default"].createElement("button", {
       className: CL,
       style: _style,
       onClick: this._hClick

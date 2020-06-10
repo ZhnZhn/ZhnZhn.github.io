@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _crAdapter = _interopRequireDefault(require("../crAdapter"));
+
 var _toChart = _interopRequireDefault(require("./toChart"));
 
 var _toList = _interopRequireDefault(require("./toList"));
@@ -14,29 +16,14 @@ var _rAdapter = {
   MCL: _toList["default"]
 };
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
-
 var _getAdapter = function _getAdapter(option) {
   var dfSubId = option.dfSubId;
   return _rAdapter[dfSubId] || _rAdapter.DF;
 };
 
-var CgAdapter = {
-  crKey: function crKey(option) {
-    return _getAdapter(option).crKey(option);
-  },
-  toConfig: function toConfig(json, option) {
-    return _getAdapter(option).toConfig(json, option);
-  },
-  isAdd: function isAdd(option) {
-    return _isFn(_getAdapter(option).toSeries);
-  },
-  toSeries: function toSeries(json, option) {
-    return _getAdapter(option).toSeries(json, option);
-  }
-};
+var CgAdapter = (0, _crAdapter["default"])(_getAdapter, {
+  isKey: true
+});
 var _default = CgAdapter;
 exports["default"] = _default;
 //# sourceMappingURL=CgAdapter.js.map

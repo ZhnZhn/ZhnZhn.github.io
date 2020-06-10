@@ -63,9 +63,7 @@ var DRAG = {
   ITEM: 'ITEM'
 };
 
-var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(WatchBrowser, _Component);
 
   function WatchBrowser(props) {
@@ -111,7 +109,7 @@ function (_Component) {
       return watchList.groups.map(function (group, index) {
         var caption = group.caption,
             lists = group.lists;
-        return _react["default"].createElement(_Comp["default"].OpenClose2, {
+        return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
           key: index,
           style: S.GROUP_DIV,
           fillOpen: C_GROUP_OPEN,
@@ -134,7 +132,7 @@ function (_Component) {
       return lists.map(function (list, index) {
         var caption = list.caption,
             items = list.items;
-        return _react["default"].createElement(_Comp["default"].OpenClose2, {
+        return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
           key: index,
           fillOpen: C_LIST_OPEN,
           style: S.LIST_DIV,
@@ -159,7 +157,7 @@ function (_Component) {
       return items.map(function (item, index) {
         var id = item.id,
             caption = item.caption;
-        return _react["default"].createElement(_WatchItem["default"], {
+        return /*#__PURE__*/_react["default"].createElement(_WatchItem["default"], {
           key: id,
           className: CL.WATCH_ITEM,
           isModeEdit: isModeEdit,
@@ -234,27 +232,27 @@ function (_Component) {
         watchList = _this$state.watchList,
         _captionEV = isModeEdit ? 'V' : 'E';
 
-    return _react["default"].createElement(_Comp["default"].Browser, {
+    return /*#__PURE__*/_react["default"].createElement(_Comp["default"].Browser, {
       isShow: isShow,
       style: S.BROWSER
-    }, _react["default"].createElement(_Comp["default"].BrowserCaption, {
+    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].BrowserCaption, {
       caption: caption,
       onClose: this._handlerHide
-    }, _react["default"].createElement(_Comp["default"].ButtonCircle, {
+    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].ButtonCircle, {
       caption: "S",
       title: "Save to LocalStorage",
       style: S.BT_CIRCLE,
       onClick: this._handlerSaveWatch
-    }), _react["default"].createElement(_Comp["default"].ButtonCircle, {
+    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ButtonCircle, {
       caption: _captionEV,
       title: "Toggle Edit Mode: E/V",
       style: S.BT_CIRCLE,
       onClick: this._handlerToggleEditMode
-    })), _react["default"].createElement(_EditBar["default"], {
+    })), /*#__PURE__*/_react["default"].createElement(_EditBar["default"], {
       isShow: isModeEdit,
       onClickGroup: this._handlerEditGroup,
       onClickList: this._handlerEditList
-    }), _react["default"].createElement(_Comp["default"].ScrollPane, {
+    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ScrollPane, {
       className: CL.SCROLL
     }, watchList && this._renderWatchList(watchList)));
   };

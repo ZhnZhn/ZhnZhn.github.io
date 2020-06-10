@@ -103,17 +103,17 @@ var Frame = function Frame(_ref) {
 
   var _isTitle = title && onClickPrev;
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: style
-  }, _isTitle && _react["default"].createElement(_MenuTitle["default"], {
+  }, _isTitle && /*#__PURE__*/_react["default"].createElement(_MenuTitle["default"], {
     innerRef: _refTitle,
     title: title,
     onClick: onClickPrev.bind(null, pageNumber)
-  }), _react["default"].createElement(_MenuList["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_MenuList["default"], {
     refFirstItem: refFirstItem,
     model: model,
     fOnClickItem: _fOnClickItem
-  }), _react["default"].createElement(_ErrMsg["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_ErrMsg["default"], {
     errMsg: errMsg
   }));
 };

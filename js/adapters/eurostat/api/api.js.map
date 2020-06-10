@@ -1,12 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/adapters/eurostat/api/api.js"
- ],
- "file": "../../../../src/adapters/eurostat/api/api.js",
- "names": [
-  "api",
-  "crUrlN"
- ],
- "mappings": ";;;;;;;AACA;;AAEA,IAAMA,GAAG,GAAG;AACVC,EAAAA,MAAM,EAANA;AADU,CAAZ;eAIeD,G"
-}
+{"version":3,"sources":["../../../../src/adapters/eurostat/api/api.js"],"names":["api","crUrlN"],"mappings":";;;;;;;AACA;;AAEA,IAAMA,GAAG,GAAG;AACVC,EAAAA,MAAM,EAANA;AADU,CAAZ;eAIeD,G","sourcesContent":["\r\nimport crUrlN from './crUrlN'\r\n\r\nconst api = {\r\n  crUrlN\r\n};\r\n\r\nexport default api;\r\n"],"file":"api.js"}

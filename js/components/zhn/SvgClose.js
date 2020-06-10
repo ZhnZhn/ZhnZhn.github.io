@@ -20,12 +20,12 @@ var SvgClose = function SvgClose(_ref) {
   var style = _ref.style,
       _ref$onClose = _ref.onClose,
       onClose = _ref$onClose === void 0 ? function () {} : _ref$onClose;
-  return _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("button", {
     tabIndex: "-1",
     className: CL,
     style: style,
     onClick: onClose
-  }, _react["default"].createElement("svg", {
+  }, /*#__PURE__*/_react["default"].createElement("svg", {
     viewBox: "0 0 12 12",
     width: "100%",
     height: "100%",
@@ -35,9 +35,9 @@ var SvgClose = function SvgClose(_ref) {
     strokeWidth: "2",
     stroke: STYLE.COLOR,
     strokeLinecap: "round"
-  }, _react["default"].createElement("path", {
+  }, /*#__PURE__*/_react["default"].createElement("path", {
     d: "M 0,0 L 12,12"
-  }), _react["default"].createElement("path", {
+  }), /*#__PURE__*/_react["default"].createElement("path", {
     d: "M 12,0 L 0,12"
   })));
 };

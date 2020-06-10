@@ -94,7 +94,7 @@ var createLoadOptions = function createLoadOptions(props, options) {
 
   _modifyIfItemTable(dfProps, items);
 
-  return (0, _extends2["default"])({}, dfProps, {}, dialogOptions, {
+  return (0, _extends2["default"])({}, dfProps, dialogOptions, {
     _type: TYPE,
     _itemKey: _itemKey,
     itemCaption: itemCaption,

@@ -72,9 +72,7 @@ var S = {
   }
 };
 
-var SeriaRow =
-/*#__PURE__*/
-function (_Component) {
+var SeriaRow = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SeriaRow, _Component);
 
   function SeriaRow() {
@@ -136,26 +134,26 @@ function (_Component) {
       backgroundColor: this._getColor()
     };
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
-    }, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       rootStyle: S.ROW_CHECK_BOX,
       caption: "",
       onCheck: this._hCheck,
       onUnCheck: this._hUnCheck
-    }), _react["default"].createElement("span", {
+    }), /*#__PURE__*/_react["default"].createElement("span", {
       className: CL.ELL,
       style: S.TITLE
-    }, _name), _react["default"].createElement(_CellColor["default"], {
-      style: (0, _extends2["default"])({}, S.COLOR, {}, _bgColor),
+    }, _name), /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
+      style: (0, _extends2["default"])({}, S.COLOR, _bgColor),
       onReg: this._hRegCellColor,
       onClick: this._hClickPallete
-    }, _react["default"].createElement(_ModalPalette["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ModalPalette["default"], {
       isShow: isShowPallete,
       model: _Model["default"].palette,
       onClickCell: this._hEnterColor,
       onClose: this._hClosePalette
-    })), _react["default"].createElement(_InputSelect["default"], {
+    })), /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {
       placeholder: "withYAxis",
       width: "150",
       rootStyle: S.SELECT,

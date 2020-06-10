@@ -12,11 +12,11 @@ var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 //import PropTypes from "prop-types";
 var _renderValidationMessages = function _renderValidationMessages(validationMessages) {
   return validationMessages.map(function (msg, index) {
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       key: msg
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: _DialogStyles["default"].VM_MSG_NUMBER
-    }, index + 1), _react["default"].createElement("span", {
+    }, index + 1), /*#__PURE__*/_react["default"].createElement("span", {
       style: _DialogStyles["default"].VM_MSG
     }, msg));
   });
@@ -25,7 +25,7 @@ var _renderValidationMessages = function _renderValidationMessages(validationMes
 var ValidationMessages = function ValidationMessages(_ref) {
   var _ref$validationMessag = _ref.validationMessages,
       validationMessages = _ref$validationMessag === void 0 ? [] : _ref$validationMessag;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: _DialogStyles["default"].VM_CONT
   }, _renderValidationMessages(validationMessages));
 };

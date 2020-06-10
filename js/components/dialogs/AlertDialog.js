@@ -44,9 +44,7 @@ var S = {
   }
 };
 
-var AlertDialog =
-/*#__PURE__*/
-function (_Component) {
+var AlertDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AlertDialog, _Component);
 
   function AlertDialog() {
@@ -86,19 +84,19 @@ function (_Component) {
         alertDescr = data.alertDescr,
         _caption = alertCaption + ': ';
 
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       caption: "Alert",
       isShow: isShow,
       onClose: onClose
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROW_CAPTION
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.CAPTION
-    }, _caption), _react["default"].createElement("span", {
+    }, _caption), /*#__PURE__*/_react["default"].createElement("span", {
       className: CL_ELL,
       style: S.ITEM_ID,
       title: alertItemId
-    }, alertItemId)), _react["default"].createElement("p", {
+    }, alertItemId)), /*#__PURE__*/_react["default"].createElement("p", {
       style: S.DESCR
     }, alertDescr));
   };

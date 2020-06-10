@@ -54,9 +54,7 @@ var _crCheckedStyle = function _crCheckedStyle(color) {
   };
 };
 
-var RowCheckBox =
-/*#__PURE__*/
-function (_Component) {
+var RowCheckBox = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(RowCheckBox, _Component);
 
   /*
@@ -145,21 +143,21 @@ function (_Component) {
         value = _this$props3.value,
         TS = theme.getStyle(TH_ID),
         _value = this.state ? this.state.isChecked : value,
-        _style = _value ? (0, _extends2["default"])({}, captionStyle, {}, _crCheckedStyle(checkedColor)) : captionStyle;
+        _style = _value ? (0, _extends2["default"])({}, captionStyle, _crCheckedStyle(checkedColor)) : captionStyle;
 
-    return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.ROOT, {}, rootStyle)
-    }, _react["default"].createElement(_SvgCheckBox["default"], {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.ROOT, rootStyle)
+    }, /*#__PURE__*/_react["default"].createElement(_SvgCheckBox["default"], {
       value: _value,
       checkedRestStroke: checkedColor,
       checkedRestFill: checkedColor,
       checkedColor: TS.CHECKED_COLOR,
       onCheck: this._hCheck,
       onUnCheck: this._hUnCheck
-    }), caption && _react["default"].createElement("button", {
+    }), caption && /*#__PURE__*/_react["default"].createElement("button", {
       className: CL,
       tabIndex: "-1",
-      style: (0, _extends2["default"])({}, S.CAPTION, {}, _style),
+      style: (0, _extends2["default"])({}, S.CAPTION, _style),
       onClick: this._hToggle
     }, caption));
   };

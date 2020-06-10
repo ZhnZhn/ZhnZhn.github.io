@@ -18,11 +18,11 @@ var RowInputSearch = function RowInputSearch(props) {
       caption = _useRowOptions.caption,
       options = _useRowOptions.options;
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: rowStyle
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: labelStyle
-  }, caption), _react["default"].createElement(_InputSearch["default"], options));
+  }, caption), /*#__PURE__*/_react["default"].createElement(_InputSearch["default"], options));
 };
 
 var _default = RowInputSearch;

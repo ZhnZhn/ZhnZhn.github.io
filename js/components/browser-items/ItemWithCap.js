@@ -16,7 +16,7 @@ var ItemWithCap = function ItemWithCap(props) {
       cap = item.cap,
       salePrice = item.salePrice,
       ipo = item.ipo;
-  return _react["default"].createElement(_Item["default"], props, _react["default"].createElement(_RowCap["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_Item["default"], props, /*#__PURE__*/_react["default"].createElement(_RowCap["default"], {
     cap: cap,
     salePrice: salePrice,
     ipo: ipo

@@ -34,7 +34,7 @@ var _crHistoricalItemConf = function _crHistoricalItemConf(data, option) {
       items = option.items,
       dfT = option.dfT,
       dfPn = option.dfPn;
-  return (0, _extends2["default"])({}, crItemConf(option), {}, crValueConf(data), {
+  return (0, _extends2["default"])({}, crItemConf(option), crValueConf(data), {
     _itemKey: 'FMP/' + itemCaption,
     dataSource: dataSource,
     items: items,

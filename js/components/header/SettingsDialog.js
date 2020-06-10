@@ -42,9 +42,7 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var SettingsDialog =
-/*#__PURE__*/
-function (_Component) {
+var SettingsDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SettingsDialog, _Component);
 
   function SettingsDialog() {
@@ -96,26 +94,26 @@ function (_Component) {
     var _this$props = this.props,
         isShow = _this$props.isShow,
         data = _this$props.data;
-    return _react["default"].createElement(_Comp["default"].ModalDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_Comp["default"].ModalDialog, {
       ref: this._refModal,
       caption: "User Settings",
       style: S.MODAL,
       isWithButton: false,
       isShow: isShow,
       onClose: this._hClose
-    }, _react["default"].createElement(_Comp["default"].TabPane, {
+    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].TabPane, {
       isUpdateInit: true
-    }, _react["default"].createElement(_Comp["default"].Tab, {
+    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].Tab, {
       title: "ApiKeys"
-    }, _react["default"].createElement(_PaneApiKey["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_PaneApiKey["default"], {
       isShow: isShow,
       titleStyle: S.TITLE_API,
       btStyle: S.BT,
       data: data,
       onClose: this._hClose
-    })), _react["default"].createElement(_Comp["default"].Tab, {
+    })), /*#__PURE__*/_react["default"].createElement(_Comp["default"].Tab, {
       title: "Options"
-    }, _react["default"].createElement(_PaneOptions["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_PaneOptions["default"], {
       titleStyle: S.TITLE_OPTION,
       btStyle: S.BT,
       data: data,

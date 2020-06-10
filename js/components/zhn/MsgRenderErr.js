@@ -21,8 +21,8 @@ var MsgRenderErr = function MsgRenderErr(_ref) {
       style = _ref.style,
       _ref$msg = _ref.msg,
       msg = _ref$msg === void 0 ? '' : _ref$msg;
-  return isShow ? _react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.RENDER_ERR, {}, style)
+  return isShow ? /*#__PURE__*/_react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, S.RENDER_ERR, style)
   }, ("Error occured during rendering " + msg).trim() + '.') : null;
 };
 

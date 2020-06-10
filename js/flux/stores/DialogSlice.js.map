@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/flux/stores/DialogSlice.js"
- ],
- "file": "../../../src/flux/stores/DialogSlice.js",
- "names": [
-  "DialogSlice",
-  "getDialogConf",
-  "conf",
-  "chartType",
-  "dialogConf",
-  "_browserId",
-  "split",
-  "getSourceConfig"
- ],
- "mappings": ";;;;AACA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,aADkB,yBACJC,IADI,EACEC,SADF,EACY;AAC5B;AACA,QAAID,IAAI,IAAIA,IAAI,CAACE,UAAjB,EAA6B;AAC3B,aAAOF,IAAP;AACD;;AACD,QAAMG,UAAU,GAAGF,SAAS,CAACG,KAAV,CAAgB,GAAhB,EAAqB,CAArB,CAAnB;AACA,WAAO,KAAKC,eAAL,CAAqBF,UAArB,EAAiCF,SAAjC,CAAP;AACD;AARiB,CAApB;eAWeH,W"
-}
+{"version":3,"sources":["../../../src/flux/stores/DialogSlice.js"],"names":["DialogSlice","getDialogConf","conf","chartType","dialogConf","_browserId","split","getSourceConfig"],"mappings":";;;;AACA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,aADkB,yBACJC,IADI,EACEC,SADF,EACY;AAC5B;AACA,QAAID,IAAI,IAAIA,IAAI,CAACE,UAAjB,EAA6B;AAC3B,aAAOF,IAAP;AACD;;AACD,QAAMG,UAAU,GAAGF,SAAS,CAACG,KAAV,CAAgB,GAAhB,EAAqB,CAArB,CAAnB;AACA,WAAO,KAAKC,eAAL,CAAqBF,UAArB,EAAiCF,SAAjC,CAAP;AACD;AARiB,CAApB;eAWeH,W","sourcesContent":["\r\nconst DialogSlice = {\r\n  getDialogConf(conf, chartType){\r\n    //DialogStatN\r\n    if (conf && conf.dialogConf) {\r\n      return conf;\r\n    }\r\n    const _browserId = chartType.split('_')[0];\r\n    return this.getSourceConfig(_browserId, chartType);\r\n  }\r\n}\r\n\r\nexport default DialogSlice\r\n"],"file":"DialogSlice.js"}

@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/hooks/useToggle.js"
- ],
- "file": "../../../src/components/hooks/useToggle.js",
- "names": [
-  "useToggle",
-  "initialValue",
-  "is",
-  "setIs"
- ],
- "mappings": ";;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,YAAD,EAAkB;AAAA,kBACf,qBAASA,YAAT,CADe;AAAA,MAC5BC,EAD4B;AAAA,MACxBC,KADwB;;AAEnC,SAAO,CACLD,EADK,EAEL,wBAAY;AAAA,WAAMC,KAAK,CAAC,UAAAD,EAAE;AAAA,aAAI,CAACA,EAAL;AAAA,KAAH,CAAX;AAAA,GAAZ,EAAoC,EAApC,CAFK,CAAP;AAIA,CAND;;eAQeF,S"
-}
+{"version":3,"sources":["../../../src/components/hooks/useToggle.js"],"names":["useToggle","initialValue","is","setIs"],"mappings":";;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,YAAD,EAAkB;AAAA,kBACf,qBAASA,YAAT,CADe;AAAA,MAC5BC,EAD4B;AAAA,MACxBC,KADwB;;AAEnC,SAAO,CACLD,EADK,EAEL,wBAAY;AAAA,WAAMC,KAAK,CAAC,UAAAD,EAAE;AAAA,aAAI,CAACA,EAAL;AAAA,KAAH,CAAX;AAAA,GAAZ,EAAoC,EAApC,CAFK,CAAP;AAIA,CAND;;eAQeF,S","sourcesContent":["import { useState, useCallback } from 'react'\r\n\r\nconst useToggle = (initialValue) => {\r\n const [is, setIs] = useState(initialValue);\r\n return [\r\n   is,\r\n   useCallback(() => setIs(is => !is), [])\r\n ];\r\n};\r\n\r\nexport default useToggle\r\n"],"file":"useToggle.js"}

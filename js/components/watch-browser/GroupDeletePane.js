@@ -14,9 +14,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
-var GroupDeletePane =
-/*#__PURE__*/
-function (_Component) {
+var GroupDeletePane = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(GroupDeletePane, _Component);
 
   /*
@@ -83,7 +81,7 @@ function (_Component) {
     };
 
     _this.caption = null;
-    _this._primaryBt = _react["default"].createElement(_Atoms["default"].Button.Primary, {
+    _this._primaryBt = /*#__PURE__*/_react["default"].createElement(_Atoms["default"].Button.Primary, {
       caption: "Delete",
       title: "Delete Group",
       onClick: _this._handleDeleteGroup
@@ -110,13 +108,13 @@ function (_Component) {
         _this$state = this.state,
         groupOptions = _this$state.groupOptions,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement("div", null, _react["default"].createElement(_Atoms["default"].RowInputSelect, {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_Atoms["default"].RowInputSelect, {
       caption: "Group:",
       options: groupOptions,
       onSelect: this._handleSelectGroup
-    }), _react["default"].createElement(_Atoms["default"].ValidationMessages, {
+    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].ValidationMessages, {
       validationMessages: validationMessages
-    }), _react["default"].createElement(_Atoms["default"].RowButtons, {
+    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].RowButtons, {
       Primary: this._primaryBt,
       withoutClear: true,
       onClose: onClose

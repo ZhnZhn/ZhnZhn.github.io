@@ -45,7 +45,7 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
     zhToggle2H: _zhToggle2H["default"],
     zhRemoveCategory: _zhRemoveCategory["default"],
     zhZoomX: _zhZoomX["default"]
-  }, _zhIs["default"], {}, _zhGet["default"], {}, _zhDetailCharts["default"]));
+  }, _zhIs["default"], _zhGet["default"], _zhDetailCharts["default"]));
 };
 
 var _default = HighchartsZhn;

@@ -23,13 +23,13 @@ var SparklinesSpots = function SparklinesSpots(props) {
       size = props.size,
       style = props.style,
       spotColors = props.spotColors,
-      startSpot = _react["default"].createElement("circle", {
+      startSpot = /*#__PURE__*/_react["default"].createElement("circle", {
     cx: points[0].x,
     cy: points[0].y,
     r: size,
     style: style
   }),
-      endSpot = _react["default"].createElement("circle", {
+      endSpot = /*#__PURE__*/_react["default"].createElement("circle", {
     cx: points[points.length - 1].x,
     cy: points[points.length - 1].y,
     r: size,
@@ -38,7 +38,7 @@ var SparklinesSpots = function SparklinesSpots(props) {
     }
   });
 
-  return _react["default"].createElement("g", null, style && startSpot, endSpot);
+  return /*#__PURE__*/_react["default"].createElement("g", null, style && startSpot, endSpot);
 };
 /*
 SparklinesSpots.propTypes = {

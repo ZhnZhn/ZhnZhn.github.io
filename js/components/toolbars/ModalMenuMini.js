@@ -18,7 +18,7 @@ var _ModalMenu = _interopRequireDefault(require("./ModalMenu.Style"));
 var _renderItems = function _renderItems(configs, onClickItem) {
   return configs.map(function (c) {
     var btTitle = c.btTitle;
-    return _react["default"].createElement(_SubMenuItem["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
       key: btTitle,
       caption: btTitle,
       onClick: onClickItem.bind(null, btTitle)
@@ -32,11 +32,11 @@ var ModalMenuMini = function ModalMenuMini(_ref) {
       onClose = _ref.onClose,
       configs = _ref.configs,
       onClickItem = _ref.onClickItem;
-  return _react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
     isShow: isShow,
-    style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, {}, style),
+    style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, style),
     onClose: onClose
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     style: _ModalMenu["default"].PANE
   }, configs && _renderItems(configs, onClickItem)));
 };

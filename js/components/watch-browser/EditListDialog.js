@@ -39,9 +39,7 @@ var EDIT_WATCH_COMPLETED = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
 var notSelected = _MsgWatch["default"].notSelected,
     emptyName = _MsgWatch["default"].emptyName;
 
-var EditListDialog =
-/*#__PURE__*/
-function (_Component) {
+var EditListDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(EditListDialog, _Component);
 
   function EditListDialog() {
@@ -70,16 +68,16 @@ function (_Component) {
         isShow = _this$props.isShow,
         store = _this$props.store,
         onClose = _this$props.onClose;
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       caption: "Watch Lists Edit",
       isShow: isShow,
       isWithButton: false,
       onClose: onClose
-    }, _react["default"].createElement(_TabPane["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_TabPane["default"], {
       width: "380px"
-    }, _react["default"].createElement(_Tab["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_Tab["default"], {
       title: "Create"
-    }, _react["default"].createElement(_ListCreatePane["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ListCreatePane["default"], {
       store: store,
       actionCompleted: EDIT_WATCH_COMPLETED,
       actionFailed: EDIT_WATCH_FAILED,
@@ -88,9 +86,9 @@ function (_Component) {
       msgOnIsEmptyName: emptyName,
       onCreate: createList,
       onClose: onClose
-    })), _react["default"].createElement(_Tab["default"], {
+    })), /*#__PURE__*/_react["default"].createElement(_Tab["default"], {
       title: "Rename"
-    }, _react["default"].createElement(_ListEditPane["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ListEditPane["default"], {
       store: store,
       actionCompleted: EDIT_WATCH_COMPLETED,
       actionFailed: EDIT_WATCH_FAILED,
@@ -99,9 +97,9 @@ function (_Component) {
       msgOnIsEmptyName: emptyName,
       onRename: renameList,
       onClose: onClose
-    })), _react["default"].createElement(_Tab["default"], {
+    })), /*#__PURE__*/_react["default"].createElement(_Tab["default"], {
       title: "Delete"
-    }, _react["default"].createElement(_ListDeletePane["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ListDeletePane["default"], {
       store: store,
       actionCompleted: EDIT_WATCH_COMPLETED,
       actionFailed: EDIT_WATCH_FAILED,

@@ -17,7 +17,7 @@ var S = {
 
 var Clear = function Clear(_ref) {
   var onClick = _ref.onClick;
-  return _react["default"].createElement(_FlatButton["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
     style: S.BT,
     caption: "Clear",
     title: "Clear Input",
@@ -27,7 +27,7 @@ var Clear = function Clear(_ref) {
 
 var Close = function Close(_ref2) {
   var onClick = _ref2.onClick;
-  return _react["default"].createElement(_FlatButton["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
     style: S.BT,
     caption: "Close",
     title: "Close Dialog",
@@ -39,7 +39,7 @@ var Primary = function Primary(_ref3) {
   var caption = _ref3.caption,
       title = _ref3.title,
       onClick = _ref3.onClick;
-  return _react["default"].createElement(_FlatButton["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
     caption: caption,
     title: title,
     isPrimary: true,

@@ -29,9 +29,7 @@ var C = {
   DESC: 'descending'
 };
 
-var Table =
-/*#__PURE__*/
-function (_Component) {
+var Table = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(Table, _Component);
 
   /*
@@ -149,9 +147,9 @@ function (_Component) {
         rows = _this$state.rows,
         _className = isGridLine ? _Style["default"].CL_GRID : '';
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: _Style["default"].WRAPPER_DIV
-    }, _react["default"].createElement(_ModalMenu["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ModalMenu["default"], {
       isShow: isMenuMore,
       style: _Style["default"].STYLE_MORE,
       onClose: this._hToggleMenuMore,
@@ -159,12 +157,12 @@ function (_Component) {
       onToggleGrid: this._hToogleGridLine,
       headers: headers,
       onToggle: this._hToggleColumn
-    }), _react["default"].createElement("table", {
+    }), /*#__PURE__*/_react["default"].createElement("table", {
       className: _className + " " + className,
       id: gridId,
       style: _Style["default"].TABLE,
       role: "grid"
-    }, _react["default"].createElement(_TableHead["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_TableHead["default"], {
       gridId: gridId,
       thMoreStyle: thMoreStyle,
       headers: headers,
@@ -172,7 +170,7 @@ function (_Component) {
       sortTo: sortTo,
       onSort: this._hSort,
       onMenuMore: this._hToggleMenuMore
-    }), _react["default"].createElement(_TableBody["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_TableBody["default"], {
       headers: headers,
       rows: rows,
       tableFn: tableFn

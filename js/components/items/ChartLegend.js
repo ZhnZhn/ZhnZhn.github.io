@@ -15,9 +15,9 @@ var ChartLegend = function ChartLegend(_ref) {
   var isShow = _ref.isShow,
       legend = _ref.legend,
       onClickItem = _ref.onClickItem;
-  return legend ? _react["default"].createElement(_ShowHide["default"], {
+  return legend ? /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
     isShow: isShow
-  }, _react["default"].createElement(_Legend["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_Legend["default"], {
     legend: legend,
     onClickItem: onClickItem
   })) : null;

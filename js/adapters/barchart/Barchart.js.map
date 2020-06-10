@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/barchart/Barchart.js"
- ],
- "file": "../../../src/adapters/barchart/Barchart.js",
- "names": [
-  "Barchart",
-  "fnFetch",
-  "fetchJsonp",
-  "optionFetch",
-  "jsonpCallbackFunction",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AAEA,IAAMA,QAAQ,GAAG;AACfC,EAAAA,OAAO,EAAEC,mBADM;AAEfC,EAAAA,WAAW,EAAE;AACXC,IAAAA,qBAAqB,EAAE;AADZ,GAFE;AAKfC,EAAAA,GAAG,EAAHA,uBALe;AAKVC,EAAAA,OAAO,EAAPA;AALU,CAAjB;eAQeN,Q"
-}
+{"version":3,"sources":["../../../src/adapters/barchart/Barchart.js"],"names":["Barchart","fnFetch","fetchJsonp","optionFetch","jsonpCallbackFunction","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AAEA,IAAMA,QAAQ,GAAG;AACfC,EAAAA,OAAO,EAAEC,mBADM;AAEfC,EAAAA,WAAW,EAAE;AACXC,IAAAA,qBAAqB,EAAE;AADZ,GAFE;AAKfC,EAAAA,GAAG,EAAHA,uBALe;AAKVC,EAAAA,OAAO,EAAPA;AALU,CAAjB;eAQeN,Q","sourcesContent":["import { fetchJsonp } from '../../utils/fnFetch'\r\nimport api from './BarchartApi'\r\nimport adapter from './BarchartAdapter'\r\n\r\nconst Barchart = {\r\n  fnFetch: fetchJsonp,\r\n  optionFetch: {\r\n    jsonpCallbackFunction: 'BarchartAPIcallback'\r\n  },\r\n  api, adapter\r\n};\r\n\r\nexport default Barchart\r\n"],"file":"Barchart.js"}

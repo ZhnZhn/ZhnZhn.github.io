@@ -22,14 +22,14 @@ var _crDfProps = function _crDfProps(option) {
 
 describe('FlatButton Snap', function () {
   test('should renders correctly with isPrimary true', function () {
-    var tree = _reactTestRenderer["default"].create(_react["default"].createElement(_FlatButton["default"], _crDfProps({
+    var tree = _reactTestRenderer["default"].create( /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], _crDfProps({
       isPrimary: true
     }))).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
   test('should renders correctly with isPrimary false', function () {
-    var tree = _reactTestRenderer["default"].create(_react["default"].createElement(_FlatButton["default"], _crDfProps({
+    var tree = _reactTestRenderer["default"].create( /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], _crDfProps({
       isPrimary: false
     }))).toJSON();
 

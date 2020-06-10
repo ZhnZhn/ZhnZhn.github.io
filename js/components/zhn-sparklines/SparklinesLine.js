@@ -35,10 +35,10 @@ var SparklinesLine = function SparklinesLine(props) {
     fillOpacity: style.fillOpacity || '.1',
     fill: style.fill || color || 'slategray'
   };
-  return _react["default"].createElement("g", null, _react["default"].createElement("polyline", {
+  return /*#__PURE__*/_react["default"].createElement("g", null, /*#__PURE__*/_react["default"].createElement("polyline", {
     points: fillPoints.join(' '),
     style: fillStyle
-  }), _react["default"].createElement("polyline", {
+  }), /*#__PURE__*/_react["default"].createElement("polyline", {
     points: linePoints.join(' '),
     style: lineStyle
   }));

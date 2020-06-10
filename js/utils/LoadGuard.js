@@ -3,9 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var LoadGuard =
-/*#__PURE__*/
-function () {
+var LoadGuard = /*#__PURE__*/function () {
   function LoadGuard(mls) {
     if (mls === void 0) {
       mls = 5000;

@@ -40,7 +40,7 @@ var S = {
 var _crInitialState = function _crInitialState(model, INIT_ID) {
   return {
     pageCurrent: 1,
-    pages: [_react["default"].createElement(_MenuPage["default"], {
+    pages: [/*#__PURE__*/_react["default"].createElement(_MenuPage["default"], {
       key: INIT_ID,
       items: model[INIT_ID],
       baseTitleCl: model.baseTitleCl,
@@ -50,9 +50,7 @@ var _crInitialState = function _crInitialState(model, INIT_ID) {
   };
 };
 
-var ModalSlider =
-/*#__PURE__*/
-function (_Component) {
+var ModalSlider = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ModalSlider, _Component);
 
   /*
@@ -80,7 +78,7 @@ function (_Component) {
 
     _this._addPage = function (pages, id, title) {
       var model = _this.props.model;
-      pages.push(_react["default"].createElement(_MenuPage["default"], {
+      pages.push( /*#__PURE__*/_react["default"].createElement(_MenuPage["default"], {
         key: id,
         title: title,
         items: model[id],
@@ -132,7 +130,7 @@ function (_Component) {
           pages = _this$state.pages,
           pageCurrent = _this$state.pageCurrent;
       return pages.map(function (Page, index) {
-        return _react["default"].cloneElement(Page, {
+        return /*#__PURE__*/_react["default"].cloneElement(Page, {
           pageCurrent: pageCurrent,
           style: _this._pageStyle,
           pageNumber: index + 1,
@@ -181,18 +179,18 @@ function (_Component) {
         style = _this$props.style,
         onClose = _this$props.onClose,
         _transform = this._crTransform(),
-        _showHideStyle = (0, _extends2["default"])({}, style, {}, S.SHOW_HIDE, {}, _pageStyle),
-        _divStyle = (0, _extends2["default"])({}, S.PAGES, {}, _pagesStyle, {}, _transform);
+        _showHideStyle = (0, _extends2["default"])({}, style, S.SHOW_HIDE, _pageStyle),
+        _divStyle = (0, _extends2["default"])({}, S.PAGES, _pagesStyle, _transform);
 
-    return _react["default"].createElement(_ModalPane["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalPane["default"], {
       isShow: isShow,
       style: rootStyle,
       onClose: onClose
-    }, _react["default"].createElement(_ShowHide["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       className: className,
       style: _showHideStyle,
       isShow: isShow
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       ref: this._refPages,
       style: _divStyle
     }, this._renderPages())));

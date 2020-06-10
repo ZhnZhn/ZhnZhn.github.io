@@ -18,13 +18,13 @@ var RowChart = function RowChart(_ref) {
       options = _ref.options,
       onSelectChart = _ref.onSelectChart,
       onRegColor = _ref.onRegColor;
-  return _react["default"].createElement(_RowOcSelect["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_RowOcSelect["default"], {
     isShowLabels: isShowLabels,
     caption: "Chart",
     placeholder: placeholder || options[0].caption,
     options: options,
     onSelect: onSelectChart
-  }, _react["default"].createElement(_SeriaColor["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_SeriaColor["default"], {
     chartType: chartType,
     isLong: isShowLabels,
     onReg: onRegColor

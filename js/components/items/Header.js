@@ -86,7 +86,7 @@ var S = {
 
 var ItemTime = function ItemTime(_ref) {
   var itemTime = _ref.itemTime;
-  return !itemTime ? null : _react["default"].createElement("span", {
+  return !itemTime ? null : /*#__PURE__*/_react["default"].createElement("span", {
     style: S.TIME
   }, itemTime);
 };
@@ -102,12 +102,12 @@ var MenuMore = function MenuMore(_ref2) {
       toggleFocus = _useFnFocus[1];
 
   if (!moreModel) return null;
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(SvgMore, {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(SvgMore, {
     style: S.BT_MORE,
     svgStyle: S.SVG_MORE,
     btRef: refBtSvg,
     onClick: onToggle
-  }), _react["default"].createElement(ModalSlider, {
+  }), /*#__PURE__*/_react["default"].createElement(ModalSlider, {
     isShow: isMore,
     rootStyle: S.ROOT_MORE,
     className: CL_MORE,
@@ -138,31 +138,31 @@ var Header = function Header(_ref3) {
       TS = useTheme(TH_ID),
       _captionStyle = crStyle([S.CAPTION_OPEN, !isOpen && S.CAPTION_CLOSE, !valueMoving && S.CAPTION_WIDTH]);
 
-  return _react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.ROOT, {}, TS.ROOT)
-  }, _react["default"].createElement(MenuMore, {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, S.ROOT, TS.ROOT)
+  }, /*#__PURE__*/_react["default"].createElement(MenuMore, {
     isMore: isMore,
     moreModel: moreModel,
     sliderStyle: TS.BORDER,
     onToggle: _toggleMore
-  }), _react["default"].createElement(SvgCheckBox, {
+  }), /*#__PURE__*/_react["default"].createElement(SvgCheckBox, {
     initValue: false,
     style: S.CHECK_BOX,
     onCheck: onCheck,
     onUnCheck: onUnCheck
-  }), _react["default"].createElement("button", {
+  }), /*#__PURE__*/_react["default"].createElement("button", {
     className: CL,
     title: itemTitle,
     style: _captionStyle,
     onClick: onToggle
-  }, itemCaption), valueMoving ? _react["default"].createElement(_ValueMovingBadge["default"], {
+  }, itemCaption), valueMoving ? /*#__PURE__*/_react["default"].createElement(_ValueMovingBadge["default"], {
     valueMoving: valueMoving,
     isAdminMode: isAdminMode,
     crValueMoving: crValueMoving,
     regCompVm: regCompVm
-  }) : _react["default"].createElement(ItemTime, {
+  }) : /*#__PURE__*/_react["default"].createElement(ItemTime, {
     itemType: itemTime
-  }), _react["default"].createElement(SvgClose, {
+  }), /*#__PURE__*/_react["default"].createElement(SvgClose, {
     style: S.CLOSE,
     onClose: onClose
   }));

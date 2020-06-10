@@ -12,7 +12,7 @@ var _Style = _interopRequireDefault(require("./Style"));
 var ErrMsg = function ErrMsg(_ref) {
   var errMsg = _ref.errMsg;
   if (!errMsg) return null;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: _Style["default"].MSG_ERR
   }, errMsg);
 };

@@ -85,7 +85,7 @@ var fnAdapter = {
       color: _color,
       marker: this.crMarker(_color)
     },
-        _seriaOption = seriaOption !== null ? isShow ? (0, _extends2["default"])({}, _conf["default"].SPLINE, {}, _seriaColor) : (0, _extends2["default"])({}, _conf["default"].SPLINE_NOT_VISIBLE, {}, _seriaColor) : null;
+        _seriaOption = seriaOption !== null ? isShow ? (0, _extends2["default"])({}, _conf["default"].SPLINE, _seriaColor) : (0, _extends2["default"])({}, _conf["default"].SPLINE_NOT_VISIBLE, _seriaColor) : null;
 
     _ChartConfig["default"].setSerieData(config, hm[name], i, name, _seriaOption, this.crSeriaOption(key + '_' + name));
 

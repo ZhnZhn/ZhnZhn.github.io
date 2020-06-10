@@ -20,7 +20,7 @@ var _isFn = function _isFn(fn) {
 var _crLinkEl = function _crLinkEl(id, title, fn) {
   var _href = _isFn(fn) ? fn(id) : void 0;
 
-  return _react["default"].createElement("a", {
+  return /*#__PURE__*/_react["default"].createElement("a", {
     className: _Style["default"].CL_LINK,
     href: _href
   }, title);
@@ -45,7 +45,7 @@ var _crTd = function _crTd(rId, r, h, hIndex, numberFormat, valueToHref) {
   }),
       _elOrTitle = isHref ? _crLinkEl(r.id, _v, valueToHref) : _v;
 
-  return [_key, (0, _extends2["default"])({}, style, {}, _tdStyle), _elOrTitle];
+  return [_key, (0, _extends2["default"])({}, style, _tdStyle), _elOrTitle];
 };
 
 var _renderRows = function _renderRows(props) {
@@ -66,13 +66,13 @@ var _renderRows = function _renderRows(props) {
           _style = _crTd2[1],
           _elOrTitle = _crTd2[2];
 
-      return _react["default"].createElement("td", {
+      return /*#__PURE__*/_react["default"].createElement("td", {
         key: _key,
-        style: (0, _extends2["default"])({}, _Style["default"].TD, {}, _style)
+        style: (0, _extends2["default"])({}, _Style["default"].TD, _style)
       }, _elOrTitle);
     }).filter(Boolean);
 
-    return _react["default"].createElement("tr", {
+    return /*#__PURE__*/_react["default"].createElement("tr", {
       key: _rId,
       role: "row"
     }, _elTds);
@@ -80,7 +80,7 @@ var _renderRows = function _renderRows(props) {
 };
 
 var TableBody = function TableBody(props) {
-  return _react["default"].createElement("tbody", null, _renderRows(props));
+  return /*#__PURE__*/_react["default"].createElement("tbody", null, _renderRows(props));
 };
 
 var _default = TableBody;

@@ -40,11 +40,11 @@ var RowDate = function RowDate(_ref) {
       }
     };
   }, []);
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: rowStyle
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: labelStyle
-  }, labelTitle), _react["default"].createElement(_DateField["default"], {
+  }, labelTitle), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
     ref: _refDate,
     initialValue: initValue,
     errorMsg: errorMsg,

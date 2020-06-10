@@ -44,9 +44,7 @@ var CL = "component-container";
 
 var showSettings = _ComponentActions["default"].showSettings.bind(null, _ChartStore["default"].exportSettingFn());
 
-var AppErc =
-/*#__PURE__*/
-function (_Component) {
+var AppErc = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AppErc, _Component);
 
   function AppErc() {
@@ -92,25 +90,25 @@ function (_Component) {
 
   _proto.render = function render() {
     var theme = this.state.theme;
-    return _react["default"].createElement(_ThemeContext["default"].Provider, {
+    return /*#__PURE__*/_react["default"].createElement(_ThemeContext["default"].Provider, {
       value: theme
-    }, _react["default"].createElement(_HeaderBar["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_HeaderBar["default"], {
       store: _ChartStore["default"],
       showSettings: showSettings
-    }), _react["default"].createElement("div", {
+    }), /*#__PURE__*/_react["default"].createElement("div", {
       className: CL
-    }, _react["default"].createElement(_BrowserContainer["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_BrowserContainer["default"], {
       store: _ChartStore["default"],
       initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
       showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
       onCloseDialog: _ComponentActions["default"].closeDialog
-    }), _react["default"].createElement(_About["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_About["default"], {
       store: _ChartStore["default"],
       isInitShow: true
-    }), _react["default"].createElement(_CompContainer["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_CompContainer["default"], {
       store: _ChartStore["default"],
       addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
-    })), _react["default"].createElement(_DialogContainer["default"], {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogContainer["default"], {
       store: _ChartStore["default"]
     }));
   };

@@ -16,7 +16,7 @@ var C = {
 var BarchartLink = function BarchartLink(_ref) {
   var item = _ref.item,
       style = _ref.style;
-  return item ? _react["default"].createElement(_Link["default"], {
+  return item ? /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     style: style,
     href: C.URL + "/" + item + "/overview",
     caption: "Barchart " + item

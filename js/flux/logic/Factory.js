@@ -112,7 +112,7 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
   }
 
   return _RouterDialog["default"].getDialog(dialogType).then(function (Comp) {
-    return _react["default"].createElement(Comp, (0, _extends2["default"])({
+    return /*#__PURE__*/_react["default"].createElement(Comp, (0, _extends2["default"])({
       key: itemKey,
       caption: dialogCaption || menuTitle,
       optionURI: optionURI,
@@ -136,7 +136,7 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
 var _crOptionDialogComp = function _crOptionDialogComp(option) {
   var dialogType = option.dialogType;
   return _RouterDialog["default"].getDialog(dialogType).then(function (Comp) {
-    return _react["default"].createElement(Comp, {
+    return /*#__PURE__*/_react["default"].createElement(Comp, {
       key: dialogType
     });
   });

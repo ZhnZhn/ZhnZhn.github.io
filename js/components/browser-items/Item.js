@@ -46,14 +46,14 @@ var Item = function Item(_ref) {
   /*eslint-enable react-hooks/exhaustive-deps*/
 
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     role: "menuitem",
     tabIndex: "0",
     className: className,
     style: S.ITEM_DIV,
     onClick: onClickItem.bind(null, item),
     onKeyDown: _hKeyDown
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: S.ITEM_SPAN
   }, caption), children);
 };

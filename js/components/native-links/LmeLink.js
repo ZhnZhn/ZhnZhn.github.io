@@ -20,7 +20,7 @@ var LmeLink = function LmeLink(_ref) {
       caption = _item$caption === void 0 ? '' : _item$caption,
       _path = String(caption).toLowerCase().replace(' ', '-');
 
-  return _react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     caption: LME + caption,
     href: BASE_URL + _path
   });

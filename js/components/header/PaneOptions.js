@@ -66,9 +66,7 @@ var _crHaloOption = function _crHaloOption(is) {
   };
 };
 
-var PaneOptions =
-/*#__PURE__*/
-function (_Component) {
+var PaneOptions = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(PaneOptions, _Component);
 
   /*
@@ -131,43 +129,43 @@ function (_Component) {
         _isDrawDeltaExtrems = (0, _safeFn["default"])(data, MODE_DELTA, false)(),
         _isNotZoomToMinMax = (0, _safeFn["default"])(data, MODE_ZOOM, false)();
 
-    return _react["default"].createElement("div", null, _react["default"].createElement(_DialogCell["default"].RowPattern, {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
       ref: this._refProxy,
       captionStyle: titleStyle,
       caption: "Https Proxy:",
       placeholder: "Https Proxy for CORS",
       initValue: _proxy,
       onEnter: this._setProxy
-    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       caption: "UI Theme",
       captionStyle: titleStyle,
       options: UI_THEME_OPTIONS,
       onSelect: this._hSelectTheme
-    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: _isAdminMode,
       caption: "View in Admin Mode",
       onCheck: this._hMode.bind(null, MODE_ADMIN, true),
       onUnCheck: this._hMode.bind(null, MODE_ADMIN, false)
-    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: _isDrawDeltaExtrems,
       caption: "Draw Deltas to Min-Max",
       onCheck: this._hMode.bind(null, MODE_DELTA, true),
       onUnCheck: this._hMode.bind(null, MODE_DELTA, false)
-    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: _isNotZoomToMinMax,
       caption: "Not Zoom to Min-Max",
       onCheck: this._hMode.bind(null, MODE_ZOOM, true),
       onUnCheck: this._hMode.bind(null, MODE_ZOOM, false)
-    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: false,
       caption: "Without Points Halo",
       onCheck: this._setHalo.bind(null, false),
       onUnCheck: this._setHalo.bind(null, true)
-    }), _react["default"].createElement(_RowButtons["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowButtons["default"], {
       btStyle: btStyle,
       onClose: onClose
-    }, _react["default"].createElement(_FlatButton["default"], {
-      style: (0, _extends2["default"])({}, btStyle, {}, S.BT_PROXY),
+    }, /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
+      style: (0, _extends2["default"])({}, btStyle, S.BT_PROXY),
       caption: "SET PROXY",
       onClick: this._hSetProxy
     })));

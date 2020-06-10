@@ -19,8 +19,8 @@ var STYLE = {
 var SpanDate = function SpanDate(_ref) {
   var date = _ref.date,
       style = _ref.style;
-  return _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, STYLE.ROOT, {}, style)
+  return /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, STYLE.ROOT, style)
   }, date);
 };
 

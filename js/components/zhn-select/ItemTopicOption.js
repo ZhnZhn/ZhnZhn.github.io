@@ -21,7 +21,7 @@ var S = {
 
 var ItemTopicOption = function ItemTopicOption(props) {
   var item = props.item;
-  return _react["default"].createElement("div", null, _react["default"].createElement(_ItemOption["default"], props), _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_ItemOption["default"], props), /*#__PURE__*/_react["default"].createElement("div", {
     style: S.TOPIC
   }, item.topic));
 };

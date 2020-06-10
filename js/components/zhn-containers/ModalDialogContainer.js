@@ -29,9 +29,7 @@ var STYLE = {
   }
 };
 
-var ModalDialogContainer =
-/*#__PURE__*/
-function (_Component) {
+var ModalDialogContainer = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ModalDialogContainer, _Component);
 
   function ModalDialogContainer() {
@@ -79,7 +77,7 @@ function (_Component) {
       }
     }
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       className: _className,
       style: _style,
       onClick: onClose

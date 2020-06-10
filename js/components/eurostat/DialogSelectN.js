@@ -72,9 +72,7 @@ var _isRequireChartOptionsUpdate = function _isRequireChartOptionsUpdate(oldFreq
   return oldFrequency !== mapFrequency && (oldFrequency === 'M' || mapFrequency === 'M');
 };
 
-var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _withForDate["default"])(_class = (_temp = _class2 =
-/*#__PURE__*/
-function (_Component) {
+var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _withForDate["default"])(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogSelectN, _Component);
 
   /*
@@ -276,10 +274,10 @@ function (_Component) {
 
         var _isShow = _this.state[_crIsId(id)];
 
-        return _react["default"].createElement(_DialogCell["default"].ShowHide, {
+        return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
           key: id,
           isShow: _isShow
-        }, _react["default"].createElement(_DialogCell["default"].SelectWithLoad, (0, _extends2["default"])({}, restItem, {
+        }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, (0, _extends2["default"])({}, restItem, {
           ref: _this._refSelect.bind(null, id),
           isShow: isShow,
           isShowLabels: isShowLabels,
@@ -303,7 +301,7 @@ function (_Component) {
       isOptions: props.isCh,
       isToggle: true
     });
-    _this._refFromDate = _react["default"].createRef();
+    _this._refFromDate = /*#__PURE__*/_react["default"].createRef();
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this._chartOptions = crOptions(props);
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
@@ -312,7 +310,7 @@ function (_Component) {
       isShowFd: true,
       isShowChart: true,
       isShowDate: false
-    }, (0, _crDateConfig["default"])('EMPTY'), {}, _crIsToggleInit(props.selectProps));
+    }, (0, _crDateConfig["default"])('EMPTY'), _crIsToggleInit(props.selectProps));
     return _this;
   }
 
@@ -365,7 +363,7 @@ function (_Component) {
         _isRowFd = isFd && !_isCategory,
         _noForDate = noForDate || !_isCategory;
 
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -373,14 +371,14 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._hClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_ModalOptions["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ModalOptions["default"], {
       isShow: isOptions,
       toggleOption: this._toggleOptionWithToolbar,
       onClose: this._hideOptionsWithToolbar
-    }), _react["default"].createElement(_ModalToggle["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ModalToggle["default"], {
       isShow: isToggle,
       noForDate: _noForDate,
       selectProps: selectProps,
@@ -394,16 +392,16 @@ function (_Component) {
       onCheckCaption: this._checkCaptionBy,
       onUnCheckCaption: this._uncheckCaption,
       onClose: this._hideToggleWithToolbar
-    }), this._renderSelects(selectProps, isShow, isShowLabels), _isRowFd && _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), this._renderSelects(selectProps, isShow, isShowLabels), _isRowFd && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowFd
-    }, _react["default"].createElement(_DialogCell["default"].RowDate, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowDate, {
       innerRef: this._refFromDate,
       isShowLabels: isShowLabels,
       labelTitle: "From Date:",
       initValue: initFromDate,
       errorMsg: errNotYmdOrEmpty,
       onTestDate: isYmdOrEmpty
-    })), isCh && _react["default"].createElement(_RowChart["default"], {
+    })), isCh && /*#__PURE__*/_react["default"].createElement(_RowChart["default"], {
       chartType: chartType,
       isShowLabels: isShowLabels,
       isShowChart: isShowChart,
@@ -415,7 +413,7 @@ function (_Component) {
       dateDefault: dateDefault,
       dateOptions: dateOptions,
       onSelecDate: this._hSelectDate
-    }), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

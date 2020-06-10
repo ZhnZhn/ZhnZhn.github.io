@@ -53,12 +53,12 @@ var MiniCharts = function MiniCharts(_ref) {
     return null;
   }
 
-  return _react["default"].createElement("div", null, _configs.map(function (c) {
-    return _react["default"].createElement(_Comp["default"].ShowHide, {
+  return /*#__PURE__*/_react["default"].createElement("div", null, _configs.map(function (c) {
+    return /*#__PURE__*/_react["default"].createElement(_Comp["default"].ShowHide, {
       key: c[idPropName],
       isShow: true,
       withoutAnimation: withoutAnimation
-    }, _react["default"].createElement(_Comp["default"].HighchartWrapper, {
+    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].HighchartWrapper, {
       config: c.config,
       absComp: absComp,
       onLoaded: onLoaded,

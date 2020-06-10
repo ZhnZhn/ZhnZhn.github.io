@@ -13,9 +13,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _MenuBrowserDynamic = _interopRequireDefault(require("../zhn/MenuBrowserDynamic2"));
 
-var SourceBrowserDynamic2 =
-/*#__PURE__*/
-function (_Component) {
+var SourceBrowserDynamic2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SourceBrowserDynamic2, _Component);
 
   function SourceBrowserDynamic2() {
@@ -29,7 +27,7 @@ function (_Component) {
   };
 
   _proto.render = function render() {
-    return _react["default"].createElement(_MenuBrowserDynamic["default"], this.props);
+    return /*#__PURE__*/_react["default"].createElement(_MenuBrowserDynamic["default"], this.props);
   };
 
   return SourceBrowserDynamic2;

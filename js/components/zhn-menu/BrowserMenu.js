@@ -95,17 +95,17 @@ var BrowserMenu = function BrowserMenu(_ref) {
   }, [isLoaded, isShow]);
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  return _react["default"].createElement(Browser, {
+  return /*#__PURE__*/_react["default"].createElement(Browser, {
     isShow: isShow,
     style: S.BROWSER
-  }, _react["default"].createElement(BrowserCaption, {
+  }, /*#__PURE__*/_react["default"].createElement(BrowserCaption, {
     caption: caption,
     captionStyle: S.CAPTION,
     onClose: _hHide
-  }), _react["default"].createElement(ScrollPane, {
+  }), /*#__PURE__*/_react["default"].createElement(ScrollPane, {
     className: S.CL_SCROLL
   }, arrMenu.map(function (menuTopic, index) {
-    return _react["default"].createElement(_MenuTopic["default"], (0, _extends2["default"])({
+    return /*#__PURE__*/_react["default"].createElement(_MenuTopic["default"], (0, _extends2["default"])({
       key: index
     }, menuTopic));
   }), children));

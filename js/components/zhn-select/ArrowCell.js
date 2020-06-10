@@ -42,9 +42,7 @@ var C = {
   BORDER_COLOR: "#1b75bb transparent transparent"
 };
 
-var ArrowCell =
-/*#__PURE__*/
-function (_Component) {
+var ArrowCell = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ArrowCell, _Component);
 
   function ArrowCell() {
@@ -82,15 +80,15 @@ function (_Component) {
     var _this$props = this.props,
         arrowStyle = _this$props.arrowStyle,
         onClick = _this$props.onClick;
-    return _react["default"].createElement("button", {
+    return /*#__PURE__*/_react["default"].createElement("button", {
       ref: this._refArrowCell,
       className: _CL["default"].BT_ARROW,
       style: S.ARROW_CELL,
       tabIndex: "-1",
       onClick: onClick
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       ref: this._refArrow,
-      style: (0, _extends2["default"])({}, S.ARROW, {}, arrowStyle)
+      style: (0, _extends2["default"])({}, S.ARROW, arrowStyle)
     }));
   };
 

@@ -51,10 +51,10 @@ var S = {
 var FlexSpans = function FlexSpans(_ref) {
   var _ref$tokens = _ref.tokens,
       tokens = _ref$tokens === void 0 ? [] : _ref$tokens;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.TOKENS
   }, tokens.map(function (token) {
-    return _react["default"].createElement("span", {
+    return /*#__PURE__*/_react["default"].createElement("span", {
       key: token,
       style: S.TOKEN
     }, token);
@@ -64,12 +64,12 @@ var FlexSpans = function FlexSpans(_ref) {
 var Tokens = function Tokens(_ref2) {
   var tokens = _ref2.tokens,
       tokensName = _ref2.tokensName;
-  return tokensName ? _react["default"].createElement(_Comp["default"].OpenClose, {
+  return tokensName ? /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
     caption: tokensName,
     isClose: false
-  }, _react["default"].createElement(FlexSpans, {
+  }, /*#__PURE__*/_react["default"].createElement(FlexSpans, {
     tokens: tokens
-  })) : _react["default"].createElement(FlexSpans, {
+  })) : /*#__PURE__*/_react["default"].createElement(FlexSpans, {
     tokens: tokens
   });
 };
@@ -80,11 +80,11 @@ var Descr = function Descr(_ref3) {
       descrName = _ref3$descrName === void 0 ? "Decription" : _ref3$descrName,
       descr = _ref3.descr;
   if (!descr) return null;
-  return _react["default"].createElement(_Comp["default"].OpenClose, {
+  return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
     caption: descrName,
     isClose: true
-  }, _react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.DESCR, {}, descrStyle)
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, S.DESCR, descrStyle)
   }, descr));
 };
 
@@ -107,23 +107,23 @@ var FlexTokensItem = function FlexTokensItem(props) {
     });
   }, []);
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.ROOT
-  }, _react["default"].createElement(_ItemHeader["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_ItemHeader["default"], {
     isOpen: isOpen,
     rootStyle: S.HEADER,
     captionStyle: S.CAPTION,
     caption: caption,
     onClick: _hToggle,
     onClose: onCloseItem
-  }), _react["default"].createElement(_Comp["default"].ShowHide, {
+  }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ShowHide, {
     isShow: isOpen
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     style: S.INFO
-  }, _react["default"].createElement(Tokens, {
+  }, /*#__PURE__*/_react["default"].createElement(Tokens, {
     tokens: tokens,
     tokensName: tokensName
-  }), _react["default"].createElement(Descr, {
+  }), /*#__PURE__*/_react["default"].createElement(Descr, {
     descr: descr,
     descrName: descrName,
     descrStyle: descrStyle

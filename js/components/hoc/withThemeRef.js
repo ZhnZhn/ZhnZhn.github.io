@@ -12,9 +12,9 @@ var _react = _interopRequireDefault(require("react"));
 var _ThemeContext = _interopRequireDefault(require("./ThemeContext"));
 
 var withThemeRef = function withThemeRef(Wrapper) {
-  return _react["default"].forwardRef(function (props, ref) {
-    return _react["default"].createElement(_ThemeContext["default"].Consumer, null, function (theme) {
-      return _react["default"].createElement(Wrapper, (0, _extends2["default"])({}, props, {
+  return /*#__PURE__*/_react["default"].forwardRef(function (props, ref) {
+    return /*#__PURE__*/_react["default"].createElement(_ThemeContext["default"].Consumer, null, function (theme) {
+      return /*#__PURE__*/_react["default"].createElement(Wrapper, (0, _extends2["default"])({}, props, {
         theme: theme,
         ref: ref
       }));

@@ -17,7 +17,7 @@ var EuronextLink = function EuronextLink(_ref) {
       item = _ref$item === void 0 ? {} : _ref$item,
       _ref$caption = _ref.caption,
       caption = _ref$caption === void 0 ? CAPTION : _ref$caption;
-  return _react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     caption: caption + " " + item.caption,
     href: "" + EURONEXT_BASE + item.isin + "-" + item.market
   });

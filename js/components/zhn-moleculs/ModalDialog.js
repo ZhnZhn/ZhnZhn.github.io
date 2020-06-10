@@ -49,9 +49,7 @@ var S = (0, _extends2["default"])({}, _Dialog["default"], {
   }
 });
 
-var ModalDialog =
-/*#__PURE__*/
-function (_Component) {
+var ModalDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ModalDialog, _Component);
 
   /*
@@ -77,9 +75,9 @@ function (_Component) {
       var _this$props = _this.props,
           commandButtons = _this$props.commandButtons,
           withoutClose = _this$props.withoutClose;
-      return _react["default"].createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         style: S.COMMAND_DIV
-      }, commandButtons, !withoutClose && _react["default"].createElement(_FlatButton["default"], {
+      }, commandButtons, !withoutClose && /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
         key: "close",
         style: S.BT,
         caption: "Close",
@@ -180,6 +178,8 @@ function (_Component) {
     }
 
     return (
+      /*#__PURE__*/
+
       /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
       _react["default"].createElement("div", {
         ref: this._refRootNode,
@@ -188,17 +188,17 @@ function (_Component) {
         "aria-label": caption,
         "aria-hidden": !isShow,
         className: CL.MD + " " + _className,
-        style: (0, _extends2["default"])({}, S.ROOT_DIV, {}, S.ROOT_DIV_MODAL, {}, style, {}, _style, {}, TS.ROOT, {}, TS.EL_BORDER),
+        style: (0, _extends2["default"])({}, S.ROOT_DIV, S.ROOT_DIV_MODAL, style, _style, TS.ROOT, TS.EL_BORDER),
         onClick: this._hClick,
         onKeyDown: this._hKeyDown
-      }, _react["default"].createElement("div", {
-        style: (0, _extends2["default"])({}, S.CAPTION_DIV, {}, TS.EL)
-      }, _react["default"].createElement("span", {
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        style: (0, _extends2["default"])({}, S.CAPTION_DIV, TS.EL)
+      }, /*#__PURE__*/_react["default"].createElement("span", {
         style: styleCaption
-      }, caption), _react["default"].createElement(_SvgClose["default"], {
+      }, caption), /*#__PURE__*/_react["default"].createElement(_SvgClose["default"], {
         style: S.SVG_CLOSE,
         onClose: this._hClose
-      })), _react["default"].createElement("div", null, children), isWithButton && this._renderCommandButton())
+      })), /*#__PURE__*/_react["default"].createElement("div", null, children), isWithButton && this._renderCommandButton())
     );
   };
 

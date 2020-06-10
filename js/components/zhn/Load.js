@@ -25,7 +25,7 @@ var S = {
 };
 
 var Loading = function Loading() {
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     "data-loader": "circle",
     style: S.LOADING
   });
@@ -34,10 +34,10 @@ var Loading = function Loading() {
 var LoadFailed = function LoadFailed(_ref) {
   var _ref$errMsg = _ref.errMsg,
       errMsg = _ref$errMsg === void 0 ? '' : _ref$errMsg;
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
     "data-loader": "circle-failed",
-    style: (0, _extends2["default"])({}, S.LOADING, {}, S.LOAD_FAILED)
-  }), _react["default"].createElement("p", {
+    style: (0, _extends2["default"])({}, S.LOADING, S.LOAD_FAILED)
+  }), /*#__PURE__*/_react["default"].createElement("p", {
     style: S.ERR_MSG
   }, errMsg + ": Network error."));
 };

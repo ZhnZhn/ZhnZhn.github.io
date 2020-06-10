@@ -70,14 +70,14 @@ function ItemHeader(_ref) {
       _title = _crTitle(title, caption),
       _styleCaption = isOpen ? S.OPEN : S.CLOSE;
 
-  return _react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.ROOT, {}, rootStyle, {}, TS.ROOT)
-  }, _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, S.ROOT, rootStyle, TS.ROOT)
+  }, /*#__PURE__*/_react["default"].createElement("button", {
     className: CL_CAPTION,
-    style: (0, _extends2["default"])({}, S.CAPTION, {}, captionStyle, {}, _styleCaption),
+    style: (0, _extends2["default"])({}, S.CAPTION, captionStyle, _styleCaption),
     title: _title,
     onClick: onClick
-  }, caption), children, _react["default"].createElement(_Comp["default"].SvgClose, {
+  }, caption), children, /*#__PURE__*/_react["default"].createElement(_Comp["default"].SvgClose, {
     style: S.SVG_CLOSE,
     onClose: onClose
   }));

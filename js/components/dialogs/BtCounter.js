@@ -48,7 +48,7 @@ var BtCounter = function BtCounter(_ref, ref) {
       }
     };
   }, [value]);
-  return isShow ? _react["default"].createElement(_ButtonCircle["default"], {
+  return isShow ? /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
     style: style,
     title: title,
     caption: value,
@@ -56,7 +56,7 @@ var BtCounter = function BtCounter(_ref, ref) {
   }) : null;
 };
 
-var _default = _react["default"].forwardRef(BtCounter);
+var _default = /*#__PURE__*/_react["default"].forwardRef(BtCounter);
 
 exports["default"] = _default;
 //# sourceMappingURL=BtCounter.js.map

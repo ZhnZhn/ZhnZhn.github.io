@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/coin-gecko/Cg.js"
- ],
- "file": "../../../src/adapters/coin-gecko/Cg.js",
- "names": [
-  "Cg",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AACJC,EAAAA,OAAO,EAAPA;AADI,CAAX;eAIeF,E"
-}
+{"version":3,"sources":["../../../src/adapters/coin-gecko/Cg.js"],"names":["Cg","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AACJC,EAAAA,OAAO,EAAPA;AADI,CAAX;eAIeF,E","sourcesContent":["import api from './CgApi'\r\nimport adapter from './CgAdapter'\r\n\r\nconst Cg = {\r\n  api, adapter\r\n};\r\n\r\nexport default Cg\r\n"],"file":"Cg.js"}

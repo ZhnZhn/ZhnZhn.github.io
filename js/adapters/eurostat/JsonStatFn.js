@@ -130,7 +130,7 @@ var JsonStatFn = {
 
 
     if (dfTime && _isEmptyGeoSlice(_sGeo)) {
-      _sGeo = ds.Data((0, _extends2["default"])({}, configSlice, {}, {
+      _sGeo = ds.Data((0, _extends2["default"])({}, configSlice, {
         time: dfTime
       }));
       time = dfTime;
@@ -142,7 +142,7 @@ var JsonStatFn = {
 
       if (maxIndex > 0) {
         time = ds.Dimension("time").id[maxIndex - 1];
-        _sGeo = ds.Data((0, _extends2["default"])({}, configSlice, {}, {
+        _sGeo = ds.Data((0, _extends2["default"])({}, configSlice, {
           time: time
         }));
       }

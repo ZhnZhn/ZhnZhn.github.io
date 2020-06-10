@@ -77,9 +77,7 @@ var _isZipCode = function _isZipCode(value) {
   return _reZipCode.test(value.trim());
 };
 
-var ZillowDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var ZillowDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ZillowDialog, _Component);
 
   function ZillowDialog(props) {
@@ -228,7 +226,7 @@ function (_Component) {
         isShowDate = _this$state.isShowDate,
         isShowPattern = _this$state.isShowPattern,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -236,10 +234,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
@@ -247,7 +245,7 @@ function (_Component) {
       caption: oneCaption,
       optionNames: "Items",
       onSelect: this._hSelectMetric
-    }), _react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
       ref: this._refTypeCode,
       isShow: isShow,
       isShowLabels: isShowLabels,
@@ -258,18 +256,18 @@ function (_Component) {
       twoCaption: threeCaption,
       msgOnNotSelected: msgOnNotSelected,
       onSelectOne: this._handleSelectType
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowPattern
-    }, _react["default"].createElement(_DialogCell["default"].RowPattern, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
       ref: this._refZip,
       isShowLabels: isShowLabels,
       caption: "*Zip Code",
       placeholder: "Zip Code, 5 Digits",
       onTest: _isZipCode,
       errorMsg: "5 digits format is required"
-    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,
@@ -277,11 +275,11 @@ function (_Component) {
       nForecastDate: nForecastDate,
       msgOnNotValidFormat: msgOnNotValidFormat,
       onTestDate: onTestDate
-    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowPattern
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.TIP
-    }, DATA_NOTE)), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    }, DATA_NOTE)), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

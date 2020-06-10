@@ -24,12 +24,12 @@ var ModalPopup = function ModalPopup(_ref) {
       children = _ref.children,
       onClose = _ref.onClose;
   var TS = (0, _useTheme["default"])(TH_ID);
-  return _react["default"].createElement(_ModalPane["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_ModalPane["default"], {
     isShow: isShow,
     onClose: onClose
-  }, _react["default"].createElement(_ShowHide["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
     className: className,
-    style: (0, _extends2["default"])({}, style, {}, TS.BORDER),
+    style: (0, _extends2["default"])({}, style, TS.BORDER),
     isShow: isShow
   }, children));
 };

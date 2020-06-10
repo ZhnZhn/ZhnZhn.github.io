@@ -19,9 +19,7 @@ var _InputSecret = _interopRequireDefault(require("../zhn/InputSecret"));
 
 var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 
-var RowSecret =
-/*#__PURE__*/
-function (_Component) {
+var RowSecret = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(RowSecret, _Component);
 
   function RowSecret() {
@@ -47,11 +45,11 @@ function (_Component) {
         title = _this$props.title,
         titleStyle = _this$props.titleStyle,
         rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["title", "titleStyle"]);
-    return _react["default"].createElement("form", null, _react["default"].createElement("label", {
+    return /*#__PURE__*/_react["default"].createElement("form", null, /*#__PURE__*/_react["default"].createElement("label", {
       style: _DialogStyles["default"].rowDiv
-    }, _react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, {}, titleStyle)
-    }, title), _react["default"].createElement(_InputSecret["default"], (0, _extends2["default"])({
+    }, /*#__PURE__*/_react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, titleStyle)
+    }, title), /*#__PURE__*/_react["default"].createElement(_InputSecret["default"], (0, _extends2["default"])({
       ref: this._refInput
     }, rest))));
   };

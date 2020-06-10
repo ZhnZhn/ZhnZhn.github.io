@@ -35,7 +35,7 @@ var C_GREY = "#777777";
 
 var SvgChecked = function SvgChecked(_ref) {
   var stroke = _ref.stroke;
-  return _react["default"].createElement("path", {
+  return /*#__PURE__*/_react["default"].createElement("path", {
     d: "M 2,5 L 8,14 14,1",
     strokeWidth: "2",
     strokeLinecap: "round",
@@ -65,9 +65,7 @@ var _getInitStateFrom = function _getInitStateFrom(_ref2) {
   };
 };
 
-var SvgCheckBox =
-/*#__PURE__*/
-function (_Component) {
+var SvgCheckBox = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SvgCheckBox, _Component);
 
   /*
@@ -147,22 +145,22 @@ function (_Component) {
         _restStroke = value ? checkedRestStroke : C_GREY,
         _restFill = value ? checkedRestFill : _Color["default"].BLANK;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       role: "checkbox",
       tabIndex: "0",
       "aria-checked": value //aria-labelledby
       ,
-      style: (0, _extends2["default"])({}, S.DIV, {}, style),
+      style: (0, _extends2["default"])({}, S.DIV, style),
       onClick: this._hClick,
       onKeyDown: this._hKeyDown
-    }, _react["default"].createElement("svg", {
+    }, /*#__PURE__*/_react["default"].createElement("svg", {
       viewBox: "0 0 16 16",
       width: "100%",
       height: "100%",
       preserveAspectRatio: "none",
       xmlns: "http://www.w3.org/2000/svg",
       style: S.SVG
-    }, _react["default"].createElement("rect", {
+    }, /*#__PURE__*/_react["default"].createElement("rect", {
       x: "1",
       y: "1",
       height: "14",
@@ -171,7 +169,7 @@ function (_Component) {
       rx: "3",
       stroke: _restStroke,
       fill: _restFill
-    }), value ? _react["default"].createElement(SvgChecked, {
+    }), value ? /*#__PURE__*/_react["default"].createElement(SvgChecked, {
       stroke: checkedColor
     }) : null));
   };

@@ -33,9 +33,7 @@ var _testId = function _testId(value) {
   return true;
 };
 
-var DialogQuery = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec(_class = _dec2(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var DialogQuery = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec(_class = _dec2(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogQuery, _Component);
 
   function DialogQuery(props) {
@@ -114,7 +112,7 @@ function (_Component) {
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
         isShowDate = _this$state.isShowDate;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       menuModel: this._menuMore,
       caption: caption,
@@ -122,10 +120,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: onClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].RowPattern, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
       ref: this._refIdInput,
       isShow: isShow,
       isShowLabels: isShowLabels,
@@ -133,9 +131,9 @@ function (_Component) {
       caption: oneCaption,
       onTest: _testId,
       errorMsg: ERR_MSG
-    }), !noDate && _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), !noDate && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,

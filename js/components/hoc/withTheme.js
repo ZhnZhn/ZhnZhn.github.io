@@ -13,8 +13,8 @@ var _ThemeContext = _interopRequireDefault(require("./ThemeContext"));
 
 var withTheme = function withTheme(Wrapper) {
   return function (props) {
-    return _react["default"].createElement(_ThemeContext["default"].Consumer, null, function (theme) {
-      return _react["default"].createElement(Wrapper, (0, _extends2["default"])({}, props, {
+    return /*#__PURE__*/_react["default"].createElement(_ThemeContext["default"].Consumer, null, function (theme) {
+      return /*#__PURE__*/_react["default"].createElement(Wrapper, (0, _extends2["default"])({}, props, {
         theme: theme
       }));
     });

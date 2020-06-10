@@ -40,9 +40,7 @@ var transformOptions = [{
   caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100",
   value: "normalize"
 }];
-var DialogType3 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = _class2 =
-/*#__PURE__*/
-function (_Component) {
+var DialogType3 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogType3, _Component);
 
   /*
@@ -214,7 +212,7 @@ function (_Component) {
         isShowDate = _this$state.isShowDate,
         validationMessages = _this$state.validationMessages;
 
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       menuModel: this._menuMore,
       caption: caption,
@@ -222,10 +220,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       placeholder: onePlaceholder,
@@ -235,16 +233,16 @@ function (_Component) {
       optionNames: optionNames,
       isWithInput: isWithInputStock,
       onSelect: this._handleSelectStock
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowTransform
-    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Transform",
       options: transformOptions,
       onSelect: this._handleSelectTransform
-    })), !noDate && _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), !noDate && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: function ref(c) {
         return _this2.datesFragment = c;
       },
@@ -253,7 +251,7 @@ function (_Component) {
       initToDate: initToDate,
       msgOnNotValidFormat: msgOnNotValidFormat,
       onTestDate: onTestDate
-    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

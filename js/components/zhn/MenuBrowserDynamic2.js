@@ -60,9 +60,7 @@ var STYLE = {
   }
 };
 
-var MenuBrowserDynamic2 =
-/*#__PURE__*/
-function (_Component) {
+var MenuBrowserDynamic2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MenuBrowserDynamic2, _Component);
 
   function MenuBrowserDynamic2(props) {
@@ -205,28 +203,28 @@ function (_Component) {
         scrollClass = _this$state2.scrollClass,
         _isMenuEmpty = menuItems.length === 0;
 
-    return _react["default"].createElement(_Browser["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_Browser["default"], {
       isShow: isShow,
       style: STYLE.BROWSER
-    }, _react["default"].createElement(_BrowserCaption["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_BrowserCaption["default"], {
       caption: caption,
       captionStyle: STYLE.CAPTION,
       onClose: this._handleHide
-    }), _react["default"].createElement(_ToolbarButtonCircle["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ToolbarButtonCircle["default"], {
       buttons: this.toolbarButtons
-    }), !_isMenuEmpty && _react["default"].createElement(_ShowHide["default"], {
+    }), !_isMenuEmpty && /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowSearch
-    }, _react["default"].createElement(_WrapperInputSearch["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_WrapperInputSearch["default"], {
       style: STYLE.WRAPPER_SEARCH,
       placeholder: SEARCH_PLACEHOLDER,
       data: menuItems,
       ItemOptionComp: ItemOptionComp,
       onSelect: this._handleClickItem
-    })), _react["default"].createElement(_ScrollPane["default"], {
+    })), /*#__PURE__*/_react["default"].createElement(_ScrollPane["default"], {
       className: scrollClass
-    }, _isMenuEmpty && _react["default"].createElement(_SpinnerLoading["default"], {
+    }, _isMenuEmpty && /*#__PURE__*/_react["default"].createElement(_SpinnerLoading["default"], {
       style: STYLE.SPINNER_LOADING
-    }), _react["default"].createElement(_MenuListType["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_MenuListType["default"], {
       model: menuItems,
       ItemComp: ItemComp,
       itemClassName: CL.ROW_ITEM,

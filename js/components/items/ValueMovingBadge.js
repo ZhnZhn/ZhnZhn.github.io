@@ -65,19 +65,19 @@ var _getDirection = function _getDirection(direction) {
   switch (direction) {
     case _Type.Direction.DOWN:
       return {
-        _svgDirection: _react["default"].createElement(_SvgDown["default"], null),
+        _svgDirection: /*#__PURE__*/_react["default"].createElement(_SvgDown["default"], null),
         _dStyle: S.DOWN
       };
 
     case _Type.Direction.UP:
       return {
-        _svgDirection: _react["default"].createElement(_SvgUp["default"], null),
+        _svgDirection: /*#__PURE__*/_react["default"].createElement(_SvgUp["default"], null),
         _dStyle: S.UP
       };
 
     case _Type.Direction.EQUAL:
       return {
-        _svgDirection: _react["default"].createElement(_SvgEqual["default"], null),
+        _svgDirection: /*#__PURE__*/_react["default"].createElement(_SvgEqual["default"], null),
         _dStyle: S.EQUAL
       };
 
@@ -88,9 +88,7 @@ var _getDirection = function _getDirection(direction) {
   }
 };
 
-var ValueMovingBadge =
-/*#__PURE__*/
-function (_Component) {
+var ValueMovingBadge = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ValueMovingBadge, _Component);
 
   /*
@@ -173,21 +171,21 @@ function (_Component) {
         _svgDirection = _getDirection2._svgDirection,
         _dStyle = _getDirection2._dStyle;
 
-    return _react["default"].createElement("span", {
+    return /*#__PURE__*/_react["default"].createElement("span", {
       style: S.ROOT
-    }, _react["default"].createElement(_SpanValue["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_SpanValue["default"], {
       value: value
-    }), _svgDirection, _react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.DELTA, {}, _dStyle)
-    }, percent), _react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.DELTA, {}, _dStyle)
-    }, delta), _react["default"].createElement("button", {
+    }), _svgDirection, /*#__PURE__*/_react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.DELTA, _dStyle)
+    }, percent), /*#__PURE__*/_react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.DELTA, _dStyle)
+    }, delta), /*#__PURE__*/_react["default"].createElement("button", {
       style: S.BT,
       onClick: this._hClickBt
-    }, _react["default"].createElement(_SpanDate["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_SpanDate["default"], {
       style: S.DATE,
       date: date
-    })), _svgDirection !== null && _react["default"].createElement(_ModalValueMoving["default"], {
+    })), _svgDirection !== null && /*#__PURE__*/_react["default"].createElement(_ModalValueMoving["default"], {
       isShow: isShowModal,
       onClose: this._hCloseModal,
       valueMoving: valueMoving,

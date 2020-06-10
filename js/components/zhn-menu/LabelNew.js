@@ -18,7 +18,7 @@ var S = {
 };
 
 var LabelNew = function LabelNew() {
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     style: S.LABEL
   }, "New");
 };

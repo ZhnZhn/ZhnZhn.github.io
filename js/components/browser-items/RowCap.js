@@ -44,11 +44,11 @@ var RowCap = function RowCap(_ref) {
   var _cap = cap === 0 ? NA : _capFormatter.format(cap),
       _salePrice = cap !== NA && cap !== 0 ? _formatter.format(salePrice) : NA;
 
-  return _react["default"].createElement("div", null, _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
     style: STYLE.CAP
-  }, _cap), _react["default"].createElement("span", {
+  }, _cap), /*#__PURE__*/_react["default"].createElement("span", {
     style: STYLE.IPO
-  }, "ipo " + ipo), _react["default"].createElement("span", {
+  }, "ipo " + ipo), /*#__PURE__*/_react["default"].createElement("span", {
     style: STYLE.SALE_PRICE
   }, _salePrice));
 };

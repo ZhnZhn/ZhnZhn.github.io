@@ -25,12 +25,12 @@ var ButtonCircle = function ButtonCircle(_ref) {
 
   var _className = isWithoutDefault ? className + " " + CL.NOT : CL.ROOT + " " + className + " " + CL.NOT;
 
-  return _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("button", {
     className: _className,
     style: style,
     title: title,
     onClick: onClick
-  }, _react["default"].createElement("div", null, caption));
+  }, /*#__PURE__*/_react["default"].createElement("div", null, caption));
 };
 /*
 ButtonCircle.propTypes = {

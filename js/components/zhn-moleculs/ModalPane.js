@@ -58,9 +58,9 @@ var ModalPane = function ModalPane(_ref) {
   /*eslint-enable react-hooks/exhaustive-deps */
 
   var TS = (0, _useTheme["default"])(TH_ID);
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     ref: _refNode,
-    style: (0, _extends2["default"])({}, style, {}, TS.ROOT)
+    style: (0, _extends2["default"])({}, style, TS.ROOT)
   }, children);
 };
 /*

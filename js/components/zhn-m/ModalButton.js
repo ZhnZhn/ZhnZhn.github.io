@@ -32,7 +32,7 @@ var ModalButton = function ModalButton(_ref) {
   var _className = (CL.BT + ' ' + className).trim(),
       _title = accessKey ? title + " [" + accessKey + "]" : title;
 
-  return _react["default"].createElement("button", {
+  return /*#__PURE__*/_react["default"].createElement("button", {
     ref: refBt,
     type: "button",
     className: _className,
@@ -41,9 +41,9 @@ var ModalButton = function ModalButton(_ref) {
     title: _title,
     tabIndex: 0,
     onClick: onClick
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     className: clDiv
-  }, _react["default"].createElement(_CaptionInput["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_CaptionInput["default"], {
     className: CL.BT_SPAN,
     caption: caption,
     accessKey: accessKey

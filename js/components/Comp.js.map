@@ -1,15 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../src/components/Comp.js"
- ],
- "file": "../../src/components/Comp.js",
- "names": [
-  "Comp",
-  "A",
-  "Am",
-  "Aml",
-  "ModalSlider"
- ],
- "mappings": ";;;;;;;;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,IAAI,iCACLC,aADK,MAELC,cAFK,MAGLC,cAHK;AAIRC,EAAAA,WAAW,EAAXA;AAJQ,EAAV;eAOeJ,I"
-}
+{"version":3,"sources":["../../src/components/Comp.js"],"names":["Comp","A","Am","Aml","ModalSlider"],"mappings":";;;;;;;;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,IAAI,iCACLC,aADK,EAELC,cAFK,EAGLC,cAHK;AAIRC,EAAAA,WAAW,EAAXA;AAJQ,EAAV;eAOeJ,I","sourcesContent":["\r\nimport A from './zhn/A'\r\nimport Am from './zhn-m/A'\r\nimport Aml from './zhn-moleculs/A'\r\nimport ModalSlider from './zhn-modal-slider/ModalSlider'\r\n\r\nconst Comp = {\r\n  ...A,\r\n  ...Am,\r\n  ...Aml,\r\n  ModalSlider\r\n};\r\n\r\nexport default Comp\r\n"],"file":"Comp.js"}

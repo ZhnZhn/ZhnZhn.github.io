@@ -164,7 +164,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     }
 
     this.config = _ChartConfig["default"].crAreaConfig();
-    var xAxis = (0, _extends2["default"])({}, C.CATEGORIES_X_AXIS, {}, {
+    var xAxis = (0, _extends2["default"])({}, C.CATEGORIES_X_AXIS, {
       categories: categories
     });
     this.add('xAxis', xAxis);

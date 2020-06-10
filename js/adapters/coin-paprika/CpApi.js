@@ -11,7 +11,9 @@ var getValue = _fnAdapter["default"].getValue;
 var C = {
   URL: 'https://api.coinpaprika.com/v1',
   DF_ID: 'btc-bitcoin'
-};
+}; //https://api.coinpaprika.com/v1/coins/btc-bitcoin/twitter
+//status, status_link, date, user_name, retweet_count, like_count
+
 var _isArr = Array.isArray;
 var CpApi = {
   getRequestUrl: function getRequestUrl(option) {

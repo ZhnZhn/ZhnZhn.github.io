@@ -24,11 +24,11 @@ var RowInputSelect = function RowInputSelect(_ref) {
   var caption = _ref.caption,
       options = _ref.options,
       onSelect = _ref.onSelect;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: _DialogStyles["default"].rowDiv
-  }, _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, {}, S.CAPTION)
-  }, caption), _react["default"].createElement(_InputSelect["default"], {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, S.CAPTION)
+  }, caption), /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {
     width: "250",
     options: options,
     onSelect: onSelect

@@ -207,7 +207,7 @@ var toTreeMap = {
         _subtitle = (items[1].caption || '') + ": " + Tid,
         values = ds.Data((0, _extends2["default"])({
       Tid: Tid
-    }, itemSlice, {}, dfTSlice)),
+    }, itemSlice, dfTSlice)),
         _d1 = _crData(values, categories, Tid, option),
         _c = _d1.map(function (item) {
       return item.c;
@@ -247,7 +247,7 @@ var toTreeMap = {
     }
 
     return function (json, option) {
-      return toTreeMap.crConfig(json, (0, _extends2["default"])({}, option, {}, param, {}, _crCategory(option, config.by, config.depth)));
+      return toTreeMap.crConfig(json, (0, _extends2["default"])({}, option, param, _crCategory(option, config.by, config.depth)));
     };
   }
 };

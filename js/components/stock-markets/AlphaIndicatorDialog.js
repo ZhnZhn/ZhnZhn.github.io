@@ -67,9 +67,7 @@ var _crValue = function _crValue(indicator, period) {
   }
 };
 
-var AlphaIndicatorDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var AlphaIndicatorDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AlphaIndicatorDialog, _Component);
 
   function AlphaIndicatorDialog(props) {
@@ -162,7 +160,7 @@ function (_Component) {
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
         isShowOptions = _this$state.isShowOptions;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -170,10 +168,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
@@ -181,30 +179,30 @@ function (_Component) {
       caption: oneCaption,
       optionNames: "Items",
       onSelect: this._handleSelectOne
-    }), _react["default"].createElement(_DialogCell["default"].RowPattern, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
       ref: this._refTicket,
       isShowLabels: isShowLabels,
       caption: "Ticket",
       placeholder: "Nyse or Nasdaq Ticket",
       onTest: _testTicket,
       errorMsg: "Not Empty"
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowOptions
-    }, _react["default"].createElement(_DialogCell["default"].RowPattern, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
       ref: this._refPeriod,
       isShowLabels: isShowLabels,
       caption: "Period",
       placeholder: "Default: " + DF.PERIOD,
       onTest: _testPeriod,
       errorMsg: "Number in range 1-200"
-    }), _react["default"].createElement(_DialogCell["default"].RowPattern, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
       ref: this._refForDays,
       isShowLabels: isShowLabels,
       caption: "For Days",
       placeholder: "Default: " + DF.FOR_DAYS + " (2 Years)",
       onTest: _testForDays,
       errorMsg: "Number in range 250-2500"
-    })), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: false,
       caption: "Add Seria with Second YAxis",
       onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),

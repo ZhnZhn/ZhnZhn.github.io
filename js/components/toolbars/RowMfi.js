@@ -64,12 +64,12 @@ var RowMfi = function RowMfi(_ref) {
     }));
   };
 
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_RowCaptionInput["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_RowCaptionInput["default"], {
     caption: "MFI",
     forwardRef: _refPeriod,
     initValue: 14,
     onAdd: _onAddMfi
-  }), _react["default"].createElement(_SeriaConfigs["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_SeriaConfigs["default"], {
     configs: mfiConfs,
     onRemove: _onRemoveMfi
   }));

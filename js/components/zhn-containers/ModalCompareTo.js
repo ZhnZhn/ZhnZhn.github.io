@@ -60,11 +60,11 @@ var ModalCompareTo = function ModalCompareTo(_ref) {
       _refInput.current.focusInput();
     }
   }, [isShow]);
-  return _react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
     isShow: isShow,
     style: S.ROOT,
     onClose: onClose
-  }, _react["default"].createElement(_DivCompareTo["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_DivCompareTo["default"], {
     ref: _refInput,
     msgErr: msgErr,
     onTest: isDmy,

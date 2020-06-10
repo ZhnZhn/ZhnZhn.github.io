@@ -39,9 +39,7 @@ var _crValueState = function _crValueState(value) {
   };
 };
 
-var DateField =
-/*#__PURE__*/
-function (_Component) {
+var DateField = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DateField, _Component);
 
   /*
@@ -163,11 +161,11 @@ function (_Component) {
         isValid = _this$state.isValid,
         _styleHr = isValid ? _InputStyle["default"].HR_VALID : _InputStyle["default"].HR_NOT_VALID;
 
-    return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _InputStyle["default"].ROOT, {}, rootStyle)
-    }, _react["default"].createElement("input", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, _InputStyle["default"].ROOT, rootStyle)
+    }, /*#__PURE__*/_react["default"].createElement("input", {
       ref: this._refDate,
-      style: (0, _extends2["default"])({}, _InputStyle["default"].INPUT, {}, inputStyle),
+      style: (0, _extends2["default"])({}, _InputStyle["default"].INPUT, inputStyle),
       name: name //autoComplete="new-text-date"
       ,
       autoComplete: "off",
@@ -182,9 +180,9 @@ function (_Component) {
       onChange: this._handleChangeValue,
       onBlur: this._handleBlurValue,
       onKeyDown: this._handleKeyDown
-    }), _react["default"].createElement("hr", {
-      style: (0, _extends2["default"])({}, _InputStyle["default"].HR, {}, _styleHr)
-    }), _react["default"].createElement("div", {
+    }), /*#__PURE__*/_react["default"].createElement("hr", {
+      style: (0, _extends2["default"])({}, _InputStyle["default"].HR, _styleHr)
+    }), /*#__PURE__*/_react["default"].createElement("div", {
       style: _InputStyle["default"].ERR_MSG
     }, errorInput));
   };

@@ -29,9 +29,7 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var SvgHrzResize =
-/*#__PURE__*/
-function (_Component) {
+var SvgHrzResize = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SvgHrzResize, _Component);
 
   function SvgHrzResize(props) {
@@ -134,11 +132,11 @@ function (_Component) {
 
   _proto.render = function render() {
     var btStyle = this.props.btStyle,
-        _btStyle = (0, _extends2["default"])({}, S.LEFT_DIV, {}, btStyle);
+        _btStyle = (0, _extends2["default"])({}, S.LEFT_DIV, btStyle);
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT_DIV
-    }, _react["default"].createElement("button", {
+    }, /*#__PURE__*/_react["default"].createElement("button", {
       className: CL,
       style: _btStyle,
       title: "Resize container to left",
@@ -146,22 +144,22 @@ function (_Component) {
       onMouseUp: this._hStopResize,
       onTouchStart: this._hStartResizeLeft,
       onTouchEnd: this._hStopResize
-    }, _react["default"].createElement("svg", {
+    }, /*#__PURE__*/_react["default"].createElement("svg", {
       viewBox: "0 0 12 12",
       width: "100%",
       height: "100%",
       preserveAspectRatio: "none",
       xmlns: "http://www.w3.org/2000/svg"
-    }, _react["default"].createElement("path", {
+    }, /*#__PURE__*/_react["default"].createElement("path", {
       d: "M 1,6 L 11,6",
       strokeWidth: "2",
       strokeLinecap: "round"
-    }), _react["default"].createElement("path", {
+    }), /*#__PURE__*/_react["default"].createElement("path", {
       d: "M 6,2 L 1,6 6,10",
       strokeWidth: "2",
       strokeLinecap: "round",
       fill: "none"
-    }))), _react["default"].createElement("button", {
+    }))), /*#__PURE__*/_react["default"].createElement("button", {
       className: CL,
       style: _btStyle,
       title: "Resize container to right",
@@ -169,17 +167,17 @@ function (_Component) {
       onMouseUp: this._hStopResize,
       onTouchStart: this._hStartResizeRight,
       onTouchEnd: this._hStopResize
-    }, _react["default"].createElement("svg", {
+    }, /*#__PURE__*/_react["default"].createElement("svg", {
       viewBox: "0 0 12 12",
       width: "100%",
       height: "100%",
       preserveAspectRatio: "none",
       xmlns: "http://www.w3.org/2000/svg"
-    }, _react["default"].createElement("path", {
+    }, /*#__PURE__*/_react["default"].createElement("path", {
       d: "M 1,6 L 11,6",
       strokeWidth: "2",
       strokeLinecap: "round"
-    }), _react["default"].createElement("path", {
+    }), /*#__PURE__*/_react["default"].createElement("path", {
       d: "M 6,2 L 11,6 6,10",
       strokeWidth: "2",
       strokeLinecap: "round",

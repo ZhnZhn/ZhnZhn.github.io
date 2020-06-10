@@ -31,9 +31,7 @@ var S = {
   }
 };
 
-var InputSecret =
-/*#__PURE__*/
-function (_Component) {
+var InputSecret = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(InputSecret, _Component);
 
   function InputSecret() {
@@ -105,14 +103,14 @@ function (_Component) {
         placeholder = _this$props.placeholder,
         maxLength = _this$props.maxLength,
         value = this.state.value;
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
-    }, _react["default"].createElement("input", {
+    }, /*#__PURE__*/_react["default"].createElement("input", {
       hidden: true,
       autoComplete: "username",
       value: name,
       readOnly: true
-    }), _react["default"].createElement("input", {
+    }), /*#__PURE__*/_react["default"].createElement("input", {
       ref: this._refInput,
       style: S.INPUT,
       type: "password",

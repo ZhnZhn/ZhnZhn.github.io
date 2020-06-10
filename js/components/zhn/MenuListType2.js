@@ -52,9 +52,7 @@ var STYLE = {
   }
 };
 
-var MenuListType2 =
-/*#__PURE__*/
-function (_Component) {
+var MenuListType2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MenuListType2, _Component);
 
   function MenuListType2() {
@@ -78,7 +76,7 @@ function (_Component) {
           onClickItem = _this$props.onClickItem;
       return items.map(function (item, index) {
         var caption = item[captionProp];
-        return _react["default"].createElement(ItemComp, {
+        return /*#__PURE__*/_react["default"].createElement(ItemComp, {
           key: index,
           className: itemClassName,
           caption: caption,
@@ -96,7 +94,7 @@ function (_Component) {
       return lists.map(function (list, index) {
         var caption = list[captionProp],
             items = list[itemsProp];
-        return _react["default"].createElement(_OpenClose["default"], {
+        return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
           key: index,
           fillOpen: C_FILL_OPEN,
           style: STYLE.LIST_DIV,
@@ -126,7 +124,7 @@ function (_Component) {
       return groups.map(function (group, index) {
         var caption = group[_captionProp],
             lists = group[_listsProp];
-        return _react["default"].createElement(_OpenClose["default"], {
+        return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
           key: index,
           style: STYLE.GROUP_DIV,
           fillOpen: C_GROUP_OPEN,
@@ -150,7 +148,7 @@ function (_Component) {
 
   _proto.render = function render() {
     var model = this.props.model;
-    return _react["default"].createElement("div", null, this._renderLevel1(model));
+    return /*#__PURE__*/_react["default"].createElement("div", null, this._renderLevel1(model));
   };
 
   return MenuListType2;

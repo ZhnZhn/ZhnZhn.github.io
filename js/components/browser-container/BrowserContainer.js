@@ -16,9 +16,7 @@ var _DialogContainer = _interopRequireDefault(require("../zhn-containers/DialogC
 //import PropTypes from "prop-types";
 var CL_ROOT = "hrz-container";
 
-var BrowserContainer =
-/*#__PURE__*/
-function (_Component) {
+var BrowserContainer = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(BrowserContainer, _Component);
 
   function BrowserContainer() {
@@ -63,11 +61,11 @@ function (_Component) {
         showDialogAction = _this$props.showDialogAction,
         onCloseDialog = _this$props.onCloseDialog,
         elBrowsers = this.state.elBrowsers;
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       className: CL_ROOT
     }, elBrowsers.map(function (Comp) {
-      return _react["default"].cloneElement(Comp);
-    }), _react["default"].createElement(_DialogContainer["default"], {
+      return /*#__PURE__*/_react["default"].cloneElement(Comp);
+    }), /*#__PURE__*/_react["default"].createElement(_DialogContainer["default"], {
       maxDialog: 3,
       store: store,
       showAction: showDialogAction,

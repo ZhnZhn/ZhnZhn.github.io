@@ -114,29 +114,29 @@ var InputSearch = function InputSearch(_ref) {
 
   var onKeyDown = isSearch ? _onKeyDown : null,
       onInputChange = isSearch ? _onInputChange : null,
-      _rootStyle = isOptions ? (0, _extends2["default"])({}, S.ROOT, {}, S.ROOT_OPTIONS) : S.ROOT;
+      _rootStyle = isOptions ? (0, _extends2["default"])({}, S.ROOT, S.ROOT_OPTIONS) : S.ROOT;
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: _rootStyle,
     tabIndex: "-1",
     role: "textbox",
     onKeyDown: onKeyDown
-  }, _react["default"].createElement(_InputText["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
     ref: refInput,
     key: inputKey,
     style: S.INPUT,
     initValue: ticket,
     onInputChange: onInputChange,
     onEnter: _onEnter
-  }), _react["default"].createElement("hr", {
+  }), /*#__PURE__*/_react["default"].createElement("hr", {
     className: CL.INPUT_HR
-  }), isSearch && _react["default"].createElement(_react.Fragment, null, _react["default"].createElement(_ToggleButton["default"], {
+  }), isSearch && /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, /*#__PURE__*/_react["default"].createElement(_ToggleButton["default"], {
     isLoading: isLoading,
     isLoadingFailed: isLoadingFailed,
     options: options,
     isOptions: isOptions,
     toggleOptions: action.toggleOptions
-  }), _react["default"].createElement(_SearchOptions["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_SearchOptions["default"], {
     isShow: isOptions,
     options: options,
     onClickItem: _onClickItem

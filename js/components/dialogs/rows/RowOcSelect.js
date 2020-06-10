@@ -41,14 +41,14 @@ var RowOcSelect = function RowOcSelect(_ref) {
       caption = _useRowOptions.caption,
       options = _useRowOptions.options;
 
-  return _react["default"].createElement(_OpenClose["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
     isClose: true,
     rootStyle: rowStyle,
-    ocStyle: (0, _extends2["default"])({}, S.OC, {}, labelStyle),
+    ocStyle: (0, _extends2["default"])({}, S.OC, labelStyle),
     caption: caption,
     captionStyle: S.CAPTION,
     openColor: C_OPEN,
-    CompAfter: _react["default"].createElement(_InputSelect["default"], options)
+    CompAfter: /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], options)
   }, children);
 };
 

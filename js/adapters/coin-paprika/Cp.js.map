@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/coin-paprika/Cp.js"
- ],
- "file": "../../../src/adapters/coin-paprika/Cp.js",
- "names": [
-  "Cp",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AACJC,EAAAA,OAAO,EAAPA;AADI,CAAX;eAIeF,E"
-}
+{"version":3,"sources":["../../../src/adapters/coin-paprika/Cp.js"],"names":["Cp","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AACJC,EAAAA,OAAO,EAAPA;AADI,CAAX;eAIeF,E","sourcesContent":["import api from './CpApi'\r\nimport adapter from './CpAdapter'\r\n\r\nconst Cp = {\r\n  api, adapter\r\n}\r\n\r\nexport default Cp\r\n"],"file":"Cp.js"}

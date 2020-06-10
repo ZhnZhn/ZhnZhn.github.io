@@ -13,16 +13,16 @@ var CL = {
 };
 
 var SvgEqual = function SvgEqual() {
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     className: CL.ROOT
-  }, _react["default"].createElement("svg", {
+  }, /*#__PURE__*/_react["default"].createElement("svg", {
     viewBox: "0 0 12 12",
     width: "100%",
     height: "100%",
     className: CL.SVG,
     preserveAspectRatio: "none",
     xmlns: "http://www.w3.org/2000/svg"
-  }, _react["default"].createElement("path", {
+  }, /*#__PURE__*/_react["default"].createElement("path", {
     d: "M 0,3 L 12,3 M 0,7 L 12,7"
   })));
 };

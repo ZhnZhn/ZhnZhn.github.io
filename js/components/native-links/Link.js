@@ -23,9 +23,9 @@ var Link = function Link(_ref) {
     return null;
   }
 
-  return _react["default"].createElement("a", {
+  return /*#__PURE__*/_react["default"].createElement("a", {
     className: className,
-    style: (0, _extends2["default"])({}, _Link["default"].LINK, {}, style),
+    style: (0, _extends2["default"])({}, _Link["default"].LINK, style),
     href: href
   }, caption);
 };

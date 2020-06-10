@@ -129,9 +129,7 @@ var _crLeftStyle = function _crLeftStyle(percent) {
   };
 };
 
-var InputSlider =
-/*#__PURE__*/
-function (_Component) {
+var InputSlider = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(InputSlider, _Component);
 
   function InputSlider() {
@@ -257,35 +255,35 @@ function (_Component) {
         hovered = _this$state.hovered,
         dragged = _this$state.dragged,
         value = _this$state.value,
-        _lineAfterStyle = hovered ? (0, _extends2["default"])({}, S.LINE_AFTER, {}, S.LINE_HOVERED) : S.LINE_AFTER,
+        _lineAfterStyle = hovered ? (0, _extends2["default"])({}, S.LINE_AFTER, S.LINE_HOVERED) : S.LINE_AFTER,
         _circleStyle = dragged ? S.CIRCLE_DRAGGED : null,
         _emberStyle = dragged ? S.EMBER : null,
-        _circleInnerEl = hovered || dragged ? _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.CIRCLE_INNER_EL, {}, _emberStyle)
+        _circleInnerEl = hovered || dragged ? /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.CIRCLE_INNER_EL, _emberStyle)
     }) : null,
         _percent = _toPercent(value, min, max),
         _widthBeforeStyle = _crWidthStyle(_percent),
         _widthAfterStyle = _crWidthStyle(100 - _percent),
         _leftStyle = _crLeftStyle(_percent);
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT,
       onMouseDown: this._handleMouseDown,
       onMouseEnter: this._handleMouseEnter,
       onMouseLeave: this._handleMouseLeave
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       ref: this._refTrack,
       style: S.ROOT_LINE
-    }, _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.LINE_BEFORE, {}, _widthBeforeStyle)
-    }), _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _lineAfterStyle, {}, _widthAfterStyle)
-    }), _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.LINE_BEFORE, _widthBeforeStyle)
+    }), /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, _lineAfterStyle, _widthAfterStyle)
+    }), /*#__PURE__*/_react["default"].createElement("div", {
       tabIndex: 0,
-      style: (0, _extends2["default"])({}, S.ROOT_CIRCLE, {}, _circleStyle, {}, _leftStyle)
-    }, _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.CIRCLE_INNER, {}, _circleStyle)
-    }, _circleInnerEl)), _react["default"].createElement("input", {
+      style: (0, _extends2["default"])({}, S.ROOT_CIRCLE, _circleStyle, _leftStyle)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.CIRCLE_INNER, _circleStyle)
+    }, _circleInnerEl)), /*#__PURE__*/_react["default"].createElement("input", {
       type: "hidden",
       step: step,
       min: min,

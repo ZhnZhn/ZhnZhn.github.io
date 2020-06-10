@@ -20,9 +20,7 @@ var _InputPattern = _interopRequireDefault(require("../../zhn/InputPattern"));
 var _useRow2 = _interopRequireDefault(require("./useRow"));
 
 //import PropTypes from "prop-types";
-var RowPattern =
-/*#__PURE__*/
-function (_Component) {
+var RowPattern = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(RowPattern, _Component);
 
   function RowPattern() {
@@ -58,11 +56,11 @@ function (_Component) {
         labelStyle = _useRow.labelStyle,
         _caption = _useRow.caption;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: rowStyle
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: labelStyle
-    }, _caption), _react["default"].createElement(_InputPattern["default"], (0, _extends2["default"])({
+    }, _caption), /*#__PURE__*/_react["default"].createElement(_InputPattern["default"], (0, _extends2["default"])({
       ref: this._refInput
     }, rest)));
   };

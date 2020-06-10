@@ -16,11 +16,11 @@ var RowButtons = function RowButtons(_ref) {
       withoutClear = _ref.withoutClear,
       onClear = _ref.onClear,
       onClose = _ref.onClose;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: _Pane["default"].COMMAND_DIV
-  }, Primary, !withoutClear && _react["default"].createElement(_Button["default"].Clear, {
+  }, Primary, !withoutClear && /*#__PURE__*/_react["default"].createElement(_Button["default"].Clear, {
     onClick: onClear
-  }), _react["default"].createElement(_Button["default"].Close, {
+  }), /*#__PURE__*/_react["default"].createElement(_Button["default"].Close, {
     onClick: onClose
   }));
 };

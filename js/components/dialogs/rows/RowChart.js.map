@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/dialogs/rows/RowChart.js"
- ],
- "file": "../../../../src/components/dialogs/rows/RowChart.js",
- "names": [
-  "RowChart",
-  "chartType",
-  "isShowLabels",
-  "placeholder",
-  "options",
-  "onSelectChart",
-  "onRegColor",
-  "caption"
- ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW;AAAA,MACfC,SADe,QACfA,SADe;AAAA,MAEfC,YAFe,QAEfA,YAFe;AAAA,MAGfC,WAHe,QAGfA,WAHe;AAAA,MAIfC,OAJe,QAIfA,OAJe;AAAA,MAKfC,aALe,QAKfA,aALe;AAAA,MAMfC,UANe,QAMfA,UANe;AAAA,SAQf,gCAAC,uBAAD;AACE,IAAA,YAAY,EAAEJ,YADhB;AAEE,IAAA,OAAO,EAAC,OAFV;AAGE,IAAA,WAAW,EAAEC,WAAW,IAAIC,OAAO,CAAC,CAAD,CAAP,CAAWG,OAHzC;AAIE,IAAA,OAAO,EAAEH,OAJX;AAKE,IAAA,QAAQ,EAAEC;AALZ,KAOE,gCAAC,sBAAD;AACE,IAAA,SAAS,EAAEJ,SADb;AAEE,IAAA,MAAM,EAAEC,YAFV;AAGE,IAAA,KAAK,EAAEI;AAHT,IAPF,CARe;AAAA,CAAjB;;eAuBeN,Q"
-}
+{"version":3,"sources":["../../../../src/components/dialogs/rows/RowChart.jsx"],"names":["RowChart","chartType","isShowLabels","placeholder","options","onSelectChart","onRegColor","caption"],"mappings":";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW;AAAA,MACfC,SADe,QACfA,SADe;AAAA,MAEfC,YAFe,QAEfA,YAFe;AAAA,MAGfC,WAHe,QAGfA,WAHe;AAAA,MAIfC,OAJe,QAIfA,OAJe;AAAA,MAKfC,aALe,QAKfA,aALe;AAAA,MAMfC,UANe,QAMfA,UANe;AAAA,sBAQf,gCAAC,uBAAD;AACE,IAAA,YAAY,EAAEJ,YADhB;AAEE,IAAA,OAAO,EAAC,OAFV;AAGE,IAAA,WAAW,EAAEC,WAAW,IAAIC,OAAO,CAAC,CAAD,CAAP,CAAWG,OAHzC;AAIE,IAAA,OAAO,EAAEH,OAJX;AAKE,IAAA,QAAQ,EAAEC;AALZ,kBAOE,gCAAC,sBAAD;AACE,IAAA,SAAS,EAAEJ,SADb;AAEE,IAAA,MAAM,EAAEC,YAFV;AAGE,IAAA,KAAK,EAAEI;AAHT,IAPF,CARe;AAAA,CAAjB;;eAuBeN,Q","sourcesContent":["import React from 'react'\r\n\r\nimport RowOcSelect from './RowOcSelect'\r\nimport SeriaColor from '../SeriaColor'\r\n\r\nconst RowChart = ({\r\n  chartType,\r\n  isShowLabels,\r\n  placeholder,\r\n  options,\r\n  onSelectChart,\r\n  onRegColor\r\n}) => (\r\n  <RowOcSelect\r\n    isShowLabels={isShowLabels}\r\n    caption=\"Chart\"\r\n    placeholder={placeholder || options[0].caption}\r\n    options={options}\r\n    onSelect={onSelectChart}\r\n  >\r\n    <SeriaColor\r\n      chartType={chartType}\r\n      isLong={isShowLabels}\r\n      onReg={onRegColor}\r\n    />\r\n  </RowOcSelect>\r\n);\r\n\r\nexport default RowChart\r\n"],"file":"RowChart.js"}

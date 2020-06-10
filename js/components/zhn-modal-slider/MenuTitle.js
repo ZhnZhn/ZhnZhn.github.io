@@ -27,9 +27,7 @@ var S = {
   }
 };
 
-var MenuTitle =
-/*#__PURE__*/
-function (_Component) {
+var MenuTitle = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MenuTitle, _Component);
 
   function MenuTitle() {
@@ -59,14 +57,14 @@ function (_Component) {
       return null;
     }
 
-    return _react["default"].createElement(_MenuAriaItem["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_MenuAriaItem["default"], {
       className: baseTitleCl,
       style: S.ITEM,
       onClick: onPrevPage.bind(null, pageNumber),
       onReg: onReg
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.PREV_PAGE
-    }, '<'), _react["default"].createElement("span", {
+    }, '<'), /*#__PURE__*/_react["default"].createElement("span", {
       style: S.TITLE
     }, title));
   };

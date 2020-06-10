@@ -40,11 +40,11 @@ var _isFn = function _isFn(fn) {
 };
 
 var _getFromToDates = function _getFromToDates(chart) {
-  var _ref;
+  var _chart$zhGetFromToDat;
 
-  return (_ref = chart.zhGetFromToDates == null ? void 0 : chart.zhGetFromToDates({
+  return (_chart$zhGetFromToDat = chart.zhGetFromToDates == null ? void 0 : chart.zhGetFromToDates({
     format: mlsToDmy
-  })) != null ? _ref : {};
+  })) != null ? _chart$zhGetFromToDat : {};
 };
 
 var _getMinYear = function _getMinYear(strDmy) {
@@ -55,9 +55,7 @@ var _crErrMsg = function _crErrMsg(minYear) {
   return "DD-MM-YYYY format must be, min 01-01-" + minYear;
 };
 
-var ZoomDialog =
-/*#__PURE__*/
-function (_Component) {
+var ZoomDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ZoomDialog, _Component);
 
   /*
@@ -147,7 +145,7 @@ function (_Component) {
     _this._hZoom3M = _this._hZoomBy.bind(null, -3);
     _this._hZoom6M = _this._hZoomBy.bind(null, -6);
     _this._hZoom1Y = _this._hZoomBy.bind(null, -12);
-    _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Flat, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
       key: "zoom",
       caption: "Zoom",
       isPrimary: true,
@@ -184,13 +182,13 @@ function (_Component) {
         id = chart.zhGetId == null ? void 0 : chart.zhGetId(),
         _isDaily = chart.zhIsDaily == null ? void 0 : chart.zhIsDaily();
 
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       caption: "Zoom Chart",
       style: S.DIALOG,
       isShow: isShow,
       commandButtons: this._commandButtons,
       onClose: onClose
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       key: id,
       ref: this._refDates,
       dateStyle: S.DATE,
@@ -201,7 +199,7 @@ function (_Component) {
       isPeriodValid: isDmyPeriod,
       onTestDate: _onTestDate,
       onEnter: this._hZoom
-    }), _isDaily && _react["default"].createElement(_ZoomDailyRow["default"], {
+    }), _isDaily && /*#__PURE__*/_react["default"].createElement(_ZoomDailyRow["default"], {
       onZoom1M: this._hZoom1M,
       onZoom3M: this._hZoom3M,
       onZoom6M: this._hZoom6M,

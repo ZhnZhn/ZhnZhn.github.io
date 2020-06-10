@@ -15,7 +15,7 @@ var C = {
 
 var FaoStatLink = function FaoStatLink(_ref) {
   var item = _ref.item;
-  return _react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     href: item ? C.BASE + item : C.BASE,
     caption: "FAOSTAT Link"
   });

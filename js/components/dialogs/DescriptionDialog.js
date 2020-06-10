@@ -44,9 +44,7 @@ var _isUpdateDescr = function _isUpdateDescr(prevProps, props, state) {
   return _isNewShow(prevProps, props) && prevProps.data.descrUrl !== props.data.descrUrl;
 };
 
-var DescriptionDialog =
-/*#__PURE__*/
-function (_Component) {
+var DescriptionDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DescriptionDialog, _Component);
 
   function DescriptionDialog() {
@@ -143,14 +141,14 @@ function (_Component) {
         isLoadFailed = _this$state.isLoadFailed,
         errMsg = _this$state.errMsg,
         descrHtml = _this$state.descrHtml;
-    return _react["default"].createElement(ModalDialog, {
+    return /*#__PURE__*/_react["default"].createElement(ModalDialog, {
       caption: "About Datasource",
       isShow: isShow,
       style: S.DIALOG,
       onClose: onClose
-    }, isLoading ? _react["default"].createElement(Load.Loading, null) : isLoadFailed ? _react["default"].createElement(Load.LoadFailed, {
+    }, isLoading ? /*#__PURE__*/_react["default"].createElement(Load.Loading, null) : isLoadFailed ? /*#__PURE__*/_react["default"].createElement(Load.LoadFailed, {
       errMsg: errMsg
-    }) : _react["default"].createElement(DivHtml, {
+    }) : /*#__PURE__*/_react["default"].createElement(DivHtml, {
       style: S.DIV,
       str: descrHtml
     }));

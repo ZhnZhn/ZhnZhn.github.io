@@ -75,9 +75,7 @@ var _isShortDescr = function _isShortDescr(descr) {
   return descr && descr.length < 200;
 };
 
-var PanelDataInfo =
-/*#__PURE__*/
-function (_Component) {
+var PanelDataInfo = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(PanelDataInfo, _Component);
 
   function PanelDataInfo() {
@@ -94,7 +92,7 @@ function (_Component) {
         return null;
       } else {
         var Comp = _RouterNativeLink["default"]['QUANDL'];
-        return _react["default"].createElement(Comp, {
+        return /*#__PURE__*/_react["default"].createElement(Comp, {
           dbCode: dbCode,
           dsCode: dsCode
         });
@@ -107,7 +105,7 @@ function (_Component) {
       }
 
       var Comp = _RouterNativeLink["default"][linkFn];
-      return typeof Comp !== 'undefined' ? _react["default"].createElement(Comp, {
+      return typeof Comp !== 'undefined' ? /*#__PURE__*/_react["default"].createElement(Comp, {
         item: item
       }) : null;
     };
@@ -136,37 +134,37 @@ function (_Component) {
         linkFn = zhInfo.linkFn,
         _style = isShow ? S.ROOT_SHOW : S.ROOT_HIDE;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: _style
-    }, _react["default"].createElement(_Comp["default"].ButtonTab, {
+    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].ButtonTab, {
       style: S.BT_CAPTION,
       caption: "Chart",
       onClick: onClickChart
-    }), _react["default"].createElement(_Comp["default"].InfoPart, {
+    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
       text: name,
       styleText: S.INFO_TEXT
-    }), _react["default"].createElement(_Comp["default"].InfoPart, {
+    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
       caption: "From Date",
       styleCaption: S.INFO_CAPTION,
       text: fromDate,
       styleText: S.INFO_TEXT
-    }), _react["default"].createElement(_Comp["default"].InfoPart, {
+    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
       style: S.TO_DATE_INFO,
       caption: "To Date",
       styleCaption: S.INFO_CAPTION,
       text: toDate,
       styleText: S.INFO_TEXT
-    }), _react["default"].createElement(_Comp["default"].InfoPart, {
+    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
       caption: "Frequency",
       styleCaption: S.INFO_CAPTION,
       text: frequency,
       styleText: S.INFO_TEXT
-    }), this._renderQuandlLink(database_code, dataset_code), description && _react["default"].createElement(_Comp["default"].OpenClose2, {
+    }), this._renderQuandlLink(database_code, dataset_code), description && /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
       isInitialOpen: _isShortDescr(description),
       fillOpen: C_DESCR_OPEN,
       styleItem: S.DESCR_ITEM,
       caption: "Description"
-    }, _react["default"].createElement(_Comp["default"].InfoPart, {
+    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
       style: S.DESCR_INFO,
       isHtml: true,
       text: description,

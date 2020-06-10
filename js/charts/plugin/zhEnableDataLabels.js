@@ -27,7 +27,7 @@ var zhEnableDataLabels = function zhEnableDataLabels(seriaType, options) {
 
     this.update({
       plotOptions: (_plotOptions = {}, _plotOptions[seriaType] = {
-        dataLabels: (0, _extends2["default"])({}, options, {}, DATA_LABELS)
+        dataLabels: (0, _extends2["default"])({}, options, DATA_LABELS)
       }, _plotOptions)
     });
   } catch (err) {

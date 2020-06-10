@@ -32,7 +32,7 @@ var MenuItem = function MenuItem(_ref) {
     }
   }, [onClick]);
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     ref: innerRef,
     className: CL.ITEM,
     style: _style,

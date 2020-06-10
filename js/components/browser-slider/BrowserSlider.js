@@ -25,7 +25,7 @@ var S = {
   }
 };
 
-var BrowserSlider = _react["default"].memo(function (props) {
+var BrowserSlider = /*#__PURE__*/_react["default"].memo(function (props) {
   var isInitShow = props.isInitShow,
       caption = props.caption,
       store = props.store,
@@ -44,16 +44,16 @@ var BrowserSlider = _react["default"].memo(function (props) {
       setIsShow(true);
     }
   });
-  return _react["default"].createElement(_Comp["default"].Browser, {
+  return /*#__PURE__*/_react["default"].createElement(_Comp["default"].Browser, {
     isShow: isShow,
     style: S.BROWSER
-  }, _react["default"].createElement(_Comp["default"].BrowserCaption, {
+  }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].BrowserCaption, {
     caption: caption,
     onClose: _hHide
-  }), _react["default"].createElement(_Comp["default"].ScrollPane, {
+  }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ScrollPane, {
     className: CL_SCROLL,
     style: S.SCROLL_PANE
-  }, _react["default"].createElement(_MenuSlider["default"], props)));
+  }, /*#__PURE__*/_react["default"].createElement(_MenuSlider["default"], props)));
 });
 
 var _default = BrowserSlider;

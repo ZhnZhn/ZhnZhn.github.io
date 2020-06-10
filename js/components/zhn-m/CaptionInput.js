@@ -31,14 +31,14 @@ var CaptionInput = function CaptionInput(_ref) {
         _key = caption.substring(_index, _index + 1),
         _after = caption.substring(_index + 1);
 
-    return _react["default"].createElement("span", {
+    return /*#__PURE__*/_react["default"].createElement("span", {
       className: className,
       style: rootStyle
-    }, _react["default"].createElement("span", null, _before), _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", null, _before), /*#__PURE__*/_react["default"].createElement("span", {
       style: S.KEY
-    }, _key), _react["default"].createElement("span", null, _after), children);
+    }, _key), /*#__PURE__*/_react["default"].createElement("span", null, _after), children);
   } else {
-    return _react["default"].createElement("span", {
+    return /*#__PURE__*/_react["default"].createElement("span", {
       className: className,
       style: rootStyle
     }, caption, children);

@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/iex/ItemTypes.js"
- ],
- "file": "../../../src/adapters/iex/ItemTypes.js",
- "names": [
-  "ItemTypes",
-  "CHART",
-  "ERN",
-  "DIV",
-  "COM",
-  "STA",
-  "ML"
- ],
- "mappings": ";;;;AACA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,KAAK,EAAE,OADS;AAEhBC,EAAAA,GAAG,EAAE,UAFW;AAGhBC,EAAAA,GAAG,EAAE,WAHW;AAIhBC,EAAAA,GAAG,EAAE,SAJW;AAKhBC,EAAAA,GAAG,EAAE,OALW;AAMhBC,EAAAA,EAAE,EAAE;AANY,CAAlB;eASeN,S"
-}
+{"version":3,"sources":["../../../src/adapters/iex/ItemTypes.js"],"names":["ItemTypes","CHART","ERN","DIV","COM","STA","ML"],"mappings":";;;;AACA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,KAAK,EAAE,OADS;AAEhBC,EAAAA,GAAG,EAAE,UAFW;AAGhBC,EAAAA,GAAG,EAAE,WAHW;AAIhBC,EAAAA,GAAG,EAAE,SAJW;AAKhBC,EAAAA,GAAG,EAAE,OALW;AAMhBC,EAAAA,EAAE,EAAE;AANY,CAAlB;eASeN,S","sourcesContent":["\r\nconst ItemTypes = {\r\n  CHART: 'chart',\r\n  ERN: 'earnings',\r\n  DIV: 'dividends',\r\n  COM: 'company',\r\n  STA: 'stats',\r\n  ML: 'market'\r\n};\r\n\r\nexport default ItemTypes\r\n"],"file":"ItemTypes.js"}

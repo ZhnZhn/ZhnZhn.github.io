@@ -1,15 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/hooks/useListen.js"
- ],
- "file": "../../../src/components/hooks/useListen.js",
- "names": [
-  "useListen",
-  "store",
-  "onStore",
-  "unsubscribe",
-  "listen"
- ],
- "mappings": ";;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,KAAD,EAAQC,OAAR,EAAoB;AACpC,wBAAU,YAAM;AACd,QAAMC,WAAW,GAAGF,KAAK,CAACG,MAAN,CAAaF,OAAb,CAApB;AACA,WAAO,YAAM;AACXC,MAAAA,WAAW;AACZ,KAFD;AAGD,GALD,EAKG,EALH;AAMD,CAPD;;eASeH,S"
-}
+{"version":3,"sources":["../../../src/components/hooks/useListen.js"],"names":["useListen","store","onStore","unsubscribe","listen"],"mappings":";;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,KAAD,EAAQC,OAAR,EAAoB;AACpC,wBAAU,YAAM;AACd,QAAMC,WAAW,GAAGF,KAAK,CAACG,MAAN,CAAaF,OAAb,CAApB;AACA,WAAO,YAAM;AACXC,MAAAA,WAAW;AACZ,KAFD;AAGD,GALD,EAKG,EALH;AAMD,CAPD;;eASeH,S","sourcesContent":["import { useEffect } from 'react'\r\n\r\nconst useListen = (store, onStore) => {\r\n  useEffect(() => {\r\n    const unsubscribe = store.listen(onStore)\r\n    return () => {\r\n      unsubscribe()\r\n    }\r\n  }, [])\r\n}\r\n\r\nexport default useListen\r\n"],"file":"useListen.js"}

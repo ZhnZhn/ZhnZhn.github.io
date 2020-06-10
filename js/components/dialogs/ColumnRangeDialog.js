@@ -88,14 +88,12 @@ var _fHeValue = function _fHeValue(propName, min, max) {
 };
 
 var _crSeriaOptions = function _crSeriaOptions(pointWidth) {
-  return (0, _extends2["default"])({}, SERIA_OPTION, {}, {
+  return (0, _extends2["default"])({}, SERIA_OPTION, {
     pointWidth: pointWidth
   });
 };
 
-var ColumnRangeDialog =
-/*#__PURE__*/
-function (_Component) {
+var ColumnRangeDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ColumnRangeDialog, _Component);
 
   function ColumnRangeDialog(_props) {
@@ -140,7 +138,7 @@ function (_Component) {
       _this._color = color;
     };
 
-    _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Flat, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
       key: "yes",
       caption: "Yes, Connect" //accessKey="y"
       ,
@@ -153,9 +151,9 @@ function (_Component) {
     _this._r1 = INIT.R1;
     _this._r2 = INIT.R1;
     _this._pointWidth = INIT.POIN_WIDTH;
-    _this._refW = _react["default"].createRef();
-    _this._refR1 = _react["default"].createRef();
-    _this._refR2 = _react["default"].createRef();
+    _this._refW = /*#__PURE__*/_react["default"].createRef();
+    _this._refR1 = /*#__PURE__*/_react["default"].createRef();
+    _this._refR2 = /*#__PURE__*/_react["default"].createRef();
     return _this;
   }
 
@@ -187,22 +185,22 @@ function (_Component) {
     this._fromIndex = fromIndex;
     this._toIndex = toIndex;
     this._color = c1;
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       caption: "Add ColumnRange",
       isShow: isShow,
       commandButtons: this._commandButtons,
       onClose: onClose
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.TEXT
-    }, "Connect dots series by column range?"), _react["default"].createElement("div", {
+    }, "Connect dots series by column range?"), /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROW
-    }, _react["default"].createElement(_DialogCell["default"].RowInputColor, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputColor, {
       styleRoot: S.INLINE,
       styleCaption: S.CAPTION_1,
       initValue: c1,
       onEnter: this._heColor,
       maxLength: 7
-    }), _react["default"].createElement(_DialogCell["default"].RowInputText, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputText, {
       ref: this._refW,
       styleRoot: S.INLINE,
       styleCaption: S.CAPTION_1,
@@ -214,12 +212,12 @@ function (_Component) {
       min: 0,
       max: 6,
       step: 1
-    })), _react["default"].createElement("div", {
+    })), /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROW
-    }, _react["default"].createElement(_DialogCell["default"].RowInputText, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputText, {
       ref: this._refR1,
       styleRoot: S.INLINE,
-      styleCaption: (0, _extends2["default"])({}, S.CAPTION_2, {}, {
+      styleCaption: (0, _extends2["default"])({}, S.CAPTION_2, {
         color: c1
       }),
       styleInput: S.INPUT,
@@ -227,10 +225,10 @@ function (_Component) {
       initValue: INIT.R1,
       type: "number",
       maxLength: 2
-    }), _react["default"].createElement(_DialogCell["default"].RowInputText, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputText, {
       ref: this._refR2,
       styleRoot: S.INLINE,
-      styleCaption: (0, _extends2["default"])({}, S.CAPTION_2, {}, {
+      styleCaption: (0, _extends2["default"])({}, S.CAPTION_2, {
         color: c2
       }),
       styleInput: S.INPUT,

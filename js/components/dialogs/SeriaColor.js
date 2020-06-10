@@ -67,9 +67,7 @@ var _hasLineWidth = function _hasLineWidth(chartType) {
   return false;
 };
 
-var SeriaColor =
-/*#__PURE__*/
-function (_Component) {
+var SeriaColor = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SeriaColor, _Component);
 
   function SeriaColor(props) {
@@ -95,7 +93,7 @@ function (_Component) {
       var _max = isLong ? colors.length : N_SHORT;
 
       return colors.map(function (c, i) {
-        return i < _max ? _react["default"].createElement(_CellColor["default"], {
+        return i < _max ? /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
           key: c,
           color: c,
           style: S.CELL,
@@ -104,7 +102,7 @@ function (_Component) {
       }).filter(Boolean);
     };
 
-    _this._refLineWidth = _react["default"].createRef();
+    _this._refLineWidth = /*#__PURE__*/_react["default"].createRef();
     _this.state = {
       color: _initColor(props)
     };
@@ -127,17 +125,17 @@ function (_Component) {
         chartType = _this$props.chartType,
         color = this.state.color,
         _isLineWidth = _hasLineWidth(chartType),
-        _rowStyle = _isLineWidth ? S.ROW2 : (0, _extends2["default"])({}, S.ROW2, {}, S.ROW2_PADDING);
+        _rowStyle = _isLineWidth ? S.ROW2 : (0, _extends2["default"])({}, S.ROW2, S.ROW2_PADDING);
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
-    }, _react["default"].createElement("div", null, _react["default"].createElement(_CellColor["default"], {
+    }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
       color: color,
-      style: (0, _extends2["default"])({}, S.CELL, {}, S.TO_CELL),
+      style: (0, _extends2["default"])({}, S.CELL, S.TO_CELL),
       onClick: this._hReset
-    }), this._renderColors(COLORS1, isLong)), _react["default"].createElement("div", {
+    }), this._renderColors(COLORS1, isLong)), /*#__PURE__*/_react["default"].createElement("div", {
       style: _rowStyle
-    }, _react["default"].createElement(_BtCounter["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_BtCounter["default"], {
       ref: this._refLineWidth,
       isShow: _isLineWidth,
       style: S.BT_COUNTER,

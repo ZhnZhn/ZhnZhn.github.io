@@ -174,11 +174,11 @@ var _crSeries = function _crSeries(data) {
       _dPrev = _crSeriaData3.arr;
 
   return {
-    nowSeria: _crSeria(_yearNow, (0, _extends2["default"])({}, C.NOW, {}, {
+    nowSeria: _crSeria(_yearNow, (0, _extends2["default"])({}, C.NOW, {
       data: _dNow
     })),
     nowItem: _crItem(_yearNow, C.NOW),
-    prevSeria: _crSeria(_yearPrev, (0, _extends2["default"])({}, C.PREV, {}, {
+    prevSeria: _crSeria(_yearPrev, (0, _extends2["default"])({}, C.PREV, {
       data: _dPrev
     })),
     prevItem: _crItem(_yearPrev, C.PREV)
@@ -280,7 +280,7 @@ var _crAvgSeria = function _crAvgSeria(data) {
       name = "Avg " + fromYear + ":" + _stopYear;
 
   return {
-    avgSeria: _crSeria(name, (0, _extends2["default"])({}, C.AVG, {}, {
+    avgSeria: _crSeria(name, (0, _extends2["default"])({}, C.AVG, {
       data: _data
     })),
     avgItem: _crItem(name, C.AVG)

@@ -64,9 +64,7 @@ var _isFn = function _isFn(fn) {
 
 var _isNarrowWidth = !_has["default"].wideWidth();
 
-var ChartItem =
-/*#__PURE__*/
-function (_Component) {
+var ChartItem = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ChartItem, _Component);
 
   /*
@@ -130,7 +128,7 @@ function (_Component) {
     };
 
     _this.setDataSource = function (strDataSource) {
-      _this._dataSourceEl = _react["default"].createElement("div", {
+      _this._dataSourceEl = /*#__PURE__*/_react["default"].createElement("div", {
         style: S.DATA_SOURCE
       }, strDataSource);
 
@@ -292,10 +290,10 @@ function (_Component) {
       var _this$state = _this.state,
           hasError = _this$state.hasError,
           isShowToolbar = _this$state.isShowToolbar;
-      return _react["default"].createElement(ShowHide, {
+      return /*#__PURE__*/_react["default"].createElement(ShowHide, {
         isShow: isShowToolbar,
         withoutAnimation: withoutAnimation
-      }, _react["default"].createElement(_ChartToolBar["default"], {
+      }, /*#__PURE__*/_react["default"].createElement(_ChartToolBar["default"], {
         hasError: hasError,
         style: S.TAB_DIV,
         chartId: _this._chartId,
@@ -344,7 +342,7 @@ function (_Component) {
         _itemCaption = itemCaption || _caption;
 
     _this._chartId = _id;
-    _this._dataSourceEl = _react["default"].createElement("div", {
+    _this._dataSourceEl = /*#__PURE__*/_react["default"].createElement("div", {
       style: S.DATA_SOURCE
     }, dataSource);
     _this.state = {
@@ -422,9 +420,9 @@ function (_Component) {
         isCaption = _this$state2.isCaption,
         _withoutAnimation = _isNarrowWidth || withoutAnimation;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       className: CL.ROOT
-    }, isCaption && _react["default"].createElement(_Header["default"], {
+    }, isCaption && /*#__PURE__*/_react["default"].createElement(_Header["default"], {
       isOpen: isOpen,
       moreModel: this._moreModel,
       onCheck: this._fnOnCheck,
@@ -438,36 +436,36 @@ function (_Component) {
       isAdminMode: isAdminMode,
       crValueMoving: this._crValueMoving,
       regCompVm: this._regCompVm
-    }), _react["default"].createElement(ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(ShowHide, {
       isShow: isOpen,
       withoutAnimation: _withoutAnimation,
       style: S.SHOW_HIDE
-    }, isShowChart && this._createChartToolBar(config, _withoutAnimation), hasError ? _react["default"].createElement(MsgRenderErr, {
+    }, isShowChart && this._createChartToolBar(config, _withoutAnimation), hasError ? /*#__PURE__*/_react["default"].createElement(MsgRenderErr, {
       isShow: isShowChart,
       msg: "chart"
-    }) : _react["default"].createElement(HighchartWrapper, {
+    }) : /*#__PURE__*/_react["default"].createElement(HighchartWrapper, {
       ref: this._refChartComp,
       isShow: isShowChart,
       style: S.WRAPPER,
       config: config,
       isShowAbs: isShowAbs,
       absComp: this._dataSourceEl
-    }), _react["default"].createElement(_PanelDataInfo["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_PanelDataInfo["default"], {
       isShow: isShowInfo,
       info: config.info,
       zhInfo: config.zhConfig,
       onClickChart: this._handleClickChart
-    }), _react["default"].createElement(_ChartLegend["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ChartLegend["default"], {
       isShow: isShowLegend,
       legend: legend,
       onClickItem: this._handleToggleSeria
-    }), _react["default"].createElement(_MiniCharts["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_MiniCharts["default"], {
       withoutAnimation: _withoutAnimation,
       configs: mfiConfigs,
       absComp: this._dataSourceEl,
       onLoaded: this._handleLoadedMiniChart,
       onWillUnLoaded: this._handleUnLoadedMiniChart
-    }), _react["default"].createElement(_MiniCharts["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_MiniCharts["default"], {
       withoutAnimation: _withoutAnimation,
       configs: zhMiniConfigs,
       idPropName: "btTitle",

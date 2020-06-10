@@ -14,9 +14,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
-var GroupAddPane =
-/*#__PURE__*/
-function (_Component) {
+var GroupAddPane = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(GroupAddPane, _Component);
 
   /*
@@ -81,7 +79,7 @@ function (_Component) {
       }
     };
 
-    _this._primaryBt = _react["default"].createElement(_Atoms["default"].Button.Primary, {
+    _this._primaryBt = /*#__PURE__*/_react["default"].createElement(_Atoms["default"].Button.Primary, {
       caption: "Create",
       title: "Create New Group",
       onClick: _this._handleCreate
@@ -107,14 +105,14 @@ function (_Component) {
 
     var onClose = this.props.onClose,
         validationMessages = this.state.validationMessages;
-    return _react["default"].createElement("div", null, _react["default"].createElement(_Atoms["default"].RowInputText, {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_Atoms["default"].RowInputText, {
       ref: function ref(c) {
         return _this2.inputText = c;
       },
       caption: "Group:"
-    }), _react["default"].createElement(_Atoms["default"].ValidationMessages, {
+    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].ValidationMessages, {
       validationMessages: validationMessages
-    }), _react["default"].createElement(_Atoms["default"].RowButtons, {
+    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].RowButtons, {
       Primary: this._primaryBt,
       onClear: this._handleClear,
       onClose: onClose

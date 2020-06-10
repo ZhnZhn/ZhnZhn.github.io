@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/browser-container/SourceBrowserDynamic.js"
- ],
- "file": "../../../src/components/browser-container/SourceBrowserDynamic.js",
- "names": [
-  "SourceBrowserDynamic",
-  "React",
-  "memo",
-  "props"
- ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,oBAAoB,GAAGC,kBAAMC,IAAN,CAC3B,UAACC,KAAD;AAAA,SAAW,gCAAC,uBAAD,EAAiBA,KAAjB,CAAX;AAAA,CAD2B,EAE3B;AAAA,SAAM,IAAN;AAAA,CAF2B,CAA7B;;eAKeH,oB"
-}
+{"version":3,"sources":["../../../src/components/browser-container/SourceBrowserDynamic.jsx"],"names":["SourceBrowserDynamic","React","memo","props"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,oBAAoB,gBAAGC,kBAAMC,IAAN,CAC3B,UAACC,KAAD;AAAA,sBAAW,gCAAC,uBAAD,EAAiBA,KAAjB,CAAX;AAAA,CAD2B,EAE3B;AAAA,SAAM,IAAN;AAAA,CAF2B,CAA7B;;eAKeH,oB","sourcesContent":["import React from 'react'\r\n\r\nimport BrowserMenu from '../zhn-menu/BrowserMenu'\r\n\r\nconst SourceBrowserDynamic = React.memo(\r\n  (props) => <BrowserMenu {...props} />,\r\n  () => true\r\n);\r\n\r\nexport default SourceBrowserDynamic\r\n"],"file":"SourceBrowserDynamic.js"}

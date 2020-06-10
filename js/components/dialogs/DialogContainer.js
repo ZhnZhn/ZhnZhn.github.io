@@ -18,9 +18,7 @@ var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _RouterModalDialog = _interopRequireDefault(require("./RouterModalDialog"));
 
 //import PropTypes from "prop-types";
-var DialogContainer =
-/*#__PURE__*/
-function (_Component) {
+var DialogContainer = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogContainer, _Component);
 
   function DialogContainer() {
@@ -90,7 +88,7 @@ function (_Component) {
       return dialogs.map(function (dialog) {
         var type = dialog.type,
             comp = dialog.comp;
-        return _react["default"].createElement(comp, {
+        return /*#__PURE__*/_react["default"].createElement(comp, {
           key: type,
           isShow: shows[type],
           data: data[type],
@@ -117,7 +115,7 @@ function (_Component) {
     var _this$state2 = this.state,
         isShow = _this$state2.isShow,
         currentDialog = _this$state2.currentDialog;
-    return _react["default"].createElement(_ModalDialogContainer["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialogContainer["default"], {
       isShow: isShow,
       onClose: this._handleClose.bind(null, currentDialog)
     }, this._renderDialogs());

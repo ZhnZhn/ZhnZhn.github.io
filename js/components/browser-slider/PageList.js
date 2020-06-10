@@ -11,7 +11,7 @@ var PageList = function PageList(_ref) {
   var pages = _ref.pages,
       pageCurrent = _ref.pageCurrent;
   return pages.map(function (page, index) {
-    return _react["default"].cloneElement(page, {
+    return /*#__PURE__*/_react["default"].cloneElement(page, {
       pageCurrent: pageCurrent,
       pageNumber: index + 1
     });

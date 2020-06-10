@@ -30,9 +30,7 @@ var S = {
   }
 };
 
-var PaneApiKey =
-/*#__PURE__*/
-function (_Component) {
+var PaneApiKey = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(PaneApiKey, _Component);
 
   /*
@@ -124,21 +122,21 @@ function (_Component) {
       return null;
     }
 
-    return _react["default"].createElement("div", null, _react["default"].createElement(_RowSecret["default"], {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
       ref: this._ref1,
       titleStyle: titleStyle,
       title: "Alpha:",
       name: "alpha-vantage",
       placeholder: "Alpha Vantage API Key",
       onEnter: this._setKey1
-    }), _react["default"].createElement(_RowSecret["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
       ref: this._ref2,
       titleStyle: titleStyle,
       title: "Barchar:",
       name: "barchart",
       placeholder: "Barchar API Key",
       onEnter: this._setKey2
-    }), _react["default"].createElement(_RowSecret["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
       ref: this._ref3,
       titleStyle: titleStyle,
       title: "BEA:",
@@ -146,7 +144,7 @@ function (_Component) {
       placeholder: "BEA API Key",
       maxLength: "36",
       onEnter: this._setKey3
-    }), _react["default"].createElement(_RowSecret["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
       ref: this._ref4,
       titleStyle: titleStyle,
       title: "EIA:",
@@ -154,7 +152,7 @@ function (_Component) {
       placeholder: "EIA API Key",
       maxLength: "32",
       onEnter: this._setKey4
-    }), _react["default"].createElement(_RowSecret["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
       ref: this._ref5,
       titleStyle: titleStyle,
       title: "FMP:",
@@ -162,7 +160,7 @@ function (_Component) {
       placeholder: "Financial Modeling Prep API Key",
       maxLength: "32",
       onEnter: this._setKey5
-    }), _react["default"].createElement(_RowSecret["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
       ref: this._ref6,
       titleStyle: titleStyle,
       title: "IEX:",
@@ -170,7 +168,7 @@ function (_Component) {
       placeholder: "IEX Cloud API Key",
       maxLength: "35",
       onEnter: this._setKey6
-    }), _react["default"].createElement(_RowSecret["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
       ref: this._ref7,
       titleStyle: titleStyle,
       title: "Intrinio:",
@@ -178,22 +176,22 @@ function (_Component) {
       placeholder: "Intrinio API Key",
       maxLength: "32",
       onEnter: this._setKey7
-    }), _react["default"].createElement(_RowSecret["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
       ref: this._ref8,
       titleStyle: titleStyle,
       title: "Quandl:",
       name: "quandl",
       placeholder: "Quandl API Key",
       onEnter: this._setKey8
-    }), _react["default"].createElement(_RowButtons["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_RowButtons["default"], {
       btStyle: btStyle,
       onClose: onClose
-    }, _react["default"].createElement(_FlatButton["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
       style: btStyle,
       caption: "CLEAR ALL",
       onClick: this._hClearAll
-    }), _react["default"].createElement(_FlatButton["default"], {
-      style: (0, _extends2["default"])({}, btStyle, {}, S.BT_SET),
+    }), /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
+      style: (0, _extends2["default"])({}, btStyle, S.BT_SET),
       caption: "SET ALL",
       onClick: this._hSetAll
     })));

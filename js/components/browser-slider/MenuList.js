@@ -9,13 +9,13 @@ var _react = _interopRequireDefault(require("react"));
 
 var _MenuItem = _interopRequireDefault(require("./MenuItem"));
 
-var MenuList = _react["default"].memo(function (_ref) {
+var MenuList = /*#__PURE__*/_react["default"].memo(function (_ref) {
   var refFirstItem = _ref.refFirstItem,
       _ref$model = _ref.model,
       model = _ref$model === void 0 ? [] : _ref$model,
       fOnClickItem = _ref.fOnClickItem;
-  return _react["default"].createElement("div", null, model.map(function (item, index) {
-    return _react["default"].createElement(_MenuItem["default"], {
+  return /*#__PURE__*/_react["default"].createElement("div", null, model.map(function (item, index) {
+    return /*#__PURE__*/_react["default"].createElement(_MenuItem["default"], {
       innerRef: index === 0 ? refFirstItem : void 0,
       key: item.id,
       item: item,

@@ -63,7 +63,7 @@ var createLoadOptions = function createLoadOptions(props, options) {
       _items = _toIds(dfProps, items),
       _itemKey = crItemKey(_items, seriaType, time);
 
-  return (0, _extends2["default"])({}, dfProps, {}, dialogOptions, {
+  return (0, _extends2["default"])({}, dfProps, dialogOptions, {
     _itemKey: _itemKey,
     itemCaption: itemCaption,
     loadId: loadId,

@@ -48,10 +48,10 @@ var Tab = function Tab(_ref) {
   var TS = (0, _useTheme["default"])(TH_ID),
       _selectedStyle = isSelected ? S.SELECTED : null;
 
-  return _react["default"].createElement("li", {
-    style: (0, _extends2["default"])({}, S.LI, {}, TS.BG, {}, _selectedStyle),
+  return /*#__PURE__*/_react["default"].createElement("li", {
+    style: (0, _extends2["default"])({}, S.LI, TS.BG, _selectedStyle),
     onClick: onClick
-  }, _react["default"].createElement("span", null, title));
+  }, /*#__PURE__*/_react["default"].createElement("span", null, title));
 };
 /*
 Tab.propTypes = {

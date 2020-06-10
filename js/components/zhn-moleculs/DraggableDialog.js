@@ -62,9 +62,7 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var DraggableDialog =
-/*#__PURE__*/
-function (_Component) {
+var DraggableDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DraggableDialog, _Component);
 
   function DraggableDialog() {
@@ -103,7 +101,7 @@ function (_Component) {
     };
 
     _this._renderMenuMore = function (menuModel, isMore, TS) {
-      return menuModel && _react["default"].createElement(_ModalSlider["default"], {
+      return menuModel && /*#__PURE__*/_react["default"].createElement(_ModalSlider["default"], {
         isShow: isMore,
         className: CL.MENU_MORE,
         style: TS.EL_BORDER,
@@ -113,7 +111,7 @@ function (_Component) {
     };
 
     _this._renderBtMore = function (menuModel) {
-      return menuModel && _react["default"].createElement(_SvgMore["default"], {
+      return menuModel && /*#__PURE__*/_react["default"].createElement(_SvgMore["default"], {
         btRef: _this._refBtMore,
         style: S.BT_MORE,
         svgStyle: S.BT_MORE_SVG,
@@ -122,9 +120,9 @@ function (_Component) {
     };
 
     _this._renderCommandButton = function (commandButtons, onShowChart, onClose) {
-      return _react["default"].createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         style: S.COMMAND_DIV
-      }, commandButtons, _isFn(onShowChart) && _react["default"].createElement(_FlatButton["default"], {
+      }, commandButtons, _isFn(onShowChart) && /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
         key: "show",
         timeout: 0,
         style: S.BT,
@@ -132,7 +130,7 @@ function (_Component) {
         title: "Show Item Container" //accessKey="s"
         ,
         onClick: onShowChart
-      }), _react["default"].createElement(_FlatButton["default"], {
+      }), /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
         key: "close",
         timeout: 0,
         style: S.BT,
@@ -189,6 +187,8 @@ function (_Component) {
         _className = CL.ROOT + " " + _classShow;
 
     return (
+      /*#__PURE__*/
+
       /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
       _react["default"].createElement("div", {
         ref: this._refRootDiv,
@@ -197,17 +197,17 @@ function (_Component) {
         "aria-label": caption,
         "aria-hidden": !isShow,
         className: _className,
-        style: (0, _extends2["default"])({}, S.ROOT_DIV, {}, S.ROOT_DIV_DRAG, {}, _styleShow, {}, TS.ROOT, {}, TS.EL_BORDER),
+        style: (0, _extends2["default"])({}, S.ROOT_DIV, S.ROOT_DIV_DRAG, _styleShow, TS.ROOT, TS.EL_BORDER),
         onClick: onFront,
         onKeyDown: this._hKeyDown
-      }, _react["default"].createElement("div", {
-        style: (0, _extends2["default"])({}, S.CAPTION_DIV, {}, TS.EL)
-      }, this._renderBtMore(menuModel), this._renderMenuMore(menuModel, isMore, TS), _react["default"].createElement("span", {
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        style: (0, _extends2["default"])({}, S.CAPTION_DIV, TS.EL)
+      }, this._renderBtMore(menuModel), this._renderMenuMore(menuModel, isMore, TS), /*#__PURE__*/_react["default"].createElement("span", {
         className: CL.NOT_SELECTED
-      }, caption), _react["default"].createElement(_SvgClose["default"], {
+      }, caption), /*#__PURE__*/_react["default"].createElement(_SvgClose["default"], {
         style: S.SVG_CLOSE,
         onClose: this._hClose
-      })), _react["default"].createElement("div", {
+      })), /*#__PURE__*/_react["default"].createElement("div", {
         style: S.CHILDREN_DIV
       }, children), this._renderCommandButton(commandButtons, onShowChart, this._hClose))
     );

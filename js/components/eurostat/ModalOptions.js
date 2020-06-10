@@ -26,17 +26,17 @@ var ModalOptions = function ModalOptions(_ref) {
   var _toggleZoomMinMax = toggleOption.bind(null, 'isNotZoomToMinMax'),
       _toggleFilterZero = toggleOption.bind(null, 'isFilterZero');
 
-  return _react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
     isShow: isShow,
-    style: (0, _extends2["default"])({}, _Modal["default"].ROOT, {}, style),
+    style: (0, _extends2["default"])({}, _Modal["default"].ROOT, style),
     className: className,
     onClose: onClose
-  }, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     initValue: false,
     rootStyle: _Modal["default"].ROW_CB,
     caption: "Not Zoom to Min-Max",
     onToggle: _toggleZoomMinMax
-  }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     initValue: false,
     rootStyle: _Modal["default"].ROW_CB,
     caption: "Filter Trim Zero Values",

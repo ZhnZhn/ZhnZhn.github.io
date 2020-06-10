@@ -17,7 +17,7 @@ var _WithLogicItem = _interopRequireDefault(require("./WithLogicItem"));
 
 var _WithLogicDnD = _interopRequireDefault(require("./WithLogicDnD"));
 
-var Logic = (0, _extends2["default"])({}, _WithLogicGroup["default"], {}, _WithLogicList["default"], {}, _WithLogicItem["default"], {}, _WithLogicDnD["default"], {
+var Logic = (0, _extends2["default"])({}, _WithLogicGroup["default"], _WithLogicList["default"], _WithLogicItem["default"], _WithLogicDnD["default"], {
   findGroup: _LogicFn["default"].findGroup
 });
 var _default = Logic;

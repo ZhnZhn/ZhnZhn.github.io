@@ -20,7 +20,7 @@ var SparklinesReferenceLine = function SparklinesReferenceLine(props) {
     return p.y;
   }),
       y = type === 'custom' ? value : _index.hm[type](ypoints);
-  return _react["default"].createElement("line", {
+  return /*#__PURE__*/_react["default"].createElement("line", {
     x1: points[0].x,
     y1: y + margin,
     x2: points[points.length - 1].x,

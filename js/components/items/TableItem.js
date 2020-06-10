@@ -44,9 +44,7 @@ var S = {
   }
 };
 
-var TableItem =
-/*#__PURE__*/
-function (_Component) {
+var TableItem = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(TableItem, _Component);
 
   function TableItem() {
@@ -89,26 +87,26 @@ function (_Component) {
         _gridId = "tb_" + id,
         isOpen = this.state.isOpen;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
-    }, _react["default"].createElement(_ItemHeader["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ItemHeader["default"], {
       isOpen: isOpen,
       rootStyle: S.ROOT_HEADER,
       caption: title,
       captionStyle: S.CAPTION,
       onClick: this._hToggle,
       onClose: onCloseItem
-    }), _react["default"].createElement(_ShowHide["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isOpen,
       style: S.SHOW_HIDE
-    }, _react["default"].createElement(_Table["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_Table["default"], {
       gridId: _gridId,
       thMoreStyle: thMoreStyle,
       headers: headers,
       rows: rows,
       tableFn: tableFn
-    }), dataSource && _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.DATA_SOURCE, {}, dsStyle)
+    }), dataSource && /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.DATA_SOURCE, dsStyle)
     }, dataSource)));
   };
 

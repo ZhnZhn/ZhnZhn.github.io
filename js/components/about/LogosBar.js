@@ -47,7 +47,7 @@ var Logo = function Logo(_ref) {
       title = _ref.title,
       caption = _ref.caption,
       rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["className", "title", "caption"]);
-  return _react["default"].createElement("a", (0, _extends2["default"])({
+  return /*#__PURE__*/_react["default"].createElement("a", (0, _extends2["default"])({
     className: className,
     title: title || caption
   }, rest), caption);
@@ -56,20 +56,20 @@ var Logo = function Logo(_ref) {
 var LogosBar = function LogosBar() {
   var theme = (0, _react.useContext)(_ThemeContext["default"]),
       TS = theme.getStyle(TH_ID);
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: CL.ROOT,
     style: TS.ROOT
-  }, _react["default"].createElement(_LogoQuandl["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_LogoQuandl["default"], {
     className: CL.LI
-  }), _react["default"].createElement(_LogoGitHub["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_LogoGitHub["default"], {
     className: CL.LI,
     href: "https://github.com/ZhnZhn/ZhnZhn.github.io"
-  }), _react["default"].createElement(_LogoReact["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_LogoReact["default"], {
     className: CL.LI
-  }), _react["default"].createElement(_LogoHighcharts["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_LogoHighcharts["default"], {
     className: CL.LI
   }), LOGO_CONFS.map(function (config) {
-    return _react["default"].createElement(Logo, (0, _extends2["default"])({
+    return /*#__PURE__*/_react["default"].createElement(Logo, (0, _extends2["default"])({
       key: config.caption
     }, config));
   }));

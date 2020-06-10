@@ -33,7 +33,7 @@ var _fnRenderApp = function _fnRenderApp() {
     document.body.removeChild(document.getElementById('preloader'));
   }
 
-  (0, _reactDom.render)(_react["default"].createElement(_AppErc["default"], null), document.getElementById('app'));
+  (0, _reactDom.render)( /*#__PURE__*/_react["default"].createElement(_AppErc["default"], null), document.getElementById('app'));
 };
 
 var _fnLoading = function _fnLoading() {

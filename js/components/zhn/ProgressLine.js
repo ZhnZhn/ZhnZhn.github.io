@@ -26,9 +26,7 @@ var _crStyle = function _crStyle(backgroundColor, opacity, width, transition) {
   };
 };
 
-var ProgressLine =
-/*#__PURE__*/
-function (_Component) {
+var ProgressLine = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ProgressLine, _Component);
 
   function ProgressLine(props) {
@@ -97,7 +95,7 @@ function (_Component) {
       _style = _crStyle(color, 1, completed + '%', T.WIDTH);
     }
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       className: CL,
       style: _style
     });

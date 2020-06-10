@@ -52,7 +52,7 @@ var _crZhConfig = function _crZhConfig(id, data, option) {
     linkFn: linkFn,
     itemConf: (0, _extends2["default"])({
       _itemKey: value
-    }, crItemConf(option), {}, crValueConf(data), {
+    }, crItemConf(option), crValueConf(data), {
       value: value,
       dataSource: dataSource,
       dfT: dfT,

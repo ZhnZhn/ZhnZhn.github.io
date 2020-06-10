@@ -23,9 +23,9 @@ var RowButtons = function RowButtons(_ref) {
   var children = _ref.children,
       btStyle = _ref.btStyle,
       onClose = _ref.onClose;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.ROW
-  }, children, _react["default"].createElement(_FlatButton["default"], {
+  }, children, /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
     style: btStyle,
     caption: "Close",
     onClick: onClose

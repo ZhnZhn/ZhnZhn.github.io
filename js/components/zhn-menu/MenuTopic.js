@@ -21,12 +21,12 @@ var MenuTopic = function MenuTopic(_ref) {
 
   var _isClose = isInitOpen === true ? false : true;
 
-  return _react["default"].createElement(_OpenClose["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
     rootStyle: style,
     openColor: openColor,
     caption: caption,
     isClose: _isClose
-  }, _react["default"].createElement(_MenuItems["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_MenuItems["default"], {
     items: items
   }));
 };

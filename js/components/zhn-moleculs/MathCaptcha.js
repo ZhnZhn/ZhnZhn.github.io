@@ -45,9 +45,7 @@ var _crRandomNumber = function _crRandomNumber(m, n) {
   return m + Math.floor((n - m + 1) * Math.random());
 };
 
-var MatchCaptcha =
-/*#__PURE__*/
-function (_Component) {
+var MatchCaptcha = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MatchCaptcha, _Component);
 
   /*
@@ -87,15 +85,15 @@ function (_Component) {
         resultSum = _this$state.resultSum,
         _sumStyle = isOk ? S.SUM_OK : S.SUM_NOT_OK;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: rootStyle
-    }, _react["default"].createElement("p", {
+    }, /*#__PURE__*/_react["default"].createElement("p", {
       style: S.MSG
-    }, MSG), _react["default"].createElement("p", {
+    }, MSG), /*#__PURE__*/_react["default"].createElement("p", {
       style: S.P_SUM
-    }, _react["default"].createElement("span", null, this.firstNumber + " + " + this.secondNumber + " = "), _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", null, this.firstNumber + " + " + this.secondNumber + " = "), /*#__PURE__*/_react["default"].createElement("span", {
       style: _sumStyle
-    }, resultSum)), _react["default"].createElement(_InputSlider["default"], {
+    }, resultSum)), /*#__PURE__*/_react["default"].createElement(_InputSlider["default"], {
       onChange: this._hChangeSlider
     }));
   };

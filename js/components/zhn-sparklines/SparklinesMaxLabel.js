@@ -27,7 +27,7 @@ var SparklinesMaxLabel = function SparklinesMaxLabel(props) {
   var _max = (0, _max2["default"])(data),
       _y = fontSize - dy;
 
-  return _react["default"].createElement(_SparklinesLabel["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_SparklinesLabel["default"], {
     title: _max,
     x: 0,
     y: _y,

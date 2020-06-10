@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var SpinnerLoading = function SpinnerLoading(_ref) {
   var style = _ref.style;
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     style: style,
     "data-loader": "circle"
   });

@@ -11,7 +11,7 @@ var _Link = _interopRequireDefault(require("./Link"));
 
 var DfLink = function DfLink(_ref) {
   var item = _ref.item;
-  return _react["default"].createElement(_Link["default"], item);
+  return /*#__PURE__*/_react["default"].createElement(_Link["default"], item);
 };
 
 var _default = DfLink;

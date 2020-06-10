@@ -19,12 +19,12 @@ var S = {
   }
 };
 
-var _loadingEl = _react["default"].createElement("span", {
+var _loadingEl = /*#__PURE__*/_react["default"].createElement("span", {
   className: CL.SPINNER,
   "data-loader": "circle"
 });
 
-var _loadingFailedEl = _react["default"].createElement("span", {
+var _loadingFailedEl = /*#__PURE__*/_react["default"].createElement("span", {
   className: CL.SPINNER_FAILED,
   "data-loader": "circle-failed"
 });
@@ -41,7 +41,7 @@ var ToggleButton = function ToggleButton(_ref) {
   } else if (isLoadingFailed) {
     return _loadingFailedEl;
   } else if (options && options.length > 0) {
-    return _react["default"].createElement(_ArrowCell["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ArrowCell["default"], {
       arrowStyle: isOptions ? S.ARROW_SHOW : null,
       onClick: toggleOptions
     });

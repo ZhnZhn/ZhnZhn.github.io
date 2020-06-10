@@ -30,15 +30,15 @@ var InfoPart = function InfoPart(props) {
     return null;
   }
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: style
-  }, caption && _react["default"].createElement("span", {
+  }, caption && /*#__PURE__*/_react["default"].createElement("span", {
     style: styleCaption
-  }, caption + ":"), isHtml ? _react["default"].createElement(_DivHtml["default"], {
+  }, caption + ":"), isHtml ? /*#__PURE__*/_react["default"].createElement(_DivHtml["default"], {
     className: classText,
-    style: (0, _extends2["default"])({}, styleText, {}, S.INLINE),
+    style: (0, _extends2["default"])({}, styleText, S.INLINE),
     str: text
-  }) : _react["default"].createElement("span", {
+  }) : /*#__PURE__*/_react["default"].createElement("span", {
     className: classText,
     style: styleText
   }, text));

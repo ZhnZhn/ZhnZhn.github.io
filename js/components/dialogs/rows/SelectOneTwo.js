@@ -23,9 +23,7 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var SelectOneTwo = (0, _withLoadOptions["default"])(_class = (_temp = _class2 =
-/*#__PURE__*/
-function (_Component) {
+var SelectOneTwo = (0, _withLoadOptions["default"])(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SelectOneTwo, _Component);
 
   function SelectOneTwo() {
@@ -128,7 +126,7 @@ function (_Component) {
         isLoadingFailed = _this$state.isLoadingFailed,
         oneOptions = _this$state.oneOptions,
         twoOptions = _this$state.twoOptions;
-    return _react["default"].createElement("div", null, _react["default"].createElement(_RowInputSelect["default"], {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_RowInputSelect["default"], {
       isShowLabels: isShowLabels,
       caption: oneCaption,
       options: oneOptions,
@@ -137,9 +135,9 @@ function (_Component) {
       isLoadingFailed: isLoadingFailed,
       onLoadOption: this._loadOptions,
       onSelect: this._hSelectOne
-    }), _react["default"].createElement(_ShowHide["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: !isHideTwo
-    }, _react["default"].createElement(_RowInputSelect["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_RowInputSelect["default"], {
       isShowLabels: isShowLabels,
       caption: twoCaption,
       options: twoOptions,

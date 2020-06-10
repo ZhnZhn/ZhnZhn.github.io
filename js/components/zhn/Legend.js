@@ -54,7 +54,7 @@ var BtMore = function BtMore(_ref) {
   if (_len > C.MORE_MAX) {
     var _caption = isMore ? C.LESS + ': ' + C.MORE_MAX : C.MORE + ': +' + (_len - C.MORE_MAX);
 
-    return _react["default"].createElement("button", {
+    return /*#__PURE__*/_react["default"].createElement("button", {
       style: S.BT_MORE,
       onClick: onClick
     }, _caption);
@@ -63,9 +63,7 @@ var BtMore = function BtMore(_ref) {
   }
 };
 
-var Legend =
-/*#__PURE__*/
-function (_Component) {
+var Legend = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(Legend, _Component);
 
   function Legend() {
@@ -97,7 +95,7 @@ function (_Component) {
         if (isMore || !isMore && i < C.MORE_MAX) {
           var item = legend[i];
 
-          _legend.push(_react["default"].createElement(_LegendItem["default"], {
+          _legend.push( /*#__PURE__*/_react["default"].createElement(_LegendItem["default"], {
             key: item.name,
             item: item,
             onClickItem: onClickItem
@@ -128,14 +126,14 @@ function (_Component) {
         legend = _this$props.legend,
         onClickItem = _this$props.onClickItem,
         isMore = this.state.isMore,
-        _rootStyle = isMore ? S.ROOT_MORE : (0, _extends2["default"])({}, S.ROOT_MORE, {}, S.ROOT_LESS);
+        _rootStyle = isMore ? S.ROOT_MORE : (0, _extends2["default"])({}, S.ROOT_MORE, S.ROOT_LESS);
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       className: C.CL_SCROLL,
       style: _rootStyle
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.DIV
-    }, this._renderLegend(legend, isMore, onClickItem), _react["default"].createElement(BtMore, {
+    }, this._renderLegend(legend, isMore, onClickItem), /*#__PURE__*/_react["default"].createElement(BtMore, {
       isMore: isMore,
       legend: legend,
       onClick: this._handleMore

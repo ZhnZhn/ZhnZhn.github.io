@@ -21,11 +21,11 @@ var ButtonCircle2 = function ButtonCircle2(_ref) {
       caption = _ref$caption === void 0 ? '' : _ref$caption,
       onClick = _ref.onClick,
       rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["className", "style", "caption", "onClick"]);
-  return _react["default"].createElement("button", (0, _extends2["default"])({
+  return /*#__PURE__*/_react["default"].createElement("button", (0, _extends2["default"])({
     className: CL + " " + className,
     style: style,
     onClick: onClick
-  }, rest), _react["default"].createElement("div", null, caption));
+  }, rest), /*#__PURE__*/_react["default"].createElement("div", null, caption));
 };
 
 var _default = ButtonCircle2;

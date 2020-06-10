@@ -30,14 +30,14 @@ var SparklinesBars = function SparklinesBars(props) {
       strokeWidth = _style$strokeWidth === void 0 ? 0 : _style$strokeWidth,
       _width = barWidth || _crWidth(points);
 
-  return _react["default"].createElement("g", null, points.map(function (p, i) {
+  return /*#__PURE__*/_react["default"].createElement("g", null, points.map(function (p, i) {
     var x = p.x,
         y = p.y,
-        _style = i === pointIndex ? (0, _extends2["default"])({}, style, {}, {
+        _style = i === pointIndex ? (0, _extends2["default"])({}, style, {
       fill: barStrokeColors[(0, _calcDirection["default"])(points, pointIndex)]
     }) : style;
 
-    return _react["default"].createElement("rect", {
+    return /*#__PURE__*/_react["default"].createElement("rect", {
       key: i,
       x: Math.ceil(x - strokeWidth * i),
       y: Math.ceil(y),

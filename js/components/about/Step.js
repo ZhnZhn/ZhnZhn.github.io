@@ -24,7 +24,7 @@ var S = {
 var Step = function Step(_ref) {
   var _ref$step = _ref.step,
       step = _ref$step === void 0 ? '0' : _ref$step;
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     style: S.STEP
   }, step);
 };

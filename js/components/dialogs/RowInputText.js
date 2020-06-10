@@ -40,9 +40,7 @@ var S = {
 };
 var COLLON = ':';
 
-var RowInputText =
-/*#__PURE__*/
-function (_Component) {
+var RowInputText = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(RowInputText, _Component);
 
   function RowInputText() {
@@ -73,16 +71,16 @@ function (_Component) {
         inputStyle = _this$props.inputStyle,
         styleInput = _this$props.styleInput,
         rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["styleRoot", "rootStyle", "captionStyle", "styleCaption", "caption", "inputStyle", "styleInput"]),
-        _rootStyle = rootStyle || (0, _extends2["default"])({}, S.ROOT, {}, styleRoot),
-        _captionStyle = captionStyle || (0, _extends2["default"])({}, S.CAPTION, {}, styleCaption),
-        _inputStyle = inputStyle || (0, _extends2["default"])({}, S.INPUT_TEXT, {}, styleInput),
+        _rootStyle = rootStyle || (0, _extends2["default"])({}, S.ROOT, styleRoot),
+        _captionStyle = captionStyle || (0, _extends2["default"])({}, S.CAPTION, styleCaption),
+        _inputStyle = inputStyle || (0, _extends2["default"])({}, S.INPUT_TEXT, styleInput),
         _caption = caption.indexOf(COLLON) === -1 ? caption + COLLON : caption;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: _rootStyle
-    }, _react["default"].createElement("label", null, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("label", null, /*#__PURE__*/_react["default"].createElement("span", {
       style: _captionStyle
-    }, _caption), _react["default"].createElement(_InputText["default"], (0, _extends2["default"])({
+    }, _caption), /*#__PURE__*/_react["default"].createElement(_InputText["default"], (0, _extends2["default"])({
       ref: this._refInput,
       style: _inputStyle
     }, rest))));

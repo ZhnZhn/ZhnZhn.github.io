@@ -15,9 +15,7 @@ var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
 var _MenuItemList = _interopRequireDefault(require("./MenuItemList"));
 
-var MenuPage =
-/*#__PURE__*/
-function (_Component) {
+var MenuPage = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MenuPage, _Component);
 
   function MenuPage() {
@@ -80,15 +78,15 @@ function (_Component) {
         onPrevPage = _this$props2.onPrevPage,
         onClose = _this$props2.onClose,
         children = _this$props2.children;
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: style
-    }, _react["default"].createElement(_MenuTitle["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_MenuTitle["default"], {
       baseTitleCl: baseTitleCl,
       title: title,
       pageNumber: pageNumber,
       onPrevPage: onPrevPage,
       onReg: this._onRegTitle
-    }), _react["default"].createElement(_MenuItemList["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_MenuItemList["default"], {
       items: items,
       itemCl: itemCl || baseTitleCl,
       pageNumber: pageNumber,

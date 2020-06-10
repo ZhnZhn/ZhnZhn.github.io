@@ -64,9 +64,7 @@ var _crValue = function _crValue(x, y) {
   return (y + " " + mlsToDmy(x)).trim();
 };
 
-var LoadItemDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = _class2 =
-/*#__PURE__*/
-function (_Component) {
+var LoadItemDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(LoadItemDialog, _Component);
 
   /*
@@ -166,7 +164,7 @@ function (_Component) {
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       isValue: isValue
     });
-    _this._commandButtons = [_react["default"].createElement(_DialogCell["default"].Button.Load, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Load, {
       key: "load",
       onClick: _this._handleLoad
     })];
@@ -211,41 +209,41 @@ function (_Component) {
         _style = isShowLabels ? S.DIALOG : S.DIALOG_SHORT,
         _value = _crValue(x, y);
 
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       style: _style,
       isShow: isShow,
       caption: "Load Item",
       commandButtons: this._commandButtons,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: true,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].Row.Text, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
       isShowLabels: isShowLabels,
       styleText: S.ITEM_TEXT,
       caption: "Item:",
       text: caption
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isValue
-    }, _react["default"].createElement(_DialogCell["default"].Row.Text, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
       isShowLabels: isShowLabels,
       styleText: S.ITEM_TEXT,
       caption: "Value:",
       text: _value
-    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,
       initToDate: initToDate,
       onTestDate: onTestDate
-    })), _react["default"].createElement(_DialogCell["default"].Row.Text, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
       isShowLabels: isShowLabels,
       styleText: S.ITEM_TEXT,
       caption: "Source:",
       text: dataSource
-    }), _react["default"].createElement(_ValidationMessages["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ValidationMessages["default"], {
       validationMessages: validationMessages
     }));
   };

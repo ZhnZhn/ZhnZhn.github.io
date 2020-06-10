@@ -40,28 +40,28 @@ var MenuItem = function MenuItem(_ref) {
       onBadgeClick = _ref.onBadgeClick,
       onBadgeClose = _ref.onBadgeClose,
       onClick = _ref.onClick;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: CL_ROW,
     onClick: onClick,
     tabIndex: "0",
     role: "menuitem",
     onKeyDown: _hKeyDown.bind(null, onClick)
-  }, title, counter !== 0 ? _react["default"].createElement(_MenuBadge["default"], {
+  }, title, counter !== 0 ? /*#__PURE__*/_react["default"].createElement(_MenuBadge["default"], {
     counter: counter,
     isOpen: isOpen,
     onClick: onBadgeClick,
     onBadgeClose: onBadgeClose
-  }) : null, isNew ? _react["default"].createElement(_LabelNew["default"], null) : null);
+  }) : null, isNew ? /*#__PURE__*/_react["default"].createElement(_LabelNew["default"], null) : null);
 };
 
 var MenuItems = function MenuItems(_ref2) {
   var items = _ref2.items;
   return items.map(function (item, index) {
-    return _isArr(item.items) ? _react["default"].createElement(_MenuTopic["default"], (0, _extends2["default"])({}, item, {
+    return _isArr(item.items) ? /*#__PURE__*/_react["default"].createElement(_MenuTopic["default"], (0, _extends2["default"])({}, item, {
       key: index,
       style: S.MP_LEVEL_2,
       openColor: S.OPEN_COLOR
-    })) : _react["default"].createElement(MenuItem, (0, _extends2["default"])({}, item, {
+    })) : /*#__PURE__*/_react["default"].createElement(MenuItem, (0, _extends2["default"])({}, item, {
       key: index
     }));
   });

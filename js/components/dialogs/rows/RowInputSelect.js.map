@@ -1,16 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/dialogs/rows/RowInputSelect.js"
- ],
- "file": "../../../../src/components/dialogs/rows/RowInputSelect.js",
- "names": [
-  "RowInputSelect",
-  "props",
-  "rowStyle",
-  "labelStyle",
-  "caption",
-  "options"
- ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,cAAc,GAAG,SAAjBA,cAAiB,CAACC,KAAD,EAAW;AAAA,uBAK5B,gCAAcA,KAAd,CAL4B;AAAA,MAE9BC,QAF8B,kBAE9BA,QAF8B;AAAA,MAEpBC,UAFoB,kBAEpBA,UAFoB;AAAA,MAG9BC,OAH8B,kBAG9BA,OAH8B;AAAA,MAI9BC,OAJ8B,kBAI9BA,OAJ8B;;AAOhC,SACG;AAAK,IAAA,KAAK,EAAEH;AAAZ,KACG;AAAM,IAAA,KAAK,EAAEC;AAAb,KACIC,OADJ,CADH,EAIG,gCAAC,uBAAD,EAAiBC,OAAjB,CAJH,CADH;AAQD,CAfD;;eAkBeL,c"
-}
+{"version":3,"sources":["../../../../src/components/dialogs/rows/RowInputSelect.jsx"],"names":["RowInputSelect","props","rowStyle","labelStyle","caption","options"],"mappings":";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,cAAc,GAAG,SAAjBA,cAAiB,CAACC,KAAD,EAAW;AAAA,uBAK5B,gCAAcA,KAAd,CAL4B;AAAA,MAE9BC,QAF8B,kBAE9BA,QAF8B;AAAA,MAEpBC,UAFoB,kBAEpBA,UAFoB;AAAA,MAG9BC,OAH8B,kBAG9BA,OAH8B;AAAA,MAI9BC,OAJ8B,kBAI9BA,OAJ8B;;AAOhC,sBACG;AAAK,IAAA,KAAK,EAAEH;AAAZ,kBACG;AAAM,IAAA,KAAK,EAAEC;AAAb,KACIC,OADJ,CADH,eAIG,gCAAC,uBAAD,EAAiBC,OAAjB,CAJH,CADH;AAQD,CAfD;;eAkBeL,c","sourcesContent":["import React from 'react';\r\n\r\nimport InputSelect from '../../zhn-select/InputSelect';\r\nimport useRowOptions from './useRowOptions'\r\n\r\nconst RowInputSelect = (props) => {\r\n  const {\r\n    rowStyle, labelStyle,\r\n    caption,\r\n    options\r\n  } = useRowOptions(props);\r\n\r\n  return (\r\n     <div style={rowStyle}>\r\n        <span style={labelStyle}>\r\n           {caption}\r\n        </span>\r\n        <InputSelect {...options} />\r\n    </div>\r\n  );\r\n};\r\n\r\n\r\nexport default RowInputSelect\r\n"],"file":"RowInputSelect.js"}

@@ -98,9 +98,7 @@ var _crItemLabel = function _crItemLabel(html, top, fontSize) {
   };
 };
 
-var CustomizeExportDialog =
-/*#__PURE__*/
-function (_Component) {
+var CustomizeExportDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(CustomizeExportDialog, _Component);
 
   function CustomizeExportDialog(props) {
@@ -149,7 +147,7 @@ function (_Component) {
     };
 
     _this._hExport = function () {
-      var _ref, _chart$userOptions$zh;
+      var _chart$userOptions$zh, _chart$userOptions$zh2;
 
       var _this$props = _this.props,
           data = _this$props.data,
@@ -171,7 +169,7 @@ function (_Component) {
           text: _this.inputSubtitle.getValue()
         },
         labels: {
-          items: [_crItemLabel(C.APP_HTML), _crItemLabel("DataSource: " + ((_ref = (_chart$userOptions$zh = chart.userOptions.zhConfig) == null ? void 0 : _chart$userOptions$zh.dataSource) != null ? _ref : ''), height - C.DS_TOP_PADDING, C.DS_FONT_SIZE)]
+          items: [_crItemLabel(C.APP_HTML), _crItemLabel("DataSource: " + ((_chart$userOptions$zh = (_chart$userOptions$zh2 = chart.userOptions.zhConfig) == null ? void 0 : _chart$userOptions$zh2.dataSource) != null ? _chart$userOptions$zh : ''), height - C.DS_TOP_PADDING, C.DS_FONT_SIZE)]
         }
       }, _this.exportStyle);
 
@@ -207,7 +205,7 @@ function (_Component) {
       onClick: _this._hClickStyle
     }];
     _this.optionStyles = _ChartExportConfig["default"].createOptionStyles();
-    _this._commandButtons = [_react["default"].createElement(_Button["default"].Flat, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       key: "export",
       caption: "Export" //accessKey="x"
       ,
@@ -247,22 +245,22 @@ function (_Component) {
         isShowDimension = _this$state.isShowDimension,
         isShowTitle = _this$state.isShowTitle,
         isShowStyle = _this$state.isShowStyle;
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       caption: "Customize Export Chart",
       isShow: isShow,
       commandButtons: this._commandButtons,
       onClose: onClose
-    }, _react["default"].createElement(_ToolbarButtonCircle["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ToolbarButtonCircle["default"], {
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_ShowHide["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowDimension
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: _DialogStyles["default"].rowDiv
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL
-    }, "Dimension:"), _react["default"].createElement("span", {
+    }, "Dimension:"), /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL_WIDTH
-    }, "Width:"), _react["default"].createElement(_InputText["default"], {
+    }, "Width:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
       ref: this._refInputWidth,
       type: "number",
       placeholder: chartWidth,
@@ -270,9 +268,9 @@ function (_Component) {
       style: S.INPUT_NUMBER,
       min: C.W_MIN,
       max: C.W_MAX
-    }), _react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.LABEL_WIDTH, {}, S.LABEL_HEIGHT)
-    }, "Height:"), _react["default"].createElement(_InputText["default"], {
+    }), /*#__PURE__*/_react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.LABEL_WIDTH, S.LABEL_HEIGHT)
+    }, "Height:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
       ref: this._refInputHeight,
       type: "number",
       placeholder: chartHeight,
@@ -280,31 +278,31 @@ function (_Component) {
       style: S.INPUT_NUMBER,
       min: C.H_MIN,
       max: C.H_MAX
-    }))), _react["default"].createElement(_ShowHide["default"], {
+    }))), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowTitle
-    }, _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, {}, S.GAP_BETWEEN_GROUP)
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, S.GAP_BETWEEN_GROUP)
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL
-    }, "Title:"), _react["default"].createElement(_InputText["default"], {
+    }, "Title:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
       ref: this._refInputTitle,
       initValue: title,
       style: S.INPUT_TEXT
-    })), _react["default"].createElement("div", {
+    })), /*#__PURE__*/_react["default"].createElement("div", {
       style: _DialogStyles["default"].rowDiv
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL
-    }, "Subtitle:"), _react["default"].createElement(_InputText["default"], {
+    }, "Subtitle:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
       ref: this._refInputSubtitle,
       initValue: subtitle,
       style: S.INPUT_TEXT
-    }))), _react["default"].createElement(_ShowHide["default"], {
+    }))), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowStyle
-    }, _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, {}, S.GAP_BETWEEN_GROUP)
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, S.GAP_BETWEEN_GROUP)
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL
-    }, "Style:"), _react["default"].createElement(_InputSelect["default"], {
+    }, "Style:"), /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {
       width: "250",
       options: this.optionStyles,
       placeholder: "Default",

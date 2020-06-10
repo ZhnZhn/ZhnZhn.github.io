@@ -33,7 +33,7 @@ var _crZhConfig = function _crZhConfig(id, option, data) {
     itemCaption: one,
     itemConf: (0, _extends2["default"])({
       _itemKey: id
-    }, crItemConf(option), {}, crValueConf(data), {
+    }, crItemConf(option), crValueConf(data), {
       symbol: one,
       dfPeriod: two,
       dataSource: dataSource

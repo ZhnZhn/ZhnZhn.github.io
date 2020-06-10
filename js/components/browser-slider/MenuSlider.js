@@ -53,9 +53,7 @@ var _getTranslateX = function _getTranslateX(node) {
   return parseInt(_prevStr, 10);
 };
 
-var MenuSlider =
-/*#__PURE__*/
-function (_Component) {
+var MenuSlider = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MenuSlider, _Component);
 
   function MenuSlider(props) {
@@ -105,7 +103,7 @@ function (_Component) {
       var _this$props2 = _this.props,
           dfProps = _this$props2.dfProps,
           store = _this$props2.store;
-      pages.push(_react["default"].createElement(_Frame["default"], {
+      pages.push( /*#__PURE__*/_react["default"].createElement(_Frame["default"], {
         key: id,
         id: id,
         style: S.PAGE,
@@ -187,7 +185,7 @@ function (_Component) {
     _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this._direction = 0;
-    _this._refFirstItem = _react["default"].createRef();
+    _this._refFirstItem = /*#__PURE__*/_react["default"].createRef();
 
     _this._fOnClickItem = function (_ref3) {
       var id = _ref3.id,
@@ -217,22 +215,22 @@ function (_Component) {
         pageCurrent = _this$state.pageCurrent;
 
     var _transform = this._crTransform(),
-        _pagesStyle = (0, _extends2["default"])({}, S.PAGES, {}, _transform);
+        _pagesStyle = (0, _extends2["default"])({}, S.PAGES, _transform);
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       ref: this._refMenu,
       style: _pagesStyle
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.PAGE
-    }, _react["default"].createElement(_MenuList["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_MenuList["default"], {
       refFirstItem: this._refFirstItem,
       model: model,
       fOnClickItem: this._fOnClickItem
-    }), _react["default"].createElement(_ErrMsg["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ErrMsg["default"], {
       errMsg: errMsg
-    })), _react["default"].createElement(_PageList["default"], {
+    })), /*#__PURE__*/_react["default"].createElement(_PageList["default"], {
       pages: pages,
       pageCurrent: pageCurrent
     })));

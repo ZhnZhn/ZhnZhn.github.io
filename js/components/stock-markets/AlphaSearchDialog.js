@@ -29,9 +29,7 @@ var C = {
   ERR_DESCR: 'API key from Alpha Vantage is required',
   ERR_CAPTION: "Without API Key"
 };
-var AlphaIntradayDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var AlphaIntradayDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AlphaIntradayDialog, _Component);
 
   function AlphaIntradayDialog(props) {
@@ -95,16 +93,16 @@ function (_Component) {
         _this$state = this.state,
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].RowInputSearch, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSearch, {
       isShowLabels: isShowLabels,
       caption: "Token",
       searchApi: this._searchApi

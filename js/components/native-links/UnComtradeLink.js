@@ -11,7 +11,7 @@ var _Link = _interopRequireDefault(require("./Link"));
 
 var UnComtradeLink = function UnComtradeLink(_ref) {
   var item = _ref.item;
-  return _react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     href: item,
     caption: "UN Comtrade Link"
   });

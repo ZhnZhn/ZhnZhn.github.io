@@ -55,9 +55,7 @@ var S = {
   }
 };
 
-var AskDialog =
-/*#__PURE__*/
-function (_Component) {
+var AskDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AskDialog, _Component);
 
   /*
@@ -77,12 +75,12 @@ function (_Component) {
 
     _this = _Component.call(this) || this;
     _this._handleLoad = _this._handleLoad.bind((0, _assertThisInitialized2["default"])(_this));
-    _this._commandButtons = [_react["default"].createElement(_Button["default"].Flat, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       caption: "Yes, Load" //accessKey="s"
       ,
       isPrimary: true,
       onClick: _this._handleLoad
-    }), _react["default"].createElement(_Button["default"].Flat, {
+    }), /*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       caption: "No, Close" //accessKey="c"
       ,
       onClick: props.onClose
@@ -127,20 +125,20 @@ function (_Component) {
         options = _data$options2 === void 0 ? {} : _data$options2,
         _options$name = options.name,
         name = _options$name === void 0 ? '' : _options$name;
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       style: S.MODAL,
       caption: "Confirm Load",
       isShow: isShow,
       commandButtons: this._commandButtons,
       withoutClose: true,
       onClose: onClose
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT_DIV
-    }, _react["default"].createElement("p", {
+    }, /*#__PURE__*/_react["default"].createElement("p", {
       style: S.DESCR
-    }, MSG_PREFIX, _react["default"].createElement("span", {
+    }, MSG_PREFIX, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.NAME
-    }, name), MSG_SUFFIX), _react["default"].createElement(_MathCaptcha["default"], {
+    }, name), MSG_SUFFIX), /*#__PURE__*/_react["default"].createElement(_MathCaptcha["default"], {
       ref: function ref(c) {
         return _this2.captchaComp = c;
       },

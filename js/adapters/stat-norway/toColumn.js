@@ -122,7 +122,7 @@ var toColumn = {
     }
 
     return function (json, option) {
-      return toColumn.crConfig(json, (0, _extends2["default"])({}, option, {}, param, {}, _crCategory(option, config.by)));
+      return toColumn.crConfig(json, (0, _extends2["default"])({}, option, param, _crCategory(option, config.by)));
     };
   },
   crConfig: function crConfig(json, option) {
@@ -141,7 +141,7 @@ var toColumn = {
         Tid = crTid(time, _ds),
         _values = _ds.Data((0, _extends2["default"])({
       Tid: Tid
-    }, itemSlice, {}, dfTSlice)),
+    }, itemSlice, dfTSlice)),
         _title = crTitle(option),
         _twoC = (items[1] || {}).caption || '',
         _subtitle = _twoC + ": " + Tid,

@@ -69,9 +69,9 @@ var BtTabInfo = function BtTabInfo(_ref) {
     return null;
   }
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.TAB_DIV
-  }, _react["default"].createElement(_Comp["default"].ButtonTab, {
+  }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].ButtonTab, {
     caption: "Info",
     onClick: onClick
   }));
@@ -81,9 +81,7 @@ var _crMapId = function _crMapId(caption) {
   return "map_" + caption;
 };
 
-var MapChartItem =
-/*#__PURE__*/
-function (_Component) {
+var MapChartItem = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MapChartItem, _Component);
 
   function MapChartItem() {
@@ -177,26 +175,26 @@ function (_Component) {
         time = _this$state.time,
         _styleMap = isShowInfo ? S.NONE : S.BLOCK;
 
-    return _react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT_DIV
-    }, _react["default"].createElement(_ItemHeader["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ItemHeader["default"], {
       isOpen: isOpen,
       caption: itemCaption,
       onClick: this._hToggle,
       onClose: onCloseItem
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.TIME
-    }, time)), _react["default"].createElement(_Comp["default"].ShowHide, {
+    }, time)), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ShowHide, {
       isShow: isOpen
-    }, _react["default"].createElement(BtTabInfo, {
+    }, /*#__PURE__*/_react["default"].createElement(BtTabInfo, {
       isShow: !isShowInfo,
       onClick: this._hClickInfo
-    }), _react["default"].createElement("div", {
+    }), /*#__PURE__*/_react["default"].createElement("div", {
       id: _mapId,
-      style: (0, _extends2["default"])({}, S.MAP_DIV, {}, _styleMap)
-    }, isLoading && _react["default"].createElement(_Comp["default"].SpinnerLoading, {
+      style: (0, _extends2["default"])({}, S.MAP_DIV, _styleMap)
+    }, isLoading && /*#__PURE__*/_react["default"].createElement(_Comp["default"].SpinnerLoading, {
       style: S.SPINNER_LOADING
-    })), _react["default"].createElement(_PanelDataInfo["default"], {
+    })), /*#__PURE__*/_react["default"].createElement(_PanelDataInfo["default"], {
       isShow: isShowInfo,
       info: info,
       onClickChart: this._hClickChart

@@ -42,14 +42,12 @@ var _fClick = function _fClick(_ref) {
 var NextPageArrow = function NextPageArrow(_ref2) {
   var type = _ref2.type;
   if (type !== SUB_MENU) return null;
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     style: S.NEXT_PAGE
   }, ">");
 };
 
-var MenuItemList =
-/*#__PURE__*/
-function (_Component) {
+var MenuItemList = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MenuItemList, _Component);
 
   function MenuItemList() {
@@ -83,13 +81,13 @@ function (_Component) {
         }),
             _onReg = index === 0 ? onReg : void 0;
 
-        return _react["default"].createElement(_MenuAriaItem["default"], {
+        return /*#__PURE__*/_react["default"].createElement(_MenuAriaItem["default"], {
           key: name,
           className: cn || itemCl,
           style: S.ITEM,
           onClick: _onClick,
           onReg: _onReg
-        }, _react["default"].createElement("span", null, name), _react["default"].createElement(NextPageArrow, {
+        }, /*#__PURE__*/_react["default"].createElement("span", null, name), /*#__PURE__*/_react["default"].createElement(NextPageArrow, {
           type: type
         }));
       });
@@ -101,7 +99,7 @@ function (_Component) {
   var _proto = MenuItemList.prototype;
 
   _proto.render = function render() {
-    return _react["default"].createElement(_react.Fragment, null, this._renderItems());
+    return /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, this._renderItems());
   };
 
   return MenuItemList;

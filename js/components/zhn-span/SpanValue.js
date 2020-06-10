@@ -20,8 +20,8 @@ var STYLE = {
 var SpanValue = function SpanValue(_ref) {
   var value = _ref.value,
       style = _ref.style;
-  return _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, STYLE.ROOT, {}, style)
+  return /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, STYLE.ROOT, style)
   }, value);
 };
 

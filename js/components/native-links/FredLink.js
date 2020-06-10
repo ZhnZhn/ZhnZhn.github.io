@@ -24,7 +24,7 @@ var S = {
 };
 
 var Delimeter = function Delimeter() {
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     style: S.DELIMETER
   }, "\xA0");
 };
@@ -35,13 +35,13 @@ var FredLink = function FredLink(_ref) {
   var _item$id = item.id,
       id = _item$id === void 0 ? '' : _item$id,
       article = item.article;
-  return _react["default"].createElement(_react.Fragment, null, _react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     caption: "FRED Search",
     href: C.URL_SEARCH + id
-  }), _react["default"].createElement(Delimeter, null), _react["default"].createElement(_Link["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     caption: "FRED Graph",
     href: C.URL_GRAPH + id
-  }), _react["default"].createElement(Delimeter, null), article && _react["default"].createElement(_Link["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), article && /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     caption: "FRED Article",
     href: article
   }));

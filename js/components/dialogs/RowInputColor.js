@@ -52,9 +52,7 @@ var S = {
   }
 };
 
-var RowInputColor =
-/*#__PURE__*/
-function (_Component) {
+var RowInputColor = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(RowInputColor, _Component);
 
   /*
@@ -133,20 +131,20 @@ function (_Component) {
       backgroundColor: value
     };
 
-    return _react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.ROOT, {}, styleRoot)
-    }, _react["default"].createElement("label", null, _react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.CAPTION, {}, styleCaption)
-    }, _caption), _react["default"].createElement(_InputText["default"], {
-      style: (0, _extends2["default"])({}, S.INPUT_TEXT, {}, styleInput),
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      style: (0, _extends2["default"])({}, S.ROOT, styleRoot)
+    }, /*#__PURE__*/_react["default"].createElement("label", null, /*#__PURE__*/_react["default"].createElement("span", {
+      style: (0, _extends2["default"])({}, S.CAPTION, styleCaption)
+    }, _caption), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
+      style: (0, _extends2["default"])({}, S.INPUT_TEXT, styleInput),
       initValue: value,
       maxLength: 20,
       onEnter: this._hEnter
-    })), _react["default"].createElement(_CellColor["default"], {
-      style: (0, _extends2["default"])({}, S.COLOR, {}, _bgColor),
+    })), /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
+      style: (0, _extends2["default"])({}, S.COLOR, _bgColor),
       onReg: this._hRegCellColor,
       onClick: this._hClickPallete
-    }, _react["default"].createElement(_ModalPalette["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ModalPalette["default"], {
       isShow: isShowPallete,
       model: _Model["default"].palette,
       onClickCell: this._hEnter,

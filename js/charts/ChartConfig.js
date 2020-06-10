@@ -66,7 +66,7 @@ var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data, zhSe
   };
 };
 
-var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], {}, _WithMarkers["default"], {}, _WithPieConfig["default"], {}, _WithStackedAreaConfig["default"], {}, _WithStackedColumnConfig["default"], {}, _WithTreeMapConfig["default"], {
+var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], _WithMarkers["default"], _WithPieConfig["default"], _WithStackedAreaConfig["default"], _WithStackedColumnConfig["default"], _WithTreeMapConfig["default"], {
   init: function init() {
     (0, _highchartsMore["default"])(_highcharts["default"]);
     (0, _treemap["default"])(_highcharts["default"]);

@@ -14,9 +14,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
-var GroupEditPane =
-/*#__PURE__*/
-function (_Component) {
+var GroupEditPane = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(GroupEditPane, _Component);
 
   /*
@@ -109,7 +107,7 @@ function (_Component) {
     };
 
     _this.captionFrom = null;
-    _this._primaryBt = _react["default"].createElement(_Atoms["default"].Button.Primary, {
+    _this._primaryBt = /*#__PURE__*/_react["default"].createElement(_Atoms["default"].Button.Primary, {
       caption: "Edit",
       title: "Edit Group Name",
       onClick: _this._handleRename
@@ -136,16 +134,16 @@ function (_Component) {
         _this$state = this.state,
         groupOptions = _this$state.groupOptions,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement("div", null, _react["default"].createElement(_Atoms["default"].RowInputSelect, {
+    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_Atoms["default"].RowInputSelect, {
       caption: "Group From:",
       options: groupOptions,
       onSelect: this._handleSelectGroup
-    }), _react["default"].createElement(_Atoms["default"].RowInputText, {
+    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].RowInputText, {
       ref: this._refInputText,
       caption: "Group To:"
-    }), _react["default"].createElement(_Atoms["default"].ValidationMessages, {
+    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].ValidationMessages, {
       validationMessages: validationMessages
-    }), _react["default"].createElement(_Atoms["default"].RowButtons, {
+    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].RowButtons, {
       Primary: this._primaryBt,
       onClear: this._handleClear,
       onClose: onClose

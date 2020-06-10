@@ -5,16 +5,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
+var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
 var _rSeries2;
 
-var ymdtToUTC = _AdapterFn["default"].ymdtToUTC,
-    findMinY = _AdapterFn["default"].findMinY;
 var C = {
   TWO_YEARS_DAYS: 501,
   TA: 'Technical Analysis:',
@@ -95,7 +93,7 @@ var _toDataArrs = function _toDataArrs(_ref, arrProp) {
 
   for (i = max; i > -1; i--) {
     _date = dateKeys[i];
-    _x = ymdtToUTC(_date);
+    _x = _AdapterFn["default"].ymdtToUTC(_date);
     _v = value[_date];
 
     for (j = 0; j < _maxProp; j++) {
@@ -110,11 +108,16 @@ var _crSplineSeria = function _crSplineSeria(_ref2, option) {
   var data = _ref2.data,
       ticket = _ref2.ticket,
       valueText = _ref2.valueText;
-  return (0, _ConfigBuilder["default"])().splineSeria((0, _extends2["default"])({
+  return Object.assign(_ChartConfig["default"].fSeries(), {
+    type: 'spline',
+    visible: true,
     data: data,
+    marker: {
+      symbol: 'circle'
+    },
     zhSeriaId: ticket + '_' + valueText,
     zhValueText: valueText
-  }, option)).toSeria();
+  }, option);
 };
 
 var _crSeriaData = function _crSeriaData(json, option) {
@@ -134,7 +137,7 @@ var _crSeriaData = function _crSeriaData(json, option) {
     _date = dateKeys[i];
     _v = parseFloat(value[_date][_indicator]);
 
-    _data.push([ymdtToUTC(_date), _v]);
+    _data.push([_AdapterFn["default"].ymdtToUTC(_date), _v]);
   }
 
   return _data;
@@ -146,10 +149,9 @@ var _crSeria = function _crSeria(json, option) {
       _data = _crSeriaData(json, option);
 
   return _crSplineSeria({
-    valueText: indicator,
-    ticket: ticket,
     data: _data,
-    minY: findMinY
+    valueText: indicator,
+    ticket: ticket
   });
 };
 
@@ -166,12 +168,12 @@ var _crMacdSeries = function _crMacdSeries(json, option) {
     valueText: C.MACD_S,
     ticket: ticket
   }, C.RED),
-      sHist = (0, _ConfigBuilder["default"])().splineSeria({
-    type: 'column',
+      sHist = Object.assign(_ChartConfig["default"].fSeries(), {
     color: C.COLOR_BLUE_A,
     data: _arrs[2],
     zhSeriaId: ticket + '_' + C.MACD_H,
     zhValueText: C.MACD_H,
+    type: 'column',
     visible: false,
     shadow: false,
     borderWidth: 0,
@@ -179,7 +181,7 @@ var _crMacdSeries = function _crMacdSeries(json, option) {
     pointPadding: 0,
     groupPadding: 0,
     turboThreshold: 20000
-  }).toSeria();
+  });
 
   return [sHist, sSignal, sMcad];
 };
@@ -246,14 +248,14 @@ var AlphaAdapter = {
       isNotZoomToMinMax: false
     };
   },
-  isAdd: function isAdd(option) {
-    console.log(_rSeries[option.indicator], !_rSeries[option.indicator], option.indicator);
-    return !_rSeries[option.indicator];
-  },
   toSeries: function toSeries(json, option) {
-    var _crSeries = _rSeries[option.indicator] || _rSeries.DF;
+    var _fnToSeries = _rSeries[option.indicator];
 
-    return _crSeries(json, option);
+    if (_fnToSeries) {
+      return _fnToSeries(json, option);
+    } else {
+      return _rSeries.DF(json, option);
+    }
   }
 };
 var _default = AlphaAdapter;

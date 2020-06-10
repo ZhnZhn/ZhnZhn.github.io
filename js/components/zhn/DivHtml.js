@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _dompurify = _interopRequireDefault(require("dompurify"));
 
-var DivHtml = (0, _react.memo)(function (_ref) {
+var DivHtml = /*#__PURE__*/(0, _react.memo)(function (_ref) {
   var str = _ref.str,
       className = _ref.className,
       style = _ref.style;
@@ -22,7 +22,7 @@ var DivHtml = (0, _react.memo)(function (_ref) {
     return null;
   }
 
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: className,
     style: style,
     dangerouslySetInnerHTML: {

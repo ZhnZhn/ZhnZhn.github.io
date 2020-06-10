@@ -16,7 +16,7 @@ var SvgIcon = function SvgIcon(_ref) {
       size = _ref.size,
       children = _ref.children,
       restProps = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["color", "size", "children"]);
-  return _react["default"].createElement("svg", (0, _extends2["default"])({
+  return /*#__PURE__*/_react["default"].createElement("svg", (0, _extends2["default"])({
     xmlns: "http://www.w3.org/2000/svg",
     width: size,
     height: size,

@@ -32,16 +32,16 @@ var _assignDf = function _assignDf(option) {
   var items = option.items,
       it1 = items[0],
       it2 = items[1],
-      caption = it1.caption,
-      value = it1.value,
+      c = it1.c,
+      value = it1.v,
       s = it1.s,
-      _currency = it2.value,
+      _currency = it2.v,
       _vs = s + "/" + _currency,
       _days = _crDays(option);
 
   _assign(option, {
     itemCaption: _vs,
-    title: caption + " (" + _vs + ")",
+    title: c,
     subtitle: 'Values on 00:00 GMT',
     _currency: _currency,
     _nativeUrl: C.PAGE_URL + "/" + value,

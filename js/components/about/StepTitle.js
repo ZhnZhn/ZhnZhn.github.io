@@ -12,9 +12,9 @@ var _Step = _interopRequireDefault(require("./Step"));
 var StepTitle = function StepTitle(_ref) {
   var step = _ref.step,
       title = _ref.title;
-  return _react["default"].createElement("p", null, _react["default"].createElement(_Step["default"], {
+  return /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement(_Step["default"], {
     step: step
-  }), _react["default"].createElement("span", null, "\xA0", title, "."));
+  }), /*#__PURE__*/_react["default"].createElement("span", null, "\xA0", title, "."));
 };
 
 var _default = StepTitle;

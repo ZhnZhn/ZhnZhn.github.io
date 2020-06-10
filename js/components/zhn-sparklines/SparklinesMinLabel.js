@@ -29,7 +29,7 @@ var SparklinesMinLabel = function SparklinesMinLabel(props) {
   var _min = (0, _min2["default"])(data),
       _y = height - dy;
 
-  return _react["default"].createElement(_SparklinesLabel["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_SparklinesLabel["default"], {
     title: _min,
     x: 0,
     y: _y,

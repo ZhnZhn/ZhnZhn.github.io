@@ -24,7 +24,7 @@ var QuandlLink = function QuandlLink(_ref) {
       dsCode = _ref$dsCode === void 0 ? '' : _ref$dsCode,
       _ref$caption = _ref.caption,
       caption = _ref$caption === void 0 ? C.CAPTION : _ref$caption;
-  return _react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
     style: C.STYLE,
     href: "" + C.ROOT_URI + dbCode + "/" + dsCode,
     caption: caption + " " + dbCode + "/" + dsCode

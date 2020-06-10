@@ -29,16 +29,16 @@ var RowCaptionInput = function RowCaptionInput(_ref) {
       _ref$maxLength = _ref.maxLength,
       maxLength = _ref$maxLength === void 0 ? 3 : _ref$maxLength,
       onAdd = _ref.onAdd;
-  return _react["default"].createElement("div", null, _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
     style: S.CAPTION
-  }, caption), _react["default"].createElement(_A["default"].InputText, {
+  }, caption), /*#__PURE__*/_react["default"].createElement(_A["default"].InputText, {
     ref: forwardRef,
     type: "number",
     style: S.INPUT_TEXT,
     initValue: initValue,
     maxLength: maxLength,
     onEnter: onAdd
-  }), _react["default"].createElement(_A["default"].SvgPlus, {
+  }), /*#__PURE__*/_react["default"].createElement(_A["default"].SvgPlus, {
     onClick: onAdd
   }));
 };

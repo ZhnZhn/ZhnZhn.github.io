@@ -14,9 +14,9 @@ var _ToolbarButtonCircle = _interopRequireDefault(require("./ToolbarButtonCircle
 var Toolbar = function Toolbar(_ref) {
   var isShow = _ref.isShow,
       buttons = _ref.buttons;
-  return _react["default"].createElement(_ShowHide["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
     isShow: isShow
-  }, _react["default"].createElement(_ToolbarButtonCircle["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_ToolbarButtonCircle["default"], {
     buttons: buttons
   }));
 };

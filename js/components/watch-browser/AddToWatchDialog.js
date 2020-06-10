@@ -47,9 +47,7 @@ var S = {
 };
 var SELECT_WIDTH = "216";
 
-var AddToWatchDialog = (0, _withValidationLoad["default"])(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var AddToWatchDialog = (0, _withValidationLoad["default"])(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AddToWatchDialog, _Component);
 
   /*
@@ -160,7 +158,7 @@ function (_Component) {
 
     _this.groupCaption = null;
     _this.listCaption = null;
-    _this._commandButtons = [_react["default"].createElement(_Button["default"].Flat, {
+    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       key: "add",
       caption: "Add",
       title: "Add Item To Watch List",
@@ -226,29 +224,29 @@ function (_Component) {
         groupOptions = _this$state.groupOptions,
         listOptions = _this$state.listOptions,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       style: S.DIALOG,
       caption: "Add To Watch List",
       isShow: isShow,
       commandButtons: this._commandButtons,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Row.Text, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
       styleCaption: S.CAPTION,
       caption: "Item:",
       text: caption
-    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       caption: "Group",
       captionStyle: S.CAPTION,
       width: SELECT_WIDTH,
       options: groupOptions,
       onSelect: this._handleSelectGroup
-    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       caption: "List",
       captionStyle: S.CAPTION,
       width: SELECT_WIDTH,
       onSelect: this._handleSelectList,
       options: listOptions
-    }), _react["default"].createElement(_ValidationMessages["default"], {
+    }), /*#__PURE__*/_react["default"].createElement(_ValidationMessages["default"], {
       validationMessages: validationMessages
     }));
   };

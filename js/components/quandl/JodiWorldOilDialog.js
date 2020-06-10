@@ -46,9 +46,7 @@ var chartOptions = [{
   caption: "Yearly by Month",
   value: "YEARLY"
 }];
-var JodiWorldOilDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var JodiWorldOilDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(JodiWorldOilDialog, _Component);
 
   function JodiWorldOilDialog(props) {
@@ -198,7 +196,7 @@ function (_Component) {
         isShowDate = _this$state.isShowDate,
         isShowOptions = _this$state.isShowOptions,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -206,10 +204,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
@@ -217,7 +215,7 @@ function (_Component) {
       caption: oneCaption,
       optionNames: "Items",
       onSelect: this._hSelectCountry
-    }), _react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
       ref: this._refProductFlow,
       isShow: isShow,
       isShowLabels: isShowLabels,
@@ -226,29 +224,29 @@ function (_Component) {
       oneJsonProp: parentJsonProp,
       twoCaption: childCaption,
       msgOnNotSelected: msgOnNotSelected
-    }), _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Units",
       options: unitOptions,
       onSelect: this._hSelectUnits
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,
       initToDate: initToDate,
       msgOnNotValidFormat: msgOnNotValidFormat,
       onTestDate: onTestDate
-    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowOptions
-    }, _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Chart Type",
       placeholder: "Default: AreaSpline",
       options: chartOptions,
       onSelect: this._hSelectChartType
-    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

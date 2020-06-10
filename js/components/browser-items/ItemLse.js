@@ -44,11 +44,11 @@ var ItemLse = function ItemLse(props) {
       date = _ref.date,
       _cap = cap === 0 ? NA : _formatter.format(cap) + ML;
 
-  return _react["default"].createElement(_Item["default"], props, _react["default"].createElement("div", null, _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement(_Item["default"], props, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
     style: STYLE.CAP
-  }, _cap), _react["default"].createElement("span", {
+  }, _cap), /*#__PURE__*/_react["default"].createElement("span", {
     style: STYLE.DATE
-  }, date), _react["default"].createElement("span", {
+  }, date), /*#__PURE__*/_react["default"].createElement("span", {
     style: STYLE.COUNTRY
   }, c)));
 };

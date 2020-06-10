@@ -36,9 +36,7 @@ var CHART_TYPE_OPTIONS = [{
   caption: 'Scatter: Label Down',
   value: _Type.ChartType.SCATTER_DOWN
 }];
-var DialogType5 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var DialogType5 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogType5, _Component);
 
   function DialogType5(props) {
@@ -175,7 +173,7 @@ function (_Component) {
         isShowDate = _this$state.isShowDate,
         isShowOptions = _this$state.isShowOptions,
         validationMessages = _this$state.validationMessages;
-    return _react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -183,10 +181,10 @@ function (_Component) {
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose
-    }, _react["default"].createElement(_DialogCell["default"].Toolbar, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
       isShow: isToolbar,
       buttons: this.toolbarButtons
-    }), _react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
@@ -194,7 +192,7 @@ function (_Component) {
       caption: oneCaption,
       optionNames: "Items",
       onSelect: this._handleSelectOne
-    }), _react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
       ref: this._refTwoThree,
       isShow: isShow,
       isShowLabels: isShowLabels,
@@ -203,9 +201,9 @@ function (_Component) {
       oneJsonProp: twoJsonProp,
       twoCaption: threeCaption,
       msgOnNotSelected: msgOnNotSelected
-    }), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
-    }, _react["default"].createElement(_DialogCell["default"].DatesFragment, {
+    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
       ref: this._refDates,
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,
@@ -213,19 +211,19 @@ function (_Component) {
       nForecastDate: nForecastDate,
       msgOnNotValidFormat: msgOnNotValidFormat,
       onTestDate: onTestDate
-    })), _react["default"].createElement(_DialogCell["default"].ShowHide, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowOptions
-    }, isChartType && _react["default"].createElement(_DialogCell["default"].RowInputSelect, {
+    }, isChartType && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: "Chart Type:",
       options: CHART_TYPE_OPTIONS,
       onSelect: this._handlerSelectChartType
-    }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
       initValue: false,
       caption: "Add Seria with Second YAxis",
       onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
       onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
-    })), _react["default"].createElement(_DialogCell["default"].ValidationMessages, {
+    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
       validationMessages: validationMessages
     }));
   };

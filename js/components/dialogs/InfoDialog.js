@@ -34,9 +34,7 @@ var S = {
   }
 };
 
-var InfoDialog =
-/*#__PURE__*/
-function (_Component) {
+var InfoDialog = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(InfoDialog, _Component);
 
   function InfoDialog() {
@@ -60,17 +58,17 @@ function (_Component) {
         onClose = _this$props.onClose,
         caption = data.caption,
         descr = data.descr;
-    return _react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
       caption: "Information",
       isShow: isShow,
       onClose: onClose
-    }, _react["default"].createElement("div", {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
       style: _DialogStyles["default"].rowDiv
-    }, _react["default"].createElement("p", {
+    }, /*#__PURE__*/_react["default"].createElement("p", {
       style: S.CAPTION
-    }, caption)), _react["default"].createElement("div", {
+    }, caption)), /*#__PURE__*/_react["default"].createElement("div", {
       style: _DialogStyles["default"].rowDiv
-    }, _react["default"].createElement("p", {
+    }, /*#__PURE__*/_react["default"].createElement("p", {
       style: S.DESCR
     }, descr)));
   };

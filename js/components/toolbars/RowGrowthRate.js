@@ -67,7 +67,7 @@ var InputPlus = function InputPlus(_ref) {
   var initValue = _ref.initValue,
       onChangePeriod = _ref.onChangePeriod,
       onPlus = _ref.onPlus;
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_A["default"].InputText, {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_A["default"].InputText, {
     style: S.PERIOD_INPUT,
     type: "number",
     initValue: initValue,
@@ -76,7 +76,7 @@ var InputPlus = function InputPlus(_ref) {
     maxLength: 3,
     onInputChange: onChangePeriod,
     onEnter: onPlus
-  }), _react["default"].createElement(_A["default"].SvgPlus, {
+  }), /*#__PURE__*/_react["default"].createElement(_A["default"].SvgPlus, {
     style: S.INLINE,
     onClick: onPlus
   }));
@@ -86,10 +86,10 @@ var MinusPeriod = function MinusPeriod(_ref2) {
   var color = _ref2.color,
       period = _ref2.period,
       onMinus = _ref2.onMinus;
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_A["default"].SvgMinus, {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_A["default"].SvgMinus, {
     style: S.INLINE,
     onClick: onMinus
-  }), _react["default"].createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     style: S.fnSpan(color)
   }, period));
 };
@@ -129,47 +129,47 @@ var RowGrowthRate = function RowGrowthRate(_ref3) {
     }, _refPeriod.current);
   };
 
-  return _react["default"].createElement(_A["default"].OpenClose, {
+  return /*#__PURE__*/_react["default"].createElement(_A["default"].OpenClose, {
     isClose: true,
     rootStyle: S.ROOT_OC,
     ocStyle: S.OC,
     caption: "Growth Rate",
     captionStyle: S.CAPTION,
     openColor: OC_COLOR,
-    CompAfter: is ? _react["default"].createElement(MinusPeriod, {
+    CompAfter: is ? /*#__PURE__*/_react["default"].createElement(MinusPeriod, {
       color: _refColor.current,
       period: _refPeriod.current,
       onMinus: onMinus
-    }) : _react["default"].createElement(InputPlus, {
+    }) : /*#__PURE__*/_react["default"].createElement(InputPlus, {
       initValue: _refPeriod.current,
       onChangePeriod: _onChangePeriod,
       onPlus: _onPlus
     })
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     style: S.PL_8
-  }, _react["default"].createElement(_DialogCell["default"].RowInputColor, {
+  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputColor, {
     styleCaption: S.NONE,
     initValue: INITIAL_COLOR,
     onEnter: _onColor
-  }), _react["default"].createElement("div", null, _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+  }), /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     caption: "Column",
-    rootStyle: (0, _extends2["default"])({}, S.INLINE, {}, S.PL_6),
+    rootStyle: (0, _extends2["default"])({}, S.INLINE, S.PL_6),
     captionStyle: S.PL_6,
     checkedColor: OC_COLOR,
     initValue: true,
     onCheck: _onCheckColumn,
     onUnCheck: _onUnCheckColumn
-  }), _react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     caption: "OnTop",
-    rootStyle: (0, _extends2["default"])({}, S.INLINE, {}, S.PL_24),
+    rootStyle: (0, _extends2["default"])({}, S.INLINE, S.PL_24),
     captionStyle: S.PL_6,
     checkedColor: OC_COLOR,
     initValue: false,
     onCheck: _onCheckTop,
     onUnCheck: _onUnCheckTop
-  })), _react["default"].createElement("div", {
+  })), /*#__PURE__*/_react["default"].createElement("div", {
     style: S.TEXT
-  }, "Def: 100*(\u0394y", _react["default"].createElement("sub", null, "t1-t0"), "/y", _react["default"].createElement("sub", null, "t0"), ")")));
+  }, "Def: 100*(\u0394y", /*#__PURE__*/_react["default"].createElement("sub", null, "t1-t0"), "/y", /*#__PURE__*/_react["default"].createElement("sub", null, "t0"), ")")));
 };
 
 var _default = RowGrowthRate;

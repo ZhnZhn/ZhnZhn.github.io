@@ -11,7 +11,7 @@ var AppLabel = function AppLabel(_ref) {
   var className = _ref.className,
       caption = _ref.caption,
       title = _ref.title;
-  return _react["default"].createElement("span", {
+  return /*#__PURE__*/_react["default"].createElement("span", {
     className: className,
     title: title
   }, caption);

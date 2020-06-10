@@ -42,8 +42,8 @@ var S = {
 var Plain = function Plain(_ref) {
   var style = _ref.style,
       children = _ref.children;
-  return _react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, {}, style)
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, style)
   }, children);
 };
 
@@ -59,12 +59,12 @@ var Text = function Text(_ref2) {
 
   var _styleCaption = isShowLabels ? void 0 : S.NONE;
 
-  return _react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.ROOT_DIV, {}, styleRoot)
-  }, _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.LABEL_SPAN, {}, styleCaption, {}, _styleCaption)
-  }, caption), _react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.TEXT, {}, styleText)
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, S.ROOT_DIV, styleRoot)
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, S.LABEL_SPAN, styleCaption, _styleCaption)
+  }, caption), /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, S.TEXT, styleText)
   }, text));
 };
 

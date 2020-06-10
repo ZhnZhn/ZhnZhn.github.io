@@ -10,7 +10,7 @@ var _react = _interopRequireDefault(require("react"));
 var ItemOptionDf = function ItemOptionDf(_ref) {
   var item = _ref.item,
       propCaption = _ref.propCaption;
-  return _react["default"].createElement("span", null, item[propCaption]);
+  return /*#__PURE__*/_react["default"].createElement("span", null, item[propCaption]);
 };
 
 var _default = ItemOptionDf;
