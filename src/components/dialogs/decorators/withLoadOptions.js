@@ -2,6 +2,8 @@
 import Msg from '../../../constants/Msg';
 import CA from '../../../flux/actions/ComponentActions';
 
+import crOptions from './crOptions'
+
 const NETWORK_ERROR = Msg.Alert.NETWORK_ERROR;
 
 const _showMsgErr = function(alertCaption, alertDescr){
@@ -51,31 +53,18 @@ const _loadOptions = function(option){
     })
 }
 
-const _notNullOrUndef = v => v != null;
-
-const _crPropCaption = arr => {
-   if (!Array.isArray(arr) || arr.length === 0) {
-     return;
-   }
-   const _items = arr[0];
-   if (_notNullOrUndef(_items.caption)) {
-     return;
-   }
-   if (_notNullOrUndef(_items.c)) {
-     return 'c'
-   }
-}
-
 const _onLoadOptionsCompleted = function(
    target, { toStateProp, json, optionJsonProp }
  ){
   if (toStateProp && optionJsonProp) {
      if (!json.dfColumns) {
-       const _items = json[optionJsonProp];
+       const {
+         items,
+         propCaption
+       } = crOptions(json, optionJsonProp);
        target.setState({
-         isLoading: false,
-         propCaption: _crPropCaption(_items),
-         [toStateProp]: _items
+         isLoading: false, propCaption,
+         [toStateProp]: items
        });
      } else {
        target._isDfColumns = true

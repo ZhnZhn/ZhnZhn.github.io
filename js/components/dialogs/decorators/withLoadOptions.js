@@ -9,6 +9,8 @@ var _Msg = _interopRequireDefault(require("../../../constants/Msg"));
 
 var _ComponentActions = _interopRequireDefault(require("../../../flux/actions/ComponentActions"));
 
+var _crOptions2 = _interopRequireDefault(require("./crOptions"));
+
 var NETWORK_ERROR = _Msg["default"].Alert.NETWORK_ERROR;
 
 var _showMsgErr = function _showMsgErr(alertCaption, alertDescr) {
@@ -70,26 +72,6 @@ var _loadOptions = function _loadOptions(option) {
   });
 };
 
-var _notNullOrUndef = function _notNullOrUndef(v) {
-  return v != null;
-};
-
-var _crPropCaption = function _crPropCaption(arr) {
-  if (!Array.isArray(arr) || arr.length === 0) {
-    return;
-  }
-
-  var _items = arr[0];
-
-  if (_notNullOrUndef(_items.caption)) {
-    return;
-  }
-
-  if (_notNullOrUndef(_items.c)) {
-    return 'c';
-  }
-};
-
 var _onLoadOptionsCompleted = function _onLoadOptionsCompleted(target, _ref) {
   var toStateProp = _ref.toStateProp,
       json = _ref.json,
@@ -99,11 +81,14 @@ var _onLoadOptionsCompleted = function _onLoadOptionsCompleted(target, _ref) {
     if (!json.dfColumns) {
       var _target$setState;
 
-      var _items = json[optionJsonProp];
+      var _crOptions = (0, _crOptions2["default"])(json, optionJsonProp),
+          items = _crOptions.items,
+          propCaption = _crOptions.propCaption;
+
       target.setState((_target$setState = {
         isLoading: false,
-        propCaption: _crPropCaption(_items)
-      }, _target$setState[toStateProp] = _items, _target$setState));
+        propCaption: propCaption
+      }, _target$setState[toStateProp] = items, _target$setState));
     } else {
       var _target$setState2;
 

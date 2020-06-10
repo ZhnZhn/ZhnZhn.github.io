@@ -10,7 +10,7 @@ var _react = _interopRequireDefault(require("react"));
 var _DialogCell = _interopRequireDefault(require("../DialogCell"));
 
 var _crCommandsWithLoad = function _crCommandsWithLoad(comp) {
-  return [_react["default"].createElement(_DialogCell["default"].Button.Load, {
+  return [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Load, {
     key: "load",
     onClick: comp._handleLoad
   })];
