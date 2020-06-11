@@ -29,6 +29,8 @@ var _InfoPart = _interopRequireDefault(require("./InfoPart"));
 
 var _InputText = _interopRequireDefault(require("./InputText"));
 
+var _ItemList = _interopRequireDefault(require("./ItemList"));
+
 var _Load = _interopRequireDefault(require("./Load"));
 
 var _OpenClose = _interopRequireDefault(require("./OpenClose"));
@@ -66,6 +68,7 @@ var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   DivHtml: _DivHtml["default"],
   InfoPart: _InfoPart["default"],
   InputText: _InputText["default"],
+  ItemList: _ItemList["default"],
   Load: _Load["default"],
   OpenClose: _OpenClose["default"],
   OpenClose2: _OpenClose2["default"],

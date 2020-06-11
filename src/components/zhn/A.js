@@ -10,6 +10,7 @@ import ButtonTab from './ButtonTab'
 import DivHtml from './DivHtml'
 import InfoPart from './InfoPart'
 import InputText from './InputText'
+import ItemList from './ItemList'
 import Load from './Load'
 import OpenClose from './OpenClose'
 import OpenClose2 from './OpenClose2'
@@ -36,6 +37,7 @@ const A = {
   DivHtml,
   InfoPart,
   InputText,
+  ItemList,
   Load,
   OpenClose,
   OpenClose2,
