@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/adapters/coin-paprika/CpAdapter.js"],"names":["_rAdapter","DF","toChartConfig","_getAdapter","option","dfRoute","CpAdapter","isKey"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC;AADY,CAAlB;;AAIA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAACC,MAAD,EAAY;AAAA,MACtBC,OADsB,GACVD,MADU,CACtBC,OADsB;AAE9B,SAAOL,SAAS,CAACK,OAAD,CAAT,IAAsBL,SAAS,CAACC,EAAvC;AACD,CAHD;;AAKA,IAAMK,SAAS,GAAG,2BAAUH,WAAV,EAAuB;AAAEI,EAAAA,KAAK,EAAE;AAAT,CAAvB,CAAlB;eAEeD,S","sourcesContent":["import toChartConfig from './toChartConfig'\r\n\r\nimport crAdapter from '../crAdapter'\r\n\r\nconst _rAdapter = {\r\n  DF: toChartConfig\r\n};\r\n\r\nconst _getAdapter = (option) => {\r\n  const { dfRoute } = option;\r\n  return _rAdapter[dfRoute] || _rAdapter.DF;\r\n};\r\n\r\nconst CpAdapter = crAdapter(_getAdapter, { isKey: true });\r\n\r\nexport default CpAdapter\r\n"],"file":"CpAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-paprika/CpAdapter.js"
+ ],
+ "file": "../../../src/adapters/coin-paprika/CpAdapter.js",
+ "names": [
+  "_rAdapter",
+  "DF",
+  "toChartConfig",
+  "TW",
+  "toTwConfig",
+  "_getAdapter",
+  "option",
+  "dfRoute",
+  "CpAdapter",
+  "isKey"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,yBADY;AAEhBC,EAAAA,EAAE,EAAEC;AAFY,CAAlB;;AAKA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAACC,MAAD,EAAY;AAAA,MACtBC,OADsB,GACVD,MADU,CACtBC,OADsB;AAE9B,SAAOP,SAAS,CAACO,OAAD,CAAT,IAAsBP,SAAS,CAACC,EAAvC;AACD,CAHD;;AAKA,IAAMO,SAAS,GAAG,2BAAUH,WAAV,EAAuB;AAAEI,EAAAA,KAAK,EAAE;AAAT,CAAvB,CAAlB;eAEeD,S"
+}

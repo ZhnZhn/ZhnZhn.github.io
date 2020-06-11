@@ -1,9 +1,11 @@
 import toChartConfig from './toChartConfig'
+import toTwConfig from './toTwConfig'
 
 import crAdapter from '../crAdapter'
 
 const _rAdapter = {
-  DF: toChartConfig
+  DF: toChartConfig,
+  TW: toTwConfig
 };
 
 const _getAdapter = (option) => {
