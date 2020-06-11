@@ -1,0 +1,23 @@
+
+.twit {
+  width: 100%;
+  padding-top: 8px;  
+  padding-bottom: 6px;
+  line-height: 1.5;
+  font-weight: bold;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.6) 1px 4px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.twit > a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  border-bottom: 2px solid transparent;
+}
+
+.twit > a:hover {
+  border-bottom: 2px solid #1b75bb;
+}

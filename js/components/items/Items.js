@@ -17,13 +17,16 @@ var _AlphaPerfItem = _interopRequireDefault(require("./AlphaPerfItem"));
 
 var _FlexTokensItem = _interopRequireDefault(require("./FlexTokensItem"));
 
+var _TwList = _interopRequireDefault(require("./TwList"));
+
 var _default = {
   AreaChart: _ChartItem["default"],
   MapChart: _MapChartItem["default"],
   CoinInfo: _CoinInfoItem["default"],
   Table: _TableItem["default"],
   AlphaPerf: _AlphaPerfItem["default"],
-  FlexTokens: _FlexTokensItem["default"]
+  FlexTokens: _FlexTokensItem["default"],
+  TwList: _TwList["default"]
 };
 exports["default"] = _default;
 //# sourceMappingURL=Items.js.map

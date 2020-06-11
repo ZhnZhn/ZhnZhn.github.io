@@ -99,7 +99,8 @@ var CompItemType = {
   COIN_INFO: 'COIN_INFO',
   TABLE: 'TABLE',
   ALPHA_PERF: 'ALPHA_PERF',
-  FLEX_TOKENS: 'FLEX_TOKENS'
+  FLEX_TOKENS: 'FLEX_TOKENS',
+  TW_LIST: 'TW_LIST'
 };
 exports.CompItemType = CompItemType;
 //# sourceMappingURL=Type.js.map

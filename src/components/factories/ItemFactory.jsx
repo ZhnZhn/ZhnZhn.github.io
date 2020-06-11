@@ -67,7 +67,8 @@ const _rCrItem = {
   [CIT.COIN_INFO]: _fItem(Item.CoinInfo),
   [CIT.TABLE]: _fItem(Item.Table),
   [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf),
-  [CIT.FLEX_TOKENS]: _fItem(Item.FlexTokens)
+  [CIT.FLEX_TOKENS]: _fItem(Item.FlexTokens),
+  [CIT.TW_LIST]: _fItem(Item.TwList)
 };
 
 const ItemFactory = {
