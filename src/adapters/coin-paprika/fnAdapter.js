@@ -5,7 +5,9 @@ const {
   volumeColumnPoint,
   valueMoving,
   crSeria,
-  getValue
+  getValue,
+  joinBy,
+  toUpperCaseFirst
 } = AdapterFn
 
 const _crZhConfig = ({
@@ -26,6 +28,8 @@ const _crInfo = ({ title }) => ({
 const fnAdapter = {
   crSeria,
   getValue,
+  joinBy,
+  toUpperCaseFirst,
 
   crData: (arr) => {
     const data = []

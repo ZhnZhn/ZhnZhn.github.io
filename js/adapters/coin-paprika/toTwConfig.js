@@ -43,7 +43,7 @@ var toTwConfig = {
   crKey: function crKey(option) {
     var _option$items = option.items,
         items = _option$items === void 0 ? [] : _option$items;
-    return option._itemKey = "" + getValue(items[0]);
+    return option._itemKey = getValue(items[0]);
   },
   toConfig: function toConfig(json, option) {
     var _itemKey = option._itemKey,

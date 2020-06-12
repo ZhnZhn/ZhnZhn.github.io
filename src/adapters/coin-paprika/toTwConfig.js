@@ -29,7 +29,7 @@ const _crItems = json => {
 const toTwConfig = {
   crKey(option){
     const { items=[] } = option;
-    return (option._itemKey = `${getValue(items[0])}`);
+    return (option._itemKey = getValue(items[0]));
   },
 
   toConfig(json, option){

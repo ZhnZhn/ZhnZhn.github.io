@@ -11,7 +11,9 @@ var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
     valueMoving = _AdapterFn["default"].valueMoving,
     crSeria = _AdapterFn["default"].crSeria,
-    getValue = _AdapterFn["default"].getValue;
+    getValue = _AdapterFn["default"].getValue,
+    joinBy = _AdapterFn["default"].joinBy,
+    toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
@@ -35,6 +37,8 @@ var _crInfo = function _crInfo(_ref2) {
 var fnAdapter = {
   crSeria: crSeria,
   getValue: getValue,
+  joinBy: joinBy,
+  toUpperCaseFirst: toUpperCaseFirst,
   crData: function crData(arr) {
     var data = [],
         dColumn = [],

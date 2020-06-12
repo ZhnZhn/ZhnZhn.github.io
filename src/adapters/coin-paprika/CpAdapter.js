@@ -1,11 +1,13 @@
 import toChartConfig from './toChartConfig'
 import toTwConfig from './toTwConfig'
+import toCiConfig from './toCiConfig'
 
 import crAdapter from '../crAdapter'
 
 const _rAdapter = {
   DF: toChartConfig,
-  TW: toTwConfig
+  TW: toTwConfig,
+  CI: toCiConfig
 };
 
 const _getAdapter = (option) => {

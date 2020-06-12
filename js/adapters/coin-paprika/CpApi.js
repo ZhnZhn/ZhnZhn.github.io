@@ -14,28 +14,37 @@ var C = {
 };
 var _isArr = Array.isArray;
 
-var _crUrlDf = function _crUrlDf(option) {
-  var _option$items = option.items,
-      items = _option$items === void 0 ? [] : _option$items,
-      fromDate = option.fromDate,
-      value = getValue(items[0], {
+var _getCoinId = function _getCoinId(_ref) {
+  var _ref$items = _ref.items,
+      items = _ref$items === void 0 ? [] : _ref$items;
+  return getValue(items[0], {
     dfValue: C.DF_ID
   });
-  return C.URL + "/coins/" + value + "/ohlcv/historical?start=" + fromDate + "&limit=366";
+};
+
+var _crUrlDf = function _crUrlDf(option) {
+  var fromDate = option.fromDate,
+      _coinId = _getCoinId(option);
+
+  return C.URL + "/coins/" + _coinId + "/ohlcv/historical?start=" + fromDate + "&limit=366";
 };
 
 var _crUrlTw = function _crUrlTw(option) {
-  var _option$items2 = option.items,
-      items = _option$items2 === void 0 ? [] : _option$items2,
-      value = getValue(items[0], {
-    dfValue: C.DF_ID
-  });
-  return C.URL + "/coins/" + value + "/twitter";
+  var _coinId = _getCoinId(option);
+
+  return C.URL + "/coins/" + _coinId + "/twitter";
+};
+
+var _crUrlCi = function _crUrlCi(option) {
+  var _coinId = _getCoinId(option);
+
+  return C.URL + "/coins/" + _coinId;
 };
 
 var _rApi = {
   DF: _crUrlDf,
-  TW: _crUrlTw
+  TW: _crUrlTw,
+  CI: _crUrlCi
 };
 var CpApi = {
   getRequestUrl: function getRequestUrl(option) {
@@ -45,7 +54,8 @@ var CpApi = {
     return option._itemUrl = _crUrl(option);
   },
   checkResponse: function checkResponse(json, option) {
-    return _isArr(json);
+    var dfRoute = option.dfRoute;
+    return _isArr(json) || dfRoute === 'CI' && json;
   }
 };
 var _default = CpApi;

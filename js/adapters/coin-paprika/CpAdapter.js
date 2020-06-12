@@ -9,11 +9,14 @@ var _toChartConfig = _interopRequireDefault(require("./toChartConfig"));
 
 var _toTwConfig = _interopRequireDefault(require("./toTwConfig"));
 
+var _toCiConfig = _interopRequireDefault(require("./toCiConfig"));
+
 var _crAdapter = _interopRequireDefault(require("../crAdapter"));
 
 var _rAdapter = {
   DF: _toChartConfig["default"],
-  TW: _toTwConfig["default"]
+  TW: _toTwConfig["default"],
+  CI: _toCiConfig["default"]
 };
 
 var _getAdapter = function _getAdapter(option) {
