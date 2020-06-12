@@ -97,6 +97,7 @@ class DialogSelectN extends Component {
     this._compSelect = {}
     //this.date = undefined;
 
+    const { isCh, isFd, selectProps } = props;
     this._setFrequencyConfig(
       _getDfFrequencyConfig(props)
     )
@@ -106,8 +107,9 @@ class DialogSelectN extends Component {
       onAbout: this._clickInfoWithToolbar
     })
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true, isOptions: props.isCh, isToggle: true }
-    )
+      props, { noDate: true, isOptions: isCh,
+      isToggle: isFd || selectProps.length > 1
+    })
     this._refFromDate = React.createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
     this._chartOptions = crOptions(props)
@@ -120,7 +122,7 @@ class DialogSelectN extends Component {
       isShowChart: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
-      ..._crIsToggleInit(props.selectProps)
+      ..._crIsToggleInit(selectProps)
       //chartType
     }
   }

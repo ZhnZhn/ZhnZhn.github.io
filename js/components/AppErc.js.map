@@ -1,1 +1,43 @@
-{"version":3,"sources":["../../src/components/AppErc.jsx"],"names":["BUILD_DATE","CL","showSettings","CA","bind","ChartStore","exportSettingFn","AppErc","state","theme","initTheme","_onStore","actionType","themeName","CAT","CHANGE_THEME","setState","setThemeName","componentDidMount","unsubsribe","listen","LocationSearch","load","showReload","componentWillUnmout","render","BAT","INIT_BROWSER_DYNAMIC","SHOW_DIALOG","closeDialog","CHAT","INIT_AND_SHOW_CHART","Component"],"mappings":";;;;;;;;;;;;;AACA;;AAEA;;AACA;;AAEA;;AACA;;AACA;;AAEA;;AACA;;AACA;;AACA;;AACA;;AAEA;;AACA;;AAEA;;AAEA,IAAMA,UAAU,GAAG,YAAnB;AACA,IAAMC,EAAE,GAAG,qBAAX;;AAEA,IAAMC,YAAY,GAAGC,6BAAGD,YAAH,CACnBE,IADmB,CACd,IADc,EACRC,uBAAWC,eAAX,EADQ,CAArB;;IAGMC,M;;;;;;;;;;;UACJC,K,GAAQ;AACNC,MAAAA,KAAK,EAAEC;AADD,K;;UAYRC,Q,GAAW,UAACC,UAAD,EAAaC,SAAb,EAA2B;AACpC,UAAID,UAAU,KAAKE,uCAAIC,YAAvB,EAAqC;AACnC,cAAKC,QAAL,CAAc,gBAAe;AAAA,cAAZP,KAAY,QAAZA,KAAY;AAC3BA,UAAAA,KAAK,CAACQ,YAAN,CAAmBJ,SAAnB;AACA,iBAAO;AACLJ,YAAAA,KAAK,gCAAMA,KAAN;AADA,WAAP;AAGD,SALD;AAMD;AACF,K;;;;;;;SAjBDS,iB,GAAA,6BAAmB;AACjB,SAAKC,UAAL,GAAkBd,uBAAWe,MAAX,CAAkB,KAAKT,QAAvB,CAAlB;;AACAU,+BAAeC,IAAf;;AACA,gCAAWtB,UAAX,EAAuBG,6BAAGoB,UAA1B;AACD,G;;SACDC,mB,GAAA,+BAAqB;AACnB,SAAKL,UAAL;AACD,G;;SAYDM,M,GAAA,kBAAQ;AAAA,QACEhB,KADF,GACY,KAAKD,KADjB,CACEC,KADF;AAEN,wBACE,gCAAC,wBAAD,CAAc,QAAd;AAAuB,MAAA,KAAK,EAAEA;AAA9B,oBACE,gCAAC,qBAAD;AAAW,MAAA,KAAK,EAAEJ,sBAAlB;AAA8B,MAAA,YAAY,EAAEH;AAA5C,MADF,eAEE;AAAK,MAAA,SAAS,EAAED;AAAhB,oBACG,gCAAC,4BAAD;AACG,MAAA,KAAK,EAAEI,sBADV;AAEG,MAAA,iBAAiB,EAAEqB,mCAAIC,oBAF1B;AAGG,MAAA,gBAAgB,EAAEb,uCAAIc,WAHzB;AAIG,MAAA,aAAa,EAAEzB,6BAAG0B;AAJrB,MADH,eAOG,gCAAC,iBAAD;AAAO,MAAA,KAAK,EAAExB,sBAAd;AAA0B,MAAA,UAAU,EAAE;AAAtC,MAPH,eAQG,gCAAC,yBAAD;AACE,MAAA,KAAK,EAAEA,sBADT;AAEE,MAAA,SAAS,EAAEyB,+BAAKC;AAFlB,MARH,CAFF,eAeC,gCAAC,2BAAD;AAAiB,MAAA,KAAK,EAAE1B;AAAxB,MAfD,CADF;AAmBD,G;;;EA7CkB2B,gB;;eAgDNzB,M","sourcesContent":["\r\nimport React, { Component } from 'react';\r\n\r\nimport LocationSearch from '../flux/logic/LocationSearch';\r\nimport ChartStore from '../flux/stores/ChartStore';\r\n\r\nimport CA, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';\r\nimport { BrowserActionTypes as BAT } from '../flux/actions/BrowserActions';\r\nimport { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';\r\n\r\nimport HeaderBar from './header/HeaderBar';\r\nimport BrowserContainer from './browser-container/BrowserContainer';\r\nimport About from './about/About';\r\nimport CompContainer from './zhn-containers/CompContainer';\r\nimport DialogContainer from './dialogs/DialogContainer';\r\n\r\nimport initTheme from './styles/theme'\r\nimport ThemeContext from './hoc/ThemeContext'\r\n\r\nimport checkBuild from './checkBuild'\r\n\r\nconst BUILD_DATE = '04-06-2020';\r\nconst CL = \"component-container\"\r\n\r\nconst showSettings = CA.showSettings\r\n .bind(null, ChartStore.exportSettingFn())\r\n\r\nclass AppErc extends Component {\r\n  state = {\r\n    theme: initTheme\r\n  }\r\n\r\n  componentDidMount(){\r\n    this.unsubsribe = ChartStore.listen(this._onStore)\r\n    LocationSearch.load();\r\n    checkBuild(BUILD_DATE, CA.showReload)\r\n  }\r\n  componentWillUnmout(){\r\n    this.unsubsribe()\r\n  }\r\n  _onStore = (actionType, themeName) => {\r\n    if (actionType === CAT.CHANGE_THEME) {\r\n      this.setState(({ theme }) => {\r\n        theme.setThemeName(themeName)\r\n        return {\r\n          theme: {...theme}\r\n        };\r\n      })\r\n    }\r\n  }\r\n\r\n  render(){\r\n    const { theme } = this.state;\r\n    return (\r\n      <ThemeContext.Provider value={theme}>\r\n        <HeaderBar store={ChartStore} showSettings={showSettings} />\r\n        <div className={CL}>\r\n           <BrowserContainer\r\n              store={ChartStore}\r\n              initBrowserAction={BAT.INIT_BROWSER_DYNAMIC}\r\n              showDialogAction={CAT.SHOW_DIALOG}\r\n              onCloseDialog={CA.closeDialog}\r\n           />\r\n           <About store={ChartStore} isInitShow={true} />\r\n           <CompContainer\r\n             store={ChartStore}\r\n             addAction={CHAT.INIT_AND_SHOW_CHART}\r\n           />\r\n       </div>\r\n       <DialogContainer store={ChartStore} />\r\n     </ThemeContext.Provider>\r\n   );\r\n  }\r\n}\r\n\r\nexport default AppErc\r\n"],"file":"AppErc.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/AppErc.js"
+ ],
+ "file": "../../src/components/AppErc.js",
+ "names": [
+  "BUILD_DATE",
+  "CL",
+  "showSettings",
+  "CA",
+  "bind",
+  "ChartStore",
+  "exportSettingFn",
+  "AppErc",
+  "state",
+  "theme",
+  "initTheme",
+  "_onStore",
+  "actionType",
+  "themeName",
+  "CAT",
+  "CHANGE_THEME",
+  "setState",
+  "setThemeName",
+  "componentDidMount",
+  "unsubsribe",
+  "listen",
+  "LocationSearch",
+  "load",
+  "showReload",
+  "componentWillUnmout",
+  "render",
+  "BAT",
+  "INIT_BROWSER_DYNAMIC",
+  "SHOW_DIALOG",
+  "closeDialog",
+  "CHAT",
+  "INIT_AND_SHOW_CHART",
+  "Component"
+ ],
+ "mappings": ";;;;;;;;;;;;;AACA;;AAEA;;AACA;;AAEA;;AACA;;AACA;;AAEA;;AACA;;AACA;;AACA;;AACA;;AAEA;;AACA;;AAEA;;AAEA,IAAMA,UAAU,GAAG,YAAnB;AACA,IAAMC,EAAE,GAAG,qBAAX;;AAEA,IAAMC,YAAY,GAAGC,6BAAGD,YAAH,CACnBE,IADmB,CACd,IADc,EACRC,uBAAWC,eAAX,EADQ,CAArB;;IAGMC,M;;;;;;;;;;;UACJC,K,GAAQ;AACNC,MAAAA,KAAK,EAAEC;AADD,K;;UAYRC,Q,GAAW,UAACC,UAAD,EAAaC,SAAb,EAA2B;AACpC,UAAID,UAAU,KAAKE,uCAAIC,YAAvB,EAAqC;AACnC,cAAKC,QAAL,CAAc,gBAAe;AAAA,cAAZP,KAAY,QAAZA,KAAY;AAC3BA,UAAAA,KAAK,CAACQ,YAAN,CAAmBJ,SAAnB;AACA,iBAAO;AACLJ,YAAAA,KAAK,gCAAMA,KAAN;AADA,WAAP;AAGD,SALD;AAMD;AACF,K;;;;;;;SAjBDS,iB,GAAA,6BAAmB;AACjB,SAAKC,UAAL,GAAkBd,uBAAWe,MAAX,CAAkB,KAAKT,QAAvB,CAAlB;;AACAU,+BAAeC,IAAf;;AACA,gCAAWtB,UAAX,EAAuBG,6BAAGoB,UAA1B;AACD,G;;SACDC,mB,GAAA,+BAAqB;AACnB,SAAKL,UAAL;AACD,G;;SAYDM,M,GAAA,kBAAQ;AAAA,QACEhB,KADF,GACY,KAAKD,KADjB,CACEC,KADF;AAEN,wBACE,gCAAC,wBAAD,CAAc,QAAd;AAAuB,MAAA,KAAK,EAAEA;AAA9B,oBACE,gCAAC,qBAAD;AAAW,MAAA,KAAK,EAAEJ,sBAAlB;AAA8B,MAAA,YAAY,EAAEH;AAA5C,MADF,eAEE;AAAK,MAAA,SAAS,EAAED;AAAhB,oBACG,gCAAC,4BAAD;AACG,MAAA,KAAK,EAAEI,sBADV;AAEG,MAAA,iBAAiB,EAAEqB,mCAAIC,oBAF1B;AAGG,MAAA,gBAAgB,EAAEb,uCAAIc,WAHzB;AAIG,MAAA,aAAa,EAAEzB,6BAAG0B;AAJrB,MADH,eAOG,gCAAC,iBAAD;AAAO,MAAA,KAAK,EAAExB,sBAAd;AAA0B,MAAA,UAAU,EAAE;AAAtC,MAPH,eAQG,gCAAC,yBAAD;AACE,MAAA,KAAK,EAAEA,sBADT;AAEE,MAAA,SAAS,EAAEyB,+BAAKC;AAFlB,MARH,CAFF,eAeC,gCAAC,2BAAD;AAAiB,MAAA,KAAK,EAAE1B;AAAxB,MAfD,CADF;AAmBD,G;;;EA7CkB2B,gB;;eAgDNzB,M"
+}
