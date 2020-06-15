@@ -87,7 +87,7 @@ var _fItem = function _fItem(Comp) {
 
 var _rCrItem = (_rCrItem2 = {
   DF: _crAreaChart
-}, _rCrItem2[_Type.CompItemType.EUROSTAT_MAP] = _crMapChart, _rCrItem2[_Type.CompItemType.COIN_INFO] = _fItem(_Items["default"].CoinInfo), _rCrItem2[_Type.CompItemType.TABLE] = _fItem(_Items["default"].Table), _rCrItem2[_Type.CompItemType.ALPHA_PERF] = _fItem(_Items["default"].AlphaPerf), _rCrItem2[_Type.CompItemType.FLEX_TOKENS] = _fItem(_Items["default"].FlexTokens), _rCrItem2[_Type.CompItemType.TW_LIST] = _fItem(_Items["default"].TwList), _rCrItem2);
+}, _rCrItem2[_Type.CompItemType.EUROSTAT_MAP] = _crMapChart, _rCrItem2[_Type.CompItemType.COIN_INFO] = _fItem(_Items["default"].CoinInfo), _rCrItem2[_Type.CompItemType.TABLE] = _fItem(_Items["default"].Table), _rCrItem2[_Type.CompItemType.ALPHA_PERF] = _fItem(_Items["default"].AlphaPerf), _rCrItem2[_Type.CompItemType.INFO_ITEM] = _fItem(_Items["default"].InfoItem), _rCrItem2[_Type.CompItemType.TW_LIST] = _fItem(_Items["default"].TwList), _rCrItem2);
 
 var ItemFactory = {
   /* { store, config, index, option, props } */

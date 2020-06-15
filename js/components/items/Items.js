@@ -15,7 +15,7 @@ var _TableItem = _interopRequireDefault(require("./TableItem"));
 
 var _AlphaPerfItem = _interopRequireDefault(require("./AlphaPerfItem"));
 
-var _FlexTokensItem = _interopRequireDefault(require("./FlexTokensItem"));
+var _InfoItem = _interopRequireDefault(require("./InfoItem"));
 
 var _TwList = _interopRequireDefault(require("./TwList"));
 
@@ -25,7 +25,7 @@ var _default = {
   CoinInfo: _CoinInfoItem["default"],
   Table: _TableItem["default"],
   AlphaPerf: _AlphaPerfItem["default"],
-  FlexTokens: _FlexTokensItem["default"],
+  InfoItem: _InfoItem["default"],
   TwList: _TwList["default"]
 };
 exports["default"] = _default;

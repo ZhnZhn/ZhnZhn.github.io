@@ -35,7 +35,7 @@ const _crTokens = ({
 
 const _crOpenSource = is => is ? 'OpenSource': 'not OpenSource';
 const _crIsActive = is => is ? 'Active': 'not Active';
-const _crTokensName = ({ type, open_source, is_active}) => joinBy(' ',
+const _crTokensCaption = ({ type, open_source, is_active}) => joinBy(' ',
   toUpperCaseFirst(type),
   _crOpenSource(open_source),
   _crIsActive(is_active)
@@ -52,15 +52,20 @@ const toCiConfig = {
   toConfig(json, option) {
     const { _itemKey } = option
     , config = {
-        zhCompType: "FLEX_TOKENS",
+        zhCompType: "INFO_ITEM",
         id: _itemKey,
         caption: _crCaption(json),
-        tokens: _crTokens(json),
-        tokensName: _crTokensName(json),
-        descr: _crDescr(json),
-        descrStyle: {
-          fontWeight: 'bold'
-        },
+        items: [
+          {
+            caption: _crTokensCaption(json),
+            tokens: _crTokens(json)
+          },{
+            style: {
+              fontWeight: 'bold'
+            },
+            descr: _crDescr(json)
+          }
+        ],
         zhConfig: {
           id: _itemKey,
           key: _itemKey

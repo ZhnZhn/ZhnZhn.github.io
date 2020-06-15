@@ -48,7 +48,7 @@ var _crIsActive = function _crIsActive(is) {
   return is ? 'Active' : 'not Active';
 };
 
-var _crTokensName = function _crTokensName(_ref3) {
+var _crTokensCaption = function _crTokensCaption(_ref3) {
   var type = _ref3.type,
       open_source = _ref3.open_source,
       is_active = _ref3.is_active;
@@ -68,15 +68,18 @@ var toCiConfig = {
   toConfig: function toConfig(json, option) {
     var _itemKey = option._itemKey,
         config = {
-      zhCompType: "FLEX_TOKENS",
+      zhCompType: "INFO_ITEM",
       id: _itemKey,
       caption: _crCaption(json),
-      tokens: _crTokens(json),
-      tokensName: _crTokensName(json),
-      descr: _crDescr(json),
-      descrStyle: {
-        fontWeight: 'bold'
-      },
+      items: [{
+        caption: _crTokensCaption(json),
+        tokens: _crTokens(json)
+      }, {
+        style: {
+          fontWeight: 'bold'
+        },
+        descr: _crDescr(json)
+      }],
       zhConfig: {
         id: _itemKey,
         key: _itemKey

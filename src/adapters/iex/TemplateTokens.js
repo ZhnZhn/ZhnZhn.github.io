@@ -8,6 +8,9 @@ const _crNoop = () => {};
 const _crToken = (json, fnOrPropName) => _isFn(fnOrPropName)
   ? fnOrPropName(json)
   : json[fnOrPropName];
+const _crTokens = (CONFIGS, json) => CONFIGS
+  .map(config => _crToken(json, config))
+  .filter(Boolean);
 
 const TemplateTokens = function(impl) {
   if (!(this instanceof TemplateTokens)) {
@@ -37,18 +40,22 @@ Object.assign(TemplateTokens.prototype, {
       CONFIGS
     } = this.impl
     ,  _id = getId(option)
-    , _tokens = CONFIGS
-        .map(config => _crToken(json, config))
-        .filter(Boolean);
+    , _tokens = _crTokens(CONFIGS, json);
+
     return {
-      zhCompType: CIT.FLEX_TOKENS,
+      zhCompType: CIT.INFO_ITEM,
       id: _id,
       caption: crCaption(json, option),
-      tokens: _tokens,
-      tokensName: crTokensName(json),
-      descr: crDescr(json),
-      descrName: crDescrName(),
-      descrStyle: crDescrStyle(),
+      items: [
+        {
+          caption: crTokensName(json),
+          tokens: _tokens,
+        },{
+          style: crDescrStyle(),
+          caption: crDescrName(),
+          descr: crDescr(json)
+        }
+      ],
       zhConfig: {
         key: _id,
         id: _id

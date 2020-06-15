@@ -99,7 +99,7 @@ var CompItemType = {
   COIN_INFO: 'COIN_INFO',
   TABLE: 'TABLE',
   ALPHA_PERF: 'ALPHA_PERF',
-  FLEX_TOKENS: 'FLEX_TOKENS',
+  INFO_ITEM: 'INFO_ITEM',
   TW_LIST: 'TW_LIST'
 };
 exports.CompItemType = CompItemType;

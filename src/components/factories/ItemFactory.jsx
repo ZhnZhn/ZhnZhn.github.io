@@ -66,8 +66,8 @@ const _rCrItem = {
   [CIT.EUROSTAT_MAP]: _crMapChart,
   [CIT.COIN_INFO]: _fItem(Item.CoinInfo),
   [CIT.TABLE]: _fItem(Item.Table),
-  [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf),
-  [CIT.FLEX_TOKENS]: _fItem(Item.FlexTokens),
+  [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf),  
+  [CIT.INFO_ITEM]: _fItem(Item.InfoItem),
   [CIT.TW_LIST]: _fItem(Item.TwList)
 };
 

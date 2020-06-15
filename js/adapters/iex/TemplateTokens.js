@@ -28,6 +28,12 @@ var _crToken = function _crToken(json, fnOrPropName) {
   return _isFn(fnOrPropName) ? fnOrPropName(json) : json[fnOrPropName];
 };
 
+var _crTokens = function _crTokens(CONFIGS, json) {
+  return CONFIGS.map(function (config) {
+    return _crToken(json, config);
+  }).filter(Boolean);
+};
+
 var TemplateTokens = function TemplateTokens(impl) {
   if (!(this instanceof TemplateTokens)) {
     return new TemplateTokens(impl);
@@ -57,19 +63,20 @@ Object.assign(TemplateTokens.prototype, {
         crDescrStyle = _this$impl.crDescrStyle,
         CONFIGS = _this$impl.CONFIGS,
         _id = getId(option),
-        _tokens = CONFIGS.map(function (config) {
-      return _crToken(json, config);
-    }).filter(Boolean);
+        _tokens = _crTokens(CONFIGS, json);
 
     return {
-      zhCompType: _Type.CompItemType.FLEX_TOKENS,
+      zhCompType: _Type.CompItemType.INFO_ITEM,
       id: _id,
       caption: crCaption(json, option),
-      tokens: _tokens,
-      tokensName: crTokensName(json),
-      descr: crDescr(json),
-      descrName: crDescrName(),
-      descrStyle: crDescrStyle(),
+      items: [{
+        caption: crTokensName(json),
+        tokens: _tokens
+      }, {
+        style: crDescrStyle(),
+        caption: crDescrName(),
+        descr: crDescr(json)
+      }],
       zhConfig: {
         key: _id,
         id: _id
