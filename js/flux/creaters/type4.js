@@ -7,6 +7,15 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _createrFns = _interopRequireDefault(require("./createrFns"));
+
+var getC = _createrFns["default"].getC,
+    getV = _createrFns["default"].getV;
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var createLoadOptions = function createLoadOptions(props, options) {
   if (props === void 0) {
     props = {};
@@ -33,7 +42,13 @@ var createLoadOptions = function createLoadOptions(props, options) {
       fromDate = _options.fromDate,
       toDate = _options.toDate,
       hasSecondYAxis = _options.hasSecondYAxis,
-      _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : one.value;
+      _oneV = getV(one),
+      _oneC = getC(one),
+      _twoV = getV(two),
+      _twoC = getC(two),
+      _threeV = getV(three),
+      _threeC = getC(three),
+      _value = _isFn(fnValue) ? fnValue(_oneV, _twoV) : _oneV;
 
   return (0, _extends2["default"])({}, dfProps, {
     value: _value,
@@ -41,18 +56,18 @@ var createLoadOptions = function createLoadOptions(props, options) {
     toDate: toDate,
     dataColumn: dataColumn,
     loadId: loadId,
-    title: one.caption,
-    subtitle: two.caption,
+    title: _oneC,
+    subtitle: _twoC,
     isPremium: isPremium,
     dataSource: dataSource,
     hasSecondYAxis: hasSecondYAxis,
     linkFn: linkFn,
-    oneCaption: one.caption,
-    twoCaption: two.caption,
-    threeCaption: three.caption,
-    one: one.value,
-    two: two.value,
-    three: three.value,
+    oneCaption: _oneC,
+    twoCaption: _twoC,
+    threeCaption: _threeC,
+    one: _oneV,
+    two: _twoV,
+    three: _threeV,
     items: [one, two, three]
   });
 };

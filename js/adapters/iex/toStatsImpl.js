@@ -7,7 +7,8 @@ exports["default"] = void 0;
 
 var _toFns = _interopRequireDefault(require("./toFns"));
 
-var toStr = _toFns["default"].toStr,
+var getValue = _toFns["default"].getValue,
+    toStr = _toFns["default"].toStr,
     toPerc = _toFns["default"].toPerc;
 
 var _isFn = function _isFn(fn) {
@@ -41,7 +42,7 @@ var toStatsImpl = {
   crCaption: function crCaption(_ref2, _ref3) {
     var marketcap = _ref2.marketcap;
     var item = _ref3.item;
-    return item.value + ': ' + toStr(marketcap);
+    return getValue(item) + ': ' + toStr(marketcap);
   },
   crTokensName: function crTokensName(_ref4) {
     var companyName = _ref4.companyName;

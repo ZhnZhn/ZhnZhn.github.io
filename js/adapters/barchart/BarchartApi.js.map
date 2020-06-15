@@ -1,1 +1,38 @@
-{"version":3,"sources":["../../../src/adapters/barchart/BarchartApi.js"],"names":["C","ROOT","REQUEST_ERROR","RESPONSE_EMPTY","_crDfUrl","value","fromDate","apiKey","_crFtUrl","_rCrUrl","DF","FT","BarchartApi","getRequestUrl","option","dfT","_crUrl","checkResponse","json","Array","isArray","results","errCaption","message"],"mappings":";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE,yDADE;AAER;AAEAC,EAAAA,aAAa,EAAE,eAJP;AAKRC,EAAAA,cAAc,EAAE;AALR,CAAV;;AAQA,IAAMC,QAAQ,GAAG,SAAXA,QAAW;AAAA,MACfC,KADe,QACfA,KADe;AAAA,2BAEfC,QAFe;AAAA,MAEfA,QAFe,8BAEN,EAFM;AAAA,MAGfC,MAHe,QAGfA,MAHe;AAAA,SAIRP,CAAC,CAACC,IAJM,aAIMM,MAJN,gBAIuBF,KAJvB,8BAIqDC,QAJrD;AAAA,CAAjB;;AAMA,IAAME,QAAQ,GAAG,SAAXA,QAAW;AAAA,MACfD,MADe,SACfA,MADe;AAAA,MAEfF,KAFe,SAEfA,KAFe;AAAA,6BAGfC,QAHe;AAAA,MAGfA,QAHe,+BAGN,EAHM;AAAA,SAIRN,CAAC,CAACC,IAJM,aAIMM,MAJN,gBAIuBF,KAJvB,8BAIqDC,QAJrD;AAAA,CAAjB;;AAMA,IAAMG,OAAO,GAAG;AACdC,EAAAA,EAAE,EAAEN,QADU;AAEdO,EAAAA,EAAE,EAAEH;AAFU,CAAhB;AAKA,IAAMI,WAAW,GAAG;AAClBC,EAAAA,aADkB,yBACJC,MADI,EACI;AACd,QAAEC,GAAF,GAAUD,MAAV,CAAEC,GAAF;AAAA,QACJC,MADI,GACKP,OAAO,CAACM,GAAD,CAAP,IAAgBN,OAAO,CAACC,EAD7B;;AAEN,WAAOM,MAAM,CAACF,MAAD,CAAb;AACD,GALiB;AAOlBG,EAAAA,aAPkB,yBAOJC,IAPI,EAOC;AACjB,QAAK,EAAEA,IAAI,IAAIC,KAAK,CAACC,OAAN,CAAcF,IAAI,CAACG,OAAnB,CAAV,CAAL,EAA8C;AAC5C,YAAM;AACJC,QAAAA,UAAU,EAAEtB,CAAC,CAACE,aADV;AAEJqB,QAAAA,OAAO,EAAEvB,CAAC,CAACG;AAFP,OAAN;AAID;;AACD,WAAO,IAAP;AACD;AAfiB,CAApB;eAkBeS,W","sourcesContent":["\r\nconst C = {\r\n  ROOT: \"https://marketdata.websol.barchart.com/getHistory.jsonp\",\r\n  //DF_FROM_DATE: '20190627000000',\r\n\r\n  REQUEST_ERROR: 'Request Error',\r\n  RESPONSE_EMPTY: 'Dataset Empty'\r\n};\r\n\r\nconst _crDfUrl = ({\r\n  value,\r\n  fromDate='',\r\n  apiKey\r\n}) => `${C.ROOT}?key=${apiKey}&symbol=${value}&type=daily&startDate=${fromDate}&dividends=0&splits=0`;\r\n\r\nconst _crFtUrl = ({\r\n  apiKey,\r\n  value,\r\n  fromDate=''\r\n}) => `${C.ROOT}?key=${apiKey}&symbol=${value}&type=daily&startDate=${fromDate}`;\r\n\r\nconst _rCrUrl = {\r\n  DF: _crDfUrl,\r\n  FT: _crFtUrl\r\n};\r\n\r\nconst BarchartApi = {\r\n  getRequestUrl(option) {\r\n    const { dfT } = option\r\n    , _crUrl = _rCrUrl[dfT] || _rCrUrl.DF;\r\n    return _crUrl(option);\r\n  },\r\n\r\n  checkResponse(json){\r\n    if ( !(json && Array.isArray(json.results)) ) {\r\n      throw {\r\n        errCaption: C.REQUEST_ERROR,\r\n        message: C.RESPONSE_EMPTY\r\n      };\r\n    }\r\n    return true;\r\n  }\r\n};\r\n\r\nexport default BarchartApi\r\n"],"file":"BarchartApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/barchart/BarchartApi.js"
+ ],
+ "file": "../../../src/adapters/barchart/BarchartApi.js",
+ "names": [
+  "getValue",
+  "fnAdapter",
+  "C",
+  "ROOT",
+  "REQUEST_ERROR",
+  "RESPONSE_EMPTY",
+  "_crDfUrl",
+  "option",
+  "items",
+  "fromDate",
+  "apiKey",
+  "_symbol",
+  "value",
+  "_crFtUrl",
+  "_rCrUrl",
+  "DF",
+  "FT",
+  "BarchartApi",
+  "getRequestUrl",
+  "dfT",
+  "_crUrl",
+  "checkResponse",
+  "json",
+  "Array",
+  "isArray",
+  "results",
+  "errCaption",
+  "message"
+ ],
+ "mappings": ";;;;;;;AAAA;;IAEQA,Q,GAAaC,qB,CAAbD,Q;AAGR,IAAME,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE,yDADE;AAER;AAEAC,EAAAA,aAAa,EAAE,eAJP;AAKRC,EAAAA,cAAc,EAAE;AALR,CAAV;;AAQA,IAAMC,QAAQ,GAAG,SAAXA,QAAW,CAACC,MAAD,EAAY;AAAA,sBACeA,MADf,CACnBC,KADmB;AAAA,MACnBA,KADmB,8BACb,EADa;AAAA,yBACeD,MADf,CACTE,QADS;AAAA,MACTA,QADS,iCACA,EADA;AAAA,MACIC,MADJ,GACeH,MADf,CACIG,MADJ;AAAA,MAEzBC,OAFyB,GAEfX,QAAQ,CAACQ,KAAK,CAAC,CAAD,CAAN,CAFO;;AAG3BD,EAAAA,MAAM,CAACK,KAAP,GAAeD,OAAf;AACA,SAAUT,CAAC,CAACC,IAAZ,aAAwBO,MAAxB,gBAAyCC,OAAzC,8BAAyEF,QAAzE;AACD,CALD;;AAOA,IAAMI,QAAQ,GAAG,SAAXA,QAAW;AAAA,MACfH,MADe,QACfA,MADe;AAAA,MAEfE,KAFe,QAEfA,KAFe;AAAA,2BAGfH,QAHe;AAAA,MAGfA,QAHe,8BAGN,EAHM;AAAA,SAIRP,CAAC,CAACC,IAJM,aAIMO,MAJN,gBAIuBE,KAJvB,8BAIqDH,QAJrD;AAAA,CAAjB;;AAMA,IAAMK,OAAO,GAAG;AACdC,EAAAA,EAAE,EAAET,QADU;AAEdU,EAAAA,EAAE,EAAEH;AAFU,CAAhB;AAKA,IAAMI,WAAW,GAAG;AAClBC,EAAAA,aADkB,yBACJX,MADI,EACI;AACd,QAAEY,GAAF,GAAUZ,MAAV,CAAEY,GAAF;AAAA,QACJC,MADI,GACKN,OAAO,CAACK,GAAD,CAAP,IAAgBL,OAAO,CAACC,EAD7B;;AAEN,WAAOK,MAAM,CAACb,MAAD,CAAb;AACD,GALiB;AAOlBc,EAAAA,aAPkB,yBAOJC,IAPI,EAOC;AACjB,QAAK,EAAEA,IAAI,IAAIC,KAAK,CAACC,OAAN,CAAcF,IAAI,CAACG,OAAnB,CAAV,CAAL,EAA8C;AAC5C,YAAM;AACJC,QAAAA,UAAU,EAAExB,CAAC,CAACE,aADV;AAEJuB,QAAAA,OAAO,EAAEzB,CAAC,CAACG;AAFP,OAAN;AAID;;AACD,WAAO,IAAP;AACD;AAfiB,CAApB;eAkBeY,W"
+}

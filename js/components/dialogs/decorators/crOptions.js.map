@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../../src/components/dialogs/decorators/crOptions.js"],"names":["_crItems","json","optionJsonProp","_arr","s","map","c","v","_notNullOrUndef","_crPropCaption","arr","Array","isArray","length","_items","caption","crOptions","items","propCaption"],"mappings":";;;;;AACA,IAAMA,QAAQ,GAAG,SAAXA,QAAW,CAACC,IAAD,EAAOC,cAAP,EAA0B;AACzC,MAAMC,IAAI,GAAGF,IAAI,CAACC,cAAD,CAAjB;AACA,SAAOC,IAAI,CAAC,CAAD,CAAJ,IAAWA,IAAI,CAAC,CAAD,CAAJ,CAAQC,CAAR,IAAa,IAAxB,GACHD,IAAI,CAACE,GAAL,CAAS;AAAA,QAAGC,CAAH,QAAGA,CAAH;AAAA,QAAMC,CAAN,QAAMA,CAAN;AAAA,QAASH,CAAT,QAASA,CAAT;AAAA,WAAkB;AACzBE,MAAAA,CAAC,EAAKA,CAAL,UAAWF,CAAX,MADwB;AACPG,MAAAA,CAAC,EAADA,CADO;AACJH,MAAAA,CAAC,EAADA;AADI,KAAlB;AAAA,GAAT,CADG,GAIHD,IAJJ;AAKD,CAPD;;AASA,IAAMK,eAAe,GAAG,SAAlBA,eAAkB,CAAAD,CAAC;AAAA,SAAIA,CAAC,IAAI,IAAT;AAAA,CAAzB;;AAEA,IAAME,cAAc,GAAG,SAAjBA,cAAiB,CAAAC,GAAG,EAAI;AAC3B,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcF,GAAd,CAAD,IAAuBA,GAAG,CAACG,MAAJ,KAAe,CAA1C,EAA6C;AAC3C;AACD;;AACD,MAAMC,MAAM,GAAGJ,GAAG,CAAC,CAAD,CAAlB;;AACA,MAAIF,eAAe,CAACM,MAAM,CAACC,OAAR,CAAnB,EAAqC;AACnC;AACD;;AACD,MAAIP,eAAe,CAACM,MAAM,CAACR,CAAR,CAAnB,EAA+B;AAC7B,WAAO,GAAP;AACD;AACH,CAXD;;AAaA,IAAMU,SAAS,GAAG,SAAZA,SAAY,CAACf,IAAD,EAAOC,cAAP,EAA0B;AAC1C,MAAMe,KAAK,GAAGjB,QAAQ,CAACC,IAAD,EAAOC,cAAP,CAAtB;AAAA,MACEgB,WAAW,GAAGT,cAAc,CAACQ,KAAD,CAD9B;;AAEA,SAAO;AAAEA,IAAAA,KAAK,EAALA,KAAF;AAASC,IAAAA,WAAW,EAAXA;AAAT,GAAP;AACD,CAJD;;eAMeF,S","sourcesContent":["\r\nconst _crItems = (json, optionJsonProp) => {\r\n  const _arr = json[optionJsonProp];\r\n  return _arr[0] && _arr[0].s != null\r\n    ? _arr.map(({ c, v, s }) => ({\r\n        c: `${c} (${s})`, v, s\r\n      }))\r\n    : _arr;\r\n};\r\n\r\nconst _notNullOrUndef = v => v != null;\r\n\r\nconst _crPropCaption = arr => {\r\n   if (!Array.isArray(arr) || arr.length === 0) {\r\n     return;\r\n   }\r\n   const _items = arr[0];\r\n   if (_notNullOrUndef(_items.caption)) {\r\n     return;\r\n   }\r\n   if (_notNullOrUndef(_items.c)) {\r\n     return 'c';\r\n   }\r\n}\r\n\r\nconst crOptions = (json, optionJsonProp) => {\r\n  const items = _crItems(json, optionJsonProp)\r\n  , propCaption = _crPropCaption(items);\r\n  return { items, propCaption };\r\n}\r\n\r\nexport default crOptions\r\n"],"file":"crOptions.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/decorators/crOptions.js"
+ ],
+ "file": "../../../../src/components/dialogs/decorators/crOptions.js",
+ "names": [
+  "_crCvItems",
+  "arr",
+  "map",
+  "c",
+  "v",
+  "restProps",
+  "_crSItems",
+  "s",
+  "_crItems",
+  "json",
+  "optionJsonProp",
+  "_arr",
+  "isCv",
+  "_notNullOrUndef",
+  "_crPropCaption",
+  "Array",
+  "isArray",
+  "length",
+  "_items",
+  "caption",
+  "crOptions",
+  "items",
+  "propCaption"
+ ],
+ "mappings": ";;;;;;;;;;;AACA,IAAMA,UAAU,GAAG,SAAbA,UAAa,CAAAC,GAAG;AAAA,SAAIA,GAAG,CAC3BC,GADwB,CACpB;AAAA,QAAGC,CAAH,QAAGA,CAAH;AAAA,QAAMC,CAAN,QAAMA,CAAN;AAAA,QAAYC,SAAZ;AAAA;AACFF,MAAAA,CAAC,EAAKA,CAAL,UAAWC,CAAX,MADC;AACgBA,MAAAA,CAAC,EAADA;AADhB,OACsBC,SADtB;AAAA,GADoB,CAAJ;AAAA,CAAtB;;AAKA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAAAL,GAAG;AAAA,SAAIA,GAAG,CACzBC,GADsB,CAClB;AAAA,QAAGC,CAAH,SAAGA,CAAH;AAAA,QAAMC,CAAN,SAAMA,CAAN;AAAA,QAASG,CAAT,SAASA,CAAT;AAAA,WAAkB;AACrBJ,MAAAA,CAAC,EAAKA,CAAL,UAAWI,CAAX,MADoB;AACHH,MAAAA,CAAC,EAADA,CADG;AACAG,MAAAA,CAAC,EAADA;AADA,KAAlB;AAAA,GADkB,CAAJ;AAAA,CAArB;;AAKA,IAAMC,QAAQ,GAAG,SAAXA,QAAW,CAACC,IAAD,EAAOC,cAAP,EAA0B;AACzC,MAAMC,IAAI,GAAGF,IAAI,CAACC,cAAD,CAAjB;;AACA,MAAID,IAAI,CAACG,IAAT,EAAe;AACb,WAAOZ,UAAU,CAACW,IAAD,CAAjB;AACD;;AACD,SAAOA,IAAI,CAAC,CAAD,CAAJ,IAAWA,IAAI,CAAC,CAAD,CAAJ,CAAQJ,CAAR,IAAa,IAAxB,GACHD,SAAS,CAACK,IAAD,CADN,GAEHA,IAFJ;AAGD,CARD;;AAUA,IAAME,eAAe,GAAG,SAAlBA,eAAkB,CAAAT,CAAC;AAAA,SAAIA,CAAC,IAAI,IAAT;AAAA,CAAzB;;AAEA,IAAMU,cAAc,GAAG,SAAjBA,cAAiB,CAAAb,GAAG,EAAI;AAC3B,MAAI,CAACc,KAAK,CAACC,OAAN,CAAcf,GAAd,CAAD,IAAuBA,GAAG,CAACgB,MAAJ,KAAe,CAA1C,EAA6C;AAC3C;AACD;;AACD,MAAMC,MAAM,GAAGjB,GAAG,CAAC,CAAD,CAAlB;;AACA,MAAIY,eAAe,CAACK,MAAM,CAACC,OAAR,CAAnB,EAAqC;AACnC;AACD;;AACD,MAAIN,eAAe,CAACK,MAAM,CAACf,CAAR,CAAnB,EAA+B;AAC7B,WAAO,GAAP;AACD;AACH,CAXD;;AAaA,IAAMiB,SAAS,GAAG,SAAZA,SAAY,CAACX,IAAD,EAAOC,cAAP,EAA0B;AAC1C,MAAMW,KAAK,GAAGb,QAAQ,CAACC,IAAD,EAAOC,cAAP,CAAtB;AAAA,MACEY,WAAW,GAAGR,cAAc,CAACO,KAAD,CAD9B;;AAEA,SAAO;AAAEA,IAAAA,KAAK,EAALA,KAAF;AAASC,IAAAA,WAAW,EAAXA;AAAT,GAAP;AACD,CAJD;;eAMeF,S"
+}

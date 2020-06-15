@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../src/adapters/iex/toStatsImpl.js"],"names":["toStr","fns","toPerc","_isFn","fn","_isNumber","n","_crEarningsDate","nextEarningsDate","_fNameValue","propName","json","_crConfig","str","toStatsImpl","CONFIGS","map","crCaption","marketcap","item","value","crTokensName","companyName","crDescrName","crDescrStyle","fontWeight","whiteSpace","crDescr","year5ChangePercent","year2ChangePercent","year1ChangePercent","ytdChangePercent","month6ChangePercent","month3ChangePercent","month1ChangePercent","day5ChangePercent"],"mappings":";;;;;;;AACA;;IAEQA,K,GAAkBC,iB,CAAlBD,K;IAAOE,M,GAAWD,iB,CAAXC,M;;AACf,IAAMC,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;;AACA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAAAC,CAAC;AAAA,SAAI,OAAOA,CAAP,KAAa,QAAjB;AAAA,CAAnB,C,CAEA;;;AACA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB;AAAA,MAAGC,gBAAH,QAAGA,gBAAH;AAAA,SAA0BA,gBAAgB,GAC7D,uBAAuBA,gBADsC,GAE7D,EAFmB;AAAA,CAAxB;;AAGA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAAAC,QAAQ;AAAA,SAC1B,UAAAC,IAAI;AAAA,WAAIN,SAAS,CAACM,IAAI,CAACD,QAAD,CAAL,CAAT,GACJA,QAAQ,GAAG,IAAX,GAAkBV,KAAK,CAACW,IAAI,CAACD,QAAD,CAAL,CADnB,GAEJ,EAFA;AAAA,GADsB;AAAA,CAA5B;;AAIA,IAAME,SAAS,GAAG,SAAZA,SAAY,CAAAC,GAAG;AAAA,SAAIV,KAAK,CAACU,GAAD,CAAL,GACrBA,GADqB,GAErBJ,WAAW,CAACI,GAAD,CAFM;AAAA,CAArB;;AAIA,IAAMC,WAAW,GAAG;AAClBC,EAAAA,OAAO,EAAE,CACP;AACA,qBAFO,EAGP,OAHO,EAIP,WAJO,EAKP,QALO,EAKI;AACX,mBANO,EAOP,eAPO,EAQP,SARO,EASP,MATO,EAUPR,eAVO,EAWPS,GAXO,CAWHJ,SAXG,CADS;AAclBK,EAAAA,SAAS,EAAE;AAAA,QAAGC,SAAH,SAAGA,SAAH;AAAA,QAAkBC,IAAlB,SAAkBA,IAAlB;AAAA,WACRA,IAAI,CAACC,KAAL,GAAa,IAAb,GAAoBpB,KAAK,CAACkB,SAAD,CADjB;AAAA,GAdO;AAgBlBG,EAAAA,YAAY,EAAE;AAAA,QAAGC,WAAH,SAAGA,WAAH;AAAA,WAAqBA,WAAW,IAAI,EAApC;AAAA,GAhBI;AAiBlBC,EAAAA,WAAW,EAAE;AAAA,WAAM,eAAN;AAAA,GAjBK;AAkBlBC,EAAAA,YAAY,EAAE;AAAA,WAAO;AACnBC,MAAAA,UAAU,EAAE,MADO;AAEnBC,MAAAA,UAAU,EAAE;AAFO,KAAP;AAAA,GAlBI;AAsBlBC,EAAAA,OAAO,EAAE,iBAAAhB,IAAI;AAAA,sBAAaT,MAAM,CAACS,IAAI,CAACiB,kBAAN,CAAnB,gBACP1B,MAAM,CAACS,IAAI,CAACkB,kBAAN,CADC,gBAEP3B,MAAM,CAACS,IAAI,CAACmB,kBAAN,CAFC,iBAGN5B,MAAM,CAACS,IAAI,CAACoB,gBAAN,CAHA,kBAIP7B,MAAM,CAACS,IAAI,CAACqB,mBAAN,CAJC,gBAKP9B,MAAM,CAACS,IAAI,CAACsB,mBAAN,CALC,gBAMP/B,MAAM,CAACS,IAAI,CAACuB,mBAAN,CANC,gBAOPhC,MAAM,CAACS,IAAI,CAACwB,iBAAN,CAPC;AAAA;AAtBK,CAApB;eAgCerB,W","sourcesContent":["\r\nimport fns from './toFns'\r\n\r\nconst { toStr, toPerc } = fns;\r\nconst _isFn = fn => typeof fn === 'function';\r\nconst _isNumber = n => typeof n === 'number';\r\n\r\n//const _crCompanyName = ({ companyName }) => companyName || '';\r\nconst _crEarningsDate = ({ nextEarningsDate }) => nextEarningsDate\r\n  ?  'nextEarningsDate: ' + nextEarningsDate\r\n  :  '';\r\nconst _fNameValue = propName =>\r\n  json => _isNumber(json[propName])\r\n    ? propName + ': ' + toStr(json[propName])\r\n    : '';\r\nconst _crConfig = str => _isFn(str)\r\n  ? str\r\n  : _fNameValue(str);\r\n\r\nconst toStatsImpl = {\r\n  CONFIGS: [\r\n    //_crCompanyName,\r\n    \"sharesOutstanding\",\r\n    \"float\",\r\n    \"employees\",\r\n    \"ttmEPS\",  // 12 month tralling\r\n    \"ttmDividendRate\",\r\n    \"dividendYield\",\r\n    \"peRatio\",\r\n    \"beta\",\r\n    _crEarningsDate\r\n  ].map(_crConfig),\r\n\r\n  crCaption: ({ marketcap }, { item }) =>\r\n     item.value + ': ' + toStr(marketcap),\r\n  crTokensName: ({ companyName }) => companyName || '',\r\n  crDescrName: () => 'ChangePercent',\r\n  crDescrStyle: () => ({\r\n    fontWeight: 'bold',\r\n    whiteSpace: 'pre'\r\n  }),\r\n  crDescr: json => `  5Y: ${toPerc(json.year5ChangePercent)}\r\n  2Y: ${toPerc(json.year2ChangePercent)}\r\n  1Y: ${toPerc(json.year1ChangePercent)}\r\n  YTD: ${toPerc(json.ytdChangePercent)}\\n\r\n  6M: ${toPerc(json.month6ChangePercent)}\r\n  3M: ${toPerc(json.month3ChangePercent)}\r\n  1M: ${toPerc(json.month1ChangePercent)}\r\n  5D: ${toPerc(json.day5ChangePercent)}`\r\n};\r\n\r\nexport default toStatsImpl\r\n"],"file":"toStatsImpl.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/iex/toStatsImpl.js"
+ ],
+ "file": "../../../src/adapters/iex/toStatsImpl.js",
+ "names": [
+  "getValue",
+  "fns",
+  "toStr",
+  "toPerc",
+  "_isFn",
+  "fn",
+  "_isNumber",
+  "n",
+  "_crEarningsDate",
+  "nextEarningsDate",
+  "_fNameValue",
+  "propName",
+  "json",
+  "_crConfig",
+  "str",
+  "toStatsImpl",
+  "CONFIGS",
+  "map",
+  "crCaption",
+  "marketcap",
+  "item",
+  "crTokensName",
+  "companyName",
+  "crDescrName",
+  "crDescrStyle",
+  "fontWeight",
+  "whiteSpace",
+  "crDescr",
+  "year5ChangePercent",
+  "year2ChangePercent",
+  "year1ChangePercent",
+  "ytdChangePercent",
+  "month6ChangePercent",
+  "month3ChangePercent",
+  "month1ChangePercent",
+  "day5ChangePercent"
+ ],
+ "mappings": ";;;;;;;AACA;;IAEQA,Q,GAA4BC,iB,CAA5BD,Q;IAAUE,K,GAAkBD,iB,CAAlBC,K;IAAOC,M,GAAWF,iB,CAAXE,M;;AACzB,IAAMC,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;;AACA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAAAC,CAAC;AAAA,SAAI,OAAOA,CAAP,KAAa,QAAjB;AAAA,CAAnB,C,CAEA;;;AACA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB;AAAA,MAAGC,gBAAH,QAAGA,gBAAH;AAAA,SAA0BA,gBAAgB,GAC7D,uBAAuBA,gBADsC,GAE7D,EAFmB;AAAA,CAAxB;;AAGA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAAAC,QAAQ;AAAA,SAC1B,UAAAC,IAAI;AAAA,WAAIN,SAAS,CAACM,IAAI,CAACD,QAAD,CAAL,CAAT,GACJA,QAAQ,GAAG,IAAX,GAAkBT,KAAK,CAACU,IAAI,CAACD,QAAD,CAAL,CADnB,GAEJ,EAFA;AAAA,GADsB;AAAA,CAA5B;;AAIA,IAAME,SAAS,GAAG,SAAZA,SAAY,CAAAC,GAAG;AAAA,SAAIV,KAAK,CAACU,GAAD,CAAL,GACrBA,GADqB,GAErBJ,WAAW,CAACI,GAAD,CAFM;AAAA,CAArB;;AAIA,IAAMC,WAAW,GAAG;AAClBC,EAAAA,OAAO,EAAE,CACP;AACA,qBAFO,EAGP,OAHO,EAIP,WAJO,EAKP,QALO,EAKI;AACX,mBANO,EAOP,eAPO,EAQP,SARO,EASP,MATO,EAUPR,eAVO,EAWPS,GAXO,CAWHJ,SAXG,CADS;AAclBK,EAAAA,SAAS,EAAE;AAAA,QAAGC,SAAH,SAAGA,SAAH;AAAA,QAAkBC,IAAlB,SAAkBA,IAAlB;AAAA,WACRpB,QAAQ,CAACoB,IAAD,CAAR,GAAiB,IAAjB,GAAwBlB,KAAK,CAACiB,SAAD,CADrB;AAAA,GAdO;AAgBlBE,EAAAA,YAAY,EAAE;AAAA,QAAGC,WAAH,SAAGA,WAAH;AAAA,WAAqBA,WAAW,IAAI,EAApC;AAAA,GAhBI;AAiBlBC,EAAAA,WAAW,EAAE;AAAA,WAAM,eAAN;AAAA,GAjBK;AAkBlBC,EAAAA,YAAY,EAAE;AAAA,WAAO;AACnBC,MAAAA,UAAU,EAAE,MADO;AAEnBC,MAAAA,UAAU,EAAE;AAFO,KAAP;AAAA,GAlBI;AAsBlBC,EAAAA,OAAO,EAAE,iBAAAf,IAAI;AAAA,sBAAaT,MAAM,CAACS,IAAI,CAACgB,kBAAN,CAAnB,gBACPzB,MAAM,CAACS,IAAI,CAACiB,kBAAN,CADC,gBAEP1B,MAAM,CAACS,IAAI,CAACkB,kBAAN,CAFC,iBAGN3B,MAAM,CAACS,IAAI,CAACmB,gBAAN,CAHA,kBAIP5B,MAAM,CAACS,IAAI,CAACoB,mBAAN,CAJC,gBAKP7B,MAAM,CAACS,IAAI,CAACqB,mBAAN,CALC,gBAMP9B,MAAM,CAACS,IAAI,CAACsB,mBAAN,CANC,gBAOP/B,MAAM,CAACS,IAAI,CAACuB,iBAAN,CAPC;AAAA;AAtBK,CAApB;eAgCepB,W"
+}

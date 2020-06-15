@@ -5,6 +5,8 @@ import AdapterFn from '../AdapterFn'
 import AdapterStockFn from '../AdapterStockFn'
 
 const {
+  getCaption,
+  getValue,
   crItemConf,
   crValueConf,
   valueMoving,
@@ -48,14 +50,13 @@ const _crZhConfig = (id, data, option) => {
 };
 
 const fnAdapter = {
+  getCaption,
+  getValue,
   toSeriesData,
   joinBy,
   findMinY,
 
-  crChartId: (option) => {
-    const { value='' } = option;
-    return `B/${value}`;
-  },
+  crChartId: ({ value='' }) => `B/${value}`,
 
   crData: (json, option) => {
     const {

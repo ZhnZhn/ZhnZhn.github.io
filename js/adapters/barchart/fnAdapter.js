@@ -13,7 +13,9 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _AdapterStockFn = _interopRequireDefault(require("../AdapterStockFn"));
 
-var crItemConf = _AdapterFn["default"].crItemConf,
+var getCaption = _AdapterFn["default"].getCaption,
+    getValue = _AdapterFn["default"].getValue,
+    crItemConf = _AdapterFn["default"].crItemConf,
     crValueConf = _AdapterFn["default"].crValueConf,
     valueMoving = _AdapterFn["default"].valueMoving,
     joinBy = _AdapterFn["default"].joinBy,
@@ -63,12 +65,14 @@ var _crZhConfig = function _crZhConfig(id, data, option) {
 };
 
 var fnAdapter = {
+  getCaption: getCaption,
+  getValue: getValue,
   toSeriesData: toSeriesData,
   joinBy: joinBy,
   findMinY: findMinY,
-  crChartId: function crChartId(option) {
-    var _option$value = option.value,
-        value = _option$value === void 0 ? '' : _option$value;
+  crChartId: function crChartId(_ref2) {
+    var _ref2$value = _ref2.value,
+        value = _ref2$value === void 0 ? '' : _ref2$value;
     return "B/" + value;
   },
   crData: function crData(json, option) {
@@ -87,16 +91,16 @@ var fnAdapter = {
 
     var _json$results = json.results,
         results = _json$results === void 0 ? [] : _json$results;
-    return results.map(function (_ref2) {
-      var tradingDay = _ref2.tradingDay,
-          openInterest = _ref2.openInterest;
+    return results.map(function (_ref3) {
+      var tradingDay = _ref3.tradingDay,
+          openInterest = _ref3.openInterest;
       return [ymdToUTC(tradingDay), openInterest];
     });
   },
-  crConfigOption: function crConfigOption(_ref3) {
-    var chartId = _ref3.chartId,
-        option = _ref3.option,
-        data = _ref3.data;
+  crConfigOption: function crConfigOption(_ref4) {
+    var chartId = _ref4.chartId,
+        option = _ref4.option,
+        data = _ref4.data;
     return {
       valueMoving: valueMoving(data),
       info: _crInfo(option),

@@ -22,6 +22,13 @@ var CAPTION_OPTIONS = {
     v: 123,
     s: 'Abc'
   }]
+},
+    IS_CV_OPTIONS = {
+  isCv: true,
+  items: [{
+    c: 'Abc',
+    v: 'Abc'
+  }]
 };
 describe('crOptions', function () {
   var fn = _crOptions["default"];
@@ -33,6 +40,9 @@ describe('crOptions', function () {
   });
   test('should add item s value to c', function () {
     expect(fn(S_OPTIONS, 'items').items[0].c).toBe('Abc (Abc)');
+  });
+  test('should return correct options for isCv case', function () {
+    expect(fn(IS_CV_OPTIONS, 'items').items[0].c).toBe('Abc (Abc)');
   });
 });
 //# sourceMappingURL=crOptions.test.js.map

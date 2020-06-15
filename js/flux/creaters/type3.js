@@ -7,6 +7,11 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _createrFns = _interopRequireDefault(require("./createrFns"));
+
+var getC = _createrFns["default"].getC,
+    getV = _createrFns["default"].getV;
+
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
@@ -35,8 +40,8 @@ var createLoadOptions = function createLoadOptions(props, options) {
       fromDate = _options.fromDate,
       toDate = _options.toDate,
       transform = _options.transform,
-      value = one.value,
-      caption = one.caption,
+      value = getV(one),
+      caption = getC(one),
       _value = _isFn(fnValue) ? fnValue(value) : value,
       _itemCaption = _isFn(fnItemCaption) ? fnItemCaption(value) : void 0,
       _transform = transform ? transform.value : void 0,

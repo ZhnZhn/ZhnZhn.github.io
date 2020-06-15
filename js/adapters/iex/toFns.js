@@ -5,8 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
 var _ItemTypes = _interopRequireDefault(require("./ItemTypes"));
 
+var getValue = _AdapterFn["default"].getValue;
 var _LOCALE = (navigator || {}).language;
 
 var _isNumber = function _isNumber(n) {
@@ -23,6 +26,7 @@ var _calcScatterY = function _calcScatterY(chart, isMin) {
 };
 
 var toFns = {
+  getValue: getValue,
   toStr: function toStr(n) {
     return _isNumber(n) ? n.toLocaleString(_LOCALE) : '';
   },

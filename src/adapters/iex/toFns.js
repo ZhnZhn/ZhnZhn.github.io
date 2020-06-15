@@ -1,4 +1,8 @@
+import AdapterFn from '../AdapterFn'
+
 import IT from './ItemTypes'
+
+const { getValue } = AdapterFn
 
 const _LOCALE = (navigator || {}).language;
 const _isNumber = n => typeof n === 'number';
@@ -13,6 +17,8 @@ const _calcScatterY = (chart, isMin) => {
 };
 
 const toFns = {
+  getValue,
+  
   toStr: n => _isNumber(n)
     ? n.toLocaleString(_LOCALE)
     : '',

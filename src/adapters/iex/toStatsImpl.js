@@ -1,7 +1,7 @@
 
 import fns from './toFns'
 
-const { toStr, toPerc } = fns;
+const { getValue, toStr, toPerc } = fns;
 const _isFn = fn => typeof fn === 'function';
 const _isNumber = n => typeof n === 'number';
 
@@ -32,7 +32,7 @@ const toStatsImpl = {
   ].map(_crConfig),
 
   crCaption: ({ marketcap }, { item }) =>
-     item.value + ': ' + toStr(marketcap),
+     getValue(item) + ': ' + toStr(marketcap),
   crTokensName: ({ companyName }) => companyName || '',
   crDescrName: () => 'ChangePercent',
   crDescrStyle: () => ({

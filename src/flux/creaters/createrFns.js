@@ -19,6 +19,8 @@ const _crItemCaption = (items, titles) => {
 };
 
 const createrFns = {
+  getC,
+  getV,
 
   crItemKey: (items, seriaType, date) => {
     const _prefix = items

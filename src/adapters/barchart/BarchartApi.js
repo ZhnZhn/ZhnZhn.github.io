@@ -1,3 +1,7 @@
+import fnAdapter from './fnAdapter'
+
+const { getValue } = fnAdapter
+
 
 const C = {
   ROOT: "https://marketdata.websol.barchart.com/getHistory.jsonp",
@@ -7,11 +11,12 @@ const C = {
   RESPONSE_EMPTY: 'Dataset Empty'
 };
 
-const _crDfUrl = ({
-  value,
-  fromDate='',
-  apiKey
-}) => `${C.ROOT}?key=${apiKey}&symbol=${value}&type=daily&startDate=${fromDate}&dividends=0&splits=0`;
+const _crDfUrl = (option) => {
+  const { items=[], fromDate='', apiKey } = option
+  , _symbol = getValue(items[0]);
+  option.value = _symbol
+  return `${C.ROOT}?key=${apiKey}&symbol=${_symbol}&type=daily&startDate=${fromDate}&dividends=0&splits=0`;
+}
 
 const _crFtUrl = ({
   apiKey,
@@ -27,7 +32,7 @@ const _rCrUrl = {
 const BarchartApi = {
   getRequestUrl(option) {
     const { dfT } = option
-    , _crUrl = _rCrUrl[dfT] || _rCrUrl.DF;
+    , _crUrl = _rCrUrl[dfT] || _rCrUrl.DF;    
     return _crUrl(option);
   },
 

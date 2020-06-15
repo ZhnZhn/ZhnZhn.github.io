@@ -1,10 +1,21 @@
 
+const _crCvItems = arr => arr
+ .map(({ c, v, ...restProps }) => ({
+    c: `${c} (${v})`, v, ...restProps
+  }));
+
+const _crSItems = arr => arr
+  .map(({ c, v, s }) => ({
+    c: `${c} (${s})`, v, s
+  }));
+
 const _crItems = (json, optionJsonProp) => {
   const _arr = json[optionJsonProp];
+  if (json.isCv) {
+    return _crCvItems(_arr);
+  }
   return _arr[0] && _arr[0].s != null
-    ? _arr.map(({ c, v, s }) => ({
-        c: `${c} (${s})`, v, s
-      }))
+    ? _crSItems(_arr)
     : _arr;
 };
 

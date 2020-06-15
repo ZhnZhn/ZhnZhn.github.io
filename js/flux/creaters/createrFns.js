@@ -31,6 +31,8 @@ var _crItemCaption = function _crItemCaption(items, titles) {
 };
 
 var createrFns = {
+  getC: getC,
+  getV: getV,
   crItemKey: function crItemKey(items, seriaType, date) {
     var _prefix = items.filter(Boolean).map(function (item) {
       return getV(item) || getC(item) || item;

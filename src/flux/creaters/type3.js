@@ -1,4 +1,8 @@
 
+import fns from './createrFns'
+
+const { getC, getV } = fns;
+
 const _isFn = fn => typeof fn === 'function';
 
 const createLoadOptions = (props={}, options={}) => {
@@ -9,7 +13,8 @@ const createLoadOptions = (props={}, options={}) => {
           dfProps
         } = props
       , { one, fromDate, toDate, transform } = options
-      , { value, caption } = one
+      , value = getV(one)
+      , caption = getC(one)
       , _value = _isFn(fnValue)
             ? fnValue(value)
             : value
@@ -21,7 +26,7 @@ const createLoadOptions = (props={}, options={}) => {
             : void 0
       , _subtitle = transform
             ? transform.caption
-            : void 0;  
+            : void 0;
   return {
     value : _value,
     transform: _transform,
