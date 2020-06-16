@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/dialogs/Dialogs.js"],"names":["Dialogs","Type3","Type4","Type4A","Type5","Query"],"mappings":";;;;;;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,OAAO,GAAG;AACdC,EAAAA,KAAK,EAALA,sBADc;AAEdC,EAAAA,KAAK,EAALA,uBAFc;AAGdC,EAAAA,MAAM,EAANA,wBAHc;AAIdC,EAAAA,KAAK,EAALA,uBAJc;AAKdC,EAAAA,KAAK,EAALA;AALc,CAAhB;eAQeL,O","sourcesContent":["\r\nimport Type3 from './DialogType3';\r\nimport Type4 from './DialogType4';\r\nimport Type4A from './DialogType4A';\r\nimport Type5 from './DialogType5';\r\nimport Query from './DialogQuery';\r\n\r\nconst Dialogs = {\r\n  Type3,\r\n  Type4,\r\n  Type4A,\r\n  Type5,\r\n  Query\r\n};\r\n\r\nexport default Dialogs\r\n"],"file":"Dialogs.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/Dialogs.js"
+ ],
+ "file": "../../../src/components/dialogs/Dialogs.js",
+ "names": [
+  "Dialogs",
+  "Type3",
+  "Type4",
+  "Query"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;AACA;;AAEA,IAAMA,OAAO,GAAG;AACdC,EAAAA,KAAK,EAALA,sBADc;AAEdC,EAAAA,KAAK,EAALA,uBAFc;AAGdC,EAAAA,KAAK,EAALA;AAHc,CAAhB;eAMeH,O"
+}

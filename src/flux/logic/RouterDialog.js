@@ -11,9 +11,33 @@ const _router = {
 
   DialogType3: D.Type3,
   DialogType4: D.Type4,
-  DialogType4A: D.Type4A,
-  DialogType5: D.Type5,
   DialogQuery: D.Query,
+
+  _loadGD(){
+    /*eslint-disable no-undef */
+    if ( process.env.NODE_ENV === '_development' ) {
+      return this.GD = import("js/components/dialogs/GeneralDialogs.js")
+        .then(module => this.GD = _resolve(module.default))
+        .catch(err => console.log(MSG_OFFLINE));
+   /*eslint-enable no-undef */
+   }
+   return import(
+      /* webpackChunkName: "general-dialogs" */
+      /* webpackMode: "lazy" */
+       "../../components/dialogs/GeneralDialogs"
+      )
+     .then(module => this.GD = _resolve(module.default))
+     .catch(err => console.log(MSG_OFFLINE));
+  },
+  getGD(){
+    return this.GD || this._loadGD();
+  },
+  get DialogType4A() {
+    return this.getGD().then(D => D.Type4A);
+  },
+  get DialogType5() {
+    return this.getGD().then(D => D.Type5);
+  },
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */

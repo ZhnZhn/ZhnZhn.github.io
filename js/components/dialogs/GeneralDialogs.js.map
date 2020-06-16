@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/GeneralDialogs.js"
+ ],
+ "file": "../../../src/components/dialogs/GeneralDialogs.js",
+ "names": [
+  "GeneralDialogs",
+  "Type4A",
+  "Type5"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,cAAc,GAAG;AACrBC,EAAAA,MAAM,EAANA,wBADqB;AAErBC,EAAAA,KAAK,EAALA;AAFqB,CAAvB;eAKeF,c"
+}

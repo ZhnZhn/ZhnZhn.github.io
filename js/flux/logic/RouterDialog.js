@@ -19,9 +19,45 @@ var _router = {
   DEFAULT: _Dialogs["default"].Type3,
   DialogType3: _Dialogs["default"].Type3,
   DialogType4: _Dialogs["default"].Type4,
-  DialogType4A: _Dialogs["default"].Type4A,
-  DialogType5: _Dialogs["default"].Type5,
   DialogQuery: _Dialogs["default"].Query,
+  _loadGD: function _loadGD() {
+    var _this = this;
+
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === '_development') {
+      return this.GD = Promise.resolve().then(function () {
+        return (0, _interopRequireWildcard2["default"])(require("js/components/dialogs/GeneralDialogs.js"));
+      }).then(function (module) {
+        return _this.GD = _resolve(module["default"]);
+      })["catch"](function (err) {
+        return console.log(MSG_OFFLINE);
+      });
+      /*eslint-enable no-undef */
+    }
+
+    return Promise.resolve().then(function () {
+      return (0, _interopRequireWildcard2["default"])(require("../../components/dialogs/GeneralDialogs"));
+    }).then(function (module) {
+      return _this.GD = _resolve(module["default"]);
+    })["catch"](function (err) {
+      return console.log(MSG_OFFLINE);
+    });
+  },
+  getGD: function getGD() {
+    return this.GD || this._loadGD();
+  },
+
+  get DialogType4A() {
+    return this.getGD().then(function (D) {
+      return D.Type4A;
+    });
+  },
+
+  get DialogType5() {
+    return this.getGD().then(function (D) {
+      return D.Type5;
+    });
+  },
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */
@@ -43,14 +79,14 @@ var _router = {
   },
 
   _loadUN: function _loadUN() {
-    var _this = this;
+    var _this2 = this;
 
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       return this.UN = Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/uncomtrade/UnDialogs.js"));
       }).then(function (module) {
-        return _this.UN = _resolve(module["default"]);
+        return _this2.UN = _resolve(module["default"]);
       })["catch"](function (err) {
         return console.log(MSG_OFFLINE);
       });
@@ -60,7 +96,7 @@ var _router = {
     return Promise.resolve().then(function () {
       return (0, _interopRequireWildcard2["default"])(require("../../components/uncomtrade/UnDialogs"));
     }).then(function (module) {
-      return _this.UN = _resolve(module["default"]);
+      return _this2.UN = _resolve(module["default"]);
     })["catch"](function (err) {
       return console.log(MSG_OFFLINE);
     });
@@ -76,14 +112,14 @@ var _router = {
   },
 
   _loadSM: function _loadSM() {
-    var _this2 = this;
+    var _this3 = this;
 
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       return Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/stock-markets/AlphaDialogs.js"));
       }).then(function (module) {
-        return _this2.SM = _resolve(module["default"]);
+        return _this3.SM = _resolve(module["default"]);
       })["catch"](function (err) {
         return console.log(MSG_OFFLINE);
       });
@@ -93,7 +129,7 @@ var _router = {
     return Promise.resolve().then(function () {
       return (0, _interopRequireWildcard2["default"])(require("../../components/stock-markets/AlphaDialogs"));
     }).then(function (module) {
-      return _this2.SM = _resolve(module["default"]);
+      return _this3.SM = _resolve(module["default"]);
     })["catch"](function (err) {
       return console.log(MSG_OFFLINE);
     });
@@ -127,14 +163,14 @@ var _router = {
   },
 
   _loadES: function _loadES() {
-    var _this3 = this;
+    var _this4 = this;
 
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       return Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/eurostat/EurostatDialogs.js"));
       }).then(function (module) {
-        return _this3.ES = _resolve(module["default"]);
+        return _this4.ES = _resolve(module["default"]);
       })["catch"](function (err) {
         return console.log(MSG_OFFLINE);
       });
@@ -144,7 +180,7 @@ var _router = {
     return Promise.resolve().then(function () {
       return (0, _interopRequireWildcard2["default"])(require("../../components/eurostat/EurostatDialogs"));
     }).then(function (module) {
-      return _this3.ES = _resolve(module["default"]);
+      return _this4.ES = _resolve(module["default"]);
     })["catch"](function (err) {
       return console.log(MSG_OFFLINE);
     });
@@ -166,14 +202,14 @@ var _router = {
   },
 
   _loadUSAE: function _loadUSAE() {
-    var _this4 = this;
+    var _this5 = this;
 
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       return Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/usa-economy/UsaeDialogs.js"));
       }).then(function (module) {
-        return _this4.USAE = _resolve(module["default"]);
+        return _this5.USAE = _resolve(module["default"]);
       })["catch"](function (err) {
         return console.log(MSG_OFFLINE);
       });
@@ -183,7 +219,7 @@ var _router = {
     return Promise.resolve().then(function () {
       return (0, _interopRequireWildcard2["default"])(require("../../components/usa-economy/UsaeDialogs"));
     }).then(function (module) {
-      return _this4.USAE = _resolve(module["default"]);
+      return _this5.USAE = _resolve(module["default"]);
     })["catch"](function (err) {
       return console.log(MSG_OFFLINE);
     });
@@ -199,14 +235,14 @@ var _router = {
   },
 
   _loadQE: function _loadQE() {
-    var _this5 = this;
+    var _this6 = this;
 
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       return Promise.resolve().then(function () {
         return (0, _interopRequireWildcard2["default"])(require("js/components/quandl/QuandlDialogs.js"));
       }).then(function (module) {
-        return _this5.QE = _resolve(module["default"]);
+        return _this6.QE = _resolve(module["default"]);
       })["catch"](function (err) {
         return console.log(MSG_OFFLINE);
       });
@@ -216,7 +252,7 @@ var _router = {
     return Promise.resolve().then(function () {
       return (0, _interopRequireWildcard2["default"])(require("../../components/quandl/QuandlDialogs"));
     }).then(function (module) {
-      return _this5.QE = _resolve(module["default"]);
+      return _this6.QE = _resolve(module["default"]);
     })["catch"](function (err) {
       return console.log(MSG_OFFLINE);
     });
