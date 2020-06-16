@@ -11,6 +11,8 @@ var _RowInputSearch = _interopRequireDefault(require("./RowInputSearch"));
 
 var _RowChart = _interopRequireDefault(require("./RowChart"));
 
+var _RowChartDate = _interopRequireDefault(require("./RowChartDate"));
+
 var _RowPattern = _interopRequireDefault(require("./RowPattern"));
 
 var _RowCheckBox = _interopRequireDefault(require("./RowCheckBox"));
@@ -27,6 +29,7 @@ var Rows = {
   RowInputSelect: _RowInputSelect["default"],
   RowInputSearch: _RowInputSearch["default"],
   RowChart: _RowChart["default"],
+  RowChartDate: _RowChartDate["default"],
   DatesFragment: _DatesFragment["default"],
   SelectOneTwo: _SelectOneTwo["default"],
   RowPattern: _RowPattern["default"],

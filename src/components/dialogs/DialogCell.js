@@ -1,4 +1,5 @@
 
+import Modals from './modals/Modals'
 import Rows from './rows/Rows'
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog'
@@ -17,7 +18,7 @@ const DialogCell = {
   DraggableDialog,
   ModalPopup,
   ShowHide,
-  ValidationMessages,  
+  ValidationMessages,
 
   ToolbarButtonCircle,
   Toolbar,
@@ -25,7 +26,8 @@ const DialogCell = {
   RowInputColor,
   SelectWithLoad,
   Button,
-  ...Rows
+  ...Rows,
+  ...Modals
 };
 
 export default DialogCell

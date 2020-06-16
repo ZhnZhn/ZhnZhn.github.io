@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _Modals = _interopRequireDefault(require("./modals/Modals"));
+
 var _Rows = _interopRequireDefault(require("./rows/Rows"));
 
 var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
@@ -40,7 +42,7 @@ var DialogCell = (0, _extends2["default"])({
   RowInputColor: _RowInputColor["default"],
   SelectWithLoad: _SelectWithLoad["default"],
   Button: _Button["default"]
-}, _Rows["default"]);
+}, _Rows["default"], _Modals["default"]);
 var _default = DialogCell;
 exports["default"] = _default;
 //# sourceMappingURL=DialogCell.js.map

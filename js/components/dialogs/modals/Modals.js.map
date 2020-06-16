@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/modals/Modals.js"
+ ],
+ "file": "../../../../src/components/dialogs/modals/Modals.js",
+ "names": [
+  "Modals",
+  "ModalOptions",
+  "ModalToggle"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,MAAM,GAAG;AACbC,EAAAA,YAAY,EAAZA,wBADa;AAEbC,EAAAA,WAAW,EAAXA;AAFa,CAAf;eAKeF,M"
+}

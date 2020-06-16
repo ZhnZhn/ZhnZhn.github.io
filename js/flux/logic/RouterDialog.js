@@ -17,9 +17,8 @@ var _resolve = Promise.resolve.bind(Promise);
 
 var _router = {
   DEFAULT: _Dialogs["default"].Type3,
+  DialogSelectN: _Dialogs["default"].SelectN,
   DialogType3: _Dialogs["default"].Type3,
-  DialogType4: _Dialogs["default"].Type4,
-  DialogQuery: _Dialogs["default"].Query,
   _loadGD: function _loadGD() {
     var _this = this;
 
@@ -45,6 +44,18 @@ var _router = {
   },
   getGD: function getGD() {
     return this.GD || this._loadGD();
+  },
+
+  get DialogQuery() {
+    return this.getGD().then(function (D) {
+      return D.Query;
+    });
+  },
+
+  get DialogType4() {
+    return this.getGD().then(function (D) {
+      return D.Type4;
+    });
   },
 
   get DialogType4A() {
@@ -162,15 +173,15 @@ var _router = {
     });
   },
 
-  _loadES: function _loadES() {
+  _loadSD: function _loadSD() {
     var _this4 = this;
 
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       return Promise.resolve().then(function () {
-        return (0, _interopRequireWildcard2["default"])(require("js/components/eurostat/EurostatDialogs.js"));
+        return (0, _interopRequireWildcard2["default"])(require("js/components/stat-dialogs/StatDialogs.js"));
       }).then(function (module) {
-        return _this4.ES = _resolve(module["default"]);
+        return _this4.SD = _resolve(module["default"]);
       })["catch"](function (err) {
         return console.log(MSG_OFFLINE);
       });
@@ -178,25 +189,19 @@ var _router = {
     }
 
     return Promise.resolve().then(function () {
-      return (0, _interopRequireWildcard2["default"])(require("../../components/eurostat/EurostatDialogs"));
+      return (0, _interopRequireWildcard2["default"])(require("../../components/stat-dialogs/StatDialogs"));
     }).then(function (module) {
-      return _this4.ES = _resolve(module["default"]);
+      return _this4.SD = _resolve(module["default"]);
     })["catch"](function (err) {
       return console.log(MSG_OFFLINE);
     });
   },
-  getES: function getES() {
-    return this.ES || this._loadES();
-  },
-
-  get DialogSelectN() {
-    return this.getES().then(function (D) {
-      return D.SelectN;
-    });
+  getSD: function getSD() {
+    return this.SD || this._loadSD();
   },
 
   get DialogStatN() {
-    return this.getES().then(function (D) {
+    return this.getSD().then(function (D) {
       return D.StatN;
     });
   },
@@ -292,10 +297,9 @@ var _router = {
 
         break;
 
-      case _Type.BrowserType.EUROSTAT:
       case _Type.BrowserType.NORWAY_STATISTICS:
       case _Type.BrowserType.SWEDEN_STAT:
-        this._loadES();
+        this._loadSD();
 
         break;
 
@@ -310,7 +314,7 @@ var _router = {
         break;
 
       default:
-        return undefined;
+        return;
     }
   }
 };

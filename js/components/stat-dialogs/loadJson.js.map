@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/loadJson.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/loadJson.js",
+ "names": [
+  "MSG_403",
+  "MSG_HTTP_CODE",
+  "loadJson",
+  "url",
+  "option",
+  "fetch",
+  "then",
+  "res",
+  "status",
+  "statusText",
+  "json",
+  "Error"
+ ],
+ "mappings": ";;;;AACA,IAAMA,OAAO,GAAG,oDAAhB;AACA,IAAMC,aAAa,GAAG,WAAtB;;AAEA,IAAMC,QAAQ,GAAG,SAAXA,QAAW,CAACC,GAAD,EAAMC,MAAN;AAAA,SAAiBC,KAAK,CAACF,GAAD,EAAMC,MAAN,CAAL,CAC9BE,IAD8B,CACzB,UAAAC,GAAG,EAAI;AAAA,QACHC,MADG,GACoBD,GADpB,CACHC,MADG;AAAA,QACKC,UADL,GACoBF,GADpB,CACKE,UADL;;AAEX,QAAID,MAAM,IAAE,GAAR,IAAeA,MAAM,GAAC,GAA1B,EAA+B;AAC7B,aAAOD,GAAG,CAACG,IAAJ,EAAP;AACD,KAFD,MAEO;AACL,UAAIF,MAAM,KAAK,GAAf,EAAqB;AACnB,cAAMG,KAAK,CAACX,OAAD,CAAX;AACD;;AACD,YAAMW,KAAK,CAAIV,aAAJ,UAAsBO,MAAtB,SAAgCC,UAAhC,CAAX;AACD;AACF,GAX8B,CAAjB;AAAA,CAAjB;;eAaeP,Q"
+}

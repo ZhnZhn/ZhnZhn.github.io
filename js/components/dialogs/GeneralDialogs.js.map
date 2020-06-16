@@ -6,8 +6,10 @@
  "file": "../../../src/components/dialogs/GeneralDialogs.js",
  "names": [
   "GeneralDialogs",
+  "Query",
+  "Type4",
   "Type4A",
   "Type5"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,cAAc,GAAG;AACrBC,EAAAA,MAAM,EAANA,wBADqB;AAErBC,EAAAA,KAAK,EAALA;AAFqB,CAAvB;eAKeF,c"
+ "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AAEA,IAAMA,cAAc,GAAG;AACrBC,EAAAA,KAAK,EAALA,uBADqB;AAErBC,EAAAA,KAAK,EAALA,sBAFqB;AAGrBC,EAAAA,MAAM,EAANA,wBAHqB;AAIrBC,EAAAA,KAAK,EAALA;AAJqB,CAAvB;eAOeJ,c"
 }

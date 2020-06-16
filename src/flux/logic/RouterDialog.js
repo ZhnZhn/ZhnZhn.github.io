@@ -9,10 +9,9 @@ const _resolve = Promise.resolve.bind(Promise);
 const _router = {
   DEFAULT: D.Type3,
 
+  DialogSelectN: D.SelectN,
   DialogType3: D.Type3,
-  DialogType4: D.Type4,
-  DialogQuery: D.Query,
-
+  
   _loadGD(){
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === '_development' ) {
@@ -31,6 +30,12 @@ const _router = {
   },
   getGD(){
     return this.GD || this._loadGD();
+  },
+  get DialogQuery() {
+    return this.getGD().then(D => D.Query);
+  },
+  get DialogType4() {
+    return this.getGD().then(D => D.Type4);
   },
   get DialogType4A() {
     return this.getGD().then(D => D.Type4A);
@@ -109,30 +114,27 @@ const _router = {
     return this.getSM().then(D => D.Intraday);
   },
 
-  _loadES() {
+  _loadSD() {
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === '_development' ) {
-       return import("js/components/eurostat/EurostatDialogs.js")
-         .then(module => this.ES = _resolve(module.default))
+       return import("js/components/stat-dialogs/StatDialogs.js")
+         .then(module => this.SD = _resolve(module.default))
          .catch(err => console.log(MSG_OFFLINE));
     /*eslint-enable no-undef */
      }
      return import(
-       /* webpackChunkName: "eurostat-dialogs" */
+       /* webpackChunkName: "stat-dialogs" */
        /* webpackMode: "lazy" */
-        "../../components/eurostat/EurostatDialogs"
+        "../../components/stat-dialogs/StatDialogs"
        )
-      .then(module => this.ES = _resolve(module.default))
+      .then(module => this.SD = _resolve(module.default))
       .catch(err => console.log(MSG_OFFLINE));
   },
-  getES() {
-    return this.ES || this._loadES();
-  },
-  get DialogSelectN() {
-    return this.getES().then(D => D.SelectN);
+  getSD() {
+    return this.SD || this._loadSD();
   },
   get DialogStatN() {
-    return this.getES().then(D => D.StatN);
+    return this.getSD().then(D => D.StatN);
   },
 
   _loadUSAE() {
@@ -195,15 +197,14 @@ const _router = {
     switch(browserType){
       case BT.STOCK_MARKETS:
         this._loadSM(); break;
-      case BT.EUROSTAT:
       case BT.NORWAY_STATISTICS:
       case BT.SWEDEN_STAT:
-         this._loadES(); break;
+         this._loadSD(); break;
       case BT.QUANDL:
          this._loadQE(); break;
       case BT.UN_COMTRADE:
         this._loadUN(); break;
-      default: return undefined;
+      default: return;
     }
   }
 

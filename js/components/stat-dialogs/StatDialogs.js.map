@@ -1,0 +1,12 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/StatDialogs.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/StatDialogs.js",
+ "names": [
+  "StatDialogs",
+  "StatN"
+ ],
+ "mappings": ";;;;;;;AACA;;AAEA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,KAAK,EAALA;AADkB,CAApB;eAIeD,W"
+}

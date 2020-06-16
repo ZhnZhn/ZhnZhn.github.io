@@ -6,9 +6,8 @@
  "file": "../../../src/components/dialogs/Dialogs.js",
  "names": [
   "Dialogs",
-  "Type3",
-  "Type4",
-  "Query"
+  "SelectN",
+  "Type3"
  ],
- "mappings": ";;;;;;;AACA;;AACA;;AACA;;AAEA,IAAMA,OAAO,GAAG;AACdC,EAAAA,KAAK,EAALA,sBADc;AAEdC,EAAAA,KAAK,EAALA,uBAFc;AAGdC,EAAAA,KAAK,EAALA;AAHc,CAAhB;eAMeH,O"
+ "mappings": ";;;;;;;AACA;;AACA;;AAEA,IAAMA,OAAO,GAAG;AACdC,EAAAA,OAAO,EAAPA,yBADc;AAEdC,EAAAA,KAAK,EAALA;AAFc,CAAhB;eAKeF,O"
 }
