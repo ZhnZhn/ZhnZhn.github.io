@@ -1,0 +1,14 @@
+{"items":[
+{"value":"TOTAL","caption":"Total - all NACE activities"},
+{"value":"A","caption":"Agriculture, forestry and fishing"},
+{"value":"B-E","caption":"Industry (except construction)"},
+{"value":"C","caption":"Manufacturing"},
+{"value":"F","caption":"Construction"},
+{"value":"G-I","caption":"Wholesale and retail trade, transport, accommodation and food service activities"},
+{"value":"J","caption":"Information and communication"},
+{"value":"K","caption":"Financial and insurance activities"},
+{"value":"L","caption":"Real estate activities"},
+{"value":"M_N","caption":"Professional, scientific and technical activities; administrative and support service activities"},
+{"value":"O-Q","caption":"Public administration, defence, education, human health and social work activities"},
+{"value":"R-U","caption":"Arts, entertainment and recreation; other service activities; activities of household and extra-territorial organizations and bodies"}
+]}
