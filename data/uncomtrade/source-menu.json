@@ -182,7 +182,7 @@
       "type": "UN_01",
       "menuTitle": "01 Animals live",
       "dialogCaption": "01 Animals live",
-      "chartContainerCaption": "UN Comtrade: Animal Products: 01",
+      "contFullCaption": "UN Comtrade: Animal Products: 01",
       "dialogType": "UnDialog5",
       "addProps": "UN_00",
       "dialogProps": {
@@ -193,7 +193,7 @@
       "type": "UN_02",
       "menuTitle": "02 Meat, edible meat offal",
       "dialogCaption": "02 Meat, edible meat offal",
-      "chartContainerCaption": "UN Comtrade: Animal Products: 02",
+      "contFullCaption": "UN Comtrade: Animal Products: 02",
       "dialogType": "UnDialog5",
       "addProps": "UN_00",
       "dialogProps": {
@@ -204,7 +204,7 @@
       "type": "UN_03",
       "menuTitle": "03 Fish, crustaceans, molluscs",
       "dialogCaption": "03 Fish, crustaceans, molluscs",
-      "chartContainerCaption": "UN Comtrade: Animal Products: 03",
+      "contFullCaption": "UN Comtrade: Animal Products: 03",
       "dialogType": "UnDialog5",
       "addProps": "UN_00",
       "dialogProps": {
@@ -215,7 +215,7 @@
       "type": "UN_04",
       "menuTitle": "04 Dairy produce, eggs, honey",
       "dialogCaption": "04 Dairy produce, eggs, honey",
-      "chartContainerCaption": "UN Comtrade: Animal Products: 04",
+      "contFullCaption": "UN Comtrade: Animal Products: 04",
       "dialogType": "UnDialog5",
       "addProps": "UN_00",
       "dialogProps": {
@@ -226,7 +226,7 @@
       "type": "UN_05",
       "menuTitle": "05 Animal originated products",
       "dialogCaption": "05 Animal originated products",
-      "chartContainerCaption": "UN Comtrade: Animal Products: 05",
+      "contFullCaption": "UN Comtrade: Animal Products: 05",
       "dialogType": "UnDialog5",
       "addProps": "UN_00",
       "dialogProps": {
@@ -238,7 +238,7 @@
       "type": "UN_06",
       "menuTitle": "06 Trees, other plants live",
       "dialogCaption": "06 Trees, other plants live",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 06",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 06",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -249,7 +249,7 @@
       "type": "UN_07",
       "menuTitle": "07 Vegetable, certain roots, tuners",
       "dialogCaption": "07 Vegetable, certain roots, tuners",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 07",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 07",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -260,7 +260,7 @@
       "type": "UN_08",
       "menuTitle": "08 Fruit, nuts, edible",
       "dialogCaption": "08 Fruit, nuts, edible",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 08",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 08",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -271,7 +271,7 @@
       "type": "UN_09",
       "menuTitle": "09 Coffee, tea, mate, spices",
       "dialogCaption": "09 Coffee, tea, mate, spices",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 09",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 09",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -282,7 +282,7 @@
       "type": "UN_10",
       "menuTitle": "10 Cereals",
       "dialogCaption": "10 Cereals",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 10",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 10",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -293,7 +293,7 @@
       "type": "UN_11",
       "menuTitle": "11 Products of the milling industry",
       "dialogCaption": "11 Products of the milling industry",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 11",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 11",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -304,7 +304,7 @@
       "type": "UN_12",
       "menuTitle": "12 Oil seeds, oleaginous fruits",
       "dialogCaption": "12 Oil seeds, oleaginous fruits",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 12",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 12",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -315,7 +315,7 @@
       "type": "UN_13",
       "menuTitle": "13 Lac",
       "dialogCaption": "13 Lac",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 13",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 13",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -326,7 +326,7 @@
       "type": "UN_14",
       "menuTitle": "14 Vegetable plaiting materials",
       "dialogCaption": "14 Vegetable plaiting materials",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 14",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 14",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -337,7 +337,7 @@
       "type": "UN_15",
       "menuTitle": "15 Animal or vegetable fats, oils",
       "dialogCaption": "15 Animal or vegetable fats, oils",
-      "chartContainerCaption": "UN Comtrade: Vegetable Products: 15",
+      "contFullCaption": "UN Comtrade: Vegetable Products: 15",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -349,7 +349,7 @@
       "type": "UN_16",
       "menuTitle": "16 Meat, fish or crustaceans",
       "dialogCaption": "16 Meat, fish or crustaceans",
-      "chartContainerCaption": "UN Comtrade: Footstuffs: 16",
+      "contFullCaption": "UN Comtrade: Footstuffs: 16",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -360,7 +360,7 @@
       "type": "UN_17",
       "menuTitle": "17 Sugars & Confectionery",
       "dialogCaption": "17 Sugars & Confectionery",
-      "chartContainerCaption": "UN Comtrade: Foodstuffs: 17",
+      "contFullCaption": "UN Comtrade: Foodstuffs: 17",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -371,7 +371,7 @@
       "type": "UN_18",
       "menuTitle": "18 Cocoa & Preparations",
       "dialogCaption": "18 Cocoa & Preparations",
-      "chartContainerCaption": "UN Comtrade: Foodstuffs: 18",
+      "contFullCaption": "UN Comtrade: Foodstuffs: 18",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -382,7 +382,7 @@
       "type": "UN_19",
       "menuTitle": "19 Cereals, flour, starch or milk",
       "dialogCaption": "19 Cereals, flour, starch or milk",
-      "chartContainerCaption": "UN Comtrade: Foodstuffs: 19",
+      "contFullCaption": "UN Comtrade: Foodstuffs: 19",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -393,7 +393,7 @@
       "type": "UN_20",
       "menuTitle": "20 Vegetables, fruit, nuts",
       "dialogCaption": "20 Vegetables, fruit, nuts",
-      "chartContainerCaption": "UN Comtrade: Foodstuffs: 20",
+      "contFullCaption": "UN Comtrade: Foodstuffs: 20",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -404,7 +404,7 @@
       "type": "UN_21",
       "menuTitle": "21 Miscellaneous edible",
       "dialogCaption": "21 Miscellaneous edible",
-      "chartContainerCaption": "UN Comtrade: Foodstuffs: 21",
+      "contFullCaption": "UN Comtrade: Foodstuffs: 21",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -415,7 +415,7 @@
       "type": "UN_22",
       "menuTitle": "22 Beverages, spirits, vinegar",
       "dialogCaption": "22 Beverages, spirits, vinegar",
-      "chartContainerCaption": "UN Comtrade: Foodstuffs: 22",
+      "contFullCaption": "UN Comtrade: Foodstuffs: 22",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -426,7 +426,7 @@
       "type": "UN_23",
       "menuTitle": "23 Food industries",
       "dialogCaption": "23 Food industries",
-      "chartContainerCaption": "UN Comtrade: Foodstuffs: 23",
+      "contFullCaption": "UN Comtrade: Foodstuffs: 23",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -437,7 +437,7 @@
       "type": "UN_24",
       "menuTitle": "24 Tobacco",
       "dialogCaption": "24 Tobacco",
-      "chartContainerCaption": "UN Comtrade: Foodstuffs: 24",
+      "contFullCaption": "UN Comtrade: Foodstuffs: 24",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -449,7 +449,7 @@
       "type": "UN_25",
       "menuTitle": "25 Salt, sulphur, earths, stone",
       "dialogCaption": "25 Salt, sulphur, earths, stone",
-      "chartContainerCaption": "UN Comtrade: Mineral Products: 25",
+      "contFullCaption": "UN Comtrade: Mineral Products: 25",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -460,7 +460,7 @@
       "type": "UN_26",
       "menuTitle": "26 Ores, slag, ash",
       "dialogCaption": "26 Ores, slag, ash",
-      "chartContainerCaption": "UN Comtrade: Mineral Products: 26",
+      "contFullCaption": "UN Comtrade: Mineral Products: 26",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -471,7 +471,7 @@
       "type": "UN_27",
       "menuTitle": "27 Mineral fuels, oils, products",
       "dialogCaption": "27 Mineral fuels, oils, products",
-      "chartContainerCaption": "UN Comtrade: Mineral Products: 27",
+      "contFullCaption": "UN Comtrade: Mineral Products: 27",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -483,7 +483,7 @@
       "type": "UN_28",
       "menuTitle": "28 Inorganic chemicals",
       "dialogCaption": "28 Inorganic chemicals",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 28",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 28",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -494,7 +494,7 @@
       "type": "UN_29",
       "menuTitle": "29 Organic chemicals",
       "dialogCaption": "29 Organic chemicals",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 29",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 29",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -505,7 +505,7 @@
       "type": "UN_30",
       "menuTitle": "30 Pharmaceutical products",
       "dialogCaption": "30 Pharmaceutical products",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 30",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 30",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -516,7 +516,7 @@
       "type": "UN_31",
       "menuTitle": "31 Fertilizers",
       "dialogCaption": "31 Fertilizers",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 31",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 31",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -527,7 +527,7 @@
       "type": "UN_32",
       "menuTitle": "32 Tanning or dyeing extracts",
       "dialogCaption": "32 Tanning or dyeing extracts",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 32",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 32",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -538,7 +538,7 @@
       "type": "UN_33",
       "menuTitle": "33 Essential oils, resinoids",
       "dialogCaption": "33 Essential oils, resinoids",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 33",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 33",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -549,7 +549,7 @@
       "type": "UN_34",
       "menuTitle": "34 Soap, organic surface-active agents",
       "dialogCaption": "34 Soap, organic surface-active agents",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 34",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 34",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -560,7 +560,7 @@
       "type": "UN_35",
       "menuTitle": "35 Albuminoidal substances",
       "dialogCaption": "35 Albuminoidal substances",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 35",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 35",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -571,7 +571,7 @@
       "type": "UN_36",
       "menuTitle": "36 Explosives, pyrotechnic products",
       "dialogCaption": "36 Explosives, pyrotechnic products",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 36",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 36",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -582,7 +582,7 @@
       "type": "UN_37",
       "menuTitle": "37 Photographic or cinematographic goods",
       "dialogCaption": "37 Photographic or cinematographic goods",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 37",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 37",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -593,7 +593,7 @@
       "type": "UN_38",
       "menuTitle": "38 Chemical products n.e.c.",
       "dialogCaption": "38 Chemical products n.e.c.",
-      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 38",
+      "contFullCaption": "UN Comtrade: Chemicals Allied Industry: 38",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -605,7 +605,7 @@
       "type": "UN_39",
       "menuTitle": "39 Plastics, articles thereof",
       "dialogCaption": "39 Plastics, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Plastics, Rubbers: 39",
+      "contFullCaption": "UN Comtrade: Plastics, Rubbers: 39",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -616,7 +616,7 @@
       "type": "UN_40",
       "menuTitle": "40 Rubber, articles thereof",
       "dialogCaption": "40 Rubber, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Plastics, Rubbers: 40",
+      "contFullCaption": "UN Comtrade: Plastics, Rubbers: 40",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -628,7 +628,7 @@
       "type": "UN_41",
       "menuTitle": "41 Raw hides, skins (other than furskins)",
       "dialogCaption": "",
-      "chartContainerCaption": "UN Comtrade: Raw Hides, Skins, Leather: 41",
+      "contFullCaption": "UN Comtrade: Raw Hides, Skins, Leather: 41",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -639,7 +639,7 @@
       "type": "UN_42",
       "menuTitle": "42 Articles of leather",
       "dialogCaption": "42 Articles of leather",
-      "chartContainerCaption": "UN Comtrade: Raw Hides, Skins, Leather: 42",
+      "contFullCaption": "UN Comtrade: Raw Hides, Skins, Leather: 42",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -650,7 +650,7 @@
       "type": "UN_43",
       "menuTitle": "43 Furskins, artificial fur",
       "dialogCaption": "43 Furskins, artificial fur",
-      "chartContainerCaption": "UN Comtrade: Raw Hides, Skins, Leather: 43",
+      "contFullCaption": "UN Comtrade: Raw Hides, Skins, Leather: 43",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -662,7 +662,7 @@
       "type": "UN_44",
       "menuTitle": "44 Wood, articles of wood",
       "dialogCaption": "44 Wood, articles of wood",
-      "chartContainerCaption": "UN Comtrade: Wood & Products: 44",
+      "contFullCaption": "UN Comtrade: Wood & Products: 44",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -673,7 +673,7 @@
       "type": "UN_45",
       "menuTitle": "45 Cork, articles of cork",
       "dialogCaption": "45 Cork, articles of cork",
-      "chartContainerCaption": "UN Comtrade: Wood & Products: 45",
+      "contFullCaption": "UN Comtrade: Wood & Products: 45",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -684,7 +684,7 @@
       "type": "UN_46",
       "menuTitle": "46 Manufactures of straw, esparto",
       "dialogCaption": "46 Manufactures of straw, esparto",
-      "chartContainerCaption": "UN Comtrade: Wood & Products: 46",
+      "contFullCaption": "UN Comtrade: Wood & Products: 46",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -695,7 +695,7 @@
       "type": "UN_47",
       "menuTitle": "47 Pulp of wood or other fibrous",
       "dialogCaption": "47 Pulp of wood or other fibrous",
-      "chartContainerCaption": "UN Comtrade: Wood & Products: 47",
+      "contFullCaption": "UN Comtrade: Wood & Products: 47",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -706,7 +706,7 @@
       "type": "UN_48",
       "menuTitle": "48 Paper, paperboard",
       "dialogCaption": "48 Paper, paperboard",
-      "chartContainerCaption": "UN Comtrade: Wood & Products: 48",
+      "contFullCaption": "UN Comtrade: Wood & Products: 48",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -717,7 +717,7 @@
       "type": "UN_49",
       "menuTitle": "49 Printed books, newspapers",
       "dialogCaption": "49 Printed books, newspapers",
-      "chartContainerCaption": "UN Comtrade: Wood & Products: 49",
+      "contFullCaption": "UN Comtrade: Wood & Products: 49",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -729,7 +729,7 @@
       "type": "UN_50",
       "menuTitle": "50 Silk",
       "dialogCaption": "50 Silk",
-      "chartContainerCaption": "UN Comtrade: Textiles: 50",
+      "contFullCaption": "UN Comtrade: Textiles: 50",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -740,7 +740,7 @@
       "type": "UN_51",
       "menuTitle": "51 Wool, fine or animal hair",
       "dialogCaption": "51 Wool, fine or animal hair",
-      "chartContainerCaption": "UN Comtrade: Textiles: 51",
+      "contFullCaption": "UN Comtrade: Textiles: 51",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -751,7 +751,7 @@
       "type": "UN_52",
       "menuTitle": "52 Cotton",
       "dialogCaption": "52 Cotton",
-      "chartContainerCaption": "UN Comtrade: Textiles: 52",
+      "contFullCaption": "UN Comtrade: Textiles: 52",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -762,7 +762,7 @@
       "type": "UN_53",
       "menuTitle": "53 Vegetable textile fibres",
       "dialogCaption": "53 Vegetable textile fibres",
-      "chartContainerCaption": "UN Comtrade: Textiles: 53",
+      "contFullCaption": "UN Comtrade: Textiles: 53",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -773,7 +773,7 @@
       "type": "UN_54",
       "menuTitle": "54 Man-made filaments",
       "dialogCaption": "54 Man-made filaments",
-      "chartContainerCaption": "UN Comtrade: Textiles: 54",
+      "contFullCaption": "UN Comtrade: Textiles: 54",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -784,7 +784,7 @@
       "type": "UN_55",
       "menuTitle": "55 Man-made staple fibres",
       "dialogCaption": "55 Man-made staple fibres",
-      "chartContainerCaption": "UN Comtrade: Textiles: 55",
+      "contFullCaption": "UN Comtrade: Textiles: 55",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -795,7 +795,7 @@
       "type": "UN_56",
       "menuTitle": "56 Wadding, felt, nonwovens",
       "dialogCaption": "56 Wadding, felt, nonwovens",
-      "chartContainerCaption": "UN Comtrade: Textiles: 56",
+      "contFullCaption": "UN Comtrade: Textiles: 56",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -806,7 +806,7 @@
       "type": "UN_57",
       "menuTitle": "57 Carpets, other floor coverings",
       "dialogCaption": "57 Carpets, other floor coverings",
-      "chartContainerCaption": "UN Comtrade: Textiles: 57",
+      "contFullCaption": "UN Comtrade: Textiles: 57",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -817,7 +817,7 @@
       "type": "UN_58",
       "menuTitle": "58 Fabrics; woven fabrics",
       "dialogCaption": "58 Fabrics; woven fabrics",
-      "chartContainerCaption": "UN Comtrade: Textiles: 58",
+      "contFullCaption": "UN Comtrade: Textiles: 58",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -828,7 +828,7 @@
       "type": "UN_59",
       "menuTitle": "59 Textile fabrics",
       "dialogCaption": "59 Textile fabrics",
-      "chartContainerCaption": "UN Comtrade: Textiles: 59",
+      "contFullCaption": "UN Comtrade: Textiles: 59",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -839,7 +839,7 @@
       "type": "UN_60",
       "menuTitle": "60 Fabrics; knitted or crocheted",
       "dialogCaption": "60 Fabrics; knitted or crocheted",
-      "chartContainerCaption": "UN Comtrade: Textiles: 60",
+      "contFullCaption": "UN Comtrade: Textiles: 60",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -850,7 +850,7 @@
       "type": "UN_61",
       "menuTitle": "61 Apparel; knitted",
       "dialogCaption": "61 Apparel; knitted",
-      "chartContainerCaption": "UN Comtrade: Textiles: 61",
+      "contFullCaption": "UN Comtrade: Textiles: 61",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -861,7 +861,7 @@
       "type": "UN_62",
       "menuTitle": "62 Apparel; not knitted",
       "dialogCaption": "62",
-      "chartContainerCaption": "UN Comtrade: Textiles: 62",
+      "contFullCaption": "UN Comtrade: Textiles: 62",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -872,7 +872,7 @@
       "type": "UN_63",
       "menuTitle": "63 Made up articles",
       "dialogCaption": "63 Made up articles",
-      "chartContainerCaption": "UN Comtrade: Textiles: 63",
+      "contFullCaption": "UN Comtrade: Textiles: 63",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -884,7 +884,7 @@
       "type": "UN_64",
       "menuTitle": "64 Footwear",
       "dialogCaption": "64 Footwear",
-      "chartContainerCaption": "UN Comtrade: Footwear, Headgear: 64",
+      "contFullCaption": "UN Comtrade: Footwear, Headgear: 64",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -895,7 +895,7 @@
       "type": "UN_65",
       "menuTitle": "65 Headgear, parts thereof",
       "dialogCaption": "65 Headgear, parts thereof",
-      "chartContainerCaption": "UN Comtrade: Footwear, Headgear: 65",
+      "contFullCaption": "UN Comtrade: Footwear, Headgear: 65",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -906,7 +906,7 @@
       "type": "UN_66",
       "menuTitle": "66 Umbrellas, walking-sticks",
       "dialogCaption": "66 Umbrellas, walking-sticks",
-      "chartContainerCaption": "UN Comtrade: Footwear, Headgear: 66",
+      "contFullCaption": "UN Comtrade: Footwear, Headgear: 66",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -917,7 +917,7 @@
       "type": "UN_67",
       "menuTitle": "67 Feathers, down, prepared",
       "dialogCaption": "67 Feathers, down, prepared",
-      "chartContainerCaption": "UN Comtrade: Footwear, Headgear: 67",
+      "contFullCaption": "UN Comtrade: Footwear, Headgear: 67",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -929,7 +929,7 @@
       "type": "UN_68",
       "menuTitle": "68 Stone, plaster, cement",
       "dialogCaption": "68 Stone, plaster, cement",
-      "chartContainerCaption": "UN Comtrade: Stone, Glass: 68",
+      "contFullCaption": "UN Comtrade: Stone, Glass: 68",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -940,7 +940,7 @@
       "type": "UN_69",
       "menuTitle": "69 Ceramic products",
       "dialogCaption": "69 Ceramic products",
-      "chartContainerCaption": "UN Comtrade: Stone, Glass: 69",
+      "contFullCaption": "UN Comtrade: Stone, Glass: 69",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -951,7 +951,7 @@
       "type": "UN_70",
       "menuTitle": "70 Glass, glassware",
       "dialogCaption": "70 Glass, glassware",
-      "chartContainerCaption": "UN Comtrade: Stone, Glass: 70",
+      "contFullCaption": "UN Comtrade: Stone, Glass: 70",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -962,7 +962,7 @@
       "type": "UN_71",
       "menuTitle": "71 Natural, cultured pearls",
       "dialogCaption": "71 Natural, cultured pearls",
-      "chartContainerCaption": "UN Comtrade: Stone, Glass: 71",
+      "contFullCaption": "UN Comtrade: Stone, Glass: 71",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -974,7 +974,7 @@
       "type": "UN_72",
       "menuTitle": "72 Iron and steel",
       "dialogCaption": "72 Iron and steel",
-      "chartContainerCaption": "UN Comtrade: Metals: 72",
+      "contFullCaption": "UN Comtrade: Metals: 72",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -985,7 +985,7 @@
       "type": "UN_73",
       "menuTitle": "73 Iron or steel articles",
       "dialogCaption": "73 Iron or steel articles",
-      "chartContainerCaption": "UN Comtrade: Metals: 73",
+      "contFullCaption": "UN Comtrade: Metals: 73",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -996,7 +996,7 @@
       "type": "UN_74",
       "menuTitle": "74 Copper, articles thereof",
       "dialogCaption": "74 Copper, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Metals: 74",
+      "contFullCaption": "UN Comtrade: Metals: 74",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1007,7 +1007,7 @@
       "type": "UN_75",
       "menuTitle": "75 Nickel, articles thereof",
       "dialogCaption": "75 Nickel, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Metals: 75",
+      "contFullCaption": "UN Comtrade: Metals: 75",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1018,7 +1018,7 @@
       "type": "UN_76",
       "menuTitle": "76 Aluminium, articles thereof",
       "dialogCaption": "76 Aluminium, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Metals: 76",
+      "contFullCaption": "UN Comtrade: Metals: 76",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1029,7 +1029,7 @@
       "type": "UN_78",
       "menuTitle": "78 Lead, articles thereof",
       "dialogCaption": "78 Lead, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Metals: 78",
+      "contFullCaption": "UN Comtrade: Metals: 78",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1040,7 +1040,7 @@
       "type": "UN_79",
       "menuTitle": "79 Zinc, articles thereof",
       "dialogCaption": "79 Zinc, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Metals: 79",
+      "contFullCaption": "UN Comtrade: Metals: 79",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1051,7 +1051,7 @@
       "type": "UN_80",
       "menuTitle": "80 Tin, articles thereof",
       "dialogCaption": "80 Tin, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Metals: 80",
+      "contFullCaption": "UN Comtrade: Metals: 80",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1062,7 +1062,7 @@
       "type": "UN_81",
       "menuTitle": "81 N.E.C., cermets, articles thereof",
       "dialogCaption": "81 N.E.C., cermets, articles thereof",
-      "chartContainerCaption": "UN Comtrade: Metals: 81",
+      "contFullCaption": "UN Comtrade: Metals: 81",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1073,7 +1073,7 @@
       "type": "UN_82",
       "menuTitle": "82 Tools, implements, cutlery",
       "dialogCaption": "82 Tools, implements, cutlery",
-      "chartContainerCaption": "UN Comtrade: Metals: 82",
+      "contFullCaption": "UN Comtrade: Metals: 82",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1084,7 +1084,7 @@
       "type": "UN_83",
       "menuTitle": "83 Products of base metal",
       "dialogCaption": "83 Products of base metal",
-      "chartContainerCaption": "UN Comtrade: Metals: 83",
+      "contFullCaption": "UN Comtrade: Metals: 83",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1096,7 +1096,7 @@
       "type": "UN_84",
       "menuTitle": "84 Nuclear reactors, boilers",
       "dialogCaption": "84 Nuclear reactors, boilers",
-      "chartContainerCaption": "UN Comtrade: Machinery Electrical: 84",
+      "contFullCaption": "UN Comtrade: Machinery Electrical: 84",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1107,7 +1107,7 @@
       "type": "UN_85",
       "menuTitle": "85 Electrical machinery",
       "dialogCaption": "85 Electrical machinery",
-      "chartContainerCaption": "UN Comtrade: Machinery Electrical: 85",
+      "contFullCaption": "UN Comtrade: Machinery Electrical: 85",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1119,7 +1119,7 @@
       "type": "UN_86",
       "menuTitle": "86 Railway, tramway locomotives",
       "dialogCaption": "86 Railway, tramway locomotives",
-      "chartContainerCaption": "UN Comtrade: Transportation: 86",
+      "contFullCaption": "UN Comtrade: Transportation: 86",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1130,7 +1130,7 @@
       "type": "UN_87",
       "menuTitle": "87 Vehicles other than railway",
       "dialogCaption": "87 Vehicles other than railway",
-      "chartContainerCaption": "UN Comtrade: Transportation: 87",
+      "contFullCaption": "UN Comtrade: Transportation: 87",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1141,7 +1141,7 @@
       "type": "UN_88",
       "menuTitle": "88 Aircraft, spacecraft",
       "dialogCaption": "88 Aircraft, spacecraft",
-      "chartContainerCaption": "UN Comtrade: Transportation: 88",
+      "contFullCaption": "UN Comtrade: Transportation: 88",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1152,7 +1152,7 @@
       "type": "UN_89",
       "menuTitle": "89 Ships, boats, floating structures",
       "dialogCaption": "89 Ships, boats, floating structures",
-      "chartContainerCaption": "UN Comtrade: Transportation: 89",
+      "contFullCaption": "UN Comtrade: Transportation: 89",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1164,7 +1164,7 @@
       "type": "UN_90",
       "menuTitle": "90 Optical, photographic",
       "dialogCaption": "90 Optical, photographic",
-      "chartContainerCaption": "UN Comtrade: Miscellaneous: 90",
+      "contFullCaption": "UN Comtrade: Miscellaneous: 90",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1175,7 +1175,7 @@
       "type": "UN_91",
       "menuTitle": "91 Clocks, watches",
       "dialogCaption": "91 Clocks, watches",
-      "chartContainerCaption": "UN Comtrade: Miscellaneous: 91",
+      "contFullCaption": "UN Comtrade: Miscellaneous: 91",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1186,7 +1186,7 @@
       "type": "UN_92",
       "menuTitle": "92 Musical instruments",
       "dialogCaption": "92 Musical instruments",
-      "chartContainerCaption": "UN Comtrade: Miscellaneous: 92",
+      "contFullCaption": "UN Comtrade: Miscellaneous: 92",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1197,7 +1197,7 @@
       "type": "UN_93",
       "menuTitle": "93 Arms, ammunition",
       "dialogCaption": "93 Arms, ammunition",
-      "chartContainerCaption": "UN Comtrade: Miscellaneous: 93",
+      "contFullCaption": "UN Comtrade: Miscellaneous: 93",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1208,7 +1208,7 @@
       "type": "UN_94",
       "menuTitle": "94 Furniture; bedding, mattresses",
       "dialogCaption": "94 Furniture; bedding, mattresses",
-      "chartContainerCaption": "UN Comtrade: Miscellaneous: 94",
+      "contFullCaption": "UN Comtrade: Miscellaneous: 94",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1219,7 +1219,7 @@
       "type": "UN_95",
       "menuTitle": "95 Toys, games, sports",
       "dialogCaption": "95 Toys, games, sports",
-      "chartContainerCaption": "UN Comtrade: Miscellaneous: 95",
+      "contFullCaption": "UN Comtrade: Miscellaneous: 95",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1230,7 +1230,7 @@
       "type": "UN_96",
       "menuTitle": "96 Manufactured articles",
       "dialogCaption": "96 Manufactured articles",
-      "chartContainerCaption": "UN Comtrade: Miscellaneous: 96",
+      "contFullCaption": "UN Comtrade: Miscellaneous: 96",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {
@@ -1241,7 +1241,7 @@
       "type": "UN_97",
       "menuTitle": "97 Works of art",
       "dialogCaption": "97 Works of art",
-      "chartContainerCaption": "UN Comtrade: Miscellaneous: 97",
+      "contFullCaption": "UN Comtrade: Miscellaneous: 97",
       "dialogType" : "UnDialog5",
       "addProps": "UN_00",
       "dialogProps" : {

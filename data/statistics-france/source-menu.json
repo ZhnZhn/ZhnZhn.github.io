@@ -38,7 +38,6 @@
       "type" : "FS_GDP_BALANCE",
       "menuTitle" : "GDP Balance (base 2010)",
       "dialogCaption" : "GDP Balance",
-      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/statistics-france/insee.html",
@@ -72,7 +71,6 @@
       "type": "FS_TRADE_PRODUCT_A17",
       "menuTitle": "Product Level A17",
       "dialogCaption": "Foreign Trade of Product Level A17",
-      "chartContainerCaption": "Insee: France Statistics",
       "dialogType": "DialogType4A",
       "addProps": "FS_TRADE_PRODUCT",
       "dialogProps": {
@@ -83,7 +81,6 @@
       "type": "FS_TRADE_PRODUCT_A38",
       "menuTitle" : "Product Level A38",
       "dialogCaption" : "Foreign Trade of Product Level A38",
-      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "addProps": "FS_TRADE_PRODUCT",
       "dialogProps" : {
@@ -94,7 +91,6 @@
       "type" : "FS_TRADE_AREA",
       "menuTitle" : "Area or Zone",
       "dialogCaption" : "Foreign Trade of Area or Zone",
-      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/statistics-france/insee.html",
@@ -127,7 +123,6 @@
       "type": "FS_TRADE_EUROPE",
       "menuTitle": "Europe",
       "dialogCaption": "Foreign Trade of Europe",
-      "chartContainerCaption": "Insee: France Statistics",
       "dialogType": "DialogType4A",
       "addProps": "FS_TRADE",
       "dialogProps" : {
@@ -138,7 +133,6 @@
       "type": "FS_TRADE_AFRICA",
       "menuTitle": "Africa",
       "dialogCaption": "Foreign Trade of Africa",
-      "chartContainerCaption": "Insee: France Statistics",
       "dialogType": "DialogType4A",
       "addProps": "FS_TRADE",
       "dialogProps": {
@@ -149,7 +143,6 @@
       "type": "FS_TRADE_AMERICA",
       "menuTitle": "America",
       "dialogCaption": "Foreign Trade of America",
-      "chartContainerCaption": "Insee: France Statistics",
       "dialogType": "DialogType4A",
       "addProps": "FS_TRADE",
       "dialogProps": {
@@ -160,7 +153,6 @@
       "type" : "FS_TRADE_MIDDLE_EAST",
       "menuTitle" : "Middle East",
       "dialogCaption" : "Foreign Trade of Middle East",
-      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "addProps": "FS_TRADE",
       "dialogProps" : {
@@ -171,7 +163,6 @@
       "type" : "FS_TRADE_ASIA_OCEANIA",
       "menuTitle" : "Asia & Oceania",
       "dialogCaption" : "Foreign Trade of Asia & Oceania",
-      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "addProps": "FS_TRADE",
       "dialogProps" : {
@@ -197,7 +188,6 @@
       "type" : "FS_PRICE_AGRI",
       "menuTitle" : "Agriculture Producer (base 2010)",
       "dialogCaption" : "Agriculture Producer",
-      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "addProps": "FS_PRICE",
       "dialogProps" : {
@@ -208,7 +198,6 @@
       "type" : "FS_PRICE_FOOD",
       "menuTitle" : "Wholesale Food (base 2005)",
       "dialogCaption" : "Wholesale Food Price Indices",
-      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "addProps": "FS_PRICE",
       "dialogProps" : {
@@ -219,7 +208,6 @@
       "type" : "FS_PRICE_RETAIL",
       "menuTitle" : "Average Retail Prices",
       "dialogCaption" : "Average Retail Prices",
-      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "addProps": "FS_PRICE",
       "dialogProps" : {
@@ -244,8 +232,7 @@
     "FS_CULTURE": {
       "type": "FS_CULTURE",
       "menuTitle": "Culture",
-      "dialogCaption": "Society - Culture",
-      "chartContainerCaption": "Insee: France Statistics Culture",
+      "dialogCaption": "Society, Culture",
       "addProps": "FS_SOCIETY",
       "dialogProps": {
         "optionURI": "./data/statistics-france/society-culture.json"
@@ -254,8 +241,6 @@
     "FS_CAR_REGISTRATION": {
       "type": "FS_CAR_REGISTRATION",
       "menuTitle": "Cars Registration",
-      "dialogCaption": "Cars Registration",
-      "chartContainerCaption": "Insee: Cars Registration",
       "addProps": "FS_SOCIETY",
       "dialogProps": {
         "optionURI": "./data/statistics-france/cars-registration.json"
@@ -263,9 +248,7 @@
     },
     "FS_MIN_WAGE": {
       "type": "FS_MIN_WAGE",
-      "menuTitle": "Guaranteed Min. Wages",
-      "dialogCaption": "Guaranteed Min. Wages",
-      "chartContainerCaption": "Insee: Guaranteed Minimum Wages",
+      "menuTitle": "Guaranteed Min. Wages",      
       "addProps": "FS_SOCIETY",
       "dialogProps": {
         "optionURI": "./data/statistics-france/min-wages.json"

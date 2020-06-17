@@ -105,8 +105,7 @@
     "DBN_BIS_DSR": {
       "type": "DBN_BIS_DSR",
       "menuTitle" : "Debt Service Ratio, Q",
-      "chartContainerCaption" : "DB Nomics: BIS: Debt Service Ratio",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",      
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -125,8 +124,7 @@
     "DBN_BIS_PPSS": {
       "type": "DBN_BIS_PPSS",
       "menuTitle" : "Selected Property Prices, Q",
-      "chartContainerCaption" : "DB Nomics: BIS: Selected Property Prices",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -147,8 +145,7 @@
     "DBN_ECB_CURRENCY": {
       "type" : "DBN_ECB_CURRENCY",
       "menuTitle" : "Exchange Rates, D",
-      "chartContainerCaption" : "DB Nomics: ECB: Exchange Rates, Daily",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "nInitFromDate": 3,
@@ -165,8 +162,7 @@
     "DBN_ECB_FMINDEX": {
       "type" : "DBN_ECB_FMINDEX",
       "menuTitle" : "Financial Market Index, M",
-      "chartContainerCaption" : "DB Nomics: ECB: Financial Market Index (FM), Monthly",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -185,8 +181,7 @@
     "DBN_ECB_CARREG": {
       "type" : "DBN_ECB_CARREG",
       "menuTitle" : "Car registration, WSA, M",
-      "chartContainerCaption" : "DB Nomics: ECB: Car registration (STS), WSA, Monthly",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -208,8 +203,7 @@
     "DBN_IMF_CPI": {
       "type" : "DBN_IMF_CPI",
       "menuTitle" : "CPI, M",
-      "chartContainerCaption" : "DB Nomics: IMF: CPI, Monthly",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_IMF",
       "dialogProps" : {
         "selectProps": [
@@ -227,8 +221,7 @@
     "DBN_IMF_TRADE": {
       "type" : "DBN_IMF_TRADE",
       "menuTitle" : "Trade Goods (DOTS), M",
-      "chartContainerCaption" : "DB Nomics: IMF: Direction of Trade Goods Statistics, M",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_IMF",
       "dialogProps": {
         "selectProps": [
@@ -247,8 +240,7 @@
     "DBN_IMF_COFOG": {
       "type" : "DBN_IMF_COFOG",
       "menuTitle" : "Expenditure (COFOG), A",
-      "chartContainerCaption" : "DB Nomics: IMF: Expenditure (COFOG), Annual",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_IMF",
       "dialogProps": {
         "selectProps": [
@@ -268,8 +260,7 @@
     "DBN_IMF_WEO": {
       "type" : "DBN_IMF_WEO",
       "menuTitle" : "WEO by Countries, A",
-      "chartContainerCaption" : "DB Nomics: IMF: WEO by Countries, Annual",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps": {
         "selectProps": [
@@ -287,8 +278,7 @@
     "DBN_IMF_WEOAGG": {
       "type" : "DBN_IMF_WEOAGG",
       "menuTitle" : "WEO by Country Groups, A",
-      "chartContainerCaption" : "DB Nomics: IMF: WEO by Country Groups, Annual",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps": {
         "selectProps": [
@@ -307,8 +297,7 @@
     "DBN_OECD_SHORTINDICATOR": {
       "type" : "DBN_OECD_SHORTINDICATOR",
       "menuTitle" : "Short Key Indicators, M",
-      "chartContainerCaption" : "DB Nomics: OECD: Short Key Indicators, Monthly",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_OECD",
       "dialogProps": {
         "selectProps": [
@@ -326,8 +315,7 @@
     "DBN_OECD_PRODUCERPRICES": {
       "type" : "DBN_OECD_PRODUCERPRICES",
       "menuTitle" : "Producer Prices Index, A",
-      "chartContainerCaption" : "DB Nomics: OECD: Producer Prices Index, Annual",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_OECD",
       "dialogProps": {
         "selectProps": [
@@ -345,8 +333,7 @@
     "DBN_OECD_RATES": {
       "type" : "DBN_OECD_RATES",
       "menuTitle" : "Interest Rates, M",
-      "chartContainerCaption" : "DB Nomics: OECD: Interest Rates, Monthly",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_OECD",
       "dialogProps": {
         "selectProps": [
@@ -365,8 +352,7 @@
     "DBN_WTO_GOODSTRADE_A": {
       "type" : "DBN_WTO_GOODSTRADE_A",
       "menuTitle" : "Merchandise Trade Value, A",
-      "chartContainerCaption" : "DB Nomics: WTO: Merchandise Trade Value, Annual",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_WTO",
       "dialogProps": {
         "selectProps": [
@@ -384,8 +370,7 @@
     "DBN_WTO_GOODSTRADE": {
       "type" : "DBN_WTO_GOODSTRADE",
       "menuTitle" : "Merchandise Trade Value, M",
-      "chartContainerCaption" : "DB Nomics: WTO: Merchandise Trade Value, Monthly",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_WTO",
       "dialogProps": {
         "dataSource" : "DB Nomics: WTO: Merchandise Trade Value in $Ml, M",
@@ -399,8 +384,7 @@
     "DBN_WTO_SERVICETRADE": {
       "type" : "DBN_WTO_SERVICETRADE",
       "menuTitle" : "Services Trade Value, M",
-      "chartContainerCaption" : "DB Nomics: WTO: Commercial Services Trade Value, Monthly",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_WTO",
       "dialogProps": {
         "dataSource" : "DB Nomics: WTO: Commercial Services Trade Value in $Ml, M",
@@ -414,8 +398,7 @@
     "DBN_FED_IPMAJOR": {
       "type": "DBN_FED_IPMAJOR",
       "menuTitle" : "Industrial Production",
-      "chartContainerCaption" : "DB Nomics: The Fed: Industrial Production",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -435,8 +418,7 @@
     "DBN_FED_CAP": {
       "type": "DBN_FED_CAP",
       "menuTitle" : "Industrial Capacity",
-      "chartContainerCaption" : "DB Nomics: The Fed: Industrial Capacity",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -456,8 +438,7 @@
     "DBN_FED_CAPUTL": {
       "type": "DBN_FED_CAPUTL",
       "menuTitle" : "Capacity Utilization",
-      "chartContainerCaption" : "DB Nomics: The Fed: Capacity Utilization",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -478,8 +459,7 @@
     "DBN_NBB_HICP": {
       "type" : "DBN_NBB_HICP",
       "menuTitle" : "Inflation & HICP, M",
-      "chartContainerCaption" : "DB Nomics: NBB: Inflation & HICP, Monthly",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -495,8 +475,7 @@
     "DBN_NBB_MARKETS": {
       "type" : "DBN_NBB_MARKETS",
       "menuTitle" : "Stocks & Commodities, D",
-      "chartContainerCaption" : "DB Nomics: NBB: Stocks & Commodities Market, Daily",
-      "dialogType": "DialogSelectN",
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "nInitFromDate": 5,
@@ -514,7 +493,7 @@
     "DBN_QUERY": {
       "type" : "DBN_QUERY",
       "menuTitle" : "Query by Id",
-      "chartContainerCaption" : "DB Nomics: Query by Id",
+      "contFullCaption" : "DB Nomics: Query by Id",
       "dialogType": "DialogQuery",
       "addProps": "DBN_B",
       "dialogProps" : {

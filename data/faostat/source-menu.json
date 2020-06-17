@@ -58,7 +58,7 @@
       "type": "FAO_CROPS",
       "menuTitle": "Crops",
       "dialogCaption": "Production Crops",
-      "chartContainerCaption": "FAOSTAT: Production Crops",
+      "contFullCaption": "FAOSTAT: Production Crops",
       "dialogType": "DialogType5",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -72,8 +72,7 @@
     "FAO_CROPS_PROCESSED": {
       "type": "FAO_CROPS_PROCESSED",
       "menuTitle": "Crops Processed",
-      "dialogCaption": "Crops Processsed",
-      "chartContainerCaption": "FAOSTAT: Production Crops Processsed",
+      "contFullCaption": "FAOSTAT: Production Crops Processsed",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -87,8 +86,7 @@
     "FAO_LIVE_ANIMAL": {
       "type": "FAO_LIVE_ANIMAL",
       "menuTitle": "Live Animals",
-      "dialogCaption": "Live Animals",
-      "chartContainerCaption": "FAOSTAT: Production Live Animals",
+      "contFullCaption": "FAOSTAT: Production Live Animals",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -104,7 +102,7 @@
       "type": "FAO_PRODUCER_PRICES",
       "menuTitle": "Producer Prices (LCU/tonne)",
       "dialogCaption": "Producer Prices",
-      "chartContainerCaption": "FAOSTAT: Producer Prices",
+      "contFullCaption": "FAOSTAT: Producer Prices",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -120,8 +118,7 @@
     "FAO_CPI": {
       "type": "FAO_CPI",
       "menuTitle": "Consume Price Indices",
-      "dialogCaption": "Consume Price Indices",
-      "chartContainerCaption": "FAOSTAT: Consume Price Indeces",
+      "contFullCaption": "FAOSTAT: Consume Price Indeces",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -134,15 +131,10 @@
       }
     },
 
-
-
-
-
     "FAO_PESTICIDES": {
       "type": "FAO_PESTICIDES",
       "menuTitle": "Pesticides Use",
-      "dialogCaption": "Pesticides Use",
-      "chartContainerCaption": "FAOSTAT: Input: Pesticides Use",
+      "contFullCaption": "FAOSTAT: Input: Pesticides Use",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -156,8 +148,7 @@
     "FAO_PESTICIDES_PER": {
       "type": "FAO_PESTICIDES_PER",
       "menuTitle": "Pesticides per Cropland",
-      "dialogCaption": "Pesticides per Cropland",
-      "chartContainerCaption": "FAOSTAT: Input: Pesticides per Cropland",
+      "contFullCaption": "FAOSTAT: Input: Pesticides per Cropland",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -171,8 +162,7 @@
     "FAO_FERTILIZERS": {
       "type": "FAO_FERTILIZERS",
       "menuTitle": "Fertilizers Use",
-      "dialogCaption": "Fertilizers Use",
-      "chartContainerCaption": "FAOSTAT: Inputs: Fertilizers Use",
+      "contFullCaption": "FAOSTAT: Inputs: Fertilizers Use",
       "dialogType": "DialogType5",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -186,8 +176,7 @@
     "FAO_FERTILIZER_PER": {
       "type": "FAO_FERTILIZER_PER",
       "menuTitle": "Fertilizers per Cropland",
-      "dialogCaption": "Fertilizers per Cropland",
-      "chartContainerCaption": "FAOSTAT: Inputs: Fertilizers per Cropland",
+      "contFullCaption": "FAOSTAT: Inputs: Fertilizers per Cropland",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -202,8 +191,7 @@
     "FAO_GOV_EXP": {
       "type": "FAO_GOV_EXP",
       "menuTitle": "Government Expenditure",
-      "dialogCaption": "Government Expenditure",
-      "chartContainerCaption": "FAOSTAT: Investments: Government Expenditure",
+      "contFullCaption": "FAOSTAT: Investments: Government Expenditure",
       "dialogType": "DialogType5",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -217,8 +205,7 @@
     "FAO_CREDIT_TO_AGRI": {
       "type": "FAO_CREDIT_TO_AGRI",
       "menuTitle": "Credit to Agriculture",
-      "dialogCaption": "Credit to Agriculture",
-      "chartContainerCaption": "FAOSTAT: Investments: Credit to Agriculture",
+      "contFullCaption": "FAOSTAT: Investments: Credit to Agriculture",
       "dialogType": "DialogType5",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -233,8 +220,7 @@
     "FAO_LAND_COVER": {
       "type": "FAO_LAND_COVER",
       "menuTitle": "Land Cover",
-      "dialogCaption": "Land Cover",
-      "chartContainerCaption": "FAOSTAT: Land Cover",
+      "contFullCaption": "FAOSTAT: Land Cover",
       "dialogType": "DialogType5",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -250,7 +236,7 @@
       "type": "FAO_TEMP_CHANGE",
       "menuTitle": "Temp. Change (1951-80)",
       "dialogCaption": "Temperature Change",
-      "chartContainerCaption": "FAOSTAT: Temperature Change",
+      "contFullCaption": "FAOSTAT: Temperature Change from (1951-80)",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -268,7 +254,7 @@
       "type": "FAO_ST_DEVIATION",
       "menuTitle": "Standard Deviation (Temp. Ch.)",
       "dialogCaption": "Standard Deviation",
-      "chartContainerCaption": "FAOSTAT: Standard Deviation of Temp. Change (1951-80)",
+      "contFullCaption": "FAOSTAT: Standard Deviation of Temp. Change (1951-80)",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {

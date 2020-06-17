@@ -54,8 +54,7 @@
     "WB_AGRICULTURE": {
       "type": "WB_AGRICULTURE",
       "menuTitle": "Agriculture",
-      "dialogCaption": "Agriculture",
-      "chartContainerCaption": "World Bank: Agriculture",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -66,8 +65,7 @@
     "WB_ECONOMY": {
       "type": "WB_ECONOMY",
       "menuTitle": "Economy & Growth",
-      "dialogCaption": "Economy & Growth",
-      "chartContainerCaption": "World Bank: Economy & Growth",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -78,8 +76,7 @@
     "WB_ENERGY": {
       "type": "WB_ENERGY",
       "menuTitle": "Energy & Mining",
-      "dialogCaption": "Energy & Mining",
-      "chartContainerCaption": "World Bank: Energy & Mining",
+      "contCaption": "World Bank: Energy & Mining",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -90,8 +87,7 @@
     "WB_PUBLICSECTOR": {
       "type": "WB_PUBLICSECTOR",
       "menuTitle": "Public Sector",
-      "dialogCaption": "Public Sector",
-      "chartContainerCaption": "World Bank: Public Sector",
+      "contCaption": "World Bank: Public Sector",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -102,8 +98,7 @@
     "WB_PRIVATESECTOR": {
       "type": "WB_PRIVATESECTOR",
       "menuTitle": "Private Sector",
-      "dialogCaption": "Private Sector",
-      "chartContainerCaption": "World Bank: Private Sector",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -114,8 +109,7 @@
     "WB_EXTERNALDEBT": {
       "type": "WB_EXTERNALDEBT",
       "menuTitle": "External Debt",
-      "dialogCaption": "External Debt",
-      "chartContainerCaption": "World Bank: External Debt",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -126,8 +120,7 @@
     "WB_FINANCE": {
       "type": "WB_FINANCE",
       "menuTitle": "Financial Sector",
-      "dialogCaption": "Financial Sector",
-      "chartContainerCaption": "World Bank: Financial Sector",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -138,8 +131,7 @@
     "WB_INFRASTRUCTURE": {
       "type": "WB_INFRASTRUCTURE",
       "menuTitle": "Infrastructure",
-      "dialogCaption": "Infrastructure",
-      "chartContainerCaption": "World Bank: Infrastructure",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -150,8 +142,7 @@
     "WB_SCIENCE": {
       "type": "WB_SCIENCE",
       "menuTitle": "Science & Technology",
-      "dialogCaption": "Science & Technology",
-      "chartContainerCaption": "World Bank: Science & Technology",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -162,8 +153,7 @@
     "WB_TRADE": {
       "type": "WB_TRADE",
       "menuTitle": "Trade",
-      "dialogCaption": "Trade",
-      "chartContainerCaption": "World Bank: Trade",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -174,8 +164,7 @@
     "WB_MILLENIUMGOAL": {
       "type": "WB_MILLENIUMGOAL",
       "menuTitle": "Millenium Goals",
-      "dialogCaption": "Millenium Goals",
-      "chartContainerCaption": "World Bank: Millenium Goals",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -187,8 +176,7 @@
     "WB_AIDEFFECTIVENESS": {
       "type": "WB_AIDEFFECTIVENESS",
       "menuTitle": "Aid Effectiveness",
-      "dialogCaption": "Aid Effectiveness",
-      "chartContainerCaption": "World Bank: Aid Effectiveness",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -199,8 +187,7 @@
     "WB_EDUCATION": {
       "type": "WB_EDUCATION",
       "menuTitle": "Education",
-      "dialogCaption": "Education",
-      "chartContainerCaption": "World Bank: Education",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -211,8 +198,7 @@
     "WB_HEALTH": {
       "type": "WB_HEALTH",
       "menuTitle": "Health",
-      "dialogCaption": "Health",
-      "chartContainerCaption": "World Bank: Health",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -223,8 +209,7 @@
     "WB_SOCIALPROTECTION": {
       "type": "WB_SOCIALPROTECTION",
       "menuTitle": "Social Protection & Labor",
-      "dialogCaption": "Social Protection & Labor",
-      "chartContainerCaption": "World Bank: Social Protection & Labor",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -235,8 +220,7 @@
     "WB_SOCIALDEVELOPMENT": {
       "type": "WB_SOCIALDEVELOPMENT",
       "menuTitle": "Social Development",
-      "dialogCaption": "Social Development",
-      "chartContainerCaption": "World Bank: Social Development",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -247,8 +231,7 @@
     "WB_URBANDEVELOPMENT": {
       "type": "WB_URBANDEVELOPMENT",
       "menuTitle": "Urban Development",
-      "dialogCaption": "Urban Development",
-      "chartContainerCaption": "World Bank: Urban Development",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -259,8 +242,7 @@
     "WB_GENDER": {
       "type": "WB_GENDER",
       "menuTitle": "Gender",
-      "dialogCaption": "Gender",
-      "chartContainerCaption": "World Bank: Gender",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -271,8 +253,7 @@
     "WB_POVERTY": {
       "type": "WB_POVERTY",
       "menuTitle": "Poverty",
-      "dialogCaption": "Poverty",
-      "chartContainerCaption": "World Bank: Poverty",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -285,8 +266,7 @@
     "WB_ENVIRONMENT": {
       "type": "WB_ENVIRONMENT",
       "menuTitle": "Environment",
-      "dialogCaption": "Environment",
-      "chartContainerCaption": "World Bank: Environment",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
@@ -297,8 +277,7 @@
     "WB_CLIMATECHANGE": {
       "type": "WB_CLIMATECHANGE",
       "menuTitle": "Climate Change",
-      "dialogCaption": "Climate Change",
-      "chartContainerCaption": "World Bank: Climate Change",
+      "contCaption": "",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {

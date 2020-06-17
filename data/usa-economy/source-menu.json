@@ -119,8 +119,7 @@
     "USAE_RGDP_1": {
       "type": "USAE_RGDP_1",
       "menuTitle": "Value Added",
-      "dialogCaption": "Value Added by Industry",
-      "chartContainerCaption": "BEA: GDP: Value Added by Industry",
+      "contFullCaption": "BEA: GDP: Value Added by Industry",
       "dialogType": "DialogType3",
       "addProps": "USAE_B1",
       "dialogProps": {
@@ -135,8 +134,7 @@
     "USAE_RGDP_2": {
       "type": "USAE_RGDP_2",
       "menuTitle": "Value Added as %",
-      "dialogCaption": "Value Addded by Industry as %",
-      "chartContainerCaption" : "BEA: Value Added by Industry as % of GDP",
+      "contFullCaption" : "BEA: Value Added by Industry as % of GDP",
       "dialogType": "DialogType3",
       "addProps": "USAE_B1",
       "dialogProps": {
@@ -151,8 +149,7 @@
     "USAE_RGDP_3": {
       "type": "USAE_RGDP_3",
       "menuTitle": "Comp. of Value Added as %",
-      "dialogCaption": "Comp. of Value Added as %",
-      "chartContainerCaption": "BEA: GDP: Components of Value Added as %",
+      "contFullCaption": "BEA: GDP: Components of Value Added as %",
       "dialogType": "DialogType4",
       "addProps": "USAE_B1",
       "dialogProps": {
@@ -170,8 +167,7 @@
     "USAE_RGDP_4": {
       "type": "USAE_RGDP_4",
       "menuTitle": "Real Value Added",
-      "dialogCaption": "Real Value Added by Industry",
-      "chartContainerCaption": "BEA: RGDP: Real Value Added by Industry",
+      "contFullCaption": "BEA: RGDP: Real Value Added by Industry",
       "dialogType": "DialogType3",
       "addProps": "USAE_B1",
       "dialogProps": {
@@ -186,8 +182,7 @@
     "USAE_RGDP_5": {
       "type": "USAE_RGDP_5",
       "menuTitle": "Contr. to % Change in RGDP",
-      "dialogCaption": "Contr. to % Change in RGDP",
-      "chartContainerCaption" : "BEA: Contribution to % Change in RGDP by",
+      "contFullCaption" : "BEA: Contribution to % Change in RGDP by",
       "dialogType": "DialogType3",
       "addProps": "USAE_B1",
       "dialogProps": {
@@ -205,7 +200,7 @@
       "type": "USAE_GO_1",
       "menuTitle": "Gross Output",
       "dialogCaption": "Gross Output by Industry",
-      "chartContainerCaption" : "BEA: Gross Output by Industry",
+      "contFullCaption" : "BEA: Gross Output by Industry",
       "dialogType": "DialogType3",
       "addProps": "USAE_B1",
       "dialogProps": {
@@ -220,8 +215,7 @@
     "USAE_GO_2": {
       "type": "USAE_GO_2",
       "menuTitle": "Intermediate Inputs",
-      "dialogCaption": "Intermediate Inputs",
-      "chartContainerCaption" : "BEA: Intermediate Inputs by Industry",
+      "contFullCaption" : "BEA: Intermediate Inputs by Industry",
       "dialogType": "DialogType3",
       "addProps": "USAE_B1",
       "dialogProps": {
@@ -236,8 +230,7 @@
     "USAE_GO_3": {
       "type": "USAE_GO_3",
       "menuTitle": "Shares of Gross Output",
-      "dialogCaption": "Shares Gross Output",
-      "chartContainerCaption" : "BEA: Shares Gross Output by Industry",
+      "contFullCaption" : "BEA: Shares Gross Output by Industry",
       "dialogType": "DialogType4",
       "addProps": "USAE_B1",
       "dialogProps": {
@@ -256,8 +249,7 @@
     "USAE_EIA_NET_GENER": {
       "type": "USAE_EIA_NET_GENER",
       "menuTitle": "Net Generation",
-      "dialogCaption": "Net Generation",
-      "chartContainerCaption" : "EIA: Electricity: Net Generation, Monthly",
+      "contFullCaption" : "EIA: Electricity: Net Generation, Monthly",
       "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
@@ -275,8 +267,7 @@
     "USAE_EIA_AVG_PRICE": {
       "type": "USAE_EIA_AVG_PRICE",
       "menuTitle": "Average Retail Price",
-      "dialogCaption": "Average Retail Price",
-      "chartContainerCaption" : "EIA: Electricity: Average Retail Price, Monthly",
+      "contFullCaption" : "EIA: Electricity: Average Retail Price, Monthly",
       "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
@@ -294,8 +285,7 @@
     "USAE_EIA_RETAIL_SALES": {
       "type": "USAE_EIA_RETAIL_SALES",
       "menuTitle": "Retail Sales",
-      "dialogCaption": "Retail Sales",
-      "chartContainerCaption" : "EIA: Electricity: Retail Sales, Monthly",
+      "contFullCaption" : "EIA: Electricity: Retail Sales, Monthly",
       "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
@@ -313,8 +303,7 @@
     "USAE_EIA_RETAIL_REVENUE": {
       "type": "USAE_EIA_RETAIL_REVENUE",
       "menuTitle": "Revenue from Retail Sales",
-      "dialogCaption": "Revenue from Retail Sales",
-      "chartContainerCaption" : "EIA: Electricity: Revenue from Retail Sales, Monthly",
+      "contFullCaption" : "EIA: Electricity: Revenue from Retail Sales, Monthly",
       "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
@@ -333,8 +322,7 @@
     "USAE_EIA_ENV_CO2": {
       "type": "USAE_EIA_ENV_CO2",
       "menuTitle": "CO2 Emissions",
-      "dialogCaption": "CO2 Emissions",
-      "chartContainerCaption" : "EIA: CO2 Emissions, Annual, Ml Tonnes",
+      "contFullCaption" : "EIA: CO2 Emissions, Annual, Ml Tonnes",
       "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
@@ -355,8 +343,7 @@
     "USAE_BLS_CAVP": {
       "type": "USAE_BLS_CAVP",
       "menuTitle" : "Consumer Average Prices",
-      "dialogCaption": "Consumer Average Prices",
-      "chartContainerCaption" : "BLS: Consumer Average Prices",
+      "contFullCaption" : "BLS: Consumer Average Prices",
       "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
@@ -370,7 +357,7 @@
       "type": "USAE_BLS_CPI",
       "menuTitle" : "CPI-U",
       "dialogCaption": "Consume Price Index (CPI-U)",
-      "chartContainerCaption" : "BLS: Consume Price Index (CPI-U)",
+      "contFullCaption" : "BLS: Consume Price Index (CPI-U)",
       "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
@@ -384,7 +371,7 @@
       "type": "USAE_BLS_PPIINDUSTRY",
       "menuTitle" : "PPI Industry",
       "dialogCaption": "PPI Industry",
-      "chartContainerCaption" : "BLS: PPI Industry",
+      "contFullCaption" : "BLS: PPI Industry",
       "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
@@ -398,7 +385,7 @@
       "type": "USAE_BLS_PPICOMMODITY",
       "menuTitle" : "PPI Commodity",
       "dialogCaption": "PPI Commodity",
-      "chartContainerCaption" : "BLS: PPI Commodity",
+      "contFullCaption" : "BLS: PPI Commodity",
       "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
@@ -412,7 +399,7 @@
       "type": "USAE_BLS_EXPIMPPRICE",
       "menuTitle" : "Export-Import Indexes",
       "dialogCaption": "Export-Import Indexes",
-      "chartContainerCaption" : "BLS: Export-Import Price Indexes",
+      "contFullCaption" : "BLS: Export-Import Price Indexes",
       "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
@@ -427,7 +414,7 @@
       "type": "USAE_CPI_1",
       "menuTitle" : "Quandl: BLS Inflation",
       "dialogCaption": "BLS Inflation & Prices",
-      "chartContainerCaption" : "Quandl: BLS Inflation & Prices",
+      "contFullCaption" : "Quandl: BLS Inflation & Prices",
       "dialogType": "DialogType3",
       "dialogProps" : {
         "itemCaption" : "Item:",
@@ -448,7 +435,7 @@
       "type" : "USAE_C_1",
       "menuTitle" : "Quandl: EIA Coal Mining",
       "dialogCaption" : "EIA Coal Mining",
-      "chartContainerCaption" : "Quandl: U.S. Energy Information Administration",
+      "contFullCaption" : "Quandl: U.S. Energy Information Administration",
       "dialogType" : "DialogType5",
       "dialogProps" : {
         "descrUrl": "./data/usa-economy/eia-coal-mining-via-quandl.html",
@@ -471,7 +458,7 @@
       "type" : "USAE_RE_1",
       "menuTitle" : "Quandl: Zillow Research",
       "dialogCaption" : "Zillow Real Estate Research",
-      "chartContainerCaption" : "Quandl: Zillow Real Estate Research",
+      "contFullCaption" : "Quandl: Zillow Real Estate Research",
       "dialogType" : "ZillowDialog",
       "dialogProps" : {
         "descrUrl": "./data/usa-economy/zillow.html",
@@ -492,7 +479,7 @@
       "type" : "USAE_RE_2",
       "menuTitle" : "Quandl: Freddie Mac",
       "dialogCaption" : "Freddie Mac",
-      "chartContainerCaption" : "Quandl: Freddie Mac",
+      "contFullCaption" : "Quandl: Freddie Mac",
       "dialogProps" : {
         "itemCaption" : "Item:",
         "optionNames" : "items",
@@ -512,7 +499,7 @@
       "type": "USAE_INTR_1",
       "menuTitle": "GDP, R+GDP",
       "dialogCaption": "GDP, R+GDP",
-      "chartContainerCaption" : "Intrinio: FRED GDP, R+GDP",
+      "contFullCaption" : "Intrinio: FRED GDP, R+GDP",
       "addProps": "USAE_B2",
       "dialogProps": {
         "optionURI": "./data/usa-economy/intrinio-gdp.json"
@@ -522,7 +509,7 @@
       "type": "USAE_INTR_2",
       "menuTitle": "CPI, Unemployment",
       "dialogCaption": "CPI, Unemployment",
-      "chartContainerCaption": "Intrinio: FRED CPI, Unemployment",
+      "contFullCaption": "Intrinio: FRED CPI, Unemployment",
       "addProps": "USAE_B2",
       "dialogProps": {
         "optionURI": "./data/usa-economy/intrinio-cpi.json"
@@ -532,7 +519,7 @@
       "type": "USAE_INTR_3",
       "menuTitle": "Index, Price, Rate",
       "dialogCaption": "Index, Price, Rate",
-      "chartContainerCaption": "Intrinio: FREDIndex, Price, Rate",
+      "contFullCaption": "Intrinio: FREDIndex, Price, Rate",
       "addProps": "USAE_B2",
       "dialogProps": {
         "optionURI": "./data/usa-economy/intrinio-rate.json"
@@ -542,7 +529,7 @@
       "type": "USAE_INTR_4",
       "menuTitle": "Treasury, Monetary",
       "dialogCaption": "Treasury, Monetary",
-      "chartContainerCaption": "Intrinio: FRED Treasury, Monetary",
+      "contFullCaption": "Intrinio: FRED Treasury, Monetary",
       "addProps": "USAE_B2",
       "dialogProps": {
         "optionURI": "./data/usa-economy/intrinio-treasury.json"
@@ -552,7 +539,7 @@
       "type": "USAE_INTR_5",
       "menuTitle": "Fin. Condition Indexes (4/6)",
       "dialogCaption": "Fin. Condition Indexes (4/6)",
-      "chartContainerCaption": "Intrinio: FRED Fin. Condition Indexes (4/6)",
+      "contFullCaption": "Intrinio: FRED Fin. Condition Indexes (4/6)",
       "addProps": "USAE_B2",
       "dialogProps": {
         "optionURI": "./data/usa-economy/intrinio-fci.json",
@@ -565,7 +552,7 @@
       "type": "USAE_INTR_6",
       "menuTitle": "Series",
       "dialogCaption": "Series",
-      "chartContainerCaption": "Intrinio: FRED Series",
+      "contFullCaption": "Intrinio: FRED Series",
       "addProps": "USAE_B2",
       "dialogProps": {
         "optionURI": "./data/usa-economy/intrinio-series.json"
