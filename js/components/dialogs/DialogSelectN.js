@@ -71,6 +71,7 @@ var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _wi
 
   /*
   static propTypes = {
+    isOpt: PropTypes.bool,
     isCh: PropTypes.bool,
     isShow: PropTypes.bool,
     caption: PropTypes.string,
@@ -284,7 +285,8 @@ var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _wi
     _this._titles = [0];
     _this._compSelect = {}; //this.date = undefined;
 
-    var isCh = props.isCh,
+    var isOpt = props.isOpt,
+        isCh = props.isCh,
         isFd = props.isFd,
         _selectProps = props.selectProps;
 
@@ -296,7 +298,7 @@ var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _wi
     });
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       noDate: true,
-      isOptions: isCh,
+      isOptions: isOpt || isCh,
       isToggle: isFd || _selectProps.length > 1
     });
     _this._refFromDate = /*#__PURE__*/_react["default"].createRef();

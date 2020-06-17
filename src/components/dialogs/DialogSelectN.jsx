@@ -48,6 +48,7 @@ const _isRequireChartOptionsUpdate = (
 class DialogSelectN extends Component {
   /*
   static propTypes = {
+    isOpt: PropTypes.bool,
     isCh: PropTypes.bool,
     isShow: PropTypes.bool,
     caption: PropTypes.string,
@@ -93,7 +94,7 @@ class DialogSelectN extends Component {
     this._compSelect = {}
     //this.date = undefined;
 
-    const { isCh, isFd, selectProps } = props;
+    const { isOpt, isCh, isFd, selectProps } = props;
     this._setFrequencyConfig(
       _getDfFrequencyConfig(props)
     )
@@ -103,7 +104,7 @@ class DialogSelectN extends Component {
       onAbout: this._clickInfoWithToolbar
     })
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true, isOptions: isCh,
+      props, { noDate: true, isOptions: isOpt || isCh,
       isToggle: isFd || selectProps.length > 1
     })
     this._refFromDate = React.createRef()
