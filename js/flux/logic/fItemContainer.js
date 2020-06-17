@@ -15,19 +15,27 @@ var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActi
 
 var _ChartActions = _interopRequireDefault(require("../actions/ChartActions"));
 
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
+
 var _crCaption = function _crCaption(dialogConf, browserType) {
-  var _caption = dialogConf.chartContainerCaption || dialogConf.contFullCaption || _BrowserConfig["default"][browserType].contFullCaption;
+  var _caption = dialogConf.contFullCaption || _BrowserConfig["default"][browserType].contFullCaption;
 
   if (_caption) {
     return _caption;
   }
 
-  var _ref = dialogConf.dialogProps || {},
+  var contCaption = dialogConf.contCaption,
+      dialogCaption = dialogConf.dialogCaption,
+      menuTitle = dialogConf.menuTitle,
+      dialogProps = dialogConf.dialogProps,
+      _ref = dialogProps || {},
       _ref$dataSource = _ref.dataSource,
       dataSource = _ref$dataSource === void 0 ? '' : _ref$dataSource;
 
-  _caption = dialogConf.contCaption || dialogConf.dialogCaption || dialogConf.menuTitle || 'Chart Container';
-  return dataSource && dataSource.length > 0 ? dataSource + ": " + _caption : _caption;
+  _caption = _isStr(contCaption) ? contCaption : dialogCaption || menuTitle || 'Item Container';
+  return [dataSource, _caption].filter(Boolean).join(': ');
 };
 
 var fItemContainer = {

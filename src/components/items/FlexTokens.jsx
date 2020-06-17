@@ -26,7 +26,7 @@ const FlexSpans = ({ tokens=[] }) => (
   </div>
 );
 
-const FlexTokens = ({ caption, tokens }) => {
+const FlexTokens = React.memo(({ caption, tokens }) => {
   return caption
     ? <A.OpenClose
         caption={caption}
@@ -35,6 +35,6 @@ const FlexTokens = ({ caption, tokens }) => {
         <FlexSpans tokens={tokens}/>
       </A.OpenClose>
     : <FlexSpans tokens={tokens}/>
-};
+});
 
 export default FlexTokens

@@ -22,7 +22,7 @@ var _crDataSource = function _crDataSource(_ref) {
   var dataSource = _ref.dataSource,
       _ref$dialogConf = _ref.dialogConf,
       dialogConf = _ref$dialogConf === void 0 ? {} : _ref$dialogConf;
-  return dataSource || dialogConf.chartContainerCaption || '';
+  return dataSource || dialogConf.contFullCaption || '';
 };
 
 var _assignDf = function _assignDf(option) {

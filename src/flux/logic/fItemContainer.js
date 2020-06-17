@@ -6,22 +6,27 @@ import BrowserConfig from '../../constants/BrowserConfig';
 import CA from '../actions/ComponentActions';
 import CHA from '../actions/ChartActions';
 
+const _isStr = str => typeof str === 'string';
+
 const _crCaption = (dialogConf, browserType) => {
-  let _caption = dialogConf.chartContainerCaption
-    || dialogConf.contFullCaption
+  let _caption = dialogConf.contFullCaption
     || BrowserConfig[browserType].contFullCaption;
   if (_caption) {
     return _caption;
   }
 
-  const { dataSource='' } = dialogConf.dialogProps || {};
-  _caption = dialogConf.contCaption
-     || dialogConf.dialogCaption
-     || dialogConf.menuTitle
-     || 'Chart Container'
-  return dataSource && dataSource.length>0
-     ? `${dataSource}: ${_caption}`
-     : _caption;
+  const {
+    contCaption, dialogCaption, menuTitle,
+    dialogProps
+  } = dialogConf
+  , { dataSource= ''} = dialogProps || {};
+
+  _caption = _isStr(contCaption)
+      ? contCaption
+      : dialogCaption || menuTitle || 'Item Container';
+  return [dataSource, _caption]
+    .filter(Boolean)
+    .join(': ');
 };
 
 const fItemContainer = {

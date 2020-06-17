@@ -73,7 +73,8 @@ var _crColumnConfig = function _crColumnConfig(_ref) {
       verticalAlign: 'top',
       layout: 'horizontal',
       x: 0,
-      y: -42
+      //y: -42
+      y: 12
     },
     plotOptions: {
       column: {

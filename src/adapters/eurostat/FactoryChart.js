@@ -63,7 +63,8 @@ const _crColumnConfig = ({ seriaColor=DF_COLOR }) => ({
     verticalAlign: 'top',
     layout: 'horizontal',
     x:  0,
-    y: -42
+    //y: -42
+    y: 12
   },
   plotOptions: {
     column : {

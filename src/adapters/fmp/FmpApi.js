@@ -16,7 +16,7 @@ const _isArr = Array.isArray
 const _assign = Object.assign;
 
 const _crDataSource = ({ dataSource, dialogConf={} }) =>
-  dataSource || dialogConf.chartContainerCaption || '';
+  dataSource || dialogConf.contFullCaption || '';
 
 const _assignDf = option => {
   const { dfT, items=[] } = option

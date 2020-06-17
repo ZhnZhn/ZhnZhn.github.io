@@ -33,11 +33,12 @@ var getFromDate = _DateUtils["default"].getFromDate,
     getToDate = _DateUtils["default"].getToDate,
     isYmd = _DateUtils["default"].isYmd,
     isYmdOrEmpty = _DateUtils["default"].isYmdOrEmpty;
-var initFromDate = getFromDate(2),
+var _isArr = Array.isArray,
+    initFromDate = getFromDate(2),
     initToDate = getToDate();
 
 var _crFnValue = function _crFnValue(valueFn, valueFnPrefix) {
-  return valueFn ? valueFnPrefix ? _RouterFnValue["default"][valueFn].bind(null, valueFnPrefix) : _RouterFnValue["default"][valueFn] : undefined;
+  return valueFn ? valueFnPrefix ? _RouterFnValue["default"][valueFn].bind(null, valueFnPrefix) : _RouterFnValue["default"][valueFn] : void 0;
 };
 
 var _crDateProps = function _crDateProps(_ref) {
@@ -79,6 +80,17 @@ var _crClickAbout = function _crClickAbout(_ref2) {
   }) : void 0;
 };
 
+var D = {
+  SELECT_N: 'DialogSelectN',
+  STAT_N: 'DialogStatN'
+};
+
+var _getDialogType = function _getDialogType(dialogType, _ref3) {
+  var selectProps = _ref3.selectProps,
+      dims = _ref3.dims;
+  return dialogType || (_isArr(selectProps) ? D.SELECT_N : void 0) || (_isArr(dims) ? D.STAT_N : void 0);
+};
+
 var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
   var itemKey = dialogConf.type,
       _dialogConf$dialogPro = dialogConf.dialogProps,
@@ -86,17 +98,15 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
       dialogType = dialogConf.dialogType,
       dialogCaption = dialogConf.dialogCaption,
       menuTitle = dialogConf.menuTitle,
-      optionURI = dialogConf.optionURI,
-      optionsJsonProp = dialogConf.optionsJsonProp,
-      dataColumn = dialogConf.dataColumn,
       valueFn = dialogProps.valueFn,
       valueFnPrefix = dialogProps.valueFnPrefix,
       loadFnType = dialogProps.loadFnType,
       loadId = dialogProps.loadId,
       isProxy = dialogProps.isProxy,
       isGetKey = dialogProps.isGetKey,
+      _dialogType = _getDialogType(dialogType, dialogProps),
       onClickInfo = _crClickAbout(dialogProps),
-      loadFn = _RouterLoadFn["default"].getFn(loadFnType, dialogType),
+      loadFn = _RouterLoadFn["default"].getFn(loadFnType, _dialogType),
       proxy = isProxy ? _ChartStore["default"].getProxy() : void 0,
       getKey = isGetKey && _ChartStore["default"].getKey,
       onError = isGetKey && _onError,
@@ -111,13 +121,10 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
     dialogProps.loadId = _Type.LoadType.Q;
   }
 
-  return _RouterDialog["default"].getDialog(dialogType).then(function (Comp) {
+  return _RouterDialog["default"].getDialog(_dialogType).then(function (Comp) {
     return /*#__PURE__*/_react["default"].createElement(Comp, (0, _extends2["default"])({
       key: itemKey,
       caption: dialogCaption || menuTitle,
-      optionURI: optionURI,
-      optionsJsonProp: optionsJsonProp,
-      dataColumn: dataColumn,
       msgOnNotSelected: _Msg["default"].NOT_SELECTED,
       msgOnNotValidFormat: _Msg["default"].NOT_VALID_FORMAT,
       fnValue: _crFnValue(valueFn, valueFnPrefix)

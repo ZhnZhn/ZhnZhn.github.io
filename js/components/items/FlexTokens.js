@@ -36,7 +36,7 @@ var FlexSpans = function FlexSpans(_ref) {
   }));
 };
 
-var FlexTokens = function FlexTokens(_ref2) {
+var FlexTokens = /*#__PURE__*/_react["default"].memo(function (_ref2) {
   var caption = _ref2.caption,
       tokens = _ref2.tokens;
   return caption ? /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
@@ -47,7 +47,7 @@ var FlexTokens = function FlexTokens(_ref2) {
   })) : /*#__PURE__*/_react["default"].createElement(FlexSpans, {
     tokens: tokens
   });
-};
+});
 
 var _default = FlexTokens;
 exports["default"] = _default;

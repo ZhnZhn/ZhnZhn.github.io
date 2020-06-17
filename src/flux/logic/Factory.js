@@ -23,7 +23,8 @@ const {
   isYmdOrEmpty
 } = DateUtils;
 
-const initFromDate = getFromDate(2)
+const _isArr = Array.isArray
+, initFromDate = getFromDate(2)
 , initToDate = getToDate();
 
 const _crFnValue = (valueFn, valueFnPrefix) => {
@@ -31,7 +32,7 @@ const _crFnValue = (valueFn, valueFnPrefix) => {
     ? valueFnPrefix
        ? RouterFnValue[valueFn].bind(null, valueFnPrefix)
        : RouterFnValue[valueFn]
-    : undefined;
+    : void 0;
 };
 
 const _crDateProps = ({ isFd, nInitFromDate }) => {
@@ -64,13 +65,19 @@ const _crClickAbout = ({ rootUri, descr, descrUrl }) => {
     : void 0;
 };
 
+const D = {
+  SELECT_N: 'DialogSelectN',
+  STAT_N: 'DialogStatN'
+};
+const _getDialogType = (dialogType, { selectProps, dims }) =>
+  dialogType || ( _isArr(selectProps) ? D.SELECT_N : void 0)
+  || (_isArr(dims) ? D.STAT_N : void 0);
+
 const _crDialogComp = function (browserType, dialogConf){
    const {
            type:itemKey,
            dialogProps={}, dialogType,
-           dialogCaption, menuTitle,
-           optionURI, optionsJsonProp,
-           dataColumn
+           dialogCaption, menuTitle
          } = dialogConf
        , {
            valueFn, valueFnPrefix,
@@ -79,8 +86,9 @@ const _crDialogComp = function (browserType, dialogConf){
            isProxy,
            isGetKey
          } = dialogProps
+       , _dialogType = _getDialogType(dialogType, dialogProps)
        , onClickInfo = _crClickAbout(dialogProps)
-       , loadFn = RouterLoadFn.getFn(loadFnType, dialogType)
+       , loadFn = RouterLoadFn.getFn(loadFnType, _dialogType)
        , proxy = isProxy
             ? ChartStore.getProxy()
             : void 0
@@ -99,14 +107,11 @@ const _crDialogComp = function (browserType, dialogConf){
          dialogProps.loadId = LoadType.Q;
        }
 
-      return RouterDialog.getDialog(dialogType)
+      return RouterDialog.getDialog(_dialogType)
          .then(Comp => {
             return React.createElement(Comp, {
               key : itemKey,
               caption : dialogCaption || menuTitle,
-              optionURI : optionURI,
-              optionsJsonProp : optionsJsonProp,
-              dataColumn : dataColumn,
               msgOnNotSelected : Msg.NOT_SELECTED,
               msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
               fnValue : _crFnValue(valueFn, valueFnPrefix),
