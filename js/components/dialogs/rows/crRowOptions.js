@@ -9,9 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _useRow = _interopRequireDefault(require("./useRow"));
+var _crRow = _interopRequireDefault(require("./crRow"));
 
-var useRowOptions = function useRowOptions(_ref, _temp) {
+var crRowOptions = function crRowOptions(_ref, _temp) {
   var isShowLabels = _ref.isShowLabels,
       _ref$caption = _ref.caption,
       caption = _ref$caption === void 0 ? '' : _ref$caption,
@@ -21,7 +21,7 @@ var useRowOptions = function useRowOptions(_ref, _temp) {
   var _ref2 = _temp === void 0 ? {} : _temp,
       isOc = _ref2.isOc;
 
-  return (0, _extends2["default"])({}, (0, _useRow["default"])({
+  return (0, _extends2["default"])({}, (0, _crRow["default"])({
     isShowLabels: isShowLabels,
     caption: caption,
     captionStyle: captionStyle
@@ -34,6 +34,6 @@ var useRowOptions = function useRowOptions(_ref, _temp) {
   });
 };
 
-var _default = useRowOptions;
+var _default = crRowOptions;
 exports["default"] = _default;
-//# sourceMappingURL=useRowOptions.js.map
+//# sourceMappingURL=crRowOptions.js.map

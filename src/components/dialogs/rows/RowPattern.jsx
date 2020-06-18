@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import InputPattern from '../../zhn/InputPattern'
-import useRow from './useRow'
+import crRow from './crRow'
 
 class RowPattern extends Component {
   /*
@@ -24,7 +24,7 @@ class RowPattern extends Component {
     , {
       rowStyle, labelStyle,
       caption:_caption
-    } = useRow({
+    } = crRow({
       isShowLabels, caption, captionStyle
     });
     return (

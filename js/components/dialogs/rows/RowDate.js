@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 
-var _useRowStyle2 = _interopRequireDefault(require("./useRowStyle"));
+var _crRowStyle2 = _interopRequireDefault(require("./crRowStyle"));
 
 //import PropTypes from "prop-types";
 var RowDate = function RowDate(_ref) {
@@ -24,11 +24,11 @@ var RowDate = function RowDate(_ref) {
       onTestDate = _ref.onTestDate;
 
   var _refDate = (0, _react.useRef)(null),
-      _useRowStyle = (0, _useRowStyle2["default"])({
+      _crRowStyle = (0, _crRowStyle2["default"])({
     isShowLabels: isShowLabels
   }),
-      rowStyle = _useRowStyle.rowStyle,
-      labelStyle = _useRowStyle.labelStyle;
+      rowStyle = _crRowStyle.rowStyle,
+      labelStyle = _crRowStyle.labelStyle;
 
   (0, _react.useImperativeHandle)(innerRef, function () {
     return {

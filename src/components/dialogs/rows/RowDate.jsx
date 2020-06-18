@@ -2,19 +2,19 @@ import React, { useRef, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
 
 import DateField from '../../zhn/DateField';
-import useRowStyle from './useRowStyle'
+import crRowStyle from './crRowStyle'
 
 const RowDate = ({
   innerRef,
   isShowLabels, labelTitle='', initValue,
   errorMsg, onTestDate
 }) => {
-  const _refDate = useRef(null)
- , { rowStyle, labelStyle } = useRowStyle({ isShowLabels });
+ const _refDate = useRef(null)
+ , { rowStyle, labelStyle } = crRowStyle({ isShowLabels });
  useImperativeHandle(innerRef, () => ({
    getValue: () => _refDate.current.getValue(),
    isValid: () => _refDate.current.isValid
- }), [])
+ }), []);
  return (
    <div style={rowStyle}>
      <span style={labelStyle}>

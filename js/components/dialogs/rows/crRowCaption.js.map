@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/crRowCaption.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/crRowCaption.js",
+ "names": [
+  "crRowCaption",
+  "caption",
+  "STYLE"
+ ],
+ "mappings": ";;;;;;;AACA;;AAEA,IAAMA,YAAY,GAAG,SAAfA,YAAe,CAACC,OAAD;AAAA,MAACA,OAAD;AAACA,IAAAA,OAAD,GAAS,EAAT;AAAA;;AAAA,SAAiB;AACpCA,IAAAA,OAAO,EAAEC,yBAAMF,YAAN,CAAmBC,OAAnB;AAD2B,GAAjB;AAAA,CAArB;;eAIeD,Y"
+}

@@ -17,7 +17,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _InputPattern = _interopRequireDefault(require("../../zhn/InputPattern"));
 
-var _useRow2 = _interopRequireDefault(require("./useRow"));
+var _crRow2 = _interopRequireDefault(require("./crRow"));
 
 //import PropTypes from "prop-types";
 var RowPattern = /*#__PURE__*/function (_Component) {
@@ -47,14 +47,14 @@ var RowPattern = /*#__PURE__*/function (_Component) {
         caption = _this$props.caption,
         captionStyle = _this$props.captionStyle,
         rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["isShowLabels", "caption", "captionStyle"]),
-        _useRow = (0, _useRow2["default"])({
+        _crRow = (0, _crRow2["default"])({
       isShowLabels: isShowLabels,
       caption: caption,
       captionStyle: captionStyle
     }),
-        rowStyle = _useRow.rowStyle,
-        labelStyle = _useRow.labelStyle,
-        _caption = _useRow.caption;
+        rowStyle = _crRow.rowStyle,
+        labelStyle = _crRow.labelStyle,
+        _caption = _crRow.caption;
 
     return /*#__PURE__*/_react["default"].createElement("div", {
       style: rowStyle

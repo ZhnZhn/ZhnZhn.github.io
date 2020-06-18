@@ -1,14 +1,14 @@
 import React from 'react';
 
 import InputSearch from '../../zhn-search/InputSearch';
-import useRowOptions from './useRowOptions'
+import crRowOptions from './crRowOptions'
 
 const RowInputSearch = (props) => {
   const {
     rowStyle, labelStyle,
     caption,
     options
-  } = useRowOptions(props);
+  } = crRowOptions(props);
 
   return (
      <div style={rowStyle}>

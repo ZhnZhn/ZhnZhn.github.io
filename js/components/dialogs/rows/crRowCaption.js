@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _DialogStyles = _interopRequireDefault(require("../../styles/DialogStyles"));
 
-var useRowCaption = function useRowCaption(caption) {
+var crRowCaption = function crRowCaption(caption) {
   if (caption === void 0) {
     caption = '';
   }
@@ -17,6 +17,6 @@ var useRowCaption = function useRowCaption(caption) {
   };
 };
 
-var _default = useRowCaption;
+var _default = crRowCaption;
 exports["default"] = _default;
-//# sourceMappingURL=useRowCaption.js.map
+//# sourceMappingURL=crRowCaption.js.map

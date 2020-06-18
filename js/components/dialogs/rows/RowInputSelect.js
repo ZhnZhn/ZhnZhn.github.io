@@ -9,14 +9,14 @@ var _react = _interopRequireDefault(require("react"));
 
 var _InputSelect = _interopRequireDefault(require("../../zhn-select/InputSelect"));
 
-var _useRowOptions2 = _interopRequireDefault(require("./useRowOptions"));
+var _crRowOptions2 = _interopRequireDefault(require("./crRowOptions"));
 
 var RowInputSelect = function RowInputSelect(props) {
-  var _useRowOptions = (0, _useRowOptions2["default"])(props),
-      rowStyle = _useRowOptions.rowStyle,
-      labelStyle = _useRowOptions.labelStyle,
-      caption = _useRowOptions.caption,
-      options = _useRowOptions.options;
+  var _crRowOptions = (0, _crRowOptions2["default"])(props),
+      rowStyle = _crRowOptions.rowStyle,
+      labelStyle = _crRowOptions.labelStyle,
+      caption = _crRowOptions.caption,
+      options = _crRowOptions.options;
 
   return /*#__PURE__*/_react["default"].createElement("div", {
     style: rowStyle

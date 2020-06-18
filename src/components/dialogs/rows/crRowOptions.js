@@ -1,13 +1,13 @@
 
-import useRow from './useRow'
+import crRow from './crRow'
 
-const useRowOptions = ({
+const crRowOptions = ({
   isShowLabels,
   caption='',
   captionStyle,
   ...rest
 }, { isOc }={}) => ({
-  ...useRow({ isShowLabels, caption, captionStyle }, isOc),
+  ...crRow({ isShowLabels, caption, captionStyle }, isOc),
   options: {
     width: "250",
     ...rest,
@@ -17,4 +17,4 @@ const useRowOptions = ({
   }
 });
 
-export default useRowOptions
+export default crRowOptions

@@ -1,8 +1,8 @@
 
 import STYLE from '../../styles/DialogStyles';
 
-const useRowCaption = (caption='') => ({
+const crRowCaption = (caption='') => ({
   caption: STYLE.crRowCaption(caption)
 });
 
-export default useRowCaption
+export default crRowCaption

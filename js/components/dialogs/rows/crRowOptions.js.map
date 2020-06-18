@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/crRowOptions.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/crRowOptions.js",
+ "names": [
+  "crRowOptions",
+  "isShowLabels",
+  "caption",
+  "captionStyle",
+  "rest",
+  "isOc",
+  "options",
+  "width",
+  "optionName",
+  "replace"
+ ],
+ "mappings": ";;;;;;;;;;;AACA;;AAEA,IAAMA,YAAY,GAAG,SAAfA,YAAe;AAAA,MACnBC,YADmB,QACnBA,YADmB;AAAA,0BAEnBC,OAFmB;AAAA,MAEnBA,OAFmB,6BAEX,EAFW;AAAA,MAGnBC,YAHmB,QAGnBA,YAHmB;AAAA,MAIhBC,IAJgB;;AAAA,iCAKT,EALS;AAAA,MAKhBC,IALgB,SAKhBA,IALgB;;AAAA,uCAMhB,uBAAM;AAAEJ,IAAAA,YAAY,EAAZA,YAAF;AAAgBC,IAAAA,OAAO,EAAPA,OAAhB;AAAyBC,IAAAA,YAAY,EAAZA;AAAzB,GAAN,EAA+CE,IAA/C,CANgB;AAOnBC,IAAAA,OAAO;AACLC,MAAAA,KAAK,EAAE;AADF,OAEFH,IAFE;AAGLI,MAAAA,UAAU,EAAEP,YAAY,GACpB,EADoB,GAEpBC,OAAO,CAACO,OAAR,CAAgB,GAAhB,EAAqB,EAArB;AALC;AAPY;AAAA,CAArB;;eAgBeT,Y"
+}

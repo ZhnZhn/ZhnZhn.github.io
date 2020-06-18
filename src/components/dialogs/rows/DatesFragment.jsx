@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import DateField from '../../zhn/DateField';
-import useRowStyle from './useRowStyle'
+import crRowStyle from './crRowStyle'
 
 const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 const NEAR_ERR_MSG = "From Date is near that To Date";
@@ -50,7 +50,7 @@ class DatesFragment extends Component {
       } = this.props
     , {
         rowStyle, labelStyle
-      } = useRowStyle({ isShowLabels })
+      } = crRowStyle({ isShowLabels })
 
     return (
         <div>

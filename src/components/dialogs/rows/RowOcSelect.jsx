@@ -2,7 +2,7 @@ import React from 'react';
 
 import OpenClose from '../../zhn/OpenClose'
 import InputSelect from '../../zhn-select/InputSelect'
-import useRowOptions from './useRowOptions'
+import crRowOptions from './crRowOptions'
 
 const C_OPEN = "#1b75bb";
 const S = {
@@ -23,7 +23,7 @@ const RowOcSelect = ({
    const {
      rowStyle, labelStyle, caption,
      options
-   } = useRowOptions(restProps, { isOc: true });
+   } = crRowOptions(restProps, { isOc: true });
 
   return (
      <OpenClose

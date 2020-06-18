@@ -13,7 +13,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 
-var _useRowStyle2 = _interopRequireDefault(require("./useRowStyle"));
+var _crRowStyle2 = _interopRequireDefault(require("./crRowStyle"));
 
 //import PropTypes from "prop-types";
 var FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
@@ -57,11 +57,11 @@ var DatesFragment = /*#__PURE__*/function (_Component) {
         errMsg = _this$props.errMsg,
         onTestDate = _this$props.onTestDate,
         onEnter = _this$props.onEnter,
-        _useRowStyle = (0, _useRowStyle2["default"])({
+        _crRowStyle = (0, _crRowStyle2["default"])({
       isShowLabels: isShowLabels
     }),
-        rowStyle = _useRowStyle.rowStyle,
-        labelStyle = _useRowStyle.labelStyle;
+        rowStyle = _crRowStyle.rowStyle,
+        labelStyle = _crRowStyle.labelStyle;
 
     return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
       style: rowStyle
