@@ -18,15 +18,6 @@ const _crQuandlKey = function(option){
     : viewKey || value;
 };
 
-const _crEurostatKey = function(option){
-  const {
-          geo='', group='', metric='',
-          seriaType='AREA', time='',
-         } = option
-      , _metric = metric.replace('?', '_');
-  return `${geo}_${group}_${_metric}_${seriaType}_${time}`;
-};
-
 const _crKey = (option) => {
   const { loadId, value, _itemKey } = option
       , loadConfig = LoadConfig[loadId] || {}
@@ -42,10 +33,8 @@ const LogicUtils = {
     switch (loadId) {
       case LT.Q: case LT.QCT:
         return _itemKey || _crQuandlKey(option);
-      case LT.EU_STAT: case LT.EIA:
-         return _itemKey || _crEurostatKey(option);
-      case LT.WL:
-         return _itemKey || option.id;
+      case LT.EU_STAT: case LT.EIA: case LT.WL:
+        return _itemKey || option.id;
       default:
         return _crKey(option);
     }
