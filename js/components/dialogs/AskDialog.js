@@ -27,31 +27,30 @@ var MSG_SUFFIX = "from url?";
 var S = {
   MODAL: {
     position: 'static',
-    width: '400px',
-    height: '205px',
+    width: 400,
+    height: 205,
     margin: '70px auto'
   },
   ROOT_DIV: {
-    display: 'block',
-    margin: '5px'
+    margin: 5
   },
   NAME: {
     color: '#a487d4',
-    paddingLeft: '5px',
-    paddingRight: '5px'
+    paddingLeft: 5,
+    paddingRight: 5
   },
   DESCR: {
     color: 'gray',
-    width: '400px',
-    paddingLeft: '10px',
-    paddingTop: '5px',
-    fontWeight: 'bold',
+    width: 400,
+    paddingLeft: 10,
+    paddingTop: 5,
     lineHeight: 1.4,
+    fontWeight: 'bold',
     whiteSpace: 'pre'
   },
   CAPTCHA: {
-    padding: '8px',
-    paddingBottom: '0px'
+    padding: 8,
+    paddingBottom: 0
   }
 };
 
@@ -73,7 +72,12 @@ var AskDialog = /*#__PURE__*/function (_Component) {
   function AskDialog(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
+
+    _this._refCaptcha = function (c) {
+      return _this.captchaComp = c;
+    };
+
     _this._handleLoad = _this._handleLoad.bind((0, _assertThisInitialized2["default"])(_this));
     _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       caption: "Yes, Load" //accessKey="s"
@@ -114,8 +118,6 @@ var AskDialog = /*#__PURE__*/function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this2 = this;
-
     var _this$props2 = this.props,
         isShow = _this$props2.isShow,
         _this$props2$data = _this$props2.data,
@@ -139,9 +141,7 @@ var AskDialog = /*#__PURE__*/function (_Component) {
     }, MSG_PREFIX, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.NAME
     }, name), MSG_SUFFIX), /*#__PURE__*/_react["default"].createElement(_MathCaptcha["default"], {
-      ref: function ref(c) {
-        return _this2.captchaComp = c;
-      },
+      ref: this._refCaptcha,
       rootStyle: S.CAPTCHA
     })));
   };

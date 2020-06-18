@@ -13,31 +13,30 @@ const MSG_SUFFIX = "from url?";
 const S = {
   MODAL : {
     position: 'static',
-    width: '400px',
-    height: '205px',
+    width: 400,
+    height: 205,
     margin: '70px auto'
   },
   ROOT_DIV: {
-    display: 'block',
-    margin: '5px'
+    margin: 5
   },
   NAME : {
     color: '#a487d4',
-    paddingLeft: '5px',
-    paddingRight: '5px'
+    paddingLeft: 5,
+    paddingRight: 5
   },
   DESCR : {
     color: 'gray',
-    width : '400px',
-    paddingLeft : '10px',
-    paddingTop: '5px',
-    fontWeight: 'bold',
+    width : 400,
+    paddingLeft : 10,
+    paddingTop: 5,
     lineHeight : 1.4,
+    fontWeight: 'bold',
     whiteSpace : 'pre'
   },
   CAPTCHA : {
-    padding: '8px',
-    paddingBottom : '0px'
+    padding: 8,
+    paddingBottom : 0
   }
 }
 
@@ -56,7 +55,7 @@ class AskDialog extends Component {
    */
 
   constructor(props){
-    super();
+    super(props);
 
     this._handleLoad = this._handleLoad.bind(this)
     this._commandButtons = [
@@ -92,6 +91,8 @@ class AskDialog extends Component {
     return true;
   }
 
+  _refCaptcha = c => this.captchaComp = c
+
   render(){
     const { isShow, data={}, onClose } = this.props
         , { options={} } = data
@@ -112,7 +113,7 @@ class AskDialog extends Component {
                {MSG_SUFFIX}
             </p>
             <MathCaptcha
-              ref={c => this.captchaComp = c}
+              ref={this._refCaptcha}
               rootStyle={S.CAPTCHA}
             />
          </div>
