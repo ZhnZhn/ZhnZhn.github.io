@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 //import PropTypes from "prop-types";
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
+import crModalDialog from './crModalDialog'
 
 const CL_ELL =  'ellipsis';
 
@@ -34,54 +35,48 @@ const S = {
   }
 };
 
-class AlertDialog extends Component{
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    data: PropTypes.shape({
-      alertCaption: PropTypes.string,
-      alertItemId: PropTypes.string,
-      alertDescr: PropTypes.string
-    }),
-    onClose: PropTypes.func
-  }
-  */
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  }
-
-  render(){
-    const { isShow, data, onClose } = this.props
-    , { alertCaption='Item', alertItemId='', alertDescr } = data
-    , _caption = alertCaption + ': ';
-    return (
-      <ModalDialog
-        caption="Alert"
-        isShow={isShow}
-        onClose={onClose}
-      >
-         <div style={S.ROW_CAPTION}>
-            <span style={S.CAPTION}>
-              {_caption}
-            </span>
-            <span
-              className={CL_ELL}
-              style={S.ITEM_ID}
-              title={alertItemId}
-            >
-              {alertItemId}
-            </span>
-         </div>
-         <p style={S.DESCR}>
-           {alertDescr}
-         </p>
-      </ModalDialog>
-    );
-  }
+/*
+AlertDialog.propTypes = {
+  isShow: PropTypes.bool,
+  data: PropTypes.shape({
+    alertCaption: PropTypes.string,
+    alertItemId: PropTypes.string,
+    alertDescr: PropTypes.string
+  }),
+  onClose: PropTypes.func
 }
+*/
+
+const AlertDialog = crModalDialog(({ isShow, data, onClose }) => {
+   const {
+     alertCaption='Item',
+     alertItemId='',
+     alertDescr
+   } = data
+   , _caption = alertCaption + ': ';
+   return (
+     <ModalDialog
+       caption="Alert"
+       isShow={isShow}
+       onClose={onClose}
+     >
+        <div style={S.ROW_CAPTION}>
+           <span style={S.CAPTION}>
+             {_caption}
+           </span>
+           <span
+             className={CL_ELL}
+             style={S.ITEM_ID}
+             title={alertItemId}
+           >
+             {alertItemId}
+           </span>
+        </div>
+        <p style={S.DESCR}>
+          {alertDescr}
+        </p>
+     </ModalDialog>
+   );
+})
 
 export default AlertDialog
