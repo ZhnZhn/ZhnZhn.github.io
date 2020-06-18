@@ -7,6 +7,12 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _Decorators = _interopRequireDefault(require("./decorators/Decorators"));
+
+var _crDateConfig = _interopRequireDefault(require("./fns/crDateConfig"));
+
+var _crMenuMore = _interopRequireDefault(require("./fns/crMenuMore"));
+
 var _Modals = _interopRequireDefault(require("./modals/Modals"));
 
 var _Rows = _interopRequireDefault(require("./rows/Rows"));
@@ -42,7 +48,11 @@ var DialogCell = (0, _extends2["default"])({
   RowInputColor: _RowInputColor["default"],
   SelectWithLoad: _SelectWithLoad["default"],
   Button: _Button["default"]
-}, _Rows["default"], _Modals["default"]);
+}, _Rows["default"], _Modals["default"], {
+  crDateConfig: _crDateConfig["default"],
+  crMenuMore: _crMenuMore["default"],
+  Decor: _Decorators["default"]
+});
 var _default = DialogCell;
 exports["default"] = _default;
 //# sourceMappingURL=DialogCell.js.map

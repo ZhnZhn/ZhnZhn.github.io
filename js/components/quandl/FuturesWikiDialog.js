@@ -17,12 +17,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
-
-var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
-
 var _dec, _class, _temp;
 
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore;
 var typeOptions = [{
   caption: 'Continuous Contract #1',
   value: 1
@@ -39,7 +37,7 @@ var typeOptions = [{
   caption: 'Continuous Contract #5',
   value: 5
 }];
-var FuturesWikiDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
+var FuturesWikiDialog = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(FuturesWikiDialog, _Component);
 
   function FuturesWikiDialog(props) {
@@ -100,7 +98,7 @@ var FuturesWikiDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_t
       _this._handleWithValidationClose();
     };
 
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });

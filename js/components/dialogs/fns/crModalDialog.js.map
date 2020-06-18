@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/dialogs/crModalDialog.js"
+  "../../../../src/components/dialogs/fns/crModalDialog.js"
  ],
- "file": "../../../src/components/dialogs/crModalDialog.js",
+ "file": "../../../../src/components/dialogs/fns/crModalDialog.js",
  "names": [
   "_areEqual",
   "prevProps",

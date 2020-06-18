@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { ChartType } from '../../constants/Type';
 
 import D from '../dialogs/DialogCell'
-import crMenuMore from '../dialogs/MenuMore'
-import Decor from '../dialogs/decorators/Decorators'
+const { Decor, crMenuMore } = D
 
 const S = {
   BT_ROOT: {

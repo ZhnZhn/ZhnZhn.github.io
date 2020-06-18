@@ -17,20 +17,15 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _crDateConfig = _interopRequireDefault(require("./crDateConfig"));
+var _ChartTypes = _interopRequireDefault(require("./ChartTypes"));
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
-var _MenuMore = _interopRequireDefault(require("./MenuMore"));
+var _dec, _dec2, _class, _class2, _temp;
 
-var _Decorators = _interopRequireDefault(require("./decorators/Decorators"));
-
-var _withForDate = _interopRequireDefault(require("./decorators/withForDate"));
-
-var _ChartTypes = _interopRequireDefault(require("./ChartTypes"));
-
-var _dec, _class, _class2, _temp;
-
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore,
+    crDateConfig = _DialogCell["default"].crDateConfig;
 var DF_INIT_FROM_DATE = '2010-01-01';
 var DF_MAP_FREQUENCY = 'M';
 var TABLE_ID = 'table';
@@ -66,7 +61,7 @@ var _isRequireChartOptionsUpdate = function _isRequireChartOptionsUpdate(oldFreq
   return oldFrequency !== mapFrequency && (oldFrequency === 'M' || mapFrequency === 'M');
 };
 
-var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _withForDate["default"])(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
+var DialogSelectN = (_dec = Decor.dialog, _dec2 = Decor.withForDate, _dec(_class = _dec2(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogSelectN, _Component);
 
   /*
@@ -126,7 +121,7 @@ var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _wi
           _mapFrequency = _assertThisInitialize._mapFrequency,
           _mapDateDf = _assertThisInitialize._mapDateDf;
 
-      return (0, _crDateConfig["default"])(_mapFrequency, _mapDateDf);
+      return crDateConfig(_mapFrequency, _mapDateDf);
     };
 
     _this._updateForDate = function (chartType) {
@@ -292,7 +287,7 @@ var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _wi
 
     _this._setFrequencyConfig(_getDfFrequencyConfig(props));
 
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
@@ -310,7 +305,7 @@ var DialogSelectN = (_dec = _Decorators["default"].dialog, _dec(_class = (0, _wi
       isShowFd: true,
       isShowChart: true,
       isShowDate: false
-    }, (0, _crDateConfig["default"])('EMPTY'), _crIsToggleInit(_selectProps));
+    }, crDateConfig('EMPTY'), _crIsToggleInit(_selectProps));
     return _this;
   }
 

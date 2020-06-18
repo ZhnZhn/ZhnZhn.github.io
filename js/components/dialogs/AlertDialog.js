@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _crModalDialog = _interopRequireDefault(require("./crModalDialog"));
+var _crModalDialog = _interopRequireDefault(require("./fns/crModalDialog"));
 
 //import PropTypes from "prop-types";
 var CL_ELL = 'ellipsis';

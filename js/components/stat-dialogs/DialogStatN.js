@@ -15,22 +15,19 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _crDateConfig = _interopRequireDefault(require("../dialogs/crDateConfig"));
-
 var _loadConfigs = _interopRequireDefault(require("./loadConfigs"));
-
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
-
-var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
-
-var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
 
 var _ChartTypes = _interopRequireDefault(require("../dialogs/ChartTypes"));
 
 var _SpinnerLoading = _interopRequireDefault(require("../zhn/SpinnerLoading"));
 
+var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+
 var _dec, _class, _temp;
 
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore,
+    crDateConfig = _DialogCell["default"].crDateConfig;
 var MAP_FREQUENCY_DF = 'M',
     MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.";
 var S = {
@@ -58,7 +55,7 @@ var _isOpenAndPrevLoadFailed = function _isOpenAndPrevLoadFailed(prevProps, prop
   return props !== prevProps && !prevProps.isShow && props.isShow && state.isLoadFailed;
 };
 
-var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
+var DialogStatN = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogStatN, _Component);
 
   function DialogStatN(props) {
@@ -141,7 +138,7 @@ var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = 
       var mapDateDf = _this.props.mapDateDf,
           mapFrequency = _this.state.mapFrequency,
           _frequency = mapFrequency || MAP_FREQUENCY_DF,
-          dateConfig = (0, _crDateConfig["default"])(_frequency, mapDateDf);
+          dateConfig = crDateConfig(_frequency, mapDateDf);
 
       _this.setState((0, _extends2["default"])({
         isShowDate: true
@@ -268,7 +265,7 @@ var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = 
       });
     };
 
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
@@ -285,7 +282,7 @@ var DialogStatN = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = 
       isLoadFailed: false,
       isShowChart: true,
       isShowDate: false
-    }, (0, _crDateConfig["default"])('EMPTY'), {
+    }, crDateConfig('EMPTY'), {
       isOptions: false,
       isToggle: false,
       configs: [],

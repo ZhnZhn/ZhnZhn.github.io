@@ -17,12 +17,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
-var _MenuMore = _interopRequireDefault(require("./MenuMore"));
-
-var _Decorators = _interopRequireDefault(require("./decorators/Decorators"));
-
 var _dec, _class, _class2, _temp;
 
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore;
 var DF_TIMEOUT = 4000;
 var transformOptions = [{
   caption: "NO EFFECT: z[t]=y[t]",
@@ -40,7 +38,7 @@ var transformOptions = [{
   caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100",
   value: "normalize"
 }];
-var DialogType3 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
+var DialogType3 = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogType3, _Component);
 
   /*
@@ -146,7 +144,7 @@ var DialogType3 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = 
     };
 
     _this.isLoaded = false;
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });

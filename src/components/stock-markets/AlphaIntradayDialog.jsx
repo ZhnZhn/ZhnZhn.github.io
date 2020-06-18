@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 
 import D from '../dialogs/DialogCell'
-import Decor from '../dialogs/decorators/Decorators'
-import crMenuMore from '../dialogs/MenuMore'
+const { Decor, crMenuMore } = D
 
 const DAILY = 'DAILY';
 const D_ADJ = 'DAILY_ADJUSTED';

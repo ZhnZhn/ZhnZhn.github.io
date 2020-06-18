@@ -19,12 +19,10 @@ var _Type = require("../../constants/Type");
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
-
-var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
-
 var _dec, _dec2, _dec3, _class, _temp;
 
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore;
 var S = {
   BT_ROOT: {
     color: 'rgb(35, 47, 59)'
@@ -87,7 +85,7 @@ var CHART_TYPE_OPTIONS = [{
   caption: 'Tree Map : On Recent Year',
   value: _Type.ChartType.TREE_MAP
 }];
-var UNCommodityTradeDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withValidationLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = /*#__PURE__*/function (_Component) {
+var UNCommodityTradeDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withValidationLoad, _dec3 = Decor.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(UNCommodityTradeDialog, _Component);
 
   function UNCommodityTradeDialog(props) {
@@ -360,7 +358,7 @@ var UNCommodityTradeDialog = (_dec = _Decorators["default"].withToolbar, _dec2 =
       return _this.datesFragment = c;
     };
 
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });

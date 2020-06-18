@@ -3,8 +3,7 @@ import React, { Component } from 'react'
 import Adapter from '../../adapters/alpha/Adapter'
 
 import D from '../dialogs/DialogCell'
-import Decor from '../dialogs/decorators/Decorators'
-import crMenuMore from '../dialogs/MenuMore'
+const { Decor, crMenuMore } = D
 
 const C = {
   ERR_DESCR: 'API key from Alpha Vantage is required',
@@ -35,7 +34,7 @@ class AlphaIntradayDialog extends Component {
     }
 
     this.state = {
-      ...this._isWithInitialState()      
+      ...this._isWithInitialState()
     }
   }
 

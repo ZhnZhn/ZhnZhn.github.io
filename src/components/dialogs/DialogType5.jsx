@@ -3,8 +3,7 @@ import React, { Component } from 'react'
 import { ChartType as CH } from '../../constants/Type';
 
 import D from './DialogCell'
-import crMenuMore from './MenuMore'
-import Decor from './decorators/Decorators'
+const { Decor, crMenuMore } = D
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 

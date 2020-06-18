@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 
-import crDateConfig from '../dialogs/crDateConfig'
-
 import loadConfigs from './loadConfigs'
 
-import D from '../dialogs/DialogCell'
-import crMenuMore from '../dialogs/MenuMore'
-import Decor from '../dialogs/decorators/Decorators';
 import ChartTypes from '../dialogs/ChartTypes'
 import SpinnerLoading from '../zhn/SpinnerLoading'
+import D from '../dialogs/DialogCell'
+const { Decor, crMenuMore, crDateConfig } = D
 
 const MAP_FREQUENCY_DF = 'M'
     , MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.";

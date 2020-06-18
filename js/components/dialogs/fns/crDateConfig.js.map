@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/dialogs/crDateConfig.js"
+  "../../../../src/components/dialogs/fns/crDateConfig.js"
  ],
- "file": "../../../src/components/dialogs/crDateConfig.js",
+ "file": "../../../../src/components/dialogs/fns/crDateConfig.js",
  "names": [
   "C",
   "DF_PLACEHOLDER",

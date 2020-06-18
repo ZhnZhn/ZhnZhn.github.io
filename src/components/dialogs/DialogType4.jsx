@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import D from './DialogCell'
-import crMenuMore from './MenuMore'
-import Decor from './decorators/Decorators'
+const { Decor, crMenuMore } = D
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 const CAPTION_YAXIS = 'Add Seria with Second YAxis';
-
 
 @Decor.dialog
 class DialogType4 extends Component {
@@ -50,7 +48,7 @@ class DialogType4 extends Component {
     const { noDate, noOptions } = props;
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate, isShowOptions: !noOptions  }
-    );    
+    );
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {

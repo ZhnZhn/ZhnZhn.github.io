@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import crDateConfig from './crDateConfig'
-
-import D from './DialogCell'
-import crMenuMore from './MenuMore'
-import Decor from './decorators/Decorators'
-import withForDate from './decorators/withForDate'
 import ChartTypes from './ChartTypes'
+import D from './DialogCell'
+const { Decor, crMenuMore, crDateConfig } = D
 
 const DF_INIT_FROM_DATE = '2010-01-01'
 const DF_MAP_FREQUENCY = 'M';
@@ -44,7 +40,7 @@ const _isRequireChartOptionsUpdate = (
   && (oldFrequency === 'M' || mapFrequency === 'M');
 
 @Decor.dialog
-@withForDate
+@Decor.withForDate
 class DialogSelectN extends Component {
   /*
   static propTypes = {

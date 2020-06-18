@@ -19,12 +19,10 @@ var _Type = require("../../constants/Type");
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
-var _MenuMore = _interopRequireDefault(require("./MenuMore"));
-
-var _Decorators = _interopRequireDefault(require("./decorators/Decorators"));
-
 var _dec, _class, _temp;
 
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore;
 var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 var CHART_TYPE_OPTIONS = [{
   caption: 'Default: Area',
@@ -36,7 +34,7 @@ var CHART_TYPE_OPTIONS = [{
   caption: 'Scatter: Label Down',
   value: _Type.ChartType.SCATTER_DOWN
 }];
-var DialogType5 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
+var DialogType5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogType5, _Component);
 
   function DialogType5(props) {
@@ -120,7 +118,7 @@ var DialogType5 = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = 
       return _this.datesFragment = c;
     };
 
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });

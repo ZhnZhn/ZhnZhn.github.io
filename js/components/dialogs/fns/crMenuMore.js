@@ -46,4 +46,4 @@ var crMenuMore = function crMenuMore(comp, _ref2) {
 
 var _default = crMenuMore;
 exports["default"] = _default;
-//# sourceMappingURL=MenuMore.js.map
+//# sourceMappingURL=crMenuMore.js.map

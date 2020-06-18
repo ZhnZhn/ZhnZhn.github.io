@@ -2,7 +2,7 @@ import React from 'react';
 //import PropTypes from "prop-types";
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import crModalDialog from './crModalDialog'
+import crModalDialog from './fns/crModalDialog'
 
 const CL_ELL =  'ellipsis';
 

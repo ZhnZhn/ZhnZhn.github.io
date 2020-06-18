@@ -1,4 +1,7 @@
 
+import Decor from './decorators/Decorators'
+import crDateConfig from './fns/crDateConfig'
+import crMenuMore from './fns/crMenuMore'
 import Modals from './modals/Modals'
 import Rows from './rows/Rows'
 
@@ -27,7 +30,10 @@ const DialogCell = {
   SelectWithLoad,
   Button,
   ...Rows,
-  ...Modals
+  ...Modals,
+  crDateConfig,
+  crMenuMore,
+  Decor
 };
 
 export default DialogCell

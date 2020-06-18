@@ -17,12 +17,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
-
-var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
-
 var _dec, _dec2, _dec3, _class, _temp;
 
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore;
 var DAILY = 'DAILY';
 var D_ADJ = 'DAILY_ADJUSTED';
 
@@ -115,7 +113,7 @@ var _crLoadOptions = function _crLoadOptions(key, input) {
   });
 };
 
-var AlphaIntradayDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec3 = _Decorators["default"].withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = /*#__PURE__*/function (_Component) {
+var AlphaIntradayDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec3 = Decor.withInitialState, _dec(_class = _dec2(_class = _dec3(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(AlphaIntradayDialog, _Component);
 
   function AlphaIntradayDialog(props) {
@@ -169,7 +167,7 @@ var AlphaIntradayDialog = (_dec = _Decorators["default"].withToolbar, _dec2 = _D
     _this._isDailyAdj = _isDailyAdj(_dfT);
     _this._hasDividend = false;
     _this._hasFilterZero = false;
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });

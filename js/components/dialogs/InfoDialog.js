@@ -9,9 +9,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _crModalDialog = _interopRequireDefault(require("./crModalDialog"));
-
 var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
+
+var _crModalDialog = _interopRequireDefault(require("./fns/crModalDialog"));
 
 var S = {
   CAPTION: {

@@ -15,12 +15,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
-var _MenuMore = _interopRequireDefault(require("./MenuMore"));
-
-var _Decorators = _interopRequireDefault(require("./decorators/Decorators"));
-
 var _dec, _dec2, _class, _temp;
 
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore;
 var ERR_MSG = 'Empty or Id format is not valid';
 
 var _testId = function _testId(value) {
@@ -33,7 +31,7 @@ var _testId = function _testId(value) {
   return true;
 };
 
-var DialogQuery = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorators["default"].withLoad, _dec(_class = _dec2(_class = (_temp = /*#__PURE__*/function (_Component) {
+var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class = _dec2(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogQuery, _Component);
 
   function DialogQuery(props) {
@@ -65,7 +63,7 @@ var DialogQuery = (_dec = _Decorators["default"].withToolbar, _dec2 = _Decorator
       return _this.datesFragment = c;
     };
 
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });

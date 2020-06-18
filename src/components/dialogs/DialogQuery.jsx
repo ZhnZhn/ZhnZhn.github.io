@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import D from './DialogCell'
-import crMenuMore from './MenuMore'
-import Decor from './decorators/Decorators'
+
+const { Decor, crMenuMore } = D
 
 const ERR_MSG = 'Empty or Id format is not valid';
 

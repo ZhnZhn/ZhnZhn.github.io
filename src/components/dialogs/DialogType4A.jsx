@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import D from './DialogCell'
-import crMenuMore from './MenuMore'
-import Decor from './decorators/Decorators'
+const { Decor, crMenuMore } = D
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 

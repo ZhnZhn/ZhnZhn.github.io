@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import D from '../dialogs/DialogCell'
-import crMenuMore from '../dialogs/MenuMore'
-import Decor from '../dialogs/decorators/Decorators'
+const { Decor, crMenuMore } = D
 
 const unitOptions = [
   { "caption" : "Thousand Barrels per day (kb/d)", "value" : "KD" },

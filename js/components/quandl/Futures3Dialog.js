@@ -17,12 +17,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _MenuMore = _interopRequireDefault(require("../dialogs/MenuMore"));
-
-var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
-
 var _dec, _class, _temp;
 
+var Decor = _DialogCell["default"].Decor,
+    crMenuMore = _DialogCell["default"].crMenuMore;
 var yearOptions = [{
   caption: '2020',
   value: 2020
@@ -51,7 +49,7 @@ var yearOptions = [{
   caption: '2012',
   value: 2012
 }];
-var Futures3Dialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
+var Futures3Dialog = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(Futures3Dialog, _Component);
 
   function Futures3Dialog(props) {
@@ -112,7 +110,7 @@ var Futures3Dialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp
       _this._handleWithValidationClose();
     };
 
-    _this._menuMore = (0, _MenuMore["default"])((0, _assertThisInitialized2["default"])(_this), {
+    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });

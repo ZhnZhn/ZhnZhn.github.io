@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import D from '../dialogs/DialogCell'
-import Decor from '../dialogs/decorators/Decorators'
-import crMenuMore from '../dialogs/MenuMore'
+const { Decor, crMenuMore } = D
 
 const TRADE_FLOW = [
   { caption: "Export Value", value: { rg: 2, measure: "TradeValue" } },
@@ -14,7 +13,7 @@ const TRADE_FLOW = [
 ];
 
 @Decor.dialog
-class  UnDialog5 extends Component {
+class UnDialog5 extends Component {
 
   constructor(props){
     super(props)
@@ -44,7 +43,7 @@ class  UnDialog5 extends Component {
     }
     return true;
   }
-  
+
   _handleSelectOne = (one) => {
     this.one = one;
   }
