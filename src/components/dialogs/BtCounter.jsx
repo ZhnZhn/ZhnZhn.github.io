@@ -2,16 +2,7 @@ import React, { useState, useCallback, useImperativeHandle } from 'react'
 
 import ButtonCircle from '../zhn/ButtonCircle'
 
-/*
-const S = {
-  BT: {
-    color: '#7cb5ec',
-    borderColor: '#7cb5ec'
-  }
-};
-*/
-
-const BtCounter = ({
+const BtCounter = React.forwardRef(({
   isShow,
   style,
   title,
@@ -26,9 +17,11 @@ const BtCounter = ({
        setValue(1)
      }
    }, [value, maxValue]);
-   useImperativeHandle(ref, () => ({
+
+  useImperativeHandle(ref, () => ({
      getValue: () => value
-   }), [value])  
+  }), [value])
+
   return isShow ? (
     <ButtonCircle
       style={style}
@@ -37,6 +30,6 @@ const BtCounter = ({
       onClick={_onClick}
     />
   ) : null;
-}
+})
 
-export default React.forwardRef(BtCounter)
+export default BtCounter

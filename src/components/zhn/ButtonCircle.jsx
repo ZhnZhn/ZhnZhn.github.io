@@ -7,12 +7,12 @@ const CL = {
 };
 
 const ButtonCircle = ({
+  isOverwriteClass,
   className='', style,
-  caption='', title,
-  isWithoutDefault,
+  caption='', title,    
   onClick
 }) => {
-   const _className = isWithoutDefault
+   const _className = isOverwriteClass
      ? `${className} ${CL.NOT}`
      : `${CL.ROOT} ${className} ${CL.NOT}`;
     return (

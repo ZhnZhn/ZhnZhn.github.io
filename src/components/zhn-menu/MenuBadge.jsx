@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 
 import ThemeContext from '../hoc/ThemeContext'
-import Button from '../zhn/ButtonCircle2'
+import BtCircle2 from '../zhn/ButtonCircle2'
 
 const TH_ID = 'ELEMENT'
 const CL = "menu__badge";
@@ -33,7 +33,7 @@ const MenuBadge = ({
       }
     }, [isOpen, onClick, onBadgeClose]);
   return (
-    <Button
+    <BtCircle2
       tabIndex="-1"
       className={CL}
       style={{...S.BT, ..._btStyle, ...TS.BG}}

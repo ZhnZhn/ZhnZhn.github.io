@@ -3,20 +3,21 @@ import React from 'react'
 const CL = 'zhn-bt-circle2';
 
 const ButtonCircle2 = ({
-  className='', style,
-  caption='', onClick,
-  ...rest
+  tabIndex,
+  className='', style, dataLoader,
+  caption='', onClick,    
 }) => (
   <button
+     tabIndex={tabIndex}
      className={`${CL} ${className}`}
      style={style}
      onClick={onClick}
-     {...rest}
+     data-loader={dataLoader}
   >
     <div>
       {caption}
     </div>
   </button>
-);  
+);
 
 export default ButtonCircle2

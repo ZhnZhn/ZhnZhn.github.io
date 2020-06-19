@@ -1,6 +1,6 @@
 import React from 'react'
 
-import BtCircle from '../zhn/ButtonCircle2';
+import BtCircle2 from '../zhn/ButtonCircle2';
 import CL from './CL';
 
 const S = {
@@ -26,19 +26,19 @@ const OptionsFooter = React.forwardRef(({
       </span>
     </span>
     <span className={CL.FOOTER_BTS}>
-      <BtCircle
+      <BtCircle2
          className={CL.FOOTER_MARGIN}
          style={S.BT_CIRCLE}
          caption="Dn"
          onClick={onStepDown}
       />
-      <BtCircle
+      <BtCircle2
          className={CL.FOOTER_MARGIN}
          style={S.BT_CIRCLE}
          caption="Up"
          onClick={onStepUp}
       />
-      <BtCircle
+      <BtCircle2
          style={S.BT_CIRCLE}
          caption="CL"
          onClick={onClear}

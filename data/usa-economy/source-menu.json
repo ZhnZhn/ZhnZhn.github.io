@@ -250,7 +250,6 @@
       "type": "USAE_EIA_NET_GENER",
       "menuTitle": "Net Generation",
       "contFullCaption" : "EIA: Electricity: Net Generation, Monthly",
-      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
         "selectProps": [
@@ -268,7 +267,6 @@
       "type": "USAE_EIA_AVG_PRICE",
       "menuTitle": "Average Retail Price",
       "contFullCaption" : "EIA: Electricity: Average Retail Price, Monthly",
-      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
         "selectProps": [
@@ -286,7 +284,6 @@
       "type": "USAE_EIA_RETAIL_SALES",
       "menuTitle": "Retail Sales",
       "contFullCaption" : "EIA: Electricity: Retail Sales, Monthly",
-      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
         "selectProps": [
@@ -304,7 +301,6 @@
       "type": "USAE_EIA_RETAIL_REVENUE",
       "menuTitle": "Revenue from Retail Sales",
       "contFullCaption" : "EIA: Electricity: Revenue from Retail Sales, Monthly",
-      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
         "selectProps": [
@@ -323,7 +319,6 @@
       "type": "USAE_EIA_ENV_CO2",
       "menuTitle": "CO2 Emissions",
       "contFullCaption" : "EIA: CO2 Emissions, Annual, Ml Tonnes",
-      "dialogType": "DialogSelectN",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
         "selectProps": [

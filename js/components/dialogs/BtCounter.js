@@ -11,15 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 
-/*
-const S = {
-  BT: {
-    color: '#7cb5ec',
-    borderColor: '#7cb5ec'
-  }
-};
-*/
-var BtCounter = function BtCounter(_ref, ref) {
+var BtCounter = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
   var isShow = _ref.isShow,
       style = _ref.style,
       title = _ref.title,
@@ -54,9 +46,8 @@ var BtCounter = function BtCounter(_ref, ref) {
     caption: value,
     onClick: _onClick
   }) : null;
-};
+});
 
-var _default = /*#__PURE__*/_react["default"].forwardRef(BtCounter);
-
+var _default = BtCounter;
 exports["default"] = _default;
 //# sourceMappingURL=BtCounter.js.map

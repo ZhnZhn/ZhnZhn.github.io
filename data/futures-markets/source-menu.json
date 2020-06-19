@@ -25,9 +25,10 @@
         "spT": "id",
         "loadId": "B",
         "isFd": true,
-        "nInitFromDate": 1,
+        "isOpt": true,
         "isCh": false,
-        "noDate": true,
+        "nInitFromDate": 1,
+        "noDate": true,        
         "dfProps": {
           "dfT": "FT"
         },
@@ -80,7 +81,7 @@
     "FT_BR_GRAIN": {
       "type": "FT_BR_GRAIN",
       "menuTitle": "Grains",
-      "contFullCaption": "Barchart: Grains Futures",      
+      "contFullCaption": "Barchart: Grains Futures",
       "addProps": "FT_BR",
       "dialogProps": {
         "selectProps": [

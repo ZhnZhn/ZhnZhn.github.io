@@ -532,7 +532,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
         _placeholder = "Loading " + optionNames + " Failed";
         _afterInputEl = /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
           className: _CL["default"].SPINNER_FAILED,
-          "data-loader": "circle-failed",
+          dataLoader: "circle-failed",
           onClick: onLoadOption
         });
       }

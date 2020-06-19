@@ -6,35 +6,34 @@ const CL_BT = "bt__watch__bar";
 
 const S = {
   ROOT: {
-    marginBottom: '10px'
+    marginBottom: 10
   },
   BT_LIST : {
-    marginLeft: '20px'
+    marginLeft: 20
   }
 };
 
-const EditBar = ({ isShow, onClickGroup, onClickList }) => {
-  if (isShow) {
-    return (
-      <div style={S.ROOT}>
+const EditBar = ({
+  isShow,
+  onClickGroup,
+  onClickList
+}) => isShow
+   ? (<div style={S.ROOT}>
          <ButtonCircle
            caption="GROUP"
-           isWithoutDefault={true}
+           isOverwriteClass={true}
            className={CL_BT}
            onClick={onClickGroup}
         />
         <ButtonCircle
            caption="LIST"
-           isWithoutDefault={true}
+           isOverwriteClass={true}
            className={CL_BT}
            style={S.BT_LIST}
            onClick={onClickList}
         />
-      </div>
-    );
-  } else {
-    return null;
-  }
-}
+     </div>)
+   : null;
+
 
 export default EditBar

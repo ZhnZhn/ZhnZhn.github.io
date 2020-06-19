@@ -12,10 +12,10 @@ var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 var CL_BT = "bt__watch__bar";
 var S = {
   ROOT: {
-    marginBottom: '10px'
+    marginBottom: 10
   },
   BT_LIST: {
-    marginLeft: '20px'
+    marginLeft: 20
   }
 };
 
@@ -23,25 +23,20 @@ var EditBar = function EditBar(_ref) {
   var isShow = _ref.isShow,
       onClickGroup = _ref.onClickGroup,
       onClickList = _ref.onClickList;
-
-  if (isShow) {
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT
-    }, /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
-      caption: "GROUP",
-      isWithoutDefault: true,
-      className: CL_BT,
-      onClick: onClickGroup
-    }), /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
-      caption: "LIST",
-      isWithoutDefault: true,
-      className: CL_BT,
-      style: S.BT_LIST,
-      onClick: onClickList
-    }));
-  } else {
-    return null;
-  }
+  return isShow ? /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.ROOT
+  }, /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
+    caption: "GROUP",
+    isOverwriteClass: true,
+    className: CL_BT,
+    onClick: onClickGroup
+  }), /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
+    caption: "LIST",
+    isOverwriteClass: true,
+    className: CL_BT,
+    style: S.BT_LIST,
+    onClick: onClickList
+  })) : null;
 };
 
 var _default = EditBar;

@@ -21,7 +21,7 @@ var _SpanValue = _interopRequireDefault(require("../zhn-span/SpanValue"));
 
 var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 
-var _DivCompareTo = _interopRequireDefault(require("../modals/DivCompareTo"));
+var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 
 //import PropTypes from "prop-types";
 var isDmy = _DateUtils["default"].isDmy;

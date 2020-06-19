@@ -7,7 +7,7 @@ import formatAllNumber from '../../utils/formatAllNumber'
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
-import DivCompareTo from '../modals/DivCompareTo'
+import DivCompareTo from './DivCompareTo'
 
 const { isDmy } = DateUtils;
 

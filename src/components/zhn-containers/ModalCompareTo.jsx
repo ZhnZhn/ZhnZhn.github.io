@@ -3,7 +3,7 @@ import React, { useState, useCallback, useRef, useEffect } from 'react'
 import DateUtils from '../../utils/DateUtils'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
-import DivCompareTo from '../modals/DivCompareTo'
+import DivCompareTo from '../items/DivCompareTo'
 
 const { isDmy } = DateUtils;
 

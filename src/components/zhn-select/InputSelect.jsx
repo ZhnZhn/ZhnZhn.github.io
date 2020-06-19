@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import ArrowCell from './ArrowCell';
 
-import BtCircle from '../zhn/ButtonCircle2';
+import BtCircle2 from '../zhn/ButtonCircle2';
 import ItemOptionDf from './ItemOptionDf'
 import OptionsFooter from './OptionsFooter'
 import CL from './CL'
@@ -478,9 +478,9 @@ class InputSelect extends Component {
     } else if (isLoadingFailed) {
        _placeholder=`Loading ${optionNames} Failed`;
        _afterInputEl = (
-         <BtCircle
+         <BtCircle2
            className={CL.SPINNER_FAILED}
-           data-loader="circle-failed"
+           dataLoader="circle-failed"
            onClick={onLoadOption}
          />
        )

@@ -14,16 +14,16 @@ var CL = {
 };
 
 var ButtonCircle = function ButtonCircle(_ref) {
-  var _ref$className = _ref.className,
+  var isOverwriteClass = _ref.isOverwriteClass,
+      _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
       style = _ref.style,
       _ref$caption = _ref.caption,
       caption = _ref$caption === void 0 ? '' : _ref$caption,
       title = _ref.title,
-      isWithoutDefault = _ref.isWithoutDefault,
       onClick = _ref.onClick;
 
-  var _className = isWithoutDefault ? className + " " + CL.NOT : CL.ROOT + " " + className + " " + CL.NOT;
+  var _className = isOverwriteClass ? className + " " + CL.NOT : CL.ROOT + " " + className + " " + CL.NOT;
 
   return /*#__PURE__*/_react["default"].createElement("button", {
     className: _className,

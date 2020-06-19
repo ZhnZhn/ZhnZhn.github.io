@@ -13,7 +13,7 @@ var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
-var _DivCompareTo = _interopRequireDefault(require("../modals/DivCompareTo"));
+var _DivCompareTo = _interopRequireDefault(require("../items/DivCompareTo"));
 
 var isDmy = _DateUtils["default"].isDmy;
 var S = {
