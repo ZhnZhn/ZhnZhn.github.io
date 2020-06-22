@@ -9,7 +9,7 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _react = _interopRequireDefault(require("react"));
 
-var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
+var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
 var _LabelNew = _interopRequireDefault(require("./LabelNew"));
 
@@ -26,12 +26,6 @@ var S = {
 };
 var _isArr = Array.isArray;
 
-var _hKeyDown = function _hKeyDown(onClick, event) {
-  if ((0, _isKeyEnter["default"])(event)) {
-    onClick();
-  }
-};
-
 var MenuItem = function MenuItem(_ref) {
   var title = _ref.title,
       counter = _ref.counter,
@@ -40,12 +34,15 @@ var MenuItem = function MenuItem(_ref) {
       onBadgeClick = _ref.onBadgeClick,
       onBadgeClose = _ref.onBadgeClose,
       onClick = _ref.onClick;
+
+  var _hKeyDown = (0, _useKeyEnter["default"])(onClick);
+
   return /*#__PURE__*/_react["default"].createElement("div", {
-    className: CL_ROW,
-    onClick: onClick,
     tabIndex: "0",
     role: "menuitem",
-    onKeyDown: _hKeyDown.bind(null, onClick)
+    className: CL_ROW,
+    onClick: onClick,
+    onKeyDown: _hKeyDown
   }, title, counter !== 0 ? /*#__PURE__*/_react["default"].createElement(_MenuBadge["default"], {
     counter: counter,
     isOpen: isOpen,

@@ -1,6 +1,7 @@
 import React from 'react'
 
-import isKeyEnter from '../zhn/isKeyEnter'
+import useKeyEnter from '../hooks/useKeyEnter'
+
 import LabelNew from './LabelNew'
 import MenuBadge from './MenuBadge'
 import MenuTopic from './MenuTopic'
@@ -16,24 +17,20 @@ const S = {
 
 const _isArr = Array.isArray;
 
-const _hKeyDown = (onClick, event) => {
-  if (isKeyEnter(event)) {
-    onClick()
-  }
-};
-
 const MenuItem = ({
   title, counter,
   isNew,
   isOpen, onBadgeClick, onBadgeClose,
   onClick
-}) => (
-  <div
-      className={CL_ROW}
-      onClick={onClick}
+}) => {
+  const _hKeyDown = useKeyEnter(onClick);
+  return (
+  <div      
       tabIndex="0"
       role="menuitem"
-      onKeyDown={_hKeyDown.bind(null, onClick)}
+      className={CL_ROW}
+      onClick={onClick}
+      onKeyDown={_hKeyDown}
    >
      {title}
      {counter !== 0
@@ -47,7 +44,8 @@ const MenuItem = ({
      }
      {isNew ? <LabelNew /> : null}
   </div>
-)
+  );
+}
 
 const MenuItems = ({ items }) => {
  return items.map((item, index) => _isArr(item.items)
