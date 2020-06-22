@@ -13,10 +13,11 @@ const MenuTopic = ({
     ? false : true;
   return (
     <OpenClose
-       rootStyle={style}
-       openColor={openColor}
-       caption={caption}
        isClose={_isClose}
+       role="menuitem"
+       caption={caption}
+       style={style}
+       openColor={openColor}
     >
        <MenuItems items={items} />
     </OpenClose>
@@ -25,8 +26,10 @@ const MenuTopic = ({
 
 /*
 MenuPart.propTypes = {
+  isInitOpen: PropTypes.bool,
   caption: PropTypes.string,
-  isOpen: PropTypes.bool,
+  style: PropTypes.object,
+  openColor: PropTypes.string,  
   items: PropTypes.arrayOf(
      PropTypes.shape({
        isOpen: PropTypes.bool,

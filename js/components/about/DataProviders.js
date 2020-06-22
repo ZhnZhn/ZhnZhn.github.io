@@ -57,10 +57,10 @@ var DataProviders = function DataProviders(_ref) {
   return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
     isClose: isClose,
     caption: "Data Providers (All 21):",
+    style: (0, _extends2["default"])({}, _About["default"].LINE_HEIGHT, _About["default"].P_BOTTOM),
     captionStyle: ocCaptionStyle,
-    rootStyle: (0, _extends2["default"])({}, _About["default"].LINE_HEIGHT, _About["default"].P_BOTTOM),
-    childStyle: ST.ROOT_CHILD,
-    openColor: _Color["default"].YELLOW
+    openColor: _Color["default"].YELLOW,
+    childStyle: ST.ROOT_CHILD
   }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].Quandl, null), /*#__PURE__*/_react["default"].createElement("span", {
@@ -90,12 +90,11 @@ var DataProviders = function DataProviders(_ref) {
   }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].CoinGecko, null)), /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].Coinpaprika, null))), /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
-    caption: "(8) Required API key:",
+    caption: "(8) Required API Key:",
+    style: ST.OPEN_CLOSE,
     captionStyle: ocCaptionStyle,
-    rootStyle: ST.OPEN_CLOSE,
-    childStyle: ST.CHILD_STYLE,
-    isClose: true,
-    openColor: OPEN_COLOR_L2
+    openColor: OPEN_COLOR_L2,
+    childStyle: ST.CHILD_STYLE
   }, /*#__PURE__*/_react["default"].createElement("p", {
     style: ST.P4
   }, /*#__PURE__*/_react["default"].createElement("span", {
@@ -132,11 +131,10 @@ var DataProviders = function DataProviders(_ref) {
     style: _About["default"].BLACK
   }, "Note:\xA0"), "This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA."))), /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
     caption: "(2) Required Https Proxy:",
+    style: ST.OPEN_CLOSE,
     captionStyle: ocCaptionStyle,
-    rootStyle: ST.OPEN_CLOSE,
-    childStyle: ST.CHILD_STYLE,
-    isClose: true,
-    openColor: OPEN_COLOR_L2
+    openColor: OPEN_COLOR_L2,
+    childStyle: ST.CHILD_STYLE
   }, /*#__PURE__*/_react["default"].createElement("p", {
     style: ST.P4
   }, /*#__PURE__*/_react["default"].createElement("span", {

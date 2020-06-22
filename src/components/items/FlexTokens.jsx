@@ -12,7 +12,8 @@ const S = {
     display: 'inline-block',
     paddingLeft: 8,
     paddingRight: 8,
-    fontWeight: 600
+    fontWeight: 600,
+    whiteSpace: 'nowrap'
   }
 }
 
@@ -29,8 +30,8 @@ const FlexSpans = ({ tokens=[] }) => (
 const FlexTokens = React.memo(({ caption, tokens }) => {
   return caption
     ? <A.OpenClose
-        caption={caption}
         isClose={false}
+        caption={caption}        
       >
         <FlexSpans tokens={tokens}/>
       </A.OpenClose>

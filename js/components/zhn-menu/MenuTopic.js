@@ -22,18 +22,21 @@ var MenuTopic = function MenuTopic(_ref) {
   var _isClose = isInitOpen === true ? false : true;
 
   return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
-    rootStyle: style,
-    openColor: openColor,
+    isClose: _isClose,
+    role: "menuitem",
     caption: caption,
-    isClose: _isClose
+    style: style,
+    openColor: openColor
   }, /*#__PURE__*/_react["default"].createElement(_MenuItems["default"], {
     items: items
   }));
 };
 /*
 MenuPart.propTypes = {
+  isInitOpen: PropTypes.bool,
   caption: PropTypes.string,
-  isOpen: PropTypes.bool,
+  style: PropTypes.object,
+  openColor: PropTypes.string,  
   items: PropTypes.arrayOf(
      PropTypes.shape({
        isOpen: PropTypes.bool,

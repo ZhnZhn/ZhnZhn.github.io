@@ -66,7 +66,7 @@ const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
   </React.Fragment>
 );
 const MinusPeriod = ({ color, period, onMinus }) => (
-  <React.Fragment>
+  <>
     <A.SvgMinus
        style={S.INLINE}
        onClick={onMinus}
@@ -74,7 +74,7 @@ const MinusPeriod = ({ color, period, onMinus }) => (
     <span style={S.fnSpan(color)}>
       {period}
     </span>
-  </React.Fragment>
+  </>
 );
 
 const RowGrowthRate = ({
@@ -99,11 +99,10 @@ const RowGrowthRate = ({
      }, _refPeriod.current);
 
   return (
-  <A.OpenClose
-    isClose={true}
-    rootStyle={S.ROOT_OC}
-    ocStyle={S.OC}
+  <A.OpenClose    
     caption="Growth Rate"
+    style={S.ROOT_OC}
+    ocStyle={S.OC}
     captionStyle={S.CAPTION}
     openColor={OC_COLOR}
     CompAfter={

@@ -27,10 +27,9 @@ const RowOcSelect = ({
 
   return (
      <OpenClose
-       isClose={true}
-       rootStyle={rowStyle}
-       ocStyle={{...S.OC, ...labelStyle}}
        caption={caption}
+       style={rowStyle}
+       ocStyle={{...S.OC, ...labelStyle}}
        captionStyle={S.CAPTION}
        openColor={C_OPEN}
        CompAfter={<InputSelect {...options} />}

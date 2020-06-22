@@ -19,7 +19,8 @@ var S = {
     display: 'inline-block',
     paddingLeft: 8,
     paddingRight: 8,
-    fontWeight: 600
+    fontWeight: 600,
+    whiteSpace: 'nowrap'
   }
 };
 
@@ -40,8 +41,8 @@ var FlexTokens = /*#__PURE__*/_react["default"].memo(function (_ref2) {
   var caption = _ref2.caption,
       tokens = _ref2.tokens;
   return caption ? /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
-    caption: caption,
-    isClose: false
+    isClose: false,
+    caption: caption
   }, /*#__PURE__*/_react["default"].createElement(FlexSpans, {
     tokens: tokens
   })) : /*#__PURE__*/_react["default"].createElement(FlexSpans, {

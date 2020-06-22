@@ -129,11 +129,10 @@ var About = function About(_ref) {
   }, "Chart item"), " in a container. More information about a dataset can be found on a ", /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
   }, "tab Info of Chart item."))), /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
-    isClose: true,
     caption: "More...",
+    style: _About["default"].LH_14,
     ocStyle: _About["default"].LH_18,
     captionStyle: OC_CAPTION_STYLE,
-    rootStyle: _About["default"].LH_14,
     openColor: _Color["default"].YELLOW
   }, /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM

@@ -77,10 +77,7 @@ const Topic = memo(({ className, title, str }) => {
     return null;
   }
   return (
-    <OpenClose
-      caption={title}
-      isClose={true}
-    >
+    <OpenClose caption={title}>
       <DivHtml
         className={className}
         style={S.TOPIC}
@@ -156,7 +153,7 @@ class CoinInfoItem extends Component {
           isShow={isOpen}
           style={S.SHOW_HIDE}
         >
-          <OpenClose caption={`Coin Params (${Id})`}>
+          <OpenClose isClose={false} caption={`Coin Params (${Id})`}>
             <RowField items={items1} />
             <RowField items={items2} />
             <RowField items={items3} />

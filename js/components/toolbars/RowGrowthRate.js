@@ -130,10 +130,9 @@ var RowGrowthRate = function RowGrowthRate(_ref3) {
   };
 
   return /*#__PURE__*/_react["default"].createElement(_A["default"].OpenClose, {
-    isClose: true,
-    rootStyle: S.ROOT_OC,
-    ocStyle: S.OC,
     caption: "Growth Rate",
+    style: S.ROOT_OC,
+    ocStyle: S.OC,
     captionStyle: S.CAPTION,
     openColor: OC_COLOR,
     CompAfter: is ? /*#__PURE__*/_react["default"].createElement(MinusPeriod, {

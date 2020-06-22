@@ -47,10 +47,10 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
      caption="Data Providers (All 21):"
+     style={{...S.LINE_HEIGHT, ...S.P_BOTTOM}}
      captionStyle={ocCaptionStyle}
-     rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM }}
-     childStyle={ST.ROOT_CHILD}
      openColor={C.YELLOW}
+     childStyle={ST.ROOT_CHILD}
   >
     <div>
       <p>
@@ -98,12 +98,11 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
       </p>
       <OpenClose
-        caption="(8) Required API key:"
+        caption="(8) Required API Key:"
+        style={ST.OPEN_CLOSE}
         captionStyle={ocCaptionStyle}
-        rootStyle={ST.OPEN_CLOSE}
-        childStyle={ST.CHILD_STYLE}
-        isClose={true}
         openColor={OPEN_COLOR_L2}
+        childStyle={ST.CHILD_STYLE}
       >
       <p style={ST.P4}>
         <span style={S.PROVIDER}>
@@ -152,11 +151,10 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
       </OpenClose>
       <OpenClose
         caption="(2) Required Https Proxy:"
+        style={ST.OPEN_CLOSE}
         captionStyle={ocCaptionStyle}
-        rootStyle={ST.OPEN_CLOSE}
-        childStyle={ST.CHILD_STYLE}
-        isClose={true}
         openColor={OPEN_COLOR_L2}
+        childStyle={ST.CHILD_STYLE}
       >
         <p style={ST.P4}>
           <span style={S.PROVIDER}>

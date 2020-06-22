@@ -42,10 +42,9 @@ var RowOcSelect = function RowOcSelect(_ref) {
       options = _crRowOptions.options;
 
   return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
-    isClose: true,
-    rootStyle: rowStyle,
-    ocStyle: (0, _extends2["default"])({}, S.OC, labelStyle),
     caption: caption,
+    style: rowStyle,
+    ocStyle: (0, _extends2["default"])({}, S.OC, labelStyle),
     captionStyle: S.CAPTION,
     openColor: C_OPEN,
     CompAfter: /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], options)

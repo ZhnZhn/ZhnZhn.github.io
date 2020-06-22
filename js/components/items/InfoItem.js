@@ -47,8 +47,7 @@ var Descr = function Descr(_ref) {
       descr = _ref.descr;
   if (!descr) return null;
   return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
-    caption: caption,
-    isClose: true
+    caption: caption
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: (0, _extends2["default"])({}, S.DESCR, style)
   }, descr));

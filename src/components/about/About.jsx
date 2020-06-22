@@ -116,11 +116,10 @@ const About = ({ store, isInitShow }) => {
           </span>
        </p>
         <A.OpenClose
-          isClose={true}
           caption="More..."
+          style={S.LH_14}
           ocStyle={S.LH_18}
           captionStyle={OC_CAPTION_STYLE}
-          rootStyle={S.LH_14}
           openColor={C.YELLOW}
         >
           <p style={S.MB_8EM}>

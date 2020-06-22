@@ -37,10 +37,7 @@ const Descr = ({
 }) => {
   if (!descr) return null;
   return (
-    <A.OpenClose
-      caption={caption}
-      isClose={true}
-    >
+    <A.OpenClose caption={caption}>
       <div style={{...S.DESCR, ...style}}>
         {descr}
       </div>

@@ -101,8 +101,7 @@ var Topic = /*#__PURE__*/(0, _react.memo)(function (_ref3) {
   }
 
   return /*#__PURE__*/_react["default"].createElement(OpenClose, {
-    caption: title,
-    isClose: true
+    caption: title
   }, /*#__PURE__*/_react["default"].createElement(DivHtml, {
     className: className,
     style: S.TOPIC,
@@ -220,6 +219,7 @@ var CoinInfoItem = /*#__PURE__*/function (_Component) {
       isShow: isOpen,
       style: S.SHOW_HIDE
     }, /*#__PURE__*/_react["default"].createElement(OpenClose, {
+      isClose: false,
       caption: "Coin Params (" + Id + ")"
     }, /*#__PURE__*/_react["default"].createElement(RowField, {
       items: items1

@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/components/zhn-menu/MenuTopic.jsx"],"names":["MenuTopic","style","openColor","caption","isInitOpen","items","_isClose"],"mappings":";;;;;;;AAAA;;AAGA;;AACA;;AAHA;AAKA,IAAMA,SAAS,GAAG,SAAZA,SAAY,OAIZ;AAAA,MAHJC,KAGI,QAHJA,KAGI;AAAA,MAHGC,SAGH,QAHGA,SAGH;AAAA,MAFJC,OAEI,QAFJA,OAEI;AAAA,MAFKC,UAEL,QAFKA,UAEL;AAAA,MADJC,KACI,QADJA,KACI;;AACJ,MAAMC,QAAQ,GAAGF,UAAU,KAAK,IAAf,GACb,KADa,GACL,IADZ;;AAEA,sBACE,gCAAC,qBAAD;AACG,IAAA,SAAS,EAAEH,KADd;AAEG,IAAA,SAAS,EAAEC,SAFd;AAGG,IAAA,OAAO,EAAEC,OAHZ;AAIG,IAAA,OAAO,EAAEG;AAJZ,kBAMG,gCAAC,qBAAD;AAAW,IAAA,KAAK,EAAED;AAAlB,IANH,CADF;AAUD,CAjBD;AAmBA;;;;;;;;;;;;;;;;;;;eAkBeL,S","sourcesContent":["import React from 'react';\r\n//import PropTypes from 'prop-types'\r\n\r\nimport OpenClose from '../zhn/OpenClose';\r\nimport MenuItems from './MenuItems'\r\n\r\nconst MenuTopic = ({\r\n  style, openColor,\r\n  caption, isInitOpen,\r\n  items\r\n}) => {\r\n  const _isClose = isInitOpen === true\r\n    ? false : true;\r\n  return (\r\n    <OpenClose\r\n       rootStyle={style}\r\n       openColor={openColor}\r\n       caption={caption}\r\n       isClose={_isClose}\r\n    >\r\n       <MenuItems items={items} />\r\n    </OpenClose>\r\n  );\r\n};\r\n\r\n/*\r\nMenuPart.propTypes = {\r\n  caption: PropTypes.string,\r\n  isOpen: PropTypes.bool,\r\n  items: PropTypes.arrayOf(\r\n     PropTypes.shape({\r\n       isOpen: PropTypes.bool,\r\n       title: PropTypes.string,\r\n       counter: PropTypes.number,\r\n       isNew: PropTypes.bool,\r\n       onClick: PropTypes.func,\r\n       onBadgeClick: PropTypes.func,\r\n       onBadgeClose: PropTypes.func\r\n     })\r\n  )\r\n}\r\n*/\r\n\r\nexport default MenuTopic\r\n"],"file":"MenuTopic.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-menu/MenuTopic.js"
+ ],
+ "file": "../../../src/components/zhn-menu/MenuTopic.js",
+ "names": [
+  "MenuTopic",
+  "style",
+  "openColor",
+  "caption",
+  "isInitOpen",
+  "items",
+  "_isClose"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAGA;;AACA;;AAHA;AAKA,IAAMA,SAAS,GAAG,SAAZA,SAAY,OAIZ;AAAA,MAHJC,KAGI,QAHJA,KAGI;AAAA,MAHGC,SAGH,QAHGA,SAGH;AAAA,MAFJC,OAEI,QAFJA,OAEI;AAAA,MAFKC,UAEL,QAFKA,UAEL;AAAA,MADJC,KACI,QADJA,KACI;;AACJ,MAAMC,QAAQ,GAAGF,UAAU,KAAK,IAAf,GACb,KADa,GACL,IADZ;;AAEA,sBACE,gCAAC,qBAAD;AACG,IAAA,OAAO,EAAEE,QADZ;AAEG,IAAA,IAAI,EAAC,UAFR;AAGG,IAAA,OAAO,EAAEH,OAHZ;AAIG,IAAA,KAAK,EAAEF,KAJV;AAKG,IAAA,SAAS,EAAEC;AALd,kBAOG,gCAAC,qBAAD;AAAW,IAAA,KAAK,EAAEG;AAAlB,IAPH,CADF;AAWD,CAlBD;AAoBA;;;;;;;;;;;;;;;;;;;;;eAoBeL,S"
+}
