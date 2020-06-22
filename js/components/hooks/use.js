@@ -17,13 +17,16 @@ var _useTheme = _interopRequireDefault(require("./useTheme"));
 
 var _useToggle = _interopRequireDefault(require("./useToggle"));
 
+var _useKeyEnter = _interopRequireDefault(require("./useKeyEnter"));
+
 var use = {
   crStyle: _crStyle["default"],
   useFnFocus: _useFnFocus["default"],
   useListen: _useListen["default"],
   useRefInit: _useRefInit["default"],
   useTheme: _useTheme["default"],
-  useToggle: _useToggle["default"]
+  useToggle: _useToggle["default"],
+  useKeyEnter: _useKeyEnter["default"]
 };
 var _default = use;
 exports["default"] = _default;

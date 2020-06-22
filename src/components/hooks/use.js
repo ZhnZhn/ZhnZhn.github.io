@@ -4,6 +4,7 @@ import useListen from './useListen'
 import useRefInit from './useRefInit'
 import useTheme from './useTheme'
 import useToggle from './useToggle'
+import useKeyEnter from './useKeyEnter'
 
 const use = {
   crStyle,
@@ -11,7 +12,8 @@ const use = {
   useListen,
   useRefInit,
   useTheme,
-  useToggle
+  useToggle,
+  useKeyEnter
 }
 
 export default use
