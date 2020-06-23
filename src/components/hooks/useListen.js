@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+/*eslint-disable react-hooks/exhaustive-deps */
 const useListen = (store, onStore) => {
   useEffect(() => {
     const unsubscribe = store.listen(onStore)
@@ -8,5 +9,6 @@ const useListen = (store, onStore) => {
     }
   }, [])
 }
+/*eslint-enable react-hooks/exhaustive-deps */
 
 export default useListen
