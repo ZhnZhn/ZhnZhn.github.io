@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _trIfCategoryCase2 = _interopRequireDefault(require("./trIfCategoryCase"));
+
 var YAXIS = 'yAxis';
 var _isArr = Array.isArray;
 
@@ -87,6 +89,10 @@ var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
     options = {};
   }
 
+  if (seriaOptions === void 0) {
+    seriaOptions = {};
+  }
+
   try {
     var _options = options,
         color = _options.color,
@@ -100,11 +106,14 @@ var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
       this.addAxis(_crAxis(id, color), false, true);
     }
 
-    var _seria = this.addSeries(_crSeria({
+    var _trIfCategoryCase = (0, _trIfCategoryCase2["default"])(this, _crData(options), seriaOptions),
+        data = _trIfCategoryCase.data,
+        seriaOption = _trIfCategoryCase.seriaOption,
+        _seria = this.addSeries(_crSeria({
       id: id,
       color: color,
-      data: _crData(options)
-    }, seriaOptions), false);
+      data: data
+    }, seriaOption), false);
 
     this.redraw();
     return _seria;

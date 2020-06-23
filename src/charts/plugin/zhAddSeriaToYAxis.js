@@ -1,3 +1,4 @@
+import trIfCategoryCase from './trIfCategoryCase'
 
 const YAXIS = 'yAxis';
 
@@ -66,15 +67,18 @@ const _crData = ({ data, userMin, userMax }) => {
     : data;
 };
 
-const zhAddSeriaToYAxis = function(options={}, seriaOptions) {
+const zhAddSeriaToYAxis = function(options={}, seriaOptions={}) {
   try {
     const { color, yIndex=-1 } = options
     , { id, isNewYAxis } = _checkYAxis(yIndex, this);
     if (isNewYAxis) {
       this.addAxis(_crAxis(id, color), false, true)
     }
-    const _seria = this.addSeries(_crSeria({
-      id, color, data: _crData(options) }, seriaOptions), false
+    const {
+      data, seriaOption
+    } = trIfCategoryCase(this, _crData(options), seriaOptions)
+    , _seria = this.addSeries(_crSeria({
+      id, color, data }, seriaOption), false
     );
     this.redraw();
     return _seria;
