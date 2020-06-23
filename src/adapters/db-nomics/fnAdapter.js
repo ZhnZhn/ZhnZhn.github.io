@@ -8,13 +8,14 @@ const {
   joinBy,
   ymdToUTC,
   valueMoving,
-  crSeria
+  crSeria,
+  getValue
 } = AdapterFn;
 const {
   getPeriodAndValue,
   getTitle,
   getSubtitle,
-  getInexedAt
+  getIndexedAt
  } = fnSelector;
 
 const C = {
@@ -33,7 +34,7 @@ const _getId = (option) => _isId(option.seriaId)
 const _crItemLink = crItemLink
   .bind(null, 'DB Nomics Chart');
 const _crUpdatedDate = json => {
-  const _date = getInexedAt(json).split('T')[0]
+  const _date = getIndexedAt(json).split('T')[0]
   return _date
     ? `<p>Updated by DB Nomics on ${_date}</p>`
     : '';
@@ -69,13 +70,14 @@ const _crInfo = (json, option) => ({
   description: _crDescr(json, option)
 })
 
-const _isNumber = n => typeof(n) === 'number'
+const _isNumber = n => typeof n === 'number'
  && !Number.isNaN(n);
 
 
 const fnAdapter = {
   crError,
   crSeria,
+  getValue,
   crTitle: ({ title, subtitle }, json) => {
     const _ = getSubtitle(json)
     , _subtitle = _.length > C.SUBT_MAX
@@ -91,10 +93,11 @@ const fnAdapter = {
     const data = []
     , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
     , { period, value } = getPeriodAndValue(json)
-    , _len = period.length;
+    , _len = period.length
+    , _ymdOption = { y: 1 };
     let i = 0, _x, _y;
     for (i; i<_len; i++){
-      _x = ymdToUTC(period[i])
+      _x = ymdToUTC(period[i], _ymdOption)
       _y = value[i]
       if (_x > _xFrom && _isNumber(_y)) {
         data.push([ _x, _y ])

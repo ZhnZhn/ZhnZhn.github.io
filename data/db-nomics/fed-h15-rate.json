@@ -1,0 +1,14 @@
+{"items":[
+{"c":"Federal funds – Overnight","v":"RIFSPFF_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 1-month","v":"RIFLGFCM01_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 3-month","v":"RIFLGFCM03_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 6-month","v":"RIFLGFCM06_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 1-year","v":"RIFLGFCY01_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 2-year","v":"RIFLGFCY02_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 3-year","v":"RIFLGFCY03_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 5-year","v":"RIFLGFCY05_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 7-year","v":"RIFLGFCY07_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 10-year","v":"RIFLGFCY10_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 20-year","v":"RIFLGFCY20_N"},
+{"c":"U.S. Treasury constant maturities/Nominal – 30-year","v":"RIFLGFCY30_N"}
+]}

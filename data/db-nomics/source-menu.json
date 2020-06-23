@@ -17,15 +17,10 @@
     },{
       "caption": "FED",
       "items": [
+        { "id": "DBN_FED_H15"},
         { "id": "DBN_FED_IPMAJOR" },
         { "id": "DBN_FED_CAP" },
         { "id": "DBN_FED_CAPUTL"}
-      ]
-    },{
-      "caption": "NBB",
-      "items": [
-        { "id": "DBN_NBB_HICP" },
-        { "id": "DBN_NBB_MARKETS" }
       ]
     },{
       "caption": "IMF",
@@ -35,6 +30,12 @@
         { "id": "DBN_IMF_COFOG" },
         { "id": "DBN_IMF_WEO" },
         { "id": "DBN_IMF_WEOAGG" }
+      ]
+    },{
+      "caption": "NBB",
+      "items": [
+        { "id": "DBN_NBB_HICP" },
+        { "id": "DBN_NBB_MARKETS" }
       ]
     },{
       "caption": "OECD",
@@ -105,7 +106,7 @@
     "DBN_BIS_DSR": {
       "type": "DBN_BIS_DSR",
       "menuTitle" : "Debt Service Ratio, Q",
-      "contCaption" : "",      
+      "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
@@ -392,6 +393,25 @@
           "dfProvider": "WTO",
           "dfCode": "m2",
           "dfFnUrl": "s21"
+        }
+      }
+    },
+    "DBN_FED_H15": {
+      "type": "DBN_FED_H15",
+      "menuTitle" : "Selected Interest Rates",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "nInitFromDate": 3,
+        "selectProps": [
+          [ "Rate", "fed-h15-rate" ],
+          [ "Frequency", "fed-h15-freq"]
+        ],
+        "dataSource" : "DB Nomics: The Fed: Selected Interest Rates",
+        "dfProps": {
+          "dfProvider": "FED",
+          "dfCode": "H15",
+          "dfFnUrl": "s12"
         }
       }
     },

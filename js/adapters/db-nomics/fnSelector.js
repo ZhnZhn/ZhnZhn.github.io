@@ -26,7 +26,7 @@ var fnSelector = {
   },
   getTitle: _fGetByPropName('dataset_name'),
   getSubtitle: _fGetByPropName('series_name'),
-  getInexedAt: _fGetByPropName('indexed_at')
+  getIndexedAt: _fGetByPropName('indexed_at')
 };
 var _default = fnSelector;
 exports["default"] = _default;

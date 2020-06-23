@@ -1,12 +1,23 @@
-{
-  "items":[
-{"value":"BCA_NGDPD","caption":"Current account balance - Percent of GDP"},
-{"value":"GGXCNL_NGDP","caption":"General government net lending/borrowing - Percent of GDP"},
-{"value":"NGDPRPPPPCPCH","caption":"Gross domestic product per capita, constant prices - Purchasing power parity; percent change"},
-{"value":"NGDP_RPCH","caption":"Gross domestic product, constant prices - Percent change"},
-{"value":"PPPGDP","caption":"Gross domestic product, current prices - Purchasing power parity; international dollars"},
-{"value":"PCPIPCH","caption":"Inflation, average consumer prices - Percent change"},
-{"value":"PCPIEPCH","caption":"Inflation, end of period consumer prices - Percent change"},
-{"value":"LUR","caption":"Unemployment rate - Percent of total labor force"}
-]
-}
+{"items":[
+{"v":"BCA.us_dollars","c":"Current account balance – U.S. dollars"},
+{"v":"BCA_NGDPD.pcent_gdp","c":"Current account balance - Percent of GDP"},
+{"v":"GGR.national_currency","c":"General government revenue – National currency"},
+{"v":"GGR_NGDP.pcent_gdp","c":"General government revenue – Percent of GDP"},
+{"v":"GGX.national_currency","c":"General government total expenditure – National currency"},
+{"v":"GGX_NGDP.pcent_gdp","c":"General government total expenditure – Percent of GDP"},
+{"v":"GGXCNL_NGDP.pcent_gdp","c":"General government net lending/borrowing - Percent of GDP"},
+{"v":"NGDPD.us_dollars","c":"Gross domestic product, current prices – U.S. dollars"},
+{"v":"NGDP_R.national_currency","c":"Gross domestic product, constant prices – National currency"},
+{"v":"NGDP_RPCH.pcent_change","c":"Gross domestic product, constant prices - Percent change"},
+{"v":"NGDPRPPPPCPCH.purchasing_power_parity_pcent_change","c":"Gross domestic product per capita, constant prices - Purchasing power parity; percent change"},
+{"v":"PPPGDP.purchasing_power_parity_international_dollars","c":"Gross domestic product, current prices - Purchasing power parity; international dollars"},
+{"v":"NGSD_NGDP.pcent_gdp","c":"Gross national savings – Percent of GDP"},
+{"v":"NID_NGDP.pcent_gdp","c":"Total investment – Percent of GDP"},
+{"v":"PCPIPCH.pcent_change","c":"Inflation, average consumer prices - Percent change"},
+{"v":"PCPIEPCH.pcent_change","c":"Inflation, end of period consumer prices - Percent change"},
+{"v":"LUR.pcent_total_labor_force","c":"Unemployment rate - Percent of total labor force"},
+{"v":"TMG_RPCH.pcent_change","c":"Volume of Imports of goods – Percent change"},
+{"v":"TM_RPCH.pcent_change","c":"Volume of imports of goods and services – Percent change"},
+{"v":"TXG_RPCH.pcent_change","c":"Volume of exports of goods – Percent change"},
+{"v":"TX_RPCH.pcent_change","c":"Volume of exports of goods and services – Percent change"}
+]}

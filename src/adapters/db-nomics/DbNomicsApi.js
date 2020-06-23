@@ -1,6 +1,6 @@
 import fnAdapter from './fnAdapter'
 
-const { crError } = fnAdapter;
+const { crError, getValue } = fnAdapter;
 
 const C = {
   URL: 'https://api.db.nomics.world/v22/series',
@@ -12,10 +12,6 @@ const C = {
 
 const _isArr = Array.isArray;
 const _crErr = crError.bind(null, C.ERR_CAPTION);
-
-const _getValue = obj => obj && obj.value
-   ? obj.value
-   : '';
 
 const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
  if (!dfProvider || !dfCode || !seriaId) {
@@ -31,7 +27,7 @@ const _crUrl = (seriaId, option) => {
 };
 
 const _dfFnUrl = option => _isArr(option.items)
-  ? _crUrl(_getValue(option.items[0]), option)
+  ? _crUrl(getValue(option.items[0]), option)
   : _crUrl('', option);
 
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
@@ -55,7 +51,7 @@ const _crSeriaId = ({ dfPrefix, dfSufix }, ...args) => [
 const _s1FnUrl = (option) => {
   const { items } = option
   , _seriaId = _crSeriaId(option,
-    _getValue(items[0]),
+    getValue(items[0])
   );
   return _crUrl(_seriaId, option);
 };
@@ -64,9 +60,9 @@ const _s21FnUrl = (option) => {
   const { items, df1Prefix, df2Prefix } = option
   , _seriaId = _crSeriaId(option,
     df1Prefix,
-    _getValue(items[1]),
+    getValue(items[1]),
     df2Prefix,
-    _getValue(items[0]),
+    getValue(items[0]),
   );
   return _crUrl(_seriaId, option);
 };
@@ -74,29 +70,29 @@ const _s12FnUrl = (option) => {
   const { items, df1Prefix, df2Prefix } = option
   , _seriaId = _crSeriaId(option,
     df1Prefix,
-    _getValue(items[0]),
+    getValue(items[0]),
     df2Prefix,
-    _getValue(items[1]),
+    getValue(items[1]),
   );
   return _crUrl(_seriaId, option);
 };
 const _s123AFnUrl = (option) => {
   const { items, df3Prefix } = option
   , _seriaId = _crSeriaId(option,
-    _getValue(items[0]),
-    _getValue(items[1]),
+    getValue(items[0]),
+    getValue(items[1]),
     df3Prefix,
-    _getValue(items[2])
+    getValue(items[2])
   );
   return _crUrl(_seriaId, option);
 };
 const _s123BFnUrl = (option) => {
   const { items, df2Prefix } = option
   , _seriaId = _crSeriaId(option,
-    _getValue(items[0]),
+    getValue(items[0]),
     df2Prefix,
-    _getValue(items[1]),
-    _getValue(items[2])
+    getValue(items[1]),
+    getValue(items[2])
   );
   return _crUrl(_seriaId, option);
 };
@@ -104,11 +100,11 @@ const _s123BFnUrl = (option) => {
 const _s123FnUrl = (option) => {
   const { items } = option
   , _seriaId = _crSeriaId(option,
-    _getValue(items[0]),
-    _getValue(items[1]),
-    _getValue(items[2])
-    )
-    return _crUrl(_seriaId, option);
+     getValue(items[0]),
+     getValue(items[1]),
+     getValue(items[2])
+    );
+  return _crUrl(_seriaId, option);
 };
 
 const _rFnUrl = {

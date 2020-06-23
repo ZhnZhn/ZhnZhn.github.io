@@ -17,11 +17,12 @@ var crError = _AdapterFn["default"].crError,
     joinBy = _AdapterFn["default"].joinBy,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     valueMoving = _AdapterFn["default"].valueMoving,
-    crSeria = _AdapterFn["default"].crSeria;
+    crSeria = _AdapterFn["default"].crSeria,
+    getValue = _AdapterFn["default"].getValue;
 var getPeriodAndValue = _fnSelector["default"].getPeriodAndValue,
     getTitle = _fnSelector["default"].getTitle,
     getSubtitle = _fnSelector["default"].getSubtitle,
-    getInexedAt = _fnSelector["default"].getInexedAt;
+    getIndexedAt = _fnSelector["default"].getIndexedAt;
 var C = {
   CHART_URL: 'https://db.nomics.world',
   SUBT_MAX: 60
@@ -45,7 +46,7 @@ var _getId = function _getId(option) {
 var _crItemLink = crItemLink.bind(null, 'DB Nomics Chart');
 
 var _crUpdatedDate = function _crUpdatedDate(json) {
-  var _date = getInexedAt(json).split('T')[0];
+  var _date = getIndexedAt(json).split('T')[0];
   return _date ? "<p>Updated by DB Nomics on " + _date + "</p>" : '';
 };
 
@@ -94,6 +95,7 @@ var _isNumber = function _isNumber(n) {
 var fnAdapter = {
   crError: crError,
   crSeria: crSeria,
+  getValue: getValue,
   crTitle: function crTitle(_ref2, json) {
     var title = _ref2.title,
         subtitle = _ref2.subtitle;
@@ -112,14 +114,17 @@ var fnAdapter = {
         _getPeriodAndValue = getPeriodAndValue(json),
         period = _getPeriodAndValue.period,
         value = _getPeriodAndValue.value,
-        _len = period.length;
+        _len = period.length,
+        _ymdOption = {
+      y: 1
+    };
 
     var i = 0,
         _x,
         _y;
 
     for (i; i < _len; i++) {
-      _x = ymdToUTC(period[i]);
+      _x = ymdToUTC(period[i], _ymdOption);
       _y = value[i];
 
       if (_x > _xFrom && _isNumber(_y)) {

@@ -1,5 +1,5 @@
 {"items":[
-{"value":"H","caption":"Households & NPISHs"},
-{"value":"N","caption":"Non-financial corporations"},
-{"value":"P","caption":"Private non-financial sector"}
+{"v":"H","c":"Households & NPISHs"},
+{"v":"N","c":"Non-financial corporations"},
+{"v":"P","c":"Private non-financial sector"}
 ]}

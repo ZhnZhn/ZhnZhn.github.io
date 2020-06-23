@@ -12,10 +12,10 @@ const fnSelector = {
     period: _getByPropName(json, 'period'),
     value: _getByPropName(json, 'value')
   }),
-  
+
   getTitle: _fGetByPropName('dataset_name'),
   getSubtitle: _fGetByPropName('series_name'),
-  getInexedAt: _fGetByPropName('indexed_at')
+  getIndexedAt: _fGetByPropName('indexed_at')
 };
 
 export default fnSelector

@@ -7,7 +7,8 @@ exports["default"] = void 0;
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crError = _fnAdapter["default"].crError;
+var crError = _fnAdapter["default"].crError,
+    getValue = _fnAdapter["default"].getValue;
 var C = {
   URL: 'https://api.db.nomics.world/v22/series',
   TAIL: 'observations=1&format=json&metadata=false',
@@ -18,10 +19,6 @@ var C = {
 var _isArr = Array.isArray;
 
 var _crErr = crError.bind(null, C.ERR_CAPTION);
-
-var _getValue = function _getValue(obj) {
-  return obj && obj.value ? obj.value : '';
-};
 
 var _crUrlImpl = function _crUrlImpl(dfProvider, dfCode, seriaId) {
   if (!dfProvider || !dfCode || !seriaId) {
@@ -39,7 +36,7 @@ var _crUrl = function _crUrl(seriaId, option) {
 };
 
 var _dfFnUrl = function _dfFnUrl(option) {
-  return _isArr(option.items) ? _crUrl(_getValue(option.items[0]), option) : _crUrl('', option);
+  return _isArr(option.items) ? _crUrl(getValue(option.items[0]), option) : _crUrl('', option);
 };
 
 var _crIdUrl = function _crIdUrl(option, dfProvider, dfCode, seriaId) {
@@ -72,7 +69,7 @@ var _crSeriaId = function _crSeriaId(_ref2) {
 
 var _s1FnUrl = function _s1FnUrl(option) {
   var items = option.items,
-      _seriaId = _crSeriaId(option, _getValue(items[0]));
+      _seriaId = _crSeriaId(option, getValue(items[0]));
 
   return _crUrl(_seriaId, option);
 };
@@ -81,7 +78,7 @@ var _s21FnUrl = function _s21FnUrl(option) {
   var items = option.items,
       df1Prefix = option.df1Prefix,
       df2Prefix = option.df2Prefix,
-      _seriaId = _crSeriaId(option, df1Prefix, _getValue(items[1]), df2Prefix, _getValue(items[0]));
+      _seriaId = _crSeriaId(option, df1Prefix, getValue(items[1]), df2Prefix, getValue(items[0]));
 
   return _crUrl(_seriaId, option);
 };
@@ -90,7 +87,7 @@ var _s12FnUrl = function _s12FnUrl(option) {
   var items = option.items,
       df1Prefix = option.df1Prefix,
       df2Prefix = option.df2Prefix,
-      _seriaId = _crSeriaId(option, df1Prefix, _getValue(items[0]), df2Prefix, _getValue(items[1]));
+      _seriaId = _crSeriaId(option, df1Prefix, getValue(items[0]), df2Prefix, getValue(items[1]));
 
   return _crUrl(_seriaId, option);
 };
@@ -98,7 +95,7 @@ var _s12FnUrl = function _s12FnUrl(option) {
 var _s123AFnUrl = function _s123AFnUrl(option) {
   var items = option.items,
       df3Prefix = option.df3Prefix,
-      _seriaId = _crSeriaId(option, _getValue(items[0]), _getValue(items[1]), df3Prefix, _getValue(items[2]));
+      _seriaId = _crSeriaId(option, getValue(items[0]), getValue(items[1]), df3Prefix, getValue(items[2]));
 
   return _crUrl(_seriaId, option);
 };
@@ -106,14 +103,14 @@ var _s123AFnUrl = function _s123AFnUrl(option) {
 var _s123BFnUrl = function _s123BFnUrl(option) {
   var items = option.items,
       df2Prefix = option.df2Prefix,
-      _seriaId = _crSeriaId(option, _getValue(items[0]), df2Prefix, _getValue(items[1]), _getValue(items[2]));
+      _seriaId = _crSeriaId(option, getValue(items[0]), df2Prefix, getValue(items[1]), getValue(items[2]));
 
   return _crUrl(_seriaId, option);
 };
 
 var _s123FnUrl = function _s123FnUrl(option) {
   var items = option.items,
-      _seriaId = _crSeriaId(option, _getValue(items[0]), _getValue(items[1]), _getValue(items[2]));
+      _seriaId = _crSeriaId(option, getValue(items[0]), getValue(items[1]), getValue(items[2]));
 
   return _crUrl(_seriaId, option);
 };
