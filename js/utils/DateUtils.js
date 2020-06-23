@@ -137,7 +137,7 @@ var DateUtils = {
 
     return DateUtils.isYmd(y + "-" + m + "-" + d, 0, minYear);
   },
-  ymdToUTC: function ymdToUTC(dateStr) {
+  ymdToUTC: function ymdToUTC(dateStr, option) {
     var _dateStr = dateStr || '',
         _arr = _dateStr.split('-'),
         _len = _arr.length;
@@ -159,7 +159,11 @@ var DateUtils = {
         return _m;
       }
     } else if (_len === 1) {
-      return Date.UTC(_arr[0], 11, 31);
+      var _option$y = option.y,
+          y = _option$y === void 0 ? 0 : _option$y,
+          _y = parseInt(_arr[0], 10) - y;
+
+      return !_isNaN(_y) ? Date.UTC(_y, 11, 31) : _y;
     }
   },
   ymdtToUTC: function ymdtToUTC(dateStr) {

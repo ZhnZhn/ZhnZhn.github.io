@@ -104,7 +104,7 @@ const DateUtils = {
 	 return DateUtils.isYmd(`${y}-${m}-${d}`, 0, minYear);
  },
 
- ymdToUTC: (dateStr) => {
+ ymdToUTC: (dateStr, option) => {
 	 const _dateStr = dateStr || ''
    , _arr = _dateStr.split('-')
 	 , _len = _arr.length;
@@ -116,7 +116,7 @@ const DateUtils = {
 				const  _d = (new Date(_arr[0], _m, 0)).getDate();
 		    return Date.UTC( _arr[0], _m - 1, _d );
 		 // YYYY-Q format
-	 } else if (_isLikelyQuarter(_arr[1])) {
+	   } else if (_isLikelyQuarter(_arr[1])) {
 			  const _q = parseInt(_arr[1][1], 10);
 				return !_isNaN(_q)
 				  ? Date.UTC( _arr[0], _q*3 - 1, 30)
@@ -125,7 +125,11 @@ const DateUtils = {
 			 return _m;
 		 }
 	 } else if ( _len === 1) {
-		 return Date.UTC( _arr[0], 11, 31 );
+     const { y=0 } = option
+     , _y = parseInt(_arr[0], 10) - y;
+		 return !_isNaN(_y)
+       ? Date.UTC( _y, 11, 31)
+       : _y;
 	 }
  },
  ymdtToUTC(dateStr) {
