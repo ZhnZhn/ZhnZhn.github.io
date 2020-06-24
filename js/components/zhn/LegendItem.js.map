@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../../src/components/zhn/LegendItem.jsx"],"names":["CL","S","ITEM","display","paddingLeft","paddingRight","CIRCLE","backgroundColor","width","height","marginLeft","border","borderRadius","DF_STYLES","DECOR_STYLE","borderWidth","fontWeight","_useStyles","is","color","borderColor","_decorStyle","LegendItem","item","onClickItem","name","isVisible","setIs","btStyle","circleStyle","_hClick","v"],"mappings":";;;;;;;;;;;AAAA;;AACA;AAEA,IAAMA,EAAE,GAAG,SAAX;AAEA,IAAMC,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAG;AACLC,IAAAA,OAAO,EAAG,cADL;AAELC,IAAAA,WAAW,EAAG,CAFT;AAGLC,IAAAA,YAAY,EAAG;AAHV,GADC;AAMRC,EAAAA,MAAM,EAAG;AACPH,IAAAA,OAAO,EAAG,cADH;AAEPI,IAAAA,eAAe,EAAG,MAFX;AAGPC,IAAAA,KAAK,EAAG,EAHD;AAIPC,IAAAA,MAAM,EAAG,EAJF;AAKPC,IAAAA,UAAU,EAAG,CALN;AAMPC,IAAAA,MAAM,EAAE,gBAND;AAOPC,IAAAA,YAAY,EAAG;AAPR;AAND,CAAV;AAiBA,IAAMC,SAAS,GAAG,CAAC,MAAD,EAAS,EAAT,CAAlB;AACA,IAAMC,WAAW,GAAG;AAAEC,EAAAA,WAAW,EAAE,CAAf;AAAkBC,EAAAA,UAAU,EAAE;AAA9B,CAApB;;AACA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACC,EAAD,EAAKC,KAAL,EAAe;AAAA,aACGD,EAAE,GACjC,CAAEC,KAAF,EAASL,WAAT,CADiC,GAEjCD,SAH4B;AAAA,MACzBO,WADyB;AAAA,MACZC,WADY;;AAIhC,SAAO;AACHF,IAAAA,KAAK,EAAEA,KADJ;AACWC,IAAAA,WAAW,EAAXA;AADX,KAC2BC,WAD3B,GAEL;AAAEd,IAAAA,eAAe,EAAEa,WAAnB;AAAgCA,IAAAA,WAAW,EAAXA;AAAhC,GAFK,CAAP;AAID,CARD;;AAUA,IAAME,UAAU,GAAG,SAAbA,UAAa,QAA8B;AAAA,yBAA3BC,IAA2B;AAAA,MAA3BA,IAA2B,2BAAtB,EAAsB;AAAA,MAAlBC,WAAkB,SAAlBA,WAAkB;;AAAA,MACvCL,KADuC,GACZI,IADY,CACvCJ,KADuC;AAAA,MAChCM,IADgC,GACZF,IADY,CAChCE,IADgC;AAAA,MAC1BC,SAD0B,GACZH,IADY,CAC1BG,SAD0B;AAAA,kBAE/B,qBAASA,SAAT,CAF+B;AAAA,MAE5CR,EAF4C;AAAA,MAExCS,KAFwC;AAAA,oBAGlBV,UAAU,CAACC,EAAD,EAAKC,KAAL,CAHQ;AAAA,MAG3CS,OAH2C;AAAA,MAGlCC,WAHkC;AAAA,MAI7CC,OAJ6C,GAInC,SAAVA,OAAU,GAAM;AACdN,IAAAA,WAAW,CAACD,IAAD,CAAX;AACAI,IAAAA,KAAK,CAAC,UAAAI,CAAC;AAAA,aAAI,CAACA,CAAL;AAAA,KAAF,CAAL;AACH,GAP8C;;AAQ/C,sBACE;AACG,IAAA,SAAS,EAAE/B,EADd;AAEG,IAAA,KAAK,EAAE4B,OAFV;AAGG,IAAA,OAAO,EAAEE;AAHZ,kBAKE;AAAM,IAAA,KAAK,gCAAM7B,CAAC,CAACK,MAAR,EAAmBuB,WAAnB;AAAX,IALF,eAME;AAAM,IAAA,KAAK,EAAE5B,CAAC,CAACC;AAAf,KAAsBuB,IAAtB,CANF,CADF;AAUD,CAlBD;AAoBA;;;;;;;;;;;;eAWeH,U","sourcesContent":["import React, { useState } from 'react';\r\n//import PropTypes from \"prop-types\";\r\n\r\nconst CL = 'bt-item';\r\n\r\nconst S = {\r\n  ITEM : {\r\n    display : 'inline-block',\r\n    paddingLeft : 5,\r\n    paddingRight : 6\r\n  },\r\n  CIRCLE : {\r\n    display : 'inline-block',\r\n    backgroundColor : 'grey',\r\n    width : 12,\r\n    height : 12,\r\n    marginLeft : 6,\r\n    border: '1px solid grey',\r\n    borderRadius : '50%'\r\n  }\r\n}\r\n\r\nconst DF_STYLES = ['grey', {}];\r\nconst DECOR_STYLE = { borderWidth: 2, fontWeight: 'bold' };\r\nconst _useStyles = (is, color) => {\r\n  const [borderColor, _decorStyle] = is\r\n    ? [ color, DECOR_STYLE ]\r\n    : DF_STYLES;\r\n  return [\r\n    { color: color, borderColor, ..._decorStyle },\r\n    { backgroundColor: borderColor, borderColor}\r\n  ];\r\n};\r\n\r\nconst LegendItem = ({ item={}, onClickItem }) => {\r\n  const { color, name, isVisible } = item\r\n  , [is, setIs] = useState(isVisible)\r\n  , [ btStyle, circleStyle ] = _useStyles(is, color)\r\n  , _hClick = () => {\r\n      onClickItem(item);\r\n      setIs(v => !v)\r\n  };\r\n  return (\r\n    <button\r\n       className={CL}\r\n       style={btStyle}\r\n       onClick={_hClick}\r\n    >\r\n      <span style={{...S.CIRCLE, ...circleStyle}} />\r\n      <span style={S.ITEM}>{name}</span>\r\n   </button>\r\n  );\r\n}\r\n\r\n/*\r\nLegendItem.propTypes = {\r\n  item: PropTypes.shape({\r\n    isVisible: PropTypes.bool,\r\n    color: PropTypes.string,\r\n    name: PropTypes.string\r\n  })\r\n  onClickItem: PropTypes.func\r\n}\r\n*/\r\n\r\nexport default LegendItem\r\n"],"file":"LegendItem.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/LegendItem.js"
+ ],
+ "file": "../../../src/components/zhn/LegendItem.js",
+ "names": [
+  "CL",
+  "S",
+  "ITEM",
+  "display",
+  "paddingLeft",
+  "paddingRight",
+  "CIRCLE",
+  "backgroundColor",
+  "width",
+  "height",
+  "marginLeft",
+  "border",
+  "borderRadius",
+  "DF_STYLES",
+  "DECOR_STYLE",
+  "borderWidth",
+  "fontWeight",
+  "_crStyles",
+  "is",
+  "color",
+  "borderColor",
+  "_decorStyle",
+  "LegendItem",
+  "item",
+  "onClickItem",
+  "name",
+  "isVisible",
+  "toggleIs",
+  "btStyle",
+  "circleStyle",
+  "_hClick"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAGA;;AAFA;AAIA,IAAMA,EAAE,GAAG,SAAX;AAEA,IAAMC,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AACJC,IAAAA,OAAO,EAAE,cADL;AAEJC,IAAAA,WAAW,EAAE,CAFT;AAGJC,IAAAA,YAAY,EAAE;AAHV,GADE;AAMRC,EAAAA,MAAM,EAAE;AACNH,IAAAA,OAAO,EAAE,cADH;AAENI,IAAAA,eAAe,EAAE,MAFX;AAGNC,IAAAA,KAAK,EAAE,EAHD;AAINC,IAAAA,MAAM,EAAE,EAJF;AAKNC,IAAAA,UAAU,EAAE,CALN;AAMNC,IAAAA,MAAM,EAAE,gBANF;AAONC,IAAAA,YAAY,EAAE;AAPR;AANA,CAAV;AAiBA,IAAMC,SAAS,GAAG,CAAC,MAAD,EAAS,EAAT,CAAlB;AACA,IAAMC,WAAW,GAAG;AAAEC,EAAAA,WAAW,EAAE,CAAf;AAAkBC,EAAAA,UAAU,EAAE;AAA9B,CAApB;;AACA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,EAAD,EAAKC,KAAL,EAAe;AAAA,aACID,EAAE,GACjC,CAAEC,KAAF,EAASL,WAAT,CADiC,GAEjCD,SAH2B;AAAA,MACxBO,WADwB;AAAA,MACXC,WADW;;AAI/B,SAAO;AACHF,IAAAA,KAAK,EAAEA,KADJ;AACWC,IAAAA,WAAW,EAAXA;AADX,KAC2BC,WAD3B,GAEL;AAAEd,IAAAA,eAAe,EAAEa,WAAnB;AAAgCA,IAAAA,WAAW,EAAXA;AAAhC,GAFK,CAAP;AAID,CARD;;AAUA,IAAME,UAAU,GAAG,SAAbA,UAAa,QAA2B;AAAA,MAAxBC,IAAwB,SAAxBA,IAAwB;AAAA,MAAlBC,WAAkB,SAAlBA,WAAkB;;AAAA,cACTD,IADS,WACTA,IADS,GACD,EADC;AAAA,MACpCJ,KADoC,SACpCA,KADoC;AAAA,MAC7BM,IAD6B,SAC7BA,IAD6B;AAAA,MACvBC,SADuB,SACvBA,SADuB;AAAA,mBAEzB,4BAAU;AAAA,WAAMA,SAAN;AAAA,GAAV,CAFyB;AAAA,MAEzCR,EAFyC;AAAA,MAErCS,QAFqC;AAAA,mBAGfV,SAAS,CAACC,EAAD,EAAKC,KAAL,CAHM;AAAA,MAGxCS,OAHwC;AAAA,MAG/BC,WAH+B;AAAA,MAI1CC,OAJ0C,GAIhC,SAAVA,OAAU,GAAM;AACdN,IAAAA,WAAW,CAACD,IAAD,CAAX;AACAI,IAAAA,QAAQ;AACX,GAP2C;;AAQ5C,sBACE;AACG,IAAA,SAAS,EAAE3B,EADd;AAEG,IAAA,KAAK,EAAE4B,OAFV;AAGG,IAAA,OAAO,EAAEE;AAHZ,kBAKE;AAAM,IAAA,KAAK,gCAAM7B,CAAC,CAACK,MAAR,EAAmBuB,WAAnB;AAAX,IALF,eAME;AAAM,IAAA,KAAK,EAAE5B,CAAC,CAACC;AAAf,KAAsBuB,IAAtB,CANF,CADF;AAUD,CAlBD;AAoBA;;;;;;;;;;;;eAWeH,U"
+}

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
+
+var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
 //import PropTypes from "prop-types";
 var CL = 'bt-item';
@@ -35,7 +35,7 @@ var DECOR_STYLE = {
   fontWeight: 'bold'
 };
 
-var _useStyles = function _useStyles(is, color) {
+var _crStyles = function _crStyles(is, color) {
   var _ref = is ? [color, DECOR_STYLE] : DF_STYLES,
       borderColor = _ref[0],
       _decorStyle = _ref[1];
@@ -50,24 +50,24 @@ var _useStyles = function _useStyles(is, color) {
 };
 
 var LegendItem = function LegendItem(_ref2) {
-  var _ref2$item = _ref2.item,
-      item = _ref2$item === void 0 ? {} : _ref2$item,
+  var item = _ref2.item,
       onClickItem = _ref2.onClickItem;
 
-  var color = item.color,
-      name = item.name,
-      isVisible = item.isVisible,
-      _useState = (0, _react.useState)(isVisible),
-      is = _useState[0],
-      setIs = _useState[1],
-      _useStyles2 = _useStyles(is, color),
-      btStyle = _useStyles2[0],
-      circleStyle = _useStyles2[1],
+  var _ref3 = item != null ? item : {},
+      color = _ref3.color,
+      name = _ref3.name,
+      isVisible = _ref3.isVisible,
+      _useToggle = (0, _useToggle2["default"])(function () {
+    return isVisible;
+  }),
+      is = _useToggle[0],
+      toggleIs = _useToggle[1],
+      _crStyles2 = _crStyles(is, color),
+      btStyle = _crStyles2[0],
+      circleStyle = _crStyles2[1],
       _hClick = function _hClick() {
     onClickItem(item);
-    setIs(function (v) {
-      return !v;
-    });
+    toggleIs();
   };
 
   return /*#__PURE__*/_react["default"].createElement("button", {
