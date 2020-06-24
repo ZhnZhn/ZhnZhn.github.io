@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,9 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 //import PropTypes from "prop-types";
 var TH_ID = 'BROWSER';
@@ -33,8 +31,7 @@ var Browser = function Browser(_ref) {
       style = _ref.style,
       children = _ref.children;
 
-  var theme = (0, _react.useContext)(_ThemeContext["default"]),
-      TS = theme.getStyle(TH_ID),
+  var TS = (0, _useTheme["default"])(TH_ID),
       _styleOpen = isShow ? S.BLOCK : S.NONE,
       _clOpen = isShow ? CL.SHOW : '',
       _clRoot = CL.BROWSER + " " + _clOpen;

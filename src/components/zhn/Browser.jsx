@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 //import PropTypes from "prop-types";
-
-import ThemeContext from '../hoc/ThemeContext'
+import useTheme from '../hooks/useTheme'
 
 const TH_ID = 'BROWSER';
 
@@ -19,8 +18,7 @@ const S = {
 };
 
 const Browser = ({ isShow, style, children }) => {
-  const theme = useContext(ThemeContext)
-  , TS = theme.getStyle(TH_ID)
+  const TS = useTheme(TH_ID)
   , _styleOpen = isShow ? S.BLOCK : S.NONE
   , _clOpen = isShow ? CL.SHOW : ''
   , _clRoot = `${CL.BROWSER} ${_clOpen}`;
