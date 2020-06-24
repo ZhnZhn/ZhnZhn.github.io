@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
+import useToggle from '../hooks/useToggle'
 import LegendItem from './LegendItem';
 
 const C = {
@@ -10,14 +11,14 @@ const C = {
 };
 
 const S = {
-  ROOT_MORE: {
+  MORE: {
     overflowY: 'auto',
     height: 250,
-    marginLeft: -8,
     paddingRight: 4,
+    marginLeft: -8,
     transform: 'scaleX(-1)'
   },
-  ROOT_LESS: {
+  LESS: {
     height: 'auto',
   },
   DIV: {
@@ -26,9 +27,9 @@ const S = {
 
   BT_MORE: {
     display: 'inline-block',
+    color: '#1b2836',
     marginTop: 10,
     marginLeft: 8,
-    color: '#1b2836',
     fontWeight: 'bold',
     cursor: 'pointer'
   }
@@ -38,8 +39,8 @@ const BtMore = ({ isMore, legend, onClick }) => {
   const _len = legend.length;
   if (_len > C.MORE_MAX) {
     const _caption = isMore
-            ? C.LESS + ': ' + C.MORE_MAX
-            : C.MORE + ': +' + (_len - C.MORE_MAX);
+      ? C.LESS + ': ' + C.MORE_MAX
+      : C.MORE + ': +' + (_len - C.MORE_MAX);
     return (
       <button
         style={S.BT_MORE}
@@ -53,73 +54,43 @@ const BtMore = ({ isMore, legend, onClick }) => {
   }
 }
 
-class Legend extends Component {
-
-  static defaultProps = {
-    legend: []
-  }
-
-  state = {
-    isMore: false
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (
-        nextProps.legend === this.props.legend
-        && nextState.isMore === this.state.isMore
-    ){
-      return false;
-    }
-    return true;
-  }
-
-  _handleMore = () => {
-    this.setState(prevState => ({
-      isMore: !prevState.isMore
-    }))
-  }
-
-  _renderLegend = (legend, isMore, onClickItem) => {
-     const _legend = [], max = legend.length;
-     let i=0;
-     for (; i<max; i++){
-       if ( (isMore) || (!isMore && i < C.MORE_MAX) ) {
-         const item = legend[i];
-         _legend.push(
-           <LegendItem
-              key={item.name}
-              item={item}
-              onClickItem={onClickItem}
-           />
-         )
-       } else {
-         break;
-       }
-     }
-     return _legend;
-  }
-
-  render(){
-    const {
-        legend, onClickItem
-      } = this.props
-    , { isMore } = this.state
-    , _rootStyle = isMore
-         ? S.ROOT_MORE
-         : {...S.ROOT_MORE, ...S.ROOT_LESS};
-    return (
-      <div className={C.CL_SCROLL} style={_rootStyle}>
-        <div style={S.DIV}>
-          {this._renderLegend(legend, isMore, onClickItem)}
-          <BtMore
-            isMore={isMore}
-            legend={legend}
-            onClick={this._handleMore}
+const _renderLegend = (legend, isMore, onClickItem) => {
+   const _legendItems = [], max = legend.length;
+   let i=0;
+   for (; i<max; i++){
+     if ( (isMore) || (!isMore && i < C.MORE_MAX) ) {
+       const item = legend[i];
+       _legendItems.push(
+         <LegendItem
+            key={item.name}
+            item={item}
+            onClickItem={onClickItem}
          />
-        </div>
-      </div>
-    );
-  }
+       )
+     } else {
+       break;
+     }
+   }
+   return _legendItems;
 }
+
+const Legend = React.memo(({ legend=[], onClickItem }) => {
+  const [isMore, toggleIsMore] = useToggle(false)
+  , _style = isMore
+       ? S.MORE
+       : {...S.MORE, ...S.LESS};
+  return (
+    <div className={C.CL_SCROLL} style={_style}>
+      <div style={S.DIV}>
+        {_renderLegend(legend, isMore, onClickItem)}
+        <BtMore
+          isMore={isMore}
+          legend={legend}
+          onClick={toggleIsMore}
+       />
+      </div>
+    </div>
+  );
+})
 
 export default Legend

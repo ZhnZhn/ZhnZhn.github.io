@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,9 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+var _react = _interopRequireDefault(require("react"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _LegendItem = _interopRequireDefault(require("./LegendItem"));
 
@@ -22,14 +20,14 @@ var C = {
   LESS: 'LESS'
 };
 var S = {
-  ROOT_MORE: {
+  MORE: {
     overflowY: 'auto',
     height: 250,
-    marginLeft: -8,
     paddingRight: 4,
+    marginLeft: -8,
     transform: 'scaleX(-1)'
   },
-  ROOT_LESS: {
+  LESS: {
     height: 'auto'
   },
   DIV: {
@@ -37,9 +35,9 @@ var S = {
   },
   BT_MORE: {
     display: 'inline-block',
+    color: '#1b2836',
     marginTop: 10,
     marginLeft: 8,
-    color: '#1b2836',
     fontWeight: 'bold',
     cursor: 'pointer'
   }
@@ -63,89 +61,50 @@ var BtMore = function BtMore(_ref) {
   }
 };
 
-var Legend = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(Legend, _Component);
+var _renderLegend = function _renderLegend(legend, isMore, onClickItem) {
+  var _legendItems = [],
+      max = legend.length;
+  var i = 0;
 
-  function Legend() {
-    var _this;
+  for (; i < max; i++) {
+    if (isMore || !isMore && i < C.MORE_MAX) {
+      var item = legend[i];
 
-    for (var _len2 = arguments.length, args = new Array(_len2), _key = 0; _key < _len2; _key++) {
-      args[_key] = arguments[_key];
+      _legendItems.push( /*#__PURE__*/_react["default"].createElement(_LegendItem["default"], {
+        key: item.name,
+        item: item,
+        onClickItem: onClickItem
+      }));
+    } else {
+      break;
     }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      isMore: false
-    };
-
-    _this._handleMore = function () {
-      _this.setState(function (prevState) {
-        return {
-          isMore: !prevState.isMore
-        };
-      });
-    };
-
-    _this._renderLegend = function (legend, isMore, onClickItem) {
-      var _legend = [],
-          max = legend.length;
-      var i = 0;
-
-      for (; i < max; i++) {
-        if (isMore || !isMore && i < C.MORE_MAX) {
-          var item = legend[i];
-
-          _legend.push( /*#__PURE__*/_react["default"].createElement(_LegendItem["default"], {
-            key: item.name,
-            item: item,
-            onClickItem: onClickItem
-          }));
-        } else {
-          break;
-        }
-      }
-
-      return _legend;
-    };
-
-    return _this;
   }
 
-  var _proto = Legend.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.legend === this.props.legend && nextState.isMore === this.state.isMore) {
-      return false;
-    }
-
-    return true;
-  };
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        legend = _this$props.legend,
-        onClickItem = _this$props.onClickItem,
-        isMore = this.state.isMore,
-        _rootStyle = isMore ? S.ROOT_MORE : (0, _extends2["default"])({}, S.ROOT_MORE, S.ROOT_LESS);
-
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      className: C.CL_SCROLL,
-      style: _rootStyle
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.DIV
-    }, this._renderLegend(legend, isMore, onClickItem), /*#__PURE__*/_react["default"].createElement(BtMore, {
-      isMore: isMore,
-      legend: legend,
-      onClick: this._handleMore
-    })));
-  };
-
-  return Legend;
-}(_react.Component);
-
-Legend.defaultProps = {
-  legend: []
+  return _legendItems;
 };
+
+var Legend = /*#__PURE__*/_react["default"].memo(function (_ref2) {
+  var _ref2$legend = _ref2.legend,
+      legend = _ref2$legend === void 0 ? [] : _ref2$legend,
+      onClickItem = _ref2.onClickItem;
+
+  var _useToggle = (0, _useToggle2["default"])(false),
+      isMore = _useToggle[0],
+      toggleIsMore = _useToggle[1],
+      _style = isMore ? S.MORE : (0, _extends2["default"])({}, S.MORE, S.LESS);
+
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: C.CL_SCROLL,
+    style: _style
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.DIV
+  }, _renderLegend(legend, isMore, onClickItem), /*#__PURE__*/_react["default"].createElement(BtMore, {
+    isMore: isMore,
+    legend: legend,
+    onClick: toggleIsMore
+  })));
+});
+
 var _default = Legend;
 exports["default"] = _default;
 //# sourceMappingURL=Legend.js.map
