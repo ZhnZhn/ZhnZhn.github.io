@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 //import PropTypes from "prop-types";
 
-import ThemeContext from '../hoc/ThemeContext'
-
+import useTheme from '../hooks/useTheme';
 import SvgMore from './SvgMore';
 import SvgCheckBox from './SvgCheckBox';
 import SvgClose from './SvgClose';
@@ -64,8 +63,7 @@ const BrowserCaption = ({
   onCheck, onUnCheck,
   onClose
 }) => {
-  const theme = useContext(ThemeContext)
-  , TS = theme.getStyle(TH_ID);
+  const TS = useTheme(TH_ID);
   return (
   <div
     className={CL.ROOT}

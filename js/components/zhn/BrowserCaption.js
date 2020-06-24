@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,9 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 
@@ -78,8 +76,7 @@ var BrowserCaption = function BrowserCaption(_ref) {
       onCheck = _ref.onCheck,
       onUnCheck = _ref.onUnCheck,
       onClose = _ref.onClose;
-  var theme = (0, _react.useContext)(_ThemeContext["default"]),
-      TS = theme.getStyle(TH_ID);
+  var TS = (0, _useTheme["default"])(TH_ID);
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: CL.ROOT,
     style: (0, _extends2["default"])({}, S.ROOT, style, TS.ROOT)
