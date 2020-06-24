@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 //import PropTypes from "prop-types";
 
-import ThemeContext from '../hoc/ThemeContext'
-
+import useTheme from '../hooks/useTheme'
 
 const TH_ID = 'ELEMENT';
 
@@ -20,8 +19,7 @@ const ButtonTab = ({
   caption, children,
   onClick
 }) => {
-  const theme = useContext(ThemeContext)
-  , TS = theme.getStyle(TH_ID)
+  const TS = useTheme(TH_ID)
   , _rootClass = _isBool(isShow) & isShow
        ? CL.BT_TAB__SHOW
        : CL.BT_TAB
