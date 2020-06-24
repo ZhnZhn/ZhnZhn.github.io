@@ -38,11 +38,8 @@ const S = {
     color: 'black',
     textTransform: 'capitalize'
   },
-  DESCR_ITEM: {
-    lineHeight: 2
-  },
   DESCR_INFO: {
-    marginTop: 10
+    lineHeight: 1.7
   },
   DESCR_TEXT: {
     color: 'gray',
@@ -131,11 +128,10 @@ class PanelDataInfo extends Component {
             styleText={S.INFO_TEXT}
          />
          {this._renderQuandlLink(database_code, dataset_code)}
-         { description && <A.OpenClose2
-              isInitialOpen={_isShortDescr(description)}
-              fillOpen={C_DESCR_OPEN}
-              styleItem={S.DESCR_ITEM}
+         { description && <A.OpenClose
+              isClose={!_isShortDescr(description)}
               caption="Description"
+              openColor={C_DESCR_OPEN}
              >
                <A.InfoPart
                   style={S.DESCR_INFO}
@@ -144,7 +140,7 @@ class PanelDataInfo extends Component {
                   classText={CL_DESCR}
                   styleText={S.DESCR_TEXT}
                />
-            </A.OpenClose2>
+            </A.OpenClose>
          }
          {this._renderNativeLink(linkFn, item)}
        </div>

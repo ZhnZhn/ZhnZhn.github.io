@@ -48,11 +48,8 @@ var S = {
     color: 'black',
     textTransform: 'capitalize'
   },
-  DESCR_ITEM: {
-    lineHeight: 2
-  },
   DESCR_INFO: {
-    marginTop: 10
+    lineHeight: 1.7
   },
   DESCR_TEXT: {
     color: 'gray',
@@ -159,11 +156,10 @@ var PanelDataInfo = /*#__PURE__*/function (_Component) {
       styleCaption: S.INFO_CAPTION,
       text: frequency,
       styleText: S.INFO_TEXT
-    }), this._renderQuandlLink(database_code, dataset_code), description && /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
-      isInitialOpen: _isShortDescr(description),
-      fillOpen: C_DESCR_OPEN,
-      styleItem: S.DESCR_ITEM,
-      caption: "Description"
+    }), this._renderQuandlLink(database_code, dataset_code), description && /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
+      isClose: !_isShortDescr(description),
+      caption: "Description",
+      openColor: C_DESCR_OPEN
     }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
       style: S.DESCR_INFO,
       isHtml: true,

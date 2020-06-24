@@ -112,7 +112,7 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
         return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
           key: index,
           style: S.GROUP_DIV,
-          fillOpen: C_GROUP_OPEN,
+          openColor: C_GROUP_OPEN,
           caption: caption,
           isDraggable: isModeEdit,
           option: {
@@ -134,9 +134,9 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
             items = list.items;
         return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
           key: index,
-          fillOpen: C_LIST_OPEN,
           style: S.LIST_DIV,
-          styleNotSelected: S.ITEM_NOT_SELECTED,
+          notSelectedStyle: S.ITEM_NOT_SELECTED,
+          openColor: C_LIST_OPEN,
           caption: caption,
           isDraggable: isModeEdit,
           option: {

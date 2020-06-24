@@ -110,7 +110,7 @@ class WatchBrowser extends Component {
                <A.OpenClose2
                   key={index}
                   style={S.GROUP_DIV}
-                  fillOpen={C_GROUP_OPEN}
+                  openColor={C_GROUP_OPEN}
                   caption={caption}
                   isDraggable={isModeEdit}
                   option={{ caption }}
@@ -133,9 +133,9 @@ class WatchBrowser extends Component {
       return (
         <A.OpenClose2
            key={index}
-           fillOpen={C_LIST_OPEN}
            style={S.LIST_DIV}
-           styleNotSelected={S.ITEM_NOT_SELECTED}
+           notSelectedStyle={S.ITEM_NOT_SELECTED}
+           openColor={C_LIST_OPEN}
            caption={caption}
            isDraggable={isModeEdit}
            option={{ groupCaption, caption }}

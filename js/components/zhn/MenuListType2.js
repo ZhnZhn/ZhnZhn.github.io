@@ -15,8 +15,8 @@ var _Color = _interopRequireDefault(require("../styles/Color"));
 
 var _OpenClose = _interopRequireDefault(require("./OpenClose2"));
 
-var C_FILL_OPEN = _Color["default"].GREEN;
-var C_GROUP_OPEN = _Color["default"].TITLE;
+var LIST_OPEN_COLOR = _Color["default"].GREEN;
+var GROUP_OPEN_COLOR = _Color["default"].TITLE;
 var MODEL_PROP = {
   CAPTION: 'caption',
   GROUPS: 'groups',
@@ -31,7 +31,7 @@ var STYLE = {
     marginLeft: 8,
     paddingLeft: 12,
     lineHeight: 2,
-    borderLeft: "2px solid " + C_GROUP_OPEN
+    borderLeft: "2px solid " + GROUP_OPEN_COLOR
   },
   ITEM_DIV: {
     position: 'relative',
@@ -96,8 +96,8 @@ var MenuListType2 = /*#__PURE__*/function (_Component) {
             items = list[itemsProp];
         return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
           key: index,
-          fillOpen: C_FILL_OPEN,
           style: STYLE.LIST_DIV,
+          openColor: LIST_OPEN_COLOR,
           caption: caption
         }, _this._renderLevel3(items, captionProp));
       });
@@ -127,7 +127,7 @@ var MenuListType2 = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
           key: index,
           style: STYLE.GROUP_DIV,
-          fillOpen: C_GROUP_OPEN,
+          openColor: GROUP_OPEN_COLOR,
           caption: caption
         }, _this._renderLevel2(lists, _captionProp, _itemsProp));
       });

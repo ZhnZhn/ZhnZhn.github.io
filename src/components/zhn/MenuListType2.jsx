@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import C from '../styles/Color'
 import OpenClose2 from './OpenClose2'
 
-const C_FILL_OPEN = C.GREEN;
-const C_GROUP_OPEN = C.TITLE;
+const LIST_OPEN_COLOR = C.GREEN;
+const GROUP_OPEN_COLOR = C.TITLE;
 
 const MODEL_PROP = {
   CAPTION : 'caption',
@@ -21,8 +21,8 @@ const STYLE = {
     marginLeft : 8,
     paddingLeft : 12,
     lineHeight : 2,
-    borderLeft : `2px solid ${C_GROUP_OPEN}`
-  },  
+    borderLeft : `2px solid ${GROUP_OPEN_COLOR}`
+  },
   ITEM_DIV : {
     position: 'relative',
     paddingRight: 10,
@@ -76,8 +76,8 @@ class MenuListType2 extends Component {
       return (
         <OpenClose2
            key={index}
-           fillOpen={C_FILL_OPEN}
            style={STYLE.LIST_DIV}
+           openColor={LIST_OPEN_COLOR}
            caption={caption}
         >
           {this._renderLevel3(items, captionProp)}
@@ -102,7 +102,7 @@ class MenuListType2 extends Component {
           <OpenClose2
              key={index}
              style={STYLE.GROUP_DIV}
-             fillOpen={C_GROUP_OPEN}
+             openColor={GROUP_OPEN_COLOR}
              caption={caption}
           >
             {this._renderLevel2(lists, _captionProp, _itemsProp)}
