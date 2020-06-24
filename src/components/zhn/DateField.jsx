@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import STYLE from './InputStyle';
+import STYLE from './Input.Style';
 
 const _isFn = fn => typeof fn === 'function';
 

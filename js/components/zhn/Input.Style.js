@@ -6,47 +6,47 @@ var STYLE = {
   ROOT: {
     position: 'relative',
     display: 'inline-block',
-    backgroundColor: '#E1E1CB',
-    width: '250px'
+    backgroundColor: '#e1e1cb',
+    width: 250
   },
   INPUT: {
     background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
     color: 'green',
     width: '100%',
+    height: 30,
+    paddingLeft: 10,
+    border: 'medium none',
+    outline: 'medium none',
     fontSize: '16px',
     fontWeight: 'bold'
   },
   HR: {
+    width: 'auto',
+    //width: '90%'
+    //width: '230px'
+    marginTop: 0,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 5,
     borderWidth: 'medium medium 1px',
     borderStyle: 'none none solid',
     borderColor: 'red',
-    borderImage: 'none',
-    margin: 0,
-    marginLeft: '10px',
-    marginRight: '10px',
-    marginBottom: '5px',
-    width: 'auto' //width: '90%'
-    //width: '230px'
-
+    borderImage: 'none'
   },
   HR_VALID: {
-    borderColor: '#1B75BB'
+    borderColor: '#1b75bb'
   },
   HR_NOT_VALID: {
-    borderColor: '#F44336'
+    borderColor: '#f44336'
   },
   ERR_MSG: {
-    color: '#F44336',
-    paddingLeft: '10px',
-    paddingBottom: '5px',
+    color: '#f44336',
+    paddingLeft: 10,
+    paddingBottom: 5,
     fontSize: '12px',
     fontWeight: 'bold'
   }
 };
 var _default = STYLE;
 exports["default"] = _default;
-//# sourceMappingURL=InputStyle.js.map
+//# sourceMappingURL=Input.Style.js.map

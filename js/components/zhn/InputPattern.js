@@ -13,7 +13,7 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _InputStyle = _interopRequireDefault(require("./InputStyle"));
+var _Input = _interopRequireDefault(require("./Input.Style"));
 
 //import PropTypes from "prop-types";
 var _isFn = function _isFn(fn) {
@@ -134,13 +134,13 @@ var InputPattern = /*#__PURE__*/function (_Component) {
         value = _this$state.value,
         errorInput = _this$state.errorInput,
         isValid = _this$state.isValid,
-        _styleHr = isValid ? _InputStyle["default"].HR_VALID : _InputStyle["default"].HR_NOT_VALID;
+        _styleHr = isValid ? _Input["default"].HR_VALID : _Input["default"].HR_NOT_VALID;
 
     return /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _InputStyle["default"].ROOT, rootStyle)
+      style: (0, _extends2["default"])({}, _Input["default"].ROOT, rootStyle)
     }, /*#__PURE__*/_react["default"].createElement("input", {
       type: "text",
-      style: (0, _extends2["default"])({}, _InputStyle["default"].INPUT, inputStyle),
+      style: (0, _extends2["default"])({}, _Input["default"].INPUT, inputStyle),
       ref: this._refInput,
       name: "text-date" //autoComplete="new-text-date"
       ,
@@ -154,9 +154,9 @@ var InputPattern = /*#__PURE__*/function (_Component) {
       onBlur: this._handleBlurValue,
       onKeyDown: this._handleKeyDown
     }), /*#__PURE__*/_react["default"].createElement("hr", {
-      style: (0, _extends2["default"])({}, _InputStyle["default"].HR, _styleHr)
+      style: (0, _extends2["default"])({}, _Input["default"].HR, _styleHr)
     }), /*#__PURE__*/_react["default"].createElement("div", {
-      style: _InputStyle["default"].ERR_MSG
+      style: _Input["default"].ERR_MSG
     }, errorInput));
   };
 
