@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/components/zhn-span/SpanValue.jsx"],"names":["STYLE","ROOT","color","fontWeight","whiteSpace","SpanValue","value","style"],"mappings":";;;;;;;;;AAAA;;AAEA,IAAMA,KAAK,GAAG;AACZC,EAAAA,IAAI,EAAG;AACLC,IAAAA,KAAK,EAAG,SADH;AAELC,IAAAA,UAAU,EAAG,MAFR;AAGLC,IAAAA,UAAU,EAAE;AAHP;AADK,CAAd;;AAQA,IAAMC,SAAS,GAAG,SAAZA,SAAY;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,KAAV,QAAUA,KAAV;AAAA,sBAChB;AAAM,IAAA,KAAK,gCAAMP,KAAK,CAACC,IAAZ,EAAqBM,KAArB;AAAX,KACGD,KADH,CADgB;AAAA,CAAlB;;eAMeD,S","sourcesContent":["import React from 'react'\r\n\r\nconst STYLE = {\r\n  ROOT : {\r\n    color : '#2F7ED8',\r\n    fontWeight : 'bold',\r\n    whiteSpace: 'nowrap'\r\n  }\r\n}\r\n\r\nconst SpanValue = ({ value, style }) => (\r\n  <span style={{...STYLE.ROOT, ...style}}>\r\n    {value}\r\n  </span>\r\n)\r\n\r\nexport default SpanValue\r\n"],"file":"SpanValue.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-span/SpanValue.js"
+ ],
+ "file": "../../../src/components/zhn-span/SpanValue.js",
+ "names": [
+  "S",
+  "color",
+  "fontWeight",
+  "whiteSpace",
+  "SpanValue",
+  "value",
+  "style"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAE,SADC;AAERC,EAAAA,UAAU,EAAG,MAFL;AAGRC,EAAAA,UAAU,EAAE;AAHJ,CAAV;;AAMA,IAAMC,SAAS,GAAG,SAAZA,SAAY;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,KAAV,QAAUA,KAAV;AAAA,sBAChB;AAAM,IAAA,KAAK,gCAAMN,CAAN,EAAYM,KAAZ;AAAX,KACGD,KADH,CADgB;AAAA,CAAlB;;eAMeD,S"
+}

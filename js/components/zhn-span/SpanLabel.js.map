@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/components/zhn-span/SpanLabel.jsx"],"names":["STYLE","ROOT","color","fontSize","fontWeight","SpanLabel","label","style"],"mappings":";;;;;;;;;AAAA;;AAEA,IAAMA,KAAK,GAAG;AACZC,EAAAA,IAAI,EAAG;AACLC,IAAAA,KAAK,EAAE,SADF;AAELC,IAAAA,QAAQ,EAAE,MAFL;AAGLC,IAAAA,UAAU,EAAE;AAHP;AADK,CAAd;;AAQA,IAAMC,SAAS,GAAG,SAAZA,SAAY;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,KAAV,QAAUA,KAAV;AAAA,sBAChB;AAAM,IAAA,KAAK,gCAAMP,KAAK,CAACC,IAAZ,EAAqBM,KAArB;AAAX,KACGD,KADH,CADgB;AAAA,CAAlB;;eAMeD,S","sourcesContent":["import React from 'react'\r\n\r\nconst STYLE = {\r\n  ROOT : {\r\n    color: '#1b75bb',\r\n    fontSize: '16px',\r\n    fontWeight: 'bold'\r\n  }\r\n}\r\n\r\nconst SpanLabel = ({ label, style }) => (\r\n  <span style={{...STYLE.ROOT, ...style}}>\r\n    {label}\r\n  </span>\r\n)\r\n\r\nexport default SpanLabel\r\n"],"file":"SpanLabel.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-span/SpanLabel.js"
+ ],
+ "file": "../../../src/components/zhn-span/SpanLabel.js",
+ "names": [
+  "S",
+  "color",
+  "fontSize",
+  "fontWeight",
+  "SpanLabel",
+  "label",
+  "style"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAE,SADC;AAERC,EAAAA,QAAQ,EAAE,MAFF;AAGRC,EAAAA,UAAU,EAAE;AAHJ,CAAV;;AAMA,IAAMC,SAAS,GAAG,SAAZA,SAAY;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,KAAV,QAAUA,KAAV;AAAA,sBAChB;AAAM,IAAA,KAAK,gCAAMN,CAAN,EAAYM,KAAZ;AAAX,KACGD,KADH,CADgB;AAAA,CAAlB;;eAMeD,S"
+}

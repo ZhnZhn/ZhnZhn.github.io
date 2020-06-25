@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/components/zhn-span/SpanDate.jsx"],"names":["STYLE","ROOT","color","fontWeight","SpanDate","date","style"],"mappings":";;;;;;;;;AAAA;;AAEA,IAAMA,KAAK,GAAG;AACZC,EAAAA,IAAI,EAAG;AACLC,IAAAA,KAAK,EAAE,SADF;AAELC,IAAAA,UAAU,EAAG;AAFR;AADK,CAAd;;AAOA,IAAMC,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,sBACf;AAAM,IAAA,KAAK,gCAAMN,KAAK,CAACC,IAAZ,EAAqBK,KAArB;AAAX,KACGD,IADH,CADe;AAAA,CAAjB;;eAMeD,Q","sourcesContent":["import React from 'react'\r\n\r\nconst STYLE = {\r\n  ROOT : {\r\n    color: '#FDB316',\r\n    fontWeight : 'bold'\r\n  }\r\n}\r\n\r\nconst SpanDate = ({ date, style }) => (\r\n  <span style={{...STYLE.ROOT, ...style}}>\r\n    {date}\r\n  </span>\r\n)\r\n\r\nexport default SpanDate\r\n"],"file":"SpanDate.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-span/SpanDate.js"
+ ],
+ "file": "../../../src/components/zhn-span/SpanDate.js",
+ "names": [
+  "S",
+  "color",
+  "fontWeight",
+  "SpanDate",
+  "date",
+  "style"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAE,SADC;AAERC,EAAAA,UAAU,EAAE;AAFJ,CAAV;;AAKA,IAAMC,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,sBACf;AAAM,IAAA,KAAK,gCAAML,CAAN,EAAYK,KAAZ;AAAX,KACGD,IADH,CADe;AAAA,CAAjB;;eAMeD,Q"
+}

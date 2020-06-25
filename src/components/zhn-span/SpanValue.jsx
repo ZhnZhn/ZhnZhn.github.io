@@ -1,15 +1,13 @@
 import React from 'react'
 
-const STYLE = {
-  ROOT : {
-    color : '#2F7ED8',
-    fontWeight : 'bold',
-    whiteSpace: 'nowrap'
-  }
+const S = {  
+  color: '#2f7ed8',
+  fontWeight : 'bold',
+  whiteSpace: 'nowrap'
 }
 
 const SpanValue = ({ value, style }) => (
-  <span style={{...STYLE.ROOT, ...style}}>
+  <span style={{...S, ...style}}>
     {value}
   </span>
 )

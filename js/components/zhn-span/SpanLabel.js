@@ -9,19 +9,17 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _react = _interopRequireDefault(require("react"));
 
-var STYLE = {
-  ROOT: {
-    color: '#1b75bb',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  }
+var S = {
+  color: '#1b75bb',
+  fontSize: '16px',
+  fontWeight: 'bold'
 };
 
 var SpanLabel = function SpanLabel(_ref) {
   var label = _ref.label,
       style = _ref.style;
   return /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, STYLE.ROOT, style)
+    style: (0, _extends2["default"])({}, S, style)
   }, label);
 };
 

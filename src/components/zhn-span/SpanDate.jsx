@@ -1,14 +1,12 @@
 import React from 'react'
 
-const STYLE = {
-  ROOT : {
-    color: '#FDB316',
-    fontWeight : 'bold'
-  }
+const S = {
+  color: '#fdb316',
+  fontWeight: 'bold'
 }
 
 const SpanDate = ({ date, style }) => (
-  <span style={{...STYLE.ROOT, ...style}}>
+  <span style={{...S, ...style}}>
     {date}
   </span>
 )
