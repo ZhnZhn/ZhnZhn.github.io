@@ -25,7 +25,7 @@ var _SpanValue = _interopRequireDefault(require("../zhn-span/SpanValue"));
 
 var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 
-var _ModalValueMoving = _interopRequireDefault(require("./ModalValueMoving"));
+var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
 
 //import PropTypes from "prop-types";
 var S = {
@@ -38,8 +38,13 @@ var S = {
     marginLeft: 5,
     fontWeight: 'bold'
   },
+  G5: {
+    display: 'inline-block',
+    width: 5
+  },
   DATE: {
-    marginLeft: 10
+    paddingLeft: 5,
+    paddingRight: 5
   },
   UP: {
     color: '#4caf50'
@@ -179,13 +184,15 @@ var ValueMovingBadge = /*#__PURE__*/function (_Component) {
       style: (0, _extends2["default"])({}, S.DELTA, _dStyle)
     }, percent), /*#__PURE__*/_react["default"].createElement("span", {
       style: (0, _extends2["default"])({}, S.DELTA, _dStyle)
-    }, delta), /*#__PURE__*/_react["default"].createElement("button", {
+    }, delta), /*#__PURE__*/_react["default"].createElement("span", {
+      style: S.G5
+    }), /*#__PURE__*/_react["default"].createElement("button", {
       style: S.BT,
       onClick: this._hClickBt
     }, /*#__PURE__*/_react["default"].createElement(_SpanDate["default"], {
       style: S.DATE,
       date: date
-    })), _svgDirection !== null && /*#__PURE__*/_react["default"].createElement(_ModalValueMoving["default"], {
+    })), _svgDirection !== null && /*#__PURE__*/_react["default"].createElement(_ValueMovingModal["default"], {
       isShow: isShowModal,
       onClose: this._hCloseModal,
       valueMoving: valueMoving,

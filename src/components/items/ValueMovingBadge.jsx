@@ -9,7 +9,7 @@ import SvgEqual from '../zhn/SvgEqual'
 
 import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
-import ModalValueMoving from './ModalValueMoving'
+import ValueMovingModal from './ValueMovingModal'
 
 const S = {
   ROOT: {
@@ -21,8 +21,13 @@ const S = {
     marginLeft: 5,
     fontWeight: 'bold'
   },
+  G5: {
+    display: 'inline-block',
+    width: 5
+  },
   DATE: {
-    marginLeft: 10
+    paddingLeft: 5,
+    paddingRight: 5
   },
   UP: {
     color: '#4caf50'
@@ -123,7 +128,7 @@ class ValueMovingBadge extends Component {
 
 
   _updateDateTo = (dateTo) => {
-    const valueMoving = this.props.crValueMoving(this.state.valueMoving, dateTo)    
+    const valueMoving = this.props.crValueMoving(this.state.valueMoving, dateTo)
     if (valueMoving) {
       this.setState({ valueMoving })
       return valueMoving;
@@ -160,11 +165,12 @@ class ValueMovingBadge extends Component {
          <span style={{...S.DELTA, ..._dStyle}}>
            {delta}
          </span>
+         <span style={S.G5} />
          <button style = {S.BT} onClick={this._hClickBt} >
            <SpanDate style={S.DATE} date={date} />
          </button>
          {
-           _svgDirection !== null && <ModalValueMoving
+           _svgDirection !== null && <ValueMovingModal
                 isShow={isShowModal}
                 onClose={this._hCloseModal}
                 valueMoving={valueMoving}
