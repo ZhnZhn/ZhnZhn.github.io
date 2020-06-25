@@ -47,9 +47,20 @@
     },{
       "caption": "WTO",
       "items": [
-        { "id": "DBN_WTO_GOODSTRADE_A" },
-        { "id": "DBN_WTO_GOODSTRADE" },
-        { "id": "DBN_WTO_SERVICETRADE" }
+        { "caption": "Merchandise Trade",
+          "items": [
+            {"id": "DBN_WTO_MTEM"},
+            {"id": "DBN_WTO_MTIM"},
+            {"id": "DBN_WTO_MTEQ"},
+            {"id": "DBN_WTO_MTIQ"}
+          ]
+        },{
+          "caption": "Commercial Services Trade",
+          "items": [
+             {"id": "DBN_WTO_CSTEM"},
+             {"id": "DBN_WTO_CSTIM"}
+          ]
+        }
       ]
     },{
       "caption": "DB NOMICS",
@@ -94,12 +105,28 @@
         ]
       }
     },
-    "DBN_B_WTO": {
+    "DBN_B_WTO_MT_M": {
       "extends": "DBN_B_S",
       "dialogProps": {
         "selectProps": [
-          [ "Country", "wto-countries" ],
-          [ "Flow", "wto-flow" ]
+          [ "Country", "wto-mt-countries" ],
+          [ "Partner", "wto-mt-partner" ]
+        ]
+      }
+    },
+    "DBN_B_WTO_MT_Q": {
+      "extends": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Entity", "wto-mtq-entities" ]
+        ]
+      }
+    },
+    "DBN_B_WTO_CST_M": {
+      "extends": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "wto-cst-countries" ]
         ]
       }
     },
@@ -350,52 +377,100 @@
       }
     },
 
-    "DBN_WTO_GOODSTRADE_A": {
-      "type" : "DBN_WTO_GOODSTRADE_A",
-      "menuTitle" : "Merchandise Trade Value, A",
+    "DBN_WTO_MTEM": {
+      "type" : "DBN_WTO_MTEM",
+      "menuTitle" : "Total Exports, M",
       "contCaption" : "",
-      "addProps": "DBN_B_WTO",
+      "addProps": "DBN_B_WTO_MT_M",
       "dialogProps": {
-        "selectProps": [
-          [ "Goods", "wto-goods" ]
-        ],
-        "dataSource" : "DB Nomics: WTO: Merchandise Trade Value in $Ml, A",
+        "dataSource" : "DB Nomics: WTO: Merchandise Exports in $Ml, M",
         "dfProps": {
           "dfProvider": "WTO",
-          "dfCode": "a2",
-          "dfFnUrl": "s123A",
-          "df3Prefix": "WL"
+          "dfCode": "ITS_MTV_MX",
+          "dfFnUrl": "s12",
+          "df2Prefix": "TO",
+          "dfSufix": "M"
         }
       }
     },
-    "DBN_WTO_GOODSTRADE": {
-      "type" : "DBN_WTO_GOODSTRADE",
-      "menuTitle" : "Merchandise Trade Value, M",
+    "DBN_WTO_MTIM": {
+      "type" : "DBN_WTO_MTIM",
+      "menuTitle" : "Total Imports, M",
       "contCaption" : "",
-      "addProps": "DBN_B_WTO",
+      "addProps": "DBN_B_WTO_MT_M",
       "dialogProps": {
-        "dataSource" : "DB Nomics: WTO: Merchandise Trade Value in $Ml, M",
+        "dataSource" : "DB Nomics: WTO: Merchandise Imports in $Ml, M",
         "dfProps": {
           "dfProvider": "WTO",
-          "dfCode": "m1",
-          "dfFnUrl": "s21"
+          "dfCode": "ITS_MTV_MM",
+          "dfFnUrl": "s12",
+          "df2Prefix": "TO",
+          "dfSufix": "M"
         }
       }
     },
-    "DBN_WTO_SERVICETRADE": {
-      "type" : "DBN_WTO_SERVICETRADE",
-      "menuTitle" : "Services Trade Value, M",
+    "DBN_WTO_MTEQ": {
+      "type" : "DBN_WTO_MTEQ",
+      "menuTitle" : "Total Exports, Q",
       "contCaption" : "",
-      "addProps": "DBN_B_WTO",
+      "addProps": "DBN_B_WTO_MT_Q",
       "dialogProps": {
-        "dataSource" : "DB Nomics: WTO: Commercial Services Trade Value in $Ml, M",
+        "dataSource" : "DB Nomics: WTO: Merchandise Exports in $Ml, Q",
         "dfProps": {
           "dfProvider": "WTO",
-          "dfCode": "m2",
-          "dfFnUrl": "s21"
+          "dfCode": "ITS_MTV_QX",
+          "dfFnUrl": "s1",
+          "dfSufix": "TO.000.Q"
         }
       }
     },
+    "DBN_WTO_MTIQ": {
+      "type" : "DBN_WTO_MTIQ",
+      "menuTitle" : "Total Imports, Q",
+      "contCaption" : "",
+      "addProps": "DBN_B_WTO_MT_Q",
+      "dialogProps": {
+        "dataSource" : "DB Nomics: WTO: Merchandise Imports in $Ml, Q",
+        "dfProps": {
+          "dfProvider": "WTO",
+          "dfCode": "ITS_MTV_QM",
+          "dfFnUrl": "s1",
+          "dfSufix": "TO.000.Q"
+        }
+      }
+    },
+
+    "DBN_WTO_CSTEM": {
+      "type" : "DBN_WTO_CSTEM",
+      "menuTitle" : "Total Exports, M",
+      "contCaption" : "",
+      "addProps": "DBN_B_WTO_CST_M",
+      "dialogProps": {
+        "dataSource" : "DB Nomics: WTO: Commercial Services Exports in $Ml, M",
+        "dfProps": {
+          "dfProvider": "WTO",
+          "dfCode": "ITS_CS_MX",
+          "dfFnUrl": "s1",
+          "dfSufix": "S.000.M"
+        }
+      }
+    },
+    "DBN_WTO_CSTIM": {
+      "type" : "DBN_WTO_CSTIM",
+      "menuTitle" : "Total Imports, M",
+      "contCaption" : "",
+      "addProps": "DBN_B_WTO_CST_M",
+      "dialogProps": {
+        "dataSource" : "DB Nomics: WTO: Commercial Services Imports in $Ml, M",
+        "dfProps": {
+          "dfProvider": "WTO",
+          "dfCode": "ITS_CS_MM",
+          "dfFnUrl": "s1",
+          "dfSufix": "S.000.M"
+        }
+      }
+    },
+
     "DBN_FED_H15": {
       "type": "DBN_FED_H15",
       "menuTitle" : "Selected Interest Rates",
