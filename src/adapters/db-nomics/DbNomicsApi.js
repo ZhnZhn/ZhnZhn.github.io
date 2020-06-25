@@ -62,7 +62,7 @@ const _s21FnUrl = (option) => {
     df1Prefix,
     getValue(items[1]),
     df2Prefix,
-    getValue(items[0]),
+    getValue(items[0])
   );
   return _crUrl(_seriaId, option);
 };
@@ -72,20 +72,11 @@ const _s12FnUrl = (option) => {
     df1Prefix,
     getValue(items[0]),
     df2Prefix,
-    getValue(items[1]),
+    getValue(items[1])
   );
   return _crUrl(_seriaId, option);
 };
-const _s123AFnUrl = (option) => {
-  const { items, df3Prefix } = option
-  , _seriaId = _crSeriaId(option,
-    getValue(items[0]),
-    getValue(items[1]),
-    df3Prefix,
-    getValue(items[2])
-  );
-  return _crUrl(_seriaId, option);
-};
+
 const _s123BFnUrl = (option) => {
   const { items, df2Prefix } = option
   , _seriaId = _crSeriaId(option,
@@ -113,7 +104,6 @@ const _rFnUrl = {
   s1: _s1FnUrl,
   s12: _s12FnUrl,
   s21: _s21FnUrl,
-  s123A: _s123AFnUrl,
   s123B: _s123BFnUrl,
   s123: _s123FnUrl
 };

@@ -92,14 +92,6 @@ var _s12FnUrl = function _s12FnUrl(option) {
   return _crUrl(_seriaId, option);
 };
 
-var _s123AFnUrl = function _s123AFnUrl(option) {
-  var items = option.items,
-      df3Prefix = option.df3Prefix,
-      _seriaId = _crSeriaId(option, getValue(items[0]), getValue(items[1]), df3Prefix, getValue(items[2]));
-
-  return _crUrl(_seriaId, option);
-};
-
 var _s123BFnUrl = function _s123BFnUrl(option) {
   var items = option.items,
       df2Prefix = option.df2Prefix,
@@ -121,7 +113,6 @@ var _rFnUrl = {
   s1: _s1FnUrl,
   s12: _s12FnUrl,
   s21: _s21FnUrl,
-  s123A: _s123AFnUrl,
   s123B: _s123BFnUrl,
   s123: _s123FnUrl
 };
