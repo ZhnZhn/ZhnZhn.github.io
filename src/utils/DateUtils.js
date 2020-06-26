@@ -9,6 +9,9 @@ const _pad2 = n => n<10 ? '0'+n : ''+n;
 const _isLikelyQuarter = (str) => _isStr(str)
   && str[0].toUpperCase() === 'Q';
 
+
+const _toIntMonth = str => parseInt(str, 10)-1;
+
 const DateUtils = {
 
   //YYYY-MM-DD valid format
@@ -81,12 +84,10 @@ const DateUtils = {
 
  dmyToUTC(str){
 	  const _str = str || ''
-		    , [ d=10, m=10, y=1970 ] = _str.toString().split('-');
-		if (DateUtils.isYmd(`${y}-${m}-${d}`)){
-			return Date.UTC(y, (parseInt(m, 10)-1), d)
-		} else {
-			return 0;
-		}
+		, [ d=10, m=10, y=1970 ] = _str.toString().split('-');
+    return DateUtils.isYmd(`${y}-${m}-${d}`)
+      ? Date.UTC(y, _toIntMonth(m), d)
+      : 0;
  },
 
  dmyToMls(str){
@@ -104,17 +105,18 @@ const DateUtils = {
 	 return DateUtils.isYmd(`${y}-${m}-${d}`, 0, minYear);
  },
 
- ymdToUTC: (dateStr, option) => {
+ ymdToUTC: (dateStr, option={}) => {
 	 const _dateStr = dateStr || ''
    , _arr = _dateStr.split('-')
-	 , _len = _arr.length;
+	 , _len = _arr.length
+   , [yearStr, mStr, dStr] = _arr;
 	 if (_len === 3) {
-		 return Date.UTC( _arr[0], (parseInt(_arr[1], 10)-1), _arr[2] );
-	 } else if ( _len === 2 && _arr[1] !== ''){
-		 const _m = parseInt(_arr[1], 10);
+		 return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
+	 } else if ( _len === 2 && mStr !== ''){
+		 const _m = parseInt(mStr, 10);
 		 if (!_isNaN(_m)) {
-				const  _d = (new Date(_arr[0], _m, 0)).getDate();
-		    return Date.UTC( _arr[0], _m - 1, _d );
+				const _d = (new Date(yearStr, _m, 0)).getDate();
+		    return Date.UTC(yearStr, _m - 1, _d);
 		 // YYYY-Q format
 	   } else if (_isLikelyQuarter(_arr[1])) {
 			  const _q = parseInt(_arr[1][1], 10);
@@ -126,9 +128,9 @@ const DateUtils = {
 		 }
 	 } else if ( _len === 1) {
      const { y=0 } = option
-     , _y = parseInt(_arr[0], 10) - y;
+     , _y = parseInt(yearStr, 10) - y;
 		 return !_isNaN(_y)
-       ? Date.UTC( _y, 11, 31)
+       ? Date.UTC(_y, 11, 31)
        : _y;
 	 }
  },

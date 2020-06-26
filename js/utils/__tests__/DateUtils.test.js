@@ -7,6 +7,7 @@ var _DateUtils = _interopRequireDefault(require("../DateUtils"));
 var isYmd = _DateUtils["default"].isYmd,
     isYmdOrEmpty = _DateUtils["default"].isYmdOrEmpty,
     dmyToUTC = _DateUtils["default"].dmyToUTC,
+    ymdToUTC = _DateUtils["default"].ymdToUTC,
     mlsToDmy = _DateUtils["default"].mlsToDmy,
     isDmy = _DateUtils["default"].isDmy,
     getUTCTime = _DateUtils["default"].getUTCTime,
@@ -73,6 +74,15 @@ describe('dmyToUTC', function () {
     expect(fn("")).toBe(0);
     expect(fn(null)).toBe(0);
     expect(fn(undefined)).toBe(0);
+  });
+});
+describe('ymdToUTC', function () {
+  var fn = ymdToUTC;
+  test('should use option y for YYYY case', function () {
+    expect(fn("2010")).toBe(Date.UTC(2010, 11, 31));
+    expect(fn("2010", {
+      y: 1
+    })).toBe(Date.UTC(2010 - 1, 11, 31));
   });
 });
 describe('formatTo', function () {

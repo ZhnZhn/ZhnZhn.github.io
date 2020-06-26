@@ -4,6 +4,7 @@ const {
   isYmd,
   isYmdOrEmpty,
   dmyToUTC,
+  ymdToUTC,
   mlsToDmy,
   isDmy,
   getUTCTime,
@@ -71,6 +72,14 @@ describe('dmyToUTC', ()=>{
     expect(fn("")).toBe(0)
     expect(fn(null)).toBe(0)
     expect(fn(undefined)).toBe(0)
+  })
+})
+
+describe('ymdToUTC', ()=> {
+  const fn = ymdToUTC  
+  test('should use option y for YYYY case', () => {
+    expect(fn("2010")).toBe(Date.UTC(2010, 11, 31))
+    expect(fn("2010", {y: 1})).toBe(Date.UTC(2010-1, 11, 31))
   })
 })
 

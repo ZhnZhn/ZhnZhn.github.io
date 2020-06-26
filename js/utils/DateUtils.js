@@ -19,6 +19,10 @@ var _isLikelyQuarter = function _isLikelyQuarter(str) {
   return _isStr(str) && str[0].toUpperCase() === 'Q';
 };
 
+var _toIntMonth = function _toIntMonth(str) {
+  return parseInt(str, 10) - 1;
+};
+
 var DateUtils = {
   //YYYY-MM-DD valid format
   isYmd: function isYmd(str, nForecastDate, minYear) {
@@ -103,11 +107,7 @@ var DateUtils = {
         _str$toString$split$3 = _str$toString$split[2],
         y = _str$toString$split$3 === void 0 ? 1970 : _str$toString$split$3;
 
-    if (DateUtils.isYmd(y + "-" + m + "-" + d)) {
-      return Date.UTC(y, parseInt(m, 10) - 1, d);
-    } else {
-      return 0;
-    }
+    return DateUtils.isYmd(y + "-" + m + "-" + d) ? Date.UTC(y, _toIntMonth(m), d) : 0;
   },
   dmyToMls: function dmyToMls(str) {
     var _str = str || '',
@@ -138,19 +138,26 @@ var DateUtils = {
     return DateUtils.isYmd(y + "-" + m + "-" + d, 0, minYear);
   },
   ymdToUTC: function ymdToUTC(dateStr, option) {
+    if (option === void 0) {
+      option = {};
+    }
+
     var _dateStr = dateStr || '',
         _arr = _dateStr.split('-'),
-        _len = _arr.length;
+        _len = _arr.length,
+        yearStr = _arr[0],
+        mStr = _arr[1],
+        dStr = _arr[2];
 
     if (_len === 3) {
-      return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _arr[2]);
-    } else if (_len === 2 && _arr[1] !== '') {
-      var _m = parseInt(_arr[1], 10);
+      return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
+    } else if (_len === 2 && mStr !== '') {
+      var _m = parseInt(mStr, 10);
 
       if (!_isNaN(_m)) {
-        var _d = new Date(_arr[0], _m, 0).getDate();
+        var _d = new Date(yearStr, _m, 0).getDate();
 
-        return Date.UTC(_arr[0], _m - 1, _d); // YYYY-Q format
+        return Date.UTC(yearStr, _m - 1, _d); // YYYY-Q format
       } else if (_isLikelyQuarter(_arr[1])) {
         var _q = parseInt(_arr[1][1], 10);
 
@@ -159,9 +166,10 @@ var DateUtils = {
         return _m;
       }
     } else if (_len === 1) {
-      var _option$y = option.y,
+      var _option = option,
+          _option$y = _option.y,
           y = _option$y === void 0 ? 0 : _option$y,
-          _y = parseInt(_arr[0], 10) - y;
+          _y = parseInt(yearStr, 10) - y;
 
       return !_isNaN(_y) ? Date.UTC(_y, 11, 31) : _y;
     }
