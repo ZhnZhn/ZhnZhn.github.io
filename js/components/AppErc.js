@@ -39,7 +39,7 @@ var _ThemeContext = _interopRequireDefault(require("./hoc/ThemeContext"));
 
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
-var BUILD_DATE = '25-06-2020';
+var BUILD_DATE = '26-06-2020';
 var CL = "component-container";
 
 var showSettings = _ComponentActions["default"].showSettings.bind(null, _ChartStore["default"].exportSettingFn());
