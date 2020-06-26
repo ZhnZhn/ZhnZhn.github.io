@@ -1,9 +1,9 @@
 {
   "menu" : [
     {
-      "caption" : "Macro-Economic",
+      "caption" : "Economics",
       "items" : [
-        { "id" : "FS_GDP_BALANCE" }
+        { "id" : "FS_GDP" }
       ]
     },{
       "caption" : "Foreign Trade Of",
@@ -34,15 +34,15 @@
     }
   ],
   "items" : {
-    "FS_GDP_BALANCE" : {
-      "type" : "FS_GDP_BALANCE",
-      "menuTitle" : "GDP Balance (base 2010)",
-      "dialogCaption" : "GDP Balance",
+    "FS_GDP" : {
+      "type" : "FS_GDP",
+      "menuTitle" : "GDP & Components (base 2014)",
+      "dialogCaption" : "GDP & Its Components",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/statistics-france/insee.html",
         "oneCaption" : "Group:",
-        "oneURI" : "./data/statistics-france/gdp-balance.json",
+        "oneURI" : "./data/statistics-france/gdp.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Item:",
         "nInitFromDate" : 16,
@@ -52,7 +52,6 @@
         "dataSource" : "INSEE"
       }
     },
-
     "FS_TRADE_PRODUCT": {
       "type": "FS_TRADE_PRODUCT",
       "dialogProps": {
@@ -248,7 +247,7 @@
     },
     "FS_MIN_WAGE": {
       "type": "FS_MIN_WAGE",
-      "menuTitle": "Guaranteed Min. Wages",      
+      "menuTitle": "Guaranteed Min. Wages",
       "addProps": "FS_SOCIETY",
       "dialogProps": {
         "optionURI": "./data/statistics-france/min-wages.json"
