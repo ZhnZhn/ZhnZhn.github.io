@@ -36,6 +36,7 @@
   padding-bottom: 2px;
   border-bottom: 1px solid;
   text-decoration: none;
+  cursor: pointer;
 }
 .descr-datasource a:hover,
 .info__descr a:hover,
