@@ -3,6 +3,10 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
+};
+
 var zhZoomX = function zhZoomX(_ref) {
   var _ref$seriaIndex = _ref.seriaIndex,
       seriaIndex = _ref$seriaIndex === void 0 ? 0 : _ref$seriaIndex,
@@ -10,6 +14,10 @@ var zhZoomX = function zhZoomX(_ref) {
       to = _ref.to;
 
   try {
+    if (!_isNumber(from) || !_isNumber(to)) {
+      return false;
+    }
+
     var xAxis = this.xAxis[seriaIndex];
 
     if (xAxis && from <= to) {
