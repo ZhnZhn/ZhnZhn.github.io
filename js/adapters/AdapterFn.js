@@ -26,7 +26,6 @@ var dt = _ut["default"].dt,
 var findMinY = _seriaFn["default"].findMinY,
     findMaxY = _seriaFn["default"].findMaxY;
 var ymdToUTC = dt.ymdToUTC,
-    ymdtToUTC = dt.ymdtToUTC,
     ymdhmsToUTC = dt.ymdhmsToUTC,
     mlsToDmy = dt.mlsToDmy,
     getFromDate = dt.getFromDate;
@@ -91,7 +90,6 @@ var _fToFloatOr = function _fToFloatOr(dfValue) {
 
 var AdapterFn = {
   ymdToUTC: ymdToUTC,
-  ymdtToUTC: ymdtToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
   getFromDate: getFromDate,
   getCaption: getC,

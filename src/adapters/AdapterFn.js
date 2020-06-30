@@ -14,7 +14,6 @@ const { findMinY, findMaxY } = seriaFn;
 
 const {
   ymdToUTC,
-  ymdtToUTC,
   ymdhmsToUTC,
   mlsToDmy,
   getFromDate
@@ -78,9 +77,8 @@ const _fToFloatOr = dfValue => str => {
   return _isNaN(_v) ? dfValue : _v;
 };
 
-const AdapterFn = {  
-  ymdToUTC,
-  ymdtToUTC,
+const AdapterFn = {
+  ymdToUTC,  
   ymdhmsToUTC,
   getFromDate,
 

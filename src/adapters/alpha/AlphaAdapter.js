@@ -3,6 +3,8 @@ import AdapterFn from '../AdapterFn'
 import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
 
+const { ymdToUTC } = AdapterFn
+
 const C = {
   TWO_YEARS_DAYS: 501,
   TA: 'Technical Analysis:',
@@ -26,6 +28,8 @@ const C = {
   COLOR_BLUE_A: 'rgba(47, 126, 216, 0.75)',
   GREEN: { color: '#4caf50' }
 }
+
+const _assign = Object.assign
 
 const _crZhConfig = (id) => ({
   id: id,
@@ -68,7 +72,7 @@ const _toDataArrs = ({dateKeys, value, max}, arrProp) => {
 
   for(i=max; i>-1; i--) {
     _date = dateKeys[i]
-    _x = AdapterFn.ymdtToUTC(_date)
+    _x = ymdToUTC(_date)
     _v = value[_date]
     for(j=0; j<_maxProp; j++){
       result[j].push([_x, parseFloat(_v[arrProp[j]])])
@@ -77,18 +81,18 @@ const _toDataArrs = ({dateKeys, value, max}, arrProp) => {
   return result;
 }
 
-const _crSplineSeria = ({data, ticket, valueText}, option) => {
-  return Object.assign(ChartConfig.fSeries(), {
-            type: 'spline',
-            visible: true,
-            data: data,
-            marker: {
-              symbol: 'circle'
-            },
-            zhSeriaId: ticket + '_' + valueText ,
-            zhValueText: valueText
-          }, option);
-}
+const _crSplineSeria = ({data, ticket, valueText}, option) =>
+  _assign(ChartConfig.crSeria(), {
+    type: 'spline',
+    visible: true,
+    data: data,
+    marker: {
+      symbol: 'circle'
+    },
+    zhSeriaId: ticket + '_' + valueText ,
+    zhValueText: valueText
+  }, option);
+
 
 const _crSeriaData = (json, option) => {
   const { indicator } = option
@@ -100,7 +104,7 @@ const _crSeriaData = (json, option) => {
   for(; i>-1; i--) {
     _date = dateKeys[i]
     _v = parseFloat(value[_date][_indicator])
-    _data.push([ AdapterFn.ymdtToUTC(_date), _v])
+    _data.push([ymdToUTC(_date), _v])
   }
 
   return _data;
@@ -127,7 +131,7 @@ const _crMacdSeries = (json, option) => {
       , sSignal = _crSplineSeria({
            data: _arrs[1], valueText: C.MACD_S, ticket
         }, C.RED)
-      , sHist = Object.assign(ChartConfig.fSeries(), {
+      , sHist = _assign(ChartConfig.crSeria(), {
            color: C.COLOR_BLUE_A,
            data: _arrs[2],
            zhSeriaId: ticket + '_' + C.MACD_H,
@@ -201,18 +205,15 @@ const AlphaAdapter = {
             .toConfig();
     return {
       config,
-      isDrawDeltaExtrems:false,
-      isNotZoomToMinMax:false
+      isDrawDeltaExtrems: false,
+      isNotZoomToMinMax: false
     };
   },
 
   toSeries(json, option) {
-    const _fnToSeries = _rSeries[option.indicator];
-    if (_fnToSeries){
-      return _fnToSeries(json, option);
-    } else {
-      return _rSeries.DF(json, option);
-    }
+    const _crSeries = _rSeries[option.indicator]
+      || _rSeries.DF;
+    return _crSeries(json, option);
   }
 };
 

@@ -25,6 +25,7 @@ const {
 
 
 const _isFn = fn => typeof fn === 'function';
+const _isNaN = Number.isNaN || isNaN;
 const _fnFindIndex = fnArr.findIndexByProp('x');
 
 const C = {
@@ -37,8 +38,6 @@ const C = {
   SERIA_LABEL_WIDTH : 125,
   SERIA_LABEL_HEIGHT : 20
 };
-
-//const _fnNoop = () => {};
 
 const _initOptionsZhSeries = (chart) => {
   const options = chart.options
@@ -180,8 +179,10 @@ const ChartFn = {
 
   crValueMoving(chart, prev, dateTo){
     const points = chart.series[0].data
-        , millisUTC = DateUtils.dmyToUTC(dateTo)
-        , index = _fnFindIndex(points, millisUTC)
+        , mlsUTC = DateUtils.dmyToUTC(dateTo)
+        , index = _isNaN(mlsUTC)
+            ? -1
+            : _fnFindIndex(points, mlsUTC)
         , valueTo = index !== -1
             ? points[index].y
             : undefined;

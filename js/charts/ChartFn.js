@@ -37,6 +37,8 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
+var _isNaN = Number.isNaN || isNaN;
+
 var _fnFindIndex = _fnArr["default"].findIndexByProp('x');
 
 var C = {
@@ -48,7 +50,7 @@ var C = {
   SERIA_LABEL_Y_DELTA: 95,
   SERIA_LABEL_WIDTH: 125,
   SERIA_LABEL_HEIGHT: 20
-}; //const _fnNoop = () => {};
+};
 
 var _initOptionsZhSeries = function _initOptionsZhSeries(chart) {
   var options = chart.options,
@@ -242,8 +244,8 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
   },
   crValueMoving: function crValueMoving(chart, prev, dateTo) {
     var points = chart.series[0].data,
-        millisUTC = _DateUtils["default"].dmyToUTC(dateTo),
-        index = _fnFindIndex(points, millisUTC),
+        mlsUTC = _DateUtils["default"].dmyToUTC(dateTo),
+        index = _isNaN(mlsUTC) ? -1 : _fnFindIndex(points, mlsUTC),
         valueTo = index !== -1 ? points[index].y : undefined;
 
     return valueTo !== undefined ? Object.assign({}, prev, _crValueMoving({
