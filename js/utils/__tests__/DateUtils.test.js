@@ -4,14 +4,21 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _DateUtils = _interopRequireDefault(require("../DateUtils"));
 
+var _DateUtilsWithMock = _interopRequireDefault(require("./DateUtilsWithMock"));
+
 var isYmd = _DateUtils["default"].isYmd,
     isYmdOrEmpty = _DateUtils["default"].isYmdOrEmpty,
+    isDmyPeriod = _DateUtils["default"].isDmyPeriod,
     dmyToUTC = _DateUtils["default"].dmyToUTC,
     ymdToUTC = _DateUtils["default"].ymdToUTC,
+    ymdhmsToUTC = _DateUtils["default"].ymdhmsToUTC,
     mlsToDmy = _DateUtils["default"].mlsToDmy,
     isDmy = _DateUtils["default"].isDmy,
     getUTCTime = _DateUtils["default"].getUTCTime,
-    addToDmy = _DateUtils["default"].addToDmy;
+    addToDmy = _DateUtils["default"].addToDmy,
+    getYTDfromDmy = _DateUtils["default"].getYTDfromDmy; // DateUtils configuration consts
+
+var MIN_YEAR = 1990;
 
 var _compose = function _compose(fns) {
   return fns.reduce(function (f, g) {
@@ -31,9 +38,12 @@ describe('isYmd YYYY-MM-DD', function () {
     expect(fn("2010-14-01")).toBe(false);
     expect(fn("2010-02-32")).toBe(false);
   });
-  test('min valid value is 1990-01-01', function () {
-    expect(fn('1990-01-01')).toBe(true);
+  test("min default valid value is " + MIN_YEAR + "-01-01", function () {
+    expect(fn(MIN_YEAR + "-01-01")).toBe(true);
     expect(fn('1989-12-30')).toBe(false);
+  });
+  test('min default valid can be configured', function () {
+    expect(fn('1989-12-30', 0, 1989)).toBe(true);
   });
   test('should year be not future', function () {
     expect(fn('2030-01-01')).toBe(false);
@@ -63,26 +73,66 @@ describe('isYmdOrEmty YYYY-MM-DD', function () {
     expect(fn("2010-40-40")).toBe(false);
   });
 });
+describe('isDmyPeriod', function () {
+  var fn = isDmyPeriod;
+  test('should return correct boolean', function () {
+    expect(fn('01-01-2010', '02-01-2010')).toBe(true);
+    expect(fn('01-01-2010', '01-01-2010')).toBe(true);
+    expect(fn('02-01-2010', '01-01-2010')).toBe(false);
+  });
+});
 describe('dmyToUTC', function () {
   var fn = dmyToUTC;
   test('should return UTC from DD-MM-YYYY', function () {
     expect(fn("10-10-2010")).toBe(Date.UTC(2010, 9, 10));
     expect(fn("01-01-2010")).toBe(Date.UTC(2010, 0, 1));
   });
-  test('should return 0 in edge case', function () {
-    expect(fn("20-20-2010")).toBe(0);
-    expect(fn("")).toBe(0);
-    expect(fn(null)).toBe(0);
-    expect(fn(undefined)).toBe(0);
+  test('should return NaN in edge case', function () {
+    expect(fn("20-20-2010")).toBe(NaN);
+    expect(fn("")).toBe(NaN);
+    expect(fn(null)).toBe(NaN);
+    expect(fn(undefined)).toBe(NaN);
   });
 });
 describe('ymdToUTC', function () {
   var fn = ymdToUTC;
+  test('should return mls UTC-0 for str YYYY-MM-DD', function () {
+    expect(fn('2010-01-01')).toBe(Date.UTC(2010, 0, 1));
+  });
+  test('should return mls UTC-0 for str YYYY-MM', function () {
+    expect(fn('2010-01')).toBe(Date.UTC(2010, 0, 31));
+  });
+  test('should return NaN for YYYY-MM edge case', function () {
+    expect(fn('2010-MM')).toBe(NaN);
+  });
+  test('should return mls UTC-0 for str YYYY-QN', function () {
+    expect(fn('2010-Q1')).toBe(Date.UTC(2010, 2, 31));
+    expect(fn('2010-Q2')).toBe(Date.UTC(2010, 5, 30));
+  });
+  test('should return NaN for YYYY-QS edge case', function () {
+    expect(fn('2010-QS')).toBe(NaN);
+  });
+  test('should return mls UTC-0 for str YYYY', function () {
+    expect(fn('2010')).toBe(Date.UTC(2010, 11, 31));
+  });
+  test('should return NaN for YYYY edge case', function () {
+    expect(fn('YYYY')).toBe(NaN);
+  });
+  test('should return mls UTC-0 for YYYY-MM-DD or NaN for more than 3 tokens', function () {
+    expect(fn('2010-01-01-12:00')).toBe(Date.UTC(2010, 0, 1));
+    expect(fn('2010-01-AA-12:00')).toBe(NaN);
+  });
   test('should use option y for YYYY case', function () {
     expect(fn("2010")).toBe(Date.UTC(2010, 11, 31));
     expect(fn("2010", {
       y: 1
     })).toBe(Date.UTC(2010 - 1, 11, 31));
+  });
+});
+describe('ymdhmsToUTC', function () {
+  var fn = ymdhmsToUTC;
+  test('should retun mls UTC-0 for str date', function () {
+    expect(fn('2010-01-01 12:00:00')).toBe(Date.UTC(2010, 0, 1, 12, 0, 0));
   });
 });
 describe('formatTo', function () {
@@ -101,6 +151,7 @@ describe('formatTo', function () {
     expect(fn('')).toBe(EMPTY);
     expect(fn('abc')).toBe(EMPTY);
     expect(fn(function () {})).toBe(EMPTY);
+    expect(fn(Number.MAX_SAFE_INTEGER)).toBe(EMPTY);
   });
 });
 describe('isDmy', function () {
@@ -109,6 +160,12 @@ describe('isDmy', function () {
     expect(fn('10-10-2000')).toBe(true);
     expect(fn('20-01-2000')).toBe(true);
     expect(fn('01-12-2000')).toBe(true);
+  });
+  test("should use defult min year value " + MIN_YEAR, function () {
+    expect(fn('31-12-1989')).toBe(false);
+  });
+  test('should use minYear param', function () {
+    expect(fn('10-10-2000', 2010)).toBe(false);
   });
   test('should return false for str not in format DD-MM-YYYY', function () {
     expect(fn('10-14-2000')).toBe(false);
@@ -161,13 +218,12 @@ describe('addToDmy', function () {
     expect(_fn('01-02-2019', -12)).toBe('01-02-2018');
   });
 });
-/*
-describe('getDaysFromYmd', ()=>{
-  test('should return number days from ymd to now', ()=>{
-    const fn = getDaysFromYmd
-    expect(fn('2020-04-01')).toBe(2)
-    expect(fn('2020-04-02')).toBe(1)
-  })
-})
-*/
+describe('getYTDfromDmy', function () {
+  var fn = getYTDfromDmy;
+  test('should return mls to start of year', function () {
+    expect(fn('01-01-2010')).toBe(Date.UTC(2010, 0, 1));
+    expect(fn('02-01-2010')).toBe(Date.UTC(2010, 0, 1));
+  });
+});
+(0, _DateUtilsWithMock["default"])();
 //# sourceMappingURL=DateUtils.test.js.map

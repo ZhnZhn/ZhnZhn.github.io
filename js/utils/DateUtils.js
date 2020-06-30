@@ -15,12 +15,44 @@ var _pad2 = function _pad2(n) {
   return n < 10 ? '0' + n : '' + n;
 };
 
+var _toIntMonth = function _toIntMonth(str) {
+  return parseInt(str, 10) - 1;
+};
+
+var _splitDateStr = function _splitDateStr(str) {
+  return (str || '').toString().split('-');
+};
+
 var _isLikelyQuarter = function _isLikelyQuarter(str) {
   return _isStr(str) && str[0].toUpperCase() === 'Q';
 };
 
-var _toIntMonth = function _toIntMonth(str) {
-  return parseInt(str, 10) - 1;
+var _notInIntervalStrict = function _notInIntervalStrict(n, min, max) {
+  return _isNaN(n) || n < min || n > max;
+};
+
+var _notInLengthMinMax = function _notInLengthMinMax(str, length, min, max) {
+  return typeof str === 'string' && str.length !== length || _notInIntervalStrict(parseInt(str, 10), min, max) ? true : false;
+};
+
+var _isYmd = function _isYmd(yStr, mStr, dStr, _temp) {
+  var _ref = _temp === void 0 ? {} : _temp,
+      _ref$nForecastDate = _ref.nForecastDate,
+      nForecastDate = _ref$nForecastDate === void 0 ? 0 : _ref$nForecastDate,
+      _ref$minYear = _ref.minYear,
+      minYear = _ref$minYear === void 0 ? MIN_YEAR : _ref$minYear;
+
+  var _nowYear = new Date().getFullYear();
+
+  if (_notInLengthMinMax(yStr, 4, minYear, _nowYear + nForecastDate) || _notInLengthMinMax(mStr, 2, 1, 12) || _notInLengthMinMax(dStr, 2, 1, 31)) {
+    return false;
+  }
+
+  return true;
+};
+
+var _getDaysInYm = function _getDaysInYm(y, m) {
+  return new Date(y, m, 0).getDate();
 };
 
 var DateUtils = {
@@ -42,33 +74,14 @@ var DateUtils = {
 
     if (_str.length !== 10) {
       return false;
-    } // m[1] is year 'YYYY' * m[2] is month 'MM' * m[3] is day 'DD'
-
-
-    var m = _str.match(/(\d{4})-(\d{2})-(\d{2})/); // STR IS NOT FIT m IS NOT OBJECT
-
-
-    if (m === null || typeof m !== 'object' || m.length !== 4) {
-      return false;
     }
 
-    var thisYear = new Date().getFullYear(); // YEAR CHECK
+    var _arr = _str.split('-');
 
-    if (m[1].length < 4 || m[1] < minYear || m[1] > thisYear + nForecastDate) {
-      return false;
-    } // MONTH CHECK
-
-
-    if (m[2].length < 2 || m[2] < 1 || m[2] > 12) {
-      return false;
-    } // DAY CHECK
-
-
-    if (m[3].length < 2 || m[3] < 1 || m[3] > 31) {
-      return false;
-    }
-
-    return true;
+    return _isYmd(_arr[0], _arr[1], _arr[2], {
+      nForecastDate: nForecastDate,
+      minYear: minYear
+    });
   },
   isYmdOrEmpty: function isYmdOrEmpty(str) {
     return str === '' ? true : DateUtils.isYmd(str);
@@ -98,52 +111,36 @@ var DateUtils = {
     return ("0" + d.getUTCDate()).slice(-2) + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + d.getUTCFullYear();
   },
   dmyToUTC: function dmyToUTC(str) {
-    var _str = str || '',
-        _str$toString$split = _str.toString().split('-'),
-        _str$toString$split$ = _str$toString$split[0],
-        d = _str$toString$split$ === void 0 ? 10 : _str$toString$split$,
-        _str$toString$split$2 = _str$toString$split[1],
-        m = _str$toString$split$2 === void 0 ? 10 : _str$toString$split$2,
-        _str$toString$split$3 = _str$toString$split[2],
-        y = _str$toString$split$3 === void 0 ? 1970 : _str$toString$split$3;
+    var _splitDateStr2 = _splitDateStr(str),
+        d = _splitDateStr2[0],
+        m = _splitDateStr2[1],
+        y = _splitDateStr2[2];
 
-    return DateUtils.isYmd(y + "-" + m + "-" + d) ? Date.UTC(y, _toIntMonth(m), d) : 0;
-  },
-  dmyToMls: function dmyToMls(str) {
-    var _str = str || '',
-        _str$toString$split2 = _str.toString().split('-'),
-        d = _str$toString$split2[0],
-        m = _str$toString$split2[1],
-        y = _str$toString$split2[2];
-
-    return Date.UTC(y, parseInt(m, 10) - 1, d);
+    return _isYmd(y, m, d) ? Date.UTC(y, _toIntMonth(m), d) : NaN;
   },
   isDmyPeriod: function isDmyPeriod(from, to) {
-    return DateUtils.dmyToMls(from) <= DateUtils.dmyToMls(to);
+    return DateUtils.dmyToUTC(from) <= DateUtils.dmyToUTC(to);
   },
   isDmy: function isDmy(str, minYear) {
     if (minYear === void 0) {
       minYear = MIN_YEAR;
     }
 
-    var _str = str || '',
-        _str$toString$split3 = _str.toString().split('-'),
-        _str$toString$split3$ = _str$toString$split3[0],
-        d = _str$toString$split3$ === void 0 ? 10 : _str$toString$split3$,
-        _str$toString$split3$2 = _str$toString$split3[1],
-        m = _str$toString$split3$2 === void 0 ? 10 : _str$toString$split3$2,
-        _str$toString$split3$3 = _str$toString$split3[2],
-        y = _str$toString$split3$3 === void 0 ? minYear - 1 : _str$toString$split3$3;
+    var _splitDateStr3 = _splitDateStr(str),
+        d = _splitDateStr3[0],
+        m = _splitDateStr3[1],
+        y = _splitDateStr3[2];
 
-    return DateUtils.isYmd(y + "-" + m + "-" + d, 0, minYear);
+    return _isYmd(y, m, d, {
+      minYear: minYear
+    });
   },
   ymdToUTC: function ymdToUTC(dateStr, option) {
     if (option === void 0) {
       option = {};
     }
 
-    var _dateStr = dateStr || '',
-        _arr = _dateStr.split('-'),
+    var _arr = _splitDateStr(dateStr),
         _len = _arr.length,
         yearStr = _arr[0],
         mStr = _arr[1],
@@ -151,21 +148,31 @@ var DateUtils = {
 
     if (_len === 3) {
       return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
-    } else if (_len === 2 && mStr !== '') {
+    }
+
+    if (_len === 2 && mStr !== '') {
       var _m = parseInt(mStr, 10);
 
       if (!_isNaN(_m)) {
-        var _d = new Date(yearStr, _m, 0).getDate();
+        var _d = _getDaysInYm(yearStr, _m);
 
         return Date.UTC(yearStr, _m - 1, _d); // YYYY-Q format
       } else if (_isLikelyQuarter(_arr[1])) {
         var _q = parseInt(_arr[1][1], 10);
 
-        return !_isNaN(_q) ? Date.UTC(_arr[0], _q * 3 - 1, 30) : _q;
+        if (_isNaN(_q)) {
+          return _q;
+        }
+
+        var _d2 = _getDaysInYm(_arr[0], _q * 3);
+
+        return Date.UTC(_arr[0], _q * 3 - 1, _d2);
       } else {
         return _m;
       }
-    } else if (_len === 1) {
+    }
+
+    if (_len === 1) {
       var _option = option,
           _option$y = _option.y,
           y = _option$y === void 0 ? 0 : _option$y,
@@ -173,12 +180,8 @@ var DateUtils = {
 
       return !_isNaN(_y) ? Date.UTC(_y, 11, 31) : _y;
     }
-  },
-  ymdtToUTC: function ymdtToUTC(dateStr) {
-    var _arr = dateStr.split('-'),
-        _d = _arr[2].split(' ')[0];
 
-    return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _d);
+    return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
   },
   ymdhmsToUTC: function ymdhmsToUTC(dateStr) {
     var _dtArr = dateStr.split(' '),

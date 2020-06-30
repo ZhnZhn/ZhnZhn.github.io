@@ -6,11 +6,34 @@ const _isNaN = Number.isNaN || isNaN;
 const _isStr = str => typeof str === 'string';
 const _pad2 = n => n<10 ? '0'+n : ''+n;
 
+const _toIntMonth = str => parseInt(str, 10)-1;
+const _splitDateStr = str => (str || '')
+  .toString().split('-');
+
 const _isLikelyQuarter = (str) => _isStr(str)
   && str[0].toUpperCase() === 'Q';
 
 
-const _toIntMonth = str => parseInt(str, 10)-1;
+const _notInIntervalStrict = (n, min, max) => _isNaN(n) || (n<min || n>max);
+const _notInLengthMinMax = (str, length, min, max) =>
+ (typeof str === 'string' && str.length !== length)
+ || _notInIntervalStrict(parseInt(str, 10), min, max)
+   ? true
+   : false;
+
+const _isYmd = (yStr, mStr, dStr, {nForecastDate=0, minYear=MIN_YEAR} = {}) => {
+  const _nowYear = new Date().getFullYear();
+
+  if( _notInLengthMinMax(yStr, 4, minYear, _nowYear + nForecastDate)
+   || _notInLengthMinMax(mStr, 2, 1, 12)
+   || _notInLengthMinMax(dStr, 2, 1, 31)) {
+    return false;
+  }
+
+  return true;
+};
+
+const _getDaysInYm = (y, m) => (new Date(y, m, 0)).getDate();
 
 const DateUtils = {
 
@@ -24,30 +47,8 @@ const DateUtils = {
 			 return false;
 		 }
 
-		 // m[1] is year 'YYYY' * m[2] is month 'MM' * m[3] is day 'DD'
-		 const m = _str.match(/(\d{4})-(\d{2})-(\d{2})/);
-
-		 // STR IS NOT FIT m IS NOT OBJECT
-		 if( m === null || typeof m !== 'object' || m.length!==4) {
-			 return false;
-		 }
-
-		 const thisYear = new Date().getFullYear();
-
-		// YEAR CHECK
-		 if( (m[1].length < 4) || m[1] < minYear || m[1] > thisYear + nForecastDate) {
-       return false;
-     }
-		// MONTH CHECK
-		 if( (m[2].length < 2) || m[2] < 1 || m[2] > 12) {
-       return false;
-     }
-		// DAY CHECK
-		 if( (m[3].length < 2) || m[3] < 1 || m[3] > 31) {
-       return false;
-     }
-
-		 return true;
+     const _arr = _str.split('-');
+     return _isYmd(_arr[0], _arr[1], _arr[2], {nForecastDate, minYear});
 	},
 
 	isYmdOrEmpty(str){
@@ -83,63 +84,54 @@ const DateUtils = {
 	},
 
  dmyToUTC(str){
-	  const _str = str || ''
-		, [ d=10, m=10, y=1970 ] = _str.toString().split('-');
-    return DateUtils.isYmd(`${y}-${m}-${d}`)
+		const [d, m, y] = _splitDateStr(str);
+    return _isYmd(y, m, d)
       ? Date.UTC(y, _toIntMonth(m), d)
-      : 0;
- },
-
- dmyToMls(str){
-	 const _str = str || ''
-	 , [ d, m, y ] = _str.toString().split('-');
-	 return Date.UTC(y, (parseInt(m, 10)-1), d);
+      : NaN;
  },
 
  isDmyPeriod: (from, to) => DateUtils
-   .dmyToMls(from) <= DateUtils.dmyToMls(to),
+   .dmyToUTC(from) <= DateUtils.dmyToUTC(to),
 
  isDmy(str, minYear=MIN_YEAR){
-	 const _str = str || ''
-	 , [ d=10, m=10, y=minYear-1 ] = _str.toString().split('-');
-	 return DateUtils.isYmd(`${y}-${m}-${d}`, 0, minYear);
+	 const [ d, m, y ] = _splitDateStr(str);
+	 return _isYmd(y, m, d, { minYear });
  },
 
  ymdToUTC: (dateStr, option={}) => {
-	 const _dateStr = dateStr || ''
-   , _arr = _dateStr.split('-')
+	 const _arr = _splitDateStr(dateStr)
 	 , _len = _arr.length
    , [yearStr, mStr, dStr] = _arr;
+
 	 if (_len === 3) {
 		 return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
-	 } else if ( _len === 2 && mStr !== ''){
+	 }
+
+   if ( _len === 2 && mStr !== ''){
 		 const _m = parseInt(mStr, 10);
 		 if (!_isNaN(_m)) {
-				const _d = (new Date(yearStr, _m, 0)).getDate();
+				const _d = _getDaysInYm(yearStr, _m);
 		    return Date.UTC(yearStr, _m - 1, _d);
 		 // YYYY-Q format
 	   } else if (_isLikelyQuarter(_arr[1])) {
 			  const _q = parseInt(_arr[1][1], 10);
-				return !_isNaN(_q)
-				  ? Date.UTC( _arr[0], _q*3 - 1, 30)
-					: _q;
+        if (_isNaN(_q)) { return _q; }
+        const _d = _getDaysInYm(_arr[0], _q*3);
+				return Date.UTC( _arr[0], _q*3 - 1, _d);
 		 } else {
 			 return _m;
 		 }
-	 } else if ( _len === 1) {
+	 }
+
+   if ( _len === 1) {
      const { y=0 } = option
      , _y = parseInt(yearStr, 10) - y;
 		 return !_isNaN(_y)
        ? Date.UTC(_y, 11, 31)
        : _y;
 	 }
- },
- ymdtToUTC(dateStr) {
-	 const _arr = dateStr.split('-')
-			 , _d = _arr[2].split(' ')[0];
-	 return Date.UTC(
-		 _arr[0], (parseInt(_arr[1], 10)-1), _d
-	 );
+
+   return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
  },
  ymdhmsToUTC(dateStr) {
 	 const _dtArr = dateStr.split(' ')
