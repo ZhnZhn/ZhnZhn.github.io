@@ -18,7 +18,7 @@ const S = {
 
 const {
   isDmy,
-  dmyToMls,
+  dmyToUTC,
   isDmyPeriod,
   mlsToDmy,
   addToDmy,
@@ -84,10 +84,9 @@ class ZoomDialog extends Component {
     if ( _isFn(chart.zhZoomX)
          && this._dates.getValidation().isValid ) {
       const { fromDate, toDate } = this._dates.getValues()
-      chart.zhZoomX({
-        from: dmyToMls(fromDate),
-        to: dmyToMls(toDate)
-      })
+      , from = dmyToUTC(fromDate)
+      , to = dmyToUTC(toDate);
+      chart.zhZoomX({ from, to })
     }
     onClose()
   }
@@ -96,10 +95,11 @@ class ZoomDialog extends Component {
     const { chart } = this._getChart();
     if (_isFn(chart.zhZoomX)) {
       const { to } = _getFromToDates(chart)
-      , _fromMls = addToDmy(to, month).getTime();
-      if ( chart.zhZoomX({
+      , _fromMls = addToDmy(to, month).getTime()
+      , _toMls = dmyToUTC(to);
+      if (chart.zhZoomX({
         from: _fromMls,
-        to: dmyToMls(to)
+        to: _toMls
       })) {
         this._dates.setFromTo(mlsToDmy(_fromMls), to)
       }
@@ -110,10 +110,11 @@ class ZoomDialog extends Component {
     const { chart } = this._getChart()
     if (_isFn(chart.zhZoomX)) {
       const { to } = _getFromToDates(chart)
-      , _fromMls = getYTDfromDmy(to);
-      if ( chart.zhZoomX({
+      , _fromMls = getYTDfromDmy(to)
+      , _toMls = dmyToUTC(to);
+      if (chart.zhZoomX({
         from: _fromMls,
-        to: dmyToMls(to)
+        to: _toMls
       })) {
         this._dates.setFromTo(mlsToDmy(_fromMls), to)
       }

@@ -29,7 +29,7 @@ var S = {
   }
 };
 var isDmy = _DateUtils["default"].isDmy,
-    dmyToMls = _DateUtils["default"].dmyToMls,
+    dmyToUTC = _DateUtils["default"].dmyToUTC,
     isDmyPeriod = _DateUtils["default"].isDmyPeriod,
     mlsToDmy = _DateUtils["default"].mlsToDmy,
     addToDmy = _DateUtils["default"].addToDmy,
@@ -90,11 +90,13 @@ var ZoomDialog = /*#__PURE__*/function (_Component) {
       if (_isFn(chart.zhZoomX) && _this._dates.getValidation().isValid) {
         var _this$_dates$getValue = _this._dates.getValues(),
             fromDate = _this$_dates$getValue.fromDate,
-            toDate = _this$_dates$getValue.toDate;
+            toDate = _this$_dates$getValue.toDate,
+            from = dmyToUTC(fromDate),
+            to = dmyToUTC(toDate);
 
         chart.zhZoomX({
-          from: dmyToMls(fromDate),
-          to: dmyToMls(toDate)
+          from: from,
+          to: to
         });
       }
 
@@ -108,11 +110,12 @@ var ZoomDialog = /*#__PURE__*/function (_Component) {
       if (_isFn(chart.zhZoomX)) {
         var _getFromToDates2 = _getFromToDates(chart),
             to = _getFromToDates2.to,
-            _fromMls = addToDmy(to, month).getTime();
+            _fromMls = addToDmy(to, month).getTime(),
+            _toMls = dmyToUTC(to);
 
         if (chart.zhZoomX({
           from: _fromMls,
-          to: dmyToMls(to)
+          to: _toMls
         })) {
           _this._dates.setFromTo(mlsToDmy(_fromMls), to);
         }
@@ -126,11 +129,12 @@ var ZoomDialog = /*#__PURE__*/function (_Component) {
       if (_isFn(chart.zhZoomX)) {
         var _getFromToDates3 = _getFromToDates(chart),
             to = _getFromToDates3.to,
-            _fromMls = getYTDfromDmy(to);
+            _fromMls = getYTDfromDmy(to),
+            _toMls = dmyToUTC(to);
 
         if (chart.zhZoomX({
           from: _fromMls,
-          to: dmyToMls(to)
+          to: _toMls
         })) {
           _this._dates.setFromTo(mlsToDmy(_fromMls), to);
         }
