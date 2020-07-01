@@ -5,7 +5,7 @@ const fnEcho = value => value;
 const MAX_TO_ROUND = '1000000';
 
 const _isNumber = n => typeof n === 'number'
- && !Number.isNaN(n);
+ && (n - n === 0);
 
 const _formatedToBig = (v=0, dfR) => {
   const _b = Big(v.toString().replace(/\s/g,''));
@@ -15,15 +15,14 @@ const _formatedToBig = (v=0, dfR) => {
 }
 
 const _roundBig = (bValue) => {
-  let _bValue = bValue.round(4);
-  if ( _bValue.gt(MAX_TO_ROUND) ){
-    _bValue = bValue.toFixed(0);
-  }
-  return _bValue;
+  const _bValue = bValue.round(4);
+  return _bValue.gt(MAX_TO_ROUND)
+     ? bValue.toFixed(0)
+     : _bValue;
 };
 
 
-const _toBig = (bValue, dfValue=0) => {
+const _toBig = (bValue) => {
   if (bValue instanceof Big) {
     return bValue;
   }
@@ -31,7 +30,7 @@ const _toBig = (bValue, dfValue=0) => {
     bValue = new Big(bValue)
     return bValue;
   } catch(err) {
-    return new Big(dfValue);
+    return new Big(0);
   }
 };
 
@@ -50,30 +49,24 @@ const mathFn = {
       : Big(0).toFixed(2);
   },
 
-  crValueMoving: (option) => {
-    const {
-      nowValue,
-      prevValue,
-      Direction:D={},
-      fnFormat=fnEcho,
-      dfR
-    } = option
-    , bNowValue = _formatedToBig(nowValue, dfR)
+  crValueMoving: ({
+    nowValue,
+    prevValue,
+    Direction:D={},
+    fnFormat=fnEcho,
+    dfR
+  }) => {
+    const bNowValue = _formatedToBig(nowValue, dfR)
     , bPrevValue = _formatedToBig(prevValue, dfR)
     , _bDelta = bPrevValue.minus(bNowValue)
     , _direction = _bDelta.gt(0.0)
          ? D.DOWN
-         : _bDelta.lt(0.0)
-              ? D.UP
-              : D.EQUAL;
-
-    const _bPercent = mathFn.calcPercent({
+         : _bDelta.lt(0.0) ? D.UP : D.EQUAL
+    , _bPercent = mathFn.calcPercent({
       bValue:_bDelta, bTotal: bPrevValue
-    });
-
-    const _bNowValue = _roundBig(bNowValue)
+    })
+    , _bNowValue = _roundBig(bNowValue)
     , _bDeltaAbs = _roundBig(_bDelta.abs());
-
 
     return {
       value: fnFormat(_bNowValue).toString(),

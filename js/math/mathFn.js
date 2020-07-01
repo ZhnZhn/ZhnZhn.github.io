@@ -14,7 +14,7 @@ var fnEcho = function fnEcho(value) {
 var MAX_TO_ROUND = '1000000';
 
 var _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && !Number.isNaN(n);
+  return typeof n === 'number' && n - n === 0;
 };
 
 var _formatedToBig = function _formatedToBig(v, dfR) {
@@ -30,18 +30,10 @@ var _formatedToBig = function _formatedToBig(v, dfR) {
 var _roundBig = function _roundBig(bValue) {
   var _bValue = bValue.round(4);
 
-  if (_bValue.gt(MAX_TO_ROUND)) {
-    _bValue = bValue.toFixed(0);
-  }
-
-  return _bValue;
+  return _bValue.gt(MAX_TO_ROUND) ? bValue.toFixed(0) : _bValue;
 };
 
-var _toBig = function _toBig(bValue, dfValue) {
-  if (dfValue === void 0) {
-    dfValue = 0;
-  }
-
+var _toBig = function _toBig(bValue) {
   if (bValue instanceof _big["default"]) {
     return bValue;
   }
@@ -50,7 +42,7 @@ var _toBig = function _toBig(bValue, dfValue) {
     bValue = new _big["default"](bValue);
     return bValue;
   } catch (err) {
-    return new _big["default"](dfValue);
+    return new _big["default"](0);
   }
 };
 
@@ -73,25 +65,24 @@ var mathFn = {
     bTotal = _toBig(bTotal);
     return !bTotal.eq((0, _big["default"])(0)) ? bValue.times(100).div(bTotal).abs().toFixed(2) : (0, _big["default"])(0).toFixed(2);
   },
-  crValueMoving: function crValueMoving(option) {
-    var nowValue = option.nowValue,
-        prevValue = option.prevValue,
-        _option$Direction = option.Direction,
-        D = _option$Direction === void 0 ? {} : _option$Direction,
-        _option$fnFormat = option.fnFormat,
-        fnFormat = _option$fnFormat === void 0 ? fnEcho : _option$fnFormat,
-        dfR = option.dfR,
-        bNowValue = _formatedToBig(nowValue, dfR),
+  crValueMoving: function crValueMoving(_ref2) {
+    var nowValue = _ref2.nowValue,
+        prevValue = _ref2.prevValue,
+        _ref2$Direction = _ref2.Direction,
+        D = _ref2$Direction === void 0 ? {} : _ref2$Direction,
+        _ref2$fnFormat = _ref2.fnFormat,
+        fnFormat = _ref2$fnFormat === void 0 ? fnEcho : _ref2$fnFormat,
+        dfR = _ref2.dfR;
+
+    var bNowValue = _formatedToBig(nowValue, dfR),
         bPrevValue = _formatedToBig(prevValue, dfR),
         _bDelta = bPrevValue.minus(bNowValue),
-        _direction = _bDelta.gt(0.0) ? D.DOWN : _bDelta.lt(0.0) ? D.UP : D.EQUAL;
-
-    var _bPercent = mathFn.calcPercent({
+        _direction = _bDelta.gt(0.0) ? D.DOWN : _bDelta.lt(0.0) ? D.UP : D.EQUAL,
+        _bPercent = mathFn.calcPercent({
       bValue: _bDelta,
       bTotal: bPrevValue
-    });
-
-    var _bNowValue = _roundBig(bNowValue),
+    }),
+        _bNowValue = _roundBig(bNowValue),
         _bDeltaAbs = _roundBig(_bDelta.abs());
 
     return {

@@ -13,7 +13,7 @@ const {
 const PERCENT_0 = '0.00%';
 const PERCENT_100 = '100.00%';
 
-const _fValueMoving = (nowValue, prevValue) => ({
+const _crVmInputs = (nowValue, prevValue) => ({
   nowValue, prevValue, Direction
 });
 
@@ -38,12 +38,28 @@ describe('calcPercent', ()=>{
      const r = fn({ bValue: Big(10), bTotal: Big(100)})
      expect(r).toBe('10.00')
   })
+  test('should return str percent with Fixed 2 from number values', ()=>{
+    const r = fn({ bValue: 10, bTotal: 100})
+    expect(r).toBe('10.00')
+  })
+  test('should use bValue 0 in case undefined', ()=>{
+    const r = fn({ bTotal: Big(100) })
+    expect(r).toBe('0.00')
+  })
+  test('should use bTotal 0 in case undefined', ()=>{
+    const r = fn({ bValue: Big(10) })
+    expect(r).toBe('0.00')
+  })
+  test('should return str 0.00 in case bValue NaN', ()=>{
+    const r = fn({ bValue: NaN, bTotal: Big(100)})
+    expect(r).toBe('0.00')
+  })
 })
 
 describe('crValueMoving', () => {
    const fn = crValueMoving
    test('should return correct obj for Big values', ()=>{
-     const r = fn(_fValueMoving(
+     const r = fn(_crVmInputs(
         Big('200.02'), Big('100.01')
      ));
 
@@ -53,7 +69,7 @@ describe('crValueMoving', () => {
      expect(r.direction).toBe(Direction.UP)
    })
    test('should return correct obj for strings values with radix', ()=>{
-     const r = fn(_fValueMoving(
+     const r = fn(_crVmInputs(
        '200.02', '100.01'
      ));
 
@@ -62,8 +78,46 @@ describe('crValueMoving', () => {
      expect(r.delta).toBe('100.01')
      expect(r.direction).toBe(Direction.UP)
    })
+   test('should use dfR for rounding', () => {
+     const r = fn({
+       ..._crVmInputs('200.023333', '100.01333'),
+       ...{ dfR: 2 }
+     });
+
+     expect(r.value).toBe('200.02')
+     expect(r.percent).toBe(PERCENT_100)
+     expect(r.delta).toBe('100.01')
+     expect(r.direction).toBe(Direction.UP)
+   })
+   test('should use fnFormat for output', () => {
+     const r = fn({
+       ..._crVmInputs('200.02', '100.01'),
+       ...{ fnFormat: (value) => value + ';' }
+     });
+
+     expect(r.value).toBe('200.02;')
+     expect(r.delta).toBe('100.01;')
+   })
+   test('should use Direction for output', () => {
+     const _Direction = { UP: 'UPPP' }
+     const r = fn({
+       ..._crVmInputs('200.02', '100.01'),
+       ...{ Direction: _Direction }
+     });
+
+     expect(r.direction).toBe(_Direction.UP)
+   })
+   test('should use df Direction as {} for output', () => {
+     const r = fn({
+       ..._crVmInputs('200.02', '100.01'),
+       ...{ Direction: void 0 }
+     });
+
+     expect(r.direction).toBe(undefined)
+   })
+
    test('should return correct obj for strings values with nowValue="0"', ()=>{
-     const r = fn(_fValueMoving(
+     const r = fn(_crVmInputs(
        '0', '100'
      ));
 
@@ -73,7 +127,7 @@ describe('crValueMoving', () => {
      expect(r.direction).toBe(Direction.DOWN)
    })
    test('should return correct obj for equal strings values', ()=>{
-     const r = fn(_fValueMoving(
+     const r = fn(_crVmInputs(
        '100', '100'
      ));
 
@@ -84,7 +138,7 @@ describe('crValueMoving', () => {
    })
 
    test('should replace blanks in string values', ()=>{
-     const r = fn(_fValueMoving(
+     const r = fn(_crVmInputs(
        '200 000 000', '100 000 000'
      ));
 
@@ -94,7 +148,7 @@ describe('crValueMoving', () => {
      expect(r.direction).toBe(Direction.UP)
    })
    test('should replace several blanks in string values', ()=>{
-     const r = fn(_fValueMoving(
+     const r = fn(_crVmInputs(
        '200  000  000', '100  000  000'
      ));
 
@@ -104,7 +158,7 @@ describe('crValueMoving', () => {
      expect(r.direction).toBe(Direction.UP)
    })
    test('should to fixed to radix 0 value and round delta in case value or delta bigger 1 000 000', ()=>{
-     const r = fn(_fValueMoving(
+     const r = fn(_crVmInputs(
        '200 000 000.02', '100 000 000.01'
      ))
 
@@ -149,5 +203,10 @@ describe('toFixedNumber', ()=>{
     expect(fn(9.00005)).toBe(9.0001)
     expect(fn(9000.005)).toBe(9000.01)
     expect(fn(10000.005)).toBe(10000)
+  })
+  test('should retun same value in case not number', () => {
+    expect(fn(NaN)).toBe(NaN)
+    expect(fn()).toBe(undefined)
+    expect(fn(null)).toBe(null)
   })
 })
