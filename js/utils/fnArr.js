@@ -2,32 +2,31 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _isArr = Array.isArray,
+    _fIsItem = function _fIsItem(propName, propValue) {
+  return function (item) {
+    return item[propName] === propValue;
+  };
+},
+    _findArrIndexBy = function _findArrIndexBy(arr, propName, propValue) {
+  return arr.findIndex(_fIsItem(propName, propValue));
+};
+
 var fnArr = {
   findIndexByProp: function findIndexByProp(propName) {
     return function (arr, propValue) {
-      if (!Array.isArray(arr)) {
-        return -1;
-      }
-
-      return arr.findIndex(function (item) {
-        return item[propName] === propValue;
-      });
+      return _isArr(arr) ? _findArrIndexBy(arr, propName, propValue) : -1;
     };
   },
   isSameByProp: function isSameByProp(propName) {
     return function (arr, propValue) {
-      if (!Array.isArray(arr)) {
-        return false;
-      }
-
-      return arr.findIndex(function (item) {
-        return item[propName] === propValue;
-      }) === -1 ? false : true;
+      return _isArr(arr) ? _findArrIndexBy(arr, propName, propValue) === -1 ? false : true : false;
     };
   },
   isInArrStr: function isInArrStr(arr) {
     return function (str) {
-      if (!Array.isArray(arr)) {
+      if (!_isArr(arr)) {
         return false;
       }
 
@@ -44,7 +43,7 @@ var fnArr = {
   }
   /*
   isStrInArr: (str) => (arr) => {
-     if (!Array.isArray(arr)){
+     if (!_isArr(arr)){
        return false;
      }
      let i;

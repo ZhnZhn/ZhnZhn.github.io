@@ -1,29 +1,23 @@
 
+const _isArr = Array.isArray
+, _fIsItem = (propName, propValue) =>
+    item => item[propName] === propValue
+, _findArrIndexBy = (arr, propName, propValue) =>
+    arr.findIndex(_fIsItem(propName, propValue));
+
 const fnArr = {
 
-  findIndexByProp: (propName) => (arr, propValue) => {
-     if (!Array.isArray(arr)){
-       return -1;
-     }
+  findIndexByProp: (propName) => (arr, propValue) => _isArr(arr)
+    ? _findArrIndexBy(arr, propName, propValue)
+    : -1,
 
-     return arr.findIndex(
-       item => item[propName] === propValue
-     );
-  },
+  isSameByProp: (propName) => (arr, propValue) => _isArr(arr)
+    ? _findArrIndexBy(arr, propName, propValue) === -1
+        ? false : true
+    : false,
 
-
-  isSameByProp: (propName) => (arr, propValue) => {
-      if (!Array.isArray(arr)){
-        return false;
-      }
-
-      return arr.findIndex(
-         item => item[propName] === propValue
-      ) === -1 ? false : true;
-  },
-  
   isInArrStr: (arr) => (str) => {
-    if (!Array.isArray(arr)) {
+    if (!_isArr(arr)) {
       return false;
     }
     let i;
@@ -34,9 +28,10 @@ const fnArr = {
     }
     return false;
   },
+
   /*
   isStrInArr: (str) => (arr) => {
-     if (!Array.isArray(arr)){
+     if (!_isArr(arr)){
        return false;
      }
      let i;
