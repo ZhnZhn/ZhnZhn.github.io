@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../src/utils/safeFn.js"],"names":["safeFn","obj","propName","dfValue"],"mappings":";;;;;AACe,SAASA,MAAT,CAAgBC,GAAhB,EAAqBC,QAArB,EAA+BC,OAA/B,EAAwC;AACrD,MAAI,CAACF,GAAL,EAAU;AACR,WAAO,YAAM;AAAE,aAAOE,OAAP;AAAiB,KAAhC;AACD;;AAED,MAAI,OAAOF,GAAG,CAACC,QAAD,CAAV,IAAwB,UAA5B,EAAuC;AACrC,WAAOD,GAAG,CAACC,QAAD,CAAV;AACD,GAFD,MAEQ;AACN,WAAO,YAAM;AAAE,aAAOC,OAAP;AAAiB,KAAhC;AACD;AACF","sourcesContent":["\r\nexport default function safeFn(obj, propName, dfValue) {\r\n  if (!obj) {\r\n    return () => { return dfValue; };\r\n  }\r\n\r\n  if (typeof obj[propName] == 'function'){\r\n    return obj[propName];\r\n  } else  {\r\n    return () => { return dfValue; };\r\n  }    \r\n}\r\n"],"file":"safeFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/safeFn.js"
+ ],
+ "file": "../../src/utils/safeFn.js",
+ "names": [
+  "safeFn",
+  "obj",
+  "propName",
+  "dfValue"
+ ],
+ "mappings": ";;;;;AACe,SAASA,MAAT,CAAgBC,GAAhB,EAAqBC,QAArB,EAA+BC,OAA/B,EAAwC;AACrD,MAAI,CAACF,GAAL,EAAU;AACR,WAAO,YAAM;AAAE,aAAOE,OAAP;AAAiB,KAAhC;AACD;;AAED,SAAO,OAAOF,GAAG,CAACC,QAAD,CAAV,IAAwB,UAAxB,GACHD,GAAG,CAACC,QAAD,CADA,GAEH,YAAM;AAAE,WAAOC,OAAP;AAAiB,GAF7B;AAGD"
+}

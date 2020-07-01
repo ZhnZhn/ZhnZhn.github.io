@@ -10,12 +10,8 @@ function safeFn(obj, propName, dfValue) {
     };
   }
 
-  if (typeof obj[propName] == 'function') {
-    return obj[propName];
-  } else {
-    return function () {
-      return dfValue;
-    };
-  }
+  return typeof obj[propName] == 'function' ? obj[propName] : function () {
+    return dfValue;
+  };
 }
 //# sourceMappingURL=safeFn.js.map
