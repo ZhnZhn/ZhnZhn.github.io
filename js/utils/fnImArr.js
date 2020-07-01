@@ -2,9 +2,11 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
+var _assign = Object.assign,
+    _isArr = Array.isArray;
 var fnImArr = {
   push: function push(arr, obj) {
-    return arr ? [].concat(arr, [Object.assign({}, obj)]) : [Object.assign({}, obj)];
+    return _isArr(arr) ? [].concat(arr, [_assign({}, obj)]) : [_assign({}, obj)];
   },
   filterByPropFn: function filterByPropFn(propName) {
     return function (arr, propValue) {
@@ -14,17 +16,13 @@ var fnImArr = {
     };
   },
   insertItem: function insertItem(item, index, arr) {
-    if (arr === void 0) {
-      arr = [];
-    }
-
-    return [].concat(arr.slice(0, index), [Object.assign({}, item)], arr.slice(index));
+    return _isArr(arr) ? [].concat(arr.slice(0, index), [_assign({}, item)], arr.slice(index)) : [_assign({}, item)];
   },
   editByPropFn: function editByPropFn(propName) {
     return function (arr, index, propValue) {
-      var _Object$assign;
+      var _assign2;
 
-      return [].concat(arr.slice(0, index), [Object.assign({}, arr[index], (_Object$assign = {}, _Object$assign[propName] = propValue, _Object$assign))], arr.slice(index + 1));
+      return [].concat(arr.slice(0, index), [_assign({}, arr[index], (_assign2 = {}, _assign2[propName] = propValue, _assign2))], arr.slice(index + 1));
     };
   }
 };

@@ -9,18 +9,25 @@ var push = _fnImArr["default"].push,
     filterByPropFn = _fnImArr["default"].filterByPropFn,
     editByPropFn = _fnImArr["default"].editByPropFn;
 describe('push', function () {
+  var fn = push,
+      obj = {
+    b: 2
+  };
   test('should push obj', function () {
     var arr = [{
       a: 1
     }],
-        obj = {
-      b: 2
-    },
-        result = push(arr, obj),
+        result = fn(arr, obj),
         maxIndex = result.length - 1;
     expect(result).not.toBe(arr);
     expect(result[maxIndex]).not.toBe(obj);
     expect(result[maxIndex]).toEqual(obj);
+  });
+  test('should use empty arr in case arr not Array', function () {
+    var result = push(void 0, obj);
+    expect(result[0]).not.toBe(obj);
+    expect(result[0]).toEqual(obj);
+    expect(result.length).toEqual(1);
   });
 });
 describe('filterByPropFn', function () {
@@ -42,7 +49,8 @@ describe('filterByPropFn', function () {
   });
 });
 describe('insertItem', function () {
-  var arr = [{
+  var fn = insertItem,
+      arr = [{
     a: 1
   }, {
     b: 2
@@ -53,7 +61,7 @@ describe('insertItem', function () {
     d: 4
   };
   test('should insert obj to arr, index=0', function () {
-    var result = insertItem(obj, 0, arr);
+    var result = fn(obj, 0, arr);
     expect(result).not.toBe(arr);
     expect(result[0]).not.toBe(obj);
     expect(result[0]).toEqual(obj);
@@ -61,11 +69,17 @@ describe('insertItem', function () {
   });
   test('should insert obj to arr, index=length', function () {
     var index = arr.length,
-        result = insertItem(obj, index, arr);
+        result = fn(obj, index, arr);
     expect(result).not.toBe(arr);
     expect(result[index]).not.toBe(obj);
     expect(result[index]).toEqual(obj);
     expect(result.length).toBe(arr.length + 1);
+  });
+  test('should use empty arr in case arr not Array', function () {
+    var result = fn(obj, 2);
+    expect(result[0]).not.toBe(obj);
+    expect(result[0]).toEqual(obj);
+    expect(result.length).toBe(1);
   });
 });
 describe('editByPropFn', function () {

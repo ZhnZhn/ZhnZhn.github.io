@@ -8,15 +8,24 @@ const {
 } = fnImArr;
 
 describe('push', () => {
+  const fn = push
+  , obj = {b:2};
   test('should push obj', () => {
      const arr = [ {a:1} ]
-         , obj = {b:2}
-         , result = push(arr, obj)
+         , result = fn(arr, obj)
          , maxIndex = result.length-1;
 
      expect(result).not.toBe(arr)
      expect(result[maxIndex]).not.toBe(obj)
      expect(result[maxIndex]).toEqual(obj)
+  })
+  test('should use empty arr in case arr not Array', ()=>{
+     const result = push(void 0, obj);
+
+     expect(result[0]).not.toBe(obj)
+     expect(result[0]).toEqual(obj)
+     expect(result.length).toEqual(1)
+
   })
 })
 
@@ -33,10 +42,11 @@ describe('filterByPropFn', ()=> {
 })
 
 describe('insertItem', () => {
-  const arr = [ {a:1}, {b:2}, {c:3} ]
-      , obj = {d:4};
+  const fn = insertItem
+  , arr = [ {a:1}, {b:2}, {c:3} ]
+  , obj = {d:4};
   test('should insert obj to arr, index=0', () => {
-      const result = insertItem(obj, 0, arr);
+      const result = fn(obj, 0, arr);
 
       expect(result).not.toBe(arr)
       expect(result[0]).not.toBe(obj)
@@ -45,12 +55,19 @@ describe('insertItem', () => {
   })
   test('should insert obj to arr, index=length', () => {
       const index = arr.length
-          , result = insertItem(obj, index, arr);
+          , result = fn(obj, index, arr);
 
       expect(result).not.toBe(arr)
       expect(result[index]).not.toBe(obj)
       expect(result[index]).toEqual(obj)
       expect(result.length).toBe(arr.length+1)
+  })
+  test('should use empty arr in case arr not Array', () => {
+    const result = fn(obj, 2)
+
+    expect(result[0]).not.toBe(obj)
+    expect(result[0]).toEqual(obj)
+    expect(result.length).toBe(1)
   })
 })
 

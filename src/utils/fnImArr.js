@@ -1,10 +1,13 @@
 
+const _assign = Object.assign
+, _isArr = Array.isArray;
+
 const fnImArr = {
 
   push(arr, obj){
-     return (arr)
-        ? [...arr, Object.assign({}, obj)]
-        : [ Object.assign({}, obj) ];
+     return _isArr(arr)
+        ? [...arr, _assign({}, obj)]
+        : [ _assign({}, obj) ];
   },
 
   filterByPropFn: (propName) => (arr, propValue) => {
@@ -13,18 +16,20 @@ const fnImArr = {
     );
   },
 
-  insertItem(item, index, arr=[]){
-    return [
-      ...arr.slice(0, index),
-      Object.assign({}, item),
-      ...arr.slice(index)
-    ];
+  insertItem(item, index, arr){
+    return _isArr(arr)
+      ? [
+         ...arr.slice(0, index),
+         _assign({}, item),
+         ...arr.slice(index)
+        ]
+      : [ _assign({}, item) ];
   },
 
   editByPropFn: (propName) => (arr, index, propValue) => {
     return [
       ...arr.slice(0, index),
-      Object.assign({}, arr[index], { [propName]: propValue} ),
+      _assign({}, arr[index], { [propName]: propValue} ),
       ...arr.slice(index+1)
     ]
   }
