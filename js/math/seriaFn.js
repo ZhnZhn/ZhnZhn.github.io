@@ -11,14 +11,9 @@ var _mathFn = _interopRequireDefault(require("./mathFn"));
 
 var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
 
-function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } it = o[Symbol.iterator](); return it.next.bind(it); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 var isNumber = _seriaHelperFn["default"].isNumber,
     isPointArr = _seriaHelperFn["default"].isPointArr,
+    crPointGetter = _seriaHelperFn["default"].crPointGetter,
     fGetY = _seriaHelperFn["default"].fGetY,
     getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
     getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
@@ -70,27 +65,31 @@ var fn = {
     return _d;
   },
   normalize: function normalize(d) {
-    if (!_isArr(d)) {
+    if (!(_isArr(d) && d[0])) {
       return [];
     }
 
-    var _d = [],
-        _max = d.length,
-        _y0 = d[0].y;
+    var _crPointGetter = crPointGetter(d),
+        getX = _crPointGetter.getX,
+        getY = _crPointGetter.getY,
+        _y0 = getY(d[0]);
 
-    if (!isNumber(_y0) || _y0 === 0 || _max === 0) {
+    if (!(isNumber(_y0) && _y0 !== 0)) {
       return [];
     }
 
-    for (var i = 0; i < _max; i++) {
-      _d.push([d[i].x, parseFloat((0, _big["default"])(d[i].y / _y0).times(100).toFixed(2))]);
+    var _d = [];
+    var i = 0;
+
+    for (; i < d.length; i++) {
+      _d.push([getX(d[i]), parseFloat((0, _big["default"])(getY(d[i]) / _y0).times(100).toFixed(2))]);
     }
 
     return _d;
   },
   findMinY: function findMinY(data) {
-    if (!_isArr(data) || data.length < 1) {
-      return undefined;
+    if (!(_isArr(data) && data.length)) {
+      return void 0;
     }
 
     var minY = Number.POSITIVE_INFINITY;
@@ -101,15 +100,17 @@ var fn = {
       return isNumber(arr[1]) && arr[1] < min ? arr[1] : min;
     };
 
-    for (var i = 0, max = data.length; i < max; i++) {
+    var i = 0;
+
+    for (; i < data.length; i++) {
       minY = _fn(data[i], minY);
     }
 
-    return minY !== Number.POSITIVE_INFINITY ? _mathFn["default"].toFixedNumber(minY) : undefined;
+    return minY !== Number.POSITIVE_INFINITY ? _mathFn["default"].toFixedNumber(minY) : void 0;
   },
   findMaxY: function findMaxY(data) {
-    if (!_isArr(data) || data.length < 1) {
-      return undefined;
+    if (!(_isArr(data) && data.length)) {
+      return void 0;
     }
 
     var maxY = Number.NEGATIVE_INFINITY;
@@ -120,11 +121,13 @@ var fn = {
       return isNumber(arr[1]) && arr[1] > max ? arr[1] : max;
     };
 
-    for (var i = 0, max = data.length; i < max; i++) {
+    var i = 0;
+
+    for (; i < data.length; i++) {
       maxY = _fn(data[i], maxY);
     }
 
-    return maxY !== Number.NEGATIVE_INFINITY ? _mathFn["default"].toFixedNumber(maxY) : undefined;
+    return maxY !== Number.NEGATIVE_INFINITY ? _mathFn["default"].toFixedNumber(maxY) : void 0;
   },
   filterTrimZero: function filterTrimZero(data) {
     if (!_isArr(data)) {
@@ -156,21 +159,24 @@ var fn = {
       return [];
     }
 
-    var _sum = (0, _big["default"])(0);
+    var _sum = (0, _big["default"])(0),
+        _numberOfPoints = 0,
+        i = 0,
+        _p;
 
-    for (var _iterator = _createForOfIteratorHelperLoose(data), _step; !(_step = _iterator()).done;) {
-      var p = _step.value;
+    for (; i < data.length; i++) {
+      _p = data[i];
 
-      if (isNumber(p[1])) {
-        _sum = _sum.add(p[1]);
+      if (isNumber(_p[1])) {
+        _sum = _sum.add(_p[1]);
+        _numberOfPoints++;
       }
     }
 
-    var _max = data.length - 1;
+    var _maxIndex = data.length - 1,
+        _avg = parseInt(_sum.div(_numberOfPoints).toFixed(0), 10);
 
-    var _avg = parseInt(_sum.div(_max).toFixed(0), 10);
-
-    return [[data[0][0], _avg], [data[_max][0], _avg]];
+    return [[data[0][0], _avg], [data[_maxIndex][0], _avg]];
   },
   median: function median(data) {
     if (!isPointArr(data)) {

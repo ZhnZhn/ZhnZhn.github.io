@@ -4,28 +4,41 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _seriaHelperFn = _interopRequireDefault(require("../seriaHelperFn"));
 
+var isNumber = _seriaHelperFn["default"].isNumber,
+    isPointArr = _seriaHelperFn["default"].isPointArr,
+    crPointGetter = _seriaHelperFn["default"].crPointGetter,
+    fGetY = _seriaHelperFn["default"].fGetY,
+    getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
+    getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
 describe("isNumber", function () {
-  var isNumber = _seriaHelperFn["default"].isNumber;
+  var fn = isNumber;
   test("should check is value number type", function () {
-    expect(isNumber(0.1)).toBe(true);
-    expect(isNumber(0)).toBe(true);
-    expect(isNumber(-0)).toBe(true);
-    expect(isNumber(+0)).toBe(true);
-    expect(isNumber(NaN)).toBe(false);
-    expect(isNumber(null)).toBe(false);
-    expect(isNumber(undefined)).toBe(false);
-    expect(isNumber('')).toBe(false);
-    expect(isNumber({})).toBe(false);
+    expect(fn(0.1)).toBe(true);
+    expect(fn(0)).toBe(true);
+    expect(fn(-0)).toBe(true);
+    expect(fn(+0)).toBe(true);
+    expect(fn(NaN)).toBe(false);
+    expect(fn(null)).toBe(false);
+    expect(fn(undefined)).toBe(false);
+    expect(fn('')).toBe(false);
+    expect(fn({})).toBe(false);
+  });
+});
+describe("isPointArr", function () {
+  var fn = isPointArr;
+  test('should return true in case data points is arr and at least 2', function () {
+    var data = [[], []];
+    expect(fn(data)).toBe(true);
   });
 });
 describe("crPointGetter", function () {
-  var crPointGetter = _seriaHelperFn["default"].crPointGetter;
+  var fn = crPointGetter;
   test("should create getter for array points", function () {
     var _data = [[0, 0], [1, 1]];
 
-    var _crPointGetter = crPointGetter(_data),
-        getX = _crPointGetter.getX,
-        getY = _crPointGetter.getY;
+    var _fn = fn(_data),
+        getX = _fn.getX,
+        getY = _fn.getY;
 
     expect(getX(_data[0])).toBe(0);
     expect(getY(_data[0])).toBe(0);
@@ -41,14 +54,70 @@ describe("crPointGetter", function () {
       y: 1
     }];
 
-    var _crPointGetter2 = crPointGetter(_data),
-        getX = _crPointGetter2.getX,
-        getY = _crPointGetter2.getY;
+    var _fn2 = fn(_data),
+        getX = _fn2.getX,
+        getY = _fn2.getY;
 
     expect(getX(_data[0])).toBe(0);
     expect(getY(_data[0])).toBe(0);
     expect(getX(_data[1])).toBe(1);
     expect(getY(_data[1])).toBe(1);
+  });
+});
+describe("fGetY", function () {
+  var fn = fGetY;
+  test("should return function for getting y for arr point", function () {
+    var point = [1, 2],
+        getY = fn(point);
+    expect(typeof getY).toBe('function');
+    expect(getY(point)).toBe(point[1]);
+  });
+  test("should return function for getting y for obj point", function () {
+    var point = {
+      y: 2
+    },
+        getY = fn(point);
+    expect(typeof getY).toBe('function');
+    expect(getY(point)).toBe(point.y);
+  });
+  test('should return undefined for edge case', function () {
+    expect(fn(null)).toBe(undefined);
+    expect(fn({})).toBe(undefined);
+  });
+});
+describe('getZeroCountFromStart', function () {
+  var fn = getZeroCountFromStart;
+  test('should return number of points with y 0 or null from data start', function () {
+    var dataArr = [[1, 0], [2, null]];
+    expect(fn(dataArr, fGetY(dataArr[0]))).toBe(2);
+    var dataArr2 = [[1, 0], [2, null], [-1, 1]];
+    expect(fn(dataArr2, fGetY(dataArr2[0]))).toBe(2);
+    var dataObj = [{
+      x: 1,
+      y: 0
+    }, {
+      x: 2,
+      y: null
+    }];
+    expect(fn(dataObj, fGetY(dataObj[0]))).toBe(2);
+  });
+});
+describe('getZeroIndexFromEnd', function () {
+  var fn = getZeroIndexFromEnd;
+  test('should return index of last y 0 or null from data end', function () {
+    var dataArr = [[-1, -1], [1, 0], [2, null]];
+    expect(fn(dataArr, fGetY(dataArr[0]))).toBe(1);
+    var dataObj = [{
+      x: -1,
+      y: -1
+    }, {
+      x: 1,
+      y: 0
+    }, {
+      x: 2,
+      y: null
+    }];
+    expect(fn(dataObj, fGetY(dataObj[0]))).toBe(1);
   });
 });
 //# sourceMappingURL=seriaHelperFn.test.js.map

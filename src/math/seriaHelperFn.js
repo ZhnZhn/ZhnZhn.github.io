@@ -32,8 +32,8 @@ const seriaHelperFn = {
   },
 
   getZeroCountFromStart: (arr, getY) => {
-    let _toIndex = -1;
-    for(let i=0; i<arr.length; i++){
+    let _toIndex = -1, i=0;
+    for(; i<arr.length; i++){
       const _y = getY(arr[i])
       if (_y === 0 || _y === null){
         _toIndex = i

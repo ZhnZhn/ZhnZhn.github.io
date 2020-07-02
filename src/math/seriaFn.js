@@ -6,6 +6,7 @@ import fns from './seriaHelperFn'
 const {
   isNumber,
   isPointArr,
+  crPointGetter,
   fGetY,
   getZeroCountFromStart,
   getZeroIndexFromEnd
@@ -62,20 +63,22 @@ const fn = {
   },
 
   normalize: (d) => {
-    if (!_isArr(d)) {
+    if ( !(_isArr(d) && d[0]) ) {
       return [];
     }
-    const _d = []
-    , _max = d.length
-    , _y0 = d[0].y;
-    if (!isNumber(_y0) || _y0 === 0 || _max === 0) {
+    const { getX, getY } = crPointGetter(d)
+    , _y0 = getY(d[0]);
+    if ( !(isNumber(_y0) && _y0 !== 0) ) {
       return [];
     }
-    for(let i=0; i<_max; i++) {
+
+    const _d = [];
+    let i = 0;
+    for(; i<d.length; i++) {
       _d.push([
-        d[i].x,
+        getX(d[i]),
         parseFloat(
-          Big(d[i].y/_y0)
+          Big(getY(d[i])/_y0)
            .times(100)
            .toFixed(2)
         )
@@ -86,34 +89,36 @@ const fn = {
   },
 
   findMinY: (data) => {
-    if (!_isArr(data) || data.length<1 ) {
-      return undefined;
+    if ( !(_isArr(data) && data.length) ) {
+      return void 0;
     }
     let minY = Number.POSITIVE_INFINITY;
     const _fn = isNumber(data[0].y)
       ? (p, min) => isNumber(p.y) && p.y<min ? p.y : min
       : (arr, min) => isNumber(arr[1]) && arr[1]<min ? arr[1] : min;
-    for (let i=0, max=data.length; i<max; i++){
+    let i = 0;
+    for (; i<data.length; i++){
       minY = _fn(data[i], minY)
     }
     return minY !== Number.POSITIVE_INFINITY
       ? mathFn.toFixedNumber(minY)
-      : undefined;
+      : void 0;
   },
   findMaxY: (data) => {
-    if (!_isArr(data) || data.length<1 ) {
-      return undefined;
+    if (! (_isArr(data) && data.length) ) {
+      return void 0;
     }
     let maxY = Number.NEGATIVE_INFINITY;
     const _fn = isNumber(data[0].y)
       ? (p, max) => isNumber(p.y) && p.y>max ? p.y : max
       : (arr, max) => isNumber(arr[1]) && arr[1]>max ? arr[1] : max;
-    for (let i=0, max=data.length; i<max; i++){
+    let i = 0;
+    for (; i<data.length; i++){
       maxY = _fn(data[i], maxY)
     }
     return maxY !== Number.NEGATIVE_INFINITY
       ? mathFn.toFixedNumber(maxY)
-      : undefined;
+      : void 0;
   },
 
   filterTrimZero: (data) => {
@@ -137,17 +142,21 @@ const fn = {
     if ( !isPointArr(data) ) {
       return [];
     }
-    let _sum = Big(0);
-    for (const p of data) {
-      if (isNumber(p[1])) {
-        _sum = _sum.add(p[1])
+
+    let _sum = Big(0)
+    , _numberOfPoints = 0, i = 0, _p;
+    for (;i<data.length;i++) {
+      _p = data[i]
+      if (isNumber(_p[1])) {
+        _sum = _sum.add(_p[1])
+        _numberOfPoints++
       }
     }
-    const _max = data.length - 1;
-    const _avg = parseInt(_sum.div(_max).toFixed(0), 10);
+    const _maxIndex = data.length - 1
+    , _avg = parseInt(_sum.div(_numberOfPoints).toFixed(0), 10);
     return [
       [data[0][0], _avg],
-      [data[_max][0], _avg]
+      [data[_maxIndex][0], _avg]
     ];
   },
 
@@ -155,6 +164,7 @@ const fn = {
     if ( !isPointArr(data) ) {
       return [];
     }
+
     const _d = data
       .map(arrP => arrP[1])
       .sort((a, b) => a-b)

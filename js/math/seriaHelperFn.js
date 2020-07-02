@@ -52,9 +52,10 @@ var seriaHelperFn = {
     return;
   },
   getZeroCountFromStart: function getZeroCountFromStart(arr, getY) {
-    var _toIndex = -1;
+    var _toIndex = -1,
+        i = 0;
 
-    for (var i = 0; i < arr.length; i++) {
+    for (; i < arr.length; i++) {
       var _y = getY(arr[i]);
 
       if (_y === 0 || _y === null) {
