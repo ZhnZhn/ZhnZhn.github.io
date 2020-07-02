@@ -1,1 +1,37 @@
-{"version":3,"sources":["../../src/math/sma.js"],"names":["isNumber","fns","crPointGetter","_crPeriod","period","plus","_delta","parseFloat","minus","toFixed","sma","data","dataSma","Array","isArray","length","_period","getX","getY","_data","filter","p","max","bSum","point","i","push","div"],"mappings":";;;;;;;AAAA;;AAEA;;IAEQA,Q,GAA4BC,yB,CAA5BD,Q;IAAUE,a,GAAkBD,yB,CAAlBC,a;;AAElB,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,MAAD,EAASC,IAAT,EAAkB;AAClC,MAAMC,MAAM,GAAGN,QAAQ,CAACK,IAAD,CAAR,GAAiB,IAAIA,IAArB,GAA4B,CAA3C;;AACA,SAAOE,UAAU,CACf,qBAAIH,MAAJ,EACEI,KADF,CACQF,MADR,EAEEG,OAFF,CAEU,CAFV,CADe,CAAjB;AAKD,CAPD;;AASA,IAAMC,GAAG,GAAG,SAANA,GAAM,CAACC,IAAD,EAAOP,MAAP,EAAiBC,IAAjB,EAA0B;AAAA,MAAnBD,MAAmB;AAAnBA,IAAAA,MAAmB,GAAZ,CAAY;AAAA;;AACpC,MAAMQ,OAAO,GAAG,EAAhB;;AACA,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcH,IAAd,CAAD,IAAwBA,IAAI,CAACI,MAAL,KAAgB,CAA5C,EAA+C;AAC7C,WAAOH,OAAP;AACD;;AAEK,MAAAI,OAAO,GAAGb,SAAS,CAACC,MAAD,EAASC,IAAT,CAAnB;AAAA,uBACaH,aAAa,CAACS,IAAD,CAD1B;AAAA,MACFM,IADE,kBACFA,IADE;AAAA,MACIC,IADJ,kBACIA,IADJ;AAAA,MAEJC,KAFI,GAEIR,IAAI,CAACS,MAAL,CAAY,UAAAC,CAAC;AAAA,WAAIrB,QAAQ,CAACkB,IAAI,CAACG,CAAD,CAAL,CAAZ;AAAA,GAAb,CAFJ;AAAA,MAGJC,GAHI,GAGEH,KAAK,CAACJ,MAHR;;AAIN,MAAIQ,IAAI,GAAG,qBAAI,KAAJ,CAAX;AAAA,MACEC,KADF;;AAEA,OAAK,IAAIC,CAAC,GAAC,CAAX,EAAcA,CAAC,GAACH,GAAhB,EAAqBG,CAAC,EAAtB,EAAyB;AACvBD,IAAAA,KAAK,GAAGL,KAAK,CAACM,CAAD,CAAb;;AACA,QAAIA,CAAC,GAACT,OAAN,EAAc;AACXO,MAAAA,IAAI,GAAGA,IAAI,CAAClB,IAAL,CAAUa,IAAI,CAACM,KAAD,CAAd,EAAuBhB,KAAvB,CAA6BU,IAAI,CAACC,KAAK,CAACM,CAAC,GAACrB,MAAH,CAAN,CAAjC,CAAP;AACAQ,MAAAA,OAAO,CAACc,IAAR,CAAa,CACXT,IAAI,CAACO,KAAD,CADO,EAEXjB,UAAU,CAACgB,IAAI,CAACI,GAAL,CAASvB,MAAT,EAAiBK,OAAjB,CAAyB,CAAzB,CAAD,CAFC,CAAb;AAIF,KAND,MAMO;AACLc,MAAAA,IAAI,GAAGA,IAAI,CAAClB,IAAL,CAAUa,IAAI,CAACM,KAAD,CAAd,CAAP;AACD;AACF;;AACD,SAAOZ,OAAP;AACD,CAzBD;;eA2BeF,G","sourcesContent":["import Big from 'big.js';\r\n\r\nimport fns from './seriaHelperFn'\r\n\r\nconst { isNumber, crPointGetter } = fns;\r\n\r\nconst _crPeriod = (period, plus) => {\r\n  const _delta = isNumber(plus) ? 1 - plus : 1;\r\n  return parseFloat(\r\n    Big(period)\r\n     .minus(_delta)\r\n     .toFixed(0)\r\n  );\r\n};\r\n\r\nconst sma = (data, period=1, plus) => {\r\n  const dataSma = [];\r\n  if (!Array.isArray(data) || data.length === 0) {\r\n    return dataSma;\r\n  }\r\n\r\n  const _period = _crPeriod(period, plus)\r\n  , { getX, getY } = crPointGetter(data)\r\n  , _data = data.filter(p => isNumber(getY(p)))\r\n  , max = _data.length;\r\n  let bSum = Big('0.0')\r\n  , point;\r\n  for (let i=0; i<max; i++){\r\n    point = _data[i]\r\n    if (i>_period){\r\n       bSum = bSum.plus(getY(point)).minus(getY(_data[i-period]));\r\n       dataSma.push([\r\n         getX(point),\r\n         parseFloat(bSum.div(period).toFixed(2))\r\n       ])\r\n    } else {\r\n      bSum = bSum.plus(getY(point));\r\n    }\r\n  }\r\n  return dataSma;\r\n};\r\n\r\nexport default sma\r\n"],"file":"sma.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/math/sma.js"
+ ],
+ "file": "../../src/math/sma.js",
+ "names": [
+  "isNumber",
+  "fns",
+  "crPointGetter",
+  "_isArr",
+  "Array",
+  "isArray",
+  "sma",
+  "data",
+  "period",
+  "dataSma",
+  "_period",
+  "parseInt",
+  "length",
+  "getX",
+  "getY",
+  "_data",
+  "filter",
+  "p",
+  "bSum",
+  "point",
+  "i",
+  "plus",
+  "minus",
+  "push",
+  "parseFloat",
+  "div",
+  "toFixed"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;IAEQA,Q,GAA4BC,yB,CAA5BD,Q;IAAUE,a,GAAkBD,yB,CAAlBC,a;AAElB,IAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;AAEA;;;;;;;;;;;AAWA,IAAMC,GAAG,GAAG,SAANA,GAAM,CAACC,IAAD,EAAOC,MAAP,EAAoB;AAAA,MAAbA,MAAa;AAAbA,IAAAA,MAAa,GAAN,CAAM;AAAA;;AAC9B,MAAMC,OAAO,GAAG,EAAhB;AAAA,MACEC,OAAO,GAAGC,QAAQ,CAACH,MAAD,EAAS,EAAT,CAAR,GAAuB,CADnC;;AAEA,MAAK,EAAEL,MAAM,CAACI,IAAD,CAAN,IAAgBP,QAAQ,CAACU,OAAD,CAAxB,IACGH,IAAI,CAACK,MADR,IAEGF,OAAO,GAAGH,IAAI,CAACK,MAFpB,CAAL,EAEkC;AAChC,WAAOH,OAAP;AACD;;AACD,MAAKC,OAAO,IAAE,CAAd,EAAiB;AACf,WAAOH,IAAP;AACD;;AAV6B,uBAYPL,aAAa,CAACK,IAAD,CAZN;AAAA,MAYtBM,IAZsB,kBAYtBA,IAZsB;AAAA,MAYhBC,IAZgB,kBAYhBA,IAZgB;AAAA,MAa5BC,KAb4B,GAapBR,IAAI,CAACS,MAAL,CAAY,UAAAC,CAAC;AAAA,WAAIjB,QAAQ,CAACc,IAAI,CAACG,CAAD,CAAL,CAAZ;AAAA,GAAb,CAboB;;AAc9B,MAAIC,IAAI,GAAG,qBAAI,KAAJ,CAAX;AAAA,MACEC,KADF;AAAA,MACSC,CAAC,GAAC,CADX;;AAEA,SAAOA,CAAC,GAACL,KAAK,CAACH,MAAf,EAAuBQ,CAAC,EAAxB,EAA2B;AACzBD,IAAAA,KAAK,GAAGJ,KAAK,CAACK,CAAD,CAAb;;AACA,QAAIA,CAAC,IAAEV,OAAP,EAAe;AACZQ,MAAAA,IAAI,GAAIE,CAAC,KAAKV,OAAP,GACHQ,IAAI,CAACG,IAAL,CAAUP,IAAI,CAACK,KAAD,CAAd,CADG,GAEHD,IAAI,CAACG,IAAL,CAAUP,IAAI,CAACK,KAAD,CAAd,EAAuBG,KAAvB,CAA6BR,IAAI,CAACC,KAAK,CAACK,CAAC,GAACZ,MAAH,CAAN,CAAjC,CAFJ;AAGAC,MAAAA,OAAO,CAACc,IAAR,CAAa,CACXV,IAAI,CAACM,KAAD,CADO,EAEXK,UAAU,CAACN,IAAI,CAACO,GAAL,CAASjB,MAAT,EAAiBkB,OAAjB,CAAyB,CAAzB,CAAD,CAFC,CAAb;AAIF,KARD,MAQO;AACLR,MAAAA,IAAI,GAAGA,IAAI,CAACG,IAAL,CAAUP,IAAI,CAACK,KAAD,CAAd,CAAP;AACD;AACF;;AACD,SAAOV,OAAP;AACD,CA/BD;;eAiCeH,G"
+}
