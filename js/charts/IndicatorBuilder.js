@@ -38,10 +38,9 @@ var IndicatorBuilder = {
   addSmaTo: function addSmaTo(chart, option) {
     var id = option.id,
         period = option.period,
-        plus = option.plus,
         parentId = chart.options.zhConfig.id,
         data = chart.series[0].data,
-        dataSma = sma(data, period, plus);
+        dataSma = sma(data, period);
 
     if (dataSma.length > 0) {
       return _addDataAsSeriaToChart(chart, {

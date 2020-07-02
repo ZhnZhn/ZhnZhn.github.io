@@ -9,7 +9,7 @@ const {
 } = ChartConfig;
 
 const _addDataAsSeriaToChart = (chart, option) => {
-  const seria = ChartConfig.crSeria(option);  
+  const seria = ChartConfig.crSeria(option);
   chart.addSeries(seria, true, true)
   return chart.options.colors[seria['_colorIndex']];
 };
@@ -27,10 +27,10 @@ const IndicatorBuilder = {
   },
 
   addSmaTo: (chart, option) => {
-    const { id, period, plus } = option
+    const { id, period } = option
         , parentId = chart.options.zhConfig.id
         , data = chart.series[0].data
-        , dataSma = sma(data, period, plus);
+        , dataSma = sma(data, period);
 
     if (dataSma.length>0){
       return _addDataAsSeriaToChart(chart, {

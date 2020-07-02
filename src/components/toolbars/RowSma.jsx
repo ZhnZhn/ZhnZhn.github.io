@@ -44,9 +44,7 @@ const RowSma = ({
       , id = _crId(period);
       if ( !_isInArrObjWithId(smaConfs, id)  ){
         const chart = getChart()
-        , color = addSmaTo(chart, {
-             id, period, isPlus: false
-          });
+        , color = addSmaTo(chart, { id, period });
         if (color){
           setSmaConfs([...smaConfs, { id, color }])
         }
@@ -60,7 +58,7 @@ const RowSma = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       <RowCaptionInput
         caption="SMA"
         forwardRef={_refPeriod}
@@ -71,7 +69,7 @@ const RowSma = ({
         configs={smaConfs}
         onRemove={_onRemoveSma}
       />
-    </React.Fragment>
+    </>
   );
 };
 

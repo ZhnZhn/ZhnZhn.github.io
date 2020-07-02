@@ -60,8 +60,7 @@ var RowSma = function RowSma(_ref) {
       var chart = getChart(),
           color = addSmaTo(chart, {
         id: id,
-        period: period,
-        isPlus: false
+        period: period
       });
 
       if (color) {
