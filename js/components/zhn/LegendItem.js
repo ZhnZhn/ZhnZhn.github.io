@@ -57,9 +57,7 @@ var LegendItem = function LegendItem(_ref2) {
       color = _ref3.color,
       name = _ref3.name,
       isVisible = _ref3.isVisible,
-      _useToggle = (0, _useToggle2["default"])(function () {
-    return isVisible;
-  }),
+      _useToggle = (0, _useToggle2["default"])(isVisible),
       is = _useToggle[0],
       toggleIs = _useToggle[1],
       _crStyles2 = _crStyles(is, color),

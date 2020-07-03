@@ -70,7 +70,7 @@ const OpenClose2 = ({
   isDraggable, option, onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop,
   children
 }) => {
-  const [isOpen, toggleIsOpen] = useToggle(()=>Boolean(isInitialOpen))
+  const [isOpen, toggleIsOpen] = useToggle(isInitialOpen)
   , _hKeyDown = useKeyEnter(toggleIsOpen)
   , _dragOption = isDraggable
       ? {

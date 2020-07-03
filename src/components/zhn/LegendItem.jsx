@@ -36,7 +36,7 @@ const _crStyles = (is, color) => {
 
 const LegendItem = ({ item, onClickItem }) => {
   const { color, name, isVisible } = item ?? {}
-  , [is, toggleIs] = useToggle(() => isVisible)
+  , [is, toggleIs] = useToggle(isVisible)
   , [ btStyle, circleStyle ] = _crStyles(is, color)
   , _hClick = () => {
       onClickItem(item);

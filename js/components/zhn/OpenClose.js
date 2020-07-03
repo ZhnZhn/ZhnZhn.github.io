@@ -89,9 +89,7 @@ var OpenClose = function OpenClose(_ref2) {
       childStyle = _ref2.childStyle,
       children = _ref2.children;
 
-  var _useToggle = useToggle(function () {
-    return !isClose;
-  }),
+  var _useToggle = useToggle(!isClose),
       isOpen = _useToggle[0],
       toggleIsOpen = _useToggle[1],
       _hKeyDown = useKeyEnter(toggleIsOpen),

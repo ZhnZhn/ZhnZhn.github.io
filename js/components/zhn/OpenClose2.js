@@ -92,9 +92,7 @@ var OpenClose2 = function OpenClose2(_ref2) {
       onDrop = _ref2.onDrop,
       children = _ref2.children;
 
-  var _useToggle = useToggle(function () {
-    return Boolean(isInitialOpen);
-  }),
+  var _useToggle = useToggle(isInitialOpen),
       isOpen = _useToggle[0],
       toggleIsOpen = _useToggle[1],
       _hKeyDown = useKeyEnter(toggleIsOpen),
