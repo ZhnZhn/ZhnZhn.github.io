@@ -88,6 +88,7 @@
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
+    "@testing-library/react-hooks": "^3.3.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "del": "^5.1.0",
