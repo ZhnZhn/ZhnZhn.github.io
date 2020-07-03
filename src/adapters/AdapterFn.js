@@ -12,6 +12,7 @@ import C from '../constants/Color'
 const {
   dt,
   fCompareBy,
+  fCompareByTwoProps,
   getC, getV,
   formatAllNumber
 } = ut;
@@ -44,14 +45,6 @@ const _isArr = Array.isArray;
 const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
     && isFinite(p[pn]);
-}
-
-const _compareByTwoProp = (propName1, propName2) => (a, b) => {
-  if (a[propName1] < b[propName1]) return -1;
-  else if (a[propName1] > b[propName1]) return 1;
-  else if (a[propName2] < b[propName2]) return -1;
-  else if (a[propName2] > a[propName2]) return 1;
-  else return 0;
 }
 
 const _getDate = point =>_isArr(point)
@@ -155,7 +148,7 @@ const AdapterFn = {
   compareByDate: fCompareBy(0),
   compareByY: fCompareBy('y'),
   compareByValue: fCompareBy('value'),
-  compareByValueId: _compareByTwoProp('value', 'id'),
+  compareByValueId: fCompareByTwoProps('value', 'id'),
 
   crValueMoving: ({
     bNowValue=Big('0.0'),
