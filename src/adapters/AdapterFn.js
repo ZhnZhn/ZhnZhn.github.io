@@ -9,7 +9,12 @@ import seriaFn from '../math/seriaFn'
 import { Direction } from '../constants/Type'
 import C from '../constants/Color'
 
-const { dt, getC, getV, formatAllNumber } = ut;
+const {
+  dt,
+  fCompareBy,
+  getC, getV,
+  formatAllNumber
+} = ut;
 const { findMinY, findMaxY } = seriaFn;
 
 const {
@@ -41,11 +46,6 @@ const _fIsNumber = (pn) => (p) => {
     && isFinite(p[pn]);
 }
 
-const _compareArrByIndex = index => (arrA, arrB) => {
-  if (arrA[index] < arrB[index]) return -1;
-  else if (arrA[index] === arrB[index]) return 0;
-  else return 1;
-}
 const _compareByTwoProp = (propName1, propName2) => (a, b) => {
   if (a[propName1] < b[propName1]) return -1;
   else if (a[propName1] > b[propName1]) return 1;
@@ -78,7 +78,7 @@ const _fToFloatOr = dfValue => str => {
 };
 
 const AdapterFn = {
-  ymdToUTC,  
+  ymdToUTC,
   ymdhmsToUTC,
   getFromDate,
 
@@ -152,9 +152,9 @@ const AdapterFn = {
   toFloatOrNull: _fToFloatOr(null),
   toFloatOrEmpty: _fToFloatOr(''),
 
-  compareByDate: _compareArrByIndex(0),
-  compareByY: _compareArrByIndex('y'),
-  compareByValue: _compareArrByIndex('value'),
+  compareByDate: fCompareBy(0),
+  compareByY: fCompareBy('y'),
+  compareByValue: fCompareBy('value'),
   compareByValueId: _compareByTwoProp('value', 'id'),
 
   crValueMoving: ({

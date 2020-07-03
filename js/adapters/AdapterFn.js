@@ -20,6 +20,7 @@ var _Type = require("../constants/Type");
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
 var dt = _ut["default"].dt,
+    fCompareBy = _ut["default"].fCompareBy,
     getC = _ut["default"].getC,
     getV = _ut["default"].getV,
     formatAllNumber = _ut["default"].formatAllNumber;
@@ -53,12 +54,6 @@ var _isArr = Array.isArray;
 var _fIsNumber = function _fIsNumber(pn) {
   return function (p) {
     return typeof p[pn] === 'number' && isFinite(p[pn]);
-  };
-};
-
-var _compareArrByIndex = function _compareArrByIndex(index) {
-  return function (arrA, arrB) {
-    if (arrA[index] < arrB[index]) return -1;else if (arrA[index] === arrB[index]) return 0;else return 1;
   };
 };
 
@@ -168,9 +163,9 @@ var AdapterFn = {
   isYNumber: _fIsNumber('y'),
   toFloatOrNull: _fToFloatOr(null),
   toFloatOrEmpty: _fToFloatOr(''),
-  compareByDate: _compareArrByIndex(0),
-  compareByY: _compareArrByIndex('y'),
-  compareByValue: _compareArrByIndex('value'),
+  compareByDate: fCompareBy(0),
+  compareByY: fCompareBy('y'),
+  compareByValue: fCompareBy('value'),
   compareByValueId: _compareByTwoProp('value', 'id'),
   crValueMoving: function crValueMoving(_ref3) {
     var _ref3$bNowValue = _ref3.bNowValue,
