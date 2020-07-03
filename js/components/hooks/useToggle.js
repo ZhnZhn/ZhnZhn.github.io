@@ -6,7 +6,9 @@ exports["default"] = void 0;
 var _react = require("react");
 
 var useToggle = function useToggle(initialValue) {
-  var _useState = (0, _react.useState)(initialValue),
+  var _useState = (0, _react.useState)(function () {
+    return !!initialValue;
+  }),
       is = _useState[0],
       setIs = _useState[1];
 
