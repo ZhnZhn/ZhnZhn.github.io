@@ -8,6 +8,7 @@ import seriaFn from '../math/seriaFn'
 
 import { Direction } from '../constants/Type'
 import C from '../constants/Color'
+import crPoint from './crPoint'
 
 const {
   dt,
@@ -40,8 +41,10 @@ const ITEM_CONF_PROP_NAMES = [
  'seriaType'
 ];
 
-const _isNaN = Number && Number.isNaN || isNaN;
-const _isArr = Array.isArray;
+const _isNaN = Number && Number.isNaN || isNaN
+, _isArr = Array.isArray
+, _isNumber = n => typeof n === 'number'
+    && (n - n) === 0;
 const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
     && isFinite(p[pn]);
@@ -53,15 +56,13 @@ const _getDate = point =>_isArr(point)
 
 const _getValue = (point) => {
   if (_isArr(point)){
-    return point[1] != null
+    return _isNumber(point[1])
        ? point[1]
        : '0.0';
   } else {
-    return point
-      && point.y != null
-      && !_isNaN(point.y)
-        ? point.y
-        : '0.0';
+    return point && _isNumber(point.y)
+      ? point.y
+      : '0.0';
   }
 }
 
@@ -71,56 +72,15 @@ const _fToFloatOr = dfValue => str => {
 };
 
 const AdapterFn = {
+  ...crPoint,
+
   ymdToUTC,
   ymdhmsToUTC,
   getFromDate,
 
   getCaption: getC,
   getValue: getV,
-
-  volumeColumnPoint({ date, open, close, volume, option }) {
-    let _color;
-    if (open && close > open) {
-      _color = C.GREEN
-    } else if (open && close<open) {
-      _color = C.RED
-    } else {
-      _color = C.GRAY
-    }
-
-    return Object.assign({
-      x: date, y: volume, color: _color,
-      _open: open, _close: close
-    }, option);
-  },
-
-  athPoint({ date, prevClose, open }) {
-    const _bDelta = (open && prevClose)
-             ? Big(prevClose).minus(open)
-             : Big('0.0')
-        , _bPercent = (prevClose)
-             ? _bDelta.times(100).div(prevClose).abs().toFixed(2)
-             : Big('0.0');
-
-    let _color;
-    if (_bDelta.gt(0.0)){
-      _color = C.RED;
-    }
-    else if (!_bDelta.gte(0.0)){
-      _color = C.GREEN;
-    } else {
-      _color = (open) ? C.GRAY : C.WHITE;
-    }
-
-    return {
-      x : date,
-      y : parseFloat(_bPercent),
-      close : prevClose,
-      open : open ? open : 'Unknown',
-      color : _color
-    };
-  },
-
+    
   legendItem: (index, color, name, is=false) => ({
     index, color, name,
     isVisible: is
@@ -138,9 +98,8 @@ const AdapterFn = {
   roundBy: mathFn.roundBy,
   numberFormat: formatAllNumber,
 
-  isNumberOrNull: v => (typeof v === 'number' && !isNaN(v))
-     || v === null
-  ,
+  isNumberOrNull: v => _isNumber(v) || v === null,
+
   isYNumber: _fIsNumber('y'),
   toFloatOrNull: _fToFloatOr(null),
   toFloatOrEmpty: _fToFloatOr(''),

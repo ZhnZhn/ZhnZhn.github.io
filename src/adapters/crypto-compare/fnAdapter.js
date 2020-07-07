@@ -4,7 +4,7 @@ import AdapterFn from '../AdapterFn'
 const {
   getValue,
   valueMoving,
-  volumeColumnPoint,
+  crVolumePoint,
   roundBy,
   crSeria
 } = AdapterFn;
@@ -40,7 +40,7 @@ const _addPointTo = (arr, d, value) => {
 const _addColumnPointTo = (arr, d, p, volume) => {
   if (_isNumber(volume)){
     arr.push(
-      volumeColumnPoint({
+      crVolumePoint({
          date: d,
          open: p.open,
          close: p.close,

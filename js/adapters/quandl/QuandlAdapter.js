@@ -158,7 +158,7 @@ var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
       _open = open ? point[open] : undefined;
 
   dataVolume.push([dateUTC, point[volume]]);
-  dataVolumeColumn.push(_AdapterFn["default"].volumeColumnPoint({
+  dataVolumeColumn.push(_AdapterFn["default"].crVolumePoint({
     open: _open,
     close: point[close],
     date: dateUTC,
@@ -182,9 +182,9 @@ var _fnAddATH = function _fnAddATH(optionIndex, result) {
 
   if (len > 1) {
     var _prevPoint = seria[len - 2];
-    dataATH.push(_AdapterFn["default"].athPoint({
+    dataATH.push(_AdapterFn["default"].crAthPoint({
       date: dateUTC,
-      prevClose: _prevPoint[1],
+      close: _prevPoint[1],
       open: point[open]
     }));
   }

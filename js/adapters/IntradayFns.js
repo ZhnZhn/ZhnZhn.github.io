@@ -10,7 +10,7 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
 var ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
-    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint;
+    crVolumePoint = _AdapterFn["default"].crVolumePoint;
 var C = {
   TIME_START_DAY: '09:30:00',
   TIME_CLOSE_DAY: '16:00:00',
@@ -84,7 +84,7 @@ var IntradayFns = {
       dL.push([_dateMs, _low]);
       dO.push([_dateMs, _open]);
       dVolume.push([_dateMs, _volume]);
-      dColumn.push(volumeColumnPoint({
+      dColumn.push(crVolumePoint({
         open: _open,
         close: _closeV,
         volume: _volume,

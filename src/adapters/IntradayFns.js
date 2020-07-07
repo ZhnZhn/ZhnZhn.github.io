@@ -1,6 +1,6 @@
 import AdapterFn from './AdapterFn'
 
-const { ymdhmsToUTC, volumeColumnPoint } = AdapterFn;
+const { ymdhmsToUTC, crVolumePoint } = AdapterFn;
 
 const C = {
   TIME_START_DAY: '09:30:00',
@@ -66,7 +66,7 @@ const IntradayFns = {
 
       dVolume.push([_dateMs, _volume])
       dColumn.push(
-        volumeColumnPoint({
+        crVolumePoint({
            open: _open,
            close: _closeV,
            volume: _volume,

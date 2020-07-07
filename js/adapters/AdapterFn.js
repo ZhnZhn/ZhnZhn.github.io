@@ -19,6 +19,8 @@ var _Type = require("../constants/Type");
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
+var _crPoint = _interopRequireDefault(require("./crPoint"));
+
 var dt = _ut["default"].dt,
     fCompareBy = _ut["default"].fCompareBy,
     fCompareByTwoProps = _ut["default"].fCompareByTwoProps,
@@ -48,9 +50,11 @@ var HP_MONTH = {
 };
 var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType'];
 
-var _isNaN = Number && Number.isNaN || isNaN;
-
-var _isArr = Array.isArray;
+var _isNaN = Number && Number.isNaN || isNaN,
+    _isArr = Array.isArray,
+    _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
+};
 
 var _fIsNumber = function _fIsNumber(pn) {
   return function (p) {
@@ -64,9 +68,9 @@ var _getDate = function _getDate(point) {
 
 var _getValue = function _getValue(point) {
   if (_isArr(point)) {
-    return point[1] != null ? point[1] : '0.0';
+    return _isNumber(point[1]) ? point[1] : '0.0';
   } else {
-    return point && point.y != null && !_isNaN(point.y) ? point.y : '0.0';
+    return point && _isNumber(point.y) ? point.y : '0.0';
   }
 };
 
@@ -78,63 +82,12 @@ var _fToFloatOr = function _fToFloatOr(dfValue) {
   };
 };
 
-var AdapterFn = {
+var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
   ymdToUTC: ymdToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
   getFromDate: getFromDate,
   getCaption: getC,
   getValue: getV,
-  volumeColumnPoint: function volumeColumnPoint(_ref) {
-    var date = _ref.date,
-        open = _ref.open,
-        close = _ref.close,
-        volume = _ref.volume,
-        option = _ref.option;
-
-    var _color;
-
-    if (open && close > open) {
-      _color = _Color["default"].GREEN;
-    } else if (open && close < open) {
-      _color = _Color["default"].RED;
-    } else {
-      _color = _Color["default"].GRAY;
-    }
-
-    return Object.assign({
-      x: date,
-      y: volume,
-      color: _color,
-      _open: open,
-      _close: close
-    }, option);
-  },
-  athPoint: function athPoint(_ref2) {
-    var date = _ref2.date,
-        prevClose = _ref2.prevClose,
-        open = _ref2.open;
-
-    var _bDelta = open && prevClose ? (0, _big["default"])(prevClose).minus(open) : (0, _big["default"])('0.0'),
-        _bPercent = prevClose ? _bDelta.times(100).div(prevClose).abs().toFixed(2) : (0, _big["default"])('0.0');
-
-    var _color;
-
-    if (_bDelta.gt(0.0)) {
-      _color = _Color["default"].RED;
-    } else if (!_bDelta.gte(0.0)) {
-      _color = _Color["default"].GREEN;
-    } else {
-      _color = open ? _Color["default"].GRAY : _Color["default"].WHITE;
-    }
-
-    return {
-      x: date,
-      y: parseFloat(_bPercent),
-      close: prevClose,
-      open: open ? open : 'Unknown',
-      color: _color
-    };
-  },
   legendItem: function legendItem(index, color, name, is) {
     if (is === void 0) {
       is = false;
@@ -153,7 +106,7 @@ var AdapterFn = {
   roundBy: _mathFn["default"].roundBy,
   numberFormat: formatAllNumber,
   isNumberOrNull: function isNumberOrNull(v) {
-    return typeof v === 'number' && !isNaN(v) || v === null;
+    return _isNumber(v) || v === null;
   },
   isYNumber: _fIsNumber('y'),
   toFloatOrNull: _fToFloatOr(null),
@@ -162,12 +115,12 @@ var AdapterFn = {
   compareByY: fCompareBy('y'),
   compareByValue: fCompareBy('value'),
   compareByValueId: fCompareByTwoProps('value', 'id'),
-  crValueMoving: function crValueMoving(_ref3) {
-    var _ref3$bNowValue = _ref3.bNowValue,
-        bNowValue = _ref3$bNowValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bNowValue,
-        _ref3$bPrevValue = _ref3.bPrevValue,
-        bPrevValue = _ref3$bPrevValue === void 0 ? (0, _big["default"])('0.0') : _ref3$bPrevValue,
-        dfR = _ref3.dfR;
+  crValueMoving: function crValueMoving(_ref) {
+    var _ref$bNowValue = _ref.bNowValue,
+        bNowValue = _ref$bNowValue === void 0 ? (0, _big["default"])('0.0') : _ref$bNowValue,
+        _ref$bPrevValue = _ref.bPrevValue,
+        bPrevValue = _ref$bPrevValue === void 0 ? (0, _big["default"])('0.0') : _ref$bPrevValue,
+        dfR = _ref.dfR;
     return _mathFn["default"].crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
@@ -230,11 +183,11 @@ var AdapterFn = {
       x: _getDate(_p)
     };
   },
-  crSeria: function crSeria(_ref4) {
-    var adapter = _ref4.adapter,
-        json = _ref4.json,
-        option = _ref4.option,
-        type = _ref4.type;
+  crSeria: function crSeria(_ref2) {
+    var adapter = _ref2.adapter,
+        json = _ref2.json,
+        option = _ref2.option,
+        type = _ref2.type;
 
     var _adapter$toConfig = adapter.toConfig(json, option),
         config = _adapter$toConfig.config,
@@ -280,7 +233,7 @@ var AdapterFn = {
   crItemLink: function crItemLink(caption, itemUrl) {
     return "<p>\n    <a href=\"" + itemUrl + "\" style=\"padding-top: 4px;\">" + caption + "</a>\n  </p>";
   }
-};
+});
 var _default = AdapterFn;
 exports["default"] = _default;
 //# sourceMappingURL=AdapterFn.js.map

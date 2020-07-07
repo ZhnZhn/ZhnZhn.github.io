@@ -2,7 +2,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
   ymdToUTC,
-  volumeColumnPoint,
+  crVolumePoint,
   valueMoving,
   crSeria,
   getValue,
@@ -48,7 +48,7 @@ const fnAdapter = {
         data.push([ _date, close ])
         dVolume.push([ _date, volume ])
         dColumn.push(
-          volumeColumnPoint({
+          crVolumePoint({
              date: _date,
              open, close, volume,
              option: {

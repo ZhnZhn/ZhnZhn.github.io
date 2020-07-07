@@ -9,7 +9,7 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var getValue = _AdapterFn["default"].getValue,
     valueMoving = _AdapterFn["default"].valueMoving,
-    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
+    crVolumePoint = _AdapterFn["default"].crVolumePoint,
     roundBy = _AdapterFn["default"].roundBy,
     crSeria = _AdapterFn["default"].crSeria;
 
@@ -54,7 +54,7 @@ var _addPointTo = function _addPointTo(arr, d, value) {
 
 var _addColumnPointTo = function _addColumnPointTo(arr, d, p, volume) {
   if (_isNumber(volume)) {
-    arr.push(volumeColumnPoint({
+    arr.push(crVolumePoint({
       date: d,
       open: p.open,
       close: p.close,

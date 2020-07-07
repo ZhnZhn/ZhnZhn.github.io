@@ -12,7 +12,7 @@ import fnAdapter from './fnAdapter'
 const {
    ymdToUTC,
    ymdhmsToUTC,
-   volumeColumnPoint,
+   crVolumePoint,
    crSeria
 } = AdapterFn;
 const { crMarkerColor, crDataDaily } = IntradayFns
@@ -108,7 +108,7 @@ const _crSeriaData = (objValues, option) => {
 
       dVolume.push([_dateMs, _volume])
       dColumn.push(
-          volumeColumnPoint({
+          crVolumePoint({
              open: _open,
              close: _closeV,
              volume: _volume,

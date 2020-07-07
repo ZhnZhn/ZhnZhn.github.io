@@ -12,8 +12,8 @@ var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runt
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
-    athPoint = _AdapterFn["default"].athPoint;
+    crVolumePoint = _AdapterFn["default"].crVolumePoint,
+    crAthPoint = _AdapterFn["default"].crAthPoint;
 
 var _isUndef = function _isUndef(v) {
   return typeof v === 'undefined';
@@ -69,7 +69,7 @@ var AdapterStockFn = {
         dataHigh.push([_date, high]);
         dataLow.push([_date, low]);
         dataVolume.push([_date, volume]);
-        dataVolumeColumn.push(volumeColumnPoint({
+        dataVolumeColumn.push(crVolumePoint({
           open: open,
           close: close,
           volume: volume,
@@ -80,21 +80,15 @@ var AdapterStockFn = {
           }
         }));
         dataMfi.push([date, close, high, low, close, volume]);
-
-        if (!_isUndef(_prevClose)) {
-          dataATH.push(athPoint({
-            date: _date,
-            prevClose: _prevClose,
-            open: open
-          }));
-        } else {
-          dataATH.push(athPoint({
-            date: _date,
-            prevClose: close,
-            open: close
-          }));
-        }
-
+        dataATH.push(!_isUndef(_prevClose) ? crAthPoint({
+          date: _date,
+          close: _prevClose,
+          open: open
+        }) : crAthPoint({
+          date: _date,
+          close: close,
+          open: close
+        }));
         _prevClose = close;
       }
     });

@@ -2,8 +2,8 @@ import AdapterFn from './AdapterFn'
 
 const {
   ymdToUTC,
-  volumeColumnPoint,
-  athPoint
+  crVolumePoint,
+  crAthPoint
 } = AdapterFn;
 
 const _isUndef = v => typeof v === 'undefined';
@@ -43,32 +43,27 @@ const AdapterStockFn = {
         dataLow.push([_date, low])
         dataVolume.push([_date, volume])
         dataVolumeColumn.push(
-            volumeColumnPoint({
+            crVolumePoint({
                open, close, volume, date: _date,
                option: { _high: high, _low: low }
             })
         )
         dataMfi.push([date, close, high, low, close, volume])
-        if (!_isUndef(_prevClose)){
-          dataATH.push(
-             athPoint({
-               date: _date,
-               prevClose: _prevClose,
-               open
-             })
-          )
-        } else {
-          dataATH.push(
-             athPoint({
-               date: _date,
-               prevClose: close,
-               open: close
-             })
-          )
-        }
+        dataATH.push(!_isUndef(_prevClose)
+          ? crAthPoint({
+             date: _date,
+             close: _prevClose,
+             open
+            })
+          : crAthPoint({
+             date: _date,
+             close: close,
+             open: close
+            })
+        )
         _prevClose = close
        }
-    })    
+    })
     return {
       data,
       minClose, maxClose,

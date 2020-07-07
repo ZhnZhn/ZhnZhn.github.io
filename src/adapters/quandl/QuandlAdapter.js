@@ -112,7 +112,7 @@ const _fnAddVolume = function(optionIndex, result){
       , _open = (open) ? point[open] : undefined;
 
   dataVolume.push([dateUTC, point[volume]]);
-  dataVolumeColumn.push( AdapterFn.volumeColumnPoint({
+  dataVolumeColumn.push( AdapterFn.crVolumePoint({
     open: _open, close: point[close], date: dateUTC, volume: point[volume],
     option: {_low: point[low], _high: point[high]},
   }))
@@ -127,8 +127,10 @@ const _fnAddATH = function(optionIndex, result){
 
   if (len>1) {
     const _prevPoint = seria[len-2];
-    dataATH.push(AdapterFn.athPoint({
-      date: dateUTC, prevClose: _prevPoint[1], open: point[open]
+    dataATH.push(AdapterFn.crAthPoint({
+      date: dateUTC,
+      close: _prevPoint[1], 
+      open: point[open]
     }))
   }
 
@@ -515,7 +517,7 @@ const _crSeriaData = (data, yIndex) => {
 const _toSeria = (json, option) => {
   const { value:chartId, parentId } = option
   , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
-  , data = _crSeriaData(getData(json), yPointIndex);  
+  , data = _crSeriaData(getData(json), yPointIndex);
   return ChartConfig.crSeria({
       zhSeriaId: parentId + '_' + chartId,
       zhValueText: chartId.substring(0,12),

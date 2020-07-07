@@ -23,7 +23,7 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
-    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
+    crVolumePoint = _AdapterFn["default"].crVolumePoint,
     crSeria = _AdapterFn["default"].crSeria;
 var crMarkerColor = _IntradayFns["default"].crMarkerColor,
     crDataDaily = _IntradayFns["default"].crDataDaily;
@@ -126,7 +126,7 @@ var _crSeriaData = function _crSeriaData(objValues, option) {
       dL.push([_dateMs, _low]);
       dO.push([_dateMs, _open]);
       dVolume.push([_dateMs, _volume]);
-      dColumn.push(volumeColumnPoint({
+      dColumn.push(crVolumePoint({
         open: _open,
         close: _closeV,
         volume: _volume,

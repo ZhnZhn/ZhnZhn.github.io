@@ -8,7 +8,7 @@ exports["default"] = void 0;
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    volumeColumnPoint = _AdapterFn["default"].volumeColumnPoint,
+    crVolumePoint = _AdapterFn["default"].crVolumePoint,
     valueMoving = _AdapterFn["default"].valueMoving,
     crSeria = _AdapterFn["default"].crSeria,
     getValue = _AdapterFn["default"].getValue,
@@ -57,7 +57,7 @@ var fnAdapter = {
       if (_date) {
         data.push([_date, close]);
         dVolume.push([_date, volume]);
-        dColumn.push(volumeColumnPoint({
+        dColumn.push(crVolumePoint({
           date: _date,
           open: open,
           close: close,
