@@ -12,8 +12,7 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption,
-    crSeria = _fnAdapter["default"].crSeria;
+    crConfigOption = _fnAdapter["default"].crConfigOption;
 var BeaAdapter = {
   toConfig: function toConfig(json, option) {
     var Results = json.BEAAPI.Results,
@@ -33,7 +32,7 @@ var BeaAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return crSeria({
+    return _ConfigBuilder["default"].crSeria({
       adapter: BeaAdapter,
       json: json,
       option: option

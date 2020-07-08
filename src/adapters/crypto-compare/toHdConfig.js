@@ -4,8 +4,7 @@ import fnAdapter from './fnAdapter'
 
 const {
   crData,
-  crConfigOption,
-  crSeria
+  crConfigOption  
  } = fnAdapter;
 
 const DF_PAIR = 'USD';
@@ -62,7 +61,7 @@ const toHdConfig = {
   },
 
   toSeries: (json, option) => {
-    return crSeria({
+    return Builder.crSeria({
       adapter: toHdConfig,
       json, option
     })

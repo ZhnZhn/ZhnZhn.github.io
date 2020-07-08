@@ -4,7 +4,6 @@ const {
   ymdToUTC,
   crVolumePoint,
   valueMoving,
-  crSeria,
   getValue,
   joinBy,
   toUpperCaseFirst
@@ -25,8 +24,7 @@ const _crInfo = ({ title }) => ({
   name: title
 });
 
-const fnAdapter = {
-  crSeria,
+const fnAdapter = {  
   getValue,
   joinBy,
   toUpperCaseFirst,

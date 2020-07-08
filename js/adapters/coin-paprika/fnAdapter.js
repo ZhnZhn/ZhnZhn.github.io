@@ -10,7 +10,6 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
     valueMoving = _AdapterFn["default"].valueMoving,
-    crSeria = _AdapterFn["default"].crSeria,
     getValue = _AdapterFn["default"].getValue,
     joinBy = _AdapterFn["default"].joinBy,
     toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst;
@@ -35,7 +34,6 @@ var _crInfo = function _crInfo(_ref2) {
 };
 
 var fnAdapter = {
-  crSeria: crSeria,
   getValue: getValue,
   joinBy: joinBy,
   toUpperCaseFirst: toUpperCaseFirst,

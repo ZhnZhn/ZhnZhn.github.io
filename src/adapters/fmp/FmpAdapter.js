@@ -5,8 +5,7 @@ import fnAdapter from './fnAdapter'
 const {
   crCaption,
   crData,
-  crConfigOption,
-  crSeria
+  crConfigOption
 } = fnAdapter;
 
 const FmpAdapter = {
@@ -40,8 +39,8 @@ const FmpAdapter = {
     return { config };
   },
 
-  toSeries(json, option){    
-    return crSeria({
+  toSeries(json, option){
+    return Builder.crSeria({
       adapter: FmpAdapter,
       json, option
     });

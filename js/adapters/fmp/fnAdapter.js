@@ -19,8 +19,7 @@ var crError = _AdapterFn["default"].crError,
     crItemLink = _AdapterFn["default"].crItemLink,
     compareByDate = _AdapterFn["default"].compareByDate,
     crItemConf = _AdapterFn["default"].crItemConf,
-    crValueConf = _AdapterFn["default"].crValueConf,
-    crSeria = _AdapterFn["default"].crSeria;
+    crValueConf = _AdapterFn["default"].crValueConf;
 
 var _isNaN = Number.isNaN || isNaN;
 
@@ -80,7 +79,6 @@ var fnAdapter = {
   getFromDate: getFromDate,
   getCaption: getCaption,
   getValue: getValue,
-  crSeria: crSeria,
   crData: function crData(metrics, propName) {
     var _data = [];
     metrics.forEach(function (item) {

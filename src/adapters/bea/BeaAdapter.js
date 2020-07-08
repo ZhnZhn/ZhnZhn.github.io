@@ -4,8 +4,7 @@ import fnAdapter from './fnAdapter';
 
 const {
   crData,
-  crConfigOption,
-  crSeria
+  crConfigOption  
 } = fnAdapter;
 
 const BeaAdapter = {
@@ -29,7 +28,7 @@ const BeaAdapter = {
   },
 
   toSeries(json, option){
-     return crSeria({
+     return Builder.crSeria({
        adapter: BeaAdapter,
        json, option
      })

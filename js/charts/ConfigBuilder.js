@@ -97,6 +97,25 @@ var ConfigBuilder = function ConfigBuilder(config) {
   this.config = config;
 };
 
+ConfigBuilder.crSeria = function (_ref) {
+  var adapter = _ref.adapter,
+      json = _ref.json,
+      option = _ref.option,
+      type = _ref.type;
+
+  var _adapter$toConfig = adapter.toConfig(json, option),
+      config = _adapter$toConfig.config,
+      _seria = config.series[0];
+
+  _seria.minY = findMinY(_seria.data);
+
+  if (type) {
+    _seria.type = type;
+  }
+
+  return _seria;
+};
+
 ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["default"])({}, _SeriaBuilder["default"], {
   init: function init(config) {
     if (config === void 0) {
@@ -138,16 +157,16 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       data: dataATH
     }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
   },
-  intradayConfig: function intradayConfig(_ref) {
-    var id = _ref.id,
-        data = _ref.data,
-        dH = _ref.dH,
-        dL = _ref.dL,
-        dO = _ref.dO,
-        minClose = _ref.minClose,
-        maxClose = _ref.maxClose,
-        dVolume = _ref.dVolume,
-        dColumn = _ref.dColumn;
+  intradayConfig: function intradayConfig(_ref2) {
+    var id = _ref2.id,
+        data = _ref2.data,
+        dH = _ref2.dH,
+        dL = _ref2.dL,
+        dO = _ref2.dO,
+        minClose = _ref2.minClose,
+        maxClose = _ref2.maxClose,
+        dVolume = _ref2.dVolume,
+        dColumn = _ref2.dColumn;
     return this.areaConfig().add('chart', {
       spacingTop: 25,
       marginBottom: 20
@@ -395,10 +414,10 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   */
-  addDividend: function addDividend(_ref2) {
-    var dataDividend = _ref2.dataDividend,
-        minClose = _ref2.minClose,
-        maxClose = _ref2.maxClose;
+  addDividend: function addDividend(_ref3) {
+    var dataDividend = _ref3.dataDividend,
+        minClose = _ref3.minClose,
+        maxClose = _ref3.maxClose;
 
     if (dataDividend.length > 0) {
       setYToPoints(dataDividend, calcMinY({

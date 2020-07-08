@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/adapters/bea/BeaAdapter.js"],"names":["crData","fnAdapter","crConfigOption","crSeria","BeaAdapter","toConfig","json","option","Results","BEAAPI","data","seria","splineSeria","toSeria","title","dfTitle","config","area2Config","addMinMax","addSeries","add","toSeries","adapter"],"mappings":";;;;;;;;;AAAA;;AAEA;;IAGEA,M,GAGEC,qB,CAHFD,M;IACAE,c,GAEED,qB,CAFFC,c;IACAC,O,GACEF,qB,CADFE,O;AAGF,IAAMC,UAAU,GAAG;AACjBC,EAAAA,QADiB,oBACRC,IADQ,EACFC,MADE,EACK;AACd,QAAAC,OAAO,GAAGF,IAAI,CAACG,MAAL,CAAYD,OAAtB;AAAA,QACAE,IADA,GACOV,MAAM,CAACQ,OAAD,EAAUD,MAAV,CADb;AAAA,QAEAI,KAFA,GAEQ,iCACLC,WADK,CACO;AAAEF,MAAAA,IAAI,EAAJA;AAAF,KADP,EAELG,OAFK,EAFR;AAAA,QAKEC,KALF,GAKqBP,MALrB,CAKEO,KALF;AAAA,QAKSC,OALT,GAKqBR,MALrB,CAKSQ,OALT;AAAA,QAMAC,MANA,GAMS,iCACPC,WADO,CACKF,OADL,EACcD,KADd,EAEPI,SAFO,CAEGR,IAFH,EAESH,MAFT,EAGPY,SAHO,CAGGR,KAHH,EAIPS,GAJO,+BAKHlB,cAAc,CAAC;AAAEK,MAAAA,MAAM,EAANA,MAAF;AAAUG,MAAAA,IAAI,EAAJA,IAAV;AAAgBF,MAAAA,OAAO,EAAPA;AAAhB,KAAD,CALX,GAOPH,QAPO,EANT;AAeN,WAAO;AAAEW,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAlBgB;AAoBjBK,EAAAA,QApBiB,oBAoBRf,IApBQ,EAoBFC,MApBE,EAoBK;AACnB,WAAOJ,OAAO,CAAC;AACbmB,MAAAA,OAAO,EAAElB,UADI;AAEbE,MAAAA,IAAI,EAAJA,IAFa;AAEPC,MAAAA,MAAM,EAANA;AAFO,KAAD,CAAd;AAIF;AAzBgB,CAAnB;eA6BeH,U","sourcesContent":["import Builder from '../../charts/ConfigBuilder';\r\n\r\nimport fnAdapter from './fnAdapter';\r\n\r\nconst {\r\n  crData,\r\n  crConfigOption,\r\n  crSeria\r\n} = fnAdapter;\r\n\r\nconst BeaAdapter = {\r\n  toConfig(json, option){\r\n    const Results = json.BEAAPI.Results\r\n        , data = crData(Results, option)\r\n        , seria = Builder()\r\n            .splineSeria({ data })\r\n            .toSeria()\r\n        , { title, dfTitle } = option\r\n        , config = Builder()\r\n           .area2Config(dfTitle, title)\r\n           .addMinMax(data, option)\r\n           .addSeries(seria)\r\n           .add({\r\n             ...crConfigOption({ option, data, Results })\r\n           })\r\n           .toConfig();\r\n\r\n    return { config };\r\n  },\r\n\r\n  toSeries(json, option){\r\n     return crSeria({\r\n       adapter: BeaAdapter,\r\n       json, option\r\n     })\r\n  }\r\n\r\n}\r\n\r\nexport default BeaAdapter\r\n"],"file":"BeaAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bea/BeaAdapter.js"
+ ],
+ "file": "../../../src/adapters/bea/BeaAdapter.js",
+ "names": [
+  "crData",
+  "fnAdapter",
+  "crConfigOption",
+  "BeaAdapter",
+  "toConfig",
+  "json",
+  "option",
+  "Results",
+  "BEAAPI",
+  "data",
+  "seria",
+  "splineSeria",
+  "toSeria",
+  "title",
+  "dfTitle",
+  "config",
+  "area2Config",
+  "addMinMax",
+  "addSeries",
+  "add",
+  "toSeries",
+  "Builder",
+  "crSeria",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;IAGEA,M,GAEEC,qB,CAFFD,M;IACAE,c,GACED,qB,CADFC,c;AAGF,IAAMC,UAAU,GAAG;AACjBC,EAAAA,QADiB,oBACRC,IADQ,EACFC,MADE,EACK;AACd,QAAAC,OAAO,GAAGF,IAAI,CAACG,MAAL,CAAYD,OAAtB;AAAA,QACAE,IADA,GACOT,MAAM,CAACO,OAAD,EAAUD,MAAV,CADb;AAAA,QAEAI,KAFA,GAEQ,iCACLC,WADK,CACO;AAAEF,MAAAA,IAAI,EAAJA;AAAF,KADP,EAELG,OAFK,EAFR;AAAA,QAKEC,KALF,GAKqBP,MALrB,CAKEO,KALF;AAAA,QAKSC,OALT,GAKqBR,MALrB,CAKSQ,OALT;AAAA,QAMAC,MANA,GAMS,iCACPC,WADO,CACKF,OADL,EACcD,KADd,EAEPI,SAFO,CAEGR,IAFH,EAESH,MAFT,EAGPY,SAHO,CAGGR,KAHH,EAIPS,GAJO,+BAKHjB,cAAc,CAAC;AAAEI,MAAAA,MAAM,EAANA,MAAF;AAAUG,MAAAA,IAAI,EAAJA,IAAV;AAAgBF,MAAAA,OAAO,EAAPA;AAAhB,KAAD,CALX,GAOPH,QAPO,EANT;AAeN,WAAO;AAAEW,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAlBgB;AAoBjBK,EAAAA,QApBiB,oBAoBRf,IApBQ,EAoBFC,MApBE,EAoBK;AACnB,WAAOe,0BAAQC,OAAR,CAAgB;AACrBC,MAAAA,OAAO,EAAEpB,UADY;AAErBE,MAAAA,IAAI,EAAJA,IAFqB;AAEfC,MAAAA,MAAM,EAANA;AAFe,KAAhB,CAAP;AAIF;AAzBgB,CAAnB;eA6BeH,U"
+}

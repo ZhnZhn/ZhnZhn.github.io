@@ -17,7 +17,6 @@ var crError = _AdapterFn["default"].crError,
     joinBy = _AdapterFn["default"].joinBy,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     valueMoving = _AdapterFn["default"].valueMoving,
-    crSeria = _AdapterFn["default"].crSeria,
     getValue = _AdapterFn["default"].getValue;
 var getPeriodAndValue = _fnSelector["default"].getPeriodAndValue,
     getTitle = _fnSelector["default"].getTitle,
@@ -94,7 +93,6 @@ var _isNumber = function _isNumber(n) {
 
 var fnAdapter = {
   crError: crError,
-  crSeria: crSeria,
   getValue: getValue,
   crTitle: function crTitle(_ref2, json) {
     var title = _ref2.title,

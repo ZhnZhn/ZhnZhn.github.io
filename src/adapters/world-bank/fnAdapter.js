@@ -2,17 +2,14 @@ import AdapterFn from '../AdapterFn'
 
 const {
   ymdToUTC,
-  valueMoving,
-  crSeria
+  valueMoving
 } = AdapterFn;
 
 const _crInfo = ({ title, subtitle, two }) => ({
   name: `${title}: ${subtitle} (${two})`
 });
 
-const fnAdapter = {
-  crSeria,
-  
+const fnAdapter = {    
   crId: (option) => {
     const { one='', two='' } = option;
     return `${one}_${two}`;

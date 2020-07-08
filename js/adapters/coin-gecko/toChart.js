@@ -12,8 +12,7 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var valueMoving = _AdapterFn["default"].valueMoving,
-    crItemLink = _AdapterFn["default"].crItemLink,
-    crSeria = _AdapterFn["default"].crSeria;
+    crItemLink = _AdapterFn["default"].crItemLink;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
@@ -85,7 +84,7 @@ var toChart = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return crSeria({
+    return _ConfigBuilder["default"].crSeria({
       adapter: toChart,
       json: json,
       option: option

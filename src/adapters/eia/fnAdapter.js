@@ -1,8 +1,7 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  valueMoving,
-  crSeria
+  valueMoving
 } = AdapterFn;
 
 const C = {
@@ -61,9 +60,7 @@ const _getCaption = (obj) => {
     : '';
 };
 
-const fnAdapter = {
-  crSeria,
-
+const fnAdapter = {  
   /* [ ["201806", 1000], ... ] */
   crTitle: (option) => {
     const {

@@ -63,7 +63,7 @@ var _fIsNumber = function _fIsNumber(pn) {
 };
 
 var _getDate = function _getDate(point) {
-  return _isArr(point) ? point[0] : point.x;
+  return _isArr(point) ? point[0] : (point || {}).x;
 };
 
 var _getValue = function _getValue(point) {
@@ -133,17 +133,15 @@ var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
     if (!_isArr(data)) {
       return {
         date: data,
-        direction: 'empty'
+        direction: _Type.Direction.EMPTY
       };
     }
 
     var len = data.length,
         _pointNow = len > 0 && data[len - 1] ? data[len - 1] : [EMPTY, 0],
-        _nowValue = _getValue(_pointNow),
-        bNowValue = (0, _big["default"])(_nowValue),
+        bNowValue = (0, _big["default"])(_getValue(_pointNow)),
         _pointPrev = len > 1 && data[len - 2] ? data[len - 2] : _pointNow,
-        _prevValue = _getValue(_pointPrev),
-        bPrevValue = (0, _big["default"])(_prevValue),
+        bPrevValue = (0, _big["default"])(_getValue(_pointPrev)),
         _nowDate = _getDate(_pointNow),
         date = len > 0 ? mlsToDmy(_nowDate) : EMPTY,
         _prevDate = _getDate(_pointPrev),
@@ -154,7 +152,7 @@ var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
       bPrevValue: bPrevValue,
       dfR: dfR
     }), {
-      valueTo: AdapterFn.numberFormat(bPrevValue),
+      valueTo: formatAllNumber(bPrevValue),
       date: date,
       dateTo: dateTo
     });
@@ -182,24 +180,6 @@ var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
       y: _getValue(_p),
       x: _getDate(_p)
     };
-  },
-  crSeria: function crSeria(_ref2) {
-    var adapter = _ref2.adapter,
-        json = _ref2.json,
-        option = _ref2.option,
-        type = _ref2.type;
-
-    var _adapter$toConfig = adapter.toConfig(json, option),
-        config = _adapter$toConfig.config,
-        _seria = config.series[0];
-
-    _seria.minY = findMinY(_seria.data);
-
-    if (type) {
-      _seria.type = type;
-    }
-
-    return _seria;
   },
   joinBy: function joinBy(delimeter) {
     for (var _len = arguments.length, restItems = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {

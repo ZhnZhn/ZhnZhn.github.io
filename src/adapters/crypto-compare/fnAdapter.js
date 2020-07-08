@@ -5,8 +5,7 @@ const {
   getValue,
   valueMoving,
   crVolumePoint,
-  roundBy,
-  crSeria
+  roundBy
 } = AdapterFn;
 
 const _crZhConfig = ({
@@ -66,8 +65,7 @@ const _addHLPointTo = (arr, d, p) => {
 };
 
 const fnAdapter = {
-  getValue,
-  crSeria,
+  getValue,  
 
   crData: (json) => {
     const data = []

@@ -13,8 +13,7 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crCaption = _fnAdapter["default"].crCaption,
     crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption,
-    crSeria = _fnAdapter["default"].crSeria;
+    crConfigOption = _fnAdapter["default"].crConfigOption;
 var FmpAdapter = {
   toConfig: function toConfig(json, option) {
     var dfPn = option.dfPn,
@@ -43,7 +42,7 @@ var FmpAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return crSeria({
+    return _ConfigBuilder["default"].crSeria({
       adapter: FmpAdapter,
       json: json,
       option: option

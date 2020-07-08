@@ -9,8 +9,7 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var isNumberOrNull = _AdapterFn["default"].isNumberOrNull,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving,
-    crSeria = _AdapterFn["default"].crSeria;
+    valueMoving = _AdapterFn["default"].valueMoving;
 var FRED = 'FRED';
 
 var _crId = function _crId(option) {
@@ -63,7 +62,6 @@ var _crInfo = function _crInfo(_ref) {
 };
 
 var fnAdapter = {
-  crSeria: crSeria,
   crSubtitle: function crSubtitle(_ref2) {
     var _ref2$subtitle = _ref2.subtitle,
         subtitle = _ref2$subtitle === void 0 ? '' : _ref2$subtitle,

@@ -11,8 +11,7 @@ const {
   crItemLink,
   compareByDate,
   crItemConf,
-  crValueConf,
-  crSeria
+  crValueConf
 } = AdapterFn;
 
 const _isNaN = Number.isNaN || isNaN
@@ -66,7 +65,6 @@ const fnAdapter = {
   getFromDate,
   getCaption,
   getValue,
-  crSeria,
 
   crData: (metrics, propName) => {
     const _data = [];

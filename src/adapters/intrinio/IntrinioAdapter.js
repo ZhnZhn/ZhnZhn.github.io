@@ -4,8 +4,7 @@ import fnAdapter from './fnAdapter'
 const {
   crSubtitle,
   crData,
-  crConfigOption,
-  crSeria
+  crConfigOption
 } = fnAdapter;
 
 const IntrinioAdapter = {
@@ -27,8 +26,8 @@ const IntrinioAdapter = {
     return { config };
   },
 
-  toSeries(json, option){    
-    return crSeria({
+  toSeries(json, option){
+    return Builder.crSeria({
       adapter: IntrinioAdapter,
       json, option
     });

@@ -4,8 +4,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
   valueMoving,
-  crItemLink,
-  crSeria
+  crItemLink  
 } = AdapterFn;
 
 const _crZhConfig = ({
@@ -71,7 +70,7 @@ const toChart = {
   },
 
   toSeries(json, option){
-    return crSeria({
+    return Builder.crSeria({
       adapter: toChart,
       json, option
     });

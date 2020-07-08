@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/adapters/bls/BlsAdapter.js"],"names":["crTitle","fnAdapter","crData","crConfigOption","crSeria","BlsAdapter","toConfig","json","option","title","_dfTitle","data","seria","splineSeria","toSeria","config","area2Config","addMinMax","addSeries","add","toSeries","adapter"],"mappings":";;;;;;;;;AAAA;;AAEA;;IAEEA,O,GAEEC,qB,CAFFD,O;IAASE,M,GAEPD,qB,CAFOC,M;IAAQC,c,GAEfF,qB,CAFeE,c;IACjBC,O,GACEH,qB,CADFG,O;AAGF,IAAMC,UAAU,GAAG;AACjBC,EAAAA,QADiB,oBACRC,IADQ,EACFC,MADE,EACK;AACd,QAAEC,KAAF,GAAYD,MAAZ,CAAEC,KAAF;AAAA,QACJC,QADI,GACOV,OAAO,CAACQ,MAAD,CADd;AAAA,QAEJG,IAFI,GAEGT,MAAM,CAACK,IAAD,CAFT;AAAA,QAGJK,KAHI,GAGI,iCACLC,WADK,CACO;AAAEF,MAAAA,IAAI,EAAJA;AAAF,KADP,EAELG,OAFK,EAHJ;AAAA,QAMJC,MANI,GAMK,iCACNC,WADM,CACMN,QADN,EACgBD,KADhB,EAENQ,SAFM,CAEIN,IAFJ,EAEUH,MAFV,EAGNU,SAHM,CAGIN,KAHJ,EAINO,GAJM,+BAKFhB,cAAc,CAAC;AAAEI,MAAAA,IAAI,EAAJA,IAAF;AAAQC,MAAAA,MAAM,EAANA,MAAR;AAAgBG,MAAAA,IAAI,EAAJA;AAAhB,KAAD,CALZ,GAONL,QAPM,EANL;;AAcN,WAAO;AAAES,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAjBgB;AAmBjBK,EAAAA,QAnBiB,oBAmBRb,IAnBQ,EAmBFC,MAnBE,EAmBK;AACnB,WAAOJ,OAAO,CAAC;AACbiB,MAAAA,OAAO,EAAEhB,UADI;AAEbE,MAAAA,IAAI,EAAJA,IAFa;AAEPC,MAAAA,MAAM,EAANA;AAFO,KAAD,CAAd;AAIF;AAxBgB,CAAnB;eA2BeH,U","sourcesContent":["import Builder from '../../charts/ConfigBuilder'\r\n\r\nimport fnAdapter from './fnAdapter'\r\nconst {\r\n  crTitle, crData, crConfigOption,\r\n  crSeria\r\n} = fnAdapter;\r\n\r\nconst BlsAdapter = {\r\n  toConfig(json, option){\r\n    const { title } = option\r\n    , _dfTitle = crTitle(option)\r\n    , data = crData(json)\r\n    , seria = Builder()\r\n        .splineSeria({ data })\r\n        .toSeria()\r\n    , config = Builder()\r\n        .area2Config(_dfTitle, title)\r\n        .addMinMax(data, option)\r\n        .addSeries(seria)\r\n        .add({\r\n          ...crConfigOption({ json, option, data })\r\n         })\r\n        .toConfig()\r\n    return { config };\r\n  },\r\n\r\n  toSeries(json, option){\r\n     return crSeria({\r\n       adapter: BlsAdapter,\r\n       json, option\r\n     });\r\n  }\r\n}\r\n\r\nexport default BlsAdapter\r\n"],"file":"BlsAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bls/BlsAdapter.js"
+ ],
+ "file": "../../../src/adapters/bls/BlsAdapter.js",
+ "names": [
+  "crTitle",
+  "fnAdapter",
+  "crData",
+  "crConfigOption",
+  "BlsAdapter",
+  "toConfig",
+  "json",
+  "option",
+  "title",
+  "_dfTitle",
+  "data",
+  "seria",
+  "splineSeria",
+  "toSeria",
+  "config",
+  "area2Config",
+  "addMinMax",
+  "addSeries",
+  "add",
+  "toSeries",
+  "Builder",
+  "crSeria",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;IAGEA,O,GACEC,qB,CADFD,O;IAASE,M,GACPD,qB,CADOC,M;IAAQC,c,GACfF,qB,CADeE,c;AAGnB,IAAMC,UAAU,GAAG;AACjBC,EAAAA,QADiB,oBACRC,IADQ,EACFC,MADE,EACK;AACd,QAAEC,KAAF,GAAYD,MAAZ,CAAEC,KAAF;AAAA,QACJC,QADI,GACOT,OAAO,CAACO,MAAD,CADd;AAAA,QAEJG,IAFI,GAEGR,MAAM,CAACI,IAAD,CAFT;AAAA,QAGJK,KAHI,GAGI,iCACLC,WADK,CACO;AAAEF,MAAAA,IAAI,EAAJA;AAAF,KADP,EAELG,OAFK,EAHJ;AAAA,QAMJC,MANI,GAMK,iCACNC,WADM,CACMN,QADN,EACgBD,KADhB,EAENQ,SAFM,CAEIN,IAFJ,EAEUH,MAFV,EAGNU,SAHM,CAGIN,KAHJ,EAINO,GAJM,+BAKFf,cAAc,CAAC;AAAEG,MAAAA,IAAI,EAAJA,IAAF;AAAQC,MAAAA,MAAM,EAANA,MAAR;AAAgBG,MAAAA,IAAI,EAAJA;AAAhB,KAAD,CALZ,GAONL,QAPM,EANL;;AAcN,WAAO;AAAES,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAjBgB;AAmBjBK,EAAAA,QAnBiB,oBAmBRb,IAnBQ,EAmBFC,MAnBE,EAmBK;AACnB,WAAOa,0BAAQC,OAAR,CAAgB;AACrBC,MAAAA,OAAO,EAAElB,UADY;AAErBE,MAAAA,IAAI,EAAJA,IAFqB;AAEfC,MAAAA,MAAM,EAANA;AAFe,KAAhB,CAAP;AAIF;AAxBgB,CAAnB;eA2BeH,U"
+}

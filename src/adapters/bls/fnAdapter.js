@@ -4,8 +4,7 @@ import AdapterFn from '../AdapterFn'
 const {
   valueMoving,
   ymdToUTC,
-  joinBy,
-  crSeria
+  joinBy
 } = AdapterFn;
 
 const _crZhConfig = ({
@@ -25,9 +24,7 @@ const _crInfo = ({ title }) => ({
   name: title
 });
 
-const fnAdapter = {
-  crSeria,
-
+const fnAdapter = {  
   crTitle: ({ dfTitle, item={}, subtitle }) => dfTitle
     ? joinBy(', ', dfTitle, item.t)
     : subtitle,

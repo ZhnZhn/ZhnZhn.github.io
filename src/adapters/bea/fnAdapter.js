@@ -4,8 +4,7 @@ import AdapterFn from '../AdapterFn'
 const {
   crId,
   ymdToUTC,
-  valueMoving,
-  crSeria
+  valueMoving
 } = AdapterFn;
 
 const _crName = (Results) => {
@@ -52,9 +51,7 @@ const _crUTC = (item) => {
   return ymdToUTC(Year + md);
 };
 
-const fnAdapter = {
-  crSeria,
-
+const fnAdapter = {  
   crData: (Results, option) => {
     const { dfFilterName, two } = option
         , d = []

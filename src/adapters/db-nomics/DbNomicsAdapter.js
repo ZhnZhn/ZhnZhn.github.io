@@ -5,8 +5,7 @@ import fnAdapter from './fnAdapter';
 const {
   crData,
   crTitle,
-  crConfigOption,
-  crSeria
+  crConfigOption  
 } = fnAdapter;
 
 const DbNomicsAdapter = {
@@ -35,12 +34,12 @@ const DbNomicsAdapter = {
         ...crConfigOption({ json, option, data })
        })
        .toConfig();
-           
+
     return { config };
   },
 
   toSeries(json, option){
-    return crSeria({
+    return Builder.crSeria({
       adapter: DbNomicsAdapter,
       json, option
     });

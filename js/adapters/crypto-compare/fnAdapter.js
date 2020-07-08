@@ -10,8 +10,7 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 var getValue = _AdapterFn["default"].getValue,
     valueMoving = _AdapterFn["default"].valueMoving,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
-    roundBy = _AdapterFn["default"].roundBy,
-    crSeria = _AdapterFn["default"].crSeria;
+    roundBy = _AdapterFn["default"].roundBy;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var title = _ref.title,
@@ -81,7 +80,6 @@ var _addHLPointTo = function _addHLPointTo(arr, d, p) {
 
 var fnAdapter = {
   getValue: getValue,
-  crSeria: crSeria,
   crData: function crData(json) {
     var data = [],
         dVolume = [],

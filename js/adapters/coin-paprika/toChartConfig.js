@@ -11,8 +11,7 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crSeria = _fnAdapter["default"].crSeria,
-    getValue = _fnAdapter["default"].getValue,
+var getValue = _fnAdapter["default"].getValue,
     crData = _fnAdapter["default"].crData,
     crConfigOption = _fnAdapter["default"].crConfigOption;
 var SUBTITLE = 'Values on 23:59:59 UTC';
@@ -59,7 +58,7 @@ var toChartConfig = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return crSeria({
+    return _ConfigBuilder["default"].crSeria({
       adapter: toChartConfig,
       json: json,
       option: option

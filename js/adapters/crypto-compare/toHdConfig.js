@@ -12,8 +12,7 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption,
-    crSeria = _fnAdapter["default"].crSeria;
+    crConfigOption = _fnAdapter["default"].crConfigOption;
 var DF_PAIR = 'USD';
 var V_ON_TIME = 'Values on 00:00 GMT';
 
@@ -74,7 +73,7 @@ var toHdConfig = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return crSeria({
+    return _ConfigBuilder["default"].crSeria({
       adapter: toHdConfig,
       json: json,
       option: option

@@ -8,7 +8,6 @@ const {
   joinBy,
   ymdToUTC,
   valueMoving,
-  crSeria,
   getValue
 } = AdapterFn;
 const {
@@ -75,8 +74,7 @@ const _isNumber = n => typeof n === 'number'
 
 
 const fnAdapter = {
-  crError,
-  crSeria,
+  crError,  
   getValue,
   crTitle: ({ title, subtitle }, json) => {
     const _ = getSubtitle(json)

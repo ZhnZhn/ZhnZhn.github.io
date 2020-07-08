@@ -2,8 +2,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
   isNumberOrNull, ymdToUTC,
-  valueMoving,
-  crSeria
+  valueMoving
 } = AdapterFn;
 
 const FRED = 'FRED';
@@ -42,9 +41,7 @@ const _crInfo = ({ title='' }) => ({
   name: title
 });
 
-const fnAdapter = {
-  crSeria,
-  
+const fnAdapter = {    
   crSubtitle: ({ subtitle='', threeCaption }) => {
     return threeCaption
       ? `${subtitle}, ${threeCaption}`

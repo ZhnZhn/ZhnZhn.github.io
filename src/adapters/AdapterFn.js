@@ -52,7 +52,7 @@ const _fIsNumber = (pn) => (p) => {
 
 const _getDate = point =>_isArr(point)
   ? point[0]
-  : point.x;
+  : (point || {}).x;
 
 const _getValue = (point) => {
   if (_isArr(point)){
@@ -80,7 +80,7 @@ const AdapterFn = {
 
   getCaption: getC,
   getValue: getV,
-    
+
   legendItem: (index, color, name, is=false) => ({
     index, color, name,
     isVisible: is
@@ -124,32 +124,33 @@ const AdapterFn = {
 
   valueMoving(data, dfR){
     if (!_isArr(data)) {
-      return { date: data, direction: 'empty' };
+      return {
+        date: data,
+        direction: Direction.EMPTY
+      };
     }
 
     const len = data.length
-          , _pointNow = len>0 && data[len-1]
-               ? data[len-1]
-               : [ EMPTY, 0 ]
-          , _nowValue = _getValue(_pointNow)
-          , bNowValue = Big(_nowValue)
-          , _pointPrev = len>1 && data[len-2]
-              ? data[len-2]
-              : _pointNow
-          , _prevValue = _getValue(_pointPrev)
-          , bPrevValue = Big(_prevValue)
-          , _nowDate = _getDate(_pointNow)
-          , date = len>0
-               ? mlsToDmy(_nowDate)
-               : EMPTY
-          , _prevDate = _getDate(_pointPrev)
-          , dateTo = len>1 && _prevDate
-               ? mlsToDmy(_prevDate)
-               : EMPTY;
+    , _pointNow = len>0 && data[len-1]
+         ? data[len-1]
+         : [ EMPTY, 0 ]
+    , bNowValue = Big(_getValue(_pointNow))
+    , _pointPrev = len>1 && data[len-2]
+        ? data[len-2]
+        : _pointNow
+    , bPrevValue = Big(_getValue(_pointPrev))
+    , _nowDate = _getDate(_pointNow)
+    , date = len>0
+         ? mlsToDmy(_nowDate)
+         : EMPTY
+    , _prevDate = _getDate(_pointPrev)
+    , dateTo = len>1 && _prevDate
+         ? mlsToDmy(_prevDate)
+         : EMPTY;
 
       return  {
         ...AdapterFn.crValueMoving({ bNowValue, bPrevValue, dfR }),
-        valueTo: AdapterFn.numberFormat(bPrevValue),
+        valueTo: formatAllNumber(bPrevValue),
         date, dateTo
       };
   },
@@ -181,17 +182,7 @@ const AdapterFn = {
       x: _getDate(_p)
     };
   },
-
-  crSeria: ({ adapter, json, option, type }) => {
-    const { config } = adapter.toConfig(json, option)
-    , _seria = config.series[0];
-    _seria.minY = findMinY(_seria.data)
-    if (type) {
-      _seria.type = type
-    }
-    return _seria;
-  },
-
+  
   joinBy: (delimeter, ...restItems) => restItems
    .filter(Boolean)
    .join(delimeter),

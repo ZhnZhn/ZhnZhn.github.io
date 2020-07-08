@@ -1,6 +1,6 @@
 
 import ChartConfig from '../../charts/ChartConfig'
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 import AdapterFn from '../AdapterFn'
 import IntradayFns from '../IntradayFns'
 
@@ -12,8 +12,7 @@ import fnAdapter from './fnAdapter'
 const {
    ymdToUTC,
    ymdhmsToUTC,
-   crVolumePoint,
-   crSeria
+   crVolumePoint
 } = AdapterFn;
 const { crMarkerColor, crDataDaily } = IntradayFns
 
@@ -170,7 +169,7 @@ const AlphaIntradayAdapter = {
     option.minY = minClose
     option.maxY = maxClose
 
-    const config = ConfigBuilder()
+    const config = Builder()
       .areaConfig()
       .add('chart', { spacingTop: 25 })
       .addCaption(_chartId, `Time Series (${interval})`)
@@ -195,7 +194,7 @@ const AlphaIntradayAdapter = {
   },
 
   toSeries(json, option){
-    return crSeria({
+    return Builder.crSeria({
       adapter: AlphaIntradayAdapter,
       json, option,
       type: 'spline'

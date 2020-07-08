@@ -2,7 +2,7 @@ import Builder from '../../charts/ConfigBuilder';
 import fnAdapter from './fnAdapter'
 
 const {
-  crSeria, getValue,
+  getValue,
   crData, crConfigOption
 } = fnAdapter
 
@@ -51,7 +51,7 @@ const toChartConfig = {
   },
 
   toSeries(json, option){
-    return crSeria({
+    return Builder.crSeria({
       adapter: toChartConfig,
       json, option
     });

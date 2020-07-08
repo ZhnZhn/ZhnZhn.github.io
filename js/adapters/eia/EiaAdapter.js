@@ -13,8 +13,7 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crTitle = _fnAdapter["default"].crTitle,
     crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption,
-    crSeria = _fnAdapter["default"].crSeria;
+    crConfigOption = _fnAdapter["default"].crConfigOption;
 var EiaAdapter = {
   toConfig: function toConfig(json, option) {
     var seriaType = option.seriaType,
@@ -41,7 +40,7 @@ var EiaAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return crSeria({
+    return _ConfigBuilder["default"].crSeria({
       adapter: EiaAdapter,
       json: json,
       option: option

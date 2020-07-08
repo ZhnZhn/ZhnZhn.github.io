@@ -23,8 +23,7 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
-    crVolumePoint = _AdapterFn["default"].crVolumePoint,
-    crSeria = _AdapterFn["default"].crSeria;
+    crVolumePoint = _AdapterFn["default"].crVolumePoint;
 var crMarkerColor = _IntradayFns["default"].crMarkerColor,
     crDataDaily = _IntradayFns["default"].crDataDaily;
 var crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption; //const DAILY = 'Daily';
@@ -219,7 +218,7 @@ var AlphaIntradayAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return crSeria({
+    return _ConfigBuilder["default"].crSeria({
       adapter: AlphaIntradayAdapter,
       json: json,
       option: option,

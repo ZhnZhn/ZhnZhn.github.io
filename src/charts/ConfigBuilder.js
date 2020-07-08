@@ -78,6 +78,16 @@ const ConfigBuilder = function(config={}) {
   this.config = config;
 };
 
+ConfigBuilder.crSeria = ({ adapter, json, option, type }) => {
+  const { config } = adapter.toConfig(json, option)
+  , _seria = config.series[0];
+  _seria.minY = findMinY(_seria.data)
+  if (type) {
+    _seria.type = type
+  }
+  return _seria;
+}
+
 ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   ...SeriaBuilder,
 

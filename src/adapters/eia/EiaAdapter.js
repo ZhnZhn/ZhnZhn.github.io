@@ -5,8 +5,7 @@ import fnAdapter from './fnAdapter';
 const {
   crTitle,
   crData,
-  crConfigOption,
-  crSeria
+  crConfigOption
 } = fnAdapter;
 
 const EiaAdapter = {
@@ -38,8 +37,8 @@ const EiaAdapter = {
     return { config };
   },
 
-  toSeries(json, option){    
-    return crSeria({
+  toSeries(json, option){
+    return Builder.crSeria({
       adapter: EiaAdapter,
       json, option
     });

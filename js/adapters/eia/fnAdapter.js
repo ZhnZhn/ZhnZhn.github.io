@@ -7,8 +7,7 @@ exports["default"] = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var valueMoving = _AdapterFn["default"].valueMoving,
-    crSeria = _AdapterFn["default"].crSeria;
+var valueMoving = _AdapterFn["default"].valueMoving;
 var C = {
   CHART_URL: "https://www.eia.gov/opendata/embed.php?type=chart&series_id="
 };
@@ -65,8 +64,6 @@ var _getCaption = function _getCaption(obj) {
 };
 
 var fnAdapter = {
-  crSeria: crSeria,
-
   /* [ ["201806", 1000], ... ] */
   crTitle: function crTitle(option) {
     var _option$items = option.items,

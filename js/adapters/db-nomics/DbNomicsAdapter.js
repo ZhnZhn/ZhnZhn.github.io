@@ -13,8 +13,7 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crData = _fnAdapter["default"].crData,
     crTitle = _fnAdapter["default"].crTitle,
-    crConfigOption = _fnAdapter["default"].crConfigOption,
-    crSeria = _fnAdapter["default"].crSeria;
+    crConfigOption = _fnAdapter["default"].crConfigOption;
 var DbNomicsAdapter = {
   toConfig: function toConfig(json, option) {
     var fromDate = option.fromDate,
@@ -42,7 +41,7 @@ var DbNomicsAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return crSeria({
+    return _ConfigBuilder["default"].crSeria({
       adapter: DbNomicsAdapter,
       json: json,
       option: option

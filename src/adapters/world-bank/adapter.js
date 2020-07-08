@@ -2,8 +2,7 @@ import Builder from '../../charts/ConfigBuilder'
 import fnAdapter from './fnAdapter'
 
 const {
-  crId, crData, crConfigOptions,
-  crSeria
+  crId, crData, crConfigOptions
 } = fnAdapter;
 
 const adapter = {
@@ -30,8 +29,8 @@ const adapter = {
     return { config };
   },
 
-  toSeries(json, option){    
-    return crSeria({
+  toSeries(json, option){
+    return Builder.crSeria({
       adapter, json, option
     });
   }
