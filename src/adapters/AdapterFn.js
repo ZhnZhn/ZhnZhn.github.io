@@ -100,8 +100,7 @@ const AdapterFn = {
 
   isNumberOrNull: v => _isNumber(v) || v === null,
 
-  isYNumber: _fIsNumber('y'),
-  toFloatOrNull: _fToFloatOr(null),
+  isYNumber: _fIsNumber('y'),  
   toFloatOrEmpty: _fToFloatOr(''),
 
   compareByDate: fCompareBy(0),
@@ -182,7 +181,7 @@ const AdapterFn = {
       x: _getDate(_p)
     };
   },
-  
+
   joinBy: (delimeter, ...restItems) => restItems
    .filter(Boolean)
    .join(delimeter),

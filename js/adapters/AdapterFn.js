@@ -109,7 +109,6 @@ var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
     return _isNumber(v) || v === null;
   },
   isYNumber: _fIsNumber('y'),
-  toFloatOrNull: _fToFloatOr(null),
   toFloatOrEmpty: _fToFloatOr(''),
   compareByDate: fCompareBy(0),
   compareByY: fCompareBy('y'),
