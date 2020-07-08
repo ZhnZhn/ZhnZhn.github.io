@@ -13,7 +13,8 @@ const {
   isDmy,
   getUTCTime,
   addToDmy,
-  getYTDfromDmy
+  getYTDfromDmy,
+  monthIndex
 } = DateUtils;
 
 // DateUtils configuration consts
@@ -228,6 +229,27 @@ describe('getYTDfromDmy', ()=>{
   test('should return mls to start of year', ()=>{
     expect(fn('01-01-2010')).toBe(Date.UTC(2010, 0, 1))
     expect(fn('02-01-2010')).toBe(Date.UTC(2010, 0, 1))
+  })
+})
+
+describe('monthIndex', ()=>{
+  const fn = monthIndex
+  it('should return month index from 0 from str', ()=>{
+    expect(fn('january')).toBe(0)
+    expect(fn('January')).toBe(0)
+    expect(fn('december')).toBe(11)
+    expect(fn('December')).toBe(11)
+  })
+  it('should return -1 for edge cases', ()=>{
+    expect(fn('str')).toBe(-1)
+    expect(fn('Jan')).toBe(-1)
+    expect(fn('decembe')).toBe(-1)
+    expect(fn('')).toBe(-1)
+
+    expect(fn()).toBe(-1)
+    expect(fn(null)).toBe(-1)
+    expect(fn(1)).toBe(-1)
+    expect(fn({})).toBe(-1)
   })
 })
 

@@ -5,10 +5,16 @@ exports["default"] = void 0;
 var MIN_YEAR = 1990;
 var DAY_IN_MLS = 1000 * 60 * 60 * 24;
 
-var _isNaN = Number.isNaN || isNaN;
+var _isNaN = function _isNaN(n) {
+  return typeof n === 'number' && n - n !== 0;
+};
 
 var _isStr = function _isStr(str) {
   return typeof str === 'string';
+};
+
+var _isUndef = function _isUndef(v) {
+  return typeof v === 'undefined';
 };
 
 var _pad2 = function _pad2(n) {
@@ -55,6 +61,20 @@ var _getDaysInYm = function _getDaysInYm(y, m) {
   return new Date(y, m, 0).getDate();
 };
 
+var MONTH_HP = {
+  january: 0,
+  february: 1,
+  march: 2,
+  april: 3,
+  may: 4,
+  june: 5,
+  july: 6,
+  august: 7,
+  september: 8,
+  october: 9,
+  november: 10,
+  december: 11
+};
 var DateUtils = {
   //YYYY-MM-DD valid format
   isYmd: function isYmd(str, nForecastDate, minYear) {
@@ -220,6 +240,14 @@ var DateUtils = {
     var _fromMls = DateUtils.ymdToUTC(ymd);
 
     return Math.ceil((new Date().getTime() - _fromMls) / DAY_IN_MLS);
+  },
+  monthIndex: function monthIndex(str) {
+    if (!_isStr(str)) {
+      return -1;
+    }
+
+    var _monthIndex = MONTH_HP[String(str).toLowerCase()];
+    return _isUndef(_monthIndex) ? -1 : _monthIndex;
   }
 };
 var _default = DateUtils;

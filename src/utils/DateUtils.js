@@ -2,8 +2,10 @@
 const MIN_YEAR = 1990;
 const DAY_IN_MLS = 1000*60*60*24;
 
-const _isNaN = Number.isNaN || isNaN;
+const _isNaN = n => typeof n === 'number'
+  && (n-n !== 0);
 const _isStr = str => typeof str === 'string';
+const _isUndef = v => typeof v === 'undefined';
 const _pad2 = n => n<10 ? '0'+n : ''+n;
 
 const _toIntMonth = str => parseInt(str, 10)-1;
@@ -34,6 +36,14 @@ const _isYmd = (yStr, mStr, dStr, {nForecastDate=0, minYear=MIN_YEAR} = {}) => {
 };
 
 const _getDaysInYm = (y, m) => (new Date(y, m, 0)).getDate();
+
+const MONTH_HP = {
+  january: 0, february: 1,
+  march: 2, april: 3, may: 4,
+  june: 5, july: 6, august: 7,
+  september: 8, october: 9, november: 10,
+  december: 11
+};
 
 const DateUtils = {
 
@@ -170,6 +180,16 @@ const DateUtils = {
  getDaysFromYmd: ymd => {
    const _fromMls = DateUtils.ymdToUTC(ymd);
    return Math.ceil(((new Date()).getTime() - _fromMls)/DAY_IN_MLS);
+ },
+
+ monthIndex: str => {
+   if (!_isStr(str)) {
+     return -1;
+   }
+   const _monthIndex = MONTH_HP[String(str).toLowerCase()];
+   return _isUndef(_monthIndex)
+     ? -1
+     : _monthIndex;
  }
 
 };

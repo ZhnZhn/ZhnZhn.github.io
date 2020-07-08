@@ -16,7 +16,8 @@ var isYmd = _DateUtils["default"].isYmd,
     isDmy = _DateUtils["default"].isDmy,
     getUTCTime = _DateUtils["default"].getUTCTime,
     addToDmy = _DateUtils["default"].addToDmy,
-    getYTDfromDmy = _DateUtils["default"].getYTDfromDmy; // DateUtils configuration consts
+    getYTDfromDmy = _DateUtils["default"].getYTDfromDmy,
+    monthIndex = _DateUtils["default"].monthIndex; // DateUtils configuration consts
 
 var MIN_YEAR = 1990;
 
@@ -223,6 +224,25 @@ describe('getYTDfromDmy', function () {
   test('should return mls to start of year', function () {
     expect(fn('01-01-2010')).toBe(Date.UTC(2010, 0, 1));
     expect(fn('02-01-2010')).toBe(Date.UTC(2010, 0, 1));
+  });
+});
+describe('monthIndex', function () {
+  var fn = monthIndex;
+  it('should return month index from 0 from str', function () {
+    expect(fn('january')).toBe(0);
+    expect(fn('January')).toBe(0);
+    expect(fn('december')).toBe(11);
+    expect(fn('December')).toBe(11);
+  });
+  it('should return -1 for edge cases', function () {
+    expect(fn('str')).toBe(-1);
+    expect(fn('Jan')).toBe(-1);
+    expect(fn('decembe')).toBe(-1);
+    expect(fn('')).toBe(-1);
+    expect(fn()).toBe(-1);
+    expect(fn(null)).toBe(-1);
+    expect(fn(1)).toBe(-1);
+    expect(fn({})).toBe(-1);
   });
 });
 (0, _DateUtilsWithMock["default"])();
