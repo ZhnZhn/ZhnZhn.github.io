@@ -1,0 +1,25 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/crFn.js"
+ ],
+ "file": "../../src/adapters/crFn.js",
+ "names": [
+  "crFn",
+  "crError",
+  "errCaption",
+  "message",
+  "crId",
+  "Date",
+  "now",
+  "toString",
+  "Math",
+  "random",
+  "substring",
+  "toUpperCase",
+  "crItemLink",
+  "caption",
+  "itemUrl"
+ ],
+ "mappings": ";;;;AACA,IAAMA,IAAI,GAAG;AACXC,EAAAA,OAAO,EAAE,iBAACC,UAAD,EAAgBC,OAAhB;AAAA,QAACD,UAAD;AAACA,MAAAA,UAAD,GAAY,EAAZ;AAAA;;AAAA,QAAgBC,OAAhB;AAAgBA,MAAAA,OAAhB,GAAwB,EAAxB;AAAA;;AAAA,WAAgC;AACvCD,MAAAA,UAAU,EAAVA,UADuC;AAEvCC,MAAAA,OAAO,EAAPA;AAFuC,KAAhC;AAAA,GADE;AAMXC,EAAAA,IAAI,EAAE;AAAA,WAAM,CACVC,IAAI,CAACC,GAAL,GAAWC,QAAX,CAAoB,EAApB,IACAC,IAAI,CAACC,MAAL,GAAcF,QAAd,CAAuB,EAAvB,EAA2BG,SAA3B,CAAqC,CAArC,EAAwC,CAAxC,CAFU,EAGVC,WAHU,EAAN;AAAA,GANK;AAWXC,EAAAA,UAAU,EAAE,oBAACC,OAAD,EAAUC,OAAV;AAAA,6BAAqCA,OAArC,uCAA2ED,OAA3E;AAAA;AAXD,CAAb;eAceb,I"
+}

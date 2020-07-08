@@ -1,14 +1,14 @@
 {
  "version": 3,
  "sources": [
-  "../../src/adapters/crPoint.js"
+  "../../src/adapters/pointFn.js"
  ],
- "file": "../../src/adapters/crPoint.js",
+ "file": "../../src/adapters/pointFn.js",
  "names": [
   "_assign",
   "Object",
   "assign",
-  "crPoint",
+  "pointFn",
   "crVolumePoint",
   "date",
   "open",

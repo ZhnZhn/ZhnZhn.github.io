@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/__tests__/crFn.test.js"
+ ],
+ "file": "../../../src/adapters/__tests__/crFn.test.js",
+ "names": [
+  "crError",
+  "crFn",
+  "describe",
+  "fn",
+  "it",
+  "expect",
+  "toEqual",
+  "errCaption",
+  "message"
+ ],
+ "mappings": ";;;;AAAA;;IAEQA,O,GAAYC,gB,CAAZD,O;AAERE,QAAQ,CAAC,SAAD,EAAY,YAAI;AACtB,MAAMC,EAAE,GAAGH,OAAX;AACAI,EAAAA,EAAE,CAAC,uBAAD,EAA0B,YAAI;AAC9BC,IAAAA,MAAM,CAACF,EAAE,CAAC,SAAD,EAAY,KAAZ,CAAH,CAAN,CAA6BG,OAA7B,CAAqC;AACnCC,MAAAA,UAAU,EAAE,SADuB;AAEnCC,MAAAA,OAAO,EAAE;AAF0B,KAArC;AAID,GALC,CAAF;AAMAJ,EAAAA,EAAE,CAAC,2CAAD,EAA8C,YAAI;AAClDC,IAAAA,MAAM,CAACF,EAAE,EAAH,CAAN,CAAaG,OAAb,CAAqB;AACnBC,MAAAA,UAAU,EAAE,EADO;AAEnBC,MAAAA,OAAO,EAAE;AAFU,KAArB;AAID,GALC,CAAF;AAMD,CAdO,CAAR"
+}

@@ -2,14 +2,41 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+var _Type = require("../../constants/Type");
+
+var crError = _AdapterFn["default"].crError,
+    crId = _AdapterFn["default"].crId,
+    crItemLink = _AdapterFn["default"].crItemLink,
+    crVolumePoint = _AdapterFn["default"].crVolumePoint,
+    crAthPoint = _AdapterFn["default"].crAthPoint,
+    legendItem = _AdapterFn["default"].legendItem,
+    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
     toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
     isYNumber = _AdapterFn["default"].isYNumber,
+    isNumberOrNull = _AdapterFn["default"].isNumberOrNull,
+    toFloatOrEmpty = _AdapterFn["default"].toFloatOrEmpty,
     findMinY = _AdapterFn["default"].findMinY,
     findMaxY = _AdapterFn["default"].findMaxY,
-    joinBy = _AdapterFn["default"].joinBy;
+    joinBy = _AdapterFn["default"].joinBy,
+    valueMoving = _AdapterFn["default"].valueMoving,
+    crItemConf = _AdapterFn["default"].crItemConf,
+    crValueConf = _AdapterFn["default"].crValueConf;
+describe('added fns', function () {
+  it('should have next fns', function () {
+    expect(typeof crError).toBe('function');
+    expect(typeof crId).toBe('function');
+    expect(typeof crItemLink).toBe('function');
+    expect(typeof crVolumePoint).toBe('function');
+    expect(typeof crAthPoint).toBe('function');
+    expect(typeof legendItem).toBe('function');
+    expect(typeof stockSeriesLegend).toBe('function');
+  });
+});
 var Y = [{
   "in": '2017',
   r: 1514678400000,
@@ -179,6 +206,26 @@ describe('isYNumber', function () {
     })).toBe(false);
   });
 });
+describe('isNumberOrNull', function () {
+  var fn = isNumberOrNull;
+  it('should return true for number and null or false', function () {
+    expect(fn(123)).toBe(true);
+    expect(fn(12.3)).toBe(true);
+    expect(fn(1.23)).toBe(true);
+    expect(fn(null)).toBe(true);
+    expect(fn('123')).toBe(false);
+    expect(fn()).toBe(false);
+    expect(fn(NaN)).toBe(false);
+  });
+});
+describe('toFloatOrEmpty', function () {
+  var fn = toFloatOrEmpty;
+  it('should convert input to float or return empty str', function () {
+    expect(fn('1.23')).toBe(1.23);
+    expect(fn('')).toBe('');
+    expect(fn('str')).toBe('');
+  });
+});
 var DATA_ARR = [[0, 0.3], [0, 0.31], [0, 0.29]];
 var DATA_POINT = [{
   x: 0,
@@ -234,6 +281,118 @@ describe('joinBy', function () {
     expect(joinBy('.', '', 'b', 'c')).toBe('b.c');
     expect(joinBy('.', null, 'b', 'c')).toBe('b.c');
     expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c');
+  });
+});
+describe('valueMoving', function () {
+  var fn = valueMoving;
+  it('should return echo data and direction empty for !arr input', function () {
+    var direction = {
+      direction: _Type.Direction.EMPTY
+    };
+    expect(fn('')).toEqual((0, _extends2["default"])({
+      date: ''
+    }, direction));
+    expect(fn(null)).toEqual((0, _extends2["default"])({
+      date: null
+    }, direction));
+    expect(fn()).toEqual((0, _extends2["default"])({
+      date: void 0
+    }, direction));
+    expect(fn({})).toEqual((0, _extends2["default"])({
+      date: {}
+    }, direction));
+    expect(fn('str')).toEqual((0, _extends2["default"])({
+      date: 'str'
+    }, direction));
+  });
+  it('should return valueMoving obj for arr input', function () {
+    expect(fn([[Date.UTC(2018, 11, 31), 10000], [Date.UTC(2019, 11, 31), 20000]])).toEqual({
+      value: '20 000',
+      _value: '20000',
+      delta: '10 000',
+      _deltaAbs: '10000',
+      percent: '100.00%',
+      _percentAbs: '100.00',
+      direction: _Type.Direction.UP,
+      valueTo: '10 000',
+      date: '31-12-2019',
+      dateTo: '31-12-2018'
+    });
+  });
+  it('should return valueMoving obj for arr input with 1 point', function () {
+    expect(fn([[Date.UTC(2019, 11, 31), 20000]])).toEqual({
+      value: '20 000',
+      _value: '20000',
+      delta: '0',
+      _deltaAbs: '0',
+      percent: '0.00%',
+      _percentAbs: '0.00',
+      direction: _Type.Direction.EQUAL,
+      valueTo: '20 000',
+      date: '31-12-2019',
+      dateTo: '31-12-2019'
+    });
+  });
+  it('should return valueMoving obj for empty arr', function () {
+    expect(fn([])).toEqual({
+      value: '0',
+      _value: '0',
+      delta: '0',
+      _deltaAbs: '0',
+      percent: '0.00%',
+      _percentAbs: '0.00',
+      direction: _Type.Direction.EQUAL,
+      valueTo: '0',
+      date: '',
+      dateTo: ''
+    });
+  });
+});
+describe('crItemConf', function () {
+  var fn = crItemConf;
+  it('should create obj with item conf', function () {
+    expect(fn({
+      title: 'title',
+      subtitle: null,
+      itemCaption: void 0
+    })).toEqual({
+      title: 'title'
+    });
+  });
+});
+describe('crValueConf', function () {
+  var fn = crValueConf;
+  it('should return {x, y} recent point from data', function () {
+    expect(fn([[3, 3], [1, 2]])).toEqual({
+      x: 1,
+      y: 2
+    });
+    expect(fn([{
+      x: 3,
+      y: 3
+    }, {
+      x: 1,
+      y: 2
+    }])).toEqual({
+      x: 1,
+      y: 2
+    });
+  });
+  it('should use str 0.0 for y not number', function () {
+    expect(fn([[3, 3], [1, null]])).toEqual({
+      x: 1,
+      y: '0.0'
+    });
+    expect(fn([{
+      x: 3,
+      y: 3
+    }, {
+      x: 1,
+      y: NaN
+    }])).toEqual({
+      x: 1,
+      y: '0.0'
+    });
   });
 });
 //# sourceMappingURL=AdapterFn.test.js.map

@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/__tests__/crPoint.test.js"
+  "../../../src/adapters/__tests__/pointFn.test.js"
  ],
- "file": "../../../src/adapters/__tests__/crPoint.test.js",
+ "file": "../../../src/adapters/__tests__/pointFn.test.js",
  "names": [
   "crVolumePoint",
   "crPoint",

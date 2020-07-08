@@ -10,7 +10,7 @@ var _big = _interopRequireDefault(require("big.js"));
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
 var _assign = Object.assign;
-var crPoint = {
+var pointFn = {
   crVolumePoint: function crVolumePoint(_ref) {
     var date = _ref.date,
         open = _ref.open,
@@ -64,6 +64,6 @@ var crPoint = {
     };
   }
 };
-var _default = crPoint;
+var _default = pointFn;
 exports["default"] = _default;
-//# sourceMappingURL=crPoint.js.map
+//# sourceMappingURL=pointFn.js.map

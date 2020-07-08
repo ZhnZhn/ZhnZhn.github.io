@@ -1,13 +1,44 @@
 import AdapterFn from '../AdapterFn'
 
+import { Direction } from '../../constants/Type'
+
 const {
+  crError,
+  crId,
+  crItemLink,
+
+  crVolumePoint,
+  crAthPoint,
+
+  legendItem,
+  stockSeriesLegend,
+
   ymdToUTC,
   toUpperCaseFirst,
   isYNumber,
+  isNumberOrNull,
+  toFloatOrEmpty,
   findMinY,
   findMaxY,
-  joinBy
+  joinBy,
+  valueMoving,
+  crItemConf,
+  crValueConf
 } = AdapterFn;
+
+describe('added fns', ()=>{
+  it('should have next fns', ()=>{
+    expect(typeof crError).toBe('function')
+    expect(typeof crId).toBe('function')
+    expect(typeof crItemLink).toBe('function')
+
+    expect(typeof crVolumePoint).toBe('function')
+    expect(typeof crAthPoint).toBe('function')
+
+    expect(typeof legendItem).toBe('function')
+    expect(typeof stockSeriesLegend).toBe('function')
+  })
+})
 
 const Y = [
   { in: '2017', r: 1514678400000, d: '31-12-2017' },
@@ -111,6 +142,29 @@ describe('isYNumber', () => {
   })
 })
 
+describe('isNumberOrNull', ()=>{
+  const fn = isNumberOrNull
+  it('should return true for number and null or false', ()=>{
+    expect(fn(123)).toBe(true)
+    expect(fn(12.3)).toBe(true)
+    expect(fn(1.23)).toBe(true)
+    expect(fn(null)).toBe(true)
+
+    expect(fn('123')).toBe(false)
+    expect(fn()).toBe(false)
+    expect(fn(NaN)).toBe(false)
+  })
+})
+
+describe('toFloatOrEmpty', ()=>{
+  const fn = toFloatOrEmpty
+  it('should convert input to float or return empty str', ()=>{
+    expect(fn('1.23')).toBe(1.23)
+    expect(fn('')).toBe('')
+    expect(fn('str')).toBe('')
+  })
+})
+
 const DATA_ARR = [ [0, 0.3], [0, 0.31], [0, 0.29] ];
 const DATA_POINT = [ {x:0, y: 0.3},{x:0, y: 0.31},{x:0, y: 0.29} ];
 
@@ -156,5 +210,91 @@ describe('joinBy', () => {
     expect(joinBy('.', '', 'b', 'c')).toBe('b.c')
     expect(joinBy('.', null, 'b', 'c')).toBe('b.c')
     expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c')
+  })
+})
+
+describe('valueMoving', ()=>{
+  const fn = valueMoving
+  it('should return echo data and direction empty for !arr input', ()=>{
+    const direction = { direction: Direction.EMPTY }
+    expect(fn('')).toEqual({ date: '', ...direction })
+    expect(fn(null)).toEqual({ date: null, ...direction })
+    expect(fn()).toEqual({ date: void 0, ...direction })
+    expect(fn({})).toEqual({ date: {}, ...direction })
+    expect(fn('str')).toEqual({ date: 'str', ...direction })
+  })
+  it('should return valueMoving obj for arr input', ()=>{
+    expect(fn([
+      [Date.UTC(2018, 11, 31), 10000], [Date.UTC(2019, 11, 31), 20000]
+    ])).toEqual({
+      value: '20 000',
+      _value: '20000',
+      delta: '10 000',
+      _deltaAbs: '10000',
+      percent: '100.00%',
+      _percentAbs: '100.00',
+      direction: Direction.UP,
+
+      valueTo: '10 000',
+      date: '31-12-2019',
+      dateTo: '31-12-2018'
+    })
+  })
+  it('should return valueMoving obj for arr input with 1 point', ()=>{
+    expect(fn([
+      [Date.UTC(2019, 11, 31), 20000]
+    ])).toEqual({
+      value: '20 000',
+      _value: '20000',
+      delta: '0',
+      _deltaAbs: '0',
+      percent: '0.00%',
+      _percentAbs: '0.00',
+      direction: Direction.EQUAL,
+
+      valueTo: '20 000',
+      date: '31-12-2019',
+      dateTo: '31-12-2019'
+    })
+  })
+  it('should return valueMoving obj for empty arr', ()=>{
+    expect(fn([])).toEqual({
+      value: '0',
+      _value: '0',
+      delta: '0',
+      _deltaAbs: '0',
+      percent: '0.00%',
+      _percentAbs: '0.00',
+      direction: Direction.EQUAL,
+
+      valueTo: '0',
+      date: '',
+      dateTo: ''
+    })
+  })
+})
+
+describe('crItemConf', ()=>{
+  const fn = crItemConf
+  it('should create obj with item conf', ()=>{
+    expect(fn({
+      title: 'title',
+      subtitle: null,
+      itemCaption: void 0
+    })).toEqual({
+      title: 'title'
+    })
+  })
+})
+
+describe('crValueConf', ()=>{
+  const fn = crValueConf
+  it('should return {x, y} recent point from data', ()=>{
+    expect(fn([[3, 3], [1, 2]])).toEqual({ x: 1, y: 2 })
+    expect(fn([{x:3, y:3}, {x:1, y:2}])).toEqual({ x: 1, y: 2 })
+  })
+  it('should use str 0.0 for y not number', ()=>{
+    expect(fn([[3, 3], [1, null]])).toEqual({ x: 1, y: '0.0' })
+    expect(fn([{x:3, y:3}, {x:1, y:NaN}])).toEqual({ x: 1, y: '0.0' })
   })
 })

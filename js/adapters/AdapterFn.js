@@ -17,9 +17,11 @@ var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
 var _Type = require("../constants/Type");
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _crFn = _interopRequireDefault(require("./crFn"));
 
-var _crPoint = _interopRequireDefault(require("./crPoint"));
+var _pointFn = _interopRequireDefault(require("./pointFn"));
+
+var _legendFn = _interopRequireDefault(require("./legendFn"));
 
 var dt = _ut["default"].dt,
     fCompareBy = _ut["default"].fCompareBy,
@@ -32,25 +34,14 @@ var findMinY = _seriaFn["default"].findMinY,
 var ymdToUTC = dt.ymdToUTC,
     ymdhmsToUTC = dt.ymdhmsToUTC,
     mlsToDmy = dt.mlsToDmy,
-    getFromDate = dt.getFromDate;
+    getFromDate = dt.getFromDate,
+    monthIndex = dt.monthIndex;
 var EMPTY = '';
-var HP_MONTH = {
-  january: 0,
-  february: 1,
-  march: 2,
-  april: 3,
-  may: 4,
-  june: 5,
-  july: 6,
-  august: 7,
-  september: 8,
-  october: 9,
-  november: 10,
-  december: 11
-};
 var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType'];
 
-var _isNaN = Number && Number.isNaN || isNaN,
+var _isNaN = function _isNaN(n) {
+  return typeof n === 'number' && n - n !== 0;
+},
     _isArr = Array.isArray,
     _isNumber = function _isNumber(n) {
   return typeof n === 'number' && n - n === 0;
@@ -67,11 +58,15 @@ var _getDate = function _getDate(point) {
 };
 
 var _getValue = function _getValue(point) {
-  if (_isArr(point)) {
-    return _isNumber(point[1]) ? point[1] : '0.0';
-  } else {
-    return point && _isNumber(point.y) ? point.y : '0.0';
-  }
+  return _isArr(point) ? _isNumber(point[1]) ? point[1] : '0.0' : point && _isNumber(point.y) ? point.y : '0.0';
+};
+
+var _crBigValueFrom = function _crBigValueFrom(point) {
+  return (0, _big["default"])(_getValue(point));
+};
+
+var _crDmyFrom = function _crDmyFrom(point) {
+  return mlsToDmy(_getDate(point));
 };
 
 var _fToFloatOr = function _fToFloatOr(dfValue) {
@@ -82,27 +77,13 @@ var _fToFloatOr = function _fToFloatOr(dfValue) {
   };
 };
 
-var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
+var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["default"], _legendFn["default"], {
   ymdToUTC: ymdToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
   getFromDate: getFromDate,
+  monthIndex: monthIndex,
   getCaption: getC,
   getValue: getV,
-  legendItem: function legendItem(index, color, name, is) {
-    if (is === void 0) {
-      is = false;
-    }
-
-    return {
-      index: index,
-      color: color,
-      name: name,
-      isVisible: is
-    };
-  },
-  stockSeriesLegend: function stockSeriesLegend() {
-    return [AdapterFn.legendItem(0, _Color["default"].S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color["default"].S_HIGH, 'High'), AdapterFn.legendItem(2, _Color["default"].S_LOW, 'Low'), AdapterFn.legendItem(3, _Color["default"].S_OPEN, 'Open')];
-  },
   roundBy: _mathFn["default"].roundBy,
   numberFormat: formatAllNumber,
   isNumberOrNull: function isNumberOrNull(v) {
@@ -137,14 +118,12 @@ var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
     }
 
     var len = data.length,
-        _pointNow = len > 0 && data[len - 1] ? data[len - 1] : [EMPTY, 0],
-        bNowValue = (0, _big["default"])(_getValue(_pointNow)),
-        _pointPrev = len > 1 && data[len - 2] ? data[len - 2] : _pointNow,
-        bPrevValue = (0, _big["default"])(_getValue(_pointPrev)),
-        _nowDate = _getDate(_pointNow),
-        date = len > 0 ? mlsToDmy(_nowDate) : EMPTY,
-        _prevDate = _getDate(_pointPrev),
-        dateTo = len > 1 && _prevDate ? mlsToDmy(_prevDate) : EMPTY;
+        _pointNow = data[len - 1] || [EMPTY, 0],
+        bNowValue = _crBigValueFrom(_pointNow),
+        _pointPrev = data[len - 2] || _pointNow,
+        bPrevValue = _crBigValueFrom(_pointPrev),
+        date = _crDmyFrom(_pointNow),
+        dateTo = _crDmyFrom(_pointPrev);
 
     return (0, _extends2["default"])({}, AdapterFn.crValueMoving({
       bNowValue: bNowValue,
@@ -155,9 +134,6 @@ var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
       date: date,
       dateTo: dateTo
     });
-  },
-  crId: function crId() {
-    return (Date.now().toString(36) + Math.random().toString(36).substring(2, 9)).toUpperCase();
   },
   crItemConf: function crItemConf(option) {
     var _itemConf = {};
@@ -176,8 +152,8 @@ var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
   crValueConf: function crValueConf(data) {
     var _p = data[data.length - 1];
     return {
-      y: _getValue(_p),
-      x: _getDate(_p)
+      x: _getDate(_p),
+      y: _getValue(_p)
     };
   },
   joinBy: function joinBy(delimeter) {
@@ -190,28 +166,8 @@ var AdapterFn = (0, _extends2["default"])({}, _crPoint["default"], {
   toUpperCaseFirst: function toUpperCaseFirst(str) {
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substring(1) : EMPTY;
   },
-  monthIndex: function monthIndex(str) {
-    return HP_MONTH[String(str).toLowerCase()] || -1;
-  },
   findMinY: findMinY,
-  findMaxY: findMaxY,
-  crError: function crError(errCaption, message) {
-    if (errCaption === void 0) {
-      errCaption = '';
-    }
-
-    if (message === void 0) {
-      message = '';
-    }
-
-    return {
-      errCaption: errCaption,
-      message: message
-    };
-  },
-  crItemLink: function crItemLink(caption, itemUrl) {
-    return "<p>\n    <a href=\"" + itemUrl + "\" style=\"padding-top: 4px;\">" + caption + "</a>\n  </p>";
-  }
+  findMaxY: findMaxY
 });
 var _default = AdapterFn;
 exports["default"] = _default;

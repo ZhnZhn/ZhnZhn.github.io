@@ -3,7 +3,7 @@ import C from '../constants/Color'
 
 const _assign = Object.assign
 
-const crPoint = {
+const pointFn = {
   crVolumePoint: ({ date, open, close, volume, option }) => {
     let _color;
     if (open && close>open) {
@@ -49,4 +49,4 @@ const crPoint = {
   }
 }
 
-export default crPoint
+export default pointFn

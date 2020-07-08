@@ -1,4 +1,4 @@
-import crPoint from '../crPoint'
+import crPoint from '../pointFn'
 
 import C from '../../constants/Color'
 

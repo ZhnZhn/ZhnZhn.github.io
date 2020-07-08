@@ -7,8 +7,11 @@ import mathFn from '../math/mathFn'
 import seriaFn from '../math/seriaFn'
 
 import { Direction } from '../constants/Type'
-import C from '../constants/Color'
-import crPoint from './crPoint'
+
+import crFn from './crFn'
+import pointFn from './pointFn'
+import legendFn from './legendFn'
+
 
 const {
   dt,
@@ -23,17 +26,11 @@ const {
   ymdToUTC,
   ymdhmsToUTC,
   mlsToDmy,
-  getFromDate
+  getFromDate,
+  monthIndex
 } = dt;
 
 const EMPTY = '';
-const HP_MONTH = {
-  january: 0, february: 1,
-  march: 2, april: 3, may: 4,
-  june: 5, july: 6, august: 7,
-  september: 8, october: 9, november: 10,
-  december: 11
-};
 
 const ITEM_CONF_PROP_NAMES = [
  'url', 'loadId',
@@ -41,7 +38,8 @@ const ITEM_CONF_PROP_NAMES = [
  'seriaType'
 ];
 
-const _isNaN = Number && Number.isNaN || isNaN
+const _isNaN = n => typeof n === 'number'
+  && (n-n !== 0)
 , _isArr = Array.isArray
 , _isNumber = n => typeof n === 'number'
     && (n - n) === 0;
@@ -54,17 +52,16 @@ const _getDate = point =>_isArr(point)
   ? point[0]
   : (point || {}).x;
 
-const _getValue = (point) => {
-  if (_isArr(point)){
-    return _isNumber(point[1])
+const _getValue = (point) => _isArr(point)
+  ? _isNumber(point[1])
        ? point[1]
-       : '0.0';
-  } else {
-    return point && _isNumber(point.y)
+       : '0.0'
+  : point && _isNumber(point.y)
       ? point.y
       : '0.0';
-  }
-}
+
+const _crBigValueFrom = point => Big(_getValue(point));
+const _crDmyFrom = point => mlsToDmy(_getDate(point));
 
 const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
@@ -72,35 +69,24 @@ const _fToFloatOr = dfValue => str => {
 };
 
 const AdapterFn = {
-  ...crPoint,
+  ...crFn,
+  ...pointFn,
+  ...legendFn,
 
   ymdToUTC,
   ymdhmsToUTC,
   getFromDate,
+  monthIndex,
 
   getCaption: getC,
   getValue: getV,
-
-  legendItem: (index, color, name, is=false) => ({
-    index, color, name,
-    isVisible: is
-  }),
-
-  stockSeriesLegend(){
-    return [
-      AdapterFn.legendItem(0, C.S_STOCK_CLOSE, 'Close', true),
-      AdapterFn.legendItem(1, C.S_HIGH, 'High'),
-      AdapterFn.legendItem(2, C.S_LOW, 'Low'),
-      AdapterFn.legendItem(3, C.S_OPEN, 'Open')
-    ];
-  },
 
   roundBy: mathFn.roundBy,
   numberFormat: formatAllNumber,
 
   isNumberOrNull: v => _isNumber(v) || v === null,
 
-  isYNumber: _fIsNumber('y'),  
+  isYNumber: _fIsNumber('y'),
   toFloatOrEmpty: _fToFloatOr(''),
 
   compareByDate: fCompareBy(0),
@@ -130,36 +116,18 @@ const AdapterFn = {
     }
 
     const len = data.length
-    , _pointNow = len>0 && data[len-1]
-         ? data[len-1]
-         : [ EMPTY, 0 ]
-    , bNowValue = Big(_getValue(_pointNow))
-    , _pointPrev = len>1 && data[len-2]
-        ? data[len-2]
-        : _pointNow
-    , bPrevValue = Big(_getValue(_pointPrev))
-    , _nowDate = _getDate(_pointNow)
-    , date = len>0
-         ? mlsToDmy(_nowDate)
-         : EMPTY
-    , _prevDate = _getDate(_pointPrev)
-    , dateTo = len>1 && _prevDate
-         ? mlsToDmy(_prevDate)
-         : EMPTY;
+    , _pointNow = data[len-1] || [ EMPTY, 0 ]
+    , bNowValue = _crBigValueFrom(_pointNow)
+    , _pointPrev = data[len-2] || _pointNow
+    , bPrevValue = _crBigValueFrom(_pointPrev)
+    , date = _crDmyFrom(_pointNow)
+    , dateTo = _crDmyFrom(_pointPrev);
 
       return  {
         ...AdapterFn.crValueMoving({ bNowValue, bPrevValue, dfR }),
         valueTo: formatAllNumber(bPrevValue),
         date, dateTo
       };
-  },
-
-  crId: () => {
-    return (
-        Date.now().toString(36) +
-        Math.random().toString(36).substring(2, 9)
-      )
-      .toUpperCase();
   },
 
   crItemConf: (option) => {
@@ -177,8 +145,8 @@ const AdapterFn = {
   crValueConf: data => {
     const _p = data[data.length-1];
     return {
-      y: _getValue(_p),
-      x: _getDate(_p)
+      x: _getDate(_p),
+      y: _getValue(_p)
     };
   },
 
@@ -192,19 +160,8 @@ const AdapterFn = {
       : EMPTY
   ,
 
-  monthIndex: str => HP_MONTH[String(str).toLowerCase()]
-    || -1,
-
   findMinY,
-  findMaxY,
-
-  crError: (errCaption='', message='') => ({
-    errCaption,
-    message
-  }),
-  crItemLink: (caption, itemUrl) => `<p>
-    <a href="${itemUrl}" style="padding-top: 4px;">${caption}</a>
-  </p>`
+  findMaxY
 };
 
 export default AdapterFn

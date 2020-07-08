@@ -4,12 +4,12 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _crPoint = _interopRequireDefault(require("../crPoint"));
+var _pointFn = _interopRequireDefault(require("../pointFn"));
 
 var _Color = _interopRequireDefault(require("../../constants/Color"));
 
-var crVolumePoint = _crPoint["default"].crVolumePoint,
-    crAthPoint = _crPoint["default"].crAthPoint;
+var crVolumePoint = _pointFn["default"].crVolumePoint,
+    crAthPoint = _pointFn["default"].crAthPoint;
 describe('crVolumePoint', function () {
   var fn = crVolumePoint;
   var _p = {
@@ -190,4 +190,4 @@ describe('crAthPoint', function () {
     });
   });
 });
-//# sourceMappingURL=crPoint.test.js.map
+//# sourceMappingURL=pointFn.test.js.map
