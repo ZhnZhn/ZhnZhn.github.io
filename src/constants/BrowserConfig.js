@@ -62,6 +62,12 @@ const BrowserConfig = {
     caption: 'Insee: France Statistics',
     sourceMenuUrl: './data/statistics-france/source-menu.json'
   },
+  [BT.UK_STATISTICS]: {
+    browserType: BT.UK_STATISTICS,
+    isDynamic: true,
+    caption: 'ONS: UK Statistics',
+    sourceMenuUrl: './data/statistics-uk/source-menu.json'    
+  },
   [BT.NORWAY_STATISTICS]: {
     browserType: BT.NORWAY_STATISTICS,
     isDynamic: true,

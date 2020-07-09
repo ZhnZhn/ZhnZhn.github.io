@@ -56,7 +56,7 @@ var DataProviders = function DataProviders(_ref) {
       ocCaptionStyle = _ref.ocCaptionStyle;
   return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
     isClose: isClose,
-    caption: "Data Providers (All 21):",
+    caption: "Data Providers (All 22):",
     style: (0, _extends2["default"])({}, _About["default"].LINE_HEIGHT, _About["default"].P_BOTTOM),
     captionStyle: ocCaptionStyle,
     openColor: _Color["default"].YELLOW,
@@ -76,6 +76,8 @@ var DataProviders = function DataProviders(_ref) {
   }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].WorldBank, null)), /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].Insee, null)), /*#__PURE__*/_react["default"].createElement("span", {
+    style: _About["default"].PROVIDER
+  }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].ONS, null)), /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].PROVIDER
   }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].StatNorway, null)), /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].PROVIDER

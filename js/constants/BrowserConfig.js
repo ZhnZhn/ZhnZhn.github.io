@@ -57,6 +57,11 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
   isDynamic: true,
   caption: 'Insee: France Statistics',
   sourceMenuUrl: './data/statistics-france/source-menu.json'
+}, _BrowserConfig[_Type.BrowserType.UK_STATISTICS] = {
+  browserType: _Type.BrowserType.UK_STATISTICS,
+  isDynamic: true,
+  caption: 'ONS: UK Statistics',
+  sourceMenuUrl: './data/statistics-uk/source-menu.json'
 }, _BrowserConfig[_Type.BrowserType.NORWAY_STATISTICS] = {
   browserType: _Type.BrowserType.NORWAY_STATISTICS,
   isDynamic: true,

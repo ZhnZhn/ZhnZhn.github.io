@@ -32,6 +32,7 @@ const LINK_CONFIGS = [
  ["Eia","U.S. EIA", "https://www.eia.gov"],
  ["Intrinio",'Intrinio', "https://intrinio.com"],
  ["Insee","Insee: France Statistics", "https://www.insee.fr/en/accueil/"],
+ ["ONS","ONS: UK Statistics", "https://www.ons.gov.uk"],
  ["StatNorway","Statistics Norway", "https://www.ssb.no/en/"],
  ["StatSweden","Statistics Sweden", "https://www.scb.se/en/"],
  ["StatFinland","Statistics Finland", "https://www.stat.fi/index_en.html"],

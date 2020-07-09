@@ -46,7 +46,7 @@ const ST = {
 const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 21):"
+     caption="Data Providers (All 22):"
      style={{...S.LINE_HEIGHT, ...S.P_BOTTOM}}
      captionStyle={ocCaptionStyle}
      openColor={C.YELLOW}
@@ -74,6 +74,9 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Insee/>
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.ONS/>
         </span>
         <span style={S.PROVIDER}>
           <Link.StatNorway />

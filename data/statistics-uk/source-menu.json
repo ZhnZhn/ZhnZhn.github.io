@@ -1,0 +1,35 @@
+{
+  "menu": [
+    { "caption": "Economics",
+      "items": [
+        { "id": "UKS_TRADE" }
+      ]
+    }
+  ],
+  "items": {
+    "UKS_B1": {
+      "dialogProps": {
+        "noDate": true,
+        "descrUrl" : "./data/statistics-uk/ons.html",
+        "loadId" : "UKS",
+        "rootUri": "./data/statistics-uk/",
+        "spT": "id",
+        "chartsType": "t2",
+        "dataSource" : "ONS: UK Statistics"
+      }
+    },
+    "UKS_TRADE": {
+      "type": "UKS_TRADE",
+      "menuTitle" : "Trade of Goods, M",
+      "contCaption" : "",
+      "addProps": "UKS_B1",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Country", "country" ],
+          [ "Item", "commodity" ],
+          [ "Flow", "trade-flow" ]
+        ]
+      }
+    }
+  }
+}

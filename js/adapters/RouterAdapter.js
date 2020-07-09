@@ -15,6 +15,10 @@ var _FaoStat = _interopRequireDefault(require("./faostat/FaoStat"));
 
 var _WorldBank = _interopRequireDefault(require("./world-bank/WorldBank"));
 
+var _Insee = _interopRequireDefault(require("./insee/Insee"));
+
+var _StatUk = _interopRequireDefault(require("./stat-uk/StatUk"));
+
 var _StatNorway = _interopRequireDefault(require("./stat-norway/StatNorway"));
 
 var _StatSweden = _interopRequireDefault(require("./stat-sweden/StatSweden"));
@@ -28,8 +32,6 @@ var _Barchart = _interopRequireDefault(require("./barchart/Barchart"));
 var _Iex = _interopRequireDefault(require("./iex/Iex"));
 
 var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
-
-var _Insee = _interopRequireDefault(require("./insee/Insee"));
 
 var _Bea = _interopRequireDefault(require("./bea/Bea"));
 
@@ -55,7 +57,9 @@ var RouterAdapter = (0, _extends2["default"])({
   EuroStat: _EuroStat["default"],
   UnComtrade: _UnComtrade["default"],
   FaoStat: _FaoStat["default"],
-  WorldBank: _WorldBank["default"]
+  WorldBank: _WorldBank["default"],
+  Insee: _Insee["default"],
+  StatUk: _StatUk["default"]
 }, _StatNorway["default"], {
   StatSweden: _StatSweden["default"],
   StatFinland: _StatFinland["default"]
@@ -63,7 +67,6 @@ var RouterAdapter = (0, _extends2["default"])({
   Barchart: _Barchart["default"],
   Iex: _Iex["default"],
   Fmp: _Fmp["default"],
-  Insee: _Insee["default"],
   Bea: _Bea["default"],
   Bls: _Bls["default"],
   Eia: _Eia["default"],

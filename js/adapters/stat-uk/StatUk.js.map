@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-uk/StatUk.js"
+ ],
+ "file": "../../../src/adapters/stat-uk/StatUk.js",
+ "names": [
+  "StatUk",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,MAAM,GAAG;AACbC,EAAAA,GAAG,EAAHA,kBADa;AACRC,EAAAA,OAAO,EAAPA;AADQ,CAAf;eAIeF,M"
+}

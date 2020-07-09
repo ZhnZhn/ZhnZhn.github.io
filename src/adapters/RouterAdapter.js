@@ -3,6 +3,8 @@ import EuroStat from './eurostat/EuroStat'
 import UnComtrade from './uncomtrade/UnComtrade'
 import FaoStat from './faostat/FaoStat'
 import WorldBank from './world-bank/WorldBank'
+import Insee from './insee/Insee'
+import StatUk from './stat-uk/StatUk'
 import StatNorway from './stat-norway/StatNorway'
 import StatSweden from './stat-sweden/StatSweden'
 import StatFinland from './stat-finland/StatFinland'
@@ -10,7 +12,6 @@ import AlphaVantage from './alpha/AlphaVantage'
 import Barchart from './barchart/Barchart'
 import Iex from './iex/Iex'
 import Fmp from './fmp/Fmp'
-import Insee from './insee/Insee'
 import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Eia from './eia/Eia'
@@ -29,14 +30,15 @@ const RouterAdapter = {
   UnComtrade,
   FaoStat,
   WorldBank,
+  Insee,
+  StatUk,
   ...StatNorway,
   StatSweden,
   StatFinland,
   ...AlphaVantage,
   Barchart,
   Iex,
-  Fmp,
-  Insee,
+  Fmp,  
   Bea,
   Bls,
   Eia,

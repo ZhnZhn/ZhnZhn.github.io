@@ -20,6 +20,8 @@ const LoadConfig = {
   [LT.FMP]: LoadImpl.Fmp,
 
   [LT.EU_STAT]: LoadImpl.EuroStat,
+  [LT.FS]: LoadImpl.Insee,
+  [LT.UKS]: LoadImpl.StatUk,
   [LT.NST]: LoadImpl.StatNorway,
   [LT.NST_2]: LoadImpl.StatNorway2,
   [LT.SWS]: LoadImpl.StatSweden,

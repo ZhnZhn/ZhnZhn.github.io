@@ -8,6 +8,7 @@ export const BrowserType = {
    WORLD_BANK: 'WB',
 
    FRANCE_STATISTICS: 'FS',
+   UK_STATISTICS: 'UKS',
    NORWAY_STATISTICS: 'NST',
    NORWAY_STAT_ALL: 'NST_ALL',
    SWEDEN_STAT: 'SWS',
@@ -81,6 +82,7 @@ export const LoadType = {
   DBN: 'DBN',
   EU_STAT: 'EU_STAT',
   FS: 'FS',
+  UKS: 'UKS',
   NST: 'NST',
   NST_2: 'NST_2',
   SWS: 'SWS',
@@ -103,7 +105,7 @@ export const CompItemType = {
   EUROSTAT_MAP: 'EUROSTAT_MAP',
   COIN_INFO: 'COIN_INFO',
   TABLE: 'TABLE',
-  ALPHA_PERF: 'ALPHA_PERF',  
+  ALPHA_PERF: 'ALPHA_PERF',
   INFO_ITEM: 'INFO_ITEM',
   TW_LIST: 'TW_LIST'
 }

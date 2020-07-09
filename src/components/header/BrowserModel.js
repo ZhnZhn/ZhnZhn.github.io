@@ -97,6 +97,11 @@ const crBrowserModel = () => {
         isClose: true
       },{
         cn: CL.ORG,
+        name: 'ONS: UK Statistics',
+        onClick: _fBD(BT.UK_STATISTICS),
+        isClose: true
+      },{
+        cn: CL.ORG,
         name: 'Statistics Norway',
         onClick: _fBD(BT.NORWAY_STATISTICS),
         isClose: true
