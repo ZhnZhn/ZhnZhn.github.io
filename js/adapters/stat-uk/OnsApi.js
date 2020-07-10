@@ -10,8 +10,9 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 var getValue = _fnAdapter["default"].getValue,
     crError = _fnAdapter["default"].crError;
 var C = {
-  ROOT: 'https://api.beta.ons.gov.uk/',
-  TRADE: 'v1/datasets/trade/editions/time-series/versions/21/observations',
+  ROOT: 'https://api.beta.ons.gov.uk/v1/datasets/',
+  EDT: '/editions/time-series/versions/',
+  OBS: '/observations?',
   QUERY_TAIL: 'time=*&geography=K02000001',
   ERR_CAPTION: 'Server Response',
   MSG_EMPTY: 'Dataset is empty'
@@ -20,13 +21,33 @@ var _isArr = Array.isArray;
 
 var _crErr = crError.bind(null, C.ERR_CAPTION, C.MSG_EMPTY);
 
+var _crUrl = function _crUrl(item, vers) {
+  return C.ROOT + item + C.EDT + vers + C.OBS;
+};
+
+var _crTradeUrl = function _crTradeUrl(_ref) {
+  var items = _ref.items;
+  var v1 = getValue(items[0]),
+      v2 = getValue(items[1]),
+      v3 = getValue(items[2]);
+  return _crUrl('trade', '21') + "country=" + v1 + "&commodity=" + v2 + "&direction=" + v3 + "&" + C.QUERY_TAIL;
+};
+
+var _crCpiUrl = function _crCpiUrl(_ref2) {
+  var items = _ref2.items;
+  var v1 = getValue(items[0]);
+  return _crUrl('cpih01', '34') + "aggregate=" + v1 + "&" + C.QUERY_TAIL;
+};
+
+var _rCrUrl = {
+  '21': _crTradeUrl,
+  '34': _crCpiUrl
+};
 var OnsApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var items = option.items,
-        v1 = getValue(items[0]),
-        v2 = getValue(items[1]),
-        v3 = getValue(items[2]);
-    return "" + C.ROOT + C.TRADE + "?country=" + v1 + "&commodity=" + v2 + "&direction=" + v3 + "&" + C.QUERY_TAIL;
+    var _rCrUrl$option$dfV;
+
+    return (_rCrUrl$option$dfV = _rCrUrl[option.dfV]) == null ? void 0 : _rCrUrl$option$dfV.call(_rCrUrl, option);
   },
   checkResponse: function checkResponse(json) {
     if (!(json && _isArr(json.observations))) {
