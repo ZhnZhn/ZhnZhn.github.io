@@ -11,6 +11,7 @@ var C = {
   //LIMIT_REMAINING: 'X-RateLimit-Remaining',
   REQ_ERR: 'Request Error',
   RESP_ERR: 'Response Error',
+  MSG_URI_EMPTY: "Item url isn't specified by adapter.",
   MSG_400: '400: Bad request.',
   MSG_404: '404: Resource is not existed.',
   MSG_429: '429: Too many request in a given amount of time (rate limiting).',
@@ -21,8 +22,11 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
+var _isArr = Array.isArray;
+var _assign = Object.assign;
+
 var _isInArrValue = function _isInArrValue(arr, value) {
-  return Array.isArray(arr) && arr.indexOf(value) !== -1;
+  return _isArr(arr) && arr.indexOf(value) !== -1;
 };
 
 var _crErr = function _crErr(message, errCaption) {
@@ -67,6 +71,19 @@ var _fFetch = function _fFetch(propName, type) {
         onFailed = _ref2.onFailed,
         onCatch = _ref2.onCatch;
 
+    if (!uri) {
+      if (_isFn(onFailed)) {
+        setTimeout(function () {
+          return onFailed(_assign(option, {
+            alertCaption: C.REQ_ERR,
+            alertDescr: C.MSG_URI_EMPTY
+          }));
+        }, 0);
+      }
+
+      return;
+    }
+
     var _fnFetch = type !== 'jsonp' ? fetch : _fetchJsonp["default"];
 
     _fnFetch(uri, optionFetch).then(function (response) {
@@ -106,7 +123,7 @@ var _fFetch = function _fFetch(propName, type) {
       } else if (status >= 500 && status < 600) {
         throw _crErr(status + ": " + statusText, C.RESP_ERR);
       } else {
-        return [undefined, {}, status];
+        return [void 0, {}, status];
       }
     }).then(function (_ref3) {
       var limitRemaining = _ref3[0],

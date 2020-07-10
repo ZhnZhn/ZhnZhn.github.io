@@ -5,6 +5,7 @@ const C = {
   REQ_ERR: 'Request Error',
   RESP_ERR: 'Response Error',
 
+  MSG_URI_EMPTY: "Item url isn't specified by adapter.",
   MSG_400: '400: Bad request.',
   MSG_404: '404: Resource is not existed.',
   MSG_429: '429: Too many request in a given amount of time (rate limiting).',
@@ -12,8 +13,10 @@ const C = {
 };
 
 const _isFn = fn => typeof fn === 'function';
+const _isArr = Array.isArray
+const _assign = Object.assign
 
-const _isInArrValue = (arr, value) => Array.isArray(arr)
+const _isInArrValue = (arr, value) => _isArr(arr)
   && arr.indexOf(value) !== -1;
 
 const _crErr = (message, errCaption=C.REQ_ERR) => ({
@@ -52,6 +55,15 @@ const _fFetch = (propName, type) => function({
    onFetch, onCompleted,
    onFailed, onCatch
  }){
+  if (!uri) {
+    if (_isFn(onFailed)) {
+      setTimeout(()=>onFailed(_assign(option, {
+        alertCaption: C.REQ_ERR,
+        alertDescr: C.MSG_URI_EMPTY
+      })), 0)
+    }
+    return;
+  }
   const _fnFetch = type !== 'jsonp'
     ? fetch
     : fetchJsonpImpl;
@@ -79,7 +91,7 @@ const _fFetch = (propName, type) => function({
       } else if (status>=500 && status<600){
          throw _crErr(`${status}: ${statusText}`, C.RESP_ERR);
       } else {
-        return [undefined, {}, status];
+        return [void 0, {}, status];
       }
     })
     .then(([limitRemaining, json, status]) => {
