@@ -3,7 +3,9 @@
     { "caption": "Economics",
       "items": [
         { "id": "UKS_CPIH" },
-        { "id": "UKS_TRADE" }
+        { "id": "UKS_TRADE" },
+        { "id": "UKS_PHRI" },
+        { "id": "UKS_GDP" }
       ]
     }
   ],
@@ -22,7 +24,7 @@
     "UKS_CPIH": {
       "type": "UKS_CPIH",
       "menuTitle" : "CPIH, M",
-      "contCaption" : "",
+      "contCaption" : "CPIH, M",
       "addProps": "UKS_B1",
       "dialogProps" : {
         "selectProps": [
@@ -36,7 +38,7 @@
     "UKS_TRADE": {
       "type": "UKS_TRADE",
       "menuTitle" : "Trade of Goods, M",
-      "contCaption" : "",
+      "contCaption" : "Trade of Goods, M",
       "addProps": "UKS_B1",
       "dialogProps" : {
         "selectProps": [
@@ -46,6 +48,37 @@
         ],
         "dfProps": {
           "dfV": 21
+        }
+      }
+    },
+    "UKS_PHRI": {
+      "type": "UKS_PHRI",
+      "menuTitle" : "Private House Rental Index, M",
+      "contCaption" : "Private House Rental Index, M",
+      "addProps": "UKS_B1",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Geography", "phri-geography" ],
+          [ "Index", "phri-index" ]
+        ],
+        "dfProps": {
+          "dfV": 20
+        }
+      }
+    },
+    "UKS_GDP": {
+      "type": "UKS_GDP",
+      "menuTitle" : "GDP, Chained Volume, Q",
+      "contCaption" : "GDP, Chained Volume, Q",
+      "addProps": "UKS_B1",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Geography", "gdp-geography" ],
+          [ "SIC", "sic" ],
+          [ "Measure", "gdp-measure" ]
+        ],
+        "dfProps": {
+          "dfV": 5
         }
       }
     }

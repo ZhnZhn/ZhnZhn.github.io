@@ -27,6 +27,13 @@ const MONTH_HM = {
   Dec: '12'
 }
 
+const QUARTER_HM = {
+  q1: "03",
+  q2: "06",
+  q3: "09",
+  q4: "12"
+}
+
 //Jan-20
 const _mmmYyToMls = str => {
   const _arr = str.split('-')
@@ -34,6 +41,23 @@ const _mmmYyToMls = str => {
   , _yStr = _arr[1].trim()
   , _yPrefix = _yStr < '30' ? '20' : '19';
   return ymdToUTC(`${_yPrefix}${_yStr}-${_m}`);
+}
+
+//2010-q1
+const _yyyyQqToMls = str => {
+  const [ _yyyy, _q='' ] = str && str.split('-') || []
+  , _mm = QUARTER_HM[_q.trim().toLowerCase()];
+  return _yyyy && _mm
+    ? ymdToUTC(`${_yyyy}-${_mm}`)
+    : NaN;
+}
+
+const _fCrToMls = observations => {
+  const _item = observations[0] || {}
+  , {  href='' } = (_item.dimensions || {}).time || {};
+  return href.indexOf('yyyy-qq') !== -1
+    ? _yyyyQqToMls
+    : _mmmYyToMls;
 }
 
 const _isNumber = n => typeof n === 'number'
@@ -70,12 +94,13 @@ const fnAdapter = {
   crData: (json) => {
     const _data = []
     , { observations } = json
+    , _toMsl = _fCrToMls(observations);
     let i=0;
     for (;i<observations.length; i++){
       const item = observations[i]
       , { dimensions, observation } = item
       , { id } = (dimensions || {}).time || {}
-      , _x = _mmmYyToMls(id)
+      , _x = _toMsl(id)
       , _y = parseFloat(observation)
       if (_isNumber(_x) && _isNumber(_y)) {
         _data.push([_x, _y])

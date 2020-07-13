@@ -13,7 +13,8 @@ var C = {
   ROOT: 'https://api.beta.ons.gov.uk/v1/datasets/',
   EDT: '/editions/time-series/versions/',
   OBS: '/observations?',
-  QUERY_TAIL: 'time=*&geography=K02000001',
+  QUERY_TIME: '&time=*',
+  QUERY_TAIL: '&time=*&geography=K02000001',
   ERR_CAPTION: 'Server Response',
   MSG_EMPTY: 'Dataset is empty'
 };
@@ -30,18 +31,35 @@ var _crTradeUrl = function _crTradeUrl(_ref) {
   var v1 = getValue(items[0]),
       v2 = getValue(items[1]),
       v3 = getValue(items[2]);
-  return _crUrl('trade', '21') + "country=" + v1 + "&commodity=" + v2 + "&direction=" + v3 + "&" + C.QUERY_TAIL;
+  return _crUrl('trade', '21') + "country=" + v1 + "&commodity=" + v2 + "&direction=" + v3 + C.QUERY_TAIL;
 };
 
 var _crCpiUrl = function _crCpiUrl(_ref2) {
   var items = _ref2.items;
   var v1 = getValue(items[0]);
-  return _crUrl('cpih01', '34') + "aggregate=" + v1 + "&" + C.QUERY_TAIL;
+  return _crUrl('cpih01', '34') + "aggregate=" + v1 + C.QUERY_TAIL;
+};
+
+var _crPhriUrl = function _crPhriUrl(_ref3) {
+  var items = _ref3.items;
+  var v1 = getValue(items[0]),
+      v2 = getValue(items[1]);
+  return _crUrl('index-private-housing-rental-prices', '20') + "geography=" + v1 + "&variable=" + v2 + C.QUERY_TIME;
+};
+
+var _crGdpUrl = function _crGdpUrl(_ref4) {
+  var items = _ref4.items;
+  var v1 = getValue(items[0]),
+      v2 = getValue(items[1]),
+      v3 = getValue(items[2]);
+  return _crUrl('regional-gdp-by-quarter', '5') + "geography=" + v1 + "&sic=" + v2 + "&measure=" + v3 + "&prices=cvm" + C.QUERY_TIME;
 };
 
 var _rCrUrl = {
   '21': _crTradeUrl,
-  '34': _crCpiUrl
+  '34': _crCpiUrl,
+  '20': _crPhriUrl,
+  '5': _crGdpUrl
 };
 var OnsApi = {
   getRequestUrl: function getRequestUrl(option) {

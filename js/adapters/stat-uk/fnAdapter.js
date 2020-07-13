@@ -30,6 +30,12 @@ var MONTH_HM = {
   Oct: '10',
   Nov: '11',
   Dec: '12'
+};
+var QUARTER_HM = {
+  q1: "03",
+  q2: "06",
+  q3: "09",
+  q4: "12"
 }; //Jan-20
 
 var _mmmYyToMls = function _mmmYyToMls(str) {
@@ -39,16 +45,36 @@ var _mmmYyToMls = function _mmmYyToMls(str) {
       _yPrefix = _yStr < '30' ? '20' : '19';
 
   return ymdToUTC("" + _yPrefix + _yStr + "-" + _m);
+}; //2010-q1
+
+
+var _yyyyQqToMls = function _yyyyQqToMls(str) {
+  var _ref = str && str.split('-') || [],
+      _yyyy = _ref[0],
+      _ref$ = _ref[1],
+      _q = _ref$ === void 0 ? '' : _ref$,
+      _mm = QUARTER_HM[_q.trim().toLowerCase()];
+
+  return _yyyy && _mm ? ymdToUTC(_yyyy + "-" + _mm) : NaN;
+};
+
+var _fCrToMls = function _fCrToMls(observations) {
+  var _item = observations[0] || {},
+      _ref2 = (_item.dimensions || {}).time || {},
+      _ref2$href = _ref2.href,
+      href = _ref2$href === void 0 ? '' : _ref2$href;
+
+  return href.indexOf('yyyy-qq') !== -1 ? _yyyyQqToMls : _mmmYyToMls;
 };
 
 var _isNumber = function _isNumber(n) {
   return typeof n === 'number' && n - n === 0;
 };
 
-var _crZhConfig = function _crZhConfig(_ref) {
-  var _itemKey = _ref._itemKey,
-      title = _ref.title,
-      dataSource = _ref.dataSource;
+var _crZhConfig = function _crZhConfig(_ref3) {
+  var _itemKey = _ref3._itemKey,
+      title = _ref3.title,
+      dataSource = _ref3.dataSource;
   return {
     id: _itemKey,
     key: _itemKey,
@@ -57,18 +83,18 @@ var _crZhConfig = function _crZhConfig(_ref) {
   };
 };
 
-var _crName = function _crName(_ref2, _ref3) {
-  var unit_of_measure = _ref2.unit_of_measure;
-  var title = _ref3.title,
-      subtitle = _ref3.subtitle;
+var _crName = function _crName(_ref4, _ref5) {
+  var unit_of_measure = _ref4.unit_of_measure;
+  var title = _ref5.title,
+      subtitle = _ref5.subtitle;
   return joinBy(': ', subtitle, title, unit_of_measure);
 };
 
-var _crDescr = function _crDescr(_ref4) {
-  var links = _ref4.links;
+var _crDescr = function _crDescr(_ref6) {
+  var links = _ref6.links;
 
-  var _ref5 = (links || {}).dataset_metadata || {},
-      href = _ref5.href;
+  var _ref7 = (links || {}).dataset_metadata || {},
+      href = _ref7.href;
 
   return href ? _crItemLink(href) : '';
 };
@@ -85,16 +111,18 @@ var fnAdapter = {
   crError: crError,
   crData: function crData(json) {
     var _data = [],
-        observations = json.observations;
+        observations = json.observations,
+        _toMsl = _fCrToMls(observations);
+
     var i = 0;
 
     for (; i < observations.length; i++) {
       var item = observations[i],
           dimensions = item.dimensions,
           observation = item.observation,
-          _ref6 = (dimensions || {}).time || {},
-          id = _ref6.id,
-          _x = _mmmYyToMls(id),
+          _ref8 = (dimensions || {}).time || {},
+          id = _ref8.id,
+          _x = _toMsl(id),
           _y = parseFloat(observation);
 
       if (_isNumber(_x) && _isNumber(_y)) {
@@ -104,10 +132,10 @@ var fnAdapter = {
 
     return _data.sort(compareByDate);
   },
-  crConfigOption: function crConfigOption(_ref7) {
-    var json = _ref7.json,
-        option = _ref7.option,
-        data = _ref7.data;
+  crConfigOption: function crConfigOption(_ref9) {
+    var json = _ref9.json,
+        option = _ref9.option,
+        data = _ref9.data;
     return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),
