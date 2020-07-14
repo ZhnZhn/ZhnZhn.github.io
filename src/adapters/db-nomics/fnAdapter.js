@@ -74,7 +74,7 @@ const _isNumber = n => typeof n === 'number'
 
 
 const fnAdapter = {
-  crError,  
+  crError,
   getValue,
   crTitle: ({ title, subtitle }, json) => {
     const _ = getSubtitle(json)
@@ -91,11 +91,10 @@ const fnAdapter = {
     const data = []
     , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
     , { period, value } = getPeriodAndValue(json)
-    , _len = period.length
-    , _ymdOption = { y: 1 };
+    , _len = period.length;    
     let i = 0, _x, _y;
     for (i; i<_len; i++){
-      _x = ymdToUTC(period[i], _ymdOption)
+      _x = ymdToUTC(period[i])
       _y = value[i]
       if (_x > _xFrom && _isNumber(_y)) {
         data.push([ _x, _y ])

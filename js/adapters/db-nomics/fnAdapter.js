@@ -112,17 +112,14 @@ var fnAdapter = {
         _getPeriodAndValue = getPeriodAndValue(json),
         period = _getPeriodAndValue.period,
         value = _getPeriodAndValue.value,
-        _len = period.length,
-        _ymdOption = {
-      y: 1
-    };
+        _len = period.length;
 
     var i = 0,
         _x,
         _y;
 
     for (i; i < _len; i++) {
-      _x = ymdToUTC(period[i], _ymdOption);
+      _x = ymdToUTC(period[i]);
       _y = value[i];
 
       if (_x > _xFrom && _isNumber(_y)) {
