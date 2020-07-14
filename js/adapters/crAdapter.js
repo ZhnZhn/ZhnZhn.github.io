@@ -9,11 +9,14 @@ var _isFn = function _isFn(fn) {
 
 var crAdapter = function crAdapter(getAdapter, _temp) {
   var _ref = _temp === void 0 ? {} : _temp,
-      isKey = _ref.isKey;
+      isKey = _ref.isKey,
+      crDfKey = _ref.crDfKey;
 
   return {
-    crKey: isKey ? function (option) {
-      return getAdapter(option).crKey(option);
+    crKey: isKey || crDfKey ? function (option) {
+      var _crKey = getAdapter(option).crKey || crDfKey;
+
+      return _isFn(_crKey) ? _crKey(option) : void 0;
     } : void 0,
     toConfig: function toConfig(json, option) {
       return getAdapter(option).toConfig(json, option);
@@ -21,8 +24,8 @@ var crAdapter = function crAdapter(getAdapter, _temp) {
     isAdd: function isAdd(option) {
       return _isFn(getAdapter(option).toSeries);
     },
-    toSeries: function toSeries(json, option) {
-      return getAdapter(option).toSeries(json, option);
+    toSeries: function toSeries(json, option, chart) {
+      return getAdapter(option).toSeries(json, option, chart);
     }
   };
 };

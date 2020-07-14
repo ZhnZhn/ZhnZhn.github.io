@@ -1,1 +1,24 @@
-{"version":3,"sources":["../../src/adapters/crAdapter.js"],"names":["_isFn","fn","crAdapter","getAdapter","isKey","crKey","option","toConfig","json","isAdd","toSeries"],"mappings":";;;;;AACA,IAAMA,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;;AAEA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,UAAD;AAAA,gCAAyB,EAAzB;AAAA,MAAeC,KAAf,QAAeA,KAAf;;AAAA,SAAiC;AAC/CC,IAAAA,KAAK,EAAED,KAAK,GACR,UAACE,MAAD;AAAA,aAAYH,UAAU,CAACG,MAAD,CAAV,CAAmBD,KAAnB,CAAyBC,MAAzB,CAAZ;AAAA,KADQ,GAER,KAAK,CAHsC;AAK/CC,IAAAA,QAAQ,EAAE,kBAACC,IAAD,EAAOF,MAAP;AAAA,aAAkBH,UAAU,CAACG,MAAD,CAAV,CACzBC,QADyB,CAChBC,IADgB,EACVF,MADU,CAAlB;AAAA,KALqC;AAQ/CG,IAAAA,KAAK,EAAE,eAACH,MAAD;AAAA,aAAYN,KAAK,CAACG,UAAU,CAACG,MAAD,CAAV,CAAmBI,QAApB,CAAjB;AAAA,KARwC;AAU/CA,IAAAA,QAAQ,EAAE,kBAACF,IAAD,EAAOF,MAAP;AAAA,aAAkBH,UAAU,CAACG,MAAD,CAAV,CACzBI,QADyB,CAChBF,IADgB,EACVF,MADU,CAAlB;AAAA;AAVqC,GAAjC;AAAA,CAAlB;;eAceJ,S","sourcesContent":["\r\nconst _isFn = fn => typeof fn === 'function';\r\n\r\nconst crAdapter = (getAdapter, { isKey } = {}) => ({\r\n    crKey: isKey\r\n      ? (option) => getAdapter(option).crKey(option)\r\n      : void 0,\r\n\r\n    toConfig: (json, option) => getAdapter(option)\r\n      .toConfig(json, option),\r\n\r\n    isAdd: (option) => _isFn(getAdapter(option).toSeries),\r\n\r\n    toSeries: (json, option) => getAdapter(option)\r\n      .toSeries(json, option)\r\n});\r\n\r\nexport default crAdapter\r\n"],"file":"crAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/crAdapter.js"
+ ],
+ "file": "../../src/adapters/crAdapter.js",
+ "names": [
+  "_isFn",
+  "fn",
+  "crAdapter",
+  "getAdapter",
+  "isKey",
+  "crDfKey",
+  "crKey",
+  "option",
+  "_crKey",
+  "toConfig",
+  "json",
+  "isAdd",
+  "toSeries",
+  "chart"
+ ],
+ "mappings": ";;;;;AACA,IAAMA,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;;AAEA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,UAAD;AAAA,gCAAkC,EAAlC;AAAA,MAAeC,KAAf,QAAeA,KAAf;AAAA,MAAsBC,OAAtB,QAAsBA,OAAtB;;AAAA,SAA0C;AACxDC,IAAAA,KAAK,EAAEF,KAAK,IAAIC,OAAT,GACH,UAACE,MAAD,EAAY;AACV,UAAMC,MAAM,GAAGL,UAAU,CAACI,MAAD,CAAV,CAAmBD,KAAnB,IACVD,OADL;;AAEA,aAAOL,KAAK,CAACQ,MAAD,CAAL,GACHA,MAAM,CAACD,MAAD,CADH,GAEH,KAAK,CAFT;AAGD,KAPE,GAQH,KAAK,CAT+C;AAWxDE,IAAAA,QAAQ,EAAE,kBAACC,IAAD,EAAOH,MAAP;AAAA,aAAkBJ,UAAU,CAACI,MAAD,CAAV,CACzBE,QADyB,CAChBC,IADgB,EACVH,MADU,CAAlB;AAAA,KAX8C;AAcxDI,IAAAA,KAAK,EAAE,eAACJ,MAAD;AAAA,aAAYP,KAAK,CAACG,UAAU,CAACI,MAAD,CAAV,CAAmBK,QAApB,CAAjB;AAAA,KAdiD;AAgBxDA,IAAAA,QAAQ,EAAE,kBAACF,IAAD,EAAOH,MAAP,EAAeM,KAAf;AAAA,aAAyBV,UAAU,CAACI,MAAD,CAAV,CAChCK,QADgC,CACvBF,IADuB,EACjBH,MADiB,EACTM,KADS,CAAzB;AAAA;AAhB8C,GAA1C;AAAA,CAAlB;;eAoBeX,S"
+}
