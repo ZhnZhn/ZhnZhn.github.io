@@ -158,7 +158,7 @@ var _crConfig = function _crConfig(_temp) {
       _ref$chartOption = _ref.chartOption,
       chartOption = _ref$chartOption === void 0 ? {} : _ref$chartOption;
 
-  return _Builder(_Chart["default"].fBaseConfig({
+  return _Builder(_Chart["default"].crAreaConfig({
     title: title
   })).assignTo('navigation', {
     buttonOptions: {

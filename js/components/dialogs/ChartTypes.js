@@ -60,6 +60,10 @@ var _crT1 = function _crT1() {
   return [_crItem(['Default: Spline', V.S]), _crItem(['Line', V.L]), _crItem(['Area', V.A])];
 };
 
+var _crT1A = function _crT1A() {
+  return [_crItem(['Default: Area', V.A]), _crItem(['Line', V.L]), _crItem(['Spline', V.S])];
+};
+
 var _crT2 = function _crT2() {
   return [].concat(_crT1(), [_crItem(['Column', V.S_C])]);
 };
@@ -101,6 +105,7 @@ var _crT4 = function _crT4(_ref5) {
 var _r = {
   DF: _crDF,
   t1: _crT1,
+  t1a: _crT1A,
   t2: _crT2,
   t2a: _crT2A,
   t3: _crT3,

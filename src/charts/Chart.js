@@ -5,6 +5,7 @@ import COLOR from '../constants/Color';
 import Tooltip from './Tooltip';
 
 const merge = Highcharts.merge;
+const _isStr = str => typeof str === 'string'
 
 const TITLE_STYLE = {
   stroke: 'transparent',
@@ -172,9 +173,9 @@ const Chart = {
    }
  },
 
-fBaseConfig({
+crAreaConfig({
   title='',
-  seriaType='area',
+  seriaType,
   seriaColor,
   seriaWidth=1,
   spacingTop,
@@ -188,7 +189,7 @@ fBaseConfig({
       marginRight: Chart.MARGIN_RIGHT,
       spacingTop: spacingTop
     },
-    title: typeof title === 'string'
+    title: _isStr(title)
       ? { text: title }
       : title,
     legend: {
@@ -214,7 +215,9 @@ fBaseConfig({
     series: [{
       zhValueText: 'Value',
       turboThreshold: 20000,
-      type: seriaType,
+      type: _isStr(seriaType)
+        ? seriaType.toLowerCase()
+        : 'area',
       color: seriaColor,
       tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter),
       lineWidth: seriaWidth,

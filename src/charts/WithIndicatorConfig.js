@@ -136,7 +136,7 @@ _Builder.prototype = _assign(_Builder.prototype, {
 const _crConfig = ({
   title,
   chartOption={}
-}={}) => _Builder(Chart.fBaseConfig({ title }))
+}={}) => _Builder(Chart.crAreaConfig({ title }))
   .assignTo('navigation', {
      buttonOptions: {
         y: 20

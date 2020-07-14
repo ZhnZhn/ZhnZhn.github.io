@@ -38,6 +38,19 @@ const _crScatterSeria = (color, pointFormatter, data, zhSeriaId) => ({
   zhSeriaId: zhSeriaId
 });
 
+const _crZhSeriaId = (id) => ({
+   zhSeriaId: id
+})
+
+const _crSeriaOption = (color, option) => _assign({
+  type: 'line', visible: false, color,
+  marker: {
+    radius: 3,
+    symbol: "circle"
+  }
+}, option);
+
+
 const ChartConfig = {
   ...WithIndicator,
   ...WithMarkers,
@@ -57,16 +70,6 @@ const ChartConfig = {
     Highcharts.setOptions(ChartTheme);
   },
 
-  seriaOption(color, option) {
-    return _assign({
-      type: 'line', visible: false, color,
-      marker: {
-        radius: 3,
-        symbol: "circle"
-      }
-    }, option)
-  },
-
   setSerieData(config, data, index, name, options) {
     config.series[index] = _assign({
       type: 'area',
@@ -80,22 +83,18 @@ const ChartConfig = {
     )
   },
 
-  _zhSeriaId(id){
-    return { zhSeriaId: id };
-  },
-
   setStockSerias(config, dClose, dHigh, dLow, dOpen, id){
     this.setSerieData(config, dClose, 0, 'Close',
-      this._zhSeriaId(id)
+      _crZhSeriaId(id)
     )
     this.setSerieData(config, dHigh, 1, 'High',
-      this.seriaOption(COLOR.S_HIGH, this._zhSeriaId(id+'H'))
+      _crSeriaOption(COLOR.S_HIGH, _crZhSeriaId(id+'H'))
     )
     this.setSerieData(config, dLow, 2, 'Low',
-      this.seriaOption(COLOR.S_LOW, this._zhSeriaId(id+'L'))
+      _crSeriaOption(COLOR.S_LOW, _crZhSeriaId(id+'L'))
     )
     this.setSerieData(config, dOpen, 3, 'Open',
-      this.seriaOption(COLOR.S_OPEN, this._zhSeriaId(id+'O'))
+      _crSeriaOption(COLOR.S_OPEN, _crZhSeriaId(id+'O'))
     )
   },
 
@@ -137,7 +136,7 @@ const ChartConfig = {
 
   crAreaConfig: (options) => {
     const config = _merge(
-      Chart.fBaseConfig(options), {
+      Chart.crAreaConfig(options), {
       chart: {
         zoomType: 'xy',
         resetZoomButton: Chart.fResetZoomButton({

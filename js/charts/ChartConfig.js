@@ -66,6 +66,24 @@ var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data, zhSe
   };
 };
 
+var _crZhSeriaId = function _crZhSeriaId(id) {
+  return {
+    zhSeriaId: id
+  };
+};
+
+var _crSeriaOption = function _crSeriaOption(color, option) {
+  return _assign({
+    type: 'line',
+    visible: false,
+    color: color,
+    marker: {
+      radius: 3,
+      symbol: "circle"
+    }
+  }, option);
+};
+
 var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], _WithMarkers["default"], _WithPieConfig["default"], _WithStackedAreaConfig["default"], _WithStackedColumnConfig["default"], _WithTreeMapConfig["default"], {
   init: function init() {
     (0, _highchartsMore["default"])(_highcharts["default"]);
@@ -76,17 +94,6 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
 
     _highcharts["default"].setOptions(_ChartTheme["default"]);
   },
-  seriaOption: function seriaOption(color, option) {
-    return _assign({
-      type: 'line',
-      visible: false,
-      color: color,
-      marker: {
-        radius: 3,
-        symbol: "circle"
-      }
-    }, option);
-  },
   setSerieData: function setSerieData(config, data, index, name, options) {
     config.series[index] = _assign({
       type: 'area',
@@ -96,16 +103,11 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
     }, options);
     config.series[index].point = _Chart["default"].fEventsMouseOver(_handleMouseOver["default"]);
   },
-  _zhSeriaId: function _zhSeriaId(id) {
-    return {
-      zhSeriaId: id
-    };
-  },
   setStockSerias: function setStockSerias(config, dClose, dHigh, dLow, dOpen, id) {
-    this.setSerieData(config, dClose, 0, 'Close', this._zhSeriaId(id));
-    this.setSerieData(config, dHigh, 1, 'High', this.seriaOption(_Color["default"].S_HIGH, this._zhSeriaId(id + 'H')));
-    this.setSerieData(config, dLow, 2, 'Low', this.seriaOption(_Color["default"].S_LOW, this._zhSeriaId(id + 'L')));
-    this.setSerieData(config, dOpen, 3, 'Open', this.seriaOption(_Color["default"].S_OPEN, this._zhSeriaId(id + 'O')));
+    this.setSerieData(config, dClose, 0, 'Close', _crZhSeriaId(id));
+    this.setSerieData(config, dHigh, 1, 'High', _crSeriaOption(_Color["default"].S_HIGH, _crZhSeriaId(id + 'H')));
+    this.setSerieData(config, dLow, 2, 'Low', _crSeriaOption(_Color["default"].S_LOW, _crZhSeriaId(id + 'L')));
+    this.setSerieData(config, dOpen, 3, 'Open', _crSeriaOption(_Color["default"].S_OPEN, _crZhSeriaId(id + 'O')));
   },
   getColor: function getColor(seriaIndex) {
     var colors = _ChartTheme["default"].colors;
@@ -136,7 +138,7 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
     }, restOption);
   },
   crAreaConfig: function crAreaConfig(options) {
-    var config = _merge(_Chart["default"].fBaseConfig(options), {
+    var config = _merge(_Chart["default"].crAreaConfig(options), {
       chart: {
         zoomType: 'xy',
         resetZoomButton: _Chart["default"].fResetZoomButton({

@@ -70,6 +70,11 @@ const _crT1 = () => ([
   _crItem(['Line', V.L]),
   _crItem(['Area', V.A]),
 ]);
+const _crT1A = () => ([
+  _crItem(['Default: Area', V.A]),
+  _crItem(['Line', V.L]),
+  _crItem(['Spline', V.S ])
+]);
 
 
 const _crT2 = () => ([
@@ -122,6 +127,7 @@ const _crT4 = ([oneCaption, twoCaption]) => ([
 const _r = {
   DF: _crDF,
   t1: _crT1,
+  t1a: _crT1A,
   t2: _crT2,
   t2a: _crT2A,
   t3: _crT3,

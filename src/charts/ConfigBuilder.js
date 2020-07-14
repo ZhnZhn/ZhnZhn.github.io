@@ -111,9 +111,10 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       minClose, maxClose,
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
-      data, dataHigh, dataLow, dataOpen
+      data, dataHigh, dataLow, dataOpen,
+      seriaType, seriaColor, seriaWidth
     } = dataOption;
-    return this.areaConfig({ spacingTop: 25 })
+    return this.areaConfig({ spacingTop: 25, seriaType, seriaColor, seriaWidth })
       .addTooltip(Tooltip.fnBasePointFormatter)
       .addMiniVolume({
         id,

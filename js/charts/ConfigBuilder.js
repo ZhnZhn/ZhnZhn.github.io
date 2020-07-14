@@ -145,9 +145,15 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
         data = dataOption.data,
         dataHigh = dataOption.dataHigh,
         dataLow = dataOption.dataLow,
-        dataOpen = dataOption.dataOpen;
+        dataOpen = dataOption.dataOpen,
+        seriaType = dataOption.seriaType,
+        seriaColor = dataOption.seriaColor,
+        seriaWidth = dataOption.seriaWidth;
     return this.areaConfig({
-      spacingTop: 25
+      spacingTop: 25,
+      seriaType: seriaType,
+      seriaColor: seriaColor,
+      seriaWidth: seriaWidth
     }).addTooltip(_Tooltip["default"].fnBasePointFormatter).addMiniVolume({
       id: id,
       dColumn: dataVolumeColumn,

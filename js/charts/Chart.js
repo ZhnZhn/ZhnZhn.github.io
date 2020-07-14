@@ -14,6 +14,11 @@ var _Color = _interopRequireDefault(require("../constants/Color"));
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
 var merge = _highcharts["default"].merge;
+
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
+
 var TITLE_STYLE = {
   stroke: 'transparent',
   fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
@@ -197,12 +202,11 @@ var Chart = {
       }
     };
   },
-  fBaseConfig: function fBaseConfig(_temp2) {
+  crAreaConfig: function crAreaConfig(_temp2) {
     var _ref2 = _temp2 === void 0 ? {} : _temp2,
         _ref2$title = _ref2.title,
         title = _ref2$title === void 0 ? '' : _ref2$title,
-        _ref2$seriaType = _ref2.seriaType,
-        seriaType = _ref2$seriaType === void 0 ? 'area' : _ref2$seriaType,
+        seriaType = _ref2.seriaType,
         seriaColor = _ref2.seriaColor,
         _ref2$seriaWidth = _ref2.seriaWidth,
         seriaWidth = _ref2$seriaWidth === void 0 ? 1 : _ref2$seriaWidth,
@@ -218,7 +222,7 @@ var Chart = {
         marginRight: Chart.MARGIN_RIGHT,
         spacingTop: spacingTop
       },
-      title: typeof title === 'string' ? {
+      title: _isStr(title) ? {
         text: title
       } : title,
       legend: {
@@ -244,7 +248,7 @@ var Chart = {
       series: [{
         zhValueText: 'Value',
         turboThreshold: 20000,
-        type: seriaType,
+        type: _isStr(seriaType) ? seriaType.toLowerCase() : 'area',
         color: seriaColor,
         tooltip: Chart.fTooltip(_Tooltip["default"].fnBasePointFormatter),
         lineWidth: seriaWidth,
