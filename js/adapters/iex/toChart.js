@@ -72,7 +72,9 @@ var toChart = {
       zhConfig: _crZhConfig(_id, option, data)
     }).addZhPoints(dataMfi).toConfig();
 
-    return config;
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(json, option) {
     var _id = _crId(option),

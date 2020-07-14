@@ -60,14 +60,16 @@ const toTable = {
   toConfig(json, option){
     const {title, key} = option;
     return {
-      id: key,
-      title: _crTitle(title, json),
-      headers: HEADERS,
-      rows: crRows(HEADERS, json, ID_PROP_NAME),
-      dataSource: 'IEX Cloud',
-      zhCompType: 'TABLE',
-      zhConfig: {
-        id: key, key
+      config: {
+        id: key,
+        title: _crTitle(title, json),
+        headers: HEADERS,
+        rows: crRows(HEADERS, json, ID_PROP_NAME),
+        dataSource: 'IEX Cloud',
+        zhCompType: 'TABLE',
+        zhConfig: {
+          id: key, key
+        }
       }
     };
   }

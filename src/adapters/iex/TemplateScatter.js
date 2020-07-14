@@ -18,8 +18,8 @@ Object.assign(TemplateScatter.prototype, {
   },
 
   toConfig(json, option){
-    const { crSubtitle, crSeria } = this.impl;
-    return Builder()
+    const { crSubtitle, crSeria } = this.impl
+    , config = Builder()
       .areaConfig({
          spacingTop: 25,
          isCrosshair: false
@@ -28,6 +28,7 @@ Object.assign(TemplateScatter.prototype, {
       .addSeriaTo(0, crSeria(json, option))
       .add({ zhConfig: fns.crZhConfig(option) })
       .toConfig();
+    return { config };
   },
 
   toSeries(json, option, chart){

@@ -43,22 +43,24 @@ Object.assign(TemplateTokens.prototype, {
     , _tokens = _crTokens(CONFIGS, json);
 
     return {
-      zhCompType: CIT.INFO_ITEM,
-      id: _id,
-      caption: crCaption(json, option),
-      items: [
-        {
-          caption: crTokensName(json),
-          tokens: _tokens,
-        },{
-          style: crDescrStyle(),
-          caption: crDescrName(),
-          descr: crDescr(json)
+      config: {
+        zhCompType: CIT.INFO_ITEM,
+        id: _id,
+        caption: crCaption(json, option),
+        items: [
+          {
+            caption: crTokensName(json),
+            tokens: _tokens,
+          },{
+            style: crDescrStyle(),
+            caption: crDescrName(),
+            descr: crDescr(json)
+          }
+        ],
+        zhConfig: {
+          key: _id,
+          id: _id
         }
-      ],
-      zhConfig: {
-        key: _id,
-        id: _id
       }
     };
   }

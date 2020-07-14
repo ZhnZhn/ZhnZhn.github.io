@@ -72,15 +72,17 @@ var toTable = {
     var title = option.title,
         key = option.key;
     return {
-      id: key,
-      title: _crTitle(title, json),
-      headers: HEADERS,
-      rows: crRows(HEADERS, json, ID_PROP_NAME),
-      dataSource: 'IEX Cloud',
-      zhCompType: 'TABLE',
-      zhConfig: {
+      config: {
         id: key,
-        key: key
+        title: _crTitle(title, json),
+        headers: HEADERS,
+        rows: crRows(HEADERS, json, ID_PROP_NAME),
+        dataSource: 'IEX Cloud',
+        zhCompType: 'TABLE',
+        zhConfig: {
+          id: key,
+          key: key
+        }
       }
     };
   }

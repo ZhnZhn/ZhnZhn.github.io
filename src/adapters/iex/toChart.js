@@ -62,7 +62,7 @@ const toChart = {
          .addZhPoints(dataMfi)
          .toConfig();
 
-    return config;
+    return { config };
   },
 
   toSeries(json, option){

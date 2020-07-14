@@ -27,13 +27,16 @@ Object.assign(TemplateScatter.prototype, {
   toConfig: function toConfig(json, option) {
     var _this$impl = this.impl,
         crSubtitle = _this$impl.crSubtitle,
-        crSeria = _this$impl.crSeria;
-    return (0, _ConfigBuilder["default"])().areaConfig({
+        crSeria = _this$impl.crSeria,
+        config = (0, _ConfigBuilder["default"])().areaConfig({
       spacingTop: 25,
       isCrosshair: false
     }).addCaption(TITLE, crSubtitle(option)).addSeriaTo(0, crSeria(json, option)).add({
       zhConfig: _toFns["default"].crZhConfig(option)
     }).toConfig();
+    return {
+      config: config
+    };
   },
   toSeries: function toSeries(json, option, chart) {
     var _this$impl2 = this.impl,
