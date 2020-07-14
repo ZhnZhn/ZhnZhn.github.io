@@ -19,7 +19,8 @@ var crError = _AdapterFn["default"].crError,
     crItemLink = _AdapterFn["default"].crItemLink,
     compareByDate = _AdapterFn["default"].compareByDate,
     crItemConf = _AdapterFn["default"].crItemConf,
-    crValueConf = _AdapterFn["default"].crValueConf;
+    crValueConf = _AdapterFn["default"].crValueConf,
+    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend;
 
 var _isNaN = Number.isNaN || isNaN;
 
@@ -47,13 +48,17 @@ var _crZhConfig = function _crZhConfig(data, option) {
       itemCaption = option.itemCaption,
       dataSource = option.dataSource,
       dfPn = option.dfPn,
-      itemConf = _isHistorical(dfPn) ? _crHistoricalItemConf(data, option) : void 0;
+      _isH = _isHistorical(dfPn),
+      itemConf = _isH ? _crHistoricalItemConf(data, option) : void 0,
+      legend = _isH ? stockSeriesLegend() : void 0;
+
   return {
     id: _itemKey,
     key: _itemKey,
     itemCaption: itemCaption,
     itemConf: itemConf,
-    dataSource: dataSource
+    dataSource: dataSource,
+    legend: legend
   };
 };
 

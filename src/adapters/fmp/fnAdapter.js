@@ -11,7 +11,8 @@ const {
   crItemLink,
   compareByDate,
   crItemConf,
-  crValueConf
+  crValueConf,
+  stockSeriesLegend
 } = AdapterFn;
 
 const _isNaN = Number.isNaN || isNaN
@@ -38,14 +39,19 @@ const _crZhConfig = (data, option) => {
     dataSource,
     dfPn
   } = option
-  , itemConf = _isHistorical(dfPn)
+  , _isH = _isHistorical(dfPn)
+  , itemConf = _isH
       ? _crHistoricalItemConf(data, option)
+      : void 0
+  , legend = _isH
+      ? stockSeriesLegend()
       : void 0;
   return {
     id: _itemKey, key: _itemKey,
     itemCaption,
     itemConf,
-    dataSource
+    dataSource,
+    legend
   }
 };
 

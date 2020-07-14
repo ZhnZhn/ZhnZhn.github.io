@@ -44,7 +44,8 @@ const _assignHp = option => {
   } = option
   , _fromDate = fromDate || getFromDate(3)
   , _symbol = getValue(items[0], {isUpper: true})
-  , _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
+  //, _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
+  , _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}`;
 
   _assign(option, {
     _symbol,

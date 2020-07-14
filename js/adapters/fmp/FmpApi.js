@@ -59,7 +59,7 @@ var _assignHp = function _assignHp(option) {
       _symbol = getValue(items[0], {
     isUpper: true
   }),
-      _itemUrl = C.URI + "/" + dfT + "/" + _symbol + "?from=" + _fromDate + "&serietype=line";
+      _itemUrl = C.URI + "/" + dfT + "/" + _symbol + "?from=" + _fromDate;
 
   _assign(option, {
     _symbol: _symbol,
