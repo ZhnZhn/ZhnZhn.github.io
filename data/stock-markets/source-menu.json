@@ -405,11 +405,11 @@
          "addProps" : "SM_BASE_FMP",
          "dialogProps" : {
            "isFd": true,
+           "isCh": false,
            "nInitFromDate": 2,
            "selectProps": [
               ["Stock", "wiki", "tickets", true]
-            ],
-           "chartsType": "t1",
+            ],           
            "dfProps": {
              "dfT": "historical-price-full",
              "dfPn": "historical"
@@ -423,8 +423,8 @@
          "addProps" : "SM_BASE_FMP",
          "dialogProps" : {
            "isFd": true,
+           "isCh": false,
            "nInitFromDate": 2,
-           "chartsType": "t1",
            "selectProps": [
               ["Equity", "fmp-euronext", "items", true]
             ],
@@ -489,7 +489,7 @@
      "SM_FMP_FGR" : {
          "type" : "SM_FMP_FGR",
          "menuTitle" : "Financial Growth",
-         "contFullCaption" : "FMP: Financials Growth",         
+         "contFullCaption" : "FMP: Financials Growth",
          "addProps" : "SM_BASE_FMP",
          "dialogProps" : {
            "selectProps": [
