@@ -40,16 +40,9 @@ const _crId = ({ one, two }) => one + '_' + two;
 
 const toChart = {
   toConfig(json, option){
-    const {
-      title,
-      isNotZoomToMinMax,
-      isDrawDeltaExtrems
-    } = option
+    const { title } = option
     , _id = _crId(option)
-    , dataOption = toSeriesData(json, {
-        isNotZoomToMinMax,
-        isDrawDeltaExtrems
-      })
+    , dataOption = toSeriesData({ arr: json, option })
     , { data, dataMfi } = dataOption
     , config = Builder()
         .stockConfig(_id, dataOption)
@@ -67,7 +60,11 @@ const toChart = {
 
   toSeries(json, option){
     const _id = _crId(option)
-    , { data } = toSeriesData(json, { isAllSeries: false });
+    , { data } = toSeriesData({
+       arr: json,
+       seriaOption: { isAllSeries: false },
+       option
+     });
     return Builder()
       .stockSeria(_id, data)
       .toSeria();

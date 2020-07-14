@@ -5,10 +5,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
@@ -20,18 +16,22 @@ var _isUndef = function _isUndef(v) {
 };
 
 var AdapterStockFn = {
-  toSeriesData: function toSeriesData(arr, seriaOption) {
-    if (arr === void 0) {
-      arr = [];
-    }
-
-    var _ref = seriaOption || {},
-        _ref$isAllSeries = _ref.isAllSeries,
-        isAllSeries = _ref$isAllSeries === void 0 ? true : _ref$isAllSeries,
-        _ref$pnDate = _ref.pnDate,
-        pnDate = _ref$pnDate === void 0 ? 'date' : _ref$pnDate,
-        restOption = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["isAllSeries", "pnDate"]);
-
+  toSeriesData: function toSeriesData(_ref) {
+    var _ref$arr = _ref.arr,
+        arr = _ref$arr === void 0 ? [] : _ref$arr,
+        _ref$seriaOption = _ref.seriaOption,
+        seriaOption = _ref$seriaOption === void 0 ? {} : _ref$seriaOption,
+        _ref$option = _ref.option,
+        option = _ref$option === void 0 ? {} : _ref$option;
+    var _seriaOption$isAllSer = seriaOption.isAllSeries,
+        isAllSeries = _seriaOption$isAllSer === void 0 ? true : _seriaOption$isAllSer,
+        _seriaOption$pnDate = seriaOption.pnDate,
+        pnDate = _seriaOption$pnDate === void 0 ? 'date' : _seriaOption$pnDate,
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
+        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
+        seriaType = option.seriaType,
+        seriaColor = option.seriaColor,
+        seriaWidth = option.seriaWidth;
     var data = [],
         dataOpen = [],
         dataHigh = [],
@@ -92,7 +92,7 @@ var AdapterStockFn = {
         _prevClose = close;
       }
     });
-    return (0, _extends2["default"])({
+    return {
       data: data,
       minClose: minClose,
       maxClose: maxClose,
@@ -102,8 +102,13 @@ var AdapterStockFn = {
       dataVolume: dataVolume,
       dataVolumeColumn: dataVolumeColumn,
       dataATH: dataATH,
-      dataMfi: dataMfi
-    }, restOption);
+      dataMfi: dataMfi,
+      isNotZoomToMinMax: isNotZoomToMinMax,
+      isDrawDeltaExtrems: isDrawDeltaExtrems,
+      seriaType: seriaType,
+      seriaColor: seriaColor,
+      seriaWidth: seriaWidth
+    };
   }
 };
 var _default = AdapterStockFn;

@@ -58,12 +58,12 @@ var BarchartAdapter = {
         title = _option$title === void 0 ? '' : _option$title,
         _option$subtitle = option.subtitle,
         subtitle = _option$subtitle === void 0 ? '' : _option$subtitle,
-        isNotZoomToMinMax = option.isNotZoomToMinMax,
-        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        dataOption = toSeriesData(json.results, {
-      pnDate: 'tradingDay',
-      isNotZoomToMinMax: isNotZoomToMinMax,
-      isDrawDeltaExtrems: isDrawDeltaExtrems
+        dataOption = toSeriesData({
+      arr: json.results,
+      seriaOption: {
+        pnDate: 'tradingDay'
+      },
+      option: option
     }),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
@@ -89,9 +89,13 @@ var BarchartAdapter = {
 
     var parentId = option.parentId,
         _id = parentId + "_" + crChartId(option),
-        _toSeriesData = toSeriesData(json.results, {
-      isAllSeries: false,
-      pnDate: 'tradingDay'
+        _toSeriesData = toSeriesData({
+      arr: json.results,
+      seriaOption: {
+        isAllSeries: false,
+        pnDate: 'tradingDay'
+      },
+      option: option
     }),
         data = _toSeriesData.data;
 

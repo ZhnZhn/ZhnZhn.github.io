@@ -57,12 +57,10 @@ var _crId = function _crId(_ref) {
 var toChart = {
   toConfig: function toConfig(json, option) {
     var title = option.title,
-        isNotZoomToMinMax = option.isNotZoomToMinMax,
-        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
         _id = _crId(option),
-        dataOption = toSeriesData(json, {
-      isNotZoomToMinMax: isNotZoomToMinMax,
-      isDrawDeltaExtrems: isDrawDeltaExtrems
+        dataOption = toSeriesData({
+      arr: json,
+      option: option
     }),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
@@ -78,8 +76,12 @@ var toChart = {
   },
   toSeries: function toSeries(json, option) {
     var _id = _crId(option),
-        _toSeriesData = toSeriesData(json, {
-      isAllSeries: false
+        _toSeriesData = toSeriesData({
+      arr: json,
+      seriaOption: {
+        isAllSeries: false
+      },
+      option: option
     }),
         data = _toSeriesData.data;
 

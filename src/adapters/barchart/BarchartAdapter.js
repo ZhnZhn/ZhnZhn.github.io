@@ -49,16 +49,12 @@ const BarchartAdapter = {
   },
   toConfig(json, option) {
     const chartId = crChartId(option)
-    , {
-        title='', subtitle='',
-        isNotZoomToMinMax,
-        isDrawDeltaExtrems
-      } = option
-    , dataOption = toSeriesData(json.results, {
-       pnDate: 'tradingDay',
-       isNotZoomToMinMax,
-       isDrawDeltaExtrems
-    })
+    , { title='', subtitle='' } = option
+    , dataOption = toSeriesData({
+        arr: json.results,
+        seriaOption: { pnDate: 'tradingDay'},
+        option
+      })
     , { data, dataMfi } = dataOption
     , dataInterest = crOpenInterest(json, option)
     , config = Builder()
@@ -84,10 +80,14 @@ const BarchartAdapter = {
   toSeries(json={}, option) {
     const { parentId } = option
     , _id = `${parentId}_${crChartId(option)}`
-    , { data } = toSeriesData(json.results, {
-         isAllSeries: false,
-         pnDate: 'tradingDay'
-      });
+    , { data } = toSeriesData({
+         arr: json.results,
+         seriaOption: {
+           isAllSeries: false,
+           pnDate: 'tradingDay'
+         },
+         option
+       });
     return Builder()
       .stockSeria(_id, data)
       .toSeria();

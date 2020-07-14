@@ -9,14 +9,18 @@ const {
 const _isUndef = v => typeof v === 'undefined';
 
 const AdapterStockFn = {
-  toSeriesData: (arr=[], seriaOption) => {
+  toSeriesData: ({ arr=[], seriaOption={}, option={} }) => {
     const {
-            isAllSeries=true,
-            pnDate='date',
-            ...restOption
-            //isNotZoomToMinMax,
-            //isDrawDeltaExtrems
-          } = seriaOption || {};
+      isAllSeries=true,
+      pnDate='date',
+    } = seriaOption
+    , {
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      seriaType,
+      seriaColor,
+      seriaWidth
+    } = option
     const data = []
         , dataOpen = [], dataHigh = [], dataLow = []
         , dataVolume = [], dataVolumeColumn = []
@@ -70,7 +74,11 @@ const AdapterStockFn = {
       dataOpen, dataHigh, dataLow,
       dataVolume, dataVolumeColumn,
       dataATH, dataMfi,
-      ...restOption
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      seriaType,
+      seriaColor,
+      seriaWidth
     };
   }
 };
