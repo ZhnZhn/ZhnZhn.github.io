@@ -7,10 +7,13 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
+
 var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
+var findMinY = _seriaFn["default"].findMinY;
 var C = {
   SERIA: {
     //type: 'spline',
@@ -126,6 +129,11 @@ var SeriaBuilder = {
   },
   scatterSeria: function scatterSeria(tooltip, option) {
     return this._seria(C.SCATTER, tooltip, option);
+  },
+  stockSeria: function stockSeria(id, data) {
+    return this.initSeria({
+      minY: findMinY(data)
+    }).addPoints(id, data);
   },
   addSeriaBy: function addSeriaBy(index, obj) {
     if (this.config.series[index]) {

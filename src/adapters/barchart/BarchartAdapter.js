@@ -5,12 +5,10 @@ import fnAdapter from './fnAdapter'
 
 const {
   crChartId,
-  crData,
   crConfigOption,
   toSeriesData,
   crOpenInterest,
-  joinBy,
-  findMinY
+  joinBy
 } = fnAdapter;
 
 const _getValue = obj => obj && obj.value
@@ -51,8 +49,16 @@ const BarchartAdapter = {
   },
   toConfig(json, option) {
     const chartId = crChartId(option)
-    , { title='', subtitle='' } = option
-    , dataOption = crData(json, option)
+    , {
+        title='', subtitle='',
+        isNotZoomToMinMax,
+        isDrawDeltaExtrems
+      } = option
+    , dataOption = toSeriesData(json.results, {
+       pnDate: 'tradingDay',
+       isNotZoomToMinMax,
+       isDrawDeltaExtrems
+    })
     , { data, dataMfi } = dataOption
     , dataInterest = crOpenInterest(json, option)
     , config = Builder()
@@ -83,8 +89,7 @@ const BarchartAdapter = {
          pnDate: 'tradingDay'
       });
     return Builder()
-      .initSeria({ minY: findMinY(data) })
-      .addPoints(_id, data)
+      .stockSeria(_id, data)
       .toSeria();
   }
 }

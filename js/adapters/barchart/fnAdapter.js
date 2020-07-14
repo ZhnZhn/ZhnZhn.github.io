@@ -19,8 +19,7 @@ var getCaption = _AdapterFn["default"].getCaption,
     crValueConf = _AdapterFn["default"].crValueConf,
     valueMoving = _AdapterFn["default"].valueMoving,
     joinBy = _AdapterFn["default"].joinBy,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    findMinY = _AdapterFn["default"].findMinY;
+    ymdToUTC = _AdapterFn["default"].ymdToUTC;
 var toSeriesData = _AdapterStockFn["default"].toSeriesData;
 var DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.com'>market data</a> provided by Barchart Market Data Solutions.<br><br>" + "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>";
 var DATA_SOURCE = "Barchart Market Data Solutions";
@@ -69,20 +68,10 @@ var fnAdapter = {
   getValue: getValue,
   toSeriesData: toSeriesData,
   joinBy: joinBy,
-  findMinY: findMinY,
   crChartId: function crChartId(_ref2) {
     var _ref2$value = _ref2.value,
         value = _ref2$value === void 0 ? '' : _ref2$value;
     return "B/" + value;
-  },
-  crData: function crData(json, option) {
-    var isNotZoomToMinMax = option.isNotZoomToMinMax,
-        isDrawDeltaExtrems = option.isDrawDeltaExtrems;
-    return toSeriesData(json.results, {
-      pnDate: 'tradingDay',
-      isNotZoomToMinMax: isNotZoomToMinMax,
-      isDrawDeltaExtrems: isDrawDeltaExtrems
-    });
   },
   crOpenInterest: function crOpenInterest(json, option) {
     if (option.dfT !== "FT") {

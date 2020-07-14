@@ -1,5 +1,9 @@
+import seriaFns from '../math/seriaFn'
+
 import Chart from './Chart'
 import ChartConfig from './ChartConfig'
+
+const { findMinY } = seriaFns
 
 const C = {
   SERIA: {
@@ -97,6 +101,11 @@ const SeriaBuilder = {
   },
   scatterSeria(tooltip, option){
     return this._seria(C.SCATTER, tooltip, option);
+  },
+  stockSeria(id, data){
+    return this
+      .initSeria({ minY: findMinY(data) })
+      .addPoints(id, data);
   },
 
   addSeriaBy(index, obj) {

@@ -11,8 +11,7 @@ const {
   crValueConf,
   valueMoving,
   joinBy,
-  ymdToUTC,
-  findMinY
+  ymdToUTC
 } =AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
@@ -53,22 +52,9 @@ const fnAdapter = {
   getCaption,
   getValue,
   toSeriesData,
-  joinBy,
-  findMinY,
+  joinBy,  
 
   crChartId: ({ value='' }) => `B/${value}`,
-
-  crData: (json, option) => {
-    const {
-      isNotZoomToMinMax,
-      isDrawDeltaExtrems
-    } = option;
-    return toSeriesData(json.results, {
-       pnDate: 'tradingDay',
-       isNotZoomToMinMax,
-       isDrawDeltaExtrems
-    });
-  },
 
   crOpenInterest: (json, option) => {
     if (option.dfT !== "FT") {

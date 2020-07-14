@@ -12,12 +12,10 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crChartId = _fnAdapter["default"].crChartId,
-    crData = _fnAdapter["default"].crData,
     crConfigOption = _fnAdapter["default"].crConfigOption,
     toSeriesData = _fnAdapter["default"].toSeriesData,
     crOpenInterest = _fnAdapter["default"].crOpenInterest,
-    joinBy = _fnAdapter["default"].joinBy,
-    findMinY = _fnAdapter["default"].findMinY;
+    joinBy = _fnAdapter["default"].joinBy;
 
 var _getValue = function _getValue(obj) {
   return obj && obj.value || '';
@@ -60,7 +58,13 @@ var BarchartAdapter = {
         title = _option$title === void 0 ? '' : _option$title,
         _option$subtitle = option.subtitle,
         subtitle = _option$subtitle === void 0 ? '' : _option$subtitle,
-        dataOption = crData(json, option),
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
+        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
+        dataOption = toSeriesData(json.results, {
+      pnDate: 'tradingDay',
+      isNotZoomToMinMax: isNotZoomToMinMax,
+      isDrawDeltaExtrems: isDrawDeltaExtrems
+    }),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
         dataInterest = crOpenInterest(json, option),
@@ -91,9 +95,7 @@ var BarchartAdapter = {
     }),
         data = _toSeriesData.data;
 
-    return (0, _ConfigBuilder["default"])().initSeria({
-      minY: findMinY(data)
-    }).addPoints(_id, data).toSeria();
+    return (0, _ConfigBuilder["default"])().stockSeria(_id, data).toSeria();
   }
 };
 var _default = BarchartAdapter;
