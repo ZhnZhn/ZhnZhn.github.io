@@ -7,17 +7,12 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
-
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _AdapterStockFn = _interopRequireDefault(require("../AdapterStockFn"));
+var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
 var crItemConf = _AdapterFn["default"].crItemConf,
-    crValueConf = _AdapterFn["default"].crValueConf,
-    valueMoving = _AdapterFn["default"].valueMoving,
-    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend;
-var toSeriesData = _AdapterStockFn["default"].toSeriesData;
+    crValueConf = _AdapterFn["default"].crValueConf;
 
 var _crZhConfig = function _crZhConfig(id, option, data) {
   var one = option.one,
@@ -30,14 +25,12 @@ var _crZhConfig = function _crZhConfig(id, option, data) {
     linkFn: "NASDAQ",
     item: one,
     itemCaption: one,
-    itemConf: (0, _extends2["default"])({
-      _itemKey: id
-    }, crItemConf(option), crValueConf(data), {
+    itemConf: (0, _extends2["default"])({}, crItemConf(option), crValueConf(data), {
+      _itemKey: id,
       symbol: one,
       dfPeriod: two,
       dataSource: dataSource
-    }),
-    legend: stockSeriesLegend()
+    })
   };
 };
 
@@ -48,46 +41,24 @@ var _crInfo = function _crInfo(title) {
   };
 };
 
-var _crId = function _crId(_ref) {
-  var one = _ref.one,
-      two = _ref.two;
-  return one + '_' + two;
-};
-
-var toChart = {
-  toConfig: function toConfig(json, option) {
-    var title = option.title,
-        _id = _crId(option),
-        dataOption = toSeriesData({
-      arr: json,
-      option: option
-    }),
-        data = dataOption.data,
-        dataMfi = dataOption.dataMfi,
-        config = (0, _ConfigBuilder["default"])().stockConfig(_id, dataOption).addCaption(title).add({
-      valueMoving: valueMoving(data),
-      info: _crInfo(title),
-      zhConfig: _crZhConfig(_id, option, data)
-    }).addZhPoints(dataMfi).toConfig();
-
-    return {
-      config: config
-    };
+var toChart = (0, _crAdapterOHLCV["default"])({
+  crId: function crId(_ref) {
+    var _itemKey = _ref._itemKey,
+        one = _ref.one,
+        two = _ref.two;
+    return _itemKey || one + '_' + two;
   },
-  toSeries: function toSeries(json, option) {
-    var _id = _crId(option),
-        _toSeriesData = toSeriesData({
-      arr: json,
-      seriaOption: {
-        isAllSeries: false
-      },
-      option: option
-    }),
-        data = _toSeriesData.data;
-
-    return (0, _ConfigBuilder["default"])().stockSeria(_id, data).toSeria();
+  crAddConfig: function crAddConfig(_ref2) {
+    var title = _ref2.title,
+        option = _ref2.option,
+        id = _ref2.id,
+        data = _ref2.data;
+    return {
+      info: _crInfo(title),
+      zhConfig: _crZhConfig(id, option, data)
+    };
   }
-};
+});
 var _default = toChart;
 exports["default"] = _default;
 //# sourceMappingURL=toChart.js.map

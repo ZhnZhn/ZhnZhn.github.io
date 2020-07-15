@@ -11,13 +11,11 @@ const {
   crItemLink,
   compareByDate,
   crItemConf,
-  crValueConf,
-  stockSeriesLegend
+  crValueConf
 } = AdapterFn;
 
 const _isNaN = Number.isNaN || isNaN
 
-const _isHistorical = dfPn => dfPn === 'historical';
 const _crHistoricalItemConf = (data, option) => {
   const {
     itemCaption, dataSource,
@@ -32,31 +30,23 @@ const _crHistoricalItemConf = (data, option) => {
   };
 }
 
-const _crZhConfig = (data, option) => {
-  const {
-    _itemKey,
-    itemCaption,
-    dataSource,
-    dfPn
-  } = option
-  , _isH = _isHistorical(dfPn)
-  , itemConf = _isH
-      ? _crHistoricalItemConf(data, option)
-      : void 0
-  , legend = _isH
-      ? stockSeriesLegend()
-      : void 0;
-  return {
-    id: _itemKey, key: _itemKey,
-    itemCaption,
-    itemConf,
-    dataSource,
-    legend
-  }
-};
+const _crZhConfig = ({
+  _itemKey,
+  itemCaption,
+  dataSource,
+}) => ({
+  id: _itemKey, key: _itemKey,
+  itemCaption,
+  dataSource
+});
+
+const _crHistZhConfig = (data, option) => ({
+  ..._crZhConfig(option),
+  itemConf: _crHistoricalItemConf(data, option)
+});
 
 const _crName = items => items
-  .map(item => item.caption)
+  .map(getCaption)
   .join(': ');
 const _crDescription = crItemLink
   .bind(null, 'Financial Modeling Prep');
@@ -92,9 +82,13 @@ const fnAdapter = {
   }),
 
   crConfigOption: ({ json, option, data }) => ({
-    zhConfig: _crZhConfig(data, option),
     valueMoving: valueMoving(data),
-    info: _crInfo(option)
+    info: _crInfo(option),
+    zhConfig: _crZhConfig(option)
+  }),
+  crHistOption: ({ option, data }) => ({
+    info: _crInfo(option),
+    zhConfig: _crHistZhConfig(data, option),
   })
 };
 

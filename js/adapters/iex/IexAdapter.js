@@ -11,11 +11,12 @@ var _RouterAdapter = _interopRequireDefault(require("./RouterAdapter"));
 
 var IexAdapter = (0, _crAdapter["default"])(_RouterAdapter["default"].getAdapter, {
   crDfKey: function crDfKey(_ref) {
-    var _ref$one = _ref.one,
+    var _itemKey = _ref._itemKey,
+        _ref$one = _ref.one,
         one = _ref$one === void 0 ? '' : _ref$one,
         _ref$two = _ref.two,
         two = _ref$two === void 0 ? '' : _ref$two;
-    return one + '_' + two;
+    return _itemKey || one + '_' + two;
   }
 });
 var _default = IexAdapter;

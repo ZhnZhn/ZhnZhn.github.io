@@ -19,14 +19,9 @@ var crError = _AdapterFn["default"].crError,
     crItemLink = _AdapterFn["default"].crItemLink,
     compareByDate = _AdapterFn["default"].compareByDate,
     crItemConf = _AdapterFn["default"].crItemConf,
-    crValueConf = _AdapterFn["default"].crValueConf,
-    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend;
+    crValueConf = _AdapterFn["default"].crValueConf;
 
 var _isNaN = Number.isNaN || isNaN;
-
-var _isHistorical = function _isHistorical(dfPn) {
-  return dfPn === 'historical';
-};
 
 var _crHistoricalItemConf = function _crHistoricalItemConf(data, option) {
   var itemCaption = option.itemCaption,
@@ -43,36 +38,33 @@ var _crHistoricalItemConf = function _crHistoricalItemConf(data, option) {
   });
 };
 
-var _crZhConfig = function _crZhConfig(data, option) {
-  var _itemKey = option._itemKey,
-      itemCaption = option.itemCaption,
-      dataSource = option.dataSource,
-      dfPn = option.dfPn,
-      _isH = _isHistorical(dfPn),
-      itemConf = _isH ? _crHistoricalItemConf(data, option) : void 0,
-      legend = _isH ? stockSeriesLegend() : void 0;
-
+var _crZhConfig = function _crZhConfig(_ref) {
+  var _itemKey = _ref._itemKey,
+      itemCaption = _ref.itemCaption,
+      dataSource = _ref.dataSource;
   return {
     id: _itemKey,
     key: _itemKey,
     itemCaption: itemCaption,
-    itemConf: itemConf,
-    dataSource: dataSource,
-    legend: legend
+    dataSource: dataSource
   };
 };
 
+var _crHistZhConfig = function _crHistZhConfig(data, option) {
+  return (0, _extends2["default"])({}, _crZhConfig(option), {
+    itemConf: _crHistoricalItemConf(data, option)
+  });
+};
+
 var _crName = function _crName(items) {
-  return items.map(function (item) {
-    return item.caption;
-  }).join(': ');
+  return items.map(getCaption).join(': ');
 };
 
 var _crDescription = crItemLink.bind(null, 'Financial Modeling Prep');
 
-var _crInfo = function _crInfo(_ref) {
-  var items = _ref.items,
-      _itemUrl = _ref._itemUrl;
+var _crInfo = function _crInfo(_ref2) {
+  var items = _ref2.items,
+      _itemUrl = _ref2._itemUrl;
   return {
     name: _crName(items),
     description: _crDescription(_itemUrl)
@@ -95,21 +87,29 @@ var fnAdapter = {
     });
     return _data.reverse().sort(compareByDate);
   },
-  crCaption: function crCaption(_ref2) {
-    var items = _ref2.items;
+  crCaption: function crCaption(_ref3) {
+    var items = _ref3.items;
     return {
       title: getCaption(items[0]),
       subtitle: joinBy(': ', getCaption(items[1]), getCaption(items[2]))
     };
   },
-  crConfigOption: function crConfigOption(_ref3) {
-    var json = _ref3.json,
-        option = _ref3.option,
-        data = _ref3.data;
+  crConfigOption: function crConfigOption(_ref4) {
+    var json = _ref4.json,
+        option = _ref4.option,
+        data = _ref4.data;
     return {
-      zhConfig: _crZhConfig(data, option),
       valueMoving: valueMoving(data),
-      info: _crInfo(option)
+      info: _crInfo(option),
+      zhConfig: _crZhConfig(option)
+    };
+  },
+  crHistOption: function crHistOption(_ref5) {
+    var option = _ref5.option,
+        data = _ref5.data;
+    return {
+      info: _crInfo(option),
+      zhConfig: _crHistZhConfig(data, option)
     };
   }
 };

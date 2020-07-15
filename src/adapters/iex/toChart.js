@@ -1,14 +1,11 @@
-import Builder from '../../charts/ConfigBuilder'
+
 import AdapterFn from '../AdapterFn'
-import AdapterStockFn from '../AdapterStockFn'
+import crAdapterOHLCV from '../crAdapterOHLCV'
 
 const {
   crItemConf,
-  crValueConf,
-  valueMoving,
-  stockSeriesLegend
+  crValueConf
 } = AdapterFn;
-const { toSeriesData } = AdapterStockFn;
 
 const _crZhConfig = (id, option, data) => {
   const { one, two, dataSource } = option;
@@ -20,14 +17,13 @@ const _crZhConfig = (id, option, data) => {
     item: one,
     itemCaption: one,
     itemConf: {
-      _itemKey: id,
       ...crItemConf(option),
       ...crValueConf(data),
+      _itemKey: id,
       symbol: one,
       dfPeriod: two,
       dataSource
-    },
-    legend: stockSeriesLegend()
+    }
   };
 }
 
@@ -36,39 +32,13 @@ const _crInfo = (title) => ({
   frequency: "Daily",
 });
 
-const _crId = ({ one, two }) => one + '_' + two;
-
-const toChart = {
-  toConfig(json, option){
-    const { title } = option
-    , _id = _crId(option)
-    , dataOption = toSeriesData({ arr: json, option })
-    , { data, dataMfi } = dataOption
-    , config = Builder()
-        .stockConfig(_id, dataOption)
-        .addCaption(title)
-        .add({
-           valueMoving: valueMoving(data),
-           info: _crInfo(title),
-           zhConfig: _crZhConfig(_id, option, data)
-         })
-         .addZhPoints(dataMfi)
-         .toConfig();
-
-    return { config };
-  },
-
-  toSeries(json, option){
-    const _id = _crId(option)
-    , { data } = toSeriesData({
-       arr: json,
-       seriaOption: { isAllSeries: false },
-       option
-     });
-    return Builder()
-      .stockSeria(_id, data)
-      .toSeria();
-  }
-}
+const toChart = crAdapterOHLCV({
+  crId: ({ _itemKey, one, two }) => _itemKey
+    || one + '_' + two,
+  crAddConfig: ({ title, option, id, data }) => ({
+    info: _crInfo(title),
+    zhConfig: _crZhConfig(id, option, data)
+  })
+})
 
 export default toChart
