@@ -25,7 +25,7 @@ var crStyle = _use["default"].crStyle,
     useToggle = _use["default"].useToggle,
     useFnFocus = _use["default"].useFnFocus;
 var TH_ID = 'ELEMENT';
-var CL = 'not-selected shadow-right',
+var CL_CAPTION = 'not-selected text-clip bt-left',
     CL_MORE = "popup-menu charts__menu-more";
 var S = {
   ROOT: {
@@ -50,19 +50,14 @@ var S = {
     display: 'inline-block'
   },
   CHECK_BOX: {
-    marginRight: 10,
+    marginRight: 8,
     marginLeft: 8
   },
   CAPTION_OPEN: {
-    display: 'inline-block',
     color: '#a487d4',
     width: 125,
-    textAlign: 'left',
-    fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow: 'clip',
-    overflow: 'hidden',
-    cursor: 'pointer'
+    paddingTop: 4,
+    paddingBottom: 2
   },
   CAPTION_CLOSE: {
     color: 'gray'
@@ -151,7 +146,7 @@ var Header = function Header(_ref3) {
     onCheck: onCheck,
     onUnCheck: onUnCheck
   }), /*#__PURE__*/_react["default"].createElement("button", {
-    className: CL,
+    className: CL_CAPTION,
     title: itemTitle,
     style: _captionStyle,
     onClick: onToggle

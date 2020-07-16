@@ -28,6 +28,7 @@ var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
 
 //import PropTypes from "prop-types";
+var CL_BT = 'bt';
 var S = {
   ROOT: {
     position: 'relative',
@@ -43,6 +44,9 @@ var S = {
     width: 5
   },
   DATE: {
+    display: 'inline-block',
+    paddingTop: 4,
+    paddingBottom: 2,
     paddingLeft: 5,
     paddingRight: 5
   },
@@ -54,9 +58,6 @@ var S = {
   },
   EQUAL: {
     color: '#2f7ed8'
-  },
-  BT: {
-    cursor: 'pointer'
   },
   SHOW_HIDE: {
     position: 'absolute',
@@ -187,7 +188,7 @@ var ValueMovingBadge = /*#__PURE__*/function (_Component) {
     }, delta), /*#__PURE__*/_react["default"].createElement("span", {
       style: S.G5
     }), /*#__PURE__*/_react["default"].createElement("button", {
-      style: S.BT,
+      className: CL_BT,
       onClick: this._hClickBt
     }, /*#__PURE__*/_react["default"].createElement(_SpanDate["default"], {
       style: S.DATE,

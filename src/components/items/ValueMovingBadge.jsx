@@ -11,6 +11,8 @@ import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
 import ValueMovingModal from './ValueMovingModal'
 
+const CL_BT = 'bt'
+
 const S = {
   ROOT: {
     position: 'relative',
@@ -26,6 +28,9 @@ const S = {
     width: 5
   },
   DATE: {
+    display: 'inline-block',
+    paddingTop: 4,
+    paddingBottom: 2,
     paddingLeft: 5,
     paddingRight: 5
   },
@@ -37,9 +42,6 @@ const S = {
   },
   EQUAL: {
     color: '#2f7ed8'
-  },
-  BT: {
-    cursor: 'pointer'
   },
   SHOW_HIDE: {
     position: 'absolute',
@@ -166,7 +168,7 @@ class ValueMovingBadge extends Component {
            {delta}
          </span>
          <span style={S.G5} />
-         <button style = {S.BT} onClick={this._hClickBt} >
+         <button className={CL_BT} onClick={this._hClickBt} >
            <SpanDate style={S.DATE} date={date} />
          </button>
          {

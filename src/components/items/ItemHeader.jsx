@@ -5,7 +5,7 @@ import A from '../Comp'
 
 const TH_ID = 'ELEMENT';
 
-const CL_CAPTION = "not-selected text-clip shadow-right";
+const CL_CAPTION = "not-selected text-clip bt-left";
 
 const S = {
   ROOT: {
@@ -22,9 +22,9 @@ const S = {
   },
   CAPTION: {
     width: '75%',
-    textAlign: 'left',
-    fontWeight: 'bold',
-    cursor: 'pointer'
+    paddingRight: 2,
+    paddingTop: 4,
+    paddingBottom: 2    
   },
   OPEN: {
     color: '#a487d4',

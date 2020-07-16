@@ -19,7 +19,7 @@ const {
 
 const TH_ID = 'ELEMENT';
 
-const CL = 'not-selected shadow-right'
+const CL_CAPTION = 'not-selected text-clip bt-left'
 , CL_MORE = "popup-menu charts__menu-more"
 
 const S = {
@@ -45,19 +45,14 @@ const S = {
     display: 'inline-block'
   },
   CHECK_BOX: {
-    marginRight: 10,
+    marginRight: 8,
     marginLeft: 8
   },
   CAPTION_OPEN : {
-    display: 'inline-block',
     color: '#a487d4',
     width: 125,
-    textAlign: 'left',
-    fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow: 'clip',
-    overflow: 'hidden',
-    cursor: 'pointer'
+    paddingTop: 4,
+    paddingBottom: 2    
   },
   CAPTION_CLOSE: {
     color: 'gray'
@@ -143,7 +138,7 @@ const Header = ({
          onUnCheck={onUnCheck}
       />
       <button
-         className={CL}
+         className={CL_CAPTION}
          title={itemTitle}
          style={_captionStyle}
          onClick={onToggle}

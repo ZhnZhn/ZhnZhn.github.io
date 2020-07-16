@@ -3,7 +3,7 @@
   display: inline-block;
   color: #80c040;
   border: 2px solid #80c040;
-  border-radius: 50%;  
+  border-radius: 50%;
   line-height: 1.45;
   width: 26px;
   height: 26px;
@@ -60,4 +60,29 @@
 .zhn-bt-circle2:hover > div,
 .zhn-bt-circle2:focus > div {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.bt {
+  border-radius: 2px;
+  cursor: pointer;
+}
+.bt:hover {
+  outline: 0
+}
+.bt:focus{
+  background: rgba(164, 164, 164, 0.3);
+}
+
+.bt-left {
+  padding-left: 2px;
+  border-radius: 2px;
+  text-align: left;
+  font-weight: bold;
+  cursor: pointer;
+}
+.bt-left:hover {
+  outline: 0;
+}
+.bt-left:focus {
+  background: rgba(164, 164, 164, 0.3);  
 }

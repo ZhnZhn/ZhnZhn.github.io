@@ -16,7 +16,7 @@ var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 var _Comp = _interopRequireDefault(require("../Comp"));
 
 var TH_ID = 'ELEMENT';
-var CL_CAPTION = "not-selected text-clip shadow-right";
+var CL_CAPTION = "not-selected text-clip bt-left";
 var S = {
   ROOT: {
     position: 'relative',
@@ -32,9 +32,9 @@ var S = {
   },
   CAPTION: {
     width: '75%',
-    textAlign: 'left',
-    fontWeight: 'bold',
-    cursor: 'pointer'
+    paddingRight: 2,
+    paddingTop: 4,
+    paddingBottom: 2
   },
   OPEN: {
     color: '#a487d4'
