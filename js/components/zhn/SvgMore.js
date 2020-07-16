@@ -9,12 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _react = _interopRequireDefault(require("react"));
 
-var CL = 'focusable';
+var CL_BT_MORE = 'bt-more';
 var S = {
-  BT: {
-    height: 26,
-    padding: '2px 6px'
-  },
   SVG: {
     fill: 'black',
     stroke: 'black'
@@ -28,8 +24,8 @@ var SvgMore = function SvgMore(_ref) {
       onClick = _ref.onClick;
   return /*#__PURE__*/_react["default"].createElement("button", {
     ref: btRef,
-    className: CL,
-    style: (0, _extends2["default"])({}, S.BT, style),
+    className: CL_BT_MORE,
+    style: style,
     onClick: onClick
   }, /*#__PURE__*/_react["default"].createElement("svg", {
     style: (0, _extends2["default"])({}, S.SVG, svgStyle),
