@@ -7,10 +7,6 @@
   user-select: none;           /* Likely future */
 }
 
-.shadow-right {
-  position: relative;
-}
-
 .gap-right::before {
    content: '';
    position: absolute;
@@ -27,8 +23,7 @@
 }
 
 .text-clip {
-  display: inline-block;
-  width: 100px;
+  display: inline-block;  
   white-space: nowrap;
   text-overflow: clip;
   overflow: hidden;
