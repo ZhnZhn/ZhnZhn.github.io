@@ -92,6 +92,9 @@
   border-bottom: solid 2px #1b75bb;
   font-weight: bolder;
 }
+.zhn-select__row:focus {
+  outline: 0;
+}
 .zhn-select__row--active {
   border-bottom: solid 2px #1b75bb;
   font-weight: bolder;
