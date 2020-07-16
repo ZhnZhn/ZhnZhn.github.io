@@ -30,14 +30,14 @@
 }
 
 .charts__menu-more {
-  top: 36px;
-  left: 8px;
+  top: 34px;
+  left: 0;
   z-index: 2000;
 }
 
 .dialog__menu-more {
   top: 30px;
-  left: 4px;
+  left: -2px;
   z-index: 10;
   text-align: left;
 }
