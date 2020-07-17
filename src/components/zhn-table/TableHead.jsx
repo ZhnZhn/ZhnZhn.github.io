@@ -14,6 +14,19 @@ const C = {
   DESC: 'descending'
 };
 
+const ThMore = ({ name, onMenuMore }) => (
+  <>
+    <SvgMore
+       style={S.BT_SVG_MORE}
+       svgStyle={S.SVG_MORE}
+       onClick={onMenuMore}
+    />
+    <span style={S.TH_MORE_SPAN}>
+      {name}
+    </span>
+  </>
+);
+
 class TableHead extends Component {
 
   /*
@@ -38,7 +51,7 @@ class TableHead extends Component {
   }
   */
 
-  _hThKeyDown = (pn, evt) => {            
+  _hThKeyDown = (pn, evt) => {
     if (isKeyEnter(evt)) {
       this.props.onSort(pn)
     }
@@ -60,20 +73,19 @@ class TableHead extends Component {
         } = FN.crAppearance({
               S, C, pn, name, sortBy, sortTo
             })
-      , _elMore = hIndex === 0
-           ? (<SvgMore
-                style={S.BT_SVG_MORE}
-                svgStyle={S.SVG_MORE}
-                onClick={onMenuMore}
+      , _nameOrEl = hIndex === 0
+          ? (<ThMore
+               name={name}
+               onMenuMore={onMenuMore}
              />)
-           : null
+          : name
       , _thStyle = hIndex === 0
-           ? thMoreStyle
-           : null;
+           ? {...thMoreStyle, ...style}
+           : style;
       return (
         <th
           key={h.name}
-          style={{...S.TH, ..._thStyle, ...style }}
+          style={{...S.TH, ..._thStyle }}
           rowSpan="1"
           colSpan="1"
           tabIndex="0"
@@ -83,8 +95,7 @@ class TableHead extends Component {
           onClick={onSort.bind(null, pn)}
           onKeyDown={this._hThKeyDown.bind(null, pn)}
         >
-          {_elMore}
-          {name}
+          {_nameOrEl}
         </th>
       );
     }).filter(Boolean);

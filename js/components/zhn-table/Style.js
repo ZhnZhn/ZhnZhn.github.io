@@ -27,6 +27,10 @@ var S = {
     userSelect: 'none',
     cursor: 'pointer'
   },
+  TH_MORE_SPAN: {
+    position: 'relative',
+    top: -4
+  },
   TH_UP: {
     borderTop: '3px solid #f1d600'
   },
@@ -42,8 +46,8 @@ var S = {
   },
   STYLE_MORE: {
     position: 'absolute',
-    top: 38,
-    left: 8,
+    top: 36,
+    left: 0,
     zIndex: 1010,
     backgroundColor: 'inherit',
     paddingTop: 4,

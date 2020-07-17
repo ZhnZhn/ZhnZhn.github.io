@@ -28,6 +28,18 @@ var C = {
   DESC: 'descending'
 };
 
+var ThMore = function ThMore(_ref) {
+  var name = _ref.name,
+      onMenuMore = _ref.onMenuMore;
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_SvgMore["default"], {
+    style: _Style["default"].BT_SVG_MORE,
+    svgStyle: _Style["default"].SVG_MORE,
+    onClick: onMenuMore
+  }), /*#__PURE__*/_react["default"].createElement("span", {
+    style: _Style["default"].TH_MORE_SPAN
+  }, name));
+};
+
 var TableHead = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(TableHead, _Component);
 
@@ -73,16 +85,15 @@ var TableHead = /*#__PURE__*/function (_Component) {
             style = _FN$crAppearance.style,
             ariaSort = _FN$crAppearance.ariaSort,
             ariaLabel = _FN$crAppearance.ariaLabel,
-            _elMore = hIndex === 0 ? /*#__PURE__*/_react["default"].createElement(_SvgMore["default"], {
-          style: _Style["default"].BT_SVG_MORE,
-          svgStyle: _Style["default"].SVG_MORE,
-          onClick: onMenuMore
-        }) : null,
-            _thStyle = hIndex === 0 ? thMoreStyle : null;
+            _nameOrEl = hIndex === 0 ? /*#__PURE__*/_react["default"].createElement(ThMore, {
+          name: name,
+          onMenuMore: onMenuMore
+        }) : name,
+            _thStyle = hIndex === 0 ? (0, _extends2["default"])({}, thMoreStyle, style) : style;
 
         return /*#__PURE__*/_react["default"].createElement("th", {
           key: h.name,
-          style: (0, _extends2["default"])({}, _Style["default"].TH, _thStyle, style),
+          style: (0, _extends2["default"])({}, _Style["default"].TH, _thStyle),
           rowSpan: "1",
           colSpan: "1",
           tabIndex: "0",
@@ -91,7 +102,7 @@ var TableHead = /*#__PURE__*/function (_Component) {
           "aria-sort": ariaSort,
           onClick: onSort.bind(null, pn),
           onKeyDown: _this._hThKeyDown.bind(null, pn)
-        }, _elMore, name);
+        }, _nameOrEl);
       }).filter(Boolean);
     };
 
