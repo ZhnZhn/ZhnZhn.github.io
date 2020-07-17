@@ -26,7 +26,7 @@ const CHILD_MARGIN = 36
     , MIN_WIDTH_WITH_TAB_MINI = 470
     , MIN_WIDTH = 365
     , MAX_WIDTH = 1200
-    , DELTA = 10;
+    , STEP = 10;
 
 const S = {
   BR_CAPTION: {
@@ -53,14 +53,9 @@ const COMP_ACTIONS = [
   CHAT.CLOSE_CHART
 ];
 
-
 const _isFn = fn => typeof fn === "function";
 const _isBool = bool => typeof bool === 'boolean';
 const _isInArray = (arr=[], value) => Boolean(~arr.indexOf(value))
-
-const _getWidth = style => parseInt(style.width, 10)
-  || INITIAL_WIDTH;
-const _toStyleWidth = width => width + 'px';
 
 const _crItemRefPropName = index => 'chart' + index;
 
@@ -86,6 +81,7 @@ class ChartContainer extends Component {
 
     this._refRootNode = React.createRef()
     this._refSpComp = React.createRef()
+    this._refResize = React.createRef()
 
 
     this.state = {
@@ -106,6 +102,15 @@ class ChartContainer extends Component {
       : MIN_WIDTH
   }
 
+  _crResizeFn = (methodName, ...args) => {
+     return () => {
+       const _compResize = this._refResize.current;
+       if (_compResize) {
+         _compResize[methodName](...args)
+       }
+     }
+  }
+
   _crModelMore = (isAdminMode) => {
     const {
       store,
@@ -116,10 +121,10 @@ class ChartContainer extends Component {
       : store.isAdminMode();
 
     return crModelMore({
-      onMinWidth: this._resizeTo.bind(this, this._MIN_WIDTH),
-      onInitWidth: this._resizeTo.bind(this, this._INITIAL_WIDTH),
-      onPlusWidth: this._plusToWidth,
-      onMinusWidth: this._minusToWidth,
+      onMinWidth: this._crResizeFn('toWidth', this._MIN_WIDTH, true),
+      onInitWidth: this._crResizeFn('toWidth', this._INITIAL_WIDTH, true),
+      onPlusWidth: this._crResizeFn('resizeBy', STEP),
+      onMinusWidth: this._crResizeFn('resizeBy', -STEP),
       onFit: this._fitToWidth,
       onShowCaptions: this._onShowCaptions,
       onSortBy,
@@ -258,23 +263,6 @@ class ChartContainer extends Component {
      return style;
    }
 
-   _resizeTo = (width) => {
-     this._getRootNodeStyle().width = _toStyleWidth(width);
-     this._hResizeAfter(width)
-   }
-
-   _plusToWidth = () => {
-     const style = this._getRootNodeStyle()
-     , w = _getWidth(style) + DELTA
-     , _width = w < MAX_WIDTH ? w : MAX_WIDTH;
-     style.width = _toStyleWidth(_width)
-   }
-   _minusToWidth = () => {
-     const style = this._getRootNodeStyle()
-     , w = _getWidth(style) - DELTA
-     , _width = w > this._MIN_WIDTH ? w : this._MIN_WIDTH;
-     style.width = _toStyleWidth(_width)
-   }
    _fitToWidth = () => {
      const { width } = this._getRootNodeStyle();
      if (width) {
@@ -343,11 +331,13 @@ class ChartContainer extends Component {
              onClose={this._hHide}
           >
              <A.SvgHrzResize
+               ref={this._refResize}
                btStyle={S.BT_RESIZE}
                initWidth={INITIAL_WIDTH}
                minWidth={this._MIN_WIDTH}
                maxWidth={MAX_WIDTH}
-               comp={this}
+               step={STEP}
+               nodeRef={this._refRootNode}
                onResizeAfter={this._hResizeAfter}
              />
           </A.BrowserCaption>

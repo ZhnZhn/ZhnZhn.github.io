@@ -13,14 +13,14 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
+var _isKeyEnter = _interopRequireDefault(require("./isKeyEnter"));
 
-var CL = "svg-resize not-selected";
+var CL_BT = "bt-resize not-selected";
 var S = {
   ROOT_DIV: {
     display: 'inline-block'
   },
-  LEFT_DIV: {
+  BT: {
     marginLeft: 10
   }
 };
@@ -32,6 +32,17 @@ var _isFn = function _isFn(fn) {
 var SvgHrzResize = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SvgHrzResize, _Component);
 
+  /*
+  static propTypes = {
+    btStyle: PropTypes.object
+    initWidth: PropTypes.number,
+    minWidth: PropTypes.number,
+    maxWidth: PropTypes.number,
+    step: PropTypes.number,
+    nodeRef=PropTypes.ref,
+    onResizeAfter=PropTypes.func
+  }
+  */
   function SvgHrzResize(props) {
     var _this;
 
@@ -51,28 +62,80 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
       }
     };
 
-    _this._resizeLeft = function () {
-      if (_this.delta > _this.minDelta) {
-        _this.delta -= _this.step;
-        _this.currentWidth = _this.initWidth + _this.delta;
-        _this.domNode.style.width = _this.currentWidth + 'px';
+    _this._getNodeStyle = function () {
+      var nodeRef = _this.props.nodeRef,
+          _ref = nodeRef || {},
+          current = _ref.current;
 
-        _this._increaseStepValue();
+      return current && current.style || {};
+    };
+
+    _this._setNodeWidth = function (width) {
+      _this.currentWidth = width;
+      _this._getNodeStyle().width = _this.currentWidth + 'px';
+    };
+
+    _this._onResizeAfter = function (isOnResizeAfter) {
+      var onResizeAfter = _this.props.onResizeAfter;
+
+      if (isOnResizeAfter && _isFn(onResizeAfter)) {
+        onResizeAfter(_this.currentWidth);
+      }
+    };
+
+    _this.toWidth = function (width, isOnResizeAfter) {
+      var _this$props = _this.props,
+          minWidth = _this$props.minWidth,
+          maxWidth = _this$props.maxWidth,
+          initWidth = _this$props.initWidth;
+
+      if (width >= minWidth && width <= maxWidth) {
+        _this.delta = width - initWidth;
+
+        _this._setNodeWidth(width);
+
+        _this._onResizeAfter(isOnResizeAfter);
+      }
+    };
+
+    _this.resizeBy = function (step) {
+      if (step < 0 && _this.delta > _this.minDelta || step > 0 && _this.delta < _this.maxDelta) {
+        _this.delta += step;
+
+        _this._setNodeWidth(_this.initWidth + _this.delta);
+      }
+    };
+
+    _this._hKdLeft = function (event) {
+      if ((0, _isKeyEnter["default"])(event)) {
+        event.stopPropagation();
+
+        _this.resizeBy(-_this.props.step);
+      }
+    };
+
+    _this._resizeLeft = function () {
+      _this.resizeBy(-_this.step);
+
+      _this._increaseStepValue();
+    };
+
+    _this._hKdRight = function (event) {
+      if ((0, _isKeyEnter["default"])(event)) {
+        event.stopPropagation();
+
+        _this.resizeBy(_this.props.step);
       }
     };
 
     _this._resizeRight = function () {
-      if (_this.delta < _this.maxDelta) {
-        _this.delta += _this.step;
-        _this.currentWidth = _this.initWidth + _this.delta;
-        _this.domNode.style.width = _this.currentWidth + 'px';
+      _this.resizeBy(_this.step);
 
-        _this._increaseStepValue();
-      }
+      _this._increaseStepValue();
     };
 
     _this._updateDelta = function () {
-      var w = parseInt(_this.domNode.style.width);
+      var w = parseInt(_this._getNodeStyle().width, 10);
 
       if (!isNaN(w)) {
         _this.delta = w - _this.initWidth;
@@ -96,52 +159,41 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
       _this.step = 1;
       _this.countStep = 0;
 
-      if (isOnResizeAfter && _this.isResizeAfter) {
-        _this.props.onResizeAfter(_this.currentWidth);
-      }
+      _this._onResizeAfter(isOnResizeAfter);
     };
 
+    var _initWidth = props.initWidth,
+        _minWidth = props.minWidth,
+        _maxWidth = props.maxWidth;
+    _this.initWidth = _initWidth;
+    _this.currentWidth = _this.initWidth;
+    _this.minDelta = _minWidth - _this.initWidth;
+    _this.maxDelta = _maxWidth - _this.initWidth;
     _this.id = null;
-    _this.domNode = null;
     _this.delta = 0;
     _this.step = 1;
     _this.countStep = 0;
-    _this.isResizeAfter = _isFn(props.onResizeAfter);
     _this._hStartResizeLeft = _this._startResize.bind(null, _this._resizeLeft);
     _this._hStartResizeRight = _this._startResize.bind(null, _this._resizeRight);
     _this._hStopResize = _this._stopResize.bind(null, true);
-    _this.state = {};
     return _this;
   }
 
   var _proto = SvgHrzResize.prototype;
 
-  _proto.componentDidMount = function componentDidMount() {
-    var _this$props = this.props,
-        comp = _this$props.comp,
-        initWidth = _this$props.initWidth,
-        minWidth = _this$props.minWidth,
-        maxWidth = _this$props.maxWidth;
-    this.domNode = _reactDom["default"].findDOMNode(comp); //this.initWidth = this.domNode.getBoundingClientRect().width;
-
-    this.initWidth = initWidth;
-    this.currentWidth = this.initWidth;
-    this.minDelta = minWidth - this.initWidth;
-    this.maxDelta = maxWidth - this.initWidth;
-  };
-
   _proto.render = function render() {
     var btStyle = this.props.btStyle,
-        _btStyle = (0, _extends2["default"])({}, S.LEFT_DIV, btStyle);
+        _btStyle = (0, _extends2["default"])({}, S.BT, btStyle);
 
     return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT_DIV
     }, /*#__PURE__*/_react["default"].createElement("button", {
-      className: CL,
+      className: CL_BT,
       style: _btStyle,
       title: "Resize container to left",
       onMouseDown: this._hStartResizeLeft,
       onMouseUp: this._hStopResize,
+      onKeyDown: this._hKdLeft,
       onTouchStart: this._hStartResizeLeft,
       onTouchEnd: this._hStopResize
     }, /*#__PURE__*/_react["default"].createElement("svg", {
@@ -160,11 +212,12 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
       strokeLinecap: "round",
       fill: "none"
     }))), /*#__PURE__*/_react["default"].createElement("button", {
-      className: CL,
+      className: CL_BT,
       style: _btStyle,
       title: "Resize container to right",
       onMouseDown: this._hStartResizeRight,
       onMouseUp: this._hStopResize,
+      onKeyDown: this._hKdRight,
       onTouchStart: this._hStartResizeRight,
       onTouchEnd: this._hStopResize
     }, /*#__PURE__*/_react["default"].createElement("svg", {
@@ -188,6 +241,9 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
   return SvgHrzResize;
 }(_react.Component);
 
+SvgHrzResize.defaultProps = {
+  step: 10
+};
 var _default = SvgHrzResize;
 exports["default"] = _default;
 //# sourceMappingURL=SvgHrzResize.js.map

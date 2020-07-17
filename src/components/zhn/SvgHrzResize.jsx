@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
-const CL = "svg-resize not-selected";
+import isKeyEnter from './isKeyEnter'
+
+const CL_BT = "bt-resize not-selected";
 
 const S = {
   ROOT_DIV: {
-    display: 'inline-block'    
+    display: 'inline-block'
   },
-  LEFT_DIV: {
+  BT: {
     marginLeft: 10
   }
 };
@@ -15,30 +16,40 @@ const S = {
 const _isFn = fn => typeof fn === 'function';
 
 class SvgHrzResize extends Component {
+  static defaultProps = {
+    step: 10
+  }
+
+  /*
+  static propTypes = {
+    btStyle: PropTypes.object
+    initWidth: PropTypes.number,
+    minWidth: PropTypes.number,
+    maxWidth: PropTypes.number,
+    step: PropTypes.number,
+    nodeRef=PropTypes.ref,
+    onResizeAfter=PropTypes.func
+  }
+  */
+
   constructor(props){
     super(props);
+    const {
+      initWidth, minWidth, maxWidth
+    } = props
+    this.initWidth = initWidth;
+    this.currentWidth = this.initWidth;
+    this.minDelta = minWidth - this.initWidth;
+    this.maxDelta = maxWidth - this.initWidth;
+
     this.id = null;
-    this.domNode = null;
     this.delta = 0;
     this.step = 1;
     this.countStep = 0;
-    this.isResizeAfter = _isFn(props.onResizeAfter)
 
     this._hStartResizeLeft = this._startResize.bind(null, this._resizeLeft)
     this._hStartResizeRight = this._startResize.bind(null, this._resizeRight)
     this._hStopResize = this._stopResize.bind(null, true)
-
-    this.state = {};
-  }
-
-  componentDidMount(){
-     const { comp, initWidth, minWidth, maxWidth } = this.props;
-     this.domNode = ReactDOM.findDOMNode(comp);
-     //this.initWidth = this.domNode.getBoundingClientRect().width;
-     this.initWidth = initWidth;
-     this.currentWidth = this.initWidth;
-     this.minDelta = minWidth - this.initWidth;
-     this.maxDelta = maxWidth - this.initWidth;
   }
 
   _increaseStepValue = () => {
@@ -54,25 +65,64 @@ class SvgHrzResize extends Component {
     }
   }
 
-  _resizeLeft = () => {
-    if (this.delta > this.minDelta){
-      this.delta -= this.step;
-      this.currentWidth = this.initWidth + this.delta;
-      this.domNode.style.width = this.currentWidth + 'px';
-      this._increaseStepValue();
-    }
+  _getNodeStyle = () => {
+    const { nodeRef } = this.props
+    , { current } = nodeRef || {};
+    return current && current.style || {};
   }
-  _resizeRight = () => {
-    if (this.delta < this.maxDelta){
-      this.delta += this.step;
-      this.currentWidth = this.initWidth + this.delta;
-      this.domNode.style.width = this.currentWidth + 'px';
-      this._increaseStepValue();
+
+  _setNodeWidth = (width) => {
+    this.currentWidth = width
+    this._getNodeStyle().width = this.currentWidth + 'px';
+  }
+
+  _onResizeAfter = (isOnResizeAfter) => {
+    const { onResizeAfter } = this.props;
+    if (isOnResizeAfter && _isFn(onResizeAfter)) {
+      onResizeAfter(this.currentWidth);
     }
   }
 
+  toWidth = (width, isOnResizeAfter) => {
+    const { minWidth, maxWidth, initWidth } = this.props;
+    if (width >= minWidth && width <= maxWidth) {
+      this.delta = width - initWidth
+      this._setNodeWidth(width)
+      this._onResizeAfter(isOnResizeAfter)
+    }
+  }
+
+  resizeBy = (step) => {
+    if ( (step < 0 && this.delta > this.minDelta)
+      || (step > 0 && this.delta < this.maxDelta) ) {
+      this.delta += step;
+      this._setNodeWidth(this.initWidth + this.delta)
+    }
+  }
+
+  _hKdLeft = (event) => {
+    if (isKeyEnter(event)) {
+      event.stopPropagation()
+      this.resizeBy(-this.props.step)
+    }
+  }
+  _resizeLeft = () => {
+     this.resizeBy(-this.step)
+     this._increaseStepValue();
+  }
+  _hKdRight = (event) => {
+    if (isKeyEnter(event)) {
+      event.stopPropagation()
+      this.resizeBy(this.props.step)
+    }
+  }
+  _resizeRight = () => {
+    this.resizeBy(this.step)
+    this._increaseStepValue();
+  }
+
   _updateDelta = () => {
-    const w = parseInt(this.domNode.style.width);
+    const w = parseInt(this._getNodeStyle().width, 10);
     if (!isNaN(w)) {
       this.delta = w - this.initWidth
     }
@@ -91,22 +141,21 @@ class SvgHrzResize extends Component {
     this.step = 1;
     this.countStep = 0;
 
-    if (isOnResizeAfter && this.isResizeAfter){
-      this.props.onResizeAfter(this.currentWidth);
-    }
+    this._onResizeAfter(isOnResizeAfter)
   }
 
   render(){
     const { btStyle } = this.props
-    , _btStyle = {...S.LEFT_DIV, ...btStyle };
+    , _btStyle = {...S.BT, ...btStyle };
     return (
       <div style={S.ROOT_DIV}>
         <button
-           className={CL}
+           className={CL_BT}
            style={_btStyle}
            title="Resize container to left"
            onMouseDown={this._hStartResizeLeft}
            onMouseUp={this._hStopResize}
+           onKeyDown={this._hKdLeft}
            onTouchStart={this._hStartResizeLeft}
            onTouchEnd={this._hStopResize}
         >
@@ -127,11 +176,12 @@ class SvgHrzResize extends Component {
           </svg>
       </button>
       <button
-         className={CL}
+         className={CL_BT}
          style={_btStyle}
          title="Resize container to right"
          onMouseDown={this._hStartResizeRight}
          onMouseUp={this._hStopResize}
+         onKeyDown={this._hKdRight}
          onTouchStart={this._hStartResizeRight}
          onTouchEnd={this._hStopResize}
       >

@@ -43,7 +43,7 @@ var CHILD_MARGIN = 36,
     MIN_WIDTH_WITH_TAB_MINI = 470,
     MIN_WIDTH = 365,
     MAX_WIDTH = 1200,
-    DELTA = 10;
+    STEP = 10;
 var S = {
   BR_CAPTION: {
     paddingLeft: 4
@@ -80,14 +80,6 @@ var _isInArray = function _isInArray(arr, value) {
   return Boolean(~arr.indexOf(value));
 };
 
-var _getWidth = function _getWidth(style) {
-  return parseInt(style.width, 10) || INITIAL_WIDTH;
-};
-
-var _toStyleWidth = function _toStyleWidth(width) {
-  return width + 'px';
-};
-
 var _crItemRefPropName = function _crItemRefPropName(index) {
   return 'chart' + index;
 };
@@ -113,6 +105,20 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
       _this._MIN_WIDTH = _this._INITIAL_WIDTH > MIN_WIDTH_WITH_TAB_MINI ? MIN_WIDTH_WITH_TAB_MINI : MIN_WIDTH;
     };
 
+    _this._crResizeFn = function (methodName) {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      return function () {
+        var _compResize = _this._refResize.current;
+
+        if (_compResize) {
+          _compResize[methodName].apply(_compResize, args);
+        }
+      };
+    };
+
     _this._crModelMore = function (isAdminMode) {
       var _this$props = _this.props,
           store = _this$props.store,
@@ -120,10 +126,10 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
           onSortBy = _this$props.onSortBy;
       _this._isAdminMode = _isBool(isAdminMode) ? isAdminMode : store.isAdminMode();
       return (0, _ModelMore["default"])({
-        onMinWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), _this._MIN_WIDTH),
-        onInitWidth: _this._resizeTo.bind((0, _assertThisInitialized2["default"])(_this), _this._INITIAL_WIDTH),
-        onPlusWidth: _this._plusToWidth,
-        onMinusWidth: _this._minusToWidth,
+        onMinWidth: _this._crResizeFn('toWidth', _this._MIN_WIDTH, true),
+        onInitWidth: _this._crResizeFn('toWidth', _this._INITIAL_WIDTH, true),
+        onPlusWidth: _this._crResizeFn('resizeBy', STEP),
+        onMinusWidth: _this._crResizeFn('resizeBy', -STEP),
         onFit: _this._fitToWidth,
         onShowCaptions: _this._onShowCaptions,
         onSortBy: onSortBy,
@@ -289,28 +295,6 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
       return style;
     };
 
-    _this._resizeTo = function (width) {
-      _this._getRootNodeStyle().width = _toStyleWidth(width);
-
-      _this._hResizeAfter(width);
-    };
-
-    _this._plusToWidth = function () {
-      var style = _this._getRootNodeStyle(),
-          w = _getWidth(style) + DELTA,
-          _width = w < MAX_WIDTH ? w : MAX_WIDTH;
-
-      style.width = _toStyleWidth(_width);
-    };
-
-    _this._minusToWidth = function () {
-      var style = _this._getRootNodeStyle(),
-          w = _getWidth(style) - DELTA,
-          _width = w > _this._MIN_WIDTH ? w : _this._MIN_WIDTH;
-
-      style.width = _toStyleWidth(_width);
-    };
-
     _this._fitToWidth = function () {
       var _this$_getRootNodeSty = _this._getRootNodeStyle(),
           width = _this$_getRootNodeSty.width;
@@ -348,6 +332,7 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);
     _this._refRootNode = /*#__PURE__*/_react["default"].createRef();
     _this._refSpComp = /*#__PURE__*/_react["default"].createRef();
+    _this._refResize = /*#__PURE__*/_react["default"].createRef();
     _this.state = {
       isMore: false,
       isCompareTo: false
@@ -408,11 +393,13 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
       captionStyle: S.CAPTION,
       onClose: this._hHide
     }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].SvgHrzResize, {
+      ref: this._refResize,
       btStyle: S.BT_RESIZE,
       initWidth: INITIAL_WIDTH,
       minWidth: this._MIN_WIDTH,
       maxWidth: MAX_WIDTH,
-      comp: this,
+      step: STEP,
+      nodeRef: this._refRootNode,
       onResizeAfter: this._hResizeAfter
     })), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ScrollPane, {
       innerRef: this._refSpComp,
