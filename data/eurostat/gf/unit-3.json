@@ -1,0 +1,7 @@
+{
+  "items":[
+  {"value":"MIO_EUR","caption":"Million euro"},
+	{"value":"MIO_NAC","caption":"Million units of national currency"},
+	{"value":"PC_GDP","caption":"Percentage of gross domestic product (GDP)"}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "items":[
+    {"value":"P51G","caption":"Gross fixed capital formation"},
+    {"value":"B9","caption":"Deficit/Surplus"},
+    {"value":"D41PAY","caption":"Interest, payable"},
+    {"value":"GD","caption":"Government consolidated gross debt"},
+    {"value":"IGL_F4_EA19","caption":"Intergovernmental lending within EA19 (from 2015)"},
+    {"value":"IGL_F4_EU27_2020","caption":"Intergovernmental lending within EU27 (from 2020)"},
+    {"value":"GD_F2","caption":"Government consolidated gross debt at face value - Currency and deposits"},
+	  {"value":"GD_F3","caption":"Government consolidated gross debt at face value - Debt securities"},
+	  {"value":"GD_F31","caption":"Government consolidated gross debt at face value - Short-term debt securities"},
+	  {"value":"GD_F32","caption":"Government consolidated gross debt at face value - Long-term debt securities"},
+	  {"value":"GD_F4","caption":"Government consolidated gross debt at face value - Loans"},
+	  {"value":"GD_F41","caption":"Government consolidated gross debt at face value - Short-term loans"},
+	  {"value":"GD_F42","caption":"Government consolidated gross debt at face value - Long-term loans"},
+	  {"value":"AF_81L","caption":"Trade credits and advances - liabilities"}
+  ]
+}
