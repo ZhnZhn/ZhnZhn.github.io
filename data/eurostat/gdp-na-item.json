@@ -1,6 +1,6 @@
 {"items":[
-{"value":"B1G","caption":"Value added, gross"},
-{"value":"D1","caption":"Compensation of employees"},
-{"value":"D11","caption":"Wages and salaries"},
-{"value":"D12","caption":"Employers' social contributions"}
+{"v":"B1G","c":"Value added, gross"},
+{"v":"D1","c":"Compensation of employees"},
+{"v":"D11","c":"Wages and salaries"},
+{"v":"D12","c":"Employers' social contributions"}
 ]}

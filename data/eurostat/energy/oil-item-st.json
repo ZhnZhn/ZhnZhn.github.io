@@ -1,10 +1,10 @@
 {"items":[
-{"value":"10_196102","caption":"Closing Stocks"},
-{"value":"B_195500","caption":"Demand"},
-{"value":"B_190100","caption":"Primary Production"},
-{"value":"B_190300","caption":"Imports"},
-{"value":"B_190400","caption":"Stock Changes"},
-{"value":"B_190500","caption":"Exports"},
-{"value":"B_191008","caption":"Refinery Intake"},
-{"value":"B_191108","caption":"Refinery Output"}
+{"v":"10_196102","c":"Closing Stocks"},
+{"v":"B_195500","c":"Demand"},
+{"v":"B_190100","c":"Primary Production"},
+{"v":"B_190300","c":"Imports"},
+{"v":"B_190400","c":"Stock Changes"},
+{"v":"B_190500","c":"Exports"},
+{"v":"B_191008","c":"Refinery Intake"},
+{"v":"B_191108","c":"Refinery Output"}
 ]}

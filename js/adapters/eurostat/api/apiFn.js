@@ -9,6 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _fnArr = _interopRequireDefault(require("../../../utils/fnArr"));
 
+var _AdapterFn = _interopRequireDefault(require("../../AdapterFn"));
+
+var getValue = _AdapterFn["default"].getValue;
 var isInArrStr = _fnArr["default"].isInArrStr;
 var C = {
   URL: "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/",
@@ -17,6 +20,7 @@ var C = {
 };
 var CATEGORY_TYPES = ['MAP', 'COLUMN_SET', 'BAR_SET', 'BAR_WITH_LABELS', 'DOT_SET'];
 var apiFn = (0, _extends2["default"])({}, C, {
+  getValue: getValue,
   isCategory: isInArrStr(CATEGORY_TYPES),
   isMap: function isMap(seriaType) {
     return seriaType === 'MAP';

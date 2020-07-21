@@ -1,7 +1,7 @@
 {"items":[
-{"value":"4161901","caption":"Consumption < 1 000 kWh (DA)"},
-{"value":"4161902","caption":"1 000 kWh < Consumption < 2 500 kWh (DB)"},
-{"value":"4161903","caption":"2 500 kWh < Consumption < 5 000 kWh (DC)"},
-{"value":"4161904","caption":"5 000 kWh < Consumption < 15 000 kWh (DD)"},
-{"value":"4161905","caption":"Consumption > 15 000 kWh (DE)"}
+{"v":"4161901","c":"Consumption < 1 000 kWh (DA)"},
+{"v":"4161902","c":"1 000 kWh < Consumption < 2 500 kWh (DB)"},
+{"v":"4161903","c":"2 500 kWh < Consumption < 5 000 kWh (DC)"},
+{"v":"4161904","c":"5 000 kWh < Consumption < 15 000 kWh (DD)"},
+{"v":"4161905","c":"Consumption > 15 000 kWh (DE)"}
 ]}

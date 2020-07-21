@@ -1,1 +1,1 @@
-{"items":[{"caption":"Percentage of GDP","value":"PC_GDP"},{"caption":"Million EUR","value":"MIO_EUR"},{"caption":"Euro per inhabitant","value":"EUR_HAB"},{"caption":"Percentage of total","value":"PC_TOT"},{"caption":"Million units of national currency","value":"MIO_NAC"}]}
+{"items":[{"c":"Percentage of GDP","v":"PC_GDP"},{"c":"Million EUR","v":"MIO_EUR"},{"c":"Euro per inhabitant","v":"EUR_HAB"},{"c":"Percentage of total","v":"PC_TOT"},{"c":"Million units of national currency","v":"MIO_NAC"}]}

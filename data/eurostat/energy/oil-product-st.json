@@ -1,10 +1,10 @@
 {"items": [
-{"value":"3000","caption":"Total petroleum products"},
-{"value":"3105","caption":"Crude oil (without NGL)"},
-{"value":"3200","caption":"All petroleum products"},
-{"value":"3220","caption":"Liquified petroleum gas (LPG)"},
-{"value":"3230","caption":"Motor spirit"},
-{"value":"3240","caption":"Kerosenes - Jet Fuels"},
-{"value":"3260","caption":"Gas/diesel oil (without bio components)"},
-{"value":"3270A","caption":"Total fuel oil"}
+{"v":"3000","c":"Total petroleum products"},
+{"v":"3105","c":"Crude oil (without NGL)"},
+{"v":"3200","c":"All petroleum products"},
+{"v":"3220","c":"Liquified petroleum gas (LPG)"},
+{"v":"3230","c":"Motor spirit"},
+{"v":"3240","c":"Kerosenes - Jet Fuels"},
+{"v":"3260","c":"Gas/diesel oil (without bio components)"},
+{"v":"3270A","c":"Total fuel oil"}
 ]}

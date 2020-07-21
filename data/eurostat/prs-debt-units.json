@@ -1,4 +1,4 @@
 {"items":[
- { "caption": "Percent of gross domestic product (GDP)", "value": "PC_GDP" }, 
- { "caption": "Million units of national currency", "value": "MIO_NAC" }
+ { "c": "Percent of gross domestic product (GDP)", "v": "PC_GDP" },
+ { "c": "Million units of national currency", "v": "MIO_NAC" }
 ]}

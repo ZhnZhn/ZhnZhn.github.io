@@ -5,6 +5,8 @@ const { crCaption, crItemKey, crAlertConf } = fns;
 const TYPE = 'selectN';
 const TABLE_ID = 'table';
 
+const _assign = Object.assign
+
 const _findItemTable = (items) => {
   let tableItem, tableIndex;
   for (let i=0; i<items.length;i++){
@@ -20,11 +22,9 @@ const _findItemTable = (items) => {
 const _modifyIfItemTable = (dfProps, items) => {
   const { tableItem, tableIndex } = _findItemTable(items);
   if (tableItem) {
-    const { value, dfTail, mapFrequency } = tableItem;
-    if (value) {
-      Object.assign(dfProps, {
-        dfTable: value, dfTail
-      })
+    const { v:dfTable, dfTail, mapFrequency } = tableItem
+    if (dfTable) {
+      _assign(dfProps, { dfTable, dfTail })
       if (mapFrequency) {
         dfProps.mapFrequency = mapFrequency
       }

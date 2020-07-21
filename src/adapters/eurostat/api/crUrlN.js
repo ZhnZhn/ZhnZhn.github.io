@@ -3,10 +3,11 @@ import apiFn from './apiFn'
 const {
   DF_TAIL,
   isCategory, isMap,
-  crUrl
+  crUrl,
+  getValue
 } = apiFn;
 
-const _isStrNotEmpty = str => str &&
+const _isNotEmptyStr = str => str &&
   typeof str === 'string';
 
 const _addDfTailTo = (mapSlice, dfTail) => {
@@ -21,9 +22,9 @@ const _addDfTailTo = (mapSlice, dfTail) => {
 const _crMapSlice = (items, { dfTail }) => {
   const mapSlice = {};
   items.forEach(item => {
-    mapSlice[item.id] = item.value
+    mapSlice[item.id] = getValue(item)
   })
-  if (_isStrNotEmpty(dfTail)) {
+  if (_isNotEmptyStr(dfTail)) {
     _addDfTailTo(mapSlice, dfTail)
   }
   return mapSlice;
@@ -37,7 +38,7 @@ const _crItems = ({ seriaType, items, time }) => isCategory(seriaType)
 
 const _crQuery = (items, dfTail) => {
   const _q = items
-    .map(item => `${item.id}=${item.value}`)
+    .map(item => `${item.id}=${getValue(item)}`)
     .join('&');
   return dfTail
     ? `${_q}&${dfTail}`

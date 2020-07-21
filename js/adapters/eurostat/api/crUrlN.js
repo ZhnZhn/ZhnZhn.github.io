@@ -10,9 +10,10 @@ var _apiFn = _interopRequireDefault(require("./apiFn"));
 var DF_TAIL = _apiFn["default"].DF_TAIL,
     isCategory = _apiFn["default"].isCategory,
     isMap = _apiFn["default"].isMap,
-    crUrl = _apiFn["default"].crUrl;
+    crUrl = _apiFn["default"].crUrl,
+    getValue = _apiFn["default"].getValue;
 
-var _isStrNotEmpty = function _isStrNotEmpty(str) {
+var _isNotEmptyStr = function _isNotEmptyStr(str) {
   return str && typeof str === 'string';
 };
 
@@ -30,10 +31,10 @@ var _crMapSlice = function _crMapSlice(items, _ref) {
   var dfTail = _ref.dfTail;
   var mapSlice = {};
   items.forEach(function (item) {
-    mapSlice[item.id] = item.value;
+    mapSlice[item.id] = getValue(item);
   });
 
-  if (_isStrNotEmpty(dfTail)) {
+  if (_isNotEmptyStr(dfTail)) {
     _addDfTailTo(mapSlice, dfTail);
   }
 
@@ -52,7 +53,7 @@ var _crItems = function _crItems(_ref2) {
 
 var _crQuery = function _crQuery(items, dfTail) {
   var _q = items.map(function (item) {
-    return item.id + "=" + item.value;
+    return item.id + "=" + getValue(item);
   }).join('&');
 
   return dfTail ? _q + "&" + dfTail : _q;

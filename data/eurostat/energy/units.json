@@ -1,7 +1,7 @@
 {
   "items":[
-  {"value":"MTOE","caption":"Million tonnes of oil equivalent (TOE)"},
-	{"value":"I05","caption":"Index, 2005=100"},
-  {"value":"PC","caption":"Percentage"}	
+  {"v":"MTOE","c":"Million tonnes of oil equivalent (TOE)"},
+	{"v":"I05","c":"Index, 2005=100"},
+  {"v":"PC","c":"Percentage"}
   ]
 }

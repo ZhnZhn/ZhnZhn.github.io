@@ -1,6 +1,8 @@
 
 import fnArr from '../../../utils/fnArr';
+import AdapterFn from '../../AdapterFn'
 
+const { getValue } = AdapterFn
 const { isInArrStr } = fnArr;
 
 const C = {
@@ -18,6 +20,7 @@ const CATEGORY_TYPES = [
 
 const apiFn = {
   ...C,
+  getValue,
   isCategory: isInArrStr(CATEGORY_TYPES),
   isMap: seriaType => seriaType === 'MAP',
   crUrl: (table, q, tail=C.QUERY_TAIL) => `${C.URL}${table}?${q}${tail}`

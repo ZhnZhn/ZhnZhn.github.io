@@ -1,12 +1,12 @@
 {"items":[
-{"value":"D1110D","caption":"Raw cows' milk delivered to dairies"},
-{"value":"D1200DME","caption":"Raw cream delivered to dairies (in milk equivalent)"},
-{"value":"D2100","caption":"Drinking milk"},
-{"value":"D2200V","caption":"Cream for direct consumption"},
-{"value":"D3100_X_3113","caption":"Milk and cream powders, excluding skimmed milk powders"},
-{"value":"D3113","caption":"Skimmed milk powder"},
-{"value":"D3200","caption":"Concentrated milk"},
-{"value":"D4100","caption":"Acidified milk (yoghurts and other)"},
-{"value":"D6000","caption":"Butter, incl. dehydrated butter and ghee, and other fats and oils derived from milk; dairy spreads"},
-{"value":"D7121","caption":"Cheese from cows'milk (pure)"}
+{"v":"D1110D","c":"Raw cows' milk delivered to dairies"},
+{"v":"D1200DME","c":"Raw cream delivered to dairies (in milk equivalent)"},
+{"v":"D2100","c":"Drinking milk"},
+{"v":"D2200V","c":"Cream for direct consumption"},
+{"v":"D3100_X_3113","c":"Milk and cream powders, excluding skimmed milk powders"},
+{"v":"D3113","c":"Skimmed milk powder"},
+{"v":"D3200","c":"Concentrated milk"},
+{"v":"D4100","c":"Acidified milk (yoghurts and other)"},
+{"v":"D6000","c":"Butter, incl. dehydrated butter and ghee, and other fats and oils derived from milk; dairy spreads"},
+{"v":"D7121","c":"Cheese from cows'milk (pure)"}
 ]}

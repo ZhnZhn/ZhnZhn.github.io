@@ -14,6 +14,7 @@ var crCaption = _createrFns["default"].crCaption,
     crAlertConf = _createrFns["default"].crAlertConf;
 var TYPE = 'selectN';
 var TABLE_ID = 'table';
+var _assign = Object.assign;
 
 var _findItemTable = function _findItemTable(items) {
   var tableItem, tableIndex;
@@ -38,13 +39,13 @@ var _modifyIfItemTable = function _modifyIfItemTable(dfProps, items) {
       tableIndex = _findItemTable2.tableIndex;
 
   if (tableItem) {
-    var value = tableItem.value,
+    var dfTable = tableItem.v,
         dfTail = tableItem.dfTail,
         mapFrequency = tableItem.mapFrequency;
 
-    if (value) {
-      Object.assign(dfProps, {
-        dfTable: value,
+    if (dfTable) {
+      _assign(dfProps, {
+        dfTable: dfTable,
         dfTail: dfTail
       });
 

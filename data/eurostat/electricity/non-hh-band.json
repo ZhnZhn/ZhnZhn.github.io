@@ -1,11 +1,11 @@
 {
   "items":[
-  {"value":"4162901","caption":"Band IA : Consumption < 20 MWh"},
-	{"value":"4162902","caption":"Band IB : 20 MWh < Consumption < 500 MWh"},
-	{"value":"4162903","caption":"Band IC : 500 MWh < Consumption < 2 000 MWh"},
-	{"value":"4162904","caption":"Band ID : 2 000 MWh < Consumption < 20 000 MWh"},
-	{"value":"4162905","caption":"Band IE : 20 000 MWh < Consumption < 70 000 MWh"},
-	{"value":"4162906","caption":"Band IF : 70 000 MWh < Consumption < 150 000 MWh"},
-	{"value":"4162907","caption":"Band IG : Consumption > 150 000 MWh"}
+  {"v":"4162901","c":"Band IA : Consumption < 20 MWh"},
+	{"v":"4162902","c":"Band IB : 20 MWh < Consumption < 500 MWh"},
+	{"v":"4162903","c":"Band IC : 500 MWh < Consumption < 2 000 MWh"},
+	{"v":"4162904","c":"Band ID : 2 000 MWh < Consumption < 20 000 MWh"},
+	{"v":"4162905","c":"Band IE : 20 000 MWh < Consumption < 70 000 MWh"},
+	{"v":"4162906","c":"Band IF : 70 000 MWh < Consumption < 150 000 MWh"},
+	{"v":"4162907","c":"Band IG : Consumption > 150 000 MWh"}
   ]
 }

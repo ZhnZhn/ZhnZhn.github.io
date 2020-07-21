@@ -1,5 +1,5 @@
 {"items":[
-{"value":"THS_T","caption":"Thousand tonnes"},
-{"value":"PC_FAT","caption":"Fat content (% of product weight)"},
-{"value":"PC_PRO","caption":"Protein content (% of product weight)"}
+{"v":"THS_T","c":"Thousand tonnes"},
+{"v":"PC_FAT","c":"Fat content (% of product weight)"},
+{"v":"PC_PRO","c":"Protein content (% of product weight)"}
 ]}

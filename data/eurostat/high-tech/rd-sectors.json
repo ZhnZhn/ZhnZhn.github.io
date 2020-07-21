@@ -1,9 +1,9 @@
 {
   "items": [
-  {"value":"TOTAL","caption":"All sectors"},
-	{"value":"BES","caption":"Business enterprise sector"},
-	{"value":"GOV","caption":"Government sector"},
-	{"value":"HES","caption":"Higher education sector"},
-	{"value":"PNP","caption":"Private non-profit sector"}
+  {"v":"TOTAL","c":"All sectors"},
+	{"v":"BES","c":"Business enterprise sector"},
+	{"v":"GOV","c":"Government sector"},
+	{"v":"HES","c":"Higher education sector"},
+	{"v":"PNP","c":"Private non-profit sector"}
   ]
 }
