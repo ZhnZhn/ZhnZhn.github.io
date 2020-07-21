@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
-
 import A from '../Comp'
 import ItemHeader from './ItemHeader'
 import PanelDataInfo from './PanelDataInfo';
@@ -15,7 +14,6 @@ const S = {
     marginRight: 25,
   },
   TIME: {
-    position: 'absolute',
     display: 'inline-block',
     color: '#fdb316',
     paddingLeft: 16,

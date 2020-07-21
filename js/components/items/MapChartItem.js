@@ -29,7 +29,6 @@ var S = {
     marginRight: 25
   },
   TIME: {
-    position: 'absolute',
     display: 'inline-block',
     color: '#fdb316',
     paddingLeft: 16,
