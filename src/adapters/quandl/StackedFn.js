@@ -74,11 +74,11 @@ const _fnCreateDataTopPercent = function(data, bTotal, percent){
 }
 
 
-const _fnInitSeries = function({ items, zhSeriaId, chartType, fSeria }){
+const _fnInitSeries = function({ items, chartType, fSeria }){
   return items.map((item, itemIndex)=>{
            const color = Chart.fnGetMonoColor(itemIndex)
                , {name} = item
-               return fSeria({ zhSeriaId, name, color })
+               return fSeria({ name, color })
          });
 }
 
@@ -92,10 +92,10 @@ const _fnCalcPercent = (
 
 
 const _fnCreateStackedSeries = function({
-  jsonData, items100, items90, zhSeriaId, chartType, stacking
+  jsonData, items100, items90, chartType, stacking
 }){
    const fSeria = _rFactorySeria[chartType]
-       , series = _fnInitSeries({ items:items90, zhSeriaId, chartType, fSeria })
+       , series = _fnInitSeries({ items:items90, chartType, fSeria })
        , categories = []
        , dataOther = []
 
@@ -137,7 +137,6 @@ const _fnCreateStackedSeries = function({
 
    series.push(
      fSeria({
-       zhSeriaId : zhSeriaId,
        name : 'Other',
        data : dataOther,
        color: 'gray'
@@ -148,14 +147,14 @@ const _fnCreateStackedSeries = function({
 }
 
 export const fnCreateStackedConfig = function({
-   jsonData, items100, zhSeriaId, chartType=ChartType.STACKED_AREA, stacking='normal'
+   jsonData, items100, chartType=ChartType.STACKED_AREA, stacking='normal'
  }){
   const {referenceData , bTotal} = _fnCreateReferenceDataAndTotal(jsonData[0], items100)
       , items90 = _fnCreateDataTopPercent(referenceData, bTotal, 0.9)
       , bPrevTotal = fnCalcTotal(jsonData[1], items100)
       , dateTo = (jsonData[1][0]) ? jsonData[1][0] : ''
       , { series, categories } = _fnCreateStackedSeries({
-          jsonData, items100, items90, zhSeriaId, chartType, stacking
+          jsonData, items100, items90, chartType, stacking
         })
       , date = ( categories && categories.length>1 )
            ? categories[categories.length-1]
@@ -198,10 +197,10 @@ export const crValueMoving = function(bNowTotal, date, bPrevTotal, dateTo){
    );
 }
 
-export const crZhConfig = function(option, zhSeriaId){
+export const crZhConfig = function(option, id){
   return Object.assign(
        QuandlFn2.createZhConfig(option), {
-         id: zhSeriaId,
+         id,
          isWithoutIndicator: true
       }
   );

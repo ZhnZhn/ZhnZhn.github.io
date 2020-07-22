@@ -28,7 +28,6 @@ const C = {
     }
   },
   TREE_MAP: {
-        //zhSeriaId : zhSeriaId,
         type : 'treemap',
         layoutAlgorithm: 'squarified',
         //layoutAlgorithm : 'sliceAndDice',
@@ -121,7 +120,7 @@ const SeriaBuilder = {
     return this;
   },
 
-  addSeriaPoints(id, points, { maxVisible=6 }={}){
+  _addSeriaPoints(points, { maxVisible=6 }={}){
     const _legend = [];
     points.forEach((data, index) => {
       const is = index<maxVisible ? true : false
@@ -135,7 +134,6 @@ const SeriaBuilder = {
            data: data,
            name: seriaName,
            zhValueText: seriaName,
-           zhSeriaId: id + '_' + index,
            visible: is
         })
     })
@@ -145,29 +143,27 @@ const SeriaBuilder = {
     return this;
   },
 
-  _addPointsToConfig(id, points){
+  _addPointsToConfig(points){
     if (points[0]
         && _isArr(points[0])
         && points[0][0]
         && typeof points[0][0] !== 'number'
     ) {
-      this.addSeriaPoints(id, points)
+      this._addSeriaPoints(points)
     } else {
       this.addSeriaBy(0, {
          type: 'spline',
-         data: points,
-         zhSeriaId: id
+         data: points
       });
     }
   },
 
   addPoints(id, points, text){
     if (this._type !== 'S') {
-      this._addPointsToConfig(id, points)
+      this._addPointsToConfig(points)
     } else {
       this.add({
         data: points,
-        zhSeriaId: id,
         zhValueText: text ? text : id
       })
     }

@@ -222,7 +222,6 @@ var toTreeMap = {
     }
 
     var _seria = (0, _ConfigBuilder["default"])().treeMapSeria(_Tooltip["default"].treeMap, {
-      zhSeriaId: _fnAdapter["default"].crId(),
       data: _data
     }).toSeria();
 

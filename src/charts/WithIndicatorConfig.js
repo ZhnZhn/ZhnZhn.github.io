@@ -73,8 +73,7 @@ const _crLegendVolume = (titleOrX=C.DF_LEGEND_VOLUME_X) => {
   }
 }
 
-const _crLineSeria = (id, name, color, data) => ({
-  zhSeriaId: id + '_' + name,
+const _crLineSeria = (name, color, data) => ({
   zhValueText: name,
   type: "line",
   color: color,
@@ -170,13 +169,12 @@ const _crConfig = ({
 
 const WithIndicatorConfig = {
 
-  crMfiConfig(id, parentId, title, data){
+  crMfiConfig(id, title, data){
     return _Builder(_crConfig({
         title: _crTitle(title),
         chartOption: C.CROSS_LABEL
       }))
       .assignToSeries(0, {
-        zhSeriaId: parentId + '_' + id,
         zhValueText: id,
         data: data,
         name: "MFI",
@@ -192,7 +190,7 @@ const WithIndicatorConfig = {
   crMiniVolumeConfig({
       btTitle='Volume',
       title,
-      id='id', dColumn=[], dVolume,
+      dColumn=[], dVolume,
       tooltipColumn
     }){
     const _title = title || btTitle
@@ -205,7 +203,6 @@ const WithIndicatorConfig = {
          legend: _crLegendVolume(_title)
        })
        .assignToSeries(0, {
-         zhSeriaId: id + '_VolumeArea',
          zhValueText: "Volume",
          data: dVolume,
          visible: !_hasColumn,
@@ -219,7 +216,6 @@ const WithIndicatorConfig = {
 
     if (_hasColumn) {
       series.push({
-        zhSeriaId: id + '_VolumeColumn',
         zhValueText: "Volume",
         turboThreshold: 20000,
         type: "column",
@@ -237,10 +233,10 @@ const WithIndicatorConfig = {
         tooltip: tooltipColumn || Chart.fTooltip(Tooltip.volume)
       });
       series.push(_crLineSeria(
-        id, 'Median', C.MEDIAN, median(dVolume)
+        'Median', C.MEDIAN, median(dVolume)
       ))
       series.push(_crLineSeria(
-        id, 'Mean', C.MEAN, mean(dVolume)
+        'Mean', C.MEAN, mean(dVolume)
       ))
     }
 
@@ -249,12 +245,11 @@ const WithIndicatorConfig = {
     };
   },
 
-  crMiniATHConfig({ btTitle="ATH", id, data }){
+  crMiniATHConfig({ btTitle="ATH", data }){
     const config = _Builder(_crConfig({
         title: _crTitle('ATH')
       }))
       .addColumnSeria({
-         zhSeriaId: id + "_ATH",
          name: "ATH",
          borderWidth: 0,
          pointPlacement: 'on',
@@ -267,7 +262,7 @@ const WithIndicatorConfig = {
     return { btTitle, config };
   },
 
-  crMomAthConfig(id, { dataMom, dataAth, dataSum }){
+  crMomAthConfig({ dataMom, dataAth, dataSum }){
     return _Builder(_crConfig())
       .assign({
         title: _crTitle(''),
@@ -291,7 +286,6 @@ const WithIndicatorConfig = {
         tickPixelInterval: 20
       })
       .addColumnSeria({
-        zhSeriaId: id + "_MOM",
         zhValueText: "MOM(1)",
         name: "MOM(1)",
         color: C.MOM,
@@ -299,12 +293,10 @@ const WithIndicatorConfig = {
         data: dataMom
       })
       .addColumnSeria({
-        zhSeriaId: id + "_ATH",
         name: "ATH",
         data: dataAth
       })
       .addColumnSeria({
-        zhSeriaId: id + "_CLOSE_OPEN",
         name: "Close-Open",
         color: C.CLOSE_OPEN,
         visible: false,
@@ -313,12 +305,11 @@ const WithIndicatorConfig = {
       .toConfig();
   },
 
-  crMiniHLConfig({ btTitle="Daily HighLow", id='id', data }){
+  crMiniHLConfig({ btTitle="Daily HighLow", data }){
     const config = _Builder(_crConfig({
         title: _crTitle('HighLow')
       }))
       .assignToSeries(0, {
-        zhSeriaId: id + '_HL',
         name: "HL",
         visible: true,
         type: "arearange",

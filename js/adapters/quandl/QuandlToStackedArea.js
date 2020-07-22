@@ -26,12 +26,11 @@ var fCreateStackedAreaConfig = function fCreateStackedAreaConfig(json, option) {
       items100 = _option$sliceItems === void 0 ? [] : _option$sliceItems,
       _option$value = option.value,
       value = _option$value === void 0 ? '' : _option$value,
-      zhSeriaId = value + "_" + chartType,
+      id = value + "_" + chartType,
       jsonData = json.dataset && json.dataset.data ? json.dataset.data : [],
       _fnCreateStackedConfi = (0, _StackedFn.fnCreateStackedConfig)({
     jsonData: jsonData,
     items100: items100,
-    zhSeriaId: zhSeriaId,
     chartType: chartType,
     stacking: stacking
   }),
@@ -50,7 +49,7 @@ var fCreateStackedAreaConfig = function fCreateStackedAreaConfig(json, option) {
   _QuandlFn["default"].setTitleToConfig(config, option);
 
   config.valueMoving = (0, _StackedFn.crValueMoving)(bNowTotal, date, bPrevTotal, dateTo);
-  config.zhConfig = (0, _StackedFn.crZhConfig)(option, zhSeriaId);
+  config.zhConfig = (0, _StackedFn.crZhConfig)(option, id);
   config.info = _QuandlFn["default"].createDatasetInfo(json);
   return {
     config: config

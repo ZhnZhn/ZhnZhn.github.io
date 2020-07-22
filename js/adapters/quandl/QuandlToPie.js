@@ -93,7 +93,7 @@ var fCreatePieConfig = function fCreatePieConfig(json, option) {
       items = _option$sliceItems === void 0 ? [] : _option$sliceItems,
       _option$value = option.value,
       value = _option$value === void 0 ? '' : _option$value,
-      zhSeriaId = value + "_" + _Type.ChartType.SEMI_DONUT,
+      id = value + "_" + _Type.ChartType.SEMI_DONUT,
       jsonData = json.dataset && json.dataset.data ? json.dataset.data : [],
       jsonData1 = jsonData[0],
       jsonData2 = jsonData[1],
@@ -149,7 +149,6 @@ var fCreatePieConfig = function fCreatePieConfig(json, option) {
     year: _year1,
     bTotal: (0, _formatAllNumber["default"])(_bTotal1)
   }), _ChartConfig["default"].fOuterPieSeria({
-    zhSeriaId: zhSeriaId,
     center: ['20%', '80%'],
     data: _dataTop1,
     isShowInLegend: true
@@ -158,7 +157,6 @@ var fCreatePieConfig = function fCreatePieConfig(json, option) {
     year: _year2,
     bTotal: (0, _formatAllNumber["default"])(_bTotal2)
   }), _ChartConfig["default"].fOuterPieSeria({
-    zhSeriaId: zhSeriaId,
     center: ['70%', '80%'],
     data: _dataTop2
   })];
@@ -170,7 +168,7 @@ var fCreatePieConfig = function fCreatePieConfig(json, option) {
       height: _fnCalcPieLegendHeight(_dataTop1.length)
     },
     valueMoving: (0, _StackedFn.crValueMoving)(_bTotal1, _year1, _bTotal2, _year2),
-    zhConfig: (0, _StackedFn.crZhConfig)(option, zhSeriaId),
+    zhConfig: (0, _StackedFn.crZhConfig)(option, id),
     info: _QuandlFn["default"].createDatasetInfo(json)
   });
   return {

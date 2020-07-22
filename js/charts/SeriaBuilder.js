@@ -39,7 +39,6 @@ var C = {
     }
   },
   TREE_MAP: {
-    //zhSeriaId : zhSeriaId,
     type: 'treemap',
     layoutAlgorithm: 'squarified',
     //layoutAlgorithm : 'sliceAndDice',
@@ -148,7 +147,7 @@ var SeriaBuilder = {
     this.config.series[index] = seria;
     return this;
   },
-  addSeriaPoints: function addSeriaPoints(id, points, _temp) {
+  _addSeriaPoints: function _addSeriaPoints(points, _temp) {
     var _this = this;
 
     var _ref2 = _temp === void 0 ? {} : _temp,
@@ -173,7 +172,6 @@ var SeriaBuilder = {
         data: data,
         name: seriaName,
         zhValueText: seriaName,
-        zhSeriaId: id + '_' + index,
         visible: is
       });
     });
@@ -184,24 +182,22 @@ var SeriaBuilder = {
 
     return this;
   },
-  _addPointsToConfig: function _addPointsToConfig(id, points) {
+  _addPointsToConfig: function _addPointsToConfig(points) {
     if (points[0] && _isArr(points[0]) && points[0][0] && typeof points[0][0] !== 'number') {
-      this.addSeriaPoints(id, points);
+      this._addSeriaPoints(points);
     } else {
       this.addSeriaBy(0, {
         type: 'spline',
-        data: points,
-        zhSeriaId: id
+        data: points
       });
     }
   },
   addPoints: function addPoints(id, points, text) {
     if (this._type !== 'S') {
-      this._addPointsToConfig(id, points);
+      this._addPointsToConfig(points);
     } else {
       this.add({
         data: points,
-        zhSeriaId: id,
         zhValueText: text ? text : id
       });
     }

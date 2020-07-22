@@ -46,14 +46,11 @@ var FaoStatAdapter = {
     }
 
     var _data = crSeriaData(json, option),
-        _id = crId(option),
-        parentId = option.parentId,
         oneCaption = option.oneCaption;
 
     return (0, _ConfigBuilder["default"])().initSeria().add({
       data: _data,
       minY: findMinY(_data),
-      zhSeriaId: parentId + '_' + _id,
       zhValueText: oneCaption,
       zhItemCaption: oneCaption
     }).toSeria();

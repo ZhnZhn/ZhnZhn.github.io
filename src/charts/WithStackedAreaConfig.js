@@ -39,9 +39,8 @@ const WithStackAreaConfig = {
     }
   },
 
-  fStackAreaSeria({zhSeriaId, name, data=[], color='gray'}){
+  fStackAreaSeria({name, data=[], color='gray'}){
     return {
-        zhSeriaId : zhSeriaId,
         name: name,
         data : data,
         color : color,

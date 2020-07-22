@@ -373,7 +373,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
         dataDividend,
         calcMinY({ min: minClose, max: maxClose })
       );
-      this.config.series.push(crDividendSeria(dataDividend, 'exDividend'));
+      this.config.series.push(crDividendSeria(dataDividend));
       this.config.chart.spacingBottom = 40;
     }
     return this;

@@ -31,9 +31,8 @@ var WithTreeMapConfig = {
       navigation: _Chart["default"].fNavigation()
     };
   },
-  fCreateTreeMapSeria: function fCreateTreeMapSeria(zhSeriaId, data) {
+  fCreateTreeMapSeria: function fCreateTreeMapSeria(data) {
     return {
-      zhSeriaId: zhSeriaId,
       type: 'treemap',
       layoutAlgorithm: 'squarified',
       //layoutAlgorithm : 'sliceAndDice',

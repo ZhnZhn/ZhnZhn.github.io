@@ -41,7 +41,6 @@ const toArea = {
        seriaType, seriaColor, seriaWidth,
        data,
        minY: findMinY(data),
-       zhSeriaId: option.key,
        zhValueText: itemCaption
      });
    }

@@ -81,7 +81,7 @@ const _toDataArrs = ({dateKeys, value, max}, arrProp) => {
   return result;
 }
 
-const _crSplineSeria = ({data, ticket, valueText}, option) =>
+const _crSplineSeria = ({ data, valueText }, option) =>
   _assign(ChartConfig.crSeria(), {
     type: 'spline',
     visible: true,
@@ -89,7 +89,6 @@ const _crSplineSeria = ({data, ticket, valueText}, option) =>
     marker: {
       symbol: 'circle'
     },
-    zhSeriaId: ticket + '_' + valueText ,
     zhValueText: valueText
   }, option);
 
@@ -111,74 +110,71 @@ const _crSeriaData = (json, option) => {
 }
 
 const _crSeria = (json, option ) => {
-  const { indicator, ticket } = option
-      , _data = _crSeriaData(json, option);
+  const { indicator } = option
+  , _data = _crSeriaData(json, option);
   return _crSplineSeria({
-           data: _data, valueText: indicator, ticket
-         });
+    data: _data,
+    valueText: indicator
+  });
 }
 
 
 const _crMacdSeries = (json, option) => {
-  const { ticket } = option
-      , _arrs = _toDataArrs(
-           _crValue(json, option),
-           [C.MACD, C.MACD_S, C.MACD_H]
-        )
-      , sMcad = _crSplineSeria({
-           data: _arrs[0], valueText: C.MACD, ticket
-        }, C.BLACK)
-      , sSignal = _crSplineSeria({
-           data: _arrs[1], valueText: C.MACD_S, ticket
-        }, C.RED)
-      , sHist = _assign(ChartConfig.crSeria(), {
-           color: C.COLOR_BLUE_A,
-           data: _arrs[2],
-           zhSeriaId: ticket + '_' + C.MACD_H,
-           zhValueText: C.MACD_H,
-           type: 'column',
-           visible: false,
-           shadow: false,
-           borderWidth: 0,
-           pointPlacement: 'on',
-           pointPadding: 0,
-           groupPadding: 0,
-           turboThreshold: 20000
-        });
+  const _arrs = _toDataArrs(
+     _crValue(json, option),
+     [C.MACD, C.MACD_S, C.MACD_H]
+  )
+  , sMcad = _crSplineSeria({
+       data: _arrs[0], valueText: C.MACD
+    }, C.BLACK)
+  , sSignal = _crSplineSeria({
+       data: _arrs[1], valueText: C.MACD_S
+    }, C.RED)
+  , sHist = _assign(ChartConfig.crSeria(), {
+       color: C.COLOR_BLUE_A,
+       data: _arrs[2],
+       zhValueText: C.MACD_H,
+       type: 'column',
+       visible: false,
+       shadow: false,
+       borderWidth: 0,
+       pointPlacement: 'on',
+       pointPadding: 0,
+       groupPadding: 0,
+       turboThreshold: 20000
+    });
 
   return [ sHist, sSignal, sMcad ];
 }
 
 const _crStochSeries = (json, option) => {
-  const { ticket } = option
-      , _arrs = _toDataArrs(
-           _crValue(json, option), [C.SLOW_K, C.SLOW_D]
-        )
-      , sSlowK = _crSplineSeria({
-          data: _arrs[0], valueText: C.SLOW_K, ticket
-        }, C.BLUE)
-     , sSlowD = _crSplineSeria({
-          data: _arrs[1], valueText: C.SLOW_D, ticket
-       }, C.RED);
+  const _arrs = _toDataArrs(
+    _crValue(json, option), [C.SLOW_K, C.SLOW_D]
+  )
+  , sSlowK = _crSplineSeria({
+      data: _arrs[0], valueText: C.SLOW_K
+    }, C.BLUE)
+ , sSlowD = _crSplineSeria({
+      data: _arrs[1], valueText: C.SLOW_D
+   }, C.RED);
 
   return [sSlowK, sSlowD];
 }
 
 const _crBbandsSeries = (json, option) => {
-  const { ticket } = option
-      , _arrs = _toDataArrs(
-           _crValue(json, option),
-           [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]
-        )
-      , sMiddle = _crSplineSeria({
-          data: _arrs[0], valueText: C.BBANDS_M, ticket
-        }, C.BLUE)
-     , sUpper = _crSplineSeria({
-          data: _arrs[1], valueText: C.BBANDS_U, ticket
-       }, C.GREEN)
-     , sLow = _crSplineSeria({
-            data: _arrs[2], valueText: C.BBANDS_L, ticket
-       }, C.RED);
+  const _arrs = _toDataArrs(
+      _crValue(json, option),
+      [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]
+    )
+    , sMiddle = _crSplineSeria({
+        data: _arrs[0], valueText: C.BBANDS_M
+      }, C.BLUE)
+   , sUpper = _crSplineSeria({
+        data: _arrs[1], valueText: C.BBANDS_U
+     }, C.GREEN)
+   , sLow = _crSplineSeria({
+          data: _arrs[2], valueText: C.BBANDS_L
+     }, C.RED);
 
     return [sMiddle, sUpper, sLow];
 }

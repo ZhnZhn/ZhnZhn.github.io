@@ -136,8 +136,7 @@ class ChartToolbar extends Component {
   render(){
     const {
             hasError,
-            style, config={},
-            chartId,
+            style, config={},            
             onMiniChart,
             getChart,
             onAddMfi, onRemoveMfi,
@@ -190,7 +189,6 @@ class ChartToolbar extends Component {
         key="menu_ind"
         isShow={isShowInd}
         style={S.M_IND}
-        chartId={chartId}
         config={config}
         getChart={getChart}
         onAddMfi={onAddMfi}

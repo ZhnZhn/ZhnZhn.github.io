@@ -16,7 +16,7 @@ const _crZhConfig = (option) => {
   const { dataSource } = option
       , id = AdapterFn.crId();
   return {
-    id, key: id,    
+    id, key: id,
     dataSource
   };
 }
@@ -61,8 +61,7 @@ const _crSeria = (arr, option) => {
       pointFormatter: Tooltip.exValue,
       headerFormat: ''
     },
-    data: data
-    //zhSeriaId : zhSeriaId
+    data: data    
   };
 }
 

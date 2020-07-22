@@ -430,7 +430,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
         min: minClose,
         max: maxClose
       }));
-      this.config.series.push(crDividendSeria(dataDividend, 'exDividend'));
+      this.config.series.push(crDividendSeria(dataDividend));
       this.config.chart.spacingBottom = 40;
     }
 

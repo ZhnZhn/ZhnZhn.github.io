@@ -16,10 +16,10 @@ export const fCreateStackedColumnConfig = function(json, option){
        , PERCENT = ( stacking === 'percent' ) ? ':PERCENT' : ''
        , config = ChartConfig.fBaseStackedColumnConfig({ stacking })
        , {sliceItems:items100=[], value=''} = option
-       , zhSeriaId = `${value}_${chartType}`
+       , id = `${value}_${chartType}`
        , jsonData = (json.dataset && json.dataset.data) ? json.dataset.data : []
        , {bNowTotal, date, bPrevTotal, dateTo, series, categories} =
-            fnCreateStackedConfig({jsonData, items100, zhSeriaId, chartType, stacking })
+            fnCreateStackedConfig({jsonData, items100, chartType, stacking })
 
    config.series = series;
    config.xAxis.categories = categories;
@@ -29,7 +29,7 @@ export const fCreateStackedColumnConfig = function(json, option){
    QuandlFn2.setTitleToConfig(config, option);
 
    config.valueMoving = crValueMoving(bNowTotal, date, bPrevTotal, dateTo)
-   config.zhConfig = crZhConfig(option, zhSeriaId)
+   config.zhConfig = crZhConfig(option, id)
 
    config.info = QuandlFn2.createDatasetInfo(json);
 

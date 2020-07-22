@@ -1,1 +1,47 @@
-{"version":3,"sources":["../../../src/adapters/quandl/QuandlToStackedColumn.js"],"names":["fCreateStackedColumnConfig","json","option","chartType","seriaType","stacking","ChartType","STACKED_COLUMN_PERCENT","PERCENT","config","ChartConfig","fBaseStackedColumnConfig","sliceItems","items100","value","zhSeriaId","jsonData","dataset","data","bNowTotal","date","bPrevTotal","dateTo","series","categories","xAxis","chart","height","Chart","STACKED_HEIGHT","title","QuandlFn2","setTitleToConfig","valueMoving","zhConfig","info","createDatasetInfo"],"mappings":";;;;;;;AACA;;AACA;;AACA;;AAEA;;AAKA;;AAEO,IAAMA,0BAA0B,GAAG,SAA7BA,0BAA6B,CAASC,IAAT,EAAeC,MAAf,EAAsB;AACvD,MAAYC,SAAZ,GAA0BD,MAA1B,CAAEE,SAAF;AAAA,MACAC,QADA,GACYF,SAAS,KAAKG,gBAAUC,sBAAzB,GAAmD,SAAnD,GAA+D,QAD1E;AAAA,MAEAC,OAFA,GAEYH,QAAQ,KAAK,SAAf,GAA6B,UAA7B,GAA0C,EAFpD;AAAA,MAGAI,MAHA,GAGSC,wBAAYC,wBAAZ,CAAqC;AAAEN,IAAAA,QAAQ,EAARA;AAAF,GAArC,CAHT;AAAA,2BAIqCH,MAJrC,CAICU,UAJD;AAAA,MAIYC,QAJZ,mCAIqB,EAJrB;AAAA,sBAIqCX,MAJrC,CAIyBY,KAJzB;AAAA,MAIyBA,KAJzB,8BAI+B,EAJ/B;AAAA,MAKAC,SALA,GAKeD,KALf,SAKwBX,SALxB;AAAA,MAMAa,QANA,GAMYf,IAAI,CAACgB,OAAL,IAAgBhB,IAAI,CAACgB,OAAL,CAAaC,IAA9B,GAAsCjB,IAAI,CAACgB,OAAL,CAAaC,IAAnD,GAA0D,EANrE;AAAA,8BAQG,sCAAsB;AAACF,IAAAA,QAAQ,EAARA,QAAD;AAAWH,IAAAA,QAAQ,EAARA,QAAX;AAAqBE,IAAAA,SAAS,EAATA,SAArB;AAAgCZ,IAAAA,SAAS,EAATA,SAAhC;AAA2CE,IAAAA,QAAQ,EAARA;AAA3C,GAAtB,CARH;AAAA,MAOCc,SAPD,yBAOCA,SAPD;AAAA,MAOYC,IAPZ,yBAOYA,IAPZ;AAAA,MAOkBC,UAPlB,yBAOkBA,UAPlB;AAAA,MAO8BC,MAP9B,yBAO8BA,MAP9B;AAAA,MAOsCC,MAPtC,yBAOsCA,MAPtC;AAAA,MAO8CC,UAP9C,yBAO8CA,UAP9C;;AAUNf,EAAAA,MAAM,CAACc,MAAP,GAAgBA,MAAhB;AACAd,EAAAA,MAAM,CAACgB,KAAP,CAAaD,UAAb,GAA0BA,UAA1B;AACAf,EAAAA,MAAM,CAACiB,KAAP,CAAaC,MAAb,GAAsBC,kBAAMC,cAA5B;AAEA3B,EAAAA,MAAM,CAAC4B,KAAP,QAAkB5B,MAAM,CAAC4B,KAAzB,GAAiCtB,OAAjC;;AACAuB,uBAAUC,gBAAV,CAA2BvB,MAA3B,EAAmCP,MAAnC;;AAEAO,EAAAA,MAAM,CAACwB,WAAP,GAAqB,8BAAcd,SAAd,EAAyBC,IAAzB,EAA+BC,UAA/B,EAA2CC,MAA3C,CAArB;AACAb,EAAAA,MAAM,CAACyB,QAAP,GAAkB,2BAAWhC,MAAX,EAAmBa,SAAnB,CAAlB;AAEAN,EAAAA,MAAM,CAAC0B,IAAP,GAAcJ,qBAAUK,iBAAV,CAA4BnC,IAA5B,CAAd;AAEA,SAAO;AAACQ,IAAAA,MAAM,EAANA;AAAD,GAAP;AACF,CAxBM","sourcesContent":["\r\nimport {ChartType} from '../../constants/Type';\r\nimport Chart from '../../charts/Chart';\r\nimport ChartConfig from '../../charts/ChartConfig';\r\n\r\nimport {\r\n  fnCreateStackedConfig,\r\n  crValueMoving,\r\n  crZhConfig\r\n} from './StackedFn';\r\nimport QuandlFn2 from './QuandlFn2';\r\n\r\nexport const fCreateStackedColumnConfig = function(json, option){\r\n   const { seriaType:chartType } = option\r\n       , stacking = (chartType === ChartType.STACKED_COLUMN_PERCENT) ? 'percent' : 'normal'\r\n       , PERCENT = ( stacking === 'percent' ) ? ':PERCENT' : ''\r\n       , config = ChartConfig.fBaseStackedColumnConfig({ stacking })\r\n       , {sliceItems:items100=[], value=''} = option\r\n       , zhSeriaId = `${value}_${chartType}`\r\n       , jsonData = (json.dataset && json.dataset.data) ? json.dataset.data : []\r\n       , {bNowTotal, date, bPrevTotal, dateTo, series, categories} =\r\n            fnCreateStackedConfig({jsonData, items100, zhSeriaId, chartType, stacking })\r\n\r\n   config.series = series;\r\n   config.xAxis.categories = categories;\r\n   config.chart.height = Chart.STACKED_HEIGHT;\r\n\r\n   option.title = `${option.title}${PERCENT}`\r\n   QuandlFn2.setTitleToConfig(config, option);\r\n\r\n   config.valueMoving = crValueMoving(bNowTotal, date, bPrevTotal, dateTo)\r\n   config.zhConfig = crZhConfig(option, zhSeriaId)\r\n\r\n   config.info = QuandlFn2.createDatasetInfo(json);\r\n\r\n   return {config}\r\n}\r\n"],"file":"QuandlToStackedColumn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/quandl/QuandlToStackedColumn.js"
+ ],
+ "file": "../../../src/adapters/quandl/QuandlToStackedColumn.js",
+ "names": [
+  "fCreateStackedColumnConfig",
+  "json",
+  "option",
+  "chartType",
+  "seriaType",
+  "stacking",
+  "ChartType",
+  "STACKED_COLUMN_PERCENT",
+  "PERCENT",
+  "config",
+  "ChartConfig",
+  "fBaseStackedColumnConfig",
+  "sliceItems",
+  "items100",
+  "value",
+  "id",
+  "jsonData",
+  "dataset",
+  "data",
+  "bNowTotal",
+  "date",
+  "bPrevTotal",
+  "dateTo",
+  "series",
+  "categories",
+  "xAxis",
+  "chart",
+  "height",
+  "Chart",
+  "STACKED_HEIGHT",
+  "title",
+  "QuandlFn2",
+  "setTitleToConfig",
+  "valueMoving",
+  "zhConfig",
+  "info",
+  "createDatasetInfo"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;AACA;;AAEA;;AAKA;;AAEO,IAAMA,0BAA0B,GAAG,SAA7BA,0BAA6B,CAASC,IAAT,EAAeC,MAAf,EAAsB;AACvD,MAAYC,SAAZ,GAA0BD,MAA1B,CAAEE,SAAF;AAAA,MACAC,QADA,GACYF,SAAS,KAAKG,gBAAUC,sBAAzB,GAAmD,SAAnD,GAA+D,QAD1E;AAAA,MAEAC,OAFA,GAEYH,QAAQ,KAAK,SAAf,GAA6B,UAA7B,GAA0C,EAFpD;AAAA,MAGAI,MAHA,GAGSC,wBAAYC,wBAAZ,CAAqC;AAAEN,IAAAA,QAAQ,EAARA;AAAF,GAArC,CAHT;AAAA,2BAIqCH,MAJrC,CAICU,UAJD;AAAA,MAIYC,QAJZ,mCAIqB,EAJrB;AAAA,sBAIqCX,MAJrC,CAIyBY,KAJzB;AAAA,MAIyBA,KAJzB,8BAI+B,EAJ/B;AAAA,MAKAC,EALA,GAKQD,KALR,SAKiBX,SALjB;AAAA,MAMAa,QANA,GAMYf,IAAI,CAACgB,OAAL,IAAgBhB,IAAI,CAACgB,OAAL,CAAaC,IAA9B,GAAsCjB,IAAI,CAACgB,OAAL,CAAaC,IAAnD,GAA0D,EANrE;AAAA,8BAQG,sCAAsB;AAACF,IAAAA,QAAQ,EAARA,QAAD;AAAWH,IAAAA,QAAQ,EAARA,QAAX;AAAqBV,IAAAA,SAAS,EAATA,SAArB;AAAgCE,IAAAA,QAAQ,EAARA;AAAhC,GAAtB,CARH;AAAA,MAOCc,SAPD,yBAOCA,SAPD;AAAA,MAOYC,IAPZ,yBAOYA,IAPZ;AAAA,MAOkBC,UAPlB,yBAOkBA,UAPlB;AAAA,MAO8BC,MAP9B,yBAO8BA,MAP9B;AAAA,MAOsCC,MAPtC,yBAOsCA,MAPtC;AAAA,MAO8CC,UAP9C,yBAO8CA,UAP9C;;AAUNf,EAAAA,MAAM,CAACc,MAAP,GAAgBA,MAAhB;AACAd,EAAAA,MAAM,CAACgB,KAAP,CAAaD,UAAb,GAA0BA,UAA1B;AACAf,EAAAA,MAAM,CAACiB,KAAP,CAAaC,MAAb,GAAsBC,kBAAMC,cAA5B;AAEA3B,EAAAA,MAAM,CAAC4B,KAAP,QAAkB5B,MAAM,CAAC4B,KAAzB,GAAiCtB,OAAjC;;AACAuB,uBAAUC,gBAAV,CAA2BvB,MAA3B,EAAmCP,MAAnC;;AAEAO,EAAAA,MAAM,CAACwB,WAAP,GAAqB,8BAAcd,SAAd,EAAyBC,IAAzB,EAA+BC,UAA/B,EAA2CC,MAA3C,CAArB;AACAb,EAAAA,MAAM,CAACyB,QAAP,GAAkB,2BAAWhC,MAAX,EAAmBa,EAAnB,CAAlB;AAEAN,EAAAA,MAAM,CAAC0B,IAAP,GAAcJ,qBAAUK,iBAAV,CAA4BnC,IAA5B,CAAd;AAEA,SAAO;AAACQ,IAAAA,MAAM,EAANA;AAAD,GAAP;AACF,CAxBM"
+}

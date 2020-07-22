@@ -133,7 +133,7 @@ var fCreateTreeMapConfig = function fCreateTreeMapConfig(json, option) {
       items100 = _option$sliceItems === void 0 ? [] : _option$sliceItems,
       _option$value = option.value,
       value = _option$value === void 0 ? '' : _option$value,
-      zhSeriaId = value + "_" + _Type.ChartType.TREE_MAP,
+      id = value + "_" + _Type.ChartType.TREE_MAP,
       jsonData = json.dataset && json.dataset.data ? json.dataset.data : [],
       bYearTotals = _fnCreateYearTotals(jsonData, items100),
       _fnCreateDataAndTotal2 = _fnCreateDataAndTotal(jsonData, items100, bYearTotals),
@@ -154,9 +154,9 @@ var fCreateTreeMapConfig = function fCreateTreeMapConfig(json, option) {
   _QuandlFn["default"].setTitleToConfig(config, option);
 
   Object.assign(config, {
-    series: [_ChartConfig["default"].fCreateTreeMapSeria(zhSeriaId, data)],
+    series: [_ChartConfig["default"].fCreateTreeMapSeria(data)],
     valueMoving: (0, _StackedFn.crValueMoving)(bTotal, yearTitle, bPrevTotal, dateTo),
-    zhConfig: (0, _StackedFn.crZhConfig)(option, zhSeriaId),
+    zhConfig: (0, _StackedFn.crZhConfig)(option, id),
     info: _QuandlFn["default"].createDatasetInfo(json)
   });
   return {

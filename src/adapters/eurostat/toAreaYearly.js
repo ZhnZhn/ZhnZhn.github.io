@@ -28,8 +28,7 @@ const toAreaYearly = {
    },
 
    createSeria: (json, option) => {
-     return ChartConfig.crSeria({
-       zhSeriaId: 'Empty_Seria',
+     return ChartConfig.crSeria({       
        zhValueText: 'Empty Seria'
      });
    }

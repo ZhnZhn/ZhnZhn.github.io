@@ -102,7 +102,6 @@ var _fnCreateDataTopPercent = function _fnCreateDataTopPercent(data, bTotal, per
 
 var _fnInitSeries = function _fnInitSeries(_ref) {
   var items = _ref.items,
-      zhSeriaId = _ref.zhSeriaId,
       chartType = _ref.chartType,
       fSeria = _ref.fSeria;
   return items.map(function (item, itemIndex) {
@@ -110,7 +109,6 @@ var _fnInitSeries = function _fnInitSeries(_ref) {
         name = item.name;
 
     return fSeria({
-      zhSeriaId: zhSeriaId,
       name: name,
       color: color
     });
@@ -133,14 +131,12 @@ var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
   var jsonData = _ref2.jsonData,
       items100 = _ref2.items100,
       items90 = _ref2.items90,
-      zhSeriaId = _ref2.zhSeriaId,
       chartType = _ref2.chartType,
       stacking = _ref2.stacking;
 
   var fSeria = _rFactorySeria[chartType],
       series = _fnInitSeries({
     items: items90,
-    zhSeriaId: zhSeriaId,
     chartType: chartType,
     fSeria: fSeria
   }),
@@ -185,7 +181,6 @@ var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
     }
   });
   series.push(fSeria({
-    zhSeriaId: zhSeriaId,
     name: 'Other',
     data: dataOther,
     color: 'gray'
@@ -199,7 +194,6 @@ var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
 var fnCreateStackedConfig = function fnCreateStackedConfig(_ref3) {
   var jsonData = _ref3.jsonData,
       items100 = _ref3.items100,
-      zhSeriaId = _ref3.zhSeriaId,
       _ref3$chartType = _ref3.chartType,
       chartType = _ref3$chartType === void 0 ? _Type.ChartType.STACKED_AREA : _ref3$chartType,
       _ref3$stacking = _ref3.stacking,
@@ -215,7 +209,6 @@ var fnCreateStackedConfig = function fnCreateStackedConfig(_ref3) {
     jsonData: jsonData,
     items100: items100,
     items90: items90,
-    zhSeriaId: zhSeriaId,
     chartType: chartType,
     stacking: stacking
   }),
@@ -272,9 +265,9 @@ var crValueMoving = function crValueMoving(bNowTotal, date, bPrevTotal, dateTo) 
 
 exports.crValueMoving = crValueMoving;
 
-var crZhConfig = function crZhConfig(option, zhSeriaId) {
+var crZhConfig = function crZhConfig(option, id) {
   return Object.assign(_QuandlFn["default"].createZhConfig(option), {
-    id: zhSeriaId,
+    id: id,
     isWithoutIndicator: true
   });
 };

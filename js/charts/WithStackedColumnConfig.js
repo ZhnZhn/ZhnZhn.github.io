@@ -51,14 +51,12 @@ var WithStackedColumnConfig = {
     };
   },
   fStackedColumnSeria: function fStackedColumnSeria(_ref2) {
-    var zhSeriaId = _ref2.zhSeriaId,
-        name = _ref2.name,
+    var name = _ref2.name,
         _ref2$data = _ref2.data,
         data = _ref2$data === void 0 ? [] : _ref2$data,
         _ref2$color = _ref2.color,
         color = _ref2$color === void 0 ? 'gray' : _ref2$color;
     return {
-      zhSeriaId: zhSeriaId,
       name: name,
       data: data,
       borderColor: 'transparent',

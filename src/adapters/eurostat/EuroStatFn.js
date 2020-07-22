@@ -86,7 +86,7 @@ const EuroStatFn = {
     const data = [];
     let max = Number.NEGATIVE_INFINITY
       , min = Number.POSITIVE_INFINITY;
-   
+
     Object.keys(timeIndex).forEach(key => {
        if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
          const y = value[timeIndex[key]];
@@ -129,8 +129,7 @@ const EuroStatFn = {
     if (_isLineSeria(seriaType)){
       config.valueMoving = valueMoving(data)
     }
-
-    config.series[0].zhSeriaId = option.key;
+    
     config.series[0].data = data;
   },
 

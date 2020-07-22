@@ -150,7 +150,6 @@ var EuroStatFn = {
       config.valueMoving = valueMoving(data);
     }
 
-    config.series[0].zhSeriaId = option.key;
     config.series[0].data = data;
   },
   setInfo: function setInfo(_ref2) {

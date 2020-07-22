@@ -45,7 +45,6 @@ const toCategory = {
             ? _crScatterProps(seriaColor)
             : void 0;
     return {
-      zhSeriaId: 'optionKey',
       zhValueText: 'Value',
       minY: findMinY(data),
       name: _name,

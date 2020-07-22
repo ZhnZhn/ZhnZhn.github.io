@@ -38,13 +38,11 @@ var IndicatorBuilder = {
   addSmaTo: function addSmaTo(chart, option) {
     var id = option.id,
         period = option.period,
-        parentId = chart.options.zhConfig.id,
         data = chart.series[0].data,
         dataSma = sma(data, period);
 
     if (dataSma.length > 0) {
       return _addDataAsSeriaToChart(chart, {
-        zhSeriaId: parentId + '_' + id,
         zhValueText: id,
         lineWidth: 2,
         data: dataSma
@@ -56,17 +54,16 @@ var IndicatorBuilder = {
   },
   crMfiConfig: function crMfiConfig(chart, period, id) {
     var data = chart.options.zhPoints,
-        parentId = chart.options.zhConfig.id,
         _mfi = mfi(data, period),
         dataMfi = _mfi.dataMfi,
         nNotFullPoint = _mfi.nNotFullPoint,
         titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
 
-    return _crMfiConfig(id, parentId, id + titleNotFullPoint, dataMfi);
+    return _crMfiConfig(id, id + titleNotFullPoint, dataMfi);
   },
-  crMomAthConfig: function crMomAthConfig(chart, id) {
+  crMomAthConfig: function crMomAthConfig(chart) {
     var data = chart.options.zhPoints;
-    return _crMomAthConfig(id, momAth(data));
+    return _crMomAthConfig(momAth(data));
   }
 };
 var _default = IndicatorBuilder;

@@ -56,19 +56,12 @@ var _isStr = function _isStr(str) {
   return typeof str === 'string';
 };
 
-var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data, zhSeriaId) {
+var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data) {
   return {
     type: 'scatter',
     color: color,
     tooltip: _Chart["default"].fTooltip(pointFormatter),
-    data: data,
-    zhSeriaId: zhSeriaId
-  };
-};
-
-var _crZhSeriaId = function _crZhSeriaId(id) {
-  return {
-    zhSeriaId: id
+    data: data
   };
 };
 
@@ -104,20 +97,20 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
     config.series[index].point = _Chart["default"].fEventsMouseOver(_handleMouseOver["default"]);
   },
   setStockSerias: function setStockSerias(config, dClose, dHigh, dLow, dOpen, id) {
-    this.setSerieData(config, dClose, 0, 'Close', _crZhSeriaId(id));
-    this.setSerieData(config, dHigh, 1, 'High', _crSeriaOption(_Color["default"].S_HIGH, _crZhSeriaId(id + 'H')));
-    this.setSerieData(config, dLow, 2, 'Low', _crSeriaOption(_Color["default"].S_LOW, _crZhSeriaId(id + 'L')));
-    this.setSerieData(config, dOpen, 3, 'Open', _crSeriaOption(_Color["default"].S_OPEN, _crZhSeriaId(id + 'O')));
+    this.setSerieData(config, dClose, 0, 'Close');
+    this.setSerieData(config, dHigh, 1, 'High', _crSeriaOption(_Color["default"].S_HIGH));
+    this.setSerieData(config, dLow, 2, 'Low', _crSeriaOption(_Color["default"].S_LOW));
+    this.setSerieData(config, dOpen, 3, 'Open', _crSeriaOption(_Color["default"].S_OPEN));
   },
   getColor: function getColor(seriaIndex) {
     var colors = _ChartTheme["default"].colors;
     return colors[seriaIndex % colors.length];
   },
-  crDividendSeria: function crDividendSeria(data, chartId) {
-    return _crScatterSeria(_Color["default"].EX_DIVIDEND, _Tooltip["default"].exDividend, data, chartId + '_ExDivident');
+  crDividendSeria: function crDividendSeria(data) {
+    return _crScatterSeria(_Color["default"].EX_DIVIDEND, _Tooltip["default"].exDividend, data);
   },
-  crSplitRatioSeria: function crSplitRatioSeria(data, chartId) {
-    return _crScatterSeria(_Color["default"].SPLIT_RATIO, _Tooltip["default"].splitRatio, data, chartId + '_SplitRatio');
+  crSplitRatioSeria: function crSplitRatioSeria(data) {
+    return _crScatterSeria(_Color["default"].SPLIT_RATIO, _Tooltip["default"].splitRatio, data);
   },
   crSeria: function crSeria(option) {
     if (option === void 0) {

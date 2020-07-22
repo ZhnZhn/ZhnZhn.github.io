@@ -129,7 +129,7 @@ const _fnAddATH = function(optionIndex, result){
     const _prevPoint = seria[len-2];
     dataATH.push(AdapterFn.crAthPoint({
       date: dateUTC,
-      close: _prevPoint[1], 
+      close: _prevPoint[1],
       open: point[open]
     }))
   }
@@ -296,18 +296,18 @@ const _fnSetYForPoints = function(data, y){
   }
 }
 
-const _fnAddSeriesExDivident = function(config, data, chartId, y){
+const _fnAddSeriesExDivident = function(config, data, y){
   if (data.length>0){
     _fnSetYForPoints(data, y);
-    config.series.push(crDividendSeria(data, chartId));
+    config.series.push(crDividendSeria(data));
     config.chart.spacingBottom = 40;
   }
 }
 
-const _fnAddSeriesSplitRatio = function(config, data, chartId, y){
+const _fnAddSeriesSplitRatio = function(config, data, y){
   if (data.length>0){
     _fnSetYForPoints(data, y);
-    config.series.push(crSplitRatioSeria(data, chartId));
+    config.series.push(crSplitRatioSeria(data));
     config.chart.spacingBottom = 40;
   }
 };
@@ -339,7 +339,7 @@ const _fnSetChartTitle = function(config, option){
   }
 }
 
-const _fnSetLegendSeriesToConfig = function(legendSeries, config, chartId){
+const _fnSetLegendSeriesToConfig = function(legendSeries, config){
   const legend = []
       , _len = config.series.length;
 
@@ -356,7 +356,6 @@ const _fnSetLegendSeriesToConfig = function(legendSeries, config, chartId){
   for (i; i<max; i++){
     const { data, name, color, symbol, isSecondAxes } = legendSeries[i]
         , seria = ChartConfig.crSeria({
-             zhSeriaId : i + '_' + chartId,
              zhValueText : name,
              visible : false,
              marker : Chart.fSeriaMarker({ color, symbol }),
@@ -410,10 +409,9 @@ const fnGetSeries = function(config, json, option){
    _fnCheckIsMomAth(config, json, zhPoints);
 
    config.series[0].data = seria;
-   config.series[0].zhSeriaId = chartId;
 
-   _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
-   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
+   _fnAddSeriesExDivident(config, dataExDividend, minY);
+   _fnAddSeriesSplitRatio(config, dataSplitRatio, minY);
 
    config = ConfigBuilder()
      .init(config)
@@ -436,7 +434,7 @@ const fnGetSeries = function(config, json, option){
      .toConfig();
 
     if (legendSeries){
-      _fnSetLegendSeriesToConfig(legendSeries, config, chartId)
+      _fnSetLegendSeriesToConfig(legendSeries, config)
     }
 
    return {
@@ -515,11 +513,10 @@ const _crSeriaData = (data, yIndex) => {
 };
 
 const _toSeria = (json, option) => {
-  const { value:chartId, parentId } = option
+  const { value:chartId } = option
   , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
   , data = _crSeriaData(getData(json), yPointIndex);
   return ChartConfig.crSeria({
-      zhSeriaId: parentId + '_' + chartId,
       zhValueText: chartId.substring(0,12),
       data: data,
       minY: AdapterFn.findMinY(data)

@@ -379,20 +379,20 @@ var _fnSetYForPoints = function _fnSetYForPoints(data, y) {
   }
 };
 
-var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data, chartId, y) {
+var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data, y) {
   if (data.length > 0) {
     _fnSetYForPoints(data, y);
 
-    config.series.push(crDividendSeria(data, chartId));
+    config.series.push(crDividendSeria(data));
     config.chart.spacingBottom = 40;
   }
 };
 
-var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chartId, y) {
+var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, y) {
   if (data.length > 0) {
     _fnSetYForPoints(data, y);
 
-    config.series.push(crSplitRatioSeria(data, chartId));
+    config.series.push(crSplitRatioSeria(data));
     config.chart.spacingBottom = 40;
   }
 };
@@ -428,7 +428,7 @@ var _fnSetChartTitle = function _fnSetChartTitle(config, option) {
   }
 };
 
-var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSeries, config, chartId) {
+var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSeries, config) {
   var legend = [],
       _len = config.series.length;
 
@@ -452,7 +452,6 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
         symbol = _legendSeries$i.symbol,
         isSecondAxes = _legendSeries$i.isSecondAxes,
         seria = _ChartConfig["default"].crSeria({
-      zhSeriaId: i + '_' + chartId,
       zhValueText: name,
       visible: false,
       marker: _Chart["default"].fSeriaMarker({
@@ -516,11 +515,10 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   _fnCheckIsMomAth(config, json, zhPoints);
 
   config.series[0].data = seria;
-  config.series[0].zhSeriaId = chartId;
 
-  _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
+  _fnAddSeriesExDivident(config, dataExDividend, minY);
 
-  _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
+  _fnAddSeriesSplitRatio(config, dataSplitRatio, minY);
 
   config = (0, _ConfigBuilder["default"])().init(config).add({
     valueMoving: _AdapterFn["default"].valueMoving(seria, dfR)
@@ -537,7 +535,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   }).toConfig();
 
   if (legendSeries) {
-    _fnSetLegendSeriesToConfig(legendSeries, config, chartId);
+    _fnSetLegendSeriesToConfig(legendSeries, config);
   }
 
   return {
@@ -619,12 +617,10 @@ var _crSeriaData = function _crSeriaData(data, yIndex) {
 
 var _toSeria = function _toSeria(json, option) {
   var chartId = option.value,
-      parentId = option.parentId,
       yPointIndex = _QuandlFn["default"].getDataColumnIndex(json, option),
       data = _crSeriaData(getData(json), yPointIndex);
 
   return _ChartConfig["default"].crSeria({
-    zhSeriaId: parentId + '_' + chartId,
     zhValueText: chartId.substring(0, 12),
     data: data,
     minY: _AdapterFn["default"].findMinY(data)

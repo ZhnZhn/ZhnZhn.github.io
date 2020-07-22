@@ -68,7 +68,6 @@ class ModalMenuIndicator extends Component {
   /*
   static propTypes = {
     rootStyle: PropTypes.object,
-    chartId: PropTypes.string,
     config: PropTypes.object,
     getChart: PropTypes.func,
     onAddMfi: PropTypes.func,
@@ -149,7 +148,7 @@ class ModalMenuIndicator extends Component {
 
   _handleAddMomAth = () => {
     const chart = this.props.getChart()
-    , config = crMomAthConfig(chart, this.props.chartId)
+    , config = crMomAthConfig(chart)
     if (config) {
       this.props.onAddMfi(config, MOM_ATH)
       this.setState({ isMomAth: true })

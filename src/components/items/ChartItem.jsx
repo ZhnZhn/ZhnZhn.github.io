@@ -92,10 +92,8 @@ class ChartItem extends Component {
 
     const { config={}, caption='' } = props
     , { zhConfig={} } = config
-    , { dataSource='', itemCaption, id } = zhConfig
+    , { dataSource='', itemCaption } = zhConfig
     , _itemCaption = itemCaption || caption;
-
-    this._chartId = id
 
     this._dataSourceEl = (
        <div style={S.DATA_SOURCE}>
@@ -316,8 +314,7 @@ class ChartItem extends Component {
          >
            <ChartToolBar
              hasError={hasError}
-             style={S.TAB_DIV}
-             chartId={this._chartId}
+             style={S.TAB_DIV}             
              config={config}
              onMiniChart={this._handleMiniChart}
              getChart={this.getMainChart}

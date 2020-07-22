@@ -66,7 +66,6 @@ var toArea = {
       seriaWidth: seriaWidth,
       data: data,
       minY: findMinY(data),
-      zhSeriaId: option.key,
       zhValueText: itemCaption
     });
   }

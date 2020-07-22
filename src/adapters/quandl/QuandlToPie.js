@@ -65,7 +65,7 @@ const _fnCreateTopDonutData = function({
 export const fCreatePieConfig = function(json, option){
    const config = ChartConfig.fBasePieConfig()
        , {sliceItems:items=[], value=''} = option
-       , zhSeriaId = `${value}_${ChartType.SEMI_DONUT}`
+       , id = `${value}_${ChartType.SEMI_DONUT}`
        , jsonData = (json.dataset && json.dataset.data) ? json.dataset.data : []
        , jsonData1 = jsonData[0]
        , jsonData2 = jsonData[1]
@@ -110,7 +110,6 @@ export const fCreatePieConfig = function(json, option){
        bTotal : formatAllNumber(_bTotal1)
       })
     , ChartConfig.fOuterPieSeria({
-        zhSeriaId : zhSeriaId,
         center  : ['20%', '80%'],
         data : _dataTop1,
         isShowInLegend : true
@@ -121,7 +120,6 @@ export const fCreatePieConfig = function(json, option){
         bTotal : formatAllNumber(_bTotal2)
       })
     , ChartConfig.fOuterPieSeria({
-        zhSeriaId : zhSeriaId,
         center  : ['70%', '80%'],
         data : _dataTop2
      })
@@ -134,7 +132,7 @@ export const fCreatePieConfig = function(json, option){
        height: _fnCalcPieLegendHeight(_dataTop1.length)
      },
      valueMoving: crValueMoving(_bTotal1, _year1, _bTotal2, _year2),
-     zhConfig: crZhConfig(option, zhSeriaId),
+     zhConfig: crZhConfig(option, id),
      info: QuandlFn2.createDatasetInfo(json)
    })
 

@@ -48,11 +48,10 @@ fInnerPieSeria({center, year, bTotal}){
  },
 
  fOuterPieSeria({
-   zhSeriaId, center, data,
+   center, data,
    isDataLabels=false, isShowInLegend=false
  }){
   return {
-     zhSeriaId : zhSeriaId,
      type : 'pie',
      colorByPoint : true,
      allowPointSelect: true,

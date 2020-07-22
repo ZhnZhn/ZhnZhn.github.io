@@ -105,7 +105,7 @@ const _fnSetColorToPoint = function(data, level60, level90){
 export const fCreateTreeMapConfig = function(json, option){
   const config = ChartConfig.fBaseTreeMapConfig()
      ,  { sliceItems:items100=[], value='' } = option
-     ,  zhSeriaId = `${value}_${ChartType.TREE_MAP}`
+     ,  id = `${value}_${ChartType.TREE_MAP}`
      ,  jsonData = json.dataset && json.dataset.data
            ? json.dataset.data
            : []
@@ -126,9 +126,9 @@ export const fCreateTreeMapConfig = function(json, option){
   QuandlFn2.setTitleToConfig(config, option)
 
   Object.assign(config, {
-    series: [ ChartConfig.fCreateTreeMapSeria(zhSeriaId, data) ],
+    series: [ ChartConfig.fCreateTreeMapSeria(data) ],
     valueMoving: crValueMoving(bTotal, yearTitle, bPrevTotal, dateTo),
-    zhConfig: crZhConfig(option, zhSeriaId),
+    zhConfig: crZhConfig(option, id),
     info: QuandlFn2.createDatasetInfo(json)
   })
 

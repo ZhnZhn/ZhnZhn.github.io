@@ -78,8 +78,7 @@ var _crSeria = function _crSeria(arr, option) {
       pointFormatter: _Tooltip["default"].exValue,
       headerFormat: ''
     },
-    data: data //zhSeriaId : zhSeriaId
-
+    data: data
   };
 };
 

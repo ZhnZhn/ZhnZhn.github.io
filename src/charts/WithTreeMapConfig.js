@@ -22,9 +22,8 @@ const WithTreeMapConfig = {
      }
    },
 
-   fCreateTreeMapSeria(zhSeriaId, data){
-     return {
-         zhSeriaId : zhSeriaId,
+   fCreateTreeMapSeria(data){
+     return {         
          type : 'treemap',
          layoutAlgorithm: 'squarified',
          //layoutAlgorithm : 'sliceAndDice',

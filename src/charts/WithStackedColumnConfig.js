@@ -42,9 +42,8 @@ const WithStackedColumnConfig = {
    }
  },
 
- fStackedColumnSeria({zhSeriaId, name, data=[], color='gray'}){
+ fStackedColumnSeria({ name, data=[], color='gray' }){
    return {
-     zhSeriaId : zhSeriaId,
      name: name,
      data : data,
      borderColor: 'transparent',

@@ -30,17 +30,12 @@ const _merge = Highcharts.merge;
 const _assign = Object.assign;
 const _isStr = str => typeof str === 'string';
 
-const _crScatterSeria = (color, pointFormatter, data, zhSeriaId) => ({
+const _crScatterSeria = (color, pointFormatter, data) => ({
   type: 'scatter',
   color: color,
   tooltip: Chart.fTooltip(pointFormatter),
-  data: data,
-  zhSeriaId: zhSeriaId
+  data: data
 });
-
-const _crZhSeriaId = (id) => ({
-   zhSeriaId: id
-})
 
 const _crSeriaOption = (color, option) => _assign({
   type: 'line', visible: false, color,
@@ -84,17 +79,15 @@ const ChartConfig = {
   },
 
   setStockSerias(config, dClose, dHigh, dLow, dOpen, id){
-    this.setSerieData(config, dClose, 0, 'Close',
-      _crZhSeriaId(id)
-    )
+    this.setSerieData(config, dClose, 0, 'Close')
     this.setSerieData(config, dHigh, 1, 'High',
-      _crSeriaOption(COLOR.S_HIGH, _crZhSeriaId(id+'H'))
+      _crSeriaOption(COLOR.S_HIGH)
     )
     this.setSerieData(config, dLow, 2, 'Low',
-      _crSeriaOption(COLOR.S_LOW, _crZhSeriaId(id+'L'))
+      _crSeriaOption(COLOR.S_LOW)
     )
     this.setSerieData(config, dOpen, 3, 'Open',
-      _crSeriaOption(COLOR.S_OPEN, _crZhSeriaId(id+'O'))
+      _crSeriaOption(COLOR.S_OPEN)
     )
   },
 
@@ -103,18 +96,16 @@ const ChartConfig = {
     return colors[seriaIndex % colors.length];
   },
 
-  crDividendSeria: (data, chartId) => _crScatterSeria(
+  crDividendSeria: (data) => _crScatterSeria(
     COLOR.EX_DIVIDEND,
     Tooltip.exDividend,
-    data,
-    chartId + '_ExDivident'
+    data
   ),
 
-  crSplitRatioSeria: (data, chartId) => _crScatterSeria(
+  crSplitRatioSeria: (data) => _crScatterSeria(
     COLOR.SPLIT_RATIO,
     Tooltip.splitRatio,
-    data,
-    chartId + '_SplitRatio'
+    data
   ),
 
   crSeria: (option={}) => {

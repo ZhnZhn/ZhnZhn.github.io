@@ -57,15 +57,13 @@ var WithPieConfig = {
     };
   },
   fOuterPieSeria: function fOuterPieSeria(_ref2) {
-    var zhSeriaId = _ref2.zhSeriaId,
-        center = _ref2.center,
+    var center = _ref2.center,
         data = _ref2.data,
         _ref2$isDataLabels = _ref2.isDataLabels,
         isDataLabels = _ref2$isDataLabels === void 0 ? false : _ref2$isDataLabels,
         _ref2$isShowInLegend = _ref2.isShowInLegend,
         isShowInLegend = _ref2$isShowInLegend === void 0 ? false : _ref2$isShowInLegend;
     return {
-      zhSeriaId: zhSeriaId,
       type: 'pie',
       colorByPoint: true,
       allowPointSelect: true,

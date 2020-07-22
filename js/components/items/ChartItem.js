@@ -296,7 +296,6 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/_react["default"].createElement(_ChartToolBar["default"], {
         hasError: hasError,
         style: S.TAB_DIV,
-        chartId: _this._chartId,
         config: config,
         onMiniChart: _this._handleMiniChart,
         getChart: _this.getMainChart,
@@ -338,10 +337,8 @@ var ChartItem = /*#__PURE__*/function (_Component) {
         _zhConfig$dataSource = zhConfig.dataSource,
         dataSource = _zhConfig$dataSource === void 0 ? '' : _zhConfig$dataSource,
         itemCaption = zhConfig.itemCaption,
-        _id = zhConfig.id,
         _itemCaption = itemCaption || _caption;
 
-    _this._chartId = _id;
     _this._dataSourceEl = /*#__PURE__*/_react["default"].createElement("div", {
       style: S.DATA_SOURCE
     }, dataSource);

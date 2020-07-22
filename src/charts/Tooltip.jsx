@@ -23,8 +23,9 @@ const _fnAddHandlerClose = function(id, point){
 
 const _fFormatter = (option) => function(){
    const {
-      fnTemplate, onAfterRender=_fnAddHandlerClose,
-      fnDateFormat = toDateFormatDMY,
+      fnTemplate,
+      onAfterRender=_fnAddHandlerClose,
+      fnDateFormat= toDateFormatDMY,
       isWithColor, isWithValueText, isWithValue
      } = option
    , point = this
@@ -32,11 +33,8 @@ const _fFormatter = (option) => function(){
    , date = fnDateFormat(point.x)
    , color = isWithColor
        ? point.color || series.color
-       : undefined
-   , { zhValueText, name='Value',
-       //id, zhSeriaId
-     } = series.userOptions
-   //, _id = zhSeriaId || id || 'TP'
+       : void 0
+   , { zhValueText, name='Value' } = series.userOptions
    , _id = crTpId()
    , valueText = isWithValueText
         ? zhValueText || name

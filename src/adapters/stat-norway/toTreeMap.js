@@ -41,7 +41,7 @@ const _fIsPoint = (dfT, hm, depth) => {
   return p => {
     if (dfT && p.label === dfT) {
       return false;
-    }    
+    }
     if ( hm[p.label].d !== depth) {
       return false;
     }
@@ -172,8 +172,7 @@ const toTreeMap = {
 
    const _seria = Builder()
      .treeMapSeria(
-        Tooltip.treeMap, {
-          zhSeriaId: fnAdapter.crId(),
+        Tooltip.treeMap, {          
           data: _data
       })
       .toSeria();

@@ -80,7 +80,6 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
   /*
   static propTypes = {
     rootStyle: PropTypes.object,
-    chartId: PropTypes.string,
     config: PropTypes.object,
     getChart: PropTypes.func,
     onAddMfi: PropTypes.func,
@@ -94,7 +93,7 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
 
     _this._handleAddMomAth = function () {
       var chart = _this.props.getChart(),
-          config = crMomAthConfig(chart, _this.props.chartId);
+          config = crMomAthConfig(chart);
 
       if (config) {
         _this.props.onAddMfi(config, MOM_ATH);

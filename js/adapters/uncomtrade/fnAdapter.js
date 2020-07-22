@@ -33,11 +33,6 @@ var fnAdapter = {
         measure = _option$measure === void 0 ? "A" : _option$measure;
     return value + '_' + rg + '_' + measure;
   },
-  crSeriaOption: function crSeriaOption(id) {
-    return {
-      zhSeriaId: id
-    };
-  },
   crMarker: function crMarker(color) {
     return {
       fillColor: color,
@@ -77,9 +72,7 @@ var fnAdapter = {
         _ref$isShow = _ref.isShow,
         isShow = _ref$isShow === void 0 ? false : _ref$isShow;
 
-    var _config$zhConfig = config.zhConfig,
-        key = _config$zhConfig.key,
-        legend = _config$zhConfig.legend,
+    var legend = config.zhConfig.legend,
         _color = color || _ChartConfig["default"].getColor(i),
         _seriaColor = {
       color: _color,
@@ -87,7 +80,7 @@ var fnAdapter = {
     },
         _seriaOption = seriaOption !== null ? isShow ? (0, _extends2["default"])({}, _conf["default"].SPLINE, _seriaColor) : (0, _extends2["default"])({}, _conf["default"].SPLINE_NOT_VISIBLE, _seriaColor) : null;
 
-    _ChartConfig["default"].setSerieData(config, hm[name], i, name, _seriaOption, this.crSeriaOption(key + '_' + name));
+    _ChartConfig["default"].setSerieData(config, hm[name], i, name, _seriaOption);
 
     legend.push(_AdapterFn["default"].legendItem(i, _color, name, isShow));
   },

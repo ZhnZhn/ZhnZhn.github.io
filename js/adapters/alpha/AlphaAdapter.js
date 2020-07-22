@@ -108,7 +108,6 @@ var _toDataArrs = function _toDataArrs(_ref, arrProp) {
 
 var _crSplineSeria = function _crSplineSeria(_ref2, option) {
   var data = _ref2.data,
-      ticket = _ref2.ticket,
       valueText = _ref2.valueText;
   return _assign(_ChartConfig["default"].crSeria(), {
     type: 'spline',
@@ -117,7 +116,6 @@ var _crSplineSeria = function _crSplineSeria(_ref2, option) {
     marker: {
       symbol: 'circle'
     },
-    zhSeriaId: ticket + '_' + valueText,
     zhValueText: valueText
   }, option);
 };
@@ -147,33 +145,27 @@ var _crSeriaData = function _crSeriaData(json, option) {
 
 var _crSeria = function _crSeria(json, option) {
   var indicator = option.indicator,
-      ticket = option.ticket,
       _data = _crSeriaData(json, option);
 
   return _crSplineSeria({
     data: _data,
-    valueText: indicator,
-    ticket: ticket
+    valueText: indicator
   });
 };
 
 var _crMacdSeries = function _crMacdSeries(json, option) {
-  var ticket = option.ticket,
-      _arrs = _toDataArrs(_crValue(json, option), [C.MACD, C.MACD_S, C.MACD_H]),
+  var _arrs = _toDataArrs(_crValue(json, option), [C.MACD, C.MACD_S, C.MACD_H]),
       sMcad = _crSplineSeria({
     data: _arrs[0],
-    valueText: C.MACD,
-    ticket: ticket
+    valueText: C.MACD
   }, C.BLACK),
       sSignal = _crSplineSeria({
     data: _arrs[1],
-    valueText: C.MACD_S,
-    ticket: ticket
+    valueText: C.MACD_S
   }, C.RED),
       sHist = _assign(_ChartConfig["default"].crSeria(), {
     color: C.COLOR_BLUE_A,
     data: _arrs[2],
-    zhSeriaId: ticket + '_' + C.MACD_H,
     zhValueText: C.MACD_H,
     type: 'column',
     visible: false,
@@ -189,39 +181,32 @@ var _crMacdSeries = function _crMacdSeries(json, option) {
 };
 
 var _crStochSeries = function _crStochSeries(json, option) {
-  var ticket = option.ticket,
-      _arrs = _toDataArrs(_crValue(json, option), [C.SLOW_K, C.SLOW_D]),
+  var _arrs = _toDataArrs(_crValue(json, option), [C.SLOW_K, C.SLOW_D]),
       sSlowK = _crSplineSeria({
     data: _arrs[0],
-    valueText: C.SLOW_K,
-    ticket: ticket
+    valueText: C.SLOW_K
   }, C.BLUE),
       sSlowD = _crSplineSeria({
     data: _arrs[1],
-    valueText: C.SLOW_D,
-    ticket: ticket
+    valueText: C.SLOW_D
   }, C.RED);
 
   return [sSlowK, sSlowD];
 };
 
 var _crBbandsSeries = function _crBbandsSeries(json, option) {
-  var ticket = option.ticket,
-      _arrs = _toDataArrs(_crValue(json, option), [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]),
+  var _arrs = _toDataArrs(_crValue(json, option), [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]),
       sMiddle = _crSplineSeria({
     data: _arrs[0],
-    valueText: C.BBANDS_M,
-    ticket: ticket
+    valueText: C.BBANDS_M
   }, C.BLUE),
       sUpper = _crSplineSeria({
     data: _arrs[1],
-    valueText: C.BBANDS_U,
-    ticket: ticket
+    valueText: C.BBANDS_U
   }, C.GREEN),
       sLow = _crSplineSeria({
     data: _arrs[2],
-    valueText: C.BBANDS_L,
-    ticket: ticket
+    valueText: C.BBANDS_L
   }, C.RED);
 
   return [sMiddle, sUpper, sLow];

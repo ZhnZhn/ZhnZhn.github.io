@@ -39,15 +39,13 @@ const FaoStatAdapter = {
     if (!checkToSeries(option)) {
       throw new Error('ERR_10');
     }
-    const _data = crSeriaData(json, option)
-        , _id = crId(option)
-        , { parentId, oneCaption } = option;
+    const _data = crSeriaData(json, option)        
+    , { oneCaption } = option;
     return Builder()
       .initSeria()
       .add({
         data: _data,
         minY: findMinY(_data),
-        zhSeriaId: parentId + '_' + _id,
         zhValueText: oneCaption,
         zhItemCaption: oneCaption
       })

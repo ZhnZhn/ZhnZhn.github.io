@@ -18,10 +18,6 @@ const fnAdapter = {
     return value + '_' + rg + '_' + measure;
   },
 
-  crSeriaOption: id => {
-    return { zhSeriaId: id };
-  },
-
   crMarker: color => {
     return {
       fillColor: color,
@@ -42,7 +38,7 @@ const fnAdapter = {
         , _id = this.crChartId(option);
     return {
       id: _id,
-      key: _id,      
+      key: _id,
       legend: [],
       dataSource: dataSource,
       linkFn: "UN_COMTRADE",
@@ -55,7 +51,7 @@ const fnAdapter = {
     name, i, color,
     seriaOption, isShow=false
   }) {
-    const { key, legend } = config.zhConfig
+    const { legend } = config.zhConfig
         , _color = color || ChartConfig.getColor(i)
         , _seriaColor = {
              color: _color,
@@ -68,8 +64,7 @@ const fnAdapter = {
                : null;
 
     ChartConfig.setSerieData(
-      config, hm[name], i, name, _seriaOption,
-      this.crSeriaOption(key + '_' + name)
+      config, hm[name], i, name, _seriaOption
     )
     legend.push(
        AdapterFn.legendItem(i, _color, name, isShow)
