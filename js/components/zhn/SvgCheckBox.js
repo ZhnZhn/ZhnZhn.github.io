@@ -7,8 +7,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
@@ -20,13 +18,8 @@ var _isKeyEnter = _interopRequireDefault(require("./isKeyEnter"));
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
 //import PropTypes from "prop-types";
+var CL_CHB = 'chb';
 var S = {
-  DIV: {
-    display: 'inline-block',
-    width: 16,
-    height: 16,
-    cursor: 'pointer'
-  },
   SVG: {
     display: 'inline-block'
   }
@@ -150,7 +143,8 @@ var SvgCheckBox = /*#__PURE__*/function (_Component) {
       tabIndex: "0",
       "aria-checked": value //aria-labelledby
       ,
-      style: (0, _extends2["default"])({}, S.DIV, style),
+      className: CL_CHB,
+      style: style,
       onClick: this._hClick,
       onKeyDown: this._hKeyDown
     }, /*#__PURE__*/_react["default"].createElement("svg", {

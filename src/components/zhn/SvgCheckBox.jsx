@@ -5,13 +5,8 @@ import isKeyEnter from './isKeyEnter'
 
 import C from '../styles/Color';
 
+const CL_CHB = 'chb';
 const S = {
-  DIV: {
-    display: 'inline-block',
-    width: 16,
-    height: 16,
-    cursor: 'pointer'
-  },
   SVG: {
     display: 'inline-block'
   }
@@ -116,7 +111,8 @@ class SvgCheckBox extends Component {
          tabIndex="0"
          aria-checked={value}
          //aria-labelledby
-         style={{ ...S.DIV, ...style }}
+         className={CL_CHB}
+         style={style}
          onClick={this._hClick}
          onKeyDown={this._hKeyDown}
       >
