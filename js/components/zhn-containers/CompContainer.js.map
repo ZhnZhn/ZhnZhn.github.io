@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/components/zhn-containers/CompContainer.jsx"],"names":["CL","CompContainer","state","containers","_onStore","actionType","Comp","props","addAction","setState","prevState","unshift","componentDidMount","unsubscribe","store","listen","componentWillUnmount","render","className","Component","defaultProps"],"mappings":";;;;;;;;;;;AAAA;;AACA;AAEA,IAAMA,EAAE,GAAG,eAAX;;IAEMC,a;;;;;;;;;;;UAcJC,K,GAAQ;AACNC,MAAAA,UAAU,EAAE;AADN,K;;UAYRC,Q,GAAW,UAACC,UAAD,EAAaC,IAAb,EAAsB;AAC9B,UAAID,UAAU,KAAK,MAAKE,KAAL,CAAWC,SAA9B,EAAwC;AACtC,cAAKC,QAAL,CAAc,UAAAC,SAAS,EAAI;AACzBA,UAAAA,SAAS,CAACP,UAAV,CAAqBQ,OAArB,CAA6BL,IAA7B;AACA,iBAAOI,SAAP;AACD,SAHD;AAID;AACH,K;;;;;;;SAfDE,iB,GAAA,6BAAmB;AACjB,SAAKC,WAAL,GAAmB,KAAKN,KAAL,CAAWO,KAAX,CAChBC,MADgB,CACT,KAAKX,QADI,CAAnB;AAED,G;;SACDY,oB,GAAA,gCAAsB;AACpB,SAAKH,WAAL;AACD,G;;SAWDI,M,GAAA,kBAAQ;AACN,wBACC;AAAK,MAAA,SAAS,EAAE,KAAKV,KAAL,CAAWW;AAA3B,OACG,KAAKhB,KAAL,CAAWC,UADd,CADD;AAKD,G;;;EAzCyBgB,gB;;AAAtBlB,a,CAUGmB,Y,GAAe;AACpBF,EAAAA,SAAS,EAAElB;AADS,C;eAkCTC,a","sourcesContent":["import React, { Component } from 'react';\r\n//import PropTypes from 'prop-types';\r\n\r\nconst CL = \"hrz-container\";\r\n\r\nclass CompContainer extends Component {\r\n  /*\r\n  static propTypes = {\r\n    className: PropTypes.string,\r\n    store: PropTypes.shape({\r\n      listen: PropTypes.func\r\n    }),\r\n    addAction: PropTypes.string\r\n  }\r\n  */\r\n  static defaultProps = {\r\n    className: CL\r\n  }\r\n\r\n  state = {\r\n    containers: []\r\n  }\r\n\r\n  componentDidMount(){\r\n    this.unsubscribe = this.props.store\r\n      .listen(this._onStore)\r\n  }\r\n  componentWillUnmount(){\r\n    this.unsubscribe()\r\n  }\r\n\r\n  _onStore = (actionType, Comp) => {\r\n     if (actionType === this.props.addAction){       \r\n       this.setState(prevState => {\r\n         prevState.containers.unshift(Comp)\r\n         return prevState;\r\n       })\r\n     }\r\n  }\r\n\r\n  render(){\r\n    return (\r\n     <div className={this.props.className}>\r\n       {this.state.containers}\r\n     </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default CompContainer\r\n"],"file":"CompContainer.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-containers/CompContainer.js"
+ ],
+ "file": "../../../src/components/zhn-containers/CompContainer.js",
+ "names": [
+  "CL",
+  "CompContainer",
+  "className",
+  "store",
+  "addAction",
+  "containers",
+  "setContainers",
+  "actionType",
+  "Comp",
+  "arrComp"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;AADA;AAGA,IAAMA,EAAE,GAAG,eAAX;;AAEA,IAAMC,aAAa,GAAG,SAAhBA,aAAgB,OAIhB;AAAA,4BAHJC,SAGI;AAAA,MAHJA,SAGI,+BAHMF,EAGN;AAAA,MAFJG,KAEI,QAFJA,KAEI;AAAA,MADJC,SACI,QADJA,SACI;;AAAA,kBACgC,qBAAS,EAAT,CADhC;AAAA,MACGC,UADH;AAAA,MACeC,aADf;;AAGJ,6BAAUH,KAAV,EAAiB,UAACI,UAAD,EAAaC,IAAb,EAAsB;AACrC,QAAID,UAAU,KAAKH,SAAnB,EAA8B;AAC5BE,MAAAA,aAAa,CAAC,UAAAG,OAAO;AAAA,gBAAKD,IAAL,SAAcC,OAAd;AAAA,OAAR,CAAb;AACD;AACF,GAJD;AAKA,sBACE;AAAK,IAAA,SAAS,EAAEP;AAAhB,KACGG,UADH,CADF;AAKD,CAjBD;AAmBA;;;;;;;;;;;eAUeJ,a"
+}

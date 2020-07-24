@@ -1,68 +1,51 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
+
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 //import PropTypes from 'prop-types';
 var CL = "hrz-container";
 
-var CompContainer = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(CompContainer, _Component);
+var CompContainer = function CompContainer(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === void 0 ? CL : _ref$className,
+      store = _ref.store,
+      addAction = _ref.addAction;
 
-  function CompContainer() {
-    var _this;
+  var _useState = (0, _react.useState)([]),
+      containers = _useState[0],
+      setContainers = _useState[1];
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+  (0, _useListen["default"])(store, function (actionType, Comp) {
+    if (actionType === addAction) {
+      setContainers(function (arrComp) {
+        return [Comp].concat(arrComp);
+      });
     }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      containers: []
-    };
-
-    _this._onStore = function (actionType, Comp) {
-      if (actionType === _this.props.addAction) {
-        _this.setState(function (prevState) {
-          prevState.containers.unshift(Comp);
-          return prevState;
-        });
-      }
-    };
-
-    return _this;
-  }
-
-  var _proto = CompContainer.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unsubscribe();
-  };
-
-  _proto.render = function render() {
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      className: this.props.className
-    }, this.state.containers);
-  };
-
-  return CompContainer;
-}(_react.Component);
-
-CompContainer.defaultProps = {
-  className: CL
+  });
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: className
+  }, containers);
 };
+/*
+CompContainer.propTypes = {
+  className: PropTypes.string,
+  store: PropTypes.shape({
+    listen: PropTypes.func
+  }),
+  addAction: PropTypes.string
+}
+*/
+
+
 var _default = CompContainer;
 exports["default"] = _default;
 //# sourceMappingURL=CompContainer.js.map

@@ -1,50 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 //import PropTypes from 'prop-types';
+import useListen from '../hooks/useListen'
 
 const CL = "hrz-container";
 
-class CompContainer extends Component {
-  /*
-  static propTypes = {
-    className: PropTypes.string,
-    store: PropTypes.shape({
-      listen: PropTypes.func
-    }),
-    addAction: PropTypes.string
-  }
-  */
-  static defaultProps = {
-    className: CL
-  }
+const CompContainer = ({
+  className=CL,
+  store,
+  addAction
+}) => {
+  const [containers, setContainers] = useState([]);
 
-  state = {
-    containers: []
-  }
-
-  componentDidMount(){
-    this.unsubscribe = this.props.store
-      .listen(this._onStore)
-  }
-  componentWillUnmount(){
-    this.unsubscribe()
-  }
-
-  _onStore = (actionType, Comp) => {
-     if (actionType === this.props.addAction){       
-       this.setState(prevState => {
-         prevState.containers.unshift(Comp)
-         return prevState;
-       })
-     }
-  }
-
-  render(){
-    return (
-     <div className={this.props.className}>
-       {this.state.containers}
-     </div>
-    );
-  }
+  useListen(store, (actionType, Comp) => {
+    if (actionType === addAction) {
+      setContainers(arrComp => [Comp, ...arrComp])
+    }
+  })
+  return (
+    <div className={className}>
+      {containers}
+    </div>
+  );
 }
+
+/*
+CompContainer.propTypes = {
+  className: PropTypes.string,
+  store: PropTypes.shape({
+    listen: PropTypes.func
+  }),
+  addAction: PropTypes.string
+}
+*/
 
 export default CompContainer
