@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 
 const CL = "progress-line";
 
-const T = {  
+const T = {
   WIDTH: 'width 350ms linear',
   OPACITY: 'opacity 250ms linear'
 };
 
 const _crStyle = (backgroundColor, opacity, width, transition) => ({
-   backgroundColor, width, opacity, transition
+   backgroundColor,
+   width,
+   opacity,
+   transition
 });
 
 class ProgressLine extends Component {
@@ -16,6 +19,12 @@ class ProgressLine extends Component {
     color: '#2f7ed8'
   }
 
+  wasCompleted = false
+  idCompleted = null
+  wasOpacied = false
+  idOpacied = null
+
+  /*
   constructor(props){
     super();
     this.wasCompleted = false;
@@ -23,6 +32,7 @@ class ProgressLine extends Component {
     this.wasOpacied = false;
     this.idOpacied = null;
   }
+  */
 
   componentWillUnmount(){
     if (this.idCompleted){

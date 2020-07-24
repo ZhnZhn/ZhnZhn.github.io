@@ -29,10 +29,14 @@ var _crStyle = function _crStyle(backgroundColor, opacity, width, transition) {
 var ProgressLine = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ProgressLine, _Component);
 
-  function ProgressLine(props) {
+  function ProgressLine() {
     var _this;
 
-    _this = _Component.call(this) || this;
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
     _this.wasCompleted = false;
     _this.idCompleted = null;
     _this.wasOpacied = false;
@@ -42,6 +46,15 @@ var ProgressLine = /*#__PURE__*/function (_Component) {
 
   var _proto = ProgressLine.prototype;
 
+  /*
+  constructor(props){
+    super();
+    this.wasCompleted = false;
+    this.idCompleted = null;
+    this.wasOpacied = false;
+    this.idOpacied = null;
+  }
+  */
   _proto.componentWillUnmount = function componentWillUnmount() {
     if (this.idCompleted) {
       clearTimeout(this.idCompleted);

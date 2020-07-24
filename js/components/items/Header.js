@@ -50,6 +50,8 @@ var S = {
     display: 'inline-block'
   },
   CHECK_BOX: {
+    position: 'relative',
+    top: 1,
     marginRight: 8,
     marginLeft: 8
   },

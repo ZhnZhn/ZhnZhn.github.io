@@ -46,7 +46,7 @@ var CHILD_MARGIN = 36,
     STEP = 10;
 var S = {
   BR_CAPTION: {
-    paddingLeft: 4
+    paddingLeft: 2
   },
   CAPTION: {
     position: 'relative',

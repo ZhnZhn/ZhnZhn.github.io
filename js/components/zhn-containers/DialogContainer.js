@@ -17,8 +17,8 @@ var S = {
   ROOT: {
     zIndex: 1030,
     position: 'absolute',
-    top: '70px',
-    left: '10px',
+    top: 70,
+    left: 10,
     width: '98%'
   }
 };
@@ -30,7 +30,7 @@ var _findCompIndex = function _findCompIndex(arr, key) {
     }
   }
 
-  return undefined;
+  return;
 };
 
 var _doVisible = function _doVisible(arr, keyValue) {
@@ -60,16 +60,26 @@ var _updateVisible = function _updateVisible(state, key, maxDialog) {
 var _findCompByKey = function _findCompByKey(comps, key) {
   var index = _findCompIndex(comps, key);
 
-  return typeof index !== 'undefined' ? comps[index] : undefined;
+  return typeof index !== 'undefined' ? comps[index] : void 0;
 };
 
 var DialogContainer = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogContainer, _Component);
 
-  function DialogContainer(props) {
+  function DialogContainer() {
     var _this;
 
-    _this = _Component.call(this) || this;
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
+      hmIs: {},
+      compDialogs: [],
+      hmData: {},
+      visibleDialogs: []
+    };
 
     _this._onStore = function (actionType, option) {
       var showAction = _this.props.showAction;
@@ -122,7 +132,6 @@ var DialogContainer = /*#__PURE__*/function (_Component) {
               _keyIndex = visibleDialogs.indexOf(key);
 
           visibleDialogs.splice(_keyIndex, 1);
-          _this.elHtml.style.cursor = '';
         }
 
         return prevState;
@@ -163,13 +172,6 @@ var DialogContainer = /*#__PURE__*/function (_Component) {
       });
     };
 
-    _this.elHtml = document.getElementsByTagName('html')[0];
-    _this.state = {
-      hmIs: {},
-      compDialogs: [],
-      hmData: {},
-      visibleDialogs: []
-    };
     return _this;
   }
 

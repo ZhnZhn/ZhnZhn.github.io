@@ -53,7 +53,9 @@ var S = {
     stroke: 'inherit'
   },
   CHECK_BOX: {
-    marginLeft: 8,
+    position: 'relative',
+    top: 1,
+    marginLeft: 6,
     marginRight: 10
   },
   SVG_CLOSE: {

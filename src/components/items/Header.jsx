@@ -45,6 +45,8 @@ const S = {
     display: 'inline-block'
   },
   CHECK_BOX: {
+    position: 'relative',
+    top: 1,
     marginRight: 8,
     marginLeft: 8
   },
@@ -52,7 +54,7 @@ const S = {
     color: '#a487d4',
     width: 125,
     paddingTop: 4,
-    paddingBottom: 2    
+    paddingBottom: 2
   },
   CAPTION_CLOSE: {
     color: 'gray'

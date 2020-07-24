@@ -45,13 +45,10 @@ var ModalCompareTo = function ModalCompareTo(_ref) {
       setMsgErr = _useState[1],
       _onEnterDateTo = (0, _react.useCallback)(function (dateTo) {
     if (isDmy(dateTo)) {
-      var _r = onCompareTo(dateTo);
+      var _r = onCompareTo(dateTo),
+          _msgErr = _r !== 0 ? "No " + _r + " data for " + dateTo : '';
 
-      if (_r !== 0) {
-        setMsgErr("No " + _r + " data for " + dateTo);
-      } else {
-        setMsgErr('');
-      }
+      setMsgErr(_msgErr);
     }
   }, []);
 

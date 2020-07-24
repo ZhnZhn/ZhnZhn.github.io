@@ -4,8 +4,8 @@ const S = {
   ROOT: {
     zIndex: 1030,
     position: 'absolute',
-    top: '70px',
-    left: '10px',
+    top: 70,
+    left: 10,
     width: '98%'
   }
 };
@@ -16,7 +16,7 @@ const _findCompIndex = (arr, key) => {
       return i;
     }
   }
-  return undefined;
+  return;
 };
 
 const _doVisible = function(arr, keyValue){
@@ -46,7 +46,7 @@ const _findCompByKey = (comps, key) => {
   const index = _findCompIndex(comps, key);
   return typeof index !== 'undefined'
      ? comps[index]
-     : undefined;
+     : void 0;
 };
 
 class DialogContainer extends Component {
@@ -54,15 +54,11 @@ class DialogContainer extends Component {
     maxDialog: 3
   }
 
-  constructor(props){
-    super()
-    this.elHtml = document.getElementsByTagName('html')[0]
-    this.state = {
-      hmIs: {},
-      compDialogs: [],
-      hmData: {},
-      visibleDialogs: []
-    }
+  state = {
+    hmIs: {},
+    compDialogs: [],
+    hmData: {},
+    visibleDialogs: []
   }
 
    componentDidMount(){
@@ -119,7 +115,6 @@ class DialogContainer extends Component {
         const visibleDialogs = prevState.visibleDialogs
             , _keyIndex = visibleDialogs.indexOf(key);
         visibleDialogs.splice(_keyIndex, 1)
-        this.elHtml.style.cursor = ''
       }
       return prevState;
     })

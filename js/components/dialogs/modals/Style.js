@@ -7,11 +7,14 @@ var STYLE = {
   ROOT: {
     left: 8,
     zIndex: 100,
-    padding: '8px 12px',
-    lineHeight: 1.7
+    paddingTop: 4,
+    paddingLeft: 12,
+    paddingRight: 12,
+    paddingBottom: 12
   },
-  ROW_CB: {
-    paddingLeft: 0
+  ROW_CHB: {
+    paddingLeft: 0,
+    paddingBottom: 3
   }
 };
 var _default = STYLE;

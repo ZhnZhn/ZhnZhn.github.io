@@ -31,13 +31,12 @@ const ModalCompareTo = ({ isShow, onClose, onCompareTo }) => {
    , [msgErr, setMsgErr] = useState('')
    , _onEnterDateTo = useCallback(dateTo => {
        if (isDmy(dateTo)) {
-          const _r = onCompareTo(dateTo);
-          if (_r !== 0) {
-            setMsgErr(`No ${_r} data for ${dateTo}`)
-          } else {
-            setMsgErr('')
-          }
-        }
+          const _r = onCompareTo(dateTo)
+          , _msgErr = (_r !== 0)
+              ? `No ${_r} data for ${dateTo}`
+              : '';
+          setMsgErr(_msgErr)
+       }
      }, []);
    useEffect(() => {
     if (isShow && _refInput.current) {

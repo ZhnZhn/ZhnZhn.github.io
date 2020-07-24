@@ -1,30 +1,33 @@
 import React from 'react';
 
+const CL_BT = 'zhn-select__bt-arrow'
+
 const S = {
   ARROW_CELL: {
     position: 'absolute',
-    top: '10px',
-    right: '0px',
-    cursor: 'pointer',
+    top: 10,
+    right: 0,
+    width: 35,
+    paddingRight: 5,
     textAlign: 'center',
     verticalAlign: 'middle',
-    width: '35px',
-    paddingRight: '5px'
+    cursor: 'pointer'
   },
   ARROW: {
     position: 'relative',
-    top: '2px',
+    top: 2,
+    display: 'inline-block',
+    height: 0,
+    width: 0,
     borderColor: '#999 transparent transparent',
     borderStyle: 'solid',
-    borderWidth: '10px 8px 4px',
-    display: 'inline-block',
-    height: '0px',
-    width: '0px'
+    borderWidth: '10px 8px 4px'
   }
 }
 
 const ArrowCell = ({ arrowStyle, tabIndex="-1", onClick }) => (
   <button
+     className={CL_BT}
      style={S.ARROW_CELL}
      tabIndex={tabIndex}
      onClick={onClick}>

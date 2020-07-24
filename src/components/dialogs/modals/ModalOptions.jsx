@@ -24,13 +24,13 @@ const ModalOptions = ({
   >
     <RowCheckBox
       initValue={false}
-      rootStyle={STYLE.ROW_CB}
+      rootStyle={STYLE.ROW_CHB}
       caption="Not Zoom to Min-Max"
       onToggle={_toggleZoomMinMax}
     />
     <RowCheckBox
       initValue={false}
-      rootStyle={STYLE.ROW_CB}
+      rootStyle={STYLE.ROW_CHB}
       caption="Filter Trim Zero Values"
       onToggle={_toggleFilterZero}
     />

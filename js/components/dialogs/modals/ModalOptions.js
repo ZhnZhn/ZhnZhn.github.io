@@ -33,12 +33,12 @@ var ModalOptions = function ModalOptions(_ref) {
     onClose: onClose
   }, /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
     initValue: false,
-    rootStyle: _Style["default"].ROW_CB,
+    rootStyle: _Style["default"].ROW_CHB,
     caption: "Not Zoom to Min-Max",
     onToggle: _toggleZoomMinMax
   }), /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
     initValue: false,
-    rootStyle: _Style["default"].ROW_CB,
+    rootStyle: _Style["default"].ROW_CHB,
     caption: "Filter Trim Zero Values",
     onToggle: _toggleFilterZero
   }));

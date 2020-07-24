@@ -10,7 +10,8 @@ const CAPTION_CHECKBOX_COLOR = '#a487d4';
 const S = {
   ROW: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingTop: 3    
   },
   INLINE: {
     display: 'inline-block'
@@ -35,7 +36,7 @@ const CheckBoxList = ({
     <div style={S.ROW} key={item.id}>
       <RowCheckBox
         initValue={true}
-        rootStyle={{ ...STYLE.ROW_CB, ...S.INLINE}}
+        rootStyle={{ ...STYLE.ROW_CHB, ...S.INLINE}}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption={item.caption}
         captionStyle={S.CAPTION}
@@ -88,7 +89,7 @@ const ModalToggle = ({
     { isFd && <RowCheckBox
         key="isShowFd"
         value={isShowFd}
-        rootStyle={STYLE.ROW_CB}
+        rootStyle={STYLE.ROW_CHB}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="From Date"
         onToggle={_toggleFd}
@@ -97,7 +98,7 @@ const ModalToggle = ({
     { isCh && <RowCheckBox
         key="isShowChart"
         value={isShowChart}
-        rootStyle={STYLE.ROW_CB}
+        rootStyle={STYLE.ROW_CHB}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="Chart"
         onToggle={_toggleChart}
@@ -106,7 +107,7 @@ const ModalToggle = ({
     { !noForDate && <RowCheckBox
         key="isForDate"
         value={isShowDate}
-        rootStyle={STYLE.ROW_CB}
+        rootStyle={STYLE.ROW_CHB}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="For Date"
         onToggle={_toggleDate}

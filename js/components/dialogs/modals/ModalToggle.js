@@ -22,7 +22,8 @@ var CAPTION_CHECKBOX_COLOR = '#a487d4';
 var S = {
   ROW: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingTop: 3
   },
   INLINE: {
     display: 'inline-block'
@@ -48,7 +49,7 @@ var CheckBoxList = function CheckBoxList(_ref) {
       key: item.id
     }, /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
       initValue: true,
-      rootStyle: (0, _extends2["default"])({}, _Style["default"].ROW_CB, S.INLINE),
+      rootStyle: (0, _extends2["default"])({}, _Style["default"].ROW_CHB, S.INLINE),
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: item.caption,
       captionStyle: S.CAPTION,
@@ -111,21 +112,21 @@ var ModalToggle = function ModalToggle(_ref2) {
   }), isFd && /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
     key: "isShowFd",
     value: isShowFd,
-    rootStyle: _Style["default"].ROW_CB,
+    rootStyle: _Style["default"].ROW_CHB,
     checkedColor: TOGGLE_CHECKBOX_COLOR,
     caption: "From Date",
     onToggle: _toggleFd
   }), isCh && /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
     key: "isShowChart",
     value: isShowChart,
-    rootStyle: _Style["default"].ROW_CB,
+    rootStyle: _Style["default"].ROW_CHB,
     checkedColor: TOGGLE_CHECKBOX_COLOR,
     caption: "Chart",
     onToggle: _toggleChart
   }), !noForDate && /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
     key: "isForDate",
     value: isShowDate,
-    rootStyle: _Style["default"].ROW_CB,
+    rootStyle: _Style["default"].ROW_CHB,
     checkedColor: TOGGLE_CHECKBOX_COLOR,
     caption: "For Date",
     onToggle: _toggleDate
