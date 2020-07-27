@@ -32,6 +32,14 @@
         { "id": "DBN_IMF_WEOAGG" }
       ]
     },{
+      "caption": "LBMA",
+      "items": [
+        { "id": "DBN_LBMA_GOLD" },
+        { "id": "DBN_LBMA_PALLAD" },
+        { "id": "DBN_LBMA_PLAT" },
+        { "id": "DBN_LBMA_SILVER"}
+      ]
+    },{
       "caption": "NBB",
       "items": [
         { "id": "DBN_NBB_HICP" },
@@ -547,6 +555,71 @@
           "dfCode": "G17_CAPUTL",
           "dfFnUrl": "s12",
           "df1Prefix": "CAPUTL"
+        }
+      }
+    },
+
+    "DBN_LBMA_GOLD": {
+      "type" : "DBN_LBMA_GOLD",
+      "menuTitle" : "Gold",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Item", "lbma-gold" ]
+        ],
+        "dataSource" : "DB Nomics: LBMA: Gold per Oz",
+        "dfProps": {
+          "dfProvider": "LBMA",
+          "dfCode": "gold"
+        }
+      }
+    },
+    "DBN_LBMA_PALLAD": {
+      "type" : "DBN_LBMA_PALLAD",
+      "menuTitle" : "Palladium",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Item", "lbma-palladium" ]
+        ],
+        "dataSource" : "DB Nomics: LBMA: Palladium per Oz",
+        "dfProps": {
+          "dfProvider": "LBMA",
+          "dfCode": "palladium"
+        }
+      }
+    },
+    "DBN_LBMA_PLAT": {
+      "type" : "DBN_LBMA_PLAT",
+      "menuTitle" : "Platinum",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Item", "lbma-platinum" ]
+        ],
+        "dataSource" : "DB Nomics: LBMA: Platinum per Oz",
+        "dfProps": {
+          "dfProvider": "LBMA",
+          "dfCode": "platinum"
+        }
+      }
+    },
+    "DBN_LBMA_SILVER": {
+      "type" : "DBN_LBMA_SILVER",
+      "menuTitle" : "Silver",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Item", "lbma-silver" ]
+        ],
+        "dataSource" : "DB Nomics: LBMA: Silver per Oz",
+        "dfProps": {
+          "dfProvider": "LBMA",
+          "dfCode": "silver"
         }
       }
     },
