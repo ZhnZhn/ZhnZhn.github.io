@@ -48,9 +48,10 @@
     },{
       "caption": "OECD",
       "items": [
-        { "id": "DBN_OECD_SHORTINDICATOR" },
+        { "id": "DBN_OECD_HPI"},
+        { "id": "DBN_OECD_RATES" },
         { "id": "DBN_OECD_PRODUCERPRICES" },
-        { "id": "DBN_OECD_RATES" }
+        { "id": "DBN_OECD_SHORTINDICATOR" }
       ]
     },{
       "caption": "WTO",
@@ -362,6 +363,23 @@
           "dfProvider": "OECD",
           "dfCode": "MEI",
           "dfSufix": "IXOB.A",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_OECD_HPI": {
+      "type" : "DBN_OECD_HPI",
+      "menuTitle" : "House Prices Indicators, Q",
+      "contCaption" : "",
+      "addProps": "DBN_B_OECD",
+      "dialogProps": {
+        "selectProps": [
+          ["Indicator", "oecd-hpi"]
+        ],
+        "dataSource" : "DB Nomics: OECD: House Prices Indicators",
+        "dfProps": {
+          "dfProvider": "OECD",
+          "dfCode": "HOUSE_PRICES",
           "dfFnUrl": "s12"
         }
       }
