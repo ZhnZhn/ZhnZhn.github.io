@@ -9,7 +9,7 @@ const _fGetByPropName = propName =>
 
 const fnSelector = {
   getPeriodAndValue: json => ({
-    period: _getByPropName(json, 'period'),
+    period: _getByPropName(json, 'period') || [],
     value: _getByPropName(json, 'value')
   }),
 

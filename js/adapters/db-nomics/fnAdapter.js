@@ -91,6 +91,16 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number' && !Number.isNaN(n);
 };
 
+var _isAnnualQuarter = function _isAnnualQuarter(period) {
+  return ("" + period[0]).indexOf("Q") === -1 && ("" + period[1]).indexOf("Q") !== -1;
+};
+
+var _filterQuarterPeriod = function _filterQuarterPeriod(period) {
+  return period.filter(function (item) {
+    return item.indexOf("Q") !== -1;
+  });
+};
+
 var fnAdapter = {
   crError: crError,
   getValue: getValue,
@@ -106,12 +116,13 @@ var fnAdapter = {
       subtitle: _subtitle
     };
   },
-  crData: function crData(json, fromDate) {
+  crData: function crData(json, fromDate, frequency) {
     var data = [],
         _xFrom = fromDate ? ymdToUTC(fromDate) : 0,
         _getPeriodAndValue = getPeriodAndValue(json),
         period = _getPeriodAndValue.period,
         value = _getPeriodAndValue.value,
+        _period = _isAnnualQuarter(period) ? _filterQuarterPeriod(period) : period,
         _len = period.length;
 
     var i = 0,
@@ -119,7 +130,7 @@ var fnAdapter = {
         _y;
 
     for (i; i < _len; i++) {
-      _x = ymdToUTC(period[i]);
+      _x = ymdToUTC(_period[i]);
       _y = value[i];
 
       if (_x > _xFrom && _isNumber(_y)) {

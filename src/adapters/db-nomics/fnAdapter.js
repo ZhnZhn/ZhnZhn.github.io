@@ -72,6 +72,11 @@ const _crInfo = (json, option) => ({
 const _isNumber = n => typeof n === 'number'
  && !Number.isNaN(n);
 
+const _isAnnualQuarter = period => (""+period[0]).indexOf("Q") === -1
+ && (""+period[1]).indexOf("Q") !== -1
+
+const _filterQuarterPeriod = period => period
+  .filter(item => item.indexOf("Q") !== -1);
 
 const fnAdapter = {
   crError,
@@ -87,14 +92,17 @@ const fnAdapter = {
     };
   },
 
-  crData: (json, fromDate) => {
+  crData: (json, fromDate, frequency) => {
     const data = []
     , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
     , { period, value } = getPeriodAndValue(json)
-    , _len = period.length;    
+    , _period = _isAnnualQuarter(period)
+        ? _filterQuarterPeriod(period)
+        : period
+    , _len = period.length;
     let i = 0, _x, _y;
     for (i; i<_len; i++){
-      _x = ymdToUTC(period[i])
+      _x = ymdToUTC(_period[i])
       _y = value[i]
       if (_x > _xFrom && _isNumber(_y)) {
         data.push([ _x, _y ])

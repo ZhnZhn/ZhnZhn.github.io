@@ -20,7 +20,7 @@ var _fGetByPropName = function _fGetByPropName(propName) {
 var fnSelector = {
   getPeriodAndValue: function getPeriodAndValue(json) {
     return {
-      period: _getByPropName(json, 'period'),
+      period: _getByPropName(json, 'period') || [],
       value: _getByPropName(json, 'value')
     };
   },
