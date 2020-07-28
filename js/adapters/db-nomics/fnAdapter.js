@@ -91,14 +91,12 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number' && !Number.isNaN(n);
 };
 
-var _isAnnualQuarter = function _isAnnualQuarter(period) {
-  return ("" + period[0]).indexOf("Q") === -1 && ("" + period[1]).indexOf("Q") !== -1;
+var _isQuarter = function _isQuarter(str) {
+  return ("" + str).indexOf("Q") !== -1;
 };
 
-var _filterQuarterPeriod = function _filterQuarterPeriod(period) {
-  return period.filter(function (item) {
-    return item.indexOf("Q") !== -1;
-  });
+var _isAnnualQuarter = function _isAnnualQuarter(period) {
+  return !_isQuarter(period[0]) && _isQuarter(period[1]);
 };
 
 var fnAdapter = {
@@ -122,8 +120,8 @@ var fnAdapter = {
         _getPeriodAndValue = getPeriodAndValue(json),
         period = _getPeriodAndValue.period,
         value = _getPeriodAndValue.value,
-        _period = _isAnnualQuarter(period) ? _filterQuarterPeriod(period) : period,
-        _len = period.length;
+        _period = _isAnnualQuarter(period) ? period.filter(_isQuarter) : period,
+        _len = _period.length;
 
     var i = 0,
         _x,

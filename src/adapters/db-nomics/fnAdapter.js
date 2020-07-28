@@ -72,11 +72,10 @@ const _crInfo = (json, option) => ({
 const _isNumber = n => typeof n === 'number'
  && !Number.isNaN(n);
 
-const _isAnnualQuarter = period => (""+period[0]).indexOf("Q") === -1
- && (""+period[1]).indexOf("Q") !== -1
+const _isQuarter = str => (""+str).indexOf("Q") !== -1;
 
-const _filterQuarterPeriod = period => period
-  .filter(item => item.indexOf("Q") !== -1);
+const _isAnnualQuarter = period =>
+  !_isQuarter(period[0]) && _isQuarter(period[1]);
 
 const fnAdapter = {
   crError,
@@ -97,9 +96,9 @@ const fnAdapter = {
     , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
     , { period, value } = getPeriodAndValue(json)
     , _period = _isAnnualQuarter(period)
-        ? _filterQuarterPeriod(period)
+        ? period.filter(_isQuarter)
         : period
-    , _len = period.length;
+    , _len = _period.length;
     let i = 0, _x, _y;
     for (i; i<_len; i++){
       _x = ymdToUTC(_period[i])
