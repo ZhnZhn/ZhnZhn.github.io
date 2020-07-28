@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useRef, useCallback } from 'react'
 
 import CaptionInput from './CaptionInput'
 
@@ -18,54 +18,48 @@ const _isNotZeroNumber = n => n
  && typeof n === 'number'
  && n-n === 0;
 
-class FlatButton extends Component {
-
-  static defaultProps = {
-    timeout: 3000
+const  _setPointerEvents = (refBt, value='auto') => {
+  const btNode = refBt && refBt.current;
+  if (btNode && btNode.style) {
+    btNode.style[POINTER_EVENTS] = value
   }
+};
 
-  _setPointerEvents = (value='auto') => {
-    if (this && this.rootNode && this.rootNode.style) {
-       this.rootNode.style[POINTER_EVENTS] = value
-    }
-  }
 
-  _hClick = (event) => {
-    const { timeout, onClick } = this.props;
+const FlatButton = ({
+  timeout=3000,
+  className, style, clDiv=CL.BT_DIV, isPrimary,
+  title='', caption, accessKey,
+  children,
+  onClick
+}) => {
+  const refBt = useRef(null)
+  , _hClick = useCallback((event) => {
     if (_isNotZeroNumber(timeout)) {
-      this._setPointerEvents('none')
-      setTimeout(this._setPointerEvents, timeout)
+      _setPointerEvents(refBt, 'none')
+      setTimeout(() => _setPointerEvents(refBt), timeout)
     }
     onClick(event)
-  }
-
-  _refNode = node => this.rootNode = node
-
-  render() {
-    const {
-           className, style, clDiv=CL.BT_DIV, isPrimary,
-           title='', caption, accessKey,
-           children
-          } = this.props
-        , _style = isPrimary
-             ? {...style, ...S.PRIMARY }
-             : style
-        , _className = className
-             ? `${CL.BT} ${className}`
-             : CL.BT
-        , _title = accessKey
-             ? `${title} [${accessKey}]`
-             : title;
+  }, [timeout, onClick])
+  , _style = isPrimary
+       ? {...style, ...S.PRIMARY }
+       : style
+  , _className = className
+       ? `${CL.BT} ${className}`
+       : CL.BT
+  , _title = accessKey
+       ? `${title} [${accessKey}]`
+       : title;
   return (
     <button
       type="button"
-      ref = {this._refNode}
+      ref = {refBt}
       className={_className}
       style={_style}
       accessKey={accessKey}
       tabIndex={0}
       title={_title}
-      onClick={this._hClick}
+      onClick={_hClick}
     >
       <div className={clDiv}>
         <CaptionInput
@@ -77,8 +71,6 @@ class FlatButton extends Component {
       </div>
     </button>
   );
- }
-
 }
 
 export default FlatButton
