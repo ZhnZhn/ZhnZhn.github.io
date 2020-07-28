@@ -1,65 +1,46 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 //import PropTypes from "prop-types";
+import useListen from '../hooks/useListen'
 
 import DialogContainer from '../zhn-containers/DialogContainer';
 
 const CL_ROOT = "hrz-container";
 
-class BrowserContainer extends Component {
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func
-    }),
-    initBrowserAction: PropTypes.string,
-    showDialogAction: PropTypes.string,
-    onCloseDialog: PropTypes.func
-  }
-  */
+const BrowserContainer = ({
+  store,
+  initBrowserAction,
+  showDialogAction,
+  onCloseDialog
+}) => {
+  const [elBrowsers, setElBrowsers] = useState([]);
 
-  state = {
-    elBrowsers: []
-  }
-
-  componentDidMount(){
-    const { store } = this.props;
-    this.unsubscribe = store.listen(this._onStore)
-  }
-
-  componentWillUnmount(){
-    this.unsubscribe()
-  }
-
-  _onStore = (actionType, data) => {
-     if (actionType === this.props.initBrowserAction){
-       this.setState(prevState => ({
-         elBrowsers: [data, ...prevState.elBrowsers]
-       }))
-     }
-  }
-
-  render(){
-    const {
-      store,
-      showDialogAction,
-      onCloseDialog
-    } = this.props
-    , {
-      elBrowsers
-    } = this.state;
-
-    return (
-      <div className={CL_ROOT}>
-         {elBrowsers.map(Comp => React.cloneElement(Comp))}
-         <DialogContainer
-            maxDialog={3}
-            store={store}
-            showAction={showDialogAction}
-            onCloseDialog={onCloseDialog}
-         />
-      </div>
-    );
-  }
+  useListen(store, (actionType, elBrowser) => {
+    if (actionType === initBrowserAction){
+      setElBrowsers(arrEl => [elBrowser, ...arrEl])
+    }
+  })
+  return (
+    <div className={CL_ROOT}>
+       {elBrowsers}
+       <DialogContainer
+          maxDialog={3}
+          store={store}
+          showAction={showDialogAction}
+          onCloseDialog={onCloseDialog}
+       />
+    </div>
+  );
 }
+
+/*
+BrowserContainer.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func
+  }),
+  initBrowserAction: PropTypes.string,
+  showDialogAction: PropTypes.string,
+  onCloseDialog: PropTypes.func
+}
+*/
 
 export default BrowserContainer
