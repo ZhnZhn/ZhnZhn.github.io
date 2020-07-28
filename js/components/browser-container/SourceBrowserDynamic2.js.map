@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/browser-container/SourceBrowserDynamic2.jsx"],"names":["SourceBrowserDynamic2","shouldComponentUpdate","render","props","Component"],"mappings":";;;;;;;;;;;AAAA;;AAEA;;IAEMA,qB;;;;;;;;;SACJC,qB,GAAA,iCAAuB;AACrB,WAAO,KAAP;AACD,G;;SAEDC,M,GAAA,kBAAQ;AACN,wBAAS,gCAAC,8BAAD,EAAyB,KAAKC,KAA9B,CAAT;AACD,G;;;EAPiCC,gB;;eAUrBJ,qB","sourcesContent":["import React, { Component } from 'react';\r\n\r\nimport MenuBrowserDynamic2 from '../zhn/MenuBrowserDynamic2';\r\n\r\nclass SourceBrowserDynamic2 extends Component {\r\n  shouldComponentUpdate(){\r\n    return false;\r\n  }\r\n\r\n  render(){\r\n    return ( <MenuBrowserDynamic2 {...this.props} />);\r\n  }\r\n}\r\n\r\nexport default SourceBrowserDynamic2\r\n"],"file":"SourceBrowserDynamic2.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-container/SourceBrowserDynamic2.js"
+ ],
+ "file": "../../../src/components/browser-container/SourceBrowserDynamic2.js",
+ "names": [
+  "SourceBrowserDynamic2",
+  "React",
+  "memo",
+  "props"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,qBAAqB,gBAAGC,kBAAMC,IAAN,CAC5B,UAAAC,KAAK;AAAA,sBAAI,gCAAC,8BAAD,EAAyBA,KAAzB,CAAJ;AAAA,CADuB,EAE5B;AAAA,SAAM,IAAN;AAAA,CAF4B,CAA9B;;eAKeH,qB"
+}

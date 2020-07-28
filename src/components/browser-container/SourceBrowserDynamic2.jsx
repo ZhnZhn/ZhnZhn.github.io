@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import MenuBrowserDynamic2 from '../zhn/MenuBrowserDynamic2';
 
-class SourceBrowserDynamic2 extends Component {
-  shouldComponentUpdate(){
-    return false;
-  }
-
-  render(){
-    return ( <MenuBrowserDynamic2 {...this.props} />);
-  }
-}
+const SourceBrowserDynamic2 = React.memo(
+  props => <MenuBrowserDynamic2 {...props} />,
+  () => true
+);
 
 export default SourceBrowserDynamic2
