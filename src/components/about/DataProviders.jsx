@@ -12,21 +12,23 @@ const CL = {
 };
 
 const OPEN_COLOR_L2 = C.GREEN;
-
+const OPEN_COLOR_L1 = C.TITLE
 const ST = {
   ROOT_CHILD: {
-    borderLeft: `1px dashed ${C.YELLOW}`,
+    borderLeft: `2px solid ${OPEN_COLOR_L1}`,
     marginLeft: -5,
     paddingLeft: 8
   },
-  OPEN_CLOSE: {
+  OC_L1: {
+    ...S.LINE_HEIGHT,
+    ...S.P_BOTTOM    
+  },
+  OC_L2: {
     paddingTop: 6,
     lineHeight: 1.8
   },
   CHILD_STYLE: {
-    borderLeft: `1px dotted ${C.GREEN}`,
-    marginLeft: 2,
-    paddingLeft: 6
+    paddingLeft: 4
   },
   P4: {
     paddingTop: 4
@@ -46,10 +48,10 @@ const ST = {
 const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 22):"
-     style={{...S.LINE_HEIGHT, ...S.P_BOTTOM}}
+     caption="Data Providers (All 23):"
+     style={ST.OC_L1}
      captionStyle={ocCaptionStyle}
-     openColor={C.YELLOW}
+     openColor={OPEN_COLOR_L1}
      childStyle={ST.ROOT_CHILD}
   >
     <div>
@@ -99,10 +101,13 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         <span style={S.PROVIDER}>
           <Link.Coinpaprika />
         </span>
+        <span style={S.PROVIDER}>
+          <Link.Binance />
+        </span>
       </p>
       <OpenClose
         caption="(8) Required API Key:"
-        style={ST.OPEN_CLOSE}
+        style={ST.OC_L2}
         captionStyle={ocCaptionStyle}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}
@@ -154,7 +159,7 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
       </OpenClose>
       <OpenClose
         caption="(2) Required Https Proxy:"
-        style={ST.OPEN_CLOSE}
+        style={ST.OC_L2}
         captionStyle={ocCaptionStyle}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}

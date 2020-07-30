@@ -120,7 +120,7 @@ const About = ({ store, isInitShow }) => {
           style={S.LH_14}
           ocStyle={S.LH_18}
           captionStyle={OC_CAPTION_STYLE}
-          openColor={C.YELLOW}
+          openColor={C.TITLE}
         >
           <p style={S.MB_8EM}>
             After clicking a <span style={S.BLACK}>button Show</span> in a Dialog will be an opened up <span style={S.BLACK}>Chart container</span> with charts or empty.

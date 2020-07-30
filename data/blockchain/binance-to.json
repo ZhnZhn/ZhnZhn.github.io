@@ -1,0 +1,9 @@
+{
+  "items":[
+    {"c": "BUSD", "v": "BUSD" },
+    {"c": "TUSD", "v": "TUSD" },
+    {"c": "BNB", "v": "BNB" },
+    {"c": "BTC", "v": "BTC" },
+    {"c": "ETH", "v": "ETH" }    
+  ]
+}

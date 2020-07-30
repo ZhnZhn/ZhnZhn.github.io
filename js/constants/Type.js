@@ -89,6 +89,7 @@ var LoadType = {
   BLS: 'BLS',
   EIA: 'EIA',
   INTR: 'INTR',
+  BN: 'BN',
   CRC: 'CRC',
   CG: 'CG',
   CP: 'CP',

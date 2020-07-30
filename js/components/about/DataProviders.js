@@ -21,20 +21,20 @@ var CL = {
   BR: "provider__note__br"
 };
 var OPEN_COLOR_L2 = _Color["default"].GREEN;
+var OPEN_COLOR_L1 = _Color["default"].TITLE;
 var ST = {
   ROOT_CHILD: {
-    borderLeft: "1px dashed " + _Color["default"].YELLOW,
+    borderLeft: "2px solid " + OPEN_COLOR_L1,
     marginLeft: -5,
     paddingLeft: 8
   },
-  OPEN_CLOSE: {
+  OC_L1: (0, _extends2["default"])({}, _About["default"].LINE_HEIGHT, _About["default"].P_BOTTOM),
+  OC_L2: {
     paddingTop: 6,
     lineHeight: 1.8
   },
   CHILD_STYLE: {
-    borderLeft: "1px dotted " + _Color["default"].GREEN,
-    marginLeft: 2,
-    paddingLeft: 6
+    paddingLeft: 4
   },
   P4: {
     paddingTop: 4
@@ -56,10 +56,10 @@ var DataProviders = function DataProviders(_ref) {
       ocCaptionStyle = _ref.ocCaptionStyle;
   return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
     isClose: isClose,
-    caption: "Data Providers (All 22):",
-    style: (0, _extends2["default"])({}, _About["default"].LINE_HEIGHT, _About["default"].P_BOTTOM),
+    caption: "Data Providers (All 23):",
+    style: ST.OC_L1,
     captionStyle: ocCaptionStyle,
-    openColor: _Color["default"].YELLOW,
+    openColor: OPEN_COLOR_L1,
     childStyle: ST.ROOT_CHILD
   }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].PROVIDER
@@ -91,9 +91,11 @@ var DataProviders = function DataProviders(_ref) {
     style: _About["default"].PROVIDER
   }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].CoinGecko, null)), /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].PROVIDER
-  }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].Coinpaprika, null))), /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].Coinpaprika, null)), /*#__PURE__*/_react["default"].createElement("span", {
+    style: _About["default"].PROVIDER
+  }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].Binance, null))), /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
     caption: "(8) Required API Key:",
-    style: ST.OPEN_CLOSE,
+    style: ST.OC_L2,
     captionStyle: ocCaptionStyle,
     openColor: OPEN_COLOR_L2,
     childStyle: ST.CHILD_STYLE
@@ -133,7 +135,7 @@ var DataProviders = function DataProviders(_ref) {
     style: _About["default"].BLACK
   }, "Note:\xA0"), "This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA."))), /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
     caption: "(2) Required Https Proxy:",
-    style: ST.OPEN_CLOSE,
+    style: ST.OC_L2,
     captionStyle: ocCaptionStyle,
     openColor: OPEN_COLOR_L2,
     childStyle: ST.CHILD_STYLE

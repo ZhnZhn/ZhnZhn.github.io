@@ -18,6 +18,7 @@ import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
 import Quandl from './quandl/Quandl'
 import DbNomics from './db-nomics/DbNomics'
+import Bn from './binance/Bn'
 import Crc from './crypto-compare/Crc'
 import Cg from './coin-gecko/Cg'
 import Cp from './coin-paprika/Cp'
@@ -38,11 +39,12 @@ const RouterAdapter = {
   ...AlphaVantage,
   Barchart,
   Iex,
-  Fmp,  
+  Fmp,
   Bea,
   Bls,
   Eia,
   Intrinio,
+  Bn,
   Crc,
   Cg,
   Cp

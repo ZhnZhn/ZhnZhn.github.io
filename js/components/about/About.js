@@ -133,7 +133,7 @@ var About = function About(_ref) {
     style: _About["default"].LH_14,
     ocStyle: _About["default"].LH_18,
     captionStyle: OC_CAPTION_STYLE,
-    openColor: _Color["default"].YELLOW
+    openColor: _Color["default"].TITLE
   }, /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
   }, "After clicking a ", /*#__PURE__*/_react["default"].createElement("span", {

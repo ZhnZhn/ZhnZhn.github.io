@@ -37,7 +37,8 @@ const LINK_CONFIGS = [
  ["StatSweden","Statistics Sweden", "https://www.scb.se/en/"],
  ["StatFinland","Statistics Finland", "https://www.stat.fi/index_en.html"],
  ["CoinGecko","CoinGecko", "https://www.coingecko.com/en/"],
- ["Coinpaprika", "Coinpaprika", "https://coinpaprika.com/"]
+ ["Coinpaprika", "Coinpaprika", "https://coinpaprika.com/"],
+ ["Binance", "Binance", "https://binance.com/"]
 ];
 
 const Links = {
