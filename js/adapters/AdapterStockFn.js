@@ -19,6 +19,8 @@ var AdapterStockFn = {
   toSeriesData: function toSeriesData(_ref) {
     var _ref$arr = _ref.arr,
         arr = _ref$arr === void 0 ? [] : _ref$arr,
+        _ref$toDate = _ref.toDate,
+        toDate = _ref$toDate === void 0 ? ymdToUTC : _ref$toDate,
         _ref$seriaOption = _ref.seriaOption,
         seriaOption = _ref$seriaOption === void 0 ? {} : _ref$seriaOption,
         _ref$option = _ref.option,
@@ -52,7 +54,7 @@ var AdapterStockFn = {
           close = item.close,
           volume = item.volume,
           date = item[pnDate] || '',
-          _date = ymdToUTC(date);
+          _date = toDate(date);
 
       data.push([_date, close]);
 

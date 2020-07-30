@@ -44,7 +44,8 @@ var crAdapterOHLCV = function crAdapterOHLCV(_ref3) {
       _ref3$getArr = _ref3.getArr,
       getArr = _ref3$getArr === void 0 ? _getArrDf : _ref3$getArr,
       _ref3$crAddConfig = _ref3.crAddConfig,
-      crAddConfig = _ref3$crAddConfig === void 0 ? _crAddConfigDf : _ref3$crAddConfig;
+      crAddConfig = _ref3$crAddConfig === void 0 ? _crAddConfigDf : _ref3$crAddConfig,
+      toDate = _ref3.toDate;
   return {
     toConfig: function toConfig(json, option) {
       var _crCaption = crCaption(option),
@@ -53,6 +54,7 @@ var crAdapterOHLCV = function crAdapterOHLCV(_ref3) {
           id = crId(option),
           dataOption = toSeriesData({
         arr: getArr(json, option),
+        toDate: toDate,
         seriaOption: seriaOption,
         option: option
       }),
@@ -79,6 +81,7 @@ var crAdapterOHLCV = function crAdapterOHLCV(_ref3) {
       var id = crId(option),
           _toSeriesData = toSeriesData({
         arr: getArr(json, option),
+        toDate: toDate,
         seriaOption: (0, _extends2["default"])({}, seriaOption, {
           isAllSeries: false
         }),

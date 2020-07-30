@@ -9,7 +9,7 @@ const {
 const _isUndef = v => typeof v === 'undefined';
 
 const AdapterStockFn = {
-  toSeriesData: ({ arr=[], seriaOption={}, option={} }) => {
+  toSeriesData: ({ arr=[], toDate=ymdToUTC, seriaOption={}, option={} }) => {
     const {
       isAllSeries=true,
       pnDate='date',
@@ -34,7 +34,7 @@ const AdapterStockFn = {
              volume
             } = item
           , date = item[pnDate] || ''
-          , _date = ymdToUTC(date);
+          , _date = toDate(date);
 
       data.push([_date, close])
 
