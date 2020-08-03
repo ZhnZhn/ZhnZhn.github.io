@@ -8,7 +8,9 @@ exports["default"] = void 0;
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
 var C = {
-  URL: 'https://api.binance.com/api/v3/klines?interval=1d'
+  URL: 'https://api.binance.com/api/v3/klines?interval=1d',
+  RESEARCH_URL: 'https://research.binance.com/en/projects',
+  TRADE_URL: 'https://binance.com/en/trade'
 };
 var _isArr = Array.isArray;
 
@@ -20,22 +22,30 @@ var _crDays = function _crDays(_ref) {
   return _d < 1001 ? _d : 1000;
 };
 
-var _setCaption = function _setCaption(option, _to) {
-  var title = option.title;
-  option.title = title.replace(')', "/" + _to + ")");
-  option.subtitle = '';
+var _setLinks = function _setLinks(option, c, s) {
+  var _toIndex = c.indexOf('('),
+      _caption = c.substring(0, _toIndex).trim().toLowerCase().replace(' ', '-'),
+      _s = s.replace('/', '_').toLowerCase();
+
+  option._researchLink = C.RESEARCH_URL + "/" + _caption;
+  option._tradeLink = C.TRADE_URL + "/" + _s;
 };
 
 var BnApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var items = option.items,
-        _symbol = items[0].s,
-        _to = items[1].v,
+    var _option$items = option.items,
+        items = _option$items === void 0 ? [] : _option$items,
+        _ref2 = items[0] || {},
+        _ref2$s = _ref2.s,
+        s = _ref2$s === void 0 ? '' : _ref2$s,
+        _ref2$c = _ref2.c,
+        c = _ref2$c === void 0 ? '' : _ref2$c,
+        _symbol = s.replace('/', ''),
         _limit = _crDays(option);
 
-    _setCaption(option, _to);
+    _setLinks(option, c, s);
 
-    return C.URL + "&symbol=" + _symbol + _to + "&limit=" + _limit;
+    return C.URL + "&symbol=" + _symbol + "&limit=" + _limit;
   },
   checkResponse: function checkResponse(json, option) {
     if (_isArr(json)) {

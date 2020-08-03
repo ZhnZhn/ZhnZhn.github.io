@@ -5,7 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
+
+var crItemLink = _AdapterFn["default"].crItemLink;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
@@ -19,11 +23,20 @@ var _crZhConfig = function _crZhConfig(_ref) {
   };
 };
 
-var _crInfo = function _crInfo(_ref2) {
-  var title = _ref2.title;
+var _crResearchLink = crItemLink.bind(null, 'Binance Research');
+
+var _crTradeLink = crItemLink.bind(null, 'Binance Trade Chart');
+
+var _crDescription = function _crDescription(_ref2) {
+  var _researchLink = _ref2._researchLink,
+      _tradeLink = _ref2._tradeLink;
+  return _crResearchLink(_researchLink, "padding-bottom: 8px;") + _crTradeLink(_tradeLink);
+};
+
+var _crInfo = function _crInfo(option) {
   return {
-    name: title,
-    description: 'Data from Binance cryptocurrency exchange API'
+    name: option.title,
+    description: _crDescription(option)
   };
 };
 

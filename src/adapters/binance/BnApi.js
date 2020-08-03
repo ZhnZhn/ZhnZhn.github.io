@@ -1,7 +1,9 @@
 import dt from '../../utils/DateUtils'
 
 const C = {
-  URL: 'https://api.binance.com/api/v3/klines?interval=1d'
+  URL: 'https://api.binance.com/api/v3/klines?interval=1d',
+  RESEARCH_URL: 'https://research.binance.com/en/projects',
+  TRADE_URL: 'https://binance.com/en/trade'
 }
 
 const _isArr = Array.isArray;
@@ -11,20 +13,25 @@ const _crDays = ({ fromDate }) => {
   return _d < 1001 ? _d : 1000;
 };
 
-const _setCaption = (option, _to) => {
-  const { title } = option;
-  option.title = title.replace(')',`/${_to})`)
-  option.subtitle = ''
+const _setLinks = (option, c, s) => {
+  const _toIndex = c.indexOf('(')
+  , _caption = c.substring(0, _toIndex)
+      .trim()
+      .toLowerCase()
+      .replace(' ', '-')
+  , _s = s.replace('/', '_').toLowerCase();
+  option._researchLink = `${C.RESEARCH_URL}/${_caption}`
+  option._tradeLink = `${C.TRADE_URL}/${_s}`
 }
 
 const BnApi = {
   getRequestUrl(option){
-    const { items } = option
-    , _symbol = items[0].s
-    , _to = items[1].v
-    , _limit = _crDays(option)
-    _setCaption(option, _to)
-    return `${C.URL}&symbol=${_symbol}${_to}&limit=${_limit}`;
+    const { items=[] } = option
+    , { s='', c='' } = items[0] || {}
+    , _symbol = s.replace('/','')
+    , _limit = _crDays(option);
+    _setLinks(option, c, s)
+    return `${C.URL}&symbol=${_symbol}&limit=${_limit}`;
   },
 
   checkResponse(json, option){

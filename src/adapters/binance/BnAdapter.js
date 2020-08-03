@@ -1,4 +1,7 @@
+import AdapterFn from '../AdapterFn'
 import crAdapterOHLCV from '../crAdapterOHLCV'
+
+const { crItemLink } = AdapterFn
 
 const _crZhConfig = ({
     _itemKey,
@@ -10,9 +13,18 @@ const _crZhConfig = ({
     dataSource
   });
 
-const _crInfo = ({ title }) => ({
-  name: title,
-  description: 'Data from Binance cryptocurrency exchange API'
+const _crResearchLink = crItemLink
+    .bind(null, 'Binance Research');
+const _crTradeLink = crItemLink
+    .bind(null, 'Binance Trade Chart');
+
+const _crDescription = ({ _researchLink, _tradeLink }) =>
+ _crResearchLink(_researchLink, "padding-bottom: 8px;")
+ + _crTradeLink(_tradeLink);
+
+const _crInfo = (option) => ({
+  name: option.title,
+  description: _crDescription(option)
 })
 
 const _crAddConfig = ({ option }) => ({
