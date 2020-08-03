@@ -1,4 +1,7 @@
 
+const _crPTag = (style) =>
+ style ? `<p style="${style}">` : '<p>';
+
 const crFn = {
   crError: (errCaption='', message='') => ({
     errCaption,
@@ -10,7 +13,7 @@ const crFn = {
     Math.random().toString(36).substring(2, 9)
   ).toUpperCase(),
 
-  crItemLink: (caption, itemUrl) => `<p><a href="${itemUrl}" style="padding-top: 4px;">${caption}</a></p>`
+  crItemLink: (caption, itemUrl, style) => `${_crPTag(style)}<a href="${itemUrl}">${caption}</a></p>`
 }
 
 export default crFn
