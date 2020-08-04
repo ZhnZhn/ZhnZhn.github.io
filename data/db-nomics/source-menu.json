@@ -185,6 +185,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
+        "isFdw": true,
         "nInitFromDate": 3,
         "selectProps": [
           [ "Rate", "ecb-exchange-rates" ]
@@ -583,6 +584,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
+        "isFdw": true,
         "selectProps": [
           [ "Item", "lbma-gold" ]
         ],
@@ -599,6 +601,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
+        "isFdw": true,
         "selectProps": [
           [ "Item", "lbma-palladium" ]
         ],
@@ -615,6 +618,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
+        "isFdw": true,
         "selectProps": [
           [ "Item", "lbma-platinum" ]
         ],
@@ -631,6 +635,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
+        "isFdw": true,
         "selectProps": [
           [ "Item", "lbma-silver" ]
         ],
@@ -664,6 +669,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps" : {
+        "isFdw": true,
         "nInitFromDate": 5,
         "selectProps": [
           [ "Item", "nbb-stocks-commodities" ]
