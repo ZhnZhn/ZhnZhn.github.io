@@ -92,18 +92,29 @@ var _isYearOrMapFrequencyKey = function _isYearOrMapFrequencyKey(key, mapFrequen
   return !mapFrequency || mapFrequency === "Y" || key.indexOf(mapFrequency) !== -1;
 };
 
+var _crPoint = function _crPoint(x, y, status) {
+  return status && status !== ':' && status.length === 1 ? [x, y, status] : [x, y];
+};
+
 var EuroStatFn = {
   joinBy: joinBy,
-  createData: function createData(timeIndex, value, mapFrequency) {
-    var data = [];
+  findMinY: findMinY,
+  createData: function createData(json, mapFrequency) {
+    var _EuroStatFn$crTimeInd = EuroStatFn.crTimeIndexAndValue(json),
+        timeIndex = _EuroStatFn$crTimeInd.timeIndex,
+        value = _EuroStatFn$crTimeInd.value,
+        status = _EuroStatFn$crTimeInd.status,
+        data = [];
+
     var max = Number.NEGATIVE_INFINITY,
         min = Number.POSITIVE_INFINITY;
     Object.keys(timeIndex).forEach(function (key) {
       if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
-        var y = value[timeIndex[key]];
+        var _valueIndex = timeIndex[key],
+            y = value[_valueIndex];
 
         if (y != null) {
-          data.push([EuroStatFn.convertToUTC(key), y]);
+          data.push(_crPoint(EuroStatFn.convertToUTC(key), y, status[_valueIndex]));
 
           if (y >= max) {
             max = y;
@@ -121,13 +132,19 @@ var EuroStatFn = {
       min: min
     };
   },
-  toPointArr: function toPointArr(timeIndex, value) {
-    var data = [];
-    Object.keys(timeIndex).map(function (key) {
-      var pointValue = value[timeIndex[key]];
+  toPointArr: function toPointArr(json) {
+    var _EuroStatFn$crTimeInd2 = EuroStatFn.crTimeIndexAndValue(json),
+        timeIndex = _EuroStatFn$crTimeInd2.timeIndex,
+        value = _EuroStatFn$crTimeInd2.value,
+        status = _EuroStatFn$crTimeInd2.status,
+        data = [];
 
-      if (!(pointValue == null)) {
-        data.push([key.replace('M', '-'), pointValue]);
+    Object.keys(timeIndex).map(function (key) {
+      var _valueIndex = timeIndex[key],
+          y = value[_valueIndex];
+
+      if (y != null) {
+        data.push(_crPoint(key.replace('M', '-'), y, status[_valueIndex]));
       }
     });
     return data;
@@ -320,12 +337,13 @@ var EuroStatFn = {
       fromDate: '1996-01-30'
     };
   },
-  findMinY: findMinY,
   crTimeIndexAndValue: function crTimeIndexAndValue(json) {
     var _json$dimension = json.dimension,
         dimension = _json$dimension === void 0 ? {} : _json$dimension,
         _json$value = json.value,
         value = _json$value === void 0 ? [] : _json$value,
+        _json$status = json.status,
+        status = _json$status === void 0 ? {} : _json$status,
         _dimension$time = dimension.time,
         time = _dimension$time === void 0 ? {} : _dimension$time,
         _time$category = time.category,
@@ -334,7 +352,8 @@ var EuroStatFn = {
         timeIndex = _category$index === void 0 ? 0 : _category$index;
     return {
       timeIndex: timeIndex,
-      value: value
+      value: value,
+      status: status
     };
   }
 };

@@ -14,9 +14,7 @@ const _addItemCaptionTo = (option) => {
 
 const toMap = {
   createConfig : (json, option) => {
-    const timeIndex = json.dimension.time.category.index
-    , value = json.value
-    , { data } = createData(timeIndex, value)
+    const { data } = createData(json)
     , config = ChartConfig.crAreaConfig();
 
      _addItemCaptionTo(option)

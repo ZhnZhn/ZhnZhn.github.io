@@ -17,16 +17,18 @@ const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json'
    '#74c476'
   ];
 
+const _isArr = Array.isArray
+
 const _findFeature = function(features, id){
-  if (!Array.isArray(features)) {
-    return void 0;
+  if (!_isArr(features)) {
+    return;
   }
   for(let i=0; i<features.length; i++){
     if (features?.[i]?.properties.id === id){
       return features[i];
     }
   }
-  return void 0;
+  return;
 };
 
 
@@ -36,11 +38,12 @@ const _mergeGeoAndValue = function(sGeo, dGeo, json){
     , maxValue = Number.NEGATIVE_INFINITY;
   sGeo.forEach((cell, index) => {
     const feature = _findFeature(json.features, dGeo.id[index])
-        , value = cell.value;
+    , { value, status } = cell;
     if (feature && value){
       feature.properties.value = value;
 
       const point = [value, 0];
+      point.status = status
       point.id = feature.properties.id;
       points.push(point);
 

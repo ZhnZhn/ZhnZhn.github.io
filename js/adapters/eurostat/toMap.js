@@ -20,9 +20,7 @@ var _addItemCaptionTo = function _addItemCaptionTo(option) {
 
 var toMap = {
   createConfig: function createConfig(json, option) {
-    var timeIndex = json.dimension.time.category.index,
-        value = json.value,
-        _createData = createData(timeIndex, value),
+    var _createData = createData(json),
         data = _createData.data,
         config = _ChartConfig["default"].crAreaConfig();
 

@@ -50,12 +50,14 @@ const _crItem = (
 
 const _crPoint = item => ({
   c: _getMonth(item[0]),
-  y: item[1]
+  y: item[1],
+  status: item[2]
 });
 const _crValuePoint = item => item[1];
 const _crValueYearPoint = item => ({
   v: item[1],
-  y: _getYear(item[0])
+  y: _getYear(item[0]),
+  status: item[2]
 });
 const _findHighLow = (arr) => {
   let h = { v: Number.NEGATIVE_INFINITY, y: '' },
@@ -69,8 +71,8 @@ const _findHighLow = (arr) => {
     }
   })
   return {
-    high: h.v, yHigh: h.y,
-    low: l.v, yLow: l.y
+    high: h.v, yHigh: h.y, yHs: h.status,
+    low: l.v, yLow: l.y, yLs: l.status
   };
 }
 const _crHighLowPoint = (key, arr) => {
@@ -219,7 +221,7 @@ const _crZhConfig = (option, { legend }) => {
     id: _id,
     key: _id,
     itemCaption,
-    isWithoutIndicator: true,    
+    isWithoutIndicator: true,
     legend, dataSource, linkFn, item
   };
 }

@@ -2,13 +2,15 @@ import fn from './tpFn'
 
 const {
   crHeader, crRow,
-  toDateFormatDMYT
+  toDateFormatDMYT,
+  getStatus
  } = fn;
 
-const _crValue = function({date, id, color, valueText='Value', value}){
+const _crValue = function({date, id, color, valueText='Value', value, point}){
+  const status = getStatus(point);
   return `${crHeader(date, id)}
   <div class="tp__body">
-    ${crRow(valueText, value, { color })}
+    ${crRow(valueText, value, { color, status })}
   </div>`;
 }
 

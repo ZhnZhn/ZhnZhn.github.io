@@ -27,11 +27,14 @@ const _fnIdToCountry = (id) => {
    return name ? name : id;
 }
 
-const _combineToArr = (dGeo, sGeo) => {
+const _combineToArr = (dGeo, sGeo, status={}) => {
   const arr = [];
   dGeo.forEach((id, index) => {
     if (sGeo[index] != null && sGeo[index].value != null){
-      arr.push({ id, value : sGeo[index].value });
+      arr.push({ id,
+         value: sGeo[index].value,
+         status: status[index]
+      });
     }
   })
   return arr;
@@ -42,10 +45,10 @@ const _splitForConfig = (arr) => {
    let max = Number.NEGATIVE_INFINITY
      , min = Number.POSITIVE_INFINITY;
    arr.forEach((item) => {
-     const { id, value } = item
+     const { id, value, status } = item
          , country = _fnIdToCountry(id);
      categories.push(country);
-     data.push({ y: value, c: country, id: country })
+     data.push({ y: value, c: country, id: country, status })
      if (value>=max) { max = value; }
      if (value<=min) { min = value; }
     })
@@ -131,7 +134,7 @@ const JsonStatFn = {
   trJsonToCategory : (json, configSlice) => {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
     return _fnFetchHmIdCountry().then(() => {
-       return Box( _combineToArr(dGeo.id, sGeo) )
+       return Box( _combineToArr(dGeo.id, sGeo, json.status) )
          .map(arr => arr.sort(AdapterFn.compareByValueId))
          .fold(_splitForConfig);
        });

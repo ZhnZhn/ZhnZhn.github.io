@@ -35,13 +35,18 @@ var _fnIdToCountry = function _fnIdToCountry(id) {
   return name ? name : id;
 };
 
-var _combineToArr = function _combineToArr(dGeo, sGeo) {
+var _combineToArr = function _combineToArr(dGeo, sGeo, status) {
+  if (status === void 0) {
+    status = {};
+  }
+
   var arr = [];
   dGeo.forEach(function (id, index) {
     if (sGeo[index] != null && sGeo[index].value != null) {
       arr.push({
         id: id,
-        value: sGeo[index].value
+        value: sGeo[index].value,
+        status: status[index]
       });
     }
   });
@@ -56,13 +61,15 @@ var _splitForConfig = function _splitForConfig(arr) {
   arr.forEach(function (item) {
     var id = item.id,
         value = item.value,
+        status = item.status,
         country = _fnIdToCountry(id);
 
     categories.push(country);
     data.push({
       y: value,
       c: country,
-      id: country
+      id: country,
+      status: status
     });
 
     if (value >= max) {
@@ -174,7 +181,7 @@ var JsonStatFn = {
         sGeo = _JsonStatFn$createGeo.sGeo;
 
     return _fnFetchHmIdCountry().then(function () {
-      return (0, _Box["default"])(_combineToArr(dGeo.id, sGeo)).map(function (arr) {
+      return (0, _Box["default"])(_combineToArr(dGeo.id, sGeo, json.status)).map(function (arr) {
         return arr.sort(_AdapterFn["default"].compareByValueId);
       }).fold(_splitForConfig);
     });

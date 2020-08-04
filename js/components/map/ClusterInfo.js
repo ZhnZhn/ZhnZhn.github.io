@@ -29,26 +29,26 @@ var SPOT_COLORS = {
 var S = {
   CAPTION: {
     position: 'relative',
-    opacity: 0.7,
+    padding: 3,
+    marginBottom: 5,
     lineHeight: 1.8,
-    padding: '3px',
-    marginBottom: '5px'
+    opacity: 0.7
   },
   CAPTION_BT: {
     position: 'absolute',
-    top: '4px',
-    right: '8px',
+    top: 4,
+    right: 8,
     fontSize: '18px',
     fontWeight: 'bold',
     cursor: 'pointer'
   },
   ITEM_ROOT: {
-    padding: '3px',
+    padding: 3,
     cursor: 'pointer'
   },
   ITEM_TITLE: {
     display: 'inline-block',
-    width: '30px'
+    width: 30
   },
   ITEM_VALUE: {
     display: 'inline-block',
@@ -74,7 +74,11 @@ var Caption = function Caption(_ref) {
 var Item = function Item(_ref2) {
   var title = _ref2.title,
       value = _ref2.value,
+      status = _ref2.status,
       onClick = _ref2.onClick;
+
+  var _value = status ? value + " (" + status + ")" : value;
+
   return /*#__PURE__*/_react["default"].createElement("p", {
     style: S.ITEM_ROOT,
     onClick: onClick
@@ -82,7 +86,7 @@ var Item = function Item(_ref2) {
     style: S.ITEM_TITLE
   }, title), /*#__PURE__*/_react["default"].createElement("span", {
     style: S.ITEM_VALUE
-  }, value));
+  }, _value));
 };
 
 var ClusterItem = /*#__PURE__*/function (_Component) {
@@ -93,6 +97,7 @@ var ClusterItem = /*#__PURE__*/function (_Component) {
     point: PropTypes.shape({
       0: PropTypes.number,
       id: PropTypes.string,
+      status: PropTypes.string,
       seria: PropTypes.shape({
         data: PropTypes.array
       })
@@ -105,7 +110,7 @@ var ClusterItem = /*#__PURE__*/function (_Component) {
   function ClusterItem(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._handleClickItem = function () {
       _this.setState(function (prevState) {
@@ -118,7 +123,7 @@ var ClusterItem = /*#__PURE__*/function (_Component) {
     _this.data = props.point.seria.data;
     _this.pointIndex = _this.data.length - 1;
     _this.state = {
-      isShowChart: props.index < 3 ? true : false
+      isShowChart: props.index < 3
     };
     return _this;
   }
@@ -143,6 +148,7 @@ var ClusterItem = /*#__PURE__*/function (_Component) {
     return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(Item, {
       title: point.id,
       value: point[0],
+      status: point.status,
       onClick: this._handleClickItem
     }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowChart
@@ -198,10 +204,17 @@ Cluster.propTypes = {
 var ClusterInfo = /*#__PURE__*/function (_Component2) {
   (0, _inheritsLoose2["default"])(ClusterInfo, _Component2);
 
-  function ClusterInfo(props) {
+  function ClusterInfo() {
     var _this2;
 
-    _this2 = _Component2.call(this) || this;
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this2 = _Component2.call.apply(_Component2, [this].concat(args)) || this;
+    _this2.state = {
+      isShowRange: false
+    };
 
     _this2._handleToggleRange = function () {
       _this2.setState(function (prevState) {
@@ -211,9 +224,6 @@ var ClusterInfo = /*#__PURE__*/function (_Component2) {
       });
     };
 
-    _this2.state = {
-      isShowRange: false
-    };
     return _this2;
   }
 

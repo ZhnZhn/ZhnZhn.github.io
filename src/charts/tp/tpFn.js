@@ -18,7 +18,8 @@ const C = {
 }
 
 const TITLE_STYLE = `style="color:${C.TITLE_C};"`;
-const FONT_STYLE = 'font-size:16px;font-weight:bold';
+const FONT_STYLE = 'font-size:16px;font-weight:bold;';
+const STATUS_STYLE = 'padding-left:4px;'
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -43,14 +44,19 @@ const _isValueEmpty = v => v === 'NoData'
  || v === ''
  || v == null;
 
+const _crSpanStyle = (color, tailStyle='') => `style="color:${color};${FONT_STYLE}${tailStyle}"`;
+
 const tpFn = {
-  crSpan: (t='', v='', { color=C.VALUE_C }={}) => {
-    const _vStyle = `style="color:${color};${FONT_STYLE}"`
-        , _t = t ? `${t}: `: ''
-        , _v = v !== null ? v: '';
+  crSpan: (t='', v='', { color=C.VALUE_C, status }={}) => {
+    const _vStyle = _crSpanStyle(color)
+    , _t = t ? `${t}: `: ''
+    , _v = v !== null ? v: ''
+    , _statusSpan = status
+         ? `<span ${_crSpanStyle(color, STATUS_STYLE)}>(${status})</span>`
+         : '';
     return `
     <span ${TITLE_STYLE}>${_t}</span>
-    <span ${_vStyle}>${_v}</span>`;
+    <span ${_vStyle}>${_v}</span>${_statusSpan}`;
   },
   crNotEmptySpan: (title, v) => _isValueEmpty(v)
     ? ''
@@ -74,6 +80,17 @@ const tpFn = {
 
   addHideHandler: (id, point, fn) => {
     _addClickOnceById(id, _fHideTooltip(point, fn))
+  },
+
+  getStatus: point => {
+    const { index, series={} } = point
+    , { userOptions={} } = series
+    , { data=[] } = userOptions
+    , _p = data[index] || []
+    , _status = _p[2];
+    return _status && _status !== ':'
+      ? _status
+      : void 0;
   }
 
 };

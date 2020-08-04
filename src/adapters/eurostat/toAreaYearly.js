@@ -2,8 +2,7 @@ import ChartConfig from '../../charts/ChartConfig'
 import EuroStatFn from './EuroStatFn';
 import toYearly from '../toYearsByMonths'
 
-const {
-  crTimeIndexAndValue,
+const {  
   toPointArr,
   crDataSource,
   crLinkConf,
@@ -12,8 +11,7 @@ const {
 
 const toAreaYearly = {
    createConfig: (json, option) => {
-     const { timeIndex, value } = crTimeIndexAndValue(json)
-     , data = toPointArr(timeIndex, value).reverse()
+     const data = toPointArr(json).reverse()
      , { title, subtitle } = option
      , config = toYearly.toConfig(
          data, {
@@ -28,7 +26,7 @@ const toAreaYearly = {
    },
 
    createSeria: (json, option) => {
-     return ChartConfig.crSeria({       
+     return ChartConfig.crSeria({
        zhValueText: 'Empty Seria'
      });
    }

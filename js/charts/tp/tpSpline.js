@@ -9,7 +9,8 @@ var _tpFn = _interopRequireDefault(require("./tpFn"));
 
 var crHeader = _tpFn["default"].crHeader,
     crRow = _tpFn["default"].crRow,
-    toDateFormatDMYT = _tpFn["default"].toDateFormatDMYT;
+    toDateFormatDMYT = _tpFn["default"].toDateFormatDMYT,
+    getStatus = _tpFn["default"].getStatus;
 
 var _crValue = function _crValue(_ref) {
   var date = _ref.date,
@@ -17,9 +18,12 @@ var _crValue = function _crValue(_ref) {
       color = _ref.color,
       _ref$valueText = _ref.valueText,
       valueText = _ref$valueText === void 0 ? 'Value' : _ref$valueText,
-      value = _ref.value;
+      value = _ref.value,
+      point = _ref.point;
+  var status = getStatus(point);
   return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow(valueText, value, {
-    color: color
+    color: color,
+    status: status
   }) + "\n  </div>";
 };
 

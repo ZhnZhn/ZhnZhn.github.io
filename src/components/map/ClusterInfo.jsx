@@ -19,26 +19,26 @@ const SPOT_COLORS = {'-1': COLOR_MIN, '0': COLOR_EQUAL, '1': COLOR_MAX };
 const S = {
   CAPTION: {
     position: 'relative',
-    opacity: 0.7,
+    padding: 3,
+    marginBottom: 5,
     lineHeight: 1.8,
-    padding: '3px',
-    marginBottom: '5px'
+    opacity: 0.7
   },
   CAPTION_BT: {
     position: 'absolute',
-    top: '4px',
-    right: '8px',
+    top: 4,
+    right: 8,
     fontSize: '18px',
     fontWeight: 'bold',
     cursor: 'pointer'
   },
   ITEM_ROOT: {
-    padding: '3px',
+    padding: 3,
     cursor: 'pointer'
   },
   ITEM_TITLE: {
     display: 'inline-block',
-    width: '30px',
+    width: 30,
   },
   ITEM_VALUE: {
     display: 'inline-block',
@@ -55,19 +55,24 @@ const Caption = ({ color, from, to, onClick }) => (
 );
 
 
-const Item = ({ title, value, onClick }) => (
-  <p
-    style={S.ITEM_ROOT}
-    onClick={onClick}
-  >
-    <span style={S.ITEM_TITLE}>
-       {title}
-    </span>
-    <span style={S.ITEM_VALUE}>
-      {value}
-    </span>
-  </p>
-);
+const Item = ({ title, value, status, onClick }) => {
+  const _value = status
+    ? `${value} (${status})`
+    : value;
+  return (
+    <p
+      style={S.ITEM_ROOT}
+      onClick={onClick}
+    >
+      <span style={S.ITEM_TITLE}>
+         {title}
+      </span>
+      <span style={S.ITEM_VALUE}>
+        {_value}
+      </span>
+    </p>
+  );
+}
 
 class ClusterItem extends Component {
   /*
@@ -75,6 +80,7 @@ class ClusterItem extends Component {
     point: PropTypes.shape({
       0: PropTypes.number,
       id: PropTypes.string,
+      status: PropTypes.string,
       seria: PropTypes.shape({
         data: PropTypes.array
       })
@@ -86,37 +92,35 @@ class ClusterItem extends Component {
   */
 
   constructor(props){
-    super()
+    super(props)
     this.data = props.point.seria.data
     this.pointIndex = this.data.length - 1
     this.state = {
-      isShowChart: (props.index<3) ? true : false
+      isShowChart: props.index < 3
     }
   }
 
   _handleClickItem = () => {
-    this.setState(prevState => {
-      return {
+    this.setState(prevState => ({
         isShowChart: !prevState.isShowChart
-      };
-    })
+    }))
   }
 
   render(){
       const { point, color, isShowRange } = this.props
           , { isShowChart } = this.state
-          , _maxLabel = (isShowRange)
+          , _maxLabel = isShowRange
               ? <SparklinesMaxLabel color={COLOR_MAX} fontSize={14} />
               : <span/>
-          , _minLabel = (isShowRange)
+          , _minLabel = isShowRange
               ? <SparklinesMinLabel color={COLOR_MIN} fontSize={14} />
               : <span/>;
-
       return (
         <div>
           <Item
             title={point.id}
             value={point[0]}
+            status={point.status}
             onClick={this._handleClickItem}
           />
           <ShowHide isShow={isShowChart}>
@@ -175,14 +179,14 @@ Cluster.propTypes = {
 */
 
 class ClusterInfo extends Component {
-  constructor(props){
-    super()
-    this.state = {
-      isShowRange: false
-    }
+  state = {
+    isShowRange: false
   }
+
   _handleToggleRange = () => {
-    this.setState(prevState => ({isShowRange: !prevState.isShowRange }))
+    this.setState(prevState => ({
+      isShowRange: !prevState.isShowRange
+    }))
   }
 
   render(){

@@ -77,7 +77,8 @@ var _crItem = function _crItem(name, _ref2) {
 var _crPoint = function _crPoint(item) {
   return {
     c: _getMonth(item[0]),
-    y: item[1]
+    y: item[1],
+    status: item[2]
   };
 };
 
@@ -88,7 +89,8 @@ var _crValuePoint = function _crValuePoint(item) {
 var _crValueYearPoint = function _crValueYearPoint(item) {
   return {
     v: item[1],
-    y: _getYear(item[0])
+    y: _getYear(item[0]),
+    status: item[2]
   };
 };
 
@@ -113,8 +115,10 @@ var _findHighLow = function _findHighLow(arr) {
   return {
     high: h.v,
     yHigh: h.y,
+    yHs: h.status,
     low: l.v,
-    yLow: l.y
+    yLow: l.y,
+    yLs: l.status
   };
 };
 

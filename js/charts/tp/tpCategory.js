@@ -19,13 +19,16 @@ var _crSimple = function _crSimple(_ref) {
   var id = _ref.id,
       point = _ref.point;
   var y = point.y,
+      status = point.status,
       category = point.category,
       c = point.c,
       _point$series = point.series,
       series = _point$series === void 0 ? {} : _point$series,
       name = series.name,
       color = series.color;
-  return crHeader(category || c, id) + "\n   <div class=\"tp__body\">\n     " + crRow('Value', toNumberFormatAll(y)) + "\n     " + crRow('Seria', name, {
+  return crHeader(category || c, id) + "\n   <div class=\"tp__body\">\n     " + crRow('Value', toNumberFormatAll(y), {
+    status: status
+  }) + "\n     " + crRow('Seria', name, {
     color: color
   }) + "\n   </div>";
 }; //style='cursor:pointer;pointer-events:visible;color:cadetblue;'
@@ -36,8 +39,11 @@ var _crRemove = function _crRemove(_ref2) {
       point = _ref2.point;
   var y = point.y,
       c = point.c,
-      category = point.category;
-  return crHeader(c || category, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Value', toNumberFormatAll(y)) + "\n    <div class='tp__bt' id=" + (id + '_R') + ">\n         Remove\n    </div>\n  </div>";
+      category = point.category,
+      status = point.status;
+  return crHeader(c || category, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Value', toNumberFormatAll(y), {
+    status: status
+  }) + "\n    <div class='tp__bt' id=" + (id + '_R') + ">\n         Remove\n    </div>\n  </div>";
 };
 
 var _addCategoryHandlersImpl = function _addCategoryHandlersImpl(id, point) {
@@ -53,17 +59,27 @@ var _addCategoryHandlers = function _addCategoryHandlers(id, point) {
   }, 1);
 };
 
+var _crY = function _crY(y, status) {
+  return status && status !== ':' ? y + " (" + status + ")" : y;
+};
+
 var _fnCategoryRHLY = function _fnCategoryRHLY(_ref3) {
   var id = _ref3.id,
       point = _ref3.point;
+
   var high = point.high,
       yHigh = point.yHigh,
+      yHs = point.yHs,
       low = point.low,
       yLow = point.yLow,
-      c = point.c;
-  return crHeader(c, id) + "\n  <div class=\"tp__body\">\n    <div>\n      " + crSpan('High', high) + "\n      " + crSpan('', yHigh, {
+      yLs = point.yLs,
+      c = point.c,
+      _high = _crY(high, yHs),
+      _low = _crY(low, yLs);
+
+  return crHeader(c, id) + "\n  <div class=\"tp__body\">\n    <div>\n      " + crSpan('High', _high) + "\n      " + crSpan('', yHigh, {
     color: _tpConfig["default"].YEAR_C
-  }) + "\n    </div>\n    <div>\n      " + crSpan('&nbsp;Low', low) + "\n      " + crSpan('', yLow, {
+  }) + "\n    </div>\n    <div>\n      " + crSpan('&nbsp;Low', _low) + "\n      " + crSpan('', yLow, {
     color: _tpConfig["default"].YEAR_C
   }) + "\n    </div>\n  </div>";
 };

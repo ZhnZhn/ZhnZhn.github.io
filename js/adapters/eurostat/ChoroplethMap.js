@@ -31,10 +31,11 @@ var URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
     NUMBER_OF_CLUSTERS = 6,
     NUMBER_OF_ITERATION = 100,
     COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
+var _isArr = Array.isArray;
 
 var _findFeature = function _findFeature(features, id) {
-  if (!Array.isArray(features)) {
-    return void 0;
+  if (!_isArr(features)) {
+    return;
   }
 
   for (var i = 0; i < features.length; i++) {
@@ -45,7 +46,7 @@ var _findFeature = function _findFeature(features, id) {
     }
   }
 
-  return void 0;
+  return;
 };
 
 var _mergeGeoAndValue = function _mergeGeoAndValue(sGeo, dGeo, json) {
@@ -54,11 +55,13 @@ var _mergeGeoAndValue = function _mergeGeoAndValue(sGeo, dGeo, json) {
       maxValue = Number.NEGATIVE_INFINITY;
   sGeo.forEach(function (cell, index) {
     var feature = _findFeature(json.features, dGeo.id[index]),
-        value = cell.value;
+        value = cell.value,
+        status = cell.status;
 
     if (feature && value) {
       feature.properties.value = value;
       var point = [value, 0];
+      point.status = status;
       point.id = feature.properties.id;
       points.push(point);
 

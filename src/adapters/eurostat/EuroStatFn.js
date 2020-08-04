@@ -79,20 +79,29 @@ const _isYearOrMapFrequencyKey = (key, mapFrequency) => !mapFrequency
   || mapFrequency === "Y"
   || key.indexOf(mapFrequency) !== -1;
 
+const _crPoint = (x, y, status) => status
+  && status !== ':' && status.length === 1
+   ? [ x, y, status ]
+   : [ x, y ];
+
 const EuroStatFn = {
    joinBy,
+   findMinY,
 
-  createData(timeIndex, value, mapFrequency){
-    const data = [];
+  createData(json, mapFrequency){
+    const { timeIndex, value, status } = EuroStatFn.crTimeIndexAndValue(json)
+    , data = [];
     let max = Number.NEGATIVE_INFINITY
       , min = Number.POSITIVE_INFINITY;
-
     Object.keys(timeIndex).forEach(key => {
        if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
-         const y = value[timeIndex[key]];
+         const _valueIndex = timeIndex[key]
+         , y = value[_valueIndex];
          if (y != null){
-           data.push([ EuroStatFn.convertToUTC(key), y ]);
-
+           data.push(_crPoint(
+             EuroStatFn.convertToUTC(key),
+             y, status[_valueIndex]
+           ));
            if (y>=max) { max = y; }
            if (y<=min) { min = y; }
          }
@@ -104,15 +113,17 @@ const EuroStatFn = {
     };
   },
 
-  toPointArr(timeIndex, value){
-    const data = [];
+  toPointArr(json){
+    const { timeIndex, value, status } = EuroStatFn.crTimeIndexAndValue(json)
+    , data = [];
     Object.keys(timeIndex).map((key) => {
-       const pointValue = value[timeIndex[key]];
-       if ( !(pointValue == null) ){
-         data.push([
-            key.replace('M', '-'),
-            pointValue
-          ]);
+       const _valueIndex = timeIndex[key]
+       , y = value[_valueIndex];
+       if ( y != null ){
+         data.push(_crPoint(
+           key.replace('M', '-'),
+           y, status[_valueIndex]
+         ));
        }
     })
 
@@ -129,7 +140,7 @@ const EuroStatFn = {
     if (_isLineSeria(seriaType)){
       config.valueMoving = valueMoving(data)
     }
-    
+
     config.series[0].data = data;
   },
 
@@ -269,14 +280,12 @@ const EuroStatFn = {
     };
   },
 
-  findMinY: findMinY,
-
   crTimeIndexAndValue: (json) => {
-    const { dimension={}, value=[] } = json
+    const { dimension={}, value=[], status={} } = json
         , { time={} } = dimension
         , { category={} } = time
         , { index:timeIndex=0 } = category;
-    return { timeIndex, value };
+    return { timeIndex, value, status };
   }
 }
 

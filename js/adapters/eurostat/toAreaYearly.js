@@ -13,17 +13,13 @@ var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
 var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
-var crTimeIndexAndValue = _EuroStatFn["default"].crTimeIndexAndValue,
-    toPointArr = _EuroStatFn["default"].toPointArr,
+var toPointArr = _EuroStatFn["default"].toPointArr,
     crDataSource = _EuroStatFn["default"].crDataSource,
     crLinkConf = _EuroStatFn["default"].crLinkConf,
     setInfo = _EuroStatFn["default"].setInfo;
 var toAreaYearly = {
   createConfig: function createConfig(json, option) {
-    var _crTimeIndexAndValue = crTimeIndexAndValue(json),
-        timeIndex = _crTimeIndexAndValue.timeIndex,
-        value = _crTimeIndexAndValue.value,
-        data = toPointArr(timeIndex, value).reverse(),
+    var data = toPointArr(json).reverse(),
         title = option.title,
         subtitle = option.subtitle,
         config = _toYearsByMonths["default"].toConfig(data, (0, _extends2["default"])({

@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/toMap.js"],"names":["createData","EuroStatFn","setDataAndInfo","_addItemCaptionTo","option","itemCaption","subtitle","toMap","createConfig","json","timeIndex","dimension","time","category","index","value","data","config","ChartConfig","crAreaConfig","Object","assign","zhDialog","zhMapSlice"],"mappings":";;;;;;;AAAA;;AAEA;;IAGEA,U,GAEEC,sB,CAFFD,U;IACAE,c,GACED,sB,CADFC,c;;AAGF,IAAMC,iBAAiB,GAAG,SAApBA,iBAAoB,CAACC,MAAD,EAAY;AAAA,MAC5BC,WAD4B,GACFD,MADE,CAC5BC,WAD4B;AAAA,MACfC,QADe,GACFF,MADE,CACfE,QADe;AAEpCF,EAAAA,MAAM,CAACC,WAAP,GAAqBA,WAAW,IAAIC,QAApC;AACD,CAHD;;AAKA,IAAMC,KAAK,GAAG;AACZC,EAAAA,YAAY,EAAG,sBAACC,IAAD,EAAOL,MAAP,EAAkB;AACzB,QAAAM,SAAS,GAAGD,IAAI,CAACE,SAAL,CAAeC,IAAf,CAAoBC,QAApB,CAA6BC,KAAzC;AAAA,QACJC,KADI,GACIN,IAAI,CAACM,KADT;AAAA,sBAEOf,UAAU,CAACU,SAAD,EAAYK,KAAZ,CAFjB;AAAA,QAEFC,IAFE,eAEFA,IAFE;AAAA,QAGJC,MAHI,GAGKC,wBAAYC,YAAZ,EAHL;;AAKLhB,IAAAA,iBAAiB,CAACC,MAAD,CAAjB;;AACAF,IAAAA,cAAc,CAAC;AAAEe,MAAAA,MAAM,EAANA,MAAF;AAAUD,MAAAA,IAAI,EAAJA,IAAV;AAAgBP,MAAAA,IAAI,EAAJA,IAAhB;AAAsBL,MAAAA,MAAM,EAANA;AAAtB,KAAD,CAAd;AACAgB,IAAAA,MAAM,CAACC,MAAP,CAAcJ,MAAd,EAAsB;AACpBK,MAAAA,QAAQ,EAAElB,MADU;AAEpBK,MAAAA,IAAI,EAAEA,IAFc;AAGpBc,MAAAA,UAAU,EAAEnB,MAAM,CAACmB;AAHC,KAAtB;AAKA,WAAON,MAAP;AACF;AAfW,CAAd;eAkBeV,K","sourcesContent":["import ChartConfig from '../../charts/ChartConfig';\r\n\r\nimport EuroStatFn from './EuroStatFn';\r\n\r\nconst {\r\n  createData,\r\n  setDataAndInfo\r\n} = EuroStatFn\r\n\r\nconst _addItemCaptionTo = (option) => {\r\n  const { itemCaption, subtitle } = option;\r\n  option.itemCaption = itemCaption || subtitle\r\n};\r\n\r\nconst toMap = {\r\n  createConfig : (json, option) => {\r\n    const timeIndex = json.dimension.time.category.index\r\n    , value = json.value\r\n    , { data } = createData(timeIndex, value)\r\n    , config = ChartConfig.crAreaConfig();\r\n\r\n     _addItemCaptionTo(option)\r\n     setDataAndInfo({ config, data, json, option });\r\n     Object.assign(config, {\r\n       zhDialog: option,\r\n       json: json,\r\n       zhMapSlice: option.zhMapSlice\r\n     })\r\n     return config;\r\n  }\r\n};\r\n\r\nexport default toMap\r\n"],"file":"toMap.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/toMap.js"
+ ],
+ "file": "../../../src/adapters/eurostat/toMap.js",
+ "names": [
+  "createData",
+  "EuroStatFn",
+  "setDataAndInfo",
+  "_addItemCaptionTo",
+  "option",
+  "itemCaption",
+  "subtitle",
+  "toMap",
+  "createConfig",
+  "json",
+  "data",
+  "config",
+  "ChartConfig",
+  "crAreaConfig",
+  "Object",
+  "assign",
+  "zhDialog",
+  "zhMapSlice"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;IAGEA,U,GAEEC,sB,CAFFD,U;IACAE,c,GACED,sB,CADFC,c;;AAGF,IAAMC,iBAAiB,GAAG,SAApBA,iBAAoB,CAACC,MAAD,EAAY;AAAA,MAC5BC,WAD4B,GACFD,MADE,CAC5BC,WAD4B;AAAA,MACfC,QADe,GACFF,MADE,CACfE,QADe;AAEpCF,EAAAA,MAAM,CAACC,WAAP,GAAqBA,WAAW,IAAIC,QAApC;AACD,CAHD;;AAKA,IAAMC,KAAK,GAAG;AACZC,EAAAA,YAAY,EAAG,sBAACC,IAAD,EAAOL,MAAP,EAAkB;AAAA,sBACdJ,UAAU,CAACS,IAAD,CADI;AAAA,QACvBC,IADuB,eACvBA,IADuB;AAAA,QAE7BC,MAF6B,GAEpBC,wBAAYC,YAAZ,EAFoB;;AAI9BV,IAAAA,iBAAiB,CAACC,MAAD,CAAjB;;AACAF,IAAAA,cAAc,CAAC;AAAES,MAAAA,MAAM,EAANA,MAAF;AAAUD,MAAAA,IAAI,EAAJA,IAAV;AAAgBD,MAAAA,IAAI,EAAJA,IAAhB;AAAsBL,MAAAA,MAAM,EAANA;AAAtB,KAAD,CAAd;AACAU,IAAAA,MAAM,CAACC,MAAP,CAAcJ,MAAd,EAAsB;AACpBK,MAAAA,QAAQ,EAAEZ,MADU;AAEpBK,MAAAA,IAAI,EAAEA,IAFc;AAGpBQ,MAAAA,UAAU,EAAEb,MAAM,CAACa;AAHC,KAAtB;AAKA,WAAON,MAAP;AACF;AAbW,CAAd;eAgBeJ,K"
+}

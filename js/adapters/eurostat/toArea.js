@@ -9,22 +9,18 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
-var crTimeIndexAndValue = _EuroStatFn["default"].crTimeIndexAndValue,
-    createData = _EuroStatFn["default"].createData,
+var createData = _EuroStatFn["default"].createData,
     setDataAndInfo = _EuroStatFn["default"].setDataAndInfo,
     setLineExtrems = _EuroStatFn["default"].setLineExtrems,
     findMinY = _EuroStatFn["default"].findMinY;
 var toArea = {
   createConfig: function createConfig(json, option) {
-    var _crTimeIndexAndValue = crTimeIndexAndValue(json),
-        timeIndex = _crTimeIndexAndValue.timeIndex,
-        value = _crTimeIndexAndValue.value,
-        isNotZoomToMinMax = option.isNotZoomToMinMax,
+    var isNotZoomToMinMax = option.isNotZoomToMinMax,
         seriaType = option.seriaType,
         seriaColor = option.seriaColor,
         seriaWidth = option.seriaWidth,
         mapFrequency = option.mapFrequency,
-        _createData = createData(timeIndex, value, mapFrequency),
+        _createData = createData(json, mapFrequency),
         data = _createData.data,
         max = _createData.max,
         min = _createData.min,
@@ -50,15 +46,12 @@ var toArea = {
     return config;
   },
   createSeria: function createSeria(json, option) {
-    var _crTimeIndexAndValue2 = crTimeIndexAndValue(json),
-        timeIndex = _crTimeIndexAndValue2.timeIndex,
-        value = _crTimeIndexAndValue2.value,
+    var _createData2 = createData(json),
+        data = _createData2.data,
         itemCaption = option.itemCaption,
         seriaType = option.seriaType,
         seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        _createData2 = createData(timeIndex, value),
-        data = _createData2.data;
+        seriaWidth = option.seriaWidth;
 
     return _ChartConfig["default"].crSeria({
       seriaType: seriaType,
