@@ -14,6 +14,7 @@ import CA from '../actions/ComponentActions';
 import CHA from '../actions/ChartActions';
 
 import DateUtils from '../../utils/DateUtils';
+import has from '../../components/has';
 import ChartStore from '../stores/ChartStore';
 
 const {
@@ -23,8 +24,10 @@ const {
   isYmdOrEmpty
 } = DateUtils;
 
+const { isWideWidth } = has
+
 const _isArr = Array.isArray
-, initFromDate = getFromDate(2)
+, _initFromDate = getFromDate(2)
 , initToDate = getToDate();
 
 const _crFnValue = (valueFn, valueFnPrefix) => {
@@ -35,17 +38,24 @@ const _crFnValue = (valueFn, valueFnPrefix) => {
     : void 0;
 };
 
-const _crDateProps = ({ isFd, nInitFromDate }) => {
-  const _props = isFd
+const _crInitFromDate = ({ isFdw, nInitFromDate }) => {
+  if (isFdw && !isWideWidth) {
+    return _initFromDate;
+  }
+  return nInitFromDate
+    ? getFromDate(nInitFromDate)
+    : _initFromDate
+}
+
+const _crDateProps = (dialogProps) => {
+  const _props = dialogProps.isFd
     ? {
         errNotYmdOrEmpty: Msg.YMD_DATE_OR_EMPTY,
         isYmdOrEmpty
       }
     : void 0;
   return {
-    initFromDate: nInitFromDate
-      ? getFromDate(nInitFromDate)
-      : initFromDate,
+    initFromDate: _crInitFromDate(dialogProps),
     initToDate,
     onTestDate: isYmd,
     ..._props

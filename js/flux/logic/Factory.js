@@ -27,31 +27,43 @@ var _ChartActions = _interopRequireDefault(require("../actions/ChartActions"));
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
+var _has = _interopRequireDefault(require("../../components/has"));
+
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
 var getFromDate = _DateUtils["default"].getFromDate,
     getToDate = _DateUtils["default"].getToDate,
     isYmd = _DateUtils["default"].isYmd,
     isYmdOrEmpty = _DateUtils["default"].isYmdOrEmpty;
+var isWideWidth = _has["default"].isWideWidth;
+
 var _isArr = Array.isArray,
-    initFromDate = getFromDate(2),
+    _initFromDate = getFromDate(2),
     initToDate = getToDate();
 
 var _crFnValue = function _crFnValue(valueFn, valueFnPrefix) {
   return valueFn ? valueFnPrefix ? _RouterFnValue["default"][valueFn].bind(null, valueFnPrefix) : _RouterFnValue["default"][valueFn] : void 0;
 };
 
-var _crDateProps = function _crDateProps(_ref) {
-  var isFd = _ref.isFd,
+var _crInitFromDate = function _crInitFromDate(_ref) {
+  var isFdw = _ref.isFdw,
       nInitFromDate = _ref.nInitFromDate;
 
-  var _props = isFd ? {
+  if (isFdw && !isWideWidth) {
+    return _initFromDate;
+  }
+
+  return nInitFromDate ? getFromDate(nInitFromDate) : _initFromDate;
+};
+
+var _crDateProps = function _crDateProps(dialogProps) {
+  var _props = dialogProps.isFd ? {
     errNotYmdOrEmpty: _Msg["default"].YMD_DATE_OR_EMPTY,
     isYmdOrEmpty: isYmdOrEmpty
   } : void 0;
 
   return (0, _extends2["default"])({
-    initFromDate: nInitFromDate ? getFromDate(nInitFromDate) : initFromDate,
+    initFromDate: _crInitFromDate(dialogProps),
     initToDate: initToDate,
     onTestDate: isYmd
   }, _props);
