@@ -77,6 +77,12 @@ const _isQuarter = str => (""+str).indexOf("Q") !== -1;
 const _isAnnualQuarter = period =>
   !_isQuarter(period[0]) && _isQuarter(period[1]);
 
+const _crPoint = (date, y) => ([ymdToUTC(date), y]);
+
+const _crAqPoint = (date, y) => _isQuarter(date)
+  ? _crPoint(date, y)
+  : [];
+
 const fnAdapter = {
   crError,
   getValue,
@@ -95,16 +101,15 @@ const fnAdapter = {
     const data = []
     , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
     , { period, value } = getPeriodAndValue(json)
-    , _period = _isAnnualQuarter(period)
-        ? period.filter(_isQuarter)
-        : period
-    , _len = _period.length;
-    let i = 0, _x, _y;
-    for (i; i<_len; i++){
-      _x = ymdToUTC(_period[i])
-      _y = value[i]
-      if (_x > _xFrom && _isNumber(_y)) {
-        data.push([ _x, _y ])
+    , crPoint = _isAnnualQuarter(period)
+       ? _crAqPoint
+       : _crPoint
+    , _len = period.length;
+    let _arrPoint;
+    for (let i= 0; i<_len; i++){
+      _arrPoint = crPoint(period[i], value[i]);
+      if (_arrPoint[0] > _xFrom && _isNumber(_arrPoint[1])) {
+        data.push(_arrPoint)
       }
     }
     return data;

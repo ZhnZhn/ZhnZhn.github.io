@@ -99,6 +99,14 @@ var _isAnnualQuarter = function _isAnnualQuarter(period) {
   return !_isQuarter(period[0]) && _isQuarter(period[1]);
 };
 
+var _crPoint = function _crPoint(date, y) {
+  return [ymdToUTC(date), y];
+};
+
+var _crAqPoint = function _crAqPoint(date, y) {
+  return _isQuarter(date) ? _crPoint(date, y) : [];
+};
+
 var fnAdapter = {
   crError: crError,
   getValue: getValue,
@@ -120,19 +128,16 @@ var fnAdapter = {
         _getPeriodAndValue = getPeriodAndValue(json),
         period = _getPeriodAndValue.period,
         value = _getPeriodAndValue.value,
-        _period = _isAnnualQuarter(period) ? period.filter(_isQuarter) : period,
-        _len = _period.length;
+        crPoint = _isAnnualQuarter(period) ? _crAqPoint : _crPoint,
+        _len = period.length;
 
-    var i = 0,
-        _x,
-        _y;
+    var _arrPoint;
 
-    for (i; i < _len; i++) {
-      _x = ymdToUTC(_period[i]);
-      _y = value[i];
+    for (var i = 0; i < _len; i++) {
+      _arrPoint = crPoint(period[i], value[i]);
 
-      if (_x > _xFrom && _isNumber(_y)) {
-        data.push([_x, _y]);
+      if (_arrPoint[0] > _xFrom && _isNumber(_arrPoint[1])) {
+        data.push(_arrPoint);
       }
     }
 
