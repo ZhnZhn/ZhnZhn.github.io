@@ -23,7 +23,7 @@ const {
 const { useTheme, useToggle, useFnFocus } = use;
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
-    , CAPTION = "ERC v0.17.0";
+    , CAPTION = "ERC v0.18.0";
 
 const ID = 'HEADER_BAR';
 

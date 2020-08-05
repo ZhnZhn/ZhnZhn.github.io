@@ -40,7 +40,7 @@ var useTheme = _use["default"].useTheme,
     useToggle = _use["default"].useToggle,
     useFnFocus = _use["default"].useFnFocus;
 var LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
-    CAPTION = "ERC v0.17.0";
+    CAPTION = "ERC v0.18.0";
 var ID = 'HEADER_BAR';
 var CL = {
   HEADER: "header",

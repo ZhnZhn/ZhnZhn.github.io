@@ -19,7 +19,7 @@ import ThemeContext from './hoc/ThemeContext'
 
 import checkBuild from './checkBuild'
 
-const BUILD_DATE = '30-07-2020';
+const BUILD_DATE = '05-08-2020';
 const CL = "component-container"
 
 const showSettings = CA.showSettings
