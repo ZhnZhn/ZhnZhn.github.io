@@ -70,7 +70,7 @@ const OpenClose = ({
   openColor=DF.OPEN_COLOR,
   closeColor=DF.CLOSE_COLOR,
   CompAfter, childStyle, children
-}) => {  
+}) => {
   const [isOpen, toggleIsOpen] = useToggle(!isClose)
   , _hKeyDown = useKeyEnter(toggleIsOpen)
   , {
@@ -106,8 +106,8 @@ const OpenClose = ({
        </div>
        {CompAfter}
     </div>
-    <div
-      role="region"
+    <div      
+      aria-expanded={isOpen}
       className={_childCl}
       style={{...childStyle, ..._childStyle}}
     >

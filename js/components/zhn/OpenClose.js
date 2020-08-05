@@ -129,7 +129,7 @@ var OpenClose = function OpenClose(_ref2) {
   })), /*#__PURE__*/_react["default"].createElement("span", {
     style: (0, _extends2["default"])({}, S.CAPTION, captionStyle)
   }, caption)), CompAfter), /*#__PURE__*/_react["default"].createElement("div", {
-    role: "region",
+    "aria-expanded": isOpen,
     className: _childCl,
     style: (0, _extends2["default"])({}, childStyle, _childStyle)
   }, children));

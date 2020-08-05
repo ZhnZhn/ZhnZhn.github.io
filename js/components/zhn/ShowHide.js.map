@@ -1,1 +1,24 @@
-{"version":3,"sources":["../../../src/components/zhn/ShowHide.jsx"],"names":["CL_SHOW_POPUP","S","SHOW","display","HIDE","ShowHide","isShow","withoutAnimation","className","style","children","_styleShow","_classShow","_className"],"mappings":";;;;;;;;;AAAA;;AACA;AAEA,IAAMA,aAAa,GAAG,YAAtB;AACA,IAAMC,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AACJC,IAAAA,OAAO,EAAE;AADL,GADE;AAIRC,EAAAA,IAAI,EAAE;AACJD,IAAAA,OAAO,EAAE;AADL;AAJE,CAAV;;AASA,IAAME,QAAQ,GAAG,SAAXA,QAAW,OAKX;AAAA,MAJJC,MAII,QAJJA,MAII;AAAA,mCAHJC,gBAGI;AAAA,MAHJA,gBAGI,sCAHa,KAGb;AAAA,MAFJC,SAEI,QAFJA,SAEI;AAAA,MAFOC,KAEP,QAFOA,KAEP;AAAA,MADJC,QACI,QADJA,QACI;;AACF,MAAMC,UAAU,GAAGL,MAAM,GAAGL,CAAC,CAACC,IAAL,GAAYD,CAAC,CAACG,IAAvC;AAAA,MACEQ,UAAU,GAAGN,MAAM,GACdC,gBAAgB,GAAG,EAAH,GAAQP,aADV,GAEd,EAHP;AAAA,MAIEa,UAAU,GAAGL,SAAS,GACfA,SADe,SACFI,UADE,GAElBA,UAAU,IAAI,KAAK,CANzB;;AAOA,sBACE;AACE,IAAA,SAAS,EAAEC,UADb;AAEE,IAAA,KAAK,gCAAOJ,KAAP,EAAiBE,UAAjB;AAFP,KAIGD,QAJH,CADF;AAQF,CArBF;AAuBA;;;;;;;;;;;;;eAYeL,Q","sourcesContent":["import React from 'react';\r\n//import PropTypes from \"prop-types\";\r\n\r\nconst CL_SHOW_POPUP = 'show-popup';\r\nconst S = {\r\n  SHOW: {\r\n    display: 'block'\r\n  },\r\n  HIDE: {\r\n    display: 'none'\r\n  }\r\n};\r\n\r\nconst ShowHide = ({\r\n  isShow,\r\n  withoutAnimation=false,\r\n  className, style,\r\n  children\r\n}) => {\r\n    const _styleShow = isShow ? S.SHOW : S.HIDE\r\n    , _classShow = isShow\r\n         ? withoutAnimation ? '' : CL_SHOW_POPUP\r\n         : ''\r\n    , _className = className\r\n        ? `${className} ${_classShow}`\r\n        : _classShow || void 0;\r\n    return (\r\n      <div\r\n        className={_className}\r\n        style={{ ...style, ..._styleShow}}\r\n      >\r\n        {children}\r\n      </div>\r\n    );\r\n }\r\n\r\n/*\r\nShowHide.propTypes = {\r\n  isShow: PropTypes.bool,\r\n  withoutAnimation: PropTypes.bool,\r\n  className: PropTypes.string,\r\n  style: PropTypes.object,\r\n  children: PropTypes.oneOfType[\r\n    (PropTypes.arrayOf(PropTypes.node), PropTypes.node)\r\n  ]\r\n}\r\n*/\r\n\r\nexport default ShowHide\r\n"],"file":"ShowHide.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/ShowHide.js"
+ ],
+ "file": "../../../src/components/zhn/ShowHide.js",
+ "names": [
+  "CL_SHOW_POPUP",
+  "S",
+  "SHOW",
+  "display",
+  "HIDE",
+  "ShowHide",
+  "isShow",
+  "withoutAnimation",
+  "className",
+  "style",
+  "children",
+  "_styleShow",
+  "_classShow",
+  "_className"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;AAEA,IAAMA,aAAa,GAAG,YAAtB;AACA,IAAMC,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AACJC,IAAAA,OAAO,EAAE;AADL,GADE;AAIRC,EAAAA,IAAI,EAAE;AACJD,IAAAA,OAAO,EAAE;AADL;AAJE,CAAV;;AASA,IAAME,QAAQ,GAAG,SAAXA,QAAW,OAKX;AAAA,MAJJC,MAII,QAJJA,MAII;AAAA,mCAHJC,gBAGI;AAAA,MAHJA,gBAGI,sCAHa,KAGb;AAAA,MAFJC,SAEI,QAFJA,SAEI;AAAA,MAFOC,KAEP,QAFOA,KAEP;AAAA,MADJC,QACI,QADJA,QACI;;AACF,MAAMC,UAAU,GAAGL,MAAM,GAAGL,CAAC,CAACC,IAAL,GAAYD,CAAC,CAACG,IAAvC;AAAA,MACEQ,UAAU,GAAGN,MAAM,GACdC,gBAAgB,GAAG,EAAH,GAAQP,aADV,GAEd,EAHP;AAAA,MAIEa,UAAU,GAAGL,SAAS,GACfA,SADe,SACFI,UADE,GAElBA,UAAU,IAAI,KAAK,CANzB;;AAOA,sBACE;AACE,qBAAeN,MADjB;AAEE,IAAA,SAAS,EAAEO,UAFb;AAGE,IAAA,KAAK,gCAAOJ,KAAP,EAAiBE,UAAjB;AAHP,KAKGD,QALH,CADF;AASF,CAtBF;AAwBA;;;;;;;;;;;;;eAYeL,Q"
+}

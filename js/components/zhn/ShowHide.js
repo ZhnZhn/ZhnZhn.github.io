@@ -33,6 +33,7 @@ var ShowHide = function ShowHide(_ref) {
       _className = className ? className + " " + _classShow : _classShow || void 0;
 
   return /*#__PURE__*/_react["default"].createElement("div", {
+    "aria-expanded": isShow,
     className: _className,
     style: (0, _extends2["default"])({}, style, _styleShow)
   }, children);

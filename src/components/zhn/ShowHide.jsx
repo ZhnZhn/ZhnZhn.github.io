@@ -26,6 +26,7 @@ const ShowHide = ({
         : _classShow || void 0;
     return (
       <div
+        aria-expanded={isShow}
         className={_className}
         style={{ ...style, ..._styleShow}}
       >

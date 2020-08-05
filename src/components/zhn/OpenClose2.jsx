@@ -110,8 +110,8 @@ const OpenClose2 = ({
            {caption}
          </span>
       </div>
-      <div
-        role="region"
+      <div        
+        aria-expanded={isOpen}
         className={_classShow}
         style={_divStyle}
       >
