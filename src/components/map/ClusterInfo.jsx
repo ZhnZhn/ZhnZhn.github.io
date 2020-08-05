@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useRef } from 'react'
 //import PropTypes from 'prop-types'
 
 import ShowHide from '../zhn/ShowHide'
@@ -10,6 +10,10 @@ import {
   SparklinesMaxLabel,
   SparklinesMinLabel
 } from '../zhn-sparklines/Sparklines'
+
+import use from '../hooks/use'
+
+const { useToggle, useKeyEnter } = use
 
 const COLOR_MAX = "#8bc34a";
 const COLOR_MIN = "#f44336";
@@ -47,22 +51,34 @@ const S = {
 }
 
 
-const Caption = ({ color, from, to, onClick }) => (
-  <p style={{ ...S.CAPTION, ...{ background: color } }}>
-    <span>{from}&nbsp;&ndash;&nbsp;{to}</span>
-    <span style={S.CAPTION_BT} onClick={onClick}>*</span>
-  </p>
-);
-
+const Caption = ({ color, from, to, onClick }) => {
+  const _hKeyDown = useKeyEnter(onClick);
+  return (
+    <p style={{ ...S.CAPTION, ...{ background: color } }}>
+      <span>{from}&nbsp;&ndash;&nbsp;{to}</span>
+      <span
+        tabIndex="0"
+        role="button"
+        style={S.CAPTION_BT}
+        onClick={onClick}
+        onKeyDown={_hKeyDown}
+      >*</span>
+    </p>
+  );
+}
 
 const Item = ({ title, value, status, onClick }) => {
-  const _value = status
+  const _hKeyDown = useKeyEnter(onClick)
+  , _value = status
     ? `${value} (${status})`
     : value;
   return (
-    <p
+    <div
+      tabIndex="0"
+      role="button"
       style={S.ITEM_ROOT}
       onClick={onClick}
+      onKeyDown={_hKeyDown}
     >
       <span style={S.ITEM_TITLE}>
          {title}
@@ -70,98 +86,82 @@ const Item = ({ title, value, status, onClick }) => {
       <span style={S.ITEM_VALUE}>
         {_value}
       </span>
-    </p>
+    </div>
   );
 }
 
-class ClusterItem extends Component {
-  /*
-  static propTypes = {
-    point: PropTypes.shape({
-      0: PropTypes.number,
-      id: PropTypes.string,
-      status: PropTypes.string,
-      seria: PropTypes.shape({
-        data: PropTypes.array
-      })
-    }),
-    color: PropTypes.string,
-    index: PropTypes.number,
-    isShowRange: PropTypes.bool
-  }
-  */
+const ClusterItem = ({ point, color, index, isShowRange }) => {
+  const _refData = useRef(point.seria.data || [])
+  , _refPointIndex = useRef(_refData.current.length-1)
+  , [isShowChart, toggleIsShowChart] = useToggle(index < 3)
 
-  constructor(props){
-    super(props)
-    this.data = props.point.seria.data
-    this.pointIndex = this.data.length - 1
-    this.state = {
-      isShowChart: props.index < 3
-    }
-  }
-
-  _handleClickItem = () => {
-    this.setState(prevState => ({
-        isShowChart: !prevState.isShowChart
-    }))
-  }
-
-  render(){
-      const { point, color, isShowRange } = this.props
-          , { isShowChart } = this.state
-          , _maxLabel = isShowRange
-              ? <SparklinesMaxLabel color={COLOR_MAX} fontSize={14} />
-              : <span/>
-          , _minLabel = isShowRange
-              ? <SparklinesMinLabel color={COLOR_MIN} fontSize={14} />
-              : <span/>;
-      return (
-        <div>
-          <Item
-            title={point.id}
-            value={point[0]}
-            status={point.status}
-            onClick={this._handleClickItem}
-          />
-          <ShowHide isShow={isShowChart}>
-            <Sparklines
-              height={32}
-              width={140}
-              svgHeight={32}
-              svgWidth={140}
-              data={this.data}
-              margin={3}
-              //marginLeft={20}
-            >
-               {_maxLabel}
-               {_minLabel}
-               <SparklinesLine color={color} />
-               {/*<SparklinesSpots />*/}
-               <SparklinesSpot
-                   pointIndex={this.pointIndex}
-                   size={3}
-                   spotColors={SPOT_COLORS}
-                 />
-            </Sparklines>
-        </ShowHide>
-       </div>
-      );
-   }
+  const _maxLabel = isShowRange
+          ? <SparklinesMaxLabel color={COLOR_MAX} fontSize={14} />
+          : <span/>
+      , _minLabel = isShowRange
+          ? <SparklinesMinLabel color={COLOR_MIN} fontSize={14} />
+          : <span/>;
+  return (
+      <div>
+        <Item
+          title={point.id}
+          value={point[0]}
+          status={point.status}
+          onClick={toggleIsShowChart}
+        />
+        <ShowHide isShow={isShowChart}>
+          <Sparklines
+            height={32}
+            width={140}
+            svgHeight={32}
+            svgWidth={140}
+            data={_refData.current}
+            margin={3}
+            //marginLeft={20}
+          >
+             {_maxLabel}
+             {_minLabel}
+             <SparklinesLine color={color} />
+             {/*<SparklinesSpots />*/}
+             <SparklinesSpot
+                 pointIndex={_refPointIndex.current}
+                 size={3}
+                 spotColors={SPOT_COLORS}
+             />
+          </Sparklines>
+      </ShowHide>
+     </div>
+  );
 }
 
-const Cluster = ({ cluster,color, isShowRange }) => {
+
+/*
+ ClusterItem.propTypes = {
+  point: PropTypes.shape({
+    0: PropTypes.number,
+    id: PropTypes.string,
+    status: PropTypes.string,
+    seria: PropTypes.shape({
+      data: PropTypes.array
+    })
+  }),
+  color: PropTypes.string,
+  index: PropTypes.number,
+  isShowRange: PropTypes.bool
+}
+*/
+
+const Cluster = ({ cluster, color, isShowRange }) => {
   const points = cluster.points || [];
   return (
     <div>
       {
-        points.map( (point, index) => {
-          return (
-            <ClusterItem
-               key={point.id}
-               {...{ point, color, index, isShowRange }}
-            />
-          );
-        })
+        points.map( (point, index) => (
+          <ClusterItem
+             key={point.id}
+             {...{ point, color, index, isShowRange }}
+          />
+        ))
       }
     </div>
   );
@@ -178,28 +178,16 @@ Cluster.propTypes = {
 }
 */
 
-class ClusterInfo extends Component {
-  state = {
-    isShowRange: false
-  }
-
-  _handleToggleRange = () => {
-    this.setState(prevState => ({
-      isShowRange: !prevState.isShowRange
-    }))
-  }
-
-  render(){
-    const  { cluster, color, from, to } = this.props
-        ,  { isShowRange } = this.state;
-    return  (
-      <div>
-        <Caption {...{ color, from, to, onClick:this._handleToggleRange } } />
-        <Cluster {...{ cluster, color, isShowRange } } />
-      </div>
-    );
-  }
+const ClusterInfo = ({ cluster, color, from, to }) => {
+  const [isShowRange, onClick] = useToggle(false);
+  return  (
+    <div>
+      <Caption {...{ color, from, to, onClick } } />
+      <Cluster {...{ cluster, color, isShowRange } } />
+    </div>
+  );
 }
+
 /*
 ClusterInfo.propTypes = {
   cluster: PropTypes.object,
