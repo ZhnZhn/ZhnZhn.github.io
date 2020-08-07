@@ -9,9 +9,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
+
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var _has = _interopRequireDefault(require("../has"));
 
@@ -30,10 +30,7 @@ var S = {
 };
 
 var _isIn = function _isIn(arr, type) {
-  var len = arr.length;
-  var i = 0;
-
-  for (; i < len; i++) {
+  for (var i = 0; i < arr.length; i++) {
     if (arr[i].type === type) {
       return true;
     }
@@ -42,21 +39,7 @@ var _isIn = function _isIn(arr, type) {
   return false;
 };
 
-var _crBtProps = function _crBtProps(index, caption) {
-  if (caption === void 0) {
-    caption = '';
-  }
-
-  var _accessKey = _has["default"].touch ? '' : (index + 1).toString();
-
-  return {
-    accessKey: _accessKey || void 0,
-    caption: _accessKey + caption.substring(0, 3),
-    title: caption
-  };
-};
-
-var _calcMaxButtons = function _calcMaxButtons(props) {
+var _calcMaxButtons = function _calcMaxButtons(maxButtons) {
   switch (_has["default"].strWidth) {
     case '"W600"':
       return 3;
@@ -68,99 +51,87 @@ var _calcMaxButtons = function _calcMaxButtons(props) {
       return 1;
 
     default:
-      return props.maxButtons;
+      return maxButtons;
   }
 };
 
-var HotBar = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(HotBar, _Component);
+var CleanButton = function CleanButton(_ref) {
+  var is = _ref.is,
+      onClick = _ref.onClick;
+  return is ? /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
+    key: "BT_CLEAN",
+    timeout: 0,
+    style: S.BT_CL,
+    caption: "CL",
+    title: "Clean Hot Bar",
+    onClick: onClick
+  }) : null;
+};
 
-  function HotBar(props) {
-    var _this;
+var _crBtProps = function _crBtProps(index, caption) {
+  if (caption === void 0) {
+    caption = '';
+  }
 
-    _this = _Component.call(this, props) || this;
+  var _accessKey = _has["default"].touch ? '' : String(index + 1);
 
-    _this._onStore = function (actionType, option) {
-      var closeDialogAction = _this.props.closeDialogAction;
+  return {
+    accessKey: _accessKey || void 0,
+    caption: _accessKey + caption.substring(0, 3),
+    title: caption
+  };
+};
 
-      if (actionType === closeDialogAction) {
-        _this.setState(function (prevState) {
-          var hotButtons = prevState.hotButtons,
-              countButtons = prevState.countButtons;
-
-          if (!_isIn(hotButtons, option.type)) {
-            hotButtons[countButtons % _this._maxButtons] = option;
-            prevState.countButtons += 1;
-          }
-
-          return prevState;
-        });
-      }
-    };
-
-    _this._hClean = function () {
-      _this.setState({
-        countButtons: 0,
-        hotButtons: []
-      });
-    };
-
-    _this._renderHotButtons = function (hotButtons, onShowDialog) {
-      return hotButtons.map(function (conf, index) {
-        var type = conf.type,
-            caption = conf.caption;
-        return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
-          key: type,
-          timeout: 0,
-          style: S.BT_D,
-          onClick: onShowDialog.bind(null, type)
-        }));
-      });
-    };
-
-    _this._btCleanEl = /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-      key: "BT_CLEAN",
+var _renderHotButtons = function _renderHotButtons(hotButtons, onShowDialog) {
+  return hotButtons.map(function (conf, index) {
+    var type = conf.type,
+        caption = conf.caption;
+    return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
+      key: type,
       timeout: 0,
-      style: S.BT_CL,
-      caption: "CL",
-      title: "Clean Hot Bar",
-      onClick: _this._hClean
-    });
-    _this._maxButtons = _calcMaxButtons(props);
-    _this.state = {
-      countButtons: 0,
-      hotButtons: []
-    };
-    return _this;
-  }
-
-  var _proto = HotBar.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    var store = this.props.store;
-    this.unsubscribe = store.listen(this._onStore);
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unsubscribe();
-  };
-
-  _proto.render = function render() {
-    var onShowDialog = this.props.onShowDialog,
-        hotButtons = this.state.hotButtons,
-        _cleanBtEl = hotButtons.length !== 0 ? this._btCleanEl : null;
-
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT
-    }, this._renderHotButtons(hotButtons, onShowDialog), _cleanBtEl);
-  };
-
-  return HotBar;
-}(_react.Component);
-
-HotBar.defaultProps = {
-  maxButtons: 5
+      style: S.BT_D,
+      onClick: onShowDialog.bind(null, type)
+    }));
+  });
 };
+
+var HotBar = function HotBar(_ref2) {
+  var _ref2$maxButtons = _ref2.maxButtons,
+      maxButtons = _ref2$maxButtons === void 0 ? 5 : _ref2$maxButtons,
+      store = _ref2.store,
+      closeDialogAction = _ref2.closeDialogAction,
+      onShowDialog = _ref2.onShowDialog;
+
+  var _refMaxBt = (0, _react.useRef)(_calcMaxButtons(maxButtons)),
+      _useState = (0, _react.useState)([]),
+      hotButtons = _useState[0],
+      setHotButtons = _useState[1],
+      _hClean = (0, _react.useCallback)(function () {
+    return setHotButtons([]);
+  }, []);
+
+  (0, _useListen["default"])(store, function (actionType, conf) {
+    if (actionType === closeDialogAction) {
+      setHotButtons(function (arr) {
+        if (!_isIn(arr, conf.type)) {
+          var _index = arr.length % _refMaxBt.current;
+
+          arr[_index] = conf;
+          return [].concat(arr);
+        }
+
+        return arr;
+      });
+    }
+  });
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.ROOT
+  }, _renderHotButtons(hotButtons, onShowDialog), /*#__PURE__*/_react["default"].createElement(CleanButton, {
+    is: hotButtons.length !== 0,
+    onClick: _hClean
+  }));
+};
+
 var _default = HotBar;
 exports["default"] = _default;
 //# sourceMappingURL=HotBar.js.map
