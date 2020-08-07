@@ -297,7 +297,7 @@
     },
     "DBN_IMF_WEO": {
       "type" : "DBN_IMF_WEO",
-      "menuTitle" : "WEO by Countries, A",
+      "menuTitle" : "WEO Rev. 1, A",
       "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps": {
@@ -305,7 +305,7 @@
           [ "Country", "imf-weo-countries" ],
           [ "Subject", "imf-weo-subjects" ]
         ],
-        "dataSource": "DB Nomics: IMF: WEO by Countries, A",
+        "dataSource": "DB Nomics: IMF: WEO by Countries Rev. 1, A",
         "dfProps": {
           "dfProvider": "IMF",
           "dfCode": "WEO",
@@ -315,7 +315,7 @@
     },
     "DBN_IMF_WEOAGG": {
       "type" : "DBN_IMF_WEOAGG",
-      "menuTitle" : "WEO by Country Groups, A",
+      "menuTitle" : "WEO AGG. Rev. 1, A",
       "contCaption" : "",
       "addProps": "DBN_B_S",
       "dialogProps": {
@@ -323,7 +323,7 @@
           [ "Entity", "imf-weo-country-groups" ],
           [ "Subject", "imf-weo-subjects" ]
         ],
-        "dataSource": "DB Nomics: IMF: WEO by Country Groups, A",
+        "dataSource": "DB Nomics: IMF: WEO by Country Groups Rev. 1, A",
         "dfProps": {
           "dfProvider": "IMF",
           "dfCode": "WEOAGG",
