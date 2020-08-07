@@ -17,9 +17,10 @@ var S = {
 var styleConfig = {
   themeName: void 0,
   style: void 0,
-  createStyle: function createStyle(CSS_RULE) {
+  createStyle: function createStyle(CSS_RULE, themeName) {
     return (0, _extends2["default"])({}, S, {
-      ROOT: (0, _extends2["default"])({}, CSS_RULE.BG)
+      ROOT: (0, _extends2["default"])({}, CSS_RULE.BG),
+      BT_HOT: (0, _extends2["default"])({}, CSS_RULE.BT_HOT)
     });
   }
 };

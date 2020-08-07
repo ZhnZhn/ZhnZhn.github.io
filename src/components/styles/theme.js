@@ -4,6 +4,8 @@ const P_GREY = {
   BG_BODY: '#5f5f5f',
   BG: '#4d4d4d',
 
+  BT_HOT_C: '#c0c0c0',
+
   EL_BG: '#1b2836',
   EL_C: 'silver',
 
@@ -11,31 +13,34 @@ const P_GREY = {
   C_HEADER: '#8a8a8a'
 };
 const P_WHITE = {
-  //BG_BODY: '#d0d0d0',
   BG_BODY: '#e1e1e1',
   BG: '#ebf1f5',
+
+  BT_HOT_C: '#c0c0c0',
 
   EL_BG: '#bcd8f5',
   EL_C: '#212020',
 
-  BG_HEADER: 'rgb(0, 150, 200)',
+  BG_HEADER: '#0096c8',
   C_HEADER: '#4d4d4d'
 };
 const P_SAND = {
-  //BG_BODY: '#ddd',
-  BG_BODY: '#9e9e9e',
-  BG: '#e8e0cb',
+  BG_BODY: '#9e9e9e',  
+  BG: '#e6d5a9',
 
-  //EL_BG: '#795548',
-  EL_BG: '#64473d',
+  BT_HOT_C: '#5b5b5b',
+
+  EL_BG: '#463222',
   EL_C: 'silver',
 
-  BG_HEADER: 'rgb(0, 150, 200)',
+  BG_HEADER: '#0096c8',
   C_HEADER: '#4d4d4d'
 };
 
 const CSS_RULE = {
   BG: {},
+
+  BT_HOT: {},
 
   EL: {},
   EL_BORDER: {},
@@ -68,12 +73,18 @@ const _crEl = (conf, P) => {
     backgroundColor: P.EL_BG,
   })
 }
+const _crHotBt = (conf, P) => {
+  _assign(conf.BT_HOT, {
+     color: P.BT_HOT_C
+  })
+}
 
 
 const _FN_STYLES = [
   _setBodyBg,
   _crBg,
-  _crEl
+  _crEl,
+  _crHotBt
 ];
 const _setStyleTo = (conf, pallete) => {
   _FN_STYLES.forEach(fn => fn(conf, pallete))

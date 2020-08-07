@@ -12,32 +12,33 @@ var _THEME_CONFIG;
 var P_GREY = {
   BG_BODY: '#5f5f5f',
   BG: '#4d4d4d',
+  BT_HOT_C: '#c0c0c0',
   EL_BG: '#1b2836',
   EL_C: 'silver',
   BG_HEADER: '#3a6799',
   C_HEADER: '#8a8a8a'
 };
 var P_WHITE = {
-  //BG_BODY: '#d0d0d0',
   BG_BODY: '#e1e1e1',
   BG: '#ebf1f5',
+  BT_HOT_C: '#c0c0c0',
   EL_BG: '#bcd8f5',
   EL_C: '#212020',
-  BG_HEADER: 'rgb(0, 150, 200)',
+  BG_HEADER: '#0096c8',
   C_HEADER: '#4d4d4d'
 };
 var P_SAND = {
-  //BG_BODY: '#ddd',
   BG_BODY: '#9e9e9e',
-  BG: '#e8e0cb',
-  //EL_BG: '#795548',
-  EL_BG: '#64473d',
+  BG: '#e6d5a9',
+  BT_HOT_C: '#5b5b5b',
+  EL_BG: '#463222',
   EL_C: 'silver',
-  BG_HEADER: 'rgb(0, 150, 200)',
+  BG_HEADER: '#0096c8',
   C_HEADER: '#4d4d4d'
 };
 var CSS_RULE = {
   BG: {},
+  BT_HOT: {},
   EL: {},
   EL_BORDER: {},
   EL_BG: {},
@@ -73,7 +74,13 @@ var _crEl = function _crEl(conf, P) {
   });
 };
 
-var _FN_STYLES = [_setBodyBg, _crBg, _crEl];
+var _crHotBt = function _crHotBt(conf, P) {
+  _assign(conf.BT_HOT, {
+    color: P.BT_HOT_C
+  });
+};
+
+var _FN_STYLES = [_setBodyBg, _crBg, _crEl, _crHotBt];
 
 var _setStyleTo = function _setStyleTo(conf, pallete) {
   _FN_STYLES.forEach(function (fn) {

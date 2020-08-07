@@ -123,6 +123,7 @@ var HeaderBar = function HeaderBar(_ref) {
     accessKey: "w",
     onClick: _BrowserActions["default"].showWatch
   }), /*#__PURE__*/_react["default"].createElement(_HotBar["default"], {
+    btStyle: TS.BT_HOT,
     store: store,
     closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
     onShowDialog: _ComponentActions["default"].showDialog

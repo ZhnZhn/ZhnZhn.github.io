@@ -12,11 +12,14 @@ const styleConfig = {
   themeName: void 0,
   style: void 0,
 
-  createStyle: (CSS_RULE) => {
+  createStyle: (CSS_RULE, themeName) => {
     return {
       ...S,
       ROOT: {
         ...CSS_RULE.BG
+      },
+      BT_HOT: {
+        ...CSS_RULE.BT_HOT
       }
     };
   }

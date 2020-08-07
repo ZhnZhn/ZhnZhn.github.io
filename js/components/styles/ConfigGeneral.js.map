@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/components/styles/ConfigGeneral.js"],"names":["styleConfig","themeName","undefined","style","createStyle","CSS_RULE","CL_SCROLL","ROOT","BG","EL","EL_BORDER"],"mappings":";;;;;;;;;AAAA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,SAAS,EAAEC,SADO;AAElBC,EAAAA,KAAK,EAAED,SAFW;AAIlBE,EAAAA,WAAW,EAAE,qBAACC,QAAD,EAAc;AACzB,WAAO;AACLC,MAAAA,SAAS,EAAED,QAAQ,CAACC,SADf;AAELC,MAAAA,IAAI,gCACCF,QAAQ,CAACG,EADV,CAFC;AAKLC,MAAAA,EAAE,gCACGJ,QAAQ,CAACI,EADZ,CALG;AAQLC,MAAAA,SAAS,gCACJL,QAAQ,CAACK,SADL;AARJ,KAAP;AAYD;AAjBiB,CAApB;eAoBeV,W","sourcesContent":["const styleConfig = {\r\n  themeName: undefined,\r\n  style: undefined,\r\n\r\n  createStyle: (CSS_RULE) => {\r\n    return {\r\n      CL_SCROLL: CSS_RULE.CL_SCROLL,\r\n      ROOT: {\r\n        ...CSS_RULE.BG\r\n      },\r\n      EL: {\r\n        ...CSS_RULE.EL\r\n      },\r\n      EL_BORDER: {\r\n        ...CSS_RULE.EL_BORDER\r\n      }\r\n    };\r\n  }\r\n};\r\n\r\nexport default styleConfig\r\n"],"file":"ConfigGeneral.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/styles/ConfigGeneral.js"
+ ],
+ "file": "../../../src/components/styles/ConfigGeneral.js",
+ "names": [
+  "styleConfig",
+  "themeName",
+  "style",
+  "createStyle",
+  "CSS_RULE",
+  "CL_SCROLL",
+  "ROOT",
+  "BG",
+  "EL",
+  "EL_BORDER"
+ ],
+ "mappings": ";;;;;;;;;AAAA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,SAAS,EAAE,KAAK,CADE;AAElBC,EAAAA,KAAK,EAAE,KAAK,CAFM;AAIlBC,EAAAA,WAAW,EAAE,qBAACC,QAAD,EAAc;AACzB,WAAO;AACLC,MAAAA,SAAS,EAAED,QAAQ,CAACC,SADf;AAELC,MAAAA,IAAI,gCACCF,QAAQ,CAACG,EADV,CAFC;AAKLC,MAAAA,EAAE,gCACGJ,QAAQ,CAACI,EADZ,CALG;AAQLC,MAAAA,SAAS,gCACJL,QAAQ,CAACK,SADL;AARJ,KAAP;AAYD;AAjBiB,CAApB;eAoBeT,W"
+}

@@ -59,7 +59,7 @@ const HeaderBar = ({ store, showSettings }) => {
   const [isTopics, toggleTopics] = useToggle(false)
   , [refBt, _toggleTopics] = useFnFocus(toggleTopics)
   , TS = useTheme(ID);
-
+  
   return (
     <div className={CL.HEADER} style={TS.ROOT} >
        <ProgressLoading store={store} ACTIONS={LPAT} />
@@ -107,6 +107,7 @@ const HeaderBar = ({ store, showSettings }) => {
            onClick={BA.showWatch}
         />
         <HotBar
+          btStyle={TS.BT_HOT}
           store={store}
           closeDialogAction={CAT.CLOSE_DIALOG}
           onShowDialog={CA.showDialog}

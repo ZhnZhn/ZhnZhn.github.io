@@ -62,10 +62,10 @@
 }
 .with-scroll--sand {
   scrollbar-width: thin;
-  scrollbar-color: #8bc34a #795548;
+  scrollbar-color: #8bc34a #463222;
 }
 .with-scroll--sand::-webkit-scrollbar-track-piece {
-  background-color: #795548;
+  background-color: #463222; 
 }
 
 .scroll-browser-by {

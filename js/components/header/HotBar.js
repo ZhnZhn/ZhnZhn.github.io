@@ -21,9 +21,6 @@ var S = {
   ROOT: {
     display: 'inline-block'
   },
-  BT_D: {
-    color: '#c0c0c0'
-  },
   BT_CL: {
     color: '#f44336'
   }
@@ -82,14 +79,14 @@ var _crBtProps = function _crBtProps(index, caption) {
   };
 };
 
-var _renderHotButtons = function _renderHotButtons(hotButtons, onShowDialog) {
+var _renderHotButtons = function _renderHotButtons(style, hotButtons, onShowDialog) {
   return hotButtons.map(function (conf, index) {
     var type = conf.type,
         caption = conf.caption;
     return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
       key: type,
       timeout: 0,
-      style: S.BT_D,
+      style: style,
       onClick: onShowDialog.bind(null, type)
     }));
   });
@@ -98,6 +95,7 @@ var _renderHotButtons = function _renderHotButtons(hotButtons, onShowDialog) {
 var HotBar = function HotBar(_ref2) {
   var _ref2$maxButtons = _ref2.maxButtons,
       maxButtons = _ref2$maxButtons === void 0 ? 5 : _ref2$maxButtons,
+      btStyle = _ref2.btStyle,
       store = _ref2.store,
       closeDialogAction = _ref2.closeDialogAction,
       onShowDialog = _ref2.onShowDialog;
@@ -126,7 +124,7 @@ var HotBar = function HotBar(_ref2) {
   });
   return /*#__PURE__*/_react["default"].createElement("div", {
     style: S.ROOT
-  }, _renderHotButtons(hotButtons, onShowDialog), /*#__PURE__*/_react["default"].createElement(CleanButton, {
+  }, _renderHotButtons(btStyle, hotButtons, onShowDialog), /*#__PURE__*/_react["default"].createElement(CleanButton, {
     is: hotButtons.length !== 0,
     onClick: _hClean
   }));
