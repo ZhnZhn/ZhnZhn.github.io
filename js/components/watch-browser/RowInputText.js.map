@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/components/watch-browser/RowInputText.jsx"],"names":["S","ROOT","lineHeight","CAPTION","width","INPUT_TEXT","marginLeft","marginRight","paddingLeft","height","RowInputText","_refInputText","c","inputText","render","caption","props","STYLE","rowDiv","labelSpan","getValue","trim","setValue","value","Component"],"mappings":";;;;;;;;;;;;;AAAA;;AAGA;;AACA;;AAHA;AAKA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAG;AACLC,IAAAA,UAAU,EAAE;AADP,GADC;AAIRC,EAAAA,OAAO,EAAG;AACRC,IAAAA,KAAK,EAAE;AADC,GAJF;AAORC,EAAAA,UAAU,EAAG;AACXD,IAAAA,KAAK,EAAG,OADG;AAEXE,IAAAA,UAAU,EAAG,CAFF;AAGXC,IAAAA,WAAW,EAAE,CAHF;AAIXC,IAAAA,WAAW,EAAE,MAJF;AAKXC,IAAAA,MAAM,EAAE;AALG;AAPL,CAAV;;IAgBMC,Y;;;;;;;;;;;;UAMJC,a,GAAgB,UAAAC,CAAC;AAAA,aAAI,MAAKC,SAAL,GAAiBD,CAArB;AAAA,K;;;;;;;SAEjBE,M,GAAA,kBAAQ;AAAA,QACEC,OADF,GACc,KAAKC,KADnB,CACED,OADF;AAEN,wBACE;AAAK,MAAA,KAAK,gCAAME,yBAAMC,MAAZ,EAAuBlB,CAAC,CAACC,IAAzB;AAAV,oBACG;AAAM,MAAA,KAAK,gCAAMgB,yBAAME,SAAZ,EAA0BnB,CAAC,CAACG,OAA5B;AAAX,OACGY,OADH,CADH,eAIG,gCAAC,qBAAD;AACG,MAAA,GAAG,EAAE,KAAKJ,aADb;AAEG,MAAA,KAAK,EAAEX,CAAC,CAACK;AAFZ,MAJH,CADF;AAWD,G;;SAEDe,Q,GAAA,oBAAU;AACR,WAAO,KAAKP,SAAL,CAAeO,QAAf,GAA0BC,IAA1B,EAAP;AACD,G;;SACDC,Q,GAAA,kBAASC,KAAT,EAAe;AACb,SAAKV,SAAL,CAAeS,QAAf,CAAwBC,KAAxB;AACD,G;;;EA5BwBC,gB;;eA+BZd,Y","sourcesContent":["import React, { Component } from 'react';\r\n//import PropTypes from \"prop-types\";\r\n\r\nimport InputText from '../zhn/InputText';\r\nimport STYLE from '../styles/DialogStyles';\r\n\r\nconst S = {\r\n  ROOT : {\r\n    lineHeight: 2\r\n  },\r\n  CAPTION : {\r\n    width: '120px'\r\n  },\r\n  INPUT_TEXT : {\r\n    width : '250px',\r\n    marginLeft : 0,\r\n    marginRight: 0,\r\n    paddingLeft: '10px',\r\n    height: '30px'\r\n  }\r\n}\r\n\r\nclass RowInputText extends Component {\r\n  /*\r\n  static propTypes = {\r\n    caption: PropTypes.string\r\n  }\r\n  */\r\n  _refInputText = c => this.inputText = c\r\n\r\n  render(){\r\n    const { caption } = this.props;\r\n    return (\r\n      <div style={{...STYLE.rowDiv, ...S.ROOT}}>\r\n         <span style={{...STYLE.labelSpan, ...S.CAPTION}}>\r\n           {caption}\r\n         </span>\r\n         <InputText\r\n            ref={this._refInputText}\r\n            style={S.INPUT_TEXT}\r\n         />\r\n      </div>\r\n    )\r\n  }\r\n\r\n  getValue(){\r\n    return this.inputText.getValue().trim();\r\n  }\r\n  setValue(value){\r\n    this.inputText.setValue(value)\r\n  }\r\n}\r\n\r\nexport default RowInputText\r\n"],"file":"RowInputText.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/watch-browser/RowInputText.js"
+ ],
+ "file": "../../../src/components/watch-browser/RowInputText.js",
+ "names": [
+  "S",
+  "ROW",
+  "STYLE",
+  "lineHeight",
+  "CAPTION",
+  "width",
+  "INPUT_TEXT",
+  "height",
+  "paddingLeft",
+  "marginLeft",
+  "marginRight",
+  "RowInputText",
+  "_refInputText",
+  "c",
+  "inputText",
+  "render",
+  "caption",
+  "props",
+  "getValue",
+  "trim",
+  "setValue",
+  "value",
+  "Component"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA;;AAGA;;AACA;;AAHA;AAKA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,gCACEC,yBAAMD,GADR;AAEDE,IAAAA,UAAU,EAAE;AAFX,IADK;AAKRC,EAAAA,OAAO,gCACFF,yBAAME,OADJ;AAELC,IAAAA,KAAK,EAAE;AAFF,IALC;AASRC,EAAAA,UAAU,EAAG;AACXD,IAAAA,KAAK,EAAG,GADG;AAEXE,IAAAA,MAAM,EAAE,EAFG;AAGXC,IAAAA,WAAW,EAAE,EAHF;AAIXC,IAAAA,UAAU,EAAG,CAJF;AAKXC,IAAAA,WAAW,EAAE;AALF;AATL,CAAV;;IAkBMC,Y;;;;;;;;;;;;UAMJC,a,GAAgB,UAAAC,CAAC;AAAA,aAAI,MAAKC,SAAL,GAAiBD,CAArB;AAAA,K;;;;;;;SAEjBE,M,GAAA,kBAAQ;AAAA,QACEC,OADF,GACc,KAAKC,KADnB,CACED,OADF;AAEN,wBACE;AAAK,MAAA,KAAK,EAAEhB,CAAC,CAACC;AAAd,oBACG;AAAM,MAAA,KAAK,EAAED,CAAC,CAACI;AAAf,OACGY,OADH,CADH,eAIG,gCAAC,qBAAD;AACG,MAAA,GAAG,EAAE,KAAKJ,aADb;AAEG,MAAA,KAAK,EAAEZ,CAAC,CAACM;AAFZ,MAJH,CADF;AAWD,G;;SAEDY,Q,GAAA,oBAAU;AACR,WAAO,KAAKJ,SAAL,CAAeI,QAAf,GAA0BC,IAA1B,EAAP;AACD,G;;SACDC,Q,GAAA,kBAASC,KAAT,EAAe;AACb,SAAKP,SAAL,CAAeM,QAAf,CAAwBC,KAAxB;AACD,G;;;EA5BwBC,gB;;eA+BZX,Y"
+}

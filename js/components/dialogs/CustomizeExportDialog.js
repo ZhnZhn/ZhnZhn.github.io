@@ -255,7 +255,7 @@ var CustomizeExportDialog = /*#__PURE__*/function (_Component) {
     }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowDimension
     }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: _DialogStyles["default"].rowDiv
+      style: _DialogStyles["default"].ROW
     }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL
     }, "Dimension:"), /*#__PURE__*/_react["default"].createElement("span", {
@@ -281,7 +281,7 @@ var CustomizeExportDialog = /*#__PURE__*/function (_Component) {
     }))), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowTitle
     }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, S.GAP_BETWEEN_GROUP)
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].ROW, S.GAP_BETWEEN_GROUP)
     }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL
     }, "Title:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
@@ -289,7 +289,7 @@ var CustomizeExportDialog = /*#__PURE__*/function (_Component) {
       initValue: title,
       style: S.INPUT_TEXT
     })), /*#__PURE__*/_react["default"].createElement("div", {
-      style: _DialogStyles["default"].rowDiv
+      style: _DialogStyles["default"].ROW
     }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL
     }, "Subtitle:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
@@ -299,7 +299,7 @@ var CustomizeExportDialog = /*#__PURE__*/function (_Component) {
     }))), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
       isShow: isShowStyle
     }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, S.GAP_BETWEEN_GROUP)
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].ROW, S.GAP_BETWEEN_GROUP)
     }, /*#__PURE__*/_react["default"].createElement("span", {
       style: S.LABEL
     }, "Style:"), /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {

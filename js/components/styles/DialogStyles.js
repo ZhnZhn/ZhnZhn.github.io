@@ -46,8 +46,8 @@ var S = {
 };
 var DialogStyles = {
   //Dialogs, DatesFragments
-  rowDiv: (0, _extends2["default"])({}, S.ROW),
-  labelSpan: (0, _extends2["default"])({}, S.LABEL),
+  ROW: (0, _extends2["default"])({}, S.ROW),
+  CAPTION: (0, _extends2["default"])({}, S.LABEL),
   crRowCaption: function crRowCaption(caption) {
     return caption.indexOf(':') === -1 && caption !== '' ? caption + ":" : caption;
   },

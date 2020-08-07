@@ -201,7 +201,7 @@ class CustomizeExportDialog extends Component {
            buttons={this.toolbarButtons}
          />
          <ShowHide isShow={isShowDimension}>
-           <div style={STYLE.rowDiv}>
+           <div style={STYLE.ROW}>
               <span style={S.LABEL}>Dimension:</span>
               <span style={S.LABEL_WIDTH}>Width:</span>
               <InputText
@@ -226,7 +226,7 @@ class CustomizeExportDialog extends Component {
            </div>
          </ShowHide>
          <ShowHide isShow={isShowTitle}>
-           <div style={{ ...STYLE.rowDiv, ...S.GAP_BETWEEN_GROUP }}>
+           <div style={{ ...STYLE.ROW, ...S.GAP_BETWEEN_GROUP }}>
              <span style={S.LABEL}>Title:</span>
              <InputText
                ref={this._refInputTitle}
@@ -234,7 +234,7 @@ class CustomizeExportDialog extends Component {
                style={S.INPUT_TEXT}
              />
            </div>
-           <div style={STYLE.rowDiv}>
+           <div style={STYLE.ROW}>
              <span style={S.LABEL}>Subtitle:</span>
              <InputText
                ref={this._refInputSubtitle}
@@ -244,7 +244,7 @@ class CustomizeExportDialog extends Component {
            </div>
          </ShowHide>
          <ShowHide isShow={isShowStyle}>
-           <div style={{ ...STYLE.rowDiv, ...S.GAP_BETWEEN_GROUP}}>
+           <div style={{ ...STYLE.ROW, ...S.GAP_BETWEEN_GROUP}}>
              <span style={S.LABEL}>Style:</span>
              <InputSelect
                width="250"

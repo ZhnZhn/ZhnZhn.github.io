@@ -42,11 +42,11 @@ var InfoDialog = (0, _crModalDialog["default"])(function (_ref) {
     isShow: isShow,
     onClose: onClose
   }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: _DialogStyles["default"].rowDiv
+    style: _DialogStyles["default"].ROW
   }, /*#__PURE__*/_react["default"].createElement("p", {
     style: S.CAPTION
   }, caption)), /*#__PURE__*/_react["default"].createElement("div", {
-    style: _DialogStyles["default"].rowDiv
+    style: _DialogStyles["default"].ROW
   }, /*#__PURE__*/_react["default"].createElement("p", {
     style: S.DESCR
   }, descr)));

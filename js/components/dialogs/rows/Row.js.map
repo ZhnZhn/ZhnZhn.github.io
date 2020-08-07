@@ -1,1 +1,43 @@
-{"version":3,"sources":["../../../../src/components/dialogs/rows/Row.jsx"],"names":["S","ROOT_DIV","margin","marginLeft","lineHeight","fontWeight","LABEL_SPAN","display","color","width","paddingRight","textAlign","fontSize","TEXT","maxWidth","height","verticalAlign","textOverflow","overflow","NONE","Plain","style","children","STYLE","rowDiv","Text","isShowLabels","caption","text","styleRoot","styleCaption","styleText","_styleCaption"],"mappings":";;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE;AACRC,IAAAA,MAAM,EAAE,CADA;AAERC,IAAAA,UAAU,EAAE,EAFJ;AAGRC,IAAAA,UAAU,EAAE,CAHJ;AAIRC,IAAAA,UAAU,EAAE;AAJJ,GADF;AAORC,EAAAA,UAAU,EAAG;AACXC,IAAAA,OAAO,EAAE,cADE;AAEXC,IAAAA,KAAK,EAAE,SAFI;AAGXC,IAAAA,KAAK,EAAE,EAHI;AAIXC,IAAAA,YAAY,EAAE,CAJH;AAKXC,IAAAA,SAAS,EAAE,OALA;AAMXC,IAAAA,QAAQ,EAAE;AANC,GAPL;AAeRC,EAAAA,IAAI,EAAE;AACJN,IAAAA,OAAO,EAAE,cADL;AAEJO,IAAAA,QAAQ,EAAE,GAFN;AAGJC,IAAAA,MAAM,EAAE,EAHJ;AAIJC,IAAAA,aAAa,EAAE,QAJX;AAKJC,IAAAA,YAAY,EAAE,UALV;AAMJC,IAAAA,QAAQ,EAAE;AANN,GAfE;AAuBRC,EAAAA,IAAI,EAAE;AACJZ,IAAAA,OAAO,EAAE;AADL;AAvBE,CAAV;;AA4BA,IAAMa,KAAK,GAAG,SAARA,KAAQ;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,sBACZ;AAAK,IAAA,KAAK,gCAAOC,yBAAMC,MAAb,EAAwBH,KAAxB;AAAV,KACGC,QADH,CADY;AAAA,CAAd;;AAMA,IAAMG,IAAI,GAAG,SAAPA,IAAO,QAIP;AAAA,iCAHJC,YAGI;AAAA,MAHJA,YAGI,mCAHS,IAGT;AAAA,MAFJC,OAEI,SAFJA,OAEI;AAAA,MAFKC,IAEL,SAFKA,IAEL;AAAA,MADJC,SACI,SADJA,SACI;AAAA,MADOC,YACP,SADOA,YACP;AAAA,MADqBC,SACrB,SADqBA,SACrB;AACJ,MAAI,CAACH,IAAL,EAAW,OAAO,IAAP;;AACX,MAAMI,aAAa,GAAGN,YAAY,GAAG,KAAK,CAAR,GAAY1B,CAAC,CAACmB,IAAhD;;AACA,sBACE;AAAK,IAAA,KAAK,gCAAOnB,CAAC,CAACC,QAAT,EAAsB4B,SAAtB;AAAV,kBACE;AAAM,IAAA,KAAK,gCAAO7B,CAAC,CAACM,UAAT,EAAwBwB,YAAxB,EAAyCE,aAAzC;AAAX,KACGL,OADH,CADF,eAIE;AAAM,IAAA,KAAK,gCAAO3B,CAAC,CAACa,IAAT,EAAkBkB,SAAlB;AAAX,KACGH,IADH,CAJF,CADF;AAUD,CAjBD;;eAmBe;AAAER,EAAAA,KAAK,EAALA,KAAF;AAASK,EAAAA,IAAI,EAAJA;AAAT,C","sourcesContent":["import React from 'react'\r\n\r\nimport STYLE from '../../styles/DialogStyles'\r\n\r\nconst S = {\r\n  ROOT_DIV: {\r\n    margin: 5,\r\n    marginLeft: 10,\r\n    lineHeight: 2,\r\n    fontWeight: 'bold'\r\n  },\r\n  LABEL_SPAN : {\r\n    display: 'inline-block',\r\n    color: '#1b75bb',\r\n    width: 95,\r\n    paddingRight: 5,\r\n    textAlign: 'right',\r\n    fontSize: '16px'\r\n  },\r\n  TEXT: {\r\n    display: 'inline-block',\r\n    maxWidth: 200,\r\n    height: 32,\r\n    verticalAlign: 'middle',\r\n    textOverflow: 'ellipsis',\r\n    overflow: 'hidden'\r\n  },\r\n  NONE: {\r\n    display: 'none'\r\n  }\r\n};\r\n\r\nconst Plain = ({ style, children }) => (\r\n  <div style={{ ...STYLE.rowDiv, ...style }}>\r\n    {children}\r\n  </div>\r\n);\r\n\r\nconst Text = ({\r\n  isShowLabels=true,\r\n  caption, text,\r\n  styleRoot, styleCaption, styleText\r\n}) => {\r\n  if (!text) return null;\r\n  const _styleCaption = isShowLabels ? void 0 : S.NONE;\r\n  return (\r\n    <div style={{ ...S.ROOT_DIV, ...styleRoot }}>\r\n      <span style={{ ...S.LABEL_SPAN, ...styleCaption, ..._styleCaption }}>\r\n        {caption}\r\n      </span>\r\n      <span style={{ ...S.TEXT, ...styleText }}>\r\n        {text}\r\n      </span>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default { Plain, Text }\r\n"],"file":"Row.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/Row.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/Row.js",
+ "names": [
+  "S",
+  "ROOT_DIV",
+  "margin",
+  "marginLeft",
+  "lineHeight",
+  "fontWeight",
+  "LABEL_SPAN",
+  "display",
+  "color",
+  "width",
+  "paddingRight",
+  "textAlign",
+  "fontSize",
+  "TEXT",
+  "maxWidth",
+  "height",
+  "verticalAlign",
+  "textOverflow",
+  "overflow",
+  "NONE",
+  "Plain",
+  "style",
+  "children",
+  "STYLE",
+  "ROW",
+  "Text",
+  "isShowLabels",
+  "caption",
+  "text",
+  "styleRoot",
+  "styleCaption",
+  "styleText",
+  "_styleCaption"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE;AACRC,IAAAA,MAAM,EAAE,CADA;AAERC,IAAAA,UAAU,EAAE,EAFJ;AAGRC,IAAAA,UAAU,EAAE,CAHJ;AAIRC,IAAAA,UAAU,EAAE;AAJJ,GADF;AAORC,EAAAA,UAAU,EAAG;AACXC,IAAAA,OAAO,EAAE,cADE;AAEXC,IAAAA,KAAK,EAAE,SAFI;AAGXC,IAAAA,KAAK,EAAE,EAHI;AAIXC,IAAAA,YAAY,EAAE,CAJH;AAKXC,IAAAA,SAAS,EAAE,OALA;AAMXC,IAAAA,QAAQ,EAAE;AANC,GAPL;AAeRC,EAAAA,IAAI,EAAE;AACJN,IAAAA,OAAO,EAAE,cADL;AAEJO,IAAAA,QAAQ,EAAE,GAFN;AAGJC,IAAAA,MAAM,EAAE,EAHJ;AAIJC,IAAAA,aAAa,EAAE,QAJX;AAKJC,IAAAA,YAAY,EAAE,UALV;AAMJC,IAAAA,QAAQ,EAAE;AANN,GAfE;AAuBRC,EAAAA,IAAI,EAAE;AACJZ,IAAAA,OAAO,EAAE;AADL;AAvBE,CAAV;;AA4BA,IAAMa,KAAK,GAAG,SAARA,KAAQ;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,sBACZ;AAAK,IAAA,KAAK,gCAAOC,yBAAMC,GAAb,EAAqBH,KAArB;AAAV,KACGC,QADH,CADY;AAAA,CAAd;;AAMA,IAAMG,IAAI,GAAG,SAAPA,IAAO,QAIP;AAAA,iCAHJC,YAGI;AAAA,MAHJA,YAGI,mCAHS,IAGT;AAAA,MAFJC,OAEI,SAFJA,OAEI;AAAA,MAFKC,IAEL,SAFKA,IAEL;AAAA,MADJC,SACI,SADJA,SACI;AAAA,MADOC,YACP,SADOA,YACP;AAAA,MADqBC,SACrB,SADqBA,SACrB;AACJ,MAAI,CAACH,IAAL,EAAW,OAAO,IAAP;;AACX,MAAMI,aAAa,GAAGN,YAAY,GAAG,KAAK,CAAR,GAAY1B,CAAC,CAACmB,IAAhD;;AACA,sBACE;AAAK,IAAA,KAAK,gCAAOnB,CAAC,CAACC,QAAT,EAAsB4B,SAAtB;AAAV,kBACE;AAAM,IAAA,KAAK,gCAAO7B,CAAC,CAACM,UAAT,EAAwBwB,YAAxB,EAAyCE,aAAzC;AAAX,KACGL,OADH,CADF,eAIE;AAAM,IAAA,KAAK,gCAAO3B,CAAC,CAACa,IAAT,EAAkBkB,SAAlB;AAAX,KACGH,IADH,CAJF,CADF;AAUD,CAjBD;;eAmBe;AAAER,EAAAA,KAAK,EAALA,KAAF;AAASK,EAAAA,IAAI,EAAJA;AAAT,C"
+}

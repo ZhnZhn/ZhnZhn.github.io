@@ -31,7 +31,7 @@ const S = {
 };
 
 const Plain = ({ style, children }) => (
-  <div style={{ ...STYLE.rowDiv, ...style }}>
+  <div style={{ ...STYLE.ROW, ...style }}>
     {children}
   </div>
 );

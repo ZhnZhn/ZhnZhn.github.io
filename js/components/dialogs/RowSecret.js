@@ -46,9 +46,9 @@ var RowSecret = /*#__PURE__*/function (_Component) {
         titleStyle = _this$props.titleStyle,
         rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["title", "titleStyle"]);
     return /*#__PURE__*/_react["default"].createElement("form", null, /*#__PURE__*/_react["default"].createElement("label", {
-      style: _DialogStyles["default"].rowDiv
+      style: _DialogStyles["default"].ROW
     }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, titleStyle)
+      style: (0, _extends2["default"])({}, _DialogStyles["default"].CAPTION, titleStyle)
     }, title), /*#__PURE__*/_react["default"].createElement(_InputSecret["default"], (0, _extends2["default"])({
       ref: this._refInput
     }, rest))));

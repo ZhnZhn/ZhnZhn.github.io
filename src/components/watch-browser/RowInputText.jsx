@@ -5,18 +5,20 @@ import InputText from '../zhn/InputText';
 import STYLE from '../styles/DialogStyles';
 
 const S = {
-  ROOT : {
+  ROW : {
+    ...STYLE.ROW,
     lineHeight: 2
   },
   CAPTION : {
-    width: '120px'
+    ...STYLE.CAPTION,
+    width: 120
   },
   INPUT_TEXT : {
-    width : '250px',
+    width : 250,
+    height: 30,
+    paddingLeft: 10,
     marginLeft : 0,
-    marginRight: 0,
-    paddingLeft: '10px',
-    height: '30px'
+    marginRight: 0
   }
 }
 
@@ -31,8 +33,8 @@ class RowInputText extends Component {
   render(){
     const { caption } = this.props;
     return (
-      <div style={{...STYLE.rowDiv, ...S.ROOT}}>
-         <span style={{...STYLE.labelSpan, ...S.CAPTION}}>
+      <div style={S.ROW}>
+         <span style={S.CAPTION}>
            {caption}
          </span>
          <InputText

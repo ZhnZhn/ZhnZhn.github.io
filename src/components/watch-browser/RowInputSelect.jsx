@@ -5,14 +5,15 @@ import InputSelect from '../zhn-select/InputSelect';
 import STYLE from '../styles/DialogStyles';
 
 const S = {
-  CAPTION : {
-    width: '120px'
+  CAPTION: {
+    ...STYLE.CAPTION,
+    width: 120
   }
 };
 
 const RowInputSelect = ({ caption, options, onSelect }) => (
-  <div style={STYLE.rowDiv}>
-     <span style={{...STYLE.labelSpan, ...S.CAPTION}}>
+  <div style={STYLE.ROW}>
+     <span style={S.CAPTION}>
        {caption}
      </span>
      <InputSelect
@@ -26,7 +27,7 @@ const RowInputSelect = ({ caption, options, onSelect }) => (
 /*
 RowInputSelect.propTypes = {
   caption: PropTypes.string,
-  options: PropTypes.array,  
+  options: PropTypes.array,
   onSelect: PropTypes.func
 }
 */

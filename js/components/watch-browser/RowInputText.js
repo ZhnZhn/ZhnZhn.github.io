@@ -7,9 +7,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -19,18 +19,18 @@ var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 
 //import PropTypes from "prop-types";
 var S = {
-  ROOT: {
+  ROW: (0, _extends2["default"])({}, _DialogStyles["default"].ROW, {
     lineHeight: 2
-  },
-  CAPTION: {
-    width: '120px'
-  },
+  }),
+  CAPTION: (0, _extends2["default"])({}, _DialogStyles["default"].CAPTION, {
+    width: 120
+  }),
   INPUT_TEXT: {
-    width: '250px',
+    width: 250,
+    height: 30,
+    paddingLeft: 10,
     marginLeft: 0,
-    marginRight: 0,
-    paddingLeft: '10px',
-    height: '30px'
+    marginRight: 0
   }
 };
 
@@ -58,9 +58,9 @@ var RowInputText = /*#__PURE__*/function (_Component) {
   _proto.render = function render() {
     var caption = this.props.caption;
     return /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, S.ROOT)
+      style: S.ROW
     }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, S.CAPTION)
+      style: S.CAPTION
     }, caption), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
       ref: this._refInputText,
       style: S.INPUT_TEXT

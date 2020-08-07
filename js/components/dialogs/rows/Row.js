@@ -43,7 +43,7 @@ var Plain = function Plain(_ref) {
   var style = _ref.style,
       children = _ref.children;
   return /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, _DialogStyles["default"].rowDiv, style)
+    style: (0, _extends2["default"])({}, _DialogStyles["default"].ROW, style)
   }, children);
 };
 

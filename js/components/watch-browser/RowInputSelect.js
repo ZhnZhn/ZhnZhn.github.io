@@ -15,9 +15,9 @@ var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 
 //import PropTypes from "prop-types";
 var S = {
-  CAPTION: {
-    width: '120px'
-  }
+  CAPTION: (0, _extends2["default"])({}, _DialogStyles["default"].CAPTION, {
+    width: 120
+  })
 };
 
 var RowInputSelect = function RowInputSelect(_ref) {
@@ -25,9 +25,9 @@ var RowInputSelect = function RowInputSelect(_ref) {
       options = _ref.options,
       onSelect = _ref.onSelect;
   return /*#__PURE__*/_react["default"].createElement("div", {
-    style: _DialogStyles["default"].rowDiv
+    style: _DialogStyles["default"].ROW
   }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, _DialogStyles["default"].labelSpan, S.CAPTION)
+    style: S.CAPTION
   }, caption), /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {
     width: "250",
     options: options,
@@ -37,7 +37,7 @@ var RowInputSelect = function RowInputSelect(_ref) {
 /*
 RowInputSelect.propTypes = {
   caption: PropTypes.string,
-  options: PropTypes.array,  
+  options: PropTypes.array,
   onSelect: PropTypes.func
 }
 */

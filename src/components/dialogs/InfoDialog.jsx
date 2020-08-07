@@ -31,12 +31,12 @@ const InfoDialog = crModalDialog(({ isShow, data, onClose }) => {
       isShow={isShow}
       onClose={onClose}
     >
-       <div style={STYLE.rowDiv}>
+       <div style={STYLE.ROW}>
           <p style={S.CAPTION}>
             {caption}
           </p>
        </div>
-       <div style={STYLE.rowDiv}>
+       <div style={STYLE.ROW}>
           <p style={S.DESCR}>{descr}</p>
        </div>
     </ModalDialog>

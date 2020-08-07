@@ -39,9 +39,9 @@ const S = {
 
 const DialogStyles = {
   //Dialogs, DatesFragments
-  rowDiv: { ...S.ROW },
-  labelSpan : { ...S.LABEL },
-
+  ROW: { ...S.ROW },
+  CAPTION: { ...S.LABEL },
+  
   crRowCaption: (caption) => caption.indexOf(':') === -1
     && caption !== ''
       ? `${caption}:`

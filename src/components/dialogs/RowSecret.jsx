@@ -15,8 +15,8 @@ class RowSecret extends Component {
     const { title, titleStyle, ...rest } = this.props;
     return (
       <form>
-        <label style={STYLE.rowDiv}>
-           <span style={{...STYLE.labelSpan, ...titleStyle}}>
+        <label style={STYLE.ROW}>
+           <span style={{...STYLE.CAPTION, ...titleStyle}}>
              {title}
            </span>
            <InputSecret
