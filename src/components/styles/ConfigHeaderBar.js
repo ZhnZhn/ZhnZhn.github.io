@@ -8,10 +8,7 @@ const S = {
 //for light
 //0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.3)
 
-const styleConfig = {
-  themeName: void 0,
-  style: void 0,
-
+const styleConfig = {  
   createStyle: (CSS_RULE, themeName) => {
     return {
       ...S,

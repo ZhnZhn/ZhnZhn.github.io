@@ -1,7 +1,4 @@
-const styleConfig = {
-  themeName: void 0,
-  style: void 0,
-
+const styleConfig = {  
   createStyle: (CSS_RULE) => {
     return {
       ROOT: {

@@ -25,47 +25,54 @@
   width: 5px;
   height: 5px;
 }
-
-.with-scroll::-webkit-scrollbar-track {
-  width: 2px;
-  border-radius: 2px;
-}
-
 .with-scroll::-webkit-scrollbar-thumb {
   width: 3px;
   height: 50px;
   background-color: #8bc34a;
   border-radius: 2px;
 }
-
+.with-scroll::-webkit-scrollbar-track {
+  width: 2px;
+  border-radius: 2px;
+}
 .with-scroll::-webkit-scrollbar-track-piece {
-  background-color: #1b2836;
+  /*background-color: #1b2836;*/
   width: 2px;
 }
+/*
 .with-scroll::-webkit-scrollbar-corner {
   background-color: #1b2836;
 }
+*/
 
-.with-scroll--grey {
+
+.scroll--grey {
   scrollbar-width: thin;
   scrollbar-color: #8bc34a #1b2836;
 }
-.with-scroll--grey::-webkit-scrollbar-track-piece {
+.scroll--grey::-webkit-scrollbar-track-piece {
   background-color: #1b2836;
 }
-.with-scroll--white {
+.scroll--white {
   scrollbar-width: thin;
   scrollbar-color: #8bc34a #bcd8f5;
 }
-.with-scroll--white::-webkit-scrollbar-track-piece {
+.scroll--white::-webkit-scrollbar-track-piece {
   background-color: #bcd8f5;
 }
-.with-scroll--sand {
+.scroll--sand {
   scrollbar-width: thin;
   scrollbar-color: #8bc34a #463222;
 }
-.with-scroll--sand::-webkit-scrollbar-track-piece {
-  background-color: #463222; 
+.scroll--sand::-webkit-scrollbar-track-piece {
+  background-color: #463222;
+}
+.scroll--sand-l {
+  scrollbar-width: thin;
+  scrollbar-color: #8bc34a #64473d;
+}
+.scroll--sand-l::-webkit-scrollbar-track-piece {
+  background-color: #64473d;
 }
 
 .scroll-browser-by {

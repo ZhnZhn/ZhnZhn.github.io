@@ -38,8 +38,17 @@ var UI_THEME_OPTIONS = [{
   caption: 'Light',
   value: 'WHITE'
 }, {
-  caption: 'Sand',
-  value: 'SAND'
+  caption: 'Light New',
+  value: 'WHITE_N'
+}, {
+  caption: 'Sand New',
+  value: 'SAND_N'
+}, {
+  caption: 'Sand Light New',
+  value: 'SAND_L_N'
+}, {
+  caption: 'Sand Light',
+  value: 'SAND_L'
 }];
 var SET = {
   PROXY: 'setProxy'

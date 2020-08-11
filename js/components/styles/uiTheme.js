@@ -3,52 +3,60 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = exports.THEME_NAME = void 0;
+exports["default"] = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _RouterConfig = _interopRequireDefault(require("./RouterConfig"));
 
-var _THEME_CONFIG;
-
+var DF_T_C = '#1b2836';
 var P_GREY = {
   BG_BODY: '#5f5f5f',
   BG: '#4d4d4d',
   BT_HOT_C: '#c0c0c0',
   EL_BG: '#1b2836',
   EL_C: 'silver',
-  BG_HEADER: '#3a6799',
-  C_HEADER: '#8a8a8a'
+  T_C: DF_T_C
 };
 var P_WHITE = {
   BG_BODY: '#e1e1e1',
   BG: '#ebf1f5',
   BT_HOT_C: '#c0c0c0',
   EL_BG: '#bcd8f5',
-  EL_C: '#212020',
-  BG_HEADER: '#0096c8',
-  C_HEADER: '#4d4d4d'
+  EL_C: '#212020'
 };
-var P_SAND = {
+var P_WHITE_N = (0, _extends2["default"])({}, P_WHITE, {
+  T_C: '#1b75bb'
+});
+var P_SAND_L = {
   BG_BODY: '#9e9e9e',
-  BG: '#e6d5a9',
+  BG: '#e8e0cb',
   BT_HOT_C: '#5b5b5b',
-  EL_BG: '#463222',
-  EL_C: 'silver',
-  BG_HEADER: '#0096c8',
-  C_HEADER: '#4d4d4d'
+  EL_BG: '#64473d',
+  EL_C: 'silver'
 };
+var P_SAND_N = (0, _extends2["default"])({}, P_SAND_L, {
+  BG: '#e6d5a9',
+  EL_BG: '#463222',
+  T_C: '#785133'
+});
+var P_SAND_L_N = (0, _extends2["default"])({}, P_SAND_L, {
+  T_C: '#785133'
+});
 var CSS_RULE = {
   BG: {},
   BT_HOT: {},
   EL: {},
   EL_BORDER: {},
-  EL_BG: {},
-  BG_HEADER: {},
-  R_DIALOG: {}
+  EL_BG: {}
 };
 var _assign = Object.assign;
 
-var _setBodyBg = function _setBodyBg(conf, P) {
-  document.body.style.backgroundColor = P.BG_BODY;
+var _setStyle = function _setStyle(conf, P) {
+  var _style = document.body.style;
+  _style.backgroundColor = P.BG_BODY;
+
+  _style.setProperty("--t-c", P.T_C || DF_T_C);
 };
 
 var _crBg = function _crBg(conf, P) {
@@ -80,7 +88,7 @@ var _crHotBt = function _crHotBt(conf, P) {
   });
 };
 
-var _FN_STYLES = [_setBodyBg, _crBg, _crEl, _crHotBt];
+var _FN_STYLES = [_crBg, _crEl, _crHotBt, _setStyle];
 
 var _setStyleTo = function _setStyleTo(conf, pallete) {
   _FN_STYLES.forEach(function (fn) {
@@ -88,25 +96,27 @@ var _setStyleTo = function _setStyleTo(conf, pallete) {
   });
 };
 
-var THEME_NAME = {
-  DEFAULT: 'GREY',
-  GREY: 'GREY',
-  WHITE: 'WHITE',
-  SAND: 'SAND'
+var HP_THEME = {
+  GREY: [P_GREY, '--grey'],
+  WHITE: [P_WHITE, '--white'],
+  WHITE_N: [P_WHITE_N, '--white'],
+  SAND_N: [P_SAND_N, '--sand'],
+  SAND_L_N: [P_SAND_L_N, '--sand-l'],
+  SAND_L: [P_SAND_L, '--sand-l']
 };
-exports.THEME_NAME = THEME_NAME;
-var THEME_CONFIG = (_THEME_CONFIG = {}, _THEME_CONFIG[THEME_NAME.GREY] = {
-  pallete: P_GREY,
-  clSuffix: '--grey'
-}, _THEME_CONFIG[THEME_NAME.WHITE] = {
-  pallete: P_WHITE,
-  clSuffix: '--white'
-}, _THEME_CONFIG[THEME_NAME.SAND] = {
-  pallete: P_SAND,
-  clSuffix: '--sand'
-}, _THEME_CONFIG);
+var DF_THEME_ID = 'GREY';
+
+var _crThemeConfig = function _crThemeConfig(themeName) {
+  var _arr = HP_THEME[themeName] || HP_THEME[DF_THEME_ID];
+
+  return {
+    pallete: _arr[0],
+    clSuffix: _arr[1]
+  };
+};
+
 var CL_PROPS = {
-  CL_SCROLL: 'with-scroll'
+  CL_SCROLL: 'scroll'
 };
 
 var _setClassNameTo = function _setClassNameTo(suffix) {
@@ -120,25 +130,25 @@ var _setClassNameTo = function _setClassNameTo(suffix) {
 };
 
 var _setTheme = function _setTheme(themeName) {
-  var config = THEME_CONFIG[themeName];
-  var clSuffix = config.clSuffix,
-      pallete = config.pallete;
+  var _crThemeConfig2 = _crThemeConfig(themeName),
+      clSuffix = _crThemeConfig2.clSuffix,
+      pallete = _crThemeConfig2.pallete;
 
   _setClassNameTo(clSuffix);
 
   _setStyleTo(CSS_RULE, pallete);
 };
 
-var theme = {
-  themeName: THEME_NAME.DEFAULT,
+var uiTheme = {
+  themeName: DF_THEME_ID,
   _init: function _init() {
-    this.setThemeName(THEME_NAME.DEFAULT);
+    this.setThemeName(DF_THEME_ID);
   },
   getThemeName: function getThemeName() {
     return this.themeName;
   },
-  setThemeName: function setThemeName(themeName) {
-    this.themeName = THEME_NAME[themeName] || THEME_NAME.DEFAULT;
+  setThemeName: function setThemeName(themeId) {
+    this.themeName = HP_THEME[themeId] ? themeId : DF_THEME_ID;
 
     _setTheme(this.themeName);
   },
@@ -154,8 +164,8 @@ var theme = {
   }
 };
 
-theme._init();
+uiTheme._init();
 
-var _default = theme;
+var _default = uiTheme;
 exports["default"] = _default;
-//# sourceMappingURL=theme.js.map
+//# sourceMappingURL=uiTheme.js.map

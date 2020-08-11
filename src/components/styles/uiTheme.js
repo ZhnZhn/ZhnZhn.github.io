@@ -1,5 +1,7 @@
 import routerConfig from './RouterConfig'
 
+const DF_T_C = '#1b2836';
+
 const P_GREY = {
   BG_BODY: '#5f5f5f',
   BG: '#4d4d4d',
@@ -9,8 +11,7 @@ const P_GREY = {
   EL_BG: '#1b2836',
   EL_C: 'silver',
 
-  BG_HEADER: '#3a6799',
-  C_HEADER: '#8a8a8a'
+  T_C: DF_T_C
 };
 const P_WHITE = {
   BG_BODY: '#e1e1e1',
@@ -19,23 +20,34 @@ const P_WHITE = {
   BT_HOT_C: '#c0c0c0',
 
   EL_BG: '#bcd8f5',
-  EL_C: '#212020',
-
-  BG_HEADER: '#0096c8',
-  C_HEADER: '#4d4d4d'
+  EL_C: '#212020'
 };
-const P_SAND = {
-  BG_BODY: '#9e9e9e',  
-  BG: '#e6d5a9',
+const P_WHITE_N = {
+  ...P_WHITE,
+  T_C: '#1b75bb'
+}
+
+const P_SAND_L = {
+  BG_BODY: '#9e9e9e',
+  BG: '#e8e0cb',
 
   BT_HOT_C: '#5b5b5b',
 
+  EL_BG: '#64473d',
+  EL_C: 'silver'
+}
+const P_SAND_N = {
+  ...P_SAND_L,
+  BG: '#e6d5a9',
   EL_BG: '#463222',
-  EL_C: 'silver',
 
-  BG_HEADER: '#0096c8',
-  C_HEADER: '#4d4d4d'
+  T_C: '#785133'
 };
+const P_SAND_L_N = {
+  ...P_SAND_L,
+  T_C: '#785133'
+}
+
 
 const CSS_RULE = {
   BG: {},
@@ -44,15 +56,14 @@ const CSS_RULE = {
 
   EL: {},
   EL_BORDER: {},
-  EL_BG: {},
-
-  BG_HEADER: {},
-  R_DIALOG: {}
+  EL_BG: {}
 };
 
 const _assign = Object.assign;
-const _setBodyBg = (conf, P) => {
-  document.body.style.backgroundColor = P.BG_BODY
+const _setStyle = (conf, P) => {
+  const _style = document.body.style;
+  _style.backgroundColor = P.BG_BODY
+  _style.setProperty("--t-c", P.T_C || DF_T_C)
 };
 const _crBg = (conf, P) => {
   _assign(conf.BG, {
@@ -81,39 +92,35 @@ const _crHotBt = (conf, P) => {
 
 
 const _FN_STYLES = [
-  _setBodyBg,
   _crBg,
   _crEl,
-  _crHotBt
+  _crHotBt,
+  _setStyle
 ];
 const _setStyleTo = (conf, pallete) => {
   _FN_STYLES.forEach(fn => fn(conf, pallete))
 };
 
-export const THEME_NAME = {
-  DEFAULT: 'GREY',
-  GREY: 'GREY',
-  WHITE: 'WHITE',
-  SAND: 'SAND'
-};
+const HP_THEME = {
+  GREY: [P_GREY, '--grey'],
+  WHITE: [P_WHITE, '--white'],
+  WHITE_N: [P_WHITE_N, '--white'],
+  SAND_N: [P_SAND_N, '--sand'],
+  SAND_L_N: [P_SAND_L_N, '--sand-l'],
+  SAND_L: [P_SAND_L, '--sand-l']
+}
+const DF_THEME_ID = 'GREY';
 
-const THEME_CONFIG = {
-  [THEME_NAME.GREY]: {
-    pallete: P_GREY,
-    clSuffix: '--grey'
-  },
-  [THEME_NAME.WHITE]: {
-    pallete: P_WHITE,
-    clSuffix: '--white'
-  },
-  [THEME_NAME.SAND]: {
-    pallete: P_SAND,
-    clSuffix: '--sand'
-  }
-};
+const _crThemeConfig = (themeName) => {
+  const _arr = HP_THEME[themeName] || HP_THEME[DF_THEME_ID];
+  return {
+    pallete: _arr[0],
+    clSuffix: _arr[1]
+  };
+}
 
 const CL_PROPS = {
-  CL_SCROLL: 'with-scroll',
+  CL_SCROLL: 'scroll',
 };
 
 const _setClassNameTo = (suffix='') => {
@@ -123,22 +130,23 @@ const _setClassNameTo = (suffix='') => {
 }
 
 const _setTheme = (themeName) => {
-  const config = THEME_CONFIG[themeName];
-  const { clSuffix, pallete } = config;
+  const { clSuffix, pallete } = _crThemeConfig(themeName);
   _setClassNameTo(clSuffix)
   _setStyleTo(CSS_RULE, pallete)
 }
 
-const theme = {
-  themeName: THEME_NAME.DEFAULT,
+const uiTheme = {
+  themeName: DF_THEME_ID,
   _init(){
-    this.setThemeName(THEME_NAME.DEFAULT)
+    this.setThemeName(DF_THEME_ID)
   },
   getThemeName(){
     return this.themeName;
   },
-  setThemeName(themeName){
-    this.themeName = THEME_NAME[themeName] || THEME_NAME.DEFAULT;
+  setThemeName(themeId){
+    this.themeName = HP_THEME[themeId]
+      ? themeId
+      : DF_THEME_ID
     _setTheme(this.themeName)
   },
   getStyle(id){
@@ -151,6 +159,6 @@ const theme = {
   }
 };
 
-theme._init()
+uiTheme._init()
 
-export default theme
+export default uiTheme

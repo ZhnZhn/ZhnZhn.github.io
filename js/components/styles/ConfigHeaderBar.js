@@ -15,8 +15,6 @@ var S = {
 //0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.3)
 
 var styleConfig = {
-  themeName: void 0,
-  style: void 0,
   createStyle: function createStyle(CSS_RULE, themeName) {
     return (0, _extends2["default"])({}, S, {
       ROOT: (0, _extends2["default"])({}, CSS_RULE.BG),
