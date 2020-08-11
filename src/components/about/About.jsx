@@ -14,7 +14,6 @@ import StepTitle from './StepTitle';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
 
-import C from '../styles/Color';
 import S from './About.Style';
 
 const { useListen, useTheme } = use
@@ -33,10 +32,6 @@ const STEP = {
   T3: "Select params and enter query date in the opened up draggable Dialog",
   T4: "Click a button Load",
   T5: "Also you can export chart to PNG, JPG, SVG, print to PDF"
-};
-
-const OC_CAPTION_STYLE = {
-  color: C.TITLE
 };
 
 const IS_CLOSE_PROVIDERS = !has.isWideWidth;
@@ -90,10 +85,7 @@ const About = ({ store, isInitShow }) => {
            is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers.
          </span>
        </p>
-       <DataProviders
-         isClose={IS_CLOSE_PROVIDERS}
-         ocCaptionStyle={OC_CAPTION_STYLE}
-       />
+       <DataProviders isClose={IS_CLOSE_PROVIDERS} />
        <div style={S.BLACK}>
           <StepTitle step="1" title={STEP.T1} />
           <StepTitle step="2" title={STEP.T2} />
@@ -119,8 +111,6 @@ const About = ({ store, isInitShow }) => {
           caption="More..."
           style={S.LH_14}
           ocStyle={S.LH_18}
-          captionStyle={OC_CAPTION_STYLE}
-          openColor={C.TITLE}
         >
           <p style={S.MB_8EM}>
             After clicking a <span style={S.BLACK}>button Show</span> in a Dialog will be an opened up <span style={S.BLACK}>Chart container</span> with charts or empty.

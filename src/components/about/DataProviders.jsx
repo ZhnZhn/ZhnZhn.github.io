@@ -12,16 +12,16 @@ const CL = {
 };
 
 const OPEN_COLOR_L2 = C.GREEN;
-const OPEN_COLOR_L1 = C.TITLE
 const ST = {
   ROOT_CHILD: {
-    borderLeft: `2px solid ${OPEN_COLOR_L1}`,
+    borderLeftStyle: 'solid',
+    borderLeftWidth: 2,
     marginLeft: -5,
     paddingLeft: 8
   },
   OC_L1: {
     ...S.LINE_HEIGHT,
-    ...S.P_BOTTOM    
+    ...S.P_BOTTOM
   },
   OC_L2: {
     paddingTop: 6,
@@ -45,13 +45,11 @@ const ST = {
   }
 };
 
-const DataProviders = ({ isClose, ocCaptionStyle }) => (
+const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
      caption="Data Providers (All 23):"
      style={ST.OC_L1}
-     captionStyle={ocCaptionStyle}
-     openColor={OPEN_COLOR_L1}
      childStyle={ST.ROOT_CHILD}
   >
     <div>
@@ -108,7 +106,6 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
       <OpenClose
         caption="(8) Required API Key:"
         style={ST.OC_L2}
-        captionStyle={ocCaptionStyle}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}
       >
@@ -160,7 +157,6 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
       <OpenClose
         caption="(2) Required Https Proxy:"
         style={ST.OC_L2}
-        captionStyle={ocCaptionStyle}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}
       >

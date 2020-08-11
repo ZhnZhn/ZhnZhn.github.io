@@ -5,7 +5,6 @@ import D from '../dialogs/DialogCell';
 import A from '../zhn/A'
 
 const INITIAL_COLOR = '#d2b772';
-//const OC_COLOR = '#1b2836';
 const OC_COLOR = 'black';
 const DF_PERIOD = 1;
 
@@ -23,6 +22,10 @@ const S = {
   PERIOD_INPUT: {
     width: 56,
     marginRight: 12
+  },
+  ROW_CHB: {
+    lineHeight: 'initial',
+    paddingBottom: 4
   },
   PL_6: {
     paddingLeft: 6
@@ -99,7 +102,7 @@ const RowGrowthRate = ({
      }, _refPeriod.current);
 
   return (
-  <A.OpenClose    
+  <A.OpenClose
     caption="Growth Rate"
     style={S.ROOT_OC}
     ocStyle={S.OC}
@@ -124,7 +127,7 @@ const RowGrowthRate = ({
         initValue={INITIAL_COLOR}
         onEnter={_onColor}
       />
-      <div>
+      <div style={S.ROW_CHB}>
         <D.RowCheckBox
           caption="Column"
           rootStyle={{ ...S.INLINE, ...S.PL_6 }}

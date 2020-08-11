@@ -31,8 +31,6 @@ var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 
 var _LogosBar = _interopRequireDefault(require("./LogosBar"));
 
-var _Color = _interopRequireDefault(require("../styles/Color"));
-
 var _About = _interopRequireDefault(require("./About.Style"));
 
 var useListen = _use["default"].useListen,
@@ -49,9 +47,6 @@ var STEP = {
   T3: "Select params and enter query date in the opened up draggable Dialog",
   T4: "Click a button Load",
   T5: "Also you can export chart to PNG, JPG, SVG, print to PDF"
-};
-var OC_CAPTION_STYLE = {
-  color: _Color["default"].TITLE
 };
 var IS_CLOSE_PROVIDERS = !_has["default"].isWideWidth;
 
@@ -98,8 +93,7 @@ var About = function About(_ref) {
   }, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].GREEN
   }, "ERC (Economic RESTful Client)\xA0"), /*#__PURE__*/_react["default"].createElement("span", null, "is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers.")), /*#__PURE__*/_react["default"].createElement(_DataProviders["default"], {
-    isClose: IS_CLOSE_PROVIDERS,
-    ocCaptionStyle: OC_CAPTION_STYLE
+    isClose: IS_CLOSE_PROVIDERS
   }), /*#__PURE__*/_react["default"].createElement("div", {
     style: _About["default"].BLACK
   }, /*#__PURE__*/_react["default"].createElement(_StepTitle["default"], {
@@ -131,9 +125,7 @@ var About = function About(_ref) {
   }, "tab Info of Chart item."))), /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
     caption: "More...",
     style: _About["default"].LH_14,
-    ocStyle: _About["default"].LH_18,
-    captionStyle: OC_CAPTION_STYLE,
-    openColor: _Color["default"].TITLE
+    ocStyle: _About["default"].LH_18
   }, /*#__PURE__*/_react["default"].createElement("p", {
     style: _About["default"].MB_8EM
   }, "After clicking a ", /*#__PURE__*/_react["default"].createElement("span", {

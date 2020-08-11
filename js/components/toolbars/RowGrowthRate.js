@@ -15,8 +15,7 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
 var _A = _interopRequireDefault(require("../zhn/A"));
 
-var INITIAL_COLOR = '#d2b772'; //const OC_COLOR = '#1b2836';
-
+var INITIAL_COLOR = '#d2b772';
 var OC_COLOR = 'black';
 var DF_PERIOD = 1;
 var S = {
@@ -33,6 +32,10 @@ var S = {
   PERIOD_INPUT: {
     width: 56,
     marginRight: 12
+  },
+  ROW_CHB: {
+    lineHeight: 'initial',
+    paddingBottom: 4
   },
   PL_6: {
     paddingLeft: 6
@@ -150,7 +153,9 @@ var RowGrowthRate = function RowGrowthRate(_ref3) {
     styleCaption: S.NONE,
     initValue: INITIAL_COLOR,
     onEnter: _onColor
-  }), /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+  }), /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.ROW_CHB
+  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     caption: "Column",
     rootStyle: (0, _extends2["default"])({}, S.INLINE, S.PL_6),
     captionStyle: S.PL_6,
