@@ -19,12 +19,10 @@ var useToggle = _use["default"].useToggle,
 var CL = {
   ROOT: 'zhn-oc',
   SHOW_POPUP: 'show-popup',
-  NOT_SELECTED: 'not-selected'
+  NOT_SELECTED: 'not-selected',
+  OC_EXP: 'zhn-oc__exp'
 };
-var DF = {
-  OPEN_COLOR: _Color["default"].TITLE,
-  CLOSE_COLOR: _Color["default"].BLANK
-};
+var FILL_CLOSE_COLOR = _Color["default"].BLANK;
 var S = {
   ROOT_DIV: {
     lineHeight: 2
@@ -38,7 +36,6 @@ var S = {
     marginLeft: 8
   },
   CAPTION: {
-    color: _Color["default"].TITLE,
     paddingLeft: 4,
     fontFamily: 'Roboto, Arial, Lato, sans-serif',
     fontWeight: 'bold',
@@ -57,17 +54,16 @@ var PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
 var _crConf = function _crConf(_ref) {
   var isOpen = _ref.isOpen,
-      openColor = _ref.openColor,
-      closeColor = _ref.closeColor;
+      openColor = _ref.openColor;
   return isOpen ? {
     _pathV: PATH_OPEN,
     _fillV: openColor,
-    _childCl: CL.SHOW_POPUP,
+    _childCl: CL.OC_EXP + " " + CL.SHOW_POPUP,
     _childStyle: S.BLOCK
   } : {
     _pathV: PATH_CLOSE,
-    _fillV: closeColor,
-    _childCl: null,
+    _fillV: FILL_CLOSE_COLOR,
+    _childCl: CL.OC_EXP,
     _childStyle: S.NONE
   };
 };
@@ -81,10 +77,7 @@ var OpenClose = function OpenClose(_ref2) {
       ocStyle = _ref2.ocStyle,
       caption = _ref2.caption,
       captionStyle = _ref2.captionStyle,
-      _ref2$openColor = _ref2.openColor,
-      openColor = _ref2$openColor === void 0 ? DF.OPEN_COLOR : _ref2$openColor,
-      _ref2$closeColor = _ref2.closeColor,
-      closeColor = _ref2$closeColor === void 0 ? DF.CLOSE_COLOR : _ref2$closeColor,
+      openColor = _ref2.openColor,
       CompAfter = _ref2.CompAfter,
       childStyle = _ref2.childStyle,
       children = _ref2.children;
@@ -95,8 +88,7 @@ var OpenClose = function OpenClose(_ref2) {
       _hKeyDown = useKeyEnter(toggleIsOpen),
       _crConf2 = _crConf({
     isOpen: isOpen,
-    openColor: openColor,
-    closeColor: closeColor
+    openColor: openColor
   }),
       _pathV = _crConf2._pathV,
       _fillV = _crConf2._fillV,
@@ -143,7 +135,6 @@ OpenClose.propTypes = {
   caption: PropTypes.string,
   captionStyle: PropTypes.object,
   openColor: PropTypes.string,
-  closeColor: PropTypes.string,
   CompAfter: PropTypes.node,
   childStyle: PropTypes.object,
 }

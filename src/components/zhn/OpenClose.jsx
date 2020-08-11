@@ -8,13 +8,11 @@ const { useToggle, useKeyEnter } = use
 const CL = {
   ROOT: 'zhn-oc',
   SHOW_POPUP: 'show-popup',
-  NOT_SELECTED: 'not-selected'
+  NOT_SELECTED: 'not-selected',
+  OC_EXP: 'zhn-oc__exp'
 };
 
-const DF = {
-  OPEN_COLOR: C.TITLE,
-  CLOSE_COLOR: C.BLANK
-};
+const FILL_CLOSE_COLOR = C.BLANK
 
 const S = {
   ROOT_DIV: {
@@ -29,7 +27,6 @@ const S = {
     marginLeft: 8
   },
   CAPTION: {
-    color: C.TITLE,
     paddingLeft: 4,
     fontFamily: 'Roboto, Arial, Lato, sans-serif',
     fontWeight: 'bold',
@@ -48,17 +45,17 @@ const S = {
 const PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
 const PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
-const _crConf = ({ isOpen, openColor, closeColor }) => isOpen
+const _crConf = ({ isOpen, openColor }) => isOpen
   ? {
       _pathV: PATH_OPEN,
       _fillV: openColor,
-      _childCl: CL.SHOW_POPUP,
+      _childCl: `${CL.OC_EXP} ${CL.SHOW_POPUP}`,
       _childStyle: S.BLOCK
     }
   : {
       _pathV: PATH_CLOSE,
-      _fillV: closeColor,
-      _childCl: null,
+      _fillV: FILL_CLOSE_COLOR,
+      _childCl: CL.OC_EXP,
       _childStyle: S.NONE
     };
 
@@ -67,8 +64,7 @@ const OpenClose = ({
   role='button',
   style, ocStyle,
   caption, captionStyle,
-  openColor=DF.OPEN_COLOR,
-  closeColor=DF.CLOSE_COLOR,
+  openColor,
   CompAfter, childStyle, children
 }) => {
   const [isOpen, toggleIsOpen] = useToggle(!isClose)
@@ -76,7 +72,7 @@ const OpenClose = ({
   , {
      _pathV, _fillV,
      _childCl, _childStyle
-    } = _crConf({ isOpen, openColor, closeColor });
+   } = _crConf({ isOpen, openColor });
   return (
     <div style={{...S.ROOT_DIV, ...style}}>
       <div className={CL.NOT_SELECTED}>
@@ -106,7 +102,7 @@ const OpenClose = ({
        </div>
        {CompAfter}
     </div>
-    <div      
+    <div
       aria-expanded={isOpen}
       className={_childCl}
       style={{...childStyle, ..._childStyle}}
@@ -126,7 +122,6 @@ OpenClose.propTypes = {
   caption: PropTypes.string,
   captionStyle: PropTypes.object,
   openColor: PropTypes.string,
-  closeColor: PropTypes.string,
   CompAfter: PropTypes.node,
   childStyle: PropTypes.object,
 }

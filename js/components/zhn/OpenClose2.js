@@ -17,12 +17,10 @@ var useToggle = _use["default"].useToggle,
     useKeyEnter = _use["default"].useKeyEnter;
 var CL = {
   SHOW: 'show-popup',
-  NOT_SELECTED: 'not-selected zhn-oc'
+  NOT_SELECTED: 'not-selected zhn-oc',
+  OC_EXP: 'zhn-oc__exp'
 };
-var DF = {
-  OPEN_COLOR: _Color["default"].YELLOW,
-  CLOSE_COLOR: _Color["default"].BLANK
-};
+var FILL_CLOSE_COLOR = _Color["default"].BLANK;
 var S = {
   SVG: {
     display: 'inline-block',
@@ -33,7 +31,6 @@ var S = {
     marginLeft: 8
   },
   CAPTION: {
-    color: _Color["default"].TITLE,
     paddingLeft: 4,
     fontFamily: 'Roboto, Arial, Lato, sans-serif',
     fontWeight: 'bold',
@@ -55,19 +52,18 @@ var PATH = {
 var _crStyleConf = function _crStyleConf(_ref) {
   var isOpen = _ref.isOpen,
       openColor = _ref.openColor,
-      closeColor = _ref.closeColor,
       notSelectedStyle = _ref.notSelectedStyle;
   return isOpen ? {
     _pathV: PATH.OPEN,
     _fillV: openColor,
     _divStyle: S.BLOCK,
-    _classShow: CL.SHOW,
+    _expClass: CL.OC_EXP + " " + CL.SHOW,
     _notSelectedStyle: null
   } : {
     _pathV: PATH.CLOSE,
-    _fillV: closeColor,
+    _fillV: FILL_CLOSE_COLOR,
     _divStyle: S.NONE,
-    _classShow: null,
+    _expClass: CL.OC_EXP,
     _notSelectedStyle: notSelectedStyle
   };
 };
@@ -79,10 +75,7 @@ var OpenClose2 = function OpenClose2(_ref2) {
       notSelectedStyle = _ref2.notSelectedStyle,
       captionStyle = _ref2.captionStyle,
       caption = _ref2.caption,
-      _ref2$openColor = _ref2.openColor,
-      openColor = _ref2$openColor === void 0 ? DF.OPEN_COLOR : _ref2$openColor,
-      _ref2$closeColor = _ref2.closeColor,
-      closeColor = _ref2$closeColor === void 0 ? DF.CLOSE_COLOR : _ref2$closeColor,
+      openColor = _ref2.openColor,
       isDraggable = _ref2.isDraggable,
       option = _ref2.option,
       onDragStart = _ref2.onDragStart,
@@ -107,13 +100,12 @@ var OpenClose2 = function OpenClose2(_ref2) {
       _crStyleConf2 = _crStyleConf({
     isOpen: isOpen,
     openColor: openColor,
-    closeColor: closeColor,
     notSelectedStyle: notSelectedStyle
   }),
       _pathV = _crStyleConf2._pathV,
       _fillV = _crStyleConf2._fillV,
       _divStyle = _crStyleConf2._divStyle,
-      _classShow = _crStyleConf2._classShow,
+      _expClass = _crStyleConf2._expClass,
       _notSelectedStyle = _crStyleConf2._notSelectedStyle;
 
   return /*#__PURE__*/_react["default"].createElement("div", {
@@ -141,7 +133,7 @@ var OpenClose2 = function OpenClose2(_ref2) {
     style: (0, _extends2["default"])({}, S.CAPTION, captionStyle)
   }, caption)), /*#__PURE__*/_react["default"].createElement("div", {
     "aria-expanded": isOpen,
-    className: _classShow,
+    className: _expClass,
     style: _divStyle
   }, children));
 };

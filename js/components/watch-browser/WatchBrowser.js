@@ -30,8 +30,9 @@ var _class, _temp;
 var CL = {
   SCROLL: 'scroll-container-y scroll-watch',
   WATCH_ITEM: 'row__type2-topic not-selected'
-};
-var C_GROUP_OPEN = '#1b2836';
+}; //const C_GROUP_OPEN = '#1b2836';
+
+var C_GROUP_OPEN = '#1b75bb';
 var C_LIST_OPEN = '#80c040';
 var S = {
   BROWSER: {
@@ -47,8 +48,12 @@ var S = {
   },
   LIST_DIV: {
     marginLeft: 8,
-    paddingLeft: 12,
-    borderLeft: "2px solid " + C_GROUP_OPEN,
+    //paddingLeft: 12,
+    paddingLeft: 2,
+    borderLeftStyle: 'solid',
+    borderLeftWidth: 2,
+    borderLeftColor: 'inherit',
+    //borderLeft: `2px solid ${C_GROUP_OPEN}`,
     lineHeight: 2
   },
   ITEM_NOT_SELECTED: {
@@ -111,8 +116,8 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
             lists = group.lists;
         return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
           key: index,
-          style: S.GROUP_DIV,
-          openColor: C_GROUP_OPEN,
+          style: S.GROUP_DIV //openColor={C_GROUP_OPEN}
+          ,
           caption: caption,
           isDraggable: isModeEdit,
           option: {

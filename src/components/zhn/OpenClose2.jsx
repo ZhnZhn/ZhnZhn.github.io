@@ -7,13 +7,11 @@ const { useToggle, useKeyEnter } = use;
 
 const CL = {
   SHOW: 'show-popup',
-  NOT_SELECTED: 'not-selected zhn-oc'
+  NOT_SELECTED: 'not-selected zhn-oc',
+  OC_EXP: 'zhn-oc__exp'
 };
 
-const DF = {
-  OPEN_COLOR: C.YELLOW,
-  CLOSE_COLOR: C.BLANK
-};
+const FILL_CLOSE_COLOR = C.BLANK
 
 const S = {
   SVG: {
@@ -25,7 +23,6 @@ const S = {
     marginLeft: 8
   },
   CAPTION: {
-    color: C.TITLE,
     paddingLeft: 4,
     fontFamily: 'Roboto, Arial, Lato, sans-serif',
     fontWeight: 'bold',
@@ -45,28 +42,27 @@ const PATH = {
   CLOSE: "M 2,2 L 14,8 2,14 2,2"
 };
 
-const _crStyleConf = ({ isOpen, openColor, closeColor, notSelectedStyle }) => isOpen
+const _crStyleConf = ({ isOpen, openColor, notSelectedStyle }) => isOpen
   ? {
      _pathV: PATH.OPEN,
      _fillV: openColor,
      _divStyle: S.BLOCK,
-     _classShow: CL.SHOW,
+     _expClass: `${CL.OC_EXP} ${CL.SHOW}`,
      _notSelectedStyle: null
     }
   : {
     _pathV: PATH.CLOSE,
-    _fillV: closeColor,
+    _fillV: FILL_CLOSE_COLOR,
     _divStyle: S.NONE,
-    _classShow: null,
+    _expClass: CL.OC_EXP,
     _notSelectedStyle: notSelectedStyle
   };
 
 const OpenClose2 = ({
   isInitialOpen,
   style, ocStyle, notSelectedStyle,
-  captionStyle, caption,
-  openColor=DF.OPEN_COLOR,
-  closeColor=DF.CLOSE_COLOR,
+  captionStyle, caption,  
+  openColor,
   isDraggable, option, onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop,
   children
 }) => {
@@ -82,9 +78,9 @@ const OpenClose2 = ({
       : void 0
    , {
       _pathV, _fillV,
-      _divStyle, _classShow,
+      _divStyle, _expClass,
       _notSelectedStyle
-    } = _crStyleConf({ isOpen, openColor, closeColor, notSelectedStyle });
+    } = _crStyleConf({ isOpen, openColor, notSelectedStyle });
   return (
     <div style={style}>
       <div
@@ -110,9 +106,9 @@ const OpenClose2 = ({
            {caption}
          </span>
       </div>
-      <div        
+      <div
         aria-expanded={isOpen}
-        className={_classShow}
+        className={_expClass}
         style={_divStyle}
       >
         {children}

@@ -16,7 +16,8 @@ const CL = {
   WATCH_ITEM: 'row__type2-topic not-selected'
 };
 
-const C_GROUP_OPEN = '#1b2836';
+//const C_GROUP_OPEN = '#1b2836';
+const C_GROUP_OPEN = '#1b75bb'
 const C_LIST_OPEN = '#80c040';
 const S = {
   BROWSER: {
@@ -32,8 +33,12 @@ const S = {
   },
   LIST_DIV: {
     marginLeft: 8,
-    paddingLeft: 12,
-    borderLeft: `2px solid ${C_GROUP_OPEN}`,
+    //paddingLeft: 12,
+    paddingLeft: 2,
+    borderLeftStyle: 'solid',
+    borderLeftWidth: 2,
+    borderLeftColor: 'inherit',
+    //borderLeft: `2px solid ${C_GROUP_OPEN}`,
     lineHeight: 2
   },
   ITEM_NOT_SELECTED: {
@@ -110,7 +115,7 @@ class WatchBrowser extends Component {
                <A.OpenClose2
                   key={index}
                   style={S.GROUP_DIV}
-                  openColor={C_GROUP_OPEN}
+                  //openColor={C_GROUP_OPEN}
                   caption={caption}
                   isDraggable={isModeEdit}
                   option={{ caption }}

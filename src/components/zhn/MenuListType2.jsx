@@ -4,7 +4,7 @@ import C from '../styles/Color'
 import OpenClose2 from './OpenClose2'
 
 const LIST_OPEN_COLOR = C.GREEN;
-const GROUP_OPEN_COLOR = C.TITLE;
+//const GROUP_OPEN_COLOR = C.TITLE;
 
 const MODEL_PROP = {
   CAPTION : 'caption',
@@ -19,9 +19,12 @@ const STYLE = {
   },
   LIST_DIV : {
     marginLeft : 8,
-    paddingLeft : 12,
+    paddingLeft : 12,    
     lineHeight : 2,
-    borderLeft : `2px solid ${GROUP_OPEN_COLOR}`
+    borderLeftStyle: 'solid',
+    borderLeftWidth: 2,
+    borderLeftColor: 'inherit',
+    //borderLeft : `2px solid ${GROUP_OPEN_COLOR}`
   },
   ITEM_DIV : {
     position: 'relative',
@@ -92,7 +95,7 @@ const _renderLevel1 = (props) => {
         <OpenClose2
            key={index}
            style={STYLE.GROUP_DIV}
-           openColor={GROUP_OPEN_COLOR}
+           //openColor={GROUP_OPEN_COLOR}
            caption={caption}
         >
           {_renderLevel2(lists, _captionProp, _itemsProp, props)}
