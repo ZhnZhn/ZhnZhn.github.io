@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,70 +9,44 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _InputPattern = _interopRequireDefault(require("../../zhn/InputPattern"));
 
 var _crRow2 = _interopRequireDefault(require("./crRow"));
 
 //import PropTypes from "prop-types";
-var RowPattern = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(RowPattern, _Component);
+var RowPattern = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+  var isShowLabels = _ref.isShowLabels,
+      caption = _ref.caption,
+      captionStyle = _ref.captionStyle,
+      rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["isShowLabels", "caption", "captionStyle"]);
 
-  function RowPattern() {
-    var _this;
+  var _crRow = (0, _crRow2["default"])({
+    isShowLabels: isShowLabels,
+    caption: caption,
+    captionStyle: captionStyle
+  }),
+      rowStyle = _crRow.rowStyle,
+      labelStyle = _crRow.labelStyle,
+      _caption = _crRow.caption;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: rowStyle
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: labelStyle
+  }, _caption), /*#__PURE__*/_react["default"].createElement(_InputPattern["default"], (0, _extends2["default"])({
+    ref: ref
+  }, rest)));
+});
+/*
+RowPattern.propTypes = {
+   isShowLabels: PropTypes.bool,
+   caption : PropTypes.string
+   captionStyle: PropTypes.object
+}
+*/
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-
-    _this._refInput = function (c) {
-      return _this.inputPattern = c;
-    };
-
-    return _this;
-  }
-
-  var _proto = RowPattern.prototype;
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        isShowLabels = _this$props.isShowLabels,
-        caption = _this$props.caption,
-        captionStyle = _this$props.captionStyle,
-        rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["isShowLabels", "caption", "captionStyle"]),
-        _crRow = (0, _crRow2["default"])({
-      isShowLabels: isShowLabels,
-      caption: caption,
-      captionStyle: captionStyle
-    }),
-        rowStyle = _crRow.rowStyle,
-        labelStyle = _crRow.labelStyle,
-        _caption = _crRow.caption;
-
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: rowStyle
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: labelStyle
-    }, _caption), /*#__PURE__*/_react["default"].createElement(_InputPattern["default"], (0, _extends2["default"])({
-      ref: this._refInput
-    }, rest)));
-  };
-
-  _proto.getValue = function getValue() {
-    return this.inputPattern.getValue();
-  };
-
-  _proto.isValid = function isValid() {
-    return this.inputPattern.isValid();
-  };
-
-  return RowPattern;
-}(_react.Component);
 
 var _default = RowPattern;
 exports["default"] = _default;

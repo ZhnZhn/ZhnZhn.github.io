@@ -1,51 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 //import PropTypes from "prop-types";
 
 import InputPattern from '../../zhn/InputPattern'
 import crRow from './crRow'
 
-class RowPattern extends Component {
-  /*
-  static propTypes = {
-     isShowLabels: PropTypes.bool,
-     caption : PropTypes.string
-     captionStyle: PropTypes.object
-  }
-  */
-
-  _refInput = c => this.inputPattern = c
-
-  render(){
+const RowPattern = React.forwardRef(({
+  isShowLabels, caption, captionStyle,
+  ...rest
+}, ref) => {
     const {
-      isShowLabels,
-      caption, captionStyle,
-      ...rest
-    } = this.props
-    , {
       rowStyle, labelStyle,
       caption:_caption
-    } = crRow({
-      isShowLabels, caption, captionStyle
-    });
+    } = crRow({ isShowLabels, caption, captionStyle });
     return (
       <div style={rowStyle}>
         <span style={labelStyle}>
            {_caption}
         </span>
         <InputPattern
-           ref={this._refInput}
+           ref={ref}
            {...rest}
         />
      </div>
-    );
-  }
+    )
+})
 
-  getValue(){
-    return this.inputPattern.getValue();
-  }
-  isValid(){
-    return this.inputPattern.isValid();
-  }
+/*
+RowPattern.propTypes = {
+   isShowLabels: PropTypes.bool,
+   caption : PropTypes.string
+   captionStyle: PropTypes.object
 }
+*/
 
 export default RowPattern
