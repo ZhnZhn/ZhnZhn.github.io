@@ -101,6 +101,10 @@ var PaneOptions = /*#__PURE__*/function (_Component) {
       _this._setProxy(_this.proxyComp.getValue());
     };
 
+    _this._hClearProxy = function () {
+      _this._setProxy('');
+    };
+
     _this._hSelectTheme = function (item) {
       var _this$props = _this.props,
           theme = _this$props.theme,
@@ -141,10 +145,11 @@ var PaneOptions = /*#__PURE__*/function (_Component) {
     return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
       ref: this._refProxy,
       captionStyle: titleStyle,
-      caption: "Https Proxy:",
-      placeholder: "Https Proxy for CORS",
+      caption: "Proxy:",
+      placeholder: "Https Proxy Server",
       initValue: _proxy,
-      onEnter: this._setProxy
+      onEnter: this._setProxy,
+      onClear: this._hClearProxy
     }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
       caption: "UI Theme",
       captionStyle: titleStyle,

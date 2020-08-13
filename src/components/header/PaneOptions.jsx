@@ -70,6 +70,9 @@ class PaneOptions extends Component {
   _hSetProxy = () => {
     this._setProxy(this.proxyComp.getValue())
   }
+  _hClearProxy = () => {
+    this._setProxy('')
+  }
   _hSelectTheme = (item) => {
     const { theme, onChangeTheme } = this.props;
     if (
@@ -99,10 +102,11 @@ class PaneOptions extends Component {
         <D.RowPattern
            ref={this._refProxy}
            captionStyle={titleStyle}
-           caption="Https Proxy:"
-           placeholder="Https Proxy for CORS"
+           caption="Proxy:"
+           placeholder="Https Proxy Server"
            initValue={_proxy}
            onEnter={this._setProxy}
+           onClear={this._hClearProxy}
         />
         <D.RowInputSelect
            caption="UI Theme"
