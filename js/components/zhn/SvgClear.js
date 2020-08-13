@@ -10,26 +10,25 @@ var _react = _interopRequireDefault(require("react"));
 var _SvgX = _interopRequireDefault(require("./svg/SvgX"));
 
 //import PropTypes from "prop-types";
-var CL = "bt-svg-close";
+var CL = "bt-svg-clear";
 
-var SvgClose = function SvgClose(_ref) {
+var SvgClear = function SvgClear(_ref) {
   var style = _ref.style,
-      onClose = _ref.onClose;
+      onClick = _ref.onClick;
   return /*#__PURE__*/_react["default"].createElement("button", {
-    tabIndex: "-1",
     className: CL,
     style: style,
-    onClick: onClose
+    onClick: onClick
   }, /*#__PURE__*/_react["default"].createElement(_SvgX["default"], null));
 };
 /*
-SvgClose.propTypes = {
+SvgClear.propTypes = {
   style: PropTypes.object,
-  onClose: PropTypes.func
+  onClick: PropTypes.func
 }
 */
 
 
-var _default = SvgClose;
+var _default = SvgClear;
 exports["default"] = _default;
-//# sourceMappingURL=SvgClose.js.map
+//# sourceMappingURL=SvgClear.js.map

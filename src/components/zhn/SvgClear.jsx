@@ -1,25 +1,25 @@
 import React from 'react';
 //import PropTypes from "prop-types";
+
 import SvgX from './svg/SvgX'
 
-const CL = "bt-svg-close";
+const CL = "bt-svg-clear";
 
-const SvgClose = ({ style, onClose }) => (
+const SvgClear = ({ style, onClick }) => (
    <button
-      tabIndex="-1"
       className={CL}
       style={style}
-      onClick={onClose}
+      onClick={onClick}
    >
      <SvgX />
    </button>
-)
+);
 
 /*
-SvgClose.propTypes = {
+SvgClear.propTypes = {
   style: PropTypes.object,
-  onClose: PropTypes.func
+  onClick: PropTypes.func
 }
 */
 
-export default SvgClose
+export default SvgClear

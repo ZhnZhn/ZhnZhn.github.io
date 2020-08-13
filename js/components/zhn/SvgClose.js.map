@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/zhn/SvgClose.jsx"],"names":["CL","STYLE","COLOR","SVG","padding","SvgClose","style","onClose"],"mappings":";;;;;;;AAAA;;AACA;AAEA,IAAMA,EAAE,GAAG,cAAX;AAEA,IAAMC,KAAK,GAAG;AACZC,EAAAA,KAAK,EAAE,SADK;AAEZC,EAAAA,GAAG,EAAE;AAAEC,IAAAA,OAAO,EAAE;AAAX;AAFO,CAAd;;AAKA,IAAMC,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,0BAAUC,OAAV;AAAA,MAAUA,OAAV,6BAAkB,YAAI,CAAE,CAAxB;AAAA,sBACd;AACG,IAAA,QAAQ,EAAC,IADZ;AAEG,IAAA,SAAS,EAAEP,EAFd;AAGG,IAAA,KAAK,EAAEM,KAHV;AAIG,IAAA,OAAO,EAAEC;AAJZ,kBAME;AAAK,IAAA,OAAO,EAAC,WAAb;AAAyB,IAAA,KAAK,EAAC,MAA/B;AAAsC,IAAA,MAAM,EAAC,MAA7C;AACK,IAAA,KAAK,EAAEN,KAAK,CAACE,GADlB;AACuB,IAAA,mBAAmB,EAAC,MAD3C;AACkD,IAAA,KAAK,EAAC,4BADxD;AAEK,IAAA,WAAW,EAAC,GAFjB;AAGK,IAAA,MAAM,EAAEF,KAAK,CAACC,KAHnB;AAIK,IAAA,aAAa,EAAC;AAJnB,kBAMG;AAAM,IAAA,CAAC,EAAC;AAAR,IANH,eAOG;AAAM,IAAA,CAAC,EAAC;AAAR,IAPH,CANF,CADc;AAAA,CAAjB;AAkBA;;;;;;;;eAOeG,Q","sourcesContent":["import React from 'react';\r\n//import PropTypes from \"prop-types\";\r\n\r\nconst CL = \"bt-svg-close\";\r\n\r\nconst STYLE = {\r\n  COLOR: '#f44336',\r\n  SVG: { padding: 3 }\r\n};\r\n\r\nconst SvgClose = ({ style, onClose=()=>{} }) => (\r\n   <button\r\n      tabIndex=\"-1\"\r\n      className={CL}\r\n      style={style}\r\n      onClick={onClose}\r\n   >\r\n     <svg viewBox=\"0 0 12 12\" width=\"100%\" height=\"100%\"\r\n          style={STYLE.SVG} preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\"\r\n          strokeWidth=\"2\"\r\n          stroke={STYLE.COLOR}\r\n          strokeLinecap=\"round\"\r\n      >\r\n        <path d=\"M 0,0 L 12,12\" />\r\n        <path d=\"M 12,0 L 0,12\" />\r\n     </svg>\r\n   </button>\r\n)\r\n/*\r\nSvgClose.propTypes = {\r\n  style: PropTypes.object,\r\n  onClose: PropTypes.func\r\n}\r\n*/\r\n\r\nexport default SvgClose\r\n"],"file":"SvgClose.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/SvgClose.js"
+ ],
+ "file": "../../../src/components/zhn/SvgClose.js",
+ "names": [
+  "CL",
+  "SvgClose",
+  "style",
+  "onClose"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AADA;AAGA,IAAMA,EAAE,GAAG,cAAX;;AAEA,IAAMC,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,OAAV,QAAUA,OAAV;AAAA,sBACd;AACG,IAAA,QAAQ,EAAC,IADZ;AAEG,IAAA,SAAS,EAAEH,EAFd;AAGG,IAAA,KAAK,EAAEE,KAHV;AAIG,IAAA,OAAO,EAAEC;AAJZ,kBAME,gCAAC,gBAAD,OANF,CADc;AAAA,CAAjB;AAWA;;;;;;;;eAOeF,Q"
+}
