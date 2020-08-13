@@ -1,4 +1,12 @@
 
+const WITHOUT_API_KEY = 'Without Api Key';
+
+const _crForReqToken = (providerName) => [
+   'For this type of', providerName, 'request'
+].filter(Boolean).join(' ');
+
+const AND_THEN_ENTER_KEY = 'and then enter your API key in dialog SETTINGS [s].';
+
 const Msg = {
   setAlertMsg : (option, msg) => {
     const {caption, descr} = msg;
@@ -26,19 +34,21 @@ const Msg = {
        descr: 'Meta data for this code already have been loaded.'
      },
      PREMIUM_WITHOUT_KEY : {
-       caption : 'Without Key',
+       caption : WITHOUT_API_KEY,
        descr : '403 : Forbidden\n\nYou have attempted to view a premium database in anonymous mode, i.e., without providing a Quandl key. Please register for a free Quandl account, and then enter your API in dialog SETTINGS [s].'
      },
      FEATURE_WITHOUT_KEY : {
-       caption : 'Without API Key',
-       descr : 'For this type of request required a Quandl API key. Please register for a free Quandl account, and then enter your API key in dialog SETTINGS [s].'
+       caption : WITHOUT_API_KEY,
+       descr : `${_crForReqToken()} a Quandl API key is required. Please register for a free Quandl account, ${AND_THEN_ENTER_KEY}`
      },
-     withoutApiKey: (providerName) => {
-       return {
-         caption : 'Without API Key',
-         descr : `For this type of request required a ${providerName} API key. Please register for a free ${providerName} account, more top button A in dialog, and then enter your API key in dialog SETTINGS [s].`
-       };
-     },
+     withoutApiKey: (providerName) => ({
+       caption : WITHOUT_API_KEY,
+       descr : `${_crForReqToken()} a ${providerName} API key is required. Please register for a free ${providerName} account, more top button A in dialog, ${AND_THEN_ENTER_KEY}`
+     }),
+     withoutProxy: (providerName) => ({
+       caption : 'Without Proxy Server',
+       descr : `${_crForReqToken(providerName)} proxy server is required. Could be set in dialog SETTINGS [s].`
+     }),
      RUNTIME_ERROR : {
         caption : 'Runtime Error'
      },
