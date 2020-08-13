@@ -105,6 +105,7 @@ ChartActions.fnOnChangeStore = _fnOnChangeStore
 
 const {
   isApiKeyRequired,
+  isProxyRequired,
   getApiTitle
 } = SettingSlice;
 
@@ -127,6 +128,12 @@ const _checkMsgApiKey = ({
   }
   return '';
 };
+const _checkProxy = ({ proxy, loadId }) => {
+  if (isProxyRequired(loadId) && !proxy) {
+    return M.withoutProxy(getApiTitle(loadId));
+  }
+  return '';
+};
 
 ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
   const key = LogicUtils.createKeyForConfig(option)
@@ -139,9 +146,10 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
   //{ chartType, browserType, dialogConf } = confItem
   _addSettingsTo(option, confItem, { key })
 
-  const _msgApiKey = _checkMsgApiKey(option);
-  if (_msgApiKey) {
-    this.cancelLoad(option, _msgApiKey, false);
+  const _msgSetting = _checkMsgApiKey(option)
+    || _checkProxy(option);   
+  if (_msgSetting) {
+    this.cancelLoad(option, _msgSetting, false);
   } else if (isDoublingLoad){
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta){

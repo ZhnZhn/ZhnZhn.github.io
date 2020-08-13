@@ -111,6 +111,7 @@ var ChartActions = _refluxCore["default"].createActions((_Reflux$createActions =
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 var isApiKeyRequired = _SettingSlice["default"].isApiKeyRequired,
+    isProxyRequired = _SettingSlice["default"].isProxyRequired,
     getApiTitle = _SettingSlice["default"].getApiTitle;
 
 var _checkMsgApiKey = function _checkMsgApiKey(_ref) {
@@ -136,6 +137,17 @@ var _checkMsgApiKey = function _checkMsgApiKey(_ref) {
   return '';
 };
 
+var _checkProxy = function _checkProxy(_ref2) {
+  var proxy = _ref2.proxy,
+      loadId = _ref2.loadId;
+
+  if (isProxyRequired(loadId) && !proxy) {
+    return M.withoutProxy(getApiTitle(loadId));
+  }
+
+  return '';
+};
+
 ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
   if (confItem === void 0) {
     confItem = {};
@@ -155,10 +167,10 @@ ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
     key: key
   });
 
-  var _msgApiKey = _checkMsgApiKey(option);
+  var _msgSetting = _checkMsgApiKey(option) || _checkProxy(option);
 
-  if (_msgApiKey) {
-    this.cancelLoad(option, _msgApiKey, false);
+  if (_msgSetting) {
+    this.cancelLoad(option, _msgSetting, false);
   } else if (isDoublingLoad) {
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta) {
@@ -191,8 +203,8 @@ var SUBTITLE = 'Loaded from URL Query';
 var _addDialogPropsTo = function _addDialogPropsTo(option) {
   var chartType = option.chartType,
       browserType = option.browserType,
-      _ref2 = _ChartStore["default"].getSourceConfig(browserType, chartType) || {},
-      dialogProps = _ref2.dialogProps;
+      _ref3 = _ChartStore["default"].getSourceConfig(browserType, chartType) || {},
+      dialogProps = _ref3.dialogProps;
 
   Object.assign(option, dialogProps, dialogProps.dfProps, {
     subtitle: SUBTITLE
