@@ -7,27 +7,71 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _react = _interopRequireWildcard(require("react"));
+
+var _SvgClear = _interopRequireDefault(require("./SvgClear"));
 
 var _Input = _interopRequireDefault(require("./Input.Style"));
 
 //import PropTypes from "prop-types";
+var S = {
+  INPUT: (0, _extends2["default"])({}, _Input["default"].INPUT, {
+    width: 'calc(100% - 50px)',
+    paddingLeft: 0,
+    marginLeft: 10,
+    marginBottom: 5
+  }),
+  INPUT_BORDER: {
+    borderBottomStyle: 'solid',
+    borderBottomWidth: 1
+  },
+  BT_CLEAR: {
+    "float": 'right',
+    position: 'relative',
+    top: 4,
+    right: 7
+  }
+};
+
 var _isFn = function _isFn(fn) {
   return typeof fn === "function";
 };
 
-var _getInitStateFrom = function _getInitStateFrom(_ref) {
-  var initValue = _ref.initValue;
+var ErrMsg = function ErrMsg(_ref) {
+  var msg = _ref.msg;
+  return msg ? /*#__PURE__*/_react["default"].createElement("div", {
+    style: _Input["default"].ERR_MSG
+  }, msg) : null;
+};
+
+var _getInitStateFrom = function _getInitStateFrom(_ref2) {
+  var initValue = _ref2.initValue;
   return {
     initValue: initValue,
     value: initValue || '',
-    errorInput: undefined,
+    errorInput: void 0,
     isValid: true
   };
+};
+
+var _getIsValidColor = function _getIsValidColor(isValid) {
+  return isValid ? '#1b75bb' : '#f44336';
+};
+
+var _crInputStyle = function _crInputStyle(isValid) {
+  return (0, _extends2["default"])({}, S.INPUT_BORDER, {
+    borderBottomColor: _getIsValidColor(isValid)
+  });
+};
+
+var _crBtClearStyle = function _crBtClearStyle(isValid) {
+  return (0, _extends2["default"])({}, S.BT_CLEAR, {
+    stroke: _getIsValidColor(isValid)
+  });
 };
 
 var InputPattern = /*#__PURE__*/function (_Component) {
@@ -39,6 +83,10 @@ var InputPattern = /*#__PURE__*/function (_Component) {
      inputStyle: PropTypes.object,
      initValue: PropTypes.string,
      placeholder: PropTypes.string,
+     maxLength: PropTypes.oneOfType([
+       PropTypes.string,
+       PropTypes.number
+     ]),
      errorMsg: PropTypes.string,
      onTest: PropTypes.func,
      onEnter: PropTypes.func
@@ -49,7 +97,7 @@ var InputPattern = /*#__PURE__*/function (_Component) {
 
     _this = _Component.call(this, _props) || this;
 
-    _this._handleChangeValue = function (event) {
+    _this._hChangeValue = function (event) {
       var onTest = _this.props.onTest,
           value = event.target.value;
 
@@ -62,31 +110,12 @@ var InputPattern = /*#__PURE__*/function (_Component) {
         _this.setState({
           value: value,
           isValid: true,
-          errorInput: undefined
+          errorInput: void 0
         });
       }
     };
 
-    _this._handleBlurValue = function () {
-      var _this$props = _this.props,
-          onTest = _this$props.onTest,
-          errorMsg = _this$props.errorMsg,
-          value = _this.state.value;
-
-      if (!onTest(value)) {
-        _this.setState({
-          errorInput: errorMsg,
-          isValid: false
-        });
-      } else {
-        _this.setState({
-          errorInput: undefined,
-          isValid: true
-        });
-      }
-    };
-
-    _this._handleKeyDown = function (event) {
+    _this._hKeyDown = function (event) {
       switch (event.keyCode) {
         case 13:
           if (_isFn(_this.props.onEnter)) {
@@ -110,8 +139,26 @@ var InputPattern = /*#__PURE__*/function (_Component) {
       }
     };
 
+    _this._hClear = function () {
+      _this.props.onClear();
+
+      if (_this.inputPattern) {
+        _this.inputPattern.focus();
+      }
+
+      _this.setState({
+        value: '',
+        isValid: true,
+        errorInput: void 0
+      });
+    };
+
     _this._refInput = function (input) {
       return _this.inputPattern = input;
+    };
+
+    _this._refBtClear = function (bt) {
+      return _this._btClear = bt;
     };
 
     _this.state = _getInitStateFrom(_props);
@@ -125,22 +172,23 @@ var InputPattern = /*#__PURE__*/function (_Component) {
   var _proto = InputPattern.prototype;
 
   _proto.render = function render() {
-    var _this$props2 = this.props,
-        rootStyle = _this$props2.rootStyle,
-        inputStyle = _this$props2.inputStyle,
-        _this$props2$placehol = _this$props2.placeholder,
-        placeholder = _this$props2$placehol === void 0 ? 'Input Pattern' : _this$props2$placehol,
+    var _this$props = this.props,
+        rootStyle = _this$props.rootStyle,
+        inputStyle = _this$props.inputStyle,
+        placeholder = _this$props.placeholder,
+        maxLength = _this$props.maxLength,
         _this$state = this.state,
         value = _this$state.value,
         errorInput = _this$state.errorInput,
         isValid = _this$state.isValid,
-        _styleHr = isValid ? _Input["default"].HR_VALID : _Input["default"].HR_NOT_VALID;
+        _inputStyle = _crInputStyle(isValid),
+        _btClearStyle = _crBtClearStyle(isValid);
 
     return /*#__PURE__*/_react["default"].createElement("div", {
       style: (0, _extends2["default"])({}, _Input["default"].ROOT, rootStyle)
     }, /*#__PURE__*/_react["default"].createElement("input", {
       type: "text",
-      style: (0, _extends2["default"])({}, _Input["default"].INPUT, inputStyle),
+      style: (0, _extends2["default"])({}, S.INPUT, inputStyle, _inputStyle),
       ref: this._refInput,
       name: "text-date" //autoComplete="new-text-date"
       ,
@@ -150,14 +198,16 @@ var InputPattern = /*#__PURE__*/function (_Component) {
       spellCheck: false,
       placeholder: placeholder,
       value: value,
-      onChange: this._handleChangeValue,
-      onBlur: this._handleBlurValue,
-      onKeyDown: this._handleKeyDown
-    }), /*#__PURE__*/_react["default"].createElement("hr", {
-      style: (0, _extends2["default"])({}, _Input["default"].HR, _styleHr)
-    }), /*#__PURE__*/_react["default"].createElement("div", {
-      style: _Input["default"].ERR_MSG
-    }, errorInput));
+      maxLength: maxLength,
+      onChange: this._hChangeValue,
+      onKeyDown: this._hKeyDown
+    }), value || errorInput ? /*#__PURE__*/_react["default"].createElement(_SvgClear["default"], {
+      ref: this._refBtClear,
+      style: _btClearStyle,
+      onClick: this._hClear
+    }) : null, /*#__PURE__*/_react["default"].createElement(ErrMsg, {
+      msg: errorInput
+    }));
   };
 
   _proto.getValue = function getValue() {
@@ -172,13 +222,23 @@ var InputPattern = /*#__PURE__*/function (_Component) {
     this.inputPattern.focus();
   };
 
+  _proto.showErrMsg = function showErrMsg() {
+    this.setState({
+      errorInput: this.props.errorMsg,
+      isValid: false
+    });
+  };
+
   return InputPattern;
 }(_react.Component);
 
 InputPattern.defaultProps = {
+  maxLength: 64,
+  placeholder: 'Input Pattern',
   onTest: function onTest() {
     return true;
-  }
+  },
+  onClear: function onClear() {}
 };
 var _default = InputPattern;
 exports["default"] = _default;
