@@ -7,6 +7,11 @@ const { Decor, crMenuMore } = D
 
 const ERR_MSG = 'Empty or Id format is not valid';
 
+const S = {
+  ID_CAPTION: { width: 80 },
+  ID_ROOT: { width: 270 }
+};
+
 const _testId = (value) => {
   if (typeof value !== 'string' || !value ) {
     return false;
@@ -49,15 +54,19 @@ class DialogQuery extends Component {
   }
 
   _handleLoad = () => {
-    if (this._idInput && this._idInput.isValid()) {
-      const _value = this._idInput.getValue()
-      , { onLoad, loadFn } = this.props;
-      onLoad(loadFn(this.props, {
-        one: {
-          value: _value,
-          caption: _value
-        }
-      }));
+    if (this._idInput) {
+      if (this._idInput.isValid()) {
+        const _value = this._idInput.getValue()
+        , { onLoad, loadFn } = this.props;
+        onLoad(loadFn(this.props, {
+          one: {
+            value: _value,
+            caption: _value
+          }
+        }));
+      } else {
+        this._idInput.showErrMsg()
+      }
     }
   }
 
@@ -92,6 +101,8 @@ class DialogQuery extends Component {
           ref={this._refIdInput}
           isShow={isShow}
           isShowLabels={isShowLabels}
+          captionStyle={S.ID_CAPTION}
+          rootStyle={S.ID_ROOT}
           placeholder={onePlaceholder}
           caption={oneCaption}
           onTest={_testId}

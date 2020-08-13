@@ -20,6 +20,14 @@ var _dec, _dec2, _class, _temp;
 var Decor = _DialogCell["default"].Decor,
     crMenuMore = _DialogCell["default"].crMenuMore;
 var ERR_MSG = 'Empty or Id format is not valid';
+var S = {
+  ID_CAPTION: {
+    width: 80
+  },
+  ID_ROOT: {
+    width: 270
+  }
+};
 
 var _testId = function _testId(value) {
   if (typeof value !== 'string' || !value) {
@@ -40,18 +48,22 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
     _this = _Component.call(this, props) || this;
 
     _this._handleLoad = function () {
-      if (_this._idInput && _this._idInput.isValid()) {
-        var _value = _this._idInput.getValue(),
-            _this$props = _this.props,
-            onLoad = _this$props.onLoad,
-            loadFn = _this$props.loadFn;
+      if (_this._idInput) {
+        if (_this._idInput.isValid()) {
+          var _value = _this._idInput.getValue(),
+              _this$props = _this.props,
+              onLoad = _this$props.onLoad,
+              loadFn = _this$props.loadFn;
 
-        onLoad(loadFn(_this.props, {
-          one: {
-            value: _value,
-            caption: _value
-          }
-        }));
+          onLoad(loadFn(_this.props, {
+            one: {
+              value: _value,
+              caption: _value
+            }
+          }));
+        } else {
+          _this._idInput.showErrMsg();
+        }
       }
     };
 
@@ -125,6 +137,8 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
       ref: this._refIdInput,
       isShow: isShow,
       isShowLabels: isShowLabels,
+      captionStyle: S.ID_CAPTION,
+      rootStyle: S.ID_ROOT,
       placeholder: onePlaceholder,
       caption: oneCaption,
       onTest: _testId,
