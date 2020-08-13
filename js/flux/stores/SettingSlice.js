@@ -8,13 +8,13 @@ var _Type = require("../../constants/Type");
 var _apiTitle2;
 
 var _settings = {};
-var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.FMP, _Type.LoadType.IEX, _Type.LoadType.INTR];
+var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR, _Type.LoadType.IEX, _Type.LoadType.FMP];
 var _withProxy = [_Type.LoadType.FAO, _Type.LoadType.CRC];
 var API_TITLE_AV = 'Alpha Vantage';
 
 var _apiTitle = (_apiTitle2 = {
-  DF: 'API'
-}, _apiTitle2[_Type.LoadType.B] = 'Barchart Market Data', _apiTitle2[_Type.LoadType.AL] = API_TITLE_AV, _apiTitle2[_Type.LoadType.AL_S] = API_TITLE_AV, _apiTitle2[_Type.LoadType.AL_I] = API_TITLE_AV, _apiTitle2[_Type.LoadType.BEA] = 'BEA', _apiTitle2[_Type.LoadType.EIA] = 'EIA', _apiTitle2[_Type.LoadType.FMP] = 'FMP', _apiTitle2[_Type.LoadType.INTR] = 'Intrinio', _apiTitle2);
+  DF: ''
+}, _apiTitle2[_Type.LoadType.B] = 'Barchart Market Data', _apiTitle2[_Type.LoadType.AL] = API_TITLE_AV, _apiTitle2[_Type.LoadType.AL_S] = API_TITLE_AV, _apiTitle2[_Type.LoadType.AL_I] = API_TITLE_AV, _apiTitle2[_Type.LoadType.IEX] = 'IEX Cloud', _apiTitle2[_Type.LoadType.BEA] = 'BEA', _apiTitle2[_Type.LoadType.EIA] = 'EIA', _apiTitle2[_Type.LoadType.FMP] = 'FMP', _apiTitle2[_Type.LoadType.INTR] = 'Intrinio', _apiTitle2[_Type.LoadType.FAO] = 'FAOSTAT', _apiTitle2[_Type.LoadType.CRC] = 'CryptoCompare Information', _apiTitle2);
 
 var _isUndef = function _isUndef(value) {
   return typeof value === 'undefined';
@@ -90,7 +90,10 @@ var SettingSlice = {
     this.setting.isAdminMode = !!value;
   },
   isApiKeyRequired: function isApiKeyRequired(loadId) {
-    return _withApiKey.indexOf(loadId) !== -1 ? true : false;
+    return _withApiKey.indexOf(loadId) !== -1;
+  },
+  isProxyRequired: function isProxyRequired(loadId) {
+    return _withProxy.indexOf(loadId) !== -1;
   },
   getApiTitle: function getApiTitle(loadId) {
     return _apiTitle[loadId] || _apiTitle.DF;

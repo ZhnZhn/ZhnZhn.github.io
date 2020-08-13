@@ -3,7 +3,7 @@ import { LoadType as LT } from '../../constants/Type'
 const _settings = {};
 const _withApiKey = [
   LT.B, LT.AL, LT.AL_S, LT.AL_I,
-  LT.BEA, LT.EIA, LT.FMP, LT.IEX, LT.INTR
+  LT.BEA, LT.EIA, LT.INTR, LT.IEX, LT.FMP
 ];
 const _withProxy = [
   LT.FAO,
@@ -11,16 +11,22 @@ const _withProxy = [
 ];
 const API_TITLE_AV = 'Alpha Vantage';
 const _apiTitle = {
-  DF: 'API',
+  DF: '',
   [LT.B]: 'Barchart Market Data',
   [LT.AL]: API_TITLE_AV,
   [LT.AL_S]: API_TITLE_AV,
   [LT.AL_I]: API_TITLE_AV,
+  [LT.IEX]: 'IEX Cloud',
+  //[LT.WTD]: 'World Trading Data',
   [LT.BEA]: 'BEA',
   [LT.EIA]: 'EIA',
   [LT.FMP]: 'FMP',
-  [LT.INTR]: 'Intrinio'
+  [LT.INTR]: 'Intrinio',
+
+  [LT.FAO]: 'FAOSTAT',
+  [LT.CRC]: 'CryptoCompare Information'
 };
+
 
 const _isUndef = value => typeof value === 'undefined';
 
@@ -90,9 +96,10 @@ const SettingSlice = {
   },
 
   isApiKeyRequired(loadId){
-    return _withApiKey.indexOf(loadId) !== -1
-      ? true
-      : false;
+    return _withApiKey.indexOf(loadId) !== -1;
+  },
+  isProxyRequired(loadId){
+    return _withProxy.indexOf(loadId) !== -1;
   },
   getApiTitle(loadId){
     return _apiTitle[loadId] || _apiTitle.DF;
