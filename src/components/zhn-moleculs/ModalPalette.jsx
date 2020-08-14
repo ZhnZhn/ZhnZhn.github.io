@@ -9,8 +9,7 @@ const S = {
     position: 'absolute',
     top: 35,
     left: -10,
-    backgroundColor: 'rgba(77, 77, 77, 1)',
-    borderBottom: '4px solid green',
+    backgroundColor: 'inherit',
     borderRadius: 5,
     boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
   }
@@ -22,7 +21,7 @@ const ModalPalette = ({ isShow, model, onClickCell, onClose }) => (
     isShow={isShow}
     onClose={onClose}
   >
-    <CellColorPane       
+    <CellColorPane
        model={model}
        onClickCell={onClickCell}
     />
