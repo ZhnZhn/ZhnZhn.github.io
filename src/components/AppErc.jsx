@@ -14,12 +14,12 @@ import About from './about/About';
 import CompContainer from './zhn-containers/CompContainer';
 import DialogContainer from './dialogs/DialogContainer';
 
-import initTheme from './styles/theme'
+import initialTheme from './styles/uiTheme'
 import ThemeContext from './hoc/ThemeContext'
 
 import checkBuild from './checkBuild'
 
-const BUILD_DATE = '05-08-2020';
+const BUILD_DATE = '14-08-2020';
 const CL = "component-container"
 
 const showSettings = CA.showSettings
@@ -27,7 +27,7 @@ const showSettings = CA.showSettings
 
 class AppErc extends Component {
   state = {
-    theme: initTheme
+    theme: initialTheme
   }
 
   componentDidMount(){

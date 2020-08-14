@@ -33,13 +33,13 @@ var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContai
 
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 
-var _theme = _interopRequireDefault(require("./styles/theme"));
+var _uiTheme = _interopRequireDefault(require("./styles/uiTheme"));
 
 var _ThemeContext = _interopRequireDefault(require("./hoc/ThemeContext"));
 
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
-var BUILD_DATE = '05-08-2020';
+var BUILD_DATE = '14-08-2020';
 var CL = "component-container";
 
 var showSettings = _ComponentActions["default"].showSettings.bind(null, _ChartStore["default"].exportSettingFn());
@@ -56,7 +56,7 @@ var AppErc = /*#__PURE__*/function (_Component) {
 
     _this = _Component.call.apply(_Component, [this].concat(args)) || this;
     _this.state = {
-      theme: _theme["default"]
+      theme: _uiTheme["default"]
     };
 
     _this._onStore = function (actionType, themeName) {

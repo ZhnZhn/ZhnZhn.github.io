@@ -29,14 +29,16 @@ var S = {
   }
 };
 
+var _isStrNotBlank = function _isStrNotBlank(str) {
+  return typeof str === 'string' && str.trim();
+};
+
 var _testId = function _testId(value) {
-  if (typeof value !== 'string' || !value) {
-    return false;
-  } else if (value.split('/').length !== 3) {
-    return false;
+  if (_isStrNotBlank(value) && _isStrNotBlank(value.split('/')[2])) {
+    return true;
   }
 
-  return true;
+  return false;
 };
 
 var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class = _dec2(_class = (_temp = /*#__PURE__*/function (_Component) {

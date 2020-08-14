@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import CL from './CL';
 
 const S = {
-  ARROW_CELL : {
+  ARROW_CELL: {
     position: 'absolute',
     top: 10,
     right: 0,
@@ -13,9 +13,9 @@ const S = {
     verticalAlign: 'middle',
     cursor: 'pointer'
   },
-  ARROW : {
+  ARROW: {
     position: 'relative',
-    top: '2px',
+    top: 2,
     display: 'inline-block',
     height: 0,
     width: 0,

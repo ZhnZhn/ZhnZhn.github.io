@@ -48,12 +48,20 @@ var _crIdUrl = function _crIdUrl(option, dfProvider, dfCode, seriaId) {
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 
+var _trimStr = function _trimStr(str) {
+  if (str === void 0) {
+    str = '';
+  }
+
+  return str.trim();
+};
+
 var _idFnUrl = function _idFnUrl(option) {
   var _ref = option || '',
       value = _ref.value,
       arr = value.split('/');
 
-  return _crIdUrl(option, arr[0], arr[1], arr[2]);
+  return _crIdUrl(option, _trimStr(arr[0]), _trimStr(arr[1]), _trimStr(arr[2]));
 };
 
 var _crSeriaId = function _crSeriaId(_ref2) {

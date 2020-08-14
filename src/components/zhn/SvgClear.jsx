@@ -7,6 +7,7 @@ const CL = "bt-svg-clear";
 
 const SvgClear = ({ style, onClick }) => (
    <button
+      tabIndex="-1"
       className={CL}
       style={style}
       onClick={onClick}

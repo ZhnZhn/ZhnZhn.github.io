@@ -12,13 +12,15 @@ const S = {
   ID_ROOT: { width: 270 }
 };
 
+const _isStrNotBlank = str => typeof str === 'string'
+  && str.trim();
+
 const _testId = (value) => {
-  if (typeof value !== 'string' || !value ) {
-    return false;
-  } else if ( value.split('/').length !== 3 ){
-    return false;
+  if (_isStrNotBlank(value)
+   && _isStrNotBlank(value.split('/')[2])) {
+    return true;
   }
-  return true;
+  return false;
 };
 
 @Decor.withToolbar

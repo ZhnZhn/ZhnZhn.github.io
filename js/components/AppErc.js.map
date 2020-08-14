@@ -15,7 +15,7 @@
   "AppErc",
   "state",
   "theme",
-  "initTheme",
+  "initialTheme",
   "_onStore",
   "actionType",
   "themeName",

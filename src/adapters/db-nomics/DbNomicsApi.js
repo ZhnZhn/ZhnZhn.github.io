@@ -37,10 +37,16 @@ const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
   })
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
+
+const _trimStr = (str='') => str.trim();
 const _idFnUrl = (option) => {
   const { value } = option || ''
   , arr = value.split('/');
-  return _crIdUrl(option, arr[0], arr[1], arr[2]);
+  return _crIdUrl(option,
+    _trimStr(arr[0]),
+    _trimStr(arr[1]),
+    _trimStr(arr[2])
+  );
 };
 
 const _crSeriaId = ({ dfPrefix, dfSufix }, ...args) => [

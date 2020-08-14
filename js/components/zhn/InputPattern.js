@@ -89,7 +89,8 @@ var InputPattern = /*#__PURE__*/function (_Component) {
      ]),
      errorMsg: PropTypes.string,
      onTest: PropTypes.func,
-     onEnter: PropTypes.func
+     onEnter: PropTypes.func,
+     onClear: PropTypes.func
    }
   */
   function InputPattern(_props) {

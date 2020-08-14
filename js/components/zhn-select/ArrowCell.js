@@ -28,7 +28,7 @@ var S = {
   },
   ARROW: {
     position: 'relative',
-    top: '2px',
+    top: 2,
     display: 'inline-block',
     height: 0,
     width: 0,

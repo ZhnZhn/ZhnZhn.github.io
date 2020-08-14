@@ -16,6 +16,7 @@ var SvgClear = function SvgClear(_ref) {
   var style = _ref.style,
       onClick = _ref.onClick;
   return /*#__PURE__*/_react["default"].createElement("button", {
+    tabIndex: "-1",
     className: CL,
     style: style,
     onClick: onClick

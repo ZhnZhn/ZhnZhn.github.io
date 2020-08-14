@@ -69,7 +69,8 @@ class InputPattern extends Component {
      ]),
      errorMsg: PropTypes.string,
      onTest: PropTypes.func,
-     onEnter: PropTypes.func
+     onEnter: PropTypes.func,
+     onClear: PropTypes.func
    }
   */
    static defaultProps = {
