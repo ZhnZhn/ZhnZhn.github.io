@@ -84,7 +84,7 @@ var RowCheckBox = /*#__PURE__*/function (_Component) {
       if (_isFn(onCheck)) {
         onCheck();
       } else if (_isFn(onToggle)) {
-        onToggle();
+        onToggle(true);
       }
 
       if (_this.state) {
@@ -102,7 +102,7 @@ var RowCheckBox = /*#__PURE__*/function (_Component) {
       if (_isFn(onUnCheck)) {
         onUnCheck();
       } else if (_isFn(onToggle)) {
-        onToggle();
+        onToggle(false);
       }
 
       if (_this.state) {

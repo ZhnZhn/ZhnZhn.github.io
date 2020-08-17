@@ -64,12 +64,12 @@ class RowCheckBox extends Component {
     }
   }
 
-  _hCheck = () => {    
+  _hCheck = () => {
     const { onCheck, onToggle } = this.props;
     if (_isFn(onCheck)){
       onCheck()
     } else if (_isFn(onToggle)) {
-      onToggle()
+      onToggle(true)
     }
     if (this.state) {
       this.setState({ isChecked: true })
@@ -80,7 +80,7 @@ class RowCheckBox extends Component {
     if (_isFn(onUnCheck)){
       onUnCheck()
     } else if (_isFn(onToggle)) {
-      onToggle()
+      onToggle(false)
     }
     if (this.state) {
       this.setState({ isChecked: false })
