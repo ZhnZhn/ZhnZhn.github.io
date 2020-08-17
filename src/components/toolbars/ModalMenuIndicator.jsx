@@ -6,7 +6,7 @@ import IndicatorBuilder from '../../charts/IndicatorBuilder'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 
-import RowGrowthRate from './RowGrowthRate'
+import RowType1 from './RowType1'
 import RowPlusMinus from './RowPlusMinus'
 import RowSma from './RowSma'
 import RowMfi from './RowMfi'
@@ -15,6 +15,7 @@ import S from './ModalMenu.Style'
 
 const {
   growthRate,
+  changesBetween,
   normalize
  } = seriaFn;
 
@@ -26,7 +27,7 @@ const C_GROW = '#90ed7d';
 
 const STYLE = {
   PANE: {
-    width: 230,
+    width: 265,
     margin: 8
   },
   CAPTION: {
@@ -55,8 +56,15 @@ const _isSeriaInst = (s) => s && _isFn(s.setVisible);
 
 const FNS = {
   GR: ['_grSeria', 'isGrowthRate', C_GROW, growthRate, true],
+  CH: ['_chvSeria', 'isChanges', C_GROW, changesBetween, true],
   NORM: ['_normSeria', 'isNormalize', C_GROW, normalize, false]
 };
+
+/*
+const DEF_GROWTH_RATE = (
+  <>Def: 100*(&Delta;y<sub>t1-t0</sub>/y<sub>t0</sub>)</>
+);
+*/
 
 const NORM_CAPTION_EL = (
   <Fragment>
@@ -90,6 +98,11 @@ class ModalMenuIndicator extends Component {
      .bind(this, FNS.GR)
     this._removeGrowRate = this._hideSeriaBy
      .bind(this, FNS.GR)
+
+     this._addChanges = this._addSeriaBy
+      .bind(this, FNS.CH)
+     this._removeChanges = this._hideSeriaBy
+      .bind(this, FNS.CH)
 
      this._addNormalize = this._addSeriaBy
       .bind(this, FNS.NORM, {}, undefined)
@@ -169,6 +182,7 @@ class ModalMenuIndicator extends Component {
     , { isWithoutSma } = zhConfig
     , {
       isGrowthRate,
+      isChanges,
       isNormalize,
       isMomAth
     } = this.state;
@@ -179,8 +193,16 @@ class ModalMenuIndicator extends Component {
         onClose={onClose}
       >
         <div style={STYLE.PANE}>
-          <RowGrowthRate
+          <RowType1
+            is={isChanges}
+            caption="Changes Between"
+            onMinus={this._removeChanges}
+            onPlus={this._addChanges}
+          />
+          <RowType1
             is={isGrowthRate}
+            caption="Growth Rate"
+            //Def={DEF_GROWTH_RATE}
             onMinus={this._removeGrowRate}
             onPlus={this._addGrowRate}
           />

@@ -21,7 +21,7 @@ var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBu
 
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
-var _RowGrowthRate = _interopRequireDefault(require("./RowGrowthRate"));
+var _RowType = _interopRequireDefault(require("./RowType1"));
 
 var _RowPlusMinus = _interopRequireDefault(require("./RowPlusMinus"));
 
@@ -33,12 +33,13 @@ var _ModalMenu = _interopRequireDefault(require("./ModalMenu.Style"));
 
 //import PropTypes from "prop-types";
 var growthRate = _seriaFn["default"].growthRate,
+    changesBetween = _seriaFn["default"].changesBetween,
     normalize = _seriaFn["default"].normalize;
 var crMomAthConfig = _IndicatorBuilder["default"].crMomAthConfig;
 var C_GROW = '#90ed7d';
 var STYLE = {
   PANE: {
-    width: 230,
+    width: 265,
     margin: 8
   },
   CAPTION: {
@@ -69,8 +70,14 @@ var _isSeriaInst = function _isSeriaInst(s) {
 
 var FNS = {
   GR: ['_grSeria', 'isGrowthRate', C_GROW, growthRate, true],
+  CH: ['_chvSeria', 'isChanges', C_GROW, changesBetween, true],
   NORM: ['_normSeria', 'isNormalize', C_GROW, normalize, false]
 };
+/*
+const DEF_GROWTH_RATE = (
+  <>Def: 100*(&Delta;y<sub>t1-t0</sub>/y<sub>t0</sub>)</>
+);
+*/
 
 var NORM_CAPTION_EL = /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, "Normalize (100*y", /*#__PURE__*/_react["default"].createElement("sub", null, "t"), "/y", /*#__PURE__*/_react["default"].createElement("sub", null, "0"), ")");
 
@@ -117,6 +124,8 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
     _this._isMomAth = !!_config.zhIsMomAth;
     _this._addGrowRate = _this._addSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.GR);
     _this._removeGrowRate = _this._hideSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.GR);
+    _this._addChanges = _this._addSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.CH);
+    _this._removeChanges = _this._hideSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.CH);
     _this._addNormalize = _this._addSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.NORM, {}, undefined);
     _this._removeNormalize = _this._hideSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.NORM);
     _this.state = {
@@ -194,6 +203,7 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
         isWithoutSma = zhConfig.isWithoutSma,
         _this$state = this.state,
         isGrowthRate = _this$state.isGrowthRate,
+        isChanges = _this$state.isChanges,
         isNormalize = _this$state.isNormalize,
         isMomAth = _this$state.isMomAth;
     return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
@@ -202,8 +212,15 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
       onClose: onClose
     }, /*#__PURE__*/_react["default"].createElement("div", {
       style: STYLE.PANE
-    }, /*#__PURE__*/_react["default"].createElement(_RowGrowthRate["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_RowType["default"], {
+      is: isChanges,
+      caption: "Changes Between",
+      onMinus: this._removeChanges,
+      onPlus: this._addChanges
+    }), /*#__PURE__*/_react["default"].createElement(_RowType["default"], {
       is: isGrowthRate,
+      caption: "Growth Rate" //Def={DEF_GROWTH_RATE}
+      ,
       onMinus: this._removeGrowRate,
       onPlus: this._addGrowRate
     }), /*#__PURE__*/_react["default"].createElement(_RowPlusMinus["default"], {
