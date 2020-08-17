@@ -31,36 +31,50 @@ const _calcY = (yPrev, yNext) => {
   }
 
   return parseFloat(
-    Big(yNext - yPrev)
+    Big(yNext).minus(yPrev)
       .div(Math.abs(yPrev))
       .times(100)
       .toFixed(2)
     );
 };
 
-const fn = {
-  growthRate: (d, rt=1) => {
-    const _rt = parseInt(rt, 10);
-    if ( !(_isArr(d) && isNumber(_rt)) ) {
-      return [];
-    }
+const _calcChanges = (yPrev, yNext) => {
+  if (!isNumber(yPrev) || !isNumber(yNext)) {
+    return null;
+  }
+  return parseFloat(Big(yNext).minus(yPrev).toString());
+};
 
-    const _d = []
-    , max = d.length
-    , prevStep = _rt-1;
-    let pPrev = d[0]
-      , pNext
-      , i=_rt;
-    for (; i<max; i++){
-      pNext = d[i];
-      _d.push([
-        pNext.x,
-        _calcY(pPrev.y, pNext.y)
-      ])
-      pPrev = d[i-prevStep]
-    }
-    return _d;
-  },
+const _crIndicatorData = (d, rt, calc) => {
+  const _d = []
+  , max = d.length
+  , prevStep = rt-1
+  , { getX, getY } = crPointGetter(d);
+  let pPrev = d[0]
+    , pNext
+    , i=rt;
+  for (; i<max; i++){
+    pNext = d[i];
+    _d.push([
+      getX(pNext),
+      calc(getY(pPrev), getY(pNext))
+    ])
+    pPrev = d[i-prevStep]
+  }
+  return _d;
+}
+
+const _fIndicator = (calc) => (d, rt=1) => {
+  const _rt = parseInt(rt, 10);
+  if ( !(_isArr(d) && isNumber(_rt)) ) {
+    return [];
+  }
+  return _crIndicatorData(d, _rt, calc);
+};
+
+const fn = {
+  growthRate: _fIndicator(_calcY),
+  changesBetween: _fIndicator(_calcChanges),
 
   normalize: (d) => {
     if ( !(_isArr(d) && d[0]) ) {
@@ -78,7 +92,7 @@ const fn = {
       _d.push([
         getX(d[i]),
         parseFloat(
-          Big(getY(d[i])/_y0)
+          Big(getY(d[i])).div(_y0)
            .times(100)
            .toFixed(2)
         )

@@ -32,11 +32,42 @@ var _calcY = function _calcY(yPrev, yNext) {
     return null;
   }
 
-  return parseFloat((0, _big["default"])(yNext - yPrev).div(Math.abs(yPrev)).times(100).toFixed(2));
+  return parseFloat((0, _big["default"])(yNext).minus(yPrev).div(Math.abs(yPrev)).times(100).toFixed(2));
 };
 
-var fn = {
-  growthRate: function growthRate(d, rt) {
+var _calcChanges = function _calcChanges(yPrev, yNext) {
+  if (!isNumber(yPrev) || !isNumber(yNext)) {
+    return null;
+  }
+
+  return parseFloat((0, _big["default"])(yNext).minus(yPrev).toString());
+};
+
+var _crIndicatorData = function _crIndicatorData(d, rt, calc) {
+  var _d = [],
+      max = d.length,
+      prevStep = rt - 1,
+      _crPointGetter = crPointGetter(d),
+      getX = _crPointGetter.getX,
+      getY = _crPointGetter.getY;
+
+  var pPrev = d[0],
+      pNext,
+      i = rt;
+
+  for (; i < max; i++) {
+    pNext = d[i];
+
+    _d.push([getX(pNext), calc(getY(pPrev), getY(pNext))]);
+
+    pPrev = d[i - prevStep];
+  }
+
+  return _d;
+};
+
+var _fIndicator = function _fIndicator(calc) {
+  return function (d, rt) {
     if (rt === void 0) {
       rt = 1;
     }
@@ -47,31 +78,21 @@ var fn = {
       return [];
     }
 
-    var _d = [],
-        max = d.length,
-        prevStep = _rt - 1;
-    var pPrev = d[0],
-        pNext,
-        i = _rt;
+    return _crIndicatorData(d, _rt, calc);
+  };
+};
 
-    for (; i < max; i++) {
-      pNext = d[i];
-
-      _d.push([pNext.x, _calcY(pPrev.y, pNext.y)]);
-
-      pPrev = d[i - prevStep];
-    }
-
-    return _d;
-  },
+var fn = {
+  growthRate: _fIndicator(_calcY),
+  changesBetween: _fIndicator(_calcChanges),
   normalize: function normalize(d) {
     if (!(_isArr(d) && d[0])) {
       return [];
     }
 
-    var _crPointGetter = crPointGetter(d),
-        getX = _crPointGetter.getX,
-        getY = _crPointGetter.getY,
+    var _crPointGetter2 = crPointGetter(d),
+        getX = _crPointGetter2.getX,
+        getY = _crPointGetter2.getY,
         _y0 = getY(d[0]);
 
     if (!(isNumber(_y0) && _y0 !== 0)) {
@@ -82,7 +103,7 @@ var fn = {
     var i = 0;
 
     for (; i < d.length; i++) {
-      _d.push([getX(d[i]), parseFloat((0, _big["default"])(getY(d[i]) / _y0).times(100).toFixed(2))]);
+      _d.push([getX(d[i]), parseFloat((0, _big["default"])(getY(d[i])).div(_y0).times(100).toFixed(2))]);
     }
 
     return _d;

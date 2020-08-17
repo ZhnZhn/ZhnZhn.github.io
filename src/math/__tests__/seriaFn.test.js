@@ -2,6 +2,7 @@ import seriaFn from '../seriaFn'
 
 const {
   growthRate,
+  changesBetween,
   normalize,
   findMinY,
   findMaxY,
@@ -10,10 +11,24 @@ const {
   median
 } = seriaFn;
 
-const _crInArr = (arr) => arr
+const _crInArrOfObj = (arr) => arr
   .map((v, i) => ({ x: i+1, y: v }));
+const _crInArr = (arr) => arr
+  .map((v, i) => ([i+1, v]));
 const _crOutArr = (arr) => arr
-  .map((v, i) => ([ i+2, v]));
+  .map((v, i) => ([i+2, v]));
+
+const _testFn = (fn, inputArr, resultArr) => {
+  const _dOut = _crOutArr(resultArr);
+  expect(fn(_crInArrOfObj(inputArr))).toEqual(_dOut)
+  expect(fn(_crInArr(inputArr))).toEqual(_dOut)
+}
+
+const _testRtParam = (fn, rtNumber, inputArr, pointArr) => {
+  const _dIn = _crInArr(inputArr);
+  expect(fn(_dIn, rtNumber)).toEqual([pointArr])
+  expect(fn(_dIn, ''+rtNumber)).toEqual([pointArr])
+}
 
 describe('calc seria growRate', ()=>{
   const fn = growthRate;
@@ -28,78 +43,77 @@ describe('calc seria growRate', ()=>{
   })
 
   test('should calc growthRate by 0, 0', ()=>{
-    const _dIn = _crInArr([1.0001, 1.0001, 1.0001])
-        , _dOut = _crOutArr([0, 0])
-        , _dR = fn(_dIn);
-    _dR.forEach((p, i) => {
-      expect(p).toEqual(_dOut[i])
-    })
+    _testFn(fn,
+      [1.0001, 1.0001, 1.0001],
+      [0, 0]
+    )
   })
 
   test('should calc growthRate as null in case null value', ()=>{
-    const _dIn = _crInArr([1.0001, null, 1.0001])
-        , _dOut = _crOutArr([null, null])
-        , _dR = fn(_dIn);
-    _dR.forEach((p, i) => {
-      expect(p).toEqual(_dOut[i])
-    })
+    _testFn(fn,
+      [1.0001, null, 1.0001],
+      [null, null]
+    )
   })
 
 
   test('should calc growthRate by 100, 50', ()=>{
-    const _dIn = _crInArr([1.00001, 2.00002, 3.00003])
-        , _dOut = _crOutArr([100, 50])
-        , _dR = fn(_dIn);
-    _dR.forEach((p, i) => {
-      expect(p).toEqual(_dOut[i])
-    })
+    _testFn(fn,
+      [1.00001, 2.00002, 3.00003],
+      [100, 50]
+    )
   })
 
   test('should calc growthRate with presicion of 2 digits by -33.33, -49.75', ()=>{
-    const _dIn = _crInArr([3.00003, 2.00002, 1.005])
-       , _dOut = _crOutArr([-33.33, -49.75])
-       , _dR = fn(_dIn);
-    _dR.forEach((p, i) => {
-      expect(p).toEqual(_dOut[i])
-    })
+    _testFn(fn,
+      [3.00003, 2.00002, 1.005],
+      [-33.33, -49.75]
+    )
   })
   test('should calc growthRate with presicion of 2 digits by 0.01, 0', ()=>{
-    const _dIn = _crInArr([100, 100.01, 100.011])
-        , _dOut = _crOutArr([0.01, 0])
-        , _dR = fn(_dIn);
-    _dR.forEach((p, i) => {
-      expect(p).toEqual(_dOut[i])
-    })
+    _testFn(fn,
+      [100, 100.01, 100.011],
+      [0.01, 0]
+    )
   })
 
   test('should fill to null for zero old values', ()=>{
-    const _dIn = _crInArr([0, 0, 1, 1])
-        , _dOut = _crOutArr([0, null, 0])
-        , _dR = fn(_dIn)
-    _dR.forEach((p, i) => {
-      expect(p).toEqual(_dOut[i])
-    })
+    _testFn(fn,
+      [0, 0, 1, 1],
+      [0, null, 0]
+    )
   })
 
   test('should calc growth rate from 0 to values as 0, 100, -100 or null', ()=>{
-    const _dIn = _crInArr([0, 2, 0, 0, -3, 0])
-        , _dOut = _crOutArr([null, -100, 0, null, 100])
-        , _dR = fn(_dIn)
-    _dR.forEach((p, i) => {
-      expect(p).toEqual(_dOut[i])
-    })
+    _testFn(fn,
+      [0, 2, 0, 0, -3, 0],
+      [null, -100, 0, null, 100]
+    )
   })
 
   test('should use rt param as number & string', ()=>{
-    const _dIn = _crInArr([1.0001, 1.0001, 1.0001])
-    , _dIn2 = _crInArr([100.0001, 200.0002, 300.0003])
-
-    expect(fn(_dIn, 2)).toEqual([[3, 0]])
-    expect(fn(_dIn, '2')).toEqual([[3, 0]])
-    expect(fn(_dIn2, 2)).toEqual([[3, 200]])
-    expect(fn(_dIn2, '2')).toEqual([[3, 200]])
+    _testRtParam(fn, 2, [1.0001, 1.0001, 1.0001], [3, 0])
+    _testRtParam(fn, 2, [100.0001, 200.0002, 300.0003], [3, 200])
   })
 
+})
+
+describe('changesBetween', ()=>{
+  const fn = changesBetween;
+  test('should return arr with changes between', () =>{
+    _testFn(fn, [1.1, 2.2, 4.4], [1.1, 2.2])
+
+    _testFn(fn, [0.13, 0.14], [0.01])
+    _testFn(fn, [209.19, 208.7], [-0.49])
+
+    _testFn(fn, [1.1, null], [null])
+    _testFn(fn, [null, 2.2], [null])
+  })
+  test('should use params rt as number & string', () => {
+    _testRtParam(fn, 2, [1.1, 2.2, 4.4], [3, 3.3])
+    _testRtParam(fn, 2, [0.13, 2.2, 0.14], [3, 0.01])
+    _testRtParam(fn, 2, [209.19, 209, 208.7], [3, -0.49])
+  })
 })
 
 
