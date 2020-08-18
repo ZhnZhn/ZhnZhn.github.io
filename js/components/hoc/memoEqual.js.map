@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hoc/memoEqual.js"
+ ],
+ "file": "../../../src/components/hoc/memoEqual.js",
+ "names": [
+  "memoEqual",
+  "Element",
+  "areEqualProps",
+  "React",
+  "memo"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,OAAD,EAAUC,aAAV;AAAA,MAAUA,aAAV;AAAUA,IAAAA,aAAV,GAAwB;AAAA,aAAI,IAAJ;AAAA,KAAxB;AAAA;;AAAA,sBAChBC,kBAAMC,IAAN,CAAWH,OAAX,EAAoBC,aAApB,CADgB;AAAA,CAAlB;;eAGeF,S"
+}

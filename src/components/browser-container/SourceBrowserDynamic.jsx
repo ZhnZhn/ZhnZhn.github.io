@@ -1,10 +1,10 @@
 import React from 'react'
 
+import memoEqual from '../hoc/memoEqual'
 import BrowserMenu from '../zhn-menu/BrowserMenu'
 
-const SourceBrowserDynamic = React.memo(
-  (props) => <BrowserMenu {...props} />,
-  () => true
+const SourceBrowserDynamic = memoEqual(
+  (props) => <BrowserMenu {...props} />
 );
 
 export default SourceBrowserDynamic

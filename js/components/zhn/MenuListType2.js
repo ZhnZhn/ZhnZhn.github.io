@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
+
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
 var _OpenClose = _interopRequireDefault(require("./OpenClose2"));
@@ -119,10 +121,9 @@ var _areEqual = function _areEqual(prevProps, nextProps) {
   return prevProps.model === nextProps.model;
 };
 
-var MenuListType2 = /*#__PURE__*/_react["default"].memo(function (props) {
+var MenuListType2 = (0, _memoEqual["default"])(function (props) {
   return /*#__PURE__*/_react["default"].createElement("div", null, _renderLevel1(props));
 }, _areEqual);
-
 var _default = MenuListType2;
 exports["default"] = _default;
 //# sourceMappingURL=MenuListType2.js.map

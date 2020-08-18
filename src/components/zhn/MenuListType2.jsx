@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+import memoEqual from '../hoc/memoEqual'
 import C from '../styles/Color'
 import OpenClose2 from './OpenClose2'
 
@@ -19,7 +21,7 @@ const STYLE = {
   },
   LIST_DIV : {
     marginLeft : 8,
-    paddingLeft : 12,    
+    paddingLeft : 12,
     lineHeight : 2,
     borderLeftStyle: 'solid',
     borderLeftWidth: 2,
@@ -105,7 +107,7 @@ const _renderLevel1 = (props) => {
 };
 
 const _areEqual = (prevProps, nextProps) => prevProps.model === nextProps.model;
-const MenuListType2 = React.memo(props => (
+const MenuListType2 = memoEqual(props => (
   <div>
      {_renderLevel1(props)}
   </div>
