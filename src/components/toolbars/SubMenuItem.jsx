@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 //import PropTypes from "prop-types";
+
+import memoEqual from '../hoc/memoEqual'
+import useToggle from '../hooks/useToggle'
 
 const CL = "bt-sub-item";
 
@@ -11,60 +14,45 @@ const S = {
 
 const _isFn = fn => typeof fn === 'function';
 
-class SubMenuItem extends Component{
-  /*
-  static propTypes = {
-    caption: PropTypes.string,
-    initialIsActive: PropTypes.bool,
-    isNotActive: PropTypes.bool,
-    onClick: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
-  static defaultProps = {
-    initialIsActive: false
-  }
-
-  constructor(props){
-    super(props)
-    this.state = {
-      isActive: props.initialIsActive
-    }
-  }
-
-  _hClick = () => {
-    const { onClick, onClose } = this.props;
+const SubMenuItem = memoEqual(({
+  caption,
+  initialIsActive=false,
+  onClick,
+  onClose
+}) => {
+  const [isActive, toggleIsAcive] = useToggle(initialIsActive)
+  , _hClick = () => {
     onClick()
-    this.setState(prev => ({
-      isActive: !prev.isActive
-    }), () => {
-      if (_isFn(onClose)) {
-        onClose()
-      }
-    })
-  }
-
-  render(){
-    const { caption, isNotActive, onClick  } = this.props;
-    if ( !_isFn(onClick) ){
-      return null;
+    if (_isFn(onClose)) {
+      onClose()
+    } else {
+      toggleIsAcive()
     }
+  };
 
-    const { isActive } = this.state
-    , _style = (isActive && !isNotActive)
-        ? S.ACTIVE
-        : null;
-
-    return(
-      <button
-        className={CL}
-        style={_style}
-        onClick={this._hClick}
-      >
-        {caption}
-      </button>
-    )
+  if (!_isFn(onClick)){
+    return null;
   }
+  const _style = isActive ? S.ACTIVE : null;
+
+  return (
+    <button
+      className={CL}
+      style={_style}
+      onClick={_hClick}
+    >
+      {caption}
+    </button>
+  );
+})
+
+/*
+SubMenuItem.propTypes = {
+  caption: PropTypes.string,
+  initialIsActive: PropTypes.bool,
+  onClick: PropTypes.func,
+  onClose: PropTypes.func
 }
+*/
 
 export default SubMenuItem

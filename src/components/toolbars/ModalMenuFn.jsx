@@ -60,20 +60,17 @@ const ModalMenuFn = ({
       }
       { _isZoom(getChart) && <SubMenuItem
           caption="Zoom"
-          isNotActive={true}
           onClick={onZoom}
           onClose={onClose}
         />
       }
       <SubMenuItem
         caption="Copy"
-        isNotActive={true}
         onClick={onCopy}
         onClose={onClose}
       />
       <SubMenuItem
-        caption="PasteTo"
-        isNotActive={true}
+        caption="PasteTo"        
         onClick={onPasteTo}
         onClose={onClose}
       />

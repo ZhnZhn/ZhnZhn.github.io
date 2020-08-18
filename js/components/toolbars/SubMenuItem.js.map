@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../../src/components/toolbars/SubMenuItem.jsx"],"names":["CL","S","ACTIVE","fontWeight","_isFn","fn","SubMenuItem","props","_hClick","onClick","onClose","setState","prev","isActive","state","initialIsActive","render","caption","isNotActive","_style","Component","defaultProps"],"mappings":";;;;;;;;;;;AAAA;;AACA;AAEA,IAAMA,EAAE,GAAG,aAAX;AAEA,IAAMC,CAAC,GAAG;AACRC,EAAAA,MAAM,EAAE;AACNC,IAAAA,UAAU,EAAE;AADN;AADA,CAAV;;AAMA,IAAMC,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;;IAEMC,W;;;AACJ;;;;;;;;;AAaA,uBAAYC,KAAZ,EAAkB;AAAA;;AAChB,kCAAMA,KAAN;;AADgB,UAOlBC,OAPkB,GAOR,YAAM;AAAA,wBACe,MAAKD,KADpB;AAAA,UACNE,OADM,eACNA,OADM;AAAA,UACGC,OADH,eACGA,OADH;AAEdD,MAAAA,OAAO;;AACP,YAAKE,QAAL,CAAc,UAAAC,IAAI;AAAA,eAAK;AACrBC,UAAAA,QAAQ,EAAE,CAACD,IAAI,CAACC;AADK,SAAL;AAAA,OAAlB,EAEI,YAAM;AACR,YAAIT,KAAK,CAACM,OAAD,CAAT,EAAoB;AAClBA,UAAAA,OAAO;AACR;AACF,OAND;AAOD,KAjBiB;;AAEhB,UAAKI,KAAL,GAAa;AACXD,MAAAA,QAAQ,EAAEN,KAAK,CAACQ;AADL,KAAb;AAFgB;AAKjB;;;;SAcDC,M,GAAA,kBAAQ;AAAA,uBACqC,KAAKT,KAD1C;AAAA,QACEU,OADF,gBACEA,OADF;AAAA,QACWC,WADX,gBACWA,WADX;AAAA,QACwBT,OADxB,gBACwBA,OADxB;;AAEN,QAAK,CAACL,KAAK,CAACK,OAAD,CAAX,EAAsB;AACpB,aAAO,IAAP;AACD;;AAEK,QAAEI,QAAF,GAAe,KAAKC,KAApB,CAAED,QAAF;AAAA,QACJM,MADI,GACMN,QAAQ,IAAI,CAACK,WAAd,GACLjB,CAAC,CAACC,MADG,GAEL,IAHA;;AAKN,wBACE;AACE,MAAA,SAAS,EAAEF,EADb;AAEE,MAAA,KAAK,EAAEmB,MAFT;AAGE,MAAA,OAAO,EAAE,KAAKX;AAHhB,OAKGS,OALH,CADF;AASD,G;;;EArDuBG,gB;;AAApBd,W,CAUGe,Y,GAAe;AACpBN,EAAAA,eAAe,EAAE;AADG,C;eA8CTT,W","sourcesContent":["import React, { Component } from 'react';\r\n//import PropTypes from \"prop-types\";\r\n\r\nconst CL = \"bt-sub-item\";\r\n\r\nconst S = {\r\n  ACTIVE: {\r\n    fontWeight: 'bold'\r\n  }\r\n};\r\n\r\nconst _isFn = fn => typeof fn === 'function';\r\n\r\nclass SubMenuItem extends Component{\r\n  /*\r\n  static propTypes = {\r\n    caption: PropTypes.string,\r\n    initialIsActive: PropTypes.bool,\r\n    isNotActive: PropTypes.bool,\r\n    onClick: PropTypes.func,\r\n    onClose: PropTypes.func\r\n  }\r\n  */\r\n  static defaultProps = {\r\n    initialIsActive: false\r\n  }\r\n\r\n  constructor(props){\r\n    super(props)\r\n    this.state = {\r\n      isActive: props.initialIsActive\r\n    }\r\n  }\r\n\r\n  _hClick = () => {\r\n    const { onClick, onClose } = this.props;\r\n    onClick()\r\n    this.setState(prev => ({\r\n      isActive: !prev.isActive\r\n    }), () => {\r\n      if (_isFn(onClose)) {\r\n        onClose()\r\n      }\r\n    })\r\n  }\r\n\r\n  render(){\r\n    const { caption, isNotActive, onClick  } = this.props;\r\n    if ( !_isFn(onClick) ){\r\n      return null;\r\n    }\r\n\r\n    const { isActive } = this.state\r\n    , _style = (isActive && !isNotActive)\r\n        ? S.ACTIVE\r\n        : null;\r\n\r\n    return(\r\n      <button\r\n        className={CL}\r\n        style={_style}\r\n        onClick={this._hClick}\r\n      >\r\n        {caption}\r\n      </button>\r\n    )\r\n  }\r\n}\r\n\r\nexport default SubMenuItem\r\n"],"file":"SubMenuItem.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/SubMenuItem.js"
+ ],
+ "file": "../../../src/components/toolbars/SubMenuItem.js",
+ "names": [
+  "CL",
+  "S",
+  "ACTIVE",
+  "fontWeight",
+  "_isFn",
+  "fn",
+  "SubMenuItem",
+  "caption",
+  "initialIsActive",
+  "onClick",
+  "onClose",
+  "isActive",
+  "toggleIsAcive",
+  "_hClick",
+  "_style"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAGA;;AACA;;AAHA;AAKA,IAAMA,EAAE,GAAG,aAAX;AAEA,IAAMC,CAAC,GAAG;AACRC,EAAAA,MAAM,EAAE;AACNC,IAAAA,UAAU,EAAE;AADN;AADA,CAAV;;AAMA,IAAMC,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;;AAEA,IAAMC,WAAW,GAAG,2BAAU,gBAKxB;AAAA,MAJJC,OAII,QAJJA,OAII;AAAA,kCAHJC,eAGI;AAAA,MAHJA,eAGI,qCAHY,KAGZ;AAAA,MAFJC,OAEI,QAFJA,OAEI;AAAA,MADJC,OACI,QADJA,OACI;;AAAA,mBAC8B,4BAAUF,eAAV,CAD9B;AAAA,MACGG,QADH;AAAA,MACaC,aADb;AAAA,MAEFC,OAFE,GAEQ,SAAVA,OAAU,GAAM;AAChBJ,IAAAA,OAAO;;AACP,QAAIL,KAAK,CAACM,OAAD,CAAT,EAAoB;AAClBA,MAAAA,OAAO;AACR,KAFD,MAEO;AACLE,MAAAA,aAAa;AACd;AACF,GATG;;AAWJ,MAAI,CAACR,KAAK,CAACK,OAAD,CAAV,EAAoB;AAClB,WAAO,IAAP;AACD;;AACD,MAAMK,MAAM,GAAGH,QAAQ,GAAGV,CAAC,CAACC,MAAL,GAAc,IAArC;;AAEA,sBACE;AACE,IAAA,SAAS,EAAEF,EADb;AAEE,IAAA,KAAK,EAAEc,MAFT;AAGE,IAAA,OAAO,EAAED;AAHX,KAKGN,OALH,CADF;AASD,CA9BmB,CAApB;AAgCA;;;;;;;;;eASeD,W"
+}

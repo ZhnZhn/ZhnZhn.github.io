@@ -1,15 +1,15 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+var _react = _interopRequireDefault(require("react"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
+
+var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
 //import PropTypes from "prop-types";
 var CL = "bt-sub-item";
@@ -23,74 +23,47 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var SubMenuItem = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(SubMenuItem, _Component);
+var SubMenuItem = (0, _memoEqual["default"])(function (_ref) {
+  var caption = _ref.caption,
+      _ref$initialIsActive = _ref.initialIsActive,
+      initialIsActive = _ref$initialIsActive === void 0 ? false : _ref$initialIsActive,
+      onClick = _ref.onClick,
+      onClose = _ref.onClose;
 
-  /*
-  static propTypes = {
-    caption: PropTypes.string,
-    initialIsActive: PropTypes.bool,
-    isNotActive: PropTypes.bool,
-    onClick: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
-  function SubMenuItem(props) {
-    var _this;
+  var _useToggle = (0, _useToggle2["default"])(initialIsActive),
+      isActive = _useToggle[0],
+      toggleIsAcive = _useToggle[1],
+      _hClick = function _hClick() {
+    onClick();
 
-    _this = _Component.call(this, props) || this;
-
-    _this._hClick = function () {
-      var _this$props = _this.props,
-          onClick = _this$props.onClick,
-          onClose = _this$props.onClose;
-      onClick();
-
-      _this.setState(function (prev) {
-        return {
-          isActive: !prev.isActive
-        };
-      }, function () {
-        if (_isFn(onClose)) {
-          onClose();
-        }
-      });
-    };
-
-    _this.state = {
-      isActive: props.initialIsActive
-    };
-    return _this;
-  }
-
-  var _proto = SubMenuItem.prototype;
-
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        caption = _this$props2.caption,
-        isNotActive = _this$props2.isNotActive,
-        onClick = _this$props2.onClick;
-
-    if (!_isFn(onClick)) {
-      return null;
+    if (_isFn(onClose)) {
+      onClose();
+    } else {
+      toggleIsAcive();
     }
-
-    var isActive = this.state.isActive,
-        _style = isActive && !isNotActive ? S.ACTIVE : null;
-
-    return /*#__PURE__*/_react["default"].createElement("button", {
-      className: CL,
-      style: _style,
-      onClick: this._hClick
-    }, caption);
   };
 
-  return SubMenuItem;
-}(_react.Component);
+  if (!_isFn(onClick)) {
+    return null;
+  }
 
-SubMenuItem.defaultProps = {
-  initialIsActive: false
-};
+  var _style = isActive ? S.ACTIVE : null;
+
+  return /*#__PURE__*/_react["default"].createElement("button", {
+    className: CL,
+    style: _style,
+    onClick: _hClick
+  }, caption);
+});
+/*
+SubMenuItem.propTypes = {
+  caption: PropTypes.string,
+  initialIsActive: PropTypes.bool,
+  onClick: PropTypes.func,
+  onClose: PropTypes.func
+}
+*/
+
 var _default = SubMenuItem;
 exports["default"] = _default;
 //# sourceMappingURL=SubMenuItem.js.map

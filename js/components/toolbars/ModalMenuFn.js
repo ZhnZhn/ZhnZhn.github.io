@@ -75,17 +75,14 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
     onClick: onMinMax
   }), _isZoom(getChart) && /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
     caption: "Zoom",
-    isNotActive: true,
     onClick: onZoom,
     onClose: onClose
   }), /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
     caption: "Copy",
-    isNotActive: true,
     onClick: onCopy,
     onClose: onClose
   }), /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
     caption: "PasteTo",
-    isNotActive: true,
     onClick: onPasteTo,
     onClose: onClose
   })));
