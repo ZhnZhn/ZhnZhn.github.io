@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { useRef, useCallback } from 'react';
 //import PropTypes from "prop-types";
 
-import ButtonTab from '../zhn/ButtonTab'
+import useToggle from '../hooks/useToggle'
 
+import ButtonTab from '../zhn/ButtonTab'
 import ModalMenuIndicator from './ModalMenuIndicator'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
@@ -41,6 +42,9 @@ const S = {
     top: 60,
     left: 290
   },
+   BT_CONF: {
+    left: 430
+  },
   BT_R: {
     left: 440,
     width: 36
@@ -49,12 +53,13 @@ const S = {
 
 const _isFn = fn => typeof fn === 'function';
 const _isNumber = n => typeof n === 'number';
-const _isArr = Array.isArray
+const _isArr = Array.isArray;
 
 const _isHrzScrollable = node  => node
   && node.scrollWidth > node.clientWidth;
 
-const _scrollNodeToLeft = (node, left) => {
+const _scrollNodeToLeft = (ref, left) => {
+  const node = ref.current;
   if ( _isHrzScrollable(node) ) {
    if (_isFn(node.scroll)) {
      node.scroll({ left, behavior: 'smooth'})
@@ -75,207 +80,185 @@ const _isIndicatorTab = ({ series, xAxis }, isWithoutIndicator) => !isWithoutInd
        || !_isColumnCategoryConfig(xAxis)
      );
 
-const _crModalMenuStyle = (node, left) => {
+const _crModalMenuStyle = (ref, left) => {
+  const node = ref.current
   if (node && _isNumber(node.scrollLeft)) {
     return { left: left - node.scrollLeft };
   }
   return void 0;
 };
 
-class ChartToolbar extends Component {
-  /*
-  static propTypes = {
-    style: PropTypes.object,
-    config: PropTypes.object
-  }
-  */
-  state = {
-    isShowInd: false,
-    isShowFn: false,
-    isShowMini: false
-  }
+const ChartToolbar = ({
+  hasError,
+  style, config={},
+  onMiniChart,
+  getChart,
+  onAddMfi, onRemoveMfi,
+  onClickLegend,
+  onClick2H,
+  onAddToWatch,
+  onCopy,
+  onPasteTo,
+  onMinMax,
+  onZoom,
+  onClickInfo
+}) => {
+  const _refToolbar = useRef()
+  , [isShowInd, toggleInd] = useToggle(false)
+  , [isShowFn, toggleFn] = useToggle(false)
+  , [isShowMini, toggleMini] = useToggle(false)
+  , _hClickR = useCallback(() => {
+      _scrollNodeToLeft(_refToolbar, 0)
+    }, []);
 
-  _hShowInd = () => {
-    this.setState({ isShowInd: true })
-  }
-  _hCloseInd = () => {
-    this.setState({ isShowInd: false })
-  }
+  const { zhConfig={}, info, zhMiniConfigs } = config
+  , { isWithoutIndicator, itemConf, legend } = zhConfig
+  , _modalMenuArr = [];
 
-  _hShowFn = () => {
-    this.setState({
-      isShowFn: true,
-      fnStyle: _crModalMenuStyle(this._nodeToolbar, S.BT_FN.left)
-    })
-  }
-  _hCloseFn = () => {
-    this.setState({ isShowFn: false })
-  }
+  const _btInfo = (<ButtonTab
+    is={!!info}
+    caption="Info"
+    onClick={onClickInfo}
+  />)
 
-  _hShowMini = () => {
-    this.setState({
-      isShowMini: true,
-      miniStyle: _crModalMenuStyle(this._nodeToolbar, S.M_MINI.left)
-    })
-  }
-  _hCloseMini = () => {
-    this.setState({ isShowMini: false })
-  }
-
-  _hClickR = () => {
-    _scrollNodeToLeft(this._nodeToolbar, 0)
-  }
-
-  /*
-  shouldComponentUpdate(){
-    return false;
-  }
-  */
-  _refToolbar = node => this._nodeToolbar = node
-
-  render(){
-    const {
-            hasError,
-            style, config={},            
-            onMiniChart,
-            getChart,
-            onAddMfi, onRemoveMfi,
-            onClickLegend,
-            onClick2H,
-            onAddToWatch,
-            onCopy,
-            onPasteTo,
-            onMinMax,
-            onZoom,
-            onClickInfo
-          } = this.props
-        , { zhConfig={}, info, zhMiniConfigs } = config
-        , { isWithoutIndicator, itemConf, legend } = zhConfig
-        , { isShowInd,
-            isShowFn, fnStyle,
-            isShowMini, miniStyle
-          } = this.state
-        , _arrModalMenu = [];
-
-    const _btInfo = info ? (
-      <ButtonTab
-        caption="Info"
-        onClick={onClickInfo}
-      />
-    ) : null;
-
-    if (hasError) {
-      return (
-        <div
-           ref={this._refToolbar}
-           className={CL.SCROLL}
-           style={style}
-        >
-          {_btInfo}
-        </div>
-      );
-    }
-
-    let _btTabIndicator = null;
-    if (_isIndicatorTab(config, isWithoutIndicator)) {
-      _btTabIndicator = (<ButtonTab
-        style= {S.BT_IND}
-        caption="Indicator"
-        isShow={isShowInd}
-        isMenu={true}
-        onClick={this._hShowInd}
-      />)
-      _arrModalMenu.push(<ModalMenuIndicator
-        key="menu_ind"
-        isShow={isShowInd}
-        style={S.M_IND}
-        config={config}
-        getChart={getChart}
-        onAddMfi={onAddMfi}
-        onRemoveMfi={onRemoveMfi}
-        onClose={this._hCloseInd}
-      />)
-    }
-
-    const _btLegend = legend ? (
-      <ButtonTab
-        style={S.BT_LEGEND}
-        caption="Legend"
-        onClick={onClickLegend}
-      />
-    ) : null;
-
-    const _btAdd = itemConf ? (
-      <ButtonTab
-        style={S.BT_ADD}
-        caption="Add"
-        //isUpdatable={false}
-        onClick={onAddToWatch}
-      />
-    ) : null;
-
-    let _btTabMini = null;
-    if (zhMiniConfigs && zhMiniConfigs.length) {
-      _btTabMini = (<ButtonTab
-         style= {S.BT_MINI}
-         caption="Mini"
-         isShow={isShowMini}
-         isMenu={true}
-         onClick={this._hShowMini}
-      />)
-      _arrModalMenu.push(<ModalMenuMini
-        key="menu_mini"
-        isShow={isShowMini}
-        style={{...S.M_MINI, ...miniStyle}}
-        configs={zhMiniConfigs}
-        onClickItem={onMiniChart}
-        onClose={this._hCloseMini}
-      />)
-    }
-
+  if (hasError) {
     return (
-      <>
-        <ModalMenuFn
-          isShow={isShowFn}
-          style={{...S.M_FN, ...fnStyle}}
-          config={config}
-          getChart={getChart}
-          onX2H={onClick2H}
-          onMinMax={onMinMax}
-          onZoom={onZoom}
-          onCopy={onCopy}
-          onPasteTo={onPasteTo}
-          onClose={this._hCloseFn}
-        />
-        {_arrModalMenu}
-        <div
-           ref={this._refToolbar}
-           className={CL.SCROLL}
-           style={style}
-        >
-           {_btTabIndicator}
-           {_btLegend}
-           <ButtonTab
-             style={S.BT_FN}
-             caption="Fn"
-             isShow={isShowFn}
-             isMenu={true}
-             onClick={this._hShowFn}
-           />
-           {_btAdd}
-           {_btInfo}
-           {_btTabMini}
-           {_btTabMini && <ButtonTab
-              className={CL.BT_R}
-              style={S.BT_R}
-              caption=">"
-              onClick={this._hClickR}
-            />
-           }
-        </div>
-      </>
+      <div
+         ref={_refToolbar}
+         className={CL.SCROLL}
+         style={style}
+      >
+        {_btInfo}
+      </div>
     );
   }
+
+  let _btTabIndicator = null;
+  if (_isIndicatorTab(config, isWithoutIndicator)) {
+    _btTabIndicator = (<ButtonTab
+       style= {S.BT_IND}
+       caption="Indicator"
+       isShow={isShowInd}
+       isMenu={true}
+       onClick={toggleInd}
+    />)
+    _modalMenuArr.push(<ModalMenuIndicator
+       key="menu_ind"
+       isShow={isShowInd}
+       style={S.M_IND}
+       config={config}
+       getChart={getChart}
+       onAddMfi={onAddMfi}
+       onRemoveMfi={onRemoveMfi}
+       onClose={toggleInd}
+    />)
+  }
+
+  const _btLegend = (<ButtonTab
+    is={!!legend}
+    style={S.BT_LEGEND}
+    caption="Legend"
+    onClick={onClickLegend}
+  />)
+
+  const _btAdd = (<ButtonTab
+    is={!!itemConf}
+    style={S.BT_ADD}
+    caption="Add"
+    onClick={onAddToWatch}
+  />);
+
+  let _btTabMini = null;
+  if (zhMiniConfigs && zhMiniConfigs.length) {
+    _btTabMini = (<ButtonTab
+       style= {S.BT_MINI}
+       caption="Mini"
+       isShow={isShowMini}
+       isMenu={true}
+       onClick={toggleMini}
+    />)
+    const _miniStyle = isShowMini
+      ? _crModalMenuStyle(_refToolbar, S.M_MINI.left)
+      : void 0;
+   _modalMenuArr.push(<ModalMenuMini
+      key="menu_mini"
+      isShow={isShowMini}
+      style={{...S.M_MINI, ..._miniStyle}}
+      configs={zhMiniConfigs}
+      onClickItem={onMiniChart}
+      onClose={toggleMini}
+    />)
+  }
+
+  const _fnStyle = isShowFn
+    ? _crModalMenuStyle(_refToolbar, S.BT_FN.left)
+    : void 0;
+
+  return (
+    <>
+      <ModalMenuFn
+        isShow={isShowFn}
+        style={{...S.M_FN, ..._fnStyle}}
+        config={config}
+        getChart={getChart}
+        onX2H={onClick2H}
+        onMinMax={onMinMax}
+        onZoom={onZoom}
+        onCopy={onCopy}
+        onPasteTo={onPasteTo}
+        onClose={toggleFn}
+      />
+      {_modalMenuArr}
+      <div
+         ref={_refToolbar}
+         className={CL.SCROLL}
+         style={style}
+      >
+         {_btTabIndicator}
+         {_btLegend}
+         <ButtonTab
+           style={S.BT_FN}
+           caption="Fn"
+           isShow={isShowFn}
+           isMenu={true}
+           onClick={toggleFn}
+         />
+         {_btAdd}
+         {_btInfo}
+         {_btTabMini}
+         <ButtonTab
+            is={!!_btTabMini}
+            className={CL.BT_R}
+            style={S.BT_R}
+            caption=">"
+            onClick={_hClickR}
+          />
+      </div>
+    </>
+  );
 }
+
+/*
+ChartToolbar.propTypes = {
+  hasError: PropTypes.bool,
+
+  style: PropTypes.object,
+  config: PropTypes.object,
+
+  getChart: PropTypes.func,
+  
+  onMiniChart: PropTypes.func,
+  onAddMfi: PropTypes.func,
+  onRemoveMfi: PropTypes.func,
+  onClickLegend: PropTypes.func,
+  onClick2H: PropTypes.func,
+  onAddToWatch: PropTypes.func,
+  onCopy: PropTypes.func,
+  onPasteTo: PropTypes.func,
+  onMinMax: PropTypes.func,
+  onZoom: PropTypes.func,
+  onClickInfo: PropTypes.func
+}
+*/
 
 export default ChartToolbar
