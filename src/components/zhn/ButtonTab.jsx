@@ -5,27 +5,33 @@ import useTheme from '../hooks/useTheme'
 
 const TH_ID = 'ELEMENT';
 
-const CL = {
-  BT_TAB: 'button-tab not-selected',
-  BT_TAB__SHOW: 'button-tab button-tab--show not-selected',
-  ARROW: 'arrow-down'
-};
+const BT_TAB_CL = 'not-selected button-tab'
+, BT_TAB__SHOW_CL = `${BT_TAB_CL} button-tab--show`
+, ARROW_CL = 'arrow-down';
 
 const _isBool = bool => typeof bool === 'boolean';
+const _crBtClass = (isShow, className) => {
+  const _btCl = _isBool(isShow) && isShow
+    ? BT_TAB__SHOW_CL
+    : BT_TAB_CL;
+  return className
+    ? `${_btCl} ${className}`
+    : _btCl;
+}
+
 
 const ButtonTab = ({
+  is=true,
   isShow, isMenu,
   className, style,
   caption, children,
   onClick
-}) => {
+}) => {  
   const TS = useTheme(TH_ID)
-  , _rootClass = _isBool(isShow) & isShow
-       ? CL.BT_TAB__SHOW
-       : CL.BT_TAB
-  , _btClass = className
-       ? `${_rootClass} ${className}`
-       : _rootClass;
+
+  if (!is) { return null; }
+  const _btClass = _crBtClass(isShow, className);
+
   return (
     <button
       className={_btClass}
@@ -33,7 +39,7 @@ const ButtonTab = ({
       onClick={onClick}
     >
        {caption}
-       {isMenu && <span className={CL.ARROW} />}
+       {isMenu && <span className={ARROW_CL} />}
        {children}
     </button>
   );

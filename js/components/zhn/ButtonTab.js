@@ -13,35 +13,44 @@ var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 //import PropTypes from "prop-types";
 var TH_ID = 'ELEMENT';
-var CL = {
-  BT_TAB: 'button-tab not-selected',
-  BT_TAB__SHOW: 'button-tab button-tab--show not-selected',
-  ARROW: 'arrow-down'
-};
+var BT_TAB_CL = 'not-selected button-tab',
+    BT_TAB__SHOW_CL = BT_TAB_CL + " button-tab--show",
+    ARROW_CL = 'arrow-down';
 
 var _isBool = function _isBool(bool) {
   return typeof bool === 'boolean';
 };
 
+var _crBtClass = function _crBtClass(isShow, className) {
+  var _btCl = _isBool(isShow) && isShow ? BT_TAB__SHOW_CL : BT_TAB_CL;
+
+  return className ? _btCl + " " + className : _btCl;
+};
+
 var ButtonTab = function ButtonTab(_ref) {
-  var isShow = _ref.isShow,
+  var _ref$is = _ref.is,
+      is = _ref$is === void 0 ? true : _ref$is,
+      isShow = _ref.isShow,
       isMenu = _ref.isMenu,
       className = _ref.className,
       style = _ref.style,
       caption = _ref.caption,
       children = _ref.children,
       onClick = _ref.onClick;
+  var TS = (0, _useTheme["default"])(TH_ID);
 
-  var TS = (0, _useTheme["default"])(TH_ID),
-      _rootClass = _isBool(isShow) & isShow ? CL.BT_TAB__SHOW : CL.BT_TAB,
-      _btClass = className ? _rootClass + " " + className : _rootClass;
+  if (!is) {
+    return null;
+  }
+
+  var _btClass = _crBtClass(isShow, className);
 
   return /*#__PURE__*/_react["default"].createElement("button", {
     className: _btClass,
     style: (0, _extends2["default"])({}, style, TS.BG),
     onClick: onClick
   }, caption, isMenu && /*#__PURE__*/_react["default"].createElement("span", {
-    className: CL.ARROW
+    className: ARROW_CL
   }), children);
 };
 
