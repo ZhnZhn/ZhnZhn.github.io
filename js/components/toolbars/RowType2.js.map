@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/RowType2.js"
+ ],
+ "file": "../../../src/components/toolbars/RowType2.js",
+ "names": [
+  "RowType2",
+  "forwardRef",
+  "caption",
+  "initValue",
+  "configs",
+  "onAdd",
+  "onRemove"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW;AAAA,MACfC,UADe,QACfA,UADe;AAAA,MAEfC,OAFe,QAEfA,OAFe;AAAA,MAGfC,SAHe,QAGfA,SAHe;AAAA,MAIfC,OAJe,QAIfA,OAJe;AAAA,MAKfC,KALe,QAKfA,KALe;AAAA,MAMfC,QANe,QAMfA,QANe;AAAA,sBAQb,+EACE,gCAAC,2BAAD;AACE,IAAA,OAAO,EAAEJ,OADX;AAEE,IAAA,UAAU,EAAED,UAFd;AAGE,IAAA,SAAS,EAAEE,SAHb;AAIE,IAAA,KAAK,EAAEE;AAJT,IADF,eAOE,gCAAC,wBAAD;AACE,IAAA,OAAO,EAAED,OADX;AAEE,IAAA,QAAQ,EAAEE;AAFZ,IAPF,CARa;AAAA,CAAjB;;eAsBeN,Q"
+}

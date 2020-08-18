@@ -11,11 +11,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 
+var _RowType = _interopRequireDefault(require("./RowType2"));
+
 var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
-
-var _RowCaptionInput = _interopRequireDefault(require("./RowCaptionInput"));
-
-var _SeriaConfigs = _interopRequireDefault(require("./SeriaConfigs"));
 
 var addSmaTo = _IndicatorBuilder["default"].addSmaTo,
     removeSeriaFrom = _IndicatorBuilder["default"].removeSeriaFrom;
@@ -81,15 +79,14 @@ var RowSma = function RowSma(_ref) {
     }
   };
 
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_RowCaptionInput["default"], {
-    caption: "SMA",
+  return /*#__PURE__*/_react["default"].createElement(_RowType["default"], {
     forwardRef: _refPeriod,
+    caption: "SMA",
     initValue: _initialSma,
-    onAdd: _onAddSma
-  }), /*#__PURE__*/_react["default"].createElement(_SeriaConfigs["default"], {
     configs: smaConfs,
+    onAdd: _onAddSma,
     onRemove: _onRemoveSma
-  }));
+  });
 };
 
 var _default = RowSma;

@@ -1,10 +1,8 @@
 import React, { useRef, useState } from 'react';
 import useRefInit from '../hooks/useRefInit'
 
+import RowType2 from './RowType2'
 import IndicatorBuilder from '../../charts/IndicatorBuilder';
-
-import RowCaptionInput from './RowCaptionInput'
-import SeriaConfigs from './SeriaConfigs'
 
 const {
   addSmaTo,
@@ -58,18 +56,14 @@ const RowSma = ({
   };
 
   return (
-    <>
-      <RowCaptionInput
-        caption="SMA"
-        forwardRef={_refPeriod}
-        initValue={_initialSma}
-        onAdd={_onAddSma}
-      />
-      <SeriaConfigs
-        configs={smaConfs}
-        onRemove={_onRemoveSma}
-      />
-    </>
+    <RowType2
+      forwardRef={_refPeriod}
+      caption="SMA"
+      initValue={_initialSma}
+      configs={smaConfs}
+      onAdd={_onAddSma}
+      onRemove={_onRemoveSma}
+    />
   );
 };
 

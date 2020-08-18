@@ -9,11 +9,9 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _RowType = _interopRequireDefault(require("./RowType2"));
+
 var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
-
-var _RowCaptionInput = _interopRequireDefault(require("./RowCaptionInput"));
-
-var _SeriaConfigs = _interopRequireDefault(require("./SeriaConfigs"));
 
 var crMfiConfig = _IndicatorBuilder["default"].crMfiConfig;
 
@@ -64,15 +62,14 @@ var RowMfi = function RowMfi(_ref) {
     }));
   };
 
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_RowCaptionInput["default"], {
-    caption: "MFI",
+  return /*#__PURE__*/_react["default"].createElement(_RowType["default"], {
     forwardRef: _refPeriod,
+    caption: "MFI",
     initValue: 14,
-    onAdd: _onAddMfi
-  }), /*#__PURE__*/_react["default"].createElement(_SeriaConfigs["default"], {
     configs: mfiConfs,
+    onAdd: _onAddMfi,
     onRemove: _onRemoveMfi
-  }));
+  });
 };
 
 var _default = RowMfi;

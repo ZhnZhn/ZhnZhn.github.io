@@ -1,9 +1,7 @@
 import React, { useRef, useState } from 'react'
 
+import RowType2 from './RowType2'
 import IndicatorBuilder from '../../charts/IndicatorBuilder';
-
-import RowCaptionInput from './RowCaptionInput'
-import SeriaConfigs from './SeriaConfigs'
 
 const { crMfiConfig } = IndicatorBuilder;
 
@@ -38,18 +36,14 @@ const RowMfi = ({ getChart, onAddMfi, onRemoveMfi }) => {
      setMfiConfs(mfiConfs.filter(d => d.id !== id))
   };
   return (
-    <React.Fragment>
-      <RowCaptionInput
-        caption="MFI"
-        forwardRef={_refPeriod}
-        initValue={14}
-        onAdd={_onAddMfi}
-      />
-      <SeriaConfigs
-        configs={mfiConfs}
-        onRemove={_onRemoveMfi}
-      />
-    </React.Fragment>
+    <RowType2
+      forwardRef={_refPeriod}
+      caption="MFI"
+      initValue={14}
+      configs={mfiConfs}
+      onAdd={_onAddMfi}
+      onRemove={_onRemoveMfi}
+    />
   );
 };
 
