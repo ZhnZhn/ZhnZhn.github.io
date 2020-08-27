@@ -9,7 +9,7 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
+var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
 var S = {
   ITEM_DIV: {
@@ -38,20 +38,20 @@ var Item = function Item(_ref) {
       children = _ref.children;
 
   /*eslint-disable react-hooks/exhaustive-deps*/
-  var _hKeyDown = (0, _react.useCallback)(function (evt) {
-    if ((0, _isKeyEnter["default"])(evt)) {
-      onClickItem(item);
-    }
+  var _hClick = (0, _react.useCallback)(function () {
+    return onClickItem(item);
   }, []);
   /*eslint-enable react-hooks/exhaustive-deps*/
 
+
+  var _hKeyDown = (0, _useKeyEnter["default"])(_hClick);
 
   return /*#__PURE__*/_react["default"].createElement("div", {
     role: "menuitem",
     tabIndex: "0",
     className: className,
     style: S.ITEM_DIV,
-    onClick: onClickItem.bind(null, item),
+    onClick: _hClick,
     onKeyDown: _hKeyDown
   }, /*#__PURE__*/_react["default"].createElement("span", {
     style: S.ITEM_SPAN

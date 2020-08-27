@@ -1,12 +1,10 @@
 import React from 'react';
 
-
 import memoEqual from '../hoc/memoEqual'
 import C from '../styles/Color'
 import OpenClose2 from './OpenClose2'
 
 const LIST_OPEN_COLOR = C.GREEN;
-//const GROUP_OPEN_COLOR = C.TITLE;
 
 const MODEL_PROP = {
   CAPTION : 'caption',
@@ -16,29 +14,27 @@ const MODEL_PROP = {
 }
 
 const STYLE = {
-  GROUP_DIV : {
-    lineHeight : 2
+  GROUP_DIV: {
+    lineHeight: 2
   },
-  LIST_DIV : {
-    marginLeft : 8,
-    paddingLeft : 12,
-    lineHeight : 2,
+  LIST_DIV: {
+    marginLeft: 8,
+    paddingLeft: 12,
+    lineHeight: 2,
     borderLeftStyle: 'solid',
     borderLeftWidth: 2,
     borderLeftColor: 'inherit',
-    //borderLeft : `2px solid ${GROUP_OPEN_COLOR}`
   },
   ITEM_DIV : {
     position: 'relative',
     paddingRight: 10,
-    paddingTop : 5,
+    paddingTop: 5,
     paddingBottom: 5,
-    lineHeight : 1.4
+    lineHeight: 1.4
   },
   ITEM_SPAN : {
     display: 'inline-block',
     width: '100%',
-    //maxWidth: '250px',
     //direction: "ltr",
     verticalAlign : 'middle',
     whiteSpace: 'nowrap',
@@ -47,10 +43,12 @@ const STYLE = {
   }
 };
 
+
+
 const _renderLevel3 = (items=[], captionProp, props) => {
   const { itemClassName, ItemComp, onClickItem } = props;
   return items.map((item, index) => {
-    const caption  = item[captionProp];
+    const caption = item[captionProp];
     return (
       <ItemComp
          key={index}
@@ -97,7 +95,6 @@ const _renderLevel1 = (props) => {
         <OpenClose2
            key={index}
            style={STYLE.GROUP_DIV}
-           //openColor={GROUP_OPEN_COLOR}
            caption={caption}
         >
           {_renderLevel2(lists, _captionProp, _itemsProp, props)}

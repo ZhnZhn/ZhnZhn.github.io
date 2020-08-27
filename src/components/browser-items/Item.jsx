@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import isKeyEnter from '../zhn/isKeyEnter'
+import useKeyEnter from '../hooks/useKeyEnter'
 
 const S = {
   ITEM_DIV: {
@@ -23,23 +23,21 @@ const S = {
 
 const Item = ({
    caption, className,
-   item, onClickItem,
+   item,
+   onClickItem,
    children
   }) => {
   /*eslint-disable react-hooks/exhaustive-deps*/
-  const _hKeyDown = useCallback((evt) => {
-    if (isKeyEnter(evt)) {
-      onClickItem(item)
-    }
-  }, []);
+  const _hClick = useCallback(() => onClickItem(item), []);
   /*eslint-enable react-hooks/exhaustive-deps*/
+  const _hKeyDown = useKeyEnter(_hClick);
   return (
     <div
       role="menuitem"
       tabIndex="0"
       className={className}
       style={S.ITEM_DIV}
-      onClick={onClickItem.bind(null, item)}
+      onClick={_hClick}
       onKeyDown={_hKeyDown}
     >
       <span style={S.ITEM_SPAN}>

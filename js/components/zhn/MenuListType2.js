@@ -13,8 +13,7 @@ var _Color = _interopRequireDefault(require("../styles/Color"));
 
 var _OpenClose = _interopRequireDefault(require("./OpenClose2"));
 
-var LIST_OPEN_COLOR = _Color["default"].GREEN; //const GROUP_OPEN_COLOR = C.TITLE;
-
+var LIST_OPEN_COLOR = _Color["default"].GREEN;
 var MODEL_PROP = {
   CAPTION: 'caption',
   GROUPS: 'groups',
@@ -31,8 +30,7 @@ var STYLE = {
     lineHeight: 2,
     borderLeftStyle: 'solid',
     borderLeftWidth: 2,
-    borderLeftColor: 'inherit' //borderLeft : `2px solid ${GROUP_OPEN_COLOR}`
-
+    borderLeftColor: 'inherit'
   },
   ITEM_DIV: {
     position: 'relative',
@@ -44,7 +42,6 @@ var STYLE = {
   ITEM_SPAN: {
     display: 'inline-block',
     width: '100%',
-    //maxWidth: '250px',
     //direction: "ltr",
     verticalAlign: 'middle',
     whiteSpace: 'nowrap',
@@ -110,8 +107,7 @@ var _renderLevel1 = function _renderLevel1(props) {
         lists = group[_listsProp];
     return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
       key: index,
-      style: STYLE.GROUP_DIV //openColor={GROUP_OPEN_COLOR}
-      ,
+      style: STYLE.GROUP_DIV,
       caption: caption
     }, _renderLevel2(lists, _captionProp, _itemsProp, props));
   });
