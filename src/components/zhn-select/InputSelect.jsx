@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types'
+import has from '../has'
 
 import ArrowCell from './ArrowCell';
+import SvgClear from '../zhn/SvgClear';
 
 import BtCircle2 from '../zhn/ButtonCircle2';
 import ItemOptionDf from './ItemOptionDf'
@@ -47,6 +49,12 @@ const S = {
   },
   ARROW_SHOW: {
     borderColor: '#1b75bb transparent transparent'
+  },
+  SVG_CLEAR: {
+    position: 'absolute',
+    top: 5,
+    right: 8,
+    stroke: '#1b75bb'
   }
 };
 
@@ -57,12 +65,31 @@ const _crInitialStateFromProps = ({ optionName, optionNames, options }) => ({
   options: options,
   optionNames: optionNames || optionName || '',
   isValidDomOptionsCache: false,
-  isLocalMode: false
+  isLocalMode: false,
+  isFocused: false
 });
 
 const _crValue = str => str
   .replace(INPUT_PREFIX, '')
   .trim();
+
+const _filterOptions = (options, value, pnCaption) => {
+   const _value = value.toLowerCase();
+   return options.filter(item => item[pnCaption]
+     .toLowerCase()
+     .indexOf(_value) !== -1
+   );
+}
+
+const _crFilterOptions = (options, token, props) => {
+  const { propCaption } = props;
+  const _arr = _filterOptions(options, token, propCaption);
+  if (_arr.length === 0){
+    _arr.push(_crInputItem(token, props))
+  }
+  return _arr;
+}
+
 
 class InputSelect extends Component {
   /*
@@ -108,14 +135,19 @@ class InputSelect extends Component {
 
   constructor(props){
     super(props)
-    this._initFromProps(props)
+    this._touchHandlers = has.touch
+      ? {
+          onFocus: this._hFocus,
+          onBlur: this._hBlur
+        }
+      : void 0
+    this._initProperties()
     this.state = _crInitialStateFromProps(props)
   }
 
-  _initFromProps = ({ propCaption }) => {
+  _initProperties = () => {
     this.domOptionsCache = null
     this.indexActiveOption = 0
-    this.propCaption = propCaption
   }
 
   static getDerivedStateFromProps(props, state){
@@ -127,79 +159,70 @@ class InputSelect extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
+    const { initialOptions, isShowOption } = this.state;
     // Init from props for new options from props
-    if (prevState.initialOptions !== this.state.initialOptions) {
-      this._initFromProps(this.props)
+    if (prevState.initialOptions !== initialOptions) {
+      this._initProperties()
     }
-     //Decorate Active Option
-     if (this.state.isShowOption){
-       const comp = this._getActiveItemComp();
-       this._decorateActiveRowComp(comp);
-       this._makeVisibleActiveRowComp(comp);
+    //Decorate Active Option
+    if (isShowOption){
+      const comp = this._decorateCurrentComp();
+      this._makeVisible(comp)
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._blurId)
   }
 
   _setStateToInit = (props) => {
-    this._initFromProps(props)
+    this._initProperties()
     this.setState(_crInitialStateFromProps(props))
   }
 
-  _getActiveItemComp = () => {
+  _getCurrentComp = () => {
     return this[`v${this.indexActiveOption}`];
   }
-  _decorateActiveRowComp = (comp) => {
+  _decorateCurrentComp = () => {
+    const comp = this._getCurrentComp();
     if (comp){
       comp.classList.add(CL.OPTIONS_ROW_ACTIVE);
+      if (this.indexNode) {
+        this.indexNode.textContent = this.indexActiveOption + 1
+      }
     }
-    if (this.indexNode) {
-      this.indexNode.textContent = this.indexActiveOption + 1
-    }
+    return comp;
   }
-  _undecorateActiveRowComp = (comp) => {
-     const _comp = comp || this._getActiveItemComp();
+  _undecorateCurrentComp = (comp) => {
+     const _comp = comp || this._getCurrentComp();
      if (_comp){
       _comp.classList.remove(CL.OPTIONS_ROW_ACTIVE);
      }
   }
 
-  _makeVisibleActiveRowComp = comp => {
+  _calcDeltaTop = (comp) => {
+    return comp && this.optionsComp
+      ? comp.offsetTop - this.optionsComp.scrollTop
+      : void 0;
+  }
+
+  _makeVisible = comp => {
     if (comp){
-      const  { offsetTop } = comp
-      , { scrollTop } = this.optionsComp;
-      if (offsetTop - scrollTop > 70){
-         this.optionsComp.scrollTop += offsetTop - scrollTop - 70;
+      const deltaTop = this._calcDeltaTop(comp);
+      if (deltaTop > 70){
+        this.optionsComp.scrollTop += deltaTop - 70;
       }
-      if (offsetTop - scrollTop < 0){
+      if (deltaTop < 0){
         this.optionsComp.scrollTop = 0;
       }
     }
-  }
-
-  _filterOptions = (options, value) => {
-     const valueFor = value.toLowerCase()
-     , _caption = this.propCaption;
-     return options.filter(option => option[_caption]
-        .toLowerCase()
-        .indexOf(valueFor) !== -1
-     );
-  }
-
-  _crFilterOptions = (token, tokenLn, valueLn) => {
-    const { options, initialOptions } = this.state
-    , _options = tokenLn > valueLn
-        ? options : initialOptions
-    , _arr = this._filterOptions(_options, token);
-    if (_arr.length === 0){
-      _arr.push(_crInputItem(token, this.props))
-    }
-    return _arr;
   }
 
   _hInputChange = (event) => {
     const { isWithInput, regInput } = this.props
     , token = event.target.value
     , tokenLn = token.length
-    , { value } = this.state
+    , { value, options, initialOptions } = this.state
     , valueLn = value.length;
 
     if ( isWithInput
@@ -209,13 +232,15 @@ class InputSelect extends Component {
     }
 
     if (tokenLn !== valueLn){
-      this._undecorateActiveRowComp()
+      this._undecorateCurrentComp()
       this.indexActiveOption = 0;
+      const _options = tokenLn > valueLn
+        ? options : initialOptions;
       this.setState({
         value: token,
         isShowOption: true,
         isValidDomOptionsCache: false,
-        options: this._crFilterOptions(token, tokenLn, valueLn)
+        options: _crFilterOptions(_options, token, this.props)
       })
     }
   }
@@ -243,11 +268,22 @@ class InputSelect extends Component {
     }
   }
 
+  _decorateByStep = (isStepDown) => {
+    const fnPredicate = isStepDown
+      ? (delta) => delta > 70
+      : (delta) => delta < 70
+    , comp = this._decorateCurrentComp()
+    , deltaTop = this._calcDeltaTop(comp);
+    if (fnPredicate(deltaTop)){
+       this.optionsComp.scrollTop += deltaTop - 70;
+    }
+  }
+
   _stepDownOption = () => {
-    const prevComp = this._getActiveItemComp();
+    const prevComp = this._getCurrentComp();
 
     if (prevComp){
-       this._undecorateActiveRowComp(prevComp);
+       this._undecorateCurrentComp(prevComp);
 
        this.indexActiveOption += 1;
        if (this.indexActiveOption>=this.state.options.length){
@@ -255,37 +291,23 @@ class InputSelect extends Component {
           this.optionsComp.scrollTop = 0;
        }
 
-       const nextComp = this._getActiveItemComp();
-       this._decorateActiveRowComp(nextComp)
-
-       const offsetTop = nextComp.offsetTop
-       const scrollTop = this.optionsComp.scrollTop;
-       if ( (offsetTop - scrollTop) > 70){
-          this.optionsComp.scrollTop += (offsetTop - scrollTop - 70);
-       }
+       this._decorateByStep(true)
     }
   }
 
   _stepUpOption = () => {
-    const prevComp = this._getActiveItemComp();
+    const prevComp = this._getCurrentComp();
     if (prevComp){
-      this._undecorateActiveRowComp(prevComp);
+      this._undecorateCurrentComp(prevComp);
 
       this.indexActiveOption -= 1;
       if (this.indexActiveOption < 0){
         this.indexActiveOption = this.state.options.length - 1;
-        const bottomComp = this._getActiveItemComp()
+        const bottomComp = this._getCurrentComp()
         this.optionsComp.scrollTop = bottomComp.offsetTop
       }
 
-      const nextComp = this._getActiveItemComp();
-      this._decorateActiveRowComp(nextComp);
-
-      const offsetTop = nextComp.offsetTop;
-      const scrollTop = this.optionsComp.scrollTop;
-      if ( (offsetTop - scrollTop) < 70){
-        this.optionsComp.scrollTop -= ( 70 - (offsetTop - scrollTop) );
-      }
+      this._decorateByStep()
     }
   }
 
@@ -315,11 +337,13 @@ class InputSelect extends Component {
     switch(event.keyCode){
       // enter
       case 13:{
-         const item = this.state.options[this.indexActiveOption];
+         const { propCaption } = this.props
+         , item = this.state.options[this.indexActiveOption] || {}
+         , _value = item[propCaption];
 
-         if (item && item[this.propCaption]){
+         if (_value){
            this.setState({
-             value: _crValue(item[this.propCaption]),
+             value: _crValue(_value),
              isShowOption: false,
              isValidDomOptionsCache: true
            });
@@ -332,9 +356,7 @@ class InputSelect extends Component {
         if (this.state.isShowOption){
           this.setState({ isShowOption: false });
         } else {
-          this._undecorateActiveRowComp();
-          this._setStateToInit(this.props);
-          this._selectItem()
+          this.clearInput()
         }
       break;}
       case 40: //down
@@ -363,11 +385,11 @@ class InputSelect extends Component {
     }
   }
 
-  _hClickItem = (item, index) => {
-    this._undecorateActiveRowComp()
+  _hClickItem = (item, index, propCaption) => {
+    this._undecorateCurrentComp()
     this.indexActiveOption = index;
     this.setState({
-      value: _crValue(item[this.propCaption]),
+      value: _crValue(item[propCaption]),
       isShowOption: false
     });
     this._selectItem(item)
@@ -378,13 +400,13 @@ class InputSelect extends Component {
 
   _createDomOptionsWithCache = () => {
     const {
+      propCaption,
       ItemOptionComp
     } = this.props
     , {
       options,
       isValidDomOptionsCache
-    } = this.state
-    , _propCaption = this.propCaption;
+    } = this.state;
 
     let _domOptions;
     if (options){
@@ -397,11 +419,11 @@ class InputSelect extends Component {
               key={index}
               className={CL.OPTIONS_ROW}
               ref={c => this[`v${index}`] = c}
-              onClick={this._hClickItem.bind(null, item, index)}
+              onClick={() => this._hClickItem(item, index, propCaption)}
             >
               <ItemOptionComp
                  item={item}
-                 propCaption={_propCaption}
+                 propCaption={propCaption}
               />
             </div>
          ));
@@ -442,7 +464,7 @@ class InputSelect extends Component {
             nFiltered={_nFiltered}
             onStepUp={this._stepUpOption}
             onStepDown={this._stepDownOption}
-            onClear={this.clearInput}
+            onClear={this._hClear}
           />
         </div>
     );
@@ -450,23 +472,38 @@ class InputSelect extends Component {
 
   _refArrowCell = c => this.arrowCell = c
 
+  _hClear = () => {
+    this.clearInput()
+    this.focusInput()
+  }
+
   _crAfterInputEl = () => {
     const {
        isLoading, isLoadingFailed,
        placeholder, optionName, onLoadOption
      } = this.props
-    , { isShowOption, optionNames } = this.state;
+    , { isShowOption, optionNames, isFocused, value } = this.state;
 
     let _placeholder, _afterInputEl;
     if (!isLoading && !isLoadingFailed){
-       _placeholder = placeholder || `Select ${optionName}...`;
-       _afterInputEl = (
-         <ArrowCell
-           ref={this._refArrowCell}
-           arrowStyle={isShowOption ? S.ARROW_SHOW : void 0}
-           onClick={this._hToggleOptions}
-         />
-      );
+       if (isFocused && value) {
+         _afterInputEl = (
+            <SvgClear
+               style={S.SVG_CLEAR}
+               onClick={this._hClear}
+            />
+          )
+       } else {
+         _placeholder = placeholder || `Select ${optionName}...`;
+         _afterInputEl = (
+           <ArrowCell
+             ref={this._refArrowCell}
+             arrowStyle={isShowOption ? S.ARROW_SHOW : void 0}
+             onClick={this._hToggleOptions}
+           />
+        );
+      }
+
     } else if (isLoading){
       _placeholder = `Loading ${optionNames}...`;
       _afterInputEl = (
@@ -491,7 +528,18 @@ class InputSelect extends Component {
     };
   }
 
-  _refDomInputText = c => this.domInputText = c
+  _hFocus = () => {
+    clearTimeout(this._blurId)
+    this.setState({ isFocused: true })
+  }
+  _hBlur = () => {
+    this._blurId = setTimeout(
+      () => this.setState({ isFocused: false }),
+      800
+    )
+  }
+
+  _refInput = node => this._nodeInput = node
 
   render(){
     const { rootStyle, width } = this.props
@@ -505,7 +553,7 @@ class InputSelect extends Component {
         style={_rootWidthStyle}
       >
         <input
-           ref={this._refDomInputText}
+           ref={this._refInput}
            className={CL.INPUT}
            type="text"
            name="select"
@@ -517,6 +565,7 @@ class InputSelect extends Component {
            placeholder={placeholder}
            onChange={this._hInputChange}
            onKeyDown={this._hInputKeyDown}
+           {...this._touchHandlers}
         />
         {afterInputEl}
         <hr className={CL.INPUT_HR} />
@@ -526,16 +575,13 @@ class InputSelect extends Component {
   }
 
   clearInput = () => {
-    this._undecorateActiveRowComp()
+    this._undecorateCurrentComp()
     this._selectItem()
     this._setStateToInit(this.props)
   }
 
   focusInput(){
-    this.domInputText.focus()
-  }
-  focusNotValidInput(){
-    this.domInputText.focus()
+    this._nodeInput.focus()
   }
 
 }
