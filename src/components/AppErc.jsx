@@ -1,5 +1,7 @@
 
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import useListen from './hooks/useListen'
 
 import LocationSearch from '../flux/logic/LocationSearch';
 import ChartStore from '../flux/stores/ChartStore';
@@ -25,52 +27,40 @@ const CL = "component-container"
 const showSettings = CA.showSettings
  .bind(null, ChartStore.exportSettingFn())
 
-class AppErc extends Component {
-  state = {
-    theme: initialTheme
-  }
 
-  componentDidMount(){
-    this.unsubsribe = ChartStore.listen(this._onStore)
+const AppErc = () => {
+  const [theme, setTheme] = useState(initialTheme);
+
+  useListen(ChartStore, (actionType, themeName) => {
+    if (actionType === CAT.CHANGE_THEME) {
+      theme.setThemeName(themeName)
+      setTheme({...theme})
+    }
+  })
+  useEffect(()=>{
     LocationSearch.load();
     checkBuild(BUILD_DATE, CA.showReload)
-  }
-  componentWillUnmout(){
-    this.unsubsribe()
-  }
-  _onStore = (actionType, themeName) => {
-    if (actionType === CAT.CHANGE_THEME) {
-      this.setState(({ theme }) => {
-        theme.setThemeName(themeName)
-        return {
-          theme: {...theme}
-        };
-      })
-    }
-  }
+  }, [])
 
-  render(){
-    const { theme } = this.state;
-    return (
-      <ThemeContext.Provider value={theme}>
-        <HeaderBar store={ChartStore} showSettings={showSettings} />
-        <div className={CL}>
-           <BrowserContainer
-              store={ChartStore}
-              initBrowserAction={BAT.INIT_BROWSER_DYNAMIC}
-              showDialogAction={CAT.SHOW_DIALOG}
-              onCloseDialog={CA.closeDialog}
-           />
-           <About store={ChartStore} isInitShow={true} />
-           <CompContainer
-             store={ChartStore}
-             addAction={CHAT.INIT_AND_SHOW_CHART}
-           />
-       </div>
-       <DialogContainer store={ChartStore} />
-     </ThemeContext.Provider>
-   );
-  }
+  return (
+    <ThemeContext.Provider value={theme}>
+      <HeaderBar store={ChartStore} showSettings={showSettings} />
+      <div className={CL}>
+         <BrowserContainer
+            store={ChartStore}
+            initBrowserAction={BAT.INIT_BROWSER_DYNAMIC}
+            showDialogAction={CAT.SHOW_DIALOG}
+            onCloseDialog={CA.closeDialog}
+         />
+         <About store={ChartStore} isInitShow={true} />
+         <CompContainer
+           store={ChartStore}
+           addAction={CHAT.INIT_AND_SHOW_CHART}
+         />
+     </div>
+     <DialogContainer store={ChartStore} />
+   </ThemeContext.Provider>
+  );
 }
 
 export default AppErc

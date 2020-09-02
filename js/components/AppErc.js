@@ -9,9 +9,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
+
+var _useListen = _interopRequireDefault(require("./hooks/useListen"));
 
 var _LocationSearch = _interopRequireDefault(require("../flux/logic/LocationSearch"));
 
@@ -44,77 +44,44 @@ var CL = "component-container";
 
 var showSettings = _ComponentActions["default"].showSettings.bind(null, _ChartStore["default"].exportSettingFn());
 
-var AppErc = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(AppErc, _Component);
+var AppErc = function AppErc() {
+  var _useState = (0, _react.useState)(_uiTheme["default"]),
+      theme = _useState[0],
+      setTheme = _useState[1];
 
-  function AppErc() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+  (0, _useListen["default"])(_ChartStore["default"], function (actionType, themeName) {
+    if (actionType === _ComponentActions.ComponentActionTypes.CHANGE_THEME) {
+      theme.setThemeName(themeName);
+      setTheme((0, _extends2["default"])({}, theme));
     }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      theme: _uiTheme["default"]
-    };
-
-    _this._onStore = function (actionType, themeName) {
-      if (actionType === _ComponentActions.ComponentActionTypes.CHANGE_THEME) {
-        _this.setState(function (_ref) {
-          var theme = _ref.theme;
-          theme.setThemeName(themeName);
-          return {
-            theme: (0, _extends2["default"])({}, theme)
-          };
-        });
-      }
-    };
-
-    return _this;
-  }
-
-  var _proto = AppErc.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.unsubsribe = _ChartStore["default"].listen(this._onStore);
-
+  });
+  (0, _react.useEffect)(function () {
     _LocationSearch["default"].load();
 
     (0, _checkBuild["default"])(BUILD_DATE, _ComponentActions["default"].showReload);
-  };
-
-  _proto.componentWillUnmout = function componentWillUnmout() {
-    this.unsubsribe();
-  };
-
-  _proto.render = function render() {
-    var theme = this.state.theme;
-    return /*#__PURE__*/_react["default"].createElement(_ThemeContext["default"].Provider, {
-      value: theme
-    }, /*#__PURE__*/_react["default"].createElement(_HeaderBar["default"], {
-      store: _ChartStore["default"],
-      showSettings: showSettings
-    }), /*#__PURE__*/_react["default"].createElement("div", {
-      className: CL
-    }, /*#__PURE__*/_react["default"].createElement(_BrowserContainer["default"], {
-      store: _ChartStore["default"],
-      initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
-      showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
-      onCloseDialog: _ComponentActions["default"].closeDialog
-    }), /*#__PURE__*/_react["default"].createElement(_About["default"], {
-      store: _ChartStore["default"],
-      isInitShow: true
-    }), /*#__PURE__*/_react["default"].createElement(_CompContainer["default"], {
-      store: _ChartStore["default"],
-      addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
-    })), /*#__PURE__*/_react["default"].createElement(_DialogContainer["default"], {
-      store: _ChartStore["default"]
-    }));
-  };
-
-  return AppErc;
-}(_react.Component);
+  }, []);
+  return /*#__PURE__*/_react["default"].createElement(_ThemeContext["default"].Provider, {
+    value: theme
+  }, /*#__PURE__*/_react["default"].createElement(_HeaderBar["default"], {
+    store: _ChartStore["default"],
+    showSettings: showSettings
+  }), /*#__PURE__*/_react["default"].createElement("div", {
+    className: CL
+  }, /*#__PURE__*/_react["default"].createElement(_BrowserContainer["default"], {
+    store: _ChartStore["default"],
+    initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+    showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+    onCloseDialog: _ComponentActions["default"].closeDialog
+  }), /*#__PURE__*/_react["default"].createElement(_About["default"], {
+    store: _ChartStore["default"],
+    isInitShow: true
+  }), /*#__PURE__*/_react["default"].createElement(_CompContainer["default"], {
+    store: _ChartStore["default"],
+    addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
+  })), /*#__PURE__*/_react["default"].createElement(_DialogContainer["default"], {
+    store: _ChartStore["default"]
+  }));
+};
 
 var _default = AppErc;
 exports["default"] = _default;
