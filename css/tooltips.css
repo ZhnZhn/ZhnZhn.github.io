@@ -1,6 +1,7 @@
 
 .tp__header {
   position: relative;
+  padding-top: 1px;
   padding-left: 5px;
   padding-right: 25px;
   height: 26px;

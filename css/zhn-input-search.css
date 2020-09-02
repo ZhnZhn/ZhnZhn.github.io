@@ -55,6 +55,7 @@
 }
 .zhn-search__row:hover,
 .zhn-search__row:focus {
+  outline: 0;
   border-bottom: solid 2px #1b75bb;
   font-weight: bolder;
 }

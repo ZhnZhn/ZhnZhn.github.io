@@ -54,6 +54,7 @@ module.exports = {
     }),
     */   
     new HtmlWebpackPlugin({
+        minify: false,
         filename: path.resolve('index.html'),
         template: path.resolve('template', 'index.ejs'),
         inject: false,
