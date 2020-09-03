@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/quandl/toStackedArea.js"
+ ],
+ "file": "../../../src/adapters/quandl/toStackedArea.js",
+ "names": [
+  "crConfig",
+  "fnStacked",
+  "toStackedArea",
+  "json",
+  "option",
+  "percentType",
+  "ChartType",
+  "STACKED_AREA_PERCENT"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;IAEQA,Q,GAAaC,qB,CAAbD,Q;;AAER,IAAME,aAAa,GAAG,SAAhBA,aAAgB,CAACC,IAAD,EAAOC,MAAP;AAAA,SAAkBJ,QAAQ,CAAC;AAC/CK,IAAAA,WAAW,EAAEC,gBAAUC,oBADwB;AAE/CJ,IAAAA,IAAI,EAAJA,IAF+C;AAEzCC,IAAAA,MAAM,EAANA;AAFyC,GAAD,CAA1B;AAAA,CAAtB;;eAKeF,a"
+}

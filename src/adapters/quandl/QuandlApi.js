@@ -56,17 +56,18 @@ const _checkDataEmpty = (dataset, datatable) => {
   }
 };
 const _checkDataset = (dataset) => {
-  if ( dataset && (!dataset.data || dataset.data.length === 0) ) {
-      const {
-              newest_available_date,
-              oldest_available_date
-            } = dataset;
-      throw _crErr(
-         C.DATASET_EMPTY,
-         `Result dataset for request is empty:
-          Newest Date: ${newest_available_date || ''}
-          Oldest Date: ${oldest_available_date || ''}`
-      );
+  const {
+    data,
+    newest_available_date,
+    oldest_available_date
+  } = dataset;
+  if (!data || data.length === 0 ) {
+    throw _crErr(
+       C.DATASET_EMPTY,
+       `Result dataset for request is empty:
+        Newest Date: ${newest_available_date || ''}
+        Oldest Date: ${oldest_available_date || ''}`
+    );
   }
 };
 
@@ -79,13 +80,13 @@ const QuandlApi = {
   },
 
   // headers && headers.get existed
-  getLimitRemaiming: headers => headers.get(C.LIMIT_REMAINING),          
+  getLimitRemaiming: headers => headers.get(C.LIMIT_REMAINING),
 
   checkResponse(json) {
     const {
-      quandl_error
-      , dataset
-      , datatable
+      quandl_error,
+      dataset,
+      datatable
     } = json;
 
     _checkErr(quandl_error)

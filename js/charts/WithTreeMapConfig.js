@@ -10,7 +10,7 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
 var WithTreeMapConfig = {
-  fBaseTreeMapConfig: function fBaseTreeMapConfig() {
+  crTreeMapConfig: function crTreeMapConfig() {
     return {
       zhSeries: {
         count: 0
@@ -31,7 +31,7 @@ var WithTreeMapConfig = {
       navigation: _Chart["default"].fNavigation()
     };
   },
-  fCreateTreeMapSeria: function fCreateTreeMapSeria(data) {
+  crTreeMapSeria: function crTreeMapSeria(data) {
     return {
       type: 'treemap',
       layoutAlgorithm: 'squarified',

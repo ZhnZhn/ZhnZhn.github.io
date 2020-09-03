@@ -96,11 +96,11 @@ var Chart = {
       opacity = 0.75;
     }
 
-    return _highcharts["default"].Color(base).brighten(this.COLOR_LOW_LEVEL + deltaColor).setOpacity(opacity).get();
+    return _highcharts["default"].Color(base).brighten(Chart.COLOR_LOW_LEVEL + deltaColor).setOpacity(opacity).get();
   },
   fnGetMonoColor: function fnGetMonoColor(index) {
     var colorIndex = index % 8;
-    return this._monoColors[colorIndex];
+    return Chart._monoColors[colorIndex];
   },
   fCreditsRightBottom: function fCreditsRightBottom(option) {
     if (option === void 0) {

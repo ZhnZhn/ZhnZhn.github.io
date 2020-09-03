@@ -3,17 +3,21 @@ import Big from 'big.js';
 import AdapterFn from '../AdapterFn'
 
 import {ChartType} from '../../constants/Type';
-import formatAllNumber from '../../utils/formatAllNumber'
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
 import QuandlFn2 from './QuandlFn2';
 
+const {
+  crStackedAreaSeria,
+  crStackedColumnSeria
+} = ChartConfig
+
 const _rFactorySeria = {
-  [ChartType.STACKED_AREA] : ChartConfig.fStackAreaSeria,
-  [ChartType.STACKED_AREA_PERCENT] : ChartConfig.fStackAreaSeria,
-  [ChartType.STACKED_COLUMN] : ChartConfig.fStackedColumnSeria,
-  [ChartType.STACKED_COLUMN_PERCENT] : ChartConfig.fStackedColumnSeria
+  [ChartType.STACKED_AREA]: crStackedAreaSeria,
+  [ChartType.STACKED_AREA_PERCENT]: crStackedAreaSeria,
+  [ChartType.STACKED_COLUMN]: crStackedColumnSeria,
+  [ChartType.STACKED_COLUMN_PERCENT]: crStackedColumnSeria
 }
 
 export const fnCalcTotal = function(jsonData=[], items=[]){
@@ -180,28 +184,4 @@ export const fnCreateSparkData = function(jsonData, itemIndex, bYearTotals){
   })
 
   return { sparkvalues, sparkpercent };
-}
-
-export const crValueMoving = function(bNowTotal, date, bPrevTotal, dateTo){
-  return Object.assign(
-      QuandlFn2.createValueMoving({
-        bNowValue  : bNowTotal,
-        bPrevValue : bPrevTotal
-      }),
-      {
-        date: date,
-        dateTo: dateTo.split('-')[0],
-        valueTo: formatAllNumber(bPrevTotal),
-        isDenyToChange: true
-      }
-   );
-}
-
-export const crZhConfig = function(option, id){
-  return Object.assign(
-       QuandlFn2.createZhConfig(option), {
-         id,
-         isWithoutIndicator: true
-      }
-  );
 }

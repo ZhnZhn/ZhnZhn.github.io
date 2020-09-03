@@ -5,57 +5,22 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _Tooltip = _interopRequireDefault(require("./Tooltip"));
+var _crStackedConfig = _interopRequireDefault(require("./crStackedConfig"));
 
 var WithStackedColumnConfig = {
-  fBaseStackedColumnConfig: function fBaseStackedColumnConfig(_ref) {
-    var _ref$stacking = _ref.stacking,
-        stacking = _ref$stacking === void 0 ? 'normal' : _ref$stacking;
-    return {
-      zhSeries: {
-        count: 0
-      },
-      zhDetailCharts: [],
-      credits: _Chart["default"].fCreditsRightBottom(),
-      chart: {
-        type: 'column',
-        spacingTop: _Chart["default"].STACKED_SPACING_TOP,
-        spacingBottom: _Chart["default"].SPACING_BOTTOM,
-        zoomType: 'xy',
-        resetZoomButton: _Chart["default"].fResetZoomButton()
-      },
-      title: _Chart["default"].fTitle({
-        y: _Chart["default"].STACKED_TITLE_Y
-      }),
-      subtitle: _Chart["default"].fSubtitle({
-        y: _Chart["default"].STACKED_SUBTITLE_Y
-      }),
-      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].sparkStackedArea),
-      xAxis: _Chart["default"].fXAxisOpposite({
-        categories: [],
-        type: "category",
-        startOnTick: false,
-        min: 1,
-        crosshair: _Chart["default"].fCrosshair()
-      }),
-      yAxis: _Chart["default"].fYAxisOpposite(),
-      plotOptions: {
-        column: _Chart["default"].fPlotOptionsColumn({
-          stacking: stacking
-        }),
-        series: _Chart["default"].fPlotOptionsSeries()
-      },
-      legend: _Chart["default"].fLegend()
-    };
+  crStackedColumnConfig: function crStackedColumnConfig(props) {
+    return (0, _crStackedConfig["default"])((0, _extends2["default"])({}, props, {
+      type: 'column'
+    }));
   },
-  fStackedColumnSeria: function fStackedColumnSeria(_ref2) {
-    var name = _ref2.name,
-        _ref2$data = _ref2.data,
-        data = _ref2$data === void 0 ? [] : _ref2$data,
-        _ref2$color = _ref2.color,
-        color = _ref2$color === void 0 ? 'gray' : _ref2$color;
+  crStackedColumnSeria: function crStackedColumnSeria(_ref) {
+    var name = _ref.name,
+        _ref$data = _ref.data,
+        data = _ref$data === void 0 ? [] : _ref$data,
+        _ref$color = _ref.color,
+        color = _ref$color === void 0 ? 'gray' : _ref$color;
     return {
       name: name,
       data: data,

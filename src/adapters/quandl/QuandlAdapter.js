@@ -13,12 +13,12 @@ import ConfigBuilder from '../../charts/ConfigBuilder';
 import AdapterFn from '../AdapterFn';
 import QuandlFn2 from './QuandlFn2';
 
-import {fCreatePieConfig} from './QuandlToPie';
-import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
-import {fCreateStackedColumnConfig} from './QuandlToStackedColumn';
-import {fCreateTreeMapConfig} from './QuandlToTreeMap';
+import toSemiDonut from './toSemiDonut'
+import toStackedArea  from './toStackedArea'
+import toStackedColumn from './toStackedColumn'
+import toTreeMap from './toTreeMap'
 import toYearly from '../toYearsByMonths'
-import ToScatter from './ToScatter'
+import toScatter from './toScatter2'
 
 const { getData, getColumnNames } = QuandlFn2;
 
@@ -493,17 +493,17 @@ const _fToSeria = builder => (json, option, chart) => {
 }
 
 const _rToConfig = {
-  [ChartType.AREA] : _fCreateAreaConfig,
-  [ChartType.SEMI_DONUT] : fCreatePieConfig,
-  [ChartType.STACKED_AREA] : fCreateStackedAreaConfig,
-  [ChartType.STACKED_AREA_PERCENT] : fCreateStackedAreaConfig,
-  [ChartType.STACKED_COLUMN] : fCreateStackedColumnConfig,
-  [ChartType.STACKED_COLUMN_PERCENT] : fCreateStackedColumnConfig,
-  [ChartType.TREE_MAP] : fCreateTreeMapConfig,
+  [ChartType.AREA]: _fCreateAreaConfig,
+  [ChartType.SEMI_DONUT]: toSemiDonut,
+  [ChartType.STACKED_AREA]: toStackedArea,
+  [ChartType.STACKED_AREA_PERCENT]: toStackedArea,
+  [ChartType.STACKED_COLUMN]: toStackedColumn,
+  [ChartType.STACKED_COLUMN_PERCENT]: toStackedColumn,
+  [ChartType.TREE_MAP]: toTreeMap,
   [ChartType.YEARLY]: _fToConfig(toYearly),
-  [ChartType.SCATTER]: _fToConfig(ToScatter),
-  [ChartType.SCATTER_UP]: _fToConfig(ToScatter),
-  [ChartType.SCATTER_DOWN]: _fToConfig(ToScatter)
+  [ChartType.SCATTER]: _fToConfig(toScatter),
+  [ChartType.SCATTER_UP]: _fToConfig(toScatter),
+  [ChartType.SCATTER_DOWN]: _fToConfig(toScatter)
 }
 
 const _crSeriaData = (data, yIndex) => {
@@ -525,9 +525,9 @@ const _toSeria = (json, option) => {
 
 const _rToSeria = {
   DF: _toSeria,
-  [ChartType.SCATTER]: _fToSeria(ToScatter),
-  [ChartType.SCATTER_UP]: _fToSeria(ToScatter),
-  [ChartType.SCATTER_DOWN]: _fToSeria(ToScatter)
+  [ChartType.SCATTER]: _fToSeria(toScatter),
+  [ChartType.SCATTER_UP]: _fToSeria(toScatter),
+  [ChartType.SCATTER_DOWN]: _fToSeria(toScatter)
 }
 
 const QuandlAdapter = {

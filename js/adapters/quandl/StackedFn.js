@@ -3,15 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.crZhConfig = exports.crValueMoving = exports.fnCreateSparkData = exports.fnCreateStackedConfig = exports.fnCalcTotal = void 0;
+exports.fnCreateSparkData = exports.fnCreateStackedConfig = exports.fnCalcTotal = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _Type = require("../../constants/Type");
-
-var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
@@ -21,7 +19,10 @@ var _QuandlFn = _interopRequireDefault(require("./QuandlFn2"));
 
 var _rFactorySeria2;
 
-var _rFactorySeria = (_rFactorySeria2 = {}, _rFactorySeria2[_Type.ChartType.STACKED_AREA] = _ChartConfig["default"].fStackAreaSeria, _rFactorySeria2[_Type.ChartType.STACKED_AREA_PERCENT] = _ChartConfig["default"].fStackAreaSeria, _rFactorySeria2[_Type.ChartType.STACKED_COLUMN] = _ChartConfig["default"].fStackedColumnSeria, _rFactorySeria2[_Type.ChartType.STACKED_COLUMN_PERCENT] = _ChartConfig["default"].fStackedColumnSeria, _rFactorySeria2);
+var crStackedAreaSeria = _ChartConfig["default"].crStackedAreaSeria,
+    crStackedColumnSeria = _ChartConfig["default"].crStackedColumnSeria;
+
+var _rFactorySeria = (_rFactorySeria2 = {}, _rFactorySeria2[_Type.ChartType.STACKED_AREA] = crStackedAreaSeria, _rFactorySeria2[_Type.ChartType.STACKED_AREA_PERCENT] = crStackedAreaSeria, _rFactorySeria2[_Type.ChartType.STACKED_COLUMN] = crStackedColumnSeria, _rFactorySeria2[_Type.ChartType.STACKED_COLUMN_PERCENT] = crStackedColumnSeria, _rFactorySeria2);
 
 var fnCalcTotal = function fnCalcTotal(jsonData, items) {
   if (jsonData === void 0) {
@@ -250,27 +251,4 @@ var fnCreateSparkData = function fnCreateSparkData(jsonData, itemIndex, bYearTot
 };
 
 exports.fnCreateSparkData = fnCreateSparkData;
-
-var crValueMoving = function crValueMoving(bNowTotal, date, bPrevTotal, dateTo) {
-  return Object.assign(_QuandlFn["default"].createValueMoving({
-    bNowValue: bNowTotal,
-    bPrevValue: bPrevTotal
-  }), {
-    date: date,
-    dateTo: dateTo.split('-')[0],
-    valueTo: (0, _formatAllNumber["default"])(bPrevTotal),
-    isDenyToChange: true
-  });
-};
-
-exports.crValueMoving = crValueMoving;
-
-var crZhConfig = function crZhConfig(option, id) {
-  return Object.assign(_QuandlFn["default"].createZhConfig(option), {
-    id: id,
-    isWithoutIndicator: true
-  });
-};
-
-exports.crZhConfig = crZhConfig;
 //# sourceMappingURL=StackedFn.js.map

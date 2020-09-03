@@ -69,10 +69,12 @@ var _checkDataEmpty = function _checkDataEmpty(dataset, datatable) {
 };
 
 var _checkDataset = function _checkDataset(dataset) {
-  if (dataset && (!dataset.data || dataset.data.length === 0)) {
-    var newest_available_date = dataset.newest_available_date,
-        oldest_available_date = dataset.oldest_available_date;
-    throw _crErr(C.DATASET_EMPTY, "Result dataset for request is empty:\n          Newest Date: " + (newest_available_date || '') + "\n          Oldest Date: " + (oldest_available_date || ''));
+  var data = dataset.data,
+      newest_available_date = dataset.newest_available_date,
+      oldest_available_date = dataset.oldest_available_date;
+
+  if (!data || data.length === 0) {
+    throw _crErr(C.DATASET_EMPTY, "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
   }
 };
 

@@ -40,14 +40,7 @@ var _calcScatterY = function _calcScatterY(option, chart) {
       max = _chart$yAxis$.max,
       min = _chart$yAxis$.min,
       onePercent = (max - min) / 100;
-
-  switch (seriaType) {
-    case _Type.ChartType.SCATTER_DOWN:
-      return min + 4 * onePercent;
-
-    default:
-      return max - 7 * onePercent;
-  }
+  return seriaType === _Type.ChartType.SCATTER_DOWN ? min + 4 * onePercent : max - 7 * onePercent;
 };
 
 var _updateLabelY = function _updateLabelY(p, seriaType) {
@@ -94,7 +87,7 @@ var _getSeriaFrom = function _getSeriaFrom(config, option, chart) {
   return seria;
 };
 
-var ToScatter = {
+var toScatter = {
   toConfig: function toConfig(data, option) {
     var seria = _crSeria(data, option),
         config = (0, _ConfigBuilder["default"])().areaConfig().add({
@@ -105,12 +98,12 @@ var ToScatter = {
     return config;
   },
   toSeria: function toSeria(data, option, chart) {
-    var config = ToScatter.toConfig(data, option),
+    var config = toScatter.toConfig(data, option),
         seria = _getSeriaFrom(config, option, chart);
 
     return seria;
   }
 };
-var _default = ToScatter;
+var _default = toScatter;
 exports["default"] = _default;
-//# sourceMappingURL=ToScatter.js.map
+//# sourceMappingURL=toScatter2.js.map

@@ -23,14 +23,11 @@ const _crZhConfig = (option) => {
 
 const _calcScatterY = (option, chart) => {
   const { seriaType=CT.SCATTER_UP } = option
-      , { max, min } = chart.yAxis[0]
-      , onePercent = (max - min)/100;
-  switch(seriaType){
-    case CT.SCATTER_DOWN:
-      return (min + 4*onePercent);
-    default:
-      return (max - 7*onePercent);
-  }
+  , { max, min } = chart.yAxis[0]
+  , onePercent = (max - min)/100;
+  return seriaType === CT.SCATTER_DOWN
+    ? min + 4*onePercent
+    : max - 7*onePercent;
 }
 
 
@@ -61,7 +58,7 @@ const _crSeria = (arr, option) => {
       pointFormatter: Tooltip.exValue,
       headerFormat: ''
     },
-    data: data    
+    data: data
   };
 }
 
@@ -76,7 +73,7 @@ const _getSeriaFrom = (config, option, chart) => {
   return seria;
 }
 
-const ToScatter = {
+const toScatter = {
 
   toConfig: (data, option) => {
     const seria = _crSeria(data, option)
@@ -89,11 +86,11 @@ const ToScatter = {
   },
 
   toSeria: (data, option, chart) => {
-    const config = ToScatter.toConfig(data, option)
+    const config = toScatter.toConfig(data, option)
         , seria = _getSeriaFrom(config, option, chart)
     return seria;
   }
 
 }
 
-export default ToScatter
+export default toScatter

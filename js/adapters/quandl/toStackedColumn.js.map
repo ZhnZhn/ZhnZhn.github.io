@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/quandl/toStackedColumn.js"
+ ],
+ "file": "../../../src/adapters/quandl/toStackedColumn.js",
+ "names": [
+  "crConfig",
+  "fnStacked",
+  "toStackedColumn",
+  "json",
+  "option",
+  "type",
+  "percentType",
+  "ChartType",
+  "STACKED_COLUMN_PERCENT"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;IAEQA,Q,GAAcC,qB,CAAdD,Q;;AAER,IAAME,eAAe,GAAG,SAAlBA,eAAkB,CAACC,IAAD,EAAOC,MAAP;AAAA,SAAkBJ,QAAQ,CAAC;AAChDK,IAAAA,IAAI,EAAE,QAD0C;AAEhDC,IAAAA,WAAW,EAAEC,gBAAUC,sBAFyB;AAGhDL,IAAAA,IAAI,EAAJA,IAHgD;AAG1CC,IAAAA,MAAM,EAANA;AAH0C,GAAD,CAA1B;AAAA,CAAxB;;eAMeF,e"
+}

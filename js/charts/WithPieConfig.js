@@ -10,7 +10,7 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
 var WithPieConfig = {
-  fBasePieConfig: function fBasePieConfig() {
+  crPieConfig: function crPieConfig() {
     return {
       zhSeries: {
         count: 0
@@ -27,7 +27,7 @@ var WithPieConfig = {
       navigation: _Chart["default"].fNavigation()
     };
   },
-  fInnerPieSeria: function fInnerPieSeria(_ref) {
+  crInnerPieSeria: function crInnerPieSeria(_ref) {
     var center = _ref.center,
         year = _ref.year,
         bTotal = _ref.bTotal;
@@ -41,7 +41,7 @@ var WithPieConfig = {
       startAngle: -90,
       endAngle: 90,
       data: [{
-        name: "<span style=\"color:#A487D4;\">" + year + "</span><br/>" + bTotal.toString(),
+        name: "<span style=\"color:#a487d4;\">" + year + "</span><br/>" + bTotal.toString(),
         y: 1
       }],
       dataLabels: {
@@ -56,7 +56,7 @@ var WithPieConfig = {
       }
     };
   },
-  fOuterPieSeria: function fOuterPieSeria(_ref2) {
+  crOuterPieSeria: function crOuterPieSeria(_ref2) {
     var center = _ref2.center,
         data = _ref2.data,
         _ref2$isDataLabels = _ref2.isDataLabels,
@@ -69,9 +69,9 @@ var WithPieConfig = {
       allowPointSelect: true,
       borderColor: null,
       center: center,
-      //size : '100%',
+      //size: '100%',
       size: 250,
-      //innerSize : '60%',
+      //innerSize: '60%',
       innerSize: 250 * 0.6,
       startAngle: -90,
       endAngle: 90,
