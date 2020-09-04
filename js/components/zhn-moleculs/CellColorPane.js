@@ -46,7 +46,6 @@ var CellColorPane = /*#__PURE__*/_react["default"].memo(function (_ref) {
 
       _elCells.push( /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
         key: _color,
-        id: _color,
         style: S.COLOR,
         color: _color,
         onClick: onClickCell.bind(null, _color)
@@ -55,7 +54,6 @@ var CellColorPane = /*#__PURE__*/_react["default"].memo(function (_ref) {
 
     _elRows.push( /*#__PURE__*/_react["default"].createElement("div", {
       key: _idPrefix + r,
-      id: _idPrefix + r,
       style: S.ROW
     }, _elCells));
   }

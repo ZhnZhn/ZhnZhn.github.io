@@ -27,13 +27,13 @@ var HandleF = {
       this.setState((_this$setState2 = {}, _this$setState2[propName] = false, _this$setState2));
     };
   },
-  toggleModalTo: function toggleModalTo(propName1, propName2) {
+  toggleModalBy: function toggleModalBy(propName1, propName2) {
     return function () {
       var _ref;
 
       var event = (_ref = arguments.length - 1, _ref < 0 || arguments.length <= _ref ? undefined : arguments[_ref]);
 
-      if (event && event.target === this[propName2]) {
+      if (event && event.target === this[propName2].current) {
         this.setState(function (prevState) {
           var _ref2;
 

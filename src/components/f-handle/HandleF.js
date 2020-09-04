@@ -22,10 +22,11 @@ const HandleF = {
       this.setState({ [propName]: false })
     }
   },
-  toggleModalTo: (propName1, propName2) => {
+
+  toggleModalBy: (propName1, propName2) => {
     return function (...args) {
       const event = args[args.length-1];
-      if (event && event.target === this[propName2]) {
+      if (event && event.target === this[propName2].current) {
         this.setState((prevState) => ({
           [propName1]: !prevState[propName1]
         }))

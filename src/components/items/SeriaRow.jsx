@@ -53,9 +53,11 @@ const S = {
   }
 };
 
+const _isFn = fn => typeof fn === 'function';
+
 class SeriaRow extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.isChecked = false
     this._hCheck = HandleF
@@ -69,17 +71,16 @@ class SeriaRow extends Component {
       .reg('toYAxis')
       .bind(this)
 
-    this._hRegCellColor = HandleF
-      .reg('cellColorNode')
-      .bind(this)
     this._hEnterColor = HandleF
       .enterTo('colorEntered')
       .bind(this)
     this._hClosePalette = HandleF
       .closeTo('isShowPallete')
       .bind(this)
+
+    this._refCellColor = React.createRef()
     this._hClickPallete = HandleF
-      .toggleModalTo('isShowPallete', 'cellColorNode')
+      .toggleModalBy('isShowPallete', '_refCellColor')
       .bind(this)
 
     this.state = {
@@ -90,20 +91,20 @@ class SeriaRow extends Component {
 
   componentDidMount(){
     const { onReg } = this.props;
-    if (typeof onReg === 'function') {
+    if (_isFn(onReg)) {
       onReg(this)
     }
   }
   componentWillUnmount(){
     const { onUnReg } = this.props;
-    if (typeof onUnReg === 'function') {
+    if (_isFn(onUnReg)) {
       onUnReg(this)
     }
   }
 
   _getColor = () => {
     const { colorEntered } = this.state
-        , { color } = this.props.seria.options;
+        , { color } = this.props.seria.options;    
     return colorEntered || color || DF.COLOR;
   }
 
@@ -130,8 +131,8 @@ class SeriaRow extends Component {
           {_name}
         </span>
         <CellColor
-           style={{ ...S.COLOR, ..._bgColor}}
-           onReg={this._hRegCellColor}
+           ref={this._refCellColor}
+           style={{...S.COLOR, ..._bgColor}}
            onClick={this._hClickPallete}
         >
           <ModalPalette

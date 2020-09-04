@@ -78,12 +78,8 @@ var RowInputColor = /*#__PURE__*/function (_Component) {
       });
     };
 
-    _this._hRegCellColor = function (node) {
-      _this.cellColorNode = node;
-    };
-
     _this._hClickPallete = function (color, event) {
-      if (event.target === _this.cellColorNode) {
+      if (event.target === _this._refCellColor.current) {
         _this.setState(function (prevState) {
           return {
             isShowPallete: !prevState.isShowPallete
@@ -98,6 +94,7 @@ var RowInputColor = /*#__PURE__*/function (_Component) {
       });
     };
 
+    _this._refCellColor = /*#__PURE__*/_react["default"].createRef();
     var initValue = props.initValue;
     _this.state = {
       initValue: initValue,
@@ -141,8 +138,8 @@ var RowInputColor = /*#__PURE__*/function (_Component) {
       maxLength: 20,
       onEnter: this._hEnter
     })), /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
+      ref: this._refCellColor,
       style: (0, _extends2["default"])({}, S.COLOR, _bgColor),
-      onReg: this._hRegCellColor,
       onClick: this._hClickPallete
     }, /*#__PURE__*/_react["default"].createElement(_ModalPalette["default"], {
       isShow: isShowPallete,

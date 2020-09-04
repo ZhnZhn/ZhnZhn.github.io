@@ -34,7 +34,6 @@ const CellColorPane = React.memo(({ model, onClickCell }) => {
        _elCells.push((
          <CellColor
            key={_color}
-           id={_color}
            style={S.COLOR}
            color={_color}
            onClick={onClickCell.bind(null, _color)}
@@ -44,7 +43,6 @@ const CellColorPane = React.memo(({ model, onClickCell }) => {
      _elRows.push((
        <div
          key={_idPrefix + r}
-         id={_idPrefix + r}
          style={S.ROW}
        >
          {_elCells}

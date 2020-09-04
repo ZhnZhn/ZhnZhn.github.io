@@ -72,13 +72,17 @@ var S = {
   }
 };
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var SeriaRow = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SeriaRow, _Component);
 
-  function SeriaRow() {
+  function SeriaRow(props) {
     var _this;
 
-    _this = _Component.call(this) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._getColor = function () {
       var colorEntered = _this.state.colorEntered,
@@ -90,10 +94,10 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
     _this._hCheck = _HandleF["default"].set('isChecked', true).bind((0, _assertThisInitialized2["default"])(_this));
     _this._hUnCheck = _HandleF["default"].set('isChecked', false).bind((0, _assertThisInitialized2["default"])(_this));
     _this._hSelectYAxis = _HandleF["default"].reg('toYAxis').bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hRegCellColor = _HandleF["default"].reg('cellColorNode').bind((0, _assertThisInitialized2["default"])(_this));
     _this._hEnterColor = _HandleF["default"].enterTo('colorEntered').bind((0, _assertThisInitialized2["default"])(_this));
     _this._hClosePalette = _HandleF["default"].closeTo('isShowPallete').bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hClickPallete = _HandleF["default"].toggleModalTo('isShowPallete', 'cellColorNode').bind((0, _assertThisInitialized2["default"])(_this));
+    _this._refCellColor = /*#__PURE__*/_react["default"].createRef();
+    _this._hClickPallete = _HandleF["default"].toggleModalBy('isShowPallete', '_refCellColor').bind((0, _assertThisInitialized2["default"])(_this));
     _this.state = {
       isShowPallete: false,
       colorEntered: void 0
@@ -106,7 +110,7 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
   _proto.componentDidMount = function componentDidMount() {
     var onReg = this.props.onReg;
 
-    if (typeof onReg === 'function') {
+    if (_isFn(onReg)) {
       onReg(this);
     }
   };
@@ -114,7 +118,7 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
   _proto.componentWillUnmount = function componentWillUnmount() {
     var onUnReg = this.props.onUnReg;
 
-    if (typeof onUnReg === 'function') {
+    if (_isFn(onUnReg)) {
       onUnReg(this);
     }
   };
@@ -145,8 +149,8 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
       className: CL.ELL,
       style: S.TITLE
     }, _name), /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
+      ref: this._refCellColor,
       style: (0, _extends2["default"])({}, S.COLOR, _bgColor),
-      onReg: this._hRegCellColor,
       onClick: this._hClickPallete
     }, /*#__PURE__*/_react["default"].createElement(_ModalPalette["default"], {
       isShow: isShowPallete,

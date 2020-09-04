@@ -56,6 +56,7 @@ class RowInputColor extends Component {
 
   constructor(props){
     super(props)
+    this._refCellColor = React.createRef()
     const { initValue } = props
     this.state = {
       initValue: initValue,
@@ -75,12 +76,8 @@ class RowInputColor extends Component {
     this.setState({ value })
   }
 
-  _hRegCellColor = (node) => {
-    this.cellColorNode = node
-  }
-
   _hClickPallete = (color, event) => {
-    if (event.target === this.cellColorNode) {
+    if (event.target === this._refCellColor.current) {
       this.setState(prevState => ({
         isShowPallete: !prevState.isShowPallete
       }))
@@ -115,8 +112,8 @@ class RowInputColor extends Component {
           />
         </label>
         <CellColor
-          style={{ ...S.COLOR, ..._bgColor}}
-          onReg={this._hRegCellColor}
+          ref={this._refCellColor}
+          style={{...S.COLOR, ..._bgColor}}
           onClick={this._hClickPallete}
         >
           <ModalPalette
