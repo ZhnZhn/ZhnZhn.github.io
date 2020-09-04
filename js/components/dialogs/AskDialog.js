@@ -7,8 +7,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -74,11 +72,22 @@ var AskDialog = /*#__PURE__*/function (_Component) {
 
     _this = _Component.call(this, props) || this;
 
-    _this._refCaptcha = function (c) {
-      return _this.captchaComp = c;
+    _this._handleLoad = function () {
+      var _this$props = _this.props,
+          _this$props$data = _this$props.data,
+          data = _this$props$data === void 0 ? {} : _this$props$data,
+          onClose = _this$props.onClose,
+          _data$options = data.options,
+          options = _data$options === void 0 ? {} : _data$options;
+
+      if (_this._refCaptcha.current.isOk()) {
+        _FactoryAction["default"].crLoadQuery(options).run();
+
+        onClose();
+      }
     };
 
-    _this._handleLoad = _this._handleLoad.bind((0, _assertThisInitialized2["default"])(_this));
+    _this._refCaptcha = /*#__PURE__*/_react["default"].createRef();
     _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       caption: "Yes, Load" //accessKey="s"
       ,
@@ -93,21 +102,6 @@ var AskDialog = /*#__PURE__*/function (_Component) {
   }
 
   var _proto = AskDialog.prototype;
-
-  _proto._handleLoad = function _handleLoad() {
-    var _this$props = this.props,
-        _this$props$data = _this$props.data,
-        data = _this$props$data === void 0 ? {} : _this$props$data,
-        onClose = _this$props.onClose,
-        _data$options = data.options,
-        options = _data$options === void 0 ? {} : _data$options;
-
-    if (this.captchaComp.isOk()) {
-      _FactoryAction["default"].crLoadQuery(options).run();
-
-      onClose();
-    }
-  };
 
   _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
@@ -142,7 +136,7 @@ var AskDialog = /*#__PURE__*/function (_Component) {
       style: S.NAME
     }, name), MSG_SUFFIX), /*#__PURE__*/_react["default"].createElement(_MathCaptcha["default"], {
       ref: this._refCaptcha,
-      rootStyle: S.CAPTCHA
+      style: S.CAPTCHA
     })));
   };
 

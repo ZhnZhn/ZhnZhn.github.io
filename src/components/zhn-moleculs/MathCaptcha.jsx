@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
 
 import InputSlider from '../zhn/InputSlider'
@@ -11,9 +11,9 @@ const S = {
     fontWeight: 'bold'
   },
   P_SUM: {
+    paddingTop: 4,
     textAlign: 'center',
     fontSize: '22px',
-    paddingTop: 4
   },
   SUM_OK: {
     color: '#4caf50'
@@ -27,63 +27,48 @@ const _crRandomNumber = (m=0, n=10) => {
   return m + (Math.floor((n-m+1)*Math.random()));
 }
 
-class MatchCaptcha extends Component {
-  /*
-  static propTypes = {
-    rootStyle: PropTypes.object
-  }
-  */
+const _useRandomNumber = () => useState(() => _crRandomNumber(0, 10))[0];
 
-  constructor(props){
-    super(props)
-    this.firstNumber = _crRandomNumber(0, 10)
-    this.secondNumber = _crRandomNumber(0, 10)
-    this.state = {
-      isOk: false,
-      resultSum: ''
-    }
-  }
+const MathCaptcha = React.forwardRef(({ style }, ref) => {
+  const n1 = _useRandomNumber()
+  , n2  = _useRandomNumber()
+  , [{isOk, resultSum}, setState] = useState({isOk: false, resultSum: ''})
+  /* eslint-disable react-hooks/exhaustive-deps */
+  , _hChangeSlider = useCallback((evt, value) => setState({
+        isOk: n1+n2 === value,
+        resultSum: value
+    }), []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
-  _hChangeSlider = (event, value) => {
-    const _isOk = (this.firstNumber + this.secondNumber === value)
-      ? true
-      : false;
-    this.setState({
-       isOk: _isOk,
-       resultSum: value
-    })
-  }
+  useImperativeHandle(ref, () => ({
+    isOk: () => isOk
+  }), [isOk])
 
-  render(){
-    const { rootStyle } = this.props
-    , { isOk, resultSum } = this.state
-    , _sumStyle = isOk
-         ? S.SUM_OK
-         : S.SUM_NOT_OK;
-    return(
-      <div style={rootStyle} >
-        <p style={S.MSG}>
-          {MSG}
-        </p>
-        <p style={S.P_SUM}>
-          <span>
-            {`${this.firstNumber} + ${this.secondNumber} = `}
-          </span>
-          <span style={_sumStyle}>
-            {resultSum}
-          </span>
-        </p>
-        <InputSlider
-            onChange={this._hChangeSlider}
-        />
-      </div>
-    );
-  }
+  const _sumStyle = isOk
+    ? S.SUM_OK
+    : S.SUM_NOT_OK;
+  return (
+    <div style={style} >
+      <p style={S.MSG}>
+        {MSG}
+      </p>
+      <p style={S.P_SUM}>
+        <span>
+          {`${n1} + ${n2} = `}
+        </span>
+        <span style={_sumStyle}>
+          {resultSum}
+        </span>
+      </p>
+      <InputSlider onChange={_hChangeSlider} />
+    </div>
+  );
+})
 
-  isOk() {
-    return this.state.isOk;
-  }
-
+/*
+MatchCaptcha.propTypes = {
+  style: PropTypes.object
 }
+*/
 
-export default MatchCaptcha
+export default MathCaptcha

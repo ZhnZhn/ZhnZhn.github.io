@@ -11,7 +11,7 @@ const MSG_PREFIX = "Would you like load item";
 const MSG_SUFFIX = "from url?";
 
 const S = {
-  MODAL : {
+  MODAL: {
     position: 'static',
     width: 400,
     height: 205,
@@ -20,23 +20,23 @@ const S = {
   ROOT_DIV: {
     margin: 5
   },
-  NAME : {
+  NAME: {
     color: '#a487d4',
     paddingLeft: 5,
     paddingRight: 5
   },
-  DESCR : {
+  DESCR: {
     color: 'gray',
-    width : 400,
+    width: 400,
     paddingLeft : 10,
     paddingTop: 5,
-    lineHeight : 1.4,
+    lineHeight: 1.4,
     fontWeight: 'bold',
-    whiteSpace : 'pre'
+    whiteSpace: 'pre'
   },
-  CAPTCHA : {
+  CAPTCHA: {
     padding: 8,
-    paddingBottom : 0
+    paddingBottom: 0
   }
 }
 
@@ -57,7 +57,7 @@ class AskDialog extends Component {
   constructor(props){
     super(props);
 
-    this._handleLoad = this._handleLoad.bind(this)
+    this._refCaptcha = React.createRef()
     this._commandButtons = [
         <Button.Flat
           caption="Yes, Load"
@@ -73,10 +73,10 @@ class AskDialog extends Component {
     ]
   }
 
-  _handleLoad(){
+  _handleLoad = () => {
     const { data={}, onClose } = this.props
         , { options={} } = data;
-    if (this.captchaComp.isOk()){
+    if (this._refCaptcha.current.isOk()){
        FactoryAction
          .crLoadQuery(options)
          .run()
@@ -90,8 +90,6 @@ class AskDialog extends Component {
     }
     return true;
   }
-
-  _refCaptcha = c => this.captchaComp = c
 
   render(){
     const { isShow, data={}, onClose } = this.props
@@ -114,7 +112,7 @@ class AskDialog extends Component {
             </p>
             <MathCaptcha
               ref={this._refCaptcha}
-              rootStyle={S.CAPTCHA}
+              style={S.CAPTCHA}
             />
          </div>
       </ModalDialog>

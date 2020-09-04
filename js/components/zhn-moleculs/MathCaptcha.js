@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -21,9 +19,9 @@ var S = {
     fontWeight: 'bold'
   },
   P_SUM: {
+    paddingTop: 4,
     textAlign: 'center',
-    fontSize: '22px',
-    paddingTop: 4
+    fontSize: '22px'
   },
   SUM_OK: {
     color: '#4caf50'
@@ -45,66 +43,63 @@ var _crRandomNumber = function _crRandomNumber(m, n) {
   return m + Math.floor((n - m + 1) * Math.random());
 };
 
-var MatchCaptcha = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(MatchCaptcha, _Component);
+var _useRandomNumber = function _useRandomNumber() {
+  return (0, _react.useState)(function () {
+    return _crRandomNumber(0, 10);
+  })[0];
+};
 
-  /*
-  static propTypes = {
-    rootStyle: PropTypes.object
-  }
-  */
-  function MatchCaptcha(props) {
-    var _this;
+var MathCaptcha = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+  var style = _ref.style;
 
-    _this = _Component.call(this, props) || this;
+  var n1 = _useRandomNumber(),
+      n2 = _useRandomNumber(),
+      _useState = (0, _react.useState)({
+    isOk: false,
+    resultSum: ''
+  }),
+      _useState$ = _useState[0],
+      _isOk = _useState$.isOk,
+      resultSum = _useState$.resultSum,
+      setState = _useState[1],
+      _hChangeSlider = (0, _react.useCallback)(function (evt, value) {
+    return setState({
+      isOk: n1 + n2 === value,
+      resultSum: value
+    });
+  }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
-    _this._hChangeSlider = function (event, value) {
-      var _isOk = _this.firstNumber + _this.secondNumber === value ? true : false;
 
-      _this.setState({
-        isOk: _isOk,
-        resultSum: value
-      });
+  (0, _react.useImperativeHandle)(ref, function () {
+    return {
+      isOk: function isOk() {
+        return _isOk;
+      }
     };
+  }, [_isOk]);
 
-    _this.firstNumber = _crRandomNumber(0, 10);
-    _this.secondNumber = _crRandomNumber(0, 10);
-    _this.state = {
-      isOk: false,
-      resultSum: ''
-    };
-    return _this;
-  }
+  var _sumStyle = _isOk ? S.SUM_OK : S.SUM_NOT_OK;
 
-  var _proto = MatchCaptcha.prototype;
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: style
+  }, /*#__PURE__*/_react["default"].createElement("p", {
+    style: S.MSG
+  }, MSG), /*#__PURE__*/_react["default"].createElement("p", {
+    style: S.P_SUM
+  }, /*#__PURE__*/_react["default"].createElement("span", null, n1 + " + " + n2 + " = "), /*#__PURE__*/_react["default"].createElement("span", {
+    style: _sumStyle
+  }, resultSum)), /*#__PURE__*/_react["default"].createElement(_InputSlider["default"], {
+    onChange: _hChangeSlider
+  }));
+});
+/*
+MatchCaptcha.propTypes = {
+  style: PropTypes.object
+}
+*/
 
-  _proto.render = function render() {
-    var rootStyle = this.props.rootStyle,
-        _this$state = this.state,
-        isOk = _this$state.isOk,
-        resultSum = _this$state.resultSum,
-        _sumStyle = isOk ? S.SUM_OK : S.SUM_NOT_OK;
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: rootStyle
-    }, /*#__PURE__*/_react["default"].createElement("p", {
-      style: S.MSG
-    }, MSG), /*#__PURE__*/_react["default"].createElement("p", {
-      style: S.P_SUM
-    }, /*#__PURE__*/_react["default"].createElement("span", null, this.firstNumber + " + " + this.secondNumber + " = "), /*#__PURE__*/_react["default"].createElement("span", {
-      style: _sumStyle
-    }, resultSum)), /*#__PURE__*/_react["default"].createElement(_InputSlider["default"], {
-      onChange: this._hChangeSlider
-    }));
-  };
-
-  _proto.isOk = function isOk() {
-    return this.state.isOk;
-  };
-
-  return MatchCaptcha;
-}(_react.Component);
-
-var _default = MatchCaptcha;
+var _default = MathCaptcha;
 exports["default"] = _default;
 //# sourceMappingURL=MathCaptcha.js.map
