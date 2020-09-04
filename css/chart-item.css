@@ -5,8 +5,9 @@
    position: relative;
  }
 
+
  @media (min-width: 500px) {
     .chart-item {
-      margin-right: 25px;
+      margin-right: 12px;
     }
  }

@@ -13,7 +13,7 @@ const _renamePropName = ({
     chartType: cT,
     columnName: cN,
     fromDate: fD,
-    toDate: tD || DateUtils.getToDate(),
+    toDate: tD || DateUtils.getToDate()
   };
 }
 
