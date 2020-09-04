@@ -37,7 +37,7 @@ var _isStrEqTo = function _isStrEqTo(str, strTo) {
   return _isStr(str) && str.toLowerCase() === strTo;
 };
 
-var QuandlFn2 = {
+var QuandlFn = {
   getData: function getData(json) {
     var _json$dataset = json.dataset,
         dataset = _json$dataset === void 0 ? {} : _json$dataset,
@@ -188,7 +188,7 @@ var QuandlFn2 = {
       columnName = '';
     }
 
-    var column_names = _isArr(obj) ? obj : QuandlFn2.getColumnNames(obj),
+    var column_names = _isArr(obj) ? obj : QuandlFn.getColumnNames(obj),
         _columnName = columnName.toLowerCase();
 
     if (_columnName && column_names) {
@@ -204,11 +204,11 @@ var QuandlFn2 = {
   getDataColumnIndex: function getDataColumnIndex(json, option) {
     var columnName = option.columnName,
         dataColumn = option.dataColumn,
-        _dataColumn = QuandlFn2.findColumnIndex(json, columnName);
+        _dataColumn = QuandlFn.findColumnIndex(json, columnName);
 
     return _dataColumn || dataColumn || 1;
   }
 };
-var _default = QuandlFn2;
+var _default = QuandlFn;
 exports["default"] = _default;
-//# sourceMappingURL=QuandlFn2.js.map
+//# sourceMappingURL=QuandlFn.js.map

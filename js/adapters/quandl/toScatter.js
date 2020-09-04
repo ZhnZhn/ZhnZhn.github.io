@@ -106,4 +106,4 @@ var toScatter = {
 };
 var _default = toScatter;
 exports["default"] = _default;
-//# sourceMappingURL=toScatter2.js.map
+//# sourceMappingURL=toScatter.js.map

@@ -12,7 +12,7 @@
   "ChartConfig",
   "crStackedColumnConfig",
   "setTitleToConfig",
-  "QuandlFn2",
+  "QuandlFn",
   "createZhConfig",
   "createValueMoving",
   "createDatasetInfo",

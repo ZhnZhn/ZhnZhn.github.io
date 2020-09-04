@@ -10,7 +10,7 @@ import {
   fnCalcTotal,
   fnCreateSparkData
 } from './StackedFn';
-import QuandlFn2 from './QuandlFn2';
+import QuandlFn from './QuandlFn';
 import fnStacked from './fnStacked'
 
 const _assign = Object.assign
@@ -20,7 +20,7 @@ const _assign = Object.assign
     createPercent,
     setTitleToConfig,
     createDatasetInfo
-  } = QuandlFn2
+  } = QuandlFn
 , {
    COLOR_PERIOD,
    COLOR_BASE1,

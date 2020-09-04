@@ -11,16 +11,16 @@ import ChartLegend from '../../charts/ChartLegend';
 import ConfigBuilder from '../../charts/ConfigBuilder';
 
 import AdapterFn from '../AdapterFn';
-import QuandlFn2 from './QuandlFn2';
+import QuandlFn from './QuandlFn';
 
 import toSemiDonut from './toSemiDonut'
 import toStackedArea  from './toStackedArea'
 import toStackedColumn from './toStackedColumn'
 import toTreeMap from './toTreeMap'
 import toYearly from '../toYearsByMonths'
-import toScatter from './toScatter2'
+import toScatter from './toScatter'
 
-const { getData, getColumnNames } = QuandlFn2;
+const { getData, getColumnNames } = QuandlFn;
 
 const {
   crDividendSeria,
@@ -97,7 +97,7 @@ const _fnAddExDividend = function(exDividendIndex, result){
                 ChartConfig.crMarkerExDividend(),
                 { x, exValue, price }
              );
-       if (!QuandlFn2.isPrevDateAfter(dataExDividend, x , 14)) {
+       if (!QuandlFn.isPrevDateAfter(dataExDividend, x , 14)) {
          marker.dataLabels.y = 0;
        }
        dataExDividend.push(marker);
@@ -190,7 +190,7 @@ const _fLegendConfig = function(seriaColumnNames, column_names){
     let i=0, max=seriaColumnNames.length;
     for (; i<max; i++ ){
        const columnName = seriaColumnNames[i]
-           , columnIndex = QuandlFn2.findColumnIndex(column_names, columnName);
+           , columnIndex = QuandlFn.findColumnIndex(column_names, columnName);
        if (columnIndex) {
           legendSeries.push(
             ChartLegend.fLegendConfig(columnName)
@@ -218,16 +218,16 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
          dataATH : [], dataHighLow : []
       };
 
-  const open = QuandlFn2.findColumnIndex(column_names, C.OPEN)
-      , _closeIndex = QuandlFn2.findColumnIndex(column_names, C.CLOSE)
+  const open = QuandlFn.findColumnIndex(column_names, C.OPEN)
+      , _closeIndex = QuandlFn.findColumnIndex(column_names, C.CLOSE)
       , close = ( typeof _closeIndex !== 'undefined')
           ? _closeIndex
-          : QuandlFn2.findColumnIndex(column_names, C.PRICE)
-      , low = QuandlFn2.findColumnIndex(column_names, C.LOW)
-      , high = QuandlFn2.findColumnIndex(column_names, C.HIGH)
-      , volume = QuandlFn2.findColumnIndex(column_names, C.VOLUME)
-      , exDividend = QuandlFn2.findColumnIndex(column_names, C.EX_DIVIDEND)
-      , splitRatio = QuandlFn2.findColumnIndex(column_names, C.SPLIT_RATIO);
+          : QuandlFn.findColumnIndex(column_names, C.PRICE)
+      , low = QuandlFn.findColumnIndex(column_names, C.LOW)
+      , high = QuandlFn.findColumnIndex(column_names, C.HIGH)
+      , volume = QuandlFn.findColumnIndex(column_names, C.VOLUME)
+      , exDividend = QuandlFn.findColumnIndex(column_names, C.EX_DIVIDEND)
+      , splitRatio = QuandlFn.findColumnIndex(column_names, C.SPLIT_RATIO);
 
 
   if (volume){
@@ -394,8 +394,8 @@ const fnGetSeries = function(config, json, option){
          } = option;
 
    _fnSetChartTitle(config, option);
-   config.zhConfig = QuandlFn2.createZhConfig(option);
-   config.info = QuandlFn2.createDatasetInfo(json);
+   config.zhConfig = QuandlFn.createZhConfig(option);
+   config.info = QuandlFn.createDatasetInfo(json);
 
    const {
      seria, minPoint, maxPoint, minY,
@@ -475,7 +475,7 @@ const _fCreateAreaConfig = function(json, option){
   const config = ChartConfig.crAreaConfig()
       , { columnName } = option;
 
-  option.dataColumn = QuandlFn2.getDataColumnIndex(json, option);
+  option.dataColumn = QuandlFn.getDataColumnIndex(json, option);
   if ( columnName ){
     config.series[0].zhValueText = columnName;
   }
@@ -514,7 +514,7 @@ const _crSeriaData = (data, yIndex) => {
 
 const _toSeria = (json, option) => {
   const { value:chartId } = option
-  , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
+  , yPointIndex = QuandlFn.getDataColumnIndex(json, option)
   , data = _crSeriaData(getData(json), yPointIndex);
   return ChartConfig.crSeria({
       zhValueText: chartId.substring(0,12),

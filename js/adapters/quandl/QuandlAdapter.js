@@ -23,7 +23,7 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _QuandlFn = _interopRequireDefault(require("./QuandlFn2"));
+var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
 
 var _toSemiDonut = _interopRequireDefault(require("./toSemiDonut"));
 
@@ -35,7 +35,7 @@ var _toTreeMap = _interopRequireDefault(require("./toTreeMap"));
 
 var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
-var _toScatter = _interopRequireDefault(require("./toScatter2"));
+var _toScatter = _interopRequireDefault(require("./toScatter"));
 
 var _rToConfig2, _rToSeria2;
 

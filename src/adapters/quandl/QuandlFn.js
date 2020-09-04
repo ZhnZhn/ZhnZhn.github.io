@@ -21,7 +21,7 @@ const _crItemCaption = ({ dfItemCaption, items, itemCaption }) => _isNumber(dfIt
 const _isStrEqTo = (str, strTo) => _isStr(str)
  && str.toLowerCase() === strTo;
 
-const QuandlFn2 = {
+const QuandlFn = {
   getData: (json) => {
     const { dataset={}, datatable={} } = json;
     return dataset.data || datatable.data || [];
@@ -135,7 +135,7 @@ const QuandlFn2 = {
   findColumnIndex(obj, columnName=''){
      const column_names = _isArr(obj)
        ? obj
-       : QuandlFn2.getColumnNames(obj)
+       : QuandlFn.getColumnNames(obj)
      , _columnName = columnName.toLowerCase();
 
      if ( _columnName && column_names ) {
@@ -150,10 +150,10 @@ const QuandlFn2 = {
 
   getDataColumnIndex(json, option){
     const { columnName, dataColumn } = option
-    , _dataColumn = QuandlFn2.findColumnIndex(json, columnName);
+    , _dataColumn = QuandlFn.findColumnIndex(json, columnName);
     return _dataColumn || dataColumn || 1;
   }
 
 };
 
-export default QuandlFn2
+export default QuandlFn

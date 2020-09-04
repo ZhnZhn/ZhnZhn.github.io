@@ -6,7 +6,7 @@ import {ChartType} from '../../constants/Type';
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
-import QuandlFn2 from './QuandlFn2';
+import QuandlFn from './QuandlFn';
 
 const {
   crStackedAreaSeria,
@@ -174,7 +174,7 @@ export const fnCreateSparkData = function(jsonData, itemIndex, bYearTotals){
   jsonData.forEach( (yearData, yearIndex) => {
       sparkvalues.push( yearData[itemIndex] );
       if ( yearData[itemIndex] ) {
-         sparkpercent.push( parseFloat(QuandlFn2.createPercent({
+         sparkpercent.push( parseFloat(QuandlFn.createPercent({
             bValue : Big(yearData[itemIndex]),
             bTotal : bYearTotals[yearIndex]
          }), 10) );

@@ -17,7 +17,7 @@ var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _QuandlFn = _interopRequireDefault(require("./QuandlFn2"));
+var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
 
 var _fnStacked = _interopRequireDefault(require("./fnStacked"));
 

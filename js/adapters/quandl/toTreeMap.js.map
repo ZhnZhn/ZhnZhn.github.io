@@ -14,7 +14,7 @@
   "compareByValue",
   "AdapterFn",
   "createPercent",
-  "QuandlFn2",
+  "QuandlFn",
   "setTitleToConfig",
   "createDatasetInfo",
   "COLOR_PERIOD",

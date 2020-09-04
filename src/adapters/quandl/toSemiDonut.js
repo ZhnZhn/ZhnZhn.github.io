@@ -7,7 +7,7 @@ import formatAllNumber from '../../utils/formatAllNumber';
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
-import QuandlFn2 from './QuandlFn2';
+import QuandlFn from './QuandlFn';
 import fnStacked from './fnStacked';
 
 const { crValueMoving, crZhConfig } = fnStacked;
@@ -17,7 +17,7 @@ const _assign = Object.assign
    setTitleToConfig,
    createDatasetInfo,
    createPercent
-  }  = QuandlFn2
+  }  = QuandlFn
 , {
     crPieConfig,
     crInnerPieSeria,

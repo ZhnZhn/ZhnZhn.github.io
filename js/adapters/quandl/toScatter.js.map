@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/quandl/toScatter2.js"
+  "../../../src/adapters/quandl/toScatter.js"
  ],
- "file": "../../../src/adapters/quandl/toScatter2.js",
+ "file": "../../../src/adapters/quandl/toScatter.js",
  "names": [
   "C",
   "COLOR_PLUS",

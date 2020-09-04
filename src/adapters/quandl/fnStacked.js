@@ -2,7 +2,7 @@ import formatAllNumber from '../../utils/formatAllNumber';
 import ChartConfig from '../../charts/ChartConfig';
 
 import { fnCreateStackedConfig } from './StackedFn';
-import QuandlFn2 from './QuandlFn2';
+import QuandlFn from './QuandlFn';
 
 const _assign = Object.assign
 , {
@@ -14,7 +14,7 @@ const _assign = Object.assign
   createZhConfig,
   createValueMoving,
   createDatasetInfo
-} = QuandlFn2
+} = QuandlFn
 
 const _setCaption = (config, option, stacking) => {
   const PERCENT = stacking === 'percent'
