@@ -139,10 +139,10 @@ const _crChartOptions = (dfT, data) => {
        ? crDataDaily(data)
        : data,
     seriaTooltip: _isIntraday
-      ? Tooltip.fnBasePointFormatterT
-      : Tooltip.fnBasePointFormatter,
+      ? Tooltip.vTdmy
+      : Tooltip.vDmy,
     volumeTooltip: _isIntraday
-      ? Tooltip.volumeDmyt
+      ? Tooltip.volumeTdmy
       : Tooltip.volume
   };
 };

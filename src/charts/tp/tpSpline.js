@@ -2,7 +2,8 @@ import fn from './tpFn'
 
 const {
   crHeader, crRow,
-  toDateFormatDMYT,
+  toTdmy,
+  //toTdmyIf,
   getStatus
  } = fn;
 
@@ -14,20 +15,25 @@ const _crValue = function({date, id, color, valueText='Value', value, point}){
   </div>`;
 }
 
+const _splineOptions = {
+  fnTemplate: _crValue,
+  isWithColor: true,
+  isWithValueText: true,
+  isWithValue: true
+}
+
 const tpSpline = {
-  value: {
-    fnTemplate : _crValue,
-    isWithColor: true,
-    isWithValueText: true,
-    isWithValue: true
+  vDmy: _splineOptions,
+  vTdmy: {
+    ..._splineOptions,
+    fnDateFormat: toTdmy,
   },
-  valueDmyt: {
-    fnTemplate : _crValue,
-    fnDateFormat: toDateFormatDMYT,
-    isWithColor: true,
-    isWithValueText: true,
-    isWithValue: true
+  /*
+  vTdmyIf: {
+    ..._splineOptions,
+    fnDateFormat: toTdmyIf
   }
+  */
 };
 
 export default tpSpline

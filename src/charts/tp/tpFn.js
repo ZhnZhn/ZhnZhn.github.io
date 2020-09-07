@@ -6,8 +6,9 @@ const {
   crTpId,
   toNumberFormat,
   toNumberFormatAll,
-  toDateFormatDMY,
-  toDateFormatDMYT
+  toDmy,
+  toTdmy
+  //toTdmyIf
 } = ChartFn;
 
 const C = {
@@ -74,9 +75,10 @@ const tpFn = {
 
   crTpId,
   toNumberFormat,
-  toNumberFormatAll,
-  toDateFormatDMY,
-  toDateFormatDMYT,
+  toNumberFormatAll,  
+  toDmy,
+  toTdmy,
+  //toTdmyIf,
 
   addHideHandler: (id, point, fn) => {
     _addClickOnceById(id, _fHideTooltip(point, fn))

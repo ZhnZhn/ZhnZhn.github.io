@@ -32,6 +32,7 @@ var _calcDeltaYAxis = _interopRequireDefault(require("./calcDeltaYAxis"));
 var _crValueMoving = _mathFn["default"].crValueMoving,
     toFixedNumber = _mathFn["default"].toFixedNumber,
     calcPercent = _mathFn["default"].calcPercent;
+var dateFormat = _highcharts["default"].dateFormat;
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
@@ -263,8 +264,17 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
   crTpId: function crTpId() {
     return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 9)).toUpperCase();
   },
-  toDateFormatDMY: _highcharts["default"].dateFormat.bind(null, '%A, %b %d, %Y'),
-  toDateFormatDMYT: _highcharts["default"].dateFormat.bind(null, '%A, %b %d, %Y, %H:%M'),
+  toDmy: dateFormat.bind(null, '%A, %b %d, %Y'),
+  toTdmy: dateFormat.bind(null, '%H:%M, %A, %b %d, %Y'),
+
+  /*
+  toTdmyIf: (mls) => {
+    const _t = dateFormat('%H:%M', mls);
+    return _t === '00:00'
+      ? dateFormat('%A, %b %d, %Y', mls)
+      : dateFormat('%H:%M, %A, %b %d, %Y', mls);
+  },
+  */
   setMinMaxPlotLines: function setMinMaxPlotLines(_ref4) {
     var plotLines = _ref4.plotLines,
         min = _ref4.min,

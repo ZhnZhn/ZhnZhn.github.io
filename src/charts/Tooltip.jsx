@@ -1,6 +1,3 @@
-
-import ChartFn from './ChartFn'
-
 import tpSpline from './tp/tpSpline'
 import tpCategory from './tp/tpCategory'
 import tpScatter from './tp/tpScatter'
@@ -8,14 +5,15 @@ import tpStock from './tp/tpStock'
 import tpSpark from './tp/tpSpark'
 import tpTreeMap from './tp/tpTreeMap'
 import tpDonut from './tp/tpDonut'
+
 import fns from './tp/tpFn'
 
 const {
   crTpId,
   toNumberFormat,
-  toDateFormatDMY
-} = ChartFn;
-const { addHideHandler } = fns;
+  toDmy,
+  addHideHandler
+} = fns;
 
 const _fnAddHandlerClose = function(id, point){
   setTimeout(() => addHideHandler(id, point), 1);
@@ -25,7 +23,7 @@ const _fFormatter = (option) => function(){
    const {
       fnTemplate,
       onAfterRender=_fnAddHandlerClose,
-      fnDateFormat= toDateFormatDMY,
+      fnDateFormat=toDmy,
       isWithColor, isWithValueText, isWithValue
      } = option
    , point = this
@@ -54,9 +52,10 @@ const _fFormatter = (option) => function(){
 };
 
 
-const Tooltip = {
-  fnBasePointFormatter: _fFormatter({...tpSpline.value}),
-  fnBasePointFormatterT: _fFormatter({...tpSpline.valueDmyt}),
+const Tooltip = {  
+  vDmy: _fFormatter({...tpSpline.vDmy}),
+  vTdmyIf: _fFormatter({...tpSpline.vTdmyIf}),
+  vTdmy: _fFormatter({...tpSpline.vTdmy}),
 
   categorySimple: _fFormatter({...tpCategory.simple}),
   category: _fFormatter({...tpCategory.remove}),
@@ -68,7 +67,7 @@ const Tooltip = {
   eps: _fFormatter({...tpScatter.eps}),
 
   volume: _fFormatter({...tpStock.volume}),
-  volumeDmyt: _fFormatter({...tpStock.volumeDmyt}),
+  volumeTdmy: _fFormatter({...tpStock.volumeTdmy}),
   ath: _fFormatter({...tpStock.ath}),
   hl: _fFormatter({...tpStock.hl}),
 

@@ -219,7 +219,7 @@ crAreaConfig({
         ? seriaType.toLowerCase()
         : 'area',
       color: seriaColor,
-      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter),
+      tooltip: Chart.fTooltip(Tooltip.vDmy),
       lineWidth: seriaWidth,
       states: {
         hover: {

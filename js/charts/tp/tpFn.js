@@ -12,8 +12,8 @@ var _ChartFn = _interopRequireDefault(require("../ChartFn"));
 var crTpId = _ChartFn["default"].crTpId,
     toNumberFormat = _ChartFn["default"].toNumberFormat,
     toNumberFormatAll = _ChartFn["default"].toNumberFormatAll,
-    toDateFormatDMY = _ChartFn["default"].toDateFormatDMY,
-    toDateFormatDMYT = _ChartFn["default"].toDateFormatDMYT;
+    toDmy = _ChartFn["default"].toDmy,
+    toTdmy = _ChartFn["default"].toTdmy;
 var C = {
   TITLE_C: '#a487d4',
   YEAR_C: '#fdb316',
@@ -116,8 +116,9 @@ var tpFn = {
   crTpId: crTpId,
   toNumberFormat: toNumberFormat,
   toNumberFormatAll: toNumberFormatAll,
-  toDateFormatDMY: toDateFormatDMY,
-  toDateFormatDMYT: toDateFormatDMYT,
+  toDmy: toDmy,
+  toTdmy: toTdmy,
+  //toTdmyIf,
   addHideHandler: function addHideHandler(id, point, fn) {
     _addClickOnceById(id, _fHideTooltip(point, fn));
   },

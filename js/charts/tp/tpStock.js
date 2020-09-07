@@ -10,7 +10,7 @@ var _tpFn = _interopRequireDefault(require("./tpFn"));
 var crHeader = _tpFn["default"].crHeader,
     crRow = _tpFn["default"].crRow,
     crNotEmptySpan = _tpFn["default"].crNotEmptySpan,
-    toDateFormatDMYT = _tpFn["default"].toDateFormatDMYT;
+    toTdmy = _tpFn["default"].toTdmy;
 
 var _crVolume = function _crVolume(_ref) {
   var date = _ref.date,
@@ -61,9 +61,9 @@ var tpStock = {
     fnTemplate: _crVolume,
     isWithValue: true
   },
-  volumeDmyt: {
+  volumeTdmy: {
     fnTemplate: _crVolume,
-    fnDateFormat: toDateFormatDMYT,
+    fnDateFormat: toTdmy,
     isWithValue: true
   },
   ath: {

@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _ChartFn = _interopRequireDefault(require("./ChartFn"));
-
 var _tpSpline = _interopRequireDefault(require("./tp/tpSpline"));
 
 var _tpCategory = _interopRequireDefault(require("./tp/tpCategory"));
@@ -25,10 +23,10 @@ var _tpDonut = _interopRequireDefault(require("./tp/tpDonut"));
 
 var _tpFn = _interopRequireDefault(require("./tp/tpFn"));
 
-var crTpId = _ChartFn["default"].crTpId,
-    toNumberFormat = _ChartFn["default"].toNumberFormat,
-    toDateFormatDMY = _ChartFn["default"].toDateFormatDMY;
-var addHideHandler = _tpFn["default"].addHideHandler;
+var crTpId = _tpFn["default"].crTpId,
+    toNumberFormat = _tpFn["default"].toNumberFormat,
+    toDmy = _tpFn["default"].toDmy,
+    addHideHandler = _tpFn["default"].addHideHandler;
 
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {
   setTimeout(function () {
@@ -42,7 +40,7 @@ var _fFormatter = function _fFormatter(option) {
         _option$onAfterRender = option.onAfterRender,
         onAfterRender = _option$onAfterRender === void 0 ? _fnAddHandlerClose : _option$onAfterRender,
         _option$fnDateFormat = option.fnDateFormat,
-        fnDateFormat = _option$fnDateFormat === void 0 ? toDateFormatDMY : _option$fnDateFormat,
+        fnDateFormat = _option$fnDateFormat === void 0 ? toDmy : _option$fnDateFormat,
         isWithColor = option.isWithColor,
         isWithValueText = option.isWithValueText,
         isWithValue = option.isWithValue,
@@ -71,8 +69,9 @@ var _fFormatter = function _fFormatter(option) {
 };
 
 var Tooltip = {
-  fnBasePointFormatter: _fFormatter((0, _extends2["default"])({}, _tpSpline["default"].value)),
-  fnBasePointFormatterT: _fFormatter((0, _extends2["default"])({}, _tpSpline["default"].valueDmyt)),
+  vDmy: _fFormatter((0, _extends2["default"])({}, _tpSpline["default"].vDmy)),
+  vTdmyIf: _fFormatter((0, _extends2["default"])({}, _tpSpline["default"].vTdmyIf)),
+  vTdmy: _fFormatter((0, _extends2["default"])({}, _tpSpline["default"].vTdmy)),
   categorySimple: _fFormatter((0, _extends2["default"])({}, _tpCategory["default"].simple)),
   category: _fFormatter((0, _extends2["default"])({}, _tpCategory["default"].remove)),
   categoryRHLY: _fFormatter((0, _extends2["default"])({}, _tpCategory["default"].rhly)),
@@ -81,7 +80,7 @@ var Tooltip = {
   exValue: _fFormatter((0, _extends2["default"])({}, _tpScatter["default"].exValue)),
   eps: _fFormatter((0, _extends2["default"])({}, _tpScatter["default"].eps)),
   volume: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volume)),
-  volumeDmyt: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volumeDmyt)),
+  volumeTdmy: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volumeTdmy)),
   ath: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].ath)),
   hl: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].hl)),
   donut: _fFormatter((0, _extends2["default"])({}, _tpDonut["default"].value)),

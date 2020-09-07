@@ -89,7 +89,7 @@ const _crLineSeria = (name, color, data) => ({
 const _crColumnSeria = option => _assign({
    type: "column",
    visible: true,
-   tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter)
+   tooltip: Chart.fTooltip(Tooltip.vDmy)
  }, option);
 
 function _Builder(config) {
@@ -276,7 +276,7 @@ const WithIndicatorConfig = {
             pointPadding: 0,
             groupPadding: 0,
             turboThreshold: 20000,
-            tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter)
+            tooltip: Chart.fTooltip(Tooltip.vDmy)
           }
         }
       })

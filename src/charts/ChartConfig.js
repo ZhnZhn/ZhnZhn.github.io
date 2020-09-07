@@ -111,16 +111,19 @@ const ChartConfig = {
   crSeria: (option={}) => {
     const {
       seriaType, seriaWidth, seriaColor,
+      tp,
       ...restOption
     } = option
     , type = _isStr(seriaType)
         ? seriaType.toLowerCase()
-        : 'spline';
+        : 'spline'
+    , pointFormatter = tp && Tooltip[tp]
+        || Tooltip.vDmy;
     return {
       type,
       lineWidth: seriaWidth ?? 1,
       color: seriaColor,
-      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter),
+      tooltip: Chart.fTooltip(pointFormatter),
       ...restOption
     };
   },

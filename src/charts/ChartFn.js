@@ -23,10 +23,11 @@ const {
   calcPercent
 } = mathFn;
 
-
+const dateFormat = Highcharts.dateFormat;
 const _isFn = fn => typeof fn === 'function';
 const _isNaN = Number.isNaN || isNaN;
 const _fnFindIndex = fnArr.findIndexByProp('x');
+
 
 const C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
@@ -212,10 +213,16 @@ const ChartFn = {
       .toUpperCase();
   },
 
-  toDateFormatDMY: Highcharts
-     .dateFormat.bind(null, '%A, %b %d, %Y'),
-  toDateFormatDMYT: Highcharts
-     .dateFormat.bind(null, '%A, %b %d, %Y, %H:%M'),
+  toDmy: dateFormat.bind(null, '%A, %b %d, %Y'),
+  toTdmy: dateFormat.bind(null, '%H:%M, %A, %b %d, %Y'),
+  /*
+  toTdmyIf: (mls) => {
+    const _t = dateFormat('%H:%M', mls);
+    return _t === '00:00'
+      ? dateFormat('%A, %b %d, %Y', mls)
+      : dateFormat('%H:%M, %A, %b %d, %Y', mls);
+  },
+  */
 
   setMinMaxPlotLines({ plotLines, min, max, value, isDrawDeltaExtrems}){
     if (isDrawDeltaExtrems) {

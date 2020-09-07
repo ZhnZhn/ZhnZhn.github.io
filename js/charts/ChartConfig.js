@@ -121,13 +121,15 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
         seriaType = _option.seriaType,
         seriaWidth = _option.seriaWidth,
         seriaColor = _option.seriaColor,
-        restOption = (0, _objectWithoutPropertiesLoose2["default"])(_option, ["seriaType", "seriaWidth", "seriaColor"]),
-        type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline';
+        tp = _option.tp,
+        restOption = (0, _objectWithoutPropertiesLoose2["default"])(_option, ["seriaType", "seriaWidth", "seriaColor", "tp"]),
+        type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline',
+        pointFormatter = tp && _Tooltip["default"][tp] || _Tooltip["default"].vDmy;
     return (0, _extends2["default"])({
       type: type,
       lineWidth: seriaWidth != null ? seriaWidth : 1,
       color: seriaColor,
-      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].fnBasePointFormatter)
+      tooltip: _Chart["default"].fTooltip(pointFormatter)
     }, restOption);
   },
   crAreaConfig: function crAreaConfig(options) {

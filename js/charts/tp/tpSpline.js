@@ -5,11 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _tpFn = _interopRequireDefault(require("./tpFn"));
 
 var crHeader = _tpFn["default"].crHeader,
     crRow = _tpFn["default"].crRow,
-    toDateFormatDMYT = _tpFn["default"].toDateFormatDMYT,
+    toTdmy = _tpFn["default"].toTdmy,
     getStatus = _tpFn["default"].getStatus;
 
 var _crValue = function _crValue(_ref) {
@@ -27,20 +29,24 @@ var _crValue = function _crValue(_ref) {
   }) + "\n  </div>";
 };
 
+var _splineOptions = {
+  fnTemplate: _crValue,
+  isWithColor: true,
+  isWithValueText: true,
+  isWithValue: true
+};
 var tpSpline = {
-  value: {
-    fnTemplate: _crValue,
-    isWithColor: true,
-    isWithValueText: true,
-    isWithValue: true
-  },
-  valueDmyt: {
-    fnTemplate: _crValue,
-    fnDateFormat: toDateFormatDMYT,
-    isWithColor: true,
-    isWithValueText: true,
-    isWithValue: true
+  vDmy: _splineOptions,
+  vTdmy: (0, _extends2["default"])({}, _splineOptions, {
+    fnDateFormat: toTdmy
+  })
+  /*
+  vTdmyIf: {
+    ..._splineOptions,
+    fnDateFormat: toTdmyIf
   }
+  */
+
 };
 var _default = tpSpline;
 exports["default"] = _default;

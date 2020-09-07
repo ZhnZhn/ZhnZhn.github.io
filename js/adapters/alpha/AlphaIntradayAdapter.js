@@ -168,8 +168,8 @@ var _crChartOptions = function _crChartOptions(dfT, data) {
 
   return {
     dataDaily: _isIntraday ? crDataDaily(data) : data,
-    seriaTooltip: _isIntraday ? _Tooltip["default"].fnBasePointFormatterT : _Tooltip["default"].fnBasePointFormatter,
-    volumeTooltip: _isIntraday ? _Tooltip["default"].volumeDmyt : _Tooltip["default"].volume
+    seriaTooltip: _isIntraday ? _Tooltip["default"].vTdmy : _Tooltip["default"].vDmy,
+    volumeTooltip: _isIntraday ? _Tooltip["default"].volumeTdmy : _Tooltip["default"].volume
   };
 };
 

@@ -30,7 +30,7 @@ var FaoStatAdapter = {
         _points = toDataPoints(json, option),
         config = (0, _ConfigBuilder["default"])().areaConfig({
       spacingTop: 25
-    }).addCaption(_title, _subtitle).addPoints(_id, _points).addMinMax(_points, option).addTooltip(_Tooltip["default"].fnBasePointFormatter).add({
+    }).addCaption(_title, _subtitle).addPoints(_id, _points).addMinMax(_points, option).addTooltip(_Tooltip["default"].vDmy).add({
       info: toInfo(json, _title, _subtitle),
       valueMoving: crValueMoving(_points),
       zhConfig: crZhConfig(_id, option)

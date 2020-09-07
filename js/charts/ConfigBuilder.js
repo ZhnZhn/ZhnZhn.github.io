@@ -154,7 +154,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       seriaType: seriaType,
       seriaColor: seriaColor,
       seriaWidth: seriaWidth
-    }).addTooltip(_Tooltip["default"].fnBasePointFormatter).addMiniVolume({
+    }).addTooltip(_Tooltip["default"].vDmy).addMiniVolume({
       id: id,
       dColumn: dataVolumeColumn,
       dVolume: dataVolume
@@ -176,11 +176,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this.areaConfig().add('chart', {
       spacingTop: 25,
       marginBottom: 20
-    }).addTooltip(_Tooltip["default"].fnBasePointFormatterT).setStockSerias(id, data, dH, dL, dO).setMinMax(minClose, maxClose, false).addMiniVolume({
+    }).addTooltip(_Tooltip["default"].vTdmy).setStockSerias(id, data, dH, dL, dO).setMinMax(minClose, maxClose, false).addMiniVolume({
       id: id,
       dVolume: dVolume,
       dColumn: dColumn,
-      tooltipColumn: _Chart["default"].fTooltip(_Tooltip["default"].volumeDmyt)
+      tooltipColumn: _Chart["default"].fTooltip(_Tooltip["default"].volumeTdmy)
     });
   },
   categoryConfig: function categoryConfig(categories) {

@@ -99,7 +99,7 @@ var _crColumnSeria = function _crColumnSeria(option) {
   return _assign({
     type: "column",
     visible: true,
-    tooltip: _Chart["default"].fTooltip(_Tooltip["default"].fnBasePointFormatter)
+    tooltip: _Chart["default"].fTooltip(_Tooltip["default"].vDmy)
   }, option);
 };
 
@@ -290,7 +290,7 @@ var WithIndicatorConfig = {
           pointPadding: 0,
           groupPadding: 0,
           turboThreshold: 20000,
-          tooltip: _Chart["default"].fTooltip(_Tooltip["default"].fnBasePointFormatter)
+          tooltip: _Chart["default"].fTooltip(_Tooltip["default"].vDmy)
         }
       }
     }).assignTo('yAxis', {

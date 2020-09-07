@@ -250,7 +250,7 @@ var Chart = {
         turboThreshold: 20000,
         type: _isStr(seriaType) ? seriaType.toLowerCase() : 'area',
         color: seriaColor,
-        tooltip: Chart.fTooltip(_Tooltip["default"].fnBasePointFormatter),
+        tooltip: Chart.fTooltip(_Tooltip["default"].vDmy),
         lineWidth: seriaWidth,
         states: {
           hover: {

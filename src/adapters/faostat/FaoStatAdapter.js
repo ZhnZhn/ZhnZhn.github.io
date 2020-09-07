@@ -25,7 +25,7 @@ const FaoStatAdapter = {
        .addCaption(_title, _subtitle)
        .addPoints(_id, _points)
        .addMinMax(_points, option)
-       .addTooltip(Tooltip.fnBasePointFormatter)
+       .addTooltip(Tooltip.vDmy)
        .add({
          info: toInfo(json, _title, _subtitle),
          valueMoving: crValueMoving(_points),
@@ -39,7 +39,7 @@ const FaoStatAdapter = {
     if (!checkToSeries(option)) {
       throw new Error('ERR_10');
     }
-    const _data = crSeriaData(json, option)        
+    const _data = crSeriaData(json, option)
     , { oneCaption } = option;
     return Builder()
       .initSeria()

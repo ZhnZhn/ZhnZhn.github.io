@@ -115,7 +115,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       seriaType, seriaColor, seriaWidth
     } = dataOption;
     return this.areaConfig({ spacingTop: 25, seriaType, seriaColor, seriaWidth })
-      .addTooltip(Tooltip.fnBasePointFormatter)
+      .addTooltip(Tooltip.vDmy)
       .addMiniVolume({
         id,
         dColumn: dataVolumeColumn,
@@ -136,12 +136,12 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   }){
     return this.areaConfig()
       .add('chart', { spacingTop: 25, marginBottom: 20 })
-      .addTooltip(Tooltip.fnBasePointFormatterT)
+      .addTooltip(Tooltip.vTdmy)
       .setStockSerias(id, data, dH, dL, dO)
       .setMinMax(minClose, maxClose, false)
       .addMiniVolume({
         id, dVolume, dColumn,
-        tooltipColumn: Chart.fTooltip(Tooltip.volumeDmyt)
+        tooltipColumn: Chart.fTooltip(Tooltip.volumeTdmy)
       });
   },
   categoryConfig(categories=[]){
