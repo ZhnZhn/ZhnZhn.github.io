@@ -26,39 +26,43 @@ class MenuPage extends Component {
     items: []
   }
 
+  _refTitle = React.createRef()
+  _refFirst = React.createRef()
+
   componentDidMount(){
     this._focus()
   }
 
-  _onRegTitle = (n) => this._titleNode = n
-  _onRegFirst = (n) => this._firstNode = n
+  _hClickTitle = () => {
+    const {pageNumber, onPrevPage } = this.props
+    onPrevPage(pageNumber)
+  }
 
   render(){
     const {
        style,
        title,
        items,
-       baseTitleCl, itemCl,
+       titleCl, itemCl,
        pageNumber,
-       onNextPage, onPrevPage,
+       onNextPage,
        onClose,
        children
      } = this.props;
     return(
       <div style={style}>
         <MenuTitle
-          baseTitleCl={baseTitleCl}
+          ref={this._refTitle}
+          titleCl={titleCl}
           title={title}
-          pageNumber={pageNumber}
-          onPrevPage={onPrevPage}
-          onReg={this._onRegTitle}
+          onClick={this._hClickTitle}
         />
         <MenuItemList
+          ref={this._refFirst}
           items={items}
-          itemCl={itemCl || baseTitleCl}
+          itemCl={itemCl || titleCl}
           pageNumber={pageNumber}
           onNextPage={onNextPage}
-          onReg={this._onRegFirst}
           onClose={onClose}
         />
         {children}
@@ -66,15 +70,15 @@ class MenuPage extends Component {
     );
   }
 
-  _focusTitle = () => this._titleNode.focus()
-  _focusFirst = () => this._firstNode.focus()
+  _focusTitle = () => this._refTitle.current.focus()
+  _focusFirst = () => this._refFirst.current.focus()
 
   _focus = () => {
     const { pageCurrent, pageNumber } = this.props;
     if (pageCurrent === pageNumber){
-      if (this._titleNode) {
+      if (this._refTitle.current) {
          setTimeout(this._focusTitle, 1000)
-      } else if (this._firstNode) {
+      } else if (this._refFirst.current) {
          setTimeout(this._focusFirst, 1000)
       }
     }

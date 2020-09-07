@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import MenuAriaItem from './MenuAriaItem'
 
@@ -9,47 +9,42 @@ const S = {
   PREV_PAGE: {
     position: 'absolute',
     top: 0,
-    left: '16px'
+    left: 16
   },
   TITLE: {
-    paddingLeft: '16px'
+    paddingLeft: 16
   }
 };
 
-class MenuTitle extends Component {
-  /*
-  static propTypes = {
-    baseTitleCl: PropTypes.string,
-    title: PropTypes.string,
-    pageNumber: PropTypes.number,
-    onPrevPage: PropTypes.func,
-    onReg: PropTypes.func
-  }
-  */
-
-  render(){
-    const {
-            baseTitleCl,
-            title, pageNumber,
-            onPrevPage, onReg
-          } = this.props;
-    if (!title) { return null; }
-    return (
+const MenuTitle = React.forwardRef(({
+  titleCl,
+  title,
+  onClick
+}, ref) => {
+  if (!title) { return null; }
+  return (
       <MenuAriaItem
-        className={baseTitleCl}
+        ref={ref}
+        className={titleCl}
         style={S.ITEM}
-        onClick={onPrevPage.bind(null, pageNumber)}
-        onReg={onReg}
+        onClick={onClick}
       >
         <span style={S.PREV_PAGE}>
-          {'<'}
+          {"<"}
         </span>
         <span style={S.TITLE}>
           {title}
         </span>
       </MenuAriaItem>
-    );
-  }
+  )
+})
+
+/*
+MenuTitle.propTypes = {
+  titleCl: PropTypes.string,
+  title: PropTypes.string,
+  onClick: PropTypes.func
 }
+*/
 
 export default MenuTitle

@@ -8,7 +8,7 @@ const _crItem = (name, onClick) => ({
 const crModel = (comp, {
   onToggle, onToTop, onHideCaption
 }) => ({
-    baseTitleCl: CL_ROW,
+    titleCl: CL_ROW,
     pageWidth: 150,
     maxPages: 1,
     p0: [

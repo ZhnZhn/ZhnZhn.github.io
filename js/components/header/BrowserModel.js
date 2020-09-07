@@ -29,7 +29,7 @@ var _fBD = function _fBD(id) {
 
 var crBrowserModel = function crBrowserModel() {
   return {
-    baseTitleCl: CL.BR,
+    titleCl: CL.BR,
     pageWidth: 235,
     maxPages: 2,
     page_0: [{

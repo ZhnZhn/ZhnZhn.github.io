@@ -1,46 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import isKeyEnter from '../zhn/isKeyEnter'
+import useKeyEnter from '../hooks/useKeyEnter'
 
-const _fKeyDown = (onClick) => (evt) => {
-  if (isKeyEnter(evt)) {
-    onClick()
-  }
+const MenuAriaItem = React.forwardRef(({ children, onClick, onReg, ...rest }, ref) => {
+  const _hKeyDown = useKeyEnter(onClick);
+
+  return (
+    <div
+      {...rest}
+      ref={ref}
+      role="menuitem"
+      tabIndex="0"
+      onClick={onClick}
+      onKeyDown={_hKeyDown}
+    >
+      {children}
+    </div>
+  );
+})
+
+/*
+MenuAriaItem.propTypes = {
+  onClick: PropTypes.func
 }
-
-class MenuAriaItem extends Component {
-
-  /*
-  static propTypes = {
-    onClick: PropTypes.func,
-    onReg: PropTypes.func
-  }
-  */
-
-  componentDidMount(){
-    const { onReg } = this.props
-    if (this._node && typeof onReg === 'function') {
-      onReg(this._node)
-    }
-  }
-
-  _ref = n => this._node = n
-
-  render(){
-    const { children, onClick, onReg, ...rest } = this.props
-    return (
-      <div
-        {...rest}
-        ref={onReg ? this._ref: void 0}
-        role="menuitem"
-        tabIndex="0"
-        onClick={onClick}
-        onKeyDown={_fKeyDown(onClick)}
-      >
-        {children}
-      </div>
-    );
-  }
-}
+*/
 
 export default MenuAriaItem

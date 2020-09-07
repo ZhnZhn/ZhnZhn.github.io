@@ -35,7 +35,7 @@ const crModelMore = ({
     p1.push(_crItem('CompareTo', onCompareTo))
   }
   return {
-    baseTitleCl: CL_ROW,
+    titleCl: CL_ROW,
     pageWidth: 180,
     maxPages: 2,
     p0: P0,

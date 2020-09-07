@@ -17,7 +17,7 @@ var crModel = function crModel(comp, _ref) {
       onToTop = _ref.onToTop,
       onHideCaption = _ref.onHideCaption;
   return {
-    baseTitleCl: CL_ROW,
+    titleCl: CL_ROW,
     pageWidth: 150,
     maxPages: 1,
     p0: [_crItem('Move to Top', onToTop), _crItem('Hide Caption', onHideCaption.bind(comp)), _crItem('Toggle Toolbar', onToggle.bind(comp))]

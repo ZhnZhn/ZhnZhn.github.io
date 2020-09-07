@@ -20,7 +20,7 @@ const _fBD = (id) => () => {
 
 const crBrowserModel = () => {
   return {
-    baseTitleCl: CL.BR,
+    titleCl: CL.BR,
     pageWidth: 235,
     maxPages: 2,
     page_0: [

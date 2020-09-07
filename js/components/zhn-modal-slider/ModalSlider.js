@@ -43,7 +43,7 @@ var _crInitialState = function _crInitialState(model, INIT_ID) {
     pages: [/*#__PURE__*/_react["default"].createElement(_MenuPage["default"], {
       key: INIT_ID,
       items: model[INIT_ID],
-      baseTitleCl: model.baseTitleCl,
+      titleCl: model.titleCl,
       itemCl: model.itemCl
     })],
     model: model
@@ -82,7 +82,7 @@ var ModalSlider = /*#__PURE__*/function (_Component) {
         key: id,
         title: title,
         items: model[id],
-        baseTitleCl: model.baseTitleCl,
+        titleCl: model.titleCl,
         itemCl: model.itemCl
       }));
     };

@@ -37,7 +37,7 @@ var crMenuMore = function crMenuMore(comp, _ref2) {
   });
 
   return {
-    baseTitleCl: CL_ROW,
+    titleCl: CL_ROW,
     pageWidth: 175,
     maxPages: 1,
     p0: p0

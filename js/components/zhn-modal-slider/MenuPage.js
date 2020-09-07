@@ -26,32 +26,33 @@ var MenuPage = /*#__PURE__*/function (_Component) {
     }
 
     _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this._refTitle = /*#__PURE__*/_react["default"].createRef();
+    _this._refFirst = /*#__PURE__*/_react["default"].createRef();
 
-    _this._onRegTitle = function (n) {
-      return _this._titleNode = n;
-    };
-
-    _this._onRegFirst = function (n) {
-      return _this._firstNode = n;
+    _this._hClickTitle = function () {
+      var _this$props = _this.props,
+          pageNumber = _this$props.pageNumber,
+          onPrevPage = _this$props.onPrevPage;
+      onPrevPage(pageNumber);
     };
 
     _this._focusTitle = function () {
-      return _this._titleNode.focus();
+      return _this._refTitle.current.focus();
     };
 
     _this._focusFirst = function () {
-      return _this._firstNode.focus();
+      return _this._refFirst.current.focus();
     };
 
     _this._focus = function () {
-      var _this$props = _this.props,
-          pageCurrent = _this$props.pageCurrent,
-          pageNumber = _this$props.pageNumber;
+      var _this$props2 = _this.props,
+          pageCurrent = _this$props2.pageCurrent,
+          pageNumber = _this$props2.pageNumber;
 
       if (pageCurrent === pageNumber) {
-        if (_this._titleNode) {
+        if (_this._refTitle.current) {
           setTimeout(_this._focusTitle, 1000);
-        } else if (_this._firstNode) {
+        } else if (_this._refFirst.current) {
           setTimeout(_this._focusFirst, 1000);
         }
       }
@@ -67,31 +68,29 @@ var MenuPage = /*#__PURE__*/function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this$props2 = this.props,
-        style = _this$props2.style,
-        title = _this$props2.title,
-        items = _this$props2.items,
-        baseTitleCl = _this$props2.baseTitleCl,
-        itemCl = _this$props2.itemCl,
-        pageNumber = _this$props2.pageNumber,
-        onNextPage = _this$props2.onNextPage,
-        onPrevPage = _this$props2.onPrevPage,
-        onClose = _this$props2.onClose,
-        children = _this$props2.children;
+    var _this$props3 = this.props,
+        style = _this$props3.style,
+        title = _this$props3.title,
+        items = _this$props3.items,
+        titleCl = _this$props3.titleCl,
+        itemCl = _this$props3.itemCl,
+        pageNumber = _this$props3.pageNumber,
+        onNextPage = _this$props3.onNextPage,
+        onClose = _this$props3.onClose,
+        children = _this$props3.children;
     return /*#__PURE__*/_react["default"].createElement("div", {
       style: style
     }, /*#__PURE__*/_react["default"].createElement(_MenuTitle["default"], {
-      baseTitleCl: baseTitleCl,
+      ref: this._refTitle,
+      titleCl: titleCl,
       title: title,
-      pageNumber: pageNumber,
-      onPrevPage: onPrevPage,
-      onReg: this._onRegTitle
+      onClick: this._hClickTitle
     }), /*#__PURE__*/_react["default"].createElement(_MenuItemList["default"], {
+      ref: this._refFirst,
       items: items,
-      itemCl: itemCl || baseTitleCl,
+      itemCl: itemCl || titleCl,
       pageNumber: pageNumber,
       onNextPage: onNextPage,
-      onReg: this._onRegFirst,
       onClose: onClose
     }), children);
   };

@@ -27,7 +27,7 @@ const _crInitialState = (model, INIT_ID) => ({
     <MenuPage
       key={INIT_ID}
       items={model[INIT_ID]}
-      baseTitleCl={model.baseTitleCl}
+      titleCl={model.titleCl}
       itemCl={model.itemCl}
     />
   ],
@@ -107,7 +107,7 @@ class ModalSlider extends Component {
         key={id}
         title={title}
         items={model[id]}
-        baseTitleCl={model.baseTitleCl}
+        titleCl={model.titleCl}
         itemCl={model.itemCl}
       />
     ))
