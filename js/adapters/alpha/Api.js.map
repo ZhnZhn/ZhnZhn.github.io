@@ -1,1 +1,44 @@
-{"version":3,"sources":["../../../src/adapters/alpha/Api.js"],"names":["C","ROOT","ERR_PROP","REQ_ERROR","RES_EMPTY","MSG_EMPTY","_crError","errCaption","message","AlphaApi","getRequestUrl","option","indicator","ticket","period","apiKey","interval","outputsize","checkResponse","json"],"mappings":";;;;;;;AACA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE,mCADE;AAGRC,EAAAA,QAAQ,EAAE,eAHF;AAIRC,EAAAA,SAAS,EAAE,eAJH;AAKRC,EAAAA,SAAS,EAAE,gBALH;AAMRC,EAAAA,SAAS,EAAE;AANH,CAAV;;AASA,IAAMC,QAAQ,GAAG,SAAXA,QAAW,CAACC,UAAD,EAAaC,OAAb;AAAA,SAA0B;AACzCD,IAAAA,UAAU,EAAVA,UADyC;AAC7BC,IAAAA,OAAO,EAAPA;AAD6B,GAA1B;AAAA,CAAjB;;AAIA,IAAMC,QAAQ,GAAG;AACfC,EAAAA,aADe,yBACDC,MADC,EACO;AAAA,4BACmDA,MADnD,CACZC,SADY;AAAA,QACZA,SADY,kCACF,KADE;AAAA,yBACmDD,MADnD,CACKE,MADL;AAAA,QACKA,MADL,+BACY,MADZ;AAAA,yBACmDF,MADnD,CACoBG,MADpB;AAAA,QACoBA,MADpB,+BAC2B,IAD3B;AAAA,yBACmDH,MADnD,CACiCI,MADjC;AAAA,QACiCA,MADjC,+BACwC,MADxC;;AAEpB,YAAOH,SAAP;AACE,WAAK,QAAL;AACE,eAAUZ,CAAC,CAACC,IAAZ,kBAA6BW,SAA7B,gBAAiDG,MAAjD;;AACF,WAAK,sBAAL;AAA4B;AAAA,cAClBC,QADkB,GACLL,MADK,CAClBK,QADkB;AAE1B,iBAAUhB,CAAC,CAACC,IAAZ,kBAA6BW,SAA7B,kBAAmDI,QAAnD,gBAAsEH,MAAtE,gBAAuFE,MAAvF;AACD;;AACD,WAAK,mBAAL;AAA0B;AAAA,mCACSJ,MADT,CAChBM,UADgB;AAAA,cAChBA,UADgB,mCACL,SADK;AAExB,iBAAUjB,CAAC,CAACC,IAAZ,kBAA6BW,SAA7B,oBAAqDK,UAArD,gBAA0EJ,MAA1E,gBAA2FE,MAA3F;AACD;;AACD,WAAK,4BAAL;AAAmC;AAAA,cACzBE,WADyB,GACVN,MADU,CACzBM,UADyB;AAEjC,iBAAUjB,CAAC,CAACC,IAAZ,kBAA6BW,SAA7B,oBAAqDK,WAArD,gBAA0EJ,MAA1E,gBAA2FE,MAA3F;AACD;;AACD;AACE,eAAUf,CAAC,CAACC,IAAZ,kBAA6BW,SAA7B,gBAAiDC,MAAjD,oCAAsFC,MAAtF,kCAAyHC,MAAzH;AAhBJ;AAkBD,GArBc;AAuBfG,EAAAA,aAvBe,yBAuBDC,IAvBC,EAuBI;AACjB,QAAI,yBAAQA,IAAR,CAAJ,EAAmB;AACjB,YAAMb,QAAQ,CAACN,CAAC,CAACI,SAAH,EAAcJ,CAAC,CAACK,SAAhB,CAAd;AACD;;AACD,QAAI,CAACc,IAAI,CAACnB,CAAC,CAACE,QAAH,CAAT,EAAuB;AACrB,aAAO,IAAP;AACD,KAFD,MAEO;AACL,YAAMI,QAAQ,CAAEN,CAAC,CAACG,SAAJ,EAAegB,IAAI,CAACnB,CAAC,CAACE,QAAH,CAAnB,CAAd;AACD;AACF;AAhCc,CAAjB;eAmCeO,Q","sourcesContent":["\r\nimport isEmpty from '../../utils/isEmpty'\r\n\r\nconst C = {\r\n  ROOT: 'https://www.alphavantage.co/query',\r\n\r\n  ERR_PROP: 'Error Message',\r\n  REQ_ERROR: 'Request Error',\r\n  RES_EMPTY: 'Response Empty',\r\n  MSG_EMPTY: 'Empty response from data provider'\r\n};\r\n\r\nconst _crError = (errCaption, message) => ({\r\n  errCaption, message\r\n});\r\n\r\nconst AlphaApi = {\r\n  getRequestUrl(option) {\r\n    const { indicator='SMA', ticket='MSFT', period='50', apiKey='demo' } = option;\r\n    switch(indicator){\r\n      case 'SECTOR':\r\n        return `${C.ROOT}?function=${indicator}&apikey=${apiKey}`;\r\n      case 'TIME_SERIES_INTRADAY':{\r\n        const { interval } = option;\r\n        return `${C.ROOT}?function=${indicator}&interval=${interval}&symbol=${ticket}&apikey=${apiKey}`;\r\n      }\r\n      case 'TIME_SERIES_DAILY': {\r\n        const { outputsize='compact' } = option;\r\n        return `${C.ROOT}?function=${indicator}&outputsize=${outputsize}&symbol=${ticket}&apikey=${apiKey}`;\r\n      }\r\n      case 'TIME_SERIES_DAILY_ADJUSTED': {\r\n        const { outputsize } = option;\r\n        return `${C.ROOT}?function=${indicator}&outputsize=${outputsize}&symbol=${ticket}&apikey=${apiKey}`;\r\n      }\r\n      default:\r\n        return `${C.ROOT}?function=${indicator}&symbol=${ticket}&interval=daily&time_period=${period}&series_type=close&apikey=${apiKey}`;\r\n    }\r\n  },\r\n\r\n  checkResponse(json){\r\n    if (isEmpty(json)) {\r\n      throw _crError(C.RES_EMPTY, C.MSG_EMPTY);\r\n    }\r\n    if (!json[C.ERR_PROP]) {\r\n      return true;\r\n    } else {\r\n      throw _crError( C.REQ_ERROR, json[C.ERR_PROP]);\r\n    }\r\n  }\r\n}\r\n\r\nexport default AlphaApi\r\n"],"file":"Api.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/alpha/Api.js"
+ ],
+ "file": "../../../src/adapters/alpha/Api.js",
+ "names": [
+  "getValue",
+  "fnAdapter",
+  "getCaption",
+  "C",
+  "ROOT",
+  "ERR_PROP",
+  "REQ_ERROR",
+  "RES_EMPTY",
+  "MSG_EMPTY",
+  "_assign",
+  "Object",
+  "assign",
+  "_crError",
+  "errCaption",
+  "message",
+  "AlphaApi",
+  "getRequestUrl",
+  "option",
+  "indicator",
+  "ticket",
+  "period",
+  "apiKey",
+  "dfFn",
+  "_fn",
+  "interval",
+  "outputsize",
+  "items",
+  "itemCaption",
+  "_symbol",
+  "replace",
+  "dfItem",
+  "dfPeriod",
+  "checkResponse",
+  "json"
+ ],
+ "mappings": "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"
+}

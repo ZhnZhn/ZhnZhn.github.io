@@ -1,0 +1,31 @@
+{
+  "items":[
+    { "c":"Total Revenue","v":"totalRevenue"},
+    { "c":"Total Operating Expense","v":"totalOperatingExpense"},
+    { "c":"Cost Of Revenue","v":"costOfRevenue"},
+    { "c":"Gross Profit","v":"grossProfit"},
+    { "c":"EBIT","v":"ebit"},
+    { "c":"Net Income","v":"netIncome"},
+    { "c":"Research And Development","v":"researchAndDevelopment"},
+    { "c":"Effect Of Accounting Charges","v":"effectOfAccountingCharges"},
+    { "c":"Income Before Tac","v":"incomeBeforeTax"},
+    { "c":"Minority Interest","v":"minorityInterest"},
+    { "c":"Selling General Administrative","v":"sellingGeneralAdministrative"},
+    { "c":"Other Non-Operating Income","v":"otherNonOperatingIncome"},
+    { "c":"Operating Income","v":"operatingIncome"},
+    { "c":"Other Operating Expense","v":"otherOperatingExpense"},
+    { "c":"Interest Expense","v":"interestExpense"},
+    { "c":"Tax Provision","v":"taxProvision"},
+    { "c":"Interest Income","v":"interestIncome"},
+    { "c":"Net Interest Income","v":"netInterestIncome"},
+    { "c":"Extraordinary Items","v":"extraordinaryItems"},
+    { "c":"Non Recurring","v":"nonRecurring"},
+    { "c":"Other Items","v":"otherItems"},
+    { "c":"Income Tax Expense","v":"incomeTaxExpense"},
+    { "c":"Total Other Income Expense","v":"totalOtherIncomeExpense"},
+    { "c":"Discontinued Operations","v":"discontinuedOperations"},
+    { "c":"Net Income From Continuing Operations","v":"netIncomeFromContinuingOperations"},
+    { "c":"Net Income Applicable To Common Shares","v":"netIncomeApplicableToCommonShares"},
+    { "c":"Preferred Stock And Other Adjustments","v":"preferredStockAndOtherAdjustments"}
+  ]
+}

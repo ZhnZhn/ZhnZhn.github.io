@@ -11,6 +11,8 @@ var _AlphaAdapter = _interopRequireDefault(require("./AlphaAdapter"));
 
 var _AlphaIntradayAdapter = _interopRequireDefault(require("./AlphaIntradayAdapter"));
 
+var _FundAdapter = _interopRequireDefault(require("./FundAdapter"));
+
 var _AlphaSectorAdapter = _interopRequireDefault(require("./AlphaSectorAdapter"));
 
 var AlphaVantage = {
@@ -21,6 +23,10 @@ var AlphaVantage = {
   AlphaIntraday: {
     api: _Api["default"],
     adapter: _AlphaIntradayAdapter["default"]
+  },
+  AlphaFund: {
+    api: _Api["default"],
+    adapter: _FundAdapter["default"]
   },
   AlphaSector: {
     api: _Api["default"],

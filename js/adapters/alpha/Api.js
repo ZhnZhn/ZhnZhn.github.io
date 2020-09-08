@@ -7,6 +7,10 @@ exports["default"] = void 0;
 
 var _isEmpty = _interopRequireDefault(require("../../utils/isEmpty"));
 
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+
+var getValue = _fnAdapter["default"].getValue,
+    getCaption = _fnAdapter["default"].getCaption;
 var C = {
   ROOT: 'https://www.alphavantage.co/query',
   ERR_PROP: 'Error Message',
@@ -14,6 +18,7 @@ var C = {
   RES_EMPTY: 'Response Empty',
   MSG_EMPTY: 'Empty response from data provider'
 };
+var _assign = Object.assign;
 
 var _crError = function _crError(errCaption, message) {
   return {
@@ -30,30 +35,48 @@ var AlphaApi = {
         ticket = _option$ticket === void 0 ? 'MSFT' : _option$ticket,
         _option$period = option.period,
         period = _option$period === void 0 ? '50' : _option$period,
-        _option$apiKey = option.apiKey,
-        apiKey = _option$apiKey === void 0 ? 'demo' : _option$apiKey;
+        apiKey = option.apiKey,
+        dfFn = option.dfFn,
+        _fn = dfFn || indicator;
 
-    switch (indicator) {
+    switch (_fn) {
       case 'SECTOR':
-        return C.ROOT + "?function=" + indicator + "&apikey=" + apiKey;
+        return C.ROOT + "?function=" + _fn + "&apikey=" + apiKey;
 
       case 'TIME_SERIES_INTRADAY':
         {
           var interval = option.interval;
-          return C.ROOT + "?function=" + indicator + "&interval=" + interval + "&symbol=" + ticket + "&apikey=" + apiKey;
+          return C.ROOT + "?function=" + _fn + "&interval=" + interval + "&symbol=" + ticket + "&apikey=" + apiKey;
         }
 
       case 'TIME_SERIES_DAILY':
         {
           var _option$outputsize = option.outputsize,
               outputsize = _option$outputsize === void 0 ? 'compact' : _option$outputsize;
-          return C.ROOT + "?function=" + indicator + "&outputsize=" + outputsize + "&symbol=" + ticket + "&apikey=" + apiKey;
+          return C.ROOT + "?function=" + _fn + "&outputsize=" + outputsize + "&symbol=" + ticket + "&apikey=" + apiKey;
         }
 
       case 'TIME_SERIES_DAILY_ADJUSTED':
         {
           var _outputsize = option.outputsize;
-          return C.ROOT + "?function=" + indicator + "&outputsize=" + _outputsize + "&symbol=" + ticket + "&apikey=" + apiKey;
+          return C.ROOT + "?function=" + _fn + "&outputsize=" + _outputsize + "&symbol=" + ticket + "&apikey=" + apiKey;
+        }
+
+      case 'INCOME_STATEMENT':
+      case 'BALANCE_SHEET':
+      case 'CASH_FLOW':
+        {
+          var items = option.items,
+              itemCaption = option.itemCaption,
+              _symbol = getValue(items[0]);
+
+          _assign(option, {
+            itemCaption: itemCaption.replace(getCaption(items[0]), _symbol),
+            dfItem: getValue(items[1]),
+            dfPeriod: getValue(items[2])
+          });
+
+          return C.ROOT + "?function=" + _fn + "&symbol=" + _symbol + "&apikey=" + apiKey;
         }
 
       default:

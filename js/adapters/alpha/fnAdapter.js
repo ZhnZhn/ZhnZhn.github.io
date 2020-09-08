@@ -9,10 +9,14 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var crItemConf = _AdapterFn["default"].crItemConf,
+var getValue = _AdapterFn["default"].getValue,
+    getCaption = _AdapterFn["default"].getCaption,
+    crItemConf = _AdapterFn["default"].crItemConf,
     crValueConf = _AdapterFn["default"].crValueConf,
     stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    valueMoving = _AdapterFn["default"].valueMoving,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    compareByDate = _AdapterFn["default"].compareByDate;
 
 var _crItemConf = function _crItemConf(_ref, option) {
   var id = _ref.id,
@@ -48,6 +52,11 @@ var _crZhConfig = function _crZhConfig(config, option) {
 };
 
 var fnAdapter = {
+  getValue: getValue,
+  getCaption: getCaption,
+  valueMoving: valueMoving,
+  ymdToUTC: ymdToUTC,
+  compareByDate: compareByDate,
   crIntradayConfigOption: function crIntradayConfigOption(config, option) {
     return {
       zhConfig: _crZhConfig(config, option),

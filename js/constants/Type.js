@@ -71,6 +71,7 @@ var LoadType = {
   AL: 'AL',
   AL_S: 'AL_S',
   AL_I: 'AL_I',
+  AL_F: 'AL_F',
   IEX: 'IEX',
   FMP: 'FMP',
   QCT: 'QCT',

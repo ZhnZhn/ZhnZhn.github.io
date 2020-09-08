@@ -16,6 +16,7 @@ const LoadConfig = {
   [LT.AL]: LoadImpl.AlphaIndicator,
   [LT.AL_S]: LoadImpl.AlphaSector,
   [LT.AL_I]: LoadImpl.AlphaIntraday,
+  [LT.AL_F]: LoadImpl.AlphaFund,
   [LT.IEX]: LoadImpl.Iex,
   [LT.FMP]: LoadImpl.Fmp,
 

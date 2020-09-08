@@ -2,10 +2,14 @@
 import AdapterFn from '../AdapterFn'
 
 const {
+  getValue,
+  getCaption,
   crItemConf,
   crValueConf,
   stockSeriesLegend,
-  valueMoving
+  valueMoving,
+  ymdToUTC,
+  compareByDate
 } = AdapterFn;
 
 const _crItemConf = ({id, dataSource, data}, option) => {
@@ -33,6 +37,11 @@ const _crZhConfig = (config, option) => {
 };
 
 const fnAdapter = {
+  getValue,
+  getCaption,
+  valueMoving,
+  ymdToUTC,
+  compareByDate,
   crIntradayConfigOption: (config, option) => ({
     zhConfig: _crZhConfig(config, option),
     valueMoving: valueMoving(config.data)

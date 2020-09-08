@@ -15,10 +15,22 @@
     },{
       "caption": "Alpha Vantage",
       "items": [
-        { "id": "SM_A_INDICATOR" },
-        { "id": "SM_A_INTRADAY" },
-        { "id": "SM_A_DAILY" },
-        { "id": "SM_A_DAILYADJUSTED" },
+        { "caption": "Historical Prices",
+          "items": [
+            { "id": "SM_A_INTRADAY" },
+            { "id": "SM_A_DAILY" },
+            { "id": "SM_A_DAILYADJUSTED" },
+            { "id": "SM_A_INDICATOR" }
+          ]
+        },
+        {
+          "caption": "Fundamental",
+          "items":[
+            { "id": "SM_A_INCOME" },
+            { "id": "SM_A_BS" },
+            { "id": "SM_A_CF" }
+          ]
+        },
         { "id": "SM_A_SECTOR" },
         { "id": "SM_A_SEARCH" }
       ]
@@ -99,6 +111,20 @@
         "rootUri" : "./data/stock-markets/",
         "spT": "id",
         "chartsType": "t2"
+      }
+    },
+    "SM_BASE_AV" : {
+      "dialogProps" : {
+        "noForDate" : true,
+        "loadId" : "AL_F",
+        "dataSource": "Alpha Vantage",
+        "descrUrl" : "./data/stock-markets/alpha-vantage.html",
+        "rootUri" : "./data/stock-markets/",
+        "selectProps": [
+          ["Stock", "wiki", "tickets", true]
+        ],
+        "spT" : "id",
+        "chartsType" : "t2"
       }
     },
     "SM_BASE_Q": {
@@ -239,7 +265,7 @@
     },
     "SM_A_INTRADAY" : {
         "type" : "SM_A_INTRADAY",
-        "menuTitle" : "Intraday Prices",
+        "menuTitle" : "Intraday",
         "dialogCaption" : "Alpha Vantage: Intraday",
         "contFullCaption" : "Alpha Vantage: Intraday Prices",
         "dialogType" : "AlphaIntradayDialog",
@@ -253,9 +279,9 @@
      },
      "SM_A_DAILY" : {
          "type" : "SM_A_DAILY",
-         "menuTitle" : "Historical Prices",
-         "dialogCaption" : "Alpha Vantage: Historical",
-         "contFullCaption": "Alpha Vantage: Historical Prices",
+         "menuTitle" : "Daily",
+         "dialogCaption" : "Alpha Vantage: Daily",
+         "contFullCaption": "Alpha Vantage: Daily Prices",
          "dialogType" : "AlphaIntradayDialog",
          "dialogProps" : {
            "descrUrl" : "./data/stock-markets/alpha-vantage.html",
@@ -267,9 +293,9 @@
       },
       "SM_A_DAILYADJUSTED" : {
           "type" : "SM_A_DAILYADJUSTED",
-          "menuTitle" : "Historical Adjusted Prices",
-          "dialogCaption" : "AV: Historical Adjusted",
-          "contFullCaption" : "Alpha Vantage: Historical Adjusted Prices",
+          "menuTitle" : "Daily Adjusted",
+          "dialogCaption" : "AV: Daily Adjusted",
+          "contFullCaption" : "Alpha Vantage: Daily Adjusted Prices",
           "dialogType" : "AlphaIntradayDialog",
           "dialogProps" : {
             "descrUrl" : "./data/stock-markets/alpha-vantage.html",
@@ -279,6 +305,48 @@
             "dfT": "DAILY_ADJUSTED"
           }
        },
+       "SM_A_INCOME" : {
+           "type" : "SM_A_INCOME",
+           "menuTitle" : "Income Statement",
+           "addProps" : "SM_BASE_AV",
+           "dialogProps" : {
+             "selectProps": [
+               ["Statement", "av-income-statement"],
+               ["Period", "av-periods"]
+             ],
+             "dfProps": {
+               "dfFn": "INCOME_STATEMENT"
+             }
+           }
+        },
+        "SM_A_BS" : {
+            "type" : "SM_A_BS",
+            "menuTitle" : "Balance Sheet",
+            "addProps" : "SM_BASE_AV",
+            "dialogProps" : {
+              "selectProps": [
+                ["Statement", "av-balance-sheet"],
+                ["Period", "av-periods"]
+              ],
+              "dfProps": {
+                "dfFn": "BALANCE_SHEET"
+              }
+            }
+         },
+         "SM_A_CF" : {
+             "type" : "SM_A_CF",
+             "menuTitle" : "Cash Flow",
+             "addProps" : "SM_BASE_AV",
+             "dialogProps" : {
+               "selectProps": [                 
+                 ["Statement", "av-cash-flow"],
+                 ["Period", "av-periods"]
+               ],
+               "dfProps": {
+                 "dfFn": "CASH_FLOW"
+               }
+             }
+          },
        "SM_A_SEARCH" : {
            "type" : "SM_A_SEARCH",
            "menuTitle" : "Search Symbols or Companies",
@@ -409,7 +477,7 @@
            "nInitFromDate": 2,
            "selectProps": [
               ["Stock", "wiki", "tickets", true]
-            ],           
+            ],
            "dfProps": {
              "dfT": "historical-price-full",
              "dfPn": "historical"

@@ -1,0 +1,26 @@
+{
+  "items":[
+    {"c":"Investments","v":"investments"},
+    {"c":"Change In Liabilities","v":"changeInLiabilities"},
+    {"c":"Cashflow From Investment","v":"cashflowFromInvestment"},
+    {"c":"Other Cashflow From Investment","v":"otherCashflowFromInvestment"},
+    {"c":"Net Borrowings","v":"netBorrowings"},
+    {"c":"Cashflow From Financing","v":"cashflowFromFinancing"},
+    {"c":"Other Cashflow From Financing","v":"otherCashflowFromFinancing"},
+    {"c":"Change In Operating Activities","v":"changeInOperatingActivities"},
+    {"c":"Net Income","v":"netIncome"},
+    {"c":"Change In Cash","v":"changeInCash"},
+    {"c":"Operating Cashflow","v":"operatingCashflow"},
+    {"c":"Other Operating Cashflow","v":"otherOperatingCashflow"},
+    {"c":"Depreciation","v":"depreciation"},
+    {"c":"Dividend Payout","v":"dividendPayout"},
+    {"c":"Stock Sale And Purchase","v":"stockSaleAndPurchase"},
+    {"c":"Change In Inventory","v":"changeInInventory"},
+    {"c":"Change In Account Receivables","v":"changeInAccountReceivables"},
+    {"c":"Change In Net Income","v":"changeInNetIncome"},
+    {"c":"Capital Expenditures","v":"capitalExpenditures"},
+    {"c":"Change In Receivables","v":"changeInReceivables"},
+    {"c":"Change In Exchange Rate","v":"changeInExchangeRate"},
+    {"c":"changeInCashAndCashEquivalents","v":"changeInCashAndCashEquivalents"}
+  ]
+}
