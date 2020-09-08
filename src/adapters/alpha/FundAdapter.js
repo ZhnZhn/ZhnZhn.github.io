@@ -42,6 +42,9 @@ const crConfigOption = ({option, data}) => ({
 })
 
 const FundAdapter = {
+  crKey(option){
+    return option._itemKey;
+  },
   toConfig(json, option){
     const {
       seriaType,

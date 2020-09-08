@@ -147,7 +147,10 @@ const _crChartOptions = (dfT, data) => {
   };
 };
 
-const AlphaIntradayAdapter = {
+const IntradayAdapter = {
+  crKey(option){
+    return option.value;
+  },
   toConfig(json, option){
     const {
       value:_chartId,
@@ -195,11 +198,11 @@ const AlphaIntradayAdapter = {
 
   toSeries(json, option){
     return Builder.crSeria({
-      adapter: AlphaIntradayAdapter,
+      adapter: IntradayAdapter,
       json, option,
       type: 'spline'
     });
   }
 }
 
-export default AlphaIntradayAdapter
+export default IntradayAdapter

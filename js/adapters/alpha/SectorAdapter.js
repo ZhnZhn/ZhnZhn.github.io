@@ -174,7 +174,10 @@ var _crTitle = function _crTitle(json) {
   return C.TITLE + " " + lr;
 };
 
-var AlphaSectorAdapter = {
+var SectorAdapter = {
+  crKey: function crKey() {
+    return C.ID;
+  },
   toConfig: function toConfig(json, option) {
     var id = C.ID,
         _crConfig2 = _crConfig(json),
@@ -210,6 +213,6 @@ var AlphaSectorAdapter = {
     };
   }
 };
-var _default = AlphaSectorAdapter;
+var _default = SectorAdapter;
 exports["default"] = _default;
-//# sourceMappingURL=AlphaSectorAdapter.js.map
+//# sourceMappingURL=SectorAdapter.js.map

@@ -15,7 +15,7 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Adapter = _interopRequireDefault(require("../../adapters/alpha/Adapter"));
+var _SearchAdapter = _interopRequireDefault(require("../../adapters/alpha/SearchAdapter"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
@@ -63,7 +63,7 @@ var AlphaIntradayDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withInitialSt
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       noDate: true
     });
-    _this._searchApi = (0, _extends2["default"])({}, _Adapter["default"].Search, {
+    _this._searchApi = (0, _extends2["default"])({}, _SearchAdapter["default"], {
       crUrlOptions: _this._crUrlOptions,
       onError: _this.props.onError
     });

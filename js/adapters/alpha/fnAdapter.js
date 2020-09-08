@@ -25,11 +25,13 @@ var _crItemConf = function _crItemConf(_ref, option) {
   var indicator = option.indicator,
       ticket = option.ticket,
       dfT = option.dfT,
+      dfSubId = option.dfSubId,
       interval = option.interval;
   return indicator === 'TIME_SERIES_DAILY' ? (0, _extends2["default"])({
     _itemKey: id
   }, crItemConf(option), crValueConf(data), {
     dfT: dfT,
+    dfSubId: dfSubId,
     interval: interval,
     indicator: indicator,
     ticket: ticket,

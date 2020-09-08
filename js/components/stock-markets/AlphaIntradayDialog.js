@@ -130,12 +130,14 @@ var AlphaIntradayDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _de
           dfT = _this$props.dfT,
           dataSource = _this$props.dataSource,
           loadId = _this$props.loadId,
-          _ticket = _this.ticketComp.isValid() ? _this.ticketComp.getValue() : undefined,
+          dfSubId = _this$props.dfSubId,
+          _ticket = _this.ticketComp.isValid() ? _this.ticketComp.getValue() : void 0,
           _options = _crLoadOptions(dfT, _this.interval),
           _value = (_ticket || '') + " (" + _options.interval + ")";
 
       _this.props.onLoad((0, _extends2["default"])({
-        loadId: loadId
+        loadId: loadId,
+        dfSubId: dfSubId
       }, _options, {
         ticket: _ticket,
         value: _value,

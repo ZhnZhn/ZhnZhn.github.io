@@ -121,15 +121,16 @@ class AlphaIntradayDialog extends Component {
   }
 
   _handleLoad = () => {
-    const { dfT, dataSource, loadId } = this.props
+    const { dfT, dataSource, loadId, dfSubId } = this.props
     , _ticket = this.ticketComp.isValid()
         ? this.ticketComp.getValue()
-        : undefined
+        : void 0
     , _options = _crLoadOptions(dfT, this.interval)
     , _value = `${_ticket || ''} (${_options.interval})`;
 
     this.props.onLoad({
       loadId,
+      dfSubId,
       ..._options,
       ticket: _ticket,
       value: _value, //for label

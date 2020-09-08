@@ -35,11 +35,12 @@ var AlphaIndicatorDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _d
     _this._handleLoad = function () {
       var _this$props = _this.props,
           loadId = _this$props.loadId,
+          dfSubId = _this$props.dfSubId,
           onLoad = _this$props.onLoad;
       var option = {
         loadId: loadId,
-        indicator: 'SECTOR' //value: _value, //for label
-
+        dfSubId: dfSubId,
+        indicator: 'SECTOR'
       };
       onLoad(option);
     };

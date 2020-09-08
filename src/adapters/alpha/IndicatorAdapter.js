@@ -186,10 +186,14 @@ const _rSeries = {
   [C.BBANDS]: _crBbandsSeries,
 }
 
-const AlphaAdapter = {
+const IndicatorAdapter = {
+  crKey(option){
+    const { ticket, value } = option;
+    return (option.chartId = `${ticket}-${value}`);
+  },
   toConfig(json, option) {
-    const { ticket, value } = option
-        , _chartId = `${ticket}-${value}`
+    const { ticket, value, chartId } = option
+        //, _chartId = `${ticket}-${value}`
         , _title = `${ticket}: ${value}`
         , _series = this.toSeries(json, option)
         , config = Builder()
@@ -197,7 +201,7 @@ const AlphaAdapter = {
             .addCaption(_title)
             .clearSeries()
             .addSeries(_series)
-            .add({ zhConfig: _crZhConfig(_chartId) })
+            .add({ zhConfig: _crZhConfig(chartId) })
             .toConfig();
     return {
       config,
@@ -213,4 +217,4 @@ const AlphaAdapter = {
   }
 };
 
-export default AlphaAdapter
+export default IndicatorAdapter

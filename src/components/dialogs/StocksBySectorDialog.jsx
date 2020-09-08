@@ -61,8 +61,9 @@ const IEX_SOURCES = [
 const SOURCE_OPTIONS = [
   {
     caption: 'Alpha Vantage: Daily (100)' ,
-    value: 'AL_I',
+    value: 'AL',
     dfProps: {
+      dfSubId: 'I',
       indicator: 'TIME_SERIES_DAILY',
       interval: 'Daily',
       outputsize: 'compact'

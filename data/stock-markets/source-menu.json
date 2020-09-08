@@ -116,7 +116,7 @@
     "SM_BASE_AV" : {
       "dialogProps" : {
         "noForDate" : true,
-        "loadId" : "AL_F",
+        "loadId" : "AL",
         "dataSource": "Alpha Vantage",
         "descrUrl" : "./data/stock-markets/alpha-vantage.html",
         "rootUri" : "./data/stock-markets/",
@@ -272,7 +272,8 @@
         "dialogProps" : {
           "descrUrl" : "./data/stock-markets/alpha-vantage.html",
           "valueFn" : "ROne",
-          "loadId" : "AL_I",
+          "loadId" : "AL",
+          "dfSubId": "I",
           "dataSource" : "Alpha Vantage: Intraday",
           "dfT": "INTRADAY"
         }
@@ -286,7 +287,8 @@
          "dialogProps" : {
            "descrUrl" : "./data/stock-markets/alpha-vantage.html",
            "valueFn" : "ROne",
-           "loadId" : "AL_I",
+           "loadId" : "AL",
+           "dfSubId": "I",
            "dataSource" : "Alpha Vantage: Daily",
            "dfT": "DAILY"
          }
@@ -300,7 +302,8 @@
           "dialogProps" : {
             "descrUrl" : "./data/stock-markets/alpha-vantage.html",
             "valueFn" : "ROne",
-            "loadId" : "AL_I",
+            "loadId" : "AL",
+            "dfSubId": "I",
             "dataSource" : "Alpha Vantage: Daily Adjusted",
             "dfT": "DAILY_ADJUSTED"
           }
@@ -315,6 +318,7 @@
                ["Period", "av-periods"]
              ],
              "dfProps": {
+               "dfSubId": "F",
                "dfFn": "INCOME_STATEMENT"
              }
            }
@@ -329,6 +333,7 @@
                 ["Period", "av-periods"]
               ],
               "dfProps": {
+                "dfSubId": "F",
                 "dfFn": "BALANCE_SHEET"
               }
             }
@@ -338,11 +343,12 @@
              "menuTitle" : "Cash Flow",
              "addProps" : "SM_BASE_AV",
              "dialogProps" : {
-               "selectProps": [                 
+               "selectProps": [
                  ["Statement", "av-cash-flow"],
                  ["Period", "av-periods"]
                ],
                "dfProps": {
+                 "dfSubId": "F",
                  "dfFn": "CASH_FLOW"
                }
              }
@@ -355,7 +361,8 @@
            "dialogProps" : {
              "descrUrl" : "./data/stock-markets/alpha-vantage.html",
              "valueFn" : "ROne",
-             "loadId" : "AL_I",
+             "loadId" : "AL",
+             "dfSubId": "I",
              "dataSource" : "Alpha Vantage: Search",
              "dfT": "SEARCH",
              "isGetKey": true
@@ -369,7 +376,8 @@
          "dialogType" : "AlphaSectorDialog",
          "dialogProps" : {
            "descrUrl" : "./data/stock-markets/alpha-vantage.html",
-           "loadId" : "AL_S",
+           "loadId" : "AL",
+           "dfSubId": "S",
            "dataSource" : "Alpha Vantage"
          }
      },

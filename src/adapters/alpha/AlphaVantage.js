@@ -1,15 +1,26 @@
-
 import api from './Api'
-import Indicator from './AlphaAdapter'
-import Intraday from './AlphaIntradayAdapter'
-import Fund from './FundAdapter'
-import Sector from './AlphaSectorAdapter'
+import crAdapter from '../crAdapter'
 
-const AlphaVantage = {
-  AlphaIndicator: { api, adapter: Indicator },
-  AlphaIntraday: { api, adapter: Intraday },
-  AlphaFund: { api, adapter: Fund },
-  AlphaSector: { api, adapter: Sector }
+import IndicatorAdapter from './IndicatorAdapter'
+import IntradayAdapter from './IntradayAdapter'
+import SectorAdapter from './SectorAdapter'
+import SearchAdapter from './SearchAdapter'
+import FundAdapter from './FundAdapter'
+
+const _rAdapter = {
+  DF: IndicatorAdapter,
+  I: IntradayAdapter,
+  S: SectorAdapter,
+  SR: SearchAdapter,
+  F: FundAdapter
+}
+
+const _getAdapter = option => {
+  const { dfSubId } = option;
+  return _rAdapter[dfSubId] || _rAdapter.DF;
 };
+
+const adapter = crAdapter(_getAdapter, { isKey: true });
+const AlphaVantage = { api, adapter };
 
 export default AlphaVantage

@@ -173,7 +173,10 @@ var _crChartOptions = function _crChartOptions(dfT, data) {
   };
 };
 
-var AlphaIntradayAdapter = {
+var IntradayAdapter = {
+  crKey: function crKey(option) {
+    return option.value;
+  },
   toConfig: function toConfig(json, option) {
     var _chartId = option.value,
         interval = option.interval,
@@ -219,13 +222,13 @@ var AlphaIntradayAdapter = {
   },
   toSeries: function toSeries(json, option) {
     return _ConfigBuilder["default"].crSeria({
-      adapter: AlphaIntradayAdapter,
+      adapter: IntradayAdapter,
       json: json,
       option: option,
       type: 'spline'
     });
   }
 };
-var _default = AlphaIntradayAdapter;
+var _default = IntradayAdapter;
 exports["default"] = _default;
-//# sourceMappingURL=AlphaIntradayAdapter.js.map
+//# sourceMappingURL=IntradayAdapter.js.map

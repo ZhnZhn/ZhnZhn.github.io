@@ -13,13 +13,13 @@ const {
 } = AdapterFn;
 
 const _crItemConf = ({id, dataSource, data}, option) => {
-  const { indicator, ticket, dfT, interval } = option;
+  const { indicator, ticket, dfT, dfSubId, interval } = option;
   return indicator === 'TIME_SERIES_DAILY'
      ? {
           _itemKey: id,
           ...crItemConf(option),
           ...crValueConf(data),
-          dfT, interval, indicator, ticket,
+          dfT, dfSubId, interval, indicator, ticket,
           dataSource
        }
     : void 0;

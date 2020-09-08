@@ -64,8 +64,8 @@ var RouterAdapter = (0, _extends2["default"])({
   StatUk: _StatUk["default"]
 }, _StatNorway["default"], {
   StatSweden: _StatSweden["default"],
-  StatFinland: _StatFinland["default"]
-}, _AlphaVantage["default"], {
+  StatFinland: _StatFinland["default"],
+  AlphaVantage: _AlphaVantage["default"],
   Barchart: _Barchart["default"],
   Iex: _Iex["default"],
   Fmp: _Fmp["default"],

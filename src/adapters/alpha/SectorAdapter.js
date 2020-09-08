@@ -138,7 +138,10 @@ const _crTitle = (json) => {
   return `${C.TITLE} ${lr}`;
 }
 
-const AlphaSectorAdapter = {
+const SectorAdapter = {
+  crKey(){
+    return C.ID;
+  },
   toConfig(json, option) {
     const id = C.ID
         , { mRows, yRows } = _crConfig(json)
@@ -166,7 +169,7 @@ const AlphaSectorAdapter = {
           }
         };
     return { config };
-  }   
+  }
 }
 
-export default AlphaSectorAdapter
+export default SectorAdapter

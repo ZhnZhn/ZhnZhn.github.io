@@ -36,7 +36,7 @@ const RouterAdapter = {
   ...StatNorway,
   StatSweden,
   StatFinland,
-  ...AlphaVantage,
+  AlphaVantage,  
   Barchart,
   Iex,
   Fmp,

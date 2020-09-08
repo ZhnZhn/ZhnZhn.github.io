@@ -41,11 +41,10 @@ class AlphaIndicatorDialog extends Component {
   }
 
   _handleLoad = () => {
-    const { loadId, onLoad } = this.props;
+    const { loadId, dfSubId, onLoad } = this.props;
     const option = {
-      loadId: loadId,
-      indicator: 'SECTOR',
-      //value: _value, //for label
+      loadId, dfSubId,
+      indicator: 'SECTOR',      
     };
     onLoad(option)
   }

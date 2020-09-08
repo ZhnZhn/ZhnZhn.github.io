@@ -57,6 +57,9 @@ var crConfigOption = function crConfigOption(_ref2) {
 };
 
 var FundAdapter = {
+  crKey: function crKey(option) {
+    return option._itemKey;
+  },
   toConfig: function toConfig(json, option) {
     var seriaType = option.seriaType,
         seriaColor = option.seriaColor,

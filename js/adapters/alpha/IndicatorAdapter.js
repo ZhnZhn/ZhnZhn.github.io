@@ -216,17 +216,22 @@ var _rSeries = (_rSeries2 = {
   DF: _crSeria
 }, _rSeries2[C.MACD] = _crMacdSeries, _rSeries2[C.STOCH] = _crStochSeries, _rSeries2[C.BBANDS] = _crBbandsSeries, _rSeries2);
 
-var AlphaAdapter = {
+var IndicatorAdapter = {
+  crKey: function crKey(option) {
+    var ticket = option.ticket,
+        value = option.value;
+    return option.chartId = ticket + "-" + value;
+  },
   toConfig: function toConfig(json, option) {
     var ticket = option.ticket,
         value = option.value,
-        _chartId = ticket + "-" + value,
+        chartId = option.chartId,
         _title = ticket + ": " + value,
         _series = this.toSeries(json, option),
         config = (0, _ConfigBuilder["default"])().areaConfig({
       spacingTop: 25
     }).addCaption(_title).clearSeries().addSeries(_series).add({
-      zhConfig: _crZhConfig(_chartId)
+      zhConfig: _crZhConfig(chartId)
     }).toConfig();
 
     return {
@@ -241,6 +246,6 @@ var AlphaAdapter = {
     return _crSeries(json, option);
   }
 };
-var _default = AlphaAdapter;
+var _default = IndicatorAdapter;
 exports["default"] = _default;
-//# sourceMappingURL=AlphaAdapter.js.map
+//# sourceMappingURL=IndicatorAdapter.js.map

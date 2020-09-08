@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Adapter from '../../adapters/alpha/Adapter'
+import SearchAdapter from '../../adapters/alpha/SearchAdapter'
 
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
@@ -27,8 +27,8 @@ class AlphaIntradayDialog extends Component {
       props, { noDate: true }
     )
 
-    this._searchApi = {
-      ...Adapter.Search,
+    this._searchApi = {      
+      ...SearchAdapter,
       crUrlOptions: this._crUrlOptions,
       onError: this.props.onError
     }

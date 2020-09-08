@@ -13,10 +13,7 @@ const LoadConfig = {
   [LT.DBN]: LoadImpl.DbNomics,
 
   [LT.B]: LoadImpl.Barchart,
-  [LT.AL]: LoadImpl.AlphaIndicator,
-  [LT.AL_S]: LoadImpl.AlphaSector,
-  [LT.AL_I]: LoadImpl.AlphaIntraday,
-  [LT.AL_F]: LoadImpl.AlphaFund,
+  [LT.AL]: LoadImpl.AlphaVantage,  
   [LT.IEX]: LoadImpl.Iex,
   [LT.FMP]: LoadImpl.Fmp,
 

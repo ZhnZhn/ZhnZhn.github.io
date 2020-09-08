@@ -73,10 +73,7 @@ export const ChartType = {
 export const LoadType = {
   Q: 'Q',
   B: 'B',
-  AL: 'AL',
-  AL_S: 'AL_S',
-  AL_I: 'AL_I',
-  AL_F: 'AL_F',
+  AL: 'AL',      
   IEX: 'IEX',
   FMP: 'FMP',
   QCT: 'QCT',
