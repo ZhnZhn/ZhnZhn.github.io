@@ -37,8 +37,8 @@ var _assignDf = function _assignDf(option) {
   }),
       _period = getValue(it3),
       _propName = getCaption(it2),
-      _query = _period ? "?period=" + _period : '',
-      _itemUrl = C.URI + "/" + dfT + "/" + _symbol + _query;
+      _query = _period ? "period=" + _period : '',
+      _itemUrl = C.URI + "/" + dfT + "/" + _symbol + "?" + _query;
 
   _assign(option, {
     _symbol: _symbol,

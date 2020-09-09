@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 import MenuTitle from './MenuTitle'
 import MenuItemList from './MenuItemList'
 
+const _fFocus = ref => () => {
+  if (ref && ref.current) {
+    ref.current.focus()
+  }
+}
+
 class MenuPage extends Component {
   /*
   static propTypes = {
@@ -70,16 +76,13 @@ class MenuPage extends Component {
     );
   }
 
-  _focusTitle = () => this._refTitle.current.focus()
-  _focusFirst = () => this._refFirst.current.focus()
-
   _focus = () => {
     const { pageCurrent, pageNumber } = this.props;
     if (pageCurrent === pageNumber){
       if (this._refTitle.current) {
-         setTimeout(this._focusTitle, 1000)
+         setTimeout(_fFocus(this._refTitle), 1000)
       } else if (this._refFirst.current) {
-         setTimeout(this._focusFirst, 1000)
+         setTimeout(_fFocus(this._refFirst), 1000)
       }
     }
  }

@@ -15,6 +15,14 @@ var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
 var _MenuItemList = _interopRequireDefault(require("./MenuItemList"));
 
+var _fFocus = function _fFocus(ref) {
+  return function () {
+    if (ref && ref.current) {
+      ref.current.focus();
+    }
+  };
+};
+
 var MenuPage = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(MenuPage, _Component);
 
@@ -36,14 +44,6 @@ var MenuPage = /*#__PURE__*/function (_Component) {
       onPrevPage(pageNumber);
     };
 
-    _this._focusTitle = function () {
-      return _this._refTitle.current.focus();
-    };
-
-    _this._focusFirst = function () {
-      return _this._refFirst.current.focus();
-    };
-
     _this._focus = function () {
       var _this$props2 = _this.props,
           pageCurrent = _this$props2.pageCurrent,
@@ -51,9 +51,9 @@ var MenuPage = /*#__PURE__*/function (_Component) {
 
       if (pageCurrent === pageNumber) {
         if (_this._refTitle.current) {
-          setTimeout(_this._focusTitle, 1000);
+          setTimeout(_fFocus(_this._refTitle), 1000);
         } else if (_this._refFirst.current) {
-          setTimeout(_this._focusFirst, 1000);
+          setTimeout(_fFocus(_this._refFirst), 1000);
         }
       }
     };
