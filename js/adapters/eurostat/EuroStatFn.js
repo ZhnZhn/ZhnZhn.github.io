@@ -96,6 +96,23 @@ var _crPoint = function _crPoint(x, y, status) {
   return status && status !== ':' && status.length === 1 ? [x, y, status] : [x, y];
 };
 
+var _setZoomMinMaxTo = function _setZoomMinMaxTo(config, isNotZoomToMinMax, min) {
+  if (isNotZoomToMinMax) {
+    config.yAxis.zhNotZoomToMinMax = true;
+  } else {
+    config.yAxis.min = min;
+  }
+};
+
+var _setHeightIfBarTo = function _setHeightIfBarTo(config, seriaType, categories) {
+  if (seriaType === 'BAR_SET' || seriaType === 'BAR_WITH_LABELS') {
+    var height = config.chart.height,
+        _height = 100 + 17 * categories.length;
+
+    config.chart.height = _height < height ? _height : height;
+  }
+};
+
 var EuroStatFn = {
   joinBy: joinBy,
   findMinY: findMinY,
@@ -183,19 +200,18 @@ var EuroStatFn = {
         tooltip = _ref3$tooltip === void 0 ? _Tooltip["default"].category : _ref3$tooltip,
         option = _ref3.option;
     var time = option.time,
-        isNotZoomToMinMax = option.isNotZoomToMinMax;
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
+        seriaType = option.seriaType;
     config.xAxis.categories = categories;
 
-    if (isNotZoomToMinMax) {
-      config.yAxis.zhNotZoomToMinMax = true;
-    } else {
-      config.yAxis.min = min;
-    }
+    _setZoomMinMaxTo(config, isNotZoomToMinMax, min);
 
     config.series[0].name = time;
     config.tooltip = _Chart["default"].fTooltip(tooltip);
     config.zhConfig.itemCaption = EuroStatFn.crItemCaption(option);
     config.zhConfig.itemTime = time;
+
+    _setHeightIfBarTo(config, seriaType, categories);
   },
   colorSeries: function colorSeries(config) {
     _colorSeriaIn(config, C.EU_CODES, COLOR.EU);

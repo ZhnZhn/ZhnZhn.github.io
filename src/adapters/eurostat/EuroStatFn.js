@@ -84,6 +84,22 @@ const _crPoint = (x, y, status) => status
    ? [ x, y, status ]
    : [ x, y ];
 
+const _setZoomMinMaxTo = (config, isNotZoomToMinMax, min) => {
+  if (isNotZoomToMinMax) {
+    config.yAxis.zhNotZoomToMinMax = true
+  } else {
+    config.yAxis.min = min
+  }
+}
+const _setHeightIfBarTo = (config, seriaType, categories) => {
+  if (seriaType === 'BAR_SET' || seriaType === 'BAR_WITH_LABELS'){
+    const { height } = config.chart
+    , _height = 100 + 17*categories.length;
+    config.chart.height = _height < height
+       ? _height : height
+  }
+};
+
 const EuroStatFn = {
    joinBy,
    findMinY,
@@ -153,18 +169,17 @@ const EuroStatFn = {
     tooltip=Tooltip.category,
     option
   }){
-    const { time, isNotZoomToMinMax } = option;
+    const { time, isNotZoomToMinMax, seriaType } = option;
     config.xAxis.categories = categories
-    if (isNotZoomToMinMax) {
-      config.yAxis.zhNotZoomToMinMax = true
-    } else {
-      config.yAxis.min = min
-    }
+    _setZoomMinMaxTo(config, isNotZoomToMinMax, min)
+
     config.series[0].name = time
     config.tooltip = Chart.fTooltip(tooltip)
 
     config.zhConfig.itemCaption = EuroStatFn.crItemCaption(option)
     config.zhConfig.itemTime = time
+
+    _setHeightIfBarTo(config, seriaType, categories)
   },
 
   colorSeries(config){
