@@ -40,6 +40,10 @@ var _isFn = function _isFn(fn) {
 
 var _isNaN = Number.isNaN || isNaN;
 
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
+};
+
 var _fnFindIndex = _fnArr["default"].findIndexByProp('x');
 
 var C = {
@@ -149,23 +153,32 @@ var _renderSeriesLabel = function _renderSeriesLabel(_ref2) {
   }).add();
 };
 
-var _updateYAxisMin = function _updateYAxisMin(_ref3) {
-  var _options$yAxis, _options$yAxis$, _chart$yAxis;
+var _updateYAxisMinMax = function _updateYAxisMinMax(_ref3) {
+  var _chart$yAxis;
 
   var hasSecondYAxis = _ref3.hasSecondYAxis,
       series = _ref3.series,
       options = _ref3.options,
       chart = _ref3.chart;
 
-  var minY = series == null ? void 0 : series.minY,
-      min = options == null ? void 0 : (_options$yAxis = options.yAxis) == null ? void 0 : (_options$yAxis$ = _options$yAxis[0]) == null ? void 0 : _options$yAxis$.min,
-      _yAxis = chart == null ? void 0 : (_chart$yAxis = chart.yAxis) == null ? void 0 : _chart$yAxis[0];
+  var _yAxis = chart == null ? void 0 : (_chart$yAxis = chart.yAxis) == null ? void 0 : _chart$yAxis[0];
 
-  if (!hasSecondYAxis && minY !== undefined && min > minY && _isFn(_yAxis == null ? void 0 : _yAxis.update)) {
-    _yAxis.update({
-      min: minY,
-      startOnTick: true
-    });
+  if (!hasSecondYAxis && _isFn(_yAxis == null ? void 0 : _yAxis.update)) {
+    var _options$yAxis;
+
+    var _ref4 = series || {},
+        minY = _ref4.minY,
+        maxY = _ref4.maxY,
+        _optionYAxis = options == null ? void 0 : (_options$yAxis = options.yAxis) == null ? void 0 : _options$yAxis[0],
+        _ref5 = _optionYAxis || {},
+        min = _ref5.min,
+        max = _ref5.max,
+        _min = min > minY ? minY : min,
+        _max = max < maxY ? maxY : max,
+        _minE = _isNumber(_min) ? _min : null,
+        _maxE = _isNumber(_max) ? _max : null;
+
+    _yAxis.setExtremes(_minE, _maxE, true);
   }
 };
 
@@ -210,7 +223,7 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
     options.zhSeries.count += 1;
     options.zhSeries.titleEls.push(textEl);
 
-    _updateYAxisMin({
+    _updateYAxisMinMax({
       hasSecondYAxis: hasSecondYAxis,
       series: series,
       options: options,
@@ -275,12 +288,12 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
       : dateFormat('%H:%M, %A, %b %d, %Y', mls);
   },
   */
-  setMinMaxPlotLines: function setMinMaxPlotLines(_ref4) {
-    var plotLines = _ref4.plotLines,
-        min = _ref4.min,
-        max = _ref4.max,
-        value = _ref4.value,
-        isDrawDeltaExtrems = _ref4.isDrawDeltaExtrems;
+  setMinMaxPlotLines: function setMinMaxPlotLines(_ref6) {
+    var plotLines = _ref6.plotLines,
+        min = _ref6.min,
+        max = _ref6.max,
+        value = _ref6.value,
+        isDrawDeltaExtrems = _ref6.isDrawDeltaExtrems;
 
     if (isDrawDeltaExtrems) {
       ChartFn.setPlotLinesDeltas({
@@ -297,10 +310,10 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
       });
     }
   },
-  setPlotLinesMinMax: function setPlotLinesMinMax(_ref5) {
-    var plotLines = _ref5.plotLines,
-        min = _ref5.min,
-        max = _ref5.max;
+  setPlotLinesMinMax: function setPlotLinesMinMax(_ref7) {
+    var plotLines = _ref7.plotLines,
+        min = _ref7.min,
+        max = _ref7.max;
 
     if (max > Number.NEGATIVE_INFINITY) {
       _setPlotLine(plotLines[0], max);
@@ -310,11 +323,11 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
       _setPlotLine(plotLines[1], min);
     }
   },
-  setPlotLinesDeltas: function setPlotLinesDeltas(_ref6) {
-    var plotLines = _ref6.plotLines,
-        min = _ref6.min,
-        max = _ref6.max,
-        value = _ref6.value;
+  setPlotLinesDeltas: function setPlotLinesDeltas(_ref8) {
+    var plotLines = _ref8.plotLines,
+        min = _ref8.min,
+        max = _ref8.max,
+        value = _ref8.value;
 
     var _bMax = max !== Number.NEGATIVE_INFINITY ? (0, _big["default"])(max) : (0, _big["default"])(0),
         _bMin = min !== Number.POSITIVE_INFINITY ? (0, _big["default"])(min) : (0, _big["default"])(0),
@@ -336,9 +349,9 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
 
     _setPlotLine(plotLines[1], _minPoint, _deltaMin);
   },
-  calcMinY: function calcMinY(_ref7) {
-    var min = _ref7.min,
-        max = _ref7.max;
+  calcMinY: function calcMinY(_ref9) {
+    var min = _ref9.min,
+        max = _ref9.max;
     return max > Number.NEGATIVE_INFINITY && min < Number.POSITIVE_INFINITY ? min - (max - min) * 1 / 6 : void 0;
   },
   setYToPoints: function setYToPoints(data, y) {

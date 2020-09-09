@@ -26,6 +26,8 @@ const {
 const dateFormat = Highcharts.dateFormat;
 const _isFn = fn => typeof fn === 'function';
 const _isNaN = Number.isNaN || isNaN;
+const _isNumber = n => typeof n === 'number'
+  && n-n===0;
 const _fnFindIndex = fnArr.findIndexByProp('x');
 
 
@@ -113,16 +115,20 @@ const _renderSeriesLabel = ({chart, options, series, label='', color }) => {
     .add();
 };
 
-const _updateYAxisMin = ({ hasSecondYAxis, series, options, chart }) => {
-  const minY = series?.minY
-  , min = options?.yAxis?.[0]?.min
-  , _yAxis = chart?.yAxis?.[0];
-  if ( !hasSecondYAxis && (minY !== undefined)
-       && min>minY && _isFn(_yAxis?.update)){
-    _yAxis.update({ min: minY, startOnTick: true });
-  }
-};
 
+const _updateYAxisMinMax = ({ hasSecondYAxis, series, options, chart }) => {
+  const _yAxis = chart?.yAxis?.[0];
+  if (!hasSecondYAxis && _isFn(_yAxis?.update)) {
+    const { minY, maxY } = series || {}
+    , _optionYAxis = options?.yAxis?.[0]
+    , { min, max } = _optionYAxis || {}
+    , _min = min>minY ? minY : min
+    , _max = max<maxY ? maxY : max
+    , _minE = _isNumber(_min) ? _min : null
+    , _maxE = _isNumber(_max) ? _max : null;
+    _yAxis.setExtremes(_minE, _maxE, true)
+  }
+}
 
 const _formatNumber = n => formatAllNumber(toFixedNumber(n));
 const _setPlotLine = (plotLine, value, delta='') => {
@@ -139,20 +145,20 @@ const ChartFn = {
 
   addSeriaWithRenderLabel(props){
     const {
-            chart, series, label, color, hasSecondYAxis
-          } = props
-        ,  options = _initOptionsZhSeries(chart)
-        , _color = _addSeries({
-            chart, series, label, hasSecondYAxis
-          })
-        , textEl = _renderSeriesLabel({
-            chart, options, series, label,
-            color: color || _color
-          });
+        chart, series, label, color, hasSecondYAxis
+      } = props
+    ,  options = _initOptionsZhSeries(chart)
+    , _color = _addSeries({
+        chart, series, label, hasSecondYAxis
+      })
+    , textEl = _renderSeriesLabel({
+        chart, options, series, label,
+        color: color || _color
+      });
     options.zhSeries.count +=1
     options.zhSeries.titleEls.push(textEl)
 
-    _updateYAxisMin({ hasSecondYAxis, series, options, chart })
+    _updateYAxisMinMax({ hasSecondYAxis, series, options, chart })
   },
 
   zoomIndicatorCharts(event){
