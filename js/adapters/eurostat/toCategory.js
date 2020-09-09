@@ -17,6 +17,12 @@ var addToCategoryConfig = _EuroStatFn["default"].addToCategoryConfig,
     findMinY = _EuroStatFn["default"].findMinY,
     crCategoryTooltip = _EuroStatFn["default"].crCategoryTooltip;
 
+var _filterZeroIf = function _filterZeroIf(data, is) {
+  return is ? data.map(function (value) {
+    return value === 0 ? null : value;
+  }) : data;
+};
+
 var _crScatterProps = function _crScatterProps(seriaColor) {
   return {
     type: 'scatter',
@@ -51,21 +57,22 @@ var toCategory = {
   createSeria: function createSeria(json, option, chart) {
     var categories = chart.options.xAxis[0].categories;
 
-    var _option$zhMapSlice = option.zhMapSlice,
+    var isFilterZero = option.isFilterZero,
+        _option$zhMapSlice = option.zhMapSlice,
         configSlice = _option$zhMapSlice === void 0 ? {} : _option$zhMapSlice,
         time = option.time,
         seriaColor = option.seriaColor,
         seriaType = option.seriaType,
-        _name = configSlice.time || time,
         data = _JsonStatFn["default"].trJsonToSeria(json, configSlice, categories),
+        _data = _filterZeroIf(data, isFilterZero),
         _seriaProps = seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
 
     return (0, _extends2["default"])({
       zhValueText: 'Value',
       minY: findMinY(data),
-      name: _name,
+      name: configSlice.time || time,
       color: seriaColor,
-      data: data,
+      data: _data,
       tooltip: crCategoryTooltip()
     }, _seriaProps);
   }

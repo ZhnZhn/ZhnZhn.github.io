@@ -9,6 +9,10 @@ const {
   crCategoryTooltip
 } = EuroStatFn
 
+const _filterZeroIf = (data, is) => is
+  ? data.map(value => value === 0 ? null : value)
+  : data;
+
 const _crScatterProps = (seriaColor)  => ({
   type: 'scatter',
   marker: {
@@ -34,22 +38,23 @@ const toCategory = {
   createSeria: (json, option, chart) => {
     const categories = chart.options.xAxis[0].categories;
     const {
-            zhMapSlice:configSlice={},
-            time,
-            seriaColor,
-            seriaType
-          } = option
-        , _name = configSlice.time || time
-        , data = JsonStatFn.trJsonToSeria(json, configSlice, categories)
-        , _seriaProps = seriaType === 'DOT_SET'
-            ? _crScatterProps(seriaColor)
-            : void 0;
+        isFilterZero,
+        zhMapSlice:configSlice={},
+        time,
+        seriaColor,
+        seriaType
+      } = option
+    , data = JsonStatFn.trJsonToSeria(json, configSlice, categories)
+    , _data = _filterZeroIf(data, isFilterZero)
+    , _seriaProps = seriaType === 'DOT_SET'
+        ? _crScatterProps(seriaColor)
+        : void 0;
     return {
       zhValueText: 'Value',
       minY: findMinY(data),
-      name: _name,
+      name: configSlice.time || time,
       color: seriaColor,
-      data: data,
+      data: _data,
       tooltip: crCategoryTooltip(),
       ..._seriaProps
     };
