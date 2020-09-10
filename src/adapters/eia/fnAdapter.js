@@ -1,8 +1,3 @@
-import AdapterFn from '../AdapterFn'
-
-const {
-  valueMoving
-} = AdapterFn;
 
 const C = {
   CHART_URL: "https://www.eia.gov/opendata/embed.php?type=chart&series_id="
@@ -60,7 +55,7 @@ const _getCaption = (obj) => {
     : '';
 };
 
-const fnAdapter = {  
+const fnAdapter = {
   /* [ ["201806", 1000], ... ] */
   crTitle: (option) => {
     const {
@@ -85,9 +80,8 @@ const fnAdapter = {
     .reverse();
   },
 
-  crConfigOption: ({ json, option, data }) => ({
+  crConfigOption: (json, option) => ({
     zhConfig: _crZhConfig(json, option),
-    valueMoving: valueMoving(data),
     info: _crInfo(json)
   })
 }

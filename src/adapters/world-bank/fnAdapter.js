@@ -1,21 +1,19 @@
 import AdapterFn from '../AdapterFn'
 
-const {
-  ymdToUTC,
-  valueMoving
-} = AdapterFn;
+const { ymdToUTC } = AdapterFn
+, _isArr = Array.isArray
 
 const _crInfo = ({ title, subtitle, two }) => ({
   name: `${title}: ${subtitle} (${two})`
 });
 
-const fnAdapter = {    
+const fnAdapter = {
   crId: (option) => {
-    const { one='', two='' } = option;
-    return `${one}_${two}`;
+    const { one, two } = option;
+    return `${one || ''}_${two || ''}`;
   },
   crData: (arrIn) => {
-    if (!Array.isArray(arrIn)) {
+    if (!_isArr(arrIn)) {
       return [];
     }
     const d = [];
@@ -30,9 +28,9 @@ const fnAdapter = {
     return d.reverse();
   },
 
-  crConfigOptions: (option, data) => {
+  crConfigOptions: (option) => {
     const { title, linkItem, dataSource } = option
-        , _id = fnAdapter.crId(option);
+    , _id = fnAdapter.crId(option);
     return {
       info: _crInfo(option),
       zhConfig: {
@@ -42,8 +40,7 @@ const fnAdapter = {
         linkFn: 'DF',
         item: { ...linkItem },
         dataSource
-      },
-      valueMoving: valueMoving(data)
+      }
     };
   }
 };

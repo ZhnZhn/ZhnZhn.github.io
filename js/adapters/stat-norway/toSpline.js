@@ -5,18 +5,16 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _fnUtil = _interopRequireDefault(require("./fnUtil"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var toUTC = _fnUtil["default"].toUTC,
-    compose = _fnUtil["default"].compose;
-var crDsValuesTimes = _fnAdapter["default"].crDsValuesTimes,
-    crChartOption = _fnAdapter["default"].crChartOption;
+    compose = _fnUtil["default"].compose,
+    crDsValuesTimes = _fnAdapter["default"].crDsValuesTimes,
+    crConfOption = _fnAdapter["default"].crConfOption;
 var _isArr = Array.isArray;
 
 var _filterLeadingNulls = function _filterLeadingNulls(data) {
@@ -58,27 +56,18 @@ var _toData = function _toData(values, times) {
 
 var toArea = {
   crConfig: function crConfig(json, option) {
-    var _option$title = option.title,
-        title = _option$title === void 0 ? '' : _option$title,
-        subtitle = option.subtitle,
-        seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        _crDsValuesTimes = crDsValuesTimes(json, option),
+    var _crDsValuesTimes = crDsValuesTimes(json, option),
         ds = _crDsValuesTimes.ds,
         values = _crDsValuesTimes.values,
         times = _crDsValuesTimes.times,
         data = _toData(values, times),
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth,
-      data: data
-    }).toSeria();
+        confOption = crConfOption(ds, option);
 
-    return (0, _ConfigBuilder["default"])().areaConfig({
-      spacingTop: 25
-    }).addCaption(title, subtitle).clearSeries().addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, crChartOption(ds, data, option))).toConfig();
+    return (0, _crConfigType["default"])({
+      option: option,
+      data: data,
+      confOption: confOption
+    });
   }
 };
 var _default = toArea;

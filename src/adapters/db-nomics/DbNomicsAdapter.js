@@ -1,41 +1,27 @@
-import Builder from '../../charts/ConfigBuilder';
+import crConfigType1 from '../../charts/crConfigType1'
+import fnAdapter from './fnAdapter'
 
-import fnAdapter from './fnAdapter';
-
-const {
+const { Builder } = crConfigType1
+, {
   crData,
   crTitle,
-  crConfigOption  
-} = fnAdapter;
+  crConfigOption
+} = fnAdapter
+, _assign = Object.assign;
 
 const DbNomicsAdapter = {
   toConfig(json, option){
-    const {
-      fromDate,
-      seriaType,
-      seriaColor,
-      seriaWidth
-    } = option
-    , { title, subtitle } = crTitle(option, json)
+    const { fromDate } = option
     , data = crData(json, fromDate)
-    , seria = Builder()
-        .splineSeria({
-           seriaType,
-           seriaColor,
-           seriaWidth,
-           data
-        })
-        .toSeria()
-    , config = Builder()
-       .area2Config(title, subtitle)
-       .addSeries(seria)
-       .addMinMax(data, option)
-       .add({
-        ...crConfigOption({ json, option, data })
-       })
-       .toConfig();
+    , confOption = crConfigOption(json, option);
 
-    return { config };
+    _assign(option, crTitle(option, json))
+
+    return {
+      config: crConfigType1({
+        option, data, confOption
+      })
+     };
   },
 
   toSeries(json, option){

@@ -3,25 +3,24 @@ import AdapterFn from '../AdapterFn'
 
 const {
   getValue,
-  valueMoving,
   crVolumePoint,
   roundBy
 } = AdapterFn;
 
 const _crZhConfig = ({
-  title,
+  itemCaption,
   dataSource,
   value,
   linkFn
 }) => ({
     id: value, key: value,
-    itemCaption: title,
+    itemCaption,
     linkFn, item: value,
     dataSource
 });
 
-const _crInfo = ({ title }) => ({
-  name: title
+const _crInfo = ({ itemCaption }) => ({
+  name: itemCaption
 });
 
 const _isNumber = v => typeof v === 'number';
@@ -65,7 +64,7 @@ const _addHLPointTo = (arr, d, p) => {
 };
 
 const fnAdapter = {
-  getValue,  
+  getValue,
 
   crData: (json) => {
     const data = []
@@ -96,9 +95,8 @@ const fnAdapter = {
     };
   },
 
-  crConfigOption: ({ option, data }) => ({
+  crConfigOption: (option) => ({
     zhConfig: _crZhConfig(option),
-    valueMoving: valueMoving(data),
     info: _crInfo(option)
   })
 };

@@ -8,19 +8,18 @@ exports["default"] = void 0;
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var getValue = _AdapterFn["default"].getValue,
-    valueMoving = _AdapterFn["default"].valueMoving,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
     roundBy = _AdapterFn["default"].roundBy;
 
 var _crZhConfig = function _crZhConfig(_ref) {
-  var title = _ref.title,
+  var itemCaption = _ref.itemCaption,
       dataSource = _ref.dataSource,
       value = _ref.value,
       linkFn = _ref.linkFn;
   return {
     id: value,
     key: value,
-    itemCaption: title,
+    itemCaption: itemCaption,
     linkFn: linkFn,
     item: value,
     dataSource: dataSource
@@ -28,9 +27,9 @@ var _crZhConfig = function _crZhConfig(_ref) {
 };
 
 var _crInfo = function _crInfo(_ref2) {
-  var title = _ref2.title;
+  var itemCaption = _ref2.itemCaption;
   return {
-    name: title
+    name: itemCaption
   };
 };
 
@@ -111,12 +110,9 @@ var fnAdapter = {
       dHL: dHL
     };
   },
-  crConfigOption: function crConfigOption(_ref3) {
-    var option = _ref3.option,
-        data = _ref3.data;
+  crConfigOption: function crConfigOption(option) {
     return {
       zhConfig: _crZhConfig(option),
-      valueMoving: valueMoving(data),
       info: _crInfo(option)
     };
   }

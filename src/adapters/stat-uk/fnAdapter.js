@@ -4,8 +4,7 @@ const {
   getValue,
   crError,
   ymdToUTC,
-  compareByDate,
-  valueMoving,
+  compareByDate,  
   joinBy,
   crItemLink
 } = AdapterFn
@@ -109,9 +108,8 @@ const fnAdapter = {
     return _data.sort(compareByDate);
   },
 
-  crConfigOption: ({ json, option, data }) => ({
+  crConfigOption: (json, option) => ({
     zhConfig: _crZhConfig(option),
-    valueMoving: valueMoving(data),
     info: _crInfo(json, option)
   })
 }

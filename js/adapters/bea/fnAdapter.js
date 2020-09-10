@@ -8,8 +8,7 @@ exports["default"] = void 0;
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var crId = _AdapterFn["default"].crId,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    ymdToUTC = _AdapterFn["default"].ymdToUTC;
 
 var _crName = function _crName(Results) {
   var _Results$Statistic = Results.Statistic,
@@ -41,13 +40,13 @@ var _crInfo = function _crInfo(Results) {
 };
 
 var _crZhConfig = function _crZhConfig(option) {
-  var title = option.title,
+  var itemCaption = option.itemCaption,
       dataSource = option.dataSource,
       id = crId();
   return {
     id: id,
     key: id,
-    itemCaption: title,
+    itemCaption: itemCaption,
     dataSource: dataSource
   };
 };
@@ -101,13 +100,9 @@ var fnAdapter = {
     });
     return d;
   },
-  crConfigOption: function crConfigOption(_ref) {
-    var option = _ref.option,
-        Results = _ref.Results,
-        data = _ref.data;
+  crConfigOption: function crConfigOption(Results, option) {
     return {
       zhConfig: _crZhConfig(option),
-      valueMoving: valueMoving(data),
       info: _crInfo(Results)
     };
   }

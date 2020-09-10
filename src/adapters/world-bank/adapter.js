@@ -1,32 +1,25 @@
-import Builder from '../../charts/ConfigBuilder'
+import crConfigType1 from '../../charts/crConfigType1'
 import fnAdapter from './fnAdapter'
 
-const {
-  crId, crData, crConfigOptions
+const { Builder } = crConfigType1
+, {
+  crId,
+  crData,
+  crConfigOptions
 } = fnAdapter;
 
 const adapter = {
   crKey: crId,
 
   toConfig(json, option){
-    const {
-      title, subtitle
-    } = option
-    , data = crData(json[1])
-    , seria = Builder()
-       .splineSeria({ data })
-       .toSeria()
-    , config = Builder()
-       .areaConfig({ spacingTop: 25 })
-       .addCaption(title, subtitle)
-       .addSeries(seria)
-       .addMinMax(data, option)
-       .add({
-          ...crConfigOptions(option, data)
-       })
-       .toConfig();
+    const data = crData(json[1])
+    , confOption = crConfigOptions(option, data);
 
-    return { config };
+    return {
+      config: crConfigType1({
+        option, data, confOption
+      })
+     };
   },
 
   toSeries(json, option){

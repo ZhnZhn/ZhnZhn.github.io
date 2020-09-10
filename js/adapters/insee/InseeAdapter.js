@@ -5,18 +5,17 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _fnDescr = _interopRequireDefault(require("./fnDescr"));
 
-var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+var Builder = _crConfigType["default"].Builder,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
     compareByDate = _AdapterFn["default"].compareByDate,
-    valueMoving = _AdapterFn["default"].valueMoving,
-    findMinY = _AdapterFn["default"].findMinY;
-
-var _parser = new window.DOMParser(); //€
+    findMinY = _AdapterFn["default"].findMinY,
+    _parser = new window.DOMParser(); //€
 
 
 var _crZhConfig = function _crZhConfig(id) {
@@ -36,17 +35,19 @@ var _toData = function _toData(str) {
   var i = 0,
       max = series.length,
       _seria,
+      _getAttr,
       _v;
 
   for (i; i < max; i++) {
     _seria = series[i];
+    _getAttr = _seria.getAttribute.bind(_seria);
     info.push({
-      id: _seria.getAttribute('IDBANK'),
-      title: _seria.getAttribute('TITLE_EN'),
-      frequency: _seria.getAttribute('FREQ'),
-      updatedOn: _seria.getAttribute('LAST_UPDATE'),
-      unitMeasure: _seria.getAttribute('UNIT_MEASURE'),
-      unitMult: _seria.getAttribute('UNIT_MULT')
+      id: _getAttr('IDBANK'),
+      title: _getAttr('TITLE_EN'),
+      frequency: _getAttr('FREQ'),
+      updatedOn: _getAttr('LAST_UPDATE'),
+      unitMeasure: _getAttr('UNIT_MEASURE'),
+      unitMult: _getAttr('UNIT_MULT')
     });
 
     _seria.childNodes.forEach(function (node) {
@@ -64,24 +65,28 @@ var _toData = function _toData(str) {
   };
 };
 
+var _crConfigOption = function _crConfigOption(_ref, info) {
+  var value = _ref.value,
+      title = _ref.title;
+  return {
+    info: _fnDescr["default"].toInfo(info, title),
+    zhConfig: _crZhConfig(value)
+  };
+};
+
 var InseeAdapter = {
   toConfig: function toConfig(str, option) {
-    var value = option.value,
-        title = option.title,
-        subtitle = option.subtitle,
-        _toData2 = _toData(str),
+    var _toData2 = _toData(str),
         data = _toData2.data,
         info = _toData2.info,
-        config = (0, _ConfigBuilder["default"])().areaConfig({
-      spacingTop: 25
-    }).addCaption(title, subtitle).addPoints(value, data).addMinMax(data, option).add({
-      info: _fnDescr["default"].toInfo(info, title),
-      valueMoving: valueMoving(data),
-      zhConfig: _crZhConfig(value)
-    }).toConfig();
+        confOption = _crConfigOption(option, info);
 
     return {
-      config: config
+      config: (0, _crConfigType["default"])({
+        option: option,
+        data: data,
+        confOption: confOption
+      })
     };
   },
   toSeries: function toSeries(str, option) {
@@ -92,7 +97,7 @@ var InseeAdapter = {
         _toData3 = _toData(str),
         data = _toData3.data;
 
-    return (0, _ConfigBuilder["default"])().initSeria({
+    return Builder().initSeria({
       minY: findMinY
     }).addPoints(value, data, _text).toSeria();
   }

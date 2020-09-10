@@ -2,13 +2,12 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  valueMoving,
   ymdToUTC,
   joinBy
 } = AdapterFn;
 
 const _crZhConfig = ({
-  title,
+  itemCaption,
   dataSource, dfTitle,
   value,
   linkItem
@@ -16,15 +15,15 @@ const _crZhConfig = ({
   id: value, key: value,
   item: { ...linkItem },
   linkFn: 'DF',
-  itemCaption: title,
+  itemCaption,
   dataSource: joinBy(": ", dataSource, dfTitle)
 });
 
-const _crInfo = ({ title }) => ({
-  name: title
+const _crInfo = ({ itemCaption }) => ({
+  name: itemCaption
 });
 
-const fnAdapter = {  
+const fnAdapter = {
   crTitle: ({ dfTitle, item={}, subtitle }) => dfTitle
     ? joinBy(', ', dfTitle, item.t)
     : subtitle,
@@ -45,9 +44,8 @@ const fnAdapter = {
     return _data.reverse();
   },
 
-  crConfigOption: ({ json, option, data }) => ({
+  crConfigOption: (option) => ({
     zhConfig: _crZhConfig(option),
-    valueMoving: valueMoving(data),
     info: _crInfo(option)
   })
 

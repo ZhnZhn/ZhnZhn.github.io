@@ -208,12 +208,16 @@ var fnAdapter = {
       dataSource: _crDataSource(option)
     };
   },
-  crChartOption: function crChartOption(ds, data, option) {
+  crConfOption: function crConfOption(ds, option) {
     return {
       info: fnAdapter.crInfo(ds, option),
-      valueMoving: fnAdapter.crValueMoving(data),
       zhConfig: fnAdapter.crZhConfig(option)
     };
+  },
+  crChartOption: function crChartOption(ds, data, option) {
+    return (0, _extends2["default"])({
+      valueMoving: fnAdapter.crValueMoving(data)
+    }, fnAdapter.crConfOption(ds, option));
   }
 };
 var _default = fnAdapter;

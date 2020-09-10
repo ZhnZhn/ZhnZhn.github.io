@@ -2,8 +2,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
   ymdToUTC,
-  crVolumePoint,
-  valueMoving,
+  crVolumePoint,  
   getValue,
   joinBy,
   toUpperCaseFirst
@@ -24,7 +23,7 @@ const _crInfo = ({ title }) => ({
   name: title
 });
 
-const fnAdapter = {  
+const fnAdapter = {
   getValue,
   joinBy,
   toUpperCaseFirst,
@@ -65,9 +64,8 @@ const fnAdapter = {
     };
   },
 
-  crConfigOption: ({ json, option, data }) => ({
+  crConfigOption: (option) => ({
       zhConfig: _crZhConfig(option),
-      valueMoving: valueMoving(data),
       info: _crInfo(option)
     })
 }

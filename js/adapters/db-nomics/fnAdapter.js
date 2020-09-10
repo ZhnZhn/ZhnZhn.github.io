@@ -16,7 +16,6 @@ var crError = _AdapterFn["default"].crError,
     crItemConf = _AdapterFn["default"].crItemConf,
     joinBy = _AdapterFn["default"].joinBy,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving,
     getValue = _AdapterFn["default"].getValue;
 var getPeriodAndValue = _fnSelector["default"].getPeriodAndValue,
     getTitle = _fnSelector["default"].getTitle,
@@ -143,13 +142,9 @@ var fnAdapter = {
 
     return data;
   },
-  crConfigOption: function crConfigOption(_ref3) {
-    var json = _ref3.json,
-        option = _ref3.option,
-        data = _ref3.data;
+  crConfigOption: function crConfigOption(json, option) {
     return {
       zhConfig: _crZhConfig(option),
-      valueMoving: valueMoving(data),
       info: _crInfo(json, option)
     };
   }

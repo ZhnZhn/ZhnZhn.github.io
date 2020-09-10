@@ -1,8 +1,8 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  isNumberOrNull, ymdToUTC,
-  valueMoving
+  isNumberOrNull,
+  ymdToUTC,
 } = AdapterFn;
 
 const FRED = 'FRED';
@@ -41,7 +41,7 @@ const _crInfo = ({ title='' }) => ({
   name: title
 });
 
-const fnAdapter = {    
+const fnAdapter = {
   crSubtitle: ({ subtitle='', threeCaption }) => {
     return threeCaption
       ? `${subtitle}, ${threeCaption}`
@@ -63,9 +63,8 @@ const fnAdapter = {
   },
 
 
-  crConfigOption: ({ option, data }) => ({
+  crConfigOption: (option) => ({
     zhConfig: _crZhConfig(option),
-    valueMoving: valueMoving(data),
     info: _crInfo(option)
   })
 

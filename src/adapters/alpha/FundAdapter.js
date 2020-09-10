@@ -1,15 +1,14 @@
+import crConfigType1 from '../../charts/crConfigType1'
 import fnAdapter from './fnAdapter'
-import Builder from '../../charts/ConfigBuilder'
 
-const {
+const { Builder } = crConfigType1
+, {
   ymdToUTC,
-  compareByDate,
-  valueMoving
+  compareByDate
 } = fnAdapter
+, _isNan = Number.isNaN || isNaN;
 
-const _isNan = Number.isNaN || isNaN;
-
-const crData = (json, option) => {
+const _crData = (json, option) => {
   const { dfItem, dfPeriod } = option
   , _pnReport = dfPeriod === 'A'
        ? 'annualReports'
@@ -36,8 +35,8 @@ const _crZhConfig = ({
   dataSource
 });
 
-const crConfigOption = ({option, data}) => ({
-  valueMoving: valueMoving(data),
+const _crConfigOption = (option) => ({
+  //valueMoving: valueMoving(data),
   zhConfig: _crZhConfig(option)
 })
 
@@ -46,31 +45,13 @@ const FundAdapter = {
     return option._itemKey;
   },
   toConfig(json, option){
-    const {
-      seriaType,
-      seriaColor,
-      seriaWidth,
-      title, subtitle
-    } = option
-    , data = crData(json, option)
-    , seria = Builder()
-        .splineSeria({
-           seriaType,
-           seriaColor,
-           seriaWidth,
-           data
-        })
-        .toSeria()
-    , config = Builder()
-        .area2Config(title, subtitle)
-        .addSeries(seria)
-        .addMinMax(data, option)
-        .add({
-          ...crConfigOption({ option, data })
-        })
-        .toConfig();
-
-    return { config };
+    const data = _crData(json, option)
+    , confOption = _crConfigOption(option);
+    return {
+      config: crConfigType1({
+        option, data, confOption,
+      })
+    };
   },
   toSeries(json, option){
     return Builder.crSeria({

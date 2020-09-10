@@ -5,44 +5,34 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crCaption = _fnAdapter["default"].crCaption,
+var Builder = _crConfigType["default"].Builder,
+    crCaption = _fnAdapter["default"].crCaption,
     crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    _assign = Object.assign;
 var toChart = {
   toConfig: function toConfig(json, option) {
     var dfPn = option.dfPn,
         _propName = option._propName,
-        seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        _crCaption = crCaption(option),
-        title = _crCaption.title,
-        subtitle = _crCaption.subtitle,
         data = crData(json[dfPn], _propName),
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth,
-      data: data
-    }).toSeria(),
-        config = (0, _ConfigBuilder["default"])().area2Config(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, crConfigOption({
-      json: json,
-      option: option,
-      data: data
-    }))).toConfig();
+        confOption = crConfigOption(option);
+
+    _assign(option, crCaption(option));
 
     return {
-      config: config
+      config: (0, _crConfigType["default"])({
+        option: option,
+        data: data,
+        confOption: confOption
+      })
     };
   },
   toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+    return Builder.crSeria({
       adapter: toChart,
       json: json,
       option: option

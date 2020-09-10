@@ -8,8 +8,7 @@ exports["default"] = void 0;
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var isNumberOrNull = _AdapterFn["default"].isNumberOrNull,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    ymdToUTC = _AdapterFn["default"].ymdToUTC;
 var FRED = 'FRED';
 
 var _crId = function _crId(option) {
@@ -83,12 +82,9 @@ var fnAdapter = {
     });
     return d.reverse();
   },
-  crConfigOption: function crConfigOption(_ref3) {
-    var option = _ref3.option,
-        data = _ref3.data;
+  crConfigOption: function crConfigOption(option) {
     return {
       zhConfig: _crZhConfig(option),
-      valueMoving: valueMoving(data),
       info: _crInfo(option)
     };
   }

@@ -6,8 +6,7 @@ const {
   getCaption,
   getValue,
   joinBy,
-  ymdToUTC,
-  valueMoving,
+  ymdToUTC,  
   crItemLink,
   compareByDate,
   crItemConf,
@@ -81,8 +80,7 @@ const fnAdapter = {
     )
   }),
 
-  crConfigOption: ({ json, option, data }) => ({
-    valueMoving: valueMoving(data),
+  crConfigOption: (option) => ({
     info: _crInfo(option),
     zhConfig: _crZhConfig(option)
   }),

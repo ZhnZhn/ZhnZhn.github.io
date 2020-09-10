@@ -1,42 +1,27 @@
-import Builder from '../../charts/ConfigBuilder';
-
+import crConfigType1 from '../../charts/crConfigType1';
 import fnAdapter from './fnAdapter'
 
-const {
+const { Builder } = crConfigType1
+, {
   crCaption,
   crData,
   crConfigOption
-} = fnAdapter;
+} = fnAdapter
+, _assign = Object.assign;
 
 const toChart = {
   toConfig(json, option){
-    const {
-      dfPn,
-      _propName,
-      seriaType,
-      seriaColor,
-      seriaWidth
-    } = option
-    , { title, subtitle } = crCaption(option)
+    const { dfPn, _propName } = option
     , data = crData(json[dfPn], _propName)
-    , seria = Builder()
-        .splineSeria({
-           seriaType,
-           seriaColor,
-           seriaWidth,
-           data
-        })
-        .toSeria()
-    , config = Builder()
-        .area2Config(title, subtitle)
-        .addSeries(seria)
-        .addMinMax(data, option)
-        .add({
-          ...crConfigOption({ json, option, data })
-        })
-        .toConfig();
+    , confOption = crConfigOption(option);
 
-    return { config };
+    _assign(option, crCaption(option))
+
+    return {
+      config:  crConfigType1({
+         option, data, confOption
+      })
+    };
   },
 
   toSeries(json, option){

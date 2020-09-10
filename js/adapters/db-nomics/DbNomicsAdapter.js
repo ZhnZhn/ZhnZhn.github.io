@@ -5,43 +5,33 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crData = _fnAdapter["default"].crData,
+var Builder = _crConfigType["default"].Builder,
+    crData = _fnAdapter["default"].crData,
     crTitle = _fnAdapter["default"].crTitle,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    _assign = Object.assign;
 var DbNomicsAdapter = {
   toConfig: function toConfig(json, option) {
     var fromDate = option.fromDate,
-        seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        _crTitle = crTitle(option, json),
-        title = _crTitle.title,
-        subtitle = _crTitle.subtitle,
         data = crData(json, fromDate),
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth,
-      data: data
-    }).toSeria(),
-        config = (0, _ConfigBuilder["default"])().area2Config(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, crConfigOption({
-      json: json,
-      option: option,
-      data: data
-    }))).toConfig();
+        confOption = crConfigOption(json, option);
+
+    _assign(option, crTitle(option, json));
 
     return {
-      config: config
+      config: (0, _crConfigType["default"])({
+        option: option,
+        data: data,
+        confOption: confOption
+      })
     };
   },
   toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+    return Builder.crSeria({
       adapter: DbNomicsAdapter,
       json: json,
       option: option

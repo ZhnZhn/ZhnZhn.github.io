@@ -3,8 +3,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
   crId,
-  ymdToUTC,
-  valueMoving
+  ymdToUTC
 } = AdapterFn;
 
 const _crName = (Results) => {
@@ -26,11 +25,11 @@ const _crInfo = (Results) => ({
 });
 
 const _crZhConfig = (option) => {
-  const { title, dataSource } = option
+  const { itemCaption, dataSource } = option
        , id = crId();
   return {
     id, key: id,
-    itemCaption: title,
+    itemCaption,
     dataSource
   };
 };
@@ -51,7 +50,7 @@ const _crUTC = (item) => {
   return ymdToUTC(Year + md);
 };
 
-const fnAdapter = {  
+const fnAdapter = {
   crData: (Results, option) => {
     const { dfFilterName, two } = option
         , d = []
@@ -71,9 +70,8 @@ const fnAdapter = {
     return d;
   },
 
-  crConfigOption: ({ option, Results, data }) => ({
+  crConfigOption: (Results, option) => ({
     zhConfig: _crZhConfig(option),
-    valueMoving: valueMoving(data),
     info: _crInfo(Results)
   })
 

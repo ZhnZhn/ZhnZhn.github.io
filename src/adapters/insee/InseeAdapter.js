@@ -1,15 +1,15 @@
+
+import crConfigType1 from '../../charts/crConfigType1'
 import AdapterFn from '../AdapterFn'
-import Builder from '../../charts/ConfigBuilder'
 import fnDescr from './fnDescr'
 
-const {
+const { Builder } = crConfigType1
+, {
   ymdToUTC,
   compareByDate,
-  valueMoving,
   findMinY
 } = AdapterFn
-
-const _parser = new window.DOMParser();
+, _parser = new window.DOMParser();
 
 //€
 
@@ -24,17 +24,18 @@ const _toData = (str) => {
       , series = xml.getElementsByTagName('Series')
       , data = [], info = [];
   let i=0, max = series.length
-  , _seria, _v;
+  , _seria, _getAttr, _v;
 
   for(i; i<max; i++){
     _seria = series[i]
+    _getAttr = _seria.getAttribute.bind(_seria)
     info.push({
-      id: _seria.getAttribute('IDBANK'),
-      title: _seria.getAttribute('TITLE_EN'),
-      frequency: _seria.getAttribute('FREQ'),
-      updatedOn: _seria.getAttribute('LAST_UPDATE'),
-      unitMeasure: _seria.getAttribute('UNIT_MEASURE'),
-      unitMult: _seria.getAttribute('UNIT_MULT')
+      id: _getAttr('IDBANK'),
+      title: _getAttr('TITLE_EN'),
+      frequency: _getAttr('FREQ'),
+      updatedOn: _getAttr('LAST_UPDATE'),
+      unitMeasure: _getAttr('UNIT_MEASURE'),
+      unitMult: _getAttr('UNIT_MULT')
     })
 
     _seria.childNodes.forEach(node => {
@@ -54,23 +55,21 @@ const _toData = (str) => {
   };
 }
 
+const _crConfigOption = ({value, title}, info) => ({
+  info: fnDescr.toInfo(info, title),
+  zhConfig: _crZhConfig(value)
+})
+
 const InseeAdapter = {
   toConfig(str, option) {
-    const { value, title, subtitle } = option
-        , { data, info } = _toData(str)
-        , config = Builder()
-            .areaConfig({ spacingTop: 25 })
-            .addCaption(title, subtitle)
-            .addPoints(value, data)
-            .addMinMax(data, option)
-            .add({
-              info: fnDescr.toInfo(info, title),
-              valueMoving: valueMoving(data),
-              zhConfig: _crZhConfig(value)
-            })
-            .toConfig();
+    const { data, info } = _toData(str)
+    , confOption = _crConfigOption(option, info);
 
-    return { config };
+    return {
+      config: crConfigType1({
+        option, data, confOption
+      })
+     };
   },
 
   toSeries(str, option) {

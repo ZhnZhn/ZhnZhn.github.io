@@ -181,10 +181,14 @@ const fnAdapter = {
     };
   },
 
-  crChartOption: (ds, data, option) => ({
+  crConfOption: (ds, option) => ({
     info: fnAdapter.crInfo(ds, option),
-    valueMoving: fnAdapter.crValueMoving(data),
     zhConfig: fnAdapter.crZhConfig(option)
+  }),
+
+  crChartOption: (ds, data, option) => ({
+    valueMoving: fnAdapter.crValueMoving(data),
+    ...fnAdapter.crConfOption(ds, option)    
   })
 }
 

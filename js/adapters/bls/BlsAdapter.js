@@ -5,35 +5,42 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crTitle = _fnAdapter["default"].crTitle,
+var Builder = _crConfigType["default"].Builder,
+    crTitle = _fnAdapter["default"].crTitle,
     crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    _assign = Object.assign;
+
+var _setCaptionTo = function _setCaptionTo(option) {
+  var title = option.title;
+
+  _assign(option, {
+    itemCaption: title,
+    title: crTitle(option),
+    subtitle: title
+  });
+};
+
 var BlsAdapter = {
   toConfig: function toConfig(json, option) {
-    var title = option.title,
-        _dfTitle = crTitle(option),
-        data = crData(json),
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      data: data
-    }).toSeria(),
-        config = (0, _ConfigBuilder["default"])().area2Config(_dfTitle, title).addMinMax(data, option).addSeries(seria).add((0, _extends2["default"])({}, crConfigOption({
-      json: json,
-      option: option,
-      data: data
-    }))).toConfig();
+    _setCaptionTo(option);
 
+    var data = crData(json),
+        confOption = crConfigOption(option);
     return {
-      config: config
+      config: (0, _crConfigType["default"])({
+        option: option,
+        data: data,
+        confOption: confOption
+      })
     };
   },
   toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+    return Builder.crSeria({
       adapter: BlsAdapter,
       json: json,
       option: option

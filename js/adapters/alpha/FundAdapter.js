@@ -5,19 +5,16 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
-
-var ymdToUTC = _fnAdapter["default"].ymdToUTC,
+var Builder = _crConfigType["default"].Builder,
+    ymdToUTC = _fnAdapter["default"].ymdToUTC,
     compareByDate = _fnAdapter["default"].compareByDate,
-    valueMoving = _fnAdapter["default"].valueMoving;
+    _isNan = Number.isNaN || isNaN;
 
-var _isNan = Number.isNaN || isNaN;
-
-var crData = function crData(json, option) {
+var _crData = function _crData(json, option) {
   var dfItem = option.dfItem,
       dfPeriod = option.dfPeriod,
       _pnReport = dfPeriod === 'A' ? 'annualReports' : 'quarterlyReports',
@@ -47,11 +44,9 @@ var _crZhConfig = function _crZhConfig(_ref) {
   };
 };
 
-var crConfigOption = function crConfigOption(_ref2) {
-  var option = _ref2.option,
-      data = _ref2.data;
+var _crConfigOption = function _crConfigOption(option) {
   return {
-    valueMoving: valueMoving(data),
+    //valueMoving: valueMoving(data),
     zhConfig: _crZhConfig(option)
   };
 };
@@ -61,28 +56,19 @@ var FundAdapter = {
     return option._itemKey;
   },
   toConfig: function toConfig(json, option) {
-    var seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        title = option.title,
-        subtitle = option.subtitle,
-        data = crData(json, option),
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth,
-      data: data
-    }).toSeria(),
-        config = (0, _ConfigBuilder["default"])().area2Config(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, crConfigOption({
-      option: option,
-      data: data
-    }))).toConfig();
+    var data = _crData(json, option),
+        confOption = _crConfigOption(option);
+
     return {
-      config: config
+      config: (0, _crConfigType["default"])({
+        option: option,
+        data: data,
+        confOption: confOption
+      })
     };
   },
   toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+    return Builder.crSeria({
       adapter: FundAdapter,
       json: json,
       option: option,

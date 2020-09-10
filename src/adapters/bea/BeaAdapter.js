@@ -1,30 +1,34 @@
-import Builder from '../../charts/ConfigBuilder';
-
+import crConfigType1 from '../../charts/crConfigType1';
 import fnAdapter from './fnAdapter';
 
-const {
+const { Builder } = crConfigType1
+, {
   crData,
-  crConfigOption  
-} = fnAdapter;
+  crConfigOption
+} = fnAdapter
+, _assign = Object.assign;
+
+const _setCaptionTo = option => {
+  const { title, dfTitle } = option;
+  _assign(option, {
+    itemCaption: title,
+    title: dfTitle,
+    subtitle: title
+  })
+};
 
 const BeaAdapter = {
   toConfig(json, option){
+    _setCaptionTo(option)
     const Results = json.BEAAPI.Results
-        , data = crData(Results, option)
-        , seria = Builder()
-            .splineSeria({ data })
-            .toSeria()
-        , { title, dfTitle } = option
-        , config = Builder()
-           .area2Config(dfTitle, title)
-           .addMinMax(data, option)
-           .addSeries(seria)
-           .add({
-             ...crConfigOption({ option, data, Results })
-           })
-           .toConfig();
+    , data = crData(Results, option)
+    , confOption = crConfigOption(Results, option);
 
-    return { config };
+    return {
+      config: crConfigType1({
+        option, data, confOption
+      })
+    };
   },
 
   toSeries(json, option){

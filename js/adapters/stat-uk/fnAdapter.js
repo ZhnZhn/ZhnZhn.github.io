@@ -11,7 +11,6 @@ var getValue = _AdapterFn["default"].getValue,
     crError = _AdapterFn["default"].crError,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     compareByDate = _AdapterFn["default"].compareByDate,
-    valueMoving = _AdapterFn["default"].valueMoving,
     joinBy = _AdapterFn["default"].joinBy,
     crItemLink = _AdapterFn["default"].crItemLink;
 
@@ -132,13 +131,9 @@ var fnAdapter = {
 
     return _data.sort(compareByDate);
   },
-  crConfigOption: function crConfigOption(_ref9) {
-    var json = _ref9.json,
-        option = _ref9.option,
-        data = _ref9.data;
+  crConfigOption: function crConfigOption(json, option) {
     return {
       zhConfig: _crZhConfig(option),
-      valueMoving: valueMoving(data),
       info: _crInfo(json, option)
     };
   }

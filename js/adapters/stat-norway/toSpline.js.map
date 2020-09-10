@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../src/adapters/stat-norway/toSpline.js"],"names":["toUTC","fnUtil","compose","crDsValuesTimes","fnAdapter","crChartOption","_isArr","Array","isArray","_filterLeadingNulls","data","_len","length","i","y","slice","_isReverse","x","_checkOrder","reverse","_fCrDataPoint","values","time","value","_postProcessData","_toData","times","_values","_crPoint","map","toArea","crConfig","json","option","title","subtitle","seriaType","seriaColor","seriaWidth","ds","seria","splineSeria","toSeria","areaConfig","spacingTop","addCaption","clearSeries","addSeries","addMinMax","add","toConfig"],"mappings":";;;;;;;;;AAAA;;AAEA;;AACA;;IAEQA,K,GAAmBC,kB,CAAnBD,K;IAAOE,O,GAAYD,kB,CAAZC,O;IAEbC,e,GACEC,qB,CADFD,e;IAAiBE,a,GACfD,qB,CADeC,a;AAGnB,IAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAEA,IAAMC,mBAAmB,GAAG,SAAtBA,mBAAsB,CAAAC,IAAI,EAAI;AAClC,MAAMC,IAAI,GAAGD,IAAI,CAACE,MAAlB;AACA,MAAIC,CAAC,GAAG,CAAR;;AACA,OAAIA,CAAJ,EAAOA,CAAC,GAACF,IAAT,EAAeE,CAAC,EAAhB,EAAmB;AACjB,QAAIH,IAAI,CAACG,CAAD,CAAJ,CAAQC,CAAR,KAAc,IAAlB,EAAwB;AACzB;;AACD,SAAOJ,IAAI,CAACK,KAAL,CAAWF,CAAX,CAAP;AACD,CAPD;;AASA,IAAMG,UAAU,GAAG,SAAbA,UAAa,CAAAN,IAAI;AAAA,SAAIA,IAAI,CAACE,MAAL,GAAc,CAAd,IACtBF,IAAI,CAAC,CAAD,CAAJ,CAAQO,CAAR,GAAYP,IAAI,CAAC,CAAD,CAAJ,CAAQO,CADF;AAAA,CAAvB;;AAEA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAAAR,IAAI;AAAA,SAAIM,UAAU,CAACN,IAAD,CAAV,GACxBA,IAAI,CAACS,OAAL,EADwB,GAExBT,IAFoB;AAAA,CAAxB;;AAIA,IAAMU,aAAa,GAAG,SAAhBA,aAAgB,CAACC,MAAD;AAAA,SAAY,UAACC,IAAD,EAAOT,CAAP;AAAA,WAAc;AAC9CI,MAAAA,CAAC,EAAEjB,KAAK,CAACsB,IAAD,CADsC;AAE9CR,MAAAA,CAAC,EAAEO,MAAM,CAACR,CAAD,CAAN,GAAYQ,MAAM,CAACR,CAAD,CAAN,CAAUU,KAAtB,GAA8B;AAFa,KAAd;AAAA,GAAZ;AAAA,CAAtB;;AAKA,IAAMC,gBAAgB,GAAGtB,OAAO,CAC9BO,mBAD8B,EAE9BS,WAF8B,CAAhC;;AAKA,IAAMO,OAAO,GAAG,SAAVA,OAAU,CAACJ,MAAD,EAASK,KAAT,EAAmB;AACjC,MAAMC,OAAO,GAAGrB,MAAM,CAACe,MAAD,CAAN,GAAiBA,MAAjB,GAA0B,CAACA,MAAD,CAA1C;AAAA,MACEO,QAAQ,GAAGR,aAAa,CAACO,OAAD,CAD1B;;AAEA,SAAOrB,MAAM,CAACoB,KAAD,CAAN,GACHF,gBAAgB,CAACE,KAAK,CAACG,GAAN,CAAUD,QAAV,CAAD,CADb,GAEH,EAFJ;AAGD,CAND;;AAQA,IAAME,MAAM,GAAG;AACbC,EAAAA,QAAQ,EAAE,kBAACC,IAAD,EAAOC,MAAP,EAAkB;AAAA,wBAItBA,MAJsB,CAExBC,KAFwB;AAAA,QAExBA,KAFwB,8BAElB,EAFkB;AAAA,QAEdC,QAFc,GAItBF,MAJsB,CAEdE,QAFc;AAAA,QAGxBC,SAHwB,GAItBH,MAJsB,CAGxBG,SAHwB;AAAA,QAGbC,UAHa,GAItBJ,MAJsB,CAGbI,UAHa;AAAA,QAGDC,UAHC,GAItBL,MAJsB,CAGDK,UAHC;AAAA,2BAKAnC,eAAe,CAAC6B,IAAD,EAAOC,MAAP,CALf;AAAA,QAKtBM,EALsB,oBAKtBA,EALsB;AAAA,QAKlBlB,MALkB,oBAKlBA,MALkB;AAAA,QAKVK,KALU,oBAKVA,KALU;AAAA,QAMxBhB,IANwB,GAMjBe,OAAO,CAACJ,MAAD,EAASK,KAAT,CANU;AAAA,QAOxBc,KAPwB,GAOhB,iCACLC,WADK,CACO;AACXL,MAAAA,SAAS,EAATA,SADW;AAEXC,MAAAA,UAAU,EAAVA,UAFW;AAGXC,MAAAA,UAAU,EAAVA,UAHW;AAIX5B,MAAAA,IAAI,EAAJA;AAJW,KADP,EAOLgC,OAPK,EAPgB;;AAe1B,WAAO,iCACJC,UADI,CACO;AAAEC,MAAAA,UAAU,EAAE;AAAd,KADP,EAEJC,UAFI,CAEOX,KAFP,EAEcC,QAFd,EAGJW,WAHI,GAIJC,SAJI,CAIMP,KAJN,EAKJQ,SALI,CAKMtC,IALN,EAKYuB,MALZ,EAMJgB,GANI,+BAMK5C,aAAa,CAACkC,EAAD,EAAK7B,IAAL,EAAWuB,MAAX,CANlB,GAOJiB,QAPI,EAAP;AAQA;AAxBW,CAAf;eA2BepB,M","sourcesContent":["import Builder from '../../charts/ConfigBuilder'\r\n\r\nimport fnUtil from './fnUtil'\r\nimport fnAdapter from './fnAdapter'\r\n\r\nconst { toUTC, compose } = fnUtil;\r\nconst {\r\n  crDsValuesTimes, crChartOption\r\n} = fnAdapter;\r\n\r\nconst _isArr = Array.isArray;\r\n\r\nconst _filterLeadingNulls = data => {\r\n  const _len = data.length;\r\n  let i = 0;\r\n  for(i; i<_len; i++){\r\n    if (data[i].y !== null) break;\r\n  }\r\n  return data.slice(i);\r\n};\r\n\r\nconst _isReverse = data => data.length > 2\r\n  && data[0].x > data[1].x;\r\nconst _checkOrder = data => _isReverse(data)\r\n  ? data.reverse()\r\n  : data;\r\n\r\nconst _fCrDataPoint = (values) => (time, i) => ({\r\n  x: toUTC(time),\r\n  y: values[i] ? values[i].value : null\r\n});\r\n\r\nconst _postProcessData = compose(\r\n  _filterLeadingNulls,\r\n  _checkOrder\r\n);\r\n\r\nconst _toData = (values, times) => {\r\n  const _values = _isArr(values) ? values : [values]\r\n  , _crPoint = _fCrDataPoint(_values);\r\n  return _isArr(times)\r\n    ? _postProcessData(times.map(_crPoint))\r\n    : [];\r\n};\r\n\r\nconst toArea = {\r\n  crConfig: (json, option) => {\r\n    const {\r\n      title='', subtitle,\r\n      seriaType, seriaColor, seriaWidth\r\n    } = option\r\n    , { ds, values, times } = crDsValuesTimes(json, option)\r\n    , data = _toData(values, times)\r\n    , seria = Builder()\r\n        .splineSeria({\r\n          seriaType,\r\n          seriaColor,\r\n          seriaWidth,\r\n          data\r\n        })\r\n        .toSeria()\r\n    return Builder()\r\n      .areaConfig({ spacingTop: 25 })\r\n      .addCaption(title, subtitle)\r\n      .clearSeries()\r\n      .addSeries(seria)\r\n      .addMinMax(data, option)\r\n      .add({ ...crChartOption(ds, data, option) })\r\n      .toConfig();\r\n   }\r\n};\r\n\r\nexport default toArea\r\n"],"file":"toSpline.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-norway/toSpline.js"
+ ],
+ "file": "../../../src/adapters/stat-norway/toSpline.js",
+ "names": [
+  "toUTC",
+  "fnUtil",
+  "compose",
+  "crDsValuesTimes",
+  "fnAdapter",
+  "crConfOption",
+  "_isArr",
+  "Array",
+  "isArray",
+  "_filterLeadingNulls",
+  "data",
+  "_len",
+  "length",
+  "i",
+  "y",
+  "slice",
+  "_isReverse",
+  "x",
+  "_checkOrder",
+  "reverse",
+  "_fCrDataPoint",
+  "values",
+  "time",
+  "value",
+  "_postProcessData",
+  "_toData",
+  "times",
+  "_values",
+  "_crPoint",
+  "map",
+  "toArea",
+  "crConfig",
+  "json",
+  "option",
+  "ds",
+  "confOption"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;IAEQA,K,GAAmBC,kB,CAAnBD,K;IAAOE,O,GAAYD,kB,CAAZC,O;IAEbC,e,GAEEC,qB,CAFFD,e;IACAE,Y,GACED,qB,CADFC,Y;AAGF,IAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAEA,IAAMC,mBAAmB,GAAG,SAAtBA,mBAAsB,CAAAC,IAAI,EAAI;AAClC,MAAMC,IAAI,GAAGD,IAAI,CAACE,MAAlB;AACA,MAAIC,CAAC,GAAG,CAAR;;AACA,OAAIA,CAAJ,EAAOA,CAAC,GAACF,IAAT,EAAeE,CAAC,EAAhB,EAAmB;AACjB,QAAIH,IAAI,CAACG,CAAD,CAAJ,CAAQC,CAAR,KAAc,IAAlB,EAAwB;AACzB;;AACD,SAAOJ,IAAI,CAACK,KAAL,CAAWF,CAAX,CAAP;AACD,CAPD;;AASA,IAAMG,UAAU,GAAG,SAAbA,UAAa,CAAAN,IAAI;AAAA,SAAIA,IAAI,CAACE,MAAL,GAAc,CAAd,IACtBF,IAAI,CAAC,CAAD,CAAJ,CAAQO,CAAR,GAAYP,IAAI,CAAC,CAAD,CAAJ,CAAQO,CADF;AAAA,CAAvB;;AAEA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAAAR,IAAI;AAAA,SAAIM,UAAU,CAACN,IAAD,CAAV,GACxBA,IAAI,CAACS,OAAL,EADwB,GAExBT,IAFoB;AAAA,CAAxB;;AAIA,IAAMU,aAAa,GAAG,SAAhBA,aAAgB,CAACC,MAAD;AAAA,SAAY,UAACC,IAAD,EAAOT,CAAP;AAAA,WAAc;AAC9CI,MAAAA,CAAC,EAAEjB,KAAK,CAACsB,IAAD,CADsC;AAE9CR,MAAAA,CAAC,EAAEO,MAAM,CAACR,CAAD,CAAN,GAAYQ,MAAM,CAACR,CAAD,CAAN,CAAUU,KAAtB,GAA8B;AAFa,KAAd;AAAA,GAAZ;AAAA,CAAtB;;AAKA,IAAMC,gBAAgB,GAAGtB,OAAO,CAC9BO,mBAD8B,EAE9BS,WAF8B,CAAhC;;AAKA,IAAMO,OAAO,GAAG,SAAVA,OAAU,CAACJ,MAAD,EAASK,KAAT,EAAmB;AACjC,MAAMC,OAAO,GAAGrB,MAAM,CAACe,MAAD,CAAN,GAAiBA,MAAjB,GAA0B,CAACA,MAAD,CAA1C;AAAA,MACEO,QAAQ,GAAGR,aAAa,CAACO,OAAD,CAD1B;;AAEA,SAAOrB,MAAM,CAACoB,KAAD,CAAN,GACHF,gBAAgB,CAACE,KAAK,CAACG,GAAN,CAAUD,QAAV,CAAD,CADb,GAEH,EAFJ;AAGD,CAND;;AAQA,IAAME,MAAM,GAAG;AACbC,EAAAA,QAAQ,EAAE,kBAACC,IAAD,EAAOC,MAAP,EAAkB;AAAA,2BACI9B,eAAe,CAAC6B,IAAD,EAAOC,MAAP,CADnB;AAAA,QAClBC,EADkB,oBAClBA,EADkB;AAAA,QACdb,MADc,oBACdA,MADc;AAAA,QACNK,KADM,oBACNA,KADM;AAAA,QAExBhB,IAFwB,GAEjBe,OAAO,CAACJ,MAAD,EAASK,KAAT,CAFU;AAAA,QAGxBS,UAHwB,GAGX9B,YAAY,CAAC6B,EAAD,EAAKD,MAAL,CAHD;;AAK1B,WAAO,8BAAc;AACnBA,MAAAA,MAAM,EAANA,MADmB;AACXvB,MAAAA,IAAI,EAAJA,IADW;AACLyB,MAAAA,UAAU,EAAVA;AADK,KAAd,CAAP;AAGD;AATY,CAAf;eAYeL,M"
+}

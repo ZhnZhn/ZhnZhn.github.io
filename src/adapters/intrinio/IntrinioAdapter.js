@@ -1,7 +1,8 @@
-import Builder from '../../charts/ConfigBuilder'
+import crConfigType1 from '../../charts/crConfigType1'
 import fnAdapter from './fnAdapter'
 
-const {
+const { Builder } = crConfigType1
+, {
   crSubtitle,
   crData,
   crConfigOption
@@ -9,21 +10,16 @@ const {
 
 const IntrinioAdapter = {
   toConfig(json, option){
-    const data = crData(json, option)
-        , seria = Builder()
-            .splineSeria({ data })
-            .toSeria()
-        , _subtitle = crSubtitle(option)
-        , { title } = option
-        , config = Builder()
-            .area2Config(title, _subtitle)
-            .addSeries(seria)
-            .add({
-              ...crConfigOption({ option, data })
-             })
-            .toConfig();
+    option.subtitle = crSubtitle(option)
 
-    return { config };
+    const data = crData(json, option)
+    , confOption = crConfigOption(option);
+
+    return {
+      config: crConfigType1({
+        option, data, confOption
+      })
+    };
   },
 
   toSeries(json, option){

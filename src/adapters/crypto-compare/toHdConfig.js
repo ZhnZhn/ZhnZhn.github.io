@@ -1,11 +1,13 @@
-import Builder from '../../charts/ConfigBuilder'
-
+import crConfigType1 from '../../charts/crConfigType1'
 import fnAdapter from './fnAdapter'
 
-const {
+const { Builder } = crConfigType1
+, {
   crData,
-  crConfigOption  
- } = fnAdapter;
+  crConfigOption
+ } = fnAdapter
+, _assign = Object.assign;
+
 
 const DF_PAIR = 'USD';
 const V_ON_TIME = 'Values on 00:00 GMT';
@@ -26,26 +28,23 @@ const _crBtTitleTo = (json) => {
 
 const toHdConfig = {
   toConfig: (json, option) => {
+    const { value='', title } = option
+    _assign(option, {
+      itemCaption: title,
+      title: _crTitle(title),
+      subtitle: _crSubtitle(json, value)
+    })
     const {
        data,
        dVolume, dColumn,
        dToVolume,
        dHL
      } = crData(json)
-    , seria = Builder()
-        .splineSeria({ data })
-        .toSeria()
-    , { value='', title } = option
-    , _title = _crTitle(title)
-    , _subtitle = _crSubtitle(json, value)
     , _btTitleTo = _crBtTitleTo(json)
-    , config = Builder()
-        .area2Config(_title, _subtitle)
-        .addSeries(seria)
-        .addMinMax(data, option)
-        .add({
-           ...crConfigOption({ option, data })
-        })
+    , confOption = crConfigOption(option)
+    , config = Builder(crConfigType1({
+         option, data, confOption
+       }))
         .addMiniVolume({
           btTitle: 'Volume ' + value,
           dColumn, dVolume

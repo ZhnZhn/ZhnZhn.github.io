@@ -1,13 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
-
-var valueMoving = _AdapterFn["default"].valueMoving;
 var C = {
   CHART_URL: "https://www.eia.gov/opendata/embed.php?type=chart&series_id="
 };
@@ -87,13 +81,9 @@ var fnAdapter = {
       };
     }).reverse();
   },
-  crConfigOption: function crConfigOption(_ref) {
-    var json = _ref.json,
-        option = _ref.option,
-        data = _ref.data;
+  crConfigOption: function crConfigOption(json, option) {
     return {
       zhConfig: _crZhConfig(json, option),
-      valueMoving: valueMoving(data),
       info: _crInfo(json)
     };
   }

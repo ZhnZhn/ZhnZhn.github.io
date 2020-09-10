@@ -5,14 +5,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+var Builder = _crConfigType["default"].Builder,
+    crData = _fnAdapter["default"].crData,
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    _assign = Object.assign;
 var DF_PAIR = 'USD';
 var V_ON_TIME = 'Values on 00:00 GMT';
 
@@ -38,25 +38,29 @@ var _crBtTitleTo = function _crBtTitleTo(json) {
 
 var toHdConfig = {
   toConfig: function toConfig(json, option) {
+    var _option$value = option.value,
+        value = _option$value === void 0 ? '' : _option$value,
+        title = option.title;
+
+    _assign(option, {
+      itemCaption: title,
+      title: _crTitle(title),
+      subtitle: _crSubtitle(json, value)
+    });
+
     var _crData = crData(json),
         data = _crData.data,
         dVolume = _crData.dVolume,
         dColumn = _crData.dColumn,
         dToVolume = _crData.dToVolume,
         dHL = _crData.dHL,
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      data: data
-    }).toSeria(),
-        _option$value = option.value,
-        value = _option$value === void 0 ? '' : _option$value,
-        title = option.title,
-        _title = _crTitle(title),
-        _subtitle = _crSubtitle(json, value),
         _btTitleTo = _crBtTitleTo(json),
-        config = (0, _ConfigBuilder["default"])().area2Config(_title, _subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, crConfigOption({
+        confOption = crConfigOption(option),
+        config = Builder((0, _crConfigType["default"])({
       option: option,
-      data: data
-    }))).addMiniVolume({
+      data: data,
+      confOption: confOption
+    })).addMiniVolume({
       btTitle: 'Volume ' + value,
       dColumn: dColumn,
       dVolume: dVolume
@@ -73,7 +77,7 @@ var toHdConfig = {
     };
   },
   toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+    return Builder.crSeria({
       adapter: toHdConfig,
       json: json,
       option: option

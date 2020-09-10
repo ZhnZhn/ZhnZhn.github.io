@@ -5,34 +5,29 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crSubtitle = _fnAdapter["default"].crSubtitle,
+var Builder = _crConfigType["default"].Builder,
+    crSubtitle = _fnAdapter["default"].crSubtitle,
     crData = _fnAdapter["default"].crData,
     crConfigOption = _fnAdapter["default"].crConfigOption;
 var IntrinioAdapter = {
   toConfig: function toConfig(json, option) {
+    option.subtitle = crSubtitle(option);
     var data = crData(json, option),
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      data: data
-    }).toSeria(),
-        _subtitle = crSubtitle(option),
-        title = option.title,
-        config = (0, _ConfigBuilder["default"])().area2Config(title, _subtitle).addSeries(seria).add((0, _extends2["default"])({}, crConfigOption({
-      option: option,
-      data: data
-    }))).toConfig();
-
+        confOption = crConfigOption(option);
     return {
-      config: config
+      config: (0, _crConfigType["default"])({
+        option: option,
+        data: data,
+        confOption: confOption
+      })
     };
   },
   toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+    return Builder.crSeria({
       adapter: IntrinioAdapter,
       json: json,
       option: option

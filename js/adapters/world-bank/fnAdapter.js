@@ -10,7 +10,7 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving;
+    _isArr = Array.isArray;
 
 var _crInfo = function _crInfo(_ref) {
   var title = _ref.title,
@@ -23,14 +23,12 @@ var _crInfo = function _crInfo(_ref) {
 
 var fnAdapter = {
   crId: function crId(option) {
-    var _option$one = option.one,
-        one = _option$one === void 0 ? '' : _option$one,
-        _option$two = option.two,
-        two = _option$two === void 0 ? '' : _option$two;
-    return one + "_" + two;
+    var one = option.one,
+        two = option.two;
+    return (one || '') + "_" + (two || '');
   },
   crData: function crData(arrIn) {
-    if (!Array.isArray(arrIn)) {
+    if (!_isArr(arrIn)) {
       return [];
     }
 
@@ -45,7 +43,7 @@ var fnAdapter = {
     });
     return d.reverse();
   },
-  crConfigOptions: function crConfigOptions(option, data) {
+  crConfigOptions: function crConfigOptions(option) {
     var title = option.title,
         linkItem = option.linkItem,
         dataSource = option.dataSource,
@@ -60,8 +58,7 @@ var fnAdapter = {
         linkFn: 'DF',
         item: (0, _extends2["default"])({}, linkItem),
         dataSource: dataSource
-      },
-      valueMoving: valueMoving(data)
+      }
     };
   }
 };

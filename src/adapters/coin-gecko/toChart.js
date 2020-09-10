@@ -1,11 +1,8 @@
-import Builder from '../../charts/ConfigBuilder';
-
+import crConfigType1 from '../../charts/crConfigType1'
 import AdapterFn from '../AdapterFn'
 
-const {
-  valueMoving,
-  crItemLink  
-} = AdapterFn;
+const { Builder } = crConfigType1
+const { crItemLink } = AdapterFn;
 
 const _crZhConfig = ({
     _itemKey,
@@ -25,9 +22,8 @@ const _crInfo = ({ title, _nativeUrl}) => ({
   description: _crDescription(_nativeUrl)
 });
 
-const _crConfigOption = ({ json, option, data }) => ({
+const _crConfigOption = (option) => ({
     zhConfig: _crZhConfig(option),
-    valueMoving: valueMoving(data),
     info: _crInfo(option)
   })
 
@@ -37,35 +33,28 @@ const toChart = {
   },
 
   toConfig(json, option){
-    const data = json.prices
-     , {
-         seriaType, seriaColor, seriaWidth,
-         title, subtitle, _currency
-       } = option
-     , seria = Builder()
-        .splineSeria({
-          seriaType, seriaColor, seriaWidth,
-          data
-        })
-        .toSeria()
-    , config = Builder()
-        .area2Config(title, subtitle)
-        .addSeries(seria)
-        .addMinMax(data, option)
-        .add({
-          ..._crConfigOption({ json, option, data })
-        })
-        .addMiniVolume({
-          btTitle: 'Volume',
-          title: 'Volume ' + _currency,
-          dVolume: json.total_volumes
-        })
-        .addMiniVolume({
-          btTitle: 'Market Cap',
-          title: 'Market Cap ' + _currency,
-          dVolume: json.market_caps
-        })
-        .toConfig();
+    const {
+      prices:data,
+      total_volumes,
+      market_caps
+     } = json
+     , { _currency } = option
+     , confOption = _crConfigOption(option)
+     , config = Builder(crConfigType1({
+        option, data, confOption
+      }))
+      .addMiniVolume({
+        btTitle: 'Volume',
+        title: 'Volume ' + _currency,
+        dVolume: total_volumes
+      })
+      .addMiniVolume({
+        btTitle: 'Market Cap',
+        title: 'Market Cap ' + _currency,
+        dVolume: market_caps
+      })
+      .toConfig();
+
     return { config };
   },
 

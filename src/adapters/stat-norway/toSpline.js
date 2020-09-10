@@ -1,11 +1,12 @@
-import Builder from '../../charts/ConfigBuilder'
+import crConfigType1 from '../../charts/crConfigType1'
 
 import fnUtil from './fnUtil'
 import fnAdapter from './fnAdapter'
 
-const { toUTC, compose } = fnUtil;
-const {
-  crDsValuesTimes, crChartOption
+const { toUTC, compose } = fnUtil
+, {
+  crDsValuesTimes,
+  crConfOption
 } = fnAdapter;
 
 const _isArr = Array.isArray;
@@ -45,29 +46,14 @@ const _toData = (values, times) => {
 
 const toArea = {
   crConfig: (json, option) => {
-    const {
-      title='', subtitle,
-      seriaType, seriaColor, seriaWidth
-    } = option
-    , { ds, values, times } = crDsValuesTimes(json, option)
+    const { ds, values, times } = crDsValuesTimes(json, option)
     , data = _toData(values, times)
-    , seria = Builder()
-        .splineSeria({
-          seriaType,
-          seriaColor,
-          seriaWidth,
-          data
-        })
-        .toSeria()
-    return Builder()
-      .areaConfig({ spacingTop: 25 })
-      .addCaption(title, subtitle)
-      .clearSeries()
-      .addSeries(seria)
-      .addMinMax(data, option)
-      .add({ ...crChartOption(ds, data, option) })
-      .toConfig();
-   }
+    , confOption = crConfOption(ds, option);
+
+    return crConfigType1({
+      option, data, confOption
+    });
+  }
 };
 
 export default toArea

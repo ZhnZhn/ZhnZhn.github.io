@@ -5,14 +5,12 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var valueMoving = _AdapterFn["default"].valueMoving,
-    crItemLink = _AdapterFn["default"].crItemLink;
+var Builder = _crConfigType["default"].Builder;
+var crItemLink = _AdapterFn["default"].crItemLink;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
@@ -37,13 +35,9 @@ var _crInfo = function _crInfo(_ref2) {
   };
 };
 
-var _crConfigOption = function _crConfigOption(_ref3) {
-  var json = _ref3.json,
-      option = _ref3.option,
-      data = _ref3.data;
+var _crConfigOption = function _crConfigOption(option) {
   return {
     zhConfig: _crZhConfig(option),
-    valueMoving: valueMoving(data),
     info: _crInfo(option)
   };
 };
@@ -54,37 +48,30 @@ var toChart = {
   },
   toConfig: function toConfig(json, option) {
     var data = json.prices,
-        seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        title = option.title,
-        subtitle = option.subtitle,
+        total_volumes = json.total_volumes,
+        market_caps = json.market_caps,
         _currency = option._currency,
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth,
-      data: data
-    }).toSeria(),
-        config = (0, _ConfigBuilder["default"])().area2Config(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends2["default"])({}, _crConfigOption({
-      json: json,
+        confOption = _crConfigOption(option),
+        config = Builder((0, _crConfigType["default"])({
       option: option,
-      data: data
-    }))).addMiniVolume({
+      data: data,
+      confOption: confOption
+    })).addMiniVolume({
       btTitle: 'Volume',
       title: 'Volume ' + _currency,
-      dVolume: json.total_volumes
+      dVolume: total_volumes
     }).addMiniVolume({
       btTitle: 'Market Cap',
       title: 'Market Cap ' + _currency,
-      dVolume: json.market_caps
+      dVolume: market_caps
     }).toConfig();
+
     return {
       config: config
     };
   },
   toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+    return Builder.crSeria({
       adapter: toChart,
       json: json,
       option: option

@@ -9,7 +9,6 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
-    valueMoving = _AdapterFn["default"].valueMoving,
     getValue = _AdapterFn["default"].getValue,
     joinBy = _AdapterFn["default"].joinBy,
     toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst;
@@ -75,13 +74,9 @@ var fnAdapter = {
       dMarketCap: dMarketCap
     };
   },
-  crConfigOption: function crConfigOption(_ref3) {
-    var json = _ref3.json,
-        option = _ref3.option,
-        data = _ref3.data;
+  crConfigOption: function crConfigOption(option) {
     return {
       zhConfig: _crZhConfig(option),
-      valueMoving: valueMoving(data),
       info: _crInfo(option)
     };
   }

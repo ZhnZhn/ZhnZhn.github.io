@@ -9,12 +9,11 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var valueMoving = _AdapterFn["default"].valueMoving,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC,
+var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     joinBy = _AdapterFn["default"].joinBy;
 
 var _crZhConfig = function _crZhConfig(_ref) {
-  var title = _ref.title,
+  var itemCaption = _ref.itemCaption,
       dataSource = _ref.dataSource,
       dfTitle = _ref.dfTitle,
       value = _ref.value,
@@ -24,15 +23,15 @@ var _crZhConfig = function _crZhConfig(_ref) {
     key: value,
     item: (0, _extends2["default"])({}, linkItem),
     linkFn: 'DF',
-    itemCaption: title,
+    itemCaption: itemCaption,
     dataSource: joinBy(": ", dataSource, dfTitle)
   };
 };
 
 var _crInfo = function _crInfo(_ref2) {
-  var title = _ref2.title;
+  var itemCaption = _ref2.itemCaption;
   return {
-    name: title
+    name: itemCaption
   };
 };
 
@@ -63,13 +62,9 @@ var fnAdapter = {
     });
     return _data.reverse();
   },
-  crConfigOption: function crConfigOption(_ref4) {
-    var json = _ref4.json,
-        option = _ref4.option,
-        data = _ref4.data;
+  crConfigOption: function crConfigOption(option) {
     return {
       zhConfig: _crZhConfig(option),
-      valueMoving: valueMoving(data),
       info: _crInfo(option)
     };
   }

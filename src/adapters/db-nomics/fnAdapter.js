@@ -6,8 +6,7 @@ const {
   crItemLink,
   crItemConf,
   joinBy,
-  ymdToUTC,
-  valueMoving,
+  ymdToUTC,  
   getValue
 } = AdapterFn;
 const {
@@ -115,9 +114,8 @@ const fnAdapter = {
     return data;
   },
 
-  crConfigOption: ({ json, option, data }) => ({
+  crConfigOption: (json, option) => ({
     zhConfig: _crZhConfig(option),
-    valueMoving: valueMoving(data),
     info: _crInfo(json, option)
   })
 };

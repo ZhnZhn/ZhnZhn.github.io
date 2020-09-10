@@ -5,34 +5,43 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption;
+var Builder = _crConfigType["default"].Builder,
+    crData = _fnAdapter["default"].crData,
+    crConfigOption = _fnAdapter["default"].crConfigOption,
+    _assign = Object.assign;
+
+var _setCaptionTo = function _setCaptionTo(option) {
+  var title = option.title,
+      dfTitle = option.dfTitle;
+
+  _assign(option, {
+    itemCaption: title,
+    title: dfTitle,
+    subtitle: title
+  });
+};
+
 var BeaAdapter = {
   toConfig: function toConfig(json, option) {
+    _setCaptionTo(option);
+
     var Results = json.BEAAPI.Results,
         data = crData(Results, option),
-        seria = (0, _ConfigBuilder["default"])().splineSeria({
-      data: data
-    }).toSeria(),
-        title = option.title,
-        dfTitle = option.dfTitle,
-        config = (0, _ConfigBuilder["default"])().area2Config(dfTitle, title).addMinMax(data, option).addSeries(seria).add((0, _extends2["default"])({}, crConfigOption({
-      option: option,
-      data: data,
-      Results: Results
-    }))).toConfig();
+        confOption = crConfigOption(Results, option);
     return {
-      config: config
+      config: (0, _crConfigType["default"])({
+        option: option,
+        data: data,
+        confOption: confOption
+      })
     };
   },
   toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+    return Builder.crSeria({
       adapter: BeaAdapter,
       json: json,
       option: option

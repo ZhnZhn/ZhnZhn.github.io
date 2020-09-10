@@ -15,7 +15,6 @@ var crError = _AdapterFn["default"].crError,
     getValue = _AdapterFn["default"].getValue,
     joinBy = _AdapterFn["default"].joinBy,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving,
     crItemLink = _AdapterFn["default"].crItemLink,
     compareByDate = _AdapterFn["default"].compareByDate,
     crItemConf = _AdapterFn["default"].crItemConf,
@@ -94,19 +93,15 @@ var fnAdapter = {
       subtitle: joinBy(': ', getCaption(items[1]), getCaption(items[2]))
     };
   },
-  crConfigOption: function crConfigOption(_ref4) {
-    var json = _ref4.json,
-        option = _ref4.option,
-        data = _ref4.data;
+  crConfigOption: function crConfigOption(option) {
     return {
-      valueMoving: valueMoving(data),
       info: _crInfo(option),
       zhConfig: _crZhConfig(option)
     };
   },
-  crHistOption: function crHistOption(_ref5) {
-    var option = _ref5.option,
-        data = _ref5.data;
+  crHistOption: function crHistOption(_ref4) {
+    var option = _ref4.option,
+        data = _ref4.data;
     return {
       info: _crInfo(option),
       zhConfig: _crHistZhConfig(data, option)
