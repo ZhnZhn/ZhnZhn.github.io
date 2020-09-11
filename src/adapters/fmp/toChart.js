@@ -12,7 +12,8 @@ const { Builder } = crConfigType1
 const toChart = {
   toConfig(json, option){
     const { dfPn, _propName } = option
-    , data = crData(json[dfPn], _propName)
+    , _rowData = dfPn ? json[dfPn] : json
+    , data = crData(_rowData, _propName)
     , confOption = crConfigOption(option);
 
     _assign(option, crCaption(option))

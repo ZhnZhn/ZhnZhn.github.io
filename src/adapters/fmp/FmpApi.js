@@ -18,12 +18,23 @@ const _assign = Object.assign;
 const _crDataSource = ({ dataSource, dialogConf={} }) =>
   dataSource || dialogConf.contFullCaption || '';
 
+const REG_BLANKS = /\s/g;
+const _toLowerCamelCase = str => str[0].toLowerCase()
+  + str.replace(REG_BLANKS,'').substring(1);
+
+const _crDfPropName = (item, dfT) => {
+  const _caption = getCaption(item);
+  return dfT !== "ratios"
+    ? _caption
+    : _toLowerCamelCase(_caption);
+};
+
 const _assignDf = option => {
   const { dfT, items=[] } = option
   , [ it1, it2 , it3 ] = items
   , _symbol = getValue(it1, {isUpper: true})
   , _period = getValue(it3)
-  , _propName = getCaption(it2)
+  , _propName = _crDfPropName(it2, dfT)
   , _query = _period
       ? `period=${_period}`
       : ''
@@ -73,8 +84,9 @@ const FmpApi = {
   checkResponse(json, options){
     const { dfPn, _symbol } = options
     , _json = json || {};
-    if (_isArr(_json[dfPn]) && _json.symbol === _symbol) {
-      return true;
+    if (!dfPn && _isArr(_json) && _json[0].symbol === _symbol
+     || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
+       return true;
     }
     throw crError(
       _symbol,

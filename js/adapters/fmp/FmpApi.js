@@ -25,6 +25,18 @@ var _crDataSource = function _crDataSource(_ref) {
   return dataSource || dialogConf.contFullCaption || '';
 };
 
+var REG_BLANKS = /\s/g;
+
+var _toLowerCamelCase = function _toLowerCamelCase(str) {
+  return str[0].toLowerCase() + str.replace(REG_BLANKS, '').substring(1);
+};
+
+var _crDfPropName = function _crDfPropName(item, dfT) {
+  var _caption = getCaption(item);
+
+  return dfT !== "ratios" ? _caption : _toLowerCamelCase(_caption);
+};
+
 var _assignDf = function _assignDf(option) {
   var dfT = option.dfT,
       _option$items = option.items,
@@ -36,7 +48,7 @@ var _assignDf = function _assignDf(option) {
     isUpper: true
   }),
       _period = getValue(it3),
-      _propName = getCaption(it2),
+      _propName = _crDfPropName(it2, dfT),
       _query = _period ? "period=" + _period : '',
       _itemUrl = C.URI + "/" + dfT + "/" + _symbol + "?" + _query;
 
@@ -88,7 +100,7 @@ var FmpApi = {
         _symbol = options._symbol,
         _json = json || {};
 
-    if (_isArr(_json[dfPn]) && _json.symbol === _symbol) {
+    if (!dfPn && _isArr(_json) && _json[0].symbol === _symbol || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
       return true;
     }
 
