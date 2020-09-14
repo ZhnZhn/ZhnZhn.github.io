@@ -2,12 +2,8 @@
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -35,88 +31,70 @@ var S = {
   }
 };
 
-var TabPane = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(TabPane, _Component);
+var _renderTabs = function _renderTabs(children, selectedTabIndex, hClickTab) {
+  return children.map(function (tab, index) {
+    return /*#__PURE__*/_react["default"].cloneElement(tab, {
+      key: index,
+      onClick: hClickTab.bind(null, index),
+      isSelected: index === selectedTabIndex
+    });
+  });
+};
 
-  /*
-  static propTypes = {
-    width: PropTypes.string,
-    height: PropTypes.string,
-    children: PropTypes.arrayOf(PropTypes.node)
-  }
-  */
-  function TabPane(props) {
-    var _this;
+var _renderComponents = function _renderComponents(children, selectedTabIndex) {
+  return children.map(function (tab, index) {
+    var _isSelected = index === selectedTabIndex,
+        _divStyle = _isSelected ? S.BLOCK : S.NONE;
 
-    _this = _Component.call(this, props) || this;
-
-    _this._hClickTab = function (index) {
-      _this.setState({
-        selectedTabIndex: index
-      });
-    };
-
-    _this._renderTabs = function (children) {
-      var selectedTabIndex = _this.state.selectedTabIndex;
-      return children.map(function (tab, index) {
-        var isSelected = index === selectedTabIndex;
-        return /*#__PURE__*/_react["default"].cloneElement(tab, {
-          key: index,
-          onClick: _this._hClickTab.bind(null, index),
-          isSelected: isSelected
-        });
-      });
-    };
-
-    _this._renderComponents = function () {
-      var children = _this.props.children;
-      var selectedTabIndex = _this.state.selectedTabIndex;
-      return children.map(function (tab, index) {
-        var _isSelected = index === selectedTabIndex,
-            _divStyle = _isSelected ? S.BLOCK : S.NONE;
-
-        return /*#__PURE__*/_react["default"].createElement("div", {
-          style: _divStyle,
-          key: 'a' + index
-        }, /*#__PURE__*/_react["default"].cloneElement(tab.props.children, {
-          key: 'comp' + index,
-          isSelected: _isSelected
-        }));
-      });
-    };
-
-    _this.getSelectedTabIndex = function () {
-      return _this.state.selectedTabIndex;
-    };
-
-    _this.state = {
-      selectedTabIndex: 0
-    };
-    return _this;
-  }
-
-  var _proto = TabPane.prototype;
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        children = _this$props.children,
-        width = _this$props.width,
-        height = _this$props.height;
     return /*#__PURE__*/_react["default"].createElement("div", {
-      style: {
-        width: width,
-        height: height
-      }
-    }, /*#__PURE__*/_react["default"].createElement("ul", {
-      className: CL,
-      style: S.UL
-    }, this._renderTabs(children)), /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.DIV
-    }, this._renderComponents()));
-  };
+      style: _divStyle,
+      key: 'a' + index
+    }, /*#__PURE__*/_react["default"].cloneElement(tab.props.children, {
+      key: 'comp' + index,
+      isSelected: _isSelected
+    }));
+  });
+};
 
-  return TabPane;
-}(_react.Component);
+var TabPane = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+  var width = _ref.width,
+      height = _ref.height,
+      children = _ref.children;
+
+  var _useState = (0, _react.useState)(0),
+      selectedTabIndex = _useState[0],
+      setSelectedTabIndex = _useState[1],
+      _hClickTab = (0, _react.useCallback)(function (index) {
+    return setSelectedTabIndex(index);
+  }, []);
+
+  (0, _react.useImperativeHandle)(ref, function () {
+    return {
+      getSelectedTabIndex: function getSelectedTabIndex() {
+        return selectedTabIndex;
+      }
+    };
+  }, [selectedTabIndex]);
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: {
+      width: width,
+      height: height
+    }
+  }, /*#__PURE__*/_react["default"].createElement("ul", {
+    className: CL,
+    style: S.UL
+  }, _renderTabs(children, selectedTabIndex, _hClickTab)), /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.DIV
+  }, _renderComponents(children, selectedTabIndex)));
+});
+/*
+TabPane.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.node)
+}
+*/
+
 
 var _default = TabPane;
 exports["default"] = _default;
