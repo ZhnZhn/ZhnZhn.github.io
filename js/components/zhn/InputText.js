@@ -9,8 +9,6 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
 
 //import PropTypes from "prop-types";
@@ -37,10 +35,7 @@ var S = {
 };
 var C = {
   BLANK: '',
-  TEXT: 'text',
-  //NEW_TEXT: 'new-text',
-  ON: 'on',
-  OFF: 'off'
+  TEXT: 'text'
 };
 
 var _isFn = function _isFn(fn) {
@@ -51,163 +46,121 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number';
 };
 
-var _getInitStateFrom = function _getInitStateFrom(_ref) {
-  var initValue = _ref.initValue;
-  return {
-    initValue: initValue,
-    value: initValue != null ? initValue : C.BLANK
-  };
+var _initValue = function _initValue(initialValue) {
+  return initialValue != null ? initialValue : C.BLANK;
 };
 
-var _isMinMaxNumber = function _isMinMaxNumber(_ref2) {
-  var type = _ref2.type,
-      min = _ref2.min,
-      max = _ref2.max;
+var _isMinMaxNumber = function _isMinMaxNumber(_ref) {
+  var type = _ref.type,
+      min = _ref.min,
+      max = _ref.max;
   return type === 'number' && _isNumber(min) && _isNumber(max);
 };
 
-var InputText = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(InputText, _Component);
+var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) {
+  var initValue = props.initValue,
+      style = props.style,
+      type = props.type,
+      spellCheck = props.spellCheck,
+      placeholder = props.placeholder,
+      _props$maxLength = props.maxLength,
+      maxLength = _props$maxLength === void 0 ? 125 : _props$maxLength,
+      min = props.min,
+      max = props.max,
+      step = props.step,
+      onInputChange = props.onInputChange,
+      onEnter = props.onEnter,
+      _useState = (0, _react.useState)(function () {
+    return _initValue(initValue);
+  }),
+      value = _useState[0],
+      setValue = _useState[1],
+      _refInput = (0, _react.useRef)(),
+      _hInputChange = function _hInputChange(event) {
+    var value = event.target.value;
 
-  /*
-  static propTypes = {
-    style: PropTypes.object,
-    initValue: PropTypes.string,
-    type: PropTypes.string,
-    placeholder: PropTypes.string,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    step: PropTypes.number,
-    onEnter: PropTypes.func
-  }
-  */
-  function InputText(props) {
-    var _this;
+    if (value.length <= maxLength) {
+      setValue(value);
 
-    _this = _Component.call(this, props) || this;
+      if (_isFn(onInputChange)) {
+        onInputChange(value);
+      }
+    }
+  },
+      _hKeyDown = function _hKeyDown(event) {
+    switch (event.keyCode) {
+      case 27:
+      case 46:
+        event.preventDefault();
+        setValue(C.BLANK);
+        break;
 
-    _this._handleInputChange = function (event) {
-      var value = event.target.value,
-          _this$props = _this.props,
-          maxLength = _this$props.maxLength,
-          onInputChange = _this$props.onInputChange;
-
-      if (value.length <= maxLength) {
-        _this.setState({
-          value: value
-        });
-
-        if (_isFn(onInputChange)) {
-          onInputChange(value);
+      case 13:
+        if (_isFn(onEnter)) {
+          onEnter(event.target.value);
         }
-      }
-    };
 
-    _this._handleKeyDown = function (event) {
-      switch (event.keyCode) {
-        case 27:
-        case 46:
-          event.preventDefault();
+        break;
 
-          _this.setState({
-            value: C.BLANK
-          });
-
-          break;
-
-        case 13:
-          if (_this.isOnEnter) {
-            _this.props.onEnter(event.target.value);
-          }
-
-          break;
-
-        default:
-          return;
-      }
-    };
-
-    _this._refInput = /*#__PURE__*/_react["default"].createRef();
-    _this.isOnEnter = _isFn(props.onEnter) ? true : false;
-    _this.state = _getInitStateFrom(props);
-    return _this;
-  }
-
-  var _proto = InputText.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    var onReg = this.props.onReg;
-
-    if (_isFn(onReg)) {
-      onReg(this);
+      default:
+        return;
     }
   };
 
-  InputText.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
-    return props.initValue !== state.initValue ? _getInitStateFrom(props) : null;
-  };
+  (0, _react.useEffect)(function () {
+    return setValue(_initValue(initValue));
+  }, [initValue]);
+  (0, _react.useImperativeHandle)(ref, function () {
+    return {
+      getValue: function getValue() {
+        return ('' + value).trim();
+      },
+      setValue: setValue,
+      focus: function focus() {
+        return _refInput.current.focus();
+      }
+    };
+  }, [value]);
 
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        style = _this$props2.style,
-        type = _this$props2.type,
-        spellCheck = _this$props2.spellCheck,
-        placeholder = _this$props2.placeholder,
-        maxLength = _this$props2.maxLength,
-        min = _this$props2.min,
-        max = _this$props2.max,
-        step = _this$props2.step,
-        value = this.state.value,
-        _autoCorrect = spellCheck ? C.ON : C.OFF,
-        _spellCheck = spellCheck ? "true" : "false",
-        _className = _isMinMaxNumber(this.props) ? CL.NUMBER_RANGE : void 0;
+  var _autoCorrect = spellCheck ? "on" : "off",
+      _spellCheck = spellCheck ? "true" : "false",
+      _className = _isMinMaxNumber(props) ? CL.NUMBER_RANGE : void 0;
 
-    return /*#__PURE__*/_react["default"].createElement("input", {
-      ref: this._refInput,
-      className: _className,
-      style: (0, _extends2["default"])({}, S.INPUT, style),
-      type: type || C.TEXT,
-      name: C.TEXT,
-      autoCapitalize: C.OFF,
-      autoComplete: C.OFF,
-      autoCorrect: _autoCorrect,
-      spellCheck: _spellCheck,
-      translate: "false",
-      value: value,
-      placeholder: placeholder,
-      maxLength: maxLength,
-      min: min,
-      max: max,
-      step: step,
-      onChange: this._handleInputChange,
-      onKeyDown: this._handleKeyDown
-    });
-  };
+  return /*#__PURE__*/_react["default"].createElement("input", {
+    ref: _refInput,
+    className: _className,
+    style: (0, _extends2["default"])({}, S.INPUT, style),
+    type: type || C.TEXT,
+    name: C.TEXT,
+    autoCapitalize: C.OFF,
+    autoComplete: C.OFF,
+    autoCorrect: _autoCorrect,
+    spellCheck: _spellCheck,
+    translate: "false",
+    value: value,
+    placeholder: placeholder,
+    maxLength: maxLength,
+    min: min,
+    max: max,
+    step: step,
+    onChange: _hInputChange,
+    onKeyDown: _hKeyDown
+  });
+});
+/*
+ InputText.propTypes = {
+   style: PropTypes.object,
+   initValue: PropTypes.string,
+   type: PropTypes.string,
+   placeholder: PropTypes.string,
+   min: PropTypes.number,
+   max: PropTypes.number,
+   step: PropTypes.number,
+   onEnter: PropTypes.func
+ }
+ */
 
-  _proto.getValue = function getValue() {
-    return this.state.value;
-  };
 
-  _proto.setValue = function setValue(value) {
-    this.setState({
-      value: value
-    });
-  };
-
-  _proto.focus = function focus() {
-    var current = this._refInput.current;
-
-    if (current) {
-      current.focus();
-    }
-  };
-
-  return InputText;
-}(_react.Component);
-
-InputText.defaultProps = {
-  maxLength: 125
-};
 var _default = InputText;
 exports["default"] = _default;
 //# sourceMappingURL=InputText.js.map
