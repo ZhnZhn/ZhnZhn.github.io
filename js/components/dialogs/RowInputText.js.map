@@ -1,1 +1,43 @@
-{"version":3,"sources":["../../../src/components/dialogs/RowInputText.jsx"],"names":["S","ROOT","paddingTop","paddingBottom","paddingRight","CAPTION","display","color","textAlign","width","fontSize","fontWeight","INPUT_TEXT","boxShadow","COLLON","RowInputText","_refInput","node","_inputComp","render","props","styleRoot","rootStyle","captionStyle","styleCaption","caption","inputStyle","styleInput","rest","_rootStyle","_captionStyle","_inputStyle","_caption","indexOf","getValue","Component","defaultProps"],"mappings":";;;;;;;;;;;;;;;AAAA;;AAGA;;AAFA;AAIA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AACJC,IAAAA,UAAU,EAAE,CADR;AAEJC,IAAAA,aAAa,EAAE,CAFX;AAGJC,IAAAA,YAAY,EAAE;AAHV,GADE;AAMRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,OAAO,EAAE,cADF;AAEPC,IAAAA,KAAK,EAAE,SAFA;AAGPC,IAAAA,SAAS,EAAE,OAHJ;AAIPC,IAAAA,KAAK,EAAE,GAJA;AAKPL,IAAAA,YAAY,EAAE,CALP;AAMPM,IAAAA,QAAQ,EAAE,EANH;AAOPC,IAAAA,UAAU,EAAE;AAPL,GAND;AAeRC,EAAAA,UAAU,EAAG;AACXH,IAAAA,KAAK,EAAE,GADI;AAEXI,IAAAA,SAAS,EAAE;AAFA;AAfL,CAAV;AAqBA,IAAMC,MAAM,GAAG,GAAf;;IAEMC,Y;;;;;;;;;;;;UAeJC,S,GAAY,UAACC,IAAD;AAAA,aAAU,MAAKC,UAAL,GAAkBD,IAA5B;AAAA,K;;;;;;;SAEZE,M,GAAA,kBAAQ;AAAA,sBAOF,KAAKC,KAPH;AAAA,QAEJC,SAFI,eAEJA,SAFI;AAAA,QAEOC,SAFP,eAEOA,SAFP;AAAA,QAGJC,YAHI,eAGJA,YAHI;AAAA,QAGUC,YAHV,eAGUA,YAHV;AAAA,QAIJC,OAJI,eAIJA,OAJI;AAAA,QAKJC,UALI,eAKJA,UALI;AAAA,QAKQC,UALR,eAKQA,UALR;AAAA,QAMDC,IANC;AAAA,QAQJC,UARI,GAQSP,SAAS,kCACZtB,CAAC,CAACC,IADU,EACDoB,SADC,CARlB;AAAA,QAUJS,aAVI,GAUYP,YAAY,kCAClBvB,CAAC,CAACK,OADgB,EACJmB,YADI,CAVxB;AAAA,QAYJO,WAZI,GAYUL,UAAU,kCACd1B,CAAC,CAACY,UADY,EACGe,UADH,CAZpB;AAAA,QAcJK,QAdI,GAcOP,OAAO,CAACQ,OAAR,CAAgBnB,MAAhB,MAA4B,CAAC,CAA7B,GACPW,OAAO,GAAGX,MADH,GAEPW,OAhBA;;AAiBN,wBACE;AAAK,MAAA,KAAK,EAAEI;AAAZ,oBACE,4DACE;AAAM,MAAA,KAAK,EAAEC;AAAb,OACGE,QADH,CADF,eAIE,gCAAC,qBAAD;AACG,MAAA,GAAG,EAAE,KAAKhB,SADb;AAEG,MAAA,KAAK,EAAEe;AAFV,OAGOH,IAHP,EAJF,CADF,CADF;AAcD,G;;SAEDM,Q,GAAA,oBAAU;AACR,WAAO,KAAKhB,UAAL,CAAgBgB,QAAhB,EAAP;AACD,G;;;EApDwBC,gB;;AAArBpB,Y,CAWGqB,Y,GAAe;AACpBX,EAAAA,OAAO,EAAE;AADW,C;eA4CTV,Y","sourcesContent":["import React, { Component } from 'react';\r\n//import PropTypes from \"prop-types\";\r\n\r\nimport InputText from '../zhn/InputText'\r\n\r\nconst S = {\r\n  ROOT: {\r\n    paddingTop: 6,\r\n    paddingBottom: 6,\r\n    paddingRight: 6\r\n  },\r\n  CAPTION: {\r\n    display: 'inline-block',\r\n    color: '#1b75bb',\r\n    textAlign: 'right',\r\n    width: 100,\r\n    paddingRight: 5,\r\n    fontSize: 16,\r\n    fontWeight: 'bold'\r\n  },\r\n  INPUT_TEXT : {\r\n    width: 220,\r\n    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'\r\n  }\r\n}\r\n\r\nconst COLLON = ':';\r\n\r\nclass RowInputText extends Component {\r\n  /*\r\n  static propTypes={\r\n    styleRoot: PropTypes.object,\r\n    styleCaption: PropTypes.object,\r\n    styleInput: PropTypes.object,\r\n    caption: PropTypes.string,\r\n    initValue: PropTypes.string,\r\n    onEnter: PropTypes.func\r\n  }\r\n  */\r\n  static defaultProps = {\r\n    caption: 'Input'\r\n  }\r\n\r\n  _refInput = (node) => this._inputComp = node\r\n\r\n  render(){\r\n    const {\r\n      styleRoot, rootStyle,\r\n      captionStyle, styleCaption,\r\n      caption,\r\n      inputStyle, styleInput,\r\n      ...rest\r\n    } = this.props\r\n    , _rootStyle = rootStyle\r\n         || {...S.ROOT, ...styleRoot}\r\n    , _captionStyle = captionStyle\r\n         || {...S.CAPTION, ...styleCaption}\r\n    , _inputStyle = inputStyle\r\n         || {...S.INPUT_TEXT, ...styleInput}\r\n    , _caption = caption.indexOf(COLLON) === -1\r\n        ? caption + COLLON\r\n        : caption;\r\n    return (\r\n      <div style={_rootStyle}>\r\n        <label>\r\n          <span style={_captionStyle}>\r\n            {_caption}\r\n          </span>\r\n          <InputText\r\n             ref={this._refInput}\r\n             style={_inputStyle}\r\n             {...rest}\r\n          />\r\n        </label>\r\n      </div>\r\n    );\r\n  }\r\n\r\n  getValue(){\r\n    return this._inputComp.getValue();\r\n  }\r\n}\r\n\r\nexport default RowInputText\r\n"],"file":"RowInputText.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/RowInputText.js"
+ ],
+ "file": "../../../src/components/dialogs/RowInputText.js",
+ "names": [
+  "S",
+  "ROOT",
+  "paddingTop",
+  "paddingBottom",
+  "paddingRight",
+  "CAPTION",
+  "display",
+  "color",
+  "textAlign",
+  "width",
+  "fontSize",
+  "fontWeight",
+  "INPUT_TEXT",
+  "boxShadow",
+  "COLLON",
+  "RowInputText",
+  "React",
+  "forwardRef",
+  "props",
+  "ref",
+  "styleRoot",
+  "rootStyle",
+  "captionStyle",
+  "styleCaption",
+  "caption",
+  "inputStyle",
+  "styleInput",
+  "rest",
+  "_rootStyle",
+  "_captionStyle",
+  "_inputStyle",
+  "_caption",
+  "indexOf"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AAGA;;AAFA;AAIA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AACJC,IAAAA,UAAU,EAAE,CADR;AAEJC,IAAAA,aAAa,EAAE,CAFX;AAGJC,IAAAA,YAAY,EAAE;AAHV,GADE;AAMRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,OAAO,EAAE,cADF;AAEPC,IAAAA,KAAK,EAAE,SAFA;AAGPC,IAAAA,SAAS,EAAE,OAHJ;AAIPC,IAAAA,KAAK,EAAE,GAJA;AAKPL,IAAAA,YAAY,EAAE,CALP;AAMPM,IAAAA,QAAQ,EAAE,EANH;AAOPC,IAAAA,UAAU,EAAE;AAPL,GAND;AAeRC,EAAAA,UAAU,EAAG;AACXH,IAAAA,KAAK,EAAE,GADI;AAEXI,IAAAA,SAAS,EAAE;AAFA;AAfL,CAAV;AAqBA,IAAMC,MAAM,GAAG,GAAf;;AAEA,IAAMC,YAAY,gBAAGC,kBAAMC,UAAN,CAAiB,UAACC,KAAD,EAAQC,GAAR,EAAgB;AAAA,MAElDC,SAFkD,GAOhDF,KAPgD,CAElDE,SAFkD;AAAA,MAEvCC,SAFuC,GAOhDH,KAPgD,CAEvCG,SAFuC;AAAA,MAGlDC,YAHkD,GAOhDJ,KAPgD,CAGlDI,YAHkD;AAAA,MAGpCC,YAHoC,GAOhDL,KAPgD,CAGpCK,YAHoC;AAAA,uBAOhDL,KAPgD,CAIlDM,OAJkD;AAAA,MAIlDA,OAJkD,+BAI1C,OAJ0C;AAAA,MAKlDC,UALkD,GAOhDP,KAPgD,CAKlDO,UALkD;AAAA,MAKtCC,UALsC,GAOhDR,KAPgD,CAKtCQ,UALsC;AAAA,MAM/CC,IAN+C,kDAOhDT,KAPgD;AAAA,MAQlDU,UARkD,GAQrCP,SAAS,kCACZrB,CAAC,CAACC,IADU,EACDmB,SADC,CAR4B;AAAA,MAUlDS,aAVkD,GAUlCP,YAAY,kCAClBtB,CAAC,CAACK,OADgB,EACJkB,YADI,CAVsB;AAAA,MAYlDO,WAZkD,GAYpCL,UAAU,kCACdzB,CAAC,CAACY,UADY,EACGc,UADH,CAZ0B;AAAA,MAclDK,QAdkD,GAcvCP,OAAO,CAACQ,OAAR,CAAgBlB,MAAhB,MAA4B,CAAC,CAA7B,GACPU,OAAO,GAAGV,MADH,GAEPU,OAhB8C;;AAiBpD,sBACE;AAAK,IAAA,KAAK,EAAEI;AAAZ,kBACE,4DACE;AAAM,IAAA,KAAK,EAAEC;AAAb,KACGE,QADH,CADF,eAIE,gCAAC,qBAAD;AACG,IAAA,GAAG,EAAEZ,GADR;AAEG,IAAA,KAAK,EAAEW;AAFV,KAGOH,IAHP,EAJF,CADF,CADF;AAcD,CA/BoB,CAArB;AAiCA;;;;;;;;;;;;eAWeZ,Y"
+}
