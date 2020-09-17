@@ -19,11 +19,11 @@ class ListEditPane extends Component {
 
   constructor(props){
     super()
-    this._primaryBt = <A.Button.Primary
-                         caption="Edit"
-                         title="Edit List Name"
-                         onClick={this._handleRename}
-                      />
+    this._primaryBt = (<A.Button.Primary
+       caption="Edit"
+       title="Edit List Name"
+       onClick={this._handleRename}
+    />)
     this.state = {
       groupOptions : props.store.getWatchGroups(),
       listOptions : [],

@@ -23,11 +23,11 @@ class ListCreatePane extends Component {
   constructor(props){
     super()
     this.captionGroup = null
-    this._primaryBt = <A.Button.Primary
+    this._primaryBt = (<A.Button.Primary
        caption="Create"
        title="Create New List"
        onClick={this._handleCreate}
-    />
+    />)
     this.state = {
       groupOptions: props.store.getWatchGroups(),
       validationMessages: []

@@ -20,11 +20,11 @@ class GroupAddPane extends Component {
 
   constructor(props){
     super()
-    this._primaryBt = <A.Button.Primary
-                         caption="Create"
-                         title="Create New Group"
-                         onClick={this._handleCreate}
-                      />
+    this._primaryBt = (<A.Button.Primary
+       caption="Create"
+       title="Create New Group"
+       onClick={this._handleCreate}
+    />)
     this.state = {
       validationMessages : []
     }

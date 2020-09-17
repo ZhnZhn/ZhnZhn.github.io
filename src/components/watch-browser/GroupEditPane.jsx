@@ -23,11 +23,11 @@ class GroupEditPane extends Component {
   constructor(props){
     super()
     this.captionFrom = null
-    this._primaryBt = <A.Button.Primary
+    this._primaryBt = (<A.Button.Primary
        caption="Edit"
        title="Edit Group Name"
        onClick={this._handleRename}
-    />
+    />)
     this.state = {
       groupOptions: props.store.getWatchGroups(),
       validationMessages: []

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 //import PropTypes from "prop-types";
 
 import InputText from '../zhn/InputText';
@@ -22,35 +22,22 @@ const S = {
   }
 }
 
-class RowInputText extends Component {
-  /*
-  static propTypes = {
-    caption: PropTypes.string
-  }
-  */
-  _refInputText = c => this.inputText = c
+const RowInputText = React.forwardRef(({ caption }, ref) => (
+  <div style={S.ROW}>
+     <span style={S.CAPTION}>
+       {caption}
+     </span>
+     <InputText
+        ref={ref}
+        style={S.INPUT_TEXT}
+     />
+  </div>
+))
 
-  render(){
-    const { caption } = this.props;
-    return (
-      <div style={S.ROW}>
-         <span style={S.CAPTION}>
-           {caption}
-         </span>
-         <InputText
-            ref={this._refInputText}
-            style={S.INPUT_TEXT}
-         />
-      </div>
-    )
-  }
-
-  getValue(){
-    return this.inputText.getValue().trim();
-  }
-  setValue(value){
-    this.inputText.setValue(value)
-  }
+/*
+RowInputText.propTypes = {
+  caption: PropTypes.string
 }
+*/
 
 export default RowInputText
