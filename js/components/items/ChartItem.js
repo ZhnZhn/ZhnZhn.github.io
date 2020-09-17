@@ -135,6 +135,10 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       _this.forceUpdate();
     };
 
+    _this._hLoaded = function (chart) {
+      return _this.mainChart = chart;
+    };
+
     _this.getMainChart = function () {
       return _this.mainChart;
     };
@@ -313,10 +317,6 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       }));
     };
 
-    _this._refChartComp = function (comp) {
-      return _this.chartComp = comp;
-    };
-
     _this._handleToggleOpen = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isOpen');
     _this._handleClickLegend = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isShowLegend');
     _this._handleToggleToolbar = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isShowToolbar');
@@ -379,12 +379,6 @@ var ChartItem = /*#__PURE__*/function (_Component) {
   */
   ;
 
-  _proto.componentDidMount = function componentDidMount() {
-    if (this.chartComp) {
-      this.mainChart = this.chartComp.getChart();
-    }
-  };
-
   _proto.compareTo = function compareTo(dateTo) {
     if (this._compVm) {
       return this._compVm._updateDateTo(dateTo);
@@ -441,12 +435,12 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       isShow: isShowChart,
       msg: "chart"
     }) : /*#__PURE__*/_react["default"].createElement(HighchartWrapper, {
-      ref: this._refChartComp,
       isShow: isShowChart,
       style: S.WRAPPER,
       config: config,
       isShowAbs: isShowAbs,
-      absComp: this._dataSourceEl
+      absComp: this._dataSourceEl,
+      onLoaded: this._hLoaded
     }), /*#__PURE__*/_react["default"].createElement(_PanelDataInfo["default"], {
       isShow: isShowInfo,
       info: config.info,

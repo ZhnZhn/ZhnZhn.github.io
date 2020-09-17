@@ -9,8 +9,6 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
@@ -32,93 +30,59 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var HighchartWrapper = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(HighchartWrapper, _Component);
+var HighchartWrapper = function HighchartWrapper(_ref) {
+  var _ref$isShow = _ref.isShow,
+      isShow = _ref$isShow === void 0 ? true : _ref$isShow,
+      _ref$isShowAbs = _ref.isShowAbs,
+      isShowAbs = _ref$isShowAbs === void 0 ? true : _ref$isShowAbs,
+      _ref$absComp = _ref.absComp,
+      absComp = _ref$absComp === void 0 ? null : _ref$absComp,
+      style = _ref.style,
+      config = _ref.config,
+      onLoaded = _ref.onLoaded,
+      onWillUnLoaded = _ref.onWillUnLoaded;
 
-  function HighchartWrapper(props) {
-    var _this;
+  var _refChartNode = (0, _react.useRef)(),
+      _refChart = (0, _react.useRef)();
+  /*eslint-disable react-hooks/exhaustive-deps */
 
-    _this = _Component.call(this, props) || this;
 
-    _this._renderChart = function (config) {
-      if (!config) {
-        throw new Error("Chart's config must be specified.");
-      }
-
-      _this.chart = new _highcharts["default"]['Chart'](_this._refChart.current, config);
-    };
-
-    _this._refChart = /*#__PURE__*/_react["default"].createRef();
-    return _this;
-  }
-
-  var _proto = HighchartWrapper.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    var _this$props = this.props,
-        config = _this$props.config,
-        onLoaded = _this$props.onLoaded;
-
-    this._renderChart(config);
-
-    if (this.chart && _isFn(onLoaded)) {
-      onLoaded(this.chart);
+  (0, _react.useEffect)(function () {
+    if (!config) {
+      throw new Error("Chart's config must be specified.");
     }
-  };
 
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    try {
-      var onWillUnLoaded = this.props.onWillUnLoaded;
+    _refChart.current = new _highcharts["default"]['Chart'](_refChartNode.current, config);
+    var current = _refChart.current;
+
+    if (current && _isFn(onLoaded)) {
+      onLoaded(current);
+    }
+
+    return function () {
+      var current = _refChart.current;
 
       if (_isFn(onWillUnLoaded)) {
-        onWillUnLoaded(this.chart);
+        onWillUnLoaded(current);
       }
 
-      if (this.chart) {
-        this.chart.destroy();
-        this.chart = null;
+      if (current) {
+        current.destroy();
+        _refChart.current = null;
       }
-    } catch (err) {
-      /*eslint-disable no-undef */
-      if (process.env.NODE_ENV === '_development') {
-        console.log('Exception during destroy chart');
-        console.log(err);
-      }
-      /*eslint-enable no-undef */
+    };
+  }, []);
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-    }
-  };
+  var _style = isShow ? S.SHOW : S.HIDE;
 
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        isShow = _this$props2.isShow,
-        style = _this$props2.style,
-        isShowAbs = _this$props2.isShowAbs,
-        absComp = _this$props2.absComp,
-        _style = isShow ? S.SHOW : S.HIDE;
-
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, style, S.DIV, _style)
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      ref: this._refChart
-    }), isShowAbs && absComp);
-  };
-
-  _proto.getChart = function getChart() {
-    if (!this.chart) {
-      throw new Error('getChart() should not called before a component is mounted');
-    }
-
-    return this.chart;
-  };
-
-  return HighchartWrapper;
-}(_react.Component);
-
-HighchartWrapper.defaultProps = {
-  isShow: true,
-  isShowAbs: true
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: (0, _extends2["default"])({}, style, S.DIV, _style)
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    ref: _refChartNode
+  }), isShowAbs && absComp);
 };
+
 var _default = HighchartWrapper;
 exports["default"] = _default;
 //# sourceMappingURL=HighchartWrapper.js.map

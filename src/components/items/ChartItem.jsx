@@ -167,15 +167,9 @@ class ChartItem extends Component {
   }
   */
 
-  componentDidMount(){
-    if (this.chartComp) {
-      this.mainChart = this.chartComp.getChart()
-    }
-  }
+  _hLoaded = (chart) => this.mainChart = chart
+  getMainChart = () => this.mainChart
 
-  getMainChart = () => {
-    return this.mainChart;
-  }
 
   _handleLoadedMiniChart = (metricChart) => {
      if (this.mainChart) {
@@ -314,7 +308,7 @@ class ChartItem extends Component {
          >
            <ChartToolBar
              hasError={hasError}
-             style={S.TAB_DIV}             
+             style={S.TAB_DIV}
              config={config}
              onMiniChart={this._handleMiniChart}
              getChart={this.getMainChart}
@@ -333,8 +327,6 @@ class ChartItem extends Component {
          </ShowHide>
       );
    }
-
-  _refChartComp = comp => this.chartComp = comp
 
   render(){
     const {
@@ -385,12 +377,12 @@ class ChartItem extends Component {
                  msg="chart"
                />
              : <HighchartWrapper
-                ref={this._refChartComp}
-                isShow={isShowChart}
-                style={S.WRAPPER}
-                config={config}
-                isShowAbs={isShowAbs}
-                absComp={this._dataSourceEl}
+                 isShow={isShowChart}
+                 style={S.WRAPPER}
+                 config={config}
+                 isShowAbs={isShowAbs}
+                 absComp={this._dataSourceEl}
+                 onLoaded={this._hLoaded}
                />
            }
            <PanelDataInfo
