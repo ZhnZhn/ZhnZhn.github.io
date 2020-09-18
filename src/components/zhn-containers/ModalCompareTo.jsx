@@ -40,7 +40,7 @@ const ModalCompareTo = ({ isShow, onClose, onCompareTo }) => {
      }, []);
    useEffect(() => {
     if (isShow && _refInput.current) {
-      _refInput.current.focusInput()
+      _refInput.current.focus()
     }
    }, [isShow]);
   return (

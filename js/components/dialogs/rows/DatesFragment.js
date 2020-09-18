@@ -131,17 +131,17 @@ var DatesFragment = /*#__PURE__*/function (_Component) {
   };
 
   _proto.focusInput = function focusInput() {
-    this.fromDate.focusInput();
+    this.fromDate.focus();
   };
 
   _proto.focusNotValidInput = function focusNotValidInput() {
     if (!this.fromDate.isValid()) {
-      this.fromDate.focusInput();
+      this.fromDate.focus();
       return true;
     }
 
     if (!this.toDate.isValid()) {
-      this.toDate.focusInput();
+      this.toDate.focus();
       return true;
     }
 

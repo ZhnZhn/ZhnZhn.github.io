@@ -122,16 +122,16 @@ class DatesFragment extends Component {
   }
 
   focusInput() {
-    this.fromDate.focusInput();
+    this.fromDate.focus();
   }
 
   focusNotValidInput() {
     if (!this.fromDate.isValid()){
-      this.fromDate.focusInput();
+      this.fromDate.focus();
       return true;
     }
     if (!this.toDate.isValid()){
-      this.toDate.focusInput();
+      this.toDate.focus();
       return true;
     }
     return false;

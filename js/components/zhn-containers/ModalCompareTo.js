@@ -54,7 +54,7 @@ var ModalCompareTo = function ModalCompareTo(_ref) {
 
   (0, _react.useEffect)(function () {
     if (isShow && _refInput.current) {
-      _refInput.current.focusInput();
+      _refInput.current.focus();
     }
   }, [isShow]);
   return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {

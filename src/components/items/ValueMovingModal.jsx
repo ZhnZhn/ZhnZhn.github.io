@@ -77,7 +77,7 @@ const ValueMovingModal = (props) => {
   useEffect(()=>{
     if (isShow) {
       if (_refInput.current) {
-        _refInput.current.focusInput()
+        _refInput.current.focus()
       }
       if (msgDateTo) {
         setMsgDateTo('')
