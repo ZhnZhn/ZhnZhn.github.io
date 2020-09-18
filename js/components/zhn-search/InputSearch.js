@@ -126,7 +126,7 @@ var InputSearch = function InputSearch(_ref) {
     key: inputKey,
     style: S.INPUT,
     initValue: ticket,
-    onInputChange: onInputChange,
+    onChange: onInputChange,
     onEnter: _onEnter
   }), /*#__PURE__*/_react["default"].createElement("hr", {
     className: CL.INPUT_HR

@@ -78,7 +78,7 @@ var InputPlus = function InputPlus(_ref) {
     min: 1,
     max: 999,
     maxLength: 3,
-    onInputChange: onChangePeriod,
+    onChange: onChangePeriod,
     onEnter: onPlus
   }), /*#__PURE__*/_react["default"].createElement(_A["default"].SvgPlus, {
     style: S.INLINE,

@@ -46,26 +46,28 @@ const InputText = React.forwardRef((props, ref) => {
     spellCheck, placeholder,
     maxLength=125,
     min, max, step,
-    onInputChange, onEnter
+    onChange, onEnter
   } = props
   , [value, setValue] = useState(() => _initValue(initValue))
   , _refInput = useRef()
-  , _hInputChange = (event) => {
-      const value = event.target.value
-      if (value.length <= maxLength) {
-        setValue(value)
-        if (_isFn(onInputChange)) {
-          onInputChange(value)
+  , _hChange = (event) => {
+      const _value = event.target.value;
+      if (_value.length <= maxLength) {
+        setValue(_value)
+        if (_isFn(onChange)) {
+          onChange(_value)
         }
       }
     }
   , _hKeyDown = (event) => {
-      switch(event.keyCode){
-        case 27: case 46:
+      const { code, keyCode } = event
+      , _code = code || keyCode;
+      switch(_code){
+        case 'Delete': case 46:
            event.preventDefault()
            setValue(C.BLANK)
            break;
-        case 13:
+        case 'Enter': case 13:
            if (_isFn(onEnter)) {
              onEnter(event.target.value)
            }
@@ -111,7 +113,7 @@ const InputText = React.forwardRef((props, ref) => {
       min={min}
       max={max}
       step={step}
-      onChange={_hInputChange}
+      onChange={_hChange}
       onKeyDown={_hKeyDown}
     />
   );
@@ -123,10 +125,13 @@ const InputText = React.forwardRef((props, ref) => {
    initValue: PropTypes.string,
    type: PropTypes.string,
    placeholder: PropTypes.string,
+   spellCheck: PropTypes.bool,
+   maxLength: PropTypes.number,
    min: PropTypes.number,
    max: PropTypes.number,
    step: PropTypes.number,
-   onEnter: PropTypes.func
+   onEnter: PropTypes.func,
+   onChange: PropTypes.func
  }
  */
 

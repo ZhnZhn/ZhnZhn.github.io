@@ -68,7 +68,7 @@ var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) 
       min = props.min,
       max = props.max,
       step = props.step,
-      onInputChange = props.onInputChange,
+      onChange = props.onChange,
       onEnter = props.onEnter,
       _useState = (0, _react.useState)(function () {
     return _initValue(initValue);
@@ -76,25 +76,30 @@ var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) 
       value = _useState[0],
       setValue = _useState[1],
       _refInput = (0, _react.useRef)(),
-      _hInputChange = function _hInputChange(event) {
-    var value = event.target.value;
+      _hChange = function _hChange(event) {
+    var _value = event.target.value;
 
-    if (value.length <= maxLength) {
-      setValue(value);
+    if (_value.length <= maxLength) {
+      setValue(_value);
 
-      if (_isFn(onInputChange)) {
-        onInputChange(value);
+      if (_isFn(onChange)) {
+        onChange(_value);
       }
     }
   },
       _hKeyDown = function _hKeyDown(event) {
-    switch (event.keyCode) {
-      case 27:
+    var code = event.code,
+        keyCode = event.keyCode,
+        _code = code || keyCode;
+
+    switch (_code) {
+      case 'Delete':
       case 46:
         event.preventDefault();
         setValue(C.BLANK);
         break;
 
+      case 'Enter':
       case 13:
         if (_isFn(onEnter)) {
           onEnter(event.target.value);
@@ -143,7 +148,7 @@ var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) 
     min: min,
     max: max,
     step: step,
-    onChange: _hInputChange,
+    onChange: _hChange,
     onKeyDown: _hKeyDown
   });
 });
@@ -153,10 +158,13 @@ var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) 
    initValue: PropTypes.string,
    type: PropTypes.string,
    placeholder: PropTypes.string,
+   spellCheck: PropTypes.bool,
+   maxLength: PropTypes.number,
    min: PropTypes.number,
    max: PropTypes.number,
    step: PropTypes.number,
-   onEnter: PropTypes.func
+   onEnter: PropTypes.func,
+   onChange: PropTypes.func
  }
  */
 

@@ -56,7 +56,7 @@ const S = {
 };
 
 const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
-  <React.Fragment>
+  <>
     <A.InputText
       style={S.PERIOD_INPUT}
       type="number"
@@ -64,11 +64,11 @@ const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
       min={1}
       max={999}
       maxLength={3}
-      onInputChange={onChangePeriod}
+      onChange={onChangePeriod}
       onEnter={onPlus}
     />
     <A.SvgPlus style={S.INLINE} onClick={onPlus} />
-  </React.Fragment>
+  </>
 );
 const MinusPeriod = ({ color, period, onMinus }) => (
   <>
