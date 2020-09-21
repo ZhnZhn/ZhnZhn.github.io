@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
+import useInputKeyDown from './useInputKeyDown'
 //import PropTypes from "prop-types";
 
 import STYLE from './Input.Style';
-
-const _isFn = fn => typeof fn === 'function';
 
 const _initState = (value) => ({
   value,
@@ -43,20 +42,10 @@ const DateField = React.forwardRef(({
         setState({ value, errorInput: null, isValid: true })
       }
     }
-  , _hKeyDown = (event) => {
-      switch(event.keyCode){
-        case 13:
-          if (_isFn(onEnter)) {
-            onEnter(event.target.value)
-          }
-          break;
-        case 27: case 46:
-          event.preventDefault()
-          setState(_initState(initialValue))
-          break;
-        default: return;
-      }
-    };
+  , _hKeyDown = useInputKeyDown({
+      onEnter,
+      onDelete: () => setState(_initState(initialValue))
+  }, [initialValue]);
 
   useEffect(() => setState(_initState(initialValue))
     ,[initialValue]

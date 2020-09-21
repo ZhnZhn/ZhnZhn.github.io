@@ -11,13 +11,11 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
+
 var _Input = _interopRequireDefault(require("./Input.Style"));
 
 //import PropTypes from "prop-types";
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
-
 var _initState = function _initState(value) {
   return {
     value: value,
@@ -87,25 +85,12 @@ var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
       });
     }
   },
-      _hKeyDown = function _hKeyDown(event) {
-    switch (event.keyCode) {
-      case 13:
-        if (_isFn(onEnter)) {
-          onEnter(event.target.value);
-        }
-
-        break;
-
-      case 27:
-      case 46:
-        event.preventDefault();
-        setState(_initState(initialValue));
-        break;
-
-      default:
-        return;
+      _hKeyDown = (0, _useInputKeyDown["default"])({
+    onEnter: onEnter,
+    onDelete: function onDelete() {
+      return setState(_initState(initialValue));
     }
-  };
+  }, [initialValue]);
 
   (0, _react.useEffect)(function () {
     return setState(_initState(initialValue));
