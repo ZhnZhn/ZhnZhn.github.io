@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
+import useInputKeyDown from './useInputKeyDown'
 //import PropTypes from "prop-types";
 
 const CL = {
@@ -59,26 +60,15 @@ const InputText = React.forwardRef((props, ref) => {
         }
       }
     }
-  , _hKeyDown = (event) => {
-      const { code, keyCode } = event
-      , _code = code || keyCode;
-      switch(_code){
-        case 'Delete': case 46:
-           event.preventDefault()
-           setValue(C.BLANK)
-           break;
-        case 'Enter': case 13:
-           if (_isFn(onEnter)) {
-             onEnter(event.target.value)
-           }
-           break;
-        default: return;
-      }
-  };
+  , _hKeyDown = useInputKeyDown({
+      onEnter,
+      onDelete: () => setValue(C.BLANK)
+  }, [onEnter]);
 
-  useEffect(() =>
-     setValue(_initValue(initValue))
-  , [initValue])
+
+  useEffect(() => setValue(_initValue(initValue))
+   ,[initValue]
+  )
 
   useImperativeHandle(ref, () => ({
     getValue: () => (''+value).trim(),

@@ -11,6 +11,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
+
 //import PropTypes from "prop-types";
 var CL = {
   NUMBER_RANGE: 'input-minmax-number'
@@ -87,30 +89,12 @@ var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) 
       }
     }
   },
-      _hKeyDown = function _hKeyDown(event) {
-    var code = event.code,
-        keyCode = event.keyCode,
-        _code = code || keyCode;
-
-    switch (_code) {
-      case 'Delete':
-      case 46:
-        event.preventDefault();
-        setValue(C.BLANK);
-        break;
-
-      case 'Enter':
-      case 13:
-        if (_isFn(onEnter)) {
-          onEnter(event.target.value);
-        }
-
-        break;
-
-      default:
-        return;
+      _hKeyDown = (0, _useInputKeyDown["default"])({
+    onEnter: onEnter,
+    onDelete: function onDelete() {
+      return setValue(C.BLANK);
     }
-  };
+  }, [onEnter]);
 
   (0, _react.useEffect)(function () {
     return setValue(_initValue(initValue));
