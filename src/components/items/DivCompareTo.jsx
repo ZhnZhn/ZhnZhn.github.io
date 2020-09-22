@@ -35,7 +35,7 @@ const DivCompareTo = React.forwardRef(({
      <SpanLabel label="CompareTo:" />
      <DateField
        ref={ref}
-       rootStyle={S.DATE_FIELD}
+       style={S.DATE_FIELD}
        initialValue={initialValue}
        placeholder="DD-MM-YYYY"
        errorMsg="DD-MM-YYYY"

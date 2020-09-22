@@ -105,7 +105,7 @@ class  DialogType5 extends Component {
            caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
-           initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate,
+           initFromDate, initToDate, msgOnNotValidFormat, onTestDate,
            isChartType
           } = this.props
         , {
@@ -154,8 +154,7 @@ class  DialogType5 extends Component {
                  ref={this._refDates}
                  isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
-                 initToDate={initToDate}
-                 nForecastDate={nForecastDate}
+                 initToDate={initToDate}                 
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
                />

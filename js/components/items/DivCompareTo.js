@@ -42,7 +42,7 @@ var DivCompareTo = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref
     label: "CompareTo:"
   }), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
     ref: ref,
-    rootStyle: S.DATE_FIELD,
+    style: S.DATE_FIELD,
     initialValue: initialValue,
     placeholder: "DD-MM-YYYY",
     errorMsg: "DD-MM-YYYY",

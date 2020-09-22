@@ -29,7 +29,7 @@ var _onTest = function _onTest() {
 };
 
 var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
-  var rootStyle = _ref.rootStyle,
+  var style = _ref.style,
       inputStyle = _ref.inputStyle,
       _ref$initialValue = _ref.initialValue,
       initialValue = _ref$initialValue === void 0 ? '' : _ref$initialValue,
@@ -41,7 +41,6 @@ var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
       name = _ref$name === void 0 ? 'text-date' : _ref$name,
       _ref$maxLength = _ref.maxLength,
       maxLength = _ref$maxLength === void 0 ? 10 : _ref$maxLength,
-      nForecastDate = _ref.nForecastDate,
       _ref$errorMsg = _ref.errorMsg,
       errorMsg = _ref$errorMsg === void 0 ? null : _ref$errorMsg,
       _ref$onTest = _ref.onTest,
@@ -60,7 +59,7 @@ var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
       _hChangeValue = function _hChangeValue(event) {
     var value = event.target.value;
 
-    if (!onTest(value, nForecastDate)) {
+    if (!onTest(value)) {
       setState({
         value: value,
         isValid: false,
@@ -71,7 +70,7 @@ var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
     }
   },
       _hBlurValue = function _hBlurValue() {
-    if (value !== initialValue && !onTest(value, nForecastDate)) {
+    if (value !== initialValue && !onTest(value)) {
       setState({
         value: value,
         errorInput: errorMsg,
@@ -117,7 +116,7 @@ var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
   var _styleHr = _isValid ? _Input["default"].HR_VALID : _Input["default"].HR_NOT_VALID;
 
   return /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, _Input["default"].ROOT, rootStyle)
+    style: (0, _extends2["default"])({}, _Input["default"].ROOT, style)
   }, /*#__PURE__*/_react["default"].createElement("input", {
     ref: _refInput,
     style: (0, _extends2["default"])({}, _Input["default"].INPUT, inputStyle),
@@ -142,14 +141,13 @@ var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
 });
 /*
  DateField.propTypes = {
-   rootStyle: PropTypes.object,
+   style: PropTypes.object,
    inputStyle: PropTypes.object,
    initialValue: PropTypes.string,
    placeholder: PropTypes.string,
    inpumode: PropTypes.string,
    maxLength: PropTypes.number,
    errorMsg: PropTypes.string,
-   nForecastDate: PropTypes.number,
    onTest: PropTypes.func,
    onEnter: PropTypes.func
  }

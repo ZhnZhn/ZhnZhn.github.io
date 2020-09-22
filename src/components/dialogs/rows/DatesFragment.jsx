@@ -17,7 +17,6 @@ class DatesFragment extends Component {
     fromCaption: PropTypes.string,
     toCaption: PropTypes.string,
     errMsg: PropTypes.string,
-    nForecastDate: PropTypes.number,
     onTestDate: PropTypes.func,
     msgOnNotValidFormat: PropTypes.func,
     onEnter: PropTypes.func
@@ -43,7 +42,6 @@ class DatesFragment extends Component {
         fromCaption, initFromDate,
         toCaption, initToDate,
         dateStyle,
-        nForecastDate,
         errMsg,
         onTestDate,
         onEnter
@@ -60,7 +58,7 @@ class DatesFragment extends Component {
             </span>
             <DateField
                ref={this._refFromDate}
-               rootStyle={dateStyle}
+               style={dateStyle}
                placeholder={placeholder}
                initialValue={initFromDate}
                errorMsg={errMsg}
@@ -74,10 +72,9 @@ class DatesFragment extends Component {
             </span>
             <DateField
                ref={this._refToDate}
-               rootStyle={dateStyle}
+               style={dateStyle}
                placeholder={placeholder}
                initialValue={initToDate}
-               nForecastDate={nForecastDate}
                errorMsg={errMsg}
                onTest={onTestDate}
                onEnter={onEnter}

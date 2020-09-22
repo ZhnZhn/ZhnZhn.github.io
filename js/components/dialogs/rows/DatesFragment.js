@@ -53,7 +53,6 @@ var DatesFragment = /*#__PURE__*/function (_Component) {
         toCaption = _this$props.toCaption,
         initToDate = _this$props.initToDate,
         dateStyle = _this$props.dateStyle,
-        nForecastDate = _this$props.nForecastDate,
         errMsg = _this$props.errMsg,
         onTestDate = _this$props.onTestDate,
         onEnter = _this$props.onEnter,
@@ -69,7 +68,7 @@ var DatesFragment = /*#__PURE__*/function (_Component) {
       style: labelStyle
     }, fromCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
       ref: this._refFromDate,
-      rootStyle: dateStyle,
+      style: dateStyle,
       placeholder: placeholder,
       initialValue: initFromDate,
       errorMsg: errMsg,
@@ -81,10 +80,9 @@ var DatesFragment = /*#__PURE__*/function (_Component) {
       style: labelStyle
     }, toCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
       ref: this._refToDate,
-      rootStyle: dateStyle,
+      style: dateStyle,
       placeholder: placeholder,
       initialValue: initToDate,
-      nForecastDate: nForecastDate,
       errorMsg: errMsg,
       onTest: onTestDate,
       onEnter: onEnter

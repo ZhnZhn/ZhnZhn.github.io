@@ -13,13 +13,12 @@ const _initState = (value) => ({
 const _onTest = () => true
 
 const DateField = React.forwardRef(({
-  rootStyle, inputStyle,
+  style, inputStyle,
   initialValue='',
   placeholder='YYYY-MM-DD',
   inputmode='numeric',
   name='text-date',
   maxLength=10,
-  nForecastDate,
   errorMsg=null,
   onTest=_onTest,
   onEnter
@@ -29,14 +28,14 @@ const DateField = React.forwardRef(({
   , { value, errorInput, isValid } = state
   , _hChangeValue = (event) => {
       const value = event.target.value;
-      if (!onTest(value, nForecastDate)){
+      if (!onTest(value)){
         setState({ value, isValid: false, errorInput: null })
       } else {
         setState(_initState(value))
       }
     }
   , _hBlurValue = () => {
-      if (value !== initialValue && !onTest(value, nForecastDate)){
+      if (value !== initialValue && !onTest(value)){
         setState({ value, errorInput: errorMsg, isValid: false })
       } else {
         setState({ value, errorInput: null, isValid: true })
@@ -66,7 +65,7 @@ const DateField = React.forwardRef(({
       ? STYLE.HR_VALID
       : STYLE.HR_NOT_VALID;
   return (
-    <div style={{...STYLE.ROOT, ...rootStyle}}>
+    <div style={{...STYLE.ROOT, ...style}}>
       <input
          ref={_refInput}
          style={{...STYLE.INPUT, ...inputStyle}}
@@ -94,14 +93,13 @@ const DateField = React.forwardRef(({
 
 /*
  DateField.propTypes = {
-   rootStyle: PropTypes.object,
+   style: PropTypes.object,
    inputStyle: PropTypes.object,
    initialValue: PropTypes.string,
    placeholder: PropTypes.string,
    inpumode: PropTypes.string,
    maxLength: PropTypes.number,
    errorMsg: PropTypes.string,
-   nForecastDate: PropTypes.number,
    onTest: PropTypes.func,
    onEnter: PropTypes.func
  }

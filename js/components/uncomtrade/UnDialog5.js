@@ -173,7 +173,6 @@ var UnDialog5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/functi
         msgOnNotSelected = _this$props.msgOnNotSelected,
         initFromDate = _this$props.initFromDate,
         initToDate = _this$props.initToDate,
-        nForecastDate = _this$props.nForecastDate,
         msgOnNotValidFormat = _this$props.msgOnNotValidFormat,
         onTestDate = _this$props.onTestDate,
         _this$state = this.state,
@@ -217,7 +216,6 @@ var UnDialog5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/functi
       isShowLabels: isShowLabels,
       initFromDate: initFromDate,
       initToDate: initToDate,
-      nForecastDate: nForecastDate,
       msgOnNotValidFormat: msgOnNotValidFormat,
       onTestDate: onTestDate
     })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
