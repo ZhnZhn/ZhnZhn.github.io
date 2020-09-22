@@ -1,8 +1,15 @@
 import '@testing-library/jest-dom'
 import React from 'react'
-import { render, fireEvent, screen, act } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
+import fireEventHelpers from './_fireEventHelpers'
 
 import InputText from '../InputText'
+
+const {
+  fireChange,
+  fireKeyDownEnter,
+  fireKeyDownDelete
+} = fireEventHelpers
 
 describe("InputText", () => {
   const _findInput = () => screen.findByRole('textbox');
@@ -22,20 +29,20 @@ describe("InputText", () => {
 
     //2 Test event handlers
     //2.1 KeyDown Delete
-    fireEvent.keyDown(input, { key: 'Delete', keyCode: 46 })
+    fireKeyDownDelete(input)
     input = await _findInput()
     expect(input).toHaveValue('')
 
     //2.2 onChange
-    fireEvent.change(input, {target: { value: 'abcd' }})
+    const _changeValue = 'abcd'
+    fireChange(input, _changeValue)
     input = await _findInput()
-    expect(input).toHaveValue('abcd')
-
+    expect(input).toHaveValue(_changeValue)
     expect(onChange).toHaveBeenCalledTimes(1)
-    expect(onChange.mock.calls[0][0]).toBe('abcd')
+    expect(onChange.mock.calls[0][0]).toBe(_changeValue)
 
     //2.3 KeyDown Enter && onEnter
-    fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 })
+    fireKeyDownEnter(input)
     expect(onEnter).toHaveBeenCalledTimes(1)
     expect(onEnter.mock.calls[0][0]).toBe('abcd')
 
@@ -56,14 +63,13 @@ describe("InputText", () => {
     expect(input).toHaveValue('abcde')
 
     //4.1 KeyDown Enter && onEnter
-    fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 })
+    fireKeyDownEnter(input)
     expect(onEnter).toHaveBeenCalledTimes(1)
 
     //4.2 onChange
-    fireEvent.change(input, {target: { value: 'abcd' }})
+    fireChange(input, _changeValue)
     input = await _findInput()
-    expect(input).toHaveValue('abcd')
+    expect(input).toHaveValue(_changeValue)
     expect(onChange).toHaveBeenCalledTimes(1)
-
   })
 })

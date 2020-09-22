@@ -12,8 +12,13 @@ var _react = _interopRequireDefault(require("react"));
 
 var _react2 = require("@testing-library/react");
 
+var _fireEventHelpers = _interopRequireDefault(require("./_fireEventHelpers"));
+
 var _DateField = _interopRequireDefault(require("../DateField"));
 
+var fireChange = _fireEventHelpers["default"].fireChange,
+    fireKeyDownEnter = _fireEventHelpers["default"].fireKeyDownEnter,
+    fireKeyDownDelete = _fireEventHelpers["default"].fireKeyDownDelete;
 describe("DateField", function () {
   var _findInput = function _findInput() {
     return _react2.screen.findByRole('textbox');
@@ -36,13 +41,7 @@ describe("DateField", function () {
             //2.1 onChange
 
             _changeValue = '2020-01-01';
-
-            _react2.fireEvent.change(input, {
-              target: {
-                value: _changeValue
-              }
-            });
-
+            fireChange(input, _changeValue);
             _context.next = 7;
             return _findInput();
 
@@ -50,19 +49,11 @@ describe("DateField", function () {
             input = _context.sent;
             expect(input).toHaveValue(_changeValue); //2.2 KeyDown Enter
 
-            _react2.fireEvent.keyDown(input, {
-              key: 'Enter',
-              keyCode: 13
-            });
-
+            fireKeyDownEnter(input);
             expect(onEnter).toHaveBeenCalledTimes(1);
             expect(onEnter.mock.calls[0][0]).toBe(_changeValue); //2.3 KeyDown Delete
 
-            _react2.fireEvent.keyDown(input, {
-              key: 'Delete',
-              keyCode: 46
-            });
-
+            fireKeyDownDelete(input);
             _context.next = 15;
             return _findInput();
 

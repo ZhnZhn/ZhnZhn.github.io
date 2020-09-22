@@ -1,8 +1,15 @@
 import '@testing-library/jest-dom'
 import React from 'react'
-import { render, fireEvent, screen, act } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
+import fireEventHelpers from './_fireEventHelpers'
 
 import DateField from '../DateField'
+
+const {
+  fireChange,
+  fireKeyDownEnter,
+  fireKeyDownDelete
+} = fireEventHelpers
 
 describe("DateField", () => {
   const _findInput = () => screen.findByRole('textbox');
@@ -21,18 +28,18 @@ describe("DateField", () => {
 
     //2 Test event handlers
     //2.1 onChange
-    const _changeValue = '2020-01-01'
-    fireEvent.change(input, {target: { value: _changeValue }})
+    const _changeValue = '2020-01-01';
+    fireChange(input, _changeValue)
     input = await _findInput()
     expect(input).toHaveValue(_changeValue)
 
     //2.2 KeyDown Enter
-    fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 })
+    fireKeyDownEnter(input)
     expect(onEnter).toHaveBeenCalledTimes(1)
     expect(onEnter.mock.calls[0][0]).toBe(_changeValue)
 
     //2.3 KeyDown Delete
-    fireEvent.keyDown(input, { key: 'Delete', keyCode: 46 })
+    fireKeyDownDelete(input)
     input = await _findInput()
     expect(input).toHaveValue(initialValue)
 

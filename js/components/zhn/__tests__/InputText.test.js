@@ -12,15 +12,20 @@ var _react = _interopRequireDefault(require("react"));
 
 var _react2 = require("@testing-library/react");
 
+var _fireEventHelpers = _interopRequireDefault(require("./_fireEventHelpers"));
+
 var _InputText = _interopRequireDefault(require("../InputText"));
 
+var fireChange = _fireEventHelpers["default"].fireChange,
+    fireKeyDownEnter = _fireEventHelpers["default"].fireKeyDownEnter,
+    fireKeyDownDelete = _fireEventHelpers["default"].fireKeyDownDelete;
 describe("InputText", function () {
   var _findInput = function _findInput() {
     return _react2.screen.findByRole('textbox');
   };
 
   test('should render InputText with event handlers and ref', /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-    var onEnter, onChange, ref, _render, rerender, input;
+    var onEnter, onChange, ref, _render, rerender, input, _changeValue;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -36,11 +41,7 @@ describe("InputText", function () {
             expect(input).toHaveValue('abc'); //2 Test event handlers
             //2.1 KeyDown Delete
 
-            _react2.fireEvent.keyDown(input, {
-              key: 'Delete',
-              keyCode: 46
-            });
-
+            fireKeyDownDelete(input);
             _context.next = 6;
             return _findInput();
 
@@ -48,26 +49,18 @@ describe("InputText", function () {
             input = _context.sent;
             expect(input).toHaveValue(''); //2.2 onChange
 
-            _react2.fireEvent.change(input, {
-              target: {
-                value: 'abcd'
-              }
-            });
-
-            _context.next = 11;
+            _changeValue = 'abcd';
+            fireChange(input, _changeValue);
+            _context.next = 12;
             return _findInput();
 
-          case 11:
+          case 12:
             input = _context.sent;
-            expect(input).toHaveValue('abcd');
+            expect(input).toHaveValue(_changeValue);
             expect(onChange).toHaveBeenCalledTimes(1);
-            expect(onChange.mock.calls[0][0]).toBe('abcd'); //2.3 KeyDown Enter && onEnter
+            expect(onChange.mock.calls[0][0]).toBe(_changeValue); //2.3 KeyDown Enter && onEnter
 
-            _react2.fireEvent.keyDown(input, {
-              key: 'Enter',
-              keyCode: 13
-            });
-
+            fireKeyDownEnter(input);
             expect(onEnter).toHaveBeenCalledTimes(1);
             expect(onEnter.mock.calls[0][0]).toBe('abcd'); //3 Test ref implementation interface
             //3.1
@@ -77,10 +70,10 @@ describe("InputText", function () {
             (0, _react2.act)(function () {
               return ref.current.setValue('a');
             });
-            _context.next = 22;
+            _context.next = 23;
             return _findInput();
 
-          case 22:
+          case 23:
             input = _context.sent;
             expect(input).toHaveValue('a'); //3.3
 
@@ -90,35 +83,26 @@ describe("InputText", function () {
             rerender( /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
               initValue: "abcde"
             }));
-            _context.next = 29;
+            _context.next = 30;
             return _findInput();
 
-          case 29:
+          case 30:
             input = _context.sent;
             expect(input).toHaveValue('abcde'); //4.1 KeyDown Enter && onEnter
 
-            _react2.fireEvent.keyDown(input, {
-              key: 'Enter',
-              keyCode: 13
-            });
-
+            fireKeyDownEnter(input);
             expect(onEnter).toHaveBeenCalledTimes(1); //4.2 onChange
 
-            _react2.fireEvent.change(input, {
-              target: {
-                value: 'abcd'
-              }
-            });
-
-            _context.next = 36;
+            fireChange(input, _changeValue);
+            _context.next = 37;
             return _findInput();
 
-          case 36:
+          case 37:
             input = _context.sent;
-            expect(input).toHaveValue('abcd');
+            expect(input).toHaveValue(_changeValue);
             expect(onChange).toHaveBeenCalledTimes(1);
 
-          case 39:
+          case 40:
           case "end":
             return _context.stop();
         }
