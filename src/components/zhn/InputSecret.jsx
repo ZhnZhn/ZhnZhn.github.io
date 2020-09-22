@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { useRef, useState, useCallback, useEffect, useImperativeHandle } from 'react';
+import useInputKeyDown from './useInputKeyDown'
 
 const S = {
   ROOT: {
@@ -20,92 +21,71 @@ const S = {
   }
 };
 
-class InputSecret extends Component {
 
-  static defaultProps = {
-    maxLength: "32",
-    onEnter: () => {}
-  }
+const _onEnter = () => {}
 
-  state = {
-    value: ''
-  }
+const InputSecret = React.forwardRef(({
+  name,
+  placeholder,
+  maxLength="32",
+  onEnter=_onEnter
+}, ref) => {
+  const _refInput = useRef()
+  , _refEnter = useRef(() => '')
+  , [value, setValue] = useState('')
+  , _hInputChange = useCallback(event => {
+    setValue(event.target.value.trim())
+  }, [])
+  , _hKeyDown = useInputKeyDown({
+    onEnter: () => _refEnter.current(),
+    onDelete: () => {
+      onEnter('')
+      setValue('')
+    }
+  });
 
-  _hInputChange = (event) => {
-    this.setState({
-      value: event.target.value.trim(),
-    })
-  }
+  useImperativeHandle(ref, () => ({
+    getValue: () => value,
+    clear: () => setValue('')
+  }), [value])
 
-  _clearAttrValue = () => {
-    this._clearId = setTimeout(() => {
-      const _input = this._input;
+  /*eslint-disable react-hooks/exhaustive-deps*/
+  useEffect(() =>
+   _refEnter.current = () => onEnter(value)
+   , [value]
+  ) //onEnter
+  /*eslint-enable react-hooks/exhaustive-deps*/
+
+  useEffect(() => {
+    setTimeout(() => {
+      const _input = _refInput.current;
       if (_input && _input.hasAttribute('value')) {
         _input.removeAttribute('value')
       }
     })
-  }
+  })
 
-  _hKeyDown = (event) => {
-    if (event.keyCode !== 27) {
-      event.stopPropagation()
-    }
-    switch(event.keyCode){
-      case 13:
-        event.preventDefault()
-        this.props.onEnter(this.state.value)
-        break;
-      case 27: case 46:
-        this.props.onEnter('')
-        this.clear();
-        break;
-      default: return;
-    }
-  }
-
-
-  _refInput = n => this._input = n
-
-  render(){
-    const {
-      name,
-      placeholder,
-      maxLength
-    } = this.props
-    , { value } = this.state;
-    return (
-      <div style={S.ROOT}>
-        <input
-            hidden={true}
-            autoComplete="username"
-            value={name}
-            readOnly={true}
-        />
-        <input
-           ref={this._refInput}
-           style={S.INPUT}
-           type="password"
-           autoComplete="current-password"
-           placeholder={placeholder}
-           maxLength={maxLength}
-           value={value}
-           onChange={this._hInputChange}
-           onKeyDown={this._hKeyDown}
-        />
-      </div>
-    )
-  }
-
-  componentDidUpdate() {
-    this._clearAttrValue()
-  }
-
-  getValue(){
-    return this.state.value;
-  }
-  clear(){
-    this.setState({ value: '' })
-  }
-}
+  return (
+    <div style={S.ROOT}>
+      <input
+         hidden={true}
+         autoComplete="username"
+         value={name}
+         readOnly={true}
+      />
+      <input
+         ref={_refInput}
+         style={S.INPUT}
+         type="password"
+         autoComplete="current-password"
+         placeholder={placeholder}
+         maxLength={maxLength}
+         value={value}
+         onChange={_hInputChange}
+         onKeyDown={_hKeyDown}
+      />
+    </div>
+  );
+})
 
 export default InputSecret

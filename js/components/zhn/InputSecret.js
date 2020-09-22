@@ -1,15 +1,15 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
+
+var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
 var S = {
   ROOT: {
@@ -31,119 +31,85 @@ var S = {
   }
 };
 
-var InputSecret = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(InputSecret, _Component);
+var _onEnter = function _onEnter() {};
 
-  function InputSecret() {
-    var _this;
+var InputSecret = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+  var name = _ref.name,
+      placeholder = _ref.placeholder,
+      _ref$maxLength = _ref.maxLength,
+      maxLength = _ref$maxLength === void 0 ? "32" : _ref$maxLength,
+      _ref$onEnter = _ref.onEnter,
+      onEnter = _ref$onEnter === void 0 ? _onEnter : _ref$onEnter;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+  var _refInput = (0, _react.useRef)(),
+      _refEnter = (0, _react.useRef)(function () {
+    return '';
+  }),
+      _useState = (0, _react.useState)(''),
+      value = _useState[0],
+      setValue = _useState[1],
+      _hInputChange = (0, _react.useCallback)(function (event) {
+    setValue(event.target.value.trim());
+  }, []),
+      _hKeyDown = (0, _useInputKeyDown["default"])({
+    onEnter: function onEnter() {
+      return _refEnter.current();
+    },
+    onDelete: function onDelete() {
+      onEnter('');
+      setValue('');
     }
+  });
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      value: ''
-    };
-
-    _this._hInputChange = function (event) {
-      _this.setState({
-        value: event.target.value.trim()
-      });
-    };
-
-    _this._clearAttrValue = function () {
-      _this._clearId = setTimeout(function () {
-        var _input = _this._input;
-
-        if (_input && _input.hasAttribute('value')) {
-          _input.removeAttribute('value');
-        }
-      });
-    };
-
-    _this._hKeyDown = function (event) {
-      if (event.keyCode !== 27) {
-        event.stopPropagation();
-      }
-
-      switch (event.keyCode) {
-        case 13:
-          event.preventDefault();
-
-          _this.props.onEnter(_this.state.value);
-
-          break;
-
-        case 27:
-        case 46:
-          _this.props.onEnter('');
-
-          _this.clear();
-
-          break;
-
-        default:
-          return;
+  (0, _react.useImperativeHandle)(ref, function () {
+    return {
+      getValue: function getValue() {
+        return value;
+      },
+      clear: function clear() {
+        return setValue('');
       }
     };
+  }, [value]);
+  /*eslint-disable react-hooks/exhaustive-deps*/
 
-    _this._refInput = function (n) {
-      return _this._input = n;
+  (0, _react.useEffect)(function () {
+    return _refEnter.current = function () {
+      return onEnter(value);
     };
+  }, [value]); //onEnter
 
-    return _this;
-  }
+  /*eslint-enable react-hooks/exhaustive-deps*/
 
-  var _proto = InputSecret.prototype;
+  (0, _react.useEffect)(function () {
+    setTimeout(function () {
+      var _input = _refInput.current;
 
-  _proto.render = function render() {
-    var _this$props = this.props,
-        name = _this$props.name,
-        placeholder = _this$props.placeholder,
-        maxLength = _this$props.maxLength,
-        value = this.state.value;
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT
-    }, /*#__PURE__*/_react["default"].createElement("input", {
-      hidden: true,
-      autoComplete: "username",
-      value: name,
-      readOnly: true
-    }), /*#__PURE__*/_react["default"].createElement("input", {
-      ref: this._refInput,
-      style: S.INPUT,
-      type: "password",
-      autoComplete: "current-password",
-      placeholder: placeholder,
-      maxLength: maxLength,
-      value: value,
-      onChange: this._hInputChange,
-      onKeyDown: this._hKeyDown
-    }));
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate() {
-    this._clearAttrValue();
-  };
-
-  _proto.getValue = function getValue() {
-    return this.state.value;
-  };
-
-  _proto.clear = function clear() {
-    this.setState({
-      value: ''
+      if (_input && _input.hasAttribute('value')) {
+        _input.removeAttribute('value');
+      }
     });
-  };
+  });
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.ROOT
+  }, /*#__PURE__*/_react["default"].createElement("input", {
+    hidden: true,
+    autoComplete: "username",
+    value: name,
+    readOnly: true
+  }), /*#__PURE__*/_react["default"].createElement("input", {
+    ref: _refInput,
+    style: S.INPUT,
+    type: "password",
+    autoComplete: "current-password",
+    placeholder: placeholder,
+    maxLength: maxLength,
+    value: value,
+    onChange: _hInputChange,
+    onKeyDown: _hKeyDown
+  }));
+});
 
-  return InputSecret;
-}(_react.Component);
-
-InputSecret.defaultProps = {
-  maxLength: "32",
-  onEnter: function onEnter() {}
-};
 var _default = InputSecret;
 exports["default"] = _default;
 //# sourceMappingURL=InputSecret.js.map
