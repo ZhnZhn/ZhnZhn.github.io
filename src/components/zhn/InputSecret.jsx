@@ -42,19 +42,15 @@ const InputSecret = React.forwardRef(({
       onEnter('')
       setValue('')
     }
-  });
+  }, [onEnter]);
+
+  _refEnter.current = () => onEnter(value)
 
   useImperativeHandle(ref, () => ({
     getValue: () => value,
     clear: () => setValue('')
   }), [value])
 
-  /*eslint-disable react-hooks/exhaustive-deps*/
-  useEffect(() =>
-   _refEnter.current = () => onEnter(value)
-   , [value]
-  ) //onEnter
-  /*eslint-enable react-hooks/exhaustive-deps*/
 
   useEffect(() => {
     setTimeout(() => {

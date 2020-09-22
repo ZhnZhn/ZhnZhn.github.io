@@ -59,7 +59,11 @@ var InputSecret = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref)
       onEnter('');
       setValue('');
     }
-  });
+  }, [onEnter]);
+
+  _refEnter.current = function () {
+    return onEnter(value);
+  };
 
   (0, _react.useImperativeHandle)(ref, function () {
     return {
@@ -71,16 +75,6 @@ var InputSecret = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref)
       }
     };
   }, [value]);
-  /*eslint-disable react-hooks/exhaustive-deps*/
-
-  (0, _react.useEffect)(function () {
-    return _refEnter.current = function () {
-      return onEnter(value);
-    };
-  }, [value]); //onEnter
-
-  /*eslint-enable react-hooks/exhaustive-deps*/
-
   (0, _react.useEffect)(function () {
     setTimeout(function () {
       var _input = _refInput.current;
