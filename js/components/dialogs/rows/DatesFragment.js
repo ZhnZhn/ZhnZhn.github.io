@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -19,170 +17,146 @@ var _crRowStyle2 = _interopRequireDefault(require("./crRowStyle"));
 var FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 var NEAR_ERR_MSG = "From Date is near that To Date";
 
-var DatesFragment = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(DatesFragment, _Component);
-
-  function DatesFragment() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-
-    _this._refFromDate = function (c) {
-      return _this.fromDate = c;
-    };
-
-    _this._refToDate = function (c) {
-      return _this.toDate = c;
-    };
-
-    return _this;
+var _isPeriodValid = function _isPeriodValid(from, to) {
+  return from <= to;
+},
+    _msgOnNotValidFormat = function _msgOnNotValidFormat(item) {
+  if (item === void 0) {
+    item = 'Date';
   }
 
-  var _proto = DatesFragment.prototype;
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        isShowLabels = _this$props.isShowLabels,
-        placeholder = _this$props.placeholder,
-        fromCaption = _this$props.fromCaption,
-        initFromDate = _this$props.initFromDate,
-        toCaption = _this$props.toCaption,
-        initToDate = _this$props.initToDate,
-        dateStyle = _this$props.dateStyle,
-        errMsg = _this$props.errMsg,
-        onTestDate = _this$props.onTestDate,
-        onEnter = _this$props.onEnter,
-        _crRowStyle = (0, _crRowStyle2["default"])({
-      isShowLabels: isShowLabels
-    }),
-        rowStyle = _crRowStyle.rowStyle,
-        labelStyle = _crRowStyle.labelStyle;
-
-    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
-      style: rowStyle
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: labelStyle
-    }, fromCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
-      ref: this._refFromDate,
-      style: dateStyle,
-      placeholder: placeholder,
-      initialValue: initFromDate,
-      errorMsg: errMsg,
-      onTest: onTestDate,
-      onEnter: onEnter
-    })), /*#__PURE__*/_react["default"].createElement("div", {
-      style: rowStyle
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: labelStyle
-    }, toCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
-      ref: this._refToDate,
-      style: dateStyle,
-      placeholder: placeholder,
-      initialValue: initToDate,
-      errorMsg: errMsg,
-      onTest: onTestDate,
-      onEnter: onEnter
-    })));
-  };
-
-  _proto.getValues = function getValues() {
-    return {
-      fromDate: this.fromDate.getValue(),
-      toDate: this.toDate.getValue()
-    };
-  };
-
-  _proto.getValidation = function getValidation() {
-    var fromDate = this.fromDate,
-        toDate = this.toDate,
-        _this$props2 = this.props,
-        msgOnNotValidFormat = _this$props2.msgOnNotValidFormat,
-        isPeriodValid = _this$props2.isPeriodValid,
-        datesMsg = [];
-
-    if (!fromDate.isValid()) {
-      datesMsg.push(msgOnNotValidFormat('From Date'));
-    }
-
-    if (!toDate.isValid()) {
-      datesMsg.push(msgOnNotValidFormat('To Date'));
-    }
-
-    if (datesMsg.length === 0 && !isPeriodValid(fromDate.getValue().trim(), toDate.getValue().trim())) {
-      datesMsg.push(NEAR_ERR_MSG);
-    }
-
-    if (datesMsg.length > 0) {
-      return {
-        isValid: false,
-        datesMsg: datesMsg
-      };
-    }
-
-    return {
-      isValid: true
-    };
-  };
-
-  _proto.focusInput = function focusInput() {
-    this.fromDate.focus();
-  };
-
-  _proto.focusNotValidInput = function focusNotValidInput() {
-    if (!this.fromDate.isValid()) {
-      this.fromDate.focus();
-      return true;
-    }
-
-    if (!this.toDate.isValid()) {
-      this.toDate.focus();
-      return true;
-    }
-
-    return false;
-  };
-
-  _proto.setFromTo = function setFromTo(fromStr, toStr) {
-    this._setFromDate(fromStr);
-
-    this._setToDate(toStr);
-  };
-
-  _proto._setFromDate = function _setFromDate(dateStr) {
-    if (this.fromDate) {
-      this.fromDate.setValue(dateStr);
-    }
-  };
-
-  _proto._setToDate = function _setToDate(dateStr) {
-    if (this.toDate) {
-      this.toDate.setValue(dateStr);
-    }
-  };
-
-  return DatesFragment;
-}(_react.Component);
-
-DatesFragment.defaultProps = {
-  isShowLabels: true,
-  fromCaption: 'From Date:',
-  toCaption: 'To Date:',
-  errMsg: FORMAT_ERR_MSG,
-  msgOnNotValidFormat: function msgOnNotValidFormat(item) {
-    if (item === void 0) {
-      item = 'Date';
-    }
-
-    return item + " is not in valid format";
-  },
-  isPeriodValid: function isPeriodValid(from, to) {
-    return from <= to;
-  }
+  return item + " is not in valid format";
 };
+
+var _getValue = function _getValue(ref) {
+  return ref.current.getValue();
+},
+    _getTrimValue = function _getTrimValue(ref) {
+  return _getValue(ref).trim();
+},
+    _isValid = function _isValid(ref) {
+  return ref.current.isValid();
+},
+    _setValue = function _setValue(ref, value) {
+  return ref.current.setValue(value);
+};
+
+var DatesFragment = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+  var _ref$isShowLabels = _ref.isShowLabels,
+      isShowLabels = _ref$isShowLabels === void 0 ? true : _ref$isShowLabels,
+      placeholder = _ref.placeholder,
+      _ref$fromCaption = _ref.fromCaption,
+      fromCaption = _ref$fromCaption === void 0 ? 'From Date:' : _ref$fromCaption,
+      initFromDate = _ref.initFromDate,
+      _ref$toCaption = _ref.toCaption,
+      toCaption = _ref$toCaption === void 0 ? 'To Date:' : _ref$toCaption,
+      initToDate = _ref.initToDate,
+      dateStyle = _ref.dateStyle,
+      _ref$errMsg = _ref.errMsg,
+      errMsg = _ref$errMsg === void 0 ? FORMAT_ERR_MSG : _ref$errMsg,
+      _ref$isPeriodValid = _ref.isPeriodValid,
+      isPeriodValid = _ref$isPeriodValid === void 0 ? _isPeriodValid : _ref$isPeriodValid,
+      _ref$msgOnNotValidFor = _ref.msgOnNotValidFormat,
+      msgOnNotValidFormat = _ref$msgOnNotValidFor === void 0 ? _msgOnNotValidFormat : _ref$msgOnNotValidFor,
+      onTestDate = _ref.onTestDate,
+      onEnter = _ref.onEnter;
+
+  var _refFrom = (0, _react.useRef)(),
+      _refTo = (0, _react.useRef)(),
+      _crRowStyle = (0, _crRowStyle2["default"])({
+    isShowLabels: isShowLabels
+  }),
+      rowStyle = _crRowStyle.rowStyle,
+      labelStyle = _crRowStyle.labelStyle;
+
+  (0, _react.useImperativeHandle)(ref, function () {
+    return {
+      getValues: function getValues() {
+        return {
+          fromDate: _getValue(_refFrom),
+          toDate: _getValue(_refTo)
+        };
+      },
+      getValidation: function getValidation() {
+        var datesMsg = [];
+
+        if (!_isValid(_refFrom)) {
+          datesMsg.push(msgOnNotValidFormat('From Date'));
+        }
+
+        if (!_isValid(_refTo)) {
+          datesMsg.push(msgOnNotValidFormat('To Date'));
+        }
+
+        if (datesMsg.length === 0 && !isPeriodValid(_getTrimValue(_refFrom), _getTrimValue(_refTo))) {
+          datesMsg.push(NEAR_ERR_MSG);
+        }
+
+        if (datesMsg.length > 0) {
+          return {
+            isValid: false,
+            datesMsg: datesMsg
+          };
+        }
+
+        return {
+          isValid: true
+        };
+      },
+      focusInput: function focusInput() {
+        return _refFrom.current.focus();
+      },
+      setFromTo: function setFromTo(fromStr, toStr) {
+        _setValue(_refFrom, fromStr);
+
+        _setValue(_refTo, toStr);
+      }
+    };
+  }, [isPeriodValid, msgOnNotValidFormat]);
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
+    style: rowStyle
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: labelStyle
+  }, fromCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
+    ref: _refFrom,
+    style: dateStyle,
+    placeholder: placeholder,
+    initialValue: initFromDate,
+    errorMsg: errMsg,
+    onTest: onTestDate,
+    onEnter: onEnter
+  })), /*#__PURE__*/_react["default"].createElement("div", {
+    style: rowStyle
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: labelStyle
+  }, toCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
+    ref: _refTo,
+    style: dateStyle,
+    placeholder: placeholder,
+    initialValue: initToDate,
+    errorMsg: errMsg,
+    onTest: onTestDate,
+    onEnter: onEnter
+  })));
+});
+/*
+DatesFragment.propTypes = {
+  isShowLabels: PropTypes.bool,
+  dateStyle: PropTypes.object,
+  placeholder: PropTypes.string,
+  initFromDate: PropTypes.string,
+  initToDate: PropTypes.string,
+  fromCaption: PropTypes.string,
+  toCaption: PropTypes.string,
+  errMsg: PropTypes.string,
+  onTestDate: PropTypes.func,
+  isPeriodValid: PropTypes.func,
+  msgOnNotValidFormat: PropTypes.func,
+  onEnter: PropTypes.func
+}
+*/
+
+
 var _default = DatesFragment;
 exports["default"] = _default;
 //# sourceMappingURL=DatesFragment.js.map
