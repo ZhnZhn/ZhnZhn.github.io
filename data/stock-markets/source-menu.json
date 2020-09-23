@@ -51,7 +51,8 @@
         { "caption": "Historical Prices",
           "items": [
             { "id": "SM_FMP_EN" },
-            { "id": "SM_FMP_NN" }
+            { "id": "SM_FMP_NN" },
+            { "id": "SM_FMP_TS" }
           ]
         },
         {
@@ -112,6 +113,18 @@
         "rootUri" : "./data/stock-markets/",
         "spT": "id",
         "chartsType": "t2"
+      }
+    },
+    "SM_BASE_FMP_HP": {
+      "extends": "SM_BASE_FMP",
+      "dialogProps": {
+        "isFd": true,
+        "isCh": false,
+        "nInitFromDate": 2,
+        "dfProps": {
+          "dfT": "historical-price-full",
+          "dfPn": "historical"
+        }
       }
     },
     "SM_BASE_AV" : {
@@ -479,36 +492,33 @@
          "type" : "SM_FMP_NN",
          "menuTitle" : "Nyse, Nasdaq",
          "contFullCaption" : "FMP: Nyse, Nasdaq",
-         "addProps" : "SM_BASE_FMP",
+         "addProps" : "SM_BASE_FMP_HP",
          "dialogProps" : {
-           "isFd": true,
-           "isCh": false,
-           "nInitFromDate": 2,
            "selectProps": [
               ["Stock", "wiki", "tickets", true]
-            ],
-           "dfProps": {
-             "dfT": "historical-price-full",
-             "dfPn": "historical"
-           }
+            ]           
          }
      },
      "SM_FMP_EN" : {
          "type" : "SM_FMP_EN",
          "menuTitle" : "Euronext",
          "contFullCaption" : "FMP: Euronext",
-         "addProps" : "SM_BASE_FMP",
+         "addProps" : "SM_BASE_FMP_HP",
          "dialogProps" : {
-           "isFd": true,
-           "isCh": false,
-           "nInitFromDate": 2,
            "selectProps": [
               ["Equity", "fmp-euronext", "items", true]
-            ],
-           "dfProps": {
-             "dfT": "historical-price-full",
-             "dfPn": "historical"
-           }
+            ]
+         }
+     },
+     "SM_FMP_TS" : {
+         "type" : "SM_FMP_TS",
+         "menuTitle" : "TSX",
+         "contFullCaption" : "FMP: TSX",
+         "addProps" : "SM_BASE_FMP_HP",
+         "dialogProps" : {
+           "selectProps": [
+              ["Stock", "fmp-tsx", "items", true]
+            ]
          }
      },
 
@@ -540,7 +550,7 @@
              ["Ratio", "fmp-financial-ratio"],
              ["Period", "fmp-periods"]
            ],
-           "dfProps": {             
+           "dfProps": {
              "dfT": "ratios"
            }
          }
