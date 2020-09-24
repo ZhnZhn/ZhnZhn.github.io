@@ -1,53 +1,40 @@
 import React from 'react';
 //import PropTypes from "prop-types";
 
-import useTheme from '../hooks/useTheme'
-
-const TH_ID = 'ELEMENT';
+const CL = 'tab';
 
 const S = {
-  LI : {
-    float: 'left',
-    display: 'inline-block',
-    backgroundColor: '#1b2836',
-    color: 'gray',
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 6,
-    paddingBottom: 6,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    borderTop: '2px solid gray',
-    borderLeft: '2px solid gray',
-    borderRight: '2px solid gray',
-    borderBottom: 'none',
+  BT : {
+    color: '#2f7ed8',
+    borderBottom : '3px solid #2f7ed8'
   },
-  SELECTED : {
-    borderTop: '2px solid #a487d4',
-    borderLeft: '2px solid #a487d4',
-    borderRight: '2px solid #a487d4',
-    color: '#a487d4'
+  TITLE: {
+    color: '#2f7ed8'
   }
-}
+};
 
-
-const Tab = ({ isSelected, title, onClick }) => {
-    const TS = useTheme(TH_ID)
-    , _selectedStyle = isSelected ? S.SELECTED : null;
-    return (
-       <li
-          style={{ ...S.LI, ...TS.BG, ..._selectedStyle }}
-          onClick={onClick}
-       >
-          <span>{title}</span>
-       </li>
-    );
+const Tab = ({ id, title, isSelected, onClick }) => {
+  const _btStyle = isSelected ? S.BT : null
+  , _titleStyle = isSelected ? S.TITLE : null;
+  return (
+    <button
+       className={CL}
+       style={_btStyle}
+       id={`tab-${id}`}
+       role="tab"
+       aria-selected={isSelected}
+       aria-controls={`tabpanel-${id}`}
+       tabIndex="0"
+       onClick={onClick}
+    >
+       <span style={_titleStyle}>{title}</span>
+    </button>
+  );
 }
 
 /*
 Tab.propTypes = {
+  id: PropTypes.number,
   title: PropTypes.string,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func

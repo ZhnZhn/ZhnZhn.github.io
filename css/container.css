@@ -135,21 +135,11 @@
   padding: 2px;
   border-radius: 50%;
   cursor: pointer; }
-  
+
 .bt-svg-clear:hover,
 .bt-svg-clear:focus {
   background: rgba(0, 0, 0, 0.3);
   outline: none;}
-
-/* TabPane */
-.tabpane__tabs::before {
-  content: " ";
-  display: table; }
-
-.tabpane__tabs::after {
-  clear: both;
-  content: " ";
-  display: table; }
 
 .grid > thead > tr {
   background-color: transparent !important; }

@@ -5,56 +5,45 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _react = _interopRequireDefault(require("react"));
 
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
-
 //import PropTypes from "prop-types";
-var TH_ID = 'ELEMENT';
+var CL = 'tab';
 var S = {
-  LI: {
-    "float": 'left',
-    display: 'inline-block',
-    backgroundColor: '#1b2836',
-    color: 'gray',
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 6,
-    paddingBottom: 6,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    borderTop: '2px solid gray',
-    borderLeft: '2px solid gray',
-    borderRight: '2px solid gray',
-    borderBottom: 'none'
+  BT: {
+    color: '#2f7ed8',
+    borderBottom: '3px solid #2f7ed8'
   },
-  SELECTED: {
-    borderTop: '2px solid #a487d4',
-    borderLeft: '2px solid #a487d4',
-    borderRight: '2px solid #a487d4',
-    color: '#a487d4'
+  TITLE: {
+    color: '#2f7ed8'
   }
 };
 
 var Tab = function Tab(_ref) {
-  var isSelected = _ref.isSelected,
+  var id = _ref.id,
       title = _ref.title,
+      isSelected = _ref.isSelected,
       onClick = _ref.onClick;
 
-  var TS = (0, _useTheme["default"])(TH_ID),
-      _selectedStyle = isSelected ? S.SELECTED : null;
+  var _btStyle = isSelected ? S.BT : null,
+      _titleStyle = isSelected ? S.TITLE : null;
 
-  return /*#__PURE__*/_react["default"].createElement("li", {
-    style: (0, _extends2["default"])({}, S.LI, TS.BG, _selectedStyle),
+  return /*#__PURE__*/_react["default"].createElement("button", {
+    className: CL,
+    style: _btStyle,
+    id: "tab-" + id,
+    role: "tab",
+    "aria-selected": isSelected,
+    "aria-controls": "tabpanel-" + id,
+    tabIndex: "0",
     onClick: onClick
-  }, /*#__PURE__*/_react["default"].createElement("span", null, title));
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: _titleStyle
+  }, title));
 };
 /*
 Tab.propTypes = {
+  id: PropTypes.number,
   title: PropTypes.string,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func

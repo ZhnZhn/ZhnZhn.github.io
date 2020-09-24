@@ -8,14 +8,12 @@ exports["default"] = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 //import PropTypes from "prop-types";
-var CL = "tabpane__tabs";
 var S = {
-  UL: {
-    listStyle: 'outside none none',
-    marginTop: 10,
-    marginLeft: 10,
+  TABS: {
+    marginTop: 5,
     marginRight: 5,
-    borderBottom: '2px solid rgba(164, 135, 212, 1)'
+    marginBottom: 10,
+    marginLeft: 24
   },
   BLOCK: {
     display: 'block',
@@ -35,6 +33,7 @@ var _renderTabs = function _renderTabs(children, selectedTabIndex, hClickTab) {
   return children.map(function (tab, index) {
     return /*#__PURE__*/_react["default"].cloneElement(tab, {
       key: index,
+      id: index,
       onClick: hClickTab.bind(null, index),
       isSelected: index === selectedTabIndex
     });
@@ -47,8 +46,11 @@ var _renderComponents = function _renderComponents(children, selectedTabIndex) {
         _divStyle = _isSelected ? S.BLOCK : S.NONE;
 
     return /*#__PURE__*/_react["default"].createElement("div", {
+      key: 'a' + index,
       style: _divStyle,
-      key: 'a' + index
+      role: "tabpanel",
+      id: "tabpanel-" + index,
+      "aria-labelledby": "tab-" + index
     }, /*#__PURE__*/_react["default"].cloneElement(tab.props.children, {
       key: 'comp' + index,
       isSelected: _isSelected
@@ -80,9 +82,8 @@ var TabPane = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
       width: width,
       height: height
     }
-  }, /*#__PURE__*/_react["default"].createElement("ul", {
-    className: CL,
-    style: S.UL
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.TABS
   }, _renderTabs(children, selectedTabIndex, _hClickTab)), /*#__PURE__*/_react["default"].createElement("div", {
     style: S.DIV
   }, _renderComponents(children, selectedTabIndex)));

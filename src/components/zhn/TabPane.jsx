@@ -1,15 +1,12 @@
 import React, { useState, useCallback, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
 
-const CL = "tabpane__tabs";
-
 const S = {
-  UL: {
-    listStyle: 'outside none none',
-    marginTop: 10,
-    marginLeft: 10,
+  TABS: {
+    marginTop: 5,
     marginRight: 5,
-    borderBottom: '2px solid rgba(164, 135, 212, 1)'
+    marginBottom: 10,
+    marginLeft: 24
   },
   BLOCK: {
     display: 'block',
@@ -28,6 +25,7 @@ const S = {
 const _renderTabs = (children, selectedTabIndex, hClickTab) => children
  .map((tab, index) => React.cloneElement(tab, {
     key: index,
+    id: index,
     onClick: hClickTab.bind(null, index),
     isSelected: index === selectedTabIndex
  }));
@@ -37,7 +35,13 @@ const _renderTabs = (children, selectedTabIndex, hClickTab) => children
      const _isSelected = (index === selectedTabIndex)
      , _divStyle = _isSelected ? S.BLOCK : S.NONE;
      return (
-        <div style={_divStyle} key={'a'+index}>
+        <div
+          key={'a'+index}
+          style={_divStyle}
+          role="tabpanel"
+          id={`tabpanel-${index}`}
+          aria-labelledby={`tab-${index}`}          
+        >
            {React.cloneElement(tab.props.children, {
              key: 'comp'+index,
              isSelected: _isSelected
@@ -47,7 +51,11 @@ const _renderTabs = (children, selectedTabIndex, hClickTab) => children
  });
 
 
-const TabPane = React.forwardRef(({ width, height, children }, ref) => {
+const TabPane = React.forwardRef(({
+  width,
+  height,
+  children
+}, ref) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0)
   , _hClickTab = useCallback(
        (index)=>setSelectedTabIndex(index),
@@ -59,9 +67,9 @@ const TabPane = React.forwardRef(({ width, height, children }, ref) => {
 
   return (
     <div style={{ width, height }}>
-      <ul className={CL} style={S.UL}>
+      <div style={S.TABS}>
          {_renderTabs(children, selectedTabIndex, _hClickTab)}
-      </ul>
+      </div>
       <div style={S.DIV}>
          {_renderComponents(children, selectedTabIndex)}
       </div>
