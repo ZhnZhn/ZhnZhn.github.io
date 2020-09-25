@@ -1,43 +1,31 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+
+import useListen from '../hooks/useListen'
 
 const S = {
-  LABEL : {
+  LABEL: {
     display: 'inline-block',
-    color:'#2f7ed8',
+    color: '#2f7ed8',
     paddingRight: 8,
     fontSize: '16px',
     fontWeight: 'bold'
   }
 };
 
-class LimitRemainingLabel extends Component {
-  state = {
-    value : ''
-  }
+const LimitRemainingLabel = ({ store, style }) => {
+  const [value, setValue] = useState('');
 
-  componentDidMount() {
-    const { store } = this.props;
-    this.unsubscribe = store.listenLimitRemaining(this._onStore)
-  }
-  componentWillUnmount() {
-    this.unsubscribe()
-  }
-
-  _onStore = (value) => {
-    if ( !(value == null) ) {
-      this.setState({ value: value })
+  useListen(store, (v) => {
+    if (v != null) {
+      setValue(v)
     }
-  }
+  }, 'listenLimitRemaining')
 
-  render() {
-    const { style } = this.props
-        , { value } = this.state;
-    return (
-       <span style={{ ...S.LABEL, ...style }}>
-         {value}
-       </span>
-    );
-  }
+  return (
+    <span style={{...S.LABEL, ...style}}>
+      {value}
+    </span>
+  );
 }
 
 export default LimitRemainingLabel
