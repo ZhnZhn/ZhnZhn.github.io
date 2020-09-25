@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect } from 'react'
 
-const CL = "progress-line";
+import useForceUpdate from '../hooks/useForceUpdate'
 
-const T = {
+const CL = "progress-line"
+, TM_PERIOD = 800
+, T = {
   WIDTH: 'width 350ms linear',
   OPACITY: 'opacity 250ms linear'
 };
@@ -14,75 +16,60 @@ const _crStyle = (backgroundColor, opacity, width, transition) => ({
    transition
 });
 
-class ProgressLine extends Component {
-  static defaultProps = {
-    color: '#2f7ed8'
-  }
+const _getCurrent = ref => ref.current;
 
-  wasCompleted = false
-  idCompleted = null
-  wasOpacied = false
-  idOpacied = null
+const ProgressLine = ({
+  color='#2f7ed8',
+  completed
+}) => {
+  const forceUpdate = useForceUpdate()[1]
+  , _refWasCompleted = useRef(false)
+  , _refIdCompleted = useRef(null)
+  , _refWasOpacied = useRef(false)
+  , _refIdOpacied = useRef(null);
 
-  /*
-  constructor(props){
-    super();
-    this.wasCompleted = false;
-    this.idCompleted = null;
-    this.wasOpacied = false;
-    this.idOpacied = null;
-  }
-  */
-
-  componentWillUnmount(){
-    if (this.idCompleted){
-      clearTimeout(this.idCompleted)
+  useEffect(()=>{
+    if (_getCurrent(_refWasCompleted)){
+      _refIdCompleted.current = setTimeout(forceUpdate, TM_PERIOD)
+    } else if (_getCurrent(_refWasOpacied)){
+      _refIdOpacied.current = setTimeout(forceUpdate, TM_PERIOD)
     }
-    if (this.idOpacied){
-      clearTimeout(this.idOpacied)
+  })
+
+  useEffect(()=>{
+    return () => {
+      clearTimeout(_getCurrent(_refIdCompleted))
+      clearTimeout(_getCurrent(_refIdOpacied))
     }
+  }, [])
+
+  let _style;
+
+  if (_getCurrent(_refWasOpacied)) {
+    _style = _crStyle(color, 1, 0)
+    _refWasOpacied.current = false;
+  } else if (_getCurrent(_refWasCompleted)) {
+    _style = _crStyle(color, 0, '100%', T.OPACITY)
+    _refWasCompleted.current = false;
+    _refWasOpacied.current = true;
+  } else {
+     if (completed < 0) {
+       completed = 0;
+     } else if (completed >= 100) {
+       completed = 100;
+       _refWasCompleted.current = true
+     }
+     _style = _crStyle(color, 1, completed+'%', T.WIDTH)
   }
 
-  componentDidUpdate(){
-    if (this.wasCompleted){
-      this.idCompleted = setTimeout(()=>{
-        this.idCompleted = null;
-        this.forceUpdate();
-      }, 800)
-    } else if (this.wasOpacied){
-      this.idOpacied = setTimeout(()=>{
-        this.idOpacied = null;
-        this.forceUpdate();
-      }, 800)
-    }
-  }
-
-  render(){
-    const { color } = this.props;
-    let _style;
-
-    if (this.wasOpacied) {
-      _style = _crStyle(color, 1, 0)
-      this.wasOpacied = false;
-    } else if (this.wasCompleted) {
-      _style = _crStyle(color, 0, '100%', T.OPACITY)
-      this.wasCompleted = false;
-      this.wasOpacied = true;
-    } else {
-       let { completed } = this.props;
-       if (completed < 0) {
-         completed = 0;
-       } else if (completed >= 100) {
-         completed = 100;
-         this.wasCompleted = true
-       }
-       _style = _crStyle(color, 1, completed+'%', T.WIDTH)
-    }
-
-    return (
-      <div className={CL} style={_style} />
-    );
-  }
+  return (<div className={CL} style={_style} />);
 }
+
+/*
+ProgressLine.propTypes = {
+  color: PropTypes.string,
+  completed: PropTypes.number
+}
+*/
 
 export default ProgressLine
