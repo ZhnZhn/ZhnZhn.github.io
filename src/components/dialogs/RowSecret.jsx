@@ -1,39 +1,33 @@
-import React, { Component } from 'react'
+import React, { forwardRef } from 'react'
 
 import InputSecret from '../zhn/InputSecret'
 import STYLE from '../styles/DialogStyles'
 
-class RowSecret extends Component {
+const RowSecret = forwardRef(({
+  title='',
+  titleStyle,
+  ...rest
+}, ref) => {
+  return (
+    <form>
+      <label style={STYLE.ROW}>
+         <span style={{...STYLE.CAPTION, ...titleStyle}}>
+           {title}
+         </span>
+         <InputSecret
+            ref={ref}
+            {...rest}
+         />
+      </label>
+    </form>
+  );
+})
 
-  static defaultProps = {
-    title: ''
-  }
-
-  _refInput = (comp) => this.inputComp = comp
-
-  render() {
-    const { title, titleStyle, ...rest } = this.props;
-    return (
-      <form>
-        <label style={STYLE.ROW}>
-           <span style={{...STYLE.CAPTION, ...titleStyle}}>
-             {title}
-           </span>
-           <InputSecret
-              ref={this._refInput}
-              {...rest}
-           />
-        </label>
-      </form>
-    );
-  }
-
-  getValue(){
-    return this.inputComp.getValue();
-  }
-  clear(){
-    this.inputComp.clear()
-  }
+/*
+RowSecret.propTypes = {
+  title: PropTypes.string,
+  titleStyle: PropTypes.object
 }
+*/
 
 export default RowSecret

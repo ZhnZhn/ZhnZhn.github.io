@@ -11,63 +11,32 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
 
 var _InputSecret = _interopRequireDefault(require("../zhn/InputSecret"));
 
 var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 
-var RowSecret = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(RowSecret, _Component);
+var RowSecret = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
+  var _ref$title = _ref.title,
+      title = _ref$title === void 0 ? '' : _ref$title,
+      titleStyle = _ref.titleStyle,
+      rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["title", "titleStyle"]);
+  return /*#__PURE__*/_react["default"].createElement("form", null, /*#__PURE__*/_react["default"].createElement("label", {
+    style: _DialogStyles["default"].ROW
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    style: (0, _extends2["default"])({}, _DialogStyles["default"].CAPTION, titleStyle)
+  }, title), /*#__PURE__*/_react["default"].createElement(_InputSecret["default"], (0, _extends2["default"])({
+    ref: ref
+  }, rest))));
+});
+/*
+RowSecret.propTypes = {
+  title: PropTypes.string,
+  titleStyle: PropTypes.object
+}
+*/
 
-  function RowSecret() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-
-    _this._refInput = function (comp) {
-      return _this.inputComp = comp;
-    };
-
-    return _this;
-  }
-
-  var _proto = RowSecret.prototype;
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        title = _this$props.title,
-        titleStyle = _this$props.titleStyle,
-        rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props, ["title", "titleStyle"]);
-    return /*#__PURE__*/_react["default"].createElement("form", null, /*#__PURE__*/_react["default"].createElement("label", {
-      style: _DialogStyles["default"].ROW
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].CAPTION, titleStyle)
-    }, title), /*#__PURE__*/_react["default"].createElement(_InputSecret["default"], (0, _extends2["default"])({
-      ref: this._refInput
-    }, rest))));
-  };
-
-  _proto.getValue = function getValue() {
-    return this.inputComp.getValue();
-  };
-
-  _proto.clear = function clear() {
-    this.inputComp.clear();
-  };
-
-  return RowSecret;
-}(_react.Component);
-
-RowSecret.defaultProps = {
-  title: ''
-};
 var _default = RowSecret;
 exports["default"] = _default;
 //# sourceMappingURL=RowSecret.js.map
