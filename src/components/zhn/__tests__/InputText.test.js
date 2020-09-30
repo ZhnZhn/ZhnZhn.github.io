@@ -14,18 +14,19 @@ const {
 describe("InputText", () => {
   const _findInput = () => screen.findByRole('textbox');
   test('should render InputText with event handlers and ref', async ()=>{
-    const onEnter = jest.fn()
+    const initValue = 'abc'
+    , onEnter = jest.fn()
     , onChange = jest.fn()
     , ref = React.createRef()
     //1 Test render
     , { rerender } = render(<InputText
        ref={ref}
-       initValue="abc"
+       initValue={initValue}
        onChange={onChange}
        onEnter={onEnter}
     />)
     let input = screen.getByRole('textbox')
-    expect(input).toHaveValue('abc')
+    expect(input).toHaveValue(initValue)
 
     //2 Test event handlers
     //2.1 KeyDown Delete
@@ -44,11 +45,11 @@ describe("InputText", () => {
     //2.3 KeyDown Enter && onEnter
     fireKeyDownEnter(input)
     expect(onEnter).toHaveBeenCalledTimes(1)
-    expect(onEnter.mock.calls[0][0]).toBe('abcd')
+    expect(onEnter.mock.calls[0][0]).toBe(_changeValue)
 
     //3 Test ref implementation interface
     //3.1
-     expect(ref.current.getValue()).toBe('abcd')
+     expect(ref.current.getValue()).toBe(_changeValue)
     //3.2
     act(() => ref.current.setValue('a'))
     input = await _findInput()
@@ -58,9 +59,10 @@ describe("InputText", () => {
     expect(input).toHaveFocus()
 
     //4 Test rerender with new initValue without optional handlers
-    rerender(<InputText initValue="abcde"/>)
+    const _initValue = "abcde"
+    rerender(<InputText initValue={_initValue} />)
     input = await _findInput()
-    expect(input).toHaveValue('abcde')
+    expect(input).toHaveValue(_initValue)
 
     //4.1 KeyDown Enter && onEnter
     fireKeyDownEnter(input)

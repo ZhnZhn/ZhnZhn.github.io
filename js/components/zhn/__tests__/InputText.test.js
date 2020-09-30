@@ -25,20 +25,20 @@ describe("InputText", function () {
   };
 
   test('should render InputText with event handlers and ref', /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-    var onEnter, onChange, ref, _render, rerender, input, _changeValue;
+    var initValue, onEnter, onChange, ref, _render, rerender, input, _changeValue, _initValue;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            onEnter = jest.fn(), onChange = jest.fn(), ref = /*#__PURE__*/_react["default"].createRef(), _render = (0, _react2.render)( /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
+            initValue = 'abc', onEnter = jest.fn(), onChange = jest.fn(), ref = /*#__PURE__*/_react["default"].createRef(), _render = (0, _react2.render)( /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
               ref: ref,
-              initValue: "abc",
+              initValue: initValue,
               onChange: onChange,
               onEnter: onEnter
             })), rerender = _render.rerender;
             input = _react2.screen.getByRole('textbox');
-            expect(input).toHaveValue('abc'); //2 Test event handlers
+            expect(input).toHaveValue(initValue); //2 Test event handlers
             //2.1 KeyDown Delete
 
             fireKeyDownDelete(input);
@@ -62,10 +62,10 @@ describe("InputText", function () {
 
             fireKeyDownEnter(input);
             expect(onEnter).toHaveBeenCalledTimes(1);
-            expect(onEnter.mock.calls[0][0]).toBe('abcd'); //3 Test ref implementation interface
+            expect(onEnter.mock.calls[0][0]).toBe(_changeValue); //3 Test ref implementation interface
             //3.1
 
-            expect(ref.current.getValue()).toBe('abcd'); //3.2
+            expect(ref.current.getValue()).toBe(_changeValue); //3.2
 
             (0, _react2.act)(function () {
               return ref.current.setValue('a');
@@ -80,29 +80,30 @@ describe("InputText", function () {
             ref.current.focus();
             expect(input).toHaveFocus(); //4 Test rerender with new initValue without optional handlers
 
+            _initValue = "abcde";
             rerender( /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
-              initValue: "abcde"
+              initValue: _initValue
             }));
-            _context.next = 30;
+            _context.next = 31;
             return _findInput();
 
-          case 30:
+          case 31:
             input = _context.sent;
-            expect(input).toHaveValue('abcde'); //4.1 KeyDown Enter && onEnter
+            expect(input).toHaveValue(_initValue); //4.1 KeyDown Enter && onEnter
 
             fireKeyDownEnter(input);
             expect(onEnter).toHaveBeenCalledTimes(1); //4.2 onChange
 
             fireChange(input, _changeValue);
-            _context.next = 37;
+            _context.next = 38;
             return _findInput();
 
-          case 37:
+          case 38:
             input = _context.sent;
             expect(input).toHaveValue(_changeValue);
             expect(onChange).toHaveBeenCalledTimes(1);
 
-          case 40:
+          case 41:
           case "end":
             return _context.stop();
         }
