@@ -100,7 +100,6 @@ var InputPattern = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
       onClear = _ref2$onClear === void 0 ? _onClear : _ref2$onClear;
 
   var _refInput = (0, _react.useRef)(),
-      _refBtClear = (0, _react.useRef)(),
       _refGetValue = (0, _react.useRef)(),
       _refIsValid = (0, _react.useRef)(),
       _useState = (0, _react.useState)(function () {
@@ -198,7 +197,6 @@ var InputPattern = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
     onChange: _hChangeValue,
     onKeyDown: _hKeyDown
   }), value || errorInput ? /*#__PURE__*/_react["default"].createElement(_SvgClear["default"], {
-    ref: _refBtClear,
     style: _btClearStyle,
     onClick: _hClear
   }) : null, /*#__PURE__*/_react["default"].createElement(ErrMsg, {

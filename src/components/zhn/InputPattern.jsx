@@ -79,9 +79,8 @@ const InputPattern = forwardRef(({
   onTest=_onTest,
   onEnter,
   onClear=_onClear
-}, ref) => {  
-  const _refInput = useRef()
-  , _refBtClear = useRef()
+}, ref) => {
+  const _refInput = useRef()  
   , _refGetValue = useRef()
   , _refIsValid = useRef()
   , [state, setState] = useState(() => _crInitialState(initValue))
@@ -150,7 +149,6 @@ const InputPattern = forwardRef(({
       />
       { value || errorInput
           ? <SvgClear
-               ref={_refBtClear}
                style={_btClearStyle}
                onClick={_hClear}
             />
