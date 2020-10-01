@@ -90,8 +90,8 @@ var TabPane = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
 });
 /*
 TabPane.propTypes = {
-  width: PropTypes.string,
-  height: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
   children: PropTypes.arrayOf(PropTypes.node)
 }
 */

@@ -40,7 +40,7 @@ const _renderTabs = (children, selectedTabIndex, hClickTab) => children
           style={_divStyle}
           role="tabpanel"
           id={`tabpanel-${index}`}
-          aria-labelledby={`tab-${index}`}          
+          aria-labelledby={`tab-${index}`}
         >
            {React.cloneElement(tab.props.children, {
              key: 'comp'+index,
@@ -79,8 +79,8 @@ const TabPane = React.forwardRef(({
 
 /*
 TabPane.propTypes = {
-  width: PropTypes.string,
-  height: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
   children: PropTypes.arrayOf(PropTypes.node)
 }
 */

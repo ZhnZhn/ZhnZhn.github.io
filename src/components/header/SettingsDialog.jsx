@@ -71,7 +71,7 @@ class SettingsDialog extends Component {
             isShow={isShow}
             onClose={this._hClose}
          >
-           <A.TabPane isUpdateInit={true}>
+           <A.TabPane>
              <A.Tab title="ApiKeys">
                <PaneApiKey
                   isShow={isShow}

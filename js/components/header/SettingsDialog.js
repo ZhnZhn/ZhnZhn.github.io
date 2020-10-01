@@ -101,9 +101,7 @@ var SettingsDialog = /*#__PURE__*/function (_Component) {
       isWithButton: false,
       isShow: isShow,
       onClose: this._hClose
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].TabPane, {
-      isUpdateInit: true
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].Tab, {
+    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].TabPane, null, /*#__PURE__*/_react["default"].createElement(_Comp["default"].Tab, {
       title: "ApiKeys"
     }, /*#__PURE__*/_react["default"].createElement(_PaneApiKey["default"], {
       isShow: isShow,

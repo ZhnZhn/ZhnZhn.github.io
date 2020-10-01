@@ -74,7 +74,7 @@ var EditListDialog = /*#__PURE__*/function (_Component) {
       isWithButton: false,
       onClose: onClose
     }, /*#__PURE__*/_react["default"].createElement(_TabPane["default"], {
-      width: "380px"
+      width: 380
     }, /*#__PURE__*/_react["default"].createElement(_Tab["default"], {
       title: "Create"
     }, /*#__PURE__*/_react["default"].createElement(_ListCreatePane["default"], {
