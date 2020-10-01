@@ -61,6 +61,14 @@ var _getDaysInYm = function _getDaysInYm(y, m) {
   return new Date(y, m, 0).getDate();
 };
 
+var _getTimeUTC = function _getTimeUTC(d) {
+  return _pad2(d.getUTCHours()) + ":" + _pad2(d.getUTCMinutes());
+};
+
+var _getYmdUTC = function _getYmdUTC(d, yearMinus) {
+  return d.getUTCFullYear() - yearMinus + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
+};
+
 var MONTH_HP = {
   january: 0,
   february: 1,
@@ -112,10 +120,15 @@ var DateUtils = {
     }
 
     var dNow = new Date();
-    return dNow.getUTCFullYear() - yearMinus + "-" + ("0" + (dNow.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + dNow.getUTCDate()).slice(-2);
+    return _getYmdUTC(dNow, yearMinus);
   },
   getToDate: function getToDate() {
     return DateUtils.getFromDate(0);
+  },
+  getYmdhmUTC: function getYmdhmUTC(date) {
+    var _d = date || new Date();
+
+    return _getYmdUTC(_d, 0) + " " + _getTimeUTC(_d) + " UTC";
   },
   mlsToDmy: function mlsToDmy(mlsUTC) {
     if (typeof mlsUTC !== 'number' || !isFinite(mlsUTC)) {
@@ -217,7 +230,7 @@ var DateUtils = {
 
     var _d = new Date(ms);
 
-    return _pad2(_d.getUTCHours()) + ":" + _pad2(_d.getUTCMinutes());
+    return _getTimeUTC(_d);
   },
   addToDmy: function addToDmy(dmy, month) {
     if (!DateUtils.isDmy(dmy)) {

@@ -17,7 +17,8 @@ var isYmd = _DateUtils["default"].isYmd,
     getUTCTime = _DateUtils["default"].getUTCTime,
     addToDmy = _DateUtils["default"].addToDmy,
     getYTDfromDmy = _DateUtils["default"].getYTDfromDmy,
-    monthIndex = _DateUtils["default"].monthIndex; // DateUtils configuration consts
+    monthIndex = _DateUtils["default"].monthIndex,
+    getYmdhmUTC = _DateUtils["default"].getYmdhmUTC; // DateUtils configuration consts
 
 var MIN_YEAR = 1990;
 
@@ -243,6 +244,13 @@ describe('monthIndex', function () {
     expect(fn(null)).toBe(-1);
     expect(fn(1)).toBe(-1);
     expect(fn({})).toBe(-1);
+  });
+});
+describe("getYmdhms", function () {
+  var fn = getYmdhmUTC;
+  it("should return str in format YYYY-MM-DD HH:MM UTC", function () {
+    expect(fn(new Date(Date.UTC(2010, 0, 1)))).toBe('2010-01-01 00:00 UTC');
+    expect(fn(new Date(Date.UTC(2010, 0, 1, 1)))).toBe('2010-01-01 01:00 UTC');
   });
 });
 (0, _DateUtilsWithMock["default"])();

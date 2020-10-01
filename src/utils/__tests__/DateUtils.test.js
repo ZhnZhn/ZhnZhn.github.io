@@ -14,7 +14,8 @@ const {
   getUTCTime,
   addToDmy,
   getYTDfromDmy,
-  monthIndex
+  monthIndex,
+  getYmdhmUTC
 } = DateUtils;
 
 // DateUtils configuration consts
@@ -252,5 +253,15 @@ describe('monthIndex', ()=>{
     expect(fn({})).toBe(-1)
   })
 })
+
+
+describe("getYmdhms", ()=>{
+  const fn = getYmdhmUTC
+  it("should return str in format YYYY-MM-DD HH:MM UTC", ()=>{
+    expect(fn(new Date(Date.UTC(2010, 0, 1)))).toBe('2010-01-01 00:00 UTC')
+    expect(fn(new Date(Date.UTC(2010, 0, 1, 1)))).toBe('2010-01-01 01:00 UTC')
+  })
+})
+
 
 DateUtilsWithMock()

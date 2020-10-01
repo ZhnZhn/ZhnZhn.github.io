@@ -37,6 +37,11 @@ const _isYmd = (yStr, mStr, dStr, {nForecastDate=0, minYear=MIN_YEAR} = {}) => {
 
 const _getDaysInYm = (y, m) => (new Date(y, m, 0)).getDate();
 
+const _getTimeUTC = d => `${_pad2(d.getUTCHours())}:${_pad2(d.getUTCMinutes())}`;
+const _getYmdUTC = (d, yearMinus) => (d.getUTCFullYear()-yearMinus)
+   + "-" + ("0"+(d.getUTCMonth() + 1)).slice(-2)
+   + "-" + ("0"+d.getUTCDate()).slice(-2);
+
 const MONTH_HP = {
   january: 0, february: 1,
   march: 2, april: 3, may: 4,
@@ -69,14 +74,19 @@ const DateUtils = {
 
 	getFromDate(yearMinus=2){
 		const dNow = new Date();
-		return (dNow.getUTCFullYear()-yearMinus)
-		   + "-" + ("0"+(dNow.getUTCMonth() + 1)).slice(-2)
-			 + "-" + ("0"+dNow.getUTCDate()).slice(-2);
+		return _getYmdUTC(dNow, yearMinus);
 	},
 
 	getToDate(){
 		return DateUtils.getFromDate(0);
 	},
+
+
+  getYmdhmUTC(date){
+    const _d = date || (new Date());
+    return `${_getYmdUTC(_d, 0)} ${_getTimeUTC(_d)} UTC`;
+  },
+
 
 	mlsToDmy(mlsUTC){
 		if (typeof mlsUTC !== 'number'
@@ -158,7 +168,7 @@ const DateUtils = {
      return '';
    }
    const _d = new Date(ms);
-   return `${_pad2(_d.getUTCHours())}:${_pad2(_d.getUTCMinutes())}`;
+   return _getTimeUTC(_d);
  },
 
   addToDmy: (dmy, month) => {
