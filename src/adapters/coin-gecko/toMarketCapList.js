@@ -1,11 +1,8 @@
-import AdapterFn from '../AdapterFn'
 import toTableFn from '../toTableFn'
-
 import fnAdapter from './fnAdapter'
+import crTableConfig from './crTableConfig'
 
-const { numberFormat } = AdapterFn;
 const { crRows } = toTableFn;
-
 const { crPageConfig } = fnAdapter;
 
 const HEADERS = [{
@@ -68,7 +65,7 @@ const HEADERS = [{
 ];
 
 const _toDate = (rowDate) => {
-  const _rowDate = rowDate || ''
+  const _rowDate = rowDate || '';
   return _rowDate.replace('T', ' ').split('.')[0];
 }
 
@@ -83,34 +80,24 @@ const _crDataSource = (rows) => {
   return `CoinGecko ${rows[0].last_updated} UTC`;
 };
 
-const toList = {
+const toMarketCapList = {
   crKey(option){
     option.key = crPageConfig(option).join('_');
     return option.key;
   },
 
   toConfig(json, option){
-    const _id = option.key
+    const { key, title } = option
     , _json = _transformDate(json)
     , _rows = crRows(HEADERS, _json)
-    , _dataSource = _crDataSource(_rows)
-    , config = {
-      id: _id,
-      title: option.title,
+    , config = crTableConfig({
+      id: key, title,
       headers: HEADERS,
-      tableFn: {
-        numberFormat
-        //valueToHref
-      },
       rows: _rows,
-      dataSource: _dataSource,
-      zhCompType: 'TABLE',
-      zhConfig: {
-        id: _id, key: _id
-      }
-    };
+      dataSource: _crDataSource(_rows)
+    })
     return { config };
-  }  
+  }
 }
 
-export default toList
+export default toMarketCapList

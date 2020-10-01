@@ -50,9 +50,21 @@ const _assignMcl = option => {
   })
 }
 
+const _assignEl = option => {
+  const [
+    page, perPage
+  ] = crPageConfig(option);
+
+  _assign(option, {
+    title: `By Exchages Page: ${page} (${perPage})`,
+    _itemUrl: `${C.API_URL}/exchanges?page=${page}&per_page=${perPage}`
+  })
+}
+
 const _rAssign = {
   DF: _assignDf,
-  MCL: _assignMcl
+  MCL: _assignMcl,
+  EL: _assignEl
 }
 
 const CgApi = {
@@ -63,7 +75,8 @@ const CgApi = {
     return option._itemUrl;
   },
   checkResponse(json, option){
-    if (option.dfSubId === 'MCL'
+    const { dfSubId } = option
+    if ( (dfSubId === 'MCL' || dfSubId === 'EL')
         && _isArr(json)
         && json.length > 1) {
       return true;

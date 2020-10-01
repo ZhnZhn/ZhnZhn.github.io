@@ -18,7 +18,7 @@ var _isFn = function _isFn(fn) {
 };
 
 var _crLinkEl = function _crLinkEl(id, title, fn) {
-  var _href = _isFn(fn) ? fn(id) : void 0;
+  var _href = _isFn(fn) ? fn(id, title) : void 0;
 
   return /*#__PURE__*/_react["default"].createElement("a", {
     className: _Style["default"].CL_LINK,

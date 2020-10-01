@@ -7,7 +7,9 @@ import S from './Style'
 const _isFn = fn => typeof fn === 'function';
 
 const _crLinkEl = (id, title, fn) => {
-  const _href = _isFn(fn) ? fn(id) : void 0;
+  const _href = _isFn(fn)
+    ? fn(id, title)
+    : void 0;
   return (
     <a
       className={S.CL_LINK}

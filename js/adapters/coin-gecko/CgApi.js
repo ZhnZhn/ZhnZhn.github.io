@@ -61,9 +61,21 @@ var _assignMcl = function _assignMcl(option) {
   });
 };
 
+var _assignEl = function _assignEl(option) {
+  var _crPageConfig2 = crPageConfig(option),
+      page = _crPageConfig2[0],
+      perPage = _crPageConfig2[1];
+
+  _assign(option, {
+    title: "By Exchages Page: " + page + " (" + perPage + ")",
+    _itemUrl: C.API_URL + "/exchanges?page=" + page + "&per_page=" + perPage
+  });
+};
+
 var _rAssign = {
   DF: _assignDf,
-  MCL: _assignMcl
+  MCL: _assignMcl,
+  EL: _assignEl
 };
 var CgApi = {
   getRequestUrl: function getRequestUrl(option) {
@@ -75,7 +87,9 @@ var CgApi = {
     return option._itemUrl;
   },
   checkResponse: function checkResponse(json, option) {
-    if (option.dfSubId === 'MCL' && _isArr(json) && json.length > 1) {
+    var dfSubId = option.dfSubId;
+
+    if ((dfSubId === 'MCL' || dfSubId === 'EL') && _isArr(json) && json.length > 1) {
       return true;
     }
 

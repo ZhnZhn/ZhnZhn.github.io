@@ -7,7 +7,8 @@ exports["default"] = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var getValue = _AdapterFn["default"].getValue;
+var getValue = _AdapterFn["default"].getValue,
+    getYmdhmUTC = _AdapterFn["default"].getYmdhmUTC;
 var C = {
   DF_PAGE: 1,
   DF_PER_PAGE: 10,
@@ -19,6 +20,7 @@ var _isInRange = function _isInRange(v, min, max) {
 };
 
 var fnAdapter = {
+  getYmdhmUTC: getYmdhmUTC,
   crPageConfig: function crPageConfig(option) {
     var _option$items = option.items,
         items = _option$items === void 0 ? [] : _option$items,

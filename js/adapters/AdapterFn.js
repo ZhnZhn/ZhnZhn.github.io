@@ -35,6 +35,7 @@ var ymdToUTC = dt.ymdToUTC,
     ymdhmsToUTC = dt.ymdhmsToUTC,
     mlsToDmy = dt.mlsToDmy,
     getFromDate = dt.getFromDate,
+    getYmdhmUTC = dt.getYmdhmUTC,
     monthIndex = dt.monthIndex;
 var EMPTY = '';
 var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType'];
@@ -81,6 +82,7 @@ var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["defaul
   ymdToUTC: ymdToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
   getFromDate: getFromDate,
+  getYmdhmUTC: getYmdhmUTC,
   monthIndex: monthIndex,
   getCaption: getC,
   getValue: getV,

@@ -27,6 +27,7 @@ const {
   ymdhmsToUTC,
   mlsToDmy,
   getFromDate,
+  getYmdhmUTC,
   monthIndex
 } = dt;
 
@@ -76,6 +77,7 @@ const AdapterFn = {
   ymdToUTC,
   ymdhmsToUTC,
   getFromDate,
+  getYmdhmUTC,
   monthIndex,
 
   getCaption: getC,

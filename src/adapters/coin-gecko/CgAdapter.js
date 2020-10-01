@@ -1,11 +1,13 @@
 import crAdapter from '../crAdapter'
 
 import toChart from './toChart'
-import toList from './toList'
+import toExchangeList from './toExchangeList'
+import toMarketCapList from './toMarketCapList'
 
 const _rAdapter = {
   DF: toChart,
-  MCL: toList
+  EL: toExchangeList,
+  MCL: toMarketCapList,
 }
 
 const _getAdapter = option => {

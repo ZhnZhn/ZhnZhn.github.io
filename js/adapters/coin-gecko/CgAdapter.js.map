@@ -1,1 +1,22 @@
-{"version":3,"sources":["../../../src/adapters/coin-gecko/CgAdapter.js"],"names":["_rAdapter","DF","toChart","MCL","toList","_getAdapter","option","dfSubId","CgAdapter","isKey"],"mappings":";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,mBADY;AAEhBC,EAAAA,GAAG,EAAEC;AAFW,CAAlB;;AAKA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAAAC,MAAM,EAAI;AAAA,MACpBC,OADoB,GACRD,MADQ,CACpBC,OADoB;AAE5B,SAAOP,SAAS,CAACO,OAAD,CAAT,IAAsBP,SAAS,CAACC,EAAvC;AACD,CAHD;;AAKA,IAAMO,SAAS,GAAG,2BAAUH,WAAV,EAAuB;AAAEI,EAAAA,KAAK,EAAE;AAAT,CAAvB,CAAlB;eAEeD,S","sourcesContent":["import crAdapter from '../crAdapter'\r\n\r\nimport toChart from './toChart'\r\nimport toList from './toList'\r\n\r\nconst _rAdapter = {\r\n  DF: toChart,\r\n  MCL: toList\r\n}\r\n\r\nconst _getAdapter = option => {\r\n  const { dfSubId } = option;\r\n  return _rAdapter[dfSubId] || _rAdapter.DF;\r\n};\r\n\r\nconst CgAdapter = crAdapter(_getAdapter, { isKey: true })\r\n\r\nexport default CgAdapter\r\n"],"file":"CgAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-gecko/CgAdapter.js"
+ ],
+ "file": "../../../src/adapters/coin-gecko/CgAdapter.js",
+ "names": [
+  "_rAdapter",
+  "DF",
+  "toChart",
+  "EL",
+  "toExchangeList",
+  "MCL",
+  "toMarketCapList",
+  "_getAdapter",
+  "option",
+  "dfSubId",
+  "CgAdapter",
+  "isKey"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,mBADY;AAEhBC,EAAAA,EAAE,EAAEC,0BAFY;AAGhBC,EAAAA,GAAG,EAAEC;AAHW,CAAlB;;AAMA,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAAAC,MAAM,EAAI;AAAA,MACpBC,OADoB,GACRD,MADQ,CACpBC,OADoB;AAE5B,SAAOT,SAAS,CAACS,OAAD,CAAT,IAAsBT,SAAS,CAACC,EAAvC;AACD,CAHD;;AAKA,IAAMS,SAAS,GAAG,2BAAUH,WAAV,EAAuB;AAAEI,EAAAA,KAAK,EAAE;AAAT,CAAvB,CAAlB;eAEeD,S"
+}

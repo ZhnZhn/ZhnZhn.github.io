@@ -1,1 +1,29 @@
-{"version":3,"sources":["../../../src/adapters/coin-gecko/fnAdapter.js"],"names":["getValue","AdapterFn","C","DF_PAGE","DF_PER_PAGE","DF_CURRENCY","_isInRange","v","min","max","fnAdapter","crPageConfig","option","items","_page","page","_perPage","perPage"],"mappings":";;;;;;;AAAA;;IAEQA,Q,GAAaC,qB,CAAbD,Q;AAER,IAAME,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE,CADD;AAERC,EAAAA,WAAW,EAAE,EAFL;AAGRC,EAAAA,WAAW,EAAE;AAHL,CAAV;;AAMA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACC,CAAD,EAAIC,GAAJ,EAASC,GAAT;AAAA,SAAiBF,CAAC,GAACC,GAAF,IAASD,CAAC,GAACE,GAA5B;AAAA,CAAnB;;AAEA,IAAMC,SAAS,GAAG;AAChBC,EAAAA,YAAY,EAAE,sBAAAC,MAAM,EAAI;AAAA,wBACDA,MADC,CACdC,KADc;AAAA,QACdA,KADc,8BACR,EADQ;AAAA,QAEpBC,KAFoB,GAEZd,QAAQ,CAACa,KAAK,CAAC,CAAD,CAAN,CAFI;AAAA,QAGpBE,IAHoB,GAGbT,UAAU,CAACQ,KAAD,EAAQ,CAAR,EAAW,EAAX,CAAV,GACHA,KADG,GACKZ,CAAC,CAACC,OAJM;AAAA,QAKpBa,QALoB,GAKThB,QAAQ,CAACa,KAAK,CAAC,CAAD,CAAN,CALC;AAAA,QAMpBI,OANoB,GAMVX,UAAU,CAACU,QAAD,EAAW,CAAX,EAAc,EAAd,CAAV,GACNA,QADM,GACKd,CAAC,CAACE,WAPG;;AAQtB,WAAO,CACLW,IADK,EACCE,OADD,EAELjB,QAAQ,CAACa,KAAK,CAAC,CAAD,CAAN,CAAR,IAAsBX,CAAC,CAACG,WAFnB,CAAP;AAID;AAbe,CAAlB;eAgBeK,S","sourcesContent":["import AdapterFn from '../AdapterFn'\r\n\r\nconst { getValue } = AdapterFn\r\n\r\nconst C = {\r\n  DF_PAGE: 1,\r\n  DF_PER_PAGE: 10,\r\n  DF_CURRENCY: 'USD'\r\n};\r\n\r\nconst _isInRange = (v, min, max) => v>min && v<max ;\r\n\r\nconst fnAdapter = {\r\n  crPageConfig: option => {\r\n    const { items=[] } = option    \r\n    , _page = getValue(items[0])\r\n    , page = _isInRange(_page, 0, 11)\r\n        ? _page : C.DF_PAGE\r\n    , _perPage = getValue(items[1])\r\n    , perPage = _isInRange(_perPage, 9, 51)\r\n        ? _perPage : C.DF_PER_PAGE;\r\n    return [\r\n      page, perPage,\r\n      getValue(items[2]) || C.DF_CURRENCY\r\n    ]\r\n  }\r\n};\r\n\r\nexport default fnAdapter\r\n"],"file":"fnAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-gecko/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/coin-gecko/fnAdapter.js",
+ "names": [
+  "getValue",
+  "AdapterFn",
+  "getYmdhmUTC",
+  "C",
+  "DF_PAGE",
+  "DF_PER_PAGE",
+  "DF_CURRENCY",
+  "_isInRange",
+  "v",
+  "min",
+  "max",
+  "fnAdapter",
+  "crPageConfig",
+  "option",
+  "items",
+  "_page",
+  "page",
+  "_perPage",
+  "perPage"
+ ],
+ "mappings": ";;;;;;;AAAA;;IAGEA,Q,GAEEC,qB,CAFFD,Q;IACAE,W,GACED,qB,CADFC,W;AAGF,IAAMC,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE,CADD;AAERC,EAAAA,WAAW,EAAE,EAFL;AAGRC,EAAAA,WAAW,EAAE;AAHL,CAAV;;AAMA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACC,CAAD,EAAIC,GAAJ,EAASC,GAAT;AAAA,SAAiBF,CAAC,GAACC,GAAF,IAASD,CAAC,GAACE,GAA5B;AAAA,CAAnB;;AAEA,IAAMC,SAAS,GAAG;AAChBT,EAAAA,WAAW,EAAXA,WADgB;AAGhBU,EAAAA,YAAY,EAAE,sBAAAC,MAAM,EAAI;AAAA,wBACDA,MADC,CACdC,KADc;AAAA,QACdA,KADc,8BACR,EADQ;AAAA,QAEpBC,KAFoB,GAEZf,QAAQ,CAACc,KAAK,CAAC,CAAD,CAAN,CAFI;AAAA,QAGpBE,IAHoB,GAGbT,UAAU,CAACQ,KAAD,EAAQ,CAAR,EAAW,EAAX,CAAV,GACHA,KADG,GACKZ,CAAC,CAACC,OAJM;AAAA,QAKpBa,QALoB,GAKTjB,QAAQ,CAACc,KAAK,CAAC,CAAD,CAAN,CALC;AAAA,QAMpBI,OANoB,GAMVX,UAAU,CAACU,QAAD,EAAW,CAAX,EAAc,EAAd,CAAV,GACNA,QADM,GACKd,CAAC,CAACE,WAPG;;AAQtB,WAAO,CACLW,IADK,EACCE,OADD,EAELlB,QAAQ,CAACc,KAAK,CAAC,CAAD,CAAN,CAAR,IAAsBX,CAAC,CAACG,WAFnB,CAAP;AAID;AAfe,CAAlB;eAkBeK,S"
+}

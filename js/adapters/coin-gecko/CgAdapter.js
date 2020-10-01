@@ -9,11 +9,14 @@ var _crAdapter = _interopRequireDefault(require("../crAdapter"));
 
 var _toChart = _interopRequireDefault(require("./toChart"));
 
-var _toList = _interopRequireDefault(require("./toList"));
+var _toExchangeList = _interopRequireDefault(require("./toExchangeList"));
+
+var _toMarketCapList = _interopRequireDefault(require("./toMarketCapList"));
 
 var _rAdapter = {
   DF: _toChart["default"],
-  MCL: _toList["default"]
+  EL: _toExchangeList["default"],
+  MCL: _toMarketCapList["default"]
 };
 
 var _getAdapter = function _getAdapter(option) {

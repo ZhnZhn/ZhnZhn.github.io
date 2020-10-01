@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-gecko/crTableConfig.js"
+ ],
+ "file": "../../../src/adapters/coin-gecko/crTableConfig.js",
+ "names": [
+  "numberFormat",
+  "AdapterFn",
+  "crTableConfig",
+  "id",
+  "title",
+  "headers",
+  "rows",
+  "dataSource",
+  "fns",
+  "tableFn",
+  "zhCompType",
+  "zhConfig",
+  "key"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;IAEQA,Y,GAAiBC,qB,CAAjBD,Y;;AAER,IAAME,aAAa,GAAG,SAAhBA,aAAgB;AAAA,MACpBC,EADoB,QACpBA,EADoB;AAAA,MAEpBC,KAFoB,QAEpBA,KAFoB;AAAA,MAGpBC,OAHoB,QAGpBA,OAHoB;AAAA,MAIpBC,IAJoB,QAIpBA,IAJoB;AAAA,MAKpBC,UALoB,QAKpBA,UALoB;AAAA,sBAMpBC,GANoB;AAAA,MAMpBA,GANoB,yBAMhB,EANgB;AAAA,SAOf;AACLL,IAAAA,EAAE,EAAFA,EADK;AAELC,IAAAA,KAAK,EAALA,KAFK;AAGLC,IAAAA,OAAO,EAAPA,OAHK;AAILI,IAAAA,OAAO;AACLT,MAAAA,YAAY,EAAZA;AADK,OAEFQ,GAFE,CAJF;AAQLF,IAAAA,IAAI,EAAJA,IARK;AASLC,IAAAA,UAAU,EAAVA,UATK;AAULG,IAAAA,UAAU,EAAE,OAVP;AAWLC,IAAAA,QAAQ,EAAE;AACRR,MAAAA,EAAE,EAAEA,EADI;AACAS,MAAAA,GAAG,EAAET;AADL;AAXL,GAPe;AAAA,CAAtB;;eAuBeD,a"
+}

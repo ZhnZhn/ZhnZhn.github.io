@@ -11,8 +11,6 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var _crTableConfig = _interopRequireDefault(require("./crTableConfig"));
 
-//import AdapterFn from '../AdapterFn'
-//const { numberFormat } = AdapterFn;
 var crRows = _toTableFn["default"].crRows;
 var crPageConfig = _fnAdapter["default"].crPageConfig;
 var HEADERS = [{
@@ -92,7 +90,7 @@ var _crDataSource = function _crDataSource(rows) {
   return "CoinGecko " + rows[0].last_updated + " UTC";
 };
 
-var toList = {
+var toMarketCapList = {
   crKey: function crKey(option) {
     option.key = crPageConfig(option).join('_');
     return option.key;
@@ -109,30 +107,12 @@ var toList = {
       rows: _rows,
       dataSource: _crDataSource(_rows)
     });
-    /*
-    , config = {
-      id: _id,
-      title: option.title,
-      headers: HEADERS,
-      tableFn: {
-        numberFormat
-        //valueToHref
-      },
-      rows: _rows,
-      dataSource: _dataSource,
-      zhCompType: 'TABLE',
-      zhConfig: {
-        id: _id, key: _id
-      }
-    };
-    */
-
 
     return {
       config: config
     };
   }
 };
-var _default = toList;
+var _default = toMarketCapList;
 exports["default"] = _default;
-//# sourceMappingURL=toList.js.map
+//# sourceMappingURL=toMarketCapList.js.map
