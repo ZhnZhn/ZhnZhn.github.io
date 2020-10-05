@@ -13,7 +13,7 @@ const MODEL_PROP = {
   ITEMS : 'items'
 }
 
-const STYLE = {
+const S = {
   GROUP_DIV: {
     lineHeight: 2
   },
@@ -24,22 +24,6 @@ const STYLE = {
     borderLeftStyle: 'solid',
     borderLeftWidth: 2,
     borderLeftColor: 'inherit',
-  },
-  ITEM_DIV : {
-    position: 'relative',
-    paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    lineHeight: 1.4
-  },
-  ITEM_SPAN : {
-    display: 'inline-block',
-    width: '100%',
-    //direction: "ltr",
-    verticalAlign : 'middle',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
   }
 };
 
@@ -68,7 +52,7 @@ const _renderLevel2 = (lists=[], captionProp, itemsProp, props) => {
     return (
       <OpenClose2
          key={index}
-         style={STYLE.LIST_DIV}
+         style={S.LIST_DIV}
          openColor={LIST_OPEN_COLOR}
          caption={caption}
       >
@@ -94,7 +78,7 @@ const _renderLevel1 = (props) => {
       return (
         <OpenClose2
            key={index}
-           style={STYLE.GROUP_DIV}
+           style={S.GROUP_DIV}
            caption={caption}
         >
           {_renderLevel2(lists, _captionProp, _itemsProp, props)}

@@ -20,7 +20,7 @@ var MODEL_PROP = {
   LISTS: 'lists',
   ITEMS: 'items'
 };
-var STYLE = {
+var S = {
   GROUP_DIV: {
     lineHeight: 2
   },
@@ -31,22 +31,6 @@ var STYLE = {
     borderLeftStyle: 'solid',
     borderLeftWidth: 2,
     borderLeftColor: 'inherit'
-  },
-  ITEM_DIV: {
-    position: 'relative',
-    paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    lineHeight: 1.4
-  },
-  ITEM_SPAN: {
-    display: 'inline-block',
-    width: '100%',
-    //direction: "ltr",
-    verticalAlign: 'middle',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
   }
 };
 
@@ -80,7 +64,7 @@ var _renderLevel2 = function _renderLevel2(lists, captionProp, itemsProp, props)
         items = list[itemsProp];
     return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
       key: index,
-      style: STYLE.LIST_DIV,
+      style: S.LIST_DIV,
       openColor: LIST_OPEN_COLOR,
       caption: caption
     }, _renderLevel3(items, captionProp, props));
@@ -107,7 +91,7 @@ var _renderLevel1 = function _renderLevel1(props) {
         lists = group[_listsProp];
     return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
       key: index,
-      style: STYLE.GROUP_DIV,
+      style: S.GROUP_DIV,
       caption: caption
     }, _renderLevel2(lists, _captionProp, _itemsProp, props));
   });
