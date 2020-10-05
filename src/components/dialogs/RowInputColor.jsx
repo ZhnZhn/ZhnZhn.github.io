@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useRef, useState, useCallback, useMemo, useEffect } from 'react';
 //import PropTypes from "prop-types";
 
 import Model from '../../constants/Model'
@@ -36,96 +36,85 @@ const S = {
   }
 }
 
-class RowInputColor extends Component {
-  /*
-  static propTypes = {
-    styleRoot: PropTypes.object,
-    styleCaption: PropTypes.object,
-    styleInput: PropTypes.object,
-    caption: PropTypes.string,
-    initValue: PropTypes.string,
-    onEnter: PropTypes.func
-  }
-  */
+const _onEnter = () => {};
 
-  static defaultProps = {
-    caption: 'Color:',
-    initValue: '#90ed7d',
-    onEnter: () => {}
-  }
+const RowInputColor = ({
+  styleRoot,
+  styleCaption,
+  styleInput,
+  caption='Color:',
+  initValue='#90ed7d',
+  onEnter=_onEnter
+}) => {
+  const _refCellColor = useRef()
+  , [value, setValue] = useState(initValue)
+  , [isShowPallete, setIsShowPallette] = useState(false)
+  , _hEnter = useCallback((value) => {
+      onEnter(value)
+      setValue(value)
+    }, [onEnter])
+  , _hClickPallete = useCallback((color, event) => {
+      if (event.target === _refCellColor.current) {
+        setIsShowPallette(is => !is)
+      }
+    }, [])
+  , _hClosePalette = useCallback(() => {
+      setIsShowPallette(false)
+   }, [])
 
-  constructor(props){
-    super(props)
-    this._refCellColor = React.createRef()
-    const { initValue } = props
-    this.state = {
-      initValue: initValue,
-      value: initValue,
-      isShowPallete: false
-    }
-  }
 
-  static getDerivedStateFromProps({ initValue }, state) {
-    return initValue !== state.initValue
-      ? { initValue, value: initValue }
-      : null;
-  }
 
-  _hEnter = (value) => {
-    this.props.onEnter(value)
-    this.setState({ value })
-  }
+  useEffect(()=>setValue(initValue), [initValue])
 
-  _hClickPallete = (color, event) => {
-    if (event.target === this._refCellColor.current) {
-      this.setState(prevState => ({
-        isShowPallete: !prevState.isShowPallete
-      }))
-    }
-  }
+  const _caption = caption.indexOf(':') !== -1
+    ? caption
+    : `${caption}:`
+  , _cellColorStyle = useMemo(
+        () => ({
+           ...S.COLOR,
+           backgroundColor: value
+        }),
+        [value]
+    );
 
-  _hClosePalette = (event) => {
-     this.setState({ isShowPallete: false })
-  }
-
-  render(){
-    const {
-        styleRoot, styleCaption, styleInput,
-        caption
-      } = this.props
-    , { isShowPallete, value } = this.state
-    , _caption = caption.indexOf(':') !== -1
-         ? caption
-         : `${caption}:`
-    , _bgColor = { backgroundColor: value };
-    return (
-      <div style={{...S.ROOT, ...styleRoot}}>
-        <label>
-          <span style={{...S.CAPTION, ...styleCaption}}>
-            {_caption}
-          </span>
-          <InputText
-             style={{...S.INPUT_TEXT, ...styleInput}}
-             initValue={value}
-             maxLength={20}
-             onEnter={this._hEnter}
-          />
-        </label>
-        <CellColor
-          ref={this._refCellColor}
-          style={{...S.COLOR, ..._bgColor}}
-          onClick={this._hClickPallete}
-        >
-          <ModalPalette
-             isShow={isShowPallete}
-             model={Model.palette}
-             onClickCell={this._hEnter}
-             onClose={this._hClosePalette}
-          />
-        </CellColor>
-      </div>
+  return (
+    <div style={{...S.ROOT, ...styleRoot}}>
+      <label>
+        <span style={{...S.CAPTION, ...styleCaption}}>
+          {_caption}
+        </span>
+        <InputText
+           style={{...S.INPUT_TEXT, ...styleInput}}
+           initValue={value}
+           maxLength={20}
+           onEnter={_hEnter}
+        />
+      </label>
+      <CellColor
+        ref={_refCellColor}
+        style={_cellColorStyle}
+        onClick={_hClickPallete}
+      >
+        <ModalPalette
+           isShow={isShowPallete}
+           model={Model.palette}
+           onClickCell={_hEnter}
+           onClose={_hClosePalette}
+        />
+      </CellColor>
+    </div>
   );
- }
 }
+
+/*
+RowInputColor.propTypes = {
+  styleRoot: PropTypes.object,
+  styleCaption: PropTypes.object,
+  styleInput: PropTypes.object,
+  caption: PropTypes.string,
+  initValue: PropTypes.string,
+  onEnter: PropTypes.func
+}
+*/
 
 export default RowInputColor
