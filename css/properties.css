@@ -23,8 +23,16 @@
 }
 
 .text-clip {
-  display: inline-block;  
+  display: inline-block;
   white-space: nowrap;
   text-overflow: clip;
   overflow: hidden;
+}
+
+.p-r {
+  position: relative;
+}
+
+.va-b {
+  vertical-align: bottom;
 }

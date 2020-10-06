@@ -20,6 +20,7 @@ var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette"));
 
 //import PropTypes from "prop-types";
+var CL_INPUT_COLOR = 'p-r input-color va-b';
 var S = {
   ROOT: {
     paddingTop: 6,
@@ -37,15 +38,7 @@ var S = {
   },
   INPUT_TEXT: {
     width: 80,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  },
-  COLOR: {
-    position: 'relative',
-    display: 'inline-block',
-    height: 32,
-    width: 32,
-    borderRadius: 2,
-    verticalAlign: 'bottom',
+    marginRight: 8,
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
 };
@@ -89,12 +82,7 @@ var RowInputColor = function RowInputColor(_ref) {
     return setValue(initValue);
   }, [initValue]);
 
-  var _caption = caption.indexOf(':') !== -1 ? caption : caption + ":",
-      _cellColorStyle = (0, _react.useMemo)(function () {
-    return (0, _extends2["default"])({}, S.COLOR, {
-      backgroundColor: value
-    });
-  }, [value]);
+  var _caption = caption.indexOf(':') !== -1 ? caption : caption + ":";
 
   return /*#__PURE__*/_react["default"].createElement("div", {
     style: (0, _extends2["default"])({}, S.ROOT, styleRoot)
@@ -107,7 +95,8 @@ var RowInputColor = function RowInputColor(_ref) {
     onEnter: _hEnter
   })), /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
     ref: _refCellColor,
-    style: _cellColorStyle,
+    className: CL_INPUT_COLOR,
+    color: value,
     onClick: _hClickPallete
   }, /*#__PURE__*/_react["default"].createElement(_ModalPalette["default"], {
     isShow: isShowPallete,

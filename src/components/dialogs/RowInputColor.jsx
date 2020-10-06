@@ -1,10 +1,12 @@
-import React, { useRef, useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 //import PropTypes from "prop-types";
 
 import Model from '../../constants/Model'
 import InputText from '../zhn/InputText'
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
+
+const CL_INPUT_COLOR = 'p-r input-color va-b'
 
 const S = {
   ROOT: {
@@ -23,15 +25,7 @@ const S = {
   },
   INPUT_TEXT: {
     width: 80,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  },
-  COLOR: {
-    position: 'relative',
-    display: 'inline-block',
-    height: 32,
-    width: 32,
-    borderRadius: 2,
-    verticalAlign: 'bottom',
+    marginRight: 8,
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
 }
@@ -60,22 +54,13 @@ const RowInputColor = ({
     }, [])
   , _hClosePalette = useCallback(() => {
       setIsShowPallette(false)
-   }, [])
-
-
+   }, []);
 
   useEffect(()=>setValue(initValue), [initValue])
 
   const _caption = caption.indexOf(':') !== -1
     ? caption
-    : `${caption}:`
-  , _cellColorStyle = useMemo(
-        () => ({
-           ...S.COLOR,
-           backgroundColor: value
-        }),
-        [value]
-    );
+    : `${caption}:`;
 
   return (
     <div style={{...S.ROOT, ...styleRoot}}>
@@ -92,7 +77,8 @@ const RowInputColor = ({
       </label>
       <CellColor
         ref={_refCellColor}
-        style={_cellColorStyle}
+        className={CL_INPUT_COLOR}
+        color={value}
         onClick={_hClickPallete}
       >
         <ModalPalette

@@ -34,15 +34,3 @@
   left: 0;
   z-index: 2000;
 }
-
-.dialog__menu-more {
-  top: 30px;
-  left: -2px;
-  z-index: 10;
-  text-align: left;
-}
-
-.modal-dialog:focus,
-.draggable-dialog:focus {
-  outline: 0;
-}
