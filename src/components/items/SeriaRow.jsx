@@ -14,6 +14,8 @@ const DF = {
 const CL = {
   ELL: 'ellipsis'
 };
+
+const CL_INPUT_COLOR = 'p-r input-color va-m';
 const S = {
   ROOT: {
     paddingLeft: 16,
@@ -29,15 +31,6 @@ const S = {
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
-  },
-  COLOR: {
-    position: 'relative',
-    display: 'inline-block',
-    height: 32,
-    width: 32,
-    borderRadius: 2,
-    verticalAlign: 'middle',
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   },
   ROW_CHECK_BOX: {
     display: 'inline-block',
@@ -104,7 +97,7 @@ class SeriaRow extends Component {
 
   _getColor = () => {
     const { colorEntered } = this.state
-        , { color } = this.props.seria.options;    
+        , { color } = this.props.seria.options;
     return colorEntered || color || DF.COLOR;
   }
 
@@ -114,7 +107,7 @@ class SeriaRow extends Component {
         , { name, options={} } = seria
         , { zhValueText } = options
         , _name = zhValueText || name
-        , _bgColor = { backgroundColor: this._getColor() };
+        , _color = this._getColor();
 
     return (
       <div style={S.ROOT}>
@@ -132,7 +125,8 @@ class SeriaRow extends Component {
         </span>
         <CellColor
            ref={this._refCellColor}
-           style={{...S.COLOR, ..._bgColor}}
+           className={CL_INPUT_COLOR}
+           color={_color}           
            onClick={this._hClickPallete}
         >
           <ModalPalette

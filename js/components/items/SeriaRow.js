@@ -7,8 +7,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
@@ -33,6 +31,7 @@ var DF = {
 var CL = {
   ELL: 'ellipsis'
 };
+var CL_INPUT_COLOR = 'p-r input-color va-m';
 var S = {
   ROOT: {
     paddingLeft: 16,
@@ -48,15 +47,6 @@ var S = {
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
-  },
-  COLOR: {
-    position: 'relative',
-    display: 'inline-block',
-    height: 32,
-    width: 32,
-    borderRadius: 2,
-    verticalAlign: 'middle',
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   },
   ROW_CHECK_BOX: {
     display: 'inline-block',
@@ -134,9 +124,7 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
         options = _seria$options === void 0 ? {} : _seria$options,
         zhValueText = options.zhValueText,
         _name = zhValueText || name,
-        _bgColor = {
-      backgroundColor: this._getColor()
-    };
+        _color = this._getColor();
 
     return /*#__PURE__*/_react["default"].createElement("div", {
       style: S.ROOT
@@ -150,7 +138,8 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
       style: S.TITLE
     }, _name), /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
       ref: this._refCellColor,
-      style: (0, _extends2["default"])({}, S.COLOR, _bgColor),
+      className: CL_INPUT_COLOR,
+      color: _color,
       onClick: this._hClickPallete
     }, /*#__PURE__*/_react["default"].createElement(_ModalPalette["default"], {
       isShow: isShowPallete,
