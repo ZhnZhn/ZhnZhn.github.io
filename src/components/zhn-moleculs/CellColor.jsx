@@ -1,8 +1,11 @@
 import React from 'react'
+import useKeyEnter from '../hooks/useKeyEnter'
 //import PropTypes from 'prop-types'
 
 const CellColor = React.forwardRef(({
-  style, color,
+  className,
+  style,
+  color,
   onClick,
   children
 }, ref) => {
@@ -11,12 +14,17 @@ const CellColor = React.forwardRef(({
      : void 0
   , _onClick = onClick
      ? (event) => onClick(color, event)
-     : void 0;
+     : void 0
+  , _onKeyEnter = useKeyEnter(_onClick, [_onClick])
   return (
     <span
-       ref={ref}       
+       ref={ref}
+       tabIndex="0"
+       role="button"
+       className={className}
        style={{...style, ..._styleColor}}
        onClick={_onClick}
+       onKeyDown={_onKeyEnter}
     >
        {children}
     </span>
@@ -25,9 +33,10 @@ const CellColor = React.forwardRef(({
 
 /*
 CellColor.propTypes = {
+  className: PropTypes.string,
   style: PropTypes.object,
   color: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 }
 */
 
