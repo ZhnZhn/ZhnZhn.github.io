@@ -15,6 +15,8 @@ const COLORS2 = [
   '#607d8b','#7092be','#c3c3c3'
 ];
 
+const CL_INPUT_COLOR = 'input-color va-b'
+
 const S = {
   ROOT: {
     paddingTop: 6,
@@ -32,17 +34,10 @@ const S = {
   },
   TO_CELL: {
     marginLeft: 12,
-    marginRight: 12,
+    marginRight: 12
   },
   CELL: {
-  marginRight: 4,
-  position: 'relative',
-  display: 'inline-block',
-  height: 32,
-  width: 32,
-  borderRadius: 2,
-  verticalAlign: 'bottom',
-  boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+    marginRight: 4,
   }
 };
 
@@ -92,8 +87,9 @@ class SeriaColor extends Component {
       return i < _max ? (
         <CellColor
           key={c}
-          color={c}
+          className={CL_INPUT_COLOR}
           style={S.CELL}
+          color={c}
           onClick={this._hClick}
         />
       ) : null ;
@@ -112,7 +108,8 @@ class SeriaColor extends Component {
         <div>
           <CellColor
             color={color}
-            style={{ ...S.CELL, ...S.TO_CELL }}
+            className={CL_INPUT_COLOR}            
+            style={S.TO_CELL}
             onClick={this._hReset}
           />
           {this._renderColors(COLORS1, isLong)}
@@ -129,7 +126,7 @@ class SeriaColor extends Component {
       </div>
     );
   }
-  
+
   getConf(){
     const { chartType } = this.props
     , { color } = this.state;

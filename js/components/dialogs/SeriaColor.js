@@ -21,6 +21,7 @@ var C_TRANSPARENT = "transparent";
 var N_SHORT = 5;
 var COLORS1 = ['#8abb5d', '#f7a35c', '#795548', '#f15c80', '#f45b5b', '#d2b772', '#dda0dd', '#fffafa'];
 var COLORS2 = ['#f1d600', '#008b8b', '#2f7ed8', '#673ab7', '#000000', '#607d8b', '#7092be', '#c3c3c3'];
+var CL_INPUT_COLOR = 'input-color va-b';
 var S = {
   ROOT: {
     paddingTop: 6,
@@ -41,14 +42,7 @@ var S = {
     marginRight: 12
   },
   CELL: {
-    marginRight: 4,
-    position: 'relative',
-    display: 'inline-block',
-    height: 32,
-    width: 32,
-    borderRadius: 2,
-    verticalAlign: 'bottom',
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+    marginRight: 4
   }
 };
 
@@ -95,8 +89,9 @@ var SeriaColor = /*#__PURE__*/function (_Component) {
       return colors.map(function (c, i) {
         return i < _max ? /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
           key: c,
-          color: c,
+          className: CL_INPUT_COLOR,
           style: S.CELL,
+          color: c,
           onClick: _this._hClick
         }) : null;
       }).filter(Boolean);
@@ -131,7 +126,8 @@ var SeriaColor = /*#__PURE__*/function (_Component) {
       style: S.ROOT
     }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
       color: color,
-      style: (0, _extends2["default"])({}, S.CELL, S.TO_CELL),
+      className: CL_INPUT_COLOR,
+      style: S.TO_CELL,
       onClick: this._hReset
     }), this._renderColors(COLORS1, isLong)), /*#__PURE__*/_react["default"].createElement("div", {
       style: _rowStyle
