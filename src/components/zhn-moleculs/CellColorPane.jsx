@@ -2,6 +2,8 @@ import React from 'react'
 
 import CellColor from './CellColor'
 
+const CL_INPUT_COLOR = "va-b"
+
 const S = {
   PANE: {
     margin: 10
@@ -10,13 +12,7 @@ const S = {
     width: 120
   },
   COLOR: {
-    display: 'inline-block',
-    height: 32,
-    width: 32,
-    margin: 4,
-    borderRadius: 2,
-    verticalAlign: 'bottom',
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+    margin: 4
   }
 }
 
@@ -34,6 +30,7 @@ const CellColorPane = React.memo(({ model, onClickCell }) => {
        _elCells.push((
          <CellColor
            key={_color}
+           className={CL_INPUT_COLOR}
            style={S.COLOR}
            color={_color}
            onClick={onClickCell.bind(null, _color)}

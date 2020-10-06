@@ -9,6 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _CellColor = _interopRequireDefault(require("./CellColor"));
 
+var CL_INPUT_COLOR = "va-b";
 var S = {
   PANE: {
     margin: 10
@@ -17,13 +18,7 @@ var S = {
     width: 120
   },
   COLOR: {
-    display: 'inline-block',
-    height: 32,
-    width: 32,
-    margin: 4,
-    borderRadius: 2,
-    verticalAlign: 'bottom',
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+    margin: 4
   }
 };
 
@@ -46,6 +41,7 @@ var CellColorPane = /*#__PURE__*/_react["default"].memo(function (_ref) {
 
       _elCells.push( /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
         key: _color,
+        className: CL_INPUT_COLOR,
         style: S.COLOR,
         color: _color,
         onClick: onClickCell.bind(null, _color)

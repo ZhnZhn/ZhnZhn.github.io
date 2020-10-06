@@ -12,6 +12,12 @@ var _react = _interopRequireDefault(require("react"));
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
 //import PropTypes from 'prop-types'
+var CL_INPUT_COLOR = 'input-color';
+
+var _crClassName = function _crClassName(className) {
+  return className ? className + ' ' + CL_INPUT_COLOR : CL_INPUT_COLOR;
+};
+
 var CellColor = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
   var className = _ref.className,
       style = _ref.style,
@@ -19,7 +25,8 @@ var CellColor = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
       onClick = _ref.onClick,
       children = _ref.children;
 
-  var _styleColor = color ? {
+  var _className = _crClassName(className),
+      _styleColor = color ? {
     backgroundColor: color
   } : void 0,
       _onClick = onClick ? function (event) {
@@ -31,7 +38,7 @@ var CellColor = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
     ref: ref,
     tabIndex: "0",
     role: "button",
-    className: className,
+    className: _className,
     style: (0, _extends2["default"])({}, style, _styleColor),
     onClick: _onClick,
     onKeyDown: _onKeyEnter

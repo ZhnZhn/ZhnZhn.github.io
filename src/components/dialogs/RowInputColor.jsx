@@ -6,7 +6,7 @@ import InputText from '../zhn/InputText'
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
 
-const CL_INPUT_COLOR = 'p-r input-color va-b'
+const CL_INPUT_COLOR = 'p-r va-b'
 
 const S = {
   ROOT: {

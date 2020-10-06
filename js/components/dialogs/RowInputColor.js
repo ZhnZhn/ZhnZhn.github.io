@@ -20,7 +20,7 @@ var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette"));
 
 //import PropTypes from "prop-types";
-var CL_INPUT_COLOR = 'p-r input-color va-b';
+var CL_INPUT_COLOR = 'p-r va-b';
 var S = {
   ROOT: {
     paddingTop: 6,

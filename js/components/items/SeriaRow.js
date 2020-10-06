@@ -31,7 +31,7 @@ var DF = {
 var CL = {
   ELL: 'ellipsis'
 };
-var CL_INPUT_COLOR = 'p-r input-color va-m';
+var CL_INPUT_COLOR = 'p-r va-m';
 var S = {
   ROOT: {
     paddingLeft: 16,

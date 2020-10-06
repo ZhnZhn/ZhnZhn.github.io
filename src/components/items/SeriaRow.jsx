@@ -15,7 +15,7 @@ const CL = {
   ELL: 'ellipsis'
 };
 
-const CL_INPUT_COLOR = 'p-r input-color va-m';
+const CL_INPUT_COLOR = 'p-r va-m';
 const S = {
   ROOT: {
     paddingLeft: 16,
@@ -126,7 +126,7 @@ class SeriaRow extends Component {
         <CellColor
            ref={this._refCellColor}
            className={CL_INPUT_COLOR}
-           color={_color}           
+           color={_color}
            onClick={this._hClickPallete}
         >
           <ModalPalette

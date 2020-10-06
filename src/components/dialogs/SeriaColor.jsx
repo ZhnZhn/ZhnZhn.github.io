@@ -15,7 +15,7 @@ const COLORS2 = [
   '#607d8b','#7092be','#c3c3c3'
 ];
 
-const CL_INPUT_COLOR = 'input-color va-b'
+const CL_INPUT_COLOR = 'va-b'
 
 const S = {
   ROOT: {
@@ -108,7 +108,7 @@ class SeriaColor extends Component {
         <div>
           <CellColor
             color={color}
-            className={CL_INPUT_COLOR}            
+            className={CL_INPUT_COLOR}
             style={S.TO_CELL}
             onClick={this._hReset}
           />

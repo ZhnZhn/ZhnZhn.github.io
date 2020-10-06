@@ -21,7 +21,7 @@ var C_TRANSPARENT = "transparent";
 var N_SHORT = 5;
 var COLORS1 = ['#8abb5d', '#f7a35c', '#795548', '#f15c80', '#f45b5b', '#d2b772', '#dda0dd', '#fffafa'];
 var COLORS2 = ['#f1d600', '#008b8b', '#2f7ed8', '#673ab7', '#000000', '#607d8b', '#7092be', '#c3c3c3'];
-var CL_INPUT_COLOR = 'input-color va-b';
+var CL_INPUT_COLOR = 'va-b';
 var S = {
   ROOT: {
     paddingTop: 6,
