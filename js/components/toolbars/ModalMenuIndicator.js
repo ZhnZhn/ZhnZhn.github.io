@@ -79,7 +79,19 @@ const DEF_GROWTH_RATE = (
 );
 */
 
-var NORM_CAPTION_EL = /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, "Normalize (100*y", /*#__PURE__*/_react["default"].createElement("sub", null, "t"), "/y", /*#__PURE__*/_react["default"].createElement("sub", null, "0"), ")");
+var NORM_CAPTION_EL = /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, "Normalize (100*y", /*#__PURE__*/_react["default"].createElement("sub", null, "t"), "/y", /*#__PURE__*/_react["default"].createElement("sub", null, "0"), ")");
+
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number';
+};
+
+var _getSeriaIndex = function _getSeriaIndex(chart, _ref) {
+  var s = _ref.s;
+
+  var _index = _isNumber(s) ? s - 1 : 0;
+
+  return (chart == null ? void 0 : chart.series.length) > _index ? _index : 0;
+};
 
 var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ModalMenuIndicator, _Component);
@@ -126,7 +138,7 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
     _this._removeGrowRate = _this._hideSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.GR);
     _this._addChanges = _this._addSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.CH);
     _this._removeChanges = _this._hideSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.CH);
-    _this._addNormalize = _this._addSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.NORM, {}, undefined);
+    _this._addNormalize = _this._addSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.NORM, {});
     _this._removeNormalize = _this._hideSeriaBy.bind((0, _assertThisInitialized2["default"])(_this), FNS.NORM);
     _this.state = {
       isGrowthRate: false,
@@ -152,10 +164,12 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
     if (this._chart) {
       var _this$setState;
 
+      var seriaIndex = _getSeriaIndex(this._chart, seriaOptions);
+
       if (_isSeriaInst(_seria)) {
         _seria.setVisible(true);
       } else {
-        var data = this._chart.series[0].data,
+        var data = this._chart.series[seriaIndex].data,
             seriaData = fn(data, fnOptions);
         this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
           data: seriaData,

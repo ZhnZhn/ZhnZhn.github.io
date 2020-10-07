@@ -18,8 +18,11 @@ var _A = _interopRequireDefault(require("../zhn/A"));
 var DF_COLOR = '#d2b772';
 var OC_COLOR = 'black';
 var DF_PERIOD = 1;
+var DF_SERIA = 1;
 var S = {
   ROOT_OC: {
+    lineHeight: 'unset',
+    paddingBottom: 4,
     marginLeft: -8
   },
   OC: {
@@ -33,18 +36,30 @@ var S = {
     width: 56,
     marginRight: 12
   },
-  ROW_CHB: {
-    lineHeight: 'initial',
-    paddingBottom: 4
+  COLOR_INPUT: {
+    marginBottom: 2
+  },
+  CAPTION_SERIA_INPUT: {
+    width: 85,
+    paddingLeft: 5,
+    paddingRight: 4,
+    color: 'black',
+    fontWeight: 'bold'
+  },
+  SERIA_INPUT: {
+    width: 36
+  },
+  ROW_2: {
+    paddingBottom: 6
+  },
+  VA_M: {
+    verticalAlign: 'middle'
   },
   PL_6: {
     paddingLeft: 6
   },
   PL_8: {
     paddingLeft: 8
-  },
-  PL_24: {
-    paddingLeft: 24
   },
   TEXT: {
     display: 'inline-block',
@@ -65,6 +80,10 @@ var S = {
       fontWeight: 'bold'
     };
   }
+};
+var S1 = {
+  COLUMN: (0, _extends2["default"])({}, S.INLINE, S.VA_M, S.PL_6),
+  ON_TOP: (0, _extends2["default"])({}, S.INLINE, S.VA_M, S.PL_8)
 };
 
 var InputPlus = function InputPlus(_ref) {
@@ -106,6 +125,12 @@ const Defenition = ({ Def }) => Def
 */
 
 
+var _fChangeNumber = function _fChangeNumber(ref, dfValue) {
+  return function (n) {
+    return ref.current = parseInt(n, 10) || dfValue;
+  };
+};
+
 var RowType1 = function RowType1(_ref3) {
   var is = _ref3.is,
       caption = _ref3.caption,
@@ -117,21 +142,22 @@ var RowType1 = function RowType1(_ref3) {
   var _refColor = (0, _react.useRef)(dfColor),
       _refPeriod = (0, _react.useRef)(DF_PERIOD),
       _refSeriaType = (0, _react.useRef)('column'),
+      _refSeria = (0, _react.useRef)(DF_SERIA),
       _refOnTop = (0, _react.useRef)(false),
       _onColor = function _onColor(color) {
     return _refColor.current = color;
   },
-      _onChangePeriod = function _onChangePeriod(n) {
-    return _refPeriod.current = parseInt(n, 10) || DF_PERIOD;
-  },
+      _onChangePeriod = _fChangeNumber(_refPeriod, DF_PERIOD),
       _onToggleColumn = function _onToggleColumn(is) {
     return _refSeriaType.current = is ? 'column' : 'spline';
   },
+      _onChangeSeria = _fChangeNumber(_refSeria, DF_SERIA),
       _onToggleTop = function _onToggleTop(is) {
     return _refOnTop.current = is;
   },
       _onPlus = function _onPlus() {
     return onPlus({
+      s: _refSeria.current,
       color: _refColor.current,
       type: _refSeriaType.current,
       zIndex: _refOnTop.current ? void 0 : -1
@@ -156,21 +182,35 @@ var RowType1 = function RowType1(_ref3) {
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: S.PL_8
   }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputColor, {
+    styleRoot: S.INLINE,
     styleCaption: S.NONE,
+    styleInput: S.COLOR_INPUT,
     initValue: DF_COLOR,
     onEnter: _onColor
-  }), /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROW_CHB
-  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
+  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     caption: "Column",
-    rootStyle: (0, _extends2["default"])({}, S.INLINE, S.PL_6),
+    rootStyle: S1.COLUMN,
     captionStyle: S.PL_6,
     checkedColor: OC_COLOR,
     initValue: true,
     onToggle: _onToggleColumn
+  }), /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.ROW_2
+  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputText, {
+    rootStyle: S.INLINE,
+    caption: "For Seria",
+    captionStyle: S.CAPTION_SERIA_INPUT,
+    style: S.SERIA_INPUT,
+    type: "number",
+    initValue: 1,
+    min: 1,
+    max: 9,
+    maxLength: 1,
+    onChange: _onChangeSeria,
+    onEnter: _onPlus
   }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
     caption: "OnTop",
-    rootStyle: (0, _extends2["default"])({}, S.INLINE, S.PL_24),
+    rootStyle: S1.ON_TOP,
     captionStyle: S.PL_6,
     checkedColor: OC_COLOR,
     initValue: false,

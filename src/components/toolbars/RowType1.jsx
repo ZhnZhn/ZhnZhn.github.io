@@ -7,9 +7,12 @@ import A from '../zhn/A'
 const DF_COLOR = '#d2b772';
 const OC_COLOR = 'black';
 const DF_PERIOD = 1;
+const DF_SERIA = 1;
 
 const S = {
   ROOT_OC: {
+    lineHeight: 'unset',
+    paddingBottom: 4,
     marginLeft: -8
   },
   OC: {
@@ -23,18 +26,30 @@ const S = {
     width: 56,
     marginRight: 12
   },
-  ROW_CHB: {
-    lineHeight: 'initial',
-    paddingBottom: 4
+  COLOR_INPUT: {
+    marginBottom: 2
+  },
+  CAPTION_SERIA_INPUT: {
+    width: 85,
+    paddingLeft: 5,
+    paddingRight: 4,
+    color: 'black',
+    fontWeight: 'bold'
+  },
+  SERIA_INPUT: {
+    width: 36,
+  },
+  ROW_2: {
+    paddingBottom: 6
+  },
+  VA_M: {
+    verticalAlign: 'middle'
   },
   PL_6: {
     paddingLeft: 6
   },
   PL_8: {
     paddingLeft: 8
-  },
-  PL_24: {
-    paddingLeft: 24
   },
   TEXT: {
     display: 'inline-block',
@@ -54,6 +69,19 @@ const S = {
     fontWeight: 'bold'
   })
 };
+
+const S1 = {
+  COLUMN: {
+    ...S.INLINE,
+    ...S.VA_M,
+    ...S.PL_6
+  },
+  ON_TOP: {
+    ...S.INLINE,
+    ...S.VA_M,
+    ...S.PL_8
+  }
+}
 
 const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
   <>
@@ -90,6 +118,9 @@ const Defenition = ({ Def }) => Def
 : null;
 */
 
+const _fChangeNumber = (ref, dfValue) =>
+  n => ref.current = parseInt(n, 10) || dfValue;
+
 const RowType1 = ({
   is,
   caption,
@@ -101,12 +132,15 @@ const RowType1 = ({
   const _refColor = useRef(dfColor)
   , _refPeriod = useRef(DF_PERIOD)
   , _refSeriaType = useRef('column')
+  , _refSeria = useRef(DF_SERIA)
   , _refOnTop = useRef(false)
   , _onColor = color => _refColor.current = color
-  , _onChangePeriod = n => _refPeriod.current = parseInt(n, 10) || DF_PERIOD
+  , _onChangePeriod = _fChangeNumber(_refPeriod, DF_PERIOD)
   , _onToggleColumn = is => _refSeriaType.current = is ? 'column' : 'spline'
+  , _onChangeSeria = _fChangeNumber(_refSeria, DF_SERIA)
   , _onToggleTop = is => _refOnTop.current = is
   , _onPlus = () => onPlus({
+      s: _refSeria.current,
       color: _refColor.current,
       type: _refSeriaType.current,
       zIndex: _refOnTop.current ? void 0 : -1
@@ -134,22 +168,37 @@ const RowType1 = ({
   >
     <div style={S.PL_8}>
       <D.RowInputColor
+        styleRoot={S.INLINE}
         styleCaption={S.NONE}
+        styleInput={S.COLOR_INPUT}
         initValue={DF_COLOR}
         onEnter={_onColor}
       />
-      <div style={S.ROW_CHB}>
-        <D.RowCheckBox
-          caption="Column"
-          rootStyle={{ ...S.INLINE, ...S.PL_6 }}
-          captionStyle={S.PL_6}
-          checkedColor={OC_COLOR}
-          initValue={true}
-          onToggle={_onToggleColumn}
+      <D.RowCheckBox
+        caption="Column"
+        rootStyle={S1.COLUMN}
+        captionStyle={S.PL_6}
+        checkedColor={OC_COLOR}
+        initValue={true}
+        onToggle={_onToggleColumn}
+      />
+      <div style={S.ROW_2}>
+        <D.RowInputText
+          rootStyle={S.INLINE}
+          caption="For Seria"
+          captionStyle={S.CAPTION_SERIA_INPUT}
+          style={S.SERIA_INPUT}
+          type="number"
+          initValue={1}
+          min={1}
+          max={9}
+          maxLength={1}
+          onChange={_onChangeSeria}
+          onEnter={_onPlus}
         />
         <D.RowCheckBox
           caption="OnTop"
-          rootStyle={{ ...S.INLINE, ...S.PL_24 }}
+          rootStyle={S1.ON_TOP}
           captionStyle={S.PL_6}
           checkedColor={OC_COLOR}
           initValue={false}

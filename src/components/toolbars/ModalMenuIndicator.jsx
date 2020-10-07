@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import seriaFn from '../../math/seriaFn'
@@ -67,10 +67,19 @@ const DEF_GROWTH_RATE = (
 */
 
 const NORM_CAPTION_EL = (
-  <Fragment>
+  <>
     Normalize (100*y<sub>t</sub>/y<sub>0</sub>)
-  </Fragment>
+  </>
 );
+
+const _isNumber = n => typeof n === 'number'
+
+const _getSeriaIndex = (chart, { s }) => {
+  const _index = _isNumber(s) ? s - 1 : 0;
+  return chart?.series.length > _index
+    ? _index
+    : 0;
+}
 
 class ModalMenuIndicator extends Component {
   /*
@@ -105,7 +114,7 @@ class ModalMenuIndicator extends Component {
       .bind(this, FNS.CH)
 
      this._addNormalize = this._addSeriaBy
-      .bind(this, FNS.NORM, {}, undefined)
+      .bind(this, FNS.NORM, {})
      this._removeNormalize = this._hideSeriaBy
       .bind(this, FNS.NORM)
 
@@ -128,10 +137,11 @@ class ModalMenuIndicator extends Component {
       this._chart = this.props.getChart()
     }
     if (this._chart) {
+      const seriaIndex = _getSeriaIndex(this._chart, seriaOptions);
       if ( _isSeriaInst(_seria) ) {
         _seria.setVisible(true)
       } else {
-        const data = this._chart.series[0].data
+        const data = this._chart.series[seriaIndex].data
             , seriaData = fn(data, fnOptions);
         this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
           data: seriaData,
