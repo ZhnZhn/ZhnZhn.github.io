@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
+import ChartTypes from './ChartTypes'
 import D from './DialogCell'
 
+const { crOptions } = ChartTypes;
 const { Decor, crMenuMore } = D
 
 const ERR_MSG = 'Empty or Id format is not valid';
 
 const S = {
-  ID_CAPTION: { width: 80 },
+  ID_CAPTION: { width: 85 },
   ID_ROOT: { width: 270 }
 };
 
@@ -37,12 +39,14 @@ class DialogQuery extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
        props, { noDate }
     )
+    this._chartOptions = crOptions({ chartsType: 't2' })
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
        isToolbar: true,
        isShowLabels: true,
        isShowDate: true,
+       chartType: 'SPLINE'
     }
   }
 
@@ -55,16 +59,30 @@ class DialogQuery extends Component {
     return true;
   }
 
+  _hSelectChartType = (chartType) => {
+    this.setState({ chartType })
+  }
+  _onRegColor = (comp) => {
+    this.colorComp = comp
+  }
+
+
   _handleLoad = () => {
     if (this._idInput) {
       if (this._idInput.isValid()) {
         const _value = this._idInput.getValue()
-        , { onLoad, loadFn } = this.props;
+        , { props, state, colorComp } = this
+        , { onLoad, loadFn } = props
+        , { chartType } = state
+        , { seriaColor, seriaWidth } = colorComp
+            ? colorComp.getConf()
+            : {};
         onLoad(loadFn(this.props, {
           one: {
             value: _value,
             caption: _value
-          }
+          },
+          chartType, seriaColor, seriaWidth
         }));
       } else {
         this._idInput.showErrMsg()
@@ -84,6 +102,7 @@ class DialogQuery extends Component {
           } = this.props
         , { isToolbar,
             isShowLabels, isShowDate,
+            chartType
           } = this.state;
     return (
       <D.DraggableDialog
@@ -110,6 +129,17 @@ class DialogQuery extends Component {
           onTest={_testId}
           errorMsg={ERR_MSG}
         />
+        <D.RowChartDate
+            chartType={chartType}
+            isShowLabels={isShowLabels}
+            isShowChart={true}
+            labelStyle={S.ID_CAPTION}
+            selectWidth={S.ID_ROOT.width}
+            chartOptions={this._chartOptions}
+            onSelectChart={this._hSelectChartType}
+            onRegColor={this._onRegColor}
+            noDate={noDate}
+          />
         {
           !noDate &&
           <D.ShowHide isShow={isShowDate}>

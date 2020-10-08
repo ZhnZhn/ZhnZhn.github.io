@@ -13,16 +13,19 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _ChartTypes = _interopRequireDefault(require("./ChartTypes"));
+
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
 var _dec, _dec2, _class, _temp;
 
+var crOptions = _ChartTypes["default"].crOptions;
 var Decor = _DialogCell["default"].Decor,
     crMenuMore = _DialogCell["default"].crMenuMore;
 var ERR_MSG = 'Empty or Id format is not valid';
 var S = {
   ID_CAPTION: {
-    width: 80
+    width: 85
   },
   ID_ROOT: {
     width: 270
@@ -44,24 +47,44 @@ var _testId = function _testId(value) {
 var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class = _dec2(_class = (_temp = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogQuery, _Component);
 
-  function DialogQuery(props) {
+  function DialogQuery(_props) {
     var _this;
 
-    _this = _Component.call(this, props) || this;
+    _this = _Component.call(this, _props) || this;
+
+    _this._hSelectChartType = function (chartType) {
+      _this.setState({
+        chartType: chartType
+      });
+    };
+
+    _this._onRegColor = function (comp) {
+      _this.colorComp = comp;
+    };
 
     _this._handleLoad = function () {
       if (_this._idInput) {
         if (_this._idInput.isValid()) {
           var _value = _this._idInput.getValue(),
-              _this$props = _this.props,
-              onLoad = _this$props.onLoad,
-              loadFn = _this$props.loadFn;
+              _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
+              props = _assertThisInitialize.props,
+              state = _assertThisInitialize.state,
+              colorComp = _assertThisInitialize.colorComp,
+              onLoad = props.onLoad,
+              loadFn = props.loadFn,
+              chartType = state.chartType,
+              _ref = colorComp ? colorComp.getConf() : {},
+              seriaColor = _ref.seriaColor,
+              seriaWidth = _ref.seriaWidth;
 
           onLoad(loadFn(_this.props, {
             one: {
               value: _value,
               caption: _value
-            }
+            },
+            chartType: chartType,
+            seriaColor: seriaColor,
+            seriaWidth: seriaWidth
           }));
         } else {
           _this._idInput.showErrMsg();
@@ -81,15 +104,19 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
-    var noDate = props.noDate;
-    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+    var noDate = _props.noDate;
+    _this.toolbarButtons = _this._createType2WithToolbar(_props, {
       noDate: noDate
+    });
+    _this._chartOptions = crOptions({
+      chartsType: 't2'
     });
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this.state = {
       isToolbar: true,
       isShowLabels: true,
-      isShowDate: true
+      isShowDate: true,
+      chartType: 'SPLINE'
     };
     return _this;
   }
@@ -107,23 +134,24 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
   };
 
   _proto.render = function render() {
-    var _this$props2 = this.props,
-        caption = _this$props2.caption,
-        isShow = _this$props2.isShow,
-        onShow = _this$props2.onShow,
-        onFront = _this$props2.onFront,
-        onClose = _this$props2.onClose,
-        oneCaption = _this$props2.oneCaption,
-        onePlaceholder = _this$props2.onePlaceholder,
-        noDate = _this$props2.noDate,
-        initFromDate = _this$props2.initFromDate,
-        initToDate = _this$props2.initToDate,
-        msgOnNotValidFormat = _this$props2.msgOnNotValidFormat,
-        onTestDate = _this$props2.onTestDate,
+    var _this$props = this.props,
+        caption = _this$props.caption,
+        isShow = _this$props.isShow,
+        onShow = _this$props.onShow,
+        onFront = _this$props.onFront,
+        onClose = _this$props.onClose,
+        oneCaption = _this$props.oneCaption,
+        onePlaceholder = _this$props.onePlaceholder,
+        noDate = _this$props.noDate,
+        initFromDate = _this$props.initFromDate,
+        initToDate = _this$props.initToDate,
+        msgOnNotValidFormat = _this$props.msgOnNotValidFormat,
+        onTestDate = _this$props.onTestDate,
         _this$state = this.state,
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
-        isShowDate = _this$state.isShowDate;
+        isShowDate = _this$state.isShowDate,
+        chartType = _this$state.chartType;
     return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       menuModel: this._menuMore,
@@ -145,6 +173,16 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
       caption: oneCaption,
       onTest: _testId,
       errorMsg: ERR_MSG
+    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowChartDate, {
+      chartType: chartType,
+      isShowLabels: isShowLabels,
+      isShowChart: true,
+      labelStyle: S.ID_CAPTION,
+      selectWidth: S.ID_ROOT.width,
+      chartOptions: this._chartOptions,
+      onSelectChart: this._hSelectChartType,
+      onRegColor: this._onRegColor,
+      noDate: noDate
     }), !noDate && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
       isShow: isShowDate
     }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {

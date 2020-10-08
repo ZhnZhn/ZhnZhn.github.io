@@ -12,7 +12,15 @@ const createLoadOptions = (props={}, options={}) => {
           linkFn, dataSource,
           dfProps
         } = props
-      , { one, fromDate, toDate, transform } = options
+      , {
+        one,
+        fromDate, toDate,
+        transform,
+        chartType={},
+        seriaColor,
+        seriaWidth,
+      } = options
+      , {  value:seriaType } = chartType
       , value = getV(one)
       , caption = getC(one)
       , _value = _isFn(fnValue)
@@ -41,6 +49,7 @@ const createLoadOptions = (props={}, options={}) => {
     itemCaption : _itemCaption,
     loadId : loadId,
     linkFn : linkFn,
+    seriaType, seriaColor, seriaWidth,
     seriaColumnNames, dataSource,
     ...dfProps
   }

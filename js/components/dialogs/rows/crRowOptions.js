@@ -16,7 +16,9 @@ var crRowOptions = function crRowOptions(_ref, _temp) {
       _ref$caption = _ref.caption,
       caption = _ref$caption === void 0 ? '' : _ref$caption,
       captionStyle = _ref.captionStyle,
-      rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["isShowLabels", "caption", "captionStyle"]);
+      _ref$width = _ref.width,
+      width = _ref$width === void 0 ? 250 : _ref$width,
+      rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["isShowLabels", "caption", "captionStyle", "width"]);
 
   var _ref2 = _temp === void 0 ? {} : _temp,
       isOc = _ref2.isOc;
@@ -27,7 +29,7 @@ var crRowOptions = function crRowOptions(_ref, _temp) {
     captionStyle: captionStyle
   }, isOc), {
     options: (0, _extends2["default"])({
-      width: "250"
+      width: width
     }, rest, {
       optionName: isShowLabels ? '' : caption.replace(':', '')
     })

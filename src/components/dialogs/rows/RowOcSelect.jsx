@@ -23,13 +23,18 @@ const RowOcSelect = ({
    const {
      rowStyle, labelStyle, caption,
      options
-   } = crRowOptions(restProps, { isOc: true });
+   } = crRowOptions(restProps, { isOc: true })
+   , _ocStyle = {
+       ...S.OC,
+       ...labelStyle,
+       ...restProps.labelStyle
+     };
 
   return (
      <OpenClose
        caption={caption}
        style={rowStyle}
-       ocStyle={{...S.OC, ...labelStyle}}
+       ocStyle={_ocStyle}
        captionStyle={S.CAPTION}
        openColor={C_OPEN}
        CompAfter={<InputSelect {...options} />}

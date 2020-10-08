@@ -14,14 +14,18 @@ var _SeriaColor = _interopRequireDefault(require("../SeriaColor"));
 var RowChart = function RowChart(_ref) {
   var chartType = _ref.chartType,
       isShowLabels = _ref.isShowLabels,
+      labelStyle = _ref.labelStyle,
       placeholder = _ref.placeholder,
+      selectWidth = _ref.selectWidth,
       options = _ref.options,
       onSelectChart = _ref.onSelectChart,
       onRegColor = _ref.onRegColor;
   return /*#__PURE__*/_react["default"].createElement(_RowOcSelect["default"], {
     isShowLabels: isShowLabels,
+    labelStyle: labelStyle,
     caption: "Chart",
     placeholder: placeholder || options[0].caption,
+    width: selectWidth,
     options: options,
     onSelect: onSelectChart
   }, /*#__PURE__*/_react["default"].createElement(_SeriaColor["default"], {

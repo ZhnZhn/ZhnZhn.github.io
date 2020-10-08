@@ -9,6 +9,8 @@ const { ShowHide } = Comp
 const RowChartDate = ({
   chartType,
   isShowLabels,
+  labelStyle,
+  selectWidth,
   isShowChart, chartOptions,
   onSelectChart, onRegColor,
   isShowDate, noDate=false,
@@ -19,6 +21,8 @@ const RowChartDate = ({
       <RowChart
         chartType={chartType}
         isShowLabels={isShowLabels}
+        labelStyle={labelStyle}
+        selectWidth={selectWidth}
         options={chartOptions}
         onSelectChart={onSelectChart}
         onRegColor={onRegColor}

@@ -6,15 +6,19 @@ import SeriaColor from '../SeriaColor'
 const RowChart = ({
   chartType,
   isShowLabels,
+  labelStyle,
   placeholder,
+  selectWidth,
   options,
   onSelectChart,
   onRegColor
 }) => (
   <RowOcSelect
     isShowLabels={isShowLabels}
+    labelStyle={labelStyle}
     caption="Chart"
     placeholder={placeholder || options[0].caption}
+    width={selectWidth}
     options={options}
     onSelect={onSelectChart}
   >

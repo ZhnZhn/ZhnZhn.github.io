@@ -5,11 +5,12 @@ const crRowOptions = ({
   isShowLabels,
   caption='',
   captionStyle,
+  width=250,
   ...rest
 }, { isOc }={}) => ({
   ...crRow({ isShowLabels, caption, captionStyle }, isOc),
   options: {
-    width: "250",
+    width,
     ...rest,
     optionName: isShowLabels
       ? ''

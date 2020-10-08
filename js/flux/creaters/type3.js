@@ -40,6 +40,11 @@ var createLoadOptions = function createLoadOptions(props, options) {
       fromDate = _options.fromDate,
       toDate = _options.toDate,
       transform = _options.transform,
+      _options$chartType = _options.chartType,
+      chartType = _options$chartType === void 0 ? {} : _options$chartType,
+      seriaColor = _options.seriaColor,
+      seriaWidth = _options.seriaWidth,
+      seriaType = chartType.value,
       value = getV(one),
       caption = getC(one),
       _value = _isFn(fnValue) ? fnValue(value) : value,
@@ -61,6 +66,9 @@ var createLoadOptions = function createLoadOptions(props, options) {
     itemCaption: _itemCaption,
     loadId: loadId,
     linkFn: linkFn,
+    seriaType: seriaType,
+    seriaColor: seriaColor,
+    seriaWidth: seriaWidth,
     seriaColumnNames: seriaColumnNames,
     dataSource: dataSource
   }, dfProps);

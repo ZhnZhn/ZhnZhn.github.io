@@ -18,6 +18,8 @@ var ShowHide = _Comp["default"].ShowHide;
 var RowChartDate = function RowChartDate(_ref) {
   var chartType = _ref.chartType,
       isShowLabels = _ref.isShowLabels,
+      labelStyle = _ref.labelStyle,
+      selectWidth = _ref.selectWidth,
       isShowChart = _ref.isShowChart,
       chartOptions = _ref.chartOptions,
       onSelectChart = _ref.onSelectChart,
@@ -33,6 +35,8 @@ var RowChartDate = function RowChartDate(_ref) {
   }, /*#__PURE__*/_react["default"].createElement(_RowChart["default"], {
     chartType: chartType,
     isShowLabels: isShowLabels,
+    labelStyle: labelStyle,
+    selectWidth: selectWidth,
     options: chartOptions,
     onSelectChart: onSelectChart,
     onRegColor: onRegColor
