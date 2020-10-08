@@ -50,13 +50,20 @@ const _crUTC = (item) => {
   return ymdToUTC(Year + md);
 };
 
+const _isArr = Array.isArray
+
+const _getData = Results => _isArr(Results)
+  ? Results[0].Data
+  : Results.Data;
+
 const fnAdapter = {
   crData: (Results, option) => {
     const { dfFilterName, two } = option
-        , d = []
-        , isFilter = dfFilterName ? true : false;
+    , d = []
+    , isFilter = dfFilterName ? true : false
+    , data = _getData(Results) || [];
 
-    Results.Data.forEach(item => {
+    data.forEach(item => {
       const v = parseFloat(item.DataValue)
           , y = !Number.isNaN(v) ? v : null;
       if ( !(isFilter && item[dfFilterName] !== two) ) {

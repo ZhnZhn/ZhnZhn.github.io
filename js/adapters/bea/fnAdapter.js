@@ -81,13 +81,20 @@ var _crUTC = function _crUTC(item) {
   return ymdToUTC(Year + md);
 };
 
+var _isArr = Array.isArray;
+
+var _getData = function _getData(Results) {
+  return _isArr(Results) ? Results[0].Data : Results.Data;
+};
+
 var fnAdapter = {
   crData: function crData(Results, option) {
     var dfFilterName = option.dfFilterName,
         two = option.two,
         d = [],
-        isFilter = dfFilterName ? true : false;
-    Results.Data.forEach(function (item) {
+        isFilter = dfFilterName ? true : false,
+        data = _getData(Results) || [];
+    data.forEach(function (item) {
       var v = parseFloat(item.DataValue),
           y = !Number.isNaN(v) ? v : null;
 
