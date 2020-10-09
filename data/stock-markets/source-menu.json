@@ -426,6 +426,7 @@
          "dialogType": "DialogType4",
          "addProps": "SM_BASE_IEX",
          "dialogProps" : {
+           "isWithOneInput": true,
            "oneCaption": "Stock",
            "oneURI" : "./data/stock-markets/wiki.json",
            "oneJsonProp": "tickets",
@@ -496,7 +497,7 @@
          "dialogProps" : {
            "selectProps": [
               ["Stock", "wiki", "tickets", true]
-            ]           
+            ]
          }
      },
      "SM_FMP_EN" : {

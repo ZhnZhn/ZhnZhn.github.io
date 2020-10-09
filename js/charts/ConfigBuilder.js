@@ -230,7 +230,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this._columnConfig(categories, option);
   },
   treeMapConfig: function treeMapConfig() {
-    this.config = _ChartConfig["default"].fBaseTreeMapConfig();
+    this.config = _ChartConfig["default"].crTreeMapConfig();
     return this;
   },
   alignButtonExport: function alignButtonExport() {

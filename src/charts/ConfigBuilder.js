@@ -168,7 +168,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this._columnConfig(categories, option);
   },
   treeMapConfig(){
-    this.config = ChartConfig.fBaseTreeMapConfig()
+    this.config = ChartConfig.crTreeMapConfig()
     return this;
   },
 

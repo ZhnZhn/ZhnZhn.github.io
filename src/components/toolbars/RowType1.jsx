@@ -32,7 +32,7 @@ const S = {
   CAPTION_SERIA_INPUT: {
     width: 85,
     paddingLeft: 5,
-    paddingRight: 4,
+    paddingRight: 5,
     color: 'black',
     fontWeight: 'bold'
   },
