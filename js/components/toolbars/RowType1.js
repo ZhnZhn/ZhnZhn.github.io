@@ -26,6 +26,9 @@ var S = {
     marginLeft: -8
   },
   OC: {
+    display: 'inline-block',
+    height: 32,
+    paddingTop: 4,
     width: 'auto',
     paddingRight: 8
   },
@@ -40,9 +43,9 @@ var S = {
     marginBottom: 2
   },
   CAPTION_SERIA_INPUT: {
+    display: 'inline-block',
     width: 85,
     paddingLeft: 5,
-    paddingRight: 5,
     color: 'black',
     fontWeight: 'bold'
   },
@@ -60,6 +63,9 @@ var S = {
   },
   PL_8: {
     paddingLeft: 8
+  },
+  PL_10: {
+    paddingLeft: 10
   },
   TEXT: {
     display: 'inline-block',
@@ -82,8 +88,8 @@ var S = {
   }
 };
 var S1 = {
-  COLUMN: (0, _extends2["default"])({}, S.INLINE, S.VA_M, S.PL_6),
-  ON_TOP: (0, _extends2["default"])({}, S.INLINE, S.VA_M, S.PL_8)
+  COLUMN: (0, _extends2["default"])({}, S.INLINE, S.VA_M, S.PL_10),
+  ON_TOP: (0, _extends2["default"])({}, S.INLINE, S.VA_M, S.PL_10)
 };
 
 var InputPlus = function InputPlus(_ref) {

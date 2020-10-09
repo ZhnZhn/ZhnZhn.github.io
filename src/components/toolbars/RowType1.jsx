@@ -16,6 +16,9 @@ const S = {
     marginLeft: -8
   },
   OC: {
+    display: 'inline-block',
+    height: 32,
+    paddingTop: 4,
     width: 'auto',
     paddingRight: 8
   },
@@ -30,9 +33,9 @@ const S = {
     marginBottom: 2
   },
   CAPTION_SERIA_INPUT: {
+    display: 'inline-block',
     width: 85,
     paddingLeft: 5,
-    paddingRight: 5,
     color: 'black',
     fontWeight: 'bold'
   },
@@ -50,6 +53,9 @@ const S = {
   },
   PL_8: {
     paddingLeft: 8
+  },
+  PL_10: {
+    paddingLeft: 10
   },
   TEXT: {
     display: 'inline-block',
@@ -74,12 +80,12 @@ const S1 = {
   COLUMN: {
     ...S.INLINE,
     ...S.VA_M,
-    ...S.PL_6
+    ...S.PL_10
   },
   ON_TOP: {
     ...S.INLINE,
     ...S.VA_M,
-    ...S.PL_8
+    ...S.PL_10
   }
 }
 
