@@ -1,40 +1,36 @@
-import React, { Component } from 'react';
+import React, { useCallback } from 'react';
+import memoEqual from '../hoc/memoEqual'
 
 import TransformFn from './TransformFn';
 import InputSelect from './InputSelect';
 
-class WrapperInputSearch extends Component {
+const WrapperInputSearch = memoEqual(({
+  style,
+  placeholder='',
+  data,
+  ItemOptionComp,
+  onSelect
+}) => {
+  const _hSelectItem = useCallback(item => {
+     if (item){ onSelect(item) }
+  }, [onSelect])
+  , { meta } = data || {}
+  , { caption } = meta || {}
+  , _options = TransformFn.fromLevel3(data);
 
-  shouldComponentUpdate(){
-    return false;
-  }
-
-  _handleSelectItem = (item) => {
-     if (item){
-       this.props.onSelect(item)
-     }
-  }
-
-  render(){
-    const  { style, placeholder='', data={}, ItemOptionComp } = this.props
-         , { meta } = data
-         , { caption={} } = meta
-         , _options = TransformFn.fromLevel3(data);
-
-    return (
-      <div style={style}>
-        <InputSelect
-           width="100%"
-           isShowOptionAnim={true}
-           placeholder={placeholder}
-           propCaption={caption}
-           options={_options}
-           ItemOptionComp={ItemOptionComp}
-           onSelect={this._handleSelectItem}
-        />
-     </div>
-    );
-  }
-}
+  return (
+    <div style={style}>
+      <InputSelect
+         width="100%"
+         isShowOptionAnim={true}
+         placeholder={placeholder}
+         propCaption={caption}
+         options={_options}
+         ItemOptionComp={ItemOptionComp}
+         onSelect={_hSelectItem}
+      />
+   </div>
+  );
+})
 
 export default WrapperInputSearch
