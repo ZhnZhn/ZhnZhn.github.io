@@ -23,7 +23,7 @@ var S = {
     marginBottom: 10
   },
   HEADER: {
-    height: 30
+    height: 33
   },
   CAPTION: {
     width: 'auto'
