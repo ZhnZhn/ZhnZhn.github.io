@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
+import useToggle from '../hooks/useToggle'
 
 import ShowHide from '../zhn/ShowHide';
 import Table from '../zhn-table/Table'
@@ -29,54 +30,46 @@ const S = {
   }
 };
 
-class TableItem extends Component {
-  state = {
-    isOpen: true
-  }
-
-  _hToggle = () => {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen
-    }))
-  }
-
-  render() {
-    const { thMoreStyle, config, onCloseItem } = this.props
-    , {
-        id, title, headers, rows, tableFn,
-        dataSource, dsStyle
-      } = config
-    , _gridId = `tb_${id}`
-    , { isOpen } = this.state;
-    return (
-      <div style={S.ROOT}>
-        <ItemHeader
-          isOpen={isOpen}
-          rootStyle={S.ROOT_HEADER}
-          caption={title}
-          captionStyle={S.CAPTION}
-          onClick={this._hToggle}
-          onClose={onCloseItem}
+const TableItem = ({
+  thMoreStyle,
+  config,
+  onCloseItem
+}) => {
+  const [isOpen, toggleIsOpen] = useToggle(true)
+  , {
+      id, title,
+      headers, rows,
+      tableFn,
+      dataSource, dsStyle
+    } = config
+  , _gridId = `tb_${id}`;
+  return (
+    <div style={S.ROOT}>
+      <ItemHeader
+        isOpen={isOpen}
+        rootStyle={S.ROOT_HEADER}
+        caption={title}
+        captionStyle={S.CAPTION}
+        onClick={toggleIsOpen}
+        onClose={onCloseItem}
+      />
+      <ShowHide
+        isShow={isOpen}
+        style={S.SHOW_HIDE}
+      >
+        <Table
+          gridId={_gridId}
+          thMoreStyle={thMoreStyle}
+          headers={headers}
+          rows={rows}
+          tableFn={tableFn}
         />
-        <ShowHide
-          isShow={isOpen}
-          style={S.SHOW_HIDE}
-        >
-          <Table
-            gridId={_gridId}
-            thMoreStyle={thMoreStyle}
-            headers={headers}
-            rows={rows}
-            tableFn={tableFn}
-          />
-          {dataSource && <div
-             style={{...S.DATA_SOURCE, ...dsStyle }}>{dataSource}
-           </div>}
-        </ShowHide>
-      </div>
-    );
-  }
-
+        {dataSource && <div
+           style={{...S.DATA_SOURCE, ...dsStyle}}>{dataSource}
+         </div>}
+      </ShowHide>
+    </div>
+  );
 }
 
 export default TableItem

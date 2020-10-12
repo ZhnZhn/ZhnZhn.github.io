@@ -1,1 +1,40 @@
-{"version":3,"sources":["../../../src/components/items/TableItem.jsx"],"names":["S","ROOT","paddingBottom","ROOT_HEADER","position","top","zIndex","willChange","CAPTION","width","SHOW_HIDE","paddingTop","DATA_SOURCE","paddingLeft","color","fontSize","TableItem","state","isOpen","_hToggle","setState","prevState","render","props","thMoreStyle","config","onCloseItem","id","title","headers","rows","tableFn","dataSource","dsStyle","_gridId","Component"],"mappings":";;;;;;;;;;;;;AAAA;;AAEA;;AACA;;AACA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AACJC,IAAAA,aAAa,EAAE;AADX,GADE;AAIRC,EAAAA,WAAW,EAAE;AACXC,IAAAA,QAAQ,EAAE,QADC;AAEXC,IAAAA,GAAG,EAAE,CAAC,CAFK;AAGXC,IAAAA,MAAM,EAAE,CAHG;AAIXC,IAAAA,UAAU,EAAE;AAJD,GAJL;AAURC,EAAAA,OAAO,EAAE;AACPC,IAAAA,KAAK,EAAE;AADA,GAVD;AAaRC,EAAAA,SAAS,EAAE;AACTC,IAAAA,UAAU,EAAE,CADH;AAETT,IAAAA,aAAa,EAAE;AAFN,GAbH;AAiBRU,EAAAA,WAAW,EAAE;AACXD,IAAAA,UAAU,EAAE,CADD;AAEXE,IAAAA,WAAW,EAAE,EAFF;AAGXC,IAAAA,KAAK,EAAE,SAHI;AAIXC,IAAAA,QAAQ,EAAE;AAJC;AAjBL,CAAV;;IAyBMC,S;;;;;;;;;;;UACJC,K,GAAQ;AACNC,MAAAA,MAAM,EAAE;AADF,K;;UAIRC,Q,GAAW,YAAM;AACf,YAAKC,QAAL,CAAc,UAAAC,SAAS;AAAA,eAAK;AAC1BH,UAAAA,MAAM,EAAE,CAACG,SAAS,CAACH;AADO,SAAL;AAAA,OAAvB;AAGD,K;;;;;;;SAEDI,M,GAAA,kBAAS;AAAA,sBACsC,KAAKC,KAD3C;AAAA,QACCC,WADD,eACCA,WADD;AAAA,QACcC,MADd,eACcA,MADd;AAAA,QACsBC,WADtB,eACsBA,WADtB;AAAA,QAGHC,EAHG,GAKDF,MALC,CAGHE,EAHG;AAAA,QAGCC,KAHD,GAKDH,MALC,CAGCG,KAHD;AAAA,QAGQC,OAHR,GAKDJ,MALC,CAGQI,OAHR;AAAA,QAGiBC,IAHjB,GAKDL,MALC,CAGiBK,IAHjB;AAAA,QAGuBC,OAHvB,GAKDN,MALC,CAGuBM,OAHvB;AAAA,QAIHC,UAJG,GAKDP,MALC,CAIHO,UAJG;AAAA,QAISC,OAJT,GAKDR,MALC,CAISQ,OAJT;AAAA,QAMLC,OANK,WAMWP,EANX;AAAA,QAOHT,MAPG,GAOQ,KAAKD,KAPb,CAOHC,MAPG;;AAQP,wBACE;AAAK,MAAA,KAAK,EAAElB,CAAC,CAACC;AAAd,oBACE,gCAAC,sBAAD;AACE,MAAA,MAAM,EAAEiB,MADV;AAEE,MAAA,SAAS,EAAElB,CAAC,CAACG,WAFf;AAGE,MAAA,OAAO,EAAEyB,KAHX;AAIE,MAAA,YAAY,EAAE5B,CAAC,CAACQ,OAJlB;AAKE,MAAA,OAAO,EAAE,KAAKW,QALhB;AAME,MAAA,OAAO,EAAEO;AANX,MADF,eASE,gCAAC,oBAAD;AACE,MAAA,MAAM,EAAER,MADV;AAEE,MAAA,KAAK,EAAElB,CAAC,CAACU;AAFX,oBAIE,gCAAC,iBAAD;AACE,MAAA,MAAM,EAAEwB,OADV;AAEE,MAAA,WAAW,EAAEV,WAFf;AAGE,MAAA,OAAO,EAAEK,OAHX;AAIE,MAAA,IAAI,EAAEC,IAJR;AAKE,MAAA,OAAO,EAAEC;AALX,MAJF,EAWGC,UAAU,iBAAI;AACZ,MAAA,KAAK,gCAAMhC,CAAC,CAACY,WAAR,EAAwBqB,OAAxB;AADO,OAC6BD,UAD7B,CAXjB,CATF,CADF;AA2BD,G;;;EA9CqBG,gB;;eAkDTnB,S","sourcesContent":["import React, { Component } from 'react'\r\n\r\nimport ShowHide from '../zhn/ShowHide';\r\nimport Table from '../zhn-table/Table'\r\nimport ItemHeader from './ItemHeader'\r\n\r\nconst S = {\r\n  ROOT: {\r\n    paddingBottom: 8\r\n  },\r\n  ROOT_HEADER: {\r\n    position: 'sticky',\r\n    top: -1,\r\n    zIndex: 1,\r\n    willChange: 'transform'\r\n  },\r\n  CAPTION: {\r\n    width: '100%'\r\n  },\r\n  SHOW_HIDE: {\r\n    paddingTop: 8,\r\n    paddingBottom: 8\r\n  },\r\n  DATA_SOURCE: {\r\n    paddingTop: 2,\r\n    paddingLeft: 12,\r\n    color: '#909090',\r\n    fontSize: '11px'\r\n  }\r\n};\r\n\r\nclass TableItem extends Component {\r\n  state = {\r\n    isOpen: true\r\n  }\r\n\r\n  _hToggle = () => {\r\n    this.setState(prevState => ({\r\n      isOpen: !prevState.isOpen\r\n    }))\r\n  }\r\n\r\n  render() {\r\n    const { thMoreStyle, config, onCloseItem } = this.props\r\n    , {\r\n        id, title, headers, rows, tableFn,\r\n        dataSource, dsStyle\r\n      } = config\r\n    , _gridId = `tb_${id}`\r\n    , { isOpen } = this.state;\r\n    return (\r\n      <div style={S.ROOT}>\r\n        <ItemHeader\r\n          isOpen={isOpen}\r\n          rootStyle={S.ROOT_HEADER}\r\n          caption={title}\r\n          captionStyle={S.CAPTION}\r\n          onClick={this._hToggle}\r\n          onClose={onCloseItem}\r\n        />\r\n        <ShowHide\r\n          isShow={isOpen}\r\n          style={S.SHOW_HIDE}\r\n        >\r\n          <Table\r\n            gridId={_gridId}\r\n            thMoreStyle={thMoreStyle}\r\n            headers={headers}\r\n            rows={rows}\r\n            tableFn={tableFn}\r\n          />\r\n          {dataSource && <div\r\n             style={{...S.DATA_SOURCE, ...dsStyle }}>{dataSource}\r\n           </div>}\r\n        </ShowHide>\r\n      </div>\r\n    );\r\n  }\r\n\r\n}\r\n\r\nexport default TableItem\r\n"],"file":"TableItem.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/TableItem.js"
+ ],
+ "file": "../../../src/components/items/TableItem.js",
+ "names": [
+  "S",
+  "ROOT",
+  "paddingBottom",
+  "ROOT_HEADER",
+  "position",
+  "top",
+  "zIndex",
+  "willChange",
+  "CAPTION",
+  "width",
+  "SHOW_HIDE",
+  "paddingTop",
+  "DATA_SOURCE",
+  "paddingLeft",
+  "color",
+  "fontSize",
+  "TableItem",
+  "thMoreStyle",
+  "config",
+  "onCloseItem",
+  "isOpen",
+  "toggleIsOpen",
+  "id",
+  "title",
+  "headers",
+  "rows",
+  "tableFn",
+  "dataSource",
+  "dsStyle",
+  "_gridId"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;AAEA;;AACA;;AACA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AACJC,IAAAA,aAAa,EAAE;AADX,GADE;AAIRC,EAAAA,WAAW,EAAE;AACXC,IAAAA,QAAQ,EAAE,QADC;AAEXC,IAAAA,GAAG,EAAE,CAAC,CAFK;AAGXC,IAAAA,MAAM,EAAE,CAHG;AAIXC,IAAAA,UAAU,EAAE;AAJD,GAJL;AAURC,EAAAA,OAAO,EAAE;AACPC,IAAAA,KAAK,EAAE;AADA,GAVD;AAaRC,EAAAA,SAAS,EAAE;AACTC,IAAAA,UAAU,EAAE,CADH;AAETT,IAAAA,aAAa,EAAE;AAFN,GAbH;AAiBRU,EAAAA,WAAW,EAAE;AACXD,IAAAA,UAAU,EAAE,CADD;AAEXE,IAAAA,WAAW,EAAE,EAFF;AAGXC,IAAAA,KAAK,EAAE,SAHI;AAIXC,IAAAA,QAAQ,EAAE;AAJC;AAjBL,CAAV;;AAyBA,IAAMC,SAAS,GAAG,SAAZA,SAAY,OAIZ;AAAA,MAHJC,WAGI,QAHJA,WAGI;AAAA,MAFJC,MAEI,QAFJA,MAEI;AAAA,MADJC,WACI,QADJA,WACI;;AAAA,mBAC2B,4BAAU,IAAV,CAD3B;AAAA,MACGC,MADH;AAAA,MACWC,YADX;AAAA,MAGAC,EAHA,GAOEJ,MAPF,CAGAI,EAHA;AAAA,MAGIC,KAHJ,GAOEL,MAPF,CAGIK,KAHJ;AAAA,MAIAC,OAJA,GAOEN,MAPF,CAIAM,OAJA;AAAA,MAISC,IAJT,GAOEP,MAPF,CAISO,IAJT;AAAA,MAKAC,OALA,GAOER,MAPF,CAKAQ,OALA;AAAA,MAMAC,UANA,GAOET,MAPF,CAMAS,UANA;AAAA,MAMYC,OANZ,GAOEV,MAPF,CAMYU,OANZ;AAAA,MAQFC,OARE,WAQcP,EARd;;AASJ,sBACE;AAAK,IAAA,KAAK,EAAEtB,CAAC,CAACC;AAAd,kBACE,gCAAC,sBAAD;AACE,IAAA,MAAM,EAAEmB,MADV;AAEE,IAAA,SAAS,EAAEpB,CAAC,CAACG,WAFf;AAGE,IAAA,OAAO,EAAEoB,KAHX;AAIE,IAAA,YAAY,EAAEvB,CAAC,CAACQ,OAJlB;AAKE,IAAA,OAAO,EAAEa,YALX;AAME,IAAA,OAAO,EAAEF;AANX,IADF,eASE,gCAAC,oBAAD;AACE,IAAA,MAAM,EAAEC,MADV;AAEE,IAAA,KAAK,EAAEpB,CAAC,CAACU;AAFX,kBAIE,gCAAC,iBAAD;AACE,IAAA,MAAM,EAAEmB,OADV;AAEE,IAAA,WAAW,EAAEZ,WAFf;AAGE,IAAA,OAAO,EAAEO,OAHX;AAIE,IAAA,IAAI,EAAEC,IAJR;AAKE,IAAA,OAAO,EAAEC;AALX,IAJF,EAWGC,UAAU,iBAAI;AACZ,IAAA,KAAK,gCAAM3B,CAAC,CAACY,WAAR,EAAwBgB,OAAxB;AADO,KAC4BD,UAD5B,CAXjB,CATF,CADF;AA2BD,CAxCD;;eA0CeX,S"
+}
