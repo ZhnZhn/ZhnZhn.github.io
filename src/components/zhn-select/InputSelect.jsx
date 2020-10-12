@@ -90,6 +90,7 @@ const _crFilterOptions = (options, token, props) => {
   return _arr;
 }
 
+const _getCurrent = ref => ref.current;
 
 class InputSelect extends Component {
   /*
@@ -142,6 +143,7 @@ class InputSelect extends Component {
         }
       : void 0
     this._initProperties()
+    this._refArrowCell = React.createRef()
     this.state = _crInitialStateFromProps(props)
   }
 
@@ -247,11 +249,11 @@ class InputSelect extends Component {
 
   _startAfterInputAnimation = () => {
     if (this.state.options.length>MAX_WITHOUT_ANIMATION){
-      this.arrowCell.startAnimation()
+      _getCurrent(this._refArrowCell).startAnimation()
     }
   }
   _stopAfterInputAnimation = () => {
-    this.arrowCell.stopAnimation()
+    _getCurrent(this._refArrowCell).stopAnimation()
   }
   _setShowOptions = () => {
     this.setState(
@@ -470,7 +472,7 @@ class InputSelect extends Component {
     );
   }
 
-  _refArrowCell = c => this.arrowCell = c
+  //_refArrowCell = c => this.arrowCell = c
 
   _hClear = () => {
     this.clearInput()

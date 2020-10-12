@@ -9,8 +9,6 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
 
 var _CL = _interopRequireDefault(require("./CL"));
@@ -42,58 +40,45 @@ var C = {
   BORDER_COLOR: "#1b75bb transparent transparent"
 };
 
-var ArrowCell = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(ArrowCell, _Component);
+var _getStyle = function _getStyle(ref) {
+  return ref.current.style;
+};
 
-  function ArrowCell() {
-    var _this;
+var ArrowCell = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
+  var arrowStyle = _ref.arrowStyle,
+      onClick = _ref.onClick;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+  var _refArrowCell = (0, _react.useRef)(),
+      _refArrow = (0, _react.useRef)();
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-
-    _this._refArrowCell = function (n) {
-      return _this.arrowCell = n;
+  (0, _react.useImperativeHandle)(ref, function () {
+    return {
+      startAnimation: function startAnimation() {
+        _getStyle(_refArrowCell).animation = C.ANIMATION_CIRCLE;
+        _getStyle(_refArrow).borderColor = C.BORDER_COLOR;
+      },
+      stopAnimation: function stopAnimation() {
+        _getStyle(_refArrowCell).animation = "";
+      }
     };
-
-    _this._refArrow = function (n) {
-      return _this.arrow = n;
-    };
-
-    _this.startAnimation = function () {
-      _this.arrowCell.style.animation = C.ANIMATION_CIRCLE;
-      _this.arrow.style.borderColor = C.BORDER_COLOR;
-    };
-
-    _this.stopAnimation = function () {
-      _this.arrowCell.style.animation = "";
-    };
-
-    return _this;
-  }
-
-  var _proto = ArrowCell.prototype;
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        arrowStyle = _this$props.arrowStyle,
-        onClick = _this$props.onClick;
-    return /*#__PURE__*/_react["default"].createElement("button", {
-      ref: this._refArrowCell,
-      className: _CL["default"].BT_ARROW,
-      style: S.ARROW_CELL,
-      tabIndex: "-1",
-      onClick: onClick
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      ref: this._refArrow,
-      style: (0, _extends2["default"])({}, S.ARROW, arrowStyle)
-    }));
-  };
-
-  return ArrowCell;
-}(_react.Component);
+  }, []);
+  return /*#__PURE__*/_react["default"].createElement("button", {
+    ref: _refArrowCell,
+    className: _CL["default"].BT_ARROW,
+    style: S.ARROW_CELL,
+    tabIndex: "-1",
+    onClick: onClick
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    ref: _refArrow,
+    style: (0, _extends2["default"])({}, S.ARROW, arrowStyle)
+  }));
+});
+/*
+ArrowCell.propTypes = {
+ arrowStyle: PropTypes.object,
+ onClick: PropTypes.func
+}
+*/
 
 var _default = ArrowCell;
 exports["default"] = _default;

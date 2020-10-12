@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 
 import CL from './CL';
 
@@ -26,38 +26,50 @@ const S = {
 };
 
 const C = {
-  ANIMATION_CIRCLE : "circle infinite 1.25s linear",
-  BORDER_COLOR : "#1b75bb transparent transparent"
+  ANIMATION_CIRCLE: "circle infinite 1.25s linear",
+  BORDER_COLOR: "#1b75bb transparent transparent"
 };
 
+const _getStyle = ref => ref.current.style;
 
-class ArrowCell extends Component {
-  _refArrowCell = n => this.arrowCell = n
-  _refArrow = n => this.arrow = n
-  render(){
-    const { arrowStyle, onClick } = this.props;
-    return (
-      <button
-         ref={this._refArrowCell}
-         className={CL.BT_ARROW}
-         style={S.ARROW_CELL}
-         tabIndex="-1"
-         onClick={onClick}>
-        <span
-           ref={this._refArrow}
-           style={{...S.ARROW, ...arrowStyle}}
-        />
-      </button>
-    );
-  }
+const ArrowCell = forwardRef(({
+  arrowStyle,
+  onClick
+}, ref) => {
+  const _refArrowCell = useRef()
+  , _refArrow = useRef();
 
-  startAnimation = () => {
-    this.arrowCell.style.animation = C.ANIMATION_CIRCLE;
-    this.arrow.style.borderColor = C.BORDER_COLOR;
-  }
-  stopAnimation = () => {
-    this.arrowCell.style.animation = "";
-  }
+  useImperativeHandle(ref, () => ({
+    startAnimation: () => {
+      _getStyle(_refArrowCell).animation = C.ANIMATION_CIRCLE;
+      _getStyle(_refArrow).borderColor = C.BORDER_COLOR;
+    },
+    stopAnimation: () => {
+      _getStyle(_refArrowCell).animation = "";
+    }
+  }), [])
+
+  return (
+    <button
+       ref={_refArrowCell}
+       className={CL.BT_ARROW}
+       style={S.ARROW_CELL}
+       tabIndex="-1"
+       onClick={onClick}
+    >
+      <span
+         ref={_refArrow}
+         style={{...S.ARROW, ...arrowStyle}}
+      />
+    </button>
+  );
+})
+
+/*
+ArrowCell.propTypes = {
+ arrowStyle: PropTypes.object,
+ onClick: PropTypes.func
 }
+*/
 
 export default ArrowCell

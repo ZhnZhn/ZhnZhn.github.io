@@ -120,6 +120,10 @@ var _crFilterOptions = function _crFilterOptions(options, token, props) {
   return _arr;
 };
 
+var _getCurrent = function _getCurrent(ref) {
+  return ref.current;
+};
+
 var InputSelect = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(InputSelect, _Component);
 
@@ -241,12 +245,12 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
     _this._startAfterInputAnimation = function () {
       if (_this.state.options.length > MAX_WITHOUT_ANIMATION) {
-        _this.arrowCell.startAnimation();
+        _getCurrent(_this._refArrowCell).startAnimation();
       }
     };
 
     _this._stopAfterInputAnimation = function () {
-      _this.arrowCell.stopAnimation();
+      _getCurrent(_this._refArrowCell).stopAnimation();
     };
 
     _this._setShowOptions = function () {
@@ -514,10 +518,6 @@ var InputSelect = /*#__PURE__*/function (_Component) {
       }));
     };
 
-    _this._refArrowCell = function (c) {
-      return _this.arrowCell = c;
-    };
-
     _this._hClear = function () {
       _this.clearInput();
 
@@ -609,6 +609,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
     _this._initProperties();
 
+    _this._refArrowCell = /*#__PURE__*/_react["default"].createRef();
     _this.state = _crInitialStateFromProps(_props);
     return _this;
   }
