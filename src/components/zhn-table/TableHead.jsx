@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import isKeyEnter from '../zhn/isKeyEnter'
 import SvgMore from '../zhn/SvgMore'
@@ -27,89 +27,85 @@ const ThMore = ({ name, onMenuMore }) => (
   </>
 );
 
-class TableHead extends Component {
-
-  /*
-  static propTypes = {
-    gridId: PropTypes.string,
-    thMoreStyle: PropTypes.object,
-    headers: PropTypes.arrayOf(
-       PropTypes.shape({
-        isHide: PropTypes.bool,
-        name: PropTypes.string,
-        pn: PropTypes.string,
-        isR: PropTypes.bool,
-        isF: PropTypes.bool,
-        isHref: PropTypes.bool,
-        style: PropTypes.object
+const _renderHeader = (props, _hThKeyDown) => {
+  const {
+    gridId, thMoreStyle, headers,
+    sortBy, sortTo, onSort, onMenuMore
+  } = props;
+  return headers.map((h, hIndex) => {
+    if (h.isHide) {
+      return null;
+    }
+    const { name, pn } = h
+    , {
+        style,
+        ariaSort, ariaLabel
+      } = FN.crAppearance({
+        S, C, pn, name, sortBy, sortTo
       })
-    ),
-    sortBy: PropTypes.string,
-    sortTo: PropTypes.string,
-    onSort: PropTypes.func,
-    onMenuMore: PropTypes.func
-  }
-  */
+    , _nameOrEl = hIndex === 0
+        ? (<ThMore
+             name={name}
+             onMenuMore={onMenuMore}
+           />)
+        : name
+    , _thStyle = hIndex === 0
+         ? {...thMoreStyle, ...style}
+         : style;
+    return (
+      <th
+        key={h.name}
+        style={{...S.TH, ..._thStyle}}
+        rowSpan="1"
+        colSpan="1"
+        tabIndex="0"
+        arial-controls={gridId}
+        aria-label={ariaLabel}
+        aria-sort={ariaSort}
+        onClick={() => onSort(pn)}
+        onKeyDown={(event) => _hThKeyDown(event, pn)}
+      >
+        {_nameOrEl}
+      </th>
+    );
+  }).filter(Boolean);
+}
 
-  _hThKeyDown = (pn, evt) => {
+const TableHead = (props) => {
+  const _hThKeyEnter = (evt, pn) => {
     if (isKeyEnter(evt)) {
-      this.props.onSort(pn)
+      props?.onSort(pn)
     }
   }
-
-  _renderHeader = () => {
-    const {
-      gridId, thMoreStyle, headers,
-      sortBy, sortTo, onSort, onMenuMore
-    } = this.props;
-    return headers.map((h, hIndex) => {
-      if (h.isHide) {
-        return null;
-      }
-      const { name, pn } = h
-      , {
-          style,
-          ariaSort, ariaLabel
-        } = FN.crAppearance({
-              S, C, pn, name, sortBy, sortTo
-            })
-      , _nameOrEl = hIndex === 0
-          ? (<ThMore
-               name={name}
-               onMenuMore={onMenuMore}
-             />)
-          : name
-      , _thStyle = hIndex === 0
-           ? {...thMoreStyle, ...style}
-           : style;
-      return (
-        <th
-          key={h.name}
-          style={{...S.TH, ..._thStyle }}
-          rowSpan="1"
-          colSpan="1"
-          tabIndex="0"
-          arial-controls={gridId}
-          aria-label={ariaLabel}
-          aria-sort={ariaSort}
-          onClick={onSort.bind(null, pn)}
-          onKeyDown={this._hThKeyDown.bind(null, pn)}
-        >
-          {_nameOrEl}
-        </th>
-      );
-    }).filter(Boolean);
-  }
-
-  render(){
-    return (
-      <thead style={S.THEAD}>
-         <tr>
-           {this._renderHeader()}
-         </tr>
-      </thead>
-    );
-  }
+  return (
+    <thead style={S.THEAD}>
+       <tr>
+         {_renderHeader(props, _hThKeyEnter)}
+       </tr>
+    </thead>
+  );
 }
+
+/*
+TableHead.propTypes = {
+  gridId: PropTypes.string,
+  thMoreStyle: PropTypes.object,
+  headers: PropTypes.arrayOf(
+     PropTypes.shape({
+      isHide: PropTypes.bool,
+      name: PropTypes.string,
+      pn: PropTypes.string,
+      isR: PropTypes.bool,
+      isF: PropTypes.bool,
+      isHref: PropTypes.bool,
+      style: PropTypes.object
+    })
+  ),
+  sortBy: PropTypes.string,
+  sortTo: PropTypes.string,
+  onSort: PropTypes.func,
+  onMenuMore: PropTypes.func
+}
+*/
 
 export default TableHead

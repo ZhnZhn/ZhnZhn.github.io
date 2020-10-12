@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,9 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
@@ -40,85 +36,90 @@ var ThMore = function ThMore(_ref) {
   }, name));
 };
 
-var TableHead = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(TableHead, _Component);
-
-  function TableHead() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+var _renderHeader = function _renderHeader(props, _hThKeyDown) {
+  var gridId = props.gridId,
+      thMoreStyle = props.thMoreStyle,
+      headers = props.headers,
+      sortBy = props.sortBy,
+      sortTo = props.sortTo,
+      onSort = props.onSort,
+      onMenuMore = props.onMenuMore;
+  return headers.map(function (h, hIndex) {
+    if (h.isHide) {
+      return null;
     }
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    var name = h.name,
+        pn = h.pn,
+        _FN$crAppearance = _tableFn["default"].crAppearance({
+      S: _Style["default"],
+      C: C,
+      pn: pn,
+      name: name,
+      sortBy: sortBy,
+      sortTo: sortTo
+    }),
+        style = _FN$crAppearance.style,
+        ariaSort = _FN$crAppearance.ariaSort,
+        ariaLabel = _FN$crAppearance.ariaLabel,
+        _nameOrEl = hIndex === 0 ? /*#__PURE__*/_react["default"].createElement(ThMore, {
+      name: name,
+      onMenuMore: onMenuMore
+    }) : name,
+        _thStyle = hIndex === 0 ? (0, _extends2["default"])({}, thMoreStyle, style) : style;
 
-    _this._hThKeyDown = function (pn, evt) {
-      if ((0, _isKeyEnter["default"])(evt)) {
-        _this.props.onSort(pn);
+    return /*#__PURE__*/_react["default"].createElement("th", {
+      key: h.name,
+      style: (0, _extends2["default"])({}, _Style["default"].TH, _thStyle),
+      rowSpan: "1",
+      colSpan: "1",
+      tabIndex: "0",
+      "arial-controls": gridId,
+      "aria-label": ariaLabel,
+      "aria-sort": ariaSort,
+      onClick: function onClick() {
+        return onSort(pn);
+      },
+      onKeyDown: function onKeyDown(event) {
+        return _hThKeyDown(event, pn);
       }
-    };
+    }, _nameOrEl);
+  }).filter(Boolean);
+};
 
-    _this._renderHeader = function () {
-      var _this$props = _this.props,
-          gridId = _this$props.gridId,
-          thMoreStyle = _this$props.thMoreStyle,
-          headers = _this$props.headers,
-          sortBy = _this$props.sortBy,
-          sortTo = _this$props.sortTo,
-          onSort = _this$props.onSort,
-          onMenuMore = _this$props.onMenuMore;
-      return headers.map(function (h, hIndex) {
-        if (h.isHide) {
-          return null;
-        }
-
-        var name = h.name,
-            pn = h.pn,
-            _FN$crAppearance = _tableFn["default"].crAppearance({
-          S: _Style["default"],
-          C: C,
-          pn: pn,
-          name: name,
-          sortBy: sortBy,
-          sortTo: sortTo
-        }),
-            style = _FN$crAppearance.style,
-            ariaSort = _FN$crAppearance.ariaSort,
-            ariaLabel = _FN$crAppearance.ariaLabel,
-            _nameOrEl = hIndex === 0 ? /*#__PURE__*/_react["default"].createElement(ThMore, {
-          name: name,
-          onMenuMore: onMenuMore
-        }) : name,
-            _thStyle = hIndex === 0 ? (0, _extends2["default"])({}, thMoreStyle, style) : style;
-
-        return /*#__PURE__*/_react["default"].createElement("th", {
-          key: h.name,
-          style: (0, _extends2["default"])({}, _Style["default"].TH, _thStyle),
-          rowSpan: "1",
-          colSpan: "1",
-          tabIndex: "0",
-          "arial-controls": gridId,
-          "aria-label": ariaLabel,
-          "aria-sort": ariaSort,
-          onClick: onSort.bind(null, pn),
-          onKeyDown: _this._hThKeyDown.bind(null, pn)
-        }, _nameOrEl);
-      }).filter(Boolean);
-    };
-
-    return _this;
-  }
-
-  var _proto = TableHead.prototype;
-
-  _proto.render = function render() {
-    return /*#__PURE__*/_react["default"].createElement("thead", {
-      style: _Style["default"].THEAD
-    }, /*#__PURE__*/_react["default"].createElement("tr", null, this._renderHeader()));
+var TableHead = function TableHead(props) {
+  var _hThKeyEnter = function _hThKeyEnter(evt, pn) {
+    if ((0, _isKeyEnter["default"])(evt)) {
+      props == null ? void 0 : props.onSort(pn);
+    }
   };
 
-  return TableHead;
-}(_react.Component);
+  return /*#__PURE__*/_react["default"].createElement("thead", {
+    style: _Style["default"].THEAD
+  }, /*#__PURE__*/_react["default"].createElement("tr", null, _renderHeader(props, _hThKeyEnter)));
+};
+/*
+TableHead.propTypes = {
+  gridId: PropTypes.string,
+  thMoreStyle: PropTypes.object,
+  headers: PropTypes.arrayOf(
+     PropTypes.shape({
+      isHide: PropTypes.bool,
+      name: PropTypes.string,
+      pn: PropTypes.string,
+      isR: PropTypes.bool,
+      isF: PropTypes.bool,
+      isHref: PropTypes.bool,
+      style: PropTypes.object
+    })
+  ),
+  sortBy: PropTypes.string,
+  sortTo: PropTypes.string,
+  onSort: PropTypes.func,
+  onMenuMore: PropTypes.func
+}
+*/
+
 
 var _default = TableHead;
 exports["default"] = _default;
