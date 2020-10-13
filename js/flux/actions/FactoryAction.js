@@ -12,7 +12,9 @@ var _BrowserActions = _interopRequireDefault(require("./BrowserActions"));
 var _ChartActions = _interopRequireDefault(require("./ChartActions"));
 
 var _crLoadQueryDynamic = function _crLoadQueryDynamic(option) {
-  var browserType = option.browserType;
+  var _ref = option || {},
+      browserType = _ref.browserType;
+
   return new _SeqActions["default"]([{
     action: _BrowserActions["default"].showBrowserDynamic,
     type: 'loadBrowserDynamicCompleted',
@@ -26,9 +28,7 @@ var _crLoadQueryDynamic = function _crLoadQueryDynamic(option) {
 };
 
 var FactoryAction = {
-  crLoadQuery: function crLoadQuery(option) {
-    return _crLoadQueryDynamic(option);
-  }
+  crLoadQuery: _crLoadQueryDynamic
 };
 var _default = FactoryAction;
 exports["default"] = _default;

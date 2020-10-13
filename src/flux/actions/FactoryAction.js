@@ -5,7 +5,7 @@ import BrowserActions from './BrowserActions'
 import ChartActions from './ChartActions'
 
 const _crLoadQueryDynamic = option => {
-  const { browserType } = option;
+  const { browserType } = option || {};
   return new SeqActions([
     {
       action: BrowserActions.showBrowserDynamic,
@@ -21,9 +21,7 @@ const _crLoadQueryDynamic = option => {
 };
 
 const FactoryAction = {
-   crLoadQuery: (option) => {     
-     return _crLoadQueryDynamic(option);
-   }
+  crLoadQuery: _crLoadQueryDynamic   
 };
 
 export default FactoryAction
