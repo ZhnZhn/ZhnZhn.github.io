@@ -73,7 +73,7 @@ export const ChartType = {
 export const LoadType = {
   Q: 'Q',
   B: 'B',
-  AL: 'AL',      
+  AL: 'AL',
   IEX: 'IEX',
   FMP: 'FMP',
   QCT: 'QCT',
@@ -101,8 +101,7 @@ export const LoadType = {
 
 export const CompItemType = {
   CHART_AREA: 'CHART_AREA',
-  EUROSTAT_MAP: 'EUROSTAT_MAP',
-  COIN_INFO: 'COIN_INFO',
+  EUROSTAT_MAP: 'EUROSTAT_MAP',  
   TABLE: 'TABLE',
   ALPHA_PERF: 'ALPHA_PERF',
   INFO_ITEM: 'INFO_ITEM',

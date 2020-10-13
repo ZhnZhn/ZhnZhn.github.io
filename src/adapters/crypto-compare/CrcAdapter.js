@@ -1,12 +1,10 @@
 import crAdapter from '../crAdapter'
 
 import toHdConfig from './toHdConfig'
-import toInfoConfig from './toInfoConfig'
 
 const _rAdapter = {
   DF: toHdConfig,
-  HD: toHdConfig,
-  CI: toInfoConfig
+  HD: toHdConfig
 };
 
 const _getAdapter = (option) => {

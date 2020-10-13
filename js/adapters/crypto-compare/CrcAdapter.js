@@ -9,12 +9,9 @@ var _crAdapter = _interopRequireDefault(require("../crAdapter"));
 
 var _toHdConfig = _interopRequireDefault(require("./toHdConfig"));
 
-var _toInfoConfig = _interopRequireDefault(require("./toInfoConfig"));
-
 var _rAdapter = {
   DF: _toHdConfig["default"],
-  HD: _toHdConfig["default"],
-  CI: _toInfoConfig["default"]
+  HD: _toHdConfig["default"]
 };
 
 var _getAdapter = function _getAdapter(option) {

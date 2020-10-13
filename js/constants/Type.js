@@ -97,7 +97,6 @@ exports.LoadType = LoadType;
 var CompItemType = {
   CHART_AREA: 'CHART_AREA',
   EUROSTAT_MAP: 'EUROSTAT_MAP',
-  COIN_INFO: 'COIN_INFO',
   TABLE: 'TABLE',
   ALPHA_PERF: 'ALPHA_PERF',
   INFO_ITEM: 'INFO_ITEM',

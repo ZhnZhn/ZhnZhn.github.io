@@ -11,7 +11,6 @@ var getValue = _fnAdapter["default"].getValue;
 var C = {
   URL: 'https://min-api.cryptocompare.com/',
   HD: 'data/histoday',
-  URL_CI: 'https://www.cryptocompare.com/api/data/coinsnapshotfullbyid/',
   REQUEST_ERROR: 'Request Error',
   RESPONSE_EMPTY: 'Response Empty',
   DF_ID: 'BTC'
@@ -34,19 +33,9 @@ var _hdUrl = function _hdUrl(option) {
   return "" + C.URL + C.HD + "?fsym=" + value + "&tsym=USD&limit=600";
 };
 
-var _ciUrl = function _ciUrl(option) {
-  var proxy = option.proxy,
-      items = option.items,
-      value = _getValue(items);
-
-  option.value = value;
-  return "" + proxy + C.URL_CI + "?id=" + value;
-};
-
 var _rUrl = {
   DF: _hdUrl,
-  HD: _hdUrl,
-  CI: _ciUrl
+  HD: _hdUrl
 };
 var CrcApi = {
   getRequestUrl: function getRequestUrl(option) {

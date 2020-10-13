@@ -64,9 +64,8 @@ const _fItem = (Comp) => ({ config={}, props }) => (
 const _rCrItem = {
   DF: _crAreaChart,
   [CIT.EUROSTAT_MAP]: _crMapChart,
-  [CIT.COIN_INFO]: _fItem(Item.CoinInfo),
   [CIT.TABLE]: _fItem(Item.Table),
-  [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf),  
+  [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf),
   [CIT.INFO_ITEM]: _fItem(Item.InfoItem),
   [CIT.TW_LIST]: _fItem(Item.TwList)
 };
