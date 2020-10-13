@@ -130,7 +130,7 @@ var DataProviders = function DataProviders(_ref) {
   }, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK
   }, "Note:\xA0"), "This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA."))), /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
-    caption: "(2) Required Https Proxy:",
+    caption: "(1) Required Https Proxy:",
     style: ST.OC_L2,
     openColor: OPEN_COLOR_L2,
     childStyle: ST.CHILD_STYLE
@@ -138,11 +138,7 @@ var DataProviders = function DataProviders(_ref) {
     style: ST.P4
   }, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].PROVIDER
-  }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].FaoStat, null)), /*#__PURE__*/_react["default"].createElement("span", {
-    style: _About["default"].PROVIDER
-  }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].CryptoCompare, null), /*#__PURE__*/_react["default"].createElement("span", {
-    style: _About["default"].BLACK
-  }, "\xA0(Coin Inform.)"))), /*#__PURE__*/_react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement(_ProviderLinks["default"].FaoStat, null))), /*#__PURE__*/_react["default"].createElement("div", {
     style: ST.NOTE
   }, /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("span", {
     style: _About["default"].BLACK

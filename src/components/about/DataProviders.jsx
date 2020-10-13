@@ -155,7 +155,7 @@ const DataProviders = ({ isClose }) => (
       </div>
       </OpenClose>
       <OpenClose
-        caption="(2) Required Https Proxy:"
+        caption="(1) Required Https Proxy:"
         style={ST.OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}
@@ -163,12 +163,6 @@ const DataProviders = ({ isClose }) => (
         <p style={ST.P4}>
           <span style={S.PROVIDER}>
            <Link.FaoStat />
-          </span>
-          <span style={S.PROVIDER}>
-            <Link.CryptoCompare/>
-            <span style={S.BLACK}>
-               &nbsp;(Coin Inform.)
-            </span>
           </span>
         </p>
         <div style={ST.NOTE}>
