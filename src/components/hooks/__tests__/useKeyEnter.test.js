@@ -1,6 +1,8 @@
 import {renderHook, act} from '@testing-library/react-hooks'
 import useKeyEnter from '../useKeyEnter'
 
+import factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps'
+
 describe('useKeyEnter', ()=>{
   test('should return fn onKeyEnter depended of deps', ()=>{
     const onEnter = jest.fn()
@@ -43,32 +45,8 @@ describe('useKeyEnter', ()=>{
     //3.2 With new onEnter
     rerender({ onEnter: jest.fn() })
     expect(_onKeyEnter).not.toEqual(result.current)
-
   })
-  test('should return same fn in case of empty deps', ()=>{
-    const onEnter = jest.fn()
-    //1 Test return type
-    , {
-      result,
-      rerender
-    } = renderHook(({ onEnter })=>useKeyEnter(onEnter), {
-      initialProps: { onEnter }
-    })
 
-    const _onKeyEnter = result.current;
-    expect(typeof _onKeyEnter).toBe('function')
-
-    //2 Test rerender
-    //2.1 With same onEnter
-    rerender({ onEnter })
-    expect(_onKeyEnter).toEqual(result.current)
-
-    //2.2 With new onEnter
-    rerender({ onEnter: jest.fn() })
-    expect(_onKeyEnter).toEqual(result.current)
-
-    //2.3 With empty onEnter
-    rerender()
-    expect(_onKeyEnter).toEqual(result.current)
-  })
+  test('should return same fn in case of empty deps',
+    factorySameFnForEmptyDeps(useKeyEnter))
 })

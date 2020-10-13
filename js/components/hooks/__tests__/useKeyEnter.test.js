@@ -6,6 +6,8 @@ var _reactHooks = require("@testing-library/react-hooks");
 
 var _useKeyEnter = _interopRequireDefault(require("../useKeyEnter"));
 
+var _factorySameFnForEmptyDeps = _interopRequireDefault(require("./_factorySameFnForEmptyDeps"));
+
 describe('useKeyEnter', function () {
   test('should return fn onKeyEnter depended of deps', function () {
     var onEnter = jest.fn(),
@@ -65,36 +67,6 @@ describe('useKeyEnter', function () {
     });
     expect(_onKeyEnter).not.toEqual(result.current);
   });
-  test('should return same fn in case of empty deps', function () {
-    var onEnter = jest.fn(),
-        _renderHook2 = (0, _reactHooks.renderHook)(function (_ref2) {
-      var onEnter = _ref2.onEnter;
-      return (0, _useKeyEnter["default"])(onEnter);
-    }, {
-      initialProps: {
-        onEnter: onEnter
-      }
-    }),
-        result = _renderHook2.result,
-        rerender = _renderHook2.rerender; //1 Test return type
-
-
-    var _onKeyEnter = result.current;
-    expect(typeof _onKeyEnter).toBe('function'); //2 Test rerender
-    //2.1 With same onEnter
-
-    rerender({
-      onEnter: onEnter
-    });
-    expect(_onKeyEnter).toEqual(result.current); //2.2 With new onEnter
-
-    rerender({
-      onEnter: jest.fn()
-    });
-    expect(_onKeyEnter).toEqual(result.current); //2.3 With empty onEnter
-
-    rerender();
-    expect(_onKeyEnter).toEqual(result.current);
-  });
+  test('should return same fn in case of empty deps', (0, _factorySameFnForEmptyDeps["default"])(_useKeyEnter["default"]));
 });
 //# sourceMappingURL=useKeyEnter.test.js.map
