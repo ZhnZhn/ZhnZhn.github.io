@@ -1,1 +1,36 @@
-{"version":3,"sources":["../../../src/components/dialogs/ReloadDialog.jsx"],"names":["S","MODAL","position","width","height","margin","ROOT","color","paddingTop","paddingLeft","lineHeight","fontWeight","DATE","CLOSE","ReloadDialog","props","_hReload","document","cookie","window","location","reload","_commandButtons","onClose","shouldComponentUpdate","nextProps","nextState","isShow","render","data","buildDate","Component"],"mappings":";;;;;;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAE;AACLC,IAAAA,QAAQ,EAAE,QADL;AAELC,IAAAA,KAAK,EAAE,GAFF;AAGLC,IAAAA,MAAM,EAAE,GAHH;AAILC,IAAAA,MAAM,EAAE;AAJH,GADC;AAORC,EAAAA,IAAI,EAAE;AACJC,IAAAA,KAAK,EAAE,MADH;AAEJC,IAAAA,UAAU,EAAE,CAFR;AAGJC,IAAAA,WAAW,EAAE,EAHT;AAIJC,IAAAA,UAAU,EAAE,GAJR;AAKJC,IAAAA,UAAU,EAAE;AALR,GAPE;AAcRC,EAAAA,IAAI,EAAE;AACJL,IAAAA,KAAK,EAAE;AADH,GAdE;AAiBRM,EAAAA,KAAK,EAAE;AACLN,IAAAA,KAAK,EAAE;AADF;AAjBC,CAAV;;IAsBMO,Y;;;AAEJ,wBAAYC,KAAZ,EAAkB;AAAA;;AAChB,kCAAMA,KAAN;;AADgB,UAkBlBC,QAlBkB,GAkBP,YAAM;AACfC,MAAAA,QAAQ,CAACC,MAAT,GAAgB,OAAhB;AACAC,MAAAA,MAAM,CAACC,QAAP,CAAgBC,MAAhB,CAAuB,IAAvB;AACD,KArBiB;;AAEhB,UAAKC,eAAL,GAAuB,cACrB,gCAAC,kBAAD,CAAQ,IAAR;AACE,MAAA,GAAG,EAAC,QADN;AAEE,MAAA,OAAO,EAAC,aAFV;AAGE,MAAA,SAAS,EAAE,IAHb;AAIE,MAAA,OAAO,EAAE,MAAKN;AAJhB,MADqB,eAOrB,gCAAC,kBAAD,CAAQ,IAAR;AACE,MAAA,GAAG,EAAC,IADN;AAEE,MAAA,SAAS,EAAEhB,CAAC,CAACa,KAFf;AAGE,MAAA,OAAO,EAAC,IAHV;AAIE,MAAA,OAAO,EAAEE,KAAK,CAACQ;AAJjB,MAPqB,CAAvB;AAFgB;AAgBjB;;;;SAODC,qB,GAAA,+BAAsBC,SAAtB,EAAiCC,SAAjC,EAA2C;AACzC,QAAID,SAAS,KAAK,KAAKV,KAAnB,IAA4BU,SAAS,CAACE,MAAV,KAAqB,KAAKZ,KAAL,CAAWY,MAAhE,EAAwE;AACtE,aAAO,KAAP;AACD;;AACD,WAAO,IAAP;AACD,G;;SAEDC,M,GAAA,kBAAQ;AAAA,sBAC4B,KAAKb,KADjC;AAAA,QACEY,MADF,eACEA,MADF;AAAA,QACUJ,OADV,eACUA,OADV;AAAA,QACmBM,IADnB,eACmBA,IADnB;AAAA,0BAEmBA,IAFnB,CAEEC,SAFF;AAAA,QAEEA,SAFF,gCAEY,EAFZ;AAGN,wBACE,gCAAC,uBAAD;AACE,MAAA,KAAK,EAAE9B,CAAC,CAACC,KADX;AAEE,MAAA,OAAO,EAAC,gBAFV;AAGE,MAAA,MAAM,EAAE0B,MAHV;AAIE,MAAA,cAAc,EAAE,KAAKL,eAJvB;AAKE,MAAA,YAAY,EAAE,IALhB;AAME,MAAA,OAAO,EAAEC;AANX,oBAQE;AAAK,MAAA,KAAK,EAAEvB,CAAC,CAACM;AAAd,oBACE,kFADF,eAIE,kFAJF,eAOE;AAAG,MAAA,KAAK,EAAEN,CAAC,CAACY;AAAZ,sBACgBkB,SADhB,oBAPF,CARF,CADF;AAsBD,G;;;EAzDwBC,gB;;eA4DZjB,Y","sourcesContent":["import React, { Component } from 'react'\r\n\r\nimport Button from './Button'\r\nimport ModalDialog from '../zhn-moleculs/ModalDialog';\r\n\r\nconst S = {\r\n  MODAL: {\r\n    position: 'static',\r\n    width: 350,\r\n    height: 175,\r\n    margin: '70px auto'\r\n  },\r\n  ROOT: {\r\n    color: 'gray',\r\n    paddingTop: 8,\r\n    paddingLeft: 16,\r\n    lineHeight: 1.7,\r\n    fontWeight: 'bold'\r\n  },\r\n  DATE: {\r\n    color: '#80c040'\r\n  },\r\n  CLOSE: {\r\n    color: '#232f3b'\r\n  }\r\n}\r\n\r\nclass ReloadDialog extends Component {\r\n\r\n  constructor(props){\r\n    super(props)\r\n    this._commandButtons = [\r\n      <Button.Flat\r\n        key=\"reload\"\r\n        caption=\"Yes, Reload\"\r\n        isPrimary={true}\r\n        onClick={this._hReload}\r\n      />,\r\n      <Button.Flat\r\n        key=\"no\"\r\n        rootStyle={S.CLOSE}\r\n        caption=\"No\"\r\n        onClick={props.onClose}\r\n      />\r\n    ]\r\n  }\r\n\r\n  _hReload = () => {\r\n    document.cookie=\"erc=1\"\r\n    window.location.reload(true)\r\n  }\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {\r\n      return false;\r\n    }\r\n    return true;\r\n  }\r\n\r\n  render(){\r\n    const { isShow, onClose, data } = this.props\r\n        , { buildDate='' } = data;\r\n    return (\r\n      <ModalDialog\r\n        style={S.MODAL}\r\n        caption=\"Reload Web App\"\r\n        isShow={isShow}\r\n        commandButtons={this._commandButtons}\r\n        withoutClose={true}\r\n        onClose={onClose}\r\n      >\r\n        <div style={S.ROOT}>\r\n          <p>\r\n            Browser has loaded ERC from a cache.\r\n          </p>\r\n          <p>\r\n            Reload web app ERC to the new build?\r\n          </p>\r\n          <p style={S.DATE}>\r\n            {`New build ${buildDate} is available.`}\r\n          </p>\r\n        </div>\r\n      </ModalDialog>\r\n    );\r\n  }\r\n}\r\n\r\nexport default ReloadDialog\r\n"],"file":"ReloadDialog.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/ReloadDialog.js"
+ ],
+ "file": "../../../src/components/dialogs/ReloadDialog.js",
+ "names": [
+  "S",
+  "MODAL",
+  "position",
+  "width",
+  "height",
+  "margin",
+  "ROOT",
+  "color",
+  "paddingTop",
+  "paddingLeft",
+  "lineHeight",
+  "fontWeight",
+  "DATE",
+  "CLOSE",
+  "ReloadDialog",
+  "isShow",
+  "data",
+  "onClose",
+  "_hReload",
+  "document",
+  "cookie",
+  "window",
+  "location",
+  "reload",
+  "_commandButtons",
+  "buildDate"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,KAAK,EAAE;AACLC,IAAAA,QAAQ,EAAE,QADL;AAELC,IAAAA,KAAK,EAAE,GAFF;AAGLC,IAAAA,MAAM,EAAE,GAHH;AAILC,IAAAA,MAAM,EAAE;AAJH,GADC;AAORC,EAAAA,IAAI,EAAE;AACJC,IAAAA,KAAK,EAAE,MADH;AAEJC,IAAAA,UAAU,EAAE,CAFR;AAGJC,IAAAA,WAAW,EAAE,EAHT;AAIJC,IAAAA,UAAU,EAAE,GAJR;AAKJC,IAAAA,UAAU,EAAE;AALR,GAPE;AAcRC,EAAAA,IAAI,EAAE;AACJL,IAAAA,KAAK,EAAE;AADH,GAdE;AAiBRM,EAAAA,KAAK,EAAE;AACLN,IAAAA,KAAK,EAAE;AADF;AAjBC,CAAV;;AAsBA,IAAMO,YAAY,GAAG,SAAfA,YAAe,OAIf;AAAA,MAHJC,MAGI,QAHJA,MAGI;AAAA,MAFJC,IAEI,QAFJA,IAEI;AAAA,MADJC,OACI,QADJA,OACI;;AACE,MAAAC,QAAQ,GAAG,wBAAY,YAAM;AACjCC,IAAAA,QAAQ,CAACC,MAAT,GAAgB,OAAhB;AACAC,IAAAA,MAAM,CAACC,QAAP,CAAgBC,MAAhB,CAAuB,IAAvB;AACD,GAHgB,EAGd,EAHc,CAAX;AAAA,MAKJC,eALI,GAKc,oBAAQ;AAAA,WAAI,cAC5B,gCAAC,kBAAD,CAAQ,IAAR;AACE,MAAA,GAAG,EAAC,QADN;AAEE,MAAA,OAAO,EAAC,aAFV;AAGE,MAAA,SAAS,EAAE,IAHb;AAIE,MAAA,OAAO,EAAEN;AAJX,MAD4B,eAO5B,gCAAC,kBAAD,CAAQ,IAAR;AACE,MAAA,GAAG,EAAC,IADN;AAEE,MAAA,SAAS,EAAElB,CAAC,CAACa,KAFf;AAGE,MAAA,OAAO,EAAC,IAHV;AAIE,MAAA,OAAO,EAAEI;AAJX,MAP4B,CAAJ;AAAA,GAAR,EAaf,CAACA,OAAD,CAbe,CALd;AAAA,cAqBeD,IAAI,IAAI,EArBvB;AAAA,8BAqBFS,SArBE;AAAA,MAqBFA,SArBE,gCAqBQ,EArBR;AAIN;;;AAmBA,sBACE,gCAAC,uBAAD;AACE,IAAA,KAAK,EAAEzB,CAAC,CAACC,KADX;AAEE,IAAA,OAAO,EAAC,gBAFV;AAGE,IAAA,MAAM,EAAEc,MAHV;AAIE,IAAA,cAAc,EAAES,eAJlB;AAKE,IAAA,YAAY,EAAE,IALhB;AAME,IAAA,OAAO,EAAEP;AANX,kBAQE;AAAK,IAAA,KAAK,EAAEjB,CAAC,CAACM;AAAd,kBACE,kFADF,eAEE,kFAFF,eAGE;AAAG,IAAA,KAAK,EAAEN,CAAC,CAACY;AAAZ,oBACgBa,SADhB,oBAHF,CARF,CADF;AAkBD,CA9CD;AAgDA;;;;;;;;;;;eAUeX,Y"
+}

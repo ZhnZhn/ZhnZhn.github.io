@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -37,66 +35,57 @@ var S = {
   }
 };
 
-var ReloadDialog = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(ReloadDialog, _Component);
+var ReloadDialog = function ReloadDialog(_ref) {
+  var isShow = _ref.isShow,
+      data = _ref.data,
+      onClose = _ref.onClose;
 
-  function ReloadDialog(props) {
-    var _this;
-
-    _this = _Component.call(this, props) || this;
-
-    _this._hReload = function () {
-      document.cookie = "erc=1";
-      window.location.reload(true);
-    };
-
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
+  var _hReload = (0, _react.useCallback)(function () {
+    document.cookie = "erc=1";
+    window.location.reload(true);
+  }, []),
+      _commandButtons = (0, _react.useMemo)(function () {
+    return [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       key: "reload",
       caption: "Yes, Reload",
       isPrimary: true,
-      onClick: _this._hReload
+      onClick: _hReload
     }), /*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       key: "no",
       rootStyle: S.CLOSE,
       caption: "No",
-      onClick: props.onClose
+      onClick: onClose
     })];
-    return _this;
-  }
+  }, [onClose]),
+      _ref2 = data || {},
+      _ref2$buildDate = _ref2.buildDate,
+      buildDate = _ref2$buildDate === void 0 ? '' : _ref2$buildDate;
+  /*eslint-disable react-hooks/exhaustive-deps */
 
-  var _proto = ReloadDialog.prototype;
 
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
+  return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    style: S.MODAL,
+    caption: "Reload Web App",
+    isShow: isShow,
+    commandButtons: _commandButtons,
+    withoutClose: true,
+    onClose: onClose
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.ROOT
+  }, /*#__PURE__*/_react["default"].createElement("p", null, "Browser has loaded ERC from a cache."), /*#__PURE__*/_react["default"].createElement("p", null, "Reload web app ERC to the new build?"), /*#__PURE__*/_react["default"].createElement("p", {
+    style: S.DATE
+  }, "New build " + buildDate + " is available.")));
+};
+/*
+ReloadDialog.propTypes = {
+  isShow: PropTypes.bool,
+  data: PropTypes.shape({
+    buildDate: PropTypes.string
+  }),
+  onClose: PropTypes.func
+}
+*/
 
-    return true;
-  };
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        isShow = _this$props.isShow,
-        onClose = _this$props.onClose,
-        data = _this$props.data,
-        _data$buildDate = data.buildDate,
-        buildDate = _data$buildDate === void 0 ? '' : _data$buildDate;
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
-      style: S.MODAL,
-      caption: "Reload Web App",
-      isShow: isShow,
-      commandButtons: this._commandButtons,
-      withoutClose: true,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT
-    }, /*#__PURE__*/_react["default"].createElement("p", null, "Browser has loaded ERC from a cache."), /*#__PURE__*/_react["default"].createElement("p", null, "Reload web app ERC to the new build?"), /*#__PURE__*/_react["default"].createElement("p", {
-      style: S.DATE
-    }, "New build " + buildDate + " is available.")));
-  };
-
-  return ReloadDialog;
-}(_react.Component);
 
 var _default = ReloadDialog;
 exports["default"] = _default;
