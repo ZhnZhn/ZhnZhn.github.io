@@ -19,6 +19,8 @@ var _useToggle = _interopRequireDefault(require("./useToggle"));
 
 var _useKeyEnter = _interopRequireDefault(require("./useKeyEnter"));
 
+var _useKeyEscape = _interopRequireDefault(require("./useKeyEscape"));
+
 var use = {
   crStyle: _crStyle["default"],
   useFnFocus: _useFnFocus["default"],
@@ -26,7 +28,8 @@ var use = {
   useRefInit: _useRefInit["default"],
   useTheme: _useTheme["default"],
   useToggle: _useToggle["default"],
-  useKeyEnter: _useKeyEnter["default"]
+  useKeyEnter: _useKeyEnter["default"],
+  useKeyEscape: _useKeyEscape["default"]
 };
 var _default = use;
 exports["default"] = _default;

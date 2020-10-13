@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useKeyEscape.js"
+ ],
+ "file": "../../../src/components/hooks/useKeyEscape.js",
+ "names": [
+  "useKeyEscape",
+  "fn",
+  "deps",
+  "event",
+  "preventDefault",
+  "stopPropagation"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AAEA;AACA,IAAMA,YAAY,GAAG,SAAfA,YAAe,CAACC,EAAD,EAAKC,IAAL;AAAA,SAAc,wBAAY,UAAAC,KAAK,EAAI;AACtD,QAAI,6BAAYA,KAAZ,CAAJ,EAAwB;AACtBA,MAAAA,KAAK,CAACC,cAAN;AACAD,MAAAA,KAAK,CAACE,eAAN;AACAJ,MAAAA,EAAE;AACH;AACF,GANkC,EAMhCC,IAAI,IAAI,EANwB,CAAd;AAAA,CAArB;AAOA;;;eAEeF,Y"
+}
