@@ -1,15 +1,15 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = _interopRequireWildcard(require("react"));
+
+var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 
 var _Button = _interopRequireDefault(require("./Button"));
 
@@ -51,97 +51,75 @@ var S = {
     paddingBottom: 0
   }
 };
+var _DF_DATA = {};
 
-var AskDialog = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(AskDialog, _Component);
+var _areEqualProps = function _areEqualProps(prevProps, nextProps) {
+  return nextProps.isShow === prevProps.isShow;
+};
 
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    data: PropTypes.shape({
-      options: PropTypes.shape({
-        chartType: PropTypes.string,
-        browserType: PropTypes.string
-      })
-    }),
-    onClose: PropTypes.func
-  }
-  */
-  function AskDialog(props) {
-    var _this;
+var AskDialog = (0, _memoEqual["default"])(function (_ref) {
+  var isShow = _ref.isShow,
+      _ref$data = _ref.data,
+      data = _ref$data === void 0 ? _DF_DATA : _ref$data,
+      onClose = _ref.onClose;
 
-    _this = _Component.call(this, props) || this;
+  var _refCaptcha = (0, _react.useRef)(),
+      _hLoad = (0, _react.useCallback)(function () {
+    if (_refCaptcha.current.isOk()) {
+      var _options = data.options;
 
-    _this._handleLoad = function () {
-      var _this$props = _this.props,
-          _this$props$data = _this$props.data,
-          data = _this$props$data === void 0 ? {} : _this$props$data,
-          onClose = _this$props.onClose,
-          _data$options = data.options,
-          options = _data$options === void 0 ? {} : _data$options;
+      _FactoryAction["default"].crLoadQuery(_options).run();
 
-      if (_this._refCaptcha.current.isOk()) {
-        _FactoryAction["default"].crLoadQuery(options).run();
-
-        onClose();
-      }
-    };
-
-    _this._refCaptcha = /*#__PURE__*/_react["default"].createRef();
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
+      onClose();
+    }
+  }, [data, onClose]),
+      _commandButtons = (0, _react.useMemo)(function () {
+    return [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       caption: "Yes, Load" //accessKey="s"
       ,
       isPrimary: true,
-      onClick: _this._handleLoad
+      onClick: _hLoad
     }), /*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
       caption: "No, Close" //accessKey="c"
       ,
-      onClick: props.onClose
+      onClick: onClose
     })];
-    return _this;
-  }
+  }, [_hLoad, onClose]),
+      options = data.options,
+      _ref2 = options || {},
+      _ref2$name = _ref2.name,
+      name = _ref2$name === void 0 ? '' : _ref2$name;
 
-  var _proto = AskDialog.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-
-    return true;
-  };
-
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        isShow = _this$props2.isShow,
-        _this$props2$data = _this$props2.data,
-        data = _this$props2$data === void 0 ? {} : _this$props2$data,
-        onClose = _this$props2.onClose,
-        _data$options2 = data.options,
-        options = _data$options2 === void 0 ? {} : _data$options2,
-        _options$name = options.name,
-        name = _options$name === void 0 ? '' : _options$name;
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
-      style: S.MODAL,
-      caption: "Confirm Load",
-      isShow: isShow,
-      commandButtons: this._commandButtons,
-      withoutClose: true,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT_DIV
-    }, /*#__PURE__*/_react["default"].createElement("p", {
-      style: S.DESCR
-    }, MSG_PREFIX, /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.NAME
-    }, name), MSG_SUFFIX), /*#__PURE__*/_react["default"].createElement(_MathCaptcha["default"], {
-      ref: this._refCaptcha,
-      style: S.CAPTCHA
-    })));
-  };
-
-  return AskDialog;
-}(_react.Component);
+  return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    style: S.MODAL,
+    caption: "Confirm Load",
+    isShow: isShow,
+    commandButtons: _commandButtons,
+    withoutClose: true,
+    onClose: onClose
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: S.ROOT_DIV
+  }, /*#__PURE__*/_react["default"].createElement("p", {
+    style: S.DESCR
+  }, MSG_PREFIX, /*#__PURE__*/_react["default"].createElement("span", {
+    style: S.NAME
+  }, name), MSG_SUFFIX), /*#__PURE__*/_react["default"].createElement(_MathCaptcha["default"], {
+    ref: _refCaptcha,
+    style: S.CAPTCHA
+  })));
+}, _areEqualProps);
+/*
+AskDialog.propTypes = {
+  isShow: PropTypes.bool,
+  data: PropTypes.shape({
+    options: PropTypes.shape({
+      chartType: PropTypes.string,
+      browserType: PropTypes.string
+    })
+  }),
+  onClose: PropTypes.func
+}
+*/
 
 var _default = AskDialog;
 exports["default"] = _default;

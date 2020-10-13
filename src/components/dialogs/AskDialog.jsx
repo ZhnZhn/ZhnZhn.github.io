@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { useRef, useCallback, useMemo } from 'react';
 //import PropTypes from "prop-types";
+import memoEqual from '../hoc/memoEqual'
 
 import Button from './Button'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
@@ -28,7 +29,7 @@ const S = {
   DESCR: {
     color: 'gray',
     width: 400,
-    paddingLeft : 10,
+    paddingLeft: 10,
     paddingTop: 5,
     lineHeight: 1.4,
     fontWeight: 'bold',
@@ -38,86 +39,79 @@ const S = {
     padding: 8,
     paddingBottom: 0
   }
+};
+
+const _DF_DATA = {};
+
+const _areEqualProps = (prevProps, nextProps) =>
+  nextProps.isShow === prevProps.isShow;
+
+const AskDialog = memoEqual(({
+  isShow,
+  data=_DF_DATA,
+  onClose
+}) => {
+  const _refCaptcha = useRef()
+  , _hLoad = useCallback(() => {
+      if (_refCaptcha.current.isOk()){
+        const { options } = data;
+        FactoryAction
+          .crLoadQuery(options)
+          .run()
+        onClose()
+      }
+    }, [data, onClose])
+ , _commandButtons = useMemo(() => [
+     <Button.Flat
+       caption="Yes, Load"
+       //accessKey="s"
+       isPrimary={true}
+       onClick={_hLoad}
+     />,
+     <Button.Flat
+       caption="No, Close"
+       //accessKey="c"
+       onClick={onClose}
+     />
+ ], [_hLoad, onClose])
+ , { options } = data
+ , { name='' } = options || {};
+
+  return (
+    <ModalDialog
+      style={S.MODAL}
+      caption="Confirm Load"
+      isShow={isShow}
+      commandButtons={_commandButtons}
+      withoutClose={true}
+      onClose={onClose}
+    >
+       <div style={S.ROOT_DIV}>
+          <p style={S.DESCR}>
+             {MSG_PREFIX}
+             <span style={S.NAME}>{name}</span>
+             {MSG_SUFFIX}
+          </p>
+          <MathCaptcha
+            ref={_refCaptcha}
+            style={S.CAPTCHA}
+          />
+       </div>
+    </ModalDialog>
+  );
+}, _areEqualProps)
+
+/*
+AskDialog.propTypes = {
+  isShow: PropTypes.bool,
+  data: PropTypes.shape({
+    options: PropTypes.shape({
+      chartType: PropTypes.string,
+      browserType: PropTypes.string
+    })
+  }),
+  onClose: PropTypes.func
 }
-
-class AskDialog extends Component {
-   /*
-   static propTypes = {
-     isShow: PropTypes.bool,
-     data: PropTypes.shape({
-       options: PropTypes.shape({
-         chartType: PropTypes.string,
-         browserType: PropTypes.string
-       })
-     }),
-     onClose: PropTypes.func
-   }
-   */
-
-  constructor(props){
-    super(props);
-
-    this._refCaptcha = React.createRef()
-    this._commandButtons = [
-        <Button.Flat
-          caption="Yes, Load"
-          //accessKey="s"
-          isPrimary={true}
-          onClick={this._handleLoad}
-        />,
-        <Button.Flat
-          caption="No, Close"
-          //accessKey="c"
-          onClick={props.onClose}
-        />
-    ]
-  }
-
-  _handleLoad = () => {
-    const { data={}, onClose } = this.props
-        , { options={} } = data;
-    if (this._refCaptcha.current.isOk()){
-       FactoryAction
-         .crLoadQuery(options)
-         .run()
-      onClose()
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  }
-
-  render(){
-    const { isShow, data={}, onClose } = this.props
-        , { options={} } = data
-        , { name='' } = options;
-    return (
-      <ModalDialog
-        style={S.MODAL}
-        caption="Confirm Load"
-        isShow={isShow}
-        commandButtons={this._commandButtons}
-        withoutClose={true}
-        onClose={onClose}
-      >
-         <div style={S.ROOT_DIV}>
-            <p style={S.DESCR}>
-               {MSG_PREFIX}
-               <span style={S.NAME}>{name}</span>
-               {MSG_SUFFIX}
-            </p>
-            <MathCaptcha
-              ref={this._refCaptcha}
-              style={S.CAPTCHA}
-            />
-         </div>
-      </ModalDialog>
-    )
-  }
-}
+*/
 
 export default AskDialog
