@@ -43,7 +43,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "big.js": "^5.2.2",
+    "big.js": "^6.0.1",
     "dompurify": "^2.1.1",
     "fetch-jsonp": "^1.1.3",
     "highcharts": "^6.2.0",
@@ -61,7 +61,7 @@
   "jspm": {
     "dependencies": {
       "@babel/runtime": "npm:@babel/runtime@^7.10.2",
-      "big.js": "npm:big.js@^5.2.2",
+      "big.js": "npm:big.js@^6.0.1",
       "dompurify": "npm:dompurify@^2.1.1",
       "fetch-jsonp": "npm:fetch-jsonp@^1.1.3",
       "highcharts": "npm:highcharts@6.2.0",
