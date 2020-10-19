@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _Button = _interopRequireDefault(require("./Button"));
 
@@ -45,17 +45,15 @@ var ReloadDialog = function ReloadDialog(_ref) {
     window.location.reload(true);
   }, []),
       _commandButtons = (0, _react.useMemo)(function () {
-    return [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
-      key: "reload",
+    return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button["default"].Flat, {
       caption: "Yes, Reload",
       isPrimary: true,
       onClick: _hReload
-    }), /*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
-      key: "no",
+    }, "reload"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button["default"].Flat, {
       rootStyle: S.CLOSE,
       caption: "No",
       onClick: onClose
-    })];
+    }, "no")];
   }, [onClose]),
       _ref2 = data || {},
       _ref2$buildDate = _ref2.buildDate,
@@ -63,18 +61,25 @@ var ReloadDialog = function ReloadDialog(_ref) {
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
-  return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog["default"], {
     style: S.MODAL,
     caption: "Reload Web App",
     isShow: isShow,
     commandButtons: _commandButtons,
     withoutClose: true,
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROOT
-  }, /*#__PURE__*/_react["default"].createElement("p", null, "Browser has loaded ERC from a cache."), /*#__PURE__*/_react["default"].createElement("p", null, "Reload web app ERC to the new build?"), /*#__PURE__*/_react["default"].createElement("p", {
-    style: S.DATE
-  }, "New build " + buildDate + " is available.")));
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROOT,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        children: "Browser has loaded ERC from a cache."
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        children: "Reload web app ERC to the new build?"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        style: S.DATE,
+        children: "New build " + buildDate + " is available."
+      })]
+    })
+  });
 };
 /*
 ReloadDialog.propTypes = {

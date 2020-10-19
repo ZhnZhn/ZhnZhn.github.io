@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Link from './Link'
 
 const EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/'

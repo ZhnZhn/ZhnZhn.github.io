@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import mathFns from '../../math/mathFn'
 //import PropTypes from "prop-types";

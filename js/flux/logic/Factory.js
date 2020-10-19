@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 
 var _RouterDialog = _interopRequireDefault(require("./RouterDialog"));
 
@@ -134,7 +134,7 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
   }
 
   return _RouterDialog["default"].getDialog(_dialogType).then(function (Comp) {
-    return /*#__PURE__*/_react["default"].createElement(Comp, (0, _extends2["default"])({
+    return /*#__PURE__*/(0, _react.createElement)(Comp, (0, _extends2["default"])({
       key: itemKey,
       caption: dialogCaption || menuTitle,
       msgOnNotSelected: _Msg["default"].NOT_SELECTED,
@@ -155,7 +155,7 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
 var _crOptionDialogComp = function _crOptionDialogComp(option) {
   var dialogType = option.dialogType;
   return _RouterDialog["default"].getDialog(dialogType).then(function (Comp) {
-    return /*#__PURE__*/_react["default"].createElement(Comp, {
+    return /*#__PURE__*/(0, _react.createElement)(Comp, {
       key: dialogType
     });
   });

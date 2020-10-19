@@ -1,4 +1,3 @@
-import React from 'react';
 //import PropTypes from "prop-types";
 
 const CL = {
@@ -9,7 +8,7 @@ const CL = {
 const ButtonCircle = ({
   isOverwriteClass,
   className='', style,
-  caption='', title,    
+  caption='', title,
   onClick
 }) => {
    const _className = isOverwriteClass

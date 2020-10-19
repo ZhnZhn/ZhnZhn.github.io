@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { memo, useState, useCallback } from 'react'
 
 import useListen from '../hooks/useListen'
 import A from '../Comp'
@@ -16,7 +16,7 @@ const S = {
   }
 };
 
-const BrowserSlider = React.memo((props) => {
+const BrowserSlider = memo((props) => {
   const {
     isInitShow, caption,
     store, browserType, showAction

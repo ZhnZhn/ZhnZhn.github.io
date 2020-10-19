@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 //import PropTypes from "prop-types";
 
 import Model from '../../constants/Model'

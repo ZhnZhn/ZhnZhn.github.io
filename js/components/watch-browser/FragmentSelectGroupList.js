@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 
@@ -91,15 +91,17 @@ var FragmentSelectGroupList = /*#__PURE__*/function (_Component) {
         groupOptions = _this$props.groupOptions,
         listCaption = _this$props.listCaption,
         listOptions = this.state.listOptions;
-    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_RowInputSelect["default"], {
-      caption: groupCaption,
-      options: groupOptions,
-      onSelect: this._handleSelectGroup
-    }), /*#__PURE__*/_react["default"].createElement(_RowInputSelect["default"], {
-      caption: listCaption,
-      options: listOptions,
-      onSelect: this._handleSelectList
-    }));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect["default"], {
+        caption: groupCaption,
+        options: groupOptions,
+        onSelect: this._handleSelectGroup
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect["default"], {
+        caption: listCaption,
+        options: listOptions,
+        onSelect: this._handleSelectList
+      })]
+    });
   };
 
   _proto.getValue = function getValue() {

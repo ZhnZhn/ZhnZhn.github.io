@@ -1,8 +1,8 @@
-import React from 'react'
+import { forwardRef } from 'react'
 
 import useKeyEnter from '../hooks/useKeyEnter'
 
-const MenuAriaItem = React.forwardRef(({ children, onClick, onReg, ...rest }, ref) => {
+const MenuAriaItem = forwardRef(({ children, onClick, onReg, ...rest }, ref) => {
   const _hKeyDown = useKeyEnter(onClick);
 
   return (

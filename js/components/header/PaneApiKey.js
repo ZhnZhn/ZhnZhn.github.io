@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _safeFn = _interopRequireDefault(require("../../utils/safeFn"));
 
@@ -122,79 +122,82 @@ var PaneApiKey = /*#__PURE__*/function (_Component) {
       return null;
     }
 
-    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref1,
-      titleStyle: titleStyle,
-      title: "Alpha:",
-      name: "alpha-vantage",
-      placeholder: "Alpha Vantage API Key",
-      onEnter: this._setKey1
-    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref2,
-      titleStyle: titleStyle,
-      title: "Barchar:",
-      name: "barchart",
-      placeholder: "Barchar API Key",
-      onEnter: this._setKey2
-    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref3,
-      titleStyle: titleStyle,
-      title: "BEA:",
-      name: "bea",
-      placeholder: "BEA API Key",
-      maxLength: "36",
-      onEnter: this._setKey3
-    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref4,
-      titleStyle: titleStyle,
-      title: "EIA:",
-      name: "eia",
-      placeholder: "EIA API Key",
-      maxLength: "32",
-      onEnter: this._setKey4
-    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref5,
-      titleStyle: titleStyle,
-      title: "FMP:",
-      name: "fmp",
-      placeholder: "Financial Modeling Prep API Key",
-      maxLength: "32",
-      onEnter: this._setKey5
-    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref6,
-      titleStyle: titleStyle,
-      title: "IEX:",
-      name: "iex-cloud",
-      placeholder: "IEX Cloud API Key",
-      maxLength: "35",
-      onEnter: this._setKey6
-    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref7,
-      titleStyle: titleStyle,
-      title: "Intrinio:",
-      name: "intrinio",
-      placeholder: "Intrinio API Key",
-      maxLength: "32",
-      onEnter: this._setKey7
-    }), /*#__PURE__*/_react["default"].createElement(_RowSecret["default"], {
-      ref: this._ref8,
-      titleStyle: titleStyle,
-      title: "Quandl:",
-      name: "quandl",
-      placeholder: "Quandl API Key",
-      onEnter: this._setKey8
-    }), /*#__PURE__*/_react["default"].createElement(_RowButtons["default"], {
-      btStyle: btStyle,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-      style: btStyle,
-      caption: "CLEAR ALL",
-      onClick: this._hClearAll
-    }), /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-      style: (0, _extends2["default"])({}, btStyle, S.BT_SET),
-      caption: "SET ALL",
-      onClick: this._hSetAll
-    })));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
+        ref: this._ref1,
+        titleStyle: titleStyle,
+        title: "Alpha:",
+        name: "alpha-vantage",
+        placeholder: "Alpha Vantage API Key",
+        onEnter: this._setKey1
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
+        ref: this._ref2,
+        titleStyle: titleStyle,
+        title: "Barchar:",
+        name: "barchart",
+        placeholder: "Barchar API Key",
+        onEnter: this._setKey2
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
+        ref: this._ref3,
+        titleStyle: titleStyle,
+        title: "BEA:",
+        name: "bea",
+        placeholder: "BEA API Key",
+        maxLength: "36",
+        onEnter: this._setKey3
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
+        ref: this._ref4,
+        titleStyle: titleStyle,
+        title: "EIA:",
+        name: "eia",
+        placeholder: "EIA API Key",
+        maxLength: "32",
+        onEnter: this._setKey4
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
+        ref: this._ref5,
+        titleStyle: titleStyle,
+        title: "FMP:",
+        name: "fmp",
+        placeholder: "Financial Modeling Prep API Key",
+        maxLength: "32",
+        onEnter: this._setKey5
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
+        ref: this._ref6,
+        titleStyle: titleStyle,
+        title: "IEX:",
+        name: "iex-cloud",
+        placeholder: "IEX Cloud API Key",
+        maxLength: "35",
+        onEnter: this._setKey6
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
+        ref: this._ref7,
+        titleStyle: titleStyle,
+        title: "Intrinio:",
+        name: "intrinio",
+        placeholder: "Intrinio API Key",
+        maxLength: "32",
+        onEnter: this._setKey7
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
+        ref: this._ref8,
+        titleStyle: titleStyle,
+        title: "Quandl:",
+        name: "quandl",
+        placeholder: "Quandl API Key",
+        onEnter: this._setKey8
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowButtons["default"], {
+        btStyle: btStyle,
+        onClose: onClose,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
+          style: btStyle,
+          caption: "CLEAR ALL",
+          onClick: this._hClearAll
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
+          style: (0, _extends2["default"])({}, btStyle, S.BT_SET),
+          caption: "SET ALL",
+          onClick: this._hSetAll
+        })]
+      })]
+    });
   };
 
   return PaneApiKey;

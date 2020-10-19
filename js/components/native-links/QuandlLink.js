@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Link = _interopRequireDefault(require("./Link"));
 
@@ -24,7 +24,7 @@ var QuandlLink = function QuandlLink(_ref) {
       dsCode = _ref$dsCode === void 0 ? '' : _ref$dsCode,
       _ref$caption = _ref.caption,
       caption = _ref$caption === void 0 ? C.CAPTION : _ref$caption;
-  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
     style: C.STYLE,
     href: "" + C.ROOT_URI + dbCode + "/" + dsCode,
     caption: caption + " " + dbCode + "/" + dsCode

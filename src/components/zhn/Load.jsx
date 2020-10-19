@@ -1,5 +1,3 @@
-import React from 'react'
-
 const FAILED_COLOR = '#f44336';
 const S = {
   LOADING: {
@@ -22,7 +20,7 @@ const Loading = () => (
   />
 );
 const LoadFailed = ({ errMsg='' }) => (
-  <React.Fragment>
+  <>
     <div
       data-loader="circle-failed"
       style={{...S.LOADING, ...S.LOAD_FAILED}}
@@ -30,7 +28,7 @@ const LoadFailed = ({ errMsg='' }) => (
     <p style={S.ERR_MSG}>
       {`${errMsg}: Network error.`}
     </p>
-  </React.Fragment>
+  </>
 );
 
 const Load = {

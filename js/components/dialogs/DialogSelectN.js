@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -15,7 +13,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ChartTypes = _interopRequireDefault(require("./ChartTypes"));
 
@@ -264,15 +264,15 @@ var DialogSelectN = (_dec = Decor.dialog, _dec2 = Decor.withForDate, _dec(_class
 
         var _isShow = _this.state[_crIsId(id)];
 
-        return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-          key: id,
-          isShow: _isShow
-        }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, (0, _extends2["default"])({}, restItem, {
-          ref: _this._refSelect.bind(null, id),
-          isShow: isShow,
-          isShowLabels: isShowLabels,
-          onSelect: _this._hSelect.bind(null, id, index)
-        })));
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+          isShow: _isShow,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, (0, _extends2["default"])({}, restItem, {
+            ref: _this._refSelect.bind(null, id),
+            isShow: isShow,
+            isShowLabels: isShowLabels,
+            onSelect: _this._hSelect.bind(null, id, index)
+          }))
+        }, id);
       });
     };
 
@@ -296,7 +296,7 @@ var DialogSelectN = (_dec = Decor.dialog, _dec2 = Decor.withForDate, _dec(_class
       isOptions: isOpt || isCh,
       isToggle: isFd || _selectProps.length > 1
     });
-    _this._refFromDate = /*#__PURE__*/_react["default"].createRef();
+    _this._refFromDate = /*#__PURE__*/(0, _react.createRef)();
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this._chartOptions = crOptions(props);
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
@@ -358,59 +358,61 @@ var DialogSelectN = (_dec = Decor.dialog, _dec2 = Decor.withForDate, _dec(_class
         _isRowFd = isFd && !_isCategory,
         _noForDate = noForDate || !_isCategory;
 
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: this._hClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: isToolbar,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ModalOptions, {
-      isShow: isOptions,
-      toggleOption: this._toggleOptionWithToolbar,
-      onClose: this._hideOptionsWithToolbar
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ModalToggle, {
-      isShow: isToggle,
-      noForDate: _noForDate,
-      selectProps: selectProps,
-      isFd: _isRowFd,
-      isShowFd: isShowFd,
-      isCh: isCh,
-      isShowChart: isShowChart,
-      isShowDate: isShowDate,
-      crIsId: _crIsId,
-      onToggle: this._toggleStateBy,
-      onCheckCaption: this._checkCaptionBy,
-      onUnCheckCaption: this._uncheckCaption,
-      onClose: this._hideToggleWithToolbar
-    }), this._renderSelects(selectProps, isShow, isShowLabels), _isRowFd && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowFd
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowDate, {
-      innerRef: this._refFromDate,
-      isShowLabels: isShowLabels,
-      labelTitle: "From Date:",
-      initValue: initFromDate,
-      errorMsg: errNotYmdOrEmpty,
-      onTestDate: isYmdOrEmpty
-    })), isCh && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowChartDate, {
-      chartType: chartType,
-      isShowLabels: isShowLabels,
-      isShowChart: isShowChart,
-      chartOptions: this._chartOptions,
-      onSelectChart: this._hSelectChartType,
-      onRegColor: this._onRegColor,
-      noDate: noDate,
-      isShowDate: isShowDate,
-      dateDefault: dateDefault,
-      dateOptions: dateOptions,
-      onSelecDate: this._hSelectDate
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
-      validationMessages: validationMessages
-    }));
+      onClose: this._hClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: isToolbar,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ModalOptions, {
+        isShow: isOptions,
+        toggleOption: this._toggleOptionWithToolbar,
+        onClose: this._hideOptionsWithToolbar
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ModalToggle, {
+        isShow: isToggle,
+        noForDate: _noForDate,
+        selectProps: selectProps,
+        isFd: _isRowFd,
+        isShowFd: isShowFd,
+        isCh: isCh,
+        isShowChart: isShowChart,
+        isShowDate: isShowDate,
+        crIsId: _crIsId,
+        onToggle: this._toggleStateBy,
+        onCheckCaption: this._checkCaptionBy,
+        onUnCheckCaption: this._uncheckCaption,
+        onClose: this._hideToggleWithToolbar
+      }), this._renderSelects(selectProps, isShow, isShowLabels), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowFd,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowDate, {
+          innerRef: this._refFromDate,
+          isShowLabels: isShowLabels,
+          labelTitle: "From Date:",
+          initValue: initFromDate,
+          errorMsg: errNotYmdOrEmpty,
+          onTestDate: isYmdOrEmpty
+        })
+      }), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowChartDate, {
+        chartType: chartType,
+        isShowLabels: isShowLabels,
+        isShowChart: isShowChart,
+        chartOptions: this._chartOptions,
+        onSelectChart: this._hSelectChartType,
+        onRegColor: this._onRegColor,
+        noDate: noDate,
+        isShowDate: isShowDate,
+        dateDefault: dateDefault,
+        dateOptions: dateOptions,
+        onSelecDate: this._hSelectDate
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
+        validationMessages: validationMessages
+      })]
+    });
   };
 
   return DialogSelectN;

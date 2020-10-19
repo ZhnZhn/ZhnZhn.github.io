@@ -2,16 +2,16 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 
-var BtCounter = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+var BtCounter = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var isShow = _ref.isShow,
       style = _ref.style,
       title = _ref.title,
@@ -40,14 +40,13 @@ var BtCounter = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
       }
     };
   }, [value]);
-  return isShow ? /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
+  return isShow ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
     style: style,
     title: title,
     caption: value,
     onClick: _onClick
   }) : null;
 });
-
 var _default = BtCounter;
 exports["default"] = _default;
 //# sourceMappingURL=BtCounter.js.map

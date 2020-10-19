@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
@@ -76,11 +76,12 @@ var HighchartWrapper = function HighchartWrapper(_ref) {
 
   var _style = isShow ? S.SHOW : S.HIDE;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, style, S.DIV, _style)
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    ref: _refChartNode
-  }), isShowAbs && absComp);
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: (0, _extends2["default"])({}, style, S.DIV, _style),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      ref: _refChartNode
+    }), isShowAbs && absComp]
+  });
 };
 
 var _default = HighchartWrapper;

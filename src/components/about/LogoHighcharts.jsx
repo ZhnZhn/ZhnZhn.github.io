@@ -1,9 +1,7 @@
-import React from 'react';
-
 const C = {
   CL: 'logo-highcharts',
   TITLE: 'Highcharts Logo',
-  HREF: 'http://www.highcharts.com/'
+  HREF: 'https://www.highcharts.com'
 };
 
 const IconHighcharts = ({ className='' }) => (

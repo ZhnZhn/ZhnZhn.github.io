@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component, createRef } from 'react'
 
 import Model from '../../constants/Model'
 import HandleF from '../f-handle/HandleF'
@@ -71,7 +71,7 @@ class SeriaRow extends Component {
       .closeTo('isShowPallete')
       .bind(this)
 
-    this._refCellColor = React.createRef()
+    this._refCellColor = createRef()
     this._hClickPallete = HandleF
       .toggleModalBy('isShowPallete', '_refCellColor')
       .bind(this)

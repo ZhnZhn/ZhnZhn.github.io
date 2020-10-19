@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 
 import InputSecret from '../zhn/InputSecret'
 import STYLE from '../styles/DialogStyles'

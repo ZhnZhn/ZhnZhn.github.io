@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -13,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _loadConfigs = _interopRequireDefault(require("./loadConfigs"));
 
@@ -253,15 +253,15 @@ var DialogStatN = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
             options = conf.options,
             _isShow = !_this.state[_crIsId(id)];
 
-        return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-          key: id,
-          isShow: _isShow
-        }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-          isShowLabels: isShowLabels,
-          caption: caption,
-          options: options,
-          onSelect: _this._fSelect(index).bind((0, _assertThisInitialized2["default"])(_this))
-        }));
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+          isShow: _isShow,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+            isShowLabels: isShowLabels,
+            caption: caption,
+            options: options,
+            onSelect: _this._fSelect(index).bind((0, _assertThisInitialized2["default"])(_this))
+          })
+        }, id);
       });
     };
 
@@ -344,47 +344,48 @@ var DialogStatN = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
         validationMessages = _this$state4.validationMessages,
         _spinnerStyle = !isLoadFailed ? S.SPINNER_LOADING : (0, _extends2["default"])({}, S.SPINNER_LOADING, S.SPINNER_FAILED);
 
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: this._handleClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: isToolbar,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ModalOptions, {
-      isShow: isOptions,
-      toggleOption: this._toggleOptionWithToolbar,
-      onClose: this._hideOptionsWithToolbar
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ModalToggle, {
-      isShow: isToggle,
-      selectProps: configs,
-      isShowChart: isShowChart,
-      isShowDate: isShowDate,
-      crIsId: _crIsId,
-      onToggle: this._toggleStateBy,
-      onCheckCaption: this._checkCaptionBy,
-      onUnCheckCaption: this._uncheckCaption,
-      onClose: this._hideToggleWithToolbar
-    }), (isLoading || isLoadFailed) && /*#__PURE__*/_react["default"].createElement(_SpinnerLoading["default"], {
-      style: _spinnerStyle
-    }), !isLoading && !isLoadFailed && this._renderSelectInputs(), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowChartDate, {
-      chartType: chartType,
-      isShowLabels: isShowLabels,
-      isShowChart: isShowChart,
-      chartOptions: chartOptions,
-      onSelectChart: this._hSelectChartType,
-      onRegColor: this._onRegColor,
-      isShowDate: isShowDate,
-      dateDefault: dateDefault,
-      dateOptions: dateOptions,
-      onSelecDate: this._hSelectDate
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
-      validationMessages: validationMessages
-    }));
+      onClose: this._handleClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: isToolbar,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ModalOptions, {
+        isShow: isOptions,
+        toggleOption: this._toggleOptionWithToolbar,
+        onClose: this._hideOptionsWithToolbar
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ModalToggle, {
+        isShow: isToggle,
+        selectProps: configs,
+        isShowChart: isShowChart,
+        isShowDate: isShowDate,
+        crIsId: _crIsId,
+        onToggle: this._toggleStateBy,
+        onCheckCaption: this._checkCaptionBy,
+        onUnCheckCaption: this._uncheckCaption,
+        onClose: this._hideToggleWithToolbar
+      }), (isLoading || isLoadFailed) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading["default"], {
+        style: _spinnerStyle
+      }), !isLoading && !isLoadFailed && this._renderSelectInputs(), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowChartDate, {
+        chartType: chartType,
+        isShowLabels: isShowLabels,
+        isShowChart: isShowChart,
+        chartOptions: chartOptions,
+        onSelectChart: this._hSelectChartType,
+        onRegColor: this._onRegColor,
+        isShowDate: isShowDate,
+        dateDefault: dateDefault,
+        dateOptions: dateOptions,
+        onSelecDate: this._hSelectDate
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
+        validationMessages: validationMessages
+      })]
+    });
   };
 
   return DialogStatN;

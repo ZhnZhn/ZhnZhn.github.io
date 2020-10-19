@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Link = _interopRequireDefault(require("./Link"));
 
@@ -15,7 +15,7 @@ var C = {
 
 var FaoStatLink = function FaoStatLink(_ref) {
   var item = _ref.item;
-  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
     href: item ? C.BASE + item : C.BASE,
     caption: "FAOSTAT Link"
   });

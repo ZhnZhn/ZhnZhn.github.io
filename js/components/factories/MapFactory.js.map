@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/components/factories/MapFactory.jsx"],"names":["MapFactory","crClusterInfo","props","crInfo","label","value"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,UAAU,GAAG;AACjBC,EAAAA,aADiB,yBACHC,KADG,EACG;AAClB,wBACE,gCAAC,uBAAD,EAAiBA,KAAjB,CADF;AAGD,GALgB;AAOjBC,EAAAA,MAPiB,wBAOO;AAAA,QAAfC,KAAe,QAAfA,KAAe;AAAA,QAARC,KAAQ,QAARA,KAAQ;AACtB,wBACE,wDACE,8CACGD,KADH,UADF,eAIE,8CACGC,KAAK,GAAGA,KAAH,GAAW,SADnB,CAJF,CADF;AAUD;AAlBgB,CAAnB;eAqBeL,U","sourcesContent":["import React from 'react'\r\n\r\nimport ClusterInfo from '../map/ClusterInfo'\r\n\r\nconst MapFactory = {\r\n  crClusterInfo(props){\r\n    return (\r\n      <ClusterInfo {...props} />\r\n    );\r\n  },\r\n  \r\n  crInfo({ label, value }){\r\n    return(\r\n      <p>\r\n        <span>\r\n          {label}:&nbsp;\r\n        </span>\r\n        <span>\r\n          {value ? value : 'unknown'}\r\n        </span>\r\n      </p>\r\n    );\r\n  }\r\n}\r\n\r\nexport default MapFactory\r\n"],"file":"MapFactory.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/factories/MapFactory.js"
+ ],
+ "file": "../../../src/components/factories/MapFactory.js",
+ "names": [
+  "MapFactory",
+  "crClusterInfo",
+  "props",
+  "crInfo",
+  "label",
+  "value"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AAEA,IAAMA,UAAU,GAAG;AACjBC,EAAAA,aADiB,yBACHC,KADG,EACG;AAClB,wBACE,qBAAC,uBAAD,gCAAiBA,KAAjB,EADF;AAGD,GALgB;AAOjBC,EAAAA,MAPiB,wBAOO;AAAA,QAAfC,KAAe,QAAfA,KAAe;AAAA,QAARC,KAAQ,QAARA,KAAQ;AACtB,wBACE;AAAA,8BACE;AAAA,mBACGD,KADH;AAAA,QADF,eAIE;AAAA,kBACGC,KAAK,GAAGA,KAAH,GAAW;AADnB,QAJF;AAAA,MADF;AAUD;AAlBgB,CAAnB;eAqBeL,U"
+}

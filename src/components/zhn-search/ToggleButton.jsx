@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ArrowCell from './ArrowCell'
 
 const CL = {

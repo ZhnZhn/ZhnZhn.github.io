@@ -1,1 +1,22 @@
-{"version":3,"sources":["../../../src/components/browser-slider/MenuTitle.jsx"],"names":["CL","ITEM","MenuTitle","innerRef","title","onClick","_hKeyDown","evt","preventDefault","S","TITLE","TITLE_ARROW"],"mappings":";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,IAAI,EAAE;AADG,CAAX;;AAIA,IAAMC,SAAS,GAAG,SAAZA,SAAY,OAAkC;AAAA,MAA/BC,QAA+B,QAA/BA,QAA+B;AAAA,MAArBC,KAAqB,QAArBA,KAAqB;AAAA,MAAdC,OAAc,QAAdA,OAAc;;AAClD,MAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,GAAD,EAAS;AACzB,QAAI,4BAAWA,GAAX,CAAJ,EAAqB;AACnBA,MAAAA,GAAG,CAACC,cAAJ;AACAH,MAAAA,OAAO;AACR;AACF,GALD;;AAMA,sBACE;AACE,IAAA,GAAG,EAAEF,QADP;AAEE,IAAA,SAAS,EAAEH,EAAE,CAACC,IAFhB;AAGE,IAAA,KAAK,EAAEQ,kBAAEC,KAHX;AAIE,IAAA,IAAI,EAAC,UAJP;AAKE,IAAA,QAAQ,EAAC,GALX;AAME,IAAA,OAAO,EAAEL,OANX;AAOE,IAAA,SAAS,EAAEC;AAPb,KASGF,KATH,eAUE;AAAM,IAAA,KAAK,EAAEK,kBAAEE;AAAf,KACG,GADH,CAVF,CADF;AAgBD,CAvBD;AAyBA;;;;;;;;;;;eAUeT,S","sourcesContent":["import React from 'react'\r\n\r\nimport isKeyEnter from '../zhn/isKeyEnter'\r\nimport S from './Style'\r\n\r\nconst CL = {\r\n  ITEM: 'menu-item'\r\n};\r\n\r\nconst MenuTitle = ({ innerRef, title, onClick }) => {\r\n  const _hKeyDown = (evt) => {\r\n    if (isKeyEnter(evt)) {\r\n      evt.preventDefault()\r\n      onClick()\r\n    }\r\n  };\r\n  return (\r\n    <div\r\n      ref={innerRef}\r\n      className={CL.ITEM}\r\n      style={S.TITLE}\r\n      role=\"menuitem\"\r\n      tabIndex=\"0\"\r\n      onClick={onClick}\r\n      onKeyDown={_hKeyDown}\r\n    >\r\n      {title}\r\n      <span style={S.TITLE_ARROW}>\r\n        {'<'}\r\n      </span>\r\n    </div>\r\n  );\r\n}\r\n\r\n/*\r\nMenuTitle.propTypes = {\r\n  innerRef: PropTypes.shape({\r\n    current: PropTypes.object\r\n  })\r\n  title: PropTypes.string,\r\n  onClick: PropTypes.func\r\n}\r\n*/\r\n\r\nexport default MenuTitle\r\n"],"file":"MenuTitle.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/MenuTitle.js"
+ ],
+ "file": "../../../src/components/browser-slider/MenuTitle.js",
+ "names": [
+  "CL",
+  "ITEM",
+  "MenuTitle",
+  "innerRef",
+  "title",
+  "onClick",
+  "_hKeyDown",
+  "evt",
+  "preventDefault",
+  "S",
+  "TITLE",
+  "TITLE_ARROW"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,IAAI,EAAE;AADG,CAAX;;AAIA,IAAMC,SAAS,GAAG,SAAZA,SAAY,OAAkC;AAAA,MAA/BC,QAA+B,QAA/BA,QAA+B;AAAA,MAArBC,KAAqB,QAArBA,KAAqB;AAAA,MAAdC,OAAc,QAAdA,OAAc;;AAClD,MAAMC,SAAS,GAAG,SAAZA,SAAY,CAACC,GAAD,EAAS;AACzB,QAAI,4BAAWA,GAAX,CAAJ,EAAqB;AACnBA,MAAAA,GAAG,CAACC,cAAJ;AACAH,MAAAA,OAAO;AACR;AACF,GALD;;AAMA,sBACE;AACE,IAAA,GAAG,EAAEF,QADP;AAEE,IAAA,SAAS,EAAEH,EAAE,CAACC,IAFhB;AAGE,IAAA,KAAK,EAAEQ,kBAAEC,KAHX;AAIE,IAAA,IAAI,EAAC,UAJP;AAKE,IAAA,QAAQ,EAAC,GALX;AAME,IAAA,OAAO,EAAEL,OANX;AAOE,IAAA,SAAS,EAAEC,SAPb;AAAA,eASGF,KATH,eAUE;AAAM,MAAA,KAAK,EAAEK,kBAAEE,WAAf;AAAA,gBACG;AADH,MAVF;AAAA,IADF;AAgBD,CAvBD;AAyBA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;eAEeT,S"
+}

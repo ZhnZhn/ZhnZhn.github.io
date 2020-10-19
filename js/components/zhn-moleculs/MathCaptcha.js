@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _InputSlider = _interopRequireDefault(require("../zhn/InputSlider"));
 
@@ -49,7 +49,7 @@ var _useRandomNumber = function _useRandomNumber() {
   })[0];
 };
 
-var MathCaptcha = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+var MathCaptcha = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var style = _ref.style;
 
   var n1 = _useRandomNumber(),
@@ -81,24 +81,29 @@ var MathCaptcha = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref)
 
   var _sumStyle = _isOk ? S.SUM_OK : S.SUM_NOT_OK;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: style
-  }, /*#__PURE__*/_react["default"].createElement("p", {
-    style: S.MSG
-  }, MSG), /*#__PURE__*/_react["default"].createElement("p", {
-    style: S.P_SUM
-  }, /*#__PURE__*/_react["default"].createElement("span", null, n1 + " + " + n2 + " = "), /*#__PURE__*/_react["default"].createElement("span", {
-    style: _sumStyle
-  }, resultSum)), /*#__PURE__*/_react["default"].createElement(_InputSlider["default"], {
-    onChange: _hChangeSlider
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: style,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+      style: S.MSG,
+      children: MSG
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
+      style: S.P_SUM,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        children: n1 + " + " + n2 + " = "
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: _sumStyle,
+        children: resultSum
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSlider["default"], {
+      onChange: _hChangeSlider
+    })]
+  });
 });
 /*
 MatchCaptcha.propTypes = {
   style: PropTypes.object
 }
 */
-
 
 var _default = MathCaptcha;
 exports["default"] = _default;

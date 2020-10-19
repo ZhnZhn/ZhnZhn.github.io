@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component, createRef } from 'react'
 
 import MenuTitle from './MenuTitle'
 import MenuItemList from './MenuItemList'
@@ -32,8 +32,8 @@ class MenuPage extends Component {
     items: []
   }
 
-  _refTitle = React.createRef()
-  _refFirst = React.createRef()
+  _refTitle = createRef()
+  _refFirst = createRef()
 
   componentDidMount(){
     this._focus()

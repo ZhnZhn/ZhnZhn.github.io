@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ChartExportConfig = _interopRequireDefault(require("../../charts/ChartExportConfig"));
 
@@ -205,13 +205,12 @@ var CustomizeExportDialog = /*#__PURE__*/function (_Component) {
       onClick: _this._hClickStyle
     }];
     _this.optionStyles = _ChartExportConfig["default"].createOptionStyles();
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
-      key: "export",
+    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button["default"].Flat, {
       caption: "Export" //accessKey="x"
       ,
       isPrimary: true,
       onClick: _this._hExport
-    })];
+    }, "export")];
     _this.state = {
       isShowDimension: true,
       isShowTitle: true,
@@ -245,69 +244,83 @@ var CustomizeExportDialog = /*#__PURE__*/function (_Component) {
         isShowDimension = _this$state.isShowDimension,
         isShowTitle = _this$state.isShowTitle,
         isShowStyle = _this$state.isShowStyle;
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
       caption: "Customize Export Chart",
       isShow: isShow,
       commandButtons: this._commandButtons,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement(_ToolbarButtonCircle["default"], {
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-      isShow: isShowDimension
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: _DialogStyles["default"].ROW
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.LABEL
-    }, "Dimension:"), /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.LABEL_WIDTH
-    }, "Width:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
-      ref: this._refInputWidth,
-      type: "number",
-      placeholder: chartWidth,
-      initValue: chartWidth,
-      style: S.INPUT_NUMBER,
-      min: C.W_MIN,
-      max: C.W_MAX
-    }), /*#__PURE__*/_react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.LABEL_WIDTH, S.LABEL_HEIGHT)
-    }, "Height:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
-      ref: this._refInputHeight,
-      type: "number",
-      placeholder: chartHeight,
-      initValue: chartHeight,
-      style: S.INPUT_NUMBER,
-      min: C.H_MIN,
-      max: C.H_MAX
-    }))), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-      isShow: isShowTitle
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].ROW, S.GAP_BETWEEN_GROUP)
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.LABEL
-    }, "Title:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
-      ref: this._refInputTitle,
-      initValue: title,
-      style: S.INPUT_TEXT
-    })), /*#__PURE__*/_react["default"].createElement("div", {
-      style: _DialogStyles["default"].ROW
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.LABEL
-    }, "Subtitle:"), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
-      ref: this._refInputSubtitle,
-      initValue: subtitle,
-      style: S.INPUT_TEXT
-    }))), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-      isShow: isShowStyle
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, _DialogStyles["default"].ROW, S.GAP_BETWEEN_GROUP)
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.LABEL
-    }, "Style:"), /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {
-      width: "250",
-      options: this.optionStyles,
-      placeholder: "Default",
-      onSelect: this._hSelectStyle
-    }))));
+      onClose: onClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle["default"], {
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+        isShow: isShowDimension,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          style: _DialogStyles["default"].ROW,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            style: S.LABEL,
+            children: "Dimension:"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            style: S.LABEL_WIDTH,
+            children: "Width:"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
+            ref: this._refInputWidth,
+            type: "number",
+            placeholder: chartWidth,
+            initValue: chartWidth,
+            style: S.INPUT_NUMBER,
+            min: C.W_MIN,
+            max: C.W_MAX
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            style: (0, _extends2["default"])({}, S.LABEL_WIDTH, S.LABEL_HEIGHT),
+            children: "Height:"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
+            ref: this._refInputHeight,
+            type: "number",
+            placeholder: chartHeight,
+            initValue: chartHeight,
+            style: S.INPUT_NUMBER,
+            min: C.H_MIN,
+            max: C.H_MAX
+          })]
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide["default"], {
+        isShow: isShowTitle,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          style: (0, _extends2["default"])({}, _DialogStyles["default"].ROW, S.GAP_BETWEEN_GROUP),
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            style: S.LABEL,
+            children: "Title:"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
+            ref: this._refInputTitle,
+            initValue: title,
+            style: S.INPUT_TEXT
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          style: _DialogStyles["default"].ROW,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            style: S.LABEL,
+            children: "Subtitle:"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
+            ref: this._refInputSubtitle,
+            initValue: subtitle,
+            style: S.INPUT_TEXT
+          })]
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+        isShow: isShowStyle,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          style: (0, _extends2["default"])({}, _DialogStyles["default"].ROW, S.GAP_BETWEEN_GROUP),
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            style: S.LABEL,
+            children: "Style:"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect["default"], {
+            width: "250",
+            options: this.optionStyles,
+            placeholder: "Default",
+            onSelect: this._hSelectStyle
+          })]
+        })
+      })]
+    });
   };
 
   return CustomizeExportDialog;

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
@@ -142,47 +142,50 @@ var PaneOptions = /*#__PURE__*/function (_Component) {
         _isDrawDeltaExtrems = (0, _safeFn["default"])(data, MODE_DELTA, false)(),
         _isNotZoomToMinMax = (0, _safeFn["default"])(data, MODE_ZOOM, false)();
 
-    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
-      ref: this._refProxy,
-      captionStyle: titleStyle,
-      caption: "Proxy:",
-      placeholder: "Https Proxy Server",
-      initValue: _proxy,
-      onEnter: this._setProxy,
-      onClear: this._hClearProxy
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      caption: "UI Theme",
-      captionStyle: titleStyle,
-      options: UI_THEME_OPTIONS,
-      onSelect: this._hSelectTheme
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      initValue: _isAdminMode,
-      caption: "View in Admin Mode",
-      onCheck: this._hMode.bind(null, MODE_ADMIN, true),
-      onUnCheck: this._hMode.bind(null, MODE_ADMIN, false)
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      initValue: _isDrawDeltaExtrems,
-      caption: "Draw Deltas to Min-Max",
-      onCheck: this._hMode.bind(null, MODE_DELTA, true),
-      onUnCheck: this._hMode.bind(null, MODE_DELTA, false)
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      initValue: _isNotZoomToMinMax,
-      caption: "Not Zoom to Min-Max",
-      onCheck: this._hMode.bind(null, MODE_ZOOM, true),
-      onUnCheck: this._hMode.bind(null, MODE_ZOOM, false)
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      initValue: false,
-      caption: "Without Points Halo",
-      onCheck: this._setHalo.bind(null, false),
-      onUnCheck: this._setHalo.bind(null, true)
-    }), /*#__PURE__*/_react["default"].createElement(_RowButtons["default"], {
-      btStyle: btStyle,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-      style: (0, _extends2["default"])({}, btStyle, S.BT_PROXY),
-      caption: "SET PROXY",
-      onClick: this._hSetProxy
-    })));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowPattern, {
+        ref: this._refProxy,
+        captionStyle: titleStyle,
+        caption: "Proxy:",
+        placeholder: "Https Proxy Server",
+        initValue: _proxy,
+        onEnter: this._setProxy,
+        onClear: this._hClearProxy
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+        caption: "UI Theme",
+        captionStyle: titleStyle,
+        options: UI_THEME_OPTIONS,
+        onSelect: this._hSelectTheme
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+        initValue: _isAdminMode,
+        caption: "View in Admin Mode",
+        onCheck: this._hMode.bind(null, MODE_ADMIN, true),
+        onUnCheck: this._hMode.bind(null, MODE_ADMIN, false)
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+        initValue: _isDrawDeltaExtrems,
+        caption: "Draw Deltas to Min-Max",
+        onCheck: this._hMode.bind(null, MODE_DELTA, true),
+        onUnCheck: this._hMode.bind(null, MODE_DELTA, false)
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+        initValue: _isNotZoomToMinMax,
+        caption: "Not Zoom to Min-Max",
+        onCheck: this._hMode.bind(null, MODE_ZOOM, true),
+        onUnCheck: this._hMode.bind(null, MODE_ZOOM, false)
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+        initValue: false,
+        caption: "Without Points Halo",
+        onCheck: this._setHalo.bind(null, false),
+        onUnCheck: this._setHalo.bind(null, true)
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons["default"], {
+        btStyle: btStyle,
+        onClose: onClose,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
+          style: (0, _extends2["default"])({}, btStyle, S.BT_PROXY),
+          caption: "SET PROXY",
+          onClick: this._hSetProxy
+        })
+      })]
+    });
   };
 
   return PaneOptions;

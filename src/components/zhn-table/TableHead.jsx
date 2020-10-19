@@ -1,5 +1,3 @@
-import React from 'react'
-
 import isKeyEnter from '../zhn/isKeyEnter'
 import SvgMore from '../zhn/SvgMore'
 

@@ -5,7 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 
@@ -22,8 +24,7 @@ var S = {
     paddingLeft: 16
   }
 };
-
-var MenuTitle = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+var MenuTitle = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var titleCl = _ref.titleCl,
       title = _ref.title,
       onClick = _ref.onClick;
@@ -32,16 +33,19 @@ var MenuTitle = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
     return null;
   }
 
-  return /*#__PURE__*/_react["default"].createElement(_MenuAriaItem["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_MenuAriaItem["default"], {
     ref: ref,
     className: titleCl,
     style: S.ITEM,
-    onClick: onClick
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.PREV_PAGE
-  }, "<"), /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.TITLE
-  }, title));
+    onClick: onClick,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S.PREV_PAGE,
+      children: "<"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S.TITLE,
+      children: title
+    })]
+  });
 });
 /*
 MenuTitle.propTypes = {
@@ -50,7 +54,6 @@ MenuTitle.propTypes = {
   onClick: PropTypes.func
 }
 */
-
 
 var _default = MenuTitle;
 exports["default"] = _default;

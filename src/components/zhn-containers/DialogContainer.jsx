@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { cloneElement, Component } from 'react';
 
 const S = {
   ROOT: {
@@ -138,7 +138,7 @@ class DialogContainer extends Component {
     const { hmIs, compDialogs, hmData } = this.state;
     return compDialogs.map(Comp => {
        const key = Comp.key;
-       return React.cloneElement(Comp, {
+       return cloneElement(Comp, {
           key: key,
           isShow: hmIs[key],
           optionData: hmData[key],

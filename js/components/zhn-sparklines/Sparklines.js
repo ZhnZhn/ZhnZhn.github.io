@@ -1,15 +1,17 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
 exports.Sparklines = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _SparklinesLine = _interopRequireDefault(require("./SparklinesLine"));
 
@@ -108,14 +110,16 @@ var Sparklines = /*#__PURE__*/function (_PureComponent) {
     };
     if (svgWidth > 0) svgOpts.width = svgWidth;
     if (svgHeight > 0) svgOpts.height = svgHeight;
-    return /*#__PURE__*/_react["default"].createElement("svg", svgOpts, _react["default"].Children.map(this.props.children, function (child) {
-      return /*#__PURE__*/_react["default"].cloneElement(child, {
-        data: data,
-        points: points,
-        width: width,
-        height: height,
-        margin: margin
-      });
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", (0, _extends2["default"])({}, svgOpts, {
+      children: _react.Children.map(this.props.children, function (child) {
+        return /*#__PURE__*/(0, _react.cloneElement)(child, {
+          data: data,
+          points: points,
+          width: width,
+          height: height,
+          margin: margin
+        });
+      })
     }));
   };
 

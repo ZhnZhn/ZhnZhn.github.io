@@ -1,5 +1,3 @@
-import React from 'react'
-
 const SvgIcon = ({ color, size, children, ...restProps }) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

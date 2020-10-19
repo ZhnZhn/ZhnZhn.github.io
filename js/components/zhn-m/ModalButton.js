@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _CaptionInput = _interopRequireDefault(require("./CaptionInput"));
 
@@ -32,7 +32,7 @@ var ModalButton = function ModalButton(_ref) {
   var _className = (CL.BT + ' ' + className).trim(),
       _title = accessKey ? title + " [" + accessKey + "]" : title;
 
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     ref: refBt,
     type: "button",
     className: _className,
@@ -40,14 +40,17 @@ var ModalButton = function ModalButton(_ref) {
     accessKey: accessKey,
     title: _title,
     tabIndex: 0,
-    onClick: onClick
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    className: clDiv
-  }, /*#__PURE__*/_react["default"].createElement(_CaptionInput["default"], {
-    className: CL.BT_SPAN,
-    caption: caption,
-    accessKey: accessKey
-  }, children)));
+    onClick: onClick,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: clDiv,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_CaptionInput["default"], {
+        className: CL.BT_SPAN,
+        caption: caption,
+        accessKey: accessKey,
+        children: children
+      })
+    })
+  });
 };
 
 var _default = ModalButton;

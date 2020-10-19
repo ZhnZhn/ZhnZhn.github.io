@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -36,9 +36,10 @@ var LimitRemainingLabel = function LimitRemainingLabel(_ref) {
       setValue(v);
     }
   }, 'listenLimitRemaining');
-  return /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.LABEL, style)
-  }, value);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: (0, _extends2["default"])({}, S.LABEL, style),
+    children: value
+  });
 };
 
 var _default = LimitRemainingLabel;

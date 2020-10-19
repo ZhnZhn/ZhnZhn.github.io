@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useRef, useCallback, useEffect, useImperativeHandle } from 'react';
+import { forwardRef, useState, useRef, useCallback, useEffect, useImperativeHandle } from 'react';
 
 import useInputKeyDown from './useInputKeyDown'
 //import PropTypes from "prop-types";
@@ -80,7 +80,7 @@ const InputPattern = forwardRef(({
   onEnter,
   onClear=_onClear
 }, ref) => {
-  const _refInput = useRef()  
+  const _refInput = useRef()
   , _refGetValue = useRef()
   , _refIsValid = useRef()
   , [state, setState] = useState(() => _crInitialState(initValue))

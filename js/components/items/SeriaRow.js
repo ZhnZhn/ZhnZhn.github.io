@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _Model = _interopRequireDefault(require("../../constants/Model"));
 
@@ -86,7 +86,7 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
     _this._hSelectYAxis = _HandleF["default"].reg('toYAxis').bind((0, _assertThisInitialized2["default"])(_this));
     _this._hEnterColor = _HandleF["default"].enterTo('colorEntered').bind((0, _assertThisInitialized2["default"])(_this));
     _this._hClosePalette = _HandleF["default"].closeTo('isShowPallete').bind((0, _assertThisInitialized2["default"])(_this));
-    _this._refCellColor = /*#__PURE__*/_react["default"].createRef();
+    _this._refCellColor = /*#__PURE__*/(0, _react.createRef)();
     _this._hClickPallete = _HandleF["default"].toggleModalBy('isShowPallete', '_refCellColor').bind((0, _assertThisInitialized2["default"])(_this));
     _this.state = {
       isShowPallete: false,
@@ -126,34 +126,37 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
         _name = zhValueText || name,
         _color = this._getColor();
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      rootStyle: S.ROW_CHECK_BOX,
-      caption: "",
-      onCheck: this._hCheck,
-      onUnCheck: this._hUnCheck
-    }), /*#__PURE__*/_react["default"].createElement("span", {
-      className: CL.ELL,
-      style: S.TITLE
-    }, _name), /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
-      ref: this._refCellColor,
-      className: CL_INPUT_COLOR,
-      color: _color,
-      onClick: this._hClickPallete
-    }, /*#__PURE__*/_react["default"].createElement(_ModalPalette["default"], {
-      isShow: isShowPallete,
-      model: _Model["default"].palette,
-      onClickCell: this._hEnterColor,
-      onClose: this._hClosePalette
-    })), /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {
-      placeholder: "withYAxis",
-      width: "150",
-      rootStyle: S.SELECT,
-      rootOptionsStyle: S.SELECT_OPTIONS,
-      options: yAxisOptions,
-      onSelect: this._hSelectYAxis
-    }));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROOT,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+        rootStyle: S.ROW_CHECK_BOX,
+        caption: "",
+        onCheck: this._hCheck,
+        onUnCheck: this._hUnCheck
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: CL.ELL,
+        style: S.TITLE,
+        children: _name
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor["default"], {
+        ref: this._refCellColor,
+        className: CL_INPUT_COLOR,
+        color: _color,
+        onClick: this._hClickPallete,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPalette["default"], {
+          isShow: isShowPallete,
+          model: _Model["default"].palette,
+          onClickCell: this._hEnterColor,
+          onClose: this._hClosePalette
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect["default"], {
+        placeholder: "withYAxis",
+        width: "150",
+        rootStyle: S.SELECT,
+        rootOptionsStyle: S.SELECT_OPTIONS,
+        options: yAxisOptions,
+        onSelect: this._hSelectYAxis
+      })]
+    });
   };
 
   _proto.getValue = function getValue() {

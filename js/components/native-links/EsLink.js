@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Link = _interopRequireDefault(require("./Link"));
 
@@ -23,15 +23,20 @@ var EsLink = function EsLink(_ref) {
     return null;
   }
 
-  return /*#__PURE__*/_react["default"].createElement("ul", {
-    style: S.ROOT
-  }, item.href && /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_Link["default"], {
-    caption: "Eurostat Raw Data Link",
-    href: item.href
-  })), item.dataset && /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_Link["default"], {
-    caption: "Eurostat Dataset Viewer",
-    href: "" + URL + item.dataset
-  })));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("ul", {
+    style: S.ROOT,
+    children: [item.href && /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
+        caption: "Eurostat Raw Data Link",
+        href: item.href
+      })
+    }), item.dataset && /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
+        caption: "Eurostat Dataset Viewer",
+        href: "" + URL + item.dataset
+      })
+    })]
+  });
 };
 
 var _default = EsLink;

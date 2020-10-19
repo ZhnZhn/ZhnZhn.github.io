@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/binance/Bn.js"
- ],
- "file": "../../../src/adapters/binance/Bn.js",
- "names": [
-  "Bn",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;;AACA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AACJC,EAAAA,OAAO,EAAPA;AADI,CAAX;eAIeF,E"
-}
+{"version":3,"sources":["../../../src/adapters/binance/Bn.js"],"names":["Bn","api","adapter"],"mappings":";;;;;;;AACA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AACJC,EAAAA,OAAO,EAAPA;AADI,CAAX;eAIeF,E","sourcesContent":["\r\nimport api from './BnApi'\r\nimport adapter from './BnAdapter'\r\n\r\nconst Bn = {\r\n  api, adapter\r\n}\r\n\r\nexport default Bn\r\n"],"file":"Bn.js"}

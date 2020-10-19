@@ -1,9 +1,7 @@
-import React from 'react'
-
 import Link from './Link'
 
 const UnComtradeLink = ({ item }) => (
-  <Link     
+  <Link
      href={item}
      caption="UN Comtrade Link"
   />

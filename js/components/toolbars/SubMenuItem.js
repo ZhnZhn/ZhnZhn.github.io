@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 
@@ -49,11 +49,12 @@ var SubMenuItem = (0, _memoEqual["default"])(function (_ref) {
 
   var _style = isActive ? S.ACTIVE : null;
 
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     className: CL,
     style: _style,
-    onClick: _hClick
-  }, caption);
+    onClick: _hClick,
+    children: caption
+  });
 });
 /*
 SubMenuItem.propTypes = {

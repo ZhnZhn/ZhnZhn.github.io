@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _Model = _interopRequireDefault(require("../../constants/Model"));
 
@@ -84,26 +84,31 @@ var RowInputColor = function RowInputColor(_ref) {
 
   var _caption = caption.indexOf(':') !== -1 ? caption : caption + ":";
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.ROOT, styleRoot)
-  }, /*#__PURE__*/_react["default"].createElement("label", null, /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.CAPTION, styleCaption)
-  }, _caption), /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
-    style: (0, _extends2["default"])({}, S.INPUT_TEXT, styleInput),
-    initValue: value,
-    maxLength: 20,
-    onEnter: _hEnter
-  })), /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
-    ref: _refCellColor,
-    className: CL_INPUT_COLOR,
-    color: value,
-    onClick: _hClickPallete
-  }, /*#__PURE__*/_react["default"].createElement(_ModalPalette["default"], {
-    isShow: isShowPallete,
-    model: _Model["default"].palette,
-    onClickCell: _hEnter,
-    onClose: _hClosePalette
-  })));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: (0, _extends2["default"])({}, S.ROOT, styleRoot),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: (0, _extends2["default"])({}, S.CAPTION, styleCaption),
+        children: _caption
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
+        style: (0, _extends2["default"])({}, S.INPUT_TEXT, styleInput),
+        initValue: value,
+        maxLength: 20,
+        onEnter: _hEnter
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor["default"], {
+      ref: _refCellColor,
+      className: CL_INPUT_COLOR,
+      color: value,
+      onClick: _hClickPallete,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPalette["default"], {
+        isShow: isShowPallete,
+        model: _Model["default"].palette,
+        onClickCell: _hEnter,
+        onClose: _hClosePalette
+      })
+    })]
+  });
 };
 /*
 RowInputColor.propTypes = {

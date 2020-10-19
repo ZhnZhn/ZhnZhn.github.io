@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _RowOcSelect = _interopRequireDefault(require("./RowOcSelect"));
 
@@ -20,19 +20,20 @@ var RowChart = function RowChart(_ref) {
       options = _ref.options,
       onSelectChart = _ref.onSelectChart,
       onRegColor = _ref.onRegColor;
-  return /*#__PURE__*/_react["default"].createElement(_RowOcSelect["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowOcSelect["default"], {
     isShowLabels: isShowLabels,
     labelStyle: labelStyle,
     caption: "Chart",
     placeholder: placeholder || options[0].caption,
     width: selectWidth,
     options: options,
-    onSelect: onSelectChart
-  }, /*#__PURE__*/_react["default"].createElement(_SeriaColor["default"], {
-    chartType: chartType,
-    isLong: isShowLabels,
-    onReg: onRegColor
-  }));
+    onSelect: onSelectChart,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaColor["default"], {
+      chartType: chartType,
+      isLong: isShowLabels,
+      onReg: onRegColor
+    })
+  });
 };
 
 var _default = RowChart;

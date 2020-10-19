@@ -1,8 +1,5 @@
-import React from 'react'
-
 import FN from './tableFn'
 import S from './Style'
-
 
 const _isFn = fn => typeof fn === 'function';
 

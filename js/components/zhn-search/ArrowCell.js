@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var CL_BT = 'zhn-select__bt-arrow';
 var S = {
@@ -38,14 +38,15 @@ var ArrowCell = function ArrowCell(_ref) {
       _ref$tabIndex = _ref.tabIndex,
       tabIndex = _ref$tabIndex === void 0 ? "-1" : _ref$tabIndex,
       onClick = _ref.onClick;
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     className: CL_BT,
     style: S.ARROW_CELL,
     tabIndex: tabIndex,
-    onClick: onClick
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.ARROW, arrowStyle)
-  }));
+    onClick: onClick,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: (0, _extends2["default"])({}, S.ARROW, arrowStyle)
+    })
+  });
 };
 
 var _default = ArrowCell;

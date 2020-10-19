@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
@@ -30,8 +30,7 @@ var _renderHeaders = function _renderHeaders(headers, _onToggle) {
   /*eslint-enable no-unused-vars*/
 
   return restHeader.map(function (h, index) {
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      key: h.name,
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
       rootStyle: S.ROW,
       checkedColor: "black",
       caption: h.name,
@@ -39,7 +38,7 @@ var _renderHeaders = function _renderHeaders(headers, _onToggle) {
       onToggle: function onToggle() {
         return _onToggle(index);
       }
-    });
+    }, h.name);
   });
 };
 
@@ -51,19 +50,20 @@ var ModalMenu = function ModalMenu(_ref) {
       onToggleGrid = _ref.onToggleGrid,
       headers = _ref.headers,
       onToggle = _ref.onToggle;
-  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup["default"], {
     style: style,
     isShow: isShow,
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-    rootStyle: S.ROW,
-    checkedColor: "black",
-    caption: "withStripLines",
-    value: isGridLine,
-    onToggle: onToggleGrid
-  }), /*#__PURE__*/_react["default"].createElement("hr", {
-    style: S.HR
-  }), _renderHeaders(headers, onToggle));
+    onClose: onClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+      rootStyle: S.ROW,
+      checkedColor: "black",
+      caption: "withStripLines",
+      value: isGridLine,
+      onToggle: onToggleGrid
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
+      style: S.HR
+    }), _renderHeaders(headers, onToggle)]
+  });
 };
 
 var _default = ModalMenu;

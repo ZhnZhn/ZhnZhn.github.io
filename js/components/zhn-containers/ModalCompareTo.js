@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
@@ -57,16 +57,17 @@ var ModalCompareTo = function ModalCompareTo(_ref) {
       _refInput.current.focus();
     }
   }, [isShow]);
-  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup["default"], {
     isShow: isShow,
     style: S.ROOT,
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement(_DivCompareTo["default"], {
-    ref: _refInput,
-    msgErr: msgErr,
-    onTest: isDmy,
-    onEnter: _onEnterDateTo
-  }));
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo["default"], {
+      ref: _refInput,
+      msgErr: msgErr,
+      onTest: isDmy,
+      onEnter: _onEnterDateTo
+    })
+  });
 };
 
 var _default = ModalCompareTo;

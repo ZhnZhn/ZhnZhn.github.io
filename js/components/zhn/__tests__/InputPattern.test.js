@@ -6,9 +6,11 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _jsxRuntime = require("react/jsx-runtime.js");
+
 require("@testing-library/jest-dom");
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 
 var _react2 = require("@testing-library/react");
 
@@ -37,7 +39,7 @@ describe("InputPattern", function () {
           case 0:
             onEnter = jest.fn(), onClear = jest.fn(), onTest = jest.fn(function (str) {
               return str.length < 4;
-            }), ref = /*#__PURE__*/_react["default"].createRef(), initValue = "abc", _render = (0, _react2.render)( /*#__PURE__*/_react["default"].createElement(_InputPattern["default"], {
+            }), ref = /*#__PURE__*/(0, _react.createRef)(), initValue = "abc", _render = (0, _react2.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern["default"], {
               ref: ref,
               initValue: initValue,
               onTest: onTest,
@@ -104,7 +106,7 @@ describe("InputPattern", function () {
             expect(ref.current.isValid()).toBe(true); //4 Test rerender with new initValue without optional handlers
 
             _initValue = "abcde";
-            rerender( /*#__PURE__*/_react["default"].createElement(_InputPattern["default"], {
+            rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern["default"], {
               initValue: _initValue
             }));
             _context.next = 41;

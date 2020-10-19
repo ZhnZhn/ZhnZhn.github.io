@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
@@ -15,12 +15,13 @@ var ChartLegend = function ChartLegend(_ref) {
   var isShow = _ref.isShow,
       legend = _ref.legend,
       onClickItem = _ref.onClickItem;
-  return legend ? /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-    isShow: isShow
-  }, /*#__PURE__*/_react["default"].createElement(_Legend["default"], {
-    legend: legend,
-    onClickItem: onClickItem
-  })) : null;
+  return legend ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+    isShow: isShow,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Legend["default"], {
+      legend: legend,
+      onClickItem: onClickItem
+    })
+  }) : null;
 };
 
 var _default = ChartLegend;

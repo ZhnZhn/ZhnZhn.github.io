@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
@@ -96,31 +96,36 @@ var InputPlus = function InputPlus(_ref) {
   var initValue = _ref.initValue,
       onChangePeriod = _ref.onChangePeriod,
       onPlus = _ref.onPlus;
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_A["default"].InputText, {
-    style: S.PERIOD_INPUT,
-    type: "number",
-    initValue: initValue,
-    min: 1,
-    max: 999,
-    maxLength: 3,
-    onChange: onChangePeriod,
-    onEnter: onPlus
-  }), /*#__PURE__*/_react["default"].createElement(_A["default"].SvgPlus, {
-    style: S.INLINE,
-    onClick: onPlus
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].InputText, {
+      style: S.PERIOD_INPUT,
+      type: "number",
+      initValue: initValue,
+      min: 1,
+      max: 999,
+      maxLength: 3,
+      onChange: onChangePeriod,
+      onEnter: onPlus
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].SvgPlus, {
+      style: S.INLINE,
+      onClick: onPlus
+    })]
+  });
 };
 
 var MinusPeriod = function MinusPeriod(_ref2) {
   var color = _ref2.color,
       period = _ref2.period,
       onMinus = _ref2.onMinus;
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_A["default"].SvgMinus, {
-    style: S.INLINE,
-    onClick: onMinus
-  }), /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.fnSpan(color)
-  }, period));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].SvgMinus, {
+      style: S.INLINE,
+      onClick: onMinus
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S.fnSpan(color),
+      children: period
+    })]
+  });
 };
 /*
 const Defenition = ({ Def }) => Def
@@ -170,58 +175,61 @@ var RowType1 = function RowType1(_ref3) {
     }, _refPeriod.current);
   };
 
-  return /*#__PURE__*/_react["default"].createElement(_A["default"].OpenClose, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].OpenClose, {
     caption: caption,
     style: S.ROOT_OC,
     ocStyle: S.OC,
     captionStyle: S.CAPTION,
     openColor: OC_COLOR,
-    CompAfter: is ? /*#__PURE__*/_react["default"].createElement(MinusPeriod, {
+    CompAfter: is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinusPeriod, {
       color: _refColor.current,
       period: _refPeriod.current,
       onMinus: onMinus
-    }) : /*#__PURE__*/_react["default"].createElement(InputPlus, {
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(InputPlus, {
       initValue: _refPeriod.current,
       onChangePeriod: _onChangePeriod,
       onPlus: _onPlus
+    }),
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.PL_8,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputColor, {
+        styleRoot: S.INLINE,
+        styleCaption: S.NONE,
+        styleInput: S.COLOR_INPUT,
+        initValue: DF_COLOR,
+        onEnter: _onColor
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+        caption: "Column",
+        rootStyle: S1.COLUMN,
+        captionStyle: S.PL_6,
+        checkedColor: OC_COLOR,
+        initValue: true,
+        onToggle: _onToggleColumn
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: S.ROW_2,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputText, {
+          rootStyle: S.INLINE,
+          caption: "For Seria",
+          captionStyle: S.CAPTION_SERIA_INPUT,
+          style: S.SERIA_INPUT,
+          type: "number",
+          initValue: 1,
+          min: 1,
+          max: 9,
+          maxLength: 1,
+          onChange: _onChangeSeria,
+          onEnter: _onPlus
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+          caption: "OnTop",
+          rootStyle: S1.ON_TOP,
+          captionStyle: S.PL_6,
+          checkedColor: OC_COLOR,
+          initValue: false,
+          onToggle: _onToggleTop
+        })]
+      })]
     })
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.PL_8
-  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputColor, {
-    styleRoot: S.INLINE,
-    styleCaption: S.NONE,
-    styleInput: S.COLOR_INPUT,
-    initValue: DF_COLOR,
-    onEnter: _onColor
-  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-    caption: "Column",
-    rootStyle: S1.COLUMN,
-    captionStyle: S.PL_6,
-    checkedColor: OC_COLOR,
-    initValue: true,
-    onToggle: _onToggleColumn
-  }), /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROW_2
-  }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputText, {
-    rootStyle: S.INLINE,
-    caption: "For Seria",
-    captionStyle: S.CAPTION_SERIA_INPUT,
-    style: S.SERIA_INPUT,
-    type: "number",
-    initValue: 1,
-    min: 1,
-    max: 9,
-    maxLength: 1,
-    onChange: _onChangeSeria,
-    onEnter: _onPlus
-  }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-    caption: "OnTop",
-    rootStyle: S1.ON_TOP,
-    captionStyle: S.PL_6,
-    checkedColor: OC_COLOR,
-    initValue: false,
-    onToggle: _onToggleTop
-  }))));
+  });
 };
 
 var _default = RowType1;

@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/components/native-links/QuandlLink.jsx"],"names":["C","ROOT_URI","CAPTION","STYLE","color","QuandlLink","dbCode","dsCode","caption"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE,8BADF;AAERC,EAAAA,OAAO,EAAE,kBAFD;AAGRC,EAAAA,KAAK,EAAE;AACLC,IAAAA,KAAK,EAAE;AADF;AAHC,CAAV;;AAQA,IAAMC,UAAU,GAAG,SAAbA,UAAa;AAAA,yBAAGC,MAAH;AAAA,MAAGA,MAAH,4BAAU,EAAV;AAAA,yBAAcC,MAAd;AAAA,MAAcA,MAAd,4BAAqB,EAArB;AAAA,0BAAyBC,OAAzB;AAAA,MAAyBA,OAAzB,6BAAiCR,CAAC,CAACE,OAAnC;AAAA,sBACjB,gCAAC,gBAAD;AACE,IAAA,KAAK,EAAEF,CAAC,CAACG,KADX;AAEE,IAAA,IAAI,OAAKH,CAAC,CAACC,QAAP,GAAkBK,MAAlB,SAA4BC,MAFlC;AAGE,IAAA,OAAO,EAAKC,OAAL,SAAgBF,MAAhB,SAA0BC;AAHnC,IADiB;AAAA,CAAnB;;eAQeF,U","sourcesContent":["import React from 'react';\r\n\r\nimport Link from './Link'\r\n\r\nconst C = {\r\n  ROOT_URI: 'https://www.quandl.com/data/',\r\n  CAPTION: 'Quandl Data Link',\r\n  STYLE: {\r\n    color: '#e05927'\r\n  }\r\n};\r\n\r\nconst QuandlLink = ({ dbCode='', dsCode='', caption=C.CAPTION }) => (\r\n  <Link\r\n    style={C.STYLE}\r\n    href={`${C.ROOT_URI}${dbCode}/${dsCode}`}\r\n    caption={`${caption} ${dbCode}/${dsCode}`}\r\n  />\r\n);\r\n\r\nexport default QuandlLink\r\n"],"file":"QuandlLink.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/QuandlLink.js"
+ ],
+ "file": "../../../src/components/native-links/QuandlLink.js",
+ "names": [
+  "C",
+  "ROOT_URI",
+  "CAPTION",
+  "STYLE",
+  "color",
+  "QuandlLink",
+  "dbCode",
+  "dsCode",
+  "caption"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE,8BADF;AAERC,EAAAA,OAAO,EAAE,kBAFD;AAGRC,EAAAA,KAAK,EAAE;AACLC,IAAAA,KAAK,EAAE;AADF;AAHC,CAAV;;AAQA,IAAMC,UAAU,GAAG,SAAbA,UAAa;AAAA,yBAAGC,MAAH;AAAA,MAAGA,MAAH,4BAAU,EAAV;AAAA,yBAAcC,MAAd;AAAA,MAAcA,MAAd,4BAAqB,EAArB;AAAA,0BAAyBC,OAAzB;AAAA,MAAyBA,OAAzB,6BAAiCR,CAAC,CAACE,OAAnC;AAAA,sBACjB,qBAAC,gBAAD;AACE,IAAA,KAAK,EAAEF,CAAC,CAACG,KADX;AAEE,IAAA,IAAI,OAAKH,CAAC,CAACC,QAAP,GAAkBK,MAAlB,SAA4BC,MAFlC;AAGE,IAAA,OAAO,EAAKC,OAAL,SAAgBF,MAAhB,SAA0BC;AAHnC,IADiB;AAAA,CAAnB;;eAQeF,U"
+}

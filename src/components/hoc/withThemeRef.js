@@ -1,7 +1,7 @@
-import React from 'react'
+import { forwardRef } from 'react'
 import ThemeContext from './ThemeContext'
 
-const withThemeRef = (Wrapper) => React.forwardRef((props, ref) => (
+const withThemeRef = (Wrapper) => forwardRef((props, ref) => (
   <ThemeContext.Consumer>
     { theme => <Wrapper {...props} theme={theme} ref={ref} /> }
   </ThemeContext.Consumer>

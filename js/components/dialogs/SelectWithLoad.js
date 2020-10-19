@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _RowInputSelect = _interopRequireDefault(require("./rows/RowInputSelect"));
 
@@ -66,7 +66,7 @@ var SelectWithLoad = (0, _withLoadOptions["default"])(_class = (_temp = _class2 
   };
 
   _proto.render = function render() {
-    return /*#__PURE__*/_react["default"].createElement(_RowInputSelect["default"], (0, _extends2["default"])({}, this.props, this.state, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect["default"], (0, _extends2["default"])({}, this.props, this.state, {
       onLoadOption: this._handlerLoadOptions
     }));
   };

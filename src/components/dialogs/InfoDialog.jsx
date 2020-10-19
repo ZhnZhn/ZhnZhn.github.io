@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import STYLE from '../styles/DialogStyles'
 import crModalDialog from './fns/crModalDialog'

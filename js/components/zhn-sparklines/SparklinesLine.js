@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 //import PropTypes from 'prop-types';
 var SparklinesLine = function SparklinesLine(props) {
@@ -35,13 +33,15 @@ var SparklinesLine = function SparklinesLine(props) {
     fillOpacity: style.fillOpacity || '.1',
     fill: style.fill || color || 'slategray'
   };
-  return /*#__PURE__*/_react["default"].createElement("g", null, /*#__PURE__*/_react["default"].createElement("polyline", {
-    points: fillPoints.join(' '),
-    style: fillStyle
-  }), /*#__PURE__*/_react["default"].createElement("polyline", {
-    points: linePoints.join(' '),
-    style: lineStyle
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("polyline", {
+      points: fillPoints.join(' '),
+      style: fillStyle
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("polyline", {
+      points: linePoints.join(' '),
+      style: lineStyle
+    })]
+  });
 };
 /*
 SparklinesLine.propTypes = {

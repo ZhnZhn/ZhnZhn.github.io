@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 //import PropTypes from "prop-types";
 
 import useToggle from '../hooks/useToggle'
@@ -246,7 +246,7 @@ ChartToolbar.propTypes = {
   config: PropTypes.object,
 
   getChart: PropTypes.func,
-  
+
   onMiniChart: PropTypes.func,
   onAddMfi: PropTypes.func,
   onRemoveMfi: PropTypes.func,

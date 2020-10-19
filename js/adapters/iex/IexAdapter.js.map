@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/iex/IexAdapter.js"
- ],
- "file": "../../../src/adapters/iex/IexAdapter.js",
- "names": [
-  "IexAdapter",
-  "Router",
-  "getAdapter",
-  "crDfKey",
-  "_itemKey",
-  "one",
-  "two"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,UAAU,GAAG,2BAAUC,0BAAOC,UAAjB,EAA6B;AAC7CC,EAAAA,OAAO,EAAE;AAAA,QAAGC,QAAH,QAAGA,QAAH;AAAA,wBAAaC,GAAb;AAAA,QAAaA,GAAb,yBAAiB,EAAjB;AAAA,wBAAqBC,GAArB;AAAA,QAAqBA,GAArB,yBAAyB,EAAzB;AAAA,WAAkCF,QAAQ,IAC9CC,GAAG,GAAG,GAAN,GAAYC,GADR;AAAA;AADoC,CAA7B,CAAnB;eAKeN,U"
-}
+{"version":3,"sources":["../../../src/adapters/iex/IexAdapter.js"],"names":["IexAdapter","Router","getAdapter","crDfKey","_itemKey","one","two"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,UAAU,GAAG,2BAAUC,0BAAOC,UAAjB,EAA6B;AAC7CC,EAAAA,OAAO,EAAE;AAAA,QAAGC,QAAH,QAAGA,QAAH;AAAA,wBAAaC,GAAb;AAAA,QAAaA,GAAb,yBAAiB,EAAjB;AAAA,wBAAqBC,GAArB;AAAA,QAAqBA,GAArB,yBAAyB,EAAzB;AAAA,WAAkCF,QAAQ,IAC9CC,GAAG,GAAG,GAAN,GAAYC,GADR;AAAA;AADoC,CAA7B,CAAnB;eAKeN,U","sourcesContent":["import crAdapter from '../crAdapter'\r\nimport Router from './RouterAdapter'\r\n\r\nconst IexAdapter = crAdapter(Router.getAdapter, {\r\n   crDfKey: ({ _itemKey, one='', two='' }) => _itemKey\r\n     || one + '_' + two\r\n});\r\n\r\nexport default IexAdapter\r\n"],"file":"IexAdapter.js"}

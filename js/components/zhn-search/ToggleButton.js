@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ArrowCell = _interopRequireDefault(require("./ArrowCell"));
 
@@ -19,12 +19,12 @@ var S = {
   }
 };
 
-var _loadingEl = /*#__PURE__*/_react["default"].createElement("span", {
+var _loadingEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
   className: CL.SPINNER,
   "data-loader": "circle"
 });
 
-var _loadingFailedEl = /*#__PURE__*/_react["default"].createElement("span", {
+var _loadingFailedEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
   className: CL.SPINNER_FAILED,
   "data-loader": "circle-failed"
 });
@@ -41,7 +41,7 @@ var ToggleButton = function ToggleButton(_ref) {
   } else if (isLoadingFailed) {
     return _loadingFailedEl;
   } else if (options && options.length > 0) {
-    return /*#__PURE__*/_react["default"].createElement(_ArrowCell["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell["default"], {
       arrowStyle: isOptions ? S.ARROW_SHOW : null,
       onClick: toggleOptions
     });

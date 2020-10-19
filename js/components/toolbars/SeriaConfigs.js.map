@@ -1,1 +1,22 @@
-{"version":3,"sources":["../../../src/components/toolbars/SeriaConfigs.jsx"],"names":["S","ROW","paddingTop","fnSpan","color","paddingLeft","SeriaConfigs","configs","onRemove","map","id","bind"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE;AACHC,IAAAA,UAAU,EAAE;AADT,GADG;AAIRC,EAAAA,MAAM,EAAE,gBAAAC,KAAK;AAAA,WAAK;AAChBA,MAAAA,KAAK,EAALA,KADgB;AACTC,MAAAA,WAAW,EAAE;AADJ,KAAL;AAAA;AAJL,CAAV;;AASA,IAAMC,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,MAAYC,QAAZ,QAAYA,QAAZ;AAAA,sBACnB,6CACED,OAAO,CAACE,GAAR,CAAY;AAAA,QAAGC,EAAH,SAAGA,EAAH;AAAA,QAAON,KAAP,SAAOA,KAAP;AAAA,wBACV;AAAK,MAAA,GAAG,EAAEM,EAAV;AAAc,MAAA,KAAK,EAAEV,CAAC,CAACC;AAAvB,oBACE,gCAAC,aAAD,CAAG,QAAH;AAAY,MAAA,OAAO,EAAEO,QAAQ,CAACG,IAAT,CAAc,IAAd,EAAoBD,EAApB;AAArB,MADF,eAEE;AAAM,MAAA,KAAK,EAAEV,CAAC,CAACG,MAAF,CAASC,KAAT;AAAb,OAA+BM,EAA/B,CAFF,CADU;AAAA,GAAZ,CADF,CADmB;AAAA,CAArB;;eAYeJ,Y","sourcesContent":["import React from 'react';\r\n\r\nimport A from '../zhn/A';\r\n\r\nconst S = {\r\n  ROW: {\r\n    paddingTop: 5\r\n  },\r\n  fnSpan: color => ({\r\n    color, paddingLeft: 8\r\n  })\r\n};\r\n\r\nconst SeriaConfigs = ({ configs, onRemove }) => (\r\n  <div>\r\n  { configs.map(({ id, color }) => (\r\n      <div key={id} style={S.ROW}>\r\n        <A.SvgMinus onClick={onRemove.bind(null, id)} />\r\n        <span style={S.fnSpan(color)}>{id}</span>\r\n      </div>\r\n    ))\r\n  }\r\n  </div>\r\n);\r\n\r\nexport default SeriaConfigs\r\n"],"file":"SeriaConfigs.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/SeriaConfigs.js"
+ ],
+ "file": "../../../src/components/toolbars/SeriaConfigs.js",
+ "names": [
+  "S",
+  "ROW",
+  "paddingTop",
+  "fnSpan",
+  "color",
+  "paddingLeft",
+  "SeriaConfigs",
+  "configs",
+  "onRemove",
+  "map",
+  "id",
+  "bind"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE;AACHC,IAAAA,UAAU,EAAE;AADT,GADG;AAIRC,EAAAA,MAAM,EAAE,gBAAAC,KAAK;AAAA,WAAK;AAChBA,MAAAA,KAAK,EAALA,KADgB;AACTC,MAAAA,WAAW,EAAE;AADJ,KAAL;AAAA;AAJL,CAAV;;AASA,IAAMC,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,MAAYC,QAAZ,QAAYA,QAAZ;AAAA,sBACnB;AAAA,cACED,OAAO,CAACE,GAAR,CAAY;AAAA,UAAGC,EAAH,SAAGA,EAAH;AAAA,UAAON,KAAP,SAAOA,KAAP;AAAA,0BACV;AAAc,QAAA,KAAK,EAAEJ,CAAC,CAACC,GAAvB;AAAA,gCACE,qBAAC,aAAD,CAAG,QAAH;AAAY,UAAA,OAAO,EAAEO,QAAQ,CAACG,IAAT,CAAc,IAAd,EAAoBD,EAApB;AAArB,UADF,eAEE;AAAM,UAAA,KAAK,EAAEV,CAAC,CAACG,MAAF,CAASC,KAAT,CAAb;AAAA,oBAA+BM;AAA/B,UAFF;AAAA,SAAUA,EAAV,CADU;AAAA,KAAZ;AADF,IADmB;AAAA,CAArB;;eAYeJ,Y"
+}

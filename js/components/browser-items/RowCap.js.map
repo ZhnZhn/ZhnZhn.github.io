@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../src/components/browser-items/RowCap.jsx"],"names":["NA","STYLE","CAP","paddingRight","SALE_PRICE","display","color","width","IPO","_capFormatter","minimumFractionDigits","maximumFractionDigits","_formatter","RowCap","cap","salePrice","ipo","_cap","format","_salePrice"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,EAAE,GAAG,KAAX;AAEA,IAAMC,KAAK,GAAG;AACZC,EAAAA,GAAG,EAAG;AACJC,IAAAA,YAAY,EAAE;AADV,GADM;AAIZC,EAAAA,UAAU,EAAG;AACXC,IAAAA,OAAO,EAAE,gBADE;AAEXC,IAAAA,KAAK,EAAE,mBAFI;AAGXH,IAAAA,YAAY,EAAE,CAHH;AAIXI,IAAAA,KAAK,EAAE,EAJI;AAKX,aAAO;AALI,GAJD;AAWZC,EAAAA,GAAG,EAAG;AACJH,IAAAA,OAAO,EAAE,gBADL;AAEJC,IAAAA,KAAK,EAAE,mBAFH;AAGJC,IAAAA,KAAK,EAAE,EAHH;AAIJ,aAAO;AAJH;AAXM,CAAd;;AAmBA,IAAME,aAAa,GAAG,qCAAoB;AACxCC,EAAAA,qBAAqB,EAAE,CADiB;AAExCC,EAAAA,qBAAqB,EAAE;AAFiB,CAApB,CAAtB;;AAIA,IAAMC,UAAU,GAAG,sCAAnB;;AAEA,IAAMC,MAAM,GAAG,SAATA,MAAS,OAA6B;AAAA,MAA1BC,GAA0B,QAA1BA,GAA0B;AAAA,MAArBC,SAAqB,QAArBA,SAAqB;AAAA,MAAVC,GAAU,QAAVA,GAAU;;AAC1C,MAAMC,IAAI,GAAIH,GAAG,KAAK,CAAT,GACFd,EADE,GAEFS,aAAa,CAACS,MAAd,CAAqBJ,GAArB,CAFX;AAAA,MAGMK,UAAU,GAAIL,GAAG,KAAKd,EAAR,IAAcc,GAAG,KAAK,CAAvB,GACRF,UAAU,CAACM,MAAX,CAAkBH,SAAlB,CADQ,GAERf,EALX;;AAMA,sBACE,0DACG;AAAM,IAAA,KAAK,EAAEC,KAAK,CAACC;AAAnB,KACGe,IADH,CADH,eAIG;AAAM,IAAA,KAAK,EAAEhB,KAAK,CAACO;AAAnB,cACUQ,GADV,CAJH,eAOG;AAAM,IAAA,KAAK,EAAEf,KAAK,CAACG;AAAnB,KACGe,UADH,CAPH,CADF;AAaD,CApBD;;eAsBeN,M","sourcesContent":["import React from 'react';\r\n\r\nimport crCurrencyFormatter from '../../utils/crCurrencyFormatter'\r\n\r\nconst NA = 'n/a';\r\n\r\nconst STYLE = {\r\n  CAP : {\r\n    paddingRight: 8\r\n  },\r\n  SALE_PRICE : {\r\n    display: 'display-inline',\r\n    color: 'rgb(47, 126, 216)',\r\n    paddingRight: 8,\r\n    width: 90,\r\n    float: 'right'\r\n  },\r\n  IPO : {\r\n    display: 'display-inline',\r\n    color: 'rgb(253, 179, 22)',\r\n    width: 70,\r\n    float: 'right'\r\n  }\r\n}\r\n\r\nconst _capFormatter = crCurrencyFormatter({\r\n  minimumFractionDigits: 0,\r\n  maximumFractionDigits: 0\r\n});\r\nconst _formatter = crCurrencyFormatter();\r\n\r\nconst RowCap = ({ cap, salePrice, ipo }) => {\r\n  const _cap = (cap === 0)\r\n           ? NA\r\n           : _capFormatter.format(cap)\r\n      , _salePrice = (cap !== NA && cap !== 0)\r\n           ? _formatter.format(salePrice)\r\n           : NA;\r\n  return (\r\n    <div>\r\n       <span style={STYLE.CAP}>\r\n         {_cap}\r\n       </span>\r\n       <span style={STYLE.IPO}>\r\n         {`ipo ${ipo}`}\r\n       </span>\r\n       <span style={STYLE.SALE_PRICE}>\r\n         {_salePrice}\r\n       </span>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default RowCap\r\n"],"file":"RowCap.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-items/RowCap.js"
+ ],
+ "file": "../../../src/components/browser-items/RowCap.js",
+ "names": [
+  "NA",
+  "STYLE",
+  "CAP",
+  "paddingRight",
+  "SALE_PRICE",
+  "display",
+  "color",
+  "width",
+  "IPO",
+  "_capFormatter",
+  "minimumFractionDigits",
+  "maximumFractionDigits",
+  "_formatter",
+  "RowCap",
+  "cap",
+  "salePrice",
+  "ipo",
+  "_cap",
+  "format",
+  "_salePrice"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,EAAE,GAAG,KAAX;AAEA,IAAMC,KAAK,GAAG;AACZC,EAAAA,GAAG,EAAG;AACJC,IAAAA,YAAY,EAAE;AADV,GADM;AAIZC,EAAAA,UAAU,EAAG;AACXC,IAAAA,OAAO,EAAE,gBADE;AAEXC,IAAAA,KAAK,EAAE,mBAFI;AAGXH,IAAAA,YAAY,EAAE,CAHH;AAIXI,IAAAA,KAAK,EAAE,EAJI;AAKX,aAAO;AALI,GAJD;AAWZC,EAAAA,GAAG,EAAG;AACJH,IAAAA,OAAO,EAAE,gBADL;AAEJC,IAAAA,KAAK,EAAE,mBAFH;AAGJC,IAAAA,KAAK,EAAE,EAHH;AAIJ,aAAO;AAJH;AAXM,CAAd;;AAmBA,IAAME,aAAa,GAAG,qCAAoB;AACxCC,EAAAA,qBAAqB,EAAE,CADiB;AAExCC,EAAAA,qBAAqB,EAAE;AAFiB,CAApB,CAAtB;;AAIA,IAAMC,UAAU,GAAG,sCAAnB;;AAEA,IAAMC,MAAM,GAAG,SAATA,MAAS,OAA6B;AAAA,MAA1BC,GAA0B,QAA1BA,GAA0B;AAAA,MAArBC,SAAqB,QAArBA,SAAqB;AAAA,MAAVC,GAAU,QAAVA,GAAU;;AAC1C,MAAMC,IAAI,GAAIH,GAAG,KAAK,CAAT,GACFd,EADE,GAEFS,aAAa,CAACS,MAAd,CAAqBJ,GAArB,CAFX;AAAA,MAGMK,UAAU,GAAIL,GAAG,KAAKd,EAAR,IAAcc,GAAG,KAAK,CAAvB,GACRF,UAAU,CAACM,MAAX,CAAkBH,SAAlB,CADQ,GAERf,EALX;;AAMA,sBACE;AAAA,4BACG;AAAM,MAAA,KAAK,EAAEC,KAAK,CAACC,GAAnB;AAAA,gBACGe;AADH,MADH,eAIG;AAAM,MAAA,KAAK,EAAEhB,KAAK,CAACO,GAAnB;AAAA,yBACUQ;AADV,MAJH,eAOG;AAAM,MAAA,KAAK,EAAEf,KAAK,CAACG,UAAnB;AAAA,gBACGe;AADH,MAPH;AAAA,IADF;AAaD,CApBD;;eAsBeN,M"
+}

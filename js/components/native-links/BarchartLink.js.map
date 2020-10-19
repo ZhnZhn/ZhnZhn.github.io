@@ -1,1 +1,15 @@
-{"version":3,"sources":["../../../src/components/native-links/BarchartLink.jsx"],"names":["C","URL","BarchartLink","item","style"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE;AADG,CAAV;;AAIA,IAAMC,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SAAqBD,IAAI,gBACzC,gCAAC,gBAAD;AACC,IAAA,KAAK,EAAEC,KADR;AAEC,IAAA,IAAI,EAAKJ,CAAC,CAACC,GAAP,SAAcE,IAAd,cAFL;AAGC,IAAA,OAAO,gBAAcA;AAHtB,IADyC,GAM1C,IANiB;AAAA,CAArB;;eAQeD,Y","sourcesContent":["import React from 'react'\r\n\r\nimport Link from './Link'\r\n\r\nconst C = {\r\n  URL: 'https://www.barchart.com/futures/quotes'\r\n};\r\n\r\nconst BarchartLink = ({ item, style }) => item\r\n  ? (<Link\r\n      style={style}\r\n      href={`${C.URL}/${item}/overview`}\r\n      caption={`Barchart ${item}`}\r\n     />)\r\n  : null;\r\n\r\nexport default BarchartLink\r\n"],"file":"BarchartLink.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/BarchartLink.js"
+ ],
+ "file": "../../../src/components/native-links/BarchartLink.js",
+ "names": [
+  "C",
+  "URL",
+  "BarchartLink",
+  "item",
+  "style"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE;AADG,CAAV;;AAIA,IAAMC,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SAAqBD,IAAI,gBACzC,qBAAC,gBAAD;AACC,IAAA,KAAK,EAAEC,KADR;AAEC,IAAA,IAAI,EAAKJ,CAAC,CAACC,GAAP,SAAcE,IAAd,cAFL;AAGC,IAAA,OAAO,gBAAcA;AAHtB,IADyC,GAM1C,IANiB;AAAA,CAArB;;eAQeD,Y"
+}

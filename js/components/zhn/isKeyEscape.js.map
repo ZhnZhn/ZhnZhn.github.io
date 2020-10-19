@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/zhn/isKeyEscape.js"
- ],
- "file": "../../../src/components/zhn/isKeyEscape.js",
- "names": [
-  "isKeyEscape",
-  "evt",
-  "keyCode",
-  "key"
- ],
- "mappings": ";;;;;AAAA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAAAC,GAAG;AAAA,SAAIA,GAAG,CAACC,OAAJ,KAAgB,EAAhB,IACvBD,GAAG,CAACE,GAAJ,KAAY,QADO;AAAA,CAAvB;;eAGeH,W"
-}
+{"version":3,"sources":["../../../src/components/zhn/isKeyEscape.js"],"names":["isKeyEscape","evt","keyCode","key"],"mappings":";;;;;AAAA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAAAC,GAAG;AAAA,SAAIA,GAAG,CAACC,OAAJ,KAAgB,EAAhB,IACvBD,GAAG,CAACE,GAAJ,KAAY,QADO;AAAA,CAAvB;;eAGeH,W","sourcesContent":["const isKeyEscape = evt => evt.keyCode === 27\r\n || evt.key === 'Escape';\r\n\r\nexport default isKeyEscape \r\n"],"file":"isKeyEscape.js"}

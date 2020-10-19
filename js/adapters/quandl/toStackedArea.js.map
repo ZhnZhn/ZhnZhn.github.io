@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/quandl/toStackedArea.js"
- ],
- "file": "../../../src/adapters/quandl/toStackedArea.js",
- "names": [
-  "crConfig",
-  "fnStacked",
-  "toStackedArea",
-  "json",
-  "option",
-  "percentType",
-  "ChartType",
-  "STACKED_AREA_PERCENT"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;IAEQA,Q,GAAaC,qB,CAAbD,Q;;AAER,IAAME,aAAa,GAAG,SAAhBA,aAAgB,CAACC,IAAD,EAAOC,MAAP;AAAA,SAAkBJ,QAAQ,CAAC;AAC/CK,IAAAA,WAAW,EAAEC,gBAAUC,oBADwB;AAE/CJ,IAAAA,IAAI,EAAJA,IAF+C;AAEzCC,IAAAA,MAAM,EAANA;AAFyC,GAAD,CAA1B;AAAA,CAAtB;;eAKeF,a"
-}
+{"version":3,"sources":["../../../src/adapters/quandl/toStackedArea.js"],"names":["crConfig","fnStacked","toStackedArea","json","option","percentType","ChartType","STACKED_AREA_PERCENT"],"mappings":";;;;;;;AAAA;;AACA;;IAEQA,Q,GAAaC,qB,CAAbD,Q;;AAER,IAAME,aAAa,GAAG,SAAhBA,aAAgB,CAACC,IAAD,EAAOC,MAAP;AAAA,SAAkBJ,QAAQ,CAAC;AAC/CK,IAAAA,WAAW,EAAEC,gBAAUC,oBADwB;AAE/CJ,IAAAA,IAAI,EAAJA,IAF+C;AAEzCC,IAAAA,MAAM,EAANA;AAFyC,GAAD,CAA1B;AAAA,CAAtB;;eAKeF,a","sourcesContent":["import { ChartType } from '../../constants/Type';\r\nimport fnStacked from './fnStacked'\r\n\r\nconst { crConfig } = fnStacked;\r\n\r\nconst toStackedArea = (json, option) => crConfig({\r\n  percentType: ChartType.STACKED_AREA_PERCENT,\r\n  json, option\r\n});\r\n\r\nexport default toStackedArea\r\n"],"file":"toStackedArea.js"}

@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 //import PropTypes from "prop-types";
 var CL = {
@@ -25,12 +23,15 @@ var ButtonCircle = function ButtonCircle(_ref) {
 
   var _className = isOverwriteClass ? className + " " + CL.NOT : CL.ROOT + " " + className + " " + CL.NOT;
 
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     className: _className,
     style: style,
     title: title,
-    onClick: onClick
-  }, /*#__PURE__*/_react["default"].createElement("div", null, caption));
+    onClick: onClick,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      children: caption
+    })
+  });
 };
 /*
 ButtonCircle.propTypes = {

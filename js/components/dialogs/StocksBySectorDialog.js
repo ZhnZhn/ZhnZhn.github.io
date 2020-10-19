@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ChartActions = _interopRequireDefault(require("../../flux/actions/ChartActions"));
 
@@ -205,13 +205,11 @@ var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
       title: 'Click to toggle options',
       onClick: _this._hClickLink
     }];
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Load, {
-      key: "load",
+    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Load, {
       onClick: _this._hLoad
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Show, {
-      key: "show",
+    }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Show, {
       onClick: _this._hShow
-    })];
+    }, "show")];
     _this.state = (0, _extends2["default"])({}, _createInitialState(props), {
       isShowLabels: true
     });
@@ -251,33 +249,37 @@ var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
         _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
         _linkStyle = isShowLabels ? S.LINK : (0, _extends2["default"])({}, S.LINK, S.LINK_NOT_LABELS);
 
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
       caption: text,
       style: _style,
       styleCaption: S.CAPTION_SPAN,
       isShow: isShow,
       commandButtons: this._commandButtons,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ToolbarButtonCircle, {
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      isShowLabels: isShowLabels,
-      caption: "Source",
-      placeholder: DF_SOURCE.caption,
-      options: SOURCE_OPTIONS,
-      onSelect: this._hSelectDataSource
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowLink,
-      style: S.LINK_SHOW_HIDE
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Plain, {
-      style: S.LINK_ROOT
-    }, isShowLabels && /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.LINK_CAPTION
-    }, "Link:"), /*#__PURE__*/_react["default"].createElement(_NasdaqLink["default"], {
-      style: _linkStyle,
-      item: item,
-      caption: "NASDAQ"
-    }))));
+      onClose: onClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ToolbarButtonCircle, {
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+        isShowLabels: isShowLabels,
+        caption: "Source",
+        placeholder: DF_SOURCE.caption,
+        options: SOURCE_OPTIONS,
+        onSelect: this._hSelectDataSource
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowLink,
+        style: S.LINK_SHOW_HIDE,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].Row.Plain, {
+          style: S.LINK_ROOT,
+          children: [isShowLabels && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            style: S.LINK_CAPTION,
+            children: "Link:"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqLink["default"], {
+            style: _linkStyle,
+            item: item,
+            caption: "NASDAQ"
+          })]
+        })
+      })]
+    });
   };
 
   return StocksBySectorDialog;

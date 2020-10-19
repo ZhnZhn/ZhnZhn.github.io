@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
@@ -27,34 +27,36 @@ var S = {
 };
 var SparkFactory = {
   createSparklines: function createSparklines(data, pointIndex) {
-    return /*#__PURE__*/_react["default"].createElement(_Sparklines.Sparklines, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Sparklines.Sparklines, {
       height: 45,
       width: 100,
       svgHeight: 45,
       svgWidth: 100,
-      data: data
-    }, /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesLine, {
-      color: C_YELLOW
-    }), /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesReferenceLine, {
-      style: S.REF_LINE,
-      type: "avg"
-    }), /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesSpots, null), /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesSpot, {
-      pointIndex: pointIndex
-    }));
+      data: data,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesLine, {
+        color: C_YELLOW
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesReferenceLine, {
+        style: S.REF_LINE,
+        type: "avg"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesSpots, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesSpot, {
+        pointIndex: pointIndex
+      })]
+    });
   },
   createSparkbars: function createSparkbars(data, pointIndex) {
-    return /*#__PURE__*/_react["default"].createElement(_Sparklines.Sparklines, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.Sparklines, {
       height: 45,
       width: 100,
       svgHeight: 45,
       svgWidth: 100,
       data: data,
       min: 0,
-      max: 100
-    }, /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesBars, {
-      style: S.BARS,
-      pointIndex: pointIndex
-    }));
+      max: 100,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesBars, {
+        style: S.BARS,
+        pointIndex: pointIndex
+      })
+    });
   }
 };
 var _default = SparkFactory;

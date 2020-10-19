@@ -1,5 +1,3 @@
-import React from 'react'
-
 import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
 import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
@@ -59,7 +57,7 @@ const HeaderBar = ({ store, showSettings }) => {
   const [isTopics, toggleTopics] = useToggle(false)
   , [refBt, _toggleTopics] = useFnFocus(toggleTopics)
   , TS = useTheme(ID);
-  
+
   return (
     <div className={CL.HEADER} style={TS.ROOT} >
        <ProgressLoading store={store} ACTIONS={LPAT} />

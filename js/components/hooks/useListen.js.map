@@ -1,15 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/hooks/useListen.js"
- ],
- "file": "../../../src/components/hooks/useListen.js",
- "names": [
-  "useListen",
-  "store",
-  "onStore",
-  "propNameListen",
-  "unsubscribe"
- ],
- "mappings": ";;;;;AAAA;;AAEA;AACA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,KAAD,EAAQC,OAAR,EAAiBC,cAAjB,EAA6C;AAAA,MAA5BA,cAA4B;AAA5BA,IAAAA,cAA4B,GAAb,QAAa;AAAA;;AAC7D,wBAAU,YAAM;AACd,QAAMC,WAAW,GAAGH,KAAK,CAACE,cAAD,CAAL,CAAsBD,OAAtB,CAApB;AACA,WAAOE,WAAP;AACD,GAHD,EAGG,EAHH;AAID,CALD;AAMA;;;eAEeJ,S"
-}
+{"version":3,"sources":["../../../src/components/hooks/useListen.js"],"names":["useListen","store","onStore","propNameListen","unsubscribe"],"mappings":";;;;;AAAA;;AAEA;AACA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,KAAD,EAAQC,OAAR,EAAiBC,cAAjB,EAA6C;AAAA,MAA5BA,cAA4B;AAA5BA,IAAAA,cAA4B,GAAb,QAAa;AAAA;;AAC7D,wBAAU,YAAM;AACd,QAAMC,WAAW,GAAGH,KAAK,CAACE,cAAD,CAAL,CAAsBD,OAAtB,CAApB;AACA,WAAOE,WAAP;AACD,GAHD,EAGG,EAHH;AAID,CALD;AAMA;;;eAEeJ,S","sourcesContent":["import { useEffect } from 'react'\r\n\r\n/*eslint-disable react-hooks/exhaustive-deps */\r\nconst useListen = (store, onStore, propNameListen='listen') => {\r\n  useEffect(() => {\r\n    const unsubscribe = store[propNameListen](onStore)\r\n    return unsubscribe;\r\n  }, [])\r\n}\r\n/*eslint-enable react-hooks/exhaustive-deps */\r\n\r\nexport default useListen\r\n"],"file":"useListen.js"}

@@ -1,7 +1,7 @@
-import React from 'react'
+import { cloneElement } from 'react'
 
 const PageList = ({ pages, pageCurrent }) => pages
- .map((page, index) => React.cloneElement(page, {
+ .map((page, index) => cloneElement(page, {
      pageCurrent,
      pageNumber: index + 1
   }));

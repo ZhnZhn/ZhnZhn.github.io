@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import RowType2 from './RowType2'
 import IndicatorBuilder from '../../charts/IndicatorBuilder';

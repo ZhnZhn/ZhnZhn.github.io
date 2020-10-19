@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -13,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
@@ -210,48 +210,51 @@ var DialogType3 = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PU
         isShowDate = _this$state.isShowDate,
         validationMessages = _this$state.validationMessages;
 
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       menuModel: this._menuMore,
       caption: caption,
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: this._handleClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: isToolbar,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
-      isShow: isShow,
-      isShowLabels: isShowLabels,
-      placeholder: onePlaceholder,
-      uri: _oneURI,
-      jsonProp: optionsJsonProp,
-      caption: _oneCaption,
-      optionNames: optionNames,
-      isWithInput: isWithInputStock,
-      onSelect: this._handleSelectStock
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowTransform
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      isShowLabels: isShowLabels,
-      caption: "Transform",
-      options: transformOptions,
-      onSelect: this._handleSelectTransform
-    })), !noDate && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowDate
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
-      ref: function ref(c) {
-        return _this2.datesFragment = c;
-      },
-      isShowLabels: isShowLabels,
-      initFromDate: initFromDate,
-      initToDate: initToDate,
-      msgOnNotValidFormat: msgOnNotValidFormat,
-      onTestDate: onTestDate
-    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
-      validationMessages: validationMessages
-    }));
+      onClose: this._handleClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: isToolbar,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, {
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        placeholder: onePlaceholder,
+        uri: _oneURI,
+        jsonProp: optionsJsonProp,
+        caption: _oneCaption,
+        optionNames: optionNames,
+        isWithInput: isWithInputStock,
+        onSelect: this._handleSelectStock
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowTransform,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+          isShowLabels: isShowLabels,
+          caption: "Transform",
+          options: transformOptions,
+          onSelect: this._handleSelectTransform
+        })
+      }), !noDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowDate,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
+          ref: function ref(c) {
+            return _this2.datesFragment = c;
+          },
+          isShowLabels: isShowLabels,
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          msgOnNotValidFormat: msgOnNotValidFormat,
+          onTestDate: onTestDate
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
+        validationMessages: validationMessages
+      })]
+    });
   };
 
   return DialogType3;

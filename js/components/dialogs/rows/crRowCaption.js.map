@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/dialogs/rows/crRowCaption.js"
- ],
- "file": "../../../../src/components/dialogs/rows/crRowCaption.js",
- "names": [
-  "crRowCaption",
-  "caption",
-  "STYLE"
- ],
- "mappings": ";;;;;;;AACA;;AAEA,IAAMA,YAAY,GAAG,SAAfA,YAAe,CAACC,OAAD;AAAA,MAACA,OAAD;AAACA,IAAAA,OAAD,GAAS,EAAT;AAAA;;AAAA,SAAiB;AACpCA,IAAAA,OAAO,EAAEC,yBAAMF,YAAN,CAAmBC,OAAnB;AAD2B,GAAjB;AAAA,CAArB;;eAIeD,Y"
-}
+{"version":3,"sources":["../../../../src/components/dialogs/rows/crRowCaption.js"],"names":["crRowCaption","caption","STYLE"],"mappings":";;;;;;;AACA;;AAEA,IAAMA,YAAY,GAAG,SAAfA,YAAe,CAACC,OAAD;AAAA,MAACA,OAAD;AAACA,IAAAA,OAAD,GAAS,EAAT;AAAA;;AAAA,SAAiB;AACpCA,IAAAA,OAAO,EAAEC,yBAAMF,YAAN,CAAmBC,OAAnB;AAD2B,GAAjB;AAAA,CAArB;;eAIeD,Y","sourcesContent":["\r\nimport STYLE from '../../styles/DialogStyles';\r\n\r\nconst crRowCaption = (caption='') => ({\r\n  caption: STYLE.crRowCaption(caption)\r\n});\r\n\r\nexport default crRowCaption\r\n"],"file":"crRowCaption.js"}

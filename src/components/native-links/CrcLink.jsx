@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Link from './Link'
 
 const URL = 'https://www.cryptocompare.com/coins/';

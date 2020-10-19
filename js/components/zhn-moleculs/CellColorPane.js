@@ -5,7 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _CellColor = _interopRequireDefault(require("./CellColor"));
 
@@ -21,8 +23,7 @@ var S = {
     margin: 4
   }
 };
-
-var CellColorPane = /*#__PURE__*/_react["default"].memo(function (_ref) {
+var CellColorPane = /*#__PURE__*/(0, _react.memo)(function (_ref) {
   var model = _ref.model,
       onClickCell = _ref.onClickCell;
   var rows = model.rows,
@@ -39,26 +40,25 @@ var CellColorPane = /*#__PURE__*/_react["default"].memo(function (_ref) {
     for (c = 0; c < cols; c++) {
       _color = colors[r * cols + c];
 
-      _elCells.push( /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
-        key: _color,
+      _elCells.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor["default"], {
         className: CL_INPUT_COLOR,
         style: S.COLOR,
         color: _color,
         onClick: onClickCell.bind(null, _color)
-      }));
+      }, _color));
     }
 
-    _elRows.push( /*#__PURE__*/_react["default"].createElement("div", {
-      key: _idPrefix + r,
-      style: S.ROW
-    }, _elCells));
+    _elRows.push( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: S.ROW,
+      children: _elCells
+    }, _idPrefix + r));
   }
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.PANE
-  }, _elRows);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: S.PANE,
+    children: _elRows
+  });
 });
-
 var _default = CellColorPane;
 exports["default"] = _default;
 //# sourceMappingURL=CellColorPane.js.map

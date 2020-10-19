@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../../src/components/zhn-moleculs/ModalPane.jsx"],"names":["TH_ID","_removeClickListener","listener","ref","current","document","removeEventListener","ModalPane","isShow","style","children","onClose","_refNode","_refIs","_hClickOutside","event","contains","target","stopPropagation","addEventListener","TS","ROOT"],"mappings":";;;;;;;;;;;AAAA;;AAGA;;AAFA;AAIA,IAAMA,KAAK,GAAG,YAAd;;AAEA,IAAMC,oBAAoB,GAAG,SAAvBA,oBAAuB,CAACC,QAAD,EAAWC,GAAX,EAAmB;AAC9C,MAAIA,GAAG,CAACC,OAAR,EAAiB;AAChBC,IAAAA,QAAQ,CAACC,mBAAT,CAA6B,OAA7B,EAAsCJ,QAAtC,EAAgD,IAAhD;AACAC,IAAAA,GAAG,CAACC,OAAJ,GAAc,IAAd;AACA;AACF,CALD;AAOA;;;AACA,IAAMG,SAAS,GAAG,SAAZA,SAAY,OAIZ;AAAA,MAHJC,MAGI,QAHJA,MAGI;AAAA,MAHIC,KAGJ,QAHIA,KAGJ;AAAA,MAFJC,QAEI,QAFJA,QAEI;AAAA,MADJC,OACI,QADJA,OACI;;AACJ,MAAMC,QAAQ,GAAG,mBAAO,IAAP,CAAjB;AAAA,MACEC,MAAM,GAAG,mBAAO,IAAP,CADX;AAAA,MAEEC,cAAc,GAAG,wBAAY,UAAAC,KAAK,EAAI;AAAA;;AACpC,QAAK,CAAAH,QAAQ,QAAR,gCAAAA,QAAQ,CAAER,OAAV,sCAAmBY,QAAnB,KACA,CAACJ,QAAQ,CAACR,OAAT,CAAiBY,QAAjB,CAA0BD,KAAK,CAACE,MAAhC,CADN,EAEC;AACCF,MAAAA,KAAK,CAACG,eAAN;AACAP,MAAAA,OAAO,CAACI,KAAD,CAAP;AACD;AACJ,GAPkB,EAOhB,EAPgB,CAFnB;;AAWA,wBAAU,YAAM;AACd,QAAIP,MAAM,IAAI,CAACK,MAAM,CAACT,OAAtB,EAA+B;AAC7BC,MAAAA,QAAQ,CAACc,gBAAT,CAA0B,OAA1B,EAAmCL,cAAnC,EAAmD,IAAnD;AACAD,MAAAA,MAAM,CAACT,OAAP,GAAiB,IAAjB;AACD,KAHD,MAGO,IAAI,CAACI,MAAL,EAAa;AAClBP,MAAAA,oBAAoB,CAACa,cAAD,EAAiBD,MAAjB,CAApB;AACD;AACF,GAPD;AAQA,wBAAU,YAAM;AACd,WAAO;AAAA,aAAMZ,oBAAoB,CAACa,cAAD,EAAiBD,MAAjB,CAA1B;AAAA,KAAP;AACD,GAFD,EAEG,EAFH;AAGF;;AAEE,MAAMO,EAAE,GAAG,0BAASpB,KAAT,CAAX;AACA,sBACE;AACG,IAAA,GAAG,EAAEY,QADR;AAEG,IAAA,KAAK,gCAAMH,KAAN,EAAgBW,EAAE,CAACC,IAAnB;AAFR,KAIGX,QAJH,CADF;AAQD,CAtCD;AAwCA;;;;;;;;;;eASeH,S","sourcesContent":["import React, { useRef, useCallback, useEffect } from 'react'\r\n//import PropTypes from 'prop-types'\r\n\r\nimport useTheme from '../hooks/useTheme'\r\n\r\nconst TH_ID = 'MODAL_PANE';\r\n\r\nconst _removeClickListener = (listener, ref) => {\r\n  if (ref.current) {\r\n   document.removeEventListener('click', listener, true);\r\n   ref.current = null\r\n  }\r\n};\r\n\r\n/*eslint-disable react-hooks/exhaustive-deps */\r\nconst ModalPane = ({\r\n  isShow, style,\r\n  children,\r\n  onClose\r\n}) => {\r\n  const _refNode = useRef(null)\r\n  , _refIs = useRef(null)\r\n  , _hClickOutside = useCallback(event => {\r\n      if ( _refNode?.current?.contains\r\n        && !_refNode.current.contains(event.target)\r\n      ){\r\n        event.stopPropagation()\r\n        onClose(event)\r\n      }\r\n  }, []);\r\n\r\n  useEffect(() => {\r\n    if (isShow && !_refIs.current) {\r\n      document.addEventListener('click', _hClickOutside, true)\r\n      _refIs.current = true\r\n    } else if (!isShow) {\r\n      _removeClickListener(_hClickOutside, _refIs)\r\n    }\r\n  })\r\n  useEffect(() => {\r\n    return () => _removeClickListener(_hClickOutside, _refIs)\r\n  }, [])\r\n/*eslint-enable react-hooks/exhaustive-deps */\r\n\r\n  const TS = useTheme(TH_ID);\r\n  return (\r\n    <div\r\n       ref={_refNode}\r\n       style={{...style, ...TS.ROOT}}\r\n    >\r\n      {children}\r\n    </div>\r\n  );\r\n}\r\n\r\n/*\r\nModalPane.propTypes = {\r\n className: PropTypes.string,\r\n style: PropTypes.object,\r\n isShow: PropTypes.bool,\r\n onClose: PropTypes.func\r\n}\r\n*/\r\n\r\nexport default ModalPane\r\n"],"file":"ModalPane.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-moleculs/ModalPane.js"
+ ],
+ "file": "../../../src/components/zhn-moleculs/ModalPane.js",
+ "names": [
+  "TH_ID",
+  "_removeClickListener",
+  "listener",
+  "ref",
+  "current",
+  "document",
+  "removeEventListener",
+  "ModalPane",
+  "isShow",
+  "style",
+  "children",
+  "onClose",
+  "_refNode",
+  "_refIs",
+  "_hClickOutside",
+  "event",
+  "contains",
+  "target",
+  "stopPropagation",
+  "addEventListener",
+  "TS",
+  "ROOT"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AAGA;;AAFA;AAIA,IAAMA,KAAK,GAAG,YAAd;;AAEA,IAAMC,oBAAoB,GAAG,SAAvBA,oBAAuB,CAACC,QAAD,EAAWC,GAAX,EAAmB;AAC9C,MAAIA,GAAG,CAACC,OAAR,EAAiB;AAChBC,IAAAA,QAAQ,CAACC,mBAAT,CAA6B,OAA7B,EAAsCJ,QAAtC,EAAgD,IAAhD;AACAC,IAAAA,GAAG,CAACC,OAAJ,GAAc,IAAd;AACA;AACF,CALD;AAOA;;;AACA,IAAMG,SAAS,GAAG,SAAZA,SAAY,OAIZ;AAAA,MAHJC,MAGI,QAHJA,MAGI;AAAA,MAHIC,KAGJ,QAHIA,KAGJ;AAAA,MAFJC,QAEI,QAFJA,QAEI;AAAA,MADJC,OACI,QADJA,OACI;;AACJ,MAAMC,QAAQ,GAAG,mBAAO,IAAP,CAAjB;AAAA,MACEC,MAAM,GAAG,mBAAO,IAAP,CADX;AAAA,MAEEC,cAAc,GAAG,wBAAY,UAAAC,KAAK,EAAI;AAAA;;AACpC,QAAK,CAAAH,QAAQ,QAAR,gCAAAA,QAAQ,CAAER,OAAV,sCAAmBY,QAAnB,KACA,CAACJ,QAAQ,CAACR,OAAT,CAAiBY,QAAjB,CAA0BD,KAAK,CAACE,MAAhC,CADN,EAEC;AACCF,MAAAA,KAAK,CAACG,eAAN;AACAP,MAAAA,OAAO,CAACI,KAAD,CAAP;AACD;AACJ,GAPkB,EAOhB,EAPgB,CAFnB;;AAWA,wBAAU,YAAM;AACd,QAAIP,MAAM,IAAI,CAACK,MAAM,CAACT,OAAtB,EAA+B;AAC7BC,MAAAA,QAAQ,CAACc,gBAAT,CAA0B,OAA1B,EAAmCL,cAAnC,EAAmD,IAAnD;AACAD,MAAAA,MAAM,CAACT,OAAP,GAAiB,IAAjB;AACD,KAHD,MAGO,IAAI,CAACI,MAAL,EAAa;AAClBP,MAAAA,oBAAoB,CAACa,cAAD,EAAiBD,MAAjB,CAApB;AACD;AACF,GAPD;AAQA,wBAAU,YAAM;AACd,WAAO;AAAA,aAAMZ,oBAAoB,CAACa,cAAD,EAAiBD,MAAjB,CAA1B;AAAA,KAAP;AACD,GAFD,EAEG,EAFH;AAGF;;AAEE,MAAMO,EAAE,GAAG,0BAASpB,KAAT,CAAX;AACA,sBACE;AACG,IAAA,GAAG,EAAEY,QADR;AAEG,IAAA,KAAK,gCAAMH,KAAN,EAAgBW,EAAE,CAACC,IAAnB,CAFR;AAAA,cAIGX;AAJH,IADF;AAQD,CAtCD;AAwCA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;eAEeH,S"
+}

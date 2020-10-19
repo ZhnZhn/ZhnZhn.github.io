@@ -9,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 
@@ -35,8 +37,7 @@ var S = {
   }
 };
 var COLLON = ':';
-
-var RowInputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) {
+var RowInputText = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
   var styleRoot = props.styleRoot,
       rootStyle = props.rootStyle,
       captionStyle = props.captionStyle,
@@ -51,14 +52,18 @@ var RowInputText = /*#__PURE__*/_react["default"].forwardRef(function (props, re
       _inputStyle = inputStyle || (0, _extends2["default"])({}, S.INPUT_TEXT, styleInput),
       _caption = caption.indexOf(COLLON) === -1 ? caption + COLLON : caption;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: _rootStyle
-  }, /*#__PURE__*/_react["default"].createElement("label", null, /*#__PURE__*/_react["default"].createElement("span", {
-    style: _captionStyle
-  }, _caption), /*#__PURE__*/_react["default"].createElement(_InputText["default"], (0, _extends2["default"])({
-    ref: ref,
-    style: _inputStyle
-  }, rest))));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: _rootStyle,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: _captionStyle,
+        children: _caption
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], (0, _extends2["default"])({
+        ref: ref,
+        style: _inputStyle
+      }, rest))]
+    })
+  });
 });
 /*
 RowInputText.propTypes= {
@@ -70,7 +75,6 @@ RowInputText.propTypes= {
   onEnter: PropTypes.func
 }
 */
-
 
 var _default = RowInputText;
 exports["default"] = _default;

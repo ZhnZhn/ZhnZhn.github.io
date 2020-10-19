@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
@@ -58,10 +58,11 @@ var ModalPane = function ModalPane(_ref) {
   /*eslint-enable react-hooks/exhaustive-deps */
 
   var TS = (0, _useTheme["default"])(TH_ID);
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: _refNode,
-    style: (0, _extends2["default"])({}, style, TS.ROOT)
-  }, children);
+    style: (0, _extends2["default"])({}, style, TS.ROOT),
+    children: children
+  });
 };
 /*
 ModalPane.propTypes = {

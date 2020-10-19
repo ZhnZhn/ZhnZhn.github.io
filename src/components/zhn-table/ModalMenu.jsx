@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import D from '../dialogs/DialogCell'
 
@@ -35,7 +33,7 @@ const ModalMenu = ({
   isShow, style,
   onClose,
   isGridLine,
-  onToggleGrid,  
+  onToggleGrid,
   headers, onToggle
 }) => (
   <ModalPopup

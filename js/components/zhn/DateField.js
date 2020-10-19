@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
@@ -28,7 +28,7 @@ var _onTest = function _onTest() {
   return true;
 };
 
-var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+var DateField = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var style = _ref.style,
       inputStyle = _ref.inputStyle,
       _ref$initialValue = _ref.initialValue,
@@ -115,29 +115,31 @@ var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
 
   var _styleHr = _isValid ? _Input["default"].HR_VALID : _Input["default"].HR_NOT_VALID;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, _Input["default"].ROOT, style)
-  }, /*#__PURE__*/_react["default"].createElement("input", {
-    ref: _refInput,
-    style: (0, _extends2["default"])({}, _Input["default"].INPUT, inputStyle),
-    name: name,
-    autoComplete: "off",
-    autoCorrect: "off",
-    autoCapitalize: "off",
-    spellCheck: false,
-    type: "text",
-    placeholder: placeholder,
-    inputMode: inputmode,
-    value: value,
-    maxLength: maxLength,
-    onChange: _hChangeValue,
-    onBlur: _hBlurValue,
-    onKeyDown: _hKeyDown
-  }), /*#__PURE__*/_react["default"].createElement("hr", {
-    style: (0, _extends2["default"])({}, _Input["default"].HR, _styleHr)
-  }), /*#__PURE__*/_react["default"].createElement("div", {
-    style: _Input["default"].ERR_MSG
-  }, errorInput));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: (0, _extends2["default"])({}, _Input["default"].ROOT, style),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      ref: _refInput,
+      style: (0, _extends2["default"])({}, _Input["default"].INPUT, inputStyle),
+      name: name,
+      autoComplete: "off",
+      autoCorrect: "off",
+      autoCapitalize: "off",
+      spellCheck: false,
+      type: "text",
+      placeholder: placeholder,
+      inputMode: inputmode,
+      value: value,
+      maxLength: maxLength,
+      onChange: _hChangeValue,
+      onBlur: _hBlurValue,
+      onKeyDown: _hKeyDown
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
+      style: (0, _extends2["default"])({}, _Input["default"].HR, _styleHr)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: _Input["default"].ERR_MSG,
+      children: errorInput
+    })]
+  });
 });
 /*
  DateField.propTypes = {
@@ -152,7 +154,6 @@ var DateField = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
    onEnter: PropTypes.func
  }
 */
-
 
 var _default = DateField;
 exports["default"] = _default;

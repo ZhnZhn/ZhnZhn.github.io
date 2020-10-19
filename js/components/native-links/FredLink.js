@@ -2,12 +2,10 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Link = _interopRequireDefault(require("./Link"));
 
@@ -24,9 +22,10 @@ var S = {
 };
 
 var Delimeter = function Delimeter() {
-  return /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.DELIMETER
-  }, "\xA0");
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: S.DELIMETER,
+    children: "\xA0"
+  });
 };
 
 var FredLink = function FredLink(_ref) {
@@ -35,16 +34,18 @@ var FredLink = function FredLink(_ref) {
   var _item$id = item.id,
       id = _item$id === void 0 ? '' : _item$id,
       article = item.article;
-  return /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, /*#__PURE__*/_react["default"].createElement(_Link["default"], {
-    caption: "FRED Search",
-    href: C.URL_SEARCH + id
-  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(_Link["default"], {
-    caption: "FRED Graph",
-    href: C.URL_GRAPH + id
-  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), article && /*#__PURE__*/_react["default"].createElement(_Link["default"], {
-    caption: "FRED Article",
-    href: article
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
+      caption: "FRED Search",
+      href: C.URL_SEARCH + id
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Delimeter, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
+      caption: "FRED Graph",
+      href: C.URL_GRAPH + id
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Delimeter, {}), article && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
+      caption: "FRED Article",
+      href: article
+    })]
+  });
 };
 
 var _default = FredLink;

@@ -1,13 +1,13 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ComponentActions = _interopRequireWildcard(require("../../flux/actions/ComponentActions"));
 
@@ -79,83 +79,88 @@ var HeaderBar = function HeaderBar(_ref) {
       _toggleTopics = _useFnFocus[1],
       TS = useTheme(ID);
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL.HEADER,
-    style: TS.ROOT
-  }, /*#__PURE__*/_react["default"].createElement(_ProgressLoading["default"], {
-    store: store,
-    ACTIONS: _LoadingProgressActions.T
-  }), /*#__PURE__*/_react["default"].createElement(_IconLogoErc["default"], {
-    className: CL.ICON,
-    title: LOGO_TITLE
-  }), /*#__PURE__*/_react["default"].createElement(_AppLabel["default"], {
-    className: CL.LABEL,
-    caption: CAPTION
-  }), /*#__PURE__*/_react["default"].createElement(ModalButton, {
-    refBt: refBt,
-    className: CL.TOPICS,
-    rootStyle: TS.BT,
-    caption: "Topics",
-    title: "Click to open topics menu",
-    accessKey: "t",
-    onClick: _toggleTopics
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    className: CL.ARROW
-  })), /*#__PURE__*/_react["default"].createElement(FlatButton, {
-    className: CL.QUANDL,
-    style: TS.BT,
-    caption: "Quandl",
-    title: "Quandl Browser",
-    accessKey: "q",
-    onClick: _BrowserActions["default"].showQuandl
-  }), /*#__PURE__*/_react["default"].createElement(FlatButton, {
-    className: CL.EUROSTAT,
-    style: TS.BT,
-    caption: "Eurostat",
-    title: "Eurostat Statistics Browser",
-    accessKey: "u",
-    onClick: _BrowserActions["default"].showEurostat
-  }), /*#__PURE__*/_react["default"].createElement(FlatButton, {
-    className: CL.WATCH,
-    style: TS.BT,
-    caption: "Watch",
-    title: "Watch List Browser",
-    accessKey: "w",
-    onClick: _BrowserActions["default"].showWatch
-  }), /*#__PURE__*/_react["default"].createElement(_HotBar["default"], {
-    btStyle: TS.BT_HOT,
-    store: store,
-    closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
-    onShowDialog: _ComponentActions["default"].showDialog
-  }), /*#__PURE__*/_react["default"].createElement("div", {
-    className: CL.BTS_RIGHT
-  }, /*#__PURE__*/_react["default"].createElement(_LimitRemainingLabel["default"], {
-    store: store
-  }), /*#__PURE__*/_react["default"].createElement(FlatButton, {
-    style: TS.BT,
-    isPrimary: true,
-    title: "User Settings Dialog",
-    accessKey: "s",
-    timeout: 500,
-    onClick: showSettings
-  }, /*#__PURE__*/_react["default"].createElement(SvgSettings, {
-    style: STYLE.SVG_BT
-  })), /*#__PURE__*/_react["default"].createElement(FlatButton, {
-    className: CL.ABOUT,
-    style: TS.BT,
-    title: "About Web Application ERC",
-    accessKey: "a",
-    timeout: 0,
-    onClick: _ComponentActions["default"].showAbout
-  }, /*#__PURE__*/_react["default"].createElement(SvgInfo, {
-    style: STYLE.SVG_BT
-  }))), /*#__PURE__*/_react["default"].createElement(ModalSlider, {
-    isShow: isTopics,
-    className: CL.BROWSER_MENU,
-    INIT_ID: "page_0",
-    model: MODEL,
-    onClose: _toggleTopics
-  }));
+    style: TS.ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading["default"], {
+      store: store,
+      ACTIONS: _LoadingProgressActions.T
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc["default"], {
+      className: CL.ICON,
+      title: LOGO_TITLE
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_AppLabel["default"], {
+      className: CL.LABEL,
+      caption: CAPTION
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalButton, {
+      refBt: refBt,
+      className: CL.TOPICS,
+      rootStyle: TS.BT,
+      caption: "Topics",
+      title: "Click to open topics menu",
+      accessKey: "t",
+      onClick: _toggleTopics,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: CL.ARROW
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+      className: CL.QUANDL,
+      style: TS.BT,
+      caption: "Quandl",
+      title: "Quandl Browser",
+      accessKey: "q",
+      onClick: _BrowserActions["default"].showQuandl
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+      className: CL.EUROSTAT,
+      style: TS.BT,
+      caption: "Eurostat",
+      title: "Eurostat Statistics Browser",
+      accessKey: "u",
+      onClick: _BrowserActions["default"].showEurostat
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+      className: CL.WATCH,
+      style: TS.BT,
+      caption: "Watch",
+      title: "Watch List Browser",
+      accessKey: "w",
+      onClick: _BrowserActions["default"].showWatch
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar["default"], {
+      btStyle: TS.BT_HOT,
+      store: store,
+      closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
+      onShowDialog: _ComponentActions["default"].showDialog
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: CL.BTS_RIGHT,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel["default"], {
+        store: store
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+        style: TS.BT,
+        isPrimary: true,
+        title: "User Settings Dialog",
+        accessKey: "s",
+        timeout: 500,
+        onClick: showSettings,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgSettings, {
+          style: STYLE.SVG_BT
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+        className: CL.ABOUT,
+        style: TS.BT,
+        title: "About Web Application ERC",
+        accessKey: "a",
+        timeout: 0,
+        onClick: _ComponentActions["default"].showAbout,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgInfo, {
+          style: STYLE.SVG_BT
+        })
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
+      isShow: isTopics,
+      className: CL.BROWSER_MENU,
+      INIT_ID: "page_0",
+      model: MODEL,
+      onClose: _toggleTopics
+    })]
+  });
 };
 
 var _default = HeaderBar;

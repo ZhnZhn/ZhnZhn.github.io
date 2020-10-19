@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CL = "button-circle";
 
 const SvgPlus = ({ style, onClick }) => (

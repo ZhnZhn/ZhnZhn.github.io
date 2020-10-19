@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -95,20 +95,20 @@ var BrowserMenu = function BrowserMenu(_ref) {
   }, [isLoaded, isShow]);
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  return /*#__PURE__*/_react["default"].createElement(Browser, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
-    style: S.BROWSER
-  }, /*#__PURE__*/_react["default"].createElement(BrowserCaption, {
-    caption: caption,
-    captionStyle: S.CAPTION,
-    onClose: _hHide
-  }), /*#__PURE__*/_react["default"].createElement(ScrollPane, {
-    className: S.CL_SCROLL
-  }, arrMenu.map(function (menuTopic, index) {
-    return /*#__PURE__*/_react["default"].createElement(_MenuTopic["default"], (0, _extends2["default"])({
-      key: index
-    }, menuTopic));
-  }), children));
+    style: S.BROWSER,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BrowserCaption, {
+      caption: caption,
+      captionStyle: S.CAPTION,
+      onClose: _hHide
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
+      className: S.CL_SCROLL,
+      children: [arrMenu.map(function (menuTopic, index) {
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopic["default"], (0, _extends2["default"])({}, menuTopic), index);
+      }), children]
+    })]
+  });
 };
 
 var _default = BrowserMenu;

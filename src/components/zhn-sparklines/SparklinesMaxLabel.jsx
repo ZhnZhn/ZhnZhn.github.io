@@ -1,5 +1,3 @@
-import React from 'react'
-
 import max from './dataProcessing/max'
 import SparklinesLabel from './SparklinesLabel'
 

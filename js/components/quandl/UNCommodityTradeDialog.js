@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -13,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _Type = require("../../constants/Type");
 
@@ -384,16 +384,14 @@ var UNCommodityTradeDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withValida
       onClick: _this._handlerClickChartType
     });
 
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
-      key: "meta",
+    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Flat, {
       rootStyle: S.BT_ROOT,
       caption: "Load Meta",
       title: "First Load Meta, then Load Item",
       onClick: _this._handlerLoadMeta
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Load, {
-      key: "load",
+    }, "meta"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Load, {
       onClick: _this._handlerLoadData
-    })];
+    }, "load")];
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isShowFilter: false,
       isShowChartType: false,
@@ -441,70 +439,74 @@ var UNCommodityTradeDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withValida
         optionTrades = _this$state2.optionTrades,
         placeholderTrade = _this$state2.placeholderTrade,
         validationMessages = _this$state2.validationMessages;
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: "United Nations Commodity Trade",
       menuModel: this._menuMore,
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: this._handlerClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: isToolbar,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
-      isShow: isShow,
-      isShowLabels: isShowLabels,
-      uri: countryURI,
-      jsonProp: countryJsonProp,
-      caption: "Country:",
-      optionNames: "Countries",
-      onSelect: this._handlerSelectCountry
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectWithLoad, {
-      isShow: isShow,
-      isShowLabels: isShowLabels,
-      uri: commodityURI,
-      jsonProp: commodityJsonProp,
-      caption: "Chapter:",
-      optionNames: "Chapters",
-      onSelect: this._handlerSelectChapter
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowFilter
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      isShowLabels: isShowLabels,
-      caption: "Filter Trade:",
-      options: TRADE_FILTER_OPTIONS,
-      placeholder: "Filter...",
-      onSelect: this._handlerSelectTradeFilter
-    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      isShowLabels: isShowLabels,
-      caption: "Subheading:",
-      options: optionTrades,
-      optionNames: "Meta",
-      isLoading: isLoadingTrade,
-      isLoadingFailed: isLoadingTradeFailed,
-      placeholder: placeholderTrade,
-      onLoadOption: this._handlerLoadMeta,
-      onSelect: this._handlerSelectTrade
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowDate
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
-      ref: this._refDates,
-      isShowLabels: isShowLabels,
-      initFromDate: initFromDate,
-      initToDate: initToDate,
-      msgOnNotValidFormat: msgOnNotValidFormat,
-      onTestDate: onTestDate
-    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowChartType
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      isShowLabels: isShowLabels,
-      caption: "Chart Type:",
-      options: CHART_TYPE_OPTIONS,
-      onSelect: this._handlerSelectChartType
-    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
-      validationMessages: validationMessages
-    }));
+      onClose: this._handlerClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: isToolbar,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, {
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        uri: countryURI,
+        jsonProp: countryJsonProp,
+        caption: "Country:",
+        optionNames: "Countries",
+        onSelect: this._handlerSelectCountry
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, {
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        uri: commodityURI,
+        jsonProp: commodityJsonProp,
+        caption: "Chapter:",
+        optionNames: "Chapters",
+        onSelect: this._handlerSelectChapter
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowFilter,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+          isShowLabels: isShowLabels,
+          caption: "Filter Trade:",
+          options: TRADE_FILTER_OPTIONS,
+          placeholder: "Filter...",
+          onSelect: this._handlerSelectTradeFilter
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+        isShowLabels: isShowLabels,
+        caption: "Subheading:",
+        options: optionTrades,
+        optionNames: "Meta",
+        isLoading: isLoadingTrade,
+        isLoadingFailed: isLoadingTradeFailed,
+        placeholder: placeholderTrade,
+        onLoadOption: this._handlerLoadMeta,
+        onSelect: this._handlerSelectTrade
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowDate,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
+          ref: this._refDates,
+          isShowLabels: isShowLabels,
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          msgOnNotValidFormat: msgOnNotValidFormat,
+          onTestDate: onTestDate
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowChartType,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+          isShowLabels: isShowLabels,
+          caption: "Chart Type:",
+          options: CHART_TYPE_OPTIONS,
+          onSelect: this._handlerSelectChartType
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
+        validationMessages: validationMessages
+      })]
+    });
   };
 
   return UNCommodityTradeDialog;

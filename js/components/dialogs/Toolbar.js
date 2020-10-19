@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
@@ -14,11 +14,12 @@ var _ToolbarButtonCircle = _interopRequireDefault(require("./ToolbarButtonCircle
 var Toolbar = function Toolbar(_ref) {
   var isShow = _ref.isShow,
       buttons = _ref.buttons;
-  return /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-    isShow: isShow
-  }, /*#__PURE__*/_react["default"].createElement(_ToolbarButtonCircle["default"], {
-    buttons: buttons
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+    isShow: isShow,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle["default"], {
+      buttons: buttons
+    })
+  });
 };
 
 var _default = Toolbar;

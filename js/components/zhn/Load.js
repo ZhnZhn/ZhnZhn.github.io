@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var FAILED_COLOR = '#f44336';
 var S = {
@@ -25,7 +25,7 @@ var S = {
 };
 
 var Loading = function Loading() {
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     "data-loader": "circle",
     style: S.LOADING
   });
@@ -34,12 +34,15 @@ var Loading = function Loading() {
 var LoadFailed = function LoadFailed(_ref) {
   var _ref$errMsg = _ref.errMsg,
       errMsg = _ref$errMsg === void 0 ? '' : _ref$errMsg;
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
-    "data-loader": "circle-failed",
-    style: (0, _extends2["default"])({}, S.LOADING, S.LOAD_FAILED)
-  }), /*#__PURE__*/_react["default"].createElement("p", {
-    style: S.ERR_MSG
-  }, errMsg + ": Network error."));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      "data-loader": "circle-failed",
+      style: (0, _extends2["default"])({}, S.LOADING, S.LOAD_FAILED)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+      style: S.ERR_MSG,
+      children: errMsg + ": Network error."
+    })]
+  });
 };
 
 var Load = {

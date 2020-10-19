@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useImperativeHandle } from 'react';
+import { forwardRef, useState, useCallback, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
 
 import InputSlider from '../zhn/InputSlider'
@@ -29,7 +29,7 @@ const _crRandomNumber = (m=0, n=10) => {
 
 const _useRandomNumber = () => useState(() => _crRandomNumber(0, 10))[0];
 
-const MathCaptcha = React.forwardRef(({ style }, ref) => {
+const MathCaptcha = forwardRef(({ style }, ref) => {
   const n1 = _useRandomNumber()
   , n2  = _useRandomNumber()
   , [{isOk, resultSum}, setState] = useState({isOk: false, resultSum: ''})

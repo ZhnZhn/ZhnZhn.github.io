@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 
 var _ChartContainer = _interopRequireDefault(require("../../components/zhn-containers/ChartContainer"));
 
@@ -52,7 +52,7 @@ var fItemContainer = {
         _type = type || _BrowserConfig["default"][browserType].chartContainerType,
         _caption = _crCaption(dialogConf, browserType);
 
-    return /*#__PURE__*/_react["default"].createElement(Comp, {
+    return /*#__PURE__*/(0, _react.createElement)(Comp, {
       key: _type,
       store: store,
       caption: _caption,

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import C from '../styles/Color';
 
 import {

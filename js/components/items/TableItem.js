@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
@@ -59,27 +59,30 @@ var TableItem = function TableItem(_ref) {
       dsStyle = config.dsStyle,
       _gridId = "tb_" + id;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROOT
-  }, /*#__PURE__*/_react["default"].createElement(_ItemHeader["default"], {
-    isOpen: isOpen,
-    rootStyle: S.ROOT_HEADER,
-    caption: title,
-    captionStyle: S.CAPTION,
-    onClick: toggleIsOpen,
-    onClose: onCloseItem
-  }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-    isShow: isOpen,
-    style: S.SHOW_HIDE
-  }, /*#__PURE__*/_react["default"].createElement(_Table["default"], {
-    gridId: _gridId,
-    thMoreStyle: thMoreStyle,
-    headers: headers,
-    rows: rows,
-    tableFn: tableFn
-  }), dataSource && /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.DATA_SOURCE, dsStyle)
-  }, dataSource)));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemHeader["default"], {
+      isOpen: isOpen,
+      rootStyle: S.ROOT_HEADER,
+      caption: title,
+      captionStyle: S.CAPTION,
+      onClick: toggleIsOpen,
+      onClose: onCloseItem
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide["default"], {
+      isShow: isOpen,
+      style: S.SHOW_HIDE,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Table["default"], {
+        gridId: _gridId,
+        thMoreStyle: thMoreStyle,
+        headers: headers,
+        rows: rows,
+        tableFn: tableFn
+      }), dataSource && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: (0, _extends2["default"])({}, S.DATA_SOURCE, dsStyle),
+        children: dataSource
+      })]
+    })]
+  });
 };
 
 var _default = TableItem;

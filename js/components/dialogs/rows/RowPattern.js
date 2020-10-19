@@ -9,14 +9,16 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _InputPattern = _interopRequireDefault(require("../../zhn/InputPattern"));
 
 var _crRow2 = _interopRequireDefault(require("./crRow"));
 
 //import PropTypes from "prop-types";
-var RowPattern = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+var RowPattern = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var isShowLabels = _ref.isShowLabels,
       caption = _ref.caption,
       captionStyle = _ref.captionStyle,
@@ -31,13 +33,15 @@ var RowPattern = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) 
       labelStyle = _crRow.labelStyle,
       _caption = _crRow.caption;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: rowStyle
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: labelStyle
-  }, _caption), /*#__PURE__*/_react["default"].createElement(_InputPattern["default"], (0, _extends2["default"])({
-    ref: ref
-  }, rest)));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: rowStyle,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: labelStyle,
+      children: _caption
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern["default"], (0, _extends2["default"])({
+      ref: ref
+    }, rest))]
+  });
 });
 /*
 RowPattern.propTypes = {
@@ -46,7 +50,6 @@ RowPattern.propTypes = {
    captionStyle: PropTypes.object
 }
 */
-
 
 var _default = RowPattern;
 exports["default"] = _default;

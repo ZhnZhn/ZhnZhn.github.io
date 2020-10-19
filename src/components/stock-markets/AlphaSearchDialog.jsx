@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import SearchAdapter from '../../adapters/alpha/SearchAdapter'
 
@@ -27,7 +27,7 @@ class AlphaIntradayDialog extends Component {
       props, { noDate: true }
     )
 
-    this._searchApi = {      
+    this._searchApi = {
       ...SearchAdapter,
       crUrlOptions: this._crUrlOptions,
       onError: this.props.onError

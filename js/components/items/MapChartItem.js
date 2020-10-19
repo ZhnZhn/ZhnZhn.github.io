@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ChoroplethMap = _interopRequireDefault(require("../../adapters/eurostat/ChoroplethMap"));
 
@@ -68,12 +68,13 @@ var BtTabInfo = function BtTabInfo(_ref) {
     return null;
   }
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.TAB_DIV
-  }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].ButtonTab, {
-    caption: "Info",
-    onClick: onClick
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: S.TAB_DIV,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ButtonTab, {
+      caption: "Info",
+      onClick: onClick
+    })
+  });
 };
 
 var _crMapId = function _crMapId(caption) {
@@ -174,30 +175,35 @@ var MapChartItem = /*#__PURE__*/function (_Component) {
         time = _this$state.time,
         _styleMap = isShowInfo ? S.NONE : S.BLOCK;
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT_DIV
-    }, /*#__PURE__*/_react["default"].createElement(_ItemHeader["default"], {
-      isOpen: isOpen,
-      caption: itemCaption,
-      onClick: this._hToggle,
-      onClose: onCloseItem
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.TIME
-    }, time)), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ShowHide, {
-      isShow: isOpen
-    }, /*#__PURE__*/_react["default"].createElement(BtTabInfo, {
-      isShow: !isShowInfo,
-      onClick: this._hClickInfo
-    }), /*#__PURE__*/_react["default"].createElement("div", {
-      id: _mapId,
-      style: (0, _extends2["default"])({}, S.MAP_DIV, _styleMap)
-    }, isLoading && /*#__PURE__*/_react["default"].createElement(_Comp["default"].SpinnerLoading, {
-      style: S.SPINNER_LOADING
-    })), /*#__PURE__*/_react["default"].createElement(_PanelDataInfo["default"], {
-      isShow: isShowInfo,
-      info: info,
-      onClickChart: this._hClickChart
-    })));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROOT_DIV,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemHeader["default"], {
+        isOpen: isOpen,
+        caption: itemCaption,
+        onClick: this._hToggle,
+        onClose: onCloseItem,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          style: S.TIME,
+          children: time
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].ShowHide, {
+        isShow: isOpen,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BtTabInfo, {
+          isShow: !isShowInfo,
+          onClick: this._hClickInfo
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          id: _mapId,
+          style: (0, _extends2["default"])({}, S.MAP_DIV, _styleMap),
+          children: isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].SpinnerLoading, {
+            style: S.SPINNER_LOADING
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo["default"], {
+          isShow: isShowInfo,
+          info: info,
+          onClickChart: this._hClickChart
+        })]
+      })]
+    });
   };
 
   return MapChartItem;

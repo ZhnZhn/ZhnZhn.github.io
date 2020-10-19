@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
@@ -103,19 +103,20 @@ var Frame = function Frame(_ref) {
 
   var _isTitle = title && onClickPrev;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: style
-  }, _isTitle && /*#__PURE__*/_react["default"].createElement(_MenuTitle["default"], {
-    innerRef: _refTitle,
-    title: title,
-    onClick: onClickPrev.bind(null, pageNumber)
-  }), /*#__PURE__*/_react["default"].createElement(_MenuList["default"], {
-    refFirstItem: refFirstItem,
-    model: model,
-    fOnClickItem: _fOnClickItem
-  }), /*#__PURE__*/_react["default"].createElement(_ErrMsg["default"], {
-    errMsg: errMsg
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: style,
+    children: [_isTitle && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle["default"], {
+      innerRef: _refTitle,
+      title: title,
+      onClick: onClickPrev.bind(null, pageNumber)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuList["default"], {
+      refFirstItem: refFirstItem,
+      model: model,
+      fOnClickItem: _fOnClickItem
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ErrMsg["default"], {
+      errMsg: errMsg
+    })]
+  });
 };
 
 var _default = Frame;

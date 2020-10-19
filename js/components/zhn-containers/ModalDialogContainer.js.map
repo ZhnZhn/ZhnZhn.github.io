@@ -1,1 +1,37 @@
-{"version":3,"sources":["../../../src/components/zhn-containers/ModalDialogContainer.jsx"],"names":["CL","INIT","SHOWING","HIDING","STYLE","SHOW","display","HIDE","HIDE_BACKGROUND","backgroundColor","ModalDialogContainer","wasClosing","componentDidUpdate","prevProps","prevState","setTimeout","setState","props","timeout","render","isShow","children","onClose","_className","_style","Component","defaultProps"],"mappings":";;;;;;;;;;;AAAA;;AACA;AAGA,IAAMA,EAAE,GAAG;AACTC,EAAAA,IAAI,EAAG,YADE;AAETC,EAAAA,OAAO,EAAG,uBAFD;AAGTC,EAAAA,MAAM,EAAG;AAHA,CAAX;AAMA,IAAMC,KAAK,GAAG;AACZC,EAAAA,IAAI,EAAE;AACJC,IAAAA,OAAO,EAAE;AADL,GADM;AAIZC,EAAAA,IAAI,EAAE;AACJD,IAAAA,OAAO,EAAE;AADL,GAJM;AAOZE,EAAAA,eAAe,EAAE;AACfC,IAAAA,eAAe,EAAE;AADF;AAPL,CAAd;;IAYMC,oB;;;;;;;;;;;UAYJC,U,GAAa,I;;;;;;SAEbC,kB,GAAA,4BAAmBC,SAAnB,EAA8BC,SAA9B,EAAwC;AAAA;;AACtC,QAAI,KAAKH,UAAT,EAAoB;AAClBI,MAAAA,UAAU,CACR,YAAM;AAAE,QAAA,MAAI,CAACC,QAAL,CAAc,EAAd;AAAmB,OADnB,EAER,KAAKC,KAAL,CAAWC,OAFH,CAAV;AAID;AACF,G;;SAEDC,M,GAAA,kBAAQ;AAAA,sBACgC,KAAKF,KADrC;AAAA,QACEG,MADF,eACEA,MADF;AAAA,QACUC,QADV,eACUA,QADV;AAAA,QACoBC,OADpB,eACoBA,OADpB;;AAEN,QAAIC,UAAJ,EAAgBC,MAAhB;;AACA,QAAI,KAAKb,UAAT,EAAoB;AACjBY,MAAAA,UAAU,GAAGvB,EAAE,CAACC,IAAhB;AACAuB,MAAAA,MAAM,GAAGpB,KAAK,CAACG,IAAf;AACA,WAAKI,UAAL,GAAkB,KAAlB;AACF,KAJD,MAIO;AACLY,MAAAA,UAAU,GAAGH,MAAM,GAAGpB,EAAE,CAACE,OAAN,GAAgBF,EAAE,CAACG,MAAtC;AACAqB,MAAAA,MAAM,GAAGJ,MAAM,GAAGhB,KAAK,CAACC,IAAT,GAAgBD,KAAK,CAACI,eAArC;;AACA,UAAI,CAACY,MAAL,EAAY;AACV,aAAKT,UAAL,GAAkB,IAAlB;AACD;AACF;;AAED,wBACE;AAAK,MAAA,SAAS,EAAEY,UAAhB;AAA4B,MAAA,KAAK,EAAEC,MAAnC;AAA2C,MAAA,OAAO,EAAEF;AAApD,OACGD,QADH,CADF;AAKD,G;;;EA3CgCI,gB;;AAA7Bf,oB,CAQGgB,Y,GAAe;AACpBR,EAAAA,OAAO,EAAG;AADU,C;eAsCTR,oB","sourcesContent":["import React, { Component } from 'react';\r\n//import PropTypes from 'prop-types'\r\n\r\n\r\nconst CL = {\r\n  INIT : 'modal-root',\r\n  SHOWING : 'modal-root show-modal',\r\n  HIDING : 'modal-root hide-modal'\r\n};\r\n\r\nconst STYLE = {\r\n  SHOW: {\r\n    display: 'block'\r\n  },\r\n  HIDE: {\r\n    display: 'none'\r\n  },\r\n  HIDE_BACKGROUND: {\r\n    backgroundColor: 'rgba(0,0,0, 0)'\r\n  }\r\n}\r\n\r\nclass ModalDialogContainer extends Component {\r\n  /*\r\n  static propTypes = {\r\n    isShow  : PropTypes.bool,\r\n    timeout : PropTypes.number,\r\n    onClose : PropTypes.func\r\n  }\r\n  */\r\n  static defaultProps = {\r\n    timeout : 450\r\n  }\r\n\r\n  wasClosing = true\r\n\r\n  componentDidUpdate(prevProps, prevState){\r\n    if (this.wasClosing){\r\n      setTimeout(\r\n        () => { this.setState({}) },\r\n        this.props.timeout\r\n      )\r\n    }\r\n  }\r\n\r\n  render(){\r\n    const { isShow, children, onClose } = this.props;\r\n    let _className, _style;\r\n    if (this.wasClosing){\r\n       _className = CL.INIT;\r\n       _style = STYLE.HIDE;\r\n       this.wasClosing = false;\r\n    } else {\r\n      _className = isShow ? CL.SHOWING : CL.HIDING;\r\n      _style = isShow ? STYLE.SHOW : STYLE.HIDE_BACKGROUND;\r\n      if (!isShow){\r\n        this.wasClosing = true;\r\n      }\r\n    }\r\n\r\n    return (\r\n      <div className={_className} style={_style} onClick={onClose}>\r\n        {children}\r\n      </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default ModalDialogContainer\r\n"],"file":"ModalDialogContainer.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-containers/ModalDialogContainer.js"
+ ],
+ "file": "../../../src/components/zhn-containers/ModalDialogContainer.js",
+ "names": [
+  "CL",
+  "INIT",
+  "SHOWING",
+  "HIDING",
+  "STYLE",
+  "SHOW",
+  "display",
+  "HIDE",
+  "HIDE_BACKGROUND",
+  "backgroundColor",
+  "ModalDialogContainer",
+  "wasClosing",
+  "componentDidUpdate",
+  "prevProps",
+  "prevState",
+  "setTimeout",
+  "setState",
+  "props",
+  "timeout",
+  "render",
+  "isShow",
+  "children",
+  "onClose",
+  "_className",
+  "_style",
+  "Component",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AACA;AAGA,IAAMA,EAAE,GAAG;AACTC,EAAAA,IAAI,EAAG,YADE;AAETC,EAAAA,OAAO,EAAG,uBAFD;AAGTC,EAAAA,MAAM,EAAG;AAHA,CAAX;AAMA,IAAMC,KAAK,GAAG;AACZC,EAAAA,IAAI,EAAE;AACJC,IAAAA,OAAO,EAAE;AADL,GADM;AAIZC,EAAAA,IAAI,EAAE;AACJD,IAAAA,OAAO,EAAE;AADL,GAJM;AAOZE,EAAAA,eAAe,EAAE;AACfC,IAAAA,eAAe,EAAE;AADF;AAPL,CAAd;;IAYMC,oB;;;;;;;;;;;UAYJC,U,GAAa,I;;;;;;SAEbC,kB,GAAA,4BAAmBC,SAAnB,EAA8BC,SAA9B,EAAwC;AAAA;;AACtC,QAAI,KAAKH,UAAT,EAAoB;AAClBI,MAAAA,UAAU,CACR,YAAM;AAAE,QAAA,MAAI,CAACC,QAAL,CAAc,EAAd;AAAmB,OADnB,EAER,KAAKC,KAAL,CAAWC,OAFH,CAAV;AAID;AACF,G;;SAEDC,M,GAAA,kBAAQ;AAAA,sBACgC,KAAKF,KADrC;AAAA,QACEG,MADF,eACEA,MADF;AAAA,QACUC,QADV,eACUA,QADV;AAAA,QACoBC,OADpB,eACoBA,OADpB;;AAEN,QAAIC,UAAJ,EAAgBC,MAAhB;;AACA,QAAI,KAAKb,UAAT,EAAoB;AACjBY,MAAAA,UAAU,GAAGvB,EAAE,CAACC,IAAhB;AACAuB,MAAAA,MAAM,GAAGpB,KAAK,CAACG,IAAf;AACA,WAAKI,UAAL,GAAkB,KAAlB;AACF,KAJD,MAIO;AACLY,MAAAA,UAAU,GAAGH,MAAM,GAAGpB,EAAE,CAACE,OAAN,GAAgBF,EAAE,CAACG,MAAtC;AACAqB,MAAAA,MAAM,GAAGJ,MAAM,GAAGhB,KAAK,CAACC,IAAT,GAAgBD,KAAK,CAACI,eAArC;;AACA,UAAI,CAACY,MAAL,EAAY;AACV,aAAKT,UAAL,GAAkB,IAAlB;AACD;AACF;;AAED,wBACE;AAAK,MAAA,SAAS,EAAEY,UAAhB;AAA4B,MAAA,KAAK,EAAEC,MAAnC;AAA2C,MAAA,OAAO,EAAEF,OAApD;AAAA,gBACGD;AADH,MADF;AAKD,G;;;EA3CgCI,gB;;AAA7Bf,oB,CAQGgB,Y,GAAe;AACpBR,EAAAA,OAAO,EAAG;AADU,C;eAsCTR,oB"
+}

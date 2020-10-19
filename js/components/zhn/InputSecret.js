@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
@@ -33,7 +33,7 @@ var S = {
 
 var _onEnter = function _onEnter() {};
 
-var InputSecret = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+var InputSecret = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var name = _ref.name,
       placeholder = _ref.placeholder,
       _ref$maxLength = _ref.maxLength,
@@ -84,26 +84,26 @@ var InputSecret = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref)
       }
     });
   });
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROOT
-  }, /*#__PURE__*/_react["default"].createElement("input", {
-    hidden: true,
-    autoComplete: "username",
-    value: name,
-    readOnly: true
-  }), /*#__PURE__*/_react["default"].createElement("input", {
-    ref: _refInput,
-    style: S.INPUT,
-    type: "password",
-    autoComplete: "current-password",
-    placeholder: placeholder,
-    maxLength: maxLength,
-    value: value,
-    onChange: _hInputChange,
-    onKeyDown: _hKeyDown
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      hidden: true,
+      autoComplete: "username",
+      value: name,
+      readOnly: true
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      ref: _refInput,
+      style: S.INPUT,
+      type: "password",
+      autoComplete: "current-password",
+      placeholder: placeholder,
+      maxLength: maxLength,
+      value: value,
+      onChange: _hInputChange,
+      onKeyDown: _hKeyDown
+    })]
+  });
 });
-
 var _default = InputSecret;
 exports["default"] = _default;
 //# sourceMappingURL=InputSecret.js.map

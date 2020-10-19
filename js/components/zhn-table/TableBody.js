@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _tableFn = _interopRequireDefault(require("./tableFn"));
 
@@ -20,10 +20,11 @@ var _isFn = function _isFn(fn) {
 var _crLinkEl = function _crLinkEl(id, title, fn) {
   var _href = _isFn(fn) ? fn(id, title) : void 0;
 
-  return /*#__PURE__*/_react["default"].createElement("a", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     className: _Style["default"].CL_LINK,
-    href: _href
-  }, title);
+    href: _href,
+    children: title
+  });
 };
 
 var _crTd = function _crTd(rId, r, h, hIndex, numberFormat, valueToHref) {
@@ -66,21 +67,23 @@ var _renderRows = function _renderRows(props) {
           _style = _crTd2[1],
           _elOrTitle = _crTd2[2];
 
-      return /*#__PURE__*/_react["default"].createElement("td", {
-        key: _key,
-        style: (0, _extends2["default"])({}, _Style["default"].TD, _style)
-      }, _elOrTitle);
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)("td", {
+        style: (0, _extends2["default"])({}, _Style["default"].TD, _style),
+        children: _elOrTitle
+      }, _key);
     }).filter(Boolean);
 
-    return /*#__PURE__*/_react["default"].createElement("tr", {
-      key: _rId,
-      role: "row"
-    }, _elTds);
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("tr", {
+      role: "row",
+      children: _elTds
+    }, _rId);
   });
 };
 
 var TableBody = function TableBody(props) {
-  return /*#__PURE__*/_react["default"].createElement("tbody", null, _renderRows(props));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("tbody", {
+    children: _renderRows(props)
+  });
 };
 
 var _default = TableBody;

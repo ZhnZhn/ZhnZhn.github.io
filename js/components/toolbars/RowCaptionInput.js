@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _A = _interopRequireDefault(require("../zhn/A"));
 
@@ -29,18 +29,21 @@ var RowCaptionInput = function RowCaptionInput(_ref) {
       _ref$maxLength = _ref.maxLength,
       maxLength = _ref$maxLength === void 0 ? 3 : _ref$maxLength,
       onAdd = _ref.onAdd;
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.CAPTION
-  }, caption), /*#__PURE__*/_react["default"].createElement(_A["default"].InputText, {
-    ref: forwardRef,
-    type: "number",
-    style: S.INPUT_TEXT,
-    initValue: initValue,
-    maxLength: maxLength,
-    onEnter: onAdd
-  }), /*#__PURE__*/_react["default"].createElement(_A["default"].SvgPlus, {
-    onClick: onAdd
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S.CAPTION,
+      children: caption
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].InputText, {
+      ref: forwardRef,
+      type: "number",
+      style: S.INPUT_TEXT,
+      initValue: initValue,
+      maxLength: maxLength,
+      onEnter: onAdd
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].SvgPlus, {
+      onClick: onAdd
+    })]
+  });
 };
 
 var _default = RowCaptionInput;

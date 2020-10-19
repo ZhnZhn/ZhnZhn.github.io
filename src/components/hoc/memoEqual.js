@@ -1,6 +1,10 @@
-import React from 'react'
+import { memo } from 'react'
 
-const memoEqual = (Element, areEqualProps=()=>true) =>
-  React.memo(Element, areEqualProps)
+const DF_ARE_EQUAL_PROPS = () => {};
+
+const memoEqual = (
+  Element,
+  areEqualProps=DF_ARE_EQUAL_PROPS
+) => memo(Element, areEqualProps);
 
 export default memoEqual

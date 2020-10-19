@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
@@ -70,17 +70,19 @@ function ItemHeader(_ref) {
       _title = _crTitle(title, caption),
       _styleCaption = isOpen ? S.OPEN : S.CLOSE;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.ROOT, rootStyle, TS.ROOT)
-  }, /*#__PURE__*/_react["default"].createElement("button", {
-    className: CL_CAPTION,
-    style: (0, _extends2["default"])({}, S.CAPTION, captionStyle, _styleCaption),
-    title: _title,
-    onClick: onClick
-  }, caption), children, /*#__PURE__*/_react["default"].createElement(_Comp["default"].SvgClose, {
-    style: S.SVG_CLOSE,
-    onClose: onClose
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: (0, _extends2["default"])({}, S.ROOT, rootStyle, TS.ROOT),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+      className: CL_CAPTION,
+      style: (0, _extends2["default"])({}, S.CAPTION, captionStyle, _styleCaption),
+      title: _title,
+      onClick: onClick,
+      children: caption
+    }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].SvgClose, {
+      style: S.SVG_CLOSE,
+      onClose: onClose
+    })]
+  });
 }
 
 var _default = ItemHeader;

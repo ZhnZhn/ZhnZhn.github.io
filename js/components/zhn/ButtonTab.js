@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
@@ -45,13 +45,14 @@ var ButtonTab = function ButtonTab(_ref) {
 
   var _btClass = _crBtClass(isShow, className);
 
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
     className: _btClass,
     style: (0, _extends2["default"])({}, style, TS.BG),
-    onClick: onClick
-  }, caption, isMenu && /*#__PURE__*/_react["default"].createElement("span", {
-    className: ARROW_CL
-  }), children);
+    onClick: onClick,
+    children: [caption, isMenu && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      className: ARROW_CL
+    }), children]
+  });
 };
 
 var _default = ButtonTab;

@@ -5,15 +5,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _DialogCell = _interopRequireDefault(require("../DialogCell"));
 
 var _crCommandsWithLoad = function _crCommandsWithLoad(comp) {
-  return [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Load, {
-    key: "load",
+  return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Load, {
     onClick: comp._handleLoad
-  })];
+  }, "load")];
 };
 
 var withLoad = function withLoad(target) {

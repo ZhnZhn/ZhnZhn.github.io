@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -13,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
@@ -138,45 +138,48 @@ var DialogType4A = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/fun
         isShowDate = _this$state.isShowDate,
         isShowOptions = _this$state.isShowOptions,
         validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: this._handleClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: isToolbar,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
-      ref: this._refOneTwo,
-      isShow: isShow,
-      isShowLabels: isShowLabels,
-      uri: oneURI,
-      oneCaption: oneCaption,
-      oneJsonProp: oneJsonProp,
-      twoCaption: twoCaption,
-      msgOnNotSelected: msgOnNotSelected
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowDate
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
-      ref: this._refDates,
-      isShowLabels: isShowLabels,
-      initFromDate: initFromDate,
-      initToDate: initToDate,
-      msgOnNotValidFormat: msgOnNotValidFormat,
-      onTestDate: onTestDate
-    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowOptions
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      initValue: false,
-      caption: "Add Seria with Second YAxis",
-      onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
-      onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
-    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
-      validationMessages: validationMessages
-    }));
+      onClose: this._handleClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: isToolbar,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectOneTwo, {
+        ref: this._refOneTwo,
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        uri: oneURI,
+        oneCaption: oneCaption,
+        oneJsonProp: oneJsonProp,
+        twoCaption: twoCaption,
+        msgOnNotSelected: msgOnNotSelected
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowDate,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
+          ref: this._refDates,
+          isShowLabels: isShowLabels,
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          msgOnNotValidFormat: msgOnNotValidFormat,
+          onTestDate: onTestDate
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowOptions,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+          initValue: false,
+          caption: "Add Seria with Second YAxis",
+          onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
+          onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
+        validationMessages: validationMessages
+      })]
+    });
   };
 
   return DialogType4A;

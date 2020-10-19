@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
@@ -32,15 +32,16 @@ var MenuItem = function MenuItem(_ref) {
     }
   }, [onClick]);
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: innerRef,
     className: CL.ITEM,
     style: _style,
     tabIndex: "0",
     role: "menuitem",
     onClick: onClick,
-    onKeyDown: _hKeyDown
-  }, text);
+    onKeyDown: _hKeyDown,
+    children: text
+  });
 };
 
 var _default = MenuItem;

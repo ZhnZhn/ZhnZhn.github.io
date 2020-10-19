@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -13,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ChartActions = require("../../flux/actions/ChartActions");
 
@@ -330,9 +330,9 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
     _this._MODEL = _this._crModelMore();
     _this._hSetActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), true);
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);
-    _this._refRootNode = /*#__PURE__*/_react["default"].createRef();
-    _this._refSpComp = /*#__PURE__*/_react["default"].createRef();
-    _this._refResize = /*#__PURE__*/_react["default"].createRef();
+    _this._refRootNode = /*#__PURE__*/(0, _react.createRef)();
+    _this._refSpComp = /*#__PURE__*/(0, _react.createRef)();
+    _this._refResize = /*#__PURE__*/(0, _react.createRef)();
     _this.state = {
       isMore: false,
       isCompareTo: false
@@ -370,41 +370,46 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
         _classIsShow = isShow ? CL.ROOT + " " + CL.SHOW : CL.ROOT,
         _modelMore = this._getModelMore();
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       ref: this._refRootNode,
       className: _classIsShow,
-      style: (0, _extends2["default"])({}, this._initialWidthStyle, _styleIsShow, TS.ROOT)
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].ModalSlider, {
-      isShow: isMore,
-      className: CL.MENU_MORE,
-      style: TS.EL_BORDER,
-      model: _modelMore,
-      onClose: this._hToggleMore
-    }), this._isAdminMode && /*#__PURE__*/_react["default"].createElement(_ModalCompareTo["default"], {
-      isShow: isCompareTo,
-      onClose: this._closeCompareTo,
-      onCompareTo: this._compareTo
-    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].BrowserCaption, {
-      style: S.BR_CAPTION,
-      onMore: this._showMore,
-      onCheck: this._hSetActive,
-      onUnCheck: this._hSetNotActive,
-      caption: caption,
-      captionStyle: S.CAPTION,
-      onClose: this._hHide
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].SvgHrzResize, {
-      ref: this._refResize,
-      btStyle: S.BT_RESIZE,
-      initWidth: INITIAL_WIDTH,
-      minWidth: this._MIN_WIDTH,
-      maxWidth: MAX_WIDTH,
-      step: STEP,
-      nodeRef: this._refRootNode,
-      onResizeAfter: this._hResizeAfter
-    })), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ScrollPane, {
-      innerRef: this._refSpComp,
-      className: CL.SCROLL
-    }, /*#__PURE__*/_react["default"].createElement("div", null, this._renderCharts())));
+      style: (0, _extends2["default"])({}, this._initialWidthStyle, _styleIsShow, TS.ROOT),
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ModalSlider, {
+        isShow: isMore,
+        className: CL.MENU_MORE,
+        style: TS.EL_BORDER,
+        model: _modelMore,
+        onClose: this._hToggleMore
+      }), this._isAdminMode && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalCompareTo["default"], {
+        isShow: isCompareTo,
+        onClose: this._closeCompareTo,
+        onCompareTo: this._compareTo
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].BrowserCaption, {
+        style: S.BR_CAPTION,
+        onMore: this._showMore,
+        onCheck: this._hSetActive,
+        onUnCheck: this._hSetNotActive,
+        caption: caption,
+        captionStyle: S.CAPTION,
+        onClose: this._hHide,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].SvgHrzResize, {
+          ref: this._refResize,
+          btStyle: S.BT_RESIZE,
+          initWidth: INITIAL_WIDTH,
+          minWidth: this._MIN_WIDTH,
+          maxWidth: MAX_WIDTH,
+          step: STEP,
+          nodeRef: this._refRootNode,
+          onResizeAfter: this._hResizeAfter
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ScrollPane, {
+        innerRef: this._refSpComp,
+        className: CL.SCROLL,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          children: this._renderCharts()
+        })
+      })]
+    });
   };
 
   return ChartContainer;

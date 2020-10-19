@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
@@ -73,43 +73,44 @@ var MenuMore = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
     return null;
   }
 
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_SvgMore["default"], {
-    btRef: ref,
-    style: S.BT_MORE,
-    svgStyle: S.BT_MORE_SVG,
-    onClick: toggle
-  }), /*#__PURE__*/_react["default"].createElement(_ModalSlider["default"], {
-    isShow: isMore,
-    className: CL.MENU_MORE,
-    style: TS.EL_BORDER,
-    model: menuModel,
-    onClose: toggle
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore["default"], {
+      btRef: ref,
+      style: S.BT_MORE,
+      svgStyle: S.BT_MORE_SVG,
+      onClick: toggle
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider["default"], {
+      isShow: isMore,
+      className: CL.MENU_MORE,
+      style: TS.EL_BORDER,
+      model: menuModel,
+      onClose: toggle
+    })]
+  });
 });
 
 var CommandButtons = function CommandButtons(_ref2) {
   var buttons = _ref2.buttons,
       onShow = _ref2.onShow,
       onClose = _ref2.onClose;
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.COMMAND_DIV
-  }, buttons, _isFn(onShow) && /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-    key: "show",
-    timeout: 0,
-    style: S.BT,
-    caption: "Show",
-    title: "Show Item Container" //accessKey="s"
-    ,
-    onClick: onShow
-  }), /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-    key: "close",
-    timeout: 0,
-    style: S.BT,
-    caption: "Close",
-    title: "Close Draggable Dialog" //accessKey="c"
-    ,
-    onClick: onClose
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.COMMAND_DIV,
+    children: [buttons, _isFn(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
+      timeout: 0,
+      style: S.BT,
+      caption: "Show",
+      title: "Show Item Container" //accessKey="s"
+      ,
+      onClick: onShow
+    }, "show"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
+      timeout: 0,
+      style: S.BT,
+      caption: "Close",
+      title: "Close Draggable Dialog" //accessKey="c"
+      ,
+      onClick: onClose
+    }, "close")]
+  });
 };
 
 var _getCurrent = function _getCurrent(ref) {
@@ -183,7 +184,7 @@ var DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref3, ref) 
     /*#__PURE__*/
 
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
-    _react["default"].createElement("div", {
+    (0, _jsxRuntime.jsxs)("div", {
       ref: _refRootDiv,
       role: "dialog",
       tabIndex: "-1",
@@ -192,27 +193,31 @@ var DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref3, ref) 
       className: _className,
       style: (0, _extends2["default"])({}, S.ROOT_DIV, S.ROOT_DIV_DRAG, _styleShow, TS.ROOT, TS.EL_BORDER),
       onClick: onFront,
-      onKeyDown: _hKeyDown
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.CAPTION_DIV, TS.EL)
-    }, /*#__PURE__*/_react["default"].createElement(MenuMore, {
-      ref: _refBtMore,
-      isMore: isMore,
-      menuModel: menuModel,
-      TS: TS,
-      toggle: toggleIsMore
-    }), /*#__PURE__*/_react["default"].createElement("span", {
-      className: CL.NOT_SELECTED
-    }, caption), /*#__PURE__*/_react["default"].createElement(_SvgClose["default"], {
-      style: S.SVG_CLOSE,
-      onClose: _hClose
-    })), /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.CHILDREN_DIV
-    }, children), /*#__PURE__*/_react["default"].createElement(CommandButtons, {
-      buttons: commandButtons,
-      onShow: onShowChart,
-      onClose: _hClose
-    }))
+      onKeyDown: _hKeyDown,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: (0, _extends2["default"])({}, S.CAPTION_DIV, TS.EL),
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(MenuMore, {
+          ref: _refBtMore,
+          isMore: isMore,
+          menuModel: menuModel,
+          TS: TS,
+          toggle: toggleIsMore
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          className: CL.NOT_SELECTED,
+          children: caption
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose["default"], {
+          style: S.SVG_CLOSE,
+          onClose: _hClose
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: S.CHILDREN_DIV,
+        children: children
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
+        buttons: commandButtons,
+        onShow: onShowChart,
+        onClose: _hClose
+      })]
+    })
   );
 });
 /*

@@ -1,4 +1,4 @@
-import React from 'react'
+import { forwardRef } from 'react'
 
 import MenuAriaItem from './MenuAriaItem'
 
@@ -38,7 +38,7 @@ const NextPageArrow = ({ type }) => {
 }
 
 
-const MenuItemList = React.forwardRef(({
+const MenuItemList = forwardRef(({
   items, itemCl,
   pageNumber, onNextPage,
   onClose
@@ -72,7 +72,7 @@ const MenuItemList = React.forwardRef(({
 MenuItemList.propTypes = {
   items: PropTypes.array,
   itemCl: PropTypes.string,
-  pageNumber: PropTypes.number,  
+  pageNumber: PropTypes.number,
   onNextPage: PropTypes.func,
   onClose: PropTypes.func
 }

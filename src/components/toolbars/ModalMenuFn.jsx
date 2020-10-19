@@ -1,5 +1,3 @@
-import React from 'react'
-
 import dt from '../../utils/DateUtils'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
@@ -70,7 +68,7 @@ const ModalMenuFn = ({
         onClose={onClose}
       />
       <SubMenuItem
-        caption="PasteTo"        
+        caption="PasteTo"
         onClick={onPasteTo}
         onClose={onClose}
       />

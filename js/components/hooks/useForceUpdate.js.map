@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/hooks/useForceUpdate.js"
- ],
- "file": "../../../src/components/hooks/useForceUpdate.js",
- "names": [
-  "useForceUpdate",
-  "_",
-  "Object",
-  "create"
- ],
- "mappings": ";;;;;AAAA;;AAEA,IAAMA,cAAc,GAAG,SAAjBA,cAAiB;AAAA,SAAM,uBAAY,UAAAC,CAAC;AAAA,WAAIC,MAAM,CAACC,MAAP,CAAc,IAAd,CAAJ;AAAA,GAAb,CAAN;AAAA,CAAvB;;eAEeH,c"
-}
+{"version":3,"sources":["../../../src/components/hooks/useForceUpdate.js"],"names":["useForceUpdate","_","Object","create"],"mappings":";;;;;AAAA;;AAEA,IAAMA,cAAc,GAAG,SAAjBA,cAAiB;AAAA,SAAM,uBAAY,UAAAC,CAAC;AAAA,WAAIC,MAAM,CAACC,MAAP,CAAc,IAAd,CAAJ;AAAA,GAAb,CAAN;AAAA,CAAvB;;eAEeH,c","sourcesContent":["import { useReducer } from 'react'\r\n\r\nconst useForceUpdate = () => useReducer( _ => Object.create(null));\r\n\r\nexport default useForceUpdate\r\n"],"file":"useForceUpdate.js"}

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import D from './DialogCell';
 
 const S = {

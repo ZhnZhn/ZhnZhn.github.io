@@ -1,1 +1,29 @@
-{"version":3,"sources":["../../../src/components/about/LogosBar.jsx"],"names":["TH_ID","CL","ROOT","LI","LOGO","LOGO_CONFS","caption","title","href","Logo","className","rest","LogosBar","theme","ThemeContext","TS","getStyle","map","config"],"mappings":";;;;;;;;;;;;;AAAA;;AAEA;;AAEA;;AACA;;AACA;;AACA;;AAEA,IAAMA,KAAK,GAAG,OAAd;AAEA,IAAMC,EAAE,GAAG;AACVC,EAAAA,IAAI,EAAE,gBADI;AAEVC,EAAAA,EAAE,EAAE,WAFM;AAGVC,EAAAA,IAAI,EAAE;AAHI,CAAX;AAMA,IAAMC,UAAU,GAAG,CACjB;AACEC,EAAAA,OAAO,EAAE,UADX;AAEEC,EAAAA,KAAK,EAAE,UAFT;AAGEC,EAAAA,IAAI,EAAE;AAHR,CADiB,EAKf;AACAF,EAAAA,OAAO,EAAE,aADT;AAEAE,EAAAA,IAAI,EAAE;AAFN,CALe,EAQf;AACAF,EAAAA,OAAO,EAAE,SADT;AAEAE,EAAAA,IAAI,EAAE;AAFN,CARe,CAAnB;;AAeA,IAAMC,IAAI,GAAG,SAAPA,IAAO;AAAA,4BACXC,SADW;AAAA,MACXA,SADW,+BACDT,EAAE,CAACG,IADF;AAAA,MAEXG,KAFW,QAEXA,KAFW;AAAA,MAEJD,OAFI,QAEJA,OAFI;AAAA,MAGRK,IAHQ;AAAA,sBAKX;AACE,IAAA,SAAS,EAAED,SADb;AAEE,IAAA,KAAK,EAAEH,KAAK,IAAID;AAFlB,KAGMK,IAHN,GAKEL,OALF,CALW;AAAA,CAAb;;AAcA,IAAMM,QAAQ,GAAG,SAAXA,QAAW,GAAM;AACrB,MAAMC,KAAK,GAAG,uBAAWC,wBAAX,CAAd;AAAA,MACEC,EAAE,GAAGF,KAAK,CAACG,QAAN,CAAehB,KAAf,CADP;AAEA,sBACE;AAAK,IAAA,SAAS,EAAEC,EAAE,CAACC,IAAnB;AAAyB,IAAA,KAAK,EAAEa,EAAE,CAACb;AAAnC,kBACG,gCAAC,sBAAD;AAAY,IAAA,SAAS,EAAED,EAAE,CAACE;AAA1B,IADH,eAEG,gCAAC,sBAAD;AACE,IAAA,SAAS,EAAEF,EAAE,CAACE,EADhB;AAEE,IAAA,IAAI,EAAC;AAFP,IAFH,eAKG,gCAAC,qBAAD;AAAW,IAAA,SAAS,EAAEF,EAAE,CAACE;AAAzB,IALH,eAMG,gCAAC,0BAAD;AAAgB,IAAA,SAAS,EAAEF,EAAE,CAACE;AAA9B,IANH,EAQKE,UAAU,CAACY,GAAX,CAAe,UAAAC,MAAM;AAAA,wBACnB,gCAAC,IAAD;AAAM,MAAA,GAAG,EAAEA,MAAM,CAACZ;AAAlB,OAA+BY,MAA/B,EADmB;AAAA,GAArB,CARL,CADF;AAeD,CAlBD;;eAoBeN,Q","sourcesContent":["import React, { useContext } from 'react';\r\n\r\nimport ThemeContext  from '../hoc/ThemeContext';\r\n\r\nimport LogoQuandl from './LogoQuandl';\r\nimport LogoGitHub from './LogoGitHub';\r\nimport LogoReact from './LogoReact';\r\nimport LogoHighcharts from './LogoHighcharts';\r\n\r\nconst TH_ID = 'LOGOS';\r\n\r\nconst CL = {\r\n ROOT: 'logo-container',\r\n LI: 'logo-item',\r\n LOGO: 'logo-item data-provider-logo'\r\n};\r\n\r\nconst LOGO_CONFS = [\r\n  {\r\n    caption: 'eurostat',\r\n    title: 'Eurostat',\r\n    href: 'http://ec.europa.eu/eurostat'\r\n  },{\r\n    caption: 'UN Comtrade',\r\n    href: 'https://comtrade.un.org'\r\n  },{\r\n    caption: 'FAOSTAT',\r\n    href: 'http://www.fao.org/faostat/en/#data'\r\n  }\r\n];\r\n\r\n\r\nconst Logo = ({\r\n  className=CL.LOGO,\r\n  title, caption,\r\n  ...rest\r\n}) => (\r\n  <a\r\n    className={className}\r\n    title={title || caption}\r\n    {...rest}\r\n  >\r\n   {caption}\r\n  </a>\r\n);\r\n\r\nconst LogosBar = () => {\r\n  const theme = useContext(ThemeContext)\r\n  , TS = theme.getStyle(TH_ID);\r\n  return (\r\n    <div className={CL.ROOT} style={TS.ROOT}>\r\n       <LogoQuandl className={CL.LI} />\r\n       <LogoGitHub\r\n         className={CL.LI}\r\n         href=\"https://github.com/ZhnZhn/ZhnZhn.github.io\" />\r\n       <LogoReact className={CL.LI} />\r\n       <LogoHighcharts className={CL.LI} />\r\n       {\r\n         LOGO_CONFS.map(config => (\r\n           <Logo key={config.caption} {...config} />\r\n         ))\r\n       }\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default LogosBar\r\n"],"file":"LogosBar.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/about/LogosBar.js"
+ ],
+ "file": "../../../src/components/about/LogosBar.js",
+ "names": [
+  "TH_ID",
+  "CL",
+  "ROOT",
+  "LI",
+  "LOGO",
+  "LOGO_CONFS",
+  "caption",
+  "title",
+  "href",
+  "Logo",
+  "className",
+  "rest",
+  "LogosBar",
+  "theme",
+  "ThemeContext",
+  "TS",
+  "getStyle",
+  "map",
+  "config"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA;;AAEA;;AAEA;;AACA;;AACA;;AACA;;AAEA,IAAMA,KAAK,GAAG,OAAd;AAEA,IAAMC,EAAE,GAAG;AACVC,EAAAA,IAAI,EAAE,gBADI;AAEVC,EAAAA,EAAE,EAAE,WAFM;AAGVC,EAAAA,IAAI,EAAE;AAHI,CAAX;AAMA,IAAMC,UAAU,GAAG,CACjB;AACEC,EAAAA,OAAO,EAAE,UADX;AAEEC,EAAAA,KAAK,EAAE,UAFT;AAGEC,EAAAA,IAAI,EAAE;AAHR,CADiB,EAKf;AACAF,EAAAA,OAAO,EAAE,aADT;AAEAE,EAAAA,IAAI,EAAE;AAFN,CALe,EAQf;AACAF,EAAAA,OAAO,EAAE,SADT;AAEAE,EAAAA,IAAI,EAAE;AAFN,CARe,CAAnB;;AAeA,IAAMC,IAAI,GAAG,SAAPA,IAAO;AAAA,4BACXC,SADW;AAAA,MACXA,SADW,+BACDT,EAAE,CAACG,IADF;AAAA,MAEXG,KAFW,QAEXA,KAFW;AAAA,MAEJD,OAFI,QAEJA,OAFI;AAAA,MAGRK,IAHQ;AAAA,sBAKX;AACE,IAAA,SAAS,EAAED,SADb;AAEE,IAAA,KAAK,EAAEH,KAAK,IAAID;AAFlB,KAGMK,IAHN;AAAA,cAKEL;AALF,KALW;AAAA,CAAb;;AAcA,IAAMM,QAAQ,GAAG,SAAXA,QAAW,GAAM;AACrB,MAAMC,KAAK,GAAG,uBAAWC,wBAAX,CAAd;AAAA,MACEC,EAAE,GAAGF,KAAK,CAACG,QAAN,CAAehB,KAAf,CADP;AAEA,sBACE;AAAK,IAAA,SAAS,EAAEC,EAAE,CAACC,IAAnB;AAAyB,IAAA,KAAK,EAAEa,EAAE,CAACb,IAAnC;AAAA,4BACG,qBAAC,sBAAD;AAAY,MAAA,SAAS,EAAED,EAAE,CAACE;AAA1B,MADH,eAEG,qBAAC,sBAAD;AACE,MAAA,SAAS,EAAEF,EAAE,CAACE,EADhB;AAEE,MAAA,IAAI,EAAC;AAFP,MAFH,eAKG,qBAAC,qBAAD;AAAW,MAAA,SAAS,EAAEF,EAAE,CAACE;AAAzB,MALH,eAMG,qBAAC,0BAAD;AAAgB,MAAA,SAAS,EAAEF,EAAE,CAACE;AAA9B,MANH,EAQKE,UAAU,CAACY,GAAX,CAAe,UAAAC,MAAM;AAAA,0BACnB,qBAAC,IAAD,gCAA+BA,MAA/B,GAAWA,MAAM,CAACZ,OAAlB,CADmB;AAAA,KAArB,CARL;AAAA,IADF;AAeD,CAlBD;;eAoBeM,Q"
+}

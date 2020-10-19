@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ModalMenu = _interopRequireDefault(require("./ModalMenu"));
 
@@ -147,34 +147,36 @@ var Table = /*#__PURE__*/function (_Component) {
         rows = _this$state.rows,
         _className = isGridLine ? _Style["default"].CL_GRID : '';
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: _Style["default"].WRAPPER_DIV
-    }, /*#__PURE__*/_react["default"].createElement(_ModalMenu["default"], {
-      isShow: isMenuMore,
-      style: _Style["default"].STYLE_MORE,
-      onClose: this._hToggleMenuMore,
-      isGridLine: isGridLine,
-      onToggleGrid: this._hToogleGridLine,
-      headers: headers,
-      onToggle: this._hToggleColumn
-    }), /*#__PURE__*/_react["default"].createElement("table", {
-      className: _className + " " + className,
-      id: gridId,
-      style: _Style["default"].TABLE,
-      role: "grid"
-    }, /*#__PURE__*/_react["default"].createElement(_TableHead["default"], {
-      gridId: gridId,
-      thMoreStyle: thMoreStyle,
-      headers: headers,
-      sortBy: sortBy,
-      sortTo: sortTo,
-      onSort: this._hSort,
-      onMenuMore: this._hToggleMenuMore
-    }), /*#__PURE__*/_react["default"].createElement(_TableBody["default"], {
-      headers: headers,
-      rows: rows,
-      tableFn: tableFn
-    })));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: _Style["default"].WRAPPER_DIV,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenu["default"], {
+        isShow: isMenuMore,
+        style: _Style["default"].STYLE_MORE,
+        onClose: this._hToggleMenuMore,
+        isGridLine: isGridLine,
+        onToggleGrid: this._hToogleGridLine,
+        headers: headers,
+        onToggle: this._hToggleColumn
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("table", {
+        className: _className + " " + className,
+        id: gridId,
+        style: _Style["default"].TABLE,
+        role: "grid",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_TableHead["default"], {
+          gridId: gridId,
+          thMoreStyle: thMoreStyle,
+          headers: headers,
+          sortBy: sortBy,
+          sortTo: sortTo,
+          onSort: this._hSort,
+          onMenuMore: this._hToggleMenuMore
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_TableBody["default"], {
+          headers: headers,
+          rows: rows,
+          tableFn: tableFn
+        })]
+      })]
+    });
   };
 
   return Table;

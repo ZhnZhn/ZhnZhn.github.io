@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import Button from './Button'
 import ModalDialog from '../zhn-moleculs/ModalDialog';

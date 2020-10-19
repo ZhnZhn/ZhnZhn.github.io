@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
@@ -45,7 +45,7 @@ var MenuBadge = function MenuBadge(_ref) {
     }
   }, [isOpen, onClick, onBadgeClose]);
 
-  return /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
     tabIndex: "-1",
     className: CL,
     style: (0, _extends2["default"])({}, S.BT, _btStyle, TS.BG),

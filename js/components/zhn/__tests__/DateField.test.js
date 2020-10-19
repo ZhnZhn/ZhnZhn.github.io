@@ -6,9 +6,11 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _jsxRuntime = require("react/jsx-runtime.js");
+
 require("@testing-library/jest-dom");
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 
 var _react2 = require("@testing-library/react");
 
@@ -31,7 +33,7 @@ describe("DateField", function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            onEnter = jest.fn(), ref = /*#__PURE__*/_react["default"].createRef(), initialValue = "2010-01-01", _render = (0, _react2.render)( /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
+            onEnter = jest.fn(), ref = /*#__PURE__*/(0, _react.createRef)(), initialValue = "2010-01-01", _render = (0, _react2.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField["default"], {
               ref: ref,
               initialValue: initialValue,
               onEnter: onEnter
@@ -81,7 +83,7 @@ describe("DateField", function () {
             expect(input).toHaveFocus(); //4 Test rerender with new initialValue
 
             _rerenderValue = "2020-01-01";
-            rerender( /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
+            rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField["default"], {
               initialValue: _rerenderValue
             }));
             _context.next = 31;

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import CaptionInput from './CaptionInput'
 
 const CL = {

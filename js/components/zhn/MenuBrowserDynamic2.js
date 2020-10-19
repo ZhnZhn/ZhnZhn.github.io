@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _Browser = _interopRequireDefault(require("./Browser"));
 
@@ -203,33 +203,36 @@ var MenuBrowserDynamic2 = /*#__PURE__*/function (_Component) {
         scrollClass = _this$state2.scrollClass,
         _isMenuEmpty = menuItems.length === 0;
 
-    return /*#__PURE__*/_react["default"].createElement(_Browser["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser["default"], {
       isShow: isShow,
-      style: STYLE.BROWSER
-    }, /*#__PURE__*/_react["default"].createElement(_BrowserCaption["default"], {
-      caption: caption,
-      captionStyle: STYLE.CAPTION,
-      onClose: this._handleHide
-    }), /*#__PURE__*/_react["default"].createElement(_ToolbarButtonCircle["default"], {
-      buttons: this.toolbarButtons
-    }), !_isMenuEmpty && /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-      isShow: isShowSearch
-    }, /*#__PURE__*/_react["default"].createElement(_WrapperInputSearch["default"], {
-      style: STYLE.WRAPPER_SEARCH,
-      placeholder: SEARCH_PLACEHOLDER,
-      data: menuItems,
-      ItemOptionComp: ItemOptionComp,
-      onSelect: this._handleClickItem
-    })), /*#__PURE__*/_react["default"].createElement(_ScrollPane["default"], {
-      className: scrollClass
-    }, _isMenuEmpty && /*#__PURE__*/_react["default"].createElement(_SpinnerLoading["default"], {
-      style: STYLE.SPINNER_LOADING
-    }), /*#__PURE__*/_react["default"].createElement(_MenuListType["default"], {
-      model: menuItems,
-      ItemComp: ItemComp,
-      itemClassName: CL.ROW_ITEM,
-      onClickItem: this._handleClickItem
-    }), children));
+      style: STYLE.BROWSER,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption["default"], {
+        caption: caption,
+        captionStyle: STYLE.CAPTION,
+        onClose: this._handleHide
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle["default"], {
+        buttons: this.toolbarButtons
+      }), !_isMenuEmpty && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+        isShow: isShowSearch,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WrapperInputSearch["default"], {
+          style: STYLE.WRAPPER_SEARCH,
+          placeholder: SEARCH_PLACEHOLDER,
+          data: menuItems,
+          ItemOptionComp: ItemOptionComp,
+          onSelect: this._handleClickItem
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane["default"], {
+        className: scrollClass,
+        children: [_isMenuEmpty && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading["default"], {
+          style: STYLE.SPINNER_LOADING
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuListType["default"], {
+          model: menuItems,
+          ItemComp: ItemComp,
+          itemClassName: CL.ROW_ITEM,
+          onClickItem: this._handleClickItem
+        }), children]
+      })]
+    });
   };
 
   return MenuBrowserDynamic2;

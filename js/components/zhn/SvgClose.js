@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _SvgX = _interopRequireDefault(require("./svg/SvgX"));
 
@@ -15,12 +15,13 @@ var CL = "bt-svg-close";
 var SvgClose = function SvgClose(_ref) {
   var style = _ref.style,
       onClose = _ref.onClose;
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     tabIndex: "-1",
     className: CL,
     style: style,
-    onClick: onClose
-  }, /*#__PURE__*/_react["default"].createElement(_SvgX["default"], null));
+    onClick: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgX["default"], {})
+  });
 };
 /*
 SvgClose.propTypes = {

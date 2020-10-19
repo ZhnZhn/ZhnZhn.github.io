@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/stat-uk/StatUk.js"
- ],
- "file": "../../../src/adapters/stat-uk/StatUk.js",
- "names": [
-  "StatUk",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,MAAM,GAAG;AACbC,EAAAA,GAAG,EAAHA,kBADa;AACRC,EAAAA,OAAO,EAAPA;AADQ,CAAf;eAIeF,M"
-}
+{"version":3,"sources":["../../../src/adapters/stat-uk/StatUk.js"],"names":["StatUk","api","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,MAAM,GAAG;AACbC,EAAAA,GAAG,EAAHA,kBADa;AACRC,EAAAA,OAAO,EAAPA;AADQ,CAAf;eAIeF,M","sourcesContent":["import api from './OnsApi'\r\nimport adapter from './OnsAdapter'\r\n\r\nconst StatUk = {\r\n  api, adapter\r\n}\r\n\r\nexport default StatUk\r\n"],"file":"StatUk.js"}

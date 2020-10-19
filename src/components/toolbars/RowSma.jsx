@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import useRefInit from '../hooks/useRefInit'
 
 import RowType2 from './RowType2'

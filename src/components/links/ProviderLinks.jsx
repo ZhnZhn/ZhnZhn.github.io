@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Link from '../zhn/Link'
 
 const CL_LINK = "data-provider-link";

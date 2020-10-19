@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import memoEqual from '../hoc/memoEqual'
 
 import TransformFn from './TransformFn';

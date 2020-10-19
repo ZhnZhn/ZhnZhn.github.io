@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 
 import isKeyEnter from '../zhn/isKeyEnter'
 import STYLE from './Style'

@@ -1,5 +1,3 @@
-import React from 'react'
-
 const COLOR = '#faebd7';
 const TWITTER_URL = 'https://twitter.com';
 const S = {

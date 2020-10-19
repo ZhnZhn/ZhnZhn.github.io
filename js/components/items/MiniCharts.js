@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -53,18 +53,20 @@ var MiniCharts = function MiniCharts(_ref) {
     return null;
   }
 
-  return /*#__PURE__*/_react["default"].createElement("div", null, _configs.map(function (c) {
-    return /*#__PURE__*/_react["default"].createElement(_Comp["default"].ShowHide, {
-      key: c[idPropName],
-      isShow: true,
-      withoutAnimation: withoutAnimation
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].HighchartWrapper, {
-      config: c.config,
-      absComp: absComp,
-      onLoaded: onLoaded,
-      onWillUnLoaded: onWillUnLoaded
-    }));
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    children: _configs.map(function (c) {
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ShowHide, {
+        isShow: true,
+        withoutAnimation: withoutAnimation,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].HighchartWrapper, {
+          config: c.config,
+          absComp: absComp,
+          onLoaded: onLoaded,
+          onWillUnLoaded: onWillUnLoaded
+        })
+      }, c[idPropName]);
+    })
+  });
 };
 /*
 MiniCharts.propTypes = {

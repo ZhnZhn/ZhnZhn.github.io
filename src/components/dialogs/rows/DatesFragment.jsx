@@ -1,4 +1,4 @@
-import React, { useRef, useImperativeHandle } from 'react';
+import { forwardRef, useRef, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
 
 import DateField from '../../zhn/DateField';
@@ -15,7 +15,7 @@ const _getValue = ref => ref.current.getValue()
 , _isValid = ref => ref.current.isValid()
 , _setValue = (ref, value) => ref.current.setValue(value);
 
-const DatesFragment = React.forwardRef(({
+const DatesFragment = forwardRef(({
   isShowLabels=true,
   placeholder,
   fromCaption='From Date:',

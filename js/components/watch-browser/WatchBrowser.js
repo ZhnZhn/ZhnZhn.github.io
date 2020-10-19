@@ -2,14 +2,14 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _Type = require("../../constants/Type");
 
@@ -114,8 +114,7 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
       return watchList.groups.map(function (group, index) {
         var caption = group.caption,
             lists = group.lists;
-        return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
-          key: index,
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].OpenClose2, {
           style: S.GROUP_DIV //openColor={C_GROUP_OPEN}
           ,
           caption: caption,
@@ -127,8 +126,9 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
           onDragEnter: _this._hDragEnterGroup,
           onDragOver: _this._hDragOverGroup,
           onDragLeave: _this._hDragLeaveGroup,
-          onDrop: _this._hDropGroup
-        }, lists && _this._renderLists(lists, caption));
+          onDrop: _this._hDropGroup,
+          children: lists && _this._renderLists(lists, caption)
+        }, index);
       });
     };
 
@@ -137,8 +137,7 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
       return lists.map(function (list, index) {
         var caption = list.caption,
             items = list.items;
-        return /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose2, {
-          key: index,
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].OpenClose2, {
           style: S.LIST_DIV,
           notSelectedStyle: S.ITEM_NOT_SELECTED,
           openColor: C_LIST_OPEN,
@@ -152,8 +151,9 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
           onDragEnter: _this._hDragEnterList,
           onDragOver: _this._hDragOverList,
           onDragLeave: _this._hDragLeaveList,
-          onDrop: _this._hDropList
-        }, items && _this._renderItems(items, groupCaption, caption));
+          onDrop: _this._hDropList,
+          children: items && _this._renderItems(items, groupCaption, caption)
+        }, index);
       });
     };
 
@@ -162,8 +162,7 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
       return items.map(function (item, index) {
         var id = item.id,
             caption = item.caption;
-        return /*#__PURE__*/_react["default"].createElement(_WatchItem["default"], {
-          key: id,
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchItem["default"], {
           className: CL.WATCH_ITEM,
           isModeEdit: isModeEdit,
           item: item,
@@ -179,7 +178,7 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
           onDragEnter: _this._hDragEnterItem,
           onDragLeave: _this._hDragLeaveItem,
           onDrop: _this._hDropItem
-        });
+        }, id);
       });
     };
 
@@ -237,29 +236,32 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
         watchList = _this$state.watchList,
         _captionEV = isModeEdit ? 'V' : 'E';
 
-    return /*#__PURE__*/_react["default"].createElement(_Comp["default"].Browser, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].Browser, {
       isShow: isShow,
-      style: S.BROWSER
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].BrowserCaption, {
-      caption: caption,
-      onClose: this._handlerHide
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].ButtonCircle, {
-      caption: "S",
-      title: "Save to LocalStorage",
-      style: S.BT_CIRCLE,
-      onClick: this._handlerSaveWatch
-    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ButtonCircle, {
-      caption: _captionEV,
-      title: "Toggle Edit Mode: E/V",
-      style: S.BT_CIRCLE,
-      onClick: this._handlerToggleEditMode
-    })), /*#__PURE__*/_react["default"].createElement(_EditBar["default"], {
-      isShow: isModeEdit,
-      onClickGroup: this._handlerEditGroup,
-      onClickList: this._handlerEditList
-    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ScrollPane, {
-      className: CL.SCROLL
-    }, watchList && this._renderWatchList(watchList)));
+      style: S.BROWSER,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].BrowserCaption, {
+        caption: caption,
+        onClose: this._handlerHide,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ButtonCircle, {
+          caption: "S",
+          title: "Save to LocalStorage",
+          style: S.BT_CIRCLE,
+          onClick: this._handlerSaveWatch
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ButtonCircle, {
+          caption: _captionEV,
+          title: "Toggle Edit Mode: E/V",
+          style: S.BT_CIRCLE,
+          onClick: this._handlerToggleEditMode
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EditBar["default"], {
+        isShow: isModeEdit,
+        onClickGroup: this._handlerEditGroup,
+        onClickList: this._handlerEditList
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ScrollPane, {
+        className: CL.SCROLL,
+        children: watchList && this._renderWatchList(watchList)
+      })]
+    });
   };
 
   return WatchBrowser;

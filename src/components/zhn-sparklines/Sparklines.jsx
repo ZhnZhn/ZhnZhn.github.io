@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import { cloneElement, Children, PureComponent } from 'react';
 //import PropTypes from 'prop-types';
 import SparklinesLine from './SparklinesLine';
 
@@ -62,8 +62,8 @@ class Sparklines extends PureComponent {
 
       return (
         <svg {...svgOpts} >
-            {React.Children.map(this.props.children, child =>
-                React.cloneElement(child, { data, points, width, height, margin })
+            {Children.map(this.props.children, child =>
+                cloneElement(child, { data, points, width, height, margin })
             )}
         </svg>
      );

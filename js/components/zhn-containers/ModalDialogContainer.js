@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 //import PropTypes from 'prop-types'
 var CL = {
@@ -77,11 +77,12 @@ var ModalDialogContainer = /*#__PURE__*/function (_Component) {
       }
     }
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: _className,
       style: _style,
-      onClick: onClose
-    }, children);
+      onClick: onClose,
+      children: children
+    });
   };
 
   return ModalDialogContainer;

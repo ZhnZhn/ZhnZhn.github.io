@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CL_BT_MORE = 'bt-more';
 
 const S = {

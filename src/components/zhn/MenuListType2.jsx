@@ -1,5 +1,3 @@
-import React from 'react';
-
 import memoEqual from '../hoc/memoEqual'
 import C from '../styles/Color'
 import OpenClose2 from './OpenClose2'

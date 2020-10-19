@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 
@@ -87,14 +87,13 @@ var SeriesPane = /*#__PURE__*/function (_Component) {
       return series.filter(function (seria) {
         return seria.visible;
       }).map(function (seria, index) {
-        return /*#__PURE__*/_react["default"].createElement(_SeriaRow["default"], {
-          key: chartId + index,
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaRow["default"], {
           seria: seria,
           compIndex: index,
           yAxisOptions: options,
           onReg: _this._regSeriaRow,
           onUnReg: _this._unregSeriaRow
-        });
+        }, chartId + index);
       });
     };
 
@@ -119,16 +118,24 @@ var SeriesPane = /*#__PURE__*/function (_Component) {
         _zhConfig$id = zhConfig.id,
         chartId = _zhConfig$id === void 0 ? 'id' : _zhConfig$id;
 
-    return /*#__PURE__*/_react["default"].createElement(_ScrollPane["default"], {
-      style: rootStyle
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT_DIV
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.TITLE
-    }, /*#__PURE__*/_react["default"].createElement("span", null, "From Chart:\xA0"), /*#__PURE__*/_react["default"].createElement("span", {
-      className: CL.ELL,
-      style: S.CHART_ID
-    }, chartId)), /*#__PURE__*/_react["default"].createElement("div", null, this._renderSeries(chartId, series, _yAxisOption))));
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ScrollPane["default"], {
+      style: rootStyle,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: S.ROOT_DIV,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          style: S.TITLE,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            children: "From Chart:\xA0"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: CL.ELL,
+            style: S.CHART_ID,
+            children: chartId
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          children: this._renderSeries(chartId, series, _yAxisOption)
+        })]
+      })
+    });
   };
 
   _proto.getValues = function getValues() {

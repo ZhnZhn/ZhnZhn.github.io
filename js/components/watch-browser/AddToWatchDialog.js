@@ -11,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _WatchActions = _interopRequireWildcard(require("../../flux/actions/WatchActions"));
 
@@ -158,13 +160,12 @@ var AddToWatchDialog = (0, _withValidationLoad["default"])(_class = (_temp = /*#
 
     _this.groupCaption = null;
     _this.listCaption = null;
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
-      key: "add",
+    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button["default"].Flat, {
       caption: "Add",
       title: "Add Item To Watch List",
       isPrimary: true,
       onClick: _this._handleAdd
-    })];
+    }, "add")];
     _this.state = {
       groupOptions: props.store.getWatchGroups(),
       listOptions: [],
@@ -224,31 +225,32 @@ var AddToWatchDialog = (0, _withValidationLoad["default"])(_class = (_temp = /*#
         groupOptions = _this$state.groupOptions,
         listOptions = _this$state.listOptions,
         validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
       style: S.DIALOG,
       caption: "Add To Watch List",
       isShow: isShow,
       commandButtons: this._commandButtons,
-      onClose: this._handleClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
-      styleCaption: S.CAPTION,
-      caption: "Item:",
-      text: caption
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      caption: "Group",
-      captionStyle: S.CAPTION,
-      width: SELECT_WIDTH,
-      options: groupOptions,
-      onSelect: this._handleSelectGroup
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      caption: "List",
-      captionStyle: S.CAPTION,
-      width: SELECT_WIDTH,
-      onSelect: this._handleSelectList,
-      options: listOptions
-    }), /*#__PURE__*/_react["default"].createElement(_ValidationMessages["default"], {
-      validationMessages: validationMessages
-    }));
+      onClose: this._handleClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Row.Text, {
+        styleCaption: S.CAPTION,
+        caption: "Item:",
+        text: caption
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+        caption: "Group",
+        captionStyle: S.CAPTION,
+        width: SELECT_WIDTH,
+        options: groupOptions,
+        onSelect: this._handleSelectGroup
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+        caption: "List",
+        captionStyle: S.CAPTION,
+        width: SELECT_WIDTH,
+        onSelect: this._handleSelectList,
+        options: listOptions
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages["default"], {
+        validationMessages: validationMessages
+      })]
+    });
   };
 
   return AddToWatchDialog;

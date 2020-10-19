@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Link = ({ title, dfStyle, style, children, ...rest }) => (
  <a
    target="_blank"

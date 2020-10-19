@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 
@@ -87,17 +87,16 @@ var SeriaColor = /*#__PURE__*/function (_Component) {
       var _max = isLong ? colors.length : N_SHORT;
 
       return colors.map(function (c, i) {
-        return i < _max ? /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
-          key: c,
+        return i < _max ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor["default"], {
           className: CL_INPUT_COLOR,
           style: S.CELL,
           color: c,
           onClick: _this._hClick
-        }) : null;
+        }, c) : null;
       }).filter(Boolean);
     };
 
-    _this._refLineWidth = /*#__PURE__*/_react["default"].createRef();
+    _this._refLineWidth = /*#__PURE__*/(0, _react.createRef)();
     _this.state = {
       color: _initColor(props)
     };
@@ -122,21 +121,25 @@ var SeriaColor = /*#__PURE__*/function (_Component) {
         _isLineWidth = _hasLineWidth(chartType),
         _rowStyle = _isLineWidth ? S.ROW2 : (0, _extends2["default"])({}, S.ROW2, S.ROW2_PADDING);
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT
-    }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_CellColor["default"], {
-      color: color,
-      className: CL_INPUT_COLOR,
-      style: S.TO_CELL,
-      onClick: this._hReset
-    }), this._renderColors(COLORS1, isLong)), /*#__PURE__*/_react["default"].createElement("div", {
-      style: _rowStyle
-    }, /*#__PURE__*/_react["default"].createElement(_BtCounter["default"], {
-      ref: this._refLineWidth,
-      isShow: _isLineWidth,
-      style: S.BT_COUNTER,
-      title: "Line Width"
-    }), this._renderColors(COLORS2, isLong)));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROOT,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor["default"], {
+          color: color,
+          className: CL_INPUT_COLOR,
+          style: S.TO_CELL,
+          onClick: this._hReset
+        }), this._renderColors(COLORS1, isLong)]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: _rowStyle,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtCounter["default"], {
+          ref: this._refLineWidth,
+          isShow: _isLineWidth,
+          style: S.BT_COUNTER,
+          title: "Line Width"
+        }), this._renderColors(COLORS2, isLong)]
+      })]
+    });
   };
 
   _proto.getConf = function getConf() {

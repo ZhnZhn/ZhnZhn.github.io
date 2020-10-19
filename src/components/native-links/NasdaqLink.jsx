@@ -1,11 +1,9 @@
-import React from 'react'
-
 import Link from './Link'
 
 const NASDAQ_BASE = 'https://www.nasdaq.com/symbol/'
     , CAPTION = 'NASDAQ Link';
 
-const NasdaqLink = ({ item={}, caption=CAPTION, style }) => {  
+const NasdaqLink = ({ item={}, caption=CAPTION, style }) => {
   const { text='', value } = typeof item === 'object'
            ? item
            : { value: item }

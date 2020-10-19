@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component, createRef } from 'react';
 
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
@@ -30,8 +30,8 @@ class Futures3Dialog extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
-    this._refItemMonth = React.createRef()
-    this._refFromDate = React.createRef()
+    this._refItemMonth = createRef()
+    this._refFromDate = createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {

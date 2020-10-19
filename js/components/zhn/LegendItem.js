@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
@@ -68,15 +68,17 @@ var LegendItem = function LegendItem(_ref2) {
     toggleIs();
   };
 
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
     className: CL,
     style: btStyle,
-    onClick: _hClick
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.CIRCLE, circleStyle)
-  }), /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.ITEM
-  }, name));
+    onClick: _hClick,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: (0, _extends2["default"])({}, S.CIRCLE, circleStyle)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S.ITEM,
+      children: name
+    })]
+  });
 };
 /*
 LegendItem.propTypes = {

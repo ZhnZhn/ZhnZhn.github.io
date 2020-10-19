@@ -1,5 +1,3 @@
-import React from 'react'
-
 import useKeyEnter from '../hooks/useKeyEnter'
 
 import LabelNew from './LabelNew'
@@ -25,7 +23,7 @@ const MenuItem = ({
 }) => {
   const _hKeyDown = useKeyEnter(onClick);
   return (
-  <div      
+  <div
       tabIndex="0"
       role="menuitem"
       className={CL_ROW}

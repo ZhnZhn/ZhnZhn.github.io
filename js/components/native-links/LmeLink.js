@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Link = _interopRequireDefault(require("./Link"));
 
@@ -20,7 +20,7 @@ var LmeLink = function LmeLink(_ref) {
       caption = _item$caption === void 0 ? '' : _item$caption,
       _path = String(caption).toLowerCase().replace(' ', '-');
 
-  return /*#__PURE__*/_react["default"].createElement(_Link["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
     caption: LME + caption,
     href: BASE_URL + _path
   });

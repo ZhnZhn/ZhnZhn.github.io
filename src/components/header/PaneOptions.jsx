@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import Highcharts from 'highcharts'
 //import PropTypes from 'prop-types'
 

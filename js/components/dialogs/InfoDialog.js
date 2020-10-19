@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -37,19 +37,24 @@ var InfoDialog = (0, _crModalDialog["default"])(function (_ref) {
       onClose = _ref.onClose;
   var caption = data.caption,
       descr = data.descr;
-  return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
     caption: "Information",
     isShow: isShow,
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: _DialogStyles["default"].ROW
-  }, /*#__PURE__*/_react["default"].createElement("p", {
-    style: S.CAPTION
-  }, caption)), /*#__PURE__*/_react["default"].createElement("div", {
-    style: _DialogStyles["default"].ROW
-  }, /*#__PURE__*/_react["default"].createElement("p", {
-    style: S.DESCR
-  }, descr)));
+    onClose: onClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: _DialogStyles["default"].ROW,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        style: S.CAPTION,
+        children: caption
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: _DialogStyles["default"].ROW,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        style: S.DESCR,
+        children: descr
+      })
+    })]
+  });
 });
 var _default = InfoDialog;
 exports["default"] = _default;

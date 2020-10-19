@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -33,14 +33,15 @@ var BrowserContainer = function BrowserContainer(_ref) {
       });
     }
   });
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    className: CL_ROOT
-  }, elBrowsers, /*#__PURE__*/_react["default"].createElement(_DialogContainer["default"], {
-    maxDialog: 3,
-    store: store,
-    showAction: showDialogAction,
-    onCloseDialog: onCloseDialog
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: CL_ROOT,
+    children: [elBrowsers, /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer["default"], {
+      maxDialog: 3,
+      store: store,
+      showAction: showDialogAction,
+      onCloseDialog: onCloseDialog
+    })]
+  });
 };
 /*
 BrowserContainer.propTypes = {

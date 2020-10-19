@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
@@ -39,9 +39,10 @@ var S = {
 
 var ErrMsg = function ErrMsg(_ref) {
   var msg = _ref.msg;
-  return msg ? /*#__PURE__*/_react["default"].createElement("div", {
-    style: _Input["default"].ERR_MSG
-  }, msg) : null;
+  return msg ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: _Input["default"].ERR_MSG,
+    children: msg
+  }) : null;
 };
 
 var _crInitialState = function _crInitialState(initValue) {
@@ -179,29 +180,30 @@ var InputPattern = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
   var _inputStyle = _crInputStyle(isValid),
       _btClearStyle = _crBtClearStyle(isValid);
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, _Input["default"].ROOT, rootStyle)
-  }, /*#__PURE__*/_react["default"].createElement("input", {
-    type: "text",
-    style: (0, _extends2["default"])({}, S.INPUT, inputStyle, _inputStyle),
-    ref: _refInput,
-    name: "text-date" //autoComplete="new-text-date"
-    ,
-    autoComplete: "off",
-    autoCorrect: "off",
-    autoCapitalize: "off",
-    spellCheck: false,
-    placeholder: placeholder,
-    value: value,
-    maxLength: maxLength,
-    onChange: _hChangeValue,
-    onKeyDown: _hKeyDown
-  }), value || errorInput ? /*#__PURE__*/_react["default"].createElement(_SvgClear["default"], {
-    style: _btClearStyle,
-    onClick: _hClear
-  }) : null, /*#__PURE__*/_react["default"].createElement(ErrMsg, {
-    msg: errorInput
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: (0, _extends2["default"])({}, _Input["default"].ROOT, rootStyle),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      type: "text",
+      style: (0, _extends2["default"])({}, S.INPUT, inputStyle, _inputStyle),
+      ref: _refInput,
+      name: "text-date" //autoComplete="new-text-date"
+      ,
+      autoComplete: "off",
+      autoCorrect: "off",
+      autoCapitalize: "off",
+      spellCheck: false,
+      placeholder: placeholder,
+      value: value,
+      maxLength: maxLength,
+      onChange: _hChangeValue,
+      onKeyDown: _hKeyDown
+    }), value || errorInput ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClear["default"], {
+      style: _btClearStyle,
+      onClick: _hClear
+    }) : null, /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrMsg, {
+      msg: errorInput
+    })]
+  });
 });
 /*
 static propTypes = {

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 
@@ -116,31 +116,33 @@ var InputSearch = function InputSearch(_ref) {
       onInputChange = isSearch ? _onInputChange : null,
       _rootStyle = isOptions ? (0, _extends2["default"])({}, S.ROOT, S.ROOT_OPTIONS) : S.ROOT;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: _rootStyle,
     tabIndex: "-1",
     role: "textbox",
-    onKeyDown: onKeyDown
-  }, /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
-    ref: refInput,
-    key: inputKey,
-    style: S.INPUT,
-    initValue: ticket,
-    onChange: onInputChange,
-    onEnter: _onEnter
-  }), /*#__PURE__*/_react["default"].createElement("hr", {
-    className: CL.INPUT_HR
-  }), isSearch && /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, /*#__PURE__*/_react["default"].createElement(_ToggleButton["default"], {
-    isLoading: isLoading,
-    isLoadingFailed: isLoadingFailed,
-    options: options,
-    isOptions: isOptions,
-    toggleOptions: action.toggleOptions
-  }), /*#__PURE__*/_react["default"].createElement(_SearchOptions["default"], {
-    isShow: isOptions,
-    options: options,
-    onClickItem: _onClickItem
-  })));
+    onKeyDown: onKeyDown,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
+      ref: refInput,
+      style: S.INPUT,
+      initValue: ticket,
+      onChange: onInputChange,
+      onEnter: _onEnter
+    }, inputKey), /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
+      className: CL.INPUT_HR
+    }), isSearch && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_react.Fragment, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToggleButton["default"], {
+        isLoading: isLoading,
+        isLoadingFailed: isLoadingFailed,
+        options: options,
+        isOptions: isOptions,
+        toggleOptions: action.toggleOptions
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SearchOptions["default"], {
+        isShow: isOptions,
+        options: options,
+        onClickItem: _onClickItem
+      })]
+    })]
+  });
 };
 
 var _default = InputSearch;

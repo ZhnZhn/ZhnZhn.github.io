@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import A from './Atoms'
@@ -21,11 +21,11 @@ class GroupDeletePane extends Component {
   constructor(props){
     super()
     this.caption = null
-    this._primaryBt = <A.Button.Primary
+    this._primaryBt = (<A.Button.Primary
        caption="Delete"
        title="Delete Group"
        onClick={this._handleDeleteGroup}
-    />
+    />)
     this.state = {
       groupOptions: props.store.getWatchGroups(),
       validationMessages: []

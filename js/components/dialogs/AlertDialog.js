@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -65,21 +65,26 @@ var AlertDialog = (0, _crModalDialog["default"])(function (_ref) {
       alertDescr = data.alertDescr,
       _caption = alertCaption + ': ';
 
-  return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
     caption: "Alert",
     isShow: isShow,
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROW_CAPTION
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.CAPTION
-  }, _caption), /*#__PURE__*/_react["default"].createElement("span", {
-    className: CL_ELL,
-    style: S.ITEM_ID,
-    title: alertItemId
-  }, alertItemId)), /*#__PURE__*/_react["default"].createElement("p", {
-    style: S.DESCR
-  }, alertDescr));
+    onClose: onClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROW_CAPTION,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: S.CAPTION,
+        children: _caption
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: CL_ELL,
+        style: S.ITEM_ID,
+        title: alertItemId,
+        children: alertItemId
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+      style: S.DESCR,
+      children: alertDescr
+    })]
+  });
 });
 var _default = AlertDialog;
 exports["default"] = _default;

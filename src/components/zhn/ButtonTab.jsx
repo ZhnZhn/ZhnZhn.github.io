@@ -1,4 +1,3 @@
-import React from 'react';
 //import PropTypes from "prop-types";
 
 import useTheme from '../hooks/useTheme'
@@ -26,7 +25,7 @@ const ButtonTab = ({
   className, style,
   caption, children,
   onClick
-}) => {  
+}) => {
   const TS = useTheme(TH_ID)
 
   if (!is) { return null; }

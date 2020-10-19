@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useToggle4 = _interopRequireDefault(require("../hooks/useToggle"));
 
@@ -162,24 +162,25 @@ var ChartToolbar = function ChartToolbar(_ref3) {
       legend = zhConfig.legend,
       _modalMenuArr = [];
 
-  var _btInfo = /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
+  var _btInfo = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {
     is: !!info,
     caption: "Info",
     onClick: onClickInfo
   });
 
   if (hasError) {
-    return /*#__PURE__*/_react["default"].createElement("div", {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       ref: _refToolbar,
       className: CL.SCROLL,
-      style: style
-    }, _btInfo);
+      style: style,
+      children: _btInfo
+    });
   }
 
   var _btTabIndicator = null;
 
   if (_isIndicatorTab(config, isWithoutIndicator)) {
-    _btTabIndicator = /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
+    _btTabIndicator = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {
       style: S.BT_IND,
       caption: "Indicator",
       isShow: isShowInd,
@@ -187,8 +188,7 @@ var ChartToolbar = function ChartToolbar(_ref3) {
       onClick: toggleInd
     });
 
-    _modalMenuArr.push( /*#__PURE__*/_react["default"].createElement(_ModalMenuIndicator["default"], {
-      key: "menu_ind",
+    _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuIndicator["default"], {
       isShow: isShowInd,
       style: S.M_IND,
       config: config,
@@ -196,17 +196,17 @@ var ChartToolbar = function ChartToolbar(_ref3) {
       onAddMfi: onAddMfi,
       onRemoveMfi: onRemoveMfi,
       onClose: toggleInd
-    }));
+    }, "menu_ind"));
   }
 
-  var _btLegend = /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
+  var _btLegend = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {
     is: !!legend,
     style: S.BT_LEGEND,
     caption: "Legend",
     onClick: onClickLegend
   });
 
-  var _btAdd = /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
+  var _btAdd = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {
     is: !!itemConf,
     style: S.BT_ADD,
     caption: "Add",
@@ -216,7 +216,7 @@ var ChartToolbar = function ChartToolbar(_ref3) {
   var _btTabMini = null;
 
   if (zhMiniConfigs && zhMiniConfigs.length) {
-    _btTabMini = /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
+    _btTabMini = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {
       style: S.BT_MINI,
       caption: "Mini",
       isShow: isShowMini,
@@ -226,46 +226,48 @@ var ChartToolbar = function ChartToolbar(_ref3) {
 
     var _miniStyle = isShowMini ? _crModalMenuStyle(_refToolbar, S.M_MINI.left) : void 0;
 
-    _modalMenuArr.push( /*#__PURE__*/_react["default"].createElement(_ModalMenuMini["default"], {
-      key: "menu_mini",
+    _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuMini["default"], {
       isShow: isShowMini,
       style: (0, _extends2["default"])({}, S.M_MINI, _miniStyle),
       configs: zhMiniConfigs,
       onClickItem: onMiniChart,
       onClose: toggleMini
-    }));
+    }, "menu_mini"));
   }
 
   var _fnStyle = isShowFn ? _crModalMenuStyle(_refToolbar, S.BT_FN.left) : void 0;
 
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_ModalMenuFn["default"], {
-    isShow: isShowFn,
-    style: (0, _extends2["default"])({}, S.M_FN, _fnStyle),
-    config: config,
-    getChart: getChart,
-    onX2H: onClick2H,
-    onMinMax: onMinMax,
-    onZoom: onZoom,
-    onCopy: onCopy,
-    onPasteTo: onPasteTo,
-    onClose: toggleFn
-  }), _modalMenuArr, /*#__PURE__*/_react["default"].createElement("div", {
-    ref: _refToolbar,
-    className: CL.SCROLL,
-    style: style
-  }, _btTabIndicator, _btLegend, /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
-    style: S.BT_FN,
-    caption: "Fn",
-    isShow: isShowFn,
-    isMenu: true,
-    onClick: toggleFn
-  }), _btAdd, _btInfo, _btTabMini, /*#__PURE__*/_react["default"].createElement(_ButtonTab["default"], {
-    is: !!_btTabMini,
-    className: CL.BT_R,
-    style: S.BT_R,
-    caption: ">",
-    onClick: _hClickR
-  })));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuFn["default"], {
+      isShow: isShowFn,
+      style: (0, _extends2["default"])({}, S.M_FN, _fnStyle),
+      config: config,
+      getChart: getChart,
+      onX2H: onClick2H,
+      onMinMax: onMinMax,
+      onZoom: onZoom,
+      onCopy: onCopy,
+      onPasteTo: onPasteTo,
+      onClose: toggleFn
+    }), _modalMenuArr, /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      ref: _refToolbar,
+      className: CL.SCROLL,
+      style: style,
+      children: [_btTabIndicator, _btLegend, /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {
+        style: S.BT_FN,
+        caption: "Fn",
+        isShow: isShowFn,
+        isMenu: true,
+        onClick: toggleFn
+      }), _btAdd, _btInfo, _btTabMini, /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {
+        is: !!_btTabMini,
+        className: CL.BT_R,
+        style: S.BT_R,
+        caption: ">",
+        onClick: _hClickR
+      })]
+    })]
+  });
 };
 /*
 ChartToolbar.propTypes = {
@@ -275,7 +277,7 @@ ChartToolbar.propTypes = {
   config: PropTypes.object,
 
   getChart: PropTypes.func,
-  
+
   onMiniChart: PropTypes.func,
   onAddMfi: PropTypes.func,
   onRemoveMfi: PropTypes.func,

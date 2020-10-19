@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
@@ -59,14 +59,15 @@ var _isNotAdminMode = function _isNotAdminMode(isAdminMode, isDenyToChange) {
 var RowValueDate = function RowValueDate(_ref) {
   var value = _ref.value,
       date = _ref.date;
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROW
-  }, /*#__PURE__*/_react["default"].createElement(_SpanValue["default"], {
-    value: (0, _formatAllNumber["default"])(value)
-  }), /*#__PURE__*/_react["default"].createElement(_SpanDate["default"], {
-    date: date,
-    style: S.DATE
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.ROW,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanValue["default"], {
+      value: (0, _formatAllNumber["default"])(value)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate["default"], {
+      date: date,
+      style: S.DATE
+    })]
+  });
 };
 
 var ValueMovingModal = function ValueMovingModal(props) {
@@ -107,23 +108,24 @@ var ValueMovingModal = function ValueMovingModal(props) {
       valueTo = valueMoving.valueTo,
       dateTo = valueMoving.dateTo,
       isDenyToChange = valueMoving.isDenyToChange;
-  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup["default"], {
     isShow: isShow,
     style: S.ROOT,
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement(RowValueDate, {
-    value: value,
-    date: date
-  }), /*#__PURE__*/_react["default"].createElement(RowValueDate, {
-    value: valueTo,
-    date: dateTo
-  }), !_isNotAdminMode(isAdminMode, isDenyToChange) && /*#__PURE__*/_react["default"].createElement(_DivCompareTo["default"], {
-    ref: _refInput,
-    initialValue: dateTo,
-    msgErr: msgDateTo,
-    onTest: isDmy,
-    onEnter: _hEnterDate
-  }));
+    onClose: onClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(RowValueDate, {
+      value: value,
+      date: date
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(RowValueDate, {
+      value: valueTo,
+      date: dateTo
+    }), !_isNotAdminMode(isAdminMode, isDenyToChange) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo["default"], {
+      ref: _refInput,
+      initialValue: dateTo,
+      msgErr: msgDateTo,
+      onTest: isDmy,
+      onEnter: _hEnterDate
+    })]
+  });
 };
 /*
 ModalValueMoving.propTypes = {

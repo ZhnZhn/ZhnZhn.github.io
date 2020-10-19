@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from './Link'
 
 const C = {
@@ -6,7 +5,7 @@ const C = {
 };
 
 const FaoStatLink = ({ item }) => (
-  <Link    
+  <Link
     href={item ? C.BASE + item : C.BASE}
     caption="FAOSTAT Link"
   />

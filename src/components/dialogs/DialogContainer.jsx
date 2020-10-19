@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component, createElement } from 'react';
 //import PropTypes from "prop-types";
 
 import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
@@ -79,7 +79,7 @@ class DialogContainer extends Component {
     return dialogs
       .map(dialog => {
         const { type, comp } = dialog;
-        return React.createElement(comp, {
+        return createElement(comp, {
            key: type,
            isShow: shows[type],
            data: data[type],

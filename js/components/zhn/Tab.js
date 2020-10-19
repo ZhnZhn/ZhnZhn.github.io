@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 //import PropTypes from "prop-types";
 var CL = 'tab';
@@ -28,7 +26,7 @@ var Tab = function Tab(_ref) {
   var _btStyle = isSelected ? S.BT : null,
       _titleStyle = isSelected ? S.TITLE : null;
 
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     className: CL,
     style: _btStyle,
     id: "tab-" + id,
@@ -36,10 +34,12 @@ var Tab = function Tab(_ref) {
     "aria-selected": isSelected,
     "aria-controls": "tabpanel-" + id,
     tabIndex: "0",
-    onClick: onClick
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: _titleStyle
-  }, title));
+    onClick: onClick,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: _titleStyle,
+      children: title
+    })
+  });
 };
 /*
 Tab.propTypes = {

@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -31,9 +31,10 @@ var CompContainer = function CompContainer(_ref) {
       });
     }
   });
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    className: className
-  }, containers);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    className: className,
+    children: containers
+  });
 };
 /*
 CompContainer.propTypes = {

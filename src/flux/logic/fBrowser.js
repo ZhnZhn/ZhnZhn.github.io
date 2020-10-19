@@ -1,4 +1,4 @@
-import React from 'react'
+import { createElement } from 'react'
 
 import ChartStore from '../stores/ChartStore';
 
@@ -13,7 +13,7 @@ import RouterItemOption from '../../components/zhn-select/RouterItemOption';
 import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
 
 
-const _crBrowserWatchList = (Comp) => React.createElement(Comp, {
+const _crBrowserWatchList = (Comp) => createElement(Comp, {
    key: BT.WATCH_LIST,
    browserType: BT.WATCH_LIST,
    caption: "Watch List",
@@ -42,7 +42,7 @@ const _crBrowserDynamic = (Comp, option) => {
             : undefined
        , onShowContainer = CHA.showChart.bind(null, chartContainerType, browserType);
 
-   return React.createElement(Comp , {
+   return createElement(Comp , {
      dfProps,
      key : browserType,
      browserType : browserType,
@@ -79,7 +79,7 @@ const fBrowser = {
 
       case BT.SWEDEN_STAT_ALL:
       case BT.NORWAY_STAT_ALL:
-      case BT.FINLAND_STAT_ALL:      
+      case BT.FINLAND_STAT_ALL:
         return RouterBrowser.STAT_ALL
           .then(Comp => _crBrowserDynamic(Comp, option));
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import DivHtml from './DivHtml'
 
 const S = {

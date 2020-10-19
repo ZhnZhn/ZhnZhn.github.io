@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import { ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';

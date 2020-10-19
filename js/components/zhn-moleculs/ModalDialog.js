@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
@@ -52,15 +52,15 @@ var CommandButtons = function CommandButtons(_ref) {
   var commandButtons = _ref.commandButtons,
       withoutClose = _ref.withoutClose,
       onClose = _ref.onClose;
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.COMMAND_DIV
-  }, commandButtons, !withoutClose && /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-    key: "close",
-    style: S.BT,
-    caption: "Close",
-    title: "Close Modal Dialog",
-    onClick: onClose
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.COMMAND_DIV,
+    children: [commandButtons, !withoutClose && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
+      style: S.BT,
+      caption: "Close",
+      title: "Close Modal Dialog",
+      onClick: onClose
+    }, "close")]
+  });
 };
 
 var DF_ON_CLOSE = function DF_ON_CLOSE() {};
@@ -157,7 +157,7 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
     /*#__PURE__*/
 
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
-    _react["default"].createElement("div", {
+    (0, _jsxRuntime.jsxs)("div", {
       ref: _refRoot,
       role: "dialog",
       tabIndex: "-1",
@@ -166,19 +166,24 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
       className: CL.MD + " " + _className,
       style: (0, _extends2["default"])({}, S.ROOT_DIV, S.ROOT_DIV_MODAL, style, _style, TS.ROOT, TS.EL_BORDER),
       onClick: _hClick,
-      onKeyDown: _hKeyDown
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.CAPTION_DIV, TS.EL)
-    }, /*#__PURE__*/_react["default"].createElement("span", {
-      style: styleCaption
-    }, caption), /*#__PURE__*/_react["default"].createElement(_SvgClose["default"], {
-      style: S.SVG_CLOSE,
-      onClose: _hClose
-    })), /*#__PURE__*/_react["default"].createElement("div", null, children), isWithButton && /*#__PURE__*/_react["default"].createElement(CommandButtons, {
-      commandButtons: commandButtons,
-      withoutClose: withoutClose,
-      onClose: _hClose
-    }))
+      onKeyDown: _hKeyDown,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: (0, _extends2["default"])({}, S.CAPTION_DIV, TS.EL),
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          style: styleCaption,
+          children: caption
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose["default"], {
+          style: S.SVG_CLOSE,
+          onClose: _hClose
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        children: children
+      }), isWithButton && /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
+        commandButtons: commandButtons,
+        withoutClose: withoutClose,
+        onClose: _hClose
+      })]
+    })
   );
 });
 /*

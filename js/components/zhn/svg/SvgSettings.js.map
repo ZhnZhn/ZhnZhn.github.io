@@ -1,1 +1,12 @@
-{"version":3,"sources":["../../../../src/components/zhn/svg/SvgSettings.jsx"],"names":["SvgSettings","props"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAACC,KAAD;AAAA,sBACjB,gCAAC,mBAAD,EAAaA,KAAb,eACG;AAAQ,IAAA,EAAE,EAAC,IAAX;AAAgB,IAAA,EAAE,EAAC,IAAnB;AAAwB,IAAA,CAAC,EAAC;AAA1B,IADH,eAEG;AAAM,IAAA,CAAC,EAAC;AAAR,IAFH,CADiB;AAAA,CAApB;;eAOeD,W","sourcesContent":["import React from 'react';\r\n\r\nimport SvgIcon from './SvgIcon'\r\n\r\nconst SvgSettings = (props) => (\r\n   <SvgIcon {...props}>\r\n      <circle cx=\"12\" cy=\"12\" r=\"3\" />\r\n      <path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z\" />\r\n    </SvgIcon>\r\n);\r\n\r\nexport default SvgSettings\r\n"],"file":"SvgSettings.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn/svg/SvgSettings.js"
+ ],
+ "file": "../../../../src/components/zhn/svg/SvgSettings.js",
+ "names": [
+  "SvgSettings",
+  "props"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AAEA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAACC,KAAD;AAAA,sBACjB,sBAAC,mBAAD,gCAAaA,KAAb;AAAA,4BACG;AAAQ,MAAA,EAAE,EAAC,IAAX;AAAgB,MAAA,EAAE,EAAC,IAAnB;AAAwB,MAAA,CAAC,EAAC;AAA1B,MADH,eAEG;AAAM,MAAA,CAAC,EAAC;AAAR,MAFH;AAAA,KADiB;AAAA,CAApB;;eAOeD,W"
+}

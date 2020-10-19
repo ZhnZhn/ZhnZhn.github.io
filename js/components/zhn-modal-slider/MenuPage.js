@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
@@ -34,8 +34,8 @@ var MenuPage = /*#__PURE__*/function (_Component) {
     }
 
     _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this._refTitle = /*#__PURE__*/_react["default"].createRef();
-    _this._refFirst = /*#__PURE__*/_react["default"].createRef();
+    _this._refTitle = /*#__PURE__*/(0, _react.createRef)();
+    _this._refFirst = /*#__PURE__*/(0, _react.createRef)();
 
     _this._hClickTitle = function () {
       var _this$props = _this.props,
@@ -78,21 +78,22 @@ var MenuPage = /*#__PURE__*/function (_Component) {
         onNextPage = _this$props3.onNextPage,
         onClose = _this$props3.onClose,
         children = _this$props3.children;
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: style
-    }, /*#__PURE__*/_react["default"].createElement(_MenuTitle["default"], {
-      ref: this._refTitle,
-      titleCl: titleCl,
-      title: title,
-      onClick: this._hClickTitle
-    }), /*#__PURE__*/_react["default"].createElement(_MenuItemList["default"], {
-      ref: this._refFirst,
-      items: items,
-      itemCl: itemCl || titleCl,
-      pageNumber: pageNumber,
-      onNextPage: onNextPage,
-      onClose: onClose
-    }), children);
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: style,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle["default"], {
+        ref: this._refTitle,
+        titleCl: titleCl,
+        title: title,
+        onClick: this._hClickTitle
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItemList["default"], {
+        ref: this._refFirst,
+        items: items,
+        itemCl: itemCl || titleCl,
+        pageNumber: pageNumber,
+        onNextPage: onNextPage,
+        onClose: onClose
+      }), children]
+    });
   };
 
   _proto.componentDidUpdate = function componentDidUpdate(prevProps) {

@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _index = require("./dataProcessing/index");
 
@@ -20,7 +18,7 @@ var SparklinesReferenceLine = function SparklinesReferenceLine(props) {
     return p.y;
   }),
       y = type === 'custom' ? value : _index.hm[type](ypoints);
-  return /*#__PURE__*/_react["default"].createElement("line", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("line", {
     x1: points[0].x,
     y1: y + margin,
     x2: points[points.length - 1].x,

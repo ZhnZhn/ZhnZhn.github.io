@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _useToggle3 = _interopRequireDefault(require("../hooks/useToggle"));
 
@@ -61,21 +61,34 @@ var Twit = function Twit(_ref) {
       text = item.text,
       retweet = item.retweet,
       like = item.like;
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL,
-    href: link
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROW_TITLE
-  }, /*#__PURE__*/_react["default"].createElement("span", null, user + " "), /*#__PURE__*/_react["default"].createElement("span", null, date), /*#__PURE__*/_react["default"].createElement(SvgClose, {
-    style: S.BT_CLOSE,
-    onClose: toggleIsShow
-  })), /*#__PURE__*/_react["default"].createElement("a", {
-    href: link
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.PL_16
-  }, text)), /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROW
-  }, /*#__PURE__*/_react["default"].createElement("span", null, "Retweets " + retweet + " "), /*#__PURE__*/_react["default"].createElement("span", null, "Likes " + like)));
+    href: link,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROW_TITLE,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        children: user + " "
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        children: date
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgClose, {
+        style: S.BT_CLOSE,
+        onClose: toggleIsShow
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
+      href: link,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: S.PL_16,
+        children: text
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROW,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        children: "Retweets " + retweet + " "
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        children: "Likes " + like
+      })]
+    })]
+  });
 };
 
 var TwList = function TwList(_ref2) {
@@ -88,20 +101,22 @@ var TwList = function TwList(_ref2) {
       isOpen = _useToggle2[0],
       toggleIsOpen = _useToggle2[1];
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROOT
-  }, /*#__PURE__*/_react["default"].createElement(_ItemHeader["default"], {
-    isOpen: isOpen,
-    caption: title,
-    onClick: toggleIsOpen,
-    onClose: onCloseItem
-  }), /*#__PURE__*/_react["default"].createElement(ShowHide, {
-    isShow: isOpen,
-    style: S.SHOW_HIDE
-  }, /*#__PURE__*/_react["default"].createElement(ItemList, {
-    items: items,
-    Item: Twit
-  })));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemHeader["default"], {
+      isOpen: isOpen,
+      caption: title,
+      onClick: toggleIsOpen,
+      onClose: onCloseItem
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
+      isShow: isOpen,
+      style: S.SHOW_HIDE,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemList, {
+        items: items,
+        Item: Twit
+      })
+    })]
+  });
 };
 
 var _default = TwList;

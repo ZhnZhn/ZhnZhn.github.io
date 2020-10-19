@@ -1,5 +1,3 @@
-import React from 'react'
-
 import A from '../Comp'
 
 const _fIsTitle = (title, idPropName) => c => c[idPropName] === title;

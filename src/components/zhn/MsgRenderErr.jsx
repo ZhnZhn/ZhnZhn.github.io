@@ -1,5 +1,3 @@
-import React from 'react'
-
 const S = {
   RENDER_ERR: {
     color: '#f44336',

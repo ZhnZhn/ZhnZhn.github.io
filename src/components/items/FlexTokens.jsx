@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 
 import A from '../Comp'
 
@@ -27,11 +27,11 @@ const FlexSpans = ({ tokens=[] }) => (
   </div>
 );
 
-const FlexTokens = React.memo(({ caption, tokens }) => {
+const FlexTokens = memo(({ caption, tokens }) => {
   return caption
     ? <A.OpenClose
         isClose={false}
-        caption={caption}        
+        caption={caption}
       >
         <FlexSpans tokens={tokens}/>
       </A.OpenClose>

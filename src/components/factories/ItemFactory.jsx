@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ChartFn from '../../charts/ChartFn';
 
 import CA from '../../flux/actions/ComponentActions';

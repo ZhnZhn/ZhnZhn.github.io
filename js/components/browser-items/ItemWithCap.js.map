@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/components/browser-items/ItemWithCap.jsx"],"names":["ItemWithCap","props","item","cap","salePrice","ipo"],"mappings":";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAACC,KAAD,EAAW;AACvB,MAAEC,IAAF,GAAWD,KAAX,CAAEC,IAAF;AAAA,MACEC,GADF,GACyBD,IADzB,CACEC,GADF;AAAA,MACOC,SADP,GACyBF,IADzB,CACOE,SADP;AAAA,MACkBC,GADlB,GACyBH,IADzB,CACkBG,GADlB;AAEN,sBACI,gCAAC,gBAAD,EAAUJ,KAAV,eACG,gCAAC,kBAAD;AACE,IAAA,GAAG,EAAEE,GADP;AAEE,IAAA,SAAS,EAAEC,SAFb;AAGE,IAAA,GAAG,EAAEC;AAHP,IADH,CADJ;AASD,CAZD;;eAceL,W","sourcesContent":["import React from 'react';\r\n\r\nimport Item from './Item';\r\nimport RowCap from './RowCap';\r\n\r\nconst ItemWithCap = (props) => {\r\n  const { item } = props\r\n      , { cap, salePrice, ipo} = item;\r\n  return (\r\n      <Item {...props}>\r\n         <RowCap\r\n           cap={cap}\r\n           salePrice={salePrice}\r\n           ipo={ipo}\r\n         />\r\n      </Item>\r\n  );\r\n};\r\n\r\nexport default ItemWithCap\r\n"],"file":"ItemWithCap.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-items/ItemWithCap.js"
+ ],
+ "file": "../../../src/components/browser-items/ItemWithCap.js",
+ "names": [
+  "ItemWithCap",
+  "props",
+  "item",
+  "cap",
+  "salePrice",
+  "ipo"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAACC,KAAD,EAAW;AACvB,MAAEC,IAAF,GAAWD,KAAX,CAAEC,IAAF;AAAA,MACEC,GADF,GACyBD,IADzB,CACEC,GADF;AAAA,MACOC,SADP,GACyBF,IADzB,CACOE,SADP;AAAA,MACkBC,GADlB,GACyBH,IADzB,CACkBG,GADlB;AAEN,sBACI,qBAAC,gBAAD,gCAAUJ,KAAV;AAAA,2BACG,qBAAC,kBAAD;AACE,MAAA,GAAG,EAAEE,GADP;AAEE,MAAA,SAAS,EAAEC,SAFb;AAGE,MAAA,GAAG,EAAEC;AAHP;AADH,KADJ;AASD,CAZD;;eAceL,W"
+}

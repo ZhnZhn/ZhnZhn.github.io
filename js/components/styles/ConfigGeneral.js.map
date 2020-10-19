@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/styles/ConfigGeneral.js"
- ],
- "file": "../../../src/components/styles/ConfigGeneral.js",
- "names": [
-  "styleConfig",
-  "createStyle",
-  "CSS_RULE",
-  "CL_SCROLL",
-  "ROOT",
-  "BG",
-  "EL",
-  "EL_BORDER"
- ],
- "mappings": ";;;;;;;;;AAAA,IAAMA,WAAW,GAAG;AAClB;AACA;AAEAC,EAAAA,WAAW,EAAE,qBAACC,QAAD,EAAc;AACzB,WAAO;AACLC,MAAAA,SAAS,EAAED,QAAQ,CAACC,SADf;AAELC,MAAAA,IAAI,gCACCF,QAAQ,CAACG,EADV,CAFC;AAKLC,MAAAA,EAAE,gCACGJ,QAAQ,CAACI,EADZ,CALG;AAQLC,MAAAA,SAAS,gCACJL,QAAQ,CAACK,SADL;AARJ,KAAP;AAYD;AAjBiB,CAApB;eAoBeP,W"
-}
+{"version":3,"sources":["../../../src/components/styles/ConfigGeneral.js"],"names":["styleConfig","createStyle","CSS_RULE","CL_SCROLL","ROOT","BG","EL","EL_BORDER"],"mappings":";;;;;;;;;AAAA,IAAMA,WAAW,GAAG;AAClB;AACA;AAEAC,EAAAA,WAAW,EAAE,qBAACC,QAAD,EAAc;AACzB,WAAO;AACLC,MAAAA,SAAS,EAAED,QAAQ,CAACC,SADf;AAELC,MAAAA,IAAI,gCACCF,QAAQ,CAACG,EADV,CAFC;AAKLC,MAAAA,EAAE,gCACGJ,QAAQ,CAACI,EADZ,CALG;AAQLC,MAAAA,SAAS,gCACJL,QAAQ,CAACK,SADL;AARJ,KAAP;AAYD;AAjBiB,CAApB;eAoBeP,W","sourcesContent":["const styleConfig = {\r\n  //themeName: void 0,\r\n  //style: void 0,\r\n\r\n  createStyle: (CSS_RULE) => {\r\n    return {\r\n      CL_SCROLL: CSS_RULE.CL_SCROLL,\r\n      ROOT: {\r\n        ...CSS_RULE.BG\r\n      },\r\n      EL: {\r\n        ...CSS_RULE.EL\r\n      },\r\n      EL_BORDER: {\r\n        ...CSS_RULE.EL_BORDER\r\n      }\r\n    };\r\n  }\r\n};\r\n\r\nexport default styleConfig\r\n"],"file":"ConfigGeneral.js"}

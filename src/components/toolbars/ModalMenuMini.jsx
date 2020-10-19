@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SubMenuItem from './SubMenuItem'
 

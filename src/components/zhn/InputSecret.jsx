@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect, useImperativeHandle } from 'react';
+import { forwardRef, useRef, useState, useCallback, useEffect, useImperativeHandle } from 'react';
 import useInputKeyDown from './useInputKeyDown'
 
 const S = {
@@ -24,7 +24,7 @@ const S = {
 
 const _onEnter = () => {}
 
-const InputSecret = React.forwardRef(({
+const InputSecret = forwardRef(({
   name,
   placeholder,
   maxLength="32",

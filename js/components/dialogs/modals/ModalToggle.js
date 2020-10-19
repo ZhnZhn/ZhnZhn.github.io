@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 
@@ -44,29 +44,29 @@ var CheckBoxList = function CheckBoxList(_ref) {
       onCheckCaption = _ref.onCheckCaption,
       onUnCheckCaption = _ref.onUnCheckCaption;
   return selectProps.map(function (item, index) {
-    return /*#__PURE__*/_react["default"].createElement("div", {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S.ROW,
-      key: item.id
-    }, /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
-      initValue: true,
-      rootStyle: (0, _extends2["default"])({}, _Style["default"].ROW_CHB, S.INLINE),
-      checkedColor: TOGGLE_CHECKBOX_COLOR,
-      caption: item.caption,
-      captionStyle: S.CAPTION,
-      onToggle: function onToggle() {
-        return _onToggle(crIsId(item.id));
-      }
-    }), /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
-      initValue: index === 0,
-      rootStyle: S.CHB_CAPTION,
-      checkedColor: CAPTION_CHECKBOX_COLOR,
-      onCheck: function onCheck() {
-        return onCheckCaption(index);
-      },
-      onUnCheck: function onUnCheck() {
-        return onUnCheckCaption(index);
-      }
-    }));
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
+        initValue: true,
+        rootStyle: (0, _extends2["default"])({}, _Style["default"].ROW_CHB, S.INLINE),
+        checkedColor: TOGGLE_CHECKBOX_COLOR,
+        caption: item.caption,
+        captionStyle: S.CAPTION,
+        onToggle: function onToggle() {
+          return _onToggle(crIsId(item.id));
+        }
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
+        initValue: index === 0,
+        rootStyle: S.CHB_CAPTION,
+        checkedColor: CAPTION_CHECKBOX_COLOR,
+        onCheck: function onCheck() {
+          return onCheckCaption(index);
+        },
+        onUnCheck: function onUnCheck() {
+          return onUnCheckCaption(index);
+        }
+      })]
+    }, item.id);
   });
 };
 
@@ -98,39 +98,37 @@ var ModalToggle = function ModalToggle(_ref2) {
   /*eslint-enable react-hooks/exhaustive-deps */
 
 
-  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup["default"], {
     isShow: isShow,
     style: (0, _extends2["default"])({}, _Style["default"].ROOT, style),
     className: className,
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement(CheckBoxList, {
-    selectProps: selectProps,
-    crIsId: crIsId,
-    onToggle: onToggle,
-    onCheckCaption: onCheckCaption,
-    onUnCheckCaption: onUnCheckCaption
-  }), isFd && /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
-    key: "isShowFd",
-    value: isShowFd,
-    rootStyle: _Style["default"].ROW_CHB,
-    checkedColor: TOGGLE_CHECKBOX_COLOR,
-    caption: "From Date",
-    onToggle: _toggleFd
-  }), isCh && /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
-    key: "isShowChart",
-    value: isShowChart,
-    rootStyle: _Style["default"].ROW_CHB,
-    checkedColor: TOGGLE_CHECKBOX_COLOR,
-    caption: "Chart",
-    onToggle: _toggleChart
-  }), !noForDate && /*#__PURE__*/_react["default"].createElement(_RowCheckBox["default"], {
-    key: "isForDate",
-    value: isShowDate,
-    rootStyle: _Style["default"].ROW_CHB,
-    checkedColor: TOGGLE_CHECKBOX_COLOR,
-    caption: "For Date",
-    onToggle: _toggleDate
-  }));
+    onClose: onClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(CheckBoxList, {
+      selectProps: selectProps,
+      crIsId: crIsId,
+      onToggle: onToggle,
+      onCheckCaption: onCheckCaption,
+      onUnCheckCaption: onUnCheckCaption
+    }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
+      value: isShowFd,
+      rootStyle: _Style["default"].ROW_CHB,
+      checkedColor: TOGGLE_CHECKBOX_COLOR,
+      caption: "From Date",
+      onToggle: _toggleFd
+    }, "isShowFd"), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
+      value: isShowChart,
+      rootStyle: _Style["default"].ROW_CHB,
+      checkedColor: TOGGLE_CHECKBOX_COLOR,
+      caption: "Chart",
+      onToggle: _toggleChart
+    }, "isShowChart"), !noForDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
+      value: isShowDate,
+      rootStyle: _Style["default"].ROW_CHB,
+      checkedColor: TOGGLE_CHECKBOX_COLOR,
+      caption: "For Date",
+      onToggle: _toggleDate
+    }, "isForDate")]
+  });
 };
 
 var _default = ModalToggle;

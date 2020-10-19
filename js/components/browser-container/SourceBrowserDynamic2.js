@@ -5,14 +5,16 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 
 var _MenuBrowserDynamic = _interopRequireDefault(require("../zhn/MenuBrowserDynamic2"));
 
 var SourceBrowserDynamic2 = (0, _memoEqual["default"])(function (props) {
-  return /*#__PURE__*/_react["default"].createElement(_MenuBrowserDynamic["default"], props);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuBrowserDynamic["default"], (0, _extends2["default"])({}, props));
 });
 var _default = SourceBrowserDynamic2;
 exports["default"] = _default;

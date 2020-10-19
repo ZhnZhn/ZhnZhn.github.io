@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/native-links/CrcLink.jsx"],"names":["URL","CrcLink","item","style"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,GAAG,GAAG,sCAAZ;;AAEA,IAAMC,OAAO,GAAG,SAAVA,OAAU;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,sBACd,gCAAC,gBAAD;AACE,IAAA,KAAK,EAAEA,KADT;AAEE,IAAA,OAAO,+BAA6BD,IAA7B,MAFT;AAGE,IAAA,IAAI,OAAKF,GAAL,GAAWE,IAAX;AAHN,IADc;AAAA,CAAhB;;eAQeD,O","sourcesContent":["import React from 'react'\r\n\r\nimport Link from './Link'\r\n\r\nconst URL = 'https://www.cryptocompare.com/coins/';\r\n\r\nconst CrcLink = ({ item, style }) => (\r\n  <Link\r\n    style={style}\r\n    caption={`CryptoCompare Overview (${item})`}\r\n    href={`${URL}${item}/overview`}\r\n  />\r\n)\r\n\r\nexport default CrcLink\r\n"],"file":"CrcLink.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/CrcLink.js"
+ ],
+ "file": "../../../src/components/native-links/CrcLink.js",
+ "names": [
+  "URL",
+  "CrcLink",
+  "item",
+  "style"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,GAAG,GAAG,sCAAZ;;AAEA,IAAMC,OAAO,GAAG,SAAVA,OAAU;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,sBACd,qBAAC,gBAAD;AACE,IAAA,KAAK,EAAEA,KADT;AAEE,IAAA,OAAO,+BAA6BD,IAA7B,MAFT;AAGE,IAAA,IAAI,OAAKF,GAAL,GAAWE,IAAX;AAHN,IADc;AAAA,CAAhB;;eAQeD,O"
+}

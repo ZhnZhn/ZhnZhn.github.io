@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/dialogs/Dialogs.js"
- ],
- "file": "../../../src/components/dialogs/Dialogs.js",
- "names": [
-  "Dialogs",
-  "SelectN",
-  "Type3"
- ],
- "mappings": ";;;;;;;AACA;;AACA;;AAEA,IAAMA,OAAO,GAAG;AACdC,EAAAA,OAAO,EAAPA,yBADc;AAEdC,EAAAA,KAAK,EAALA;AAFc,CAAhB;eAKeF,O"
-}
+{"version":3,"sources":["../../../src/components/dialogs/Dialogs.js"],"names":["Dialogs","SelectN","Type3"],"mappings":";;;;;;;AACA;;AACA;;AAEA,IAAMA,OAAO,GAAG;AACdC,EAAAA,OAAO,EAAPA,yBADc;AAEdC,EAAAA,KAAK,EAALA;AAFc,CAAhB;eAKeF,O","sourcesContent":["\r\nimport SelectN from './DialogSelectN'\r\nimport Type3 from './DialogType3';\r\n\r\nconst Dialogs = {\r\n  SelectN,\r\n  Type3\r\n};\r\n\r\nexport default Dialogs\r\n"],"file":"Dialogs.js"}

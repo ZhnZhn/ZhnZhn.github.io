@@ -1,5 +1,4 @@
-
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import RouterNativeLink from '../native-links/RouterNativeLink';
 

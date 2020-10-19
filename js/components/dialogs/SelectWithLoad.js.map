@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/components/dialogs/SelectWithLoad.jsx"],"names":["SelectWithLoad","withLoadOptions","state","options","isLoading","isLoadingFailed","_handlerLoadOptions","props","uri","jsonProp","_handlerWithLoadOptions","componentDidMount","componentDidUpdate","prevProps","prevState","isShow","componetWillUnmount","_unmountWithLoadOptions","render","getOptions","Component","defaultProps","optionNames"],"mappings":";;;;;;;;;;;;;AAAA;;AAEA;;AAEA;;;;IAGMA,c,OADLC,2B;;;;;;;;;;;UAQGC,K,GAAQ;AACNC,MAAAA,OAAO,EAAE,EADH;AAENC,MAAAA,SAAS,EAAE,KAFL;AAGNC,MAAAA,eAAe,EAAE;AAHX,K;;UAoBRC,mB,GAAsB,YAAM;AAAA,wBACA,MAAKC,KADL;AAAA,UAClBC,GADkB,eAClBA,GADkB;AAAA,UACbC,QADa,eACbA,QADa;;AAE1B,YAAKC,uBAAL,CACE,SADF,EACaF,GADb,EACkBC,QADlB;AAGD,K;;;;;;;SAnBDE,iB,GAAA,6BAAmB;AACjB,SAAKL,mBAAL;AACD,G;;SACDM,kB,GAAA,4BAAmBC,SAAnB,EAA8BC,SAA9B,EAAwC;AACtC,QAAID,SAAS,KAAK,KAAKN,KAAvB,EAA6B;AAC1B,UAAI,KAAKL,KAAL,CAAWG,eAAX,IAA8B,KAAKE,KAAL,CAAWQ,MAA7C,EAAoD;AAClD,aAAKT,mBAAL;AACD;AACH;AACF,G;;SACDU,mB,GAAA,+BAAqB;AACnB,SAAKC,uBAAL;AACD,G;;SASDC,M,GAAA,kBAAQ;AACN,wBACE,gCAAC,0BAAD,gCACO,KAAKX,KADZ,EAEO,KAAKL,KAFZ;AAGG,MAAA,YAAY,EAAE,KAAKI;AAHtB,OADF;AAOD,G;;SAEDa,U,GAAA,sBAAY;AACV,WAAO,KAAKjB,KAAL,CAAWC,OAAlB;AACD,G;;;EA9CwBiB,gB,WAClBC,Y,GAAe;AACnBN,EAAAA,MAAM,EAAE,IADW;AAEnBO,EAAAA,WAAW,EAAE,OAFM;AAGnBb,EAAAA,QAAQ,EAAE;AAHS,C;;eAiDXT,c","sourcesContent":["import React, { Component } from 'react';\r\n\r\nimport RowInputSelect from './rows/RowInputSelect'\r\n\r\nimport withLoadOptions from './decorators/withLoadOptions';\r\n\r\n@withLoadOptions\r\nclass SelectWithLoad extends Component {\r\n    static defaultProps = {\r\n       isShow: true,\r\n       optionNames: 'Items',\r\n       jsonProp: 'items'\r\n     }\r\n\r\n    state = {\r\n      options: [],\r\n      isLoading: false,\r\n      isLoadingFailed: false\r\n    }\r\n\r\n    componentDidMount(){\r\n      this._handlerLoadOptions();\r\n    }\r\n    componentDidUpdate(prevProps, prevState){\r\n      if (prevProps !== this.props){\r\n         if (this.state.isLoadingFailed && this.props.isShow){\r\n           this._handlerLoadOptions();\r\n         }\r\n      }\r\n    }\r\n    componetWillUnmount(){\r\n      this._unmountWithLoadOptions();\r\n    }\r\n\r\n    _handlerLoadOptions = () => {\r\n      const { uri, jsonProp } = this.props;\r\n      this._handlerWithLoadOptions(\r\n        'options', uri, jsonProp\r\n      );\r\n    }\r\n\r\n    render(){\r\n      return (\r\n        <RowInputSelect\r\n           {...this.props}\r\n           {...this.state}\r\n           onLoadOption={this._handlerLoadOptions}\r\n        />\r\n      );\r\n    }\r\n\r\n    getOptions(){\r\n      return this.state.options;\r\n    }\r\n}\r\n\r\n\r\nexport default SelectWithLoad\r\n"],"file":"SelectWithLoad.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/SelectWithLoad.js"
+ ],
+ "file": "../../../src/components/dialogs/SelectWithLoad.js",
+ "names": [
+  "SelectWithLoad",
+  "withLoadOptions",
+  "state",
+  "options",
+  "isLoading",
+  "isLoadingFailed",
+  "_handlerLoadOptions",
+  "props",
+  "uri",
+  "jsonProp",
+  "_handlerWithLoadOptions",
+  "componentDidMount",
+  "componentDidUpdate",
+  "prevProps",
+  "prevState",
+  "isShow",
+  "componetWillUnmount",
+  "_unmountWithLoadOptions",
+  "render",
+  "getOptions",
+  "Component",
+  "defaultProps",
+  "optionNames"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA;;AAEA;;AAEA;;;;IAGMA,c,OADLC,2B;;;;;;;;;;;UAQGC,K,GAAQ;AACNC,MAAAA,OAAO,EAAE,EADH;AAENC,MAAAA,SAAS,EAAE,KAFL;AAGNC,MAAAA,eAAe,EAAE;AAHX,K;;UAoBRC,mB,GAAsB,YAAM;AAAA,wBACA,MAAKC,KADL;AAAA,UAClBC,GADkB,eAClBA,GADkB;AAAA,UACbC,QADa,eACbA,QADa;;AAE1B,YAAKC,uBAAL,CACE,SADF,EACaF,GADb,EACkBC,QADlB;AAGD,K;;;;;;;SAnBDE,iB,GAAA,6BAAmB;AACjB,SAAKL,mBAAL;AACD,G;;SACDM,kB,GAAA,4BAAmBC,SAAnB,EAA8BC,SAA9B,EAAwC;AACtC,QAAID,SAAS,KAAK,KAAKN,KAAvB,EAA6B;AAC1B,UAAI,KAAKL,KAAL,CAAWG,eAAX,IAA8B,KAAKE,KAAL,CAAWQ,MAA7C,EAAoD;AAClD,aAAKT,mBAAL;AACD;AACH;AACF,G;;SACDU,mB,GAAA,+BAAqB;AACnB,SAAKC,uBAAL;AACD,G;;SASDC,M,GAAA,kBAAQ;AACN,wBACE,qBAAC,0BAAD,gCACO,KAAKX,KADZ,EAEO,KAAKL,KAFZ;AAGG,MAAA,YAAY,EAAE,KAAKI;AAHtB,OADF;AAOD,G;;SAEDa,U,GAAA,sBAAY;AACV,WAAO,KAAKjB,KAAL,CAAWC,OAAlB;AACD,G;;;EA9CwBiB,gB,WAClBC,Y,GAAe;AACnBN,EAAAA,MAAM,EAAE,IADW;AAEnBO,EAAAA,WAAW,EAAE,OAFM;AAGnBb,EAAAA,QAAQ,EAAE;AAHS,C;;eAiDXT,c"
+}

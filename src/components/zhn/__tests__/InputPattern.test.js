@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import React from 'react'
+import { createRef } from 'react'
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import fireEventHelpers from './_fireEventHelpers'
 
@@ -18,7 +18,7 @@ describe("InputPattern", () => {
     const onEnter = jest.fn()
     , onClear = jest.fn()
     , onTest = jest.fn(str => str.length < 4 )
-    , ref = React.createRef()
+    , ref = createRef()
     , initValue = "abc"
     //1 Test render
     , { rerender } = render(<InputPattern

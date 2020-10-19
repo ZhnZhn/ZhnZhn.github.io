@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/fmp/RouterAdapter.js"
- ],
- "file": "../../../src/adapters/fmp/RouterAdapter.js",
- "names": [
-  "_rAdapter",
-  "DF",
-  "toChart",
-  "historical",
-  "toHistorical",
-  "RouterAdapter",
-  "getAdapter",
-  "dfPn"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,mBADY;AAEhBC,EAAAA,UAAU,EAAEC;AAFI,CAAlB;AAKA,IAAMC,aAAa,GAAG;AACpBC,EAAAA,UAAU,EAAE;AAAA,QAAGC,IAAH,QAAGA,IAAH;AAAA,WAAcP,SAAS,CAACO,IAAD,CAAT,IACrBP,SAAS,CAACC,EADH;AAAA;AADQ,CAAtB;eAKeI,a"
-}
+{"version":3,"sources":["../../../src/adapters/fmp/RouterAdapter.js"],"names":["_rAdapter","DF","toChart","historical","toHistorical","RouterAdapter","getAdapter","dfPn"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,mBADY;AAEhBC,EAAAA,UAAU,EAAEC;AAFI,CAAlB;AAKA,IAAMC,aAAa,GAAG;AACpBC,EAAAA,UAAU,EAAE;AAAA,QAAGC,IAAH,QAAGA,IAAH;AAAA,WAAcP,SAAS,CAACO,IAAD,CAAT,IACrBP,SAAS,CAACC,EADH;AAAA;AADQ,CAAtB;eAKeI,a","sourcesContent":["import toChart from './toChart'\r\nimport toHistorical from './toHistorical'\r\n\r\nconst _rAdapter = {\r\n  DF: toChart,\r\n  historical: toHistorical\r\n};\r\n\r\nconst RouterAdapter = {\r\n  getAdapter: ({ dfPn }) => _rAdapter[dfPn]\r\n    || _rAdapter.DF\r\n};\r\n\r\nexport default RouterAdapter\r\n"],"file":"RouterAdapter.js"}

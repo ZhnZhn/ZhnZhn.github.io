@@ -1,6 +1,6 @@
-import React from 'react'
+import { memo } from 'react'
 
-const ItemList = React.memo(({ items, pnId='id', Item }) => (
+const ItemList = memo(({ items, pnId='id', Item }) => (
   <>
     {items.map(item => (
       <Item key={item[pnId]} item={item} />

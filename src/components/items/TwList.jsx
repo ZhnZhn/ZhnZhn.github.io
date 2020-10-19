@@ -1,5 +1,3 @@
-import React from 'react'
-
 import useToggle from '../hooks/useToggle'
 
 import Comp from '../Comp'

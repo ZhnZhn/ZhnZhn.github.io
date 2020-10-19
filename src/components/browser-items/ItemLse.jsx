@@ -1,5 +1,3 @@
-import React from 'react';
-
 import crCurrencyFormatter from '../../utils/crCurrencyFormatter';
 
 import Item from './Item';

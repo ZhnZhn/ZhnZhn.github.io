@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _withTheme = _interopRequireDefault(require("../../hoc/withTheme"));
 
@@ -145,21 +145,23 @@ var RowCheckBox = /*#__PURE__*/function (_Component) {
         _value = this.state ? this.state.isChecked : value,
         _style = _value ? (0, _extends2["default"])({}, captionStyle, _crCheckedStyle(checkedColor)) : captionStyle;
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: (0, _extends2["default"])({}, S.ROOT, rootStyle)
-    }, /*#__PURE__*/_react["default"].createElement(_SvgCheckBox["default"], {
-      value: _value,
-      checkedRestStroke: checkedColor,
-      checkedRestFill: checkedColor,
-      checkedColor: TS.CHECKED_COLOR,
-      onCheck: this._hCheck,
-      onUnCheck: this._hUnCheck
-    }), caption && /*#__PURE__*/_react["default"].createElement("button", {
-      className: CL,
-      tabIndex: "-1",
-      style: (0, _extends2["default"])({}, S.CAPTION, _style),
-      onClick: this._hToggle
-    }, caption));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: (0, _extends2["default"])({}, S.ROOT, rootStyle),
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {
+        value: _value,
+        checkedRestStroke: checkedColor,
+        checkedRestFill: checkedColor,
+        checkedColor: TS.CHECKED_COLOR,
+        onCheck: this._hCheck,
+        onUnCheck: this._hUnCheck
+      }), caption && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+        className: CL,
+        tabIndex: "-1",
+        style: (0, _extends2["default"])({}, S.CAPTION, _style),
+        onClick: this._hToggle,
+        children: caption
+      })]
+    });
   };
 
   return RowCheckBox;

@@ -6,9 +6,11 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _jsxRuntime = require("react/jsx-runtime.js");
+
 require("@testing-library/jest-dom");
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 
 var _react2 = require("@testing-library/react");
 
@@ -31,7 +33,7 @@ describe("InputText", function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            initValue = 'abc', onEnter = jest.fn(), onChange = jest.fn(), ref = /*#__PURE__*/_react["default"].createRef(), _render = (0, _react2.render)( /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
+            initValue = 'abc', onEnter = jest.fn(), onChange = jest.fn(), ref = /*#__PURE__*/(0, _react.createRef)(), _render = (0, _react2.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
               ref: ref,
               initValue: initValue,
               onChange: onChange,
@@ -81,7 +83,7 @@ describe("InputText", function () {
             expect(input).toHaveFocus(); //4 Test rerender with new initValue without optional handlers
 
             _initValue = "abcde";
-            rerender( /*#__PURE__*/_react["default"].createElement(_InputText["default"], {
+            rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
               initValue: _initValue
             }));
             _context.next = 31;

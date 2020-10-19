@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useForceUpdate = _interopRequireDefault(require("../hooks/useForceUpdate"));
 
@@ -76,7 +76,7 @@ var ProgressLine = function ProgressLine(_ref) {
     _style = _crStyle(color, 1, completed + '%', T.WIDTH);
   }
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: CL,
     style: _style
   });

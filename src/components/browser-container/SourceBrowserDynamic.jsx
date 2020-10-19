@@ -1,5 +1,3 @@
-import React from 'react'
-
 import memoEqual from '../hoc/memoEqual'
 import BrowserMenu from '../zhn-menu/BrowserMenu'
 

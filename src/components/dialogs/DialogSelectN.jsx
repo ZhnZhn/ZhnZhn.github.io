@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component, createRef } from 'react';
 //import PropTypes from "prop-types";
 
 import ChartTypes from './ChartTypes'
@@ -103,7 +103,7 @@ class DialogSelectN extends Component {
       props, { noDate: true, isOptions: isOpt || isCh,
       isToggle: isFd || selectProps.length > 1
     })
-    this._refFromDate = React.createRef()
+    this._refFromDate = createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
     this._chartOptions = crOptions(props)
 

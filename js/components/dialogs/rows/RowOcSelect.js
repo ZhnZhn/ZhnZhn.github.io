@@ -9,7 +9,7 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _OpenClose = _interopRequireDefault(require("../../zhn/OpenClose"));
 
@@ -42,14 +42,15 @@ var RowOcSelect = function RowOcSelect(_ref) {
       options = _crRowOptions.options,
       _ocStyle = (0, _extends2["default"])({}, S.OC, labelStyle, restProps.labelStyle);
 
-  return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
     caption: caption,
     style: rowStyle,
     ocStyle: _ocStyle,
     captionStyle: S.CAPTION,
     openColor: C_OPEN,
-    CompAfter: /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], options)
-  }, children);
+    CompAfter: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect["default"], (0, _extends2["default"])({}, options)),
+    children: children
+  });
 };
 
 var _default = RowOcSelect;

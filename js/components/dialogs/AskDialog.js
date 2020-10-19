@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 
@@ -74,12 +74,12 @@ var AskDialog = (0, _memoEqual["default"])(function (_ref) {
     }
   }, [data, onClose]),
       _commandButtons = (0, _react.useMemo)(function () {
-    return [/*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
+    return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button["default"].Flat, {
       caption: "Yes, Load" //accessKey="s"
       ,
       isPrimary: true,
       onClick: _hLoad
-    }), /*#__PURE__*/_react["default"].createElement(_Button["default"].Flat, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button["default"].Flat, {
       caption: "No, Close" //accessKey="c"
       ,
       onClick: onClose
@@ -90,23 +90,27 @@ var AskDialog = (0, _memoEqual["default"])(function (_ref) {
       _ref2$name = _ref2.name,
       name = _ref2$name === void 0 ? '' : _ref2$name;
 
-  return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog["default"], {
     style: S.MODAL,
     caption: "Confirm Load",
     isShow: isShow,
     commandButtons: _commandButtons,
     withoutClose: true,
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROOT_DIV
-  }, /*#__PURE__*/_react["default"].createElement("p", {
-    style: S.DESCR
-  }, MSG_PREFIX, /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.NAME
-  }, name), MSG_SUFFIX), /*#__PURE__*/_react["default"].createElement(_MathCaptcha["default"], {
-    ref: _refCaptcha,
-    style: S.CAPTCHA
-  })));
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROOT_DIV,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
+        style: S.DESCR,
+        children: [MSG_PREFIX, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          style: S.NAME,
+          children: name
+        }), MSG_SUFFIX]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MathCaptcha["default"], {
+        ref: _refCaptcha,
+        style: S.CAPTCHA
+      })]
+    })
+  });
 }, _areEqualProps);
 /*
 AskDialog.propTypes = {

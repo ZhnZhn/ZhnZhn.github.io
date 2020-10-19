@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import Browser from './Browser';
 import BrowserCaption from './BrowserCaption';

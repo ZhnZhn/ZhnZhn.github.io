@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/components/watch-browser/RowButtons.jsx"],"names":["RowButtons","Primary","withoutClear","onClear","onClose","S","COMMAND_DIV"],"mappings":";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,UAAU,GAAG,SAAbA,UAAa;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,MAAYC,YAAZ,QAAYA,YAAZ;AAAA,MAA0BC,OAA1B,QAA0BA,OAA1B;AAAA,MAAmCC,OAAnC,QAAmCA,OAAnC;AAAA,sBACjB;AAAK,IAAA,KAAK,EAAEC,iBAAEC;AAAd,KACGL,OADH,EAEG,CAACC,YAAD,iBACC,gCAAC,kBAAD,CAAQ,KAAR;AACG,IAAA,OAAO,EAAEC;AADZ,IAHJ,eAOE,gCAAC,kBAAD,CAAQ,KAAR;AACG,IAAA,OAAO,EAAEC;AADZ,IAPF,CADiB;AAAA,CAAnB;;eAceJ,U","sourcesContent":["import React from 'react'\r\n\r\nimport Button from './Button'\r\nimport S from './Pane.Style'\r\n\r\nconst RowButtons = ({ Primary, withoutClear, onClear, onClose }) => (\r\n  <div style={S.COMMAND_DIV}>\r\n    {Primary}\r\n    {!withoutClear &&\r\n      <Button.Clear\r\n         onClick={onClear}\r\n      />\r\n    }\r\n    <Button.Close\r\n       onClick={onClose}\r\n    />\r\n  </div>\r\n);\r\n\r\nexport default RowButtons\r\n"],"file":"RowButtons.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/watch-browser/RowButtons.js"
+ ],
+ "file": "../../../src/components/watch-browser/RowButtons.js",
+ "names": [
+  "RowButtons",
+  "Primary",
+  "withoutClear",
+  "onClear",
+  "onClose",
+  "S",
+  "COMMAND_DIV"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,UAAU,GAAG,SAAbA,UAAa;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,MAAYC,YAAZ,QAAYA,YAAZ;AAAA,MAA0BC,OAA1B,QAA0BA,OAA1B;AAAA,MAAmCC,OAAnC,QAAmCA,OAAnC;AAAA,sBACjB;AAAK,IAAA,KAAK,EAAEC,iBAAEC,WAAd;AAAA,eACGL,OADH,EAEG,CAACC,YAAD,iBACC,qBAAC,kBAAD,CAAQ,KAAR;AACG,MAAA,OAAO,EAAEC;AADZ,MAHJ,eAOE,qBAAC,kBAAD,CAAQ,KAAR;AACG,MAAA,OAAO,EAAEC;AADZ,MAPF;AAAA,IADiB;AAAA,CAAnB;;eAceJ,U"
+}

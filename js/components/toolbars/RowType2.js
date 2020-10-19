@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _RowCaptionInput = _interopRequireDefault(require("./RowCaptionInput"));
 
@@ -18,15 +18,17 @@ var RowType2 = function RowType2(_ref) {
       configs = _ref.configs,
       onAdd = _ref.onAdd,
       onRemove = _ref.onRemove;
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_RowCaptionInput["default"], {
-    caption: caption,
-    forwardRef: forwardRef,
-    initValue: initValue,
-    onAdd: onAdd
-  }), /*#__PURE__*/_react["default"].createElement(_SeriaConfigs["default"], {
-    configs: configs,
-    onRemove: onRemove
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCaptionInput["default"], {
+      caption: caption,
+      forwardRef: forwardRef,
+      initValue: initValue,
+      onAdd: onAdd
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaConfigs["default"], {
+      configs: configs,
+      onRemove: onRemove
+    })]
+  });
 };
 
 var _default = RowType2;

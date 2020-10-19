@@ -9,14 +9,14 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var SvgIcon = function SvgIcon(_ref) {
   var color = _ref.color,
       size = _ref.size,
       children = _ref.children,
       restProps = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["color", "size", "children"]);
-  return /*#__PURE__*/_react["default"].createElement("svg", (0, _extends2["default"])({
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", (0, _extends2["default"])({
     xmlns: "http://www.w3.org/2000/svg",
     width: size,
     height: size,
@@ -26,7 +26,9 @@ var SvgIcon = function SvgIcon(_ref) {
     strokeWidth: "2",
     strokeLinecap: "round",
     strokeLinejoin: "round"
-  }, restProps), children);
+  }, restProps, {
+    children: children
+  }));
 };
 
 SvgIcon.defaultProps = {

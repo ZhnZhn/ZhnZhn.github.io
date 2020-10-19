@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
@@ -164,10 +164,9 @@ var LoadItemDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       isValue: isValue
     });
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Load, {
-      key: "load",
+    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Load, {
       onClick: _this._handleLoad
-    })];
+    }, "load")];
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isShowDate: false,
       isValue: isValue,
@@ -209,43 +208,46 @@ var LoadItemDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp
         _style = isShowLabels ? S.DIALOG : S.DIALOG_SHORT,
         _value = _crValue(x, y);
 
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
       style: _style,
       isShow: isShow,
       caption: "Load Item",
       commandButtons: this._commandButtons,
-      onClose: this._handleClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: true,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
-      isShowLabels: isShowLabels,
-      styleText: S.ITEM_TEXT,
-      caption: "Item:",
-      text: caption
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isValue
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
-      isShowLabels: isShowLabels,
-      styleText: S.ITEM_TEXT,
-      caption: "Value:",
-      text: _value
-    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowDate
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
-      ref: this._refDates,
-      isShowLabels: isShowLabels,
-      initFromDate: initFromDate,
-      initToDate: initToDate,
-      onTestDate: onTestDate
-    })), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Row.Text, {
-      isShowLabels: isShowLabels,
-      styleText: S.ITEM_TEXT,
-      caption: "Source:",
-      text: dataSource
-    }), /*#__PURE__*/_react["default"].createElement(_ValidationMessages["default"], {
-      validationMessages: validationMessages
-    }));
+      onClose: this._handleClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: true,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Row.Text, {
+        isShowLabels: isShowLabels,
+        styleText: S.ITEM_TEXT,
+        caption: "Item:",
+        text: caption
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isValue,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Row.Text, {
+          isShowLabels: isShowLabels,
+          styleText: S.ITEM_TEXT,
+          caption: "Value:",
+          text: _value
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowDate,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
+          ref: this._refDates,
+          isShowLabels: isShowLabels,
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          onTestDate: onTestDate
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Row.Text, {
+        isShowLabels: isShowLabels,
+        styleText: S.ITEM_TEXT,
+        caption: "Source:",
+        text: dataSource
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages["default"], {
+        validationMessages: validationMessages
+      })]
+    });
   };
 
   return LoadItemDialog;

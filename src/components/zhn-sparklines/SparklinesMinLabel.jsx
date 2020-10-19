@@ -1,5 +1,3 @@
-import React from 'react'
-
 import min from './dataProcessing/min'
 import SparklinesLabel from './SparklinesLabel'
 

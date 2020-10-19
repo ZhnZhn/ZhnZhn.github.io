@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 
@@ -40,16 +40,18 @@ var RowDate = function RowDate(_ref) {
       }
     };
   }, []);
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: rowStyle
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: labelStyle
-  }, labelTitle), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
-    ref: _refDate,
-    initialValue: initValue,
-    errorMsg: errorMsg,
-    onTest: onTestDate
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: rowStyle,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: labelStyle,
+      children: labelTitle
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField["default"], {
+      ref: _refDate,
+      initialValue: initValue,
+      errorMsg: errorMsg,
+      onTest: onTestDate
+    })]
+  });
 };
 /*
 RowDate.propTypes = {

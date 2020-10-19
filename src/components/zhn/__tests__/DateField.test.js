@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import React from 'react'
+import { createRef } from 'react'
 import { render, screen, act } from '@testing-library/react'
 import fireEventHelpers from './_fireEventHelpers'
 
@@ -15,7 +15,7 @@ describe("DateField", () => {
   const _findInput = () => screen.findByRole('textbox');
   test('', async () => {
     const onEnter = jest.fn()
-    , ref = React.createRef()
+    , ref = createRef()
     , initialValue="2010-01-01"
     //1 Test render with initialValue
     , { rerender } = render(<DateField

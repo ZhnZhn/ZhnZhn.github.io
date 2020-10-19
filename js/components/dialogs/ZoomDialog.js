@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
@@ -149,12 +149,11 @@ var ZoomDialog = /*#__PURE__*/function (_Component) {
     _this._hZoom3M = _this._hZoomBy.bind(null, -3);
     _this._hZoom6M = _this._hZoomBy.bind(null, -6);
     _this._hZoom1Y = _this._hZoomBy.bind(null, -12);
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
-      key: "zoom",
+    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Flat, {
       caption: "Zoom",
       isPrimary: true,
       onClick: _this._hZoom
-    })];
+    }, "zoom")];
     return _this;
   }
 
@@ -186,30 +185,30 @@ var ZoomDialog = /*#__PURE__*/function (_Component) {
         id = chart.zhGetId == null ? void 0 : chart.zhGetId(),
         _isDaily = chart.zhIsDaily == null ? void 0 : chart.zhIsDaily();
 
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
       caption: "Zoom Chart",
       style: S.DIALOG,
       isShow: isShow,
       commandButtons: this._commandButtons,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
-      key: id,
-      ref: this._refDates,
-      dateStyle: S.DATE,
-      placeholder: "DD-MM-YYYY",
-      initFromDate: from,
-      initToDate: to,
-      errMsg: _errMsgDateFrom,
-      isPeriodValid: isDmyPeriod,
-      onTestDate: _onTestDate,
-      onEnter: this._hZoom
-    }), _isDaily && /*#__PURE__*/_react["default"].createElement(_ZoomDailyRow["default"], {
-      onZoom1M: this._hZoom1M,
-      onZoom3M: this._hZoom3M,
-      onZoom6M: this._hZoom6M,
-      onZoomYTD: this._hZoomYTD,
-      onZoom1Y: this._hZoom1Y
-    }));
+      onClose: onClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
+        ref: this._refDates,
+        dateStyle: S.DATE,
+        placeholder: "DD-MM-YYYY",
+        initFromDate: from,
+        initToDate: to,
+        errMsg: _errMsgDateFrom,
+        isPeriodValid: isDmyPeriod,
+        onTestDate: _onTestDate,
+        onEnter: this._hZoom
+      }, id), _isDaily && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ZoomDailyRow["default"], {
+        onZoom1M: this._hZoom1M,
+        onZoom3M: this._hZoom3M,
+        onZoom6M: this._hZoom6M,
+        onZoomYTD: this._hZoomYTD,
+        onZoom1Y: this._hZoom1Y
+      })]
+    });
   };
 
   return ZoomDialog;

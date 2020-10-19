@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var S = {
   color: '#fdb316',
@@ -17,9 +17,10 @@ var S = {
 var SpanDate = function SpanDate(_ref) {
   var date = _ref.date,
       style = _ref.style;
-  return /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S, style)
-  }, date);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: (0, _extends2["default"])({}, S, style),
+    children: date
+  });
 };
 
 var _default = SpanDate;

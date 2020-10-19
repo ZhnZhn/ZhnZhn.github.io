@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 
@@ -44,13 +44,12 @@ var _renderLevel3 = function _renderLevel3(items, captionProp, props) {
       onClickItem = props.onClickItem;
   return items.map(function (item, index) {
     var caption = item[captionProp];
-    return /*#__PURE__*/_react["default"].createElement(ItemComp, {
-      key: index,
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemComp, {
       className: itemClassName,
       caption: caption,
       item: item,
       onClickItem: onClickItem
-    });
+    }, index);
   });
 };
 
@@ -62,12 +61,12 @@ var _renderLevel2 = function _renderLevel2(lists, captionProp, itemsProp, props)
   return lists.map(function (list, index) {
     var caption = list[captionProp],
         items = list[itemsProp];
-    return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
-      key: index,
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
       style: S.LIST_DIV,
       openColor: LIST_OPEN_COLOR,
-      caption: caption
-    }, _renderLevel3(items, captionProp, props));
+      caption: caption,
+      children: _renderLevel3(items, captionProp, props)
+    }, index);
   });
 };
 
@@ -89,11 +88,11 @@ var _renderLevel1 = function _renderLevel1(props) {
   return groups.map(function (group, index) {
     var caption = group[_captionProp],
         lists = group[_listsProp];
-    return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
-      key: index,
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
       style: S.GROUP_DIV,
-      caption: caption
-    }, _renderLevel2(lists, _captionProp, _itemsProp, props));
+      caption: caption,
+      children: _renderLevel2(lists, _captionProp, _itemsProp, props)
+    }, index);
   });
 };
 
@@ -102,7 +101,9 @@ var _areEqual = function _areEqual(prevProps, nextProps) {
 };
 
 var MenuListType2 = (0, _memoEqual["default"])(function (props) {
-  return /*#__PURE__*/_react["default"].createElement("div", null, _renderLevel1(props));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    children: _renderLevel1(props)
+  });
 }, _areEqual);
 var _default = MenuListType2;
 exports["default"] = _default;

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import { createElement } from 'react';
 
 import RouterDialog from './RouterDialog';
 import RouterLoadFn from './RouterLoadFn';
@@ -119,7 +119,7 @@ const _crDialogComp = function (browserType, dialogConf){
 
       return RouterDialog.getDialog(_dialogType)
          .then(Comp => {
-            return React.createElement(Comp, {
+            return createElement(Comp, {
               key : itemKey,
               caption : dialogCaption || menuTitle,
               msgOnNotSelected : Msg.NOT_SELECTED,
@@ -144,7 +144,7 @@ const _crOptionDialogComp = function(option) {
   const { dialogType } = option
   return RouterDialog.getDialog(dialogType)
      .then(Comp => {
-        return React.createElement(Comp, {
+        return createElement(Comp, {
             key: dialogType
         })
      });

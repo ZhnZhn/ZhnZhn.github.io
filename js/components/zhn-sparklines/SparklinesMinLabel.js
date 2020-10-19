@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _min2 = _interopRequireDefault(require("./dataProcessing/min"));
 
@@ -29,7 +29,7 @@ var SparklinesMinLabel = function SparklinesMinLabel(props) {
   var _min = (0, _min2["default"])(data),
       _y = height - dy;
 
-  return /*#__PURE__*/_react["default"].createElement(_SparklinesLabel["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SparklinesLabel["default"], {
     title: _min,
     x: 0,
     y: _y,

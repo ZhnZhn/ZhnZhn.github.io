@@ -1,5 +1,3 @@
-import React from 'react'
-
 import RowOcSelect from './RowOcSelect'
 import SeriaColor from '../SeriaColor'
 

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup'
 import RowCheckBox from '../rows/RowCheckBox'
@@ -11,7 +11,7 @@ const S = {
   ROW: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: 3    
+    paddingTop: 3
   },
   INLINE: {
     display: 'inline-block'

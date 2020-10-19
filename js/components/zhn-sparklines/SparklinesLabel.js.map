@@ -1,1 +1,13 @@
-{"version":3,"sources":["../../../src/components/zhn-sparklines/SparklinesLabel.jsx"],"names":["SparklinesLabel","title","rest"],"mappings":";;;;;;;;;AAAA;;AAEA,IAAMA,eAAe,GAAG,SAAlBA,eAAkB;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAaC,IAAb;AAAA,sBACtB,wCAAUA,IAAV,EACGD,KADH,CADsB;AAAA,CAAxB;;eAMeD,e","sourcesContent":["import React from 'react'\r\n\r\nconst SparklinesLabel = ({ title, ...rest}) => (\r\n  <text {...rest}>\r\n    {title}\r\n  </text>\r\n);  \r\n\r\nexport default SparklinesLabel\r\n"],"file":"SparklinesLabel.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-sparklines/SparklinesLabel.js"
+ ],
+ "file": "../../../src/components/zhn-sparklines/SparklinesLabel.js",
+ "names": [
+  "SparklinesLabel",
+  "title",
+  "rest"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA,IAAMA,eAAe,GAAG,SAAlBA,eAAkB;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAaC,IAAb;AAAA,sBACtB,2DAAUA,IAAV;AAAA,cACGD;AADH,KADsB;AAAA,CAAxB;;eAMeD,e"
+}

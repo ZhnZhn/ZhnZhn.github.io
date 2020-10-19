@@ -1,1 +1,22 @@
-{"version":3,"sources":["../../../src/components/zhn-sparklines/SparklinesSpot.jsx"],"names":["SparklinesSpot","props","points","size","style","spotColors","pointIndex","pointSpot","x","y","fill","defaultProps"],"mappings":";;;;;;;AAAA;;AAGA;;AAFA;AAIA,IAAMA,cAAc,GAAG,SAAjBA,cAAiB,CAACC,KAAD,EAAW;AAAA,MAExBC,MAFwB,GAItBD,KAJsB,CAExBC,MAFwB;AAAA,MAEhBC,IAFgB,GAItBF,KAJsB,CAEhBE,IAFgB;AAAA,MAEVC,KAFU,GAItBH,KAJsB,CAEVG,KAFU;AAAA,MAEHC,UAFG,GAItBJ,KAJsB,CAEHI,UAFG;AAAA,MAGxBC,UAHwB,GAItBL,KAJsB,CAGxBK,UAHwB;AAAA,MAK1BC,SAL0B,gBAMxB;AACG,IAAA,EAAE,EAAEL,MAAM,CAACI,UAAD,CAAN,CAAmBE,CAD1B;AAEG,IAAA,EAAE,EAAEN,MAAM,CAACI,UAAD,CAAN,CAAmBG,CAF1B;AAGG,IAAA,CAAC,EAAEN,IAHN;AAIG,IAAA,KAAK,EAAEC,KAAK,IAAI;AAAEM,MAAAA,IAAI,EAAEL,UAAU,CAAC,+BAAcH,MAAd,EAAsBI,UAAtB,CAAD;AAAlB;AAJnB,IANwB;;AAc9B,sBACI,2CACGC,SADH,CADJ;AAKH,CAnBD;AAqBA;;;;;;;;;;AAQAP,cAAc,CAACW,YAAf,GAA8B;AAC1BR,EAAAA,IAAI,EAAE,CADoB;AAE1BE,EAAAA,UAAU,EAAE;AACR,UAAM,KADE;AAER,SAAK,OAFG;AAGR,SAAK;AAHG;AAFc,CAA9B;eASeL,c","sourcesContent":["import React from 'react';\r\n//import PropTypes from 'prop-types';\r\n\r\nimport calcDirection from './dataProcessing/calcDirection';\r\n\r\nconst SparklinesSpot = (props) => {\r\n  const {\r\n          points, size, style, spotColors,\r\n          pointIndex\r\n        } = props\r\n      , pointSpot = (\r\n          <circle\r\n             cx={points[pointIndex].x}\r\n             cy={points[pointIndex].y}\r\n             r={size}\r\n             style={style || { fill: spotColors[calcDirection(points, pointIndex)] }}\r\n          />\r\n        );\r\n\r\n    return (\r\n        <g>\r\n          {pointSpot}\r\n        </g>\r\n    )\r\n}\r\n\r\n/*\r\nSparklinesSpot.propTypes = {\r\n    size: PropTypes.number,\r\n    style: PropTypes.object,\r\n    spotColors: PropTypes.object,\r\n    pointIndex: PropTypes.number\r\n};\r\n*/\r\nSparklinesSpot.defaultProps = {\r\n    size: 2,\r\n    spotColors: {\r\n        '-1': 'red',\r\n        '0': 'black',\r\n        '1': 'green'\r\n    }\r\n}\r\n\r\nexport default SparklinesSpot\r\n"],"file":"SparklinesSpot.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-sparklines/SparklinesSpot.js"
+ ],
+ "file": "../../../src/components/zhn-sparklines/SparklinesSpot.js",
+ "names": [
+  "SparklinesSpot",
+  "props",
+  "points",
+  "size",
+  "style",
+  "spotColors",
+  "pointIndex",
+  "pointSpot",
+  "x",
+  "y",
+  "fill",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;AAEA;;AAFA;AAIA,IAAMA,cAAc,GAAG,SAAjBA,cAAiB,CAACC,KAAD,EAAW;AAAA,MAExBC,MAFwB,GAItBD,KAJsB,CAExBC,MAFwB;AAAA,MAEhBC,IAFgB,GAItBF,KAJsB,CAEhBE,IAFgB;AAAA,MAEVC,KAFU,GAItBH,KAJsB,CAEVG,KAFU;AAAA,MAEHC,UAFG,GAItBJ,KAJsB,CAEHI,UAFG;AAAA,MAGxBC,UAHwB,GAItBL,KAJsB,CAGxBK,UAHwB;AAAA,MAK1BC,SAL0B,gBAMxB;AACG,IAAA,EAAE,EAAEL,MAAM,CAACI,UAAD,CAAN,CAAmBE,CAD1B;AAEG,IAAA,EAAE,EAAEN,MAAM,CAACI,UAAD,CAAN,CAAmBG,CAF1B;AAGG,IAAA,CAAC,EAAEN,IAHN;AAIG,IAAA,KAAK,EAAEC,KAAK,IAAI;AAAEM,MAAAA,IAAI,EAAEL,UAAU,CAAC,+BAAcH,MAAd,EAAsBI,UAAtB,CAAD;AAAlB;AAJnB,IANwB;AAc9B,sBACI;AAAA,cACGC;AADH,IADJ;AAKH,CAnBD;AAqBA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;AACAP,cAAc,CAACW,YAAf,GAA8B;AAC1BR,EAAAA,IAAI,EAAE,CADoB;AAE1BE,EAAAA,UAAU,EAAE;AACR,UAAM,KADE;AAER,SAAK,OAFG;AAGR,SAAK;AAHG;AAFc,CAA9B;eASeL,c"
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import { forwardRef } from 'react'
 import useKeyEnter from '../hooks/useKeyEnter'
 //import PropTypes from 'prop-types'
 
@@ -8,7 +8,7 @@ const _crClassName = className => className
   ? className + ' ' + CL_INPUT_COLOR
   : CL_INPUT_COLOR;
 
-const CellColor = React.forwardRef(({
+const CellColor = forwardRef(({
   className,
   style,
   color,

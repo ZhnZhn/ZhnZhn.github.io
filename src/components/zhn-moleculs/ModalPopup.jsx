@@ -1,5 +1,3 @@
-import React from 'react'
-
 import useTheme from '../hooks/useTheme'
 import ShowHide from '../zhn/ShowHide'
 import ModalPane from './ModalPane'

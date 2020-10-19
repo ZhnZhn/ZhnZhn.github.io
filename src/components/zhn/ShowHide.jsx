@@ -1,4 +1,3 @@
-import React from 'react';
 //import PropTypes from "prop-types";
 
 const CL_SHOW_POPUP = 'show-popup';

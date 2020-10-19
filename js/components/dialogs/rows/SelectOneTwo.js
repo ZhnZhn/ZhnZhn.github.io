@@ -2,14 +2,14 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 
@@ -126,23 +126,26 @@ var SelectOneTwo = (0, _withLoadOptions["default"])(_class = (_temp = _class2 = 
         isLoadingFailed = _this$state.isLoadingFailed,
         oneOptions = _this$state.oneOptions,
         twoOptions = _this$state.twoOptions;
-    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_RowInputSelect["default"], {
-      isShowLabels: isShowLabels,
-      caption: oneCaption,
-      options: oneOptions,
-      optionNames: oneOptionNames,
-      isLoading: isLoading,
-      isLoadingFailed: isLoadingFailed,
-      onLoadOption: this._loadOptions,
-      onSelect: this._hSelectOne
-    }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-      isShow: !isHideTwo
-    }, /*#__PURE__*/_react["default"].createElement(_RowInputSelect["default"], {
-      isShowLabels: isShowLabels,
-      caption: twoCaption,
-      options: twoOptions,
-      onSelect: this._hSelectTwo
-    })));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect["default"], {
+        isShowLabels: isShowLabels,
+        caption: oneCaption,
+        options: oneOptions,
+        optionNames: oneOptionNames,
+        isLoading: isLoading,
+        isLoadingFailed: isLoadingFailed,
+        onLoadOption: this._loadOptions,
+        onSelect: this._hSelectOne
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+        isShow: !isHideTwo,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect["default"], {
+          isShowLabels: isShowLabels,
+          caption: twoCaption,
+          options: twoOptions,
+          onSelect: this._hSelectTwo
+        })
+      })]
+    });
   };
 
   _proto.getValidation = function getValidation() {

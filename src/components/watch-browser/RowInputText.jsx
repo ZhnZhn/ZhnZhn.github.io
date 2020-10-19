@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 //import PropTypes from "prop-types";
 
 import InputText from '../zhn/InputText';
@@ -22,7 +22,7 @@ const S = {
   }
 }
 
-const RowInputText = React.forwardRef(({ caption }, ref) => (
+const RowInputText = forwardRef(({ caption }, ref) => (
   <div style={S.ROW}>
      <span style={S.CAPTION}>
        {caption}

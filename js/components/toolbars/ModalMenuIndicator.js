@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -13,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _seriaFn = _interopRequireDefault(require("../../math/seriaFn"));
 
@@ -79,7 +79,13 @@ const DEF_GROWTH_RATE = (
 );
 */
 
-var NORM_CAPTION_EL = /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, "Normalize (100*y", /*#__PURE__*/_react["default"].createElement("sub", null, "t"), "/y", /*#__PURE__*/_react["default"].createElement("sub", null, "0"), ")");
+var NORM_CAPTION_EL = /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+  children: ["Normalize (100*y", /*#__PURE__*/(0, _jsxRuntime.jsx)("sub", {
+    children: "t"
+  }), "/y", /*#__PURE__*/(0, _jsxRuntime.jsx)("sub", {
+    children: "0"
+  }), ")"]
+});
 
 var _isNumber = function _isNumber(n) {
   return typeof n === 'number';
@@ -220,42 +226,44 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
         isChanges = _this$state.isChanges,
         isNormalize = _this$state.isNormalize,
         isMomAth = _this$state.isMomAth;
-    return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup["default"], {
       style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, style),
       isShow: isShow,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: STYLE.PANE
-    }, /*#__PURE__*/_react["default"].createElement(_RowType["default"], {
-      is: isChanges,
-      caption: "Changes Between",
-      onMinus: this._removeChanges,
-      onPlus: this._addChanges
-    }), /*#__PURE__*/_react["default"].createElement(_RowType["default"], {
-      is: isGrowthRate,
-      caption: "Growth Rate" //Def={DEF_GROWTH_RATE}
-      ,
-      onMinus: this._removeGrowRate,
-      onPlus: this._addGrowRate
-    }), /*#__PURE__*/_react["default"].createElement(_RowPlusMinus["default"], {
-      is: isNormalize,
-      caption: NORM_CAPTION_EL,
-      onMinus: this._removeNormalize,
-      onPlus: this._addNormalize
-    }), !isWithoutSma && /*#__PURE__*/_react["default"].createElement(_RowSma["default"], {
-      config: config,
-      getChart: getChart
-    }), this._isMfi && /*#__PURE__*/_react["default"].createElement(_RowMfi["default"], {
-      getChart: getChart,
-      onAddMfi: onAddMfi,
-      onRemoveMfi: onRemoveMfi
-    }), this._isMomAth && /*#__PURE__*/_react["default"].createElement(_RowPlusMinus["default"], {
-      is: isMomAth,
-      styleCaption: _ModalMenu["default"].ROW_MOM_ATH,
-      caption: "MOM(1) & ATH",
-      onPlus: this._handleAddMomAth,
-      onMinus: this._handleRemoveMomAth
-    })));
+      onClose: onClose,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: STYLE.PANE,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType["default"], {
+          is: isChanges,
+          caption: "Changes Between",
+          onMinus: this._removeChanges,
+          onPlus: this._addChanges
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType["default"], {
+          is: isGrowthRate,
+          caption: "Growth Rate" //Def={DEF_GROWTH_RATE}
+          ,
+          onMinus: this._removeGrowRate,
+          onPlus: this._addGrowRate
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPlusMinus["default"], {
+          is: isNormalize,
+          caption: NORM_CAPTION_EL,
+          onMinus: this._removeNormalize,
+          onPlus: this._addNormalize
+        }), !isWithoutSma && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSma["default"], {
+          config: config,
+          getChart: getChart
+        }), this._isMfi && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowMfi["default"], {
+          getChart: getChart,
+          onAddMfi: onAddMfi,
+          onRemoveMfi: onRemoveMfi
+        }), this._isMomAth && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPlusMinus["default"], {
+          is: isMomAth,
+          styleCaption: _ModalMenu["default"].ROW_MOM_ATH,
+          caption: "MOM(1) & ATH",
+          onPlus: this._handleAddMomAth,
+          onMinus: this._handleRemoveMomAth
+        })]
+      })
+    });
   };
 
   return ModalMenuIndicator;

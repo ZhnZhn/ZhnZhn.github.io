@@ -1,6 +1,5 @@
 
-import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 
 import polyfill from './polyfill'
 import Raven from 'raven-js';

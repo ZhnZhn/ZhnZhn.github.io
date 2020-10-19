@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
@@ -108,34 +108,40 @@ var OpenClose2 = function OpenClose2(_ref2) {
       _expClass = _crStyleConf2._expClass,
       _notSelectedStyle = _crStyleConf2._notSelectedStyle;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: style
-  }, /*#__PURE__*/_react["default"].createElement("div", (0, _extends2["default"])({
-    role: "menuitem",
-    tabIndex: "0",
-    className: CL.NOT_SELECTED,
-    style: (0, _extends2["default"])({}, ocStyle, _notSelectedStyle),
-    onClick: toggleIsOpen,
-    onKeyDown: _hKeyDown
-  }, _dragOption), /*#__PURE__*/_react["default"].createElement("svg", {
-    viewBox: "0 0 16 16",
-    width: "100%",
-    height: "100%",
-    preserveAspectRatio: "none",
-    xmlns: "http://www.w3.org/2000/svg",
-    style: S.SVG
-  }, /*#__PURE__*/_react["default"].createElement("path", {
-    d: _pathV,
-    fill: _fillV,
-    strokeWidth: "1",
-    stroke: openColor
-  })), /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.CAPTION, captionStyle)
-  }, caption)), /*#__PURE__*/_react["default"].createElement("div", {
-    "aria-expanded": isOpen,
-    className: _expClass,
-    style: _divStyle
-  }, children));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: style,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", (0, _extends2["default"])({
+      role: "menuitem",
+      tabIndex: "0",
+      className: CL.NOT_SELECTED,
+      style: (0, _extends2["default"])({}, ocStyle, _notSelectedStyle),
+      onClick: toggleIsOpen,
+      onKeyDown: _hKeyDown
+    }, _dragOption, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("svg", {
+        viewBox: "0 0 16 16",
+        width: "100%",
+        height: "100%",
+        preserveAspectRatio: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        style: S.SVG,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+          d: _pathV,
+          fill: _fillV,
+          strokeWidth: "1",
+          stroke: openColor
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: (0, _extends2["default"])({}, S.CAPTION, captionStyle),
+        children: caption
+      })]
+    })), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      "aria-expanded": isOpen,
+      className: _expClass,
+      style: _divStyle,
+      children: children
+    })]
+  });
 };
 
 var _default = OpenClose2;

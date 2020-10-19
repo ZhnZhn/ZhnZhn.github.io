@@ -1,4 +1,4 @@
-import React from 'react'
+import { forwardRef } from 'react'
 
 import SpanLabel from '../zhn-span/SpanLabel'
 import DateField from '../zhn/DateField'
@@ -23,7 +23,7 @@ const S = {
   }
 };
 
-const DivCompareTo = React.forwardRef(({
+const DivCompareTo = forwardRef(({
   initialValue,
   msgErr,
   onTest,

@@ -1,1 +1,23 @@
-{"version":3,"sources":["../../../src/components/toolbars/RowPlusMinus.jsx"],"names":["S","CAPTION","display","color","paddingRight","paddingBottom","fontWeight","RowPlusMinus","is","styleCaption","caption","onMinus","onPlus"],"mappings":";;;;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,OAAO,EAAE,cADF;AAEPC,IAAAA,KAAK,EAAE,OAFA;AAGPC,IAAAA,YAAY,EAAE,CAHP;AAIPC,IAAAA,aAAa,EAAE,CAJR;AAKPC,IAAAA,UAAU,EAAE;AALL;AADD,CAAV;;AAUA,IAAMC,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,EAAH,QAAGA,EAAH;AAAA,MAAOC,YAAP,QAAOA,YAAP;AAAA,MAAqBC,OAArB,QAAqBA,OAArB;AAAA,MAA8BC,OAA9B,QAA8BA,OAA9B;AAAA,MAAuCC,MAAvC,QAAuCA,MAAvC;AAAA,sBACnB,0DACE;AAAM,IAAA,KAAK,gCAAMZ,CAAC,CAACC,OAAR,EAAoBQ,YAApB;AAAX,KACIC,OADJ,CADF,EAKIF,EAAE,gBAAG,gCAAC,aAAD,CAAG,QAAH;AAAY,IAAA,OAAO,EAAEG;AAArB,IAAH,gBACG,gCAAC,aAAD,CAAG,OAAH;AAAW,IAAA,OAAO,EAAEC;AAApB,IANT,CADmB;AAAA,CAArB;;eAYeL,Y","sourcesContent":["import React from 'react';\r\n\r\nimport A from '../zhn/A';\r\n\r\nconst S = {\r\n  CAPTION: {\r\n    display: 'inline-block',\r\n    color: 'black',\r\n    paddingRight: 8,\r\n    paddingBottom: 6,\r\n    fontWeight: 'bold'\r\n  }\r\n};\r\n\r\nconst RowPlusMinus = ({ is, styleCaption, caption, onMinus, onPlus }) => (\r\n  <div>\r\n    <span style={{...S.CAPTION, ...styleCaption }}>\r\n       {caption}\r\n    </span>\r\n    {\r\n      is ? <A.SvgMinus onClick={onMinus} />\r\n         : <A.SvgPlus onClick={onPlus} />\r\n    }\r\n  </div>\r\n);\r\n\r\nexport default RowPlusMinus\r\n"],"file":"RowPlusMinus.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/RowPlusMinus.js"
+ ],
+ "file": "../../../src/components/toolbars/RowPlusMinus.js",
+ "names": [
+  "S",
+  "CAPTION",
+  "display",
+  "color",
+  "paddingRight",
+  "paddingBottom",
+  "fontWeight",
+  "RowPlusMinus",
+  "is",
+  "styleCaption",
+  "caption",
+  "onMinus",
+  "onPlus"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,OAAO,EAAE,cADF;AAEPC,IAAAA,KAAK,EAAE,OAFA;AAGPC,IAAAA,YAAY,EAAE,CAHP;AAIPC,IAAAA,aAAa,EAAE,CAJR;AAKPC,IAAAA,UAAU,EAAE;AALL;AADD,CAAV;;AAUA,IAAMC,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,EAAH,QAAGA,EAAH;AAAA,MAAOC,YAAP,QAAOA,YAAP;AAAA,MAAqBC,OAArB,QAAqBA,OAArB;AAAA,MAA8BC,OAA9B,QAA8BA,OAA9B;AAAA,MAAuCC,MAAvC,QAAuCA,MAAvC;AAAA,sBACnB;AAAA,4BACE;AAAM,MAAA,KAAK,gCAAMZ,CAAC,CAACC,OAAR,EAAoBQ,YAApB,CAAX;AAAA,gBACIC;AADJ,MADF,EAKIF,EAAE,gBAAG,qBAAC,aAAD,CAAG,QAAH;AAAY,MAAA,OAAO,EAAEG;AAArB,MAAH,gBACG,qBAAC,aAAD,CAAG,OAAH;AAAW,MAAA,OAAO,EAAEC;AAApB,MANT;AAAA,IADmB;AAAA,CAArB;;eAYeL,Y"
+}

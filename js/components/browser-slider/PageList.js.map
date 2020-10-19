@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/components/browser-slider/PageList.jsx"],"names":["PageList","pages","pageCurrent","map","page","index","React","cloneElement","pageNumber"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,WAAV,QAAUA,WAAV;AAAA,SAA4BD,KAAK,CAChDE,GAD2C,CACvC,UAACC,IAAD,EAAOC,KAAP;AAAA,wBAAiBC,kBAAMC,YAAN,CAAmBH,IAAnB,EAAyB;AAC3CF,MAAAA,WAAW,EAAXA,WAD2C;AAE3CM,MAAAA,UAAU,EAAEH,KAAK,GAAG;AAFuB,KAAzB,CAAjB;AAAA,GADuC,CAA5B;AAAA,CAAjB;;eAMeL,Q","sourcesContent":["import React from 'react'\r\n\r\nconst PageList = ({ pages, pageCurrent }) => pages\r\n .map((page, index) => React.cloneElement(page, {\r\n     pageCurrent,\r\n     pageNumber: index + 1\r\n  }));\r\n\r\nexport default PageList\r\n"],"file":"PageList.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/PageList.js"
+ ],
+ "file": "../../../src/components/browser-slider/PageList.js",
+ "names": [
+  "PageList",
+  "pages",
+  "pageCurrent",
+  "map",
+  "page",
+  "index",
+  "pageNumber"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,WAAV,QAAUA,WAAV;AAAA,SAA4BD,KAAK,CAChDE,GAD2C,CACvC,UAACC,IAAD,EAAOC,KAAP;AAAA,wBAAiB,yBAAaD,IAAb,EAAmB;AACrCF,MAAAA,WAAW,EAAXA,WADqC;AAErCI,MAAAA,UAAU,EAAED,KAAK,GAAG;AAFiB,KAAnB,CAAjB;AAAA,GADuC,CAA5B;AAAA,CAAjB;;eAMeL,Q"
+}

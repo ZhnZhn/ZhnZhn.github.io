@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _A = _interopRequireDefault(require("../zhn/A"));
 
@@ -27,13 +27,16 @@ var RowPlusMinus = function RowPlusMinus(_ref) {
       caption = _ref.caption,
       onMinus = _ref.onMinus,
       onPlus = _ref.onPlus;
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
-    style: (0, _extends2["default"])({}, S.CAPTION, styleCaption)
-  }, caption), is ? /*#__PURE__*/_react["default"].createElement(_A["default"].SvgMinus, {
-    onClick: onMinus
-  }) : /*#__PURE__*/_react["default"].createElement(_A["default"].SvgPlus, {
-    onClick: onPlus
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: (0, _extends2["default"])({}, S.CAPTION, styleCaption),
+      children: caption
+    }), is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].SvgMinus, {
+      onClick: onMinus
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].SvgPlus, {
+      onClick: onPlus
+    })]
+  });
 };
 
 var _default = RowPlusMinus;

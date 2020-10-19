@@ -1,5 +1,3 @@
-import React from 'react'
-
 import STYLE from '../../styles/DialogStyles'
 
 const S = {

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
@@ -94,30 +94,35 @@ var SettingsDialog = /*#__PURE__*/function (_Component) {
     var _this$props = this.props,
         isShow = _this$props.isShow,
         data = _this$props.data;
-    return /*#__PURE__*/_react["default"].createElement(_Comp["default"].ModalDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ModalDialog, {
       ref: this._refModal,
       caption: "User Settings",
       style: S.MODAL,
       isWithButton: false,
       isShow: isShow,
-      onClose: this._hClose
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].TabPane, null, /*#__PURE__*/_react["default"].createElement(_Comp["default"].Tab, {
-      title: "ApiKeys"
-    }, /*#__PURE__*/_react["default"].createElement(_PaneApiKey["default"], {
-      isShow: isShow,
-      titleStyle: S.TITLE_API,
-      btStyle: S.BT,
-      data: data,
-      onClose: this._hClose
-    })), /*#__PURE__*/_react["default"].createElement(_Comp["default"].Tab, {
-      title: "Options"
-    }, /*#__PURE__*/_react["default"].createElement(_PaneOptions["default"], {
-      titleStyle: S.TITLE_OPTION,
-      btStyle: S.BT,
-      data: data,
-      onChangeTheme: _ComponentActions["default"].changeTheme,
-      onClose: this._hClose
-    }))));
+      onClose: this._hClose,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].TabPane, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].Tab, {
+          title: "ApiKeys",
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneApiKey["default"], {
+            isShow: isShow,
+            titleStyle: S.TITLE_API,
+            btStyle: S.BT,
+            data: data,
+            onClose: this._hClose
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].Tab, {
+          title: "Options",
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions["default"], {
+            titleStyle: S.TITLE_OPTION,
+            btStyle: S.BT,
+            data: data,
+            onChangeTheme: _ComponentActions["default"].changeTheme,
+            onClose: this._hClose
+          })
+        })]
+      })
+    });
   };
 
   return SettingsDialog;

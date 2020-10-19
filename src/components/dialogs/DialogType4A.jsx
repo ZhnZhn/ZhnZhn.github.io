@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import D from './DialogCell'
 const { Decor, crMenuMore } = D

@@ -1,1 +1,21 @@
-{"version":3,"sources":["../../../src/components/zhn-sparklines/SparklinesMaxLabel.jsx"],"names":["DF_COLOR","DF_FONT_SIZE","DF_DY","SparklinesMaxLabel","props","data","dy","color","fontSize","_max","_y"],"mappings":";;;;;;;AAAA;;AAEA;;AACA;;AAEA,IAAMA,QAAQ,GAAG,SAAjB;AACA,IAAMC,YAAY,GAAG,EAArB;AACA,IAAMC,KAAK,GAAG,CAAd,C,CACA;;AAEA,IAAMC,kBAAkB,GAAG,SAArBA,kBAAqB,CAACC,KAAD,EAAW;AAAA,MAC5BC,IAD4B,GAC8BD,KAD9B,CAC5BC,IAD4B;AAAA,kBAC8BD,KAD9B,CACtBE,EADsB;AAAA,MACtBA,EADsB,0BACnBJ,KADmB;AAAA,qBAC8BE,KAD9B,CACZG,KADY;AAAA,MACZA,KADY,6BACNP,QADM;AAAA,wBAC8BI,KAD9B,CACII,QADJ;AAAA,MACIA,QADJ,gCACaP,YADb;;AAEpC,MAAMQ,IAAI,GAAG,sBAAIJ,IAAJ,CAAb;AAAA,MACMK,EAAE,GAAGF,QAAQ,GAAGF,EADtB;;AAEA,sBACE,gCAAC,2BAAD;AACG,IAAA,KAAK,EAAEG,IADV;AAEG,IAAA,CAAC,EAAE,CAFN;AAES,IAAA,CAAC,EAAEC,EAFZ;AAGG,IAAA,MAAM,EAAC,MAHV;AAGiB,IAAA,IAAI,EAAEH,KAHvB;AAG8B,IAAA,QAAQ,EAAEC;AAHxC,IADF;AAOD,CAXD;;eAaeL,kB","sourcesContent":["import React from 'react'\r\n\r\nimport max from './dataProcessing/max'\r\nimport SparklinesLabel from './SparklinesLabel'\r\n\r\nconst DF_COLOR = \"#8bc34a\"\r\nconst DF_FONT_SIZE = 14\r\nconst DF_DY = 4\r\n//const DF_OPACITY = 0.7\r\n\r\nconst SparklinesMaxLabel = (props) => {\r\n  const { data, dy=DF_DY, color=DF_COLOR, fontSize=DF_FONT_SIZE } = props\r\n  const _max = max(data)\r\n      , _y = fontSize - dy;\r\n  return (\r\n    <SparklinesLabel\r\n       title={_max}\r\n       x={0} y={_y}\r\n       stroke=\"none\" fill={color} fontSize={fontSize}\r\n    />\r\n  );\r\n};\r\n\r\nexport default SparklinesMaxLabel\r\n"],"file":"SparklinesMaxLabel.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-sparklines/SparklinesMaxLabel.js"
+ ],
+ "file": "../../../src/components/zhn-sparklines/SparklinesMaxLabel.js",
+ "names": [
+  "DF_COLOR",
+  "DF_FONT_SIZE",
+  "DF_DY",
+  "SparklinesMaxLabel",
+  "props",
+  "data",
+  "dy",
+  "color",
+  "fontSize",
+  "_max",
+  "_y"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,QAAQ,GAAG,SAAjB;AACA,IAAMC,YAAY,GAAG,EAArB;AACA,IAAMC,KAAK,GAAG,CAAd,C,CACA;;AAEA,IAAMC,kBAAkB,GAAG,SAArBA,kBAAqB,CAACC,KAAD,EAAW;AAAA,MAC5BC,IAD4B,GAC8BD,KAD9B,CAC5BC,IAD4B;AAAA,kBAC8BD,KAD9B,CACtBE,EADsB;AAAA,MACtBA,EADsB,0BACnBJ,KADmB;AAAA,qBAC8BE,KAD9B,CACZG,KADY;AAAA,MACZA,KADY,6BACNP,QADM;AAAA,wBAC8BI,KAD9B,CACII,QADJ;AAAA,MACIA,QADJ,gCACaP,YADb;;AAEpC,MAAMQ,IAAI,GAAG,sBAAIJ,IAAJ,CAAb;AAAA,MACMK,EAAE,GAAGF,QAAQ,GAAGF,EADtB;;AAEA,sBACE,qBAAC,2BAAD;AACG,IAAA,KAAK,EAAEG,IADV;AAEG,IAAA,CAAC,EAAE,CAFN;AAES,IAAA,CAAC,EAAEC,EAFZ;AAGG,IAAA,MAAM,EAAC,MAHV;AAGiB,IAAA,IAAI,EAAEH,KAHvB;AAG8B,IAAA,QAAQ,EAAEC;AAHxC,IADF;AAOD,CAXD;;eAaeL,kB"
+}

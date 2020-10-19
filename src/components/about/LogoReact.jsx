@@ -1,9 +1,7 @@
-import React from 'react';
-
 const C = {
   CL: 'logo-react',
   TITLE: 'React Logo',
-  HREF: 'https://facebook.github.io/react/'
+  HREF: 'https://reactjs.org'
 };
 
 const LogoReact = ({ className='' }) => (

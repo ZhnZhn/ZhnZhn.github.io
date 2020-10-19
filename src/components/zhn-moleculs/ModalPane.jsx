@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 //import PropTypes from 'prop-types'
 
 import useTheme from '../hooks/useTheme'

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 
@@ -21,22 +21,23 @@ var MenuTopic = function MenuTopic(_ref) {
 
   var _isClose = isInitOpen === true ? false : true;
 
-  return /*#__PURE__*/_react["default"].createElement(_OpenClose["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
     isClose: _isClose,
     role: "menuitem",
     caption: caption,
     style: style,
-    openColor: openColor
-  }, /*#__PURE__*/_react["default"].createElement(_MenuItems["default"], {
-    items: items
-  }));
+    openColor: openColor,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems["default"], {
+      items: items
+    })
+  });
 };
 /*
 MenuPart.propTypes = {
   isInitOpen: PropTypes.bool,
   caption: PropTypes.string,
   style: PropTypes.object,
-  openColor: PropTypes.string,  
+  openColor: PropTypes.string,
   items: PropTypes.arrayOf(
      PropTypes.shape({
        isOpen: PropTypes.bool,

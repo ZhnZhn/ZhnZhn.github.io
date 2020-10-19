@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -11,7 +9,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ChartTypes = _interopRequireDefault(require("./ChartTypes"));
 
@@ -152,47 +152,49 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
         isShowLabels = _this$state.isShowLabels,
         isShowDate = _this$state.isShowDate,
         chartType = _this$state.chartType;
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       menuModel: this._menuMore,
       caption: caption,
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: isToolbar,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
-      ref: this._refIdInput,
-      isShow: isShow,
-      isShowLabels: isShowLabels,
-      captionStyle: S.ID_CAPTION,
-      rootStyle: S.ID_ROOT,
-      placeholder: onePlaceholder,
-      caption: oneCaption,
-      onTest: _testId,
-      errorMsg: ERR_MSG
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowChartDate, {
-      chartType: chartType,
-      isShowLabels: isShowLabels,
-      isShowChart: true,
-      labelStyle: S.ID_CAPTION,
-      selectWidth: S.ID_ROOT.width,
-      chartOptions: this._chartOptions,
-      onSelectChart: this._hSelectChartType,
-      onRegColor: this._onRegColor,
-      noDate: noDate
-    }), !noDate && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isShowDate
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DatesFragment, {
-      ref: this._refDates,
-      isShowLabels: isShowLabels,
-      initFromDate: initFromDate,
-      initToDate: initToDate,
-      msgOnNotValidFormat: msgOnNotValidFormat,
-      onTestDate: onTestDate
-    })));
+      onClose: onClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: isToolbar,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowPattern, {
+        ref: this._refIdInput,
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        captionStyle: S.ID_CAPTION,
+        rootStyle: S.ID_ROOT,
+        placeholder: onePlaceholder,
+        caption: oneCaption,
+        onTest: _testId,
+        errorMsg: ERR_MSG
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowChartDate, {
+        chartType: chartType,
+        isShowLabels: isShowLabels,
+        isShowChart: true,
+        labelStyle: S.ID_CAPTION,
+        selectWidth: S.ID_ROOT.width,
+        chartOptions: this._chartOptions,
+        onSelectChart: this._hSelectChartType,
+        onRegColor: this._onRegColor,
+        noDate: noDate
+      }), !noDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+        isShow: isShowDate,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
+          ref: this._refDates,
+          isShowLabels: isShowLabels,
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          msgOnNotValidFormat: msgOnNotValidFormat,
+          onTestDate: onTestDate
+        })
+      })]
+    });
   };
 
   return DialogQuery;

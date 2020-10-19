@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -13,7 +11,9 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
@@ -207,42 +207,44 @@ var AlphaIntradayDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _de
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
         isToggleOptions = _this$state.isToggleOptions;
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: this._handleClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: isToolbar,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowPattern, {
-      ref: this._refTicket,
-      isShowLabels: isShowLabels,
-      caption: "Ticket",
-      placeholder: "Nyse or Nasdaq Ticket",
-      onTest: _testTicket,
-      errorMsg: "Not Empty"
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, (0, _extends2["default"])({
-      isShowLabels: isShowLabels
-    }, _getConf(dfT), {
-      //caption="Interval"
-      //placeholder="Default: 15min"
-      //options={_intervalOptions}
-      onSelect: this._handleSelectInterval
-    })), this._isDaily && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ShowHide, {
-      isShow: isToggleOptions
-    }, this._isDailyAdj && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      initValue: false,
-      caption: "With Dividend History",
-      onToggle: this._toggleDividend
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowCheckBox, {
-      initValue: false,
-      caption: "Filter Zero Values",
-      onToggle: this._toggleFilterZero
-    })));
+      onClose: this._handleClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: isToolbar,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowPattern, {
+        ref: this._refTicket,
+        isShowLabels: isShowLabels,
+        caption: "Ticket",
+        placeholder: "Nyse or Nasdaq Ticket",
+        onTest: _testTicket,
+        errorMsg: "Not Empty"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, (0, _extends2["default"])({
+        isShowLabels: isShowLabels
+      }, _getConf(dfT), {
+        //caption="Interval"
+        //placeholder="Default: 15min"
+        //options={_intervalOptions}
+        onSelect: this._handleSelectInterval
+      })), this._isDaily && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].ShowHide, {
+        isShow: isToggleOptions,
+        children: [this._isDailyAdj && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+          initValue: false,
+          caption: "With Dividend History",
+          onToggle: this._toggleDividend
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+          initValue: false,
+          caption: "Filter Zero Values",
+          onToggle: this._toggleFilterZero
+        })]
+      })]
+    });
   };
 
   return AlphaIntradayDialog;

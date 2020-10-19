@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 
 import CellColor from './CellColor'
 
@@ -16,7 +16,7 @@ const S = {
   }
 }
 
-const CellColorPane = React.memo(({ model, onClickCell }) => {
+const CellColorPane = memo(({ model, onClickCell }) => {
 
    const { rows, cols, colors } = model
    , _elRows = [];

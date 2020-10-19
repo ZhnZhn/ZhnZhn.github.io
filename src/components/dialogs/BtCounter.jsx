@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useImperativeHandle } from 'react'
+import { forwardRef, useState, useCallback, useImperativeHandle } from 'react'
 
 import ButtonCircle from '../zhn/ButtonCircle'
 
-const BtCounter = React.forwardRef(({
+const BtCounter = forwardRef(({
   isShow,
   style,
   title,

@@ -1,17 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/dialogs/rows/crRowStyle.js"
- ],
- "file": "../../../../src/components/dialogs/rows/crRowStyle.js",
- "names": [
-  "crRowStyle",
-  "isOc",
-  "isShowLabels",
-  "captionStyle",
-  "STYLE",
-  "crRowOcSelectStyle",
-  "crRowLabelStyle"
- ],
- "mappings": ";;;;;;;AAAA;;AAEA;AACA,IAAMA,UAAU,GAAG,SAAbA,UAAa,OAAiCC,IAAjC;AAAA,MAAGC,YAAH,QAAGA,YAAH;AAAA,MAAiBC,YAAjB,QAAiBA,YAAjB;AAAA,SAA0CF,IAAI,GAC7DG,yBAAMC,kBAAN,CAAyBH,YAAzB,EAAuCC,YAAvC,CAD6D,GAE7DC,yBAAME,eAAN,CAAsBJ,YAAtB,EAAoCC,YAApC,CAFe;AAAA,CAAnB;;eAIeH,U"
-}
+{"version":3,"sources":["../../../../src/components/dialogs/rows/crRowStyle.js"],"names":["crRowStyle","isOc","isShowLabels","captionStyle","STYLE","crRowOcSelectStyle","crRowLabelStyle"],"mappings":";;;;;;;AAAA;;AAEA;AACA,IAAMA,UAAU,GAAG,SAAbA,UAAa,OAAiCC,IAAjC;AAAA,MAAGC,YAAH,QAAGA,YAAH;AAAA,MAAiBC,YAAjB,QAAiBA,YAAjB;AAAA,SAA0CF,IAAI,GAC7DG,yBAAMC,kBAAN,CAAyBH,YAAzB,EAAuCC,YAAvC,CAD6D,GAE7DC,yBAAME,eAAN,CAAsBJ,YAAtB,EAAoCC,YAApC,CAFe;AAAA,CAAnB;;eAIeH,U","sourcesContent":["import STYLE from '../../styles/DialogStyles';\r\n\r\n//rowStyle, labelStyle\r\nconst crRowStyle = ({ isShowLabels, captionStyle }, isOc) => isOc\r\n  ? STYLE.crRowOcSelectStyle(isShowLabels, captionStyle)\r\n  : STYLE.crRowLabelStyle(isShowLabels, captionStyle);\r\n\r\nexport default crRowStyle\r\n"],"file":"crRowStyle.js"}

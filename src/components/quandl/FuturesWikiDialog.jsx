@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component, createRef } from 'react';
 
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
@@ -25,8 +25,8 @@ class FuturesWikiDialog extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
-    this._refExchangeItem = React.createRef()
-    this._refFromDate = React.createRef()
+    this._refExchangeItem = createRef()
+    this._refFromDate = createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {

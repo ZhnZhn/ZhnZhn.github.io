@@ -1,4 +1,3 @@
-import React from 'react';
 //import PropTypes from 'prop-types'
 import use from '../hooks/use'
 import C from '../styles/Color'

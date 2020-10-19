@@ -7,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
+
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
@@ -37,28 +39,29 @@ var MenuItem = function MenuItem(_ref) {
 
   var _hKeyDown = (0, _useKeyEnter["default"])(onClick);
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     tabIndex: "0",
     role: "menuitem",
     className: CL_ROW,
     onClick: onClick,
-    onKeyDown: _hKeyDown
-  }, title, counter !== 0 ? /*#__PURE__*/_react["default"].createElement(_MenuBadge["default"], {
-    counter: counter,
-    isOpen: isOpen,
-    onClick: onBadgeClick,
-    onBadgeClose: onBadgeClose
-  }) : null, isNew ? /*#__PURE__*/_react["default"].createElement(_LabelNew["default"], null) : null);
+    onKeyDown: _hKeyDown,
+    children: [title, counter !== 0 ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuBadge["default"], {
+      counter: counter,
+      isOpen: isOpen,
+      onClick: onBadgeClick,
+      onBadgeClose: onBadgeClose
+    }) : null, isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_LabelNew["default"], {}) : null]
+  });
 };
 
 var MenuItems = function MenuItems(_ref2) {
   var items = _ref2.items;
   return items.map(function (item, index) {
-    return _isArr(item.items) ? /*#__PURE__*/_react["default"].createElement(_MenuTopic["default"], (0, _extends2["default"])({}, item, {
+    return _isArr(item.items) ? /*#__PURE__*/(0, _react.createElement)(_MenuTopic["default"], (0, _extends2["default"])({}, item, {
       key: index,
       style: S.MP_LEVEL_2,
       openColor: S.OPEN_COLOR
-    })) : /*#__PURE__*/_react["default"].createElement(MenuItem, (0, _extends2["default"])({}, item, {
+    })) : /*#__PURE__*/(0, _react.createElement)(MenuItem, (0, _extends2["default"])({}, item, {
       key: index
     }));
   });

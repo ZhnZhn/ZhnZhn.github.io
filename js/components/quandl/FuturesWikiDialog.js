@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
@@ -13,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
@@ -105,8 +105,8 @@ var FuturesWikiDialog = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
       noDate: true
     });
-    _this._refExchangeItem = /*#__PURE__*/_react["default"].createRef();
-    _this._refFromDate = /*#__PURE__*/_react["default"].createRef();
+    _this._refExchangeItem = /*#__PURE__*/(0, _react.createRef)();
+    _this._refFromDate = /*#__PURE__*/(0, _react.createRef)();
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState());
     return _this;
@@ -140,42 +140,43 @@ var FuturesWikiDialog = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
         validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].DraggableDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: this._handleClose
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Toolbar, {
-      isShow: isToolbar,
-      buttons: this.toolbarButtons
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].SelectOneTwo, {
-      ref: this._refExchangeItem,
-      isShow: isShow,
-      isShowLabels: isShowLabels,
-      uri: futuresURI,
-      oneCaption: "Exchange",
-      oneOptionNames: "Exchanges",
-      oneJsonProp: "futures",
-      twoCaption: "Asset",
-      msgOnNotSelected: msgOnNotSelected
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputSelect, {
-      isShowLabels: isShowLabels,
-      caption: "Type",
-      options: typeOptions,
-      onSelect: this._handleSelectType
-    }), isFd && /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowDate, {
-      innerRef: this._refFromDate,
-      isShowLabels: isShowLabels,
-      labelTitle: "From Date:",
-      initValue: initFromDate,
-      errorMsg: errNotYmdOrEmpty,
-      onTestDate: isYmdOrEmpty
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].ValidationMessages, {
-      validationMessages: validationMessages
-    }));
+      onClose: this._handleClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+        isShow: isToolbar,
+        buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectOneTwo, {
+        ref: this._refExchangeItem,
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        uri: futuresURI,
+        oneCaption: "Exchange",
+        oneOptionNames: "Exchanges",
+        oneJsonProp: "futures",
+        twoCaption: "Asset",
+        msgOnNotSelected: msgOnNotSelected
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+        isShowLabels: isShowLabels,
+        caption: "Type",
+        options: typeOptions,
+        onSelect: this._handleSelectType
+      }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowDate, {
+        innerRef: this._refFromDate,
+        isShowLabels: isShowLabels,
+        labelTitle: "From Date:",
+        initValue: initFromDate,
+        errorMsg: errNotYmdOrEmpty,
+        onTestDate: isYmdOrEmpty
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
+        validationMessages: validationMessages
+      })]
+    });
   };
 
   return FuturesWikiDialog;

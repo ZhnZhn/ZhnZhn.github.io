@@ -1,8 +1,10 @@
-import React from 'react'
+import { memo } from 'react'
 
-const _areEqual = (prevProps, nextProps) => prevProps.isShow === nextProps.isShow
+const DF_ARE_EQUAL = (prevProps, nextProps) => prevProps.isShow === nextProps.isShow
 
-const crModalDialog = (Comp, areEqual=_areEqual) =>
-  React.memo(Comp, areEqual);
+const crModalDialog = (
+  Comp,
+  areEqual=DF_ARE_EQUAL
+) => memo(Comp, areEqual);
 
 export default crModalDialog

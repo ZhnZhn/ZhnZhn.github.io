@@ -1,1 +1,27 @@
-{"version":3,"sources":["../../../../src/components/zhn-m/__test__/FlatButton.snap.test.jsx"],"names":["_crDfProps","option","isPrimary","caption","title","accessKey","onClick","jest","fn","describe","test","tree","renderer","create","toJSON","expect","toMatchSnapshot"],"mappings":";;;;;;AAAA;;AACA;;AACA;;AAEA,IAAMA,UAAU,GAAG,SAAbA,UAAa,CAACC,MAAD;AAAA;AACjBC,IAAAA,SAAS,EAAE,IADM;AAEjBC,IAAAA,OAAO,EAAE,MAFQ;AAGjBC,IAAAA,KAAK,EAAE,eAHU;AAIjBC,IAAAA,SAAS,EAAE,GAJM;AAKjBC,IAAAA,OAAO,EAAEC,IAAI,CAACC,EAAL;AALQ,KAMdP,MANc;AAAA,CAAnB;;AASAQ,QAAQ,CAAC,iBAAD,EAAoB,YAAM;AAChCC,EAAAA,IAAI,CAAC,8CAAD,EAAiD,YAAM;AACzD,QAAMC,IAAI,GAAGC,8BACVC,MADU,eAET,gCAAC,sBAAD,EACMb,UAAU,CAAC;AAAEE,MAAAA,SAAS,EAAE;AAAb,KAAD,CADhB,CAFS,EAMVY,MANU,EAAb;;AAOAC,IAAAA,MAAM,CAACJ,IAAD,CAAN,CAAaK,eAAb;AACD,GATG,CAAJ;AAUAN,EAAAA,IAAI,CAAC,+CAAD,EAAkD,YAAM;AAC1D,QAAMC,IAAI,GAAGC,8BACVC,MADU,eAET,gCAAC,sBAAD,EACMb,UAAU,CAAC;AAAEE,MAAAA,SAAS,EAAE;AAAb,KAAD,CADhB,CAFS,EAMVY,MANU,EAAb;;AAOAC,IAAAA,MAAM,CAACJ,IAAD,CAAN,CAAaK,eAAb;AACD,GATG,CAAJ;AAWD,CAtBO,CAAR","sourcesContent":["import React from 'react'\r\nimport renderer from 'react-test-renderer'\r\nimport FlatButton from '../FlatButton'\r\n\r\nconst _crDfProps = (option) => ({\r\n  isPrimary: true,\r\n  caption: \"Load\",\r\n  title: \"Click to load\",\r\n  accessKey: \"l\",\r\n  onClick: jest.fn(),\r\n  ...option\r\n});\r\n\r\ndescribe('FlatButton Snap', () => {\r\n  test('should renders correctly with isPrimary true', () => {\r\n    const tree = renderer\r\n      .create((\r\n        <FlatButton\r\n          {..._crDfProps({ isPrimary: true })}\r\n        />\r\n      ))\r\n      .toJSON()\r\n    expect(tree).toMatchSnapshot()\r\n  })\r\n  test('should renders correctly with isPrimary false', () => {\r\n    const tree = renderer\r\n      .create((\r\n        <FlatButton\r\n          {..._crDfProps({ isPrimary: false })}\r\n        />\r\n      ))\r\n      .toJSON()\r\n    expect(tree).toMatchSnapshot()\r\n  })\r\n\r\n});\r\n"],"file":"FlatButton.snap.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn-m/__test__/FlatButton.snap.test.js"
+ ],
+ "file": "../../../../src/components/zhn-m/__test__/FlatButton.snap.test.js",
+ "names": [
+  "_crDfProps",
+  "option",
+  "isPrimary",
+  "caption",
+  "title",
+  "accessKey",
+  "onClick",
+  "jest",
+  "fn",
+  "describe",
+  "test",
+  "tree",
+  "renderer",
+  "create",
+  "toJSON",
+  "expect",
+  "toMatchSnapshot"
+ ],
+ "mappings": ";;;;;;;;AAAA;;AACA;;AAEA,IAAMA,UAAU,GAAG,SAAbA,UAAa,CAACC,MAAD;AAAA;AACjBC,IAAAA,SAAS,EAAE,IADM;AAEjBC,IAAAA,OAAO,EAAE,MAFQ;AAGjBC,IAAAA,KAAK,EAAE,eAHU;AAIjBC,IAAAA,SAAS,EAAE,GAJM;AAKjBC,IAAAA,OAAO,EAAEC,IAAI,CAACC,EAAL;AALQ,KAMdP,MANc;AAAA,CAAnB;;AASAQ,QAAQ,CAAC,iBAAD,EAAoB,YAAM;AAChCC,EAAAA,IAAI,CAAC,8CAAD,EAAiD,YAAM;AACzD,QAAMC,IAAI,GAAGC,8BACVC,MADU,eAET,qBAAC,sBAAD,gCACMb,UAAU,CAAC;AAAEE,MAAAA,SAAS,EAAE;AAAb,KAAD,CADhB,EAFS,EAMVY,MANU,EAAb;;AAOAC,IAAAA,MAAM,CAACJ,IAAD,CAAN,CAAaK,eAAb;AACD,GATG,CAAJ;AAUAN,EAAAA,IAAI,CAAC,+CAAD,EAAkD,YAAM;AAC1D,QAAMC,IAAI,GAAGC,8BACVC,MADU,eAET,qBAAC,sBAAD,gCACMb,UAAU,CAAC;AAAEE,MAAAA,SAAS,EAAE;AAAb,KAAD,CADhB,EAFS,EAMVY,MANU,EAAb;;AAOAC,IAAAA,MAAM,CAACJ,IAAD,CAAN,CAAaK,eAAb;AACD,GATG,CAAJ;AAWD,CAtBO,CAAR"
+}

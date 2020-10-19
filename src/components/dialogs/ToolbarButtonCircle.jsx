@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 import D from './DialogCell'
 import ButtonCircle from '../zhn/ButtonCircle';

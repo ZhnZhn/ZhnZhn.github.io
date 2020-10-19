@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
@@ -44,7 +44,7 @@ class AlphaIndicatorDialog extends Component {
     const { loadId, dfSubId, onLoad } = this.props;
     const option = {
       loadId, dfSubId,
-      indicator: 'SECTOR',      
+      indicator: 'SECTOR',
     };
     onLoad(option)
   }

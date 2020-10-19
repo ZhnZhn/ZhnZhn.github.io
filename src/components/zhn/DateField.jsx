@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
+import { forwardRef, useState, useRef, useEffect, useImperativeHandle } from 'react';
 import useInputKeyDown from './useInputKeyDown'
 //import PropTypes from "prop-types";
 
@@ -12,7 +12,7 @@ const _initState = (value) => ({
 
 const _onTest = () => true
 
-const DateField = React.forwardRef(({
+const DateField = forwardRef(({
   style, inputStyle,
   initialValue='',
   placeholder='YYYY-MM-DD',

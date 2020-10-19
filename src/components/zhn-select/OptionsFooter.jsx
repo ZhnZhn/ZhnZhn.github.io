@@ -1,4 +1,4 @@
-import React from 'react'
+import { forwardRef } from 'react'
 
 import BtCircle2 from '../zhn/ButtonCircle2';
 import CL from './CL';
@@ -9,7 +9,7 @@ const S = {
   }
 };
 
-const OptionsFooter = React.forwardRef(({
+const OptionsFooter = forwardRef(({
   indexActiveOption,
   nFiltered, nAll,
   onStepDown,

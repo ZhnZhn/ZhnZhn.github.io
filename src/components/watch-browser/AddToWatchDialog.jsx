@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
@@ -26,7 +26,7 @@ const S = {
   },
   CAPTION: {
     width: 70
-  }  
+  }
 };
 
 const SELECT_WIDTH = "216";

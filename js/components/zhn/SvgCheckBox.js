@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _isKeyEnter = _interopRequireDefault(require("./isKeyEnter"));
 
@@ -28,7 +28,7 @@ var C_GREY = "#777777";
 
 var SvgChecked = function SvgChecked(_ref) {
   var stroke = _ref.stroke;
-  return /*#__PURE__*/_react["default"].createElement("path", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
     d: "M 2,5 L 8,14 14,1",
     strokeWidth: "2",
     strokeLinecap: "round",
@@ -138,7 +138,7 @@ var SvgCheckBox = /*#__PURE__*/function (_Component) {
         _restStroke = value ? checkedRestStroke : C_GREY,
         _restFill = value ? checkedRestFill : _Color["default"].BLANK;
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       role: "checkbox",
       tabIndex: "0",
       "aria-checked": value //aria-labelledby
@@ -146,26 +146,28 @@ var SvgCheckBox = /*#__PURE__*/function (_Component) {
       className: CL_CHB,
       style: style,
       onClick: this._hClick,
-      onKeyDown: this._hKeyDown
-    }, /*#__PURE__*/_react["default"].createElement("svg", {
-      viewBox: "0 0 16 16",
-      width: "100%",
-      height: "100%",
-      preserveAspectRatio: "none",
-      xmlns: "http://www.w3.org/2000/svg",
-      style: S.SVG
-    }, /*#__PURE__*/_react["default"].createElement("rect", {
-      x: "1",
-      y: "1",
-      height: "14",
-      width: "14",
-      strokeWidth: "2",
-      rx: "3",
-      stroke: _restStroke,
-      fill: _restFill
-    }), value ? /*#__PURE__*/_react["default"].createElement(SvgChecked, {
-      stroke: checkedColor
-    }) : null));
+      onKeyDown: this._hKeyDown,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
+        viewBox: "0 0 16 16",
+        width: "100%",
+        height: "100%",
+        preserveAspectRatio: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        style: S.SVG,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
+          x: "1",
+          y: "1",
+          height: "14",
+          width: "14",
+          strokeWidth: "2",
+          rx: "3",
+          stroke: _restStroke,
+          fill: _restFill
+        }), value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgChecked, {
+          stroke: checkedColor
+        }) : null]
+      })
+    });
   };
 
   return SvgCheckBox;

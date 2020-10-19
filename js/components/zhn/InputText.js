@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
@@ -59,7 +59,7 @@ var _isMinMaxNumber = function _isMinMaxNumber(_ref) {
   return type === 'number' && _isNumber(min) && _isNumber(max);
 };
 
-var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) {
+var InputText = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
   var initValue = props.initValue,
       style = props.style,
       type = props.type,
@@ -115,7 +115,7 @@ var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) 
       _spellCheck = spellCheck ? "true" : "false",
       _className = _isMinMaxNumber(props) ? CL.NUMBER_RANGE : void 0;
 
-  return /*#__PURE__*/_react["default"].createElement("input", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
     ref: _refInput,
     className: _className,
     style: (0, _extends2["default"])({}, S.INPUT, style),
@@ -151,7 +151,6 @@ var InputText = /*#__PURE__*/_react["default"].forwardRef(function (props, ref) 
    onChange: PropTypes.func
  }
  */
-
 
 var _default = InputText;
 exports["default"] = _default;

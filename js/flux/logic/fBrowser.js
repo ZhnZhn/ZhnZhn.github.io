@@ -7,7 +7,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
@@ -26,7 +26,7 @@ var _RouterItemOption = _interopRequireDefault(require("../../components/zhn-sel
 var _RouterBrowserItem = _interopRequireDefault(require("../../components/browser-items/RouterBrowserItem"));
 
 var _crBrowserWatchList = function _crBrowserWatchList(Comp) {
-  return /*#__PURE__*/_react["default"].createElement(Comp, {
+  return /*#__PURE__*/(0, _react.createElement)(Comp, {
     key: _Type.BrowserType.WATCH_LIST,
     browserType: _Type.BrowserType.WATCH_LIST,
     caption: "Watch List",
@@ -54,7 +54,7 @@ var _crBrowserDynamic = function _crBrowserDynamic(Comp, option) {
       onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions["default"].showDescription : undefined,
       onShowContainer = _ChartActions["default"].showChart.bind(null, chartContainerType, browserType);
 
-  return /*#__PURE__*/_react["default"].createElement(Comp, {
+  return /*#__PURE__*/(0, _react.createElement)(Comp, {
     dfProps: dfProps,
     key: browserType,
     browserType: browserType,

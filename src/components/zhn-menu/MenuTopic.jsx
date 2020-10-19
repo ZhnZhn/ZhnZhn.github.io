@@ -1,4 +1,3 @@
-import React from 'react';
 //import PropTypes from 'prop-types'
 
 import OpenClose from '../zhn/OpenClose';
@@ -29,7 +28,7 @@ MenuPart.propTypes = {
   isInitOpen: PropTypes.bool,
   caption: PropTypes.string,
   style: PropTypes.object,
-  openColor: PropTypes.string,  
+  openColor: PropTypes.string,
   items: PropTypes.arrayOf(
      PropTypes.shape({
        isOpen: PropTypes.bool,

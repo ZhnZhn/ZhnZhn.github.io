@@ -1,1 +1,15 @@
-{"version":3,"sources":["../../../src/components/hoc/withThemeRef.js"],"names":["withThemeRef","Wrapper","React","forwardRef","props","ref","theme"],"mappings":";;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,YAAY,GAAG,SAAfA,YAAe,CAACC,OAAD;AAAA,sBAAaC,kBAAMC,UAAN,CAAiB,UAACC,KAAD,EAAQC,GAAR;AAAA,wBACjD,gCAAC,wBAAD,CAAc,QAAd,QACI,UAAAC,KAAK;AAAA,0BAAI,gCAAC,OAAD,gCAAaF,KAAb;AAAoB,QAAA,KAAK,EAAEE,KAA3B;AAAkC,QAAA,GAAG,EAAED;AAAvC,SAAJ;AAAA,KADT,CADiD;AAAA,GAAjB,CAAb;AAAA,CAArB;;eAMeL,Y","sourcesContent":["import React from 'react'\r\nimport ThemeContext from './ThemeContext'\r\n\r\nconst withThemeRef = (Wrapper) => React.forwardRef((props, ref) => (\r\n  <ThemeContext.Consumer>\r\n    { theme => <Wrapper {...props} theme={theme} ref={ref} /> }\r\n  </ThemeContext.Consumer>\r\n));\r\n\r\nexport default withThemeRef\r\n"],"file":"withThemeRef.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hoc/withThemeRef.js"
+ ],
+ "file": "../../../src/components/hoc/withThemeRef.js",
+ "names": [
+  "withThemeRef",
+  "Wrapper",
+  "props",
+  "ref",
+  "theme"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,YAAY,GAAG,SAAfA,YAAe,CAACC,OAAD;AAAA,sBAAa,uBAAW,UAACC,KAAD,EAAQC,GAAR;AAAA,wBAC3C,qBAAC,wBAAD,CAAc,QAAd;AAAA,gBACI,kBAAAC,KAAK;AAAA,4BAAI,qBAAC,OAAD,gCAAaF,KAAb;AAAoB,UAAA,KAAK,EAAEE,KAA3B;AAAkC,UAAA,GAAG,EAAED;AAAvC,WAAJ;AAAA;AADT,MAD2C;AAAA,GAAX,CAAb;AAAA,CAArB;;eAMeH,Y"
+}

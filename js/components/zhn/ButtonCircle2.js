@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var CL = 'zhn-bt-circle2';
 
@@ -18,13 +16,16 @@ var ButtonCircle2 = function ButtonCircle2(_ref) {
       _ref$caption = _ref.caption,
       caption = _ref$caption === void 0 ? '' : _ref$caption,
       onClick = _ref.onClick;
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     tabIndex: tabIndex,
     className: CL + " " + className,
     style: style,
     onClick: onClick,
-    "data-loader": dataLoader
-  }, /*#__PURE__*/_react["default"].createElement("div", null, caption));
+    "data-loader": dataLoader,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      children: caption
+    })
+  });
 };
 
 var _default = ButtonCircle2;

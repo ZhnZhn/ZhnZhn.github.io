@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import { fetchTxt } from '../../utils/fnFetch';
 import Comp from '../Comp'

@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
@@ -36,10 +36,11 @@ var Browser = function Browser(_ref) {
       _clOpen = isShow ? CL.SHOW : '',
       _clRoot = CL.BROWSER + " " + _clOpen;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: _clRoot,
-    style: (0, _extends2["default"])({}, style, _styleOpen, TS.ROOT)
-  }, children);
+    style: (0, _extends2["default"])({}, style, _styleOpen, TS.ROOT),
+    children: children
+  });
 };
 /*
 Browser.propTypes = {

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _calcDirection = _interopRequireDefault(require("./dataProcessing/calcDirection"));
 
@@ -16,7 +16,7 @@ var SparklinesSpot = function SparklinesSpot(props) {
       style = props.style,
       spotColors = props.spotColors,
       pointIndex = props.pointIndex,
-      pointSpot = /*#__PURE__*/_react["default"].createElement("circle", {
+      pointSpot = /*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
     cx: points[pointIndex].x,
     cy: points[pointIndex].y,
     r: size,
@@ -24,8 +24,9 @@ var SparklinesSpot = function SparklinesSpot(props) {
       fill: spotColors[(0, _calcDirection["default"])(points, pointIndex)]
     }
   });
-
-  return /*#__PURE__*/_react["default"].createElement("g", null, pointSpot);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
+    children: pointSpot
+  });
 };
 /*
 SparklinesSpot.propTypes = {

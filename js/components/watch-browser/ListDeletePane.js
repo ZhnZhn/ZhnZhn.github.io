@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
@@ -89,7 +89,7 @@ var ListDeletePane = /*#__PURE__*/function (_Component) {
       }
     };
 
-    _this._primaryBt = /*#__PURE__*/_react["default"].createElement(_Atoms["default"].Button.Primary, {
+    _this._primaryBt = /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
       caption: "Delete",
       title: "Delete List",
       onClick: _this._handleDelete
@@ -120,21 +120,23 @@ var ListDeletePane = /*#__PURE__*/function (_Component) {
         _this$state = this.state,
         groupOptions = _this$state.groupOptions,
         validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_Atoms["default"].FragmentSelectGroupList, {
-      ref: function ref(c) {
-        return _this2.selectGroupList = c;
-      },
-      store: store,
-      groupCaption: "In Group:",
-      groupOptions: groupOptions,
-      listCaption: "List:"
-    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].ValidationMessages, {
-      validationMessages: validationMessages
-    }), /*#__PURE__*/_react["default"].createElement(_Atoms["default"].RowButtons, {
-      Primary: this._primaryBt,
-      onClear: this._handleClear,
-      onClose: onClose
-    }));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].FragmentSelectGroupList, {
+        ref: function ref(c) {
+          return _this2.selectGroupList = c;
+        },
+        store: store,
+        groupCaption: "In Group:",
+        groupOptions: groupOptions,
+        listCaption: "List:"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
+        validationMessages: validationMessages
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
+        Primary: this._primaryBt,
+        onClear: this._handleClear,
+        onClose: onClose
+      })]
+    });
   };
 
   return ListDeletePane;

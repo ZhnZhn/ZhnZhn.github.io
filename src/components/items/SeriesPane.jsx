@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import ScrollPane from '../zhn/ScrollPane'
 import SeriaRow from './SeriaRow'

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _fnFetch = require("../../utils/fnFetch");
 
@@ -141,17 +141,18 @@ var DescriptionDialog = /*#__PURE__*/function (_Component) {
         isLoadFailed = _this$state.isLoadFailed,
         errMsg = _this$state.errMsg,
         descrHtml = _this$state.descrHtml;
-    return /*#__PURE__*/_react["default"].createElement(ModalDialog, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalDialog, {
       caption: "About Datasource",
       isShow: isShow,
       style: S.DIALOG,
-      onClose: onClose
-    }, isLoading ? /*#__PURE__*/_react["default"].createElement(Load.Loading, null) : isLoadFailed ? /*#__PURE__*/_react["default"].createElement(Load.LoadFailed, {
-      errMsg: errMsg
-    }) : /*#__PURE__*/_react["default"].createElement(DivHtml, {
-      style: S.DIV,
-      str: descrHtml
-    }));
+      onClose: onClose,
+      children: isLoading ? /*#__PURE__*/(0, _jsxRuntime.jsx)(Load.Loading, {}) : isLoadFailed ? /*#__PURE__*/(0, _jsxRuntime.jsx)(Load.LoadFailed, {
+        errMsg: errMsg
+      }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(DivHtml, {
+        style: S.DIV,
+        str: descrHtml
+      })
+    });
   };
 
   return DescriptionDialog;

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _CL = _interopRequireDefault(require("./CL"));
 
@@ -62,16 +62,17 @@ var ArrowCell = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
       }
     };
   }, []);
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     ref: _refArrowCell,
     className: _CL["default"].BT_ARROW,
     style: S.ARROW_CELL,
     tabIndex: "-1",
-    onClick: onClick
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    ref: _refArrow,
-    style: (0, _extends2["default"])({}, S.ARROW, arrowStyle)
-  }));
+    onClick: onClick,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      ref: _refArrow,
+      style: (0, _extends2["default"])({}, S.ARROW, arrowStyle)
+    })
+  });
 });
 /*
 ArrowCell.propTypes = {

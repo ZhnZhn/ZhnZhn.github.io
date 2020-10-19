@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -59,12 +59,11 @@ var PasteToModalDialog = /*#__PURE__*/function (_Component) {
       return _this._compSeries = comp;
     };
 
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-      key: "paste",
+    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
       caption: "Paste & Close",
       isPrimary: true,
       onClick: _this._hPasteTo
-    })];
+    }, "paste")];
     return _this;
   }
 
@@ -85,18 +84,19 @@ var PasteToModalDialog = /*#__PURE__*/function (_Component) {
         onClose = _this$props2.onClose,
         fromChart = data.fromChart,
         toChart = data.toChart;
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog["default"], {
       style: S.MODAL,
       caption: "Paste Series To",
       isShow: isShow,
       commandButtons: this._commandButtons,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement(_SeriesPane["default"], {
-      ref: this._refCompSeries,
-      rootStyle: S.SCROLL_PANE,
-      fromChart: fromChart,
-      toChart: toChart
-    }));
+      onClose: onClose,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriesPane["default"], {
+        ref: this._refCompSeries,
+        rootStyle: S.SCROLL_PANE,
+        fromChart: fromChart,
+        toChart: toChart
+      })
+    });
   };
 
   return PasteToModalDialog;

@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 
@@ -41,7 +41,7 @@ var _getValue = function _getValue(ref) {
   return ref.current.setValue(value);
 };
 
-var DatesFragment = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+var DatesFragment = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var _ref$isShowLabels = _ref.isShowLabels,
       isShowLabels = _ref$isShowLabels === void 0 ? true : _ref$isShowLabels,
       placeholder = _ref.placeholder,
@@ -113,31 +113,37 @@ var DatesFragment = /*#__PURE__*/_react["default"].forwardRef(function (_ref, re
       }
     };
   }, [isPeriodValid, msgOnNotValidFormat]);
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
-    style: rowStyle
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: labelStyle
-  }, fromCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
-    ref: _refFrom,
-    style: dateStyle,
-    placeholder: placeholder,
-    initialValue: initFromDate,
-    errorMsg: errMsg,
-    onTest: onTestDate,
-    onEnter: onEnter
-  })), /*#__PURE__*/_react["default"].createElement("div", {
-    style: rowStyle
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: labelStyle
-  }, toCaption), /*#__PURE__*/_react["default"].createElement(_DateField["default"], {
-    ref: _refTo,
-    style: dateStyle,
-    placeholder: placeholder,
-    initialValue: initToDate,
-    errorMsg: errMsg,
-    onTest: onTestDate,
-    onEnter: onEnter
-  })));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: rowStyle,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: labelStyle,
+        children: fromCaption
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField["default"], {
+        ref: _refFrom,
+        style: dateStyle,
+        placeholder: placeholder,
+        initialValue: initFromDate,
+        errorMsg: errMsg,
+        onTest: onTestDate,
+        onEnter: onEnter
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: rowStyle,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: labelStyle,
+        children: toCaption
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField["default"], {
+        ref: _refTo,
+        style: dateStyle,
+        placeholder: placeholder,
+        initialValue: initToDate,
+        errorMsg: errMsg,
+        onTest: onTestDate,
+        onEnter: onEnter
+      })]
+    })]
+  });
 });
 /*
 DatesFragment.propTypes = {
@@ -155,7 +161,6 @@ DatesFragment.propTypes = {
   onEnter: PropTypes.func
 }
 */
-
 
 var _default = DatesFragment;
 exports["default"] = _default;

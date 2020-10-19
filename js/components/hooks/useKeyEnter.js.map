@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/hooks/useKeyEnter.js"
- ],
- "file": "../../../src/components/hooks/useKeyEnter.js",
- "names": [
-  "useKeyEnter",
-  "fn",
-  "deps",
-  "event"
- ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AAEA;AACA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAACC,EAAD,EAAKC,IAAL;AAAA,SAAc,wBAAY,UAAAC,KAAK,EAAI;AACrD,QAAI,4BAAWA,KAAX,CAAJ,EAAuB;AAAEF,MAAAA,EAAE,CAACE,KAAD,CAAF;AAAW;AACrC,GAFiC,EAE/BD,IAAI,IAAI,EAFuB,CAAd;AAAA,CAApB;AAGA;;;eAEeF,W"
-}
+{"version":3,"sources":["../../../src/components/hooks/useKeyEnter.js"],"names":["useKeyEnter","fn","deps","event"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA;AACA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAACC,EAAD,EAAKC,IAAL;AAAA,SAAc,wBAAY,UAAAC,KAAK,EAAI;AACrD,QAAI,4BAAWA,KAAX,CAAJ,EAAuB;AAAEF,MAAAA,EAAE,CAACE,KAAD,CAAF;AAAW;AACrC,GAFiC,EAE/BD,IAAI,IAAI,EAFuB,CAAd;AAAA,CAApB;AAGA;;;eAEeF,W","sourcesContent":["import { useCallback } from 'react'\r\n\r\nimport isKeyEnter from '../zhn/isKeyEnter'\r\n\r\n/*eslint-disable react-hooks/exhaustive-deps */\r\nconst useKeyEnter = (fn, deps) => useCallback(event => {\r\n  if (isKeyEnter(event)) { fn(event) }\r\n}, deps || []);\r\n/*eslint-enable react-hooks/exhaustive-deps */\r\n\r\nexport default useKeyEnter\r\n"],"file":"useKeyEnter.js"}

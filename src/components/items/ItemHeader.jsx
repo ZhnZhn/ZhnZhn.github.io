@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 import ThemeContext from '../hoc/ThemeContext'
 import A from '../Comp'
@@ -24,7 +24,7 @@ const S = {
     width: '75%',
     paddingRight: 2,
     paddingTop: 4,
-    paddingBottom: 2    
+    paddingBottom: 2
   },
   OPEN: {
     color: '#a487d4',

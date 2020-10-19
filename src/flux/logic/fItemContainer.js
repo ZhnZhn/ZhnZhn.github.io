@@ -1,4 +1,4 @@
-import React from 'react'
+import { createElement } from 'react'
 
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import BrowserConfig from '../../constants/BrowserConfig';
@@ -36,7 +36,7 @@ const fItemContainer = {
     , _type = type || BrowserConfig[browserType].chartContainerType
     , _caption = _crCaption(dialogConf, browserType);
 
-    return React.createElement(Comp, {
+    return createElement(Comp, {
       key: _type,
       store: store,
       caption: _caption,

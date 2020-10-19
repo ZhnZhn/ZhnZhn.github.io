@@ -5,11 +5,10 @@
  ],
  "file": "../../../src/components/hoc/memoEqual.js",
  "names": [
+  "DF_ARE_EQUAL_PROPS",
   "memoEqual",
   "Element",
-  "areEqualProps",
-  "React",
-  "memo"
+  "areEqualProps"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,OAAD,EAAUC,aAAV;AAAA,MAAUA,aAAV;AAAUA,IAAAA,aAAV,GAAwB;AAAA,aAAI,IAAJ;AAAA,KAAxB;AAAA;;AAAA,sBAChBC,kBAAMC,IAAN,CAAWH,OAAX,EAAoBC,aAApB,CADgB;AAAA,CAAlB;;eAGeF,S"
+ "mappings": ";;;;;AAAA;;AAEA,IAAMA,kBAAkB,GAAG,SAArBA,kBAAqB,GAAM,CAAE,CAAnC;;AAEA,IAAMC,SAAS,GAAG,SAAZA,SAAY,CAChBC,OADgB,EAEhBC,aAFgB;AAAA,MAEhBA,aAFgB;AAEhBA,IAAAA,aAFgB,GAEFH,kBAFE;AAAA;;AAAA,sBAGb,iBAAKE,OAAL,EAAcC,aAAd,CAHa;AAAA,CAAlB;;eAKeF,S"
 }

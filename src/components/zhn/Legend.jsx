@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 import useToggle from '../hooks/useToggle'
 import LegendItem from './LegendItem';
@@ -74,7 +74,7 @@ const _renderLegend = (legend, isMore, onClickItem) => {
    return _legendItems;
 }
 
-const Legend = React.memo(({ legend=[], onClickItem }) => {
+const Legend = memo(({ legend=[], onClickItem }) => {
   const [isMore, toggleIsMore] = useToggle(false)
   , _style = isMore
        ? S.MORE

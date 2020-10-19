@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _crCurrencyFormatter = _interopRequireDefault(require("../../utils/crCurrencyFormatter"));
 
@@ -44,13 +44,18 @@ var RowCap = function RowCap(_ref) {
   var _cap = cap === 0 ? NA : _capFormatter.format(cap),
       _salePrice = cap !== NA && cap !== 0 ? _formatter.format(salePrice) : NA;
 
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
-    style: STYLE.CAP
-  }, _cap), /*#__PURE__*/_react["default"].createElement("span", {
-    style: STYLE.IPO
-  }, "ipo " + ipo), /*#__PURE__*/_react["default"].createElement("span", {
-    style: STYLE.SALE_PRICE
-  }, _salePrice));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: STYLE.CAP,
+      children: _cap
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: STYLE.IPO,
+      children: "ipo " + ipo
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: STYLE.SALE_PRICE,
+      children: _salePrice
+    })]
+  });
 };
 
 var _default = RowCap;

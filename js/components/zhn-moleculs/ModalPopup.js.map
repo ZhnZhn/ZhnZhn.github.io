@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/components/zhn-moleculs/ModalPopup.jsx"],"names":["TH_ID","ModalPopup","isShow","className","style","children","onClose","TS","BORDER"],"mappings":";;;;;;;;;AAAA;;AAEA;;AACA;;AACA;;AAEA,IAAMA,KAAK,GAAG,SAAd;;AAEA,IAAMC,UAAU,GAAG,SAAbA,UAAa,OAGb;AAAA,MAFJC,MAEI,QAFJA,MAEI;AAAA,MAFIC,SAEJ,QAFIA,SAEJ;AAAA,MAFeC,KAEf,QAFeA,KAEf;AAAA,MADJC,QACI,QADJA,QACI;AAAA,MADMC,OACN,QADMA,OACN;AACJ,MAAMC,EAAE,GAAG,0BAASP,KAAT,CAAX;AACA,sBACE,gCAAC,qBAAD;AACE,IAAA,MAAM,EAAEE,MADV;AAEE,IAAA,OAAO,EAAEI;AAFX,kBAIE,gCAAC,oBAAD;AACE,IAAA,SAAS,EAAEH,SADb;AAEE,IAAA,KAAK,gCAAOC,KAAP,EAAiBG,EAAE,CAACC,MAApB,CAFP;AAGE,IAAA,MAAM,EAAEN;AAHV,KAKGG,QALH,CAJF,CADF;AAcD,CAnBD;;eAqBeJ,U","sourcesContent":["import React from 'react'\r\n\r\nimport useTheme from '../hooks/useTheme'\r\nimport ShowHide from '../zhn/ShowHide'\r\nimport ModalPane from './ModalPane'\r\n\r\nconst TH_ID = 'ELEMENT'\r\n\r\nconst ModalPopup = ({\r\n  isShow, className, style,\r\n  children, onClose\r\n}) => {\r\n  const TS = useTheme(TH_ID);\r\n  return (\r\n    <ModalPane\r\n      isShow={isShow}\r\n      onClose={onClose}\r\n    >\r\n      <ShowHide\r\n        className={className}\r\n        style={{ ...style, ...TS.BORDER}}\r\n        isShow={isShow}\r\n      >\r\n        {children}\r\n      </ShowHide>\r\n    </ModalPane>\r\n  );\r\n};\r\n\r\nexport default ModalPopup\r\n"],"file":"ModalPopup.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-moleculs/ModalPopup.js"
+ ],
+ "file": "../../../src/components/zhn-moleculs/ModalPopup.js",
+ "names": [
+  "TH_ID",
+  "ModalPopup",
+  "isShow",
+  "className",
+  "style",
+  "children",
+  "onClose",
+  "TS",
+  "BORDER"
+ ],
+ "mappings": ";;;;;;;;;;;AAAA;;AACA;;AACA;;AAEA,IAAMA,KAAK,GAAG,SAAd;;AAEA,IAAMC,UAAU,GAAG,SAAbA,UAAa,OAGb;AAAA,MAFJC,MAEI,QAFJA,MAEI;AAAA,MAFIC,SAEJ,QAFIA,SAEJ;AAAA,MAFeC,KAEf,QAFeA,KAEf;AAAA,MADJC,QACI,QADJA,QACI;AAAA,MADMC,OACN,QADMA,OACN;AACJ,MAAMC,EAAE,GAAG,0BAASP,KAAT,CAAX;AACA,sBACE,qBAAC,qBAAD;AACE,IAAA,MAAM,EAAEE,MADV;AAEE,IAAA,OAAO,EAAEI,OAFX;AAAA,2BAIE,qBAAC,oBAAD;AACE,MAAA,SAAS,EAAEH,SADb;AAEE,MAAA,KAAK,gCAAOC,KAAP,EAAiBG,EAAE,CAACC,MAApB,CAFP;AAGE,MAAA,MAAM,EAAEN,MAHV;AAAA,gBAKGG;AALH;AAJF,IADF;AAcD,CAnBD;;eAqBeJ,U"
+}

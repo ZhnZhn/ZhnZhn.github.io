@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -55,14 +55,13 @@ var _calcMaxButtons = function _calcMaxButtons(maxButtons) {
 var CleanButton = function CleanButton(_ref) {
   var is = _ref.is,
       onClick = _ref.onClick;
-  return is ? /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
-    key: "BT_CLEAN",
+  return is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
     timeout: 0,
     style: S.BT_CL,
     caption: "CL",
     title: "Clean Hot Bar",
     onClick: onClick
-  }) : null;
+  }, "BT_CLEAN") : null;
 };
 
 var _crBtProps = function _crBtProps(index, caption) {
@@ -83,7 +82,7 @@ var _renderHotButtons = function _renderHotButtons(style, hotButtons, onShowDial
   return hotButtons.map(function (conf, index) {
     var type = conf.type,
         caption = conf.caption;
-    return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
+    return /*#__PURE__*/(0, _react.createElement)(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
       key: type,
       timeout: 0,
       style: style,
@@ -122,12 +121,13 @@ var HotBar = function HotBar(_ref2) {
       });
     }
   });
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROOT
-  }, _renderHotButtons(btStyle, hotButtons, onShowDialog), /*#__PURE__*/_react["default"].createElement(CleanButton, {
-    is: hotButtons.length !== 0,
-    onClick: _hClean
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.ROOT,
+    children: [_renderHotButtons(btStyle, hotButtons, onShowDialog), /*#__PURE__*/(0, _jsxRuntime.jsx)(CleanButton, {
+      is: hotButtons.length !== 0,
+      onClick: _hClean
+    })]
+  });
 };
 
 var _default = HotBar;

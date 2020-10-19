@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ModalPopup from './ModalPopup';
 import CellColorPane from './CellColorPane'
 

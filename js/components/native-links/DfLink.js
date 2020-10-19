@@ -5,13 +5,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Link = _interopRequireDefault(require("./Link"));
 
 var DfLink = function DfLink(_ref) {
   var item = _ref.item;
-  return /*#__PURE__*/_react["default"].createElement(_Link["default"], item);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], (0, _extends2["default"])({}, item));
 };
 
 var _default = DfLink;

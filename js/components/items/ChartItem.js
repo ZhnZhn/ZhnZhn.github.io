@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _has = _interopRequireDefault(require("../has"));
 
@@ -128,9 +128,10 @@ var ChartItem = /*#__PURE__*/function (_Component) {
     };
 
     _this.setDataSource = function (strDataSource) {
-      _this._dataSourceEl = /*#__PURE__*/_react["default"].createElement("div", {
-        style: S.DATA_SOURCE
-      }, strDataSource);
+      _this._dataSourceEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: S.DATA_SOURCE,
+        children: strDataSource
+      });
 
       _this.forceUpdate();
     };
@@ -294,27 +295,28 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       var _this$state = _this.state,
           hasError = _this$state.hasError,
           isShowToolbar = _this$state.isShowToolbar;
-      return /*#__PURE__*/_react["default"].createElement(ShowHide, {
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
         isShow: isShowToolbar,
-        withoutAnimation: withoutAnimation
-      }, /*#__PURE__*/_react["default"].createElement(_ChartToolBar["default"], {
-        hasError: hasError,
-        style: S.TAB_DIV,
-        config: config,
-        onMiniChart: _this._handleMiniChart,
-        getChart: _this.getMainChart,
-        onAddMfi: _this._addMfi,
-        onRemoveMfi: _this._removeMfi,
-        onClickLegend: _this._handleClickLegend,
-        onClick2H: _this._handleClick2H,
-        onAddToWatch: _this._handleAddToWatch,
-        onClickInfo: _this._handleClickInfo,
-        onClickConfig: _this._handleClickConfig,
-        onCopy: _this._handleCopy,
-        onPasteTo: _this._handlePasteTo,
-        onMinMax: _this._toggleMinMax,
-        onZoom: _this._handleZoom
-      }));
+        withoutAnimation: withoutAnimation,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar["default"], {
+          hasError: hasError,
+          style: S.TAB_DIV,
+          config: config,
+          onMiniChart: _this._handleMiniChart,
+          getChart: _this.getMainChart,
+          onAddMfi: _this._addMfi,
+          onRemoveMfi: _this._removeMfi,
+          onClickLegend: _this._handleClickLegend,
+          onClick2H: _this._handleClick2H,
+          onAddToWatch: _this._handleAddToWatch,
+          onClickInfo: _this._handleClickInfo,
+          onClickConfig: _this._handleClickConfig,
+          onCopy: _this._handleCopy,
+          onPasteTo: _this._handlePasteTo,
+          onMinMax: _this._toggleMinMax,
+          onZoom: _this._handleZoom
+        })
+      });
     };
 
     _this._handleToggleOpen = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isOpen');
@@ -339,9 +341,10 @@ var ChartItem = /*#__PURE__*/function (_Component) {
         itemCaption = zhConfig.itemCaption,
         _itemCaption = itemCaption || _caption;
 
-    _this._dataSourceEl = /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.DATA_SOURCE
-    }, dataSource);
+    _this._dataSourceEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: S.DATA_SOURCE,
+      children: dataSource
+    });
     _this.state = {
       hasError: false,
       isOpen: true,
@@ -411,60 +414,62 @@ var ChartItem = /*#__PURE__*/function (_Component) {
         isCaption = _this$state2.isCaption,
         _withoutAnimation = _isNarrowWidth || withoutAnimation;
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      className: CL.ROOT
-    }, isCaption && /*#__PURE__*/_react["default"].createElement(_Header["default"], {
-      isOpen: isOpen,
-      moreModel: this._moreModel,
-      onCheck: this._fnOnCheck,
-      onUnCheck: this._fnOnUnCheck,
-      itemCaption: itemCaption,
-      itemTitle: caption,
-      itemTime: itemTime,
-      onToggle: this._handleToggleOpen,
-      valueMoving: config.valueMoving,
-      onClose: onCloseItem,
-      isAdminMode: isAdminMode,
-      crValueMoving: this._crValueMoving,
-      regCompVm: this._regCompVm
-    }), /*#__PURE__*/_react["default"].createElement(ShowHide, {
-      isShow: isOpen,
-      withoutAnimation: _withoutAnimation,
-      style: S.SHOW_HIDE
-    }, isShowChart && this._createChartToolBar(config, _withoutAnimation), hasError ? /*#__PURE__*/_react["default"].createElement(MsgRenderErr, {
-      isShow: isShowChart,
-      msg: "chart"
-    }) : /*#__PURE__*/_react["default"].createElement(HighchartWrapper, {
-      isShow: isShowChart,
-      style: S.WRAPPER,
-      config: config,
-      isShowAbs: isShowAbs,
-      absComp: this._dataSourceEl,
-      onLoaded: this._hLoaded
-    }), /*#__PURE__*/_react["default"].createElement(_PanelDataInfo["default"], {
-      isShow: isShowInfo,
-      info: config.info,
-      zhInfo: config.zhConfig,
-      onClickChart: this._handleClickChart
-    }), /*#__PURE__*/_react["default"].createElement(_ChartLegend["default"], {
-      isShow: isShowLegend,
-      legend: legend,
-      onClickItem: this._handleToggleSeria
-    }), /*#__PURE__*/_react["default"].createElement(_MiniCharts["default"], {
-      withoutAnimation: _withoutAnimation,
-      configs: mfiConfigs,
-      absComp: this._dataSourceEl,
-      onLoaded: this._handleLoadedMiniChart,
-      onWillUnLoaded: this._handleUnLoadedMiniChart
-    }), /*#__PURE__*/_react["default"].createElement(_MiniCharts["default"], {
-      withoutAnimation: _withoutAnimation,
-      configs: zhMiniConfigs,
-      idPropName: "btTitle",
-      ids: miniTitles,
-      absComp: this._dataSourceEl,
-      onLoaded: this._handleLoadedMiniChart,
-      onWillUnLoaded: this._handleUnLoadedMiniChart
-    })));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: CL.ROOT,
+      children: [isCaption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Header["default"], {
+        isOpen: isOpen,
+        moreModel: this._moreModel,
+        onCheck: this._fnOnCheck,
+        onUnCheck: this._fnOnUnCheck,
+        itemCaption: itemCaption,
+        itemTitle: caption,
+        itemTime: itemTime,
+        onToggle: this._handleToggleOpen,
+        valueMoving: config.valueMoving,
+        onClose: onCloseItem,
+        isAdminMode: isAdminMode,
+        crValueMoving: this._crValueMoving,
+        regCompVm: this._regCompVm
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ShowHide, {
+        isShow: isOpen,
+        withoutAnimation: _withoutAnimation,
+        style: S.SHOW_HIDE,
+        children: [isShowChart && this._createChartToolBar(config, _withoutAnimation), hasError ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
+          isShow: isShowChart,
+          msg: "chart"
+        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
+          isShow: isShowChart,
+          style: S.WRAPPER,
+          config: config,
+          isShowAbs: isShowAbs,
+          absComp: this._dataSourceEl,
+          onLoaded: this._hLoaded
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo["default"], {
+          isShow: isShowInfo,
+          info: config.info,
+          zhInfo: config.zhConfig,
+          onClickChart: this._handleClickChart
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartLegend["default"], {
+          isShow: isShowLegend,
+          legend: legend,
+          onClickItem: this._handleToggleSeria
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts["default"], {
+          withoutAnimation: _withoutAnimation,
+          configs: mfiConfigs,
+          absComp: this._dataSourceEl,
+          onLoaded: this._handleLoadedMiniChart,
+          onWillUnLoaded: this._handleUnLoadedMiniChart
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts["default"], {
+          withoutAnimation: _withoutAnimation,
+          configs: zhMiniConfigs,
+          idPropName: "btTitle",
+          ids: miniTitles,
+          absComp: this._dataSourceEl,
+          onLoaded: this._handleLoadedMiniChart,
+          onWillUnLoaded: this._handleUnLoadedMiniChart
+        })]
+      })]
+    });
   };
 
   _proto.reflowChart = function reflowChart(width) {

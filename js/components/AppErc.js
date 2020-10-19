@@ -9,7 +9,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("./hooks/useListen"));
 
@@ -39,7 +41,7 @@ var _ThemeContext = _interopRequireDefault(require("./hoc/ThemeContext"));
 
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
-var BUILD_DATE = '09-10-2020';
+var BUILD_DATE = '19-10-2020';
 var CL = "component-container";
 
 var showSettings = _ComponentActions["default"].showSettings.bind(null, _ChartStore["default"].exportSettingFn());
@@ -60,27 +62,29 @@ var AppErc = function AppErc() {
 
     (0, _checkBuild["default"])(BUILD_DATE, _ComponentActions["default"].showReload);
   }, []);
-  return /*#__PURE__*/_react["default"].createElement(_ThemeContext["default"].Provider, {
-    value: theme
-  }, /*#__PURE__*/_react["default"].createElement(_HeaderBar["default"], {
-    store: _ChartStore["default"],
-    showSettings: showSettings
-  }), /*#__PURE__*/_react["default"].createElement("div", {
-    className: CL
-  }, /*#__PURE__*/_react["default"].createElement(_BrowserContainer["default"], {
-    store: _ChartStore["default"],
-    initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
-    showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
-    onCloseDialog: _ComponentActions["default"].closeDialog
-  }), /*#__PURE__*/_react["default"].createElement(_About["default"], {
-    store: _ChartStore["default"],
-    isInitShow: true
-  }), /*#__PURE__*/_react["default"].createElement(_CompContainer["default"], {
-    store: _ChartStore["default"],
-    addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
-  })), /*#__PURE__*/_react["default"].createElement(_DialogContainer["default"], {
-    store: _ChartStore["default"]
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ThemeContext["default"].Provider, {
+    value: theme,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar["default"], {
+      store: _ChartStore["default"],
+      showSettings: showSettings
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: CL,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer["default"], {
+        store: _ChartStore["default"],
+        initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+        showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+        onCloseDialog: _ComponentActions["default"].closeDialog
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About["default"], {
+        store: _ChartStore["default"],
+        isInitShow: true
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer["default"], {
+        store: _ChartStore["default"],
+        addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer["default"], {
+      store: _ChartStore["default"]
+    })]
+  });
 };
 
 var _default = AppErc;

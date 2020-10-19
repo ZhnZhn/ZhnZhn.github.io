@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ProgressLine = _interopRequireDefault(require("../zhn/ProgressLine"));
 
@@ -83,7 +83,7 @@ var ProgressLoading = /*#__PURE__*/function (_Component) {
     var _this$state = this.state,
         completed = _this$state.completed,
         color = _this$state.color;
-    return /*#__PURE__*/_react["default"].createElement(_ProgressLine["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLine["default"], {
       height: 3,
       color: color,
       completed: completed

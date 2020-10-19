@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -13,7 +11,9 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _seriaFns = _interopRequireDefault(require("../../charts/seriaFns"));
 
@@ -138,22 +138,21 @@ var ColumnRangeDialog = /*#__PURE__*/function (_Component) {
       _this._color = color;
     };
 
-    _this._commandButtons = [/*#__PURE__*/_react["default"].createElement(_DialogCell["default"].Button.Flat, {
-      key: "yes",
+    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Flat, {
       caption: "Yes, Connect" //accessKey="y"
       ,
       isPrimary: true,
       onClick: _this._hAdd
-    })];
+    }, "yes")];
     _this._heWidth = _fHeValue('_pointWidth', -1, 7).bind((0, _assertThisInitialized2["default"])(_this));
     _this._heRadius1 = _fHeValue('_r1', -1, 9).bind((0, _assertThisInitialized2["default"])(_this));
     _this._heRadius2 = _fHeValue('_r2', -1, 9).bind((0, _assertThisInitialized2["default"])(_this));
     _this._r1 = INIT.R1;
     _this._r2 = INIT.R1;
     _this._pointWidth = INIT.POIN_WIDTH;
-    _this._refW = /*#__PURE__*/_react["default"].createRef();
-    _this._refR1 = /*#__PURE__*/_react["default"].createRef();
-    _this._refR2 = /*#__PURE__*/_react["default"].createRef();
+    _this._refW = /*#__PURE__*/(0, _react.createRef)();
+    _this._refR1 = /*#__PURE__*/(0, _react.createRef)();
+    _this._refR2 = /*#__PURE__*/(0, _react.createRef)();
     return _this;
   }
 
@@ -185,58 +184,62 @@ var ColumnRangeDialog = /*#__PURE__*/function (_Component) {
     this._fromIndex = fromIndex;
     this._toIndex = toIndex;
     this._color = c1;
-    return /*#__PURE__*/_react["default"].createElement(_ModalDialog["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
       caption: "Add ColumnRange",
       isShow: isShow,
       commandButtons: this._commandButtons,
-      onClose: onClose
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.TEXT
-    }, "Connect dots series by column range?"), /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROW
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputColor, {
-      styleRoot: S.INLINE,
-      styleCaption: S.CAPTION_1,
-      initValue: c1,
-      onEnter: this._heColor,
-      maxLength: 7
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputText, {
-      ref: this._refW,
-      styleRoot: S.INLINE,
-      styleCaption: S.CAPTION_1,
-      styleInput: S.INPUT,
-      caption: "Width",
-      initValue: INIT.POIN_WIDTH,
-      maxLength: 2,
-      type: "number",
-      min: 0,
-      max: 6,
-      step: 1
-    })), /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROW
-    }, /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputText, {
-      ref: this._refR1,
-      styleRoot: S.INLINE,
-      styleCaption: (0, _extends2["default"])({}, S.CAPTION_2, {
-        color: c1
-      }),
-      styleInput: S.INPUT,
-      caption: "R " + n1,
-      initValue: INIT.R1,
-      type: "number",
-      maxLength: 2
-    }), /*#__PURE__*/_react["default"].createElement(_DialogCell["default"].RowInputText, {
-      ref: this._refR2,
-      styleRoot: S.INLINE,
-      styleCaption: (0, _extends2["default"])({}, S.CAPTION_2, {
-        color: c2
-      }),
-      styleInput: S.INPUT,
-      caption: "R " + n2,
-      initValue: INIT.R2,
-      type: "number",
-      maxLength: 2
-    })));
+      onClose: onClose,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: S.TEXT,
+        children: "Connect dots series by column range?"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: S.ROW,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputColor, {
+          styleRoot: S.INLINE,
+          styleCaption: S.CAPTION_1,
+          initValue: c1,
+          onEnter: this._heColor,
+          maxLength: 7
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputText, {
+          ref: this._refW,
+          styleRoot: S.INLINE,
+          styleCaption: S.CAPTION_1,
+          styleInput: S.INPUT,
+          caption: "Width",
+          initValue: INIT.POIN_WIDTH,
+          maxLength: 2,
+          type: "number",
+          min: 0,
+          max: 6,
+          step: 1
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: S.ROW,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputText, {
+          ref: this._refR1,
+          styleRoot: S.INLINE,
+          styleCaption: (0, _extends2["default"])({}, S.CAPTION_2, {
+            color: c1
+          }),
+          styleInput: S.INPUT,
+          caption: "R " + n1,
+          initValue: INIT.R1,
+          type: "number",
+          maxLength: 2
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputText, {
+          ref: this._refR2,
+          styleRoot: S.INLINE,
+          styleCaption: (0, _extends2["default"])({}, S.CAPTION_2, {
+            color: c2
+          }),
+          styleInput: S.INPUT,
+          caption: "R " + n2,
+          initValue: INIT.R2,
+          type: "number",
+          maxLength: 2
+        })]
+      })]
+    });
   };
 
   return ColumnRangeDialog;

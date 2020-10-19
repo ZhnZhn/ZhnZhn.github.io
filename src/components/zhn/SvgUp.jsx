@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CL = {
   ROOT: 'svg-move',
   SVG: 'svg-move__svg svg-up'

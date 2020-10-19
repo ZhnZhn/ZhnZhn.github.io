@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var S = {
   STEP: {
@@ -24,9 +22,10 @@ var S = {
 var Step = function Step(_ref) {
   var _ref$step = _ref.step,
       step = _ref$step === void 0 ? '0' : _ref$step;
-  return /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.STEP
-  }, step);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: S.STEP,
+    children: step
+  });
 };
 
 var _default = Step;

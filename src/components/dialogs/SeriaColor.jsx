@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component, createRef } from 'react'
 
 import CellColor from '../zhn-moleculs/CellColor'
 import BtCounter from './BtCounter'
@@ -56,7 +56,7 @@ const _hasLineWidth = (chartType) => {
 class SeriaColor extends Component {
   constructor(props){
     super(props)
-    this._refLineWidth = React.createRef()
+    this._refLineWidth = createRef()
     this.state = {
       color: _initColor(props)
     }

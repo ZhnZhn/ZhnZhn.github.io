@@ -1,5 +1,3 @@
-import React from 'react'
-
 const S = {  
   color: '#2f7ed8',
   fontWeight : 'bold',

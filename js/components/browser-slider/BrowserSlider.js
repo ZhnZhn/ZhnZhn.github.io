@@ -2,12 +2,14 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -24,8 +26,7 @@ var S = {
     height: '92%'
   }
 };
-
-var BrowserSlider = /*#__PURE__*/_react["default"].memo(function (props) {
+var BrowserSlider = /*#__PURE__*/(0, _react.memo)(function (props) {
   var isInitShow = props.isInitShow,
       caption = props.caption,
       store = props.store,
@@ -44,18 +45,19 @@ var BrowserSlider = /*#__PURE__*/_react["default"].memo(function (props) {
       setIsShow(true);
     }
   });
-  return /*#__PURE__*/_react["default"].createElement(_Comp["default"].Browser, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].Browser, {
     isShow: isShow,
-    style: S.BROWSER
-  }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].BrowserCaption, {
-    caption: caption,
-    onClose: _hHide
-  }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].ScrollPane, {
-    className: CL_SCROLL,
-    style: S.SCROLL_PANE
-  }, /*#__PURE__*/_react["default"].createElement(_MenuSlider["default"], props)));
+    style: S.BROWSER,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].BrowserCaption, {
+      caption: caption,
+      onClose: _hHide
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ScrollPane, {
+      className: CL_SCROLL,
+      style: S.SCROLL_PANE,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuSlider["default"], (0, _extends2["default"])({}, props))
+    })]
+  });
 });
-
 var _default = BrowserSlider;
 exports["default"] = _default;
 //# sourceMappingURL=BrowserSlider.js.map

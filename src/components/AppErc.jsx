@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import useListen from './hooks/useListen'
 
@@ -21,7 +21,7 @@ import ThemeContext from './hoc/ThemeContext'
 
 import checkBuild from './checkBuild'
 
-const BUILD_DATE = '09-10-2020';
+const BUILD_DATE = '19-10-2020';
 const CL = "component-container"
 
 const showSettings = CA.showSettings

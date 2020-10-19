@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -13,7 +11,9 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _throttleOnce = _interopRequireDefault(require("../../utils/throttleOnce"));
 
@@ -103,8 +103,7 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
       var _this$props2 = _this.props,
           dfProps = _this$props2.dfProps,
           store = _this$props2.store;
-      pages.push( /*#__PURE__*/_react["default"].createElement(_Frame["default"], {
-        key: id,
+      pages.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Frame["default"], {
         id: id,
         style: S.PAGE,
         store: store,
@@ -114,7 +113,7 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
         onClickNext: _this.hNextPage,
         loadItems: _loadItems["default"],
         fOnClickItem: _factoryClickItem["default"]
-      }));
+      }, id));
     };
 
     _this.hNextPage = function (id, title, pageNumber) {
@@ -185,7 +184,7 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
     _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this._direction = 0;
-    _this._refFirstItem = /*#__PURE__*/_react["default"].createRef();
+    _this._refFirstItem = /*#__PURE__*/(0, _react.createRef)();
 
     _this._fOnClickItem = function (_ref3) {
       var id = _ref3.id,
@@ -217,23 +216,26 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
     var _transform = this._crTransform(),
         _pagesStyle = (0, _extends2["default"])({}, S.PAGES, _transform);
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      ref: this._refMenu,
-      style: _pagesStyle
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.PAGE
-    }, /*#__PURE__*/_react["default"].createElement(_MenuList["default"], {
-      refFirstItem: this._refFirstItem,
-      model: model,
-      fOnClickItem: this._fOnClickItem
-    }), /*#__PURE__*/_react["default"].createElement(_ErrMsg["default"], {
-      errMsg: errMsg
-    })), /*#__PURE__*/_react["default"].createElement(_PageList["default"], {
-      pages: pages,
-      pageCurrent: pageCurrent
-    })));
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: S.ROOT,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        ref: this._refMenu,
+        style: _pagesStyle,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          style: S.PAGE,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuList["default"], {
+            refFirstItem: this._refFirstItem,
+            model: model,
+            fOnClickItem: this._fOnClickItem
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ErrMsg["default"], {
+            errMsg: errMsg
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PageList["default"], {
+          pages: pages,
+          pageCurrent: pageCurrent
+        })]
+      })
+    });
   };
 
   _proto.componentDidUpdate = function componentDidUpdate() {

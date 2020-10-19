@@ -5,25 +5,29 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _SvgIcon = _interopRequireDefault(require("./SvgIcon"));
 
 var SvgInfo = function SvgInfo(props) {
-  return /*#__PURE__*/_react["default"].createElement(_SvgIcon["default"], props, /*#__PURE__*/_react["default"].createElement("circle", {
-    cx: "12",
-    cy: "12",
-    r: "10"
-  }), /*#__PURE__*/_react["default"].createElement("line", {
-    x1: "12",
-    y1: "16",
-    x2: "12",
-    y2: "12"
-  }), /*#__PURE__*/_react["default"].createElement("line", {
-    x1: "12",
-    y1: "8",
-    x2: "12",
-    y2: "8"
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_SvgIcon["default"], (0, _extends2["default"])({}, props, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
+      cx: "12",
+      cy: "12",
+      r: "10"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("line", {
+      x1: "12",
+      y1: "16",
+      x2: "12",
+      y2: "12"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("line", {
+      x1: "12",
+      y1: "8",
+      x2: "12",
+      y2: "8"
+    })]
   }));
 };
 

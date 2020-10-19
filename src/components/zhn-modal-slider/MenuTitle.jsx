@@ -1,4 +1,4 @@
-import React from 'react'
+import {  forwardRef } from 'react'
 
 import MenuAriaItem from './MenuAriaItem'
 
@@ -16,7 +16,7 @@ const S = {
   }
 };
 
-const MenuTitle = React.forwardRef(({
+const MenuTitle = forwardRef(({
   titleCl,
   title,
   onClick

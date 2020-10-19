@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component, createRef } from 'react';
 
 import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
@@ -79,9 +79,9 @@ class ChartContainer extends Component {
     this._hSetActive = this._toggleChb.bind(this, true)
     this._hSetNotActive = this._toggleChb.bind(this, false)
 
-    this._refRootNode = React.createRef()
-    this._refSpComp = React.createRef()
-    this._refResize = React.createRef()
+    this._refRootNode = createRef()
+    this._refSpComp = createRef()
+    this._refResize = createRef()
 
 
     this.state = {

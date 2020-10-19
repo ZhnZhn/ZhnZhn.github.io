@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
@@ -201,7 +201,7 @@ class  ZillowDialog extends Component {
                  ref={this._refDates}
                  isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
-                 initToDate={initToDate}                 
+                 initToDate={initToDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
                />

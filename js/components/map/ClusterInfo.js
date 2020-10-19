@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
@@ -66,17 +66,21 @@ var Caption = function Caption(_ref) {
 
   var _hKeyDown = useKeyEnter(onClick);
 
-  return /*#__PURE__*/_react["default"].createElement("p", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
     style: (0, _extends2["default"])({}, S.CAPTION, {
       background: color
-    })
-  }, /*#__PURE__*/_react["default"].createElement("span", null, from, "\xA0\u2013\xA0", to), /*#__PURE__*/_react["default"].createElement("span", {
-    tabIndex: "0",
-    role: "button",
-    style: S.CAPTION_BT,
-    onClick: onClick,
-    onKeyDown: _hKeyDown
-  }, "*"));
+    }),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+      children: [from, "\xA0\u2013\xA0", to]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      tabIndex: "0",
+      role: "button",
+      style: S.CAPTION_BT,
+      onClick: onClick,
+      onKeyDown: _hKeyDown,
+      children: "*"
+    })]
+  });
 };
 
 var Item = function Item(_ref2) {
@@ -88,17 +92,20 @@ var Item = function Item(_ref2) {
   var _hKeyDown = useKeyEnter(onClick),
       _value = status ? value + " (" + status + ")" : value;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     tabIndex: "0",
     role: "button",
     style: S.ITEM_ROOT,
     onClick: onClick,
-    onKeyDown: _hKeyDown
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.ITEM_TITLE
-  }, title), /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.ITEM_VALUE
-  }, _value));
+    onKeyDown: _hKeyDown,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S.ITEM_TITLE,
+      children: title
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S.ITEM_VALUE,
+      children: _value
+    })]
+  });
 };
 
 var ClusterItem = function ClusterItem(_ref3) {
@@ -113,37 +120,41 @@ var ClusterItem = function ClusterItem(_ref3) {
       isShowChart = _useToggle[0],
       toggleIsShowChart = _useToggle[1];
 
-  var _maxLabel = isShowRange ? /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesMaxLabel, {
+  var _maxLabel = isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesMaxLabel, {
     color: COLOR_MAX,
     fontSize: 14
-  }) : /*#__PURE__*/_react["default"].createElement("span", null),
-      _minLabel = isShowRange ? /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesMinLabel, {
+  }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {}),
+      _minLabel = isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesMinLabel, {
     color: COLOR_MIN,
     fontSize: 14
-  }) : /*#__PURE__*/_react["default"].createElement("span", null);
+  }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {});
 
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(Item, {
-    title: point.id,
-    value: point[0],
-    status: point.status,
-    onClick: toggleIsShowChart
-  }), /*#__PURE__*/_react["default"].createElement(_ShowHide["default"], {
-    isShow: isShowChart
-  }, /*#__PURE__*/_react["default"].createElement(_Sparklines.Sparklines, {
-    height: 32,
-    width: 140,
-    svgHeight: 32,
-    svgWidth: 140,
-    data: _refData.current,
-    margin: 3 //marginLeft={20}
-
-  }, _maxLabel, _minLabel, /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesLine, {
-    color: color
-  }), /*#__PURE__*/_react["default"].createElement(_Sparklines.SparklinesSpot, {
-    pointIndex: _refPointIndex.current,
-    size: 3,
-    spotColors: SPOT_COLORS
-  }))));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
+      title: point.id,
+      value: point[0],
+      status: point.status,
+      onClick: toggleIsShowChart
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+      isShow: isShowChart,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Sparklines.Sparklines, {
+        height: 32,
+        width: 140,
+        svgHeight: 32,
+        svgWidth: 140,
+        data: _refData.current,
+        margin: 3 //marginLeft={20}
+        ,
+        children: [_maxLabel, _minLabel, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesLine, {
+          color: color
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Sparklines.SparklinesSpot, {
+          pointIndex: _refPointIndex.current,
+          size: 3,
+          spotColors: SPOT_COLORS
+        })]
+      })
+    })]
+  });
 };
 /*
  ClusterItem.propTypes = {
@@ -167,16 +178,16 @@ var Cluster = function Cluster(_ref4) {
       color = _ref4.color,
       isShowRange = _ref4.isShowRange;
   var points = cluster.points || [];
-  return /*#__PURE__*/_react["default"].createElement("div", null, points.map(function (point, index) {
-    return /*#__PURE__*/_react["default"].createElement(ClusterItem, (0, _extends2["default"])({
-      key: point.id
-    }, {
-      point: point,
-      color: color,
-      index: index,
-      isShowRange: isShowRange
-    }));
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    children: points.map(function (point, index) {
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(ClusterItem, (0, _extends2["default"])({}, {
+        point: point,
+        color: color,
+        index: index,
+        isShowRange: isShowRange
+      }), point.id);
+    })
+  });
 };
 /*
 Cluster.propTypes = {
@@ -201,16 +212,18 @@ var ClusterInfo = function ClusterInfo(_ref5) {
       isShowRange = _useToggle2[0],
       onClick = _useToggle2[1];
 
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(Caption, {
-    color: color,
-    from: from,
-    to: to,
-    onClick: onClick
-  }), /*#__PURE__*/_react["default"].createElement(Cluster, {
-    cluster: cluster,
-    color: color,
-    isShowRange: isShowRange
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Caption, (0, _extends2["default"])({}, {
+      color: color,
+      from: from,
+      to: to,
+      onClick: onClick
+    })), /*#__PURE__*/(0, _jsxRuntime.jsx)(Cluster, (0, _extends2["default"])({}, {
+      cluster: cluster,
+      color: color,
+      isShowRange: isShowRange
+    }))]
+  });
 };
 /*
 ClusterInfo.propTypes = {

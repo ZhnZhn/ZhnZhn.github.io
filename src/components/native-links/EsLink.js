@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Link from './Link'
 
 const URL = 'https://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=';

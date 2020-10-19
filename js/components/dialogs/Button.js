@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
@@ -20,7 +20,7 @@ var S = {
 
 var Load = function Load(_ref) {
   var onClick = _ref.onClick;
-  return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
     style: S.LOAD,
     caption: "Load",
     title: "Load Item to Container" //accessKey="l"
@@ -31,7 +31,7 @@ var Load = function Load(_ref) {
 
 var Show = function Show(_ref2) {
   var onClick = _ref2.onClick;
-  return /*#__PURE__*/_react["default"].createElement(_FlatButton["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
     style: S.SHOW,
     caption: "Show",
     title: "Show Item Container" //accessKey="s"

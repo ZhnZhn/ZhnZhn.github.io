@@ -1,11 +1,9 @@
-import React from 'react'
-
 const CL = 'zhn-bt-circle2';
 
 const ButtonCircle2 = ({
   tabIndex,
   className='', style, dataLoader,
-  caption='', onClick,    
+  caption='', onClick,
 }) => (
   <button
      tabIndex={tabIndex}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import RowInputSelect from './RowInputSelect';
 import ShowHide from '../../zhn/ShowHide'

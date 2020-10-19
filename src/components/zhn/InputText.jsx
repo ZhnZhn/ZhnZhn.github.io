@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
+import { forwardRef, useState, useRef, useEffect, useImperativeHandle } from 'react';
 import useInputKeyDown from './useInputKeyDown'
 //import PropTypes from "prop-types";
 
@@ -40,7 +40,7 @@ const _isMinMaxNumber = ({ type, min, max }) => type === 'number'
  && _isNumber(min)
  && _isNumber(max);
 
-const InputText = React.forwardRef((props, ref) => {
+const InputText = forwardRef((props, ref) => {
   const {
     initValue,
     style, type,

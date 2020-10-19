@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/components/zhn-sparklines/SparklinesBars.jsx"],"names":["_crWidth","points","strokeWidth","length","Math","ceil","max","x","SparklinesBars","props","height","style","barWidth","pointIndex","barStrokeColors","_width","map","p","i","y","_style","fill","defaultProps"],"mappings":";;;;;;;;;AAAA;;AAGA;;AAFA;AAIA,IAAMA,QAAQ,GAAG,SAAXA,QAAW,CAACC,MAAD,EAASC,WAAT;AAAA,SAAyBD,MAAM,IAAIA,MAAM,CAACE,MAAP,IAAiB,CAA3B,GACtCC,IAAI,CAACC,IAAL,CAAUD,IAAI,CAACE,GAAL,CAAS,CAAT,EAAYL,MAAM,CAAC,CAAD,CAAN,CAAUM,CAAV,GAAcN,MAAM,CAAC,CAAD,CAAN,CAAUM,CAAxB,GAA4BL,WAAxC,CAAV,CADsC,GAEtC,CAFa;AAAA,CAAjB;;AAIA,IAAMM,cAAc,GAAG,SAAjBA,cAAiB,CAACC,KAAD,EAAW;AAAA,sBACkDA,KADlD,CACxBR,MADwB;AAAA,MACxBA,MADwB,8BACjB,EADiB;AAAA,MACbS,MADa,GACkDD,KADlD,CACbC,MADa;AAAA,qBACkDD,KADlD,CACLE,KADK;AAAA,MACLA,KADK,6BACC,EADD;AAAA,MACKC,QADL,GACkDH,KADlD,CACKG,QADL;AAAA,0BACkDH,KADlD,CACeI,UADf;AAAA,MACeA,UADf,kCAC0B,CAAC,CAD3B;AAAA,MAC8BC,eAD9B,GACkDL,KADlD,CAC8BK,eAD9B;AAAA,2BAEVH,KAFU,CAE5BT,WAF4B;AAAA,MAE5BA,WAF4B,mCAEhB,CAFgB;AAAA,MAG9Ba,MAH8B,GAGrBH,QAAQ,IAAIZ,QAAQ,CAACC,MAAD,CAHC;;AAKhC,sBACI,2CACKA,MAAM,CAACe,GAAP,CAAW,UAACC,CAAD,EAAIC,CAAJ,EAAU;AAAA,QACVX,CADU,GACDU,CADC,CACVV,CADU;AAAA,QACPY,CADO,GACDF,CADC,CACPE,CADO;AAAA,QAEhBC,MAFgB,GAENF,CAAC,KAAKL,UAAP,iCACCF,KADD,EAEC;AAAEU,MAAAA,IAAI,EAAEP,eAAe,CAAC,+BAAcb,MAAd,EAAsBY,UAAtB,CAAD;AAAvB,KAFD,IAIJF,KANW;;AAOlB,wBACE;AACG,MAAA,GAAG,EAAEO,CADR;AAEG,MAAA,CAAC,EAAEd,IAAI,CAACC,IAAL,CAAUE,CAAC,GAAGL,WAAW,GAAGgB,CAA5B,CAFN;AAGG,MAAA,CAAC,EAAEd,IAAI,CAACC,IAAL,CAAUc,CAAV,CAHN;AAIG,MAAA,KAAK,EAAEf,IAAI,CAACC,IAAL,CAAUU,MAAV,CAJV;AAKG,MAAA,MAAM,EAAEX,IAAI,CAACC,IAAL,CAAUD,IAAI,CAACE,GAAL,CAAS,CAAT,EAAYI,MAAM,GAAGS,CAArB,CAAV,CALX;AAMG,MAAA,KAAK,EAAEC;AANV,MADF;AAUD,GAjBF,CADL,CADJ;AAuBD,CA5BD;AA8BA;;;;;;;;;;AAQAZ,cAAc,CAACc,YAAf,GAA8B;AAC1BX,EAAAA,KAAK,EAAE;AAAEU,IAAAA,IAAI,EAAE;AAAR,GADmB;AAE1BP,EAAAA,eAAe,EAAE;AACb,UAAM,KADO;AAEb,SAAK,OAFQ;AAGb,SAAK;AAHQ;AAFS,CAA9B;eASeN,c","sourcesContent":["import React from 'react';\r\n//import PropTypes from 'prop-types';\r\n\r\nimport calcDirection from './dataProcessing/calcDirection';\r\n\r\nconst _crWidth = (points, strokeWidth) => points && points.length >= 2\r\n  ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth))\r\n  : 0;\r\n\r\nconst SparklinesBars = (props) => {\r\n  const { points=[], height, style={}, barWidth, pointIndex=-1, barStrokeColors } = props\r\n  , { strokeWidth=0 } = style\r\n  , _width = barWidth || _crWidth(points);\r\n\r\n  return (\r\n      <g>\r\n          {points.map((p, i) => {\r\n              const { x, y } = p\r\n              , _style = (i === pointIndex)\r\n                   ? { ...style,\r\n                       ...{ fill: barStrokeColors[calcDirection(points, pointIndex)]}\r\n                     }\r\n                   : style;\r\n              return (\r\n                <rect\r\n                   key={i}\r\n                   x={Math.ceil(x - strokeWidth * i)}\r\n                   y={Math.ceil(y)}\r\n                   width={Math.ceil(_width)}\r\n                   height={Math.ceil(Math.max(0, height - y))}\r\n                   style={_style}\r\n                />\r\n              );\r\n            }\r\n          )}\r\n      </g>\r\n  );\r\n}\r\n\r\n/*\r\nSparklinesBars.propTypes = {\r\n    points: PropTypes.arrayOf(PropTypes.object),\r\n    height: PropTypes.number,\r\n    style: PropTypes.object,\r\n    barWidth: PropTypes.number\r\n};\r\n*/\r\nSparklinesBars.defaultProps = {\r\n    style: { fill: 'slategray' },\r\n    barStrokeColors: {\r\n        '-1': 'red',\r\n        '0': 'black',\r\n        '1': 'green'\r\n    }\r\n};\r\n\r\nexport default SparklinesBars\r\n"],"file":"SparklinesBars.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-sparklines/SparklinesBars.js"
+ ],
+ "file": "../../../src/components/zhn-sparklines/SparklinesBars.js",
+ "names": [
+  "_crWidth",
+  "points",
+  "strokeWidth",
+  "length",
+  "Math",
+  "ceil",
+  "max",
+  "x",
+  "SparklinesBars",
+  "props",
+  "height",
+  "style",
+  "barWidth",
+  "pointIndex",
+  "barStrokeColors",
+  "_width",
+  "map",
+  "p",
+  "i",
+  "y",
+  "_style",
+  "fill",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;;;AAEA;;AAFA;AAIA,IAAMA,QAAQ,GAAG,SAAXA,QAAW,CAACC,MAAD,EAASC,WAAT;AAAA,SAAyBD,MAAM,IAAIA,MAAM,CAACE,MAAP,IAAiB,CAA3B,GACtCC,IAAI,CAACC,IAAL,CAAUD,IAAI,CAACE,GAAL,CAAS,CAAT,EAAYL,MAAM,CAAC,CAAD,CAAN,CAAUM,CAAV,GAAcN,MAAM,CAAC,CAAD,CAAN,CAAUM,CAAxB,GAA4BL,WAAxC,CAAV,CADsC,GAEtC,CAFa;AAAA,CAAjB;;AAIA,IAAMM,cAAc,GAAG,SAAjBA,cAAiB,CAACC,KAAD,EAAW;AAAA,sBACkDA,KADlD,CACxBR,MADwB;AAAA,MACxBA,MADwB,8BACjB,EADiB;AAAA,MACbS,MADa,GACkDD,KADlD,CACbC,MADa;AAAA,qBACkDD,KADlD,CACLE,KADK;AAAA,MACLA,KADK,6BACC,EADD;AAAA,MACKC,QADL,GACkDH,KADlD,CACKG,QADL;AAAA,0BACkDH,KADlD,CACeI,UADf;AAAA,MACeA,UADf,kCAC0B,CAAC,CAD3B;AAAA,MAC8BC,eAD9B,GACkDL,KADlD,CAC8BK,eAD9B;AAAA,2BAEVH,KAFU,CAE5BT,WAF4B;AAAA,MAE5BA,WAF4B,mCAEhB,CAFgB;AAAA,MAG9Ba,MAH8B,GAGrBH,QAAQ,IAAIZ,QAAQ,CAACC,MAAD,CAHC;;AAKhC,sBACI;AAAA,cACKA,MAAM,CAACe,GAAP,CAAW,UAACC,CAAD,EAAIC,CAAJ,EAAU;AAAA,UACVX,CADU,GACDU,CADC,CACVV,CADU;AAAA,UACPY,CADO,GACDF,CADC,CACPE,CADO;AAAA,UAEhBC,MAFgB,GAENF,CAAC,KAAKL,UAAP,iCACCF,KADD,EAEC;AAAEU,QAAAA,IAAI,EAAEP,eAAe,CAAC,+BAAcb,MAAd,EAAsBY,UAAtB,CAAD;AAAvB,OAFD,IAIJF,KANW;;AAOlB,0BACE;AAEG,QAAA,CAAC,EAAEP,IAAI,CAACC,IAAL,CAAUE,CAAC,GAAGL,WAAW,GAAGgB,CAA5B,CAFN;AAGG,QAAA,CAAC,EAAEd,IAAI,CAACC,IAAL,CAAUc,CAAV,CAHN;AAIG,QAAA,KAAK,EAAEf,IAAI,CAACC,IAAL,CAAUU,MAAV,CAJV;AAKG,QAAA,MAAM,EAAEX,IAAI,CAACC,IAAL,CAAUD,IAAI,CAACE,GAAL,CAAS,CAAT,EAAYI,MAAM,GAAGS,CAArB,CAAV,CALX;AAMG,QAAA,KAAK,EAAEC;AANV,SACQF,CADR,CADF;AAUD,KAjBF;AADL,IADJ;AAuBD,CA5BD;AA8BA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;AACAV,cAAc,CAACc,YAAf,GAA8B;AAC1BX,EAAAA,KAAK,EAAE;AAAEU,IAAAA,IAAI,EAAE;AAAR,GADmB;AAE1BP,EAAAA,eAAe,EAAE;AACb,UAAM,KADO;AAEb,SAAK,OAFQ;AAGb,SAAK;AAHQ;AAFS,CAA9B;eASeN,c"
+}

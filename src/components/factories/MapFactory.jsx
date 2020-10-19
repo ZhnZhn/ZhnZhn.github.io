@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ClusterInfo from '../map/ClusterInfo'
 
 const MapFactory = {
@@ -8,7 +6,7 @@ const MapFactory = {
       <ClusterInfo {...props} />
     );
   },
-  
+
   crInfo({ label, value }){
     return(
       <p>

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import FlatButton from '../zhn-m/FlatButton'
 
 const S = {

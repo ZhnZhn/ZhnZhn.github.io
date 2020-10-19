@@ -1,8 +1,8 @@
-import React from 'react'
+import { memo } from 'react'
 
 import MenuItem from './MenuItem'
 
-const MenuList = React.memo(({
+const MenuList = memo(({
   refFirstItem,
   model=[],
   fOnClickItem

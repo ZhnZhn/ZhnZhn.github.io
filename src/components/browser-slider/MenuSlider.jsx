@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component, createRef } from 'react'
 
 import throttleOnce from '../../utils/throttleOnce'
 
@@ -48,7 +48,7 @@ class MenuSlider extends Component {
       this.hPrevPage.bind(this)
     )
     this._direction = 0
-    this._refFirstItem = React.createRef()
+    this._refFirstItem = createRef()
 
     this._fOnClickItem = ({ id, text }) => this
       .hNextPage.bind(null, id, text, 0)

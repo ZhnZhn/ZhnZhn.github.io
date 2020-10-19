@@ -1,12 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/components/stat-dialogs/StatDialogs.js"
- ],
- "file": "../../../src/components/stat-dialogs/StatDialogs.js",
- "names": [
-  "StatDialogs",
-  "StatN"
- ],
- "mappings": ";;;;;;;AACA;;AAEA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,KAAK,EAALA;AADkB,CAApB;eAIeD,W"
-}
+{"version":3,"sources":["../../../src/components/stat-dialogs/StatDialogs.js"],"names":["StatDialogs","StatN"],"mappings":";;;;;;;AACA;;AAEA,IAAMA,WAAW,GAAG;AAClBC,EAAAA,KAAK,EAALA;AADkB,CAApB;eAIeD,W","sourcesContent":["\r\nimport StatN from './DialogStatN'\r\n\r\nconst StatDialogs = {\r\n  StatN\r\n};\r\n\r\nexport default StatDialogs\r\n"],"file":"StatDialogs.js"}

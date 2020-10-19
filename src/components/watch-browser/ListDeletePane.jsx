@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import A from './Atoms'
@@ -19,11 +19,11 @@ class ListDeletePane extends Component {
 
   constructor(props){
     super()
-    this._primaryBt = <A.Button.Primary
-                         caption="Delete"
-                         title="Delete List"
-                         onClick={this._handleDelete}
-                      />
+    this._primaryBt = (<A.Button.Primary
+       caption="Delete"
+       title="Delete List"
+       onClick={this._handleDelete}
+    />)
     this.state = {
       groupOptions : props.store.getWatchGroups(),
       validationMessages : []

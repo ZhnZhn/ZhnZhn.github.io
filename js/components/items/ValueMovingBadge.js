@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _Type = require("../../constants/Type");
 
@@ -71,19 +71,19 @@ var _getDirection = function _getDirection(direction) {
   switch (direction) {
     case _Type.Direction.DOWN:
       return {
-        _svgDirection: /*#__PURE__*/_react["default"].createElement(_SvgDown["default"], null),
+        _svgDirection: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgDown["default"], {}),
         _dStyle: S.DOWN
       };
 
     case _Type.Direction.UP:
       return {
-        _svgDirection: /*#__PURE__*/_react["default"].createElement(_SvgUp["default"], null),
+        _svgDirection: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgUp["default"], {}),
         _dStyle: S.UP
       };
 
     case _Type.Direction.EQUAL:
       return {
-        _svgDirection: /*#__PURE__*/_react["default"].createElement(_SvgEqual["default"], null),
+        _svgDirection: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgEqual["default"], {}),
         _dStyle: S.EQUAL
       };
 
@@ -177,30 +177,34 @@ var ValueMovingBadge = /*#__PURE__*/function (_Component) {
         _svgDirection = _getDirection2._svgDirection,
         _dStyle = _getDirection2._dStyle;
 
-    return /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.ROOT
-    }, /*#__PURE__*/_react["default"].createElement(_SpanValue["default"], {
-      value: value
-    }), _svgDirection, /*#__PURE__*/_react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.DELTA, _dStyle)
-    }, percent), /*#__PURE__*/_react["default"].createElement("span", {
-      style: (0, _extends2["default"])({}, S.DELTA, _dStyle)
-    }, delta), /*#__PURE__*/_react["default"].createElement("span", {
-      style: S.G5
-    }), /*#__PURE__*/_react["default"].createElement("button", {
-      className: CL_BT,
-      onClick: this._hClickBt
-    }, /*#__PURE__*/_react["default"].createElement(_SpanDate["default"], {
-      style: S.DATE,
-      date: date
-    })), _svgDirection !== null && /*#__PURE__*/_react["default"].createElement(_ValueMovingModal["default"], {
-      isShow: isShowModal,
-      onClose: this._hCloseModal,
-      valueMoving: valueMoving,
-      isAdminMode: isAdminMode,
-      msgDateTo: msgDateTo,
-      updateDateTo: this._updateDateTo
-    }));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+      style: S.ROOT,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanValue["default"], {
+        value: value
+      }), _svgDirection, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: (0, _extends2["default"])({}, S.DELTA, _dStyle),
+        children: percent
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: (0, _extends2["default"])({}, S.DELTA, _dStyle),
+        children: delta
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: S.G5
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+        className: CL_BT,
+        onClick: this._hClickBt,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate["default"], {
+          style: S.DATE,
+          date: date
+        })
+      }), _svgDirection !== null && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal["default"], {
+        isShow: isShowModal,
+        onClose: this._hCloseModal,
+        valueMoving: valueMoving,
+        isAdminMode: isAdminMode,
+        msgDateTo: msgDateTo,
+        updateDateTo: this._updateDateTo
+      })]
+    });
   };
 
   return ValueMovingBadge;

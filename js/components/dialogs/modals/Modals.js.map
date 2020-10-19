@@ -1,13 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../../src/components/dialogs/modals/Modals.js"
- ],
- "file": "../../../../src/components/dialogs/modals/Modals.js",
- "names": [
-  "Modals",
-  "ModalOptions",
-  "ModalToggle"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,MAAM,GAAG;AACbC,EAAAA,YAAY,EAAZA,wBADa;AAEbC,EAAAA,WAAW,EAAXA;AAFa,CAAf;eAKeF,M"
-}
+{"version":3,"sources":["../../../../src/components/dialogs/modals/Modals.js"],"names":["Modals","ModalOptions","ModalToggle"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,MAAM,GAAG;AACbC,EAAAA,YAAY,EAAZA,wBADa;AAEbC,EAAAA,WAAW,EAAXA;AAFa,CAAf;eAKeF,M","sourcesContent":["import ModalOptions from './ModalOptions'\r\nimport ModalToggle from './ModalToggle'\r\n\r\nconst Modals = {\r\n  ModalOptions,\r\n  ModalToggle\r\n}\r\n\r\nexport default Modals\r\n"],"file":"Modals.js"}

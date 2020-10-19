@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ShowHide from '../zhn/ShowHide';
 import Legend from '../zhn/Legend';
 

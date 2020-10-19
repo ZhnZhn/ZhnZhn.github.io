@@ -1,5 +1,3 @@
-import React from 'react';
-
 const C = {
   CL: 'logo-quandl',
   TITLE: "Quandl Logo",

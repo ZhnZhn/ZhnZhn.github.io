@@ -1,5 +1,3 @@
-import React from 'react'
-
 import RowCaptionInput from './RowCaptionInput'
 import SeriaConfigs from './SeriaConfigs'
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component, createRef } from 'react';
 //import PropTypes from 'prop-types'
 import has from '../has'
 
@@ -143,7 +143,7 @@ class InputSelect extends Component {
         }
       : void 0
     this._initProperties()
-    this._refArrowCell = React.createRef()
+    this._refArrowCell = createRef()
     this.state = _crInitialStateFromProps(props)
   }
 

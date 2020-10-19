@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _dompurify = _interopRequireDefault(require("dompurify"));
 
@@ -22,7 +22,7 @@ var DivHtml = /*#__PURE__*/(0, _react.memo)(function (_ref) {
     return null;
   }
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: className,
     style: style,
     dangerouslySetInnerHTML: {

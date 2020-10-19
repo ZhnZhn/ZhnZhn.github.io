@@ -1,10 +1,10 @@
-import React from 'react';
+import { forwardRef } from 'react';
 //import PropTypes from "prop-types";
 
 import InputPattern from '../../zhn/InputPattern'
 import crRow from './crRow'
 
-const RowPattern = React.forwardRef(({
+const RowPattern = forwardRef(({
   isShowLabels, caption, captionStyle,
   ...rest
 }, ref) => {

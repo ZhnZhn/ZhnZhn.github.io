@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var CL = {
   ROOT: 'zhn-search__options',
@@ -41,19 +41,24 @@ var S = {
 var BoldSpan = function BoldSpan(_ref) {
   var _ref$text = _ref.text,
       text = _ref$text === void 0 ? '' : _ref$text;
-  return /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.BOLD
-  }, text);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: S.BOLD,
+    children: text
+  });
 };
 
 var Delimeter = function Delimeter() {
-  return /*#__PURE__*/_react["default"].createElement("span", null, " - ");
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: " - "
+  });
 };
 
 var Span = function Span(_ref2) {
   var _ref2$text = _ref2.text,
       text = _ref2$text === void 0 ? '' : _ref2$text;
-  return /*#__PURE__*/_react["default"].createElement("span", null, text);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: text
+  });
 };
 
 var Item = function Item(_ref3) {
@@ -65,21 +70,22 @@ var Item = function Item(_ref3) {
       type = item.type,
       region = item.region,
       currency = item.currency;
-  return /*#__PURE__*/_react["default"].createElement("button", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
     className: CL.ITEM,
     onClick: onClick,
-    onFocus: onFocus
-  }, /*#__PURE__*/_react["default"].createElement(BoldSpan, {
-    text: value
-  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(Span, {
-    text: name
-  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(BoldSpan, {
-    text: type
-  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(Span, {
-    text: region
-  }), /*#__PURE__*/_react["default"].createElement(Delimeter, null), /*#__PURE__*/_react["default"].createElement(BoldSpan, {
-    text: currency
-  }));
+    onFocus: onFocus,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BoldSpan, {
+      text: value
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Delimeter, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(Span, {
+      text: name
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Delimeter, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(BoldSpan, {
+      text: type
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Delimeter, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(Span, {
+      text: region
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Delimeter, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(BoldSpan, {
+      text: currency
+    })]
+  });
 };
 
 var SearchOptions = function SearchOptions(_ref4) {
@@ -111,23 +117,29 @@ var SearchOptions = function SearchOptions(_ref4) {
 
   var _total = options.length || '';
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL.ROOT,
-    style: (0, _extends2["default"])({}, S.OPTIONS, _style)
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    className: CL.OPTIONS,
-    style: S.OPTIONS
-  }, options.map(function (item, index) {
-    return /*#__PURE__*/_react["default"].createElement(Item, {
-      key: item.value + index,
-      item: item,
-      onClick: onClickItem.bind(null, item.value),
-      onFocus: _onFocusItem.bind(null, index + 1)
-    });
-  })), /*#__PURE__*/_react["default"].createElement("div", {
-    className: CL.FOOTER,
-    style: S.FOOTER
-  }, /*#__PURE__*/_react["default"].createElement("span", null, itemIndex, ":"), /*#__PURE__*/_react["default"].createElement("span", null, _total)));
+    style: (0, _extends2["default"])({}, S.OPTIONS, _style),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: CL.OPTIONS,
+      style: S.OPTIONS,
+      children: options.map(function (item, index) {
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
+          item: item,
+          onClick: onClickItem.bind(null, item.value),
+          onFocus: _onFocusItem.bind(null, index + 1)
+        }, item.value + index);
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: CL.FOOTER,
+      style: S.FOOTER,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+        children: [itemIndex, ":"]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        children: _total
+      })]
+    })]
+  });
 };
 
 var _default = SearchOptions;

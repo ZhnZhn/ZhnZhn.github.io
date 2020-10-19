@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ButtonCircle from '../zhn/ButtonCircle';
 
 const CL_BT = "bt__watch__bar";

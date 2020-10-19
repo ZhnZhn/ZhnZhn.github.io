@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 
@@ -34,17 +34,18 @@ var WrapperInputSearch = (0, _memoEqual["default"])(function (_ref) {
       caption = _ref3.caption,
       _options = _TransformFn["default"].fromLevel3(data);
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: style
-  }, /*#__PURE__*/_react["default"].createElement(_InputSelect["default"], {
-    width: "100%",
-    isShowOptionAnim: true,
-    placeholder: placeholder,
-    propCaption: caption,
-    options: _options,
-    ItemOptionComp: ItemOptionComp,
-    onSelect: _hSelectItem
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: style,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect["default"], {
+      width: "100%",
+      isShowOptionAnim: true,
+      placeholder: placeholder,
+      propCaption: caption,
+      options: _options,
+      ItemOptionComp: ItemOptionComp,
+      onSelect: _hSelectItem
+    })
+  });
 });
 var _default = WrapperInputSearch;
 exports["default"] = _default;

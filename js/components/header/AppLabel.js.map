@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/header/AppLabel.jsx"],"names":["AppLabel","className","caption","title"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,MAAcC,OAAd,QAAcA,OAAd;AAAA,MAAuBC,KAAvB,QAAuBA,KAAvB;AAAA,sBACf;AACG,IAAA,SAAS,EAAEF,SADd;AAEG,IAAA,KAAK,EAAEE;AAFV,KAIGD,OAJH,CADe;AAAA,CAAjB;;eASeF,Q","sourcesContent":["import React from 'react';\r\n\r\nconst AppLabel = ({ className, caption, title }) => (\r\n  <span\r\n     className={className}\r\n     title={title}\r\n   >\r\n    {caption}\r\n  </span>\r\n)\r\n\r\nexport default AppLabel\r\n"],"file":"AppLabel.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/header/AppLabel.js"
+ ],
+ "file": "../../../src/components/header/AppLabel.js",
+ "names": [
+  "AppLabel",
+  "className",
+  "caption",
+  "title"
+ ],
+ "mappings": ";;;;;;;AAAA,IAAMA,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,MAAcC,OAAd,QAAcA,OAAd;AAAA,MAAuBC,KAAvB,QAAuBA,KAAvB;AAAA,sBACf;AACG,IAAA,SAAS,EAAEF,SADd;AAEG,IAAA,KAAK,EAAEE,KAFV;AAAA,cAIGD;AAJH,IADe;AAAA,CAAjB;;eASeF,Q"
+}

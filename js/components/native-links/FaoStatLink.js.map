@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/native-links/FaoStatLink.jsx"],"names":["C","BASE","FaoStatLink","item"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AADE,CAAV;;AAIA,IAAMC,WAAW,GAAG,SAAdA,WAAc;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,sBAClB,gCAAC,gBAAD;AACE,IAAA,IAAI,EAAEA,IAAI,GAAGH,CAAC,CAACC,IAAF,GAASE,IAAZ,GAAmBH,CAAC,CAACC,IADjC;AAEE,IAAA,OAAO,EAAC;AAFV,IADkB;AAAA,CAApB;;eAOeC,W","sourcesContent":["import React from 'react'\r\nimport Link from './Link'\r\n\r\nconst C = {\r\n  BASE: 'http://www.fao.org/faostat/en/#data/'\r\n};\r\n\r\nconst FaoStatLink = ({ item }) => (\r\n  <Link    \r\n    href={item ? C.BASE + item : C.BASE}\r\n    caption=\"FAOSTAT Link\"\r\n  />\r\n);\r\n\r\nexport default FaoStatLink\r\n"],"file":"FaoStatLink.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/FaoStatLink.js"
+ ],
+ "file": "../../../src/components/native-links/FaoStatLink.js",
+ "names": [
+  "C",
+  "BASE",
+  "FaoStatLink",
+  "item"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AADE,CAAV;;AAIA,IAAMC,WAAW,GAAG,SAAdA,WAAc;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,sBAClB,qBAAC,gBAAD;AACE,IAAA,IAAI,EAAEA,IAAI,GAAGH,CAAC,CAACC,IAAF,GAASE,IAAZ,GAAmBH,CAAC,CAACC,IADjC;AAEE,IAAA,OAAO,EAAC;AAFV,IADkB;AAAA,CAApB;;eAOeC,W"
+}

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -9,7 +7,9 @@ exports["default"] = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNativeLink"));
 
@@ -89,7 +89,7 @@ var PanelDataInfo = /*#__PURE__*/function (_Component) {
         return null;
       } else {
         var Comp = _RouterNativeLink["default"]['QUANDL'];
-        return /*#__PURE__*/_react["default"].createElement(Comp, {
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
           dbCode: dbCode,
           dsCode: dsCode
         });
@@ -102,7 +102,7 @@ var PanelDataInfo = /*#__PURE__*/function (_Component) {
       }
 
       var Comp = _RouterNativeLink["default"][linkFn];
-      return typeof Comp !== 'undefined' ? /*#__PURE__*/_react["default"].createElement(Comp, {
+      return typeof Comp !== 'undefined' ? /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
         item: item
       }) : null;
     };
@@ -131,42 +131,44 @@ var PanelDataInfo = /*#__PURE__*/function (_Component) {
         linkFn = zhInfo.linkFn,
         _style = isShow ? S.ROOT_SHOW : S.ROOT_HIDE;
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: _style
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].ButtonTab, {
-      style: S.BT_CAPTION,
-      caption: "Chart",
-      onClick: onClickChart
-    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
-      text: name,
-      styleText: S.INFO_TEXT
-    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
-      caption: "From Date",
-      styleCaption: S.INFO_CAPTION,
-      text: fromDate,
-      styleText: S.INFO_TEXT
-    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
-      style: S.TO_DATE_INFO,
-      caption: "To Date",
-      styleCaption: S.INFO_CAPTION,
-      text: toDate,
-      styleText: S.INFO_TEXT
-    }), /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
-      caption: "Frequency",
-      styleCaption: S.INFO_CAPTION,
-      text: frequency,
-      styleText: S.INFO_TEXT
-    }), this._renderQuandlLink(database_code, dataset_code), description && /*#__PURE__*/_react["default"].createElement(_Comp["default"].OpenClose, {
-      isClose: !_isShortDescr(description),
-      caption: "Description",
-      openColor: C_DESCR_OPEN
-    }, /*#__PURE__*/_react["default"].createElement(_Comp["default"].InfoPart, {
-      style: S.DESCR_INFO,
-      isHtml: true,
-      text: description,
-      classText: CL_DESCR,
-      styleText: S.DESCR_TEXT
-    })), this._renderNativeLink(linkFn, item));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: _style,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ButtonTab, {
+        style: S.BT_CAPTION,
+        caption: "Chart",
+        onClick: onClickChart
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
+        text: name,
+        styleText: S.INFO_TEXT
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
+        caption: "From Date",
+        styleCaption: S.INFO_CAPTION,
+        text: fromDate,
+        styleText: S.INFO_TEXT
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
+        style: S.TO_DATE_INFO,
+        caption: "To Date",
+        styleCaption: S.INFO_CAPTION,
+        text: toDate,
+        styleText: S.INFO_TEXT
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
+        caption: "Frequency",
+        styleCaption: S.INFO_CAPTION,
+        text: frequency,
+        styleText: S.INFO_TEXT
+      }), this._renderQuandlLink(database_code, dataset_code), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].OpenClose, {
+        isClose: !_isShortDescr(description),
+        caption: "Description",
+        openColor: C_DESCR_OPEN,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
+          style: S.DESCR_INFO,
+          isHtml: true,
+          text: description,
+          classText: CL_DESCR,
+          styleText: S.DESCR_TEXT
+        })
+      }), this._renderNativeLink(linkFn, item)]
+    });
   };
 
   return PanelDataInfo;

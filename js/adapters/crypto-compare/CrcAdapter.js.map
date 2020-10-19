@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/crypto-compare/CrcAdapter.js"
- ],
- "file": "../../../src/adapters/crypto-compare/CrcAdapter.js",
- "names": [
-  "_rAdapter",
-  "DF",
-  "toHdConfig",
-  "HD",
-  "_getAdapter",
-  "option",
-  "dfSubLoadId",
-  "CrcAdapter"
- ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,sBADY;AAEhBC,EAAAA,EAAE,EAAED;AAFY,CAAlB;;AAKA,IAAME,WAAW,GAAG,SAAdA,WAAc,CAACC,MAAD,EAAY;AAAA,MACtBC,WADsB,GACND,MADM,CACtBC,WADsB;AAE9B,SAAON,SAAS,CAACM,WAAD,CAAT,IAA0BN,SAAS,CAACC,EAA3C;AACD,CAHD;;AAKA,IAAMM,UAAU,GAAG,2BAAUH,WAAV,CAAnB;eAEeG,U"
-}
+{"version":3,"sources":["../../../src/adapters/crypto-compare/CrcAdapter.js"],"names":["_rAdapter","DF","toHdConfig","HD","_getAdapter","option","dfSubLoadId","CrcAdapter"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,sBADY;AAEhBC,EAAAA,EAAE,EAAED;AAFY,CAAlB;;AAKA,IAAME,WAAW,GAAG,SAAdA,WAAc,CAACC,MAAD,EAAY;AAAA,MACtBC,WADsB,GACND,MADM,CACtBC,WADsB;AAE9B,SAAON,SAAS,CAACM,WAAD,CAAT,IAA0BN,SAAS,CAACC,EAA3C;AACD,CAHD;;AAKA,IAAMM,UAAU,GAAG,2BAAUH,WAAV,CAAnB;eAEeG,U","sourcesContent":["import crAdapter from '../crAdapter'\r\n\r\nimport toHdConfig from './toHdConfig'\r\n\r\nconst _rAdapter = {\r\n  DF: toHdConfig,\r\n  HD: toHdConfig\r\n};\r\n\r\nconst _getAdapter = (option) => {\r\n  const { dfSubLoadId } = option;\r\n  return _rAdapter[dfSubLoadId] || _rAdapter.DF;\r\n};\r\n\r\nconst CrcAdapter = crAdapter(_getAdapter)\r\n\r\nexport default CrcAdapter\r\n"],"file":"CrcAdapter.js"}

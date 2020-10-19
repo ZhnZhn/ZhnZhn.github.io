@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
@@ -27,13 +27,16 @@ var C = {
 var ThMore = function ThMore(_ref) {
   var name = _ref.name,
       onMenuMore = _ref.onMenuMore;
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_SvgMore["default"], {
-    style: _Style["default"].BT_SVG_MORE,
-    svgStyle: _Style["default"].SVG_MORE,
-    onClick: onMenuMore
-  }), /*#__PURE__*/_react["default"].createElement("span", {
-    style: _Style["default"].TH_MORE_SPAN
-  }, name));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore["default"], {
+      style: _Style["default"].BT_SVG_MORE,
+      svgStyle: _Style["default"].SVG_MORE,
+      onClick: onMenuMore
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: _Style["default"].TH_MORE_SPAN,
+      children: name
+    })]
+  });
 };
 
 var _renderHeader = function _renderHeader(props, _hThKeyDown) {
@@ -62,14 +65,13 @@ var _renderHeader = function _renderHeader(props, _hThKeyDown) {
         style = _FN$crAppearance.style,
         ariaSort = _FN$crAppearance.ariaSort,
         ariaLabel = _FN$crAppearance.ariaLabel,
-        _nameOrEl = hIndex === 0 ? /*#__PURE__*/_react["default"].createElement(ThMore, {
+        _nameOrEl = hIndex === 0 ? /*#__PURE__*/(0, _jsxRuntime.jsx)(ThMore, {
       name: name,
       onMenuMore: onMenuMore
     }) : name,
         _thStyle = hIndex === 0 ? (0, _extends2["default"])({}, thMoreStyle, style) : style;
 
-    return /*#__PURE__*/_react["default"].createElement("th", {
-      key: h.name,
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("th", {
       style: (0, _extends2["default"])({}, _Style["default"].TH, _thStyle),
       rowSpan: "1",
       colSpan: "1",
@@ -82,8 +84,9 @@ var _renderHeader = function _renderHeader(props, _hThKeyDown) {
       },
       onKeyDown: function onKeyDown(event) {
         return _hThKeyDown(event, pn);
-      }
-    }, _nameOrEl);
+      },
+      children: _nameOrEl
+    }, h.name);
   }).filter(Boolean);
 };
 
@@ -94,9 +97,12 @@ var TableHead = function TableHead(props) {
     }
   };
 
-  return /*#__PURE__*/_react["default"].createElement("thead", {
-    style: _Style["default"].THEAD
-  }, /*#__PURE__*/_react["default"].createElement("tr", null, _renderHeader(props, _hThKeyEnter)));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("thead", {
+    style: _Style["default"].THEAD,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("tr", {
+      children: _renderHeader(props, _hThKeyEnter)
+    })
+  });
 };
 /*
 TableHead.propTypes = {

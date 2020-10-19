@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
@@ -47,32 +47,33 @@ var Logo = function Logo(_ref) {
       title = _ref.title,
       caption = _ref.caption,
       rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["className", "title", "caption"]);
-  return /*#__PURE__*/_react["default"].createElement("a", (0, _extends2["default"])({
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", (0, _extends2["default"])({
     className: className,
     title: title || caption
-  }, rest), caption);
+  }, rest, {
+    children: caption
+  }));
 };
 
 var LogosBar = function LogosBar() {
   var theme = (0, _react.useContext)(_ThemeContext["default"]),
       TS = theme.getStyle(TH_ID);
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL.ROOT,
-    style: TS.ROOT
-  }, /*#__PURE__*/_react["default"].createElement(_LogoQuandl["default"], {
-    className: CL.LI
-  }), /*#__PURE__*/_react["default"].createElement(_LogoGitHub["default"], {
-    className: CL.LI,
-    href: "https://github.com/ZhnZhn/ZhnZhn.github.io"
-  }), /*#__PURE__*/_react["default"].createElement(_LogoReact["default"], {
-    className: CL.LI
-  }), /*#__PURE__*/_react["default"].createElement(_LogoHighcharts["default"], {
-    className: CL.LI
-  }), LOGO_CONFS.map(function (config) {
-    return /*#__PURE__*/_react["default"].createElement(Logo, (0, _extends2["default"])({
-      key: config.caption
-    }, config));
-  }));
+    style: TS.ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LogoQuandl["default"], {
+      className: CL.LI
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_LogoGitHub["default"], {
+      className: CL.LI,
+      href: "https://github.com/ZhnZhn/ZhnZhn.github.io"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_LogoReact["default"], {
+      className: CL.LI
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_LogoHighcharts["default"], {
+      className: CL.LI
+    }), LOGO_CONFS.map(function (config) {
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(Logo, (0, _extends2["default"])({}, config), config.caption);
+    })]
+  });
 };
 
 var _default = LogosBar;

@@ -5,7 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _crCurrencyFormatter = _interopRequireDefault(require("../../utils/crCurrencyFormatter"));
 
@@ -44,13 +46,20 @@ var ItemLse = function ItemLse(props) {
       date = _ref.date,
       _cap = cap === 0 ? NA : _formatter.format(cap) + ML;
 
-  return /*#__PURE__*/_react["default"].createElement(_Item["default"], props, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
-    style: STYLE.CAP
-  }, _cap), /*#__PURE__*/_react["default"].createElement("span", {
-    style: STYLE.DATE
-  }, date), /*#__PURE__*/_react["default"].createElement("span", {
-    style: STYLE.COUNTRY
-  }, c)));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Item["default"], (0, _extends2["default"])({}, props, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: STYLE.CAP,
+        children: _cap
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: STYLE.DATE,
+        children: date
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: STYLE.COUNTRY,
+        children: c
+      })]
+    })
+  }));
 };
 
 var _default = ItemLse;

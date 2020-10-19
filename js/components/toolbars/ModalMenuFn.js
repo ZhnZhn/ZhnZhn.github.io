@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
@@ -60,32 +60,34 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
       onZoom = _ref.onZoom,
       onCopy = _ref.onCopy,
       onPasteTo = _ref.onPasteTo;
-  return /*#__PURE__*/_react["default"].createElement(_ModalPopup["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup["default"], {
     isShow: isShow,
     style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, style),
-    onClose: onClose
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: _ModalMenu["default"].PANE
-  }, /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
-    caption: "x2H",
-    onClick: onX2H
-  }), _isMinMax(config) && /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
-    caption: "MinMax",
-    initialIsActive: true,
-    onClick: onMinMax
-  }), _isZoom(getChart) && /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
-    caption: "Zoom",
-    onClick: onZoom,
-    onClose: onClose
-  }), /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
-    caption: "Copy",
-    onClick: onCopy,
-    onClose: onClose
-  }), /*#__PURE__*/_react["default"].createElement(_SubMenuItem["default"], {
-    caption: "PasteTo",
-    onClick: onPasteTo,
-    onClose: onClose
-  })));
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: _ModalMenu["default"].PANE,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+        caption: "x2H",
+        onClick: onX2H
+      }), _isMinMax(config) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+        caption: "MinMax",
+        initialIsActive: true,
+        onClick: onMinMax
+      }), _isZoom(getChart) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+        caption: "Zoom",
+        onClick: onZoom,
+        onClose: onClose
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+        caption: "Copy",
+        onClick: onCopy,
+        onClose: onClose
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+        caption: "PasteTo",
+        onClick: onPasteTo,
+        onClose: onClose
+      })]
+    })
+  });
 };
 
 var _default = ModalMenuFn;

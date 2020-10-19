@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
 
@@ -33,8 +33,7 @@ var _crAreaChart = function _crAreaChart(_ref) {
       _zhConfig$id = zhConfig.id,
       id = _zhConfig$id === void 0 ? "Id:" + index : _zhConfig$id,
       chartType = option.chartType;
-  return /*#__PURE__*/_react["default"].createElement(_Items["default"].AreaChart, (0, _extends2["default"])({
-    key: key || id,
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items["default"].AreaChart, (0, _extends2["default"])({
     chartType: chartType,
     caption: id,
     config: config,
@@ -49,7 +48,7 @@ var _crAreaChart = function _crAreaChart(_ref) {
     onZoom: _ComponentActions["default"].zoom,
     getCopyFromChart: store.getCopyFromChart.bind(store),
     ChartFn: _ChartFn["default"]
-  }));
+  }), key || id);
 };
 
 var _crMapChart = function _crMapChart(_ref2) {
@@ -65,12 +64,11 @@ var _crMapChart = function _crMapChart(_ref2) {
       _zhConfig$key = zhConfig.key,
       key = _zhConfig$key === void 0 ? index : _zhConfig$key,
       chartType = option.chartType;
-  return /*#__PURE__*/_react["default"].createElement(_Items["default"].MapChart, (0, _extends2["default"])({
-    key: key,
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items["default"].MapChart, (0, _extends2["default"])({
     chartType: chartType,
     caption: id,
     config: config
-  }, props));
+  }, props), key);
 };
 
 var _fItem = function _fItem(Comp) {
@@ -78,10 +76,9 @@ var _fItem = function _fItem(Comp) {
     var _ref3$config = _ref3.config,
         config = _ref3$config === void 0 ? {} : _ref3$config,
         props = _ref3.props;
-    return /*#__PURE__*/_react["default"].createElement(Comp, (0, _extends2["default"])({
-      key: config.id,
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, (0, _extends2["default"])({
       config: config
-    }, props));
+    }, props), config.id);
   };
 };
 

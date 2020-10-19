@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/components/header/RowButtons.jsx"],"names":["S","ROW","cursor","marginTop","marginBottom","marginRight","RowButtons","children","btStyle","onClose"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE;AACFC,IAAAA,MAAM,EAAE,SADN;AAEF,aAAO,OAFL;AAGFC,IAAAA,SAAS,EAAE,CAHT;AAIFC,IAAAA,YAAY,EAAE,EAJZ;AAKFC,IAAAA,WAAW,EAAE;AALX;AADG,CAAV;;AAUA,IAAMC,UAAU,GAAG,SAAbA,UAAa;AAAA,MAAGC,QAAH,QAAGA,QAAH;AAAA,MAAaC,OAAb,QAAaA,OAAb;AAAA,MAAsBC,OAAtB,QAAsBA,OAAtB;AAAA,sBAClB;AAAK,IAAA,KAAK,EAAET,CAAC,CAACC;AAAd,KACGM,QADH,eAEE,gCAAC,sBAAD;AACE,IAAA,KAAK,EAAEC,OADT;AAEE,IAAA,OAAO,EAAC,OAFV;AAGE,IAAA,OAAO,EAAEC;AAHX,IAFF,CADkB;AAAA,CAAnB;;eAWeH,U","sourcesContent":["import React from 'react'\r\n\r\nimport FlatButton from '../zhn-m/FlatButton'\r\n\r\nconst S = {\r\n  ROW: {\r\n     cursor: 'default',\r\n     float: 'right',\r\n     marginTop: 8,\r\n     marginBottom: 10,\r\n     marginRight: 4\r\n  }\r\n};\r\n\r\nconst RowButtons = ({ children, btStyle, onClose }) => (\r\n <div style={S.ROW}>\r\n   {children}\r\n   <FlatButton\r\n     style={btStyle}\r\n     caption=\"Close\"\r\n     onClick={onClose}\r\n   />\r\n </div>\r\n)\r\n\r\nexport default RowButtons\r\n"],"file":"RowButtons.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/header/RowButtons.js"
+ ],
+ "file": "../../../src/components/header/RowButtons.js",
+ "names": [
+  "S",
+  "ROW",
+  "cursor",
+  "marginTop",
+  "marginBottom",
+  "marginRight",
+  "RowButtons",
+  "children",
+  "btStyle",
+  "onClose"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE;AACFC,IAAAA,MAAM,EAAE,SADN;AAEF,aAAO,OAFL;AAGFC,IAAAA,SAAS,EAAE,CAHT;AAIFC,IAAAA,YAAY,EAAE,EAJZ;AAKFC,IAAAA,WAAW,EAAE;AALX;AADG,CAAV;;AAUA,IAAMC,UAAU,GAAG,SAAbA,UAAa;AAAA,MAAGC,QAAH,QAAGA,QAAH;AAAA,MAAaC,OAAb,QAAaA,OAAb;AAAA,MAAsBC,OAAtB,QAAsBA,OAAtB;AAAA,sBAClB;AAAK,IAAA,KAAK,EAAET,CAAC,CAACC,GAAd;AAAA,eACGM,QADH,eAEE,qBAAC,sBAAD;AACE,MAAA,KAAK,EAAEC,OADT;AAEE,MAAA,OAAO,EAAC,OAFV;AAGE,MAAA,OAAO,EAAEC;AAHX,MAFF;AAAA,IADkB;AAAA,CAAnB;;eAWeH,U"
+}

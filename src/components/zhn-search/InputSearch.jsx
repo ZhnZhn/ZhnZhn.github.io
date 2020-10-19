@@ -1,4 +1,4 @@
-import React, { useRef, useState, useReducer, useEffect, Fragment } from 'react'
+import { useRef, useState, useReducer, useEffect, Fragment } from 'react'
 
 import InputText from '../zhn/InputText'
 import SearchOptions from './SearchOptions'

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import OpenClose from '../../zhn/OpenClose'
 import InputSelect from '../../zhn-select/InputSelect'
 import crRowOptions from './crRowOptions'

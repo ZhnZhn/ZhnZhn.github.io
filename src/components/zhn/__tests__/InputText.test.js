@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import React from 'react'
+import { createRef } from 'react'
 import { render, screen, act } from '@testing-library/react'
 import fireEventHelpers from './_fireEventHelpers'
 
@@ -17,7 +17,7 @@ describe("InputText", () => {
     const initValue = 'abc'
     , onEnter = jest.fn()
     , onChange = jest.fn()
-    , ref = React.createRef()
+    , ref = createRef()
     //1 Test render
     , { rerender } = render(<InputText
        ref={ref}

@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
@@ -25,11 +25,12 @@ var ScrollPane = function ScrollPane(_ref) {
       TS = theme.getStyle(TH_ID),
       _cl = CL + " " + TS.CL_SCROLL + " " + className;
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: innerRef,
     className: _cl,
-    style: style
-  }, children);
+    style: style,
+    children: children
+  });
 };
 
 var _default = ScrollPane;

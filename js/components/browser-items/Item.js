@@ -2,12 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
@@ -46,16 +46,18 @@ var Item = function Item(_ref) {
 
   var _hKeyDown = (0, _useKeyEnter["default"])(_hClick);
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     role: "menuitem",
     tabIndex: "0",
     className: className,
     style: S.ITEM_DIV,
     onClick: _hClick,
-    onKeyDown: _hKeyDown
-  }, /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.ITEM_SPAN
-  }, caption), children);
+    onKeyDown: _hKeyDown,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S.ITEM_SPAN,
+      children: caption
+    }), children]
+  });
 };
 
 var _default = Item;

@@ -1,5 +1,3 @@
-import React, { Fragment } from 'react'
-
 import Link from './Link'
 
 const ROOT = 'https://fred.stlouisfed.org/';
@@ -21,7 +19,7 @@ const Delimeter = () =>
 const FredLink = ({ item={} }) => {
   const { id='', article } = item;
   return (
-    <Fragment>
+    <>
       <Link
         caption="FRED Search"
         href={C.URL_SEARCH + id}
@@ -37,7 +35,7 @@ const FredLink = ({ item={} }) => {
           href={article}
         />
       }
-   </Fragment>
+   </>
   );
 }
 

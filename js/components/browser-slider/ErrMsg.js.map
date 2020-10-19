@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/browser-slider/ErrMsg.js"],"names":["ErrMsg","errMsg","S","MSG_ERR"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,MAAM,GAAG,SAATA,MAAS,OAAgB;AAAA,MAAbC,MAAa,QAAbA,MAAa;AAC7B,MAAI,CAACA,MAAL,EAAa,OAAO,IAAP;AACb,sBACE;AAAK,IAAA,KAAK,EAAEC,kBAAEC;AAAd,KACGF,MADH,CADF;AAKD,CAPD;;eASeD,M","sourcesContent":["import React from 'react'\r\n\r\nimport S from './Style'\r\n\r\nconst ErrMsg = ({ errMsg }) => {  \r\n  if (!errMsg) return null;\r\n  return (\r\n    <div style={S.MSG_ERR}>\r\n      {errMsg}\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default ErrMsg\r\n"],"file":"ErrMsg.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/ErrMsg.js"
+ ],
+ "file": "../../../src/components/browser-slider/ErrMsg.js",
+ "names": [
+  "ErrMsg",
+  "errMsg",
+  "S",
+  "MSG_ERR"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,MAAM,GAAG,SAATA,MAAS,OAAgB;AAAA,MAAbC,MAAa,QAAbA,MAAa;AAC7B,MAAI,CAACA,MAAL,EAAa,OAAO,IAAP;AACb,sBACE;AAAK,IAAA,KAAK,EAAEC,kBAAEC,OAAd;AAAA,cACGF;AADH,IADF;AAKD,CAPD;;eASeD,M"
+}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import InputSearch from '../../zhn-search/InputSearch';
 import crRowOptions from './crRowOptions'
 

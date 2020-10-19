@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 
@@ -23,20 +23,21 @@ var EditBar = function EditBar(_ref) {
   var isShow = _ref.isShow,
       onClickGroup = _ref.onClickGroup,
       onClickList = _ref.onClickList;
-  return isShow ? /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.ROOT
-  }, /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
-    caption: "GROUP",
-    isOverwriteClass: true,
-    className: CL_BT,
-    onClick: onClickGroup
-  }), /*#__PURE__*/_react["default"].createElement(_ButtonCircle["default"], {
-    caption: "LIST",
-    isOverwriteClass: true,
-    className: CL_BT,
-    style: S.BT_LIST,
-    onClick: onClickList
-  })) : null;
+  return isShow ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
+      caption: "GROUP",
+      isOverwriteClass: true,
+      className: CL_BT,
+      onClick: onClickGroup
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
+      caption: "LIST",
+      isOverwriteClass: true,
+      className: CL_BT,
+      style: S.BT_LIST,
+      onClick: onClickList
+    })]
+  }) : null;
 };
 
 var _default = EditBar;

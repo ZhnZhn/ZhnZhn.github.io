@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CL_BT = 'zhn-select__bt-arrow'
 
 const S = {

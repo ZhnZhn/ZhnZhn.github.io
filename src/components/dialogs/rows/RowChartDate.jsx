@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Comp from '../../Comp'
 import RowChart from './RowChart'
 import RowInputSelect from './RowInputSelect'

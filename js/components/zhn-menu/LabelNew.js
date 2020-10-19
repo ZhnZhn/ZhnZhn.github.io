@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var S = {
   LABEL: {
@@ -18,9 +16,10 @@ var S = {
 };
 
 var LabelNew = function LabelNew() {
-  return /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.LABEL
-  }, "New");
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: S.LABEL,
+    children: "New"
+  });
 };
 
 var _default = LabelNew;

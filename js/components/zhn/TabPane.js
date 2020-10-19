@@ -1,11 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 //import PropTypes from "prop-types";
 var S = {
@@ -31,7 +31,7 @@ var S = {
 
 var _renderTabs = function _renderTabs(children, selectedTabIndex, hClickTab) {
   return children.map(function (tab, index) {
-    return /*#__PURE__*/_react["default"].cloneElement(tab, {
+    return /*#__PURE__*/(0, _react.cloneElement)(tab, {
       key: index,
       id: index,
       onClick: hClickTab.bind(null, index),
@@ -45,20 +45,20 @@ var _renderComponents = function _renderComponents(children, selectedTabIndex) {
     var _isSelected = index === selectedTabIndex,
         _divStyle = _isSelected ? S.BLOCK : S.NONE;
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      key: 'a' + index,
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: _divStyle,
       role: "tabpanel",
       id: "tabpanel-" + index,
-      "aria-labelledby": "tab-" + index
-    }, /*#__PURE__*/_react["default"].cloneElement(tab.props.children, {
-      key: 'comp' + index,
-      isSelected: _isSelected
-    }));
+      "aria-labelledby": "tab-" + index,
+      children: /*#__PURE__*/(0, _react.cloneElement)(tab.props.children, {
+        key: 'comp' + index,
+        isSelected: _isSelected
+      })
+    }, 'a' + index);
   });
 };
 
-var TabPane = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
+var TabPane = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var width = _ref.width,
       height = _ref.height,
       children = _ref.children;
@@ -77,16 +77,19 @@ var TabPane = /*#__PURE__*/_react["default"].forwardRef(function (_ref, ref) {
       }
     };
   }, [selectedTabIndex]);
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       width: width,
       height: height
-    }
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.TABS
-  }, _renderTabs(children, selectedTabIndex, _hClickTab)), /*#__PURE__*/_react["default"].createElement("div", {
-    style: S.DIV
-  }, _renderComponents(children, selectedTabIndex)));
+    },
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: S.TABS,
+      children: _renderTabs(children, selectedTabIndex, _hClickTab)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: S.DIV,
+      children: _renderComponents(children, selectedTabIndex)
+    })]
+  });
 });
 /*
 TabPane.propTypes = {
@@ -95,7 +98,6 @@ TabPane.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node)
 }
 */
-
 
 var _default = TabPane;
 exports["default"] = _default;

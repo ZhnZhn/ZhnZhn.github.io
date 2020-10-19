@@ -5,7 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _Item = _interopRequireDefault(require("./Item"));
 
@@ -16,10 +18,12 @@ var ItemWithCap = function ItemWithCap(props) {
       cap = item.cap,
       salePrice = item.salePrice,
       ipo = item.ipo;
-  return /*#__PURE__*/_react["default"].createElement(_Item["default"], props, /*#__PURE__*/_react["default"].createElement(_RowCap["default"], {
-    cap: cap,
-    salePrice: salePrice,
-    ipo: ipo
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Item["default"], (0, _extends2["default"])({}, props, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCap["default"], {
+      cap: cap,
+      salePrice: salePrice,
+      ipo: ipo
+    })
   }));
 };
 

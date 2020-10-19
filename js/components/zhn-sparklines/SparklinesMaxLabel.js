@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _max2 = _interopRequireDefault(require("./dataProcessing/max"));
 
@@ -27,7 +27,7 @@ var SparklinesMaxLabel = function SparklinesMaxLabel(props) {
   var _max = (0, _max2["default"])(data),
       _y = fontSize - dy;
 
-  return /*#__PURE__*/_react["default"].createElement(_SparklinesLabel["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SparklinesLabel["default"], {
     title: _max,
     x: 0,
     y: _y,

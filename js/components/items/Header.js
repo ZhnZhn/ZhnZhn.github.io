@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
@@ -83,9 +83,10 @@ var S = {
 
 var ItemTime = function ItemTime(_ref) {
   var itemTime = _ref.itemTime;
-  return !itemTime ? null : /*#__PURE__*/_react["default"].createElement("span", {
-    style: S.TIME
-  }, itemTime);
+  return !itemTime ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: S.TIME,
+    children: itemTime
+  });
 };
 
 var MenuMore = function MenuMore(_ref2) {
@@ -99,19 +100,21 @@ var MenuMore = function MenuMore(_ref2) {
       toggleFocus = _useFnFocus[1];
 
   if (!moreModel) return null;
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(SvgMore, {
-    style: S.BT_MORE,
-    svgStyle: S.SVG_MORE,
-    btRef: refBtSvg,
-    onClick: onToggle
-  }), /*#__PURE__*/_react["default"].createElement(ModalSlider, {
-    isShow: isMore,
-    rootStyle: S.ROOT_MORE,
-    className: CL_MORE,
-    style: sliderStyle,
-    model: moreModel,
-    onClose: toggleFocus
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
+      style: S.BT_MORE,
+      svgStyle: S.SVG_MORE,
+      btRef: refBtSvg,
+      onClick: onToggle
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
+      isShow: isMore,
+      rootStyle: S.ROOT_MORE,
+      className: CL_MORE,
+      style: sliderStyle,
+      model: moreModel,
+      onClose: toggleFocus
+    })]
+  });
 };
 
 var Header = function Header(_ref3) {
@@ -135,34 +138,36 @@ var Header = function Header(_ref3) {
       TS = useTheme(TH_ID),
       _captionStyle = crStyle([S.CAPTION_OPEN, !isOpen && S.CAPTION_CLOSE, !valueMoving && S.CAPTION_WIDTH]);
 
-  return /*#__PURE__*/_react["default"].createElement("div", {
-    style: (0, _extends2["default"])({}, S.ROOT, TS.ROOT)
-  }, /*#__PURE__*/_react["default"].createElement(MenuMore, {
-    isMore: isMore,
-    moreModel: moreModel,
-    sliderStyle: TS.BORDER,
-    onToggle: _toggleMore
-  }), /*#__PURE__*/_react["default"].createElement(SvgCheckBox, {
-    initValue: false,
-    style: S.CHECK_BOX,
-    onCheck: onCheck,
-    onUnCheck: onUnCheck
-  }), /*#__PURE__*/_react["default"].createElement("button", {
-    className: CL_CAPTION,
-    title: itemTitle,
-    style: _captionStyle,
-    onClick: onToggle
-  }, itemCaption), valueMoving ? /*#__PURE__*/_react["default"].createElement(_ValueMovingBadge["default"], {
-    valueMoving: valueMoving,
-    isAdminMode: isAdminMode,
-    crValueMoving: crValueMoving,
-    regCompVm: regCompVm
-  }) : /*#__PURE__*/_react["default"].createElement(ItemTime, {
-    itemType: itemTime
-  }), /*#__PURE__*/_react["default"].createElement(SvgClose, {
-    style: S.CLOSE,
-    onClose: onClose
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: (0, _extends2["default"])({}, S.ROOT, TS.ROOT),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(MenuMore, {
+      isMore: isMore,
+      moreModel: moreModel,
+      sliderStyle: TS.BORDER,
+      onToggle: _toggleMore
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgCheckBox, {
+      initValue: false,
+      style: S.CHECK_BOX,
+      onCheck: onCheck,
+      onUnCheck: onUnCheck
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+      className: CL_CAPTION,
+      title: itemTitle,
+      style: _captionStyle,
+      onClick: onToggle,
+      children: itemCaption
+    }), valueMoving ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingBadge["default"], {
+      valueMoving: valueMoving,
+      isAdminMode: isAdminMode,
+      crValueMoving: crValueMoving,
+      regCompVm: regCompVm
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemTime, {
+      itemType: itemTime
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgClose, {
+      style: S.CLOSE,
+      onClose: onClose
+    })]
+  });
 };
 /*
 Header.propTypes = {

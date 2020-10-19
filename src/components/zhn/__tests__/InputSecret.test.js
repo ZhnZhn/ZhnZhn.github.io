@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import React from 'react'
+import { createRef } from 'react'
 import { render, screen, act } from '@testing-library/react'
 import fireEventHelpers from './_fireEventHelpers'
 
@@ -16,7 +16,7 @@ describe('InputSecret', () =>{
   , _findInput = () => screen.findByPlaceholderText(placeholder);
   test('should render InputSecret with event handlers and ref', async ()=> {
     const onEnter = jest.fn()
-    , ref = React.createRef()
+    , ref = createRef()
     //1 Test render
     , { rerender } = render(<InputSecret
        ref={ref}

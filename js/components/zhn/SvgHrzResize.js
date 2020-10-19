@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
@@ -11,7 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
+
+var _react = require("react");
 
 var _isKeyEnter = _interopRequireDefault(require("./isKeyEnter"));
 
@@ -185,57 +185,62 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
     var btStyle = this.props.btStyle,
         _btStyle = (0, _extends2["default"])({}, S.BT, btStyle);
 
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      style: S.ROOT_DIV
-    }, /*#__PURE__*/_react["default"].createElement("button", {
-      className: CL_BT,
-      style: _btStyle,
-      title: "Resize container to left",
-      onMouseDown: this._hStartResizeLeft,
-      onMouseUp: this._hStopResize,
-      onKeyDown: this._hKdLeft,
-      onTouchStart: this._hStartResizeLeft,
-      onTouchEnd: this._hStopResize
-    }, /*#__PURE__*/_react["default"].createElement("svg", {
-      viewBox: "0 0 12 12",
-      width: "100%",
-      height: "100%",
-      preserveAspectRatio: "none",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/_react["default"].createElement("path", {
-      d: "M 1,6 L 11,6",
-      strokeWidth: "2",
-      strokeLinecap: "round"
-    }), /*#__PURE__*/_react["default"].createElement("path", {
-      d: "M 6,2 L 1,6 6,10",
-      strokeWidth: "2",
-      strokeLinecap: "round",
-      fill: "none"
-    }))), /*#__PURE__*/_react["default"].createElement("button", {
-      className: CL_BT,
-      style: _btStyle,
-      title: "Resize container to right",
-      onMouseDown: this._hStartResizeRight,
-      onMouseUp: this._hStopResize,
-      onKeyDown: this._hKdRight,
-      onTouchStart: this._hStartResizeRight,
-      onTouchEnd: this._hStopResize
-    }, /*#__PURE__*/_react["default"].createElement("svg", {
-      viewBox: "0 0 12 12",
-      width: "100%",
-      height: "100%",
-      preserveAspectRatio: "none",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/_react["default"].createElement("path", {
-      d: "M 1,6 L 11,6",
-      strokeWidth: "2",
-      strokeLinecap: "round"
-    }), /*#__PURE__*/_react["default"].createElement("path", {
-      d: "M 6,2 L 11,6 6,10",
-      strokeWidth: "2",
-      strokeLinecap: "round",
-      fill: "none"
-    }))));
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: S.ROOT_DIV,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+        className: CL_BT,
+        style: _btStyle,
+        title: "Resize container to left",
+        onMouseDown: this._hStartResizeLeft,
+        onMouseUp: this._hStopResize,
+        onKeyDown: this._hKdLeft,
+        onTouchStart: this._hStartResizeLeft,
+        onTouchEnd: this._hStopResize,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
+          viewBox: "0 0 12 12",
+          width: "100%",
+          height: "100%",
+          preserveAspectRatio: "none",
+          xmlns: "http://www.w3.org/2000/svg",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+            d: "M 1,6 L 11,6",
+            strokeWidth: "2",
+            strokeLinecap: "round"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+            d: "M 6,2 L 1,6 6,10",
+            strokeWidth: "2",
+            strokeLinecap: "round",
+            fill: "none"
+          })]
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+        className: CL_BT,
+        style: _btStyle,
+        title: "Resize container to right",
+        onMouseDown: this._hStartResizeRight,
+        onMouseUp: this._hStopResize,
+        onKeyDown: this._hKdRight,
+        onTouchStart: this._hStartResizeRight,
+        onTouchEnd: this._hStopResize,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
+          viewBox: "0 0 12 12",
+          width: "100%",
+          height: "100%",
+          preserveAspectRatio: "none",
+          xmlns: "http://www.w3.org/2000/svg",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+            d: "M 1,6 L 11,6",
+            strokeWidth: "2",
+            strokeLinecap: "round"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+            d: "M 6,2 L 11,6 6,10",
+            strokeWidth: "2",
+            strokeLinecap: "round",
+            fill: "none"
+          })]
+        })
+      })]
+    });
   };
 
   return SvgHrzResize;

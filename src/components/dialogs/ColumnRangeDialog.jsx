@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component, createRef } from 'react'
 
 import fn from '../../charts/seriaFns'
 
@@ -88,9 +88,9 @@ class ColumnRangeDialog extends Component {
     this._r2 = INIT.R1
     this._pointWidth = INIT.POIN_WIDTH
 
-    this._refW = React.createRef()
-    this._refR1 = React.createRef()
-    this._refR2 = React.createRef()
+    this._refW = createRef()
+    this._refR1 = createRef()
+    this._refR2 = createRef()
   }
 
   shouldComponentUpdate(nextProps, nextState){

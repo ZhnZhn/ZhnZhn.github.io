@@ -1,1 +1,24 @@
-{"version":3,"sources":["../../../src/components/toolbars/RowCaptionInput.jsx"],"names":["S","CAPTION","display","color","width","fontWeight","INPUT_TEXT","marginRight","RowCaptionInput","caption","forwardRef","initValue","maxLength","onAdd"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,OAAO,EAAE,cADF;AAEPC,IAAAA,KAAK,EAAE,OAFA;AAGPC,IAAAA,KAAK,EAAE,EAHA;AAIPC,IAAAA,UAAU,EAAG;AAJN,GADD;AAORC,EAAAA,UAAU,EAAE;AACVF,IAAAA,KAAK,EAAE,EADG;AAEVG,IAAAA,WAAW,EAAE;AAFH;AAPJ,CAAV;;AAaA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB;AAAA,MACtBC,OADsB,QACtBA,OADsB;AAAA,MAEtBC,UAFsB,QAEtBA,UAFsB;AAAA,MAEVC,SAFU,QAEVA,SAFU;AAAA,4BAGtBC,SAHsB;AAAA,MAGtBA,SAHsB,+BAGZ,CAHY;AAAA,MAItBC,KAJsB,QAItBA,KAJsB;AAAA,sBAMtB,0DACE;AAAM,IAAA,KAAK,EAAEb,CAAC,CAACC;AAAf,KAAyBQ,OAAzB,CADF,eAEE,gCAAC,aAAD,CAAG,SAAH;AACG,IAAA,GAAG,EAAEC,UADR;AAEG,IAAA,IAAI,EAAC,QAFR;AAGG,IAAA,KAAK,EAAEV,CAAC,CAACM,UAHZ;AAIG,IAAA,SAAS,EAAEK,SAJd;AAKG,IAAA,SAAS,EAAEC,SALd;AAMG,IAAA,OAAO,EAAEC;AANZ,IAFF,eAUE,gCAAC,aAAD,CAAG,OAAH;AAAW,IAAA,OAAO,EAAEA;AAApB,IAVF,CANsB;AAAA,CAAxB;;eAoBeL,e","sourcesContent":["import React from 'react'\r\n\r\nimport A from '../zhn/A'\r\n\r\nconst S = {\r\n  CAPTION: {\r\n    display: 'inline-block',\r\n    color: 'black',\r\n    width: 48,\r\n    fontWeight : 'bold',\r\n  },\r\n  INPUT_TEXT: {\r\n    width: 56,\r\n    marginRight: 12\r\n  }\r\n};\r\n\r\nconst RowCaptionInput = ({\r\n  caption,\r\n  forwardRef, initValue,\r\n  maxLength=3,\r\n  onAdd\r\n}) => (\r\n  <div>\r\n    <span style={S.CAPTION}>{caption}</span>\r\n    <A.InputText\r\n       ref={forwardRef}\r\n       type=\"number\"\r\n       style={S.INPUT_TEXT}\r\n       initValue={initValue}\r\n       maxLength={maxLength}\r\n       onEnter={onAdd}\r\n    />\r\n    <A.SvgPlus onClick={onAdd} />\r\n  </div>\r\n);\r\n\r\nexport default RowCaptionInput\r\n"],"file":"RowCaptionInput.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/RowCaptionInput.js"
+ ],
+ "file": "../../../src/components/toolbars/RowCaptionInput.js",
+ "names": [
+  "S",
+  "CAPTION",
+  "display",
+  "color",
+  "width",
+  "fontWeight",
+  "INPUT_TEXT",
+  "marginRight",
+  "RowCaptionInput",
+  "caption",
+  "forwardRef",
+  "initValue",
+  "maxLength",
+  "onAdd"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AAEA,IAAMA,CAAC,GAAG;AACRC,EAAAA,OAAO,EAAE;AACPC,IAAAA,OAAO,EAAE,cADF;AAEPC,IAAAA,KAAK,EAAE,OAFA;AAGPC,IAAAA,KAAK,EAAE,EAHA;AAIPC,IAAAA,UAAU,EAAG;AAJN,GADD;AAORC,EAAAA,UAAU,EAAE;AACVF,IAAAA,KAAK,EAAE,EADG;AAEVG,IAAAA,WAAW,EAAE;AAFH;AAPJ,CAAV;;AAaA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB;AAAA,MACtBC,OADsB,QACtBA,OADsB;AAAA,MAEtBC,UAFsB,QAEtBA,UAFsB;AAAA,MAEVC,SAFU,QAEVA,SAFU;AAAA,4BAGtBC,SAHsB;AAAA,MAGtBA,SAHsB,+BAGZ,CAHY;AAAA,MAItBC,KAJsB,QAItBA,KAJsB;AAAA,sBAMtB;AAAA,4BACE;AAAM,MAAA,KAAK,EAAEb,CAAC,CAACC,OAAf;AAAA,gBAAyBQ;AAAzB,MADF,eAEE,qBAAC,aAAD,CAAG,SAAH;AACG,MAAA,GAAG,EAAEC,UADR;AAEG,MAAA,IAAI,EAAC,QAFR;AAGG,MAAA,KAAK,EAAEV,CAAC,CAACM,UAHZ;AAIG,MAAA,SAAS,EAAEK,SAJd;AAKG,MAAA,SAAS,EAAEC,SALd;AAMG,MAAA,OAAO,EAAEC;AANZ,MAFF,eAUE,qBAAC,aAAD,CAAG,OAAH;AAAW,MAAA,OAAO,EAAEA;AAApB,MAVF;AAAA,IANsB;AAAA,CAAxB;;eAoBeL,e"
+}

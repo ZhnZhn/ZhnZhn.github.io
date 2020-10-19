@@ -6,9 +6,11 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _jsxRuntime = require("react/jsx-runtime.js");
+
 require("@testing-library/jest-dom");
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 
 var _react2 = require("@testing-library/react");
 
@@ -32,7 +34,7 @@ describe('InputSecret', function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            onEnter = jest.fn(), ref = /*#__PURE__*/_react["default"].createRef(), _render = (0, _react2.render)( /*#__PURE__*/_react["default"].createElement(_InputSecret["default"], {
+            onEnter = jest.fn(), ref = /*#__PURE__*/(0, _react.createRef)(), _render = (0, _react2.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSecret["default"], {
               ref: ref,
               placeholder: placeholder,
               onEnter: onEnter
@@ -86,7 +88,7 @@ describe('InputSecret', function () {
             _onEnterTimes = 2;
             fireChange(input, _changeValue); //5.1 Test render
 
-            rerender( /*#__PURE__*/_react["default"].createElement(_InputSecret["default"], {
+            rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSecret["default"], {
               ref: ref,
               placeholder: placeholder
             }));

@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _calcDirection = _interopRequireDefault(require("./dataProcessing/calcDirection"));
 
@@ -30,22 +30,23 @@ var SparklinesBars = function SparklinesBars(props) {
       strokeWidth = _style$strokeWidth === void 0 ? 0 : _style$strokeWidth,
       _width = barWidth || _crWidth(points);
 
-  return /*#__PURE__*/_react["default"].createElement("g", null, points.map(function (p, i) {
-    var x = p.x,
-        y = p.y,
-        _style = i === pointIndex ? (0, _extends2["default"])({}, style, {
-      fill: barStrokeColors[(0, _calcDirection["default"])(points, pointIndex)]
-    }) : style;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
+    children: points.map(function (p, i) {
+      var x = p.x,
+          y = p.y,
+          _style = i === pointIndex ? (0, _extends2["default"])({}, style, {
+        fill: barStrokeColors[(0, _calcDirection["default"])(points, pointIndex)]
+      }) : style;
 
-    return /*#__PURE__*/_react["default"].createElement("rect", {
-      key: i,
-      x: Math.ceil(x - strokeWidth * i),
-      y: Math.ceil(y),
-      width: Math.ceil(_width),
-      height: Math.ceil(Math.max(0, height - y)),
-      style: _style
-    });
-  }));
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
+        x: Math.ceil(x - strokeWidth * i),
+        y: Math.ceil(y),
+        width: Math.ceil(_width),
+        height: Math.ceil(Math.max(0, height - y)),
+        style: _style
+      }, i);
+    })
+  });
 };
 /*
 SparklinesBars.propTypes = {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import use from '../hooks/use'
 import C from '../styles/Color'
 
@@ -61,7 +59,7 @@ const _crStyleConf = ({ isOpen, openColor, notSelectedStyle }) => isOpen
 const OpenClose2 = ({
   isInitialOpen,
   style, ocStyle, notSelectedStyle,
-  captionStyle, caption,  
+  captionStyle, caption,
   openColor,
   isDraggable, option, onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop,
   children
