@@ -16,9 +16,10 @@ var C = {
   ERR_CAPTION: 'Server Response',
   MSG_EMPTY: 'Dataset is empty'
 };
-var _isArr = Array.isArray;
 
-var _crErr = crError.bind(null, C.ERR_CAPTION);
+var _isArr = Array.isArray,
+    _assign = Object.assign,
+    _crErr = crError.bind(null, C.ERR_CAPTION);
 
 var _crUrlImpl = function _crUrlImpl(dfProvider, dfCode, seriaId) {
   if (!dfProvider || !dfCode || !seriaId) {
@@ -115,6 +116,20 @@ var _s123FnUrl = function _s123FnUrl(option) {
   return _crUrl(_seriaId, option);
 };
 
+var _s3S12FnUrl = function _s3S12FnUrl(option) {
+  var items = option.items,
+      dfCode = option.dfCode,
+      subtitle = option.subtitle,
+      _seriaId = _crSeriaId(option, getValue(items[0]), getValue(items[1]));
+
+  _assign(option, {
+    dfCode: dfCode + ":" + getValue(items[2]),
+    subtitle: (subtitle || []).split(':')[0] || ''
+  });
+
+  return _crUrl(_seriaId, option);
+};
+
 var _rFnUrl = {
   DF: _dfFnUrl,
   id: _idFnUrl,
@@ -122,7 +137,8 @@ var _rFnUrl = {
   s12: _s12FnUrl,
   s21: _s21FnUrl,
   s123B: _s123BFnUrl,
-  s123: _s123FnUrl
+  s123: _s123FnUrl,
+  s3S12: _s3S12FnUrl
 };
 var DbNomicsApi = {
   getRequestUrl: function getRequestUrl(option) {

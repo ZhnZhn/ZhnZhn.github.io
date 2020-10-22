@@ -1,6 +1,9 @@
 import fnAdapter from './fnAdapter'
 
-const { crError, getValue } = fnAdapter;
+const {
+  crError,
+  getValue
+} = fnAdapter;
 
 const C = {
   URL: 'https://api.db.nomics.world/v22/series',
@@ -10,8 +13,9 @@ const C = {
   MSG_EMPTY: 'Dataset is empty'
 };
 
-const _isArr = Array.isArray;
-const _crErr = crError.bind(null, C.ERR_CAPTION);
+const _isArr = Array.isArray
+, _assign = Object.assign
+, _crErr = crError.bind(null, C.ERR_CAPTION);
 
 const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
  if (!dfProvider || !dfCode || !seriaId) {
@@ -50,9 +54,11 @@ const _idFnUrl = (option) => {
 };
 
 const _crSeriaId = ({ dfPrefix, dfSufix }, ...args) => [
-    dfPrefix, ...args, dfSufix
-  ].filter(Boolean)
-   .join('.');
+  dfPrefix, 
+  ...args,
+  dfSufix
+].filter(Boolean)
+ .join('.');
 
 const _s1FnUrl = (option) => {
   const { items } = option
@@ -104,6 +110,19 @@ const _s123FnUrl = (option) => {
   return _crUrl(_seriaId, option);
 };
 
+const _s3S12FnUrl = (option) => {
+  const { items, dfCode, subtitle } = option
+  , _seriaId = _crSeriaId(option,
+     getValue(items[0]),
+     getValue(items[1])
+   );
+  _assign(option, {
+    dfCode: `${dfCode}:${getValue(items[2])}`,
+    subtitle: (subtitle || []).split(':')[0] || ''
+  })
+  return _crUrl(_seriaId, option);
+}
+
 const _rFnUrl = {
   DF: _dfFnUrl,
   id: _idFnUrl,
@@ -111,7 +130,8 @@ const _rFnUrl = {
   s12: _s12FnUrl,
   s21: _s21FnUrl,
   s123B: _s123BFnUrl,
-  s123: _s123FnUrl
+  s123: _s123FnUrl,
+  s3S12: _s3S12FnUrl
 };
 
 const DbNomicsApi = {

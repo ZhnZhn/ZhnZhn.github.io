@@ -6,7 +6,7 @@ const {
   crItemLink,
   crItemConf,
   joinBy,
-  ymdToUTC,  
+  ymdToUTC,
   getValue
 } = AdapterFn;
 const {
@@ -85,7 +85,7 @@ const _crAqPoint = (date, y) => _isQuarter(date)
 const fnAdapter = {
   crError,
   getValue,
-  crTitle: ({ title, subtitle }, json) => {
+  crTitle: ({ title, subtitle }, json) => {    
     const _ = getSubtitle(json)
     , _subtitle = _.length > C.SUBT_MAX
          ? joinBy(': ', title, subtitle)
