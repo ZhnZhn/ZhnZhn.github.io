@@ -5,7 +5,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 var _seriaHelperFn = _interopRequireDefault(require("../seriaHelperFn"));
 
 var isNumber = _seriaHelperFn["default"].isNumber,
-    isPointArr = _seriaHelperFn["default"].isPointArr,
     crPointGetter = _seriaHelperFn["default"].crPointGetter,
     fGetY = _seriaHelperFn["default"].fGetY,
     getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
@@ -22,13 +21,6 @@ describe("isNumber", function () {
     expect(fn(undefined)).toBe(false);
     expect(fn('')).toBe(false);
     expect(fn({})).toBe(false);
-  });
-});
-describe("isPointArr", function () {
-  var fn = isPointArr;
-  test('should return true in case data points is arr and at least 2', function () {
-    var data = [[], []];
-    expect(fn(data)).toBe(true);
   });
 });
 describe("crPointGetter", function () {

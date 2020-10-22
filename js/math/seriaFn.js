@@ -12,12 +12,15 @@ var _mathFn = _interopRequireDefault(require("./mathFn"));
 var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
 
 var isNumber = _seriaHelperFn["default"].isNumber,
-    isPointArr = _seriaHelperFn["default"].isPointArr,
     crPointGetter = _seriaHelperFn["default"].crPointGetter,
     fGetY = _seriaHelperFn["default"].fGetY,
     getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
     getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
 var _isArr = Array.isArray;
+
+var _isNotEmptyArr = function _isNotEmptyArr(arr) {
+  return _isArr(arr) && arr.length > 0;
+};
 
 var _calcY = function _calcY(yPrev, yNext) {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
@@ -176,20 +179,24 @@ var fn = {
     return data;
   },
   mean: function mean(data) {
-    if (!isPointArr(data)) {
+    if (!_isNotEmptyArr(data)) {
       return [];
     }
+
+    var _crPointGetter3 = crPointGetter(data),
+        getY = _crPointGetter3.getY,
+        getX = _crPointGetter3.getX;
 
     var _sum = (0, _big["default"])(0),
         _numberOfPoints = 0,
         i = 0,
-        _p;
+        _y;
 
     for (; i < data.length; i++) {
-      _p = data[i];
+      _y = getY(data[i]);
 
-      if (isNumber(_p[1])) {
-        _sum = _sum.add(_p[1]);
+      if (isNumber(_y)) {
+        _sum = _sum.add(_y);
         _numberOfPoints++;
       }
     }
@@ -197,23 +204,25 @@ var fn = {
     var _maxIndex = data.length - 1,
         _avg = parseInt(_sum.div(_numberOfPoints).toFixed(0), 10);
 
-    return [[data[0][0], _avg], [data[_maxIndex][0], _avg]];
+    return [[getX(data[0]), _avg], [getX(data[_maxIndex]), _avg]];
   },
   median: function median(data) {
-    if (!isPointArr(data)) {
+    if (!_isNotEmptyArr(data)) {
       return [];
     }
 
-    var _d = data.map(function (arrP) {
-      return arrP[1];
-    }).sort(function (a, b) {
+    var _crPointGetter4 = crPointGetter(data),
+        getY = _crPointGetter4.getY,
+        getX = _crPointGetter4.getX;
+
+    var _d = data.map(getY).sort(function (a, b) {
       return a - b;
     }),
         _len = data.length,
         _half = _len / 2,
         _median = _half % 2 === 0 ? Math.round((_d[_half - 1] + _d[_half]) / 2) : _d[Math.round(_half) - 1];
 
-    return [[data[0][0], _median], [data[_len - 1][0], _median]];
+    return [[getX(data[0]), _median], [getX(data[_len - 1]), _median]];
   }
 };
 var _default = fn;

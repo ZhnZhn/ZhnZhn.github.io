@@ -2,7 +2,6 @@ import fns from '../seriaHelperFn'
 
 const {
   isNumber,
-  isPointArr,
   crPointGetter,
   fGetY,
   getZeroCountFromStart,
@@ -22,14 +21,6 @@ describe("isNumber", ()=>{
     expect(fn(undefined)).toBe(false)
     expect(fn('')).toBe(false)
     expect(fn({})).toBe(false)
-  })
-})
-
-describe("isPointArr", ()=>{
-  const fn = isPointArr
-  test('should return true in case data points is arr and at least 2', ()=>{
-    const data = [[], []];
-    expect(fn(data)).toBe(true)
   })
 })
 

@@ -13,9 +13,6 @@ var _isArr = Array.isArray,
 
 var seriaHelperFn = {
   isNumber: _isNumber,
-  isPointArr: function isPointArr(data) {
-    return _isArr(data) && data.length > 1 && _isArr(data[0]);
-  },
   crPointGetter: function crPointGetter(data) {
     var getX = _isUndef(data[0].x) ? function (p) {
       return p[0];

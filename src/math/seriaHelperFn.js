@@ -6,10 +6,6 @@ const _isArr = Array.isArray
 
 const seriaHelperFn = {
   isNumber: _isNumber,
-  isPointArr: data => _isArr(data)
-    && data.length > 1
-    && _isArr(data[0]),
-
   crPointGetter: data => {
     const getX = _isUndef(data[0].x)
       ? p => p[0]

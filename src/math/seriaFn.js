@@ -5,7 +5,6 @@ import fns from './seriaHelperFn'
 
 const {
   isNumber,
-  isPointArr,
   crPointGetter,
   fGetY,
   getZeroCountFromStart,
@@ -13,6 +12,9 @@ const {
 } = fns
 
 const _isArr = Array.isArray;
+
+const _isNotEmptyArr = arr => _isArr(arr)
+ && arr.length > 0;
 
 const _calcY = (yPrev, yNext) => {
 
@@ -153,34 +155,37 @@ const fn = {
   },
 
   mean: (data) => {
-    if ( !isPointArr(data) ) {
+    if (!_isNotEmptyArr(data)){
       return [];
     }
-
+    const { getY, getX } = crPointGetter(data);
     let _sum = Big(0)
-    , _numberOfPoints = 0, i = 0, _p;
-    for (;i<data.length;i++) {
-      _p = data[i]
-      if (isNumber(_p[1])) {
-        _sum = _sum.add(_p[1])
+    , _numberOfPoints = 0
+    , i = 0
+    , _y;
+    for (;i<data.length;i++) {      
+      _y = getY(data[i])
+      if (isNumber(_y)) {
+        _sum = _sum.add(_y)
         _numberOfPoints++
       }
     }
     const _maxIndex = data.length - 1
     , _avg = parseInt(_sum.div(_numberOfPoints).toFixed(0), 10);
     return [
-      [data[0][0], _avg],
-      [data[_maxIndex][0], _avg]
+      [getX(data[0]), _avg],
+      [getX(data[_maxIndex]), _avg]
     ];
   },
 
   median: (data) => {
-    if ( !isPointArr(data) ) {
+    if (!_isNotEmptyArr(data)){
       return [];
     }
+    const { getY, getX } = crPointGetter(data);
 
     const _d = data
-      .map(arrP => arrP[1])
+      .map(getY)
       .sort((a, b) => a-b)
     , _len = data.length
     , _half = _len/2
@@ -188,8 +193,8 @@ const fn = {
        ? Math.round((_d[_half-1] + _d[_half])/2)
        : _d[Math.round(_half) - 1];
     return [
-      [data[0][0], _median],
-      [data[_len-1][0], _median],
+      [getX(data[0]), _median],
+      [getX(data[_len-1]), _median],
     ];
   }
 };
