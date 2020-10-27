@@ -41,10 +41,10 @@
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/statistics-france/insee.html",
-        "oneCaption" : "Group:",
+        "oneCaption" : "Group",
         "oneURI" : "./data/statistics-france/gdp.json",
         "oneJsonProp" : "groups",
-        "twoCaption" : "Item:",
+        "twoCaption" : "Item",
         "nInitFromDate" : 16,
         "loadId" : "FS",
         "valueFn" : "RTwo",
@@ -56,9 +56,9 @@
       "type": "FS_TRADE_PRODUCT",
       "dialogProps": {
         "descrUrl": "./data/statistics-france/insee.html",
-        "oneCaption": "Product:",
+        "oneCaption": "Product",
         "oneJsonProp": "groups",
-        "twoCaption": "Trade:",
+        "twoCaption": "Flow",
         "nInitFromDate": 12,
         "loadId": "FS",
         "valueFn": "RTwo",
@@ -93,10 +93,10 @@
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/statistics-france/insee.html",
-        "oneCaption" : "Area:",
+        "oneCaption" : "Area",
         "oneURI" : "./data/statistics-france/trade-area.json",
         "oneJsonProp" : "groups",
-        "twoCaption" : "Trade:",
+        "twoCaption" : "Flow",
         "nInitFromDate" : 12,
         "loadId" : "FS",
         "valueFn" : "RTwo",
@@ -108,9 +108,23 @@
       "type": "FS_TRADE",
       "dialogProps" : {
         "descrUrl": "./data/statistics-france/insee.html",
-        "oneCaption": "Trade:",
+        "oneCaption": "Country",
         "oneJsonProp": "groups",
-        "twoCaption": "Country:",
+        "twoCaption": "Flow",
+        "nInitFromDate": 12,
+        "loadId": "FS",
+        "valueFn": "RTwo",
+        "columnName": "Value",
+        "dataSource": "INSEE"
+      }
+    },
+    "FS_TRADE_2": {
+      "type": "FS_TRADE_2",
+      "dialogProps" : {
+        "descrUrl": "./data/statistics-france/insee.html",
+        "oneCaption": "Flow",
+        "oneJsonProp": "groups",
+        "twoCaption": "Country",
         "nInitFromDate": 12,
         "loadId": "FS",
         "valueFn": "RTwo",
@@ -123,7 +137,7 @@
       "menuTitle": "Europe",
       "dialogCaption": "Foreign Trade of Europe",
       "dialogType": "DialogType4A",
-      "addProps": "FS_TRADE",
+      "addProps": "FS_TRADE_2",
       "dialogProps" : {
         "oneURI" : "./data/statistics-france/trade-countries.json"
       }
@@ -173,9 +187,9 @@
       "type": "FS_PRICE",
       "dialogProps": {
         "descrUrl" : "./data/statistics-france/insee.html",
-        "oneCaption" : "Group:",
+        "oneCaption" : "Group",
         "oneJsonProp" : "groups",
-        "twoCaption" : "Item:",
+        "twoCaption" : "Item",
         "nInitFromDate" : 12,
         "loadId" : "FS",
         "valueFn" : "RTwo",
@@ -220,7 +234,7 @@
         "descrUrl": "./data/statistics-france/insee.html",
         "optionsJsonProp": "items",
         "optionNames": "Items",
-        "itemCaption": "Item:",
+        "itemCaption": "Item",
         "nInitFromDate": 12,
         "loadId": "FS",
         "valueFn": "ROne",
