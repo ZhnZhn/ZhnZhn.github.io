@@ -62,9 +62,8 @@ module.exports = {
     }),
     new HtmlProcessingWebpackPlugin()
   ],
-  optimization: {
-    //moduleIds: false,
-    moduleIds: 'hashed',
+  optimization: {    
+    moduleIds: 'deterministic',
     runtimeChunk: 'single',
     minimize: true,
     minimizer: [new TerserPlugin()]
