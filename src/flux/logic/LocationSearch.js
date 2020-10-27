@@ -1,6 +1,4 @@
 
-import queryString from 'query-string';
-
 import CA from '../actions/ComponentActions'
 import LocationQuery from './LocationQuery'
 
@@ -12,22 +10,19 @@ const ARR_C = [
   'BC_HD'
 ];
 
-const _isQuery = (obj) => obj &&
-    ARR_C.indexOf(obj.cT) !== -1 ||
-    ARR_B.indexOf(obj.bT) !== -1;
+const _isQuery = (obj) => obj && obj.v &&
+  ARR_C.indexOf(obj.cT) !== -1 ||
+  ARR_B.indexOf(obj.bT) !== -1;
 
 const _trSearchToOptions = () => {
-  try {
-    const search = window.location
-      ? window.location.search
-      : null
-    , obj = queryString.parse(search);
-    return _isQuery(obj)
-      ? LocationQuery.toOptions(obj)
-      : undefined;
-  } catch(err) {
-    return undefined;
+  const search = window?.location?.search;
+  if (!search || search.length > 120 ){
+    return void 0;
   }
+  const options = LocationQuery.toOptions(new URLSearchParams(search));
+  return _isQuery(options)
+    ? options
+    : void 0;
 };
 
 const LocationSearch = {

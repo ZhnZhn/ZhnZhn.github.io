@@ -1,1 +1,35 @@
-{"version":3,"sources":["../../../src/flux/logic/LocationQuery.js"],"names":["_renamePropName","bT","cT","v","cN","fD","tD","_v","DOMPurify","sanitize","title","key","value","browserType","chartType","columnName","fromDate","toDate","DateUtils","getToDate","_crOptions","obj","Object","assign","LocationQuery","toOptions"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,eAAe,GAAG,SAAlBA,eAAkB,OAElB;AAAA,MADJC,EACI,QADJA,EACI;AAAA,MADAC,EACA,QADAA,EACA;AAAA,MADIC,CACJ,QADIA,CACJ;AAAA,MADOC,EACP,QADOA,EACP;AAAA,MADWC,EACX,QADWA,EACX;AAAA,MADeC,EACf,QADeA,EACf;;AACJ,MAAMC,EAAE,GAAGC,sBAAUC,QAAV,CAAmBN,CAAnB,CAAX;;AACA,SAAO;AACLO,IAAAA,KAAK,EAAEH,EADF;AAELI,IAAAA,GAAG,EAAEJ,EAFA;AAGLK,IAAAA,KAAK,EAAEL,EAHF;AAILM,IAAAA,WAAW,EAAEZ,EAJR;AAKLa,IAAAA,SAAS,EAAEZ,EALN;AAMLa,IAAAA,UAAU,EAAEX,EANP;AAOLY,IAAAA,QAAQ,EAAEX,EAPL;AAQLY,IAAAA,MAAM,EAAEX,EAAE,IAAIY,sBAAUC,SAAV;AART,GAAP;AAUD,CAdD;;AAgBA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACC,GAAD;AAAA,SAASC,MAAM,CAC/BC,MADyB,CAClBvB,eAAe,CAACqB,GAAD,CADG,EACIA,GADJ,CAAT;AAAA,CAAnB;;AAGA,IAAMG,aAAa,GAAG;AACpBC,EAAAA,SAAS,EAAEL;AADS,CAAtB;eAIeI,a","sourcesContent":["import DOMPurify from 'dompurify'\r\nimport DateUtils from '../../utils/DateUtils'\r\n\r\nconst _renamePropName = ({\r\n  bT, cT, v, cN, fD, tD\r\n}) => {\r\n  const _v = DOMPurify.sanitize(v);\r\n  return {\r\n    title: _v,\r\n    key: _v,\r\n    value: _v,\r\n    browserType: bT,\r\n    chartType: cT,\r\n    columnName: cN,\r\n    fromDate: fD,\r\n    toDate: tD || DateUtils.getToDate()\r\n  };\r\n}\r\n\r\nconst _crOptions = (obj) => Object\r\n  .assign(_renamePropName(obj), obj);\r\n\r\nconst LocationQuery = {\r\n  toOptions: _crOptions\r\n}\r\n\r\nexport default LocationQuery\r\n"],"file":"LocationQuery.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/logic/LocationQuery.js"
+ ],
+ "file": "../../../src/flux/logic/LocationQuery.js",
+ "names": [
+  "_toOptions",
+  "params",
+  "_options",
+  "forEach",
+  "value",
+  "key",
+  "DOMPurify",
+  "sanitize",
+  "_crOptions",
+  "v",
+  "bT",
+  "cT",
+  "cN",
+  "fD",
+  "tD",
+  "title",
+  "browserType",
+  "chartType",
+  "columnName",
+  "fromDate",
+  "toDate",
+  "DateUtils",
+  "getToDate",
+  "LocationQuery",
+  "toOptions"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,UAAU,GAAG,SAAbA,UAAa,CAAAC,MAAM,EAAI;AAC3B,MAAMC,QAAQ,GAAG,EAAjB;AACAD,EAAAA,MAAM,CAACE,OAAP,CAAe,UAACC,KAAD,EAAQC,GAAR,EAAgB;AAC7BH,IAAAA,QAAQ,CAACG,GAAD,CAAR,GAAgBC,sBAAUC,QAAV,CAAmBH,KAAnB,CAAhB;AACD,GAFD;AAGA,SAAOF,QAAP;AACD,CAND;;AAQA,IAAMM,UAAU,GAAG,SAAbA,UAAa,CAACP,MAAD,EAAY;AACvB,MAAAC,QAAQ,GAAGF,UAAU,CAACC,MAAD,CAArB;AAAA,MACFQ,CADE,GACwBP,QADxB,CACFO,CADE;AAAA,MACCC,EADD,GACwBR,QADxB,CACCQ,EADD;AAAA,MACKC,EADL,GACwBT,QADxB,CACKS,EADL;AAAA,MACSC,EADT,GACwBV,QADxB,CACSU,EADT;AAAA,MACaC,EADb,GACwBX,QADxB,CACaW,EADb;AAAA,MACiBC,EADjB,GACwBZ,QADxB,CACiBY,EADjB;;AAEN,uCACKZ,QADL;AAEEa,IAAAA,KAAK,EAAEN,CAFT;AAGEJ,IAAAA,GAAG,EAAEI,CAHP;AAIEL,IAAAA,KAAK,EAAEK,CAJT;AAKEO,IAAAA,WAAW,EAAEN,EALf;AAMEO,IAAAA,SAAS,EAAEN,EANb;AAOEO,IAAAA,UAAU,EAAEN,EAPd;AAQEO,IAAAA,QAAQ,EAAEN,EARZ;AASEO,IAAAA,MAAM,EAAEN,EAAE,IAAIO,sBAAUC,SAAV;AAThB;AAWD,CAdD;;AAgBA,IAAMC,aAAa,GAAG;AACpBC,EAAAA,SAAS,EAAEhB;AADS,CAAtB;eAIee,a"
+}

@@ -1,27 +1,32 @@
 import DOMPurify from 'dompurify'
 import DateUtils from '../../utils/DateUtils'
 
-const _renamePropName = ({
-  bT, cT, v, cN, fD, tD
-}) => {
-  const _v = DOMPurify.sanitize(v);
+const _toOptions = params => {
+  const _options = {};
+  params.forEach((value, key) => {
+    _options[key] = DOMPurify.sanitize(value)
+  })
+  return _options;
+};
+
+const _crOptions = (params) => {
+  const _options = _toOptions(params)
+  , { v, bT, cT, cN, fD, tD } = _options;
   return {
-    title: _v,
-    key: _v,
-    value: _v,
+    ..._options,
+    title: v,
+    key: v,
+    value: v,
     browserType: bT,
     chartType: cT,
     columnName: cN,
     fromDate: fD,
     toDate: tD || DateUtils.getToDate()
   };
-}
-
-const _crOptions = (obj) => Object
-  .assign(_renamePropName(obj), obj);
+};
 
 const LocationQuery = {
   toOptions: _crOptions
-}
+};
 
 export default LocationQuery

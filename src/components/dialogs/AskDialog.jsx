@@ -43,6 +43,12 @@ const S = {
 
 const _DF_DATA = {};
 
+const _getName = data => {  
+  const { options } = data
+  , { name, title } = options || {};
+  return name || title || '';
+};
+
 const _areEqualProps = (prevProps, nextProps) =>
   nextProps.isShow === prevProps.isShow;
 
@@ -74,8 +80,7 @@ const AskDialog = memoEqual(({
        onClick={onClose}
      />
  ], [_hLoad, onClose])
- , { options } = data
- , { name='' } = options || {};
+ , _name = _getName(data);
 
   return (
     <ModalDialog
@@ -89,7 +94,7 @@ const AskDialog = memoEqual(({
        <div style={S.ROOT_DIV}>
           <p style={S.DESCR}>
              {MSG_PREFIX}
-             <span style={S.NAME}>{name}</span>
+             <span style={S.NAME}>{_name}</span>
              {MSG_SUFFIX}
           </p>
           <MathCaptcha

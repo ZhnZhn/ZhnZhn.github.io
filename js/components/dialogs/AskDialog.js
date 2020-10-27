@@ -53,22 +53,31 @@ var S = {
 };
 var _DF_DATA = {};
 
+var _getName = function _getName(data) {
+  var options = data.options,
+      _ref = options || {},
+      name = _ref.name,
+      title = _ref.title;
+
+  return name || title || '';
+};
+
 var _areEqualProps = function _areEqualProps(prevProps, nextProps) {
   return nextProps.isShow === prevProps.isShow;
 };
 
-var AskDialog = (0, _memoEqual["default"])(function (_ref) {
-  var isShow = _ref.isShow,
-      _ref$data = _ref.data,
-      data = _ref$data === void 0 ? _DF_DATA : _ref$data,
-      onClose = _ref.onClose;
+var AskDialog = (0, _memoEqual["default"])(function (_ref2) {
+  var isShow = _ref2.isShow,
+      _ref2$data = _ref2.data,
+      data = _ref2$data === void 0 ? _DF_DATA : _ref2$data,
+      onClose = _ref2.onClose;
 
   var _refCaptcha = (0, _react.useRef)(),
       _hLoad = (0, _react.useCallback)(function () {
     if (_refCaptcha.current.isOk()) {
-      var _options = data.options;
+      var options = data.options;
 
-      _FactoryAction["default"].crLoadQuery(_options).run();
+      _FactoryAction["default"].crLoadQuery(options).run();
 
       onClose();
     }
@@ -85,10 +94,7 @@ var AskDialog = (0, _memoEqual["default"])(function (_ref) {
       onClick: onClose
     })];
   }, [_hLoad, onClose]),
-      options = data.options,
-      _ref2 = options || {},
-      _ref2$name = _ref2.name,
-      name = _ref2$name === void 0 ? '' : _ref2$name;
+      _name = _getName(data);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog["default"], {
     style: S.MODAL,
@@ -103,7 +109,7 @@ var AskDialog = (0, _memoEqual["default"])(function (_ref) {
         style: S.DESCR,
         children: [MSG_PREFIX, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: S.NAME,
-          children: name
+          children: _name
         }), MSG_SUFFIX]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MathCaptcha["default"], {
         ref: _refCaptcha,
