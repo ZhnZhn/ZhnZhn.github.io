@@ -13,7 +13,7 @@ module.exports = {
             "reflux-core",
             "fetch-jsonp",
             "big.js", "interactjs", 
-            "localforage", "query-string",            
+            "localforage",            
             "dompurify",
             "highcharts", "highcharts/highcharts-more", "highcharts/modules/treemap",
             "highcharts/modules/exporting", "highcharts/modules/offline-exporting",            
