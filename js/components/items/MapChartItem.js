@@ -26,7 +26,7 @@ var S = {
   ROOT_DIV: {
     position: 'relative',
     marginBottom: 10,
-    marginRight: 25
+    marginRight: 12
   },
   TIME: {
     display: 'inline-block',
