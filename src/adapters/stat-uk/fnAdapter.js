@@ -4,7 +4,7 @@ const {
   getValue,
   crError,
   ymdToUTC,
-  compareByDate,  
+  compareByDate,
   joinBy,
   crItemLink
 } = AdapterFn
@@ -33,6 +33,9 @@ const QUARTER_HM = {
   q4: "12"
 }
 
+const _getTimeObj = dimensions => (dimensions || {})
+  .Time || {};
+
 //Jan-20
 const _mmmYyToMls = str => {
   const _arr = str.split('-')
@@ -53,7 +56,7 @@ const _yyyyQqToMls = str => {
 
 const _fCrToMls = observations => {
   const _item = observations[0] || {}
-  , {  href='' } = (_item.dimensions || {}).time || {};
+  , { href='' } = _getTimeObj(_item.dimensions)
   return href.indexOf('yyyy-qq') !== -1
     ? _yyyyQqToMls
     : _mmmYyToMls;
@@ -98,7 +101,7 @@ const fnAdapter = {
     for (;i<observations.length; i++){
       const item = observations[i]
       , { dimensions, observation } = item
-      , { id } = (dimensions || {}).time || {}
+      , { id } = _getTimeObj(dimensions)
       , _x = _toMsl(id)
       , _y = parseFloat(observation)
       if (_isNumber(_x) && _isNumber(_y)) {

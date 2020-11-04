@@ -23,6 +23,10 @@ var _isArr = Array.isArray;
 var _crErr = crError.bind(null, C.ERR_CAPTION, C.MSG_EMPTY);
 
 var _crUrl = function _crUrl(item, vers) {
+  if (vers === void 0) {
+    vers = 1;
+  }
+
   return C.ROOT + item + C.EDT + vers + C.OBS;
 };
 
@@ -31,20 +35,20 @@ var _crTradeUrl = function _crTradeUrl(_ref) {
   var v1 = getValue(items[0]),
       v2 = getValue(items[1]),
       v3 = getValue(items[2]);
-  return _crUrl('trade', '21') + "country=" + v1 + "&commodity=" + v2 + "&direction=" + v3 + C.QUERY_TAIL;
+  return _crUrl('trade') + "countriesandterritories=" + v1 + "&standardindustrialtradeclassification=" + v2 + "&direction=" + v3 + C.QUERY_TAIL;
 };
 
 var _crCpiUrl = function _crCpiUrl(_ref2) {
   var items = _ref2.items;
   var v1 = getValue(items[0]);
-  return _crUrl('cpih01', '34') + "aggregate=" + v1 + C.QUERY_TAIL;
+  return _crUrl('cpih01') + "aggregate=" + v1 + C.QUERY_TAIL;
 };
 
 var _crPhriUrl = function _crPhriUrl(_ref3) {
   var items = _ref3.items;
   var v1 = getValue(items[0]),
       v2 = getValue(items[1]);
-  return _crUrl('index-private-housing-rental-prices', '20') + "geography=" + v1 + "&variable=" + v2 + C.QUERY_TIME;
+  return _crUrl('index-private-housing-rental-prices') + "geography=" + v1 + "&indexandyearchange=" + v2 + C.QUERY_TIME;
 };
 
 var _crGdpUrl = function _crGdpUrl(_ref4) {
@@ -52,7 +56,7 @@ var _crGdpUrl = function _crGdpUrl(_ref4) {
   var v1 = getValue(items[0]),
       v2 = getValue(items[1]),
       v3 = getValue(items[2]);
-  return _crUrl('regional-gdp-by-quarter', '5') + "geography=" + v1 + "&sic=" + v2 + "&measure=" + v3 + "&prices=cvm" + C.QUERY_TIME;
+  return _crUrl('regional-gdp-by-quarter') + "geography=" + v1 + "&unofficialstandardindustrialclassification=" + v2 + "&growthrate=" + v3 + "&prices=cvm" + C.QUERY_TIME;
 };
 
 var _rCrUrl = {
