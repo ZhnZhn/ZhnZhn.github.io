@@ -392,10 +392,10 @@ var DialogSelectN = (_dec = Decor.dialog, _dec2 = Decor.withForDate, _dec(_class
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowDate, {
           innerRef: this._refFromDate,
           isShowLabels: isShowLabels,
-          labelTitle: "From Date:",
-          initValue: initFromDate,
+          title: "From Date:",
+          initialValue: initFromDate,
           errorMsg: errNotYmdOrEmpty,
-          onTestDate: isYmdOrEmpty
+          onTest: isYmdOrEmpty
         })
       }), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowChartDate, {
         chartType: chartType,

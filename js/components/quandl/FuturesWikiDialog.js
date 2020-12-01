@@ -169,10 +169,10 @@ var FuturesWikiDialog = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__
       }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowDate, {
         innerRef: this._refFromDate,
         isShowLabels: isShowLabels,
-        labelTitle: "From Date:",
-        initValue: initFromDate,
+        title: "From Date:",
+        initialValue: initFromDate,
         errorMsg: errNotYmdOrEmpty,
-        onTestDate: isYmdOrEmpty
+        onTest: isYmdOrEmpty
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
         validationMessages: validationMessages
       })]

@@ -14,14 +14,18 @@ var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 var _crRowStyle2 = _interopRequireDefault(require("./crRowStyle"));
 
 //import PropTypes from "prop-types";
+var _getCurrent = function _getCurrent(ref) {
+  return ref.current;
+};
+
 var RowDate = function RowDate(_ref) {
   var innerRef = _ref.innerRef,
       isShowLabels = _ref.isShowLabels,
-      _ref$labelTitle = _ref.labelTitle,
-      labelTitle = _ref$labelTitle === void 0 ? '' : _ref$labelTitle,
-      initValue = _ref.initValue,
+      _ref$title = _ref.title,
+      title = _ref$title === void 0 ? '' : _ref$title,
+      initialValue = _ref.initialValue,
       errorMsg = _ref.errorMsg,
-      onTestDate = _ref.onTestDate;
+      onTest = _ref.onTest;
 
   var _refDate = (0, _react.useRef)(null),
       _crRowStyle = (0, _crRowStyle2["default"])({
@@ -33,10 +37,10 @@ var RowDate = function RowDate(_ref) {
   (0, _react.useImperativeHandle)(innerRef, function () {
     return {
       getValue: function getValue() {
-        return _refDate.current.getValue();
+        return _getCurrent(_refDate).getValue();
       },
       isValid: function isValid() {
-        return _refDate.current.isValid;
+        return _getCurrent(_refDate).isValid();
       }
     };
   }, []);
@@ -44,12 +48,12 @@ var RowDate = function RowDate(_ref) {
     style: rowStyle,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       style: labelStyle,
-      children: labelTitle
+      children: title
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField["default"], {
       ref: _refDate,
-      initialValue: initValue,
+      initialValue: initialValue,
       errorMsg: errorMsg,
-      onTest: onTestDate
+      onTest: onTest
     })]
   });
 };
@@ -57,10 +61,10 @@ var RowDate = function RowDate(_ref) {
 RowDate.propTypes = {
   innerRef: PropTypes.object,
   isShowLabels: PropTypes.bool,
-  labelTitle : PropTypes.string,
-  initValue : PropTypes.string,
-  errorMsg : PropTypes.string,
-  onTestDate : PropTypes.func
+  title: PropTypes.string,
+  initialValue: PropTypes.string,
+  errorMsg: PropTypes.string,
+  onTest: PropTypes.func
 }
 */
 

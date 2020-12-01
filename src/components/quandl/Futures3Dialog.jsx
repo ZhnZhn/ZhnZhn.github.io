@@ -4,6 +4,7 @@ import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
 
 const yearOptions = [
+  { caption: '2021', value: 2021 },
   { caption: '2020', value: 2020 },
   { caption: '2019', value: 2019 },
   { caption: '2018', value: 2018 },
@@ -140,10 +141,10 @@ class Futures3Dialog extends Component {
               <D.RowDate
                  innerRef={this._refFromDate}
                  isShowLabels={isShowLabels}
-                 labelTitle="From Date:"
-                 initValue={initFromDate}
+                 title="From Date:"
+                 initialValue={initFromDate}
                  errorMsg={errNotYmdOrEmpty}
-                 onTestDate={isYmdOrEmpty}
+                 onTest={isYmdOrEmpty}
               />
             }
            <D.ValidationMessages

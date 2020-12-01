@@ -22,6 +22,9 @@ var _dec, _class, _temp;
 var Decor = _DialogCell["default"].Decor,
     crMenuMore = _DialogCell["default"].crMenuMore;
 var yearOptions = [{
+  caption: '2021',
+  value: 2021
+}, {
   caption: '2020',
   value: 2020
 }, {
@@ -181,10 +184,10 @@ var Futures3Dialog = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/f
       }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowDate, {
         innerRef: this._refFromDate,
         isShowLabels: isShowLabels,
-        labelTitle: "From Date:",
-        initValue: initFromDate,
+        title: "From Date:",
+        initialValue: initFromDate,
         errorMsg: errNotYmdOrEmpty,
-        onTestDate: isYmdOrEmpty
+        onTest: isYmdOrEmpty
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
         validationMessages: validationMessages
       })]

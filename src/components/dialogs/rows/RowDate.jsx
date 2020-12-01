@@ -2,29 +2,32 @@ import { useRef, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
 
 import DateField from '../../zhn/DateField';
-import crRowStyle from './crRowStyle'
+import crRowStyle from './crRowStyle';
+
+const _getCurrent = ref => ref.current;
 
 const RowDate = ({
   innerRef,
-  isShowLabels, labelTitle='', initValue,
-  errorMsg, onTestDate
+  isShowLabels,
+  title='', initialValue,
+  errorMsg, onTest
 }) => {
  const _refDate = useRef(null)
  , { rowStyle, labelStyle } = crRowStyle({ isShowLabels });
  useImperativeHandle(innerRef, () => ({
-   getValue: () => _refDate.current.getValue(),
-   isValid: () => _refDate.current.isValid
+   getValue: () => _getCurrent(_refDate).getValue(),
+   isValid: () => _getCurrent(_refDate).isValid()
  }), []);
  return (
    <div style={rowStyle}>
      <span style={labelStyle}>
-        {labelTitle}
+        {title}
      </span>
      <DateField
         ref={_refDate}
-        initialValue={initValue}
+        initialValue={initialValue}
         errorMsg={errorMsg}
-        onTest={onTestDate}
+        onTest={onTest}
      />
   </div>
  );
@@ -34,10 +37,10 @@ const RowDate = ({
 RowDate.propTypes = {
   innerRef: PropTypes.object,
   isShowLabels: PropTypes.bool,
-  labelTitle : PropTypes.string,
-  initValue : PropTypes.string,
-  errorMsg : PropTypes.string,
-  onTestDate : PropTypes.func
+  title: PropTypes.string,
+  initialValue: PropTypes.string,
+  errorMsg: PropTypes.string,
+  onTest: PropTypes.func
 }
 */
 

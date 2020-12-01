@@ -133,10 +133,10 @@ class FuturesWikiDialog extends Component {
              <D.RowDate
                 innerRef={this._refFromDate}
                 isShowLabels={isShowLabels}
-                labelTitle="From Date:"
-                initValue={initFromDate}
+                title="From Date:"
+                initialValue={initFromDate}
                 errorMsg={errNotYmdOrEmpty}
-                onTestDate={isYmdOrEmpty}
+                onTest={isYmdOrEmpty}
              />
            }
            <D.ValidationMessages
