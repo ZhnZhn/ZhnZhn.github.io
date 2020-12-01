@@ -13,7 +13,7 @@ const LoadConfig = {
   [LT.DBN]: LoadImpl.DbNomics,
 
   [LT.B]: LoadImpl.Barchart,
-  [LT.AL]: LoadImpl.AlphaVantage,  
+  [LT.AL]: LoadImpl.AlphaVantage,
   [LT.IEX]: LoadImpl.Iex,
   [LT.FMP]: LoadImpl.Fmp,
 
@@ -33,6 +33,7 @@ const LoadConfig = {
   [LT.BN]:  LoadImpl.Bn,
   [LT.CRC]: LoadImpl.Crc,
   [LT.CG]: LoadImpl.Cg,
+  [LT.CM]: LoadImpl.Cm,
   [LT.CP]: LoadImpl.Cp,
 
   [LT.FS]: LoadImpl.Insee,

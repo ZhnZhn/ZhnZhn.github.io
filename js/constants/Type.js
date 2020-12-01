@@ -90,6 +90,7 @@ var LoadType = {
   BN: 'BN',
   CRC: 'CRC',
   CG: 'CG',
+  CM: 'CM',
   CP: 'CP',
   WL: 'WL'
 };

@@ -1,0 +1,25 @@
+{
+  "isCv": true,
+  "items":[
+  {"c":"Bitcoin","v":"BTC"},
+	{"c":"Ethereum","v":"ETH"},
+	{"c":"XRP","v":"XRP"},
+	{"c":"Tether","v":"USDT"},
+	{"c":"Chainlink","v":"LINK"},
+	{"c":"Bitcoin Cash","v":"BCH"},
+	{"c":"Litecoin","v":"LTC"},
+	{"c":"Cardano","v":"ADA"},
+	{"c":"Polkadot","v":"DOT"},
+	{"c":"Binance Coin","v":"BNB"},
+  {"c":"Stellar","v":"XLM"},
+	{"c":"Bitcoin SV","v":"BSV"},
+	{"c":"EOS","v":"EOS"},
+	{"c":"USD Coin","v":"USDC"},
+	{"c":"Wrapped Bitcoin","v":"WBTC"},
+	{"c":"TRON","v":"TRX"},
+	{"c":"Monero","v":"XMR"},
+	{"c":"Tezos","v":"XTZ"},
+	{"c":"NEM","v":"XEM"},
+	{"c":"DAI","v":"DAI"}
+  ]
+}

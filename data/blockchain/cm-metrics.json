@@ -1,0 +1,25 @@
+{
+  "items":[
+    {"c":"USD Denominated Closing Price", "v": "PriceUSD" },
+    {"c":"BTC Denominated Price", "v": "PriceBTC" },
+    {"c":"Market Cap (USD)", "v": "CapMrktCurUSD" },
+    {"c":"30 Day Volatility", "v": "VtyDayRet30d" },
+    {"c":"60 Day Volatility", "v": "VtyDayRet60d" },
+    {"c":"180 Day Volatility", "v": "VtyDayRet180d" },
+    {"c":"Active Address Count", "v": "AdrActCnt"},
+    {"c":"Transaction Count", "v": "TxCnt"},
+    {"c":"Transaction Transfer Count", "v": "TxTfrCnt"},
+    {"c":"Mean Transaction Size (native unit)", "v":"TxTfrValMeanNtv"},
+    {"c":"Mean Transaction Size (USD)", "v":"TxTfrValMeanUSD"},
+    {"c":"Median Transaction Size (native unit)", "v":"TxTfrValMedNtv"},
+    {"c":"Median Transaction Size (USD)", "v":"TxTfrValMedUSD"},
+    {"c":"Mean Transaction Fee (native unit)", "v":"FeeMeanNtv"},
+    {"c":"Mean Transaction Fee (USD)", "v":"FeeMeanUSD"},
+    {"c":"Median Transaction Fee (native unit)", "v":"FeeMedNtv"},
+    {"c":"Median Transaction Fee (USD)", "v":"FeeMedUSD"},
+    {"c":"Total Fees (native unit)", "v":"FeeTotNtv"},
+    {"c":"Total Fees (USD)", "v":"FeeTotUSD"},
+    {"c":"Mean Hash Rate", "v":"HashRate"},
+    {"c":"Mean Difficulty", "v":"DiffMean"}    
+  ]
+}

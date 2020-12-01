@@ -51,6 +51,8 @@ var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 
 var _Cg = _interopRequireDefault(require("./coin-gecko/Cg"));
 
+var _Cm = _interopRequireDefault(require("./coin-metrics/Cm"));
+
 var _Cp = _interopRequireDefault(require("./coin-paprika/Cp"));
 
 var RouterAdapter = (0, _extends2["default"])({
@@ -76,6 +78,7 @@ var RouterAdapter = (0, _extends2["default"])({
   Bn: _Bn["default"],
   Crc: _Crc["default"],
   Cg: _Cg["default"],
+  Cm: _Cm["default"],
   Cp: _Cp["default"]
 });
 var _default = RouterAdapter;

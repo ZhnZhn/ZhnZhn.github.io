@@ -95,13 +95,14 @@ export const LoadType = {
   BN: 'BN',
   CRC: 'CRC',
   CG: 'CG',
+  CM: 'CM',
   CP: 'CP',
   WL: 'WL'
 }
 
 export const CompItemType = {
   CHART_AREA: 'CHART_AREA',
-  EUROSTAT_MAP: 'EUROSTAT_MAP',  
+  EUROSTAT_MAP: 'EUROSTAT_MAP',
   TABLE: 'TABLE',
   ALPHA_PERF: 'ALPHA_PERF',
   INFO_ITEM: 'INFO_ITEM',
