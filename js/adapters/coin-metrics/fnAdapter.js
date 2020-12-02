@@ -32,7 +32,7 @@ var fnAdapter = {
   crData: function crData(json) {
     var arr = json.metricData.series,
         data = arr.map(function (item) {
-      return [ymdhmsToUTC(item.time.replace('T', ' ').replace('Z', '')), parseFloat(item.values[0])];
+      return [ymdhmsToUTC(item.time.replace('Z', ''), 'T'), parseFloat(item.values[0])];
     });
     return data;
   },

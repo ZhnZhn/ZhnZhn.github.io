@@ -28,7 +28,7 @@ const fnAdapter = {
     crData: (json) => {
       const arr = json.metricData.series
       , data = arr.map(item => [
-          ymdhmsToUTC(item.time.replace('T', ' ').replace('Z', '')),
+          ymdhmsToUTC(item.time.replace('Z', ''), 'T'),
           parseFloat(item.values[0])
       ]);
       return data;

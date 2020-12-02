@@ -153,13 +153,13 @@ const DateUtils = {
 
    return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
  },
- ymdhmsToUTC(dateStr) {
-	 const _dtArr = dateStr.split(' ')
-	 , _ymdArr = _dtArr[0].split('-')
-	 , _hmsArr = _dtArr[1].split(':');
+ ymdhmsToUTC(dateStr, dtDelimeter=' ') {
+	 const [ymdStr='', hmsStr=''] = dateStr.split(dtDelimeter)
+	 , [yearStr, monthStr, dayStr] = ymdStr.split('-')
+	 , [hourStr, minuteStr, secondStr] = hmsStr.split(':');
 	 return Date.UTC(
-		 _ymdArr[0], (parseInt(_ymdArr[1], 10)-1), _ymdArr[2],
-		 _hmsArr[0], _hmsArr[1], _hmsArr[2]
+		 yearStr, _toIntMonth(monthStr), dayStr,
+		 hourStr, minuteStr, secondStr
 	 );
  },
 

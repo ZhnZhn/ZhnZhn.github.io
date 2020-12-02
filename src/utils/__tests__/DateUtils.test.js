@@ -131,9 +131,14 @@ describe('ymdToUTC', ()=> {
 })
 
 describe('ymdhmsToUTC', ()=> {
-  const fn = ymdhmsToUTC;
+  const fn = ymdhmsToUTC
+  //'2010-01-01 12:00:00'
+  , DATE_IN_MLS = 1262347200000;
   test('should retun mls UTC-0 for str date', ()=> {
-    expect(fn('2010-01-01 12:00:00')).toBe(Date.UTC(2010, 0, 1, 12, 0, 0))
+    expect(fn('2010-01-01 12:00:00')).toBe(DATE_IN_MLS)
+  })
+  test('should retun mls UTC-0 for str date with dtDelimeter', ()=> {
+    expect(fn('2010-01-01T12:00:00', 'T')).toBe(DATE_IN_MLS)
   })
 })
 

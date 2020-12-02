@@ -216,12 +216,26 @@ var DateUtils = {
 
     return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
   },
-  ymdhmsToUTC: function ymdhmsToUTC(dateStr) {
-    var _dtArr = dateStr.split(' '),
-        _ymdArr = _dtArr[0].split('-'),
-        _hmsArr = _dtArr[1].split(':');
+  ymdhmsToUTC: function ymdhmsToUTC(dateStr, dtDelimeter) {
+    if (dtDelimeter === void 0) {
+      dtDelimeter = ' ';
+    }
 
-    return Date.UTC(_ymdArr[0], parseInt(_ymdArr[1], 10) - 1, _ymdArr[2], _hmsArr[0], _hmsArr[1], _hmsArr[2]);
+    var _dateStr$split = dateStr.split(dtDelimeter),
+        _dateStr$split$ = _dateStr$split[0],
+        ymdStr = _dateStr$split$ === void 0 ? '' : _dateStr$split$,
+        _dateStr$split$2 = _dateStr$split[1],
+        hmsStr = _dateStr$split$2 === void 0 ? '' : _dateStr$split$2,
+        _ymdStr$split = ymdStr.split('-'),
+        yearStr = _ymdStr$split[0],
+        monthStr = _ymdStr$split[1],
+        dayStr = _ymdStr$split[2],
+        _hmsStr$split = hmsStr.split(':'),
+        hourStr = _hmsStr$split[0],
+        minuteStr = _hmsStr$split[1],
+        secondStr = _hmsStr$split[2];
+
+    return Date.UTC(yearStr, _toIntMonth(monthStr), dayStr, hourStr, minuteStr, secondStr);
   },
   getUTCTime: function getUTCTime(ms) {
     if (!Number.isInteger(ms)) {
