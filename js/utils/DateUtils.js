@@ -5,8 +5,12 @@ exports["default"] = void 0;
 var MIN_YEAR = 1990;
 var DAY_IN_MLS = 1000 * 60 * 60 * 24;
 
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number';
+};
+
 var _isNaN = function _isNaN(n) {
-  return typeof n === 'number' && n - n !== 0;
+  return _isNumber(n) && n - n !== 0;
 };
 
 var _isStr = function _isStr(str) {
@@ -38,7 +42,7 @@ var _notInIntervalStrict = function _notInIntervalStrict(n, min, max) {
 };
 
 var _notInLengthMinMax = function _notInLengthMinMax(str, length, min, max) {
-  return typeof str === 'string' && str.length !== length || _notInIntervalStrict(parseInt(str, 10), min, max) ? true : false;
+  return _isStr(str) && str.length !== length || _notInIntervalStrict(parseInt(str, 10), min, max) ? true : false;
 };
 
 var _isYmd = function _isYmd(yStr, mStr, dStr, _temp) {
@@ -94,7 +98,7 @@ var DateUtils = {
       minYear = MIN_YEAR;
     }
 
-    if (typeof str !== 'string') {
+    if (!_isStr(str)) {
       return false;
     }
 
@@ -104,9 +108,12 @@ var DateUtils = {
       return false;
     }
 
-    var _arr = _str.split('-');
+    var _str$split = _str.split('-'),
+        y = _str$split[0],
+        m = _str$split[1],
+        d = _str$split[2];
 
-    return _isYmd(_arr[0], _arr[1], _arr[2], {
+    return _isYmd(y, m, d, {
       nForecastDate: nForecastDate,
       minYear: minYear
     });
@@ -131,7 +138,7 @@ var DateUtils = {
     return _getYmdUTC(_d, 0) + " " + _getTimeUTC(_d) + " UTC";
   },
   mlsToDmy: function mlsToDmy(mlsUTC) {
-    if (typeof mlsUTC !== 'number' || !isFinite(mlsUTC)) {
+    if (!(_isNumber(mlsUTC) && isFinite(mlsUTC))) {
       return '';
     }
 

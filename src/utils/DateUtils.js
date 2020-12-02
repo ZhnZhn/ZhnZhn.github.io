@@ -2,8 +2,8 @@
 const MIN_YEAR = 1990;
 const DAY_IN_MLS = 1000*60*60*24;
 
-const _isNaN = n => typeof n === 'number'
-  && (n-n !== 0);
+const _isNumber = n => typeof n === 'number';
+const _isNaN = n => _isNumber(n) && (n-n !== 0);
 const _isStr = str => typeof str === 'string';
 const _isUndef = v => typeof v === 'undefined';
 const _pad2 = n => n<10 ? '0'+n : ''+n;
@@ -12,13 +12,12 @@ const _toIntMonth = str => parseInt(str, 10)-1;
 const _splitDateStr = str => (str || '')
   .toString().split('-');
 
-const _isLikelyQuarter = (str) => _isStr(str)
+const _isLikelyQuarter = str => _isStr(str)
   && str[0].toUpperCase() === 'Q';
-
 
 const _notInIntervalStrict = (n, min, max) => _isNaN(n) || (n<min || n>max);
 const _notInLengthMinMax = (str, length, min, max) =>
- (typeof str === 'string' && str.length !== length)
+ (_isStr(str) && str.length !== length)
  || _notInIntervalStrict(parseInt(str, 10), min, max)
    ? true
    : false;
@@ -54,7 +53,7 @@ const DateUtils = {
 
   //YYYY-MM-DD valid format
 	isYmd(str, nForecastDate=0, minYear=MIN_YEAR){
-     if (typeof str !== 'string') {
+     if (!_isStr(str)) {
 			 return false;
 		 }
 		 const _str = str.trim();
@@ -62,8 +61,8 @@ const DateUtils = {
 			 return false;
 		 }
 
-     const _arr = _str.split('-');
-     return _isYmd(_arr[0], _arr[1], _arr[2], {nForecastDate, minYear});
+     const [y, m, d] = _str.split('-');
+     return _isYmd(y, m, d, {nForecastDate, minYear});
 	},
 
 	isYmdOrEmpty(str){
@@ -89,9 +88,7 @@ const DateUtils = {
 
 
 	mlsToDmy(mlsUTC){
-		if (typeof mlsUTC !== 'number'
-		    || !isFinite(mlsUTC)
-		) {
+		if ( !(_isNumber(mlsUTC) && isFinite(mlsUTC)) ) {
 			return '';
 		}
 		const d = new Date(mlsUTC);
@@ -99,8 +96,8 @@ const DateUtils = {
 			return '';
 		}
 	  return ("0" + d.getUTCDate()).slice(-2)
-	         + "-" + ("0" + (d.getUTCMonth() + 1) ).slice(-2)
-	         + "-" + d.getUTCFullYear() ;
+	    + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2)
+	    + "-" + d.getUTCFullYear() ;
 	},
 
  dmyToUTC(str){
