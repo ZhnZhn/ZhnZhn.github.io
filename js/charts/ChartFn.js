@@ -56,6 +56,8 @@ var C = {
   SERIA_LABEL_WIDTH: 125,
   SERIA_LABEL_HEIGHT: 20
 };
+var DMY_FORMAT = '%A, %b %d, %Y',
+    TDMY_FORMAT = '%H:%M, %A, %b %d, %Y';
 
 var _initOptionsZhSeries = function _initOptionsZhSeries(chart) {
   var options = chart.options,
@@ -277,17 +279,11 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
   crTpId: function crTpId() {
     return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 9)).toUpperCase();
   },
-  toDmy: dateFormat.bind(null, '%A, %b %d, %Y'),
-  toTdmy: dateFormat.bind(null, '%H:%M, %A, %b %d, %Y'),
-
-  /*
-  toTdmyIf: (mls) => {
-    const _t = dateFormat('%H:%M', mls);
-    return _t === '00:00'
-      ? dateFormat('%A, %b %d, %Y', mls)
-      : dateFormat('%H:%M, %A, %b %d, %Y', mls);
+  toDmy: dateFormat.bind(null, DMY_FORMAT),
+  toTdmy: dateFormat.bind(null, TDMY_FORMAT),
+  toTdmyIf: function toTdmyIf(mls) {
+    return dateFormat('%H:%M', mls) === '00:00' ? ChartFn.toDmy(mls) : ChartFn.toTdmy(mls);
   },
-  */
   setMinMaxPlotLines: function setMinMaxPlotLines(_ref6) {
     var plotLines = _ref6.plotLines,
         min = _ref6.min,

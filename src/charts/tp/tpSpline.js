@@ -3,7 +3,7 @@ import fn from './tpFn'
 const {
   crHeader, crRow,
   toTdmy,
-  //toTdmyIf,
+  toTdmyIf,
   getStatus
  } = fn;
 
@@ -28,12 +28,11 @@ const tpSpline = {
     ..._splineOptions,
     fnDateFormat: toTdmy,
   },
-  /*
   vTdmyIf: {
     ..._splineOptions,
     fnDateFormat: toTdmyIf
   }
-  */
+
 };
 
 export default tpSpline

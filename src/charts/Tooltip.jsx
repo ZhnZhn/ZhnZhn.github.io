@@ -52,7 +52,7 @@ const _fFormatter = (option) => function(){
 };
 
 
-const Tooltip = {  
+const Tooltip = {
   vDmy: _fFormatter({...tpSpline.vDmy}),
   vTdmyIf: _fFormatter({...tpSpline.vTdmyIf}),
   vTdmy: _fFormatter({...tpSpline.vTdmy}),
@@ -68,6 +68,7 @@ const Tooltip = {
 
   volume: _fFormatter({...tpStock.volume}),
   volumeTdmy: _fFormatter({...tpStock.volumeTdmy}),
+  volumeTdmyIf: _fFormatter({...tpStock.volumeTdmyIf}),
   ath: _fFormatter({...tpStock.ath}),
   hl: _fFormatter({...tpStock.hl}),
 

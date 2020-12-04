@@ -134,30 +134,32 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       spacingTop: 25
     }).addCaption(title, subtitle).clearSeries();
   },
-  stockConfig: function stockConfig(id, dataOption) {
-    var dataVolumeColumn = dataOption.dataVolumeColumn,
-        dataVolume = dataOption.dataVolume,
-        dataATH = dataOption.dataATH,
-        minClose = dataOption.minClose,
-        maxClose = dataOption.maxClose,
-        isNotZoomToMinMax = dataOption.isNotZoomToMinMax,
-        isDrawDeltaExtrems = dataOption.isDrawDeltaExtrems,
-        data = dataOption.data,
-        dataHigh = dataOption.dataHigh,
-        dataLow = dataOption.dataLow,
-        dataOpen = dataOption.dataOpen,
-        seriaType = dataOption.seriaType,
-        seriaColor = dataOption.seriaColor,
-        seriaWidth = dataOption.seriaWidth;
+  stockConfig: function stockConfig(id, option) {
+    var dataVolumeColumn = option.dataVolumeColumn,
+        dataVolume = option.dataVolume,
+        dataATH = option.dataATH,
+        minClose = option.minClose,
+        maxClose = option.maxClose,
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
+        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
+        data = option.data,
+        dataHigh = option.dataHigh,
+        dataLow = option.dataLow,
+        dataOpen = option.dataOpen,
+        seriaType = option.seriaType,
+        seriaColor = option.seriaColor,
+        seriaWidth = option.seriaWidth;
     return this.areaConfig({
       spacingTop: 25,
       seriaType: seriaType,
       seriaColor: seriaColor,
       seriaWidth: seriaWidth
-    }).addTooltip(_Tooltip["default"].vDmy).addMiniVolume({
+    }) //.addTooltip(Tooltip.vDmy)
+    .addTooltip(_Tooltip["default"].vTdmyIf).addMiniVolume({
       id: id,
       dColumn: dataVolumeColumn,
-      dVolume: dataVolume
+      dVolume: dataVolume,
+      tooltipColumn: _Chart["default"].fTooltip(_Tooltip["default"].volumeTdmyIf)
     }).addMiniATH({
       id: id,
       data: dataATH

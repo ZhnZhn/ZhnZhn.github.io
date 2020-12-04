@@ -42,6 +42,9 @@ const C = {
   SERIA_LABEL_HEIGHT : 20
 };
 
+const DMY_FORMAT = '%A, %b %d, %Y'
+, TDMY_FORMAT = '%H:%M, %A, %b %d, %Y';
+
 const _initOptionsZhSeries = (chart) => {
   const options = chart.options
       , zhSeries = options.zhSeries;
@@ -219,16 +222,11 @@ const ChartFn = {
       .toUpperCase();
   },
 
-  toDmy: dateFormat.bind(null, '%A, %b %d, %Y'),
-  toTdmy: dateFormat.bind(null, '%H:%M, %A, %b %d, %Y'),
-  /*
-  toTdmyIf: (mls) => {
-    const _t = dateFormat('%H:%M', mls);
-    return _t === '00:00'
-      ? dateFormat('%A, %b %d, %Y', mls)
-      : dateFormat('%H:%M, %A, %b %d, %Y', mls);
-  },
-  */
+  toDmy: dateFormat.bind(null, DMY_FORMAT),
+  toTdmy: dateFormat.bind(null, TDMY_FORMAT),
+  toTdmyIf: mls => dateFormat('%H:%M', mls) === '00:00'
+    ? ChartFn.toDmy(mls)
+    : ChartFn.toTdmy(mls),
 
   setMinMaxPlotLines({ plotLines, min, max, value, isDrawDeltaExtrems}){
     if (isDrawDeltaExtrems) {

@@ -12,6 +12,7 @@ var _tpFn = _interopRequireDefault(require("./tpFn"));
 var crHeader = _tpFn["default"].crHeader,
     crRow = _tpFn["default"].crRow,
     toTdmy = _tpFn["default"].toTdmy,
+    toTdmyIf = _tpFn["default"].toTdmyIf,
     getStatus = _tpFn["default"].getStatus;
 
 var _crValue = function _crValue(_ref) {
@@ -39,14 +40,10 @@ var tpSpline = {
   vDmy: _splineOptions,
   vTdmy: (0, _extends2["default"])({}, _splineOptions, {
     fnDateFormat: toTdmy
-  })
-  /*
-  vTdmyIf: {
-    ..._splineOptions,
+  }),
+  vTdmyIf: (0, _extends2["default"])({}, _splineOptions, {
     fnDateFormat: toTdmyIf
-  }
-  */
-
+  })
 };
 var _default = tpSpline;
 exports["default"] = _default;

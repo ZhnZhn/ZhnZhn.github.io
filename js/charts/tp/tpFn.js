@@ -13,7 +13,8 @@ var crTpId = _ChartFn["default"].crTpId,
     toNumberFormat = _ChartFn["default"].toNumberFormat,
     toNumberFormatAll = _ChartFn["default"].toNumberFormatAll,
     toDmy = _ChartFn["default"].toDmy,
-    toTdmy = _ChartFn["default"].toTdmy;
+    toTdmy = _ChartFn["default"].toTdmy,
+    toTdmyIf = _ChartFn["default"].toTdmyIf;
 var C = {
   TITLE_C: '#a487d4',
   YEAR_C: '#fdb316',
@@ -118,7 +119,7 @@ var tpFn = {
   toNumberFormatAll: toNumberFormatAll,
   toDmy: toDmy,
   toTdmy: toTdmy,
-  //toTdmyIf,
+  toTdmyIf: toTdmyIf,
   addHideHandler: function addHideHandler(id, point, fn) {
     _addClickOnceById(id, _fHideTooltip(point, fn));
   },

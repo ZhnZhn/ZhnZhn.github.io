@@ -81,6 +81,7 @@ var Tooltip = {
   eps: _fFormatter((0, _extends2["default"])({}, _tpScatter["default"].eps)),
   volume: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volume)),
   volumeTdmy: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volumeTdmy)),
+  volumeTdmyIf: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volumeTdmyIf)),
   ath: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].ath)),
   hl: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].hl)),
   donut: _fFormatter((0, _extends2["default"])({}, _tpDonut["default"].value)),

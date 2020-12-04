@@ -3,7 +3,8 @@ import fn from './tpFn'
 const {
   crHeader, crRow,
   crNotEmptySpan,
-  toTdmy
+  toTdmy,
+  toTdmyIf
 } = fn;
 
 const _crVolume = function({ date, id, value, point }){
@@ -51,6 +52,11 @@ const tpStock = {
   volumeTdmy: {
     fnTemplate: _crVolume,
     fnDateFormat: toTdmy,
+    isWithValue: true
+  },
+  volumeTdmyIf: {
+    fnTemplate: _crVolume,
+    fnDateFormat: toTdmyIf,
     isWithValue: true
   },
   ath: {

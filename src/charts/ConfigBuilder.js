@@ -104,7 +104,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       .addCaption(title, subtitle)
       .clearSeries();
   },
-  stockConfig(id, dataOption){
+  stockConfig(id, option){
     const {
       dataVolumeColumn, dataVolume,
       dataATH,
@@ -113,13 +113,18 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       isDrawDeltaExtrems,
       data, dataHigh, dataLow, dataOpen,
       seriaType, seriaColor, seriaWidth
-    } = dataOption;
-    return this.areaConfig({ spacingTop: 25, seriaType, seriaColor, seriaWidth })
-      .addTooltip(Tooltip.vDmy)
+    } = option;
+    return this.areaConfig({
+        spacingTop: 25,
+        seriaType, seriaColor, seriaWidth
+      })
+      //.addTooltip(Tooltip.vDmy)
+      .addTooltip(Tooltip.vTdmyIf)
       .addMiniVolume({
         id,
         dColumn: dataVolumeColumn,
-        dVolume: dataVolume
+        dVolume: dataVolume,
+        tooltipColumn: Chart.fTooltip(Tooltip.volumeTdmyIf)
       })
       .addMiniATH({
         id, data: dataATH
