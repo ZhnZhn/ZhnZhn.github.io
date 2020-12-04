@@ -57,6 +57,8 @@ var _MsgRenderErr = _interopRequireDefault(require("./MsgRenderErr"));
 
 var _HighchartWrapper = _interopRequireDefault(require("./HighchartWrapper"));
 
+var _toLink = _interopRequireDefault(require("./toLink"));
+
 var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   SpinnerLoading: _SpinnerLoading["default"],
   ScrollPane: _ScrollPane["default"],
@@ -81,7 +83,8 @@ var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
   TabPane: _TabPane["default"],
   Tab: _Tab["default"],
   MsgRenderErr: _MsgRenderErr["default"],
-  HighchartWrapper: _HighchartWrapper["default"]
+  HighchartWrapper: _HighchartWrapper["default"],
+  toLink: _toLink["default"]
 });
 var _default = A;
 exports["default"] = _default;

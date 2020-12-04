@@ -1,3 +1,4 @@
+import toLink from '../zhn/toLink'
 import FN from './tableFn'
 import S from './Style'
 
@@ -10,7 +11,7 @@ const _crLinkEl = (id, title, fn) => {
   return (
     <a
       className={S.CL_LINK}
-      href={_href}
+      href={toLink(_href)}
     >
       {title}
     </a>

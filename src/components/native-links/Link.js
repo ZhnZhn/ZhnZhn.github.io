@@ -1,3 +1,5 @@
+import toLink from '../zhn/toLink'
+
 const S = {
   LINK: {
     display: 'inline-block',
@@ -14,7 +16,7 @@ const Link = ({
   <a
     className={className}
     style={{...S.LINK, ...style}}
-    href={href}
+    href={toLink(href)}
   >
     {caption}
   </a>

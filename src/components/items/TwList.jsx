@@ -1,9 +1,15 @@
 import useToggle from '../hooks/useToggle'
 
 import Comp from '../Comp'
+
 import ItemHeader from './ItemHeader'
 
-const { ShowHide, ItemList, SvgClose } = Comp;
+const {
+  toLink,
+  ShowHide,
+  ItemList,
+  SvgClose
+} = Comp;
 
 const CL = 'twit'
 
@@ -42,15 +48,16 @@ const Twit = ({ item }) => {
     link,
     text,
     retweet, like
-  } = item;
+  } = item
+  , _link = toLink(link);
   return (
-    <div className={CL} href={link}>
+    <div className={CL} href={_link}>
       <div style={S.ROW_TITLE}>
         <span>{`${user} `}</span>
         <span>{date}</span>
         <SvgClose style={S.BT_CLOSE} onClose={toggleIsShow} />
       </div>
-      <a href={link}>
+      <a href={_link}>
         <div style={S.PL_16}>{text}</div>
       </a>
       <div style={S.ROW}>

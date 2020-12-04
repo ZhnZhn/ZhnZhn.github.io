@@ -13,7 +13,8 @@ var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 
-var ShowHide = _Comp["default"].ShowHide,
+var toLink = _Comp["default"].toLink,
+    ShowHide = _Comp["default"].ShowHide,
     ItemList = _Comp["default"].ItemList,
     SvgClose = _Comp["default"].SvgClose;
 var CL = 'twit';
@@ -60,10 +61,12 @@ var Twit = function Twit(_ref) {
       link = item.link,
       text = item.text,
       retweet = item.retweet,
-      like = item.like;
+      like = item.like,
+      _link = toLink(link);
+
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL,
-    href: link,
+    href: _link,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S.ROW_TITLE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
@@ -75,7 +78,7 @@ var Twit = function Twit(_ref) {
         onClose: toggleIsShow
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
-      href: link,
+      href: _link,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         style: S.PL_16,
         children: text

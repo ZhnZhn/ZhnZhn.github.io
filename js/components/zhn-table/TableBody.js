@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
+var _toLink = _interopRequireDefault(require("../zhn/toLink"));
+
 var _tableFn = _interopRequireDefault(require("./tableFn"));
 
 var _Style = _interopRequireDefault(require("./Style"));
@@ -22,7 +24,7 @@ var _crLinkEl = function _crLinkEl(id, title, fn) {
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     className: _Style["default"].CL_LINK,
-    href: _href,
+    href: (0, _toLink["default"])(_href),
     children: title
   });
 };

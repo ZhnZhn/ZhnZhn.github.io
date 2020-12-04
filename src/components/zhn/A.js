@@ -25,6 +25,8 @@ import Tab from './Tab'
 import MsgRenderErr from './MsgRenderErr'
 import HighchartWrapper from './HighchartWrapper'
 
+import toLink from './toLink'
+
 const A = {
   ...SvgIcons,
   SpinnerLoading,
@@ -50,7 +52,8 @@ const A = {
   TabPane,
   Tab,
   MsgRenderErr,
-  HighchartWrapper
+  HighchartWrapper,
+  toLink
 };
 
 export default A

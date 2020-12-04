@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
+var _toLink = _interopRequireDefault(require("../zhn/toLink"));
+
 var S = {
   LINK: {
     display: 'inline-block',
@@ -26,7 +28,7 @@ var Link = function Link(_ref) {
   return href ? /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     className: className,
     style: (0, _extends2["default"])({}, S.LINK, style),
-    href: href,
+    href: (0, _toLink["default"])(href),
     children: caption
   }) : null;
 };
