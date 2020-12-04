@@ -151,7 +151,7 @@ const DateUtils = {
    return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
  },
  ymdhmsToUTC(dateStr, dtDelimeter=' ') {
-	 const [ymdStr='', hmsStr=''] = dateStr.split(dtDelimeter)
+	 const [ymdStr, hmsStr=''] = (dateStr || '').split(dtDelimeter)
 	 , [yearStr, monthStr, dayStr] = ymdStr.split('-')
 	 , [hourStr, minuteStr, secondStr] = hmsStr.split(':');
 	 return Date.UTC(

@@ -141,6 +141,15 @@ describe('ymdhmsToUTC', function () {
   test('should retun mls UTC-0 for str date with dtDelimeter', function () {
     expect(fn('2010-01-01T12:00:00', 'T')).toBe(DATE_IN_MLS);
   });
+  test('should return NaN for edge case', function () {
+    expect(fn()).toBeNaN();
+    expect(fn(null)).toBeNaN();
+    expect(fn('abcd')).toBeNaN();
+    expect(fn('2010')).toBeNaN();
+    expect(fn('2010-ab')).toBeNaN();
+    expect(fn('2010-01-01T12:00', 'T')).toBeNaN();
+    expect(fn('2010-01-01T12:00:00', 'A')).toBeNaN();
+  });
 });
 describe('formatTo', function () {
   var fn = mlsToDmy;

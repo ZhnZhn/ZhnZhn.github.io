@@ -228,11 +228,10 @@ var DateUtils = {
       dtDelimeter = ' ';
     }
 
-    var _dateStr$split = dateStr.split(dtDelimeter),
-        _dateStr$split$ = _dateStr$split[0],
-        ymdStr = _dateStr$split$ === void 0 ? '' : _dateStr$split$,
-        _dateStr$split$2 = _dateStr$split[1],
-        hmsStr = _dateStr$split$2 === void 0 ? '' : _dateStr$split$2,
+    var _split = (dateStr || '').split(dtDelimeter),
+        ymdStr = _split[0],
+        _split$ = _split[1],
+        hmsStr = _split$ === void 0 ? '' : _split$,
         _ymdStr$split = ymdStr.split('-'),
         yearStr = _ymdStr$split[0],
         monthStr = _ymdStr$split[1],
