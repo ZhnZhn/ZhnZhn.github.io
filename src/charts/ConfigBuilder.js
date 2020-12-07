@@ -132,23 +132,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       .setMinMax(minClose, maxClose, isNotZoomToMinMax)
       .setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems)
       .setStockSerias(id, data, dataHigh, dataLow, dataOpen);
-  },
-  intradayConfig({
-    id,
-    data, dH, dL, dO,
-    minClose, maxClose,
-    dVolume, dColumn
-  }){
-    return this.areaConfig()
-      .add('chart', { spacingTop: 25, marginBottom: 20 })
-      .addTooltip(Tooltip.vTdmy)
-      .setStockSerias(id, data, dH, dL, dO)
-      .setMinMax(minClose, maxClose, false)
-      .addMiniVolume({
-        id, dVolume, dColumn,
-        tooltipColumn: Chart.fTooltip(Tooltip.volumeTdmy)
-      });
-  },
+  },  
   categoryConfig(categories=[]){
     this.config = ChartConfig.crAreaConfig()
     const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}

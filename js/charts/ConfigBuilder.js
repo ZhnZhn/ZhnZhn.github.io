@@ -165,26 +165,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       data: dataATH
     }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
   },
-  intradayConfig: function intradayConfig(_ref2) {
-    var id = _ref2.id,
-        data = _ref2.data,
-        dH = _ref2.dH,
-        dL = _ref2.dL,
-        dO = _ref2.dO,
-        minClose = _ref2.minClose,
-        maxClose = _ref2.maxClose,
-        dVolume = _ref2.dVolume,
-        dColumn = _ref2.dColumn;
-    return this.areaConfig().add('chart', {
-      spacingTop: 25,
-      marginBottom: 20
-    }).addTooltip(_Tooltip["default"].vTdmy).setStockSerias(id, data, dH, dL, dO).setMinMax(minClose, maxClose, false).addMiniVolume({
-      id: id,
-      dVolume: dVolume,
-      dColumn: dColumn,
-      tooltipColumn: _Chart["default"].fTooltip(_Tooltip["default"].volumeTdmy)
-    });
-  },
   categoryConfig: function categoryConfig(categories) {
     if (categories === void 0) {
       categories = [];
@@ -422,10 +402,10 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   */
-  addDividend: function addDividend(_ref3) {
-    var dataDividend = _ref3.dataDividend,
-        minClose = _ref3.minClose,
-        maxClose = _ref3.maxClose;
+  addDividend: function addDividend(_ref2) {
+    var dataDividend = _ref2.dataDividend,
+        minClose = _ref2.minClose,
+        maxClose = _ref2.maxClose;
 
     if (dataDividend.length > 0) {
       setYToPoints(dataDividend, calcMinY({
