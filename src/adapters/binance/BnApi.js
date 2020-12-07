@@ -1,17 +1,10 @@
-import dt from '../../utils/DateUtils'
-
 const C = {
-  URL: 'https://api.binance.com/api/v3/klines?interval=1d',
+  URL: 'https://api.binance.com/api/v3/klines',
   RESEARCH_URL: 'https://research.binance.com/en/projects',
   TRADE_URL: 'https://binance.com/en/trade'
-}
+};
 
 const _isArr = Array.isArray;
-
-const _crDays = ({ fromDate }) => {
-  const _d = dt.getDaysFromYmd(fromDate);
-  return _d < 1001 ? _d : 1000;
-};
 
 const _setLinks = (option, c, s) => {
   const _toIndex = c.indexOf('(')
@@ -22,16 +15,18 @@ const _setLinks = (option, c, s) => {
   , _s = s.replace('/', '_').toLowerCase();
   option._researchLink = `${C.RESEARCH_URL}/${_caption}`
   option._tradeLink = `${C.TRADE_URL}/${_s}`
-}
+};
 
 const BnApi = {
   getRequestUrl(option){
     const { items=[] } = option
-    , { s='', c='' } = items[0] || {}
-    , _symbol = s.replace('/','')
-    , _limit = _crDays(option);
+    , { s='', c='' } = items[0]
+    , { v:interval } = items[1]
+    , { v:limit } = items[2]
+    , _symbol = s.replace('/','');
+
     _setLinks(option, c, s)
-    return `${C.URL}&symbol=${_symbol}&limit=${_limit}`;
+    return `${C.URL}?symbol=${_symbol}&interval=${interval}&limit=${limit}`;
   },
 
   checkResponse(json, option){
@@ -39,9 +34,9 @@ const BnApi = {
       return true;
     }
     throw {
-      errCaption: "Response Empty",
+      errCaption: "Response Empty"
     };
   }
-}
+};
 
 export default BnApi
