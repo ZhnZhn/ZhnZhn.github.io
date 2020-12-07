@@ -37,7 +37,8 @@ const LINK_CONFIGS = [
  ["CoinGecko","CoinGecko", "https://www.coingecko.com/en/"],
  ["CoinMetrics","CoinMetrics","https://coinmetrics.io"],
  ["Coinpaprika", "Coinpaprika", "https://coinpaprika.com/"],
- ["Binance", "Binance", "https://binance.com/"]
+ ["Binance", "Binance", "https://binance.com/"],
+ ["Bitstamp", "Bitstamp", "https://www.bitstamp.net/"]
 ];
 
 const Links = {

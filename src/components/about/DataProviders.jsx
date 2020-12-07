@@ -46,7 +46,7 @@ const ST = {
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 24):"
+     caption="Data Providers (All 25):"
      style={ST.OC_L1}
      childStyle={ST.ROOT_CHILD}
   >
@@ -102,6 +102,9 @@ const DataProviders = ({ isClose }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Binance />
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.Bitstamp />
         </span>
       </p>
       <OpenClose

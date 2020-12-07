@@ -91,12 +91,13 @@ export const LoadType = {
   BEA: 'BEA',
   BLS: 'BLS',
   EIA: 'EIA',
-  INTR: 'INTR',
-  BN: 'BN',
+  INTR: 'INTR',  
   CRC: 'CRC',
   CG: 'CG',
   CM: 'CM',
   CP: 'CP',
+  BN: 'BN',
+  BT: 'BT',
   WL: 'WL'
 }
 

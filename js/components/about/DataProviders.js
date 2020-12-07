@@ -55,7 +55,7 @@ var DataProviders = function DataProviders(_ref) {
   var isClose = _ref.isClose;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
     isClose: isClose,
-    caption: "Data Providers (All 24):",
+    caption: "Data Providers (All 25):",
     style: ST.OC_L1,
     childStyle: ST.ROOT_CHILD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -111,6 +111,9 @@ var DataProviders = function DataProviders(_ref) {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: _About["default"].PROVIDER,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Binance, {})
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          style: _About["default"].PROVIDER,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Bitstamp, {})
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose["default"], {
         caption: "(8) Required API Key:",

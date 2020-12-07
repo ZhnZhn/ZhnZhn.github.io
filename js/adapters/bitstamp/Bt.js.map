@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bitstamp/Bt.js"
+ ],
+ "file": "../../../src/adapters/bitstamp/Bt.js",
+ "names": [
+  "Bt",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AAETC,EAAAA,OAAO,EAAPA;AAFS,CAAX;eAKeF,E"
+}

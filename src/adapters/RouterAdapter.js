@@ -18,11 +18,12 @@ import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
 import Quandl from './quandl/Quandl'
 import DbNomics from './db-nomics/DbNomics'
-import Bn from './binance/Bn'
 import Crc from './crypto-compare/Crc'
 import Cg from './coin-gecko/Cg'
 import Cm from './coin-metrics/Cm'
 import Cp from './coin-paprika/Cp'
+import Bn from './binance/Bn'
+import Bt from './bitstamp/Bt'
 
 
 const RouterAdapter = {
@@ -44,12 +45,13 @@ const RouterAdapter = {
   Bea,
   Bls,
   Eia,
-  Intrinio,
-  Bn,
+  Intrinio,  
   Crc,
   Cg,
   Cm,
-  Cp
+  Cp,
+  Bn,
+  Bt
 };
 
 export default RouterAdapter

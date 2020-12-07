@@ -87,11 +87,12 @@ var LoadType = {
   BLS: 'BLS',
   EIA: 'EIA',
   INTR: 'INTR',
-  BN: 'BN',
   CRC: 'CRC',
   CG: 'CG',
   CM: 'CM',
   CP: 'CP',
+  BN: 'BN',
+  BT: 'BT',
   WL: 'WL'
 };
 exports.LoadType = LoadType;

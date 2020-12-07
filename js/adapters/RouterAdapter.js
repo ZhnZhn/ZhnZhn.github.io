@@ -45,8 +45,6 @@ var _Quandl = _interopRequireDefault(require("./quandl/Quandl"));
 
 var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
 
-var _Bn = _interopRequireDefault(require("./binance/Bn"));
-
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 
 var _Cg = _interopRequireDefault(require("./coin-gecko/Cg"));
@@ -54,6 +52,10 @@ var _Cg = _interopRequireDefault(require("./coin-gecko/Cg"));
 var _Cm = _interopRequireDefault(require("./coin-metrics/Cm"));
 
 var _Cp = _interopRequireDefault(require("./coin-paprika/Cp"));
+
+var _Bn = _interopRequireDefault(require("./binance/Bn"));
+
+var _Bt = _interopRequireDefault(require("./bitstamp/Bt"));
 
 var RouterAdapter = (0, _extends2["default"])({
   Quandl: _Quandl["default"],
@@ -75,11 +77,12 @@ var RouterAdapter = (0, _extends2["default"])({
   Bls: _Bls["default"],
   Eia: _Eia["default"],
   Intrinio: _Intrinio["default"],
-  Bn: _Bn["default"],
   Crc: _Crc["default"],
   Cg: _Cg["default"],
   Cm: _Cm["default"],
-  Cp: _Cp["default"]
+  Cp: _Cp["default"],
+  Bn: _Bn["default"],
+  Bt: _Bt["default"]
 });
 var _default = RouterAdapter;
 exports["default"] = _default;
