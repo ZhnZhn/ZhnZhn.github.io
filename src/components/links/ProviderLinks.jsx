@@ -15,31 +15,33 @@ const S = {
 };
 
 const LINK_CONFIGS = [
- ["Quandl", "Quandl", "https://www.quandl.com", S.ORANGE],
+ ["Quandl", "https://www.quandl.com", S.ORANGE],
  ["DbNomics", "DB NOMICS", "https://db.nomics.world", S.DARK_GREEN],
  ["Iex", "IEX Cloud", "https://iexcloud.io"],
  ["Fmp", "Financial Modeling Prep", "https://financialmodelingprep.com"],
  ["Barchart", "Barchart Market Data", "https://www.barchartmarketdata.com"],
  ["AlphaVantage", "Alpha Vantage", "https://www.alphavantage.co"],
- ["Eurostat", "Eurostat", "http://ec.europa.eu/eurostat/"],
+ ["Eurostat", "https://ec.europa.eu/eurostat/"],
  ["UnComtrade", "UN Comtrade", "https://comtrade.un.org"],
  ["WorldBank","World Bank", "https://data.worldbank.org"],
  ["FaoStat","FAOSTAT", "http://www.fao.org/faostat/en/#data"],
  ["Bea","U.S. Bureau of Economic Analysis", "https://www.bea.gov/index.htm"],
  ["Bsl","U.S. Bureau of Labor Statistics", "https://www.bls.gov/home.htm"],
  ["Eia","U.S. EIA", "https://www.eia.gov"],
- ["Intrinio",'Intrinio', "https://intrinio.com"],
+ ["Intrinio", "https://intrinio.com"],
  ["Insee","Insee: France Statistics", "https://www.insee.fr/en/accueil/"],
  ["ONS","ONS: UK Statistics", "https://www.ons.gov.uk"],
  ["StatNorway","Statistics Norway", "https://www.ssb.no/en/"],
  ["StatSweden","Statistics Sweden", "https://www.scb.se/en/"],
  ["StatFinland","Statistics Finland", "https://www.stat.fi/index_en.html"],
- ["CoinGecko","CoinGecko", "https://www.coingecko.com/en/"],
- ["CoinMetrics","CoinMetrics","https://coinmetrics.io"],
- ["Coinpaprika", "Coinpaprika", "https://coinpaprika.com/"],
- ["Binance", "Binance", "https://binance.com/"],
- ["Bitstamp", "Bitstamp", "https://www.bitstamp.net/"]
+ ["CoinGecko", "https://www.coingecko.com/en/"],
+ ["CoinMetrics","https://coinmetrics.io"],
+ ["Coinpaprika", "https://coinpaprika.com/"],
+ ["Binance", "https://binance.com/"],
+ ["Bitstamp", "https://www.bitstamp.net/"]
 ];
+
+const _isStr = str => typeof str === 'string';
 
 const Links = {
   CryptoCompare: () => (
@@ -54,12 +56,15 @@ const Links = {
 };
 
 LINK_CONFIGS.forEach(conf => {
-  Links[conf[0]] = () => (<Link
-    className={CL_LINK}
-    title={conf[1]}
-    href={conf[2]}
-    dfStyle={conf[3]}
-  />)
+  Links[conf[0]] = () => {
+    const _confIndex = _isStr(conf[2]) ? 1 : 0;
+    return (<Link
+      className={CL_LINK}
+      title={conf[_confIndex]}
+      href={conf[_confIndex+1]}
+      style={conf[_confIndex+2]}
+   />);
+  }
 })
 
 export default Links

@@ -1,9 +1,15 @@
-const Link = ({ title, dfStyle, style, children, ...rest }) => (
+const Link = ({ 
+  className='link',
+  style,
+  title,
+  href,
+  children
+}) => (
  <a
    target="_blank"
-   className="link"
-   style={{...dfStyle, ...style}}
-   {...rest}
+   className={className}
+   style={style}
+   href={href}
  >
     {title}
     {children}
