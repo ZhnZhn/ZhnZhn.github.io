@@ -3,51 +3,60 @@ import Highcharts from 'highcharts';
 
 import COLOR from '../constants/Color';
 import Tooltip from './Tooltip';
+import MonoColorSlice from './MonoColorSlice';
 
 const merge = Highcharts.merge;
-const _isStr = str => typeof str === 'string'
+const _isStr = str => typeof str === 'string';
 
-const TITLE_STYLE = {
-  stroke: 'transparent',
+const FONT_STYLE = {
   fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
   fontSize: '16px',
-  fontWeight: 'bold'
-};
-
-const _addMonoColorsTo = (colors=[], base) => {
-  let i;
-  for (i=0; i<4; i++) {
-    // Start out with a darkened base color (negative brighten), and end
-    // up with a much brighter color
-   colors.push(
-     Highcharts.Color(base)
-       .brighten((i - 3) / 7)
-       .setOpacity(0.75)
-       .get()
-     );
+  fontWeight: 'bold',
+}, CAPTION_CONFIG = {
+  text: '',
+  floating: true,
+  align: 'left',
+  x: 25,
+  style: {
+    ...FONT_STYLE,
+    stroke: 'transparent',
+    color: COLOR.CHART_TITLE,
+    fill: COLOR.CHART_TITLE,
   }
-}
+}, YAXIS_CONFIG = {
+  endOnTick: false,
+  maxPadding: 0.15,
+  startOnTick: false,
+  minPadding: 0.15,
+  title: { text: '' }
+}, _crPlotOption = (lineColor, markerLineColor) => ({
+   lineColor: lineColor,
+   lineWidth: 0,
+   marker: {
+       enabled: false,
+       lineWidth: 1,
+       lineColor: markerLineColor
+   },
+   state: {
+     hover: {
+       lineWidth: 2
+     }
+   }
+});
 
-const _fMonoColors = function({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}){
-  const colors = [];
-
-  _addMonoColorsTo(colors, base1);
-  _addMonoColorsTo(colors, base2);
-
-  return colors;
-}
-
-const _isCrosshair = is => is
-  ? Chart.fCrosshair()
-  : undefined;
+const  _crTitle = title => _isStr(title)
+  ? { text: title }
+  : title
+, _crSeriaType = seriaType => _isStr(seriaType)
+  ? seriaType.toLowerCase()
+  : 'area'
+, _crCrosshair = (is=true) => is ? {
+    color: COLOR.CROSSHAIR,
+    width: 1,
+    zIndex: 2
+  } : void 0;
 
 const Chart = {
-  COLOR_PERIOD : 4/7,
-  COLOR_LOW_LEVEL : -3/7,
-  COLOR_OPACITY : 0.75,
-  COLOR_BASE1 : COLOR.MONO_BASE1,
-  COLOR_BASE2 : COLOR.MONO_BASE2,
-
   HEIGHT : 300,
   MARGIN_RIGHT: 50,
   STACKED_HEIGHT : 500,
@@ -67,29 +76,16 @@ const Chart = {
   SEMIDONUT_TITLE_Y : 15,
   SEMIDONUT_SUBTITLE_Y: 35,
 
-
-  _monoColors : _fMonoColors(),
-
-  fCreateMonoColor(base=COLOR.MONO_BASE1, deltaColor=0, opacity=0.75){
-    return Highcharts.Color(base)
-       .brighten( (Chart.COLOR_LOW_LEVEL) + deltaColor)
-       .setOpacity(opacity)
-       .get();
-  },
-
-  fnGetMonoColor(index){
-     const colorIndex = index % 8;
-     return  Chart._monoColors[colorIndex];
-  },
+  ...MonoColorSlice,
 
   fCreditsRightBottom(option={}){
     return merge(false, {
-       enabled : true,
-       position : {
-           align: 'right',
-           x: -10,
-           verticalAlign: 'bottom',
-           y: -5
+       enabled: true,
+       position: {
+          align: 'right',
+          verticalAlign: 'bottom',
+          x: -10,
+          y: -5
       }
     }, option)
   },
@@ -125,43 +121,27 @@ const Chart = {
   },
 
   setDefaultTitle(config, title, subtitle){
-    config.chart.spacingTop = this.STACKED_SPACING_TOP;
-    config.title = this.fTitle({
+    config.chart.spacingTop = Chart.STACKED_SPACING_TOP;
+    config.title = Chart.fTitle({
       text: title,
-      y: this.STACKED_TITLE_Y
+      y: Chart.STACKED_TITLE_Y
     });
-    config.subtitle = this.fSubtitle({
+    config.subtitle = Chart.fSubtitle({
       text: subtitle,
-      y: this.STACKED_SUBTITLE_Y
+      y: Chart.STACKED_SUBTITLE_Y
     });
   },
 
   fTitle(option={}){
     return merge(false, {
-       text: '',
-       floating: true,
-       align: 'left',
-       x: 25,
-       y: 25,
-       style: {
-         ...TITLE_STYLE,
-         color: COLOR.CHART_TITLE,
-         fill: COLOR.CHART_TITLE,
-       }
+       ...CAPTION_CONFIG,
+       y: 25
     }, option)
   },
   fSubtitle(option={}){
     return merge(false, {
-      text: '',
-      floating: true,
-      align: 'left',
-      x: 25,
-      y: 45,
-      style: {
-        ...TITLE_STYLE,
-        color: COLOR.CHART_SUBTITLE,
-        fill: COLOR.CHART_SUBTITLE
-      }
+      ...CAPTION_CONFIG,
+      y: 45
     }, option)
   },
 
@@ -179,7 +159,7 @@ crAreaConfig({
   seriaColor,
   seriaWidth=1,
   spacingTop,
-  isCrosshair=true
+  isCrosshair
 }={}){
   return {
     zhSeries: {
@@ -189,35 +169,25 @@ crAreaConfig({
       marginRight: Chart.MARGIN_RIGHT,
       spacingTop: spacingTop
     },
-    title: _isStr(title)
-      ? { text: title }
-      : title,
+    title: _crTitle(title),
     legend: {
       enabled: false
     },
     xAxis: {
       type: 'datetime',
       labels: {},
-      crosshair: _isCrosshair(isCrosshair)
+      crosshair: _crCrosshair(isCrosshair)
     },
     yAxis: {
-      crosshair: _isCrosshair(isCrosshair),
-      endOnTick: false,
-      maxPadding: 0.15,
-      startOnTick: false,
-      minPadding: 0.15,
+      ...YAXIS_CONFIG,
+      crosshair: _crCrosshair(isCrosshair),
       opposite: true,
-      showEmpty: true,
-      title: {
-        text: ''
-      }
+      showEmpty: true
     },
     series: [{
       zhValueText: 'Value',
       turboThreshold: 20000,
-      type: _isStr(seriaType)
-        ? seriaType.toLowerCase()
-        : 'area',
+      type: _crSeriaType(seriaType),
       color: seriaColor,
       tooltip: Chart.fTooltip(Tooltip.vDmy),
       lineWidth: seriaWidth,
@@ -245,18 +215,12 @@ fTooltip(fnPointFormatter){
   }
 },
 
-fCrosshair(){
-    return {
-      color: COLOR.CROSSHAIR,
-      width: 1,
-      zIndex: 2
-    }
-  },
+fCrosshair: _crCrosshair,
 
-  fPlotLine(color, text){
+fPlotLine(color, text){
     return {
       id: text,
-      value: undefined ,
+      //value: void 0,
       color: color,
       dashStyle: 'solid',
       width: 1,
@@ -296,18 +260,9 @@ fCrosshair(){
   fSecondYAxis(name, color){
     return {
       //crosshair : Chart.fCrosshair(),
+      ...YAXIS_CONFIG,
       id: name,
-
       gridLineWidth: 0,
-
-      endOnTick: false,
-      maxPadding: 0.15,
-      startOnTick: false,
-      minPadding: 0.15,
-
-      title: {
-          text: ''
-      },
       lineWidth: 2,
       lineColor: color,
       tickColor: color,
@@ -321,44 +276,18 @@ fCrosshair(){
     }
   },
 
-  calcMinY({ minPoint, maxPoint }){
-    return maxPoint>Number.NEGATIVE_INFINITY && minPoint<Number.POSITIVE_INFINITY
-      ? minPoint - ((maxPoint-minPoint)/6)
-      : void 0;
-  },
-
   fPlotOptionsArea(option={}){
-    return merge(false, {
-      lineColor: COLOR.AREA_HOVER_LINE,
-      lineWidth: 0,
-      marker: {
-          enabled: false,
-          lineWidth: 1,
-          lineColor: COLOR.AREA_MARKER_LINE
-      },
-      state: {
-        hover: {
-          lineWidth: 2
-        }
-      }
-    }, option);
+    return merge(false, _crPlotOption(
+       COLOR.AREA_HOVER_LINE,
+       COLOR.AREA_MARKER_LINE
+     ), option);
   },
 
   fPlotOptionsColumn(option={}){
-    return merge(false, {
-        lineColor: COLOR.COLUMN_HOVER_LINE,
-        lineWidth: 0,
-        marker: {
-            enabled : false,
-            lineWidth: 1,
-            lineColor: COLOR.COLUMN_MARKER_LINE
-        },
-        state: {
-          hover: {
-            lineWidth: 2
-          }
-        }
-    }, option)
+    return merge(false, _crPlotOption(
+      COLOR.COLUMN_HOVER_LINE,
+      COLOR.COLUMN_MARKER_LINE
+    ), option)
   },
 
   fPlotOptionsSeries(option={}){
@@ -384,12 +313,10 @@ fCrosshair(){
        symbolRadius: 7,
        useHTML: true,
        itemStyle: {
+         ...FONT_STYLE,
          color: COLOR.LEGEND_ITEM,
-         cursor: 'pointer',
-         fontSize: '16px',
-         fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-         fontWeight: 'bold',
-         lineHeight: 1.5
+         lineHeight: 1.5,
+         cursor: 'pointer'
        }
     }, option)
   },

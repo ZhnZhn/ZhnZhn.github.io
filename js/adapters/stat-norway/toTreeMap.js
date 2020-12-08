@@ -168,12 +168,12 @@ var _addColor = function _addColor(data, level60, level90) {
   data.forEach(function (point, pointIndex) {
     if (pointIndex < level60) {
       deltaColor = pointIndex * (period / level60);
-      point.color = _Chart["default"].fCreateMonoColor(base1, deltaColor);
+      point.color = _Chart["default"].crMonoColor(base1, deltaColor);
     } else if (pointIndex < level60 + _level90) {
       deltaColor = (pointIndex - level60) * (period / _level90);
-      point.color = _Chart["default"].fCreateMonoColor(base2, deltaColor);
+      point.color = _Chart["default"].crMonoColor(base2, deltaColor);
     } else {
-      point.color = _Chart["default"].fnGetMonoColor(pointIndex - level60 - _level90);
+      point.color = _Chart["default"].getMonoColor(pointIndex - level60 - _level90);
     }
   });
 };

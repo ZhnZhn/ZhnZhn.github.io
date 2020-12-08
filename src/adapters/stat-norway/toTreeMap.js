@@ -126,12 +126,12 @@ const _addColor = function(data, level60, level90){
   data.forEach((point, pointIndex) => {
      if (pointIndex < level60){
        deltaColor = pointIndex * ( period / level60 );
-       point.color = Chart.fCreateMonoColor(base1, deltaColor);
+       point.color = Chart.crMonoColor(base1, deltaColor);
      } else if ( pointIndex < level60+_level90 ) {
        deltaColor = (pointIndex-level60) * ( period / _level90 );
-       point.color = Chart.fCreateMonoColor(base2, deltaColor);
+       point.color = Chart.crMonoColor(base2, deltaColor);
      } else {
-       point.color = Chart.fnGetMonoColor(pointIndex-level60-_level90)
+       point.color = Chart.getMonoColor(pointIndex-level60-_level90)
      }
    })
 }
@@ -172,7 +172,7 @@ const toTreeMap = {
 
    const _seria = Builder()
      .treeMapSeria(
-        Tooltip.treeMap, {          
+        Tooltip.treeMap, {
           data: _data
       })
       .toSeria();

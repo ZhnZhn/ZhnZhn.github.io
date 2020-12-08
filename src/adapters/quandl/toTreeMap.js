@@ -26,8 +26,8 @@ const _assign = Object.assign
    COLOR_BASE1,
    COLOR_BASE2,
    STACKED_HEIGHT,
-   fCreateMonoColor,
-   fnGetMonoColor
+   crMonoColor,
+   getMonoColor
  } = Chart
  , {
    crTreeMapConfig,
@@ -111,12 +111,12 @@ const _setColorToPoint = (data, level60, level90) => {
   data.forEach((point, pointIndex) => {
      if (pointIndex < level60){
        deltaColor = pointIndex * ( period / level60 );
-       point.color = fCreateMonoColor(base1, deltaColor);
+       point.color = crMonoColor(base1, deltaColor);
      } else if ( pointIndex < level60+level90 ) {
        deltaColor = (pointIndex-level60) * ( period / level90 );
-       point.color = fCreateMonoColor(base2, deltaColor);
+       point.color = crMonoColor(base2, deltaColor);
      } else {
-       point.color = fnGetMonoColor(pointIndex-level60-level90)
+       point.color = getMonoColor(pointIndex-level60-level90)
      }
    })
 }

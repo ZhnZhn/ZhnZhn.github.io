@@ -32,8 +32,8 @@ var _assign = Object.assign,
     COLOR_BASE1 = _Chart["default"].COLOR_BASE1,
     COLOR_BASE2 = _Chart["default"].COLOR_BASE2,
     STACKED_HEIGHT = _Chart["default"].STACKED_HEIGHT,
-    fCreateMonoColor = _Chart["default"].fCreateMonoColor,
-    fnGetMonoColor = _Chart["default"].fnGetMonoColor,
+    crMonoColor = _Chart["default"].crMonoColor,
+    getMonoColor = _Chart["default"].getMonoColor,
     crTreeMapConfig = _ChartConfig["default"].crTreeMapConfig,
     crTreeMapSeria = _ChartConfig["default"].crTreeMapSeria;
 
@@ -134,12 +134,12 @@ var _setColorToPoint = function _setColorToPoint(data, level60, level90) {
   data.forEach(function (point, pointIndex) {
     if (pointIndex < level60) {
       deltaColor = pointIndex * (period / level60);
-      point.color = fCreateMonoColor(base1, deltaColor);
+      point.color = crMonoColor(base1, deltaColor);
     } else if (pointIndex < level60 + level90) {
       deltaColor = (pointIndex - level60) * (period / level90);
-      point.color = fCreateMonoColor(base2, deltaColor);
+      point.color = crMonoColor(base2, deltaColor);
     } else {
-      point.color = fnGetMonoColor(pointIndex - level60 - level90);
+      point.color = getMonoColor(pointIndex - level60 - level90);
     }
   });
 };
