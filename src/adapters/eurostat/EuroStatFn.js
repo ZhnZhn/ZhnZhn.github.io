@@ -4,7 +4,10 @@ import Tooltip from '../../charts/Tooltip';
 
 import AdapterFn from '../AdapterFn';
 
-const { setPlotLinesMinMax } = ChartFn;
+const {
+  calcMinY,
+  setPlotLinesMinMax
+} = ChartFn;
 
 const {
   compareByDate,
@@ -237,10 +240,7 @@ const EuroStatFn = {
     setPlotLinesMinMax({ plotLines, min, max })
 
     if (!isNotZoomToMinMax){
-      config.yAxis.min = Chart.calcMinY({
-        maxPoint: max,
-        minPoint: min
-      });
+      config.yAxis.min = calcMinY(min, max);
     }
   },
 

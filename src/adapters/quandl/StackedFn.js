@@ -80,7 +80,7 @@ const _fnCreateDataTopPercent = function(data, bTotal, percent){
 
 const _fnInitSeries = function({ items, chartType, fSeria }){
   return items.map((item, itemIndex)=>{
-           const color = Chart.fnGetMonoColor(itemIndex)
+           const color = Chart.getMonoColor(itemIndex)
                , {name} = item
                return fSeria({ name, color })
          });

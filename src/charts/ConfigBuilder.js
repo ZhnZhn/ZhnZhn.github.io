@@ -132,7 +132,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       .setMinMax(minClose, maxClose, isNotZoomToMinMax)
       .setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems)
       .setStockSerias(id, data, dataHigh, dataLow, dataOpen);
-  },  
+  },
   categoryConfig(categories=[]){
     this.config = ChartConfig.crAreaConfig()
     const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}
@@ -308,10 +308,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   _setYAxisMin(min, max, noZoom){
     const _min = noZoom && min > 0
       ? 0
-      : Chart.calcMinY({
-          minPoint: min,
-          maxPoint: max
-        });
+      : calcMinY(min, max);
     this.add('yAxis', {
       min: _min,
       maxPadding: 0.15,
@@ -360,7 +357,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     if (dataDividend.length > 0) {
       setYToPoints(
         dataDividend,
-        calcMinY({ min: minClose, max: maxClose })
+        calcMinY(minClose, maxClose)
       );
       this.config.series.push(crDividendSeria(dataDividend));
       this.config.chart.spacingBottom = 40;

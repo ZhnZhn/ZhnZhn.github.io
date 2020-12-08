@@ -43,7 +43,8 @@ var getData = _QuandlFn["default"].getData,
     getColumnNames = _QuandlFn["default"].getColumnNames;
 var crDividendSeria = _ChartConfig["default"].crDividendSeria,
     crSplitRatioSeria = _ChartConfig["default"].crSplitRatioSeria;
-var setMinMaxPlotLines = _ChartFn["default"].setMinMaxPlotLines;
+var calcMinY = _ChartFn["default"].calcMinY,
+    setMinMaxPlotLines = _ChartFn["default"].setMinMaxPlotLines;
 var _assign = Object.assign;
 var C = {
   OPEN: "Open",
@@ -362,9 +363,12 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex, option) {
     fnPointsFlow(points[i], result);
   }
 
+  var minPoint = result.minPoint,
+      maxPoint = result.maxPoint;
+
   _assign(result, {
     zhPoints: points,
-    minY: _Chart["default"].calcMinY(result)
+    minY: calcMinY(minPoint, maxPoint)
   });
 
   return result;

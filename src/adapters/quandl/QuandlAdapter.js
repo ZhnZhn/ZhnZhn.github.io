@@ -27,6 +27,7 @@ const {
   crSplitRatioSeria
 } = ChartConfig;
 const {
+  calcMinY,
   setMinMaxPlotLines
 } = ChartFn;
 const _assign = Object.assign;
@@ -281,9 +282,14 @@ const _fnSeriesPipe = function(json, yPointIndex, option){
     fnPointsFlow(points[i], result)
   }
 
+  const {
+    minPoint,
+    maxPoint
+  } = result;
+
   _assign(result, {
     zhPoints: points,
-    minY: Chart.calcMinY(result)
+    minY: calcMinY(minPoint, maxPoint)    
   })
 
   return result;

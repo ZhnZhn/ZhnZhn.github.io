@@ -353,10 +353,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   _setYAxisMin: function _setYAxisMin(min, max, noZoom) {
-    var _min = noZoom && min > 0 ? 0 : _Chart["default"].calcMinY({
-      minPoint: min,
-      maxPoint: max
-    });
+    var _min = noZoom && min > 0 ? 0 : calcMinY(min, max);
 
     this.add('yAxis', {
       min: _min,
@@ -408,10 +405,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
         maxClose = _ref2.maxClose;
 
     if (dataDividend.length > 0) {
-      setYToPoints(dataDividend, calcMinY({
-        min: minClose,
-        max: maxClose
-      }));
+      setYToPoints(dataDividend, calcMinY(minClose, maxClose));
       this.config.series.push(crDividendSeria(dataDividend));
       this.config.chart.spacingBottom = 40;
     }

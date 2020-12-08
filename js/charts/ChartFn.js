@@ -345,9 +345,7 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
 
     _setPlotLine(plotLines[1], _minPoint, _deltaMin);
   },
-  calcMinY: function calcMinY(_ref9) {
-    var min = _ref9.min,
-        max = _ref9.max;
+  calcMinY: function calcMinY(min, max) {
     return max > Number.NEGATIVE_INFINITY && min < Number.POSITIVE_INFINITY ? min - (max - min) * 1 / 6 : void 0;
   },
   setYToPoints: function setYToPoints(data, y) {

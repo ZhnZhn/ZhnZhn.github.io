@@ -15,7 +15,8 @@ var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax;
+var calcMinY = _ChartFn["default"].calcMinY,
+    setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax;
 var compareByDate = _AdapterFn["default"].compareByDate,
     valueMoving = _AdapterFn["default"].valueMoving,
     findMinY = _AdapterFn["default"].findMinY,
@@ -295,10 +296,7 @@ var EuroStatFn = {
     });
 
     if (!isNotZoomToMinMax) {
-      config.yAxis.min = _Chart["default"].calcMinY({
-        maxPoint: max,
-        minPoint: min
-      });
+      config.yAxis.min = calcMinY(min, max);
     }
   },
   crItemCaption: function crItemCaption(_ref7) {

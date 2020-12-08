@@ -106,7 +106,7 @@ var _fnInitSeries = function _fnInitSeries(_ref) {
       chartType = _ref.chartType,
       fSeria = _ref.fSeria;
   return items.map(function (item, itemIndex) {
-    var color = _Chart["default"].fnGetMonoColor(itemIndex),
+    var color = _Chart["default"].getMonoColor(itemIndex),
         name = item.name;
 
     return fSeria({
