@@ -24,12 +24,14 @@ const {
 } = mathFn;
 
 const dateFormat = Highcharts.dateFormat;
-const _isFn = fn => typeof fn === 'function';
-const _isNaN = Number.isNaN || isNaN;
-const _isNumber = n => typeof n === 'number'
-  && n-n===0;
-const _fnFindIndex = fnArr.findIndexByProp('x');
-
+const _isFn = fn => typeof fn === 'function'
+, _isNaN = Number.isNaN || isNaN
+, _isNumber = n => typeof n === 'number'
+    && n-n===0
+, _isUndef = v => typeof v === 'undefined'
+, _isArr = Array.isArray
+, _assign = Object.assign
+, _fnFindIndex = fnArr.findIndexByProp('x');
 
 const C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
@@ -45,21 +47,16 @@ const C = {
 const DMY_FORMAT = '%A, %b %d, %Y'
 , TDMY_FORMAT = '%H:%M, %A, %b %d, %Y';
 
-const _initOptionsZhSeries = (chart) => {
-  const options = chart.options
-      , zhSeries = options.zhSeries;
-  if (!zhSeries){
-    options.zhSeries = {
-      count: 0,
-      titleEls: []
-    }
-  } else if (!zhSeries.titleEls){
-    zhSeries.titleEls = []
-  }
+const _initOptionsZhSeries = chart => {
+  const { options } = chart;
+  options.zhSeries = _assign({
+    count: 0,
+    titleEls: []
+  }, options.zhSeries)
   return options;
 }
 
-const _crYAxisColor = (chart) => {
+const _crYAxisColor = chart => {
   switch(chart.yAxis.length){
     case 1: return C.C1_SECOND_Y_AXIS;
     case 2: return C.C2_SECOND_Y_AXIS;
@@ -76,17 +73,16 @@ const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
     series.color = _color
   }
 
-  if (Array.isArray(series)){
+  if (_isArr(series)){
     const _max = series.length - 1;
     series.forEach((seria, index) => {
       if (hasSecondYAxis) {
         seria.yAxis = label
       }
-      if (index !== _max ) {
-        chart.addSeries(seria, false, false)
-      } else {
-        chart.addSeries(seria, true, true)
-      }
+      const _option = index === _max
+        ? [true, true]
+        : [false, false];
+      chart.addSeries(seria, ...[_option])
     })
   } else {
     chart.addSeries(series, true, true)
@@ -94,7 +90,7 @@ const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
   return _color;
 }
 
-const _calcXyForLabel = (options) => {
+const _calcXyForLabel = options => {
   const seriesCount = options.zhSeries.count
   , row = Math.floor(seriesCount/C.SERIA_LABELS_IN_ROW)
   , x = C.SERIA_LABEL_X_DELTA
@@ -103,11 +99,11 @@ const _calcXyForLabel = (options) => {
   , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
   return { x, y };
 }
-const _renderSeriesLabel = ({chart, options, series, label='', color }) => {
+const _renderSeriesLabel = ({ chart, options, series, label='', color }) => {
   const seriesText = (label.length>C.SERIA_LABEL_CHARS)
-            ? label.substring(0, C.SERIA_LABEL_CHARS)
-            : label
-      , { x, y } = _calcXyForLabel(options);
+    ? label.substring(0, C.SERIA_LABEL_CHARS)
+    : label
+  , { x, y } = _calcXyForLabel(options);
 
   return chart.renderer.text(seriesText, x, y)
     .css({
@@ -141,6 +137,13 @@ const _setPlotLine = (plotLine, value, delta='') => {
   }
 };
 
+const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
+, _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10)
+, _calcPerTo = (bFrom, bValue, bTotal) => calcPercent({
+   bValue: bFrom.minus(bValue),
+   bTotal
+});
+
 
 const ChartFn = {
   ...WithAreaChartFn,
@@ -166,16 +169,12 @@ const ChartFn = {
 
   zoomIndicatorCharts(event){
     const zhDetailCharts = this.chart.options.zhDetailCharts
-       , { userMin, userMax, min, max } = event;
-    if (userMin){
-      zhDetailCharts.forEach( chart => {
-        chart.xAxis[0].setExtremes( userMin, userMax, true, true);
-      })
-    } else {
-      zhDetailCharts.forEach( chart => {
-        chart.xAxis[0].setExtremes( min, max, true, true);
-      })
-    }
+    , { userMin, userMax, min, max } = event
+    , _min = userMin || min
+    , _max = userMin ? userMax : max;
+    zhDetailCharts.forEach(chart => {
+      chart.xAxis[0].setExtremes(_min, _max, true, true);
+    })
   },
   afterSetExtremesYAxis(event){
     const { trigger, userMax, userMin } = event;
@@ -189,16 +188,17 @@ const ChartFn = {
 
   crValueMoving(chart, prev, dateTo){
     const points = chart.series[0].data
-        , mlsUTC = DateUtils.dmyToUTC(dateTo)
-        , index = _isNaN(mlsUTC)
-            ? -1
-            : _fnFindIndex(points, mlsUTC)
-        , valueTo = index !== -1
-            ? points[index].y
-            : undefined;
+    , mlsUTC = DateUtils.dmyToUTC(dateTo)
+    , index = _isNaN(mlsUTC)
+        ? -1
+        : _fnFindIndex(points, mlsUTC)
+    , valueTo = index !== -1
+        ? points[index].y
+        : void 0;
 
-    return valueTo !== undefined
-      ? Object.assign({}, prev,
+    return _isUndef(valueTo)
+      ? void 0
+      : _assign({}, prev,
           crValueMoving({
             nowValue: prev.value,
             prevValue: valueTo,
@@ -206,8 +206,7 @@ const ChartFn = {
             fnFormat: formatAllNumber
           }),
           { valueTo, dateTo }
-        )
-     : undefined;
+        );
   },
 
   toNumberFormat: formatNumber,
@@ -254,21 +253,11 @@ const ChartFn = {
     , _bValue = value !== null
         ? Big(value)
         : Big(0)
-    , perToMax = calcPercent({
-       bValue: _bMax.minus(_bValue),
-       bTotal: _bValue
-    })
-    , perToMin = calcPercent({
-      bValue: _bValue.minus(_bMin),
-      bTotal: _bValue
-    })
-    , _deltaMax = `\u00A0\u00A0Δ ${perToMax}%`
-    , _deltaMin = `\u00A0\u00A0Δ ${perToMin}%`
-    , _maxPoint = parseFloat(_bMax.round(4).toString(), 10)
-    , _minPoint = parseFloat(_bMin.round(4).toString(), 10);
+    , perToMax = _calcPerTo(_bMax, _bValue, _bValue)
+    , perToMin = _calcPerTo(_bValue, _bMin, _bValue);
 
-    _setPlotLine(plotLines[0], _maxPoint, _deltaMax)
-    _setPlotLine(plotLines[1], _minPoint, _deltaMin)
+    _setPlotLine(plotLines[0], _crPoint(_bMax), _crDelta(perToMax))
+    _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(perToMin))
   },
 
   calcMinY: (min, max) => max>Number.NEGATIVE_INFINITY

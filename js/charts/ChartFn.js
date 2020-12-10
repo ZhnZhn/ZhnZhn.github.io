@@ -36,15 +36,17 @@ var dateFormat = _highcharts["default"].dateFormat;
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
-};
-
-var _isNaN = Number.isNaN || isNaN;
-
-var _isNumber = function _isNumber(n) {
+},
+    _isNaN = Number.isNaN || isNaN,
+    _isNumber = function _isNumber(n) {
   return typeof n === 'number' && n - n === 0;
-};
-
-var _fnFindIndex = _fnArr["default"].findIndexByProp('x');
+},
+    _isUndef = function _isUndef(v) {
+  return typeof v === 'undefined';
+},
+    _isArr = Array.isArray,
+    _assign = Object.assign,
+    _fnFindIndex = _fnArr["default"].findIndexByProp('x');
 
 var C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
@@ -60,18 +62,11 @@ var DMY_FORMAT = '%A, %b %d, %Y',
     TDMY_FORMAT = '%H:%M, %A, %b %d, %Y';
 
 var _initOptionsZhSeries = function _initOptionsZhSeries(chart) {
-  var options = chart.options,
-      zhSeries = options.zhSeries;
-
-  if (!zhSeries) {
-    options.zhSeries = {
-      count: 0,
-      titleEls: []
-    };
-  } else if (!zhSeries.titleEls) {
-    zhSeries.titleEls = [];
-  }
-
+  var options = chart.options;
+  options.zhSeries = _assign({
+    count: 0,
+    titleEls: []
+  }, options.zhSeries);
   return options;
 };
 
@@ -103,7 +98,7 @@ var _addSeries = function _addSeries(_ref) {
     series.color = _color;
   }
 
-  if (Array.isArray(series)) {
+  if (_isArr(series)) {
     var _max = series.length - 1;
 
     series.forEach(function (seria, index) {
@@ -111,11 +106,9 @@ var _addSeries = function _addSeries(_ref) {
         seria.yAxis = label;
       }
 
-      if (index !== _max) {
-        chart.addSeries(seria, false, false);
-      } else {
-        chart.addSeries(seria, true, true);
-      }
+      var _option = index === _max ? [true, true] : [false, false];
+
+      chart.addSeries.apply(chart, [seria].concat([_option]));
     });
   } else {
     chart.addSeries(series, true, true);
@@ -199,6 +192,19 @@ var _setPlotLine = function _setPlotLine(plotLine, value, delta) {
   }
 };
 
+var _crDelta = function _crDelta(perToValue) {
+  return "\xA0\xA0\u0394 " + perToValue + "%";
+},
+    _crPoint = function _crPoint(bValue) {
+  return parseFloat(bValue.round(4).toString(), 10);
+},
+    _calcPerTo = function _calcPerTo(bFrom, bValue, bTotal) {
+  return calcPercent({
+    bValue: bFrom.minus(bValue),
+    bTotal: bTotal
+  });
+};
+
 var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
   arCalcDeltaYAxis: _calcDeltaYAxis["default"],
   addSeriaWithRenderLabel: function addSeriaWithRenderLabel(props) {
@@ -237,17 +243,13 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
         userMin = event.userMin,
         userMax = event.userMax,
         min = event.min,
-        max = event.max;
+        max = event.max,
+        _min = userMin || min,
+        _max = userMin ? userMax : max;
 
-    if (userMin) {
-      zhDetailCharts.forEach(function (chart) {
-        chart.xAxis[0].setExtremes(userMin, userMax, true, true);
-      });
-    } else {
-      zhDetailCharts.forEach(function (chart) {
-        chart.xAxis[0].setExtremes(min, max, true, true);
-      });
-    }
+    zhDetailCharts.forEach(function (chart) {
+      chart.xAxis[0].setExtremes(_min, _max, true, true);
+    });
   },
   afterSetExtremesYAxis: function afterSetExtremesYAxis(event) {
     var trigger = event.trigger,
@@ -262,9 +264,9 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
     var points = chart.series[0].data,
         mlsUTC = _DateUtils["default"].dmyToUTC(dateTo),
         index = _isNaN(mlsUTC) ? -1 : _fnFindIndex(points, mlsUTC),
-        valueTo = index !== -1 ? points[index].y : undefined;
+        valueTo = index !== -1 ? points[index].y : void 0;
 
-    return valueTo !== undefined ? Object.assign({}, prev, _crValueMoving({
+    return _isUndef(valueTo) ? void 0 : _assign({}, prev, _crValueMoving({
       nowValue: prev.value,
       prevValue: valueTo,
       Direction: _Type.Direction,
@@ -272,7 +274,7 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
     }), {
       valueTo: valueTo,
       dateTo: dateTo
-    }) : undefined;
+    });
   },
   toNumberFormat: _formatNumber2["default"],
   toNumberFormatAll: _formatAllNumber["default"],
@@ -328,22 +330,12 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
     var _bMax = max !== Number.NEGATIVE_INFINITY ? (0, _big["default"])(max) : (0, _big["default"])(0),
         _bMin = min !== Number.POSITIVE_INFINITY ? (0, _big["default"])(min) : (0, _big["default"])(0),
         _bValue = value !== null ? (0, _big["default"])(value) : (0, _big["default"])(0),
-        perToMax = calcPercent({
-      bValue: _bMax.minus(_bValue),
-      bTotal: _bValue
-    }),
-        perToMin = calcPercent({
-      bValue: _bValue.minus(_bMin),
-      bTotal: _bValue
-    }),
-        _deltaMax = "\xA0\xA0\u0394 " + perToMax + "%",
-        _deltaMin = "\xA0\xA0\u0394 " + perToMin + "%",
-        _maxPoint = parseFloat(_bMax.round(4).toString(), 10),
-        _minPoint = parseFloat(_bMin.round(4).toString(), 10);
+        perToMax = _calcPerTo(_bMax, _bValue, _bValue),
+        perToMin = _calcPerTo(_bValue, _bMin, _bValue);
 
-    _setPlotLine(plotLines[0], _maxPoint, _deltaMax);
+    _setPlotLine(plotLines[0], _crPoint(_bMax), _crDelta(perToMax));
 
-    _setPlotLine(plotLines[1], _minPoint, _deltaMin);
+    _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(perToMin));
   },
   calcMinY: function calcMinY(min, max) {
     return max > Number.NEGATIVE_INFINITY && min < Number.POSITIVE_INFINITY ? min - (max - min) * 1 / 6 : void 0;
