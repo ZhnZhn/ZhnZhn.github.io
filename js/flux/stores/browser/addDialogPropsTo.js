@@ -5,37 +5,27 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _crAddProps = _interopRequireDefault(require("./crAddProps"));
+
 var _crSelectProps = _interopRequireDefault(require("./crSelectProps"));
 
-var _assign = Object.assign;
-
-var _crInitialProps = function _crInitialProps(addProps, items) {
-  var initialProps = {},
-      _config = items[addProps],
-      _extends = _config["extends"];
-
-  if (typeof _extends === 'string') {
-    _assign(initialProps, items[_extends].dialogProps);
-  } else if (Array.isArray(_extends)) {
-    _extends.forEach(function (id) {
-      _assign(initialProps, items[id].dialogProps);
-    });
-  }
-
-  return _assign(initialProps, _config.dialogProps);
+var _assign = Object.assign,
+    _isUndef = function _isUndef(v) {
+  return typeof v === 'undefined';
 };
 
 var addDialogPropsTo = function addDialogPropsTo(items) {
-  Object.keys(items).forEach(function (propName) {
-    var item = items[propName],
-        addProps = item.addProps;
+  Object.keys(items).forEach(function (pnId) {
+    var item = items[pnId],
+        addPropsId = item.addProps;
 
-    if (addProps !== undefined) {
+    if (!_isUndef(addPropsId)) {
       var dialogProps = item.dialogProps,
-          initialProps = _crInitialProps(addProps, items),
-          _selectProps = (0, _crSelectProps["default"])(initialProps, dialogProps);
+          addProps = (0, _crAddProps["default"])(items, addPropsId),
+          _selectProps = (0, _crSelectProps["default"])(addProps, dialogProps);
 
-      item.dialogProps = _assign({}, initialProps, dialogProps, _selectProps);
+      item.dialogProps = _assign({}, addProps, dialogProps, _selectProps);
+      item.dialogProps.dfProps = _assign({}, addProps.dfProps, dialogProps.dfProps);
     }
   });
 };

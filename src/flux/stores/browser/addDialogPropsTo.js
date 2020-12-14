@@ -1,33 +1,23 @@
-
+import crAddProps from './crAddProps'
 import crSelectProps from './crSelectProps'
 
 const _assign = Object.assign
-
-const _crInitialProps = (addProps, items) => {
-  const initialProps = {}
-  , _config = items[addProps]
-  , _extends = _config.extends;
-
-  if (typeof _extends === 'string') {
-    _assign(initialProps, items[_extends].dialogProps)
-  } else if (Array.isArray(_extends)) {
-    _extends.forEach(id => {
-      _assign(initialProps, items[id].dialogProps)
-    })
-  }
-  return _assign(initialProps, _config.dialogProps);
-}
+, _isUndef = v => typeof v === 'undefined';
 
 const addDialogPropsTo = items => {
-  Object.keys(items).forEach(propName => {
-    const item = items[propName]
-        , addProps = item.addProps;
-    if (addProps !== undefined) {
-      const dialogProps = item.dialogProps
-      , initialProps = _crInitialProps(addProps, items)
-      , _selectProps = crSelectProps(initialProps, dialogProps);
+  Object.keys(items).forEach(pnId => {
+    const item = items[pnId]
+    , addPropsId = item.addProps;
+    if (!_isUndef(addPropsId)) {
+      const { dialogProps } = item
+      , addProps = crAddProps(items, addPropsId)
+      , _selectProps = crSelectProps(addProps, dialogProps);      
+
       item.dialogProps = _assign({},
-        initialProps, dialogProps, _selectProps
+        addProps, dialogProps, _selectProps
+      )
+      item.dialogProps.dfProps = _assign({},
+        addProps.dfProps, dialogProps.dfProps
       )
     }
   })

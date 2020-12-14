@@ -1,17 +1,23 @@
 
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, _isNumber = n => typeof n === 'number'
+    && n-n === 0
+, _isStr = str => typeof str === 'string';
 
+const _crJsonProp = strOr => _isStr(strOr)
+ ? strOr
+ : void 0;
 const _crDfItem = (item, rootUri) => ({
   id: item[0],
   caption: item[1],
   uri: `${rootUri}${item[2]}.json`,
-  jsonProp: item[3]
+  jsonProp: _crJsonProp(item[3])
 })
 const _crIdItem = (item, rootUri) => ({
   id: item[0],
   caption: item[0],
   uri: `${rootUri}${item[1]}.json`,
-  jsonProp: item[2],
+  jsonProp: _crJsonProp(item[2]),
   isWithInput: Boolean(item[3])
 });
 
@@ -20,11 +26,19 @@ const _rFns = {
   id: _crIdItem
 };
 
-const _mergeSelectProps = (selectProps, obj) => {
-  const arr = [...selectProps, ...(obj.selectProps || [])];
+const _mergeSelectProps = (selectProps, obj) => {  
+  const arr = [...selectProps];
+  (obj.selectProps || []).forEach(_arr => {
+    const _rowIndex = _arr[_arr.length - 1];
+    if (_isNumber(_rowIndex)){
+      arr.splice(_rowIndex-1, 0, _arr)
+    } else {
+      arr.push(_arr)
+    }
+  })
   return arr.length > 0
     ? arr
-    : undefined;
+    : void 0;
 };
 const _crSelectProps = (items, rootUri='', spT) => {
   if (!_isArr(items)) {

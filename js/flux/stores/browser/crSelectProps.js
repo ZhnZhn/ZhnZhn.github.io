@@ -2,14 +2,25 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-var _isArr = Array.isArray;
+
+var _isArr = Array.isArray,
+    _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
+},
+    _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
+
+var _crJsonProp = function _crJsonProp(strOr) {
+  return _isStr(strOr) ? strOr : void 0;
+};
 
 var _crDfItem = function _crDfItem(item, rootUri) {
   return {
     id: item[0],
     caption: item[1],
     uri: "" + rootUri + item[2] + ".json",
-    jsonProp: item[3]
+    jsonProp: _crJsonProp(item[3])
   };
 };
 
@@ -18,7 +29,7 @@ var _crIdItem = function _crIdItem(item, rootUri) {
     id: item[0],
     caption: item[0],
     uri: "" + rootUri + item[1] + ".json",
-    jsonProp: item[2],
+    jsonProp: _crJsonProp(item[2]),
     isWithInput: Boolean(item[3])
   };
 };
@@ -29,8 +40,17 @@ var _rFns = {
 };
 
 var _mergeSelectProps = function _mergeSelectProps(selectProps, obj) {
-  var arr = [].concat(selectProps, obj.selectProps || []);
-  return arr.length > 0 ? arr : undefined;
+  var arr = [].concat(selectProps);
+  (obj.selectProps || []).forEach(function (_arr) {
+    var _rowIndex = _arr[_arr.length - 1];
+
+    if (_isNumber(_rowIndex)) {
+      arr.splice(_rowIndex - 1, 0, _arr);
+    } else {
+      arr.push(_arr);
+    }
+  });
+  return arr.length > 0 ? arr : void 0;
 };
 
 var _crSelectProps = function _crSelectProps(items, rootUri, spT) {
