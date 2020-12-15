@@ -50,9 +50,32 @@ var ST = {
     color: '#607d8b'
   }
 };
+var DP = [_ProviderLinks["default"].DbNomics, _ProviderLinks["default"].Eurostat, _ProviderLinks["default"].UnComtrade, _ProviderLinks["default"].WorldBank, _ProviderLinks["default"].Insee, _ProviderLinks["default"].ONS, _ProviderLinks["default"].StatNorway, _ProviderLinks["default"].StatSweden, _ProviderLinks["default"].StatFinland, _ProviderLinks["default"].Bsl, _ProviderLinks["default"].CryptoCompare, _ProviderLinks["default"].CoinGecko, _ProviderLinks["default"].CoinMetrics, _ProviderLinks["default"].Coinpaprika, _ProviderLinks["default"].Binance, _ProviderLinks["default"].Bitstamp],
+    DP_KEY = [_ProviderLinks["default"].Barchart, _ProviderLinks["default"].AlphaVantage, _ProviderLinks["default"].Iex, _ProviderLinks["default"].Bea, _ProviderLinks["default"].Eia, _ProviderLinks["default"].Fmp, _ProviderLinks["default"].Intrinio];
 
-var DataProviders = function DataProviders(_ref) {
-  var isClose = _ref.isClose;
+var Links = function Links(_ref) {
+  var list = _ref.list;
+  return list.map(function (LinkComp, index) {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: _About["default"].PROVIDER,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkComp, {})
+    }, index);
+  });
+};
+
+var QuanlLink = function QuanlLink(_ref2) {
+  var req = _ref2.req;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+    style: _About["default"].PROVIDER,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Quandl, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+      style: _About["default"].BLACK,
+      children: ["\xA0(", req, " per day)"]
+    })]
+  });
+};
+
+var DataProviders = function DataProviders(_ref3) {
+  var isClose = _ref3.isClose;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
     isClose: isClose,
     caption: "Data Providers (All 25):",
@@ -60,60 +83,10 @@ var DataProviders = function DataProviders(_ref) {
     childStyle: ST.ROOT_CHILD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-          style: _About["default"].PROVIDER,
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Quandl, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: _About["default"].BLACK,
-            children: "\xA0(50 per day)"
-          })]
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].DbNomics, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Eurostat, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].UnComtrade, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].WorldBank, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Insee, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].ONS, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].StatNorway, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].StatSweden, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].StatFinland, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Bsl, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].CryptoCompare, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].CoinGecko, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].CoinMetrics, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Coinpaprika, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Binance, {})
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: _About["default"].PROVIDER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Bitstamp, {})
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(QuanlLink, {
+          req: "50"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Links, {
+          list: DP
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose["default"], {
         caption: "(8) Required API Key:",
@@ -122,33 +95,10 @@ var DataProviders = function DataProviders(_ref) {
         childStyle: ST.CHILD_STYLE,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
           style: ST.P4,
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-            style: _About["default"].PROVIDER,
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Quandl, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: _About["default"].BLACK,
-              children: "\xA0(50 000 per day)"
-            })]
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: _About["default"].PROVIDER,
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Barchart, {})
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: _About["default"].PROVIDER,
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].AlphaVantage, {})
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: _About["default"].PROVIDER,
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Iex, {})
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: _About["default"].PROVIDER,
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Bea, {})
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: _About["default"].PROVIDER,
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Eia, {})
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: _About["default"].PROVIDER,
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Fmp, {})
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: _About["default"].PROVIDER,
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Intrinio, {})
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(QuanlLink, {
+            req: "50 000"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Links, {
+            list: DP_KEY
           })]
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: ST.NOTE,

@@ -43,6 +43,33 @@ const ST = {
   }
 };
 
+const DP = [
+  Link.DbNomics, Link.Eurostat, Link.UnComtrade, Link.WorldBank,
+  Link.Insee, Link.ONS, Link.StatNorway,
+  Link.StatSweden, Link.StatFinland, Link.Bsl,
+  Link.CryptoCompare, Link.CoinGecko, Link.CoinMetrics,
+  Link.Coinpaprika, Link.Binance, Link.Bitstamp
+]
+, DP_KEY = [
+  Link.Barchart, Link.AlphaVantage, Link.Iex,
+  Link.Bea, Link.Eia, Link.Fmp, Link.Intrinio
+];
+
+const Links = ({ list }) => list.map((LinkComp, index) => (
+  <span style={S.PROVIDER} key={index}>
+    <LinkComp />
+  </span>
+));
+
+const QuanlLink = ({ req }) => (
+  <span style={S.PROVIDER}>
+    <Link.Quandl/>
+    <span style={S.BLACK}>
+       &nbsp;({req} per day)
+    </span>
+  </span>
+);
+
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
@@ -52,60 +79,8 @@ const DataProviders = ({ isClose }) => (
   >
     <div>
       <p>
-        <span style={S.PROVIDER}>
-          <Link.Quandl />
-          <span style={S.BLACK}>
-            &nbsp;(50 per day)
-          </span>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.DbNomics />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Eurostat />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.UnComtrade />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.WorldBank />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Insee/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.ONS/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.StatNorway />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.StatSweden />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.StatFinland />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Bsl/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.CryptoCompare/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.CoinGecko />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.CoinMetrics />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Coinpaprika />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Binance />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Bitstamp />
-        </span>
+        <QuanlLink req="50" />
+        <Links list={DP} />
       </p>
       <OpenClose
         caption="(8) Required API Key:"
@@ -114,33 +89,8 @@ const DataProviders = ({ isClose }) => (
         childStyle={ST.CHILD_STYLE}
       >
       <p style={ST.P4}>
-        <span style={S.PROVIDER}>
-          <Link.Quandl/>
-          <span style={S.BLACK}>
-             &nbsp;(50 000 per day)
-          </span>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Barchart/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.AlphaVantage/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Iex />
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Bea/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Eia/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Fmp/>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.Intrinio/>
-        </span>
+        <QuanlLink req="50 000" />
+        <Links list={DP_KEY} />
       </p>
       <div style={ST.NOTE}>
         <p>
