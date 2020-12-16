@@ -22,14 +22,20 @@ var _filterLeadingNulls = function _filterLeadingNulls(data) {
   var i = 0;
 
   for (i; i < _len; i++) {
-    if (data[i].y !== null) break;
+    if (data[i][1] !== null) break;
   }
 
-  return data.slice(i);
+  var j = _len - 1;
+
+  for (j; j > -1; j--) {
+    if (data[j][1] !== null) break;
+  }
+
+  return data.slice(i, j + 1);
 };
 
 var _isReverse = function _isReverse(data) {
-  return data.length > 2 && data[0].x > data[1].x;
+  return data.length > 2 && data[0][0] > data[1][0];
 };
 
 var _checkOrder = function _checkOrder(data) {
@@ -38,10 +44,13 @@ var _checkOrder = function _checkOrder(data) {
 
 var _fCrDataPoint = function _fCrDataPoint(values) {
   return function (time, i) {
-    return {
-      x: toUTC(time),
-      y: values[i] ? values[i].value : null
-    };
+    var _pIndex = time.length - 1,
+        isP = time[_pIndex] === '*',
+        _time = isP ? time.slice(0, _pIndex) : time,
+        x = toUTC(_time),
+        y = values[i] ? values[i].value : null;
+
+    return isP ? [x, y, 'p'] : [x, y];
   };
 };
 

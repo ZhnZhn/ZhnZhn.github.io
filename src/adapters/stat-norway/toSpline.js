@@ -15,21 +15,29 @@ const _filterLeadingNulls = data => {
   const _len = data.length;
   let i = 0;
   for(i; i<_len; i++){
-    if (data[i].y !== null) break;
+    if (data[i][1] !== null) break;
   }
-  return data.slice(i);
+  let j = _len - 1;
+  for(j; j>-1; j--){
+    if (data[j][1] !== null) break;
+  }
+  return data.slice(i, j+1);
 };
 
 const _isReverse = data => data.length > 2
-  && data[0].x > data[1].x;
+  && data[0][0] > data[1][0];
 const _checkOrder = data => _isReverse(data)
   ? data.reverse()
   : data;
 
-const _fCrDataPoint = (values) => (time, i) => ({
-  x: toUTC(time),
-  y: values[i] ? values[i].value : null
-});
+const _fCrDataPoint = (values) => (time, i) => {
+  const _pIndex = time.length - 1
+  , isP = time[_pIndex] === '*'
+  , _time = isP ? time.slice(0, _pIndex) : time
+  , x = toUTC(_time)
+  , y = values[i] ? values[i].value : null;
+  return isP ? [x, y, 'p'] : [x, y];
+};
 
 const _postProcessData = compose(
   _filterLeadingNulls,
