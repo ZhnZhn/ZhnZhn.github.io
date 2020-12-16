@@ -7,24 +7,28 @@ import Tooltip from '../../charts/Tooltip'
 import fnAdapter from './fnAdapter'
 
 const {
-        isYNumber,
-        crTitle, crTid, crChartOption
-      } = fnAdapter;
+  isYNumber,
+  crTitle, crTid, crChartOption
+} = fnAdapter;
+
+const _assign = Object.assign
+, _isArr = Array.isArray;
 
 const COLORS = [
-      '#9ecae1', '#6baed6',
-      '#4292c6', '#2171b5',
-      '#08519c', '#08306b',
-      '#74c476'
-  ];
+  '#9ecae1', '#6baed6',
+  '#4292c6', '#2171b5',
+  '#08519c', '#08306b',
+  '#74c476'
+];
 
 const _fCrCategoryPoint = (c) => (v, i) => {
+  const label = c.Category(i).label;
   return {
     y: v.value,
-    name: c.Category(i).label,
-    c: c.Category(i).label
+    name: label,
+    c: label
   };
-}
+};
 const _fIsCategoryPoint = (dfT) => (p) => {
   if (dfT && p.c === dfT) {
     return false;
@@ -43,11 +47,11 @@ const _colorItems = (data, _clusters) => {
 
 const _setClusters = (data) => {
   const _points = data.map((item, index) => {
-           const arr = [item.y, 0 ];
-           arr.id = index;
-           return arr;
-        })
-       , _clusters = clusterMaker.crUnarySortedCluster(_points)
+    const arr = [item.y, 0];
+    arr.id = index;
+    return arr;
+  })
+  , _clusters = clusterMaker.crUnarySortedCluster(_points);
   _colorItems(data, _clusters)
 }
 
@@ -58,7 +62,7 @@ const _crCategory = (option, by) => {
     case '2':
       for (i=0; i<items.length; i++){
         if (i!==1 && items[i]){
-          Object.assign(itemSlice, items[i].slice)
+          _assign(itemSlice, items[i].slice)
         }
       }
       return {
@@ -68,7 +72,7 @@ const _crCategory = (option, by) => {
       };
     default:
       for (i=1; i<items.length; i++){
-        Object.assign(itemSlice, items[i].slice)
+        _assign(itemSlice, items[i].slice)
       }
       return {
         category: dfC,
@@ -78,16 +82,13 @@ const _crCategory = (option, by) => {
   }
 }
 
-const _crData = (values, c, cTotal ) => {
-  if (!Array.isArray(values)) {
-    return [];
-  }
-  return values
-     .map(_fCrCategoryPoint(c))
-     .filter(_fIsCategoryPoint(cTotal))
-     .sort(_compareByY)
-     .reverse();
-}
+const _crData = (values, c, cTotal) => _isArr(values)
+ ? values
+    .map(_fCrCategoryPoint(c))
+    .filter(_fIsCategoryPoint(cTotal))
+    .sort(_compareByY)
+    .reverse()
+ : [];
 
 const toColumn = {
 
@@ -123,11 +124,11 @@ const toColumn = {
              ...crChartOption(_ds, Tid, option)
             })
            .toConfig()
-    
+
     if (isCluster) {
       _setClusters(data)
     }
-    Object.assign(config.series[0], {
+    _assign(config.series[0], {
       color: seriaColor,
       data: data
     })

@@ -21,14 +21,17 @@ var isYNumber = _fnAdapter["default"].isYNumber,
     crTitle = _fnAdapter["default"].crTitle,
     crTid = _fnAdapter["default"].crTid,
     crChartOption = _fnAdapter["default"].crChartOption;
+var _assign = Object.assign,
+    _isArr = Array.isArray;
 var COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
 
 var _fCrCategoryPoint = function _fCrCategoryPoint(c) {
   return function (v, i) {
+    var label = c.Category(i).label;
     return {
       y: v.value,
-      name: c.Category(i).label,
-      c: c.Category(i).label
+      name: label,
+      c: label
     };
   };
 };
@@ -80,7 +83,7 @@ var _crCategory = function _crCategory(option, by) {
     case '2':
       for (i = 0; i < items.length; i++) {
         if (i !== 1 && items[i]) {
-          Object.assign(itemSlice, items[i].slice);
+          _assign(itemSlice, items[i].slice);
         }
       }
 
@@ -92,7 +95,7 @@ var _crCategory = function _crCategory(option, by) {
 
     default:
       for (i = 1; i < items.length; i++) {
-        Object.assign(itemSlice, items[i].slice);
+        _assign(itemSlice, items[i].slice);
       }
 
       return {
@@ -104,11 +107,7 @@ var _crCategory = function _crCategory(option, by) {
 };
 
 var _crData = function _crData(values, c, cTotal) {
-  if (!Array.isArray(values)) {
-    return [];
-  }
-
-  return values.map(_fCrCategoryPoint(c)).filter(_fIsCategoryPoint(cTotal)).sort(_compareByY).reverse();
+  return _isArr(values) ? values.map(_fCrCategoryPoint(c)).filter(_fIsCategoryPoint(cTotal)).sort(_compareByY).reverse() : [];
 };
 
 var toColumn = {
@@ -159,10 +158,11 @@ var toColumn = {
       _setClusters(data);
     }
 
-    Object.assign(config.series[0], {
+    _assign(config.series[0], {
       color: seriaColor,
       data: data
     });
+
     return config;
   }
 };
