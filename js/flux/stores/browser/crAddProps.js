@@ -30,7 +30,10 @@ var _assignConfigTo = function _assignConfigTo(toObj, conf1, conf2) {
 
   _assign(toObj, dialogProps2, dialogProps1);
 
-  toObj.selectProps = _selectProps;
+  if (_selectProps.length > 0) {
+    toObj.selectProps = _selectProps;
+  }
+
   return toObj;
 };
 

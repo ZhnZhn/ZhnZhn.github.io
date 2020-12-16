@@ -57,6 +57,15 @@ const items = {
          dfT2: 'dfT2'
        }
      }
+  },
+  ID_TOPIC_3: {
+    type: 'ID_TOPIC_3',
+    addProps: 'B1',
+    dialogProps: {
+      dfProps: {
+        dfT3: 'dfT3'
+      }
+    }
   }
 }
 
@@ -115,6 +124,18 @@ const result = {
           dfT2: 'dfT2'
         }
       }
+  },
+  ID_TOPIC_3: {
+    type: 'ID_TOPIC_3',
+    addProps: 'B1',
+    dialogProps: {
+      rootUri: './data/',
+      b1: 'b1',
+      ba: 'b1',      
+      dfProps: {
+        dfT3: 'dfT3'
+      }
+    }
   }
 };
 
