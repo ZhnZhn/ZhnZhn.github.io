@@ -11,20 +11,23 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var ymdToUTC = _fnAdapter["default"].ymdToUTC,
     compareByDate = _fnAdapter["default"].compareByDate,
+    roundBy = _fnAdapter["default"].roundBy,
     _isNan = Number.isNaN || isNaN;
 
 var _crData = function _crData(json, option) {
-  var dfItem = option.dfItem,
-      dfPeriod = option.dfPeriod,
-      _pnReport = dfPeriod === 'A' ? 'annualReports' : 'quarterlyReports',
+  var dfPeriod = option.dfPeriod,
+      _pnReport = dfPeriod === 'A' ? 'annualEarnings' : 'quarterlyEarnings',
       _reports = json[_pnReport] || [],
       _data = [];
 
-  _reports.forEach(function (item) {
-    var _y = parseInt(item[dfItem], 10);
+  _reports.forEach(function (_ref) {
+    var reportedEPS = _ref.reportedEPS,
+        fiscalDateEnding = _ref.fiscalDateEnding;
+
+    var _y = roundBy(reportedEPS);
 
     if (!_isNan(_y)) {
-      _data.push([ymdToUTC(item.fiscalDateEnding), _y]);
+      _data.push([ymdToUTC(fiscalDateEnding), _y]);
     }
   });
 
@@ -33,10 +36,10 @@ var _crData = function _crData(json, option) {
 
 var _adapter;
 
-var FundAdapter = function FundAdapter() {
+var EarnAdapter = function EarnAdapter() {
   return _adapter || (_adapter = (0, _crAdapterType["default"])(_crData));
 };
 
-var _default = FundAdapter;
+var _default = EarnAdapter;
 exports["default"] = _default;
-//# sourceMappingURL=FundAdapter.js.map
+//# sourceMappingURL=EarnAdapter.js.map

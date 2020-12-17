@@ -41,15 +41,22 @@ const AlphaApi = {
         const { outputsize } = option;
         return `${C.ROOT}?function=${_fn}&outputsize=${outputsize}&symbol=${ticket}&apikey=${apiKey}`;
       }
-      case 'INCOME_STATEMENT':
-      case 'BALANCE_SHEET':
-      case 'CASH_FLOW': {
+      case 'INCOME_STATEMENT': case 'BALANCE_SHEET': case 'CASH_FLOW': {
         const { items, itemCaption } = option
         , _symbol = getValue(items[0]);
         _assign(option, {
           itemCaption: itemCaption.replace(getCaption(items[0]), _symbol),
           dfItem: getValue(items[1]),
           dfPeriod: getValue(items[2])
+        })
+        return `${C.ROOT}?function=${_fn}&symbol=${_symbol}&apikey=${apiKey}`;
+      }
+      case 'EARNINGS': {
+        const { items } = option
+        , _symbol = getValue(items[0]);
+        _assign(option, {
+          itemCaption: _symbol,
+          dfPeriod: getValue(items[1])
         })
         return `${C.ROOT}?function=${_fn}&symbol=${_symbol}&apikey=${apiKey}`;
       }

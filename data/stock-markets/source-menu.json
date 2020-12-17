@@ -28,7 +28,8 @@
           "items":[
             { "id": "SM_A_INCOME" },
             { "id": "SM_A_BS" },
-            { "id": "SM_A_CF" }
+            { "id": "SM_A_CF" },
+            { "id": "SM_A_EAR" }
           ]
         },
         { "id": "SM_A_SECTOR" },
@@ -367,6 +368,20 @@
                }
              }
           },
+          "SM_A_EAR" : {
+              "type" : "SM_A_EAR",
+              "menuTitle" : "Earnings (EPS)",
+              "addProps" : "SM_BASE_AV",
+              "dialogProps" : {
+                "selectProps": [
+                  ["Period", "av-periods"]
+                ],
+                "dfProps": {
+                  "dfSubId": "E",
+                  "dfFn": "EARNINGS"
+                }
+              }
+           },
        "SM_A_SEARCH" : {
            "type" : "SM_A_SEARCH",
            "menuTitle" : "Search Symbols or Companies",

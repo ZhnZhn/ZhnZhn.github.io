@@ -9,7 +9,8 @@ const {
   stockSeriesLegend,
   valueMoving,
   ymdToUTC,
-  compareByDate
+  compareByDate,
+  roundBy
 } = AdapterFn;
 
 const _crItemConf = ({id, dataSource, data}, option) => {
@@ -42,6 +43,7 @@ const fnAdapter = {
   valueMoving,
   ymdToUTC,
   compareByDate,
+  roundBy,
   crIntradayConfigOption: (config, option) => ({
     zhConfig: _crZhConfig(config, option),
     valueMoving: valueMoving(config.data)

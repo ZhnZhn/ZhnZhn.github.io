@@ -1,8 +1,7 @@
-import crConfigType1 from '../../charts/crConfigType1'
+import crAdapterType1 from '../crAdapterType1'
 import fnAdapter from './fnAdapter'
 
-const { Builder } = crConfigType1
-, {
+const {
   ymdToUTC,
   compareByDate
 } = fnAdapter
@@ -25,41 +24,8 @@ const _crData = (json, option) => {
   return _data.sort(compareByDate);
 }
 
-const _crZhConfig = ({
-  _itemKey,
-  itemCaption,
-  dataSource,
-}) => ({
-  id: _itemKey, key: _itemKey,
-  itemCaption,
-  dataSource
-});
-
-const _crConfigOption = (option) => ({
-  //valueMoving: valueMoving(data),
-  zhConfig: _crZhConfig(option)
-})
-
-const FundAdapter = {
-  crKey(option){
-    return option._itemKey;
-  },
-  toConfig(json, option){
-    const data = _crData(json, option)
-    , confOption = _crConfigOption(option);
-    return {
-      config: crConfigType1({
-        option, data, confOption,
-      })
-    };
-  },
-  toSeries(json, option){
-    return Builder.crSeria({
-      adapter: FundAdapter,
-      json, option,
-      type: 'spline'
-    });
-  }
-};
+let _adapter
+const FundAdapter = () => _adapter
+  || (_adapter = crAdapterType1(_crData))
 
 export default FundAdapter

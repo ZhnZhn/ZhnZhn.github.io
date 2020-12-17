@@ -16,7 +16,8 @@ var getValue = _AdapterFn["default"].getValue,
     stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend,
     valueMoving = _AdapterFn["default"].valueMoving,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    compareByDate = _AdapterFn["default"].compareByDate;
+    compareByDate = _AdapterFn["default"].compareByDate,
+    roundBy = _AdapterFn["default"].roundBy;
 
 var _crItemConf = function _crItemConf(_ref, option) {
   var id = _ref.id,
@@ -59,6 +60,7 @@ var fnAdapter = {
   valueMoving: valueMoving,
   ymdToUTC: ymdToUTC,
   compareByDate: compareByDate,
+  roundBy: roundBy,
   crIntradayConfigOption: function crIntradayConfigOption(config, option) {
     return {
       zhConfig: _crZhConfig(config, option),

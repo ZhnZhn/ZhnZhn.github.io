@@ -79,6 +79,19 @@ var AlphaApi = {
           return C.ROOT + "?function=" + _fn + "&symbol=" + _symbol + "&apikey=" + apiKey;
         }
 
+      case 'EARNINGS':
+        {
+          var _items = option.items,
+              _symbol2 = getValue(_items[0]);
+
+          _assign(option, {
+            itemCaption: _symbol2,
+            dfPeriod: getValue(_items[1])
+          });
+
+          return C.ROOT + "?function=" + _fn + "&symbol=" + _symbol2 + "&apikey=" + apiKey;
+        }
+
       default:
         return C.ROOT + "?function=" + indicator + "&symbol=" + ticket + "&interval=daily&time_period=" + period + "&series_type=close&apikey=" + apiKey;
     }

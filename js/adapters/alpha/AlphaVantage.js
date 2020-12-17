@@ -19,17 +19,26 @@ var _SearchAdapter = _interopRequireDefault(require("./SearchAdapter"));
 
 var _FundAdapter = _interopRequireDefault(require("./FundAdapter"));
 
+var _EarnAdapter = _interopRequireDefault(require("./EarnAdapter"));
+
 var _rAdapter = {
   DF: _IndicatorAdapter["default"],
   I: _IntradayAdapter["default"],
   S: _SectorAdapter["default"],
   SR: _SearchAdapter["default"],
-  F: _FundAdapter["default"]
+  F: _FundAdapter["default"],
+  E: _EarnAdapter["default"]
+};
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
 };
 
 var _getAdapter = function _getAdapter(option) {
-  var dfSubId = option.dfSubId;
-  return _rAdapter[dfSubId] || _rAdapter.DF;
+  var dfSubId = option.dfSubId,
+      _adapter = _rAdapter[dfSubId] || _rAdapter.DF;
+
+  return _isFn(_adapter) ? _adapter() : _adapter;
 };
 
 var adapter = (0, _crAdapter["default"])(_getAdapter, {
