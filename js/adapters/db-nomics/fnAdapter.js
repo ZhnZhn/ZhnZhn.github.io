@@ -87,7 +87,7 @@ var _crInfo = function _crInfo(json, option) {
 };
 
 var _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && !Number.isNaN(n);
+  return typeof n === 'number' && n - n === 0;
 };
 
 var _isQuarter = function _isQuarter(str) {
@@ -121,8 +121,9 @@ var fnAdapter = {
       subtitle: _subtitle
     };
   },
-  crData: function crData(json, fromDate, frequency) {
-    var data = [],
+  crData: function crData(json, option) {
+    var fromDate = option.fromDate,
+        data = [],
         _xFrom = fromDate ? ymdToUTC(fromDate) : 0,
         _getPeriodAndValue = getPeriodAndValue(json),
         period = _getPeriodAndValue.period,
@@ -142,7 +143,7 @@ var fnAdapter = {
 
     return data;
   },
-  crConfigOption: function crConfigOption(json, option) {
+  crConfOption: function crConfOption(option, json) {
     return {
       zhConfig: _crZhConfig(option),
       info: _crInfo(json, option)

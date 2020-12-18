@@ -5,39 +5,23 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
+var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var Builder = _crConfigType["default"].Builder,
-    crData = _fnAdapter["default"].crData,
+var crData = _fnAdapter["default"].crData,
     crTitle = _fnAdapter["default"].crTitle,
-    crConfigOption = _fnAdapter["default"].crConfigOption,
-    _assign = Object.assign;
-var DbNomicsAdapter = {
-  toConfig: function toConfig(json, option) {
-    var fromDate = option.fromDate,
-        data = crData(json, fromDate),
-        confOption = crConfigOption(json, option);
-
-    _assign(option, crTitle(option, json));
-
-    return {
-      config: (0, _crConfigType["default"])({
-        option: option,
-        data: data,
-        confOption: confOption
-      })
-    };
-  },
-  toSeries: function toSeries(json, option) {
-    return Builder.crSeria({
-      adapter: DbNomicsAdapter,
-      json: json,
-      option: option
-    });
-  }
+    crConfOption = _fnAdapter["default"].crConfOption,
+    _assign = Object.assign,
+    trOption = function trOption(option, json) {
+  _assign(option, crTitle(option, json));
 };
+
+var DbNomicsAdapter = (0, _crAdapterType["default"])({
+  crData: crData,
+  crConfOption: crConfOption,
+  trOption: trOption
+});
 var _default = DbNomicsAdapter;
 exports["default"] = _default;
 //# sourceMappingURL=DbNomicsAdapter.js.map

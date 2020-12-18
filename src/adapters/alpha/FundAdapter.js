@@ -7,7 +7,7 @@ const {
 } = fnAdapter
 , _isNan = Number.isNaN || isNaN;
 
-const _crData = (json, option) => {
+const crData = (json, option) => {
   const { dfItem, dfPeriod } = option
   , _pnReport = dfPeriod === 'A'
        ? 'annualReports'
@@ -26,6 +26,6 @@ const _crData = (json, option) => {
 
 let _adapter
 const FundAdapter = () => _adapter
-  || (_adapter = crAdapterType1(_crData))
+  || (_adapter = crAdapterType1({ crData }))
 
 export default FundAdapter

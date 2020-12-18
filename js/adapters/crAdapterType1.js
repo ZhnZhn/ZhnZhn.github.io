@@ -19,24 +19,27 @@ var Builder = _crConfigType["default"].Builder,
     dataSource: dataSource
   };
 },
-    crConfigOptionDf = function crConfigOptionDf(option) {
+    crConfOptionDf = function crConfOptionDf(option) {
   return {
     zhConfig: _crZhConfig(option)
   };
-};
+},
+    trOptionDf = function trOptionDf() {};
 
-var crAdapterType1 = function crAdapterType1(crData, crConfigOption) {
-  if (crConfigOption === void 0) {
-    crConfigOption = crConfigOptionDf;
-  }
-
+var crAdapterType1 = function crAdapterType1(_ref2) {
+  var crData = _ref2.crData,
+      _ref2$crConfOption = _ref2.crConfOption,
+      crConfOption = _ref2$crConfOption === void 0 ? crConfOptionDf : _ref2$crConfOption,
+      _ref2$trOption = _ref2.trOption,
+      trOption = _ref2$trOption === void 0 ? trOptionDf : _ref2$trOption;
   var adapter = {
     crKey: function crKey(option) {
       return option._itemKey;
     },
     toConfig: function toConfig(json, option) {
       var data = crData(json, option),
-          confOption = crConfigOption(option);
+          confOption = crConfOption(option, json);
+      trOption(option, json);
       return {
         config: (0, _crConfigType["default"])({
           option: option,

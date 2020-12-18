@@ -13,7 +13,7 @@ var ymdToUTC = _fnAdapter["default"].ymdToUTC,
     compareByDate = _fnAdapter["default"].compareByDate,
     _isNan = Number.isNaN || isNaN;
 
-var _crData = function _crData(json, option) {
+var crData = function crData(json, option) {
   var dfItem = option.dfItem,
       dfPeriod = option.dfPeriod,
       _pnReport = dfPeriod === 'A' ? 'annualReports' : 'quarterlyReports',
@@ -34,7 +34,9 @@ var _crData = function _crData(json, option) {
 var _adapter;
 
 var FundAdapter = function FundAdapter() {
-  return _adapter || (_adapter = (0, _crAdapterType["default"])(_crData));
+  return _adapter || (_adapter = (0, _crAdapterType["default"])({
+    crData: crData
+  }));
 };
 
 var _default = FundAdapter;

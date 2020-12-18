@@ -14,7 +14,7 @@ var ymdToUTC = _fnAdapter["default"].ymdToUTC,
     roundBy = _fnAdapter["default"].roundBy,
     _isNan = Number.isNaN || isNaN;
 
-var _crData = function _crData(json, option) {
+var crData = function crData(json, option) {
   var dfPeriod = option.dfPeriod,
       _pnReport = dfPeriod === 'A' ? 'annualEarnings' : 'quarterlyEarnings',
       _reports = json[_pnReport] || [],
@@ -37,7 +37,9 @@ var _crData = function _crData(json, option) {
 var _adapter;
 
 var EarnAdapter = function EarnAdapter() {
-  return _adapter || (_adapter = (0, _crAdapterType["default"])(_crData));
+  return _adapter || (_adapter = (0, _crAdapterType["default"])({
+    crData: crData
+  }));
 };
 
 var _default = EarnAdapter;

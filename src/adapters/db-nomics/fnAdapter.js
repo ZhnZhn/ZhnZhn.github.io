@@ -69,7 +69,7 @@ const _crInfo = (json, option) => ({
 })
 
 const _isNumber = n => typeof n === 'number'
- && !Number.isNaN(n);
+ && n-n === 0;
 
 const _isQuarter = str => (""+str).indexOf("Q") !== -1;
 
@@ -85,7 +85,7 @@ const _crAqPoint = (date, y) => _isQuarter(date)
 const fnAdapter = {
   crError,
   getValue,
-  crTitle: ({ title, subtitle }, json) => {    
+  crTitle: ({ title, subtitle }, json) => {
     const _ = getSubtitle(json)
     , _subtitle = _.length > C.SUBT_MAX
          ? joinBy(': ', title, subtitle)
@@ -96,8 +96,9 @@ const fnAdapter = {
     };
   },
 
-  crData: (json, fromDate, frequency) => {
-    const data = []
+  crData: (json, option) => {
+    const { fromDate } = option
+    , data = []
     , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
     , { period, value } = getPeriodAndValue(json)
     , crPoint = _isAnnualQuarter(period)
@@ -105,7 +106,7 @@ const fnAdapter = {
        : _crPoint
     , _len = period.length;
     let _arrPoint;
-    for (let i= 0; i<_len; i++){
+    for (let i=0; i<_len; i++){
       _arrPoint = crPoint(period[i], value[i]);
       if (_arrPoint[0] > _xFrom && _isNumber(_arrPoint[1])) {
         data.push(_arrPoint)
@@ -114,7 +115,7 @@ const fnAdapter = {
     return data;
   },
 
-  crConfigOption: (json, option) => ({
+  crConfOption: (option, json) => ({
     zhConfig: _crZhConfig(option),
     info: _crInfo(json, option)
   })
