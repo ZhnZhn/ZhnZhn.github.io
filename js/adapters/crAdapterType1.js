@@ -24,28 +24,37 @@ var Builder = _crConfigType["default"].Builder,
     zhConfig: _crZhConfig(option)
   };
 },
-    trOptionDf = function trOptionDf() {};
+    NOP = function NOP() {},
+    IDENTITY = function IDENTITY(v) {
+  return v;
+},
+    _assign = Object.assign;
 
 var crAdapterType1 = function crAdapterType1(_ref2) {
   var crData = _ref2.crData,
       _ref2$crConfOption = _ref2.crConfOption,
       crConfOption = _ref2$crConfOption === void 0 ? crConfOptionDf : _ref2$crConfOption,
+      _ref2$addConfOption = _ref2.addConfOption,
+      addConfOption = _ref2$addConfOption === void 0 ? NOP : _ref2$addConfOption,
       _ref2$trOption = _ref2.trOption,
-      trOption = _ref2$trOption === void 0 ? trOptionDf : _ref2$trOption;
+      trOption = _ref2$trOption === void 0 ? NOP : _ref2$trOption,
+      _ref2$addConfig = _ref2.addConfig,
+      addConfig = _ref2$addConfig === void 0 ? IDENTITY : _ref2$addConfig;
   var adapter = {
     crKey: function crKey(option) {
       return option._itemKey;
     },
     toConfig: function toConfig(json, option) {
       var data = crData(json, option),
-          confOption = crConfOption(option, json);
+          confOption = _assign(crConfOption(option, json), addConfOption(option, json));
+
       trOption(option, json);
       return {
-        config: (0, _crConfigType["default"])({
+        config: addConfig((0, _crConfigType["default"])({
           option: option,
           data: data,
           confOption: confOption
-        })
+        }), json, option)
       };
     },
     toSeries: function toSeries(json, option) {
@@ -60,6 +69,7 @@ var crAdapterType1 = function crAdapterType1(_ref2) {
   return adapter;
 };
 
+crAdapterType1.Builder = Builder;
 var _default = crAdapterType1;
 exports["default"] = _default;
 //# sourceMappingURL=crAdapterType1.js.map

@@ -5,79 +5,53 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
+var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var Builder = _crConfigType["default"].Builder;
-var crItemLink = _AdapterFn["default"].crItemLink;
-
-var _crZhConfig = function _crZhConfig(_ref) {
-  var _itemKey = _ref._itemKey,
-      itemCaption = _ref.itemCaption,
-      dataSource = _ref.dataSource;
-  return {
-    id: _itemKey,
-    key: _itemKey,
-    itemCaption: itemCaption,
-    dataSource: dataSource
-  };
-};
+var Builder = _crAdapterType["default"].Builder,
+    crItemLink = _AdapterFn["default"].crItemLink;
 
 var _crDescription = crItemLink.bind(null, 'Coin Gecko');
 
-var _crInfo = function _crInfo(_ref2) {
-  var title = _ref2.title,
-      _nativeUrl = _ref2._nativeUrl;
+var _crInfo = function _crInfo(_ref) {
+  var title = _ref.title,
+      _nativeUrl = _ref._nativeUrl;
   return {
     name: title,
     description: _crDescription(_nativeUrl)
   };
 };
 
-var _crConfigOption = function _crConfigOption(option) {
+var _crVolumeConfig = function _crVolumeConfig(btTitle, currency, dVolume) {
   return {
-    zhConfig: _crZhConfig(option),
-    info: _crInfo(option)
+    btTitle: btTitle,
+    title: btTitle + " " + currency,
+    dVolume: dVolume
   };
 };
 
-var toChart = {
-  crKey: function crKey(option) {
-    return option._itemKey;
-  },
-  toConfig: function toConfig(json, option) {
-    var data = json.prices,
-        total_volumes = json.total_volumes,
-        market_caps = json.market_caps,
-        _currency = option._currency,
-        confOption = _crConfigOption(option),
-        config = Builder((0, _crConfigType["default"])({
-      option: option,
-      data: data,
-      confOption: confOption
-    })).addMiniVolume({
-      btTitle: 'Volume',
-      title: 'Volume ' + _currency,
-      dVolume: total_volumes
-    }).addMiniVolume({
-      btTitle: 'Market Cap',
-      title: 'Market Cap ' + _currency,
-      dVolume: market_caps
-    }).toConfig();
-
-    return {
-      config: config
-    };
-  },
-  toSeries: function toSeries(json, option) {
-    return Builder.crSeria({
-      adapter: toChart,
-      json: json,
-      option: option
-    });
-  }
+var crData = function crData(_ref2) {
+  var prices = _ref2.prices;
+  return prices;
+},
+    addConfOption = function addConfOption(option) {
+  return {
+    info: _crInfo(option)
+  };
+},
+    addConfig = function addConfig(config, json, option) {
+  var total_volumes = json.total_volumes,
+      market_caps = json.market_caps,
+      _currency = option._currency;
+  return Builder(config).addMiniVolume(_crVolumeConfig('Volume', _currency, total_volumes)).addMiniVolume(_crVolumeConfig('Market Cap', _currency, market_caps)).toConfig();
 };
+
+var toChart = (0, _crAdapterType["default"])({
+  crData: crData,
+  addConfOption: addConfOption,
+  addConfig: addConfig
+});
 var _default = toChart;
 exports["default"] = _default;
 //# sourceMappingURL=toChart.js.map

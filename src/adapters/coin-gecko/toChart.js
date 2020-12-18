@@ -1,69 +1,51 @@
-import crConfigType1 from '../../charts/crConfigType1'
+import crAdapterType1 from '../crAdapterType1'
 import AdapterFn from '../AdapterFn'
 
-const { Builder } = crConfigType1
-const { crItemLink } = AdapterFn;
-
-const _crZhConfig = ({
-    _itemKey,
-    itemCaption,
-    dataSource
-  }) => ({
-    id: _itemKey, key: _itemKey,
-    itemCaption,
-    dataSource
-  });
+const { Builder } = crAdapterType1
+, { crItemLink } = AdapterFn;
 
 const _crDescription = crItemLink
   .bind(null, 'Coin Gecko');
 
-const _crInfo = ({ title, _nativeUrl}) => ({
+const _crInfo = ({ title, _nativeUrl }) => ({
   name: title,
   description: _crDescription(_nativeUrl)
 });
 
-const _crConfigOption = (option) => ({
-    zhConfig: _crZhConfig(option),
-    info: _crInfo(option)
-  })
+const _crVolumeConfig = (
+  btTitle,
+  currency,
+  dVolume
+) => ({
+  btTitle,
+  title: `${btTitle} ${currency}`,
+  dVolume
+});
 
-const toChart = {
-  crKey(option){
-    return option._itemKey;
-  },
+const crData = ({ prices }) => prices
+, addConfOption = (option) => ({
+   info: _crInfo(option)
+})
+, addConfig = (config, json, option) => {
+   const {
+     total_volumes,
+     market_caps
+   } = json
+   , { _currency } = option;
+   return Builder(config)
+    .addMiniVolume(_crVolumeConfig(
+      'Volume', _currency, total_volumes
+    ))
+    .addMiniVolume(_crVolumeConfig(
+      'Market Cap', _currency, market_caps
+    ))
+    .toConfig();
+};
 
-  toConfig(json, option){
-    const {
-      prices:data,
-      total_volumes,
-      market_caps
-     } = json
-     , { _currency } = option
-     , confOption = _crConfigOption(option)
-     , config = Builder(crConfigType1({
-        option, data, confOption
-      }))
-      .addMiniVolume({
-        btTitle: 'Volume',
-        title: 'Volume ' + _currency,
-        dVolume: total_volumes
-      })
-      .addMiniVolume({
-        btTitle: 'Market Cap',
-        title: 'Market Cap ' + _currency,
-        dVolume: market_caps
-      })
-      .toConfig();
-
-    return { config };
-  },
-
-  toSeries(json, option){
-    return Builder.crSeria({
-      adapter: toChart,
-      json, option
-    });
-  }
-}
+const toChart = crAdapterType1({
+  crData,
+  addConfOption,
+  addConfig
+});
 
 export default toChart

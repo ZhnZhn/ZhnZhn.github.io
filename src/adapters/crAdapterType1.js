@@ -11,12 +11,16 @@ const { Builder } = crConfigType1
   dataSource
 }), crConfOptionDf = (option) => ({
   zhConfig: _crZhConfig(option)
-}), trOptionDf = () => {};
+}), NOP = () => {}
+, IDENTITY = v => v
+, _assign = Object.assign;
 
 const crAdapterType1 = ({
   crData,
   crConfOption=crConfOptionDf,
-  trOption=trOptionDf
+  addConfOption=NOP,
+  trOption=NOP,
+  addConfig=IDENTITY
 }) => {
   const adapter = {
     crKey(option){
@@ -24,12 +28,15 @@ const crAdapterType1 = ({
     },
     toConfig(json, option){
       const data = crData(json, option)
-      , confOption = crConfOption(option, json);
+      , confOption = _assign(
+          crConfOption(option, json),
+          addConfOption(option, json)
+      );
       trOption(option, json)
       return {
-        config: crConfigType1({
+        config: addConfig(crConfigType1({
           option, data, confOption,
-        })
+        }), json, option)
       };
     },
     toSeries(json, option){
@@ -40,6 +47,8 @@ const crAdapterType1 = ({
     }
   }
   return adapter;
-}
+};
+
+crAdapterType1.Builder = Builder
 
 export default crAdapterType1
