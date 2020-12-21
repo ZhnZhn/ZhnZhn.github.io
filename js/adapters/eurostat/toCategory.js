@@ -68,7 +68,6 @@ var toCategory = {
         _seriaProps = seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
 
     return (0, _extends2["default"])({
-      zhValueText: 'Value',
       minY: findMinY(data),
       name: configSlice.time || time,
       color: seriaColor,

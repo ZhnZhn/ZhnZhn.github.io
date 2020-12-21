@@ -184,8 +184,7 @@ crAreaConfig({
       opposite: true,
       showEmpty: true
     },
-    series: [{
-      zhValueText: 'Value',
+    series: [{      
       turboThreshold: 20000,
       type: _crSeriaType(seriaType),
       color: seriaColor,

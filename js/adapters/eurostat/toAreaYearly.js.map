@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/toAreaYearly.js"],"names":["toPointArr","EuroStatFn","crDataSource","crLinkConf","setInfo","toAreaYearly","createConfig","json","option","data","reverse","title","subtitle","config","toYearly","toConfig","itemCaption","value","dataSource","createSeria","ChartConfig","crSeria","zhValueText"],"mappings":";;;;;;;;;AAAA;;AACA;;AACA;;IAGEA,U,GAIEC,sB,CAJFD,U;IACAE,Y,GAGED,sB,CAHFC,Y;IACAC,U,GAEEF,sB,CAFFE,U;IACAC,O,GACEH,sB,CADFG,O;AAGF,IAAMC,YAAY,GAAG;AAClBC,EAAAA,YAAY,EAAE,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AACxB,QAAAC,IAAI,GAAGT,UAAU,CAACO,IAAD,CAAV,CAAiBG,OAAjB,EAAP;AAAA,QACFC,KADE,GACkBH,MADlB,CACFG,KADE;AAAA,QACKC,QADL,GACkBJ,MADlB,CACKI,QADL;AAAA,QAEJC,MAFI,GAEKC,4BAASC,QAAT,CACPN,IADO;AAEPE,MAAAA,KAAK,EAALA,KAFO;AAEAC,MAAAA,QAAQ,EAARA,QAFA;AAGPI,MAAAA,WAAW,EAAEL,KAAK,GAAG,IAAR,GAAeC,QAHrB;AAIPK,MAAAA,KAAK,EAAEN,KAAK,GAAG,GAAR,GAAcC,QAJd;AAKPM,MAAAA,UAAU,EAAEhB,YAAY,CAACM,MAAD;AALjB,OAMJL,UAAU,CAACI,IAAD,EAAOC,MAAP,CANN,EAFL;;AAULJ,IAAAA,OAAO,CAAC;AAAES,MAAAA,MAAM,EAANA,MAAF;AAAUN,MAAAA,IAAI,EAAJA,IAAV;AAAgBC,MAAAA,MAAM,EAANA;AAAhB,KAAD,CAAP;AACA,WAAOK,MAAP;AACF,GAdiB;AAgBlBM,EAAAA,WAAW,EAAE,qBAACZ,IAAD,EAAOC,MAAP,EAAkB;AAC7B,WAAOY,wBAAYC,OAAZ,CAAoB;AACzBC,MAAAA,WAAW,EAAE;AADY,KAApB,CAAP;AAGD;AApBiB,CAArB;eAwBejB,Y","sourcesContent":["import ChartConfig from '../../charts/ChartConfig'\r\nimport EuroStatFn from './EuroStatFn';\r\nimport toYearly from '../toYearsByMonths'\r\n\r\nconst {  \r\n  toPointArr,\r\n  crDataSource,\r\n  crLinkConf,\r\n  setInfo\r\n} = EuroStatFn\r\n\r\nconst toAreaYearly = {\r\n   createConfig: (json, option) => {\r\n     const data = toPointArr(json).reverse()\r\n     , { title, subtitle } = option\r\n     , config = toYearly.toConfig(\r\n         data, {\r\n         title, subtitle,\r\n         itemCaption: title + ': ' + subtitle,\r\n         value: title + '_' + subtitle,\r\n         dataSource: crDataSource(option),\r\n         ...crLinkConf(json, option)\r\n       });\r\n      setInfo({ config, json, option })\r\n      return config;\r\n   },\r\n\r\n   createSeria: (json, option) => {\r\n     return ChartConfig.crSeria({\r\n       zhValueText: 'Empty Seria'\r\n     });\r\n   }\r\n\r\n};\r\n\r\nexport default toAreaYearly\r\n"],"file":"toAreaYearly.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/toAreaYearly.js"
+ ],
+ "file": "../../../src/adapters/eurostat/toAreaYearly.js",
+ "names": [
+  "toPointArr",
+  "EuroStatFn",
+  "crDataSource",
+  "crLinkConf",
+  "setInfo",
+  "toAreaYearly",
+  "createConfig",
+  "json",
+  "option",
+  "data",
+  "reverse",
+  "title",
+  "subtitle",
+  "config",
+  "toYearly",
+  "toConfig",
+  "itemCaption",
+  "value",
+  "dataSource",
+  "createSeria",
+  "ChartConfig",
+  "crSeria",
+  "name"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;AACA;;IAGEA,U,GAIEC,sB,CAJFD,U;IACAE,Y,GAGED,sB,CAHFC,Y;IACAC,U,GAEEF,sB,CAFFE,U;IACAC,O,GACEH,sB,CADFG,O;AAGF,IAAMC,YAAY,GAAG;AAClBC,EAAAA,YAAY,EAAE,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AACxB,QAAAC,IAAI,GAAGT,UAAU,CAACO,IAAD,CAAV,CAAiBG,OAAjB,EAAP;AAAA,QACFC,KADE,GACkBH,MADlB,CACFG,KADE;AAAA,QACKC,QADL,GACkBJ,MADlB,CACKI,QADL;AAAA,QAEJC,MAFI,GAEKC,4BAASC,QAAT,CACPN,IADO;AAEPE,MAAAA,KAAK,EAALA,KAFO;AAEAC,MAAAA,QAAQ,EAARA,QAFA;AAGPI,MAAAA,WAAW,EAAEL,KAAK,GAAG,IAAR,GAAeC,QAHrB;AAIPK,MAAAA,KAAK,EAAEN,KAAK,GAAG,GAAR,GAAcC,QAJd;AAKPM,MAAAA,UAAU,EAAEhB,YAAY,CAACM,MAAD;AALjB,OAMJL,UAAU,CAACI,IAAD,EAAOC,MAAP,CANN,EAFL;;AAULJ,IAAAA,OAAO,CAAC;AAAES,MAAAA,MAAM,EAANA,MAAF;AAAUN,MAAAA,IAAI,EAAJA,IAAV;AAAgBC,MAAAA,MAAM,EAANA;AAAhB,KAAD,CAAP;AACA,WAAOK,MAAP;AACF,GAdiB;AAgBlBM,EAAAA,WAAW,EAAE,qBAACZ,IAAD,EAAOC,MAAP,EAAkB;AAC7B,WAAOY,wBAAYC,OAAZ,CAAoB;AACzBC,MAAAA,IAAI,EAAE;AADmB,KAApB,CAAP;AAGD;AApBiB,CAArB;eAwBejB,Y"
+}

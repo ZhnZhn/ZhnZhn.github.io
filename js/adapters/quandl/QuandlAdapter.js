@@ -438,7 +438,7 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
 
   if (_len !== 0) {
     legend.push({
-      name: config.series[0].zhValueText,
+      name: config.series[0].name,
       index: 0,
       color: C.COLOR_BLUE,
       isVisible: true
@@ -456,14 +456,14 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
         symbol = _legendSeries$i.symbol,
         isSecondAxes = _legendSeries$i.isSecondAxes,
         seria = _ChartConfig["default"].crSeria({
-      zhValueText: name,
+      name: name,
+      data: data,
       visible: false,
+      color: color,
       marker: _Chart["default"].fSeriaMarker({
         color: color,
         symbol: symbol
-      }),
-      color: color,
-      data: data
+      })
     });
 
     if (!isSecondAxes) {
@@ -589,7 +589,7 @@ var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   option.dataColumn = _QuandlFn["default"].getDataColumnIndex(json, option);
 
   if (columnName) {
-    config.series[0].zhValueText = columnName;
+    config.series[0].name = columnName;
   }
 
   return fnQuandlFlow(config, json, option);
@@ -625,7 +625,7 @@ var _toSeria = function _toSeria(json, option) {
       data = _crSeriaData(getData(json), yPointIndex);
 
   return _ChartConfig["default"].crSeria({
-    zhValueText: chartId.substring(0, 12),
+    name: chartId.substring(0, 12),
     data: data,
     minY: _AdapterFn["default"].findMinY(data)
   });

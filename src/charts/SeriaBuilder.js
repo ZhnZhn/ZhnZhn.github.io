@@ -56,10 +56,11 @@ const C = {
     }
 };
 
-const _isArr = Array.isArray;
-const _isObj = obj => obj && typeof obj === 'object';
+const _isArr = Array.isArray
+, _assign = Object.assign
+, _isObj = obj => obj && typeof obj === 'object';
 
-const _crLegendItem = ({ index, color, name, is=false }) => ({
+const _crLegendItem = ({ index, color, name='', is=false }) => ({
   index, color, name,
   isVisible: is
 });
@@ -67,10 +68,12 @@ const _crLegendItem = ({ index, color, name, is=false }) => ({
 const _addSeriesImpl = (to, series) => {
   const _legend = [];
   series.forEach((seria, index) => {
-    const { color, zhValueText='', visible } = seria;
+    const { color, zhValueText, name, visible } = seria;
     to.push(seria)
     _legend.push(_crLegendItem({
-       index, color, name:zhValueText, is:visible
+       index, color,
+       name: zhValueText || name,
+       is: visible
      }))
   })
   return _legend;
@@ -109,7 +112,7 @@ const SeriaBuilder = {
 
   addSeriaBy(index, obj) {
     if (this.config.series[index]) {
-      Object.assign(this.config.series[index], obj)
+      _assign(this.config.series[index], obj)
     } else {
       this.config.series.push(obj)
     }

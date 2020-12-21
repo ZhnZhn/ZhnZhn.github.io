@@ -66,16 +66,18 @@ var C = {
     type: 'scatter'
   }
 };
-var _isArr = Array.isArray;
 
-var _isObj = function _isObj(obj) {
+var _isArr = Array.isArray,
+    _assign = Object.assign,
+    _isObj = function _isObj(obj) {
   return obj && typeof obj === 'object';
 };
 
 var _crLegendItem = function _crLegendItem(_ref) {
   var index = _ref.index,
       color = _ref.color,
-      name = _ref.name,
+      _ref$name = _ref.name,
+      name = _ref$name === void 0 ? '' : _ref$name,
       _ref$is = _ref.is,
       is = _ref$is === void 0 ? false : _ref$is;
   return {
@@ -90,15 +92,15 @@ var _addSeriesImpl = function _addSeriesImpl(to, series) {
   var _legend = [];
   series.forEach(function (seria, index) {
     var color = seria.color,
-        _seria$zhValueText = seria.zhValueText,
-        zhValueText = _seria$zhValueText === void 0 ? '' : _seria$zhValueText,
+        zhValueText = seria.zhValueText,
+        name = seria.name,
         visible = seria.visible;
     to.push(seria);
 
     _legend.push(_crLegendItem({
       index: index,
       color: color,
-      name: zhValueText,
+      name: zhValueText || name,
       is: visible
     }));
   });
@@ -136,7 +138,7 @@ var SeriaBuilder = {
   },
   addSeriaBy: function addSeriaBy(index, obj) {
     if (this.config.series[index]) {
-      Object.assign(this.config.series[index], obj);
+      _assign(this.config.series[index], obj);
     } else {
       this.config.series.push(obj);
     }

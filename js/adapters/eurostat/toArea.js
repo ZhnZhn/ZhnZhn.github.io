@@ -24,7 +24,7 @@ var toArea = {
         data = _createData.data,
         max = _createData.max,
         min = _createData.min,
-        _type = typeof seriaType === 'string' ? seriaType.toLowerCase() : 'spline',
+        _type = (seriaType || '').toLowerCase() || 'spline',
         config = _ChartConfig["default"].crAreaConfig({
       seriaType: _type,
       seriaColor: seriaColor,
@@ -59,7 +59,7 @@ var toArea = {
       seriaWidth: seriaWidth,
       data: data,
       minY: findMinY(data),
-      zhValueText: itemCaption
+      name: itemCaption
     });
   }
 };

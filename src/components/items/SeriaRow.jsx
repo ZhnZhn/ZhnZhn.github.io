@@ -104,9 +104,7 @@ class SeriaRow extends Component {
   render(){
     const { isShowPallete } = this.state
         , { seria={}, yAxisOptions } = this.props
-        , { name, options={} } = seria
-        , { zhValueText } = options
-        , _name = zhValueText || name
+        , { name='' } = seria        
         , _color = this._getColor();
 
     return (
@@ -121,7 +119,7 @@ class SeriaRow extends Component {
            className={CL.ELL}
            style={S.TITLE}
         >
-          {_name}
+          {name}
         </span>
         <CellColor
            ref={this._refCellColor}

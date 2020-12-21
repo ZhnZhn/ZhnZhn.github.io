@@ -39,7 +39,7 @@ var toAreaYearly = {
   },
   createSeria: function createSeria(json, option) {
     return _ChartConfig["default"].crSeria({
-      zhValueText: 'Empty Seria'
+      name: 'Empty Seria'
     });
   }
 };

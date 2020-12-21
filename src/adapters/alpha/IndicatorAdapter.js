@@ -81,15 +81,14 @@ const _toDataArrs = ({dateKeys, value, max}, arrProp) => {
   return result;
 }
 
-const _crSplineSeria = ({ data, valueText }, option) =>
+const _crSplineSeria = ({ data, name }, option) =>
   _assign(ChartConfig.crSeria(), {
+    data, name,
     type: 'spline',
     visible: true,
-    data: data,
     marker: {
       symbol: 'circle'
-    },
-    zhValueText: valueText
+    }
   }, option);
 
 
@@ -114,7 +113,7 @@ const _crSeria = (json, option ) => {
   , _data = _crSeriaData(json, option);
   return _crSplineSeria({
     data: _data,
-    valueText: indicator
+    name: indicator
   });
 }
 
@@ -125,15 +124,15 @@ const _crMacdSeries = (json, option) => {
      [C.MACD, C.MACD_S, C.MACD_H]
   )
   , sMcad = _crSplineSeria({
-       data: _arrs[0], valueText: C.MACD
+       data: _arrs[0], name: C.MACD
     }, C.BLACK)
   , sSignal = _crSplineSeria({
-       data: _arrs[1], valueText: C.MACD_S
+       data: _arrs[1], name: C.MACD_S
     }, C.RED)
   , sHist = _assign(ChartConfig.crSeria(), {
        color: C.COLOR_BLUE_A,
        data: _arrs[2],
-       zhValueText: C.MACD_H,
+       name: C.MACD_H,
        type: 'column',
        visible: false,
        shadow: false,
@@ -152,10 +151,10 @@ const _crStochSeries = (json, option) => {
     _crValue(json, option), [C.SLOW_K, C.SLOW_D]
   )
   , sSlowK = _crSplineSeria({
-      data: _arrs[0], valueText: C.SLOW_K
+      data: _arrs[0], name: C.SLOW_K
     }, C.BLUE)
  , sSlowD = _crSplineSeria({
-      data: _arrs[1], valueText: C.SLOW_D
+      data: _arrs[1], name: C.SLOW_D
    }, C.RED);
 
   return [sSlowK, sSlowD];
@@ -167,13 +166,13 @@ const _crBbandsSeries = (json, option) => {
       [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]
     )
     , sMiddle = _crSplineSeria({
-        data: _arrs[0], valueText: C.BBANDS_M
+        data: _arrs[0], name: C.BBANDS_M
       }, C.BLUE)
    , sUpper = _crSplineSeria({
-        data: _arrs[1], valueText: C.BBANDS_U
+        data: _arrs[1], name: C.BBANDS_U
      }, C.GREEN)
    , sLow = _crSplineSeria({
-          data: _arrs[2], valueText: C.BBANDS_L
+          data: _arrs[2], name: C.BBANDS_L
      }, C.RED);
 
     return [sMiddle, sUpper, sLow];

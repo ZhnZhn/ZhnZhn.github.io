@@ -219,7 +219,6 @@ var Chart = (0, _extends2["default"])({
         showEmpty: true
       }),
       series: [{
-        zhValueText: 'Value',
         turboThreshold: 20000,
         type: _crSeriaType(seriaType),
         color: seriaColor,

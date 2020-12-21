@@ -108,15 +108,15 @@ var _toDataArrs = function _toDataArrs(_ref, arrProp) {
 
 var _crSplineSeria = function _crSplineSeria(_ref2, option) {
   var data = _ref2.data,
-      valueText = _ref2.valueText;
+      name = _ref2.name;
   return _assign(_ChartConfig["default"].crSeria(), {
+    data: data,
+    name: name,
     type: 'spline',
     visible: true,
-    data: data,
     marker: {
       symbol: 'circle'
-    },
-    zhValueText: valueText
+    }
   }, option);
 };
 
@@ -149,7 +149,7 @@ var _crSeria = function _crSeria(json, option) {
 
   return _crSplineSeria({
     data: _data,
-    valueText: indicator
+    name: indicator
   });
 };
 
@@ -157,16 +157,16 @@ var _crMacdSeries = function _crMacdSeries(json, option) {
   var _arrs = _toDataArrs(_crValue(json, option), [C.MACD, C.MACD_S, C.MACD_H]),
       sMcad = _crSplineSeria({
     data: _arrs[0],
-    valueText: C.MACD
+    name: C.MACD
   }, C.BLACK),
       sSignal = _crSplineSeria({
     data: _arrs[1],
-    valueText: C.MACD_S
+    name: C.MACD_S
   }, C.RED),
       sHist = _assign(_ChartConfig["default"].crSeria(), {
     color: C.COLOR_BLUE_A,
     data: _arrs[2],
-    zhValueText: C.MACD_H,
+    name: C.MACD_H,
     type: 'column',
     visible: false,
     shadow: false,
@@ -184,11 +184,11 @@ var _crStochSeries = function _crStochSeries(json, option) {
   var _arrs = _toDataArrs(_crValue(json, option), [C.SLOW_K, C.SLOW_D]),
       sSlowK = _crSplineSeria({
     data: _arrs[0],
-    valueText: C.SLOW_K
+    name: C.SLOW_K
   }, C.BLUE),
       sSlowD = _crSplineSeria({
     data: _arrs[1],
-    valueText: C.SLOW_D
+    name: C.SLOW_D
   }, C.RED);
 
   return [sSlowK, sSlowD];
@@ -198,15 +198,15 @@ var _crBbandsSeries = function _crBbandsSeries(json, option) {
   var _arrs = _toDataArrs(_crValue(json, option), [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]),
       sMiddle = _crSplineSeria({
     data: _arrs[0],
-    valueText: C.BBANDS_M
+    name: C.BBANDS_M
   }, C.BLUE),
       sUpper = _crSplineSeria({
     data: _arrs[1],
-    valueText: C.BBANDS_U
+    name: C.BBANDS_U
   }, C.GREEN),
       sLow = _crSplineSeria({
     data: _arrs[2],
-    valueText: C.BBANDS_L
+    name: C.BBANDS_L
   }, C.RED);
 
   return [sMiddle, sUpper, sLow];

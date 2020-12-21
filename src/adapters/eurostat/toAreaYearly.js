@@ -2,7 +2,7 @@ import ChartConfig from '../../charts/ChartConfig'
 import EuroStatFn from './EuroStatFn';
 import toYearly from '../toYearsByMonths'
 
-const {  
+const {
   toPointArr,
   crDataSource,
   crLinkConf,
@@ -27,7 +27,7 @@ const toAreaYearly = {
 
    createSeria: (json, option) => {
      return ChartConfig.crSeria({
-       zhValueText: 'Empty Seria'
+       name: 'Empty Seria'       
      });
    }
 

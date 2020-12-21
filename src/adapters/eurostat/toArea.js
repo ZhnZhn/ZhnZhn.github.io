@@ -17,9 +17,7 @@ const toArea = {
          mapFrequency
         } = option
      , { data, max, min } = createData(json, mapFrequency)
-     , _type = typeof seriaType === 'string'
-         ? seriaType.toLowerCase()
-         : 'spline'
+     , _type = (seriaType || '').toLowerCase() || 'spline'
      , config = ChartConfig.crAreaConfig({
          seriaType: _type,
          seriaColor, seriaWidth
@@ -38,7 +36,7 @@ const toArea = {
        seriaType, seriaColor, seriaWidth,
        data,
        minY: findMinY(data),
-       zhValueText: itemCaption
+       name: itemCaption
      });
    }
 };

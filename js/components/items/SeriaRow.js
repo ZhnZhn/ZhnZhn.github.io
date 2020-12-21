@@ -119,11 +119,8 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
         _this$props$seria = _this$props.seria,
         seria = _this$props$seria === void 0 ? {} : _this$props$seria,
         yAxisOptions = _this$props.yAxisOptions,
-        name = seria.name,
-        _seria$options = seria.options,
-        options = _seria$options === void 0 ? {} : _seria$options,
-        zhValueText = options.zhValueText,
-        _name = zhValueText || name,
+        _seria$name = seria.name,
+        name = _seria$name === void 0 ? '' : _seria$name,
         _color = this._getColor();
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -136,7 +133,7 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         className: CL.ELL,
         style: S.TITLE,
-        children: _name
+        children: name
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor["default"], {
         ref: this._refCellColor,
         className: CL_INPUT_COLOR,
