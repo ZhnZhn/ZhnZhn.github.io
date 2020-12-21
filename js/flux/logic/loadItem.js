@@ -105,20 +105,20 @@ var _fetchToChart = function _fetchToChart(objImpl, _ref6) {
       onCompleted = _ref6.onCompleted;
 
   var adapter = objImpl.adapter,
-      itemCaption = option.itemCaption,
+      label = option.itemCaption,
       value = option.value,
       hasSecondYAxis = option.hasSecondYAxis,
       chart = _ChartStore["default"].getActiveChart(),
       series = adapter.toSeries(json, option, chart),
       _ref7 = series || {},
-      zhItemCaption = _ref7.zhItemCaption,
+      itemCaption = _ref7.itemCaption,
       color = _ref7.color,
       zhColor = _ref7.zhColor;
 
   _ChartFn["default"].addSeriaWithRenderLabel({
     chart: chart,
     series: series,
-    label: zhItemCaption || itemCaption || value,
+    label: itemCaption || label || value,
     color: color || zhColor,
     hasSecondYAxis: !!hasSecondYAxis
   });

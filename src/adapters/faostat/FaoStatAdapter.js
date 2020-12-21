@@ -46,8 +46,8 @@ const FaoStatAdapter = {
       .add({
         data: _data,
         minY: findMinY(_data),
-        zhValueText: oneCaption,
-        zhItemCaption: oneCaption
+        name: oneCaption,
+        itemCaption: oneCaption        
       })
       .toSeria();
   }

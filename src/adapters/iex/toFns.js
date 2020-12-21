@@ -6,6 +6,7 @@ const { getValue } = AdapterFn
 
 const _LOCALE = (navigator || {}).language;
 const _isNumber = n => typeof n === 'number';
+const _assign = Object.assign;
 
 const _calcScatterY = (chart, isMin) => {
   const { max, min } = chart.yAxis[0]
@@ -38,8 +39,9 @@ const toFns = {
       ? _calcScatterY(chart)
       : _calcScatterY(chart, true);
     seria.data.forEach(p => p.y = y)
-    Object.assign(seria, {
-      zhItemCaption: caption,
+    _assign(seria, {
+      name: caption,
+      itemCaption: caption,
       zhColor: color
     })
     return seria;

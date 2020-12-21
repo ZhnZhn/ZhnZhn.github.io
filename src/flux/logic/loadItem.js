@@ -55,7 +55,7 @@ const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
 const _isNotAllowToAdd = ({ toSeries, isAdd }, option) => !_isFn(toSeries)
  || (_isFn(isAdd) && !isAdd(option));
 
-const _loadToChart = function(objImpl, option, onAdded, onFailed){  
+const _loadToChart = function(objImpl, option, onAdded, onFailed){
   const { fnFetch, api } = objImpl
   , { getLimitRemaiming } = api || {}
   , optionFetch = _crOptionFetch(objImpl, option);
@@ -74,14 +74,14 @@ const _loadToChart = function(objImpl, option, onAdded, onFailed){
 
 const _fetchToChart = function(objImpl, { json, option, onCompleted }){
   const { adapter } = objImpl
-      , { itemCaption, value, hasSecondYAxis } = option
+      , { itemCaption:label, value, hasSecondYAxis } = option
       , chart = ChartStore.getActiveChart()
       , series = adapter.toSeries(json, option, chart)
-      , { zhItemCaption, color, zhColor } = series || {};
+      , { itemCaption, color, zhColor } = series || {};
 
   ChartFn.addSeriaWithRenderLabel({
-    chart, series,
-    label: zhItemCaption || itemCaption || value,
+    chart, series,    
+    label: itemCaption || label || value,
     color: color || zhColor,
     hasSecondYAxis: !!hasSecondYAxis
   })

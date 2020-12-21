@@ -16,6 +16,8 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number';
 };
 
+var _assign = Object.assign;
+
 var _calcScatterY = function _calcScatterY(chart, isMin) {
   var _chart$yAxis$ = chart.yAxis[0],
       max = _chart$yAxis$.max,
@@ -58,10 +60,13 @@ var toFns = {
     seria.data.forEach(function (p) {
       return p.y = y;
     });
-    Object.assign(seria, {
-      zhItemCaption: caption,
+
+    _assign(seria, {
+      name: caption,
+      itemCaption: caption,
       zhColor: color
     });
+
     return seria;
   }
 };
