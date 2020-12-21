@@ -1,70 +1,64 @@
-import crConfigType1 from '../../charts/crConfigType1'
+import crAdapterType1 from '../crAdapterType1'
 import fnAdapter from './fnAdapter'
 
-const { Builder } = crConfigType1
-, {
-  crData,
-  crConfigOption
- } = fnAdapter
+const { Builder } = crAdapterType1
+, { crData, crConfOption } = fnAdapter
 , _assign = Object.assign;
-
 
 const DF_PAIR = 'USD';
 const V_ON_TIME = 'Values on 00:00 GMT';
 
 const _crTitle = (title) => `${title}: ${V_ON_TIME}`;
 
+const _getConversionType = ({ ConversionType }) =>
+  ConversionType || {};
+
 const _crSubtitle = (json, value) => {
-  const { ConversionType={} } = json
-      , { conversionSymbol, type='' } = ConversionType;
+  const ConversionType= _getConversionType(json)
+  , { conversionSymbol, type='' } = ConversionType;
   return `${value}/${conversionSymbol || DF_PAIR} ${type}`;
 };
 
 const _crBtTitleTo = (json) => {
-  const { ConversionType={} } = json
-      , { conversionSymbol } = ConversionType;
+  const ConversionType = _getConversionType(json)
+  , { conversionSymbol } = ConversionType;
   return `${conversionSymbol || DF_PAIR}`;
-}
+};
 
-const toHdConfig = {
-  toConfig: (json, option) => {
-    const { value='', title } = option
-    _assign(option, {
-      itemCaption: title,
-      title: _crTitle(title),
-      subtitle: _crSubtitle(json, value)
-    })
-    const {
-       data,
-       dVolume, dColumn,
-       dToVolume,
-       dHL
-     } = crData(json)
-    , _btTitleTo = _crBtTitleTo(json)
-    , confOption = crConfigOption(option)
-    , config = Builder(crConfigType1({
-         option, data, confOption
-       }))
-        .addMiniVolume({
-          btTitle: 'Volume ' + value,
-          dColumn, dVolume
-        })
-        .addMiniVolume({
-          btTitle: 'Volume ' + _btTitleTo,
-          dVolume: dToVolume,
-          dColumn: []
-        })
-        .addMiniHL({ data: dHL })
-        .toConfig();
-    return { config };
-  },
+const _crMiniVolume = (title, dColumn, dVolume) => ({
+  btTitle: `Volume ${title}`,
+  dColumn, dVolume
+});
 
-  toSeries: (json, option) => {
-    return Builder.crSeria({
-      adapter: toHdConfig,
-      json, option
-    })
-  }
-}
+const trOption = (option, json) => {
+  const { value='', title } = option
+  _assign(option, {
+    itemCaption: title,
+    title: _crTitle(title),
+    subtitle: _crSubtitle(json, value)
+  })
+};
+
+const addConfig = (config, json, option, data) => {
+  const _btTitleTo = _crBtTitleTo(json)
+  , { value='' } = option
+  , {
+     dVolume, dColumn,
+     dToVolume,
+     dHL
+  } = data;
+  return Builder(config)
+    .addMiniVolume(_crMiniVolume(value, dColumn, dVolume))
+    .addMiniVolume(_crMiniVolume(_btTitleTo, [], dToVolume))
+    .addMiniHL({ data: dHL })
+    .toConfig();
+};
+
+const toHdConfig = crAdapterType1({
+  crData,
+  crConfOption,
+  trOption,
+  addConfig
+});
 
 export default toHdConfig

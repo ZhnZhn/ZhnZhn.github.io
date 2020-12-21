@@ -95,7 +95,7 @@ const fnAdapter = {
     };
   },
 
-  crConfigOption: (option) => ({
+  crConfOption: (option) => ({
     zhConfig: _crZhConfig(option),
     info: _crInfo(option)
   })

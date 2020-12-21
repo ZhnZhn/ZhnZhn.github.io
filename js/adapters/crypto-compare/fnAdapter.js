@@ -110,7 +110,7 @@ var fnAdapter = {
       dHL: dHL
     };
   },
-  crConfigOption: function crConfigOption(option) {
+  crConfOption: function crConfOption(option) {
     return {
       zhConfig: _crZhConfig(option),
       info: _crInfo(option)

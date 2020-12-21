@@ -1,6 +1,8 @@
 import crConfigType1 from '../charts/crConfigType1'
 
 const { Builder } = crConfigType1
+, _isArr = Array.isArray
+, _assign = Object.assign
 , _crZhConfig = ({
    _itemKey,
    itemCaption,
@@ -12,8 +14,7 @@ const { Builder } = crConfigType1
 }), crConfOptionDf = (option) => ({
   zhConfig: _crZhConfig(option)
 }), NOP = () => {}
-, IDENTITY = v => v
-, _assign = Object.assign;
+, IDENTITY = v => v;
 
 const crAdapterType1 = ({
   crData,
@@ -27,7 +28,10 @@ const crAdapterType1 = ({
       return option._itemKey;
     },
     toConfig(json, option){
-      const data = crData(json, option)
+      const _data = crData(json, option)
+      , data = _isArr(_data)
+         ? _data
+         : (_data || {}).data
       , confOption = _assign(
           crConfOption(option, json),
           addConfOption(option, json)
@@ -35,8 +39,8 @@ const crAdapterType1 = ({
       trOption(option, json)
       return {
         config: addConfig(crConfigType1({
-          option, data, confOption,
-        }), json, option)
+          option, data, confOption
+        }), json, option, _data)
       };
     },
     toSeries(json, option){

@@ -8,6 +8,8 @@ exports["default"] = void 0;
 var _crConfigType = _interopRequireDefault(require("../charts/crConfigType1"));
 
 var Builder = _crConfigType["default"].Builder,
+    _isArr = Array.isArray,
+    _assign = Object.assign,
     _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
       itemCaption = _ref.itemCaption,
@@ -27,8 +29,7 @@ var Builder = _crConfigType["default"].Builder,
     NOP = function NOP() {},
     IDENTITY = function IDENTITY(v) {
   return v;
-},
-    _assign = Object.assign;
+};
 
 var crAdapterType1 = function crAdapterType1(_ref2) {
   var crData = _ref2.crData,
@@ -45,7 +46,8 @@ var crAdapterType1 = function crAdapterType1(_ref2) {
       return option._itemKey;
     },
     toConfig: function toConfig(json, option) {
-      var data = crData(json, option),
+      var _data = crData(json, option),
+          data = _isArr(_data) ? _data : (_data || {}).data,
           confOption = _assign(crConfOption(option, json), addConfOption(option, json));
 
       trOption(option, json);
@@ -54,7 +56,7 @@ var crAdapterType1 = function crAdapterType1(_ref2) {
           option: option,
           data: data,
           confOption: confOption
-        }), json, option)
+        }), json, option, _data)
       };
     },
     toSeries: function toSeries(json, option) {
