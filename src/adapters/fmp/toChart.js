@@ -1,36 +1,18 @@
-import crConfigType1 from '../../charts/crConfigType1';
+import crAdapterType1 from '../crAdapterType1'
 import fnAdapter from './fnAdapter'
 
-const { Builder } = crConfigType1
-, {
-  crCaption,
+const {
   crData,
-  crConfigOption
+  addConfOption,
+  crCaption
 } = fnAdapter
 , _assign = Object.assign;
 
-const toChart = {
-  toConfig(json, option){
-    const { dfPn, _propName } = option
-    , _rowData = dfPn ? json[dfPn] : json
-    , data = crData(_rowData, _propName)
-    , confOption = crConfigOption(option);
+const trOption = option =>
+  _assign(option, crCaption(option));
 
-    _assign(option, crCaption(option))
-
-    return {
-      config:  crConfigType1({
-         option, data, confOption
-      })
-    };
-  },
-
-  toSeries(json, option){
-    return Builder.crSeria({
-      adapter: toChart,
-      json, option
-    });
-  }
-};
+const toChart = crAdapterType1({
+  crData, addConfOption, trOption
+});
 
 export default toChart

@@ -6,7 +6,7 @@ const {
   getCaption,
   getValue,
   joinBy,
-  ymdToUTC,  
+  ymdToUTC,
   crItemLink,
   compareByDate,
   crItemConf,
@@ -61,10 +61,12 @@ const fnAdapter = {
   getCaption,
   getValue,
 
-  crData: (metrics, propName) => {
-    const _data = [];
-    metrics.forEach(item => {
-      const _v = parseFloat(item[propName]);
+  crData: (json, option) => {
+    const { dfPn, _propName } = option
+    , _metrics = dfPn ? json[dfPn] : json
+    , _data = [];
+    _metrics.forEach(item => {
+      const _v = parseFloat(item[_propName]);
       if (!_isNaN(_v)) {
         _data.push([ymdToUTC(item.date), _v])
       }
@@ -78,11 +80,9 @@ const fnAdapter = {
        getCaption(items[1]),
        getCaption(items[2])
     )
-  }),
-
-  crConfigOption: (option) => ({
-    info: _crInfo(option),
-    zhConfig: _crZhConfig(option)
+  }),  
+  addConfOption: (option) => ({
+    info: _crInfo(option)
   }),
   crHistOption: ({ option, data }) => ({
     info: _crInfo(option),

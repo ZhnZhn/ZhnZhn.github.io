@@ -75,15 +75,20 @@ var fnAdapter = {
   getFromDate: getFromDate,
   getCaption: getCaption,
   getValue: getValue,
-  crData: function crData(metrics, propName) {
-    var _data = [];
-    metrics.forEach(function (item) {
-      var _v = parseFloat(item[propName]);
+  crData: function crData(json, option) {
+    var dfPn = option.dfPn,
+        _propName = option._propName,
+        _metrics = dfPn ? json[dfPn] : json,
+        _data = [];
+
+    _metrics.forEach(function (item) {
+      var _v = parseFloat(item[_propName]);
 
       if (!_isNaN(_v)) {
         _data.push([ymdToUTC(item.date), _v]);
       }
     });
+
     return _data.reverse().sort(compareByDate);
   },
   crCaption: function crCaption(_ref3) {
@@ -93,10 +98,9 @@ var fnAdapter = {
       subtitle: joinBy(': ', getCaption(items[1]), getCaption(items[2]))
     };
   },
-  crConfigOption: function crConfigOption(option) {
+  addConfOption: function addConfOption(option) {
     return {
-      info: _crInfo(option),
-      zhConfig: _crZhConfig(option)
+      info: _crInfo(option)
     };
   },
   crHistOption: function crHistOption(_ref4) {
