@@ -39,7 +39,7 @@ const fnAdapter = {
       subtitle
     }),
 
-    crConfigOption: (json, option) => ({
+    crConfOption: (option) => ({
       zhConfig: _crZhConfig(option)
     })
 };

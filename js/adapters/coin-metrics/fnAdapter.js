@@ -44,7 +44,7 @@ var fnAdapter = {
       subtitle: subtitle
     };
   },
-  crConfigOption: function crConfigOption(json, option) {
+  crConfOption: function crConfOption(option) {
     return {
       zhConfig: _crZhConfig(option)
     };
