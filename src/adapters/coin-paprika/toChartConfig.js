@@ -1,50 +1,32 @@
-import crConfigType1 from '../../charts/crConfigType1'
+import crAdapterType1 from '../crAdapterType1'
 import fnAdapter from './fnAdapter'
 
-const { Builder } = crConfigType1
-, {
-  getValue,
-  crData, crConfigOption
-} = fnAdapter;
+const { Builder } = crAdapterType1
+, { crData, addConfOption } = fnAdapter;
 
-const SUBTITLE = 'Values on 23:59:59 UTC'
+const _crMvOption = (btTitle, dVolume, dColumn) => ({
+  btTitle,
+  title: `${btTitle} USD`,
+  dVolume, dColumn
+});
 
-const toChartConfig = {
-  crKey(option){
-    const { items=[], fromDate } = option;
-    return (option._itemKey = `${getValue(items[0])}_${fromDate}`);
-  },
+const addConfig = (config, json, option, data) => {
+  const {
+    dVolume, dColumn,
+    dMarketCap
+  } = data;
+  return Builder(config)
+    .addMiniVolume(
+      _crMvOption('Volume', dVolume, dColumn)
+    )
+    .addMiniVolume(
+      _crMvOption('Market Cap', dMarketCap)
+    )
+    .toConfig();
+};
 
-  toConfig(json, option){
-    option.subtitle = SUBTITLE
-    const {
-      data, dVolume, dColumn,
-      dMarketCap
-    } = crData(json)
-   , confOption = crConfigOption(option)
-   , config = Builder(crConfigType1({
-       option, data, confOption
-     }))
-     .addMiniVolume({
-       btTitle: 'Volume',
-       title: 'Volume USD',
-       dVolume, dColumn
-     })
-     .addMiniVolume({
-       btTitle: 'Market Cap',
-       title: 'Market Cap USD',
-       dVolume: dMarketCap
-     })
-     .toConfig();
-   return { config };
-  },
-
-  toSeries(json, option){
-    return Builder.crSeria({
-      adapter: toChartConfig,
-      json, option
-    });
-  }
-}
+const toChartConfig = crAdapterType1({
+  crData, addConfOption, addConfig
+});
 
 export default toChartConfig

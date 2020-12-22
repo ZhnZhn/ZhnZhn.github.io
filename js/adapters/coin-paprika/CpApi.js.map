@@ -1,1 +1,40 @@
-{"version":3,"sources":["../../../src/adapters/coin-paprika/CpApi.js"],"names":["getValue","fnAdapter","C","URL","DF_ID","_isArr","Array","isArray","_getCoinId","items","dfValue","_crUrlDf","option","fromDate","_coinId","_crUrlTw","_crUrlCi","_rApi","DF","TW","CI","CpApi","getRequestUrl","dfRoute","_crUrl","_itemUrl","checkResponse","json"],"mappings":";;;;;;;AAAA;;IAEQA,Q,GAAaC,qB,CAAbD,Q;AAER,IAAME,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,gCADG;AAERC,EAAAA,KAAK,EAAE;AAFC,CAAV;AAKA,IAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAEA,IAAMC,UAAU,GAAG,SAAbA,UAAa;AAAA,wBAAGC,KAAH;AAAA,MAAGA,KAAH,2BAAS,EAAT;AAAA,SAAkBT,QAAQ,CAACS,KAAK,CAAC,CAAD,CAAN,EAAW;AAAEC,IAAAA,OAAO,EAAER,CAAC,CAACE;AAAb,GAAX,CAA1B;AAAA,CAAnB;;AAEA,IAAMO,QAAQ,GAAG,SAAXA,QAAW,CAAAC,MAAM,EAAI;AACnB,MAAEC,QAAF,GAAeD,MAAf,CAAEC,QAAF;AAAA,MACJC,OADI,GACMN,UAAU,CAACI,MAAD,CADhB;;AAEN,SAAUV,CAAC,CAACC,GAAZ,eAAyBW,OAAzB,gCAA2DD,QAA3D;AACD,CAJD;;AAMA,IAAME,QAAQ,GAAG,SAAXA,QAAW,CAAAH,MAAM,EAAI;AACzB,MAAME,OAAO,GAAGN,UAAU,CAACI,MAAD,CAA1B;;AACA,SAAUV,CAAC,CAACC,GAAZ,eAAyBW,OAAzB;AACD,CAHD;;AAKA,IAAME,QAAQ,GAAG,SAAXA,QAAW,CAAAJ,MAAM,EAAI;AACzB,MAAME,OAAO,GAAGN,UAAU,CAACI,MAAD,CAA1B;;AACA,SAAUV,CAAC,CAACC,GAAZ,eAAyBW,OAAzB;AACD,CAHD;;AAKA,IAAMG,KAAK,GAAG;AACZC,EAAAA,EAAE,EAAEP,QADQ;AAEZQ,EAAAA,EAAE,EAAEJ,QAFQ;AAGZK,EAAAA,EAAE,EAAEJ;AAHQ,CAAd;AAMA,IAAMK,KAAK,GAAG;AACZC,EAAAA,aADY,yBACEV,MADF,EACS;AACb,QAAEW,OAAF,GAAcX,MAAd,CAAEW,OAAF;AAAA,QACJC,MADI,GACKP,KAAK,CAACM,OAAD,CAAL,IAAkBN,KAAK,CAACC,EAD7B;;AAEN,WAAQN,MAAM,CAACa,QAAP,GAAkBD,MAAM,CAACZ,MAAD,CAAhC;AACD,GALW;AAMZc,EAAAA,aANY,yBAMEC,IANF,EAMQf,MANR,EAMe;AAAA,QACjBW,OADiB,GACLX,MADK,CACjBW,OADiB;AAEzB,WAAOlB,MAAM,CAACsB,IAAD,CAAN,IACDJ,OAAO,KAAK,IAAZ,IAAoBI,IAD1B;AAED;AAVW,CAAd;eAaeN,K","sourcesContent":["import fnAdapter from './fnAdapter'\r\n\r\nconst { getValue } = fnAdapter\r\n\r\nconst C = {\r\n  URL: 'https://api.coinpaprika.com/v1',\r\n  DF_ID: 'btc-bitcoin'\r\n}\r\n\r\nconst _isArr = Array.isArray;\r\n\r\nconst _getCoinId = ({ items=[] }) => getValue(items[0], { dfValue: C.DF_ID })\r\n\r\nconst _crUrlDf = option => {\r\n  const { fromDate } = option\r\n  , _coinId = _getCoinId(option)\r\n  return `${C.URL}/coins/${_coinId}/ohlcv/historical?start=${fromDate}&limit=366`;\r\n}\r\n\r\nconst _crUrlTw = option => {\r\n  const _coinId = _getCoinId(option);\r\n  return `${C.URL}/coins/${_coinId}/twitter`;\r\n}\r\n\r\nconst _crUrlCi = option => {\r\n  const _coinId = _getCoinId(option);\r\n  return `${C.URL}/coins/${_coinId}`;\r\n}\r\n\r\nconst _rApi = {\r\n  DF: _crUrlDf,\r\n  TW: _crUrlTw,\r\n  CI: _crUrlCi\r\n}\r\n\r\nconst CpApi = {\r\n  getRequestUrl(option){\r\n    const { dfRoute } = option\r\n    , _crUrl = _rApi[dfRoute] || _rApi.DF;\r\n    return (option._itemUrl = _crUrl(option));\r\n  },\r\n  checkResponse(json, option){\r\n    const { dfRoute } = option;\r\n    return _isArr(json)\r\n      || (dfRoute === 'CI' && json);\r\n  }\r\n}\r\n\r\nexport default CpApi\r\n"],"file":"CpApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-paprika/CpApi.js"
+ ],
+ "file": "../../../src/adapters/coin-paprika/CpApi.js",
+ "names": [
+  "getValue",
+  "fnAdapter",
+  "C",
+  "URL",
+  "DF_ID",
+  "DF_SUBTITLE",
+  "_isArr",
+  "Array",
+  "isArray",
+  "_getCoinId",
+  "items",
+  "dfValue",
+  "_crUrlDf",
+  "option",
+  "fromDate",
+  "_coinId",
+  "subtitle",
+  "_crUrlTw",
+  "_crUrlCi",
+  "_rApi",
+  "DF",
+  "TW",
+  "CI",
+  "CpApi",
+  "getRequestUrl",
+  "dfRoute",
+  "_crUrl",
+  "_itemUrl",
+  "checkResponse",
+  "json"
+ ],
+ "mappings": ";;;;;;;AAAA;;IAEQA,Q,GAAaC,qB,CAAbD,Q;AAER,IAAME,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,gCADG;AAERC,EAAAA,KAAK,EAAE,aAFC;AAGRC,EAAAA,WAAW,EAAE;AAHL,CAAV;AAMA,IAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAEA,IAAMC,UAAU,GAAG,SAAbA,UAAa;AAAA,wBAAGC,KAAH;AAAA,MAAGA,KAAH,2BAAS,EAAT;AAAA,SAAkBV,QAAQ,CAACU,KAAK,CAAC,CAAD,CAAN,EAAW;AAAEC,IAAAA,OAAO,EAAET,CAAC,CAACE;AAAb,GAAX,CAA1B;AAAA,CAAnB;;AAEA,IAAMQ,QAAQ,GAAG,SAAXA,QAAW,CAAAC,MAAM,EAAI;AACnB,MAAEC,QAAF,GAAeD,MAAf,CAAEC,QAAF;AAAA,MACJC,OADI,GACMN,UAAU,CAACI,MAAD,CADhB;;AAENA,EAAAA,MAAM,CAACG,QAAP,GAAkBd,CAAC,CAACG,WAApB;AACA,SAAUH,CAAC,CAACC,GAAZ,eAAyBY,OAAzB,gCAA2DD,QAA3D;AACD,CALD;;AAOA,IAAMG,QAAQ,GAAG,SAAXA,QAAW,CAAAJ,MAAM,EAAI;AACzB,MAAME,OAAO,GAAGN,UAAU,CAACI,MAAD,CAA1B;;AACA,SAAUX,CAAC,CAACC,GAAZ,eAAyBY,OAAzB;AACD,CAHD;;AAKA,IAAMG,QAAQ,GAAG,SAAXA,QAAW,CAAAL,MAAM,EAAI;AACzB,MAAME,OAAO,GAAGN,UAAU,CAACI,MAAD,CAA1B;;AACA,SAAUX,CAAC,CAACC,GAAZ,eAAyBY,OAAzB;AACD,CAHD;;AAKA,IAAMI,KAAK,GAAG;AACZC,EAAAA,EAAE,EAAER,QADQ;AAEZS,EAAAA,EAAE,EAAEJ,QAFQ;AAGZK,EAAAA,EAAE,EAAEJ;AAHQ,CAAd;AAMA,IAAMK,KAAK,GAAG;AACZC,EAAAA,aADY,yBACEX,MADF,EACS;AACb,QAAEY,OAAF,GAAcZ,MAAd,CAAEY,OAAF;AAAA,QACJC,MADI,GACKP,KAAK,CAACM,OAAD,CAAL,IAAkBN,KAAK,CAACC,EAD7B;;AAEN,WAAQP,MAAM,CAACc,QAAP,GAAkBD,MAAM,CAACb,MAAD,CAAhC;AACD,GALW;AAMZe,EAAAA,aANY,yBAMEC,IANF,EAMQhB,MANR,EAMe;AAAA,QACjBY,OADiB,GACLZ,MADK,CACjBY,OADiB;AAEzB,WAAOnB,MAAM,CAACuB,IAAD,CAAN,IACDJ,OAAO,KAAK,IAAZ,IAAoBI,IAD1B;AAED;AAVW,CAAd;eAaeN,K"
+}

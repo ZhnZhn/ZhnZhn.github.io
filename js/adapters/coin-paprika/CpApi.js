@@ -10,7 +10,8 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 var getValue = _fnAdapter["default"].getValue;
 var C = {
   URL: 'https://api.coinpaprika.com/v1',
-  DF_ID: 'btc-bitcoin'
+  DF_ID: 'btc-bitcoin',
+  DF_SUBTITLE: 'Values on 23:59:59 UTC'
 };
 var _isArr = Array.isArray;
 
@@ -26,6 +27,7 @@ var _crUrlDf = function _crUrlDf(option) {
   var fromDate = option.fromDate,
       _coinId = _getCoinId(option);
 
+  option.subtitle = C.DF_SUBTITLE;
   return C.URL + "/coins/" + _coinId + "/ohlcv/historical?start=" + fromDate + "&limit=366";
 };
 

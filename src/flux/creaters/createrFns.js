@@ -22,15 +22,14 @@ const createrFns = {
   getC,
   getV,
 
-  crItemKey: (items, seriaType, date) => {
+  crItemKey: (items, ...args) => {
     const _prefix = items
       .filter(Boolean)
       .map(item => getV(item) || getC(item) || item)
       .join('_');
     return [
       _prefix,
-      seriaType || '',
-      date || ''
+      ...args
     ].filter(Boolean)
      .join('_');
   },

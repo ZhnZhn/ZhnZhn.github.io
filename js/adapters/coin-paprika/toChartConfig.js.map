@@ -1,1 +1,29 @@
-{"version":3,"sources":["../../../src/adapters/coin-paprika/toChartConfig.js"],"names":["Builder","crConfigType1","getValue","fnAdapter","crData","crConfigOption","SUBTITLE","toChartConfig","crKey","option","items","fromDate","_itemKey","toConfig","json","subtitle","data","dVolume","dColumn","dMarketCap","confOption","config","addMiniVolume","btTitle","title","toSeries","crSeria","adapter"],"mappings":";;;;;;;AAAA;;AACA;;AAEM,IAAEA,OAAF,GAAcC,wBAAd,CAAED,OAAF;AAAA,IAEJE,QAFI,GAIFC,qBAJE,CAEJD,QAFI;AAAA,IAGJE,MAHI,GAIFD,qBAJE,CAGJC,MAHI;AAAA,IAGIC,cAHJ,GAIFF,qBAJE,CAGIE,cAHJ;AAMN,IAAMC,QAAQ,GAAG,wBAAjB;AAEA,IAAMC,aAAa,GAAG;AACpBC,EAAAA,KADoB,iBACdC,MADc,EACP;AAAA,wBACoBA,MADpB,CACHC,KADG;AAAA,QACHA,KADG,8BACG,EADH;AAAA,QACOC,QADP,GACoBF,MADpB,CACOE,QADP;AAEX,WAAQF,MAAM,CAACG,QAAP,GAAqBV,QAAQ,CAACQ,KAAK,CAAC,CAAD,CAAN,CAA7B,SAA2CC,QAAnD;AACD,GAJmB;AAMpBE,EAAAA,QANoB,oBAMXC,IANW,EAMLL,MANK,EAME;AACpBA,IAAAA,MAAM,CAACM,QAAP,GAAkBT,QAAlB;;AADoB,kBAKhBF,MAAM,CAACU,IAAD,CALU;AAAA,QAGlBE,IAHkB,WAGlBA,IAHkB;AAAA,QAGZC,OAHY,WAGZA,OAHY;AAAA,QAGHC,OAHG,WAGHA,OAHG;AAAA,QAIlBC,UAJkB,WAIlBA,UAJkB;AAAA,QAMnBC,UANmB,GAMNf,cAAc,CAACI,MAAD,CANR;AAAA,QAOnBY,MAPmB,GAOVrB,OAAO,CAAC,8BAAc;AAC7BS,MAAAA,MAAM,EAANA,MAD6B;AACrBO,MAAAA,IAAI,EAAJA,IADqB;AACfI,MAAAA,UAAU,EAAVA;AADe,KAAd,CAAD,CAAP,CAGRE,aAHQ,CAGM;AACbC,MAAAA,OAAO,EAAE,QADI;AAEbC,MAAAA,KAAK,EAAE,YAFM;AAGbP,MAAAA,OAAO,EAAPA,OAHa;AAGJC,MAAAA,OAAO,EAAPA;AAHI,KAHN,EAQRI,aARQ,CAQM;AACbC,MAAAA,OAAO,EAAE,YADI;AAEbC,MAAAA,KAAK,EAAE,gBAFM;AAGbP,MAAAA,OAAO,EAAEE;AAHI,KARN,EAaRN,QAbQ,EAPU;;AAqBrB,WAAO;AAAEQ,MAAAA,MAAM,EAANA;AAAF,KAAP;AACA,GA5BmB;AA8BpBI,EAAAA,QA9BoB,oBA8BXX,IA9BW,EA8BLL,MA9BK,EA8BE;AACpB,WAAOT,OAAO,CAAC0B,OAAR,CAAgB;AACrBC,MAAAA,OAAO,EAAEpB,aADY;AAErBO,MAAAA,IAAI,EAAJA,IAFqB;AAEfL,MAAAA,MAAM,EAANA;AAFe,KAAhB,CAAP;AAID;AAnCmB,CAAtB;eAsCeF,a","sourcesContent":["import crConfigType1 from '../../charts/crConfigType1'\r\nimport fnAdapter from './fnAdapter'\r\n\r\nconst { Builder } = crConfigType1\r\n, {\r\n  getValue,\r\n  crData, crConfigOption\r\n} = fnAdapter;\r\n\r\nconst SUBTITLE = 'Values on 23:59:59 UTC'\r\n\r\nconst toChartConfig = {\r\n  crKey(option){\r\n    const { items=[], fromDate } = option;\r\n    return (option._itemKey = `${getValue(items[0])}_${fromDate}`);\r\n  },\r\n\r\n  toConfig(json, option){\r\n    option.subtitle = SUBTITLE\r\n    const {\r\n      data, dVolume, dColumn,\r\n      dMarketCap\r\n    } = crData(json)\r\n   , confOption = crConfigOption(option)\r\n   , config = Builder(crConfigType1({\r\n       option, data, confOption\r\n     }))\r\n     .addMiniVolume({\r\n       btTitle: 'Volume',\r\n       title: 'Volume USD',\r\n       dVolume, dColumn\r\n     })\r\n     .addMiniVolume({\r\n       btTitle: 'Market Cap',\r\n       title: 'Market Cap USD',\r\n       dVolume: dMarketCap\r\n     })\r\n     .toConfig();\r\n   return { config };\r\n  },\r\n\r\n  toSeries(json, option){\r\n    return Builder.crSeria({\r\n      adapter: toChartConfig,\r\n      json, option\r\n    });\r\n  }\r\n}\r\n\r\nexport default toChartConfig\r\n"],"file":"toChartConfig.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-paprika/toChartConfig.js"
+ ],
+ "file": "../../../src/adapters/coin-paprika/toChartConfig.js",
+ "names": [
+  "Builder",
+  "crAdapterType1",
+  "crData",
+  "fnAdapter",
+  "addConfOption",
+  "_crMvOption",
+  "btTitle",
+  "dVolume",
+  "dColumn",
+  "title",
+  "addConfig",
+  "config",
+  "json",
+  "option",
+  "data",
+  "dMarketCap",
+  "addMiniVolume",
+  "toConfig",
+  "toChartConfig"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEM,IAAEA,OAAF,GAAcC,yBAAd,CAAED,OAAF;AAAA,IACFE,MADE,GACwBC,qBADxB,CACFD,MADE;AAAA,IACME,aADN,GACwBD,qBADxB,CACMC,aADN;;AAGN,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAACC,OAAD,EAAUC,OAAV,EAAmBC,OAAnB;AAAA,SAAgC;AAClDF,IAAAA,OAAO,EAAPA,OADkD;AAElDG,IAAAA,KAAK,EAAKH,OAAL,SAF6C;AAGlDC,IAAAA,OAAO,EAAPA,OAHkD;AAGzCC,IAAAA,OAAO,EAAPA;AAHyC,GAAhC;AAAA,CAApB;;AAMA,IAAME,SAAS,GAAG,SAAZA,SAAY,CAACC,MAAD,EAASC,IAAT,EAAeC,MAAf,EAAuBC,IAAvB,EAAgC;AAAA,MAE9CP,OAF8C,GAI5CO,IAJ4C,CAE9CP,OAF8C;AAAA,MAErCC,OAFqC,GAI5CM,IAJ4C,CAErCN,OAFqC;AAAA,MAG9CO,UAH8C,GAI5CD,IAJ4C,CAG9CC,UAH8C;AAKhD,SAAOf,OAAO,CAACW,MAAD,CAAP,CACJK,aADI,CAEHX,WAAW,CAAC,QAAD,EAAWE,OAAX,EAAoBC,OAApB,CAFR,EAIJQ,aAJI,CAKHX,WAAW,CAAC,YAAD,EAAeU,UAAf,CALR,EAOJE,QAPI,EAAP;AAQD,CAbD;;AAeA,IAAMC,aAAa,GAAG,+BAAe;AACnChB,EAAAA,MAAM,EAANA,MADmC;AAC3BE,EAAAA,aAAa,EAAbA,aAD2B;AACZM,EAAAA,SAAS,EAATA;AADY,CAAf,CAAtB;eAIeQ,a"
+}

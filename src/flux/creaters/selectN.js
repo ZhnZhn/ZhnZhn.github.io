@@ -49,7 +49,7 @@ const createLoadOptions = (props={}, options={}) => {
       title, subtitle
     } = crCaption(items, titles)
   , { value:seriaType, compType } = chartType
-  , _itemKey = crItemKey(items, seriaType, date);
+  , _itemKey = crItemKey(items, seriaType, date, fromDate);
 
   _modifyIfItemTable(dfProps, items)
 

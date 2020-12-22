@@ -2,22 +2,11 @@ import AdapterFn from '../AdapterFn'
 
 const {
   ymdToUTC,
-  crVolumePoint,  
+  crVolumePoint,
   getValue,
   joinBy,
   toUpperCaseFirst
-} = AdapterFn
-
-const _crZhConfig = ({
-    _itemKey,
-    itemCaption,
-    dataSource
-  }) => ({
-    id: _itemKey, key: _itemKey,
-    itemCaption,
-    dataSource
-  });
-
+} = AdapterFn;
 
 const _crInfo = ({ title }) => ({
   name: title
@@ -64,10 +53,9 @@ const fnAdapter = {
     };
   },
 
-  crConfigOption: (option) => ({
-      zhConfig: _crZhConfig(option),
-      info: _crInfo(option)
-    })
+  addConfOption: option => ({
+    info: _crInfo(option)
+  })
 }
 
 export default fnAdapter

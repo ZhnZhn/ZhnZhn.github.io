@@ -91,7 +91,7 @@ var createLoadOptions = function createLoadOptions(props, options) {
       subtitle = _crCaption.subtitle,
       seriaType = chartType.value,
       compType = chartType.compType,
-      _itemKey = crItemKey(items, seriaType, date);
+      _itemKey = crItemKey(items, seriaType, date, fromDate);
 
   _modifyIfItemTable(dfProps, items);
 

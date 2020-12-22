@@ -33,12 +33,16 @@ var _crItemCaption = function _crItemCaption(items, titles) {
 var createrFns = {
   getC: getC,
   getV: getV,
-  crItemKey: function crItemKey(items, seriaType, date) {
+  crItemKey: function crItemKey(items) {
     var _prefix = items.filter(Boolean).map(function (item) {
       return getV(item) || getC(item) || item;
     }).join('_');
 
-    return [_prefix, seriaType || '', date || ''].filter(Boolean).join('_');
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    return [_prefix].concat(args).filter(Boolean).join('_');
   },
   crCaption: function crCaption(items, titles) {
     var itemCaption = _crItemCaption(items, titles),

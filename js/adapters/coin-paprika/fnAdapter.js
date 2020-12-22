@@ -13,20 +13,8 @@ var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     joinBy = _AdapterFn["default"].joinBy,
     toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst;
 
-var _crZhConfig = function _crZhConfig(_ref) {
-  var _itemKey = _ref._itemKey,
-      itemCaption = _ref.itemCaption,
-      dataSource = _ref.dataSource;
-  return {
-    id: _itemKey,
-    key: _itemKey,
-    itemCaption: itemCaption,
-    dataSource: dataSource
-  };
-};
-
-var _crInfo = function _crInfo(_ref2) {
-  var title = _ref2.title;
+var _crInfo = function _crInfo(_ref) {
+  var title = _ref.title;
   return {
     name: title
   };
@@ -74,9 +62,8 @@ var fnAdapter = {
       dMarketCap: dMarketCap
     };
   },
-  crConfigOption: function crConfigOption(option) {
+  addConfOption: function addConfOption(option) {
     return {
-      zhConfig: _crZhConfig(option),
       info: _crInfo(option)
     };
   }
