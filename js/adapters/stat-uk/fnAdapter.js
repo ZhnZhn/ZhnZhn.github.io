@@ -75,30 +75,18 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number' && n - n === 0;
 };
 
-var _crZhConfig = function _crZhConfig(_ref2) {
-  var _itemKey = _ref2._itemKey,
-      title = _ref2.title,
-      dataSource = _ref2.dataSource;
-  return {
-    id: _itemKey,
-    key: _itemKey,
-    itemCaption: title,
-    dataSource: dataSource
-  };
-};
-
-var _crName = function _crName(_ref3, _ref4) {
-  var unit_of_measure = _ref3.unit_of_measure;
-  var title = _ref4.title,
-      subtitle = _ref4.subtitle;
+var _crName = function _crName(_ref2, _ref3) {
+  var unit_of_measure = _ref2.unit_of_measure;
+  var title = _ref3.title,
+      subtitle = _ref3.subtitle;
   return joinBy(': ', subtitle, title, unit_of_measure);
 };
 
-var _crDescr = function _crDescr(_ref5) {
-  var links = _ref5.links;
+var _crDescr = function _crDescr(_ref4) {
+  var links = _ref4.links;
 
-  var _ref6 = (links || {}).dataset_metadata || {},
-      href = _ref6.href;
+  var _ref5 = (links || {}).dataset_metadata || {},
+      href = _ref5.href;
 
   return href ? _crItemLink(href) : '';
 };
@@ -136,9 +124,8 @@ var fnAdapter = {
 
     return _data.sort(compareByDate);
   },
-  crConfigOption: function crConfigOption(json, option) {
+  addConfOption: function addConfOption(option, json) {
     return {
-      zhConfig: _crZhConfig(option),
       info: _crInfo(json, option)
     };
   }

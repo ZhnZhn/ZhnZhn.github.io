@@ -65,16 +65,6 @@ const _fCrToMls = observations => {
 const _isNumber = n => typeof n === 'number'
  && (n-n===0);
 
-const _crZhConfig = ({
-  _itemKey,
-  title,
-  dataSource
-}) => ({
-  id: _itemKey, key: _itemKey,
-  itemCaption: title,
-  dataSource
-})
-
 const _crName = ({ unit_of_measure }, { title, subtitle }) =>
   joinBy(': ', subtitle, title, unit_of_measure);
 
@@ -110,9 +100,7 @@ const fnAdapter = {
     }
     return _data.sort(compareByDate);
   },
-
-  crConfigOption: (json, option) => ({
-    zhConfig: _crZhConfig(option),
+  addConfOption: (option, json) => ({
     info: _crInfo(json, option)
   })
 }
