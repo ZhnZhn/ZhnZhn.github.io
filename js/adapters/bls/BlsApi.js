@@ -1,19 +1,39 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+
 var C = {
   URL: 'https://api.bls.gov/publicAPI/v1/timeseries/data',
   NATIVE_URL: 'https://data.bls.gov/timeseries'
 };
+var _isArr = Array.isArray,
+    _assign = Object.assign,
+    crTitle = _fnAdapter["default"].crTitle;
 
 var _addNativeLinkTo = function _addNativeLinkTo(option) {
-  var value = option.value;
-  Object.assign(option, {
+  var _option$value = option.value,
+      value = _option$value === void 0 ? '' : _option$value;
+
+  _assign(option, {
     linkItem: {
       caption: 'BSL Data Link',
       href: C.NATIVE_URL + "/" + value
     }
+  });
+};
+
+var _setCaptionTo = function _setCaptionTo(option) {
+  var title = option.title;
+
+  _assign(option, {
+    itemCaption: title,
+    title: crTitle(option),
+    subtitle: title
   });
 };
 
@@ -36,14 +56,14 @@ var BlsApi = {
   },
   */
   getRequestUrl: function getRequestUrl(option) {
-    var _option$proxy = option.proxy,
-        proxy = _option$proxy === void 0 ? '' : _option$proxy,
-        _option$value = option.value,
-        value = _option$value === void 0 ? '' : _option$value;
+    var _option$value2 = option.value,
+        value = _option$value2 === void 0 ? '' : _option$value2;
 
     _addNativeLinkTo(option);
 
-    return "" + proxy + C.URL + "/" + value;
+    _setCaptionTo(option);
+
+    return C.URL + "/" + value;
   },
   checkResponse: function checkResponse(json) {
     var _ref = json || {},
@@ -52,7 +72,7 @@ var BlsApi = {
         _Results$series = Results.series,
         series = _Results$series === void 0 ? [] : _Results$series;
 
-    return series[0] && Array.isArray(series[0].data);
+    return series[0] && _isArr(series[0].data);
   }
 };
 var _default = BlsApi;
