@@ -14,9 +14,11 @@ const { Builder } = crConfigType1
 }), crConfOptionDf = (option) => ({
   zhConfig: _crZhConfig(option)
 }), NOP = () => {}
-, IDENTITY = v => v;
+, IDENTITY = v => v
+, crKeyDf = ({ _itemKey }) => _itemKey;
 
 const crAdapterType1 = ({
+  crKey=crKeyDf,
   crData,
   crConfOption=crConfOptionDf,
   addConfOption=NOP,
@@ -24,9 +26,7 @@ const crAdapterType1 = ({
   addConfig=IDENTITY
 }) => {
   const adapter = {
-    crKey(option){
-      return option._itemKey;
-    },
+    crKey,
     toConfig(json, option){
       const _data = crData(json, option)
       , data = _isArr(_data)

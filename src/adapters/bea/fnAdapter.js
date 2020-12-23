@@ -1,34 +1,43 @@
 
 import AdapterFn from '../AdapterFn'
 
-const {
-  crId,
-  ymdToUTC
-} = AdapterFn;
+const { ymdToUTC } = AdapterFn;
 
-const _crName = (Results) => {
-  const { Statistic='', UTCProductionTime='' } = Results
+const _isArr = Array.isArray;
+
+const _getResults = json => json.BEAAPI.Results
+, _getData = Results => _isArr(Results)
+    ? Results[0].Data
+    : Results.Data
+, _getInfo = Results => _isArr(Results)
+    ? Results[0]
+    : Results;
+
+const _crName = info => {
+  const { Statistic='', UTCProductionTime='' } = info
       , t = UTCProductionTime.replace('T', ' ');
   return `${Statistic}: ${t}`;
 };
-const _crDescr = (Results) => {
-  const { Notes=[] } = Results
-      , arr = Notes.map(note => {
-          const { NoteRef='', NoteText='' } = note;
-          return `<P>${NoteRef}: ${NoteText}</P><BR/>`;
-        });
+const _crDescr = info => {
+  const { Notes=[] } = info
+  , arr = Notes.map(note => {
+      const { NoteRef='', NoteText='' } = note;
+      return `<P>${NoteRef}: ${NoteText}</P><BR/>`;
+  });
   return arr.join('');
 };
-const _crInfo = (Results) => ({
-  name: _crName(Results),
-  description: _crDescr(Results)
-});
+const _crInfo = (Results) => {
+  const _info = _getInfo(Results);
+  return {
+    name: _crName(_info),
+    description: _crDescr(_info)
+  }
+};
 
 const _crZhConfig = (option) => {
-  const { itemCaption, dataSource } = option
-       , id = crId();
+  const { value, itemCaption, dataSource } = option;
   return {
-    id, key: id,
+    id: value, key: value,
     itemCaption,
     dataSource
   };
@@ -50,15 +59,10 @@ const _crUTC = (item) => {
   return ymdToUTC(Year + md);
 };
 
-const _isArr = Array.isArray
-
-const _getData = Results => _isArr(Results)
-  ? Results[0].Data
-  : Results.Data;
-
 const fnAdapter = {
-  crData: (Results, option) => {
-    const { dfFilterName, two } = option
+  crData: (json, option) => {
+    const Results = _getResults(json)
+    , { dfFilterName, two } = option
     , d = []
     , isFilter = dfFilterName ? true : false
     , data = _getData(Results) || [];
@@ -77,11 +81,13 @@ const fnAdapter = {
     return d;
   },
 
-  crConfigOption: (Results, option) => ({
-    zhConfig: _crZhConfig(option),
-    info: _crInfo(Results)
-  })
-
-}
+  crConfOption: (option, json) => {
+    const Results = _getResults(json);
+    return {
+      zhConfig: _crZhConfig(option),
+      info: _crInfo(Results)
+    };
+  }
+};
 
 export default fnAdapter

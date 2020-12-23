@@ -5,49 +5,23 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
+var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var Builder = _crConfigType["default"].Builder,
-    crData = _fnAdapter["default"].crData,
-    crConfigOption = _fnAdapter["default"].crConfigOption,
-    _assign = Object.assign;
+var crData = _fnAdapter["default"].crData,
+    crConfOption = _fnAdapter["default"].crConfOption;
 
-var _setCaptionTo = function _setCaptionTo(option) {
-  var title = option.title,
-      dfTitle = option.dfTitle;
-
-  _assign(option, {
-    itemCaption: title,
-    title: dfTitle,
-    subtitle: title
-  });
+var crKey = function crKey(_ref) {
+  var value = _ref.value;
+  return value;
 };
 
-var BeaAdapter = {
-  toConfig: function toConfig(json, option) {
-    _setCaptionTo(option);
-
-    var Results = json.BEAAPI.Results,
-        data = crData(Results, option),
-        confOption = crConfigOption(Results, option);
-    return {
-      config: (0, _crConfigType["default"])({
-        option: option,
-        data: data,
-        confOption: confOption
-      })
-    };
-  },
-  toSeries: function toSeries(json, option) {
-    return Builder.crSeria({
-      adapter: BeaAdapter,
-      json: json,
-      option: option
-    });
-  }
-};
+var BeaAdapter = (0, _crAdapterType["default"])({
+  crKey: crKey,
+  crData: crData,
+  crConfOption: crConfOption
+});
 var _default = BeaAdapter;
 exports["default"] = _default;
 //# sourceMappingURL=BeaAdapter.js.map

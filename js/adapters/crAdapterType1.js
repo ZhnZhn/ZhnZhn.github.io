@@ -29,22 +29,26 @@ var Builder = _crConfigType["default"].Builder,
     NOP = function NOP() {},
     IDENTITY = function IDENTITY(v) {
   return v;
+},
+    crKeyDf = function crKeyDf(_ref2) {
+  var _itemKey = _ref2._itemKey;
+  return _itemKey;
 };
 
-var crAdapterType1 = function crAdapterType1(_ref2) {
-  var crData = _ref2.crData,
-      _ref2$crConfOption = _ref2.crConfOption,
-      crConfOption = _ref2$crConfOption === void 0 ? crConfOptionDf : _ref2$crConfOption,
-      _ref2$addConfOption = _ref2.addConfOption,
-      addConfOption = _ref2$addConfOption === void 0 ? NOP : _ref2$addConfOption,
-      _ref2$trOption = _ref2.trOption,
-      trOption = _ref2$trOption === void 0 ? NOP : _ref2$trOption,
-      _ref2$addConfig = _ref2.addConfig,
-      addConfig = _ref2$addConfig === void 0 ? IDENTITY : _ref2$addConfig;
+var crAdapterType1 = function crAdapterType1(_ref3) {
+  var _ref3$crKey = _ref3.crKey,
+      crKey = _ref3$crKey === void 0 ? crKeyDf : _ref3$crKey,
+      crData = _ref3.crData,
+      _ref3$crConfOption = _ref3.crConfOption,
+      crConfOption = _ref3$crConfOption === void 0 ? crConfOptionDf : _ref3$crConfOption,
+      _ref3$addConfOption = _ref3.addConfOption,
+      addConfOption = _ref3$addConfOption === void 0 ? NOP : _ref3$addConfOption,
+      _ref3$trOption = _ref3.trOption,
+      trOption = _ref3$trOption === void 0 ? NOP : _ref3$trOption,
+      _ref3$addConfig = _ref3.addConfig,
+      addConfig = _ref3$addConfig === void 0 ? IDENTITY : _ref3$addConfig;
   var adapter = {
-    crKey: function crKey(option) {
-      return option._itemKey;
-    },
+    crKey: crKey,
     toConfig: function toConfig(json, option) {
       var _data = crData(json, option),
           data = _isArr(_data) ? _data : (_data || {}).data,

@@ -7,21 +7,31 @@ exports["default"] = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var crId = _AdapterFn["default"].crId,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC;
+var ymdToUTC = _AdapterFn["default"].ymdToUTC;
+var _isArr = Array.isArray;
 
-var _crName = function _crName(Results) {
-  var _Results$Statistic = Results.Statistic,
-      Statistic = _Results$Statistic === void 0 ? '' : _Results$Statistic,
-      _Results$UTCProductio = Results.UTCProductionTime,
-      UTCProductionTime = _Results$UTCProductio === void 0 ? '' : _Results$UTCProductio,
+var _getResults = function _getResults(json) {
+  return json.BEAAPI.Results;
+},
+    _getData = function _getData(Results) {
+  return _isArr(Results) ? Results[0].Data : Results.Data;
+},
+    _getInfo = function _getInfo(Results) {
+  return _isArr(Results) ? Results[0] : Results;
+};
+
+var _crName = function _crName(info) {
+  var _info$Statistic = info.Statistic,
+      Statistic = _info$Statistic === void 0 ? '' : _info$Statistic,
+      _info$UTCProductionTi = info.UTCProductionTime,
+      UTCProductionTime = _info$UTCProductionTi === void 0 ? '' : _info$UTCProductionTi,
       t = UTCProductionTime.replace('T', ' ');
   return Statistic + ": " + t;
 };
 
-var _crDescr = function _crDescr(Results) {
-  var _Results$Notes = Results.Notes,
-      Notes = _Results$Notes === void 0 ? [] : _Results$Notes,
+var _crDescr = function _crDescr(info) {
+  var _info$Notes = info.Notes,
+      Notes = _info$Notes === void 0 ? [] : _info$Notes,
       arr = Notes.map(function (note) {
     var _note$NoteRef = note.NoteRef,
         NoteRef = _note$NoteRef === void 0 ? '' : _note$NoteRef,
@@ -33,19 +43,21 @@ var _crDescr = function _crDescr(Results) {
 };
 
 var _crInfo = function _crInfo(Results) {
+  var _info = _getInfo(Results);
+
   return {
-    name: _crName(Results),
-    description: _crDescr(Results)
+    name: _crName(_info),
+    description: _crDescr(_info)
   };
 };
 
 var _crZhConfig = function _crZhConfig(option) {
-  var itemCaption = option.itemCaption,
-      dataSource = option.dataSource,
-      id = crId();
+  var value = option.value,
+      itemCaption = option.itemCaption,
+      dataSource = option.dataSource;
   return {
-    id: id,
-    key: id,
+    id: value,
+    key: value,
     itemCaption: itemCaption,
     dataSource: dataSource
   };
@@ -81,19 +93,15 @@ var _crUTC = function _crUTC(item) {
   return ymdToUTC(Year + md);
 };
 
-var _isArr = Array.isArray;
-
-var _getData = function _getData(Results) {
-  return _isArr(Results) ? Results[0].Data : Results.Data;
-};
-
 var fnAdapter = {
-  crData: function crData(Results, option) {
-    var dfFilterName = option.dfFilterName,
+  crData: function crData(json, option) {
+    var Results = _getResults(json),
+        dfFilterName = option.dfFilterName,
         two = option.two,
         d = [],
         isFilter = dfFilterName ? true : false,
         data = _getData(Results) || [];
+
     data.forEach(function (item) {
       var v = parseFloat(item.DataValue),
           y = !Number.isNaN(v) ? v : null;
@@ -107,7 +115,9 @@ var fnAdapter = {
     });
     return d;
   },
-  crConfigOption: function crConfigOption(Results, option) {
+  crConfOption: function crConfOption(option, json) {
+    var Results = _getResults(json);
+
     return {
       zhConfig: _crZhConfig(option),
       info: _crInfo(Results)
