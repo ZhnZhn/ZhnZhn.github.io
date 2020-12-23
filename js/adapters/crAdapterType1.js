@@ -52,11 +52,11 @@ var crAdapterType1 = function crAdapterType1(_ref2) {
 
       trOption(option, json);
       return {
-        config: addConfig((0, _crConfigType["default"])({
+        config: addConfig(Builder((0, _crConfigType["default"])({
           option: option,
           data: data,
           confOption: confOption
-        }), json, option, _data)
+        })), json, option, _data).toConfig()
       };
     },
     toSeries: function toSeries(json, option) {
@@ -71,7 +71,6 @@ var crAdapterType1 = function crAdapterType1(_ref2) {
   return adapter;
 };
 
-crAdapterType1.Builder = Builder;
 var _default = crAdapterType1;
 exports["default"] = _default;
 //# sourceMappingURL=crAdapterType1.js.map

@@ -9,8 +9,7 @@ var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var Builder = _crAdapterType["default"].Builder,
-    crData = _fnAdapter["default"].crData,
+var crData = _fnAdapter["default"].crData,
     crConfOption = _fnAdapter["default"].crConfOption,
     _assign = Object.assign;
 var DF_PAIR = 'USD';
@@ -61,7 +60,7 @@ var trOption = function trOption(option, json) {
   });
 };
 
-var addConfig = function addConfig(config, json, option, data) {
+var addConfig = function addConfig(builder, json, option, data) {
   var _btTitleTo = _crBtTitleTo(json),
       _option$value2 = option.value,
       value = _option$value2 === void 0 ? '' : _option$value2,
@@ -70,9 +69,9 @@ var addConfig = function addConfig(config, json, option, data) {
       dToVolume = data.dToVolume,
       dHL = data.dHL;
 
-  return Builder(config).addMiniVolume(_crMiniVolume(value, dColumn, dVolume)).addMiniVolume(_crMiniVolume(_btTitleTo, [], dToVolume)).addMiniHL({
+  return builder.addMiniVolume(_crMiniVolume(value, dColumn, dVolume)).addMiniVolume(_crMiniVolume(_btTitleTo, [], dToVolume)).addMiniHL({
     data: dHL
-  }).toConfig();
+  });
 };
 
 var toHdConfig = (0, _crAdapterType["default"])({

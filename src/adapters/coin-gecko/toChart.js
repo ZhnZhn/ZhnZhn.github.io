@@ -1,8 +1,8 @@
 import crAdapterType1 from '../crAdapterType1'
 import AdapterFn from '../AdapterFn'
 
-const { Builder } = crAdapterType1
-, { crItemLink } = AdapterFn;
+
+const { crItemLink } = AdapterFn;
 
 const _crDescription = crItemLink
   .bind(null, 'Coin Gecko');
@@ -12,7 +12,7 @@ const _crInfo = ({ title, _nativeUrl }) => ({
   description: _crDescription(_nativeUrl)
 });
 
-const _crVolumeConfig = (
+const _crMvOption = (
   btTitle,
   currency,
   dVolume
@@ -26,20 +26,19 @@ const crData = ({ prices }) => prices
 , addConfOption = (option) => ({
    info: _crInfo(option)
 })
-, addConfig = (config, json, option) => {
+, addConfig = (builder, json, option) => {
    const {
      total_volumes,
      market_caps
    } = json
    , { _currency } = option;
-   return Builder(config)
-    .addMiniVolume(_crVolumeConfig(
+   return builder
+    .addMiniVolume(_crMvOption(
       'Volume', _currency, total_volumes
     ))
-    .addMiniVolume(_crVolumeConfig(
+    .addMiniVolume(_crMvOption(
       'Market Cap', _currency, market_caps
-    ))
-    .toConfig();
+    ));
 };
 
 const toChart = crAdapterType1({

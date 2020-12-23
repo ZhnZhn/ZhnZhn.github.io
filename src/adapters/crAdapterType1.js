@@ -38,9 +38,9 @@ const crAdapterType1 = ({
       );
       trOption(option, json)
       return {
-        config: addConfig(crConfigType1({
-          option, data, confOption
-        }), json, option, _data)
+        config: addConfig(Builder(
+          crConfigType1({ option, data, confOption })
+        ), json, option, _data).toConfig()
       };
     },
     toSeries(json, option){
@@ -52,7 +52,5 @@ const crAdapterType1 = ({
   }
   return adapter;
 };
-
-crAdapterType1.Builder = Builder
 
 export default crAdapterType1

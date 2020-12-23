@@ -1,8 +1,7 @@
 import crAdapterType1 from '../crAdapterType1'
 import fnAdapter from './fnAdapter'
 
-const { Builder } = crAdapterType1
-, { crData, addConfOption } = fnAdapter;
+const { crData, addConfOption } = fnAdapter;
 
 const _crMvOption = (btTitle, dVolume, dColumn) => ({
   btTitle,
@@ -10,19 +9,18 @@ const _crMvOption = (btTitle, dVolume, dColumn) => ({
   dVolume, dColumn
 });
 
-const addConfig = (config, json, option, data) => {
+const addConfig = (builder, json, option, data) => {
   const {
     dVolume, dColumn,
     dMarketCap
   } = data;
-  return Builder(config)
+  return builder
     .addMiniVolume(
       _crMvOption('Volume', dVolume, dColumn)
     )
     .addMiniVolume(
       _crMvOption('Market Cap', dMarketCap)
-    )
-    .toConfig();
+    );
 };
 
 const toChartConfig = crAdapterType1({

@@ -1,8 +1,8 @@
 import crAdapterType1 from '../crAdapterType1'
 import fnAdapter from './fnAdapter'
 
-const { Builder } = crAdapterType1
-, { crData, crConfOption } = fnAdapter
+
+const { crData, crConfOption } = fnAdapter
 , _assign = Object.assign;
 
 const DF_PAIR = 'USD';
@@ -39,7 +39,7 @@ const trOption = (option, json) => {
   })
 };
 
-const addConfig = (config, json, option, data) => {
+const addConfig = (builder, json, option, data) => {
   const _btTitleTo = _crBtTitleTo(json)
   , { value='' } = option
   , {
@@ -47,11 +47,10 @@ const addConfig = (config, json, option, data) => {
      dToVolume,
      dHL
   } = data;
-  return Builder(config)
+  return builder
     .addMiniVolume(_crMiniVolume(value, dColumn, dVolume))
     .addMiniVolume(_crMiniVolume(_btTitleTo, [], dToVolume))
     .addMiniHL({ data: dHL })
-    .toConfig();
 };
 
 const toHdConfig = crAdapterType1({

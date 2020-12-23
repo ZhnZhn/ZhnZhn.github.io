@@ -9,8 +9,7 @@ var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var Builder = _crAdapterType["default"].Builder,
-    crData = _fnAdapter["default"].crData,
+var crData = _fnAdapter["default"].crData,
     addConfOption = _fnAdapter["default"].addConfOption;
 
 var _crMvOption = function _crMvOption(btTitle, dVolume, dColumn) {
@@ -22,11 +21,11 @@ var _crMvOption = function _crMvOption(btTitle, dVolume, dColumn) {
   };
 };
 
-var addConfig = function addConfig(config, json, option, data) {
+var addConfig = function addConfig(builder, json, option, data) {
   var dVolume = data.dVolume,
       dColumn = data.dColumn,
       dMarketCap = data.dMarketCap;
-  return Builder(config).addMiniVolume(_crMvOption('Volume', dVolume, dColumn)).addMiniVolume(_crMvOption('Market Cap', dMarketCap)).toConfig();
+  return builder.addMiniVolume(_crMvOption('Volume', dVolume, dColumn)).addMiniVolume(_crMvOption('Market Cap', dMarketCap));
 };
 
 var toChartConfig = (0, _crAdapterType["default"])({
