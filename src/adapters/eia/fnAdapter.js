@@ -80,7 +80,7 @@ const fnAdapter = {
     .reverse();
   },
 
-  crConfigOption: (json, option) => ({
+  crConfOption: (option, json) => ({
     zhConfig: _crZhConfig(json, option),
     info: _crInfo(json)
   })

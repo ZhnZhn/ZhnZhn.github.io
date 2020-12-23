@@ -81,7 +81,7 @@ var fnAdapter = {
       };
     }).reverse();
   },
-  crConfigOption: function crConfigOption(json, option) {
+  crConfOption: function crConfOption(option, json) {
     return {
       zhConfig: _crZhConfig(json, option),
       info: _crInfo(json)

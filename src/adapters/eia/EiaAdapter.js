@@ -1,34 +1,18 @@
-import crConfigType1 from '../../charts/crConfigType1';
+import crAdapterType1 from '../crAdapterType1';
 import fnAdapter from './fnAdapter';
 
-const { Builder } = crConfigType1
-, {
+const {
   crTitle,
   crData,
-  crConfigOption
+  crConfOption
 } = fnAdapter
 , _assign = Object.assign;
 
-const EiaAdapter = {
-  toConfig(json, option){
-    const data = crData(json)
-    , confOption = crConfigOption(json, option);
+const trOption = option =>
+  _assign(option, crTitle(option));
 
-    _assign(option, crTitle(option))
-
-    return {
-      config: crConfigType1({
-        option, data, confOption
-      })
-    };
-  },
-
-  toSeries(json, option){
-    return Builder.crSeria({
-      adapter: EiaAdapter,
-      json, option
-    });
-  }
-};
+const EiaAdapter = crAdapterType1({
+  crData, crConfOption, trOption
+});
 
 export default EiaAdapter
