@@ -12,11 +12,13 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 var _fnDescr = _interopRequireDefault(require("./fnDescr"));
 
 var isYNumber = _AdapterFn["default"].isYNumber,
+    getValue = _AdapterFn["default"].getValue,
     toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
     monthIndex = _AdapterFn["default"].monthIndex,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     valueMoving = _AdapterFn["default"].valueMoving,
     findMinY = _AdapterFn["default"].findMinY;
+var _isArr = Array.isArray;
 var C = {
   DATASET_EMPTY: 'Dataset is empty',
   ENPTY: '',
@@ -104,15 +106,18 @@ var _crSeriaData = function _crSeriaData(json, option) {
   return data.map(_crPoint).sort(_compareByX);
 };
 
+var _isSeriesReq = function _isSeriesReq(_ref2) {
+  var items = _ref2.items;
+  var it1 = getValue(items[0]);
+  return it1.indexOf('>') !== -1;
+};
+
 var fnAdapter = {
+  getValue: getValue,
   findMinY: findMinY,
-  crId: function crId(_ref2) {
-    var three = _ref2.three,
-        value = _ref2.value;
-
-    var _v = value || 'faoId';
-
-    return three ? _v + "_" + three : _v;
+  crId: function crId(_ref3) {
+    var _itemKey = _ref3._itemKey;
+    return _itemKey;
   },
   crTitle: function crTitle(json, option) {
     var title = option.title,
@@ -151,13 +156,12 @@ var fnAdapter = {
   },
   crSeriaData: _crSeriaData,
   toDataPoints: function toDataPoints(json, option) {
-    var one = option.one;
-    return ('' + one).indexOf('>') === -1 ? _crSeriaData(json, option) : _crSeriesData(json, option);
+    return _isSeriesReq(option) ? _crSeriesData(json, option) : _crSeriaData(json, option);
   },
   toInfo: _fnDescr["default"].toInfo,
-  crZhConfig: function crZhConfig(id, _ref3) {
-    var dfDomain = _ref3.dfDomain,
-        oneCaption = _ref3.oneCaption;
+  crZhConfig: function crZhConfig(id, _ref4) {
+    var dfDomain = _ref4.dfDomain,
+        itemCaption = _ref4.itemCaption;
     return {
       id: id,
       key: id,
@@ -165,16 +169,13 @@ var fnAdapter = {
       dataSource: "FAOSTAT",
       linkFn: "FAO_STAT",
       item: dfDomain,
-      itemCaption: oneCaption
+      itemCaption: itemCaption
     };
   },
   crValueMoving: function crValueMoving(points) {
-    return Array.isArray(points) && !Array.isArray(points[0]) ? valueMoving(points) : undefined;
+    return _isArr(points) && !_isArr(points[0]) ? valueMoving(points) : void 0;
   },
-  checkToSeries: function checkToSeries(_ref4) {
-    var one = _ref4.one;
-    return ('' + one).indexOf('>') === -1 ? true : false;
-  }
+  isSeriesReq: _isSeriesReq
 };
 var _default = fnAdapter;
 exports["default"] = _default;

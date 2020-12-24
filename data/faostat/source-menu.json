@@ -38,19 +38,20 @@
   ],
 
   "items": {
-    "FAO_PRODUCTION": {
-      "type": "FAO_PRODUCTION",
+    "FAO_B_PR": {
+      "type": "FAO_B_PR",
       "dialogProps": {
         "descrUrl": "./data/faostat/faostat.html",
-        "oneCaption": "Country",
-        "oneURI": "./data/faostat/countries.json",
-        "oneJsonProp": "countries",
-        "twoCaption": "Item",
-        "twoJsonProp": "items",
+        "rootUri": "./data/faostat/",
+        "selectProps":[
+          ["Country", "countries"]
+        ],
+        "spT": "id",
+        "chartsType": "t2",
         "valueFn": "RPrefixOneTwo",
         "valueFnPrefix": "FAO",
         "loadId": "FAO",
-        "dataSource": "FAOSTAT: Production Crops"
+        "dataSource": "FAOSTAT"
       }
     },
 
@@ -59,11 +60,12 @@
       "menuTitle": "Crops",
       "dialogCaption": "Production Crops",
       "contFullCaption": "FAOSTAT: Production Crops",
-      "dialogType": "DialogType5",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/crops.json",
-        "threeCaption": "Element",
+        "selectProps": [
+          ["Item", "crops"],
+          ["Element", "elements"]
+        ],
         "dfProps": {
           "dfDomain": "QC"
         }
@@ -73,10 +75,11 @@
       "type": "FAO_CROPS_PROCESSED",
       "menuTitle": "Crops Processed",
       "contFullCaption": "FAOSTAT: Production Crops Processsed",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/crops-processed.json",
+        "selectProps":[
+          ["Item", "crops-processed"]
+        ],
         "dfProps": {
           "dfDomain": "QD",
           "dfElement": "2510"
@@ -87,10 +90,11 @@
       "type": "FAO_LIVE_ANIMAL",
       "menuTitle": "Live Animals",
       "contFullCaption": "FAOSTAT: Production Live Animals",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/live-animals.json",
+        "selectProps":[
+          ["Item", "live-animals"]
+        ],
         "dfProps": {
           "dfDomain": "QA",
           "dfElement": "2111"
@@ -103,11 +107,11 @@
       "menuTitle": "Producer Prices (LCU/tonne)",
       "dialogCaption": "Producer Prices",
       "contFullCaption": "FAOSTAT: Producer Prices",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/crops.json",
-        "noDate": true,
+        "selectProps":[
+          ["Item", "crops"]
+        ],
         "dfProps": {
           "dfDomain": "PM",
           "dfElement": "5530",
@@ -119,11 +123,11 @@
       "type": "FAO_CPI",
       "menuTitle": "Consume Price Indices",
       "contFullCaption": "FAOSTAT: Consume Price Indeces",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/cpi.json",
-        "noDate": true,
+        "selectProps":[
+          ["Items", "cpi"]
+        ],
         "dfProps": {
           "dfDomain": "CP",
           "dfElement": "CP"
@@ -135,10 +139,11 @@
       "type": "FAO_PESTICIDES",
       "menuTitle": "Pesticides Use",
       "contFullCaption": "FAOSTAT: Input: Pesticides Use",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/pesticides.json",
+        "selectProps":[
+          ["Item","pesticides"]
+        ],
         "dfProps": {
           "dfDomain": "RP",
           "dfElement": "2515"
@@ -149,10 +154,11 @@
       "type": "FAO_PESTICIDES_PER",
       "menuTitle": "Pesticides per Cropland",
       "contFullCaption": "FAOSTAT: Input: Pesticides per Cropland",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/pesticides-per.json",
+        "selectProps":[
+          ["Item","pesticides-per"]
+        ],
         "dfProps": {
           "dfDomain": "EP",
           "dfElement": "5159"
@@ -163,11 +169,12 @@
       "type": "FAO_FERTILIZERS",
       "menuTitle": "Fertilizers Use",
       "contFullCaption": "FAOSTAT: Inputs: Fertilizers Use",
-      "dialogType": "DialogType5",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/fertilizers.json",
-        "threeCaption": "Element",
+        "selectProps":[
+          ["Items","fertilizers"],
+          ["Element","fertilizer-elements"]
+        ],
         "dfProps": {
           "dfDomain": "RF"
         }
@@ -177,10 +184,11 @@
       "type": "FAO_FERTILIZER_PER",
       "menuTitle": "Fertilizers per Cropland",
       "contFullCaption": "FAOSTAT: Inputs: Fertilizers per Cropland",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/fertilizer-per.json",
+        "selectProps":[
+          ["Item","fertilizer-per"]
+        ],
         "dfProps": {
           "dfDomain": "EF",
           "dfElement": "5159"
@@ -192,11 +200,12 @@
       "type": "FAO_GOV_EXP",
       "menuTitle": "Government Expenditure",
       "contFullCaption": "FAOSTAT: Investments: Government Expenditure",
-      "dialogType": "DialogType5",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/government-expenditure.json",
-        "threeCaption": "Element",
+        "selectProps":[
+          ["Item","gov-expenditure"],
+          ["Element","gov-elements"]
+        ],
         "dfProps": {
           "dfDomain": "IG"
         }
@@ -206,11 +215,12 @@
       "type": "FAO_CREDIT_TO_AGRI",
       "menuTitle": "Credit to Agriculture",
       "contFullCaption": "FAOSTAT: Investments: Credit to Agriculture",
-      "dialogType": "DialogType5",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/credit-to-agriculture.json",
-        "threeCaption": "Element",
+        "selectProps":[
+          ["Item","credit-to-agriculture"],
+          ["Element","credit-elements"]
+        ],
         "dfProps": {
           "dfDomain": "IC"
         }
@@ -221,12 +231,12 @@
       "type": "FAO_LAND_COVER",
       "menuTitle": "Land Cover",
       "contFullCaption": "FAOSTAT: Land Cover",
-      "dialogType": "DialogType5",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/land-cover.json",
-        "threeCaption": "Share In",
-        "noData": true,
+        "selectProps":[
+          ["Item","land-cover"],
+          ["Element","land-cover-elements"]
+        ],
         "dfProps": {
           "dfDomain": "EL"
         }
@@ -237,11 +247,11 @@
       "menuTitle": "Temp. Change (1951-80)",
       "dialogCaption": "Temperature Change",
       "contFullCaption": "FAOSTAT: Temperature Change from (1951-80)",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/period.json",
-        "noDate": true,
+        "selectProps":[
+          ["Item","period"]
+        ],
         "dfProps": {
           "dfDomain": "ET",
           "dfElement": "7271",
@@ -255,11 +265,11 @@
       "menuTitle": "Standard Deviation (Temp. Ch.)",
       "dialogCaption": "Standard Deviation",
       "contFullCaption": "FAOSTAT: Standard Deviation of Temp. Change (1951-80)",
-      "dialogType": "DialogType4",
-      "addProps": "FAO_PRODUCTION",
+      "addProps": "FAO_B_PR",
       "dialogProps": {
-        "twoURI": "./data/faostat/period.json",
-        "noDate": true,
+        "selectProps":[
+          ["Item","period"]
+        ],
         "dfProps": {
           "dfDomain": "ET",
           "dfElement": "6078",

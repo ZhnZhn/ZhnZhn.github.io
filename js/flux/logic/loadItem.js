@@ -53,6 +53,18 @@ var _fetchToChartComp = function _fetchToChartComp(objImpl, _ref2) {
   }
 };
 
+var _crRequestUrl = function _crRequestUrl(api, option, fnCatch, onFailed) {
+  try {
+    return api.getRequestUrl(option);
+  } catch (error) {
+    fnCatch({
+      error: error,
+      option: option,
+      onFailed: onFailed
+    });
+  }
+};
+
 var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, onFailed) {
   var fnFetch = objImpl.fnFetch,
       api = objImpl.api,
@@ -61,14 +73,14 @@ var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, o
       optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
-    uri: api.getRequestUrl(option),
+    uri: _crRequestUrl(api, option, _fnCatch.fnCatch, onFailed),
     option: option,
     optionFetch: optionFetch,
     getLimitRemaiming: getLimitRemaiming,
     onCheckResponse: api.checkResponse,
     onFetch: _fetchToChartComp.bind(null, objImpl),
     onCompleted: onCompleted,
-    onCatch: _fnCatch.fnCatch,
+    fnCatch: _fnCatch.fnCatch,
     onFailed: onFailed
   });
 };
@@ -87,14 +99,14 @@ var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
       optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
-    uri: api.getRequestUrl(option),
+    uri: _crRequestUrl(api, option, _fnCatch.fnCatch, onFailed),
     option: option,
     optionFetch: optionFetch,
     getLimitRemaiming: getLimitRemaiming,
     onCheckResponse: api.checkResponse,
     onFetch: _fetchToChart.bind(null, objImpl),
     onCompleted: onAdded,
-    onCatch: _fnCatch.fnCatch,
+    fnCatch: _fnCatch.fnCatch,
     onFailed: onFailed
   });
 };

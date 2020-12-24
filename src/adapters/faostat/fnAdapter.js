@@ -5,6 +5,7 @@ import fnDescr from './fnDescr'
 
 const {
   isYNumber,
+  getValue,
   toUpperCaseFirst,
   monthIndex,
   ymdToUTC,
@@ -12,6 +13,7 @@ const {
   findMinY
 } = AdapterFn;
 
+const _isArr = Array.isArray;
 const C = {
   DATASET_EMPTY: 'Dataset is empty',
   ENPTY: '',
@@ -97,15 +99,16 @@ const _crSeriaData = (json, option) => {
     .sort(_compareByX);
 };
 
+const _isSeriesReq = ({ items }) => {
+  const it1 = getValue(items[0]);
+  return it1.indexOf('>') !== -1;
+}
+
 const fnAdapter = {
+  getValue,
   findMinY,
-  
-  crId: ({ three, value }) => {
-    const _v = value || 'faoId';
-    return three
-      ? `${_v}_${three}`
-      : _v;
-  },
+
+  crId: ({ _itemKey }) => _itemKey,
   crTitle: (json, option) => {
      const {
        title, dfTitle,
@@ -136,31 +139,26 @@ const fnAdapter = {
   },
   crSeriaData: _crSeriaData,
   toDataPoints: (json, option) => {
-    const { one } = option
-    return ( (''+one).indexOf('>') === -1 )
-      ? _crSeriaData(json, option)
-      : _crSeriesData(json, option);
+    return _isSeriesReq(option)
+      ? _crSeriesData(json, option)
+      : _crSeriaData(json, option);
   },
   toInfo: fnDescr.toInfo,
-  crZhConfig: (id, { dfDomain, oneCaption }) => ({
+  crZhConfig: (id, { dfDomain, itemCaption }) => ({
     id: id,
     key: id,
     isWithoutSma: true,
     dataSource: "FAOSTAT",
     linkFn: "FAO_STAT",
     item: dfDomain,
-    itemCaption: oneCaption
+    itemCaption: itemCaption
   }),
   crValueMoving: (points) => {
-    return Array.isArray(points) && !Array.isArray(points[0])
+    return _isArr(points) && !_isArr(points[0])
       ? valueMoving(points)
-      : undefined;
+      : void 0;
   },
-  checkToSeries: ({ one }) => {
-    return ( (''+one).indexOf('>') === -1 )
-      ? true
-      : false;
-  }
+  isSeriesReq: _isSeriesReq
 };
 
 export default fnAdapter

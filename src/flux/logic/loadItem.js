@@ -34,21 +34,27 @@ const _fetchToChartComp = function(objImpl ,{json, option, onCompleted}){
   }
 };
 
+const _crRequestUrl = (api, option, fnCatch, onFailed) => {
+  try {
+    return api.getRequestUrl(option);
+  } catch (error) {
+    fnCatch({ error, option, onFailed })
+  }
+};
+
 const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
   const { fnFetch, api } = objImpl
   , { getLimitRemaiming } = api || {}
   , optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
-    uri : api.getRequestUrl(option),
-    option : option,
-    optionFetch: optionFetch,
+    uri: _crRequestUrl(api, option, fnCatch, onFailed),
+    option, optionFetch,
     getLimitRemaiming,
     onCheckResponse : api.checkResponse,
     onFetch : _fetchToChartComp.bind(null, objImpl),
     onCompleted : onCompleted,
-    onCatch : fnCatch,
-    onFailed : onFailed
+    fnCatch, onFailed
   })
 }
 
@@ -60,15 +66,13 @@ const _loadToChart = function(objImpl, option, onAdded, onFailed){
   , { getLimitRemaiming } = api || {}
   , optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
-    uri : api.getRequestUrl(option),
-    option : option,
-    optionFetch: optionFetch,
+    uri: _crRequestUrl(api, option, fnCatch, onFailed),
+    option, optionFetch,
     getLimitRemaiming,
     onCheckResponse : api.checkResponse,
     onFetch : _fetchToChart.bind(null, objImpl),
     onCompleted : onAdded,
-    onCatch : fnCatch,
-    onFailed : onFailed
+    fnCatch, onFailed
   })
 };
 
@@ -80,7 +84,7 @@ const _fetchToChart = function(objImpl, { json, option, onCompleted }){
       , { itemCaption, color, zhColor } = series || {};
 
   ChartFn.addSeriaWithRenderLabel({
-    chart, series,    
+    chart, series,
     label: itemCaption || label || value,
     color: color || zhColor,
     hasSecondYAxis: !!hasSecondYAxis

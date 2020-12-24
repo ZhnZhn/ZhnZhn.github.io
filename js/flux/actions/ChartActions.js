@@ -161,10 +161,14 @@ ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
       isDoublingLoad = this.isLoading && key === this.idLoading,
       isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
 
-  this.isShouldEmit = true; //{ chartType, browserType, dialogConf } = confItem
+  this.isShouldEmit = true;
+
+  var _isTs = _ChartStore["default"].isLoadToChart(); //{ chartType, browserType, dialogConf } = confItem
+
 
   _addSettingsTo(option, confItem, {
-    key: key
+    key: key,
+    _isTs: _isTs
   });
 
   var _msgSetting = _checkMsgApiKey(option) || _checkProxy(option);
@@ -175,7 +179,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta) {
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
-  } else if (!_ChartStore["default"].isLoadToChart()) {
+  } else if (!_isTs) {
     if (_ChartStore["default"].isChartExist(option)) {
       this.cancelLoad(option, M.ALREADY_EXIST, true);
     }

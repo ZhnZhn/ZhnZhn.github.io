@@ -143,18 +143,19 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
       : false;
 
   this.isShouldEmit = true;
+  const _isTs = ChartStore.isLoadToChart();
   //{ chartType, browserType, dialogConf } = confItem
-  _addSettingsTo(option, confItem, { key })
+  _addSettingsTo(option, confItem, { key, _isTs })
 
   const _msgSetting = _checkMsgApiKey(option)
-    || _checkProxy(option);   
+    || _checkProxy(option);
   if (_msgSetting) {
     this.cancelLoad(option, _msgSetting, false);
   } else if (isDoublingLoad){
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta){
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
-  } else if (!ChartStore.isLoadToChart()){
+  } else if (!_isTs){
     if (ChartStore.isChartExist(option)){
       this.cancelLoad(option, M.ALREADY_EXIST, true);
     }

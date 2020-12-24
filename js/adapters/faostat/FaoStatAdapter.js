@@ -19,7 +19,6 @@ var crId = _fnAdapter["default"].crId,
     toInfo = _fnAdapter["default"].toInfo,
     crValueMoving = _fnAdapter["default"].crValueMoving,
     crSeriaData = _fnAdapter["default"].crSeriaData,
-    checkToSeries = _fnAdapter["default"].checkToSeries,
     findMinY = _fnAdapter["default"].findMinY;
 var FaoStatAdapter = {
   crKey: crId,
@@ -41,18 +40,14 @@ var FaoStatAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    if (!checkToSeries(option)) {
-      throw new Error('ERR_10');
-    }
-
     var _data = crSeriaData(json, option),
-        oneCaption = option.oneCaption;
+        itemCaption = option.itemCaption;
 
     return (0, _ConfigBuilder["default"])().initSeria().add({
       data: _data,
       minY: findMinY(_data),
-      name: oneCaption,
-      itemCaption: oneCaption
+      name: itemCaption,
+      itemCaption: itemCaption
     }).toSeria();
   }
 };

@@ -8,7 +8,7 @@ const {
   crId, crSubtitle, crTitle,
   toDataPoints,
   crZhConfig, toInfo, crValueMoving,
-  crSeriaData, checkToSeries,
+  crSeriaData,
   findMinY
 } = fnAdapter;
 
@@ -36,18 +36,15 @@ const FaoStatAdapter = {
   },
 
   toSeries(json, option){
-    if (!checkToSeries(option)) {
-      throw new Error('ERR_10');
-    }
     const _data = crSeriaData(json, option)
-    , { oneCaption } = option;
+    , { itemCaption } = option;
     return Builder()
       .initSeria()
       .add({
         data: _data,
         minY: findMinY(_data),
-        name: oneCaption,
-        itemCaption: oneCaption        
+        name: itemCaption,
+        itemCaption: itemCaption
       })
       .toSeria();
   }
