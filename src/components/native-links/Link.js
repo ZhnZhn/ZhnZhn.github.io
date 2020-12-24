@@ -8,18 +8,27 @@ const S = {
 };
 
 const Link = ({
+  isHttp,
   className='native-link',
   style,
   href,
   caption='Native Link'
-}) => href ? (
-  <a
-    className={className}
-    style={{...S.LINK, ...style}}
-    href={toLink(href)}
-  >
-    {caption}
-  </a>
-) : null;
+}) => {
+  const _href = toLink(href, isHttp)
+  , _style = {...S.LINK, ...style};
+  return _href ? (
+    <a
+      className={className}
+      style={_style}
+      href={_href}
+    >
+      {caption}
+    </a>
+  ) : (
+    <span style={_style}>
+      {caption}
+    </span>
+  );
+}
 
 export default Link

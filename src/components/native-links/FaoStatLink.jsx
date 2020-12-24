@@ -6,9 +6,12 @@ const C = {
 
 const FaoStatLink = ({ item }) => (
   <Link
+    isHttp={true}
     href={item ? C.BASE + item : C.BASE}
     caption="FAOSTAT Link"
   />
 );
+
+
 
 export default FaoStatLink

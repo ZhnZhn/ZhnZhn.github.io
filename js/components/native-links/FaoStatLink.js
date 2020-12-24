@@ -16,6 +16,7 @@ var C = {
 var FaoStatLink = function FaoStatLink(_ref) {
   var item = _ref.item;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
+    isHttp: true,
     href: item ? C.BASE + item : C.BASE,
     caption: "FAOSTAT Link"
   });

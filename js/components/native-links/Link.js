@@ -19,18 +19,26 @@ var S = {
 };
 
 var Link = function Link(_ref) {
-  var _ref$className = _ref.className,
+  var isHttp = _ref.isHttp,
+      _ref$className = _ref.className,
       className = _ref$className === void 0 ? 'native-link' : _ref$className,
       style = _ref.style,
       href = _ref.href,
       _ref$caption = _ref.caption,
       caption = _ref$caption === void 0 ? 'Native Link' : _ref$caption;
-  return href ? /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
+
+  var _href = (0, _toLink["default"])(href, isHttp),
+      _style = (0, _extends2["default"])({}, S.LINK, style);
+
+  return _href ? /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     className: className,
-    style: (0, _extends2["default"])({}, S.LINK, style),
-    href: (0, _toLink["default"])(href),
+    style: _style,
+    href: _href,
     children: caption
-  }) : null;
+  }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: _style,
+    children: caption
+  });
 };
 
 var _default = Link;
