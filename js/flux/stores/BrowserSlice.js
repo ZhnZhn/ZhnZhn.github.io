@@ -15,7 +15,6 @@ var _BrowserActions = require("../actions/BrowserActions");
 
 var _BrowserLogic = _interopRequireDefault(require("./browser/BrowserLogic"));
 
-//import Factory from '../logic/Factory';
 var C = {
   FAILED: 'Failed'
 };
@@ -60,7 +59,7 @@ var BrowserSlice = {
     }
 
     var _r = this.routeDialog[browserId];
-    return _r ? _r[sourceId] : undefined;
+    return _r ? _r[sourceId] : void 0;
   },
   onShowBrowserDynamicDone: function onShowBrowserDynamicDone(_ref) {
     var browserType = _ref.browserType;
@@ -68,8 +67,11 @@ var BrowserSlice = {
   },
   onShowBrowserDynamicInit: function onShowBrowserDynamicInit(elBrowser, option) {
     var browserType = option.browserType;
-    this.browserMenu[browserType] = [];
-    this.trigger(_BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC, elBrowser);
+
+    if (!this.browserMenu[browserType]) {
+      this.browserMenu[browserType] = [];
+      this.trigger(_BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC, elBrowser);
+    }
   },
   onShowBrowserDynamicFailed: function onShowBrowserDynamicFailed(option) {
     this.showAlertDialog(option);
@@ -77,20 +79,12 @@ var BrowserSlice = {
   },
   onLoadBrowserDynamicCompleted: function onLoadBrowserDynamicCompleted(option) {
     var json = option.json,
-        browserType = option.browserType;
-
-    if (isWithItemCounter(browserType)) {
-      var elMenu = initBrowserMenu(this, option);
-      this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-        menuItems: elMenu,
-        browserType: browserType
-      });
-    } else {
-      this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-        json: json,
-        browserType: browserType
-      });
-    }
+        browserType = option.browserType,
+        menuItems = isWithItemCounter(browserType) ? initBrowserMenu(this, option) : json;
+    this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+      menuItems: menuItems,
+      browserType: browserType
+    });
   },
   onLoadBrowserDynamicFailed: function onLoadBrowserDynamicFailed(option) {
     var alertItemId = option.alertItemId,

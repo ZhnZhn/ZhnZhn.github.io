@@ -3,12 +3,11 @@ import BrowserConfig from '../../constants/BrowserConfig';
 import { BrowserType } from '../../constants/Type';
 import DataWL from '../../constants/DataWL';
 
-//import Factory from '../logic/Factory';
 import { BrowserActionTypes as BA } from '../actions/BrowserActions';
 
 import BrowserLogic from './browser/BrowserLogic';
 
-const C = {
+const C = {  
   FAILED: 'Failed'
 };
 
@@ -55,7 +54,7 @@ const BrowserSlice = {
       return BrowserConfig[browserId];
     }
     const _r = this.routeDialog[browserId];
-    return _r ? _r[sourceId] : undefined;
+    return _r ? _r[sourceId] : void 0;
   },
 
   onShowBrowserDynamicDone({ browserType }){
@@ -63,8 +62,10 @@ const BrowserSlice = {
   },
   onShowBrowserDynamicInit(elBrowser, option){
     const { browserType } = option;
-    this.browserMenu[browserType] = [];
-    this.trigger(BA.INIT_BROWSER_DYNAMIC, elBrowser);
+    if (!this.browserMenu[browserType]) {
+      this.browserMenu[browserType] = [];
+      this.trigger(BA.INIT_BROWSER_DYNAMIC, elBrowser);
+    }
   },
   onShowBrowserDynamicFailed(option){
     this.showAlertDialog(option)
@@ -72,17 +73,13 @@ const BrowserSlice = {
   },
 
   onLoadBrowserDynamicCompleted(option){
-    const { json, browserType } = option;
-    if ( isWithItemCounter(browserType) ){
-      const elMenu = initBrowserMenu(this, option);
-      this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-         menuItems: elMenu, browserType
-      })
-    } else {
-      this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-         json, browserType
-      })
-    }
+    const { json, browserType } = option
+    , menuItems = isWithItemCounter(browserType)
+        ? initBrowserMenu(this, option)
+        : json;
+    this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+       menuItems, browserType
+    })
   },
   onLoadBrowserDynamicFailed(option){
     const { alertItemId, caption } = option;

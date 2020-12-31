@@ -48,15 +48,6 @@ var STYLE = {
     width: '100%',
     paddingBottom: 8,
     paddingRight: 24
-  },
-  SPINNER_LOADING: {
-    position: 'relative',
-    display: 'block',
-    width: 32,
-    height: 32,
-    margin: '0 auto',
-    marginTop: 32,
-    textAlign: 'middle'
   }
 };
 
@@ -91,7 +82,7 @@ var MenuBrowserDynamic2 = /*#__PURE__*/function (_Component) {
         _this._handleShow();
       } else if (actionType === loadCompletedAction && data.browserType === browserType) {
         _this.setState({
-          menuItems: data.json,
+          menuItems: data.menuItems,
           isLoaded: true
         });
       }
@@ -223,9 +214,7 @@ var MenuBrowserDynamic2 = /*#__PURE__*/function (_Component) {
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane["default"], {
         className: scrollClass,
-        children: [_isMenuEmpty && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading["default"], {
-          style: STYLE.SPINNER_LOADING
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuListType["default"], {
+        children: [_isMenuEmpty && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading["default"], {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuListType["default"], {
           model: menuItems,
           ItemComp: ItemComp,
           itemClassName: CL.ROW_ITEM,

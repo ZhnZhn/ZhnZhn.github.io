@@ -32,15 +32,6 @@ const STYLE = {
      width: '100%',
      paddingBottom: 8,
      paddingRight: 24
-  },
-  SPINNER_LOADING : {
-    position: 'relative',
-    display: 'block',
-    width: 32,
-    height: 32,
-    margin: '0 auto',
-    marginTop: 32,
-    textAlign: 'middle'
   }
 };
 
@@ -84,8 +75,8 @@ class MenuBrowserDynamic2 extends Component {
     const { browserType, showAction, loadCompletedAction } = this.props;
     if (actionType === showAction && data === browserType){
       this._handleShow();
-    } else if (actionType === loadCompletedAction && data.browserType === browserType){
-      this.setState({ menuItems: data.json, isLoaded : true });
+    } else if (actionType === loadCompletedAction && data.browserType === browserType){      
+      this.setState({ menuItems: data.menuItems, isLoaded : true });
     }
   }
 
@@ -154,9 +145,7 @@ class MenuBrowserDynamic2 extends Component {
             </ShowHide>
           }
           <ScrollPane className={scrollClass}>
-            {_isMenuEmpty && <SpinnerLoading
-               style={STYLE.SPINNER_LOADING}/>
-            }
+            {_isMenuEmpty && <SpinnerLoading />}
             <MenuListType2
                model={menuItems}
                ItemComp={ItemComp}
