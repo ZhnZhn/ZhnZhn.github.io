@@ -12,12 +12,7 @@ const MAP_FREQUENCY_DF = 'M'
 
 const S = {
   SPINNER_LOADING : {
-    position: 'relative',
-    display: 'block',
-    textAlign: 'middle',
-    margin: '16px auto 32px',
-    width: 32,
-    height: 32
+    margin: '16px auto 32px'
   },
   SPINNER_FAILED: {
     borderColor: '#f44336',

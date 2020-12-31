@@ -32,12 +32,7 @@ var MAP_FREQUENCY_DF = 'M',
     MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.";
 var S = {
   SPINNER_LOADING: {
-    position: 'relative',
-    display: 'block',
-    textAlign: 'middle',
-    margin: '16px auto 32px',
-    width: 32,
-    height: 32
+    margin: '16px auto 32px'
   },
   SPINNER_FAILED: {
     borderColor: '#f44336',

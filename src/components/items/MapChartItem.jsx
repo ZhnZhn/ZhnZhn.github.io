@@ -29,13 +29,7 @@ const S = {
     height: 400
   },
   SPINNER_LOADING: {
-    position: 'relative',
-    display: 'block',
-    width: 32,
-    height: 32,
-    margin: '0 auto',
-    marginTop: 64,
-    textAlign: 'middle'
+    margin: '64px auto 0'
   },
   BLOCK: {
     display: 'block'
