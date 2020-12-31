@@ -15,10 +15,10 @@
     "lint:hooks": "eslint -c .eslintrc-hooks.js ./src > lint-hooks.txt",
     "css:sass": "gulp sass",
     "css:min": "gulp",
-    "build:dev:dll": "webpack --colors --progress --config webpack.dev.dll.js",
-    "build:dev:dll-jsx": "webpack --colors --progress --config webpack.dev.dll-jsx.js",
-    "build:dll": "webpack --colors --progress --config webpack.dll.js",
-    "build:dll-jsx": "webpack --colors --progress --config webpack.dll-jsx.js",
+    "build:dev:dll": "webpack --color --progress --config webpack.dev.dll.js",
+    "build:dev:dll-jsx": "webpack --color --progress --config webpack.dev.dll-jsx.js",
+    "build:dll": "webpack --color --progress --config webpack.dll.js",
+    "build:dll-jsx": "webpack --color --progress --config webpack.dll-jsx.js",
     "stats": "npm run stats:json && npm run stats:report",
     "stats:json": "webpack --config webpack.dll-jsx.js --profile --json > stats.json",
     "stats:report": "webpack-bundle-analyzer stats.json --no-open --mode static"
@@ -90,12 +90,12 @@
     "@testing-library/react": "^11.0.4",
     "@testing-library/react-hooks": "^3.3.0",
     "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.2.2",
     "del": "^5.1.0",
-    "eslint": "^7.11.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.21.4",
-    "eslint-plugin-react-hooks": "^4.1.2",
+    "eslint": "^7.16.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
@@ -111,8 +111,8 @@
     "terser-webpack-plugin": "^5.0.3",
     "webpack": "^5.3.0",
     "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-cli": "^4.3.0",
+    "webpack-dev-server": "^3.11.1"
   },
   "jest": {
     "roots": [
