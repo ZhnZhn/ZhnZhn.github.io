@@ -23,10 +23,6 @@ var _loadItems = _interopRequireDefault(require("./loadItems"));
 
 var _Frame = _interopRequireDefault(require("./Frame"));
 
-var _MenuList = _interopRequireDefault(require("./MenuList"));
-
-var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
-
 var _PageList = _interopRequireDefault(require("./PageList"));
 
 var S = {
@@ -61,29 +57,6 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
 
     _this = _Component.call(this, props) || this;
 
-    _this._loadItems = function () {
-      var _this$props = _this.props,
-          _this$props$dfProps = _this$props.dfProps,
-          dfProps = _this$props$dfProps === void 0 ? {} : _this$props$dfProps,
-          store = _this$props.store,
-          lT = dfProps.lT,
-          proxy = store.getProxy(lT);
-      (0, _loadItems["default"])(dfProps.rootUrl, proxy).then(function (model) {
-        if (Array.isArray(model)) {
-          _this.setState({
-            model: model,
-            errMsg: void 0
-          });
-        } else {
-          throw new Error('Response is not array');
-        }
-      })["catch"](function (err) {
-        _this.setState({
-          errMsg: err.message
-        });
-      });
-    };
-
     _this.hPrevPage = function (pageNumber) {
       _this.setState(function (_ref) {
         var pageCurrent = _ref.pageCurrent;
@@ -100,9 +73,9 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
     };
 
     _this._addPage = function (pages, id, title) {
-      var _this$props2 = _this.props,
-          dfProps = _this$props2.dfProps,
-          store = _this$props2.store;
+      var _this$props = _this.props,
+          dfProps = _this$props.dfProps,
+          store = _this$props.store;
       pages.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Frame["default"], {
         id: id,
         style: S.PAGE,
@@ -149,19 +122,15 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
 
     _this._crTransform = function () {
       var dX = '0';
+      var _menuNode = _this._refMenu.current;
 
-      if (_this._direction !== 0 && _this._menuNode) {
-        var _prevInt = _getTranslateX(_this._menuNode);
+      if (_this._direction !== 0 && _menuNode) {
+        var _prevInt = _getTranslateX(_menuNode);
 
-        if (_this._direction === 1) {
-          dX = _prevInt - 300;
-        } else {
-          dX = _prevInt + 300;
-        }
-
+        dX = _this._direction === 1 ? _prevInt - 300 : _prevInt + 300;
         _this._direction = 0;
-      } else if (_this._direction === 0 && _this._menuNode) {
-        dX = _getTranslateX(_this._menuNode);
+      } else if (_this._direction === 0 && _menuNode) {
+        dX = _getTranslateX(_menuNode);
       }
 
       return {
@@ -169,22 +138,10 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
       };
     };
 
-    _this._refMenu = function (n) {
-      return _this._menuNode = n;
-    };
-
-    _this.focusFirst = function () {
-      var _nodeItem = _this._refFirstItem.current;
-
-      if (_nodeItem) {
-        _nodeItem.focus();
-      }
-    };
-
     _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
     _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
+    _this._refMenu = /*#__PURE__*/(0, _react.createRef)();
     _this._direction = 0;
-    _this._refFirstItem = /*#__PURE__*/(0, _react.createRef)();
 
     _this._fOnClickItem = function (_ref3) {
       var id = _ref3.id,
@@ -193,7 +150,6 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
     };
 
     _this.state = {
-      model: [],
       pageCurrent: 0,
       pages: []
     };
@@ -202,18 +158,14 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
 
   var _proto = MenuSlider.prototype;
 
-  _proto.componentDidMount = function componentDidMount() {
-    this._loadItems();
-  };
-
   _proto.render = function render() {
-    var _this$state = this.state,
-        model = _this$state.model,
-        errMsg = _this$state.errMsg,
+    var _this$props2 = this.props,
+        dfProps = _this$props2.dfProps,
+        store = _this$props2.store,
+        _this$state = this.state,
         pages = _this$state.pages,
-        pageCurrent = _this$state.pageCurrent;
-
-    var _transform = this._crTransform(),
+        pageCurrent = _this$state.pageCurrent,
+        _transform = this._crTransform(),
         _pagesStyle = (0, _extends2["default"])({}, S.PAGES, _transform);
 
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -221,29 +173,22 @@ var MenuSlider = /*#__PURE__*/function (_Component) {
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ref: this._refMenu,
         style: _pagesStyle,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Frame["default"], {
           style: S.PAGE,
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuList["default"], {
-            refFirstItem: this._refFirstItem,
-            model: model,
-            fOnClickItem: this._fOnClickItem
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ErrMsg["default"], {
-            errMsg: errMsg
-          })]
+          title: "Main Menu",
+          store: store,
+          dfProps: dfProps,
+          pageCurrent: pageCurrent,
+          pageNumber: 0,
+          onClickNext: this.hNextPage,
+          loadItems: _loadItems["default"],
+          fOnClickItem: _factoryClickItem["default"]
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PageList["default"], {
           pages: pages,
           pageCurrent: pageCurrent
         })]
       })
     });
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate() {
-    var pageCurrent = this.state.pageCurrent;
-
-    if (pageCurrent === 0) {
-      setTimeout(this.focusFirst, 1000);
-    }
   };
 
   return MenuSlider;

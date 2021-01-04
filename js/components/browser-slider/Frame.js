@@ -13,9 +13,7 @@ var _react = require("react");
 
 var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
-var _MenuList = _interopRequireDefault(require("./MenuList"));
-
-var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
+var _Page = _interopRequireDefault(require("./Page"));
 
 var FOCUS_FIRST_MLS = 1000;
 var _isArr = Array.isArray;
@@ -37,8 +35,7 @@ var _fOnClick = function _fOnClick(proxy, rootId, dfProps, pageNumber, onClickNe
 };
 
 var Frame = function Frame(_ref) {
-  var refFirstItem = _ref.refFirstItem,
-      style = _ref.style,
+  var style = _ref.style,
       store = _ref.store,
       title = _ref.title,
       _ref$id = _ref.id,
@@ -54,31 +51,28 @@ var Frame = function Frame(_ref) {
 
   var _refTitle = (0, _react.useRef)(),
       _refId = (0, _react.useRef)(),
-      _useState = (0, _react.useState)({
-    model: [],
-    errMsg: null
-  }),
+      _useState = (0, _react.useState)({}),
       state = _useState[0],
       setState = _useState[1],
       model = state.model,
       errMsg = state.errMsg,
       proxy = _getProxy(store, dfProps),
-      _fOnClickItem = (0, _react.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy]);
+      _fOnClickItem = (0, _react.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy]),
+      _isTitle = title && onClickPrev,
+      _isFocusTitle = pageNumber === pageCurrent && (_isTitle || !_isTitle && model);
 
   (0, _react.useEffect)(function () {
     if (title) {
       loadItems(dfProps.rootUrl + "/" + id, proxy).then(function (model) {
-        if (_isArr(model)) {
-          setState({
-            model: model,
-            errMsg: null
-          });
-        } else {
-          throw new Error('Response is not array');
-        }
+        var _nextState = _isArr(model) ? {
+          model: model
+        } : {
+          errMsg: 'Response is not array'
+        };
+
+        setState(_nextState);
       })["catch"](function (err) {
         return setState({
-          model: [],
           errMsg: err.message
         });
       });
@@ -90,7 +84,8 @@ var Frame = function Frame(_ref) {
     };
   }, []);
   (0, _react.useEffect)(function () {
-    if (pageNumber === pageCurrent) {
+    if (_isFocusTitle) {
+      clearTimeout(_refId.current);
       _refId.current = setTimeout(function () {
         var _titleNode = _refTitle.current;
 
@@ -99,21 +94,17 @@ var Frame = function Frame(_ref) {
         }
       }, FOCUS_FIRST_MLS);
     }
-  }, [pageNumber, pageCurrent]);
-
-  var _isTitle = title && onClickPrev;
-
+  }, [_isFocusTitle]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: style,
     children: [_isTitle && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle["default"], {
       innerRef: _refTitle,
       title: title,
       onClick: onClickPrev.bind(null, pageNumber)
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuList["default"], {
-      refFirstItem: refFirstItem,
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Page["default"], {
+      refFirstItem: !_isTitle ? _refTitle : void 0,
       model: model,
-      fOnClickItem: _fOnClickItem
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ErrMsg["default"], {
+      fOnClickItem: _fOnClickItem,
       errMsg: errMsg
     })]
   });

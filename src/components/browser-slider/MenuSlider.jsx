@@ -6,8 +6,6 @@ import fOnClickItem from './factoryClickItem'
 import loadItems from './loadItems'
 
 import Frame from './Frame'
-import MenuList from './MenuList'
-import ErrMsg from './ErrMsg'
 import PageList from './PageList'
 
 const S = {
@@ -47,40 +45,17 @@ class MenuSlider extends Component {
     this.hPrevPage = throttleOnce(
       this.hPrevPage.bind(this)
     )
+    this._refMenu = createRef()
     this._direction = 0
-    this._refFirstItem = createRef()
 
     this._fOnClickItem = ({ id, text }) => this
       .hNextPage.bind(null, id, text, 0)
 
     this.state = {
-      model: [],
       pageCurrent: 0,
       pages: []
     }
   }
-
-  componentDidMount(){
-    this._loadItems()
-  }
-
-  _loadItems = () => {
-    const { dfProps={}, store } = this.props
-        , { lT } = dfProps
-        , proxy = store.getProxy(lT);
-    loadItems(dfProps.rootUrl, proxy)
-      .then(model => {
-         if (Array.isArray(model)) {
-            this.setState({ model, errMsg: void 0})
-         } else {
-           throw new Error('Response is not array');
-         }
-      })
-      .catch(err => {
-         this.setState({ errMsg: err.message })
-      })
-  }
-
 
   hPrevPage = (pageNumber) => {
     this.setState(({ pageCurrent }) => {
@@ -138,33 +113,25 @@ class MenuSlider extends Component {
 
  _crTransform = () => {
    let dX = '0';
-   if (this._direction !== 0 && this._menuNode) {
-     const _prevInt = _getTranslateX(this._menuNode);
-     if ( this._direction === 1 ) {
-       dX = _prevInt-300
-     } else {
-       dX = _prevInt+300
-     }
+   const _menuNode = this._refMenu.current;
+   if (this._direction !== 0 && _menuNode) {
+     const _prevInt = _getTranslateX(_menuNode);
+     dX = this._direction === 1
+       ? _prevInt-300
+       : _prevInt+300     
      this._direction = 0
-   } else if (this._direction === 0 && this._menuNode) {
-     dX = _getTranslateX(this._menuNode);
+   } else if (this._direction === 0 && _menuNode) {
+     dX = _getTranslateX(_menuNode);
    }
 
    return { transform: `translateX(${dX}px)` };
  }
 
-  _refMenu = n => this._menuNode = n
-
   render(){
-    const {
-      model, errMsg,
-      pages, pageCurrent
-    } = this.state
-    const _transform = this._crTransform()
-    , _pagesStyle = {
-         ...S.PAGES,
-         ..._transform
-       };
+    const { dfProps, store } = this.props
+    , { pages, pageCurrent } = this.state
+    , _transform = this._crTransform()
+    , _pagesStyle = {...S.PAGES, ..._transform};
 
     return (
       <div style={S.ROOT}>
@@ -172,14 +139,17 @@ class MenuSlider extends Component {
           ref={this._refMenu}
           style={_pagesStyle}
         >
-          <div style={S.PAGE}>
-            <MenuList
-              refFirstItem={this._refFirstItem}
-              model={model}
-              fOnClickItem={this._fOnClickItem}
-            />
-            <ErrMsg errMsg={errMsg} />
-          </div>
+          <Frame
+            style={S.PAGE}
+            title="Main Menu"
+            store={store}
+            dfProps={dfProps}
+            pageCurrent={pageCurrent}
+            pageNumber={0}
+            onClickNext={this.hNextPage}
+            loadItems={loadItems}
+            fOnClickItem={fOnClickItem}
+          />
           <PageList
             pages={pages}
             pageCurrent={pageCurrent}
@@ -187,20 +157,6 @@ class MenuSlider extends Component {
         </div>
       </div>
     );
-  }
-
-  focusFirst = () => {
-    const _nodeItem = this._refFirstItem.current;
-    if (_nodeItem) {
-      _nodeItem.focus()
-    }
-  }
-
-  componentDidUpdate(){
-    const { pageCurrent } = this.state;
-    if (pageCurrent === 0) {
-       setTimeout(this.focusFirst, 1000)
-    }
   }
 }
 

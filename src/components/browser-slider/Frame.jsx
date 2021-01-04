@@ -1,8 +1,7 @@
 import { useRef, useState, useCallback, useEffect } from 'react'
 
 import MenuTitle from './MenuTitle'
-import MenuList from './MenuList'
-import ErrMsg from './ErrMsg'
+import Page from './Page'
 
 const FOCUS_FIRST_MLS = 1000;
 
@@ -29,7 +28,6 @@ const _fOnClick = (
 };
 
 const Frame = ({
-  refFirstItem,
   style,
   store,
   title, id='',
@@ -42,7 +40,7 @@ const Frame = ({
 }) => {
   const _refTitle = useRef()
   , _refId = useRef()
-  , [state, setState] = useState({ model: [], errMsg: null})
+  , [state, setState] = useState({})
   , { model, errMsg } = state
   , proxy = _getProxy(store, dfProps)
   , _fOnClickItem = useCallback(
@@ -50,21 +48,21 @@ const Frame = ({
          proxy, id, dfProps, pageNumber,
          onClickNext, fOnClickItem
        )
-      , [proxy]);
+      , [proxy])
+  , _isTitle = title && onClickPrev
+  , _isFocusTitle = pageNumber === pageCurrent
+      && (_isTitle || !_isTitle && model);
 
   useEffect(()=>{
     if (title) {
       loadItems(`${dfProps.rootUrl}/${id}`, proxy)
         .then(model => {
-          if (_isArr(model)){
-            setState({ model, errMsg: null })
-          } else {
-            throw new Error('Response is not array')
-          }
+          const _nextState = _isArr(model)
+            ? { model }
+            : { errMsg: 'Response is not array'};
+          setState(_nextState)
         })
-        .catch(err => setState({
-           model: [], errMsg: err.message
-         }))
+        .catch(err => setState({ errMsg: err.message }))
     }
     return () => {
       clearTimeout(_refId.current)
@@ -72,18 +70,17 @@ const Frame = ({
     }
   }, [])
 
-  useEffect(()=>{
-    if ( pageNumber === pageCurrent ) {
+  useEffect(() => {
+    if (_isFocusTitle) {
+      clearTimeout(_refId.current);
       _refId.current = setTimeout(()=>{
-        const _titleNode = _refTitle.current;
-        if (_titleNode) {
-          _titleNode.focus()
-        }
+          const _titleNode = _refTitle.current;
+          if (_titleNode) {
+           _titleNode.focus()
+          }
       }, FOCUS_FIRST_MLS)
     }
-  }, [pageNumber, pageCurrent])
-
-  const _isTitle = title && onClickPrev;
+  }, [_isFocusTitle])
 
   return (
     <div style={style}>
@@ -93,12 +90,12 @@ const Frame = ({
           onClick={onClickPrev.bind(null, pageNumber)}
         />
       }
-      <MenuList
-        refFirstItem={refFirstItem}
+      <Page
+        refFirstItem={!_isTitle ? _refTitle : void 0}
         model={model}
         fOnClickItem={_fOnClickItem}
+        errMsg={errMsg}
       />
-      <ErrMsg errMsg={errMsg} />
     </div>
   );
 }

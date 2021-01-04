@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/Page.js"
+ ],
+ "file": "../../../src/components/browser-slider/Page.js",
+ "names": [
+  "Page",
+  "refFirstItem",
+  "model",
+  "fOnClickItem",
+  "errMsg"
+ ],
+ "mappings": ";;;;;;;;;AAAA;;AACA;;AACA;;AAEA,IAAMA,IAAI,GAAG,SAAPA,IAAO;AAAA,MACXC,YADW,QACXA,YADW;AAAA,MAEXC,KAFW,QAEXA,KAFW;AAAA,MAGXC,YAHW,QAGXA,YAHW;AAAA,MAIXC,MAJW,QAIXA,MAJW;AAAA,sBAMX;AAAA,eACE,EAAEF,KAAK,IAAIE,MAAX,kBAAsB,qBAAC,0BAAD,KADxB,eAEC,qBAAC,oBAAD;AACE,MAAA,YAAY,EAAEH,YADhB;AAEE,MAAA,KAAK,EAAEC,KAFT;AAGE,MAAA,YAAY,EAAEC;AAHhB,MAFD,eAOC,qBAAC,kBAAD;AAAQ,MAAA,MAAM,EAAEC;AAAhB,MAPD;AAAA,IANW;AAAA,CAAb;;eAiBeJ,I"
+}
