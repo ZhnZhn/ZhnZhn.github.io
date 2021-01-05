@@ -1,8 +1,10 @@
 import toTableFn from '../toTableFn'
-import crTableConfig from './crTableConfig'
 import fnAdapter from './fnAdapter'
 
-const { crRows } = toTableFn
+const {
+  crRows,
+  crTableConfig
+} = toTableFn
 , {
     crPageConfig,
     getYmdhmUTC

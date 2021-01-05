@@ -1,4 +1,5 @@
 import AdapterFn from './AdapterFn'
+import crTableConfig from './crTableConfig'
 
 const { roundBy } = AdapterFn;
 
@@ -24,6 +25,7 @@ const _getCellValue = (r, h) => {
 };
 
 const toTableFn = {
+  crTableConfig,  
   crRows: (headers=[], rows=[], idPropName='id') => {
     return rows.map((r, rIndex) => {
       headers.forEach(h => {

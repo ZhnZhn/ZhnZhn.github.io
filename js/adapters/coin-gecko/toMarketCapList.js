@@ -9,9 +9,8 @@ var _toTableFn = _interopRequireDefault(require("../toTableFn"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _crTableConfig = _interopRequireDefault(require("./crTableConfig"));
-
-var crRows = _toTableFn["default"].crRows;
+var crRows = _toTableFn["default"].crRows,
+    crTableConfig = _toTableFn["default"].crTableConfig;
 var crPageConfig = _fnAdapter["default"].crPageConfig;
 var HEADERS = [{
   name: 'Rank',
@@ -100,7 +99,7 @@ var toMarketCapList = {
         title = option.title,
         _json = _transformDate(json),
         _rows = crRows(HEADERS, _json),
-        config = (0, _crTableConfig["default"])({
+        config = crTableConfig({
       id: key,
       title: title,
       headers: HEADERS,

@@ -1,8 +1,10 @@
 import toTableFn from '../toTableFn'
 import fnAdapter from './fnAdapter'
-import crTableConfig from './crTableConfig'
 
-const { crRows } = toTableFn;
+const { 
+  crRows,
+  crTableConfig
+} = toTableFn;
 const { crPageConfig } = fnAdapter;
 
 const HEADERS = [{

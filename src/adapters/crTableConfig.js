@@ -1,6 +1,6 @@
-import AdapterFn from '../AdapterFn'
+import AdapterFn from './AdapterFn'
 
-const { numberFormat } = AdapterFn
+const { numberFormat } = AdapterFn;
 
 const crTableConfig = ({
   id,
@@ -15,7 +15,7 @@ const crTableConfig = ({
   headers,
   tableFn: {
     numberFormat,
-    ...fns    
+    ...fns
   },
   rows,
   dataSource,

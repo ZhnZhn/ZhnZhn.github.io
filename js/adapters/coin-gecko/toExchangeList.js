@@ -7,11 +7,10 @@ exports["default"] = void 0;
 
 var _toTableFn = _interopRequireDefault(require("../toTableFn"));
 
-var _crTableConfig = _interopRequireDefault(require("./crTableConfig"));
-
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crRows = _toTableFn["default"].crRows,
+    crTableConfig = _toTableFn["default"].crTableConfig,
     crPageConfig = _fnAdapter["default"].crPageConfig,
     getYmdhmUTC = _fnAdapter["default"].getYmdhmUTC;
 var HEADERS = [{
@@ -77,7 +76,7 @@ var toExchangeList = {
     var key = option.key,
         title = option.title,
         _rows = crRows(HEADERS, json),
-        config = (0, _crTableConfig["default"])({
+        config = crTableConfig({
       id: key,
       title: title,
       headers: HEADERS,

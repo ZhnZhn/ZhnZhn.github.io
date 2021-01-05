@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
+var _crTableConfig = _interopRequireDefault(require("./crTableConfig"));
+
 var roundBy = _AdapterFn["default"].roundBy;
 var DF = {
   TO_FIXED_BY: 2
@@ -31,6 +33,7 @@ var _getCellValue = function _getCellValue(r, h) {
 };
 
 var toTableFn = {
+  crTableConfig: _crTableConfig["default"],
   crRows: function crRows(headers, rows, idPropName) {
     if (headers === void 0) {
       headers = [];

@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
 var numberFormat = _AdapterFn["default"].numberFormat;
 
