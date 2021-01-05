@@ -18,16 +18,22 @@ const _crLinkEl = (id, title, fn) => {
   );
 };
 
-const _crTd = (rId, r, h, hIndex, numberFormat, valueToHref) => {
-  const { pn, style, isR, isHref } = h
-  , _key = rId + hIndex
+
+const _crTdStyle = (r, h) => {
+  const { pn, style, isR } = h
+  , v = r[pn]
+  , _tdStyle = FN.crTdStyle({ S, v, isR })
+  ,  tdStyle  = (r.style || {})[pn];
+
+  return {...style, ..._tdStyle, ...tdStyle};
+}
+const _crTdElOrTitle = (r, h, numberFormat, valueToHref) => {
+  const { pn, isHref } = h
   , v = r[pn]
   , _v = FN.toFormatValue({ h, v, fn: numberFormat })
-  , _tdStyle = FN.crTdStyle({ S, v, isR })
-  , _elOrTitle = isHref
-        ? _crLinkEl(r.id, _v, valueToHref)
-        : _v;
-  return [ _key, {...style, ..._tdStyle}, _elOrTitle ];
+  return  isHref
+    ? _crLinkEl(r.id, _v, valueToHref)
+    : _v;
 }
 
 const _renderRows = (props) => {
@@ -37,18 +43,19 @@ const _renderRows = (props) => {
       valueToHref
     } = tableFn;
 
-  return rows.map((r, rIndex) => {
+  return rows.map(r => {
     const _rId = r.id
     , _elTds = headers.map((h, hIndex) => {
       if (h.isHide) {
         return null;
       }
-      const [ _key, _style, _elOrTitle ] = _crTd(
-        _rId, r, h, hIndex, numberFormat, valueToHref
-      );
+      const _key = `${_rId}_${hIndex}`
+      , _style = _crTdStyle(r, h)
+      , _elOrTitle = _crTdElOrTitle(r, h, numberFormat, valueToHref);
       return (
         <td
           key={_key}
+          role="cell"
           style={{...S.TD, ..._style}}
         >
           {_elOrTitle}
@@ -64,12 +71,11 @@ const _renderRows = (props) => {
   });
 }
 
-const TableBody = (props) => {
-  return (
-    <tbody>
-      {_renderRows(props)}
-    </tbody>
-  );
-}
+const TableBody = (props) => (
+  <tbody>
+    {_renderRows(props)}
+  </tbody>
+);
+
 
 export default TableBody

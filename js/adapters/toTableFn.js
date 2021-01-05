@@ -12,13 +12,22 @@ var DF = {
   TO_FIXED_BY: 2
 };
 
+var _replaceNaN = function _replaceNaN(n, str) {
+  if (str === void 0) {
+    str = '';
+  }
+
+  return n - n === 0 ? n : str;
+};
+
 var _getCellValue = function _getCellValue(r, h) {
   var pn = h.pn,
       isToN = h.isToN,
       isToFixed = h.isToFixed,
       _h$toFixedBy = h.toFixedBy,
-      toFixedBy = _h$toFixedBy === void 0 ? DF.TO_FIXED_BY : _h$toFixedBy;
-  return isToN ? isToFixed ? roundBy(r[pn], toFixedBy) : parseFloat(r[pn]) : r[pn];
+      toFixedBy = _h$toFixedBy === void 0 ? DF.TO_FIXED_BY : _h$toFixedBy,
+      _strV = r[pn];
+  return isToN ? isToFixed ? roundBy(_strV, toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
 };
 
 var toTableFn = {
@@ -35,11 +44,11 @@ var toTableFn = {
       idPropName = 'id';
     }
 
-    return rows.map(function (r) {
+    return rows.map(function (r, rIndex) {
       headers.forEach(function (h) {
         r[h.pn] = _getCellValue(r, h);
       });
-      r.id = r[idPropName];
+      r.id = r[idPropName] || "id" + rIndex;
       return r;
     });
   }

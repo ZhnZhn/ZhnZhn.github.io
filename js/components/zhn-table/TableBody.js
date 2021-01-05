@@ -29,26 +29,32 @@ var _crLinkEl = function _crLinkEl(id, title, fn) {
   });
 };
 
-var _crTd = function _crTd(rId, r, h, hIndex, numberFormat, valueToHref) {
+var _crTdStyle = function _crTdStyle(r, h) {
   var pn = h.pn,
       style = h.style,
       isR = h.isR,
-      isHref = h.isHref,
-      _key = rId + hIndex,
       v = r[pn],
-      _v = _tableFn["default"].toFormatValue({
-    h: h,
-    v: v,
-    fn: numberFormat
-  }),
       _tdStyle = _tableFn["default"].crTdStyle({
     S: _Style["default"],
     v: v,
     isR: isR
   }),
-      _elOrTitle = isHref ? _crLinkEl(r.id, _v, valueToHref) : _v;
+      tdStyle = (r.style || {})[pn];
 
-  return [_key, (0, _extends2["default"])({}, style, _tdStyle), _elOrTitle];
+  return (0, _extends2["default"])({}, style, _tdStyle, tdStyle);
+};
+
+var _crTdElOrTitle = function _crTdElOrTitle(r, h, numberFormat, valueToHref) {
+  var pn = h.pn,
+      isHref = h.isHref,
+      v = r[pn],
+      _v = _tableFn["default"].toFormatValue({
+    h: h,
+    v: v,
+    fn: numberFormat
+  });
+
+  return isHref ? _crLinkEl(r.id, _v, valueToHref) : _v;
 };
 
 var _renderRows = function _renderRows(props) {
@@ -57,19 +63,19 @@ var _renderRows = function _renderRows(props) {
       tableFn = props.tableFn,
       numberFormat = tableFn.numberFormat,
       valueToHref = tableFn.valueToHref;
-  return rows.map(function (r, rIndex) {
+  return rows.map(function (r) {
     var _rId = r.id,
         _elTds = headers.map(function (h, hIndex) {
       if (h.isHide) {
         return null;
       }
 
-      var _crTd2 = _crTd(_rId, r, h, hIndex, numberFormat, valueToHref),
-          _key = _crTd2[0],
-          _style = _crTd2[1],
-          _elOrTitle = _crTd2[2];
+      var _key = _rId + "_" + hIndex,
+          _style = _crTdStyle(r, h),
+          _elOrTitle = _crTdElOrTitle(r, h, numberFormat, valueToHref);
 
       return /*#__PURE__*/(0, _jsxRuntime.jsx)("td", {
+        role: "cell",
         style: (0, _extends2["default"])({}, _Style["default"].TD, _style),
         children: _elOrTitle
       }, _key);

@@ -6,25 +6,30 @@ const DF = {
   TO_FIXED_BY: 2
 };
 
+const _replaceNaN = (n, str='') => n - n === 0
+ ? n
+ : str;
+
 const _getCellValue = (r, h) => {
   const {
     pn, isToN,
     isToFixed, toFixedBy=DF.TO_FIXED_BY
-  } = h;
+  } = h
+  , _strV = r[pn];
   return isToN
     ? isToFixed
-        ? roundBy(r[pn], toFixedBy)
-        : parseFloat(r[pn])
-    : r[pn];
+        ? roundBy(_strV, toFixedBy)
+        : _replaceNaN(parseFloat(_strV))
+    : _strV;
 };
 
 const toTableFn = {
   crRows: (headers=[], rows=[], idPropName='id') => {
-    return rows.map(r => {
+    return rows.map((r, rIndex) => {
       headers.forEach(h => {
         r[h.pn] = _getCellValue(r, h);
       })
-      r.id = r[idPropName]
+      r.id = r[idPropName] || `id${rIndex}`
       return r;
     });
   }
