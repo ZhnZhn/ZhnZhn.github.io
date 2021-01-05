@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _big = _interopRequireDefault(require("big.js"));
 
+var _dateFormat = _interopRequireDefault(require("../charts/dateFormat"));
+
 var _ut = _interopRequireDefault(require("../utils/ut"));
 
 var _mathFn = _interopRequireDefault(require("../math/mathFn"));
@@ -23,6 +25,7 @@ var _pointFn = _interopRequireDefault(require("./pointFn"));
 
 var _legendFn = _interopRequireDefault(require("./legendFn"));
 
+var _toTd = _dateFormat["default"].toTd;
 var dt = _ut["default"].dt,
     fCompareBy = _ut["default"].fCompareBy,
     fCompareByTwoProps = _ut["default"].fCompareByTwoProps,
@@ -79,6 +82,9 @@ var _fToFloatOr = function _fToFloatOr(dfValue) {
 };
 
 var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["default"], _legendFn["default"], {
+  toTd: function toTd(mls) {
+    return _isNumber(mls) ? _toTd(mls) : '';
+  },
   ymdToUTC: ymdToUTC,
   ymdhmsToUTC: ymdhmsToUTC,
   getFromDate: getFromDate,

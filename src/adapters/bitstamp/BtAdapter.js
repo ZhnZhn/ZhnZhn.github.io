@@ -1,44 +1,18 @@
-import crAdapterOHLCV from '../crAdapterOHLCV'
+import crAdapter from '../crAdapter'
+import toKline from './toKline'
+import toOrderBook from './toOrderBook'
 
-const _crZhConfig = ({
-  _itemKey,
-  itemCaption,
-  dataSource
-}) => ({
-  id: _itemKey, key: _itemKey,
-  itemCaption,
-  dataSource
-});
+const _rAdapter = {
+  DF: toKline,
+  OB: toOrderBook
+};
 
-const _crAddConfig = ({ option }) => ({
-  zhConfig: _crZhConfig(option)
-});
+const _getAdapter = option => {
+  const { dfId } = option;
+  return dfId && _rAdapter[dfId]
+    || _rAdapter.DF;
+};
 
-/*
-From Bitstamp API Documentation
-  {
-     "high": "18638.71",
-     "timestamp": "1606723200",
-     "volume": "402.30570712",
-     "low": "18390.00",
-     "close": "18471.42",
-     "open": "18633.43"
-   }
-*/
-
-const _crDataOHLCV = json => json.data.ohlc.map(item => ({
-  date: parseFloat(item.timestamp)*1000,
-  open: parseFloat(item.open),
-  high: parseFloat(item.high),
-  low: parseFloat(item.low),
-  close: parseFloat(item.close),
-  volume: parseFloat(item.volume)
-}))
-
-const BtAdapter = crAdapterOHLCV({
-  getArr: _crDataOHLCV,
-  toDate: date => date,
-  crAddConfig: _crAddConfig
-});
+const BtAdapter = crAdapter(_getAdapter);
 
 export default BtAdapter

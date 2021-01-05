@@ -1,6 +1,7 @@
 
 import Big from 'big.js'
 
+import dateFormat from '../charts/dateFormat'
 import ut from '../utils/ut'
 
 import mathFn from '../math/mathFn'
@@ -12,7 +13,7 @@ import crFn from './crFn'
 import pointFn from './pointFn'
 import legendFn from './legendFn'
 
-
+const { toTd } = dateFormat
 const {
   dt,
   fCompareBy,
@@ -73,6 +74,11 @@ const AdapterFn = {
   ...crFn,
   ...pointFn,
   ...legendFn,
+
+
+  toTd: (mls) => _isNumber(mls)
+    ? toTd(mls)
+    : '',
 
   ymdToUTC,
   ymdhmsToUTC,
