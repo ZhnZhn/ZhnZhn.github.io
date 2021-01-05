@@ -1,5 +1,3 @@
-import Highcharts from 'highcharts';
-
 import Big from 'big.js';
 
 import mathFn from '../math/mathFn'
@@ -13,9 +11,11 @@ import Chart from './Chart';
 
 import { Direction } from '../constants/Type';
 
-
 import WithAreaChartFn from './WithAreaChartFn'
 import calcDeltaYAxis from './calcDeltaYAxis'
+import dateFormat from './dateFormat'
+
+const { toDmy, toTdmy, toTdmyIf } = dateFormat;
 
 const {
   crValueMoving,
@@ -23,7 +23,6 @@ const {
   calcPercent
 } = mathFn;
 
-const dateFormat = Highcharts.dateFormat;
 const _isFn = fn => typeof fn === 'function'
 , _isNaN = Number.isNaN || isNaN
 , _isNumber = n => typeof n === 'number'
@@ -43,9 +42,6 @@ const C = {
   SERIA_LABEL_WIDTH : 125,
   SERIA_LABEL_HEIGHT : 20
 };
-
-const DMY_FORMAT = '%A, %b %d, %Y'
-, TDMY_FORMAT = '%H:%M, %A, %b %d, %Y';
 
 const _initOptionsZhSeries = chart => {
   const { options } = chart;
@@ -147,6 +143,7 @@ const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
 
 const ChartFn = {
   ...WithAreaChartFn,
+  toDmy, toTdmy, toTdmyIf,
   arCalcDeltaYAxis: calcDeltaYAxis,
 
   addSeriaWithRenderLabel(props){
@@ -220,12 +217,6 @@ const ChartFn = {
       )
       .toUpperCase();
   },
-
-  toDmy: dateFormat.bind(null, DMY_FORMAT),
-  toTdmy: dateFormat.bind(null, TDMY_FORMAT),
-  toTdmyIf: mls => dateFormat('%H:%M', mls) === '00:00'
-    ? ChartFn.toDmy(mls)
-    : ChartFn.toTdmy(mls),
 
   setMinMaxPlotLines({ plotLines, min, max, value, isDrawDeltaExtrems}){
     if (isDrawDeltaExtrems) {

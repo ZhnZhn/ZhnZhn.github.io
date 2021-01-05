@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _highcharts = _interopRequireDefault(require("highcharts"));
-
 var _big = _interopRequireDefault(require("big.js"));
 
 var _mathFn = _interopRequireDefault(require("../math/mathFn"));
@@ -29,10 +27,14 @@ var _WithAreaChartFn = _interopRequireDefault(require("./WithAreaChartFn"));
 
 var _calcDeltaYAxis = _interopRequireDefault(require("./calcDeltaYAxis"));
 
+var _dateFormat = _interopRequireDefault(require("./dateFormat"));
+
+var toDmy = _dateFormat["default"].toDmy,
+    toTdmy = _dateFormat["default"].toTdmy,
+    toTdmyIf = _dateFormat["default"].toTdmyIf;
 var _crValueMoving = _mathFn["default"].crValueMoving,
     toFixedNumber = _mathFn["default"].toFixedNumber,
     calcPercent = _mathFn["default"].calcPercent;
-var dateFormat = _highcharts["default"].dateFormat;
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
@@ -58,8 +60,6 @@ var C = {
   SERIA_LABEL_WIDTH: 125,
   SERIA_LABEL_HEIGHT: 20
 };
-var DMY_FORMAT = '%A, %b %d, %Y',
-    TDMY_FORMAT = '%H:%M, %A, %b %d, %Y';
 
 var _initOptionsZhSeries = function _initOptionsZhSeries(chart) {
   var options = chart.options;
@@ -206,6 +206,9 @@ var _crDelta = function _crDelta(perToValue) {
 };
 
 var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
+  toDmy: toDmy,
+  toTdmy: toTdmy,
+  toTdmyIf: toTdmyIf,
   arCalcDeltaYAxis: _calcDeltaYAxis["default"],
   addSeriaWithRenderLabel: function addSeriaWithRenderLabel(props) {
     var chart = props.chart,
@@ -280,11 +283,6 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
   toNumberFormatAll: _formatAllNumber["default"],
   crTpId: function crTpId() {
     return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 9)).toUpperCase();
-  },
-  toDmy: dateFormat.bind(null, DMY_FORMAT),
-  toTdmy: dateFormat.bind(null, TDMY_FORMAT),
-  toTdmyIf: function toTdmyIf(mls) {
-    return dateFormat('%H:%M', mls) === '00:00' ? ChartFn.toDmy(mls) : ChartFn.toTdmy(mls);
   },
   setMinMaxPlotLines: function setMinMaxPlotLines(_ref6) {
     var plotLines = _ref6.plotLines,
