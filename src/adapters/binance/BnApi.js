@@ -1,12 +1,12 @@
 const C = {
-  URL: 'https://api.binance.com/api/v3/klines',
+  URL: 'https://api.binance.com/api/v3',
   RESEARCH_URL: 'https://research.binance.com/en/projects',
   TRADE_URL: 'https://binance.com/en/trade'
 };
 
 const _isArr = Array.isArray;
 
-const _setLinks = (option, c, s) => {
+const _setLinks = (option, c, s='') => {
   const _toIndex = c.indexOf('(')
   , _caption = c.substring(0, _toIndex)
       .trim()
@@ -17,20 +17,47 @@ const _setLinks = (option, c, s) => {
   option._tradeLink = `${C.TRADE_URL}/${_s}`
 };
 
+const _crSymbol = (s='') => s.replace('/','');
+
+const _crDfUrl = option => {
+  const { items=[] } = option
+  , { s, c='' } = items[0]
+  , { v:interval } = items[1]
+  , { v:limit } = items[2]
+  , _symbol = _crSymbol(s);
+
+  _setLinks(option, c, s)
+  return `${C.URL}/klines?symbol=${_symbol}&interval=${interval}&limit=${limit}`;
+}
+
+const _crObUrl = option => {
+  const { items=[] } = option
+  , { s } = items[0]
+  , { v:limit } = items[1]
+  , _symbol = _crSymbol(s);
+  return `${C.URL}/depth?symbol=${_symbol}&limit=${limit}`;
+}
+
+const _rCrUrl = {
+  DF: _crDfUrl,
+  OB: _crObUrl
+};
+
 const BnApi = {
   getRequestUrl(option){
-    const { items=[] } = option
-    , { s='', c='' } = items[0]
-    , { v:interval } = items[1]
-    , { v:limit } = items[2]
-    , _symbol = s.replace('/','');
-
-    _setLinks(option, c, s)
-    return `${C.URL}?symbol=${_symbol}&interval=${interval}&limit=${limit}`;
+    const { dfId } = option
+    const _crUrl = dfId && _rCrUrl[dfId]
+      || _rCrUrl.DF
+    return _crUrl(option);
   },
 
   checkResponse(json, option){
-    if (_isArr(json)) {
+    const { dfId } = option
+    if (!dfId && _isArr(json)) {
+      return true;
+    }
+    const { bids, asks } = json;
+    if (dfId === 'OB' && _isArr(bids) && _isArr(asks)) {
       return true;
     }
     throw {
