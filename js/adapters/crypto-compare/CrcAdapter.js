@@ -5,21 +5,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _crAdapter = _interopRequireDefault(require("../crAdapter"));
+var _crAdapterRouter = _interopRequireDefault(require("../crAdapterRouter"));
 
 var _toHdConfig = _interopRequireDefault(require("./toHdConfig"));
 
 var _rAdapter = {
-  DF: _toHdConfig["default"],
-  HD: _toHdConfig["default"]
-};
-
-var _getAdapter = function _getAdapter(option) {
-  var dfSubLoadId = option.dfSubLoadId;
-  return _rAdapter[dfSubLoadId] || _rAdapter.DF;
-};
-
-var CrcAdapter = (0, _crAdapter["default"])(_getAdapter);
+  DF: _toHdConfig["default"]
+},
+    CrcAdapter = (0, _crAdapterRouter["default"])(_rAdapter);
 var _default = CrcAdapter;
 exports["default"] = _default;
 //# sourceMappingURL=CrcAdapter.js.map

@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _Api = _interopRequireDefault(require("./Api"));
 
-var _crAdapter = _interopRequireDefault(require("../crAdapter"));
+var _crAdapterRouter = _interopRequireDefault(require("../crAdapterRouter"));
 
 var _IndicatorAdapter = _interopRequireDefault(require("./IndicatorAdapter"));
 
@@ -28,23 +28,11 @@ var _rAdapter = {
   SR: _SearchAdapter["default"],
   F: _FundAdapter["default"],
   E: _EarnAdapter["default"]
-};
-
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
-
-var _getAdapter = function _getAdapter(option) {
-  var dfSubId = option.dfSubId,
-      _adapter = _rAdapter[dfSubId] || _rAdapter.DF;
-
-  return _isFn(_adapter) ? _adapter() : _adapter;
-};
-
-var adapter = (0, _crAdapter["default"])(_getAdapter, {
+},
+    adapter = (0, _crAdapterRouter["default"])(_rAdapter, {
   isKey: true
-});
-var AlphaVantage = {
+}),
+    AlphaVantage = {
   api: _Api["default"],
   adapter: adapter
 };

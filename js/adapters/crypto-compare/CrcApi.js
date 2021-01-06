@@ -39,8 +39,8 @@ var _rUrl = {
 };
 var CrcApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var dfSubLoadId = option.dfSubLoadId,
-        _crUrl = _rUrl[dfSubLoadId] || _rUrl.DF;
+    var dfSubId = option.dfSubId,
+        _crUrl = _rUrl[dfSubId] || _rUrl.DF;
 
     return _crUrl(option);
   },

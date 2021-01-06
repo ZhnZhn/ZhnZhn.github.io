@@ -1,1 +1,31 @@
-{"version":3,"sources":["../../../src/adapters/iex/IexAdapter.js"],"names":["IexAdapter","Router","getAdapter","crDfKey","_itemKey","one","two"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,IAAMA,UAAU,GAAG,2BAAUC,0BAAOC,UAAjB,EAA6B;AAC7CC,EAAAA,OAAO,EAAE;AAAA,QAAGC,QAAH,QAAGA,QAAH;AAAA,wBAAaC,GAAb;AAAA,QAAaA,GAAb,yBAAiB,EAAjB;AAAA,wBAAqBC,GAArB;AAAA,QAAqBA,GAArB,yBAAyB,EAAzB;AAAA,WAAkCF,QAAQ,IAC9CC,GAAG,GAAG,GAAN,GAAYC,GADR;AAAA;AADoC,CAA7B,CAAnB;eAKeN,U","sourcesContent":["import crAdapter from '../crAdapter'\r\nimport Router from './RouterAdapter'\r\n\r\nconst IexAdapter = crAdapter(Router.getAdapter, {\r\n   crDfKey: ({ _itemKey, one='', two='' }) => _itemKey\r\n     || one + '_' + two\r\n});\r\n\r\nexport default IexAdapter\r\n"],"file":"IexAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/iex/IexAdapter.js"
+ ],
+ "file": "../../../src/adapters/iex/IexAdapter.js",
+ "names": [
+  "_rAdapter",
+  "_pn",
+  "DF",
+  "toChart",
+  "IT",
+  "ERN",
+  "toEarnings",
+  "DIV",
+  "toDividends",
+  "CHART",
+  "COM",
+  "toCompany",
+  "STA",
+  "toStats",
+  "ML",
+  "toTable",
+  "IexAdapter",
+  "crDfKey",
+  "_itemKey",
+  "one",
+  "two"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;;;AAEA,IAAMA,SAAS;AACbC,EAAAA,GAAG,EAAE,QADQ;AAEbC,EAAAA,EAAE,EAAEC;AAFS,cAGZC,sBAAGC,GAHS,IAGH,iCAAQC,0BAAR,CAHG,aAIZF,sBAAGG,GAJS,IAIH,iCAAQC,2BAAR,CAJG,aAKZJ,sBAAGK,KALS,IAKDN,mBALC,aAMZC,sBAAGM,GANS,IAMH,gCAAOC,yBAAP,CANG,aAOZP,sBAAGQ,GAPS,IAOH,gCAAOC,uBAAP,CAPG,aAQZT,sBAAGU,EARS,IAQJC,mBARI,aAAf;AAAA,IAUEC,UAAU,GAAG,iCAAgBhB,SAAhB,EAA2B;AACvCiB,EAAAA,OAAO,EAAE;AAAA,QAAGC,QAAH,QAAGA,QAAH;AAAA,wBAAaC,GAAb;AAAA,QAAaA,GAAb,yBAAiB,EAAjB;AAAA,wBAAqBC,GAArB;AAAA,QAAqBA,GAArB,yBAAyB,EAAzB;AAAA,WAAkCF,QAAQ,IAC9CC,GAAG,GAAG,GAAN,GAAYC,GADR;AAAA;AAD8B,CAA3B,CAVf;;eAeeJ,U"
+}

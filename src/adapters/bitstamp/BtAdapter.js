@@ -1,18 +1,11 @@
-import crAdapter from '../crAdapter'
+import crAdapterRouter from '../crAdapterRouter'
 import toKline from './toKline'
 import toOrderBook from './toOrderBook'
 
-const _rAdapter = {
+const _rAdapter = {  
   DF: toKline,
   OB: toOrderBook
-};
-
-const _getAdapter = option => {
-  const { dfId } = option;
-  return dfId && _rAdapter[dfId]
-    || _rAdapter.DF;
-};
-
-const BtAdapter = crAdapter(_getAdapter);
+}
+, BtAdapter = crAdapterRouter(_rAdapter);
 
 export default BtAdapter

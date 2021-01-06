@@ -50,14 +50,14 @@ var _rApi = {
 };
 var CpApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var dfRoute = option.dfRoute,
-        _crUrl = _rApi[dfRoute] || _rApi.DF;
+    var dfSubId = option.dfSubId,
+        _crUrl = _rApi[dfSubId] || _rApi.DF;
 
     return option._itemUrl = _crUrl(option);
   },
   checkResponse: function checkResponse(json, option) {
-    var dfRoute = option.dfRoute;
-    return _isArr(json) || dfRoute === 'CI' && json;
+    var dfSubId = option.dfSubId;
+    return _isArr(json) || dfSubId === 'CI' && json;
   }
 };
 var _default = CpApi;

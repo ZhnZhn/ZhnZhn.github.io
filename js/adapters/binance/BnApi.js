@@ -62,23 +62,23 @@ var _rCrUrl = {
 };
 var BnApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var dfId = option.dfId;
+    var dfSubId = option.dfSubId;
 
-    var _crUrl = dfId && _rCrUrl[dfId] || _rCrUrl.DF;
+    var _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
 
     return _crUrl(option);
   },
   checkResponse: function checkResponse(json, option) {
-    var dfId = option.dfId;
+    var dfSubId = option.dfSubId;
 
-    if (!dfId && _isArr(json)) {
+    if (!dfSubId && _isArr(json)) {
       return true;
     }
 
     var bids = json.bids,
         asks = json.asks;
 
-    if (dfId === 'OB' && _isArr(bids) && _isArr(asks)) {
+    if (dfSubId === 'OB' && _isArr(bids) && _isArr(asks)) {
       return true;
     }
 

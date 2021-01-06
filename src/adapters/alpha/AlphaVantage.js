@@ -1,5 +1,5 @@
 import api from './Api'
-import crAdapter from '../crAdapter'
+import crAdapterRouter from '../crAdapterRouter'
 
 import IndicatorAdapter from './IndicatorAdapter'
 import IntradayAdapter from './IntradayAdapter'
@@ -16,18 +16,7 @@ const _rAdapter = {
   F: FundAdapter,
   E: EarnAdapter
 }
-
-const _isFn = fn => typeof fn === 'function';
-
-const _getAdapter = option => {
-  const { dfSubId } = option
-  , _adapter = _rAdapter[dfSubId] || _rAdapter.DF;
-  return _isFn(_adapter)
-    ? _adapter()
-    : _adapter;
-};
-
-const adapter = crAdapter(_getAdapter, { isKey: true });
-const AlphaVantage = { api, adapter };
+, adapter = crAdapterRouter(_rAdapter, { isKey: true })
+, AlphaVantage = { api, adapter };
 
 export default AlphaVantage

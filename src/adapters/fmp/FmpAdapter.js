@@ -1,6 +1,13 @@
-import crAdapter from '../crAdapter'
-import Router from './RouterAdapter'
+import crAdapterRouter from '../crAdapterRouter'
 
-const FmpAdapter = crAdapter(Router.getAdapter);
+import toChart from './toChart'
+import toHistorical from './toHistorical'
+
+const _rAdapter = {
+  _pn: 'dfPn',
+  DF: toChart,
+  historical: toHistorical
+},
+FmpAdapter = crAdapterRouter(_rAdapter);
 
 export default FmpAdapter

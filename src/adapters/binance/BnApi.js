@@ -45,19 +45,19 @@ const _rCrUrl = {
 
 const BnApi = {
   getRequestUrl(option){
-    const { dfId } = option
-    const _crUrl = dfId && _rCrUrl[dfId]
+    const { dfSubId } = option
+    const _crUrl = dfSubId && _rCrUrl[dfSubId]
       || _rCrUrl.DF
     return _crUrl(option);
   },
 
   checkResponse(json, option){
-    const { dfId } = option
-    if (!dfId && _isArr(json)) {
+    const { dfSubId } = option
+    if (!dfSubId && _isArr(json)) {
       return true;
     }
     const { bids, asks } = json;
-    if (dfId === 'OB' && _isArr(bids) && _isArr(asks)) {
+    if (dfSubId === 'OB' && _isArr(bids) && _isArr(asks)) {
       return true;
     }
     throw {

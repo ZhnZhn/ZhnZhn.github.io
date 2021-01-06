@@ -29,9 +29,9 @@ var _rCrUrl = {
 };
 var BtApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var dfId = option.dfId;
+    var dfSubId = option.dfSubId;
 
-    var _crUrl = dfId && _rCrUrl[dfId] || _rCrUrl.DF;
+    var _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
 
     return _crUrl(option);
   },

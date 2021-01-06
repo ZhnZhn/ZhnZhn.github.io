@@ -37,14 +37,14 @@ const _rApi = {
 
 const CpApi = {
   getRequestUrl(option){
-    const { dfRoute } = option
-    , _crUrl = _rApi[dfRoute] || _rApi.DF;
+    const { dfSubId } = option
+    , _crUrl = _rApi[dfSubId] || _rApi.DF;
     return (option._itemUrl = _crUrl(option));
   },
   checkResponse(json, option){
-    const { dfRoute } = option;
+    const { dfSubId } = option;
     return _isArr(json)
-      || (dfRoute === 'CI' && json);
+      || (dfSubId === 'CI' && json);
   }
 }
 

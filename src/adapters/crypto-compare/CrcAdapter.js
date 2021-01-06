@@ -1,17 +1,10 @@
-import crAdapter from '../crAdapter'
+import crAdapterRouter from '../crAdapterRouter'
 
 import toHdConfig from './toHdConfig'
 
 const _rAdapter = {
-  DF: toHdConfig,
-  HD: toHdConfig
-};
-
-const _getAdapter = (option) => {
-  const { dfSubLoadId } = option;
-  return _rAdapter[dfSubLoadId] || _rAdapter.DF;
-};
-
-const CrcAdapter = crAdapter(_getAdapter)
+  DF: toHdConfig
+}
+, CrcAdapter = crAdapterRouter(_rAdapter);
 
 export default CrcAdapter

@@ -15,7 +15,7 @@ const _crDfUrl = option => {
 
 const _crObUrl = option => {
   const { items=[] } = option
-  , {v:pair} = items[0];    
+  , {v:pair} = items[0];
   return `${C.URL}/order_book/${pair}?order=0`;
 };
 
@@ -26,8 +26,8 @@ const _rCrUrl = {
 
 const BtApi = {
   getRequestUrl(option){
-    const { dfId } = option
-    const _crUrl = dfId && _rCrUrl[dfId]
+    const { dfSubId } = option
+    const _crUrl = dfSubId && _rCrUrl[dfSubId]
       || _rCrUrl.DF
     return _crUrl(option);
   },

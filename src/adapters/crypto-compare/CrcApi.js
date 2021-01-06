@@ -27,8 +27,8 @@ const _rUrl = {
 
 const CrcApi = {
   getRequestUrl(option){
-    const { dfSubLoadId } = option
-    , _crUrl = _rUrl[dfSubLoadId] || _rUrl.DF;
+    const { dfSubId } = option
+    , _crUrl = _rUrl[dfSubId] || _rUrl.DF;
     return _crUrl(option);
   },
   checkResponse(json){
