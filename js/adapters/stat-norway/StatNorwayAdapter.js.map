@@ -1,1 +1,22 @@
-{"version":3,"sources":["../../../src/adapters/stat-norway/StatNorwayAdapter.js"],"names":["StatNorwayAdapter","toConfig","json","option","seriaType","crConfig","RouterConfig","getCrConfig","config","toSeries","series"],"mappings":";;;;;;;AACA;;AAEA,IAAMA,iBAAiB,GAAG;AACxBC,EAAAA,QADwB,oBACfC,IADe,EACTC,MADS,EACF;AACd,QAAEC,SAAF,GAAgBD,MAAhB,CAAEC,SAAF;AAAA,QACAC,QADA,GACWC,yBAAaC,WAAb,CAAyBH,SAAzB,CADX;AAAA,QAEAI,MAFA,GAESH,QAAQ,CAACH,IAAD,EAAOC,MAAP,CAFjB;;AAIN,WAAO;AAAEK,MAAAA,MAAM,EAANA;AAAF,KAAP;AACD,GAPuB;AASxBC,EAAAA,QATwB,oBASfP,IATe,EASTC,MATS,EASD;AACd,QAAEC,SAAF,GAAgBD,MAAhB,CAAEC,SAAF;AAAA,QACAC,QADA,GACWC,yBAAaC,WAAb,CAAyBH,SAAzB,CADX;AAAA,QAEAI,MAFA,GAESH,QAAQ,CAACH,IAAD,EAAOC,MAAP,CAFjB;;AAGN,WAAOK,MAAM,CAACE,MAAP,CAAc,CAAd,CAAP;AACF;AAduB,CAA1B;eAiBeV,iB","sourcesContent":["\r\nimport RouterConfig from './RouterConfig'\r\n\r\nconst StatNorwayAdapter = {\r\n  toConfig(json, option){\r\n    const { seriaType } = option\r\n        , crConfig = RouterConfig.getCrConfig(seriaType)\r\n        , config = crConfig(json, option);\r\n\r\n    return { config };\r\n  },\r\n\r\n  toSeries(json, option) {\r\n     const { seriaType } = option\r\n         , crConfig = RouterConfig.getCrConfig(seriaType)\r\n         , config = crConfig(json, option);\r\n     return config.series[0];\r\n  }\r\n}\r\n\r\nexport default StatNorwayAdapter\r\n"],"file":"StatNorwayAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-norway/StatNorwayAdapter.js"
+ ],
+ "file": "../../../src/adapters/stat-norway/StatNorwayAdapter.js",
+ "names": [
+  "_crConfig",
+  "json",
+  "option",
+  "seriaType",
+  "crConfig",
+  "RouterConfig",
+  "getCrConfig",
+  "StatNorwayAdapter",
+  "toConfig",
+  "config",
+  "toSeries",
+  "series"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,IAAD,EAAOC,MAAP,EAAkB;AAC5B,MAAEC,SAAF,GAAgBD,MAAhB,CAAEC,SAAF;AAAA,MACJC,QADI,GACOC,yBAAaC,WAAb,CAAyBH,SAAzB,CADP;;AAEN,SAAOC,QAAQ,CAACH,IAAD,EAAOC,MAAP,CAAf;AACD,CAJD;;AAMA,IAAMK,iBAAiB,GAAG;AACxBC,EAAAA,QADwB,oBACfP,IADe,EACTC,MADS,EACD;AACpB,WAAO;AAAEO,MAAAA,MAAM,EAAET,SAAS,CAACC,IAAD,EAAOC,MAAP;AAAnB,KAAP;AACF,GAHuB;AAKxBQ,EAAAA,QALwB,oBAKfT,IALe,EAKTC,MALS,EAKD;AACpB,QAAMO,MAAM,GAAGT,SAAS,CAACC,IAAD,EAAOC,MAAP,CAAxB;;AACA,WAAOO,MAAM,CAACE,MAAP,CAAc,CAAd,CAAP;AACF;AARuB,CAA1B;eAWeJ,iB"
+}

@@ -7,20 +7,21 @@ exports["default"] = void 0;
 
 var _RouterConfig = _interopRequireDefault(require("./RouterConfig"));
 
+var _crConfig = function _crConfig(json, option) {
+  var seriaType = option.seriaType,
+      crConfig = _RouterConfig["default"].getCrConfig(seriaType);
+
+  return crConfig(json, option);
+};
+
 var StatNorwayAdapter = {
   toConfig: function toConfig(json, option) {
-    var seriaType = option.seriaType,
-        crConfig = _RouterConfig["default"].getCrConfig(seriaType),
-        config = crConfig(json, option);
-
     return {
-      config: config
+      config: _crConfig(json, option)
     };
   },
   toSeries: function toSeries(json, option) {
-    var seriaType = option.seriaType,
-        crConfig = _RouterConfig["default"].getCrConfig(seriaType),
-        config = crConfig(json, option);
+    var config = _crConfig(json, option);
 
     return config.series[0];
   }
