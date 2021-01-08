@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../../src/adapters/world-bank/api.js"],"names":["C","URL","NATIVE_URL","_addNativeLinkTo","option","one","two","Object","assign","linkItem","caption","href","api","getRequestUrl","checkResponse","json","Array","isArray"],"mappings":";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,8BADG;AAERC,EAAAA,UAAU,EAAE;AAFJ,CAAV;;AAKA,IAAMC,gBAAgB,GAAG,SAAnBA,gBAAmB,CAACC,MAAD,EAAY;AAAA,MAC3BC,GAD2B,GACdD,MADc,CAC3BC,GAD2B;AAAA,MACtBC,GADsB,GACdF,MADc,CACtBE,GADsB;AAEnCC,EAAAA,MAAM,CAACC,MAAP,CAAcJ,MAAd,EAAsB;AACpBK,IAAAA,QAAQ,EAAE;AACRC,MAAAA,OAAO,EAAE,YADD;AAERC,MAAAA,IAAI,EAAKX,CAAC,CAACE,UAAP,SAAqBI,GAArB,mBAAsCD;AAFlC;AADU,GAAtB;AAMD,CARD;;AAUA,IAAMO,GAAG,GAAG;AACVC,EAAAA,aADU,yBACIT,MADJ,EACW;AAAA,QACXC,GADW,GACED,MADF,CACXC,GADW;AAAA,QACNC,GADM,GACEF,MADF,CACNE,GADM;;AAEnBH,IAAAA,gBAAgB,CAACC,MAAD,CAAhB;;AACA,WAAUJ,CAAC,CAACC,GAAZ,mBAA6BI,GAA7B,oBAA+CC,GAA/C;AACD,GALS;AAMVQ,EAAAA,aANU,yBAMIC,IANJ,EAMS;AACjB,WAAOC,KAAK,CAACC,OAAN,CAAcF,IAAd,CAAP;AACD;AARS,CAAZ;eAWeH,G","sourcesContent":["\r\nconst C = {\r\n  URL: 'https://api.worldbank.org/v2',\r\n  NATIVE_URL: 'https://data.worldbank.org/indicator'\r\n};\r\n\r\nconst _addNativeLinkTo = (option) => {\r\n  const { one, two } = option;\r\n  Object.assign(option, {\r\n    linkItem: {\r\n      caption: 'World Bank',\r\n      href: `${C.NATIVE_URL}/${two}?locations=${one}`\r\n    }\r\n  })\r\n};\r\n\r\nconst api = {\r\n  getRequestUrl(option){\r\n    const { one, two } = option;\r\n    _addNativeLinkTo(option)\r\n    return `${C.URL}/countries/${one}/indicators/${two}?date=1990:2018&format=json`;\r\n  },\r\n  checkResponse(json){\r\n    return Array.isArray(json);\r\n  }\r\n};\r\n\r\nexport default api\r\n"],"file":"api.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/world-bank/api.js"
+ ],
+ "file": "../../../src/adapters/world-bank/api.js",
+ "names": [
+  "getCi",
+  "fnAdapter",
+  "C",
+  "URL",
+  "NATIVE_URL",
+  "_assign",
+  "Object",
+  "assign",
+  "_isArr",
+  "Array",
+  "isArray",
+  "_addNativeLinkTo",
+  "option",
+  "country",
+  "indicator",
+  "linkItem",
+  "caption",
+  "href",
+  "api",
+  "getRequestUrl",
+  "checkResponse",
+  "json"
+ ],
+ "mappings": ";;;;;;;AAAA;;IAEQA,K,GAAUC,qB,CAAVD,K;AACR,IAAME,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,8BADG;AAERC,EAAAA,UAAU,EAAE;AAFJ,CAAV;AAKA,IAAMC,OAAO,GAAGC,MAAM,CAACC,MAAvB;AAAA,IACEC,MAAM,GAAGC,KAAK,CAACC,OADjB;;AAGA,IAAMC,gBAAgB,GAAG,SAAnBA,gBAAmB,CAACC,MAAD,EAAY;AAAA,eACJZ,KAAK,CAACY,MAAD,CADD;AAAA,MAC3BC,OAD2B,UAC3BA,OAD2B;AAAA,MAClBC,SADkB,UAClBA,SADkB;;AAEnCT,EAAAA,OAAO,CAACO,MAAD,EAAS;AACdG,IAAAA,QAAQ,EAAE;AACRC,MAAAA,OAAO,EAAE,YADD;AAERC,MAAAA,IAAI,EAAKf,CAAC,CAACE,UAAP,SAAqBU,SAArB,mBAA4CD;AAFxC;AADI,GAAT,CAAP;AAMD,CARD;;AAUA,IAAMK,GAAG,GAAG;AACVC,EAAAA,aADU,yBACIP,MADJ,EACW;AAAA,kBACYZ,KAAK,CAACY,MAAD,CADjB;AAAA,QACXC,OADW,WACXA,OADW;AAAA,QACFC,SADE,WACFA,SADE;;AAEnBH,IAAAA,gBAAgB,CAACC,MAAD,CAAhB;;AACA,WAAUV,CAAC,CAACC,GAAZ,mBAA6BU,OAA7B,oBAAmDC,SAAnD;AACD,GALS;AAMVM,EAAAA,aANU,yBAMIC,IANJ,EAMS;AACjB,WAAOb,MAAM,CAACa,IAAD,CAAb;AACD;AARS,CAAZ;eAWeH,G"
+}

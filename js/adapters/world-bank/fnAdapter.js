@@ -15,19 +15,26 @@ var ymdToUTC = _AdapterFn["default"].ymdToUTC,
 var _crInfo = function _crInfo(_ref) {
   var title = _ref.title,
       subtitle = _ref.subtitle,
-      two = _ref.two;
+      items = _ref.items;
   return {
-    name: title + ": " + subtitle + " (" + two + ")"
+    name: title + ": " + subtitle + " (" + (items[1].c || '') + ")"
+  };
+};
+
+var _getCountryIndicator = function _getCountryIndicator(_ref2) {
+  var _ref2$items = _ref2.items,
+      items = _ref2$items === void 0 ? [] : _ref2$items;
+  return {
+    country: items[0].v,
+    indicator: items[1].v
   };
 };
 
 var fnAdapter = {
-  crId: function crId(option) {
-    var one = option.one,
-        two = option.two;
-    return (one || '') + "_" + (two || '');
-  },
-  crData: function crData(arrIn) {
+  getCi: _getCountryIndicator,
+  crData: function crData(json) {
+    var arrIn = json[1];
+
     if (!_isArr(arrIn)) {
       return [];
     }
@@ -43,17 +50,16 @@ var fnAdapter = {
     });
     return d.reverse();
   },
-  crConfigOptions: function crConfigOptions(option) {
-    var title = option.title,
+  crConfOption: function crConfOption(option) {
+    var _itemKey = option._itemKey,
+        title = option.title,
         linkItem = option.linkItem,
-        dataSource = option.dataSource,
-        _id = fnAdapter.crId(option);
-
+        dataSource = option.dataSource;
     return {
       info: _crInfo(option),
       zhConfig: {
-        key: _id,
-        id: _id,
+        key: _itemKey,
+        id: _itemKey,
         itemCaption: title,
         linkFn: 'DF',
         item: (0, _extends2["default"])({}, linkItem),

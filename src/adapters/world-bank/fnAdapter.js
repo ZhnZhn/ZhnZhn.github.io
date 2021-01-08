@@ -1,18 +1,22 @@
 import AdapterFn from '../AdapterFn'
 
 const { ymdToUTC } = AdapterFn
-, _isArr = Array.isArray
+, _isArr = Array.isArray;
 
-const _crInfo = ({ title, subtitle, two }) => ({
-  name: `${title}: ${subtitle} (${two})`
+const _crInfo = ({ title, subtitle, items }) => ({
+  name: `${title}: ${subtitle} (${items[1].c || ''})`
+});
+
+const _getCountryIndicator = ({ items=[] }) => ({
+  country: items[0].v,
+  indicator: items[1].v
 });
 
 const fnAdapter = {
-  crId: (option) => {
-    const { one, two } = option;
-    return `${one || ''}_${two || ''}`;
-  },
-  crData: (arrIn) => {
+  getCi: _getCountryIndicator,
+
+  crData: (json) => {
+    const arrIn = json[1];
     if (!_isArr(arrIn)) {
       return [];
     }
@@ -28,14 +32,16 @@ const fnAdapter = {
     return d.reverse();
   },
 
-  crConfigOptions: (option) => {
-    const { title, linkItem, dataSource } = option
-    , _id = fnAdapter.crId(option);
+  crConfOption: (option) => {
+    const {
+      _itemKey, title,
+      linkItem, dataSource
+    } = option;
     return {
       info: _crInfo(option),
       zhConfig: {
-        key: _id,
-        id: _id,
+        key: _itemKey,
+        id: _itemKey,
         itemCaption: title,
         linkFn: 'DF',
         item: { ...linkItem },
