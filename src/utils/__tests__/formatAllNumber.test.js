@@ -25,6 +25,22 @@ describe('formatAllNumber', ()=>{
     expect(typeof str2).toBe('string')
   })
 
+  test('should format small values [0, 1e-7)', ()=>{
+    const str1 = fn(0.000001099)
+    expect(str1).toBe('0.000001099')
+
+    const str2 = fn(1.099e-6)
+    expect(str2).toBe('0.000001099')
+  })
+
+  test('should format small values (1e-7, +) to exponential format',() => {
+    const str1 = fn(0.0000001099)
+    expect(str1).toBe('1.099e-7')
+
+    const str2 = fn(1.099e-7)
+    expect(str2).toBe('1.099e-7')
+  })
+
   test('should return same value for already formated str',  () => {
     const str1 = '100 000'
     , str2 = '100.001'

@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../src/utils/formatAllNumber.js"],"names":["REG_BLANKS","DF_VALUE","DELIMETER","formatAllNumber","value","_value","replace","arrSplit","split","decimal","length","Highcharts","numberFormat"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,UAAU,GAAG,KAAnB;AACA,IAAMC,QAAQ,GAAG,GAAjB;AACA,IAAMC,SAAS,GAAG,GAAlB;;AAEA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB,CAASC,KAAT,EAAgB;AACtC,MAAI,CAACA,KAAL,EAAY;AAAE,WAAOH,QAAP;AAAkB;;AAEhC,MAAMI,MAAM,GAAG,CAAC,KAAGD,KAAJ,EAAWE,OAAX,CAAmBN,UAAnB,EAA+B,EAA/B,CAAf;AAAA,MACMO,QAAQ,GAAGF,MAAM,CAACG,KAAP,CAAa,GAAb,CADjB;AAAA,MAEMC,OAAO,GAAGF,QAAQ,CAAC,CAAD,CAAR,GACNA,QAAQ,CAAC,CAAD,CAAR,CAAYG,MADN,GAEN,CAJV;;AAKA,SAAOC,uBACJC,YADI,CACSP,MADT,EACiBI,OADjB,EAC0B,GAD1B,EAC+BP,SAD/B,CAAP;AAED,CAVD;;eAYeC,e","sourcesContent":["import Highcharts from 'highcharts'\r\n\r\nconst REG_BLANKS = /\\s/g;\r\nconst DF_VALUE = '0';\r\nconst DELIMETER = ' ';\r\n\r\nconst formatAllNumber = function(value) {\r\n  if (!value) { return DF_VALUE; }\r\n\r\n  const _value = (''+value).replace(REG_BLANKS, '')\r\n      , arrSplit = _value.split('.')\r\n      , decimal = arrSplit[1]\r\n          ? arrSplit[1].length\r\n          : 0;\r\n  return Highcharts\r\n    .numberFormat(_value, decimal, '.', DELIMETER);\r\n}\r\n\r\nexport default formatAllNumber\r\n"],"file":"formatAllNumber.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/formatAllNumber.js"
+ ],
+ "file": "../../src/utils/formatAllNumber.js",
+ "names": [
+  "REG_BLANKS",
+  "DF_VALUE",
+  "DELIMETER",
+  "_calcDecimal",
+  "strNumber",
+  "arrSplit",
+  "split",
+  "length",
+  "formatAllNumber",
+  "value",
+  "_value",
+  "replace",
+  "decimal",
+  "Highcharts",
+  "numberFormat"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,UAAU,GAAG,KAAnB;AAAA,IACEC,QAAQ,GAAG,GADb;AAAA,IAEEC,SAAS,GAAG,GAFd;;AAIA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAACC,SAAD,EAAe;AAClC,MAAMC,QAAQ,GAAGD,SAAS,CAACE,KAAV,CAAgB,GAAhB,CAAjB;AACA,SAAOD,QAAQ,CAAC,CAAD,CAAR,GACHA,QAAQ,CAAC,CAAD,CAAR,CAAYE,MADT,GAEH,CAFJ;AAGD,CALD;;AAOA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB,CAASC,KAAT,EAAgB;AACtC,MAAI,CAACA,KAAL,EAAY;AAAE,WAAOR,QAAP;AAAkB;;AAChC,MAAIQ,KAAK,GAAC,CAAV,EAAa;AAAE,WAAO,KAAGA,KAAV;AAAkB;;AAEjC,MAAMC,MAAM,GAAG,CAAC,KAAGD,KAAJ,EAAWE,OAAX,CAAmBX,UAAnB,EAA+B,EAA/B,CAAf;AAAA,MACEY,OAAO,GAAGT,YAAY,CAACO,MAAD,CADxB;;AAGA,SAAOG,uBACJC,YADI,CACSJ,MADT,EACiBE,OADjB,EAC0B,GAD1B,EAC+BV,SAD/B,CAAP;AAED,CATD;;eAWeM,e"
+}

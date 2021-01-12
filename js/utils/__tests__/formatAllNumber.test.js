@@ -24,6 +24,18 @@ describe('formatAllNumber', function () {
     expect(str2).toBe('100 000.001');
     expect(typeof str2).toBe('string');
   });
+  test('should format small values [0, 1e-7)', function () {
+    var str1 = (0, _formatAllNumber["default"])(0.000001099);
+    expect(str1).toBe('0.000001099');
+    var str2 = (0, _formatAllNumber["default"])(1.099e-6);
+    expect(str2).toBe('0.000001099');
+  });
+  test('should format small values (1e-7, +) to exponential format', function () {
+    var str1 = (0, _formatAllNumber["default"])(0.0000001099);
+    expect(str1).toBe('1.099e-7');
+    var str2 = (0, _formatAllNumber["default"])(1.099e-7);
+    expect(str2).toBe('1.099e-7');
+  });
   test('should return same value for already formated str', function () {
     var str1 = '100 000',
         str2 = '100.001',
