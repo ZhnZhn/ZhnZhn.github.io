@@ -3,29 +3,24 @@ import crTableConfig from './crTableConfig'
 
 const { roundBy } = AdapterFn;
 
-const DF = {
-  TO_FIXED_BY: 2
-};
-
-const _replaceNaN = (n, str='') => n - n === 0
- ? n
- : str;
+const _isNumber = n => typeof n === 'number'
+, _replaceNaN = (n, str='') => n - n === 0
+    ? n : str;
 
 const _getCellValue = (r, h) => {
-  const {
-    pn, isToN,
-    isToFixed, toFixedBy=DF.TO_FIXED_BY
-  } = h
+  const { pn, toN } = h
+  , _isToNumber = !!toN
+  , _toFixedBy = _isToNumber && toN[0]
   , _strV = r[pn];
-  return isToN
-    ? isToFixed
-        ? roundBy(_strV, toFixedBy)
+  return _isToNumber
+    ? _isNumber(_toFixedBy)
+        ? roundBy(_strV, _toFixedBy)
         : _replaceNaN(parseFloat(_strV))
     : _strV;
 };
 
 const toTableFn = {
-  crTableConfig,  
+  crTableConfig,
   crRows: (headers=[], rows=[], idPropName='id') => {
     return rows.map((r, rIndex) => {
       headers.forEach(h => {

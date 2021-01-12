@@ -27,9 +27,7 @@ var HEADERS = [{
 }, {
   name: 'Volume',
   pn: 'volume',
-  isToN: true,
-  isToFixed: true,
-  toFixedBy: 0,
+  toN: [0],
   isF: true,
   style: {
     fontWeight: 'bold'
@@ -37,28 +35,28 @@ var HEADERS = [{
 }, {
   name: 'Price',
   pn: 'price',
-  isToN: true,
+  toN: [],
   isF: true,
   style: {
     fontWeight: 'bold'
   }
 }, {
+  isHide: true,
   name: 'Price USD',
   pn: 'price_usd',
-  isToN: true,
-  isHide: true,
+  toN: [],
   isF: true,
   style: {
     fontWeight: 'bold'
   }
 }, {
+  isHide: true,
   name: 'Time',
-  pn: 'time',
-  isHide: true
+  pn: 'time'
 }, {
+  isHide: true,
   name: 'Date',
-  pn: 'date',
-  isHide: true
+  pn: 'date'
 }];
 
 var crTableConfig = _toTableFn["default"].crTableConfig,

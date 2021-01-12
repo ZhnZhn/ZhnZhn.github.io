@@ -18,7 +18,7 @@ const HEADERS = [
   {
     name: 'Bid Price',
     pn: 'b_p',
-    isToN: true,
+    toN: [],
     style: {
       color: '#4caf50',
       fontWeight: 'bold'
@@ -27,7 +27,7 @@ const HEADERS = [
   {
     name: 'Bid QTY',
     pn: 'b_q',
-    isToN: true,
+    toN: [],
     style: {
       fontWeight: 'bold'
     }
@@ -35,7 +35,7 @@ const HEADERS = [
   {
     name: 'Ask QTY',
     pn: 'a_q',
-    isToN: true,
+    toN: [],
     style: {
       fontWeight: 'bold'
     }
@@ -43,7 +43,7 @@ const HEADERS = [
   {
     name: 'Ask Price',
     pn: 'a_p',
-    isToN: true,
+    toN: [],
     style: {
       color: '#f44336',
       fontWeight: 'bold'

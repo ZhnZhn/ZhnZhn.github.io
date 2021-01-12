@@ -15,7 +15,7 @@ var crPageConfig = _fnAdapter["default"].crPageConfig;
 var HEADERS = [{
   name: 'Rank',
   pn: 'market_cap_rank',
-  isToN: true,
+  toN: [],
   style: {
     textAlign: 'center'
   }
@@ -33,35 +33,29 @@ var HEADERS = [{
 }, {
   name: '1h %',
   pn: 'price_change_percentage_1h_in_currency',
-  isToN: true,
-  isToFixed: true,
-  toFixedBy: 3,
+  toN: [3],
   isR: true
 }, {
   name: '24h %',
   pn: 'price_change_percentage_24h',
-  isToN: true,
-  isToFixed: true,
-  toFixedBy: 3,
+  toN: [3],
   isR: true
 }, {
   name: '7d %',
   pn: 'price_change_percentage_7d_in_currency',
-  isToN: true,
-  isToFixed: true,
-  toFixedBy: 3,
+  toN: [3],
   isR: true
 }, {
   name: 'Price',
   pn: 'current_price',
-  isToN: true,
+  toN: [],
   style: {
     fontWeight: 'bold'
   }
 }, {
   name: 'MarketCap',
   pn: 'market_cap',
-  isToN: true,
+  toN: [],
   isF: true,
   style: {
     fontWeight: 'bold'

@@ -10,11 +10,11 @@ var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 var _crTableConfig = _interopRequireDefault(require("./crTableConfig"));
 
 var roundBy = _AdapterFn["default"].roundBy;
-var DF = {
-  TO_FIXED_BY: 2
-};
 
-var _replaceNaN = function _replaceNaN(n, str) {
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number';
+},
+    _replaceNaN = function _replaceNaN(n, str) {
   if (str === void 0) {
     str = '';
   }
@@ -24,12 +24,12 @@ var _replaceNaN = function _replaceNaN(n, str) {
 
 var _getCellValue = function _getCellValue(r, h) {
   var pn = h.pn,
-      isToN = h.isToN,
-      isToFixed = h.isToFixed,
-      _h$toFixedBy = h.toFixedBy,
-      toFixedBy = _h$toFixedBy === void 0 ? DF.TO_FIXED_BY : _h$toFixedBy,
+      toN = h.toN,
+      _isToNumber = !!toN,
+      _toFixedBy = _isToNumber && toN[0],
       _strV = r[pn];
-  return isToN ? isToFixed ? roundBy(_strV, toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
+
+  return _isToNumber ? _isNumber(_toFixedBy) ? roundBy(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
 };
 
 var toTableFn = {

@@ -18,26 +18,22 @@ var HEADERS = [{
 }, {
   name: 'Change %',
   pn: 'changePercent',
-  isToN: true,
-  isToFixed: true,
+  toN: [2],
   isR: true
 }, {
   name: 'YTD %',
   pn: 'ytdChange',
-  isToN: true,
-  isToFixed: true,
+  toN: [2],
   isR: true
 }, {
   name: 'Price',
   pn: 'latestPrice',
-  isToN: true,
-  isToFixed: true
+  toN: [2]
 }, {
   isHide: true,
   name: 'peRatio',
   pn: 'peRatio',
-  isToN: true,
-  isToFixed: true,
+  toN: [2],
   isR: true
 }, {
   isHide: true,

@@ -16,7 +16,7 @@ var crRows = _toTableFn["default"].crRows,
 var HEADERS = [{
   name: 'Trust Rank',
   pn: 'trust_score_rank',
-  isToN: true,
+  toN: [],
   style: {
     textAlign: 'center'
   }
@@ -26,9 +26,7 @@ var HEADERS = [{
 }, {
   name: '24h BTC',
   pn: 'trade_volume_24h_btc',
-  isToN: true,
-  isToFixed: true,
-  toFixedBy: 2,
+  toN: [2],
   isF: true,
   style: {
     fontWeight: 'bold'
@@ -36,9 +34,7 @@ var HEADERS = [{
 }, {
   name: '24h BTC Norm.',
   pn: 'trade_volume_24h_btc_normalized',
-  isToN: true,
-  isToFixed: true,
-  toFixedBy: 2,
+  toN: [2],
   isF: true,
   style: {
     fontWeight: 'bold'
@@ -46,7 +42,7 @@ var HEADERS = [{
 }, {
   name: 'Trust Score',
   pn: 'trust_score',
-  isToN: true,
+  toN: [],
   style: {
     textAlign: 'center'
   }
