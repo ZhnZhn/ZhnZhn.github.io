@@ -36,9 +36,10 @@ const LINK_CONFIGS = [
  ["StatFinland","Statistics Finland", "https://www.stat.fi/index_en.html"],
  ["CoinGecko", "https://www.coingecko.com/en/"],
  ["CoinMetrics","https://coinmetrics.io"],
- ["Coinpaprika", "https://coinpaprika.com/"],
- ["Binance", "https://binance.com/"],
- ["Bitstamp", "https://www.bitstamp.net/"]
+ ["CoinLore","https://www.coinlore.com"],
+ ["Coinpaprika", "https://coinpaprika.com"],
+ ["Binance", "https://binance.com"],
+ ["Bitstamp", "https://www.bitstamp.net"]
 ];
 
 const _isStr = str => typeof str === 'string';
@@ -47,7 +48,7 @@ const Links = {
   CryptoCompare: () => (
     <Link
       className={CL_LINK}
-      href="https://www.cryptocompare.com/"
+      href="https://www.cryptocompare.com"
       title="Crypto"
     >
       <span style={S.COMPARE}>Compare</span>

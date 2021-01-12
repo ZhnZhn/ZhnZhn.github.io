@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-lore/Cl.js"
+ ],
+ "file": "../../../src/adapters/coin-lore/Cl.js",
+ "names": [
+  "Cl",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AACJC,EAAAA,OAAO,EAAPA;AADI,CAAX;eAIeF,E"
+}

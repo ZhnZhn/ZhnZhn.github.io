@@ -22,6 +22,7 @@ import Crc from './crypto-compare/Crc'
 import Cg from './coin-gecko/Cg'
 import Cm from './coin-metrics/Cm'
 import Cp from './coin-paprika/Cp'
+import Cl from './coin-lore/Cl'
 import Bn from './binance/Bn'
 import Bt from './bitstamp/Bt'
 
@@ -45,11 +46,12 @@ const RouterAdapter = {
   Bea,
   Bls,
   Eia,
-  Intrinio,  
+  Intrinio,
   Crc,
   Cg,
   Cm,
   Cp,
+  Cl,
   Bn,
   Bt
 };

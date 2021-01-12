@@ -48,7 +48,7 @@ const DP = [
   Link.Insee, Link.ONS, Link.StatNorway,
   Link.StatSweden, Link.StatFinland, Link.Bsl,
   Link.CryptoCompare, Link.CoinGecko, Link.CoinMetrics,
-  Link.Coinpaprika, Link.Binance, Link.Bitstamp
+  Link.CoinLore, Link.Coinpaprika, Link.Binance, Link.Bitstamp
 ]
 , DP_KEY = [
   Link.Barchart, Link.AlphaVantage, Link.Iex,

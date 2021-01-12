@@ -50,7 +50,7 @@ var ST = {
     color: '#607d8b'
   }
 };
-var DP = [_ProviderLinks["default"].DbNomics, _ProviderLinks["default"].Eurostat, _ProviderLinks["default"].UnComtrade, _ProviderLinks["default"].WorldBank, _ProviderLinks["default"].Insee, _ProviderLinks["default"].ONS, _ProviderLinks["default"].StatNorway, _ProviderLinks["default"].StatSweden, _ProviderLinks["default"].StatFinland, _ProviderLinks["default"].Bsl, _ProviderLinks["default"].CryptoCompare, _ProviderLinks["default"].CoinGecko, _ProviderLinks["default"].CoinMetrics, _ProviderLinks["default"].Coinpaprika, _ProviderLinks["default"].Binance, _ProviderLinks["default"].Bitstamp],
+var DP = [_ProviderLinks["default"].DbNomics, _ProviderLinks["default"].Eurostat, _ProviderLinks["default"].UnComtrade, _ProviderLinks["default"].WorldBank, _ProviderLinks["default"].Insee, _ProviderLinks["default"].ONS, _ProviderLinks["default"].StatNorway, _ProviderLinks["default"].StatSweden, _ProviderLinks["default"].StatFinland, _ProviderLinks["default"].Bsl, _ProviderLinks["default"].CryptoCompare, _ProviderLinks["default"].CoinGecko, _ProviderLinks["default"].CoinMetrics, _ProviderLinks["default"].CoinLore, _ProviderLinks["default"].Coinpaprika, _ProviderLinks["default"].Binance, _ProviderLinks["default"].Bitstamp],
     DP_KEY = [_ProviderLinks["default"].Barchart, _ProviderLinks["default"].AlphaVantage, _ProviderLinks["default"].Iex, _ProviderLinks["default"].Bea, _ProviderLinks["default"].Eia, _ProviderLinks["default"].Fmp, _ProviderLinks["default"].Intrinio];
 
 var Links = function Links(_ref) {

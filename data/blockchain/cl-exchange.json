@@ -1,0 +1,28 @@
+{
+  "items":[
+    {"c":"Binance","v":"5"},
+    {"c":"Coinbase Pro","v":"187"},
+    {"c":"Kraken","v":"56"},
+    {"c":"Bitfinex","v":"9"},
+    {"c":"Gemini","v":"48"},
+    {"c":"Huobi","v":"50"},
+    {"c":"MXC","v":"260"},
+    {"c":"Bitstamp","v":"16"},
+    {"c":"Bitrue","v":"209"},
+    {"c":"FTX","v":"258"},
+    {"c":"Gate","v":"100"},
+    {"c":"BitMart","v":"177"},
+    {"c":"Bithumb Global","v":"514"},
+    {"c":"Bitso","v":"15"},
+    {"c":"OKEX","v":"66"},
+    {"c":"Bitcoin.com","v":"563"},
+    {"c":"KuCoin","v":"96"},
+    {"c":"Poloniex","v":"68"},
+    {"c":"Bittrex","v":"17"},
+    {"c":"AEX","v":"97"},
+    {"c":"AAX","v":"595"},
+    {"c":"FTX","v":"582"},    
+    {"c":"Dex-Trade","v":"523"},
+    {"c":"Max Maicoin","v":"578"}
+  ]
+}

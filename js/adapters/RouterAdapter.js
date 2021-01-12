@@ -53,6 +53,8 @@ var _Cm = _interopRequireDefault(require("./coin-metrics/Cm"));
 
 var _Cp = _interopRequireDefault(require("./coin-paprika/Cp"));
 
+var _Cl = _interopRequireDefault(require("./coin-lore/Cl"));
+
 var _Bn = _interopRequireDefault(require("./binance/Bn"));
 
 var _Bt = _interopRequireDefault(require("./bitstamp/Bt"));
@@ -81,6 +83,7 @@ var RouterAdapter = (0, _extends2["default"])({
   Cg: _Cg["default"],
   Cm: _Cm["default"],
   Cp: _Cp["default"],
+  Cl: _Cl["default"],
   Bn: _Bn["default"],
   Bt: _Bt["default"]
 });
