@@ -1,33 +1,39 @@
 {
-  "menu": [
-    {
-      "caption": "BEA: GDP+R by Industry",
-      "items": [
-        { "id": "USAE_RGDP_1" },
-        { "id": "USAE_RGDP_2" },
-        { "id": "USAE_RGDP_3" },
-        { "id": "USAE_RGDP_4" },
-        { "id": "USAE_RGDP_5" }
-      ]
-    },{
-      "caption": "BEA: GO by Industry",
-      "items": [
-        { "id": "USAE_GO_1" },
-        { "id": "USAE_GO_2" },
-        { "id": "USAE_GO_3" }
-      ]
-    },{
-      "caption": "EIA: Electricity, M",
-      "items": [
-        { "id": "USAE_EIA_NET_GENER" },
-        { "id": "USAE_EIA_AVG_PRICE" },
-        { "id": "USAE_EIA_RETAIL_SALES" },
-        { "id": "USAE_EIA_RETAIL_REVENUE" }
-      ]
-    },{
-      "caption": "EIA: Environment, A",
-      "items": [
-        { "id": "USAE_EIA_ENV_CO2" }
+  "menu": [{
+      "caption": "BEA",
+      "items":[{
+          "caption": "GDP+R by Industry",
+          "items": [
+            { "id": "USAE_RGDP_1" },
+            { "id": "USAE_RGDP_2" },
+            { "id": "USAE_RGDP_3" },
+            { "id": "USAE_RGDP_4" },
+            { "id": "USAE_RGDP_5" }
+          ]
+        },{
+          "caption": "GO by Industry",
+          "items": [
+            { "id": "USAE_GO_1" },
+            { "id": "USAE_GO_2" },
+            { "id": "USAE_GO_3" }
+          ]
+        }
+      ]},{
+      "caption": "EIA",
+      "items":[{
+        "caption": "Electricity, M",
+        "items": [
+          { "id": "USAE_EIA_NET_GENER" },
+          { "id": "USAE_EIA_AVG_PRICE" },
+          { "id": "USAE_EIA_RETAIL_SALES" },
+          { "id": "USAE_EIA_RETAIL_REVENUE" }
+        ]
+       },{
+          "caption": "Environment, A",
+          "items": [
+            { "id": "USAE_EIA_ENV_CO2" }
+          ]
+        }
       ]
     },{
       "caption": "Intrinio: FRED",
@@ -67,13 +73,16 @@
     }
   ],
   "items": {
-    "USAE_B1": {
+    "USAE_B1A": {
       "dialogProps": {
-        "nInitFromDate" : 10,
+        "rootUri": "./data/usa-economy/",
         "descrUrl" : "./data/usa-economy/bea.html",
-        "oneCaption": "Industry",
-        "oneURI": "./data/usa-economy/bea-industries.json",
+        "selectProps":[
+          ["Industry","bea-industries"]
+        ],
         "noDate": true,
+        "spT": "id",
+        "chartsType": "t2",
         "loadId" : "BEA",
         "dataSource": "U.S. Bureau of Economic Analysis (Not endorsed or certified by BEA)"
       }
@@ -120,14 +129,13 @@
       "type": "USAE_RGDP_1",
       "menuTitle": "Value Added",
       "contFullCaption": "BEA: GDP: Value Added by Industry",
-      "dialogType": "DialogType3",
-      "addProps": "USAE_B1",
+      "addProps": "USAE_B1A",
       "dialogProps": {
         "dfProps": {
           "DataSetName": "GDPbyIndustry",
           "TableID": "1",
           "ValueName": "Industry",
-          "dfTitle": "Value Added to GDP by, $B"
+          "dfTitle": "Value Added to GDP in $B"
         }
       }
     },
@@ -135,8 +143,7 @@
       "type": "USAE_RGDP_2",
       "menuTitle": "Value Added as %",
       "contFullCaption" : "BEA: Value Added by Industry as % of GDP",
-      "dialogType": "DialogType3",
-      "addProps": "USAE_B1",
+      "addProps": "USAE_B1A",
       "dialogProps": {
         "dfProps": {
           "DataSetName": "GDPbyIndustry",
@@ -150,16 +157,16 @@
       "type": "USAE_RGDP_3",
       "menuTitle": "Comp. of Value Added as %",
       "contFullCaption": "BEA: GDP: Components of Value Added as %",
-      "dialogType": "DialogType4",
-      "addProps": "USAE_B1",
+      "addProps": "USAE_B1A",
       "dialogProps": {
-        "twoCaption": "Slice",
-        "twoURI": "./data/usa-economy/bea-gdp-componets.json",
+        "selectProps":[
+          ["Slice","bea-gdp-componets"]
+        ],
         "dfProps": {
           "DataSetName": "GDPbyIndustry",
           "TableID": "7",
           "ValueName": "Industry",
-          "dfTitle": "Components of Value Added by, as % of GDP",
+          "dfTitle": "Components of Value Added as % of Value Added",
           "dfFilterName": "IndustrYDescription"
         }
       }
@@ -168,14 +175,13 @@
       "type": "USAE_RGDP_4",
       "menuTitle": "Real Value Added",
       "contFullCaption": "BEA: RGDP: Real Value Added by Industry",
-      "dialogType": "DialogType3",
-      "addProps": "USAE_B1",
+      "addProps": "USAE_B1A",
       "dialogProps": {
         "dfProps": {
           "DataSetName": "GDPbyIndustry",
           "TableID": "10",
           "ValueName": "Industry",
-          "dfTitle": "Real Value Added to RGDP by, in $B (chained 2009)"
+          "dfTitle": "Real Value Added to RGDP in $B (chained 2012)"
         }
       }
     },
@@ -183,14 +189,13 @@
       "type": "USAE_RGDP_5",
       "menuTitle": "Contr. to % Change in RGDP",
       "contFullCaption" : "BEA: Contribution to % Change in RGDP by",
-      "dialogType": "DialogType3",
-      "addProps": "USAE_B1",
+      "addProps": "USAE_B1A",
       "dialogProps": {
         "dfProps": {
           "DataSetName": "GDPbyIndustry",
           "TableID": "13",
           "ValueName": "Industry",
-          "dfTitle": "Contribution to % Change in RGDP by"
+          "dfTitle": "Contribution to % Change in RGDP in %"
         }
       }
     },
@@ -201,14 +206,13 @@
       "menuTitle": "Gross Output",
       "dialogCaption": "Gross Output by Industry",
       "contFullCaption" : "BEA: Gross Output by Industry",
-      "dialogType": "DialogType3",
-      "addProps": "USAE_B1",
+      "addProps": "USAE_B1A",
       "dialogProps": {
         "dfProps": {
           "DataSetName": "GDPbyIndustry",
           "TableID": "15",
           "ValueName": "Industry",
-          "dfTitle": "Gross Output by, in $B"
+          "dfTitle": "Gross Output in $B"
         }
       }
     },
@@ -216,14 +220,13 @@
       "type": "USAE_GO_2",
       "menuTitle": "Intermediate Inputs",
       "contFullCaption" : "BEA: Intermediate Inputs by Industry",
-      "dialogType": "DialogType3",
-      "addProps": "USAE_B1",
+      "addProps": "USAE_B1A",
       "dialogProps": {
         "dfProps": {
           "DataSetName": "GDPbyIndustry",
           "TableID": "20",
           "ValueName": "Industry",
-          "dfTitle": "Intermediate Inputs by, in $B"
+          "dfTitle": "Intermediate Inputs in $B"
         }
       }
     },
@@ -231,16 +234,16 @@
       "type": "USAE_GO_3",
       "menuTitle": "Shares of Gross Output",
       "contFullCaption" : "BEA: Shares Gross Output by Industry",
-      "dialogType": "DialogType4",
-      "addProps": "USAE_B1",
+      "addProps": "USAE_B1A",
       "dialogProps": {
-        "twoCaption": "Slice",
-        "twoURI": "./data/usa-economy/bea-gross-output-shares.json",
+        "selectProps":[
+          ["Slice","bea-gross-output-shares"]
+        ],
         "dfProps": {
           "DataSetName": "GDPbyIndustry",
           "TableID": "26",
           "ValueName": "Industry",
-          "dfTitle": "Shares of Gross Output by, in $B",
+          "dfTitle": "Shares of Gross Output, %",
           "dfFilterName": "IndustrYDescription"
         }
       }

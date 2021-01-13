@@ -11,14 +11,7 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crData = _fnAdapter["default"].crData,
     crConfOption = _fnAdapter["default"].crConfOption;
-
-var crKey = function crKey(_ref) {
-  var value = _ref.value;
-  return value;
-};
-
 var BeaAdapter = (0, _crAdapterType["default"])({
-  crKey: crKey,
   crData: crData,
   crConfOption: crConfOption
 });

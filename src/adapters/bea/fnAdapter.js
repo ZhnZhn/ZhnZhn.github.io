@@ -34,35 +34,36 @@ const _crInfo = (Results) => {
   }
 };
 
-const _crZhConfig = (option) => {
-  const { value, itemCaption, dataSource } = option;
-  return {
-    id: value, key: value,
-    itemCaption,
-    dataSource
-  };
+const _crZhConfig = ({
+  _itemKey,
+  itemCaption,
+  dataSource
+}) => ({
+  id: _itemKey, key: _itemKey,
+  itemCaption,
+  dataSource
+});
+
+const MD = {
+  DF: '-12-31',
+  'I': '-03-31',
+  'II': '-06-30',
+  'III': '-09-30'
 };
 
 const _crUTC = (item) => {
-  const { Frequency, Year, Quarter } = item;
-  let md = '-12-31';
-  if (Frequency === 'A') {
-    md = '-12-31';
-  } else if (Frequency === 'Q') {
-    switch(Quarter){
-      case 'I': md = '-03-31'; break;
-      case 'II': md = '-06-30'; break;
-      case 'III': md = '-09-30'; break;
-      default: md = '-12-31';
-    }
-  }
+  const { Frequency, Year, Quarter } = item
+  , md = Frequency === 'Q'
+     ? MD[Quarter] || MD.DF    
+     : MD.DF;
   return ymdToUTC(Year + md);
 };
 
 const fnAdapter = {
   crData: (json, option) => {
     const Results = _getResults(json)
-    , { dfFilterName, two } = option
+    , { dfFilterName, items } = option
+    , two = (items[1] || {}).value
     , d = []
     , isFilter = dfFilterName ? true : false
     , data = _getData(Results) || [];

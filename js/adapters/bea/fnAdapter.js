@@ -51,45 +51,30 @@ var _crInfo = function _crInfo(Results) {
   };
 };
 
-var _crZhConfig = function _crZhConfig(option) {
-  var value = option.value,
-      itemCaption = option.itemCaption,
-      dataSource = option.dataSource;
+var _crZhConfig = function _crZhConfig(_ref) {
+  var _itemKey = _ref._itemKey,
+      itemCaption = _ref.itemCaption,
+      dataSource = _ref.dataSource;
   return {
-    id: value,
-    key: value,
+    id: _itemKey,
+    key: _itemKey,
     itemCaption: itemCaption,
     dataSource: dataSource
   };
 };
 
+var MD = {
+  DF: '-12-31',
+  'I': '-03-31',
+  'II': '-06-30',
+  'III': '-09-30'
+};
+
 var _crUTC = function _crUTC(item) {
   var Frequency = item.Frequency,
       Year = item.Year,
-      Quarter = item.Quarter;
-  var md = '-12-31';
-
-  if (Frequency === 'A') {
-    md = '-12-31';
-  } else if (Frequency === 'Q') {
-    switch (Quarter) {
-      case 'I':
-        md = '-03-31';
-        break;
-
-      case 'II':
-        md = '-06-30';
-        break;
-
-      case 'III':
-        md = '-09-30';
-        break;
-
-      default:
-        md = '-12-31';
-    }
-  }
-
+      Quarter = item.Quarter,
+      md = Frequency === 'Q' ? MD[Quarter] || MD.DF : MD.DF;
   return ymdToUTC(Year + md);
 };
 
@@ -97,7 +82,8 @@ var fnAdapter = {
   crData: function crData(json, option) {
     var Results = _getResults(json),
         dfFilterName = option.dfFilterName,
-        two = option.two,
+        items = option.items,
+        two = (items[1] || {}).value,
         d = [],
         isFilter = dfFilterName ? true : false,
         data = _getData(Results) || [];

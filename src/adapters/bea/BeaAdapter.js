@@ -3,10 +3,8 @@ import fnAdapter from './fnAdapter';
 
 const { crData, crConfOption } = fnAdapter;
 
-const crKey = ({ value }) => value;
-
-const BeaAdapter = crAdapterType1({
-   crKey, crData, crConfOption
+const BeaAdapter = crAdapterType1({   
+   crData, crConfOption
 });
 
 export default BeaAdapter
