@@ -7,12 +7,12 @@ const {
 } = AdapterFn;
 
 const _crZhConfig = ({
+  _itemKey,
   itemCaption,
   dataSource, dfTitle,
-  value,
   linkItem
 }) => ({
-  id: value, key: value,
+  id: _itemKey, key: _itemKey,
   item: { ...linkItem },
   linkFn: 'DF',
   itemCaption,
@@ -24,8 +24,8 @@ const _crInfo = ({ itemCaption }) => ({
 });
 
 const fnAdapter = {
-  crTitle: ({ dfTitle, item={}, subtitle }) => dfTitle
-    ? joinBy(', ', dfTitle, item.t)
+  crTitle: ({ dfTitle, items=[], subtitle }) => dfTitle
+    ? joinBy(', ', dfTitle, items[0].t)
     : subtitle,
 
   crData: (json) => {

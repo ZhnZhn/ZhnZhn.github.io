@@ -9,8 +9,10 @@ const _isArr = Array.isArray
 , _assign = Object.assign
 , { crTitle } = fnAdapter;
 
+const _getValue = ({ items=[] }) => items[0].v;
+
 const _addNativeLinkTo = (option) => {
-  const { value='' } = option;
+  const value = _getValue(option);
   _assign(option, {
     linkItem: {
       caption: 'BSL Data Link',
@@ -30,27 +32,8 @@ const _setCaptionTo = option => {
 
 const BlsApi = {
 
-  /*
-  crOptionFetch(option){
-    const { value='' } = option
-    return {
-      method: 'POST',
-      headers: {
-        //'Accept': 'application/json',
-        //'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        seriesid: [ value ],
-        startyear: "2010",
-        endyear: "2018"
-      })
-
-    };
-  },
-  */
-
   getRequestUrl(option){
-    const { value='' } = option;
+    const value = _getValue(option);
     _addNativeLinkTo(option)
     _setCaptionTo(option)
     return `${C.URL}/${value}`;

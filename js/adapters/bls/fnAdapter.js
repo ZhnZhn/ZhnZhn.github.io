@@ -13,14 +13,14 @@ var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     joinBy = _AdapterFn["default"].joinBy;
 
 var _crZhConfig = function _crZhConfig(_ref) {
-  var itemCaption = _ref.itemCaption,
+  var _itemKey = _ref._itemKey,
+      itemCaption = _ref.itemCaption,
       dataSource = _ref.dataSource,
       dfTitle = _ref.dfTitle,
-      value = _ref.value,
       linkItem = _ref.linkItem;
   return {
-    id: value,
-    key: value,
+    id: _itemKey,
+    key: _itemKey,
     item: (0, _extends2["default"])({}, linkItem),
     linkFn: 'DF',
     itemCaption: itemCaption,
@@ -38,10 +38,10 @@ var _crInfo = function _crInfo(_ref2) {
 var fnAdapter = {
   crTitle: function crTitle(_ref3) {
     var dfTitle = _ref3.dfTitle,
-        _ref3$item = _ref3.item,
-        item = _ref3$item === void 0 ? {} : _ref3$item,
+        _ref3$items = _ref3.items,
+        items = _ref3$items === void 0 ? [] : _ref3$items,
         subtitle = _ref3.subtitle;
-    return dfTitle ? joinBy(', ', dfTitle, item.t) : subtitle;
+    return dfTitle ? joinBy(', ', dfTitle, items[0].t) : subtitle;
   },
   crData: function crData(json) {
     var data = json.Results.series[0].data,

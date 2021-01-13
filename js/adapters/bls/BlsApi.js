@@ -15,9 +15,14 @@ var _isArr = Array.isArray,
     _assign = Object.assign,
     crTitle = _fnAdapter["default"].crTitle;
 
+var _getValue = function _getValue(_ref) {
+  var _ref$items = _ref.items,
+      items = _ref$items === void 0 ? [] : _ref$items;
+  return items[0].v;
+};
+
 var _addNativeLinkTo = function _addNativeLinkTo(option) {
-  var _option$value = option.value,
-      value = _option$value === void 0 ? '' : _option$value;
+  var value = _getValue(option);
 
   _assign(option, {
     linkItem: {
@@ -38,26 +43,8 @@ var _setCaptionTo = function _setCaptionTo(option) {
 };
 
 var BlsApi = {
-  /*
-  crOptionFetch(option){
-    const { value='' } = option
-    return {
-      method: 'POST',
-      headers: {
-        //'Accept': 'application/json',
-        //'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        seriesid: [ value ],
-        startyear: "2010",
-        endyear: "2018"
-      })
-      };
-  },
-  */
   getRequestUrl: function getRequestUrl(option) {
-    var _option$value2 = option.value,
-        value = _option$value2 === void 0 ? '' : _option$value2;
+    var value = _getValue(option);
 
     _addNativeLinkTo(option);
 
@@ -66,9 +53,9 @@ var BlsApi = {
     return C.URL + "/" + value;
   },
   checkResponse: function checkResponse(json) {
-    var _ref = json || {},
-        _ref$Results = _ref.Results,
-        Results = _ref$Results === void 0 ? {} : _ref$Results,
+    var _ref2 = json || {},
+        _ref2$Results = _ref2.Results,
+        Results = _ref2$Results === void 0 ? {} : _ref2$Results,
         _Results$series = Results.series,
         series = _Results$series === void 0 ? [] : _Results$series;
 

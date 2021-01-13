@@ -114,13 +114,12 @@
     },
     "USAE_BLS": {
       "dialogProps" : {
-        "nInitFromDate" : 12,
+        "rootUri": "./data/usa-economy/",
         "descrUrl" : "./data/usa-economy/bls.html",
-        "oneCaption": "Item",
         "noDate": true,
-        "valueFn" : "ROne",
+        "spT": "id",
+        "chartsType": "t2",
         "loadId" : "BLS",
-        "isProxy": true,
         "dataSource": "U.S. BSL"
       }
     },
@@ -342,10 +341,11 @@
       "type": "USAE_BLS_CAVP",
       "menuTitle" : "Consumer Average Prices",
       "contFullCaption" : "BLS: Consumer Average Prices",
-      "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
-        "optionURI" : "./data/usa-economy/bls-consumer-avg-prices.json",
+        "selectProps":[
+          ["Item","bls-consumer-avg-prices"]
+        ],
         "dfProps": {
           "dfTitle": "Consumer Average Prices"
         }
@@ -356,10 +356,11 @@
       "menuTitle" : "CPI-U",
       "dialogCaption": "Consume Price Index (CPI-U)",
       "contFullCaption" : "BLS: Consume Price Index (CPI-U)",
-      "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
-        "optionURI" : "./data/usa-economy/bls-cpi.json",
+        "selectProps":[
+          ["Item","bls-cpi"]
+        ],
         "dfProps": {
           "dfTitle": "CPI-U"
         }
@@ -368,12 +369,12 @@
     "USAE_BLS_PPIINDUSTRY": {
       "type": "USAE_BLS_PPIINDUSTRY",
       "menuTitle" : "PPI Industry",
-      "dialogCaption": "PPI Industry",
       "contFullCaption" : "BLS: PPI Industry",
-      "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
-        "optionURI" : "./data/usa-economy/bls-ppi-industry.json",
+        "selectProps":[
+          ["Item","bls-ppi-industry"]
+        ],
         "dfProps": {
           "dfTitle": "PPI Industry"
         }
@@ -382,12 +383,12 @@
     "USAE_BLS_PPICOMMODITY": {
       "type": "USAE_BLS_PPICOMMODITY",
       "menuTitle" : "PPI Commodity",
-      "dialogCaption": "PPI Commodity",
       "contFullCaption" : "BLS: PPI Commodity",
-      "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
-        "optionURI" : "./data/usa-economy/bls-ppi-commodity.json",
+        "selectProps":[
+          ["Item","bls-ppi-commodity"]
+        ],
         "dfProps": {
           "dfTitle": "PPI Commodity"
         }
@@ -396,12 +397,12 @@
     "USAE_BLS_EXPIMPPRICE": {
       "type": "USAE_BLS_EXPIMPPRICE",
       "menuTitle" : "Export-Import Indexes",
-      "dialogCaption": "Export-Import Indexes",
       "contFullCaption" : "BLS: Export-Import Price Indexes",
-      "dialogType": "DialogType3",
       "addProps": "USAE_BLS",
       "dialogProps" : {
-        "optionURI" : "./data/usa-economy/bls-export-import-prices.json",
+        "selectProps":[
+          ["Item","bls-export-import-prices"]
+        ],
         "dfProps": {
           "dfTitle": "Export-Import Indexes"
         }
