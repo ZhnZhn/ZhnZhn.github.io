@@ -2,10 +2,7 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _isNaN = function _isNaN(v) {
-  return Number.isNaN(v);
-};
+var _isNaN = Number.isNaN;
 
 var _compMaybeNaN = function _compMaybeNaN(v1, v2) {
   if (_isNaN(v1)) {
@@ -43,12 +40,7 @@ var compFactory = {
     return function (a, b) {
       var v1 = a[pn],
           v2 = b[pn];
-
-      if (typeof v1 === 'number' || v1 === TOKEN_NAN) {
-        return _compNumber(v1, v2);
-      } else {
-        return _compStr(v1, v2);
-      }
+      return typeof v1 === 'number' || v1 === TOKEN_NAN ? _compNumber(v1, v2) : _compStr(v1, v2);
     };
   },
   opCompBy: function opCompBy(pn, fn) {

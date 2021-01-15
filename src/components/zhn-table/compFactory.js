@@ -1,5 +1,5 @@
 
-const _isNaN = (v) => Number.isNaN(v);
+const _isNaN = Number.isNaN;
 
 const _compMaybeNaN = (v1, v2) => {
   if ( _isNaN(v1) )  {
@@ -33,11 +33,9 @@ const _compStr = (v1, v2) => {
 const compFactory = {
   compBy: (TOKEN_NAN, pn) => (a, b) => {
     const v1 = a[pn], v2 = b[pn];
-    if (typeof v1 === 'number' || v1 === TOKEN_NAN) {
-      return _compNumber(v1, v2);
-    } else {
-      return _compStr(v1, v2);
-    }
+    return (typeof v1 === 'number' || v1 === TOKEN_NAN)
+      ? _compNumber(v1, v2)
+      : _compStr(v1, v2);    
   },
 
   opCompBy: (pn, fn) => (a, b) => {

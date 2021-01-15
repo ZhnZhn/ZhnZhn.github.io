@@ -41,7 +41,7 @@ const _renderRows = (props) => {
   , {
       numberFormat,
       valueToHref
-    } = tableFn;
+    } = tableFn || {};
 
   return rows.map(r => {
     const _rId = r.id

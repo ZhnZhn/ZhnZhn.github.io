@@ -61,8 +61,10 @@ var _renderRows = function _renderRows(props) {
   var headers = props.headers,
       rows = props.rows,
       tableFn = props.tableFn,
-      numberFormat = tableFn.numberFormat,
-      valueToHref = tableFn.valueToHref;
+      _ref = tableFn || {},
+      numberFormat = _ref.numberFormat,
+      valueToHref = _ref.valueToHref;
+
   return rows.map(function (r) {
     var _rId = r.id,
         _elTds = headers.map(function (h, hIndex) {

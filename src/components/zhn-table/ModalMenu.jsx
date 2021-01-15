@@ -24,7 +24,7 @@ const _renderHeaders = (headers, onToggle) => {
       checkedColor="black"
       caption={h.name}
       value={!h.isHide}
-      onToggle={() => onToggle(index)}
+      onToggle={() => onToggle(index+1)}
     />
   )})
 }

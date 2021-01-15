@@ -36,7 +36,7 @@ var _renderHeaders = function _renderHeaders(headers, _onToggle) {
       caption: h.name,
       value: !h.isHide,
       onToggle: function onToggle() {
-        return _onToggle(index);
+        return _onToggle(index + 1);
       }
     }, h.name);
   });
