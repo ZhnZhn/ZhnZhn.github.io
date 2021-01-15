@@ -12,9 +12,10 @@ const C = {
   MSG_503: '503: Back-end server is at capacity.'
 };
 
-const _isFn = fn => typeof fn === 'function';
-const _isArr = Array.isArray
-const _assign = Object.assign
+const _isFn = fn => typeof fn === 'function'
+, _isArr = Array.isArray
+, _assign = Object.assign
+, _noop = () => {};
 
 const _isInArrValue = (arr, value) => _isArr(arr)
   && arr.indexOf(value) !== -1;
@@ -51,7 +52,7 @@ const _fFetch = (propName, type) => function({
    uri, option={},
    optionFetch,
    getLimitRemaiming,
-   onCheckResponse,
+   onCheckResponse=_noop,
    onFetch, onCompleted,
    onFailed, onCatch
  }){
@@ -95,15 +96,9 @@ const _fFetch = (propName, type) => function({
       }
     })
     .then(([limitRemaining, json, status]) => {
-       if (_isFn(onCheckResponse)){
-         if (onCheckResponse(json, option, status)) {
-           option.limitRemaining = limitRemaining;
-           onFetch({ json, option, onCompleted });
-         }
-      } else {
-        option.limitRemaining = limitRemaining;
-        onFetch({ json, option, onCompleted });
-      }
+      onCheckResponse(json, option, status)
+      option.limitRemaining = limitRemaining;
+      onFetch({ json, option, onCompleted });       
     })
     .catch(error => {
        if (_isFn(onCatch)) {

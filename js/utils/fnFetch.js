@@ -20,10 +20,10 @@ var C = {
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
-};
-
-var _isArr = Array.isArray;
-var _assign = Object.assign;
+},
+    _isArr = Array.isArray,
+    _assign = Object.assign,
+    _noop = function _noop() {};
 
 var _isInArrValue = function _isInArrValue(arr, value) {
   return _isArr(arr) && arr.indexOf(value) !== -1;
@@ -65,7 +65,8 @@ var _fFetch = function _fFetch(propName, type) {
         option = _ref2$option === void 0 ? {} : _ref2$option,
         optionFetch = _ref2.optionFetch,
         getLimitRemaiming = _ref2.getLimitRemaiming,
-        onCheckResponse = _ref2.onCheckResponse,
+        _ref2$onCheckResponse = _ref2.onCheckResponse,
+        onCheckResponse = _ref2$onCheckResponse === void 0 ? _noop : _ref2$onCheckResponse,
         onFetch = _ref2.onFetch,
         onCompleted = _ref2.onCompleted,
         onFailed = _ref2.onFailed,
@@ -129,24 +130,13 @@ var _fFetch = function _fFetch(propName, type) {
       var limitRemaining = _ref3[0],
           json = _ref3[1],
           status = _ref3[2];
-
-      if (_isFn(onCheckResponse)) {
-        if (onCheckResponse(json, option, status)) {
-          option.limitRemaining = limitRemaining;
-          onFetch({
-            json: json,
-            option: option,
-            onCompleted: onCompleted
-          });
-        }
-      } else {
-        option.limitRemaining = limitRemaining;
-        onFetch({
-          json: json,
-          option: option,
-          onCompleted: onCompleted
-        });
-      }
+      onCheckResponse(json, option, status);
+      option.limitRemaining = limitRemaining;
+      onFetch({
+        json: json,
+        option: option,
+        onCompleted: onCompleted
+      });
     })["catch"](function (error) {
       if (_isFn(onCatch)) {
         onCatch({
