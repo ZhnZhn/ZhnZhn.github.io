@@ -1,48 +1,51 @@
 import {renderHook, act} from '@testing-library/react-hooks'
 import useToggle from '../useToggle'
 
+const _getState = result => result.current[0]
+, _getToggle = result => result.current[1];
+
+/* eslint-disable react-hooks/rules-of-hooks */
+const _renderInitialTest = (initialValue, expectedValue) => {
+  const {result} = renderHook(() => useToggle(initialValue));
+  expect(_getState(result)).toBe(expectedValue)
+
+  const toggle = _getToggle(result);
+  expect(typeof toggle).toBe('function')
+  return [result, toggle];
+};
+/* eslint-enable react-hooks/rules-of-hooks */
+
+const _testToggle = (result, toggle) => {
+  const beforeState = _getState(result);
+  expect(typeof beforeState).toBe('boolean')
+  act(toggle)
+  expect(_getState(result)).toBe(!beforeState)
+  expect(_getToggle(result)).toEqual(toggle)
+};
+
 describe('useToggle', ()=>{
   test('should toggle state from default initialValue false', ()=>{
-    const {result} = renderHook(() => useToggle());
+    const [result, toggle] = _renderInitialTest(void 0, false);
 
-    //assert initial state
-    expect(result.current[0]).toBe(false)
-    const _toggle = result.current[1]
-    expect(typeof _toggle).toBe('function')
-
-    //toggle && assert new state
-    act(result.current[1])
-    expect(result.current[0]).toBe(true)
-    expect(result.current[1]).toEqual(_toggle)
-
-    //toggle && assert new state
-    act(result.current[1])
-    expect(result.current[0]).toBe(false)
-    expect(result.current[1]).toEqual(_toggle)
+    const _actToggleTest = _testToggle.bind(null, result, toggle);
+    _actToggleTest()
+    _actToggleTest()
   })
   test('should use bool initialValue', ()=>{
-    const {result} = renderHook(() => useToggle(true));
+    const [result, toggle] = _renderInitialTest(true, true);
 
-    //assert initial state
-    expect(result.current[0]).toBe(true)
-
-    //toggle && assert new state
-    act(result.current[1])
-    expect(result.current[0]).toBe(false)
+    const _actToggleTest = _testToggle.bind(null, result, toggle);
+    _actToggleTest()
+    _actToggleTest()
   })
-  test('should convert to bool initialValue', ()=>{    
-    const {result} = renderHook(() => useToggle(null));
-    expect(result.current[0]).toBe(false)
-    const {result:r2} = renderHook(() => useToggle(''));
-    expect(r2.current[0]).toBe(false)
-    const {result:r3} = renderHook(() => useToggle(0));
-    expect(r3.current[0]).toBe(false)
-    const {result:r4} = renderHook(() => useToggle(NaN));
-    expect(r4.current[0]).toBe(false)
+  test('should convert to bool initialValue', ()=>{
+    _renderInitialTest(null, false)
+    _renderInitialTest(void 0, false)
+    _renderInitialTest('', false)
+    _renderInitialTest(0, false)
+    _renderInitialTest(NaN, false)
 
-    const {result:r5} = renderHook(() => useToggle(1));
-    expect(r5.current[0]).toBe(true)
-    const {result:r6} = renderHook(() => useToggle('str'));
-    expect(r6.current[0]).toBe(true)
+    _renderInitialTest(1, true)
+    _renderInitialTest('str', true)
   })
 })

@@ -6,80 +6,77 @@ var _reactHooks = require("@testing-library/react-hooks");
 
 var _useToggle = _interopRequireDefault(require("../useToggle"));
 
+var _getState = function _getState(result) {
+  return result.current[0];
+},
+    _getToggle = function _getToggle(result) {
+  return result.current[1];
+};
+/* eslint-disable react-hooks/rules-of-hooks */
+
+
+var _renderInitialTest = function _renderInitialTest(initialValue, expectedValue) {
+  var _renderHook = (0, _reactHooks.renderHook)(function () {
+    return (0, _useToggle["default"])(initialValue);
+  }),
+      result = _renderHook.result;
+
+  expect(_getState(result)).toBe(expectedValue);
+
+  var toggle = _getToggle(result);
+
+  expect(typeof toggle).toBe('function');
+  return [result, toggle];
+};
+/* eslint-enable react-hooks/rules-of-hooks */
+
+
+var _testToggle = function _testToggle(result, toggle) {
+  var beforeState = _getState(result);
+
+  expect(typeof beforeState).toBe('boolean');
+  (0, _reactHooks.act)(toggle);
+  expect(_getState(result)).toBe(!beforeState);
+  expect(_getToggle(result)).toEqual(toggle);
+};
+
 describe('useToggle', function () {
   test('should toggle state from default initialValue false', function () {
-    var _renderHook = (0, _reactHooks.renderHook)(function () {
-      return (0, _useToggle["default"])();
-    }),
-        result = _renderHook.result; //assert initial state
+    var _renderInitialTest2 = _renderInitialTest(void 0, false),
+        result = _renderInitialTest2[0],
+        toggle = _renderInitialTest2[1];
 
+    var _actToggleTest = _testToggle.bind(null, result, toggle);
 
-    expect(result.current[0]).toBe(false);
-    var _toggle = result.current[1];
-    expect(typeof _toggle).toBe('function'); //toggle && assert new state
+    _actToggleTest();
 
-    (0, _reactHooks.act)(result.current[1]);
-    expect(result.current[0]).toBe(true);
-    expect(result.current[1]).toEqual(_toggle); //toggle && assert new state
-
-    (0, _reactHooks.act)(result.current[1]);
-    expect(result.current[0]).toBe(false);
-    expect(result.current[1]).toEqual(_toggle);
+    _actToggleTest();
   });
   test('should use bool initialValue', function () {
-    var _renderHook2 = (0, _reactHooks.renderHook)(function () {
-      return (0, _useToggle["default"])(true);
-    }),
-        result = _renderHook2.result; //assert initial state
+    var _renderInitialTest3 = _renderInitialTest(true, true),
+        result = _renderInitialTest3[0],
+        toggle = _renderInitialTest3[1];
 
+    var _actToggleTest = _testToggle.bind(null, result, toggle);
 
-    expect(result.current[0]).toBe(true); //toggle && assert new state
+    _actToggleTest();
 
-    (0, _reactHooks.act)(result.current[1]);
-    expect(result.current[0]).toBe(false);
+    _actToggleTest();
   });
   test('should convert to bool initialValue', function () {
-    var _renderHook3 = (0, _reactHooks.renderHook)(function () {
-      return (0, _useToggle["default"])(null);
-    }),
-        result = _renderHook3.result;
+    _renderInitialTest(null, false);
 
-    expect(result.current[0]).toBe(false);
+    _renderInitialTest(void 0, false);
 
-    var _renderHook4 = (0, _reactHooks.renderHook)(function () {
-      return (0, _useToggle["default"])('');
-    }),
-        r2 = _renderHook4.result;
+    _renderInitialTest('', false);
 
-    expect(r2.current[0]).toBe(false);
+    _renderInitialTest(0, false);
 
-    var _renderHook5 = (0, _reactHooks.renderHook)(function () {
-      return (0, _useToggle["default"])(0);
-    }),
-        r3 = _renderHook5.result;
+    _renderInitialTest(NaN, false);
 
-    expect(r3.current[0]).toBe(false);
+    _renderInitialTest(1, true);
 
-    var _renderHook6 = (0, _reactHooks.renderHook)(function () {
-      return (0, _useToggle["default"])(NaN);
-    }),
-        r4 = _renderHook6.result;
-
-    expect(r4.current[0]).toBe(false);
-
-    var _renderHook7 = (0, _reactHooks.renderHook)(function () {
-      return (0, _useToggle["default"])(1);
-    }),
-        r5 = _renderHook7.result;
-
-    expect(r5.current[0]).toBe(true);
-
-    var _renderHook8 = (0, _reactHooks.renderHook)(function () {
-      return (0, _useToggle["default"])('str');
-    }),
-        r6 = _renderHook8.result;
-
-    expect(r6.current[0]).toBe(true);
+    _renderInitialTest('str', true);
   });
 });
 //# sourceMappingURL=useToggle.test.js.map
