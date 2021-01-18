@@ -2,6 +2,8 @@
 import useToggle from '../hooks/useToggle';
 import useTable from './useTable';
 
+import crCn from '../zhn-utils/crCn';
+
 import ModalMenu from './ModalMenu';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
@@ -15,7 +17,7 @@ const {
 } = useTable;
 
 const Table = ({
-  className='',
+  className,
   gridId,
   thMoreStyle,
   rows,
@@ -26,8 +28,8 @@ const Table = ({
   , [isMenuMore, toggleMenuMore] = useMenu()
   , [_headers, toggleColumn] = useColumn(headers)
   , [{_rows, sortBy, sortTo}, sortByPn] = useSort(rows)
-  , _cn = isGridLine ? S.CL_GRID : ''
-  , _tableClassName = `${_cn} ${className}`;
+  , _tableCn = crCn([isGridLine, S.CL_GRID], className);
+
   return (
     <div style={S.WRAPPER_DIV}>
       <ModalMenu
@@ -42,7 +44,7 @@ const Table = ({
       <table
         role="grid"
         id={gridId}
-        className={_tableClassName}
+        className={_tableCn}
         style={S.TABLE}
       >
         <TableHead

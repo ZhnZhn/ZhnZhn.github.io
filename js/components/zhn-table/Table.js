@@ -11,6 +11,8 @@ var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useTable = _interopRequireDefault(require("./useTable"));
 
+var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
+
 var _ModalMenu = _interopRequireDefault(require("./ModalMenu"));
 
 var _TableHead = _interopRequireDefault(require("./TableHead"));
@@ -25,8 +27,7 @@ var useMenu = _useTable["default"].useMenu,
     useSort = _useTable["default"].useSort;
 
 var Table = function Table(_ref) {
-  var _ref$className = _ref.className,
-      className = _ref$className === void 0 ? '' : _ref$className,
+  var className = _ref.className,
       gridId = _ref.gridId,
       thMoreStyle = _ref.thMoreStyle,
       rows = _ref.rows,
@@ -48,8 +49,7 @@ var Table = function Table(_ref) {
       sortBy = _useSort$.sortBy,
       sortTo = _useSort$.sortTo,
       sortByPn = _useSort[1],
-      _cn = isGridLine ? _Style["default"].CL_GRID : '',
-      _tableClassName = _cn + " " + className;
+      _tableCn = (0, _crCn["default"])([isGridLine, _Style["default"].CL_GRID], className);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: _Style["default"].WRAPPER_DIV,
@@ -64,7 +64,7 @@ var Table = function Table(_ref) {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("table", {
       role: "grid",
       id: gridId,
-      className: _tableClassName,
+      className: _tableCn,
       style: _Style["default"].TABLE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_TableHead["default"], {
         gridId: gridId,
