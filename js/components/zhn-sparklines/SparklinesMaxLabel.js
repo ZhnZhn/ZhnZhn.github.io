@@ -11,18 +11,14 @@ var _max2 = _interopRequireDefault(require("./dataProcessing/max"));
 
 var _SparklinesLabel = _interopRequireDefault(require("./SparklinesLabel"));
 
-var DF_COLOR = "#8bc34a";
-var DF_FONT_SIZE = 14;
-var DF_DY = 4; //const DF_OPACITY = 0.7
-
-var SparklinesMaxLabel = function SparklinesMaxLabel(props) {
-  var data = props.data,
-      _props$dy = props.dy,
-      dy = _props$dy === void 0 ? DF_DY : _props$dy,
-      _props$color = props.color,
-      color = _props$color === void 0 ? DF_COLOR : _props$color,
-      _props$fontSize = props.fontSize,
-      fontSize = _props$fontSize === void 0 ? DF_FONT_SIZE : _props$fontSize;
+var SparklinesMaxLabel = function SparklinesMaxLabel(_ref) {
+  var data = _ref.data,
+      _ref$dy = _ref.dy,
+      dy = _ref$dy === void 0 ? 4 : _ref$dy,
+      _ref$color = _ref.color,
+      color = _ref$color === void 0 ? "#8bc34a" : _ref$color,
+      _ref$fontSize = _ref.fontSize,
+      fontSize = _ref$fontSize === void 0 ? 14 : _ref$fontSize;
 
   var _max = (0, _max2["default"])(data),
       _y = fontSize - dy;

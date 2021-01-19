@@ -11,22 +11,26 @@ var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _calcDirection = _interopRequireDefault(require("./dataProcessing/calcDirection"));
 
+var _style2 = _interopRequireDefault(require("./style"));
+
 //import PropTypes from 'prop-types';
 var _crWidth = function _crWidth(points, strokeWidth) {
-  return points && points.length >= 2 ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth)) : 0;
+  return points && points.length > 1 ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth)) : 0;
 };
 
-var SparklinesBars = function SparklinesBars(props) {
-  var _props$points = props.points,
-      points = _props$points === void 0 ? [] : _props$points,
-      height = props.height,
-      _props$style = props.style,
-      style = _props$style === void 0 ? {} : _props$style,
-      barWidth = props.barWidth,
-      _props$pointIndex = props.pointIndex,
-      pointIndex = _props$pointIndex === void 0 ? -1 : _props$pointIndex,
-      barStrokeColors = props.barStrokeColors,
-      _style$strokeWidth = style.strokeWidth,
+var SparklinesBars = function SparklinesBars(_ref) {
+  var _ref$points = _ref.points,
+      points = _ref$points === void 0 ? [] : _ref$points,
+      height = _ref.height,
+      _ref$style = _ref.style,
+      style = _ref$style === void 0 ? _style2["default"].BARS : _ref$style,
+      barWidth = _ref.barWidth,
+      _ref$pointIndex = _ref.pointIndex,
+      pointIndex = _ref$pointIndex === void 0 ? -1 : _ref$pointIndex,
+      _ref$barStrokeColors = _ref.barStrokeColors,
+      barStrokeColors = _ref$barStrokeColors === void 0 ? _style2["default"].COLORS : _ref$barStrokeColors;
+
+  var _style$strokeWidth = style.strokeWidth,
       strokeWidth = _style$strokeWidth === void 0 ? 0 : _style$strokeWidth,
       _width = barWidth || _crWidth(points);
 
@@ -50,24 +54,19 @@ var SparklinesBars = function SparklinesBars(props) {
 };
 /*
 SparklinesBars.propTypes = {
-    points: PropTypes.arrayOf(PropTypes.object),
+    points: PropTypes.arrayOf(PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number
+    })),
     height: PropTypes.number,
     style: PropTypes.object,
-    barWidth: PropTypes.number
+    barWidth: PropTypes.number,
+    pointIndex: PropTypes.number
+    barStrokeColors: PropTypes.arrayOf(PropTypes.object)
 };
 */
 
 
-SparklinesBars.defaultProps = {
-  style: {
-    fill: 'slategray'
-  },
-  barStrokeColors: {
-    '-1': 'red',
-    '0': 'black',
-    '1': 'green'
-  }
-};
 var _default = SparklinesBars;
 exports["default"] = _default;
 //# sourceMappingURL=SparklinesBars.js.map

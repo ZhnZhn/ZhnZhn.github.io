@@ -1,3 +1,4 @@
+import STYLE from './style'
 //import PropTypes from 'prop-types'
 
 if (!Math.sign) {
@@ -6,13 +7,17 @@ if (!Math.sign) {
 
 const calcEndSpotDirection = function(points) {
   return points.length < 2
-          ? 0
-          : Math.sign(points[points.length - 2].y - points[points.length - 1].y);
+    ? 0
+    : Math.sign(points[points.length - 2].y - points[points.length - 1].y);
 }
 
-const SparklinesSpots = (props) => {
-  const { points, size, style, spotColors } = props
-      , startSpot = (
+const SparklinesSpots = ({
+  points,
+  size=2,
+  style,
+  spotColors=STYLE.COLORS
+}) => {
+  const startSpot = (
                <circle
                   cx={points[0].x}
                   cy={points[0].y}
@@ -34,7 +39,7 @@ const SparklinesSpots = (props) => {
             {style && startSpot}
             {endSpot}
         </g>
-    )
+    );
 }
 
 /*
@@ -44,13 +49,5 @@ SparklinesSpots.propTypes = {
     spotColors: PropTypes.object
 };
 */
-SparklinesSpots.defaultProps = {
-    size: 2,
-    spotColors: {
-        '-1': 'red',
-        '0': 'black',
-        '1': 'green'
-    }
-}
 
 export default SparklinesSpots

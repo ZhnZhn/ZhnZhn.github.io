@@ -1,14 +1,22 @@
 //import PropTypes from 'prop-types';
 
 import calcDirection from './dataProcessing/calcDirection';
+import STYLE from './style';
 
-const _crWidth = (points, strokeWidth) => points && points.length >= 2
+const _crWidth = (points, strokeWidth) => points
+&& points.length > 1
   ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth))
   : 0;
 
-const SparklinesBars = (props) => {
-  const { points=[], height, style={}, barWidth, pointIndex=-1, barStrokeColors } = props
-  , { strokeWidth=0 } = style
+const SparklinesBars = ({
+  points=[],
+  height,
+  style=STYLE.BARS,
+  barWidth,
+  pointIndex=-1,
+  barStrokeColors=STYLE.COLORS
+}) => {
+  const { strokeWidth=0 } = style
   , _width = barWidth || _crWidth(points);
 
   return (
@@ -38,19 +46,16 @@ const SparklinesBars = (props) => {
 
 /*
 SparklinesBars.propTypes = {
-    points: PropTypes.arrayOf(PropTypes.object),
+    points: PropTypes.arrayOf(PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number
+    })),
     height: PropTypes.number,
     style: PropTypes.object,
-    barWidth: PropTypes.number
+    barWidth: PropTypes.number,
+    pointIndex: PropTypes.number
+    barStrokeColors: PropTypes.arrayOf(PropTypes.object)
 };
 */
-SparklinesBars.defaultProps = {
-    style: { fill: 'slategray' },
-    barStrokeColors: {
-        '-1': 'red',
-        '0': 'black',
-        '1': 'green'
-    }
-};
 
 export default SparklinesBars
