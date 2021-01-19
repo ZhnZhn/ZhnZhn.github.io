@@ -22,7 +22,7 @@ const ProgressLine = ({
   color='#2f7ed8',
   completed
 }) => {
-  const forceUpdate = useForceUpdate()[1]
+  const forceUpdate = useForceUpdate()
   , _refWasCompleted = useRef(false)
   , _refIdCompleted = useRef(null)
   , _refWasOpacied = useRef(false)

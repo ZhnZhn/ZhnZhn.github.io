@@ -1,5 +1,6 @@
 import { useReducer } from 'react'
 
-const useForceUpdate = () => useReducer( _ => Object.create(null));
+const _reducer = () => ({});
+const useForceUpdate = () => useReducer(_reducer)[1];
 
 export default useForceUpdate

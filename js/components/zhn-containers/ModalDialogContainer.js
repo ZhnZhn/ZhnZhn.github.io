@@ -5,11 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
+
+var _useForceUpdate = _interopRequireDefault(require("../hooks/useForceUpdate"));
 
 //import PropTypes from 'prop-types'
 var CL = {
@@ -29,68 +29,97 @@ var STYLE = {
   }
 };
 
-var ModalDialogContainer = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(ModalDialogContainer, _Component);
+var ModalDialogContainer = function ModalDialogContainer(_ref) {
+  var isShow = _ref.isShow,
+      _ref$timeout = _ref.timeout,
+      timeout = _ref$timeout === void 0 ? 450 : _ref$timeout,
+      children = _ref.children,
+      onClose = _ref.onClose;
 
-  function ModalDialogContainer() {
-    var _this;
+  var _refWasClosing = (0, _react.useRef)(true),
+      forceUpdate = (0, _useForceUpdate["default"])();
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+  (0, _react.useEffect)(function () {
+    var current = _refWasClosing.current;
+
+    if (current) {
+      setTimeout(forceUpdate, timeout);
     }
+  });
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.wasClosing = true;
-    return _this;
+  var _className, _style;
+
+  if (_refWasClosing.current) {
+    _className = CL.INIT;
+    _style = STYLE.HIDE;
+    _refWasClosing.current = false;
+  } else {
+    _className = isShow ? CL.SHOWING : CL.HIDING;
+    _style = isShow ? STYLE.SHOW : STYLE.HIDE_BACKGROUND;
+
+    if (!isShow) {
+      _refWasClosing.current = true;
+    }
   }
 
-  var _proto = ModalDialogContainer.prototype;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    className: _className,
+    style: _style,
+    onClick: onClose,
+    children: children
+  });
+};
+/*
+static propTypes = {
+  isShow  : PropTypes.bool,
+  timeout : PropTypes.number,
+  onClose : PropTypes.func
+}
+*/
 
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
-    var _this2 = this;
+/*
+class ModalDialogContainer extends Component {
 
-    if (this.wasClosing) {
-      setTimeout(function () {
-        _this2.setState({});
-      }, this.props.timeout);
+  static defaultProps = {
+    timeout : 450
+  }
+
+  wasClosing = true
+
+  componentDidUpdate(prevProps, prevState){
+    if (this.wasClosing){
+      setTimeout(
+        () => { this.setState({}) },
+        this.props.timeout
+      )
     }
-  };
+  }
 
-  _proto.render = function render() {
-    var _this$props = this.props,
-        isShow = _this$props.isShow,
-        children = _this$props.children,
-        onClose = _this$props.onClose;
-
-    var _className, _style;
-
-    if (this.wasClosing) {
-      _className = CL.INIT;
-      _style = STYLE.HIDE;
-      this.wasClosing = false;
+  render(){
+    const { isShow, children, onClose } = this.props;
+    let _className, _style;
+    if (this.wasClosing){
+       _className = CL.INIT;
+       _style = STYLE.HIDE;
+       this.wasClosing = false;
     } else {
       _className = isShow ? CL.SHOWING : CL.HIDING;
       _style = isShow ? STYLE.SHOW : STYLE.HIDE_BACKGROUND;
-
-      if (!isShow) {
+      if (!isShow){
         this.wasClosing = true;
       }
     }
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      className: _className,
-      style: _style,
-      onClick: onClose,
-      children: children
-    });
-  };
+    return (
+      <div className={_className} style={_style} onClick={onClose}>
+        {children}
+      </div>
+    );
+  }
+}
+*/
 
-  return ModalDialogContainer;
-}(_react.Component);
 
-ModalDialogContainer.defaultProps = {
-  timeout: 450
-};
 var _default = ModalDialogContainer;
 exports["default"] = _default;
 //# sourceMappingURL=ModalDialogContainer.js.map
