@@ -1,57 +1,52 @@
-import { Component } from 'react';
+import { memo, useState } from 'react';
+import useListen from '../hooks/useListen';
 
 import ProgressLine from '../zhn/ProgressLine';
 
 const C = {
-  LOADING : '#2f7ed8',
-  FAILED : '#ed5813'
+  LOADING: '#2f7ed8',
+  FAILED: '#ed5813'
 };
 
 const COMPLETE_TIMEOUT_MLS = 450;
 
-class ProgressLoading extends Component {
-  state = {
+const ProgressLoading = ({
+  store,
+  ACTIONS
+}) => {
+  const [{ completed, color }, setState] = useState({
     completed: 0,
     color: C.LOADING
-  }
+  });
 
-  componentDidMount(){
-    this.unsubscribe = this.props.store
-      .listenLoadingProgress(this._onStore);
-  }
-  componentWillUnmount(){
-    this.unsubscribe()
-  }
-  _onStore = (actionType) => {
-      const { ACTIONS } = this.props;
-      if (actionType === ACTIONS.LOADING){
-        this.setState({ completed: 35, color: C.LOADING })
-      } else if (actionType === ACTIONS.LOADING_COMPLETE){
-        setTimeout(
-          () => this.setState({ completed: 100, color: C.LOADING })
-        , COMPLETE_TIMEOUT_MLS)
-      } else if (actionType === ACTIONS.LOADING_FAILED){
-        this.setState({ completed: 100, color: C.FAILED })
-      }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.state.completed === nextState.completed) {
-      return false;
+  useListen(store, (actionType)=>{
+    if (actionType === ACTIONS.LOADING){
+      setState({ completed: 35, color: C.LOADING })
+    } else if (actionType === ACTIONS.LOADING_COMPLETE){
+      setTimeout(
+        () => setState({ completed: 100, color: C.LOADING })
+      , COMPLETE_TIMEOUT_MLS)
+    } else if (actionType === ACTIONS.LOADING_FAILED){
+      setState({ completed: 100, color: C.FAILED })
     }
-    return true;
-  }
+  }, 'listenLoadingProgress')
 
-  render(){
-    const { completed, color } = this.state;
-    return (
-      <ProgressLine
-         height={3}
-         color={color}
-         completed={completed}
-      />
-    );
-  }
+  return (
+    <ProgressLine
+       height={3}
+       color={color}
+       completed={completed}
+    />
+  );
+};
+
+/*
+ProgressLoading.propTypes = {
+  store: PropTypes.shape({
+    listenLoadingProgress: PropTypes.func
+  }),
+  ACTIONS: PropTypes.arrayOf(PropTypes.string)
 }
+*/
 
-export default ProgressLoading
+export default memo(ProgressLoading)
