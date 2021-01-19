@@ -1,4 +1,4 @@
-import { cloneElement, Children, PureComponent } from 'react';
+import { memo, Children, cloneElement } from 'react';
 //import PropTypes from 'prop-types';
 import SparklinesLine from './SparklinesLine';
 
@@ -15,60 +15,66 @@ import dataToPoints from './dataProcessing/dataToPoints';
 
 //fork https://github.com/borisyankov/react-sparklines
 
-const DEFAULT_DATA = []
-    , DEFAULT_WIDTH=240
-    , DEFAULT_HEIGHT=60
-    , DEFAULT_RATIO='none'
-    , DEFAULT_MARGIN = 2;
+const _isArr = Array.isArray;
 
-class Sparklines extends PureComponent {
-   /*
-     static propTypes = {
-        data: PropTypes.array,
-        limit: PropTypes.number,
-        width: PropTypes.number,
-        height: PropTypes.number,
-        svgWidth: PropTypes.number,
-        svgHeight: PropTypes.number,
-        preserveAspectRatio: PropTypes.string,
-        margin: PropTypes.number,
-        style: PropTypes.object,
-        min: PropTypes.number,
-        max: PropTypes.number
-     }
-  */
+const DF = {
+  WIDTH: 240,
+  HEIGHT: 60,
+  RATIO: 'none',
+  MARGIN: 2
+};
 
-  render() {
-      const {
-        data=DEFAULT_DATA, limit,
-        width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
-        svgWidth, svgHeight,
-        preserveAspectRatio=DEFAULT_RATIO,
-        margin=DEFAULT_MARGIN,
-        style, max, min
-      } = this.props;
+const Sparklines = memo(({
+  data,
+  limit,
+  style,
+  preserveAspectRatio=DF.RATIO,
+  width=DF.WIDTH,
+  height=DF.HEIGHT,
+  svgWidth,
+  svgHeight,
+  margin=DF.MARGIN,
+  min,
+  max,
+  children
+}) => {
 
-      if (data.length === 0) return null;
+  if (!_isArr(data) || data.length === 0) {
+    return null;
+  }
 
-      const points = dataToPoints({ data, limit, width, height, margin, max, min })
-      , svgOpts = {
-        style: style,
-        viewBox: `0 0 ${width} ${height}`,
-        preserveAspectRatio: preserveAspectRatio
-      };
+  const points = dataToPoints({ data, limit, width, height, margin, max, min })
+  , svgOpts = {
+     style, preserveAspectRatio,
+     viewBox: `0 0 ${width} ${height}`,
+     width: svgWidth > 0 ? svgWidth : void 0,
+     height: svgHeight > 0 ? svgHeight : void 0
+  };
 
-      if (svgWidth > 0) svgOpts.width = svgWidth;
-      if (svgHeight > 0) svgOpts.height = svgHeight;
+  return (
+    <svg {...svgOpts} >
+      {Children.map(children, child =>
+          cloneElement(child, { data, points, width, height, margin })
+      )}
+    </svg>
+  );
+});
 
-      return (
-        <svg {...svgOpts} >
-            {Children.map(this.props.children, child =>
-                cloneElement(child, { data, points, width, height, margin })
-            )}
-        </svg>
-     );
-   }
+/*
+static propTypes = {
+  data: PropTypes.array,
+  limit: PropTypes.number,
+  style: PropTypes.object,
+  preserveAspectRatio: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  svgWidth: PropTypes.number,
+  svgHeight: PropTypes.number,
+  margin: PropTypes.number,
+  min: PropTypes.number,
+  max: PropTypes.number
 }
+*/
 
 export {
   Sparklines, SparklinesLine,
