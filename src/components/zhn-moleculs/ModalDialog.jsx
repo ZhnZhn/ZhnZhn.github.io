@@ -2,7 +2,7 @@ import { forwardRef, useRef, useCallback, useEffect, useImperativeHandle } from 
 //import PropTypes from "prop-types";
 import use from '../hooks/use'
 
-import { focusNode } from '../zhn-utils/utils'
+import focusNode  from '../zhn-utils/focusNode'
 
 import SvgClose from '../zhn/SvgClose'
 import FlatButton from '../zhn-m/FlatButton'
@@ -99,7 +99,7 @@ const ModalDialog = forwardRef(({
   /* _focusPrev */
   /*eslint-enable react-hooks/exhaustive-deps */
   , _hKeyDown = useKeyEscape(_hClose, [_hClose])
-  , forceUpdate = useForceUpdate()[1]
+  , forceUpdate = useForceUpdate()
   , TS = useTheme(TH_ID);
 
   /*eslint-disable react-hooks/exhaustive-deps */

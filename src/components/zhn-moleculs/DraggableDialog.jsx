@@ -1,7 +1,7 @@
 import { forwardRef, useRef, useCallback, useEffect, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
 import use from '../hooks/use'
-import { focusNode } from '../zhn-utils/utils'
+import focusNode  from '../zhn-utils/focusNode'
 
 import ModalSlider from '../zhn-modal-slider/ModalSlider'
 import SvgMore from '../zhn/SvgMore'

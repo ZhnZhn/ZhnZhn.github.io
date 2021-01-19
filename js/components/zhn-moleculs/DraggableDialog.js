@@ -13,7 +13,7 @@ var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _utils = require("../zhn-utils/utils");
+var _focusNode = _interopRequireDefault(require("../zhn-utils/focusNode"));
 
 var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
 
@@ -136,10 +136,10 @@ var DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref3, ref) 
       _refIsShow = (0, _react.useRef)(isShow),
       _focus = (0, _react.useCallback)(function () {
     _refPrevFocused.current = document.activeElement;
-    (0, _utils.focusNode)(_getCurrent(_refBtMore) || _getCurrent(_refRootDiv));
+    (0, _focusNode["default"])(_getCurrent(_refBtMore) || _getCurrent(_refRootDiv));
   }, []),
       _focusPrev = (0, _react.useCallback)(function () {
-    (0, _utils.focusNode)(_getCurrent(_refPrevFocused));
+    (0, _focusNode["default"])(_getCurrent(_refPrevFocused));
     _refPrevFocused.current = null;
   }, []),
       _hClose = (0, _react.useCallback)(function () {

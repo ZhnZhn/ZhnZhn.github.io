@@ -13,7 +13,7 @@ var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _utils = require("../zhn-utils/utils");
+var _focusNode = _interopRequireDefault(require("../zhn-utils/focusNode"));
 
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 
@@ -86,10 +86,10 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
       _refIsShow = (0, _react.useRef)(isShow),
       _focus = (0, _react.useCallback)(function () {
     _refPrevFocused.current = document.activeElement;
-    (0, _utils.focusNode)(_refRoot.current);
+    (0, _focusNode["default"])(_refRoot.current);
   }, []),
       _focusPrev = (0, _react.useCallback)(function () {
-    (0, _utils.focusNode)(_refPrevFocused.current);
+    (0, _focusNode["default"])(_refPrevFocused.current);
     _refPrevFocused.current = null;
   }, []),
       _hClick = (0, _react.useCallback)(function (event) {
@@ -107,7 +107,7 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
       _hKeyDown = useKeyEscape(_hClose, [_hClose]),
-      forceUpdate = useForceUpdate()[1],
+      forceUpdate = useForceUpdate(),
       TS = useTheme(TH_ID);
   /*eslint-disable react-hooks/exhaustive-deps */
 
