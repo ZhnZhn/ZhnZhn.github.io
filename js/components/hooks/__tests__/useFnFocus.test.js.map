@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../../src/components/hooks/__tests__/useFnFocus.test.js"],"names":["describe","test","_fn","jest","fn","_focus","result","_ref","current","focus","_doFnFocus","expect","toBe","toEqual","toBeCalledTimes"],"mappings":";;;;AAAA;;AACA;;AAEAA,QAAQ,CAAC,YAAD,EAAe,YAAI;AACzBC,EAAAA,IAAI,CAAC,qCAAD,EAAwC,YAAI;AAC9C,QAAMC,GAAG,GAAGC,IAAI,CAACC,EAAL,CAAQ,YAAI,CAAE,CAAd,CAAZ;;AACA,QAAMC,MAAM,GAAGF,IAAI,CAACC,EAAL,CAAQ,YAAM,CAAE,CAAhB,CAAf;;AAF8C,sBAI7B,4BAAW;AAAA,aAAM,4BAAWF,GAAX,CAAN;AAAA,KAAX,CAJ6B;AAAA,QAIvCI,MAJuC,eAIvCA,MAJuC;;AAM9C,QAAMC,IAAI,GAAGD,MAAM,CAACE,OAAP,CAAe,CAAf,CAAb;AACAD,IAAAA,IAAI,CAACC,OAAL,GAAe;AAAEC,MAAAA,KAAK,EAAEJ;AAAT,KAAf;AACA,QAAMK,UAAU,GAAGJ,MAAM,CAACE,OAAP,CAAe,CAAf,CAAnB;AACAG,IAAAA,MAAM,CAAC,OAAOD,UAAR,CAAN,CAA0BE,IAA1B,CAA+B,UAA/B;AAEA,yBAAIF,UAAJ;AACAC,IAAAA,MAAM,CAACL,MAAM,CAACE,OAAP,CAAe,CAAf,CAAD,CAAN,CAA0BK,OAA1B,CAAkCH,UAAlC;AACAC,IAAAA,MAAM,CAACT,GAAD,CAAN,CAAYY,eAAZ,CAA4B,CAA5B;AACAH,IAAAA,MAAM,CAACJ,IAAI,CAACC,OAAL,CAAaC,KAAd,CAAN,CAA2BK,eAA3B,CAA2C,CAA3C;AAEA,yBAAIJ,UAAJ;AACAC,IAAAA,MAAM,CAACT,GAAD,CAAN,CAAYY,eAAZ,CAA4B,CAA5B;AACAH,IAAAA,MAAM,CAACJ,IAAI,CAACC,OAAL,CAAaC,KAAd,CAAN,CAA2BK,eAA3B,CAA2C,CAA3C;AAEAP,IAAAA,IAAI,CAACC,OAAL,CAAaC,KAAb,GAAqB,IAArB;AACA,yBAAIC,UAAJ;AACAC,IAAAA,MAAM,CAACT,GAAD,CAAN,CAAYY,eAAZ,CAA4B,CAA5B;AACAH,IAAAA,MAAM,CAACN,MAAD,CAAN,CAAeS,eAAf,CAA+B,CAA/B;AAEAP,IAAAA,IAAI,CAACC,OAAL,GAAe,IAAf;AACA,yBAAIE,UAAJ;AACAC,IAAAA,MAAM,CAACT,GAAD,CAAN,CAAYY,eAAZ,CAA4B,CAA5B;AACAH,IAAAA,MAAM,CAACN,MAAD,CAAN,CAAeS,eAAf,CAA+B,CAA/B;AACD,GA7BG,CAAJ;AA8BD,CA/BO,CAAR","sourcesContent":["import {renderHook, act} from '@testing-library/react-hooks'\r\nimport useFnFocus from '../useFnFocus'\r\n\r\ndescribe('useFnFocus', ()=>{\r\n  test('should after call fn call ref focus', ()=>{\r\n    const _fn = jest.fn(()=>{})\r\n    const _focus = jest.fn(() => {})\r\n\r\n    const {result} = renderHook(() => useFnFocus(_fn))\r\n\r\n    const _ref = result.current[0]\r\n    _ref.current = { focus: _focus }\r\n    const _doFnFocus = result.current[1]\r\n    expect(typeof _doFnFocus).toBe('function')\r\n\r\n    act(_doFnFocus)\r\n    expect(result.current[1]).toEqual(_doFnFocus)\r\n    expect(_fn).toBeCalledTimes(1)\r\n    expect(_ref.current.focus).toBeCalledTimes(1)\r\n\r\n    act(_doFnFocus)\r\n    expect(_fn).toBeCalledTimes(2)\r\n    expect(_ref.current.focus).toBeCalledTimes(2)\r\n\r\n    _ref.current.focus = null\r\n    act(_doFnFocus)\r\n    expect(_fn).toBeCalledTimes(3)\r\n    expect(_focus).toBeCalledTimes(2)\r\n\r\n    _ref.current = null\r\n    act(_doFnFocus)\r\n    expect(_fn).toBeCalledTimes(4)\r\n    expect(_focus).toBeCalledTimes(2)\r\n  })\r\n})\r\n"],"file":"useFnFocus.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/hooks/__tests__/useFnFocus.test.js"
+ ],
+ "file": "../../../../src/components/hooks/__tests__/useFnFocus.test.js",
+ "names": [
+  "_getHookRef",
+  "result",
+  "current",
+  "_getHookFn",
+  "_actHookFn",
+  "hookFn",
+  "fn",
+  "focus",
+  "timesFn",
+  "timesFocus",
+  "expect",
+  "toEqual",
+  "toBeCalledTimes",
+  "describe",
+  "test",
+  "jest",
+  "ref",
+  "toBe",
+  "_actFnFocus",
+  "bind"
+ ],
+ "mappings": ";;;;AAAA;;AACA;;AAEA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAAAC,MAAM;AAAA,SAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAAJ;AAAA,CAA1B;;AACA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAAAF,MAAM;AAAA,SAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAAJ;AAAA,CAAzB;;AAEA,IAAME,UAAU,GAAG,SAAbA,UAAa,CACjBH,MADiB,EACTI,MADS,EAEjBC,EAFiB,EAEbC,KAFa,EAGjBC,OAHiB,EAGRC,UAHQ,EAId;AACH,uBAAIJ,MAAJ;AACAK,EAAAA,MAAM,CAACP,UAAU,CAACF,MAAD,CAAX,CAAN,CAA2BU,OAA3B,CAAmCN,MAAnC;AACAK,EAAAA,MAAM,CAACJ,EAAD,CAAN,CAAWM,eAAX,CAA2BJ,OAA3B;AACAE,EAAAA,MAAM,CAACH,KAAD,CAAN,CAAcK,eAAd,CAA8BH,UAA9B;AACD,CATD;;AAWAI,QAAQ,CAAC,YAAD,EAAe,YAAI;AACzBC,EAAAA,IAAI,CAAC,qCAAD,EAAwC,YAAI;AAC9C,QAAMR,EAAE,GAAGS,IAAI,CAACT,EAAL,EAAX;AAAA,QACEC,KAAK,GAAGQ,IAAI,CAACT,EAAL,EADV;;AAD8C,sBAI3B,4BAAW;AAAA,aAAM,4BAAWA,EAAX,CAAN;AAAA,KAAX,CAJ2B;AAAA,QAItCL,MAJsC,eAItCA,MAJsC;;AAK9C,QAAMe,GAAG,GAAGhB,WAAW,CAACC,MAAD,CAAvB;;AACAe,IAAAA,GAAG,CAACd,OAAJ,GAAc;AAAEK,MAAAA,KAAK,EAALA;AAAF,KAAd;;AACA,QAAMF,MAAM,GAAGF,UAAU,CAACF,MAAD,CAAzB;;AACAS,IAAAA,MAAM,CAAC,OAAOL,MAAR,CAAN,CAAsBY,IAAtB,CAA2B,UAA3B;;AAEA,QAAMC,WAAW,GAAGd,UAAU,CAACe,IAAX,CAAgB,IAAhB,EAAsBlB,MAAtB,EAA8BI,MAA9B,EAAsCC,EAAtC,EAA0CC,KAA1C,CAApB;;AACAW,IAAAA,WAAW,CAAC,CAAD,EAAI,CAAJ,CAAX;;AACAA,IAAAA,WAAW,CAAC,CAAD,EAAI,CAAJ,CAAX;;AAEAF,IAAAA,GAAG,CAACd,OAAJ,CAAYK,KAAZ,GAAoB,IAApB;;AACAW,IAAAA,WAAW,CAAC,CAAD,EAAI,CAAJ,CAAX;;AAEAF,IAAAA,GAAG,CAACd,OAAJ,GAAc,IAAd;;AACAgB,IAAAA,WAAW,CAAC,CAAD,EAAI,CAAJ,CAAX;AACD,GAnBG,CAAJ;AAoBD,CArBO,CAAR"
+}

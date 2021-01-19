@@ -1,35 +1,39 @@
 import {renderHook, act} from '@testing-library/react-hooks'
 import useFnFocus from '../useFnFocus'
 
+const _getHookRef = result => result.current[0];
+const _getHookFn = result => result.current[1];
+
+const _actHookFn = (
+  result, hookFn,
+  fn, focus,
+  timesFn, timesFocus
+) => {
+  act(hookFn)
+  expect(_getHookFn(result)).toEqual(hookFn)
+  expect(fn).toBeCalledTimes(timesFn)
+  expect(focus).toBeCalledTimes(timesFocus)
+};
+
 describe('useFnFocus', ()=>{
   test('should after call fn call ref focus', ()=>{
-    const _fn = jest.fn(()=>{})
-    const _focus = jest.fn(() => {})
+    const fn = jest.fn()
+    , focus = jest.fn();
 
-    const {result} = renderHook(() => useFnFocus(_fn))
+    const { result } = renderHook(() => useFnFocus(fn));
+    const ref = _getHookRef(result);
+    ref.current = { focus }
+    const hookFn = _getHookFn(result);
+    expect(typeof hookFn).toBe('function')
 
-    const _ref = result.current[0]
-    _ref.current = { focus: _focus }
-    const _doFnFocus = result.current[1]
-    expect(typeof _doFnFocus).toBe('function')
+    const _actFnFocus = _actHookFn.bind(null, result, hookFn, fn, focus);
+    _actFnFocus(1, 1)
+    _actFnFocus(2, 2)
 
-    act(_doFnFocus)
-    expect(result.current[1]).toEqual(_doFnFocus)
-    expect(_fn).toBeCalledTimes(1)
-    expect(_ref.current.focus).toBeCalledTimes(1)
+    ref.current.focus = null
+    _actFnFocus(3, 2)
 
-    act(_doFnFocus)
-    expect(_fn).toBeCalledTimes(2)
-    expect(_ref.current.focus).toBeCalledTimes(2)
-
-    _ref.current.focus = null
-    act(_doFnFocus)
-    expect(_fn).toBeCalledTimes(3)
-    expect(_focus).toBeCalledTimes(2)
-
-    _ref.current = null
-    act(_doFnFocus)
-    expect(_fn).toBeCalledTimes(4)
-    expect(_focus).toBeCalledTimes(2)
+    ref.current = null
+    _actFnFocus(4, 2)
   })
 })
