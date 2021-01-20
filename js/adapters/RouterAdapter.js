@@ -27,8 +27,6 @@ var _StatFinland = _interopRequireDefault(require("./stat-finland/StatFinland"))
 
 var _AlphaVantage = _interopRequireDefault(require("./alpha/AlphaVantage"));
 
-var _Barchart = _interopRequireDefault(require("./barchart/Barchart"));
-
 var _Iex = _interopRequireDefault(require("./iex/Iex"));
 
 var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
@@ -72,7 +70,6 @@ var RouterAdapter = (0, _extends2["default"])({
   StatSweden: _StatSweden["default"],
   StatFinland: _StatFinland["default"],
   AlphaVantage: _AlphaVantage["default"],
-  Barchart: _Barchart["default"],
   Iex: _Iex["default"],
   Fmp: _Fmp["default"],
   Bea: _Bea["default"],

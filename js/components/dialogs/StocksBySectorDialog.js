@@ -94,9 +94,6 @@ var SOURCE_OPTIONS = [{
     interval: 'Daily',
     outputsize: 'compact'
   }
-}, {
-  caption: 'Barchart: 6 Months',
-  value: 'B'
 }].concat(IEX_SOURCES);
 var DF_SOURCE = SOURCE_OPTIONS[0];
 

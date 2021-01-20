@@ -1,13 +1,6 @@
 {
   "menu":[
-    {
-      "caption": "Barchart",
-      "items": [
-        { "id": "FT_BR_ENERGY" },
-        { "id": "FT_BR_FINANCIAL" },
-        { "id": "FT_BR_GRAIN" }
-      ]
-    },{ "caption": "Quandl",
+    { "caption": "Quandl",
       "items": [
           { "id": "FT_CHINA_FINANCE_FUTURE" },
           { "id": "FT_DCE_FUTURE" },
@@ -17,24 +10,7 @@
       ]
     }
   ],
-  "items": {
-    "FT_BR": {
-      "dialogProps": {
-        "rootUri": "./data/futures-markets/",
-        "descrUrl": "./data/futures-markets/barchart.html",
-        "spT": "id",
-        "loadId": "B",
-        "isFd": true,
-        "isOpt": true,
-        "isCh": false,
-        "nInitFromDate": 1,
-        "noDate": true,        
-        "dfProps": {
-          "dfT": "FT"
-        },
-        "dataSource": "Barchart Market Data Solutions"
-      }
-    },
+  "items": {    
     "FT_Q": {
       "dialogProps": {
         "loadId": "Q",
@@ -51,46 +27,7 @@
             "Turnover"
         ]
       }
-    },
-    "FT_BR_ENERGY": {
-      "type": "FT_BR_ENERGY",
-      "menuTitle": "Energies",
-      "contFullCaption": "Barchart: Energy Futures",
-      "addProps": "FT_BR",
-      "dialogProps": {
-        "selectProps": [
-          [ "Futures","barchart-energy" ],
-          [ "Month","barchart-month" ],
-          [ "Year","barchart-year" ]
-        ]
-      }
-    },
-    "FT_BR_FINANCIAL": {
-      "type": "FT_BR_FINANCIAL",
-      "menuTitle": "Financials",
-      "contFullCaption": "Barchart: Financials Futures",
-      "addProps": "FT_BR",
-      "dialogProps": {
-        "selectProps": [
-          [ "Futures","barchart-financial" ],
-          [ "Month","barchart-month" ],
-          [ "Year","barchart-year" ]
-        ]
-      }
-    },
-    "FT_BR_GRAIN": {
-      "type": "FT_BR_GRAIN",
-      "menuTitle": "Grains",
-      "contFullCaption": "Barchart: Grains Futures",
-      "addProps": "FT_BR",
-      "dialogProps": {
-        "selectProps": [
-          [ "Futures","barchart-grain" ],
-          [ "Month","barchart-month" ],
-          [ "Year","barchart-year" ]
-        ]
-      }
-    },
+    },            
     "FT_CHINA_FINANCE_FUTURE": {
         "type": "FT_CHINA_FINANCE_FUTURE",
         "menuTitle": "China Finance FE",

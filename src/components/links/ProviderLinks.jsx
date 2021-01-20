@@ -19,7 +19,6 @@ const LINK_CONFIGS = [
  ["DbNomics", "DB NOMICS", "https://db.nomics.world", S.DARK_GREEN],
  ["Iex", "IEX Cloud", "https://iexcloud.io"],
  ["Fmp", "Financial Modeling Prep", "https://financialmodelingprep.com"],
- ["Barchart", "Barchart Market Data", "https://www.barchartmarketdata.com"],
  ["AlphaVantage", "Alpha Vantage", "https://www.alphavantage.co"],
  ["Eurostat", "https://ec.europa.eu/eurostat/"],
  ["UnComtrade", "UN Comtrade", "https://comtrade.un.org"],

@@ -9,7 +9,6 @@ import StatNorway from './stat-norway/StatNorway'
 import StatSweden from './stat-sweden/StatSweden'
 import StatFinland from './stat-finland/StatFinland'
 import AlphaVantage from './alpha/AlphaVantage'
-import Barchart from './barchart/Barchart'
 import Iex from './iex/Iex'
 import Fmp from './fmp/Fmp'
 import Bea from './bea/Bea'
@@ -40,7 +39,6 @@ const RouterAdapter = {
   StatSweden,
   StatFinland,
   AlphaVantage,
-  Barchart,
   Iex,
   Fmp,
   Bea,

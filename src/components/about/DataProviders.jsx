@@ -51,8 +51,9 @@ const DP = [
   Link.CoinLore, Link.Coinpaprika, Link.Binance, Link.Bitstamp
 ]
 , DP_KEY = [
-  Link.Barchart, Link.AlphaVantage, Link.Iex,
-  Link.Bea, Link.Eia, Link.Fmp, Link.Intrinio
+  Link.AlphaVantage, Link.Iex,
+  Link.Fmp, Link.Intrinio,
+  Link.Bea, Link.Eia
 ];
 
 const Links = ({ list }) => list.map((LinkComp, index) => (
@@ -83,7 +84,7 @@ const DataProviders = ({ isClose }) => (
         <Links list={DP} />
       </p>
       <OpenClose
-        caption="(8) Required API Key:"
+        caption="(7) Required API Key:"
         style={ST.OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}

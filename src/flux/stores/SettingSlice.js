@@ -2,8 +2,8 @@ import { LoadType as LT } from '../../constants/Type'
 
 const _settings = {};
 const _withApiKey = [
-  LT.B, LT.AL,
-  LT.BEA, LT.EIA, LT.INTR, LT.IEX, LT.FMP
+  LT.AL, LT.IEX, LT.FMP, LT.INTR,
+  LT.BEA, LT.EIA
 ];
 const _withProxy = [
   LT.FAO,
@@ -11,10 +11,8 @@ const _withProxy = [
 ];
 const _apiTitle = {
   DF: '',
-  [LT.B]: 'Barchart Market Data',
   [LT.AL]: 'Alpha Vantage',
   [LT.IEX]: 'IEX Cloud',
-  //[LT.WTD]: 'World Trading Data',
   [LT.BEA]: 'BEA',
   [LT.EIA]: 'EIA',
   [LT.FMP]: 'FMP',

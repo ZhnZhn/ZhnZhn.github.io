@@ -8,12 +8,12 @@ var _Type = require("../../constants/Type");
 var _apiTitle2;
 
 var _settings = {};
-var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR, _Type.LoadType.IEX, _Type.LoadType.FMP];
+var _withApiKey = [_Type.LoadType.AL, _Type.LoadType.IEX, _Type.LoadType.FMP, _Type.LoadType.INTR, _Type.LoadType.BEA, _Type.LoadType.EIA];
 var _withProxy = [_Type.LoadType.FAO, _Type.LoadType.CRC];
 
 var _apiTitle = (_apiTitle2 = {
   DF: ''
-}, _apiTitle2[_Type.LoadType.B] = 'Barchart Market Data', _apiTitle2[_Type.LoadType.AL] = 'Alpha Vantage', _apiTitle2[_Type.LoadType.IEX] = 'IEX Cloud', _apiTitle2[_Type.LoadType.BEA] = 'BEA', _apiTitle2[_Type.LoadType.EIA] = 'EIA', _apiTitle2[_Type.LoadType.FMP] = 'FMP', _apiTitle2[_Type.LoadType.INTR] = 'Intrinio', _apiTitle2[_Type.LoadType.FAO] = 'FAOSTAT', _apiTitle2[_Type.LoadType.CRC] = 'CryptoCompare Information', _apiTitle2);
+}, _apiTitle2[_Type.LoadType.AL] = 'Alpha Vantage', _apiTitle2[_Type.LoadType.IEX] = 'IEX Cloud', _apiTitle2[_Type.LoadType.BEA] = 'BEA', _apiTitle2[_Type.LoadType.EIA] = 'EIA', _apiTitle2[_Type.LoadType.FMP] = 'FMP', _apiTitle2[_Type.LoadType.INTR] = 'Intrinio', _apiTitle2[_Type.LoadType.FAO] = 'FAOSTAT', _apiTitle2[_Type.LoadType.CRC] = 'CryptoCompare Information', _apiTitle2);
 
 var _isUndef = function _isUndef(value) {
   return typeof value === 'undefined';

@@ -8,11 +8,6 @@
         { "id": "SM_UNICORN_RESEARCH" }
       ]
     },{
-      "caption": "Barchart",
-      "items": [
-        { "id": "SM_B_STOCK" }
-      ]
-    },{
       "caption": "Alpha Vantage",
       "items": [
         { "caption": "Historical Prices",
@@ -77,18 +72,7 @@
       ]
     }
   ],
-  "items" : {
-    "SM_BR": {
-      "dialogProps": {
-        "isOpt": true,
-        "isCh": false,
-        "isFd": true,
-        "spT": "id",
-        "rootUri":  "./data/stock-markets/",
-        "descrUrl" : "./data/stock-markets/barchart.html",
-        "loadId" : "B"
-      }
-    },
+  "items" : {    
     "SM_BASE_INTR": {
       "dialogProps": {
         "descrUrl" : "./data/stock-markets/intrinio.html",
@@ -242,24 +226,7 @@
         "loadId" : "Q",
         "dataSource" : "Unicorn Research Corporation (Code: URC)"
       }
-    },
-    "SM_B_STOCK" : {
-        "type" : "SM_B_STOCK",
-        "menuTitle" : "Nasdaq, Nyse",
-        "dialogCaption" : "Barchart Stock Prices",
-        "contFullCaption": "Barchart: Stock Prices Nasdaq, Nyse",
-        "addProps": "SM_BR",
-        "dialogProps" : {
-          "nInitFromDate" : 1,
-          "selectProps": [
-            [ "Stock", "wiki", "tickets", true ]
-          ],
-          "linkFn" : "NASDAQ",
-          "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adj. Close" ],
-          "dataSource" : "Barchart Market Data Solutions"
-        }
-    },
+    },    
 
     "SM_A_INDICATOR" : {
         "type" : "SM_A_INDICATOR",

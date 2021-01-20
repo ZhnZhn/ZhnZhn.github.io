@@ -67,7 +67,6 @@ var ChartType = {
 exports.ChartType = ChartType;
 var LoadType = {
   Q: 'Q',
-  B: 'B',
   AL: 'AL',
   IEX: 'IEX',
   FMP: 'FMP',
