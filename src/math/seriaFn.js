@@ -11,7 +11,8 @@ const {
   getZeroIndexFromEnd
 } = fns
 
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, _isNaN = Number.isNaN || isNaN;
 
 const _isNotEmptyArr = arr => _isArr(arr)
  && arr.length > 0;
@@ -163,7 +164,7 @@ const fn = {
     , _numberOfPoints = 0
     , i = 0
     , _y;
-    for (;i<data.length;i++) {      
+    for (;i<data.length;i++) {
       _y = getY(data[i])
       if (isNumber(_y)) {
         _sum = _sum.add(_y)
@@ -171,11 +172,14 @@ const fn = {
       }
     }
     const _maxIndex = data.length - 1
-    , _avg = parseInt(_sum.div(_numberOfPoints).toFixed(0), 10);
-    return [
-      [getX(data[0]), _avg],
-      [getX(data[_maxIndex]), _avg]
-    ];
+    , _avg = _numberOfPoints !== 0
+        ? parseInt(_sum.div(_numberOfPoints).toFixed(0), 10)
+        : NaN;
+    return _isNaN(_avg) ? []
+     : [
+         [getX(data[0]), _avg],
+         [getX(data[_maxIndex]), _avg]
+       ];
   },
 
   median: (data) => {

@@ -16,7 +16,9 @@ var isNumber = _seriaHelperFn["default"].isNumber,
     fGetY = _seriaHelperFn["default"].fGetY,
     getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
     getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
-var _isArr = Array.isArray;
+
+var _isArr = Array.isArray,
+    _isNaN = Number.isNaN || isNaN;
 
 var _isNotEmptyArr = function _isNotEmptyArr(arr) {
   return _isArr(arr) && arr.length > 0;
@@ -202,9 +204,9 @@ var fn = {
     }
 
     var _maxIndex = data.length - 1,
-        _avg = parseInt(_sum.div(_numberOfPoints).toFixed(0), 10);
+        _avg = _numberOfPoints !== 0 ? parseInt(_sum.div(_numberOfPoints).toFixed(0), 10) : NaN;
 
-    return [[getX(data[0]), _avg], [getX(data[_maxIndex]), _avg]];
+    return _isNaN(_avg) ? [] : [[getX(data[0]), _avg], [getX(data[_maxIndex]), _avg]];
   },
   median: function median(data) {
     if (!_isNotEmptyArr(data)) {

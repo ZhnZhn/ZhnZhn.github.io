@@ -199,6 +199,7 @@ describe('mean', ()=>{
     expect(fn([[1, null], [2, 3], [3, NaN]])).toEqual([[1,3], [3,3]])
   })
   test('should return [] in edge case for input', ()=>{
+    expect(fn([[1, null], [2, void 0], [3, NaN]])).toEqual([])
     expect(fn()).toEqual([])
     expect(fn(null)).toEqual([])
     expect(fn([])).toEqual([])
