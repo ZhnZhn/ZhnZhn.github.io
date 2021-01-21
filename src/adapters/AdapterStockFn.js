@@ -1,7 +1,7 @@
 import AdapterFn from './AdapterFn'
 
 const {
-  ymdToUTC,
+  ymdhmsToUTC,
   crVolumePoint,
   crAthPoint
 } = AdapterFn;
@@ -9,7 +9,7 @@ const {
 const _isUndef = v => typeof v === 'undefined';
 
 const AdapterStockFn = {
-  toSeriesData: ({ arr=[], toDate=ymdToUTC, seriaOption={}, option={} }) => {
+  toSeriesData: ({ arr=[], toDate=ymdhmsToUTC, seriaOption={}, option={} }) => {
     const {
       isAllSeries=true,
       pnDate='date',

@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
-var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+var ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
     crAthPoint = _AdapterFn["default"].crAthPoint;
 
@@ -20,7 +20,7 @@ var AdapterStockFn = {
     var _ref$arr = _ref.arr,
         arr = _ref$arr === void 0 ? [] : _ref$arr,
         _ref$toDate = _ref.toDate,
-        toDate = _ref$toDate === void 0 ? ymdToUTC : _ref$toDate,
+        toDate = _ref$toDate === void 0 ? ymdhmsToUTC : _ref$toDate,
         _ref$seriaOption = _ref.seriaOption,
         seriaOption = _ref$seriaOption === void 0 ? {} : _ref$seriaOption,
         _ref$option = _ref.option,
