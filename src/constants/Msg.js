@@ -48,10 +48,7 @@ const Msg = {
      withoutProxy: (providerName) => ({
        caption : 'Without Proxy Server',
        descr : `${_crForReqToken(providerName)} proxy server is required. Could be set in dialog SETTINGS [s].`
-     }),
-     RUNTIME_ERROR : {
-        caption : 'Runtime Error'
-     },
+     }),     
      TOO_MANY_REQUEST: {
        caption: 'Http Code 429',
        descr: 'Too many request in a given amount of time (rate limiting)'

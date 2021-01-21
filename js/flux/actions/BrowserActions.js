@@ -23,7 +23,7 @@ var _RouterDialog = _interopRequireDefault(require("../logic/RouterDialog"));
 
 var _fnFetch = require("../../utils/fnFetch");
 
-var _fnCatch = require("../logic/fnCatch");
+var _onCatch = _interopRequireDefault(require("../logic/onCatch"));
 
 var _Reflux$createActions;
 
@@ -102,7 +102,7 @@ BA[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {
     option: option,
     onFetch: _fnFetchSourceMenu,
     onCompleted: this.completed,
-    onCatch: _fnCatch.fnCatch,
+    onCatch: _onCatch["default"],
     onFailed: this.failed
   });
 });

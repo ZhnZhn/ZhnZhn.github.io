@@ -8,7 +8,7 @@ import RouterModalDialog from '../../components/dialogs/RouterModalDialog'
 import RouterDialog from '../logic/RouterDialog'
 
 import { fetchJson } from '../../utils/fnFetch'
-import { fnCatch } from '../logic/fnCatch';
+import onCatch from '../logic/onCatch'
 
 export const BrowserActionTypes = {
   SHOW_BROWSER_DYNAMIC: 'showBrowserDynamic',
@@ -79,7 +79,7 @@ BA[A.LOAD_BROWSER_DYNAMIC].listen(function(option){
     option: option,
     onFetch: _fnFetchSourceMenu,
     onCompleted: this.completed,
-    onCatch: fnCatch,
+    onCatch: onCatch,
     onFailed: this.failed
   })
 })

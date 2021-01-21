@@ -9,7 +9,7 @@ var _Type = require("../../constants/Type");
 
 var _fnFetch = require("../../utils/fnFetch");
 
-var _fnCatch = require("./fnCatch");
+var _onCatch = _interopRequireDefault(require("./onCatch"));
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
@@ -58,7 +58,7 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
     onCheckResponse: _QuandlApi["default"].checkResponse,
     onFetch: _onFetch,
     onCompleted: onCompleted,
-    onCatch: _fnCatch.fnCatch,
+    onCatch: _onCatch["default"],
     onFailed: _onFailed
   });
 };
@@ -74,7 +74,7 @@ var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
     onCheckResponse: _QuandlApi["default"].checkResponse,
     onFetch: _onFetch,
     onCompleted: onAdded,
-    onCatch: _fnCatch.fnCatch,
+    onCatch: _onCatch["default"],
     onFailed: _onFailed
   });
 };

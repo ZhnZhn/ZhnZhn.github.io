@@ -15,7 +15,7 @@ var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
 
 var _ChartTypes = _interopRequireDefault(require("../../components/dialogs/ChartTypes"));
 
-var _fnCatch = require("./fnCatch");
+var _onCatch = _interopRequireDefault(require("./onCatch"));
 
 var ALERT = {
   CATEGORY_TO_SPLINE: {
@@ -53,11 +53,11 @@ var _fetchToChartComp = function _fetchToChartComp(objImpl, _ref2) {
   }
 };
 
-var _crRequestUrl = function _crRequestUrl(api, option, fnCatch, onFailed) {
+var _crRequestUrl = function _crRequestUrl(api, option, onFailed) {
   try {
     return api.getRequestUrl(option);
   } catch (error) {
-    fnCatch({
+    (0, _onCatch["default"])({
       error: error,
       option: option,
       onFailed: onFailed
@@ -73,14 +73,14 @@ var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, o
       optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
-    uri: _crRequestUrl(api, option, _fnCatch.fnCatch, onFailed),
+    uri: _crRequestUrl(api, option, onFailed),
     option: option,
     optionFetch: optionFetch,
     getLimitRemaiming: getLimitRemaiming,
     onCheckResponse: api.checkResponse,
     onFetch: _fetchToChartComp.bind(null, objImpl),
     onCompleted: onCompleted,
-    fnCatch: _fnCatch.fnCatch,
+    onCatch: _onCatch["default"],
     onFailed: onFailed
   });
 };
@@ -99,14 +99,14 @@ var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
       optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
-    uri: _crRequestUrl(api, option, _fnCatch.fnCatch, onFailed),
+    uri: _crRequestUrl(api, option, onFailed),
     option: option,
     optionFetch: optionFetch,
     getLimitRemaiming: getLimitRemaiming,
     onCheckResponse: api.checkResponse,
     onFetch: _fetchToChart.bind(null, objImpl),
     onCompleted: onAdded,
-    fnCatch: _fnCatch.fnCatch,
+    onCatch: _onCatch["default"],
     onFailed: onFailed
   });
 };
@@ -164,7 +164,7 @@ var _loadItem = function _loadItem(objImpl, option, onCompleted, onAdded, onFail
   } else {
     if (_isNotAllowToAdd(objImpl.adapter, option)) {
       _runAsync(function () {
-        (0, _fnCatch.fnCatch)({
+        (0, _onCatch["default"])({
           error: new Error("ERR_10"),
           option: option,
           onFailed: onFailed

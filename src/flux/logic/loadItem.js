@@ -4,7 +4,7 @@ import ChartStore from '../stores/ChartStore'
 import ChartFn from '../../charts/ChartFn'
 import ChartTypes from '../../components/dialogs/ChartTypes'
 
-import { fnCatch } from './fnCatch'
+import onCatch from './onCatch'
 
 const ALERT = {
   CATEGORY_TO_SPLINE: {
@@ -34,11 +34,11 @@ const _fetchToChartComp = function(objImpl ,{json, option, onCompleted}){
   }
 };
 
-const _crRequestUrl = (api, option, fnCatch, onFailed) => {
+const _crRequestUrl = (api, option, onFailed) => {
   try {
     return api.getRequestUrl(option);
   } catch (error) {
-    fnCatch({ error, option, onFailed })
+    onCatch({ error, option, onFailed })
   }
 };
 
@@ -48,13 +48,13 @@ const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
   , optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
-    uri: _crRequestUrl(api, option, fnCatch, onFailed),
+    uri: _crRequestUrl(api, option, onFailed),
     option, optionFetch,
     getLimitRemaiming,
     onCheckResponse : api.checkResponse,
     onFetch : _fetchToChartComp.bind(null, objImpl),
     onCompleted : onCompleted,
-    fnCatch, onFailed
+    onCatch, onFailed
   })
 }
 
@@ -66,13 +66,13 @@ const _loadToChart = function(objImpl, option, onAdded, onFailed){
   , { getLimitRemaiming } = api || {}
   , optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
-    uri: _crRequestUrl(api, option, fnCatch, onFailed),
+    uri: _crRequestUrl(api, option, onFailed),
     option, optionFetch,
     getLimitRemaiming,
     onCheckResponse : api.checkResponse,
     onFetch : _fetchToChart.bind(null, objImpl),
     onCompleted : onAdded,
-    fnCatch, onFailed
+    onCatch, onFailed
   })
 };
 
@@ -111,7 +111,7 @@ const _loadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
   } else {
     if (_isNotAllowToAdd(objImpl.adapter, option)) {
       _runAsync(() => {
-        fnCatch({
+        onCatch({
           error: new Error("ERR_10"),
           option, onFailed
         })

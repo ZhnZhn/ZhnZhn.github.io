@@ -1,6 +1,6 @@
 import { LoadType as LT } from '../../constants/Type'
 import { fetchJson } from '../../utils/fnFetch'
-import { fnCatch } from './fnCatch';
+import onCatch from './onCatch'
 import ChartStore from '../stores/ChartStore';
 
 import QuandlApi from '../../adapters/quandl/QuandlApi';
@@ -45,7 +45,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
      onCheckResponse : QuandlApi.checkResponse,
      onFetch : _onFetch,
      onCompleted : onCompleted,
-     onCatch : fnCatch,
+     onCatch : onCatch,
      onFailed : _onFailed
    })
 }
@@ -64,7 +64,7 @@ const _loadToChart = function(option, onAdded, onFailed){
     onCheckResponse : QuandlApi.checkResponse,
     onFetch : _onFetch,
     onCompleted : onAdded,
-    onCatch : fnCatch,
+    onCatch : onCatch,
     onFailed : _onFailed
   })
 }
