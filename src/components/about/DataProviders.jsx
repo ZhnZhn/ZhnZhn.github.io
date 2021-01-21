@@ -52,7 +52,7 @@ const DP = [
 ]
 , DP_KEY = [
   Link.AlphaVantage, Link.Iex,
-  Link.Fmp, Link.Intrinio,
+  Link.Fmp, Link.Tw, Link.Intrinio,
   Link.Bea, Link.Eia
 ];
 
@@ -74,7 +74,7 @@ const QuanlLink = ({ req }) => (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 25):"
+     caption="Data Providers (All 26):"
      style={ST.OC_L1}
      childStyle={ST.ROOT_CHILD}
   >
@@ -84,7 +84,7 @@ const DataProviders = ({ isClose }) => (
         <Links list={DP} />
       </p>
       <OpenClose
-        caption="(7) Required API Key:"
+        caption="(8) Required API Key:"
         style={ST.OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}

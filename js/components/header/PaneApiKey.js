@@ -133,9 +133,9 @@ var PaneApiKey = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
         ref: this._ref2,
         titleStyle: titleStyle,
-        title: "Barchar:",
-        name: "barchart",
-        placeholder: "Barchar API Key",
+        title: "Twelve:",
+        name: "twelve",
+        placeholder: "Twelve Data API Key",
         onEnter: this._setKey2
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret["default"], {
         ref: this._ref3,

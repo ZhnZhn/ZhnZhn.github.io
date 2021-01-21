@@ -8,12 +8,12 @@ var _Type = require("../../constants/Type");
 var _apiTitle2;
 
 var _settings = {};
-var _withApiKey = [_Type.LoadType.AL, _Type.LoadType.IEX, _Type.LoadType.FMP, _Type.LoadType.INTR, _Type.LoadType.BEA, _Type.LoadType.EIA];
+var _withApiKey = [_Type.LoadType.AL, _Type.LoadType.IEX, _Type.LoadType.FMP, _Type.LoadType.INTR, _Type.LoadType.TW, _Type.LoadType.BEA, _Type.LoadType.EIA];
 var _withProxy = [_Type.LoadType.FAO, _Type.LoadType.CRC];
 
 var _apiTitle = (_apiTitle2 = {
   DF: ''
-}, _apiTitle2[_Type.LoadType.AL] = 'Alpha Vantage', _apiTitle2[_Type.LoadType.IEX] = 'IEX Cloud', _apiTitle2[_Type.LoadType.BEA] = 'BEA', _apiTitle2[_Type.LoadType.EIA] = 'EIA', _apiTitle2[_Type.LoadType.FMP] = 'FMP', _apiTitle2[_Type.LoadType.INTR] = 'Intrinio', _apiTitle2[_Type.LoadType.FAO] = 'FAOSTAT', _apiTitle2[_Type.LoadType.CRC] = 'CryptoCompare Information', _apiTitle2);
+}, _apiTitle2[_Type.LoadType.AL] = 'Alpha Vantage', _apiTitle2[_Type.LoadType.IEX] = 'IEX Cloud', _apiTitle2[_Type.LoadType.BEA] = 'BEA', _apiTitle2[_Type.LoadType.EIA] = 'EIA', _apiTitle2[_Type.LoadType.FMP] = 'FMP', _apiTitle2[_Type.LoadType.INTR] = 'Intrinio', _apiTitle2[_Type.LoadType.TW] = 'Twelve Data', _apiTitle2[_Type.LoadType.FAO] = 'FAOSTAT', _apiTitle2[_Type.LoadType.CRC] = 'CryptoCompare Information', _apiTitle2);
 
 var _isUndef = function _isUndef(value) {
   return typeof value === 'undefined';
@@ -29,7 +29,7 @@ var SettingSlice = {
   exportSettingFn: function exportSettingFn() {
     return {
       key1: this.fSetKey([_Type.LoadType.AL]),
-      key2: this.fSetKey([_Type.LoadType.B]),
+      key2: this.fSetKey([_Type.LoadType.TW]),
       key3: this.fSetKey([_Type.LoadType.BEA]),
       key4: this.fSetKey([_Type.LoadType.EIA]),
       key5: this.fSetKey([_Type.LoadType.FMP]),

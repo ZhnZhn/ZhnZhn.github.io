@@ -84,9 +84,9 @@ class PaneApiKey extends Component {
         <RowSecret
            ref={this._ref2}
            titleStyle={titleStyle}
-           title="Barchar:"
-           name="barchart"
-           placeholder="Barchar API Key"
+           title="Twelve:"
+           name="twelve"
+           placeholder="Twelve Data API Key"
            onEnter={this._setKey2}
         />
         <RowSecret

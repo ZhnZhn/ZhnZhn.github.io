@@ -2,7 +2,7 @@ import { LoadType as LT } from '../../constants/Type'
 
 const _settings = {};
 const _withApiKey = [
-  LT.AL, LT.IEX, LT.FMP, LT.INTR,
+  LT.AL, LT.IEX, LT.FMP, LT.INTR, LT.TW,
   LT.BEA, LT.EIA
 ];
 const _withProxy = [
@@ -17,6 +17,7 @@ const _apiTitle = {
   [LT.EIA]: 'EIA',
   [LT.FMP]: 'FMP',
   [LT.INTR]: 'Intrinio',
+  [LT.TW]: 'Twelve Data',
 
   [LT.FAO]: 'FAOSTAT',
   [LT.CRC]: 'CryptoCompare Information'
@@ -36,7 +37,7 @@ const SettingSlice = {
   exportSettingFn(){
     return {
       key1: this.fSetKey([LT.AL]),
-      key2: this.fSetKey([LT.B]),
+      key2: this.fSetKey([LT.TW]),
       key3: this.fSetKey([LT.BEA]),
       key4: this.fSetKey([LT.EIA]),
       key5: this.fSetKey([LT.FMP]),

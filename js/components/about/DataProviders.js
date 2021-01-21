@@ -51,7 +51,7 @@ var ST = {
   }
 };
 var DP = [_ProviderLinks["default"].DbNomics, _ProviderLinks["default"].Eurostat, _ProviderLinks["default"].UnComtrade, _ProviderLinks["default"].WorldBank, _ProviderLinks["default"].Insee, _ProviderLinks["default"].ONS, _ProviderLinks["default"].StatNorway, _ProviderLinks["default"].StatSweden, _ProviderLinks["default"].StatFinland, _ProviderLinks["default"].Bsl, _ProviderLinks["default"].CryptoCompare, _ProviderLinks["default"].CoinGecko, _ProviderLinks["default"].CoinMetrics, _ProviderLinks["default"].CoinLore, _ProviderLinks["default"].Coinpaprika, _ProviderLinks["default"].Binance, _ProviderLinks["default"].Bitstamp],
-    DP_KEY = [_ProviderLinks["default"].AlphaVantage, _ProviderLinks["default"].Iex, _ProviderLinks["default"].Fmp, _ProviderLinks["default"].Intrinio, _ProviderLinks["default"].Bea, _ProviderLinks["default"].Eia];
+    DP_KEY = [_ProviderLinks["default"].AlphaVantage, _ProviderLinks["default"].Iex, _ProviderLinks["default"].Fmp, _ProviderLinks["default"].Tw, _ProviderLinks["default"].Intrinio, _ProviderLinks["default"].Bea, _ProviderLinks["default"].Eia];
 
 var Links = function Links(_ref) {
   var list = _ref.list;
@@ -78,7 +78,7 @@ var DataProviders = function DataProviders(_ref3) {
   var isClose = _ref3.isClose;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
     isClose: isClose,
-    caption: "Data Providers (All 25):",
+    caption: "Data Providers (All 26):",
     style: ST.OC_L1,
     childStyle: ST.ROOT_CHILD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -89,7 +89,7 @@ var DataProviders = function DataProviders(_ref3) {
           list: DP
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose["default"], {
-        caption: "(7) Required API Key:",
+        caption: "(8) Required API Key:",
         style: ST.OC_L2,
         openColor: OPEN_COLOR_L2,
         childStyle: ST.CHILD_STYLE,

@@ -71,10 +71,11 @@ export const ChartType = {
 }
 
 export const LoadType = {
-  Q: 'Q',  
+  Q: 'Q',
   AL: 'AL',
   IEX: 'IEX',
   FMP: 'FMP',
+  TW: 'TW',
   QCT: 'QCT',
   DBN: 'DBN',
   EU_STAT: 'EU_STAT',

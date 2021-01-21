@@ -11,10 +11,11 @@ const LoadConfig = {
   [LT.QCT]: loadQuandlCommodityTrade,
 
   [LT.DBN]: LoadImpl.DbNomics,
-  
+
   [LT.AL]: LoadImpl.AlphaVantage,
   [LT.IEX]: LoadImpl.Iex,
   [LT.FMP]: LoadImpl.Fmp,
+  [LT.TW]: LoadImpl.Tw,
 
   [LT.EU_STAT]: LoadImpl.EuroStat,
   [LT.FS]: LoadImpl.Insee,

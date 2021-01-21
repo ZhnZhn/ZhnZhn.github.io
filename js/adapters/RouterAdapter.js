@@ -31,6 +31,8 @@ var _Iex = _interopRequireDefault(require("./iex/Iex"));
 
 var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
 
+var _Tw = _interopRequireDefault(require("./twelve/Tw"));
+
 var _Bea = _interopRequireDefault(require("./bea/Bea"));
 
 var _Bls = _interopRequireDefault(require("./bls/Bls"));
@@ -72,6 +74,7 @@ var RouterAdapter = (0, _extends2["default"])({
   AlphaVantage: _AlphaVantage["default"],
   Iex: _Iex["default"],
   Fmp: _Fmp["default"],
+  Tw: _Tw["default"],
   Bea: _Bea["default"],
   Bls: _Bls["default"],
   Eia: _Eia["default"],

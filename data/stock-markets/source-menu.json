@@ -63,6 +63,11 @@
         }
       ]
     },{
+       "caption": "Twelve Data",
+       "items": [
+         { "id": "SM_TW_TS" }
+       ]
+    },{
       "caption": "Intrinio: U.S. PC Financials",
       "items": [
         { "id": "SM_INTR_CALC" },
@@ -72,7 +77,7 @@
       ]
     }
   ],
-  "items" : {    
+  "items" : {
     "SM_BASE_INTR": {
       "dialogProps": {
         "descrUrl" : "./data/stock-markets/intrinio.html",
@@ -110,6 +115,17 @@
           "dfT": "historical-price-full",
           "dfPn": "historical"
         }
+      }
+    },
+    "SM_BASE_TW": {
+      "dialogProps": {
+        "noForDate": true,
+        "loadId" : "TW",
+        "descrUrl" : "./data/stock-markets/twelve-data.html",
+        "rootUri" : "./data/stock-markets/",
+        "spT": "id",
+        "isCh": false,
+        "dataSource": "Twelve Data"
       }
     },
     "SM_BASE_AV" : {
@@ -226,7 +242,7 @@
         "loadId" : "Q",
         "dataSource" : "Unicorn Research Corporation (Code: URC)"
       }
-    },    
+    },
 
     "SM_A_INDICATOR" : {
         "type" : "SM_A_INDICATOR",
@@ -587,6 +603,20 @@
              "dfT": "financial-statement-growth",
              "dfPn": "growth"
            }
+         }
+     },
+
+     "SM_TW_TS" : {
+         "type" : "SM_TW_TS",
+         "menuTitle" : "Nyse, Nasdaq",
+         "contFullCaption" : "Twelve Data: Nyse, Nasdaq",
+         "addProps" : "SM_BASE_TW",
+         "dialogProps" : {
+           "selectProps": [
+              ["Stock", "wiki", "tickets", true],
+              ["Interval", "tw-interval"],
+              ["Limit", "tw-limit"]
+            ]
          }
      },
 

@@ -11,6 +11,7 @@ import StatFinland from './stat-finland/StatFinland'
 import AlphaVantage from './alpha/AlphaVantage'
 import Iex from './iex/Iex'
 import Fmp from './fmp/Fmp'
+import Tw from './twelve/Tw'
 import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Eia from './eia/Eia'
@@ -41,6 +42,7 @@ const RouterAdapter = {
   AlphaVantage,
   Iex,
   Fmp,
+  Tw,
   Bea,
   Bls,
   Eia,
