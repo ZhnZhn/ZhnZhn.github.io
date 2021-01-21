@@ -48,7 +48,7 @@ var crAdapterOHLCV = function crAdapterOHLCV(_ref3) {
       toDate = _ref3.toDate;
   return {
     toConfig: function toConfig(json, option) {
-      var _crCaption = crCaption(option),
+      var _crCaption = crCaption(option, json),
           title = _crCaption.title,
           subtitle = _crCaption.subtitle,
           id = crId(option),

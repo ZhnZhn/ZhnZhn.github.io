@@ -2,7 +2,7 @@ import Builder from '../charts/ConfigBuilder'
 import AdapterFn from './AdapterFn'
 import AdapterStockFn from './AdapterStockFn'
 
-const {  
+const {
   valueMoving,
   stockSeriesLegend
 } = AdapterFn
@@ -22,7 +22,7 @@ const crAdapterOHLCV = ({
   toDate
 }) => ({
   toConfig(json, option){
-    const { title, subtitle } = crCaption(option)
+    const { title, subtitle } = crCaption(option, json)
     , id = crId(option)
     , dataOption = toSeriesData({
         arr: getArr(json, option),
