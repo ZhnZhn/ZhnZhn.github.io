@@ -237,9 +237,12 @@ var DateUtils = {
         monthStr = _ymdStr$split[1],
         dayStr = _ymdStr$split[2],
         _hmsStr$split = hmsStr.split(':'),
-        hourStr = _hmsStr$split[0],
-        minuteStr = _hmsStr$split[1],
-        secondStr = _hmsStr$split[2];
+        _hmsStr$split$ = _hmsStr$split[0],
+        hourStr = _hmsStr$split$ === void 0 ? '' : _hmsStr$split$,
+        _hmsStr$split$2 = _hmsStr$split[1],
+        minuteStr = _hmsStr$split$2 === void 0 ? '' : _hmsStr$split$2,
+        _hmsStr$split$3 = _hmsStr$split[2],
+        secondStr = _hmsStr$split$3 === void 0 ? '' : _hmsStr$split$3;
 
     return Date.UTC(yearStr, _toIntMonth(monthStr), dayStr, hourStr, minuteStr, secondStr);
   },

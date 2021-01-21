@@ -134,12 +134,15 @@ describe('ymdToUTC', function () {
 describe('ymdhmsToUTC', function () {
   var fn = ymdhmsToUTC //'2010-01-01 12:00:00'
   ,
-      DATE_IN_MLS = 1262347200000;
-  test('should retun mls UTC-0 for str date', function () {
-    expect(fn('2010-01-01 12:00:00')).toBe(DATE_IN_MLS);
+      UTC_MLS = 1262347200000;
+  test('should retun mls UTC for str date', function () {
+    expect(fn('2010-01-01 12:00:00')).toBe(UTC_MLS);
   });
-  test('should retun mls UTC-0 for str date with dtDelimeter', function () {
-    expect(fn('2010-01-01T12:00:00', 'T')).toBe(DATE_IN_MLS);
+  test('should retun mls UTC for str date with dtDelimeter', function () {
+    expect(fn('2010-01-01T12:00:00', 'T')).toBe(UTC_MLS);
+  });
+  test('should retun mls UTC for str yyyy-mm-dd', function () {
+    expect(fn('2010-01-01')).toBe(1262304000000);
   });
   test('should return NaN for edge case', function () {
     expect(fn()).toBeNaN();
@@ -147,7 +150,6 @@ describe('ymdhmsToUTC', function () {
     expect(fn('abcd')).toBeNaN();
     expect(fn('2010')).toBeNaN();
     expect(fn('2010-ab')).toBeNaN();
-    expect(fn('2010-01-01T12:00', 'T')).toBeNaN();
     expect(fn('2010-01-01T12:00:00', 'A')).toBeNaN();
   });
 });
