@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify'
 import Tooltip from './Tooltip'
 import Chart from './Chart'
 import seriaFn from '../math/seriaFn'
@@ -29,8 +30,8 @@ const C = {
 
 const _assign = Object.assign;
 
-const _crTitle = text => ({
-  text: text,
+const _crTitle = (text='') => ({
+  text: DOMPurify.sanitize(text || ''),
   style: {
     color: COLOR.METRIC_TITLE,
     fontSize: '16px',
@@ -265,7 +266,7 @@ const WithIndicatorConfig = {
   crMomAthConfig({ dataMom, dataAth, dataSum }){
     return _Builder(_crConfig())
       .assign({
-        title: _crTitle(''),
+        title: _crTitle(),
         legend: _crLegendVolume(),
         plotOptions: {
           column : {

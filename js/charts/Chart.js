@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
+var _dompurify = _interopRequireDefault(require("dompurify"));
+
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
@@ -63,10 +65,18 @@ var FONT_STYLE = {
   };
 };
 
+var _sanitizeOptionText = function _sanitizeOptionText(option) {
+  if (option && typeof option === 'object') {
+    option.text = _dompurify["default"].sanitize(option.text || '');
+  }
+
+  return option;
+};
+
 var _crTitle = function _crTitle(title) {
   return _isStr(title) ? {
-    text: title
-  } : title;
+    text: _dompurify["default"].sanitize(title)
+  } : _sanitizeOptionText(title);
 },
     _crSeriaType = function _crSeriaType(seriaType) {
   return _isStr(seriaType) ? seriaType.toLowerCase() : 'area';
@@ -165,6 +175,8 @@ var Chart = (0, _extends2["default"])({
       option = {};
     }
 
+    _sanitizeOptionText(option);
+
     return merge(false, (0, _extends2["default"])({}, CAPTION_CONFIG, {
       y: 25
     }), option);
@@ -173,6 +185,8 @@ var Chart = (0, _extends2["default"])({
     if (option === void 0) {
       option = {};
     }
+
+    _sanitizeOptionText(option);
 
     return merge(false, (0, _extends2["default"])({}, CAPTION_CONFIG, {
       y: 45

@@ -1,5 +1,6 @@
 
 import Highcharts from 'highcharts';
+import DOMPurify from 'dompurify'
 
 import COLOR from '../constants/Color';
 import Tooltip from './Tooltip';
@@ -44,9 +45,16 @@ const FONT_STYLE = {
    }
 });
 
+const _sanitizeOptionText = option => {
+  if (option && typeof option === 'object') {
+    option.text = DOMPurify.sanitize(option.text || '')
+  }
+  return option;
+};
+
 const  _crTitle = title => _isStr(title)
-  ? { text: title }
-  : title
+  ? { text: DOMPurify.sanitize(title) }
+  : _sanitizeOptionText(title)
 , _crSeriaType = seriaType => _isStr(seriaType)
   ? seriaType.toLowerCase()
   : 'area'
@@ -133,12 +141,14 @@ const Chart = {
   },
 
   fTitle(option={}){
+    _sanitizeOptionText(option)
     return merge(false, {
        ...CAPTION_CONFIG,
        y: 25
     }, option)
   },
   fSubtitle(option={}){
+    _sanitizeOptionText(option)
     return merge(false, {
       ...CAPTION_CONFIG,
       y: 45
@@ -184,7 +194,7 @@ crAreaConfig({
       opposite: true,
       showEmpty: true
     },
-    series: [{      
+    series: [{
       turboThreshold: 20000,
       type: _crSeriaType(seriaType),
       color: seriaColor,

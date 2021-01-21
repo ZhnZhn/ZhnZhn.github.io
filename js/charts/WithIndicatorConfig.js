@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _dompurify = _interopRequireDefault(require("dompurify"));
+
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
 var _Chart = _interopRequireDefault(require("./Chart"));
@@ -35,8 +37,12 @@ var C = {
 var _assign = Object.assign;
 
 var _crTitle = function _crTitle(text) {
+  if (text === void 0) {
+    text = '';
+  }
+
   return {
-    text: text,
+    text: _dompurify["default"].sanitize(text || ''),
     style: {
       color: _Color["default"].METRIC_TITLE,
       fontSize: '16px',
@@ -279,7 +285,7 @@ var WithIndicatorConfig = {
         dataAth = _ref4.dataAth,
         dataSum = _ref4.dataSum;
     return _Builder(_crConfig()).assign({
-      title: _crTitle(''),
+      title: _crTitle(),
       legend: _crLegendVolume(),
       plotOptions: {
         column: {
