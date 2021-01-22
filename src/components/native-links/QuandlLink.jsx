@@ -8,12 +8,16 @@ const C = {
   }
 };
 
-const QuandlLink = ({ dbCode='', dsCode='', caption=C.CAPTION }) => (
-  <Link
-    style={C.STYLE}
-    href={`${C.ROOT_URI}${dbCode}/${dsCode}`}
-    caption={`${caption} ${dbCode}/${dsCode}`}
-  />
-);
+const QuandlLink = ({ dbCode, dsCode, caption=C.CAPTION }) => {
+  if (!dbCode || !dsCode){
+    return null;
+  }
+  return (
+    <Link
+      style={C.STYLE}
+      href={`${C.ROOT_URI}${dbCode}/${dsCode}`}
+      caption={`${caption} ${dbCode}/${dsCode}`}
+    />)
+};
 
 export default QuandlLink

@@ -1,5 +1,3 @@
-import { Component } from 'react';
-
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
 import A from '../Comp'
@@ -26,15 +24,15 @@ const S = {
   },
   INFO_CAPTION: {
     display: 'inline-block',
-    color: '#1b75bb',
     width: 90,
     paddingRight: 5,
+    color: '#1b75bb',
     textAlign: 'right',
     fontWeight: 'bold'
   },
   INFO_TEXT: {
-    fontWeight: 'bold',
     color: 'black',
+    fontWeight: 'bold',
     textTransform: 'capitalize'
   },
   DESCR_INFO: {
@@ -46,105 +44,88 @@ const S = {
   }
 };
 
-const _isWithoutLink = (item={}) => {
-  const { id='' } = item;
-  return id.split('/')[0] === 'LSE'
-    ? true
-    : false;
+const _renderQuandlLink = (dbCode, dsCode) => {
+  const Comp = RouterNativeLink['QUANDL'];
+  return (<Comp dbCode={dbCode} dsCode={dsCode} />);
 };
+
+const _renderNativeLink = (linkFn, item) => {
+  const Comp = linkFn
+    ? RouterNativeLink[linkFn]
+    : void 0;
+  return Comp != null
+    ? <Comp item={item} />
+    : null;
+}
 
 const _isShortDescr = descr => descr
  && descr.length<200;
 
-class PanelDataInfo extends Component {
+const PanelDataInfo = ({
+  isShow,
+  info,
+  zhInfo,
+  onClickChart
+}) => {
+  const {
+    name,
+    toDate,
+    fromDate,
+    frequency,
+    database_code, dataset_code,
+    description
+  } = info || {}
+ , { item, linkFn } = zhInfo || {}
+ , _style = isShow ? S.ROOT_SHOW : S.ROOT_HIDE;
 
-  _renderQuandlLink = (dbCode, dsCode) => {
-    if (!dbCode || !dsCode){
-      return null;
-    } else {
-      const Comp = RouterNativeLink['QUANDL'];
-      return (<Comp dbCode={dbCode} dsCode={dsCode} />);
-    }
-  }
-
-  _renderNativeLink = (linkFn, item) => {
-    if (_isWithoutLink(item)) {
-      return null;
-    }
-    const Comp = RouterNativeLink[linkFn];
-    return typeof Comp !== 'undefined'
-      ? <Comp item={item} />
-      : null;
-  }
-
-  render(){
-    const {
-        isShow,
-        info={}, zhInfo={},
-        onClickChart
-      } = this.props
-    , {
-        name,
-        toDate,
-        fromDate,
-        frequency,
-        database_code, dataset_code,
-        description
-       } = info
-     , { item, linkFn } = zhInfo
-     , _style = isShow
-         ? S.ROOT_SHOW
-         : S.ROOT_HIDE;
-
-    return (
-       <div style={_style}>
-         <A.ButtonTab
-           style={S.BT_CAPTION}
-           caption="Chart"
-           onClick={onClickChart}
-         />
-         <A.InfoPart
-            text={name}
-            styleText={S.INFO_TEXT}
-         />
-         <A.InfoPart
-            caption="From Date"
-            styleCaption={S.INFO_CAPTION}
-            text={fromDate}
-            styleText={S.INFO_TEXT}
-         />
-         <A.InfoPart
-            style={S.TO_DATE_INFO}
-            caption="To Date"
-            styleCaption={S.INFO_CAPTION}
-            text={toDate}
-            styleText={S.INFO_TEXT}
-         />
-         <A.InfoPart
-            caption="Frequency"
-            styleCaption={S.INFO_CAPTION}
-            text={frequency}
-            styleText={S.INFO_TEXT}
-         />
-         {this._renderQuandlLink(database_code, dataset_code)}
-         { description && <A.OpenClose
-              isClose={!_isShortDescr(description)}
-              caption="Description"
-              openColor={C_DESCR_OPEN}
-             >
-               <A.InfoPart
-                  style={S.DESCR_INFO}
-                  isHtml={true}
-                  text={description}
-                  classText={CL_DESCR}
-                  styleText={S.DESCR_TEXT}
-               />
-            </A.OpenClose>
-         }
-         {this._renderNativeLink(linkFn, item)}
-       </div>
-    )
-  }
-}
+  return (
+    <div style={_style}>
+      <A.ButtonTab
+        style={S.BT_CAPTION}
+        caption="Chart"
+        onClick={onClickChart}
+      />
+      <A.InfoPart
+         text={name}
+         styleText={S.INFO_TEXT}
+      />
+      <A.InfoPart
+         caption="From Date"
+         styleCaption={S.INFO_CAPTION}
+         text={fromDate}
+         styleText={S.INFO_TEXT}
+      />
+      <A.InfoPart
+         style={S.TO_DATE_INFO}
+         caption="To Date"
+         styleCaption={S.INFO_CAPTION}
+         text={toDate}
+         styleText={S.INFO_TEXT}
+      />
+      <A.InfoPart
+         caption="Frequency"
+         styleCaption={S.INFO_CAPTION}
+         text={frequency}
+         styleText={S.INFO_TEXT}
+      />
+      {_renderQuandlLink(database_code, dataset_code)}
+      { description && <A.OpenClose
+           isClose={!_isShortDescr(description)}
+           caption="Description"
+           openColor={C_DESCR_OPEN}
+          >
+            <A.InfoPart
+               style={S.DESCR_INFO}
+               isHtml={true}
+               text={description}
+               classText={CL_DESCR}
+               styleText={S.DESCR_TEXT}
+            />
+         </A.OpenClose>
+      }
+      {_renderNativeLink(linkFn, item)}
+    </div>
+  );
+};
 
 export default PanelDataInfo
