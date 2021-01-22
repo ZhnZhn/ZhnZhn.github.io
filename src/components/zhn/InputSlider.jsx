@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+import has from '../has'
 import mathFns from '../../math/mathFn'
 //import PropTypes from "prop-types";
 
@@ -27,36 +28,36 @@ const S = {
   },
   LINE_BEFORE : {
     position: 'absolute',
+    left: 0,
     width: 'calc(15%)',
     height: '100%',
-    left: 0,
     marginRight: 6,
     backgroundColor: 'rgb(0, 188, 212)',
     transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
   LINE_AFTER : {
     position: 'absolute',
+    right: 0,
+    width: 'calc(85%)',
     height: '100%',
-    transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-    right: '0px',
+    marginLeft: 6,
     backgroundColor: 'rgb(189, 189, 189)',
-    marginLeft: '6px',
-    width: 'calc(85%)'
+    transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
   },
   LINE_HOVERED : {
     backgroundColor: 'rgb(158, 158, 158)',
   },
   ROOT_CIRCLE : {
     boxSizing: 'borderBox',
+    zIndex: '1',
     position: 'absolute',
+    top: 0,
+    left: '15%',
+    width: 12,
+    height: 12,
     cursor: 'pointer',
     pointerEvents: 'inherit',
-    top: '0px',
-    left: '15%',
-    zIndex: '1',
     margin: '1px 0px 0px',
-    width: '12px',
-    height: '12px',
     backgroundColor: 'rgb(0, 188, 212)',
     backgroundClip: 'padding-box',
     border: '0px solid transparent',
@@ -67,49 +68,54 @@ const S = {
     transition: 'background 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
   },
   CIRCLE_DRAGGED : {
-    width: '20px',
-    height: '20px '
+    width: 20,
+    height: 20
   },
   CIRCLE_INNER : {
     position: 'absolute',
-    overflow: 'visible',
-    height: '12px',
-    width: '12px',
-    top: '0px',
-    left: '0px'
+    top: 0,
+    left: 0,
+    width: 12,
+    height: 12,
+    overflow: 'visible'
   },
   CIRCLE_INNER_EL : {
     position: 'absolute',
-    height: '36px',
+    top: -12,
+    left: -12,
     width: '300%',
+    height: 36,
     borderRadius: '50%',
     //opacity: '0.16',
     backgroundColor: 'rgba(0, 188, 212, 0.16)',
-    top: '-12px',
-    left: '-12px',
     transform: 'scale(1)'
   },
   EMBER : {
-    top: '-12px' ,
-    left: '-12px',
-    height: '44px',
+    top: -12,
+    left: -12,
     width: '220%',
+    height: 44,
     border: '1px solid #4caf50'
   }
-}
+};
 
-const _isNaN = Number.isNaN;
-
-const _toPercent = (value, min, max) => {
-  const _percent = (value - min ) / (max - min);
-  return _isNaN(_percent) ? 0 : _percent*100;
+const _isNaN = Number.isNaN
+, _toPercent = (value, min, max) => {
+    const _percent = (value - min) / (max - min);
+    return _isNaN(_percent) ? 0 : _percent*100;
 }
-const _crWidthStyle = percent => ({
-  width: `calc(${percent}%)`
+, _crWidthStyle = percent => ({
+    width: `calc(${percent}%)`
 })
-const _crLeftStyle = percent => ({
+, _crLeftStyle = percent => ({
    left: `${percent}%`
 })
+, hasTouch = has.touch
+, _getClienX = hasTouch
+  ? evt => (((evt || {}).touches || [])[0] || {}).clientX || 0
+  : evt => evt.clientX
+, _isUp = keyCode => keyCode === 39 || keyCode === 38
+, _isDown = keyCode => keyCode === 37 || keyCode === 40;
 
 class InputSlider extends Component {
 
@@ -134,28 +140,68 @@ class InputSlider extends Component {
     value: 4
   }
 
-  _handleMouseEnter = () => {
+  _evtNameMove = hasTouch ? 'touchmove' : 'mousemove'
+  _evtNameUp = hasTouch ? 'touchend' : 'mouseup'
+
+  constructor(props){
+    super(props)
+    this._handlers = hasTouch ? {
+       onTouchStart: this._hMouseDown
+    } : {
+      onMouseDown: this._hMouseDown,
+      onMouseEnter: this._hMouseEnter,
+      onMouseLeave: this._hMouseLeave
+    }
+    this._btHandlers = hasTouch ? void 0 : {
+        onFocus: this._hFocusTrackBt,
+        onKeyDown: this._hKeyDown,
+        onBlur: this._hBlurTrackBt
+    }
+  }
+
+  _hKeyDown = (evt) => {
+    const { keyCode } = evt
+    , { step } = this.props
+    , { value } = this.state
+    , _newValue = _isUp(keyCode)
+        ? value + step
+        : _isDown(keyCode) ? value - step : void 0;
+    if (_newValue != null) {
+      evt.preventDefault()
+      this._updateValue(event, _newValue)
+    }
+  }
+  _hFocusTrackBt = () => {
     this.setState({ hovered: true })
   }
-  _handleMouseLeave = () => {
+  _hBlurTrackBt = () => {
     this.setState({ hovered: false })
   }
-  _handleMouseDown = (event) => {
+
+  _hMouseEnter = () => {
+    this.setState({ hovered: true })
+  }
+  _hMouseLeave = () => {
+    this.setState({ hovered: false })
+  }
+  _hMouseDown = (event) => {
     // Cancel text selection
-    event.preventDefault()
-    document.addEventListener('mousemove', this._handleDragMouseMove)
-    document.addEventListener('mouseup', this._handleDragMouseUp)
+    if (!hasTouch) {
+      event.preventDefault()
+    }
+    document.addEventListener(this._evtNameMove, this._hDragMouseMove)
+    document.addEventListener(this._evtNameUp, this._hDragMouseUp)
     this.setState({
       dragged : true
     })
   }
 
-  _handleDragMouseMove = (event) => {
+  _hDragMouseMove = (event) => {
     this._onDragUpdate(event)
   }
-  _handleDragMouseUp = () => {
-     document.removeEventListener('mousemove', this._handleDragMouseMove)
-     document.removeEventListener('mouseup', this._handleDragMouseUp)
+  _hDragMouseUp = () => {
+     document.removeEventListener(this._evtNameMove, this._hDragMouseMove)
+     document.removeEventListener(this._evtNameUp, this._hDragMouseUp)
      this.setState({
        dragged : false
      })
@@ -168,7 +214,7 @@ class InputSlider extends Component {
     this.dragRunning = true;
     requestAnimationFrame(() => {
       this.dragRunning = false;
-      const position = event.clientX - this._calcTrackOffset()
+      const position = _getClienX(event) - this._calcTrackOffset()
       this._setValueFromPosition(event, position)
     })
   }
@@ -185,25 +231,26 @@ class InputSlider extends Component {
       position = positionMax
     }
 
-    const { step, min, max, onChange } = this.props
-    let value
+    const { step, min, max } = this.props;
+    let value;
     value = position/positionMax * (max - min)
     value = Math.round(value / step) * step + min
     value = mathFns.roundBy(value, 5)
 
-    if (value > max) {
-      value = max
-    } else if (value < min ) {
-      value = min
-    }
+    this._updateValue(event, value)
+  }
 
-    if (this.state.value !== value) {
-      this.setState({
-        value: value
-      })
+  _updateValue = (event, newValue) => {
+    const { min, max, onChange } = this.props
+    , { value } = this.state
+    , _newValue = newValue > max
+        ? max
+        : newValue < min ? min : newValue;
 
+    if (_newValue !== value) {
+      this.setState({ value: _newValue })
       if (typeof onChange === 'function'){
-        onChange(event, value)
+        onChange(event, _newValue)
       }
     }
   }
@@ -213,11 +260,11 @@ class InputSlider extends Component {
   render(){
     const { step, min , max } = this.props
     , { hovered, dragged, value } = this.state
-    , _lineAfterStyle = (hovered)
+    , _lineAfterStyle = hovered
           ? {...S.LINE_AFTER, ...S.LINE_HOVERED}
           : S.LINE_AFTER
-    , _circleStyle = (dragged) ? S.CIRCLE_DRAGGED : null
-    , _emberStyle = (dragged) ? S.EMBER : null
+    , _circleStyle = dragged ? S.CIRCLE_DRAGGED : null
+    , _emberStyle = dragged ? S.EMBER : null
     , _circleInnerEl = (hovered || dragged)
           ? <div style={{ ...S.CIRCLE_INNER_EL, ..._emberStyle }} />
           : null
@@ -227,10 +274,9 @@ class InputSlider extends Component {
     , _leftStyle = _crLeftStyle(_percent)
 
     return (
-      <div style={S.ROOT}
-        onMouseDown={this._handleMouseDown}
-        onMouseEnter={this._handleMouseEnter}
-        onMouseLeave={this._handleMouseLeave}
+      <div
+        style={S.ROOT}
+        {...this._handlers}
       >
         <div
            ref={this._refTrack}
@@ -238,14 +284,6 @@ class InputSlider extends Component {
         >
           <div style={{...S.LINE_BEFORE, ..._widthBeforeStyle }} />
           <div style={{..._lineAfterStyle, ..._widthAfterStyle }} />
-          <div
-             tabIndex={0}
-             style={{...S.ROOT_CIRCLE, ..._circleStyle, ..._leftStyle }}
-          >
-            <div style={{ ...S.CIRCLE_INNER, ..._circleStyle}} >
-              {_circleInnerEl}
-            </div>
-          </div>
           <input
             type="hidden"
             step={step}
@@ -254,6 +292,21 @@ class InputSlider extends Component {
             value={value}
             required={true}
           />
+          <div
+             role="slider"
+             tabIndex={0}
+             aria-valuenow={value}
+             aria-valuemin={min}
+             aria-valuemax={max}
+             aria-orientation="horizontal"
+             aria-labelledby="discrete-slider-custom"
+             style={{...S.ROOT_CIRCLE, ..._circleStyle, ..._leftStyle }}
+             {...this._btHandlers}
+          >
+            <div style={{ ...S.CIRCLE_INNER, ..._circleStyle}} >
+              {_circleInnerEl}
+            </div>
+          </div>
         </div>
       </div>
     );
