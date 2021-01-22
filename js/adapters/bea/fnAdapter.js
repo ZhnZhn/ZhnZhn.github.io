@@ -8,7 +8,8 @@ exports["default"] = void 0;
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC;
-var _isArr = Array.isArray;
+var _isArr = Array.isArray,
+    _isNaN = Number.isNaN;
 
 var _getResults = function _getResults(json) {
   return json.BEAAPI.Results;
@@ -90,7 +91,7 @@ var fnAdapter = {
 
     data.forEach(function (item) {
       var v = parseFloat(item.DataValue),
-          y = !Number.isNaN(v) ? v : null;
+          y = _isNaN(v) ? null : v;
 
       if (!(isFilter && item[dfFilterName] !== two)) {
         d.push({

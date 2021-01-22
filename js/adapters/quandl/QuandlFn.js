@@ -23,7 +23,7 @@ var _isStr = function _isStr(str) {
 };
 
 var _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && !Number.isNaN(n);
+  return typeof n === 'number' && n - n === 0;
 };
 
 var _crItemCaption = function _crItemCaption(_ref) {

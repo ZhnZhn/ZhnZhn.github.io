@@ -40,8 +40,7 @@ const ITEM_CONF_PROP_NAMES = [
  'seriaType'
 ];
 
-const _isNaN = n => typeof n === 'number'
-  && (n-n !== 0)
+const _isNaN = Number.isNaN
 , _isArr = Array.isArray
 , _isNumber = n => typeof n === 'number'
     && (n - n) === 0;

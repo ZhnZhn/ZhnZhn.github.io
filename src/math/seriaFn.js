@@ -12,7 +12,7 @@ const {
 } = fns
 
 const _isArr = Array.isArray
-, _isNaN = Number.isNaN || isNaN;
+, _isNaN = Number.isNaN;
 
 const _isNotEmptyArr = arr => _isArr(arr)
  && arr.length > 0;

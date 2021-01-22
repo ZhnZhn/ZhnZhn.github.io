@@ -15,7 +15,8 @@ var Builder = _crConfigType["default"].Builder,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     compareByDate = _AdapterFn["default"].compareByDate,
     findMinY = _AdapterFn["default"].findMinY,
-    _parser = new window.DOMParser(); //€
+    _parser = new window.DOMParser(),
+    _isNaN = Number.isNaN; //€
 
 
 var _crZhConfig = function _crZhConfig(id) {
@@ -53,7 +54,7 @@ var _toData = function _toData(str) {
     _seria.childNodes.forEach(function (node) {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
 
-      if (!Number.isNaN(_v)) {
+      if (!_isNaN(_v)) {
         data.push([ymdToUTC(node.getAttribute('TIME_PERIOD')), _v]);
       }
     });

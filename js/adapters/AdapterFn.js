@@ -43,9 +43,7 @@ var ymdToUTC = dt.ymdToUTC,
 var EMPTY = '';
 var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType'];
 
-var _isNaN = function _isNaN(n) {
-  return typeof n === 'number' && n - n !== 0;
-},
+var _isNaN = Number.isNaN,
     _isArr = Array.isArray,
     _isNumber = function _isNumber(n) {
   return typeof n === 'number' && n - n === 0;

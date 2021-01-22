@@ -3,7 +3,7 @@ const MIN_YEAR = 1990;
 const DAY_IN_MLS = 1000*60*60*24;
 
 const _isNumber = n => typeof n === 'number';
-const _isNaN = n => _isNumber(n) && (n-n !== 0);
+const _isNaN = Number.isNaN;
 const _isStr = str => typeof str === 'string';
 const _isUndef = v => typeof v === 'undefined';
 const _pad2 = n => n<10 ? '0'+n : ''+n;
@@ -153,7 +153,7 @@ const DateUtils = {
  ymdhmsToUTC(dateStr, dtDelimeter=' ') {
 	 const [ymdStr, hmsStr=''] = (dateStr || '').split(dtDelimeter)
 	 , [yearStr, monthStr, dayStr] = ymdStr.split('-')
-	 , [hourStr='', minuteStr='', secondStr=''] = hmsStr.split(':');   
+	 , [hourStr='', minuteStr='', secondStr=''] = hmsStr.split(':');
 	 return Date.UTC(
 		 yearStr, _toIntMonth(monthStr), dayStr,
 		 hourStr, minuteStr, secondStr

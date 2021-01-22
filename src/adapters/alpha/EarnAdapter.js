@@ -6,7 +6,7 @@ const {
   compareByDate,
   roundBy
 } = fnAdapter
-, _isNan = Number.isNaN || isNaN;
+, _isNan = Number.isNaN;
 
 const crData = (json, option) => {
   const { dfPeriod } = option

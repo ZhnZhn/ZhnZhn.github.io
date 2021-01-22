@@ -21,6 +21,7 @@ var _dec, _dec2, _dec3, _class, _temp;
 
 var Decor = _DialogCell["default"].Decor,
     crMenuMore = _DialogCell["default"].crMenuMore;
+var _isNaN = Number.isNaN;
 var DF = {
   INDICATOR: 'SMA',
   PERIOD: 30,
@@ -40,7 +41,7 @@ var _testInRangeOrEmpty = function _testInRangeOrEmpty(min, max) {
 
     var n = parseInt(String(value).trim(), 10);
 
-    if (!Number.isNaN(n) && n > min && n < max) {
+    if (!_isNaN(n) && n > min && n < max) {
       return true;
     } else {
       return false;

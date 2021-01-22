@@ -3,6 +3,8 @@ import { Component } from 'react'
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
 
+const _isNaN = Number.isNaN;
+
 const DF = {
   INDICATOR: 'SMA',
   PERIOD: 30,
@@ -19,7 +21,7 @@ const _testInRangeOrEmpty = (min, max) => (value) => {
     return true;
   }
   const n = parseInt(String(value).trim(), 10)  ;
-  if (!Number.isNaN(n) && n>min && n<max) {
+  if (!_isNaN(n) && n>min && n<max) {
     return true;
   } else {
     return false;

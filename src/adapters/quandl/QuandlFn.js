@@ -11,7 +11,7 @@ const { mlsToDmy } = dt;
 const _isArr = Array.isArray;
 const _isStr = str => typeof str === 'string';
 const _isNumber = n => typeof n === 'number'
-  && !Number.isNaN(n);
+  && (n - n === 0);
 
 const _crItemCaption = ({ dfItemCaption, items, itemCaption }) => _isNumber(dfItemCaption)
   && _isArr(items) && items[dfItemCaption-1]

@@ -27,7 +27,8 @@ var S = {
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
-};
+},
+    _isNaN = Number.isNaN;
 
 var SvgHrzResize = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SvgHrzResize, _Component);
@@ -137,7 +138,7 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
     _this._updateDelta = function () {
       var w = parseInt(_this._getNodeStyle().width, 10);
 
-      if (!isNaN(w)) {
+      if (!_isNaN(w)) {
         _this.delta = w - _this.initWidth;
       }
     };

@@ -3,7 +3,8 @@ import AdapterFn from '../AdapterFn'
 
 const { ymdToUTC } = AdapterFn;
 
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, _isNaN = Number.isNaN;
 
 const _getResults = json => json.BEAAPI.Results
 , _getData = Results => _isArr(Results)
@@ -54,7 +55,7 @@ const MD = {
 const _crUTC = (item) => {
   const { Frequency, Year, Quarter } = item
   , md = Frequency === 'Q'
-     ? MD[Quarter] || MD.DF    
+     ? MD[Quarter] || MD.DF
      : MD.DF;
   return ymdToUTC(Year + md);
 };
@@ -70,7 +71,7 @@ const fnAdapter = {
 
     data.forEach(item => {
       const v = parseFloat(item.DataValue)
-          , y = !Number.isNaN(v) ? v : null;
+          , y = _isNaN(v) ? null : v;
       if ( !(isFilter && item[dfFilterName] !== two) ) {
         d.push({
           x: _crUTC(item),

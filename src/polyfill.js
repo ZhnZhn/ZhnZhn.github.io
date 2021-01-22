@@ -13,6 +13,9 @@ const polyfill = () => {
         && Math.floor(value) === value;
     };
   }
+  if (!Number.isNaN) {
+    Number.isNaN = isNaN
+  }
 };
 
 export default polyfill

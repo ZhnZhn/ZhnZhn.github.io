@@ -5,7 +5,7 @@ const {
   ymdToUTC,
   compareByDate
 } = fnAdapter
-, _isNan = Number.isNaN || isNaN;
+, _isNan = Number.isNaN;
 
 const crData = (json, option) => {
   const { dfItem, dfPeriod } = option

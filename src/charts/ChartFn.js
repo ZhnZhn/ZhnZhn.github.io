@@ -24,7 +24,7 @@ const {
 } = mathFn;
 
 const _isFn = fn => typeof fn === 'function'
-, _isNaN = Number.isNaN || isNaN
+, _isNaN = Number.isNaN
 , _isNumber = n => typeof n === 'number'
     && n-n===0
 , _isUndef = v => typeof v === 'undefined'

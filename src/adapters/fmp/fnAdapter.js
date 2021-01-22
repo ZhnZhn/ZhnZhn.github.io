@@ -13,7 +13,7 @@ const {
   crValueConf
 } = AdapterFn;
 
-const _isNaN = Number.isNaN || isNaN
+const _isNaN = Number.isNaN;
 
 const _crHistoricalItemConf = (data, option) => {
   const {
@@ -80,7 +80,7 @@ const fnAdapter = {
        getCaption(items[1]),
        getCaption(items[2])
     )
-  }),  
+  }),
   addConfOption: (option) => ({
     info: _crInfo(option)
   }),

@@ -9,7 +9,8 @@ const { Builder } = crConfigType1
   compareByDate,
   findMinY
 } = AdapterFn
-, _parser = new window.DOMParser();
+, _parser = new window.DOMParser()
+, _isNaN = Number.isNaN;
 
 //€
 
@@ -40,7 +41,7 @@ const _toData = (str) => {
 
     _seria.childNodes.forEach(node => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'))
-      if (!Number.isNaN(_v)) {
+      if (!_isNaN(_v)) {
         data.push([
           ymdToUTC(node.getAttribute('TIME_PERIOD')),
           _v

@@ -9,9 +9,7 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number';
 };
 
-var _isNaN = function _isNaN(n) {
-  return _isNumber(n) && n - n !== 0;
-};
+var _isNaN = Number.isNaN;
 
 var _isStr = function _isStr(str) {
   return typeof str === 'string';

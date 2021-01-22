@@ -16,9 +16,8 @@ var isNumber = _seriaHelperFn["default"].isNumber,
     fGetY = _seriaHelperFn["default"].fGetY,
     getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
     getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
-
 var _isArr = Array.isArray,
-    _isNaN = Number.isNaN || isNaN;
+    _isNaN = Number.isNaN;
 
 var _isNotEmptyArr = function _isNotEmptyArr(arr) {
   return _isArr(arr) && arr.length > 0;

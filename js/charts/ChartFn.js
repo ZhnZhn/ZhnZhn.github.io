@@ -39,7 +39,7 @@ var _crValueMoving = _mathFn["default"].crValueMoving,
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 },
-    _isNaN = Number.isNaN || isNaN,
+    _isNaN = Number.isNaN,
     _isNumber = function _isNumber(n) {
   return typeof n === 'number' && n - n === 0;
 },

@@ -13,7 +13,8 @@ const S = {
   }
 };
 
-const _isFn = fn => typeof fn === 'function';
+const _isFn = fn => typeof fn === 'function'
+, _isNaN = Number.isNaN;
 
 class SvgHrzResize extends Component {
   static defaultProps = {
@@ -123,7 +124,7 @@ class SvgHrzResize extends Component {
 
   _updateDelta = () => {
     const w = parseInt(this._getNodeStyle().width, 10);
-    if (!isNaN(w)) {
+    if (!_isNaN(w)) {
       this.delta = w - this.initWidth
     }
   }

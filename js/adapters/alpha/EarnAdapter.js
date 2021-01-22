@@ -12,7 +12,7 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 var ymdToUTC = _fnAdapter["default"].ymdToUTC,
     compareByDate = _fnAdapter["default"].compareByDate,
     roundBy = _fnAdapter["default"].roundBy,
-    _isNan = Number.isNaN || isNaN;
+    _isNan = Number.isNaN;
 
 var crData = function crData(json, option) {
   var dfPeriod = option.dfPeriod,

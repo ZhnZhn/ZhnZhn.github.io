@@ -110,11 +110,12 @@ var S = {
     border: '1px solid #4caf50'
   }
 };
+var _isNaN = Number.isNaN;
 
 var _toPercent = function _toPercent(value, min, max) {
   var _percent = (value - min) / (max - min);
 
-  return isNaN(_percent) ? 0 : _percent * 100;
+  return _isNaN(_percent) ? 0 : _percent * 100;
 };
 
 var _crWidthStyle = function _crWidthStyle(percent) {

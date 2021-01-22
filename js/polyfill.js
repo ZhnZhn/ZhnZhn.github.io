@@ -16,6 +16,10 @@ var polyfill = function polyfill() {
       return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
     };
   }
+
+  if (!Number.isNaN) {
+    Number.isNaN = isNaN;
+  }
 };
 
 var _default = polyfill;

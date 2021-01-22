@@ -98,9 +98,11 @@ const S = {
   }
 }
 
+const _isNaN = Number.isNaN;
+
 const _toPercent = (value, min, max) => {
   const _percent = (value - min ) / (max - min);
-  return isNaN(_percent) ? 0 : _percent*100;
+  return _isNaN(_percent) ? 0 : _percent*100;
 }
 const _crWidthStyle = percent => ({
   width: `calc(${percent}%)`

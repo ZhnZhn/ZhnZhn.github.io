@@ -19,8 +19,7 @@ var crError = _AdapterFn["default"].crError,
     compareByDate = _AdapterFn["default"].compareByDate,
     crItemConf = _AdapterFn["default"].crItemConf,
     crValueConf = _AdapterFn["default"].crValueConf;
-
-var _isNaN = Number.isNaN || isNaN;
+var _isNaN = Number.isNaN;
 
 var _crHistoricalItemConf = function _crHistoricalItemConf(data, option) {
   var itemCaption = option.itemCaption,
