@@ -7,11 +7,11 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
+
+var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _ChoroplethMap = _interopRequireDefault(require("../../adapters/eurostat/ChoroplethMap"));
 
@@ -75,133 +75,113 @@ var _crMapId = function _crMapId(caption) {
   return "map_" + caption;
 };
 
-var MapChartItem = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(MapChartItem, _Component);
+var MapChartItem = function MapChartItem(_ref2) {
+  var caption = _ref2.caption,
+      config = _ref2.config,
+      onCloseItem = _ref2.onCloseItem;
 
-  function MapChartItem() {
-    var _this;
+  var _useState = (0, _react.useState)({
+    isLoading: true,
+    time: ''
+  }),
+      state = _useState[0],
+      setState = _useState[1],
+      isLoading = state.isLoading,
+      time = state.time,
+      _useToggle = (0, _useToggle2["default"])(true),
+      isOpen = _useToggle[0],
+      toggleIsOpen = _useToggle[1],
+      _useState2 = (0, _react.useState)(false),
+      isShowInfo = _useState2[0],
+      setIsShowInfo = _useState2[1],
+      _hClickInfo = (0, _react.useCallback)(function () {
+    return setIsShowInfo(true);
+  }, []),
+      _hClickChart = (0, _react.useCallback)(function () {
+    return setIsShowInfo(false);
+  }, []);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      isLoading: true,
-      isOpen: true,
-      isShowInfo: false,
-      time: ''
-    };
-
-    _this._hToggle = function () {
-      _this.setState(function (prevState) {
-        return {
-          isOpen: !prevState.isOpen
-        };
-      });
-    };
-
-    _this._hClickInfo = function () {
-      _this.setState({
-        isShowInfo: true
-      });
-    };
-
-    _this._hClickChart = function () {
-      _this.setState({
-        isShowInfo: false
-      });
-    };
-
-    return _this;
-  }
-
-  var _proto = MapChartItem.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    var _this2 = this;
-
-    var _this$props = this.props,
-        caption = _this$props.caption,
-        config = _this$props.config,
-        jsonCube = config.json,
+  (0, _react.useEffect)(function () {
+    var jsonCube = config.json,
         zhMapSlice = config.zhMapSlice,
         _config$zhDialog = config.zhDialog,
         zhDialog = _config$zhDialog === void 0 ? {} : _config$zhDialog,
         time = zhDialog.time;
+    /*eslint-disable react-hooks/exhaustive-deps */
 
     _ChoroplethMap["default"].draw({
       id: _crMapId(caption),
       jsonCube: jsonCube,
       zhMapSlice: zhMapSlice,
       time: time
-    }).then(function (_ref2) {
-      var map = _ref2.map,
-          time = _ref2.time;
-      _this2.map = map;
-
-      _this2.setState({
+    }).then(function (_ref3) {
+      var time = _ref3.time;
+      setState({
         isLoading: false,
         time: time
       });
     })["catch"](function (err) {
-      _this2.setState({
+      setState({
         isLoading: false
       });
     });
-  };
+  }, []); // config, caption
 
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        caption = _this$props2.caption,
-        config = _this$props2.config,
-        onCloseItem = _this$props2.onCloseItem,
-        _mapId = _crMapId(caption),
-        zhDialog = config.zhDialog,
-        info = config.info,
-        _ref3 = zhDialog || {},
-        _ref3$itemCaption = _ref3.itemCaption,
-        itemCaption = _ref3$itemCaption === void 0 ? '' : _ref3$itemCaption,
-        _this$state = this.state,
-        isLoading = _this$state.isLoading,
-        isOpen = _this$state.isOpen,
-        isShowInfo = _this$state.isShowInfo,
-        time = _this$state.time,
-        _styleMap = isShowInfo ? S.NONE : S.BLOCK;
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: S.ROOT_DIV,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemHeader["default"], {
-        isOpen: isOpen,
-        caption: itemCaption,
-        onClick: this._hToggle,
-        onClose: onCloseItem,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: S.TIME,
-          children: time
+  var _mapId = _crMapId(caption),
+      zhDialog = config.zhDialog,
+      info = config.info,
+      _ref4 = zhDialog || {},
+      _ref4$itemCaption = _ref4.itemCaption,
+      itemCaption = _ref4$itemCaption === void 0 ? '' : _ref4$itemCaption,
+      _styleMap = isShowInfo ? S.NONE : S.BLOCK;
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.ROOT_DIV,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemHeader["default"], {
+      isOpen: isOpen,
+      caption: itemCaption,
+      onClick: toggleIsOpen,
+      onClose: onCloseItem,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: S.TIME,
+        children: time
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].ShowHide, {
+      isShow: isOpen,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BtTabInfo, {
+        isShow: !isShowInfo,
+        onClick: _hClickInfo
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        id: _mapId,
+        style: (0, _extends2["default"])({}, S.MAP_DIV, _styleMap),
+        children: isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].SpinnerLoading, {
+          style: S.SPINNER_LOADING
         })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].ShowHide, {
-        isShow: isOpen,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BtTabInfo, {
-          isShow: !isShowInfo,
-          onClick: this._hClickInfo
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          id: _mapId,
-          style: (0, _extends2["default"])({}, S.MAP_DIV, _styleMap),
-          children: isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].SpinnerLoading, {
-            style: S.SPINNER_LOADING
-          })
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo["default"], {
-          isShow: isShowInfo,
-          info: info,
-          onClickChart: this._hClickChart
-        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo["default"], {
+        isShow: isShowInfo,
+        info: info,
+        onClickChart: _hClickChart
       })]
-    });
-  };
+    })]
+  });
+};
+/*
+MapChartItem.propTypes = {
+  caption: PropTypes.string,
+  config: PropTypes.shape({
+    json: PropTypes.object,
+    zhMapSlice: PropTypes.object,
+    zhDialog: PropTypes.shape({
+      subtitle: PropTypes.string,
+      time: PropTypes.string
+    })
+  }),
+  onCloseItem: PropTypes.func
+}
+*/
 
-  return MapChartItem;
-}(_react.Component);
 
 var _default = MapChartItem;
 exports["default"] = _default;

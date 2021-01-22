@@ -1,10 +1,11 @@
-import { Component } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 //import PropTypes from "prop-types";
+import useToggle from '../hooks/useToggle';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
-import A from '../Comp'
-import ItemHeader from './ItemHeader'
+import A from '../Comp';
+import ItemHeader from './ItemHeader';
 import PanelDataInfo from './PanelDataInfo';
 
 const S = {
@@ -37,7 +38,7 @@ const S = {
   NONE: {
     display: 'none'
   }
-}
+};
 
 const BtTabInfo = ({ isShow, onClick }) => {
   if (!isShow) { return null; }
@@ -53,108 +54,90 @@ const BtTabInfo = ({ isShow, onClick }) => {
 
 const _crMapId = caption => `map_${caption}`;
 
-class MapChartItem extends Component {
-  /*
-  static propTypes = {
-    caption: PropTypes.string,
-    config: PropTypes.shape({
-      json: PropTypes.object,
-      zhMapSlice: PropTypes.object,
-      zhDialog: PropTypes.shape({
-        subtitle: PropTypes.string,
-        time: PropTypes.string
-      })
-    }),
-    onCloseItem: PropTypes.func
-  }
-  */
+const MapChartItem = ({
+  caption,
+  config,
+  onCloseItem
+ }) => {
+  const [state, setState] = useState({ isLoading: true, time: '' })
+  , { isLoading, time } = state
+  , [isOpen, toggleIsOpen] = useToggle(true)
+  , [isShowInfo, setIsShowInfo] = useState(false)
+  , _hClickInfo = useCallback(()=>setIsShowInfo(true), [])
+  , _hClickChart = useCallback(()=>setIsShowInfo(false), []);
 
-  //map = void 0
-  state = {
-    isLoading: true,
-    isOpen: true,
-    isShowInfo: false,
-    time: ''
-  }
-
-  componentDidMount(){
-    const { caption, config } = this.props
-    , { json:jsonCube, zhMapSlice, zhDialog={} } = config
+  useEffect(()=>{
+    const { json:jsonCube, zhMapSlice, zhDialog={} } = config
     , { time } = zhDialog;
 
+   /*eslint-disable react-hooks/exhaustive-deps */
     ChoroplethMap.draw({
       id: _crMapId(caption),
       jsonCube, zhMapSlice, time
-    }).then(({ map, time }) => {
-         this.map = map
-         this.setState({ isLoading: false, time })
+    }).then(({ time }) => {
+         setState({ isLoading: false, time })
        })
        .catch(err => {
-         this.setState({ isLoading: false })
+         setState({ isLoading: false })
        });
-  }
+   }, [])
+   // config, caption
+   /*eslint-enable react-hooks/exhaustive-deps */
 
-  _hToggle = () => {
-     this.setState(prevState => ({
-       isOpen: !prevState.isOpen
-     }))
-  }
+   const _mapId = _crMapId(caption)
+   , { zhDialog, info } = config
+   , { itemCaption='' } = zhDialog || {}
+   , _styleMap = isShowInfo ? S.NONE : S.BLOCK;
 
-  _hClickInfo = () => {
-    this.setState({ isShowInfo: true });
-  }
-  _hClickChart = () => {
-    this.setState({ isShowInfo: false });
-  }
+   return (
+     <div style={S.ROOT_DIV}>
+       <ItemHeader
+         isOpen={isOpen}
+         caption={itemCaption}
+         onClick={toggleIsOpen}
+         onClose={onCloseItem}
+       >
+         <span style={S.TIME}>
+           {time}
+         </span>
+       </ItemHeader>
 
-  render(){
-    const { caption, config, onCloseItem } = this.props
-    , _mapId = _crMapId(caption)
-    , { zhDialog, info } = config
-    , { itemCaption='' } = zhDialog || {}
-    , {
-        isLoading, isOpen, isShowInfo,
-        time
-      } = this.state
-    , _styleMap = isShowInfo
-          ? S.NONE
-          : S.BLOCK;
+       <A.ShowHide isShow={isOpen}>
+          <BtTabInfo
+            isShow={!isShowInfo}
+            onClick={_hClickInfo}
+          />
+          <div
+             id={_mapId}
+             style={{...S.MAP_DIV, ..._styleMap}}
+          >
+            {
+              isLoading && <A.SpinnerLoading style={S.SPINNER_LOADING} />
+            }
+          </div>
+          <PanelDataInfo
+             isShow={isShowInfo}
+             info={info}
+             onClickChart={_hClickChart}
+          />
+       </A.ShowHide>
+     </div>
+   );
+};
 
-    return (
-      <div style={S.ROOT_DIV}>
-        <ItemHeader
-          isOpen={isOpen}
-          caption={itemCaption}
-          onClick={this._hToggle}
-          onClose={onCloseItem}
-        >
-          <span style={S.TIME}>
-            {time}
-          </span>
-        </ItemHeader>
-
-        <A.ShowHide isShow={isOpen}>
-           <BtTabInfo
-             isShow={!isShowInfo}
-             onClick={this._hClickInfo}
-           />
-           <div
-              id={_mapId}
-              style={{ ...S.MAP_DIV, ..._styleMap }}
-           >
-             {
-               isLoading && <A.SpinnerLoading style={S.SPINNER_LOADING} />
-             }
-           </div>
-           <PanelDataInfo
-              isShow={isShowInfo}
-              info={info}
-              onClickChart={this._hClickChart}
-           />
-        </A.ShowHide>
-      </div>
-    );
-  }
+/*
+MapChartItem.propTypes = {
+  caption: PropTypes.string,
+  config: PropTypes.shape({
+    json: PropTypes.object,
+    zhMapSlice: PropTypes.object,
+    zhDialog: PropTypes.shape({
+      subtitle: PropTypes.string,
+      time: PropTypes.string
+    })
+  }),
+  onCloseItem: PropTypes.func
 }
+*/
 
 export default MapChartItem
