@@ -118,7 +118,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
         spacingTop: 25,
         seriaType, seriaColor, seriaWidth
       })
-      //.addTooltip(Tooltip.vDmy)
       .addTooltip(Tooltip.vTdmyIf)
       .addMiniVolume({
         id,

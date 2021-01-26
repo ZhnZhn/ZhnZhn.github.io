@@ -12,7 +12,6 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 var crData = _fnAdapter["default"].crData,
     crConfOption = _fnAdapter["default"].crConfOption,
     _assign = Object.assign;
-var DF_PAIR = 'USD';
 var V_ON_TIME = 'Values on 00:00 GMT';
 
 var _crTitle = function _crTitle(title) {
@@ -24,20 +23,33 @@ var _getConversionType = function _getConversionType(_ref) {
   return ConversionType || {};
 };
 
-var _crSubtitle = function _crSubtitle(json, value) {
-  var ConversionType = _getConversionType(json),
-      conversionSymbol = ConversionType.conversionSymbol,
-      _ConversionType$type = ConversionType.type,
-      type = _ConversionType$type === void 0 ? '' : _ConversionType$type;
+var _getTsym = function _getTsym(json, option) {
+  var _getConversionType2 = _getConversionType(json),
+      conversionSymbol = _getConversionType2.conversionSymbol,
+      _getConversionType2$t = _getConversionType2.type,
+      type = _getConversionType2$t === void 0 ? '' : _getConversionType2$t;
 
-  return value + "/" + (conversionSymbol || DF_PAIR) + " " + type;
+  return {
+    tsym: conversionSymbol || option.tsym,
+    type: type
+  };
 };
 
-var _crBtTitleTo = function _crBtTitleTo(json) {
-  var ConversionType = _getConversionType(json),
-      conversionSymbol = ConversionType.conversionSymbol;
+var _crSubtitle = function _crSubtitle(json, option) {
+  var value = option.value,
+      exchange = option.exchange,
+      _getTsym2 = _getTsym(json, option),
+      tsym = _getTsym2.tsym,
+      type = _getTsym2.type;
 
-  return "" + (conversionSymbol || DF_PAIR);
+  return exchange + ": " + value + "/" + tsym + " " + type;
+};
+
+var _crBtTitleTo = function _crBtTitleTo(json, option) {
+  var _getTsym3 = _getTsym(json, option),
+      tsym = _getTsym3.tsym;
+
+  return tsym;
 };
 
 var _crMiniVolume = function _crMiniVolume(title, dColumn, dVolume) {
@@ -49,21 +61,18 @@ var _crMiniVolume = function _crMiniVolume(title, dColumn, dVolume) {
 };
 
 var trOption = function trOption(option, json) {
-  var _option$value = option.value,
-      value = _option$value === void 0 ? '' : _option$value,
-      title = option.title;
+  var title = option.title;
 
   _assign(option, {
     itemCaption: title,
     title: _crTitle(title),
-    subtitle: _crSubtitle(json, value)
+    subtitle: _crSubtitle(json, option)
   });
 };
 
 var addConfig = function addConfig(builder, json, option, data) {
-  var _btTitleTo = _crBtTitleTo(json),
-      _option$value2 = option.value,
-      value = _option$value2 === void 0 ? '' : _option$value2,
+  var _btTitleTo = _crBtTitleTo(json, option),
+      value = option.value,
       dVolume = data.dVolume,
       dColumn = data.dColumn,
       dToVolume = data.dToVolume,

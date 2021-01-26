@@ -1,0 +1,11 @@
+{
+  "items":[
+    {"c":"CCCAGG", "v":"CCCAGG"},
+    {"c":"Binance", "v":"Binance"},
+    {"c":"Coinbase", "v":"Coinbase"},
+    {"c":"Kraken", "v":"Kraken"},
+    {"c":"Bitfinex", "v":"Bitfinex"},
+    {"c":"Gemini","v":"Gemini"},
+    {"c":"Bitstamp","v":"Bitstamp"}
+  ]
+}

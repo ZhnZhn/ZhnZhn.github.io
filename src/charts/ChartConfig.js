@@ -118,7 +118,7 @@ const ChartConfig = {
         ? seriaType.toLowerCase()
         : 'spline'
     , pointFormatter = tp && Tooltip[tp]
-        || Tooltip.vDmy;
+        || Tooltip.vTdmyIf;         
     return {
       type,
       lineWidth: seriaWidth ?? 1,

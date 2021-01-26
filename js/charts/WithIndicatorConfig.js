@@ -247,7 +247,7 @@ var WithIndicatorConfig = {
             brightness: 0.07
           }
         },
-        tooltip: tooltipColumn || _Chart["default"].fTooltip(_Tooltip["default"].volume)
+        tooltip: tooltipColumn || _Chart["default"].fTooltip(_Tooltip["default"].volumeTdmyIf)
       });
       series.push(_crLineSeria('Median', C.MEDIAN, median(dVolume)));
       series.push(_crLineSeria('Mean', C.MEAN, mean(dVolume)));

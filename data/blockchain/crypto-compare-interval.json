@@ -1,0 +1,7 @@
+{
+  "items":[
+    {"c": "Daily", "v": "histoday" },
+    {"c": "Hourly", "v": "histohour" },
+    {"c": "Minute", "v": "histominute" }
+  ]
+}

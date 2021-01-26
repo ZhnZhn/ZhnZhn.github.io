@@ -154,8 +154,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       seriaType: seriaType,
       seriaColor: seriaColor,
       seriaWidth: seriaWidth
-    }) //.addTooltip(Tooltip.vDmy)
-    .addTooltip(_Tooltip["default"].vTdmyIf).addMiniVolume({
+    }).addTooltip(_Tooltip["default"].vTdmyIf).addMiniVolume({
       id: id,
       dColumn: dataVolumeColumn,
       dVolume: dataVolume,

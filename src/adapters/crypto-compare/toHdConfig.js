@@ -5,7 +5,6 @@ import fnAdapter from './fnAdapter'
 const { crData, crConfOption } = fnAdapter
 , _assign = Object.assign;
 
-const DF_PAIR = 'USD';
 const V_ON_TIME = 'Values on 00:00 GMT';
 
 const _crTitle = (title) => `${title}: ${V_ON_TIME}`;
@@ -13,16 +12,26 @@ const _crTitle = (title) => `${title}: ${V_ON_TIME}`;
 const _getConversionType = ({ ConversionType }) =>
   ConversionType || {};
 
-const _crSubtitle = (json, value) => {
-  const ConversionType= _getConversionType(json)
-  , { conversionSymbol, type='' } = ConversionType;
-  return `${value}/${conversionSymbol || DF_PAIR} ${type}`;
+const _getTsym = (json, option) => {
+  const {
+    conversionSymbol,
+    type=''
+  } = _getConversionType(json);
+  return {
+    tsym: conversionSymbol || option.tsym,
+    type
+  };
 };
 
-const _crBtTitleTo = (json) => {
-  const ConversionType = _getConversionType(json)
-  , { conversionSymbol } = ConversionType;
-  return `${conversionSymbol || DF_PAIR}`;
+const _crSubtitle = (json, option) => {
+  const { value, exchange } = option
+  , { tsym, type } = _getTsym(json, option);  
+  return `${exchange}: ${value}/${tsym} ${type}`;
+};
+
+const _crBtTitleTo = (json, option) => {
+  const { tsym } = _getTsym(json, option);
+  return tsym;
 };
 
 const _crMiniVolume = (title, dColumn, dVolume) => ({
@@ -31,17 +40,17 @@ const _crMiniVolume = (title, dColumn, dVolume) => ({
 });
 
 const trOption = (option, json) => {
-  const { value='', title } = option
+  const { title } = option
   _assign(option, {
     itemCaption: title,
     title: _crTitle(title),
-    subtitle: _crSubtitle(json, value)
+    subtitle: _crSubtitle(json, option)
   })
 };
 
 const addConfig = (builder, json, option, data) => {
-  const _btTitleTo = _crBtTitleTo(json)
-  , { value='' } = option
+  const _btTitleTo = _crBtTitleTo(json, option)
+  , { value } = option
   , {
      dVolume, dColumn,
      dToVolume,

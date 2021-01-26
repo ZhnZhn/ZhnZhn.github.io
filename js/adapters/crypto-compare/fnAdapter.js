@@ -14,11 +14,12 @@ var getValue = _AdapterFn["default"].getValue,
 var _crZhConfig = function _crZhConfig(_ref) {
   var itemCaption = _ref.itemCaption,
       dataSource = _ref.dataSource,
+      _itemKey = _ref._itemKey,
       value = _ref.value,
       linkFn = _ref.linkFn;
   return {
-    id: value,
-    key: value,
+    id: _itemKey,
+    key: _itemKey,
     itemCaption: itemCaption,
     linkFn: linkFn,
     item: value,
@@ -43,10 +44,8 @@ var _isHLOC = function _isHLOC(p) {
 
 var _addPointTo = function _addPointTo(arr, d, value) {
   if (_isNumber(value)) {
-    arr.push({
-      x: d,
-      y: value
-    });
+    //arr.push({ x: d, y: value })
+    arr.push([d, value]);
   }
 };
 

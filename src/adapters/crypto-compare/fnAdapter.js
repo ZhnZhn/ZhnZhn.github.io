@@ -10,13 +10,15 @@ const {
 const _crZhConfig = ({
   itemCaption,
   dataSource,
+  _itemKey,
   value,
   linkFn
 }) => ({
-    id: value, key: value,
-    itemCaption,
-    linkFn, item: value,
-    dataSource
+  id: _itemKey, key: _itemKey,
+  itemCaption,
+  linkFn,
+  item: value,
+  dataSource
 });
 
 const _crInfo = ({ itemCaption }) => ({
@@ -32,7 +34,8 @@ const _isHLOC = (p) => _isNumber(p.open)
 
 const _addPointTo = (arr, d, value) => {
   if (_isNumber(value)) {
-    arr.push({ x: d, y: value })
+    //arr.push({ x: d, y: value })
+    arr.push([d, value ])
   }
 };
 const _addColumnPointTo = (arr, d, p, volume) => {

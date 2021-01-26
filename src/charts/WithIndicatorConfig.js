@@ -231,7 +231,7 @@ const WithIndicatorConfig = {
             brightness: 0.07
           }
         },
-        tooltip: tooltipColumn || Chart.fTooltip(Tooltip.volume)
+        tooltip: tooltipColumn || Chart.fTooltip(Tooltip.volumeTdmyIf)
       });
       series.push(_crLineSeria(
         'Median', C.MEDIAN, median(dVolume)

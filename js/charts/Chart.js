@@ -236,7 +236,7 @@ var Chart = (0, _extends2["default"])({
         turboThreshold: 20000,
         type: _crSeriaType(seriaType),
         color: seriaColor,
-        tooltip: Chart.fTooltip(_Tooltip["default"].vDmy),
+        tooltip: Chart.fTooltip(_Tooltip["default"].vTdmyIf),
         lineWidth: seriaWidth,
         states: {
           hover: {

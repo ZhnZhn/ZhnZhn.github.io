@@ -124,7 +124,7 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
         tp = _option.tp,
         restOption = (0, _objectWithoutPropertiesLoose2["default"])(_option, ["seriaType", "seriaWidth", "seriaColor", "tp"]),
         type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline',
-        pointFormatter = tp && _Tooltip["default"][tp] || _Tooltip["default"].vDmy;
+        pointFormatter = tp && _Tooltip["default"][tp] || _Tooltip["default"].vTdmyIf;
     return (0, _extends2["default"])({
       type: type,
       lineWidth: seriaWidth != null ? seriaWidth : 1,

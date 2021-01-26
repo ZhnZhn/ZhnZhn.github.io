@@ -9,28 +9,43 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var getValue = _fnAdapter["default"].getValue;
 var C = {
-  URL: 'https://min-api.cryptocompare.com/',
-  HD: 'data/histoday',
+  URL: 'https://min-api.cryptocompare.com',
+  //HD: 'data/histoday',
+  QUERY_TAIL: 'extraParams=webapperc',
   REQUEST_ERROR: 'Request Error',
   RESPONSE_EMPTY: 'Response Empty',
-  DF_ID: 'BTC'
+  DF_ID: 'BTC',
+  DF_E: 'CCCAGG',
+  DF_INTERVAL: 'histoday'
 };
 
-var _getValue = function _getValue(items) {
-  if (items === void 0) {
-    items = [];
-  }
-
-  return getValue(items[0], {
-    dfValue: C.DF_ID
-  });
-};
+var _assign = Object.assign,
+    _fGetParam = function _fGetParam(index, dfValue) {
+  return function (items) {
+    return getValue(items[index], {
+      dfValue: dfValue
+    });
+  };
+},
+    _getFsym = _fGetParam(0, C.DF_ID),
+    _getE = _fGetParam(1, C.DF_E),
+    _getInterval = _fGetParam(2, C.DF_INTERVAL);
 
 var _hdUrl = function _hdUrl(option) {
-  var value = _getValue(option.items);
+  var _option$items = option.items,
+      items = _option$items === void 0 ? [] : _option$items,
+      value = _getFsym(items),
+      exchange = _getE(items),
+      interval = _getInterval(items),
+      tsym = exchange === 'Binance' ? 'USDT' : 'USD';
 
-  option.value = value;
-  return "" + C.URL + C.HD + "?fsym=" + value + "&tsym=USD&limit=600";
+  _assign(option, {
+    value: value,
+    exchange: exchange,
+    tsym: tsym
+  });
+
+  return C.URL + "/data/" + interval + "?fsym=" + value + "&e=" + exchange + "&tsym=" + tsym + "&limit=600&" + C.QUERY_TAIL;
 };
 
 var _rUrl = {

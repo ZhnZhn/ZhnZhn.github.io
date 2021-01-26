@@ -198,7 +198,7 @@ crAreaConfig({
       turboThreshold: 20000,
       type: _crSeriaType(seriaType),
       color: seriaColor,
-      tooltip: Chart.fTooltip(Tooltip.vDmy),
+      tooltip: Chart.fTooltip(Tooltip.vTdmyIf),      
       lineWidth: seriaWidth,
       states: {
         hover: {
