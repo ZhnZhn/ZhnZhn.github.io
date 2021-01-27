@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
+var _Color = _interopRequireDefault(require("../constants/Color"));
+
 var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartFn = _interopRequireDefault(require("./ChartFn"));
@@ -31,7 +33,8 @@ var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax,
 var crDividendSeria = _ChartConfig["default"].crDividendSeria,
     crMiniVolumeConfig = _ChartConfig["default"].crMiniVolumeConfig,
     crMiniATHConfig = _ChartConfig["default"].crMiniATHConfig,
-    crMiniHLConfig = _ChartConfig["default"].crMiniHLConfig;
+    crMiniHLConfig = _ChartConfig["default"].crMiniHLConfig,
+    setSerieData = _ChartConfig["default"].setSerieData;
 var C = {
   CATEGORIES_X_AXIS: {
     type: "category",
@@ -83,6 +86,18 @@ var _getData = function _getData(obj) {
   var _obj$config, _obj$config$series;
 
   return ((_obj$config = obj.config) == null ? void 0 : (_obj$config$series = _obj$config.series) == null ? void 0 : _obj$config$series[0].data) || [];
+};
+
+var _crSeriaOption = function _crSeriaOption(color, option) {
+  return _assign({
+    type: 'line',
+    visible: false,
+    color: color,
+    marker: {
+      radius: 3,
+      symbol: "circle"
+    }
+  }, option);
 };
 
 var ConfigBuilder = function ConfigBuilder(config) {
@@ -162,7 +177,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     }).addMiniATH({
       id: id,
       data: dataATH
-    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
+    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems).setStockSerias(seriaType, data, dataHigh, dataLow, dataOpen);
   },
   categoryConfig: function categoryConfig(categories) {
     if (categories === void 0) {
@@ -373,9 +388,14 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  setStockSerias: function setStockSerias(id, d, dH, dL, dO) {
-    _ChartConfig["default"].setStockSerias(this.config, d, dH, dL, dO, id);
-
+  setStockSerias: function setStockSerias(seriaType, d, dH, dL, dO) {
+    var config = this.config;
+    setSerieData(config, d, 0, 'Close', {
+      type: seriaType || 'area'
+    });
+    setSerieData(config, dH, 1, 'High', _crSeriaOption(_Color["default"].S_HIGH));
+    setSerieData(config, dL, 2, 'Low', _crSeriaOption(_Color["default"].S_LOW));
+    setSerieData(config, dO, 3, 'Open', _crSeriaOption(_Color["default"].S_OPEN));
     return this;
   },
 

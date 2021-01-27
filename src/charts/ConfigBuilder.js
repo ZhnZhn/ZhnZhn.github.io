@@ -1,4 +1,5 @@
 import seriaFns from '../math/seriaFn'
+import COLOR from '../constants/Color';
 
 import Chart from './Chart'
 import ChartFn from './ChartFn'
@@ -23,7 +24,8 @@ const {
   crDividendSeria,
   crMiniVolumeConfig,
   crMiniATHConfig,
-  crMiniHLConfig
+  crMiniHLConfig,
+  setSerieData
 } = ChartConfig;
 
 const C = {
@@ -71,6 +73,14 @@ const _getY = (point) => _isArr(point)
 const _getData = obj => obj.config?.series?.[0].data
  || [];
 
+ const _crSeriaOption = (color, option) => _assign({
+   type: 'line', visible: false, color,
+   marker: {
+     radius: 3,
+     symbol: "circle"
+   }
+ }, option);
+
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
     return (new ConfigBuilder(config));
@@ -113,7 +123,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       isDrawDeltaExtrems,
       data, dataHigh, dataLow, dataOpen,
       seriaType, seriaColor, seriaWidth
-    } = option;
+    } = option
     return this.areaConfig({
         spacingTop: 25,
         seriaType, seriaColor, seriaWidth
@@ -130,7 +140,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       })
       .setMinMax(minClose, maxClose, isNotZoomToMinMax)
       .setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems)
-      .setStockSerias(id, data, dataHigh, dataLow, dataOpen);
+      .setStockSerias(seriaType, data, dataHigh, dataLow, dataOpen);
   },
   categoryConfig(categories=[]){
     this.config = ChartConfig.crAreaConfig()
@@ -325,9 +335,19 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     this._setYAxisMin(min, max, noZoom)
     return this;
   },
-  setStockSerias(id, d, dH, dL, dO){
-    ChartConfig.setStockSerias(
-      this.config, d, dH, dL, dO, id
+  setStockSerias(seriaType, d, dH, dL, dO){
+    const config = this.config;
+    setSerieData(config, d, 0, 'Close', {
+      type: seriaType || 'area'
+    })
+    setSerieData(config, dH, 1, 'High',
+      _crSeriaOption(COLOR.S_HIGH)
+    )
+    setSerieData(config, dL, 2, 'Low',
+      _crSeriaOption(COLOR.S_LOW)
+    )
+    setSerieData(config, dO, 3, 'Open',
+      _crSeriaOption(COLOR.S_OPEN)
     )
     return this;
   },

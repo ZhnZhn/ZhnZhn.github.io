@@ -37,15 +37,6 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
   data: data
 });
 
-const _crSeriaOption = (color, option) => _assign({
-  type: 'line', visible: false, color,
-  marker: {
-    radius: 3,
-    symbol: "circle"
-  }
-}, option);
-
-
 const ChartConfig = {
   ...WithIndicator,
   ...WithMarkers,
@@ -71,26 +62,11 @@ const ChartConfig = {
       name: name,
       data: data,
       lineWidth: 1
-    }, options)
-
-    config.series[index].point = Chart.fEventsMouseOver(
-      handleMouseOver
-    )
+    }, options, {
+      point: Chart.fEventsMouseOver(handleMouseOver)
+    })
   },
-
-  setStockSerias(config, dClose, dHigh, dLow, dOpen, id){
-    this.setSerieData(config, dClose, 0, 'Close')
-    this.setSerieData(config, dHigh, 1, 'High',
-      _crSeriaOption(COLOR.S_HIGH)
-    )
-    this.setSerieData(config, dLow, 2, 'Low',
-      _crSeriaOption(COLOR.S_LOW)
-    )
-    this.setSerieData(config, dOpen, 3, 'Open',
-      _crSeriaOption(COLOR.S_OPEN)
-    )
-  },
-
+  
   getColor(seriaIndex) {
     const colors = ChartTheme.colors;
     return colors[seriaIndex % colors.length];
@@ -118,7 +94,7 @@ const ChartConfig = {
         ? seriaType.toLowerCase()
         : 'spline'
     , pointFormatter = tp && Tooltip[tp]
-        || Tooltip.vTdmyIf;         
+        || Tooltip.vTdmyIf;
     return {
       type,
       lineWidth: seriaWidth ?? 1,

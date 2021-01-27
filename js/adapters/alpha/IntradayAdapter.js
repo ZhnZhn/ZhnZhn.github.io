@@ -182,6 +182,7 @@ var IntradayAdapter = {
         interval = option.interval,
         dfT = option.dfT,
         dataSource = option.dataSource,
+        seriaType = option.seriaType,
         _objValues = _getObjValues(json, option),
         _crSeriaData2 = _crSeriaData(_objValues, option),
         data = _crSeriaData2.data,
@@ -202,7 +203,7 @@ var IntradayAdapter = {
     option.maxY = maxClose;
     var config = (0, _ConfigBuilder["default"])().areaConfig().add('chart', {
       spacingTop: 25
-    }).addCaption(_chartId, "Time Series (" + interval + ")").addTooltip(seriaTooltip).addMinMax(dataDaily, option).setStockSerias(_chartId, data, dH, dL, dO).addDividend({
+    }).addCaption(_chartId, "Time Series (" + interval + ")").addTooltip(seriaTooltip).addMinMax(dataDaily, option).setStockSerias(seriaType, data, dH, dL, dO).addDividend({
       dataDividend: dataDividend,
       minClose: minClose,
       maxClose: maxClose

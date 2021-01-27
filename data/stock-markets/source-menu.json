@@ -108,8 +108,8 @@
     "SM_BASE_FMP_HP": {
       "extends": "SM_BASE_FMP",
       "dialogProps": {
-        "isFd": true,
-        "isCh": false,
+        "isFd": true,        
+        "chartsType": "t1a",
         "nInitFromDate": 2,
         "dfProps": {
           "dfT": "historical-price-full",
@@ -124,7 +124,7 @@
         "descrUrl" : "./data/stock-markets/twelve-data.html",
         "rootUri" : "./data/stock-markets/",
         "spT": "id",
-        "isCh": false,
+        "chartsType": "t1a",
         "dataSource": "Twelve Data"
       }
     },

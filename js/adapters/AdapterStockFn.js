@@ -15,6 +15,10 @@ var _isUndef = function _isUndef(v) {
   return typeof v === 'undefined';
 };
 
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
+
 var AdapterStockFn = {
   toSeriesData: function toSeriesData(_ref) {
     var _ref$arr = _ref.arr,
@@ -31,9 +35,10 @@ var AdapterStockFn = {
         pnDate = _seriaOption$pnDate === void 0 ? 'date' : _seriaOption$pnDate,
         isNotZoomToMinMax = option.isNotZoomToMinMax,
         isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        seriaType = option.seriaType,
+        sT = option.seriaType,
         seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth;
+        seriaWidth = option.seriaWidth,
+        seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
     var data = [],
         dataOpen = [],
         dataHigh = [],

@@ -65,18 +65,6 @@ var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data) {
   };
 };
 
-var _crSeriaOption = function _crSeriaOption(color, option) {
-  return _assign({
-    type: 'line',
-    visible: false,
-    color: color,
-    marker: {
-      radius: 3,
-      symbol: "circle"
-    }
-  }, option);
-};
-
 var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], _WithMarkers["default"], _WithPieConfig["default"], _WithStackedAreaConfig["default"], _WithStackedColumnConfig["default"], _WithTreeMapConfig["default"], {
   init: function init() {
     (0, _highchartsMore["default"])(_highcharts["default"]);
@@ -93,14 +81,9 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
       name: name,
       data: data,
       lineWidth: 1
-    }, options);
-    config.series[index].point = _Chart["default"].fEventsMouseOver(_handleMouseOver["default"]);
-  },
-  setStockSerias: function setStockSerias(config, dClose, dHigh, dLow, dOpen, id) {
-    this.setSerieData(config, dClose, 0, 'Close');
-    this.setSerieData(config, dHigh, 1, 'High', _crSeriaOption(_Color["default"].S_HIGH));
-    this.setSerieData(config, dLow, 2, 'Low', _crSeriaOption(_Color["default"].S_LOW));
-    this.setSerieData(config, dOpen, 3, 'Open', _crSeriaOption(_Color["default"].S_OPEN));
+    }, options, {
+      point: _Chart["default"].fEventsMouseOver(_handleMouseOver["default"])
+    });
   },
   getColor: function getColor(seriaIndex) {
     var colors = _ChartTheme["default"].colors;

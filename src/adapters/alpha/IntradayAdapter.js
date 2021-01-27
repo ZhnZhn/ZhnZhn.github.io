@@ -155,7 +155,8 @@ const IntradayAdapter = {
     const {
       value:_chartId,
       interval, dfT,
-      dataSource
+      dataSource,
+      seriaType
     } = option
     , _objValues = _getObjValues(json, option)
     , {
@@ -177,8 +178,8 @@ const IntradayAdapter = {
       .add('chart', { spacingTop: 25 })
       .addCaption(_chartId, `Time Series (${interval})`)
       .addTooltip(seriaTooltip)
-      .addMinMax(dataDaily, option)
-      .setStockSerias(_chartId, data, dH, dL, dO)
+      .addMinMax(dataDaily, option)      
+      .setStockSerias(seriaType, data, dH, dL, dO)
       .addDividend({ dataDividend, minClose, maxClose })
       .addMiniVolume({
         id: _chartId,

@@ -7,6 +7,7 @@ const {
 } = AdapterFn;
 
 const _isUndef = v => typeof v === 'undefined';
+const _isStr = str => typeof str === 'string';
 
 const AdapterStockFn = {
   toSeriesData: ({ arr=[], toDate=ymdhmsToUTC, seriaOption={}, option={} }) => {
@@ -17,10 +18,11 @@ const AdapterStockFn = {
     , {
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
-      seriaType,
+      seriaType: sT,
       seriaColor,
       seriaWidth
     } = option
+    , seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
     const data = []
         , dataOpen = [], dataHigh = [], dataLow = []
         , dataVolume = [], dataVolumeColumn = []
