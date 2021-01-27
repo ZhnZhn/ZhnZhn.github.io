@@ -31,8 +31,8 @@ const toStatsImpl = {
     _crEarningsDate
   ].map(_crConfig),
 
-  crCaption: ({ marketcap }, { item }) =>
-     getValue(item) + ': ' + toStr(marketcap),
+  crCaption: ({ marketcap }, { items }) =>
+     getValue(items[0]) + ': ' + toStr(marketcap),
   crTokensName: ({ companyName }) => companyName || '',
   crDescrName: () => 'ChangePercent',
   crDescrStyle: () => ({

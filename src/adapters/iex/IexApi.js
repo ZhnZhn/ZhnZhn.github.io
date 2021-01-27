@@ -1,5 +1,7 @@
-
+import AdapterFn from '../AdapterFn'
 import IT from './ItemTypes'
+
+const { getValue } = AdapterFn;
 
 const C = {
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
@@ -7,31 +9,35 @@ const C = {
   DF_PERIOD: '1m'
 };
 
-//earning, company, stats : symbol/suffix
+const _assign = Object.assign;
+
+//company, stats: symbol/dfType
 const _crUrlType1 = option => {
-  const { value='' } = option;
-  return `${C.BASE_URL}/${value}`;
+  const { items=[], dfType } = option
+  , value = getValue(items[0]);
+  option.value = value
+  return `${C.BASE_URL}/${value}/${dfType}`;
 };
 
 const _urlDividends = (option) => {
-  const {
-    value='',
-    dfPeriod
-  } = option;
+  const { items=[], dfPeriod } = option
+  , value = getValue(items[0]);
+  option.value = value
   return `${C.BASE_URL}/${value}/dividends/${dfPeriod}`;
 };
 
 const _urlChart = (option) => {
-  const { one, two, symbol, dfPeriod } = option
-  , _symbol = one || symbol || C.DF_SYMBOL
-  , _period = two || dfPeriod || C.DF_PERIOD;
-  option.one = _symbol
-  option.two = _period
-  return `${C.BASE_URL}/${_symbol}/chart/${_period}`;
+  const { items=[], one, two } = option
+  // one, two deprecated option remains for watch compatibility
+  , symbol = one || getValue(items[0], { dfValue: C.DF_SYMBOL})
+  , period = two || getValue(items[1], { dfValue: C.DF_PERIOD });
+  _assign(option, { symbol, period })
+  return `${C.BASE_URL}/${symbol}/chart/${period}`;
 };
 
 const _crUrlMarketList = (option) => {
-  const { value } = option;
+  const { items=[] } = option
+  , value = getValue(items[0]);
   return {
     url: `${C.BASE_URL}/market/list/${value}`,
     q: 'listLimit=20&displayPercent=true'
@@ -40,7 +46,6 @@ const _crUrlMarketList = (option) => {
 
 const _rUrl = {
   DF: _urlChart,
-  [IT.ERN]: _crUrlType1,
   [IT.DIV]: _urlDividends,
   [IT.CHART]: _urlChart,
   [IT.COM]: _crUrlType1,

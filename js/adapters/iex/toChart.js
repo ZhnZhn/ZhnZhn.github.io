@@ -15,20 +15,23 @@ var crItemConf = _AdapterFn["default"].crItemConf,
     crValueConf = _AdapterFn["default"].crValueConf;
 
 var _crZhConfig = function _crZhConfig(id, option, data) {
-  var one = option.one,
-      two = option.two,
+  var symbol = option.symbol,
+      period = option.period,
       dataSource = option.dataSource;
   return {
     dataSource: dataSource,
     id: id,
     key: id,
     linkFn: "NASDAQ",
-    item: one,
-    itemCaption: one,
+    item: symbol,
+    itemCaption: symbol,
     itemConf: (0, _extends2["default"])({}, crItemConf(option), crValueConf(data), {
       _itemKey: id,
-      symbol: one,
-      dfPeriod: two,
+      items: [{
+        "v": symbol
+      }, {
+        "v": period
+      }],
       dataSource: dataSource
     })
   };
@@ -42,17 +45,11 @@ var _crInfo = function _crInfo(title) {
 };
 
 var toChart = (0, _crAdapterOHLCV["default"])({
-  crId: function crId(_ref) {
-    var _itemKey = _ref._itemKey,
-        one = _ref.one,
-        two = _ref.two;
-    return _itemKey || one + '_' + two;
-  },
-  crAddConfig: function crAddConfig(_ref2) {
-    var title = _ref2.title,
-        option = _ref2.option,
-        id = _ref2.id,
-        data = _ref2.data;
+  crAddConfig: function crAddConfig(_ref) {
+    var title = _ref.title,
+        option = _ref.option,
+        id = _ref.id,
+        data = _ref.data;
     return {
       info: _crInfo(title),
       zhConfig: _crZhConfig(id, option, data)

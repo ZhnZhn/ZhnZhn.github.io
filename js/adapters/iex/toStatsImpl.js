@@ -41,8 +41,8 @@ var toStatsImpl = {
   "ttmDividendRate", "dividendYield", "peRatio", "beta", _crEarningsDate].map(_crConfig),
   crCaption: function crCaption(_ref2, _ref3) {
     var marketcap = _ref2.marketcap;
-    var item = _ref3.item;
-    return getValue(item) + ': ' + toStr(marketcap);
+    var items = _ref3.items;
+    return getValue(items[0]) + ': ' + toStr(marketcap);
   },
   crTokensName: function crTokensName(_ref4) {
     var companyName = _ref4.companyName;

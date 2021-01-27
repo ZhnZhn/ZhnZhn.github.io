@@ -15,8 +15,6 @@ var _toCompanyImpl = _interopRequireDefault(require("./toCompanyImpl"));
 
 var _toStatsImpl = _interopRequireDefault(require("./toStatsImpl"));
 
-var _toEarningsImpl = _interopRequireDefault(require("./toEarningsImpl"));
-
 var _toDividendsImpl = _interopRequireDefault(require("./toDividendsImpl"));
 
 var _toChart = _interopRequireDefault(require("./toChart"));
@@ -30,7 +28,7 @@ var _rAdapter2;
 var _rAdapter = (_rAdapter2 = {
   _pn: 'dfType',
   DF: _toChart["default"]
-}, _rAdapter2[_ItemTypes["default"].ERN] = (0, _TemplateScatter["default"])(_toEarningsImpl["default"]), _rAdapter2[_ItemTypes["default"].DIV] = (0, _TemplateScatter["default"])(_toDividendsImpl["default"]), _rAdapter2[_ItemTypes["default"].CHART] = _toChart["default"], _rAdapter2[_ItemTypes["default"].COM] = (0, _TemplateTokens["default"])(_toCompanyImpl["default"]), _rAdapter2[_ItemTypes["default"].STA] = (0, _TemplateTokens["default"])(_toStatsImpl["default"]), _rAdapter2[_ItemTypes["default"].ML] = _toTable["default"], _rAdapter2),
+}, _rAdapter2[_ItemTypes["default"].DIV] = (0, _TemplateScatter["default"])(_toDividendsImpl["default"]), _rAdapter2[_ItemTypes["default"].CHART] = _toChart["default"], _rAdapter2[_ItemTypes["default"].COM] = (0, _TemplateTokens["default"])(_toCompanyImpl["default"]), _rAdapter2[_ItemTypes["default"].STA] = (0, _TemplateTokens["default"])(_toStatsImpl["default"]), _rAdapter2[_ItemTypes["default"].ML] = _toTable["default"], _rAdapter2),
     IexAdapter = (0, _crAdapterRouter["default"])(_rAdapter, {
   crDfKey: function crDfKey(_ref) {
     var _itemKey = _ref._itemKey,

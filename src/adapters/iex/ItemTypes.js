@@ -1,7 +1,6 @@
 
 const ItemTypes = {
-  CHART: 'chart',
-  ERN: 'earnings',
+  CHART: 'chart',  
   DIV: 'dividends',
   COM: 'company',
   STA: 'stats',

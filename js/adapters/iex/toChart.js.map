@@ -1,1 +1,35 @@
-{"version":3,"sources":["../../../src/adapters/iex/toChart.js"],"names":["crItemConf","AdapterFn","crValueConf","_crZhConfig","id","option","data","one","two","dataSource","key","linkFn","item","itemCaption","itemConf","_itemKey","symbol","dfPeriod","_crInfo","title","name","frequency","toChart","crId","crAddConfig","info","zhConfig"],"mappings":";;;;;;;;;AACA;;AACA;;IAGEA,U,GAEEC,qB,CAFFD,U;IACAE,W,GACED,qB,CADFC,W;;AAGF,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAACC,EAAD,EAAKC,MAAL,EAAaC,IAAb,EAAsB;AAAA,MAChCC,GADgC,GACPF,MADO,CAChCE,GADgC;AAAA,MAC3BC,GAD2B,GACPH,MADO,CAC3BG,GAD2B;AAAA,MACtBC,UADsB,GACPJ,MADO,CACtBI,UADsB;AAExC,SAAO;AACLA,IAAAA,UAAU,EAAVA,UADK;AAELL,IAAAA,EAAE,EAAEA,EAFC;AAGLM,IAAAA,GAAG,EAAEN,EAHA;AAILO,IAAAA,MAAM,EAAE,QAJH;AAKLC,IAAAA,IAAI,EAAEL,GALD;AAMLM,IAAAA,WAAW,EAAEN,GANR;AAOLO,IAAAA,QAAQ,gCACHd,UAAU,CAACK,MAAD,CADP,EAEHH,WAAW,CAACI,IAAD,CAFR;AAGNS,MAAAA,QAAQ,EAAEX,EAHJ;AAINY,MAAAA,MAAM,EAAET,GAJF;AAKNU,MAAAA,QAAQ,EAAET,GALJ;AAMNC,MAAAA,UAAU,EAAVA;AANM;AAPH,GAAP;AAgBD,CAlBD;;AAoBA,IAAMS,OAAO,GAAG,SAAVA,OAAU,CAACC,KAAD;AAAA,SAAY;AAC1BC,IAAAA,IAAI,EAAED,KADoB;AAE1BE,IAAAA,SAAS,EAAE;AAFe,GAAZ;AAAA,CAAhB;;AAKA,IAAMC,OAAO,GAAG,gCAAe;AAC7BC,EAAAA,IAAI,EAAE;AAAA,QAAGR,QAAH,QAAGA,QAAH;AAAA,QAAaR,GAAb,QAAaA,GAAb;AAAA,QAAkBC,GAAlB,QAAkBA,GAAlB;AAAA,WAA4BO,QAAQ,IACrCR,GAAG,GAAG,GAAN,GAAYC,GADX;AAAA,GADuB;AAG7BgB,EAAAA,WAAW,EAAE;AAAA,QAAGL,KAAH,SAAGA,KAAH;AAAA,QAAUd,MAAV,SAAUA,MAAV;AAAA,QAAkBD,EAAlB,SAAkBA,EAAlB;AAAA,QAAsBE,IAAtB,SAAsBA,IAAtB;AAAA,WAAkC;AAC7CmB,MAAAA,IAAI,EAAEP,OAAO,CAACC,KAAD,CADgC;AAE7CO,MAAAA,QAAQ,EAAEvB,WAAW,CAACC,EAAD,EAAKC,MAAL,EAAaC,IAAb;AAFwB,KAAlC;AAAA;AAHgB,CAAf,CAAhB;eASegB,O","sourcesContent":["\r\nimport AdapterFn from '../AdapterFn'\r\nimport crAdapterOHLCV from '../crAdapterOHLCV'\r\n\r\nconst {\r\n  crItemConf,\r\n  crValueConf\r\n} = AdapterFn;\r\n\r\nconst _crZhConfig = (id, option, data) => {\r\n  const { one, two, dataSource } = option;\r\n  return {\r\n    dataSource,\r\n    id: id,\r\n    key: id,\r\n    linkFn: \"NASDAQ\",\r\n    item: one,\r\n    itemCaption: one,\r\n    itemConf: {\r\n      ...crItemConf(option),\r\n      ...crValueConf(data),\r\n      _itemKey: id,\r\n      symbol: one,\r\n      dfPeriod: two,\r\n      dataSource\r\n    }\r\n  };\r\n}\r\n\r\nconst _crInfo = (title) => ({\r\n  name: title,\r\n  frequency: \"Daily\",\r\n});\r\n\r\nconst toChart = crAdapterOHLCV({\r\n  crId: ({ _itemKey, one, two }) => _itemKey\r\n    || one + '_' + two,\r\n  crAddConfig: ({ title, option, id, data }) => ({\r\n    info: _crInfo(title),\r\n    zhConfig: _crZhConfig(id, option, data)\r\n  })\r\n})\r\n\r\nexport default toChart\r\n"],"file":"toChart.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/iex/toChart.js"
+ ],
+ "file": "../../../src/adapters/iex/toChart.js",
+ "names": [
+  "crItemConf",
+  "AdapterFn",
+  "crValueConf",
+  "_crZhConfig",
+  "id",
+  "option",
+  "data",
+  "symbol",
+  "period",
+  "dataSource",
+  "key",
+  "linkFn",
+  "item",
+  "itemCaption",
+  "itemConf",
+  "_itemKey",
+  "items",
+  "_crInfo",
+  "title",
+  "name",
+  "frequency",
+  "toChart",
+  "crAddConfig",
+  "info",
+  "zhConfig"
+ ],
+ "mappings": ";;;;;;;;;AACA;;AACA;;IAGEA,U,GAEEC,qB,CAFFD,U;IACAE,W,GACED,qB,CADFC,W;;AAGF,IAAMC,WAAW,GAAG,SAAdA,WAAc,CAACC,EAAD,EAAKC,MAAL,EAAaC,IAAb,EAAsB;AAAA,MAChCC,MADgC,GACDF,MADC,CAChCE,MADgC;AAAA,MACxBC,MADwB,GACDH,MADC,CACxBG,MADwB;AAAA,MAChBC,UADgB,GACDJ,MADC,CAChBI,UADgB;AAExC,SAAO;AACLA,IAAAA,UAAU,EAAVA,UADK;AAELL,IAAAA,EAAE,EAAEA,EAFC;AAGLM,IAAAA,GAAG,EAAEN,EAHA;AAILO,IAAAA,MAAM,EAAE,QAJH;AAKLC,IAAAA,IAAI,EAAEL,MALD;AAMLM,IAAAA,WAAW,EAAEN,MANR;AAOLO,IAAAA,QAAQ,gCACHd,UAAU,CAACK,MAAD,CADP,EAEHH,WAAW,CAACI,IAAD,CAFR;AAGNS,MAAAA,QAAQ,EAAEX,EAHJ;AAINY,MAAAA,KAAK,EAAE,CAAC;AAAC,aAAKT;AAAN,OAAD,EAAgB;AAAC,aAAKC;AAAN,OAAhB,CAJD;AAKNC,MAAAA,UAAU,EAAVA;AALM;AAPH,GAAP;AAeD,CAjBD;;AAmBA,IAAMQ,OAAO,GAAG,SAAVA,OAAU,CAACC,KAAD;AAAA,SAAY;AAC1BC,IAAAA,IAAI,EAAED,KADoB;AAE1BE,IAAAA,SAAS,EAAE;AAFe,GAAZ;AAAA,CAAhB;;AAKA,IAAMC,OAAO,GAAG,gCAAe;AAC7BC,EAAAA,WAAW,EAAE;AAAA,QAAGJ,KAAH,QAAGA,KAAH;AAAA,QAAUb,MAAV,QAAUA,MAAV;AAAA,QAAkBD,EAAlB,QAAkBA,EAAlB;AAAA,QAAsBE,IAAtB,QAAsBA,IAAtB;AAAA,WAAkC;AAC7CiB,MAAAA,IAAI,EAAEN,OAAO,CAACC,KAAD,CADgC;AAE7CM,MAAAA,QAAQ,EAAErB,WAAW,CAACC,EAAD,EAAKC,MAAL,EAAaC,IAAb;AAFwB,KAAlC;AAAA;AADgB,CAAf,CAAhB;eAOee,O"
+}

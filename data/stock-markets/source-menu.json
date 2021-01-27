@@ -36,7 +36,6 @@
         { "id": "SM_IEX_COMPANY" },
         { "id": "SM_IEX_STATS" },
         { "id": "SM_IEX_CHART" },
-        { "id": "SM_IEX_EARNINGS_4Q" },
         { "id": "SM_IEX_DIVIDENDS_5Y"},
         { "id": "SM_IEX_DIVIDENDS_2Y"},
         { "id": "SM_IEX_MARKET_LIST"}
@@ -108,7 +107,7 @@
     "SM_BASE_FMP_HP": {
       "extends": "SM_BASE_FMP",
       "dialogProps": {
-        "isFd": true,        
+        "isFd": true,
         "chartsType": "t1a",
         "nInitFromDate": 2,
         "dfProps": {
@@ -151,27 +150,26 @@
         "chartsType": "t2"
       }
     },
-    "SM_BASE_IEX_0": {
+    "SM_B_IEX":{
       "dialogProps": {
         "descrUrl" : "./data/stock-markets/iex.html",
-        "noDate": true,
+        "rootUri" : "./data/stock-markets/",
+        "noForDate": true,
+        "isCh": false,
+        "spT": "id",
         "loadId" : "IEX",
         "dataSource" : "IEX Cloud"
       }
     },
-    "SM_BASE_IEX": {
+    "SM_BE_IEX": {
+      "extends": "SM_B_IEX",
       "dialogProps": {
-        "descrUrl" : "./data/stock-markets/iex.html",
-        "optionURI" : "./data/stock-markets/wiki.json",
-        "optionsJsonProp" : "tickets",
-        "isWithInputStock": true,
-        "noDate": true,
-        "linkFn" : "NASDAQ",
-        "loadId" : "IEX",
-        "dataSource" : "IEX Cloud"
+        "selectProps":[
+          ["Item","wiki","tickets", true]
+        ],
+        "linkFn" : "NASDAQ"
       }
     },
-
     "SM_EURONEXT" : {
         "type" : "SM_EURONEXT",
         "menuTitle" : "Euronext",
@@ -397,10 +395,8 @@
      "SM_IEX_COMPANY" : {
          "type" : "SM_IEX_COMPANY",
          "menuTitle" : "Company",
-         "addProps": "SM_BASE_IEX",
+         "addProps": "SM_BE_IEX",
          "dialogProps" : {
-           "valueFn" : "ROneSufix",
-           "valueFnPrefix": "company",
            "dfProps": {
              "dfType": "company"
            }
@@ -409,10 +405,8 @@
      "SM_IEX_STATS" : {
          "type" : "SM_IEX_STATS",
          "menuTitle" : "Stats",
-         "addProps": "SM_BASE_IEX",
+         "addProps": "SM_BE_IEX",
          "dialogProps" : {
-           "valueFn" : "ROneSufix",
-           "valueFnPrefix": "stats",
            "dfProps": {
              "dfType": "stats"
            }
@@ -421,40 +415,24 @@
      "SM_IEX_CHART" : {
          "type" : "SM_IEX_CHART",
          "menuTitle" : "Historical Prices",
-         "dialogType": "DialogType4",
-         "addProps": "SM_BASE_IEX",
+         "addProps": "SM_BE_IEX",
          "dialogProps" : {
-           "isWithOneInput": true,
-           "oneCaption": "Stock",
-           "oneURI" : "./data/stock-markets/wiki.json",
-           "oneJsonProp": "tickets",
-           "twoCaption": "Period",
-           "twoURI": "./data/stock-markets/iex-chart.json",
-           "valueFn" : "ROne",
+           "isCh": true,
+           "chartsType": "t1a",
+           "selectProps":[
+             ["Period","iex-chart"]
+           ],
            "dataSource" : "IEX Cloud: Historical Prices",
            "dfProps": {
              "dfType": "chart"
            }
          }
      },
-     "SM_IEX_EARNINGS_4Q" : {
-         "type" : "SM_IEX_EARNINGS_4Q",
-         "menuTitle" : "Earnings 4Q (Scatter)",
-         "addProps": "SM_BASE_IEX",
-         "dialogProps" : {
-           "valueFn" : "ROneSufix",
-           "valueFnPrefix": "earnings",
-           "dfProps": {
-             "dfType": "earnings"
-           }
-         }
-     },
      "SM_IEX_DIVIDENDS_5Y" : {
          "type" : "SM_IEX_DIVIDENDS_5Y",
          "menuTitle" : "Dividends 5Y (Scatter)",
-         "addProps": "SM_BASE_IEX",
+         "addProps": "SM_BE_IEX",
          "dialogProps" : {
-           "valueFn" : "ROne",
            "dfProps": {
              "dfType": "dividends",
              "dfPeriod": "5y"
@@ -464,9 +442,8 @@
      "SM_IEX_DIVIDENDS_2Y" : {
          "type" : "SM_IEX_DIVIDENDS_2Y",
          "menuTitle" : "Dividends 2Y (Scatter)",
-         "addProps": "SM_BASE_IEX",
+         "addProps": "SM_BE_IEX",
          "dialogProps" : {
-           "valueFn" : "ROne",
            "dfProps": {
              "dfType": "dividends",
              "dfPeriod": "2y"
@@ -476,11 +453,11 @@
      "SM_IEX_MARKET_LIST" : {
          "type" : "SM_IEX_MARKET_LIST",
          "menuTitle" : "Market List",
-         "addProps": "SM_BASE_IEX_0",
+         "addProps": "SM_B_IEX",
          "dialogProps" : {
-           "optionURI" : "./data/stock-markets/iex-market.json",
-           "optionsJsonProp" : "items",
-           "valueFn" : "ROne",
+           "selectProps": [
+             ["Item", "iex-market"]
+           ],
            "dfProps": {
              "dfType": "market"
            }

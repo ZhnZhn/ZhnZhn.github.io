@@ -8,20 +8,19 @@ const {
 } = AdapterFn;
 
 const _crZhConfig = (id, option, data) => {
-  const { one, two, dataSource } = option;
+  const { symbol, period, dataSource } = option;
   return {
     dataSource,
     id: id,
     key: id,
     linkFn: "NASDAQ",
-    item: one,
-    itemCaption: one,
+    item: symbol,
+    itemCaption: symbol,
     itemConf: {
       ...crItemConf(option),
       ...crValueConf(data),
       _itemKey: id,
-      symbol: one,
-      dfPeriod: two,
+      items: [{"v": symbol}, {"v": period}],
       dataSource
     }
   };
@@ -32,9 +31,7 @@ const _crInfo = (title) => ({
   frequency: "Daily",
 });
 
-const toChart = crAdapterOHLCV({
-  crId: ({ _itemKey, one, two }) => _itemKey
-    || one + '_' + two,
+const toChart = crAdapterOHLCV({  
   crAddConfig: ({ title, option, id, data }) => ({
     info: _crInfo(title),
     zhConfig: _crZhConfig(id, option, data)
