@@ -259,36 +259,42 @@
           "dataSource" : "Alpha Vantage: Indicators"
         }
     },
-    "SM_A_INTRADAY" : {
-        "type" : "SM_A_INTRADAY",
-        "menuTitle" : "Intraday",
-        "dialogCaption" : "Alpha Vantage: Intraday",
-        "contFullCaption" : "Alpha Vantage: Intraday Prices",
-        "dialogType" : "AlphaIntradayDialog",
-        "dialogProps" : {
-          "descrUrl" : "./data/stock-markets/alpha-vantage.html",
-          "valueFn" : "ROne",
-          "loadId" : "AL",
-          "dfSubId": "I",
-          "dataSource" : "Alpha Vantage: Intraday",
-          "dfT": "INTRADAY"
-        }
-     },
-     "SM_A_DAILY" : {
-         "type" : "SM_A_DAILY",
-         "menuTitle" : "Daily",
-         "dialogCaption" : "Alpha Vantage: Daily",
-         "contFullCaption": "Alpha Vantage: Daily Prices",
-         "dialogType" : "AlphaIntradayDialog",
+     "SM_A_INTRADAY" : {
+         "type" : "SM_A_INTRADAY",
+         "menuTitle" : "Intraday",
+         "dialogCaption" : "Alpha Vantage: Intraday",
+         "contFullCaption" : "Alpha Vantage: Intraday Prices",
+         "addProps": "SM_BASE_AV",
          "dialogProps" : {
-           "descrUrl" : "./data/stock-markets/alpha-vantage.html",
-           "valueFn" : "ROne",
-           "loadId" : "AL",
-           "dfSubId": "I",
-           "dataSource" : "Alpha Vantage: Daily",
-           "dfT": "DAILY"
+           "selectProps": [
+             ["Interval","av-interval"]
+           ],
+           "chartsType": "t1a",
+           "dfProps": {
+             "dfSubId": "I",
+             "dfT": "INTRADAY",
+             "dfFn": "TIME_SERIES_INTRADAY"
+           }
          }
       },
+      "SM_A_DAILY" : {
+          "type" : "SM_A_DAILY",
+          "menuTitle" : "Daily",
+          "dialogCaption" : "Alpha Vantage: Daily",
+          "contFullCaption": "Alpha Vantage: Daily Prices",
+          "addProps": "SM_BASE_AV",
+          "dialogProps" : {
+            "selectProps": [
+              ["Period","av-size"]
+            ],
+            "chartsType": "t1a",
+            "dfProps": {
+              "dfSubId": "I",
+              "dfT": "DAILY",
+              "dfFn": "TIME_SERIES_DAILY"
+             }
+          }
+       },
       "SM_A_DAILYADJUSTED" : {
           "type" : "SM_A_DAILYADJUSTED",
           "menuTitle" : "Daily Adjusted",

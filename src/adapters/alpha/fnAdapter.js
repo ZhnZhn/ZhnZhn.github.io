@@ -13,24 +13,33 @@ const {
   roundBy
 } = AdapterFn;
 
-const _crItemConf = ({id, dataSource, data}, option) => {
-  const { indicator, ticket, dfT, dfSubId, interval } = option;
-  return indicator === 'TIME_SERIES_DAILY'
+const _crItemConf = ({ data }, option) => {
+  const {
+    _itemKey,
+    dfFn, dfT, dfSubId,
+    items,
+    dataSource
+  } = option;
+  return dfFn === 'TIME_SERIES_DAILY'
      ? {
-          _itemKey: id,
+          _itemKey,
           ...crItemConf(option),
-          ...crValueConf(data),
-          dfT, dfSubId, interval, indicator, ticket,
+          ...crValueConf(data),          
+          items: [...items],
+          dfT, dfSubId, dfFn,
           dataSource
        }
     : void 0;
 };
 
 const _crZhConfig = (config, option) => {
-  const { id, dataSource } = config
+  const { _itemKey, itemCaption } = option
+  , { id, dataSource } = config
+  , _id = _itemKey || id
   , itemConf = _crItemConf(config, option);
   return {
-    id, key: id,
+    id: _id, key: _id,
+    itemCaption,
     itemConf,
     legend: stockSeriesLegend(),
     dataSource: dataSource || "Alpha Vantage"

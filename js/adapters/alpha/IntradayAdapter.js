@@ -26,13 +26,23 @@ var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     crVolumePoint = _AdapterFn["default"].crVolumePoint;
 var crMarkerColor = _IntradayFns["default"].crMarkerColor,
     crDataDaily = _IntradayFns["default"].crDataDaily;
-var crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption; //const DAILY = 'Daily';
+var crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption;
+
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
+
+var _isBool = function _isBool(bool) {
+  return typeof bool === 'boolean';
+}; //const DAILY = 'Daily';
+
 
 var INTRADAY = 'INTRADAY';
 var DAILY_ADJUSTED = 'DAILY_ADJUSTED';
 
 var _crSeriaOptions = function _crSeriaOptions(_ref) {
   var dfT = _ref.dfT,
+      isFilterZero = _ref.isFilterZero,
       hasFilterZero = _ref.hasFilterZero,
       hasDividend = _ref.hasDividend;
 
@@ -41,7 +51,7 @@ var _crSeriaOptions = function _crSeriaOptions(_ref) {
   var _isAdjusted = dfT === DAILY_ADJUSTED;
 
   return {
-    notFilterZero: !hasFilterZero,
+    notFilterZero: _isBool(isFilterZero) ? !isFilterZero : !hasFilterZero,
     isDividend: _isAdjusted && hasDividend,
     toUTC: _isIntraday ? ymdhmsToUTC : ymdToUTC,
     pnClose: _isAdjusted ? '5. adjusted close' : '4. close',
@@ -70,7 +80,8 @@ var _notZeros = function _notZeros(v1, v2) {
 
 var _getObjValues = function _getObjValues(json, option) {
   var interval = option.interval,
-      _propName = "Time Series (" + interval + ")";
+      _suffix = interval,
+      _propName = "Time Series (" + _suffix + ")";
 
   return json[_propName];
 };
@@ -174,15 +185,22 @@ var _crChartOptions = function _crChartOptions(dfT, data) {
 };
 
 var IntradayAdapter = {
-  crKey: function crKey(option) {
-    return option.value;
+  crKey: function crKey(_ref2) {
+    var _itemKey = _ref2._itemKey,
+        value = _ref2.value;
+    return _itemKey || value;
   },
   toConfig: function toConfig(json, option) {
-    var _chartId = option.value,
+    var _itemKey = option._itemKey,
+        title = option.title,
+        value = option.value,
         interval = option.interval,
         dfT = option.dfT,
         dataSource = option.dataSource,
         seriaType = option.seriaType,
+        _chartId = _itemKey || value,
+        _title = title || value,
+        _seriaType = _isStr(seriaType) ? seriaType.toLowerCase() : 'area',
         _objValues = _getObjValues(json, option),
         _crSeriaData2 = _crSeriaData(_objValues, option),
         data = _crSeriaData2.data,
@@ -203,7 +221,7 @@ var IntradayAdapter = {
     option.maxY = maxClose;
     var config = (0, _ConfigBuilder["default"])().areaConfig().add('chart', {
       spacingTop: 25
-    }).addCaption(_chartId, "Time Series (" + interval + ")").addTooltip(seriaTooltip).addMinMax(dataDaily, option).setStockSerias(seriaType, data, dH, dL, dO).addDividend({
+    }).addCaption(_title, "Time Series (" + interval + ")").addTooltip(seriaTooltip).addMinMax(dataDaily, option).setStockSerias(_seriaType, data, dH, dL, dO).addDividend({
       dataDividend: dataDividend,
       minClose: minClose,
       maxClose: maxClose
@@ -226,7 +244,7 @@ var IntradayAdapter = {
       adapter: IntradayAdapter,
       json: json,
       option: option,
-      type: 'spline'
+      type: 'line'
     });
   }
 };

@@ -18,15 +18,26 @@ const { crMarkerColor, crDataDaily } = IntradayFns
 
 const { crIntradayConfigOption } = fnAdapter;
 
+const _isStr = str => typeof str === 'string';
+const _isBool = bool => typeof bool === 'boolean';
+
+
 //const DAILY = 'Daily';
 const INTRADAY = 'INTRADAY'
 const DAILY_ADJUSTED = 'DAILY_ADJUSTED'
 
-const _crSeriaOptions = ({ dfT, hasFilterZero, hasDividend }) => {
+
+const _crSeriaOptions = ({
+  dfT,
+  isFilterZero, hasFilterZero,
+  hasDividend
+}) => {
   const _isIntraday = dfT === INTRADAY;
   const _isAdjusted = dfT === DAILY_ADJUSTED;
   return {
-    notFilterZero: !hasFilterZero,
+    notFilterZero: _isBool(isFilterZero)
+       ? !isFilterZero
+       : !hasFilterZero,
     isDividend: _isAdjusted && hasDividend,
     toUTC: _isIntraday
       ? ymdhmsToUTC
@@ -60,7 +71,8 @@ const _notZeros = (v1, v2) => v1 !== 0 && v2 !== 0;
 
 const _getObjValues = (json, option) => {
   const { interval } = option
-  , _propName = `Time Series (${interval})`
+  , _suffix = interval
+  , _propName = `Time Series (${_suffix})`;
   return json[_propName];
 };
 
@@ -148,16 +160,22 @@ const _crChartOptions = (dfT, data) => {
 };
 
 const IntradayAdapter = {
-  crKey(option){
-    return option.value;
+  crKey({ _itemKey, value }){
+    return _itemKey || value;
   },
   toConfig(json, option){
     const {
-      value:_chartId,
+      _itemKey, title,
+      value,
       interval, dfT,
       dataSource,
       seriaType
     } = option
+    , _chartId = _itemKey || value
+    , _title = title || value
+    , _seriaType = _isStr(seriaType)
+        ?  seriaType.toLowerCase()
+        : 'area'
     , _objValues = _getObjValues(json, option)
     , {
         data, dH, dL, dO,
@@ -176,10 +194,10 @@ const IntradayAdapter = {
     const config = Builder()
       .areaConfig()
       .add('chart', { spacingTop: 25 })
-      .addCaption(_chartId, `Time Series (${interval})`)
+      .addCaption(_title, `Time Series (${interval})`)
       .addTooltip(seriaTooltip)
-      .addMinMax(dataDaily, option)      
-      .setStockSerias(seriaType, data, dH, dL, dO)
+      .addMinMax(dataDaily, option)
+      .setStockSerias(_seriaType, data, dH, dL, dO)
       .addDividend({ dataDividend, minClose, maxClose })
       .addMiniVolume({
         id: _chartId,
@@ -201,7 +219,7 @@ const IntradayAdapter = {
     return Builder.crSeria({
       adapter: IntradayAdapter,
       json, option,
-      type: 'spline'
+      type: 'line'
     });
   }
 }

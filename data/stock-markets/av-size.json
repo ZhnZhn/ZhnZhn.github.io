@@ -1,0 +1,6 @@
+{
+  "items":[
+    {"c":"Compact (100 days)","v":"compact"},
+    {"c":"Full (of 20+ years, about 1MB)","v":"full"}
+  ]
+}

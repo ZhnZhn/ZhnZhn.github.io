@@ -45,15 +45,39 @@ var AlphaApi = {
 
       case 'TIME_SERIES_INTRADAY':
         {
-          var interval = option.interval;
-          return C.ROOT + "?function=" + _fn + "&interval=" + interval + "&symbol=" + ticket + "&apikey=" + apiKey;
+          var _option$items = option.items,
+              items = _option$items === void 0 ? [] : _option$items,
+              _ticket = getValue(items[0]),
+              interval = getValue(items[1]),
+              title = _ticket + " (" + interval + ")";
+
+          _assign(option, {
+            ticket: _ticket,
+            interval: interval,
+            title: title,
+            itemCaption: title
+          });
+
+          return C.ROOT + "?function=" + _fn + "&interval=" + interval + "&symbol=" + _ticket + "&apikey=" + apiKey;
         }
 
       case 'TIME_SERIES_DAILY':
         {
-          var _option$outputsize = option.outputsize,
-              outputsize = _option$outputsize === void 0 ? 'compact' : _option$outputsize;
-          return C.ROOT + "?function=" + _fn + "&outputsize=" + outputsize + "&symbol=" + ticket + "&apikey=" + apiKey;
+          var _option$items2 = option.items,
+              _items = _option$items2 === void 0 ? [] : _option$items2,
+              _ticket2 = getValue(_items[0]),
+              outputsize = getValue(_items[1]),
+              _title = _ticket2 + " (Daily)";
+
+          _assign(option, {
+            ticket: _ticket2,
+            outputsize: outputsize,
+            interval: "Daily",
+            title: _title,
+            itemCaption: _title
+          });
+
+          return C.ROOT + "?function=" + _fn + "&outputsize=" + outputsize + "&symbol=" + _ticket2 + "&apikey=" + apiKey;
         }
 
       case 'TIME_SERIES_DAILY_ADJUSTED':
@@ -66,14 +90,14 @@ var AlphaApi = {
       case 'BALANCE_SHEET':
       case 'CASH_FLOW':
         {
-          var items = option.items,
+          var _items2 = option.items,
               itemCaption = option.itemCaption,
-              _symbol = getValue(items[0]);
+              _symbol = getValue(_items2[0]);
 
           _assign(option, {
-            itemCaption: itemCaption.replace(getCaption(items[0]), _symbol),
-            dfItem: getValue(items[1]),
-            dfPeriod: getValue(items[2])
+            itemCaption: itemCaption.replace(getCaption(_items2[0]), _symbol),
+            dfItem: getValue(_items2[1]),
+            dfPeriod: getValue(_items2[2])
           });
 
           return C.ROOT + "?function=" + _fn + "&symbol=" + _symbol + "&apikey=" + apiKey;
@@ -81,12 +105,12 @@ var AlphaApi = {
 
       case 'EARNINGS':
         {
-          var _items = option.items,
-              _symbol2 = getValue(_items[0]);
+          var _items3 = option.items,
+              _symbol2 = getValue(_items3[0]);
 
           _assign(option, {
             itemCaption: _symbol2,
-            dfPeriod: getValue(_items[1])
+            dfPeriod: getValue(_items3[1])
           });
 
           return C.ROOT + "?function=" + _fn + "&symbol=" + _symbol2 + "&apikey=" + apiKey;

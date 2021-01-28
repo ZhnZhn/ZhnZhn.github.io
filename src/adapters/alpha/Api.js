@@ -30,11 +30,25 @@ const AlphaApi = {
       case 'SECTOR':
         return `${C.ROOT}?function=${_fn}&apikey=${apiKey}`;
       case 'TIME_SERIES_INTRADAY':{
-        const { interval } = option;
+        const { items=[] } = option
+        , ticket = getValue(items[0])
+        , interval = getValue(items[1])
+        , title = `${ticket} (${interval})`;
+        _assign(option, {
+          ticket, interval,
+          title, itemCaption: title
+        })
         return `${C.ROOT}?function=${_fn}&interval=${interval}&symbol=${ticket}&apikey=${apiKey}`;
       }
       case 'TIME_SERIES_DAILY': {
-        const { outputsize='compact' } = option;
+        const { items=[] } = option
+        , ticket = getValue(items[0])
+        , outputsize = getValue(items[1])
+        , title = `${ticket} (Daily)`;
+        _assign(option, {
+           ticket, outputsize, interval: "Daily",
+           title, itemCaption: title
+         })
         return `${C.ROOT}?function=${_fn}&outputsize=${outputsize}&symbol=${ticket}&apikey=${apiKey}`;
       }
       case 'TIME_SERIES_DAILY_ADJUSTED': {
