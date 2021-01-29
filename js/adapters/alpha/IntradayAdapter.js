@@ -15,45 +15,28 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _IntradayFns = _interopRequireDefault(require("../IntradayFns"));
 
-var _Chart = _interopRequireDefault(require("../../charts/Chart"));
-
-var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
-
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
-    crVolumePoint = _AdapterFn["default"].crVolumePoint;
-var crMarkerColor = _IntradayFns["default"].crMarkerColor,
-    crDataDaily = _IntradayFns["default"].crDataDaily;
-var crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption;
-
-var _isStr = function _isStr(str) {
-  return typeof str === 'string';
-};
-
-var _isBool = function _isBool(bool) {
-  return typeof bool === 'boolean';
-}; //const DAILY = 'Daily';
-
+var ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
+    crVolumePoint = _AdapterFn["default"].crVolumePoint,
+    crMarkerColor = _IntradayFns["default"].crMarkerColor,
+    crDataDaily = _IntradayFns["default"].crDataDaily,
+    crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption; //const DAILY = 'Daily';
 
 var INTRADAY = 'INTRADAY';
 var DAILY_ADJUSTED = 'DAILY_ADJUSTED';
+var _keys = Object.keys;
 
 var _crSeriaOptions = function _crSeriaOptions(_ref) {
   var dfT = _ref.dfT,
-      isFilterZero = _ref.isFilterZero,
-      hasFilterZero = _ref.hasFilterZero,
-      hasDividend = _ref.hasDividend;
-
-  var _isIntraday = dfT === INTRADAY;
+      isFilterZero = _ref.isFilterZero;
 
   var _isAdjusted = dfT === DAILY_ADJUSTED;
 
   return {
-    notFilterZero: _isBool(isFilterZero) ? !isFilterZero : !hasFilterZero,
-    isDividend: _isAdjusted && hasDividend,
-    toUTC: _isIntraday ? ymdhmsToUTC : ymdToUTC,
+    notFilterZero: !isFilterZero,
+    isDividend: _isAdjusted,
+    toUTC: ymdhmsToUTC,
     pnClose: _isAdjusted ? '5. adjusted close' : '4. close',
     pnVolume: _isAdjusted ? '6. volume' : '5. volume'
   };
@@ -87,14 +70,14 @@ var _getObjValues = function _getObjValues(json, option) {
 };
 
 var _crSeriaData = function _crSeriaData(objValues, option) {
-  var _dateKeys = objValues ? Object.keys(objValues).sort() : [],
-      data = [],
+  var _dateKeys = objValues ? _keys(objValues).sort() : [],
+      dC = [],
       dH = [],
       dL = [],
       dO = [],
-      dataDividend = [],
-      dVolume = [],
-      dColumn = [],
+      dDividend = [],
+      dVc = [],
+      dV = [],
       _crSeriaOptions2 = _crSeriaOptions(option),
       notFilterZero = _crSeriaOptions2.notFilterZero,
       isDividend = _crSeriaOptions2.isDividend,
@@ -128,15 +111,15 @@ var _crSeriaData = function _crSeriaData(objValues, option) {
       _low = parseFloat(_point['3. low']);
       _volume = parseFloat(_point[pnVolume]);
       _dateMs = toUTC(_date);
-      data.push((0, _extends2["default"])({
+      dC.push((0, _extends2["default"])({
         x: _dateMs,
         y: _close
       }, crMarkerColor(_date)));
       dH.push([_dateMs, _high]);
       dL.push([_dateMs, _low]);
       dO.push([_dateMs, _open]);
-      dVolume.push([_dateMs, _volume]);
-      dColumn.push(crVolumePoint({
+      dV.push([_dateMs, _volume]);
+      dVc.push(crVolumePoint({
         open: _open,
         close: _closeV,
         volume: _volume,
@@ -148,7 +131,7 @@ var _crSeriaData = function _crSeriaData(objValues, option) {
       }));
 
       if (isDividend) {
-        _addDividendPointTo(dataDividend, _dateMs, _point);
+        _addDividendPointTo(dDividend, _dateMs, _point);
       }
 
       if (minClose > _close) {
@@ -162,79 +145,74 @@ var _crSeriaData = function _crSeriaData(objValues, option) {
   }
 
   return {
-    data: data,
+    dC: dC,
     dH: dH,
     dL: dL,
     dO: dO,
-    dataDividend: dataDividend,
+    dDividend: dDividend,
     minClose: minClose,
     maxClose: maxClose,
-    dVolume: dVolume,
-    dColumn: dColumn
+    dVc: dVc,
+    dV: dV
   };
 };
 
-var _crChartOptions = function _crChartOptions(dfT, data) {
-  var _isIntraday = dfT === INTRADAY;
-
-  return {
-    dataDaily: _isIntraday ? crDataDaily(data) : data,
-    seriaTooltip: _isIntraday ? _Tooltip["default"].vTdmy : _Tooltip["default"].vDmy,
-    volumeTooltip: _isIntraday ? _Tooltip["default"].volumeTdmy : _Tooltip["default"].volume
-  };
+var _crDataDaily = function _crDataDaily(dfT, data) {
+  return dfT === INTRADAY ? crDataDaily(data) : data;
 };
 
 var IntradayAdapter = {
   crKey: function crKey(_ref2) {
-    var _itemKey = _ref2._itemKey,
-        value = _ref2.value;
-    return _itemKey || value;
+    var _itemKey = _ref2._itemKey;
+    return _itemKey;
   },
   toConfig: function toConfig(json, option) {
     var _itemKey = option._itemKey,
         title = option.title,
-        value = option.value,
-        interval = option.interval,
-        dfT = option.dfT,
+        dfFn = option.dfFn,
         dataSource = option.dataSource,
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
+        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
         seriaType = option.seriaType,
-        _chartId = _itemKey || value,
-        _title = title || value,
-        _seriaType = _isStr(seriaType) ? seriaType.toLowerCase() : 'area',
+        seriaColor = option.seriaColor,
+        seriaWidth = option.seriaWidth,
+        dfT = dfFn.replace('TIME_SERIES_', ''),
         _objValues = _getObjValues(json, option),
         _crSeriaData2 = _crSeriaData(_objValues, option),
-        data = _crSeriaData2.data,
+        dC = _crSeriaData2.dC,
         dH = _crSeriaData2.dH,
         dL = _crSeriaData2.dL,
         dO = _crSeriaData2.dO,
         minClose = _crSeriaData2.minClose,
         maxClose = _crSeriaData2.maxClose,
-        dataDividend = _crSeriaData2.dataDividend,
-        dColumn = _crSeriaData2.dColumn,
-        dVolume = _crSeriaData2.dVolume,
-        _crChartOptions2 = _crChartOptions(dfT, data),
-        dataDaily = _crChartOptions2.dataDaily,
-        seriaTooltip = _crChartOptions2.seriaTooltip,
-        volumeTooltip = _crChartOptions2.volumeTooltip;
+        dDividend = _crSeriaData2.dDividend,
+        dVc = _crSeriaData2.dVc,
+        dV = _crSeriaData2.dV,
+        dataDaily = _crDataDaily(dfT, dC);
 
-    option.minY = minClose;
-    option.maxY = maxClose;
-    var config = (0, _ConfigBuilder["default"])().areaConfig().add('chart', {
-      spacingTop: 25
-    }).addCaption(_title, "Time Series (" + interval + ")").addTooltip(seriaTooltip).addMinMax(dataDaily, option).setStockSerias(_seriaType, data, dH, dL, dO).addDividend({
-      dataDividend: dataDividend,
+    var config = (0, _ConfigBuilder["default"])().stockConfig(_itemKey, {
+      dC: dC,
+      dO: dO,
+      dH: dH,
+      dL: dL,
       minClose: minClose,
-      maxClose: maxClose
-    }).addMiniVolume({
-      id: _chartId,
-      dVolume: dVolume,
-      dColumn: dColumn,
-      tooltipColumn: _Chart["default"].fTooltip(volumeTooltip)
-    }).add((0, _extends2["default"])({}, crIntradayConfigOption({
-      id: _chartId,
+      maxClose: maxClose,
+      dVc: dVc,
+      dV: dV,
+      isNotZoomToMinMax: isNotZoomToMinMax,
+      isDrawDeltaExtrems: isDrawDeltaExtrems,
+      seriaType: seriaType,
+      seriaColor: seriaColor,
+      seriaWidth: seriaWidth
+    }).addCaption(title).add(crIntradayConfigOption({
+      id: _itemKey,
       data: dataDaily,
       dataSource: dataSource
-    }, option))).toConfig();
+    }, option)).addDividend({
+      dDividend: dDividend,
+      minClose: minClose,
+      maxClose: maxClose
+    }).toConfig();
     return {
       config: config
     };

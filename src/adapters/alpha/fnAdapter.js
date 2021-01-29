@@ -4,6 +4,7 @@ import AdapterFn from '../AdapterFn'
 const {
   getValue,
   getCaption,
+  joinBy,
   crItemConf,
   crValueConf,
   stockSeriesLegend,
@@ -16,7 +17,7 @@ const {
 const _crItemConf = ({ data }, option) => {
   const {
     _itemKey,
-    dfFn, dfT, dfSubId,
+    dfFn, dfSubId,
     items,
     dataSource
   } = option;
@@ -24,9 +25,9 @@ const _crItemConf = ({ data }, option) => {
      ? {
           _itemKey,
           ...crItemConf(option),
-          ...crValueConf(data),          
+          ...crValueConf(data),
           items: [...items],
-          dfT, dfSubId, dfFn,
+          dfSubId, dfFn,
           dataSource
        }
     : void 0;
@@ -49,6 +50,7 @@ const _crZhConfig = (config, option) => {
 const fnAdapter = {
   getValue,
   getCaption,
+  joinBy,
   valueMoving,
   ymdToUTC,
   compareByDate,

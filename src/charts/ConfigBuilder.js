@@ -371,14 +371,22 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
   */
 
-  addDividend({ dataDividend, minClose, maxClose }) {
-    if (dataDividend.length > 0) {
+  //used only by Alpha Vantage Daily Adjusted
+  addDividend({ dDividend, minClose, maxClose }) {
+    if (dDividend.length > 0) {
+      const { series, chart, zhConfig } = this.config;
       setYToPoints(
-        dataDividend,
+        dDividend,
         calcMinY(minClose, maxClose)
       );
-      this.config.series.push(crDividendSeria(dataDividend));
-      this.config.chart.spacingBottom = 40;
+      series.push({
+        ...crDividendSeria(dDividend),
+        visible: false
+      });
+      chart.spacingBottom = 40;
+      zhConfig.legend.push({
+        index: 4, color: '#4caf50', name: 'Dividend'
+      })
     }
     return this;
   },

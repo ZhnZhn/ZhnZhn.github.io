@@ -419,15 +419,27 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   */
+  //used only by Alpha Vantage Daily Adjusted
   addDividend: function addDividend(_ref2) {
-    var dataDividend = _ref2.dataDividend,
+    var dDividend = _ref2.dDividend,
         minClose = _ref2.minClose,
         maxClose = _ref2.maxClose;
 
-    if (dataDividend.length > 0) {
-      setYToPoints(dataDividend, calcMinY(minClose, maxClose));
-      this.config.series.push(crDividendSeria(dataDividend));
-      this.config.chart.spacingBottom = 40;
+    if (dDividend.length > 0) {
+      var _this$config = this.config,
+          series = _this$config.series,
+          chart = _this$config.chart,
+          zhConfig = _this$config.zhConfig;
+      setYToPoints(dDividend, calcMinY(minClose, maxClose));
+      series.push((0, _extends2["default"])({}, crDividendSeria(dDividend), {
+        visible: false
+      }));
+      chart.spacingBottom = 40;
+      zhConfig.legend.push({
+        index: 4,
+        color: '#4caf50',
+        name: 'Dividend'
+      });
     }
 
     return this;

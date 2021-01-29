@@ -11,7 +11,7 @@ const _router = {
 
   DialogSelectN: D.SelectN,
   DialogType3: D.Type3,
-  
+
   _loadGD(){
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === '_development' ) {
@@ -109,10 +109,7 @@ const _router = {
   },
   get AlphaSearchDialog() {
     return this.getSM().then(D => D.Search);
-  },
-  get AlphaIntradayDialog() {
-    return this.getSM().then(D => D.Intraday);
-  },
+  },  
 
   _loadSD() {
      /*eslint-disable no-undef */

@@ -167,12 +167,6 @@ var _router = {
     });
   },
 
-  get AlphaIntradayDialog() {
-    return this.getSM().then(function (D) {
-      return D.Intraday;
-    });
-  },
-
   _loadSD: function _loadSD() {
     var _this4 = this;
 

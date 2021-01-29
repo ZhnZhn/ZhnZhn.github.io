@@ -11,6 +11,7 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var getValue = _AdapterFn["default"].getValue,
     getCaption = _AdapterFn["default"].getCaption,
+    joinBy = _AdapterFn["default"].joinBy,
     crItemConf = _AdapterFn["default"].crItemConf,
     crValueConf = _AdapterFn["default"].crValueConf,
     stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend,
@@ -23,7 +24,6 @@ var _crItemConf = function _crItemConf(_ref, option) {
   var data = _ref.data;
   var _itemKey = option._itemKey,
       dfFn = option.dfFn,
-      dfT = option.dfT,
       dfSubId = option.dfSubId,
       items = option.items,
       dataSource = option.dataSource;
@@ -31,7 +31,6 @@ var _crItemConf = function _crItemConf(_ref, option) {
     _itemKey: _itemKey
   }, crItemConf(option), crValueConf(data), {
     items: [].concat(items),
-    dfT: dfT,
     dfSubId: dfSubId,
     dfFn: dfFn,
     dataSource: dataSource
@@ -59,6 +58,7 @@ var _crZhConfig = function _crZhConfig(config, option) {
 var fnAdapter = {
   getValue: getValue,
   getCaption: getCaption,
+  joinBy: joinBy,
   valueMoving: valueMoving,
   ymdToUTC: ymdToUTC,
   compareByDate: compareByDate,

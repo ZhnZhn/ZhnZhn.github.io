@@ -1,47 +1,34 @@
-
 import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
 import AdapterFn from '../AdapterFn'
 import IntradayFns from '../IntradayFns'
 
-import Chart from '../../charts/Chart'
-import Tooltip from '../../charts/Tooltip'
-
 import fnAdapter from './fnAdapter'
 
 const {
-   ymdToUTC,
    ymdhmsToUTC,
    crVolumePoint
-} = AdapterFn;
-const { crMarkerColor, crDataDaily } = IntradayFns
-
-const { crIntradayConfigOption } = fnAdapter;
-
-const _isStr = str => typeof str === 'string';
-const _isBool = bool => typeof bool === 'boolean';
-
+} = AdapterFn
+, {
+  crMarkerColor,
+  crDataDaily
+} = IntradayFns
+, { crIntradayConfigOption } = fnAdapter;
 
 //const DAILY = 'Daily';
-const INTRADAY = 'INTRADAY'
-const DAILY_ADJUSTED = 'DAILY_ADJUSTED'
+const INTRADAY = 'INTRADAY';
+const DAILY_ADJUSTED = 'DAILY_ADJUSTED';
 
+const _keys = Object.keys;
 
 const _crSeriaOptions = ({
-  dfT,
-  isFilterZero, hasFilterZero,
-  hasDividend
+  dfT, isFilterZero
 }) => {
-  const _isIntraday = dfT === INTRADAY;
   const _isAdjusted = dfT === DAILY_ADJUSTED;
   return {
-    notFilterZero: _isBool(isFilterZero)
-       ? !isFilterZero
-       : !hasFilterZero,
-    isDividend: _isAdjusted && hasDividend,
-    toUTC: _isIntraday
-      ? ymdhmsToUTC
-      : ymdToUTC,
+    notFilterZero: !isFilterZero,
+    isDividend: _isAdjusted,
+    toUTC: ymdhmsToUTC,
     pnClose: _isAdjusted
       ? '5. adjusted close'
       : '4. close',
@@ -78,11 +65,11 @@ const _getObjValues = (json, option) => {
 
 const _crSeriaData = (objValues, option) => {
   const _dateKeys = objValues
-     ? Object.keys(objValues).sort()
+     ? _keys(objValues).sort()
      : []
-  , data = [], dH = [], dL = [], dO = []
-  , dataDividend = []
-  , dVolume = [], dColumn = []
+  , dC = [], dH = [], dL = [], dO = []
+  , dDividend = []
+  , dVc = [], dV = []
   , {
     notFilterZero, isDividend,
     toUTC, pnClose, pnVolume
@@ -107,7 +94,7 @@ const _crSeriaData = (objValues, option) => {
       _volume = parseFloat(_point[pnVolume])
 
       _dateMs = toUTC(_date)
-      data.push({
+      dC.push({
         x: _dateMs,
         y: _close,
         ...crMarkerColor(_date)
@@ -117,8 +104,8 @@ const _crSeriaData = (objValues, option) => {
       dL.push([_dateMs, _low])
       dO.push([_dateMs, _open])
 
-      dVolume.push([_dateMs, _volume])
-      dColumn.push(
+      dV.push([_dateMs, _volume])
+      dVc.push(
           crVolumePoint({
              open: _open,
              close: _closeV,
@@ -128,7 +115,7 @@ const _crSeriaData = (objValues, option) => {
           })
       )
       if (isDividend) {
-        _addDividendPointTo(dataDividend, _dateMs, _point)
+        _addDividendPointTo(dDividend, _dateMs, _point)
       }
 
       if (minClose > _close ) { minClose = _close }
@@ -137,81 +124,60 @@ const _crSeriaData = (objValues, option) => {
   }
 
   return {
-    data, dH, dL, dO,
-    dataDividend,
+    dC, dH, dL, dO,
+    dDividend,
     minClose, maxClose,
-    dVolume, dColumn
+    dVc, dV
   };
 }
 
-const _crChartOptions = (dfT, data) => {
-  const _isIntraday = dfT === INTRADAY;
-  return {
-    dataDaily: _isIntraday
-       ? crDataDaily(data)
-       : data,
-    seriaTooltip: _isIntraday
-      ? Tooltip.vTdmy
-      : Tooltip.vDmy,
-    volumeTooltip: _isIntraday
-      ? Tooltip.volumeTdmy
-      : Tooltip.volume
-  };
-};
+const _crDataDaily = (dfT, data) => dfT === INTRADAY
+  ? crDataDaily(data)
+  : data;
 
 const IntradayAdapter = {
-  crKey({ _itemKey, value }){
-    return _itemKey || value;
-  },
+  crKey: ({ _itemKey }) => _itemKey,
   toConfig(json, option){
     const {
       _itemKey, title,
-      value,
-      interval, dfT,
+      dfFn,
       dataSource,
-      seriaType
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      seriaType,
+      seriaColor,
+      seriaWidth
     } = option
-    , _chartId = _itemKey || value
-    , _title = title || value
-    , _seriaType = _isStr(seriaType)
-        ?  seriaType.toLowerCase()
-        : 'area'
+    , dfT = dfFn.replace('TIME_SERIES_', '')
     , _objValues = _getObjValues(json, option)
     , {
-        data, dH, dL, dO,
+        dC, dH, dL, dO,
         minClose, maxClose,
-        dataDividend,
-        dColumn, dVolume
+        dDividend,
+        dVc, dV
       } = _crSeriaData(_objValues, option)
-    , {
-        dataDaily,
-        seriaTooltip, volumeTooltip
-      } = _crChartOptions(dfT, data);
-
-    option.minY = minClose
-    option.maxY = maxClose
+    , dataDaily  = _crDataDaily(dfT, dC);
 
     const config = Builder()
-      .areaConfig()
-      .add('chart', { spacingTop: 25 })
-      .addCaption(_title, `Time Series (${interval})`)
-      .addTooltip(seriaTooltip)
-      .addMinMax(dataDaily, option)
-      .setStockSerias(_seriaType, data, dH, dL, dO)
-      .addDividend({ dataDividend, minClose, maxClose })
-      .addMiniVolume({
-        id: _chartId,
-        dVolume, dColumn,
-        tooltipColumn: Chart.fTooltip(volumeTooltip)
+      .stockConfig(_itemKey, {
+        dC, dO, dH, dL,
+        minClose, maxClose,
+        dVc, dV,
+        isNotZoomToMinMax,
+        isDrawDeltaExtrems,
+        seriaType,
+        seriaColor,
+        seriaWidth
       })
-      .add({
-        ...crIntradayConfigOption({
-          id: _chartId,
+      .addCaption(title)
+      .add(crIntradayConfigOption({
+          id: _itemKey,
           data: dataDaily,
           dataSource
-        }, option)
-      })
+      }, option))
+      .addDividend({ dDividend, minClose, maxClose })
       .toConfig();
+
     return { config };
   },
 
