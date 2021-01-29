@@ -15,10 +15,6 @@ var _isUndef = function _isUndef(v) {
   return typeof v === 'undefined';
 };
 
-var _isStr = function _isStr(str) {
-  return typeof str === 'string';
-};
-
 var AdapterStockFn = {
   toSeriesData: function toSeriesData(_ref) {
     var _ref$arr = _ref.arr,
@@ -35,18 +31,17 @@ var AdapterStockFn = {
         pnDate = _seriaOption$pnDate === void 0 ? 'date' : _seriaOption$pnDate,
         isNotZoomToMinMax = option.isNotZoomToMinMax,
         isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        sT = option.seriaType,
+        seriaType = option.seriaType,
         seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
-    var data = [],
-        dataOpen = [],
-        dataHigh = [],
-        dataLow = [],
-        dataVolume = [],
-        dataVolumeColumn = [],
-        dataATH = [],
-        dataMfi = [];
+        seriaWidth = option.seriaWidth;
+    var dC = [],
+        dO = [],
+        dH = [],
+        dL = [],
+        dV = [],
+        dVc = [],
+        dATH = [],
+        dMfi = [];
 
     var _prevClose,
         minClose = Number.POSITIVE_INFINITY,
@@ -61,7 +56,7 @@ var AdapterStockFn = {
           date = item[pnDate] || '',
           _date = toDate(date);
 
-      data.push([_date, close]);
+      dC.push([_date, close]);
 
       if (isAllSeries) {
         if (minClose > close) {
@@ -72,11 +67,11 @@ var AdapterStockFn = {
           maxClose = close;
         }
 
-        dataOpen.push([_date, open]);
-        dataHigh.push([_date, high]);
-        dataLow.push([_date, low]);
-        dataVolume.push([_date, volume]);
-        dataVolumeColumn.push(crVolumePoint({
+        dO.push([_date, open]);
+        dH.push([_date, high]);
+        dL.push([_date, low]);
+        dV.push([_date, volume]);
+        dVc.push(crVolumePoint({
           open: open,
           close: close,
           volume: volume,
@@ -86,8 +81,8 @@ var AdapterStockFn = {
             _low: low
           }
         }));
-        dataMfi.push([date, close, high, low, close, volume]);
-        dataATH.push(!_isUndef(_prevClose) ? crAthPoint({
+        dMfi.push([date, close, high, low, close, volume]);
+        dATH.push(!_isUndef(_prevClose) ? crAthPoint({
           date: _date,
           close: _prevClose,
           open: open
@@ -100,16 +95,16 @@ var AdapterStockFn = {
       }
     });
     return {
-      data: data,
+      dC: dC,
+      dO: dO,
+      dH: dH,
+      dL: dL,
       minClose: minClose,
       maxClose: maxClose,
-      dataOpen: dataOpen,
-      dataHigh: dataHigh,
-      dataLow: dataLow,
-      dataVolume: dataVolume,
-      dataVolumeColumn: dataVolumeColumn,
-      dataATH: dataATH,
-      dataMfi: dataMfi,
+      dVc: dVc,
+      dV: dV,
+      dATH: dATH,
+      dMfi: dMfi,
       isNotZoomToMinMax: isNotZoomToMinMax,
       isDrawDeltaExtrems: isDrawDeltaExtrems,
       seriaType: seriaType,

@@ -29,19 +29,19 @@ const crAdapterOHLCV = ({
         toDate,
         seriaOption, option
       })
-    , { data, dataMfi } = dataOption
+    , { dC, dMfi } = dataOption
     , config = Builder()
         .stockConfig(id, dataOption)
         .addCaption(title, subtitle)
         .add({
-           valueMoving: valueMoving(data),
+           valueMoving: valueMoving(dC),
            ...crAddConfig({
-              json, option, data,
+              json, option, data: dC,
               id, title, subtitle
            })
          })
          .add('zhConfig', { legend: stockSeriesLegend() })
-         .addZhPoints(dataMfi)
+         .addZhPoints(dMfi)
          .toConfig();
 
     return { config };

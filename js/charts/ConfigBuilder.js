@@ -150,20 +150,21 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     }).addCaption(title, subtitle).clearSeries();
   },
   stockConfig: function stockConfig(id, option) {
-    var dataVolumeColumn = option.dataVolumeColumn,
-        dataVolume = option.dataVolume,
-        dataATH = option.dataATH,
+    var isNotZoomToMinMax = option.isNotZoomToMinMax,
+        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
+        sT = option.seriaType,
+        seriaColor = option.seriaColor,
+        seriaWidth = option.seriaWidth,
+        dC = option.dC,
+        dH = option.dH,
+        dL = option.dL,
+        dO = option.dO,
         minClose = option.minClose,
         maxClose = option.maxClose,
-        isNotZoomToMinMax = option.isNotZoomToMinMax,
-        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        data = option.data,
-        dataHigh = option.dataHigh,
-        dataLow = option.dataLow,
-        dataOpen = option.dataOpen,
-        seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth;
+        dVc = option.dVc,
+        dV = option.dV,
+        dATH = option.dATH,
+        seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
     return this.areaConfig({
       spacingTop: 25,
       seriaType: seriaType,
@@ -171,13 +172,13 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       seriaWidth: seriaWidth
     }).addTooltip(_Tooltip["default"].vTdmyIf).addMiniVolume({
       id: id,
-      dColumn: dataVolumeColumn,
-      dVolume: dataVolume,
+      dColumn: dVc,
+      dVolume: dV,
       tooltipColumn: _Chart["default"].fTooltip(_Tooltip["default"].volumeTdmyIf)
     }).addMiniATH({
       id: id,
-      data: dataATH
-    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems).setStockSerias(seriaType, data, dataHigh, dataLow, dataOpen);
+      data: dATH
+    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, dC, isDrawDeltaExtrems).setStockSerias(seriaType, dC, dH, dL, dO);
   },
   categoryConfig: function categoryConfig(categories) {
     if (categories === void 0) {

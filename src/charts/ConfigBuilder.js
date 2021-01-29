@@ -116,14 +116,15 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
   stockConfig(id, option){
     const {
-      dataVolumeColumn, dataVolume,
-      dataATH,
-      minClose, maxClose,
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
-      data, dataHigh, dataLow, dataOpen,
-      seriaType, seriaColor, seriaWidth
+      seriaType:sT, seriaColor, seriaWidth,
+      dC, dH, dL, dO,
+      minClose, maxClose,
+      dVc, dV,
+      dATH
     } = option
+    , seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
     return this.areaConfig({
         spacingTop: 25,
         seriaType, seriaColor, seriaWidth
@@ -131,16 +132,14 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       .addTooltip(Tooltip.vTdmyIf)
       .addMiniVolume({
         id,
-        dColumn: dataVolumeColumn,
-        dVolume: dataVolume,
+        dColumn: dVc,
+        dVolume: dV,
         tooltipColumn: Chart.fTooltip(Tooltip.volumeTdmyIf)
       })
-      .addMiniATH({
-        id, data: dataATH
-      })
+      .addMiniATH({ id, data: dATH })
       .setMinMax(minClose, maxClose, isNotZoomToMinMax)
-      .setMinMaxDeltas(minClose, maxClose, data, isDrawDeltaExtrems)
-      .setStockSerias(seriaType, data, dataHigh, dataLow, dataOpen);
+      .setMinMaxDeltas(minClose, maxClose, dC, isDrawDeltaExtrems)
+      .setStockSerias(seriaType, dC, dH, dL, dO);
   },
   categoryConfig(categories=[]){
     this.config = ChartConfig.crAreaConfig()

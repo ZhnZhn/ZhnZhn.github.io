@@ -58,20 +58,20 @@ var crAdapterOHLCV = function crAdapterOHLCV(_ref3) {
         seriaOption: seriaOption,
         option: option
       }),
-          data = dataOption.data,
-          dataMfi = dataOption.dataMfi,
+          dC = dataOption.dC,
+          dMfi = dataOption.dMfi,
           config = (0, _ConfigBuilder["default"])().stockConfig(id, dataOption).addCaption(title, subtitle).add((0, _extends2["default"])({
-        valueMoving: valueMoving(data)
+        valueMoving: valueMoving(dC)
       }, crAddConfig({
         json: json,
         option: option,
-        data: data,
+        data: dC,
         id: id,
         title: title,
         subtitle: subtitle
       }))).add('zhConfig', {
         legend: stockSeriesLegend()
-      }).addZhPoints(dataMfi).toConfig();
+      }).addZhPoints(dMfi).toConfig();
 
       return {
         config: config

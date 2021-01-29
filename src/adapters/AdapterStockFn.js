@@ -7,7 +7,6 @@ const {
 } = AdapterFn;
 
 const _isUndef = v => typeof v === 'undefined';
-const _isStr = str => typeof str === 'string';
 
 const AdapterStockFn = {
   toSeriesData: ({ arr=[], toDate=ymdhmsToUTC, seriaOption={}, option={} }) => {
@@ -18,18 +17,16 @@ const AdapterStockFn = {
     , {
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
-      seriaType: sT,
+      seriaType,
       seriaColor,
       seriaWidth
-    } = option
-    , seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
-    const data = []
-        , dataOpen = [], dataHigh = [], dataLow = []
-        , dataVolume = [], dataVolumeColumn = []
-        , dataATH = [], dataMfi = [];
+    } = option;
+    const dC = [], dO = [], dH = [], dL = []
+    , dV = [], dVc = []
+    , dATH = [], dMfi = [];
     let _prevClose
-      , minClose = Number.POSITIVE_INFINITY
-      , maxClose = Number.NEGATIVE_INFINITY;
+    , minClose = Number.POSITIVE_INFINITY
+    , maxClose = Number.NEGATIVE_INFINITY;
     arr.forEach(item => {
       const {
              open, high, low, close,
@@ -38,24 +35,24 @@ const AdapterStockFn = {
           , date = item[pnDate] || ''
           , _date = toDate(date);
 
-      data.push([_date, close])
+      dC.push([_date, close])
 
       if (isAllSeries) {
         if (minClose > close) { minClose = close }
         if (maxClose < close ) { maxClose = close }
 
-        dataOpen.push([_date, open])
-        dataHigh.push([_date, high])
-        dataLow.push([_date, low])
-        dataVolume.push([_date, volume])
-        dataVolumeColumn.push(
+        dO.push([_date, open])
+        dH.push([_date, high])
+        dL.push([_date, low])
+        dV.push([_date, volume])
+        dVc.push(
             crVolumePoint({
                open, close, volume, date: _date,
                option: { _high: high, _low: low }
             })
         )
-        dataMfi.push([date, close, high, low, close, volume])
-        dataATH.push(!_isUndef(_prevClose)
+        dMfi.push([date, close, high, low, close, volume])
+        dATH.push(!_isUndef(_prevClose)
           ? crAthPoint({
              date: _date,
              close: _prevClose,
@@ -71,11 +68,10 @@ const AdapterStockFn = {
        }
     })
     return {
-      data,
+      dC, dO, dH, dL,
       minClose, maxClose,
-      dataOpen, dataHigh, dataLow,
-      dataVolume, dataVolumeColumn,
-      dataATH, dataMfi,
+      dVc, dV,
+      dATH, dMfi,
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
       seriaType,
