@@ -20,14 +20,11 @@ const P_WHITE = {
   BT_HOT_C: '#c0c0c0',
 
   EL_BG: '#bcd8f5',
-  EL_C: '#212020'
-};
-const P_WHITE_N = {
-  ...P_WHITE,
+  EL_C: '#212020',
   T_C: '#1b75bb'
 }
 
-const P_SAND_L = {
+const SAND_P = {
   BG_BODY: '#9e9e9e',
   BG: '#e8e0cb',
 
@@ -36,15 +33,15 @@ const P_SAND_L = {
   EL_BG: '#64473d',
   EL_C: 'silver'
 }
-const P_SAND_N = {
-  ...P_SAND_L,
+const P_SAND = {
+  ...SAND_P,
   BG: '#e6d5a9',
   EL_BG: '#463222',
 
   T_C: '#785133'
 };
-const P_SAND_L_N = {
-  ...P_SAND_L,
+const P_SAND_L = {
+  ...SAND_P,
   T_C: '#785133'
 }
 
@@ -104,9 +101,7 @@ const _setStyleTo = (conf, pallete) => {
 const HP_THEME = {
   GREY: [P_GREY, '--grey'],
   WHITE: [P_WHITE, '--white'],
-  WHITE_N: [P_WHITE_N, '--white'],
-  SAND_N: [P_SAND_N, '--sand'],
-  SAND_L_N: [P_SAND_L_N, '--sand-l'],
+  SAND: [P_SAND, '--sand'],
   SAND_L: [P_SAND_L, '--sand-l']
 }
 const DF_THEME_ID = 'GREY';

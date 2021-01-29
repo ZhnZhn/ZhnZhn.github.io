@@ -23,24 +23,22 @@ var P_WHITE = {
   BG: '#ebf1f5',
   BT_HOT_C: '#c0c0c0',
   EL_BG: '#bcd8f5',
-  EL_C: '#212020'
-};
-var P_WHITE_N = (0, _extends2["default"])({}, P_WHITE, {
+  EL_C: '#212020',
   T_C: '#1b75bb'
-});
-var P_SAND_L = {
+};
+var SAND_P = {
   BG_BODY: '#9e9e9e',
   BG: '#e8e0cb',
   BT_HOT_C: '#5b5b5b',
   EL_BG: '#64473d',
   EL_C: 'silver'
 };
-var P_SAND_N = (0, _extends2["default"])({}, P_SAND_L, {
+var P_SAND = (0, _extends2["default"])({}, SAND_P, {
   BG: '#e6d5a9',
   EL_BG: '#463222',
   T_C: '#785133'
 });
-var P_SAND_L_N = (0, _extends2["default"])({}, P_SAND_L, {
+var P_SAND_L = (0, _extends2["default"])({}, SAND_P, {
   T_C: '#785133'
 });
 var CSS_RULE = {
@@ -99,9 +97,7 @@ var _setStyleTo = function _setStyleTo(conf, pallete) {
 var HP_THEME = {
   GREY: [P_GREY, '--grey'],
   WHITE: [P_WHITE, '--white'],
-  WHITE_N: [P_WHITE_N, '--white'],
-  SAND_N: [P_SAND_N, '--sand'],
-  SAND_L_N: [P_SAND_L_N, '--sand-l'],
+  SAND: [P_SAND, '--sand'],
   SAND_L: [P_SAND_L, '--sand-l']
 };
 var DF_THEME_ID = 'GREY';

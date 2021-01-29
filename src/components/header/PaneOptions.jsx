@@ -19,9 +19,7 @@ const S = {
 const UI_THEME_OPTIONS = [
   { caption: 'Dark', value: 'GREY' },
   { caption: 'Light', value: 'WHITE' },
-  { caption: 'Light New', value: 'WHITE_N' },
-  { caption: 'Sand New', value: 'SAND_N' },
-  { caption: 'Sand Light New', value: 'SAND_L_N' },
+  { caption: 'Sand', value: 'SAND' },
   { caption: 'Sand Light', value: 'SAND_L' }
 ];
 
