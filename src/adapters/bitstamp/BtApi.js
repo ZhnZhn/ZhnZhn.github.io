@@ -10,6 +10,7 @@ const _crDfUrl = option => {
   , {v:pair} = items[0]
   , {v:timeframe} = items[1]
   , {v:limit} = items[2];
+  option.timeframe = timeframe
   return `${C.URL}/ohlc/${pair}?step=${timeframe}&limit=${limit}`;
 };
 
@@ -27,8 +28,8 @@ const _rCrUrl = {
 const BtApi = {
   getRequestUrl(option){
     const { dfSubId } = option
-    const _crUrl = dfSubId && _rCrUrl[dfSubId]
-      || _rCrUrl.DF
+    , _crUrl = dfSubId && _rCrUrl[dfSubId]
+        || _rCrUrl.DF
     return _crUrl(option);
   },
 

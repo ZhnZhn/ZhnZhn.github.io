@@ -5,7 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
+
+var isInArrStr = _AdapterFn["default"].isInArrStr;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
@@ -38,10 +42,34 @@ From Bitstamp API Documentation
 */
 
 
-var _crDataOHLCV = function _crDataOHLCV(json) {
-  return json.data.ohlc.map(function (item) {
+var _isDailyTimeframe = isInArrStr(["86400", "259200"]),
+    _isHourlyTimeframe = isInArrStr(["3600", "7200", "14400", "21600", "43200"]);
+
+var DAILY_TIME_DELTA = 86394000; //1000*60*60*24 - 1000*60
+
+var HOURLY_TIME_DELTA = 3540000; //1000*60*59
+
+var _toMls = function _toMls(timestamp) {
+  return parseFloat(timestamp) * 1000;
+},
+    _fToMls = function _fToMls(delta) {
+  return function (timestamp, isRecent) {
+    return isRecent ? Date.now() - 6000 //1000*60
+    : _toMls(timestamp) + delta;
+  };
+},
+    _toDailyMls = _fToMls(DAILY_TIME_DELTA),
+    _toHourlyMls = _fToMls(HOURLY_TIME_DELTA);
+
+var _crDataOHLCV = function _crDataOHLCV(json, option) {
+  var ohlc = json.data.ohlc,
+      _recentIndex = ohlc.length - 1,
+      timeframe = option.timeframe,
+      _toDate = _isDailyTimeframe(timeframe) ? _toDailyMls : _isHourlyTimeframe(timeframe) ? _toHourlyMls : _toMls;
+
+  return ohlc.map(function (item, index) {
     return {
-      date: parseFloat(item.timestamp) * 1000,
+      date: _toDate(item.timestamp, index === _recentIndex),
       open: parseFloat(item.open),
       high: parseFloat(item.high),
       low: parseFloat(item.low),

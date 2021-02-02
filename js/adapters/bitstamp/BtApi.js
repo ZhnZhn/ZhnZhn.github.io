@@ -13,6 +13,7 @@ var _crDfUrl = function _crDfUrl(option) {
       pair = items[0].v,
       timeframe = items[1].v,
       limit = items[2].v;
+  option.timeframe = timeframe;
   return C.URL + "/ohlc/" + pair + "?step=" + timeframe + "&limit=" + limit;
 };
 
@@ -29,9 +30,8 @@ var _rCrUrl = {
 };
 var BtApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var dfSubId = option.dfSubId;
-
-    var _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
+    var dfSubId = option.dfSubId,
+        _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
 
     return _crUrl(option);
   },
