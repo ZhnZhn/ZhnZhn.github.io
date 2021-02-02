@@ -26,13 +26,14 @@ var _pointFn = _interopRequireDefault(require("./pointFn"));
 var _legendFn = _interopRequireDefault(require("./legendFn"));
 
 var _toTd = _dateFormat["default"].toTd;
-var dt = _ut["default"].dt,
+var isInArrStr = _ut["default"].isInArrStr,
+    dt = _ut["default"].dt,
     fCompareBy = _ut["default"].fCompareBy,
     fCompareByTwoProps = _ut["default"].fCompareByTwoProps,
     getC = _ut["default"].getC,
     getV = _ut["default"].getV,
-    formatAllNumber = _ut["default"].formatAllNumber;
-var findMinY = _seriaFn["default"].findMinY,
+    formatAllNumber = _ut["default"].formatAllNumber,
+    findMinY = _seriaFn["default"].findMinY,
     findMaxY = _seriaFn["default"].findMaxY;
 var ymdToUTC = dt.ymdToUTC,
     ymdhmsToUTC = dt.ymdhmsToUTC,
@@ -90,6 +91,7 @@ var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["defaul
   monthIndex: monthIndex,
   getCaption: getC,
   getValue: getV,
+  isInArrStr: isInArrStr,
   roundBy: _mathFn["default"].roundBy,
   numberFormat: formatAllNumber,
   isNumberOrNull: function isNumberOrNull(v) {

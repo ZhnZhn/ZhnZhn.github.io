@@ -1,1 +1,24 @@
-{"version":3,"sources":["../../src/utils/fnArr.js"],"names":["_isArr","Array","isArray","_fIsItem","propName","propValue","item","_findArrIndexBy","arr","findIndex","fnArr","findIndexByProp","isSameByProp","isInArrStr","str","i","length"],"mappings":";;;;;AACA,IAAMA,MAAM,GAAGC,KAAK,CAACC,OAArB;AAAA,IACEC,QAAQ,GAAG,SAAXA,QAAW,CAACC,QAAD,EAAWC,SAAX;AAAA,SACT,UAAAC,IAAI;AAAA,WAAIA,IAAI,CAACF,QAAD,CAAJ,KAAmBC,SAAvB;AAAA,GADK;AAAA,CADb;AAAA,IAGEE,eAAe,GAAG,SAAlBA,eAAkB,CAACC,GAAD,EAAMJ,QAAN,EAAgBC,SAAhB;AAAA,SAChBG,GAAG,CAACC,SAAJ,CAAcN,QAAQ,CAACC,QAAD,EAAWC,SAAX,CAAtB,CADgB;AAAA,CAHpB;;AAMA,IAAMK,KAAK,GAAG;AAEZC,EAAAA,eAAe,EAAE,yBAACP,QAAD;AAAA,WAAc,UAACI,GAAD,EAAMH,SAAN;AAAA,aAAoBL,MAAM,CAACQ,GAAD,CAAN,GAC/CD,eAAe,CAACC,GAAD,EAAMJ,QAAN,EAAgBC,SAAhB,CADgC,GAE/C,CAAC,CAF0B;AAAA,KAAd;AAAA,GAFL;AAMZO,EAAAA,YAAY,EAAE,sBAACR,QAAD;AAAA,WAAc,UAACI,GAAD,EAAMH,SAAN;AAAA,aAAoBL,MAAM,CAACQ,GAAD,CAAN,GAC5CD,eAAe,CAACC,GAAD,EAAMJ,QAAN,EAAgBC,SAAhB,CAAf,KAA8C,CAAC,CAA/C,GACI,KADJ,GACY,IAFgC,GAG5C,KAHwB;AAAA,KAAd;AAAA,GANF;AAWZQ,EAAAA,UAAU,EAAE,oBAACL,GAAD;AAAA,WAAS,UAACM,GAAD,EAAS;AAC5B,UAAI,CAACd,MAAM,CAACQ,GAAD,CAAX,EAAkB;AAChB,eAAO,KAAP;AACD;;AACD,UAAIO,CAAJ;;AACA,WAAIA,CAAC,GAAC,CAAN,EAAQA,CAAC,GAACP,GAAG,CAACQ,MAAd,EAAqBD,CAAC,EAAtB,EAAyB;AACvB,YAAID,GAAG,KAAKN,GAAG,CAACO,CAAD,CAAf,EAAmB;AACjB,iBAAO,IAAP;AACD;AACF;;AACD,aAAO,KAAP;AACD,KAXW;AAAA;AAaZ;AACF;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AArCc,CAAd;eAwCeL,K","sourcesContent":["\r\nconst _isArr = Array.isArray\r\n, _fIsItem = (propName, propValue) =>\r\n    item => item[propName] === propValue\r\n, _findArrIndexBy = (arr, propName, propValue) =>\r\n    arr.findIndex(_fIsItem(propName, propValue));\r\n\r\nconst fnArr = {\r\n\r\n  findIndexByProp: (propName) => (arr, propValue) => _isArr(arr)\r\n    ? _findArrIndexBy(arr, propName, propValue)\r\n    : -1,\r\n\r\n  isSameByProp: (propName) => (arr, propValue) => _isArr(arr)\r\n    ? _findArrIndexBy(arr, propName, propValue) === -1\r\n        ? false : true\r\n    : false,\r\n\r\n  isInArrStr: (arr) => (str) => {\r\n    if (!_isArr(arr)) {\r\n      return false;\r\n    }\r\n    let i;\r\n    for(i=0;i<arr.length;i++){\r\n      if (str === arr[i]){\r\n        return true;\r\n      }\r\n    }\r\n    return false;\r\n  },\r\n\r\n  /*\r\n  isStrInArr: (str) => (arr) => {\r\n     if (!_isArr(arr)){\r\n       return false;\r\n     }\r\n     let i;\r\n     for(i=0;i<arr.length;i++){\r\n       if (str === arr[i]){\r\n         return true;\r\n       }\r\n     }\r\n     return false;\r\n  }\r\n  */\r\n};\r\n\r\nexport default fnArr\r\n"],"file":"fnArr.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/fnArr.js"
+ ],
+ "file": "../../src/utils/fnArr.js",
+ "names": [
+  "_isArr",
+  "Array",
+  "isArray",
+  "_fIsItem",
+  "propName",
+  "propValue",
+  "item",
+  "_findArrIndexBy",
+  "arr",
+  "findIndex",
+  "fnArr",
+  "isInArrStr",
+  "findIndexByProp",
+  "isSameByProp"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,MAAM,GAAGC,KAAK,CAACC,OAArB;AAAA,IACEC,QAAQ,GAAG,SAAXA,QAAW,CAACC,QAAD,EAAWC,SAAX;AAAA,SACT,UAAAC,IAAI;AAAA,WAAIA,IAAI,CAACF,QAAD,CAAJ,KAAmBC,SAAvB;AAAA,GADK;AAAA,CADb;AAAA,IAGEE,eAAe,GAAG,SAAlBA,eAAkB,CAACC,GAAD,EAAMJ,QAAN,EAAgBC,SAAhB;AAAA,SAChBG,GAAG,CAACC,SAAJ,CAAcN,QAAQ,CAACC,QAAD,EAAWC,SAAX,CAAtB,CADgB;AAAA,CAHpB;;AAMA,IAAMK,KAAK,GAAG;AACZC,EAAAA,UAAU,EAAVA,sBADY;AAGZC,EAAAA,eAAe,EAAE,yBAACR,QAAD;AAAA,WAAc,UAACI,GAAD,EAAMH,SAAN;AAAA,aAAoBL,MAAM,CAACQ,GAAD,CAAN,GAC/CD,eAAe,CAACC,GAAD,EAAMJ,QAAN,EAAgBC,SAAhB,CADgC,GAE/C,CAAC,CAF0B;AAAA,KAAd;AAAA,GAHL;AAOZQ,EAAAA,YAAY,EAAE,sBAACT,QAAD;AAAA,WAAc,UAACI,GAAD,EAAMH,SAAN;AAAA,aAAoBL,MAAM,CAACQ,GAAD,CAAN,GAC5CD,eAAe,CAACC,GAAD,EAAMJ,QAAN,EAAgBC,SAAhB,CAAf,KAA8C,CAAC,CAA/C,GACI,KADJ,GACY,IAFgC,GAG5C,KAHwB;AAAA,KAAd;AAAA;AAPF,CAAd;eAaeK,K"
+}

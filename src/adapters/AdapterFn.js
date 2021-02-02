@@ -15,13 +15,14 @@ import legendFn from './legendFn'
 
 const { toTd } = dateFormat
 const {
+  isInArrStr,
   dt,
   fCompareBy,
   fCompareByTwoProps,
   getC, getV,
   formatAllNumber
-} = ut;
-const { findMinY, findMaxY } = seriaFn;
+} = ut
+, { findMinY, findMaxY } = seriaFn;
 
 const {
   ymdToUTC,
@@ -87,6 +88,7 @@ const AdapterFn = {
 
   getCaption: getC,
   getValue: getV,
+  isInArrStr,
 
   roundBy: mathFn.roundBy,
   numberFormat: formatAllNumber,

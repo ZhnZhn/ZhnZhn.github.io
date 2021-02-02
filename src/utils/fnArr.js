@@ -1,3 +1,4 @@
+import isInArrStr from './isInArrStr';
 
 const _isArr = Array.isArray
 , _fIsItem = (propName, propValue) =>
@@ -6,6 +7,7 @@ const _isArr = Array.isArray
     arr.findIndex(_fIsItem(propName, propValue));
 
 const fnArr = {
+  isInArrStr,
 
   findIndexByProp: (propName) => (arr, propValue) => _isArr(arr)
     ? _findArrIndexBy(arr, propName, propValue)
@@ -14,35 +16,7 @@ const fnArr = {
   isSameByProp: (propName) => (arr, propValue) => _isArr(arr)
     ? _findArrIndexBy(arr, propName, propValue) === -1
         ? false : true
-    : false,
-
-  isInArrStr: (arr) => (str) => {
-    if (!_isArr(arr)) {
-      return false;
-    }
-    let i;
-    for(i=0;i<arr.length;i++){
-      if (str === arr[i]){
-        return true;
-      }
-    }
-    return false;
-  },
-
-  /*
-  isStrInArr: (str) => (arr) => {
-     if (!_isArr(arr)){
-       return false;
-     }
-     let i;
-     for(i=0;i<arr.length;i++){
-       if (str === arr[i]){
-         return true;
-       }
-     }
-     return false;
-  }
-  */
+    : false
 };
 
 export default fnArr

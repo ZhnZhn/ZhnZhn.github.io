@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _isInArrStr = _interopRequireDefault(require("./isInArrStr"));
+
 var _DateUtils = _interopRequireDefault(require("./DateUtils"));
 
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
@@ -18,6 +20,7 @@ var _getV = _interopRequireDefault(require("./getV"));
 var _formatAllNumber = _interopRequireDefault(require("./formatAllNumber"));
 
 var ut = {
+  isInArrStr: _isInArrStr["default"],
   dt: _DateUtils["default"],
   fCompareBy: _fCompareBy["default"],
   fCompareByTwoProps: _fCompareByTwoProps["default"],

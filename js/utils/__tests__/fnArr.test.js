@@ -7,8 +7,7 @@ var _fnArr = _interopRequireDefault(require("../fnArr"));
 var _ref, _ref2;
 
 var findIndexByProp = _fnArr["default"].findIndexByProp,
-    isSameByProp = _fnArr["default"].isSameByProp,
-    isInArrStr = _fnArr["default"].isInArrStr;
+    isSameByProp = _fnArr["default"].isSameByProp;
 var propName = 'caption',
     propValue1 = 'caption1',
     propValue2 = 'caption2',
@@ -46,46 +45,4 @@ describe('isSameByProp', function () {
     expect(fnEdgeCase({}, propValue1)).toBe(false);
   });
 });
-describe('isInArrStr', function () {
-  var arr = ['test1', 'test2', 'test3'],
-      isTest = isInArrStr(arr);
-  test('should return function', function () {
-    expect(typeof isTest).toBe('function');
-  });
-  test('should return true if str in array', function () {
-    expect(isTest('test1')).toBe(true);
-    expect(isTest('test3')).toBe(true);
-  });
-  test('should return false if str not in array', function () {
-    expect(isTest('test5')).toBe(false);
-    expect(isTest('7')).toBe(false);
-  });
-  test('should return false in edge case', function () {
-    var _isTest1 = isInArrStr(),
-        _isTest2 = isInArrStr({});
-
-    expect(_isTest1('test1')).toBe(false);
-    expect(_isTest2('test1')).toBe(false);
-  });
-});
-/*
-describe('isStrInArr', () => {
-  const arr = [ 'test1', 'test2', 'test3' ]
-      , fnTrue = isStrInArr('test1')
-      , fnFalse = isStrInArr('test4')
-
-   test('should return function', () => {
-      expect(typeof fnTrue).toBe('function')
-      expect(typeof fnFalse).toBe('function')
-   })
-   test('should return bool is str in array', ()=> {
-     expect(fnTrue(arr)).toBe(true)
-     expect(fnFalse(arr)).toBe(false)
-   })
-   test('should return false in edge case', () => {
-      expect(fnTrue({})).toBe(false)
-      expect(fnFalse('')).toBe(false)
-   })
-})
-*/
 //# sourceMappingURL=fnArr.test.js.map
