@@ -15,6 +15,8 @@ var _react = require("react");
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
+var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
+
 var _ChartActions = _interopRequireDefault(require("../../flux/actions/ChartActions"));
 
 var _Type = require("../../constants/Type");
@@ -61,7 +63,7 @@ var _crValue = function _crValue(x, y) {
     y = '';
   }
 
-  return (y + " " + mlsToDmy(x)).trim();
+  return ((0, _formatNumber["default"])(y) + " " + mlsToDmy(x)).trim();
 };
 
 var LoadItemDialog = (_dec = _Decorators["default"].dialog, _dec(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {

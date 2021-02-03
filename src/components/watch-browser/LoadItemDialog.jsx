@@ -2,6 +2,7 @@ import { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import DateUtils from '../../utils/DateUtils'
+import formatNumber from '../../utils/formatNumber'
 
 import ChartActions from '../../flux/actions/ChartActions'
 import { BrowserType as BT, LoadType as LT } from '../../constants/Type'
@@ -37,7 +38,7 @@ const S = {
   }
 };
 
-const _crValue = (x='', y='') => (`${y} ${mlsToDmy(x)}`).trim();
+const _crValue = (x='', y='') => (`${formatNumber(y)} ${mlsToDmy(x)}`).trim();
 
 @Decor.dialog
 class LoadItemDialog extends Component {
