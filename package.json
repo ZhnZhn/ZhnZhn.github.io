@@ -4,7 +4,7 @@
   "description": "ERC: Economic RESTFul Client",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.dev.js",
+    "dev": "webpack serve --config webpack.dev.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -109,10 +109,10 @@
     "jspm": "^0.16.55",
     "react-test-renderer": "^17.0.1",
     "terser-webpack-plugin": "^5.0.3",
-    "webpack": "^5.3.0",
-    "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-cli": "^4.3.0",
-    "webpack-dev-server": "^3.11.1"
+    "webpack": "^5.20.0",
+    "webpack-bundle-analyzer": "^4.4.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "jest": {
     "roots": [
