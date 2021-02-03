@@ -17,6 +17,8 @@ var _useTheme = _interopRequireDefault(require("./useTheme"));
 
 var _useToggle = _interopRequireDefault(require("./useToggle"));
 
+var _useBool = _interopRequireDefault(require("./useBool"));
+
 var _useForceUpdate = _interopRequireDefault(require("./useForceUpdate"));
 
 var _useKeyEnter = _interopRequireDefault(require("./useKeyEnter"));
@@ -30,6 +32,7 @@ var use = {
   useRefInit: _useRefInit["default"],
   useTheme: _useTheme["default"],
   useToggle: _useToggle["default"],
+  useBool: _useBool["default"],
   useForceUpdate: _useForceUpdate["default"],
   useKeyEnter: _useKeyEnter["default"],
   useKeyEscape: _useKeyEscape["default"]
