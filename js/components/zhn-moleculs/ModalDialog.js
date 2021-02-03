@@ -15,6 +15,8 @@ var _use = _interopRequireDefault(require("../hooks/use"));
 
 var _focusNode = _interopRequireDefault(require("../zhn-utils/focusNode"));
 
+var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
+
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
@@ -23,8 +25,7 @@ var _Dialog = _interopRequireDefault(require("./Dialog.Style"));
 
 //import PropTypes from "prop-types";
 var useKeyEscape = _use["default"].useKeyEscape,
-    useTheme = _use["default"].useTheme,
-    useForceUpdate = _use["default"].useForceUpdate;
+    useTheme = _use["default"].useTheme;
 var TH_ID = 'MODAL_DIALOG';
 var CL = {
   MD: 'modal-dialog',
@@ -82,7 +83,6 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
 
   var _refRoot = (0, _react.useRef)(),
       _refPrevFocused = (0, _react.useRef)(),
-      _refWasClosing = (0, _react.useRef)(false),
       _refIsShow = (0, _react.useRef)(isShow),
       _focus = (0, _react.useCallback)(function () {
     _refPrevFocused.current = document.activeElement;
@@ -107,7 +107,6 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
       _hKeyDown = useKeyEscape(_hClose, [_hClose]),
-      forceUpdate = useForceUpdate(),
       TS = useTheme(TH_ID);
   /*eslint-disable react-hooks/exhaustive-deps */
 
@@ -124,11 +123,6 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
   });
   /* _focus */
 
-  (0, _react.useEffect)(function () {
-    if (_refWasClosing.current) {
-      setTimeout(forceUpdate, timeout);
-    }
-  });
   (0, _react.useImperativeHandle)(ref, function () {
     return {
       focus: _focus,
@@ -139,19 +133,8 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
 
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  var _className, _style;
-
-  if (_refWasClosing.current) {
-    _style = S.HIDE;
-    _refWasClosing.current = false;
-  } else {
-    _className = isShow ? CL.SHOWING : CL.HIDING;
-    _style = isShow ? S.SHOW : S.HIDE_POPUP;
-
-    if (!isShow) {
-      _refWasClosing.current = true;
-    }
-  }
+  var _style = isShow ? S.SHOW : S.HIDE,
+      _className = (0, _crCn["default"])(CL.MD, [isShow, CL.SHOWING]);
 
   return (
     /*#__PURE__*/
@@ -163,7 +146,7 @@ var ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
       tabIndex: "-1",
       "aria-label": caption,
       "aria-hidden": !isShow,
-      className: CL.MD + " " + _className,
+      className: _className,
       style: (0, _extends2["default"])({}, S.ROOT_DIV, S.ROOT_DIV_MODAL, style, _style, TS.ROOT, TS.EL_BORDER),
       onClick: _hClick,
       onKeyDown: _hKeyDown,

@@ -3,6 +3,7 @@ import { forwardRef, useRef, useCallback, useEffect, useImperativeHandle } from 
 import use from '../hooks/use'
 
 import focusNode  from '../zhn-utils/focusNode'
+import crCn from '../zhn-utils/crCn'
 
 import SvgClose from '../zhn/SvgClose'
 import FlatButton from '../zhn-m/FlatButton'
@@ -11,8 +12,7 @@ import STYLE from './Dialog.Style'
 
 const {
   useKeyEscape,
-  useTheme,
-  useForceUpdate
+  useTheme
 } = use;
 
 const TH_ID = 'MODAL_DIALOG';
@@ -78,7 +78,6 @@ const ModalDialog = forwardRef(({
 }, ref) => {
   const _refRoot = useRef()
   , _refPrevFocused = useRef()
-  , _refWasClosing = useRef(false)
   , _refIsShow = useRef(isShow)
   , _focus = useCallback(() => {
      _refPrevFocused.current = document.activeElement
@@ -99,7 +98,6 @@ const ModalDialog = forwardRef(({
   /* _focusPrev */
   /*eslint-enable react-hooks/exhaustive-deps */
   , _hKeyDown = useKeyEscape(_hClose, [_hClose])
-  , forceUpdate = useForceUpdate()
   , TS = useTheme(TH_ID);
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -114,12 +112,6 @@ const ModalDialog = forwardRef(({
   })
   /* _focus */
 
-  useEffect(() => {
-    if (_refWasClosing.current) {
-      setTimeout(forceUpdate, timeout)
-    }
-  })
-
   useImperativeHandle(ref, () => ({
     focus: _focus,
     focusPrev: _focusPrev
@@ -127,17 +119,8 @@ const ModalDialog = forwardRef(({
   /* focus, _focusPrev */
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  let _className, _style;
-  if (_refWasClosing.current){
-    _style = S.HIDE
-    _refWasClosing.current = false
-  } else {
-    _className = isShow ? CL.SHOWING : CL.HIDING
-    _style = isShow ? S.SHOW : S.HIDE_POPUP
-    if (!isShow){
-      _refWasClosing.current = true
-    }
-  }
+  const _style = isShow ? S.SHOW : S.HIDE
+  , _className = crCn(CL.MD, [isShow, CL.SHOWING]);
 
   return (
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
@@ -147,7 +130,7 @@ const ModalDialog = forwardRef(({
         tabIndex="-1"
         aria-label={caption}
         aria-hidden={!isShow}
-        className={`${CL.MD} ${_className}`}
+        className={_className}
         style={{
           ...S.ROOT_DIV, ...S.ROOT_DIV_MODAL,
           ...style, ..._style,
