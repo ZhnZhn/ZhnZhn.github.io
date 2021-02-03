@@ -38,7 +38,8 @@ const EMPTY = '';
 const ITEM_CONF_PROP_NAMES = [
  'url', 'loadId',
  'title', 'subtitle', 'itemCaption',
- 'seriaType'
+ 'seriaType',
+ 'items'
 ];
 
 const _isNaN = Number.isNaN
@@ -145,7 +146,9 @@ const AdapterFn = {
     ITEM_CONF_PROP_NAMES.forEach(k => {
       _value = option[k]
       if (_value != null) {
-        _itemConf[k] = _value
+        _itemConf[k] = _isArr(_value)
+           ? _value.map(obj => ({...obj}))
+           : _value
       }
      })
      return _itemConf;

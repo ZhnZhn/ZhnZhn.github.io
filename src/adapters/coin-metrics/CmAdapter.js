@@ -1,18 +1,10 @@
 import crAdapterType1 from '../crAdapterType1'
 import fnAdapter from './fnAdapter'
 
-const {
-  crData,
-  crTitle,
-  crConfOption
-} = fnAdapter
-, _assign = Object.assign;
-
-const trOption = (option, json) =>
-  _assign(option, crTitle(option, json));
+const { crData, crConfOption } = fnAdapter;
 
 const CmAdapter = crAdapterType1({
-  crData, crConfOption, trOption
+  crData, crConfOption
 });
 
 export default CmAdapter

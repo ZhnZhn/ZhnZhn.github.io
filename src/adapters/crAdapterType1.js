@@ -33,7 +33,7 @@ const crAdapterType1 = ({
          ? _data
          : (_data || {}).data
       , confOption = _assign(
-          crConfOption(option, json),
+          crConfOption(option, json, _data),
           addConfOption(option, json)
       );
       trOption(option, json)

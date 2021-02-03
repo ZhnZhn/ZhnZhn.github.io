@@ -5,48 +5,45 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var crError = _AdapterFn["default"].crError,
-    ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC;
+    ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
+    crItemConf = _AdapterFn["default"].crItemConf,
+    crValueConf = _AdapterFn["default"].crValueConf;
 
-var _crZhConfig = function _crZhConfig(option) {
-  var dataSource = option.dataSource,
-      _itemKey = option._itemKey,
-      title = option.title,
-      _id = _itemKey;
+var _crZhConfig = function _crZhConfig(option, data) {
+  var _itemKey = option._itemKey,
+      dataSource = option.dataSource,
+      itemCaption = option.itemCaption;
   return {
-    id: _id,
-    key: _id,
-    itemCaption: title,
+    id: _itemKey,
+    key: _itemKey,
+    itemCaption: itemCaption,
     dataSource: dataSource,
-    itemConf: {
-      _itemKey: _id,
+    itemConf: (0, _extends2["default"])({
+      _itemKey: _itemKey
+    }, crItemConf(option), crValueConf(data), {
       dataSource: dataSource
-    }
+    })
   };
 };
 
 var fnAdapter = {
   crError: crError.bind(null, "Server Response"),
   crData: function crData(json) {
-    var arr = json.metricData.series,
-        data = arr.map(function (item) {
-      return [ymdhmsToUTC(item.time.replace('Z', ''), 'T'), parseFloat(item.values[0])];
+    var arr = json.metricData.series;
+    return arr.map(function (_ref) {
+      var time = _ref.time,
+          values = _ref.values;
+      return [ymdhmsToUTC((time || '').replace('Z', ''), 'T'), parseFloat((values || [])[0])];
     });
-    return data;
   },
-  crTitle: function crTitle(_ref) {
-    var title = _ref.title,
-        subtitle = _ref.subtitle;
+  crConfOption: function crConfOption(option, json, data) {
     return {
-      title: title,
-      subtitle: subtitle
-    };
-  },
-  crConfOption: function crConfOption(option) {
-    return {
-      zhConfig: _crZhConfig(option)
+      zhConfig: _crZhConfig(option, data)
     };
   }
 };

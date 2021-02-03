@@ -42,7 +42,7 @@ var ymdToUTC = dt.ymdToUTC,
     getYmdhmUTC = dt.getYmdhmUTC,
     monthIndex = dt.monthIndex;
 var EMPTY = '';
-var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType'];
+var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 
 var _isNaN = Number.isNaN,
     _isArr = Array.isArray,
@@ -152,7 +152,9 @@ var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["defaul
       _value = option[k];
 
       if (_value != null) {
-        _itemConf[k] = _value;
+        _itemConf[k] = _isArr(_value) ? _value.map(function (obj) {
+          return (0, _extends2["default"])({}, obj);
+        }) : _value;
       }
     });
     return _itemConf;

@@ -52,7 +52,7 @@ var crAdapterType1 = function crAdapterType1(_ref3) {
     toConfig: function toConfig(json, option) {
       var _data = crData(json, option),
           data = _isArr(_data) ? _data : (_data || {}).data,
-          confOption = _assign(crConfOption(option, json), addConfOption(option, json));
+          confOption = _assign(crConfOption(option, json, _data), addConfOption(option, json));
 
       trOption(option, json);
       return {

@@ -2,45 +2,43 @@ import AdapterFn from '../AdapterFn'
 
 const {
   crError,
-  ymdhmsToUTC
+  ymdhmsToUTC,
+  crItemConf,
+  crValueConf
 } = AdapterFn;
 
-const _crZhConfig = (option) => {
+const _crZhConfig = (option, data) => {
   const {
-    dataSource, _itemKey,
-    title
-  } = option
-  , _id = _itemKey;
+    _itemKey,
+    dataSource,
+    itemCaption
+  } = option;
   return {
-    id: _id, key: _id,
-    itemCaption: title,
+    id: _itemKey, key: _itemKey,
+    itemCaption,
     dataSource,
     itemConf: {
-       _itemKey: _id,
-       dataSource,
+      _itemKey,
+      ...crItemConf(option),
+      ...crValueConf(data),
+      dataSource
     }
-  }
+  };
 };
 
 const fnAdapter = {
     crError: crError.bind(null, "Server Response"),
 
-    crData: (json) => {
-      const arr = json.metricData.series
-      , data = arr.map(item => [
-          ymdhmsToUTC(item.time.replace('Z', ''), 'T'),
-          parseFloat(item.values[0])
+    crData: json => {
+      const arr = json.metricData.series;
+      return arr.map(({ time, values }) => [
+        ymdhmsToUTC((time || '').replace('Z', ''), 'T'),
+        parseFloat((values || [])[0])
       ]);
-      return data;
     },
 
-    crTitle: ({ title, subtitle }) => ({
-      title,
-      subtitle
-    }),
-
-    crConfOption: (option) => ({
-      zhConfig: _crZhConfig(option)
+    crConfOption: (option, json, data) => ({
+      zhConfig: _crZhConfig(option, data)
     })
 };
 

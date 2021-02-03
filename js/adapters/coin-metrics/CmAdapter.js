@@ -10,18 +10,10 @@ var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crData = _fnAdapter["default"].crData,
-    crTitle = _fnAdapter["default"].crTitle,
-    crConfOption = _fnAdapter["default"].crConfOption,
-    _assign = Object.assign;
-
-var trOption = function trOption(option, json) {
-  return _assign(option, crTitle(option, json));
-};
-
+    crConfOption = _fnAdapter["default"].crConfOption;
 var CmAdapter = (0, _crAdapterType["default"])({
   crData: crData,
-  crConfOption: crConfOption,
-  trOption: trOption
+  crConfOption: crConfOption
 });
 var _default = CmAdapter;
 exports["default"] = _default;
