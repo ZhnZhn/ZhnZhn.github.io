@@ -5,13 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
+
+var _use = _interopRequireDefault(require("../hooks/use"));
 
 var _Browser = _interopRequireDefault(require("./Browser"));
 
@@ -29,6 +27,9 @@ var _SpinnerLoading = _interopRequireDefault(require("./SpinnerLoading"));
 
 var _MenuListType = _interopRequireDefault(require("./MenuListType2"));
 
+var useBool = _use["default"].useBool,
+    useToggle = _use["default"].useToggle,
+    useListen = _use["default"].useListen;
 var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
 var CL = {
   BROWSER: "scroll-browser-by",
@@ -51,181 +52,129 @@ var STYLE = {
   }
 };
 
-var MenuBrowserDynamic2 = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(MenuBrowserDynamic2, _Component);
+var _useToolbarButtons = function _useToolbarButtons(toggleSearch, onClickInfo, descrUrl) {
+  /*eslint-disable react-hooks/exhaustive-deps */
+  var _hClickInfo = (0, _react.useCallback)(function () {
+    onClickInfo({
+      descrUrl: descrUrl
+    });
+  }, []);
 
-  function MenuBrowserDynamic2(props) {
-    var _this;
+  return (0, _react.useMemo)(function () {
+    return [{
+      caption: 'S',
+      title: 'Click to toggle input search',
+      onClick: toggleSearch
+    }, {
+      caption: 'A',
+      title: 'About Datasources',
+      onClick: _hClickInfo
+    }];
+  }, [_hClickInfo]);
+  /*eslint-enable react-hooks/exhaustive-deps */
+};
 
-    _this = _Component.call(this, props) || this;
+var MenuBrowserDynamic2 = function MenuBrowserDynamic2(_ref) {
+  var isInitShow = _ref.isInitShow,
+      store = _ref.store,
+      browserType = _ref.browserType,
+      showAction = _ref.showAction,
+      loadCompletedAction = _ref.loadCompletedAction,
+      caption = _ref.caption,
+      sourceMenuUrl = _ref.sourceMenuUrl,
+      onLoadMenu = _ref.onLoadMenu,
+      descrUrl = _ref.descrUrl,
+      onClickInfo = _ref.onClickInfo,
+      modalDialogType = _ref.modalDialogType,
+      chartContainerType = _ref.chartContainerType,
+      onShowLoadDialog = _ref.onShowLoadDialog,
+      onShowContainer = _ref.onShowContainer,
+      ItemOptionComp = _ref.ItemOptionComp,
+      ItemComp = _ref.ItemComp,
+      children = _ref.children;
 
-    _this._loadMenu = function () {
-      var _this$props = _this.props,
-          browserType = _this$props.browserType,
-          caption = _this$props.caption,
-          sourceMenuUrl = _this$props.sourceMenuUrl,
-          onLoadMenu = _this$props.onLoadMenu;
+  var _useBool = useBool(isInitShow),
+      isShow = _useBool[0],
+      show = _useBool[1],
+      hide = _useBool[2],
+      _useToggle = useToggle(),
+      isShowSearch = _useToggle[0],
+      toggleSearch = _useToggle[1],
+      _useState = (0, _react.useState)({
+    isLoaded: false,
+    menuItems: []
+  }),
+      _useState$ = _useState[0],
+      isLoaded = _useState$.isLoaded,
+      menuItems = _useState$.menuItems,
+      setMenuItems = _useState[1],
+      _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
+      _hClickItem = (0, _react.useCallback)(function (item) {
+    return onShowLoadDialog(modalDialogType, {
+      item: item,
+      browserType: browserType,
+      chartContainerType: chartContainerType,
+      onShow: onShowContainer
+    });
+  }, []);
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+
+  useListen(store, function (actionType, data) {
+    if (actionType === showAction && data === browserType) {
+      show();
+    } else if (actionType === loadCompletedAction && data.browserType === browserType) {
+      setMenuItems({
+        menuItems: data.menuItems,
+        isLoaded: true
+      });
+    }
+  });
+  /*eslint-disable react-hooks/exhaustive-deps */
+
+  (0, _react.useEffect)(function () {
+    if (!isLoaded && isShow) {
       onLoadMenu({
         browserType: browserType,
         caption: caption,
         sourceMenuUrl: sourceMenuUrl
       });
-    };
-
-    _this._onStore = function (actionType, data) {
-      var _this$props2 = _this.props,
-          browserType = _this$props2.browserType,
-          showAction = _this$props2.showAction,
-          loadCompletedAction = _this$props2.loadCompletedAction;
-
-      if (actionType === showAction && data === browserType) {
-        _this._handleShow();
-      } else if (actionType === loadCompletedAction && data.browserType === browserType) {
-        _this.setState({
-          menuItems: data.menuItems,
-          isLoaded: true
-        });
-      }
-    };
-
-    _this._handleHide = function () {
-      _this.setState({
-        isShow: false
-      });
-    };
-
-    _this._handleShow = function () {
-      _this.setState({
-        isShow: true
-      });
-    };
-
-    _this._handleClickInfo = function () {
-      var _this$props3 = _this.props,
-          descrUrl = _this$props3.descrUrl,
-          onClickInfo = _this$props3.onClickInfo;
-      onClickInfo({
-        descrUrl: descrUrl
-      });
-    };
-
-    _this._handleClickSearch = function () {
-      _this.setState(function (_ref) {
-        var isShowSearch = _ref.isShowSearch;
-
-        var _ref2 = isShowSearch ? [false, CL.BROWSER] : [true, CL.BROWSER_WITH_SEARCH],
-            is = _ref2[0],
-            scrollClass = _ref2[1];
-
-        return {
-          isShowSearch: is,
-          scrollClass: scrollClass
-        };
-      });
-    };
-
-    _this._handleClickItem = function (item) {
-      var _this$props4 = _this.props,
-          modalDialogType = _this$props4.modalDialogType,
-          browserType = _this$props4.browserType,
-          chartContainerType = _this$props4.chartContainerType,
-          onShowLoadDialog = _this$props4.onShowLoadDialog,
-          onShowContainer = _this$props4.onShowContainer;
-      onShowLoadDialog(modalDialogType, {
-        item: item,
-        browserType: browserType,
-        chartContainerType: chartContainerType,
-        onShow: onShowContainer
-      });
-    };
-
-    var isInitShow = props.isInitShow;
-    _this.toolbarButtons = [{
-      caption: 'S',
-      title: 'Click to toggle input search',
-      onClick: _this._handleClickSearch.bind((0, _assertThisInitialized2["default"])(_this))
-    }, {
-      caption: 'A',
-      title: 'About Datasources',
-      onClick: _this._handleClickInfo.bind((0, _assertThisInitialized2["default"])(_this))
-    }];
-    _this.state = {
-      isShow: !!isInitShow,
-      isShowSearch: false,
-      scrollClass: CL.BROWSER,
-      isLoaded: false,
-      menuItems: []
-    };
-    return _this;
-  }
-
-  var _proto = MenuBrowserDynamic2.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-
-    this._loadMenu();
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate() {
-    var _this$state = this.state,
-        isLoaded = _this$state.isLoaded,
-        isShow = _this$state.isShow;
-
-    if (!isLoaded && isShow) {
-      this._loadMenu();
     }
-  };
+  }, [isLoaded, isShow]);
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unsubscribe();
-  };
+  var _isMenuEmpty = menuItems.length === 0,
+      _scrollClass = isShowSearch ? CL.BROWSER_WITH_SEARCH : CL.BROWSER;
 
-  _proto.render = function render() {
-    var _this$props5 = this.props,
-        caption = _this$props5.caption,
-        children = _this$props5.children,
-        ItemOptionComp = _this$props5.ItemOptionComp,
-        ItemComp = _this$props5.ItemComp,
-        _this$state2 = this.state,
-        menuItems = _this$state2.menuItems,
-        isShow = _this$state2.isShow,
-        isShowSearch = _this$state2.isShowSearch,
-        scrollClass = _this$state2.scrollClass,
-        _isMenuEmpty = menuItems.length === 0;
-
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser["default"], {
-      isShow: isShow,
-      style: STYLE.BROWSER,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption["default"], {
-        caption: caption,
-        captionStyle: STYLE.CAPTION,
-        onClose: this._handleHide
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle["default"], {
-        buttons: this.toolbarButtons
-      }), !_isMenuEmpty && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
-        isShow: isShowSearch,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WrapperInputSearch["default"], {
-          style: STYLE.WRAPPER_SEARCH,
-          placeholder: SEARCH_PLACEHOLDER,
-          data: menuItems,
-          ItemOptionComp: ItemOptionComp,
-          onSelect: this._handleClickItem
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane["default"], {
-        className: scrollClass,
-        children: [_isMenuEmpty && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading["default"], {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuListType["default"], {
-          model: menuItems,
-          ItemComp: ItemComp,
-          itemClassName: CL.ROW_ITEM,
-          onClickItem: this._handleClickItem
-        }), children]
-      })]
-    });
-  };
-
-  return MenuBrowserDynamic2;
-}(_react.Component);
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser["default"], {
+    isShow: isShow,
+    style: STYLE.BROWSER,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption["default"], {
+      caption: caption,
+      captionStyle: STYLE.CAPTION,
+      onClose: hide
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle["default"], {
+      buttons: _toolbarButtons
+    }), !_isMenuEmpty && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+      isShow: isShowSearch,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WrapperInputSearch["default"], {
+        style: STYLE.WRAPPER_SEARCH,
+        placeholder: SEARCH_PLACEHOLDER,
+        data: menuItems,
+        ItemOptionComp: ItemOptionComp,
+        onSelect: _hClickItem
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane["default"], {
+      className: _scrollClass,
+      children: [_isMenuEmpty && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading["default"], {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuListType["default"], {
+        model: menuItems,
+        ItemComp: ItemComp,
+        itemClassName: CL.ROW_ITEM,
+        onClickItem: _hClickItem
+      }), children]
+    })]
+  });
+};
 
 var _default = MenuBrowserDynamic2;
 exports["default"] = _default;

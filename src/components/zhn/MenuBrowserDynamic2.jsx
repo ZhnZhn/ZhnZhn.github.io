@@ -1,4 +1,6 @@
-import { Component } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
+
+import use from '../hooks/use'
 
 import Browser from './Browser';
 import BrowserCaption from './BrowserCaption';
@@ -11,13 +13,15 @@ import ScrollPane from './ScrollPane';
 import SpinnerLoading from './SpinnerLoading';
 import MenuListType2 from './MenuListType2';
 
+const { useBool, useToggle, useListen } = use;
+
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 
 const CL = {
   BROWSER : "scroll-browser-by",
   BROWSER_WITH_SEARCH : "scroll-browser-by--search",
   ROW_ITEM: 'row__type2-topic not-selected'
-}
+};
 
 const STYLE = {
   BROWSER : {
@@ -35,128 +39,94 @@ const STYLE = {
   }
 };
 
-class MenuBrowserDynamic2 extends Component {
-  constructor(props){
-    super(props);
-    const { isInitShow } = props;
-    this.toolbarButtons = [
-      { caption: 'S', title: 'Click to toggle input search', onClick: this._handleClickSearch.bind(this) },
-      { caption: 'A', title: 'About Datasources', onClick: this._handleClickInfo.bind(this) }
-    ];
-    this.state = {
-      isShow: !!isInitShow,
-      isShowSearch : false,
-      scrollClass : CL.BROWSER,
-      isLoaded : false,
-      menuItems: []
-    }
-  }
+const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
+  /*eslint-disable react-hooks/exhaustive-deps */
+  const _hClickInfo = useCallback(() => {
+     onClickInfo({ descrUrl })
+  }, []);
+  return useMemo(() => [
+     { caption: 'S', title: 'Click to toggle input search', onClick: toggleSearch },
+     { caption: 'A', title: 'About Datasources', onClick: _hClickInfo }
+  ], [_hClickInfo])
+  /*eslint-enable react-hooks/exhaustive-deps */
+};
 
-  componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore)
-    this._loadMenu()
-  }
-  componentDidUpdate(){
-    const {isLoaded, isShow} = this.state;
-    if (!isLoaded && isShow) {
-      this._loadMenu()
-    }
-  }
-  componentWillUnmount(){
-    this.unsubscribe();
-  }
 
-  _loadMenu = () => {
-    const { browserType, caption, sourceMenuUrl, onLoadMenu } = this.props;
-    onLoadMenu({ browserType, caption, sourceMenuUrl });
-  }
-
-  _onStore = (actionType, data) => {
-    const { browserType, showAction, loadCompletedAction } = this.props;
-    if (actionType === showAction && data === browserType){
-      this._handleShow();
-    } else if (actionType === loadCompletedAction && data.browserType === browserType){      
-      this.setState({ menuItems: data.menuItems, isLoaded : true });
-    }
-  }
-
-  _handleHide = () => {
-    this.setState({isShow : false});
-  }
-  _handleShow = () => {
-    this.setState({isShow : true});
-  }
-
-  _handleClickInfo = () => {
-    const {descrUrl, onClickInfo} = this.props;
-    onClickInfo({ descrUrl });
-  }
-  _handleClickSearch = () => {
-    this.setState(({isShowSearch}) => {
-      const [is, scrollClass] = isShowSearch
-        ? [false, CL.BROWSER]
-        : [true, CL.BROWSER_WITH_SEARCH];
-      return { isShowSearch: is, scrollClass };
-    })
-  }
-
-  _handleClickItem = (item) => {
-    const {
-      modalDialogType, browserType, chartContainerType,
-      onShowLoadDialog, onShowContainer
-    } = this.props;
-
+const MenuBrowserDynamic2 = ({
+  isInitShow,
+  store,
+  browserType, showAction, loadCompletedAction,
+  caption, sourceMenuUrl, onLoadMenu,
+  descrUrl, onClickInfo,
+  modalDialogType, chartContainerType, onShowLoadDialog, onShowContainer,
+  ItemOptionComp, ItemComp, children
+}) => {
+  const [isShow, show, hide] = useBool(isInitShow)
+  , [isShowSearch, toggleSearch] = useToggle()
+  , [{isLoaded, menuItems}, setMenuItems] = useState({ isLoaded: false, menuItems: []})
+  , _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hClickItem = useCallback(item =>
     onShowLoadDialog(modalDialogType, {
       item, browserType, chartContainerType,
-      onShow : onShowContainer
-    });
-  }
+      onShow: onShowContainer
+    }), [])
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  render(){
-    const {
-        caption, children,
-        ItemOptionComp, ItemComp
-      } = this.props
-    , {
-      menuItems,
-      isShow, isShowSearch,
-      scrollClass
-    } = this.state
-    , _isMenuEmpty = menuItems.length === 0;
 
-    return (
-       <Browser isShow={isShow} style={STYLE.BROWSER}>
-           <BrowserCaption
-              caption={caption}
-              captionStyle={STYLE.CAPTION}
-              onClose={this._handleHide}
+  useListen(store, (actionType, data) => {
+    if (actionType === showAction && data === browserType){
+      show();
+    } else if (actionType === loadCompletedAction && data.browserType === browserType){
+      setMenuItems({ menuItems: data.menuItems, isLoaded: true })
+    }
+  })
+
+  /*eslint-disable react-hooks/exhaustive-deps */
+  useEffect(()=>{
+    if (!isLoaded && isShow) {
+      onLoadMenu({ browserType, caption, sourceMenuUrl });
+    }
+  }, [isLoaded, isShow])
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  const _isMenuEmpty = menuItems.length === 0
+  , _scrollClass = isShowSearch
+       ? CL.BROWSER_WITH_SEARCH
+       : CL.BROWSER;
+
+  return (
+    <Browser isShow={isShow} style={STYLE.BROWSER}>
+        <BrowserCaption
+           caption={caption}
+           captionStyle={STYLE.CAPTION}
+           onClose={hide}
+        />
+       <ToolbarButtonCircle
+         buttons={_toolbarButtons}
+       />
+       {!_isMenuEmpty && <ShowHide isShow={isShowSearch}>
+           <WrapperInputSearch
+             style={STYLE.WRAPPER_SEARCH}
+             placeholder={SEARCH_PLACEHOLDER}
+             data={menuItems}
+             ItemOptionComp={ItemOptionComp}
+             onSelect={_hClickItem}
            />
-          <ToolbarButtonCircle
-            buttons={this.toolbarButtons}
-          />
-          {!_isMenuEmpty && <ShowHide isShow={isShowSearch}>
-              <WrapperInputSearch
-                style={STYLE.WRAPPER_SEARCH}
-                placeholder={SEARCH_PLACEHOLDER}
-                data={menuItems}
-                ItemOptionComp={ItemOptionComp}
-                onSelect={this._handleClickItem}
-              />
-            </ShowHide>
-          }
-          <ScrollPane className={scrollClass}>
-            {_isMenuEmpty && <SpinnerLoading />}
-            <MenuListType2
-               model={menuItems}
-               ItemComp={ItemComp}
-               itemClassName={CL.ROW_ITEM}
-               onClickItem={this._handleClickItem}
-            />
-            {children}
-          </ScrollPane>
-       </Browser>
-    )
-  }
+         </ShowHide>
+       }
+       <ScrollPane className={_scrollClass}>
+         {_isMenuEmpty && <SpinnerLoading />}
+         <MenuListType2
+            model={menuItems}
+            ItemComp={ItemComp}
+            itemClassName={CL.ROW_ITEM}
+            onClickItem={_hClickItem}
+         />
+         {children}
+       </ScrollPane>
+    </Browser>
+  );
 }
 
 export default MenuBrowserDynamic2;
