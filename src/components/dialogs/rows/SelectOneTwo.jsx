@@ -1,96 +1,65 @@
-import { Component } from 'react';
+
+import { useState, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
+import useLoadOptions  from '../hooks/useLoadOptions'
 
 import RowInputSelect from './RowInputSelect';
 import ShowHide from '../../zhn/ShowHide'
-import withLoadOptions from '../decorators/withLoadOptions';
 
-const _isFn = fn => typeof fn === 'function';
+const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`;
+const NOOP = () => {};
 
-@withLoadOptions
-class SelectOneTwo extends Component {
+const SelectOneTwo = forwardRef(({
+  isShowLabels,
+  isShow=true,
+  isHideTwo=false,
+  oneOptionNames='Items',
+  msgOnNotSelected=DF_MSG_ON_NOT_SELECRED,
+  uri, oneJsonProp,
+  oneCaption, twoCaption,
+  onSelectOne=NOOP
+}, ref) => {
+    const [state, loadOptions] = useLoadOptions(isShow, uri, oneJsonProp)
+    , { isLoading, isLoadingFailed, options:oneOptions } = state
+    , [twoOptions, setTwoOptions] = useState([])
+    , _refOne = useRef(null)
+    , _refTwo = useRef(null)
+    /*eslint-disable react-hooks/exhaustive-deps */
+    , _hSelectOne = useCallback(one => {
+       _refOne.current = one;
+       _refTwo.current = null
+       setTwoOptions(one && one.columns || [])
+       onSelectOne(one)
+    }, [])
+    //onSelectOne
+    /*eslint-enable react-hooks/exhaustive-deps */
+    , _hSelectTwo = useCallback(item => {
+       _refTwo.current = item
+    }, [])
 
-  static defaultProps = {
-    isShow: true,
-    isHideTwo: false,
-    oneOptionNames: 'Items',
-    msgOnNotSelected: (item) => `${item} is not selected`
-  }
+    /*eslint-disable react-hooks/exhaustive-deps */
+    useImperativeHandle(ref, ()=>({
+      getValidation:() => {
+         const msg = [];
+         if (!_refOne.current){
+           msg.push(msgOnNotSelected(oneCaption));
+         }
+         if (!_refTwo.current){
+           msg.push(msgOnNotSelected(twoCaption));
+         }
 
-  state = {
-    isLoading: false,
-    isLoadingFailed: false,
-    oneOptions: [],
-    twoOptions: []
-  }
-  one = null
-  two = null
+         if (msg.length>0){
+           return { isValid: false, msg };
+         }
+         return { isValid: true };
+      },
+      getValues: () => ({
+        one: _refOne.current,
+        two: _refTwo.current
+      })
+    }), [])
+   //oneCaption, twoCaption
+   /*eslint-enable react-hooks/exhaustive-deps */
 
-  /*
-  constructor(props){
-    super(props);
-    this.one = null;
-    this.two = null;
-  }
-  */
-
-  componentDidMount(){
-    this._loadOptions();
-  }
-  componentDidUpdate(prevProps, prevState){
-    if (prevProps !== this.props){
-       if (this.state.isLoadingFailed && this.props.isShow){
-         this._loadOptions();
-       }
-    }
-  }
-  componetWillUnmount(){
-    this._unmountWithLoadOptions();
-  }
-
-  _loadOptions = () => {
-    const { uri, oneJsonProp } = this.props;
-    this._handlerWithLoadOptions(
-      'oneOptions', uri, oneJsonProp
-    );
-  }
-
-  _setTwoOptions = (twoOptions=[]) => {
-    this.two = null;
-    this.setState({ twoOptions });
-  }
-
-  _hSelectOne = (one) => {
-    const { onSelectOne } = this.props;
-    this.one = one;
-    if (one) {
-      if (one.columns) {
-        this._setTwoOptions(one.columns)
-      } else if (!this._isDfColumns) {
-        this._setTwoOptions()
-      }
-    } else if (!this._isDfColumns) {
-      this._setTwoOptions()
-    }
-    if (_isFn(onSelectOne)) {
-      onSelectOne(one)
-    }
-  }
-  _hSelectTwo = (two) => {
-    this.two = two;
-  }
-
-  render(){
-    const {
-      isShowLabels,
-      oneCaption, oneOptionNames,
-      isHideTwo,
-      twoCaption
-    } = this.props
-    , {
-      isLoading, isLoadingFailed,
-      oneOptions,
-      twoOptions
-    } = this.state;
     return (
       <div>
          <RowInputSelect
@@ -100,43 +69,19 @@ class SelectOneTwo extends Component {
            optionNames={oneOptionNames}
            isLoading={isLoading}
            isLoadingFailed={isLoadingFailed}
-           onLoadOption={this._loadOptions}
-           onSelect={this._hSelectOne}
+           onLoadOption={loadOptions}
+           onSelect={_hSelectOne}
          />
          <ShowHide isShow={!isHideTwo}>
            <RowInputSelect
              isShowLabels={isShowLabels}
              caption={twoCaption}
              options={twoOptions}
-             onSelect={this._hSelectTwo}
+             onSelect={_hSelectTwo}
            />
          </ShowHide>
       </div>
-    )
-  }
-
-  getValidation() {
-     const msg = []
-     , { oneCaption, twoCaption, msgOnNotSelected } = this.props;
-     if (!this.one){
-       msg.push(msgOnNotSelected(oneCaption));
-     }
-     if (!this.two){
-       msg.push(msgOnNotSelected(twoCaption));
-     }
-
-     if (msg.length>0){
-       return { isValid: false, msg };
-     }
-     return { isValid: true };
-  }
-
-  getValues() {
-    return {
-      one: this.one,
-      two: this.two
-    };
-  }
-}
+    );
+})
 
 export default SelectOneTwo
