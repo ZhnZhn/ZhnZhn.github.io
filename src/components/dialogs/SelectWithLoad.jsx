@@ -1,58 +1,31 @@
-import { Component } from 'react';
+
+import { forwardRef, useImperativeHandle } from 'react'
+import useLoadOptions  from './hooks/useLoadOptions'
 
 import RowInputSelect from './rows/RowInputSelect'
 
-import withLoadOptions from './decorators/withLoadOptions';
+const SelectWithLoad = forwardRef(({
+  isShow=true,
+  optionNames='Items',
+  jsonProp='items',
+  uri,
+  ...restProps
+}, ref) => {
+  const [state, loadOptions] = useLoadOptions(isShow, uri, jsonProp)
+  , { options } = state;
 
-@withLoadOptions
-class SelectWithLoad extends Component {
-    static defaultProps = {
-       isShow: true,
-       optionNames: 'Items',
-       jsonProp: 'items'
-     }
+  useImperativeHandle(ref, () => ({
+    getOptions: () => options
+  }), [options])
 
-    state = {
-      options: [],
-      isLoading: false,
-      isLoadingFailed: false
-    }
-
-    componentDidMount(){
-      this._handlerLoadOptions();
-    }
-    componentDidUpdate(prevProps, prevState){
-      if (prevProps !== this.props){
-         if (this.state.isLoadingFailed && this.props.isShow){
-           this._handlerLoadOptions();
-         }
-      }
-    }
-    componetWillUnmount(){
-      this._unmountWithLoadOptions();
-    }
-
-    _handlerLoadOptions = () => {
-      const { uri, jsonProp } = this.props;
-      this._handlerWithLoadOptions(
-        'options', uri, jsonProp
-      );
-    }
-
-    render(){
-      return (
-        <RowInputSelect
-           {...this.props}
-           {...this.state}
-           onLoadOption={this._handlerLoadOptions}
-        />
-      );
-    }
-
-    getOptions(){
-      return this.state.options;
-    }
-}
-
+  return (
+    <RowInputSelect
+       isShow={isShow}
+       {...restProps}
+       {...state}
+       onLoadOption={loadOptions}
+    />
+  );
+})
 
 export default SelectWithLoad

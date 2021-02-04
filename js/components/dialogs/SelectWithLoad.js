@@ -7,81 +7,44 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
+var _useLoadOptions2 = _interopRequireDefault(require("./hooks/useLoadOptions"));
+
 var _RowInputSelect = _interopRequireDefault(require("./rows/RowInputSelect"));
 
-var _withLoadOptions = _interopRequireDefault(require("./decorators/withLoadOptions"));
+var SelectWithLoad = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
+  var _ref$isShow = _ref.isShow,
+      isShow = _ref$isShow === void 0 ? true : _ref$isShow,
+      _ref$optionNames = _ref.optionNames,
+      optionNames = _ref$optionNames === void 0 ? 'Items' : _ref$optionNames,
+      _ref$jsonProp = _ref.jsonProp,
+      jsonProp = _ref$jsonProp === void 0 ? 'items' : _ref$jsonProp,
+      uri = _ref.uri,
+      restProps = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["isShow", "optionNames", "jsonProp", "uri"]);
 
-var _class, _class2, _temp;
+  var _useLoadOptions = (0, _useLoadOptions2["default"])(isShow, uri, jsonProp),
+      state = _useLoadOptions[0],
+      loadOptions = _useLoadOptions[1],
+      options = state.options;
 
-var SelectWithLoad = (0, _withLoadOptions["default"])(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(SelectWithLoad, _Component);
-
-  function SelectWithLoad() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      options: [],
-      isLoading: false,
-      isLoadingFailed: false
-    };
-
-    _this._handlerLoadOptions = function () {
-      var _this$props = _this.props,
-          uri = _this$props.uri,
-          jsonProp = _this$props.jsonProp;
-
-      _this._handlerWithLoadOptions('options', uri, jsonProp);
-    };
-
-    return _this;
-  }
-
-  var _proto = SelectWithLoad.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this._handlerLoadOptions();
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
-      if (this.state.isLoadingFailed && this.props.isShow) {
-        this._handlerLoadOptions();
+  (0, _react.useImperativeHandle)(ref, function () {
+    return {
+      getOptions: function getOptions() {
+        return options;
       }
-    }
-  };
-
-  _proto.componetWillUnmount = function componetWillUnmount() {
-    this._unmountWithLoadOptions();
-  };
-
-  _proto.render = function render() {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect["default"], (0, _extends2["default"])({}, this.props, this.state, {
-      onLoadOption: this._handlerLoadOptions
-    }));
-  };
-
-  _proto.getOptions = function getOptions() {
-    return this.state.options;
-  };
-
-  return SelectWithLoad;
-}(_react.Component), _class2.defaultProps = {
-  isShow: true,
-  optionNames: 'Items',
-  jsonProp: 'items'
-}, _temp)) || _class;
-
+    };
+  }, [options]);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect["default"], (0, _extends2["default"])({
+    isShow: isShow
+  }, restProps, state, {
+    onLoadOption: loadOptions
+  }));
+});
 var _default = SelectWithLoad;
 exports["default"] = _default;
 //# sourceMappingURL=SelectWithLoad.js.map
