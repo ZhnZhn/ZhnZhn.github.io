@@ -1,6 +1,5 @@
 
 import withForDate from './withForDate'
-import withLoadOptions from './withLoadOptions'
 import withToolbar from './withToolbar'
 import withValidationLoad from './withValidationLoad'
 import withLoad from './withLoad'
@@ -14,7 +13,6 @@ const Decorators = {
     withInitialState(target)
   },
   withForDate,
-  withLoadOptions,
 
   withToolbar,
   withValidationLoad,

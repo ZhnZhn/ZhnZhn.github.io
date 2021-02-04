@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _withForDate = _interopRequireDefault(require("./withForDate"));
 
-var _withLoadOptions = _interopRequireDefault(require("./withLoadOptions"));
-
 var _withToolbar = _interopRequireDefault(require("./withToolbar"));
 
 var _withValidationLoad = _interopRequireDefault(require("./withValidationLoad"));
@@ -25,7 +23,6 @@ var Decorators = {
     (0, _withInitialState["default"])(target);
   },
   withForDate: _withForDate["default"],
-  withLoadOptions: _withLoadOptions["default"],
   withToolbar: _withToolbar["default"],
   withValidationLoad: _withValidationLoad["default"],
   withLoad: _withLoad["default"],
