@@ -13,7 +13,7 @@ const _calcDecimal = (strNumber) => {
 
 const formatAllNumber = function(value) {
   if (!value) { return DF_VALUE; }
-  if (value<1) { return ''+value; }
+  if (value<1000 && value>-1000) { return ''+value; }
 
   const _value = (''+value).replace(REG_BLANKS, '')
   , decimal = _calcDecimal(_value);

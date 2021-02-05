@@ -21,7 +21,7 @@ var formatAllNumber = function formatAllNumber(value) {
     return DF_VALUE;
   }
 
-  if (value < 1) {
+  if (value < 1000 && value > -1000) {
     return '' + value;
   }
 

@@ -2,56 +2,50 @@ import fn from '../formatAllNumber'
 
 describe('formatAllNumber', ()=>{
   test('should format value without decimals to str with blanks', ()=>{
-    const str1 = fn(100)
-    expect(str1).toBe('100')
-    expect(typeof str1).toBe('string')
+    expect(fn(1)).toBe('1')
+    expect(fn(10)).toBe('10')
+    expect(fn(100)).toBe('100')
+    expect(fn(1_000)).toBe('1 000')
+    expect(fn(100_000)).toBe('100 000')
+    expect(fn(100_000_000)).toBe('100 000 000')
 
-    const str2 = fn(100000)
-    expect(str2).toBe('100 000')
-    expect(typeof str2).toBe('string')
-
-    const str3 = fn(100000000)
-    expect(str3).toBe('100 000 000')
-    expect(typeof str3).toBe('string')
+    expect(fn(-1)).toBe('-1')
+    expect(fn(-10)).toBe('-10')
+    expect(fn(-100)).toBe('-100')
+    expect(fn(-1_000)).toBe('-1 000')
+    expect(fn(-100_000)).toBe('-100 000')
+    expect(fn(-100_000_000)).toBe('-100 000 000')
   })
 
   test('should format value with decimals for str with blanks', ()=>{
-    const str1 = fn(100.001)
-    expect(str1).toBe('100.001')
-    expect(typeof str1).toBe('string')
+    expect(fn(100.001)).toBe('100.001')
+    expect(fn(100_000.001)).toBe('100 000.001')
 
-    const str2 = fn(100000.001)
-    expect(str2).toBe('100 000.001')
-    expect(typeof str2).toBe('string')
+    expect(fn(-100.001)).toBe('-100.001')
+    expect(fn(-100_000.001)).toBe('-100 000.001')
   })
 
   test('should format small values [0, 1e-7)', ()=>{
-    const str1 = fn(0.000001099)
-    expect(str1).toBe('0.000001099')
+    expect(fn(0.000001099)).toBe('0.000001099')
+    expect(fn(1.099e-6)).toBe('0.000001099')
 
-    const str2 = fn(1.099e-6)
-    expect(str2).toBe('0.000001099')
+    expect(fn(-0.000001099)).toBe('-0.000001099')
+    expect(fn(-1.099e-6)).toBe('-0.000001099')
   })
 
   test('should format small values (1e-7, +) to exponential format',() => {
-    const str1 = fn(0.0000001099)
-    expect(str1).toBe('1.099e-7')
+    expect(fn(0.0000001099)).toBe('1.099e-7')
+    expect(fn(1.099e-7)).toBe('1.099e-7')
 
-    const str2 = fn(1.099e-7)
-    expect(str2).toBe('1.099e-7')
+    expect(fn(-0.0000001099)).toBe('-1.099e-7')
+    expect(fn(-1.099e-7)).toBe('-1.099e-7')
   })
 
   test('should return same value for already formated str',  () => {
-    const str1 = '100 000'
-    , str2 = '100.001'
-    , str3 = '100 000.001'
-    , str4 = '100 000 000';
-
-    expect(fn(str1)).toBe(str1)
-    expect(fn(str2)).toBe(str2)
-    expect(fn(str3)).toBe(str3)
-    expect(fn(str4)).toBe(str4)
-
+    expect(fn('100 000')).toBe('100 000')
+    expect(fn('100.001')).toBe('100.001')
+    expect(fn('100 000.001')).toBe('100 000.001')
+    expect(fn('100 000 000')).toBe('100 000 000')
   })
 
   test('should return for falsy values str 0', () => {
