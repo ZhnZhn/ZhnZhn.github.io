@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
+import useHasNotEqual from '../../hooks/useHasNotEqual'
 
 import Msg from '../../../constants/Msg';
 import CA from '../../../flux/actions/ComponentActions';
@@ -78,6 +79,11 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
   return loadOptions;
 };
 
+const _useIsReload = (isShow, isLoadingFailed) => {
+  const _hasToggled = useHasNotEqual(isShow)
+  return isShow && isLoadingFailed && _hasToggled;
+};
+
 const useLoadOptions = (isShow, uri, jsonProp) => {
   const [state, setState] = useState({
     options: [],
@@ -86,6 +92,7 @@ const useLoadOptions = (isShow, uri, jsonProp) => {
   })
   , { isLoadingFailed } = state
   , refLoadId = useRef(null)
+  , _isReloadFailedOption = _useIsReload(isShow, isLoadingFailed)
   , _setLoadingFailed = _useLoadingFailed(setState)
   , _load = _useLoad(refLoadId, _setLoadingFailed, setState)
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -101,14 +108,16 @@ const useLoadOptions = (isShow, uri, jsonProp) => {
       clearTimeout(id)
     };
   }, [])
+  // loadOptions
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
-    if (isShow && isLoadingFailed) {
+    if (_isReloadFailedOption) {
       loadOptions()
     }
-  }, [isShow, isLoadingFailed])
+  }, [_isReloadFailedOption])
+  // loadOptions
   /*eslint-enable react-hooks/exhaustive-deps */
 
 

@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _react = require("react");
 
+var _useHasNotEqual = _interopRequireDefault(require("../../hooks/useHasNotEqual"));
+
 var _Msg = _interopRequireDefault(require("../../../constants/Msg"));
 
 var _ComponentActions = _interopRequireDefault(require("../../../flux/actions/ComponentActions"));
@@ -100,6 +102,12 @@ var _useLoad = function _useLoad(refLoadId, setLoadingFailed, setState) {
   return loadOptions;
 };
 
+var _useIsReload = function _useIsReload(isShow, isLoadingFailed) {
+  var _hasToggled = (0, _useHasNotEqual["default"])(isShow);
+
+  return isShow && isLoadingFailed && _hasToggled;
+};
+
 var useLoadOptions = function useLoadOptions(isShow, uri, jsonProp) {
   var _useState = (0, _react.useState)({
     options: [],
@@ -110,6 +118,7 @@ var useLoadOptions = function useLoadOptions(isShow, uri, jsonProp) {
       setState = _useState[1],
       isLoadingFailed = state.isLoadingFailed,
       refLoadId = (0, _react.useRef)(null),
+      _isReloadFailedOption = _useIsReload(isShow, isLoadingFailed),
       _setLoadingFailed = _useLoadingFailed(setState),
       _load = _useLoad(refLoadId, _setLoadingFailed, setState),
       loadOptions = (0, _react.useCallback)(function () {
@@ -130,16 +139,18 @@ var useLoadOptions = function useLoadOptions(isShow, uri, jsonProp) {
       var id = refLoadId.current;
       clearTimeout(id);
     };
-  }, []);
+  }, []); // loadOptions
+
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
 
   (0, _react.useEffect)(function () {
-    if (isShow && isLoadingFailed) {
+    if (_isReloadFailedOption) {
       loadOptions();
     }
-  }, [isShow, isLoadingFailed]);
+  }, [_isReloadFailedOption]); // loadOptions
+
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return [state, loadOptions];

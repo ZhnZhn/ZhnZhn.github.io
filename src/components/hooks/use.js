@@ -8,6 +8,7 @@ import useBool from './useBool'
 import useForceUpdate from './useForceUpdate'
 import useKeyEnter from './useKeyEnter'
 import useKeyEscape from './useKeyEscape'
+import useHasNotEqual from './useHasNotEqual'
 
 const use = {
   crStyle,
@@ -19,7 +20,8 @@ const use = {
   useBool,
   useForceUpdate,
   useKeyEnter,
-  useKeyEscape
-}
+  useKeyEscape,
+  useHasNotEqual
+};
 
 export default use

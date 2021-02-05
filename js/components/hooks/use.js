@@ -25,6 +25,8 @@ var _useKeyEnter = _interopRequireDefault(require("./useKeyEnter"));
 
 var _useKeyEscape = _interopRequireDefault(require("./useKeyEscape"));
 
+var _useHasNotEqual = _interopRequireDefault(require("./useHasNotEqual"));
+
 var use = {
   crStyle: _crStyle["default"],
   useFnFocus: _useFnFocus["default"],
@@ -35,7 +37,8 @@ var use = {
   useBool: _useBool["default"],
   useForceUpdate: _useForceUpdate["default"],
   useKeyEnter: _useKeyEnter["default"],
-  useKeyEscape: _useKeyEscape["default"]
+  useKeyEscape: _useKeyEscape["default"],
+  useHasNotEqual: _useHasNotEqual["default"]
 };
 var _default = use;
 exports["default"] = _default;
