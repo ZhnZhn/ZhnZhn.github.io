@@ -123,12 +123,15 @@ var ModalSlider = /*#__PURE__*/function (_Component) {
     };
 
     _this._renderPages = function () {
-      var onClose = _this.props.onClose,
+      var _this$props = _this.props,
+          isShow = _this$props.isShow,
+          onClose = _this$props.onClose,
           _this$state = _this.state,
           pages = _this$state.pages,
           pageCurrent = _this$state.pageCurrent;
       return pages.map(function (Page, index) {
         return /*#__PURE__*/(0, _react.cloneElement)(Page, {
+          isShow: isShow,
           pageCurrent: pageCurrent,
           style: _this._pageStyle,
           pageNumber: index + 1,
@@ -170,12 +173,12 @@ var ModalSlider = /*#__PURE__*/function (_Component) {
   _proto.render = function render() {
     var _pagesStyle = this._pagesStyle,
         _pageStyle = this._pageStyle,
-        _this$props = this.props,
-        isShow = _this$props.isShow,
-        className = _this$props.className,
-        rootStyle = _this$props.rootStyle,
-        style = _this$props.style,
-        onClose = _this$props.onClose,
+        _this$props2 = this.props,
+        isShow = _this$props2.isShow,
+        className = _this$props2.className,
+        rootStyle = _this$props2.rootStyle,
+        style = _this$props2.style,
+        onClose = _this$props2.onClose,
         _transform = this._crTransform(),
         _showHideStyle = (0, _extends2["default"])({}, style, S.SHOW_HIDE, _pageStyle),
         _divStyle = (0, _extends2["default"])({}, S.PAGES, _pagesStyle, _transform);

@@ -1,4 +1,4 @@
-import { Component, createRef } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 
 import MenuTitle from './MenuTitle'
 import MenuItemList from './MenuItemList'
@@ -7,91 +7,78 @@ const _fFocus = ref => () => {
   if (ref && ref.current) {
     ref.current.focus()
   }
+};
+
+//const _getCurrent = ({ current }) => current;
+
+const MenuPage = ({
+  isShow,
+  items=[],
+  style,
+  title,
+  titleCl, itemCl,
+  pageCurrent,
+  pageNumber,
+  onClose,
+  children,
+  onNextPage,
+  onPrevPage
+}) => {
+  const _refTitle = useRef()
+  , _refFirst = useRef()
+  , _hClickTitle = useCallback(() => {
+      onPrevPage(pageNumber)
+  }, [onPrevPage, pageNumber])
+  , _isFocus = (pageCurrent === pageNumber) && isShow;
+
+ useEffect(() => {
+   if (_isFocus) {
+     if (_refTitle.current) {
+        setTimeout(_fFocus(_refTitle), 1000)
+     } else if (_refFirst.current) {
+        setTimeout(_fFocus(_refFirst), 1000)
+     }
+   }
+ })
+
+ return (
+    <div style={style}>
+      <MenuTitle
+        ref={_refTitle}
+        titleCl={titleCl}
+        title={title}
+        onClick={_hClickTitle}
+      />
+      <MenuItemList
+        ref={_refFirst}
+        items={items}
+        itemCl={itemCl || titleCl}
+        pageNumber={pageNumber}
+        onNextPage={onNextPage}
+        onClose={onClose}
+      />
+      {children}
+    </div>
+  );
 }
 
-class MenuPage extends Component {
-  /*
-  static propTypes = {
-    title: PropTypes.string,
-    pageNumber: PropTypes.number,
-    items: PropTypes.arrayOf(
-       PropTypes.shapeOf({
-          name: PropTypes.string,
-          type: PropTypes.string,
-          id: PropTypes.string,
-          onClick: PropTypes.func
-       })
-    ),
-    onNextPage: PropTypes.func,
-    onPrevPage: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
-
-  static defaultProps = {
-    items: []
-  }
-
-  _refTitle = createRef()
-  _refFirst = createRef()
-
-  componentDidMount(){
-    this._focus()
-  }
-
-  _hClickTitle = () => {
-    const {pageNumber, onPrevPage } = this.props
-    onPrevPage(pageNumber)
-  }
-
-  render(){
-    const {
-       style,
-       title,
-       items,
-       titleCl, itemCl,
-       pageNumber,
-       onNextPage,
-       onClose,
-       children
-     } = this.props;
-    return(
-      <div style={style}>
-        <MenuTitle
-          ref={this._refTitle}
-          titleCl={titleCl}
-          title={title}
-          onClick={this._hClickTitle}
-        />
-        <MenuItemList
-          ref={this._refFirst}
-          items={items}
-          itemCl={itemCl || titleCl}
-          pageNumber={pageNumber}
-          onNextPage={onNextPage}
-          onClose={onClose}
-        />
-        {children}
-      </div>
-    );
-  }
-
-  _focus = () => {
-    const { pageCurrent, pageNumber } = this.props;
-    if (pageCurrent === pageNumber){
-      if (this._refTitle.current) {
-         setTimeout(_fFocus(this._refTitle), 1000)
-      } else if (this._refFirst.current) {
-         setTimeout(_fFocus(this._refFirst), 1000)
-      }
-    }
- }
-
-  componentDidUpdate(prevProps){
-    if (this.props !== prevProps) {
-      this._focus()
-    }
-  }
+/*
+MenuPage.propTypes = {
+  isShow: PropTypes.bool,
+  title: PropTypes.string,
+  pageNumber: PropTypes.number,
+  items: PropTypes.arrayOf(
+     PropTypes.shapeOf({
+        name: PropTypes.string,
+        type: PropTypes.string,
+        id: PropTypes.string,
+        onClick: PropTypes.func
+     })
+  ),
+  onNextPage: PropTypes.func,
+  onPrevPage: PropTypes.func,
+  onClose: PropTypes.func
 }
+*/
 
 export default MenuPage

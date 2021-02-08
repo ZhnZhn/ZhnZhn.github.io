@@ -5,8 +5,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
@@ -21,93 +19,77 @@ var _fFocus = function _fFocus(ref) {
       ref.current.focus();
     }
   };
-};
+}; //const _getCurrent = ({ current }) => current;
 
-var MenuPage = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(MenuPage, _Component);
 
-  function MenuPage() {
-    var _this;
+var MenuPage = function MenuPage(_ref) {
+  var isShow = _ref.isShow,
+      _ref$items = _ref.items,
+      items = _ref$items === void 0 ? [] : _ref$items,
+      style = _ref.style,
+      title = _ref.title,
+      titleCl = _ref.titleCl,
+      itemCl = _ref.itemCl,
+      pageCurrent = _ref.pageCurrent,
+      pageNumber = _ref.pageNumber,
+      onClose = _ref.onClose,
+      children = _ref.children,
+      onNextPage = _ref.onNextPage,
+      onPrevPage = _ref.onPrevPage;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+  var _refTitle = (0, _react.useRef)(),
+      _refFirst = (0, _react.useRef)(),
+      _hClickTitle = (0, _react.useCallback)(function () {
+    onPrevPage(pageNumber);
+  }, [onPrevPage, pageNumber]),
+      _isFocus = pageCurrent === pageNumber && isShow;
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this._refTitle = /*#__PURE__*/(0, _react.createRef)();
-    _this._refFirst = /*#__PURE__*/(0, _react.createRef)();
-
-    _this._hClickTitle = function () {
-      var _this$props = _this.props,
-          pageNumber = _this$props.pageNumber,
-          onPrevPage = _this$props.onPrevPage;
-      onPrevPage(pageNumber);
-    };
-
-    _this._focus = function () {
-      var _this$props2 = _this.props,
-          pageCurrent = _this$props2.pageCurrent,
-          pageNumber = _this$props2.pageNumber;
-
-      if (pageCurrent === pageNumber) {
-        if (_this._refTitle.current) {
-          setTimeout(_fFocus(_this._refTitle), 1000);
-        } else if (_this._refFirst.current) {
-          setTimeout(_fFocus(_this._refFirst), 1000);
-        }
+  (0, _react.useEffect)(function () {
+    if (_isFocus) {
+      if (_refTitle.current) {
+        setTimeout(_fFocus(_refTitle), 1000);
+      } else if (_refFirst.current) {
+        setTimeout(_fFocus(_refFirst), 1000);
       }
-    };
-
-    return _this;
-  }
-
-  var _proto = MenuPage.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this._focus();
-  };
-
-  _proto.render = function render() {
-    var _this$props3 = this.props,
-        style = _this$props3.style,
-        title = _this$props3.title,
-        items = _this$props3.items,
-        titleCl = _this$props3.titleCl,
-        itemCl = _this$props3.itemCl,
-        pageNumber = _this$props3.pageNumber,
-        onNextPage = _this$props3.onNextPage,
-        onClose = _this$props3.onClose,
-        children = _this$props3.children;
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: style,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle["default"], {
-        ref: this._refTitle,
-        titleCl: titleCl,
-        title: title,
-        onClick: this._hClickTitle
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItemList["default"], {
-        ref: this._refFirst,
-        items: items,
-        itemCl: itemCl || titleCl,
-        pageNumber: pageNumber,
-        onNextPage: onNextPage,
-        onClose: onClose
-      }), children]
-    });
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      this._focus();
     }
-  };
-
-  return MenuPage;
-}(_react.Component);
-
-MenuPage.defaultProps = {
-  items: []
+  });
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: style,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle["default"], {
+      ref: _refTitle,
+      titleCl: titleCl,
+      title: title,
+      onClick: _hClickTitle
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItemList["default"], {
+      ref: _refFirst,
+      items: items,
+      itemCl: itemCl || titleCl,
+      pageNumber: pageNumber,
+      onNextPage: onNextPage,
+      onClose: onClose
+    }), children]
+  });
 };
+/*
+MenuPage.propTypes = {
+  isShow: PropTypes.bool,
+  title: PropTypes.string,
+  pageNumber: PropTypes.number,
+  items: PropTypes.arrayOf(
+     PropTypes.shapeOf({
+        name: PropTypes.string,
+        type: PropTypes.string,
+        id: PropTypes.string,
+        onClick: PropTypes.func
+     })
+  ),
+  onNextPage: PropTypes.func,
+  onPrevPage: PropTypes.func,
+  onClose: PropTypes.func
+}
+*/
+
+
 var _default = MenuPage;
 exports["default"] = _default;
 //# sourceMappingURL=MenuPage.js.map

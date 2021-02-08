@@ -145,9 +145,10 @@ class ModalSlider extends Component {
   _refPages = n => this._pagesNode = n
 
   _renderPages = () => {
-    const { onClose } = this.props
+    const { isShow, onClose } = this.props
     , { pages, pageCurrent } = this.state;
     return pages.map((Page, index) => cloneElement(Page, {
+      isShow,
       pageCurrent,
       style: this._pageStyle,
       pageNumber: index + 1,
