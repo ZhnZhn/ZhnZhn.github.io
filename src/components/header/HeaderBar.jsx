@@ -137,8 +137,7 @@ const HeaderBar = ({ store, showSettings }) => {
         </div>
          <ModalSlider
            isShow={isTopics}
-           className={CL.BROWSER_MENU}
-           INIT_ID="page_0"
+           className={CL.BROWSER_MENU}           
            model={MODEL}
            onClose={_toggleTopics}
          />

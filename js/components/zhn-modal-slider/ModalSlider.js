@@ -7,13 +7,11 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
+
+var _useHasMounted = _interopRequireDefault(require("../hooks/useHasMounted"));
 
 var _throttleOnce = _interopRequireDefault(require("../../utils/throttleOnce"));
 
@@ -38,172 +36,154 @@ var S = {
     transition: 'all 750ms ease-out'
   }
 };
+/*
+static propTypes = {
+  rootStyle: PropTypes.object,
+  className: PropTypes.string,
+  style: PropTypes.object,
 
-var _crInitialState = function _crInitialState(model, INIT_ID) {
+  pageWidth: PropTypes.number,
+  maxPages: PropTypes.number,
+  model: PropTypes.object,
+
+  onClose: PropTypes.func
+}
+*/
+
+var DF_INIT_ID = 'p0';
+var DF_MODEL = {
+  pageWidth: 100,
+  maxPages: 2,
+  initId: DF_INIT_ID,
+  p0: []
+};
+
+var _initState = function _initState(model) {
+  var _pW = model.pageWidth,
+      _maxP = model.maxPages,
+      _initId = model.initId || DF_INIT_ID;
+
   return {
+    pageWidth: _pW,
+    pagesStyle: {
+      width: _maxP * _pW + "px"
+    },
+    pageStyle: {
+      width: _pW + "px"
+    },
     pageCurrent: 1,
     pages: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPage["default"], {
-      items: model[INIT_ID],
+      items: model[_initId],
       titleCl: model.titleCl,
       itemCl: model.itemCl
-    }, INIT_ID)],
-    model: model
+    }, _initId)]
   };
 };
 
-var ModalSlider = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(ModalSlider, _Component);
+var _addPage = function _addPage(pages, id, title, model) {
+  pages.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPage["default"], {
+    title: title,
+    items: model[id],
+    titleCl: model.titleCl,
+    itemCl: model.itemCl
+  }, id));
+};
 
-  /*
-  static propTypes = {
-    rootStyle: PropTypes.object,
-    className: PropTypes.string,
-    style: PropTypes.object,
-      pageWidth: PropTypes.number,
-    maxPages: PropTypes.number,
-    model: PropTypes.object,
-      onClose: PropTypes.func
-  }
-  */
-  function ModalSlider(props) {
-    var _this;
+var _crTransform = function _crTransform(pageWidth, pageCurrent) {
+  var _dX = -1 * pageWidth * (pageCurrent - 1) + 0;
 
-    _this = _Component.call(this, props) || this;
-
-    _this.hPrevPage = function (pageNumber) {
-      _this.setState(function (prevState) {
-        prevState.pageCurrent = pageNumber - 1;
-        return prevState;
-      });
-    };
-
-    _this._addPage = function (pages, id, title) {
-      var model = _this.props.model;
-      pages.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPage["default"], {
-        title: title,
-        items: model[id],
-        titleCl: model.titleCl,
-        itemCl: model.itemCl
-      }, id));
-    };
-
-    _this.hNextPage = function (id, title, pageNumber) {
-      _this.setState(function (prevState) {
-        var pages = prevState.pages,
-            _max = pages.length - 1;
-
-        if (_max + 1 > pageNumber) {
-          if (pages[pageNumber] && pages[pageNumber].key !== id) {
-            if (pageNumber > 0) {
-              prevState.pages.splice(pageNumber);
-            } else {
-              prevState.pages = [];
-            }
-
-            _this._addPage(prevState.pages, id, title);
-          }
-        } else {
-          _this._addPage(pages, id, title);
-        }
-
-        prevState.pageCurrent = pageNumber + 1;
-        return prevState;
-      });
-    };
-
-    _this._crTransform = function () {
-      var pageCurrent = _this.state.pageCurrent,
-          _dX = -1 * _this._PAGE_WIDTH * (pageCurrent - 1) + 0;
-
-      return {
-        transform: "translateX(" + _dX + "px)"
-      };
-    };
-
-    _this._refPages = function (n) {
-      return _this._pagesNode = n;
-    };
-
-    var INIT_ID = props.INIT_ID,
-        pageWidth = props.pageWidth,
-        maxPages = props.maxPages,
-        _model = props.model,
-        _pW = _model.pageWidth || pageWidth,
-        _maxP = _model.maxPages || maxPages;
-
-    _this._PAGE_WIDTH = _pW;
-    _this._pagesStyle = {
-      width: _maxP * _pW + "px"
-    };
-    _this._pageStyle = {
-      width: _pW + "px"
-    };
-    _this.hNextPage = (0, _throttleOnce["default"])(_this.hNextPage.bind((0, _assertThisInitialized2["default"])(_this)));
-    _this.hPrevPage = (0, _throttleOnce["default"])(_this.hPrevPage.bind((0, _assertThisInitialized2["default"])(_this)));
-    _this.state = _crInitialState(_model, INIT_ID);
-    return _this;
-  }
-
-  ModalSlider.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
-    var model = nextProps.model,
-        INIT_ID = nextProps.INIT_ID;
-    return model !== prevState.model ? _crInitialState(model, INIT_ID) : null;
+  return {
+    transform: "translateX(" + _dX + "px)"
   };
+};
 
-  var _proto = ModalSlider.prototype;
+var ModalSlider = function ModalSlider(_ref) {
+  var _ref$model = _ref.model,
+      model = _ref$model === void 0 ? DF_MODEL : _ref$model,
+      isShow = _ref.isShow,
+      className = _ref.className,
+      rootStyle = _ref.rootStyle,
+      style = _ref.style,
+      onClose = _ref.onClose;
 
-  _proto.render = function render() {
-    var _pagesStyle = this._pagesStyle,
-        _pageStyle = this._pageStyle,
-        _this$props = this.props,
-        isShow = _this$props.isShow,
-        className = _this$props.className,
-        rootStyle = _this$props.rootStyle,
-        style = _this$props.style,
-        onClose = _this$props.onClose,
-        _this$state = this.state,
-        pages = _this$state.pages,
-        pageCurrent = _this$state.pageCurrent,
-        _transform = this._crTransform(),
-        _showHideStyle = (0, _extends2["default"])({}, style, S.SHOW_HIDE, _pageStyle),
-        _divStyle = (0, _extends2["default"])({}, S.PAGES, _pagesStyle, _transform);
+  var _useState = (0, _react.useState)(function () {
+    return _initState(model);
+  }),
+      state = _useState[0],
+      setState = _useState[1],
+      pageWidth = state.pageWidth,
+      pagesStyle = state.pagesStyle,
+      pageStyle = state.pageStyle,
+      pageCurrent = state.pageCurrent,
+      pages = state.pages,
+      hPrevPage = (0, _react.useCallback)((0, _throttleOnce["default"])(function (pageNumber) {
+    setState(function (prevState) {
+      prevState.pageCurrent = pageNumber - 1;
+      return (0, _extends2["default"])({}, prevState);
+    });
+  }), []),
+      hNextPage = (0, _react.useCallback)((0, _throttleOnce["default"])(function (id, title, pageNumber) {
+    setState(function (prevState) {
+      var pages = prevState.pages,
+          _max = pages.length - 1;
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane["default"], {
+      if (_max + 1 > pageNumber) {
+        if (pages[pageNumber] && pages[pageNumber].key !== id) {
+          if (pageNumber > 0) {
+            prevState.pages.splice(pageNumber);
+          } else {
+            prevState.pages = [];
+          }
+
+          _addPage(prevState.pages, id, title, model);
+        }
+      } else {
+        _addPage(pages, id, title, model);
+      }
+
+      prevState.pageCurrent = pageNumber + 1;
+      return (0, _extends2["default"])({}, prevState);
+    });
+  }), [model]),
+      _hasMounted = (0, _useHasMounted["default"])();
+  /*eslint-disable react-hooks/exhaustive-deps */
+
+
+  (0, _react.useEffect)(function () {
+    if (!_hasMounted) {
+      setState(_initState(model));
+    }
+  }, [model]); // _hasMounted
+
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  var _showHideStyle = (0, _extends2["default"])({}, style, S.SHOW_HIDE, pageStyle),
+      _divStyle = (0, _extends2["default"])({}, S.PAGES, pagesStyle, _crTransform(pageWidth, pageCurrent));
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane["default"], {
+    isShow: isShow,
+    style: rootStyle,
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+      className: className,
+      style: _showHideStyle,
       isShow: isShow,
-      style: rootStyle,
-      onClose: onClose,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
-        className: className,
-        style: _showHideStyle,
-        isShow: isShow,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          ref: this._refPages,
-          style: _divStyle,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPages["default"], {
-            isShow: isShow,
-            style: this._pageStyle,
-            pages: pages,
-            pageCurrent: pageCurrent,
-            onNextPage: this.hNextPage,
-            onPrevPage: this.hPrevPage,
-            onClose: onClose
-          })
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: _divStyle,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPages["default"], {
+          isShow: isShow,
+          style: pageStyle,
+          pages: pages,
+          pageCurrent: pageCurrent,
+          onNextPage: hNextPage,
+          onPrevPage: hPrevPage,
+          onClose: onClose
         })
       })
-    });
-  };
-
-  return ModalSlider;
-}(_react.Component);
-
-ModalSlider.defaultProps = {
-  INIT_ID: 'p0',
-  model: {
-    pageWidth: 100,
-    maxPages: 2,
-    p0: []
-  }
+    })
+  });
 };
+
 var _default = ModalSlider;
 exports["default"] = _default;
 //# sourceMappingURL=ModalSlider.js.map

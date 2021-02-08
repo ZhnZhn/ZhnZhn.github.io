@@ -156,7 +156,6 @@ var HeaderBar = function HeaderBar(_ref) {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
       isShow: isTopics,
       className: CL.BROWSER_MENU,
-      INIT_ID: "page_0",
       model: MODEL,
       onClose: _toggleTopics
     })]

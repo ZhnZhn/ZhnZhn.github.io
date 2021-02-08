@@ -23,6 +23,7 @@ const crBrowserModel = () => {
     titleCl: CL.BR,
     pageWidth: 235,
     maxPages: 2,
+    initId: 'page_0',
     page_0: [
       {
         id: 'page_01',
