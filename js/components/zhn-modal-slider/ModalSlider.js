@@ -23,6 +23,8 @@ var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _MenuPage = _interopRequireDefault(require("./MenuPage"));
 
+var _MenuPages = _interopRequireDefault(require("./MenuPages"));
+
 var S = {
   SHOW_HIDE: {
     position: 'absolute',
@@ -122,26 +124,6 @@ var ModalSlider = /*#__PURE__*/function (_Component) {
       return _this._pagesNode = n;
     };
 
-    _this._renderPages = function () {
-      var _this$props = _this.props,
-          isShow = _this$props.isShow,
-          onClose = _this$props.onClose,
-          _this$state = _this.state,
-          pages = _this$state.pages,
-          pageCurrent = _this$state.pageCurrent;
-      return pages.map(function (Page, index) {
-        return /*#__PURE__*/(0, _react.cloneElement)(Page, {
-          isShow: isShow,
-          pageCurrent: pageCurrent,
-          style: _this._pageStyle,
-          pageNumber: index + 1,
-          onNextPage: index === 0 ? _this.hNextPage : void 0,
-          onPrevPage: index !== 0 ? _this.hPrevPage : void 0,
-          onClose: onClose
-        });
-      });
-    };
-
     var INIT_ID = props.INIT_ID,
         pageWidth = props.pageWidth,
         maxPages = props.maxPages,
@@ -173,12 +155,15 @@ var ModalSlider = /*#__PURE__*/function (_Component) {
   _proto.render = function render() {
     var _pagesStyle = this._pagesStyle,
         _pageStyle = this._pageStyle,
-        _this$props2 = this.props,
-        isShow = _this$props2.isShow,
-        className = _this$props2.className,
-        rootStyle = _this$props2.rootStyle,
-        style = _this$props2.style,
-        onClose = _this$props2.onClose,
+        _this$props = this.props,
+        isShow = _this$props.isShow,
+        className = _this$props.className,
+        rootStyle = _this$props.rootStyle,
+        style = _this$props.style,
+        onClose = _this$props.onClose,
+        _this$state = this.state,
+        pages = _this$state.pages,
+        pageCurrent = _this$state.pageCurrent,
         _transform = this._crTransform(),
         _showHideStyle = (0, _extends2["default"])({}, style, S.SHOW_HIDE, _pageStyle),
         _divStyle = (0, _extends2["default"])({}, S.PAGES, _pagesStyle, _transform);
@@ -194,7 +179,15 @@ var ModalSlider = /*#__PURE__*/function (_Component) {
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           ref: this._refPages,
           style: _divStyle,
-          children: this._renderPages()
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPages["default"], {
+            isShow: isShow,
+            style: this._pageStyle,
+            pages: pages,
+            pageCurrent: pageCurrent,
+            onNextPage: this.hNextPage,
+            onPrevPage: this.hPrevPage,
+            onClose: onClose
+          })
         })
       })
     });

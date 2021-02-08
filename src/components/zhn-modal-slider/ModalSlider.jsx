@@ -1,4 +1,4 @@
-import { cloneElement, Component } from 'react'
+import { Component } from 'react'
 
 import throttleOnce from '../../utils/throttleOnce'
 
@@ -6,6 +6,7 @@ import ModalPane from '../zhn-moleculs/ModalPane'
 import ShowHide from '../zhn/ShowHide'
 
 import MenuPage from './MenuPage'
+import MenuPages from './MenuPages'
 
 const S = {
   SHOW_HIDE: {
@@ -144,20 +145,6 @@ class ModalSlider extends Component {
 
   _refPages = n => this._pagesNode = n
 
-  _renderPages = () => {
-    const { isShow, onClose } = this.props
-    , { pages, pageCurrent } = this.state;
-    return pages.map((Page, index) => cloneElement(Page, {
-      isShow,
-      pageCurrent,
-      style: this._pageStyle,
-      pageNumber: index + 1,
-      onNextPage: index === 0 ? this.hNextPage : void 0,
-      onPrevPage: index !== 0 ? this.hPrevPage : void 0,
-      onClose
-    }));
-  }
-
   render(){
     const { _pagesStyle, _pageStyle } = this
     , {
@@ -165,6 +152,7 @@ class ModalSlider extends Component {
         rootStyle, style,
         onClose
       } = this.props
+    , { pages, pageCurrent } = this.state
     , _transform = this._crTransform()
     , _showHideStyle = {
         ...style,
@@ -191,7 +179,15 @@ class ModalSlider extends Component {
             ref={this._refPages}
             style={_divStyle}
           >
-            {this._renderPages()}
+            <MenuPages
+              isShow={isShow}
+              style={this._pageStyle}
+              pages={pages}
+              pageCurrent={pageCurrent}
+              onNextPage={this.hNextPage}
+              onPrevPage={this.hPrevPage}
+              onClose={onClose}
+            />
           </div>
         </ShowHide>
       </ModalPane>
