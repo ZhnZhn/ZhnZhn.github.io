@@ -4,6 +4,10 @@ exports.__esModule = true;
 exports["default"] = void 0;
 var TransformFn = {
   fromLevel3: function fromLevel3(data) {
+    if (data.length === 0) {
+      return [];
+    }
+
     var meta = data.meta,
         caption = meta.caption,
         level1 = meta.level1,

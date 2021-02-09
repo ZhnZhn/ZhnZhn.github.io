@@ -1,6 +1,9 @@
 
 const TransformFn = {
   fromLevel3(data){
+    if (data.length === 0) {
+      return [];
+    }
     const { meta } = data
         , { caption, level1, level2, level3 } = meta
         , _options = [];

@@ -7,7 +7,7 @@ import { BrowserActionTypes as BA } from '../actions/BrowserActions';
 
 import BrowserLogic from './browser/BrowserLogic';
 
-const C = {  
+const C = {
   FAILED: 'Failed'
 };
 
@@ -82,9 +82,10 @@ const BrowserSlice = {
     })
   },
   onLoadBrowserDynamicFailed(option){
-    const { alertItemId, caption } = option;
+    const { alertItemId, caption, browserType } = option;
     option.alertItemId = alertItemId || caption
     this.showAlertDialog(option);
+    this.trigger(BA.LOAD_BROWSER_FAILED, browserType)    
   }
 
 }

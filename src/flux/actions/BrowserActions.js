@@ -16,6 +16,7 @@ export const BrowserActionTypes = {
   INIT_BROWSER_DYNAMIC: 'initBrowserDynamic',
   LOAD_BROWSER_DYNAMIC: 'loadBrowserDynamic',
   LOAD_BROWSER_DYNAMIC_COMPLETED: 'loadBrowserDynamicCompleted',
+  LOAD_BROWSER_FAILED: 'loadBrowserFailed',
 
   UPDATE_WATCH_BROWSER: 'updateWatchBrowser'
 };

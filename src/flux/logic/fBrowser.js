@@ -26,48 +26,46 @@ const _crBrowserWatchList = (Comp) => createElement(Comp, {
 
 const _crBrowserDynamic = (Comp, option) => {
    const {
-            browserType, caption='Source Browser' , sourceMenuUrl,
-            chartContainerType,
-            modalDialogType, itemOptionType, itemType, descrUrl, dfProps
-          } = option
-       //, comp = RouterBrowser[browserType] || RouterBrowser.DEFAULT
-       , ItemOptionComp = (itemOptionType)
-             ? ( RouterItemOption[itemOptionType] || RouterBrowserItem.DEFAULT )
-             : RouterBrowserItem.DEFAULT
-       , ItemComp = (itemType)
-             ? ( RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT )
-             : undefined
-       , onClickInfo = (typeof ItemComp !== "undefined")
-            ? CA.showDescription
-            : undefined
-       , onShowContainer = CHA.showChart.bind(null, chartContainerType, browserType);
+         browserType, caption='Source Browser' , sourceMenuUrl,
+         chartContainerType,
+         modalDialogType, itemOptionType, itemType, descrUrl, dfProps
+       } = option
+    , ItemOptionComp = itemOptionType
+          ? RouterItemOption[itemOptionType] || RouterBrowserItem.DEFAULT
+          : RouterBrowserItem.DEFAULT
+    , ItemComp = itemType
+          ? RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT
+          : void 0
+    , onClickInfo = typeof ItemComp !== "undefined"
+         ? CA.showDescription
+         : void 0
+    //for Type2
+    , onShowLoadDialog = chartContainerType
+         ? item => CA.showModalDialog(modalDialogType, {
+             item, browserType, chartContainerType,
+             onShow: CHA.showChart.bind(null, chartContainerType, browserType)
+           })
+        : void 0;
 
    return createElement(Comp , {
      dfProps,
-     key : browserType,
-     browserType : browserType,
-     store : ChartStore,
-     isInitShow : true,
+     key: browserType,
+     browserType: browserType,
+     store: ChartStore,
+     isInitShow: true,
      caption,
-     sourceMenuUrl,
-     modalDialogType,
-     chartContainerType,
      ItemOptionComp,
      ItemComp,
      descrUrl,
      onClickInfo,
-     onShowContainer,
-
-     showAction : BAT.SHOW_BROWSER_DYNAMIC,
-     loadCompletedAction : BAT.LOAD_BROWSER_DYNAMIC_COMPLETED,
-     updateAction : BAT.UPDATE_BROWSER_MENU,  //for Type
-     onLoadMenu : BA.loadBrowserDynamic,
-     onShowLoadDialog : CA.showModalDialog  //for Type2
-
+     showAction: BAT.SHOW_BROWSER_DYNAMIC,
+     loadedAction: BAT.LOAD_BROWSER_DYNAMIC_COMPLETED,
+     failedAction: BAT.LOAD_BROWSER_FAILED,
+     updateAction: BAT.UPDATE_BROWSER_MENU, //for Type
+     onLoadMenu: BA.loadBrowserDynamic.bind(null, { browserType, caption, sourceMenuUrl }),
+     onShowLoadDialog //for Type2
    });
  }
-
-
 
 const fBrowser = {
   crAsyncBrowser(option) {

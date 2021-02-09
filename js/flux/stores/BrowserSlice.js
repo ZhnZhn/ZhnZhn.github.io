@@ -88,9 +88,11 @@ var BrowserSlice = {
   },
   onLoadBrowserDynamicFailed: function onLoadBrowserDynamicFailed(option) {
     var alertItemId = option.alertItemId,
-        caption = option.caption;
+        caption = option.caption,
+        browserType = option.browserType;
     option.alertItemId = alertItemId || caption;
     this.showAlertDialog(option);
+    this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_FAILED, browserType);
   }
 };
 var _default = BrowserSlice;

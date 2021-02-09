@@ -50,10 +50,16 @@ var _crBrowserDynamic = function _crBrowserDynamic(Comp, option) {
       descrUrl = option.descrUrl,
       dfProps = option.dfProps,
       ItemOptionComp = itemOptionType ? _RouterItemOption["default"][itemOptionType] || _RouterBrowserItem["default"].DEFAULT : _RouterBrowserItem["default"].DEFAULT,
-      ItemComp = itemType ? _RouterBrowserItem["default"][itemType] || _RouterBrowserItem["default"].DEFAULT : undefined,
-      onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions["default"].showDescription : undefined,
-      onShowContainer = _ChartActions["default"].showChart.bind(null, chartContainerType, browserType);
-
+      ItemComp = itemType ? _RouterBrowserItem["default"][itemType] || _RouterBrowserItem["default"].DEFAULT : void 0,
+      onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions["default"].showDescription : void 0,
+      onShowLoadDialog = chartContainerType ? function (item) {
+    return _ComponentActions["default"].showModalDialog(modalDialogType, {
+      item: item,
+      browserType: browserType,
+      chartContainerType: chartContainerType,
+      onShow: _ChartActions["default"].showChart.bind(null, chartContainerType, browserType)
+    });
+  } : void 0;
   return /*#__PURE__*/(0, _react.createElement)(Comp, {
     dfProps: dfProps,
     key: browserType,
@@ -61,20 +67,21 @@ var _crBrowserDynamic = function _crBrowserDynamic(Comp, option) {
     store: _ChartStore["default"],
     isInitShow: true,
     caption: caption,
-    sourceMenuUrl: sourceMenuUrl,
-    modalDialogType: modalDialogType,
-    chartContainerType: chartContainerType,
     ItemOptionComp: ItemOptionComp,
     ItemComp: ItemComp,
     descrUrl: descrUrl,
     onClickInfo: onClickInfo,
-    onShowContainer: onShowContainer,
     showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
-    loadCompletedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
+    loadedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
+    failedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_FAILED,
     updateAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
     //for Type
-    onLoadMenu: _BrowserActions["default"].loadBrowserDynamic,
-    onShowLoadDialog: _ComponentActions["default"].showModalDialog //for Type2
+    onLoadMenu: _BrowserActions["default"].loadBrowserDynamic.bind(null, {
+      browserType: browserType,
+      caption: caption,
+      sourceMenuUrl: sourceMenuUrl
+    }),
+    onShowLoadDialog: onShowLoadDialog //for Type2
 
   });
 };
