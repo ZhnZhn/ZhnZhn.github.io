@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useReducer, useCallback, useMemo, useEffect } from 'react';
 
 import use from '../hooks/use'
 
@@ -51,77 +51,92 @@ const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
   /*eslint-enable react-hooks/exhaustive-deps */
 };
 
+const LOADING = 'a'
+, LOADED = 'b'
+, FAILED = 'd'
+, initialState = {
+  isLoading: false,
+  isLoaded: false,
+  menu: []
+}
+, _crAction = (type, menu) => ({ type, menu })
+, _reducer = (state, {type, menu}) => {
+  switch(type){
+    case LOADING: return { ...state, isLoading: true };
+    case LOADED: return { isLoading: false, isLoaded: true, menu };
+    case FAILED: return {...initialState};
+    default: return state;
+  }
+};
 
 const MenuBrowserDynamic2 = ({
   isInitShow,
   store,
-  browserType, showAction, loadCompletedAction,
-  caption, sourceMenuUrl, onLoadMenu,
+  browserType,
+  showAction, loadedAction, failedAction,
+  caption,
+  onLoadMenu,
   descrUrl, onClickInfo,
-  modalDialogType, chartContainerType, onShowLoadDialog, onShowContainer,
+  onShowLoadDialog,
   ItemOptionComp, ItemComp, children
 }) => {
-  const [isShow, show, hide] = useBool(isInitShow)
+  const [isShow, showBrowser, hideBrowser] = useBool(isInitShow)
   , [isShowSearch, toggleSearch] = useToggle()
-  , [{isLoaded, menuItems}, setMenuItems] = useState({ isLoaded: false, menuItems: []})
   , _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl)
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _hClickItem = useCallback(item =>
-    onShowLoadDialog(modalDialogType, {
-      item, browserType, chartContainerType,
-      onShow: onShowContainer
-    }), [])
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+  , [{isLoading, isLoaded, menu}, dispath] = useReducer(_reducer, initialState)
 
   useListen(store, (actionType, data) => {
-    if (actionType === showAction && data === browserType){
-      show();
-    } else if (actionType === loadCompletedAction && data.browserType === browserType){
-      setMenuItems({ menuItems: data.menuItems, isLoaded: true })
+    if (data === browserType){
+      if (actionType === showAction) {
+        showBrowser();
+      } else if (actionType === failedAction) {
+        dispath(_crAction(FAILED))
+      }
+    } else if (actionType === loadedAction && data.browserType === browserType){
+      dispath(_crAction(LOADED, data.menuItems))
     }
   })
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
     if (!isLoaded && isShow) {
-      onLoadMenu({ browserType, caption, sourceMenuUrl });
+      onLoadMenu()
+      dispath(_crAction(LOADING))
     }
   }, [isLoaded, isShow])
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  const _isMenuEmpty = menuItems.length === 0
-  , _scrollClass = isShowSearch
-       ? CL.BROWSER_WITH_SEARCH
-       : CL.BROWSER;
+  const _scrollClass = isShowSearch
+    ? CL.BROWSER_WITH_SEARCH
+    : CL.BROWSER;
 
   return (
     <Browser isShow={isShow} style={STYLE.BROWSER}>
         <BrowserCaption
            caption={caption}
            captionStyle={STYLE.CAPTION}
-           onClose={hide}
+           onClose={hideBrowser}
         />
        <ToolbarButtonCircle
          buttons={_toolbarButtons}
        />
-       {!_isMenuEmpty && <ShowHide isShow={isShowSearch}>
+       {!isLoading && <ShowHide isShow={isShowSearch}>
            <WrapperInputSearch
              style={STYLE.WRAPPER_SEARCH}
              placeholder={SEARCH_PLACEHOLDER}
-             data={menuItems}
+             data={menu}
              ItemOptionComp={ItemOptionComp}
-             onSelect={_hClickItem}
+             onSelect={onShowLoadDialog}
            />
          </ShowHide>
        }
        <ScrollPane className={_scrollClass}>
-         {_isMenuEmpty && <SpinnerLoading />}
+         {isLoading && <SpinnerLoading />}
          <MenuListType2
-            model={menuItems}
+            model={menu}
             ItemComp={ItemComp}
             itemClassName={CL.ROW_ITEM}
-            onClickItem={_hClickItem}
+            onClickItem={onShowLoadDialog}
          />
          {children}
        </ScrollPane>
