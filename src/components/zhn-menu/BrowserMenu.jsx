@@ -1,8 +1,16 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useReducer, useEffect } from 'react'
 
-import useListen from '../hooks/useListen'
+import use from '../hooks/use'
 import Comp from '../Comp'
 import MenuTopic from './MenuTopic'
+
+const { useBool, useListen } = use
+, {
+  Browser,
+  BrowserCaption,
+  ScrollPane,
+  SpinnerLoading
+} = Comp;
 
 const S = {
   CL_SCROLL: 'scroll-container-y scroll-menu',
@@ -12,51 +20,65 @@ const S = {
   CAPTION: {
     top: 9
   }
-}
+};
 
-const {
-  Browser,
-  BrowserCaption,
-  ScrollPane
-} = Comp
+const LOADING = 'a'
+, LOADED = 'b'
+, FAILED = 'c'
+, UPDATE = 'd'
+, _crAction = (type, menu) => ({ type, menu })
+, initialState = {
+  isLoaded: false,
+  isLoading: false,
+  menu: [],
+};
 
-const _crMenu = (arrMenu=[], isLoaded=true) => ({
-  arrMenu,
-  isLoaded
-});
+const _reducer = (state, {type, menu}) => {
+  switch(type){
+    case LOADING: return { ...state, isLoading: true };
+    case LOADED: return {
+      isLoading: false,
+      isLoaded: true,
+      menu
+    };
+    case FAILED: return { ...initialState };
+    case UPDATE: return { ...state, menu };
+    default: return state;
+  }
+};
 
 const BrowserMenu = ({
   isInitShow,
   caption,
   store,
   browserType,
-  showAction, updateAction, loadCompletedAction,
-  sourceMenuUrl, onLoadMenu,
+  showAction, updateAction,
+  loadedAction, failedAction,
+  onLoadMenu,
   children
 }) => {
-  const [isShow, setIsShow] = useState(!!isInitShow)
-  , [menu, setMenu] = useState(() => _crMenu([], false))
-  , { arrMenu, isLoaded } = menu
-  , _hHide = useCallback(() => setIsShow(false), []);
+  const [isShow, showBrowser, hideBrowser] = useBool(isInitShow)
+  , [{isLoading, isLoaded, menu}, dispatch] = useReducer(_reducer, initialState)
 
   useListen(store, (actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
-        setIsShow(true)
+        showBrowser()
       } else if (actionType === updateAction) {
-        setMenu(_crMenu(
-          store.getBrowserMenu(browserType)
-        ))
+        dispatch(_crAction(UPDATE, store.getBrowserMenu(browserType)))
+      } else if (actionType === failedAction) {
+        dispatch(_crAction(FAILED))
       }
     } else if (data?.browserType === browserType
-        && actionType === loadCompletedAction) {
-         setMenu(_crMenu(data.menuItems))
+        && actionType === loadedAction) {
+        dispatch(_crAction(LOADED, data.menuItems))
     }
   })
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
     if (!isLoaded && isShow) {
-      onLoadMenu({ browserType, caption, sourceMenuUrl });
+      onLoadMenu()
+      dispatch(_crAction(LOADING))
     }
   }, [isLoaded, isShow])
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -66,17 +88,17 @@ const BrowserMenu = ({
       <BrowserCaption
          caption={caption}
          captionStyle={S.CAPTION}
-         onClose={_hHide}
+         onClose={hideBrowser}
       />
        <ScrollPane className={S.CL_SCROLL}>
-         {arrMenu.map(
-           (menuTopic, index) => (
-               <MenuTopic key={index} {...menuTopic} />)
+         {isLoading && <SpinnerLoading />}
+         {menu.map((menuTopic, index) => (
+            <MenuTopic key={index} {...menuTopic} />)
          )}
          {children}
        </ScrollPane>
     </Browser>
   );
-}
+};
 
 export default BrowserMenu;
