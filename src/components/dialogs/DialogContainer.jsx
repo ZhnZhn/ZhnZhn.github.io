@@ -1,5 +1,7 @@
-import { Component, createElement } from 'react';
+import { useState, useCallback, createElement } from 'react';
 //import PropTypes from "prop-types";
+
+import useListen from '../hooks/useListen'
 
 import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
@@ -28,78 +30,70 @@ const _renderDialogs = (
 }));
 
 
-class DialogContainer extends Component {
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func
-    })
-  }
-  */
-
-  state = {
+const DialogContainer = ({
+  store
+}) => {
+  const [state, setState] = useState({
     isShow: false,
     inits: {},
     shows: {},
     data: {},
     dialogs: [],
     currentDialog: null
-  }
+  })
+  , _hClose = useCallback(type => {
+     setState(prevState => {
+       prevState.shows[type] = false
+       prevState.isShow = false
+       prevState.currentDialog = null
+       return {...prevState};
+     })
+  }, [])
 
-  componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore)
-  }
-  componentWillUnmount(){
-    this.unsubscribe()
-  }
+  useListen(store, (actionType, option) => {
+    if (actionType === CAT.SHOW_MODAL_DIALOG){
+      const type = option.modalDialogType
+      , { inits } = state;
 
-  _onStore = (actionType, option) => {
-     if (actionType === CAT.SHOW_MODAL_DIALOG){
-       const type = option.modalDialogType
-       , { inits } = this.state;
+      if (inits[type]){
+        Promise.resolve()
+          .then( _ => {
+            setState(prevState => _setTypeTo(
+              prevState, type, option
+            ))
+          })
+      } else {
+        RouterModalDialog.getDialog(type)
+          .then(comp => setState(prevState => {
+              prevState.dialogs.push({ type, comp })
+              prevState.inits[type] = true
+              return _setTypeTo(
+                prevState, type, option
+              );
+            })
+          )
+      }
+    }
+  })
 
-       if (inits[type]){
-         Promise.resolve()
-           .then( _ => {
-             this.setState(prevState => _setTypeTo(
-               prevState, type, option
-             ))
-           })
-       } else {
-         RouterModalDialog.getDialog(type)
-           .then(comp => this.setState(prevState => {
-               prevState.dialogs.push({ type, comp })
-               prevState.inits[type] = true
-               return _setTypeTo(
-                 prevState, type, option
-               );
-             })
-           )
-       }
-     }
-  }
+  const { isShow, currentDialog } = state;
 
-  _hClose = (type) => {
-    this.setState(prevState => {
-      prevState.shows[type] = false
-      prevState.isShow = false
-      prevState.currentDialog = null
-      return {...prevState};
-    })
-  }
-
-  render(){
-    const { store } = this.props
-    , { isShow, currentDialog } = this.state;
-    return (
-      <ModalDialogContainer
-         isShow={isShow}
-         onClose={this._hClose.bind(null, currentDialog)}
-      >
-         {_renderDialogs(store, this.state, this._hClose)}
-     </ModalDialogContainer>
-    )
-  }
+  return (
+    <ModalDialogContainer
+       isShow={isShow}
+       onClose={_hClose.bind(null, currentDialog)}
+    >
+       {_renderDialogs(store, state, _hClose)}
+   </ModalDialogContainer>
+  );
 }
+
+/*
+DialogContainer.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func
+  })
+}
+*/
 
 export default DialogContainer

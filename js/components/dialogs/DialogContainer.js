@@ -5,13 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
+
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var _ModalDialogContainer = _interopRequireDefault(require("../zhn-containers/ModalDialogContainer"));
 
@@ -45,88 +45,69 @@ var _renderDialogs = function _renderDialogs(store, _ref, _handleClose) {
   });
 };
 
-var DialogContainer = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(DialogContainer, _Component);
+var DialogContainer = function DialogContainer(_ref3) {
+  var store = _ref3.store;
 
-  function DialogContainer() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      isShow: false,
-      inits: {},
-      shows: {},
-      data: {},
-      dialogs: [],
-      currentDialog: null
-    };
-
-    _this._onStore = function (actionType, option) {
-      if (actionType === _ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG) {
-        var type = option.modalDialogType,
-            inits = _this.state.inits;
-
-        if (inits[type]) {
-          Promise.resolve().then(function (_) {
-            _this.setState(function (prevState) {
-              return _setTypeTo(prevState, type, option);
-            });
-          });
-        } else {
-          _RouterModalDialog["default"].getDialog(type).then(function (comp) {
-            return _this.setState(function (prevState) {
-              prevState.dialogs.push({
-                type: type,
-                comp: comp
-              });
-              prevState.inits[type] = true;
-              return _setTypeTo(prevState, type, option);
-            });
-          });
-        }
-      }
-    };
-
-    _this._hClose = function (type) {
-      _this.setState(function (prevState) {
-        prevState.shows[type] = false;
-        prevState.isShow = false;
-        prevState.currentDialog = null;
-        return (0, _extends2["default"])({}, prevState);
-      });
-    };
-
-    return _this;
-  }
-
-  var _proto = DialogContainer.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unsubscribe();
-  };
-
-  _proto.render = function render() {
-    var store = this.props.store,
-        _this$state = this.state,
-        isShow = _this$state.isShow,
-        currentDialog = _this$state.currentDialog;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer["default"], {
-      isShow: isShow,
-      onClose: this._hClose.bind(null, currentDialog),
-      children: _renderDialogs(store, this.state, this._hClose)
+  var _useState = (0, _react.useState)({
+    isShow: false,
+    inits: {},
+    shows: {},
+    data: {},
+    dialogs: [],
+    currentDialog: null
+  }),
+      state = _useState[0],
+      setState = _useState[1],
+      _hClose = (0, _react.useCallback)(function (type) {
+    setState(function (prevState) {
+      prevState.shows[type] = false;
+      prevState.isShow = false;
+      prevState.currentDialog = null;
+      return (0, _extends2["default"])({}, prevState);
     });
-  };
+  }, []);
 
-  return DialogContainer;
-}(_react.Component);
+  (0, _useListen["default"])(store, function (actionType, option) {
+    if (actionType === _ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG) {
+      var type = option.modalDialogType,
+          inits = state.inits;
+
+      if (inits[type]) {
+        Promise.resolve().then(function (_) {
+          setState(function (prevState) {
+            return _setTypeTo(prevState, type, option);
+          });
+        });
+      } else {
+        _RouterModalDialog["default"].getDialog(type).then(function (comp) {
+          return setState(function (prevState) {
+            prevState.dialogs.push({
+              type: type,
+              comp: comp
+            });
+            prevState.inits[type] = true;
+            return _setTypeTo(prevState, type, option);
+          });
+        });
+      }
+    }
+  });
+  var isShow = state.isShow,
+      currentDialog = state.currentDialog;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer["default"], {
+    isShow: isShow,
+    onClose: _hClose.bind(null, currentDialog),
+    children: _renderDialogs(store, state, _hClose)
+  });
+};
+/*
+DialogContainer.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func
+  })
+}
+*/
+
 
 var _default = DialogContainer;
 exports["default"] = _default;
