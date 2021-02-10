@@ -1,8 +1,8 @@
 import memoEqual from '../hoc/memoEqual'
-import MenuBrowserDynamic2 from '../zhn/MenuBrowserDynamic2';
+import BrowserMenu2 from '../zhn-menu/BrowserMenu2'
 
 const SourceBrowserDynamic2 = memoEqual(
-  props => <MenuBrowserDynamic2 {...props} />
+  props => <BrowserMenu2 {...props} />
 );
 
 export default SourceBrowserDynamic2

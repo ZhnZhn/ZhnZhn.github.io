@@ -11,8 +11,9 @@ var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
-var _OpenClose = _interopRequireDefault(require("./OpenClose2"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
+var OpenClose2 = _Comp["default"].OpenClose2;
 var LIST_OPEN_COLOR = _Color["default"].GREEN;
 var MODEL_PROP = {
   CAPTION: 'caption',
@@ -61,7 +62,7 @@ var _renderLevel2 = function _renderLevel2(lists, captionProp, itemsProp, props)
   return lists.map(function (list, index) {
     var caption = list[captionProp],
         items = list[itemsProp];
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(OpenClose2, {
       style: S.LIST_DIV,
       openColor: LIST_OPEN_COLOR,
       caption: caption,
@@ -88,7 +89,7 @@ var _renderLevel1 = function _renderLevel1(props) {
   return groups.map(function (group, index) {
     var caption = group[_captionProp],
         lists = group[_listsProp];
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(OpenClose2, {
       style: S.GROUP_DIV,
       caption: caption,
       children: _renderLevel2(lists, _captionProp, _itemsProp, props)
@@ -100,11 +101,11 @@ var _areEqual = function _areEqual(prevProps, nextProps) {
   return prevProps.model === nextProps.model;
 };
 
-var MenuListType2 = (0, _memoEqual["default"])(function (props) {
+var MenuItems2 = (0, _memoEqual["default"])(function (props) {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     children: _renderLevel1(props)
   });
 }, _areEqual);
-var _default = MenuListType2;
+var _default = MenuItems2;
 exports["default"] = _default;
-//# sourceMappingURL=MenuListType2.js.map
+//# sourceMappingURL=MenuItems2.js.map

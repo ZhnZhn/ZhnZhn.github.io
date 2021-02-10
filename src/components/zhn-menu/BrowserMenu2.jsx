@@ -1,19 +1,19 @@
-import { useReducer, useCallback, useMemo, useEffect } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 
 import use from '../hooks/use'
+import useLoadMenu from './useLoadMenu'
+import Comp from '../Comp'
 
-import Browser from './Browser';
-import BrowserCaption from './BrowserCaption';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
-
-import ShowHide from './ShowHide';
 import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
+import MenuItems2 from './MenuItems2';
 
-import ScrollPane from './ScrollPane';
-import SpinnerLoading from './SpinnerLoading';
-import MenuListType2 from './MenuListType2';
-
-const { useBool, useToggle, useListen } = use;
+const { useBool, useToggle, useListen } = use
+, {
+  Browser, BrowserCaption,
+  ShowHide, ScrollPane,
+  SpinnerLoading
+} = Comp;
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 
@@ -51,25 +51,8 @@ const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
   /*eslint-enable react-hooks/exhaustive-deps */
 };
 
-const LOADING = 'a'
-, LOADED = 'b'
-, FAILED = 'd'
-, initialState = {
-  isLoading: false,
-  isLoaded: false,
-  menu: []
-}
-, _crAction = (type, menu) => ({ type, menu })
-, _reducer = (state, {type, menu}) => {
-  switch(type){
-    case LOADING: return { ...state, isLoading: true };
-    case LOADED: return { isLoading: false, isLoaded: true, menu };
-    case FAILED: return {...initialState};
-    default: return state;
-  }
-};
 
-const MenuBrowserDynamic2 = ({
+const BrowserMenu2 = ({
   isInitShow,
   store,
   browserType,
@@ -83,17 +66,20 @@ const MenuBrowserDynamic2 = ({
   const [isShow, showBrowser, hideBrowser] = useBool(isInitShow)
   , [isShowSearch, toggleSearch] = useToggle()
   , _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl)
-  , [{isLoading, isLoaded, menu}, dispath] = useReducer(_reducer, initialState)
+  , [
+      isLoading, isLoaded, menu,
+      setLoading, setLoaded, setFailed
+    ] = useLoadMenu();
 
   useListen(store, (actionType, data) => {
     if (data === browserType){
       if (actionType === showAction) {
         showBrowser();
       } else if (actionType === failedAction) {
-        dispath(_crAction(FAILED))
+        setFailed()
       }
     } else if (actionType === loadedAction && data.browserType === browserType){
-      dispath(_crAction(LOADED, data.menuItems))
+      setLoaded(data.menuItems)
     }
   })
 
@@ -101,7 +87,7 @@ const MenuBrowserDynamic2 = ({
   useEffect(()=>{
     if (!isLoaded && isShow) {
       onLoadMenu()
-      dispath(_crAction(LOADING))
+      setLoading()
     }
   }, [isLoaded, isShow])
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -132,7 +118,7 @@ const MenuBrowserDynamic2 = ({
        }
        <ScrollPane className={_scrollClass}>
          {isLoading && <SpinnerLoading />}
-         <MenuListType2
+         <MenuItems2
             model={menu}
             ItemComp={ItemComp}
             itemClassName={CL.ROW_ITEM}
@@ -144,4 +130,4 @@ const MenuBrowserDynamic2 = ({
   );
 }
 
-export default MenuBrowserDynamic2;
+export default BrowserMenu2;

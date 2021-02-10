@@ -1,6 +1,7 @@
-import { useReducer, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import use from '../hooks/use'
+import useLoadMenu from './useLoadMenu'
 import Comp from '../Comp'
 import MenuTopic from './MenuTopic'
 
@@ -22,6 +23,7 @@ const S = {
   }
 };
 
+/*
 const LOADING = 'a'
 , LOADED = 'b'
 , FAILED = 'c'
@@ -46,6 +48,7 @@ const _reducer = (state, {type, menu}) => {
     default: return state;
   }
 };
+*/
 
 const BrowserMenu = ({
   isInitShow,
@@ -58,27 +61,36 @@ const BrowserMenu = ({
   children
 }) => {
   const [isShow, showBrowser, hideBrowser] = useBool(isInitShow)
-  , [{isLoading, isLoaded, menu}, dispatch] = useReducer(_reducer, initialState)
+  , [
+      isLoading, isLoaded, menu,
+      setLoading, setLoaded, setFailed,
+      updateMenu
+    ] = useLoadMenu();
+  //, [{isLoading, isLoaded, menu}, dispatch] = useReducer(_reducer, initialState)
 
   useListen(store, (actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
         showBrowser()
       } else if (actionType === updateAction) {
-        dispatch(_crAction(UPDATE, store.getBrowserMenu(browserType)))
+        updateMenu(store.getBrowserMenu(browserType))
+        //dispatch(_crAction(UPDATE, store.getBrowserMenu(browserType)))
       } else if (actionType === failedAction) {
-        dispatch(_crAction(FAILED))
+        setFailed()
+        //dispatch(_crAction(FAILED))
       }
     } else if (data?.browserType === browserType
         && actionType === loadedAction) {
-        dispatch(_crAction(LOADED, data.menuItems))
+        setLoaded(data.menuItems)
+        //dispatch(_crAction(LOADED, data.menuItems))
     }
   })
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
     if (!isLoaded && isShow) {
       onLoadMenu()
-      dispatch(_crAction(LOADING))
+      setLoading()
+      //dispatch(_crAction(LOADING))
     }
   }, [isLoaded, isShow])
   /*eslint-enable react-hooks/exhaustive-deps */

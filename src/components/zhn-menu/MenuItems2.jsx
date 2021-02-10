@@ -1,6 +1,8 @@
 import memoEqual from '../hoc/memoEqual'
 import C from '../styles/Color'
-import OpenClose2 from './OpenClose2'
+import Comp from '../Comp'
+
+const { OpenClose2 } = Comp;
 
 const LIST_OPEN_COLOR = C.GREEN;
 
@@ -86,10 +88,10 @@ const _renderLevel1 = (props) => {
 };
 
 const _areEqual = (prevProps, nextProps) => prevProps.model === nextProps.model;
-const MenuListType2 = memoEqual(props => (
+const MenuItems2 = memoEqual(props => (
   <div>
      {_renderLevel1(props)}
   </div>
 ), _areEqual);
 
-export default MenuListType2
+export default MenuItems2

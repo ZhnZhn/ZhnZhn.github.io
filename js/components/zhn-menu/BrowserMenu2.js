@@ -5,33 +5,30 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _Browser = _interopRequireDefault(require("./Browser"));
+var _useLoadMenu2 = _interopRequireDefault(require("./useLoadMenu"));
 
-var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ToolbarButtonCircle = _interopRequireDefault(require("../dialogs/ToolbarButtonCircle"));
 
-var _ShowHide = _interopRequireDefault(require("./ShowHide"));
-
 var _WrapperInputSearch = _interopRequireDefault(require("../zhn-select/WrapperInputSearch"));
 
-var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
-
-var _SpinnerLoading = _interopRequireDefault(require("./SpinnerLoading"));
-
-var _MenuListType = _interopRequireDefault(require("./MenuListType2"));
+var _MenuItems = _interopRequireDefault(require("./MenuItems2"));
 
 var useBool = _use["default"].useBool,
     useToggle = _use["default"].useToggle,
-    useListen = _use["default"].useListen;
+    useListen = _use["default"].useListen,
+    Browser = _Comp["default"].Browser,
+    BrowserCaption = _Comp["default"].BrowserCaption,
+    ShowHide = _Comp["default"].ShowHide,
+    ScrollPane = _Comp["default"].ScrollPane,
+    SpinnerLoading = _Comp["default"].SpinnerLoading;
 var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
 var CL = {
   BROWSER: "scroll-browser-by",
@@ -76,60 +73,21 @@ var _useToolbarButtons = function _useToolbarButtons(toggleSearch, onClickInfo, 
   /*eslint-enable react-hooks/exhaustive-deps */
 };
 
-var LOADING = 'a',
-    LOADED = 'b',
-    FAILED = 'd',
-    initialState = {
-  isLoading: false,
-  isLoaded: false,
-  menu: []
-},
-    _crAction = function _crAction(type, menu) {
-  return {
-    type: type,
-    menu: menu
-  };
-},
-    _reducer = function _reducer(state, _ref) {
-  var type = _ref.type,
-      menu = _ref.menu;
-
-  switch (type) {
-    case LOADING:
-      return (0, _extends2["default"])({}, state, {
-        isLoading: true
-      });
-
-    case LOADED:
-      return {
-        isLoading: false,
-        isLoaded: true,
-        menu: menu
-      };
-
-    case FAILED:
-      return (0, _extends2["default"])({}, initialState);
-
-    default:
-      return state;
-  }
-};
-
-var MenuBrowserDynamic2 = function MenuBrowserDynamic2(_ref2) {
-  var isInitShow = _ref2.isInitShow,
-      store = _ref2.store,
-      browserType = _ref2.browserType,
-      showAction = _ref2.showAction,
-      loadedAction = _ref2.loadedAction,
-      failedAction = _ref2.failedAction,
-      caption = _ref2.caption,
-      onLoadMenu = _ref2.onLoadMenu,
-      descrUrl = _ref2.descrUrl,
-      onClickInfo = _ref2.onClickInfo,
-      onShowLoadDialog = _ref2.onShowLoadDialog,
-      ItemOptionComp = _ref2.ItemOptionComp,
-      ItemComp = _ref2.ItemComp,
-      children = _ref2.children;
+var BrowserMenu2 = function BrowserMenu2(_ref) {
+  var isInitShow = _ref.isInitShow,
+      store = _ref.store,
+      browserType = _ref.browserType,
+      showAction = _ref.showAction,
+      loadedAction = _ref.loadedAction,
+      failedAction = _ref.failedAction,
+      caption = _ref.caption,
+      onLoadMenu = _ref.onLoadMenu,
+      descrUrl = _ref.descrUrl,
+      onClickInfo = _ref.onClickInfo,
+      onShowLoadDialog = _ref.onShowLoadDialog,
+      ItemOptionComp = _ref.ItemOptionComp,
+      ItemComp = _ref.ItemComp,
+      children = _ref.children;
 
   var _useBool = useBool(isInitShow),
       isShow = _useBool[0],
@@ -139,22 +97,23 @@ var MenuBrowserDynamic2 = function MenuBrowserDynamic2(_ref2) {
       isShowSearch = _useToggle[0],
       toggleSearch = _useToggle[1],
       _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
-      _useReducer = (0, _react.useReducer)(_reducer, initialState),
-      _useReducer$ = _useReducer[0],
-      isLoading = _useReducer$.isLoading,
-      isLoaded = _useReducer$.isLoaded,
-      menu = _useReducer$.menu,
-      dispath = _useReducer[1];
+      _useLoadMenu = (0, _useLoadMenu2["default"])(),
+      isLoading = _useLoadMenu[0],
+      isLoaded = _useLoadMenu[1],
+      menu = _useLoadMenu[2],
+      setLoading = _useLoadMenu[3],
+      setLoaded = _useLoadMenu[4],
+      setFailed = _useLoadMenu[5];
 
   useListen(store, function (actionType, data) {
     if (data === browserType) {
       if (actionType === showAction) {
         showBrowser();
       } else if (actionType === failedAction) {
-        dispath(_crAction(FAILED));
+        setFailed();
       }
     } else if (actionType === loadedAction && data.browserType === browserType) {
-      dispath(_crAction(LOADED, data.menuItems));
+      setLoaded(data.menuItems);
     }
   });
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -162,23 +121,23 @@ var MenuBrowserDynamic2 = function MenuBrowserDynamic2(_ref2) {
   (0, _react.useEffect)(function () {
     if (!isLoaded && isShow) {
       onLoadMenu();
-      dispath(_crAction(LOADING));
+      setLoading();
     }
   }, [isLoaded, isShow]);
   /*eslint-enable react-hooks/exhaustive-deps */
 
   var _scrollClass = isShowSearch ? CL.BROWSER_WITH_SEARCH : CL.BROWSER;
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
     style: STYLE.BROWSER,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption["default"], {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BrowserCaption, {
       caption: caption,
       captionStyle: STYLE.CAPTION,
       onClose: hideBrowser
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle["default"], {
       buttons: _toolbarButtons
-    }), !isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide["default"], {
+    }), !isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
       isShow: isShowSearch,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WrapperInputSearch["default"], {
         style: STYLE.WRAPPER_SEARCH,
@@ -187,9 +146,9 @@ var MenuBrowserDynamic2 = function MenuBrowserDynamic2(_ref2) {
         ItemOptionComp: ItemOptionComp,
         onSelect: onShowLoadDialog
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane["default"], {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
       className: _scrollClass,
-      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading["default"], {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuListType["default"], {
+      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems["default"], {
         model: menu,
         ItemComp: ItemComp,
         itemClassName: CL.ROW_ITEM,
@@ -199,6 +158,6 @@ var MenuBrowserDynamic2 = function MenuBrowserDynamic2(_ref2) {
   });
 };
 
-var _default = MenuBrowserDynamic2;
+var _default = BrowserMenu2;
 exports["default"] = _default;
-//# sourceMappingURL=MenuBrowserDynamic2.js.map
+//# sourceMappingURL=BrowserMenu2.js.map
