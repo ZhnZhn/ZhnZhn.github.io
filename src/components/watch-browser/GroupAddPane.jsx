@@ -1,88 +1,78 @@
-import { Component } from 'react';
+import { useRef, useState } from 'react'
 //import PropTypes from "prop-types";
+import useListen from '../hooks/useListen'
 
 import A from './Atoms'
 
-class GroupAddPane extends Component {
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func
-    }),
-    actionCompleted: PropTypes.string,
-    actionFailed: PropTypes.string,
-    forActionType: PropTypes.string,
-    msgOnIsEmptyName: PropTypes.func,
-    onCreate: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
-
-  constructor(props){
-    super()
-    this._primaryBt = (<A.Button.Primary
-       caption="Create"
-       title="Create New Group"
-       onClick={this._handleCreate}
-    />)
-    this.state = {
-      validationMessages : []
-    }
-  }
-
-  componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore)
-  }
-  componentWillUnmount(){
-    this.unsubscribe()
-  }
-  _onStore = (actionType, data) => {
-    const { actionCompleted, actionFailed, forActionType } = this.props;
-    if (actionType === actionCompleted && data.forActionType === forActionType){
-       this._handleClear()
-    } else if (actionType === actionFailed && data.forActionType === forActionType){
-       this.setState({ validationMessages: data.messages })
-    }
-  }
-
-  _handleClear = () => {
-    this.inputText.setValue('')
-    if (this.state.validationMessages.length>0){
-       this.setState({ validationMessages: [] })
-    }
-  }
-
-  _handleCreate = () => {
-     const { onCreate, msgOnIsEmptyName } = this.props
-          , caption = this.inputText.getValue();
+const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
+  const _hCreate = () => {
+     const caption = refInput.current.getValue();
      if (caption){
        onCreate({ caption })
      } else {
-       this.inputText.setValue('')
-       this.setState({ validationMessages:[msgOnIsEmptyName('Group')] })
+       refInput.current.setValue('')
+       setState([msgOnIsEmptyName('Group')])
      }
-  }
-
-  render(){
-    const { onClose } = this.props
-        , { validationMessages } = this.state;
-    return (
-      <div>
-        <A.RowInputText
-           ref={c => this.inputText = c}
-           caption="Group:"
-        />
-        <A.ValidationMessages
-           validationMessages={validationMessages}
-         />
-         <A.RowButtons
-            Primary={this._primaryBt}
-            onClear={this._handleClear}
-            onClose={onClose}
-         />
-      </div>
-    )
-  }
+  };
+  return (<A.Button.Primary
+       caption="Create"
+       title="Create New Group"
+       onClick={_hCreate}
+  />);
 }
+
+const GroupAddPane = ({
+  store,
+  actionCompleted, actionFailed, forActionType,
+  onCreate, msgOnIsEmptyName,
+  onClose
+}) => {
+  const _refInput = useRef()
+  , [validationMessages, setState] = useState([])
+  , _primaryBt = _usePrimaryBt(_refInput, setState, onCreate, msgOnIsEmptyName)
+  , _hClear = () => {
+      _refInput.current.setValue('')
+      setState([])
+  };
+
+  useListen(store, (actionType, data) => {
+    if (actionType === actionCompleted && data.forActionType === forActionType){
+       _hClear()
+    } else if (actionType === actionFailed && data.forActionType === forActionType){
+       setState(data.messages)
+    }
+  })
+
+  return (
+    <div>
+      <A.RowInputText
+         ref={_refInput}
+         caption="Group:"
+      />
+      <A.ValidationMessages
+         validationMessages={validationMessages}
+       />
+       <A.RowButtons
+          Primary={_primaryBt}
+          onClear={_hClear}
+          onClose={onClose}
+       />
+    </div>
+  );
+}
+
+/*
+GroupAddPane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  actionFailed: PropTypes.string,
+  forActionType: PropTypes.string,
+  msgOnIsEmptyName: PropTypes.func,
+  onCreate: PropTypes.func,
+  onClose: PropTypes.func
+}
+*/
 
 export default GroupAddPane
