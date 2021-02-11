@@ -1,10 +1,9 @@
+//import PropTypes from "prop-types";
 import { forwardRef, useState, useRef, useCallback, useEffect, useImperativeHandle } from 'react';
 
 import useInputKeyDown from './useInputKeyDown'
-//import PropTypes from "prop-types";
 
 import SvgClear from './SvgClear'
-
 import STYLE from './Input.Style';
 
 const S = {
@@ -27,8 +26,6 @@ const S = {
   }
 };
 
-//const _isFn = fn => typeof fn === "function";
-
 const ErrMsg = ({ msg }) => msg
  ? (<div style={STYLE.ERR_MSG}>
      {msg}
@@ -41,16 +38,6 @@ const _crInitialState = (initValue) => ({
   errorInput: void 0,
   isValid: true
 });
-
-/*
-const _getInitStateFrom = ({ initValue }) => ({
-  initValue: initValue,
-  value: initValue || '',
-  errorInput: void 0,
-  isValid: true
-});
-*/
-
 
 const _getIsValidColor = isValid => isValid
  ? '#1b75bb'
@@ -78,6 +65,7 @@ const InputPattern = forwardRef(({
   errorMsg,
   onTest=_onTest,
   onEnter,
+  isClearBlank=false,
   onClear=_onClear
 }, ref) => {
   const _refInput = useRef()
@@ -99,8 +87,9 @@ const InputPattern = forwardRef(({
   , _hClear = useCallback(()=>{
        onClear()
        _refInput.current.focus()
-       setState(_crInitialState(initValue))
-    }, [initValue, onClear]);
+       const _initValue = isClearBlank ? '' : initValue;
+       setState(_crInitialState(_initValue))
+    }, [initValue, onClear, isClearBlank]);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -160,7 +149,7 @@ const InputPattern = forwardRef(({
 })
 
 /*
-static propTypes = {
+InputPattern.propTypes = {
   rootStyle: PropTypes.object,
   inputStyle: PropTypes.object,
   initValue: PropTypes.string,

@@ -35,7 +35,7 @@ var S = {
     top: 4,
     right: 7
   }
-}; //const _isFn = fn => typeof fn === "function";
+};
 
 var ErrMsg = function ErrMsg(_ref) {
   var msg = _ref.msg;
@@ -53,15 +53,6 @@ var _crInitialState = function _crInitialState(initValue) {
     isValid: true
   };
 };
-/*
-const _getInitStateFrom = ({ initValue }) => ({
-  initValue: initValue,
-  value: initValue || '',
-  errorInput: void 0,
-  isValid: true
-});
-*/
-
 
 var _getIsValidColor = function _getIsValidColor(isValid) {
   return isValid ? '#1b75bb' : '#f44336';
@@ -97,6 +88,8 @@ var InputPattern = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
       _ref2$onTest = _ref2.onTest,
       onTest = _ref2$onTest === void 0 ? _onTest : _ref2$onTest,
       onEnter = _ref2.onEnter,
+      _ref2$isClearBlank = _ref2.isClearBlank,
+      isClearBlank = _ref2$isClearBlank === void 0 ? false : _ref2$isClearBlank,
       _ref2$onClear = _ref2.onClear,
       onClear = _ref2$onClear === void 0 ? _onClear : _ref2$onClear;
 
@@ -133,8 +126,10 @@ var InputPattern = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
 
     _refInput.current.focus();
 
-    setState(_crInitialState(initValue));
-  }, [initValue, onClear]);
+    var _initValue = isClearBlank ? '' : initValue;
+
+    setState(_crInitialState(_initValue));
+  }, [initValue, onClear, isClearBlank]);
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
@@ -206,7 +201,7 @@ var InputPattern = /*#__PURE__*/(0, _react.forwardRef)(function (_ref2, ref) {
   });
 });
 /*
-static propTypes = {
+InputPattern.propTypes = {
   rootStyle: PropTypes.object,
   inputStyle: PropTypes.object,
   initValue: PropTypes.string,
