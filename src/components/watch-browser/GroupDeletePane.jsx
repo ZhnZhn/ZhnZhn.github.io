@@ -1,99 +1,105 @@
-import { Component } from 'react';
+import { useRef, useReducer } from 'react'
 //import PropTypes from "prop-types";
+import useListen from '../hooks/useListen'
 
 import A from './Atoms'
 
-class GroupDeletePane extends Component {
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func,
-      getWatchGroups: PropTypes.func
-    }),
-    actionCompleted: PropTypes.string,
-    forActionType: PropTypes.string,
-    msgOnNotSelect: PropTypes.func,
-    onDelete: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
 
-  constructor(props){
-    super()
-    this.caption = null
-    this._primaryBt = (<A.Button.Primary
-       caption="Delete"
-       title="Delete Group"
-       onClick={this._handleDeleteGroup}
-    />)
-    this.state = {
-      groupOptions: props.store.getWatchGroups(),
-      validationMessages: []
-    }
-  }
+const UPDATE = 'a'
+, VALIDATION_ERR = 'b'
+, _initState = store => ({
+  groups: store.getWatchGroups,
+  errs: []
+})
+, _crAction = (type, payload) => ({type, payload});
 
-  componentDidMount(){
-    this.unsubscribe = this.props.store
-      .listen(this._onStore)
-  }
-  componentWillUnmount(){
-    this.unsubscribe()
-  }
-  _onStore = (actionType, data) => {
-    const { actionCompleted, forActionType, store } = this.props;
-    if (actionType === actionCompleted) {
-      if (data.forActionType === forActionType){
-        this._handleClear()
-      }
-      this.setState({ groupOptions : store.getWatchGroups() })
-    }
-  }
-
-  _handleSelectGroup = (item) => {
-     this.caption = (item && item.caption) || null;
-  }
-
-  _handleClear = () => {
-    if (this.state.validationMessages.length>0){
-      this.setState({ validationMessages:[] })
-    }
-  }
-
-  _handleDeleteGroup = () => {
-     const { onDelete, msgOnNotSelect } = this.props;
-     if (this.caption){
-       onDelete({ caption:this.caption })
-     } else {
-       this.setState({
-         validationMessages: [msgOnNotSelect('Group')]
-       })
-     }
-  }
-
-  render(){
-      const { onClose } = this.props
-          , {
-              groupOptions, validationMessages
-            } = this.state;
-
-      return (
-         <div>
-           <A.RowInputSelect
-             caption="Group:"
-             options={groupOptions}
-             onSelect={this._handleSelectGroup}
-           />
-           <A.ValidationMessages
-             validationMessages={validationMessages}
-           />
-           <A.RowButtons
-             Primary={this._primaryBt}
-             withoutClear={true}
-             onClose={onClose}
-           />
-        </div>
-    );
+const _reducer = (state, {type, payload}) => {
+  switch(type){
+    case UPDATE: return {
+      groups: payload, errs: []
+    };
+    case VALIDATION_ERR: return {
+      ...state, errs: payload
+    };
+    default: return state;
   }
 }
+
+const _useReducer = (store, msgOnNotSelect) => {
+  const [{groups, errs}, dispatch] = useReducer(_reducer, store, _initState)
+  return [groups, errs,
+    groups => dispatch(_crAction(UPDATE, groups)),
+    () => dispatch(_crAction(VALIDATION_ERR, [msgOnNotSelect('Group')]))
+ ];
+}
+
+const _usePrimaryBt = (refCaption, onDelete, setErrs) => {
+  const _hDeleteGroup = () => {
+     const { current } = refCaption;
+     if (current){
+       onDelete({ caption: current })
+       refCaption.current = null
+     } else {
+       setErrs()
+     }
+  };
+  return (<A.Button.Primary
+     caption="Delete"
+     title="Delete Group"
+     onClick={_hDeleteGroup}
+  />);
+}
+
+const GroupDeletePane = ({
+  store,
+  actionCompleted, forActionType,
+  onDelete, msgOnNotSelect,
+  onClose
+}) => {
+  const _refCaption = useRef(null)
+  , [groups, errs, updateGroups, setErrs] = _useReducer(store, msgOnNotSelect)
+  , _primaryBt = _usePrimaryBt(_refCaption, onDelete, setErrs)
+  , _hSelectGroup = item => {
+     _refCaption.current= (item && item.caption) || null;
+  };
+
+  useListen(store, (actionType, data) => {
+    if (actionType === actionCompleted) {
+      updateGroups(store.getWatchGroups())
+    }
+  })
+
+  return (
+    <div>
+      <A.RowInputSelect
+        caption="Group:"
+        options={groups}
+        onSelect={_hSelectGroup}
+      />
+      <A.ValidationMessages
+        validationMessages={errs}
+      />
+      <A.RowButtons
+        Primary={_primaryBt}
+        withoutClear={true}
+        onClose={onClose}
+      />
+   </div>
+  );
+}
+
+/*
+GroupDeletePane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func,
+    getWatchGroups: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  forActionType: PropTypes.string,
+  msgOnNotSelect: PropTypes.func,
+  onDelete: PropTypes.func,
+  onClose: PropTypes.func
+}
+*/
 
 export default GroupDeletePane

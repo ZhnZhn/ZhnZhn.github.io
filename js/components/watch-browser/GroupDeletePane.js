@@ -5,126 +5,140 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
+
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
-var GroupDeletePane = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(GroupDeletePane, _Component);
+var UPDATE = 'a',
+    VALIDATION_ERR = 'b',
+    _initState = function _initState(store) {
+  return {
+    groups: store.getWatchGroups,
+    errs: []
+  };
+},
+    _crAction = function _crAction(type, payload) {
+  return {
+    type: type,
+    payload: payload
+  };
+};
 
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func,
-      getWatchGroups: PropTypes.func
-    }),
-    actionCompleted: PropTypes.string,
-    forActionType: PropTypes.string,
-    msgOnNotSelect: PropTypes.func,
-    onDelete: PropTypes.func,
-    onClose: PropTypes.func
+var _reducer = function _reducer(state, _ref) {
+  var type = _ref.type,
+      payload = _ref.payload;
+
+  switch (type) {
+    case UPDATE:
+      return {
+        groups: payload,
+        errs: []
+      };
+
+    case VALIDATION_ERR:
+      return (0, _extends2["default"])({}, state, {
+        errs: payload
+      });
+
+    default:
+      return state;
   }
-  */
-  function GroupDeletePane(props) {
-    var _this;
+};
 
-    _this = _Component.call(this) || this;
+var _useReducer = function _useReducer(store, msgOnNotSelect) {
+  var _useReducer2 = (0, _react.useReducer)(_reducer, store, _initState),
+      _useReducer2$ = _useReducer2[0],
+      groups = _useReducer2$.groups,
+      errs = _useReducer2$.errs,
+      dispatch = _useReducer2[1];
 
-    _this._onStore = function (actionType, data) {
-      var _this$props = _this.props,
-          actionCompleted = _this$props.actionCompleted,
-          forActionType = _this$props.forActionType,
-          store = _this$props.store;
+  return [groups, errs, function (groups) {
+    return dispatch(_crAction(UPDATE, groups));
+  }, function () {
+    return dispatch(_crAction(VALIDATION_ERR, [msgOnNotSelect('Group')]));
+  }];
+};
 
-      if (actionType === actionCompleted) {
-        if (data.forActionType === forActionType) {
-          _this._handleClear();
-        }
+var _usePrimaryBt = function _usePrimaryBt(refCaption, onDelete, setErrs) {
+  var _hDeleteGroup = function _hDeleteGroup() {
+    var current = refCaption.current;
 
-        _this.setState({
-          groupOptions: store.getWatchGroups()
-        });
-      }
-    };
-
-    _this._handleSelectGroup = function (item) {
-      _this.caption = item && item.caption || null;
-    };
-
-    _this._handleClear = function () {
-      if (_this.state.validationMessages.length > 0) {
-        _this.setState({
-          validationMessages: []
-        });
-      }
-    };
-
-    _this._handleDeleteGroup = function () {
-      var _this$props2 = _this.props,
-          onDelete = _this$props2.onDelete,
-          msgOnNotSelect = _this$props2.msgOnNotSelect;
-
-      if (_this.caption) {
-        onDelete({
-          caption: _this.caption
-        });
-      } else {
-        _this.setState({
-          validationMessages: [msgOnNotSelect('Group')]
-        });
-      }
-    };
-
-    _this.caption = null;
-    _this._primaryBt = /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
-      caption: "Delete",
-      title: "Delete Group",
-      onClick: _this._handleDeleteGroup
-    });
-    _this.state = {
-      groupOptions: props.store.getWatchGroups(),
-      validationMessages: []
-    };
-    return _this;
-  }
-
-  var _proto = GroupDeletePane.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
+    if (current) {
+      onDelete({
+        caption: current
+      });
+      refCaption.current = null;
+    } else {
+      setErrs();
+    }
   };
 
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unsubscribe();
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
+    caption: "Delete",
+    title: "Delete Group",
+    onClick: _hDeleteGroup
+  });
+};
+
+var GroupDeletePane = function GroupDeletePane(_ref2) {
+  var store = _ref2.store,
+      actionCompleted = _ref2.actionCompleted,
+      forActionType = _ref2.forActionType,
+      onDelete = _ref2.onDelete,
+      msgOnNotSelect = _ref2.msgOnNotSelect,
+      onClose = _ref2.onClose;
+
+  var _refCaption = (0, _react.useRef)(null),
+      _useReducer3 = _useReducer(store, msgOnNotSelect),
+      groups = _useReducer3[0],
+      errs = _useReducer3[1],
+      updateGroups = _useReducer3[2],
+      setErrs = _useReducer3[3],
+      _primaryBt = _usePrimaryBt(_refCaption, onDelete, setErrs),
+      _hSelectGroup = function _hSelectGroup(item) {
+    _refCaption.current = item && item.caption || null;
   };
 
-  _proto.render = function render() {
-    var onClose = this.props.onClose,
-        _this$state = this.state,
-        groupOptions = _this$state.groupOptions,
-        validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputSelect, {
-        caption: "Group:",
-        options: groupOptions,
-        onSelect: this._handleSelectGroup
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
-        validationMessages: validationMessages
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
-        Primary: this._primaryBt,
-        withoutClear: true,
-        onClose: onClose
-      })]
-    });
-  };
+  (0, _useListen["default"])(store, function (actionType, data) {
+    if (actionType === actionCompleted) {
+      updateGroups(store.getWatchGroups());
+    }
+  });
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputSelect, {
+      caption: "Group:",
+      options: groups,
+      onSelect: _hSelectGroup
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
+      validationMessages: errs
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
+      Primary: _primaryBt,
+      withoutClear: true,
+      onClose: onClose
+    })]
+  });
+};
+/*
+GroupDeletePane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func,
+    getWatchGroups: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  forActionType: PropTypes.string,
+  msgOnNotSelect: PropTypes.func,
+  onDelete: PropTypes.func,
+  onClose: PropTypes.func
+}
+*/
 
-  return GroupDeletePane;
-}(_react.Component);
 
 var _default = GroupDeletePane;
 exports["default"] = _default;
