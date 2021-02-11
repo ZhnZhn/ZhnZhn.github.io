@@ -1,4 +1,6 @@
-import { cloneElement, Component } from 'react';
+import { useState, cloneElement } from 'react';
+
+import useListen from '../hooks/useListen'
 
 const S = {
   ROOT: {
@@ -9,6 +11,8 @@ const S = {
     width: '98%'
   }
 };
+
+const _isUndef = value => typeof value === 'undefined';
 
 const _findCompIndex = (arr, key) => {
   for (let i=0; i<arr.length; i++){
@@ -44,117 +48,96 @@ const _updateVisible = (state, key, maxDialog) => {
 
 const _findCompByKey = (comps, key) => {
   const index = _findCompIndex(comps, key);
-  return typeof index !== 'undefined'
-     ? comps[index]
-     : void 0;
+  return _isUndef(index)
+    ? void 0
+    : comps[index];
 };
 
-class DialogContainer extends Component {
-  static defaultProps = {
-    maxDialog: 3
-  }
+const _filterArrByKey = (arr, key) => {
+  arr.splice(arr.indexOf(key), 1)
+};
 
-  state = {
+const _renderDialogs = (
+  { hmIs, compDialogs, hmData },
+  _hToTopLayer,
+  _hToggleDialog
+) => compDialogs.map(Comp => {
+     const key = Comp.key;
+     return cloneElement(Comp, {
+        key: key,
+        isShow: hmIs[key],
+        optionData: hmData[key],
+        onFront: () => _hToTopLayer(key),
+        onClose: () => _hToggleDialog(key)
+    });
+});
+
+const NOOP = () => {};
+
+const DialogContainer = ({
+  maxDialog=3,
+  store, showAction,
+  onCloseDialog=NOOP
+}) => {
+  const [state, setState] = useState({
     hmIs: {},
     compDialogs: [],
     hmData: {},
     visibleDialogs: []
-  }
+  })
+  , { hmIs, compDialogs, visibleDialogs } = state
+  , _hToTopLayer = key => {
+     if (visibleDialogs[visibleDialogs.length-1] !== key) {
+       setState(prevState => {
+         prevState.compDialogs = _doVisible(prevState.compDialogs, key)
+         const visibleDialogs = prevState.visibleDialogs
+         _filterArrByKey(visibleDialogs, key)
+         visibleDialogs.push(key)
+         return {...prevState};
+       })
+     }
+    }
+  , _hToggleDialog = key => {
+     if (hmIs[key]){
+       const _Comp = _findCompByKey(compDialogs, key);
+       if (_Comp){
+         onCloseDialog(_Comp)
+       }
+     }
+     setState(prevState => {
+       const { hmIs } = prevState;
+       hmIs[key] = !hmIs[key]
+       if (!hmIs[key]) {
+         _filterArrByKey(prevState.visibleDialogs, key)
+       }
+       return {...prevState};
+     })
+  };
 
-   componentDidMount(){
-     this.unsubscribe = this.props.store.listen(this._onStore)
-   }
-   componentWillUnmount(){
-     this.unsubscribe()
-   }
-
-
-   componentDidCatch(error, info){
-     /*
-     console.log(error)
-     console.log(info)
-     */
-   }
-
-
-   _onStore = (actionType, option) => {
-      const { showAction } = this.props;
-      if (actionType === showAction){
-         this.setState(prevState => {
-           const { key, Comp, data } = option
-               , { maxDialog } = this.props;
-            if (Comp && typeof _findCompIndex(prevState.compDialogs, key) !== 'undefined') {
-              return null;
-            }
-           _updateVisible(prevState, key, maxDialog)
-           if (!Comp){
-              prevState.compDialogs = _doVisible(prevState.compDialogs, key)
-           } else {
-              prevState.compDialogs.push(Comp)
+  useListen(store, (actionType, option) => {
+     if (actionType === showAction){
+        setState(prevState => {
+          const { key, Comp, data } = option;
+           if (Comp && !_isUndef(_findCompIndex(prevState.compDialogs, key))) {
+             return prevState;
            }
-           prevState.hmData[key] = data
-           return prevState;
-         })
-      }
-   }
+          _updateVisible(prevState, key, maxDialog)
+          if (!Comp){
+             prevState.compDialogs = _doVisible(prevState.compDialogs, key)
+          } else {
+             prevState.compDialogs.push(Comp)
+          }
+          prevState.hmData[key] = data
+          return {...prevState};
+        })
+     }
+  })
 
-  _handleToggleDialog = (key) => {
-    const { hmIs, compDialogs } = this.state;
-    if (hmIs[key]){
-      const { onCloseDialog } = this.props
-          , _Comp = _findCompByKey(compDialogs, key);
-      if (typeof onCloseDialog === 'function' && _Comp){
-        onCloseDialog(_Comp)
-      }
-    }
-
-    this.setState(prevState => {
-      const { hmIs } = prevState;
-      hmIs[key] = !hmIs[key]
-      if (!hmIs[key]) {
-        const visibleDialogs = prevState.visibleDialogs
-            , _keyIndex = visibleDialogs.indexOf(key);
-        visibleDialogs.splice(_keyIndex, 1)
-      }
-      return prevState;
-    })
-  }
-
-  _handleToFront = (key) => {
-    const { visibleDialogs } = this.state;
-    if (visibleDialogs[visibleDialogs.length-1] !== key) {
-      this.setState(prevState => {
-        prevState.compDialogs = _doVisible(prevState.compDialogs, key)
-        const visibleDialogs = prevState.visibleDialogs
-            , _keyIndex = visibleDialogs.indexOf(key);
-        visibleDialogs.splice(_keyIndex, 1)
-        visibleDialogs.push(key)
-        return prevState;
-      })
-    }
-  }
-
-  _renderDialogs = () => {
-    const { hmIs, compDialogs, hmData } = this.state;
-    return compDialogs.map(Comp => {
-       const key = Comp.key;
-       return cloneElement(Comp, {
-          key: key,
-          isShow: hmIs[key],
-          optionData: hmData[key],
-          onFront: this._handleToFront.bind(this, key),
-          onClose: this._handleToggleDialog.bind(this, key)
-       });
-    });
-  }
-
-  render() {
-    return (
-      <div style={S.ROOT}>
-        {this._renderDialogs()}
-      </div>
-    );
-  }
+  return (
+    <div style={S.ROOT}>
+      {_renderDialogs(state, _hToTopLayer, _hToggleDialog)}
+    </div>
+  );
 }
 
 export default DialogContainer

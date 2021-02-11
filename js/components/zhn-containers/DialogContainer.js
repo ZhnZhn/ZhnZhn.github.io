@@ -5,13 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
+
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var S = {
   ROOT: {
@@ -21,6 +21,10 @@ var S = {
     left: 10,
     width: '98%'
   }
+};
+
+var _isUndef = function _isUndef(value) {
+  return typeof value === 'undefined';
 };
 
 var _findCompIndex = function _findCompIndex(arr, key) {
@@ -60,151 +64,118 @@ var _updateVisible = function _updateVisible(state, key, maxDialog) {
 var _findCompByKey = function _findCompByKey(comps, key) {
   var index = _findCompIndex(comps, key);
 
-  return typeof index !== 'undefined' ? comps[index] : void 0;
+  return _isUndef(index) ? void 0 : comps[index];
 };
 
-var DialogContainer = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(DialogContainer, _Component);
+var _filterArrByKey = function _filterArrByKey(arr, key) {
+  arr.splice(arr.indexOf(key), 1);
+};
 
-  function DialogContainer() {
-    var _this;
+var _renderDialogs = function _renderDialogs(_ref, _hToTopLayer, _hToggleDialog) {
+  var hmIs = _ref.hmIs,
+      compDialogs = _ref.compDialogs,
+      hmData = _ref.hmData;
+  return compDialogs.map(function (Comp) {
+    var key = Comp.key;
+    return /*#__PURE__*/(0, _react.cloneElement)(Comp, {
+      key: key,
+      isShow: hmIs[key],
+      optionData: hmData[key],
+      onFront: function onFront() {
+        return _hToTopLayer(key);
+      },
+      onClose: function onClose() {
+        return _hToggleDialog(key);
+      }
+    });
+  });
+};
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+var NOOP = function NOOP() {};
+
+var DialogContainer = function DialogContainer(_ref2) {
+  var _ref2$maxDialog = _ref2.maxDialog,
+      maxDialog = _ref2$maxDialog === void 0 ? 3 : _ref2$maxDialog,
+      store = _ref2.store,
+      showAction = _ref2.showAction,
+      _ref2$onCloseDialog = _ref2.onCloseDialog,
+      onCloseDialog = _ref2$onCloseDialog === void 0 ? NOOP : _ref2$onCloseDialog;
+
+  var _useState = (0, _react.useState)({
+    hmIs: {},
+    compDialogs: [],
+    hmData: {},
+    visibleDialogs: []
+  }),
+      state = _useState[0],
+      setState = _useState[1],
+      hmIs = state.hmIs,
+      compDialogs = state.compDialogs,
+      visibleDialogs = state.visibleDialogs,
+      _hToTopLayer = function _hToTopLayer(key) {
+    if (visibleDialogs[visibleDialogs.length - 1] !== key) {
+      setState(function (prevState) {
+        prevState.compDialogs = _doVisible(prevState.compDialogs, key);
+        var visibleDialogs = prevState.visibleDialogs;
+
+        _filterArrByKey(visibleDialogs, key);
+
+        visibleDialogs.push(key);
+        return (0, _extends2["default"])({}, prevState);
+      });
+    }
+  },
+      _hToggleDialog = function _hToggleDialog(key) {
+    if (hmIs[key]) {
+      var _Comp = _findCompByKey(compDialogs, key);
+
+      if (_Comp) {
+        onCloseDialog(_Comp);
+      }
     }
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      hmIs: {},
-      compDialogs: [],
-      hmData: {},
-      visibleDialogs: []
-    };
+    setState(function (prevState) {
+      var hmIs = prevState.hmIs;
+      hmIs[key] = !hmIs[key];
 
-    _this._onStore = function (actionType, option) {
-      var showAction = _this.props.showAction;
-
-      if (actionType === showAction) {
-        _this.setState(function (prevState) {
-          var key = option.key,
-              Comp = option.Comp,
-              data = option.data,
-              maxDialog = _this.props.maxDialog;
-
-          if (Comp && typeof _findCompIndex(prevState.compDialogs, key) !== 'undefined') {
-            return null;
-          }
-
-          _updateVisible(prevState, key, maxDialog);
-
-          if (!Comp) {
-            prevState.compDialogs = _doVisible(prevState.compDialogs, key);
-          } else {
-            prevState.compDialogs.push(Comp);
-          }
-
-          prevState.hmData[key] = data;
-          return prevState;
-        });
-      }
-    };
-
-    _this._handleToggleDialog = function (key) {
-      var _this$state = _this.state,
-          hmIs = _this$state.hmIs,
-          compDialogs = _this$state.compDialogs;
-
-      if (hmIs[key]) {
-        var onCloseDialog = _this.props.onCloseDialog,
-            _Comp = _findCompByKey(compDialogs, key);
-
-        if (typeof onCloseDialog === 'function' && _Comp) {
-          onCloseDialog(_Comp);
-        }
+      if (!hmIs[key]) {
+        _filterArrByKey(prevState.visibleDialogs, key);
       }
 
-      _this.setState(function (prevState) {
-        var hmIs = prevState.hmIs;
-        hmIs[key] = !hmIs[key];
-
-        if (!hmIs[key]) {
-          var visibleDialogs = prevState.visibleDialogs,
-              _keyIndex = visibleDialogs.indexOf(key);
-
-          visibleDialogs.splice(_keyIndex, 1);
-        }
-
-        return prevState;
-      });
-    };
-
-    _this._handleToFront = function (key) {
-      var visibleDialogs = _this.state.visibleDialogs;
-
-      if (visibleDialogs[visibleDialogs.length - 1] !== key) {
-        _this.setState(function (prevState) {
-          prevState.compDialogs = _doVisible(prevState.compDialogs, key);
-
-          var visibleDialogs = prevState.visibleDialogs,
-              _keyIndex = visibleDialogs.indexOf(key);
-
-          visibleDialogs.splice(_keyIndex, 1);
-          visibleDialogs.push(key);
-          return prevState;
-        });
-      }
-    };
-
-    _this._renderDialogs = function () {
-      var _this$state2 = _this.state,
-          hmIs = _this$state2.hmIs,
-          compDialogs = _this$state2.compDialogs,
-          hmData = _this$state2.hmData;
-      return compDialogs.map(function (Comp) {
-        var key = Comp.key;
-        return /*#__PURE__*/(0, _react.cloneElement)(Comp, {
-          key: key,
-          isShow: hmIs[key],
-          optionData: hmData[key],
-          onFront: _this._handleToFront.bind((0, _assertThisInitialized2["default"])(_this), key),
-          onClose: _this._handleToggleDialog.bind((0, _assertThisInitialized2["default"])(_this), key)
-        });
-      });
-    };
-
-    return _this;
-  }
-
-  var _proto = DialogContainer.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unsubscribe();
-  };
-
-  _proto.componentDidCatch = function componentDidCatch(error, info) {
-    /*
-    console.log(error)
-    console.log(info)
-    */
-  };
-
-  _proto.render = function render() {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: S.ROOT,
-      children: this._renderDialogs()
+      return (0, _extends2["default"])({}, prevState);
     });
   };
 
-  return DialogContainer;
-}(_react.Component);
+  (0, _useListen["default"])(store, function (actionType, option) {
+    if (actionType === showAction) {
+      setState(function (prevState) {
+        var key = option.key,
+            Comp = option.Comp,
+            data = option.data;
 
-DialogContainer.defaultProps = {
-  maxDialog: 3
+        if (Comp && !_isUndef(_findCompIndex(prevState.compDialogs, key))) {
+          return prevState;
+        }
+
+        _updateVisible(prevState, key, maxDialog);
+
+        if (!Comp) {
+          prevState.compDialogs = _doVisible(prevState.compDialogs, key);
+        } else {
+          prevState.compDialogs.push(Comp);
+        }
+
+        prevState.hmData[key] = data;
+        return (0, _extends2["default"])({}, prevState);
+      });
+    }
+  });
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: S.ROOT,
+    children: _renderDialogs(state, _hToTopLayer, _hToggleDialog)
+  });
 };
+
 var _default = DialogContainer;
 exports["default"] = _default;
 //# sourceMappingURL=DialogContainer.js.map
