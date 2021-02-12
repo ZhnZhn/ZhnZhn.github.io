@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/math/categoryDiff.js"
+ ],
+ "file": "../../src/math/categoryDiff.js",
+ "names": [
+  "_calc",
+  "p1",
+  "p2",
+  "y",
+  "parseFloat",
+  "minus",
+  "toString",
+  "categoryDiff"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,KAAK,GAAG,SAARA,KAAQ,CAACC,EAAD,EAAKC,EAAL;AAAA,SAAYA,EAAE,IAAIA,EAAE,CAACC,CAAH,KAAS,IAAf,GACpBC,UAAU,CAAC,qBAAIH,EAAE,CAACE,CAAP,EAAUE,KAAV,CAAgBH,EAAE,CAACC,CAAnB,EAAsBG,QAAtB,EAAD,CADU,GAEpB,CAFQ;AAAA,CAAd;;AAIA,IAAMC,YAAY,GAAG,+BAAcP,KAAd,CAArB;eAEeO,Y"
+}

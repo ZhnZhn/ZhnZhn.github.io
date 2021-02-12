@@ -11,10 +11,16 @@ var _mfi = _interopRequireDefault(require("./mfi"));
 
 var _momAth = _interopRequireDefault(require("./momAth"));
 
+var _categoryRate = _interopRequireDefault(require("./categoryRate"));
+
+var _categoryDiff = _interopRequireDefault(require("./categoryDiff"));
+
 var tsIndicators = {
   sma: _sma["default"],
   mfi: _mfi["default"],
-  momAth: _momAth["default"]
+  momAth: _momAth["default"],
+  categoryRate: _categoryRate["default"],
+  categoryDiff: _categoryDiff["default"]
 };
 var _default = tsIndicators;
 exports["default"] = _default;
