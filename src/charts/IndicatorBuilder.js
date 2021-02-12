@@ -2,11 +2,49 @@ import tsIndicators from '../math/tsIndicators'
 
 import ChartConfig from './ChartConfig';
 
-const { sma, mfi, momAth } = tsIndicators;
+const {
+  categoryRate, categoryDiff,
+  sma, mfi, momAth
+} = tsIndicators;
 const {
   crMfiConfig,
   crMomAthConfig
 } = ChartConfig;
+
+const _getD12 = chart => {
+  const series = chart.series
+  , s1 = series[0]
+  , d1 = s1.data
+  , d2 = (series[1] || {}).data || [];
+  return { d1, d2, sc: s1.color };
+}
+
+const _findMinY = arr => {
+  let y, min = Number.MAX_SAFE_INTEGER;
+  for(let i=0; i<arr.length; i++){
+    y = arr[i].y
+    if (y<min) { min = y }
+  }
+  return min !== Number.MAX_SAFE_INTEGER
+    ? min
+    : null;
+}
+
+const _fCategoryCalc = (calc, name, isUpdateMin) => (chart, rc) => {
+  const { d1, d2, sc } = _getD12(chart);
+  if (d2.length !== 0) {
+    const data = calc(d1, d2, { rc, sc });
+    chart.addSeries({
+      name, data,
+      color: rc,
+    }, true, true)
+    if (isUpdateMin) {
+      chart.yAxis[0].setExtremes(_findMinY(data), null, true)
+    }
+    return true;
+  }
+  return false;
+};
 
 const _addDataAsSeriaToChart = (chart, option) => {
   const seria = ChartConfig.crSeria(option);
@@ -25,6 +63,9 @@ const IndicatorBuilder = {
      }
      return false;
   },
+
+  addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
+  addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2', true),
 
   addSmaTo: (chart, option) => {
     const { id, period } = option

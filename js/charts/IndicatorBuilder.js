@@ -9,11 +9,69 @@ var _tsIndicators = _interopRequireDefault(require("../math/tsIndicators"));
 
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
-var sma = _tsIndicators["default"].sma,
+var categoryRate = _tsIndicators["default"].categoryRate,
+    categoryDiff = _tsIndicators["default"].categoryDiff,
+    sma = _tsIndicators["default"].sma,
     mfi = _tsIndicators["default"].mfi,
     momAth = _tsIndicators["default"].momAth;
 var _crMfiConfig = _ChartConfig["default"].crMfiConfig,
     _crMomAthConfig = _ChartConfig["default"].crMomAthConfig;
+
+var _getD12 = function _getD12(chart) {
+  var series = chart.series,
+      s1 = series[0],
+      d1 = s1.data,
+      d2 = (series[1] || {}).data || [];
+  return {
+    d1: d1,
+    d2: d2,
+    sc: s1.color
+  };
+};
+
+var _findMinY = function _findMinY(arr) {
+  var y,
+      min = Number.MAX_SAFE_INTEGER;
+
+  for (var i = 0; i < arr.length; i++) {
+    y = arr[i].y;
+
+    if (y < min) {
+      min = y;
+    }
+  }
+
+  return min !== Number.MAX_SAFE_INTEGER ? min : null;
+};
+
+var _fCategoryCalc = function _fCategoryCalc(calc, name, isUpdateMin) {
+  return function (chart, rc) {
+    var _getD = _getD12(chart),
+        d1 = _getD.d1,
+        d2 = _getD.d2,
+        sc = _getD.sc;
+
+    if (d2.length !== 0) {
+      var data = calc(d1, d2, {
+        rc: rc,
+        sc: sc
+      });
+      chart.addSeries({
+        name: name,
+        data: data,
+        color: rc
+      }, true, true);
+
+      if (isUpdateMin) {
+        chart.yAxis[0].setExtremes(_findMinY(data), null, true);
+      }
+
+      return true;
+    }
+
+    return false;
+  };
+};
 
 var _addDataAsSeriaToChart = function _addDataAsSeriaToChart(chart, option) {
   var seria = _ChartConfig["default"].crSeria(option);
@@ -35,6 +93,8 @@ var IndicatorBuilder = {
 
     return false;
   },
+  addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
+  addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2', true),
   addSmaTo: function addSmaTo(chart, option) {
     var id = option.id,
         period = option.period,
