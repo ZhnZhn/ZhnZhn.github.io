@@ -17,6 +17,8 @@ var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
 
 var _ModalMenuIndicator = _interopRequireDefault(require("./ModalMenuIndicator"));
 
+var _ModalMenuInd = _interopRequireDefault(require("./ModalMenuInd2"));
+
 var _ModalMenuFn = _interopRequireDefault(require("./ModalMenuFn"));
 
 var _ModalMenuMini = _interopRequireDefault(require("./ModalMenuMini"));
@@ -106,7 +108,7 @@ var _isColumnCategoryConfig = function _isColumnCategoryConfig(_temp) {
 var _isIndicatorTab = function _isIndicatorTab(_ref2, isWithoutIndicator) {
   var series = _ref2.series,
       xAxis = _ref2.xAxis;
-  return !isWithoutIndicator && _isArr(series) && series[0] && (LINE_TYPES.indexOf(series[0].type) !== -1 || !_isColumnCategoryConfig(xAxis));
+  return !isWithoutIndicator && _isArr(series) && series[0] && (LINE_TYPES.indexOf(series[0].type) !== -1 || _isColumnCategoryConfig(xAxis));
 };
 
 var _crModalMenuStyle = function _crModalMenuStyle(ref, left) {
@@ -180,23 +182,37 @@ var ChartToolbar = function ChartToolbar(_ref3) {
   var _btTabIndicator = null;
 
   if (_isIndicatorTab(config, isWithoutIndicator)) {
+    var _tabIndCaption = "Indicator";
+
+    if (_isColumnCategoryConfig(config.xAxis)) {
+      _tabIndCaption = "Math";
+
+      _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuInd["default"], {
+        isShow: isShowInd,
+        style: S.M_IND,
+        config: config,
+        getChart: getChart,
+        onClose: toggleInd
+      }, "menu_ind"));
+    } else {
+      _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuIndicator["default"], {
+        isShow: isShowInd,
+        style: S.M_IND,
+        config: config,
+        getChart: getChart,
+        onAddMfi: onAddMfi,
+        onRemoveMfi: onRemoveMfi,
+        onClose: toggleInd
+      }, "menu_ind"));
+    }
+
     _btTabIndicator = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {
       style: S.BT_IND,
-      caption: "Indicator",
+      caption: _tabIndCaption,
       isShow: isShowInd,
       isMenu: true,
       onClick: toggleInd
     });
-
-    _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuIndicator["default"], {
-      isShow: isShowInd,
-      style: S.M_IND,
-      config: config,
-      getChart: getChart,
-      onAddMfi: onAddMfi,
-      onRemoveMfi: onRemoveMfi,
-      onClose: toggleInd
-    }, "menu_ind"));
   }
 
   var _btLegend = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab["default"], {

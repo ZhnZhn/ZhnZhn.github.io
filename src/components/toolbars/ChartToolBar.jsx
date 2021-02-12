@@ -5,6 +5,7 @@ import useToggle from '../hooks/useToggle'
 
 import ButtonTab from '../zhn/ButtonTab'
 import ModalMenuIndicator from './ModalMenuIndicator'
+import ModalMenuInd2 from './ModalMenuInd2'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
@@ -77,7 +78,7 @@ const _isColumnCategoryConfig = (
 const _isIndicatorTab = ({ series, xAxis }, isWithoutIndicator) => !isWithoutIndicator
   && _isArr(series) && series[0]
   && ( LINE_TYPES.indexOf(series[0].type) !== -1
-       || !_isColumnCategoryConfig(xAxis)
+       || _isColumnCategoryConfig(xAxis)
      );
 
 const _crModalMenuStyle = (ref, left) => {
@@ -135,22 +136,35 @@ const ChartToolbar = ({
 
   let _btTabIndicator = null;
   if (_isIndicatorTab(config, isWithoutIndicator)) {
+    let _tabIndCaption = "Indicator";
+    if (_isColumnCategoryConfig(config.xAxis)) {
+      _tabIndCaption = "Math"
+      _modalMenuArr.push(<ModalMenuInd2
+        key="menu_ind"
+        isShow={isShowInd}
+        style={S.M_IND}
+        config={config}
+        getChart={getChart}
+        onClose={toggleInd}
+      />)
+    } else {
+     _modalMenuArr.push(<ModalMenuIndicator
+        key="menu_ind"
+        isShow={isShowInd}
+        style={S.M_IND}
+        config={config}
+        getChart={getChart}
+        onAddMfi={onAddMfi}
+        onRemoveMfi={onRemoveMfi}
+        onClose={toggleInd}
+     />)
+    }
     _btTabIndicator = (<ButtonTab
        style= {S.BT_IND}
-       caption="Indicator"
+       caption={_tabIndCaption}
        isShow={isShowInd}
        isMenu={true}
        onClick={toggleInd}
-    />)
-    _modalMenuArr.push(<ModalMenuIndicator
-       key="menu_ind"
-       isShow={isShowInd}
-       style={S.M_IND}
-       config={config}
-       getChart={getChart}
-       onAddMfi={onAddMfi}
-       onRemoveMfi={onRemoveMfi}
-       onClose={toggleInd}
     />)
   }
 
