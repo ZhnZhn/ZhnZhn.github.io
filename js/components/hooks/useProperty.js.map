@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useProperty.js"
+ ],
+ "file": "../../../src/components/hooks/useProperty.js",
+ "names": [
+  "useProperty",
+  "initialValue",
+  "ref",
+  "setValue",
+  "v",
+  "current",
+  "_"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,IAAMA,WAAW,GAAG,SAAdA,WAAc,CAACC,YAAD,EAAkB;AACpC,MAAMC,GAAG,GAAG,mBAAOD,YAAP,CAAZ;AAAA,MACEE,QAAQ,GAAG,wBAAY,UAAAC,CAAC,EAAI;AAAEF,IAAAA,GAAG,CAACG,OAAJ,GAAcD,CAAd;AAAiB,GAApC,EAAsC,EAAtC,CADb;AAEA,SAAO,CACLD,QADK,EAEL,UAAAG,CAAC;AAAA,WAAIJ,GAAG,CAACG,OAAR;AAAA,GAFI,CAAP;AAID,CAPD;;eASeL,W"
+}
