@@ -51,15 +51,29 @@ const S = {
   },
 }
 
+const _useRowType1 = (mathFn, getChart) => {
+  const [is, setIs] = useState(false)
+  , [setColor, getColor] = useProperty(DF_COLOR)
+  , _onPlus = () => {
+     setIs(mathFn(getChart(), getColor()))
+  }
+  , compAfter = is
+     ? null
+     : <A.SvgPlus style={S.INLINE} onClick={_onPlus} />;
+
+  return [compAfter, setColor];
+};
+
+
 const RowType1 = ({
   caption,
-  is,
-  onPlus,
-  onColor
+  mathFn,
+  getChart
 }) => {
-  const _compAfter = is
-    ? null
-    : <A.SvgPlus style={S.INLINE} onClick={onPlus} />
+  const [
+    compAfter, onColor
+  ] = _useRowType1(mathFn, getChart);
+
   return (
     <A.OpenClose
       caption={caption}
@@ -67,7 +81,7 @@ const RowType1 = ({
       ocStyle={S.OC}
       captionStyle={S.CAPTION}
       openColor={OC_COLOR}
-      CompAfter={_compAfter}
+      CompAfter={compAfter}
     >
       <D.RowInputColor
         styleRoot={S.COLOR}
@@ -84,21 +98,6 @@ const ModalMenuInd2 = ({
   style, isShow, onClose,
   getChart
 }) => {
-  const [isRate, setIsRate] = useState(false)
-  , [setRateColor, getRateColor] = useProperty(DF_COLOR)
-  , [isDiff, setIsDiff] = useState(false)
-  , [setDiffColor, getDiffColor] = useProperty(DF_COLOR)
-  , _hRate = () => {
-     const chart = getChart()
-     , hasAdded = addCategoryRateTo(chart, getRateColor())
-     setIsRate(hasAdded)
-  }
-  , _hDiff = () => {
-     const chart = getChart()
-     , hasAdded = addCategoryDiffTo(chart, getDiffColor())
-     setIsDiff(hasAdded)
-  };
-
   return (
     <ModalPopup
       style={{...STYLE.ROOT, ...style}}
@@ -108,15 +107,13 @@ const ModalMenuInd2 = ({
       <div style={S.PANE}>
         <RowType1
            caption="Rate (S1/S2)"
-           is={isRate}
-           onPlus={_hRate}
-           onColor={setRateColor}
+           mathFn={addCategoryRateTo}
+           getChart={getChart}
         />
         <RowType1
            caption="Diff (S1-S2)"
-           is={isDiff}
-           onPlus={_hDiff}
-           onColor={setDiffColor}
+           mathFn={addCategoryDiffTo}
+           getChart={getChart}
         />
       </div>
     </ModalPopup>
