@@ -42,8 +42,7 @@ var RowSma = function RowSma(_ref) {
   var config = _ref.config,
       getChart = _ref.getChart;
 
-  var _refInitialSma = (0, _react.useRef)(null),
-      _initialSma = (0, _useRefInit["default"])(_refInitialSma, function () {
+  var _initialSma = (0, _useRefInit["default"])(function () {
     return _findInitSma(config);
   }),
       _refPeriod = (0, _react.useRef)(),

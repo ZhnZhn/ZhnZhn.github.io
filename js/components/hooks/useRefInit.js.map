@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/hooks/useRefInit.js"],"names":["useRefInit","ref","crValue","current"],"mappings":";;;;;AACA,IAAMA,UAAU,GAAG,SAAbA,UAAa,CAACC,GAAD,EAAMC,OAAN;AAAA,SAAkBD,GAAG,CAACE,OAAJ,GACjCF,GAAG,CAACE,OAD6B,GAEhCF,GAAG,CAACE,OAAJ,GAAcD,OAAO,EAFP;AAAA,CAAnB;;eAIeF,U","sourcesContent":["\r\nconst useRefInit = (ref, crValue) => ref.current\r\n  ? ref.current\r\n  : (ref.current = crValue());\r\n\r\nexport default useRefInit\r\n"],"file":"useRefInit.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useRefInit.js"
+ ],
+ "file": "../../../src/components/hooks/useRefInit.js",
+ "names": [
+  "useRefInit",
+  "crValue",
+  "ref",
+  "current"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,IAAMA,UAAU,GAAG,SAAbA,UAAa,CAACC,OAAD,EAAa;AAC9B,MAAMC,GAAG,GAAG,mBAAO,IAAP,CAAZ;;AACA,MAAIA,GAAG,CAACC,OAAJ,KAAgB,IAApB,EAA0B;AACxBD,IAAAA,GAAG,CAACC,OAAJ,GAAcF,OAAO,EAArB;AACD;;AACD,SAAOC,GAAG,CAACC,OAAX;AACD,CAND;;eAQeH,U"
+}

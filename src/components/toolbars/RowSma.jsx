@@ -33,8 +33,7 @@ const RowSma = ({
   config,
   getChart
 }) => {
-  const _refInitialSma = useRef(null)
-  , _initialSma = useRefInit(_refInitialSma, () => _findInitSma(config))
+  const _initialSma = useRefInit(() => _findInitSma(config))
   , _refPeriod = useRef()
   , [ smaConfs, setSmaConfs ] = useState([])
   , _onAddSma = () => {

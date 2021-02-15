@@ -3,8 +3,16 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var useRefInit = function useRefInit(ref, crValue) {
-  return ref.current ? ref.current : ref.current = crValue();
+var _react = require("react");
+
+var useRefInit = function useRefInit(crValue) {
+  var ref = (0, _react.useRef)(null);
+
+  if (ref.current === null) {
+    ref.current = crValue();
+  }
+
+  return ref.current;
 };
 
 var _default = useRefInit;
