@@ -1,10 +1,10 @@
-import { Component } from 'react'
+import { memo, useRef, useCallback, useMemo } from 'react'
+import useProperty from '../hooks/useProperty'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import FlatButton from '../zhn-m/FlatButton'
 
 import SeriesPane from './SeriesPane'
-
 
 const S = {
   MODAL: {
@@ -20,71 +20,67 @@ const S = {
   }
 };
 
-class PasteToModalDialog extends Component {
-  static defaultProps = {
-    data: {}
-  }
+const DF_DATA = {};
 
-  constructor(props){
-    super(props)
+const _areEqual = (prevProps, {isShow}) =>
+   prevProps.isShow === isShow;
 
-    this._commandButtons = [
-      <FlatButton
-        key="paste"
-        caption="Paste & Close"
-        isPrimary={true}
-        onClick={this._hPasteTo}
-      />
-    ]
-  }
+const _usePasteTo = (data, onClose) => {
+  const [setToChart, getToChart] = useProperty();
+  setToChart(data.toChart)
 
-  shouldComponentUpdate(nextProps, nextState){
-    if ( nextProps !== this.props
-      && nextProps.isShow === this.props.isShow
-    ) {
-      return false;
-    }
-    return true;
-  }
-
-  _hPasteTo = () => {
-    const { data, onClose } = this.props
-    , { toChart } = data;
-    if (toChart) {
-      this._compSeries
+  const _refCompSeries = useRef()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hPasteTo = useCallback(() => {
+    const _toChart = getToChart();
+    if (_toChart) {
+      _refCompSeries.current
         .getValues()
         .forEach(conf => {
           //color, data, name, userMin, userMax, yIndex
-          toChart.zhAddSeriaToYAxis(conf)
+          _toChart.zhAddSeriaToYAxis(conf)
         })
     }
     onClose()
-  }
+  }, [])
+  //getToChart, onClose
+  /*eslint-enable react-hooks/exhaustive-deps */
+  , _commandButtons = useMemo(() => (<FlatButton
+      key="paste"
+      caption="Paste & Close"
+      isPrimary={true}
+      onClick={_hPasteTo}
+    />), [_hPasteTo]);
 
-  _refCompSeries = comp => this._compSeries = comp
+  return [getToChart(), _refCompSeries, _commandButtons];
+};
 
-  render(){
-    const {
-        isShow, data, onClose
-      } = this.props
-    , { fromChart, toChart } = data;
-    return (
-      <ModalDialog
-        style={S.MODAL}
-        caption="Paste Series To"
-        isShow={isShow}
-        commandButtons={this._commandButtons}
-        onClose={onClose}
-      >
-        <SeriesPane
-           ref={this._refCompSeries}
-           rootStyle={S.SCROLL_PANE}
-           fromChart={fromChart}
-           toChart={toChart}
-        />
-      </ModalDialog>
-    );
-  }
-}
+const PasteToModalDialog = memo(({
+  isShow,
+  data=DF_DATA,
+  onClose
+}) => {
+  const [
+    toChart, refCompSeries, commandButtons
+  ] = _usePasteTo(data, onClose)
+  , { fromChart } = data;
+
+  return (
+    <ModalDialog
+      style={S.MODAL}
+      caption="Paste Series To"
+      isShow={isShow}
+      commandButtons={commandButtons}
+      onClose={onClose}
+    >
+      <SeriesPane
+         ref={refCompSeries}
+         style={S.SCROLL_PANE}
+         fromChart={fromChart}
+         toChart={toChart}
+      />
+    </ModalDialog>
+  );
+}, _areEqual)
 
 export default PasteToModalDialog

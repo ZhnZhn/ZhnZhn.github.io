@@ -5,11 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
+
+var _useProperty2 = _interopRequireDefault(require("../hooks/useProperty"));
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -30,81 +30,75 @@ var S = {
     paddingRight: 10
   }
 };
+var DF_DATA = {};
 
-var PasteToModalDialog = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(PasteToModalDialog, _Component);
+var _areEqual = function _areEqual(prevProps, _ref) {
+  var isShow = _ref.isShow;
+  return prevProps.isShow === isShow;
+};
 
-  function PasteToModalDialog(props) {
-    var _this;
+var _usePasteTo = function _usePasteTo(data, onClose) {
+  var _useProperty = (0, _useProperty2["default"])(),
+      setToChart = _useProperty[0],
+      getToChart = _useProperty[1];
 
-    _this = _Component.call(this, props) || this;
+  setToChart(data.toChart);
 
-    _this._hPasteTo = function () {
-      var _this$props = _this.props,
-          data = _this$props.data,
-          onClose = _this$props.onClose,
-          toChart = data.toChart;
+  var _refCompSeries = (0, _react.useRef)()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+      _hPasteTo = (0, _react.useCallback)(function () {
+    var _toChart = getToChart();
 
-      if (toChart) {
-        _this._compSeries.getValues().forEach(function (conf) {
-          //color, data, name, userMin, userMax, yIndex
-          toChart.zhAddSeriaToYAxis(conf);
-        });
-      }
-
-      onClose();
-    };
-
-    _this._refCompSeries = function (comp) {
-      return _this._compSeries = comp;
-    };
-
-    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
-      caption: "Paste & Close",
-      isPrimary: true,
-      onClick: _this._hPasteTo
-    }, "paste")];
-    return _this;
-  }
-
-  var _proto = PasteToModalDialog.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
+    if (_toChart) {
+      _refCompSeries.current.getValues().forEach(function (conf) {
+        //color, data, name, userMin, userMax, yIndex
+        _toChart.zhAddSeriaToYAxis(conf);
+      });
     }
 
-    return true;
-  };
+    onClose();
+  }, []) //getToChart, onClose
 
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        isShow = _this$props2.isShow,
-        data = _this$props2.data,
-        onClose = _this$props2.onClose,
-        fromChart = data.fromChart,
-        toChart = data.toChart;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog["default"], {
-      style: S.MODAL,
-      caption: "Paste Series To",
-      isShow: isShow,
-      commandButtons: this._commandButtons,
-      onClose: onClose,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriesPane["default"], {
-        ref: this._refCompSeries,
-        rootStyle: S.SCROLL_PANE,
-        fromChart: fromChart,
-        toChart: toChart
-      })
-    });
-  };
+  /*eslint-enable react-hooks/exhaustive-deps */
+  ,
+      _commandButtons = (0, _react.useMemo)(function () {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
+      caption: "Paste & Close",
+      isPrimary: true,
+      onClick: _hPasteTo
+    }, "paste");
+  }, [_hPasteTo]);
 
-  return PasteToModalDialog;
-}(_react.Component);
-
-PasteToModalDialog.defaultProps = {
-  data: {}
+  return [getToChart(), _refCompSeries, _commandButtons];
 };
+
+var PasteToModalDialog = /*#__PURE__*/(0, _react.memo)(function (_ref2) {
+  var isShow = _ref2.isShow,
+      _ref2$data = _ref2.data,
+      data = _ref2$data === void 0 ? DF_DATA : _ref2$data,
+      onClose = _ref2.onClose;
+
+  var _usePasteTo2 = _usePasteTo(data, onClose),
+      toChart = _usePasteTo2[0],
+      refCompSeries = _usePasteTo2[1],
+      commandButtons = _usePasteTo2[2],
+      fromChart = data.fromChart;
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog["default"], {
+    style: S.MODAL,
+    caption: "Paste Series To",
+    isShow: isShow,
+    commandButtons: commandButtons,
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriesPane["default"], {
+      ref: refCompSeries,
+      style: S.SCROLL_PANE,
+      fromChart: fromChart,
+      toChart: toChart
+    })
+  });
+}, _areEqual);
 var _default = PasteToModalDialog;
 exports["default"] = _default;
 //# sourceMappingURL=PasteToModalDialog.js.map

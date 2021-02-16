@@ -104,7 +104,7 @@ var SeriesPane = /*#__PURE__*/function (_Component) {
 
   _proto.render = function render() {
     var _this$props = this.props,
-        rootStyle = _this$props.rootStyle,
+        style = _this$props.style,
         toChart = _this$props.toChart,
         _this$props$fromChart = _this$props.fromChart,
         fromChart = _this$props$fromChart === void 0 ? {} : _this$props$fromChart,
@@ -119,7 +119,7 @@ var SeriesPane = /*#__PURE__*/function (_Component) {
         chartId = _zhConfig$id === void 0 ? 'id' : _zhConfig$id;
 
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ScrollPane["default"], {
-      style: rootStyle,
+      style: style,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S.ROOT_DIV,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

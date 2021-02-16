@@ -81,14 +81,14 @@ class SeriesPane extends Component {
   }
 
   render(){
-    const { rootStyle, toChart, fromChart={} } = this.props
+    const { style, toChart, fromChart={} } = this.props
         , _yAxisOption = _crYAxisOption(toChart)
         , { userOptions={}, series=[] } = fromChart
         , { zhConfig={} } = userOptions
         , { id:chartId='id' } = zhConfig;
 
     return (
-      <ScrollPane style={rootStyle}>
+      <ScrollPane style={style}>
         <div style={S.ROOT_DIV}>
           <div style={S.TITLE}>
             <span>From Chart:&nbsp;</span>
