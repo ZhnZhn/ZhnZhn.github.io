@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/math/pby10.js"
+ ],
+ "file": "../../src/math/pby10.js",
+ "names": [
+  "pby10",
+  "data",
+  "by",
+  "multipleBy",
+  "pow",
+  "map",
+  "point",
+  "y",
+  "parseFloat",
+  "times",
+  "toString"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,KAAK,GAAG,SAARA,KAAQ,CAACC,IAAD,EAAOC,EAAP,EAAc;AAC1B,MAAMC,UAAU,GAAG,qBAAI,EAAJ,EAAQC,GAAR,CAAYF,EAAZ,CAAnB;AACA,SAAO,CAACD,IAAI,CAACI,GAAL,CAAS,UAAAC,KAAK,EAAI;AACxBA,IAAAA,KAAK,CAACC,CAAN,GAAUC,UAAU,CAAC,qBAAIF,KAAK,CAACC,CAAV,EAAaE,KAAb,CAAmBN,UAAnB,EAA+BO,QAA/B,EAAD,CAApB;AACA,WAAOJ,KAAP;AACD,GAHO,CAAD,EAGHE,UAAU,CAACL,UAAU,CAACO,QAAX,EAAD,CAHP,CAAP;AAID,CAND;;eAQeV,K"
+}

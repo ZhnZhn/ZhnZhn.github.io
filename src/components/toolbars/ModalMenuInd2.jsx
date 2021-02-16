@@ -1,120 +1,82 @@
-import { useState } from 'react'
-import useProperty from '../hooks/useProperty'
+import { useRef } from 'react'
+import useRefInit from '../hooks/useRefInit'
 import IndicatorBuilder from '../../charts/IndicatorBuilder'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import STYLE from './ModalMenu.Style'
-import A from '../zhn/A'
-import D from '../dialogs/DialogCell';
+
+import RowTypeA from './RowTypeA'
+import RowTypeB from './RowTypeB'
 
 const {
   addCategoryRateTo,
-  addCategoryDiffTo
+  addCategoryDiffTo,
+  powerBy10
 } = IndicatorBuilder;
 
-const DF_COLOR = '#2b908f';
-const OC_COLOR = 'black';
+
+const DF_POWER_BY_10 = 0;
 
 const S = {
   PANE: {
-    width: 160,
+    width: 180,
     margin: 8
-  },
-
-  COLOR: {
-    display: 'inline-block',
-    paddingLeft: 10
-  },
-  //OC
-  ROOT_OC: {
-    lineHeight: 'unset',
-    paddingBottom: 4,
-    marginLeft: -8
-  },
-  OC: {
-    display: 'inline-block',
-    height: 32,
-    paddingTop: 4,
-    width: 'auto',
-    paddingRight: 8
-  },
-  CAPTION: {
-    color: OC_COLOR
-  },
-
-  //COLOR
-  NONE: {
-    display: 'none'
-  },
-  COLOR_INPUT: {
-    marginBottom: 2
-  },
-}
-
-const _useRowType1 = (mathFn, getChart) => {
-  const [is, setIs] = useState(false)
-  , [setColor, getColor] = useProperty(DF_COLOR)
-  , _onPlus = () => {
-     setIs(mathFn(getChart(), getColor()))
   }
-  , compAfter = is
-     ? null
-     : <A.SvgPlus style={S.INLINE} onClick={_onPlus} />;
-
-  return [compAfter, setColor];
 };
 
+const _isNumber = n => typeof n === 'number'
+ && n-n === 0;
 
-const RowType1 = ({
-  caption,
-  mathFn,
-  getChart
-}) => {
-  const [
-    compAfter, onColor
-  ] = _useRowType1(mathFn, getChart);
+const _isPowerBy = config => !config
+  ?.plotOptions?.bar?.dataLabels?.enabled;
 
-  return (
-    <A.OpenClose
-      caption={caption}
-      style={S.ROOT_OC}
-      ocStyle={S.OC}
-      captionStyle={S.CAPTION}
-      openColor={OC_COLOR}
-      CompAfter={compAfter}
-    >
-      <D.RowInputColor
-        styleRoot={S.COLOR}
-        styleCaption={S.NONE}
-        styleInput={S.COLOR_INPUT}
-        initValue={DF_COLOR}
-        onEnter={onColor}
-      />
-    </A.OpenClose>
-  );
-}
+const _crPaneStyle = hasPowerBy10 => hasPowerBy10
+  ? {...S.PANE, width: 210}
+  : S.PANE;
 
 const ModalMenuInd2 = ({
   style, isShow, onClose,
-  getChart
+  getChart, config
 }) => {
+  const _hasPowerBy10 = useRefInit(() => _isPowerBy(config))
+  , _refPowerBy10 = useRef(DF_POWER_BY_10)
+  , _onPowerBy10 = () => {
+    const _by = parseFloat(_refPowerBy10.current.getValue());
+    if (_isNumber(_by)) {
+       powerBy10(getChart(), _by)
+       return true;
+    }
+  };
+
+  const _paneStyle = _crPaneStyle(_hasPowerBy10);
+
   return (
     <ModalPopup
       style={{...STYLE.ROOT, ...style}}
       isShow={isShow}
       onClose={onClose}
     >
-      <div style={S.PANE}>
-        <RowType1
+      <div style={_paneStyle}>
+        <RowTypeA
            caption="Rate (S1/S2)"
            mathFn={addCategoryRateTo}
            getChart={getChart}
         />
-        <RowType1
+        <RowTypeA
            caption="Diff (S1-S2)"
            mathFn={addCategoryDiffTo}
            getChart={getChart}
         />
+        {_hasPowerBy10 && <RowTypeB
+           forwardRef={_refPowerBy10}
+           caption="S1*Power of 10"
+           initValue={DF_POWER_BY_10}
+           min={-9}
+           max={9}
+           maxLength={2}
+           onAdd={_onPowerBy10}
+        />
+       }
       </div>
     </ModalPopup>
   );

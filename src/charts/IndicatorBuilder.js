@@ -3,7 +3,7 @@ import tsIndicators from '../math/tsIndicators'
 import ChartConfig from './ChartConfig';
 
 const {
-  categoryRate, categoryDiff,
+  categoryRate, categoryDiff, pby10,
   sma, mfi, momAth
 } = tsIndicators;
 const {
@@ -66,6 +66,16 @@ const IndicatorBuilder = {
 
   addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
   addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2', true),
+  powerBy10: (chart, power) => {
+    const seria = chart.series[0]
+    , name = seria.getName()
+    , [dataP, by] = pby10(seria.data, power);
+
+    seria.update({
+      data: dataP,
+      name: `${name}*${by}`
+    }, true)
+  },
 
   addSmaTo: (chart, option) => {
     const { id, period } = option

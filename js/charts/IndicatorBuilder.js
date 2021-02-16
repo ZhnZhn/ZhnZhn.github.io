@@ -11,6 +11,7 @@ var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
 var categoryRate = _tsIndicators["default"].categoryRate,
     categoryDiff = _tsIndicators["default"].categoryDiff,
+    pby10 = _tsIndicators["default"].pby10,
     sma = _tsIndicators["default"].sma,
     mfi = _tsIndicators["default"].mfi,
     momAth = _tsIndicators["default"].momAth;
@@ -95,6 +96,18 @@ var IndicatorBuilder = {
   },
   addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
   addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2', true),
+  powerBy10: function powerBy10(chart, power) {
+    var seria = chart.series[0],
+        name = seria.getName(),
+        _pby = pby10(seria.data, power),
+        dataP = _pby[0],
+        by = _pby[1];
+
+    seria.update({
+      data: dataP,
+      name: name + "*" + by
+    }, true);
+  },
   addSmaTo: function addSmaTo(chart, option) {
     var id = option.id,
         period = option.period,

@@ -11,7 +11,7 @@ var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
-var _useProperty2 = _interopRequireDefault(require("../hooks/useProperty"));
+var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 
 var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
 
@@ -19,111 +19,81 @@ var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
 var _ModalMenu = _interopRequireDefault(require("./ModalMenu.Style"));
 
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _RowTypeA = _interopRequireDefault(require("./RowTypeA"));
 
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _RowTypeB = _interopRequireDefault(require("./RowTypeB"));
 
 var addCategoryRateTo = _IndicatorBuilder["default"].addCategoryRateTo,
-    addCategoryDiffTo = _IndicatorBuilder["default"].addCategoryDiffTo;
-var DF_COLOR = '#2b908f';
-var OC_COLOR = 'black';
+    addCategoryDiffTo = _IndicatorBuilder["default"].addCategoryDiffTo,
+    powerBy10 = _IndicatorBuilder["default"].powerBy10;
+var DF_POWER_BY_10 = 0;
 var S = {
   PANE: {
-    width: 160,
+    width: 180,
     margin: 8
-  },
-  COLOR: {
-    display: 'inline-block',
-    paddingLeft: 10
-  },
-  //OC
-  ROOT_OC: {
-    lineHeight: 'unset',
-    paddingBottom: 4,
-    marginLeft: -8
-  },
-  OC: {
-    display: 'inline-block',
-    height: 32,
-    paddingTop: 4,
-    width: 'auto',
-    paddingRight: 8
-  },
-  CAPTION: {
-    color: OC_COLOR
-  },
-  //COLOR
-  NONE: {
-    display: 'none'
-  },
-  COLOR_INPUT: {
-    marginBottom: 2
   }
 };
 
-var _useRowType1 = function _useRowType1(mathFn, getChart) {
-  var _useState = (0, _react.useState)(false),
-      is = _useState[0],
-      setIs = _useState[1],
-      _useProperty = (0, _useProperty2["default"])(DF_COLOR),
-      setColor = _useProperty[0],
-      getColor = _useProperty[1],
-      _onPlus = function _onPlus() {
-    setIs(mathFn(getChart(), getColor()));
-  },
-      compAfter = is ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].SvgPlus, {
-    style: S.INLINE,
-    onClick: _onPlus
-  });
-
-  return [compAfter, setColor];
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
 };
 
-var RowType1 = function RowType1(_ref) {
-  var caption = _ref.caption,
-      mathFn = _ref.mathFn,
-      getChart = _ref.getChart;
+var _isPowerBy = function _isPowerBy(config) {
+  var _config$plotOptions, _config$plotOptions$b, _config$plotOptions$b2;
 
-  var _useRowType = _useRowType1(mathFn, getChart),
-      compAfter = _useRowType[0],
-      onColor = _useRowType[1];
-
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_A["default"].OpenClose, {
-    caption: caption,
-    style: S.ROOT_OC,
-    ocStyle: S.OC,
-    captionStyle: S.CAPTION,
-    openColor: OC_COLOR,
-    CompAfter: compAfter,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputColor, {
-      styleRoot: S.COLOR,
-      styleCaption: S.NONE,
-      styleInput: S.COLOR_INPUT,
-      initValue: DF_COLOR,
-      onEnter: onColor
-    })
-  });
+  return !(config == null ? void 0 : (_config$plotOptions = config.plotOptions) == null ? void 0 : (_config$plotOptions$b = _config$plotOptions.bar) == null ? void 0 : (_config$plotOptions$b2 = _config$plotOptions$b.dataLabels) == null ? void 0 : _config$plotOptions$b2.enabled);
 };
 
-var ModalMenuInd2 = function ModalMenuInd2(_ref2) {
-  var style = _ref2.style,
-      isShow = _ref2.isShow,
-      onClose = _ref2.onClose,
-      getChart = _ref2.getChart;
+var _crPaneStyle = function _crPaneStyle(hasPowerBy10) {
+  return hasPowerBy10 ? (0, _extends2["default"])({}, S.PANE, {
+    width: 210
+  }) : S.PANE;
+};
+
+var ModalMenuInd2 = function ModalMenuInd2(_ref) {
+  var style = _ref.style,
+      isShow = _ref.isShow,
+      onClose = _ref.onClose,
+      getChart = _ref.getChart,
+      config = _ref.config;
+
+  var _hasPowerBy10 = (0, _useRefInit["default"])(function () {
+    return _isPowerBy(config);
+  }),
+      _refPowerBy10 = (0, _react.useRef)(DF_POWER_BY_10),
+      _onPowerBy10 = function _onPowerBy10() {
+    var _by = parseFloat(_refPowerBy10.current.getValue());
+
+    if (_isNumber(_by)) {
+      powerBy10(getChart(), _by);
+      return true;
+    }
+  };
+
+  var _paneStyle = _crPaneStyle(_hasPowerBy10);
+
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup["default"], {
     style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, style),
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: S.PANE,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(RowType1, {
+      style: _paneStyle,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA["default"], {
         caption: "Rate (S1/S2)",
         mathFn: addCategoryRateTo,
         getChart: getChart
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(RowType1, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA["default"], {
         caption: "Diff (S1-S2)",
         mathFn: addCategoryDiffTo,
         getChart: getChart
+      }), _hasPowerBy10 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeB["default"], {
+        forwardRef: _refPowerBy10,
+        caption: "S1*Power of 10",
+        initValue: DF_POWER_BY_10,
+        min: -9,
+        max: 9,
+        maxLength: 2,
+        onAdd: _onPowerBy10
       })]
     })
   });
