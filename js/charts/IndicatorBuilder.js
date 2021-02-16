@@ -118,7 +118,8 @@ var IndicatorBuilder = {
       return _addDataAsSeriaToChart(chart, {
         zhValueText: id,
         lineWidth: 2,
-        data: dataSma
+        data: dataSma,
+        name: "SMA(" + period + ")"
       });
     } else {
       console.log('It seems, there are not enough data for SMA(' + period + ')');
