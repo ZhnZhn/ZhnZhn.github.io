@@ -36,11 +36,10 @@ const _crAxis = (id, color) => ({
     showEmpty: false
 });
 
-const _crSeria = ({ id, color, data }, options) => ({
+const _crSeria = ({id, color, data, name}, options) => ({
   type: 'spline',
   yAxis: id,
-  color: color,
-  data: data,
+  color, data, name,
   ...options
 });
 
@@ -69,16 +68,16 @@ const _crData = ({ data, userMin, userMax }) => {
 
 const zhAddSeriaToYAxis = function(options={}, seriaOptions={}) {
   try {
-    const { color, yIndex=-1 } = options
+    const {color, yIndex=-1, name} = options
     , { id, isNewYAxis } = _checkYAxis(yIndex, this);
     if (isNewYAxis) {
       this.addAxis(_crAxis(id, color), false, true)
     }
-    const {
+    const [
       data, seriaOption
-    } = trIfCategoryCase(this, _crData(options), seriaOptions)
+    ] = trIfCategoryCase(this, _crData(options), seriaOptions)
     , _seria = this.addSeries(_crSeria({
-      id, color, data }, seriaOption), false
+      id, color, data, name}, seriaOption), false
     );
     this.redraw();
     return _seria;

@@ -47,12 +47,14 @@ var _crAxis = function _crAxis(id, color) {
 var _crSeria = function _crSeria(_ref, options) {
   var id = _ref.id,
       color = _ref.color,
-      data = _ref.data;
+      data = _ref.data,
+      name = _ref.name;
   return (0, _extends2["default"])({
     type: 'spline',
     yAxis: id,
     color: color,
-    data: data
+    data: data,
+    name: name
   }, options);
 };
 
@@ -98,6 +100,7 @@ var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
         color = _options.color,
         _options$yIndex = _options.yIndex,
         yIndex = _options$yIndex === void 0 ? -1 : _options$yIndex,
+        name = _options.name,
         _checkYAxis2 = _checkYAxis(yIndex, this),
         id = _checkYAxis2.id,
         isNewYAxis = _checkYAxis2.isNewYAxis;
@@ -107,12 +110,13 @@ var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
     }
 
     var _trIfCategoryCase = (0, _trIfCategoryCase2["default"])(this, _crData(options), seriaOptions),
-        data = _trIfCategoryCase.data,
-        seriaOption = _trIfCategoryCase.seriaOption,
+        data = _trIfCategoryCase[0],
+        seriaOption = _trIfCategoryCase[1],
         _seria = this.addSeries(_crSeria({
       id: id,
       color: color,
-      data: data
+      data: data,
+      name: name
     }, seriaOption), false);
 
     this.redraw();

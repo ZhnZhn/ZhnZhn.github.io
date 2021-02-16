@@ -47,7 +47,7 @@ var PasteToModalDialog = /*#__PURE__*/function (_Component) {
 
       if (toChart) {
         _this._compSeries.getValues().forEach(function (conf) {
-          //color, data, userMin, userMax, yIndex
+          //color, data, name, userMin, userMax, yIndex
           toChart.zhAddSeriaToYAxis(conf);
         });
       }

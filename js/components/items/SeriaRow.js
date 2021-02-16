@@ -157,11 +157,15 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
   };
 
   _proto.getValue = function getValue() {
+    var userOptions = this.props.seria.userOptions,
+        data = userOptions.data,
+        name = userOptions.name;
     return {
       isChecked: this.isChecked,
       color: this._getColor(),
       yIndex: this.toYAxis ? this.toYAxis.value : void 0,
-      data: this.props.seria.userOptions.data
+      data: data,
+      name: name
     };
   };
 

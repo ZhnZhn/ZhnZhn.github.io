@@ -80,19 +80,14 @@ var _trToCategory = function _trToCategory(chartInst, data) {
 };
 
 var trIfCategoryCase = function trIfCategoryCase(chartInst, data, seriaOption) {
-  return _isCategoryCase(chartInst, data) ? {
-    data: _trToCategory(chartInst, data),
-    seriaOption: _assign(seriaOption, {
-      point: {
-        events: {
-          mouseOver: null
-        }
+  return _isCategoryCase(chartInst, data) ? [_trToCategory(chartInst, data), _assign(seriaOption, {
+    type: void 0,
+    point: {
+      events: {
+        mouseOver: null
       }
-    })
-  } : {
-    data: data,
-    seriaOption: seriaOption
-  };
+    }
+  })] : [data, seriaOption];
 };
 
 var _default = trIfCategoryCase;

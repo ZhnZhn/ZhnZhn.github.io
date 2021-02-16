@@ -104,7 +104,7 @@ class SeriaRow extends Component {
   render(){
     const { isShowPallete } = this.state
         , { seria={}, yAxisOptions } = this.props
-        , { name='' } = seria        
+        , { name='' } = seria
         , _color = this._getColor();
 
     return (
@@ -147,11 +147,13 @@ class SeriaRow extends Component {
   }
 
   getValue() {
+    const { userOptions } = this.props.seria
+    , { data, name } = userOptions;
     return {
       isChecked: this.isChecked,
       color: this._getColor(),
       yIndex: this.toYAxis ? this.toYAxis.value : void 0,
-      data: this.props.seria.userOptions.data
+      data, name
     };
   }
 }

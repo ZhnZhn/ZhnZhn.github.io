@@ -50,16 +50,17 @@ const _trToCategory = (chartInst, data) => {
 
 const trIfCategoryCase = (chartInst, data, seriaOption) =>
   _isCategoryCase(chartInst, data)
-  ? {
-      data: _trToCategory(chartInst, data),
-      seriaOption: _assign(seriaOption, {
+  ? [
+      _trToCategory(chartInst, data),
+      _assign(seriaOption, {
+        type: void 0,
         point: {
           events: {
             mouseOver: null
           }
         }
       })
-    }
-  : { data, seriaOption };
+    ]
+  : [data, seriaOption];
 
 export default trIfCategoryCase

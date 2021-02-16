@@ -54,7 +54,7 @@ class PasteToModalDialog extends Component {
       this._compSeries
         .getValues()
         .forEach(conf => {
-          //color, data, userMin, userMax, yIndex
+          //color, data, name, userMin, userMax, yIndex
           toChart.zhAddSeriaToYAxis(conf)
         })
     }
