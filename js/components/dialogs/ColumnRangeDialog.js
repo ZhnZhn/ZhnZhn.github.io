@@ -195,11 +195,11 @@ var ColumnRangeDialog = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S.ROW,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputColor, {
-          styleRoot: S.INLINE,
-          styleCaption: S.CAPTION_1,
+          style: S.INLINE,
+          captionStyle: S.CAPTION_1,
+          caption: "Color",
           initValue: c1,
-          onEnter: this._heColor,
-          maxLength: 7
+          onEnter: this._heColor
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputText, {
           ref: this._refW,
           styleRoot: S.INLINE,

@@ -39,9 +39,6 @@ var S = {
     width: 56,
     marginRight: 12
   },
-  COLOR_INPUT: {
-    marginBottom: 2
-  },
   CAPTION_SERIA_INPUT: {
     display: 'inline-block',
     width: 85,
@@ -75,9 +72,6 @@ var S = {
   },
   INLINE: {
     display: 'inline-block'
-  },
-  NONE: {
-    display: 'none'
   },
   fnSpan: function fnSpan(color) {
     return {
@@ -193,9 +187,7 @@ var RowType1 = function RowType1(_ref3) {
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S.PL_8,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputColor, {
-        styleRoot: S.INLINE,
-        styleCaption: S.NONE,
-        styleInput: S.COLOR_INPUT,
+        style: S.INLINE,
         initValue: DF_COLOR,
         onEnter: _onColor
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {

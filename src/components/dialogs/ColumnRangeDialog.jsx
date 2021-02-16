@@ -157,11 +157,11 @@ class ColumnRangeDialog extends Component {
         </div>
         <div style={S.ROW}>
           <D.RowInputColor
-            styleRoot={S.INLINE}
-            styleCaption={S.CAPTION_1}
+            style={S.INLINE}
+            captionStyle={S.CAPTION_1}
+            caption="Color"
             initValue={c1}
-            onEnter={this._heColor}
-            maxLength={7}
+            onEnter={this._heColor}            
           />
           <D.RowInputText
              ref={this._refW}

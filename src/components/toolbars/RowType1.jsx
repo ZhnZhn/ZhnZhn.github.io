@@ -28,9 +28,6 @@ const S = {
     width: 56,
     marginRight: 12
   },
-  COLOR_INPUT: {
-    marginBottom: 2
-  },
   CAPTION_SERIA_INPUT: {
     display: 'inline-block',
     width: 85,
@@ -64,9 +61,6 @@ const S = {
   },
   INLINE: {
     display: 'inline-block'
-  },
-  NONE: {
-    display: 'none'
   },
   fnSpan: color => ({
     color,
@@ -173,9 +167,7 @@ const RowType1 = ({
   >
     <div style={S.PL_8}>
       <D.RowInputColor
-        styleRoot={S.INLINE}
-        styleCaption={S.NONE}
-        styleInput={S.COLOR_INPUT}
+        style={S.INLINE}
         initValue={DF_COLOR}
         onEnter={_onColor}
       />

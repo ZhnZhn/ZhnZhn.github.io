@@ -21,6 +21,7 @@ var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette
 
 //import PropTypes from "prop-types";
 var CL_INPUT_COLOR = 'p-r va-b';
+var DF_COLOR = '#90ed7d';
 var S = {
   ROOT: {
     paddingTop: 6,
@@ -39,20 +40,24 @@ var S = {
   INPUT_TEXT: {
     width: 80,
     marginRight: 8,
+    marginBottom: 2,
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
 };
 
 var _onEnter = function _onEnter() {};
 
+var _crCaption = function _crCaption(caption) {
+  return caption && caption.indexOf(':') === -1 ? caption + ":" : caption;
+};
+
 var RowInputColor = function RowInputColor(_ref) {
-  var styleRoot = _ref.styleRoot,
-      styleCaption = _ref.styleCaption,
-      styleInput = _ref.styleInput,
-      _ref$caption = _ref.caption,
-      caption = _ref$caption === void 0 ? 'Color:' : _ref$caption,
+  var style = _ref.style,
+      captionStyle = _ref.captionStyle,
+      inputStyle = _ref.inputStyle,
+      caption = _ref.caption,
       _ref$initValue = _ref.initValue,
-      initValue = _ref$initValue === void 0 ? '#90ed7d' : _ref$initValue,
+      initValue = _ref$initValue === void 0 ? DF_COLOR : _ref$initValue,
       _ref$onEnter = _ref.onEnter,
       onEnter = _ref$onEnter === void 0 ? _onEnter : _ref$onEnter;
 
@@ -82,16 +87,16 @@ var RowInputColor = function RowInputColor(_ref) {
     return setValue(initValue);
   }, [initValue]);
 
-  var _caption = caption.indexOf(':') !== -1 ? caption : caption + ":";
+  var _caption = _crCaption(caption);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: (0, _extends2["default"])({}, S.ROOT, styleRoot),
+    style: (0, _extends2["default"])({}, S.ROOT, style),
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        style: (0, _extends2["default"])({}, S.CAPTION, styleCaption),
+      children: [_caption && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: (0, _extends2["default"])({}, S.CAPTION, captionStyle),
         children: _caption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
-        style: (0, _extends2["default"])({}, S.INPUT_TEXT, styleInput),
+        style: (0, _extends2["default"])({}, S.INPUT_TEXT, inputStyle),
         initValue: value,
         maxLength: 20,
         onEnter: _hEnter
@@ -112,9 +117,9 @@ var RowInputColor = function RowInputColor(_ref) {
 };
 /*
 RowInputColor.propTypes = {
-  styleRoot: PropTypes.object,
-  styleCaption: PropTypes.object,
-  styleInput: PropTypes.object,
+  style: PropTypes.object,
+  captionStyle: PropTypes.object,
+  inputStyle: PropTypes.object,
   caption: PropTypes.string,
   initValue: PropTypes.string,
   onEnter: PropTypes.func

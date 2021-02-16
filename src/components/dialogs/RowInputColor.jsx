@@ -6,7 +6,8 @@ import InputText from '../zhn/InputText'
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
 
-const CL_INPUT_COLOR = 'p-r va-b'
+const CL_INPUT_COLOR = 'p-r va-b';
+const DF_COLOR = '#90ed7d';
 
 const S = {
   ROOT: {
@@ -26,24 +27,29 @@ const S = {
   INPUT_TEXT: {
     width: 80,
     marginRight: 8,
+    marginBottom: 2,
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
-}
+};
 
 const _onEnter = () => {};
 
+const _crCaption = caption => caption && caption.indexOf(':') === -1
+  ? `${caption}:`
+  : caption;
+
 const RowInputColor = ({
-  styleRoot,
-  styleCaption,
-  styleInput,
-  caption='Color:',
-  initValue='#90ed7d',
+  style,
+  captionStyle,
+  inputStyle,
+  caption,
+  initValue=DF_COLOR,
   onEnter=_onEnter
 }) => {
   const _refCellColor = useRef()
   , [value, setValue] = useState(initValue)
   , [isShowPallete, setIsShowPallette] = useState(false)
-  , _hEnter = useCallback((value) => {
+  , _hEnter = useCallback(value => {
       onEnter(value)
       setValue(value)
     }, [onEnter])
@@ -58,18 +64,16 @@ const RowInputColor = ({
 
   useEffect(()=>setValue(initValue), [initValue])
 
-  const _caption = caption.indexOf(':') !== -1
-    ? caption
-    : `${caption}:`;
+  const _caption = _crCaption(caption);
 
   return (
-    <div style={{...S.ROOT, ...styleRoot}}>
+    <div style={{...S.ROOT, ...style}}>
       <label>
-        <span style={{...S.CAPTION, ...styleCaption}}>
+        {_caption && <span style={{...S.CAPTION, ...captionStyle}}>
           {_caption}
-        </span>
+        </span>}
         <InputText
-           style={{...S.INPUT_TEXT, ...styleInput}}
+           style={{...S.INPUT_TEXT, ...inputStyle}}
            initValue={value}
            maxLength={20}
            onEnter={_hEnter}
@@ -94,9 +98,9 @@ const RowInputColor = ({
 
 /*
 RowInputColor.propTypes = {
-  styleRoot: PropTypes.object,
-  styleCaption: PropTypes.object,
-  styleInput: PropTypes.object,
+  style: PropTypes.object,
+  captionStyle: PropTypes.object,
+  inputStyle: PropTypes.object,
   caption: PropTypes.string,
   initValue: PropTypes.string,
   onEnter: PropTypes.func
