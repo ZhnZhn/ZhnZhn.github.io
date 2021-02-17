@@ -97,7 +97,7 @@ class SeriaRow extends Component {
 
   _getColor = () => {
     const { colorEntered } = this.state
-        , { color } = this.props.seria.options;
+    , { color } = this.props.seria;        
     return colorEntered || color || DF.COLOR;
   }
 

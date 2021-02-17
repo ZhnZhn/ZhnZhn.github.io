@@ -76,7 +76,7 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
 
     _this._getColor = function () {
       var colorEntered = _this.state.colorEntered,
-          color = _this.props.seria.options.color;
+          color = _this.props.seria.color;
       return colorEntered || color || DF.COLOR;
     };
 
