@@ -1,1 +1,15 @@
-{"version":3,"sources":["../../src/constants/Model.js"],"names":["Model","palette","rows","cols","colors"],"mappings":";;;;AACA,IAAMA,KAAK,GAAG;AACZC,EAAAA,OAAO,EAAE;AACPC,IAAAA,IAAI,EAAE,CADC;AAEPC,IAAAA,IAAI,EAAE,CAFC;AAGPC,IAAAA,MAAM,EAAE,CACN,SADM,EACK,SADL,EACgB,SADhB,EAEN,SAFM,EAEK,SAFL,EAEgB,SAFhB,EAGN,SAHM,EAGK,SAHL,EAGgB,SAHhB;AAHD;AADG,CAAd;eAYeJ,K","sourcesContent":["\r\nconst Model = {\r\n  palette: {\r\n    rows: 3,\r\n    cols: 3,\r\n    colors: [\r\n      '#7cb5ec', '#90ed7d', '#f7a35c',\r\n      '#8085e9', '#f15c80', '#e4d354',\r\n      '#2b908f', '#f45b5b', '#91e8e1'\r\n    ]\r\n  }\r\n};\r\n\r\nexport default Model\r\n"],"file":"Model.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/constants/Model.js"
+ ],
+ "file": "../../src/constants/Model.js",
+ "names": [
+  "Model",
+  "palette",
+  "rows",
+  "cols",
+  "colors"
+ ],
+ "mappings": ";;;;AACA,IAAMA,KAAK,GAAG;AACZC,EAAAA,OAAO,EAAE;AACPC,IAAAA,IAAI,EAAE,CADC;AAEPC,IAAAA,IAAI,EAAE,CAFC;AAGPC,IAAAA,MAAM,EAAE,CACN,SADM,EACK,SADL,EACgB,SADhB,EAEN,SAFM,EAEK,SAFL,EAEgB,SAFhB,EAGN,SAHM,EAGK,SAHL,EAGgB,SAHhB;AAHD;AADG,CAAd;eAYeJ,K"
+}
