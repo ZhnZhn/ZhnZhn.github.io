@@ -9,6 +9,8 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _mathFn = _interopRequireDefault(require("./mathFn"));
 
+var _roc = _interopRequireDefault(require("./roc"));
+
 var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
 
 var isNumber = _seriaHelperFn["default"].isNumber,
@@ -22,22 +24,32 @@ var _isArr = Array.isArray,
 var _isNotEmptyArr = function _isNotEmptyArr(arr) {
   return _isArr(arr) && arr.length > 0;
 };
+/*
+const _calcY = (yPrev, yNext) => {
 
-var _calcY = function _calcY(yPrev, yNext) {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
     return null;
   }
 
   if (yNext === 0) {
-    return yPrev === 0 ? 0 : yPrev > 0 ? -100 : 100;
+    return yPrev === 0
+      ? 0
+      : yPrev > 0 ? -100 : 100;
   }
 
   if (yPrev === 0) {
     return null;
   }
 
-  return parseFloat((0, _big["default"])(yNext).minus(yPrev).div(Math.abs(yPrev)).times(100).toFixed(2));
+  return parseFloat(
+    Big(yNext).minus(yPrev)
+      .div(Math.abs(yPrev))
+      .times(100)
+      .toFixed(2)
+    );
 };
+*/
+
 
 var _calcChanges = function _calcChanges(yPrev, yNext) {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
@@ -87,7 +99,8 @@ var _fIndicator = function _fIndicator(calc) {
 };
 
 var fn = {
-  growthRate: _fIndicator(_calcY),
+  //growthRate: _fIndicator(_calcY),
+  growthRate: _fIndicator(_roc["default"]),
   changesBetween: _fIndicator(_calcChanges),
   normalize: function normalize(d) {
     if (!(_isArr(d) && d[0])) {

@@ -15,6 +15,8 @@ var _categoryRate = _interopRequireDefault(require("./categoryRate"));
 
 var _categoryDiff = _interopRequireDefault(require("./categoryDiff"));
 
+var _categoryRoc = _interopRequireDefault(require("./categoryRoc"));
+
 var _pby = _interopRequireDefault(require("./pby10"));
 
 var tsIndicators = {
@@ -23,6 +25,7 @@ var tsIndicators = {
   momAth: _momAth["default"],
   categoryRate: _categoryRate["default"],
   categoryDiff: _categoryDiff["default"],
+  categoryRoc: _categoryRoc["default"],
   pby10: _pby["default"]
 };
 var _default = tsIndicators;

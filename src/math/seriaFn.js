@@ -1,6 +1,7 @@
 import Big from 'big.js'
 
 import mathFn from './mathFn'
+import roc from './roc'
 import fns from './seriaHelperFn'
 
 const {
@@ -17,6 +18,7 @@ const _isArr = Array.isArray
 const _isNotEmptyArr = arr => _isArr(arr)
  && arr.length > 0;
 
+/*
 const _calcY = (yPrev, yNext) => {
 
   if (!isNumber(yPrev) || !isNumber(yNext)) {
@@ -40,6 +42,7 @@ const _calcY = (yPrev, yNext) => {
       .toFixed(2)
     );
 };
+*/
 
 const _calcChanges = (yPrev, yNext) => {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
@@ -76,7 +79,8 @@ const _fIndicator = (calc) => (d, rt=1) => {
 };
 
 const fn = {
-  growthRate: _fIndicator(_calcY),
+  //growthRate: _fIndicator(_calcY),
+  growthRate: _fIndicator(roc),
   changesBetween: _fIndicator(_calcChanges),
 
   normalize: (d) => {
