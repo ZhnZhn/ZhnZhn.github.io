@@ -7,10 +7,10 @@ const _crHm = data => {
   return hm;
 };
 
-const fCategoryRate = calc => (d1, d2, {rc, sc}) => {
+const fCategoryCalc = calc => (d1, d2, {rc, sc}) => {
   const hmD2 = _crHm(d2);
   return d1.map(p1 => {
-    const {category, color, status} = p1    
+    const {category, color, status} = p1
     , value = calc(p1, hmD2[category]);
     return {
       y: value,
@@ -22,4 +22,4 @@ const fCategoryRate = calc => (d1, d2, {rc, sc}) => {
   });
 };
 
-export default fCategoryRate
+export default fCategoryCalc

@@ -11,7 +11,7 @@ var _crHm = function _crHm(data) {
   return hm;
 };
 
-var fCategoryRate = function fCategoryRate(calc) {
+var fCategoryCalc = function fCategoryCalc(calc) {
   return function (d1, d2, _ref) {
     var rc = _ref.rc,
         sc = _ref.sc;
@@ -34,6 +34,6 @@ var fCategoryRate = function fCategoryRate(calc) {
   };
 };
 
-var _default = fCategoryRate;
+var _default = fCategoryCalc;
 exports["default"] = _default;
 //# sourceMappingURL=fCategoryCalc.js.map
