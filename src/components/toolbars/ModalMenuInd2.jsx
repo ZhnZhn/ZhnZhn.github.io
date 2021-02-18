@@ -11,16 +11,15 @@ import RowTypeB from './RowTypeB'
 const {
   addCategoryRateTo,
   addCategoryDiffTo,
+  addCategoryRocTo,
   powerBy10
 } = IndicatorBuilder;
-
 
 const DF_POWER_BY_10 = 0;
 
 const S = {
   PANE: {
-    width: 180,
-    margin: 8
+    margin: '6px 10px 6px 6px'
   }
 };
 
@@ -29,10 +28,6 @@ const _isNumber = n => typeof n === 'number'
 
 const _isPowerBy = config => !config
   ?.plotOptions?.bar?.dataLabels?.enabled;
-
-const _crPaneStyle = hasPowerBy10 => hasPowerBy10
-  ? {...S.PANE, width: 210}
-  : S.PANE;
 
 const ModalMenuInd2 = ({
   style, isShow, onClose,
@@ -48,15 +43,13 @@ const ModalMenuInd2 = ({
     }
   };
 
-  const _paneStyle = _crPaneStyle(_hasPowerBy10);
-
   return (
     <ModalPopup
       style={{...STYLE.ROOT, ...style}}
       isShow={isShow}
       onClose={onClose}
     >
-      <div style={_paneStyle}>
+      <div style={S.PANE}>
         <RowTypeA
            caption="Rate (S1/S2)"
            mathFn={addCategoryRateTo}
@@ -65,6 +58,11 @@ const ModalMenuInd2 = ({
         <RowTypeA
            caption="Diff (S1-S2)"
            mathFn={addCategoryDiffTo}
+           getChart={getChart}
+        />
+        <RowTypeA
+           caption="ROC (S1 from S2)"
+           mathFn={addCategoryRocTo}
            getChart={getChart}
         />
         {_hasPowerBy10 && <RowTypeB

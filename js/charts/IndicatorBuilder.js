@@ -11,6 +11,7 @@ var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
 var categoryRate = _tsIndicators["default"].categoryRate,
     categoryDiff = _tsIndicators["default"].categoryDiff,
+    categoryRoc = _tsIndicators["default"].categoryRoc,
     pby10 = _tsIndicators["default"].pby10,
     sma = _tsIndicators["default"].sma,
     mfi = _tsIndicators["default"].mfi,
@@ -96,6 +97,7 @@ var IndicatorBuilder = {
   },
   addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
   addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2', true),
+  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S2 from S1', true),
   powerBy10: function powerBy10(chart, power) {
     var seria = chart.series[0],
         name = seria.getName(),

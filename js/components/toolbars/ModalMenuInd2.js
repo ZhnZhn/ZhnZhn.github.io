@@ -25,12 +25,12 @@ var _RowTypeB = _interopRequireDefault(require("./RowTypeB"));
 
 var addCategoryRateTo = _IndicatorBuilder["default"].addCategoryRateTo,
     addCategoryDiffTo = _IndicatorBuilder["default"].addCategoryDiffTo,
+    addCategoryRocTo = _IndicatorBuilder["default"].addCategoryRocTo,
     powerBy10 = _IndicatorBuilder["default"].powerBy10;
 var DF_POWER_BY_10 = 0;
 var S = {
   PANE: {
-    width: 180,
-    margin: 8
+    margin: '6px 10px 6px 6px'
   }
 };
 
@@ -42,12 +42,6 @@ var _isPowerBy = function _isPowerBy(config) {
   var _config$plotOptions, _config$plotOptions$b, _config$plotOptions$b2;
 
   return !(config == null ? void 0 : (_config$plotOptions = config.plotOptions) == null ? void 0 : (_config$plotOptions$b = _config$plotOptions.bar) == null ? void 0 : (_config$plotOptions$b2 = _config$plotOptions$b.dataLabels) == null ? void 0 : _config$plotOptions$b2.enabled);
-};
-
-var _crPaneStyle = function _crPaneStyle(hasPowerBy10) {
-  return hasPowerBy10 ? (0, _extends2["default"])({}, S.PANE, {
-    width: 210
-  }) : S.PANE;
 };
 
 var ModalMenuInd2 = function ModalMenuInd2(_ref) {
@@ -70,14 +64,12 @@ var ModalMenuInd2 = function ModalMenuInd2(_ref) {
     }
   };
 
-  var _paneStyle = _crPaneStyle(_hasPowerBy10);
-
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup["default"], {
     style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, style),
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: _paneStyle,
+      style: S.PANE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA["default"], {
         caption: "Rate (S1/S2)",
         mathFn: addCategoryRateTo,
@@ -85,6 +77,10 @@ var ModalMenuInd2 = function ModalMenuInd2(_ref) {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA["default"], {
         caption: "Diff (S1-S2)",
         mathFn: addCategoryDiffTo,
+        getChart: getChart
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA["default"], {
+        caption: "ROC (S1 from S2)",
+        mathFn: addCategoryRocTo,
         getChart: getChart
       }), _hasPowerBy10 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeB["default"], {
         forwardRef: _refPowerBy10,
