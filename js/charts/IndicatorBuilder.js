@@ -97,7 +97,7 @@ var IndicatorBuilder = {
   },
   addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
   addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2', true),
-  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S2 from S1', true),
+  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S1 from S2', true),
   powerBy10: function powerBy10(chart, power) {
     var seria = chart.series[0],
         name = seria.getName(),
