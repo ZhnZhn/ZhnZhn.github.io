@@ -24,32 +24,6 @@ var _isArr = Array.isArray,
 var _isNotEmptyArr = function _isNotEmptyArr(arr) {
   return _isArr(arr) && arr.length > 0;
 };
-/*
-const _calcY = (yPrev, yNext) => {
-
-  if (!isNumber(yPrev) || !isNumber(yNext)) {
-    return null;
-  }
-
-  if (yNext === 0) {
-    return yPrev === 0
-      ? 0
-      : yPrev > 0 ? -100 : 100;
-  }
-
-  if (yPrev === 0) {
-    return null;
-  }
-
-  return parseFloat(
-    Big(yNext).minus(yPrev)
-      .div(Math.abs(yPrev))
-      .times(100)
-      .toFixed(2)
-    );
-};
-*/
-
 
 var _calcChanges = function _calcChanges(yPrev, yNext) {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
@@ -98,8 +72,40 @@ var _fIndicator = function _fIndicator(calc) {
   };
 };
 
+var _fFindY = function _fFindY(initialValue, findY) {
+  return function (data) {
+    if (!(_isArr(data) && data.length)) {
+      return;
+    }
+
+    var resultY = initialValue;
+
+    var _crPointGetter2 = crPointGetter(data),
+        getY = _crPointGetter2.getY,
+        _fn = function _fn(p, currentY) {
+      var pointY = getY(p);
+      return findY(pointY, currentY);
+    };
+
+    var i = 0;
+
+    for (; i < data.length; i++) {
+      resultY = _fn(data[i], resultY);
+    }
+
+    return resultY !== initialValue ? _mathFn["default"].toFixedNumber(resultY) : void 0;
+  };
+};
+
+var _findMinY = function _findMinY(y, min) {
+  return isNumber(y) && y < min ? y : min;
+};
+
+var _findMaxY = function _findMaxY(y, max) {
+  return isNumber(y) && y > max ? y : max;
+};
+
 var fn = {
-  //growthRate: _fIndicator(_calcY),
   growthRate: _fIndicator(_roc["default"]),
   changesBetween: _fIndicator(_calcChanges),
   normalize: function normalize(d) {
@@ -107,9 +113,9 @@ var fn = {
       return [];
     }
 
-    var _crPointGetter2 = crPointGetter(d),
-        getX = _crPointGetter2.getX,
-        getY = _crPointGetter2.getY,
+    var _crPointGetter3 = crPointGetter(d),
+        getX = _crPointGetter3.getX,
+        getY = _crPointGetter3.getY,
         _y0 = getY(d[0]);
 
     if (!(isNumber(_y0) && _y0 !== 0)) {
@@ -125,48 +131,8 @@ var fn = {
 
     return _d;
   },
-  findMinY: function findMinY(data) {
-    if (!(_isArr(data) && data.length)) {
-      return void 0;
-    }
-
-    var minY = Number.POSITIVE_INFINITY;
-
-    var _fn = isNumber(data[0].y) ? function (p, min) {
-      return isNumber(p.y) && p.y < min ? p.y : min;
-    } : function (arr, min) {
-      return isNumber(arr[1]) && arr[1] < min ? arr[1] : min;
-    };
-
-    var i = 0;
-
-    for (; i < data.length; i++) {
-      minY = _fn(data[i], minY);
-    }
-
-    return minY !== Number.POSITIVE_INFINITY ? _mathFn["default"].toFixedNumber(minY) : void 0;
-  },
-  findMaxY: function findMaxY(data) {
-    if (!(_isArr(data) && data.length)) {
-      return void 0;
-    }
-
-    var maxY = Number.NEGATIVE_INFINITY;
-
-    var _fn = isNumber(data[0].y) ? function (p, max) {
-      return isNumber(p.y) && p.y > max ? p.y : max;
-    } : function (arr, max) {
-      return isNumber(arr[1]) && arr[1] > max ? arr[1] : max;
-    };
-
-    var i = 0;
-
-    for (; i < data.length; i++) {
-      maxY = _fn(data[i], maxY);
-    }
-
-    return maxY !== Number.NEGATIVE_INFINITY ? _mathFn["default"].toFixedNumber(maxY) : void 0;
-  },
+  findMinY: _fFindY(Number.POSITIVE_INFINITY, _findMinY),
+  findMaxY: _fFindY(Number.NEGATIVE_INFINITY, _findMaxY),
   filterTrimZero: function filterTrimZero(data) {
     if (!_isArr(data)) {
       return data;
@@ -197,9 +163,9 @@ var fn = {
       return [];
     }
 
-    var _crPointGetter3 = crPointGetter(data),
-        getY = _crPointGetter3.getY,
-        getX = _crPointGetter3.getX;
+    var _crPointGetter4 = crPointGetter(data),
+        getY = _crPointGetter4.getY,
+        getX = _crPointGetter4.getX;
 
     var _sum = (0, _big["default"])(0),
         _numberOfPoints = 0,
@@ -225,9 +191,9 @@ var fn = {
       return [];
     }
 
-    var _crPointGetter4 = crPointGetter(data),
-        getY = _crPointGetter4.getY,
-        getX = _crPointGetter4.getX;
+    var _crPointGetter5 = crPointGetter(data),
+        getY = _crPointGetter5.getY,
+        getX = _crPointGetter5.getX;
 
     var _d = data.map(getY).sort(function (a, b) {
       return a - b;

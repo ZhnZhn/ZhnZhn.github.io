@@ -18,32 +18,6 @@ const _isArr = Array.isArray
 const _isNotEmptyArr = arr => _isArr(arr)
  && arr.length > 0;
 
-/*
-const _calcY = (yPrev, yNext) => {
-
-  if (!isNumber(yPrev) || !isNumber(yNext)) {
-    return null;
-  }
-
-  if (yNext === 0) {
-    return yPrev === 0
-      ? 0
-      : yPrev > 0 ? -100 : 100;
-  }
-
-  if (yPrev === 0) {
-    return null;
-  }
-
-  return parseFloat(
-    Big(yNext).minus(yPrev)
-      .div(Math.abs(yPrev))
-      .times(100)
-      .toFixed(2)
-    );
-};
-*/
-
 const _calcChanges = (yPrev, yNext) => {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
     return null;
@@ -78,8 +52,30 @@ const _fIndicator = (calc) => (d, rt=1) => {
   return _crIndicatorData(d, _rt, calc);
 };
 
+const _fFindY = (initialValue, findY) => (data) => {
+  if ( !(_isArr(data) && data.length) ) {
+    return;
+  }
+  let resultY = initialValue;
+  const { getY } = crPointGetter(data)
+  , _fn = (p, currentY) => {
+      const pointY = getY(p);
+      return findY(pointY, currentY);
+  };
+  let i = 0;
+  for (; i<data.length; i++){
+    resultY = _fn(data[i], resultY)
+  }
+  return resultY !== initialValue
+    ? mathFn.toFixedNumber(resultY)
+    : void 0;
+};
+const _findMinY = (y, min) => isNumber(y) && y<min
+  ? y : min;
+const _findMaxY = (y, max) => isNumber(y) && y>max
+  ? y : max;
+
 const fn = {
-  //growthRate: _fIndicator(_calcY),
   growthRate: _fIndicator(roc),
   changesBetween: _fIndicator(_calcChanges),
 
@@ -109,38 +105,8 @@ const fn = {
     return _d;
   },
 
-  findMinY: (data) => {
-    if ( !(_isArr(data) && data.length) ) {
-      return void 0;
-    }
-    let minY = Number.POSITIVE_INFINITY;
-    const _fn = isNumber(data[0].y)
-      ? (p, min) => isNumber(p.y) && p.y<min ? p.y : min
-      : (arr, min) => isNumber(arr[1]) && arr[1]<min ? arr[1] : min;
-    let i = 0;
-    for (; i<data.length; i++){
-      minY = _fn(data[i], minY)
-    }
-    return minY !== Number.POSITIVE_INFINITY
-      ? mathFn.toFixedNumber(minY)
-      : void 0;
-  },
-  findMaxY: (data) => {
-    if (! (_isArr(data) && data.length) ) {
-      return void 0;
-    }
-    let maxY = Number.NEGATIVE_INFINITY;
-    const _fn = isNumber(data[0].y)
-      ? (p, max) => isNumber(p.y) && p.y>max ? p.y : max
-      : (arr, max) => isNumber(arr[1]) && arr[1]>max ? arr[1] : max;
-    let i = 0;
-    for (; i<data.length; i++){
-      maxY = _fn(data[i], maxY)
-    }
-    return maxY !== Number.NEGATIVE_INFINITY
-      ? mathFn.toFixedNumber(maxY)
-      : void 0;
-  },
+  findMinY: _fFindY(Number.POSITIVE_INFINITY, _findMinY),
+  findMaxY: _fFindY(Number.NEGATIVE_INFINITY, _findMaxY),
 
   filterTrimZero: (data) => {
     if (!_isArr(data)) { return data; }
