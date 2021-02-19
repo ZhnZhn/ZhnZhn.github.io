@@ -1,28 +1,13 @@
 import categoryRoc from '../categoryRoc'
+import categoryHelpers from './categoryHelpers'
 
-const _crP1 = (category, y, color) => ({
-  y, category, color
-})
-, _crP2 = (category, y) => ({
-  y, category
-}),
-_crExpectedPoint = (c, y, color) => ({
-  y, c, color,
-  id: c,
-  status: void 0
-});
+const {
+  _crP1,
+  _crExpectedPoint,
+  _crParams
+} = categoryHelpers;
 
-//'P1', 10, 5, 100
-const _crParams = (arr, {sc, rc}) => {
-  const d1 = [], d2 = [], expectedResult = [];
-  arr.forEach(p => {
-    d1.push(_crP1(p[0], p[1], sc))
-    d2.push(_crP2(p[0], p[2]))
-    expectedResult.push(_crExpectedPoint(p[0], p[3], rc))
-  })
-  return [d1, d2, expectedResult];
-}
-
+// ROC S1 from S2
 describe('categoryRoc',()=>{
   test('should return arr with correct roc values',()=>{
     const sc = '#111', rc = '#222'
@@ -41,14 +26,10 @@ describe('categoryRoc',()=>{
     ).toEqual(expectedResult)
   })
 
-
-  test('should return arr with correct roc values for edge case', ()=>{
+  test('should return arr with null values for not match points', ()=>{
     const sc = '#111', rc = '#222';
-    expect(categoryRoc([
-      _crP1('P1', 3, sc)
-    ], [], {rc, sc}
-    )).toEqual([
-      _crExpectedPoint('P1', null, rc)
-    ])
+    expect(categoryRoc(
+      [_crP1('A1', 3, sc)], [], {rc, sc}
+    )).toEqual([_crExpectedPoint('A1', null, rc)])
   })
 })

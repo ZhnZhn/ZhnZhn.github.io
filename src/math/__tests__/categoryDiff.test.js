@@ -1,19 +1,28 @@
 import categoryDiff from '../categoryDiff'
+import categoryHelpers from './categoryHelpers'
 
-describe('categoryRate', ()=>{
-  test('should return array with calculated values', ()=>{
-    const sc = 'blue', rc = 'green';
-    expect(categoryDiff([
-      {y: 10, category: 'A', color: sc },
-      {y: 10, category: 'B', color: 'cayn' }
-    ],[
-      {y: 5, category: 'A'},
-      {y: 0, category: 'B'}
-    ],
-      { rc, sc }
-    )).toEqual([
-      {y: 5, id: 'A', c: 'A', color: rc, status: void 0 },
-      {y: 10, id: 'B', c: 'B', color: 'cayn', status: void 0 }
-    ])
+const {
+  _crParams,
+  _crP1,
+  _crExpectedPoint
+} = categoryHelpers;
+
+//Diff S1-S2
+describe('categoryDiff', ()=>{
+  const sc = '#111', rc = '#222';
+  test('should return array with correct diff values', ()=>{
+    const [d1, d2, expectedResult] = _crParams([
+       ['P1', 10, 5, 5],
+       ['P2', 10, 0, 10],
+       ['P3', 10, null, 0]
+    ], {sc, rc});
+    expect(categoryDiff(d1, d2, {sc, rc}))
+      .toEqual(expectedResult)
+  })
+
+  test('should return arr with 0 y values for not match points', ()=>{
+    expect(categoryDiff(
+      [_crP1('A1', 10, sc)], [], {sc, rc}))
+    .toEqual([_crExpectedPoint('A1', 0, rc)])
   })
 })

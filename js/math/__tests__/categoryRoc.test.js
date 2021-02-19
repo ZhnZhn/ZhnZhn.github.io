@@ -4,43 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _categoryRoc = _interopRequireDefault(require("../categoryRoc"));
 
-var _crP1 = function _crP1(category, y, color) {
-  return {
-    y: y,
-    category: category,
-    color: color
-  };
-},
-    _crP2 = function _crP2(category, y) {
-  return {
-    y: y,
-    category: category
-  };
-},
-    _crExpectedPoint = function _crExpectedPoint(c, y, color) {
-  return {
-    y: y,
-    c: c,
-    color: color,
-    id: c,
-    status: void 0
-  };
-}; //'P1', 10, 5, 100
+var _categoryHelpers = _interopRequireDefault(require("./categoryHelpers"));
 
-
-var _crParams = function _crParams(arr, _ref) {
-  var sc = _ref.sc,
-      rc = _ref.rc;
-  var d1 = [],
-      d2 = [],
-      expectedResult = [];
-  arr.forEach(function (p) {
-    d1.push(_crP1(p[0], p[1], sc));
-    d2.push(_crP2(p[0], p[2]));
-    expectedResult.push(_crExpectedPoint(p[0], p[3], rc));
-  });
-  return [d1, d2, expectedResult];
-};
+var _crP1 = _categoryHelpers["default"]._crP1,
+    _crExpectedPoint = _categoryHelpers["default"]._crExpectedPoint,
+    _crParams = _categoryHelpers["default"]._crParams; // ROC S1 from S2
 
 describe('categoryRoc', function () {
   test('should return arr with correct roc values', function () {
@@ -59,13 +27,13 @@ describe('categoryRoc', function () {
       rc: rc
     })).toEqual(expectedResult);
   });
-  test('should return arr with correct roc values for edge case', function () {
+  test('should return arr with null values for not match points', function () {
     var sc = '#111',
         rc = '#222';
-    expect((0, _categoryRoc["default"])([_crP1('P1', 3, sc)], [], {
+    expect((0, _categoryRoc["default"])([_crP1('A1', 3, sc)], [], {
       rc: rc,
       sc: sc
-    })).toEqual([_crExpectedPoint('P1', null, rc)]);
+    })).toEqual([_crExpectedPoint('A1', null, rc)]);
   });
 });
 //# sourceMappingURL=categoryRoc.test.js.map
