@@ -31,22 +31,27 @@ var _getD12 = function _getD12(chart) {
   };
 };
 
-var _findMinY = function _findMinY(arr) {
-  var y,
-      min = Number.MAX_SAFE_INTEGER;
+var _updateYAxisMin = function _updateYAxisMin(chart) {
+  var _yAxis = chart.yAxis[0],
+      _yAxis$getExtremes = _yAxis.getExtremes(),
+      dataMin = _yAxis$getExtremes.dataMin,
+      min = _yAxis$getExtremes.min;
 
-  for (var i = 0; i < arr.length; i++) {
-    y = arr[i].y;
-
-    if (y < min) {
-      min = y;
-    }
+  if (dataMin < min) {
+    _yAxis.setExtremes(dataMin, null, true);
   }
+}; //df config chart.ignoreHiddenSeries = true
 
-  return min !== Number.MAX_SAFE_INTEGER ? min : null;
+
+var _hideFirstSecondSeries = function _hideFirstSecondSeries(chart) {
+  var _series = chart.series;
+
+  _series[0].hide();
+
+  _series[1].hide();
 };
 
-var _fCategoryCalc = function _fCategoryCalc(calc, name, isUpdateMin) {
+var _fCategoryCalc = function _fCategoryCalc(calc, name) {
   return function (chart, rc) {
     var _getD = _getD12(chart),
         d1 = _getD.d1,
@@ -64,9 +69,9 @@ var _fCategoryCalc = function _fCategoryCalc(calc, name, isUpdateMin) {
         color: rc
       }, true, true);
 
-      if (isUpdateMin) {
-        chart.yAxis[0].setExtremes(_findMinY(data), null, true);
-      }
+      _updateYAxisMin(chart);
+
+      _hideFirstSecondSeries(chart);
 
       return true;
     }
@@ -96,8 +101,8 @@ var IndicatorBuilder = {
     return false;
   },
   addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
-  addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2', true),
-  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S1 from S2', true),
+  addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2'),
+  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S1 from S2'),
   powerBy10: function powerBy10(chart, power) {
     var seria = chart.series[0],
         name = seria.getName(),

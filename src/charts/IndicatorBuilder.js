@@ -1,5 +1,4 @@
 import tsIndicators from '../math/tsIndicators'
-
 import ChartConfig from './ChartConfig';
 
 const {
@@ -20,28 +19,31 @@ const _getD12 = chart => {
   return { d1, d2, sc: s1.color };
 }
 
-const _findMinY = arr => {
-  let y, min = Number.MAX_SAFE_INTEGER;
-  for(let i=0; i<arr.length; i++){
-    y = arr[i].y
-    if (y<min) { min = y }
+const _updateYAxisMin = chart => {
+  const _yAxis = chart.yAxis[0]
+  , { dataMin, min } = _yAxis.getExtremes();
+  if (dataMin<min) {
+    _yAxis.setExtremes(dataMin, null, true)
   }
-  return min !== Number.MAX_SAFE_INTEGER
-    ? min
-    : null;
-}
+};
 
-const _fCategoryCalc = (calc, name, isUpdateMin) => (chart, rc) => {
+//df config chart.ignoreHiddenSeries = true
+const _hideFirstSecondSeries = chart => {
+  const _series = chart.series;
+  _series[0].hide()
+  _series[1].hide()
+};
+
+const _fCategoryCalc = (calc, name) => (chart, rc) => {
   const { d1, d2, sc } = _getD12(chart);
   if (d2.length !== 0) {
-    const data = calc(d1, d2, { rc, sc });
+    const data = calc(d1, d2, {rc, sc});
     chart.addSeries({
       name, data,
       color: rc,
     }, true, true)
-    if (isUpdateMin) {
-      chart.yAxis[0].setExtremes(_findMinY(data), null, true)
-    }
+    _updateYAxisMin(chart)
+    _hideFirstSecondSeries(chart)
     return true;
   }
   return false;
@@ -66,8 +68,8 @@ const IndicatorBuilder = {
   },
 
   addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
-  addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2', true),
-  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S1 from S2', true),
+  addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2'),
+  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S1 from S2'),
   powerBy10: (chart, power) => {
     const seria = chart.series[0]
     , name = seria.getName()
