@@ -9,19 +9,9 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
 
-var isNumber = _seriaHelperFn["default"].isNumber,
+var isNotEmptyArr = _seriaHelperFn["default"].isNotEmptyArr,
+    isNumber = _seriaHelperFn["default"].isNumber,
     crPointGetter = _seriaHelperFn["default"].crPointGetter;
-var _isArr = Array.isArray;
-/*
-const _crPeriod = (period, plus) => {
-  const _delta = isNumber(plus) ? 1 - plus : 1;
-  return parseFloat(
-    Big(period)
-     .minus(_delta)
-     .toFixed(0)
-  );
-};
-*/
 
 var sma = function sma(data, period) {
   if (period === void 0) {
@@ -31,7 +21,7 @@ var sma = function sma(data, period) {
   var dataSma = [],
       _period = parseInt(period, 10) - 1;
 
-  if (!(_isArr(data) && isNumber(_period) && data.length && _period < data.length)) {
+  if (!(isNotEmptyArr(data) && isNumber(_period) && _period < data.length)) {
     return dataSma;
   }
 

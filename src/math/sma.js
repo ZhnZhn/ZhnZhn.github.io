@@ -2,26 +2,17 @@ import Big from 'big.js';
 
 import fns from './seriaHelperFn'
 
-const { isNumber, crPointGetter } = fns;
-
-const _isArr = Array.isArray
-
-/*
-const _crPeriod = (period, plus) => {
-  const _delta = isNumber(plus) ? 1 - plus : 1;
-  return parseFloat(
-    Big(period)
-     .minus(_delta)
-     .toFixed(0)
-  );
-};
-*/
+const {
+  isNotEmptyArr,
+  isNumber,
+  crPointGetter
+} = fns;
 
 const sma = (data, period=1) => {
   const dataSma = []
   , _period = parseInt(period, 10) - 1;
-  if ( !(_isArr(data) && isNumber(_period)
-         && data.length
+  if ( !(isNotEmptyArr(data)
+         && isNumber(_period)
          && _period < data.length)) {
     return dataSma;
   }
