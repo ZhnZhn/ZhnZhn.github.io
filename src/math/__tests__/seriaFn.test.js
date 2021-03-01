@@ -114,6 +114,10 @@ describe('changesBetween', ()=>{
     _testRtParam(fn, 2, [0.13, 2.2, 0.14], [3, 0.01])
     _testRtParam(fn, 2, [209.19, 209, 208.7], [3, -0.49])
   })
+  test('should return empty arr in edge case for data', () => {
+    //expect(fn()).toEqual([])
+    //_testFn(fn, [], [])
+  })
 })
 
 

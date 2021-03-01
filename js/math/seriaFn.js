@@ -9,6 +9,8 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _mathFn = _interopRequireDefault(require("./mathFn"));
 
+var _fIndicatorCalc = _interopRequireDefault(require("./fIndicatorCalc"));
+
 var _roc = _interopRequireDefault(require("./roc"));
 
 var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
@@ -30,45 +32,6 @@ var _calcChanges = function _calcChanges(yPrev, yNext) {
   return parseFloat((0, _big["default"])(yNext).minus(yPrev).toString());
 };
 
-var _crIndicatorData = function _crIndicatorData(d, rt, calc) {
-  var _d = [],
-      max = d.length,
-      prevStep = rt - 1,
-      _crPointGetter = crPointGetter(d),
-      getX = _crPointGetter.getX,
-      getY = _crPointGetter.getY;
-
-  var pPrev = d[0],
-      pNext,
-      i = rt;
-
-  for (; i < max; i++) {
-    pNext = d[i];
-
-    _d.push([getX(pNext), calc(getY(pPrev), getY(pNext))]);
-
-    pPrev = d[i - prevStep];
-  }
-
-  return _d;
-};
-
-var _fIndicator = function _fIndicator(calc) {
-  return function (d, rt) {
-    if (rt === void 0) {
-      rt = 1;
-    }
-
-    var _rt = parseInt(rt, 10);
-
-    if (!(isNotEmptyArr(d) && isNumber(_rt))) {
-      return [];
-    }
-
-    return _crIndicatorData(d, _rt, calc);
-  };
-};
-
 var _fFindY = function _fFindY(initialValue, findY) {
   return function (data) {
     if (!isNotEmptyArr(data)) {
@@ -77,8 +40,8 @@ var _fFindY = function _fFindY(initialValue, findY) {
 
     var resultY = initialValue;
 
-    var _crPointGetter2 = crPointGetter(data),
-        getY = _crPointGetter2.getY,
+    var _crPointGetter = crPointGetter(data),
+        getY = _crPointGetter.getY,
         _fn = function _fn(p, currentY) {
       var pointY = getY(p);
       return findY(pointY, currentY);
@@ -103,16 +66,16 @@ var _findMaxY = function _findMaxY(y, max) {
 };
 
 var fn = {
-  growthRate: _fIndicator(_roc["default"]),
-  changesBetween: _fIndicator(_calcChanges),
+  growthRate: (0, _fIndicatorCalc["default"])(_roc["default"]),
+  changesBetween: (0, _fIndicatorCalc["default"])(_calcChanges),
   normalize: function normalize(d) {
     if (!isNotEmptyArr(d)) {
       return [];
     }
 
-    var _crPointGetter3 = crPointGetter(d),
-        getX = _crPointGetter3.getX,
-        getY = _crPointGetter3.getY,
+    var _crPointGetter2 = crPointGetter(d),
+        getX = _crPointGetter2.getX,
+        getY = _crPointGetter2.getY,
         _y0 = getY(d[0]);
 
     if (!(isNumber(_y0) && _y0 !== 0)) {
@@ -160,9 +123,9 @@ var fn = {
       return [];
     }
 
-    var _crPointGetter4 = crPointGetter(data),
-        getY = _crPointGetter4.getY,
-        getX = _crPointGetter4.getX;
+    var _crPointGetter3 = crPointGetter(data),
+        getY = _crPointGetter3.getY,
+        getX = _crPointGetter3.getX;
 
     var _sum = (0, _big["default"])(0),
         _numberOfPoints = 0,
@@ -188,9 +151,9 @@ var fn = {
       return [];
     }
 
-    var _crPointGetter5 = crPointGetter(data),
-        getY = _crPointGetter5.getY,
-        getX = _crPointGetter5.getX;
+    var _crPointGetter4 = crPointGetter(data),
+        getY = _crPointGetter4.getY,
+        getX = _crPointGetter4.getX;
 
     var _d = data.map(getY).sort(function (a, b) {
       return a - b;

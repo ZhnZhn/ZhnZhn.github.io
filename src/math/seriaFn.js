@@ -1,6 +1,7 @@
 import Big from 'big.js'
 
 import mathFn from './mathFn'
+import fIndicatorCalc from './fIndicatorCalc'
 import roc from './roc'
 import fns from './seriaHelperFn'
 
@@ -23,32 +24,6 @@ const _calcChanges = (yPrev, yNext) => {
   return parseFloat(Big(yNext).minus(yPrev).toString());
 };
 
-const _crIndicatorData = (d, rt, calc) => {
-  const _d = []
-  , max = d.length
-  , prevStep = rt-1
-  , { getX, getY } = crPointGetter(d);
-  let pPrev = d[0]
-    , pNext
-    , i=rt;
-  for (; i<max; i++){
-    pNext = d[i];
-    _d.push([
-      getX(pNext),
-      calc(getY(pPrev), getY(pNext))
-    ])
-    pPrev = d[i-prevStep]
-  }
-  return _d;
-}
-
-const _fIndicator = (calc) => (d, rt=1) => {
-  const _rt = parseInt(rt, 10);
-  if (!(isNotEmptyArr(d) && isNumber(_rt))) {
-    return [];
-  }
-  return _crIndicatorData(d, _rt, calc);
-};
 
 const _fFindY = (initialValue, findY) => (data) => {
   if (!isNotEmptyArr(data)){
@@ -74,8 +49,8 @@ const _findMaxY = (y, max) => isNumber(y) && y>max
   ? y : max;
 
 const fn = {
-  growthRate: _fIndicator(roc),
-  changesBetween: _fIndicator(_calcChanges),
+  growthRate: fIndicatorCalc(roc),
+  changesBetween: fIndicatorCalc(_calcChanges),
 
   normalize: (d) => {
     if (!isNotEmptyArr(d)) {

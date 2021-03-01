@@ -108,6 +108,9 @@ describe('changesBetween', function () {
 
     _testRtParam(fn, 2, [209.19, 209, 208.7], [3, -0.49]);
   });
+  test('should return empty arr in edge case for data', function () {//expect(fn()).toEqual([])
+    //_testFn(fn, [], [])
+  });
 });
 describe('normalize', function () {
   var fn = normalize;
