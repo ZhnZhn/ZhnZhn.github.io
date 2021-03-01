@@ -9,9 +9,25 @@ var _isArr = Array.isArray,
 },
     _isUndef = function _isUndef(v) {
   return typeof v === "undefined";
+},
+    _isObj = function _isObj(obj) {
+  return typeof obj === "object" && obj !== null;
 };
 
 var seriaHelperFn = {
+  isNotEmptyArr: function isNotEmptyArr(arr) {
+    if (!_isArr(arr)) {
+      return false;
+    }
+
+    for (var i = 0; i < arr.length; i++) {
+      if (_isObj(arr[i])) {
+        return true;
+      }
+    }
+
+    return false;
+  },
   isNumber: _isNumber,
   crPointGetter: function crPointGetter(data) {
     var getX = _isUndef(data[0].x) ? function (p) {

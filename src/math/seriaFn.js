@@ -5,6 +5,7 @@ import roc from './roc'
 import fns from './seriaHelperFn'
 
 const {
+  isNotEmptyArr,
   isNumber,
   crPointGetter,
   fGetY,
@@ -14,9 +15,6 @@ const {
 
 const _isArr = Array.isArray
 , _isNaN = Number.isNaN;
-
-const _isNotEmptyArr = arr => _isArr(arr)
- && arr.length > 0;
 
 const _calcChanges = (yPrev, yNext) => {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
@@ -46,14 +44,14 @@ const _crIndicatorData = (d, rt, calc) => {
 
 const _fIndicator = (calc) => (d, rt=1) => {
   const _rt = parseInt(rt, 10);
-  if ( !(_isArr(d) && isNumber(_rt)) ) {
+  if (!(isNotEmptyArr(d) && isNumber(_rt))) {
     return [];
   }
   return _crIndicatorData(d, _rt, calc);
 };
 
 const _fFindY = (initialValue, findY) => (data) => {
-  if ( !(_isArr(data) && data.length) ) {
+  if (!isNotEmptyArr(data)){
     return;
   }
   let resultY = initialValue;
@@ -80,7 +78,7 @@ const fn = {
   changesBetween: _fIndicator(_calcChanges),
 
   normalize: (d) => {
-    if ( !(_isArr(d) && d[0]) ) {
+    if (!isNotEmptyArr(d)) {
       return [];
     }
     const { getX, getY } = crPointGetter(d)
@@ -126,7 +124,7 @@ const fn = {
   },
 
   mean: (data) => {
-    if (!_isNotEmptyArr(data)){
+    if (!isNotEmptyArr(data)){
       return [];
     }
     const { getY, getX } = crPointGetter(data);
@@ -153,7 +151,7 @@ const fn = {
   },
 
   median: (data) => {
-    if (!_isNotEmptyArr(data)){
+    if (!isNotEmptyArr(data)){
       return [];
     }
     const { getY, getX } = crPointGetter(data);

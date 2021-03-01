@@ -4,11 +4,29 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _seriaHelperFn = _interopRequireDefault(require("../seriaHelperFn"));
 
-var isNumber = _seriaHelperFn["default"].isNumber,
+var isNotEmptyArr = _seriaHelperFn["default"].isNotEmptyArr,
+    isNumber = _seriaHelperFn["default"].isNumber,
     crPointGetter = _seriaHelperFn["default"].crPointGetter,
     fGetY = _seriaHelperFn["default"].fGetY,
     getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
     getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
+describe("isNotEmptyArr", function () {
+  var fn = isNotEmptyArr;
+  test('should return true for arr with object', function () {
+    expect(fn([{}])).toBe(true);
+    expect(fn([[]])).toBe(true);
+  });
+  test('should return false for not arr and arr without object', function () {
+    expect(fn()).toBe(false);
+    expect(fn(null)).toBe(false);
+    expect(fn(function () {})).toBe(false);
+    expect(fn('str')).toBe(false);
+    expect(fn(1)).toBe(false);
+    expect(fn(true)).toBe(false);
+    expect(fn([])).toBe(false);
+    expect(fn([null, void 0, 'str', 1, true])).toBe(false);
+  });
+});
 describe("isNumber", function () {
   var fn = isNumber;
   test("should check is value number type", function () {

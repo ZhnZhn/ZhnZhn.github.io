@@ -2,9 +2,18 @@
 const _isArr = Array.isArray
 , _isNumber = n => typeof n === "number"
   && (n-n === 0)
-, _isUndef = v => typeof v === "undefined";
+, _isUndef = v => typeof v === "undefined"
+, _isObj = obj => typeof obj === "object"
+  && obj !== null;
 
 const seriaHelperFn = {
+  isNotEmptyArr: arr => {
+    if (!_isArr(arr)) { return false; }
+    for (let i=0; i<arr.length; i++){
+      if (_isObj(arr[i])) { return true; }
+    }
+    return false;
+  },
   isNumber: _isNumber,
   crPointGetter: data => {
     const getX = _isUndef(data[0].x)

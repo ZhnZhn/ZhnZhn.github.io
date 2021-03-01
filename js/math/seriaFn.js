@@ -13,17 +13,14 @@ var _roc = _interopRequireDefault(require("./roc"));
 
 var _seriaHelperFn = _interopRequireDefault(require("./seriaHelperFn"));
 
-var isNumber = _seriaHelperFn["default"].isNumber,
+var isNotEmptyArr = _seriaHelperFn["default"].isNotEmptyArr,
+    isNumber = _seriaHelperFn["default"].isNumber,
     crPointGetter = _seriaHelperFn["default"].crPointGetter,
     fGetY = _seriaHelperFn["default"].fGetY,
     getZeroCountFromStart = _seriaHelperFn["default"].getZeroCountFromStart,
     getZeroIndexFromEnd = _seriaHelperFn["default"].getZeroIndexFromEnd;
 var _isArr = Array.isArray,
     _isNaN = Number.isNaN;
-
-var _isNotEmptyArr = function _isNotEmptyArr(arr) {
-  return _isArr(arr) && arr.length > 0;
-};
 
 var _calcChanges = function _calcChanges(yPrev, yNext) {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
@@ -64,7 +61,7 @@ var _fIndicator = function _fIndicator(calc) {
 
     var _rt = parseInt(rt, 10);
 
-    if (!(_isArr(d) && isNumber(_rt))) {
+    if (!(isNotEmptyArr(d) && isNumber(_rt))) {
       return [];
     }
 
@@ -74,7 +71,7 @@ var _fIndicator = function _fIndicator(calc) {
 
 var _fFindY = function _fFindY(initialValue, findY) {
   return function (data) {
-    if (!(_isArr(data) && data.length)) {
+    if (!isNotEmptyArr(data)) {
       return;
     }
 
@@ -109,7 +106,7 @@ var fn = {
   growthRate: _fIndicator(_roc["default"]),
   changesBetween: _fIndicator(_calcChanges),
   normalize: function normalize(d) {
-    if (!(_isArr(d) && d[0])) {
+    if (!isNotEmptyArr(d)) {
       return [];
     }
 
@@ -159,7 +156,7 @@ var fn = {
     return data;
   },
   mean: function mean(data) {
-    if (!_isNotEmptyArr(data)) {
+    if (!isNotEmptyArr(data)) {
       return [];
     }
 
@@ -187,7 +184,7 @@ var fn = {
     return _isNaN(_avg) ? [] : [[getX(data[0]), _avg], [getX(data[_maxIndex]), _avg]];
   },
   median: function median(data) {
-    if (!_isNotEmptyArr(data)) {
+    if (!isNotEmptyArr(data)) {
       return [];
     }
 

@@ -1,12 +1,33 @@
 import fns from '../seriaHelperFn'
 
 const {
+  isNotEmptyArr,
   isNumber,
   crPointGetter,
   fGetY,
   getZeroCountFromStart,
   getZeroIndexFromEnd
 } = fns
+
+describe("isNotEmptyArr", ()=>{
+  const fn= isNotEmptyArr;
+  test('should return true for arr with object', ()=> {
+    expect(fn([{}])).toBe(true)
+    expect(fn([[]])).toBe(true)
+  })
+  test('should return false for not arr and arr without object', ()=>{
+    expect(fn()).toBe(false)
+    expect(fn(null)).toBe(false)
+    expect(fn(()=>{})).toBe(false)
+
+    expect(fn('str')).toBe(false)
+    expect(fn(1)).toBe(false)
+    expect(fn(true)).toBe(false)
+
+    expect(fn([])).toBe(false)
+    expect(fn([null, void 0, 'str', 1, true])).toBe(false)
+  })
+})
 
 describe("isNumber", ()=>{
   const fn = isNumber
