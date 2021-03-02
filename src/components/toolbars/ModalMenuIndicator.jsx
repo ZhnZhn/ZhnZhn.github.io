@@ -55,9 +55,9 @@ const _isFn = fn => typeof fn === 'function';
 const _isSeriaInst = (s) => s && _isFn(s.setVisible);
 
 const FNS = {
-  GR: ['_grSeria', 'isGrowthRate', C_GROW, growthRate, true],
-  CH: ['_chvSeria', 'isChanges', C_GROW, changesBetween, true],
-  NORM: ['_normSeria', 'isNormalize', C_GROW, normalize, false]
+  GR: ['ROC', 'isGrowthRate', C_GROW, growthRate, true],
+  CH: ['DIFF', 'isChanges', C_GROW, changesBetween, true],
+  NORM: ['NORM', 'isNormalize', C_GROW, normalize, false]
 };
 
 /*
@@ -80,6 +80,13 @@ const _getSeriaIndex = (chart, { s }) => {
     ? _index
     : 0;
 }
+
+const _crName = (prefixStr, nOrObj) => {
+  const _suffix = _isNumber(nOrObj)
+    ? `(${nOrObj})`
+    : '';
+  return `${prefixStr}${_suffix}`;
+};
 
 class ModalMenuIndicator extends Component {
   /*
@@ -130,8 +137,8 @@ class ModalMenuIndicator extends Component {
     const seriaPropName = confArr[0]
     , statePropName = confArr[1]
     , color = confArr[2]
-    , fn = confArr[3];
-
+    , fn = confArr[3]
+    , name = _crName(seriaPropName, fnOptions);
     const _seria = this[seriaPropName];
     if (!this._chart) {
       this._chart = this.props.getChart()
@@ -146,7 +153,7 @@ class ModalMenuIndicator extends Component {
         this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
           data: seriaData,
           color: seriaOptions.color || color,
-          yIndex: -1
+          name
         }, seriaOptions)
       }
       this.setState({ [statePropName]: true })

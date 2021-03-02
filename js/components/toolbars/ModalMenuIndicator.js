@@ -69,9 +69,9 @@ var _isSeriaInst = function _isSeriaInst(s) {
 };
 
 var FNS = {
-  GR: ['_grSeria', 'isGrowthRate', C_GROW, growthRate, true],
-  CH: ['_chvSeria', 'isChanges', C_GROW, changesBetween, true],
-  NORM: ['_normSeria', 'isNormalize', C_GROW, normalize, false]
+  GR: ['ROC', 'isGrowthRate', C_GROW, growthRate, true],
+  CH: ['DIFF', 'isChanges', C_GROW, changesBetween, true],
+  NORM: ['NORM', 'isNormalize', C_GROW, normalize, false]
 };
 /*
 const DEF_GROWTH_RATE = (
@@ -97,6 +97,12 @@ var _getSeriaIndex = function _getSeriaIndex(chart, _ref) {
   var _index = _isNumber(s) ? s - 1 : 0;
 
   return (chart == null ? void 0 : chart.series.length) > _index ? _index : 0;
+};
+
+var _crName = function _crName(prefixStr, nOrObj) {
+  var _suffix = _isNumber(nOrObj) ? "(" + nOrObj + ")" : '';
+
+  return "" + prefixStr + _suffix;
 };
 
 var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
@@ -160,7 +166,9 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
     var seriaPropName = confArr[0],
         statePropName = confArr[1],
         color = confArr[2],
-        fn = confArr[3];
+        fn = confArr[3],
+        name = _crName(seriaPropName, fnOptions);
+
     var _seria = this[seriaPropName];
 
     if (!this._chart) {
@@ -180,7 +188,7 @@ var ModalMenuIndicator = /*#__PURE__*/function (_Component) {
         this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
           data: seriaData,
           color: seriaOptions.color || color,
-          yIndex: -1
+          name: name
         }, seriaOptions);
       }
 
