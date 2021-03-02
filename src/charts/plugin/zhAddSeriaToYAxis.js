@@ -1,21 +1,21 @@
-import trIfCategoryCase from './trIfCategoryCase'
+import crDataMinMaxSlice from './crDataMinMaxSlice'
+import crYAxisSeria from './crYAxisSeria'
 
 const YAXIS = 'yAxis';
 
-const _isArr = Array.isArray;
+const _isUndef = v => typeof v === 'undefined';
 
-const _crYAxisId = indexOrChart => indexOrChart
-  && _isArr(indexOrChart.yAxis)
-    ? YAXIS + indexOrChart.yAxis.length
-    : YAXIS + indexOrChart;
+const _crYAxisId = suffix => YAXIS + suffix
+, _crYAxisIdFromChart = chart =>
+    _crYAxisId(chart.yAxis.length);
 
-const _checkYAxis = (index, chart) => {
-  const isNewYAxis = index === -1
+const _checkYAxis = (chart, yIndex, name) => {
+  const isNewYAxis = _isUndef(yIndex)
   , id = isNewYAxis
-      ? _crYAxisId(chart)
-      : index === 0
+      ? name || _crYAxisIdFromChart(chart)
+      : yIndex === 0
           ? void 0
-          : _crYAxisId(index);
+          : _crYAxisId(yIndex);
   return { id, isNewYAxis };
 };
 
@@ -36,51 +36,24 @@ const _crAxis = (id, color) => ({
     showEmpty: false
 });
 
-const _crSeria = ({id, color, data, name}, options) => ({
-  type: 'spline',
-  yAxis: id,
-  color, data, name,
-  ...options
-});
-
-const _findDataIndex = (data, v) => {
-  const _max = data.length;
-  let i = 0;
-  for (i; i<_max; i++) {
-    if (data[i][0] >= v) {
-      return i;
-    }
-  }
-  return i;
-};
-
-const _crData = ({ data, userMin, userMax }) => {
-  if (!_isArr(data) || !_isArr(data[0])
-        || !userMin || !userMax) {
-    return data;
-  }
-  const _fromIndex = _findDataIndex(data, userMin)
-  , _toIndex = _findDataIndex(data, userMax);
-  return _fromIndex <= _toIndex
-    ? data.slice(_fromIndex, _toIndex+1)
-    : data;
-};
-
+//options = {color, name, yIndex, data, userMax, userMin}
+//yIndex = | void 0 | 0 | number
 const zhAddSeriaToYAxis = function(options={}, seriaOptions={}) {
   try {
-    const {color, yIndex=-1, name} = options
-    , { id, isNewYAxis } = _checkYAxis(yIndex, this);
+    const {color, yIndex, name} = options
+    , { id, isNewYAxis } = _checkYAxis(this, yIndex, name);
     if (isNewYAxis) {
       this.addAxis(_crAxis(id, color), false, true)
-    }
-    const [
-      data, seriaOption
-    ] = trIfCategoryCase(this, _crData(options), seriaOptions)
-    , _seria = this.addSeries(_crSeria({
-      id, color, data, name}, seriaOption), false
-    );
+    }    
+    const _seria = crYAxisSeria(this, {
+      color, name,
+      ...seriaOptions,
+      data: crDataMinMaxSlice(options),
+      yAxis: id
+    })
+    , _seriaInst = this.addSeries(_seria, false);
     this.redraw();
-    return _seria;
+    return _seriaInst;
   } catch(err) {
     console.log(err.message)
   }

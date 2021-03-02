@@ -1,7 +1,12 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _ChartConfig = _interopRequireDefault(require("../ChartConfig"));
+
 var _isArr = Array.isArray;
 var _assign = Object.assign;
 
@@ -79,17 +84,26 @@ var _trToCategory = function _trToCategory(chartInst, data) {
   return _data;
 };
 
-var trIfCategoryCase = function trIfCategoryCase(chartInst, data, seriaOption) {
-  return _isCategoryCase(chartInst, data) ? [_trToCategory(chartInst, data), _assign(seriaOption, {
-    type: void 0,
-    point: {
-      events: {
-        mouseOver: null
+var crYAxisSeria = function crYAxisSeria(chartInst, options) {
+  var data = options.data;
+
+  if (_isCategoryCase(chartInst, data)) {
+    return _assign(options, {
+      data: _trToCategory(chartInst, data),
+      type: void 0,
+      point: {
+        events: {
+          mouseOver: null
+        }
       }
-    }
-  })] : [data, seriaOption];
+    });
+  } else if (options.type === 'columnrange') {
+    return options;
+  }
+
+  return _ChartConfig["default"].crSeria(options);
 };
 
-var _default = trIfCategoryCase;
+var _default = crYAxisSeria;
 exports["default"] = _default;
-//# sourceMappingURL=trIfCategoryCase.js.map
+//# sourceMappingURL=crYAxisSeria.js.map

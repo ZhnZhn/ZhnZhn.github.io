@@ -1,3 +1,4 @@
+import ChartConfig from '../ChartConfig'
 
 const _isArr = Array.isArray
 const _assign = Object.assign
@@ -48,19 +49,22 @@ const _trToCategory = (chartInst, data) => {
   return _data;
 }
 
-const trIfCategoryCase = (chartInst, data, seriaOption) =>
-  _isCategoryCase(chartInst, data)
-  ? [
-      _trToCategory(chartInst, data),
-      _assign(seriaOption, {
-        type: void 0,
-        point: {
-          events: {
-            mouseOver: null
-          }
+const crYAxisSeria = (chartInst, options) => {
+  const { data } = options;
+  if (_isCategoryCase(chartInst, data)) {
+    return _assign(options, {
+      data: _trToCategory(chartInst, data),
+      type: void 0,
+      point: {
+        events: {
+          mouseOver: null
         }
-      })
-    ]
-  : [data, seriaOption];
+      }
+    })
+  } else if (options.type === 'columnrange') {
+    return options;
+  }
+  return ChartConfig.crSeria(options);
+};
 
-export default trIfCategoryCase
+export default crYAxisSeria
