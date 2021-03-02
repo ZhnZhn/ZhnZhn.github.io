@@ -19,9 +19,9 @@ const S = {
     borderBottom: '2px solid black'
   },
   CHART_ID: {
+    color: '#a487d4',
     width: 200,
-    verticalAlign: 'bottom',
-    color: 'rgb(164, 135, 212)',
+    verticalAlign: 'bottom'
   }
 };
 
@@ -39,7 +39,7 @@ const DF_FROM_CHART = {
 const _crYAxisOption = (toChart) => {
   const options = [{
     caption: 'withYAxis',
-    value: -1
+    value: void 0
   }];
   toChart.yAxis.forEach((yAxis, index) => {
     options.push ({
