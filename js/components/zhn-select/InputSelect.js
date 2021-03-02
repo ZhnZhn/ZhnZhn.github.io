@@ -132,6 +132,8 @@ var InputSelect = /*#__PURE__*/function (_Component) {
      propCaption: PropTypes.string,
      ItemOptionComp: PropTypes.element,
      width: PropTypes.string,
+     style: PropTypes.object,
+     optionsStyle: PropTypes.object,
      isShowOptionAnim: PropTypes.bool,
      options: PropTypes.arrayOf(PropTypes.shape({
         caption: PropTypes.string,
@@ -489,7 +491,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
     _this.renderOptions = function () {
       var _this$props4 = _this.props,
-          rootOptionsStyle = _this$props4.rootOptionsStyle,
+          optionsStyle = _this$props4.optionsStyle,
           width = _this$props4.width,
           isShowOption = _this.state.isShowOption,
           _domOptions = _this._createDomOptionsWithCache(),
@@ -506,7 +508,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           ref: _this._refOptionsComp,
           className: _CL["default"].OPTIONS_DIV,
-          style: (0, _extends2["default"])({}, rootOptionsStyle, _rootWidthStyle),
+          style: (0, _extends2["default"])({}, optionsStyle, _rootWidthStyle),
           children: _domOptions
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter["default"], {
           ref: _this._refIndexNode,
@@ -650,13 +652,13 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
   _proto.render = function render() {
     var _this$props6 = this.props,
-        rootStyle = _this$props6.rootStyle,
+        style = _this$props6.style,
         width = _this$props6.width,
         _this$state5 = this.state,
         value = _this$state5.value,
         isLocalMode = _this$state5.isLocalMode,
         isShowOption = _this$state5.isShowOption,
-        _rootWidthStyle = _crWidthStyle(width, rootStyle),
+        _rootWidthStyle = _crWidthStyle(width, style),
         _this$_crAfterInputEl = this._crAfterInputEl(),
         afterInputEl = _this$_crAfterInputEl.afterInputEl,
         placeholder = _this$_crAfterInputEl.placeholder;

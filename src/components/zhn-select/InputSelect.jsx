@@ -98,6 +98,8 @@ class InputSelect extends Component {
      propCaption: PropTypes.string,
      ItemOptionComp: PropTypes.element,
      width: PropTypes.string,
+     style: PropTypes.object,
+     optionsStyle: PropTypes.object,
      isShowOptionAnim: PropTypes.bool,
      options: PropTypes.arrayOf(PropTypes.shape({
         caption: PropTypes.string,
@@ -439,7 +441,7 @@ class InputSelect extends Component {
   }
 
   renderOptions = () => {
-    const { rootOptionsStyle, width } = this.props
+    const { optionsStyle, width } = this.props
     , { isShowOption } = this.state
     , _domOptions = this._createDomOptionsWithCache()
     , _styleOptions = isShowOption ? S.BLOCK : S.NONE
@@ -455,7 +457,7 @@ class InputSelect extends Component {
           <div
              ref={this._refOptionsComp}
              className={CL.OPTIONS_DIV}
-             style={{...rootOptionsStyle, ..._rootWidthStyle}}
+             style={{...optionsStyle, ..._rootWidthStyle}}
            >
             {_domOptions}
           </div>
@@ -544,9 +546,9 @@ class InputSelect extends Component {
   _refInput = node => this._nodeInput = node
 
   render(){
-    const { rootStyle, width } = this.props
+    const { style, width } = this.props
     , { value, isLocalMode, isShowOption } = this.state
-    , _rootWidthStyle = _crWidthStyle(width, rootStyle)
+    , _rootWidthStyle = _crWidthStyle(width, style)
     , { afterInputEl, placeholder } = this._crAfterInputEl();
 
     return (
