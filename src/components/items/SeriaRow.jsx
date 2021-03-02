@@ -22,24 +22,24 @@ const S = {
     paddingBottom: 16
   },
   TITLE: {
-    verticalAlign: 'middle',
-    color: 'rgb(27, 117, 187)',
-    textAlign: 'right',
+    color: '##1b75bb',
     width: 100,
     paddingLeft: 4,
     paddingRight: 16,
+    verticalAlign: 'middle',
+    textAlign: 'right',
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
   },
   ROW_CHECK_BOX: {
     display: 'inline-block',
-    verticalAlign: 'middle',
-    paddingLeft: 0
+    paddingLeft: 0,
+    verticalAlign: 'middle'    
   },
   SELECT: {
-     verticalAlign: 'middle',
-     marginLeft: 24
+     marginLeft: 24,
+     verticalAlign: 'middle'
   },
   SELECT_OPTIONS: {
     minHeight: 100
@@ -95,9 +95,15 @@ class SeriaRow extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      this.toYAxis = void 0
+    }
+  }
+
   _getColor = () => {
     const { colorEntered } = this.state
-    , { color } = this.props.seria;        
+    , { color } = this.props.seria;
     return colorEntered || color || DF.COLOR;
   }
 
@@ -137,8 +143,8 @@ class SeriaRow extends Component {
         <InputSelect
           placeholder="withYAxis"
           width="150"
-          rootStyle={S.SELECT}
-          rootOptionsStyle={S.SELECT_OPTIONS}
+          style={S.SELECT}
+          optionsStyle={S.SELECT_OPTIONS}
           options={yAxisOptions}
           onSelect={this._hSelectYAxis}
         />

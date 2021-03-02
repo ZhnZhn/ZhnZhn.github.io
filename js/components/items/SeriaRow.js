@@ -38,24 +38,24 @@ var S = {
     paddingBottom: 16
   },
   TITLE: {
-    verticalAlign: 'middle',
-    color: 'rgb(27, 117, 187)',
-    textAlign: 'right',
+    color: '##1b75bb',
     width: 100,
     paddingLeft: 4,
     paddingRight: 16,
+    verticalAlign: 'middle',
+    textAlign: 'right',
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
   },
   ROW_CHECK_BOX: {
     display: 'inline-block',
-    verticalAlign: 'middle',
-    paddingLeft: 0
+    paddingLeft: 0,
+    verticalAlign: 'middle'
   },
   SELECT: {
-    verticalAlign: 'middle',
-    marginLeft: 24
+    marginLeft: 24,
+    verticalAlign: 'middle'
   },
   SELECT_OPTIONS: {
     minHeight: 100
@@ -113,6 +113,12 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
     }
   };
 
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      this.toYAxis = void 0;
+    }
+  };
+
   _proto.render = function render() {
     var isShowPallete = this.state.isShowPallete,
         _this$props = this.props,
@@ -148,8 +154,8 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect["default"], {
         placeholder: "withYAxis",
         width: "150",
-        rootStyle: S.SELECT,
-        rootOptionsStyle: S.SELECT_OPTIONS,
+        style: S.SELECT,
+        optionsStyle: S.SELECT_OPTIONS,
         options: yAxisOptions,
         onSelect: this._hSelectYAxis
       })]
