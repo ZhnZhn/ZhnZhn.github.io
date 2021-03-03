@@ -36,6 +36,20 @@ const DF_FROM_CHART = {
 };
 */
 
+const _getUserMinMax = fromChart => {
+  const { xAxis } = fromChart || {}
+  , [ xAxis0 ] = xAxis || []
+  , {
+    dataMin, dataMax,
+    userMin, userMax
+  } = (xAxis0 && xAxis0.getExtremes()) || {};
+  return [
+    userMin || dataMin,
+    userMax || dataMax
+  ];
+};
+
+
 const _crYAxisOption = (toChart) => {
   const options = [{
     caption: 'withYAxis',
@@ -69,7 +83,7 @@ class SeriesPane extends Component {
       .map((seria, index) => {
          return (
            <SeriaRow
-              key={chartId + index}
+              key={`${chartId} ${seria.name || index}`}
               seria={seria}
               compIndex={index}
               yAxisOptions={options}
@@ -81,11 +95,11 @@ class SeriesPane extends Component {
   }
 
   render(){
-    const { style, toChart, fromChart={} } = this.props
+    const { style, toChart, fromChart } = this.props
         , _yAxisOption = _crYAxisOption(toChart)
-        , { userOptions={}, series=[] } = fromChart
-        , { zhConfig={} } = userOptions
-        , { id:chartId='id' } = zhConfig;
+        , { userOptions, series=[] } = fromChart || {}
+        , { zhConfig } = userOptions || {}
+        , { id:chartId='id' } = zhConfig || {};
 
     return (
       <ScrollPane style={style}>
@@ -108,21 +122,16 @@ class SeriesPane extends Component {
   }
 
   getValues(){
-    const {
-      fromChart={}
-    } = this.props
-    , {
-      dataMin, dataMax,
+    const [
       userMin, userMax
-    } = (fromChart.xAxis
-      && fromChart.xAxis[0].getExtremes()) || {};
+    ] = _getUserMinMax(this.props.fromChart);
     return this.compSeries
       .filter(comp => comp !== null )
       .map(comp => comp.getValue())
       .filter(config => config.isChecked)
       .map(config => {
-        config.userMin = userMin || dataMin
-        config.userMax = userMax || dataMax
+        config.userMin = userMin
+        config.userMax = userMax
         return config;
       });
   }
