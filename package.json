@@ -21,7 +21,7 @@
     "build:dll-jsx": "webpack --color --progress --config webpack.dll-jsx.js",
     "stats": "npm run stats:json && npm run stats:report",
     "stats:json": "webpack --config webpack.dll-jsx.js --profile --json > stats.json",
-    "stats:report": "webpack-bundle-analyzer stats.json --no-open --mode static"
+    "stats:report": "webpack-bundle-analyzer stats.json --no-open --mode static"    
   },
   "author": "Yevhenii Molodyi",
   "license": "BSD-3-Clause",
@@ -116,6 +116,7 @@
   },
   "jest": {
     "roots": [
+      "<rootDir>/js/charts/plugin",
       "<rootDir>/js/utils/",
       "<rootDir>/js/math/",
       "<rootDir>/js/adapters/",
@@ -128,6 +129,7 @@
       "<rootDir>/js/flux/stores/"
     ],
     "transformIgnorePatterns": [
+      "<rootDir>/js/charts/plugin",
       "<rootDir>/js/utils/",
       "<rootDir>/js/math/",
       "<rootDir>/js/adapters/",

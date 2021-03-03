@@ -1,23 +1,6 @@
 import crDataMinMaxSlice from './crDataMinMaxSlice'
+import crYAxisId from './crYAxisId'
 import crYAxisSeria from './crYAxisSeria'
-
-const YAXIS = 'yAxis';
-
-const _isUndef = v => typeof v === 'undefined';
-
-const _crYAxisId = suffix => YAXIS + suffix
-, _crYAxisIdFromChart = chart =>
-    _crYAxisId(chart.yAxis.length);
-
-const _checkYAxis = (chart, yIndex, name) => {
-  const isNewYAxis = _isUndef(yIndex)
-  , id = isNewYAxis
-      ? name || _crYAxisIdFromChart(chart)
-      : yIndex === 0
-          ? void 0
-          : _crYAxisId(yIndex);
-  return { id, isNewYAxis };
-};
 
 const _crAxis = (id, color) => ({
     id: id,
@@ -37,19 +20,19 @@ const _crAxis = (id, color) => ({
 });
 
 //options = {color, name, yIndex, data, userMax, userMin}
-//yIndex = | void 0 | 0 | number
+//yIndex =  void 0 | 0 | number
 const zhAddSeriaToYAxis = function(options={}, seriaOptions={}) {
   try {
     const {color, yIndex, name} = options
-    , { id, isNewYAxis } = _checkYAxis(this, yIndex, name);
-    if (isNewYAxis) {
-      this.addAxis(_crAxis(id, color), false, true)
-    }    
+    , [isNewAxis, yAxisId] = crYAxisId(this, yIndex, name);
+    if (isNewAxis) {
+      this.addAxis(_crAxis(yAxisId, color), false, true)
+    }
     const _seria = crYAxisSeria(this, {
       color, name,
       ...seriaOptions,
       data: crDataMinMaxSlice(options),
-      yAxis: id
+      yAxis: yAxisId
     })
     , _seriaInst = this.addSeries(_seria, false);
     this.redraw();

@@ -9,30 +9,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _crDataMinMaxSlice = _interopRequireDefault(require("./crDataMinMaxSlice"));
 
+var _crYAxisId2 = _interopRequireDefault(require("./crYAxisId"));
+
 var _crYAxisSeria = _interopRequireDefault(require("./crYAxisSeria"));
-
-var YAXIS = 'yAxis';
-
-var _isUndef = function _isUndef(v) {
-  return typeof v === 'undefined';
-};
-
-var _crYAxisId = function _crYAxisId(suffix) {
-  return YAXIS + suffix;
-},
-    _crYAxisIdFromChart = function _crYAxisIdFromChart(chart) {
-  return _crYAxisId(chart.yAxis.length);
-};
-
-var _checkYAxis = function _checkYAxis(chart, yIndex, name) {
-  var isNewYAxis = _isUndef(yIndex),
-      id = isNewYAxis ? name || _crYAxisIdFromChart(chart) : yIndex === 0 ? void 0 : _crYAxisId(yIndex);
-
-  return {
-    id: id,
-    isNewYAxis: isNewYAxis
-  };
-};
 
 var _crAxis = function _crAxis(id, color) {
   return {
@@ -52,7 +31,7 @@ var _crAxis = function _crAxis(id, color) {
     showEmpty: false
   };
 }; //options = {color, name, yIndex, data, userMax, userMin}
-//yIndex = | void 0 | 0 | number
+//yIndex =  void 0 | 0 | number
 
 
 var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
@@ -69,12 +48,12 @@ var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
         color = _options.color,
         yIndex = _options.yIndex,
         name = _options.name,
-        _checkYAxis2 = _checkYAxis(this, yIndex, name),
-        id = _checkYAxis2.id,
-        isNewYAxis = _checkYAxis2.isNewYAxis;
+        _crYAxisId = (0, _crYAxisId2["default"])(this, yIndex, name),
+        isNewAxis = _crYAxisId[0],
+        yAxisId = _crYAxisId[1];
 
-    if (isNewYAxis) {
-      this.addAxis(_crAxis(id, color), false, true);
+    if (isNewAxis) {
+      this.addAxis(_crAxis(yAxisId, color), false, true);
     }
 
     var _seria = (0, _crYAxisSeria["default"])(this, (0, _extends2["default"])({
@@ -82,7 +61,7 @@ var zhAddSeriaToYAxis = function zhAddSeriaToYAxis(options, seriaOptions) {
       name: name
     }, seriaOptions, {
       data: (0, _crDataMinMaxSlice["default"])(options),
-      yAxis: id
+      yAxis: yAxisId
     })),
         _seriaInst = this.addSeries(_seria, false);
 
