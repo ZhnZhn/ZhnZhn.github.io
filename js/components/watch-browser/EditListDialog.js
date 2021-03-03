@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
@@ -41,84 +39,67 @@ var EDIT_WATCH_COMPLETED = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
 var notSelected = _MsgWatch["default"].notSelected,
     emptyName = _MsgWatch["default"].emptyName;
 
-var EditListDialog = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(EditListDialog, _Component);
+var _areEqual = function _areEqual(prevProps, nextProps) {
+  return prevProps.isShow === nextProps.isShow;
+};
 
-  function EditListDialog() {
-    return _Component.apply(this, arguments) || this;
-  }
-
-  var _proto = EditListDialog.prototype;
-
-  /*
-  static propTypes = {
-    isShow : PropTypes.bool,
-    store : PropTypes.object,
-    onClose : PropTypes.func
-  }
-  */
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-
-    return true;
-  };
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        isShow = _this$props.isShow,
-        store = _this$props.store,
-        onClose = _this$props.onClose;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog["default"], {
-      caption: "Watch Lists Edit",
-      isShow: isShow,
-      isWithButton: false,
-      onClose: onClose,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane["default"], {
-        width: 380,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab["default"], {
-          title: "Create",
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListCreatePane["default"], {
-            store: store,
-            actionCompleted: EDIT_WATCH_COMPLETED,
-            actionFailed: EDIT_WATCH_FAILED,
-            forActionType: CREATE_LIST,
-            msgOnNotSelect: notSelected,
-            msgOnIsEmptyName: emptyName,
-            onCreate: createList,
-            onClose: onClose
-          })
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab["default"], {
-          title: "Rename",
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListEditPane["default"], {
-            store: store,
-            actionCompleted: EDIT_WATCH_COMPLETED,
-            actionFailed: EDIT_WATCH_FAILED,
-            forActionType: RENAME_LIST,
-            msgOnNotSelect: notSelected,
-            msgOnIsEmptyName: emptyName,
-            onRename: renameList,
-            onClose: onClose
-          })
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab["default"], {
-          title: "Delete",
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListDeletePane["default"], {
-            store: store,
-            actionCompleted: EDIT_WATCH_COMPLETED,
-            actionFailed: EDIT_WATCH_FAILED,
-            forActionType: DELETE_LIST,
-            msgOnNotSelect: notSelected,
-            onDelete: deleteList,
-            onClose: onClose
-          })
-        })]
-      })
-    });
-  };
-
-  return EditListDialog;
-}(_react.Component);
+var EditListDialog = /*#__PURE__*/(0, _react.memo)(function (_ref) {
+  var isShow = _ref.isShow,
+      store = _ref.store,
+      onClose = _ref.onClose;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog["default"], {
+    caption: "Watch Lists Edit",
+    isShow: isShow,
+    isWithButton: false,
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane["default"], {
+      width: 380,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab["default"], {
+        title: "Create",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListCreatePane["default"], {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          actionFailed: EDIT_WATCH_FAILED,
+          forActionType: CREATE_LIST,
+          msgOnNotSelect: notSelected,
+          msgOnIsEmptyName: emptyName,
+          onCreate: createList,
+          onClose: onClose
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab["default"], {
+        title: "Rename",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListEditPane["default"], {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          actionFailed: EDIT_WATCH_FAILED,
+          forActionType: RENAME_LIST,
+          msgOnNotSelect: notSelected,
+          msgOnIsEmptyName: emptyName,
+          onRename: renameList,
+          onClose: onClose
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab["default"], {
+        title: "Delete",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListDeletePane["default"], {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          actionFailed: EDIT_WATCH_FAILED,
+          forActionType: DELETE_LIST,
+          msgOnNotSelect: notSelected,
+          onDelete: deleteList,
+          onClose: onClose
+        })
+      })]
+    })
+  });
+}, _areEqual);
+/*
+EditListDialog.propTypes = {
+  isShow : PropTypes.bool,
+  store : PropTypes.object,
+  onClose : PropTypes.func
+}
+*/
 
 var _default = EditListDialog;
 exports["default"] = _default;

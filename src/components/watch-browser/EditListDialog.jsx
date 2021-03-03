@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { memo } from 'react';
 //import PropTypes from "prop-types";
 
 import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
@@ -19,70 +19,66 @@ const {
 } = WAT;
 const { notSelected, emptyName } = Msg;
 
-class EditListDialog extends Component {
-  /*
-  static propTypes = {
-    isShow : PropTypes.bool,
-    store : PropTypes.object,
-    onClose : PropTypes.func
-  }
-  */
+const _areEqual = (prevProps, nextProps) => prevProps
+  .isShow === nextProps.isShow;
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  }
+const EditListDialog = memo(({
+  isShow,
+  store,
+  onClose
+}) =>(
+  <ModalDialog
+     caption="Watch Lists Edit"
+     isShow={isShow}
+     isWithButton={false}
+     onClose={onClose}
+  >
+    <TabPane width={380} >
+       <Tab title="Create">
+         <ListCreatePane
+            store={store}
+            actionCompleted={EDIT_WATCH_COMPLETED}
+            actionFailed={EDIT_WATCH_FAILED}
+            forActionType={CREATE_LIST}
+            msgOnNotSelect={notSelected}
+            msgOnIsEmptyName={emptyName}
+            onCreate={createList}
+            onClose={onClose}
+          />
+       </Tab>
+       <Tab title="Rename">
+         <ListEditPane
+            store={store}
+            actionCompleted={EDIT_WATCH_COMPLETED}
+            actionFailed={EDIT_WATCH_FAILED}
+            forActionType={RENAME_LIST}
+            msgOnNotSelect={notSelected}
+            msgOnIsEmptyName={emptyName}
+            onRename={renameList}
+            onClose={onClose}
+         />
+       </Tab>
+       <Tab title="Delete">
+         <ListDeletePane
+            store={store}
+            actionCompleted={EDIT_WATCH_COMPLETED}
+            actionFailed={EDIT_WATCH_FAILED}
+            forActionType={DELETE_LIST}
+            msgOnNotSelect={notSelected}
+            onDelete={deleteList}
+            onClose={onClose}
+         />
+       </Tab>
+    </TabPane>
+  </ModalDialog>
+), _areEqual)
 
-  render(){
-    const { isShow, store, onClose } = this.props;
-    return (
-      <ModalDialog
-         caption="Watch Lists Edit"
-         isShow={isShow}
-         isWithButton={false}
-         onClose={onClose}
-      >
-        <TabPane width={380} >
-           <Tab title="Create">
-             <ListCreatePane
-                store={store}
-                actionCompleted={EDIT_WATCH_COMPLETED}
-                actionFailed={EDIT_WATCH_FAILED}
-                forActionType={CREATE_LIST}
-                msgOnNotSelect={notSelected}
-                msgOnIsEmptyName={emptyName}
-                onCreate={createList}
-                onClose={onClose} />
-           </Tab>
-           <Tab title="Rename">
-             <ListEditPane
-                store={store}
-                actionCompleted={EDIT_WATCH_COMPLETED}
-                actionFailed={EDIT_WATCH_FAILED}
-                forActionType={RENAME_LIST}
-                msgOnNotSelect={notSelected}
-                msgOnIsEmptyName={emptyName}
-                onRename={renameList}
-                onClose={onClose}
-             />
-           </Tab>
-           <Tab title="Delete">
-             <ListDeletePane
-                store={store}
-                actionCompleted={EDIT_WATCH_COMPLETED}
-                actionFailed={EDIT_WATCH_FAILED}
-                forActionType={DELETE_LIST}
-                msgOnNotSelect={notSelected}
-                onDelete={deleteList}
-                onClose={onClose}
-             />
-           </Tab>
-        </TabPane>
-      </ModalDialog>
-    )
-  }
+/*
+EditListDialog.propTypes = {
+  isShow : PropTypes.bool,
+  store : PropTypes.object,
+  onClose : PropTypes.func
 }
+*/
 
 export default EditListDialog
