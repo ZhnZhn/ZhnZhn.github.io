@@ -1,120 +1,100 @@
-import { Component } from 'react';
+import { useRef, useState, useCallback, useMemo } from 'react';
+import useListen from '../hooks/useListen'
 //import PropTypes from "prop-types";
 
 import A from './Atoms'
 
-class ListCreatePane extends Component {
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func,
-      getWatchGroups: PropTypes.func
-    }),
-    actionCompleted: PropTypes.string,
-    actionFailed: PropTypes.string,
-    forActionType: PropTypes.string,
-    msgOnNotSelect: PropTypes.func,
-    msgOnIsEmptyName: PropTypes.func,
-    onCreate: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
+const ListCreatePane = ({
+  store,
+  onCreate, msgOnNotSelect, msgOnIsEmptyName,
+  actionCompleted, actionFailed, forActionType,
+  onClose
+}) => {
+  const _refInputText = useRef()
+  , _refCaptionGroup = useRef()
+  , [groupOptions, setGroupOptions] = useState(()=>store.getWatchGroups())
+  , [validationMessages, setValidationMessages] = useState([])
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hCreate = useCallback(() => {
+      const captionList = _refInputText.current.getValue()
+      , captionGroup = _refCaptionGroup.current;
+      if (captionGroup && captionList){
+        onCreate({ captionGroup, captionList })
+      } else {
+        const msg = [];
+        if (!captionGroup) { msg.push(msgOnNotSelect('In Group')); }
+        if (!captionList)  { msg.push(msgOnIsEmptyName('List')); }
+        setValidationMessages(msg)
+      }
+  }, [])
+  //onCreate, msgOnNotSelect, msgOnIsEmptyName
+  /*eslint-enable react-hooks/exhaustive-deps */
+  , _primaryBt = useMemo(() =>(
+     <A.Button.Primary
+        caption="Create"
+        title="Create New List"
+        onClick={_hCreate}
+     />
+  ), [_hCreate])
+  , _hSelectGroup = useCallback(item => {
+    const { caption } = item || {}
+    _refCaptionGroup.current = caption
+  }, [])
+  , _hClear = useCallback(() => {
+    _refInputText.current.setValue('')
+    setValidationMessages([])
+  }, [])
 
-  constructor(props){
-    super()
-    this.captionGroup = null
-    this._primaryBt = (<A.Button.Primary
-       caption="Create"
-       title="Create New List"
-       onClick={this._handleCreate}
-    />)
-    this.state = {
-      groupOptions: props.store.getWatchGroups(),
-      validationMessages: []
-    }
-  }
-
-  componentDidMount(){
-    this.unsubscribe = this.props.store
-      .listen(this._onStore)
-  }
-  componentWillUnmount(){
-    this.unsubscribe()
-  }
-  _onStore = (actionType, data) => {
-    const { actionCompleted, actionFailed, forActionType, store } = this.props;
+  useListen(store, (actionType, data)=>{
     if (actionType === actionCompleted){
-        if (data.forActionType === forActionType){
-          this._handleClear()
-        }
-        this.setState({
-           groupOptions: store.getWatchGroups()
-        });
+      if (data.forActionType === forActionType){
+        _hClear()
+      }
+      setGroupOptions(store.getWatchGroups())
     } else if (actionType === actionFailed && data.forActionType === forActionType){
-      this.setState({
-        validationMessages: data.messages
-      })
+      setValidationMessages(data.messages)
     }
-  }
+  })
 
-  _handleSelectGroup = (item) => {
-    this.captionGroup = (item && item.caption) || null;
-  }
-
-  _handleClear = () => {
-     this.inputText.setValue('')
-     if (this.state.validationMessages.length>0){
-       this.setState({
-         validationMessages: []
-       })
-     }
-  }
-
-  _handleCreate = () => {
-     const { onCreate, msgOnNotSelect, msgOnIsEmptyName } = this.props
-         , captionList = this.inputText.getValue();
-     if (this.captionGroup && captionList){
-       onCreate({
-          captionGroup: this.captionGroup,
-          captionList: captionList
-       });
-     } else {
-       const msg = [];
-       if (!this.captionGroup) { msg.push(msgOnNotSelect('In Group')); }
-       if (!captionList)       { msg.push(msgOnIsEmptyName('List')); }
-       this.setState({
-         validationMessages: msg
-       });
-     }
-  }
-
-  _refInputText = c => this.inputText = c
-
-  render(){
-    const { onClose } = this.props
-        , { groupOptions, validationMessages } = this.state;
-    return (
-      <div>
-        <A.RowInputSelect
-           caption="In Group:"
-           options={groupOptions}
-           onSelect={this._handleSelectGroup}
-        />
-        <A.RowInputText
-           ref={this._refInputText}
-           caption="List:"
-        />
-        <A.ValidationMessages
-          validationMessages={validationMessages}
-        />
-        <A.RowButtons
-           Primary={this._primaryBt}
-           onClear={this._handleClear}
-           onClose={onClose}
-        />
-      </div>
-    )
-  }
+  return (
+    <div>
+      <A.RowInputSelect
+         caption="In Group:"
+         options={groupOptions}
+         onSelect={_hSelectGroup}
+      />
+      <A.RowInputText
+         ref={_refInputText}
+         caption="List:"
+      />
+      <A.ValidationMessages
+        validationMessages={validationMessages}
+      />
+      <A.RowButtons
+         Primary={_primaryBt}
+         onClear={_hClear}
+         onClose={onClose}
+      />
+    </div>
+  );
 }
+
+/*
+ListCreatePane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func,
+    getWatchGroups: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  actionFailed: PropTypes.string,
+  forActionType: PropTypes.string,
+
+  msgOnNotSelect: PropTypes.func,
+  msgOnIsEmptyName: PropTypes.func,
+  onCreate: PropTypes.func,
+
+  onClose: PropTypes.func
+}
+*/
 
 export default ListCreatePane

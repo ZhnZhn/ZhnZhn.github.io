@@ -5,155 +5,123 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
+
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
-var ListCreatePane = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(ListCreatePane, _Component);
+var ListCreatePane = function ListCreatePane(_ref) {
+  var store = _ref.store,
+      onCreate = _ref.onCreate,
+      msgOnNotSelect = _ref.msgOnNotSelect,
+      msgOnIsEmptyName = _ref.msgOnIsEmptyName,
+      actionCompleted = _ref.actionCompleted,
+      actionFailed = _ref.actionFailed,
+      forActionType = _ref.forActionType,
+      onClose = _ref.onClose;
 
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func,
-      getWatchGroups: PropTypes.func
-    }),
-    actionCompleted: PropTypes.string,
-    actionFailed: PropTypes.string,
-    forActionType: PropTypes.string,
-    msgOnNotSelect: PropTypes.func,
-    msgOnIsEmptyName: PropTypes.func,
-    onCreate: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
-  function ListCreatePane(props) {
-    var _this;
+  var _refInputText = (0, _react.useRef)(),
+      _refCaptionGroup = (0, _react.useRef)(),
+      _useState = (0, _react.useState)(function () {
+    return store.getWatchGroups();
+  }),
+      groupOptions = _useState[0],
+      setGroupOptions = _useState[1],
+      _useState2 = (0, _react.useState)([]),
+      validationMessages = _useState2[0],
+      setValidationMessages = _useState2[1],
+      _hCreate = (0, _react.useCallback)(function () {
+    var captionList = _refInputText.current.getValue(),
+        captionGroup = _refCaptionGroup.current;
 
-    _this = _Component.call(this) || this;
+    if (captionGroup && captionList) {
+      onCreate({
+        captionGroup: captionGroup,
+        captionList: captionList
+      });
+    } else {
+      var msg = [];
 
-    _this._onStore = function (actionType, data) {
-      var _this$props = _this.props,
-          actionCompleted = _this$props.actionCompleted,
-          actionFailed = _this$props.actionFailed,
-          forActionType = _this$props.forActionType,
-          store = _this$props.store;
-
-      if (actionType === actionCompleted) {
-        if (data.forActionType === forActionType) {
-          _this._handleClear();
-        }
-
-        _this.setState({
-          groupOptions: store.getWatchGroups()
-        });
-      } else if (actionType === actionFailed && data.forActionType === forActionType) {
-        _this.setState({
-          validationMessages: data.messages
-        });
+      if (!captionGroup) {
+        msg.push(msgOnNotSelect('In Group'));
       }
-    };
 
-    _this._handleSelectGroup = function (item) {
-      _this.captionGroup = item && item.caption || null;
-    };
-
-    _this._handleClear = function () {
-      _this.inputText.setValue('');
-
-      if (_this.state.validationMessages.length > 0) {
-        _this.setState({
-          validationMessages: []
-        });
+      if (!captionList) {
+        msg.push(msgOnIsEmptyName('List'));
       }
-    };
 
-    _this._handleCreate = function () {
-      var _this$props2 = _this.props,
-          onCreate = _this$props2.onCreate,
-          msgOnNotSelect = _this$props2.msgOnNotSelect,
-          msgOnIsEmptyName = _this$props2.msgOnIsEmptyName,
-          captionList = _this.inputText.getValue();
-
-      if (_this.captionGroup && captionList) {
-        onCreate({
-          captionGroup: _this.captionGroup,
-          captionList: captionList
-        });
-      } else {
-        var msg = [];
-
-        if (!_this.captionGroup) {
-          msg.push(msgOnNotSelect('In Group'));
-        }
-
-        if (!captionList) {
-          msg.push(msgOnIsEmptyName('List'));
-        }
-
-        _this.setState({
-          validationMessages: msg
-        });
-      }
-    };
-
-    _this._refInputText = function (c) {
-      return _this.inputText = c;
-    };
-
-    _this.captionGroup = null;
-    _this._primaryBt = /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
+      setValidationMessages(msg);
+    }
+  }, []),
+      _primaryBt = (0, _react.useMemo)(function () {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
       caption: "Create",
       title: "Create New List",
-      onClick: _this._handleCreate
+      onClick: _hCreate
     });
-    _this.state = {
-      groupOptions: props.store.getWatchGroups(),
-      validationMessages: []
-    };
-    return _this;
-  }
+  }, [_hCreate]),
+      _hSelectGroup = (0, _react.useCallback)(function (item) {
+    var _ref2 = item || {},
+        caption = _ref2.caption;
 
-  var _proto = ListCreatePane.prototype;
+    _refCaptionGroup.current = caption;
+  }, []),
+      _hClear = (0, _react.useCallback)(function () {
+    _refInputText.current.setValue('');
 
-  _proto.componentDidMount = function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  };
+    setValidationMessages([]);
+  }, []);
 
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unsubscribe();
-  };
+  (0, _useListen["default"])(store, function (actionType, data) {
+    if (actionType === actionCompleted) {
+      if (data.forActionType === forActionType) {
+        _hClear();
+      }
 
-  _proto.render = function render() {
-    var onClose = this.props.onClose,
-        _this$state = this.state,
-        groupOptions = _this$state.groupOptions,
-        validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputSelect, {
-        caption: "In Group:",
-        options: groupOptions,
-        onSelect: this._handleSelectGroup
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputText, {
-        ref: this._refInputText,
-        caption: "List:"
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
-        validationMessages: validationMessages
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
-        Primary: this._primaryBt,
-        onClear: this._handleClear,
-        onClose: onClose
-      })]
-    });
-  };
+      setGroupOptions(store.getWatchGroups());
+    } else if (actionType === actionFailed && data.forActionType === forActionType) {
+      setValidationMessages(data.messages);
+    }
+  });
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputSelect, {
+      caption: "In Group:",
+      options: groupOptions,
+      onSelect: _hSelectGroup
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputText, {
+      ref: _refInputText,
+      caption: "List:"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
+      validationMessages: validationMessages
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
+      Primary: _primaryBt,
+      onClear: _hClear,
+      onClose: onClose
+    })]
+  });
+};
+/*
+ListCreatePane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func,
+    getWatchGroups: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  actionFailed: PropTypes.string,
+  forActionType: PropTypes.string,
 
-  return ListCreatePane;
-}(_react.Component);
+  msgOnNotSelect: PropTypes.func,
+  msgOnIsEmptyName: PropTypes.func,
+  onCreate: PropTypes.func,
+
+  onClose: PropTypes.func
+}
+*/
+
 
 var _default = ListCreatePane;
 exports["default"] = _default;
