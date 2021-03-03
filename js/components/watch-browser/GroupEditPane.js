@@ -5,155 +5,123 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
+
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
-var GroupEditPane = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(GroupEditPane, _Component);
+var GroupEditPane = function GroupEditPane(_ref) {
+  var store = _ref.store,
+      actionCompleted = _ref.actionCompleted,
+      actionFailed = _ref.actionFailed,
+      forActionType = _ref.forActionType,
+      onRename = _ref.onRename,
+      msgOnNotSelect = _ref.msgOnNotSelect,
+      msgOnIsEmptyName = _ref.msgOnIsEmptyName,
+      onClose = _ref.onClose;
 
-  /*
-  static propTypes = {
-    store: PropTypes.shape({
-      listen: PropTypes.func,
-      getWatchGroups: PropTypes.func
-    }),
-    actionCompleted: PropTypes.string,
-    actionFailed: PropTypes.string,
-    forActionType: PropTypes.string,
-    msgOnIsEmptyName: PropTypes.func,
-    msgOnNotSelect: PropTypes.func,
-    onRename: PropTypes.func,
-    onClose: PropTypes.func
-  }
-  */
-  function GroupEditPane(props) {
-    var _this;
+  var _refInputText = (0, _react.useRef)(),
+      _refCaptionFrom = (0, _react.useRef)(),
+      _useState = (0, _react.useState)(function () {
+    return store.getWatchGroups();
+  }),
+      groupOptions = _useState[0],
+      setGroupOptions = _useState[1],
+      _useState2 = (0, _react.useState)([]),
+      validationMessages = _useState2[0],
+      setValidationMessages = _useState2[1],
+      _hRename = (0, _react.useCallback)(function () {
+    var captionTo = _refInputText.current.getValue(),
+        captionFrom = _refCaptionFrom.current;
 
-    _this = _Component.call(this) || this;
+    if (captionTo && captionFrom) {
+      onRename({
+        captionFrom: captionFrom,
+        captionTo: captionTo
+      });
+    } else {
+      var msg = [];
 
-    _this._onStore = function (actionType, data) {
-      var _this$props = _this.props,
-          actionCompleted = _this$props.actionCompleted,
-          actionFailed = _this$props.actionFailed,
-          forActionType = _this$props.forActionType,
-          store = _this$props.store;
-
-      if (actionType === actionCompleted) {
-        if (data.forActionType === forActionType) {
-          _this._handleClear();
-        }
-
-        _this.setState({
-          groupOptions: store.getWatchGroups()
-        });
-      } else if (actionType === actionFailed && data.forActionType === forActionType) {
-        _this.setState({
-          validationMessages: data.messages
-        });
+      if (!captionFrom) {
+        msg.push(msgOnNotSelect('Group From'));
       }
-    };
 
-    _this._handleSelectGroup = function (item) {
-      _this.captionFrom = item && item.caption || null;
-    };
-
-    _this._handleClear = function () {
-      _this.inputText.setValue('');
-
-      if (_this.state.validationMessages.length > 0) {
-        _this.setState({
-          validationMessages: []
-        });
+      if (!captionTo) {
+        msg.push(msgOnIsEmptyName('Group To'));
       }
-    };
 
-    _this._handleRename = function () {
-      var _this$props2 = _this.props,
-          onRename = _this$props2.onRename,
-          msgOnNotSelect = _this$props2.msgOnNotSelect,
-          msgOnIsEmptyName = _this$props2.msgOnIsEmptyName,
-          captionTo = _this.inputText.getValue();
-
-      if (captionTo && _this.captionFrom) {
-        onRename({
-          captionFrom: _this.captionFrom,
-          captionTo: captionTo
-        });
-      } else {
-        var msg = [];
-
-        if (!_this.captionFrom) {
-          msg.push(msgOnNotSelect('Group From'));
-        }
-
-        if (!captionTo) {
-          msg.push(msgOnIsEmptyName('Group To'));
-        }
-
-        _this.setState({
-          validationMessages: msg
-        });
-      }
-    };
-
-    _this._refInputText = function (c) {
-      return _this.inputText = c;
-    };
-
-    _this.captionFrom = null;
-    _this._primaryBt = /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
+      setValidationMessages(msg);
+    }
+  }, []),
+      _primaryBt = (0, _react.useMemo)(function () {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
       caption: "Edit",
       title: "Edit Group Name",
-      onClick: _this._handleRename
+      onClick: _hRename
     });
-    _this.state = {
-      groupOptions: props.store.getWatchGroups(),
-      validationMessages: []
-    };
-    return _this;
-  }
+  }, [_hRename]),
+      _hSelectGroup = (0, _react.useCallback)(function (item) {
+    var _ref2 = item || {},
+        caption = _ref2.caption;
 
-  var _proto = GroupEditPane.prototype;
+    _refCaptionFrom.current = caption;
+  }, []),
+      _hClear = (0, _react.useCallback)(function () {
+    _refInputText.current.setValue('');
 
-  _proto.componentDidMount = function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  };
+    setValidationMessages([]);
+  }, []);
 
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unsubscribe();
-  };
+  (0, _useListen["default"])(store, function (actionType, data) {
+    if (actionType === actionCompleted) {
+      if (data.forActionType === forActionType) {
+        _hClear();
+      }
 
-  _proto.render = function render() {
-    var onClose = this.props.onClose,
-        _this$state = this.state,
-        groupOptions = _this$state.groupOptions,
-        validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputSelect, {
-        caption: "Group From:",
-        options: groupOptions,
-        onSelect: this._handleSelectGroup
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputText, {
-        ref: this._refInputText,
-        caption: "Group To:"
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
-        validationMessages: validationMessages
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
-        Primary: this._primaryBt,
-        onClear: this._handleClear,
-        onClose: onClose
-      })]
-    });
-  };
+      setGroupOptions(store.getWatchGroups());
+    } else if (actionType === actionFailed && data.forActionType === forActionType) {
+      setValidationMessages(data.messages);
+    }
+  });
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputSelect, {
+      caption: "Group From:",
+      options: groupOptions,
+      onSelect: _hSelectGroup
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputText, {
+      ref: _refInputText,
+      caption: "Group To:"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
+      validationMessages: validationMessages
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
+      Primary: _primaryBt,
+      onClear: _hClear,
+      onClose: onClose
+    })]
+  });
+};
+/*
+GroupEditPane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func,
+    getWatchGroups: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  actionFailed: PropTypes.string,
+  forActionType: PropTypes.string,
 
-  return GroupEditPane;
-}(_react.Component);
+  msgOnIsEmptyName: PropTypes.func,
+  msgOnNotSelect: PropTypes.func,
+  onRename: PropTypes.func,
+
+  onClose: PropTypes.func
+}
+*/
+
 
 var _default = GroupEditPane;
 exports["default"] = _default;
