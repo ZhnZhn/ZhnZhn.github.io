@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { memo } from 'react';
 //import PropTypes from "prop-types";
 
 import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
@@ -19,69 +19,64 @@ const {
 } = WAT;
 const { notSelected, emptyName } = MsgWatch;
 
-class EditGroupDialog extends Component {
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    store: PropTypes.object,
-    onClose: PropTypes.func
-  }
-  */
+const _areEqual = (prevProps, nextProps) => prevProps
+  .isShow === nextProps.isShow;
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  }
+const EditGroupDialog = memo(({
+  isShow,
+  store,
+  onClose
+}) => (
+  <ModalDialog
+     caption="Watch Groups Edit"
+     isShow={isShow}
+     isWithButton={false}
+     onClose={onClose}
+  >
+    <TabPane width={380} >
+       <Tab title="Create">
+         <GroupAddPane
+            store={store}
+            actionCompleted={EDIT_WATCH_COMPLETED}
+            actionFailed={EDIT_WATCH_FAILED}
+            forActionType={ADD_GROUP}
+            msgOnIsEmptyName={emptyName}
+            onCreate={addGroup}
+            onClose={onClose}
+          />
+       </Tab>
+       <Tab title="Rename">
+         <GroupEditPane
+            store={store}
+            actionCompleted={EDIT_WATCH_COMPLETED}
+            actionFailed={EDIT_WATCH_FAILED}
+            forActionType={RENAME_GROUP}
+            msgOnNotSelect={notSelected}
+            msgOnIsEmptyName={emptyName}
+            onRename={renameGroup}
+            onClose={onClose}
+         />
+       </Tab>
+       <Tab title="Delete">
+         <GroupDeletePane
+            store={store}
+            actionCompleted={EDIT_WATCH_COMPLETED}
+            forActionType={DELETE_GROUP}
+            msgOnNotSelect={notSelected}
+            onDelete={deleteGroup}
+            onClose={onClose}
+         />
+       </Tab>
+    </TabPane>
+  </ModalDialog>
+), _areEqual)
 
-  render(){
-    const { isShow, store, onClose } = this.props;
-    return (
-      <ModalDialog
-         caption="Watch Groups Edit"
-         isShow={isShow}
-         isWithButton={false}
-         onClose={onClose}
-      >
-        <TabPane width={380} >
-           <Tab title="Create">
-             <GroupAddPane
-                store={store}
-                actionCompleted={EDIT_WATCH_COMPLETED}
-                actionFailed={EDIT_WATCH_FAILED}
-                forActionType={ADD_GROUP}
-                msgOnIsEmptyName={emptyName}
-                onCreate={addGroup}
-                onClose={onClose}
-              />
-           </Tab>
-           <Tab title="Rename">
-             <GroupEditPane
-                store={store}
-                actionCompleted={EDIT_WATCH_COMPLETED}
-                actionFailed={EDIT_WATCH_FAILED}
-                forActionType={RENAME_GROUP}
-                msgOnNotSelect={notSelected}
-                msgOnIsEmptyName={emptyName}
-                onRename={renameGroup}
-                onClose={onClose}
-             />
-           </Tab>
-           <Tab title="Delete">
-             <GroupDeletePane
-                store={store}
-                actionCompleted={EDIT_WATCH_COMPLETED}
-                forActionType={DELETE_GROUP}
-                msgOnNotSelect={notSelected}
-                onDelete={deleteGroup}
-                onClose={onClose}
-             />
-           </Tab>
-        </TabPane>
-      </ModalDialog>
-    )
-  }
+/*
+EditGroupDialog.propTypes = {
+  isShow: PropTypes.bool,
+  store: PropTypes.object,
+  onClose: PropTypes.func
 }
+*/
 
 export default EditGroupDialog
