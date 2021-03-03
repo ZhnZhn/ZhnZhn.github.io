@@ -13,6 +13,8 @@ var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var _useSelectItem2 = _interopRequireDefault(require("./hooks/useSelectItem"));
 
+var _useInputText2 = _interopRequireDefault(require("./hooks/useInputText"));
+
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
@@ -26,11 +28,7 @@ var ListCreatePane = function ListCreatePane(_ref) {
       forActionType = _ref.forActionType,
       onClose = _ref.onClose;
 
-  var _refInputText = (0, _react.useRef)(),
-      _useSelectItem = (0, _useSelectItem2["default"])(),
-      _refCaptionGroup = _useSelectItem[0],
-      _hSelectGroup = _useSelectItem[1],
-      _useState = (0, _react.useState)(function () {
+  var _useState = (0, _react.useState)(function () {
     return store.getWatchGroups();
   }),
       groupOptions = _useState[0],
@@ -38,6 +36,12 @@ var ListCreatePane = function ListCreatePane(_ref) {
       _useState2 = (0, _react.useState)([]),
       validationMessages = _useState2[0],
       setValidationMessages = _useState2[1],
+      _useInputText = (0, _useInputText2["default"])(setValidationMessages),
+      _refInputText = _useInputText[0],
+      _hClear = _useInputText[1],
+      _useSelectItem = (0, _useSelectItem2["default"])(),
+      _refCaptionGroup = _useSelectItem[0],
+      _hSelectGroup = _useSelectItem[1],
       _hCreate = (0, _react.useCallback)(function () {
     var captionList = _refInputText.current.getValue(),
         captionGroup = _refCaptionGroup.current;
@@ -67,12 +71,7 @@ var ListCreatePane = function ListCreatePane(_ref) {
       title: "Create New List",
       onClick: _hCreate
     });
-  }, [_hCreate]),
-      _hClear = (0, _react.useCallback)(function () {
-    _refInputText.current.setValue('');
-
-    setValidationMessages([]);
-  }, []);
+  }, [_hCreate]);
 
   (0, _useListen["default"])(store, function (actionType, data) {
     if (actionType === actionCompleted) {

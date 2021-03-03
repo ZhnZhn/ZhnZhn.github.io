@@ -1,6 +1,7 @@
-import { useRef, useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import useListen from '../hooks/useListen'
 import useSelectItem from './hooks/useSelectItem'
+import useInputText from './hooks/useInputText'
 //import PropTypes from "prop-types";
 
 import A from './Atoms'
@@ -11,10 +12,10 @@ const ListCreatePane = ({
   actionCompleted, actionFailed, forActionType,
   onClose
 }) => {
-  const _refInputText = useRef()
-  , [_refCaptionGroup, _hSelectGroup] = useSelectItem()
-  , [groupOptions, setGroupOptions] = useState(()=>store.getWatchGroups())
+  const [groupOptions, setGroupOptions] = useState(()=>store.getWatchGroups())
   , [validationMessages, setValidationMessages] = useState([])
+  , [_refInputText, _hClear] = useInputText(setValidationMessages)
+  , [_refCaptionGroup, _hSelectGroup] = useSelectItem()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hCreate = useCallback(() => {
       const captionList = _refInputText.current.getValue()
@@ -36,11 +37,8 @@ const ListCreatePane = ({
         title="Create New List"
         onClick={_hCreate}
      />
-  ), [_hCreate])  
-  , _hClear = useCallback(() => {
-    _refInputText.current.setValue('')
-    setValidationMessages([])
-  }, [])
+  ), [_hCreate]);
+
 
   useListen(store, (actionType, data)=>{
     if (actionType === actionCompleted){

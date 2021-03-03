@@ -1,7 +1,8 @@
-import { useRef, useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 //import PropTypes from "prop-types";
 import useListen from '../hooks/useListen'
 import useSelectItem from './hooks/useSelectItem'
+import useInputText from './hooks/useInputText'
 
 import A from './Atoms'
 
@@ -11,10 +12,10 @@ const GroupEditPane = ({
   onRename, msgOnNotSelect, msgOnIsEmptyName,
   onClose
 }) => {
-  const _refInputText = useRef()
-  , [_refCaptionFrom, _hSelectGroup] = useSelectItem()
-  , [groupOptions, setGroupOptions] = useState(() => store.getWatchGroups())
+  const [groupOptions, setGroupOptions] = useState(() => store.getWatchGroups())
   , [validationMessages, setValidationMessages] = useState([])
+  , [_refInputText, _hClear] = useInputText(setValidationMessages)
+  , [_refCaptionFrom, _hSelectGroup] = useSelectItem()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hRename = useCallback(()=>{
     const captionTo = _refInputText.current.getValue()
@@ -40,11 +41,8 @@ const GroupEditPane = ({
        title="Edit Group Name"
        onClick={_hRename}
     />
-  ), [_hRename])  
-  , _hClear = useCallback(() => {
-    _refInputText.current.setValue('')
-    setValidationMessages([])
-  }, []);
+  ), [_hRename]);
+
 
   useListen(store, (actionType, data)=>{
     if (actionType === actionCompleted){
