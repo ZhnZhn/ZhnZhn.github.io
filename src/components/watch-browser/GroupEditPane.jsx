@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback, useMemo } from 'react';
 //import PropTypes from "prop-types";
 import useListen from '../hooks/useListen'
+import useSelectItem from './hooks/useSelectItem'
 
 import A from './Atoms'
 
@@ -11,7 +12,7 @@ const GroupEditPane = ({
   onClose
 }) => {
   const _refInputText = useRef()
-  , _refCaptionFrom = useRef()
+  , [_refCaptionFrom, _hSelectGroup] = useSelectItem()
   , [groupOptions, setGroupOptions] = useState(() => store.getWatchGroups())
   , [validationMessages, setValidationMessages] = useState([])
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -39,11 +40,7 @@ const GroupEditPane = ({
        title="Edit Group Name"
        onClick={_hRename}
     />
-  ), [_hRename])
-  , _hSelectGroup = useCallback(item => {
-    const { caption } = item || {};
-    _refCaptionFrom.current = caption
-  }, [])
+  ), [_hRename])  
   , _hClear = useCallback(() => {
     _refInputText.current.setValue('')
     setValidationMessages([])

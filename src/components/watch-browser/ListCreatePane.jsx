@@ -1,5 +1,6 @@
 import { useRef, useState, useCallback, useMemo } from 'react';
 import useListen from '../hooks/useListen'
+import useSelectItem from './hooks/useSelectItem'
 //import PropTypes from "prop-types";
 
 import A from './Atoms'
@@ -11,7 +12,7 @@ const ListCreatePane = ({
   onClose
 }) => {
   const _refInputText = useRef()
-  , _refCaptionGroup = useRef()
+  , [_refCaptionGroup, _hSelectGroup] = useSelectItem()
   , [groupOptions, setGroupOptions] = useState(()=>store.getWatchGroups())
   , [validationMessages, setValidationMessages] = useState([])
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -35,11 +36,7 @@ const ListCreatePane = ({
         title="Create New List"
         onClick={_hCreate}
      />
-  ), [_hCreate])
-  , _hSelectGroup = useCallback(item => {
-    const { caption } = item || {}
-    _refCaptionGroup.current = caption
-  }, [])
+  ), [_hCreate])  
   , _hClear = useCallback(() => {
     _refInputText.current.setValue('')
     setValidationMessages([])

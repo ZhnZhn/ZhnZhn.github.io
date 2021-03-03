@@ -11,6 +11,8 @@ var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
+var _useSelectItem2 = _interopRequireDefault(require("./hooks/useSelectItem"));
+
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
@@ -25,7 +27,9 @@ var GroupEditPane = function GroupEditPane(_ref) {
       onClose = _ref.onClose;
 
   var _refInputText = (0, _react.useRef)(),
-      _refCaptionFrom = (0, _react.useRef)(),
+      _useSelectItem = (0, _useSelectItem2["default"])(),
+      _refCaptionFrom = _useSelectItem[0],
+      _hSelectGroup = _useSelectItem[1],
       _useState = (0, _react.useState)(function () {
     return store.getWatchGroups();
   }),
@@ -64,12 +68,6 @@ var GroupEditPane = function GroupEditPane(_ref) {
       onClick: _hRename
     });
   }, [_hRename]),
-      _hSelectGroup = (0, _react.useCallback)(function (item) {
-    var _ref2 = item || {},
-        caption = _ref2.caption;
-
-    _refCaptionFrom.current = caption;
-  }, []),
       _hClear = (0, _react.useCallback)(function () {
     _refInputText.current.setValue('');
 

@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/watch-browser/hooks/useSelectItem.js"
+ ],
+ "file": "../../../../src/components/watch-browser/hooks/useSelectItem.js",
+ "names": [
+  "useSelectItem",
+  "ref",
+  "_hSelect",
+  "item",
+  "caption",
+  "current"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,IAAMA,aAAa,GAAG,SAAhBA,aAAgB,GAAM;AAC1B,MAAMC,GAAG,GAAG,oBAAZ;AAAA,MACEC,QAAQ,GAAG,wBAAY,UAAAC,IAAI,EAAI;AAAA,eACXA,IAAI,IAAI,EADG;AAAA,QACvBC,OADuB,QACvBA,OADuB;;AAE/BH,IAAAA,GAAG,CAACI,OAAJ,GAAcD,OAAd;AACD,GAHY,EAGX,EAHW,CADb;;AAKA,SAAO,CAACH,GAAD,EAAMC,QAAN,CAAP;AACD,CAPD;;eASeF,a"
+}
