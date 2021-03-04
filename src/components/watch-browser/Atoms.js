@@ -1,7 +1,7 @@
 
 import RowInputText from './RowInputText'
 import RowInputSelect from './RowInputSelect'
-import FragmentSelectGroupList from './FragmentSelectGroupList'
+import SelectGroupList from './SelectGroupList'
 import Button from './Button'
 import RowButtons from './RowButtons'
 import ValidationMessages from '../zhn/ValidationMessages'
@@ -10,7 +10,7 @@ import ValidationMessages from '../zhn/ValidationMessages'
 const Atoms = {
   RowInputText,
   RowInputSelect,
-  FragmentSelectGroupList,
+  SelectGroupList,
   Button,
   RowButtons,
   ValidationMessages

@@ -9,7 +9,7 @@ var _RowInputText = _interopRequireDefault(require("./RowInputText"));
 
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 
-var _FragmentSelectGroupList = _interopRequireDefault(require("./FragmentSelectGroupList"));
+var _SelectGroupList = _interopRequireDefault(require("./SelectGroupList"));
 
 var _Button = _interopRequireDefault(require("./Button"));
 
@@ -20,7 +20,7 @@ var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessa
 var Atoms = {
   RowInputText: _RowInputText["default"],
   RowInputSelect: _RowInputSelect["default"],
-  FragmentSelectGroupList: _FragmentSelectGroupList["default"],
+  SelectGroupList: _SelectGroupList["default"],
   Button: _Button["default"],
   RowButtons: _RowButtons["default"],
   ValidationMessages: _ValidationMessages["default"]
