@@ -4,19 +4,6 @@ import useListen from '../hooks/useListen'
 
 import A from './Atoms'
 
-/*
-static propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  forActionType: PropTypes.string,
-  onRename: PropTypes.func,
-  onClose: PropTypes.func
-}
-*/
-
 const ListDeletePane = ({
   store,
   actionCompleted, forActionType,
@@ -61,7 +48,7 @@ const ListDeletePane = ({
 
   return (
     <div>
-       <A.SelectGroupList         
+       <A.SelectGroupList
          ref={_refSelectGroupList}
          store={store}
          groupCaption="In Group:"
@@ -79,5 +66,19 @@ const ListDeletePane = ({
     </div>
   );
 };
+
+/*
+ListDeletePane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func,
+    getWatchGroups: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  forActionType: PropTypes.string,
+  msgOnNotSelect: PropTypes.func,
+  onDelete: PropTypes.func,
+  onClose: PropTypes.func
+}
+*/
 
 export default ListDeletePane

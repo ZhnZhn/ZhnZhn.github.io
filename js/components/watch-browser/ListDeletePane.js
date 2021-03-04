@@ -14,19 +14,6 @@ var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
 //import PropTypes from "prop-types";
-
-/*
-static propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  forActionType: PropTypes.string,
-  onRename: PropTypes.func,
-  onClose: PropTypes.func
-}
-*/
 var ListDeletePane = function ListDeletePane(_ref) {
   var store = _ref.store,
       actionCompleted = _ref.actionCompleted,
@@ -104,6 +91,20 @@ var ListDeletePane = function ListDeletePane(_ref) {
     })]
   });
 };
+/*
+ListDeletePane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func,
+    getWatchGroups: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  forActionType: PropTypes.string,
+  msgOnNotSelect: PropTypes.func,
+  onDelete: PropTypes.func,
+  onClose: PropTypes.func
+}
+*/
+
 
 var _default = ListDeletePane;
 exports["default"] = _default;

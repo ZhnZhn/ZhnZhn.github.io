@@ -106,6 +106,24 @@ var ListEditPane = function ListEditPane(_ref) {
     })]
   });
 };
+/*
+ListEditPane.propTypes = {
+  store: PropTypes.shape({
+    listen: PropTypes.func,
+    getWatchGroups: PropTypes.func
+  }),
+  actionCompleted: PropTypes.string,
+  actionFailed: PropTypes.string,
+  forActionType: PropTypes.string,
+
+  msgOnIsEmptyName: PropTypes.func,
+  msgOnNotSelect: PropTypes.func,
+  onRename: PropTypes.func,
+
+  onClose: PropTypes.func
+}
+*/
+
 
 var _default = ListEditPane;
 exports["default"] = _default;

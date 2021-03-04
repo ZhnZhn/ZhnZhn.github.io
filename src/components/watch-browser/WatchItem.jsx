@@ -27,39 +27,38 @@ const S = {
   }
 };
 
+const EMPTY_ITEM_CAPTION = 'Not Found';
 
-const WatchItem = (props) => {
-  const {
-           item, className, isModeEdit, option,
-           onClick, onClose,
-           onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop
-         } = props
-      , { caption } = item
-      , _btClose = isModeEdit
-          ? (
-             <SvgClose
-               style={S.SVG_CLOSE}
-               onClose={onClose.bind(null, option)}
-             />
-            )
-          : null
-     , _hClick = useCallback(() => {
-        //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
-        onClick(item)
-     }, [item])
-     , _hKeyUp = useCallback((evt) => {
+//onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
+const WatchItem = ({
+  item, className, isModeEdit, option,
+  onClick, onClose,
+  onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop
+}) => {
+  const { caption=EMPTY_ITEM_CAPTION } = item || {}
+  , _btClose = isModeEdit
+     ? (<SvgClose
+         style={S.SVG_CLOSE}
+         onClose={onClose.bind(null, option)}
+       />)
+     : null
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hClick = useCallback(() => onClick(item), [item])
+  //onClick
+  /*eslint-enable react-hooks/exhaustive-deps */
+  , _hKeyUp = useCallback(evt => {
        if (isKeyEnter(evt)) {
-         onClick(item)
+         _hClick()
        }
-     }, [item])
-     , _dndOptions = isModeEdit
-         ? {
-           draggable: true,
-           onDragStart: onDragStart.bind(null, option),
-           onDrop: onDrop.bind(null, option),
-           onDragOver, onDragEnter, onDragLeave
-         } : void 0;
-return (
+  }, [_hClick])
+  , _dndOptions = isModeEdit
+      ? {
+       draggable: true,
+       onDragStart: onDragStart.bind(null, option),
+       onDrop: onDrop.bind(null, option),
+       onDragOver, onDragEnter, onDragLeave
+      } : void 0;
+ return (
      <div
        role="menuitem"
        tabIndex="0"

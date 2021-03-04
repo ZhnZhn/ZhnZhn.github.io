@@ -37,33 +37,36 @@ var S = {
     right: 0
   }
 };
+var EMPTY_ITEM_CAPTION = 'Not Found'; //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
 
-var WatchItem = function WatchItem(props) {
-  var item = props.item,
-      className = props.className,
-      isModeEdit = props.isModeEdit,
-      option = props.option,
-      onClick = props.onClick,
-      onClose = props.onClose,
-      onDragStart = props.onDragStart,
-      onDragEnter = props.onDragEnter,
-      onDragOver = props.onDragOver,
-      onDragLeave = props.onDragLeave,
-      onDrop = props.onDrop,
-      caption = item.caption,
+var WatchItem = function WatchItem(_ref) {
+  var item = _ref.item,
+      className = _ref.className,
+      isModeEdit = _ref.isModeEdit,
+      option = _ref.option,
+      onClick = _ref.onClick,
+      onClose = _ref.onClose,
+      onDragStart = _ref.onDragStart,
+      onDragEnter = _ref.onDragEnter,
+      onDragOver = _ref.onDragOver,
+      onDragLeave = _ref.onDragLeave,
+      onDrop = _ref.onDrop;
+
+  var _ref2 = item || {},
+      _ref2$caption = _ref2.caption,
+      caption = _ref2$caption === void 0 ? EMPTY_ITEM_CAPTION : _ref2$caption,
       _btClose = isModeEdit ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose["default"], {
     style: S.SVG_CLOSE,
     onClose: onClose.bind(null, option)
   }) : null,
       _hClick = (0, _react.useCallback)(function () {
-    //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
-    onClick(item);
+    return onClick(item);
   }, [item]),
       _hKeyUp = (0, _react.useCallback)(function (evt) {
     if ((0, _isKeyEnter["default"])(evt)) {
-      onClick(item);
+      _hClick();
     }
-  }, [item]),
+  }, [_hClick]),
       _dndOptions = isModeEdit ? {
     draggable: true,
     onDragStart: onDragStart.bind(null, option),
