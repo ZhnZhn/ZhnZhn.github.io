@@ -38,6 +38,7 @@ var getFromDate = _DateUtils["default"].getFromDate,
 var isWideWidth = _has["default"].isWideWidth;
 
 var _isArr = Array.isArray,
+    _assign = Object.assign,
     _initFromDate = getFromDate(2),
     initToDate = getToDate();
 
@@ -103,6 +104,22 @@ var _getDialogType = function _getDialogType(dialogType, _ref3) {
   return dialogType || (_isArr(selectProps) ? D.SELECT_N : void 0) || (_isArr(dims) ? D.STAT_N : void 0);
 };
 
+var _modifyDialogPropsByLoadId = function _modifyDialogPropsByLoadId(dialogProps, loadId) {
+  if (!loadId) {
+    dialogProps.loadId = _Type.LoadType.Q;
+  }
+
+  if (loadId === _Type.LoadType.EU_STAT) {
+    var dfProps = dialogProps.dfProps,
+        _ref4 = dfProps || {},
+        mapFrequency = _ref4.mapFrequency;
+
+    dialogProps.dfProps = _assign({}, dfProps, {
+      mapFrequency: mapFrequency || 'M'
+    });
+  }
+};
+
 var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
   var itemKey = dialogConf.type,
       _dialogConf$dialogPro = dialogConf.dialogProps,
@@ -129,9 +146,7 @@ var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
   }),
       onShow = _ChartActions["default"].showChart.bind(null, itemKey, browserType, dialogConf);
 
-  if (!loadId) {
-    dialogProps.loadId = _Type.LoadType.Q;
-  }
+  _modifyDialogPropsByLoadId(dialogProps, loadId);
 
   return _RouterDialog["default"].getDialog(_dialogType).then(function (Comp) {
     return /*#__PURE__*/(0, _react.createElement)(Comp, (0, _extends2["default"])({

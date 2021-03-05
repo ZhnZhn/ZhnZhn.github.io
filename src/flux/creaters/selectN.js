@@ -5,7 +5,7 @@ const { crCaption, crItemKey, crAlertConf } = fns;
 const TYPE = 'selectN';
 const TABLE_ID = 'table';
 
-const _assign = Object.assign
+const _assign = Object.assign;
 
 const _findItemTable = (items) => {
   let tableItem, tableIndex;
@@ -19,14 +19,14 @@ const _findItemTable = (items) => {
   return { tableItem, tableIndex };
 };
 
-const _modifyIfItemTable = (dfProps, items) => {
+const _modifyIfItemTable = (_dfProps, items) => {
   const { tableItem, tableIndex } = _findItemTable(items);
   if (tableItem) {
     const { v:dfTable, dfTail, mapFrequency } = tableItem
     if (dfTable) {
-      _assign(dfProps, { dfTable, dfTail })
+      _assign(_dfProps, { dfTable, dfTail })
       if (mapFrequency) {
-        dfProps.mapFrequency = mapFrequency
+        _dfProps.mapFrequency = mapFrequency
       }
       items.splice(tableIndex, 1);
     }
@@ -49,12 +49,13 @@ const createLoadOptions = (props={}, options={}) => {
       title, subtitle
     } = crCaption(items, titles)
   , { value:seriaType, compType } = chartType
-  , _itemKey = crItemKey(items, seriaType, date, fromDate);
+  , _itemKey = crItemKey(items, seriaType, date, fromDate)
+  , _dfProps = {...dfProps};
 
-  _modifyIfItemTable(dfProps, items)
+  _modifyIfItemTable(_dfProps, items)
 
   return {
-    ...dfProps,
+    ..._dfProps,
     ...dialogOptions,
     _type: TYPE,
     _itemKey: _itemKey,

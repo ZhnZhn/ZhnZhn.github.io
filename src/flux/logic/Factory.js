@@ -27,6 +27,7 @@ const {
 const { isWideWidth } = has
 
 const _isArr = Array.isArray
+, _assign = Object.assign
 , _initFromDate = getFromDate(2)
 , initToDate = getToDate();
 
@@ -83,6 +84,19 @@ const _getDialogType = (dialogType, { selectProps, dims }) =>
   dialogType || ( _isArr(selectProps) ? D.SELECT_N : void 0)
   || (_isArr(dims) ? D.STAT_N : void 0);
 
+const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
+  if (!loadId){
+    dialogProps.loadId = LoadType.Q;
+  }
+  if (loadId === LoadType.EU_STAT) {
+    const { dfProps } = dialogProps
+    , { mapFrequency } = dfProps || {};
+    dialogProps.dfProps = _assign({}, dfProps, {
+       mapFrequency:  mapFrequency || 'M'
+    })
+  }
+};
+
 const _crDialogComp = function (browserType, dialogConf){
    const {
            type:itemKey,
@@ -113,9 +127,7 @@ const _crDialogComp = function (browserType, dialogConf){
        , onShow = CHA.showChart
            .bind(null, itemKey, browserType, dialogConf);
 
-       if (!loadId){
-         dialogProps.loadId = LoadType.Q;
-       }
+      _modifyDialogPropsByLoadId(dialogProps, loadId)
 
       return RouterDialog.getDialog(_dialogType)
          .then(Comp => {

@@ -146,6 +146,14 @@ var ChartTypes = {
 
     return _crOptions(_captions, _mapFrequency);
   },
+  crChartOptions: function crChartOptions(selectProps, chartsType, mapFrequency) {
+    var _captions = _crCaptions({
+      selectProps: selectProps
+    }),
+        _crOptions = _r[chartsType] || _r.DF;
+
+    return _crOptions(_captions, mapFrequency);
+  },
   isCategory: function isCategory(chartItem) {
     if (!chartItem) {
       return false;

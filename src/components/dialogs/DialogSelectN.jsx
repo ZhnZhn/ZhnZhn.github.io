@@ -1,18 +1,32 @@
-import { Component, createRef } from 'react';
 //import PropTypes from "prop-types";
+import { Component, createRef } from 'react';
+import memoizeOne from 'memoize-one'
 
 import ChartTypes from './ChartTypes'
 import D from './DialogCell'
 const { Decor, crMenuMore, crDateConfig } = D
 
 const DF_INIT_FROM_DATE = '2010-01-01'
-const DF_MAP_FREQUENCY = 'M';
+const DF_MAP_FREQUENCY = 'EMPTY';
 const TABLE_ID = 'table';
 
 const {
-  crOptions,
+  crChartOptions,
   isCategory
 } = ChartTypes;
+
+const _isRequireChartOptionsUpdate = (
+  prevMapFrequency,
+  nextMapFrequency
+) => prevMapFrequency !== nextMapFrequency
+  && (prevMapFrequency === 'M' || nextMapFrequency === 'M');
+
+const _isEqualChartOptions = (nextArgs, prevArgs) => {
+  const _bool = nextArgs[0] === prevArgs[0]
+    && nextArgs[1] === prevArgs[1]
+    && !_isRequireChartOptionsUpdate(prevArgs[2], nextArgs[2]);
+  return _bool;
+};
 
 const _crIsId = id => `is${id}Select`;
 
@@ -25,22 +39,33 @@ const _crIsToggleInit = (selectProps) => {
 };
 
 const _getDfFrequencyConfig = (props) => {
-  const { dfProps={} } = props
+  const { dfProps } = props
   , {
     mapFrequency=DF_MAP_FREQUENCY,
     mapDateDf
-  } = dfProps;
+  } = dfProps || {};
   return { mapFrequency, mapDateDf };
 };
 
-const _isRequireChartOptionsUpdate = (
-  oldFrequency,
-  { mapFrequency }
-) => oldFrequency !== mapFrequency
-  && (oldFrequency === 'M' || mapFrequency === 'M');
+const _mergeFrequencyConfig = (props, item) => {
+  const { mapFrequency, mapDateDf } = _getDfFrequencyConfig(props);
+  return [
+    item.mapFrequency || mapFrequency,
+    item.mapDateDf || mapDateDf
+  ];
+};
+
+const _crStateForTableItem = (comp, item) => {
+  const { props, state } = comp
+  , [mapFrequency, mapDateDf] = _mergeFrequencyConfig(props, item)
+  , { mapFrequency: prevMf, chartType: prevCht } = state
+  , chartType = _isRequireChartOptionsUpdate(prevMf, mapFrequency)
+      ? void 0 : prevCht;
+  return {mapFrequency, mapDateDf, chartType};
+};
 
 @Decor.dialog
-@Decor.withForDate
+//@Decor.withForDate
 class DialogSelectN extends Component {
   /*
   static propTypes = {
@@ -91,9 +116,6 @@ class DialogSelectN extends Component {
     //this.date = undefined;
 
     const { isOpt, isCh, isFd, selectProps } = props;
-    this._setFrequencyConfig(
-      _getDfFrequencyConfig(props)
-    )
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -105,7 +127,9 @@ class DialogSelectN extends Component {
     })
     this._refFromDate = createRef()
     this._commandButtons = this._crCommandsWithLoad(this)
-    this._chartOptions = crOptions(props)
+
+    this._crChartOptionsMem = memoizeOne(crChartOptions, _isEqualChartOptions)
+    this._crDateConfigMem = memoizeOne(crDateConfig);
 
     this.state = {
       ...this._isWithInitialState(),
@@ -114,15 +138,15 @@ class DialogSelectN extends Component {
       isShowFd: true,
       isShowChart: true,
       isShowDate: false,
-      ...crDateConfig('EMPTY'),
-      ..._crIsToggleInit(selectProps)
+      ..._crIsToggleInit(selectProps),
+      ..._getDfFrequencyConfig(props)
       //chartType
     }
   }
 
-  _setFrequencyConfig({ mapFrequency, mapDateDf }){
-    this._mapFrequency = mapFrequency
-    this._mapDateDf = mapDateDf
+  _crDateConfig = () => {
+    const { mapFrequency, mapDateDf } = this.state;
+    return this._crDateConfigMem(mapFrequency, mapDateDf);
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -148,21 +172,14 @@ class DialogSelectN extends Component {
        .filter(v => v !== index)
   }
 
-  _crDateConfig = () => {
-    const { _mapFrequency, _mapDateDf } = this;
-    return crDateConfig(_mapFrequency, _mapDateDf);
-  }
-
   _updateForDate = (chartType) => {
     this.date = void 0;
     this.setState({
        isShowFd: false,
        isShowDate: true,
-       chartType,
-       ...this._crDateConfig()
+       chartType
     });
   }
-
 
   _hSelectChartType = (chartType) => {
     if (isCategory(chartType)) {
@@ -174,12 +191,19 @@ class DialogSelectN extends Component {
       });
     }
   }
+
   _onRegColor = (comp) => {
     this.colorComp = comp
   }
 
   _hSelectDate = (date) => {
     this.date = date;
+  }
+
+  _getDate = () => {
+    const { date } = this
+    , { value } = date || {};
+    return value || this._crDateConfig().dateDefault;
   }
 
   _handleLoad = () => {
@@ -217,7 +241,7 @@ class DialogSelectN extends Component {
     , { seriaColor, seriaWidth } = colorComp
         ? colorComp.getConf()
         : {}
-    , date = this._getDateWithForDate()
+    , date = this._getDate()
     , _isCategory = isCategory(chartType)
     , items = _isCategory
         ? this._items.slice(1)
@@ -250,37 +274,13 @@ class DialogSelectN extends Component {
   }
 
 
-  _crFrequencyConfig = (item) => {
-    const { mapFrequency, mapDateDf } = _getDfFrequencyConfig(this.props)
-    , _frequency = item.mapFrequency || mapFrequency
-    , _dateDf = item.mapDateDf || mapDateDf;
-    return this._mapFrequency !== _frequency
-      || this._mapDateDf !== _dateDf
-      ? {
-          mapFrequency: _frequency,
-          mapDateDf: _dateDf
-        }
-      : void 0;
-  }
-
-  _checkForTableId = (id, item) => {
-    if (id === TABLE_ID) {
-      const _conf = this._crFrequencyConfig(item);
-      if (_conf) {
-       if(_isRequireChartOptionsUpdate(this._mapFrequency, _conf)){
-         this._chartOptions = crOptions(this.props, _conf)
-       }
-       this._setFrequencyConfig(_conf)
-       this.setState(this._crDateConfig())
-      }
-    }
-  }
-
   _hSelect = (id, index, item) => {
     this._items[index] = item
     if (item) {
       item.id = id
-      this._checkForTableId(id, item)
+      if (id === TABLE_ID) {
+        this.setState(_crStateForTableItem(this, item))
+      }
     }
   }
   _refSelect = (id, comp) => {
@@ -313,7 +313,7 @@ class DialogSelectN extends Component {
     const {
       caption, isShow,
       onShow, onFront,
-      selectProps,
+      selectProps, chartsType,
       isFd, isCh, noDate, noForDate,
       initFromDate,
       errNotYmdOrEmpty,
@@ -324,12 +324,15 @@ class DialogSelectN extends Component {
       isToolbar, isOptions, isToggle,
       isShowLabels,
       isShowFd, isShowChart, isShowDate,
-      dateDefault, dateOptions,
-      validationMessages
+      validationMessages,
+      mapFrequency
     } = this.state
+    , _chartOptions = this._crChartOptionsMem(selectProps, chartsType, mapFrequency)
+    , { dateDefault, dateOptions } = this._crDateConfig()
     , _isCategory = isCategory(chartType)
     , _isRowFd = isFd && !_isCategory
     , _noForDate = noForDate || !_isCategory;
+
     return(
       <D.DraggableDialog
          isShow={isShow}
@@ -380,7 +383,7 @@ class DialogSelectN extends Component {
                chartType={chartType}
                isShowLabels={isShowLabels}
                isShowChart={isShowChart}
-               chartOptions={this._chartOptions}
+               chartOptions={_chartOptions}
                onSelectChart={this._hSelectChartType}
                onRegColor={this._onRegColor}
                noDate={noDate}

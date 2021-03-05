@@ -160,6 +160,12 @@ const ChartTypes = {
      return _crOptions(_captions, _mapFrequency);
   },
 
+  crChartOptions(selectProps, chartsType, mapFrequency) {
+    const _captions = _crCaptions({ selectProps })
+    , _crOptions = _r[chartsType] || _r.DF;
+    return _crOptions(_captions, mapFrequency);
+  },
+
   isCategory(chartItem) {
     if (!chartItem) {
       return false;

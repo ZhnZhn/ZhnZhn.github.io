@@ -33,7 +33,7 @@ var _findItemTable = function _findItemTable(items) {
   };
 };
 
-var _modifyIfItemTable = function _modifyIfItemTable(dfProps, items) {
+var _modifyIfItemTable = function _modifyIfItemTable(_dfProps, items) {
   var _findItemTable2 = _findItemTable(items),
       tableItem = _findItemTable2.tableItem,
       tableIndex = _findItemTable2.tableIndex;
@@ -44,13 +44,13 @@ var _modifyIfItemTable = function _modifyIfItemTable(dfProps, items) {
         mapFrequency = tableItem.mapFrequency;
 
     if (dfTable) {
-      _assign(dfProps, {
+      _assign(_dfProps, {
         dfTable: dfTable,
         dfTail: dfTail
       });
 
       if (mapFrequency) {
-        dfProps.mapFrequency = mapFrequency;
+        _dfProps.mapFrequency = mapFrequency;
       }
 
       items.splice(tableIndex, 1);
@@ -91,11 +91,12 @@ var createLoadOptions = function createLoadOptions(props, options) {
       subtitle = _crCaption.subtitle,
       seriaType = chartType.value,
       compType = chartType.compType,
-      _itemKey = crItemKey(items, seriaType, date, fromDate);
+      _itemKey = crItemKey(items, seriaType, date, fromDate),
+      _dfProps = (0, _extends2["default"])({}, dfProps);
 
-  _modifyIfItemTable(dfProps, items);
+  _modifyIfItemTable(_dfProps, items);
 
-  return (0, _extends2["default"])({}, dfProps, dialogOptions, {
+  return (0, _extends2["default"])({}, _dfProps, dialogOptions, {
     _type: TYPE,
     _itemKey: _itemKey,
     itemCaption: itemCaption,
