@@ -32,6 +32,24 @@
         { "id": "DBN_IMF_WEOAGG" }
       ]
     },{
+      "caption": "AMECO",
+      "items": [
+        { "caption": "National Income",
+          "items": [
+            { "id": "DBN_AMECO_GNI" },
+            { "id": "DBN_AMECO_NI" },
+            { "id": "DBN_AMECO_GNDI" },
+            { "id": "DBN_AMECO_NDI" }
+          ]
+        },{
+          "caption": "Domestic Product",
+          "items":[
+            {"id": "DBN_AMECO_GDPCP"},
+            {"id": "DBN_AMECO_GDPIN"}
+          ]
+        }
+      ]
+      },{
       "caption": "LBMA",
       "items": [
         { "id": "DBN_LBMA_GOLD" },
@@ -330,6 +348,115 @@
           "dfProvider": "IMF",
           "dfCode": "WEOAGG",
           "dfFnUrl": "s3S12"
+        }
+      }
+    },
+
+    "DBN_AMECO_GNI": {
+      "type" : "DBN_AMECO_GNI",
+      "menuTitle" : "GNI at CP",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "ameco-countries" ]
+        ],
+        "dataSource": "DB Nomics: AMECO: GNI at Current Prices",
+        "dfProps": {
+          "dfProvider": "AMECO",
+          "dfCode": "UVGN",
+          "dfSufix": "1.0.99.0.UVGN",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_AMECO_NI": {
+      "type" : "DBN_AMECO_NI",
+      "menuTitle" : "NI at CP",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "ameco-countries" ]
+        ],
+        "dataSource": "DB Nomics: AMECO: NI at Current Prices",
+        "dfProps": {
+          "dfProvider": "AMECO",
+          "dfCode": "UVNN",
+          "dfSufix": "1.0.99.0.UVNN",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_AMECO_GNDI": {
+      "type" : "DBN_AMECO_GNDI",
+      "menuTitle" : "GNDI",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "ameco-countries" ]
+        ],
+        "dataSource": "DB Nomics: AMECO: GNDI",
+        "dfProps": {
+          "dfProvider": "AMECO",
+          "dfCode": "UVGT",
+          "dfSufix": "1.0.99.0.UVGT",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_AMECO_NDI": {
+      "type" : "DBN_AMECO_NDI",
+      "menuTitle" : "NDI",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "ameco-countries" ]
+        ],
+        "dataSource": "DB Nomics: AMECO: NDI",
+        "dfProps": {
+          "dfProvider": "AMECO",
+          "dfCode": "UVNT",
+          "dfSufix": "1.0.99.0.UVNT",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_AMECO_GDPCP": {
+      "type" : "DBN_AMECO_GDPCP",
+      "menuTitle" : "GDP at CP",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "ameco-countries" ]
+        ],
+        "dataSource": "DB Nomics: AMECO: GDP at Current Prices",
+        "dfProps": {
+          "dfProvider": "AMECO",
+          "dfCode": "UVGD",
+          "dfSufix": "1.0.99.0.UVGD",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_AMECO_GDPIN": {
+      "type" : "DBN_AMECO_GDPIN",
+      "menuTitle" : "GDP index",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "ameco-countries" ]
+        ],
+        "dataSource": "DB Nomics: AMECO: GDP index",
+        "dfProps": {
+          "dfProvider": "AMECO",
+          "dfCode": "OVGDA",
+          "dfSufix": "3.1.0.0.OVGDA",
+          "dfFnUrl": "s12"
         }
       }
     },
