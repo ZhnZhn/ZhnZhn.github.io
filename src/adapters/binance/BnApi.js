@@ -4,14 +4,15 @@ const C = {
   TRADE_URL: 'https://binance.com/en/trade'
 };
 
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, REG_BLANKS = /\s/g;
 
 const _setLinks = (option, c, s='') => {
   const _toIndex = c.indexOf('(')
   , _caption = c.substring(0, _toIndex)
       .trim()
       .toLowerCase()
-      .replace(' ', '-')
+      .replace(REG_BLANKS, '-')
   , _s = s.replace('/', '_').toLowerCase();
   option._researchLink = `${C.RESEARCH_URL}/${_caption}`
   option._tradeLink = `${C.TRADE_URL}/${_s}`

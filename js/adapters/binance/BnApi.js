@@ -7,7 +7,8 @@ var C = {
   RESEARCH_URL: 'https://research.binance.com/en/projects',
   TRADE_URL: 'https://binance.com/en/trade'
 };
-var _isArr = Array.isArray;
+var _isArr = Array.isArray,
+    REG_BLANKS = /\s/g;
 
 var _setLinks = function _setLinks(option, c, s) {
   if (s === void 0) {
@@ -15,7 +16,7 @@ var _setLinks = function _setLinks(option, c, s) {
   }
 
   var _toIndex = c.indexOf('('),
-      _caption = c.substring(0, _toIndex).trim().toLowerCase().replace(' ', '-'),
+      _caption = c.substring(0, _toIndex).trim().toLowerCase().replace(REG_BLANKS, '-'),
       _s = s.replace('/', '_').toLowerCase();
 
   option._researchLink = C.RESEARCH_URL + "/" + _caption;
