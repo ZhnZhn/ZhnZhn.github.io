@@ -9,6 +9,9 @@ const CAPTION_OPTIONS = {
 }, IS_CV_OPTIONS = {
   isCv: true,
   items: [{ c: 'Abc', v: 'Abc' }]
+}, IS_NBQ_OPTIONS = {
+  isNbq: true,
+  items:[{ n: 'Name1', b: 'b1', q:['q1', 'q2'] }]
 }
 
 
@@ -27,4 +30,11 @@ describe('crOptions', () => {
   test('should return correct options for isCv case', ()=>{
     expect(fn(IS_CV_OPTIONS, 'items').items[0].c).toBe('Abc (Abc)')
   })
+  test('should return correct options for isNbq case', ()=>{
+    expect(fn(IS_NBQ_OPTIONS, 'items').items).toEqual([
+      {"c":"Name1 (b1/q1)", s: "b1/q1"},
+      {"c":"Name1 (b1/q2)", s: "b1/q2"}
+    ])
+  })
+
 })

@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 
+var _isArr = Array.isArray;
+
 var _crCvItems = function _crCvItems(arr) {
   return arr.map(function (_ref) {
     var c = _ref.c,
@@ -34,11 +36,35 @@ var _crSItems = function _crSItems(arr) {
   });
 };
 
+var _crNbqItems = function _crNbqItems(arr) {
+  var items = [];
+  arr.forEach(function (_ref3) {
+    var n = _ref3.n,
+        b = _ref3.b,
+        q = _ref3.q;
+
+    if (_isArr(q)) {
+      q.forEach(function (to) {
+        var s = b + "/" + to;
+        items.push({
+          c: n + " (" + s + ")",
+          s: s
+        });
+      });
+    }
+  });
+  return items;
+};
+
 var _crItems = function _crItems(json, optionJsonProp) {
   var _arr = json[optionJsonProp];
 
   if (json.isCv) {
     return _crCvItems(_arr);
+  }
+
+  if (json.isNbq) {
+    return _crNbqItems(_arr);
   }
 
   return _arr[0] && _arr[0].s != null ? _crSItems(_arr) : _arr;
@@ -49,7 +75,7 @@ var _notNullOrUndef = function _notNullOrUndef(v) {
 };
 
 var _crPropCaption = function _crPropCaption(arr) {
-  if (!Array.isArray(arr) || arr.length === 0) {
+  if (!_isArr(arr) || arr.length === 0) {
     return;
   }
 
