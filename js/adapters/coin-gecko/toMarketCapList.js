@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _toTableFn = _interopRequireDefault(require("../toTableFn"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
@@ -12,64 +14,63 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 var crRows = _toTableFn["default"].crRows,
     crTableConfig = _toTableFn["default"].crTableConfig;
 var crPageConfig = _fnAdapter["default"].crPageConfig;
-var HEADERS = [{
-  name: 'Rank',
-  pn: 'market_cap_rank',
-  toN: [],
-  style: {
-    textAlign: 'center'
-  }
-}, {
-  name: 'Name',
-  pn: 'name'
-}, {
-  isHide: true,
-  name: 'Coin',
-  pn: 'symbol',
-  style: {
-    textTransform: 'uppercase',
-    fontWeight: 'bold'
-  }
-}, {
-  name: '1h %',
-  pn: 'price_change_percentage_1h_in_currency',
-  toN: [3],
-  isR: true
-}, {
-  name: '24h %',
-  pn: 'price_change_percentage_24h',
-  toN: [3],
-  isR: true
-}, {
-  name: '7d %',
-  pn: 'price_change_percentage_7d_in_currency',
-  toN: [3],
-  isR: true
-}, {
-  name: 'Price',
-  pn: 'current_price',
-  toN: [],
-  style: {
-    fontWeight: 'bold'
-  }
-}, {
-  name: 'MarketCap',
-  pn: 'market_cap',
-  toN: [],
-  isF: true,
-  style: {
-    fontWeight: 'bold'
-  }
-}, {
-  isHide: true,
-  name: 'Updated UTC',
-  pn: 'last_updated'
-}];
+
+var _crPriceChangeItem = function _crPriceChangeItem(name, pnSuffix, options) {
+  return (0, _extends2["default"])({
+    name: name,
+    pn: "price_change_percentage_" + pnSuffix,
+    toN: [3],
+    isR: true
+  }, options);
+};
+
+var _crStyleItem = function _crStyleItem(name, pn, options) {
+  return (0, _extends2["default"])({
+    name: name,
+    pn: pn,
+    toN: [],
+    style: {
+      fontWeight: 'bold'
+    }
+  }, options);
+};
+
+var _headers;
+
+var _getTableHeaders = function _getTableHeaders() {
+  return _headers || (_headers = [{
+    name: 'Rank',
+    pn: 'market_cap_rank',
+    toN: [],
+    style: {
+      textAlign: 'center'
+    }
+  }, {
+    name: 'Name',
+    pn: 'name'
+  }, {
+    isHide: true,
+    name: 'Coin',
+    pn: 'symbol',
+    style: {
+      textTransform: 'uppercase',
+      fontWeight: 'bold'
+    }
+  }, _crPriceChangeItem('1h %', '1h_in_currency'), _crPriceChangeItem('24h %', '24h'), _crPriceChangeItem('7d %', '7d_in_currency'), _crPriceChangeItem('30d %', '30d_in_currency', {
+    isHide: true
+  }), _crPriceChangeItem('1y %', '1y_in_currency', {
+    isHide: true
+  }), _crStyleItem('Price', 'current_price'), _crStyleItem('MarketCap', 'market_cap', {
+    isF: true
+  }), {
+    isHide: true,
+    name: 'Updated UTC',
+    pn: 'last_updated'
+  }]);
+};
 
 var _toDate = function _toDate(rowDate) {
-  var _rowDate = rowDate || '';
-
-  return _rowDate.replace('T', ' ').split('.')[0];
+  return (rowDate || '').replace('T', ' ').split('.')[0];
 };
 
 var _transformDate = function _transformDate(json) {
@@ -92,13 +93,14 @@ var toMarketCapList = {
     var key = option.key,
         title = option.title,
         _json = _transformDate(json),
-        _rows = crRows(HEADERS, _json),
+        headers = _getTableHeaders(),
+        rows = crRows(headers, _json),
         config = crTableConfig({
       id: key,
       title: title,
-      headers: HEADERS,
-      rows: _rows,
-      dataSource: _crDataSource(_rows)
+      headers: headers,
+      rows: rows,
+      dataSource: _crDataSource(rows)
     });
 
     return {

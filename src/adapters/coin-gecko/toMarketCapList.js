@@ -7,70 +7,65 @@ const {
 } = toTableFn;
 const { crPageConfig } = fnAdapter;
 
-const HEADERS = [{
-  name: 'Rank',
-  pn: 'market_cap_rank',
-  toN: [],
-  style: { textAlign: 'center' }
-},{
-  name: 'Name',
-  pn: 'name',
-},{
-  isHide: true,
-  name: 'Coin',
-  pn: 'symbol',
-  style: {
-    textTransform: 'uppercase',
-    fontWeight: 'bold'
-  }
-},{
-  name: '1h %',
-  pn: 'price_change_percentage_1h_in_currency',
+const _crPriceChangeItem = (name, pnSuffix, options) => ({
+  name,
+  pn: `price_change_percentage_${pnSuffix}`,
   toN: [3],
-  isR: true
-},{
-  name: '24h %',
-  pn: 'price_change_percentage_24h',
-  toN: [3],
-  isR: true
-},{
-  name: '7d %',
-  pn: 'price_change_percentage_7d_in_currency',
-  toN: [3],
-  isR: true
-},{
-  name: 'Price',
-  pn: 'current_price',
+  isR: true,
+  ...options
+});
+const _crStyleItem = (name, pn, options) => ({
+  name, pn,
   toN: [],
   style: {
     fontWeight: 'bold'
-  }
-},{
-  name: 'MarketCap',
-  pn: 'market_cap',
-  toN: [],
-  isF: true,
-  style: {
-    fontWeight: 'bold'
-  }
-},{
-  isHide: true,
-  name: 'Updated UTC',
-  pn: 'last_updated'
-}
-];
+  },
+  ...options
+});
 
-const _toDate = (rowDate) => {
-  const _rowDate = rowDate || '';
-  return _rowDate.replace('T', ' ').split('.')[0];
-}
+let _headers;
+const _getTableHeaders = () => _headers
+  || (_headers = [{
+    name: 'Rank',
+    pn: 'market_cap_rank',
+    toN: [],
+    style: { textAlign: 'center' }
+  },{
+    name: 'Name',
+    pn: 'name',
+  },{
+    isHide: true,
+    name: 'Coin',
+    pn: 'symbol',
+    style: {
+      textTransform: 'uppercase',
+      fontWeight: 'bold'
+    }
+  },
+  _crPriceChangeItem('1h %', '1h_in_currency'),
+  _crPriceChangeItem('24h %', '24h'),
+  _crPriceChangeItem('7d %', '7d_in_currency'),
+  _crPriceChangeItem('30d %', '30d_in_currency', {isHide: true}),
+  _crPriceChangeItem('1y %', '1y_in_currency', {isHide: true}),
+  _crStyleItem('Price', 'current_price'),
+  _crStyleItem('MarketCap', 'market_cap', {isF: true})
+  ,{
+    isHide: true,
+    name: 'Updated UTC',
+    pn: 'last_updated'
+  }
+]);
 
-const _transformDate = json => {
-  return json.map(item => {
-    item.last_updated = _toDate(item.last_updated)
-    return item;
-  })
-};
+const _toDate = rowDate => (rowDate || '')
+  .replace('T', ' ')
+  .split('.')[0];
+
+const _transformDate = json => json
+ .map(item => {
+   item.last_updated = _toDate(item.last_updated)
+   return item;
+ });
+
 
 const _crDataSource = (rows) => {
   return `CoinGecko ${rows[0].last_updated} UTC`;
@@ -85,13 +80,13 @@ const toMarketCapList = {
   toConfig(json, option){
     const { key, title } = option
     , _json = _transformDate(json)
-    , _rows = crRows(HEADERS, _json)
+    , headers = _getTableHeaders()
+    , rows = crRows(headers, _json)
     , config = crTableConfig({
       id: key, title,
-      headers: HEADERS,
-      rows: _rows,
-      dataSource: _crDataSource(_rows)
-    })
+      headers, rows,
+      dataSource: _crDataSource(rows)
+    });
     return { config };
   }
 }

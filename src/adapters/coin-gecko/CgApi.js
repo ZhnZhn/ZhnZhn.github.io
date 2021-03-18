@@ -46,7 +46,7 @@ const _assignMcl = option => {
 
   _assign(option, {
     title: `By Market Cap Page: ${page} (${perPage})`,
-    _itemUrl: `${C.API_URL}/coins/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d`
+    _itemUrl: `${C.API_URL}/coins/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d,30d,1y`
   })
 }
 
