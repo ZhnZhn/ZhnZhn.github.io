@@ -21,7 +21,7 @@
     "build:dll-jsx": "webpack --color --progress --config webpack.dll-jsx.js",
     "stats": "npm run stats:json && npm run stats:report",
     "stats:json": "webpack --config webpack.dll-jsx.js --profile --json > stats.json",
-    "stats:report": "webpack-bundle-analyzer stats.json --no-open --mode static"    
+    "stats:report": "webpack-bundle-analyzer stats.json --no-open --mode static"
   },
   "author": "Yevhenii Molodyi",
   "license": "BSD-3-Clause",
@@ -103,7 +103,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
     "gulp-rev": "^9.0.0",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^4.1.0",
     "html-webpack-plugin": "^4.5.0",
     "jest": "^26.6.3",
     "jspm": "^0.16.55",
