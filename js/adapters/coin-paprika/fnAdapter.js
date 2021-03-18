@@ -11,12 +11,26 @@ var ymdToUTC = _AdapterFn["default"].ymdToUTC,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
     getValue = _AdapterFn["default"].getValue,
     joinBy = _AdapterFn["default"].joinBy,
-    toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst;
+    toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
+    crItemLink = _AdapterFn["default"].crItemLink;
+var DF_ID = 'btc-bitcoin';
 
-var _crInfo = function _crInfo(_ref) {
-  var title = _ref.title;
+var getCoinId = function getCoinId(_ref) {
+  var _ref$items = _ref.items,
+      items = _ref$items === void 0 ? [] : _ref$items;
+  return getValue(items[0], {
+    dfValue: DF_ID
+  });
+};
+
+var COIN_URL = 'https://coinpaprika.com/coin',
+    _crCoinUrl = function _crCoinUrl(option) {
+  return COIN_URL + "/" + getCoinId(option) + "/";
+},
+    _crInfo = function _crInfo(option) {
   return {
-    name: title
+    name: option.title || '',
+    description: crItemLink('Coinpaprika', _crCoinUrl(option))
   };
 };
 
@@ -24,6 +38,7 @@ var fnAdapter = {
   getValue: getValue,
   joinBy: joinBy,
   toUpperCaseFirst: toUpperCaseFirst,
+  getCoinId: getCoinId,
   crData: function crData(arr) {
     var data = [],
         dColumn = [],

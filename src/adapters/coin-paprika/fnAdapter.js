@@ -5,17 +5,28 @@ const {
   crVolumePoint,
   getValue,
   joinBy,
-  toUpperCaseFirst
+  toUpperCaseFirst,
+  crItemLink
 } = AdapterFn;
 
-const _crInfo = ({ title }) => ({
-  name: title
+const DF_ID = 'btc-bitcoin';
+const getCoinId = ({ items=[] }) =>
+  getValue(items[0], { dfValue: DF_ID });
+
+const COIN_URL = 'https://coinpaprika.com/coin'
+, _crCoinUrl = option => `${COIN_URL}/${getCoinId(option)}/`
+, _crInfo = option => ({
+  name: option.title || '',
+  description: crItemLink('Coinpaprika', _crCoinUrl(option))
 });
+
 
 const fnAdapter = {
   getValue,
   joinBy,
   toUpperCaseFirst,
+
+  getCoinId,
 
   crData: (arr) => {
     const data = []
