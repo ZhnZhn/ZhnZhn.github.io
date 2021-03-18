@@ -62,6 +62,9 @@
 .row__pane-topic:focus {
   border-bottom: 1px solid #1b75bb;
 }
+.row__pane-topic:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
 .row__type2-topic {
   line-height: 2;
