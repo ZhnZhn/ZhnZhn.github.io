@@ -54,10 +54,10 @@
   user-select: none;
   cursor: pointer; }
 
-.row__pane-topic:focus {
-  border-bottom: 2px solid #1b75bb; }
 .row__pane-topic:hover {
-  background-color: rgba(0, 0, 0, 0.05); }  
+  border-bottom: 2px solid #1b75bb; }
+.row__pane-topic:focus {
+  background-color: rgba(0, 0, 0, 0.1); }  
 
 .row__type2-topic {
   line-height: 2;

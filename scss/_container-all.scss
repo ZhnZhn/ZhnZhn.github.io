@@ -59,11 +59,11 @@
   cursor: pointer;
 }
 
-.row__pane-topic:focus {
+.row__pane-topic:hover {
   border-bottom: 1px solid #1b75bb;
 }
-.row__pane-topic:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+.row__pane-topic:focus {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .row__type2-topic {
