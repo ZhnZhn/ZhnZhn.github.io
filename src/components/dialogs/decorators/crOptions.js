@@ -24,6 +24,14 @@ const _crNbqItems = arr => {
   return items;
 };
 
+const REG_BLANKS = /\s/g;
+
+const _crCpItems = arr => arr
+ .map(({ c, v, id }) => ({
+    c: `${c} (${v})`,
+    v: id || (`${v}-${(c || '').replace(REG_BLANKS, '-')}`).toLowerCase()
+}));
+
 const _crItems = (json, optionJsonProp) => {
   const _arr = json[optionJsonProp];
   if (json.isCv) {
@@ -31,6 +39,9 @@ const _crItems = (json, optionJsonProp) => {
   }
   if (json.isNbq) {
     return _crNbqItems(_arr);
+  }
+  if (json.isCp) {
+    return _crCpItems(_arr);
   }
   return _arr[0] && _arr[0].s != null
     ? _crSItems(_arr)

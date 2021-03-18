@@ -12,7 +12,13 @@ const CAPTION_OPTIONS = {
 }, IS_NBQ_OPTIONS = {
   isNbq: true,
   items:[{ n: 'Name1', b: 'b1', q:['q1', 'q2'] }]
-}
+}, IS_CP_OPTIONS = {
+  isCp: true,
+  items:[
+    {"c":"Title1 A B","v":"AAA"},
+    {"c":"Title2 A B","v":"BBB", id: "bbb-token"}
+  ]
+};
 
 
 describe('crOptions', () => {
@@ -34,6 +40,12 @@ describe('crOptions', () => {
     expect(fn(IS_NBQ_OPTIONS, 'items').items).toEqual([
       {"c":"Name1 (b1/q1)", s: "b1/q1"},
       {"c":"Name1 (b1/q2)", s: "b1/q2"}
+    ])
+  })
+  test('should return correct options for isCp case', ()=>{
+    expect(fn(IS_CP_OPTIONS, 'items').items).toEqual([
+      {"c":"Title1 A B (AAA)","v":"aaa-title1-a-b"},
+      {"c":"Title2 A B (BBB)","v":"bbb-token"}
     ])
   })
 

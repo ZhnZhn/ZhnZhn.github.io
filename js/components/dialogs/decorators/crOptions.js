@@ -56,6 +56,20 @@ var _crNbqItems = function _crNbqItems(arr) {
   return items;
 };
 
+var REG_BLANKS = /\s/g;
+
+var _crCpItems = function _crCpItems(arr) {
+  return arr.map(function (_ref4) {
+    var c = _ref4.c,
+        v = _ref4.v,
+        id = _ref4.id;
+    return {
+      c: c + " (" + v + ")",
+      v: id || (v + "-" + (c || '').replace(REG_BLANKS, '-')).toLowerCase()
+    };
+  });
+};
+
 var _crItems = function _crItems(json, optionJsonProp) {
   var _arr = json[optionJsonProp];
 
@@ -65,6 +79,10 @@ var _crItems = function _crItems(json, optionJsonProp) {
 
   if (json.isNbq) {
     return _crNbqItems(_arr);
+  }
+
+  if (json.isCp) {
+    return _crCpItems(_arr);
   }
 
   return _arr[0] && _arr[0].s != null ? _crSItems(_arr) : _arr;
