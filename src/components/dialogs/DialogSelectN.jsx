@@ -4,6 +4,7 @@ import memoizeOne from 'memoize-one'
 
 import ChartTypes from './ChartTypes'
 import D from './DialogCell'
+import SelectList from './SelectList'
 const { Decor, crMenuMore, crDateConfig } = D
 
 const DF_INIT_FROM_DATE = '2010-01-01'
@@ -65,7 +66,6 @@ const _crStateForTableItem = (comp, item) => {
 };
 
 @Decor.dialog
-//@Decor.withForDate
 class DialogSelectN extends Component {
   /*
   static propTypes = {
@@ -149,14 +149,23 @@ class DialogSelectN extends Component {
     return this._crDateConfigMem(mapFrequency, mapDateDf);
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps
+        && this.props.isShow === nextProps.isShow) {
+      return false;
     }
     return true;
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { mapFrequency, mapDateDf } = this.state;
+    if (prevState.mapFrequency !== mapFrequency
+        || prevState.mapDateDf !== mapDateDf) {
+      this.date = void 0
+    }
+  }
+
+  _isShowById = id => this.state[_crIsId(id)]
 
   _toggleStateBy = (propName) => {
     this.setState(prevState => ({
@@ -172,24 +181,12 @@ class DialogSelectN extends Component {
        .filter(v => v !== index)
   }
 
-  _updateForDate = (chartType) => {
-    this.date = void 0;
-    this.setState({
-       isShowFd: false,
-       isShowDate: true,
-       chartType
-    });
-  }
 
   _hSelectChartType = (chartType) => {
-    if (isCategory(chartType)) {
-      this._updateForDate(chartType);
-    } else {
-      this.setState({
-        chartType,
-        isShowDate: false
-      });
-    }
+    const _nextState = isCategory(chartType)
+      ? { isShowDate: true, isShowFd: false }
+      : { isShowDate: false };
+    this.setState({ ..._nextState, chartType })
   }
 
   _onRegColor = (comp) => {
@@ -199,12 +196,8 @@ class DialogSelectN extends Component {
   _hSelectDate = (date) => {
     this.date = date;
   }
-
-  _getDate = () => {
-    const { date } = this
-    , { value } = date || {};
-    return value || this._crDateConfig().dateDefault;
-  }
+  _getDate = () => (this.date || {}).value
+     || this._crDateConfig().dateDefault
 
   _handleLoad = () => {
     this._handleWithValidationLoad(
@@ -287,27 +280,6 @@ class DialogSelectN extends Component {
     this._compSelect[id] = comp
   }
 
-  _renderSelects = (selectProps, isShow, isShowLabels) => {
-      return selectProps.map((item, index) => {
-        const {
-          id,
-          //uri, jsonProp, caption, isWithInput
-          ...restItem
-        } = item;
-        const _isShow = this.state[_crIsId(id)];
-        return (
-          <D.ShowHide key={id} isShow={_isShow}>
-            <D.SelectWithLoad
-              {...restItem}
-              ref={this._refSelect.bind(null, id)}
-              isShow={isShow}
-              isShowLabels={isShowLabels}
-              onSelect={this._hSelect.bind(null, id, index)}
-            />
-          </D.ShowHide>
-        );
-      });
-  }
 
   render(){
     const {
@@ -367,7 +339,14 @@ class DialogSelectN extends Component {
              onUnCheckCaption={this._uncheckCaption}
              onClose={this._hideToggleWithToolbar}
            />
-           {this._renderSelects(selectProps, isShow, isShowLabels)}
+           <SelectList
+             isShow={isShow}
+             isShowLabels={isShowLabels}
+             selectProps={selectProps}
+             refSelect={this._refSelect}             
+             isShowById={this._isShowById}
+             hSelect={this._hSelect}
+           />
            {_isRowFd && <D.ShowHide isShow={isShowFd}>
                <D.RowDate
                 innerRef={this._refFromDate}

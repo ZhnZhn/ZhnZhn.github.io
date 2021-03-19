@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
@@ -22,6 +20,8 @@ var _memoizeOne = _interopRequireDefault(require("memoize-one"));
 var _ChartTypes = _interopRequireDefault(require("./ChartTypes"));
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
+
+var _SelectList = _interopRequireDefault(require("./SelectList"));
 
 var _dec, _class, _class2, _temp;
 
@@ -94,8 +94,7 @@ var _crStateForTableItem = function _crStateForTableItem(comp, item) {
   };
 };
 
-var //@Decor.withForDate
-DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
+var DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(DialogSelectN, _Component);
 
   /*
@@ -139,6 +138,10 @@ DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE
       return _this._crDateConfigMem(mapFrequency, mapDateDf);
     };
 
+    _this._isShowById = function (id) {
+      return _this.state[_crIsId(id)];
+    };
+
     _this._toggleStateBy = function (propName) {
       _this.setState(function (prevState) {
         var _ref2;
@@ -157,25 +160,17 @@ DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE
       });
     };
 
-    _this._updateForDate = function (chartType) {
-      _this.date = void 0;
-
-      _this.setState({
-        isShowFd: false,
-        isShowDate: true,
-        chartType: chartType
-      });
-    };
-
     _this._hSelectChartType = function (chartType) {
-      if (isCategory(chartType)) {
-        _this._updateForDate(chartType);
-      } else {
-        _this.setState({
-          chartType: chartType,
-          isShowDate: false
-        });
-      }
+      var _nextState = isCategory(chartType) ? {
+        isShowDate: true,
+        isShowFd: false
+      } : {
+        isShowDate: false
+      };
+
+      _this.setState((0, _extends2["default"])({}, _nextState, {
+        chartType: chartType
+      }));
     };
 
     _this._onRegColor = function (comp) {
@@ -187,12 +182,7 @@ DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE
     };
 
     _this._getDate = function () {
-      var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
-          date = _assertThisInitialize.date,
-          _ref3 = date || {},
-          value = _ref3.value;
-
-      return value || _this._crDateConfig().dateDefault;
+      return (_this.date || {}).value || _this._crDateConfig().dateDefault;
     };
 
     _this._handleLoad = function () {
@@ -219,13 +209,13 @@ DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE
     };
 
     _this._createLoadOption = function () {
-      var _assertThisInitialize2 = (0, _assertThisInitialized2["default"])(_this),
-          colorComp = _assertThisInitialize2.colorComp,
-          dialogOptions = _assertThisInitialize2.dialogOptions,
+      var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
+          colorComp = _assertThisInitialize.colorComp,
+          dialogOptions = _assertThisInitialize.dialogOptions,
           chartType = _this.state.chartType,
-          _ref4 = colorComp ? colorComp.getConf() : {},
-          seriaColor = _ref4.seriaColor,
-          seriaWidth = _ref4.seriaWidth,
+          _ref3 = colorComp ? colorComp.getConf() : {},
+          seriaColor = _ref3.seriaColor,
+          seriaWidth = _ref3.seriaWidth,
           date = _this._getDate(),
           _isCategory = isCategory(chartType),
           items = _isCategory ? _this._items.slice(1) : [].concat(_this._items),
@@ -272,25 +262,6 @@ DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE
       _this._compSelect[id] = comp;
     };
 
-    _this._renderSelects = function (selectProps, isShow, isShowLabels) {
-      return selectProps.map(function (item, index) {
-        var id = item.id,
-            restItem = (0, _objectWithoutPropertiesLoose2["default"])(item, ["id"]);
-
-        var _isShow = _this.state[_crIsId(id)];
-
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
-          isShow: _isShow,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, (0, _extends2["default"])({}, restItem, {
-            ref: _this._refSelect.bind(null, id),
-            isShow: isShow,
-            isShowLabels: isShowLabels,
-            onSelect: _this._hSelect.bind(null, id, index)
-          }))
-        }, id);
-      });
-    };
-
     _this._items = [];
     _this._titles = [0];
     _this._compSelect = {}; //this.date = undefined;
@@ -325,13 +296,21 @@ DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE
   var _proto = DialogSelectN.prototype;
 
   _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps) {
-      if (this.props.isShow === nextProps.isShow) {
-        return false;
-      }
+    if (this.props !== nextProps && this.props.isShow === nextProps.isShow) {
+      return false;
     }
 
     return true;
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+    var _this$state2 = this.state,
+        mapFrequency = _this$state2.mapFrequency,
+        mapDateDf = _this$state2.mapDateDf;
+
+    if (prevState.mapFrequency !== mapFrequency || prevState.mapDateDf !== mapDateDf) {
+      this.date = void 0;
+    }
   };
 
   _proto.render = function render() {
@@ -349,17 +328,17 @@ DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE
         initFromDate = _this$props2.initFromDate,
         errNotYmdOrEmpty = _this$props2.errNotYmdOrEmpty,
         isYmdOrEmpty = _this$props2.isYmdOrEmpty,
-        _this$state2 = this.state,
-        chartType = _this$state2.chartType,
-        isToolbar = _this$state2.isToolbar,
-        isOptions = _this$state2.isOptions,
-        isToggle = _this$state2.isToggle,
-        isShowLabels = _this$state2.isShowLabels,
-        isShowFd = _this$state2.isShowFd,
-        isShowChart = _this$state2.isShowChart,
-        isShowDate = _this$state2.isShowDate,
-        validationMessages = _this$state2.validationMessages,
-        mapFrequency = _this$state2.mapFrequency,
+        _this$state3 = this.state,
+        chartType = _this$state3.chartType,
+        isToolbar = _this$state3.isToolbar,
+        isOptions = _this$state3.isOptions,
+        isToggle = _this$state3.isToggle,
+        isShowLabels = _this$state3.isShowLabels,
+        isShowFd = _this$state3.isShowFd,
+        isShowChart = _this$state3.isShowChart,
+        isShowDate = _this$state3.isShowDate,
+        validationMessages = _this$state3.validationMessages,
+        mapFrequency = _this$state3.mapFrequency,
         _chartOptions = this._crChartOptionsMem(selectProps, chartsType, mapFrequency),
         _this$_crDateConfig = this._crDateConfig(),
         dateDefault = _this$_crDateConfig.dateDefault,
@@ -397,7 +376,14 @@ DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__PURE
         onCheckCaption: this._checkCaptionBy,
         onUnCheckCaption: this._uncheckCaption,
         onClose: this._hideToggleWithToolbar
-      }), this._renderSelects(selectProps, isShow, isShowLabels), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectList["default"], {
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        selectProps: selectProps,
+        refSelect: this._refSelect,
+        isShowById: this._isShowById,
+        hSelect: this._hSelect
+      }), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
         isShow: isShowFd,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowDate, {
           innerRef: this._refFromDate,
