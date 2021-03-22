@@ -23,6 +23,8 @@ var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
 
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
 
+var _OptionList = _interopRequireDefault(require("./OptionList"));
+
 var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
 
 var _CL = _interopRequireDefault(require("./CL"));
@@ -201,6 +203,10 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
     _this._makeVisible = function (comp) {
       if (comp) {
+        if (_this.indexActiveOption === 0) {
+          return;
+        }
+
         var deltaTop = _this._calcDeltaTop(comp);
 
         if (deltaTop > 70) {
@@ -447,7 +453,11 @@ var InputSelect = /*#__PURE__*/function (_Component) {
       return _this.indexNode = n;
     };
 
-    _this._createDomOptionsWithCache = function () {
+    _this._refOptionNode = function (n, index) {
+      return _this["v" + index] = n;
+    };
+
+    _this._crOptionListWithCache = function () {
       var _this$props3 = _this.props,
           propCaption = _this$props3.propCaption,
           ItemOptionComp = _this$props3.ItemOptionComp,
@@ -455,38 +465,19 @@ var InputSelect = /*#__PURE__*/function (_Component) {
           options = _this$state2.options,
           isValidDomOptionsCache = _this$state2.isValidDomOptionsCache;
 
-      var _domOptions;
-
-      if (options) {
-        if (!isValidDomOptionsCache) {
-          /*eslint-disable jsx-a11y/click-events-have-key-events*/
-          _domOptions = options.map(function (item, index) {
-            return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-              role: "option",
-              "aria-selected": _this.indexActiveOption === index,
-              tabIndex: "0",
-              className: _CL["default"].OPTIONS_ROW,
-              ref: function ref(c) {
-                return _this["v" + index] = c;
-              },
-              onClick: function onClick() {
-                return _this._hClickItem(item, index, propCaption);
-              },
-              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemOptionComp, {
-                item: item,
-                propCaption: propCaption
-              })
-            }, index);
-          });
-          /*eslint-enable jsx-a11y/click-events-have-key-events*/
-
-          _this.domOptionsCache = _domOptions;
-        } else {
-          _domOptions = _this.domOptionsCache;
-        }
+      if (options && !isValidDomOptionsCache) {
+        _this.domOptionsCache = /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList["default"], {
+          options: options,
+          refOptionNode: _this._refOptionNode,
+          className: _CL["default"].OPTIONS_ROW,
+          selectedIndex: _this.indexActiveOption,
+          propCaption: propCaption,
+          onClick: _this._hClickItem,
+          ItemComp: ItemOptionComp
+        });
       }
 
-      return _domOptions;
+      return _this.domOptionsCache;
     };
 
     _this.renderOptions = function () {
@@ -494,7 +485,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
           optionsStyle = _this$props4.optionsStyle,
           width = _this$props4.width,
           isShowOption = _this.state.isShowOption,
-          _domOptions = _this._createDomOptionsWithCache(),
+          _optionListEl = _this._crOptionListWithCache(),
           _styleOptions = isShowOption ? S.BLOCK : S.NONE,
           _rootWidthStyle = _crWidthStyle(width, _styleOptions),
           _crFooterIndex2 = _crFooterIndex(_this.state),
@@ -509,7 +500,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
           ref: _this._refOptionsComp,
           className: _CL["default"].OPTIONS_DIV,
           style: (0, _extends2["default"])({}, optionsStyle, _rootWidthStyle),
-          children: _domOptions
+          children: _optionListEl
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter["default"], {
           ref: _this._refIndexNode,
           indexActiveOption: _this.indexActiveOption,
@@ -636,13 +627,15 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
     if (prevState.initialOptions !== initialOptions) {
       this._initProperties();
-    } //Decorate Active Option
+    } //Decorate Active Option and Make Visible
 
 
     if (isShowOption) {
       var comp = this._decorateCurrentComp();
 
-      this._makeVisible(comp);
+      if (!prevState.isShowOption) {
+        this._makeVisible(comp);
+      }
     }
   };
 

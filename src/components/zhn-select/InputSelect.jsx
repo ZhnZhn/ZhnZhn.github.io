@@ -7,6 +7,7 @@ import SvgClear from '../zhn/SvgClear';
 
 import BtCircle2 from '../zhn/ButtonCircle2';
 import ItemOptionDf from './ItemOptionDf'
+import OptionList from './OptionList'
 import OptionsFooter from './OptionsFooter'
 import CL from './CL'
 
@@ -168,10 +169,12 @@ class InputSelect extends Component {
     if (prevState.initialOptions !== initialOptions) {
       this._initProperties()
     }
-    //Decorate Active Option
+    //Decorate Active Option and Make Visible
     if (isShowOption){
       const comp = this._decorateCurrentComp();
-      this._makeVisible(comp)
+      if (!prevState.isShowOption) {
+        this._makeVisible(comp)
+      }
     }
   }
 
@@ -212,6 +215,9 @@ class InputSelect extends Component {
 
   _makeVisible = comp => {
     if (comp){
+      if (this.indexActiveOption === 0){
+        return;
+      }
       const deltaTop = this._calcDeltaTop(comp);
       if (deltaTop > 70){
         this.optionsComp.scrollTop += deltaTop - 70;
@@ -401,8 +407,9 @@ class InputSelect extends Component {
 
   _refOptionsComp = c => this.optionsComp = c
   _refIndexNode = n => this.indexNode = n
+  _refOptionNode = (n, index) => this[`v${index}`] = n
 
-  _createDomOptionsWithCache = () => {
+  _crOptionListWithCache = () => {
     const {
       propCaption,
       ItemOptionComp
@@ -412,38 +419,26 @@ class InputSelect extends Component {
       isValidDomOptionsCache
     } = this.state;
 
-    let _domOptions;
-    if (options){
-      if (!isValidDomOptionsCache){
-         /*eslint-disable jsx-a11y/click-events-have-key-events*/
-         _domOptions = options.map((item, index)=>( <div
-              role="option"
-              aria-selected={this.indexActiveOption === index}
-              tabIndex="0"
-              key={index}
-              className={CL.OPTIONS_ROW}
-              ref={c => this[`v${index}`] = c}
-              onClick={() => this._hClickItem(item, index, propCaption)}
-            >
-              <ItemOptionComp
-                 item={item}
-                 propCaption={propCaption}
-              />
-            </div>
-         ));
-         /*eslint-enable jsx-a11y/click-events-have-key-events*/
-         this.domOptionsCache = _domOptions;
-       } else {
-         _domOptions = this.domOptionsCache;
-       }
+    if (options && !isValidDomOptionsCache){
+      this.domOptionsCache = (
+        <OptionList
+          options={options}
+          refOptionNode={this._refOptionNode}
+          className={CL.OPTIONS_ROW}
+          selectedIndex={this.indexActiveOption}
+          propCaption={propCaption}
+          onClick={this._hClickItem}
+          ItemComp={ItemOptionComp}
+        />
+      )
     }
-    return _domOptions;
+    return this.domOptionsCache;
   }
 
   renderOptions = () => {
     const { optionsStyle, width } = this.props
     , { isShowOption } = this.state
-    , _domOptions = this._createDomOptionsWithCache()
+    , _optionListEl = this._crOptionListWithCache()
     , _styleOptions = isShowOption ? S.BLOCK : S.NONE
     , _rootWidthStyle = _crWidthStyle(width, _styleOptions)
     , { _nFiltered, _nAll } = _crFooterIndex(this.state);
@@ -459,7 +454,7 @@ class InputSelect extends Component {
              className={CL.OPTIONS_DIV}
              style={{...optionsStyle, ..._rootWidthStyle}}
            >
-            {_domOptions}
+            {_optionListEl}
           </div>
           <OptionsFooter
             ref={this._refIndexNode}
