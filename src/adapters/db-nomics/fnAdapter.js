@@ -21,24 +21,19 @@ const C = {
   SUBT_MAX: 60
 };
 
-
-const _isId = id => id && id.indexOf('/') !== -1;
 const _crId = ({ dfProvider, dfCode, seriaId }) =>
   joinBy('/', dfProvider, dfCode, seriaId);
-const _getId = (option) => _isId(option.seriaId)
-  ? option.seriaId
-  : _crId(option);
 
 const _crItemLink = crItemLink
   .bind(null, 'DB Nomics Chart');
 const _crUpdatedDate = json => {
-  const _date = getIndexedAt(json).split('T')[0]
+  const _date = getIndexedAt(json).split('T')[0];
   return _date
     ? `<p>Updated by DB Nomics on ${_date}</p>`
     : '';
 };
 const _crDescr = (json, option) => {
-  const _id = _getId(option);
+  const _id = _crId(option);
   return`<p>SeriaId: ${_id}</p>
    ${_crUpdatedDate(json)}
    ${_crItemLink(C.CHART_URL+'/'+_id)}`;
@@ -50,7 +45,7 @@ const _crZhConfig = (option) => {
     dfProvider, dfCode, seriaId,
     title
   } = option
-  , _id = _itemKey || seriaId;
+  , _id = _itemKey;
   return {
     id: _id, key: _id,
     itemCaption: title,

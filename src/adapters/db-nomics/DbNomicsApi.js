@@ -35,16 +35,14 @@ const _dfFnUrl = option => _isArr(option.items)
   : _crUrl('', option);
 
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
-  Object.assign(option, {
-    seriaId: option.value,
-    dfProvider, dfCode
-  })
+  _assign(option, {seriaId, dfProvider, dfCode})
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 
 const _trimStr = (str='') => str.trim();
 const _idFnUrl = (option) => {
-  const { value } = option || ''
+  const { items } = option
+  , value = getValue(items[0])
   , arr = value.split('/');
   return _crIdUrl(option,
     _trimStr(arr[0]),
@@ -54,7 +52,7 @@ const _idFnUrl = (option) => {
 };
 
 const _crSeriaId = ({ dfPrefix, dfSufix }, ...args) => [
-  dfPrefix, 
+  dfPrefix,
   ...args,
   dfSufix
 ].filter(Boolean)
@@ -135,7 +133,7 @@ const _rFnUrl = {
 };
 
 const DbNomicsApi = {
-  getRequestUrl(option){
+  getRequestUrl(option){    
     if (option.url) {
       return option.url;
     }

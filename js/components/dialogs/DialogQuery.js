@@ -37,11 +37,7 @@ var _isStrNotBlank = function _isStrNotBlank(str) {
 };
 
 var _testId = function _testId(value) {
-  if (_isStrNotBlank(value) && _isStrNotBlank(value.split('/')[2])) {
-    return true;
-  }
-
-  return false;
+  return _isStrNotBlank(value) && _isStrNotBlank(value.split('/')[2]) ? true : false;
 };
 
 var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class = _dec2(_class = (_temp = /*#__PURE__*/function (_Component) {
@@ -70,6 +66,7 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
               props = _assertThisInitialize.props,
               state = _assertThisInitialize.state,
               colorComp = _assertThisInitialize.colorComp,
+              dialogOptions = _assertThisInitialize.dialogOptions,
               onLoad = props.onLoad,
               loadFn = props.loadFn,
               chartType = state.chartType,
@@ -78,13 +75,14 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
               seriaWidth = _ref.seriaWidth;
 
           onLoad(loadFn(_this.props, {
-            one: {
-              value: _value,
-              caption: _value
-            },
+            items: [{
+              c: _value,
+              v: _value
+            }],
             chartType: chartType,
             seriaColor: seriaColor,
-            seriaWidth: seriaWidth
+            seriaWidth: seriaWidth,
+            dialogOptions: dialogOptions
           }));
         } else {
           _this._idInput.showErrMsg();
@@ -106,7 +104,8 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
     });
     var noDate = _props.noDate;
     _this.toolbarButtons = _this._createType2WithToolbar(_props, {
-      noDate: noDate
+      noDate: noDate,
+      isOptions: true
     });
     _this._chartOptions = crOptions({
       chartsType: 't2'
@@ -116,6 +115,7 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
       isToolbar: true,
       isShowLabels: true,
       isShowDate: true,
+      isOptions: false,
       chartType: 'SPLINE'
     };
     return _this;
@@ -151,6 +151,7 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
         isShowDate = _this$state.isShowDate,
+        isOptions = _this$state.isOptions,
         chartType = _this$state.chartType;
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
       isShow: isShow,
@@ -163,6 +164,10 @@ var DialogQuery = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _dec(_class
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
         isShow: isToolbar,
         buttons: this.toolbarButtons
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ModalOptions, {
+        isShow: isOptions,
+        toggleOption: this._toggleOptionWithToolbar,
+        onClose: this._hideOptionsWithToolbar
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowPattern, {
         ref: this._refIdInput,
         isShow: isShow,

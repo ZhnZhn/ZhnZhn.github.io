@@ -26,19 +26,11 @@ var C = {
   SUBT_MAX: 60
 };
 
-var _isId = function _isId(id) {
-  return id && id.indexOf('/') !== -1;
-};
-
 var _crId = function _crId(_ref) {
   var dfProvider = _ref.dfProvider,
       dfCode = _ref.dfCode,
       seriaId = _ref.seriaId;
   return joinBy('/', dfProvider, dfCode, seriaId);
-};
-
-var _getId = function _getId(option) {
-  return _isId(option.seriaId) ? option.seriaId : _crId(option);
 };
 
 var _crItemLink = crItemLink.bind(null, 'DB Nomics Chart');
@@ -49,7 +41,7 @@ var _crUpdatedDate = function _crUpdatedDate(json) {
 };
 
 var _crDescr = function _crDescr(json, option) {
-  var _id = _getId(option);
+  var _id = _crId(option);
 
   return "<p>SeriaId: " + _id + "</p>\n   " + _crUpdatedDate(json) + "\n   " + _crItemLink(C.CHART_URL + '/' + _id);
 };
@@ -61,8 +53,7 @@ var _crZhConfig = function _crZhConfig(option) {
       dfCode = option.dfCode,
       seriaId = option.seriaId,
       title = option.title,
-      _id = _itemKey || seriaId;
-
+      _id = _itemKey;
   return {
     id: _id,
     key: _id,

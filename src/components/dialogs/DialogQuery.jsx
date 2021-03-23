@@ -16,14 +16,10 @@ const S = {
 
 const _isStrNotBlank = str => typeof str === 'string'
   && str.trim();
-
-const _testId = (value) => {
-  if (_isStrNotBlank(value)
-   && _isStrNotBlank(value.split('/')[2])) {
-    return true;
-  }
-  return false;
-};
+  
+const _testId = (value) => _isStrNotBlank(value)
+  && _isStrNotBlank(value.split('/')[2])
+  ? true : false;
 
 @Decor.withToolbar
 @Decor.withLoad
@@ -37,7 +33,7 @@ class DialogQuery extends Component {
     })
     const { noDate } = props;
     this.toolbarButtons = this._createType2WithToolbar(
-       props, { noDate }
+       props, { noDate, isOptions: true }
     )
     this._chartOptions = crOptions({ chartsType: 't2' })
     this._commandButtons = this._crCommandsWithLoad(this)
@@ -46,6 +42,7 @@ class DialogQuery extends Component {
        isToolbar: true,
        isShowLabels: true,
        isShowDate: true,
+       isOptions: false,
        chartType: 'SPLINE'
     }
   }
@@ -71,18 +68,16 @@ class DialogQuery extends Component {
     if (this._idInput) {
       if (this._idInput.isValid()) {
         const _value = this._idInput.getValue()
-        , { props, state, colorComp } = this
+        , { props, state, colorComp, dialogOptions } = this
         , { onLoad, loadFn } = props
         , { chartType } = state
         , { seriaColor, seriaWidth } = colorComp
             ? colorComp.getConf()
             : {};
         onLoad(loadFn(this.props, {
-          one: {
-            value: _value,
-            caption: _value
-          },
-          chartType, seriaColor, seriaWidth
+          items: [{ c: _value, v: _value }],
+          chartType, seriaColor, seriaWidth,
+          dialogOptions
         }));
       } else {
         this._idInput.showErrMsg()
@@ -102,6 +97,7 @@ class DialogQuery extends Component {
           } = this.props
         , { isToolbar,
             isShowLabels, isShowDate,
+            isOptions,
             chartType
           } = this.state;
     return (
@@ -117,6 +113,11 @@ class DialogQuery extends Component {
         <D.Toolbar
           isShow={isToolbar}
           buttons={this.toolbarButtons}
+        />
+        <D.ModalOptions
+          isShow={isOptions}
+          toggleOption={this._toggleOptionWithToolbar}
+          onClose={this._hideOptionsWithToolbar}
         />
         <D.RowPattern
           ref={this._refIdInput}

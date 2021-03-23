@@ -41,11 +41,12 @@ var _dfFnUrl = function _dfFnUrl(option) {
 };
 
 var _crIdUrl = function _crIdUrl(option, dfProvider, dfCode, seriaId) {
-  Object.assign(option, {
-    seriaId: option.value,
+  _assign(option, {
+    seriaId: seriaId,
     dfProvider: dfProvider,
     dfCode: dfCode
   });
+
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 
@@ -58,16 +59,15 @@ var _trimStr = function _trimStr(str) {
 };
 
 var _idFnUrl = function _idFnUrl(option) {
-  var _ref = option || '',
-      value = _ref.value,
+  var items = option.items,
+      value = getValue(items[0]),
       arr = value.split('/');
-
   return _crIdUrl(option, _trimStr(arr[0]), _trimStr(arr[1]), _trimStr(arr[2]));
 };
 
-var _crSeriaId = function _crSeriaId(_ref2) {
-  var dfPrefix = _ref2.dfPrefix,
-      dfSufix = _ref2.dfSufix;
+var _crSeriaId = function _crSeriaId(_ref) {
+  var dfPrefix = _ref.dfPrefix,
+      dfSufix = _ref.dfSufix;
 
   for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
