@@ -23,33 +23,22 @@ const _r = {
   DialogType4: fnType4,
   DialogType4A: fnType4,
   DialogType5: fnType5,
-  DialogQuery: fnType3,
-
   DialogType5A: fnType5,
 
   Futures3Dialog: fnFutures3,
   FuturesWikiDialog: fnFuturesWiki,
 
   DialogSelectN: fnSelectN,
+  DialogQuery: fnSelectN,
   DialogStatN: fnStatN,
 
   UnDialog5: fnUn5
 };
 
 const RouterLoadFn = {
-   getFn : (loadFnType, dialogType) => {
-      if (loadFnType) {
-        if (_r[loadFnType]){
-          return _r[loadFnType];
-        } else {
-          return noopFn;
-        }
-      } else if (dialogType && _r[dialogType]){
-        return _r[dialogType];
-      } else {
-        return _r.DEFAULT;
-      }
-   }
-}
+  getFn : (loadFnType, dialogType) => loadFnType
+    ? _r[loadFnType] || noopFn
+    : dialogType && _r[dialogType] || _r.DEFAULT     
+};
 
 export default RouterLoadFn

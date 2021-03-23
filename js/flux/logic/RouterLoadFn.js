@@ -32,27 +32,17 @@ var _r = {
   DialogType4: _type2["default"],
   DialogType4A: _type2["default"],
   DialogType5: _type3["default"],
-  DialogQuery: _type["default"],
   DialogType5A: _type3["default"],
   Futures3Dialog: _futures["default"],
   FuturesWikiDialog: _futuresWiki["default"],
   DialogSelectN: _selectN["default"],
+  DialogQuery: _selectN["default"],
   DialogStatN: _statN["default"],
   UnDialog5: _un["default"]
 };
 var RouterLoadFn = {
   getFn: function getFn(loadFnType, dialogType) {
-    if (loadFnType) {
-      if (_r[loadFnType]) {
-        return _r[loadFnType];
-      } else {
-        return noopFn;
-      }
-    } else if (dialogType && _r[dialogType]) {
-      return _r[dialogType];
-    } else {
-      return _r.DEFAULT;
-    }
+    return loadFnType ? _r[loadFnType] || noopFn : dialogType && _r[dialogType] || _r.DEFAULT;
   }
 };
 var _default = RouterLoadFn;
