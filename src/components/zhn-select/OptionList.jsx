@@ -12,7 +12,7 @@ const OptionList = ({
    <div
      role="option"
      aria-selected={selectedIndex === index}
-     tabIndex="0"
+     tabIndex="-1"
      key={index}
      className={className}
      ref={n => refOptionNode(n, index)}

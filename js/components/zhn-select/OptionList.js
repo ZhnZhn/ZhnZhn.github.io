@@ -21,7 +21,7 @@ var OptionList = function OptionList(_ref) {
       (0, _jsxRuntime.jsx)("div", {
         role: "option",
         "aria-selected": selectedIndex === index,
-        tabIndex: "0",
+        tabIndex: "-1",
         className: className,
         ref: function ref(n) {
           return refOptionNode(n, index);

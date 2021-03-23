@@ -73,6 +73,9 @@
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
+.zhn-select__options__div:focus {
+  outline: 0
+}
 
 .zhn-select__row {
   color: green;

@@ -92,8 +92,7 @@ var _crInitialStateFromProps = function _crInitialStateFromProps(_ref4) {
     initialOptions: options,
     options: options,
     optionNames: optionNames || optionName || '',
-    isValidDomOptionsCache: false,
-    isLocalMode: false,
+    isValidOptionListCache: false,
     isFocused: false
   };
 };
@@ -161,7 +160,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
     _this = _Component.call(this, _props) || this;
 
     _this._initProperties = function () {
-      _this.domOptionsCache = null;
+      _this.optionListCache = null;
       _this.indexActiveOption = 0;
     };
 
@@ -245,7 +244,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
         _this.setState({
           value: token,
           isShowOption: true,
-          isValidDomOptionsCache: false,
+          isValidOptionListCache: false,
           options: _crFilterOptions(_options, token, _this.props)
         });
       }
@@ -369,7 +368,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
               _this.setState({
                 value: _crValue(_value),
                 isShowOption: false,
-                isValidDomOptionsCache: true
+                isValidOptionListCache: true
               });
 
               _this._selectItem(item);
@@ -449,12 +448,12 @@ var InputSelect = /*#__PURE__*/function (_Component) {
       return _this.optionsComp = c;
     };
 
-    _this._refIndexNode = function (n) {
-      return _this.indexNode = n;
-    };
-
     _this._refOptionNode = function (n, index) {
       return _this["v" + index] = n;
+    };
+
+    _this._refIndexNode = function (n) {
+      return _this.indexNode = n;
     };
 
     _this._crOptionListWithCache = function () {
@@ -463,10 +462,10 @@ var InputSelect = /*#__PURE__*/function (_Component) {
           ItemOptionComp = _this$props3.ItemOptionComp,
           _this$state2 = _this.state,
           options = _this$state2.options,
-          isValidDomOptionsCache = _this$state2.isValidDomOptionsCache;
+          isValidOptionListCache = _this$state2.isValidOptionListCache;
 
-      if (options && !isValidDomOptionsCache) {
-        _this.domOptionsCache = /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList["default"], {
+      if (options && !isValidOptionListCache) {
+        _this.optionListCache = /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList["default"], {
           options: options,
           refOptionNode: _this._refOptionNode,
           className: _CL["default"].OPTIONS_ROW,
@@ -477,7 +476,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
         });
       }
 
-      return _this.domOptionsCache;
+      return _this.optionListCache;
     };
 
     _this.renderOptions = function () {
@@ -496,10 +495,12 @@ var InputSelect = /*#__PURE__*/function (_Component) {
         className: _CL["default"].OPTIONS,
         style: _rootWidthStyle,
         "data-scrollable": true,
+        tabIndex: "-1",
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           ref: _this._refOptionsComp,
           className: _CL["default"].OPTIONS_DIV,
           style: (0, _extends2["default"])({}, optionsStyle, _rootWidthStyle),
+          tabIndex: "-1",
           children: _optionListEl
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter["default"], {
           ref: _this._refIndexNode,
@@ -585,10 +586,6 @@ var InputSelect = /*#__PURE__*/function (_Component) {
       }, 800);
     };
 
-    _this._refInput = function (node) {
-      return _this._nodeInput = node;
-    };
-
     _this.clearInput = function () {
       _this._undecorateCurrentComp();
 
@@ -604,6 +601,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
     _this._initProperties();
 
+    _this._refInput = /*#__PURE__*/(0, _react.createRef)();
     _this._refArrowCell = /*#__PURE__*/(0, _react.createRef)();
     _this.state = _crInitialStateFromProps(_props);
     return _this;
@@ -649,7 +647,6 @@ var InputSelect = /*#__PURE__*/function (_Component) {
         width = _this$props6.width,
         _this$state5 = this.state,
         value = _this$state5.value,
-        isLocalMode = _this$state5.isLocalMode,
         isShowOption = _this$state5.isShowOption,
         _rootWidthStyle = _crWidthStyle(width, style),
         _this$_crAfterInputEl = this._crAfterInputEl(),
@@ -674,12 +671,12 @@ var InputSelect = /*#__PURE__*/function (_Component) {
         onKeyDown: this._hInputKeyDown
       }, this._touchHandlers)), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
         className: _CL["default"].INPUT_HR
-      }), (isLocalMode || isShowOption) && this.renderOptions()]
+      }), isShowOption && this.renderOptions()]
     });
   };
 
   _proto.focusInput = function focusInput() {
-    this._nodeInput.focus();
+    _getCurrent(this._refNodeInput).focus();
   };
 
   return InputSelect;

@@ -65,8 +65,7 @@ const _crInitialStateFromProps = ({ optionName, optionNames, options }) => ({
   initialOptions: options,
   options: options,
   optionNames: optionNames || optionName || '',
-  isValidDomOptionsCache: false,
-  isLocalMode: false,
+  isValidOptionListCache: false,
   isFocused: false
 });
 
@@ -146,12 +145,14 @@ class InputSelect extends Component {
         }
       : void 0
     this._initProperties()
+    this._refInput = createRef()
     this._refArrowCell = createRef()
+
     this.state = _crInitialStateFromProps(props)
   }
 
   _initProperties = () => {
-    this.domOptionsCache = null
+    this.optionListCache = null
     this.indexActiveOption = 0
   }
 
@@ -249,7 +250,7 @@ class InputSelect extends Component {
       this.setState({
         value: token,
         isShowOption: true,
-        isValidDomOptionsCache: false,
+        isValidOptionListCache: false,
         options: _crFilterOptions(_options, token, this.props)
       })
     }
@@ -355,7 +356,7 @@ class InputSelect extends Component {
            this.setState({
              value: _crValue(_value),
              isShowOption: false,
-             isValidDomOptionsCache: true
+             isValidOptionListCache: true
            });
            this._selectItem(item)
          }
@@ -406,8 +407,8 @@ class InputSelect extends Component {
   }
 
   _refOptionsComp = c => this.optionsComp = c
-  _refIndexNode = n => this.indexNode = n
   _refOptionNode = (n, index) => this[`v${index}`] = n
+  _refIndexNode = n => this.indexNode = n
 
   _crOptionListWithCache = () => {
     const {
@@ -416,11 +417,11 @@ class InputSelect extends Component {
     } = this.props
     , {
       options,
-      isValidDomOptionsCache
+      isValidOptionListCache
     } = this.state;
 
-    if (options && !isValidDomOptionsCache){
-      this.domOptionsCache = (
+    if (options && !isValidOptionListCache){
+      this.optionListCache = (
         <OptionList
           options={options}
           refOptionNode={this._refOptionNode}
@@ -432,7 +433,7 @@ class InputSelect extends Component {
         />
       )
     }
-    return this.domOptionsCache;
+    return this.optionListCache;
   }
 
   renderOptions = () => {
@@ -448,11 +449,13 @@ class InputSelect extends Component {
            className={CL.OPTIONS}
            style={_rootWidthStyle}
            data-scrollable={true}
+           tabIndex="-1"
          >
           <div
              ref={this._refOptionsComp}
              className={CL.OPTIONS_DIV}
              style={{...optionsStyle, ..._rootWidthStyle}}
+             tabIndex="-1"
            >
             {_optionListEl}
           </div>
@@ -468,8 +471,6 @@ class InputSelect extends Component {
         </div>
     );
   }
-
-  //_refArrowCell = c => this.arrowCell = c
 
   _hClear = () => {
     this.clearInput()
@@ -538,11 +539,9 @@ class InputSelect extends Component {
     )
   }
 
-  _refInput = node => this._nodeInput = node
-
   render(){
     const { style, width } = this.props
-    , { value, isLocalMode, isShowOption } = this.state
+    , { value, isShowOption } = this.state
     , _rootWidthStyle = _crWidthStyle(width, style)
     , { afterInputEl, placeholder } = this._crAfterInputEl();
 
@@ -568,7 +567,7 @@ class InputSelect extends Component {
         />
         {afterInputEl}
         <hr className={CL.INPUT_HR} />
-        {(isLocalMode || isShowOption) && this.renderOptions()}
+        {isShowOption && this.renderOptions()}
       </div>
     )
   }
@@ -580,7 +579,7 @@ class InputSelect extends Component {
   }
 
   focusInput(){
-    this._nodeInput.focus()
+    _getCurrent(this._refNodeInput).focus()
   }
 
 }
