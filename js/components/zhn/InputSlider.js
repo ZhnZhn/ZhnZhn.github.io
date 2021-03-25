@@ -7,22 +7,17 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
+
+var _useBool3 = _interopRequireDefault(require("../hooks/useBool"));
 
 var _has = _interopRequireDefault(require("../has"));
 
 var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
 
 //import PropTypes from "prop-types";
-
-/*
- Mostly from
- https://github.com/callemall/material-ui/blob/master/src/Slider/Slider.js
-*/
 var S = {
   ROOT: {
     position: 'relative',
@@ -114,6 +109,12 @@ var S = {
 };
 
 var _isNaN = Number.isNaN,
+    _noopFn = function _noopFn() {},
+    EVENT_NAME_MOVE = hasTouch ? 'touchmove' : 'mousemove',
+    EVENT_NAME_UP = hasTouch ? 'touchend' : 'mouseup',
+    _checkValueInMinMax = function _checkValueInMinMax(min, max, value) {
+  return value > max ? max : value < min ? min : value;
+},
     _toPercent = function _toPercent(value, min, max) {
   var _percent = (value - min) / (max - min);
 
@@ -140,239 +141,176 @@ var _isNaN = Number.isNaN,
 },
     _isDown = function _isDown(keyCode) {
   return keyCode === 37 || keyCode === 40;
+},
+    _calcNewValueByKeyCode = function _calcNewValueByKeyCode(value, step, keyCode) {
+  return _isUp(keyCode) ? value + step : _isDown(keyCode) ? value - step : void 0;
 };
 
-var InputSlider = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(InputSlider, _Component);
+var _useMouseDown = function _useMouseDown(setValueFromPosition) {
+  var _useBool = (0, _useBool3["default"])(false),
+      dragged = _useBool[0],
+      setDraggedTrue = _useBool[1],
+      setDraggedFalse = _useBool[2],
+      _refDragRunning = (0, _react.useRef)(false),
+      _hDragMouseMove = function _hDragMouseMove(event) {
+    if (_refDragRunning.current) {
+      return;
+    }
 
-  /*
-  static propTypes = {
-    step : PropTypes.number,
-    min : PropTypes.number,
-    max : PropTypes.number,
-    onChange : PropTypes.func
-  }
-  */
-  function InputSlider(props) {
-    var _this;
+    _refDragRunning.current = true;
+    requestAnimationFrame(function () {
+      _refDragRunning.current = false;
+      setValueFromPosition(event);
+    });
+  },
+      _hDragMouseUp = function _hDragMouseUp() {
+    document.removeEventListener(EVENT_NAME_MOVE, _hDragMouseMove);
+    document.removeEventListener(EVENT_NAME_UP, _hDragMouseUp);
+    setDraggedFalse();
+  },
+      _hMouseDown = function _hMouseDown(event) {
+    // Cancel text selection
+    if (!hasTouch) {
+      event.preventDefault();
+    }
 
-    _this = _Component.call(this, props) || this;
-    _this.state = {
-      hovered: false,
-      dragged: false,
-      value: 4
-    };
-    _this._evtNameMove = hasTouch ? 'touchmove' : 'mousemove';
-    _this._evtNameUp = hasTouch ? 'touchend' : 'mouseup';
-
-    _this._hKeyDown = function (evt) {
-      var keyCode = evt.keyCode,
-          step = _this.props.step,
-          value = _this.state.value,
-          _newValue = _isUp(keyCode) ? value + step : _isDown(keyCode) ? value - step : void 0;
-
-      if (_newValue != null) {
-        evt.preventDefault();
-
-        _this._updateValue(event, _newValue);
-      }
-    };
-
-    _this._hFocusTrackBt = function () {
-      _this.setState({
-        hovered: true
-      });
-    };
-
-    _this._hBlurTrackBt = function () {
-      _this.setState({
-        hovered: false
-      });
-    };
-
-    _this._hMouseEnter = function () {
-      _this.setState({
-        hovered: true
-      });
-    };
-
-    _this._hMouseLeave = function () {
-      _this.setState({
-        hovered: false
-      });
-    };
-
-    _this._hMouseDown = function (event) {
-      // Cancel text selection
-      if (!hasTouch) {
-        event.preventDefault();
-      }
-
-      document.addEventListener(_this._evtNameMove, _this._hDragMouseMove);
-      document.addEventListener(_this._evtNameUp, _this._hDragMouseUp);
-
-      _this.setState({
-        dragged: true
-      });
-    };
-
-    _this._hDragMouseMove = function (event) {
-      _this._onDragUpdate(event);
-    };
-
-    _this._hDragMouseUp = function () {
-      document.removeEventListener(_this._evtNameMove, _this._hDragMouseMove);
-      document.removeEventListener(_this._evtNameUp, _this._hDragMouseUp);
-
-      _this.setState({
-        dragged: false
-      });
-    };
-
-    _this._onDragUpdate = function (event) {
-      if (_this.dragRunning) {
-        return;
-      }
-
-      _this.dragRunning = true;
-      requestAnimationFrame(function () {
-        _this.dragRunning = false;
-
-        var position = _getClienX(event) - _this._calcTrackOffset();
-
-        _this._setValueFromPosition(event, position);
-      });
-    };
-
-    _this._calcTrackOffset = function () {
-      return _this.trackComp.getBoundingClientRect()['left'];
-    };
-
-    _this._setValueFromPosition = function (event, position) {
-      var positionMax = _this.trackComp['clientWidth'];
-
-      if (position < 0) {
-        position = 0;
-      } else if (position > positionMax) {
-        position = positionMax;
-      }
-
-      var _this$props = _this.props,
-          step = _this$props.step,
-          min = _this$props.min,
-          max = _this$props.max;
-      var value;
-      value = position / positionMax * (max - min);
-      value = Math.round(value / step) * step + min;
-      value = _mathFn["default"].roundBy(value, 5);
-
-      _this._updateValue(event, value);
-    };
-
-    _this._updateValue = function (event, newValue) {
-      var _this$props2 = _this.props,
-          min = _this$props2.min,
-          max = _this$props2.max,
-          onChange = _this$props2.onChange,
-          value = _this.state.value,
-          _newValue = newValue > max ? max : newValue < min ? min : newValue;
-
-      if (_newValue !== value) {
-        _this.setState({
-          value: _newValue
-        });
-
-        if (typeof onChange === 'function') {
-          onChange(event, _newValue);
-        }
-      }
-    };
-
-    _this._refTrack = function (comp) {
-      return _this.trackComp = comp;
-    };
-
-    _this._handlers = hasTouch ? {
-      onTouchStart: _this._hMouseDown
-    } : {
-      onMouseDown: _this._hMouseDown,
-      onMouseEnter: _this._hMouseEnter,
-      onMouseLeave: _this._hMouseLeave
-    };
-    _this._btHandlers = hasTouch ? void 0 : {
-      onFocus: _this._hFocusTrackBt,
-      onKeyDown: _this._hKeyDown,
-      onBlur: _this._hBlurTrackBt
-    };
-    return _this;
-  }
-
-  var _proto = InputSlider.prototype;
-
-  _proto.render = function render() {
-    var _this$props3 = this.props,
-        step = _this$props3.step,
-        min = _this$props3.min,
-        max = _this$props3.max,
-        _this$state = this.state,
-        hovered = _this$state.hovered,
-        dragged = _this$state.dragged,
-        value = _this$state.value,
-        _lineAfterStyle = hovered ? (0, _extends2["default"])({}, S.LINE_AFTER, S.LINE_HOVERED) : S.LINE_AFTER,
-        _circleStyle = dragged ? S.CIRCLE_DRAGGED : null,
-        _emberStyle = dragged ? S.EMBER : null,
-        _circleInnerEl = hovered || dragged ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: (0, _extends2["default"])({}, S.CIRCLE_INNER_EL, _emberStyle)
-    }) : null,
-        _percent = _toPercent(value, min, max),
-        _widthBeforeStyle = _crWidthStyle(_percent),
-        _widthAfterStyle = _crWidthStyle(100 - _percent),
-        _leftStyle = _crLeftStyle(_percent);
-
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", (0, _extends2["default"])({
-      style: S.ROOT
-    }, this._handlers, {
-      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        ref: this._refTrack,
-        style: S.ROOT_LINE,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          style: (0, _extends2["default"])({}, S.LINE_BEFORE, _widthBeforeStyle)
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          style: (0, _extends2["default"])({}, _lineAfterStyle, _widthAfterStyle)
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-          type: "hidden",
-          step: step,
-          min: min,
-          max: max,
-          value: value,
-          required: true
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", (0, _extends2["default"])({
-          role: "slider",
-          tabIndex: 0,
-          "aria-valuenow": value,
-          "aria-valuemin": min,
-          "aria-valuemax": max,
-          "aria-orientation": "horizontal",
-          "aria-labelledby": "discrete-slider-custom",
-          style: (0, _extends2["default"])({}, S.ROOT_CIRCLE, _circleStyle, _leftStyle)
-        }, this._btHandlers, {
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-            style: (0, _extends2["default"])({}, S.CIRCLE_INNER, _circleStyle),
-            children: _circleInnerEl
-          })
-        }))]
-      })
-    }));
+    document.addEventListener(EVENT_NAME_MOVE, _hDragMouseMove);
+    document.addEventListener(EVENT_NAME_UP, _hDragMouseUp);
+    setDraggedTrue();
   };
 
-  return InputSlider;
-}(_react.Component);
-
-InputSlider.defaultProps = {
-  min: 0,
-  max: 20,
-  step: 1
+  return [dragged, _hMouseDown];
 };
+
+var InputSlider = function InputSlider(_ref) {
+  var _ref$step = _ref.step,
+      step = _ref$step === void 0 ? 1 : _ref$step,
+      _ref$min = _ref.min,
+      min = _ref$min === void 0 ? 0 : _ref$min,
+      _ref$max = _ref.max,
+      max = _ref$max === void 0 ? 20 : _ref$max,
+      _ref$onChange = _ref.onChange,
+      onChange = _ref$onChange === void 0 ? _noopFn : _ref$onChange;
+
+  var _refTrack = (0, _react.useRef)(),
+      _useBool2 = (0, _useBool3["default"])(false),
+      hovered = _useBool2[0],
+      setHoveredTrue = _useBool2[1],
+      setHoveredFalse = _useBool2[2],
+      _useState = (0, _react.useState)(4),
+      value = _useState[0],
+      setValue = _useState[1],
+      _updateValue = function _updateValue(event, newValue) {
+    var _newValue = _checkValueInMinMax(min, max, newValue);
+
+    setValue(_newValue);
+    onChange(event, _newValue);
+  },
+      _hKeyDown = function _hKeyDown(evt) {
+    var keyCode = evt.keyCode,
+        _newValue = _calcNewValueByKeyCode(value, step, keyCode);
+
+    if (_newValue != null) {
+      evt.preventDefault();
+
+      _updateValue(event, _newValue);
+    }
+  },
+      _calcPositionFromEvent = function _calcPositionFromEvent(event) {
+    var _trackOffset = _refTrack.current.getBoundingClientRect()['left'];
+
+    return _getClienX(event) - _trackOffset;
+  },
+      _setValueFromPosition = function _setValueFromPosition(event) {
+    var positionMax = _refTrack.current.clientWidth;
+
+    var position = _calcPositionFromEvent(event);
+
+    if (position < 0) {
+      position = 0;
+    } else if (position > positionMax) {
+      position = positionMax;
+    }
+
+    var v;
+    v = position / positionMax * (max - min);
+    v = Math.round(v / step) * step + min;
+    v = _mathFn["default"].roundBy(value, 5);
+
+    _updateValue(event, v);
+  },
+      _useMouseDown2 = _useMouseDown(_setValueFromPosition),
+      dragged = _useMouseDown2[0],
+      _hMouseDown = _useMouseDown2[1];
+
+  var _sliderHandlers = hasTouch ? {
+    onTouchStart: _hMouseDown
+  } : {
+    onMouseDown: _hMouseDown,
+    onMouseEnter: setHoveredTrue,
+    onMouseLeave: setHoveredFalse
+  },
+      _btHandlers = hasTouch ? void 0 : {
+    onFocus: setHoveredTrue,
+    onKeyDown: _hKeyDown,
+    onBlur: setHoveredFalse
+  },
+      _lineAfterStyle = hovered ? (0, _extends2["default"])({}, S.LINE_AFTER, S.LINE_HOVERED) : S.LINE_AFTER,
+      _circleStyle = dragged ? S.CIRCLE_DRAGGED : null,
+      _emberStyle = dragged ? S.EMBER : null,
+      _circleInnerEl = hovered || dragged ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: (0, _extends2["default"])({}, S.CIRCLE_INNER_EL, _emberStyle)
+  }) : null,
+      _percent = _toPercent(value, min, max),
+      _widthBeforeStyle = _crWidthStyle(_percent),
+      _widthAfterStyle = _crWidthStyle(100 - _percent),
+      _leftStyle = _crLeftStyle(_percent);
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", (0, _extends2["default"])({
+    style: S.ROOT
+  }, _sliderHandlers, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      ref: _refTrack,
+      style: S.ROOT_LINE,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: (0, _extends2["default"])({}, S.LINE_BEFORE, _widthBeforeStyle)
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: (0, _extends2["default"])({}, _lineAfterStyle, _widthAfterStyle)
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+        type: "hidden",
+        step: step,
+        min: min,
+        max: max,
+        value: value,
+        required: true
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", (0, _extends2["default"])({
+        role: "slider",
+        tabIndex: 0,
+        "aria-valuenow": value,
+        "aria-valuemin": min,
+        "aria-valuemax": max,
+        "aria-orientation": "horizontal",
+        "aria-labelledby": "discrete-slider-custom",
+        style: (0, _extends2["default"])({}, S.ROOT_CIRCLE, _circleStyle, _leftStyle)
+      }, _btHandlers, {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          style: (0, _extends2["default"])({}, S.CIRCLE_INNER, _circleStyle),
+          children: _circleInnerEl
+        })
+      }))]
+    })
+  }));
+};
+/*
+static propTypes = {
+  step : PropTypes.number,
+  min : PropTypes.number,
+  max : PropTypes.number,
+  onChange : PropTypes.func
+}
+*/
+
+
 var _default = InputSlider;
 exports["default"] = _default;
 //# sourceMappingURL=InputSlider.js.map
