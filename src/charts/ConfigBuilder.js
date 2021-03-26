@@ -22,6 +22,7 @@ const {
 } = ChartFn;
 const {
   crDividendSeria,
+  crSplitRatioSeria,
   crMiniVolumeConfig,
   crMiniATHConfig,
   crMiniHLConfig,
@@ -61,10 +62,12 @@ const C = {
 const _assign = Object.assign;
 const _isArr = Array.isArray;
 
-const _isObj = obj => obj && typeof obj === 'object';
-const _isStr = str => typeof str === 'string';
-const _isNumber = n => typeof n === 'number'
-  && n - n === 0;
+const _isObj = obj => obj && typeof obj === 'object'
+, _isStr = str => typeof str === 'string'
+, _isNumber = n => typeof n === 'number'
+  && n - n === 0
+, _isNotEmptyArr = arr => _isArr(arr)
+  && arr.length > 0;
 
 const _getY = (point) => _isArr(point)
  ? point[1]
@@ -80,6 +83,11 @@ const _getData = obj => obj.config?.series?.[0].data
      symbol: "circle"
    }
  }, option);
+
+ const _crScatterBottomSeria = (crSeria, data, min, max) => {
+   setYToPoints(data, calcMinY(min, max));
+   return crSeria(data);
+ };
 
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
@@ -264,17 +272,19 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
      : this;
   },
 
-  addZhPoints(data, fn){
-    this.add({
-      zhPoints: data,
-      zhIsMfi: true
-      //zhFnGetMfiConfig: fn
-    })
-    return this;
+  addZhPointsIf(data, propName='zhIsMfi', is=true){
+    return is
+      ? this.add({
+         zhPoints: data,
+         [propName]: true
+       })
+     : this;
   },
 
   addLegend(legend){
-    return this.add('zhConfig', { legend });
+    return _isNotEmptyArr(legend)
+      ? this.add('zhConfig', { legend })
+      : this;
   },
 
   addMinMax(data, option){
@@ -351,42 +361,31 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
 
-  /*
-  checkThreshold(seriaIndex=0){
-    const config = this.config
-    , { series=[] } = config
-    , seria = series[seriaIndex] || {}
-    , data = seria.data || [];
-    /*
-    if (_isArr(data) && data.length > 1000) {
-      config.plotOptions = _assign(
-        config.plotOptions || {}, {
-          series: {
-            turboThreshold: 0
-          }
-        }
-      )
+  _addScatterBottom(seria, name) {
+    const { series, chart, zhConfig } = this.config;
+    series.push({ ...seria, visible: false });
+    chart.spacingBottom = 40;
+    zhConfig.legend.push({
+      index: series.length - 1,
+      color: seria.color,
+      name: name
+    })
+    return this;
+  },
+
+  //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
+  addDividend(data, min, max) {
+    if (data.length > 0) {
+      const seria = _crScatterBottomSeria(crDividendSeria, data, min, max)      
+      this._addScatterBottom(seria, 'Dividend')
     }
     return this;
   },
-  */
-
-  //used only by Alpha Vantage Daily Adjusted
-  addDividend({ dDividend, minClose, maxClose }) {
-    if (dDividend.length > 0) {
-      const { series, chart, zhConfig } = this.config;
-      setYToPoints(
-        dDividend,
-        calcMinY(minClose, maxClose)
-      );
-      series.push({
-        ...crDividendSeria(dDividend),
-        visible: false
-      });
-      chart.spacingBottom = 40;
-      zhConfig.legend.push({
-        index: 4, color: '#4caf50', name: 'Dividend'
-      })
+  //Used only by Quandl EOD
+  addSplitRatio(data, min, max) {
+    if (data.length > 0) {
+      const seria = _crScatterBottomSeria(crSplitRatioSeria, data, min, max)
+      this._addScatterBottom(seria, 'Split Ratio')
     }
     return this;
   },

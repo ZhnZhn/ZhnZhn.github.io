@@ -41,7 +41,7 @@ const crAdapterOHLCV = ({
            })
          })
          .add('zhConfig', { legend: stockSeriesLegend() })
-         .addZhPoints(dMfi)
+         .addZhPointsIf(dMfi)
          .toConfig();
 
     return { config };

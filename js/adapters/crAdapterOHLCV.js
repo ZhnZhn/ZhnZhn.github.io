@@ -71,7 +71,7 @@ var crAdapterOHLCV = function crAdapterOHLCV(_ref3) {
         subtitle: subtitle
       }))).add('zhConfig', {
         legend: stockSeriesLegend()
-      }).addZhPoints(dMfi).toConfig();
+      }).addZhPointsIf(dMfi).toConfig();
 
       return {
         config: config

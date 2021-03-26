@@ -31,6 +31,7 @@ var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax,
     calcMinY = _ChartFn["default"].calcMinY,
     setYToPoints = _ChartFn["default"].setYToPoints;
 var crDividendSeria = _ChartConfig["default"].crDividendSeria,
+    crSplitRatioSeria = _ChartConfig["default"].crSplitRatioSeria,
     crMiniVolumeConfig = _ChartConfig["default"].crMiniVolumeConfig,
     crMiniATHConfig = _ChartConfig["default"].crMiniATHConfig,
     crMiniHLConfig = _ChartConfig["default"].crMiniHLConfig,
@@ -68,14 +69,15 @@ var _isArr = Array.isArray;
 
 var _isObj = function _isObj(obj) {
   return obj && typeof obj === 'object';
-};
-
-var _isStr = function _isStr(str) {
+},
+    _isStr = function _isStr(str) {
   return typeof str === 'string';
-};
-
-var _isNumber = function _isNumber(n) {
+},
+    _isNumber = function _isNumber(n) {
   return typeof n === 'number' && n - n === 0;
+},
+    _isNotEmptyArr = function _isNotEmptyArr(arr) {
+  return _isArr(arr) && arr.length > 0;
 };
 
 var _getY = function _getY(point) {
@@ -98,6 +100,11 @@ var _crSeriaOption = function _crSeriaOption(color, option) {
       symbol: "circle"
     }
   }, option);
+};
+
+var _crScatterBottomSeria = function _crScatterBottomSeria(crSeria, data, min, max) {
+  setYToPoints(data, calcMinY(min, max));
+  return crSeria(data);
 };
 
 var ConfigBuilder = function ConfigBuilder(config) {
@@ -326,18 +333,25 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     var data = option.data;
     return data && data.length > 0 ? this.addZhMiniConfig(crMiniHLConfig(option)) : this;
   },
-  addZhPoints: function addZhPoints(data, fn) {
-    this.add({
-      zhPoints: data,
-      zhIsMfi: true //zhFnGetMfiConfig: fn
+  addZhPointsIf: function addZhPointsIf(data, propName, is) {
+    var _this$add;
 
-    });
-    return this;
+    if (propName === void 0) {
+      propName = 'zhIsMfi';
+    }
+
+    if (is === void 0) {
+      is = true;
+    }
+
+    return is ? this.add((_this$add = {
+      zhPoints: data
+    }, _this$add[propName] = true, _this$add)) : this;
   },
   addLegend: function addLegend(legend) {
-    return this.add('zhConfig', {
+    return _isNotEmptyArr(legend) ? this.add('zhConfig', {
       legend: legend
-    });
+    }) : this;
   },
   addMinMax: function addMinMax(data, option) {
     var isNotZoomToMinMax = option.isNotZoomToMinMax,
@@ -399,47 +413,38 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     setSerieData(config, dO, 3, 'Open', _crSeriaOption(_Color["default"].S_OPEN));
     return this;
   },
-
-  /*
-  checkThreshold(seriaIndex=0){
-    const config = this.config
-    , { series=[] } = config
-    , seria = series[seriaIndex] || {}
-    , data = seria.data || [];
-    /*
-    if (_isArr(data) && data.length > 1000) {
-      config.plotOptions = _assign(
-        config.plotOptions || {}, {
-          series: {
-            turboThreshold: 0
-          }
-        }
-      )
-    }
+  _addScatterBottom: function _addScatterBottom(seria, name) {
+    var _this$config = this.config,
+        series = _this$config.series,
+        chart = _this$config.chart,
+        zhConfig = _this$config.zhConfig;
+    series.push((0, _extends2["default"])({}, seria, {
+      visible: false
+    }));
+    chart.spacingBottom = 40;
+    zhConfig.legend.push({
+      index: series.length - 1,
+      color: seria.color,
+      name: name
+    });
     return this;
   },
-  */
-  //used only by Alpha Vantage Daily Adjusted
-  addDividend: function addDividend(_ref2) {
-    var dDividend = _ref2.dDividend,
-        minClose = _ref2.minClose,
-        maxClose = _ref2.maxClose;
+  //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
+  addDividend: function addDividend(data, min, max) {
+    if (data.length > 0) {
+      var seria = _crScatterBottomSeria(crDividendSeria, data, min, max);
 
-    if (dDividend.length > 0) {
-      var _this$config = this.config,
-          series = _this$config.series,
-          chart = _this$config.chart,
-          zhConfig = _this$config.zhConfig;
-      setYToPoints(dDividend, calcMinY(minClose, maxClose));
-      series.push((0, _extends2["default"])({}, crDividendSeria(dDividend), {
-        visible: false
-      }));
-      chart.spacingBottom = 40;
-      zhConfig.legend.push({
-        index: 4,
-        color: '#4caf50',
-        name: 'Dividend'
-      });
+      this._addScatterBottom(seria, 'Dividend');
+    }
+
+    return this;
+  },
+  //Used only by Quandl EOD
+  addSplitRatio: function addSplitRatio(data, min, max) {
+    if (data.length > 0) {
+      var seria = _crScatterBottomSeria(crSplitRatioSeria, data, min, max);
+
+      this._addScatterBottom(seria, 'Split Ratio');
     }
 
     return this;
