@@ -21,15 +21,13 @@ var ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
     crMarkerColor = _IntradayFns["default"].crMarkerColor,
     crDataDaily = _IntradayFns["default"].crDataDaily,
-    crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption; //const DAILY = 'Daily';
-
+    crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption;
 var INTRADAY = 'INTRADAY';
 var DAILY_ADJUSTED = 'DAILY_ADJUSTED';
-var _keys = Object.keys;
+var _getKeys = Object.keys;
 
-var _crSeriaOptions = function _crSeriaOptions(_ref) {
-  var dfT = _ref.dfT,
-      isFilterZero = _ref.isFilterZero;
+var _crSeriaOptions = function _crSeriaOptions(_ref, dfT) {
+  var isFilterZero = _ref.isFilterZero;
 
   var _isAdjusted = dfT === DAILY_ADJUSTED;
 
@@ -46,7 +44,8 @@ var PN_DIVIDENT = '7. dividend amount';
 var PN_ADJ_CLOSE = '5. adjusted close';
 
 var _addDividendPointTo = function _addDividendPointTo(arr, dateMs, p) {
-  var _exValue = p[PN_DIVIDENT] && parseFloat(p[PN_DIVIDENT]);
+  var _strDivident = p[PN_DIVIDENT],
+      _exValue = _strDivident && parseFloat(_strDivident);
 
   if (_exValue) {
     arr.push((0, _extends2["default"])({}, _ChartConfig["default"].crMarkerExDividend(), {
@@ -63,14 +62,14 @@ var _notZeros = function _notZeros(v1, v2) {
 
 var _getObjValues = function _getObjValues(json, option) {
   var interval = option.interval,
-      _suffix = interval,
-      _propName = "Time Series (" + _suffix + ")";
+      _propName = "Time Series (" + interval + ")";
 
   return json[_propName];
 };
 
-var _crSeriaData = function _crSeriaData(objValues, option) {
-  var _dateKeys = objValues ? _keys(objValues).sort() : [],
+var _crSeriaData = function _crSeriaData(json, option, dfT) {
+  var _objValues = _getObjValues(json, option),
+      _dateKeys = _objValues ? _getKeys(_objValues).sort() : [],
       dC = [],
       dH = [],
       dL = [],
@@ -78,7 +77,7 @@ var _crSeriaData = function _crSeriaData(objValues, option) {
       dDividend = [],
       dVc = [],
       dV = [],
-      _crSeriaOptions2 = _crSeriaOptions(option),
+      _crSeriaOptions2 = _crSeriaOptions(option, dfT),
       notFilterZero = _crSeriaOptions2.notFilterZero,
       isDividend = _crSeriaOptions2.isDividend,
       toUTC = _crSeriaOptions2.toUTC,
@@ -101,7 +100,7 @@ var _crSeriaData = function _crSeriaData(objValues, option) {
 
   for (i; i < _max; i++) {
     _date = _dateKeys[i];
-    _point = objValues[_date];
+    _point = _objValues[_date];
     _closeV = parseFloat(_point['4. close']);
     _close = parseFloat(_point[pnClose]);
 
@@ -177,8 +176,7 @@ var IntradayAdapter = {
         seriaColor = option.seriaColor,
         seriaWidth = option.seriaWidth,
         dfT = dfFn.replace('TIME_SERIES_', ''),
-        _objValues = _getObjValues(json, option),
-        _crSeriaData2 = _crSeriaData(_objValues, option),
+        _crSeriaData2 = _crSeriaData(json, option, dfT),
         dC = _crSeriaData2.dC,
         dH = _crSeriaData2.dH,
         dL = _crSeriaData2.dL,
@@ -208,11 +206,7 @@ var IntradayAdapter = {
       id: _itemKey,
       data: dataDaily,
       dataSource: dataSource
-    }, option)).addDividend({
-      dDividend: dDividend,
-      minClose: minClose,
-      maxClose: maxClose
-    }).toConfig();
+    }, option)).addDividend(dDividend, minClose, maxClose).toConfig();
     return {
       config: config
     };

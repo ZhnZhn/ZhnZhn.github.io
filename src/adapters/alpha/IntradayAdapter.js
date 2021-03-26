@@ -15,15 +15,14 @@ const {
 } = IntradayFns
 , { crIntradayConfigOption } = fnAdapter;
 
-//const DAILY = 'Daily';
 const INTRADAY = 'INTRADAY';
 const DAILY_ADJUSTED = 'DAILY_ADJUSTED';
 
-const _keys = Object.keys;
+const _getKeys = Object.keys;
 
 const _crSeriaOptions = ({
-  dfT, isFilterZero
-}) => {
+  isFilterZero
+}, dfT) => {
   const _isAdjusted = dfT === DAILY_ADJUSTED;
   return {
     notFilterZero: !isFilterZero,
@@ -41,8 +40,8 @@ const _crSeriaOptions = ({
 const PN_DIVIDENT = '7. dividend amount';
 const PN_ADJ_CLOSE = '5. adjusted close';
 const _addDividendPointTo = (arr, dateMs, p) => {
-  const _exValue = p[PN_DIVIDENT]
-    && parseFloat(p[PN_DIVIDENT]);
+  const _strDivident = p[PN_DIVIDENT]
+  , _exValue = _strDivident && parseFloat(_strDivident);
   if (_exValue) {
     arr.push({
       ...ChartConfig.crMarkerExDividend(), ...{
@@ -58,22 +57,22 @@ const _notZeros = (v1, v2) => v1 !== 0 && v2 !== 0;
 
 const _getObjValues = (json, option) => {
   const { interval } = option
-  , _suffix = interval
-  , _propName = `Time Series (${_suffix})`;
+  , _propName = `Time Series (${interval})`;
   return json[_propName];
 };
 
-const _crSeriaData = (objValues, option) => {
-  const _dateKeys = objValues
-     ? _keys(objValues).sort()
-     : []
+const _crSeriaData = (json, option, dfT) => {
+  const _objValues = _getObjValues(json, option)
+  , _dateKeys = _objValues
+      ? _getKeys(_objValues).sort()
+      : []
   , dC = [], dH = [], dL = [], dO = []
   , dDividend = []
   , dVc = [], dV = []
   , {
     notFilterZero, isDividend,
     toUTC, pnClose, pnVolume
-  } = _crSeriaOptions(option);
+  } = _crSeriaOptions(option, dfT);
 
   let i = 0, _max = _dateKeys.length
   , minClose = Number.POSITIVE_INFINITY
@@ -83,7 +82,7 @@ const _crSeriaData = (objValues, option) => {
   , _open, _high, _low, _closeV, _close, _volume ;
   for (i; i<_max; i++) {
     _date = _dateKeys[i]
-    _point = objValues[_date]
+    _point = _objValues[_date]
     _closeV = parseFloat(_point['4. close'])
     _close = parseFloat(_point[pnClose])
 
@@ -122,7 +121,6 @@ const _crSeriaData = (objValues, option) => {
       if (maxClose < _close ) { maxClose = _close }
     }
   }
-
   return {
     dC, dH, dL, dO,
     dDividend,
@@ -149,13 +147,12 @@ const IntradayAdapter = {
       seriaWidth
     } = option
     , dfT = dfFn.replace('TIME_SERIES_', '')
-    , _objValues = _getObjValues(json, option)
     , {
         dC, dH, dL, dO,
         minClose, maxClose,
         dDividend,
         dVc, dV
-      } = _crSeriaData(_objValues, option)
+      } = _crSeriaData(json, option, dfT)
     , dataDaily  = _crDataDaily(dfT, dC);
 
     const config = Builder()
@@ -175,7 +172,7 @@ const IntradayAdapter = {
           data: dataDaily,
           dataSource
       }, option))
-      .addDividend({ dDividend, minClose, maxClose })
+      .addDividend(dDividend, minClose, maxClose)
       .toConfig();
 
     return { config };
