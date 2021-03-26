@@ -4,7 +4,7 @@ const C = {
   OPEN : 'open',
   OPEN_INTEREST : 'open interest',
   OPEN_INTEREST_2 : 'o.i.',
-  OPEN_INTEREST_3: 'prev. day open interest',
+  OPEN_INTEREST_3 : 'prev. day open interest',
   HIGH : 'high',
   LOW : 'low',
   VOLUME : 'volume',
@@ -15,78 +15,65 @@ const C = {
   LAST : 'last',
   TURNOVER : 'turnover',
   TRADES : 'trades',
-  BALANCE: 'balance',
-  IMPORTS: 'imports',
-  EXPORTS: 'exports'
-}
+  BALANCE : 'balance',
+  IMPORTS : 'imports',
+  EXPORTS : 'exports'
+};
+
+const _assign = Object.assign
+, _crCs = (color, symbol='circle') => ({
+  color, symbol
+})
+, _crCsa = (color, symbol='diamond') => ({
+  color, symbol,
+  isSecondAxes: true
+});
 
 const ChartLegend = {
 
-  fLegendConfig(columnName){
-    const baseConfig = {
-       data: [], name : columnName
-    }
+  crLegendConfig(columnName){
+    const _conf = {
+       data: [],
+       name: columnName
+    };
 
     switch(columnName.toLowerCase()){
       case C.OPEN:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_OPEN, symbol: 'circle' }
-        );
-      case C.OPEN_INTEREST: case C.OPEN_INTEREST_2: case C.OPEN_INTEREST_3:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_OPEN_INTEREST, symbol: 'circle', isSecondAxes: true }
-        );
+        return _assign(_conf, _crCs(COLOR.S_OPEN));
+      case C.OPEN_INTEREST:
+      case C.OPEN_INTEREST_2:
+      case C.OPEN_INTEREST_3:
+        return _assign(_conf, _crCsa(COLOR.S_OPEN_INTEREST, 'circle'));
       case C.HIGH:
-        return Object.assign({}, baseConfig,
-          { color: COLOR.S_HIGH, symbol : 'circle' }
-        );
+        return _assign(_conf, _crCs(COLOR.S_HIGH))
       case C.LOW:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_LOW, symbol : 'circle' }
-        );
+        return _assign(_conf, _crCs(COLOR.S_LOW));
       case C.VOLUME:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_VOLUME, symbol : 'diamond', isSecondAxes: true }
-        );
-      case C.ADJ_CLOSE: case C.ADJ_CLOSE_2:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_ADJ_CLOSE, symbol: 'diamond' }
-        );
-      case C.CLOSE: case C.LAST:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_CLOSE, symbol: 'diamond' }
-        );
+        return _assign({}, _conf, _crCsa(COLOR.S_VOLUME));
+      case C.ADJ_CLOSE:
+      case C.ADJ_CLOSE_2:
+        return _assign(_conf, _crCs(COLOR.S_ADJ_CLOSE, 'diamond'));
+      case C.CLOSE:
+      case C.LAST:
+        return _assign(_conf, _crCs(COLOR.S_CLOSE, 'diamond'));
       case C.PRE_SETTLE:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_PRE_SETTLE, symbol: 'diamond' }
-        );
+        return _assign(_conf, _crCs(COLOR.S_PRE_SETTLE, 'diamond'));
       case C.TURNOVER:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_TURNOVER, symbol: 'diamond', isSecondAxes: true }
-        );
+        return _assign(_conf, _crCsa(COLOR.S_TURNOVER));
       case C.TRADES:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_TRADES, symbol: 'diamond', isSecondAxes: true }
-        );
+        return _assign(_conf, _crCsa(COLOR.S_TRADES));
       case C.BALANCE:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_BALANCE, symbol: 'circle' }
-        );
+        return _assign(_conf, _crCs(COLOR.S_BALANCE));
       case C.IMPORTS:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_IMPORTS, symbol: 'circle' }
-        );
+        return _assign(_conf, _crCs(COLOR.S_IMPORTS));
       case C.EXPORTS:
-        return Object.assign({}, baseConfig,
-          { color : COLOR.S_EXPORTS, symbol: 'circle' }
-        );
+        return _assign(_conf, _crCs(COLOR.S_EXPORTS));
       default:
-       return Object.assign({}, baseConfig,
-         { color: undefined, symbol: 'circle', isSecondAxes: false }
-       );
+       return _assign(_conf, {
+         color: void 0, symbol: 'circle', isSecondAxes: false
+       });
     }
   }
-
-}
+};
 
 export default ChartLegend

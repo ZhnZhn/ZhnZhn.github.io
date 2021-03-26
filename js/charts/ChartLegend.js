@@ -26,103 +26,84 @@ var C = {
   IMPORTS: 'imports',
   EXPORTS: 'exports'
 };
+
+var _assign = Object.assign,
+    _crCs = function _crCs(color, symbol) {
+  if (symbol === void 0) {
+    symbol = 'circle';
+  }
+
+  return {
+    color: color,
+    symbol: symbol
+  };
+},
+    _crCsa = function _crCsa(color, symbol) {
+  if (symbol === void 0) {
+    symbol = 'diamond';
+  }
+
+  return {
+    color: color,
+    symbol: symbol,
+    isSecondAxes: true
+  };
+};
+
 var ChartLegend = {
-  fLegendConfig: function fLegendConfig(columnName) {
-    var baseConfig = {
+  crLegendConfig: function crLegendConfig(columnName) {
+    var _conf = {
       data: [],
       name: columnName
     };
 
     switch (columnName.toLowerCase()) {
       case C.OPEN:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_OPEN,
-          symbol: 'circle'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_OPEN));
 
       case C.OPEN_INTEREST:
       case C.OPEN_INTEREST_2:
       case C.OPEN_INTEREST_3:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_OPEN_INTEREST,
-          symbol: 'circle',
-          isSecondAxes: true
-        });
+        return _assign(_conf, _crCsa(_Color["default"].S_OPEN_INTEREST, 'circle'));
 
       case C.HIGH:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_HIGH,
-          symbol: 'circle'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_HIGH));
 
       case C.LOW:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_LOW,
-          symbol: 'circle'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_LOW));
 
       case C.VOLUME:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_VOLUME,
-          symbol: 'diamond',
-          isSecondAxes: true
-        });
+        return _assign({}, _conf, _crCsa(_Color["default"].S_VOLUME));
 
       case C.ADJ_CLOSE:
       case C.ADJ_CLOSE_2:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_ADJ_CLOSE,
-          symbol: 'diamond'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_ADJ_CLOSE, 'diamond'));
 
       case C.CLOSE:
       case C.LAST:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_CLOSE,
-          symbol: 'diamond'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_CLOSE, 'diamond'));
 
       case C.PRE_SETTLE:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_PRE_SETTLE,
-          symbol: 'diamond'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_PRE_SETTLE, 'diamond'));
 
       case C.TURNOVER:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_TURNOVER,
-          symbol: 'diamond',
-          isSecondAxes: true
-        });
+        return _assign(_conf, _crCsa(_Color["default"].S_TURNOVER));
 
       case C.TRADES:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_TRADES,
-          symbol: 'diamond',
-          isSecondAxes: true
-        });
+        return _assign(_conf, _crCsa(_Color["default"].S_TRADES));
 
       case C.BALANCE:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_BALANCE,
-          symbol: 'circle'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_BALANCE));
 
       case C.IMPORTS:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_IMPORTS,
-          symbol: 'circle'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_IMPORTS));
 
       case C.EXPORTS:
-        return Object.assign({}, baseConfig, {
-          color: _Color["default"].S_EXPORTS,
-          symbol: 'circle'
-        });
+        return _assign(_conf, _crCs(_Color["default"].S_EXPORTS));
 
       default:
-        return Object.assign({}, baseConfig, {
-          color: undefined,
+        return _assign(_conf, {
+          color: void 0,
           symbol: 'circle',
           isSecondAxes: false
         });
