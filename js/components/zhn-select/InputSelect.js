@@ -676,7 +676,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
   };
 
   _proto.focusInput = function focusInput() {
-    _getCurrent(this._refNodeInput).focus();
+    _getCurrent(this._refInput).focus();
   };
 
   return InputSelect;

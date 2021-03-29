@@ -579,7 +579,7 @@ class InputSelect extends Component {
   }
 
   focusInput(){
-    _getCurrent(this._refNodeInput).focus()
+    _getCurrent(this._refInput).focus()
   }
 
 }
