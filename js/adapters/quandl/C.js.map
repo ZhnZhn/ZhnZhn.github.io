@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/quandl/C.js"
+ ],
+ "file": "../../../src/adapters/quandl/C.js",
+ "names": [
+  "C",
+  "OPEN",
+  "CLOSE",
+  "PRICE",
+  "LOW",
+  "HIGH",
+  "VOLUME",
+  "EX_DIVIDEND",
+  "SPLIT_RATIO",
+  "UNKNOWN",
+  "COLOR_BLUE"
+ ],
+ "mappings": ";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAG,MADC;AAERC,EAAAA,KAAK,EAAG,OAFA;AAGRC,EAAAA,KAAK,EAAE,OAHC;AAIRC,EAAAA,GAAG,EAAG,KAJE;AAKRC,EAAAA,IAAI,EAAG,MALC;AAMRC,EAAAA,MAAM,EAAG,QAND;AAORC,EAAAA,WAAW,EAAG,aAPN;AAQRC,EAAAA,WAAW,EAAG,aARN;AASRC,EAAAA,OAAO,EAAG,SATF;AAWRC,EAAAA,UAAU,EAAE;AAXJ,CAAV;eAceV,C"
+}

@@ -49,7 +49,7 @@ const ChartLegend = {
       case C.LOW:
         return _assign(_conf, _crCs(COLOR.S_LOW));
       case C.VOLUME:
-        return _assign({}, _conf, _crCsa(COLOR.S_VOLUME));
+        return _assign(_conf, _crCsa(COLOR.S_VOLUME));
       case C.ADJ_CLOSE:
       case C.ADJ_CLOSE_2:
         return _assign(_conf, _crCs(COLOR.S_ADJ_CLOSE, 'diamond'));

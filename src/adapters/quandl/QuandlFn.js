@@ -6,7 +6,10 @@ import mathFn from '../../math/mathFn';
 import dt from '../../utils/DateUtils';
 import { Direction } from '../../constants/Type';
 
+import AdapterFn from '../AdapterFn';
+
 const { mlsToDmy } = dt;
+const { valueMoving } = AdapterFn;
 
 const _isArr = Array.isArray;
 const _isStr = str => typeof str === 'string';
@@ -22,6 +25,8 @@ const _isStrEqTo = (str, strTo) => _isStr(str)
  && str.toLowerCase() === strTo;
 
 const QuandlFn = {
+  valueMoving,
+  
   getData: (json) => {
     const { dataset={}, datatable={} } = json;
     return dataset.data || datatable.data || [];

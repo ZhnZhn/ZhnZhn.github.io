@@ -15,7 +15,10 @@ var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
 var _Type = require("../../constants/Type");
 
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
 var mlsToDmy = _DateUtils["default"].mlsToDmy;
+var valueMoving = _AdapterFn["default"].valueMoving;
 var _isArr = Array.isArray;
 
 var _isStr = function _isStr(str) {
@@ -38,6 +41,7 @@ var _isStrEqTo = function _isStrEqTo(str, strTo) {
 };
 
 var QuandlFn = {
+  valueMoving: valueMoving,
   getData: function getData(json) {
     var _json$dataset = json.dataset,
         dataset = _json$dataset === void 0 ? {} : _json$dataset,

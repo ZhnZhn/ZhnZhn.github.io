@@ -73,7 +73,7 @@ var ChartLegend = {
         return _assign(_conf, _crCs(_Color["default"].S_LOW));
 
       case C.VOLUME:
-        return _assign({}, _conf, _crCsa(_Color["default"].S_VOLUME));
+        return _assign(_conf, _crCsa(_Color["default"].S_VOLUME));
 
       case C.ADJ_CLOSE:
       case C.ADJ_CLOSE_2:
