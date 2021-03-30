@@ -24,8 +24,8 @@ const crStackedConfig = ({
     zoomType: 'xy',
     resetZoomButton: Chart.fResetZoomButton()
   },
-  title: Chart.fTitle({ y:Chart.STACKED_TITLE_Y }),
-  subtitle: Chart.fSubtitle({ y:Chart.STACKED_SUBTITLE_Y }),
+  title: Chart.fTitle(),
+  subtitle: Chart.fSubtitle(),
   tooltip: Chart.fTooltip(Tooltip.sparkStackedArea),
 
   xAxis: Chart.fXAxisOpposite({

@@ -103,11 +103,6 @@ var Chart = (0, _extends2["default"])({
   STACKED_SPACING_TOP: 25,
   SPACING_BOTTOM: 24,
   MARGIN_TOP: 60,
-  TREEMAP_MARGIN_TOP: 50,
-  STACKED_TITLE_Y: -10,
-  STACKED_SUBTITLE_Y: 10,
-  TREEMAP_TITLE_Y: 15,
-  TREEMAP_SUBTITLE_Y: 35,
   SEMIDONUT_TITLE_Y: 15,
   SEMIDONUT_SUBTITLE_Y: 35
 }, _MonoColorSlice["default"], {
@@ -162,12 +157,10 @@ var Chart = (0, _extends2["default"])({
   setDefaultTitle: function setDefaultTitle(config, title, subtitle) {
     config.chart.spacingTop = Chart.STACKED_SPACING_TOP;
     config.title = Chart.fTitle({
-      text: title,
-      y: Chart.STACKED_TITLE_Y
+      text: title
     });
     config.subtitle = Chart.fSubtitle({
-      text: subtitle,
-      y: Chart.STACKED_SUBTITLE_Y
+      text: subtitle
     });
   },
   fTitle: function fTitle(option) {
@@ -178,7 +171,7 @@ var Chart = (0, _extends2["default"])({
     _sanitizeOptionText(option);
 
     return merge(false, (0, _extends2["default"])({}, CAPTION_CONFIG, {
-      y: 25
+      y: -10
     }), option);
   },
   fSubtitle: function fSubtitle(option) {
@@ -189,7 +182,7 @@ var Chart = (0, _extends2["default"])({
     _sanitizeOptionText(option);
 
     return merge(false, (0, _extends2["default"])({}, CAPTION_CONFIG, {
-      y: 45
+      y: 10
     }), option);
   },
   fNavigation: function fNavigation() {

@@ -75,12 +75,7 @@ const Chart = {
   STACKED_SPACING_TOP : 25,
   SPACING_BOTTOM : 24,
   MARGIN_TOP : 60,
-  TREEMAP_MARGIN_TOP : 50,
-
-  STACKED_TITLE_Y : -10,
-  STACKED_SUBTITLE_Y : 10,
-  TREEMAP_TITLE_Y : 15,
-  TREEMAP_SUBTITLE_Y : 35,
+    
   SEMIDONUT_TITLE_Y : 15,
   SEMIDONUT_SUBTITLE_Y: 35,
 
@@ -130,28 +125,22 @@ const Chart = {
 
   setDefaultTitle(config, title, subtitle){
     config.chart.spacingTop = Chart.STACKED_SPACING_TOP;
-    config.title = Chart.fTitle({
-      text: title,
-      y: Chart.STACKED_TITLE_Y
-    });
-    config.subtitle = Chart.fSubtitle({
-      text: subtitle,
-      y: Chart.STACKED_SUBTITLE_Y
-    });
+    config.title = Chart.fTitle({ text: title });
+    config.subtitle = Chart.fSubtitle({ text: subtitle });
   },
 
   fTitle(option={}){
     _sanitizeOptionText(option)
     return merge(false, {
        ...CAPTION_CONFIG,
-       y: 25
+       y: -10
     }, option)
   },
   fSubtitle(option={}){
     _sanitizeOptionText(option)
     return merge(false, {
       ...CAPTION_CONFIG,
-      y: 45
+      y: 10
     }, option)
   },
 
@@ -198,7 +187,7 @@ crAreaConfig({
       turboThreshold: 20000,
       type: _crSeriaType(seriaType),
       color: seriaColor,
-      tooltip: Chart.fTooltip(Tooltip.vTdmyIf),      
+      tooltip: Chart.fTooltip(Tooltip.vTdmyIf),
       lineWidth: seriaWidth,
       states: {
         hover: {

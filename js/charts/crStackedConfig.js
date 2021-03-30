@@ -44,12 +44,8 @@ var crStackedConfig = function crStackedConfig(_ref) {
       zoomType: 'xy',
       resetZoomButton: _Chart["default"].fResetZoomButton()
     },
-    title: _Chart["default"].fTitle({
-      y: _Chart["default"].STACKED_TITLE_Y
-    }),
-    subtitle: _Chart["default"].fSubtitle({
-      y: _Chart["default"].STACKED_SUBTITLE_Y
-    }),
+    title: _Chart["default"].fTitle(),
+    subtitle: _Chart["default"].fSubtitle(),
     tooltip: _Chart["default"].fTooltip(_Tooltip["default"].sparkStackedArea),
     xAxis: _Chart["default"].fXAxisOpposite({
       type: "category",
