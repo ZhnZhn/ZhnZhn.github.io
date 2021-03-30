@@ -3,20 +3,19 @@ import Tooltip from './Tooltip';
 
 const WithTreeMapConfig = {
    crTreeMapConfig: () => ({
-       zhSeries: {
-         count: 0
-       },
-       zhDetailCharts: [],
-
        credits: Chart.fCreditsRightBottom(),
        chart: {
          type: 'treemap',
-         marginTop : Chart.TREEMAP_MARGIN_TOP
+         spacingTop: 25,
+         marginTop: 50,
+         marginRight: 5,
+         height: 500
        },
-       title: Chart.fTitle({ y:Chart.TREEMAP_TITLE_Y }),
-       subtitle: Chart.fSubtitle({ y:Chart.TREEMAP_SUBTITLE_Y }),
+       title: Chart.fTitle(),
+       subtitle: Chart.fSubtitle(),
        tooltip: Chart.fTooltip(Tooltip.sparkTreeMap),
-       navigation: Chart.fNavigation()
+       zhSeries: { count: 0 },
+       zhDetailCharts: [],
    }),
 
    crTreeMapSeria: (data) => ({

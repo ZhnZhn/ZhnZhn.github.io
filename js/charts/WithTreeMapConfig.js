@@ -12,23 +12,21 @@ var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 var WithTreeMapConfig = {
   crTreeMapConfig: function crTreeMapConfig() {
     return {
-      zhSeries: {
-        count: 0
-      },
-      zhDetailCharts: [],
       credits: _Chart["default"].fCreditsRightBottom(),
       chart: {
         type: 'treemap',
-        marginTop: _Chart["default"].TREEMAP_MARGIN_TOP
+        spacingTop: 25,
+        marginTop: 50,
+        marginRight: 5,
+        height: 500
       },
-      title: _Chart["default"].fTitle({
-        y: _Chart["default"].TREEMAP_TITLE_Y
-      }),
-      subtitle: _Chart["default"].fSubtitle({
-        y: _Chart["default"].TREEMAP_SUBTITLE_Y
-      }),
+      title: _Chart["default"].fTitle(),
+      subtitle: _Chart["default"].fSubtitle(),
       tooltip: _Chart["default"].fTooltip(_Tooltip["default"].sparkTreeMap),
-      navigation: _Chart["default"].fNavigation()
+      zhSeries: {
+        count: 0
+      },
+      zhDetailCharts: []
     };
   },
   crTreeMapSeria: function crTreeMapSeria(data) {

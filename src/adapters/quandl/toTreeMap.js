@@ -24,8 +24,7 @@ const _assign = Object.assign
 , {
    COLOR_PERIOD,
    COLOR_BASE1,
-   COLOR_BASE2,
-   STACKED_HEIGHT,
+   COLOR_BASE2,   
    crMonoColor,
    getMonoColor
  } = Chart
@@ -133,8 +132,6 @@ const toTreeMap = function(json, option){
   , dateTo = jsonData[1][0] ? jsonData[1][0] : '';
 
    _setColorToPoint(data, level60, level90);
-
-  config.chart.height = STACKED_HEIGHT;
 
   const yearTitle = jsonData[0] && jsonData[0][0]
     ? jsonData[0][0].split('-')[0]

@@ -163,34 +163,21 @@ const toTreeMap = {
         , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
         , _d1 = _crData(values, categories, Tid, option )
         , _c = _d1.map(item => item.c)
-        , _data = _addPercent(_d1)
-        , { index1, index2 } = _findLevelIndex(_data, 60, 90);
+        , data = _addPercent(_d1)
+        , { index1, index2 } = _findLevelIndex(data, 60, 90);
 
   if (isCluster) {
-    _addColor(_data, index1, index2)
+    _addColor(data, index1, index2)
   }
 
    const _seria = Builder()
-     .treeMapSeria(
-        Tooltip.treeMap, {
-          data: _data
-      })
+      .treeMapSeria(Tooltip.treeMap, { data })
       .toSeria();
-    const config = Builder()
+   const config = Builder()
       .treeMapConfig(_c, seriaType)
-      //.addCaption(C.TITLE, _subtitle)
       .addCaption(_title, _subtitle)
       .addSeries(_seria)
-      .add({
-        chart: {
-          spacingTop: 25,
-          marginTop: 50,
-          marginRight: 5,
-          height: 500,
-        },
-        ...crChartOption(ds, Tid, option)
-       })
-      .alignButtonExport()
+      .add(crChartOption(ds, Tid, option))
       .toConfig();
 
     return config;

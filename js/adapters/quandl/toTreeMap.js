@@ -31,7 +31,6 @@ var _assign = Object.assign,
     COLOR_PERIOD = _Chart["default"].COLOR_PERIOD,
     COLOR_BASE1 = _Chart["default"].COLOR_BASE1,
     COLOR_BASE2 = _Chart["default"].COLOR_BASE2,
-    STACKED_HEIGHT = _Chart["default"].STACKED_HEIGHT,
     crMonoColor = _Chart["default"].crMonoColor,
     getMonoColor = _Chart["default"].getMonoColor,
     crTreeMapConfig = _ChartConfig["default"].crTreeMapConfig,
@@ -164,7 +163,6 @@ var toTreeMap = function toTreeMap(json, option) {
 
   _setColorToPoint(data, level60, level90);
 
-  config.chart.height = STACKED_HEIGHT;
   var yearTitle = jsonData[0] && jsonData[0][0] ? jsonData[0][0].split('-')[0] : '';
   option.title = yearTitle + ":" + option.title;
   setTitleToConfig(config, option);

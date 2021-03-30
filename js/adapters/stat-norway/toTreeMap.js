@@ -212,28 +212,20 @@ var toTreeMap = {
         _c = _d1.map(function (item) {
       return item.c;
     }),
-        _data = _addPercent(_d1),
-        _findLevelIndex2 = _findLevelIndex(_data, 60, 90),
+        data = _addPercent(_d1),
+        _findLevelIndex2 = _findLevelIndex(data, 60, 90),
         index1 = _findLevelIndex2.index1,
         index2 = _findLevelIndex2.index2;
 
     if (isCluster) {
-      _addColor(_data, index1, index2);
+      _addColor(data, index1, index2);
     }
 
     var _seria = (0, _ConfigBuilder["default"])().treeMapSeria(_Tooltip["default"].treeMap, {
-      data: _data
+      data: data
     }).toSeria();
 
-    var config = (0, _ConfigBuilder["default"])().treeMapConfig(_c, seriaType) //.addCaption(C.TITLE, _subtitle)
-    .addCaption(_title, _subtitle).addSeries(_seria).add((0, _extends2["default"])({
-      chart: {
-        spacingTop: 25,
-        marginTop: 50,
-        marginRight: 5,
-        height: 500
-      }
-    }, crChartOption(ds, Tid, option))).alignButtonExport().toConfig();
+    var config = (0, _ConfigBuilder["default"])().treeMapConfig(_c, seriaType).addCaption(_title, _subtitle).addSeries(_seria).add(crChartOption(ds, Tid, option)).toConfig();
     return config;
   },
   fCrConfig: function fCrConfig(param, config) {
