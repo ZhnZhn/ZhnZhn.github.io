@@ -143,7 +143,7 @@ var _crSeriaData = function _crSeriaData(json, option) {
   return _data;
 };
 
-var _crSeria = function _crSeria(json, option) {
+var _crDfSeria = function _crDfSeria(json, option) {
   var indicator = option.indicator,
       _data = _crSeriaData(json, option);
 
@@ -213,8 +213,14 @@ var _crBbandsSeries = function _crBbandsSeries(json, option) {
 };
 
 var _rSeries = (_rSeries2 = {
-  DF: _crSeria
+  DF: _crDfSeria
 }, _rSeries2[C.MACD] = _crMacdSeries, _rSeries2[C.STOCH] = _crStochSeries, _rSeries2[C.BBANDS] = _crBbandsSeries, _rSeries2);
+
+var _toSeries = function _toSeries(json, option) {
+  var _crSeries = _rSeries[option.indicator] || _rSeries.DF;
+
+  return _crSeries(json, option);
+};
 
 var IndicatorAdapter = {
   crKey: function crKey(option) {
@@ -227,10 +233,8 @@ var IndicatorAdapter = {
         value = option.value,
         chartId = option.chartId,
         _title = ticket + ": " + value,
-        _series = this.toSeries(json, option),
-        config = (0, _ConfigBuilder["default"])().areaConfig({
-      spacingTop: 25
-    }).addCaption(_title).clearSeries().addSeries(_series).add({
+        _series = _toSeries(json, option),
+        config = (0, _ConfigBuilder["default"])().area2Config(_title).addSeries(_series).add({
       zhConfig: _crZhConfig(chartId)
     }).toConfig();
 
@@ -240,11 +244,7 @@ var IndicatorAdapter = {
       isNotZoomToMinMax: false
     };
   },
-  toSeries: function toSeries(json, option) {
-    var _crSeries = _rSeries[option.indicator] || _rSeries.DF;
-
-    return _crSeries(json, option);
-  }
+  toSeries: _toSeries
 };
 var _default = IndicatorAdapter;
 exports["default"] = _default;

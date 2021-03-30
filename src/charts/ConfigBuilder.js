@@ -1,13 +1,12 @@
-import seriaFns from '../math/seriaFn'
-import COLOR from '../constants/Color';
+import seriaFns from '../math/seriaFn';
 
-import Chart from './Chart'
-import ChartFn from './ChartFn'
-import ChartConfig from './ChartConfig'
-import Factory from './ChartFactory'
-import Tooltip from './Tooltip'
+import Chart from './Chart';
+import ChartFn from './ChartFn';
+import ChartConfig from './ChartConfig';
+import Factory from './ChartFactory';
 
-import SeriaBuilder from './SeriaBuilder'
+import SeriaBuilder from './SeriaBuilder';
+import ConfigStockSlice from './ConfigStockSlice';
 
 const {
   findMinY,
@@ -15,18 +14,18 @@ const {
   filterTrimZero
 } = seriaFns;
 const {
+  fTitle,
+  fSubtitle,
+  fTooltip
+} = Chart;
+const {
   setPlotLinesMinMax,
   setPlotLinesDeltas,
-  calcMinY,
-  setYToPoints,
+  calcMinY
 } = ChartFn;
 const {
-  crDividendSeria,
-  crSplitRatioSeria,
-  crMiniVolumeConfig,
-  crMiniATHConfig,
-  crMiniHLConfig,
-  setSerieData
+  crAreaConfig,
+  crTreeMapConfig
 } = ChartConfig;
 
 const C = {
@@ -59,8 +58,11 @@ const C = {
   }
 };
 
-const _assign = Object.assign;
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, _assign = Object.assign
+, _assignTo = (obj, propName, value) => {
+  obj[propName] = _assign(obj[propName] || {}, value)
+};
 
 const _isObj = obj => obj && typeof obj === 'object'
 , _isStr = str => typeof str === 'string'
@@ -76,18 +78,13 @@ const _getY = (point) => _isArr(point)
 const _getData = obj => obj.config?.series?.[0].data
  || [];
 
- const _crSeriaOption = (color, option) => _assign({
-   type: 'line', visible: false, color,
-   marker: {
-     radius: 3,
-     symbol: "circle"
-   }
- }, option);
+ const _findMinY = (minY, data) => _isNumber(minY)
+  ? minY
+  : findMinY(data);
+const _findMaxY = (maxY, data) => _isNumber(maxY)
+  ? maxY
+  : findMaxY(data);
 
- const _crScatterBottomSeria = (crSeria, data, min, max) => {
-   setYToPoints(data, calcMinY(min, max));
-   return crSeria(data);
- };
 
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
@@ -108,116 +105,56 @@ ConfigBuilder.crSeria = ({ adapter, json, option, type }) => {
 
 ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   ...SeriaBuilder,
+  ...ConfigStockSlice,
 
   init(config={}) {
     this.config = config
     return this;
   },
   areaConfig(option){
-    this.config = ChartConfig.crAreaConfig(option);
+    this.config = crAreaConfig(option);
     return this;
   },
   area2Config(title, subtitle){
     return this.areaConfig({ spacingTop: 25 })
       .addCaption(title, subtitle)
-      .clearSeries();
-  },
-  stockConfig(id, option){
-    const {
-      isNotZoomToMinMax,
-      isDrawDeltaExtrems,
-      seriaType:sT, seriaColor, seriaWidth,
-      dC, dH, dL, dO,
-      minClose, maxClose,
-      dVc, dV,
-      dATH
-    } = option
-    , seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
-    return this.areaConfig({
-        spacingTop: 25,
-        seriaType, seriaColor, seriaWidth
-      })
-      .addTooltip(Tooltip.vTdmyIf)
-      .addMiniVolume({
-        id,
-        dColumn: dVc,
-        dVolume: dV,
-        tooltipColumn: Chart.fTooltip(Tooltip.volumeTdmyIf)
-      })
-      .addMiniATH({ id, data: dATH })
-      .setMinMax(minClose, maxClose, isNotZoomToMinMax)
-      .setMinMaxDeltas(minClose, maxClose, dC, isDrawDeltaExtrems)
-      .setStockSerias(seriaType, dC, dH, dL, dO);
+      .add('series', []);
   },
   categoryConfig(categories=[]){
-    this.config = ChartConfig.crAreaConfig()
+    this.config = crAreaConfig()
     const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}
     this.add('xAxis', xAxis)
     this.add('yAxis', C.CATEGORIES_Y_AXIS)
     return this;
   },
-  _columnConfig(categories=[], option){
-    this.config = Factory.crColumnConfig(option)
-    this.add('xAxis', { categories })
-    return this;
-  },
-  _barConfig(categories=[], option){
-    this.config = Factory.crBarConfig(option)
-    this.add('xAxis', { categories })
-    return this;
-  },
   barOrColumnConfig(type, categories=[], option){
-    if (type === 'BAR') {
-      return this._barConfig(categories, option);
-    }
-    return this._columnConfig(categories, option);
+    const _crConfig = type === 'BAR'
+      ? Factory.crBarConfig
+      : Factory.crColumnConfig;
+    this.config = _crConfig(option)
+    return this.add('xAxis', { categories })
   },
   treeMapConfig(){
-    this.config = ChartConfig.crTreeMapConfig()
+    this.config = crTreeMapConfig()
     return this;
   },
 
-  alignButtonExport(){
-    _assign(
-      this.config.navigation.buttonOptions, { x: -10, y: -20 }
-    )
+  addTitle(text) {
+    _assignTo(this.config, 'title', fTitle({ text }))
     return this;
   },
-
-
-  addTitle(title) {
-    const _to = this.config.title || {};
-    this.config.title = _assign(_to,
-      Chart.fTitle({
-        text: title,
-        y: Chart.STACKED_TITLE_Y
-      })
-    )
+  addSubtitle(text) {
+    _assignTo(this.config, 'subtitle', fSubtitle({ text }))
     return this;
   },
-  addSubtitle(subtitle) {
-    const _to = this.config.subtitle || {};
-    this.config.subtitle = _assign(_to,
-       Chart.fSubtitle({
-         text: subtitle,
-         y: Chart.STACKED_SUBTITLE_Y
-       })
-    )
-    return this;
-  },
-  addCaption(title='', subtitle=''){
+  addCaption(title, subtitle){
     return this
       .addTitle(title)
       .addSubtitle(subtitle);
   },
 
   addTooltip(tooltip) {
-    this.config.tooltip = Chart.fTooltip(tooltip)
-    return this;
-  },
-
-  addXAxisCrosshair(){
-    this.add('xAxis', { crosshair : Chart.fCrosshair() })
+    this.config.tooltip = fTooltip(tooltip)
     return this;
   },
 
@@ -253,32 +190,16 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     }
     return this;
   },
-  addMiniVolume(option){
-    const { dVolume } = option;
-    return dVolume && dVolume.length > 0
-     ? this.addZhMiniConfig(crMiniVolumeConfig(option))
-     : this;
-  },
-  addMiniATH(option){
-    const { data } = option;
-    return data && data.length>0
-     ? this.addZhMiniConfig(crMiniATHConfig(option))
-     : this;
-  },
-  addMiniHL(option){
-    const { data } = option;
-    return data && data.length>0
-     ? this.addZhMiniConfig(crMiniHLConfig(option))
-     : this;
+  _addMini(data, option, crConfig){
+    return data && data.length > 0
+      ? this.addZhMiniConfig(crConfig(option))
+      : this;
   },
 
   addZhPointsIf(data, propName='zhIsMfi', is=true){
     return is
-      ? this.add({
-         zhPoints: data,
-         [propName]: true
-       })
-     : this;
+      ? this.add({ zhPoints: data, [propName]: true })
+      : this;
   },
 
   addLegend(legend){
@@ -294,15 +215,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       isFilterZero,
       minY, maxY
     } = option
-    , _data = isFilterZero
-        ? filterTrimZero(data)
-        : data
-    , min = _isNumber(minY)
-       ? minY
-       : findMinY(_data)
-    , max = _isNumber(maxY)
-       ? maxY
-       : findMaxY(_data);
+    , _data = isFilterZero ? filterTrimZero(data) : data
+    , min = _findMinY(minY, _data)
+    , max = _findMaxY(maxY, _data);
     return this.setMinMax(min, max, isNotZoomToMinMax)
       .setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
   },
@@ -344,22 +259,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     this._setYAxisMin(min, max, noZoom)
     return this;
   },
-  setStockSerias(seriaType, d, dH, dL, dO){
-    const config = this.config;
-    setSerieData(config, d, 0, 'Close', {
-      type: seriaType || 'area'
-    })
-    setSerieData(config, dH, 1, 'High',
-      _crSeriaOption(COLOR.S_HIGH)
-    )
-    setSerieData(config, dL, 2, 'Low',
-      _crSeriaOption(COLOR.S_LOW)
-    )
-    setSerieData(config, dO, 3, 'Open',
-      _crSeriaOption(COLOR.S_OPEN)
-    )
-    return this;
-  },
 
   _addScatterBottom(seria, name) {
     const { series, chart, zhConfig } = this.config;
@@ -370,23 +269,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       color: seria.color,
       name: name
     })
-    return this;
-  },
-
-  //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
-  addDividend(data, min, max) {
-    if (data.length > 0) {
-      const seria = _crScatterBottomSeria(crDividendSeria, data, min, max)      
-      this._addScatterBottom(seria, 'Dividend')
-    }
-    return this;
-  },
-  //Used only by Quandl EOD
-  addSplitRatio(data, min, max) {
-    if (data.length > 0) {
-      const seria = _crScatterBottomSeria(crSplitRatioSeria, data, min, max)
-      this._addScatterBottom(seria, 'Split Ratio')
-    }
     return this;
   },
 

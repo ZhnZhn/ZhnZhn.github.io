@@ -9,8 +9,6 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
-
 var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartFn = _interopRequireDefault(require("./ChartFn"));
@@ -19,23 +17,21 @@ var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
 var _ChartFactory = _interopRequireDefault(require("./ChartFactory"));
 
-var _Tooltip = _interopRequireDefault(require("./Tooltip"));
-
 var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
+
+var _ConfigStockSlice = _interopRequireDefault(require("./ConfigStockSlice"));
 
 var findMinY = _seriaFn["default"].findMinY,
     findMaxY = _seriaFn["default"].findMaxY,
     filterTrimZero = _seriaFn["default"].filterTrimZero;
+var fTitle = _Chart["default"].fTitle,
+    fSubtitle = _Chart["default"].fSubtitle,
+    fTooltip = _Chart["default"].fTooltip;
 var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax,
     setPlotLinesDeltas = _ChartFn["default"].setPlotLinesDeltas,
-    calcMinY = _ChartFn["default"].calcMinY,
-    setYToPoints = _ChartFn["default"].setYToPoints;
-var crDividendSeria = _ChartConfig["default"].crDividendSeria,
-    crSplitRatioSeria = _ChartConfig["default"].crSplitRatioSeria,
-    crMiniVolumeConfig = _ChartConfig["default"].crMiniVolumeConfig,
-    crMiniATHConfig = _ChartConfig["default"].crMiniATHConfig,
-    crMiniHLConfig = _ChartConfig["default"].crMiniHLConfig,
-    setSerieData = _ChartConfig["default"].setSerieData;
+    calcMinY = _ChartFn["default"].calcMinY;
+var crAreaConfig = _ChartConfig["default"].crAreaConfig,
+    crTreeMapConfig = _ChartConfig["default"].crTreeMapConfig;
 var C = {
   CATEGORIES_X_AXIS: {
     type: "category",
@@ -64,8 +60,12 @@ var C = {
     }
   }
 };
-var _assign = Object.assign;
-var _isArr = Array.isArray;
+
+var _isArr = Array.isArray,
+    _assign = Object.assign,
+    _assignTo = function _assignTo(obj, propName, value) {
+  obj[propName] = _assign(obj[propName] || {}, value);
+};
 
 var _isObj = function _isObj(obj) {
   return obj && typeof obj === 'object';
@@ -90,21 +90,12 @@ var _getData = function _getData(obj) {
   return ((_obj$config = obj.config) == null ? void 0 : (_obj$config$series = _obj$config.series) == null ? void 0 : _obj$config$series[0].data) || [];
 };
 
-var _crSeriaOption = function _crSeriaOption(color, option) {
-  return _assign({
-    type: 'line',
-    visible: false,
-    color: color,
-    marker: {
-      radius: 3,
-      symbol: "circle"
-    }
-  }, option);
+var _findMinY = function _findMinY(minY, data) {
+  return _isNumber(minY) ? minY : findMinY(data);
 };
 
-var _crScatterBottomSeria = function _crScatterBottomSeria(crSeria, data, min, max) {
-  setYToPoints(data, calcMinY(min, max));
-  return crSeria(data);
+var _findMaxY = function _findMaxY(maxY, data) {
+  return _isNumber(maxY) ? maxY : findMaxY(data);
 };
 
 var ConfigBuilder = function ConfigBuilder(config) {
@@ -138,7 +129,7 @@ ConfigBuilder.crSeria = function (_ref) {
   return _seria;
 };
 
-ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["default"])({}, _SeriaBuilder["default"], {
+ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["default"])({}, _SeriaBuilder["default"], _ConfigStockSlice["default"], {
   init: function init(config) {
     if (config === void 0) {
       config = {};
@@ -148,51 +139,20 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   areaConfig: function areaConfig(option) {
-    this.config = _ChartConfig["default"].crAreaConfig(option);
+    this.config = crAreaConfig(option);
     return this;
   },
   area2Config: function area2Config(title, subtitle) {
     return this.areaConfig({
       spacingTop: 25
-    }).addCaption(title, subtitle).clearSeries();
-  },
-  stockConfig: function stockConfig(id, option) {
-    var isNotZoomToMinMax = option.isNotZoomToMinMax,
-        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        sT = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        dC = option.dC,
-        dH = option.dH,
-        dL = option.dL,
-        dO = option.dO,
-        minClose = option.minClose,
-        maxClose = option.maxClose,
-        dVc = option.dVc,
-        dV = option.dV,
-        dATH = option.dATH,
-        seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
-    return this.areaConfig({
-      spacingTop: 25,
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth
-    }).addTooltip(_Tooltip["default"].vTdmyIf).addMiniVolume({
-      id: id,
-      dColumn: dVc,
-      dVolume: dV,
-      tooltipColumn: _Chart["default"].fTooltip(_Tooltip["default"].volumeTdmyIf)
-    }).addMiniATH({
-      id: id,
-      data: dATH
-    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, dC, isDrawDeltaExtrems).setStockSerias(seriaType, dC, dH, dL, dO);
+    }).addCaption(title, subtitle).add('series', []);
   },
   categoryConfig: function categoryConfig(categories) {
     if (categories === void 0) {
       categories = [];
     }
 
-    this.config = _ChartConfig["default"].crAreaConfig();
+    this.config = crAreaConfig();
     var xAxis = (0, _extends2["default"])({}, C.CATEGORIES_X_AXIS, {
       categories: categories
     });
@@ -200,88 +160,41 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     this.add('yAxis', C.CATEGORIES_Y_AXIS);
     return this;
   },
-  _columnConfig: function _columnConfig(categories, option) {
-    if (categories === void 0) {
-      categories = [];
-    }
-
-    this.config = _ChartFactory["default"].crColumnConfig(option);
-    this.add('xAxis', {
-      categories: categories
-    });
-    return this;
-  },
-  _barConfig: function _barConfig(categories, option) {
-    if (categories === void 0) {
-      categories = [];
-    }
-
-    this.config = _ChartFactory["default"].crBarConfig(option);
-    this.add('xAxis', {
-      categories: categories
-    });
-    return this;
-  },
   barOrColumnConfig: function barOrColumnConfig(type, categories, option) {
     if (categories === void 0) {
       categories = [];
     }
 
-    if (type === 'BAR') {
-      return this._barConfig(categories, option);
-    }
+    var _crConfig = type === 'BAR' ? _ChartFactory["default"].crBarConfig : _ChartFactory["default"].crColumnConfig;
 
-    return this._columnConfig(categories, option);
+    this.config = _crConfig(option);
+    return this.add('xAxis', {
+      categories: categories
+    });
   },
   treeMapConfig: function treeMapConfig() {
-    this.config = _ChartConfig["default"].crTreeMapConfig();
+    this.config = crTreeMapConfig();
     return this;
   },
-  alignButtonExport: function alignButtonExport() {
-    _assign(this.config.navigation.buttonOptions, {
-      x: -10,
-      y: -20
-    });
-
-    return this;
-  },
-  addTitle: function addTitle(title) {
-    var _to = this.config.title || {};
-
-    this.config.title = _assign(_to, _Chart["default"].fTitle({
-      text: title,
-      y: _Chart["default"].STACKED_TITLE_Y
+  addTitle: function addTitle(text) {
+    _assignTo(this.config, 'title', fTitle({
+      text: text
     }));
+
     return this;
   },
-  addSubtitle: function addSubtitle(subtitle) {
-    var _to = this.config.subtitle || {};
-
-    this.config.subtitle = _assign(_to, _Chart["default"].fSubtitle({
-      text: subtitle,
-      y: _Chart["default"].STACKED_SUBTITLE_Y
+  addSubtitle: function addSubtitle(text) {
+    _assignTo(this.config, 'subtitle', fSubtitle({
+      text: text
     }));
+
     return this;
   },
   addCaption: function addCaption(title, subtitle) {
-    if (title === void 0) {
-      title = '';
-    }
-
-    if (subtitle === void 0) {
-      subtitle = '';
-    }
-
     return this.addTitle(title).addSubtitle(subtitle);
   },
   addTooltip: function addTooltip(tooltip) {
-    this.config.tooltip = _Chart["default"].fTooltip(tooltip);
-    return this;
-  },
-  addXAxisCrosshair: function addXAxisCrosshair() {
-    this.add('xAxis', {
-      crosshair: _Chart["default"].fCrosshair()
-    });
+    this.config.tooltip = fTooltip(tooltip);
     return this;
   },
   add: function add(propName, option) {
@@ -321,17 +234,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  addMiniVolume: function addMiniVolume(option) {
-    var dVolume = option.dVolume;
-    return dVolume && dVolume.length > 0 ? this.addZhMiniConfig(crMiniVolumeConfig(option)) : this;
-  },
-  addMiniATH: function addMiniATH(option) {
-    var data = option.data;
-    return data && data.length > 0 ? this.addZhMiniConfig(crMiniATHConfig(option)) : this;
-  },
-  addMiniHL: function addMiniHL(option) {
-    var data = option.data;
-    return data && data.length > 0 ? this.addZhMiniConfig(crMiniHLConfig(option)) : this;
+  _addMini: function _addMini(data, option, crConfig) {
+    return data && data.length > 0 ? this.addZhMiniConfig(crConfig(option)) : this;
   },
   addZhPointsIf: function addZhPointsIf(data, propName, is) {
     var _this$add;
@@ -360,8 +264,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
         minY = option.minY,
         maxY = option.maxY,
         _data = isFilterZero ? filterTrimZero(data) : data,
-        min = _isNumber(minY) ? minY : findMinY(_data),
-        max = _isNumber(maxY) ? maxY : findMaxY(_data);
+        min = _findMinY(minY, _data),
+        max = _findMaxY(maxY, _data);
 
     return this.setMinMax(min, max, isNotZoomToMinMax).setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
   },
@@ -403,16 +307,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  setStockSerias: function setStockSerias(seriaType, d, dH, dL, dO) {
-    var config = this.config;
-    setSerieData(config, d, 0, 'Close', {
-      type: seriaType || 'area'
-    });
-    setSerieData(config, dH, 1, 'High', _crSeriaOption(_Color["default"].S_HIGH));
-    setSerieData(config, dL, 2, 'Low', _crSeriaOption(_Color["default"].S_LOW));
-    setSerieData(config, dO, 3, 'Open', _crSeriaOption(_Color["default"].S_OPEN));
-    return this;
-  },
   _addScatterBottom: function _addScatterBottom(seria, name) {
     var _this$config = this.config,
         series = _this$config.series,
@@ -427,26 +321,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       color: seria.color,
       name: name
     });
-    return this;
-  },
-  //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
-  addDividend: function addDividend(data, min, max) {
-    if (data.length > 0) {
-      var seria = _crScatterBottomSeria(crDividendSeria, data, min, max);
-
-      this._addScatterBottom(seria, 'Dividend');
-    }
-
-    return this;
-  },
-  //Used only by Quandl EOD
-  addSplitRatio: function addSplitRatio(data, min, max) {
-    if (data.length > 0) {
-      var seria = _crScatterBottomSeria(crSplitRatioSeria, data, min, max);
-
-      this._addScatterBottom(seria, 'Split Ratio');
-    }
-
     return this;
   },
   _disableAnimation: function _disableAnimation() {

@@ -108,7 +108,7 @@ const _crSeriaData = (json, option) => {
   return _data;
 }
 
-const _crSeria = (json, option ) => {
+const _crDfSeria = (json, option ) => {
   const { indicator } = option
   , _data = _crSeriaData(json, option);
   return _crSplineSeria({
@@ -179,11 +179,17 @@ const _crBbandsSeries = (json, option) => {
 }
 
 const _rSeries = {
-  DF: _crSeria,
+  DF: _crDfSeria,
   [C.MACD]: _crMacdSeries,
   [C.STOCH]: _crStochSeries,
   [C.BBANDS]: _crBbandsSeries,
 }
+
+const _toSeries = (json, option) => {
+  const _crSeries = _rSeries[option.indicator]
+    || _rSeries.DF;
+  return _crSeries(json, option);
+};
 
 const IndicatorAdapter = {
   crKey(option){
@@ -192,16 +198,14 @@ const IndicatorAdapter = {
   },
   toConfig(json, option) {
     const { ticket, value, chartId } = option
-        //, _chartId = `${ticket}-${value}`
-        , _title = `${ticket}: ${value}`
-        , _series = this.toSeries(json, option)
-        , config = Builder()
-            .areaConfig({ spacingTop: 25 })
-            .addCaption(_title)
-            .clearSeries()
-            .addSeries(_series)
-            .add({ zhConfig: _crZhConfig(chartId) })
-            .toConfig();
+    //, _chartId = `${ticket}-${value}`
+    , _title = `${ticket}: ${value}`
+    , _series = _toSeries(json, option)
+    , config = Builder()
+        .area2Config(_title)
+        .addSeries(_series)
+        .add({ zhConfig: _crZhConfig(chartId) })
+        .toConfig();
     return {
       config,
       isDrawDeltaExtrems: false,
@@ -209,11 +213,7 @@ const IndicatorAdapter = {
     };
   },
 
-  toSeries(json, option) {
-    const _crSeries = _rSeries[option.indicator]
-      || _rSeries.DF;
-    return _crSeries(json, option);
-  }
+  toSeries: _toSeries
 };
 
 export default IndicatorAdapter
