@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 var DF_COLOR = '#8085e9';
+var _assign = Object.assign;
 var ChartFactory = {
   crColumnConfig: function crColumnConfig(_temp) {
     var _ref = _temp === void 0 ? {} : _temp,
@@ -76,15 +77,16 @@ var ChartFactory = {
     };
   },
   crBarConfig: function crBarConfig(option) {
-    var config = this.crColumnConfig(option);
-    Object.assign(config.chart, {
+    var config = ChartFactory.crColumnConfig(option);
+
+    _assign(config.chart, {
       type: 'bar',
-      //marginTop: 75,
       marginTop: 50,
       height: 450
     }); //config.yAxis.labels = { x: 0, y: -7 }
 
-    Object.assign(config.yAxis, {
+
+    _assign(config.yAxis, {
       labels: {
         x: 0,
         y: 14
@@ -92,6 +94,7 @@ var ChartFactory = {
       opposite: false,
       gridLineDashStyle: 'ShortDot'
     });
+
     return config;
   }
 };

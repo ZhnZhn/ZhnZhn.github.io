@@ -1,6 +1,8 @@
 
 const DF_COLOR = '#8085e9';
 
+const _assign = Object.assign;
+
 const ChartFactory = {
   crColumnConfig({ seriaColor }={}) {
     const _color = seriaColor || DF_COLOR;
@@ -69,15 +71,14 @@ const ChartFactory = {
   },
 
   crBarConfig(option) {
-    const config = this.crColumnConfig(option);
-    Object.assign(config.chart, {
+    const config = ChartFactory.crColumnConfig(option);
+    _assign(config.chart, {
       type: 'bar',
-      //marginTop: 75,
       marginTop: 50,
       height: 450
     })
     //config.yAxis.labels = { x: 0, y: -7 }
-    Object.assign(config.yAxis, {
+    _assign(config.yAxis, {
       labels: { x: 0, y: 14 },
       opposite: false,
       gridLineDashStyle: 'ShortDot'
