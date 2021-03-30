@@ -1,9 +1,9 @@
-import seriaFns from '../math/seriaFn'
+import seriaFns from '../math/seriaFn';
 
-import Chart from './Chart'
-import ChartConfig from './ChartConfig'
+import Chart from './Chart';
+import ChartConfig from './ChartConfig';
 
-const { findMinY } = seriaFns
+const { findMinY } = seriaFns;
 
 const C = {
   SERIA: {
@@ -170,11 +170,6 @@ const SeriaBuilder = {
         zhValueText: text ? text : id
       })
     }
-    return this;
-  },
-
-  clearSeries(){
-    this.config.series = []
     return this;
   },
 

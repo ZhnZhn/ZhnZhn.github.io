@@ -206,10 +206,6 @@ var SeriaBuilder = {
 
     return this;
   },
-  clearSeries: function clearSeries() {
-    this.config.series = [];
-    return this;
-  },
   addSeries: function addSeries(series, isWithoutLegend) {
     if (isWithoutLegend === void 0) {
       isWithoutLegend = false;
