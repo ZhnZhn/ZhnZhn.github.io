@@ -82,14 +82,19 @@ var ConfigStockSlice = {
       seriaType: seriaType,
       seriaColor: seriaColor,
       seriaWidth: seriaWidth
-    }).addTooltip(_Tooltip["default"].vTdmyIf).addMiniVolume({
+    }).addTooltip(_Tooltip["default"].vTdmyIf).addMinMax(dC, {
+      minY: minClose,
+      maxY: maxClose,
+      isNotZoomToMinMax: isNotZoomToMinMax,
+      isDrawDeltaExtrems: isDrawDeltaExtrems
+    }).addMiniVolume({
       id: id,
       dColumn: dVc,
       dVolume: dV
     }).addMiniATH({
       id: id,
       data: dATH
-    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setMinMaxDeltas(minClose, maxClose, dC, isDrawDeltaExtrems).setStockSerias(seriaType, dC, dH, dL, dO);
+    }).setStockSerias(seriaType, dC, dH, dL, dO);
   },
   //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
   addDividend: function addDividend(data, min, max) {

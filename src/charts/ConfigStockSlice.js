@@ -72,10 +72,12 @@ const ConfigStockSlice = {
         seriaType, seriaColor, seriaWidth
       })
       .addTooltip(Tooltip.vTdmyIf)
+      .addMinMax(dC, {
+          minY: minClose, maxY: maxClose,
+          isNotZoomToMinMax, isDrawDeltaExtrems
+       })
       .addMiniVolume({ id, dColumn: dVc, dVolume: dV })
-      .addMiniATH({ id, data: dATH })
-      .setMinMax(minClose, maxClose, isNotZoomToMinMax)
-      .setMinMaxDeltas(minClose, maxClose, dC, isDrawDeltaExtrems)
+      .addMiniATH({ id, data: dATH })      
       .setStockSerias(seriaType, dC, dH, dL, dO);
   },
 

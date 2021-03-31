@@ -79,12 +79,16 @@ const _getY = (point) => _isArr(point)
 const _getData = obj => obj.config?.series?.[0].data
  || [];
 
- const _findMinY = (minY, data) => _isNumber(minY)
+const _findMinY = (minY, data) => _isNumber(minY)
   ? minY
   : findMinY(data);
 const _findMaxY = (maxY, data) => _isNumber(maxY)
   ? maxY
   : findMaxY(data);
+const _calcYAxisMin = (min, max, noZoom) => noZoom
+  && min > 0
+   ? 0
+   : calcMinY(min, max);
 
 
 const ConfigBuilder = function(config={}) {
@@ -219,12 +223,12 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     , _data = isFilterZero ? filterTrimZero(data) : data
     , min = _findMinY(minY, _data)
     , max = _findMaxY(maxY, _data);
-    return this.setMinMax(min, max, isNotZoomToMinMax)
-      .setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
+    return this._setMinMax(min, max, isNotZoomToMinMax)
+      ._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
   },
 
 
-  setMinMaxDeltas(min, max, data, isDrawDeltaExtrems){
+  _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems){
     if (isDrawDeltaExtrems) {
       const _recentIndex = data.length-1;
       if (_recentIndex > 0) {
@@ -239,26 +243,18 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
 
-  _setYAxisMin(min, max, noZoom){
-    const _min = noZoom && min > 0
-      ? 0
-      : calcMinY(min, max);
-    this.add('yAxis', {
-      min: _min,
-      maxPadding: 0.15,
-      minPadding: 0.15,
-      endOnTick: false,
-      startOnTick: false
-    })
-  },
-
-  setMinMax(min, max, noZoom){
+  _setMinMax(min, max, noZoom){
     setPlotLinesMinMax({
       plotLines: this.config.yAxis.plotLines,
       min, max
     })
-    this._setYAxisMin(min, max, noZoom)
-    return this;
+    return this.add('yAxis', {
+      min: _calcYAxisMin(min, max, noZoom),
+      maxPadding: 0.15,
+      minPadding: 0.15,
+      endOnTick: false,
+      startOnTick: false
+    });
   },
 
   _addScatterBottom(seria, name, min, max) {

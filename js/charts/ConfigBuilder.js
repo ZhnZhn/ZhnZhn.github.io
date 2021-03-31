@@ -99,6 +99,10 @@ var _findMaxY = function _findMaxY(maxY, data) {
   return _isNumber(maxY) ? maxY : findMaxY(data);
 };
 
+var _calcYAxisMin = function _calcYAxisMin(min, max, noZoom) {
+  return noZoom && min > 0 ? 0 : calcMinY(min, max);
+};
+
 var ConfigBuilder = function ConfigBuilder(config) {
   if (config === void 0) {
     config = {};
@@ -268,9 +272,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
         min = _findMinY(minY, _data),
         max = _findMaxY(maxY, _data);
 
-    return this.setMinMax(min, max, isNotZoomToMinMax).setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
+    return this._setMinMax(min, max, isNotZoomToMinMax)._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
   },
-  setMinMaxDeltas: function setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
+  _setMinMaxDeltas: function _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
     if (isDrawDeltaExtrems) {
       var _recentIndex = data.length - 1;
 
@@ -286,27 +290,19 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  _setYAxisMin: function _setYAxisMin(min, max, noZoom) {
-    var _min = noZoom && min > 0 ? 0 : calcMinY(min, max);
-
-    this.add('yAxis', {
-      min: _min,
-      maxPadding: 0.15,
-      minPadding: 0.15,
-      endOnTick: false,
-      startOnTick: false
-    });
-  },
-  setMinMax: function setMinMax(min, max, noZoom) {
+  _setMinMax: function _setMinMax(min, max, noZoom) {
     setPlotLinesMinMax({
       plotLines: this.config.yAxis.plotLines,
       min: min,
       max: max
     });
-
-    this._setYAxisMin(min, max, noZoom);
-
-    return this;
+    return this.add('yAxis', {
+      min: _calcYAxisMin(min, max, noZoom),
+      maxPadding: 0.15,
+      minPadding: 0.15,
+      endOnTick: false,
+      startOnTick: false
+    });
   },
   _addScatterBottom: function _addScatterBottom(seria, name, min, max) {
     var data = seria.data;
