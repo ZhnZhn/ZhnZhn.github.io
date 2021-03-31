@@ -21,7 +21,8 @@ const {
 const {
   setPlotLinesMinMax,
   setPlotLinesDeltas,
-  calcMinY
+  calcMinY,
+  setYToPoints
 } = ChartFn;
 const {
   crAreaConfig,
@@ -260,15 +261,20 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
 
-  _addScatterBottom(seria, name) {
-    const { series, chart, zhConfig } = this.config;
-    series.push({ ...seria, visible: false });
-    chart.spacingBottom = 40;
-    zhConfig.legend.push({
-      index: series.length - 1,
-      color: seria.color,
-      name: name
-    })
+  _addScatterBottom(seria, name, min, max) {
+    const { data } = seria;
+    if (data.length > 0) {
+     const { series, chart, zhConfig } = this.config;
+     setYToPoints(data, calcMinY(min, max));
+     seria.visible = false
+     series.push(seria);
+     chart.spacingBottom = 40;
+     zhConfig.legend.push({
+       index: series.length - 1,
+       color: seria.color,
+       name: name
+     })
+    }
     return this;
   },
 

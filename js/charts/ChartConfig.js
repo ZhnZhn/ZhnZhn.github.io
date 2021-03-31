@@ -56,15 +56,6 @@ var _isStr = function _isStr(str) {
   return typeof str === 'string';
 };
 
-var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data) {
-  return {
-    type: 'scatter',
-    color: color,
-    tooltip: _Chart["default"].fTooltip(pointFormatter),
-    data: data
-  };
-};
-
 var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], _WithMarkers["default"], _WithPieConfig["default"], _WithStackedAreaConfig["default"], _WithStackedColumnConfig["default"], _WithTreeMapConfig["default"], {
   init: function init() {
     (0, _highchartsMore["default"])(_highcharts["default"]);
@@ -88,12 +79,6 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
   getColor: function getColor(seriaIndex) {
     var colors = _ChartTheme["default"].colors;
     return colors[seriaIndex % colors.length];
-  },
-  crDividendSeria: function crDividendSeria(data) {
-    return _crScatterSeria(_Color["default"].EX_DIVIDEND, _Tooltip["default"].exDividend, data);
-  },
-  crSplitRatioSeria: function crSplitRatioSeria(data) {
-    return _crScatterSeria(_Color["default"].SPLIT_RATIO, _Tooltip["default"].splitRatio, data);
   },
   crSeria: function crSeria(option) {
     if (option === void 0) {

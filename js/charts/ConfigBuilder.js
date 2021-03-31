@@ -29,7 +29,8 @@ var fTitle = _Chart["default"].fTitle,
     fTooltip = _Chart["default"].fTooltip;
 var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax,
     setPlotLinesDeltas = _ChartFn["default"].setPlotLinesDeltas,
-    calcMinY = _ChartFn["default"].calcMinY;
+    calcMinY = _ChartFn["default"].calcMinY,
+    setYToPoints = _ChartFn["default"].setYToPoints;
 var crAreaConfig = _ChartConfig["default"].crAreaConfig,
     crTreeMapConfig = _ChartConfig["default"].crTreeMapConfig;
 var C = {
@@ -307,20 +308,25 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  _addScatterBottom: function _addScatterBottom(seria, name) {
-    var _this$config = this.config,
-        series = _this$config.series,
-        chart = _this$config.chart,
-        zhConfig = _this$config.zhConfig;
-    series.push((0, _extends2["default"])({}, seria, {
-      visible: false
-    }));
-    chart.spacingBottom = 40;
-    zhConfig.legend.push({
-      index: series.length - 1,
-      color: seria.color,
-      name: name
-    });
+  _addScatterBottom: function _addScatterBottom(seria, name, min, max) {
+    var data = seria.data;
+
+    if (data.length > 0) {
+      var _this$config = this.config,
+          series = _this$config.series,
+          chart = _this$config.chart,
+          zhConfig = _this$config.zhConfig;
+      setYToPoints(data, calcMinY(min, max));
+      seria.visible = false;
+      series.push(seria);
+      chart.spacingBottom = 40;
+      zhConfig.legend.push({
+        index: series.length - 1,
+        color: seria.color,
+        name: name
+      });
+    }
+
     return this;
   },
   _disableAnimation: function _disableAnimation() {

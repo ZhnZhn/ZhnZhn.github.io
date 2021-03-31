@@ -1,37 +1,42 @@
 import COLOR from '../constants/Color';
 
+import Chart from './Chart';
 import ChartConfig from './ChartConfig';
-import ChartFn from './ChartFn';
 import Tooltip from './Tooltip';
 
+const { fTooltip } = Chart;
 const {
   setSerieData,
   crMiniVolumeConfig,
   crMiniATHConfig,
-  crMiniHLConfig,
-  crDividendSeria,
-  crSplitRatioSeria
+  crMiniHLConfig
 } = ChartConfig;
-const {
-  setYToPoints,
-  calcMinY
-} = ChartFn;
 
-const _assign = Object.assign
-, _isStr = str => typeof str === 'string';
+const _isStr = str => typeof str === 'string';
 
-const _crSeriaOption = (color, option) => _assign({
+const _crSeriaOption = (color) => ({
   type: 'line', visible: false, color,
   marker: {
     radius: 3,
     symbol: "circle"
   }
-}, option);
+});
 
-const _crScatterBottomSeria = (crSeria, data, min, max) => {
-  setYToPoints(data, calcMinY(min, max));
-  return crSeria(data);
-};
+const _crScatterSeria = (color, pointFormatter, data) => ({
+  type: 'scatter',
+  color, data,
+  tooltip: fTooltip(pointFormatter),
+})
+, _crDividendSeria = (data) => _crScatterSeria(
+  COLOR.EX_DIVIDEND,
+  Tooltip.exDividend,
+  data
+)
+, _crSplitRatioSeria = (data) => _crScatterSeria(
+  COLOR.SPLIT_RATIO,
+  Tooltip.splitRatio,
+  data
+);
 
 const ConfigStockSlice = {
   setStockSerias(seriaType, d, dH, dL, dO){
@@ -76,19 +81,13 @@ const ConfigStockSlice = {
 
   //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
   addDividend(data, min, max) {
-    if (data.length > 0) {
-      const seria = _crScatterBottomSeria(crDividendSeria, data, min, max)
-      this._addScatterBottom(seria, 'Dividend')
-    }
-    return this;
+    const seria = _crDividendSeria(data);
+    return this._addScatterBottom(seria, 'Dividend', min, max);
   },
   //Used only by Quandl EOD
   addSplitRatio(data, min, max) {
-    if (data.length > 0) {
-      const seria = _crScatterBottomSeria(crSplitRatioSeria, data, min, max)
-      this._addScatterBottom(seria, 'Split Ratio')
-    }
-    return this;
+    const seria = _crSplitRatioSeria(data);
+    return this._addScatterBottom(seria, 'Split Ratio', min, max);
   },
 
   addMiniVolume(option){

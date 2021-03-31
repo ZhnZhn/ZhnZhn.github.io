@@ -30,13 +30,6 @@ const _merge = Highcharts.merge;
 const _assign = Object.assign;
 const _isStr = str => typeof str === 'string';
 
-const _crScatterSeria = (color, pointFormatter, data) => ({
-  type: 'scatter',
-  color: color,
-  tooltip: Chart.fTooltip(pointFormatter),
-  data: data
-});
-
 const ChartConfig = {
   ...WithIndicator,
   ...WithMarkers,
@@ -66,23 +59,11 @@ const ChartConfig = {
       point: Chart.fEventsMouseOver(handleMouseOver)
     })
   },
-  
+
   getColor(seriaIndex) {
     const colors = ChartTheme.colors;
     return colors[seriaIndex % colors.length];
   },
-
-  crDividendSeria: (data) => _crScatterSeria(
-    COLOR.EX_DIVIDEND,
-    Tooltip.exDividend,
-    data
-  ),
-
-  crSplitRatioSeria: (data) => _crScatterSeria(
-    COLOR.SPLIT_RATIO,
-    Tooltip.splitRatio,
-    data
-  ),
 
   crSeria: (option={}) => {
     const {

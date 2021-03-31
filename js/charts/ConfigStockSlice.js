@@ -7,28 +7,24 @@ exports["default"] = void 0;
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
+var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _ChartFn = _interopRequireDefault(require("./ChartFn"));
+var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
+var fTooltip = _Chart["default"].fTooltip;
 var setSerieData = _ChartConfig["default"].setSerieData,
     crMiniVolumeConfig = _ChartConfig["default"].crMiniVolumeConfig,
     crMiniATHConfig = _ChartConfig["default"].crMiniATHConfig,
-    crMiniHLConfig = _ChartConfig["default"].crMiniHLConfig,
-    crDividendSeria = _ChartConfig["default"].crDividendSeria,
-    crSplitRatioSeria = _ChartConfig["default"].crSplitRatioSeria;
-var setYToPoints = _ChartFn["default"].setYToPoints,
-    calcMinY = _ChartFn["default"].calcMinY;
+    crMiniHLConfig = _ChartConfig["default"].crMiniHLConfig;
 
-var _assign = Object.assign,
-    _isStr = function _isStr(str) {
+var _isStr = function _isStr(str) {
   return typeof str === 'string';
 };
 
-var _crSeriaOption = function _crSeriaOption(color, option) {
-  return _assign({
+var _crSeriaOption = function _crSeriaOption(color) {
+  return {
     type: 'line',
     visible: false,
     color: color,
@@ -36,12 +32,22 @@ var _crSeriaOption = function _crSeriaOption(color, option) {
       radius: 3,
       symbol: "circle"
     }
-  }, option);
+  };
 };
 
-var _crScatterBottomSeria = function _crScatterBottomSeria(crSeria, data, min, max) {
-  setYToPoints(data, calcMinY(min, max));
-  return crSeria(data);
+var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data) {
+  return {
+    type: 'scatter',
+    color: color,
+    data: data,
+    tooltip: fTooltip(pointFormatter)
+  };
+},
+    _crDividendSeria = function _crDividendSeria(data) {
+  return _crScatterSeria(_Color["default"].EX_DIVIDEND, _Tooltip["default"].exDividend, data);
+},
+    _crSplitRatioSeria = function _crSplitRatioSeria(data) {
+  return _crScatterSeria(_Color["default"].SPLIT_RATIO, _Tooltip["default"].splitRatio, data);
 };
 
 var ConfigStockSlice = {
@@ -87,23 +93,15 @@ var ConfigStockSlice = {
   },
   //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
   addDividend: function addDividend(data, min, max) {
-    if (data.length > 0) {
-      var seria = _crScatterBottomSeria(crDividendSeria, data, min, max);
+    var seria = _crDividendSeria(data);
 
-      this._addScatterBottom(seria, 'Dividend');
-    }
-
-    return this;
+    return this._addScatterBottom(seria, 'Dividend', min, max);
   },
   //Used only by Quandl EOD
   addSplitRatio: function addSplitRatio(data, min, max) {
-    if (data.length > 0) {
-      var seria = _crScatterBottomSeria(crSplitRatioSeria, data, min, max);
+    var seria = _crSplitRatioSeria(data);
 
-      this._addScatterBottom(seria, 'Split Ratio');
-    }
-
-    return this;
+    return this._addScatterBottom(seria, 'Split Ratio', min, max);
   },
   addMiniVolume: function addMiniVolume(option) {
     var dVolume = option.dVolume;
