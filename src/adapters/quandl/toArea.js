@@ -81,7 +81,7 @@ const toArea = function(json, option){
    } = option;
 
    const {
-     seria, minPoint, maxPoint,
+     seria, minY, maxY,
      dataExDividend, dataSplitRatio,
      dataVolume, dataVolumeColumn,
      dataATH, dataHighLow,
@@ -98,8 +98,9 @@ const toArea = function(json, option){
 
    config = ConfigBuilder(config)
      .addCaption(title, subtitle)
-     .setMinMax(minPoint, maxPoint, isNotZoomToMinMax)
-     .setMinMaxDeltas(minPoint, maxPoint, seria, isDrawDeltaExtrems)
+     .addMinMax(seria, {
+        minY, maxY, isNotZoomToMinMax, isDrawDeltaExtrems
+      })          
      .add({
        valueMoving: valueMoving(seria, dfR),
        zhConfig: createZhConfig(option),
@@ -108,8 +109,8 @@ const toArea = function(json, option){
      .addZhPointsIf(zhPoints, 'zhIsMfi', _isMfi(columnNames))
      .addZhPointsIf(zhPoints, 'zhIsMomAth', _isMomAth(columnNames))
      .addLegend(legend)
-     .addDividend(dataExDividend, minPoint, maxPoint)
-     .addSplitRatio(dataSplitRatio, minPoint, maxPoint)
+     .addDividend(dataExDividend, minY, maxY)
+     .addSplitRatio(dataSplitRatio, minY, maxY)
      .addMiniVolume({
        id: chartId,
        dColumn: dataVolumeColumn,

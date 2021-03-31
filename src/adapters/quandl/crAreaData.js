@@ -26,7 +26,8 @@ const {
 
 const _assign = Object.assign
 , _isUndef = v => typeof v === 'undefined'
-, _notNull2 = (a, b) => a !== null && b !== null;
+, _notNull2 = (a, b) => a !== null && b !== null
+, _isNumber = n => typeof n === 'number' && n-n === 0;
 
 const _fnConvertToUTC = function(point, result){
    const arrDate = point[0].split('-');
@@ -36,13 +37,11 @@ const _fnConvertToUTC = function(point, result){
 };
 
 const _fnCheckExtrems = function(result){
-  const {point, yPointIndex, maxPoint, minPoint} = result
+  const {point, yPointIndex, maxY, minY} = result
   , value = point[yPointIndex];
-  if (!(value == null) && value>maxPoint){
-    result.maxPoint = value;
-  }
-  if (!(value == null) && value<minPoint) {
-    result.minPoint = value;
+  if (_isNumber(value)){
+    if (value>maxY) { result.maxY = value; }
+    if (value<minY) { result.minY = value; }
   }
   return result;
 };
@@ -206,8 +205,8 @@ const _crPointFlow = function(json, option){
 
   , result = {
      yPointIndex,
-     minPoint : Number.POSITIVE_INFINITY,
-     maxPoint : Number.NEGATIVE_INFINITY,
+     minY : Number.POSITIVE_INFINITY,
+     maxY : Number.NEGATIVE_INFINITY,
      seria : [],
      dataVolume : [], dataVolumeColumn : [],
      dataExDividend : [], dataSplitRatio : [],

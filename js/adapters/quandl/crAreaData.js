@@ -35,6 +35,9 @@ var _assign = Object.assign,
 },
     _notNull2 = function _notNull2(a, b) {
   return a !== null && b !== null;
+},
+    _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
 };
 
 var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
@@ -47,16 +50,18 @@ var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
 var _fnCheckExtrems = function _fnCheckExtrems(result) {
   var point = result.point,
       yPointIndex = result.yPointIndex,
-      maxPoint = result.maxPoint,
-      minPoint = result.minPoint,
+      maxY = result.maxY,
+      minY = result.minY,
       value = point[yPointIndex];
 
-  if (!(value == null) && value > maxPoint) {
-    result.maxPoint = value;
-  }
+  if (_isNumber(value)) {
+    if (value > maxY) {
+      result.maxY = value;
+    }
 
-  if (!(value == null) && value < minPoint) {
-    result.minPoint = value;
+    if (value < minY) {
+      result.minY = value;
+    }
   }
 
   return result;
@@ -269,8 +274,8 @@ var _crPointFlow = function _crPointFlow(json, option) {
       splitRatio = findColumnIndex(columnNames, _C["default"].SPLIT_RATIO),
       result = {
     yPointIndex: yPointIndex,
-    minPoint: Number.POSITIVE_INFINITY,
-    maxPoint: Number.NEGATIVE_INFINITY,
+    minY: Number.POSITIVE_INFINITY,
+    maxY: Number.NEGATIVE_INFINITY,
     seria: [],
     dataVolume: [],
     dataVolumeColumn: [],

@@ -104,8 +104,8 @@ var toArea = function toArea(json, option) {
 
   var _crAreaData = (0, _crAreaData2["default"])(json, option),
       seria = _crAreaData.seria,
-      minPoint = _crAreaData.minPoint,
-      maxPoint = _crAreaData.maxPoint,
+      minY = _crAreaData.minY,
+      maxY = _crAreaData.maxY,
       dataExDividend = _crAreaData.dataExDividend,
       dataSplitRatio = _crAreaData.dataSplitRatio,
       dataVolume = _crAreaData.dataVolume,
@@ -126,11 +126,16 @@ var toArea = function toArea(json, option) {
 
   var legend = _addSeriesTo(config, legendSeries);
 
-  config = (0, _ConfigBuilder["default"])(config).addCaption(title, subtitle).setMinMax(minPoint, maxPoint, isNotZoomToMinMax).setMinMaxDeltas(minPoint, maxPoint, seria, isDrawDeltaExtrems).add({
+  config = (0, _ConfigBuilder["default"])(config).addCaption(title, subtitle).addMinMax(seria, {
+    minY: minY,
+    maxY: maxY,
+    isNotZoomToMinMax: isNotZoomToMinMax,
+    isDrawDeltaExtrems: isDrawDeltaExtrems
+  }).add({
     valueMoving: valueMoving(seria, dfR),
     zhConfig: createZhConfig(option),
     info: createDatasetInfo(json)
-  }).addZhPointsIf(zhPoints, 'zhIsMfi', _isMfi(columnNames)).addZhPointsIf(zhPoints, 'zhIsMomAth', _isMomAth(columnNames)).addLegend(legend).addDividend(dataExDividend, minPoint, maxPoint).addSplitRatio(dataSplitRatio, minPoint, maxPoint).addMiniVolume({
+  }).addZhPointsIf(zhPoints, 'zhIsMfi', _isMfi(columnNames)).addZhPointsIf(zhPoints, 'zhIsMomAth', _isMomAth(columnNames)).addLegend(legend).addDividend(dataExDividend, minY, maxY).addSplitRatio(dataSplitRatio, minY, maxY).addMiniVolume({
     id: chartId,
     dColumn: dataVolumeColumn,
     dVolume: dataVolume
