@@ -284,32 +284,10 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
   crTpId: function crTpId() {
     return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 9)).toUpperCase();
   },
-  setMinMaxPlotLines: function setMinMaxPlotLines(_ref6) {
+  setPlotLinesMinMax: function setPlotLinesMinMax(_ref6) {
     var plotLines = _ref6.plotLines,
         min = _ref6.min,
-        max = _ref6.max,
-        value = _ref6.value,
-        isDrawDeltaExtrems = _ref6.isDrawDeltaExtrems;
-
-    if (isDrawDeltaExtrems) {
-      ChartFn.setPlotLinesDeltas({
-        plotLines: plotLines,
-        min: min,
-        max: max,
-        value: value
-      });
-    } else {
-      ChartFn.setPlotLinesMinMax({
-        plotLines: plotLines,
-        min: min,
-        max: max
-      });
-    }
-  },
-  setPlotLinesMinMax: function setPlotLinesMinMax(_ref7) {
-    var plotLines = _ref7.plotLines,
-        min = _ref7.min,
-        max = _ref7.max;
+        max = _ref6.max;
 
     if (max > Number.NEGATIVE_INFINITY) {
       _setPlotLine(plotLines[0], max);
@@ -319,11 +297,11 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
       _setPlotLine(plotLines[1], min);
     }
   },
-  setPlotLinesDeltas: function setPlotLinesDeltas(_ref8) {
-    var plotLines = _ref8.plotLines,
-        min = _ref8.min,
-        max = _ref8.max,
-        value = _ref8.value;
+  setPlotLinesDeltas: function setPlotLinesDeltas(_ref7) {
+    var plotLines = _ref7.plotLines,
+        min = _ref7.min,
+        max = _ref7.max,
+        value = _ref7.value;
 
     var _bMax = max !== Number.NEGATIVE_INFINITY ? (0, _big["default"])(max) : (0, _big["default"])(0),
         _bMin = min !== Number.POSITIVE_INFINITY ? (0, _big["default"])(min) : (0, _big["default"])(0),

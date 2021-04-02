@@ -1,8 +1,8 @@
 import Big from 'big.js';
 
-import mathFn from '../math/mathFn'
-import formatNumber from '../utils/formatNumber'
-import formatAllNumber from '../utils/formatAllNumber'
+import mathFn from '../math/mathFn';
+import formatNumber from '../utils/formatNumber';
+import formatAllNumber from '../utils/formatAllNumber';
 
 import fnArr from '../utils/fnArr';
 import DateUtils from '../utils/DateUtils';
@@ -11,9 +11,9 @@ import Chart from './Chart';
 
 import { Direction } from '../constants/Type';
 
-import WithAreaChartFn from './WithAreaChartFn'
-import calcDeltaYAxis from './calcDeltaYAxis'
-import dateFormat from './dateFormat'
+import WithAreaChartFn from './WithAreaChartFn';
+import calcDeltaYAxis from './calcDeltaYAxis';
+import dateFormat from './dateFormat';
 
 const { toDmy, toTdmy, toTdmyIf } = dateFormat;
 
@@ -50,7 +50,7 @@ const _initOptionsZhSeries = chart => {
     titleEls: []
   }, options.zhSeries)
   return options;
-}
+};
 
 const _crYAxisColor = chart => {
   switch(chart.yAxis.length){
@@ -58,7 +58,7 @@ const _crYAxisColor = chart => {
     case 2: return C.C2_SECOND_Y_AXIS;
     default: return C.C1_SECOND_Y_AXIS;
   }
-}
+};
 
 const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
   let _color;
@@ -84,7 +84,7 @@ const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
     chart.addSeries(series, true, true)
   }
   return _color;
-}
+};
 
 const _calcXyForLabel = options => {
   const seriesCount = options.zhSeries.count
@@ -94,7 +94,7 @@ const _calcXyForLabel = options => {
         - row*(C.SERIA_LABEL_WIDTH*C.SERIA_LABELS_IN_ROW)
   , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
   return { x, y };
-}
+};
 const _renderSeriesLabel = ({ chart, options, series, label='', color }) => {
   const seriesText = (label.length>C.SERIA_LABEL_CHARS)
     ? label.substring(0, C.SERIA_LABEL_CHARS)
@@ -123,7 +123,7 @@ const _updateYAxisMinMax = ({ hasSecondYAxis, series, options, chart }) => {
     , _maxE = _isNumber(_max) ? _max : null;
     _yAxis.setExtremes(_minE, _maxE, true)
   }
-}
+};
 
 const _formatNumber = n => formatAllNumber(toFixedNumber(n));
 const _setPlotLine = (plotLine, value, delta='') => {
@@ -218,14 +218,6 @@ const ChartFn = {
       .toUpperCase();
   },
 
-  setMinMaxPlotLines({ plotLines, min, max, value, isDrawDeltaExtrems}){
-    if (isDrawDeltaExtrems) {
-      ChartFn.setPlotLinesDeltas({ plotLines, min, max, value })
-    } else {
-      ChartFn.setPlotLinesMinMax({ plotLines, min, max})
-    }
-  },
-
   setPlotLinesMinMax: ({ plotLines, min, max }) => {
     if ( max>Number.NEGATIVE_INFINITY ){
       _setPlotLine(plotLines[0], max)
@@ -266,6 +258,6 @@ const ChartFn = {
     }
   }
 
-}
+};
 
 export default ChartFn
