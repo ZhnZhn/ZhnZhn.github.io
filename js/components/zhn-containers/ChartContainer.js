@@ -271,13 +271,11 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
             zhConfig = _config$zhConfig === void 0 ? {} : _config$zhConfig,
             id = zhConfig.id,
             zhCompType = zhConfig.zhCompType;
-        return _ItemFactory["default"].createItem({
+        return _ItemFactory["default"].crItem({
           store: store,
           config: config,
           index: index,
-          option: {
-            chartType: chartType
-          },
+          chartType: chartType,
           props: {
             ref: !zhCompType ? _this._refChart.bind(null, index) : void 0,
             onCloseItem: onCloseItem.bind(null, chartType, browserType, id),

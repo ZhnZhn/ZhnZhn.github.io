@@ -4,17 +4,26 @@ import CA from '../../flux/actions/ComponentActions';
 import CHA from '../../flux/actions/ChartActions';
 import { CompItemType as CIT } from '../../constants/Type';
 
-import Item from '../items/Items'
+import Item from '../items/Items';
+
+const {
+  crValueMoving,
+  crId
+} = ChartFn;
+
+const _getIdKey = (config, index) => {
+  const { zhConfig } = config
+  , { id, key } = zhConfig || {};
+  return [id || `Id:${index}`, key || id || crId()];
+};
 
 const _crAreaChart = function({
-  store, config, index, option, props
+  config, index, chartType, props, store
 }) {
-  const { zhConfig={} } = config
-     ,  { key, id=`Id:${index}` } = zhConfig
-     ,  { chartType } = option;
+  const [id, key] = _getIdKey(config, index);
   return (
     <Item.AreaChart
-       key={key || id}
+       key={key}
        chartType={chartType}
        caption={id}
        config={config}
@@ -22,8 +31,7 @@ const _crAreaChart = function({
        onShowConfigDialog={CA.showConfigChart}
        onAddToWatch={CA.showAddToWatch}
        {...props}
-       crValueMoving={ChartFn.crValueMoving}
-
+       crValueMoving={crValueMoving}
        onToTop={CHA.toTop.bind(null, chartType, id)}
        onCopy={CHA.copy}
        onPasteToDialog={CA.showPasteTo}
@@ -35,11 +43,9 @@ const _crAreaChart = function({
 };
 
 const _crMapChart = function({
-  store, config, index, option, props
+  config, index, chartType, props
 }) {
-  const { zhConfig={} } = config
-     ,  { id=`Id:${index}`, key=index } = zhConfig
-     ,  { chartType } = option;
+  const [id, key] = _getIdKey(config, index);
   return(
     <Item.MapChart
        key={key}
@@ -69,8 +75,8 @@ const _rCrItem = {
 };
 
 const ItemFactory = {
-  /* { store, config, index, option, props } */
-  createItem(itemOptions){
+  /* { config, index, chartType, props, store } */
+  crItem(itemOptions){
     const { config } = itemOptions
     , { zhCompType } = config || {}
     , _crItem = _rCrItem[zhCompType] || _rCrItem.DF;

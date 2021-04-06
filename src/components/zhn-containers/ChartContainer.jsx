@@ -245,10 +245,10 @@ class ChartContainer extends Component {
      return configs.map((config, index) => {
        const { zhConfig={} } = config
            , { id, zhCompType } = zhConfig;
-       return ItemFactory.createItem({
+       return ItemFactory.crItem({
           store,
           config, index,
-          option: { chartType },
+          chartType,
           props: {
             ref: !zhCompType ? this._refChart.bind(null, index) : void 0,
             onCloseItem: onCloseItem.bind(null, chartType, browserType, id),

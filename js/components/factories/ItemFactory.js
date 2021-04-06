@@ -21,18 +21,29 @@ var _Items = _interopRequireDefault(require("../items/Items"));
 
 var _rCrItem2;
 
-var _crAreaChart = function _crAreaChart(_ref) {
-  var store = _ref.store,
-      config = _ref.config,
-      index = _ref.index,
-      option = _ref.option,
-      props = _ref.props;
-  var _config$zhConfig = config.zhConfig,
-      zhConfig = _config$zhConfig === void 0 ? {} : _config$zhConfig,
-      key = zhConfig.key,
-      _zhConfig$id = zhConfig.id,
-      id = _zhConfig$id === void 0 ? "Id:" + index : _zhConfig$id,
-      chartType = option.chartType;
+var crValueMoving = _ChartFn["default"].crValueMoving,
+    crId = _ChartFn["default"].crId;
+
+var _getIdKey = function _getIdKey(config, index) {
+  var zhConfig = config.zhConfig,
+      _ref = zhConfig || {},
+      id = _ref.id,
+      key = _ref.key;
+
+  return [id || "Id:" + index, key || id || crId()];
+};
+
+var _crAreaChart = function _crAreaChart(_ref2) {
+  var config = _ref2.config,
+      index = _ref2.index,
+      chartType = _ref2.chartType,
+      props = _ref2.props,
+      store = _ref2.store;
+
+  var _getIdKey2 = _getIdKey(config, index),
+      id = _getIdKey2[0],
+      key = _getIdKey2[1];
+
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items["default"].AreaChart, (0, _extends2["default"])({
     chartType: chartType,
     caption: id,
@@ -41,29 +52,26 @@ var _crAreaChart = function _crAreaChart(_ref) {
     onShowConfigDialog: _ComponentActions["default"].showConfigChart,
     onAddToWatch: _ComponentActions["default"].showAddToWatch
   }, props, {
-    crValueMoving: _ChartFn["default"].crValueMoving,
+    crValueMoving: crValueMoving,
     onToTop: _ChartActions["default"].toTop.bind(null, chartType, id),
     onCopy: _ChartActions["default"].copy,
     onPasteToDialog: _ComponentActions["default"].showPasteTo,
     onZoom: _ComponentActions["default"].zoom,
     getCopyFromChart: store.getCopyFromChart.bind(store),
     ChartFn: _ChartFn["default"]
-  }), key || id);
+  }), key);
 };
 
-var _crMapChart = function _crMapChart(_ref2) {
-  var store = _ref2.store,
-      config = _ref2.config,
-      index = _ref2.index,
-      option = _ref2.option,
-      props = _ref2.props;
-  var _config$zhConfig2 = config.zhConfig,
-      zhConfig = _config$zhConfig2 === void 0 ? {} : _config$zhConfig2,
-      _zhConfig$id2 = zhConfig.id,
-      id = _zhConfig$id2 === void 0 ? "Id:" + index : _zhConfig$id2,
-      _zhConfig$key = zhConfig.key,
-      key = _zhConfig$key === void 0 ? index : _zhConfig$key,
-      chartType = option.chartType;
+var _crMapChart = function _crMapChart(_ref3) {
+  var config = _ref3.config,
+      index = _ref3.index,
+      chartType = _ref3.chartType,
+      props = _ref3.props;
+
+  var _getIdKey3 = _getIdKey(config, index),
+      id = _getIdKey3[0],
+      key = _getIdKey3[1];
+
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items["default"].MapChart, (0, _extends2["default"])({
     chartType: chartType,
     caption: id,
@@ -72,10 +80,10 @@ var _crMapChart = function _crMapChart(_ref2) {
 };
 
 var _fItem = function _fItem(Comp) {
-  return function (_ref3) {
-    var _ref3$config = _ref3.config,
-        config = _ref3$config === void 0 ? {} : _ref3$config,
-        props = _ref3.props;
+  return function (_ref4) {
+    var _ref4$config = _ref4.config,
+        config = _ref4$config === void 0 ? {} : _ref4$config,
+        props = _ref4.props;
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, (0, _extends2["default"])({
       config: config
     }, props), config.id);
@@ -87,11 +95,11 @@ var _rCrItem = (_rCrItem2 = {
 }, _rCrItem2[_Type.CompItemType.EUROSTAT_MAP] = _crMapChart, _rCrItem2[_Type.CompItemType.TABLE] = _fItem(_Items["default"].Table), _rCrItem2[_Type.CompItemType.ALPHA_PERF] = _fItem(_Items["default"].AlphaPerf), _rCrItem2[_Type.CompItemType.INFO_ITEM] = _fItem(_Items["default"].InfoItem), _rCrItem2[_Type.CompItemType.TW_LIST] = _fItem(_Items["default"].TwList), _rCrItem2);
 
 var ItemFactory = {
-  /* { store, config, index, option, props } */
-  createItem: function createItem(itemOptions) {
+  /* { config, index, chartType, props, store } */
+  crItem: function crItem(itemOptions) {
     var config = itemOptions.config,
-        _ref4 = config || {},
-        zhCompType = _ref4.zhCompType,
+        _ref5 = config || {},
+        zhCompType = _ref5.zhCompType,
         _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
 
     return _crItem(itemOptions);
