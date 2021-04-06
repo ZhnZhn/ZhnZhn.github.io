@@ -14,7 +14,8 @@ var roundBy = _mathFn["default"].roundBy,
     calcPercent = _mathFn["default"].calcPercent,
     crValueMoving = _mathFn["default"].crValueMoving,
     toFixed = _mathFn["default"].toFixed,
-    toFixedNumber = _mathFn["default"].toFixedNumber;
+    toFixedNumber = _mathFn["default"].toFixedNumber,
+    crId = _mathFn["default"].crId;
 var PERCENT_0 = '0.00%';
 var PERCENT_100 = '100.00%';
 
@@ -198,6 +199,26 @@ describe('toFixedNumber', function () {
     expect(fn(NaN)).toBe(NaN);
     expect(fn()).toBe(undefined);
     expect(fn(null)).toBe(null);
+  });
+});
+describe('crId', function () {
+  var fn = crId;
+  test('should return str with 15 length for empty prefix', function () {
+    var id = fn();
+    expect(typeof id).toBe('string');
+    expect(id.length).toBe(15);
+  });
+  test('should use prefix parameter', function () {
+    var prefix = 'ABC_',
+        id = fn(prefix);
+    expect(id.substring(0, prefix.length)).toBe(prefix);
+  });
+  test('should return unique id', function () {
+    var id1 = fn(),
+        id2 = fn(),
+        id3 = fn();
+    expect(id1).not.toBe(id2);
+    expect(id2).not.toBe(id3);
   });
 });
 //# sourceMappingURL=mathFn.test.js.map

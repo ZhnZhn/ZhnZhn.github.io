@@ -34,7 +34,8 @@ var toDmy = _dateFormat["default"].toDmy,
     toTdmyIf = _dateFormat["default"].toTdmyIf;
 var _crValueMoving = _mathFn["default"].crValueMoving,
     toFixedNumber = _mathFn["default"].toFixedNumber,
-    calcPercent = _mathFn["default"].calcPercent;
+    calcPercent = _mathFn["default"].calcPercent,
+    crId = _mathFn["default"].crId;
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
@@ -281,8 +282,9 @@ var ChartFn = (0, _extends2["default"])({}, _WithAreaChartFn["default"], {
   },
   toNumberFormat: _formatNumber2["default"],
   toNumberFormatAll: _formatAllNumber["default"],
+  crId: crId,
   crTpId: function crTpId() {
-    return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 9)).toUpperCase();
+    return crId('TP_');
   },
   setPlotLinesMinMax: function setPlotLinesMinMax(_ref6) {
     var plotLines = _ref6.plotLines,

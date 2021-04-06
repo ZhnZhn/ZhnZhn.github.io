@@ -20,7 +20,8 @@ const { toDmy, toTdmy, toTdmyIf } = dateFormat;
 const {
   crValueMoving,
   toFixedNumber,
-  calcPercent
+  calcPercent,
+  crId
 } = mathFn;
 
 const _isFn = fn => typeof fn === 'function'
@@ -209,14 +210,8 @@ const ChartFn = {
   toNumberFormat: formatNumber,
   toNumberFormatAll: formatAllNumber,
 
-  crTpId: () => {
-    return (
-       'TP_' +
-        Date.now().toString(36) +
-        Math.random().toString(36).substring(2, 9)
-      )
-      .toUpperCase();
-  },
+  crId,
+  crTpId: () => crId('TP_'),
 
   setPlotLinesMinMax: ({ plotLines, min, max }) => {
     if ( max>Number.NEGATIVE_INFINITY ){
