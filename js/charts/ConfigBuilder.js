@@ -161,9 +161,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     var xAxis = (0, _extends2["default"])({}, C.CATEGORIES_X_AXIS, {
       categories: categories
     });
-    this.add('xAxis', xAxis);
-    this.add('yAxis', C.CATEGORIES_Y_AXIS);
-    return this;
+    return this.add('xAxis', xAxis).add('yAxis', C.CATEGORIES_Y_AXIS);
   },
   barOrColumnConfig: function barOrColumnConfig(type, categories, option) {
     if (categories === void 0) {
@@ -204,25 +202,12 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
   },
   add: function add(propName, option) {
     if (_isStr(propName)) {
-      var _to = this.config[propName];
-
-      if (_isObj(_to)) {
-        _assign(_to, option);
-      } else {
-        this.config[propName] = option;
-      }
+      _assignTo(this.config, propName, option);
     } else if (_isObj(propName)) {
       var _propName;
 
       for (_propName in propName) {
-        var _to2 = this.config[_propName],
-            _from = propName[_propName];
-
-        if (_to2) {
-          _assign(_to2, _from);
-        } else {
-          this.config[_propName] = _from;
-        }
+        _assignTo(this.config, _propName, propName[_propName]);
       }
     }
 
@@ -326,7 +311,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     return this;
   },
   _disableAnimation: function _disableAnimation() {
-    return this.add({
+    this.add({
       chart: {
         animation: false
       },
@@ -346,8 +331,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
     if (data.length > 3000) {
       this._disableAnimation();
     }
-
-    return this;
   },
   toConfig: function toConfig() {
     this._checkDataLength();

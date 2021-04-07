@@ -116,6 +116,7 @@
   },
   "jest": {
     "roots": [
+      "<rootDir>/js/charts",
       "<rootDir>/js/charts/plugin",
       "<rootDir>/js/utils/",
       "<rootDir>/js/math/",
@@ -130,6 +131,7 @@
       "<rootDir>/js/flux/stores/"
     ],
     "transformIgnorePatterns": [
+      "<rootDir>/js/charts",
       "<rootDir>/js/charts/plugin",
       "<rootDir>/js/utils/",
       "<rootDir>/js/math/",

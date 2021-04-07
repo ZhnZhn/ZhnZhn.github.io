@@ -128,16 +128,15 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   categoryConfig(categories=[]){
     this.config = crAreaConfig()
     const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}
-    this.add('xAxis', xAxis)
-    this.add('yAxis', C.CATEGORIES_Y_AXIS)
-    return this;
+    return this.add('xAxis', xAxis)
+      .add('yAxis', C.CATEGORIES_Y_AXIS);
   },
   barOrColumnConfig(type, categories=[], option){
     const _crConfig = type === 'BAR'
       ? Factory.crBarConfig
       : Factory.crColumnConfig;
     this.config = _crConfig(option)
-    return this.add('xAxis', { categories })
+    return this.add('xAxis', { categories });
   },
   treeMapConfig(){
     this.config = crTreeMapConfig()
@@ -165,22 +164,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
 
   add(propName, option){
     if (_isStr(propName)){
-      const _to = this.config[propName];
-      if (_isObj(_to)) {
-        _assign(_to, option)
-      } else {
-        this.config[propName] = option
-      }
+      _assignTo(this.config, propName, option)
     } else if (_isObj(propName)){
       let _propName;
       for (_propName in propName){
-        const _to = this.config[_propName]
-            , _from = propName[_propName];
-        if (_to) {
-          _assign(_to, _from)
-        } else {
-          this.config[_propName] = _from
-        }
+        _assignTo(this.config, _propName, propName[_propName])
       }
     }
     return this;
@@ -275,7 +263,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   _disableAnimation(){
-    return this.add({
+    this.add({
       chart: { animation: false },
       plotOptions: { series: { animation: false }},
       zhConfig: { withoutAnimation: true }
@@ -287,7 +275,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     if (data.length > 3000){
       this._disableAnimation()
     }
-    return this;
   },
 
   toConfig(){
