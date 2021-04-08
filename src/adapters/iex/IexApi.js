@@ -27,10 +27,11 @@ const _urlDividends = (option) => {
 };
 
 const _urlChart = (option) => {
-  const { items=[], one, two } = option
+  const { items=[], one, two, value, dfPeriod } = option
   // one, two deprecated option remains for watch compatibility
-  , symbol = one || getValue(items[0], { dfValue: C.DF_SYMBOL})
-  , period = two || getValue(items[1], { dfValue: C.DF_PERIOD });
+  // value, dfPeriod for stock by sector
+  , symbol = one || value || getValue(items[0], { dfValue: C.DF_SYMBOL})
+  , period = two || dfPeriod || getValue(items[1], { dfValue: C.DF_PERIOD });
   _assign(option, { symbol, period })
   return `${C.BASE_URL}/${symbol}/chart/${period}`;
 };

@@ -42,10 +42,12 @@ var _urlChart = function _urlChart(option) {
       items = _option$items3 === void 0 ? [] : _option$items3,
       one = option.one,
       two = option.two,
-      symbol = one || getValue(items[0], {
+      value = option.value,
+      dfPeriod = option.dfPeriod,
+      symbol = one || value || getValue(items[0], {
     dfValue: C.DF_SYMBOL
   }),
-      period = two || getValue(items[1], {
+      period = two || dfPeriod || getValue(items[1], {
     dfValue: C.DF_PERIOD
   });
 
