@@ -90,7 +90,7 @@ var SOURCE_OPTIONS = [{
   value: 'AL',
   dfProps: {
     dfSubId: 'I',
-    indicator: 'TIME_SERIES_DAILY',
+    dfFn: 'TIME_SERIES_DAILY',
     interval: 'Daily',
     outputsize: 'compact'
   }
@@ -164,13 +164,13 @@ var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
       var _this$props = _this.props,
           data = _this$props.data,
           onClose = _this$props.onClose,
-          _data$item = data.item,
-          item = _data$item === void 0 ? {} : _data$item,
+          item = data.item,
           browserType = data.browserType,
           chartContainerType = data.chartContainerType,
           dialogProps = data.dialogProps,
-          id = item.id,
-          text = item.text,
+          _ref2 = item || {},
+          id = _ref2.id,
+          text = _ref2.text,
           _this$_getDataSource = _this._getDataSource(),
           caption = _this$_getDataSource.caption,
           value = _this$_getDataSource.value,
@@ -182,10 +182,10 @@ var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
       }, (0, _extends2["default"])({
         title: text,
         value: id,
-        ticket: id,
         item: item,
         loadId: value,
         id: id,
+        _itemKey: id + "_" + value,
         linkFn: 'NASDAQ',
         dataSource: caption
       }, dialogProps, dfProps));
@@ -236,10 +236,10 @@ var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
         isShow = _this$props2.isShow,
         data = _this$props2.data,
         onClose = _this$props2.onClose,
-        _ref2 = data || {},
-        item = _ref2.item,
-        _ref3 = item || {},
-        text = _ref3.text,
+        _ref3 = data || {},
+        item = _ref3.item,
+        _ref4 = item || {},
+        text = _ref4.text,
         _this$state = this.state,
         isShowLabels = _this$state.isShowLabels,
         isShowLink = _this$state.isShowLink,

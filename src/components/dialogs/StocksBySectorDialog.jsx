@@ -64,7 +64,7 @@ const SOURCE_OPTIONS = [
     value: 'AL',
     dfProps: {
       dfSubId: 'I',
-      indicator: 'TIME_SERIES_DAILY',
+      dfFn: 'TIME_SERIES_DAILY',
       interval: 'Daily',
       outputsize: 'compact'
     }
@@ -161,8 +161,8 @@ class StocksBySectorDialog extends Component {
 
   _hLoad = () => {
     const { data, onClose } = this.props
-    , { item={}, browserType, chartContainerType, dialogProps } = data
-    , { id, text } = item
+    , { item, browserType, chartContainerType, dialogProps } = data
+    , { id, text } = item || {}
     , { caption, value, dfProps } = this._getDataSource();
 
     ChartActions.loadStock(
@@ -171,10 +171,10 @@ class StocksBySectorDialog extends Component {
       },{
          title: text,
          value: id,
-         ticket: id,
          item: item,
          loadId: value,
          id: id,
+         _itemKey: `${id}_${value}`,
          linkFn: 'NASDAQ',
          dataSource: caption,
          ...dialogProps,
