@@ -114,16 +114,25 @@ var _s123FnUrl = function _s123FnUrl(option) {
       _seriaId = _crSeriaId(option, getValue(items[0]), getValue(items[1]), getValue(items[2]));
 
   return _crUrl(_seriaId, option);
+}; //IMF WEO
+
+
+var _isIdWorldFrom2021Realease = function _isIdWorldFrom2021Realease(id, realease) {
+  return id === '001' && parseInt(realease.substring(0, 4), 10) > 2020;
 };
 
 var _s3S12FnUrl = function _s3S12FnUrl(option) {
   var items = option.items,
       dfCode = option.dfCode,
       subtitle = option.subtitle,
-      _seriaId = _crSeriaId(option, getValue(items[0]), getValue(items[1]));
+      v1 = getValue(items[0]),
+      v2 = getValue(items[1]),
+      v3 = getValue(items[2]),
+      _v1 = _isIdWorldFrom2021Realease(v1, v3) ? '1' : v1,
+      _seriaId = _crSeriaId(option, _v1, v2);
 
   _assign(option, {
-    dfCode: dfCode + ":" + getValue(items[2]),
+    dfCode: dfCode + ":" + v3,
     subtitle: (subtitle || []).split(':')[0] || ''
   });
 
