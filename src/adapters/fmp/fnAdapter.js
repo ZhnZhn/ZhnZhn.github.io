@@ -5,9 +5,8 @@ const {
   getFromDate,
   getCaption,
   getValue,
-  joinBy,
+  joinBy,  
   ymdToUTC,
-  crItemLink,
   compareByDate,
   crItemConf,
   crValueConf
@@ -47,12 +46,9 @@ const _crHistZhConfig = (data, option) => ({
 const _crName = items => items
   .map(getCaption)
   .join(': ');
-const _crDescription = crItemLink
-  .bind(null, 'Financial Modeling Prep');
 
 const _crInfo = ({ items, _itemUrl }) => ({
-  name: _crName(items),
-  description: _crDescription(_itemUrl)
+  name: _crName(items)
 });
 
 const fnAdapter = {

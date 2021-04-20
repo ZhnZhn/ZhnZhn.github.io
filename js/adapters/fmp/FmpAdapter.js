@@ -14,7 +14,8 @@ var _toHistorical = _interopRequireDefault(require("./toHistorical"));
 var _rAdapter = {
   _pn: 'dfPn',
   DF: _toChart["default"],
-  historical: _toHistorical["default"]
+  historical: _toHistorical["default"],
+  intraday: _toHistorical["default"]
 },
     FmpAdapter = (0, _crAdapterRouter["default"])(_rAdapter);
 var _default = FmpAdapter;

@@ -67,9 +67,27 @@ const _assignHp = option => {
   })
 };
 
+const _assignCp = option => {
+  const {
+     dfT, items=[]
+  } = option
+  , _symbol = getValue(items[0], {isUpper: true})
+  , _interval = getValue(items[1])
+  , _itemUrl = `${C.URI}/${dfT}/${_interval}/${_symbol}`;
+
+  _assign(option, {
+    _symbol,
+    _itemUrl,
+    _propName: 'close',
+    itemCaption: _symbol,
+    dataSource: _crDataSource(option)
+  })
+};
+
 const _rAssign = {
   DF: _assignDf,
-  historical: _assignHp
+  historical: _assignHp,
+  intraday: _assignCp
 };
 
 const FmpApi = {
@@ -77,14 +95,17 @@ const FmpApi = {
     const _assignTo = _rAssign[option.dfPn]
       || _rAssign.DF;
     _assignTo(option)
-    const { apiKey } = option;
-    return `${option._itemUrl}&apikey=${apiKey}`;
+    const { apiKey } = option
+    , _delimeter = option._itemUrl.indexOf('?') === -1
+         ? '?' : '&';
+    return `${option._itemUrl}${_delimeter}apikey=${apiKey}`;
   },
 
   checkResponse(json, options){
     const { dfPn, _symbol } = options
     , _json = json || {};
-    if (!dfPn && _isArr(_json) && _json[0].symbol === _symbol
+    if (!dfPn && _isArr(json) && _json[0].symbol === _symbol
+     || dfPn === 'intraday' && _isArr(_json)
      || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
        return true;
     }

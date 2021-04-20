@@ -15,7 +15,6 @@ var crError = _AdapterFn["default"].crError,
     getValue = _AdapterFn["default"].getValue,
     joinBy = _AdapterFn["default"].joinBy,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    crItemLink = _AdapterFn["default"].crItemLink,
     compareByDate = _AdapterFn["default"].compareByDate,
     crItemConf = _AdapterFn["default"].crItemConf,
     crValueConf = _AdapterFn["default"].crValueConf;
@@ -58,14 +57,11 @@ var _crName = function _crName(items) {
   return items.map(getCaption).join(': ');
 };
 
-var _crDescription = crItemLink.bind(null, 'Financial Modeling Prep');
-
 var _crInfo = function _crInfo(_ref2) {
   var items = _ref2.items,
       _itemUrl = _ref2._itemUrl;
   return {
-    name: _crName(items),
-    description: _crDescription(_itemUrl)
+    name: _crName(items)
   };
 };
 

@@ -4,8 +4,8 @@ import crAdapterOHLCV  from '../crAdapterOHLCV'
 const { crCaption, crHistOption } = fnAdapter
 
 const _getData = (json, option) => {
-  const { dfPn } = option
-  return json[dfPn].reverse();
+  const { dfPn } = option;  
+  return (json[dfPn] || json).reverse();
 };
 
 const toChart = crAdapterOHLCV({

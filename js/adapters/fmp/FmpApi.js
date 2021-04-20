@@ -82,9 +82,29 @@ var _assignHp = function _assignHp(option) {
   });
 };
 
+var _assignCp = function _assignCp(option) {
+  var dfT = option.dfT,
+      _option$items3 = option.items,
+      items = _option$items3 === void 0 ? [] : _option$items3,
+      _symbol = getValue(items[0], {
+    isUpper: true
+  }),
+      _interval = getValue(items[1]),
+      _itemUrl = C.URI + "/" + dfT + "/" + _interval + "/" + _symbol;
+
+  _assign(option, {
+    _symbol: _symbol,
+    _itemUrl: _itemUrl,
+    _propName: 'close',
+    itemCaption: _symbol,
+    dataSource: _crDataSource(option)
+  });
+};
+
 var _rAssign = {
   DF: _assignDf,
-  historical: _assignHp
+  historical: _assignHp,
+  intraday: _assignCp
 };
 var FmpApi = {
   getRequestUrl: function getRequestUrl(option) {
@@ -92,15 +112,17 @@ var FmpApi = {
 
     _assignTo(option);
 
-    var apiKey = option.apiKey;
-    return option._itemUrl + "&apikey=" + apiKey;
+    var apiKey = option.apiKey,
+        _delimeter = option._itemUrl.indexOf('?') === -1 ? '?' : '&';
+
+    return "" + option._itemUrl + _delimeter + "apikey=" + apiKey;
   },
   checkResponse: function checkResponse(json, options) {
     var dfPn = options.dfPn,
         _symbol = options._symbol,
         _json = json || {};
 
-    if (!dfPn && _isArr(_json) && _json[0].symbol === _symbol || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
+    if (!dfPn && _isArr(json) && _json[0].symbol === _symbol || dfPn === 'intraday' && _isArr(_json) || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
       return true;
     }
 

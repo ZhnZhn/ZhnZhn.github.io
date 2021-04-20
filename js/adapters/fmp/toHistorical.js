@@ -14,7 +14,7 @@ var crCaption = _fnAdapter["default"].crCaption,
 
 var _getData = function _getData(json, option) {
   var dfPn = option.dfPn;
-  return json[dfPn].reverse();
+  return (json[dfPn] || json).reverse();
 };
 
 var toChart = (0, _crAdapterOHLCV["default"])({

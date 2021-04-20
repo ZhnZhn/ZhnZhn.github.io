@@ -1,0 +1,10 @@
+{
+  "items":[
+    {"c":"1 minute", "value": "5min"},
+    {"c":"5 minutes", "value": "5min"},
+    {"c":"15 minutes", "value": "15min"},
+    {"c":"30 minutes", "value": "30min"},
+    {"c":"1 hour", "value": "1hour"},
+    {"c":"4 hours", "value": "4hour"}
+  ]
+}

@@ -6,7 +6,8 @@ import toHistorical from './toHistorical'
 const _rAdapter = {
   _pn: 'dfPn',
   DF: toChart,
-  historical: toHistorical
+  historical: toHistorical,
+  intraday: toHistorical
 },
 FmpAdapter = crAdapterRouter(_rAdapter);
 
