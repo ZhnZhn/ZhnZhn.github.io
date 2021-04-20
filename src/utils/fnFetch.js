@@ -1,5 +1,3 @@
-import fetchJsonpImpl from 'fetch-jsonp'
-
 const C = {
   //LIMIT_REMAINING: 'X-RateLimit-Remaining',
   REQ_ERR: 'Request Error',
@@ -48,7 +46,7 @@ const _promiseAll = ({
   ]);
 };
 
-const _fFetch = (propName, type) => function({
+const _fFetch = (propName) => function({
    uri, option={},
    optionFetch,
    getLimitRemaiming,
@@ -65,10 +63,7 @@ const _fFetch = (propName, type) => function({
     }
     return;
   }
-  const _fnFetch = type !== 'jsonp'
-    ? fetch
-    : fetchJsonpImpl;
-  _fnFetch(uri, optionFetch)
+  fetch(uri, optionFetch)
     .then(response => {
       const { status, statusText, ok } = response
           , { resErrStatus} = option;
@@ -98,7 +93,7 @@ const _fFetch = (propName, type) => function({
     .then(([limitRemaining, json, status]) => {
       onCheckResponse(json, option, status)
       option.limitRemaining = limitRemaining;
-      onFetch({ json, option, onCompleted });       
+      onFetch({ json, option, onCompleted });
     })
     .catch(error => {
        if (_isFn(onCatch)) {
@@ -111,4 +106,3 @@ const _fFetch = (propName, type) => function({
 
 export const fetchJson = _fFetch('json');
 export const fetchTxt = _fFetch('text');
-export const fetchJsonp = _fFetch('json', 'jsonp');

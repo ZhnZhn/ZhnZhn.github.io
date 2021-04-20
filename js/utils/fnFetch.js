@@ -1,12 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports.fetchJsonp = exports.fetchTxt = exports.fetchJson = void 0;
-
-var _fetchJsonp = _interopRequireDefault(require("fetch-jsonp"));
-
+exports.fetchTxt = exports.fetchJson = void 0;
 var C = {
   //LIMIT_REMAINING: 'X-RateLimit-Remaining',
   REQ_ERR: 'Request Error',
@@ -58,7 +53,7 @@ var _promiseAll = function _promiseAll(_ref) {
   return Promise.all([Promise.resolve(_limitRemaining), response[propName](), Promise.resolve(status)]);
 };
 
-var _fFetch = function _fFetch(propName, type) {
+var _fFetch = function _fFetch(propName) {
   return function (_ref2) {
     var uri = _ref2.uri,
         _ref2$option = _ref2.option,
@@ -85,9 +80,7 @@ var _fFetch = function _fFetch(propName, type) {
       return;
     }
 
-    var _fnFetch = type !== 'jsonp' ? fetch : _fetchJsonp["default"];
-
-    _fnFetch(uri, optionFetch).then(function (response) {
+    fetch(uri, optionFetch).then(function (response) {
       var status = response.status,
           statusText = response.statusText,
           ok = response.ok,
@@ -158,8 +151,4 @@ exports.fetchJson = fetchJson;
 var fetchTxt = _fFetch('text');
 
 exports.fetchTxt = fetchTxt;
-
-var fetchJsonp = _fFetch('json', 'jsonp');
-
-exports.fetchJsonp = fetchJsonp;
 //# sourceMappingURL=fnFetch.js.map
