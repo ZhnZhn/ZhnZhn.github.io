@@ -11,7 +11,8 @@
       "caption": "Prices",
       "items": [
         { "id": "FAO_CPI" },
-        { "id": "FAO_PRODUCER_PRICES" }
+        { "id": "FAO_PRODUCER_PRICES" },
+        { "id": "FAO_DEFLATORS" }
       ]
     },{
       "caption": "Inputs",
@@ -104,18 +105,32 @@
 
     "FAO_PRODUCER_PRICES": {
       "type": "FAO_PRODUCER_PRICES",
-      "menuTitle": "Producer Prices (LCU/tonne)",
-      "dialogCaption": "Producer Prices",
+      "menuTitle": "Producer Prices",
       "contFullCaption": "FAOSTAT: Producer Prices",
       "addProps": "FAO_B_PR",
       "dialogProps": {
         "selectProps":[
-          ["Item", "crops"]
+          ["Item", "crops"],
+          ["Element","pp-elements"]
         ],
         "dfProps": {
-          "dfDomain": "PM",
-          "dfElement": "5530",
+          "dfDomain": "PP",
           "dfTitle": "Producer Prices"
+        }
+      }
+    },
+    "FAO_DEFLATORS": {
+      "type": "FAO_DEFLATORS",
+      "menuTitle": "Deflators",
+      "contFullCaption": "FAOSTAT: Deflators",
+      "addProps": "FAO_B_PR",
+      "dialogProps": {
+        "selectProps":[
+          ["Item", "deflators"],
+          ["Element","deflator-elements"]
+        ],
+        "dfProps": {
+          "dfDomain": "PD"
         }
       }
     },
