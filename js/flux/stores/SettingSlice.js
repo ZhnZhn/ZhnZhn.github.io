@@ -9,7 +9,7 @@ var _apiTitle2;
 
 var _settings = {};
 var _withApiKey = [_Type.LoadType.AL, _Type.LoadType.IEX, _Type.LoadType.FMP, _Type.LoadType.INTR, _Type.LoadType.TW, _Type.LoadType.BEA, _Type.LoadType.EIA];
-var _withProxy = [_Type.LoadType.FAO, _Type.LoadType.CRC];
+var _withProxy = [_Type.LoadType.FAO];
 
 var _apiTitle = (_apiTitle2 = {
   DF: ''
@@ -21,7 +21,7 @@ var _isUndef = function _isUndef(value) {
 
 var SettingSlice = {
   setting: {
-    proxy: 'https://cors-anywhere.herokuapp.com/',
+    proxy: '',
     isAdminMode: false,
     isDrawDeltaExtrems: false,
     isNotZoomToMinMax: false
@@ -64,11 +64,7 @@ var SettingSlice = {
     };
   },
   getProxy: function getProxy(loadId) {
-    if (_withProxy.indexOf(loadId) === -1) {
-      return '';
-    }
-
-    return this.setting.proxy;
+    return _withProxy.indexOf(loadId) === -1 ? '' : this.setting.proxy;
   },
   isSetting: function isSetting(propName, value) {
     if (_isUndef(value)) {

@@ -1,4 +1,4 @@
-import { LoadType as LT } from '../../constants/Type'
+import { LoadType as LT } from '../../constants/Type';
 
 const _settings = {};
 const _withApiKey = [
@@ -6,8 +6,7 @@ const _withApiKey = [
   LT.BEA, LT.EIA
 ];
 const _withProxy = [
-  LT.FAO,
-  LT.CRC
+  LT.FAO
 ];
 const _apiTitle = {
   DF: '',
@@ -28,7 +27,7 @@ const _isUndef = value => typeof value === 'undefined';
 
 const SettingSlice = {
   setting: {
-    proxy: 'https://cors-anywhere.herokuapp.com/',
+    proxy: '',
     isAdminMode: false,
     isDrawDeltaExtrems: false,
     isNotZoomToMinMax: false
@@ -70,10 +69,9 @@ const SettingSlice = {
   },
 
   getProxy(loadId){
-    if (_withProxy.indexOf(loadId) === -1) {
-      return '';
-    }
-    return this.setting.proxy;
+    return _withProxy.indexOf(loadId) === -1
+       ? ''
+       : this.setting.proxy;
   },
   isSetting(propName, value){
     if (_isUndef(value)){
