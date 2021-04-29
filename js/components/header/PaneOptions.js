@@ -71,7 +71,11 @@ var _useProxy = function _useProxy(data) {
       _proxy = data.getProxy();
 
   return [_refProxy, _proxy, _setProxy, function () {
-    return _setProxy(_refProxy.current.getValue());
+    var input = _refProxy.current;
+
+    if (!_setProxy(input.getValue())) {
+      input.showErrMsg();
+    }
   }, function () {
     return _setProxy('');
   }];
@@ -117,11 +121,12 @@ var PaneOptions = function PaneOptions(_ref) {
       ref: _refProxy,
       captionStyle: titleStyle,
       caption: "Proxy",
-      placeholder: "Https Proxy Server",
+      placeholder: "Local Http Proxy Server",
       initValue: _proxy,
       onEnter: _setProxy,
       isClearBlank: true,
-      onClear: _hClearProxy
+      onClear: _hClearProxy,
+      errorMsg: "Should start with http://127.0.0.1"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
       caption: "UI Theme",
       captionStyle: titleStyle,

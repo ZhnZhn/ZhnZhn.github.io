@@ -48,7 +48,12 @@ const _useProxy = (data) => {
     _refProxy,
     _proxy,
     _setProxy,
-    () => _setProxy(_refProxy.current.getValue()),
+    () => {
+      const input = _refProxy.current;
+      if (!_setProxy(input.getValue())) {
+        input.showErrMsg()
+      }
+    },
     () => _setProxy('')
   ];
 }
@@ -88,11 +93,12 @@ const PaneOptions = ({
          ref={_refProxy}
          captionStyle={titleStyle}
          caption="Proxy"
-         placeholder="Https Proxy Server"
+         placeholder="Local Http Proxy Server"
          initValue={_proxy}
          onEnter={_setProxy}
          isClearBlank={true}
          onClear={_hClearProxy}
+         errorMsg="Should start with http://127.0.0.1"
       />
       <D.RowInputSelect
          caption="UI Theme"

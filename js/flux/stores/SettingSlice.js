@@ -36,7 +36,7 @@ var SettingSlice = {
       key6: this.fSetKey([_Type.LoadType.IEX]),
       key7: this.fSetKey([_Type.LoadType.INTR]),
       key8: this.fSetKey([_Type.LoadType.Q]),
-      setProxy: this.setSetting('proxy').bind(this),
+      setProxy: this.setProxy.bind(this),
       getProxy: this.getProxy.bind(this, _Type.LoadType.FAO),
       isAdminMode: this.isAdminMode.bind(this),
       isDrawDeltaExtrems: this.isSetting.bind(this, 'isDrawDeltaExtrems'),
@@ -58,10 +58,11 @@ var SettingSlice = {
         return _settings[id];
     }
   },
-  setSetting: function setSetting(propName) {
-    return function (value) {
-      this.setting[propName] = value;
-    };
+  setProxy: function setProxy(url) {
+    if (('' + url).substring(0, 16) === 'http://127.0.0.1') {
+      this.setting.proxy = url;
+      return true;
+    }
   },
   getProxy: function getProxy(loadId) {
     return _withProxy.indexOf(loadId) === -1 ? '' : this.setting.proxy;

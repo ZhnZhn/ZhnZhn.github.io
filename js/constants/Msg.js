@@ -56,7 +56,7 @@ var Msg = {
     withoutProxy: function withoutProxy(providerName) {
       return {
         caption: 'Without Proxy Server',
-        descr: _crForReqToken(providerName) + " proxy server is required. Could be set in dialog SETTINGS [s]."
+        descr: _crForReqToken(providerName) + " local HTTP proxy server is required. Could be set in dialog SETTINGS [s]."
       };
     },
     TOO_MANY_REQUEST: {

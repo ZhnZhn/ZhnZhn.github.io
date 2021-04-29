@@ -124,7 +124,7 @@ var DataProviders = function DataProviders(_ref3) {
           })
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose["default"], {
-        caption: "(1) Required Https Proxy:",
+        caption: "(1) Required Local Http Proxy:",
         style: ST.OC_L2,
         openColor: OPEN_COLOR_L2,
         childStyle: ST.CHILD_STYLE,
@@ -140,9 +140,9 @@ var DataProviders = function DataProviders(_ref3) {
             children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               style: _About["default"].BLACK,
               children: "Note:\xA0"
-            }), "Https Proxy is required for CORS Http API services.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
+            }), "Local Https Proxy is required for CORS Http API services.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
               className: CL.BR
-            }), "By default set. Can be changed in ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            }), "Could be set in ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               style: ST.SETTINGS,
               children: "SETTINGS\xA0[s]"
             }), "."]

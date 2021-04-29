@@ -110,7 +110,7 @@ const DataProviders = ({ isClose }) => (
       </div>
       </OpenClose>
       <OpenClose
-        caption="(1) Required Https Proxy:"
+        caption="(1) Required Local Http Proxy:"
         style={ST.OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}
@@ -123,9 +123,9 @@ const DataProviders = ({ isClose }) => (
         <div style={ST.NOTE}>
           <p>
             <span style={S.BLACK}>Note:&nbsp;</span>
-            Https Proxy is required for CORS Http API services.&nbsp;
+            Local Https Proxy is required for CORS Http API services.&nbsp;
             <br className={CL.BR} />
-            By default set. Can be changed in <span style={ST.SETTINGS}>SETTINGS&nbsp;[s]</span>.
+            Could be set in <span style={ST.SETTINGS}>SETTINGS&nbsp;[s]</span>.
           </p>
         </div>
       </OpenClose>
