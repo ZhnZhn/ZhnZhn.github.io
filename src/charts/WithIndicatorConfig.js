@@ -30,6 +30,18 @@ const C = {
 
 const _assign = Object.assign;
 
+const _crHighLowData = data => {
+  const highData = []
+  , lowData = [];
+  let i = 0;
+  for(i;i<data.length;i++){
+    const { x, high, low } = data[i]
+    highData.push([x, high])
+    lowData.push([x, low])
+  }
+  return [highData, lowData];
+};
+
 const _crTitle = (text='') => ({
   text: DOMPurify.sanitize(text || ''),
   style: {
@@ -114,7 +126,7 @@ _Builder.prototype = _assign(_Builder.prototype, {
     return this;
   },
   assignToSeries(index, option){
-    _assign(this.config.series[index], option)
+    this.config.series[index] = _assign({}, this.config.series[index], option)
     return this;
   },
   addColumnSeria(option){
@@ -307,16 +319,26 @@ const WithIndicatorConfig = {
   },
 
   crMiniHLConfig({ btTitle="Daily HighLow", data }){
-    const config = _Builder(_crConfig({
+    const [highData, lowData] = _crHighLowData(data)
+    , config = _Builder(_crConfig({
         title: _crTitle('HighLow')
       }))
       .assignToSeries(0, {
-        name: "HL",
+        name: "H",
         visible: true,
-        type: "arearange",
+        type: "area",
         color: C.HIGH_LOW,
-        data: data,
-        tooltip: Chart.fTooltip(Tooltip.hl)
+        fillColor: C.HIGH_LOW,
+        data: highData,
+      })
+      .assignToSeries(1, {
+        name: "L",
+        visible: true,
+        type: "area",
+        color: C.HIGH_LOW,
+        fillColor: C.HIGH_LOW,
+        data: lowData,
+        tooltip: Chart.fTooltip(Tooltip.vTdmyIf)
       })
       .toConfig();
 

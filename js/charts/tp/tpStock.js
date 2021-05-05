@@ -45,18 +45,6 @@ var _crAtn = function _crAtn(_ref2) {
   }) + "\n      " + crRow('Prev Close', close) + "\n      " + crRow('Next Open', open) + "\n    </div>";
 };
 
-var _crHl = function _crHl(_ref3) {
-  var date = _ref3.date,
-      id = _ref3.id,
-      value = _ref3.value,
-      point = _ref3.point;
-  var open = point.open,
-      dayHigh = point.dayHigh,
-      dayLow = point.dayLow,
-      close = point.close;
-  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Open', open) + "\n    " + crRow('High', dayHigh) + "\n    " + crRow('Low', dayLow) + "\n    " + crRow('Close', close) + "\n  </div>";
-};
-
 var tpStock = {
   volume: {
     fnTemplate: _crVolume,
@@ -74,9 +62,6 @@ var tpStock = {
   },
   ath: {
     fnTemplate: _crAtn
-  },
-  hl: {
-    fnTemplate: _crHl
   }
 };
 var _default = tpStock;

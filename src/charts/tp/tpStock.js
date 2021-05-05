@@ -33,17 +33,6 @@ const _crAtn = function({date, id, value, point}){
     </div>`;
 };
 
-const _crHl = function({date, id, value, point}){
-  const { open, dayHigh, dayLow, close } = point;
-  return `${crHeader(date, id)}
-  <div class="tp__body">
-    ${crRow('Open', open)}
-    ${crRow('High', dayHigh)}
-    ${crRow('Low', dayLow)}
-    ${crRow('Close', close)}
-  </div>`;
-}
-
 const tpStock = {
   volume: {
     fnTemplate: _crVolume,
@@ -61,9 +50,6 @@ const tpStock = {
   },
   ath: {
     fnTemplate: _crAtn
-  },
-  hl: {
-    fnTemplate: _crHl
   }
 };
 

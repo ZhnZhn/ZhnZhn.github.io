@@ -70,7 +70,6 @@ const Tooltip = {
   volumeTdmy: _fFormatter({...tpStock.volumeTdmy}),
   volumeTdmyIf: _fFormatter({...tpStock.volumeTdmyIf}),
   ath: _fFormatter({...tpStock.ath}),
-  hl: _fFormatter({...tpStock.hl}),
 
   donut: _fFormatter({...tpDonut.value}),
 

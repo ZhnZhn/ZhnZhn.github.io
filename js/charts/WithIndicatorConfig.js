@@ -36,6 +36,23 @@ var C = {
 };
 var _assign = Object.assign;
 
+var _crHighLowData = function _crHighLowData(data) {
+  var highData = [],
+      lowData = [];
+  var i = 0;
+
+  for (i; i < data.length; i++) {
+    var _data$i = data[i],
+        x = _data$i.x,
+        high = _data$i.high,
+        low = _data$i.low;
+    highData.push([x, high]);
+    lowData.push([x, low]);
+  }
+
+  return [highData, lowData];
+};
+
 var _crTitle = function _crTitle(text) {
   if (text === void 0) {
     text = '';
@@ -135,8 +152,7 @@ _Builder.prototype = _assign(_Builder.prototype, {
     return this;
   },
   assignToSeries: function assignToSeries(index, option) {
-    _assign(this.config.series[index], option);
-
+    this.config.series[index] = _assign({}, this.config.series[index], option);
     return this;
   },
   addColumnSeria: function addColumnSeria(option) {
@@ -324,15 +340,26 @@ var WithIndicatorConfig = {
         btTitle = _ref5$btTitle === void 0 ? "Daily HighLow" : _ref5$btTitle,
         data = _ref5.data;
 
-    var config = _Builder(_crConfig({
+    var _crHighLowData2 = _crHighLowData(data),
+        highData = _crHighLowData2[0],
+        lowData = _crHighLowData2[1],
+        config = _Builder(_crConfig({
       title: _crTitle('HighLow')
     })).assignToSeries(0, {
-      name: "HL",
+      name: "H",
       visible: true,
-      type: "arearange",
+      type: "area",
       color: C.HIGH_LOW,
-      data: data,
-      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].hl)
+      fillColor: C.HIGH_LOW,
+      data: highData
+    }).assignToSeries(1, {
+      name: "L",
+      visible: true,
+      type: "area",
+      color: C.HIGH_LOW,
+      fillColor: C.HIGH_LOW,
+      data: lowData,
+      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].vTdmyIf)
     }).toConfig();
 
     return {

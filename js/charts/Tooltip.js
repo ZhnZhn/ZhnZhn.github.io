@@ -83,7 +83,6 @@ var Tooltip = {
   volumeTdmy: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volumeTdmy)),
   volumeTdmyIf: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].volumeTdmyIf)),
   ath: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].ath)),
-  hl: _fFormatter((0, _extends2["default"])({}, _tpStock["default"].hl)),
   donut: _fFormatter((0, _extends2["default"])({}, _tpDonut["default"].value)),
   sparkStackedArea: _fFormatter((0, _extends2["default"])({}, _tpSpark["default"].stackedArea)),
   sparkTreeMap: _fFormatter((0, _extends2["default"])({}, _tpSpark["default"].treeMap)),
