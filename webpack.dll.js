@@ -14,7 +14,9 @@ module.exports = {
             "big.js", "interactjs", 
             "localforage",            
             "dompurify",
-            "highcharts", "highcharts/highcharts-more", "highcharts/modules/treemap",
+            "highcharts", 
+            //"highcharts/highcharts-more", 
+            "highcharts/modules/treemap",
             "highcharts/modules/exporting", "highcharts/modules/offline-exporting",            
             "jsonstat",
             "memoize-one"
