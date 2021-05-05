@@ -12,6 +12,7 @@ var format = _highcharts["default"].dateFormat,
     TDMY_FORMAT = '%H:%M, %A, %b %d, %Y',
     TD_FORMAT = '%H:%M:%S %d-%m-%Y';
 var dateFormat = {
+  formatDate: format,
   toDmy: format.bind(null, DMY_FORMAT),
   toTdmy: format.bind(null, TDMY_FORMAT),
   toTdmyIf: function toTdmyIf(mls) {

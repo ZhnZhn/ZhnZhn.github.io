@@ -7,12 +7,13 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _highcharts = _interopRequireDefault(require("highcharts"));
-
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
+
+var _dateFormat = _interopRequireDefault(require("./dateFormat"));
 
 var _calcDeltaYAxis = _interopRequireDefault(require("./calcDeltaYAxis"));
 
+var formatDate = _dateFormat["default"].formatDate;
 var C = {
   DATE_PATTERN: '%d-%m-%Y',
   DATE_EMPTY: '01-01-1970',
@@ -42,8 +43,10 @@ var _crDelta = function _crDelta(chart, dX, dY) {
   }
 
   var _chart$options$chart = chart.options.chart,
-      xDeltaCrossLabel = _chart$options$chart.xDeltaCrossLabel,
-      yDeltaCrossLabel = _chart$options$chart.yDeltaCrossLabel;
+      _chart$options$chart$ = _chart$options$chart.xDeltaCrossLabel,
+      xDeltaCrossLabel = _chart$options$chart$ === void 0 ? 0 : _chart$options$chart$,
+      _chart$options$chart$2 = _chart$options$chart.yDeltaCrossLabel,
+      yDeltaCrossLabel = _chart$options$chart$2 === void 0 ? 0 : _chart$options$chart$2;
   return {
     dX: xDeltaCrossLabel - dX,
     dY: yDeltaCrossLabel - dY
@@ -51,7 +54,7 @@ var _crDelta = function _crDelta(chart, dX, dY) {
 };
 
 var _crCrossParam = function _crCrossParam(point, chart) {
-  var _d = _highcharts["default"].dateFormat(C.DATE_PATTERN, point.x);
+  var _d = formatDate(C.DATE_PATTERN, point.x);
 
   return (0, _extends2["default"])({
     y: point.y,

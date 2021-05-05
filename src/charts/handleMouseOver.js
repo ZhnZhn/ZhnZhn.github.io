@@ -1,7 +1,8 @@
-import Highcharts from 'highcharts'
+import formatNumber from '../utils/formatNumber';
+import dateFormat from './dateFormat';
+import calcDeltaYAxis from './calcDeltaYAxis';
 
-import formatNumber from '../utils/formatNumber'
-import calcDeltaYAxis from './calcDeltaYAxis'
+const { formatDate } = dateFormat;
 
 const C = {
   DATE_PATTERN : '%d-%m-%Y',
@@ -27,15 +28,15 @@ const C = {
 };
 
 const _crDelta = (chart, dX=0, dY=0) => {
-  const { xDeltaCrossLabel, yDeltaCrossLabel } = chart.options.chart;
+  const { xDeltaCrossLabel=0, yDeltaCrossLabel=0 } = chart.options.chart;
   return {
     dX: xDeltaCrossLabel - dX,
     dY: yDeltaCrossLabel - dY
   };
-}
+};
 
 const _crCrossParam = (point, chart) => {
-  const _d = Highcharts.dateFormat(C.DATE_PATTERN, point.x)
+  const _d = formatDate(C.DATE_PATTERN, point.x);
   return {
     y: point.y,
     date: _d !== C.DATE_EMPTY ? _d : '',
@@ -58,17 +59,17 @@ const _crYCrossLabelY = (chart, plotY) => {
 
 const handleMouserOverPoint = function(event){
   const { isCategory, c, plotX, plotY, series } = this
-      , chart = series.chart
-      , { xCrossLabel, yCrossLabel } = chart
-      , { y, date, dX, dY } = (!isCategory || c)
-             ? _crCrossParam(this, chart)
-             : _crCategoryCrossParam(this, chart)
-      , deltaYAxis = calcDeltaYAxis(chart)
-      , xLX = deltaYAxis
-          ? plotX + deltaYAxis - C.DX_DELTA_Y_AXIS
-          : plotX
-      , xLY = _crYCrossLabelX(chart, dX)
-      , yLY = _crYCrossLabelY(chart, plotY);
+  , chart = series.chart
+  , { xCrossLabel, yCrossLabel } = chart
+  , { y, date, dX, dY } = (!isCategory || c)
+      ? _crCrossParam(this, chart)
+      : _crCategoryCrossParam(this, chart)
+  , deltaYAxis = calcDeltaYAxis(chart)
+  , xLX = deltaYAxis
+      ? plotX + deltaYAxis - C.DX_DELTA_Y_AXIS
+      : plotX
+  , xLY = _crYCrossLabelX(chart, dX)
+  , yLY = _crYCrossLabelY(chart, plotY);
 
   if (xCrossLabel) {
     xCrossLabel.attr({ x: xLX, text: date });
@@ -85,6 +86,6 @@ const handleMouserOverPoint = function(event){
       .css(C.CSS_LABEL)
       .add();
   }
-}
+};
 
 export default handleMouserOverPoint

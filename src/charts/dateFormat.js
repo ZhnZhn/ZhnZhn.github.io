@@ -6,6 +6,7 @@ const format = Highcharts.dateFormat
 , TD_FORMAT = '%H:%M:%S %d-%m-%Y';
 
 const dateFormat = {
+  formatDate: format,
   toDmy: format.bind(null, DMY_FORMAT),
   toTdmy: format.bind(null, TDMY_FORMAT),
   toTdmyIf: mls => format('%H:%M', mls) === '00:00'
