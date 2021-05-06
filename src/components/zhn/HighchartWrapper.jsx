@@ -14,29 +14,7 @@ const S = {
   }
 };
 
-const MSG_OFFLINE = 'It seems you are offline';
-
 const _isFn = fn => typeof fn === 'function';
-
-const _isAreaRangeRequired = config => {
-  const { series } = config
-  , { type } = (series || [])[0] || {}
-  return type === 'arearange'
-    && !Highcharts.seriesTypes.arearange;
-};
-
-const _loadHighchartsMore = () => {
-  /*eslint-disable no-undef */
-  if (process.env.NODE_ENV === '_development') {
-     return import("lib-dev/highcharts-more.js");
-    /*eslint-enable no-undef */
-  }
-  return import(
-    /* webpackChunkName: "highcharts-more" */
-    /* webpackMode: "lazy" */
-    "highcharts/highcharts-more"
-  );
-};
 
 const HighchartWrapper = ({
   isShow=true,
@@ -55,23 +33,13 @@ const HighchartWrapper = ({
     if (!config){
       throw new Error("Chart's config must be specified.");
     }
-    const _crChart = () => {
-       _refChart.current = new Highcharts.Chart(
-         _refChartNode.current, config
-       );
-       const { current } = _refChart;
-       if (current && _isFn(onLoaded)){
-         onLoaded(current);
-       }
-    };
 
-    if (_isAreaRangeRequired(config)) {
-       _loadHighchartsMore()
-         .then(module => module.default(Highcharts))
-         .then(_crChart)
-         .catch(err => console.log(MSG_OFFLINE));
-    } else {
-      _crChart()
+    _refChart.current = new Highcharts.Chart(
+      _refChartNode.current, config
+    );
+    const { current } = _refChart;
+    if (current && _isFn(onLoaded)){
+      onLoaded(current);
     }
 
     return () => {

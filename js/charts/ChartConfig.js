@@ -11,6 +11,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
+var _highchartsMore = _interopRequireDefault(require("highcharts/highcharts-more"));
+
 var _treemap = _interopRequireDefault(require("highcharts/modules/treemap"));
 
 var _exporting = _interopRequireDefault(require("highcharts/modules/exporting"));
@@ -56,6 +58,7 @@ var _isStr = function _isStr(str) {
 
 var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], _WithMarkers["default"], _WithPieConfig["default"], _WithStackedAreaConfig["default"], _WithStackedColumnConfig["default"], _WithTreeMapConfig["default"], {
   init: function init() {
+    (0, _highchartsMore["default"])(_highcharts["default"]);
     (0, _treemap["default"])(_highcharts["default"]);
     (0, _exporting["default"])(_highcharts["default"]);
     (0, _offlineExporting["default"])(_highcharts["default"]);

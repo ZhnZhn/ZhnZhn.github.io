@@ -1,4 +1,5 @@
 import Highcharts from 'highcharts';
+import HighchartsMore from 'highcharts/highcharts-more';
 import HighchartsTreemap from 'highcharts/modules/treemap';
 import HighchartsExporting from 'highcharts/modules/exporting';
 import HighchartsOfflineExporting from 'highcharts/modules/offline-exporting';
@@ -38,6 +39,7 @@ const ChartConfig = {
   ...WithTreeMap,
 
   init(){
+    HighchartsMore(Highcharts);
     HighchartsTreemap(Highcharts);
     HighchartsExporting(Highcharts);
     HighchartsOfflineExporting(Highcharts);

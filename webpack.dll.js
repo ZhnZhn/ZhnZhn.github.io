@@ -15,7 +15,7 @@ module.exports = {
             "localforage",            
             "dompurify",
             "highcharts", 
-            //"highcharts/highcharts-more", 
+            "highcharts/highcharts-more", 
             "highcharts/modules/treemap",
             "highcharts/modules/exporting", "highcharts/modules/offline-exporting",            
             "jsonstat",
