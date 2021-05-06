@@ -140,7 +140,7 @@ var DataProviders = function DataProviders(_ref3) {
             children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               style: _About["default"].BLACK,
               children: "Note:\xA0"
-            }), "Local Https Proxy is required for CORS Http API services.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
+            }), "Local Http Proxy is required for CORS Http API services.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
               className: CL.BR
             }), "Could be set in ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               style: ST.SETTINGS,

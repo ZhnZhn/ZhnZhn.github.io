@@ -123,7 +123,7 @@ const DataProviders = ({ isClose }) => (
         <div style={ST.NOTE}>
           <p>
             <span style={S.BLACK}>Note:&nbsp;</span>
-            Local Https Proxy is required for CORS Http API services.&nbsp;
+            Local Http Proxy is required for CORS Http API services.&nbsp;
             <br className={CL.BR} />
             Could be set in <span style={ST.SETTINGS}>SETTINGS&nbsp;[s]</span>.
           </p>
