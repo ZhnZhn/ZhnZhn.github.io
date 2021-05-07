@@ -136,8 +136,8 @@ var IndicatorBuilder = {
   crMfiConfig: function crMfiConfig(chart, period, id) {
     var data = chart.options.zhPoints,
         _mfi = mfi(data, period),
-        dataMfi = _mfi.dataMfi,
-        nNotFullPoint = _mfi.nNotFullPoint,
+        dataMfi = _mfi[0],
+        nNotFullPoint = _mfi[1],
         titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
 
     return _crMfiConfig(id, id + titleNotFullPoint, dataMfi);

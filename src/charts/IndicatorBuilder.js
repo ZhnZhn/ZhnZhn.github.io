@@ -101,13 +101,13 @@ const IndicatorBuilder = {
 
   crMfiConfig: (chart, period, id) => {
     const data = chart.options.zhPoints
-    , { dataMfi, nNotFullPoint } = mfi(data, period)
+    , [ dataMfi, nNotFullPoint ] = mfi(data, period)
     , titleNotFullPoint = (nNotFullPoint !== 0)
         ? ' Not Full Data HL:' + nNotFullPoint
         : '';
     return crMfiConfig(
-         id, id + titleNotFullPoint, dataMfi
-     );
+       id, id + titleNotFullPoint, dataMfi
+    );
   },
 
   crMomAthConfig: (chart) => {
