@@ -59,18 +59,20 @@ const C = {
   }
 };
 
-const _isArr = Array.isArray
-, _assign = Object.assign
-, _assignTo = (obj, propName, value) => {
-  obj[propName] = _assign(obj[propName] || {}, value)
-};
-
 const _isObj = obj => obj && typeof obj === 'object'
 , _isStr = str => typeof str === 'string'
 , _isNumber = n => typeof n === 'number'
   && n - n === 0
 , _isNotEmptyArr = arr => _isArr(arr)
   && arr.length > 0;
+
+const _isArr = Array.isArray
+, _assign = Object.assign
+, _assignTo = (obj, propName, value) => {
+    obj[propName] = _isObj(value) && !_isArr(value)
+      ? _assign(obj[propName] || {}, value)
+      : value
+};
 
 const _getY = (point) => _isArr(point)
  ? point[1]
@@ -189,7 +191,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       : this;
   },
 
-  addZhPointsIf(data, propName='zhIsMfi', is=true){
+  addZhPointsIf(data, propName='zhIsMfi', is=true){    
     return is
       ? this.add({ zhPoints: data, [propName]: true })
       : this;

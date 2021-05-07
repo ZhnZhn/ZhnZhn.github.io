@@ -62,12 +62,6 @@ var C = {
   }
 };
 
-var _isArr = Array.isArray,
-    _assign = Object.assign,
-    _assignTo = function _assignTo(obj, propName, value) {
-  obj[propName] = _assign(obj[propName] || {}, value);
-};
-
 var _isObj = function _isObj(obj) {
   return obj && typeof obj === 'object';
 },
@@ -79,6 +73,12 @@ var _isObj = function _isObj(obj) {
 },
     _isNotEmptyArr = function _isNotEmptyArr(arr) {
   return _isArr(arr) && arr.length > 0;
+};
+
+var _isArr = Array.isArray,
+    _assign = Object.assign,
+    _assignTo = function _assignTo(obj, propName, value) {
+  obj[propName] = _isObj(value) && !_isArr(value) ? _assign(obj[propName] || {}, value) : value;
 };
 
 var _getY = function _getY(point) {

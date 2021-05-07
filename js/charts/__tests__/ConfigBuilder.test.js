@@ -36,7 +36,7 @@ describe('ConfigBuilder addCaption', function () {
   });
 });
 describe('ConfigBuilder add', function () {
-  test('should add option by new propName', function () {
+  test('should add option by new propName, value', function () {
     var config = (0, _ConfigBuilder["default"])().add('abc', {
       a: 'a',
       b: 'b'
@@ -44,7 +44,7 @@ describe('ConfigBuilder add', function () {
     expect(config.abc.a).toBe('a');
     expect(config.abc.b).toBe('b');
   });
-  test('should add option by propName', function () {
+  test('should add option by propName, value', function () {
     var config = (0, _ConfigBuilder["default"])({
       abc: {
         a: 1,
@@ -59,7 +59,7 @@ describe('ConfigBuilder add', function () {
     expect(config.abc.b).toBe('b');
     expect(config.abc.c).toBe(3);
   });
-  test('should add options by obj with new propName-option', function () {
+  test('should add options by obj with new propName-value', function () {
     var config = (0, _ConfigBuilder["default"])().add({
       a: {
         aa: 'aa'
@@ -71,7 +71,7 @@ describe('ConfigBuilder add', function () {
     expect(config.a.aa).toBe('aa');
     expect(config.b.bb).toBe('bb');
   });
-  test('should add options by obj with propName-option', function () {
+  test('should add by option obj with propName-value', function () {
     var config = (0, _ConfigBuilder["default"])({
       a: {
         aa: 11,
@@ -99,6 +99,33 @@ describe('ConfigBuilder add', function () {
     expect(config.b.b).toBe('b');
     expect(config.c.cc).toBe(33);
     expect(config.c.c).toBe('c');
+  });
+  test('should add by option obj array, string, boolean, number values', function () {
+    var data = ['a'],
+        str = 'str',
+        bool = true,
+        n = 10,
+        config = (0, _ConfigBuilder["default"])().add({
+      a: data,
+      b: str,
+      c: bool,
+      d: n
+    }).toConfig();
+    expect(config.a).toEqual(data);
+    expect(config.b).toBe(str);
+    expect(config.c).toBe(bool);
+    expect(config.d).toBe(n);
+  });
+  test('should add array, string, number, boolean values', function () {
+    var data = ['a'],
+        str = 'str',
+        bool = true,
+        n = 10,
+        config = (0, _ConfigBuilder["default"])().add('a', data).add('b', str).add('c', bool).add('d', n).toConfig();
+    expect(config.a).toEqual(data);
+    expect(config.b).toBe(str);
+    expect(config.c).toBe(bool);
+    expect(config.d).toBe(n);
   });
 });
 //# sourceMappingURL=ConfigBuilder.test.js.map

@@ -42,14 +42,14 @@ describe('ConfigBuilder addCaption', ()=>{
 })
 
 describe('ConfigBuilder add', ()=>{
-  test('should add option by new propName', ()=>{
+  test('should add option by new propName, value', ()=>{
     const config = ConfigBuilder()
       .add('abc', {a: 'a', b: 'b'})
       .toConfig();
     expect(config.abc.a).toBe('a')
     expect(config.abc.b).toBe('b')
   })
-  test('should add option by propName', () =>{
+  test('should add option by propName, value', () =>{
     const config = ConfigBuilder(
          {abc: {a: 1, b: 2, c: 3}}
        )
@@ -60,7 +60,7 @@ describe('ConfigBuilder add', ()=>{
       expect(config.abc.c).toBe(3)
   })
 
-  test('should add options by obj with new propName-option', ()=>{
+  test('should add options by obj with new propName-value', ()=>{
     const config = ConfigBuilder()
       .add({
          a: {aa: 'aa'},
@@ -70,7 +70,7 @@ describe('ConfigBuilder add', ()=>{
     expect(config.a.aa).toBe('aa')
     expect(config.b.bb).toBe('bb')
   })
-  test('should add options by obj with propName-option', ()=>{
+  test('should add by option obj with propName-value', ()=>{
     const config = ConfigBuilder({
       a: {aa: 11, a: 'a'},
       b: {bb: 22, b: 'b'},
@@ -89,5 +89,32 @@ describe('ConfigBuilder add', ()=>{
 
     expect(config.c.cc).toBe(33)
     expect(config.c.c).toBe('c')
+  })
+  test('should add by option obj array, string, boolean, number values', ()=>{
+     const data = ['a'], str = 'str', bool = true, n=10
+     , config = ConfigBuilder()
+        .add({
+          a: data,
+          b: str,
+          c: bool,
+          d: n
+        }).toConfig();
+     expect(config.a).toEqual(data)
+     expect(config.b).toBe(str)
+     expect(config.c).toBe(bool)
+     expect(config.d).toBe(n)
+  })
+  test('should add array, string, number, boolean values', ()=>{
+     const data = ['a'], str = 'str', bool = true, n=10
+     , config = ConfigBuilder()
+        .add('a', data)
+        .add('b', str)
+        .add('c', bool)
+        .add('d', n)
+        .toConfig();
+     expect(config.a).toEqual(data)
+     expect(config.b).toBe(str)
+     expect(config.c).toBe(bool)
+     expect(config.d).toBe(n)
   })
 })
