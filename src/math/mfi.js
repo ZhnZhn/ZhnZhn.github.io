@@ -4,6 +4,8 @@ import dt from '../utils/DateUtils';
 
 const { ymdToUTC } = dt;
 
+
+
 const _getPriceAndFlow = (point) => {
   const close = point[4]
   , high = point[2] || close
@@ -15,8 +17,11 @@ const _getPriceAndFlow = (point) => {
   return [bTp, bRmf, isFullData];
 };
 
+const _isNumber = n => typeof n === 'number'
+  && n-n === 0;
+
 const _crMfiPoint = (p, y, isNegative, bTp, bRmf) => ({
-  x : ymdToUTC(p),
+  x : _isNumber(p) ? p : ymdToUTC(p),
   y : y,
   isNegative : isNegative,
   tp : parseFloat(bTp.toFixed(4)),

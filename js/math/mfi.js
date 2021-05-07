@@ -21,9 +21,13 @@ var _getPriceAndFlow = function _getPriceAndFlow(point) {
   return [bTp, bRmf, isFullData];
 };
 
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
+};
+
 var _crMfiPoint = function _crMfiPoint(p, y, isNegative, bTp, bRmf) {
   return {
-    x: ymdToUTC(p),
+    x: _isNumber(p) ? p : ymdToUTC(p),
     y: y,
     isNegative: isNegative,
     tp: parseFloat(bTp.toFixed(4)),
