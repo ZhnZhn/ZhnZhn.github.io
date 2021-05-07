@@ -64,6 +64,12 @@ var _isFn = function _isFn(fn) {
 
 var _isNarrowWidth = !_has["default"].wideWidth();
 
+var _crMiniTitles = function _crMiniTitles(miniTitles, btTitle) {
+  return miniTitles.indexOf(btTitle) === -1 ? [btTitle].concat(miniTitles) : miniTitles.filter(function (t) {
+    return t !== btTitle;
+  });
+};
+
 var ChartItem = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(ChartItem, _Component);
 
@@ -144,13 +150,13 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       return _this.mainChart;
     };
 
-    _this._handleLoadedMiniChart = function (metricChart) {
+    _this._hLoadedMiniChart = function (metricChart) {
       if (_this.mainChart) {
         _this.mainChart.zhAddDetailChart(metricChart);
       }
     };
 
-    _this._handleUnLoadedMiniChart = function (objChart) {
+    _this._hUnLoadedMiniChart = function (objChart) {
       if (_this.mainChart) {
         _this.mainChart.zhRemoveDetailChart(objChart);
       }
@@ -164,15 +170,15 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       });
     };
 
-    _this._handleToggleSeria = function (item) {
+    _this._hToggleSeria = function (item) {
       _this.mainChart.zhToggleSeria(item.index);
     };
 
-    _this._handleClick2H = function () {
+    _this._hClick2H = function () {
       _this.mainChart.zhToggle2H();
     };
 
-    _this._handleZoom = function () {
+    _this._hZoom = function () {
       var onZoom = _this.props.onZoom;
 
       if (_isFn(onZoom)) {
@@ -182,7 +188,7 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       }
     };
 
-    _this._handleAddToWatch = function () {
+    _this._hAddToWatch = function () {
       var _this$props = _this.props,
           caption = _this$props.caption,
           config = _this$props.config,
@@ -193,11 +199,11 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       });
     };
 
-    _this._handleCopy = function () {
+    _this._hCopy = function () {
       _this.props.onCopy(_this.mainChart);
     };
 
-    _this._handlePasteTo = function () {
+    _this._hPasteTo = function () {
       _this.props.onPasteToDialog({
         toChart: _this.mainChart,
         fromChart: _this.props.getCopyFromChart()
@@ -208,7 +214,7 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       _this.mainChart.zhToggleMinMaxLines();
     };
 
-    _this._handleClickInfo = function () {
+    _this._hClickInfo = function () {
       _this.setState({
         isShowInfo: true,
         isShowChart: false,
@@ -216,14 +222,14 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       });
     };
 
-    _this._handleClickChart = function () {
+    _this._hClickChart = function () {
       _this.setState({
         isShowChart: true,
         isShowInfo: false
       });
     };
 
-    _this._handleCheckBox = function (isCheck, checkBox) {
+    _this._hCheckBox = function (isCheck, checkBox) {
       var _this$props2 = _this.props,
           chartType = _this$props2.chartType,
           onSetActive = _this$props2.onSetActive;
@@ -250,7 +256,7 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       });
     };
 
-    _this._handleClickConfig = function () {
+    _this._hClickConfig = function () {
       var _this$props3 = _this.props,
           caption = _this$props3.caption,
           onShowConfigDialog = _this$props3.onShowConfigDialog;
@@ -259,7 +265,7 @@ var ChartItem = /*#__PURE__*/function (_Component) {
         chart: _this.mainChart,
         setItemCaption: _this.setItemCaption,
         setDataSource: _this.setDataSource,
-        onToggleToolbar: _this._handleToggleToolbar
+        onToggleToolbar: _this._hToggleToolbar
       });
     };
 
@@ -271,27 +277,17 @@ var ChartItem = /*#__PURE__*/function (_Component) {
       _this._compVm = comp;
     };
 
-    _this._handleMiniChart = function (btTitle) {
-      var ChartFn = _this.props.ChartFn;
+    _this._hMiniChart = function (btTitle) {
+      var miniTitles = _crMiniTitles(_this.state.miniTitles, btTitle),
+          isShowAbs = miniTitles.length === 0 ? true : false;
 
-      _this.setState(function (prevState) {
-        var _titles = prevState.miniTitles,
-            _t = _titles.find(function (t) {
-          return t === btTitle;
-        });
-
-        prevState.miniTitles = _t ? _titles.filter(function (t) {
-          return t !== btTitle;
-        }) : [btTitle].concat(_titles);
-        prevState.isShowAbs = prevState.miniTitles.length === 0 ? true : false;
-
-        _this.mainChart.update(ChartFn.arMetricOption(_this.mainChart, prevState.isShowAbs));
-
-        return prevState;
+      _this.setState({
+        miniTitles: miniTitles,
+        isShowAbs: isShowAbs
       });
     };
 
-    _this._createChartToolBar = function (config, withoutAnimation) {
+    _this._crChartToolBar = function (config, withoutAnimation) {
       var _this$state = _this.state,
           hasError = _this$state.hasError,
           isShowToolbar = _this$state.isShowToolbar;
@@ -302,33 +298,33 @@ var ChartItem = /*#__PURE__*/function (_Component) {
           hasError: hasError,
           style: S.TAB_DIV,
           config: config,
-          onMiniChart: _this._handleMiniChart,
+          onMiniChart: _this._hMiniChart,
           getChart: _this.getMainChart,
           onAddMfi: _this._addMfi,
           onRemoveMfi: _this._removeMfi,
-          onClickLegend: _this._handleClickLegend,
-          onClick2H: _this._handleClick2H,
-          onAddToWatch: _this._handleAddToWatch,
-          onClickInfo: _this._handleClickInfo,
-          onClickConfig: _this._handleClickConfig,
-          onCopy: _this._handleCopy,
-          onPasteTo: _this._handlePasteTo,
+          onClickLegend: _this._hClickLegend,
+          onClick2H: _this._hClick2H,
+          onAddToWatch: _this._hAddToWatch,
+          onClickInfo: _this._hClickInfo,
+          onClickConfig: _this._hClickConfig,
+          onCopy: _this._hCopy,
+          onPasteTo: _this._hPasteTo,
           onMinMax: _this._toggleMinMax,
-          onZoom: _this._handleZoom
+          onZoom: _this._hZoom
         })
       });
     };
 
-    _this._handleToggleOpen = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isOpen');
-    _this._handleClickLegend = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isShowLegend');
-    _this._handleToggleToolbar = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isShowToolbar');
+    _this._hToggleOpen = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isOpen');
+    _this._hClickLegend = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isShowLegend');
+    _this._hToggleToolbar = _this._toggle.bind((0, _assertThisInitialized2["default"])(_this), 'isShowToolbar');
     _this._moreModel = (0, _ChartItemMore["default"])((0, _assertThisInitialized2["default"])(_this), {
-      onToggle: _this._handleToggleToolbar,
+      onToggle: _this._hToggleToolbar,
       onToTop: props.onToTop,
       onHideCaption: _this.hideCaption
     });
-    _this._fnOnCheck = _this._handleCheckBox.bind((0, _assertThisInitialized2["default"])(_this), true);
-    _this._fnOnUnCheck = _this._handleCheckBox.bind((0, _assertThisInitialized2["default"])(_this), false);
+    _this._fnOnCheck = _this._hCheckBox.bind((0, _assertThisInitialized2["default"])(_this), true);
+    _this._fnOnUnCheck = _this._hCheckBox.bind((0, _assertThisInitialized2["default"])(_this), false);
 
     var _props$config = props.config,
         _config = _props$config === void 0 ? {} : _props$config,
@@ -369,6 +365,15 @@ var ChartItem = /*#__PURE__*/function (_Component) {
     }
 
     return true;
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+    var isShowAbs = this.state.isShowAbs,
+        mainChart = this.mainChart;
+
+    if (isShowAbs !== prevState.isShowAbs && mainChart) {
+      mainChart.update(this.props.ChartFn.arMetricOption(mainChart, isShowAbs));
+    }
   };
 
   ChartItem.getDerivedStateFromError = function getDerivedStateFromError(error) {
@@ -424,7 +429,7 @@ var ChartItem = /*#__PURE__*/function (_Component) {
         itemCaption: itemCaption,
         itemTitle: caption,
         itemTime: itemTime,
-        onToggle: this._handleToggleOpen,
+        onToggle: this._hToggleOpen,
         valueMoving: config.valueMoving,
         onClose: onCloseItem,
         isAdminMode: isAdminMode,
@@ -434,7 +439,7 @@ var ChartItem = /*#__PURE__*/function (_Component) {
         isShow: isOpen,
         withoutAnimation: _withoutAnimation,
         style: S.SHOW_HIDE,
-        children: [isShowChart && this._createChartToolBar(config, _withoutAnimation), hasError ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
+        children: [isShowChart && this._crChartToolBar(config, _withoutAnimation), hasError ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
           isShow: isShowChart,
           msg: "chart"
         }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
@@ -448,25 +453,25 @@ var ChartItem = /*#__PURE__*/function (_Component) {
           isShow: isShowInfo,
           info: config.info,
           zhInfo: config.zhConfig,
-          onClickChart: this._handleClickChart
+          onClickChart: this._hClickChart
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartLegend["default"], {
           isShow: isShowLegend,
           legend: legend,
-          onClickItem: this._handleToggleSeria
+          onClickItem: this._hToggleSeria
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts["default"], {
           withoutAnimation: _withoutAnimation,
           configs: mfiConfigs,
           absComp: this._dataSourceEl,
-          onLoaded: this._handleLoadedMiniChart,
-          onWillUnLoaded: this._handleUnLoadedMiniChart
+          onLoaded: this._hLoadedMiniChart,
+          onWillUnLoaded: this._hUnLoadedMiniChart
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts["default"], {
           withoutAnimation: _withoutAnimation,
           configs: zhMiniConfigs,
           idPropName: "btTitle",
           ids: miniTitles,
           absComp: this._dataSourceEl,
-          onLoaded: this._handleLoadedMiniChart,
-          onWillUnLoaded: this._handleUnLoadedMiniChart
+          onLoaded: this._hLoadedMiniChart,
+          onWillUnLoaded: this._hUnLoadedMiniChart
         })]
       })]
     });

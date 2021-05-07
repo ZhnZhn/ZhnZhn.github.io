@@ -45,6 +45,12 @@ const S = {
 const _isFn = fn => typeof fn === 'function';
 const _isNarrowWidth = !has.wideWidth();
 
+const _crMiniTitles = (miniTitles, btTitle) => {
+  return miniTitles.indexOf(btTitle) === -1
+    ? [btTitle, ...miniTitles]
+    : miniTitles.filter(t => t !== btTitle);
+};
+
 class ChartItem extends Component {
   /*
   static propTypes = {
@@ -77,18 +83,18 @@ class ChartItem extends Component {
   constructor(props){
     super(props)
 
-    this._handleToggleOpen = this._toggle.bind(this, 'isOpen')
-    this._handleClickLegend = this._toggle.bind(this, 'isShowLegend')
-    this._handleToggleToolbar = this._toggle.bind(this, 'isShowToolbar')
+    this._hToggleOpen = this._toggle.bind(this, 'isOpen')
+    this._hClickLegend = this._toggle.bind(this, 'isShowLegend')
+    this._hToggleToolbar = this._toggle.bind(this, 'isShowToolbar')
 
     this._moreModel = crModelMore(this, {
-      onToggle: this._handleToggleToolbar,
+      onToggle: this._hToggleToolbar,
       onToTop: props.onToTop,
       onHideCaption: this.hideCaption
     })
 
-    this._fnOnCheck = this._handleCheckBox.bind(this, true)
-    this._fnOnUnCheck = this._handleCheckBox.bind(this, false)
+    this._fnOnCheck = this._hCheckBox.bind(this, true)
+    this._fnOnUnCheck = this._hCheckBox.bind(this, false)
 
     const { config={}, caption='' } = props
     , { zhConfig={} } = config
@@ -125,6 +131,18 @@ class ChartItem extends Component {
     }
     return true;
   }
+
+
+  componentDidUpdate(prevProps, prevState){
+    const { isShowAbs } = this.state
+    , mainChart = this.mainChart;
+    if (isShowAbs !== prevState.isShowAbs && mainChart) {
+      mainChart.update(
+        this.props.ChartFn.arMetricOption(mainChart, isShowAbs)
+      )
+    }
+  }
+
 
   hideCaption = () => {
     if (this.mainChart) {
@@ -171,12 +189,12 @@ class ChartItem extends Component {
   getMainChart = () => this.mainChart
 
 
-  _handleLoadedMiniChart = (metricChart) => {
+  _hLoadedMiniChart = (metricChart) => {
      if (this.mainChart) {
        this.mainChart.zhAddDetailChart(metricChart)
      }
   }
-  _handleUnLoadedMiniChart = (objChart) => {
+  _hUnLoadedMiniChart = (objChart) => {
     if (this.mainChart) {
       this.mainChart.zhRemoveDetailChart(objChart)
     }
@@ -188,30 +206,30 @@ class ChartItem extends Component {
     }))
   }
 
-  _handleToggleSeria = (item) => {
+  _hToggleSeria = (item) => {
     this.mainChart.zhToggleSeria(item.index)
   }
 
-  _handleClick2H = () => {
+  _hClick2H = () => {
     this.mainChart.zhToggle2H()
   }
 
-  _handleZoom = () => {
+  _hZoom = () => {
     const { onZoom } = this.props;
     if (_isFn(onZoom)) {
       onZoom({ chart: this.mainChart })
     }
   }
 
-  _handleAddToWatch = () => {
+  _hAddToWatch = () => {
     const { caption, config, onAddToWatch } = this.props;
     onAddToWatch( {caption, config} )
   }
 
-  _handleCopy = () => {
+  _hCopy = () => {
     this.props.onCopy(this.mainChart)
   }
-  _handlePasteTo = () => {
+  _hPasteTo = () => {
     this.props.onPasteToDialog({
       toChart: this.mainChart,
       fromChart: this.props.getCopyFromChart()
@@ -221,7 +239,7 @@ class ChartItem extends Component {
     this.mainChart.zhToggleMinMaxLines()
   }
 
-  _handleClickInfo = () => {
+  _hClickInfo = () => {
     this.setState({
       isShowInfo: true,
       isShowChart: false,
@@ -229,14 +247,14 @@ class ChartItem extends Component {
     });
   }
 
-  _handleClickChart = () => {
+  _hClickChart = () => {
     this.setState({
        isShowChart: true,
        isShowInfo: false
      });
   }
 
-  _handleCheckBox = (isCheck, checkBox) => {
+  _hCheckBox = (isCheck, checkBox) => {
     const { chartType, onSetActive } = this.props;
     checkBox.chartType = chartType
     onSetActive(isCheck, checkBox, this.mainChart)
@@ -256,14 +274,14 @@ class ChartItem extends Component {
     })
   }
 
-  _handleClickConfig = () => {
+  _hClickConfig = () => {
     const { caption, onShowConfigDialog } = this.props;
     onShowConfigDialog({
       caption,
       chart: this.mainChart,
       setItemCaption: this.setItemCaption,
       setDataSource: this.setDataSource,
-      onToggleToolbar: this._handleToggleToolbar
+      onToggleToolbar: this._hToggleToolbar
     })
   }
 
@@ -280,26 +298,13 @@ class ChartItem extends Component {
     }
   }
 
- _handleMiniChart = (btTitle) => {
-   const { ChartFn } = this.props;
-   this.setState(prevState => {
-     const _titles = prevState.miniTitles
-         , _t = _titles.find(t => t === btTitle);
-     prevState.miniTitles = _t
-       ? _titles.filter(t => t !== btTitle)
-       : [btTitle, ..._titles]
-     prevState.isShowAbs = prevState.miniTitles.length === 0
-       ? true : false;
-     this.mainChart.update(
-       ChartFn.arMetricOption(
-         this.mainChart, prevState.isShowAbs
-       )
-     )
-     return prevState;
-   })
+ _hMiniChart = (btTitle) => {
+   const miniTitles = _crMiniTitles(this.state.miniTitles, btTitle)
+   , isShowAbs = miniTitles.length === 0 ? true : false;
+   this.setState({ miniTitles, isShowAbs })
  }
 
- _createChartToolBar = (config, withoutAnimation) => {
+ _crChartToolBar = (config, withoutAnimation) => {
    const { hasError, isShowToolbar } = this.state;
    return (
          <ShowHide
@@ -310,19 +315,19 @@ class ChartItem extends Component {
              hasError={hasError}
              style={S.TAB_DIV}
              config={config}
-             onMiniChart={this._handleMiniChart}
+             onMiniChart={this._hMiniChart}
              getChart={this.getMainChart}
              onAddMfi={this._addMfi}
              onRemoveMfi={this._removeMfi}
-             onClickLegend={this._handleClickLegend}
-             onClick2H={this._handleClick2H}
-             onAddToWatch={this._handleAddToWatch}
-             onClickInfo={this._handleClickInfo}
-             onClickConfig={this._handleClickConfig}
-             onCopy={this._handleCopy}
-             onPasteTo={this._handlePasteTo}
+             onClickLegend={this._hClickLegend}
+             onClick2H={this._hClick2H}
+             onAddToWatch={this._hAddToWatch}
+             onClickInfo={this._hClickInfo}
+             onClickConfig={this._hClickConfig}
+             onCopy={this._hCopy}
+             onPasteTo={this._hPasteTo}
              onMinMax={this._toggleMinMax}
-             onZoom={this._handleZoom}
+             onZoom={this._hZoom}
             />
          </ShowHide>
       );
@@ -357,7 +362,7 @@ class ChartItem extends Component {
             itemCaption={itemCaption}
             itemTitle={caption}
             itemTime={itemTime}
-            onToggle={this._handleToggleOpen}
+            onToggle={this._hToggleOpen}
             valueMoving={config.valueMoving}
             onClose={onCloseItem}
             isAdminMode={isAdminMode}
@@ -370,7 +375,7 @@ class ChartItem extends Component {
            withoutAnimation={_withoutAnimation}
            style={S.SHOW_HIDE}
         >
-           {isShowChart && this._createChartToolBar(config, _withoutAnimation)}
+           {isShowChart && this._crChartToolBar(config, _withoutAnimation)}
            {hasError
              ? <MsgRenderErr
                  isShow={isShowChart}
@@ -389,19 +394,19 @@ class ChartItem extends Component {
               isShow={isShowInfo}
               info={config.info}
               zhInfo={config.zhConfig}
-              onClickChart={this._handleClickChart}
+              onClickChart={this._hClickChart}
            />
            <ChartLegend
              isShow={isShowLegend}
              legend={legend}
-             onClickItem={this._handleToggleSeria}
+             onClickItem={this._hToggleSeria}
            />
            <MiniCharts
               withoutAnimation={_withoutAnimation}
               configs={mfiConfigs}
               absComp={this._dataSourceEl}
-              onLoaded={this._handleLoadedMiniChart}
-              onWillUnLoaded={this._handleUnLoadedMiniChart}
+              onLoaded={this._hLoadedMiniChart}
+              onWillUnLoaded={this._hUnLoadedMiniChart}
            />
            <MiniCharts
               withoutAnimation={_withoutAnimation}
@@ -409,8 +414,8 @@ class ChartItem extends Component {
               idPropName="btTitle"
               ids={miniTitles}
               absComp={this._dataSourceEl}
-              onLoaded={this._handleLoadedMiniChart}
-              onWillUnLoaded={this._handleUnLoadedMiniChart}
+              onLoaded={this._hLoadedMiniChart}
+              onWillUnLoaded={this._hUnLoadedMiniChart}
            />
         </ShowHide>
       </div>
