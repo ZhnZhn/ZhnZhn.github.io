@@ -65,7 +65,7 @@ var RowMfi = function RowMfi(_ref) {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType["default"], {
     forwardRef: _refPeriod,
     caption: "MFI",
-    initValue: 14,
+    initValue: 30,
     configs: mfiConfs,
     onAdd: _onAddMfi,
     onRemove: _onRemoveMfi

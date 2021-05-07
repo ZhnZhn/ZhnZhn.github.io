@@ -39,7 +39,7 @@ const RowMfi = ({ getChart, onAddMfi, onRemoveMfi }) => {
     <RowType2
       forwardRef={_refPeriod}
       caption="MFI"
-      initValue={14}
+      initValue={30}
       configs={mfiConfs}
       onAdd={_onAddMfi}
       onRemove={_onRemoveMfi}
