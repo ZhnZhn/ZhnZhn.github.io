@@ -5,9 +5,13 @@ const C = {
 
   MSG_URI_EMPTY: "Item url isn't specified by adapter.",
   MSG_400: '400: Bad request.',
-  MSG_404: '404: Resource is not existed.',
-  MSG_429: '429: Too many request in a given amount of time (rate limiting).',
-  MSG_503: '503: Back-end server is at capacity.'
+};
+
+const HTTP_CODE_ERR_MSG = {
+  403: '403: Forbidden.',
+  404: '404: Resource is not existed.',
+  429: '429: Too many request in a given amount of time (rate limiting).',
+  503: '503: Back-end server is at capacity.'
 };
 
 const _isFn = fn => typeof fn === 'function'
@@ -75,15 +79,12 @@ const _fFetch = (propName) => function({
       } else if (status === 400) {
          _throwIfNotStatus(resErrStatus, status, C.MSG_400)
          return _promiseAll({ response, propName, status });
-      } else if (status === 404) {
-         throw _crErr(C.MSG_404);
-      } else if (status === 429) {
-         throw _crErr(C.MSG_429);
+      //403,404,429,503
+      } else if (HTTP_CODE_ERR_MSG[status]) {
+        throw _crErr(HTTP_CODE_ERR_MSG[status]);
       } else if (status>400 && status<500){
          _throwIfNotStatus(resErrStatus, status, `${status}: ${statusText}`)
          return _promiseAll({ response, propName, status });
-      } else if (status === 503) {
-         throw _crErr(C.MSG_503);
       } else if (status>=500 && status<600){
          throw _crErr(`${status}: ${statusText}`, C.RESP_ERR);
       } else {
