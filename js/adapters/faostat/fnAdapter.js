@@ -28,8 +28,7 @@ var C = {
 };
 
 var _crUnit = function _crUnit(json) {
-  var _json$data = json.data,
-      data = _json$data === void 0 ? [] : _json$data,
+  var data = json.data,
       item = data[data.length - 1] || {},
       _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit || C.BLANK;
 
@@ -48,19 +47,26 @@ var _crPoint = function _crPoint(_ref) {
   };
 };
 
-var _crHm = function _crHm(json) {
-  var _json$data2 = json.data,
-      data = _json$data2 === void 0 ? [] : _json$data2,
-      hm = Object.create(null);
-  data.forEach(function (item) {
-    var Area = item.Area;
+var _crHm = function _crHm(json, prName) {
+  var hm = Object.create(null);
+  json.data.forEach(function (item) {
+    var _itemKey = item[prName];
 
-    if (!hm[Area]) {
-      hm[Area] = [];
-      hm[Area].seriaName = Area;
+    if (!hm[_itemKey]) {
+      hm[_itemKey] = [];
+      hm[_itemKey].seriaName = _itemKey;
     }
 
-    hm[Area].push(_crPoint(item));
+    hm[_itemKey].push(_crPoint(item));
+    /*
+     const { Area } = item
+     if (!hm[Area]) {
+       hm[Area] = []
+       hm[Area].seriaName = Area
+     }
+     hm[Area].push(_crPoint(item))
+     */
+
   });
   return hm;
 };
@@ -76,7 +82,8 @@ var _crRefLegend = function _crRefLegend(hm) {
   for (propName in hm) {
     var _arr = hm[propName];
     legend.push((0, _extends2["default"])({}, _arr[_arr.length - 1], {
-      Area: propName
+      //Area: propName
+      listPn: propName
     }));
   }
 
@@ -85,12 +92,13 @@ var _crRefLegend = function _crRefLegend(hm) {
 
 var _hmToPoints = function _hmToPoints(hm, arr) {
   return arr.map(function (item) {
-    return hm[item.Area];
+    return hm[item.listPn];
   });
-};
+}; //.map(item => hm[item.Area]);
 
-var _crSeriesData = function _crSeriesData(json) {
-  var _hm = _crHm(json),
+
+var _crSeriesData = function _crSeriesData(json, prName) {
+  var _hm = _crHm(json, prName),
       _legend = _crRefLegend(_hm);
 
   return _hmToPoints(_hm, _legend);
@@ -100,23 +108,44 @@ var _compareByX = function _compareByX(a, b) {
   return a.x - b.x;
 };
 
-var _crSeriaData = function _crSeriaData(json, option) {
-  var _json$data3 = json.data,
-      data = _json$data3 === void 0 ? [] : _json$data3;
-  return data.map(_crPoint).sort(_compareByX);
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && n - n === 0;
 };
 
-var _isSeriesReq = function _isSeriesReq(_ref2) {
+var _crSeriaData = function _crSeriaData(json, option) {
+  var _data = [];
+  json.data.forEach(function (item) {
+    if (_isNumber(item.Value)) {
+      _data.push(_crPoint(item));
+    }
+  });
+  return _data.sort(_compareByX);
+};
+
+var _isList = function _isList(str) {
+  return str.indexOf('>') !== -1;
+};
+
+var _getSeriesPropName = function _getSeriesPropName(_ref2) {
   var items = _ref2.items;
-  var it1 = getValue(items[0]);
-  return it1.indexOf('>') !== -1;
+
+  if (_isList(getValue(items[0]))) {
+    return 'Area';
+  } else if (_isList(getValue(items[1]))) {
+    return 'Item';
+  }
+};
+
+var _isListForList = function _isListForList(_ref3) {
+  var items = _ref3.items;
+  return _isList(getValue(items[0])) && _isList(getValue(items[1]));
 };
 
 var fnAdapter = {
   getValue: getValue,
   findMinY: findMinY,
-  crId: function crId(_ref3) {
-    var _itemKey = _ref3._itemKey;
+  crId: function crId(_ref4) {
+    var _itemKey = _ref4._itemKey;
     return _itemKey;
   },
   crTitle: function crTitle(json, option) {
@@ -133,8 +162,7 @@ var fnAdapter = {
       return dfTitle ? dfTitle + ": " + title : title;
     }
 
-    var _json$data4 = json.data,
-        data = _json$data4 === void 0 ? [] : _json$data4,
+    var data = json.data,
         p = data[data.length - 1];
 
     if (p && typeof p === 'object') {
@@ -156,12 +184,14 @@ var fnAdapter = {
   },
   crSeriaData: _crSeriaData,
   toDataPoints: function toDataPoints(json, option) {
-    return _isSeriesReq(option) ? _crSeriesData(json, option) : _crSeriaData(json, option);
+    var _prName = _getSeriesPropName(option);
+
+    return _prName ? _crSeriesData(json, _prName) : _crSeriaData(json, option);
   },
   toInfo: _fnDescr["default"].toInfo,
-  crZhConfig: function crZhConfig(id, _ref4) {
-    var dfDomain = _ref4.dfDomain,
-        itemCaption = _ref4.itemCaption;
+  crZhConfig: function crZhConfig(id, _ref5) {
+    var dfDomain = _ref5.dfDomain,
+        itemCaption = _ref5.itemCaption;
     return {
       id: id,
       key: id,
@@ -175,7 +205,8 @@ var fnAdapter = {
   crValueMoving: function crValueMoving(points) {
     return _isArr(points) && !_isArr(points[0]) ? valueMoving(points) : void 0;
   },
-  isSeriesReq: _isSeriesReq
+  isSeriesReq: _getSeriesPropName,
+  isQueryAllowed: _isListForList
 };
 var _default = fnAdapter;
 exports["default"] = _default;

@@ -13,6 +13,7 @@ var C = {
   MEM_YEAR: void 0
 };
 var isSeriesReq = _fnAdapter["default"].isSeriesReq,
+    isQueryAllowed = _fnAdapter["default"].isQueryAllowed,
     getValue = _fnAdapter["default"].getValue,
     _isArr = Array.isArray,
     _assign = Object.assign;
@@ -40,6 +41,10 @@ var _isTitle = function _isTitle(qT) {
 var _checkReq = function _checkReq(option) {
   if (option._isTs && isSeriesReq(option)) {
     throw new Error('ERR_10');
+  }
+
+  if (isQueryAllowed(option)) {
+    throw new Error('Query lists for lists is not allowed.');
   }
 };
 

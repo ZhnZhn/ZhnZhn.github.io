@@ -6,7 +6,11 @@ const C = {
   MEM_YEAR: void 0
 };
 
-const { isSeriesReq, getValue } = fnAdapter
+const {
+  isSeriesReq,
+  isQueryAllowed,
+  getValue
+} = fnAdapter
 , _isArr = Array.isArray
 , _assign = Object.assign;
 
@@ -29,6 +33,9 @@ const _isTitle = (qT) => {
 const _checkReq = (option) => {
   if (option._isTs && isSeriesReq(option)) {
     throw new Error('ERR_10');
+  }
+  if (isQueryAllowed(option)) {
+    throw new Error('Query lists for lists is not allowed.');
   }
 };
 

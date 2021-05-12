@@ -1,7 +1,6 @@
+import AdapterFn from '../AdapterFn';
 
-import AdapterFn from '../AdapterFn'
-
-import fnDescr from './fnDescr'
+import fnDescr from './fnDescr';
 
 const {
   isYNumber,
@@ -23,7 +22,7 @@ const C = {
 };
 
 const _crUnit = (json) => {
-  const { data=[] } = json
+  const { data } = json
   , item = data[data.length-1] || {}
   , _unit = item.Unit === undefined
        ? C.DATASET_EMPTY
@@ -46,17 +45,23 @@ const _crPoint = ({ Year, Months, Value }) => {
 };
 
 
-const _crHm = (json) => {
-  const { data=[]} = json
-  , hm = Object.create(null);
-
-  data.forEach(item => {
+const _crHm = (json, prName) => {
+  const hm = Object.create(null);
+  json.data.forEach(item => {
+    const _itemKey = item[prName];
+    if (!hm[_itemKey]) {
+      hm[_itemKey] = []
+      hm[_itemKey].seriaName = _itemKey
+    }
+    hm[_itemKey].push(_crPoint(item))
+    /*
      const { Area } = item
      if (!hm[Area]) {
        hm[Area] = []
        hm[Area].seriaName = Area
      }
      hm[Area].push(_crPoint(item))
+     */
   })
   return hm;
 };
@@ -70,7 +75,8 @@ const _crRefLegend = (hm) => {
     const _arr = hm[propName];
     legend.push({
       ..._arr[_arr.length-1],
-      Area: propName
+      //Area: propName
+      listPn: propName
     })
   }
   return legend
@@ -79,30 +85,46 @@ const _crRefLegend = (hm) => {
     .reverse();
 };
 
-const _hmToPoints = (hm, arr) => {
-  return arr.map(item => hm[item.Area]);
-};
+const _hmToPoints = (hm, arr) => arr
+  .map(item => hm[item.listPn]);
+  //.map(item => hm[item.Area]);
 
-const _crSeriesData = (json) => {
-  const _hm = _crHm(json)
-      , _legend = _crRefLegend(_hm);
+
+const _crSeriesData = (json, prName) => {
+  const _hm = _crHm(json, prName)
+  , _legend = _crRefLegend(_hm);
 
   return _hmToPoints(_hm, _legend);
 };
 
 const _compareByX = (a, b) => a.x - b.x;
+const _isNumber = n => typeof n === 'number'
+  && n-n === 0;
 
 const _crSeriaData = (json, option) => {
-  const { data=[] } = json;
-  return data
-    .map(_crPoint)
-    .sort(_compareByX);
+  const _data = [];
+  json.data.forEach(item => {
+    if (_isNumber(item.Value)) {
+      _data.push(_crPoint(item))
+    }
+  })
+  return _data.sort(_compareByX);
 };
 
-const _isSeriesReq = ({ items }) => {
-  const it1 = getValue(items[0]);
-  return it1.indexOf('>') !== -1;
-}
+const _isList = str => str.indexOf('>') !== -1;
+
+const _getSeriesPropName = ({ items }) => {
+  if (_isList(getValue(items[0]))) {
+    return 'Area';
+  } else if (_isList(getValue(items[1]))) {
+    return 'Item';
+  }
+};
+
+const _isListForList = ({ items }) => {
+  return _isList(getValue(items[0]))
+    && _isList(getValue(items[1]));
+};
 
 const fnAdapter = {
   getValue,
@@ -122,7 +144,7 @@ const fnAdapter = {
          ? `${dfTitle}: ${title}`
          : title;
      }
-     const { data=[] } = json
+     const { data } = json
          , p = data[data.length-1];
      if (p && typeof p === 'object') {
        const { Area='', Item='', Element='' } = p;
@@ -139,8 +161,9 @@ const fnAdapter = {
   },
   crSeriaData: _crSeriaData,
   toDataPoints: (json, option) => {
-    return _isSeriesReq(option)
-      ? _crSeriesData(json, option)
+    const _prName = _getSeriesPropName(option);
+    return _prName
+      ? _crSeriesData(json, _prName)
       : _crSeriaData(json, option);
   },
   toInfo: fnDescr.toInfo,
@@ -158,7 +181,8 @@ const fnAdapter = {
       ? valueMoving(points)
       : void 0;
   },
-  isSeriesReq: _isSeriesReq
+  isSeriesReq: _getSeriesPropName,
+  isQueryAllowed: _isListForList
 };
 
 export default fnAdapter
