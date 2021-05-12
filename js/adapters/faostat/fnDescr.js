@@ -28,8 +28,9 @@ var _crDescrRow = function _crDescrRow(title, value, code) {
   return value ? "<div>" + _crWrSpan(title + ':') + " " + _crBlackSpan(value) + _codeText + "</div>" : '';
 };
 
-var _toDescr = function _toDescr(item) {
-  var _item$Area = item.Area,
+var _toDescr = function _toDescr(item, title) {
+  var _isList = title.indexOf('> (List)') !== -1,
+      _item$Area = item.Area,
       Area = _item$Area === void 0 ? '' : _item$Area,
       _item$Domain = item.Domain,
       Domain = _item$Domain === void 0 ? '' : _item$Domain,
@@ -38,20 +39,20 @@ var _toDescr = function _toDescr(item) {
       _item$Element = item.Element,
       Element = _item$Element === void 0 ? '' : _item$Element,
       Unit = item.Unit,
+      _areaDescrRow = _isList ? '' : _crDescrRow('Area', Area, item['Area Code']),
       _Unit = toUpperCaseFirst(Unit);
 
-  return "<div>\n    " + _crDescrRow('Area', Area, item['Area Code']) + "\n    " + _crDescrRow('Domain', Domain, item['Domain Code']) + "\n    " + _crDescrRow('Item', Item, item['Item Code']) + "\n    " + _crDescrRow('Element', Element, item['Element Code']) + "\n    " + _crDescrRow('Unit', _Unit) + "\n    <div>" + (item['Flag Description'] || DATASET_EMPTY) + "</div>\n  </div>";
+  return "<div>\n    " + _areaDescrRow + "\n    " + _crDescrRow('Domain', Domain, item['Domain Code']) + "\n    " + _crDescrRow('Item', Item, item['Item Code']) + "\n    " + _crDescrRow('Element', Element, item['Element Code']) + "\n    " + _crDescrRow('Unit', _Unit) + "\n    <div>" + (item['Flag Description'] || DATASET_EMPTY) + "</div>\n  </div>";
 };
 
 var fnDescr = {
   toInfo: function toInfo(json, title, subtitle) {
-    var _json$data = json.data,
-        data = _json$data === void 0 ? [] : _json$data,
+    var data = json.data,
         _itemNewest = data[data.length - 1] || {},
         _itemOldest = data[0] || {},
         _dateNewest = _itemNewest.Year || '',
         _dateOldest = _itemOldest.Year || '',
-        _descr = _toDescr(_itemNewest);
+        _descr = _toDescr(_itemNewest, title);
 
     return {
       description: _descr,

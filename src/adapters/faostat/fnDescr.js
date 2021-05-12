@@ -1,7 +1,8 @@
+import AdapterFn from '../AdapterFn';
 
-import AdapterFn from '../AdapterFn'
-
-const { toUpperCaseFirst } = AdapterFn;
+const {
+  toUpperCaseFirst
+} = AdapterFn;
 
 const DATASET_EMPTY = "Dataset is empty";
 
@@ -15,11 +16,14 @@ const _crDescrRow = (title, value, code='') => {
     : '';
 };
 
-const _toDescr = (item) => {
-  const { Area='', Domain='', Item='', Element='', Unit } = item
-      , _Unit = toUpperCaseFirst(Unit);
+
+const _toDescr = (item, title) => {
+  const _isList = title.indexOf('> (List)') !== -1
+  , { Area='', Domain='', Item='', Element='', Unit } = item
+  , _areaDescrRow = _isList ? '' : _crDescrRow('Area', Area, item['Area Code'])
+  , _Unit = toUpperCaseFirst(Unit);
   return `<div>
-    ${_crDescrRow('Area', Area, item['Area Code'])}
+    ${_areaDescrRow}
     ${_crDescrRow('Domain', Domain, item['Domain Code'])}
     ${_crDescrRow('Item', Item, item['Item Code'])}
     ${_crDescrRow('Element', Element, item['Element Code'])}
@@ -30,12 +34,12 @@ const _toDescr = (item) => {
 
 const fnDescr = {
   toInfo(json, title, subtitle) {
-    const { data=[] } = json
+    const { data } = json
     , _itemNewest = data[data.length-1] || {}
     , _itemOldest = data[0] || {}
     , _dateNewest = _itemNewest.Year || ''
     , _dateOldest = _itemOldest.Year || ''
-    , _descr = _toDescr(_itemNewest);
+    , _descr = _toDescr(_itemNewest, title);
     return {
       description: _descr,
       frequency: "Annual",
@@ -44,6 +48,6 @@ const fnDescr = {
       fromDate: _dateOldest
     };
    }
-}
+};
 
 export default fnDescr
