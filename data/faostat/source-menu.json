@@ -1,8 +1,15 @@
 {
   "menu": [
     {
+      "caption": "Macro-Statistics",
+      "items": [
+        { "id": "FAO_INDICATORS" }
+      ]
+    },
+    {
       "caption": "Production",
       "items": [
+        { "id": "FAO_PR_INDICES" },
         { "id": "FAO_CROPS" },
         { "id": "FAO_CROPS_PROCESSED" },
         { "id": "FAO_LIVE_ANIMAL" }
@@ -56,6 +63,38 @@
       }
     },
 
+    "FAO_INDICATORS": {
+      "type": "FAO_INDICATORS",
+      "menuTitle": "Macro Indicators",
+      "contFullCaption": "FAOSTAT: Macro Indicators",
+      "addProps": "FAO_B_PR",
+      "dialogProps": {
+        "selectProps": [
+          ["Item", "mi-items"],
+          ["Element", "mi-elements"]
+        ],
+        "dfProps": {
+          "dfDomain": "MK"
+        }
+      }
+    },
+
+    "FAO_PR_INDICES": {
+      "type": "FAO_PR_INDICES",
+      "menuTitle": "Indices",
+      "dialogCaption": "Production Indices",
+      "contFullCaption": "FAOSTAT: Production Indices",
+      "addProps": "FAO_B_PR",
+      "dialogProps": {
+        "selectProps": [
+          ["Item", "pr-indices"],
+          ["Element", "pr-indices-el"]
+        ],
+        "dfProps": {
+          "dfDomain": "QI"
+        }
+      }
+    },
     "FAO_CROPS": {
       "type": "FAO_CROPS",
       "menuTitle": "Crops",
