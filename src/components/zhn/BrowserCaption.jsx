@@ -80,8 +80,7 @@ const BrowserCaption = ({
      }
      {
         (_isFn(onCheck) && _isFn(onUnCheck)) &&
-        <SvgCheckBox
-           initValue={false}
+        <SvgCheckBox           
            style={S.CHECK_BOX}
            onCheck={onCheck}
            onUnCheck={onUnCheck}

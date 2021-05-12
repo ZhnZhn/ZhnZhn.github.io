@@ -45,19 +45,6 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var _isValueFromProps = function _isValueFromProps(props, state) {
-  return !_isBool(props.initValue) || props.initValue !== state.initValue;
-};
-
-var _getInitStateFrom = function _getInitStateFrom(_ref2) {
-  var initValue = _ref2.initValue,
-      value = _ref2.value;
-  return {
-    initValue: initValue,
-    isChecked: !!value
-  };
-};
-
 var SvgCheckBox = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SvgCheckBox, _Component);
 
@@ -73,24 +60,20 @@ var SvgCheckBox = /*#__PURE__*/function (_Component) {
     onUnCheck: PropTypes.func
   }
   */
-  function SvgCheckBox(_props) {
+  function SvgCheckBox(props) {
     var _this;
 
-    _this = _Component.call(this, _props) || this;
+    _this = _Component.call(this, props) || this;
 
     _this._hClick = function () {
-      var _assertThisInitialize = (0, _assertThisInitialized2["default"])(_this),
-          _isOnCheck = _assertThisInitialize._isOnCheck,
-          _isOnUnCheck = _assertThisInitialize._isOnUnCheck,
-          state = _assertThisInitialize.state,
-          props = _assertThisInitialize.props,
-          onCheck = props.onCheck,
-          onUnCheck = props.onUnCheck,
-          isChecked = state.isChecked;
+      var _this$props = _this.props,
+          onCheck = _this$props.onCheck,
+          onUnCheck = _this$props.onUnCheck,
+          isChecked = _this.state.isChecked;
 
-      if (!isChecked && _isOnCheck) {
+      if (!isChecked && _isFn(onCheck)) {
         onCheck((0, _assertThisInitialized2["default"])(_this));
-      } else if (_isOnUnCheck) {
+      } else if (_isFn(onUnCheck)) {
         onUnCheck((0, _assertThisInitialized2["default"])(_this));
       }
 
@@ -113,28 +96,24 @@ var SvgCheckBox = /*#__PURE__*/function (_Component) {
       });
     };
 
-    var _onCheck = _props.onCheck,
-        _onUnCheck = _props.onUnCheck;
-    _this._isOnCheck = _isFn(_onCheck);
-    _this._isOnUnCheck = _isFn(_onUnCheck);
-    _this.state = _getInitStateFrom(_props);
+    var value = props.value,
+        initialValue = props.initialValue;
+    _this.state = {
+      isChecked: _isBool(value) ? value : !!initialValue
+    };
     return _this;
   }
-
-  SvgCheckBox.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
-    return _isValueFromProps(props, state) ? _getInitStateFrom(props) : null;
-  };
 
   var _proto = SvgCheckBox.prototype;
 
   _proto.render = function render() {
-    var _this$props = this.props,
-        style = _this$props.style,
-        checkedRestStroke = _this$props.checkedRestStroke,
-        checkedRestFill = _this$props.checkedRestFill,
-        checkedColor = _this$props.checkedColor,
-        _this$props$value = _this$props.value,
-        value = _this$props$value === void 0 ? this.state.isChecked : _this$props$value,
+    var _this$props2 = this.props,
+        style = _this$props2.style,
+        checkedRestStroke = _this$props2.checkedRestStroke,
+        checkedRestFill = _this$props2.checkedRestFill,
+        checkedColor = _this$props2.checkedColor,
+        _this$props2$value = _this$props2.value,
+        value = _this$props2$value === void 0 ? this.state.isChecked : _this$props2$value,
         _restStroke = value ? checkedRestStroke : C_GREY,
         _restFill = value ? checkedRestFill : _Color["default"].BLANK;
 

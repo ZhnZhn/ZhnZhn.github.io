@@ -87,7 +87,6 @@ var BrowserCaption = function BrowserCaption(_ref) {
       svgStyle: S.SVG_MORE,
       onClick: onMore
     }), _isFn(onCheck) && _isFn(onUnCheck) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {
-      initValue: false,
       style: S.CHECK_BOX,
       onCheck: onCheck,
       onUnCheck: onUnCheck

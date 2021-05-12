@@ -132,8 +132,7 @@ const Header = ({
         sliderStyle={TS.BORDER}
         onToggle={_toggleMore}
       />
-      <SvgCheckBox
-         initValue={false}
+      <SvgCheckBox         
          style={S.CHECK_BOX}
          onCheck={onCheck}
          onUnCheck={onUnCheck}

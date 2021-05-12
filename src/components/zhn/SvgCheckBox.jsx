@@ -1,7 +1,7 @@
 import { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import isKeyEnter from './isKeyEnter'
+import isKeyEnter from './isKeyEnter';
 
 import C from '../styles/Color';
 
@@ -27,16 +27,8 @@ const SvgChecked = ({ stroke }) => (
 const _isBool = bool => typeof bool === 'boolean';
 const _isFn = fn => typeof fn === 'function';
 
-const _isValueFromProps = (props, state) =>
-  !_isBool(props.initValue)
-  || props.initValue !== state.initValue;
-
-const _getInitStateFrom = ({ initValue, value }) => ({
-  initValue: initValue,
-  isChecked: !!value
-});
-
 class SvgCheckBox extends Component {
+
   /*
   static propTypes = {
     initValue: PropTypes.bool,
@@ -49,6 +41,7 @@ class SvgCheckBox extends Component {
     onUnCheck: PropTypes.func
   }
   */
+
   static defaultProps = {
     checkedRestStroke: C_GREY,
     checkedRestFill: C.BLANK,
@@ -56,32 +49,22 @@ class SvgCheckBox extends Component {
   }
 
   constructor(props){
-    super(props);
-
-    const { onCheck, onUnCheck } = props;
-    this._isOnCheck = _isFn(onCheck)
-    this._isOnUnCheck = _isFn(onUnCheck)
-
-    this.state = _getInitStateFrom(props)
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    return _isValueFromProps(props, state)
-      ? _getInitStateFrom(props)
-      : null;
+    super(props)
+    const { value, initialValue } = props;
+    this.state = {
+      isChecked: _isBool(value)
+        ? value
+        : !!initialValue
+    }
   }
 
   _hClick = () => {
-    const {
-       _isOnCheck, _isOnUnCheck,
-        state, props
-      } = this
-    , { onCheck, onUnCheck } = props
-    , { isChecked } = state;
+    const { onCheck, onUnCheck } = this.props
+    , { isChecked } = this.state;
 
-    if (!isChecked && _isOnCheck){
+    if (!isChecked && _isFn(onCheck)){
       onCheck(this);
-    } else if (_isOnUnCheck){
+    } else if (_isFn(onUnCheck)){
       onUnCheck(this);
     }
 

@@ -146,7 +146,6 @@ var Header = function Header(_ref3) {
       sliderStyle: TS.BORDER,
       onToggle: _toggleMore
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgCheckBox, {
-      initValue: false,
       style: S.CHECK_BOX,
       onCheck: onCheck,
       onUnCheck: onUnCheck
