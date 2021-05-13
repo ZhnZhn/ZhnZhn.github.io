@@ -173,7 +173,17 @@ const AdapterFn = {
   ,
 
   findMinY,
-  findMaxY
+  findMaxY,
+
+  mapIf: (arr, crItem, is) => {
+    const _items = [];
+    (arr || []).forEach(v => {
+      if (is(v)) {
+        _items.push(crItem(v))
+      }
+    })
+    return _items;
+  }
 };
 
 export default AdapterFn

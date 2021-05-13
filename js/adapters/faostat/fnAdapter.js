@@ -17,7 +17,8 @@ var isYNumber = _AdapterFn["default"].isYNumber,
     monthIndex = _AdapterFn["default"].monthIndex,
     ymdToUTC = _AdapterFn["default"].ymdToUTC,
     valueMoving = _AdapterFn["default"].valueMoving,
-    findMinY = _AdapterFn["default"].findMinY;
+    findMinY = _AdapterFn["default"].findMinY,
+    mapIf = _AdapterFn["default"].mapIf;
 var _isArr = Array.isArray;
 var C = {
   DATASET_EMPTY: 'Dataset is empty',
@@ -72,7 +73,7 @@ var _crHm = function _crHm(json, prName) {
 };
 
 var _compareByY = function _compareByY(a, b) {
-  return a.y - b.y;
+  return b.y - a.y;
 };
 
 var _crRefLegend = function _crRefLegend(hm) {
@@ -87,7 +88,7 @@ var _crRefLegend = function _crRefLegend(hm) {
     }));
   }
 
-  return legend.filter(isYNumber).sort(_compareByY).reverse();
+  return legend.filter(isYNumber).sort(_compareByY);
 };
 
 var _hmToPoints = function _hmToPoints(hm, arr) {
@@ -104,41 +105,37 @@ var _crSeriesData = function _crSeriesData(json, prName) {
   return _hmToPoints(_hm, _legend);
 };
 
+var _isValueNumber = function _isValueNumber(item) {
+  return typeof item.Value === 'number';
+};
+
 var _compareByX = function _compareByX(a, b) {
   return a.x - b.x;
 };
 
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && n - n === 0;
-};
-
 var _crSeriaData = function _crSeriaData(json, option) {
-  var _data = [];
-  json.data.forEach(function (item) {
-    if (_isNumber(item.Value)) {
-      _data.push(_crPoint(item));
-    }
-  });
-  return _data.sort(_compareByX);
+  return mapIf(json.data, _crPoint, _isValueNumber).sort(_compareByX);
 };
 
-var _isList = function _isList(str) {
-  return str.indexOf('>') !== -1;
+var _isItemList = function _isItemList(item) {
+  return getValue(item).indexOf('>') !== -1;
 };
 
 var _getSeriesPropName = function _getSeriesPropName(_ref2) {
   var items = _ref2.items;
 
-  if (_isList(getValue(items[0]))) {
+  if (_isItemList(items[0])) {
     return 'Area';
-  } else if (_isList(getValue(items[1]))) {
+  }
+
+  if (_isItemList(items[1])) {
     return 'Item';
   }
 };
 
 var _isListForList = function _isListForList(_ref3) {
   var items = _ref3.items;
-  return _isList(getValue(items[0])) && _isList(getValue(items[1]));
+  return _isItemList(items[0]) && _isItemList(items[1]);
 };
 
 var fnAdapter = {

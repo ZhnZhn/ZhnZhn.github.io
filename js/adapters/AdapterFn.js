@@ -177,7 +177,16 @@ var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["defaul
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substring(1) : EMPTY;
   },
   findMinY: findMinY,
-  findMaxY: findMaxY
+  findMaxY: findMaxY,
+  mapIf: function mapIf(arr, crItem, is) {
+    var _items = [];
+    (arr || []).forEach(function (v) {
+      if (is(v)) {
+        _items.push(crItem(v));
+      }
+    });
+    return _items;
+  }
 });
 var _default = AdapterFn;
 exports["default"] = _default;

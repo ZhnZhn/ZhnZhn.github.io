@@ -9,7 +9,8 @@ const {
   monthIndex,
   ymdToUTC,
   valueMoving,
-  findMinY
+  findMinY,
+  mapIf
 } = AdapterFn;
 
 const _isArr = Array.isArray;
@@ -66,7 +67,7 @@ const _crHm = (json, prName) => {
   return hm;
 };
 
-const _compareByY = (a, b) => a.y - b.y;
+const _compareByY = (a, b) => b.y - a.y;
 
 const _crRefLegend = (hm) => {
   const legend = [];
@@ -81,8 +82,7 @@ const _crRefLegend = (hm) => {
   }
   return legend
     .filter(isYNumber)
-    .sort(_compareByY)
-    .reverse();
+    .sort(_compareByY);
 };
 
 const _hmToPoints = (hm, arr) => arr
@@ -97,33 +97,29 @@ const _crSeriesData = (json, prName) => {
   return _hmToPoints(_hm, _legend);
 };
 
+const _isValueNumber = item => typeof item.Value === 'number';
 const _compareByX = (a, b) => a.x - b.x;
-const _isNumber = n => typeof n === 'number'
-  && n-n === 0;
 
 const _crSeriaData = (json, option) => {
-  const _data = [];
-  json.data.forEach(item => {
-    if (_isNumber(item.Value)) {
-      _data.push(_crPoint(item))
-    }
-  })
-  return _data.sort(_compareByX);
+  return mapIf(json.data, _crPoint, _isValueNumber)
+    .sort(_compareByX);
 };
 
-const _isList = str => str.indexOf('>') !== -1;
+const _isItemList = item => getValue(item)
+  .indexOf('>') !== -1;
 
 const _getSeriesPropName = ({ items }) => {
-  if (_isList(getValue(items[0]))) {
+  if (_isItemList(items[0])) {
     return 'Area';
-  } else if (_isList(getValue(items[1]))) {
+  }
+  if (_isItemList(items[1])) {
     return 'Item';
   }
 };
 
 const _isListForList = ({ items }) => {
-  return _isList(getValue(items[0]))
-    && _isList(getValue(items[1]));
+  return _isItemList(items[0])
+    && _isItemList(items[1]);
 };
 
 const fnAdapter = {
