@@ -19,8 +19,6 @@ var _ChartActions = require("../../flux/actions/ChartActions");
 
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 
-var _ItemFactory = _interopRequireDefault(require("../factories/ItemFactory"));
-
 var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
 var _has = _interopRequireDefault(require("../has"));
@@ -30,6 +28,8 @@ var _Comp = _interopRequireDefault(require("../Comp"));
 var _ModelMore = _interopRequireDefault(require("./ModelMore"));
 
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
+
+var _ChartList = _interopRequireDefault(require("./ChartList"));
 
 var TH_ID = 'CHART_CONTAINER';
 var CL = {
@@ -254,35 +254,6 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
       return _this[_crItemRefPropName(index)] = comp;
     };
 
-    _this._renderCharts = function () {
-      var _this$props4 = _this.props,
-          chartType = _this$props4.chartType,
-          browserType = _this$props4.browserType,
-          onCloseItem = _this$props4.onCloseItem,
-          store = _this$props4.store,
-          _this$state$configs = _this.state.configs,
-          configs = _this$state$configs === void 0 ? [] : _this$state$configs,
-          _isAdminMode = _isFn(store.isAdminMode) ? store.isAdminMode.bind(store) : false;
-
-      return configs.map(function (config, index) {
-        var _config$zhConfig = config.zhConfig,
-            zhConfig = _config$zhConfig === void 0 ? {} : _config$zhConfig,
-            id = zhConfig.id,
-            zhCompType = zhConfig.zhCompType;
-        return _ItemFactory["default"].crItem({
-          store: store,
-          config: config,
-          index: index,
-          chartType: chartType,
-          props: {
-            ref: !zhCompType ? _this._refChart.bind(null, index) : void 0,
-            onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
-            isAdminMode: _isAdminMode
-          }
-        });
-      });
-    };
-
     _this._getRootNodeStyle = function () {
       var _ref = _this._refRootNode.current || {},
           _ref$style = _ref.style,
@@ -323,7 +294,6 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
 
     _this._initWidthProperties(_props);
 
-    _this._MODEL = _this._crModelMore();
     _this._hSetActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), true);
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);
     _this._refRootNode = /*#__PURE__*/(0, _react.createRef)();
@@ -354,14 +324,22 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this$props5 = this.props,
-        theme = _this$props5.theme,
-        caption = _this$props5.caption,
+    var _this$props4 = this.props,
+        theme = _this$props4.theme,
+        caption = _this$props4.caption,
+        chartType = _this$props4.chartType,
+        browserType = _this$props4.browserType,
+        onCloseItem = _this$props4.onCloseItem,
+        store = _this$props4.store,
+        _isAdminModeFn = _isFn(store.isAdminMode) ? store.isAdminMode.bind(store) : function () {
+      return false;
+    },
         TS = theme.getStyle(TH_ID),
         _this$state = this.state,
         isShow = _this$state.isShow,
         isMore = _this$state.isMore,
         isCompareTo = _this$state.isCompareTo,
+        configs = _this$state.configs,
         _styleIsShow = isShow ? S.INLINE : S.NONE,
         _classIsShow = isShow ? CL.ROOT + " " + CL.SHOW : CL.ROOT,
         _modelMore = this._getModelMore();
@@ -400,8 +378,14 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ScrollPane, {
         innerRef: this._refSpComp,
         className: CL.SCROLL,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          children: this._renderCharts()
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartList["default"], {
+          refChartFn: this._refChart,
+          isAdminMode: _isAdminModeFn,
+          configs: configs,
+          store: store,
+          chartType: chartType,
+          browserType: browserType,
+          onCloseItem: onCloseItem
         })
       })]
     });

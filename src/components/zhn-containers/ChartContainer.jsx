@@ -3,13 +3,12 @@ import { Component, createRef } from 'react';
 import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 
-import ItemFactory from '../factories/ItemFactory';
-
-import withTheme from '../hoc/withTheme'
-import has from '../has'
-import A from '../Comp'
-import crModelMore from './ModelMore'
-import ModalCompareTo from './ModalCompareTo'
+import withTheme from '../hoc/withTheme';
+import has from '../has';
+import A from '../Comp';
+import crModelMore from './ModelMore';
+import ModalCompareTo from './ModalCompareTo';
+import ChartList from './ChartList';
 
 const TH_ID = 'CHART_CONTAINER';
 
@@ -36,7 +35,7 @@ const S = {
   CAPTION: {
     position: 'relative',
     top: -1
-  },  
+  },
   INLINE: {
     display: 'inline-block'
   },
@@ -69,10 +68,8 @@ class ChartContainer extends Component {
   constructor(props){
     super(props);
 
-    this.childMargin = CHILD_MARGIN;
+    this.childMargin = CHILD_MARGIN
     this._initWidthProperties(props)
-
-    this._MODEL = this._crModelMore()
 
     this._hSetActive = this._toggleChb.bind(this, true)
     this._hSetNotActive = this._toggleChb.bind(this, false)
@@ -80,7 +77,6 @@ class ChartContainer extends Component {
     this._refRootNode = createRef()
     this._refSpComp = createRef()
     this._refResize = createRef()
-
 
     this.state = {
       isMore: false,
@@ -229,32 +225,7 @@ class ChartContainer extends Component {
      }))
    }
 
-  _refChart = (index, comp) => this[_crItemRefPropName(index)] = comp
-
-  _renderCharts = () => {
-     const {
-       chartType, browserType, onCloseItem,
-       store
-     } = this.props
-     , { configs=[] } = this.state
-     , _isAdminMode = _isFn(store.isAdminMode)
-           ? store.isAdminMode.bind(store)
-           : false ;
-     return configs.map((config, index) => {
-       const { zhConfig={} } = config
-           , { id, zhCompType } = zhConfig;
-       return ItemFactory.crItem({
-          store,
-          config, index,
-          chartType,
-          props: {
-            ref: !zhCompType ? this._refChart.bind(null, index) : void 0,
-            onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
-            isAdminMode: _isAdminMode
-          }
-       });
-     });
-   }
+   _refChart = (index, comp) => this[_crItemRefPropName(index)] = comp
 
    _getRootNodeStyle = () => {
      const { style={} } = this._refRootNode.current || {};
@@ -285,10 +256,15 @@ class ChartContainer extends Component {
 
    render(){
      const  {
-       theme, caption
+       theme, caption,
+       chartType, browserType, onCloseItem,
+       store
      } = this.props
+     , _isAdminModeFn = _isFn(store.isAdminMode)
+          ? store.isAdminMode.bind(store)
+          : () => false
      , TS = theme.getStyle(TH_ID)
-     , { isShow, isMore, isCompareTo } = this.state
+     , { isShow, isMore, isCompareTo, configs } = this.state
      , _styleIsShow = isShow
           ? S.INLINE
           : S.NONE
@@ -342,9 +318,15 @@ class ChartContainer extends Component {
              innerRef={this._refSpComp}
              className={CL.SCROLL}
           >
-            <div>
-              { this._renderCharts() }
-            </div>
+            <ChartList
+               refChartFn={this._refChart}
+               isAdminMode={_isAdminModeFn}
+               configs={configs}
+               store={store}
+               chartType={chartType}
+               browserType={browserType}
+               onCloseItem={onCloseItem}
+            />
           </A.ScrollPane>
         </div>
      )
