@@ -30,15 +30,13 @@ const CHILD_MARGIN = 36
 
 const S = {
   BR_CAPTION: {
+    paddingTop: 2,
     paddingLeft: 2
   },
   CAPTION: {
     position: 'relative',
     top: -1
-  },
-  BT_RESIZE: {
-    marginTop: 5
-  },
+  },  
   INLINE: {
     display: 'inline-block'
   },
@@ -332,7 +330,6 @@ class ChartContainer extends Component {
           >
              <A.SvgHrzResize
                ref={this._refResize}
-               btStyle={S.BT_RESIZE}
                initWidth={INITIAL_WIDTH}
                minWidth={this._MIN_WIDTH}
                maxWidth={MAX_WIDTH}

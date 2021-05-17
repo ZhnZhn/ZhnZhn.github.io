@@ -5,23 +5,26 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
+var _BtResize = _interopRequireDefault(require("./BtResize"));
+
 var _isKeyEnter = _interopRequireDefault(require("./isKeyEnter"));
 
-var CL_BT = "bt-resize not-selected";
 var S = {
   ROOT_DIV: {
     display: 'inline-block'
   },
-  BT: {
+  BT_LEFT: {
     marginLeft: 10
+  },
+  BT_RIGHT: {
+    marginLeft: 10,
+    transform: 'rotate(180deg)'
   }
 };
 
@@ -35,13 +38,12 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
 
   /*
   static propTypes = {
-    btStyle: PropTypes.object
     initWidth: PropTypes.number,
     minWidth: PropTypes.number,
     maxWidth: PropTypes.number,
     step: PropTypes.number,
-    nodeRef=PropTypes.ref,
-    onResizeAfter=PropTypes.func
+    nodeRef: PropTypes.ref,
+    onResizeAfter: PropTypes.func
   }
   */
   function SvgHrzResize(props) {
@@ -104,6 +106,8 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
         _this.delta += step;
 
         _this._setNodeWidth(_this.initWidth + _this.delta);
+      } else {
+        _this._stopResize(true);
       }
     };
 
@@ -182,64 +186,25 @@ var SvgHrzResize = /*#__PURE__*/function (_Component) {
 
   var _proto = SvgHrzResize.prototype;
 
-  _proto.render = function render() {
-    var btStyle = this.props.btStyle,
-        _btStyle = (0, _extends2["default"])({}, S.BT, btStyle);
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    clearInterval(this.id);
+  };
 
+  _proto.render = function render() {
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S.ROOT_DIV,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-        className: CL_BT,
-        style: _btStyle,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtResize["default"], {
+        style: S.BT_LEFT,
         title: "Resize container to left",
-        onMouseDown: this._hStartResizeLeft,
-        onMouseUp: this._hStopResize,
-        onKeyDown: this._hKdLeft,
-        onTouchStart: this._hStartResizeLeft,
-        onTouchEnd: this._hStopResize,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
-          viewBox: "0 0 12 12",
-          width: "100%",
-          height: "100%",
-          preserveAspectRatio: "none",
-          xmlns: "http://www.w3.org/2000/svg",
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-            d: "M 1,6 L 11,6",
-            strokeWidth: "2",
-            strokeLinecap: "round"
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-            d: "M 6,2 L 1,6 6,10",
-            strokeWidth: "2",
-            strokeLinecap: "round",
-            fill: "none"
-          })]
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-        className: CL_BT,
-        style: _btStyle,
+        startResize: this._hStartResizeLeft,
+        stopResize: this._hStopResize,
+        onKeyDown: this._hKdLeft
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtResize["default"], {
+        style: S.BT_RIGHT,
         title: "Resize container to right",
-        onMouseDown: this._hStartResizeRight,
-        onMouseUp: this._hStopResize,
-        onKeyDown: this._hKdRight,
-        onTouchStart: this._hStartResizeRight,
-        onTouchEnd: this._hStopResize,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
-          viewBox: "0 0 12 12",
-          width: "100%",
-          height: "100%",
-          preserveAspectRatio: "none",
-          xmlns: "http://www.w3.org/2000/svg",
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-            d: "M 1,6 L 11,6",
-            strokeWidth: "2",
-            strokeLinecap: "round"
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-            d: "M 6,2 L 11,6 6,10",
-            strokeWidth: "2",
-            strokeLinecap: "round",
-            fill: "none"
-          })]
-        })
+        startResize: this._hStartResizeRight,
+        stopResize: this._hStopResize,
+        onKeyDown: this._hKdRight
       })]
     });
   };

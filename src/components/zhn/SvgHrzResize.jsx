@@ -1,15 +1,18 @@
 import { Component } from 'react';
 
-import isKeyEnter from './isKeyEnter'
-
-const CL_BT = "bt-resize not-selected";
+import BtResize from './BtResize';
+import isKeyEnter from './isKeyEnter';
 
 const S = {
   ROOT_DIV: {
     display: 'inline-block'
   },
-  BT: {
+  BT_LEFT: {
     marginLeft: 10
+  },
+  BT_RIGHT: {
+    marginLeft: 10,
+    transform: 'rotate(180deg)'
   }
 };
 
@@ -23,13 +26,12 @@ class SvgHrzResize extends Component {
 
   /*
   static propTypes = {
-    btStyle: PropTypes.object
     initWidth: PropTypes.number,
     minWidth: PropTypes.number,
     maxWidth: PropTypes.number,
     step: PropTypes.number,
-    nodeRef=PropTypes.ref,
-    onResizeAfter=PropTypes.func
+    nodeRef: PropTypes.ref,
+    onResizeAfter: PropTypes.func
   }
   */
 
@@ -37,7 +39,7 @@ class SvgHrzResize extends Component {
     super(props);
     const {
       initWidth, minWidth, maxWidth
-    } = props
+    } = props;
     this.initWidth = initWidth;
     this.currentWidth = this.initWidth;
     this.minDelta = minWidth - this.initWidth;
@@ -53,15 +55,19 @@ class SvgHrzResize extends Component {
     this._hStopResize = this._stopResize.bind(null, true)
   }
 
+  componentWillUnmount(){
+    clearInterval(this.id)
+  }
+
   _increaseStepValue = () => {
     this.countStep +=1;
-    if ( this.countStep > 30){
+    if (this.countStep > 30){
       this.step = 3;
-    } else if ( this.countStep > 15){
+    } else if (this.countStep > 15){
       this.step = 2;
     }
     if ( (this.maxDelta - this.delta) < 20 ||
-         (this.delta - this.minDelta) < 20    ){
+         (this.delta - this.minDelta) < 20) {
       this.step = 1;
     }
   }
@@ -98,6 +104,8 @@ class SvgHrzResize extends Component {
       || (step > 0 && this.delta < this.maxDelta) ) {
       this.delta += step;
       this._setNodeWidth(this.initWidth + this.delta)
+    } else {
+      this._stopResize(true)
     }
   }
 
@@ -146,66 +154,25 @@ class SvgHrzResize extends Component {
   }
 
   render(){
-    const { btStyle } = this.props
-    , _btStyle = {...S.BT, ...btStyle };
     return (
       <div style={S.ROOT_DIV}>
-        <button
-           className={CL_BT}
-           style={_btStyle}
-           title="Resize container to left"
-           onMouseDown={this._hStartResizeLeft}
-           onMouseUp={this._hStopResize}
-           onKeyDown={this._hKdLeft}
-           onTouchStart={this._hStartResizeLeft}
-           onTouchEnd={this._hStopResize}
-        >
-           <svg viewBox="0 0 12 12" width="100%" height="100%"
-               preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                   d="M 1,6 L 11,6"
-                   strokeWidth="2"
-                   strokeLinecap="round"
-                />
-               <path
-                   d="M 6,2 L 1,6 6,10"
-                   strokeWidth="2"
-                   strokeLinecap="round"
-                   fill="none"
-               />
-          </svg>
-      </button>
-      <button
-         className={CL_BT}
-         style={_btStyle}
-         title="Resize container to right"
-         onMouseDown={this._hStartResizeRight}
-         onMouseUp={this._hStopResize}
-         onKeyDown={this._hKdRight}
-         onTouchStart={this._hStartResizeRight}
-         onTouchEnd={this._hStopResize}
-      >
-        <svg viewBox="0 0 12 12" width="100%" height="100%"
-             preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-               d="M 1,6 L 11,6"
-               strokeWidth="2"
-               strokeLinecap="round"
-            />
-            <path
-               d="M 6,2 L 11,6 6,10"
-               strokeWidth="2"
-               strokeLinecap="round"
-               fill="none"
-             />
-        </svg>
-      </button>
-    </div>
+        <BtResize
+          style={S.BT_LEFT}
+          title="Resize container to left"
+          startResize={this._hStartResizeLeft}
+          stopResize={this._hStopResize}
+          onKeyDown={this._hKdLeft}
+        />
+        <BtResize
+          style={S.BT_RIGHT}
+          title="Resize container to right"
+          startResize={this._hStartResizeRight}
+          stopResize={this._hStopResize}
+          onKeyDown={this._hKdRight}
+        />
+     </div>
    );
   }
 }
-
 
 export default SvgHrzResize
