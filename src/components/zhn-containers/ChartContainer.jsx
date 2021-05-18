@@ -5,8 +5,9 @@ import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions
 
 import withTheme from '../hoc/withTheme';
 import has from '../has';
+import crCn from '../zhn-utils/crCn';
+import crModelMore from './crModelMore';
 import A from '../Comp';
-import crModelMore from './ModelMore';
 import ModalCompareTo from './ModalCompareTo';
 import ChartList from './ChartList';
 
@@ -51,13 +52,19 @@ const COMP_ACTIONS = [
 ];
 
 const _isFn = fn => typeof fn === "function";
-const _isBool = bool => typeof bool === 'boolean';
 const _isInArray = (arr=[], value) => Boolean(~arr.indexOf(value))
 
 const _crItemRefPropName = index => 'chart' + index;
 
 const _isContWidth = contWidth => contWidth
- && contWidth <= INITIAL_WIDTH ;
+ && contWidth <= INITIAL_WIDTH;
+
+const _crFnByNameArgs = (ref, methodName, ...args) => () => {
+  const _comp = ref.current;
+  if (_comp) {
+    _comp[methodName](...args)
+  }
+};
 
 class ChartContainer extends Component {
 
@@ -68,15 +75,16 @@ class ChartContainer extends Component {
   constructor(props){
     super(props);
 
-    this.childMargin = CHILD_MARGIN
-    this._initWidthProperties(props)
-
-    this._hSetActive = this._toggleChb.bind(this, true)
-    this._hSetNotActive = this._toggleChb.bind(this, false)
-
     this._refRootNode = createRef()
     this._refSpComp = createRef()
     this._refResize = createRef()
+
+    this.childMargin = CHILD_MARGIN
+    this._initWidthProperties(props)
+    this._initHandlers(props)
+
+    this._hSetActive = this._toggleChb.bind(this, true)
+    this._hSetNotActive = this._toggleChb.bind(this, false)
 
     this.state = {
       isMore: false,
@@ -96,42 +104,26 @@ class ChartContainer extends Component {
       : MIN_WIDTH
   }
 
-  _crResizeFn = (methodName, ...args) => {
-     return () => {
-       const _compResize = this._refResize.current;
-       if (_compResize) {
-         _compResize[methodName](...args)
-       }
-     }
-  }
-
-  _crModelMore = (isAdminMode) => {
-    const {
-      store,
-      onRemoveAll, onSortBy
-    } = this.props;
-    this._isAdminMode = _isBool(isAdminMode)
-      ? isAdminMode
-      : store.isAdminMode();
-
-    return crModelMore({
-      onMinWidth: this._crResizeFn('toWidth', this._MIN_WIDTH, true),
-      onInitWidth: this._crResizeFn('toWidth', this._INITIAL_WIDTH, true),
-      onPlusWidth: this._crResizeFn('resizeBy', STEP),
-      onMinusWidth: this._crResizeFn('resizeBy', -STEP),
+  _initHandlers = (props) => {
+    const { onSortBy, onRemoveAll } = this.props
+    , _refResize = this._refResize;
+    this._HANDLERS = {
+      onMinWidth: _crFnByNameArgs(_refResize, 'toWidth', this._MIN_WIDTH, true),
+      onInitWidth: _crFnByNameArgs(_refResize, 'toWidth', this._INITIAL_WIDTH, true),
+      onPlusWidth: _crFnByNameArgs(_refResize, 'resizeBy', STEP),
+      onMinusWidth: _crFnByNameArgs(_refResize, 'resizeBy', -STEP),
       onFit: this._fitToWidth,
       onShowCaptions: this._onShowCaptions,
       onSortBy,
       onRemoveAll,
-      isAdminMode: this._isAdminMode,
       onCompareTo: this._onCompareTo
-    });
+    }
   }
 
   componentDidMount(){
-    const { store } = this.props;
+    const { store, chartType } = this.props;
     this.unsubscribe = store.listen(this._onStore);
-    const _initState = store.getConfigs(this.props.chartType)
+    const _initState = store.getConfigs(chartType)
     if (_initState) {
        this.setState(_initState);
     }
@@ -227,13 +219,9 @@ class ChartContainer extends Component {
 
    _refChart = (index, comp) => this[_crItemRefPropName(index)] = comp
 
-   _getRootNodeStyle = () => {
-     const { style={} } = this._refRootNode.current || {};
-     return style;
-   }
-
    _fitToWidth = () => {
-     const { width } = this._getRootNodeStyle();
+     const { style } = this._refRootNode.current || {}
+     , { width } = style || {};
      if (width) {
        this._hResizeAfter(parseInt(width, 10))
      }
@@ -246,39 +234,29 @@ class ChartContainer extends Component {
      this.setState({ isCompareTo: false })
    }
 
-   _getModelMore = () => {
-     const { store } = this.props
-     , _isAdminMode = store.isAdminMode?.() || false;
-     return this._isAdminMode === _isAdminMode
-       ? this._MODEL
-       : (this._MODEL = this._crModelMore(_isAdminMode));
-   }
-
    render(){
      const  {
        theme, caption,
        chartType, browserType, onCloseItem,
        store
      } = this.props
+     , TS = theme.getStyle(TH_ID)
      , _isAdminModeFn = _isFn(store.isAdminMode)
           ? store.isAdminMode.bind(store)
           : () => false
-     , TS = theme.getStyle(TH_ID)
+     , _isAdminMode = store.isAdminMode?.() || false
+     , _modelMore = crModelMore(_isAdminMode, this._HANDLERS)
      , { isShow, isMore, isCompareTo, configs } = this.state
-     , _styleIsShow = isShow
-          ? S.INLINE
-          : S.NONE
-     , _classIsShow = isShow
-          ? `${CL.ROOT} ${CL.SHOW}`
-          : CL.ROOT
-     , _modelMore = this._getModelMore();
+     , _style = isShow ? S.INLINE : S.NONE
+     , _className = crCn(CL.ROOT, [isShow, CL.SHOW]);
+
      return(
         <div
            ref={this._refRootNode}
-           className={_classIsShow}
+           className={_className}
            style={{
              ...this._initialWidthStyle,
-             ..._styleIsShow,
+             ..._style,
              ...TS.ROOT
            }}
         >
@@ -289,7 +267,7 @@ class ChartContainer extends Component {
             model={_modelMore}
             onClose={this._hToggleMore}
           />
-          { this._isAdminMode && <ModalCompareTo
+          { _isAdminMode && <ModalCompareTo
               isShow={isCompareTo}
               onClose={this._closeCompareTo}
               onCompareTo={this._compareTo}

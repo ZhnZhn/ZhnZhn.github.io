@@ -23,9 +23,11 @@ var _withTheme = _interopRequireDefault(require("../hoc/withTheme"));
 
 var _has = _interopRequireDefault(require("../has"));
 
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 
-var _ModelMore = _interopRequireDefault(require("./ModelMore"));
+var _crModelMore = _interopRequireDefault(require("./crModelMore"));
+
+var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
 
@@ -66,10 +68,6 @@ var _isFn = function _isFn(fn) {
   return typeof fn === "function";
 };
 
-var _isBool = function _isBool(bool) {
-  return typeof bool === 'boolean';
-};
-
 var _isInArray = function _isInArray(arr, value) {
   if (arr === void 0) {
     arr = [];
@@ -84,6 +82,20 @@ var _crItemRefPropName = function _crItemRefPropName(index) {
 
 var _isContWidth = function _isContWidth(contWidth) {
   return contWidth && contWidth <= INITIAL_WIDTH;
+};
+
+var _crFnByNameArgs = function _crFnByNameArgs(ref, methodName) {
+  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    args[_key - 2] = arguments[_key];
+  }
+
+  return function () {
+    var _comp = ref.current;
+
+    if (_comp) {
+      _comp[methodName].apply(_comp, args);
+    }
+  };
 };
 
 var ChartContainer = /*#__PURE__*/function (_Component) {
@@ -103,38 +115,22 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
       _this._MIN_WIDTH = _this._INITIAL_WIDTH > MIN_WIDTH_WITH_TAB_MINI ? MIN_WIDTH_WITH_TAB_MINI : MIN_WIDTH;
     };
 
-    _this._crResizeFn = function (methodName) {
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      return function () {
-        var _compResize = _this._refResize.current;
-
-        if (_compResize) {
-          _compResize[methodName].apply(_compResize, args);
-        }
-      };
-    };
-
-    _this._crModelMore = function (isAdminMode) {
+    _this._initHandlers = function (props) {
       var _this$props = _this.props,
-          store = _this$props.store,
+          onSortBy = _this$props.onSortBy,
           onRemoveAll = _this$props.onRemoveAll,
-          onSortBy = _this$props.onSortBy;
-      _this._isAdminMode = _isBool(isAdminMode) ? isAdminMode : store.isAdminMode();
-      return (0, _ModelMore["default"])({
-        onMinWidth: _this._crResizeFn('toWidth', _this._MIN_WIDTH, true),
-        onInitWidth: _this._crResizeFn('toWidth', _this._INITIAL_WIDTH, true),
-        onPlusWidth: _this._crResizeFn('resizeBy', STEP),
-        onMinusWidth: _this._crResizeFn('resizeBy', -STEP),
+          _refResize = _this._refResize;
+      _this._HANDLERS = {
+        onMinWidth: _crFnByNameArgs(_refResize, 'toWidth', _this._MIN_WIDTH, true),
+        onInitWidth: _crFnByNameArgs(_refResize, 'toWidth', _this._INITIAL_WIDTH, true),
+        onPlusWidth: _crFnByNameArgs(_refResize, 'resizeBy', STEP),
+        onMinusWidth: _crFnByNameArgs(_refResize, 'resizeBy', -STEP),
         onFit: _this._fitToWidth,
         onShowCaptions: _this._onShowCaptions,
         onSortBy: onSortBy,
         onRemoveAll: onRemoveAll,
-        isAdminMode: _this._isAdminMode,
         onCompareTo: _this._onCompareTo
-      });
+      };
     };
 
     _this._isDataForContainer = function (data) {
@@ -254,17 +250,11 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
       return _this[_crItemRefPropName(index)] = comp;
     };
 
-    _this._getRootNodeStyle = function () {
-      var _ref = _this._refRootNode.current || {},
-          _ref$style = _ref.style,
-          style = _ref$style === void 0 ? {} : _ref$style;
-
-      return style;
-    };
-
     _this._fitToWidth = function () {
-      var _this$_getRootNodeSty = _this._getRootNodeStyle(),
-          width = _this$_getRootNodeSty.width;
+      var _ref = _this._refRootNode.current || {},
+          style = _ref.style,
+          _ref2 = style || {},
+          width = _ref2.width;
 
       if (width) {
         _this._hResizeAfter(parseInt(width, 10));
@@ -283,22 +273,17 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
       });
     };
 
-    _this._getModelMore = function () {
-      var store = _this.props.store,
-          _isAdminMode = (store.isAdminMode == null ? void 0 : store.isAdminMode()) || false;
-
-      return _this._isAdminMode === _isAdminMode ? _this._MODEL : _this._MODEL = _this._crModelMore(_isAdminMode);
-    };
-
+    _this._refRootNode = /*#__PURE__*/(0, _react.createRef)();
+    _this._refSpComp = /*#__PURE__*/(0, _react.createRef)();
+    _this._refResize = /*#__PURE__*/(0, _react.createRef)();
     _this.childMargin = CHILD_MARGIN;
 
     _this._initWidthProperties(_props);
 
+    _this._initHandlers(_props);
+
     _this._hSetActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), true);
     _this._hSetNotActive = _this._toggleChb.bind((0, _assertThisInitialized2["default"])(_this), false);
-    _this._refRootNode = /*#__PURE__*/(0, _react.createRef)();
-    _this._refSpComp = /*#__PURE__*/(0, _react.createRef)();
-    _this._refResize = /*#__PURE__*/(0, _react.createRef)();
     _this.state = {
       isMore: false,
       isCompareTo: false
@@ -309,10 +294,12 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
   var _proto = ChartContainer.prototype;
 
   _proto.componentDidMount = function componentDidMount() {
-    var store = this.props.store;
+    var _this$props4 = this.props,
+        store = _this$props4.store,
+        chartType = _this$props4.chartType;
     this.unsubscribe = store.listen(this._onStore);
 
-    var _initState = store.getConfigs(this.props.chartType);
+    var _initState = store.getConfigs(chartType);
 
     if (_initState) {
       this.setState(_initState);
@@ -324,37 +311,38 @@ var ChartContainer = /*#__PURE__*/function (_Component) {
   };
 
   _proto.render = function render() {
-    var _this$props4 = this.props,
-        theme = _this$props4.theme,
-        caption = _this$props4.caption,
-        chartType = _this$props4.chartType,
-        browserType = _this$props4.browserType,
-        onCloseItem = _this$props4.onCloseItem,
-        store = _this$props4.store,
+    var _this$props5 = this.props,
+        theme = _this$props5.theme,
+        caption = _this$props5.caption,
+        chartType = _this$props5.chartType,
+        browserType = _this$props5.browserType,
+        onCloseItem = _this$props5.onCloseItem,
+        store = _this$props5.store,
+        TS = theme.getStyle(TH_ID),
         _isAdminModeFn = _isFn(store.isAdminMode) ? store.isAdminMode.bind(store) : function () {
       return false;
     },
-        TS = theme.getStyle(TH_ID),
+        _isAdminMode = (store.isAdminMode == null ? void 0 : store.isAdminMode()) || false,
+        _modelMore = (0, _crModelMore["default"])(_isAdminMode, this._HANDLERS),
         _this$state = this.state,
         isShow = _this$state.isShow,
         isMore = _this$state.isMore,
         isCompareTo = _this$state.isCompareTo,
         configs = _this$state.configs,
-        _styleIsShow = isShow ? S.INLINE : S.NONE,
-        _classIsShow = isShow ? CL.ROOT + " " + CL.SHOW : CL.ROOT,
-        _modelMore = this._getModelMore();
+        _style = isShow ? S.INLINE : S.NONE,
+        _className = (0, _crCn["default"])(CL.ROOT, [isShow, CL.SHOW]);
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       ref: this._refRootNode,
-      className: _classIsShow,
-      style: (0, _extends2["default"])({}, this._initialWidthStyle, _styleIsShow, TS.ROOT),
+      className: _className,
+      style: (0, _extends2["default"])({}, this._initialWidthStyle, _style, TS.ROOT),
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ModalSlider, {
         isShow: isMore,
         className: CL.MENU_MORE,
         style: TS.EL_BORDER,
         model: _modelMore,
         onClose: this._hToggleMore
-      }), this._isAdminMode && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalCompareTo["default"], {
+      }), _isAdminMode && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalCompareTo["default"], {
         isShow: isCompareTo,
         onClose: this._closeCompareTo,
         onCompareTo: this._compareTo

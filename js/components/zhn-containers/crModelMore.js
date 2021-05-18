@@ -1,7 +1,12 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _memoizeOne = _interopRequireDefault(require("memoize-one"));
+
 var CL_ROW = 'row__pane-topic not-selected';
 
 var _crSubItem = function _crSubItem(id, name) {
@@ -28,7 +33,7 @@ var _crItem = function _crItem(name, onClick, isClose) {
 
 var P0 = [_crSubItem('p1', 'Items'), _crSubItem('p2', 'Sort By, ASC'), _crSubItem('p3', 'Resize')];
 
-var crModelMore = function crModelMore(_ref) {
+var _crModelMore = function _crModelMore(isAdminMode, _ref) {
   var onMinWidth = _ref.onMinWidth,
       onInitWidth = _ref.onInitWidth,
       onPlusWidth = _ref.onPlusWidth,
@@ -37,7 +42,6 @@ var crModelMore = function crModelMore(_ref) {
       onShowCaptions = _ref.onShowCaptions,
       onRemoveAll = _ref.onRemoveAll,
       onSortBy = _ref.onSortBy,
-      isAdminMode = _ref.isAdminMode,
       onCompareTo = _ref.onCompareTo;
   var p1 = [_crItem('Remove All', onRemoveAll), _crItem('Show Caption', onShowCaptions, false)];
 
@@ -56,6 +60,7 @@ var crModelMore = function crModelMore(_ref) {
   };
 };
 
+var crModelMore = (0, _memoizeOne["default"])(_crModelMore);
 var _default = crModelMore;
 exports["default"] = _default;
-//# sourceMappingURL=ModelMore.js.map
+//# sourceMappingURL=crModelMore.js.map

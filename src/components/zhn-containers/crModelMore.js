@@ -1,3 +1,5 @@
+import memoizeOne from 'memoize-one';
+
 const CL_ROW = 'row__pane-topic not-selected';
 
 const _crSubItem = (id, name) => ({
@@ -17,14 +19,13 @@ const P0 = [
   _crSubItem('p3', 'Resize')
 ];
 
-const crModelMore = ({
+const _crModelMore = (isAdminMode, {
   onMinWidth, onInitWidth,
   onPlusWidth, onMinusWidth,
   onFit,
   onShowCaptions,
   onRemoveAll,
   onSortBy,
-  isAdminMode,
   onCompareTo
 }) => {
   const p1 = [
@@ -54,6 +55,8 @@ const crModelMore = ({
       _crItem('Fit Items to Width', onFit, false)
     ]
   };
-}
+};
+
+const crModelMore = memoizeOne(_crModelMore);
 
 export default crModelMore
