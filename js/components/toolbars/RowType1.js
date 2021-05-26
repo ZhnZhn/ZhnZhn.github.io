@@ -192,7 +192,7 @@ var RowType1 = function RowType1(_ref3) {
         onEnter: _onColor
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
         caption: "Column",
-        rootStyle: S1.COLUMN,
+        style: S1.COLUMN,
         captionStyle: S.PL_6,
         checkedColor: OC_COLOR,
         initValue: true,
@@ -213,7 +213,7 @@ var RowType1 = function RowType1(_ref3) {
           onEnter: _onPlus
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
           caption: "OnTop",
-          rootStyle: S1.ON_TOP,
+          style: S1.ON_TOP,
           captionStyle: S.PL_6,
           checkedColor: OC_COLOR,
           initValue: false,

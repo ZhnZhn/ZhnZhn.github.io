@@ -123,8 +123,12 @@ var DialogType4 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
       _this._handleWithValidationClose();
     };
 
-    _this._handleMode = function (propName, value) {
-      _this[propName] = value;
+    _this._hCheckSecondYAxis = function () {
+      _this[HAS_SECOND_Y_AXIS] = true;
+    };
+
+    _this._hUnCheckSecondYAxis = function () {
+      _this[HAS_SECOND_Y_AXIS] = false;
     };
 
     _this._refDates = function (c) {
@@ -246,8 +250,8 @@ var DialogType4 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
           initValue: false,
           caption: CAPTION_YAXIS,
-          onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
-          onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
+          onCheck: this._hCheckSecondYAxis,
+          onUnCheck: this._hUnCheckSecondYAxis
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
         validationMessages: validationMessages

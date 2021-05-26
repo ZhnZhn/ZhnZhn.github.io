@@ -78,8 +78,12 @@ var DialogType4A = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/fun
       _this._handleWithValidationClose();
     };
 
-    _this._handleMode = function (propName, value) {
-      _this[propName] = value;
+    _this._hCheckSecondYAxis = function () {
+      _this[HAS_SECOND_Y_AXIS] = true;
+    };
+
+    _this._hUnCheckSecondYAxis = function () {
+      _this[HAS_SECOND_Y_AXIS] = false;
     };
 
     _this._refOneTwo = function (c) {
@@ -173,8 +177,8 @@ var DialogType4A = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/fun
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
           initValue: false,
           caption: "Add Seria with Second YAxis",
-          onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
-          onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
+          onCheck: this._hCheckSecondYAxis,
+          onUnCheck: this._hUnCheckSecondYAxis
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
         validationMessages: validationMessages

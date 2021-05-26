@@ -67,18 +67,19 @@ var SvgCheckBox = /*#__PURE__*/function (_Component) {
 
     _this._hClick = function () {
       var _this$props = _this.props,
+          _this$props$value = _this$props.value,
+          value = _this$props$value === void 0 ? _this.state.isChecked : _this$props$value,
           onCheck = _this$props.onCheck,
-          onUnCheck = _this$props.onUnCheck,
-          isChecked = _this.state.isChecked;
+          onUnCheck = _this$props.onUnCheck;
 
-      if (!isChecked && _isFn(onCheck)) {
-        onCheck((0, _assertThisInitialized2["default"])(_this));
-      } else if (_isFn(onUnCheck)) {
+      if (value && _isFn(onUnCheck)) {
         onUnCheck((0, _assertThisInitialized2["default"])(_this));
+      } else if (_isFn(onCheck)) {
+        onCheck((0, _assertThisInitialized2["default"])(_this));
       }
 
       _this.setState({
-        isChecked: !isChecked
+        isChecked: !value
       });
     };
 
@@ -96,10 +97,10 @@ var SvgCheckBox = /*#__PURE__*/function (_Component) {
       });
     };
 
-    var value = props.value,
+    var _value = props.value,
         initialValue = props.initialValue;
     _this.state = {
-      isChecked: _isBool(value) ? value : !!initialValue
+      isChecked: _isBool(_value) ? _value : !!initialValue
     };
     return _this;
   }

@@ -7,20 +7,20 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
-var _withTheme = _interopRequireDefault(require("../../hoc/withTheme"));
+var _useTheme = _interopRequireDefault(require("../../hooks/useTheme"));
+
+var _useRefInit = _interopRequireDefault(require("../../hooks/useRefInit"));
 
 var _SvgCheckBox = _interopRequireDefault(require("../../zhn/SvgCheckBox"));
 
 //import PropTypes from "prop-types";
-var CL = "bt-chb";
-var TH_ID = 'ROW_CHECKBOX';
-var CHECKED_COLOR = '#1b2836';
+var CL = "bt-chb",
+    TH_ID = 'ROW_CHECKBOX',
+    CHECKED_COLOR = '#1b2836';
 var S = {
   ROOT: {
     paddingTop: 6,
@@ -42,10 +42,12 @@ var S = {
 
 var _isFn = function _isFn(fn) {
   return typeof fn == 'function';
-};
-
-var _isUndefined = function _isUndefined(v) {
+},
+    _isUndefined = function _isUndefined(v) {
   return typeof v === 'undefined';
+},
+    _isBool = function _isBool(bool) {
+  return typeof bool === 'boolean';
 };
 
 var _crCheckedStyle = function _crCheckedStyle(color) {
@@ -54,124 +56,93 @@ var _crCheckedStyle = function _crCheckedStyle(color) {
   };
 };
 
-var RowCheckBox = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(RowCheckBox, _Component);
+var RowCheckBox = function RowCheckBox(_ref) {
+  var style = _ref.style,
+      _ref$checkedColor = _ref.checkedColor,
+      checkedColor = _ref$checkedColor === void 0 ? CHECKED_COLOR : _ref$checkedColor,
+      value = _ref.value,
+      initValue = _ref.initValue,
+      caption = _ref.caption,
+      captionStyle = _ref.captionStyle,
+      onCheck = _ref.onCheck,
+      onUnCheck = _ref.onUnCheck,
+      onToggle = _ref.onToggle;
 
-  /*
-  static propTypes = {
-    rootStyle : PropTypes.object,
-    checkedRestStroke: PropTypes.string,
-    checkedRestFill: PropTypes.string,
-    caption: PropTypes.string,
-    styleCheckedCaption: PropTypes.object,
-    initValue: PropTypes.bool,
-    value: PropTypes.bool,
-    onCheck: PropTypes.func,
-    onUnCheck: PropTypes.func,
-    onToggle: PropTypes.func
-  }
-  */
-  function RowCheckBox(props) {
-    var _this;
-
-    _this = _Component.call(this, props) || this;
-
-    _this._hCheck = function () {
-      var _this$props = _this.props,
-          onCheck = _this$props.onCheck,
-          onToggle = _this$props.onToggle;
-
-      if (_isFn(onCheck)) {
-        onCheck();
-      } else if (_isFn(onToggle)) {
-        onToggle(true);
-      }
-
-      if (_this.state) {
-        _this.setState({
-          isChecked: true
-        });
-      }
-    };
-
-    _this._hUnCheck = function () {
-      var _this$props2 = _this.props,
-          onUnCheck = _this$props2.onUnCheck,
-          onToggle = _this$props2.onToggle;
-
-      if (_isFn(onUnCheck)) {
-        onUnCheck();
-      } else if (_isFn(onToggle)) {
-        onToggle(false);
-      }
-
-      if (_this.state) {
-        _this.setState({
-          isChecked: false
-        });
-      }
-    };
-
-    _this._hToggle = function () {
-      var _is = _this.state ? _this.state.isChecked : _this.props.value;
-
-      if (_is) {
-        _this._hUnCheck();
-      } else {
-        _this._hCheck();
-      }
-    };
-
-    if (_isUndefined(props.value)) {
-      _this.state = {
-        isChecked: !!props.initValue
-      };
+  var _useState = (0, _react.useState)(function () {
+    return _isUndefined(value) ? !!initValue : void 0;
+  }),
+      valueState = _useState[0],
+      setValueState = _useState[1],
+      _isValueState = (0, _useRefInit["default"])(function () {
+    return _isBool(valueState);
+  }),
+      _value = _isValueState ? valueState : value,
+      _hCheck = (0, _react.useCallback)(function () {
+    if (_isFn(onCheck)) {
+      onCheck();
+    } else if (_isFn(onToggle)) {
+      onToggle(true);
     }
 
-    return _this;
-  }
+    if (_isValueState) {
+      setValueState(true);
+    }
+  }, [onCheck, onToggle, _isValueState]),
+      _hUnCheck = (0, _react.useCallback)(function () {
+    if (_isFn(onUnCheck)) {
+      onUnCheck();
+    } else if (_isFn(onToggle)) {
+      onToggle(false);
+    }
 
-  var _proto = RowCheckBox.prototype;
+    if (_isValueState) {
+      setValueState(false);
+    }
+  }, [onUnCheck, onToggle, _isValueState]),
+      _hToggle = (0, _react.useCallback)(function () {
+    if (_value) {
+      _hUnCheck();
+    } else {
+      _hCheck();
+    }
+  }, [_value, _hUnCheck, _hCheck]),
+      TS = (0, _useTheme["default"])(TH_ID);
 
-  _proto.render = function render() {
-    var _this$props3 = this.props,
-        theme = _this$props3.theme,
-        rootStyle = _this$props3.rootStyle,
-        checkedColor = _this$props3.checkedColor,
-        caption = _this$props3.caption,
-        captionStyle = _this$props3.captionStyle,
-        value = _this$props3.value,
-        TS = theme.getStyle(TH_ID),
-        _value = this.state ? this.state.isChecked : value,
-        _style = _value ? (0, _extends2["default"])({}, captionStyle, _crCheckedStyle(checkedColor)) : captionStyle;
+  var _style = _value ? (0, _extends2["default"])({}, captionStyle, _crCheckedStyle(checkedColor)) : captionStyle;
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: (0, _extends2["default"])({}, S.ROOT, rootStyle),
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {
-        value: _value,
-        checkedRestStroke: checkedColor,
-        checkedRestFill: checkedColor,
-        checkedColor: TS.CHECKED_COLOR,
-        onCheck: this._hCheck,
-        onUnCheck: this._hUnCheck
-      }), caption && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-        className: CL,
-        tabIndex: "-1",
-        style: (0, _extends2["default"])({}, S.CAPTION, _style),
-        onClick: this._hToggle,
-        children: caption
-      })]
-    });
-  };
-
-  return RowCheckBox;
-}(_react.Component);
-
-RowCheckBox.defaultProps = {
-  checkedColor: CHECKED_COLOR
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: (0, _extends2["default"])({}, S.ROOT, style),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {
+      value: _value,
+      checkedRestStroke: checkedColor,
+      checkedRestFill: checkedColor,
+      checkedColor: TS.CHECKED_COLOR,
+      onCheck: _hCheck,
+      onUnCheck: _hUnCheck
+    }), caption && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+      className: CL,
+      tabIndex: "-1",
+      style: (0, _extends2["default"])({}, S.CAPTION, _style),
+      onClick: _hToggle,
+      children: caption
+    })]
+  });
 };
+/*
+RowCheckBox.propTypes = {
+  style: PropTypes.object,
+  checkedColor: PropTypes.string,
+  initValue: PropTypes.bool,
+  value: PropTypes.bool,
+  caption: PropTypes.string,
+  captionStyle: PropTypes.object,
+  onCheck: PropTypes.func,
+  onUnCheck: PropTypes.func,
+  onToggle: PropTypes.func
+}
+*/
 
-var _default = (0, _withTheme["default"])(RowCheckBox);
 
+var _default = RowCheckBox;
 exports["default"] = _default;
 //# sourceMappingURL=RowCheckBox.js.map

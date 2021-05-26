@@ -173,7 +173,7 @@ const RowType1 = ({
       />
       <D.RowCheckBox
         caption="Column"
-        rootStyle={S1.COLUMN}
+        style={S1.COLUMN}
         captionStyle={S.PL_6}
         checkedColor={OC_COLOR}
         initValue={true}
@@ -195,7 +195,7 @@ const RowType1 = ({
         />
         <D.RowCheckBox
           caption="OnTop"
-          rootStyle={S1.ON_TOP}
+          style={S1.ON_TOP}
           captionStyle={S.PL_6}
           checkedColor={OC_COLOR}
           initValue={false}

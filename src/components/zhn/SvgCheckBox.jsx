@@ -59,18 +59,20 @@ class SvgCheckBox extends Component {
   }
 
   _hClick = () => {
-    const { onCheck, onUnCheck } = this.props
-    , { isChecked } = this.state;
+    const {
+      value=this.state.isChecked,
+      onCheck, onUnCheck
+    } = this.props;
 
-    if (!isChecked && _isFn(onCheck)){
-      onCheck(this);
-    } else if (_isFn(onUnCheck)){
+    if (value && _isFn(onUnCheck)){
       onUnCheck(this);
+    } else if (_isFn(onCheck)) {
+      onCheck(this);
     }
 
-    this.setState({ isChecked: !isChecked });
+    this.setState({ isChecked: !value });
   }
-
+  
   _hKeyDown = (evt) => {
     if (isKeyEnter(evt)){
       evt.preventDefault()

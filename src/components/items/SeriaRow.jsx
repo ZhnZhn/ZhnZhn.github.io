@@ -35,7 +35,7 @@ const S = {
   ROW_CHECK_BOX: {
     display: 'inline-block',
     paddingLeft: 0,
-    verticalAlign: 'middle'    
+    verticalAlign: 'middle'
   },
   SELECT: {
      marginLeft: 24,
@@ -116,8 +116,7 @@ class SeriaRow extends Component {
     return (
       <div style={S.ROOT}>
         <D.RowCheckBox
-           rootStyle={S.ROW_CHECK_BOX}
-           caption=""
+           style={S.ROW_CHECK_BOX}
            onCheck={this._hCheck}
            onUnCheck={this._hUnCheck}
         />

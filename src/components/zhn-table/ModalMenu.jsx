@@ -20,7 +20,7 @@ const _renderHeaders = (headers, onToggle) => {
   return restHeader.map((h, index) => {
     return (<D.RowCheckBox
       key={h.name}
-      rootStyle={S.ROW}
+      style={S.ROW}
       checkedColor="black"
       caption={h.name}
       value={!h.isHide}
@@ -42,7 +42,7 @@ const ModalMenu = ({
      onClose={onClose}
    >
      <D.RowCheckBox
-       rootStyle={S.ROW}
+       style={S.ROW}
        checkedColor="black"
        caption="withStripLines"
        value={isGridLine}

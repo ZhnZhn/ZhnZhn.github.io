@@ -132,8 +132,7 @@ var SeriaRow = /*#__PURE__*/function (_Component) {
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S.ROOT,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
-        rootStyle: S.ROW_CHECK_BOX,
-        caption: "",
+        style: S.ROW_CHECK_BOX,
         onCheck: this._hCheck,
         onUnCheck: this._hUnCheck
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {

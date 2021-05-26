@@ -115,8 +115,12 @@ var AlphaIndicatorDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _d
       _this.forDaysComp = comp;
     };
 
-    _this._handleMode = function (propName, value) {
-      _this[propName] = value;
+    _this._hCheckSecondYAxis = function () {
+      _this[HAS_SECOND_Y_AXIS] = true;
+    };
+
+    _this._hUnCheckSecondYAxis = function () {
+      _this[HAS_SECOND_Y_AXIS] = false;
     };
 
     _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
@@ -205,8 +209,8 @@ var AlphaIndicatorDialog = (_dec = Decor.withToolbar, _dec2 = Decor.withLoad, _d
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
         initValue: false,
         caption: "Add Seria with Second YAxis",
-        onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
-        onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
+        onCheck: this._hCheckSecondYAxis,
+        onUnCheck: this._hUnCheckSecondYAxis
       })]
     });
   };

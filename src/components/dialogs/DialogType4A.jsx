@@ -71,9 +71,12 @@ class DialogType4A extends Component {
   _handleClose = () => {
     this._handleWithValidationClose()
   }
-
-  _handleMode = (propName, value) => {
-     this[propName] = value
+  
+  _hCheckSecondYAxis = () => {
+    this[HAS_SECOND_Y_AXIS] = true
+  }
+  _hUnCheckSecondYAxis = () => {
+    this[HAS_SECOND_Y_AXIS] = false
   }
 
   _refOneTwo = c => this.oneTwo = c
@@ -130,8 +133,8 @@ class DialogType4A extends Component {
                <D.RowCheckBox
                  initValue={false}
                  caption="Add Seria with Second YAxis"
-                 onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
-                 onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
+                 onCheck={this._hCheckSecondYAxis}
+                 onUnCheck={this._hUnCheckSecondYAxis}
                />
              </D.ShowHide>
              <D.ValidationMessages

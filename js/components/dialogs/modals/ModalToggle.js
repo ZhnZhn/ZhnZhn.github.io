@@ -48,7 +48,7 @@ var CheckBoxList = function CheckBoxList(_ref) {
       style: S.ROW,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
         initValue: true,
-        rootStyle: (0, _extends2["default"])({}, _Style["default"].ROW_CHB, S.INLINE),
+        style: (0, _extends2["default"])({}, _Style["default"].ROW_CHB, S.INLINE),
         checkedColor: TOGGLE_CHECKBOX_COLOR,
         caption: item.caption,
         captionStyle: S.CAPTION,
@@ -57,7 +57,7 @@ var CheckBoxList = function CheckBoxList(_ref) {
         }
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
         initValue: index === 0,
-        rootStyle: S.CHB_CAPTION,
+        style: S.CHB_CAPTION,
         checkedColor: CAPTION_CHECKBOX_COLOR,
         onCheck: function onCheck() {
           return onCheckCaption(index);
@@ -111,19 +111,19 @@ var ModalToggle = function ModalToggle(_ref2) {
       onUnCheckCaption: onUnCheckCaption
     }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
       value: isShowFd,
-      rootStyle: _Style["default"].ROW_CHB,
+      style: _Style["default"].ROW_CHB,
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "From Date",
       onToggle: _toggleFd
     }, "isShowFd"), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
       value: isShowChart,
-      rootStyle: _Style["default"].ROW_CHB,
+      style: _Style["default"].ROW_CHB,
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "Chart",
       onToggle: _toggleChart
     }, "isShowChart"), !noForDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
       value: isShowDate,
-      rootStyle: _Style["default"].ROW_CHB,
+      style: _Style["default"].ROW_CHB,
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "For Date",
       onToggle: _toggleDate

@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
+var _react = require("react");
+
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox"));
@@ -23,8 +25,12 @@ var ModalOptions = function ModalOptions(_ref) {
       toggleOption = _ref.toggleOption,
       onClose = _ref.onClose;
 
-  var _toggleZoomMinMax = toggleOption.bind(null, 'isNotZoomToMinMax'),
-      _toggleFilterZero = toggleOption.bind(null, 'isFilterZero');
+  var _toggleZoomMinMax = (0, _react.useCallback)(function (is) {
+    return toggleOption('isNotZoomToMinMax', is);
+  }, [toggleOption]),
+      _toggleFilterZero = (0, _react.useCallback)(function (is) {
+    return toggleOption('isFilterZero', is);
+  }, [toggleOption]);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup["default"], {
     isShow: isShow,
@@ -33,12 +39,12 @@ var ModalOptions = function ModalOptions(_ref) {
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
       initValue: false,
-      rootStyle: _Style["default"].ROW_CHB,
+      style: _Style["default"].ROW_CHB,
       caption: "Not Zoom to Min-Max",
       onToggle: _toggleZoomMinMax
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox["default"], {
       initValue: false,
-      rootStyle: _Style["default"].ROW_CHB,
+      style: _Style["default"].ROW_CHB,
       caption: "Filter Trim Zero Values",
       onToggle: _toggleFilterZero
     })]
