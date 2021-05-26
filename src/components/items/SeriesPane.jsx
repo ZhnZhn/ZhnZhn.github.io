@@ -1,7 +1,7 @@
-import { Component } from 'react'
+import { Component } from 'react';
 
-import ScrollPane from '../zhn/ScrollPane'
-import SeriaRow from './SeriaRow'
+import ScrollPane from '../zhn/ScrollPane';
+import SeriaRow from './SeriaRow';
 
 const CL = {
   ELL: 'ellipsis'
@@ -64,6 +64,41 @@ const _crYAxisOption = (toChart) => {
   return options;
 };
 
+const PasteToTitle = ({ chartId }) => (
+  <div style={S.TITLE}>
+    <span>From Chart:&nbsp;</span>
+    <span
+       className={CL.ELL}
+       style={S.CHART_ID}
+    >
+      {chartId}
+    </span>
+  </div>
+);
+
+const PasteToSeriaList = ({
+  chartId, series, options,
+  onReg, onUnReg
+}) => (
+  <div>
+   {(series || [])
+     .filter(seria => seria.visible)
+     .map((seria, index) => {
+     return (
+        <SeriaRow
+         key={`${chartId}_${seria.name || ''}_${index}`}
+         seria={seria}
+         compIndex={index}
+         yAxisOptions={options}
+         onReg={onReg}
+         onUnReg={onUnReg}
+      />
+    );
+   })}
+ </div>
+);
+
+
 class SeriesPane extends Component {
 
    compSeries = []
@@ -77,46 +112,23 @@ class SeriesPane extends Component {
     this.compSeries[compIndex] = null
   }
 
-  _renderSeries = (chartId, series, options) => {
-    return series
-      .filter(seria => seria.visible)
-      .map((seria, index) => {
-         return (
-           <SeriaRow
-              key={`${chartId} ${seria.name || index}`}
-              seria={seria}
-              compIndex={index}
-              yAxisOptions={options}
-              onReg={this._regSeriaRow}
-              onUnReg={this._unregSeriaRow}
-           />
-        );
-    })
-  }
-
   render(){
     const { style, toChart, fromChart } = this.props
-        , _yAxisOption = _crYAxisOption(toChart)
-        , { userOptions, series=[] } = fromChart || {}
-        , { zhConfig } = userOptions || {}
-        , { id:chartId='id' } = zhConfig || {};
+    , _yAxisOption = _crYAxisOption(toChart)
+    , { userOptions, series } = fromChart || {}
+    , { zhConfig } = userOptions || {}
+    , { id:chartId='id' } = zhConfig || {};
 
     return (
-      <ScrollPane style={style}>
-        <div style={S.ROOT_DIV}>
-          <div style={S.TITLE}>
-            <span>From Chart:&nbsp;</span>
-            <span
-               className={CL.ELL}
-               style={S.CHART_ID}
-            >
-              {chartId}
-            </span>
-          </div>
-          <div>
-            {this._renderSeries(chartId, series, _yAxisOption)}
-          </div>
-        </div>
+      <ScrollPane style={{...style, ...S.ROOT_DIV}}>
+         <PasteToTitle chartId={chartId} />
+         <PasteToSeriaList
+            chartId={chartId}
+            series={series}
+            options={_yAxisOption}
+            onReg={this._regSeriaRow}
+            onUnReg={this._unregSeriaRow}
+         />
       </ScrollPane>
     );
   }

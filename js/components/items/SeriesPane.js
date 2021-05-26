@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _jsxRuntime = require("react/jsx-runtime.js");
@@ -74,6 +76,41 @@ var _crYAxisOption = function _crYAxisOption(toChart) {
   return options;
 };
 
+var PasteToTitle = function PasteToTitle(_ref4) {
+  var chartId = _ref4.chartId;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S.TITLE,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      children: "From Chart:\xA0"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      className: CL.ELL,
+      style: S.CHART_ID,
+      children: chartId
+    })]
+  });
+};
+
+var PasteToSeriaList = function PasteToSeriaList(_ref5) {
+  var chartId = _ref5.chartId,
+      series = _ref5.series,
+      options = _ref5.options,
+      onReg = _ref5.onReg,
+      onUnReg = _ref5.onUnReg;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    children: (series || []).filter(function (seria) {
+      return seria.visible;
+    }).map(function (seria, index) {
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaRow["default"], {
+        seria: seria,
+        compIndex: index,
+        yAxisOptions: options,
+        onReg: onReg,
+        onUnReg: onUnReg
+      }, chartId + "_" + (seria.name || '') + "_" + index);
+    })
+  });
+};
+
 var SeriesPane = /*#__PURE__*/function (_Component) {
   (0, _inheritsLoose2["default"])(SeriesPane, _Component);
 
@@ -97,20 +134,6 @@ var SeriesPane = /*#__PURE__*/function (_Component) {
       _this.compSeries[compIndex] = null;
     };
 
-    _this._renderSeries = function (chartId, series, options) {
-      return series.filter(function (seria) {
-        return seria.visible;
-      }).map(function (seria, index) {
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaRow["default"], {
-          seria: seria,
-          compIndex: index,
-          yAxisOptions: options,
-          onReg: _this._regSeriaRow,
-          onUnReg: _this._unregSeriaRow
-        }, chartId + " " + (seria.name || index));
-      });
-    };
-
     return _this;
   }
 
@@ -122,33 +145,26 @@ var SeriesPane = /*#__PURE__*/function (_Component) {
         toChart = _this$props.toChart,
         fromChart = _this$props.fromChart,
         _yAxisOption = _crYAxisOption(toChart),
-        _ref4 = fromChart || {},
-        userOptions = _ref4.userOptions,
-        _ref4$series = _ref4.series,
-        series = _ref4$series === void 0 ? [] : _ref4$series,
-        _ref5 = userOptions || {},
-        zhConfig = _ref5.zhConfig,
-        _ref6 = zhConfig || {},
-        _ref6$id = _ref6.id,
-        chartId = _ref6$id === void 0 ? 'id' : _ref6$id;
+        _ref6 = fromChart || {},
+        userOptions = _ref6.userOptions,
+        series = _ref6.series,
+        _ref7 = userOptions || {},
+        zhConfig = _ref7.zhConfig,
+        _ref8 = zhConfig || {},
+        _ref8$id = _ref8.id,
+        chartId = _ref8$id === void 0 ? 'id' : _ref8$id;
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ScrollPane["default"], {
-      style: style,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: S.ROOT_DIV,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          style: S.TITLE,
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            children: "From Chart:\xA0"
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            className: CL.ELL,
-            style: S.CHART_ID,
-            children: chartId
-          })]
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          children: this._renderSeries(chartId, series, _yAxisOption)
-        })]
-      })
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane["default"], {
+      style: (0, _extends2["default"])({}, style, S.ROOT_DIV),
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(PasteToTitle, {
+        chartId: chartId
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(PasteToSeriaList, {
+        chartId: chartId,
+        series: series,
+        options: _yAxisOption,
+        onReg: this._regSeriaRow,
+        onUnReg: this._unregSeriaRow
+      })]
     });
   };
 
