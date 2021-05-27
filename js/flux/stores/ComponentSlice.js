@@ -89,14 +89,15 @@ var CheckBoxChartLogic = {
 };
 var ChbContLogic = {
   _check: function _check(slice, checkBox) {
-    if (slice.activeContChb) {
-      slice.activeContChb.setUnchecked();
+    var _chb = slice.activeContChb;
+
+    if (_chb) {
+      _chb.setUnchecked();
     }
 
     slice.activeContChb = checkBox;
   },
   _uncheck: function _uncheck(slice) {
-    slice.activeContChb.setUnchecked();
     slice.activeContChb = null;
   },
   toggle: function toggle(slice, _ref) {
@@ -110,8 +111,12 @@ var ChbContLogic = {
     }
   },
   uncheckActive: function uncheckActive(slice, chartType) {
-    if (slice.activeContChb) {
-      this._uncheck(slice);
+    var _chb = slice.activeContChb;
+
+    if (_chb && _chb.chartType === chartType) {
+      _chb.setUnchecked();
+
+      slice.activeContChb = null;
     }
   }
 };

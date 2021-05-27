@@ -66,13 +66,13 @@ const CheckBoxChartLogic = {
 
 const ChbContLogic = {
   _check(slice, checkBox) {
-    if (slice.activeContChb) {
-      slice.activeContChb.setUnchecked()
+    const _chb = slice.activeContChb;
+    if (_chb) {
+      _chb.setUnchecked()
     }
     slice.activeContChb = checkBox
   },
   _uncheck(slice) {
-    slice.activeContChb.setUnchecked()
     slice.activeContChb = null
   },
 
@@ -85,8 +85,10 @@ const ChbContLogic = {
   },
 
   uncheckActive(slice, chartType) {
-    if (slice.activeContChb) {
-      this._uncheck(slice)
+    const _chb = slice.activeContChb;
+    if (_chb && _chb.chartType === chartType) {
+      _chb.setUnchecked()
+      slice.activeContChb = null
     }
   }
 };
