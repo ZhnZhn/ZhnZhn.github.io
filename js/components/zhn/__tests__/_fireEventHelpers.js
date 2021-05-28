@@ -11,6 +11,9 @@ describe('_fireEventHelpers', function () {
   });
 });
 var fireEventHelpers = {
+  fireClick: function fireClick(el) {
+    return _react.fireEvent.click(el);
+  },
   fireChange: function fireChange(input, value) {
     return _react.fireEvent.change(input, {
       target: {

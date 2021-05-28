@@ -1,19 +1,20 @@
-import '@testing-library/jest-dom'
-import { createRef } from 'react'
-import { render, screen, fireEvent, act } from '@testing-library/react'
-import fireEventHelpers from './_fireEventHelpers'
+import '@testing-library/jest-dom';
+import { createRef } from 'react';
+import { render, screen, act } from '@testing-library/react';
+import fireEventHelpers from './_fireEventHelpers';
 
-import InputPattern from '../InputPattern'
+import InputPattern from '../InputPattern';
 
 const {
+  fireClick,
   fireChange,
   fireKeyDownEnter,
   fireKeyDownDelete
-} = fireEventHelpers
+} = fireEventHelpers;
 
 describe("InputPattern", () => {
   const _findInput = () => screen.findByRole('textbox');
-  const _findBtClear = () => screen.findByRole('button')
+  const _findBtClear = () => screen.findByRole('button');
   test("should render InputPattern with event handlers and ref", async () => {
     const onEnter = jest.fn()
     , onClear = jest.fn()
@@ -52,7 +53,7 @@ describe("InputPattern", () => {
 
     //2.4 onClick on BtClear
     const btClear = await _findBtClear()
-    fireEvent.click(btClear)
+    fireClick(btClear)
     input = await _findInput()
     expect(input).toHaveValue(initValue)
     expect(input).toHaveFocus()

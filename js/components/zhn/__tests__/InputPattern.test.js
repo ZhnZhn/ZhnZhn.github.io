@@ -18,7 +18,8 @@ var _fireEventHelpers = _interopRequireDefault(require("./_fireEventHelpers"));
 
 var _InputPattern = _interopRequireDefault(require("../InputPattern"));
 
-var fireChange = _fireEventHelpers["default"].fireChange,
+var fireClick = _fireEventHelpers["default"].fireClick,
+    fireChange = _fireEventHelpers["default"].fireChange,
     fireKeyDownEnter = _fireEventHelpers["default"].fireKeyDownEnter,
     fireKeyDownDelete = _fireEventHelpers["default"].fireKeyDownDelete;
 describe("InputPattern", function () {
@@ -78,9 +79,7 @@ describe("InputPattern", function () {
 
           case 21:
             btClear = _context.sent;
-
-            _react2.fireEvent.click(btClear);
-
+            fireClick(btClear);
             _context.next = 25;
             return _findInput();
 
