@@ -1,6 +1,6 @@
 import ButtonCircle from '../zhn/ButtonCircle';
 
-const CL_BT = "bt__watch__bar";
+const CL_BT_WATCH_BAR = "bt__watch__bar";
 
 const S = {
   ROOT: {
@@ -19,14 +19,12 @@ const EditBar = ({
    ? (<div style={S.ROOT}>
          <ButtonCircle
            caption="GROUP"
-           isOverwriteClass={true}
-           className={CL_BT}
+           className={CL_BT_WATCH_BAR}
            onClick={onClickGroup}
         />
         <ButtonCircle
            caption="LIST"
-           isOverwriteClass={true}
-           className={CL_BT}
+           className={CL_BT_WATCH_BAR}
            style={S.BT_LIST}
            onClick={onClickList}
         />

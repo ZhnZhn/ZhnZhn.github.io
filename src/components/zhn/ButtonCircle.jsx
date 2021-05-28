@@ -1,32 +1,24 @@
 //import PropTypes from "prop-types";
 
-const CL = {
-  ROOT: 'zhn-bt-circle',
-  NOT: 'not-selected'
-};
+const CL_BT_CIRCLE = 'zhn-bt-circle';
 
 const ButtonCircle = ({
-  isOverwriteClass,
-  className='', style,
-  caption='', title,
+  className=CL_BT_CIRCLE,
+  style,
+  caption,
+  title,
   onClick
-}) => {
-   const _className = isOverwriteClass
-     ? `${className} ${CL.NOT}`
-     : `${CL.ROOT} ${className} ${CL.NOT}`;
-    return (
-      <button
-         className={_className}
-         style={style}
-         title={title}
-         onClick={onClick}
-      >
-        <div>
-          {caption}
-        </div>
-      </button>
-    );
-}
+}) => (
+  <button
+    className={className}
+    style={style}
+    title={title}
+    onClick={onClick}
+  >
+   {caption}
+  </button>
+);
+
 
 /*
 ButtonCircle.propTypes = {
@@ -34,7 +26,6 @@ ButtonCircle.propTypes = {
   style: PropTypes.object,
   caption: PropTypes.string,
   title: PropTypes.string,
-  isWithoutDefault: PropTypes.bool,
   onClick: PropTypes.func
 }
 */
