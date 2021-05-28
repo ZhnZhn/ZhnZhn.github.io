@@ -1,8 +1,9 @@
 
-import store from '../ChartStore'
+import store from '../ChartStore';
 
-const _crChb = (name='checkbox') => ({
+const _crChb = (name='checkbox', chartType="type1") => ({
   name,
+  chartType,
   setUnchecked: () => {}
 });
 const _crSpyUnchecked = (chb) => jest
@@ -10,33 +11,20 @@ const _crSpyUnchecked = (chb) => jest
 
 
 describe('ComponentSlice', ()=>{
-  test('should set/unset active container checkbox',()=>{
-    const chb = _crChb();
-    expect(store.activeContChb).toBe(undefined)
-
-    store.onSetActiveContainer(true, chb)
-    expect(store.activeContChb).toBe(chb)
-    store.onSetActiveContainer(true, chb)
-    expect(store.activeContChb).toBe(chb)
-
-    store.onSetActiveContainer(false, chb)
-    expect(store.activeContChb).toBe(null)
-  })
-
-  test('should call setUnchecked on activeContChb', ()=>{
+  test('should assign/clear store.activeContChb onSetActiveContainer',()=>{
     const _chb = _crChb();
-    const spy = _crSpyUnchecked(_chb);
+    expect(store.activeContChb).toBe(void 0)
 
+    store.onSetActiveContainer(true, _chb)
+    expect(store.activeContChb).toBe(_chb)
     store.onSetActiveContainer(true, _chb)
     expect(store.activeContChb).toBe(_chb)
 
     store.onSetActiveContainer(false, _chb)
-    expect(spy).toHaveBeenCalled()
     expect(store.activeContChb).toBe(null)
-    //spy.mockRestore()
   })
 
-  test('should call setUnchecked on prev chb', ()=>{
+  test('should call setUnchecked on prev store.activeContChb', ()=>{
     const _prevChb = _crChb('prev')
     , _nextChb = _crChb('next')
     , spy = _crSpyUnchecked(_prevChb);
@@ -45,9 +33,26 @@ describe('ComponentSlice', ()=>{
     expect(store.activeContChb).toBe(_prevChb)
 
     store.onSetActiveContainer(true, _nextChb)
-    expect(spy).toHaveBeenCalled()
+    expect(spy).toHaveBeenCalledTimes(1)
     expect(store.activeContChb).toBe(_nextChb)
     //spy.mockRestore()
+  })
+
+  test('should call setUnchecked and clear store.activeContChb onCloseChartContainer', ()=>{
+    const _chartType = 'type1'
+    , _chb = _crChb('checkbox', _chartType)
+    , spy = _crSpyUnchecked(_chb);
+
+    store.onSetActiveContainer(true, _chb)
+    expect(store.activeContChb).toBe(_chb)
+
+    store.onCloseChartContainer('not'+_chartType, 'browserType')
+    expect(spy).toHaveBeenCalledTimes(0)
+    expect(store.activeContChb).toBe(_chb)
+
+    store.onCloseChartContainer(_chartType, 'browserType')
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(store.activeContChb).toBe(null)
   })
 
 })

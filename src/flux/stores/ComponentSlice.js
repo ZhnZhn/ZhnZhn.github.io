@@ -78,9 +78,9 @@ const ChbContLogic = {
 
   toggle(slice, { isCheck, checkBox }){
     if (isCheck) {
-      this._check(slice, checkBox)
+      ChbContLogic._check(slice, checkBox)
     } else {
-      this._uncheck(slice)
+      ChbContLogic._uncheck(slice)
     }
   },
 

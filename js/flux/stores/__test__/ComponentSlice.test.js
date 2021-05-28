@@ -4,13 +4,18 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _ChartStore = _interopRequireDefault(require("../ChartStore"));
 
-var _crChb = function _crChb(name) {
+var _crChb = function _crChb(name, chartType) {
   if (name === void 0) {
     name = 'checkbox';
   }
 
+  if (chartType === void 0) {
+    chartType = "type1";
+  }
+
   return {
     name: name,
+    chartType: chartType,
     setUnchecked: function setUnchecked() {}
   };
 };
@@ -20,27 +25,14 @@ var _crSpyUnchecked = function _crSpyUnchecked(chb) {
 };
 
 describe('ComponentSlice', function () {
-  test('should set/unset active container checkbox', function () {
-    var chb = _crChb();
-
-    expect(_ChartStore["default"].activeContChb).toBe(undefined);
-
-    _ChartStore["default"].onSetActiveContainer(true, chb);
-
-    expect(_ChartStore["default"].activeContChb).toBe(chb);
-
-    _ChartStore["default"].onSetActiveContainer(true, chb);
-
-    expect(_ChartStore["default"].activeContChb).toBe(chb);
-
-    _ChartStore["default"].onSetActiveContainer(false, chb);
-
-    expect(_ChartStore["default"].activeContChb).toBe(null);
-  });
-  test('should call setUnchecked on activeContChb', function () {
+  test('should assign/clear store.activeContChb onSetActiveContainer', function () {
     var _chb = _crChb();
 
-    var spy = _crSpyUnchecked(_chb);
+    expect(_ChartStore["default"].activeContChb).toBe(void 0);
+
+    _ChartStore["default"].onSetActiveContainer(true, _chb);
+
+    expect(_ChartStore["default"].activeContChb).toBe(_chb);
 
     _ChartStore["default"].onSetActiveContainer(true, _chb);
 
@@ -48,10 +40,9 @@ describe('ComponentSlice', function () {
 
     _ChartStore["default"].onSetActiveContainer(false, _chb);
 
-    expect(spy).toHaveBeenCalled();
-    expect(_ChartStore["default"].activeContChb).toBe(null); //spy.mockRestore()
+    expect(_ChartStore["default"].activeContChb).toBe(null);
   });
-  test('should call setUnchecked on prev chb', function () {
+  test('should call setUnchecked on prev store.activeContChb', function () {
     var _prevChb = _crChb('prev'),
         _nextChb = _crChb('next'),
         spy = _crSpyUnchecked(_prevChb);
@@ -62,8 +53,27 @@ describe('ComponentSlice', function () {
 
     _ChartStore["default"].onSetActiveContainer(true, _nextChb);
 
-    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(_ChartStore["default"].activeContChb).toBe(_nextChb); //spy.mockRestore()
+  });
+  test('should call setUnchecked and clear store.activeContChb onCloseChartContainer', function () {
+    var _chartType = 'type1',
+        _chb = _crChb('checkbox', _chartType),
+        spy = _crSpyUnchecked(_chb);
+
+    _ChartStore["default"].onSetActiveContainer(true, _chb);
+
+    expect(_ChartStore["default"].activeContChb).toBe(_chb);
+
+    _ChartStore["default"].onCloseChartContainer('not' + _chartType, 'browserType');
+
+    expect(spy).toHaveBeenCalledTimes(0);
+    expect(_ChartStore["default"].activeContChb).toBe(_chb);
+
+    _ChartStore["default"].onCloseChartContainer(_chartType, 'browserType');
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(_ChartStore["default"].activeContChb).toBe(null);
   });
 });
 //# sourceMappingURL=ComponentSlice.test.js.map

@@ -105,9 +105,9 @@ var ChbContLogic = {
         checkBox = _ref.checkBox;
 
     if (isCheck) {
-      this._check(slice, checkBox);
+      ChbContLogic._check(slice, checkBox);
     } else {
-      this._uncheck(slice);
+      ChbContLogic._uncheck(slice);
     }
   },
   uncheckActive: function uncheckActive(slice, chartType) {
