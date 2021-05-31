@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+//Highcharts numberFormat from util formatNumber require jsdom 
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

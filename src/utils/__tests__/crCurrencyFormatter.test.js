@@ -1,3 +1,8 @@
+/**
+ * @jest-environment jsdom
+ */
+//Highcharts numberFormat from util formatNumber require jsdom 
+"use strict";
 import crCurrencyFormatter from '../crCurrencyFormatter'
 
 describe('crCurrencyFormatter', () => {

@@ -1,3 +1,8 @@
+/**
+ * @jest-environment jsdom
+ */
+ //Highcharts from Chart require jsdom  
+"use strict";
 import ConfigBuilder from '../ConfigBuilder';
 
 

@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+//Highcharts dataFormat require jsdom
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

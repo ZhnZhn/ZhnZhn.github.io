@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+//Highcharts dateFormat from AdapterFn require jsdom  
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

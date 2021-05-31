@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+"use strict";
 import fn from '../formatAllNumber'
 
 describe('formatAllNumber', ()=>{

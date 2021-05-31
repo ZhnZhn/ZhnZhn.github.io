@@ -1,4 +1,8 @@
-
+/**
+ * @jest-environment jsdom
+ */
+ //Highcharts dataFormat require jsdom
+"use strict";
 import store from '../ChartStore';
 
 const _crChb = (name='checkbox', chartType="type1") => ({

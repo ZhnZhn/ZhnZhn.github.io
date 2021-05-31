@@ -1,3 +1,8 @@
+/**
+ * @jest-environment jsdom
+ */
+//Highcharts dateFormat from AdapterFn require jsdom   
+"use strict";
 import AdapterFn from '../AdapterFn'
 
 import { Direction } from '../../constants/Type'

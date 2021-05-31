@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+"use strict";
 import { render, fireEvent } from '@testing-library/react'
 import useForceUpdate from '../useForceUpdate'
 

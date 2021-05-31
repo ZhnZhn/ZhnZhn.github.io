@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/utils/__tests__/crCurrencyFormatter.test.js"],"names":["describe","f","test","expect","format","toBe","_f","minimumFractionDigits","maximumFractionDigits"],"mappings":";;;;AAAA;;AAEAA,QAAQ,CAAC,qBAAD,EAAwB,YAAM;AACpC,MAAMC,CAAC,GAAG,sCAAV;AACAC,EAAAA,IAAI,CAAC,6CAAD,EAAgD,YAAI;AACtDC,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,CAAT,CAAD,CAAN,CAAoBC,IAApB,CAAyB,OAAzB;AACAF,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,IAAT,CAAD,CAAN,CAAuBC,IAAvB,CAA4B,WAA5B;AACAF,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,CAAT,CAAD,CAAN,CAAoBC,IAApB,CAAyB,OAAzB;AACD,GAJG,CAAJ;AAKAH,EAAAA,IAAI,CAAC,wCAAD,EAA2C,YAAM;AACnDC,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,CAAT,CAAD,CAAN,CAAoBC,IAApB,CAAyB,OAAzB;AACAF,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,EAAD,CAAN,CAAmBC,IAAnB,CAAwB,OAAxB;AACAF,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,IAAT,CAAD,CAAN,CAAuBC,IAAvB,CAA4B,OAA5B;AACD,GAJG,CAAJ;AAKAH,EAAAA,IAAI,CAAC,6CAAD,EAAgD,YAAM;AACvD,QAAMI,EAAE,GAAG,qCAAoB;AAC7BC,MAAAA,qBAAqB,EAAE,CADM;AAE7BC,MAAAA,qBAAqB,EAAE;AAFM,KAApB,CAAX;;AAIAL,IAAAA,MAAM,CAACG,EAAE,CAACF,MAAH,CAAU,IAAV,CAAD,CAAN,CAAwBC,IAAxB,CAA6B,IAA7B;AACAF,IAAAA,MAAM,CAACG,EAAE,CAACF,MAAH,CAAU,IAAV,CAAD,CAAN,CAAwBC,IAAxB,CAA6B,IAA7B;AACAF,IAAAA,MAAM,CAACG,EAAE,CAACF,MAAH,EAAD,CAAN,CAAoBC,IAApB,CAAyB,IAAzB;AACAF,IAAAA,MAAM,CAACG,EAAE,CAACF,MAAH,CAAU,IAAV,CAAD,CAAN,CAAwBC,IAAxB,CAA6B,IAA7B;AACF,GATG,CAAJ;AAUD,CAtBO,CAAR","sourcesContent":["import crCurrencyFormatter from '../crCurrencyFormatter'\r\n\r\ndescribe('crCurrencyFormatter', () => {\r\n  const f = crCurrencyFormatter();\r\n  test('should correct format with default settings', ()=>{\r\n    expect(f.format(1)).toBe('$1.00')\r\n    expect(f.format(1000)).toBe('$1,000.00')\r\n    expect(f.format(0)).toBe('$0.00')\r\n  })\r\n  test('should format as 0 for undefined, null', () => {\r\n    expect(f.format(0)).toBe('$0.00')\r\n    expect(f.format()).toBe('$0.00')\r\n    expect(f.format(null)).toBe('$0.00')\r\n  })\r\n  test('should pass options properties to formatter', () => {\r\n     const _f = crCurrencyFormatter({\r\n       minimumFractionDigits: 0,\r\n       maximumFractionDigits: 0\r\n     });\r\n     expect(_f.format(0.00)).toBe('$0')\r\n     expect(_f.format(1.00)).toBe('$1')\r\n     expect(_f.format()).toBe('$0')\r\n     expect(_f.format(null)).toBe('$0')\r\n  })\r\n})\r\n"],"file":"crCurrencyFormatter.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/utils/__tests__/crCurrencyFormatter.test.js"
+ ],
+ "file": "../../../src/utils/__tests__/crCurrencyFormatter.test.js",
+ "names": [
+  "describe",
+  "f",
+  "test",
+  "expect",
+  "format",
+  "toBe",
+  "_f",
+  "minimumFractionDigits",
+  "maximumFractionDigits"
+ ],
+ "mappings": "AAAA;AACA;AACA;AACA;AACA;;;;AACA;;AAEAA,QAAQ,CAAC,qBAAD,EAAwB,YAAM;AACpC,MAAMC,CAAC,GAAG,sCAAV;AACAC,EAAAA,IAAI,CAAC,6CAAD,EAAgD,YAAI;AACtDC,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,CAAT,CAAD,CAAN,CAAoBC,IAApB,CAAyB,OAAzB;AACAF,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,IAAT,CAAD,CAAN,CAAuBC,IAAvB,CAA4B,WAA5B;AACAF,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,CAAT,CAAD,CAAN,CAAoBC,IAApB,CAAyB,OAAzB;AACD,GAJG,CAAJ;AAKAH,EAAAA,IAAI,CAAC,wCAAD,EAA2C,YAAM;AACnDC,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,CAAT,CAAD,CAAN,CAAoBC,IAApB,CAAyB,OAAzB;AACAF,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,EAAD,CAAN,CAAmBC,IAAnB,CAAwB,OAAxB;AACAF,IAAAA,MAAM,CAACF,CAAC,CAACG,MAAF,CAAS,IAAT,CAAD,CAAN,CAAuBC,IAAvB,CAA4B,OAA5B;AACD,GAJG,CAAJ;AAKAH,EAAAA,IAAI,CAAC,6CAAD,EAAgD,YAAM;AACvD,QAAMI,EAAE,GAAG,qCAAoB;AAC7BC,MAAAA,qBAAqB,EAAE,CADM;AAE7BC,MAAAA,qBAAqB,EAAE;AAFM,KAApB,CAAX;;AAIAL,IAAAA,MAAM,CAACG,EAAE,CAACF,MAAH,CAAU,IAAV,CAAD,CAAN,CAAwBC,IAAxB,CAA6B,IAA7B;AACAF,IAAAA,MAAM,CAACG,EAAE,CAACF,MAAH,CAAU,IAAV,CAAD,CAAN,CAAwBC,IAAxB,CAA6B,IAA7B;AACAF,IAAAA,MAAM,CAACG,EAAE,CAACF,MAAH,EAAD,CAAN,CAAoBC,IAApB,CAAyB,IAAzB;AACAF,IAAAA,MAAM,CAACG,EAAE,CAACF,MAAH,CAAU,IAAV,CAAD,CAAN,CAAwBC,IAAxB,CAA6B,IAA7B;AACF,GATG,CAAJ;AAUD,CAtBO,CAAR"
+}

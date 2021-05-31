@@ -1,4 +1,7 @@
-
+/**
+ * @jest-environment jsdom
+ */
+"use strict";
 import fn from '../formatNumber'
 
 describe('formatNumber', ()=>{

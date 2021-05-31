@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+"use strict";
 import '@testing-library/jest-dom';
 import { createRef } from 'react';
 import { render, screen, act } from '@testing-library/react';
