@@ -114,8 +114,7 @@ var RowCheckBox = function RowCheckBox(_ref) {
     style: (0, _extends2["default"])({}, S.ROOT, style),
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {
       value: _value,
-      checkedRestStroke: checkedColor,
-      checkedRestFill: checkedColor,
+      color: checkedColor,
       checkedColor: TS.CHECKED_COLOR,
       onCheck: _hCheck,
       onUnCheck: _hUnCheck

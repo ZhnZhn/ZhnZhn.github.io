@@ -86,8 +86,7 @@ const RowCheckBox = ({
     <div style={{...S.ROOT, ...style}}>
       <SvgCheckBox
         value={_value}
-        checkedRestStroke={checkedColor}
-        checkedRestFill={checkedColor}
+        color={checkedColor}        
         checkedColor={TS.CHECKED_COLOR}
         onCheck={_hCheck}
         onUnCheck={_hUnCheck}

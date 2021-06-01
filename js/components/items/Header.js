@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
+var _Color = _interopRequireDefault(require("../styles/Color"));
+
 var _use = _interopRequireDefault(require("../hooks/use"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
@@ -147,6 +149,8 @@ var Header = function Header(_ref3) {
       onToggle: _toggleMore
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgCheckBox, {
       style: S.CHECK_BOX,
+      color: _Color["default"].GREEN,
+      checkedColor: TS.ROOT.backgroundColor,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {

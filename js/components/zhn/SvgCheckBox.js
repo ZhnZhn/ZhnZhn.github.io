@@ -45,10 +45,7 @@ var SvgCheckBox = function SvgCheckBox(_ref2) {
   var initialValue = _ref2.initialValue,
       value = _ref2.value,
       style = _ref2.style,
-      _ref2$checkedRestStro = _ref2.checkedRestStroke,
-      checkedRestStroke = _ref2$checkedRestStro === void 0 ? C_GREY : _ref2$checkedRestStro,
-      _ref2$checkedRestFill = _ref2.checkedRestFill,
-      checkedRestFill = _ref2$checkedRestFill === void 0 ? _Color["default"].BLANK : _ref2$checkedRestFill,
+      color = _ref2.color,
       _ref2$checkedColor = _ref2.checkedColor,
       checkedColor = _ref2$checkedColor === void 0 ? _Color["default"].YELLOW : _ref2$checkedColor,
       _ref2$onCheck = _ref2.onCheck,
@@ -84,8 +81,8 @@ var SvgCheckBox = function SvgCheckBox(_ref2) {
     }
   }, [_value, onCheck, onUnCheck]),
       _hKeyDown = (0, _useKeyEnter["default"])(_hToggle, [_hToggle]),
-      _restStroke = _value ? checkedRestStroke : C_GREY,
-      _restFill = _value ? checkedRestFill : _Color["default"].BLANK;
+      _restStroke = _value ? color || C_GREY : C_GREY,
+      _restFill = _value ? color || _Color["default"].BLANK : _Color["default"].BLANK;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     role: "checkbox",
@@ -123,8 +120,7 @@ SvgCheckBox.propTypes = {
   initValue: PropTypes.bool,
   value: PropTypes.bool,
   style: PropTypes.object,
-  checkedRestStroke: PropTypes.string,
-  checkedRestFill: PropTypes.string,
+  color: PropTypes.string,
   checkedColor: PropTypes.string,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func

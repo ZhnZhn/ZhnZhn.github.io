@@ -9,6 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
+var _Color = _interopRequireDefault(require("../styles/Color"));
+
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
@@ -88,6 +90,8 @@ var BrowserCaption = function BrowserCaption(_ref) {
       onClick: onMore
     }), _isFn(onCheck) && _isFn(onUnCheck) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {
       style: S.CHECK_BOX,
+      color: _Color["default"].GREEN,
+      checkedColor: TS.ROOT.backgroundColor,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {

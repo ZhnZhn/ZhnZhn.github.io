@@ -1,5 +1,7 @@
 //import PropTypes from "prop-types";
 
+import COLOR from '../styles/Color';
+
 import useTheme from '../hooks/useTheme';
 import SvgMore from './SvgMore';
 import SvgCheckBox from './SvgCheckBox';
@@ -80,8 +82,10 @@ const BrowserCaption = ({
      }
      {
         (_isFn(onCheck) && _isFn(onUnCheck)) &&
-        <SvgCheckBox           
+        <SvgCheckBox
            style={S.CHECK_BOX}
+           color={COLOR.GREEN}
+           checkedColor={TS.ROOT.backgroundColor}
            onCheck={onCheck}
            onUnCheck={onUnCheck}
         />

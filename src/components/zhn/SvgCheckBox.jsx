@@ -31,8 +31,7 @@ const SvgCheckBox = ({
   initialValue,
   value,
   style,
-  checkedRestStroke=C_GREY,
-  checkedRestFill=C.BLANK,
+  color,
   checkedColor=C.YELLOW,
   onCheck=_noopFn,
   onUnCheck=_noopFn
@@ -57,8 +56,8 @@ const SvgCheckBox = ({
   //_comp, _isValueState
   /*eslint-enable react-hooks/exhaustive-deps */
   , _hKeyDown = useKeyEnter(_hToggle, [_hToggle])
-  , _restStroke = _value ? checkedRestStroke : C_GREY
-  , _restFill = _value ? checkedRestFill : C.BLANK;
+  , _restStroke = _value ? color || C_GREY : C_GREY
+  , _restFill = _value ? color || C.BLANK : C.BLANK;
 
   return (
     <div
@@ -97,8 +96,7 @@ SvgCheckBox.propTypes = {
   initValue: PropTypes.bool,
   value: PropTypes.bool,
   style: PropTypes.object,
-  checkedRestStroke: PropTypes.string,
-  checkedRestFill: PropTypes.string,
+  color: PropTypes.string,
   checkedColor: PropTypes.string,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func

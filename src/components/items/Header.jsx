@@ -1,5 +1,7 @@
 //import PropTypes from "prop-types";
 
+import COLOR from '../styles/Color'
+
 import use from '../hooks/use'
 import Comp from '../Comp'
 import ValueMovingBadge from './ValueMovingBadge';
@@ -132,8 +134,10 @@ const Header = ({
         sliderStyle={TS.BORDER}
         onToggle={_toggleMore}
       />
-      <SvgCheckBox         
+      <SvgCheckBox
          style={S.CHECK_BOX}
+         color={COLOR.GREEN}         
+         checkedColor={TS.ROOT.backgroundColor}
          onCheck={onCheck}
          onUnCheck={onUnCheck}
       />
