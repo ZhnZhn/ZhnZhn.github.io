@@ -32,7 +32,10 @@ var COLOR = {
   CHART: '#4d4d4d',
   PLOT: '#4d4d4d',
   PLOT_G1: "rgba(69, 114, 167, 1)",
+  //bottomColor for area chart fill dark ui theme
   PLOT_G2: "rgba(2, 0, 0, 0)",
+  //bottomcollor for area chart fill light ui theme
+  PLOT_G3: "rgba(254, 256, 256, 0)",
   //CHART_TITLE : '#a487d4',
   CHART_TITLE: 'black',
   CHART_SUBTITLE: 'black',

@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _ChartUiTheme = _interopRequireDefault(require("../../charts/ChartUiTheme"));
+
 var _RouterConfig = _interopRequireDefault(require("./RouterConfig"));
 
 var DF_T_C = '#1b2836';
@@ -147,6 +149,8 @@ var uiTheme = {
     this.themeName = HP_THEME[themeId] ? themeId : DF_THEME_ID;
 
     _setTheme(this.themeName);
+
+    _ChartUiTheme["default"].setTheme(themeId !== DF_THEME_ID);
   },
   getStyle: function getStyle(id) {
     var config = _RouterConfig["default"][id] || _RouterConfig["default"].DF;

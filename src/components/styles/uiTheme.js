@@ -1,4 +1,5 @@
-import routerConfig from './RouterConfig'
+import ChartUiTheme from '../../charts/ChartUiTheme';
+import routerConfig from './RouterConfig';
 
 const DF_T_C = '#1b2836';
 
@@ -122,13 +123,13 @@ const _setClassNameTo = (suffix='') => {
   Object.keys(CL_PROPS).forEach(key => {
     CSS_RULE[key] = CL_PROPS[key] + suffix
   })
-}
+};
 
 const _setTheme = (themeName) => {
   const { clSuffix, pallete } = _crThemeConfig(themeName);
   _setClassNameTo(clSuffix)
   _setStyleTo(CSS_RULE, pallete)
-}
+};
 
 const uiTheme = {
   themeName: DF_THEME_ID,
@@ -143,6 +144,7 @@ const uiTheme = {
       ? themeId
       : DF_THEME_ID
     _setTheme(this.themeName)
+    ChartUiTheme.setTheme(themeId !== DF_THEME_ID)
   },
   getStyle(id){
     const config = routerConfig[id] || routerConfig.DF;

@@ -149,15 +149,15 @@ var ChartTheme = {
   },
   plotOptions: {
     area: {
+      /*
       fillColor: {
-        linearGradient: {
-          x1: 0,
-          x2: 0,
-          y1: 0,
-          y2: 1
-        },
-        stops: [[0, _Color["default"].PLOT_G1], [1, _Color["default"].PLOT_G2]]
+          linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+          stops: [
+             [0, COLOR.PLOT_G1],
+             [1, COLOR.PLOT_G2]
+          ]
       },
+      */
       point: {
         events: {
           mouseOver: _handleMouseOver["default"]
