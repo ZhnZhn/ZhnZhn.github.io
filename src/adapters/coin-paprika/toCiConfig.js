@@ -43,6 +43,22 @@ const _crTokensCaption = ({ type, open_source, is_active}) => joinBy(' ',
 
 const _crDescr = (json) => json.description || '';
 
+const _crBlogLinks = links_extended => (links_extended || [])
+  .filter(item => item.type === 'blog')
+  .map(item => ({href:item.url, caption:'Blog'}))
+
+const _crLinks = ({ links, links_extended }) => {
+  const { website } = links || {}
+  , _websiteLink = (website || [])[0]
+  , _websiteLinks = _websiteLink
+      ? [{ href: _websiteLink, caption: 'Website' }]
+      : []
+  , _blogLinks = _crBlogLinks(links_extended)
+  , _links = _websiteLinks.concat(_blogLinks);
+
+  return _links.length > 0 ? _links : void 0;
+};
+
 const toCiConfig = {
   crKey(option){
     const { items=[] } = option;
@@ -63,7 +79,8 @@ const toCiConfig = {
             style: {
               fontWeight: 'bold'
             },
-            descr: _crDescr(json)
+            descr: _crDescr(json),
+            links: _crLinks(json)
           }
         ],
         zhConfig: {
@@ -73,6 +90,6 @@ const toCiConfig = {
     };
     return { config };
   }
-}
+};
 
 export default toCiConfig

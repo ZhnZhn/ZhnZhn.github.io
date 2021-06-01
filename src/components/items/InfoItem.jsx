@@ -1,8 +1,9 @@
-import useToggle from '../hooks/useToggle'
+import useToggle from '../hooks/useToggle';
 
-import A from '../Comp'
-import ItemHeader from './ItemHeader'
-import FlexTokens from './FlexTokens'
+import A from '../Comp';
+import Link from '../native-links/Link';
+import ItemHeader from './ItemHeader';
+import FlexTokens from './FlexTokens';
 
 const _isArr = Array.isArray;
 
@@ -25,13 +26,31 @@ const S = {
     paddingLeft: 4,
     paddingRight: 4,
     lineHeight: 1.8
+  },
+  LINKS: {
+    listStyle: 'none',
   }
-}
+};
+
+const LinkList = ({ links }) => (
+  <ul style={S.LINKS}>
+    {(links || [])
+       .map(({href, caption}, index) => (
+        <li key={index}>
+          <Link
+             caption={`${caption}: ${href}`}
+             href={href}
+          />
+        </li>))
+    }
+  </ul>
+);
 
 const Descr = ({
   style,
   caption="Decription",
-  descr
+  descr,
+  links
 }) => {
   if (!descr) return null;
   return (
@@ -39,6 +58,7 @@ const Descr = ({
       <div style={{...S.DESCR, ...style}}>
         {descr}
       </div>
+      <LinkList links={links} />
     </A.OpenClose>
   );
 };
@@ -68,6 +88,6 @@ const InfoItem = ({ config={}, onCloseItem }) => {
       </A.ShowHide>
     </div>
   );
-}
+};
 
 export default InfoItem

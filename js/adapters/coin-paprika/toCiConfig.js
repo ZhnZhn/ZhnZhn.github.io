@@ -59,6 +59,34 @@ var _crDescr = function _crDescr(json) {
   return json.description || '';
 };
 
+var _crBlogLinks = function _crBlogLinks(links_extended) {
+  return (links_extended || []).filter(function (item) {
+    return item.type === 'blog';
+  }).map(function (item) {
+    return {
+      href: item.url,
+      caption: 'Blog'
+    };
+  });
+};
+
+var _crLinks = function _crLinks(_ref4) {
+  var links = _ref4.links,
+      links_extended = _ref4.links_extended;
+
+  var _ref5 = links || {},
+      website = _ref5.website,
+      _websiteLink = (website || [])[0],
+      _websiteLinks = _websiteLink ? [{
+    href: _websiteLink,
+    caption: 'Website'
+  }] : [],
+      _blogLinks = _crBlogLinks(links_extended),
+      _links = _websiteLinks.concat(_blogLinks);
+
+  return _links.length > 0 ? _links : void 0;
+};
+
 var toCiConfig = {
   crKey: function crKey(option) {
     var _option$items = option.items,
@@ -78,7 +106,8 @@ var toCiConfig = {
         style: {
           fontWeight: 'bold'
         },
-        descr: _crDescr(json)
+        descr: _crDescr(json),
+        links: _crLinks(json)
       }],
       zhConfig: {
         id: _itemKey,

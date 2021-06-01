@@ -13,6 +13,8 @@ var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
+var _Link = _interopRequireDefault(require("../native-links/Link"));
+
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 
 var _FlexTokens = _interopRequireDefault(require("./FlexTokens"));
@@ -37,28 +39,51 @@ var S = {
     paddingLeft: 4,
     paddingRight: 4,
     lineHeight: 1.8
+  },
+  LINKS: {
+    listStyle: 'none'
   }
 };
 
-var Descr = function Descr(_ref) {
-  var style = _ref.style,
-      _ref$caption = _ref.caption,
-      caption = _ref$caption === void 0 ? "Decription" : _ref$caption,
-      descr = _ref.descr;
-  if (!descr) return null;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].OpenClose, {
-    caption: caption,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: (0, _extends2["default"])({}, S.DESCR, style),
-      children: descr
+var LinkList = function LinkList(_ref) {
+  var links = _ref.links;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
+    style: S.LINKS,
+    children: (links || []).map(function (_ref2, index) {
+      var href = _ref2.href,
+          caption = _ref2.caption;
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link["default"], {
+          caption: caption + ": " + href,
+          href: href
+        })
+      }, index);
     })
   });
 };
 
-var InfoItem = function InfoItem(_ref2) {
-  var _ref2$config = _ref2.config,
-      config = _ref2$config === void 0 ? {} : _ref2$config,
-      onCloseItem = _ref2.onCloseItem;
+var Descr = function Descr(_ref3) {
+  var style = _ref3.style,
+      _ref3$caption = _ref3.caption,
+      caption = _ref3$caption === void 0 ? "Decription" : _ref3$caption,
+      descr = _ref3.descr,
+      links = _ref3.links;
+  if (!descr) return null;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].OpenClose, {
+    caption: caption,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: (0, _extends2["default"])({}, S.DESCR, style),
+      children: descr
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkList, {
+      links: links
+    })]
+  });
+};
+
+var InfoItem = function InfoItem(_ref4) {
+  var _ref4$config = _ref4.config,
+      config = _ref4$config === void 0 ? {} : _ref4$config,
+      onCloseItem = _ref4.onCloseItem;
   var caption = config.caption,
       items = config.items;
 
