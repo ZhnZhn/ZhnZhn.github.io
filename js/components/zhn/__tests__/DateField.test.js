@@ -13,20 +13,20 @@ var _jsxRuntime = require("react/jsx-runtime.js");
 
 require("@testing-library/jest-dom");
 
-var _react = require("react");
-
-var _react2 = require("@testing-library/react");
-
-var _fireEventHelpers = _interopRequireDefault(require("./_fireEventHelpers"));
+var _zhnTestUtils = _interopRequireDefault(require("../../_test-utils/zhn-test-utils"));
 
 var _DateField = _interopRequireDefault(require("../DateField"));
 
-var fireChange = _fireEventHelpers["default"].fireChange,
-    fireKeyDownEnter = _fireEventHelpers["default"].fireKeyDownEnter,
-    fireKeyDownDelete = _fireEventHelpers["default"].fireKeyDownDelete;
+var createRef = _zhnTestUtils["default"].createRef,
+    render = _zhnTestUtils["default"].render,
+    screen = _zhnTestUtils["default"].screen,
+    act = _zhnTestUtils["default"].act,
+    fireChange = _zhnTestUtils["default"].fireChange,
+    fireKeyDownEnter = _zhnTestUtils["default"].fireKeyDownEnter,
+    fireKeyDownDelete = _zhnTestUtils["default"].fireKeyDownDelete;
 describe("DateField", function () {
   var _findInput = function _findInput() {
-    return _react2.screen.findByRole('textbox');
+    return screen.findByRole('textbox');
   };
 
   test('', /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
@@ -36,12 +36,12 @@ describe("DateField", function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            onEnter = jest.fn(), ref = /*#__PURE__*/(0, _react.createRef)(), initialValue = "2010-01-01", _render = (0, _react2.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField["default"], {
+            onEnter = jest.fn(), ref = createRef(), initialValue = "2010-01-01", _render = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField["default"], {
               ref: ref,
               initialValue: initialValue,
               onEnter: onEnter
             })), rerender = _render.rerender;
-            input = _react2.screen.getByRole('textbox');
+            input = screen.getByRole('textbox');
             expect(input).toHaveValue(initialValue); //2 Test event handlers
             //2.1 onChange
 
@@ -70,7 +70,7 @@ describe("DateField", function () {
             expect(ref.current.getValue()).toBe(initialValue); //3.2
 
             _setValue = '2000-01-01';
-            (0, _react2.act)(function () {
+            act(function () {
               return ref.current.setValue(_setValue);
             });
             _context.next = 22;

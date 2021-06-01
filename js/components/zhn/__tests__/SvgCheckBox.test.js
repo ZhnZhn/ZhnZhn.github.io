@@ -11,17 +11,18 @@ var _jsxRuntime = require("react/jsx-runtime.js");
 
 require("@testing-library/jest-dom");
 
-var _react = require("@testing-library/react");
+var _zhnTestUtils = _interopRequireDefault(require("../../_test-utils/zhn-test-utils"));
 
 var _SvgCheckBox = _interopRequireDefault(require("../SvgCheckBox"));
 
-var _fireEventHelpers = _interopRequireDefault(require("./_fireEventHelpers"));
-
-var fireClick = _fireEventHelpers["default"].fireClick,
-    fireKeyDownEnter = _fireEventHelpers["default"].fireKeyDownEnter;
+var render = _zhnTestUtils["default"].render,
+    screen = _zhnTestUtils["default"].screen,
+    act = _zhnTestUtils["default"].act,
+    fireClick = _zhnTestUtils["default"].fireClick,
+    fireKeyDownEnter = _zhnTestUtils["default"].fireKeyDownEnter;
 
 var _crTestArtifacts = function _crTestArtifacts(onCheck, onUnCheck) {
-  var chb = _react.screen.getByRole('checkbox'),
+  var chb = screen.getByRole('checkbox'),
       _testStyledFalseTimes = function _testStyledFalseTimes(times) {
     if (times === void 0) {
       times = 0;
@@ -58,7 +59,7 @@ describe('SvgCheckBox', function () {
       onCheck: onCheck,
       onUnCheck: onUnCheck
     },
-        _render = (0, _react.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props))),
+        _render = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props))),
         rerender = _render.rerender,
         _crTestArtifacts2 = _crTestArtifacts(onCheck, onUnCheck),
         chb = _crTestArtifacts2.chb,
@@ -99,7 +100,7 @@ describe('SvgCheckBox', function () {
 
     _testStyledTrueTimes(3);
 
-    (0, _react.act)(function () {
+    act(function () {
       onCheck.mock.calls[2][0].setUnchecked();
     });
 
@@ -125,7 +126,7 @@ describe('SvgCheckBox', function () {
       onCheck: onCheck,
       onUnCheck: onUnCheck
     },
-        _render2 = (0, _react.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props))),
+        _render2 = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props))),
         rerender = _render2.rerender,
         _crTestArtifacts3 = _crTestArtifacts(onCheck, onUnCheck),
         chb = _crTestArtifacts3.chb,
@@ -160,10 +161,8 @@ describe('SvgCheckBox', function () {
     expect(onCheck).toHaveBeenCalledTimes(1);
   });
   test('should call preventDefault on event handlers', function () {
-    (0, _react.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {}));
-
-    var chb = _react.screen.getByRole('checkbox'); //In case preventDefault called fireEvent return false
-
+    render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {}));
+    var chb = screen.getByRole('checkbox'); //In case preventDefault called fireEvent return false
 
     expect(fireClick(chb)).toBe(false);
     expect(fireKeyDownEnter(chb)).toBe(false);

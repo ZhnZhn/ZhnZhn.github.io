@@ -5,11 +5,6 @@ exports["default"] = void 0;
 
 var _react = require("@testing-library/react");
 
-describe('_fireEventHelpers', function () {
-  test('', function () {
-    return expect('').toBe('');
-  });
-});
 var fireEventHelpers = {
   fireClick: function fireClick(el) {
     return _react.fireEvent.click(el);
@@ -36,4 +31,4 @@ var fireEventHelpers = {
 };
 var _default = fireEventHelpers;
 exports["default"] = _default;
-//# sourceMappingURL=_fireEventHelpers.js.map
+//# sourceMappingURL=fireEventHelpers.js.map

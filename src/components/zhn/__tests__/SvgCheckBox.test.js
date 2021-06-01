@@ -3,15 +3,14 @@
  */
 "use strict";
 import '@testing-library/jest-dom';
-import { render, screen, act } from '@testing-library/react';
-
+import zhnUtils from '../../_test-utils/zhn-test-utils';
 import SvgCheckBox from '../SvgCheckBox';
-import fireEventHelpers from './_fireEventHelpers';
 
 const {
+  render, screen, act,
   fireClick,
   fireKeyDownEnter
-} = fireEventHelpers;
+} = zhnUtils;
 
 const _crTestArtifacts = (onCheck, onUnCheck) => {
   const chb = screen.getByRole('checkbox')

@@ -2,18 +2,17 @@
  * @jest-environment jsdom
  */
 "use strict";
-import '@testing-library/jest-dom'
-import { createRef } from 'react'
-import { render, screen, act } from '@testing-library/react'
-import fireEventHelpers from './_fireEventHelpers'
-
-import DateField from '../DateField'
+import '@testing-library/jest-dom';
+import zhnUtils from '../../_test-utils/zhn-test-utils';
+import DateField from '../DateField';
 
 const {
+  createRef,
+  render, screen, act,
   fireChange,
   fireKeyDownEnter,
   fireKeyDownDelete
-} = fireEventHelpers
+} = zhnUtils;
 
 describe("DateField", () => {
   const _findInput = () => screen.findByRole('textbox');

@@ -3,18 +3,17 @@
  */
 "use strict";
 import '@testing-library/jest-dom';
-import { createRef } from 'react';
-import { render, screen, act } from '@testing-library/react';
-import fireEventHelpers from './_fireEventHelpers';
-
+import zhnUtils from '../../_test-utils/zhn-test-utils';
 import InputPattern from '../InputPattern';
 
 const {
+  createRef,
+  render, screen, act,
   fireClick,
   fireChange,
   fireKeyDownEnter,
   fireKeyDownDelete
-} = fireEventHelpers;
+} = zhnUtils;
 
 describe("InputPattern", () => {
   const _findInput = () => screen.findByRole('textbox');

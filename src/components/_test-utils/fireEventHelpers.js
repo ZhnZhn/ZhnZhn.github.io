@@ -1,9 +1,5 @@
 import { fireEvent } from '@testing-library/react';
 
-describe('_fireEventHelpers', ()=> {
-  test('', () => expect('').toBe(''))
-})
-
 const fireEventHelpers = {
   fireClick: el => fireEvent.click(el),
   fireChange: (input, value) => fireEvent.change(input, {target: { value }}),

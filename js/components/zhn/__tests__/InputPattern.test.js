@@ -13,25 +13,25 @@ var _jsxRuntime = require("react/jsx-runtime.js");
 
 require("@testing-library/jest-dom");
 
-var _react = require("react");
-
-var _react2 = require("@testing-library/react");
-
-var _fireEventHelpers = _interopRequireDefault(require("./_fireEventHelpers"));
+var _zhnTestUtils = _interopRequireDefault(require("../../_test-utils/zhn-test-utils"));
 
 var _InputPattern = _interopRequireDefault(require("../InputPattern"));
 
-var fireClick = _fireEventHelpers["default"].fireClick,
-    fireChange = _fireEventHelpers["default"].fireChange,
-    fireKeyDownEnter = _fireEventHelpers["default"].fireKeyDownEnter,
-    fireKeyDownDelete = _fireEventHelpers["default"].fireKeyDownDelete;
+var createRef = _zhnTestUtils["default"].createRef,
+    render = _zhnTestUtils["default"].render,
+    screen = _zhnTestUtils["default"].screen,
+    act = _zhnTestUtils["default"].act,
+    fireClick = _zhnTestUtils["default"].fireClick,
+    fireChange = _zhnTestUtils["default"].fireChange,
+    fireKeyDownEnter = _zhnTestUtils["default"].fireKeyDownEnter,
+    fireKeyDownDelete = _zhnTestUtils["default"].fireKeyDownDelete;
 describe("InputPattern", function () {
   var _findInput = function _findInput() {
-    return _react2.screen.findByRole('textbox');
+    return screen.findByRole('textbox');
   };
 
   var _findBtClear = function _findBtClear() {
-    return _react2.screen.findByRole('button');
+    return screen.findByRole('button');
   };
 
   test("should render InputPattern with event handlers and ref", /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
@@ -43,14 +43,14 @@ describe("InputPattern", function () {
           case 0:
             onEnter = jest.fn(), onClear = jest.fn(), onTest = jest.fn(function (str) {
               return str.length < 4;
-            }), ref = /*#__PURE__*/(0, _react.createRef)(), initValue = "abc", _render = (0, _react2.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern["default"], {
+            }), ref = createRef(), initValue = "abc", _render = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern["default"], {
               ref: ref,
               initValue: initValue,
               onTest: onTest,
               onEnter: onEnter,
               onClear: onClear
             })), rerender = _render.rerender;
-            input = _react2.screen.getByRole('textbox');
+            input = screen.getByRole('textbox');
             expect(input).toHaveValue(initValue); //2 Test event handlers
             //2.1 onChange
 
@@ -102,7 +102,7 @@ describe("InputPattern", function () {
             ref.current.focus();
             expect(input).toHaveFocus(); //3.4
 
-            (0, _react2.act)(function () {
+            act(function () {
               return ref.current.showErrMsg();
             });
             expect(ref.current.isValid()).toBe(true); //4 Test rerender with new initValue without optional handlers
