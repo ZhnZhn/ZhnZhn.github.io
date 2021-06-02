@@ -32,18 +32,11 @@ const S = {
   }
 };
 
-const LinkList = ({ links }) => (
-  <ul style={S.LINKS}>
-    {(links || [])
-       .map(({href, caption}, index) => (
-        <li key={index}>
-          <Link
-             caption={`${caption}: ${href}`}
-             href={href}
-          />
-        </li>))
-    }
-  </ul>
+const _crLinkItem = ({href, caption}) => (
+ <Link
+    caption={`${caption}: ${href}`}
+    href={href}
+ />
 );
 
 const Descr = ({
@@ -58,14 +51,21 @@ const Descr = ({
       <div style={{...S.DESCR, ...style}}>
         {descr}
       </div>
-      <LinkList links={links} />
+      <A.ItemList items={links} crItem={_crLinkItem} />
     </A.OpenClose>
   );
 };
 
+const _crStackItem = (item, index) => {
+  const _key = item.caption || index;
+  return _isArr(item.tokens)
+    ? <FlexTokens key={_key} {...item} />
+    : <Descr key={_key} {...item} />
+};
+
 const InfoItem = ({ config={}, onCloseItem }) => {
   const { caption, items } = config
-  const [isOpen, toggleIsOpen] = useToggle(true)
+  , [isOpen, toggleIsOpen] = useToggle(true);
   return (
     <div style={S.ROOT}>
       <ItemHeader
@@ -76,15 +76,8 @@ const InfoItem = ({ config={}, onCloseItem }) => {
         onClick={toggleIsOpen}
         onClose={onCloseItem}
       />
-      <A.ShowHide isShow={isOpen}>
-        <div style={S.INFO}>
-          {items.map((item, index) => {
-             const _key = item.caption || index;
-             return _isArr(item.tokens)
-               ? <FlexTokens key={_key} {...item} />
-               : <Descr key={_key} {...item} />
-          })}
-        </div>
+      <A.ShowHide isShow={isOpen} style={S.INFO}>
+         <A.ItemStack items={items} crItem={_crStackItem} />
       </A.ShowHide>
     </div>
   );

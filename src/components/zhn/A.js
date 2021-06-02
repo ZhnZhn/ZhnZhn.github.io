@@ -1,4 +1,3 @@
-
 import SvgIcons from './svg/SvgIcons'
 import SpinnerLoading from './SpinnerLoading'
 import ScrollPane from './ScrollPane'
@@ -11,6 +10,7 @@ import DivHtml from './DivHtml'
 import InfoPart from './InfoPart'
 import InputText from './InputText'
 import ItemList from './ItemList'
+import ItemStack from './ItemStack'
 import Load from './Load'
 import OpenClose from './OpenClose'
 import OpenClose2 from './OpenClose2'
@@ -40,6 +40,7 @@ const A = {
   InfoPart,
   InputText,
   ItemList,
+  ItemStack,
   Load,
   OpenClose,
   OpenClose2,
