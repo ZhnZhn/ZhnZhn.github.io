@@ -37,7 +37,7 @@ var _crDescr = function _crDescr(extension) {
   var _ext = extension || {},
       datasetId = _ext.datasetId,
       subTitle = _ext.subTitle,
-      _id = "DatasetId: " + datasetId,
+      _id = "Dataset: " + datasetId,
       _sub = subTitle ? "Metric: " + subTitle : '',
       _d = _ext.description || '';
 

@@ -38,7 +38,7 @@ const C = {
 const _crDescr = (extension) => {
   const _ext = extension || {}
     , { datasetId, subTitle } = _ext
-    , _id = `DatasetId: ${datasetId}`
+    , _id = `Dataset: ${datasetId}`
     , _sub = subTitle ? `Metric: ${subTitle}` : ''
     , _d = _ext.description || '';
    return (`${_d} ${_id} ${_sub}`).trim();
