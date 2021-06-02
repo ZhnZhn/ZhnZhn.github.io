@@ -13,14 +13,13 @@ var _react = require("react");
 
 var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
 
+var _ItemStack = _interopRequireDefault(require("./ItemStack"));
+
 var _LegendItem = _interopRequireDefault(require("./LegendItem"));
 
-var C = {
-  CL_SCROLL: "with-scroll",
-  MORE_MAX: 12,
-  MORE: 'MORE',
-  LESS: 'LESS'
-};
+var CL_SCROLL = "with-scroll",
+    CL_BT_ML = "bt-ml",
+    MORE_MAX = 12;
 var S = {
   MORE: {
     overflowY: 'auto',
@@ -34,55 +33,30 @@ var S = {
   },
   DIV: {
     transform: 'scaleX(-1)'
-  },
-  BT_MORE: {
-    display: 'inline-block',
-    color: '#1b2836',
-    marginTop: 10,
-    marginLeft: 8,
-    fontWeight: 'bold',
-    cursor: 'pointer'
   }
 };
 
-var BtMore = function BtMore(_ref) {
+var _crBtCaption = function _crBtCaption(isMore, len) {
+  return isMore ? "Less: " + MORE_MAX : "More: " + (len - MORE_MAX);
+};
+
+var BtMoreOrLess = function BtMoreOrLess(_ref) {
   var isMore = _ref.isMore,
       legend = _ref.legend,
       onClick = _ref.onClick;
   var _len = legend.length;
-
-  if (_len > C.MORE_MAX) {
-    var _caption = isMore ? C.LESS + ': ' + C.MORE_MAX : C.MORE + ': +' + (_len - C.MORE_MAX);
-
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-      style: S.BT_MORE,
-      onClick: onClick,
-      children: _caption
-    });
-  } else {
-    return null;
-  }
+  return _len > MORE_MAX ? /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+    className: CL_BT_ML,
+    onClick: onClick,
+    children: _crBtCaption(isMore, _len)
+  }) : null;
 };
 
-var _renderLegend = function _renderLegend(legend, isMore, onClickItem) {
-  var _legendItems = [],
-      max = legend.length;
-  var i = 0;
-
-  for (; i < max; i++) {
-    if (isMore || !isMore && i < C.MORE_MAX) {
-      var item = legend[i];
-
-      _legendItems.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_LegendItem["default"], {
-        item: item,
-        onClickItem: onClickItem
-      }, item.name));
-    } else {
-      break;
-    }
-  }
-
-  return _legendItems;
+var _crLegendItem = function _crLegendItem(onClickItem, item) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_LegendItem["default"], {
+    item: item,
+    onClickItem: onClickItem
+  }, item.name);
 };
 
 var Legend = /*#__PURE__*/(0, _react.memo)(function (_ref2) {
@@ -93,14 +67,21 @@ var Legend = /*#__PURE__*/(0, _react.memo)(function (_ref2) {
   var _useToggle = (0, _useToggle2["default"])(false),
       isMore = _useToggle[0],
       toggleIsMore = _useToggle[1],
+      _legendItems = isMore ? legend : legend.slice(0, MORE_MAX),
+      _crStackItem = (0, _react.useCallback)(function (item) {
+    return _crLegendItem(onClickItem, item);
+  }, [onClickItem]),
       _style = isMore ? S.MORE : (0, _extends2["default"])({}, S.MORE, S.LESS);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    className: C.CL_SCROLL,
+    className: CL_SCROLL,
     style: _style,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S.DIV,
-      children: [_renderLegend(legend, isMore, onClickItem), /*#__PURE__*/(0, _jsxRuntime.jsx)(BtMore, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack["default"], {
+        items: _legendItems,
+        crItem: _crStackItem
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(BtMoreOrLess, {
         isMore: isMore,
         legend: legend,
         onClick: toggleIsMore
