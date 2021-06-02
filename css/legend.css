@@ -1,0 +1,30 @@
+.bt-item {
+  display: inline-block;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-left: 12px;
+  margin-top: 10px;
+  font-weight: normal;  
+}
+.bt-item:hover {
+  outline: 0;
+}
+.bt-item:focus {
+  border-width: 2px;
+}
+
+.bt-ml {
+  display: inline-block;
+  color: #1b2836;
+  padding: 6px;
+  margin-left: 8px;
+  font-weight: bold;
+}
+.bt-ml:hover,
+.bt-ml:focus {
+  outline: 0;
+  background-color: rgba(120, 120, 120, 0.2);
+}
