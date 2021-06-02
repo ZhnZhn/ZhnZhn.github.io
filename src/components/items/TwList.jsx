@@ -1,13 +1,11 @@
-import useToggle from '../hooks/useToggle'
-
-import Comp from '../Comp'
-
-import ItemHeader from './ItemHeader'
+import useToggle from '../hooks/useToggle';
+import Comp from '../Comp';
+import ItemHeader from './ItemHeader';
 
 const {
   toLink,
   ShowHide,
-  ItemList,
+  ItemStack,
   SvgClose
 } = Comp;
 
@@ -66,7 +64,9 @@ const Twit = ({ item }) => {
       </div>
     </div>
   );
-}
+};
+
+const _crTwItem = item => <Twit key={item.id} item={item} />;
 
 const TwList = ({ config, onCloseItem }) => {
   const { title, items } = config
@@ -79,14 +79,11 @@ const TwList = ({ config, onCloseItem }) => {
         onClick={toggleIsOpen}
         onClose={onCloseItem}
       />
-      <ShowHide
-        isShow={isOpen}
-        style={S.SHOW_HIDE}
-      >
-        <ItemList items={items} Item={Twit} />
+      <ShowHide isShow={isOpen} style={S.SHOW_HIDE}>
+        <ItemStack items={items} crItem={_crTwItem} />
       </ShowHide>
     </div>
   );
-}
+};
 
 export default TwList

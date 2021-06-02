@@ -15,7 +15,7 @@ var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 
 var toLink = _Comp["default"].toLink,
     ShowHide = _Comp["default"].ShowHide,
-    ItemList = _Comp["default"].ItemList,
+    ItemStack = _Comp["default"].ItemStack,
     SvgClose = _Comp["default"].SvgClose;
 var CL = 'twit';
 var S = {
@@ -94,6 +94,12 @@ var Twit = function Twit(_ref) {
   });
 };
 
+var _crTwItem = function _crTwItem(item) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(Twit, {
+    item: item
+  }, item.id);
+};
+
 var TwList = function TwList(_ref2) {
   var config = _ref2.config,
       onCloseItem = _ref2.onCloseItem;
@@ -114,9 +120,9 @@ var TwList = function TwList(_ref2) {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
       isShow: isOpen,
       style: S.SHOW_HIDE,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemList, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemStack, {
         items: items,
-        Item: Twit
+        crItem: _crTwItem
       })
     })]
   });
