@@ -20,7 +20,9 @@ var ButtonCircle = function ButtonCircle(_ref) {
     style: style,
     title: title,
     onClick: onClick,
-    children: caption
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      children: caption
+    })
   });
 };
 /*

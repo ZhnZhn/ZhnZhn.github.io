@@ -14,8 +14,7 @@ const ButtonCircle = ({
     style={style}
     title={title}
     onClick={onClick}
-  >
-   {caption}
+  ><div>{caption}</div>
   </button>
 );
 
