@@ -1,9 +1,9 @@
 import { CompItemType as CIT } from '../../constants/Type';
 
 const _isFn = fn => typeof fn === 'function';
-const _crEmptyDescr = () => '';
-const _getId = ({ key }) => key;
 const _crNoop = () => {};
+const _crEmptyDescr = () => '';
+const _getId = ({ _itemKey }) => _itemKey;
 
 const _crToken = (json, fnOrPropName) => _isFn(fnOrPropName)
   ? fnOrPropName(json)
@@ -27,11 +27,6 @@ const TemplateTokens = function(impl) {
 };
 
 Object.assign(TemplateTokens.prototype, {
-  crKey(option){
-    option.key = option.value
-    return option.value;
-  },
-
   toConfig(json, option){
     const {
       getId, crCaption,
@@ -41,7 +36,6 @@ Object.assign(TemplateTokens.prototype, {
     } = this.impl
     ,  _id = getId(option)
     , _tokens = _crTokens(CONFIGS, json);
-
     return {
       config: {
         zhCompType: CIT.INFO_ITEM,

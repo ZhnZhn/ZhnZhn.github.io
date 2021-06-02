@@ -13,16 +13,16 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
+var _crNoop = function _crNoop() {};
+
 var _crEmptyDescr = function _crEmptyDescr() {
   return '';
 };
 
 var _getId = function _getId(_ref) {
-  var key = _ref.key;
-  return key;
+  var _itemKey = _ref._itemKey;
+  return _itemKey;
 };
-
-var _crNoop = function _crNoop() {};
 
 var _crToken = function _crToken(json, fnOrPropName) {
   return _isFn(fnOrPropName) ? fnOrPropName(json) : json[fnOrPropName];
@@ -49,10 +49,6 @@ var TemplateTokens = function TemplateTokens(impl) {
 };
 
 Object.assign(TemplateTokens.prototype, {
-  crKey: function crKey(option) {
-    option.key = option.value;
-    return option.value;
-  },
   toConfig: function toConfig(json, option) {
     var _this$impl = this.impl,
         getId = _this$impl.getId,
