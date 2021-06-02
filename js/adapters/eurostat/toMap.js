@@ -9,7 +9,7 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
 
-var createData = _EuroStatFn["default"].createData,
+var crData = _EuroStatFn["default"].crData,
     setDataAndInfo = _EuroStatFn["default"].setDataAndInfo;
 
 var _addItemCaptionTo = function _addItemCaptionTo(option) {
@@ -20,8 +20,8 @@ var _addItemCaptionTo = function _addItemCaptionTo(option) {
 
 var toMap = {
   createConfig: function createConfig(json, option) {
-    var _createData = createData(json),
-        data = _createData.data,
+    var _crData = crData(json),
+        data = _crData.data,
         config = _ChartConfig["default"].crAreaConfig();
 
     _addItemCaptionTo(option);

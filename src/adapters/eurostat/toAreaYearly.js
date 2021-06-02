@@ -19,7 +19,7 @@ const toAreaYearly = {
          itemCaption: title + ': ' + subtitle,
          value: title + '_' + subtitle,
          dataSource: crDataSource(option),
-         ...crLinkConf(json, option)
+         ...crLinkConf(option)
        });
       setInfo({ config, json, option })
       return config;
@@ -27,7 +27,7 @@ const toAreaYearly = {
 
    createSeria: (json, option) => {
      return ChartConfig.crSeria({
-       name: 'Empty Seria'       
+       name: 'Empty Seria'
      });
    }
 

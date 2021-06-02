@@ -34,7 +34,8 @@ var isInArrStr = _ut["default"].isInArrStr,
     getV = _ut["default"].getV,
     formatAllNumber = _ut["default"].formatAllNumber,
     findMinY = _seriaFn["default"].findMinY,
-    findMaxY = _seriaFn["default"].findMaxY;
+    findMaxY = _seriaFn["default"].findMaxY,
+    filterTrimZero = _seriaFn["default"].filterTrimZero;
 var ymdToUTC = dt.ymdToUTC,
     ymdhmsToUTC = dt.ymdhmsToUTC,
     mlsToDmy = dt.mlsToDmy,
@@ -178,6 +179,7 @@ var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["defaul
   },
   findMinY: findMinY,
   findMaxY: findMaxY,
+  filterTrimZero: filterTrimZero,
   mapIf: function mapIf(arr, crItem, is) {
     var _items = [];
     (arr || []).forEach(function (v) {

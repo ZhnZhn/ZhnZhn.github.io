@@ -22,7 +22,7 @@ const {
   getC, getV,
   formatAllNumber
 } = ut
-, { findMinY, findMaxY } = seriaFn;
+, { findMinY, findMaxY, filterTrimZero } = seriaFn;
 
 const {
   ymdToUTC,
@@ -174,6 +174,7 @@ const AdapterFn = {
 
   findMinY,
   findMaxY,
+  filterTrimZero,
 
   mapIf: (arr, crItem, is) => {
     const _items = [];

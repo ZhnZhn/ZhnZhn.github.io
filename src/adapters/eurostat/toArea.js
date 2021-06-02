@@ -3,7 +3,7 @@ import ChartConfig from '../../charts/ChartConfig';
 import EuroStatFn from './EuroStatFn';
 
 const {
-  createData,
+  crData,
   setDataAndInfo,
   setLineExtrems,
   findMinY
@@ -12,11 +12,10 @@ const {
 const toArea = {
    createConfig: (json, option) => {
      const {
-         isNotZoomToMinMax,
-         seriaType, seriaColor, seriaWidth,
-         mapFrequency
-        } = option
-     , { data, max, min } = createData(json, mapFrequency)
+       isNotZoomToMinMax,
+       seriaType, seriaColor, seriaWidth
+     } = option
+     , { data, max, min } = crData(json, option)
      , _type = (seriaType || '').toLowerCase() || 'spline'
      , config = ChartConfig.crAreaConfig({
          seriaType: _type,
@@ -29,7 +28,7 @@ const toArea = {
    },
 
    createSeria: (json, option) => {
-     const { data } = createData(json)
+     const { data } = crData(json)
      , { itemCaption, seriaType, seriaColor, seriaWidth } = option;
 
      return ChartConfig.crSeria({

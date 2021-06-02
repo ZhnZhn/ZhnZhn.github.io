@@ -20,6 +20,8 @@ var calcMinY = _ChartFn["default"].calcMinY,
 var compareByDate = _AdapterFn["default"].compareByDate,
     valueMoving = _AdapterFn["default"].valueMoving,
     findMinY = _AdapterFn["default"].findMinY,
+    findMaxY = _AdapterFn["default"].findMaxY,
+    filterTrimZero = _AdapterFn["default"].filterTrimZero,
     joinBy = _AdapterFn["default"].joinBy,
     crItemConf = _AdapterFn["default"].crItemConf;
 var COLOR = {
@@ -42,6 +44,18 @@ var _crDescr = function _crDescr(extension) {
       _d = _ext.description || '';
 
   return (_d + " " + _id + " " + _sub).trim();
+};
+
+var _crDatasetInfo = function _crDatasetInfo(_ref) {
+  var label = _ref.label,
+      updated = _ref.updated,
+      extension = _ref.extension;
+  return {
+    name: label,
+    description: _crDescr(extension),
+    toDate: updated,
+    fromDate: '1996-01-30'
+  };
 };
 
 var _colorSeriaIn = function _colorSeriaIn(config, codes, color) {
@@ -117,15 +131,17 @@ var _setHeightIfBarTo = function _setHeightIfBarTo(config, seriaType, categories
 var EuroStatFn = {
   joinBy: joinBy,
   findMinY: findMinY,
-  createData: function createData(json, mapFrequency) {
+  crData: function crData(json, _temp) {
+    var _ref2 = _temp === void 0 ? {} : _temp,
+        mapFrequency = _ref2.mapFrequency,
+        isFilterZero = _ref2.isFilterZero;
+
     var _EuroStatFn$crTimeInd = EuroStatFn.crTimeIndexAndValue(json),
         timeIndex = _EuroStatFn$crTimeInd.timeIndex,
         value = _EuroStatFn$crTimeInd.value,
-        status = _EuroStatFn$crTimeInd.status,
-        data = [];
+        status = _EuroStatFn$crTimeInd.status;
 
-    var max = Number.NEGATIVE_INFINITY,
-        min = Number.POSITIVE_INFINITY;
+    var data = [];
     Object.keys(timeIndex).forEach(function (key) {
       if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
         var _valueIndex = timeIndex[key],
@@ -133,21 +149,19 @@ var EuroStatFn = {
 
         if (y != null) {
           data.push(_crPoint(EuroStatFn.convertToUTC(key), y, status[_valueIndex]));
-
-          if (y >= max) {
-            max = y;
-          }
-
-          if (y <= min) {
-            min = y;
-          }
         }
       }
     });
+    data.sort(compareByDate);
+
+    if (isFilterZero) {
+      data = filterTrimZero(data);
+    }
+
     return {
-      data: data.sort(compareByDate),
-      max: max,
-      min: min
+      data: data,
+      max: findMaxY(data),
+      min: findMinY(data)
     };
   },
   toPointArr: function toPointArr(json) {
@@ -167,19 +181,19 @@ var EuroStatFn = {
     });
     return data;
   },
-  setDataAndInfo: function setDataAndInfo(_ref) {
-    var config = _ref.config,
-        data = _ref.data,
-        json = _ref.json,
-        option = _ref.option;
+  setDataAndInfo: function setDataAndInfo(_ref3) {
+    var config = _ref3.config,
+        data = _ref3.data,
+        json = _ref3.json,
+        option = _ref3.option;
     var title = option.title,
         subtitle = option.subtitle,
         seriaType = option.seriaType;
 
     _Chart["default"].setDefaultTitle(config, title, subtitle);
 
-    config.zhConfig = EuroStatFn.createZhConfig(json, option);
-    config.info = EuroStatFn.createDatasetInfo(json);
+    config.zhConfig = EuroStatFn.crZhConfig(option);
+    config.info = _crDatasetInfo(json);
 
     if (_isLineSeria(seriaType)) {
       config.valueMoving = valueMoving(data);
@@ -187,19 +201,19 @@ var EuroStatFn = {
 
     config.series[0].data = data;
   },
-  setInfo: function setInfo(_ref2) {
-    var config = _ref2.config,
-        json = _ref2.json,
-        option = _ref2.option;
-    config.info = EuroStatFn.createDatasetInfo(json);
+  setInfo: function setInfo(_ref4) {
+    var config = _ref4.config,
+        json = _ref4.json,
+        option = _ref4.option;
+    config.info = _crDatasetInfo(json);
   },
-  setCategories: function setCategories(_ref3) {
-    var config = _ref3.config,
-        categories = _ref3.categories,
-        min = _ref3.min,
-        _ref3$tooltip = _ref3.tooltip,
-        tooltip = _ref3$tooltip === void 0 ? _Tooltip["default"].category : _ref3$tooltip,
-        option = _ref3.option;
+  setCategories: function setCategories(_ref5) {
+    var config = _ref5.config,
+        categories = _ref5.categories,
+        min = _ref5.min,
+        _ref5$tooltip = _ref5.tooltip,
+        tooltip = _ref5$tooltip === void 0 ? _Tooltip["default"].category : _ref5$tooltip,
+        option = _ref5.option;
     var time = option.time,
         isNotZoomToMinMax = option.isNotZoomToMinMax,
         seriaType = option.seriaType;
@@ -221,12 +235,12 @@ var EuroStatFn = {
 
     _colorSeriaNotIn(config, C.EU_MEMBER, COLOR.NOT_EU_MEMBER);
   },
-  addToCategoryConfig: function addToCategoryConfig(config, _ref4) {
-    var json = _ref4.json,
-        option = _ref4.option,
-        data = _ref4.data,
-        categories = _ref4.categories,
-        min = _ref4.min;
+  addToCategoryConfig: function addToCategoryConfig(config, _ref6) {
+    var json = _ref6.json,
+        option = _ref6.option,
+        data = _ref6.data,
+        categories = _ref6.categories,
+        min = _ref6.min;
 
     if (option.isFilterZero) {
       var _r = _filterZeroCategories(data, categories);
@@ -249,9 +263,9 @@ var EuroStatFn = {
     });
     EuroStatFn.colorSeries(config);
   },
-  setTooltip: function setTooltip(_ref5) {
-    var config = _ref5.config,
-        tooltip = _ref5.tooltip;
+  setTooltip: function setTooltip(_ref7) {
+    var config = _ref7.config,
+        tooltip = _ref7.tooltip;
     config.tooltip = _Chart["default"].fTooltip(tooltip);
   },
   crCategoryTooltip: function crCategoryTooltip() {
@@ -283,11 +297,11 @@ var EuroStatFn = {
 
     return parseInt(str, 10) > 1970 ? Date.UTC(str, 11, 31) : Date.UTC(1970, 11, 31);
   },
-  setLineExtrems: function setLineExtrems(_ref6) {
-    var config = _ref6.config,
-        max = _ref6.max,
-        min = _ref6.min,
-        isNotZoomToMinMax = _ref6.isNotZoomToMinMax;
+  setLineExtrems: function setLineExtrems(_ref8) {
+    var config = _ref8.config,
+        max = _ref8.max,
+        min = _ref8.min,
+        isNotZoomToMinMax = _ref8.isNotZoomToMinMax;
     var plotLines = config.yAxis.plotLines;
     setPlotLinesMinMax({
       plotLines: plotLines,
@@ -299,30 +313,25 @@ var EuroStatFn = {
       config.yAxis.min = calcMinY(min, max);
     }
   },
-  crItemCaption: function crItemCaption(_ref7) {
-    var title = _ref7.title;
+  crItemCaption: function crItemCaption(_ref9) {
+    var title = _ref9.title;
     return joinBy(": ", "EU", title);
   },
-  crDataSource: function crDataSource(_ref8) {
-    var dfTable = _ref8.dfTable,
-        dataSource = _ref8.dataSource;
+  crDataSource: function crDataSource(_ref10) {
+    var dfTable = _ref10.dfTable,
+        dataSource = _ref10.dataSource;
     return dfTable ? dataSource + " (" + dfTable + ")" : dataSource || "Eurostat";
   },
-  crLinkConf: function crLinkConf(json, _ref9) {
-    var dfTable = _ref9.dfTable;
-
-    var href = json.href,
-        _href = href && href.replace ? href.replace('http', 'https') : href;
-
+  crLinkConf: function crLinkConf(_ref11) {
+    var dfTable = _ref11.dfTable;
     return {
       linkFn: 'ES',
       item: {
-        dataset: dfTable,
-        href: _href
+        dataset: dfTable
       }
     };
   },
-  createZhConfig: function createZhConfig(json, option) {
+  crZhConfig: function crZhConfig(option) {
     var key = option.key,
         itemCaption = option.itemCaption,
         url = option.url,
@@ -338,18 +347,7 @@ var EuroStatFn = {
       itemCaption: itemCaption,
       itemConf: itemConf,
       dataSource: dataSource
-    }, EuroStatFn.crLinkConf(json, option));
-  },
-  createDatasetInfo: function createDatasetInfo(_ref10) {
-    var label = _ref10.label,
-        updated = _ref10.updated,
-        extension = _ref10.extension;
-    return {
-      name: label,
-      description: _crDescr(extension),
-      toDate: updated,
-      fromDate: '1996-01-30'
-    };
+    }, EuroStatFn.crLinkConf(option));
   },
   crTimeIndexAndValue: function crTimeIndexAndValue(json) {
     var _json$dimension = json.dimension,

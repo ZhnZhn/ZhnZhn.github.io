@@ -13,6 +13,8 @@ const {
   compareByDate,
   valueMoving,
   findMinY,
+  findMaxY,
+  filterTrimZero,
   joinBy,
   crItemConf
 } = AdapterFn;
@@ -43,6 +45,13 @@ const _crDescr = (extension) => {
     , _d = _ext.description || '';
    return (`${_d} ${_id} ${_sub}`).trim();
 };
+
+const _crDatasetInfo = ({ label, updated, extension }) => ({
+  name: label,
+  description: _crDescr(extension),
+  toDate: updated,
+  fromDate: '1996-01-30'
+});
 
 const _colorSeriaIn = (config, codes, color) => {
   const data = config.series[0].data;
@@ -107,11 +116,9 @@ const EuroStatFn = {
    joinBy,
    findMinY,
 
-  createData(json, mapFrequency){
+  crData(json, {mapFrequency, isFilterZero}={}) {
     const { timeIndex, value, status } = EuroStatFn.crTimeIndexAndValue(json)
-    , data = [];
-    let max = Number.NEGATIVE_INFINITY
-      , min = Number.POSITIVE_INFINITY;
+    let data = [];
     Object.keys(timeIndex).forEach(key => {
        if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
          const _valueIndex = timeIndex[key]
@@ -121,14 +128,17 @@ const EuroStatFn = {
              EuroStatFn.convertToUTC(key),
              y, status[_valueIndex]
            ));
-           if (y>=max) { max = y; }
-           if (y<=min) { min = y; }
          }
        }
     })
+    data.sort(compareByDate)
+    if (isFilterZero) {
+      data = filterTrimZero(data)
+    }
     return {
-      data: data.sort(compareByDate),
-      max, min
+      data,
+      max: findMaxY(data),
+      min: findMinY(data)
     };
   },
 
@@ -153,8 +163,8 @@ const EuroStatFn = {
     const { title, subtitle, seriaType } = option;
     Chart.setDefaultTitle(config, title, subtitle);
 
-    config.zhConfig = EuroStatFn.createZhConfig(json, option);
-    config.info = EuroStatFn.createDatasetInfo(json);
+    config.zhConfig = EuroStatFn.crZhConfig(option);
+    config.info = _crDatasetInfo(json);
 
     if (_isLineSeria(seriaType)){
       config.valueMoving = valueMoving(data)
@@ -164,7 +174,7 @@ const EuroStatFn = {
   },
 
   setInfo({ config, json, option }){
-    config.info = EuroStatFn.createDatasetInfo(json);
+    config.info = _crDatasetInfo(json);
   },
 
   setCategories({
@@ -250,21 +260,16 @@ const EuroStatFn = {
     ? `${dataSource} (${dfTable})`
     : dataSource || "Eurostat",
 
-  crLinkConf: (json, { dfTable }) => {
-    const { href } = json
-    , _href = href && href.replace
-        ? href.replace('http', 'https')
-        : href;
+  crLinkConf: ({ dfTable }) => {
     return {
       linkFn: 'ES',
       item: {
-        dataset: dfTable,
-        href: _href
+        dataset: dfTable
       }
     };
   },
 
-  createZhConfig(json, option){
+  crZhConfig(option) {
     const {
       key, itemCaption,
       url
@@ -282,16 +287,7 @@ const EuroStatFn = {
       id: key, key, itemCaption,
       itemConf,
       dataSource,
-      ...EuroStatFn.crLinkConf(json, option)
-    };
-  },
-
-  createDatasetInfo({ label, updated, extension }){
-    return {
-      name: label,
-      description: _crDescr(extension),
-      toDate: updated,
-      fromDate: '1996-01-30'
+      ...EuroStatFn.crLinkConf(option)
     };
   },
 

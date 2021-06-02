@@ -28,7 +28,7 @@ var toAreaYearly = {
       itemCaption: title + ': ' + subtitle,
       value: title + '_' + subtitle,
       dataSource: crDataSource(option)
-    }, crLinkConf(json, option)));
+    }, crLinkConf(option)));
 
     setInfo({
       config: config,

@@ -3,7 +3,7 @@ import ChartConfig from '../../charts/ChartConfig';
 import EuroStatFn from './EuroStatFn';
 
 const {
-  createData,
+  crData,
   setDataAndInfo
 } = EuroStatFn
 
@@ -14,7 +14,7 @@ const _addItemCaptionTo = (option) => {
 
 const toMap = {
   createConfig : (json, option) => {
-    const { data } = createData(json)
+    const { data } = crData(json)
     , config = ChartConfig.crAreaConfig();
 
      _addItemCaptionTo(option)
