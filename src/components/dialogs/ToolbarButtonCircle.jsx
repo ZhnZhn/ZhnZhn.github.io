@@ -1,36 +1,32 @@
 import { memo } from 'react';
 
-import D from './DialogCell'
+import D from './DialogCell';
 import ButtonCircle from '../zhn/ButtonCircle';
+import ItemStack from '../zhn/ItemStack';
 
 const S = {
   ROW: {
-    paddingTop: 4,
-    paddingBottom: 8
+    paddingTop: 2,
+    paddingBottom: 4
   },
   BUTTON_CIRCLE: {
     marginLeft: 20
   }
-}
+};
 
-const _renderButtons = (buttons) => {
-  return buttons.map((button, index) => {
-    const { caption, title, onClick } = button;
-    return (
-      <ButtonCircle
-        key={caption + index}
-        caption={caption}
-        title={title}
-        style={S.BUTTON_CIRCLE}
-        onClick={onClick}
-      />
-    );
-  })
-}
+const _crButton = ({ caption, title, onClick }, index) => (
+  <ButtonCircle
+    key={caption + index}
+    style={S.BUTTON_CIRCLE}
+    caption={caption}
+    title={title}
+    onClick={onClick}
+  />
+);
 
-const ToolbarButtonCircle = memo(({ buttons=[] }) => (
+const ToolbarButtonCircle = memo(({ buttons }) => (
   <D.Row.Plain style={S.ROW}>
-    {_renderButtons(buttons)}
+    <ItemStack items={buttons} crItem={_crButton} />
   </D.Row.Plain>
 ))
 

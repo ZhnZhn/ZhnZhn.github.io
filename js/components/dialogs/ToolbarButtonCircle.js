@@ -13,36 +13,38 @@ var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 
+var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
+
 var S = {
   ROW: {
-    paddingTop: 4,
-    paddingBottom: 8
+    paddingTop: 2,
+    paddingBottom: 4
   },
   BUTTON_CIRCLE: {
     marginLeft: 20
   }
 };
 
-var _renderButtons = function _renderButtons(buttons) {
-  return buttons.map(function (button, index) {
-    var caption = button.caption,
-        title = button.title,
-        onClick = button.onClick;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
-      caption: caption,
-      title: title,
-      style: S.BUTTON_CIRCLE,
-      onClick: onClick
-    }, caption + index);
-  });
+var _crButton = function _crButton(_ref, index) {
+  var caption = _ref.caption,
+      title = _ref.title,
+      onClick = _ref.onClick;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
+    style: S.BUTTON_CIRCLE,
+    caption: caption,
+    title: title,
+    onClick: onClick
+  }, caption + index);
 };
 
-var ToolbarButtonCircle = /*#__PURE__*/(0, _react.memo)(function (_ref) {
-  var _ref$buttons = _ref.buttons,
-      buttons = _ref$buttons === void 0 ? [] : _ref$buttons;
+var ToolbarButtonCircle = /*#__PURE__*/(0, _react.memo)(function (_ref2) {
+  var buttons = _ref2.buttons;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Row.Plain, {
     style: S.ROW,
-    children: _renderButtons(buttons)
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack["default"], {
+      items: buttons,
+      crItem: _crButton
+    })
   });
 });
 /*
