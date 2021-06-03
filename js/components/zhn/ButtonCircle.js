@@ -6,7 +6,7 @@ exports["default"] = void 0;
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 //import PropTypes from "prop-types";
-var CL_BT_CIRCLE = 'zhn-bt-circle';
+var CL_BT_CIRCLE = 'bt-circle bt-c1';
 
 var ButtonCircle = function ButtonCircle(_ref) {
   var _ref$className = _ref.className,

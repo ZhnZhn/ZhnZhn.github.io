@@ -5,7 +5,7 @@ import A from '../Comp'
 
 const TH_ID = 'ELEMENT';
 
-const CL_CAPTION = "not-selected text-clip bt-left";
+const CL_CAPTION = "not-selected text-clip bt-left bt";
 
 const S = {
   ROOT: {

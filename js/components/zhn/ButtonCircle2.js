@@ -5,7 +5,7 @@ exports["default"] = void 0;
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
-var CL = 'zhn-bt-circle2';
+var CL = 'bt-circle bt-c2';
 
 var ButtonCircle2 = function ButtonCircle2(_ref) {
   var tabIndex = _ref.tabIndex,

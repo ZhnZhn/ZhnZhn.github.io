@@ -1,22 +1,19 @@
 
-.zhn-bt-circle {
+/*general button circle */
+.bt-circle {
   display: inline-block;
-  color: #80c040;
-  border: 2px solid #80c040;
   border-radius: 50%;
   line-height: 1.45;
   width: 26px;
-  height: 26px;
-  text-align: center;
   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
 }
-.zhn-bt-circle:hover,
-.zhn-bt-circle:focus {
+.bt-circle:hover,
+.bt-circle:focus {
   outline: 0;
   box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3), 0 4px 15px 0 rgba(0,0,0,0.2);
 }
 
-.zhn-bt-circle > div {
+.bt-circle > div {
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -25,43 +22,27 @@
   transition: background-color 200ms ease-out;
 }
 
-.zhn-bt-circle:hover > div,
-.zhn-bt-circle:focus > div {
+.bt-circle:hover > div,
+.bt-circle:focus > div {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.zhn-bt-circle2 {
-  display: inline-block;
+/* button circle customizations */
+.bt-c1 {
+  color: #80c040;
+  border: 2px solid #80c040;
+}
+.bt-c2 {
   background-color: #949ab4;
   width: 32px;
   line-height: 2;
-  border-radius: 50%;
   text-align: center;
   font-weight: bold;
-  vertical-align: middle;
-  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
-}
-.zhn-bt-circle2:hover,
-.zhn-bt-circle2:focus {
-  outline: 0;
-  box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3), 0 4px 15px 0 rgba(0,0,0,0.2);
-}
-
-.zhn-bt-circle2 > div {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  background-color: transparent;
-  transition: background-color 200ms ease-out;
-}
-.zhn-bt-circle2:hover > div,
-.zhn-bt-circle2:focus > div {
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .bt {
   border-radius: 2px;
+  font-weight: bold;
 }
 .bt:hover {
   outline: 0;
@@ -73,16 +54,7 @@
 
 .bt-left {
   padding-left: 2px;
-  border-radius: 2px;
   text-align: left;
-  font-weight: bold;
-}
-.bt-left:hover {
-  outline: 0;
-}
-.bt-left:focus {
-  outline: 0;
-  background: rgba(164, 164, 164, 0.3);
 }
 
 .bt-more {

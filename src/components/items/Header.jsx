@@ -20,8 +20,8 @@ const {
 
 const TH_ID = 'ELEMENT';
 
-const CL_CAPTION = 'not-selected text-clip bt-left'
-, CL_MORE = "popup-menu charts__menu-more"
+const CL_CAPTION = 'not-selected text-clip bt-left bt'
+, CL_MORE = "popup-menu charts__menu-more";
 
 const S = {
   ROOT: {
@@ -136,7 +136,7 @@ const Header = ({
       />
       <SvgCheckBox
          style={S.CHECK_BOX}
-         color={COLOR.GREEN}         
+         color={COLOR.GREEN}
          checkedColor={TS.ROOT.backgroundColor}
          onCheck={onCheck}
          onUnCheck={onUnCheck}

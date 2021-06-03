@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
-
-const CL_BT_CIRCLE = 'zhn-bt-circle';
+const CL_BT_CIRCLE = 'bt-circle bt-c1';
 
 const ButtonCircle = ({
   className=CL_BT_CIRCLE,

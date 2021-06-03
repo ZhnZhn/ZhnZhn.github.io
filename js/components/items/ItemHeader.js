@@ -16,7 +16,7 @@ var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 var _Comp = _interopRequireDefault(require("../Comp"));
 
 var TH_ID = 'ELEMENT';
-var CL_CAPTION = "not-selected text-clip bt-left";
+var CL_CAPTION = "not-selected text-clip bt-left bt";
 var S = {
   ROOT: {
     position: 'relative',

@@ -27,7 +27,7 @@ var crStyle = _use["default"].crStyle,
     useToggle = _use["default"].useToggle,
     useFnFocus = _use["default"].useFnFocus;
 var TH_ID = 'ELEMENT';
-var CL_CAPTION = 'not-selected text-clip bt-left',
+var CL_CAPTION = 'not-selected text-clip bt-left bt',
     CL_MORE = "popup-menu charts__menu-more";
 var S = {
   ROOT: {

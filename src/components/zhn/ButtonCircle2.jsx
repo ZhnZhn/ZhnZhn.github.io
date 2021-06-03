@@ -1,4 +1,4 @@
-const CL = 'zhn-bt-circle2';
+const CL = 'bt-circle bt-c2';
 
 const ButtonCircle2 = ({
   tabIndex,
