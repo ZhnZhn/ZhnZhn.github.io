@@ -1,13 +1,7 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import BtCircle2 from '../zhn/ButtonCircle2';
+import ButtonCircle2 from '../zhn/ButtonCircle2';
 import CL from './CL';
-
-const S = {
-  BT_CIRCLE: {
-    backgroundColor: '#949ab4'
-  }
-};
 
 const OptionsFooter = forwardRef(({
   indexActiveOption,
@@ -26,20 +20,18 @@ const OptionsFooter = forwardRef(({
       </span>
     </span>
     <span className={CL.FOOTER_BTS}>
-      <BtCircle2
-         className={CL.FOOTER_MARGIN}
-         style={S.BT_CIRCLE}
+      <ButtonCircle2
+         className={CL.FOOTER_BT}
          caption="Dn"
          onClick={onStepDown}
       />
-      <BtCircle2
-         className={CL.FOOTER_MARGIN}
-         style={S.BT_CIRCLE}
+      <ButtonCircle2
+         className={CL.FOOTER_BT}
          caption="Up"
          onClick={onStepUp}
       />
-      <BtCircle2
-         style={S.BT_CIRCLE}
+      <ButtonCircle2
+         className={CL.FOOTER_BT}
          caption="CL"
          onClick={onClear}
       />

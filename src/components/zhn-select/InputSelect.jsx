@@ -5,7 +5,7 @@ import has from '../has'
 import ArrowCell from './ArrowCell';
 import SvgClear from '../zhn/SvgClear';
 
-import BtCircle2 from '../zhn/ButtonCircle2';
+import ButtonCircle2 from '../zhn/ButtonCircle2';
 import ItemOptionDf from './ItemOptionDf'
 import OptionList from './OptionList'
 import OptionsFooter from './OptionsFooter'
@@ -515,7 +515,7 @@ class InputSelect extends Component {
     } else if (isLoadingFailed) {
        _placeholder=`Loading ${optionNames} Failed`;
        _afterInputEl = (
-         <BtCircle2
+         <ButtonCircle2
            className={CL.SPINNER_FAILED}
            dataLoader="circle-failed"
            onClick={onLoadOption}

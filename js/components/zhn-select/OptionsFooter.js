@@ -13,11 +13,6 @@ var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
 
 var _CL = _interopRequireDefault(require("./CL"));
 
-var S = {
-  BT_CIRCLE: {
-    backgroundColor: '#949ab4'
-  }
-};
 var OptionsFooter = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var indexActiveOption = _ref.indexActiveOption,
       nFiltered = _ref.nFiltered,
@@ -38,17 +33,15 @@ var OptionsFooter = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
       className: _CL["default"].FOOTER_BTS,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
-        className: _CL["default"].FOOTER_MARGIN,
-        style: S.BT_CIRCLE,
+        className: _CL["default"].FOOTER_BT,
         caption: "Dn",
         onClick: onStepDown
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
-        className: _CL["default"].FOOTER_MARGIN,
-        style: S.BT_CIRCLE,
+        className: _CL["default"].FOOTER_BT,
         caption: "Up",
         onClick: onStepUp
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
-        style: S.BT_CIRCLE,
+        className: _CL["default"].FOOTER_BT,
         caption: "CL",
         onClick: onClear
       })]
