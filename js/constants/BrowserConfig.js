@@ -17,6 +17,11 @@ var BrowserConfig = (_BrowserConfig = {}, _BrowserConfig[_Type.BrowserType.STOCK
   isDynamic: true,
   caption: 'Eurostat Statistics',
   sourceMenuUrl: './data/eurostat/source-menu.json'
+}, _BrowserConfig[_Type.BrowserType.FGR] = {
+  browserType: _Type.BrowserType.FGR,
+  isDynamic: true,
+  caption: 'Eurostat: FIGARO',
+  sourceMenuUrl: './data/figaro/source-menu.json'
 }, _BrowserConfig[_Type.BrowserType.UN_COMTRADE] = {
   browserType: _Type.BrowserType.UN_COMTRADE,
   isDynamic: true,

@@ -75,19 +75,24 @@ var crBrowserModel = function crBrowserModel() {
       isClose: true
     }],
     page_01: [{
-      cn: CL.BR,
-      name: 'USA Economics',
-      onClick: _fBD(_Type.BrowserType.US_ECONOMICS),
-      isClose: true
-    }, {
       cn: CL.DBN,
       name: 'DB Nomics',
       onClick: _fBD(_Type.BrowserType.DB_NOMICS),
       isClose: true
     }, {
+      cn: CL.ORG,
+      name: 'EU: FIGARO',
+      onClick: _fBD(_Type.BrowserType.FGR),
+      isClose: true
+    }, {
       cn: CL.Q,
       name: 'Quandl',
       onClick: _fBD(_Type.BrowserType.QUANDL),
+      isClose: true
+    }, {
+      cn: CL.BR,
+      name: 'USA Economics',
+      onClick: _fBD(_Type.BrowserType.US_ECONOMICS),
       isClose: true
     }],
     page_02: [{

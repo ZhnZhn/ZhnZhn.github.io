@@ -34,6 +34,7 @@ var C = {
   EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
   EU_MEMBER: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"]
 };
+var _getKeys = Object.keys;
 
 var _crDescr = function _crDescr(extension) {
   var _ext = extension || {},
@@ -142,7 +143,8 @@ var EuroStatFn = {
         status = _EuroStatFn$crTimeInd.status;
 
     var data = [];
-    Object.keys(timeIndex).forEach(function (key) {
+
+    _getKeys(timeIndex).forEach(function (key) {
       if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
         var _valueIndex = timeIndex[key],
             y = value[_valueIndex];
@@ -152,6 +154,7 @@ var EuroStatFn = {
         }
       }
     });
+
     data.sort(compareByDate);
 
     if (isFilterZero) {
@@ -171,7 +174,7 @@ var EuroStatFn = {
         status = _EuroStatFn$crTimeInd2.status,
         data = [];
 
-    Object.keys(timeIndex).map(function (key) {
+    _getKeys(timeIndex).map(function (key) {
       var _valueIndex = timeIndex[key],
           y = value[_valueIndex];
 
@@ -179,6 +182,7 @@ var EuroStatFn = {
         data.push(_crPoint(key.replace('M', '-'), y, status[_valueIndex]));
       }
     });
+
     return data;
   },
   setDataAndInfo: function setDataAndInfo(_ref3) {
@@ -350,18 +354,19 @@ var EuroStatFn = {
     }, EuroStatFn.crLinkConf(option));
   },
   crTimeIndexAndValue: function crTimeIndexAndValue(json) {
-    var _json$dimension = json.dimension,
-        dimension = _json$dimension === void 0 ? {} : _json$dimension,
+    var dimension = json.dimension,
         _json$value = json.value,
         value = _json$value === void 0 ? [] : _json$value,
         _json$status = json.status,
         status = _json$status === void 0 ? {} : _json$status,
-        _dimension$time = dimension.time,
-        time = _dimension$time === void 0 ? {} : _dimension$time,
-        _time$category = time.category,
-        category = _time$category === void 0 ? {} : _time$category,
-        _category$index = category.index,
-        timeIndex = _category$index === void 0 ? 0 : _category$index;
+        _ref12 = dimension || {},
+        time = _ref12.time,
+        _ref13 = time || {},
+        category = _ref13.category,
+        _ref14 = category || {},
+        _ref14$index = _ref14.index,
+        timeIndex = _ref14$index === void 0 ? 0 : _ref14$index;
+
     return {
       timeIndex: timeIndex,
       value: value,

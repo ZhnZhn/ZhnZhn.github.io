@@ -37,6 +37,8 @@ const C = {
   ]
 };
 
+const _getKeys = Object.keys;
+
 const _crDescr = (extension) => {
   const _ext = extension || {}
     , { datasetId, subTitle } = _ext
@@ -119,7 +121,7 @@ const EuroStatFn = {
   crData(json, {mapFrequency, isFilterZero}={}) {
     const { timeIndex, value, status } = EuroStatFn.crTimeIndexAndValue(json)
     let data = [];
-    Object.keys(timeIndex).forEach(key => {
+    _getKeys(timeIndex).forEach(key => {
        if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
          const _valueIndex = timeIndex[key]
          , y = value[_valueIndex];
@@ -145,7 +147,7 @@ const EuroStatFn = {
   toPointArr(json){
     const { timeIndex, value, status } = EuroStatFn.crTimeIndexAndValue(json)
     , data = [];
-    Object.keys(timeIndex).map((key) => {
+    _getKeys(timeIndex).map((key) => {
        const _valueIndex = timeIndex[key]
        , y = value[_valueIndex];
        if ( y != null ){
@@ -292,10 +294,10 @@ const EuroStatFn = {
   },
 
   crTimeIndexAndValue: (json) => {
-    const { dimension={}, value=[], status={} } = json
-        , { time={} } = dimension
-        , { category={} } = time
-        , { index:timeIndex=0 } = category;
+    const { dimension, value=[], status={} } = json
+    , { time } = dimension || {}
+    , { category } = time || {}
+    , { index:timeIndex=0 } = category || {};
     return { timeIndex, value, status };
   }
 }

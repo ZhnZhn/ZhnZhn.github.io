@@ -13,6 +13,12 @@ const BrowserConfig = {
     caption: 'Eurostat Statistics',
     sourceMenuUrl: './data/eurostat/source-menu.json'
   },
+  [BT.FGR]: {
+    browserType: BT.FGR,
+    isDynamic: true,
+    caption: 'Eurostat: FIGARO',
+    sourceMenuUrl: './data/figaro/source-menu.json'
+  },
   [BT.UN_COMTRADE]: {
     browserType: BT.UN_COMTRADE,
     isDynamic: true,
@@ -66,7 +72,7 @@ const BrowserConfig = {
     browserType: BT.UK_STATISTICS,
     isDynamic: true,
     caption: 'ONS: UK Statistics',
-    sourceMenuUrl: './data/statistics-uk/source-menu.json'    
+    sourceMenuUrl: './data/statistics-uk/source-menu.json'
   },
   [BT.NORWAY_STATISTICS]: {
     browserType: BT.NORWAY_STATISTICS,
