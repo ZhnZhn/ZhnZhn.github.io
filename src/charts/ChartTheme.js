@@ -31,6 +31,7 @@ const ChartTheme = {
     backgroundColor: 'transparent',
     reflow: false,
 
+    zoomType: 'x',
     panning: true,
     panKey: 'shift',
 
@@ -117,10 +118,6 @@ const ChartTheme = {
         states : {
           hover : {
             'stroke-width' : 2,
-            stroke : COLOR.HOVER
-          },
-          select : {
-            'stroke-width' : 3,
             stroke : COLOR.HOVER
           }
         }

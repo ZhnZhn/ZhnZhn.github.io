@@ -38,6 +38,7 @@ var ChartTheme = {
     plotBackgroundColor: 'transparent',
     backgroundColor: 'transparent',
     reflow: false,
+    zoomType: 'x',
     panning: true,
     panKey: 'shift',
     events: {
@@ -117,10 +118,6 @@ var ChartTheme = {
         states: {
           hover: {
             'stroke-width': 2,
-            stroke: _Color["default"].HOVER
-          },
-          select: {
-            'stroke-width': 3,
             stroke: _Color["default"].HOVER
           }
         }
