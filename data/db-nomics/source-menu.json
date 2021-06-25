@@ -539,7 +539,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_WTO_MT_M",
       "dialogProps": {
-        "dataSource" : "DB Nomics: WTO: Merchandise Exports in $Ml, M",
+        "dataSource" : "DB Nomics: WTO: Merchandise Exports in $M, M",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "ITS_MTV_MX",
@@ -555,7 +555,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_WTO_MT_M",
       "dialogProps": {
-        "dataSource" : "DB Nomics: WTO: Merchandise Imports in $Ml, M",
+        "dataSource" : "DB Nomics: WTO: Merchandise Imports in $M, M",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "ITS_MTV_MM",
@@ -571,7 +571,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_WTO_MT_Q",
       "dialogProps": {
-        "dataSource" : "DB Nomics: WTO: Merchandise Exports in $Ml, Q",
+        "dataSource" : "DB Nomics: WTO: Merchandise Exports in $M, Q",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "ITS_MTV_QX",
@@ -586,7 +586,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_WTO_MT_Q",
       "dialogProps": {
-        "dataSource" : "DB Nomics: WTO: Merchandise Imports in $Ml, Q",
+        "dataSource" : "DB Nomics: WTO: Merchandise Imports in $M, Q",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "ITS_MTV_QM",
@@ -602,7 +602,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_WTO_CST_M",
       "dialogProps": {
-        "dataSource" : "DB Nomics: WTO: Commercial Services Exports in $Ml, M",
+        "dataSource" : "DB Nomics: WTO: Commercial Services Exports in $M, M",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "ITS_CS_MX",
@@ -617,7 +617,7 @@
       "contCaption" : "",
       "addProps": "DBN_B_WTO_CST_M",
       "dialogProps": {
-        "dataSource" : "DB Nomics: WTO: Commercial Services Imports in $Ml, M",
+        "dataSource" : "DB Nomics: WTO: Commercial Services Imports in $M, M",
         "dfProps": {
           "dfProvider": "WTO",
           "dfCode": "ITS_CS_MM",
