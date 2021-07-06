@@ -1,15 +1,1 @@
-{
-  "items":[
-  {"v":"B_100100","c":"Primary production"},
-	{"v":"B_100300","c":"Imports"},
-	{"v":"B_100500","c":"Exports"},
-	{"v":"B_100400","c":"Stock Changes"},
-	{"v":"B_100900","c":"Gross inland consumption"},
-	{"v":"B_101400","c":"Distribution Losses"},
-	{"v":"10_128101","c":"Stock levels / Opening / All stocks on national territory"},
-	{"v":"10_128201","c":"Stock levels / Closing / All stocks on national territory"},
-	{"v":"B_105123","c":"Deliveries to power generation"},
-	{"v":"B_105200","c":"Gross Inland Deliveries Observed"},
-	{"v":"B_105000","c":"Gross inland deliveries (calculated)"}
-  ]
-}
+{"items":[{"v":"B_100100","c":"Primary production"},{"v":"B_100300","c":"Imports"},{"v":"B_100500","c":"Exports"},{"v":"B_100400","c":"Stock Changes"},{"v":"B_100900","c":"Gross inland consumption"},{"v":"B_101400","c":"Distribution Losses"},{"v":"10_128101","c":"Stock levels / Opening / All stocks on national territory"},{"v":"10_128201","c":"Stock levels / Closing / All stocks on national territory"},{"v":"B_105123","c":"Deliveries to power generation"},{"v":"B_105200","c":"Gross Inland Deliveries Observed"},{"v":"B_105000","c":"Gross inland deliveries (calculated)"}]}

@@ -1,11 +1,1 @@
-{
-  "items":[
-{"v":"2111","c":"Hard coal"},
-{"v":"2112","c":"Patent Fuels"},
-{"v":"2121","c":"Coke Oven Coke"},
-{"v":"2210","c":"Lignite/Brown Coal"},
-{"v":"2230","c":"BKB (brown coal briquettes)"},
-{"v":"2310","c":"Peat"},
-{"v":"2410","c":"Oil shale and oil sands"}
-  ]
-}
+{"items":[{"v":"2111","c":"Hard coal"},{"v":"2112","c":"Patent Fuels"},{"v":"2121","c":"Coke Oven Coke"},{"v":"2210","c":"Lignite/Brown Coal"},{"v":"2230","c":"BKB (brown coal briquettes)"},{"v":"2310","c":"Peat"},{"v":"2410","c":"Oil shale and oil sands"}]}
