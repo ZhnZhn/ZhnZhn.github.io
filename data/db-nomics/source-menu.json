@@ -47,6 +47,12 @@
             {"id": "DBN_AMECO_GDPCP"},
             {"id": "DBN_AMECO_GDPIN"}
           ]
+        },{
+          "caption": "Foreign Trade at CP",
+          "items":[
+            {"id": "DBN_AMECO_EXG"},
+            {"id": "DBN_AMECO_IMG"}
+          ]
         }
       ]
       },{
@@ -456,6 +462,42 @@
           "dfProvider": "AMECO",
           "dfCode": "OVGDA",
           "dfSufix": "3.1.0.0.OVGDA",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_AMECO_EXG": {
+      "type" : "DBN_AMECO_EXG",
+      "menuTitle" : "Total Exports of Goods",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "ameco-countries" ]
+        ],
+        "dataSource": "DB Nomics: AMECO: Total Exports of Goods",
+        "dfProps": {
+          "dfProvider": "AMECO",
+          "dfCode": "DXGT",
+          "dfSufix": "1.0.99.0.DXGT",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_AMECO_IMG": {
+      "type" : "DBN_AMECO_IMG",
+      "menuTitle" : "Total Imports of Goods",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "ameco-countries" ]
+        ],
+        "dataSource": "DB Nomics: AMECO: Total Imports of Goods",
+        "dfProps": {
+          "dfProvider": "AMECO",
+          "dfCode": "DMGT",
+          "dfSufix": "1.0.99.0.DMGT",
           "dfFnUrl": "s12"
         }
       }
