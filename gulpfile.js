@@ -8,7 +8,7 @@ const gulp = require('gulp')
   , inject = require('gulp-inject')
   , replace = require('gulp-replace')
   , rename = require('gulp-rename')
-  , sass = require('gulp-sass');
+  , sass = require('gulp-sass')(require('sass'));
 
 const PATH = {
   INPUT_SASS: './scss/*.scss',

@@ -85,7 +85,7 @@
 
 .row__type2-topic:focus,
 .row__type2-topic:active {
-  background-color: rgba(0,0,0, 0.15);
+  background-color: rgba(0, 0, 0, 0.15);
   outline: 0;
 }
 
