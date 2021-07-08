@@ -1,0 +1,9 @@
+{
+  "items":[
+{"v":"G","c":"General government"},
+{"v":"H","c":"Households & NPISHs"},
+{"v":"C","c":"Non financial sector"},
+{"v":"N","c":"Non-financial corporations"},
+{"v":"P","c":"Private non-financial sector"}
+  ]
+}

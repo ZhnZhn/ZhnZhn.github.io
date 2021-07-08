@@ -3,6 +3,7 @@
     {
       "caption": "BIS",
       "items": [
+        { "id": "DBN_BIS_CR" },
         { "id": "DBN_BIS_DSR" },
         { "id": "DBN_BIS_PPSS" }
       ]
@@ -161,6 +162,26 @@
         "selectProps": [
           [ "Country", "wto-cst-countries" ]
         ]
+      }
+    },
+    "DBN_BIS_CR": {
+      "type": "DBN_BIS_CR",
+      "menuTitle" : "Credits as % of GDP, Q",
+      "contCaption" : "",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Country", "bis-cr-borrows" ],
+          [ "Borrows", "bis-cr-bor-sector" ]
+        ],
+        "dataSource" : "DB Nomics: BIS: Credits to Non-Financial as % of GDP",
+        "dfProps": {
+          "dfProvider": "BIS",
+          "dfCode": "total_credit",
+          "dfFnUrl": "s12",
+          "dfPrefix": "Q",
+          "dfSufix": "A.M.770.A"
+        }
       }
     },
     "DBN_BIS_DSR": {
