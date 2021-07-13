@@ -8,7 +8,7 @@ exports["default"] = void 0;
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var C = {
-  URL: 'https://api.bls.gov/publicAPI/v1/timeseries/data',
+  URL: 'https://api.bls.gov/publicAPI/v2/timeseries/data',
   NATIVE_URL: 'https://data.bls.gov/timeseries'
 };
 var _isArr = Array.isArray,
@@ -26,7 +26,7 @@ var _addNativeLinkTo = function _addNativeLinkTo(option) {
 
   _assign(option, {
     linkItem: {
-      caption: 'BSL Data Link',
+      caption: 'BLS Data Link',
       href: C.NATIVE_URL + "/" + value
     }
   });
@@ -54,10 +54,10 @@ var BlsApi = {
   },
   checkResponse: function checkResponse(json) {
     var _ref2 = json || {},
-        _ref2$Results = _ref2.Results,
-        Results = _ref2$Results === void 0 ? {} : _ref2$Results,
-        _Results$series = Results.series,
-        series = _Results$series === void 0 ? [] : _Results$series;
+        Results = _ref2.Results,
+        _ref3 = Results || {},
+        _ref3$series = _ref3.series,
+        series = _ref3$series === void 0 ? [] : _ref3$series;
 
     return series[0] && _isArr(series[0].data);
   }
