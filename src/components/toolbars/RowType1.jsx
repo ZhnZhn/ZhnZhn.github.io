@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import D from '../dialogs/DialogCell';
 import A from '../zhn/A'
 
-const DF_COLOR = '#d2b772';
+const DF_COLOR = '#2b908f';
 const OC_COLOR = 'black';
 const DF_PERIOD = 1;
 const DF_SERIA = 1;

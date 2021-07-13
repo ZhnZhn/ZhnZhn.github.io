@@ -15,7 +15,7 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
 var _A = _interopRequireDefault(require("../zhn/A"));
 
-var DF_COLOR = '#d2b772';
+var DF_COLOR = '#2b908f';
 var OC_COLOR = 'black';
 var DF_PERIOD = 1;
 var DF_SERIA = 1;
