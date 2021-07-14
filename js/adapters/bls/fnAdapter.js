@@ -10,7 +10,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    joinBy = _AdapterFn["default"].joinBy;
+    joinBy = _AdapterFn["default"].joinBy,
+    crError = _AdapterFn["default"].crError;
 
 var _crZhConfig = function _crZhConfig(_ref) {
   var _itemKey = _ref._itemKey,
@@ -36,6 +37,7 @@ var _crInfo = function _crInfo(_ref2) {
 };
 
 var fnAdapter = {
+  crError: crError,
   crTitle: function crTitle(_ref3) {
     var dfTitle = _ref3.dfTitle,
         _ref3$items = _ref3.items,

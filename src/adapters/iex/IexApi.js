@@ -1,7 +1,7 @@
 import AdapterFn from '../AdapterFn'
 import IT from './ItemTypes'
 
-const { getValue } = AdapterFn;
+const { crError, getValue } = AdapterFn;
 
 const C = {
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
@@ -65,10 +65,7 @@ const IexApi = {
 
   checkResponse(json){
     if (!json) {
-      throw {
-        errCaption: "Error",
-        message: 'Response is empty.'
-      };
+      throw crError();
     }
     return true;
   }

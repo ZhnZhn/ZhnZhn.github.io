@@ -2,6 +2,7 @@
 import AdapterFn from '../AdapterFn'
 
 const {
+  crError,
   getValue,
   getCaption,
   joinBy,
@@ -48,6 +49,7 @@ const _crZhConfig = (config, option) => {
 };
 
 const fnAdapter = {
+  crError,
   getValue,
   getCaption,
   joinBy,

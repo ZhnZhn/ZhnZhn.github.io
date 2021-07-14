@@ -1,14 +1,20 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
 var C = {
   URL: 'https://api.binance.com/api/v3',
   RESEARCH_URL: 'https://research.binance.com/en/projects',
   TRADE_URL: 'https://binance.com/en/trade'
 };
 var _isArr = Array.isArray,
-    REG_BLANKS = /\s/g;
+    REG_BLANKS = /\s/g,
+    crError = _AdapterFn["default"].crError;
 
 var _setLinks = function _setLinks(option, c, s) {
   if (s === void 0) {
@@ -83,9 +89,7 @@ var BnApi = {
       return true;
     }
 
-    throw {
-      errCaption: "Response Empty"
-    };
+    throw crError();
   }
 };
 var _default = BnApi;

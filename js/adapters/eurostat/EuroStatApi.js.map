@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/EuroStatApi.js"],"names":["REQUEST_ERROR","MESSAGE_HEADER","RES_ERR_STATUS","MSG_400","_crDetailMsg","label","option","alertGeo","alertMetric","_crErr","errCaption","message","_addPropTo","resErrStatus","EuroStatApi","getRequestUrl","url","_url","api","crUrlN","checkResponse","json","status","error"],"mappings":";;;;;;;AACA;;AAEA,IAAMA,aAAa,GAAG,eAAtB;AAAA,IACMC,cAAc,GAAG,oBADvB;AAAA,IAEMC,cAAc,GAAG,CAAE,GAAF,CAFvB;AAAA,IAGMC,OAAO,GAAG,gMAHhB;;AAKA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAASC,KAAT,EAAgBC,MAAhB,EAAuB;AAAA,yBACFA,MADE,CAClCC,QADkC;AAAA,MAClCA,QADkC,iCACzB,EADyB;AAAA,4BACFD,MADE,CACrBE,WADqB;AAAA,MACrBA,WADqB,oCACT,EADS;AAE1C,SAAOP,cAAc,GAAGI,KAAjB,uDAA0EE,QAA1E,SAAsFC,WAAtF,+EAAP;AACD,CAHD;;AAKA,IAAMC,MAAM,GAAG,SAATA,MAAS,CAACC,UAAD,EAAaC,OAAb;AAAA,SAA0B;AACvCD,IAAAA,UAAU,EAAVA,UADuC;AAEvCC,IAAAA,OAAO,EAAPA;AAFuC,GAA1B;AAAA,CAAf;;AAKA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACN,MAAD,EAAY;AAC7BA,EAAAA,MAAM,CAACO,YAAP,aAA0BX,cAA1B;AACD,CAFD;;AAIA,IAAMY,WAAW,GAAG;AAElBC,EAAAA,aAFkB,yBAEJT,MAFI,EAEG;AACnBM,IAAAA,UAAU,CAACN,MAAD,CAAV;;AACA,QAAIA,MAAM,CAACU,GAAX,EAAgB;AACd,aAAOV,MAAM,CAACU,GAAd;AACD;;AACD,QAAMC,IAAI,GAAGC,gBAAIC,MAAJ,CAAWb,MAAX,CAAb;;AACA,WAAQA,MAAM,CAACU,GAAP,GAAaC,IAArB;AACD,GATiB;AAWlBG,EAAAA,aAXkB,yBAWJC,IAXI,EAWEf,MAXF,EAWUgB,MAXV,EAWkB;AAClC,QAAIA,MAAM,KAAK,GAAf,EAAoB;AAClB,YAAMb,MAAM,CAACT,aAAD,EAAgBG,OAAhB,CAAZ;AACD;;AAHiC,QAI1BoB,KAJ0B,GAIhBF,IAJgB,CAI1BE,KAJ0B;;AAKlC,QAAIA,KAAJ,EAAU;AAAA,UACAlB,KADA,GACUkB,KADV,CACAlB,KADA;;AAER,UAAIA,KAAJ,EAAW;AACT,cAAMI,MAAM,CAAET,aAAF,EAAiBI,YAAY,CAACC,KAAD,EAAQC,MAAR,CAA7B,CAAZ;AACD,OAFD,MAEO;AACL,cAAMG,MAAM,CAAET,aAAF,EAAiB,EAAjB,CAAZ;AACD;AACF;;AACD,WAAO,IAAP;AACD;AAzBiB,CAApB;eA6Bec,W","sourcesContent":["\r\nimport api from './api/api'\r\n\r\nconst REQUEST_ERROR = 'Request Error'\r\n    , MESSAGE_HEADER = '400: Bad Request\\n'\r\n    , RES_ERR_STATUS = [ 400 ]\r\n    , MSG_400 = '400: Bad request.\\nDataset contains no data. One or more filtering elements (query parameters) are probably not valid.\\nMaybe try to request this data set with older date or another country.';\r\n\r\nconst _crDetailMsg = function(label, option){\r\n  const { alertGeo='', alertMetric='' } = option;\r\n  return MESSAGE_HEADER + label + `\\n\\nIt seems country-dataset doesn't exsist.\\n${alertGeo}:${alertMetric}\\n\\nIf you use For Date input field in Dialog\\ntry to use more late date.`;\r\n};\r\n\r\nconst _crErr = (errCaption, message) => ({\r\n  errCaption,\r\n  message\r\n});\r\n\r\nconst _addPropTo = (option) => {\r\n  option.resErrStatus = [...RES_ERR_STATUS]\r\n};\r\n\r\nconst EuroStatApi = {\r\n\r\n  getRequestUrl(option){\r\n    _addPropTo(option)\r\n    if (option.url) {\r\n      return option.url;\r\n    }\r\n    const _url = api.crUrlN(option);    \r\n    return (option.url = _url);\r\n  },\r\n\r\n  checkResponse(json, option, status) {\r\n    if (status === 400) {\r\n      throw _crErr(REQUEST_ERROR, MSG_400);\r\n    }\r\n    const { error } = json;\r\n    if (error){\r\n      const { label } = error;\r\n      if (label) {\r\n        throw _crErr( REQUEST_ERROR, _crDetailMsg(label, option));\r\n      } else {\r\n        throw _crErr( REQUEST_ERROR, '');\r\n      }\r\n    }\r\n    return true;\r\n  }\r\n\r\n};\r\n\r\nexport default EuroStatApi\r\n"],"file":"EuroStatApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/EuroStatApi.js"
+ ],
+ "file": "../../../src/adapters/eurostat/EuroStatApi.js",
+ "names": [
+  "MESSAGE_HEADER",
+  "RES_ERR_STATUS",
+  "MSG_400",
+  "crError",
+  "AdapterFn",
+  "_crDetailMsg",
+  "label",
+  "option",
+  "alertGeo",
+  "alertMetric",
+  "_addPropTo",
+  "resErrStatus",
+  "EuroStatApi",
+  "getRequestUrl",
+  "url",
+  "_url",
+  "api",
+  "crUrlN",
+  "checkResponse",
+  "json",
+  "status",
+  "error",
+  "_msgErr"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,cAAc,GAAG,oBAAvB;AAAA,IACEC,cAAc,GAAG,CAAE,GAAF,CADnB;AAAA,IAEEC,OAAO,GAAG,gMAFZ;IAIQC,O,GAAYC,qB,CAAZD,O;;AAER,IAAME,YAAY,GAAG,SAAfA,YAAe,CAASC,KAAT,EAAgBC,MAAhB,EAAuB;AAAA,yBACFA,MADE,CAClCC,QADkC;AAAA,MAClCA,QADkC,iCACzB,EADyB;AAAA,4BACFD,MADE,CACrBE,WADqB;AAAA,MACrBA,WADqB,oCACT,EADS;AAE1C,SAAOT,cAAc,GAAGM,KAAjB,uDAA0EE,QAA1E,SAAsFC,WAAtF,+EAAP;AACD,CAHD;;AAKA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACH,MAAD,EAAY;AAC7BA,EAAAA,MAAM,CAACI,YAAP,aAA0BV,cAA1B;AACD,CAFD;;AAIA,IAAMW,WAAW,GAAG;AAElBC,EAAAA,aAFkB,yBAEJN,MAFI,EAEG;AACnBG,IAAAA,UAAU,CAACH,MAAD,CAAV;;AACA,QAAIA,MAAM,CAACO,GAAX,EAAgB;AACd,aAAOP,MAAM,CAACO,GAAd;AACD;;AACD,QAAMC,IAAI,GAAGC,gBAAIC,MAAJ,CAAWV,MAAX,CAAb;;AACA,WAAQA,MAAM,CAACO,GAAP,GAAaC,IAArB;AACD,GATiB;AAWlBG,EAAAA,aAXkB,yBAWJC,IAXI,EAWEZ,MAXF,EAWUa,MAXV,EAWkB;AAClC,QAAIA,MAAM,KAAK,GAAf,EAAoB;AAClB,YAAMjB,OAAO,CAAC,EAAD,EAAKD,OAAL,CAAb;AACD;;AAHiC,QAI1BmB,KAJ0B,GAIhBF,IAJgB,CAI1BE,KAJ0B;;AAKlC,QAAIA,KAAJ,EAAU;AACF,UAAEf,KAAF,GAAYe,KAAZ,CAAEf,KAAF;AAAA,UACJgB,OADI,GACMhB,KAAK,GACXD,YAAY,CAACC,KAAD,EAAQC,MAAR,CADD,GAEX,KAAK,CAHL;;AAIN,YAAMJ,OAAO,CAAC,EAAD,EAAKmB,OAAL,CAAb;AACD;;AACD,WAAO,IAAP;AACD;AAxBiB,CAApB;eA4BeV,W"
+}

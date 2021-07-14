@@ -7,7 +7,8 @@ exports["default"] = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var getValue = _AdapterFn["default"].getValue,
+var crError = _AdapterFn["default"].crError,
+    getValue = _AdapterFn["default"].getValue,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
     roundBy = _AdapterFn["default"].roundBy;
 
@@ -77,6 +78,7 @@ var _addHLPointTo = function _addHLPointTo(arr, d, p) {
 };
 
 var fnAdapter = {
+  crError: crError,
   getValue: getValue,
   crData: function crData(json) {
     var data = [],

@@ -1,9 +1,11 @@
+import AdapterFn from '../AdapterFn';
+
+const { crError } = AdapterFn;
 
 const C = {
   URL: 'https://api.intrinio.com/historical_data',
   TAIL: 'item=level',
-  RES_ERR_STATUS: [ 401 ],
-  MSG_ERR_SUFIX: ' (Intrinio)'
+  RES_ERR_STATUS: [ 401 ]
 };
 
 const FRQ = {
@@ -19,12 +21,7 @@ const _getErr = (json) => json
   && Array.isArray(json.errors)
   && json.errors[0]
    ? json.errors[0]
-   : undefined;
-
-const _crErr = (caption='', message='') => ({
-  errCaption: caption,
-  message: message + C.MSG_ERR_SUFIX
-});
+   : void 0;
 
 const IntrinioApi = {
   crOptionFetch(option){
@@ -59,9 +56,9 @@ const IntrinioApi = {
   checkResponse(json){
     const _err = _getErr(json);
     if (_err) {
-     throw _crErr(_err.human, _err.message);
+     throw crError(_err.human, _err.message);
     }
-    return json      
+    return json
       && Array.isArray(json.data);
   }
 };

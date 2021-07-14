@@ -9,10 +9,9 @@ const C = {
   DF_CURRENCY: 'USD'
 };
 
-const _assign = Object.assign;
-const _isArr = Array.isArray;
-
-const { crPageConfig } = fnAdapter
+const _assign = Object.assign
+, _isArr = Array.isArray
+, { crError, crPageConfig } = fnAdapter
 
 const _crDays = ({ fromDate }) => {
   const _d = dt.getDaysFromYmd(fromDate);
@@ -84,9 +83,7 @@ const CgApi = {
     if (json && _isArr(json.prices)) {
       return true;
     }
-    throw {
-      errCaption: "Response Empty",
-    };
+    throw crError();
   }
 }
 

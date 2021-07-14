@@ -1,6 +1,6 @@
 import fnAdapter from './fnAdapter'
 
-const { getCoinId } = fnAdapter;
+const { crError, getCoinId } = fnAdapter;
 
 const C = {
   URL: 'https://api.coinpaprika.com/v1',
@@ -40,9 +40,11 @@ const CpApi = {
     return (option._itemUrl = _crUrl(option));
   },
   checkResponse(json, option){
-    const { dfSubId } = option;
-    return _isArr(json)
-      || (dfSubId === 'CI' && json);
+    const { dfSubId } = option;    
+    if (_isArr(json) || (dfSubId === 'CI' && json)) {
+      return true;
+    }
+    throw crError();
   }
 }
 

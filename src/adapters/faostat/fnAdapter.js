@@ -3,6 +3,7 @@ import AdapterFn from '../AdapterFn';
 import fnDescr from './fnDescr';
 
 const {
+  crError,
   isYNumber,
   getValue,
   toUpperCaseFirst,
@@ -123,6 +124,7 @@ const _isListForList = ({ items }) => {
 };
 
 const fnAdapter = {
+  crError,
   getValue,
   findMinY,
 

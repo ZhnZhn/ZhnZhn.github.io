@@ -7,7 +7,8 @@ exports["default"] = void 0;
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var getCi = _fnAdapter["default"].getCi;
+var crError = _fnAdapter["default"].crError,
+    getCi = _fnAdapter["default"].getCi;
 var C = {
   URL: 'https://api.worldbank.org/v2',
   NATIVE_URL: 'https://data.worldbank.org/indicator'
@@ -39,7 +40,11 @@ var api = {
     return C.URL + "/countries/" + country + "/indicators/" + indicator + "?date=1990:2020&format=json";
   },
   checkResponse: function checkResponse(json) {
-    return _isArr(json);
+    if (_isArr(json)) {
+      return true;
+    }
+
+    throw crError();
   }
 };
 var _default = api;

@@ -3,7 +3,8 @@ import AdapterFn from '../AdapterFn'
 
 const {
   ymdToUTC,
-  joinBy
+  joinBy,
+  crError
 } = AdapterFn;
 
 const _crZhConfig = ({
@@ -24,6 +25,7 @@ const _crInfo = ({ itemCaption }) => ({
 });
 
 const fnAdapter = {
+  crError,
   crTitle: ({ dfTitle, items=[], subtitle }) => dfTitle
     ? joinBy(', ', dfTitle, items[0].t)
     : subtitle,

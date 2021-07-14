@@ -7,13 +7,12 @@ exports["default"] = void 0;
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var getValue = _fnAdapter["default"].getValue;
+var crError = _fnAdapter["default"].crError,
+    getValue = _fnAdapter["default"].getValue;
 var C = {
   URL: 'https://min-api.cryptocompare.com',
   //HD: 'data/histoday',
   QUERY_TAIL: 'extraParams=webapperc',
-  REQUEST_ERROR: 'Request Error',
-  RESPONSE_EMPTY: 'Response Empty',
   DF_ID: 'BTC',
   DF_E: 'CCCAGG',
   DF_INTERVAL: 'histoday'
@@ -60,11 +59,8 @@ var CrcApi = {
     return _crUrl(option);
   },
   checkResponse: function checkResponse(json) {
-    if (!(json && json.Response !== 'Error')) {
-      throw {
-        errCaption: C.REQUEST_ERROR,
-        message: json ? json.Message || '' : C.RESPONSE_EMPTY
-      };
+    if (!json || json.Response === 'Error') {
+      throw crError('', json && json.Message);
     }
 
     return true;

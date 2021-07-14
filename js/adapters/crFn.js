@@ -7,6 +7,7 @@ var _crPTag = function _crPTag(style) {
   return style ? "<p style=\"" + style + "\">" : '<p>';
 };
 
+var DF_ERR_MESSAGE = 'No data available for request.';
 var crFn = {
   crError: function crError(errCaption, message) {
     if (errCaption === void 0) {
@@ -14,7 +15,7 @@ var crFn = {
     }
 
     if (message === void 0) {
-      message = '';
+      message = DF_ERR_MESSAGE;
     }
 
     return {

@@ -9,7 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+var crError = _AdapterFn["default"].crError,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
     _isArr = Array.isArray;
 
 var _crInfo = function _crInfo(_ref) {
@@ -31,6 +32,7 @@ var _getCountryIndicator = function _getCountryIndicator(_ref2) {
 };
 
 var fnAdapter = {
+  crError: crError,
   getCi: _getCountryIndicator,
   crData: function crData(json) {
     var arrIn = json[1];

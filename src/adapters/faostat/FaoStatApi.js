@@ -7,6 +7,7 @@ const C = {
 };
 
 const {
+  crError,
   isSeriesReq,
   isQueryAllowed,
   getValue
@@ -59,7 +60,10 @@ const FaoStatApi = {
   },
 
   checkResponse(json){
-    return json && _isArr(json.data);
+    if (json && _isArr(json.data)) {
+      return true;
+    }
+    throw crError();
   },
 
   addPropsTo(option){

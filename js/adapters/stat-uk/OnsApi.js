@@ -14,13 +14,9 @@ var C = {
   EDT: '/editions/time-series/versions/',
   OBS: '/observations?',
   QUERY_TIME: '&time=*',
-  QUERY_TAIL: '&time=*&geography=K02000001',
-  ERR_CAPTION: 'Server Response',
-  MSG_EMPTY: 'Dataset is empty'
+  QUERY_TAIL: '&time=*&geography=K02000001'
 };
 var _isArr = Array.isArray;
-
-var _crErr = crError.bind(null, C.ERR_CAPTION, C.MSG_EMPTY);
 
 var _crUrl = function _crUrl(item, vers) {
   if (vers === void 0) {
@@ -73,7 +69,7 @@ var OnsApi = {
   },
   checkResponse: function checkResponse(json) {
     if (!(json && _isArr(json.observations))) {
-      throw _crErr();
+      throw crError();
     }
 
     return true;

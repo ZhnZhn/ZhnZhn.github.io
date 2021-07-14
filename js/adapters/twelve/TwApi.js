@@ -11,8 +11,7 @@ var getValue = _fnAdapter["default"].getValue,
     crError = _fnAdapter["default"].crError;
 var C = {
   URL: 'https://api.twelvedata.com',
-  QUERY_TAIL: 'dp=2&order=ASC&timezone=UTC',
-  ERR_EMPTY: 'Response is empty'
+  QUERY_TAIL: 'dp=2&order=ASC&timezone=UTC'
 };
 var _isArr = Array.isArray;
 var TwApi = {
@@ -34,7 +33,7 @@ var TwApi = {
       return true;
     }
 
-    throw crError('', json.message || C.ERR_EMPTY);
+    throw crError('', json.message);
   }
 };
 var _default = TwApi;

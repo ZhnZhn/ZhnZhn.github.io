@@ -1,12 +1,17 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
+var crError = _AdapterFn["default"].crError;
 var C = {
   URL: 'https://api.intrinio.com/historical_data',
   TAIL: 'item=level',
-  RES_ERR_STATUS: [401],
-  MSG_ERR_SUFIX: ' (Intrinio)'
+  RES_ERR_STATUS: [401]
 };
 var FRQ = {
   A: 'yearly',
@@ -18,22 +23,7 @@ var FRQ = {
 };
 
 var _getErr = function _getErr(json) {
-  return json && Array.isArray(json.errors) && json.errors[0] ? json.errors[0] : undefined;
-};
-
-var _crErr = function _crErr(caption, message) {
-  if (caption === void 0) {
-    caption = '';
-  }
-
-  if (message === void 0) {
-    message = '';
-  }
-
-  return {
-    errCaption: caption,
-    message: message + C.MSG_ERR_SUFIX
-  };
+  return json && Array.isArray(json.errors) && json.errors[0] ? json.errors[0] : void 0;
 };
 
 var IntrinioApi = {
@@ -73,7 +63,7 @@ var IntrinioApi = {
     var _err = _getErr(json);
 
     if (_err) {
-      throw _crErr(_err.human, _err.message);
+      throw crError(_err.human, _err.message);
     }
 
     return json && Array.isArray(json.data);

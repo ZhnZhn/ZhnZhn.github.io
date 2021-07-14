@@ -1,8 +1,11 @@
+import AdapterFn from '../AdapterFn';
+
 const C = {
   URL: 'https://api.coinlore.net/api'
 };
 
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, { crError } = AdapterFn;
 
 const ClApi = {
   getRequestUrl(option){
@@ -14,10 +17,8 @@ const ClApi = {
     const { pairs } = json  || {};
     if (_isArr(pairs)) {
       return true;
-    }
-    throw {
-      errCaption: "Response Empty",
-    };
+    }    
+    throw crError();
   }
 
 };

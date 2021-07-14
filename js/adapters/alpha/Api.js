@@ -9,7 +9,8 @@ var _isEmpty = _interopRequireDefault(require("../../utils/isEmpty"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var getValue = _fnAdapter["default"].getValue,
+var crError = _fnAdapter["default"].crError,
+    getValue = _fnAdapter["default"].getValue,
     getCaption = _fnAdapter["default"].getCaption,
     joinBy = _fnAdapter["default"].joinBy;
 var C = {
@@ -18,19 +19,10 @@ var C = {
   DF_SIZE: 'compact',
   DF_PERIOD: '50',
   ERR_PROP: 'Error Message',
-  REQ_ERROR: 'Request Error',
-  RES_EMPTY: 'Response Empty',
-  MSG_EMPTY: 'Empty response from data provider'
+  REQ_ERROR: 'Request Error'
 };
 var _assign = Object.assign,
     _isArr = Array.isArray;
-
-var _crError = function _crError(errCaption, message) {
-  return {
-    errCaption: errCaption,
-    message: message
-  };
-};
 
 var _getOneTwo = function _getOneTwo(_ref) {
   var value = _ref.value,
@@ -134,11 +126,11 @@ var AlphaApi = {
   },
   checkResponse: function checkResponse(json) {
     if ((0, _isEmpty["default"])(json)) {
-      throw _crError(C.RES_EMPTY, C.MSG_EMPTY);
+      throw crError();
     }
 
     if (json[C.ERR_PROP]) {
-      throw _crError(C.REQ_ERROR, json[C.ERR_PROP]);
+      throw crError(C.REQ_ERROR, json[C.ERR_PROP]);
     }
 
     return true;

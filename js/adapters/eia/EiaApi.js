@@ -1,25 +1,21 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
 var C = {
   URL: "https://api.eia.gov/category/",
   S_URL: "https://api.eia.gov/series/"
 };
-var CAPTION = 'EIA';
 var MSG = {
   ERR: 'invalid series_id.',
-  NOT_EXIST: 'Data for enetered parameters is not existed.',
-  EMPTY: 'Response is empty.',
-  DATA_EMPTY: 'Data is empty.'
+  NOT_EXIST: 'Data for enetered parameters is not existed.'
 };
-
-var _crErr = function _crErr(caption, message) {
-  return {
-    errCaption: caption,
-    message: message
-  };
-};
+var crError = _AdapterFn["default"].crError;
 
 var _getValue = function _getValue(obj) {
   return obj && obj.value ? obj.value : '';
@@ -80,23 +76,21 @@ var EiaApi = {
   },
   checkResponse: function checkResponse(json) {
     if (!json) {
-      throw _crErr(CAPTION, MSG.EMPTY);
+      throw crError();
     }
 
-    var _json$data = json.data,
-        data = _json$data === void 0 ? {} : _json$data,
-        msgErr = data.error;
+    var data = json.data,
+        _ref = data || {},
+        msgErr = _ref.error;
 
     if (msgErr) {
-      if (msgErr.indexOf(MSG.ERR) !== -1) {
-        throw _crErr(CAPTION, MSG.NOT_EXIST);
-      }
+      var _msgErr = msgErr.indexOf(MSG.ERR) !== -1 ? MSG.NOT_EXIST : msgErr;
 
-      throw _crErr(CAPTION, msgErr);
+      throw crError('', _msgErr);
     }
 
     if (!json.series || !json.series[0]) {
-      throw _crErr(CAPTION, MSG.DATA_EMPTY);
+      throw crError();
     }
 
     return true;

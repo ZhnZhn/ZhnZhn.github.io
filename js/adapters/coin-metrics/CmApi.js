@@ -9,8 +9,7 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var crError = _fnAdapter["default"].crError;
 var C = {
-  URL: 'https://community-api.coinmetrics.io/v2',
-  ERR_FORMAT: 'Unexpected format'
+  URL: 'https://community-api.coinmetrics.io/v2'
 };
 var _isArr = Array.isArray;
 var CmApi = {
@@ -31,7 +30,7 @@ var CmApi = {
         series = _ref2.series;
 
     if (!_isArr(series)) {
-      throw crError(C.ERR_FORMAT);
+      throw crError();
     }
 
     return true;

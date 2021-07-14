@@ -1,6 +1,7 @@
 import AdapterFn from '../AdapterFn'
 
 const {
+  crError,
   ymdToUTC,
   crVolumePoint,
   getValue,
@@ -22,6 +23,7 @@ const COIN_URL = 'https://coinpaprika.com/coin'
 
 
 const fnAdapter = {
+  crError,
   getValue,
   joinBy,
   toUpperCaseFirst,

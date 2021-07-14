@@ -1,4 +1,4 @@
-import fnAdapter from './fnAdapter'
+import fnAdapter from './fnAdapter';
 
 const C = {
   URL: 'https://api.bls.gov/publicAPI/v2/timeseries/data',
@@ -7,7 +7,7 @@ const C = {
 
 const _isArr = Array.isArray
 , _assign = Object.assign
-, { crTitle } = fnAdapter;
+, { crError, crTitle } = fnAdapter;
 
 const _getValue = ({ items=[] }) => items[0].v;
 
@@ -39,9 +39,13 @@ const BlsApi = {
     return `${C.URL}/${value}`;
   },
   checkResponse(json){
-    const { Results } = json || {}
-    , { series=[] } = Results || {};
-    return series[0] && _isArr(series[0].data);
+    const { Results, message=[] } = json || {}
+    , { series } = Results || {}
+    , _s = (series || [])[0];
+    if (_s && _isArr(_s.data)){
+      return true;
+    }
+    throw crError('', message[0]);
   }
 }
 

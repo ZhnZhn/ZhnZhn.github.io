@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/adapters/insee/InseeApi.js"],"names":["C","ROOT","InseeApi","getRequestUrl","option","proxy","value","fromDate","toDate","checkResponse","str"],"mappings":";;;;AAAA,IAAMA,CAAC,GAAG;AACR;AACAC,EAAAA,IAAI,EAAE;AAFE,CAAV;AAKA,IAAMC,QAAQ,GAAG;AACfC,EAAAA,aADe,yBACDC,MADC,EACO;AAAA,QACZC,KADY,GACuBD,MADvB,CACZC,KADY;AAAA,QACLC,KADK,GACuBF,MADvB,CACLE,KADK;AAAA,QACEC,QADF,GACuBH,MADvB,CACEG,QADF;AAAA,QACYC,MADZ,GACuBJ,MADvB,CACYI,MADZ;AAEpB,gBAAUH,KAAV,GAAkBL,CAAC,CAACC,IAApB,GAA2BK,KAA3B,qBAAgDC,QAAhD,mBAAsEC,MAAtE;AACD,GAJc;AAKfC,EAAAA,aALe,yBAKDC,GALC,EAKI;AACjB,WAAO,IAAP;AACD;AAPc,CAAjB;eAUeR,Q","sourcesContent":["const C = {\r\n  //ROOT: 'https://crossorigin.me/https://bdm.insee.fr/series/sdmx/data/SERIES_BDM/'\r\n  ROOT: 'https://bdm.insee.fr/series/sdmx/data/SERIES_BDM/'\r\n}\r\n\r\nconst InseeApi = {\r\n  getRequestUrl(option) {\r\n    const { proxy, value, fromDate, toDate } = option;\r\n    return `${proxy}${C.ROOT}${value}?startPeriod=${fromDate}&endPeriod=${toDate}`;\r\n  },\r\n  checkResponse(str) {\r\n    return true;\r\n  }\r\n}\r\n\r\nexport default InseeApi\r\n"],"file":"InseeApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/insee/InseeApi.js"
+ ],
+ "file": "../../../src/adapters/insee/InseeApi.js",
+ "names": [
+  "C",
+  "ROOT",
+  "InseeApi",
+  "getRequestUrl",
+  "option",
+  "value",
+  "fromDate",
+  "toDate",
+  "checkResponse",
+  "str"
+ ],
+ "mappings": ";;;;AAAA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE;AADE,CAAV;AAIA,IAAMC,QAAQ,GAAG;AACfC,EAAAA,aADe,yBACDC,MADC,EACO;AAAA,QACZC,KADY,GACgBD,MADhB,CACZC,KADY;AAAA,QACLC,QADK,GACgBF,MADhB,CACLE,QADK;AAAA,QACKC,MADL,GACgBH,MADhB,CACKG,MADL;AAEpB,gBAAUP,CAAC,CAACC,IAAZ,GAAmBI,KAAnB,qBAAwCC,QAAxC,mBAA8DC,MAA9D;AACD,GAJc;AAKfC,EAAAA,aALe,yBAKDC,GALC,EAKI;AACjB,WAAO,IAAP;AACD;AAPc,CAAjB;eAUeP,Q"
+}

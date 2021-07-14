@@ -1,11 +1,17 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
 var C = {
   URL: "https://www.bitstamp.net/api/v2"
 };
-var _isArr = Array.isArray;
+var _isArr = Array.isArray,
+    crError = _AdapterFn["default"].crError;
 
 var _crDfUrl = function _crDfUrl(option) {
   var _option$items = option.items,
@@ -51,9 +57,7 @@ var BtApi = {
       return true;
     }
 
-    throw {
-      errCaption: "Response Empty"
-    };
+    throw crError();
   }
 };
 var _default = BtApi;

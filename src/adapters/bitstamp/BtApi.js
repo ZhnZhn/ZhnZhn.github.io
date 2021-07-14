@@ -1,9 +1,11 @@
+import AdapterFn from '../AdapterFn';
 
 const C = {
  URL: "https://www.bitstamp.net/api/v2"
 };
 
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, { crError } = AdapterFn;
 
 const _crDfUrl = option => {
   const { items=[] } = option
@@ -42,9 +44,7 @@ const BtApi = {
       || (_isArr(bids) && _isArr(asks)) ) {
       return true;
     }
-    throw {
-      errCaption: "Response Empty",
-    };
+    throw crError();
   }
 };
 

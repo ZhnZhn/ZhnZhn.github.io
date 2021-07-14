@@ -1,6 +1,6 @@
 import fnAdapter from './fnAdapter'
 
-const { getCi } = fnAdapter;
+const { crError, getCi } = fnAdapter;
 const C = {
   URL: 'https://api.worldbank.org/v2',
   NATIVE_URL: 'https://data.worldbank.org/indicator'
@@ -26,7 +26,10 @@ const api = {
     return `${C.URL}/countries/${country}/indicators/${indicator}?date=1990:2020&format=json`;
   },
   checkResponse(json){
-    return _isArr(json);
+    if (_isArr(json)) {
+      return true;
+    }
+    throw crError();    
   }
 };
 

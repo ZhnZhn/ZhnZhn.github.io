@@ -1,6 +1,7 @@
 import AdapterFn from '../AdapterFn'
 
 const {
+  crError,
   getValue,
   getYmdhmUTC
 } = AdapterFn
@@ -14,6 +15,7 @@ const C = {
 const _isInRange = (v, min, max) => v>min && v<max ;
 
 const fnAdapter = {
+  crError,
   getYmdhmUTC,
 
   crPageConfig: option => {

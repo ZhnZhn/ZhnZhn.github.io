@@ -16,9 +16,10 @@ var C = {
   DF_PER_PAGE: 10,
   DF_CURRENCY: 'USD'
 };
-var _assign = Object.assign;
-var _isArr = Array.isArray;
-var crPageConfig = _fnAdapter["default"].crPageConfig;
+var _assign = Object.assign,
+    _isArr = Array.isArray,
+    crError = _fnAdapter["default"].crError,
+    crPageConfig = _fnAdapter["default"].crPageConfig;
 
 var _crDays = function _crDays(_ref) {
   var fromDate = _ref.fromDate;
@@ -97,9 +98,7 @@ var CgApi = {
       return true;
     }
 
-    throw {
-      errCaption: "Response Empty"
-    };
+    throw crError();
   }
 };
 var _default = CgApi;

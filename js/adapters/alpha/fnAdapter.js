@@ -9,7 +9,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var getValue = _AdapterFn["default"].getValue,
+var crError = _AdapterFn["default"].crError,
+    getValue = _AdapterFn["default"].getValue,
     getCaption = _AdapterFn["default"].getCaption,
     joinBy = _AdapterFn["default"].joinBy,
     crItemConf = _AdapterFn["default"].crItemConf,
@@ -56,6 +57,7 @@ var _crZhConfig = function _crZhConfig(config, option) {
 };
 
 var fnAdapter = {
+  crError: crError,
   getValue: getValue,
   getCaption: getCaption,
   joinBy: joinBy,

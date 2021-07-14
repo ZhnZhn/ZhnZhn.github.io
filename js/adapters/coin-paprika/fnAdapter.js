@@ -7,7 +7,8 @@ exports["default"] = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+var crError = _AdapterFn["default"].crError,
+    ymdToUTC = _AdapterFn["default"].ymdToUTC,
     crVolumePoint = _AdapterFn["default"].crVolumePoint,
     getValue = _AdapterFn["default"].getValue,
     joinBy = _AdapterFn["default"].joinBy,
@@ -35,6 +36,7 @@ var COIN_URL = 'https://coinpaprika.com/coin',
 };
 
 var fnAdapter = {
+  crError: crError,
   getValue: getValue,
   joinBy: joinBy,
   toUpperCaseFirst: toUpperCaseFirst,

@@ -12,14 +12,12 @@ var crError = _fnAdapter["default"].crError,
 var C = {
   URL: 'https://api.db.nomics.world/v22/series',
   TAIL: 'observations=1&format=json&metadata=false',
-  DF_ID: 'ECB/EXR/A.USD.EUR.SP00.A',
-  ERR_CAPTION: 'Server Response',
-  MSG_EMPTY: 'Dataset is empty'
+  DF_ID: 'ECB/EXR/A.USD.EUR.SP00.A'
 };
 
 var _isArr = Array.isArray,
     _assign = Object.assign,
-    _crErr = crError.bind(null, C.ERR_CAPTION);
+    _crErr = crError.bind(null, '');
 
 var _crUrlImpl = function _crUrlImpl(dfProvider, dfCode, seriaId) {
   if (!dfProvider || !dfCode || !seriaId) {
@@ -168,7 +166,7 @@ var DbNomicsApi = {
     var docs = json && json.series && json.series.docs;
 
     if (!_isArr(docs) || !docs[0] || !_isArr(docs[0].period) || !_isArr(docs[0].value)) {
-      throw _crErr(C.MSG_EMPTY);
+      throw _crErr();
     }
 
     return true;

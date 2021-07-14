@@ -1,17 +1,14 @@
+import AdapterFn from '../AdapterFn';
 
 const C = {
   ROOT_URL: "https://www.quandl.com/api/v3/datasets/",
   TABLE_URL: "https://www.quandl.com/api/v3/datatables/",
 
-  LIMIT_REMAINING: 'X-RateLimit-Remaining',
+  LIMIT_REMAINING: 'X-RateLimit-Remaining'
+};
 
-  REQUEST_ERROR: 'Request Error',
-  DATASET_EMPTY: 'Dataset Empty'
-}
+const { crError } = AdapterFn
 
-const _crErr = (errCaption, message='') => ({
-    errCaption, message
-});
 
 const _addTo = (q, pN, pV) => {
   if (!pV) {
@@ -47,12 +44,12 @@ const _crTableUrl = (option) => {
 
 const _checkErr = (err) => {
   if ( err ){
-    throw _crErr(C.REQUEST_ERROR, err.message);
+    throw crError('', err.message);
   }
 };
 const _checkDataEmpty = (dataset, datatable) => {
   if (!dataset && !datatable) {
-    throw _crErr(C.DATASET_EMPTY);
+    throw crError();
   }
 };
 const _checkDataset = (dataset) => {
@@ -62,8 +59,7 @@ const _checkDataset = (dataset) => {
     oldest_available_date
   } = dataset;
   if (!data || data.length === 0 ) {
-    throw _crErr(
-       C.DATASET_EMPTY,
+    throw crError('',
        `Result dataset for request is empty:
         Newest Date: ${newest_available_date || ''}
         Oldest Date: ${oldest_available_date || ''}`

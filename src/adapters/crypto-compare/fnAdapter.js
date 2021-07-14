@@ -2,6 +2,7 @@
 import AdapterFn from '../AdapterFn'
 
 const {
+  crError,
   getValue,
   crVolumePoint,
   roundBy
@@ -67,6 +68,7 @@ const _addHLPointTo = (arr, d, p) => {
 };
 
 const fnAdapter = {
+  crError,
   getValue,
 
   crData: (json) => {

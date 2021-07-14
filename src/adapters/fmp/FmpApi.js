@@ -8,8 +8,7 @@ const {
 } = fnAdapter;
 
 const C = {
-  URI: 'https://financialmodelingprep.com/api/v3',
-  ERR_EMPTY: 'Response is empty'
+  URI: 'https://financialmodelingprep.com/api/v3'  
 };
 
 const _isArr = Array.isArray
@@ -109,10 +108,7 @@ const FmpApi = {
      || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
        return true;
     }
-    throw crError(
-      _symbol,
-      _json.Error || C.ERR_EMPTY
-    );
+    throw crError(_symbol, _json.Error);
   }
 };
 

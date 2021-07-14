@@ -11,7 +11,8 @@ var _ItemTypes = _interopRequireDefault(require("./ItemTypes"));
 
 var _rUrl2;
 
-var getValue = _AdapterFn["default"].getValue;
+var crError = _AdapterFn["default"].crError,
+    getValue = _AdapterFn["default"].getValue;
 var C = {
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',
   DF_SYMBOL: 'AAPL',
@@ -83,10 +84,7 @@ var IexApi = {
   },
   checkResponse: function checkResponse(json) {
     if (!json) {
-      throw {
-        errCaption: "Error",
-        message: 'Response is empty.'
-      };
+      throw crError();
     }
 
     return true;

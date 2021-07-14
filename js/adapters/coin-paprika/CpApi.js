@@ -7,7 +7,8 @@ exports["default"] = void 0;
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var getCoinId = _fnAdapter["default"].getCoinId;
+var crError = _fnAdapter["default"].crError,
+    getCoinId = _fnAdapter["default"].getCoinId;
 var C = {
   URL: 'https://api.coinpaprika.com/v1',
   COIN_URL: 'https://coinpaprika.com/coin',
@@ -49,7 +50,12 @@ var CpApi = {
   },
   checkResponse: function checkResponse(json, option) {
     var dfSubId = option.dfSubId;
-    return _isArr(json) || dfSubId === 'CI' && json;
+
+    if (_isArr(json) || dfSubId === 'CI' && json) {
+      return true;
+    }
+
+    throw crError();
   }
 };
 var _default = CpApi;

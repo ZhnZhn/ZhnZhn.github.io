@@ -1,3 +1,5 @@
+import AdapterFn from '../AdapterFn'
+
 const C = {
   URL: 'https://api.binance.com/api/v3',
   RESEARCH_URL: 'https://research.binance.com/en/projects',
@@ -5,7 +7,8 @@ const C = {
 };
 
 const _isArr = Array.isArray
-, REG_BLANKS = /\s/g;
+, REG_BLANKS = /\s/g
+, { crError } = AdapterFn;
 
 const _setLinks = (option, c, s='') => {
   const _toIndex = c.indexOf('(')
@@ -61,9 +64,7 @@ const BnApi = {
     if (dfSubId === 'OB' && _isArr(bids) && _isArr(asks)) {
       return true;
     }
-    throw {
-      errCaption: "Response Empty"
-    };
+    throw crError();
   }
 };
 

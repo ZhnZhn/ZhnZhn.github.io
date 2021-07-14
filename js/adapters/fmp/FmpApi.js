@@ -12,8 +12,7 @@ var getCaption = _fnAdapter["default"].getCaption,
     crError = _fnAdapter["default"].crError,
     getFromDate = _fnAdapter["default"].getFromDate;
 var C = {
-  URI: 'https://financialmodelingprep.com/api/v3',
-  ERR_EMPTY: 'Response is empty'
+  URI: 'https://financialmodelingprep.com/api/v3'
 };
 var _isArr = Array.isArray;
 var _assign = Object.assign;
@@ -126,7 +125,7 @@ var FmpApi = {
       return true;
     }
 
-    throw crError(_symbol, _json.Error || C.ERR_EMPTY);
+    throw crError(_symbol, _json.Error);
   }
 };
 var _default = FmpApi;

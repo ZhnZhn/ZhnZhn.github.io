@@ -8,8 +8,7 @@ const {
 
 const C = {
   URL: 'https://api.twelvedata.com',
-  QUERY_TAIL: 'dp=2&order=ASC&timezone=UTC',
-  ERR_EMPTY: 'Response is empty'
+  QUERY_TAIL: 'dp=2&order=ASC&timezone=UTC'  
 };
 
 const _isArr = Array.isArray;
@@ -28,7 +27,7 @@ const TwApi = {
     if (_isArr(values)) {
       return true;
     }
-    throw crError('', json.message || C.ERR_EMPTY);
+    throw crError('', json.message);
   }
 };
 

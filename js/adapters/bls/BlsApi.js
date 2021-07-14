@@ -13,6 +13,7 @@ var C = {
 };
 var _isArr = Array.isArray,
     _assign = Object.assign,
+    crError = _fnAdapter["default"].crError,
     crTitle = _fnAdapter["default"].crTitle;
 
 var _getValue = function _getValue(_ref) {
@@ -55,11 +56,17 @@ var BlsApi = {
   checkResponse: function checkResponse(json) {
     var _ref2 = json || {},
         Results = _ref2.Results,
+        _ref2$message = _ref2.message,
+        message = _ref2$message === void 0 ? [] : _ref2$message,
         _ref3 = Results || {},
-        _ref3$series = _ref3.series,
-        series = _ref3$series === void 0 ? [] : _ref3$series;
+        series = _ref3.series,
+        _s = (series || [])[0];
 
-    return series[0] && _isArr(series[0].data);
+    if (_s && _isArr(_s.data)) {
+      return true;
+    }
+
+    throw crError('', message[0]);
   }
 };
 var _default = BlsApi;

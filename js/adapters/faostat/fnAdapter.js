@@ -11,7 +11,8 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _fnDescr = _interopRequireDefault(require("./fnDescr"));
 
-var isYNumber = _AdapterFn["default"].isYNumber,
+var crError = _AdapterFn["default"].crError,
+    isYNumber = _AdapterFn["default"].isYNumber,
     getValue = _AdapterFn["default"].getValue,
     toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
     monthIndex = _AdapterFn["default"].monthIndex,
@@ -139,6 +140,7 @@ var _isListForList = function _isListForList(_ref3) {
 };
 
 var fnAdapter = {
+  crError: crError,
   getValue: getValue,
   findMinY: findMinY,
   crId: function crId(_ref4) {

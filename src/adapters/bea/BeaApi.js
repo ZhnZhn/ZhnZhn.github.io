@@ -1,11 +1,12 @@
+import AdapterFn from '../AdapterFn';
 
 const C = {
-  URL: 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID',
-  DF_ERR_MSG: 'No data exist for selected criteria.'
+  URL: 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
 };
 
 const _isArr = Array.isArray
-, _assign = Object.assign;
+, _assign = Object.assign
+, { crError } = AdapterFn;
 
 const _crSubtitle = (title, subtitle) => subtitle
  ? `${title}: ${subtitle}`
@@ -19,11 +20,6 @@ const _setCaptionTo = option => {
     subtitle: _crSubtitle(title, subtitle)
   })
 };
-
-const _crErr = (errCaption, message) => ({
-  errCaption,
-  message
-});
 
 const BeaApi = {
   getRequestUrl(option){
@@ -42,19 +38,18 @@ const BeaApi = {
   },
 
   checkResponse(json){
-    const { BEAAPI={} } = json
-        , { Results={}, Error:ResError } = BEAAPI;
+    const { BEAAPI } = json
+    , { Results={}, Error:ResError } = BEAAPI || {};
     if (ResError) {
       const { ErrorDetail } = ResError;
-      throw _crErr(
-        ResError.APIErrorCode || '',
+      throw crError(
+        ResError.APIErrorCode,
         ErrorDetail.Description
           || ResError.APIErrorDescription
-          || C.DF_ERR_MSG
       );
     }
     if ( Results.Error || !_isArr(Results.Data) ) {
-      return _crErr('', C.DF_ERR_MSG);
+      return crError();
     }
     return true;
   }

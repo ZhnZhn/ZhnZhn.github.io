@@ -3,8 +3,7 @@ import fnAdapter from './fnAdapter';
 const { crError } = fnAdapter;
 
 const C = {
-  URL: 'https://community-api.coinmetrics.io/v2',
-  ERR_FORMAT: 'Unexpected format'
+  URL: 'https://community-api.coinmetrics.io/v2'  
 };
 
 const _isArr = Array.isArray;
@@ -22,7 +21,7 @@ const CmApi = {
     const { metricData } = json || {}
     , { series } = metricData || {};
     if (!_isArr(series)) {
-      throw crError(C.ERR_FORMAT);
+      throw crError();
     }
     return true;
   }

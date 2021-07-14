@@ -12,7 +12,8 @@ var C = {
   TAIL: 'area_cs=FAO&item_cs=FAO&show_codes=true&show_unit=true&show_flags=true&null_values=false&output_type=json',
   MEM_YEAR: void 0
 };
-var isSeriesReq = _fnAdapter["default"].isSeriesReq,
+var crError = _fnAdapter["default"].crError,
+    isSeriesReq = _fnAdapter["default"].isSeriesReq,
     isQueryAllowed = _fnAdapter["default"].isQueryAllowed,
     getValue = _fnAdapter["default"].getValue,
     _isArr = Array.isArray,
@@ -68,7 +69,11 @@ var FaoStatApi = {
     return "" + proxy + C.BASE + "/" + dfDomain + "?element=" + _element + "&area=" + _one + "&" + dfItemName + "=" + _two + "&year=" + _year + "&" + C.TAIL;
   },
   checkResponse: function checkResponse(json) {
-    return json && _isArr(json.data);
+    if (json && _isArr(json.data)) {
+      return true;
+    }
+
+    throw crError();
   },
   addPropsTo: function addPropsTo(option) {
     var qA = option.qA,

@@ -1,25 +1,18 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports["default"] = void 0;
+
+var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+
 var C = {
   ROOT_URL: "https://www.quandl.com/api/v3/datasets/",
   TABLE_URL: "https://www.quandl.com/api/v3/datatables/",
-  LIMIT_REMAINING: 'X-RateLimit-Remaining',
-  REQUEST_ERROR: 'Request Error',
-  DATASET_EMPTY: 'Dataset Empty'
+  LIMIT_REMAINING: 'X-RateLimit-Remaining'
 };
-
-var _crErr = function _crErr(errCaption, message) {
-  if (message === void 0) {
-    message = '';
-  }
-
-  return {
-    errCaption: errCaption,
-    message: message
-  };
-};
+var crError = _AdapterFn["default"].crError;
 
 var _addTo = function _addTo(q, pN, pV) {
   if (!pV) {
@@ -58,13 +51,13 @@ var _crTableUrl = function _crTableUrl(option) {
 
 var _checkErr = function _checkErr(err) {
   if (err) {
-    throw _crErr(C.REQUEST_ERROR, err.message);
+    throw crError('', err.message);
   }
 };
 
 var _checkDataEmpty = function _checkDataEmpty(dataset, datatable) {
   if (!dataset && !datatable) {
-    throw _crErr(C.DATASET_EMPTY);
+    throw crError();
   }
 };
 
@@ -74,7 +67,7 @@ var _checkDataset = function _checkDataset(dataset) {
       oldest_available_date = dataset.oldest_available_date;
 
   if (!data || data.length === 0) {
-    throw _crErr(C.DATASET_EMPTY, "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
+    throw crError('', "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
   }
 };
 

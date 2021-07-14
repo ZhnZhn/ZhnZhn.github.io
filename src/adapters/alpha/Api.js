@@ -1,7 +1,8 @@
-import isEmpty from '../../utils/isEmpty'
-import fnAdapter from './fnAdapter'
+import isEmpty from '../../utils/isEmpty';
+import fnAdapter from './fnAdapter';
 
 const {
+  crError,
   getValue,
   getCaption,
   joinBy
@@ -15,17 +16,12 @@ const C = {
   DF_PERIOD: '50',
 
   ERR_PROP: 'Error Message',
-  REQ_ERROR: 'Request Error',
-  RES_EMPTY: 'Response Empty',
-  MSG_EMPTY: 'Empty response from data provider'
+  REQ_ERROR: 'Request Error'  
 };
 
 const _assign = Object.assign
 , _isArr = Array.isArray;
 
-const _crError = (errCaption, message) => ({
-  errCaption, message
-});
 
 const _getOneTwo = ({ value, outputsize, items }) => {
   return _isArr(items)
@@ -106,10 +102,10 @@ const AlphaApi = {
 
   checkResponse(json){
     if (isEmpty(json)) {
-      throw _crError(C.RES_EMPTY, C.MSG_EMPTY);
+      throw crError();
     }
     if (json[C.ERR_PROP]) {
-      throw _crError(C.REQ_ERROR, json[C.ERR_PROP]);
+      throw crError(C.REQ_ERROR, json[C.ERR_PROP]);
     }
     return true;
   }

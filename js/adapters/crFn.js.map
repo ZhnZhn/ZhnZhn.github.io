@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../src/adapters/crFn.js"],"names":["_crPTag","style","crFn","crError","errCaption","message","crId","Date","now","toString","Math","random","substring","toUpperCase","crItemLink","caption","itemUrl"],"mappings":";;;;;AACA,IAAMA,OAAO,GAAG,SAAVA,OAAU,CAACC,KAAD;AAAA,SACfA,KAAK,mBAAgBA,KAAhB,WAA4B,KADlB;AAAA,CAAhB;;AAGA,IAAMC,IAAI,GAAG;AACXC,EAAAA,OAAO,EAAE,iBAACC,UAAD,EAAgBC,OAAhB;AAAA,QAACD,UAAD;AAACA,MAAAA,UAAD,GAAY,EAAZ;AAAA;;AAAA,QAAgBC,OAAhB;AAAgBA,MAAAA,OAAhB,GAAwB,EAAxB;AAAA;;AAAA,WAAgC;AACvCD,MAAAA,UAAU,EAAVA,UADuC;AAEvCC,MAAAA,OAAO,EAAPA;AAFuC,KAAhC;AAAA,GADE;AAMXC,EAAAA,IAAI,EAAE;AAAA,WAAM,CACVC,IAAI,CAACC,GAAL,GAAWC,QAAX,CAAoB,EAApB,IACAC,IAAI,CAACC,MAAL,GAAcF,QAAd,CAAuB,EAAvB,EAA2BG,SAA3B,CAAqC,CAArC,EAAwC,CAAxC,CAFU,EAGVC,WAHU,EAAN;AAAA,GANK;AAWXC,EAAAA,UAAU,EAAE,oBAACC,OAAD,EAAUC,OAAV,EAAmBf,KAAnB;AAAA,WAAgCD,OAAO,CAACC,KAAD,CAAvC,kBAA0De,OAA1D,WAAsED,OAAtE;AAAA;AAXD,CAAb;eAceb,I","sourcesContent":["\r\nconst _crPTag = (style) =>\r\n style ? `<p style=\"${style}\">` : '<p>';\r\n\r\nconst crFn = {\r\n  crError: (errCaption='', message='') => ({\r\n    errCaption,\r\n    message\r\n  }),\r\n\r\n  crId: () => (\r\n    Date.now().toString(36) +\r\n    Math.random().toString(36).substring(2, 9)\r\n  ).toUpperCase(),\r\n\r\n  crItemLink: (caption, itemUrl, style) => `${_crPTag(style)}<a href=\"${itemUrl}\">${caption}</a></p>`\r\n}\r\n\r\nexport default crFn\r\n"],"file":"crFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/crFn.js"
+ ],
+ "file": "../../src/adapters/crFn.js",
+ "names": [
+  "_crPTag",
+  "style",
+  "DF_ERR_MESSAGE",
+  "crFn",
+  "crError",
+  "errCaption",
+  "message",
+  "crId",
+  "Date",
+  "now",
+  "toString",
+  "Math",
+  "random",
+  "substring",
+  "toUpperCase",
+  "crItemLink",
+  "caption",
+  "itemUrl"
+ ],
+ "mappings": ";;;;;AACA,IAAMA,OAAO,GAAG,SAAVA,OAAU,CAACC,KAAD;AAAA,SACfA,KAAK,mBAAgBA,KAAhB,WAA4B,KADlB;AAAA,CAAhB;;AAGA,IAAMC,cAAc,GAAG,gCAAvB;AACA,IAAMC,IAAI,GAAG;AACXC,EAAAA,OAAO,EAAE,iBAACC,UAAD,EAAgBC,OAAhB;AAAA,QAACD,UAAD;AAACA,MAAAA,UAAD,GAAY,EAAZ;AAAA;;AAAA,QAAgBC,OAAhB;AAAgBA,MAAAA,OAAhB,GAAwBJ,cAAxB;AAAA;;AAAA,WAA4C;AACnDG,MAAAA,UAAU,EAAVA,UADmD;AAEnDC,MAAAA,OAAO,EAAPA;AAFmD,KAA5C;AAAA,GADE;AAMXC,EAAAA,IAAI,EAAE;AAAA,WAAM,CACVC,IAAI,CAACC,GAAL,GAAWC,QAAX,CAAoB,EAApB,IACAC,IAAI,CAACC,MAAL,GAAcF,QAAd,CAAuB,EAAvB,EAA2BG,SAA3B,CAAqC,CAArC,EAAwC,CAAxC,CAFU,EAGVC,WAHU,EAAN;AAAA,GANK;AAWXC,EAAAA,UAAU,EAAE,oBAACC,OAAD,EAAUC,OAAV,EAAmBhB,KAAnB;AAAA,WAAgCD,OAAO,CAACC,KAAD,CAAvC,kBAA0DgB,OAA1D,WAAsED,OAAtE;AAAA;AAXD,CAAb;eAceb,I"
+}

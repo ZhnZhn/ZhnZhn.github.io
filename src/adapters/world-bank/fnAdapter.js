@@ -1,6 +1,6 @@
 import AdapterFn from '../AdapterFn'
 
-const { ymdToUTC } = AdapterFn
+const { crError, ymdToUTC } = AdapterFn
 , _isArr = Array.isArray;
 
 const _crInfo = ({ title, subtitle, items }) => ({
@@ -13,6 +13,7 @@ const _getCountryIndicator = ({ items=[] }) => ({
 });
 
 const fnAdapter = {
+  crError,
   getCi: _getCountryIndicator,
 
   crData: (json) => {

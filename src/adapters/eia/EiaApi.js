@@ -1,19 +1,16 @@
+import AdapterFn from '../AdapterFn';
+
 const C = {
   URL: "https://api.eia.gov/category/",
   S_URL: "https://api.eia.gov/series/"
 };
-const CAPTION = 'EIA';
+
 const MSG = {
   ERR: 'invalid series_id.',
-  NOT_EXIST: 'Data for enetered parameters is not existed.',
-  EMPTY: 'Response is empty.',
-  DATA_EMPTY: 'Data is empty.'
+  NOT_EXIST: 'Data for enetered parameters is not existed.'
 };
 
-const _crErr = (caption, message) => ({
-    errCaption: caption,
-    message: message
-})
+const { crError } = AdapterFn;
 
 const _getValue = (obj) => {
   return obj && obj.value
@@ -77,18 +74,18 @@ const EiaApi = {
 
   checkResponse(json){
     if (!json) {
-      throw _crErr(CAPTION, MSG.EMPTY);
+      throw crError();
     }
-    const { data={} } = json
-    , { error:msgErr } = data;
+    const { data } = json
+    , { error:msgErr } = data || {};
     if (msgErr) {
-      if (msgErr.indexOf(MSG.ERR) !== -1) {
-        throw _crErr(CAPTION, MSG.NOT_EXIST);
-      }
-      throw _crErr(CAPTION, msgErr);
+      const _msgErr = msgErr.indexOf(MSG.ERR) !== -1
+        ? MSG.NOT_EXIST
+        : msgErr;
+      throw crError('', _msgErr);
     }
     if (!json.series || !json.series[0]) {
-      throw _crErr(CAPTION, MSG.DATA_EMPTY);
+      throw crError();
     }
     return true;
   }
