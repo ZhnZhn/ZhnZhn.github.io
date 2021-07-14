@@ -7,7 +7,7 @@ import RowSecret from '../dialogs/RowSecret'
 import FlatButton from '../zhn-m/FlatButton'
 import RowButtons from './RowButtons'
 
-const MAX_KEY = 9;
+const MAX_KEY = 10;
 
 const S = {
   BT_SET: {
@@ -15,6 +15,18 @@ const S = {
     marginRight: 8
   }
 };
+
+const CONF_ARR = [
+  ["Alpha", "alpha-vantage", "Alpha Vantage"],
+  ["Twelve", "twelve", "Twelve Data"],
+  ["BEA","bea","BEA","36"],
+  ["BLS","bls","BLS","32"],
+  ["EIA","eia","EIA","32"],
+  ["FMP","fmp","Financial Modeling Prep","32"],
+  ["IEX","iex-cloud","IEX Cloud","35"],
+  ["Intrinio","intrinio","Intrinio","32"],
+  ["Quandl","quandl","Quandl"]
+];
 
 class PaneApiKey extends Component {
   /*
@@ -61,6 +73,7 @@ class PaneApiKey extends Component {
   _ref6 = n => this.iComp6 = n
   _ref7 = n => this.iComp7 = n
   _ref8 = n => this.iComp8 = n
+  _ref9 = n => this.iComp9 = n
 
   render(){
     const {
@@ -73,75 +86,20 @@ class PaneApiKey extends Component {
     }
     return (
       <div>
-        <RowSecret
-           ref={ this._ref1}
-           titleStyle={titleStyle}
-           title="Alpha:"
-           name="alpha-vantage"
-           placeholder="Alpha Vantage API Key"
-           onEnter={this._setKey1}
-        />
-        <RowSecret
-           ref={this._ref2}
-           titleStyle={titleStyle}
-           title="Twelve:"
-           name="twelve"
-           placeholder="Twelve Data API Key"
-           onEnter={this._setKey2}
-        />
-        <RowSecret
-           ref={this._ref3}
-           titleStyle={titleStyle}
-           title="BEA:"
-           name="bea"
-           placeholder="BEA API Key"
-           maxLength="36"
-           onEnter={this._setKey3}
-        />
-        <RowSecret
-           ref={this._ref4}
-           titleStyle={titleStyle}
-           title="EIA:"
-           name="eia"
-           placeholder="EIA API Key"
-           maxLength="32"
-           onEnter={this._setKey4}
-        />
-        <RowSecret
-           ref={this._ref5}
-           titleStyle={titleStyle}
-           title="FMP:"
-           name="fmp"
-           placeholder="Financial Modeling Prep API Key"
-           maxLength="32"
-           onEnter={this._setKey5}
-        />
-        <RowSecret
-           ref={this._ref6}
-           titleStyle={titleStyle}
-           title="IEX:"
-           name="iex-cloud"
-           placeholder="IEX Cloud API Key"
-           maxLength="35"
-           onEnter={this._setKey6}
-        />
-        <RowSecret
-           ref={this._ref7}
-           titleStyle={titleStyle}
-           title="Intrinio:"
-           name="intrinio"
-           placeholder="Intrinio API Key"
-           maxLength="32"
-           onEnter={this._setKey7}
-        />
-        <RowSecret
-           ref={this._ref8}
-           titleStyle={titleStyle}
-           title="Quandl:"
-           name="quandl"
-           placeholder="Quandl API Key"
-           onEnter={this._setKey8}
-        />
+        {CONF_ARR.map((item, i) => {
+          const _i = i + 1;
+          return (
+            <RowSecret
+               key={item[0]}
+               ref={this['_ref'+_i]}
+               titleStyle={titleStyle}
+               title={`${item[0]}:`}
+               name={item[1]}
+               placeholder={`${item[2]} API Key`}
+               maxLength={item[3]}
+               onEnter={this['_setKey'+_i]}
+            />
+        )})}
         <RowButtons btStyle={btStyle} onClose={onClose}>
           <FlatButton
             style={btStyle}

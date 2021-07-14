@@ -43,33 +43,47 @@ const ST = {
   }
 };
 
+const _isArr = Array.isArray;
+
 const DP = [
+  [Link.Quandl, '50'],
   Link.DbNomics, Link.Eurostat, Link.UnComtrade, Link.WorldBank,
   Link.Insee, Link.ONS, Link.StatNorway,
-  Link.StatSweden, Link.StatFinland, Link.Bsl,
+  Link.StatSweden, Link.StatFinland, [Link.Bsl, '25'],
   Link.CryptoCompare, Link.CoinGecko, Link.CoinMetrics,
   Link.CoinLore, Link.Coinpaprika, Link.Binance, Link.Bitstamp
 ]
 , DP_KEY = [
+  [Link.Quandl, '50 000'],
   Link.AlphaVantage, Link.Iex,
   Link.Fmp, Link.Tw, Link.Intrinio,
-  Link.Bea, Link.Eia
+  Link.Bea, [Link.Bsl, '500'], Link.Eia
 ];
 
-const Links = ({ list }) => list.map((LinkComp, index) => (
-  <span style={S.PROVIDER} key={index}>
-    <LinkComp />
-  </span>
-));
-
-const QuanlLink = ({ req }) => (
-  <span style={S.PROVIDER}>
-    <Link.Quandl/>
+const LinkPer = ({ Comp, per }) => (
+  <>
+    <Comp />
     <span style={S.BLACK}>
-       &nbsp;({req} per day)
+       &nbsp;({per})
     </span>
-  </span>
+  </>
 );
+
+
+const LinkList = ({ list }) => list.map((CompOrConfig, index) => {
+  const _isConfig = _isArr(CompOrConfig)
+  , _linkComp = _isConfig
+      ? <LinkPer Comp={CompOrConfig[0]} per={CompOrConfig[1]} />
+      : <CompOrConfig />
+  , style = _isConfig
+      ? {...S.PROVIDER, ...S.PR_4 }
+      : S.PROVIDER
+  return (
+    <span style={style} key={index}>
+      {_linkComp}
+    </span>
+  );
+})
 
 const DataProviders = ({ isClose }) => (
   <OpenClose
@@ -80,18 +94,16 @@ const DataProviders = ({ isClose }) => (
   >
     <div>
       <p>
-        <QuanlLink req="50" />
-        <Links list={DP} />
+        <LinkList list={DP} />
       </p>
       <OpenClose
-        caption="(8) Required API Key:"
+        caption="(9) Required API Key:"
         style={ST.OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}
       >
       <p style={ST.P4}>
-        <QuanlLink req="50 000" />
-        <Links list={DP_KEY} />
+        <LinkList list={DP_KEY} />
       </p>
       <div style={ST.NOTE}>
         <p>

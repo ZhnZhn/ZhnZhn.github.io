@@ -1,7 +1,8 @@
 import fnAdapter from './fnAdapter';
 
 const C = {
-  URL: 'https://api.bls.gov/publicAPI/v2/timeseries/data',
+  URL: 'https://api.bls.gov/publicAPI',
+  TS_DATA: 'timeseries/data',
   NATIVE_URL: 'https://data.bls.gov/timeseries'
 };
 
@@ -30,13 +31,19 @@ const _setCaptionTo = option => {
   })
 };
 
+const _crQuery = ({ apiKey }) => apiKey
+  ? `?registrationkey=${apiKey}`
+  : ''
+
 const BlsApi = {
 
   getRequestUrl(option){
-    const value = _getValue(option);
+    const value = _getValue(option)
+    , _query = _crQuery(option)
+    , _v = _query ? 'v2' : 'v1'
     _addNativeLinkTo(option)
     _setCaptionTo(option)
-    return `${C.URL}/${value}`;
+    return `${C.URL}/${_v}/${C.TS_DATA}/${value}${_query}`;    
   },
   checkResponse(json){
     const { Results, message=[] } = json || {}

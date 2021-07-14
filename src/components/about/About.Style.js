@@ -14,6 +14,9 @@ const S = {
     paddingRight: 8,
     paddingLeft: 8
   },
+  PR_4: {
+    paddingRight: 4
+  },
   LH_18: {
     lineHeight: 1.8
   },

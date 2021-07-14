@@ -50,27 +50,35 @@ var ST = {
     color: '#607d8b'
   }
 };
-var DP = [_ProviderLinks["default"].DbNomics, _ProviderLinks["default"].Eurostat, _ProviderLinks["default"].UnComtrade, _ProviderLinks["default"].WorldBank, _ProviderLinks["default"].Insee, _ProviderLinks["default"].ONS, _ProviderLinks["default"].StatNorway, _ProviderLinks["default"].StatSweden, _ProviderLinks["default"].StatFinland, _ProviderLinks["default"].Bsl, _ProviderLinks["default"].CryptoCompare, _ProviderLinks["default"].CoinGecko, _ProviderLinks["default"].CoinMetrics, _ProviderLinks["default"].CoinLore, _ProviderLinks["default"].Coinpaprika, _ProviderLinks["default"].Binance, _ProviderLinks["default"].Bitstamp],
-    DP_KEY = [_ProviderLinks["default"].AlphaVantage, _ProviderLinks["default"].Iex, _ProviderLinks["default"].Fmp, _ProviderLinks["default"].Tw, _ProviderLinks["default"].Intrinio, _ProviderLinks["default"].Bea, _ProviderLinks["default"].Eia];
+var _isArr = Array.isArray;
+var DP = [[_ProviderLinks["default"].Quandl, '50'], _ProviderLinks["default"].DbNomics, _ProviderLinks["default"].Eurostat, _ProviderLinks["default"].UnComtrade, _ProviderLinks["default"].WorldBank, _ProviderLinks["default"].Insee, _ProviderLinks["default"].ONS, _ProviderLinks["default"].StatNorway, _ProviderLinks["default"].StatSweden, _ProviderLinks["default"].StatFinland, [_ProviderLinks["default"].Bsl, '25'], _ProviderLinks["default"].CryptoCompare, _ProviderLinks["default"].CoinGecko, _ProviderLinks["default"].CoinMetrics, _ProviderLinks["default"].CoinLore, _ProviderLinks["default"].Coinpaprika, _ProviderLinks["default"].Binance, _ProviderLinks["default"].Bitstamp],
+    DP_KEY = [[_ProviderLinks["default"].Quandl, '50 000'], _ProviderLinks["default"].AlphaVantage, _ProviderLinks["default"].Iex, _ProviderLinks["default"].Fmp, _ProviderLinks["default"].Tw, _ProviderLinks["default"].Intrinio, _ProviderLinks["default"].Bea, [_ProviderLinks["default"].Bsl, '500'], _ProviderLinks["default"].Eia];
 
-var Links = function Links(_ref) {
-  var list = _ref.list;
-  return list.map(function (LinkComp, index) {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: _About["default"].PROVIDER,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkComp, {})
-    }, index);
+var LinkPer = function LinkPer(_ref) {
+  var Comp = _ref.Comp,
+      per = _ref.per;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+      style: _About["default"].BLACK,
+      children: ["\xA0(", per, ")"]
+    })]
   });
 };
 
-var QuanlLink = function QuanlLink(_ref2) {
-  var req = _ref2.req;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-    style: _About["default"].PROVIDER,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks["default"].Quandl, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-      style: _About["default"].BLACK,
-      children: ["\xA0(", req, " per day)"]
-    })]
+var LinkList = function LinkList(_ref2) {
+  var list = _ref2.list;
+  return list.map(function (CompOrConfig, index) {
+    var _isConfig = _isArr(CompOrConfig),
+        _linkComp = _isConfig ? /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkPer, {
+      Comp: CompOrConfig[0],
+      per: CompOrConfig[1]
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(CompOrConfig, {}),
+        style = _isConfig ? (0, _extends2["default"])({}, _About["default"].PROVIDER, _About["default"].PR_4) : _About["default"].PROVIDER;
+
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: style,
+      children: _linkComp
+    }, index);
   });
 };
 
@@ -82,24 +90,20 @@ var DataProviders = function DataProviders(_ref3) {
     style: ST.OC_L1,
     childStyle: ST.ROOT_CHILD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(QuanlLink, {
-          req: "50"
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Links, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkList, {
           list: DP
-        })]
+        })
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose["default"], {
-        caption: "(8) Required API Key:",
+        caption: "(9) Required API Key:",
         style: ST.OC_L2,
         openColor: OPEN_COLOR_L2,
         childStyle: ST.CHILD_STYLE,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
           style: ST.P4,
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(QuanlLink, {
-            req: "50 000"
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Links, {
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkList, {
             list: DP_KEY
-          })]
+          })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: ST.NOTE,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
