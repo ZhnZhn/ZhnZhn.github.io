@@ -10,6 +10,8 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var ymdToUTC = _AdapterFn["default"].ymdToUTC,
+    getYear = _AdapterFn["default"].getYear,
+    getCurrentYear = _AdapterFn["default"].getCurrentYear,
     joinBy = _AdapterFn["default"].joinBy,
     crError = _AdapterFn["default"].crError;
 
@@ -38,6 +40,8 @@ var _crInfo = function _crInfo(_ref2) {
 
 var fnAdapter = {
   crError: crError,
+  getYear: getYear,
+  getCurrentYear: getCurrentYear,
   crTitle: function crTitle(_ref3) {
     var dfTitle = _ref3.dfTitle,
         _ref3$items = _ref3.items,

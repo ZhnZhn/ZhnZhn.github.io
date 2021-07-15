@@ -116,7 +116,9 @@
       "dialogProps" : {
         "rootUri": "./data/usa-economy/",
         "descrUrl" : "./data/usa-economy/bls.html",
-        "noDate": true,
+        "isFd": true,
+        "nInitFromDate": 2,
+        "isShowFd": false,
         "spT": "id",
         "chartsType": "t2",
         "loadId" : "BLS",

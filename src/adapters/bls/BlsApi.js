@@ -8,7 +8,8 @@ const C = {
 
 const _isArr = Array.isArray
 , _assign = Object.assign
-, { crError, crTitle } = fnAdapter;
+, { crError, crTitle, getYear, getCurrentYear } = fnAdapter
+, _isNumber = n => typeof n === 'number' && n-n === 0;
 
 const _getValue = ({ items=[] }) => items[0].v;
 
@@ -16,7 +17,7 @@ const _addNativeLinkTo = (option) => {
   const value = _getValue(option);
   _assign(option, {
     linkItem: {
-      caption: 'BLS Data Link',
+      caption: 'U.S. BLS Data Link',
       href: `${C.NATIVE_URL}/${value}`
     }
   })
@@ -31,20 +32,33 @@ const _setCaptionTo = option => {
   })
 };
 
-const _crQuery = ({ apiKey }) => apiKey
+const _crQueryKey = ({ apiKey }) => apiKey
   ? `?registrationkey=${apiKey}`
   : ''
+
+const _crQueryPeriod = (queryKey, {fromDate}) => {
+  if (!queryKey) { return ''; }
+  const _startyear = parseInt(getYear(fromDate), 10)
+  , _endyear = parseInt(getCurrentYear(), 10);
+  if (_isNumber(_startyear) && _isNumber(_endyear)
+      && _endyear - _startyear < 21) {
+    return `&startyear=${_startyear}&endyear=${_endyear}`;
+  }
+  return '';
+};
 
 const BlsApi = {
 
   getRequestUrl(option){
     const value = _getValue(option)
-    , _query = _crQuery(option)
-    , _v = _query ? 'v2' : 'v1'
+    , _queryKey = _crQueryKey(option)
+    , _v = _queryKey ? 'v2' : 'v1'
+    , _queryPeriod = _crQueryPeriod(_queryKey, option);
     _addNativeLinkTo(option)
     _setCaptionTo(option)
-    return `${C.URL}/${_v}/${C.TS_DATA}/${value}${_query}`;    
+    return `${C.URL}/${_v}/${C.TS_DATA}/${value}${_queryKey}${_queryPeriod}`;
   },
+
   checkResponse(json){
     const { Results, message=[] } = json || {}
     , { series } = Results || {}

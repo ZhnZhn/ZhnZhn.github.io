@@ -2,7 +2,9 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  ymdToUTC,
+  ymdToUTC,  
+  getYear,
+  getCurrentYear,
   joinBy,
   crError
 } = AdapterFn;
@@ -26,6 +28,8 @@ const _crInfo = ({ itemCaption }) => ({
 
 const fnAdapter = {
   crError,
+  getYear,
+  getCurrentYear,
   crTitle: ({ dfTitle, items=[], subtitle }) => dfTitle
     ? joinBy(', ', dfTitle, items[0].t)
     : subtitle,
