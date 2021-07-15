@@ -102,6 +102,8 @@ var DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__
     isOpt: PropTypes.bool,
     isCh: PropTypes.bool,
     isShow: PropTypes.bool,
+    isFd: PropTypes.bool,
+    isShowFd: PropTypes.bool,
     caption: PropTypes.string,
     selectProps: PropTypes.arrayOf(
        PropTypes.shape({
@@ -269,6 +271,7 @@ var DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__
     var isOpt = props.isOpt,
         isCh = props.isCh,
         isFd = props.isFd,
+        isShowFd = props.isShowFd,
         _selectProps = props.selectProps;
     _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
@@ -286,7 +289,7 @@ var DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
       isOptions: false,
       isToggle: false,
-      isShowFd: true,
+      isShowFd: isShowFd,
       isShowChart: true,
       isShowDate: false
     }, _crIsToggleInit(_selectProps), _getDfFrequencyConfig(props));
@@ -414,6 +417,7 @@ var DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = /*#__
   return DialogSelectN;
 }(_react.Component), _class2.defaultProps = {
   isCh: true,
+  isShowFd: true,
   selectProps: [],
   initFromDate: DF_INIT_FROM_DATE
 }, _temp)) || _class);

@@ -72,6 +72,8 @@ class DialogSelectN extends Component {
     isOpt: PropTypes.bool,
     isCh: PropTypes.bool,
     isShow: PropTypes.bool,
+    isFd: PropTypes.bool,
+    isShowFd: PropTypes.bool,
     caption: PropTypes.string,
     selectProps: PropTypes.arrayOf(
        PropTypes.shape({
@@ -103,6 +105,7 @@ class DialogSelectN extends Component {
 
  static defaultProps = {
    isCh: true,
+   isShowFd: true,
    selectProps: [],
    initFromDate: DF_INIT_FROM_DATE
  }
@@ -115,7 +118,7 @@ class DialogSelectN extends Component {
     this._compSelect = {}
     //this.date = undefined;
 
-    const { isOpt, isCh, isFd, selectProps } = props;
+    const { isOpt, isCh, isFd, isShowFd, selectProps } = props;
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -135,7 +138,7 @@ class DialogSelectN extends Component {
       ...this._isWithInitialState(),
       isOptions: false,
       isToggle: false,
-      isShowFd: true,
+      isShowFd: isShowFd,
       isShowChart: true,
       isShowDate: false,
       ..._crIsToggleInit(selectProps),
@@ -343,7 +346,7 @@ class DialogSelectN extends Component {
              isShow={isShow}
              isShowLabels={isShowLabels}
              selectProps={selectProps}
-             refSelect={this._refSelect}             
+             refSelect={this._refSelect}
              isShowById={this._isShowById}
              hSelect={this._hSelect}
            />
