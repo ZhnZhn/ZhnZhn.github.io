@@ -13,10 +13,10 @@ describe('crError', function () {
       message: 'msg'
     });
   });
-  it('should replace void 0 values by empty str', function () {
+  it('should replace void 0 values by default values', function () {
     expect(fn()).toEqual({
       errCaption: '',
-      message: ''
+      message: 'No data available for request.'
     });
   });
 });

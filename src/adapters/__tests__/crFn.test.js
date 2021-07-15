@@ -10,10 +10,10 @@ describe('crError', ()=>{
       message: 'msg'
     })
   })
-  it('should replace void 0 values by empty str', ()=>{
+  it('should replace void 0 values by default values', ()=>{
     expect(fn()).toEqual({
       errCaption: '',
-      message: ''
+      message: 'No data available for request.'
     })
   })
 })

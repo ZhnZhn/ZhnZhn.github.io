@@ -1,6 +1,7 @@
 
 const MIN_YEAR = 1990;
 const DAY_IN_MLS = 1000*60*60*24;
+let _currentYear;
 
 const _isNumber = n => typeof n === 'number';
 const _isNaN = Number.isNaN;
@@ -79,6 +80,12 @@ const DateUtils = {
 	getToDate(){
 		return DateUtils.getFromDate(0);
 	},
+
+  //YYYY-MM-DD
+  getYear: str => (str || '').split('-')[0],
+  getCurrentYear: () => _currentYear
+    ? _currentYear
+    : (_currentYear = DateUtils.getYear(DateUtils.getFromDate(0))),
 
 
   getYmdhmUTC(date){

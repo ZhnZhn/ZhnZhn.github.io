@@ -5,6 +5,8 @@ exports["default"] = void 0;
 var MIN_YEAR = 1990;
 var DAY_IN_MLS = 1000 * 60 * 60 * 24;
 
+var _currentYear;
+
 var _isNumber = function _isNumber(n) {
   return typeof n === 'number';
 };
@@ -129,6 +131,13 @@ var DateUtils = {
   },
   getToDate: function getToDate() {
     return DateUtils.getFromDate(0);
+  },
+  //YYYY-MM-DD
+  getYear: function getYear(str) {
+    return (str || '').split('-')[0];
+  },
+  getCurrentYear: function getCurrentYear() {
+    return _currentYear ? _currentYear : _currentYear = DateUtils.getYear(DateUtils.getFromDate(0));
   },
   getYmdhmUTC: function getYmdhmUTC(date) {
     var _d = date || new Date();

@@ -14,6 +14,7 @@ const {
   getUTCTime,
   addToDmy,
   getYTDfromDmy,
+  getYear,
   monthIndex,
   getYmdhmUTC
 } = DateUtils;
@@ -246,6 +247,18 @@ describe('getYTDfromDmy', ()=>{
   test('should return mls to start of year', ()=>{
     expect(fn('01-01-2010')).toBe(Date.UTC(2010, 0, 1))
     expect(fn('02-01-2010')).toBe(Date.UTC(2010, 0, 1))
+  })
+})
+
+describe('getYear', ()=>{
+  const fn = getYear;
+  test('should return YYYY from YYYY-MM-DD', ()=>{
+    expect(fn('2010-01-01')).toBe('2010')
+  })
+  test('should return empty string for falsy input', ()=>{
+    expect(fn()).toBe('')
+    expect(fn(null)).toBe('')
+    expect(fn('')).toBe('')
   })
 })
 

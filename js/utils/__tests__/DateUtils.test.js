@@ -17,6 +17,7 @@ var isYmd = _DateUtils["default"].isYmd,
     getUTCTime = _DateUtils["default"].getUTCTime,
     addToDmy = _DateUtils["default"].addToDmy,
     getYTDfromDmy = _DateUtils["default"].getYTDfromDmy,
+    getYear = _DateUtils["default"].getYear,
     monthIndex = _DateUtils["default"].monthIndex,
     getYmdhmUTC = _DateUtils["default"].getYmdhmUTC; // DateUtils configuration consts
 
@@ -241,6 +242,17 @@ describe('getYTDfromDmy', function () {
   test('should return mls to start of year', function () {
     expect(fn('01-01-2010')).toBe(Date.UTC(2010, 0, 1));
     expect(fn('02-01-2010')).toBe(Date.UTC(2010, 0, 1));
+  });
+});
+describe('getYear', function () {
+  var fn = getYear;
+  test('should return YYYY from YYYY-MM-DD', function () {
+    expect(fn('2010-01-01')).toBe('2010');
+  });
+  test('should return empty string for falsy input', function () {
+    expect(fn()).toBe('');
+    expect(fn(null)).toBe('');
+    expect(fn('')).toBe('');
   });
 });
 describe('monthIndex', function () {

@@ -41,6 +41,8 @@ var ymdToUTC = dt.ymdToUTC,
     mlsToDmy = dt.mlsToDmy,
     getFromDate = dt.getFromDate,
     getYmdhmUTC = dt.getYmdhmUTC,
+    getYear = dt.getYear,
+    getCurrentYear = dt.getCurrentYear,
     monthIndex = dt.monthIndex;
 var EMPTY = '';
 var ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
@@ -89,6 +91,8 @@ var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["defaul
   ymdhmsToUTC: ymdhmsToUTC,
   getFromDate: getFromDate,
   getYmdhmUTC: getYmdhmUTC,
+  getYear: getYear,
+  getCurrentYear: getCurrentYear,
   monthIndex: monthIndex,
   getCaption: getC,
   getValue: getV,
