@@ -1,7 +1,7 @@
 # [ERC (Economic RESTful Client)](https://zhnzhn.github.io)
 ERC (Economic RESTful Client) is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers. Some examples of data visualization and news about web app ERC can be found on Twitter's page [@webapperc](https://twitter.com/webapperc).   
 
-Data providers: [Quandl](https://www.quandl.com), [DB NOMICS](https://db.nomics.world), [Eurostat](http://ec.europa.eu/eurostat/web/main/home), [UnComtrade](https://comtrade.un.org), [FAOSTAT](http://www.fao.org/faostat/en/#data/), [World Bank](https://data.worldbank.org/), [Statistics Norway](http://www.ssb.no/en), [Statistics Sweden](https://www.scb.se/en), [Insee: France Statistics](https://www.insee.fr/en/accueil), [IEX Cloud](https://iexcloud.io), [Alpha Vantage](https://www.alphavantage.co) and more (All 26).   
+Data providers: [Quandl](https://www.quandl.com), [DB NOMICS](https://db.nomics.world), [Eurostat](http://ec.europa.eu/eurostat/web/main/home), [UnComtrade](https://comtrade.un.org), [FAOSTAT](http://www.fao.org/faostat/en/#data/), [World Bank](https://data.worldbank.org/), [Statistics Norway](http://www.ssb.no/en), [Statistics Sweden](https://www.scb.se/en), [Insee: France Statistics](https://www.insee.fr/en/accueil), [IEX Cloud](https://iexcloud.io), [Alpha Vantage](https://www.alphavantage.co) and more (All 27).   
 
 ![alt text](screencast/erc-currency-example.png?raw=true "Currency History")
 

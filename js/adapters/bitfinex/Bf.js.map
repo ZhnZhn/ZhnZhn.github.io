@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bitfinex/Bf.js"
+ ],
+ "file": "../../../src/adapters/bitfinex/Bf.js",
+ "names": [
+  "Bf",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,IAAMA,EAAE,GAAG;AACTC,EAAAA,GAAG,EAAHA,iBADS;AAETC,EAAAA,OAAO,EAAPA;AAFS,CAAX;eAKeF,E"
+}

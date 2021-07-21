@@ -58,6 +58,10 @@ const DP = [
   Link.AlphaVantage, Link.Iex,
   Link.Fmp, Link.Tw, Link.Intrinio,
   Link.Bea, [Link.Bsl, '500'], Link.Eia
+]
+, DP_PR = [
+  Link.FaoStat,
+  Link.Bitfinex
 ];
 
 const LinkPer = ({ Comp, per }) => (
@@ -88,7 +92,7 @@ const LinkList = ({ list }) => list.map((CompOrConfig, index) => {
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 26):"
+     caption="Data Providers (All 27):"
      style={ST.OC_L1}
      childStyle={ST.ROOT_CHILD}
   >
@@ -122,15 +126,13 @@ const DataProviders = ({ isClose }) => (
       </div>
       </OpenClose>
       <OpenClose
-        caption="(1) Required Local Http Proxy:"
+        caption="(2) Required Local Http Proxy:"
         style={ST.OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={ST.CHILD_STYLE}
       >
         <p style={ST.P4}>
-          <span style={S.PROVIDER}>
-           <Link.FaoStat />
-          </span>
+          <LinkList list={DP_PR} />
         </p>
         <div style={ST.NOTE}>
           <p>

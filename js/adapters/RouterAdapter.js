@@ -57,6 +57,8 @@ var _Cl = _interopRequireDefault(require("./coin-lore/Cl"));
 
 var _Bn = _interopRequireDefault(require("./binance/Bn"));
 
+var _Bf = _interopRequireDefault(require("./bitfinex/Bf"));
+
 var _Bt = _interopRequireDefault(require("./bitstamp/Bt"));
 
 var RouterAdapter = (0, _extends2["default"])({
@@ -85,6 +87,7 @@ var RouterAdapter = (0, _extends2["default"])({
   Cp: _Cp["default"],
   Cl: _Cl["default"],
   Bn: _Bn["default"],
+  Bf: _Bf["default"],
   Bt: _Bt["default"]
 });
 var _default = RouterAdapter;

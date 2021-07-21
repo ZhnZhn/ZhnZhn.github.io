@@ -39,7 +39,8 @@ const LINK_CONFIGS = [
  ["CoinLore","https://www.coinlore.com"],
  ["Coinpaprika", "https://coinpaprika.com"],
  ["Binance", "https://binance.com"],
- ["Bitstamp", "https://www.bitstamp.net"]
+ ["Bitstamp", "https://www.bitstamp.net"],
+ ["Bitfinex", "https://www.bitfinex.com"]
 ];
 
 const _isStr = str => typeof str === 'string';

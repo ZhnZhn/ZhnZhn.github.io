@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bitfinex/BfAdapter.js"
+ ],
+ "file": "../../../src/adapters/bitfinex/BfAdapter.js",
+ "names": [
+  "_rAdapter",
+  "DF",
+  "toKline",
+  "OB",
+  "toOrderBook",
+  "BtAdapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,mBADY;AAEhBC,EAAAA,EAAE,EAAEC;AAFY,CAAlB;AAAA,IAIEC,SAAS,GAAG,iCAAgBL,SAAhB,CAJd;eAMeK,S"
+}

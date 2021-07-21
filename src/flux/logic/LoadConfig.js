@@ -36,6 +36,7 @@ const LoadConfig = {
   [LT.CP]: LoadImpl.Cp,
   [LT.CL]: LoadImpl.Cl,
   [LT.BN]:  LoadImpl.Bn,
+  [LT.BF]: LoadImpl.Bf,
   [LT.BT]: LoadImpl.Bt,
 
   [LT.FS]: LoadImpl.Insee,

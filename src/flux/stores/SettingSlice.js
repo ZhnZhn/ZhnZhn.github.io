@@ -6,7 +6,7 @@ const _withApiKey = [
   LT.BEA, LT.EIA
 ];
 const _withProxy = [
-  LT.FAO
+  LT.FAO, LT.BF
 ];
 const _apiTitle = {
   DF: '',
