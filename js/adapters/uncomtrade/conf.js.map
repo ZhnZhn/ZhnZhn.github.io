@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../src/adapters/uncomtrade/conf.js"],"names":["C","MAX_SHOW","WORLD","ALL","NET_WEIGHT","DESCR_EMPTY","MM_DD","AVG_PRICE","WORLD_COLOR","CHART","spacingTop","marginTop","marginBottom","SPLINE","type","SPLINE_NOT_VISIBLE","visible","X_AXIS","opposite","labels","y","crosshair","tickColor","tickWidth","tickLength","tickPosition","gridLineWidth","Y_AXIS","lineWidth","startOnTick","endOnTick","minPadding","maxPadding","plotLines","x"],"mappings":";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE,CADF;AAGRC,EAAAA,KAAK,EAAE,OAHC;AAIRC,EAAAA,GAAG,EAAE,KAJG;AAMRC,EAAAA,UAAU,EAAE,WANJ;AAQRC,EAAAA,WAAW,EAAE,mBARL;AAURC,EAAAA,KAAK,EAAE,QAVC;AAWRC,EAAAA,SAAS,EAAE,UAXH;AAYRC,EAAAA,WAAW,EAAE,SAZL;AAcRC,EAAAA,KAAK,EAAE;AACLC,IAAAA,UAAU,EAAE,EADP;AAELC,IAAAA,SAAS,EAAE,EAFN;AAGLC,IAAAA,YAAY,EAAE;AAHT,GAdC;AAmBRC,EAAAA,MAAM,EAAE;AACNC,IAAAA,IAAI,EAAE;AADA,GAnBA;AAsBRC,EAAAA,kBAAkB,EAAE;AAClBD,IAAAA,IAAI,EAAE,QADY;AACFE,IAAAA,OAAO,EAAE;AADP,GAtBZ;AAyBRC,EAAAA,MAAM,EAAE;AACNH,IAAAA,IAAI,EAAE,UADA;AAENI,IAAAA,QAAQ,EAAE,KAFJ;AAGNC,IAAAA,MAAM,EAAE;AACNC,MAAAA,CAAC,EAAE;AADG,KAHF;AAMNC,IAAAA,SAAS,EAAE,IANL;AAONC,IAAAA,SAAS,EAAE,MAPL;AAQNC,IAAAA,SAAS,EAAE,CARL;AASNC,IAAAA,UAAU,EAAE,CATN;AAUNC,IAAAA,YAAY,EAAE,SAVR;AAWN;AACAC,IAAAA,aAAa,EAAE;AAZT,GAzBA;AAuCRC,EAAAA,MAAM,EAAE;AACNC,IAAAA,SAAS,EAAE,CADL;AAENJ,IAAAA,UAAU,EAAE,CAFN;AAGNK,IAAAA,WAAW,EAAE,IAHP;AAINC,IAAAA,SAAS,EAAE,IAJL;AAKNC,IAAAA,UAAU,EAAE,IALN;AAMNC,IAAAA,UAAU,EAAE,IANN;AAONC,IAAAA,SAAS,EAAE,IAPL;AAQNd,IAAAA,MAAM,EAAE;AACNe,MAAAA,CAAC,EAAE;AADG;AARF;AAvCA,CAAV;eAsDelC,C","sourcesContent":["\r\nconst C = {\r\n  MAX_SHOW: 6,\r\n\r\n  WORLD: 'World',\r\n  ALL: 'all',\r\n\r\n  NET_WEIGHT: 'NetWeight',  \r\n\r\n  DESCR_EMPTY: 'Dataset is empty.',\r\n\r\n  MM_DD: '-12-31',\r\n  AVG_PRICE: 'avgPrice',\r\n  WORLD_COLOR: '#7cb5ec',\r\n\r\n  CHART: {\r\n    spacingTop: 24,\r\n    marginTop: 42,\r\n    marginBottom: 38\r\n  },\r\n  SPLINE: {\r\n    type: 'spline'\r\n  },\r\n  SPLINE_NOT_VISIBLE: {\r\n    type: 'spline', visible: false\r\n  },\r\n  X_AXIS: {\r\n    type: 'category',\r\n    opposite: false,\r\n    labels: {\r\n      y: 18\r\n    },\r\n    crosshair: null,\r\n    tickColor: 'gray',\r\n    tickWidth: 3,\r\n    tickLength: 7,\r\n    tickPosition: 'outside',\r\n    //tickPosition: 'inside',\r\n    gridLineWidth: 0\r\n  },\r\n  Y_AXIS: {\r\n    lineWidth: 0,\r\n    tickLength: 0,\r\n    startOnTick: true,\r\n    endOnTick: true,\r\n    minPadding: 0.05,\r\n    maxPadding: 0.05,\r\n    plotLines: null,\r\n    labels: {\r\n      x: 3\r\n    }\r\n  }\r\n\r\n};\r\n\r\nexport default C\r\n"],"file":"conf.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/uncomtrade/conf.js"
+ ],
+ "file": "../../../src/adapters/uncomtrade/conf.js",
+ "names": [
+  "C",
+  "MAX_SHOW",
+  "WORLD",
+  "ALL",
+  "NET_WEIGHT",
+  "QUANTITY",
+  "DESCR_EMPTY",
+  "MM_DD",
+  "AVG_PRICE",
+  "WORLD_COLOR",
+  "CHART",
+  "spacingTop",
+  "marginTop",
+  "marginBottom",
+  "SPLINE",
+  "type",
+  "SPLINE_NOT_VISIBLE",
+  "visible",
+  "X_AXIS",
+  "opposite",
+  "labels",
+  "y",
+  "crosshair",
+  "tickColor",
+  "tickWidth",
+  "tickLength",
+  "tickPosition",
+  "gridLineWidth",
+  "Y_AXIS",
+  "lineWidth",
+  "startOnTick",
+  "endOnTick",
+  "minPadding",
+  "maxPadding",
+  "plotLines",
+  "x"
+ ],
+ "mappings": ";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE,CADF;AAGRC,EAAAA,KAAK,EAAE,OAHC;AAIRC,EAAAA,GAAG,EAAE,KAJG;AAMRC,EAAAA,UAAU,EAAE,WANJ;AAORC,EAAAA,QAAQ,EAAE,eAPF;AASRC,EAAAA,WAAW,EAAE,mBATL;AAWRC,EAAAA,KAAK,EAAE,QAXC;AAYRC,EAAAA,SAAS,EAAE,UAZH;AAaRC,EAAAA,WAAW,EAAE,SAbL;AAeRC,EAAAA,KAAK,EAAE;AACLC,IAAAA,UAAU,EAAE,EADP;AAELC,IAAAA,SAAS,EAAE,EAFN;AAGLC,IAAAA,YAAY,EAAE;AAHT,GAfC;AAoBRC,EAAAA,MAAM,EAAE;AACNC,IAAAA,IAAI,EAAE;AADA,GApBA;AAuBRC,EAAAA,kBAAkB,EAAE;AAClBD,IAAAA,IAAI,EAAE,QADY;AACFE,IAAAA,OAAO,EAAE;AADP,GAvBZ;AA0BRC,EAAAA,MAAM,EAAE;AACNH,IAAAA,IAAI,EAAE,UADA;AAENI,IAAAA,QAAQ,EAAE,KAFJ;AAGNC,IAAAA,MAAM,EAAE;AACNC,MAAAA,CAAC,EAAE;AADG,KAHF;AAMNC,IAAAA,SAAS,EAAE,IANL;AAONC,IAAAA,SAAS,EAAE,MAPL;AAQNC,IAAAA,SAAS,EAAE,CARL;AASNC,IAAAA,UAAU,EAAE,CATN;AAUNC,IAAAA,YAAY,EAAE,SAVR;AAWN;AACAC,IAAAA,aAAa,EAAE;AAZT,GA1BA;AAwCRC,EAAAA,MAAM,EAAE;AACNC,IAAAA,SAAS,EAAE,CADL;AAENJ,IAAAA,UAAU,EAAE,CAFN;AAGNK,IAAAA,WAAW,EAAE,IAHP;AAINC,IAAAA,SAAS,EAAE,IAJL;AAKNC,IAAAA,UAAU,EAAE,IALN;AAMNC,IAAAA,UAAU,EAAE,IANN;AAONC,IAAAA,SAAS,EAAE,IAPL;AAQNd,IAAAA,MAAM,EAAE;AACNe,MAAAA,CAAC,EAAE;AADG;AARF;AAxCA,CAAV;eAuDenC,C"
+}

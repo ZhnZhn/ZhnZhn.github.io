@@ -7,6 +7,7 @@ var C = {
   WORLD: 'World',
   ALL: 'all',
   NET_WEIGHT: 'NetWeight',
+  QUANTITY: 'TradeQuantity',
   DESCR_EMPTY: 'Dataset is empty.',
   MM_DD: '-12-31',
   AVG_PRICE: 'avgPrice',

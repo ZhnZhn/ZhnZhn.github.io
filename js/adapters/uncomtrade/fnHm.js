@@ -37,7 +37,14 @@ var _fCrValuePoint = function _fCrValuePoint(pnValue) {
 };
 
 var _crNetWeightPoint = function _crNetWeightPoint(item) {
-  var _w = item.NetWeight || item.TradeQuantity,
+  var _w = item.NetWeight,
+      _y = _w !== 0 ? _w : item.TradeValue ? undefined : 0;
+
+  return _crPoint(_y);
+};
+
+var _crQuantityPoint = function _crQuantityPoint(item) {
+  var _w = item.TradeQuantity,
       _y = _w !== 0 ? _w : item.TradeValue ? undefined : 0;
 
   return _crPoint(_y);
@@ -55,7 +62,7 @@ var _crAvgPricePoint = function _crAvgPricePoint(item) {
 
 var _rFnCrPoint = (_rFnCrPoint2 = {
   fDf: _fCrValuePoint
-}, _rFnCrPoint2[_conf["default"].NET_WEIGHT] = _crNetWeightPoint, _rFnCrPoint2[_conf["default"].AVG_PRICE] = _crAvgPricePoint, _rFnCrPoint2);
+}, _rFnCrPoint2[_conf["default"].NET_WEIGHT] = _crNetWeightPoint, _rFnCrPoint2[_conf["default"].QUANTITY] = _crQuantityPoint, _rFnCrPoint2[_conf["default"].AVG_PRICE] = _crAvgPricePoint, _rFnCrPoint2);
 
 var _fPoint = function _fPoint(pnValue) {
   var _crValue = _rFnCrPoint[pnValue] ? _rFnCrPoint[pnValue] : _rFnCrPoint.fDf(pnValue);

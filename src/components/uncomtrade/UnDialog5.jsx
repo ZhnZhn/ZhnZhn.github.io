@@ -5,10 +5,12 @@ const { Decor, crMenuMore } = D
 
 const TRADE_FLOW = [
   { caption: "Export Value", value: { rg: 2, measure: "TradeValue" } },
-  { caption: "Export Weight or Quantity", value: { rg: 2, measure: "NetWeight" } },
+  { caption: "Export Weight", value: { rg: 2, measure: "NetWeight" } },
+  { caption: "Export Quantity", value: { rg: 2, measure: "TradeQuantity" } },
   { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } },
   { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } },
-  { caption: "Import Weight or Quantity", value: { rg: 1, measure: "NetWeight" } },
+  { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } },
+  { caption: "Import Quantity", value: { rg: 1, measure: "TradeQuantity" } },
   { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }
 ];
 
@@ -85,11 +87,7 @@ class UnDialog5 extends Component {
   _handleClose = () => {
     this._handleWithValidationClose()
   }
-
-  _handleMode = (propName, value) => {
-     this[propName] = value
-  }
-
+  
   _refGroupItem = c => this.groupItem = c
   _refDates = c => this.datesFragment = c
 

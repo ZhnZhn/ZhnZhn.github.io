@@ -28,10 +28,16 @@ var TRADE_FLOW = [{
     measure: "TradeValue"
   }
 }, {
-  caption: "Export Weight or Quantity",
+  caption: "Export Weight",
   value: {
     rg: 2,
     measure: "NetWeight"
+  }
+}, {
+  caption: "Export Quantity",
+  value: {
+    rg: 2,
+    measure: "TradeQuantity"
   }
 }, {
   caption: "Export Average Price",
@@ -46,10 +52,16 @@ var TRADE_FLOW = [{
     measure: "TradeValue"
   }
 }, {
-  caption: "Import Weight or Quantity",
+  caption: "Import Weight",
   value: {
     rg: 1,
     measure: "NetWeight"
+  }
+}, {
+  caption: "Import Quantity",
+  value: {
+    rg: 1,
+    measure: "TradeQuantity"
   }
 }, {
   caption: "Import Average Price",
@@ -116,10 +128,6 @@ var UnDialog5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/functi
 
     _this._handleClose = function () {
       _this._handleWithValidationClose();
-    };
-
-    _this._handleMode = function (propName, value) {
-      _this[propName] = value;
     };
 
     _this._refGroupItem = function (c) {

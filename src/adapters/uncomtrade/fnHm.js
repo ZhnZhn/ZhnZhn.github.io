@@ -20,7 +20,14 @@ const _fCrValuePoint = pnValue =>
    item => _crPoint(item[pnValue]);
 
 const _crNetWeightPoint = item => {
-  const _w = item.NetWeight || item.TradeQuantity
+  const _w = item.NetWeight
+  , _y = _w !== 0 ? _w
+    : item.TradeValue ? undefined : 0 ;
+  return _crPoint(_y);
+};
+
+const _crQuantityPoint = item => {
+  const _w = item.TradeQuantity
   , _y = _w !== 0 ? _w
     : item.TradeValue ? undefined : 0 ;
   return _crPoint(_y);
@@ -41,6 +48,7 @@ const _crAvgPricePoint = item => {
 const _rFnCrPoint = {
   fDf: _fCrValuePoint,
   [C.NET_WEIGHT]: _crNetWeightPoint,
+  [C.QUANTITY]: _crQuantityPoint,
   [C.AVG_PRICE]: _crAvgPricePoint
 };
 
