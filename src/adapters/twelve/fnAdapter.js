@@ -3,18 +3,9 @@ import AdapterFn from '../AdapterFn'
 const {
   getValue,
   crError,
+  crZhConfig,
   joinBy
 } = AdapterFn;
-
-const _crZhConfig = ({
-  _itemKey,
-  itemCaption,
-  dataSource
-}) => ({
-  id: _itemKey, key: _itemKey,
-  itemCaption,
-  dataSource
-});
 
 const _joinBy = joinBy.bind(null, ': ');
 
@@ -33,7 +24,7 @@ const fnAdapter = {
   },
 
   crAddConfig: ({ option }) => ({
-    zhConfig: _crZhConfig(option)
+    zhConfig: crZhConfig(option)
   })
 };
 

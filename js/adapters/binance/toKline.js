@@ -9,27 +9,16 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
-var crItemLink = _AdapterFn["default"].crItemLink;
-
-var _crZhConfig = function _crZhConfig(_ref) {
-  var _itemKey = _ref._itemKey,
-      itemCaption = _ref.itemCaption,
-      dataSource = _ref.dataSource;
-  return {
-    id: _itemKey,
-    key: _itemKey,
-    itemCaption: itemCaption,
-    dataSource: dataSource
-  };
-};
+var crZhConfig = _AdapterFn["default"].crZhConfig,
+    crItemLink = _AdapterFn["default"].crItemLink;
 
 var _crResearchLink = crItemLink.bind(null, 'Binance Research');
 
 var _crTradeLink = crItemLink.bind(null, 'Binance Trade Chart');
 
-var _crDescription = function _crDescription(_ref2) {
-  var _researchLink = _ref2._researchLink,
-      _tradeLink = _ref2._tradeLink;
+var _crDescription = function _crDescription(_ref) {
+  var _researchLink = _ref._researchLink,
+      _tradeLink = _ref._tradeLink;
   return _crResearchLink(_researchLink, "padding-bottom: 8px;") + _crTradeLink(_tradeLink);
 };
 
@@ -40,10 +29,10 @@ var _crInfo = function _crInfo(option) {
   };
 };
 
-var _crAddConfig = function _crAddConfig(_ref3) {
-  var option = _ref3.option;
+var _crAddConfig = function _crAddConfig(_ref2) {
+  var option = _ref2.option;
   return {
-    zhConfig: _crZhConfig(option),
+    zhConfig: crZhConfig(option),
     info: _crInfo(option)
   };
 };

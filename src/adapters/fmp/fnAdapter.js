@@ -2,10 +2,11 @@ import AdapterFn from '../AdapterFn'
 
 const {
   crError,
+  crZhConfig,
   getFromDate,
   getCaption,
   getValue,
-  joinBy,  
+  joinBy,
   ymdToUTC,
   compareByDate,
   crItemConf,
@@ -28,18 +29,8 @@ const _crHistoricalItemConf = (data, option) => {
   };
 }
 
-const _crZhConfig = ({
-  _itemKey,
-  itemCaption,
-  dataSource,
-}) => ({
-  id: _itemKey, key: _itemKey,
-  itemCaption,
-  dataSource
-});
-
 const _crHistZhConfig = (data, option) => ({
-  ..._crZhConfig(option),
+  ...crZhConfig(option),
   itemConf: _crHistoricalItemConf(data, option)
 });
 

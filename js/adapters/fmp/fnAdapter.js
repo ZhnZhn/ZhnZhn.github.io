@@ -10,6 +10,7 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var crError = _AdapterFn["default"].crError,
+    crZhConfig = _AdapterFn["default"].crZhConfig,
     getFromDate = _AdapterFn["default"].getFromDate,
     getCaption = _AdapterFn["default"].getCaption,
     getValue = _AdapterFn["default"].getValue,
@@ -35,20 +36,8 @@ var _crHistoricalItemConf = function _crHistoricalItemConf(data, option) {
   });
 };
 
-var _crZhConfig = function _crZhConfig(_ref) {
-  var _itemKey = _ref._itemKey,
-      itemCaption = _ref.itemCaption,
-      dataSource = _ref.dataSource;
-  return {
-    id: _itemKey,
-    key: _itemKey,
-    itemCaption: itemCaption,
-    dataSource: dataSource
-  };
-};
-
 var _crHistZhConfig = function _crHistZhConfig(data, option) {
-  return (0, _extends2["default"])({}, _crZhConfig(option), {
+  return (0, _extends2["default"])({}, crZhConfig(option), {
     itemConf: _crHistoricalItemConf(data, option)
   });
 };
@@ -57,9 +46,9 @@ var _crName = function _crName(items) {
   return items.map(getCaption).join(': ');
 };
 
-var _crInfo = function _crInfo(_ref2) {
-  var items = _ref2.items,
-      _itemUrl = _ref2._itemUrl;
+var _crInfo = function _crInfo(_ref) {
+  var items = _ref.items,
+      _itemUrl = _ref._itemUrl;
   return {
     name: _crName(items)
   };
@@ -86,8 +75,8 @@ var fnAdapter = {
 
     return _data.reverse().sort(compareByDate);
   },
-  crCaption: function crCaption(_ref3) {
-    var items = _ref3.items;
+  crCaption: function crCaption(_ref2) {
+    var items = _ref2.items;
     return {
       title: getCaption(items[0]),
       subtitle: joinBy(': ', getCaption(items[1]), getCaption(items[2]))
@@ -98,9 +87,9 @@ var fnAdapter = {
       info: _crInfo(option)
     };
   },
-  crHistOption: function crHistOption(_ref4) {
-    var option = _ref4.option,
-        data = _ref4.data;
+  crHistOption: function crHistOption(_ref3) {
+    var option = _ref3.option,
+        data = _ref3.data;
     return {
       info: _crInfo(option),
       zhConfig: _crHistZhConfig(data, option)

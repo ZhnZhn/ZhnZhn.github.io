@@ -1,17 +1,7 @@
 import AdapterFn from '../AdapterFn'
 import crAdapterOHLCV from '../crAdapterOHLCV'
 
-const { crItemLink } = AdapterFn
-
-const _crZhConfig = ({
-    _itemKey,
-    itemCaption,
-    dataSource
-  }) => ({
-    id: _itemKey, key: _itemKey,
-    itemCaption,
-    dataSource
-  });
+const { crZhConfig, crItemLink } = AdapterFn
 
 const _crResearchLink = crItemLink
     .bind(null, 'Binance Research');
@@ -28,7 +18,7 @@ const _crInfo = (option) => ({
 })
 
 const _crAddConfig = ({ option }) => ({
-  zhConfig: _crZhConfig(option),
+  zhConfig: crZhConfig(option),
   info: _crInfo(option)
 })
 

@@ -192,6 +192,17 @@ var AdapterFn = (0, _extends2["default"])({}, _crFn["default"], _pointFn["defaul
       }
     });
     return _items;
+  },
+  crZhConfig: function crZhConfig(_ref2) {
+    var _itemKey = _ref2._itemKey,
+        itemCaption = _ref2.itemCaption,
+        dataSource = _ref2.dataSource;
+    return {
+      id: _itemKey,
+      key: _itemKey,
+      itemCaption: itemCaption,
+      dataSource: dataSource
+    };
   }
 });
 var _default = AdapterFn;

@@ -1,20 +1,10 @@
 import AdapterFn from '../AdapterFn'
 import crAdapterOHLCV from '../crAdapterOHLCV'
 
-const { isInArrStr } = AdapterFn;
-
-const _crZhConfig = ({
-  _itemKey,
-  itemCaption,
-  dataSource
-}) => ({
-  id: _itemKey, key: _itemKey,
-  itemCaption,
-  dataSource
-});
+const { crZhConfig, isInArrStr } = AdapterFn;
 
 const _crAddConfig = ({ option }) => ({
-  zhConfig: _crZhConfig(option)
+  zhConfig: crZhConfig(option)
 });
 
 /*

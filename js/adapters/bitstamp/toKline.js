@@ -9,24 +9,13 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
-var isInArrStr = _AdapterFn["default"].isInArrStr;
+var crZhConfig = _AdapterFn["default"].crZhConfig,
+    isInArrStr = _AdapterFn["default"].isInArrStr;
 
-var _crZhConfig = function _crZhConfig(_ref) {
-  var _itemKey = _ref._itemKey,
-      itemCaption = _ref.itemCaption,
-      dataSource = _ref.dataSource;
+var _crAddConfig = function _crAddConfig(_ref) {
+  var option = _ref.option;
   return {
-    id: _itemKey,
-    key: _itemKey,
-    itemCaption: itemCaption,
-    dataSource: dataSource
-  };
-};
-
-var _crAddConfig = function _crAddConfig(_ref2) {
-  var option = _ref2.option;
-  return {
-    zhConfig: _crZhConfig(option)
+    zhConfig: crZhConfig(option)
   };
 };
 /*

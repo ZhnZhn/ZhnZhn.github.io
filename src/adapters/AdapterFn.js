@@ -188,7 +188,17 @@ const AdapterFn = {
       }
     })
     return _items;
-  }
+  },
+
+  crZhConfig: ({
+    _itemKey,
+    itemCaption,
+    dataSource
+  }) => ({
+    id: _itemKey, key: _itemKey,
+    itemCaption,
+    dataSource
+  })
 };
 
 export default AdapterFn
