@@ -5,12 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _toTableFn = _interopRequireDefault(require("../toTableFn"));
-
-var _crOrderBookRows = _interopRequireDefault(require("../crOrderBookRows"));
-
-var crTableConfig = _toTableFn["default"].crTableConfig,
-    HEADERS = _crOrderBookRows["default"].HEADERS;
+var _crAdapterOrderBook = _interopRequireDefault(require("../crAdapterOrderBook"));
 
 var _isNumber = function _isNumber(n) {
   return typeof n === 'number';
@@ -18,6 +13,11 @@ var _isNumber = function _isNumber(n) {
 
 var _compareByPrice = function _compareByPrice(a, b) {
   return a[0] - b[0];
+};
+
+var crTitle = function crTitle(_ref) {
+  var items = _ref.items;
+  return items[0].c + ' P0';
 };
 /*
 From Bitfinex Documentation
@@ -30,7 +30,7 @@ if AMOUNT > 0 then bid else ask.
 */
 
 
-var _crOrderBook = function _crOrderBook(json) {
+var crOrderBook = function crOrderBook(json) {
   var asks = [],
       bids = [];
   json.forEach(function (arrItem) {
@@ -48,27 +48,10 @@ var _crOrderBook = function _crOrderBook(json) {
   };
 };
 
-var toOrderBook = {
-  toConfig: function toConfig(json, option) {
-    var _itemKey = option._itemKey,
-        dataSource = option.dataSource,
-        items = option.items,
-        title = items[0].c + ' P0',
-        _orderBook = _crOrderBook(json),
-        rows = (0, _crOrderBookRows["default"])(_orderBook),
-        config = crTableConfig({
-      id: _itemKey,
-      title: title,
-      headers: HEADERS,
-      rows: rows,
-      dataSource: dataSource
-    });
-
-    return {
-      config: config
-    };
-  }
-};
+var toOrderBook = (0, _crAdapterOrderBook["default"])({
+  crTitle: crTitle,
+  crOrderBook: crOrderBook
+});
 var _default = toOrderBook;
 exports["default"] = _default;
 //# sourceMappingURL=toOrderBook.js.map

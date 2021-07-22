@@ -1,23 +1,6 @@
-import toTableFn from '../toTableFn';
-import crOrderBookRows from '../crOrderBookRows';
+import crAdapterOrderBook from '../crAdapterOrderBook';
 
-const { crTableConfig } = toTableFn
-, { HEADERS } = crOrderBookRows
-, _crTitle = ({ items }) => items[0].s;
-
-const toOrderBook = {
-  toConfig(json, option){
-    const { _itemKey, dataSource } = option
-    , title = _crTitle(option)
-    , _rows = crOrderBookRows(json)
-    , config = crTableConfig({
-      id: _itemKey, title,
-      headers: HEADERS,
-      rows: _rows,
-      dataSource
-    })
-    return { config };
-  }
-};
+const crTitle = ({ items }) => items[0].s;
+const toOrderBook = crAdapterOrderBook({ crTitle });
 
 export default toOrderBook

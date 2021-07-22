@@ -1,12 +1,9 @@
-import toTableFn from '../toTableFn';
-import crOrderBookRows from '../crOrderBookRows';
-
-const { crTableConfig } = toTableFn
-, { HEADERS } = crOrderBookRows;
+import crAdapterOrderBook from '../crAdapterOrderBook';
 
 const _isNumber = n => typeof n === 'number';
-
 const _compareByPrice = (a, b) => a[0] - b[0];
+
+const crTitle = ({ items }) => items[0].c + ' P0';
 
 /*
 From Bitfinex Documentation
@@ -18,7 +15,7 @@ From Bitfinex Documentation
 if AMOUNT > 0 then bid else ask.
 */
 
-const _crOrderBook = json => {
+const crOrderBook = json => {
   const asks = [], bids = [];
   json.forEach(arrItem => {
     if (_isNumber(arrItem[0])) {
@@ -33,21 +30,8 @@ const _crOrderBook = json => {
     asks: asks.sort(_compareByPrice),
     bids: bids.sort(_compareByPrice).reverse()
   }
-}
-
-const toOrderBook = {
-  toConfig(json, option){
-    const { _itemKey, dataSource, items } = option
-    , title = items[0].c + ' P0'
-    , _orderBook = _crOrderBook(json)
-    , rows = crOrderBookRows(_orderBook)
-    , config = crTableConfig({
-       id: _itemKey, title,
-       headers: HEADERS,
-       rows, dataSource
-    });
-    return { config };
-  }
 };
+
+const toOrderBook = crAdapterOrderBook({ crTitle, crOrderBook });
 
 export default toOrderBook
