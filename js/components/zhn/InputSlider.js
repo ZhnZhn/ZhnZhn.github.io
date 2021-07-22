@@ -3,22 +3,20 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
-var _useBool3 = _interopRequireDefault(require("../hooks/useBool"));
+var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 
 var _has = _interopRequireDefault(require("../has"));
 
 var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
 
 //import PropTypes from "prop-types";
-var S = {
+const S = {
   ROOT: {
     position: 'relative',
     width: '100%',
@@ -108,67 +106,48 @@ var S = {
   }
 };
 
-var _isNaN = Number.isNaN,
-    _noopFn = function _noopFn() {},
-    EVENT_NAME_MOVE = hasTouch ? 'touchmove' : 'mousemove',
-    EVENT_NAME_UP = hasTouch ? 'touchend' : 'mouseup',
-    _checkValueInMinMax = function _checkValueInMinMax(min, max, value) {
-  return value > max ? max : value < min ? min : value;
-},
-    _toPercent = function _toPercent(value, min, max) {
-  var _percent = (value - min) / (max - min);
+const _isNaN = Number.isNaN,
+      _noopFn = () => {},
+      hasTouch = _has.default.touch,
+      EVENT_NAME_MOVE = hasTouch ? 'touchmove' : 'mousemove',
+      EVENT_NAME_UP = hasTouch ? 'touchend' : 'mouseup',
+      _checkValueInMinMax = (min, max, value) => value > max ? max : value < min ? min : value,
+      _toPercent = (value, min, max) => {
+  const _percent = (value - min) / (max - min);
 
   return _isNaN(_percent) ? 0 : _percent * 100;
 },
-    _crWidthStyle = function _crWidthStyle(percent) {
-  return {
-    width: "calc(" + percent + "%)"
-  };
-},
-    _crLeftStyle = function _crLeftStyle(percent) {
-  return {
-    left: percent + "%"
-  };
-},
-    hasTouch = _has["default"].touch,
-    _getClienX = hasTouch ? function (evt) {
-  return (((evt || {}).touches || [])[0] || {}).clientX || 0;
-} : function (evt) {
-  return evt.clientX;
-},
-    _isUp = function _isUp(keyCode) {
-  return keyCode === 39 || keyCode === 38;
-},
-    _isDown = function _isDown(keyCode) {
-  return keyCode === 37 || keyCode === 40;
-},
-    _calcNewValueByKeyCode = function _calcNewValueByKeyCode(value, step, keyCode) {
-  return _isUp(keyCode) ? value + step : _isDown(keyCode) ? value - step : void 0;
-};
+      _crWidthStyle = percent => ({
+  width: "calc(" + percent + "%)"
+}),
+      _crLeftStyle = percent => ({
+  left: percent + "%"
+}),
+      _getClienX = hasTouch ? evt => (((evt || {}).touches || [])[0] || {}).clientX || 0 : evt => evt.clientX,
+      _isUp = keyCode => keyCode === 39 || keyCode === 38,
+      _isDown = keyCode => keyCode === 37 || keyCode === 40,
+      _calcNewValueByKeyCode = (value, step, keyCode) => _isUp(keyCode) ? value + step : _isDown(keyCode) ? value - step : void 0;
 
-var _useMouseDown = function _useMouseDown(setValueFromPosition) {
-  var _useBool = (0, _useBool3["default"])(false),
-      dragged = _useBool[0],
-      setDraggedTrue = _useBool[1],
-      setDraggedFalse = _useBool[2],
-      _refDragRunning = (0, _react.useRef)(false),
-      _hDragMouseMove = function _hDragMouseMove(event) {
+const _useMouseDown = setValueFromPosition => {
+  const [dragged, setDraggedTrue, setDraggedFalse] = (0, _useBool.default)(false),
+        _refDragRunning = (0, _react.useRef)(false),
+        _hDragMouseMove = event => {
     if (_refDragRunning.current) {
       return;
     }
 
     _refDragRunning.current = true;
-    requestAnimationFrame(function () {
+    requestAnimationFrame(() => {
       _refDragRunning.current = false;
       setValueFromPosition(event);
     });
   },
-      _hDragMouseUp = function _hDragMouseUp() {
+        _hDragMouseUp = () => {
     document.removeEventListener(EVENT_NAME_MOVE, _hDragMouseMove);
     document.removeEventListener(EVENT_NAME_UP, _hDragMouseUp);
     setDraggedFalse();
   },
-      _hMouseDown = function _hMouseDown(event) {
+        _hMouseDown = event => {
     // Cancel text selection
     if (!hasTouch) {
       event.preventDefault();
@@ -182,33 +161,26 @@ var _useMouseDown = function _useMouseDown(setValueFromPosition) {
   return [dragged, _hMouseDown];
 };
 
-var InputSlider = function InputSlider(_ref) {
-  var _ref$step = _ref.step,
-      step = _ref$step === void 0 ? 1 : _ref$step,
-      _ref$min = _ref.min,
-      min = _ref$min === void 0 ? 0 : _ref$min,
-      _ref$max = _ref.max,
-      max = _ref$max === void 0 ? 20 : _ref$max,
-      _ref$onChange = _ref.onChange,
-      onChange = _ref$onChange === void 0 ? _noopFn : _ref$onChange;
-
-  var _refTrack = (0, _react.useRef)(),
-      _useBool2 = (0, _useBool3["default"])(false),
-      hovered = _useBool2[0],
-      setHoveredTrue = _useBool2[1],
-      setHoveredFalse = _useBool2[2],
-      _useState = (0, _react.useState)(4),
-      value = _useState[0],
-      setValue = _useState[1],
-      _updateValue = function _updateValue(event, newValue) {
-    var _newValue = _checkValueInMinMax(min, max, newValue);
+const InputSlider = ({
+  step = 1,
+  min = 0,
+  max = 20,
+  onChange = _noopFn
+}) => {
+  const _refTrack = (0, _react.useRef)(),
+        [hovered, setHoveredTrue, setHoveredFalse] = (0, _useBool.default)(false),
+        [value, setValue] = (0, _react.useState)(4),
+        _updateValue = (event, newValue) => {
+    const _newValue = _checkValueInMinMax(min, max, newValue);
 
     setValue(_newValue);
     onChange(event, _newValue);
   },
-      _hKeyDown = function _hKeyDown(evt) {
-    var keyCode = evt.keyCode,
-        _newValue = _calcNewValueByKeyCode(value, step, keyCode);
+        _hKeyDown = evt => {
+    const {
+      keyCode
+    } = evt,
+          _newValue = _calcNewValueByKeyCode(value, step, keyCode);
 
     if (_newValue != null) {
       evt.preventDefault();
@@ -216,15 +188,15 @@ var InputSlider = function InputSlider(_ref) {
       _updateValue(event, _newValue);
     }
   },
-      _calcPositionFromEvent = function _calcPositionFromEvent(event) {
-    var _trackOffset = _refTrack.current.getBoundingClientRect()['left'];
+        _calcPositionFromEvent = event => {
+    const _trackOffset = _refTrack.current.getBoundingClientRect()['left'];
 
     return _getClienX(event) - _trackOffset;
   },
-      _setValueFromPosition = function _setValueFromPosition(event) {
-    var positionMax = _refTrack.current.clientWidth;
+        _setValueFromPosition = event => {
+    const positionMax = _refTrack.current.clientWidth;
 
-    var position = _calcPositionFromEvent(event);
+    let position = _calcPositionFromEvent(event);
 
     if (position < 0) {
       position = 0;
@@ -232,50 +204,56 @@ var InputSlider = function InputSlider(_ref) {
       position = positionMax;
     }
 
-    var v;
+    let v;
     v = position / positionMax * (max - min);
     v = Math.round(v / step) * step + min;
-    v = _mathFn["default"].roundBy(value, 5);
+    v = _mathFn.default.roundBy(value, 5);
 
     _updateValue(event, v);
   },
-      _useMouseDown2 = _useMouseDown(_setValueFromPosition),
-      dragged = _useMouseDown2[0],
-      _hMouseDown = _useMouseDown2[1];
+        [dragged, _hMouseDown] = _useMouseDown(_setValueFromPosition);
 
-  var _sliderHandlers = hasTouch ? {
+  const _sliderHandlers = hasTouch ? {
     onTouchStart: _hMouseDown
   } : {
     onMouseDown: _hMouseDown,
     onMouseEnter: setHoveredTrue,
     onMouseLeave: setHoveredFalse
   },
-      _btHandlers = hasTouch ? void 0 : {
+        _btHandlers = hasTouch ? void 0 : {
     onFocus: setHoveredTrue,
     onKeyDown: _hKeyDown,
     onBlur: setHoveredFalse
   },
-      _lineAfterStyle = hovered ? (0, _extends2["default"])({}, S.LINE_AFTER, S.LINE_HOVERED) : S.LINE_AFTER,
-      _circleStyle = dragged ? S.CIRCLE_DRAGGED : null,
-      _emberStyle = dragged ? S.EMBER : null,
-      _circleInnerEl = hovered || dragged ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: (0, _extends2["default"])({}, S.CIRCLE_INNER_EL, _emberStyle)
+        _lineAfterStyle = hovered ? { ...S.LINE_AFTER,
+    ...S.LINE_HOVERED
+  } : S.LINE_AFTER,
+        _circleStyle = dragged ? S.CIRCLE_DRAGGED : null,
+        _emberStyle = dragged ? S.EMBER : null,
+        _circleInnerEl = hovered || dragged ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: { ...S.CIRCLE_INNER_EL,
+      ..._emberStyle
+    }
   }) : null,
-      _percent = _toPercent(value, min, max),
-      _widthBeforeStyle = _crWidthStyle(_percent),
-      _widthAfterStyle = _crWidthStyle(100 - _percent),
-      _leftStyle = _crLeftStyle(_percent);
+        _percent = _toPercent(value, min, max),
+        _widthBeforeStyle = _crWidthStyle(_percent),
+        _widthAfterStyle = _crWidthStyle(100 - _percent),
+        _leftStyle = _crLeftStyle(_percent);
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", (0, _extends2["default"])({
-    style: S.ROOT
-  }, _sliderHandlers, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: S.ROOT,
+    ..._sliderHandlers,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       ref: _refTrack,
       style: S.ROOT_LINE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        style: (0, _extends2["default"])({}, S.LINE_BEFORE, _widthBeforeStyle)
+        style: { ...S.LINE_BEFORE,
+          ..._widthBeforeStyle
+        }
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        style: (0, _extends2["default"])({}, _lineAfterStyle, _widthAfterStyle)
+        style: { ..._lineAfterStyle,
+          ..._widthAfterStyle
+        }
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
         type: "hidden",
         step: step,
@@ -283,7 +261,7 @@ var InputSlider = function InputSlider(_ref) {
         max: max,
         value: value,
         required: true
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", (0, _extends2["default"])({
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         role: "slider",
         tabIndex: 0,
         "aria-valuenow": value,
@@ -291,15 +269,20 @@ var InputSlider = function InputSlider(_ref) {
         "aria-valuemax": max,
         "aria-orientation": "horizontal",
         "aria-labelledby": "discrete-slider-custom",
-        style: (0, _extends2["default"])({}, S.ROOT_CIRCLE, _circleStyle, _leftStyle)
-      }, _btHandlers, {
+        style: { ...S.ROOT_CIRCLE,
+          ..._circleStyle,
+          ..._leftStyle
+        },
+        ..._btHandlers,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          style: (0, _extends2["default"])({}, S.CIRCLE_INNER, _circleStyle),
+          style: { ...S.CIRCLE_INNER,
+            ..._circleStyle
+          },
           children: _circleInnerEl
         })
-      }))]
+      })]
     })
-  }));
+  });
 };
 /*
 static propTypes = {
@@ -312,5 +295,5 @@ static propTypes = {
 
 
 var _default = InputSlider;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=InputSlider.js.map

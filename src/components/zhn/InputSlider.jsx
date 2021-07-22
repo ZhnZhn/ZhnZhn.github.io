@@ -97,6 +97,7 @@ const S = {
 
 const _isNaN = Number.isNaN
 , _noopFn = () => {}
+, hasTouch = has.touch
 , EVENT_NAME_MOVE = hasTouch ? 'touchmove' : 'mousemove'
 , EVENT_NAME_UP = hasTouch ? 'touchend' : 'mouseup'
 , _checkValueInMinMax = (min, max, value) => value > max
@@ -112,7 +113,6 @@ const _isNaN = Number.isNaN
 , _crLeftStyle = percent => ({
    left: `${percent}%`
 })
-, hasTouch = has.touch
 , _getClienX = hasTouch
   ? evt => (((evt || {}).touches || [])[0] || {}).clientX || 0
   : evt => evt.clientX

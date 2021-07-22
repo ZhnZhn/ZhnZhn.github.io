@@ -28,6 +28,7 @@ module.exports = {
     "jsx-quotes": [2, "prefer-double"],
     "no-unused-expressions": 1,
     "no-unused-vars": [1, {"args": "none"}],
+    "no-use-before-define": ["error", { "variables": false }],
 
     //set react rules
     "react/display-name": 0,
