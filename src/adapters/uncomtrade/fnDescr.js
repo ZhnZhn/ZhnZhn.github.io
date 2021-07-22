@@ -1,25 +1,38 @@
+import AdapterFn from '../AdapterFn';
+import C from './conf';
 
-import C from './conf'
+const { crItemLink } = AdapterFn;
+
+const _isArr = Array.isArray
+, _crWebsiteLink = crItemLink.bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;")
+, _crDatasetLink = crItemLink.bind(null, "UN Comtrade Dataset Link")
+
+, _crDescrText = ({ cmdDescE, qtDesc }) => cmdDescE + ', ' + qtDesc + '.';
+
+const _crDescr = json => {
+  const { dataset } = json
+  , _firtsItem = dataset[0];
+  if (_isArr(dataset) && _firtsItem){
+    let i=0, max=dataset.length;
+    for (; i<max; i++) {
+      const _item = dataset[i];
+      if (_item.TradeQuantity) {
+        return _crDescrText(_item);
+      }
+    }
+    return _firtsItem.cmdDescE
+       ? _crDescrText(_firtsItem)
+       : C.DESCR_EMPTY;
+  }
+  return C.DESCR_EMPTY;
+};
 
 const fnDescr = {
 
-  toDescr: (json) => {
-    const { dataset } = json
-        , _firtsItem = dataset[0];
-    if (Array.isArray(dataset) && _firtsItem){
-      let i=0, max=dataset.length;
-      for (; i<max; i++) {
-        const { cmdDescE, qtDesc, TradeQuantity } = dataset[i];
-        if (TradeQuantity) {
-          return cmdDescE + ' ' + qtDesc + '.';
-        }
-      }
-      return _firtsItem.cmdDescE
-         ? _firtsItem.cmdDescE + ' ' + _firtsItem.qtDesc + '.'
-         : C.DESCR_EMPTY;
-    } else {
-      return C.DESCR_EMPTY;
-    }
+  toDescr: (json, option) => {
+    return _crDescr(json)
+      + _crWebsiteLink()
+      + _crDatasetLink(option.nativeHref);
   }
 
 }

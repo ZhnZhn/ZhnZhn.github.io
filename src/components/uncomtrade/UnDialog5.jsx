@@ -1,17 +1,20 @@
 import { Component } from 'react';
 
-import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
+import D from '../dialogs/DialogCell';
 
-const TRADE_FLOW = [
+const { Decor, crMenuMore } = D;
+
+const TRADE_FLOW_OPTIONS = [
   { caption: "Export Value", value: { rg: 2, measure: "TradeValue" } },
   { caption: "Export Weight", value: { rg: 2, measure: "NetWeight" } },
   { caption: "Export Quantity", value: { rg: 2, measure: "TradeQuantity" } },
-  { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } },
+  { caption: "Export Average Value Per Weight", value: { rg: 2, measure: "avgPerWeight" } },
+  { caption: "Export Average Value Per Quantity", value: { rg: 2, measure: "avgPerQuantity" } },
   { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } },
   { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } },
   { caption: "Import Quantity", value: { rg: 1, measure: "TradeQuantity" } },
-  { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }
+  { caption: "Import Average Value Per Weight", value: { rg: 1, measure: "avgPerWeight" } },
+  { caption: "Import Average Value Per Quantity", value: { rg: 1, measure: "avgPerQuantity" } }
 ];
 
 @Decor.dialog
@@ -26,13 +29,12 @@ class UnDialog5 extends Component {
     })
 
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { isShowOptions: true })
+      props, { isShowOptions: true, noDate: true })
 
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
       ...this._isWithInitialState(),
-      isShowDate: false,
       isShowOptions: false
     }
   }
@@ -60,17 +62,9 @@ class UnDialog5 extends Component {
     );
   }
   _createValidationMessages = () => {
-     let msg = [];
+     const { msg=[] } = this.groupItem.getValidation();
 
-     const {
-             isValid:isValid1, msg:msg1
-           } = this.groupItem.getValidation();
-     if (!isValid1) { msg = msg.concat(msg1); }
-
-     const {isValid, datesMsg} = this.datesFragment.getValidation();
-     if (!isValid) { msg = msg.concat(datesMsg); }
-
-     msg.isValid = (msg.length === 0) ? true : false;
+     msg.isValid = msg.length === 0 ? true : false;
      return msg;
   }
 
@@ -87,23 +81,21 @@ class UnDialog5 extends Component {
   _handleClose = () => {
     this._handleWithValidationClose()
   }
-  
+
   _refGroupItem = c => this.groupItem = c
-  _refDates = c => this.datesFragment = c
 
   render(){
     const {
-           caption, isShow, onShow, onFront,
-           oneCaption, oneURI, oneJsonProp,
-           twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
-           initFromDate, initToDate, msgOnNotValidFormat, onTestDate
-          } = this.props
-        , {
-            isToolbar,
-            isShowLabels,
-            isShowDate, isShowOptions,
-            validationMessages
-          } = this.state;
+       caption, isShow, onShow, onFront,
+       oneCaption, oneURI, oneJsonProp,
+       twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
+    } = this.props
+    , {
+      isToolbar,
+      isShowLabels,
+      isShowOptions,
+      validationMessages
+    } = this.state;
 
     return(
         <D.DraggableDialog
@@ -139,22 +131,11 @@ class UnDialog5 extends Component {
                  twoCaption={threeCaption}
                  msgOnNotSelected={msgOnNotSelected}
              />
-
-             <D.ShowHide isShow={isShowDate}>
-               <D.DatesFragment
-                 ref={this._refDates}
-                 isShowLabels={isShowLabels}
-                 initFromDate={initFromDate}
-                 initToDate={initToDate}
-                 msgOnNotValidFormat={msgOnNotValidFormat}
-                 onTestDate={onTestDate}
-               />
-             </D.ShowHide>
              <D.ShowHide isShow={isShowOptions}>
                <D.RowInputSelect
                  isShowLabels={isShowLabels}
                  caption="Trade Flow"
-                 options={TRADE_FLOW}
+                 options={TRADE_FLOW_OPTIONS}
                  placeholder="Default: Export Value"
                  onSelect={this._handleSelectTradeFlow}
                />

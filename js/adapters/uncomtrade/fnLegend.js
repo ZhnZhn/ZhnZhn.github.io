@@ -40,7 +40,7 @@ var fnLegend = {
   toAllLegend: function toAllLegend(arr, hm, measure) {
     var sum = fnLegend.calcRecentSum(hm),
         crItemWithRatio = fnLegend.fItemWithRatio(hm, sum);
-    return sum !== 0 && measure !== _conf["default"].AVG_PRICE ? arr.map(crItemWithRatio) : arr;
+    return sum !== 0 && measure !== _conf["default"].AVG_PER_W && measure !== _conf["default"].AVG_PER_Q ? arr.map(crItemWithRatio) : arr;
   },
   toWorldLegend: function toWorldLegend(arr, hm) {
     var world = hm[_conf["default"].WORLD],

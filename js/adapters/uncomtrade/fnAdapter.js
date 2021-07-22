@@ -23,6 +23,15 @@ var _fnLegend = _interopRequireDefault(require("./fnLegend"));
 
 var _conf = _interopRequireDefault(require("./conf"));
 
+var _assign = Object.assign;
+
+var _crInfo = function _crInfo(json, option) {
+  return {
+    frequency: "Annual",
+    description: _fnDescr["default"].toDescr(json, option)
+  };
+};
+
 var fnAdapter = {
   roundBy: _AdapterFn["default"].roundBy,
   crChartId: function crChartId(option) {
@@ -42,24 +51,15 @@ var fnAdapter = {
       symbol: 'circle'
     };
   },
-  crInfo: function crInfo(json) {
-    return {
-      description: _fnDescr["default"].toDescr(json),
-      frequency: "Annual"
-    };
-  },
   crZhConfig: function crZhConfig(option) {
     var dataSource = option.dataSource,
-        nativeHref = option.nativeHref,
         _id = this.crChartId(option);
 
     return {
       id: _id,
       key: _id,
       legend: [],
-      dataSource: dataSource,
-      linkFn: "UN_COMTRADE",
-      item: nativeHref
+      dataSource: dataSource
     };
   },
   addSeriaTo: function addSeriaTo(_ref) {
@@ -148,14 +148,15 @@ var fnAdapter = {
 
     var legend = config.zhConfig.legend;
     config.zhConfig.legend = one !== _conf["default"].ALL ? _fnLegend["default"].toWorldLegend(legend, hm) : _fnLegend["default"].toAllLegend(legend, hm, measure);
-    Object.assign(config.xAxis, {
+
+    _assign(config.xAxis, {
       categories: categories
     });
   },
   crBaseConfig: function crBaseConfig(json, option) {
     var title = option.title,
         subtitle = option.subtitle;
-    return (0, _ConfigBuilder["default"])().areaConfig().add('chart', _conf["default"].CHART).addCaption(title, subtitle).add('xAxis', _conf["default"].X_AXIS).add('yAxis', _conf["default"].Y_AXIS).addTooltip(_Tooltip["default"].categorySimple).add('info', this.crInfo(json)).add('zhConfig', this.crZhConfig(option)).toConfig();
+    return (0, _ConfigBuilder["default"])().areaConfig().add('chart', _conf["default"].CHART).addCaption(title, subtitle).add('xAxis', _conf["default"].X_AXIS).add('yAxis', _conf["default"].Y_AXIS).addTooltip(_Tooltip["default"].categorySimple).add('info', _crInfo(json, option)).add('zhConfig', this.crZhConfig(option)).toConfig();
   },
   toConfig: function toConfig(json, option) {
     var config = this.crBaseConfig(json, option);

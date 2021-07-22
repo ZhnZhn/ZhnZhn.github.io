@@ -11,7 +11,11 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var _conf = _interopRequireDefault(require("./conf"));
 
-var _rFnCrPoint2;
+var _rCrPoint2;
+
+//const { roundBy } = fnAdapter;
+var NET_WEIGHT = 'NetWeight';
+var QUANTITY = 'TradeQuantity';
 
 var _toSortedArr = function _toSortedArr(obj) {
   var arr = [];
@@ -26,7 +30,7 @@ var _toSortedArr = function _toSortedArr(obj) {
 var _crPoint = function _crPoint(y, forSort) {
   return {
     y: y,
-    forSort: forSort !== undefined ? forSort : y
+    forSort: forSort !== void 0 ? forSort : y
   };
 };
 
@@ -36,48 +40,47 @@ var _fCrValuePoint = function _fCrValuePoint(pnValue) {
   };
 };
 
-var _crNetWeightPoint = function _crNetWeightPoint(item) {
-  var _w = item.NetWeight,
-      _y = _w !== 0 ? _w : item.TradeValue ? undefined : 0;
+var _fCrPoint = function _fCrPoint(pn, item) {
+  var _w = item[pn],
+      _y = _w !== 0 ? _w : item.TradeValue ? void 0 : 0;
 
   return _crPoint(_y);
 };
 
-var _crQuantityPoint = function _crQuantityPoint(item) {
-  var _w = item.TradeQuantity,
-      _y = _w !== 0 ? _w : item.TradeValue ? undefined : 0;
+var _crNetWeightPoint = _fCrPoint.bind(null, NET_WEIGHT);
 
-  return _crPoint(_y);
-};
+var _crQuantityPoint = _fCrPoint.bind(null, QUANTITY);
 
-var _crAvgPricePoint = function _crAvgPricePoint(item) {
+var _fCrAvgPoint = function _fCrAvgPoint(pn, item) {
   var TradeValue = item.TradeValue,
-      NetWeight = item.NetWeight,
-      TradeQuantity = item.TradeQuantity,
-      _NetWeight = NetWeight || TradeQuantity,
-      _y = _NetWeight && TradeValue != null ? _fnAdapter["default"].roundBy(TradeValue / _NetWeight, 2) : undefined;
+      _v = item[pn],
+      _y = _v && TradeValue != null ? _fnAdapter["default"].roundBy(TradeValue / _v, 2) : void 0;
 
-  return _crPoint(_y, _NetWeight);
+  return _crPoint(_y, _v);
 };
 
-var _rFnCrPoint = (_rFnCrPoint2 = {
+var _crAvgValuePerWeight = _fCrAvgPoint.bind(null, NET_WEIGHT);
+
+var _crAvgValuePerQuantity = _fCrAvgPoint.bind(null, QUANTITY);
+
+var _rCrPoint = (_rCrPoint2 = {
   fDf: _fCrValuePoint
-}, _rFnCrPoint2[_conf["default"].NET_WEIGHT] = _crNetWeightPoint, _rFnCrPoint2[_conf["default"].QUANTITY] = _crQuantityPoint, _rFnCrPoint2[_conf["default"].AVG_PRICE] = _crAvgPricePoint, _rFnCrPoint2);
+}, _rCrPoint2[_conf["default"].NET_WEIGHT] = _crNetWeightPoint, _rCrPoint2[_conf["default"].QUANTITY] = _crQuantityPoint, _rCrPoint2[_conf["default"].AVG_PER_W] = _crAvgValuePerWeight, _rCrPoint2[_conf["default"].AVG_PER_Q] = _crAvgValuePerQuantity, _rCrPoint2);
 
 var _fPoint = function _fPoint(pnValue) {
-  var _crValue = _rFnCrPoint[pnValue] ? _rFnCrPoint[pnValue] : _rFnCrPoint.fDf(pnValue);
+  var _crPoint = _rCrPoint[pnValue] || _rCrPoint.fDf(pnValue);
 
   return function (item) {
     return (0, _extends2["default"])({
       isCategory: true,
       x: item.period
-    }, _crValue(item));
+    }, _crPoint(item));
   };
 };
 
 var _getRecentValueForSort = function _getRecentValueForSort(points) {
   var len = points && points.length;
-  return len && len > 0 ? points[len - 1].forSort : undefined;
+  return len && len > 0 ? points[len - 1].forSort : void 0;
 };
 
 var fnHm = {
@@ -115,7 +118,7 @@ var fnHm = {
       if (_point.y != null) {
         var ptTitle = item[pnCountry];
 
-        if (_hm[ptTitle] === undefined) {
+        if (_hm[ptTitle] === void 0) {
           _hm[ptTitle] = [];
         }
 
@@ -123,7 +126,7 @@ var fnHm = {
 
         var period = item.period;
 
-        if (_category[period] === undefined) {
+        if (_category[period] === void 0) {
           _category[period] = period;
         }
       }

@@ -10,6 +10,13 @@ import fnLegend from './fnLegend'
 
 import C from './conf'
 
+const _assign = Object.assign;
+
+const _crInfo = (json, option) => ({
+  frequency: "Annual",
+  description: fnDescr.toDescr(json, option),
+});
+
 const fnAdapter = {
    roundBy: AdapterFn.roundBy,
 
@@ -27,22 +34,15 @@ const fnAdapter = {
       symbol: 'circle'
     };
   },
-
-  crInfo: json => ({
-    description: fnDescr.toDescr(json),
-    frequency: "Annual"
-  }),
-
+  
   crZhConfig(option) {
-    const { dataSource, nativeHref } = option
+    const { dataSource } = option
         , _id = this.crChartId(option);
     return {
       id: _id,
       key: _id,
       legend: [],
-      dataSource: dataSource,
-      linkFn: "UN_COMTRADE",
-      item: nativeHref
+      dataSource: dataSource
     };
   },
 
@@ -113,7 +113,7 @@ const fnAdapter = {
        ? fnLegend.toWorldLegend(legend, hm)
        : fnLegend.toAllLegend(legend, hm, measure)
 
-    Object.assign(config.xAxis, { categories })
+    _assign(config.xAxis, { categories })
   },
 
   crBaseConfig(json, option) {
@@ -125,7 +125,7 @@ const fnAdapter = {
       .add('xAxis', C.X_AXIS)
       .add('yAxis', C.Y_AXIS)
       .addTooltip(Tooltip.categorySimple)
-      .add('info', this.crInfo(json))
+      .add('info', _crInfo(json, option))
       .add('zhConfig', this.crZhConfig(option))
       .toConfig();
   },

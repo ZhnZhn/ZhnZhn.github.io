@@ -1,16 +1,16 @@
 
-import fns from './fnAdapter'
-import C from './conf'
+import fns from './fnAdapter';
+import C from './conf';
 
 const fnLegend = {
 
   fItemWithRatio: (hm, sum) => (item) => {
     const { name } = item
-        , _points = hm[name]
-        , _p = _points[_points.length-1]
-        , _ratio = _p
-              ? ' ' + fns.roundBy((_p.y/sum)*100, 1)+'%'
-              : '';
+    , _points = hm[name]
+    , _p = _points[_points.length-1]
+    , _ratio = _p
+          ? ' ' + fns.roundBy((_p.y/sum)*100, 1)+'%'
+          : '';
     return {
        ...item,
        name: name + _ratio
@@ -33,20 +33,21 @@ const fnLegend = {
 
   toAllLegend: (arr, hm, measure) => {
     const sum = fnLegend.calcRecentSum(hm)
-        , crItemWithRatio = fnLegend.fItemWithRatio(hm, sum);
-    return (sum !== 0 && measure !== C.AVG_PRICE)
+    , crItemWithRatio = fnLegend.fItemWithRatio(hm, sum);
+
+    return sum !== 0 && measure !== C.AVG_PER_W && measure !== C.AVG_PER_Q
        ? arr.map(crItemWithRatio)
        : arr;
   },
 
   toWorldLegend: (arr, hm) => {
     const world = hm[C.WORLD]
-        , sum = world
-            ? world[world.length-1].y
-            : fnLegend.calcRecentSum(hm)
-        , crItemWithRatio = fnLegend.fItemWithRatio(hm, sum);
+    , sum = world
+        ? world[world.length-1].y
+        : fnLegend.calcRecentSum(hm)
+    , crItemWithRatio = fnLegend.fItemWithRatio(hm, sum);
 
-    return (sum !== 0 && sum != null)
+    return sum !== 0 && sum != null
        ? arr.map(crItemWithRatio)
        : arr;
   }

@@ -8,10 +8,12 @@ const C = {
   NET_WEIGHT: 'NetWeight',
   QUANTITY: 'TradeQuantity',
 
+  AVG_PER_W: 'avgPerWeight',
+  AVG_PER_Q: 'avgPerQuantity',
+
   DESCR_EMPTY: 'Dataset is empty.',
 
-  MM_DD: '-12-31',
-  AVG_PRICE: 'avgPrice',
+  MM_DD: '-12-31',  
   WORLD_COLOR: '#7cb5ec',
 
   CHART: {

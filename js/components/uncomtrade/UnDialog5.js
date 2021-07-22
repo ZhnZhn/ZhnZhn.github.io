@@ -21,7 +21,7 @@ var _dec, _class, _temp;
 
 var Decor = _DialogCell["default"].Decor,
     crMenuMore = _DialogCell["default"].crMenuMore;
-var TRADE_FLOW = [{
+var TRADE_FLOW_OPTIONS = [{
   caption: "Export Value",
   value: {
     rg: 2,
@@ -40,10 +40,16 @@ var TRADE_FLOW = [{
     measure: "TradeQuantity"
   }
 }, {
-  caption: "Export Average Price",
+  caption: "Export Average Value Per Weight",
   value: {
     rg: 2,
-    measure: "avgPrice"
+    measure: "avgPerWeight"
+  }
+}, {
+  caption: "Export Average Value Per Quantity",
+  value: {
+    rg: 2,
+    measure: "avgPerQuantity"
   }
 }, {
   caption: "Import Value",
@@ -64,10 +70,16 @@ var TRADE_FLOW = [{
     measure: "TradeQuantity"
   }
 }, {
-  caption: "Import Average Price",
+  caption: "Import Average Value Per Weight",
   value: {
     rg: 1,
-    measure: "avgPrice"
+    measure: "avgPerWeight"
+  }
+}, {
+  caption: "Import Average Value Per Quantity",
+  value: {
+    rg: 1,
+    measure: "avgPerQuantity"
   }
 }];
 var UnDialog5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
@@ -91,32 +103,18 @@ var UnDialog5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/functi
     };
 
     _this._createValidationMessages = function () {
-      var msg = [];
-
       var _this$groupItem$getVa = _this.groupItem.getValidation(),
-          isValid1 = _this$groupItem$getVa.isValid,
-          msg1 = _this$groupItem$getVa.msg;
-
-      if (!isValid1) {
-        msg = msg.concat(msg1);
-      }
-
-      var _this$datesFragment$g = _this.datesFragment.getValidation(),
-          isValid = _this$datesFragment$g.isValid,
-          datesMsg = _this$datesFragment$g.datesMsg;
-
-      if (!isValid) {
-        msg = msg.concat(datesMsg);
-      }
+          _this$groupItem$getVa2 = _this$groupItem$getVa.msg,
+          msg = _this$groupItem$getVa2 === void 0 ? [] : _this$groupItem$getVa2;
 
       msg.isValid = msg.length === 0 ? true : false;
       return msg;
     };
 
     _this._createLoadOption = function () {
-      var _this$groupItem$getVa2 = _this.groupItem.getValues(),
-          two = _this$groupItem$getVa2.one,
-          three = _this$groupItem$getVa2.two;
+      var _this$groupItem$getVa3 = _this.groupItem.getValues(),
+          two = _this$groupItem$getVa3.one,
+          three = _this$groupItem$getVa3.two;
 
       return _this.props.loadFn(_this.props, {
         one: _this.one,
@@ -134,20 +132,16 @@ var UnDialog5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/functi
       return _this.groupItem = c;
     };
 
-    _this._refDates = function (c) {
-      return _this.datesFragment = c;
-    };
-
     _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
     _this.toolbarButtons = _this._createType2WithToolbar(props, {
-      isShowOptions: true
+      isShowOptions: true,
+      noDate: true
     });
     _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
     _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
-      isShowDate: false,
       isShowOptions: false
     });
     return _this;
@@ -179,14 +173,9 @@ var UnDialog5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/functi
         twoJsonProp = _this$props.twoJsonProp,
         threeCaption = _this$props.threeCaption,
         msgOnNotSelected = _this$props.msgOnNotSelected,
-        initFromDate = _this$props.initFromDate,
-        initToDate = _this$props.initToDate,
-        msgOnNotValidFormat = _this$props.msgOnNotValidFormat,
-        onTestDate = _this$props.onTestDate,
         _this$state = this.state,
         isToolbar = _this$state.isToolbar,
         isShowLabels = _this$state.isShowLabels,
-        isShowDate = _this$state.isShowDate,
         isShowOptions = _this$state.isShowOptions,
         validationMessages = _this$state.validationMessages;
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
@@ -218,21 +207,11 @@ var UnDialog5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/functi
         twoCaption: threeCaption,
         msgOnNotSelected: msgOnNotSelected
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
-        isShow: isShowDate,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
-          ref: this._refDates,
-          isShowLabels: isShowLabels,
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          msgOnNotValidFormat: msgOnNotValidFormat,
-          onTestDate: onTestDate
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
         isShow: isShowOptions,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
           isShowLabels: isShowLabels,
           caption: "Trade Flow",
-          options: TRADE_FLOW,
+          options: TRADE_FLOW_OPTIONS,
           placeholder: "Default: Export Value",
           onSelect: this._handleSelectTradeFlow
         })

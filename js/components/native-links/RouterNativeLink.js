@@ -15,8 +15,6 @@ var _NasdaqLink = _interopRequireDefault(require("./NasdaqLink"));
 
 var _LmeLink = _interopRequireDefault(require("./LmeLink"));
 
-var _UnComtradeLink = _interopRequireDefault(require("./UnComtradeLink"));
-
 var _FaoStatLink = _interopRequireDefault(require("./FaoStatLink"));
 
 var _FredLink = _interopRequireDefault(require("./FredLink"));
@@ -31,7 +29,6 @@ var RouterNativeLink = {
   EURONEXT: _EuronextLink["default"],
   NASDAQ: _NasdaqLink["default"],
   LME: _LmeLink["default"],
-  UN_COMTRADE: _UnComtradeLink["default"],
   FAO_STAT: _FaoStatLink["default"],
   FRED: _FredLink["default"],
   CRC: _CrcLink["default"],

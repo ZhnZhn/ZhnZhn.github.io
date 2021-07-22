@@ -4,7 +4,6 @@ import QuandlLink from './QuandlLink'
 import EuronextLink from './EuronextLink'
 import NasdaqLink from './NasdaqLink'
 import LmeLink from './LmeLink'
-import UnComtradeLink from './UnComtradeLink'
 import FaoStatLink from './FaoStatLink'
 import FredLink from './FredLink'
 import CrcLink from './CrcLink'
@@ -16,7 +15,6 @@ const RouterNativeLink = {
   EURONEXT: EuronextLink,
   NASDAQ: NasdaqLink,
   LME: LmeLink,
-  UN_COMTRADE: UnComtradeLink,
   FAO_STAT: FaoStatLink,
   FRED: FredLink,
   CRC: CrcLink,

@@ -1,6 +1,11 @@
 
-import fns from './fnAdapter'
-import C from './conf'
+import fns from './fnAdapter';
+import C from './conf';
+
+//const { roundBy } = fnAdapter;
+
+const NET_WEIGHT = 'NetWeight';
+const QUANTITY = 'TradeQuantity';
 
 const _toSortedArr = obj => {
   const arr = [];
@@ -12,64 +17,59 @@ const _toSortedArr = obj => {
 
 const _crPoint = (y, forSort) => ({
   y: y,
-  forSort: forSort !== undefined
+  forSort: forSort !== void 0
     ? forSort : y
 });
 
 const _fCrValuePoint = pnValue =>
    item => _crPoint(item[pnValue]);
 
-const _crNetWeightPoint = item => {
-  const _w = item.NetWeight
+const _fCrPoint = (pn, item) => {
+  const _w = item[pn]
   , _y = _w !== 0 ? _w
-    : item.TradeValue ? undefined : 0 ;
+    : item.TradeValue ? void 0 : 0 ;
   return _crPoint(_y);
 };
 
-const _crQuantityPoint = item => {
-  const _w = item.TradeQuantity
-  , _y = _w !== 0 ? _w
-    : item.TradeValue ? undefined : 0 ;
-  return _crPoint(_y);
-};
+const _crNetWeightPoint = _fCrPoint.bind(null, NET_WEIGHT)
+const _crQuantityPoint = _fCrPoint.bind(null, QUANTITY)
 
-const _crAvgPricePoint = item => {
-  const {
-    TradeValue,
-    NetWeight, TradeQuantity
-  } = item
-  , _NetWeight = NetWeight || TradeQuantity
-  , _y = _NetWeight && TradeValue != null
-       ? fns.roundBy(TradeValue/_NetWeight, 2)
-       : undefined;
-  return _crPoint(_y, _NetWeight);
-};
 
-const _rFnCrPoint = {
+const _fCrAvgPoint = (pn, item) => {
+  const { TradeValue } = item
+  , _v = item[pn]
+  , _y = _v && TradeValue != null
+       ? fns.roundBy(TradeValue/_v, 2)
+       : void 0;
+  return _crPoint(_y, _v);
+}
+
+const _crAvgValuePerWeight = _fCrAvgPoint.bind(null, NET_WEIGHT)
+const _crAvgValuePerQuantity = _fCrAvgPoint.bind(null, QUANTITY)
+
+const _rCrPoint = {
   fDf: _fCrValuePoint,
   [C.NET_WEIGHT]: _crNetWeightPoint,
   [C.QUANTITY]: _crQuantityPoint,
-  [C.AVG_PRICE]: _crAvgPricePoint
+  [C.AVG_PER_W]: _crAvgValuePerWeight,
+  [C.AVG_PER_Q]: _crAvgValuePerQuantity
 };
 
 const _fPoint = pnValue => {
-  const _crValue = _rFnCrPoint[pnValue]
-    ? _rFnCrPoint[pnValue]
-    : _rFnCrPoint.fDf(pnValue);
-  return item => {
-    return {
-      isCategory: true,
-      x: item.period,
-      ..._crValue(item)
-    };
-  };
+  const _crPoint = _rCrPoint[pnValue]
+    || _rCrPoint.fDf(pnValue);
+  return item => ({
+     isCategory: true,
+     x: item.period,
+     ..._crPoint(item)
+  });
 };
 
 const _getRecentValueForSort = points => {
    const len = points && points.length;
    return len && len > 0
      ? points[len-1].forSort
-     : undefined;
+     : void 0;
 };
 
 const fnHm = {
@@ -105,13 +105,13 @@ const fnHm = {
       if (_point.y != null) {
         const ptTitle = item[pnCountry];
 
-        if (_hm[ptTitle] === undefined) {
+        if (_hm[ptTitle] === void 0) {
           _hm[ptTitle] = []
         }
         _hm[ptTitle].push(_point)
 
         const period = item.period;
-        if (_category[period] === undefined) {
+        if (_category[period] === void 0) {
           _category[period] = period
         }
       }
