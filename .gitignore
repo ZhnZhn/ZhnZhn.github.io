@@ -1,17 +1,7 @@
 .languagebabel
-jspm_packages
 node_modules
-local_modules
 _start_server.bat
 _init_checkout.bat
-bundle.min.js
-bundle.min.js.map
-config.js
-dependency-bundle.js
-dependency-bundle.js.map
-erc.html
-erc-hot.html
-index_jspm.html
 lint.txt
 lib-dev
 stats.json
