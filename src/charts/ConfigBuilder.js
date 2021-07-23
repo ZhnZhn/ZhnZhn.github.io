@@ -128,7 +128,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       .add('series', []);
   },
   categoryConfig(categories=[]){
-    this.config = crAreaConfig()
+    this.config = crAreaConfig({ spacingTop: 25 })
     const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}
     return this.add('xAxis', xAxis)
       .add('yAxis', C.CATEGORIES_Y_AXIS);
@@ -191,7 +191,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       : this;
   },
 
-  addZhPointsIf(data, propName='zhIsMfi', is=true){    
+  addZhPointsIf(data, propName='zhIsMfi', is=true){
     return is
       ? this.add({ zhPoints: data, [propName]: true })
       : this;

@@ -1,28 +1,27 @@
-
-import fns from './tpFn'
-import C from './tpConfig'
+import fns from './tpFn';
 
 const {
-   crHeader, crRow, crSpan,
+   crHeader, crRow,
    toNumberFormatAll,
    addHideHandler
  } = fns;
 
 const _crSimple = function({ id, point }){
    const {
-     y, status,
+     y, status, d,
      category, c,
      series={}
    } = point
-   , { name, color } = series;
-   return `${crHeader(category || c, id)}
+   , { name, color } = series
+   , _c = category || c
+   , _date = d ? `${_c}-${d}` : _c
+   return `${crHeader(_date, id)}
    <div class="tp__body">
      ${crRow('Value', toNumberFormatAll(y), { status })}
      ${crRow('Seria', name, { color })}
    </div>`;
  };
 
-//style='cursor:pointer;pointer-events:visible;color:cadetblue;'
 const _crRemove = function({ id, point }){
   const { y, c, category, status } = point;
   return `${crHeader(c || category, id)}
@@ -44,27 +43,6 @@ const _addCategoryHandlers = (id, point) => {
   setTimeout(() => _addCategoryHandlersImpl(id, point), 1)
 }
 
-const _crY = (y, status) => status && status !== ':'
-  ? `${y} (${status})`
-  : y;
-
-const _fnCategoryRHLY = function({ id, point }){
-  const { high, yHigh, yHs, low, yLow, yLs, c } = point
-  , _high = _crY(high, yHs)
-  , _low = _crY(low, yLs);
-  return `${crHeader(c, id)}
-  <div class="tp__body">
-    <div>
-      ${crSpan('High', _high)}
-      ${crSpan('', yHigh, { color: C.YEAR_C })}
-    </div>
-    <div>
-      ${crSpan('&nbsp;Low', _low)}
-      ${crSpan('', yLow, { color: C.YEAR_C })}
-    </div>
-  </div>`;
-};
-
 const tpCategory = {
   simple: {
     fnTemplate: _crSimple,
@@ -72,9 +50,6 @@ const tpCategory = {
   remove: {
     fnTemplate: _crRemove,
     onAfterRender: _addCategoryHandlers
-  },
-  rhly: {
-    fnTemplate: _fnCategoryRHLY
   }
 };
 

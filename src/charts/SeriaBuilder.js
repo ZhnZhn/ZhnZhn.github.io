@@ -12,21 +12,7 @@ const C = {
      marker: {
        symbol: 'circle'
      }
-  },
-  AREA_RANGE: {
-    type: 'arearange',
-    color: '#7cb5ec',
-    fillColor: {
-      linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-      stops: [
-         [0, "rgba(69, 114, 167, 1)"],
-         [1, "rgba(2, 0, 0, 0)"]
-      ]
-    },
-    marker: {
-      radius: 0
-    }
-  },
+  },  
   TREE_MAP: {
         type : 'treemap',
         layoutAlgorithm: 'squarified',
@@ -94,9 +80,6 @@ const SeriaBuilder = {
     this.config = { ...CONFIG, ...option }
     this.add('tooltip', Chart.fTooltip(tooltip))
     return this;
-  },
-  areaRangeSeria(tooltip, option){
-    return this._seria(C.AREA_RANGE, tooltip, option);
   },
   treeMapSeria(tooltip, option){
     return this._seria(C.TREE_MAP, tooltip, option);

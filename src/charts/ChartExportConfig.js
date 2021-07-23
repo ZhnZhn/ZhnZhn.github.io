@@ -12,10 +12,7 @@ const ChartExportConfig = {
     plotOptions: {
       area: {
         fillColor: 'white'
-      },
-      arearange: {
-        fillColor: 'white'
-      }
+      }      
     },
     xAxis : {
       lineWidth: 2,
@@ -58,9 +55,6 @@ const ChartExportConfig = {
  BLACK_SERIES : {
    plotOptions: {
      area: {
-       color: 'black'
-     },
-     arearange: {
        color: 'black'
      },
      spline: {

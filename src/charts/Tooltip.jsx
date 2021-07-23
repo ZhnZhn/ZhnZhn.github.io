@@ -58,8 +58,7 @@ const Tooltip = {
   vTdmy: _fFormatter({...tpSpline.vTdmy}),
 
   categorySimple: _fFormatter({...tpCategory.simple}),
-  category: _fFormatter({...tpCategory.remove}),
-  categoryRHLY: _fFormatter({...tpCategory.rhly}),
+  category: _fFormatter({...tpCategory.remove}),  
 
   exDividend: _fFormatter({...tpScatter.exDividend}),
   splitRatio: _fFormatter({...tpScatter.splitRatio}),

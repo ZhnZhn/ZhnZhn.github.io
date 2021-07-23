@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../src/charts/ChartExportConfig.js"],"names":["merge","Highcharts","ChartExportConfig","DEFAULT","chart","plotBackgroundColor","backgroundColor","plotOptions","area","fillColor","arearange","xAxis","lineWidth","lineColor","gridLineColor","yAxis","BLACK_AXIS","labels","style","color","tickColor","BLACK_TITLE","title","BLACK_SERIES","spline","line","fDefault","fBlackAxis","fBlackAxisTitle","fBlackAll","createOptionStyles","caption","value"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,KAAK,GAAGC,uBAAWD,KAAzB;AAEA,IAAME,iBAAiB,GAAG;AAExBC,EAAAA,OAAO,EAAG;AACRC,IAAAA,KAAK,EAAG;AACNC,MAAAA,mBAAmB,EAAE,OADf;AAENC,MAAAA,eAAe,EAAG;AAFZ,KADA;AAKRC,IAAAA,WAAW,EAAE;AACXC,MAAAA,IAAI,EAAE;AACJC,QAAAA,SAAS,EAAE;AADP,OADK;AAIXC,MAAAA,SAAS,EAAE;AACTD,QAAAA,SAAS,EAAE;AADF;AAJA,KALL;AAaRE,IAAAA,KAAK,EAAG;AACNC,MAAAA,SAAS,EAAE,CADL;AAENC,MAAAA,SAAS,EAAE,OAFL;AAGNC,MAAAA,aAAa,EAAE;AAHT,KAbA;AAkBRC,IAAAA,KAAK,EAAG;AACNH,MAAAA,SAAS,EAAE,CADL;AAENC,MAAAA,SAAS,EAAE,OAFL;AAGNC,MAAAA,aAAa,EAAE;AAHT;AAlBA,GAFc;AA2BxBE,EAAAA,UAAU,EAAG;AACXL,IAAAA,KAAK,EAAE;AACJM,MAAAA,MAAM,EAAE;AACNC,QAAAA,KAAK,EAAE;AACNC,UAAAA,KAAK,EAAE;AADD;AADD;AADJ,KADI;AAQZJ,IAAAA,KAAK,EAAE;AACJK,MAAAA,SAAS,EAAE,OADP;AAEJH,MAAAA,MAAM,EAAE;AACNC,QAAAA,KAAK,EAAE;AACLC,UAAAA,KAAK,EAAE;AADF;AADD;AAFJ;AARK,GA3BW;AA6CzBE,EAAAA,WAAW,EAAG;AACZC,IAAAA,KAAK,EAAG;AACNJ,MAAAA,KAAK,EAAG;AACNC,QAAAA,KAAK,EAAG;AADF;AADF;AADI,GA7CW;AAqDzBI,EAAAA,YAAY,EAAG;AACbhB,IAAAA,WAAW,EAAE;AACXC,MAAAA,IAAI,EAAE;AACJW,QAAAA,KAAK,EAAE;AADH,OADK;AAIXT,MAAAA,SAAS,EAAE;AACTS,QAAAA,KAAK,EAAE;AADE,OAJA;AAOXK,MAAAA,MAAM,EAAE;AACNL,QAAAA,KAAK,EAAE;AADD,OAPG;AAUXM,MAAAA,IAAI,EAAE;AACJN,QAAAA,KAAK,EAAE;AADH;AAVK;AADA,GArDU;AAsEzBnB,EAAAA,KAAK,EAAEA,KAtEkB;AAwEzB0B,EAAAA,QAxEyB,sBAwEf;AACR,WAAO,KAAKvB,OAAZ;AACD,GA1EwB;AA4EzBwB,EAAAA,UA5EyB,wBA4Eb;AACV,WAAO3B,KAAK,CAAC,KAAD,EAAQ,EAAR,EACV,KAAKgB,UADK,CAAZ;AAGD,GAhFwB;AAkFzBY,EAAAA,eAlFyB,6BAkFR;AACf,WAAO5B,KAAK,CAAC,KAAD,EAAQ,EAAR,EACV,KAAKgB,UADK,EAEV,KAAKK,WAFK,CAAZ;AAID,GAvFwB;AAyFzBQ,EAAAA,SAzFyB,uBAyFd;AACT,WAAO7B,KAAK,CAAC,KAAD,EAAQ,EAAR,EACV,KAAKgB,UADK,EAEV,KAAKK,WAFK,EAGV,KAAKE,YAHK,CAAZ;AAKD,GA/FwB;AAiGzBO,EAAAA,kBAjGyB,gCAiGL;AAClB,WAAO,CACL;AAAEC,MAAAA,OAAO,EAAE,SAAX;AAAuBC,MAAAA,KAAK,EAAG;AAA/B,KADK,EAEL;AACGD,MAAAA,OAAO,EAAE,sBADZ;AAEGC,MAAAA,KAAK,EAAG,KAAKL,UAAL;AAFX,KAFK,EAKL;AACGI,MAAAA,OAAO,EAAE,oCADZ;AAEGC,MAAAA,KAAK,EAAG,KAAKJ,eAAL;AAFX,KALK,EASL;AAAEG,MAAAA,OAAO,EAAE,WAAX;AAAyBC,MAAAA,KAAK,EAAE,KAAKH,SAAL;AAAhC,KATK,CAAP;AAWD;AA7GwB,CAA1B;eAiHe3B,iB","sourcesContent":["import Highcharts from 'highcharts';\r\n\r\nconst merge = Highcharts.merge;\r\n\r\nconst ChartExportConfig = {\r\n\r\n  DEFAULT : {\r\n    chart : {\r\n      plotBackgroundColor: 'white',\r\n      backgroundColor : 'white'\r\n    },\r\n    plotOptions: {\r\n      area: {\r\n        fillColor: 'white'\r\n      },\r\n      arearange: {\r\n        fillColor: 'white'\r\n      }\r\n    },\r\n    xAxis : {\r\n      lineWidth: 2,\r\n      lineColor: 'black',\r\n      gridLineColor: 'gray'\r\n    },\r\n    yAxis : {\r\n      lineWidth: 2,\r\n      lineColor: 'black',\r\n      gridLineColor: 'gray'\r\n    }\r\n  },\r\n\r\n  BLACK_AXIS : {\r\n    xAxis: {\r\n       labels: {\r\n         style: {\r\n          color: 'black'\r\n         }\r\n      }\r\n   },\r\n   yAxis: {\r\n      tickColor: 'black',\r\n      labels: {\r\n        style: {\r\n          color: 'black'\r\n        }\r\n     }\r\n   }\r\n },\r\n\r\n BLACK_TITLE : {\r\n   title : {\r\n     style : {\r\n       color : 'black'\r\n     }\r\n   }\r\n },\r\n\r\n BLACK_SERIES : {\r\n   plotOptions: {\r\n     area: {\r\n       color: 'black'\r\n     },\r\n     arearange: {\r\n       color: 'black'\r\n     },\r\n     spline: {\r\n       color: 'black'\r\n     },\r\n     line: {\r\n       color: 'black'\r\n     }\r\n   }\r\n },\r\n\r\n merge: merge,\r\n\r\n fDefault(){\r\n   return this.DEFAULT;\r\n },\r\n\r\n fBlackAxis(){\r\n   return merge(false, {},\r\n     this.BLACK_AXIS\r\n   );\r\n },\r\n\r\n fBlackAxisTitle(){\r\n   return merge(false, {},\r\n     this.BLACK_AXIS,\r\n     this.BLACK_TITLE\r\n   );\r\n },\r\n\r\n fBlackAll(){\r\n   return merge(false, {},\r\n     this.BLACK_AXIS,\r\n     this.BLACK_TITLE,\r\n     this.BLACK_SERIES\r\n   );\r\n },\r\n\r\n createOptionStyles(){\r\n   return [\r\n     { caption: 'Default' , value : {} },\r\n     {\r\n        caption: 'Default + Black Axis' ,\r\n        value : this.fBlackAxis() },\r\n     {\r\n        caption: 'Default + Black Axis + Black Title',\r\n        value : this.fBlackAxisTitle()\r\n     },\r\n     { caption: 'All Black' , value: this.fBlackAll() }\r\n   ];\r\n }\r\n\r\n};\r\n\r\nexport default ChartExportConfig\r\n"],"file":"ChartExportConfig.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/charts/ChartExportConfig.js"
+ ],
+ "file": "../../src/charts/ChartExportConfig.js",
+ "names": [
+  "merge",
+  "Highcharts",
+  "ChartExportConfig",
+  "DEFAULT",
+  "chart",
+  "plotBackgroundColor",
+  "backgroundColor",
+  "plotOptions",
+  "area",
+  "fillColor",
+  "xAxis",
+  "lineWidth",
+  "lineColor",
+  "gridLineColor",
+  "yAxis",
+  "BLACK_AXIS",
+  "labels",
+  "style",
+  "color",
+  "tickColor",
+  "BLACK_TITLE",
+  "title",
+  "BLACK_SERIES",
+  "spline",
+  "line",
+  "fDefault",
+  "fBlackAxis",
+  "fBlackAxisTitle",
+  "fBlackAll",
+  "createOptionStyles",
+  "caption",
+  "value"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,KAAK,GAAGC,oBAAWD,KAAzB;AAEA,MAAME,iBAAiB,GAAG;AAExBC,EAAAA,OAAO,EAAG;AACRC,IAAAA,KAAK,EAAG;AACNC,MAAAA,mBAAmB,EAAE,OADf;AAENC,MAAAA,eAAe,EAAG;AAFZ,KADA;AAKRC,IAAAA,WAAW,EAAE;AACXC,MAAAA,IAAI,EAAE;AACJC,QAAAA,SAAS,EAAE;AADP;AADK,KALL;AAURC,IAAAA,KAAK,EAAG;AACNC,MAAAA,SAAS,EAAE,CADL;AAENC,MAAAA,SAAS,EAAE,OAFL;AAGNC,MAAAA,aAAa,EAAE;AAHT,KAVA;AAeRC,IAAAA,KAAK,EAAG;AACNH,MAAAA,SAAS,EAAE,CADL;AAENC,MAAAA,SAAS,EAAE,OAFL;AAGNC,MAAAA,aAAa,EAAE;AAHT;AAfA,GAFc;AAwBxBE,EAAAA,UAAU,EAAG;AACXL,IAAAA,KAAK,EAAE;AACJM,MAAAA,MAAM,EAAE;AACNC,QAAAA,KAAK,EAAE;AACNC,UAAAA,KAAK,EAAE;AADD;AADD;AADJ,KADI;AAQZJ,IAAAA,KAAK,EAAE;AACJK,MAAAA,SAAS,EAAE,OADP;AAEJH,MAAAA,MAAM,EAAE;AACNC,QAAAA,KAAK,EAAE;AACLC,UAAAA,KAAK,EAAE;AADF;AADD;AAFJ;AARK,GAxBW;AA0CzBE,EAAAA,WAAW,EAAG;AACZC,IAAAA,KAAK,EAAG;AACNJ,MAAAA,KAAK,EAAG;AACNC,QAAAA,KAAK,EAAG;AADF;AADF;AADI,GA1CW;AAkDzBI,EAAAA,YAAY,EAAG;AACbf,IAAAA,WAAW,EAAE;AACXC,MAAAA,IAAI,EAAE;AACJU,QAAAA,KAAK,EAAE;AADH,OADK;AAIXK,MAAAA,MAAM,EAAE;AACNL,QAAAA,KAAK,EAAE;AADD,OAJG;AAOXM,MAAAA,IAAI,EAAE;AACJN,QAAAA,KAAK,EAAE;AADH;AAPK;AADA,GAlDU;AAgEzBlB,EAAAA,KAAK,EAAEA,KAhEkB;;AAkEzByB,EAAAA,QAAQ,GAAE;AACR,WAAO,KAAKtB,OAAZ;AACD,GApEwB;;AAsEzBuB,EAAAA,UAAU,GAAE;AACV,WAAO1B,KAAK,CAAC,KAAD,EAAQ,EAAR,EACV,KAAKe,UADK,CAAZ;AAGD,GA1EwB;;AA4EzBY,EAAAA,eAAe,GAAE;AACf,WAAO3B,KAAK,CAAC,KAAD,EAAQ,EAAR,EACV,KAAKe,UADK,EAEV,KAAKK,WAFK,CAAZ;AAID,GAjFwB;;AAmFzBQ,EAAAA,SAAS,GAAE;AACT,WAAO5B,KAAK,CAAC,KAAD,EAAQ,EAAR,EACV,KAAKe,UADK,EAEV,KAAKK,WAFK,EAGV,KAAKE,YAHK,CAAZ;AAKD,GAzFwB;;AA2FzBO,EAAAA,kBAAkB,GAAE;AAClB,WAAO,CACL;AAAEC,MAAAA,OAAO,EAAE,SAAX;AAAuBC,MAAAA,KAAK,EAAG;AAA/B,KADK,EAEL;AACGD,MAAAA,OAAO,EAAE,sBADZ;AAEGC,MAAAA,KAAK,EAAG,KAAKL,UAAL;AAFX,KAFK,EAKL;AACGI,MAAAA,OAAO,EAAE,oCADZ;AAEGC,MAAAA,KAAK,EAAG,KAAKJ,eAAL;AAFX,KALK,EASL;AAAEG,MAAAA,OAAO,EAAE,WAAX;AAAyBC,MAAAA,KAAK,EAAE,KAAKH,SAAL;AAAhC,KATK,CAAP;AAWD;;AAvGwB,CAA1B;eA2Ge1B,iB"
+}

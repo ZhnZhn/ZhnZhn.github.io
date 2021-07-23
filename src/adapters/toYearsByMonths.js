@@ -1,3 +1,4 @@
+
 import Builder from '../charts/ConfigBuilder'
 import Tooltip from '../charts/Tooltip'
 
@@ -11,20 +12,24 @@ const CATEGORIES = [
 const C = {
   NOW: {
     index: 3,
-    color: 'yellow',
+    color: '#7cb5ec'
   },
   PREV: {
     index: 2,
     color: '#f45b5b'
   },
   AVG: {
-    index: 1,
+    index: 4,
     color: 'black',
     isVisible: false
   },
-  RANGE: {
+  MIN: {
     index: 0,
-    color: '#7cb5ec'
+    color: '#008b8b'
+  },
+  MAX: {
+    index: 1,
+    color: '#008b8b'
   }
 };
 
@@ -74,13 +79,11 @@ const _findHighLow = (arr) => {
     high: h.v, yHigh: h.y, yHs: h.status,
     low: l.v, yLow: l.y, yLs: l.status
   };
-}
-const _crHighLowPoint = (key, arr) => {
-  return {
-      c: key,
-      ..._findHighLow(arr)
-  };
-}
+};
+const _crHighLowPoint = (key, arr) => ({
+  c: key,
+  ..._findHighLow(arr)
+});
 const _calcAvg = (arr) => {
   const sum = arr.reduce((acc, a) => acc + a, 0)
   return arr.length !== 0
@@ -104,7 +107,7 @@ const _crSeriaData = (data, i, year, crPoint=_crPoint) => {
   return { i, arr: arr.reverse() };
 }
 
-const _crSeries = (data) => {
+const _crSeries = (data, seriaColor) => {
   const firtsItem = data[0][0]
   , _yearNow = _getYear(firtsItem)
   , { i, arr:_dNow } = _crSeriaData(data, 0, _yearNow)
@@ -113,28 +116,24 @@ const _crSeries = (data) => {
   , { arr:_dPrev } = _crSeriaData(data, i, _yearPrev);
 
   return {
-    nowSeria: _crSeria(_yearNow, { ...C.NOW, ...{data: _dNow} } ),
+    nowSeria: _crSeria(_yearNow, { color: seriaColor, ...C.NOW, ...{data: _dNow} } ),
     nowItem: _crItem(_yearNow, C.NOW),
     prevSeria: _crSeria(_yearPrev, { ...C.PREV, ...{data: _dPrev} }),
     prevItem: _crItem(_yearPrev, C.PREV)
   };
 }
 
-const _hmToSeriaData = (hm, crPoint) => {
-  const data = [];
-  CATEGORIES.forEach(key => {
-    data.push(crPoint(key, hm[key]))
-  })
-  return data;
-}
 
-const _crBaseHm = () => {
-  const hm = Object.create(null);
-  CATEGORIES.forEach(key => {
-    hm[key] = []
-  })
-  return hm;
-}
+const _hmToSeriaData = (hm, crPoint) => CATEGORIES
+  .map(key => crPoint(key, hm[key]));
+
+const _crBaseHm = () => CATEGORIES
+  .reduce((hm, key) => {
+    hm[key] = [];
+    return hm;
+  }, Object.create(null));
+
+
 const _crMonthHm = (i, data, stopYear, crPoint=_crValuePoint) => {
   const hm = _crBaseHm()
       , max = data.length;
@@ -147,7 +146,6 @@ const _crMonthHm = (i, data, stopYear, crPoint=_crValuePoint) => {
       break;
     }
     const _m = _getMonth(_item[0])
-    //hm[_m].push(_item[1])
     hm[_m].push(crPoint(_item))
   }
 
@@ -155,7 +153,7 @@ const _crMonthHm = (i, data, stopYear, crPoint=_crValuePoint) => {
 }
 
 
-const _crRangeSeria = (data) => {
+const _crRangeSeries = (data) => {
   const refYear = parseFloat(_getYear(data[0][0]))
       , stopYear = '' + (refYear - 5)
       , { hm, isBreaked } = _crMonthHm(
@@ -165,20 +163,20 @@ const _crRangeSeria = (data) => {
       , _stopYear = isBreaked
            ? stopYear
            : _getYear(data[max-1][0])
-      , name = `Range ${refYear}:${_stopYear}`
+      , _range = `${_stopYear}:${refYear}`
       , _data = _hmToSeriaData(hm, _crHighLowPoint);
 
-  return {
-    rangeSeria: Builder()
-      .areaRangeSeria(
-         Tooltip.categoryRHLY, {
-           data: _data,
-           name: name,
-           point: {}
-         }
-       ).toSeria(),
-    rangeItem: _crItem(name, C.RANGE)
-  };
+  const _minData = []
+  , _maxData = [];
+   _data.forEach(({ c, high, yHigh, low, yLow }) => {
+     _minData.push({ c, y: low, d: yLow })
+     _maxData.push({ c, y: high, d: yHigh })
+   })
+
+  return [
+    Builder().splineSeria({ name: `Min ${_range}`,  data: _minData, color: '#008b8b', seriaWidth: 2, tooltip: Tooltip.categorySimple }).toSeria(),
+    _crSeria(`Max ${_range}`, { data: _maxData, color: '#008b8b' })
+  ];
 }
 
 const _findStartYearIndex = (data, yearStop) => {
@@ -203,12 +201,12 @@ const _crAvgSeria = (data) => {
            ? stopYear
            : _getYear(data[max-1][0])
       , _data = _hmToSeriaData(hm, _crAvgPoint)
-      , name = `Avg ${fromYear}:${_stopYear}`;
+      , name = `Avg ${_stopYear}:${fromYear}`;
 
-  return {
-    avgSeria: _crSeria(name, {...C.AVG, ...{data: _data}}),
-    avgItem: _crItem(name, C.AVG)
-  };
+  return [
+    _crSeria(name, {...C.AVG, ...{data: _data}}),
+    _crItem(name, C.AVG),
+  ];
 }
 
 const _crZhConfig = (option, { legend }) => {
@@ -271,26 +269,27 @@ const _checkIfEnoughData = data => {
 const toMonthly = {
   toConfig(data, option) {
     _checkIfEnoughData(data)
-    const { title, subtitle } = option
+    const { title, subtitle, seriaColor } = option
     , {
         nowSeria, nowItem,
         prevSeria, prevItem
-      } = _crSeries(data)
-    , { rangeSeria, rangeItem } = _crRangeSeria(data)
-    , { avgSeria, avgItem } = _crAvgSeria(data)
-    , legend = [ nowItem, prevItem, rangeItem, avgItem ]
+      } = _crSeries(data, seriaColor)
+    , [ minSeria, maxSeria ] = _crRangeSeries(data)
+    , [ avgSeria, avgItem ] = _crAvgSeria(data)
+    , legend = [ _crItem('MIN', C.MIN), _crItem('MAX', C.MAX), prevItem, nowItem, avgItem ]
     , config = Builder()
        .categoryConfig(CATEGORIES)
        .addCaption(title, subtitle)
-       .addSeriaBy(0, rangeSeria)
-       .addSeriaBy(1, avgSeria)
+       .addSeriaBy(0, minSeria)
+       .addSeriaBy(1, maxSeria)
        .addSeriaBy(2, prevSeria)
        .addSeriaBy(3, nowSeria)
+       .addSeriaBy(4, avgSeria)
        .addTooltip(Tooltip.categorySimple)
        .add({
-         chart: { spacingTop: 25, marginTop: 45 },
+         chart: { marginTop: 45 },
          zhConfig: _crZhConfig(option, { legend }),
-         valueMoving:  _crValueMoving(nowSeria, prevSeria)
+         valueMoving: _crValueMoving(nowSeria, prevSeria)
        })
        .toConfig();
 

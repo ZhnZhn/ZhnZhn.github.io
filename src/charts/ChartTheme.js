@@ -78,10 +78,7 @@ const ChartTheme = {
       plotOptions: {
         area: {
           fillColor: COLOR.AREA_FILL_PRINT
-        },
-        arearange: {
-          fillColor: COLOR.AREA_FILL_PRINT
-        }
+        }        
       },
       xAxis : {
         lineWidth: 2,

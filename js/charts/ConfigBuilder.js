@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
@@ -21,19 +19,27 @@ var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 
 var _ConfigStockSlice = _interopRequireDefault(require("./ConfigStockSlice"));
 
-var findMinY = _seriaFn["default"].findMinY,
-    findMaxY = _seriaFn["default"].findMaxY,
-    filterTrimZero = _seriaFn["default"].filterTrimZero;
-var fTitle = _Chart["default"].fTitle,
-    fSubtitle = _Chart["default"].fSubtitle,
-    fTooltip = _Chart["default"].fTooltip;
-var setPlotLinesMinMax = _ChartFn["default"].setPlotLinesMinMax,
-    setPlotLinesDeltas = _ChartFn["default"].setPlotLinesDeltas,
-    calcMinY = _ChartFn["default"].calcMinY,
-    setYToPoints = _ChartFn["default"].setYToPoints;
-var crAreaConfig = _ChartConfig["default"].crAreaConfig,
-    crTreeMapConfig = _ChartConfig["default"].crTreeMapConfig;
-var C = {
+const {
+  findMinY,
+  findMaxY,
+  filterTrimZero
+} = _seriaFn.default;
+const {
+  fTitle,
+  fSubtitle,
+  fTooltip
+} = _Chart.default;
+const {
+  setPlotLinesMinMax,
+  setPlotLinesDeltas,
+  calcMinY,
+  setYToPoints
+} = _ChartFn.default;
+const {
+  crAreaConfig,
+  crTreeMapConfig
+} = _ChartConfig.default;
+const C = {
   CATEGORIES_X_AXIS: {
     type: "category",
     categories: [],
@@ -62,52 +68,32 @@ var C = {
   }
 };
 
-var _isObj = function _isObj(obj) {
-  return obj && typeof obj === 'object';
-},
-    _isStr = function _isStr(str) {
-  return typeof str === 'string';
-},
-    _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && n - n === 0;
-},
-    _isNotEmptyArr = function _isNotEmptyArr(arr) {
-  return _isArr(arr) && arr.length > 0;
-};
+const _isObj = obj => obj && typeof obj === 'object',
+      _isStr = str => typeof str === 'string',
+      _isNumber = n => typeof n === 'number' && n - n === 0,
+      _isNotEmptyArr = arr => _isArr(arr) && arr.length > 0;
 
-var _isArr = Array.isArray,
-    _assign = Object.assign,
-    _assignTo = function _assignTo(obj, propName, value) {
+const _isArr = Array.isArray,
+      _assign = Object.assign,
+      _assignTo = (obj, propName, value) => {
   obj[propName] = _isObj(value) && !_isArr(value) ? _assign(obj[propName] || {}, value) : value;
 };
 
-var _getY = function _getY(point) {
-  return _isArr(point) ? point[1] : point && point.y || 0;
-};
+const _getY = point => _isArr(point) ? point[1] : point && point.y || 0;
 
-var _getData = function _getData(obj) {
+const _getData = obj => {
   var _obj$config, _obj$config$series;
 
   return ((_obj$config = obj.config) == null ? void 0 : (_obj$config$series = _obj$config.series) == null ? void 0 : _obj$config$series[0].data) || [];
 };
 
-var _findMinY = function _findMinY(minY, data) {
-  return _isNumber(minY) ? minY : findMinY(data);
-};
+const _findMinY = (minY, data) => _isNumber(minY) ? minY : findMinY(data);
 
-var _findMaxY = function _findMaxY(maxY, data) {
-  return _isNumber(maxY) ? maxY : findMaxY(data);
-};
+const _findMaxY = (maxY, data) => _isNumber(maxY) ? maxY : findMaxY(data);
 
-var _calcYAxisMin = function _calcYAxisMin(min, max, noZoom) {
-  return noZoom && min > 0 ? 0 : calcMinY(min, max);
-};
+const _calcYAxisMin = (min, max, noZoom) => noZoom && min > 0 ? 0 : calcMinY(min, max);
 
-var ConfigBuilder = function ConfigBuilder(config) {
-  if (config === void 0) {
-    config = {};
-  }
-
+const ConfigBuilder = function (config = {}) {
   if (!(this instanceof ConfigBuilder)) {
     return new ConfigBuilder(config);
   }
@@ -115,16 +101,16 @@ var ConfigBuilder = function ConfigBuilder(config) {
   this.config = config;
 };
 
-ConfigBuilder.crSeria = function (_ref) {
-  var adapter = _ref.adapter,
-      json = _ref.json,
-      option = _ref.option,
-      type = _ref.type;
-
-  var _adapter$toConfig = adapter.toConfig(json, option),
-      config = _adapter$toConfig.config,
-      _seria = config.series[0];
-
+ConfigBuilder.crSeria = ({
+  adapter,
+  json,
+  option,
+  type
+}) => {
+  const {
+    config
+  } = adapter.toConfig(json, option),
+        _seria = config.series[0];
   _seria.minY = findMinY(_seria.data);
 
   if (type) {
@@ -134,77 +120,81 @@ ConfigBuilder.crSeria = function (_ref) {
   return _seria;
 };
 
-ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["default"])({}, _SeriaBuilder["default"], _ConfigStockSlice["default"], {
-  init: function init(config) {
-    if (config === void 0) {
-      config = {};
-    }
+ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.default,
+  ..._ConfigStockSlice.default,
 
+  init(config = {}) {
     this.config = config;
     return this;
   },
-  areaConfig: function areaConfig(option) {
+
+  areaConfig(option) {
     this.config = crAreaConfig(option);
     return this;
   },
-  area2Config: function area2Config(title, subtitle) {
+
+  area2Config(title, subtitle) {
     return this.areaConfig({
       spacingTop: 25
     }).addCaption(title, subtitle).add('series', []);
   },
-  categoryConfig: function categoryConfig(categories) {
-    if (categories === void 0) {
-      categories = [];
-    }
 
-    this.config = crAreaConfig();
-    var xAxis = (0, _extends2["default"])({}, C.CATEGORIES_X_AXIS, {
-      categories: categories
+  categoryConfig(categories = []) {
+    this.config = crAreaConfig({
+      spacingTop: 25
     });
+    const xAxis = { ...C.CATEGORIES_X_AXIS,
+      ...{
+        categories
+      }
+    };
     return this.add('xAxis', xAxis).add('yAxis', C.CATEGORIES_Y_AXIS);
   },
-  barOrColumnConfig: function barOrColumnConfig(type, categories, option) {
-    if (categories === void 0) {
-      categories = [];
-    }
 
-    var _crConfig = type === 'BAR' ? _ChartFactory["default"].crBarConfig : _ChartFactory["default"].crColumnConfig;
+  barOrColumnConfig(type, categories = [], option) {
+    const _crConfig = type === 'BAR' ? _ChartFactory.default.crBarConfig : _ChartFactory.default.crColumnConfig;
 
     this.config = _crConfig(option);
     return this.add('xAxis', {
-      categories: categories
+      categories
     });
   },
-  treeMapConfig: function treeMapConfig() {
+
+  treeMapConfig() {
     this.config = crTreeMapConfig();
     return this;
   },
-  addTitle: function addTitle(text) {
+
+  addTitle(text) {
     _assignTo(this.config, 'title', fTitle({
-      text: text
+      text
     }));
 
     return this;
   },
-  addSubtitle: function addSubtitle(text) {
+
+  addSubtitle(text) {
     _assignTo(this.config, 'subtitle', fSubtitle({
-      text: text
+      text
     }));
 
     return this;
   },
-  addCaption: function addCaption(title, subtitle) {
+
+  addCaption(title, subtitle) {
     return this.addTitle(title).addSubtitle(subtitle);
   },
-  addTooltip: function addTooltip(tooltip) {
+
+  addTooltip(tooltip) {
     this.config.tooltip = fTooltip(tooltip);
     return this;
   },
-  add: function add(propName, option) {
+
+  add(propName, option) {
     if (_isStr(propName)) {
       _assignTo(this.config, propName, option);
     } else if (_isObj(propName)) {
-      var _propName;
+      let _propName;
 
       for (_propName in propName) {
         _assignTo(this.config, _propName, propName[_propName]);
@@ -213,8 +203,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  addZhMiniConfig: function addZhMiniConfig(config) {
-    var _configs = this.config.zhMiniConfigs;
+
+  addZhMiniConfig(config) {
+    const _configs = this.config.zhMiniConfigs;
 
     if (_configs) {
       _configs.push(config);
@@ -224,50 +215,48 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  _addMini: function _addMini(data, option, crConfig) {
+
+  _addMini(data, option, crConfig) {
     return data && data.length > 0 ? this.addZhMiniConfig(crConfig(option)) : this;
   },
-  addZhPointsIf: function addZhPointsIf(data, propName, is) {
-    var _this$add;
 
-    if (propName === void 0) {
-      propName = 'zhIsMfi';
-    }
-
-    if (is === void 0) {
-      is = true;
-    }
-
-    return is ? this.add((_this$add = {
-      zhPoints: data
-    }, _this$add[propName] = true, _this$add)) : this;
-  },
-  addLegend: function addLegend(legend) {
-    return _isNotEmptyArr(legend) ? this.add('zhConfig', {
-      legend: legend
+  addZhPointsIf(data, propName = 'zhIsMfi', is = true) {
+    return is ? this.add({
+      zhPoints: data,
+      [propName]: true
     }) : this;
   },
-  addMinMax: function addMinMax(data, option) {
-    var isNotZoomToMinMax = option.isNotZoomToMinMax,
-        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        isFilterZero = option.isFilterZero,
-        minY = option.minY,
-        maxY = option.maxY,
-        _data = isFilterZero ? filterTrimZero(data) : data,
-        min = _findMinY(minY, _data),
-        max = _findMaxY(maxY, _data);
+
+  addLegend(legend) {
+    return _isNotEmptyArr(legend) ? this.add('zhConfig', {
+      legend
+    }) : this;
+  },
+
+  addMinMax(data, option) {
+    const {
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      isFilterZero,
+      minY,
+      maxY
+    } = option,
+          _data = isFilterZero ? filterTrimZero(data) : data,
+          min = _findMinY(minY, _data),
+          max = _findMaxY(maxY, _data);
 
     return this._setMinMax(min, max, isNotZoomToMinMax)._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
   },
-  _setMinMaxDeltas: function _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
+
+  _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
     if (isDrawDeltaExtrems) {
-      var _recentIndex = data.length - 1;
+      const _recentIndex = data.length - 1;
 
       if (_recentIndex > 0) {
         setPlotLinesDeltas({
           plotLines: this.config.yAxis.plotLines,
-          min: min,
-          max: max,
+          min,
+          max,
           value: _getY(data[_recentIndex])
         });
       }
@@ -275,11 +264,12 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  _setMinMax: function _setMinMax(min, max, noZoom) {
+
+  _setMinMax(min, max, noZoom) {
     setPlotLinesMinMax({
       plotLines: this.config.yAxis.plotLines,
-      min: min,
-      max: max
+      min,
+      max
     });
     return this.add('yAxis', {
       min: _calcYAxisMin(min, max, noZoom),
@@ -289,14 +279,18 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       startOnTick: false
     });
   },
-  _addScatterBottom: function _addScatterBottom(seria, name, min, max) {
-    var data = seria.data;
+
+  _addScatterBottom(seria, name, min, max) {
+    const {
+      data
+    } = seria;
 
     if (data.length > 0) {
-      var _this$config = this.config,
-          series = _this$config.series,
-          chart = _this$config.chart,
-          zhConfig = _this$config.zhConfig;
+      const {
+        series,
+        chart,
+        zhConfig
+      } = this.config;
       setYToPoints(data, calcMinY(min, max));
       seria.visible = false;
       series.push(seria);
@@ -310,7 +304,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
 
     return this;
   },
-  _disableAnimation: function _disableAnimation() {
+
+  _disableAnimation() {
     this.add({
       chart: {
         animation: false
@@ -325,19 +320,22 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, (0, _extends2["defaul
       }
     });
   },
-  _checkDataLength: function _checkDataLength() {
-    var data = _getData(this);
+
+  _checkDataLength() {
+    const data = _getData(this);
 
     if (data.length > 3000) {
       this._disableAnimation();
     }
   },
-  toConfig: function toConfig() {
+
+  toConfig() {
     this._checkDataLength();
 
     return this.config;
   }
-}));
+
+});
 var _default = ConfigBuilder;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ConfigBuilder.js.map

@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
 
@@ -13,29 +11,15 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
-var findMinY = _seriaFn["default"].findMinY;
-var C = {
+const {
+  findMinY
+} = _seriaFn.default;
+const C = {
   SERIA: {
     //type: 'spline',
     visible: true,
     marker: {
       symbol: 'circle'
-    }
-  },
-  AREA_RANGE: {
-    type: 'arearange',
-    color: '#7cb5ec',
-    fillColor: {
-      linearGradient: {
-        x1: 0,
-        x2: 0,
-        y1: 0,
-        y2: 1
-      },
-      stops: [[0, "rgba(69, 114, 167, 1)"], [1, "rgba(2, 0, 0, 0)"]]
-    },
-    marker: {
-      radius: 0
     }
   },
   TREE_MAP: {
@@ -67,39 +51,36 @@ var C = {
   }
 };
 
-var _isArr = Array.isArray,
-    _assign = Object.assign,
-    _isObj = function _isObj(obj) {
-  return obj && typeof obj === 'object';
-};
+const _isArr = Array.isArray,
+      _assign = Object.assign,
+      _isObj = obj => obj && typeof obj === 'object';
 
-var _crLegendItem = function _crLegendItem(_ref) {
-  var index = _ref.index,
-      color = _ref.color,
-      _ref$name = _ref.name,
-      name = _ref$name === void 0 ? '' : _ref$name,
-      _ref$is = _ref.is,
-      is = _ref$is === void 0 ? false : _ref$is;
-  return {
-    index: index,
-    color: color,
-    name: name,
-    isVisible: is
-  };
-};
+const _crLegendItem = ({
+  index,
+  color,
+  name = '',
+  is = false
+}) => ({
+  index,
+  color,
+  name,
+  isVisible: is
+});
 
-var _addSeriesImpl = function _addSeriesImpl(to, series) {
-  var _legend = [];
-  series.forEach(function (seria, index) {
-    var color = seria.color,
-        zhValueText = seria.zhValueText,
-        name = seria.name,
-        visible = seria.visible;
+const _addSeriesImpl = (to, series) => {
+  const _legend = [];
+  series.forEach((seria, index) => {
+    const {
+      color,
+      zhValueText,
+      name,
+      visible
+    } = seria;
     to.push(seria);
 
     _legend.push(_crLegendItem({
-      index: index,
-      color: color,
+      index,
+      color,
       name: zhValueText || name,
       is: visible
     }));
@@ -107,36 +88,43 @@ var _addSeriesImpl = function _addSeriesImpl(to, series) {
   return _legend;
 };
 
-var SeriaBuilder = {
-  initSeria: function initSeria(option) {
+const SeriaBuilder = {
+  initSeria(option) {
     this._type = 'S';
-    this.config = _ChartConfig["default"].crSeria(option);
+    this.config = _ChartConfig.default.crSeria(option);
     return this;
   },
-  splineSeria: function splineSeria(option) {
-    return this.initSeria((0, _extends2["default"])({}, C.SERIA, option));
+
+  splineSeria(option) {
+    return this.initSeria({ ...C.SERIA,
+      ...option
+    });
   },
-  _seria: function _seria(CONFIG, tooltip, option) {
+
+  _seria(CONFIG, tooltip, option) {
     this._type = 'S';
-    this.config = (0, _extends2["default"])({}, CONFIG, option);
-    this.add('tooltip', _Chart["default"].fTooltip(tooltip));
+    this.config = { ...CONFIG,
+      ...option
+    };
+    this.add('tooltip', _Chart.default.fTooltip(tooltip));
     return this;
   },
-  areaRangeSeria: function areaRangeSeria(tooltip, option) {
-    return this._seria(C.AREA_RANGE, tooltip, option);
-  },
-  treeMapSeria: function treeMapSeria(tooltip, option) {
+
+  treeMapSeria(tooltip, option) {
     return this._seria(C.TREE_MAP, tooltip, option);
   },
-  scatterSeria: function scatterSeria(tooltip, option) {
+
+  scatterSeria(tooltip, option) {
     return this._seria(C.SCATTER, tooltip, option);
   },
-  stockSeria: function stockSeria(id, data) {
+
+  stockSeria(id, data) {
     return this.initSeria({
       minY: findMinY(data)
     }).addPoints(id, data);
   },
-  addSeriaBy: function addSeriaBy(index, obj) {
+
+  addSeriaBy(index, obj) {
     if (this.config.series[index]) {
       _assign(this.config.series[index], obj);
     } else {
@@ -145,31 +133,31 @@ var SeriaBuilder = {
 
     return this;
   },
-  addSeriaTo: function addSeriaTo(index, seria) {
+
+  addSeriaTo(index, seria) {
     this.config.series[index] = seria;
     return this;
   },
-  _addSeriaPoints: function _addSeriaPoints(points, _temp) {
-    var _this = this;
 
-    var _ref2 = _temp === void 0 ? {} : _temp,
-        _ref2$maxVisible = _ref2.maxVisible,
-        maxVisible = _ref2$maxVisible === void 0 ? 6 : _ref2$maxVisible;
-
-    var _legend = [];
-    points.forEach(function (data, index) {
-      var is = index < maxVisible ? true : false,
-          color = _ChartConfig["default"].getColor(index),
-          seriaName = data.seriaName;
+  _addSeriaPoints(points, {
+    maxVisible = 6
+  } = {}) {
+    const _legend = [];
+    points.forEach((data, index) => {
+      const is = index < maxVisible ? true : false,
+            color = _ChartConfig.default.getColor(index),
+            {
+        seriaName
+      } = data;
 
       _legend.push(_crLegendItem({
-        index: index,
-        color: color,
+        index,
+        color,
         name: seriaName,
-        is: is
+        is
       }));
 
-      _this.addSeriaBy(index, {
+      this.addSeriaBy(index, {
         type: 'spline',
         data: data,
         name: seriaName,
@@ -184,7 +172,8 @@ var SeriaBuilder = {
 
     return this;
   },
-  _addPointsToConfig: function _addPointsToConfig(points) {
+
+  _addPointsToConfig(points) {
     if (points[0] && _isArr(points[0]) && points[0][0] && typeof points[0][0] !== 'number') {
       this._addSeriaPoints(points);
     } else {
@@ -194,7 +183,8 @@ var SeriaBuilder = {
       });
     }
   },
-  addPoints: function addPoints(id, points, text) {
+
+  addPoints(id, points, text) {
     if (this._type !== 'S') {
       this._addPointsToConfig(points);
     } else {
@@ -206,15 +196,12 @@ var SeriaBuilder = {
 
     return this;
   },
-  addSeries: function addSeries(series, isWithoutLegend) {
-    if (isWithoutLegend === void 0) {
-      isWithoutLegend = false;
-    }
 
-    var _to = _isArr(this.config.series) ? this.config.series : this.config.series = [];
+  addSeries(series, isWithoutLegend = false) {
+    const _to = _isArr(this.config.series) ? this.config.series : this.config.series = [];
 
     if (_isArr(series)) {
-      var _legend = _addSeriesImpl(_to, series);
+      const _legend = _addSeriesImpl(_to, series);
 
       if (!isWithoutLegend) {
         this.addLegend(_legend);
@@ -225,10 +212,12 @@ var SeriaBuilder = {
 
     return this;
   },
-  toSeria: function toSeria() {
+
+  toSeria() {
     return this.config;
   }
+
 };
 var _default = SeriaBuilder;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=SeriaBuilder.js.map

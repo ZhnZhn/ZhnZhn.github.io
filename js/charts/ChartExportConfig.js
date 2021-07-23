@@ -3,12 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var merge = _highcharts["default"].merge;
-var ChartExportConfig = {
+const merge = _highcharts.default.merge;
+const ChartExportConfig = {
   DEFAULT: {
     chart: {
       plotBackgroundColor: 'white',
@@ -16,9 +16,6 @@ var ChartExportConfig = {
     },
     plotOptions: {
       area: {
-        fillColor: 'white'
-      },
-      arearange: {
         fillColor: 'white'
       }
     },
@@ -62,9 +59,6 @@ var ChartExportConfig = {
       area: {
         color: 'black'
       },
-      arearange: {
-        color: 'black'
-      },
       spline: {
         color: 'black'
       },
@@ -74,19 +68,24 @@ var ChartExportConfig = {
     }
   },
   merge: merge,
-  fDefault: function fDefault() {
+
+  fDefault() {
     return this.DEFAULT;
   },
-  fBlackAxis: function fBlackAxis() {
+
+  fBlackAxis() {
     return merge(false, {}, this.BLACK_AXIS);
   },
-  fBlackAxisTitle: function fBlackAxisTitle() {
+
+  fBlackAxisTitle() {
     return merge(false, {}, this.BLACK_AXIS, this.BLACK_TITLE);
   },
-  fBlackAll: function fBlackAll() {
+
+  fBlackAll() {
     return merge(false, {}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);
   },
-  createOptionStyles: function createOptionStyles() {
+
+  createOptionStyles() {
     return [{
       caption: 'Default',
       value: {}
@@ -101,7 +100,8 @@ var ChartExportConfig = {
       value: this.fBlackAll()
     }];
   }
+
 };
 var _default = ChartExportConfig;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ChartExportConfig.js.map
