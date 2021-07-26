@@ -7,6 +7,19 @@ import Raven from 'raven-js';
 import AppErc from './components/AppErc';
 import ChartConfig from './charts/ChartConfig';
 
+let consoleWarn = (console || {}).warn;
+const _clearHighchartsWarning = () => {
+  if (consoleWarn) {
+   console.warn = (...args) => {
+     if (typeof args[0] === 'string'
+         && args[0].indexOf('Highcharts warning') !== -1) {
+       return;
+     }
+     consoleWarn(...args)
+   }
+  }
+};
+
 const _fnInitRaven = function(){
   /* eslint-disable no-undef */
   if (process.env.NODE_ENV === 'production'){
@@ -20,6 +33,7 @@ const _fnInitRaven = function(){
           'zhnzhn.github.io'
         ]
       }).install()
+      _clearHighchartsWarning()
     }
   }
 }

@@ -20,7 +20,8 @@ const C = {
 
 const TITLE_STYLE = `style="color:${C.TITLE_C};"`;
 const FONT_STYLE = 'font-size:16px;font-weight:bold;';
-const STATUS_STYLE = 'padding-left:4px;'
+const VALUE_STYLE = 'padding-right:5px;';
+const STATUS_STYLE = 'padding-left:4px;';
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -49,7 +50,7 @@ const _crSpanStyle = (color, tailStyle='') => `style="color:${color};${FONT_STYL
 
 const tpFn = {
   crSpan: (t='', v='', { color=C.VALUE_C, status }={}) => {
-    const _vStyle = _crSpanStyle(color)
+    const _vStyle = _crSpanStyle(color, VALUE_STYLE)
     , _t = t ? `${t}: `: ''
     , _v = v !== null ? v: ''
     , _statusSpan = status

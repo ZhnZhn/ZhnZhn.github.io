@@ -78,7 +78,7 @@ const ChartTheme = {
       plotOptions: {
         area: {
           fillColor: COLOR.AREA_FILL_PRINT
-        }        
+        }
       },
       xAxis : {
         lineWidth: 2,
@@ -188,13 +188,13 @@ const ChartTheme = {
 
       states : {
         hover : {
-          //lineWidthPlus: 1,
           halo : {
             opacity : 0.35,
-            //opacity : 0.05,
-            size : 16
-            //size : 2
+            size : 16            
           }
+        },
+        inactive: {
+          enabled: false
         }
       },
 

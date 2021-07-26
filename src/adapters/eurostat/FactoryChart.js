@@ -63,8 +63,8 @@ const _crColumnConfig = ({ seriaColor=DF_COLOR }) => ({
     verticalAlign: 'top',
     layout: 'horizontal',
     x:  0,
-    //y: -42
-    y: 12
+    //y: 12
+    y: 10
   },
   plotOptions: {
     column : {
@@ -92,6 +92,7 @@ const _crColumnConfig = ({ seriaColor=DF_COLOR }) => ({
 const _crBarConfig = (option) => {
   const config = _crColumnConfig(option);
   _assign(config.chart, BAR_CHART )
+  config.legend.y = 28
   if (option.seriaType === 'BAR_WITH_LABELS') {
     config.plotOptions.bar.dataLabels = {...DATA_LABELS}
   }
@@ -101,14 +102,8 @@ const _crDotConfig = (option) => {
   const { seriaColor } = option;
   const config = _crColumnConfig(option);
   _assign(config.chart, SCATTER_CHART)
-  /*
-  _assign(config.xAxis, {
-    gridLineDashStyle: "Dot",
-    gridLineWidth: 1
-  })
-  */
+  config.legend.y = 28  
   _assign(config.series[0], {
-    //color: hexToRgba(seriaColor),
     color: seriaColor,
     marker: {
       symbol: 'circle',
