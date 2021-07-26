@@ -3,15 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
-
-var _highchartsMore = _interopRequireDefault(require("highcharts/highcharts-more"));
 
 var _treemap = _interopRequireDefault(require("highcharts/modules/treemap"));
 
@@ -49,62 +43,66 @@ var _WithTreeMapConfig = _interopRequireDefault(require("./WithTreeMapConfig"));
 //import HighchartsTreemap from 'highcharts/lib/modules/treemap';
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
-var _merge = _highcharts["default"].merge;
-var _assign = Object.assign;
+const _merge = _highcharts.default.merge;
+const _assign = Object.assign;
 
-var _isStr = function _isStr(str) {
-  return typeof str === 'string';
-};
+const _isStr = str => typeof str === 'string';
 
-var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"], _WithMarkers["default"], _WithPieConfig["default"], _WithStackedAreaConfig["default"], _WithStackedColumnConfig["default"], _WithTreeMapConfig["default"], {
-  init: function init() {
-    (0, _highchartsMore["default"])(_highcharts["default"]);
-    (0, _treemap["default"])(_highcharts["default"]);
-    (0, _exporting["default"])(_highcharts["default"]);
-    (0, _offlineExporting["default"])(_highcharts["default"]);
-    (0, _zhnHighcharts["default"])(_highcharts["default"]);
+const ChartConfig = { ..._WithIndicatorConfig.default,
+  ..._WithMarkers.default,
+  ..._WithPieConfig.default,
+  ..._WithStackedAreaConfig.default,
+  ..._WithStackedColumnConfig.default,
+  ..._WithTreeMapConfig.default,
 
-    _highcharts["default"].setOptions(_ChartTheme["default"]);
+  init() {
+    (0, _treemap.default)(_highcharts.default);
+    (0, _exporting.default)(_highcharts.default);
+    (0, _offlineExporting.default)(_highcharts.default);
+    (0, _zhnHighcharts.default)(_highcharts.default);
+
+    _highcharts.default.setOptions(_ChartTheme.default);
   },
-  setSerieData: function setSerieData(config, data, index, name, options) {
+
+  setSerieData(config, data, index, name, options) {
     config.series[index] = _assign({
       type: 'area',
       name: name,
       data: data,
       lineWidth: 1
     }, options, {
-      point: _Chart["default"].fEventsMouseOver(_handleMouseOver["default"])
+      point: _Chart.default.fEventsMouseOver(_handleMouseOver.default)
     });
   },
-  getColor: function getColor(seriaIndex) {
-    var colors = _ChartTheme["default"].colors;
+
+  getColor(seriaIndex) {
+    const colors = _ChartTheme.default.colors;
     return colors[seriaIndex % colors.length];
   },
-  crSeria: function crSeria(option) {
-    if (option === void 0) {
-      option = {};
-    }
 
-    var _option = option,
-        seriaType = _option.seriaType,
-        seriaWidth = _option.seriaWidth,
-        seriaColor = _option.seriaColor,
-        tp = _option.tp,
-        restOption = (0, _objectWithoutPropertiesLoose2["default"])(_option, ["seriaType", "seriaWidth", "seriaColor", "tp"]),
-        type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline',
-        pointFormatter = tp && _Tooltip["default"][tp] || _Tooltip["default"].vTdmyIf;
-    return (0, _extends2["default"])({
-      type: type,
+  crSeria: (option = {}) => {
+    const {
+      seriaType,
+      seriaWidth,
+      seriaColor,
+      tp,
+      ...restOption
+    } = option,
+          type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline',
+          pointFormatter = tp && _Tooltip.default[tp] || _Tooltip.default.vTdmyIf;
+    return {
+      type,
       lineWidth: seriaWidth != null ? seriaWidth : 1,
       color: seriaColor,
-      tooltip: _Chart["default"].fTooltip(pointFormatter)
-    }, restOption);
+      tooltip: _Chart.default.fTooltip(pointFormatter),
+      ...restOption
+    };
   },
-  crAreaConfig: function crAreaConfig(options) {
-    var config = _merge(_Chart["default"].crAreaConfig(options), {
+  crAreaConfig: options => {
+    const config = _merge(_Chart.default.crAreaConfig(options), {
       chart: {
         zoomType: 'xy',
-        resetZoomButton: _Chart["default"].fResetZoomButton({
+        resetZoomButton: _Chart.default.fResetZoomButton({
           position: {
             x: -10
           }
@@ -115,9 +113,9 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
       zhDetailCharts: []
     });
 
-    config.xAxis = _assign(_Chart["default"].fXAxisOpposite(config.xAxis), {
+    config.xAxis = _assign(_Chart.default.fXAxisOpposite(config.xAxis), {
       events: {
-        afterSetExtremes: _ChartFn["default"].zoomIndicatorCharts
+        afterSetExtremes: _ChartFn.default.zoomIndicatorCharts
       }
     });
     config.yAxis = _assign(config.yAxis, {
@@ -129,13 +127,13 @@ var ChartConfig = (0, _extends2["default"])({}, _WithIndicatorConfig["default"],
         y: 5
       },
       events: {
-        afterSetExtremes: _ChartFn["default"].afterSetExtremesYAxis
+        afterSetExtremes: _ChartFn.default.afterSetExtremesYAxis
       }
     });
-    config.yAxis.plotLines = [_Chart["default"].fPlotLine(_Color["default"].HIGH, 'max'), _Chart["default"].fPlotLine(_Color["default"].LOW, 'min')];
+    config.yAxis.plotLines = [_Chart.default.fPlotLine(_Color.default.HIGH, 'max'), _Chart.default.fPlotLine(_Color.default.LOW, 'min')];
     return config;
   }
-});
+};
 var _default = ChartConfig;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ChartConfig.js.map

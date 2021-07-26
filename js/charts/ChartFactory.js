@@ -1,15 +1,14 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var DF_COLOR = '#8085e9';
-var _assign = Object.assign;
-var ChartFactory = {
-  crColumnConfig: function crColumnConfig(_temp) {
-    var _ref = _temp === void 0 ? {} : _temp,
-        seriaColor = _ref.seriaColor;
-
-    var _color = seriaColor || DF_COLOR;
+exports.default = void 0;
+const DF_COLOR = '#8085e9';
+const _assign = Object.assign;
+const ChartFactory = {
+  crColumnConfig({
+    seriaColor
+  } = {}) {
+    const _color = seriaColor || DF_COLOR;
 
     return {
       chart: {
@@ -76,8 +75,9 @@ var ChartFactory = {
       }]
     };
   },
-  crBarConfig: function crBarConfig(option) {
-    var config = ChartFactory.crColumnConfig(option);
+
+  crBarConfig(option) {
+    const config = ChartFactory.crColumnConfig(option);
 
     _assign(config.chart, {
       type: 'bar',
@@ -97,7 +97,8 @@ var ChartFactory = {
 
     return config;
   }
+
 };
 var _default = ChartFactory;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ChartFactory.js.map
