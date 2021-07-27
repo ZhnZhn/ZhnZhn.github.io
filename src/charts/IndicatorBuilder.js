@@ -49,10 +49,10 @@ const _fCategoryCalc = (calc, name) => (chart, rc) => {
   return false;
 };
 
-const _addDataAsSeriaToChart = (chart, option) => {
-  const seria = ChartConfig.crSeria(option);
-  chart.addSeries(seria, true, true)
-  return chart.options.colors[seria['_colorIndex']];
+const _addToChartSeria = (chart, option) => {
+  const seria = ChartConfig.crSeria(option)
+  , _seriaIns = chart.addSeries(seria, true, true);
+  return (_seriaIns || {}).color;  
 };
 
 const IndicatorBuilder = {
@@ -87,7 +87,7 @@ const IndicatorBuilder = {
     , dataSma = sma(data, period);
 
     if (dataSma.length>0){
-      return _addDataAsSeriaToChart(chart, {
+      return _addToChartSeria(chart, {
         zhValueText: id,
         lineWidth: 2,
         data: dataSma,
