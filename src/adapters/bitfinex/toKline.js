@@ -10,9 +10,8 @@ const _crAddConfig = ({ option }) => ({
 const _isNumber = n => typeof n === 'number'
 , _compareByDate = (a, b) => a.date - b.date
 , _roundBy = n => {
-  if (n>10) { return roundBy(n, 3); }
-  if (n>1) { return roundBy(n, 4); }
-  return n;
+  if (n>-1 && n<1) { return n; }
+  return roundBy(n, 2);
 };
 
 /*

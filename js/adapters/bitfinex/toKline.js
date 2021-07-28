@@ -3,38 +3,31 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
-var crZhConfig = _AdapterFn["default"].crZhConfig,
-    roundBy = _AdapterFn["default"].roundBy;
+const {
+  crZhConfig,
+  roundBy
+} = _AdapterFn.default;
 
-var _crAddConfig = function _crAddConfig(_ref) {
-  var option = _ref.option;
-  return {
-    zhConfig: crZhConfig(option)
-  };
-};
+const _crAddConfig = ({
+  option
+}) => ({
+  zhConfig: crZhConfig(option)
+});
 
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number';
-},
-    _compareByDate = function _compareByDate(a, b) {
-  return a.date - b.date;
-},
-    _roundBy = function _roundBy(n) {
-  if (n > 10) {
-    return roundBy(n, 3);
+const _isNumber = n => typeof n === 'number',
+      _compareByDate = (a, b) => a.date - b.date,
+      _roundBy = n => {
+  if (n > -1 && n < 1) {
+    return n;
   }
 
-  if (n > 1) {
-    return roundBy(n, 4);
-  }
-
-  return n;
+  return roundBy(n, 2);
 };
 /*
 From Bitfinex Documentation
@@ -49,9 +42,9 @@ From Bitfinex Documentation
 */
 
 
-var _crDataOHLCV = function _crDataOHLCV(json, option) {
-  var _data = [];
-  json.forEach(function (arrItem) {
+const _crDataOHLCV = (json, option) => {
+  const _data = [];
+  json.forEach(arrItem => {
     if (_isNumber(arrItem[0])) {
       _data.push({
         date: arrItem[0],
@@ -66,13 +59,11 @@ var _crDataOHLCV = function _crDataOHLCV(json, option) {
   return _data.sort(_compareByDate);
 };
 
-var toKline = (0, _crAdapterOHLCV["default"])({
+const toKline = (0, _crAdapterOHLCV.default)({
   getArr: _crDataOHLCV,
-  toDate: function toDate(date) {
-    return date;
-  },
+  toDate: date => date,
   crAddConfig: _crAddConfig
 });
 var _default = toKline;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toKline.js.map

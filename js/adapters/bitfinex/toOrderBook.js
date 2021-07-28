@@ -3,22 +3,17 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _crAdapterOrderBook = _interopRequireDefault(require("../crAdapterOrderBook"));
 
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number';
-};
+const _isNumber = n => typeof n === 'number';
 
-var _compareByPrice = function _compareByPrice(a, b) {
-  return a[0] - b[0];
-};
+const _compareByPrice = (a, b) => a[0] - b[0];
 
-var crTitle = function crTitle(_ref) {
-  var items = _ref.items;
-  return items[0].c + ' P0';
-};
+const crTitle = ({
+  items
+}) => items[0].c + ' P0';
 /*
 From Bitfinex Documentation
 [[
@@ -30,15 +25,15 @@ if AMOUNT > 0 then bid else ask.
 */
 
 
-var crOrderBook = function crOrderBook(json) {
-  var asks = [],
-      bids = [];
-  json.forEach(function (arrItem) {
+const crOrderBook = json => {
+  const asks = [],
+        bids = [];
+  json.forEach(arrItem => {
     if (_isNumber(arrItem[0])) {
       if (arrItem[2] > 0) {
-        bids.push([arrItem[0], arrItem[2]]);
+        bids.push([arrItem[0], arrItem[2], arrItem[1]]);
       } else {
-        asks.push([arrItem[0], -1 * arrItem[2]]);
+        asks.push([arrItem[0], -1 * arrItem[2], arrItem[1]]);
       }
     }
   });
@@ -48,10 +43,10 @@ var crOrderBook = function crOrderBook(json) {
   };
 };
 
-var toOrderBook = (0, _crAdapterOrderBook["default"])({
-  crTitle: crTitle,
-  crOrderBook: crOrderBook
+const toOrderBook = (0, _crAdapterOrderBook.default)({
+  crTitle,
+  crOrderBook
 });
 var _default = toOrderBook;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toOrderBook.js.map

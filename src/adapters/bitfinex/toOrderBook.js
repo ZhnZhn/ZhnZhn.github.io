@@ -20,9 +20,9 @@ const crOrderBook = json => {
   json.forEach(arrItem => {
     if (_isNumber(arrItem[0])) {
       if (arrItem[2] > 0) {
-        bids.push([arrItem[0], arrItem[2]])
+        bids.push([arrItem[0], arrItem[2], arrItem[1]])
       } else {
-        asks.push([arrItem[0], -1*arrItem[2]])
+        asks.push([arrItem[0], -1*arrItem[2], arrItem[1]])
       }
     }
   })
