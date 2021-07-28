@@ -1,7 +1,8 @@
 
-const _getExtremes = (v1, v2) => v1 >= v2
-  ? { min: v2, max: v1 }
-  : { min: v1, max: v2 };
+//refresh chart config
+const _updateSeriaAsync = (seria) => {
+  setTimeout(() => seria && seria.update(seria.options), 500)
+};
 
 const zhRemoveCategory = function(id){
   try {
@@ -10,13 +11,10 @@ const zhRemoveCategory = function(id){
       const _newC = _c.filter(str => str !== id)
       , _newData = this.options.series[0].data.filter(p => p.c !== id && p.name !== id && p.id !== id)
       if (_newC.length < _c.length) {
-        if (!this.yAxis[0].userOptions.zhNotZoomToMinMax) {
-          const _len = _newData.length
-              , { min, max } = _getExtremes(_newData[0].y, _newData[_len-1].y)
-          this.yAxis[0].setExtremes(min, max, false)
-        }
+        const _seria = this.series[0];
         this.xAxis[0].setCategories(_newC, false)
-        this.series[0].update({ data: _newData }, true)
+        _seria.update({ data: _newData })
+        _updateSeriaAsync(_seria)
       }
     }
   } catch (err) {
