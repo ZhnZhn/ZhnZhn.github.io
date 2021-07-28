@@ -26,7 +26,7 @@ const S = {
   },
   TH_MORE_SPAN: {
     position: 'relative',
-    top: -4
+    top: -2
   },
   TH_UP: {
     borderTop: '3px solid #f1d600'
@@ -35,6 +35,8 @@ const S = {
     borderBottom: '3px solid #f1d600'
   },
   BT_SVG_MORE: {
+    position: 'relative',
+    top: 2,
     marginRight: 4
   },
   SVG_MORE: {
@@ -47,7 +49,7 @@ const S = {
     left: 0,
     zIndex: 1010,
     backgroundColor: 'inherit',
-    padding: '4px 12px 6px',    
+    padding: '4px 12px 6px',
     borderRadius: 5,
     boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
   },

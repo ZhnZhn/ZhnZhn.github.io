@@ -1,8 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var S = {
+exports.default = void 0;
+const S = {
   TOKEN_NAN: '―',
   CL_LINK: "native-link",
   CL_GRID: "grid",
@@ -29,7 +29,7 @@ var S = {
   },
   TH_MORE_SPAN: {
     position: 'relative',
-    top: -4
+    top: -2
   },
   TH_UP: {
     borderTop: '3px solid #f1d600'
@@ -38,6 +38,8 @@ var S = {
     borderBottom: '3px solid #f1d600'
   },
   BT_SVG_MORE: {
+    position: 'relative',
+    top: 2,
     marginRight: 4
   },
   SVG_MORE: {
@@ -75,5 +77,5 @@ var S = {
   }
 };
 var _default = S;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=Style.js.map
