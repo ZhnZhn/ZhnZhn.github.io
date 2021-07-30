@@ -1,6 +1,7 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback } from 'react';
 
-import CaptionInput from './CaptionInput'
+import crCn from '../zhn-utils/crCn';
+import CaptionInput from './CaptionInput';
 
 const CL = {
   BT: 'bt-flat',
@@ -12,19 +13,6 @@ const S = {
     color: '#607d8b'
   }
 };
-const POINTER_EVENTS = 'pointer-events';
-
-const _isNotZeroNumber = n => n
- && typeof n === 'number'
- && n-n === 0;
-
-const  _setPointerEvents = (refBt, value='auto') => {
-  const btNode = refBt && refBt.current;
-  if (btNode && btNode.style) {
-    btNode.style[POINTER_EVENTS] = value
-  }
-};
-
 
 const FlatButton = ({
   timeout=3000,
@@ -33,31 +21,32 @@ const FlatButton = ({
   children,
   onClick
 }) => {
-  const refBt = useRef(null)
+  const _refTimeStamp = useRef(null)
   , _hClick = useCallback((event) => {
-    if (_isNotZeroNumber(timeout)) {
-      _setPointerEvents(refBt, 'none')
-      setTimeout(() => _setPointerEvents(refBt), timeout)
+    if (timeout === 0) {
+      onClick(event)
+      return;
     }
-    onClick(event)
+    const _timeStampPrev = _refTimeStamp.current
+    , { timeStamp } = event;
+    if (_timeStampPrev == null
+        || timeStamp - _timeStampPrev > timeout) {
+      onClick(event)
+      _refTimeStamp.current = timeStamp
+    }
   }, [timeout, onClick])
+  , _className = crCn(CL.BT, className)
   , _style = isPrimary
-       ? {...style, ...S.PRIMARY }
-       : style
-  , _className = className
-       ? `${CL.BT} ${className}`
-       : CL.BT
+       ? {...style, ...S.PRIMARY}
+       : style  
   , _title = accessKey
        ? `${title} [${accessKey}]`
        : title;
   return (
     <button
-      type="button"
-      ref = {refBt}
       className={_className}
       style={_style}
       accessKey={accessKey}
-      tabIndex={0}
       title={_title}
       onClick={_hClick}
     >
