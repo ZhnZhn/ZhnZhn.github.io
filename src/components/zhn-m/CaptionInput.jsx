@@ -4,36 +4,40 @@ const S = {
   }
 };
 
+const _crAccessKeyIndex = (accessKey, caption) => accessKey
+  ? caption.toLowerCase().indexOf(accessKey)
+  : -1;
+
+const _crCaption = (accessKey, caption) => {
+  const index = _crAccessKeyIndex(accessKey, caption);
+  if (index === -1) { return caption; }
+
+  const _before = caption.substring(0, index)
+  , _key = caption.substring(index, index+1)
+  , _after = caption.substring(index+1);
+  return (
+    <>
+     <span>{_before}</span>
+     <span style={S.KEY}>{_key}</span>
+     <span>{_after}</span>
+    </>
+  );
+};
+
 const CaptionInput = ({
   className,
-  rootStyle,
   caption,
   accessKey,
   children
 }) => {
   if (!caption) { return null; }
 
-  const _index = caption.toLowerCase().indexOf(accessKey);
-  if (accessKey && _index !== -1) {
-    const _before = caption.substring(0, _index)
-        , _key = caption.substring(_index, _index+1)
-        , _after = caption.substring(_index+1);
-    return (
-      <span className={className} style={rootStyle}>
-         <span>{_before}</span>
-         <span style={S.KEY}>{_key}</span>
-         <span>{_after}</span>
-         {children}
-      </span>
-    );
-  } else {
-    return (
-      <span className={className} style={rootStyle}>
-        {caption}
-        {children}
-      </span>
-    );
-  }
+  return (
+    <span className={className}>
+      {_crCaption(accessKey, caption)}
+      {children}
+    </span>
+  );
 };
 
 export default CaptionInput
