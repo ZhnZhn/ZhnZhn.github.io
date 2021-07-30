@@ -1,33 +1,34 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _jsxRuntime = require("react/jsx-runtime.js");
+var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 
-var CL = 'bt-circle bt-c2';
+var _jsxRuntime = require("react/jsx-runtime");
 
-var ButtonCircle2 = function ButtonCircle2(_ref) {
-  var tabIndex = _ref.tabIndex,
-      _ref$className = _ref.className,
-      className = _ref$className === void 0 ? '' : _ref$className,
-      style = _ref.style,
-      dataLoader = _ref.dataLoader,
-      _ref$caption = _ref.caption,
-      caption = _ref$caption === void 0 ? '' : _ref$caption,
-      onClick = _ref.onClick;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-    tabIndex: tabIndex,
-    className: CL + " " + className,
-    style: style,
-    onClick: onClick,
-    "data-loader": dataLoader,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      children: caption
-    })
-  });
-};
+const CL = 'bt-circle bt-c2 not-selected';
+
+const ButtonCircle2 = ({
+  tabIndex,
+  className,
+  style,
+  dataLoader,
+  caption = '',
+  onClick
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+  tabIndex: tabIndex,
+  className: (0, _crCn.default)(CL, className),
+  style: style,
+  "data-loader": dataLoader,
+  onClick: onClick,
+  children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    children: caption
+  })
+});
 
 var _default = ButtonCircle2;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ButtonCircle2.js.map

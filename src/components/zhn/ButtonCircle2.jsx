@@ -1,16 +1,19 @@
-const CL = 'bt-circle bt-c2';
+import crCn from '../zhn-utils/crCn';
+
+const CL = 'bt-circle bt-c2 not-selected';
 
 const ButtonCircle2 = ({
   tabIndex,
-  className='', style, dataLoader,
-  caption='', onClick,
+  className, style, dataLoader,
+  caption='',
+  onClick
 }) => (
   <button
      tabIndex={tabIndex}
-     className={`${CL} ${className}`}
+     className={crCn(CL, className)}
      style={style}
-     onClick={onClick}
      data-loader={dataLoader}
+     onClick={onClick}
   >
     <div>
       {caption}
