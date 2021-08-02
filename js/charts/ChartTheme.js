@@ -38,9 +38,36 @@ const ChartTheme = {
     plotBackgroundColor: 'transparent',
     backgroundColor: 'transparent',
     reflow: false,
-    zoomType: 'x',
     panning: true,
     panKey: 'shift',
+    zoomType: 'x',
+    resetZoomButton: {
+      position: {
+        align: 'right',
+        verticalAlign: 'top',
+        x: -10,
+        y: 0
+      },
+      theme: {
+        fill: _Color.default.BG_TITLE,
+        stroke: _Color.default.BG_TITLE,
+        r: 4,
+        style: {
+          color: _Color.default.TITLE_SHOW
+        },
+        states: {
+          hover: {
+            fill: _Color.default.BG_TITLE,
+            stroke: _Color.default.HOVER,
+            'stroke-width': 2,
+            style: {
+              color: _Color.default.HOVER
+            }
+          }
+        }
+      },
+      relativeTo: 'chart'
+    },
     events: {
       load: function () {
         this.zhTooltip = new _highcharts.default.Tooltip(this, this.options.tooltip);

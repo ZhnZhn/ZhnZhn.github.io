@@ -21,8 +21,7 @@ const crStackedConfig = ({
     spacingTop: Chart.STACKED_SPACING_TOP,
     spacingBottom: Chart.SPACING_BOTTOM,
     height: Chart.STACKED_HEIGHT,
-    zoomType: 'xy',
-    resetZoomButton: Chart.fResetZoomButton()
+    zoomType: 'xy'
   },
   title: Chart.fTitle(),
   subtitle: Chart.fSubtitle(),

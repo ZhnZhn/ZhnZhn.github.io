@@ -75,7 +75,7 @@ const Chart = {
   STACKED_SPACING_TOP : 25,
   SPACING_BOTTOM : 24,
   MARGIN_TOP : 60,
-    
+
   SEMIDONUT_TITLE_Y : 15,
   SEMIDONUT_SUBTITLE_Y: 35,
 
@@ -92,37 +92,7 @@ const Chart = {
       }
     }, option)
   },
-
-  fResetZoomButton(option={}){
-    return merge(false, {
-       position: {
-          align: 'right',
-          verticalAlign: 'top',
-          x: 0,
-          y: 0
-       },
-       theme: {
-         fill: COLOR.BG_TITLE,
-         stroke: COLOR.BG_TITLE,
-         r: 4,
-         style: {
-           color: COLOR.TITLE_SHOW
-         },
-         states: {
-           hover: {
-             fill: COLOR.BG_TITLE,
-             stroke: COLOR.HOVER,
-             'stroke-width': 2,
-             style: {
-               color: COLOR.HOVER
-             }
-           }
-         }
-       },
-       relativeTo: 'chart'
-    }, option)
-  },
-
+  
   setDefaultTitle(config, title, subtitle){
     config.chart.spacingTop = Chart.STACKED_SPACING_TOP;
     config.title = Chart.fTitle({ text: title });

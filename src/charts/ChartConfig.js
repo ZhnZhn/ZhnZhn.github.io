@@ -88,9 +88,6 @@ const ChartConfig = {
       Chart.crAreaConfig(options), {
       chart: {
         zoomType: 'xy',
-        resetZoomButton: Chart.fResetZoomButton({
-          position: {x: -10}
-        }),
         xDeltaCrossLabel: 4,
         yDeltaCrossLabel: 20
       },

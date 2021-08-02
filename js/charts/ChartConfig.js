@@ -102,11 +102,6 @@ const ChartConfig = { ..._WithIndicatorConfig.default,
     const config = _merge(_Chart.default.crAreaConfig(options), {
       chart: {
         zoomType: 'xy',
-        resetZoomButton: _Chart.default.fResetZoomButton({
-          position: {
-            x: -10
-          }
-        }),
         xDeltaCrossLabel: 4,
         yDeltaCrossLabel: 20
       },
