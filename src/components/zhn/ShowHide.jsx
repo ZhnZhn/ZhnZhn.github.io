@@ -1,3 +1,5 @@
+import crCn from '../zhn-utils/crCn';
+
 //import PropTypes from "prop-types";
 
 const CL_SHOW_POPUP = 'show-popup';
@@ -12,27 +14,23 @@ const S = {
 
 const ShowHide = ({
   isShow,
-  withoutAnimation=false,
+  withoutAnimation,
   className, style,
   children
 }) => {
-    const _styleShow = isShow ? S.SHOW : S.HIDE
-    , _classShow = isShow
-         ? withoutAnimation ? '' : CL_SHOW_POPUP
-         : ''
-    , _className = className
-        ? `${className} ${_classShow}`
-        : _classShow || void 0;
+    const _cn = crCn(className, [isShow && !withoutAnimation, CL_SHOW_POPUP])
+    , _styleShow = isShow ? S.SHOW : S.HIDE;
+
     return (
       <div
         aria-expanded={isShow}
-        className={_className}
-        style={{ ...style, ..._styleShow}}
+        className={_cn}
+        style={{...style, ..._styleShow}}
       >
         {children}
       </div>
     );
- }
+ };
 
 /*
 ShowHide.propTypes = {
