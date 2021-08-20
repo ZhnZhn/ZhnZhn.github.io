@@ -126,6 +126,22 @@ const BrowserConfig = {
       rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
     }
   },
+  [BT.DENMARK_STAT_ALL]: {
+    browserType: BT.DENMARK_STAT_ALL,
+    isDynamic: true,
+    caption: 'Statistics Denmark All',
+    dfProps: {
+      bT: BT.DENMARK_STAT_ALL,
+      lT: 'SDN',
+      sP: 'Stat. Denmark',
+      dU: './data/statistics-denmark/statistics-denmark.html',
+      dS: 'Statistics Denmark',
+      rootUrl: 'https://api.statbank.dk/v1/subjects',
+      dfTi: '?lang=en&includeTables=true',
+      rootMeta: 'https://api.statbank.dk/v1/tableinfo',
+      dfMeta: '?lang=en'
+    }
+  },
   [BT.US_ECONOMICS]: {
     browserType: BT.US_ECONOMICS,
     isDynamic: true,

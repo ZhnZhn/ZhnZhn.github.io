@@ -3,57 +3,84 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _loadJson = _interopRequireDefault(require("./loadJson"));
 
-var _isArr = Array.isArray;
+const _isArr = Array.isArray;
 
-var _toFirstUpperCase = function _toFirstUpperCase(str) {
-  return str.charAt(0).toUpperCase() + str.substring(1);
-};
+const _toFirstUpperCase = str => str.charAt(0).toUpperCase() + str.substring(1);
 
-var _crDimOptions = function _crDimOptions(_ref) {
-  var values = _ref.values,
-      valueTexts = _ref.valueTexts,
-      code = _ref.code;
-
+const _crDimOptions = ({
+  values,
+  valueTexts,
+  code
+}) => {
   if (!_isArr(values) || !_isArr(valueTexts) || values.length !== valueTexts.length) {
     return;
   }
 
-  var _arr = [];
+  const _arr = [];
 
-  for (var i = 0; i < valueTexts.length; i++) {
-    var _slice;
-
+  for (let i = 0; i < valueTexts.length; i++) {
     _arr.push({
       caption: valueTexts[i],
-      slice: (_slice = {}, _slice[code] = values[i], _slice)
+      slice: {
+        [code]: values[i]
+      }
     });
   }
 
   return _arr;
 };
 
-var TIME_IDS = ['Tid', 'Year', 'Month', 'Vuosi', 'Vuosineljännes'];
-var FREQUENCY_HM = {
+const _isStatDenmark = (time, text, item) => !time && text && item.id && !_isArr(item.valueTexts) && _isArr(item.values);
+
+const _crSdnDimOptions = ({
+  values,
+  id
+}) => {
+  const _arr = [];
+
+  for (let i = 0; i < values.length; i++) {
+    _arr.push({
+      caption: values[i].text,
+      slice: {
+        [id]: values[i].id
+      }
+    });
+  }
+
+  return _arr;
+};
+
+const TIME_IDS = ['Tid', 'Year', 'Month', 'Vuosi', 'Vuosineljännes'];
+const FREQUENCY_HM = {
   month: 'M',
   quarter: 'K'
 };
 
-var _crDimsConfig = function _crDimsConfig(json) {
-  var dims = [],
-      _json$variables = json.variables,
-      variables = _json$variables === void 0 ? [] : _json$variables;
-  var timeId,
+const _crDimsConfig = json => {
+  const dims = [],
+        {
+    variables
+  } = json;
+  let timeId,
       mapFrequency = 'Y';
-  variables.forEach(function (item) {
-    var code = item.code,
-        time = item.time,
-        _text = item.text || '';
+  (variables || []).forEach(item => {
+    const {
+      code,
+      time
+    } = item,
+          _text = item.text || '';
 
-    if (!time && TIME_IDS.indexOf(code) === -1) {
+    if (_isStatDenmark(time, _text, item)) {
+      dims.push({
+        c: _toFirstUpperCase(_text),
+        v: item.id,
+        options: _crSdnDimOptions(item)
+      });
+    } else if (!time && TIME_IDS.indexOf(code) === -1) {
       dims.push({
         c: _toFirstUpperCase(_text),
         v: code,
@@ -65,16 +92,16 @@ var _crDimsConfig = function _crDimsConfig(json) {
     }
   });
   return {
-    mapFrequency: mapFrequency,
-    dims: dims,
-    timeId: timeId
+    mapFrequency,
+    dims,
+    timeId
   };
 };
 
-var loadDimsWithOptions = function loadDimsWithOptions(url) {
-  return (0, _loadJson["default"])(url).then(_crDimsConfig);
+const loadDimsWithOptions = url => {
+  return (0, _loadJson.default)(url).then(_crDimsConfig);
 };
 
 var _default = loadDimsWithOptions;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=loadDimsWithOptions.js.map

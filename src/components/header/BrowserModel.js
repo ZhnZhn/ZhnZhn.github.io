@@ -131,6 +131,11 @@ const crBrowserModel = () => {
         name: 'Statistics Finland All',
         onClick: _fBD(BT.FINLAND_STAT_ALL),
         isClose: true
+      },{
+        cn: CL.ORG,
+        name: 'Statistics Denmark All',
+        onClick: _fBD(BT.DENMARK_STAT_ALL),
+        isClose: true
       }
     ],
     page_03: [

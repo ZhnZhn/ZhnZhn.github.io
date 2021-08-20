@@ -1,23 +1,67 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
+const _isArr = Array.isArray;
 
-var _compareByText = function _compareByText(a, b) {
+const _compareByText = (a, b) => {
   if (a.text < b.text) return -1;
   if (a.text > b.text) return 1;
   return 0;
 };
 
-var loadItems = function loadItems(url, proxy) {
-  var _url = proxy ? proxy + url : url;
+const _isEmptyTables = ({
+  tables
+}) => _isArr(tables) && tables.length === 0;
+
+const _trJson = (json, id) => {
+  const _json = [];
+  json.forEach(item => {
+    if (item.id !== id) {
+      item.text = item.description;
+
+      if (item.hasSubjects || _isEmptyTables(item)) {
+        item.type = 'l';
+      }
+
+      _json.push(item);
+    }
+  });
+  return _json;
+};
+
+const _trJsonIfSdn = (json, id, lT) => {
+  if (lT === 'SDN') {
+    const _item = json[0];
+
+    if ((_item.tables || []).length !== 0) {
+      return _item.tables.map(a => {
+        a.text = a.id + ": " + a.text + ", " + (a.firstPeriod || '') + "-" + (a.latestPeriod || '');
+        return a;
+      });
+    } else if ((_item.subjects || []).length !== 0) {
+      return _trJson(_item.subjects, id);
+    } else {
+      return _trJson(json, id);
+    }
+  }
+
+  return json;
+};
+
+const loadItems = (proxy = '', dfProps, id) => {
+  const {
+    rootUrl,
+    dfTi = '',
+    lT
+  } = dfProps,
+        _url = "" + proxy + rootUrl + "/" + id + dfTi;
 
   return fetch(_url, {
     cache: "default"
-  }).then(function (res) {
-    return res.json();
-  }).then(function (json) {
-    if (Array.isArray(json)) {
+  }).then(res => res.json()).then(json => {
+    if (_isArr(json)) {
+      json = _trJsonIfSdn(json, id, lT);
       json.sort(_compareByText);
     }
 
@@ -26,5 +70,5 @@ var loadItems = function loadItems(url, proxy) {
 };
 
 var _default = loadItems;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=loadItems.js.map

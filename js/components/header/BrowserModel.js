@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _Type = require("../../constants/Type");
 
@@ -11,8 +11,8 @@ var _ComponentActions = _interopRequireDefault(require("../../flux/actions/Compo
 
 var _BrowserActions = _interopRequireDefault(require("../../flux/actions/BrowserActions"));
 
-var CL_ROW = 'row__pane-topic';
-var CL = {
+const CL_ROW = 'row__pane-topic';
+const CL = {
   BR: CL_ROW + " item__browser",
   Q: CL_ROW + " item__quandl",
   DBN: CL_ROW + " item__dbnomics",
@@ -21,13 +21,11 @@ var CL = {
   AB: CL_ROW + " item__about"
 };
 
-var _fBD = function _fBD(id) {
-  return function () {
-    _BrowserActions["default"].showBrowserDynamic(id);
-  };
+const _fBD = id => () => {
+  _BrowserActions.default.showBrowserDynamic(id);
 };
 
-var crBrowserModel = function crBrowserModel() {
+const crBrowserModel = () => {
   return {
     titleCl: CL.BR,
     pageWidth: 235,
@@ -71,7 +69,7 @@ var crBrowserModel = function crBrowserModel() {
     }, {
       cn: CL.AB,
       name: 'About',
-      onClick: _ComponentActions["default"].showAbout,
+      onClick: _ComponentActions.default.showAbout,
       isClose: true
     }],
     page_01: [{
@@ -135,6 +133,11 @@ var crBrowserModel = function crBrowserModel() {
       name: 'Statistics Finland All',
       onClick: _fBD(_Type.BrowserType.FINLAND_STAT_ALL),
       isClose: true
+    }, {
+      cn: CL.ORG,
+      name: 'Statistics Denmark All',
+      onClick: _fBD(_Type.BrowserType.DENMARK_STAT_ALL),
+      isClose: true
     }],
     page_03: [{
       cn: CL.BR,
@@ -172,5 +175,5 @@ var crBrowserModel = function crBrowserModel() {
 };
 
 var _default = crBrowserModel;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=BrowserModel.js.map

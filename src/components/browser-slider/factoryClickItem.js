@@ -10,12 +10,11 @@ const CONF = {
   }
 };
 
-const _crMetaUrl = ({ rootUrl, id, proxy }) => {
-  const _href = `${rootUrl}/${id}`;
-  return proxy
-    ? `${proxy}${_href}`
-    : _href;
-}
+const _assign = Object.assign;
+
+const _crMetaUrl = ({ rootMeta, rootUrl, id, proxy='', dfMeta='' }) => {
+  return `${proxy}${rootMeta || rootUrl}/${id}${dfMeta}`;  
+};
 
 const _crTitleAndCaption = (dfProps) => {
   const _text = dfProps.text || ''
@@ -35,11 +34,11 @@ const _fOnClickTable = (dfProps) => () => {
      noTime, dS
    } = dfProps
    , _metaUrl = _crMetaUrl(dfProps)
-   , _conf = Object.assign({}, CONF, {
+   , _conf = _assign({}, CONF, {
        type: `${bT}_${id}`,
        ..._crTitleAndCaption(dfProps)
      });
-   Object.assign(_conf.dialogProps, {
+   _assign(_conf.dialogProps, {
      loadId: lT,
      descrUrl: dU,
      dataSource: dS,

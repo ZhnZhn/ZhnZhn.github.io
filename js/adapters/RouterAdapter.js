@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _EuroStat = _interopRequireDefault(require("./eurostat/EuroStat"));
 
@@ -24,6 +22,8 @@ var _StatNorway = _interopRequireDefault(require("./stat-norway/StatNorway"));
 var _StatSweden = _interopRequireDefault(require("./stat-sweden/StatSweden"));
 
 var _StatFinland = _interopRequireDefault(require("./stat-finland/StatFinland"));
+
+var _StatDenmark = _interopRequireDefault(require("./stat-denmark/StatDenmark"));
 
 var _AlphaVantage = _interopRequireDefault(require("./alpha/AlphaVantage"));
 
@@ -61,35 +61,36 @@ var _Bf = _interopRequireDefault(require("./bitfinex/Bf"));
 
 var _Bt = _interopRequireDefault(require("./bitstamp/Bt"));
 
-var RouterAdapter = (0, _extends2["default"])({
-  Quandl: _Quandl["default"],
-  DbNomics: _DbNomics["default"],
-  EuroStat: _EuroStat["default"],
-  UnComtrade: _UnComtrade["default"],
-  FaoStat: _FaoStat["default"],
-  WorldBank: _WorldBank["default"],
-  Insee: _Insee["default"],
-  StatUk: _StatUk["default"]
-}, _StatNorway["default"], {
-  StatSweden: _StatSweden["default"],
-  StatFinland: _StatFinland["default"],
-  AlphaVantage: _AlphaVantage["default"],
-  Iex: _Iex["default"],
-  Fmp: _Fmp["default"],
-  Tw: _Tw["default"],
-  Bea: _Bea["default"],
-  Bls: _Bls["default"],
-  Eia: _Eia["default"],
-  Intrinio: _Intrinio["default"],
-  Crc: _Crc["default"],
-  Cg: _Cg["default"],
-  Cm: _Cm["default"],
-  Cp: _Cp["default"],
-  Cl: _Cl["default"],
-  Bn: _Bn["default"],
-  Bf: _Bf["default"],
-  Bt: _Bt["default"]
-});
+const RouterAdapter = {
+  Quandl: _Quandl.default,
+  DbNomics: _DbNomics.default,
+  EuroStat: _EuroStat.default,
+  UnComtrade: _UnComtrade.default,
+  FaoStat: _FaoStat.default,
+  WorldBank: _WorldBank.default,
+  Insee: _Insee.default,
+  StatUk: _StatUk.default,
+  ..._StatNorway.default,
+  StatSweden: _StatSweden.default,
+  StatFinland: _StatFinland.default,
+  StatDenmark: _StatDenmark.default,
+  AlphaVantage: _AlphaVantage.default,
+  Iex: _Iex.default,
+  Fmp: _Fmp.default,
+  Tw: _Tw.default,
+  Bea: _Bea.default,
+  Bls: _Bls.default,
+  Eia: _Eia.default,
+  Intrinio: _Intrinio.default,
+  Crc: _Crc.default,
+  Cg: _Cg.default,
+  Cm: _Cm.default,
+  Cp: _Cp.default,
+  Cl: _Cl.default,
+  Bn: _Bn.default,
+  Bf: _Bf.default,
+  Bt: _Bt.default
+};
 var _default = RouterAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=RouterAdapter.js.map

@@ -3,13 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
-var CONF = {
+const CONF = {
   dialogConf: true,
   dialogType: "DialogStatN",
   dialogProps: {
@@ -18,20 +16,21 @@ var CONF = {
     isProxy: true
   }
 };
+const _assign = Object.assign;
 
-var _crMetaUrl = function _crMetaUrl(_ref) {
-  var rootUrl = _ref.rootUrl,
-      id = _ref.id,
-      proxy = _ref.proxy;
-
-  var _href = rootUrl + "/" + id;
-
-  return proxy ? "" + proxy + _href : _href;
+const _crMetaUrl = ({
+  rootMeta,
+  rootUrl,
+  id,
+  proxy = '',
+  dfMeta = ''
+}) => {
+  return "" + proxy + (rootMeta || rootUrl) + "/" + id + dfMeta;
 };
 
-var _crTitleAndCaption = function _crTitleAndCaption(dfProps) {
-  var _text = dfProps.text || '',
-      _caption = _text.length > 35 ? _text.substring(0, 35) + '...' : _text;
+const _crTitleAndCaption = dfProps => {
+  const _text = dfProps.text || '',
+        _caption = _text.length > 35 ? _text.substring(0, 35) + '...' : _text;
 
   return {
     menuTitle: _text.substring(0, 27),
@@ -39,38 +38,39 @@ var _crTitleAndCaption = function _crTitleAndCaption(dfProps) {
   };
 };
 
-var _fOnClickTable = function _fOnClickTable(dfProps) {
-  return function () {
-    var rootUrl = dfProps.rootUrl,
-        id = dfProps.id,
-        proxy = dfProps.proxy,
-        bT = dfProps.bT,
-        lT = dfProps.lT,
-        dU = dfProps.dU,
-        noTime = dfProps.noTime,
-        dS = dfProps.dS,
+const _fOnClickTable = dfProps => () => {
+  const {
+    rootUrl,
+    id,
+    proxy,
+    bT,
+    lT,
+    dU,
+    noTime,
+    dS
+  } = dfProps,
         _metaUrl = _crMetaUrl(dfProps),
-        _conf = Object.assign({}, CONF, (0, _extends2["default"])({
-      type: bT + "_" + id
-    }, _crTitleAndCaption(dfProps)));
+        _conf = _assign({}, CONF, {
+    type: bT + "_" + id,
+    ..._crTitleAndCaption(dfProps)
+  });
 
-    Object.assign(_conf.dialogProps, {
-      loadId: lT,
-      descrUrl: dU,
-      dataSource: dS,
-      dfProps: {
-        metaUrl: _metaUrl,
-        baseMeta: rootUrl,
-        dfId: id,
-        proxy: proxy,
-        noTime: noTime
-      }
-    });
+  _assign(_conf.dialogProps, {
+    loadId: lT,
+    descrUrl: dU,
+    dataSource: dS,
+    dfProps: {
+      metaUrl: _metaUrl,
+      baseMeta: rootUrl,
+      dfId: id,
+      proxy,
+      noTime
+    }
+  });
 
-    _ComponentActions["default"].showDialog(bT + "_" + id, bT, _conf);
-  };
+  _ComponentActions.default.showDialog(bT + "_" + id, bT, _conf);
 };
 
 var _default = _fOnClickTable;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=factoryClickItem.js.map

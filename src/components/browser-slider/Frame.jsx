@@ -16,11 +16,15 @@ const _fOnClick = (
   onClickNext, fOnClickItem,
   item
 ) => {
-  const { text, id, type } = item;
+  const { text, id, type } = item
+  , _id = dfProps.lT === 'SDN'
+     ? id || rootId
+     : rootId ? `${rootId}/${id}` : id;
+
   return type === 'l'
-     ? onClickNext.bind(null, `${rootId}/${id}`, text, pageNumber)
+     ? onClickNext.bind(null, _id, text, pageNumber)
      : fOnClickItem({
-         id: `${rootId}/${id}`,
+         id: _id,
          ...dfProps,
          text,
          proxy
@@ -55,7 +59,7 @@ const Frame = ({
 
   useEffect(()=>{
     if (title) {
-      loadItems(`${dfProps.rootUrl}/${id}`, proxy)
+      loadItems(proxy, dfProps, id)
         .then(model => {
           const _nextState = _isArr(model)
             ? { model }

@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.CompItemType = exports.LoadType = exports.ChartType = exports.ModalDialog = exports.Direction = exports.BrowserType = void 0;
-var BrowserType = {
+const BrowserType = {
   STOCK_MARKETS: 'SM',
   EUROSTAT: 'ES',
   UN_COMTRADE: 'UN',
@@ -15,6 +15,7 @@ var BrowserType = {
   SWEDEN_STAT: 'SWS',
   SWEDEN_STAT_ALL: 'SWS_ALL',
   FINLAND_STAT_ALL: 'SFL',
+  DENMARK_STAT_ALL: 'SDN',
   QUANDL: 'QE',
   NYSE_STOCKS: 'NS',
   NASDAQ_STOCKS: 'NQS',
@@ -27,14 +28,14 @@ var BrowserType = {
   WATCH_LIST: 'WL'
 };
 exports.BrowserType = BrowserType;
-var Direction = {
+const Direction = {
   UP: 'up',
   DOWN: 'down',
   EQUAL: 'equal',
   EMPTY: 'empty'
 };
 exports.Direction = Direction;
-var ModalDialog = {
+const ModalDialog = {
   ASK: 'ASK',
   RELOAD: 'RELOAD',
   INFO: 'info',
@@ -52,7 +53,7 @@ var ModalDialog = {
   ZOOM: 'zoom'
 };
 exports.ModalDialog = ModalDialog;
-var ChartType = {
+const ChartType = {
   AREA: 'AREA',
   SEMI_DONUT: 'SEMI_DONUT',
   STACKED_AREA: 'STACKED_AREA',
@@ -66,7 +67,7 @@ var ChartType = {
   SCATTER_DOWN: 'SCATTER_DOWN'
 };
 exports.ChartType = ChartType;
-var LoadType = {
+const LoadType = {
   Q: 'Q',
   AL: 'AL',
   IEX: 'IEX',
@@ -81,6 +82,7 @@ var LoadType = {
   NST_2: 'NST_2',
   SWS: 'SWS',
   SFL: 'SFL',
+  SDN: 'SDN',
   UN: 'UN',
   FAO: 'FAO',
   WB: 'WB',
@@ -99,7 +101,7 @@ var LoadType = {
   WL: 'WL'
 };
 exports.LoadType = LoadType;
-var CompItemType = {
+const CompItemType = {
   CHART_AREA: 'CHART_AREA',
   EUROSTAT_MAP: 'EUROSTAT_MAP',
   TABLE: 'TABLE',

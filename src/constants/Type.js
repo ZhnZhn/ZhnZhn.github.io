@@ -14,6 +14,7 @@ export const BrowserType = {
    SWEDEN_STAT: 'SWS',
    SWEDEN_STAT_ALL: 'SWS_ALL',
    FINLAND_STAT_ALL: 'SFL',
+   DENMARK_STAT_ALL: 'SDN',
 
    QUANDL: 'QE',
 
@@ -86,6 +87,7 @@ export const LoadType = {
   NST_2: 'NST_2',
   SWS: 'SWS',
   SFL: 'SFL',
+  SDN: 'SDN',
   UN: 'UN',
   FAO: 'FAO',
   WB: 'WB',

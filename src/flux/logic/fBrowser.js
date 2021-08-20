@@ -78,6 +78,7 @@ const fBrowser = {
       case BT.SWEDEN_STAT_ALL:
       case BT.NORWAY_STAT_ALL:
       case BT.FINLAND_STAT_ALL:
+      case BT.DENMARK_STAT_ALL:
         return RouterBrowser.STAT_ALL
           .then(Comp => _crBrowserDynamic(Comp, option));
 

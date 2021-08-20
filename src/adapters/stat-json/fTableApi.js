@@ -30,7 +30,7 @@ const _crArrQuery = (items) => {
      }
   })
   return arrQuery;
-}
+};
 
 const _isCategory = seriaType =>
    seriaType === "BAR_CLUSTER"
@@ -57,37 +57,73 @@ const _checkSeriaCategory = (arr, { dfC, seriaType }) => {
   return arr;
 };
 
+const _crOptionFetch = (arrQuery, option) => ({
+  method: 'POST',
+  body: JSON.stringify({
+     query: _checkSeriaCategory(arrQuery, option),
+     response: {
+        format: "json-stat"
+     }
+  })
+});
+
+const _crVariablesDenm = items => items
+ .map(({ slice }) => {
+    const code = Object.keys(slice)[0];
+    return {
+      code,
+      values: [slice[code]]
+    };
+ });
+
+const _crOptionFetchDenm = ({ dfId, items }) => ({
+  method: "POST",
+  headers: {
+   'Content-Type': "application/json",
+  },
+  body: JSON.stringify({
+     lang: "en",
+     table: dfId,
+     format: "JSONSTAT",
+     valuePresentation: "Default",
+     timeOrder: "Ascending",
+     variables: [
+       ..._crVariablesDenm(items),
+       { code: 'Tid', values: ["*"]}
+     ]
+  })
+});
+
 const fTableApi = (ROOT_URL) => ({
   getRequestUrl(option){
-    const { proxy='', dfId, url } = option;
-        
-    if (url) { return url; }
-    return (option.url = `${proxy}${ROOT_URL}/${dfId}`);
+    if (option.url) { return option.url; }
+
+    const { proxy='', dfId } = option
+    , _dfId = option.loadId === 'SDN'
+        ? ''
+        : '/'+dfId;
+
+    return (option.url = `${proxy}${ROOT_URL}${_dfId}`);
   },
 
   crOptionFetch(option){
+    if (option.optionFetch) {
+      return option.optionFetch;
+    }
+    if (option.loadId === 'SDN') {
+      return (option.optionFetch = _crOptionFetchDenm(option));
+    }
+
     const {
       items=[],
       isTop12, isTop6,
-      optionFetch
-    } = option;
-
-    if (optionFetch) { return optionFetch; }
-
-    const arrQuery = _crArrQuery(items);
+    } = option
+    , arrQuery = _crArrQuery(items);
 
     _checkTop(isTop12, '12', arrQuery)
     _checkTop(isTop6, '6', arrQuery)
 
-    return (option.optionFetch = {
-      method: 'POST',
-      body: JSON.stringify({
-         query: _checkSeriaCategory(arrQuery, option),
-         response: {
-            format: "json-stat"
-         }
-      })
-    });
+    return (option.optionFetch = _crOptionFetch(arrQuery, option));
   },
 
   checkResponse(){

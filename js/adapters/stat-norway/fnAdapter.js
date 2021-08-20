@@ -3,25 +3,25 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var isYNumber = _AdapterFn["default"].isYNumber,
-    numberFormat = _AdapterFn["default"].numberFormat,
-    crId = _AdapterFn["default"].crId,
-    roundBy = _AdapterFn["default"].roundBy,
-    valueMoving = _AdapterFn["default"].valueMoving,
-    crItemConf = _AdapterFn["default"].crItemConf;
-var TITLE = {
+const {
+  isYNumber,
+  numberFormat,
+  crId,
+  roundBy,
+  valueMoving,
+  crItemConf
+} = _AdapterFn.default;
+const TITLE = {
   NST: 'Statisctics Norway: All Items',
   SWS: 'Statisctics Sweden: All Items'
 };
-var SEARCH = {
+const SEARCH = {
   NST: {
     url: 'https://www.ssb.no/en/sok?sok=',
     title: 'Statistics Norway Search'
@@ -33,112 +33,121 @@ var SEARCH = {
   SFL: {
     url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
     title: "Statistics Finland's PX-Web"
+  },
+  SDN: {
+    url: 'https://www.statbank.dk/statbank5a/default.asp',
+    title: 'Statistics Denmark Search'
   }
 };
-var DF_SOURCE = 'Unknown';
-var MAX_SOURCE_ID_LENGTH = 9;
+const DF_SOURCE = 'Unknown';
+const MAX_SOURCE_ID_LENGTH = 9;
+const _assign = Object.assign;
 
-var _crSearchToken = function _crSearchToken(label) {
-  var _arr = (label || '').toString().split(',');
+const _crSearchToken = label => {
+  const _arr = (label || '').toString().split(',');
 
   return _arr[0] || '';
 };
 
-var _crLink = function _crLink(token, _ref) {
-  var url = _ref.url,
-      title = _ref.title;
-  return "<a class=\"native-link\" href=\"" + url + token + "\">" + title + "</a>";
-};
+const _crLink = ({
+  url,
+  title
+}, token = '') => "<a class=\"native-link\" href=\"" + url + token + "\">" + title + "</a>";
 
-var _crToken = function _crToken(_ref2) {
-  var dfId = _ref2.dfId;
-  var arr = ('' + dfId).split('/'),
-      id = arr.pop(),
-      prefix = arr.join('__');
+const _crToken = ({
+  dfId
+}) => {
+  const arr = ('' + dfId).split('/'),
+        id = arr.pop(),
+        prefix = arr.join('__');
   return prefix && id ? "StatFin__" + prefix + "/" + id : '';
 };
 
-var _crSearchLink = function _crSearchLink(label, option) {
-  var _token = _crSearchToken(label);
+const _crSearchLink = (label, option) => {
+  const _token = _crSearchToken(label);
 
   switch (option.loadId) {
     case 'NST':
     case 'NST_2':
-      return _crLink(_token, SEARCH.NST);
+      return _crLink(SEARCH.NST, _token);
 
     case 'SWS':
-      return _crLink(_token, SEARCH.SWS);
+      return _crLink(SEARCH.SWS, _token);
 
     case 'SFL':
-      return _crLink(_crToken(option), SEARCH.SFL);
+      return _crLink(SEARCH.SFL, _crToken(option));
+
+    case 'SDN':
+      return _crLink(SEARCH.SDN);
 
     default:
       return '';
   }
 };
 
-var _crDescr = function _crDescr(_ref3, option) {
-  var _ref3$updated = _ref3.updated,
-      updated = _ref3$updated === void 0 ? '' : _ref3$updated,
-      _ref3$source = _ref3.source,
-      source = _ref3$source === void 0 ? DF_SOURCE : _ref3$source,
-      label = _ref3.label;
-
-  var _date = updated.replace('T', ' ').replace('Z', ''),
-      _option$dfId = option.dfId,
-      dfId = _option$dfId === void 0 ? '' : _option$dfId,
-      _elSearchLink = _crSearchLink(label, option);
+const _crDescr = ({
+  updated = '',
+  source = DF_SOURCE,
+  label
+}, option) => {
+  const _date = updated.replace('T', ' ').replace('Z', ''),
+        {
+    dfId = ''
+  } = option,
+        _elSearchLink = _crSearchLink(label, option);
 
   return "TableId: " + dfId + "<BR/>" + source + ": " + _date + "<BR/>" + _elSearchLink;
 };
 
-var _crItemCaption = function _crItemCaption(option) {
-  var items = option.items,
-      _option$dfId2 = option.dfId,
-      dfId = _option$dfId2 === void 0 ? 'id' : _option$dfId2,
-      caption = items[0] ? items[0].caption : 'All Items';
+const _crItemCaption = option => {
+  const {
+    items,
+    dfId = 'id'
+  } = option,
+        caption = items[0] ? items[0].caption : 'All Items';
   return dfId + "_" + caption;
 };
 
-var _crAreaMapSlice = function _crAreaMapSlice(option) {
-  var items = option.items,
-      dfTSlice = option.dfTSlice,
-      mapSlice = {};
-  items.forEach(function (item) {
+const _crAreaMapSlice = option => {
+  const {
+    items,
+    dfTSlice
+  } = option,
+        mapSlice = {};
+  items.forEach(item => {
     if (item.slice) {
-      Object.assign(mapSlice, item.slice);
+      _assign(mapSlice, item.slice);
     }
   });
-  return Object.assign(mapSlice, dfTSlice);
+  return _assign(mapSlice, dfTSlice);
 };
 
-var _getDimensionWithouTime = function _getDimensionWithouTime(ds) {
-  var _dim = ds.Dimension("Year") || ds.Dimension("Vuosi") || ds.Dimension("Vuosineljännes") || ds.Dimension("Month");
+const _getDimensionWithouTime = ds => {
+  const _dim = ds.Dimension("Year") || ds.Dimension("Vuosi") || ds.Dimension("Vuosineljännes") || ds.Dimension("Month");
 
   return _dim && _dim.id ? [_dim.id[0]] : ["2019"];
 };
 
-var _getTimeDimension = function _getTimeDimension(ds, timeId) {
-  var _dimTimeId = timeId && ds.Dimension(timeId),
-      _dim = _dimTimeId || ds.Dimension("Tid"),
-      times = _dim && _dim.id || _getDimensionWithouTime(ds);
+const _getTimeDimension = (ds, timeId) => {
+  const _dimTimeId = timeId && ds.Dimension(timeId),
+        _dim = _dimTimeId || ds.Dimension("Tid"),
+        times = _dim && _dim.id || _getDimensionWithouTime(ds);
 
   return times;
 };
 
-var _crDataSource = function _crDataSource(_ref4) {
-  var dataSource = _ref4.dataSource,
-      dfId = _ref4.dfId;
-  return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
-};
+const _crDataSource = ({
+  dataSource,
+  dfId
+}) => dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
 
-var fnAdapter = {
-  isYNumber: isYNumber,
-  numberFormat: numberFormat,
-  crId: crId,
-  roundBy: roundBy,
+const fnAdapter = {
+  isYNumber,
+  numberFormat,
+  crId,
+  roundBy,
   crValueMoving: valueMoving,
-  crTitle: function crTitle(option) {
+  crTitle: option => {
     switch (option.browserType) {
       case 'NST':
       case 'NST_ALL':
@@ -152,74 +161,71 @@ var fnAdapter = {
         return '';
     }
   },
-  crDsValuesTimes: function crDsValuesTimes(json, option) {
-    var mapSlice = _crAreaMapSlice(option),
-        ds = (0, _jsonstat["default"])(json).Dataset(0),
-        values = ds.Data(mapSlice),
-        times = _getTimeDimension(ds, option.timeId);
+  crDsValuesTimes: (json, option) => {
+    const mapSlice = _crAreaMapSlice(option),
+          ds = (0, _jsonstat.default)(json).Dataset(0),
+          values = ds.Data(mapSlice),
+          times = _getTimeDimension(ds, option.timeId);
 
     return {
-      ds: ds,
-      values: values,
-      times: times
+      ds,
+      values,
+      times
     };
   },
-  crTid: function crTid(time, ds) {
+  crTid: (time, ds) => {
     if (time) {
       return time;
     }
 
-    var tidIds = _getTimeDimension(ds);
+    const tidIds = _getTimeDimension(ds);
 
     return tidIds[tidIds.length - 1];
   },
-  crInfo: function crInfo(ds, option) {
-    return {
-      name: ds.label || '',
-      description: _crDescr(ds, option)
-    };
-  },
-  crZhConfig: function crZhConfig(option) {
-    var _itemKey = option._itemKey,
-        url = option.url,
-        optionFetch = option.optionFetch,
-        items = option.items,
-        dataSource = option.dataSource,
-        dfId = option.dfId,
-        timeId = option.timeId,
-        key = _itemKey || crId(),
-        itemCaption = option.itemCaption || _crItemCaption(option),
-        itemConf = url ? (0, _extends2["default"])({
-      _itemKey: key
-    }, crItemConf(option), {
-      optionFetch: optionFetch,
-      items: items,
-      dataSource: dataSource,
+  crInfo: (ds, option) => ({
+    name: ds.label || '',
+    description: _crDescr(ds, option)
+  }),
+  crZhConfig: option => {
+    const {
+      _itemKey,
+      url,
+      optionFetch,
+      items,
+      dataSource,
+      dfId,
+      timeId
+    } = option,
+          key = _itemKey || crId(),
+          itemCaption = option.itemCaption || _crItemCaption(option),
+          itemConf = url ? {
+      _itemKey: key,
+      ...crItemConf(option),
+      optionFetch,
+      items,
+      dataSource,
       //sfl
-      dfId: dfId,
-      timeId: timeId
-    }) : void 0;
+      dfId,
+      timeId
+    } : void 0;
 
     return {
       id: key,
-      key: key,
-      itemCaption: itemCaption,
-      itemConf: itemConf,
+      key,
+      itemCaption,
+      itemConf,
       dataSource: _crDataSource(option)
     };
   },
-  crConfOption: function crConfOption(ds, option) {
-    return {
-      info: fnAdapter.crInfo(ds, option),
-      zhConfig: fnAdapter.crZhConfig(option)
-    };
-  },
-  crChartOption: function crChartOption(ds, data, option) {
-    return (0, _extends2["default"])({
-      valueMoving: fnAdapter.crValueMoving(data)
-    }, fnAdapter.crConfOption(ds, option));
-  }
+  crConfOption: (ds, option) => ({
+    info: fnAdapter.crInfo(ds, option),
+    zhConfig: fnAdapter.crZhConfig(option)
+  }),
+  crChartOption: (ds, data, option) => ({
+    valueMoving: fnAdapter.crValueMoving(data),
+    ...fnAdapter.crConfOption(ds, option)
+  })
 };
 var _default = fnAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fnAdapter.js.map

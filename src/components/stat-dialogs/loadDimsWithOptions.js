@@ -6,7 +6,6 @@ const _toFirstUpperCase = (str) => str
   .charAt(0)
   .toUpperCase() + str.substring(1);
 
-
 const _crDimOptions = ({ values, valueTexts, code }) => {
   if (!_isArr(values) || !_isArr(valueTexts)
       || values.length !== valueTexts.length) {
@@ -22,6 +21,21 @@ const _crDimOptions = ({ values, valueTexts, code }) => {
   return _arr;
 };
 
+const _isStatDenmark = (time, text, item) => !time
+  && text && item.id
+  && !_isArr(item.valueTexts)
+  && _isArr(item.values);
+
+const _crSdnDimOptions = ({ values, id }) => {
+  const _arr = [];
+  for(let i=0; i<values.length;i++){
+    _arr.push({
+      caption: values[i].text,
+      slice: { [id]: values[i].id }
+    })
+  }
+  return _arr;
+};
 
 const TIME_IDS = [
   'Tid',
@@ -35,16 +49,22 @@ const FREQUENCY_HM = {
 
 const _crDimsConfig = (json) => {
   const dims = []
-  , { variables=[] } = json;
+  , { variables } = json;
   let timeId, mapFrequency = 'Y';
-  variables.forEach(item => {
+  (variables || []).forEach(item => {
     const { code, time } = item
     , _text = item.text || '';
-    if (!time && TIME_IDS.indexOf(code) === -1) {
-     dims.push({
-       c: _toFirstUpperCase(_text),
-       v: code,
-       options: _crDimOptions(item)
+    if (_isStatDenmark(time, _text, item)) {
+      dims.push({
+        c: _toFirstUpperCase(_text),
+        v: item.id,
+        options: _crSdnDimOptions(item)
+      })
+    } else if (!time && TIME_IDS.indexOf(code) === -1) {
+      dims.push({
+        c: _toFirstUpperCase(_text),
+        v: code,
+        options: _crDimOptions(item)
      })
     } else {
       timeId = code
@@ -52,10 +72,10 @@ const _crDimsConfig = (json) => {
    }
   })
   return { mapFrequency, dims, timeId };
-}
+};
 
 const loadDimsWithOptions = (url) => {
   return loadJson(url).then(_crDimsConfig);
-}
+};
 
 export default loadDimsWithOptions

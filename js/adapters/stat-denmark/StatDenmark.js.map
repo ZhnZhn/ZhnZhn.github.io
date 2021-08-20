@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-denmark/StatDenmark.js"
+ ],
+ "file": "../../../src/adapters/stat-denmark/StatDenmark.js",
+ "names": [
+  "StatFinland",
+  "api",
+  "tableApi",
+  "optionFetch",
+  "crOptionFetch",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,WAAW,GAAG;AAClBC,EAAAA,GAAG,EAAEC,iBADa;AAElBC,EAAAA,WAAW,EAAED,kBAASE,aAFJ;AAGlBC,EAAAA,OAAO,EAAPA;AAHkB,CAApB;eAMeL,W"
+}

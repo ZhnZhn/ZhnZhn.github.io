@@ -28,18 +28,24 @@ const SEARCH = {
   SFL: {
     url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
     title: "Statistics Finland's PX-Web"
+  },
+  SDN: {
+    url: 'https://www.statbank.dk/statbank5a/default.asp',
+    title: 'Statistics Denmark Search'
   }
 };
 
 const DF_SOURCE = 'Unknown';
 const MAX_SOURCE_ID_LENGTH = 9;
 
+const _assign = Object.assign;
+
 const _crSearchToken = (label) => {
   const _arr = (label || '').toString().split(',');
   return _arr[0] || '';
 };
 
-const _crLink = (token, {url, title}) => `<a class="native-link" href="${url}${token}">${title}</a>`;
+const _crLink = ({url, title}, token='') => `<a class="native-link" href="${url}${token}">${title}</a>`;
 
 const _crToken = ({ dfId }) => {
   const arr = (''+dfId).split('/')
@@ -52,11 +58,13 @@ const _crSearchLink = (label, option) => {
   const  _token = _crSearchToken(label);
   switch(option.loadId){
     case 'NST': case 'NST_2':
-      return _crLink(_token, SEARCH.NST);
+      return _crLink(SEARCH.NST, _token);
     case 'SWS':
-      return _crLink(_token, SEARCH.SWS);
+      return _crLink(SEARCH.SWS, _token);
     case 'SFL':
-      return _crLink(_crToken(option), SEARCH.SFL);
+      return _crLink(SEARCH.SFL, _crToken(option));
+    case 'SDN':
+      return _crLink(SEARCH.SDN);
     default:
       return '';
   }
@@ -85,10 +93,10 @@ const _crAreaMapSlice = (option) => {
       , mapSlice = {};
   items.forEach(item => {
     if (item.slice) {
-      Object.assign(mapSlice, item.slice)
+      _assign(mapSlice, item.slice)
     }
   })
-  return Object.assign(mapSlice, dfTSlice)
+  return _assign(mapSlice, dfTSlice);
 };
 
 
@@ -188,7 +196,7 @@ const fnAdapter = {
 
   crChartOption: (ds, data, option) => ({
     valueMoving: fnAdapter.crValueMoving(data),
-    ...fnAdapter.crConfOption(ds, option)    
+    ...fnAdapter.crConfOption(ds, option)
   })
 }
 

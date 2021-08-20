@@ -1,0 +1,12 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-denmark/ApiTable.js"
+ ],
+ "file": "../../../src/adapters/stat-denmark/ApiTable.js",
+ "names": [
+  "ROOT_URL",
+  "TableApi"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,iCAAjB;AACA,MAAMC,QAAQ,GAAG,wBAAUD,QAAV,CAAjB;eAEeC,Q"
+}
