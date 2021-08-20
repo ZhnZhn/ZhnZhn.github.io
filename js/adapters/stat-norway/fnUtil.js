@@ -3,54 +3,63 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _compose = _interopRequireDefault(require("../../utils/compose"));
 
-var _toMonthUTC = function _toMonthUTC(str) {
-  var arrDate = str.split('M'),
-      _month = parseInt(arrDate[1], 10) - 1,
-      _day = _month === 1 ? 28 : 30;
+const _toDayUTC = str => {
+  const _arrYear = str.split('M'),
+        _arrMonth = _arrYear[1].split('D'),
+        _month = parseInt(_arrMonth[0], 10) - 1;
+
+  return Date.UTC(_arrYear[0], _month, _arrMonth[1]);
+};
+
+const _fToUTC = monthPeriod => (delimeterChart, str) => {
+  const arrDate = str.split(delimeterChart),
+        _month = parseInt(arrDate[1], 10) * monthPeriod - 1,
+        _day = _month === 1 ? 28 : 30;
 
   return Date.UTC(arrDate[0], _month, _day);
-};
+},
+      _toMonthUTC = _fToUTC(1),
+      _toQuarterUTC = _fToUTC(3),
+      _toHalfYearUTC = _fToUTC(6),
+      _toYearUTC = str => Date.UTC(str, 11, 31);
 
-var _toQuarterUTC = function _toQuarterUTC(quaterChart, str) {
-  var arrDate = str.split(quaterChart),
-      _month = parseInt(arrDate[1], 10) * 3 - 1;
+const _fIsInclude = str => token => str.indexOf(token) !== -1;
 
-  return Date.UTC(arrDate[0], _month, 30);
-};
-
-var _toYearUTC = function _toYearUTC(str) {
-  return Date.UTC(str, 11, 31);
-};
-
-var fnUtil = {
-  compose: _compose["default"],
-  toUTC: function toUTC(str) {
+const fnUtil = {
+  compose: _compose.default,
+  toUTC: str => {
     str = str.toUpperCase();
 
-    if (str.indexOf('M') !== -1) {
-      return _toMonthUTC(str);
+    const _isInclude = _fIsInclude(str);
+
+    if (_isInclude('M')) {
+      return _isInclude('D') ? _toDayUTC(str) : _toMonthUTC('M', str);
     }
 
-    if (str.indexOf('Q') !== -1) {
+    if (_isInclude('Q')) {
       return _toQuarterUTC('Q', str);
     }
 
-    if (str.indexOf('K') !== -1) {
+    if (_isInclude('K')) {
       return _toQuarterUTC('K', str);
+    }
+
+    if (_isInclude('H')) {
+      return _toHalfYearUTC('H', str);
     }
 
     return _toYearUTC(str);
   },
-  toYMD: function toYMD(str) {
-    var ms = fnUtil.toUTC(str),
-        d = new Date(ms);
+  toYMD: str => {
+    const ms = fnUtil.toUTC(str),
+          d = new Date(ms);
     return d.getUTCFullYear() + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
   }
 };
 var _default = fnUtil;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fnUtil.js.map
