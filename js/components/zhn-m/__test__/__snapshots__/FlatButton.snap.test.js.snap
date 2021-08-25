@@ -5,9 +5,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
   accessKey="l"
   className="bt-flat"
   onClick={[Function]}
-  tabIndex={0}
   title="Click to load [l]"
-  type="button"
 >
   <div
     className="bt-flat__div"
@@ -45,9 +43,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
       "color": "#607d8b",
     }
   }
-  tabIndex={0}
   title="Click to load [l]"
-  type="button"
 >
   <div
     className="bt-flat__div"
