@@ -16,14 +16,16 @@ const TITLE = {
   SWS: 'Statisctics Sweden: All Items'
 };
 
+const _crSearchTitle = country => `Statistics ${country} Search`
+
 const SEARCH = {
   NST: {
     url: 'https://www.ssb.no/en/sok?sok=',
-    title: 'Statistics Norway Search'
+    title: _crSearchTitle('Norway')
   },
   SWS: {
     url: 'https://www.scb.se/en/finding-statistics/search/?query=',
-    title: 'Statistics Sweden Search'
+    title: _crSearchTitle('Sweden')
   },
   SFL: {
     url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
@@ -31,11 +33,10 @@ const SEARCH = {
   },
   SDN: {
     url: 'https://www.statbank.dk/statbank5a/default.asp',
-    title: 'Statistics Denmark Search'
+    title: _crSearchTitle('Denmark')
   }
 };
 
-const DF_SOURCE = 'Unknown';
 const MAX_SOURCE_ID_LENGTH = 9;
 
 const _assign = Object.assign;
@@ -47,12 +48,12 @@ const _crSearchToken = (label) => {
 
 const _crLink = ({url, title}, token='') => `<a class="native-link" href="${url}${token}">${title}</a>`;
 
-const _crToken = ({ dfId }) => {
+const _crSflSearchToken = ({ dfId }) => {
   const arr = (''+dfId).split('/')
   , id = arr.pop()
   , prefix = arr.join('__');
   return prefix && id ? `StatFin__${prefix}/${id}` : '';
-}
+};
 
 const _crSearchLink = (label, option) => {
   const  _token = _crSearchToken(label);
@@ -62,7 +63,7 @@ const _crSearchLink = (label, option) => {
     case 'SWS':
       return _crLink(SEARCH.SWS, _token);
     case 'SFL':
-      return _crLink(SEARCH.SFL, _crToken(option));
+      return _crLink(SEARCH.SFL, _crSflSearchToken(option));
     case 'SDN':
       return _crLink(SEARCH.SDN);
     default:
@@ -70,14 +71,16 @@ const _crSearchLink = (label, option) => {
   }
 };
 
-const _crDescr = ({ updated='', source=DF_SOURCE, label }, option) => {
-  const _date = updated
+const _crDescr = ({ updated, source, label }, option) => {
+  const _date = (updated || '')
     .replace('T', ' ')
     .replace('Z', '')
-  , { dfId='' } = option
+  , { dfId } = option
   , _elSearchLink = _crSearchLink(label, option);
 
-  return `TableId: ${dfId}<BR/>${source}: ${_date}<BR/>${_elSearchLink}`;
+  return dfId && source
+    ? `TableId: ${dfId}<BR/>${source}: ${_date}<BR/>${_elSearchLink}`
+    : _elSearchLink;
 };
 
 const _crItemCaption = (option) => {
@@ -86,7 +89,7 @@ const _crItemCaption = (option) => {
             ? items[0].caption
             : 'All Items';
   return `${dfId}_${caption}`;
-}
+};
 
 const _crAreaMapSlice = (option) => {
   const { items, dfTSlice } = option
@@ -117,7 +120,7 @@ const _getTimeDimension = (ds, timeId) => {
      || _getDimensionWithouTime(ds);
 
   return times;
-}
+};
 
 const _crDataSource = ({ dataSource, dfId }) => dfId
  && (''+dfId).length < MAX_SOURCE_ID_LENGTH
@@ -127,7 +130,6 @@ const _crDataSource = ({ dataSource, dfId }) => dfId
 
 const fnAdapter = {
   isYNumber, numberFormat, crId, roundBy,
-  crValueMoving: valueMoving,
 
   crTitle: (option) => {
     switch(option.browserType){
@@ -147,7 +149,7 @@ const fnAdapter = {
         , ds = JSONstat(json).Dataset(0)
         , values = ds.Data(mapSlice)
         , times = _getTimeDimension(ds, option.timeId);
-    return { ds, values, times };
+    return [ ds, values, times ];
   },
 
   crTid: (time, ds) => {
@@ -195,9 +197,9 @@ const fnAdapter = {
   }),
 
   crChartOption: (ds, data, option) => ({
-    valueMoving: fnAdapter.crValueMoving(data),
+    valueMoving: valueMoving(data),
     ...fnAdapter.crConfOption(ds, option)
   })
-}
+};
 
 export default fnAdapter

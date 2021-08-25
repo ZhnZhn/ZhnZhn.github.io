@@ -25,7 +25,7 @@ const _toData = (values, times) => {
 const toYearly = {
   crConfig:(json, option) =>{
     const { title='', subtitle } = option
-      , { ds, values, times } = crDsValuesTimes(json, option)
+      , [ ds, values, times ] = crDsValuesTimes(json, option)
       , data = _toData(values, times)
       , config = ConfigBuilder()
          .init(Yearly.toConfig(data, option))

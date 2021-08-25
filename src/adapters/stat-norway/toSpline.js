@@ -54,7 +54,7 @@ const _toData = (values, times) => {
 
 const toArea = {
   crConfig: (json, option) => {
-    const { ds, values, times } = crDsValuesTimes(json, option)
+    const [ ds, values, times ] = crDsValuesTimes(json, option)
     , data = _toData(values, times)
     , confOption = crConfOption(ds, option);
 

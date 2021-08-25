@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
@@ -13,31 +13,31 @@ var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 var _fnUtil = _interopRequireDefault(require("./fnUtil"));
 
-var toYMD = _fnUtil["default"].toYMD;
-var crDsValuesTimes = _fnAdapter["default"].crDsValuesTimes,
-    crInfo = _fnAdapter["default"].crInfo,
-    crZhConfig = _fnAdapter["default"].crZhConfig;
+const {
+  toYMD
+} = _fnUtil.default;
+const {
+  crDsValuesTimes,
+  crInfo,
+  crZhConfig
+} = _fnAdapter.default;
 
-var _toData = function _toData(values, times) {
-  var _values = Array.isArray(values) ? values : [values];
+const _toData = (values, times) => {
+  const _values = Array.isArray(values) ? values : [values];
 
-  var data = times.map(function (time, i) {
-    return [toYMD(time), _values[i].value];
-  });
+  const data = times.map((time, i) => [toYMD(time), _values[i].value]);
   return data.reverse();
 };
 
-var toYearly = {
-  crConfig: function crConfig(json, option) {
-    var _option$title = option.title,
-        title = _option$title === void 0 ? '' : _option$title,
-        subtitle = option.subtitle,
-        _crDsValuesTimes = crDsValuesTimes(json, option),
-        ds = _crDsValuesTimes.ds,
-        values = _crDsValuesTimes.values,
-        times = _crDsValuesTimes.times,
-        data = _toData(values, times),
-        config = (0, _ConfigBuilder["default"])().init(_toYearsByMonths["default"].toConfig(data, option)).add('chart', {
+const toYearly = {
+  crConfig: (json, option) => {
+    const {
+      title = '',
+      subtitle
+    } = option,
+          [ds, values, times] = crDsValuesTimes(json, option),
+          data = _toData(values, times),
+          config = (0, _ConfigBuilder.default)().init(_toYearsByMonths.default.toConfig(data, option)).add('chart', {
       spacingTop: 25
     }).addCaption(title, subtitle).add('info', crInfo(ds, option)).add('zhConfig', crZhConfig(option)).toConfig();
 
@@ -45,5 +45,5 @@ var toYearly = {
   }
 };
 var _default = toYearly;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toYearly.js.map

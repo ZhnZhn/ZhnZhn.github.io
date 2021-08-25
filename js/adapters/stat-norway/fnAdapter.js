@@ -21,14 +21,17 @@ const TITLE = {
   NST: 'Statisctics Norway: All Items',
   SWS: 'Statisctics Sweden: All Items'
 };
+
+const _crSearchTitle = country => "Statistics " + country + " Search";
+
 const SEARCH = {
   NST: {
     url: 'https://www.ssb.no/en/sok?sok=',
-    title: 'Statistics Norway Search'
+    title: _crSearchTitle('Norway')
   },
   SWS: {
     url: 'https://www.scb.se/en/finding-statistics/search/?query=',
-    title: 'Statistics Sweden Search'
+    title: _crSearchTitle('Sweden')
   },
   SFL: {
     url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
@@ -36,10 +39,9 @@ const SEARCH = {
   },
   SDN: {
     url: 'https://www.statbank.dk/statbank5a/default.asp',
-    title: 'Statistics Denmark Search'
+    title: _crSearchTitle('Denmark')
   }
 };
-const DF_SOURCE = 'Unknown';
 const MAX_SOURCE_ID_LENGTH = 9;
 const _assign = Object.assign;
 
@@ -54,7 +56,7 @@ const _crLink = ({
   title
 }, token = '') => "<a class=\"native-link\" href=\"" + url + token + "\">" + title + "</a>";
 
-const _crToken = ({
+const _crSflSearchToken = ({
   dfId
 }) => {
   const arr = ('' + dfId).split('/'),
@@ -75,7 +77,7 @@ const _crSearchLink = (label, option) => {
       return _crLink(SEARCH.SWS, _token);
 
     case 'SFL':
-      return _crLink(SEARCH.SFL, _crToken(option));
+      return _crLink(SEARCH.SFL, _crSflSearchToken(option));
 
     case 'SDN':
       return _crLink(SEARCH.SDN);
@@ -86,17 +88,17 @@ const _crSearchLink = (label, option) => {
 };
 
 const _crDescr = ({
-  updated = '',
-  source = DF_SOURCE,
+  updated,
+  source,
   label
 }, option) => {
-  const _date = updated.replace('T', ' ').replace('Z', ''),
+  const _date = (updated || '').replace('T', ' ').replace('Z', ''),
         {
-    dfId = ''
+    dfId
   } = option,
         _elSearchLink = _crSearchLink(label, option);
 
-  return "TableId: " + dfId + "<BR/>" + source + ": " + _date + "<BR/>" + _elSearchLink;
+  return dfId && source ? "TableId: " + dfId + "<BR/>" + source + ": " + _date + "<BR/>" + _elSearchLink : _elSearchLink;
 };
 
 const _crItemCaption = option => {
@@ -146,7 +148,6 @@ const fnAdapter = {
   numberFormat,
   crId,
   roundBy,
-  crValueMoving: valueMoving,
   crTitle: option => {
     switch (option.browserType) {
       case 'NST':
@@ -167,11 +168,7 @@ const fnAdapter = {
           values = ds.Data(mapSlice),
           times = _getTimeDimension(ds, option.timeId);
 
-    return {
-      ds,
-      values,
-      times
-    };
+    return [ds, values, times];
   },
   crTid: (time, ds) => {
     if (time) {
@@ -222,7 +219,7 @@ const fnAdapter = {
     zhConfig: fnAdapter.crZhConfig(option)
   }),
   crChartOption: (ds, data, option) => ({
-    valueMoving: fnAdapter.crValueMoving(data),
+    valueMoving: valueMoving(data),
     ...fnAdapter.crConfOption(ds, option)
   })
 };
