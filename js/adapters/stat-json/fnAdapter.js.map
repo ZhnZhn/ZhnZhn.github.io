@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/stat-norway/fnAdapter.js"
+  "../../../src/adapters/stat-json/fnAdapter.js"
  ],
- "file": "../../../src/adapters/stat-norway/fnAdapter.js",
+ "file": "../../../src/adapters/stat-json/fnAdapter.js",
  "names": [
   "isYNumber",
   "numberFormat",

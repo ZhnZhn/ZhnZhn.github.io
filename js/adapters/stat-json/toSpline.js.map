@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/stat-norway/toSpline.js"
+  "../../../src/adapters/stat-json/toSpline.js"
  ],
- "file": "../../../src/adapters/stat-norway/toSpline.js",
+ "file": "../../../src/adapters/stat-json/toSpline.js",
  "names": [
   "toUTC",
   "compose",

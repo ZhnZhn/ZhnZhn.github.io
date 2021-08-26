@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/adapters/stat-norway/StatNorway.js"],"names":["StatNorway","api","adapter","StatNorway2","tableApi","optionFetch","crOptionFetch"],"mappings":";;;;;;;AACA;;AACA;;AACA;;AAEA,IAAMA,UAAU,GAAG;AACjBA,EAAAA,UAAU,EAAE;AAAEC,IAAAA,GAAG,EAAHA,sBAAF;AAAOC,IAAAA,OAAO,EAAPA;AAAP,GADK;AAEjBC,EAAAA,WAAW,EAAE;AACXF,IAAAA,GAAG,EAAEG,oBADM;AAEXC,IAAAA,WAAW,EAAED,qBAASE,aAFX;AAGXJ,IAAAA,OAAO,EAAPA;AAHW;AAFI,CAAnB;eASeF,U","sourcesContent":["\r\nimport api from './ApiDataset'\r\nimport tableApi from './ApiTable'\r\nimport adapter from './StatNorwayAdapter'\r\n\r\nconst StatNorway = {\r\n  StatNorway: { api, adapter },\r\n  StatNorway2: {\r\n    api: tableApi,\r\n    optionFetch: tableApi.crOptionFetch,\r\n    adapter\r\n  }\r\n};\r\n\r\nexport default StatNorway\r\n"],"file":"StatNorway.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-norway/StatNorway.js"
+ ],
+ "file": "../../../src/adapters/stat-norway/StatNorway.js",
+ "names": [
+  "StatNorway",
+  "api",
+  "adapter",
+  "StatNorway2",
+  "tableApi",
+  "optionFetch",
+  "crOptionFetch"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AAEA,MAAMA,UAAU,GAAG;AACjBA,EAAAA,UAAU,EAAE;AAAEC,IAAAA,GAAG,EAAHA,mBAAF;AAAOC,IAAAA,OAAO,EAAPA;AAAP,GADK;AAEjBC,EAAAA,WAAW,EAAE;AACXF,IAAAA,GAAG,EAAEG,iBADM;AAEXC,IAAAA,WAAW,EAAED,kBAASE,aAFX;AAGXJ,IAAAA,OAAO,EAAPA;AAHW;AAFI,CAAnB;eASeF,U"
+}

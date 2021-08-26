@@ -1,8 +1,7 @@
-
-import toSpline from './toSpline'
-import toY from './toYearly'
-import toC from './toColumn'
-import toT from './toTreeMap'
+import toSpline from './toSpline';
+import toY from './toYearly';
+import toC from './toColumn';
+import toT from './toTreeMap';
 
 const _r = {
   DF: toSpline.crConfig,
@@ -33,13 +32,11 @@ const _r = {
   ),
   TREE_MAP_2_CLUSTER: toT.fCrConfig(
     { isCluster: true }, { depth: "d2" }
-  ),
-}
+  )
+};
 
 const RouterConfig = {
-  getCrConfig(seriaType) {
-    return _r[seriaType] || _r.DF;
-  }
-}
+  getCrConfig: (seriaType) => _r[seriaType] || _r.DF
+};
 
 export default RouterConfig

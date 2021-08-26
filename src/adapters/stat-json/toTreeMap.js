@@ -1,10 +1,10 @@
 import JSONstat from 'jsonstat';
 
-import Chart from '../../charts/Chart'
-import Builder from '../../charts/ConfigBuilder'
-import Tooltip from '../../charts/Tooltip'
+import Chart from '../../charts/Chart';
+import Builder from '../../charts/ConfigBuilder';
+import Tooltip from '../../charts/Tooltip';
 
-import fnAdapter from './fnAdapter'
+import fnAdapter from './fnAdapter';
 
 const {
   crTitle,
@@ -16,7 +16,8 @@ const NUMBER_STYLE = 'style="color:#333;"';
 const _crPointName = (label, value) => {
   return `${label} <br/>
   <span ${NUMBER_STYLE}>${numberFormat(value)}</span>`;
-}
+};
+const _isArr = Array.isArray;
 
 const _fCrTreeMapPoint = (c, title) => {
   return (v, i) => {
@@ -27,7 +28,7 @@ const _fCrTreeMapPoint = (c, title) => {
       value, label, title
     };
   };
-}
+};
 
 const _toHm = (arr) => {
   const hm = Object.create(null)
@@ -35,7 +36,7 @@ const _toHm = (arr) => {
     hm[item.caption] = item
   })
   return hm;
-}
+};
 
 const _fIsPoint = (dfT, hm, depth) => {
   return p => {
@@ -47,7 +48,7 @@ const _fIsPoint = (dfT, hm, depth) => {
     }
     return p.y !== null && p.y !== 0;
   };
-}
+};
 
 const _findLevelBy = (data, from, sum, stopSum) => {
   const _maxIndex = data.length;
@@ -68,7 +69,7 @@ const _findLevelBy = (data, from, sum, stopSum) => {
     index += 1
   }
   return { index, sum };
-}
+};
 
 const _findLevelIndex = (data, level1, level2) => {
   const _t = data.reduce((acc, p) => acc + p.value, 0)
@@ -83,7 +84,7 @@ const _findLevelIndex = (data, level1, level2) => {
         } = _findLevelBy(data, index1, sum1, _v2);
 
   return { index1, index2 };
-}
+};
 
 const _compareByValue = (a, b) => a.value - b.value;
 
@@ -105,7 +106,7 @@ const _crCategory = (option, by, depth) => {
         depth
       };
   }
-}
+};
 
 const _addPercent = (data) => {
   const _total = data.reduce((acc, item) => acc + item.value, 0)
@@ -134,12 +135,12 @@ const _addColor = function(data, level60, level90){
        point.color = Chart.getMonoColor(pointIndex-level60-_level90)
      }
    })
-}
+};
 
 
 const _crData = (values, categories, Tid, option) => {
   const { selectOptions, depth, cTotal } = option;
-  if (!Array.isArray(values)) {
+  if (!_isArr(values)) {
     return [];
   }
   return values
@@ -152,33 +153,33 @@ const _crData = (values, categories, Tid, option) => {
 const toTreeMap = {
   crConfig: (json, option) => {
     const  {
-             category, itemSlice, time, dfTSlice,
-             seriaType, isCluster, items=[]
-           } = option
-        , ds = JSONstat(json).Dataset(0)
-        , categories = ds.Dimension(category)
-        , Tid = crTid(time, ds)
-        , _title = crTitle(option)
-        , _subtitle = `${items[1].caption || ''}: ${Tid}`
-        , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
-        , _d1 = _crData(values, categories, Tid, option )
-        , _c = _d1.map(item => item.c)
-        , data = _addPercent(_d1)
-        , { index1, index2 } = _findLevelIndex(data, 60, 90);
+       category, itemSlice, time, dfTSlice,
+       seriaType, isCluster, items=[]
+    } = option
+    , ds = JSONstat(json).Dataset(0)
+    , categories = ds.Dimension(category)
+    , Tid = crTid(time, ds)
+    , _title = crTitle(option)
+    , _subtitle = `${items[1].caption || ''}: ${Tid}`
+    , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
+    , _d1 = _crData(values, categories, Tid, option )
+    , _c = _d1.map(item => item.c)
+    , data = _addPercent(_d1)
+    , { index1, index2 } = _findLevelIndex(data, 60, 90);
 
-  if (isCluster) {
-    _addColor(data, index1, index2)
-  }
+    if (isCluster) {
+      _addColor(data, index1, index2)
+    }
 
-   const _seria = Builder()
-      .treeMapSeria(Tooltip.treeMap, { data })
-      .toSeria();
-   const config = Builder()
-      .treeMapConfig(_c, seriaType)
-      .addCaption(_title, _subtitle)
-      .addSeries(_seria)
-      .add(crChartOption(ds, Tid, option))
-      .toConfig();
+    const _seria = Builder()
+       .treeMapSeria(Tooltip.treeMap, { data })
+       .toSeria();
+    const config = Builder()
+       .treeMapConfig(_c, seriaType)
+       .addCaption(_title, _subtitle)
+       .addSeries(_seria)
+       .add(crChartOption(ds, Tid, option))
+       .toConfig();
 
     return config;
   },
@@ -189,6 +190,6 @@ const toTreeMap = {
       ..._crCategory(option, config.by, config.depth)
     });
   }
-}
+};
 
 export default toTreeMap

@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-json/StatJsonAdapter.js"
+ ],
+ "file": "../../../src/adapters/stat-json/StatJsonAdapter.js",
+ "names": [
+  "_crConfig",
+  "json",
+  "option",
+  "seriaType",
+  "crConfig",
+  "RouterConfig",
+  "getCrConfig",
+  "StatJsonAdapter",
+  "toConfig",
+  "config",
+  "toSeries",
+  "series"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,SAAS,GAAG,CAACC,IAAD,EAAOC,MAAP,KAAkB;AAClC,QAAM;AAAEC,IAAAA;AAAF,MAAgBD,MAAtB;AAAA,QACEE,QAAQ,GAAGC,sBAAaC,WAAb,CAAyBH,SAAzB,CADb;;AAEA,SAAOC,QAAQ,CAACH,IAAD,EAAOC,MAAP,CAAf;AACD,CAJD;;AAMA,MAAMK,eAAe,GAAG;AACtBC,EAAAA,QAAQ,CAACP,IAAD,EAAOC,MAAP,EAAe;AACpB,WAAO;AAAEO,MAAAA,MAAM,EAAET,SAAS,CAACC,IAAD,EAAOC,MAAP;AAAnB,KAAP;AACF,GAHqB;;AAKtBQ,EAAAA,QAAQ,CAACT,IAAD,EAAOC,MAAP,EAAe;AACpB,UAAMO,MAAM,GAAGT,SAAS,CAACC,IAAD,EAAOC,MAAP,CAAxB;;AACA,WAAOO,MAAM,CAACE,MAAP,CAAc,CAAd,CAAP;AACF;;AARqB,CAAxB;eAWeJ,e"
+}

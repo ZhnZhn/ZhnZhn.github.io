@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../../src/adapters/stat-norway/__tests__/fnUtil.test.js"
+  "../../../../src/adapters/stat-json/__tests__/fnUtil.test.js"
  ],
- "file": "../../../../src/adapters/stat-norway/__tests__/fnUtil.test.js",
+ "file": "../../../../src/adapters/stat-json/__tests__/fnUtil.test.js",
  "names": [
   "toUTC",
   "toYMD",

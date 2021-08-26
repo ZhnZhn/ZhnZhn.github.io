@@ -1,10 +1,10 @@
 import JSONstat from 'jsonstat';
-import clusterMaker from '../../math/k-means'
+import clusterMaker from '../../math/k-means';
 
-import Builder from '../../charts/ConfigBuilder'
-import Tooltip from '../../charts/Tooltip'
+import Builder from '../../charts/ConfigBuilder';
+import Tooltip from '../../charts/Tooltip';
 
-import fnAdapter from './fnAdapter'
+import fnAdapter from './fnAdapter';
 
 const {
   isYNumber,
@@ -34,7 +34,7 @@ const _fIsCategoryPoint = (dfT) => (p) => {
     return false;
   }
   return isYNumber(p) && p.y !== 0;
-}
+};
 const _compareByY = (a, b) => a.y - b.y;
 
 const _colorItems = (data, _clusters) => {
@@ -43,7 +43,7 @@ const _colorItems = (data, _clusters) => {
         data[p.id].color = COLORS[colorIndex]
       })
   })
-}
+};
 
 const _setClusters = (data) => {
   const _points = data.map((item, index) => {
@@ -53,7 +53,7 @@ const _setClusters = (data) => {
   })
   , _clusters = clusterMaker.crUnarySortedCluster(_points);
   _colorItems(data, _clusters)
-}
+};
 
 const _crCategory = (option, by) => {
   const { items=[], dfC, dfT, dfC2, dfT2 } = option;
@@ -80,7 +80,7 @@ const _crCategory = (option, by) => {
         itemSlice
       };
   }
-}
+};
 
 const _crData = (values, c, cTotal) => _isArr(values)
  ? values
@@ -135,6 +135,6 @@ const toColumn = {
     return config;
   }
 
-}
+};
 
 export default toColumn

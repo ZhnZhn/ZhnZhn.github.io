@@ -1,7 +1,7 @@
-import crConfigType1 from '../../charts/crConfigType1'
+import crConfigType1 from '../../charts/crConfigType1';
 
-import fnUtil from './fnUtil'
-import fnAdapter from './fnAdapter'
+import fnUtil from './fnUtil';
+import fnAdapter from './fnAdapter';
 
 const { toUTC, compose } = fnUtil
 , {

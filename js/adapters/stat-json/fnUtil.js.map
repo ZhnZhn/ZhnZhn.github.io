@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/stat-norway/fnUtil.js"
+  "../../../src/adapters/stat-json/fnUtil.js"
  ],
- "file": "../../../src/adapters/stat-norway/fnUtil.js",
+ "file": "../../../src/adapters/stat-json/fnUtil.js",
  "names": [
   "_toDayUTC",
   "str",

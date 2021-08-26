@@ -6,7 +6,7 @@ const _crConfig = (json, option) => {
   return crConfig(json, option);
 };
 
-const StatNorwayAdapter = {
+const StatJsonAdapter = {
   toConfig(json, option) {
      return { config: _crConfig(json, option) };
   },
@@ -17,4 +17,4 @@ const StatNorwayAdapter = {
   }
 };
 
-export default StatNorwayAdapter
+export default StatJsonAdapter

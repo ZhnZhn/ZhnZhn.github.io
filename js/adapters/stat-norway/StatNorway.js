@@ -3,25 +3,25 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _ApiDataset = _interopRequireDefault(require("./ApiDataset"));
 
 var _ApiTable = _interopRequireDefault(require("./ApiTable"));
 
-var _StatNorwayAdapter = _interopRequireDefault(require("./StatNorwayAdapter"));
+var _StatJsonAdapter = _interopRequireDefault(require("../stat-json/StatJsonAdapter"));
 
-var StatNorway = {
+const StatNorway = {
   StatNorway: {
-    api: _ApiDataset["default"],
-    adapter: _StatNorwayAdapter["default"]
+    api: _ApiDataset.default,
+    adapter: _StatJsonAdapter.default
   },
   StatNorway2: {
-    api: _ApiTable["default"],
-    optionFetch: _ApiTable["default"].crOptionFetch,
-    adapter: _StatNorwayAdapter["default"]
+    api: _ApiTable.default,
+    optionFetch: _ApiTable.default.crOptionFetch,
+    adapter: _StatJsonAdapter.default
   }
 };
 var _default = StatNorway;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=StatNorway.js.map

@@ -1,7 +1,6 @@
-
-import api from './ApiDataset'
-import tableApi from './ApiTable'
-import adapter from './StatNorwayAdapter'
+import api from './ApiDataset';
+import tableApi from './ApiTable';
+import adapter from '../stat-json/StatJsonAdapter';
 
 const StatNorway = {
   StatNorway: { api, adapter },
