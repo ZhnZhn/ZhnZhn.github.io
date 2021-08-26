@@ -5,12 +5,8 @@
  ],
  "file": "../../../src/adapters/stat-sweden/StatSweden.js",
  "names": [
-  "StatSweden",
-  "api",
-  "tableApi",
-  "optionFetch",
-  "crOptionFetch",
-  "adapter"
+  "DATA_URL",
+  "StatSweden"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,UAAU,GAAG;AACjBC,EAAAA,GAAG,EAAEC,iBADY;AAEjBC,EAAAA,WAAW,EAAED,kBAASE,aAFL;AAGjBC,EAAAA,OAAO,EAAPA;AAHiB,CAAnB;eAMeL,U"
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,2CAAjB;AACA,MAAMC,UAAU,GAAG,+BAAiBD,QAAjB,CAAnB;eAEeC,U"
 }

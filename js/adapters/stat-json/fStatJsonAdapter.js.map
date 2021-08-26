@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-json/fStatJsonAdapter.js"
+ ],
+ "file": "../../../src/adapters/stat-json/fStatJsonAdapter.js",
+ "names": [
+  "fStatJsonAdapter",
+  "url",
+  "tableApi",
+  "api",
+  "optionFetch",
+  "crOptionFetch",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,gBAAgB,GAAGC,GAAG,IAAI;AAC9B,QAAMC,QAAQ,GAAG,wBAAUD,GAAV,CAAjB;AACA,SAAO;AACLE,IAAAA,GAAG,EAAED,QADA;AAELE,IAAAA,WAAW,EAAEF,QAAQ,CAACG,aAFjB;AAGLC,IAAAA,OAAO,EAAPA;AAHK,GAAP;AAKD,CAPD;;eASeN,gB"
+}

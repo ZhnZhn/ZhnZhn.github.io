@@ -7,20 +7,17 @@ exports.default = void 0;
 
 var _ApiDataset = _interopRequireDefault(require("./ApiDataset"));
 
-var _ApiTable = _interopRequireDefault(require("./ApiTable"));
-
 var _StatJsonAdapter = _interopRequireDefault(require("../stat-json/StatJsonAdapter"));
 
+var _fStatJsonAdapter = _interopRequireDefault(require("../stat-json/fStatJsonAdapter"));
+
+const DATA_URL = 'https://data.ssb.no/api/v0/en/table';
 const StatNorway = {
   StatNorway: {
     api: _ApiDataset.default,
     adapter: _StatJsonAdapter.default
   },
-  StatNorway2: {
-    api: _ApiTable.default,
-    optionFetch: _ApiTable.default.crOptionFetch,
-    adapter: _StatJsonAdapter.default
-  }
+  StatNorway2: (0, _fStatJsonAdapter.default)(DATA_URL)
 };
 var _default = StatNorway;
 exports.default = _default;

@@ -5,12 +5,8 @@
  ],
  "file": "../../../src/adapters/stat-finland/StatFinland.js",
  "names": [
-  "StatFinland",
-  "api",
-  "tableApi",
-  "optionFetch",
-  "crOptionFetch",
-  "adapter"
+  "DATA_URL",
+  "StatFinland"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,WAAW,GAAG;AAClBC,EAAAA,GAAG,EAAEC,iBADa;AAElBC,EAAAA,WAAW,EAAED,kBAASE,aAFJ;AAGlBC,EAAAA,OAAO,EAAPA;AAHkB,CAApB;eAMeL,W"
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,gDAAjB;AACA,MAAMC,WAAW,GAAG,+BAAiBD,QAAjB,CAApB;eAEeC,W"
 }

@@ -1,10 +1,6 @@
-import tableApi from './ApiTable';
-import adapter from '../stat-json/StatJsonAdapter';
+import fStatJsonAdapter from '../stat-json/fStatJsonAdapter';
 
-const StatFinland = {
-  api: tableApi,
-  optionFetch: tableApi.crOptionFetch,
-  adapter
-};
+const DATA_URL = 'https://api.statbank.dk/v1/data';
+const StatDenmark = fStatJsonAdapter(DATA_URL)
 
-export default StatFinland
+export default StatDenmark

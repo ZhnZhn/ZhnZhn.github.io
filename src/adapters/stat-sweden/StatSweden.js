@@ -1,10 +1,6 @@
-import tableApi from './ApiTable';
-import adapter from '../stat-json/StatJsonAdapter';
+import fStatJsonAdapter from '../stat-json/fStatJsonAdapter';
 
-const StatSweden = {
-  api: tableApi,
-  optionFetch: tableApi.crOptionFetch,
-  adapter
-};
+const DATA_URL = 'https://api.scb.se/OV0104/v1/doris/en/ssd';
+const StatSweden = fStatJsonAdapter(DATA_URL);
 
 export default StatSweden
