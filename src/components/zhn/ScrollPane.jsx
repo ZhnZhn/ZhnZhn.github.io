@@ -1,28 +1,27 @@
-import { useContext } from 'react';
+import { forwardRef } from 'react';
 
-import ThemeContext from '../hoc/ThemeContext'
+import useTheme from '../hooks/useTheme';
+import crCn from '../zhn-utils/crCn';
 
 const TH_ID = 'SCROLL_PANE'
-const CL = 'with-scroll';
+, CL_SCROLL = 'with-scroll';
 
-const ScrollPane = ({
-  innerRef,
-  className='',
+const ScrollPane = forwardRef(({
+  className,
   style,
   children
-}) => {
-  const theme = useContext(ThemeContext)
-  , TS = theme.getStyle(TH_ID)
-  , _cl = `${CL} ${TS.CL_SCROLL} ${className}`;
+}, ref) => {
+  const TS = useTheme(TH_ID)
+  , _cn = crCn(`${CL_SCROLL} ${TS.CL_SCROLL}`, className);
   return (
     <div
-      ref={innerRef}
-      className={_cl}
+      ref={ref}
+      className={_cn}
       style={style}
     >
        {children}
     </div>
   );
-}
+});
 
 export default ScrollPane

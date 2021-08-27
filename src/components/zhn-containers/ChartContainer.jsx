@@ -293,7 +293,7 @@ class ChartContainer extends Component {
              />
           </A.BrowserCaption>
           <A.ScrollPane
-             innerRef={this._refSpComp}
+             ref={this._refSpComp}             
              className={CL.SCROLL}
           >
             <ChartList
