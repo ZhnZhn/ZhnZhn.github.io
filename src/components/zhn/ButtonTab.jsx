@@ -1,47 +1,40 @@
 //import PropTypes from "prop-types";
 
-import useTheme from '../hooks/useTheme'
+import useTheme from '../hooks/useTheme';
+import crCn from '../zhn-utils/crCn';
 
 const TH_ID = 'ELEMENT';
 
-const BT_TAB_CL = 'not-selected button-tab'
-, BT_TAB__SHOW_CL = `${BT_TAB_CL} button-tab--show`
-, ARROW_CL = 'arrow-down';
-
-const _isBool = bool => typeof bool === 'boolean';
-const _crBtClass = (isShow, className) => {
-  const _btCl = _isBool(isShow) && isShow
-    ? BT_TAB__SHOW_CL
-    : BT_TAB_CL;
-  return className
-    ? `${_btCl} ${className}`
-    : _btCl;
-}
-
+const CL_BT_TAB = 'not-selected button-tab'
+, CL_BT_TAB__SHOW = `${CL_BT_TAB} button-tab--show`
+, CL_ARROW_DOWN = 'arrow-down';
 
 const ButtonTab = ({
   is=true,
   isShow, isMenu,
   className, style,
-  caption, children,
+  caption,
   onClick
 }) => {
   const TS = useTheme(TH_ID)
 
   if (!is) { return null; }
-  const _btClass = _crBtClass(isShow, className);
+
+  const _cn = crCn(
+    isShow ? CL_BT_TAB__SHOW : CL_BT_TAB,
+    className
+  );
 
   return (
     <button
-      className={_btClass}
+      className={_cn}
       style={{...style, ...TS.BG}}
       onClick={onClick}
     >
        {caption}
-       {isMenu && <span className={ARROW_CL} />}
-       {children}
+       {isMenu && <span className={CL_ARROW_DOWN} />}
     </button>
   );
-}
+};
 
 export default ButtonTab
