@@ -1,12 +1,10 @@
-import { forwardRef } from 'react'
-import useKeyEnter from '../hooks/useKeyEnter'
+import { forwardRef } from 'react';
+
+import useKeyEnter from '../hooks/useKeyEnter';
+import crCn from '../zhn-utils/crCn';
 //import PropTypes from 'prop-types'
 
 const CL_INPUT_COLOR = 'input-color';
-
-const _crClassName = className => className
-  ? className + ' ' + CL_INPUT_COLOR
-  : CL_INPUT_COLOR;
 
 const CellColor = forwardRef(({
   className,
@@ -15,21 +13,21 @@ const CellColor = forwardRef(({
   onClick,
   children
 }, ref) => {
-  const _className = _crClassName(className)
-   , _styleColor = color
+  const _cn = crCn(className, CL_INPUT_COLOR)
+   , _bgColorStyle = color
       ? { backgroundColor: color }
       : void 0
   , _onClick = onClick
      ? (event) => onClick(color, event)
      : void 0
-  , _onKeyEnter = useKeyEnter(_onClick, [_onClick])
+  , _onKeyEnter = useKeyEnter(_onClick, [_onClick]);
   return (
     <span
        ref={ref}
        tabIndex="0"
        role="button"
-       className={_className}
-       style={{...style, ..._styleColor}}
+       className={_cn}
+       style={{...style, ..._bgColorStyle}}
        onClick={_onClick}
        onKeyDown={_onKeyEnter}
     >
