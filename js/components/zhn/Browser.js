@@ -3,42 +3,40 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
+var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
+
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from "prop-types";
-var TH_ID = 'BROWSER';
-var CL = {
-  BROWSER: 'browser-container',
-  SHOW: 'show-popup'
-};
-var S = {
-  BLOCK: {
-    display: 'block'
-  },
-  NONE: {
-    display: 'none'
-  }
+const TH_ID = 'BROWSER';
+const CL_BROWSER = 'browser-container',
+      CL_SHOW = 'show-popup',
+      S_BLOCK = {
+  display: 'block'
+},
+      S_NONE = {
+  display: 'none'
 };
 
-var Browser = function Browser(_ref) {
-  var isShow = _ref.isShow,
-      style = _ref.style,
-      children = _ref.children;
-
-  var TS = (0, _useTheme["default"])(TH_ID),
-      _styleOpen = isShow ? S.BLOCK : S.NONE,
-      _clOpen = isShow ? CL.SHOW : '',
-      _clRoot = CL.BROWSER + " " + _clOpen;
+const Browser = ({
+  isShow,
+  style,
+  children
+}) => {
+  const TS = (0, _useTheme.default)(TH_ID),
+        _cn = (0, _crCn.default)(CL_BROWSER, [isShow, CL_SHOW]),
+        _style = isShow ? S_BLOCK : S_NONE;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    className: _clRoot,
-    style: (0, _extends2["default"])({}, style, _styleOpen, TS.ROOT),
+    className: _cn,
+    style: { ...style,
+      ...TS.ROOT,
+      ..._style
+    },
     children: children
   });
 };
@@ -52,5 +50,5 @@ Browser.propTypes = {
 
 
 var _default = Browser;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=Browser.js.map
