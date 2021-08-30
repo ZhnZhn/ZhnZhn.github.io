@@ -1,15 +1,26 @@
 
 const C = {
-  DF_PLACEHOLDER: 'Before Select Metric',
   YEAR_MAX: 12,
   BI_YEAR_MAX: 24,
   Q_YEAR_MAX: 4,
   M_YEAR_MAX: 3
 };
 
+const _crDateOption = (caption, value=caption) => ({
+  caption,
+  value
+});
+
 const _getDfDate = (dateOptions, dfIndex) => {
-  return (dateOptions[dfIndex] || {}).value;
+  return typeof dfIndex === 'number'
+    ? (dateOptions[dfIndex] || {}).value || ''
+    : '';
 };
+
+const _crDateConfig = (dateOptions=[], mapDateDf) => ({
+  dateOptions,
+  dateDefault: _getDfDate(dateOptions, mapDateDf)
+});
 
 const _addYearMonthsTo = (dateOptions, y) => {
 	let m = (new Date()).getUTCMonth()
@@ -24,10 +35,7 @@ const _addYearMonthsTo = (dateOptions, y) => {
 			y = y - 1;
 			_caption = `${y}M12`;
 		}
-		dateOptions.push({
-			caption: _caption,
-			value: _caption
-		})
+		dateOptions.push(_crDateOption(_caption))
 	}
 };
 
@@ -39,20 +47,14 @@ const _addYearQuartesTo = (dateOptions, y, delimeter) => {
   let i;
   for (i=0; i<4; i++){
     if (qNow < 1) { y = y - 1; qNow = 4; }
-    dateOptions.push({
-      caption: `${y}${delimeter}${qNow}`,
-      value: `${y}${delimeter}${qNow}`
-    })
+    dateOptions.push(_crDateOption(
+      `${y}${delimeter}${qNow}`
+    ))
     qNow = qNow - 1;
   }
 };
 
-const _crDateConfig = (dateOptions, mapDateDf) => ({
-  dateOptions,
-  dateDefault: _getDfDate(dateOptions, mapDateDf)
-});
-
-const _yearMonthConfig = (mapDateDf=2) => {
+const _crYearMonthConfig = (mapDateDf=2) => {
 	const dateOptions = []
 			, y = (new Date()).getUTCFullYear();
   for(let i=0; i<C.M_YEAR_MAX; i++){
@@ -61,7 +63,7 @@ const _yearMonthConfig = (mapDateDf=2) => {
 	return _crDateConfig(dateOptions, mapDateDf);
 };
 
-const _yearQuarterConfig = (mapDateDf=1, delimeter='Q') => {
+const _crYearQuarterConfig = (mapDateDf=1, delimeter) => {
 	const dateOptions = []
       , y = (new Date()).getUTCFullYear();
   for(let i=0; i<C.Q_YEAR_MAX; i++){
@@ -71,53 +73,45 @@ const _yearQuarterConfig = (mapDateDf=1, delimeter='Q') => {
 };
 
 
-const _yearBiAnnualConfig = (mapDateDf=3) => {
+const _crYearBiAnnualConfig = (mapDateDf=3) => {
   const dateOptions = [];
   let y = (new Date()).getUTCFullYear()
   for(let i=0; i<C.BI_YEAR_MAX; i++){
     dateOptions.push(
-      { caption: `${y}S2`, value: `${y}S2`},
-      { caption: `${y}S1`, value: `${y}S1`}
+      _crDateOption(`${y}S2`),
+      _crDateOption(`${y}S1`),
     )
     y = y - 1;
   }
   return _crDateConfig(dateOptions, mapDateDf);
 };
 
-const _yearConfig = function(mapDateDf=1){
+const _crYearConfig = function(mapDateDf=1){
 	const dateOptions = [];
   let y = (new Date()).getUTCFullYear();
 	for (let i=0; i<C.YEAR_MAX; i++){
-		dateOptions.push({
-			caption: ''+y,
-			value: ''+y
-		});
+		dateOptions.push(_crDateOption(''+y));
 		y = y - 1;
 	}
 	return _crDateConfig(dateOptions, mapDateDf);
-}
-
-const _emptyConfig = () => ({
-  dateDefault: C.DF_PLACEHOLDER,
-  dateOptions: []
-});
+};
 
 const crDateConfig = (frequency='M', mapDateDf) => {
    switch (frequency){
      case 'M':
-       return _yearMonthConfig(mapDateDf);
+       return _crYearMonthConfig(mapDateDf);
      case 'Q':
      case 'K':
-       return _yearQuarterConfig(mapDateDf, frequency);
+       return _crYearQuarterConfig(mapDateDf, frequency);
      case 'S':
-       return _yearBiAnnualConfig();
+       return _crYearBiAnnualConfig(mapDateDf);
      case 'Y':
-       return _yearConfig(mapDateDf);
+       return _crYearConfig(mapDateDf);
      case 'EMPTY':
-       return _emptyConfig();
+       return _crDateConfig();
      default:
-       return _yearConfig(mapDateDf);
+       return _crYearConfig(mapDateDf);
    }
-}
+};
 
 export default crDateConfig

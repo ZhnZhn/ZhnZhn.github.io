@@ -1,21 +1,30 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var C = {
-  DF_PLACEHOLDER: 'Before Select Metric',
+exports.default = void 0;
+const C = {
   YEAR_MAX: 12,
   BI_YEAR_MAX: 24,
   Q_YEAR_MAX: 4,
   M_YEAR_MAX: 3
 };
 
-var _getDfDate = function _getDfDate(dateOptions, dfIndex) {
-  return (dateOptions[dfIndex] || {}).value;
+const _crDateOption = (caption, value = caption) => ({
+  caption,
+  value
+});
+
+const _getDfDate = (dateOptions, dfIndex) => {
+  return typeof dfIndex === 'number' ? (dateOptions[dfIndex] || {}).value || '' : '';
 };
 
-var _addYearMonthsTo = function _addYearMonthsTo(dateOptions, y) {
-  var m = new Date().getUTCMonth(),
+const _crDateConfig = (dateOptions = [], mapDateDf) => ({
+  dateOptions,
+  dateDefault: _getDfDate(dateOptions, mapDateDf)
+});
+
+const _addYearMonthsTo = (dateOptions, y) => {
+  let m = new Date().getUTCMonth(),
       _m,
       _caption,
       i;
@@ -32,19 +41,16 @@ var _addYearMonthsTo = function _addYearMonthsTo(dateOptions, y) {
       _caption = y + "M12";
     }
 
-    dateOptions.push({
-      caption: _caption,
-      value: _caption
-    });
+    dateOptions.push(_crDateOption(_caption));
   }
 };
 
-var _addYearQuartesTo = function _addYearQuartesTo(dateOptions, y, delimeter) {
-  var m = new Date().getUTCMonth(),
-      _c = Math.floor((m + 1) / 3);
+const _addYearQuartesTo = (dateOptions, y, delimeter) => {
+  const m = new Date().getUTCMonth(),
+        _c = Math.floor((m + 1) / 3);
 
-  var qNow = _c === 4 ? 3 : _c;
-  var i;
+  let qNow = _c === 4 ? 3 : _c;
+  let i;
 
   for (i = 0; i < 4; i++) {
     if (qNow < 1) {
@@ -52,130 +58,80 @@ var _addYearQuartesTo = function _addYearQuartesTo(dateOptions, y, delimeter) {
       qNow = 4;
     }
 
-    dateOptions.push({
-      caption: "" + y + delimeter + qNow,
-      value: "" + y + delimeter + qNow
-    });
+    dateOptions.push(_crDateOption("" + y + delimeter + qNow));
     qNow = qNow - 1;
   }
 };
 
-var _crDateConfig = function _crDateConfig(dateOptions, mapDateDf) {
-  return {
-    dateOptions: dateOptions,
-    dateDefault: _getDfDate(dateOptions, mapDateDf)
-  };
-};
+const _crYearMonthConfig = (mapDateDf = 2) => {
+  const dateOptions = [],
+        y = new Date().getUTCFullYear();
 
-var _yearMonthConfig = function _yearMonthConfig(mapDateDf) {
-  if (mapDateDf === void 0) {
-    mapDateDf = 2;
-  }
-
-  var dateOptions = [],
-      y = new Date().getUTCFullYear();
-
-  for (var i = 0; i < C.M_YEAR_MAX; i++) {
+  for (let i = 0; i < C.M_YEAR_MAX; i++) {
     _addYearMonthsTo(dateOptions, y - i);
   }
 
   return _crDateConfig(dateOptions, mapDateDf);
 };
 
-var _yearQuarterConfig = function _yearQuarterConfig(mapDateDf, delimeter) {
-  if (mapDateDf === void 0) {
-    mapDateDf = 1;
-  }
+const _crYearQuarterConfig = (mapDateDf = 1, delimeter) => {
+  const dateOptions = [],
+        y = new Date().getUTCFullYear();
 
-  if (delimeter === void 0) {
-    delimeter = 'Q';
-  }
-
-  var dateOptions = [],
-      y = new Date().getUTCFullYear();
-
-  for (var i = 0; i < C.Q_YEAR_MAX; i++) {
+  for (let i = 0; i < C.Q_YEAR_MAX; i++) {
     _addYearQuartesTo(dateOptions, y - i, delimeter);
   }
 
   return _crDateConfig(dateOptions, mapDateDf);
 };
 
-var _yearBiAnnualConfig = function _yearBiAnnualConfig(mapDateDf) {
-  if (mapDateDf === void 0) {
-    mapDateDf = 3;
-  }
+const _crYearBiAnnualConfig = (mapDateDf = 3) => {
+  const dateOptions = [];
+  let y = new Date().getUTCFullYear();
 
-  var dateOptions = [];
-  var y = new Date().getUTCFullYear();
-
-  for (var i = 0; i < C.BI_YEAR_MAX; i++) {
-    dateOptions.push({
-      caption: y + "S2",
-      value: y + "S2"
-    }, {
-      caption: y + "S1",
-      value: y + "S1"
-    });
+  for (let i = 0; i < C.BI_YEAR_MAX; i++) {
+    dateOptions.push(_crDateOption(y + "S2"), _crDateOption(y + "S1"));
     y = y - 1;
   }
 
   return _crDateConfig(dateOptions, mapDateDf);
 };
 
-var _yearConfig = function _yearConfig(mapDateDf) {
-  if (mapDateDf === void 0) {
-    mapDateDf = 1;
-  }
+const _crYearConfig = function (mapDateDf = 1) {
+  const dateOptions = [];
+  let y = new Date().getUTCFullYear();
 
-  var dateOptions = [];
-  var y = new Date().getUTCFullYear();
-
-  for (var i = 0; i < C.YEAR_MAX; i++) {
-    dateOptions.push({
-      caption: '' + y,
-      value: '' + y
-    });
+  for (let i = 0; i < C.YEAR_MAX; i++) {
+    dateOptions.push(_crDateOption('' + y));
     y = y - 1;
   }
 
   return _crDateConfig(dateOptions, mapDateDf);
 };
 
-var _emptyConfig = function _emptyConfig() {
-  return {
-    dateDefault: C.DF_PLACEHOLDER,
-    dateOptions: []
-  };
-};
-
-var crDateConfig = function crDateConfig(frequency, mapDateDf) {
-  if (frequency === void 0) {
-    frequency = 'M';
-  }
-
+const crDateConfig = (frequency = 'M', mapDateDf) => {
   switch (frequency) {
     case 'M':
-      return _yearMonthConfig(mapDateDf);
+      return _crYearMonthConfig(mapDateDf);
 
     case 'Q':
     case 'K':
-      return _yearQuarterConfig(mapDateDf, frequency);
+      return _crYearQuarterConfig(mapDateDf, frequency);
 
     case 'S':
-      return _yearBiAnnualConfig();
+      return _crYearBiAnnualConfig(mapDateDf);
 
     case 'Y':
-      return _yearConfig(mapDateDf);
+      return _crYearConfig(mapDateDf);
 
     case 'EMPTY':
-      return _emptyConfig();
+      return _crDateConfig();
 
     default:
-      return _yearConfig(mapDateDf);
+      return _crYearConfig(mapDateDf);
   }
 };
 
 var _default = crDateConfig;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=crDateConfig.js.map
