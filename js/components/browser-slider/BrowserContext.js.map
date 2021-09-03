@@ -1,0 +1,11 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/BrowserContext.js"
+ ],
+ "file": "../../../src/components/browser-slider/BrowserContext.js",
+ "names": [
+  "BrowserContext"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,cAAc,gBAAG,2BAAvB;eAEeA,c"
+}

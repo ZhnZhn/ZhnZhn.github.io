@@ -1,24 +1,38 @@
-import { memo } from 'react'
+import { memo, useContext, useMemo } from 'react'
 
-import MenuItem from './MenuItem'
+import BrowserContext from './BrowserContext';
+import MenuItem from './MenuItem';
+
+const DF_MODEL = [];
+
+const useModel = model => {
+  const isMenuItem  = useContext(BrowserContext)
+  return useMemo(() => isMenuItem
+    ? model.filter(isMenuItem)
+    : model
+  , [isMenuItem, model]);
+};
 
 const MenuList = memo(({
   refFirstItem,
-  model=[],
+  model=DF_MODEL,
   fOnClickItem
-}) => (
- <div>
-  {model.map((item, index) => (
-     <MenuItem
-       innerRef={index === 0 ? refFirstItem : void 0}
-       key={item.id}
-       item={item}
-       onClick={fOnClickItem(item)}
-     />
-    )
-  )}
- </div>
-))
+}) => {
+  const _model = useModel(model);
+  return (
+    <div>
+      {_model.map((item, index) => (
+         <MenuItem
+           innerRef={index === 0 ? refFirstItem : void 0}
+           key={item.id}
+           item={item}
+           onClick={fOnClickItem(item)}
+         />
+        )
+      )}
+    </div>
+  );
+})
 
 /*
 MenuList.propTypes = {

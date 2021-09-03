@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/BrowserMenuMore.js"
+ ],
+ "file": "../../../src/components/browser-slider/BrowserMenuMore.js",
+ "names": [
+  "CL_MENU_MORE",
+  "S_MENU",
+  "width",
+  "paddingBottom",
+  "BrowserMenuMore",
+  "is",
+  "toggleMenu",
+  "toggleFilter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA,MAAMA,YAAY,GAAG,8BAArB;AAAA,MACEC,MAAM,GAAG;AACTC,EAAAA,KAAK,EAAE,GADE;AAETC,EAAAA,aAAa,EAAE;AAFN,CADX;;AAMA,MAAMC,eAAe,GAAG,CAAC;AACvBC,EAAAA,EADuB;AAEvBC,EAAAA,UAFuB;AAGvBC,EAAAA;AAHuB,CAAD,kBAKtB,qBAAC,mBAAD;AACE,EAAA,MAAM,EAAEF,EADV;AAEE,EAAA,SAAS,EAAEL,YAFb;AAGE,EAAA,KAAK,EAAEC,MAHT;AAIE,EAAA,OAAO,EAAEK,UAJX;AAAA,yBAME,qBAAC,oBAAD;AACE,IAAA,OAAO,EAAC,yBADV;AAEE,IAAA,QAAQ,EAAEC;AAFZ;AANF,EALF;;eAkBeH,e"
+}
