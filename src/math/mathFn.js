@@ -34,9 +34,16 @@ const _toBig = (bValue) => {
   }
 };
 
-const _roundBy = (nOrStr, by=2) => nOrStr != null
-  ? parseFloat(Big(nOrStr).toFixed(by))
-  : null;
+const _roundBy = (nOrStr, by=2) => {
+  if (nOrStr == null) {
+    return null;
+  }
+  const _floatOrNaN = parseFloat(nOrStr);
+  if (_floatOrNaN - _floatOrNaN !== 0) {
+    return _floatOrNaN;
+  }
+  return parseFloat(Big(nOrStr).toFixed(by));
+};
 
 const mathFn = {
   roundBy: _roundBy,
@@ -103,7 +110,7 @@ const mathFn = {
     (prefix || '') +
     Date.now().toString(36) +
     Math.random().toString(36).substring(2, 9)
-   )   
+   )
 }
 
 export default mathFn

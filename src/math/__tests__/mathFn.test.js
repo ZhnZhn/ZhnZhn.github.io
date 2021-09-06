@@ -21,15 +21,30 @@ const _crVmInputs = (nowValue, prevValue) => ({
 describe('roundBy', () => {
   const fn = roundBy
   test('should return rounded number from string or number by', ()=>{
+    expect(fn(1.554, 2)).toBe(1.55)
     expect(fn(1.555, 2)).toBe(1.56)
+
+    expect(fn('1.554', 2)).toBe(1.55)
     expect(fn('1.555', 2)).toBe(1.56)
+
+    expect(fn(1.004, 2)).toBe(1)
     expect(fn(1.005, 2)).toBe(1.01)
+
+    expect(fn('1.004', 2)).toBe(1)
     expect(fn('1.005', 2)).toBe(1.01)
+
     expect(fn(0)).toBe(0)
   })
-  test('shoul return null for null or undefined', ()=>{
+  test('should return null for null or undefined', ()=>{
     expect(fn(null)).toBe(null)
     expect(fn()).toBe(null)
+  })
+  test('should return NaN for all other not number input  cases', ()=>{
+    expect(fn('str')).toBeNaN()
+    expect(fn(false)).toBeNaN()
+    expect(fn(true)).toBeNaN()
+    expect(fn({})).toBeNaN()
+    expect(fn([])).toBeNaN()
   })
 })
 
