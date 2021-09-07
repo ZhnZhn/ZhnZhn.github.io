@@ -8,7 +8,7 @@ const {
 describe('toUTC', ()=>{
   const fn = toUTC;
 
-  test('should conver str in format 2010M01D01 to mls UTC-0', ()=>{
+  test('should convert str in format 2010M01D01 to mls UTC-0', ()=>{
     expect(fn('2010M01D01')).toBe(Date.UTC(2010, 0, 1)) //2010-01-01
     expect(fn('2010M01D02')).toBe(Date.UTC(2010, 0, 2)) //2010-01-02
     expect(fn('2010M02D01')).toBe(Date.UTC(2010, 1, 1)) //2010-02-01
@@ -43,10 +43,9 @@ describe('toUTC', ()=>{
     expect(fn('2010H2')).toBe(Date.UTC(2010, 11, 30)) //2010-12-30
   })
 
-  test('should conver str in format YYYY to mls UTC-0', ()=>{
+  test('should convert str in format YYYY with hasPerJanuary boolean option to mls UTC-0', ()=>{
     expect(fn('2010')).toBe(Date.UTC(2010, 11, 31)) //2010-12-31
-    expect(fn('2011')).toBe(Date.UTC(2011, 11, 31)) //2011-12-31
-    expect(fn('2012')).toBe(Date.UTC(2012, 11, 31)) //2012-12-31
+    expect(fn('2010', true)).toBe(Date.UTC(2010, 0, 1)) //2010-01-01
   })
 })
 

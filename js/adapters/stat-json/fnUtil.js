@@ -25,13 +25,13 @@ const _fToUTC = monthPeriod => (delimeterChart, str) => {
       _toMonthUTC = _fToUTC(1),
       _toQuarterUTC = _fToUTC(3),
       _toHalfYearUTC = _fToUTC(6),
-      _toYearUTC = str => Date.UTC(str, 11, 31);
+      _toYearUTC = (str, hasPerJanuary) => hasPerJanuary ? Date.UTC(str, 0, 1) : Date.UTC(str, 11, 31);
 
 const _fIsInclude = str => token => str.indexOf(token) !== -1;
 
 const fnUtil = {
   compose: _compose.default,
-  toUTC: str => {
+  toUTC: (str, hasPerJanuary) => {
     str = str.toUpperCase();
 
     const _isInclude = _fIsInclude(str);
@@ -52,7 +52,7 @@ const fnUtil = {
       return _toHalfYearUTC('H', str);
     }
 
-    return _toYearUTC(str);
+    return _toYearUTC(str, hasPerJanuary);
   },
   toYMD: str => {
     const ms = fnUtil.toUTC(str),

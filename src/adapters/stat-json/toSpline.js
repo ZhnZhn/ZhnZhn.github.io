@@ -30,11 +30,14 @@ const _checkOrder = data => _isReverse(data)
   ? data.reverse()
   : data;
 
-const _fCrDataPoint = (values) => (time, i) => {
+const _isPerJanuary = (label) => (label || '')
+  .indexOf('per 1 January') !== -1;
+
+const _fCrDataPoint = (values, hasPerJanuary) => (time, i) => {
   const _pIndex = time.length - 1
   , isP = time[_pIndex] === '*'
   , _time = isP ? time.slice(0, _pIndex) : time
-  , x = toUTC(_time)
+  , x = toUTC(_time, hasPerJanuary)
   , y = values[i] ? values[i].value : null;
   return isP ? [x, y, 'p'] : [x, y];
 };
@@ -44,18 +47,20 @@ const _postProcessData = compose(
   _checkOrder
 );
 
-const _toData = (values, times) => {
+const _toData = (values, times, hasPerJanuary) => {
   const _values = _isArr(values) ? values : [values]
-  , _crPoint = _fCrDataPoint(_values);
+  , _crPoint = _fCrDataPoint(_values, hasPerJanuary);
   return _isArr(times)
     ? _postProcessData(times.map(_crPoint))
     : [];
 };
 
+
 const toArea = {
   crConfig: (json, option) => {
     const [ ds, values, times ] = crDsValuesTimes(json, option)
-    , data = _toData(values, times)
+    , _hasPerJanuary = _isPerJanuary(ds.label)
+    , data = _toData(values, times, _hasPerJanuary)
     , confOption = crConfOption(ds, option);
 
     return crConfigType1({
