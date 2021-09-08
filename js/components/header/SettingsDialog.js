@@ -3,11 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -19,8 +15,10 @@ var _PaneApiKey = _interopRequireDefault(require("./PaneApiKey"));
 
 var _PaneOptions = _interopRequireDefault(require("./PaneOptions"));
 
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from 'prop-types'
-var S = {
+const S = {
   MODAL: {
     position: 'static',
     width: 380,
@@ -38,96 +36,72 @@ var S = {
   }
 };
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _isFn = fn => typeof fn === 'function';
 
-var SettingsDialog = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(SettingsDialog, _Component);
+const _isNotShouldRerender = (prevProps, nextProps) => prevProps.isShow === nextProps.isShow;
 
-  function SettingsDialog() {
-    var _this;
+const SettingsDialog = /*#__PURE__*/(0, _react.memo)(({
+  isShow,
+  data,
+  onClose
+}) => {
+  const _refModalDialog = (0, _react.useRef)()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hClose = (0, _react.useCallback)(() => {
+    onClose();
+    const _compDialog = _refModalDialog.current;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+    if (_compDialog && _isFn(_compDialog.focusPrev)) {
+      _compDialog.focusPrev();
     }
+  }, []); // onClose
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-    _this._hClose = function () {
-      _this.props.onClose();
 
-      if (_this._modal && _isFn(_this._modal.focusPrev)) {
-        _this._modal.focusPrev();
-      }
-    };
-
-    _this._refModal = function (n) {
-      return _this._modal = n;
-    };
-
-    return _this;
-  }
-
-  var _proto = SettingsDialog.prototype;
-
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    data: PropTypes.shape({
-      setQuandlKey: PropTypes.func,
-      isAdminMode: PropTypes.func,
-      isDrawDeltaExtrems: PropTypes.func
-    }),
-    onClose: PropTypes.func
-  }
-  */
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-
-    return true;
-  };
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        isShow = _this$props.isShow,
-        data = _this$props.data;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ModalDialog, {
-      ref: this._refModal,
-      caption: "User Settings",
-      style: S.MODAL,
-      isWithButton: false,
-      isShow: isShow,
-      onClose: this._hClose,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].TabPane, {
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].Tab, {
-          title: "ApiKeys",
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneApiKey["default"], {
-            isShow: isShow,
-            titleStyle: S.TITLE_API,
-            btStyle: S.BT,
-            data: data,
-            onClose: this._hClose
-          })
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].Tab, {
-          title: "Options",
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions["default"], {
-            titleStyle: S.TITLE_OPTION,
-            btStyle: S.BT,
-            data: data,
-            onChangeTheme: _ComponentActions["default"].changeTheme,
-            onClose: this._hClose
-          })
-        })]
-      })
-    });
-  };
-
-  return SettingsDialog;
-}(_react.Component);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalDialog, {
+    ref: _refModalDialog,
+    caption: "User Settings",
+    style: S.MODAL,
+    isWithButton: false,
+    isShow: isShow,
+    onClose: _hClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.TabPane, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.Tab, {
+        title: "ApiKeys",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneApiKey.default, {
+          isShow: isShow,
+          titleStyle: S.TITLE_API,
+          btStyle: S.BT,
+          data: data,
+          onClose: _hClose
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.Tab, {
+        title: "Options",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions.default, {
+          titleStyle: S.TITLE_OPTION,
+          btStyle: S.BT,
+          data: data,
+          onChangeTheme: _ComponentActions.default.changeTheme,
+          onClose: _hClose
+        })
+      })]
+    })
+  });
+}, _isNotShouldRerender);
+/*
+SettingsDialog.propTypes = {
+  isShow: PropTypes.bool,
+  data: PropTypes.shape({
+    setQuandlKey: PropTypes.func,
+    isAdminMode: PropTypes.func,
+    isDrawDeltaExtrems: PropTypes.func
+  }),
+  onClose: PropTypes.func
+}
+*/
 
 var _default = SettingsDialog;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=SettingsDialog.js.map

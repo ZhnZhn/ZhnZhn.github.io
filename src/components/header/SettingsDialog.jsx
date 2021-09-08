@@ -1,16 +1,15 @@
-import { Component } from 'react'
+import { memo, useRef, useCallback } from 'react';
 //import PropTypes from 'prop-types'
 
-import Actions from '../../flux/actions/ComponentActions'
+import Actions from '../../flux/actions/ComponentActions';
 
-
-import A from '../Comp'
-import PaneApiKey from './PaneApiKey'
-import PaneOptions from './PaneOptions'
+import A from '../Comp';
+import PaneApiKey from './PaneApiKey';
+import PaneOptions from './PaneOptions';
 
 const S = {
   MODAL: {
-    position : 'static',
+    position: 'static',
     width: 380,
     height: 446,
     margin: '70px auto 0px'
@@ -28,72 +27,69 @@ const S = {
 
 const _isFn = fn => typeof fn === 'function';
 
-class SettingsDialog extends Component {
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    data: PropTypes.shape({
-      setQuandlKey: PropTypes.func,
-      isAdminMode: PropTypes.func,
-      isDrawDeltaExtrems: PropTypes.func
-    }),
-    onClose: PropTypes.func
-  }
-  */
+const _isNotShouldRerender = (prevProps, nextProps) =>
+  prevProps.isShow === nextProps.isShow;
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props
-        && nextProps.isShow === this.props.isShow
-    ) {
-      return false;
+const SettingsDialog = memo(({
+  isShow,
+  data,
+  onClose
+}) => {
+  const _refModalDialog = useRef()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hClose = useCallback(() => {
+    onClose()
+    const _compDialog = _refModalDialog.current;
+    if (_compDialog && _isFn(_compDialog.focusPrev)) {
+      _compDialog.focusPrev()
     }
-    return true;
-  }
+  }, [])
+  // onClose
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _hClose = () => {
-    this.props.onClose()
-    if (this._modal
-        && _isFn(this._modal.focusPrev) ) {
-      this._modal.focusPrev()
-    }
-  }
+  return (
+    <A.ModalDialog
+       ref={_refModalDialog}
+       caption="User Settings"
+       style={S.MODAL}
+       isWithButton={false}
+       isShow={isShow}
+       onClose={_hClose}
+    >
+      <A.TabPane>
+        <A.Tab title="ApiKeys">
+          <PaneApiKey
+             isShow={isShow}
+             titleStyle={S.TITLE_API}
+             btStyle={S.BT}
+             data={data}
+             onClose={_hClose}
+           />
+        </A.Tab>
+        <A.Tab title="Options">
+          <PaneOptions
+            titleStyle={S.TITLE_OPTION}
+            btStyle={S.BT}
+            data={data}
+            onChangeTheme={Actions.changeTheme}
+            onClose={_hClose}
+          />
+        </A.Tab>
+      </A.TabPane>
+    </A.ModalDialog>
+  );
+}, _isNotShouldRerender);
 
-  _refModal = n => this._modal = n
-
-  render(){
-    const { isShow, data } = this.props;
-    return (
-         <A.ModalDialog
-            ref={this._refModal}
-            caption="User Settings"
-            style={S.MODAL}
-            isWithButton={false}
-            isShow={isShow}
-            onClose={this._hClose}
-         >
-           <A.TabPane>
-             <A.Tab title="ApiKeys">
-               <PaneApiKey
-                  isShow={isShow}
-                  titleStyle={S.TITLE_API}
-                  btStyle={S.BT}
-                  data={data}
-                  onClose={this._hClose}
-                />
-             </A.Tab>
-             <A.Tab title="Options">
-               <PaneOptions
-                 titleStyle={S.TITLE_OPTION}
-                 btStyle={S.BT}
-                 data={data}
-                 onChangeTheme={Actions.changeTheme}
-                 onClose={this._hClose}
-               />
-             </A.Tab>
-           </A.TabPane>
-         </A.ModalDialog>
-    );
-  }
+/*
+SettingsDialog.propTypes = {
+  isShow: PropTypes.bool,
+  data: PropTypes.shape({
+    setQuandlKey: PropTypes.func,
+    isAdminMode: PropTypes.func,
+    isDrawDeltaExtrems: PropTypes.func
+  }),
+  onClose: PropTypes.func
 }
+*/
 
 export default SettingsDialog
