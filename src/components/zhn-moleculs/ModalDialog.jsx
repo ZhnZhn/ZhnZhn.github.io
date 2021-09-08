@@ -1,17 +1,20 @@
 import { forwardRef, useRef, useCallback, useEffect, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
-import use from '../hooks/use'
+import use from '../hooks/use';
 
-import focusNode  from '../zhn-utils/focusNode'
-import crCn from '../zhn-utils/crCn'
+import focusNode  from '../zhn-utils/focusNode';
+import crCn from '../zhn-utils/crCn';
 
-import SvgClose from '../zhn/SvgClose'
-import FlatButton from '../zhn-m/FlatButton'
+import SvgClose from '../zhn/SvgClose';
+import FlatButton from '../zhn-m/FlatButton';
 
-import STYLE from './Dialog.Style'
+import MenuMore from './MenuMore';
+
+import STYLE from './Dialog.Style';
 
 const {
   useKeyEscape,
+  useToggle,
   useTheme
 } = use;
 
@@ -67,6 +70,7 @@ const DF_ON_CLOSE = () => {};
 const ModalDialog = forwardRef(({
   isShow,
   style,
+  menuModel,
   caption,
   styleCaption,
   commandButtons,
@@ -98,6 +102,7 @@ const ModalDialog = forwardRef(({
   /* _focusPrev */
   /*eslint-enable react-hooks/exhaustive-deps */
   , _hKeyDown = useKeyEscape(_hClose, [_hClose])
+  , [isMore, toggleIsMore] = useToggle(false)
   , TS = useTheme(TH_ID);
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -141,7 +146,15 @@ const ModalDialog = forwardRef(({
      >
      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
          <div style={{...S.CAPTION_DIV, ...TS.EL}}>
-            <span style={styleCaption}>{caption}</span>
+           <MenuMore
+             isMore={isMore}
+             menuModel={menuModel}
+             TS={TS}
+             toggle={toggleIsMore}
+           />
+            <span style={styleCaption}>
+              {caption}
+            </span>
             <SvgClose
               style={S.SVG_CLOSE}
               onClose={_hClose}
