@@ -1,16 +1,17 @@
 import { forwardRef, useRef, useCallback, useEffect, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
-import use from '../hooks/use'
-import focusNode  from '../zhn-utils/focusNode'
+import use from '../hooks/use';
+import focusNode from '../zhn-utils/focusNode';
+import crCn from '../zhn-utils/crCn';
 
-import ModalSlider from '../zhn-modal-slider/ModalSlider'
-import SvgMore from '../zhn/SvgMore'
-import SvgClose from '../zhn/SvgClose'
-import FlatButton from '../zhn-m/FlatButton'
+import SvgClose from '../zhn/SvgClose';
+import FlatButton from '../zhn-m/FlatButton';
 
-import Interact from '../../utils/Interact'
+import MenuMore from './MenuMore';
 
-import STYLE from './Dialog.Style'
+import Interact from '../../utils/Interact';
+
+import STYLE from './Dialog.Style';
 
 const {
   useToggle,
@@ -23,8 +24,7 @@ const TH_ID = 'DRAGGABLE_DIALOG';
 const CL = {
   ROOT: "draggable-dialog",
   SHOWING: 'show-popup',
-  NOT_SELECTED: 'not-selected',
-  MENU_MORE: 'popup-menu dialog__menu-more'
+  NOT_SELECTED: 'not-selected'
 };
 
 const S = {
@@ -35,47 +35,12 @@ const S = {
     left: 50,
     zIndex: 10
   },
-  BT_MORE: {
-    position: 'absolute',
-    top: 1,
-    left: 2
-  },
-  BT_MORE_SVG: {
-    stroke: 'inherit',
-    fill: 'inherit'
-  },
   CHILDREN_DIV: {
     cursor: 'default'
   }
 };
 
 const _isFn = fn => typeof fn === 'function';
-
-const MenuMore = forwardRef(({
-  isMore,
-  menuModel,
-  TS,
-  toggle
-}, ref) => {
-  if (!menuModel) { return null; }
-  return (
-    <>
-      <SvgMore
-        btRef={ref}
-        style={S.BT_MORE}
-        svgStyle={S.BT_MORE_SVG}
-        onClick={toggle}
-      />
-      <ModalSlider
-        isShow={isMore}
-        className={CL.MENU_MORE}
-        style={TS.EL_BORDER}
-        model={menuModel}
-        onClose={toggle}
-      />
-    </>
-  );
-});
 
 const CommandButtons = ({
   buttons,
@@ -143,8 +108,7 @@ const DraggableDialog = forwardRef(({
   , [isMore, toggleIsMore] = useToggle(false)
   , TS = useTheme(TH_ID)
   , _styleShow = isShow ? S.SHOW : S.HIDE
-  , _classShow = isShow ? CL.SHOWING : ''
-  , _className = `${CL.ROOT} ${_classShow}`;
+  , _className = crCn(CL.ROOT, [isShow, CL.SHOWING]);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
