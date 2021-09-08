@@ -4,16 +4,19 @@ import InputSecret from '../zhn/InputSecret'
 import STYLE from '../styles/DialogStyles'
 
 const RowSecret = forwardRef(({
-  title='',
+  isTitle,
+  title,
   titleStyle,
   ...rest
 }, ref) => {
   return (
     <form>
       <label style={STYLE.ROW}>
-         <span style={{...STYLE.CAPTION, ...titleStyle}}>
-           {title}
-         </span>
+         {isTitle && title &&
+           <span style={{...STYLE.CAPTION, ...titleStyle}}>
+             {title}
+           </span>
+         }
          <InputSecret
             ref={ref}
             {...rest}

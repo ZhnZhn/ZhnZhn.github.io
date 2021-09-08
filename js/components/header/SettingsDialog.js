@@ -7,7 +7,11 @@ exports.default = void 0;
 
 var _react = require("react");
 
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
 var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
+
+var _has = _interopRequireDefault(require("../has"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -18,25 +22,49 @@ var _PaneOptions = _interopRequireDefault(require("./PaneOptions"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from 'prop-types'
-const S = {
-  MODAL: {
-    position: 'static',
-    width: 380,
-    height: 446,
-    margin: '70px auto 0px'
-  },
-  TITLE_API: {
-    width: 80
-  },
-  TITLE_OPTION: {
-    width: 110
-  },
-  BT: {
-    color: '#232f3b'
-  }
+const S_MODAL = {
+  position: 'static',
+  width: 380,
+  height: 446,
+  margin: '70px auto 0px'
+},
+      S_MODAL_SMALL = {
+  width: 295
+},
+      S_TITLE_API = {
+  width: 80
+},
+      S_TITLE_OPTION = {
+  width: 110
+},
+      S_BT = {
+  color: '#232f3b'
 };
 
-const _isFn = fn => typeof fn === 'function';
+const IS_WIDE_WIDTH = _has.default.wideWidth(),
+      CL_ROW = 'row__pane-topic not-selected',
+      _isFn = fn => typeof fn === 'function';
+
+const useMenuMore = () => {
+  const [isShowLabels, toggleLabels] = (0, _useToggle.default)(IS_WIDE_WIDTH)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        menuModel = (0, _react.useMemo)(() => ({
+    titleCl: CL_ROW,
+    pageWidth: 190,
+    maxPages: 1,
+    p0: [{
+      cn: CL_ROW,
+      onClick: toggleLabels,
+      name: "Toggle Input Labels",
+      isClose: true
+    }]
+  }), []); //toggleLabels
+
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  return [isShowLabels, menuModel];
+};
 
 const _isNotShouldRerender = (prevProps, nextProps) => prevProps.isShow === nextProps.isShow;
 
@@ -55,15 +83,20 @@ const SettingsDialog = /*#__PURE__*/(0, _react.memo)(({
     if (_compDialog && _isFn(_compDialog.focusPrev)) {
       _compDialog.focusPrev();
     }
-  }, []); // onClose
+  }, []) // onClose
 
   /*eslint-enable react-hooks/exhaustive-deps */
-
+  ,
+        [isShowLabels, menuModel] = useMenuMore(),
+        _style = isShowLabels ? S_MODAL : { ...S_MODAL,
+    ...S_MODAL_SMALL
+  };
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalDialog, {
     ref: _refModalDialog,
+    style: _style,
     caption: "User Settings",
-    style: S.MODAL,
+    menuModel: menuModel,
     isWithButton: false,
     isShow: isShow,
     onClose: _hClose,
@@ -72,16 +105,18 @@ const SettingsDialog = /*#__PURE__*/(0, _react.memo)(({
         title: "ApiKeys",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneApiKey.default, {
           isShow: isShow,
-          titleStyle: S.TITLE_API,
-          btStyle: S.BT,
+          isShowLabels: isShowLabels,
+          titleStyle: S_TITLE_API,
+          btStyle: S_BT,
           data: data,
           onClose: _hClose
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.Tab, {
         title: "Options",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions.default, {
-          titleStyle: S.TITLE_OPTION,
-          btStyle: S.BT,
+          isShowLabels: isShowLabels,
+          titleStyle: S_TITLE_OPTION,
+          btStyle: S_BT,
           data: data,
           onChangeTheme: _ComponentActions.default.changeTheme,
           onClose: _hClose

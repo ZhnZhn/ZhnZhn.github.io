@@ -1,31 +1,52 @@
-import { memo, useRef, useCallback } from 'react';
+import { memo, useRef, useCallback, useMemo } from 'react';
 //import PropTypes from 'prop-types'
+
+import useToggle from '../hooks/useToggle';
 
 import Actions from '../../flux/actions/ComponentActions';
 
+import has from '../has';
 import A from '../Comp';
 import PaneApiKey from './PaneApiKey';
 import PaneOptions from './PaneOptions';
 
-const S = {
-  MODAL: {
-    position: 'static',
-    width: 380,
-    height: 446,
-    margin: '70px auto 0px'
-  },
-  TITLE_API: {
-    width: 80
-  },
-  TITLE_OPTION: {
-    width: 110
-  },
-  BT: {
-    color: '#232f3b'
-  }
+const S_MODAL = {
+  position: 'static',
+  width: 380,
+  height: 446,
+  margin: '70px auto 0px'
+}, S_MODAL_SMALL = {
+  width: 295
+}, S_TITLE_API = {
+  width: 80
+}, S_TITLE_OPTION = {
+  width: 110
+}, S_BT = {
+  color: '#232f3b'
 };
 
-const _isFn = fn => typeof fn === 'function';
+const IS_WIDE_WIDTH = has.wideWidth()
+, CL_ROW = 'row__pane-topic not-selected'
+, _isFn = fn => typeof fn === 'function';
+
+const useMenuMore = () => {
+  const [isShowLabels, toggleLabels] = useToggle(IS_WIDE_WIDTH)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , menuModel = useMemo(() => ({
+    titleCl: CL_ROW,
+    pageWidth: 190,
+    maxPages: 1,
+    p0: [{
+      cn: CL_ROW,
+      onClick: toggleLabels,
+      name: "Toggle Input Labels",
+      isClose: true
+    }]
+  }), [])
+  //toggleLabels
+  /*eslint-enable react-hooks/exhaustive-deps */
+  return [isShowLabels, menuModel];
+};
 
 const _isNotShouldRerender = (prevProps, nextProps) =>
   prevProps.isShow === nextProps.isShow;
@@ -46,12 +67,17 @@ const SettingsDialog = memo(({
   }, [])
   // onClose
   /*eslint-enable react-hooks/exhaustive-deps */
+  , [isShowLabels, menuModel] = useMenuMore()
+  , _style = isShowLabels
+      ? S_MODAL
+      : {...S_MODAL, ...S_MODAL_SMALL}
 
   return (
     <A.ModalDialog
        ref={_refModalDialog}
+       style={_style}
        caption="User Settings"
-       style={S.MODAL}
+       menuModel={menuModel}
        isWithButton={false}
        isShow={isShow}
        onClose={_hClose}
@@ -60,16 +86,18 @@ const SettingsDialog = memo(({
         <A.Tab title="ApiKeys">
           <PaneApiKey
              isShow={isShow}
-             titleStyle={S.TITLE_API}
-             btStyle={S.BT}
+             isShowLabels={isShowLabels}
+             titleStyle={S_TITLE_API}
+             btStyle={S_BT}
              data={data}
              onClose={_hClose}
            />
         </A.Tab>
         <A.Tab title="Options">
           <PaneOptions
-            titleStyle={S.TITLE_OPTION}
-            btStyle={S.BT}
+            isShowLabels={isShowLabels}
+            titleStyle={S_TITLE_OPTION}
+            btStyle={S_BT}
             data={data}
             onChangeTheme={Actions.changeTheme}
             onClose={_hClose}

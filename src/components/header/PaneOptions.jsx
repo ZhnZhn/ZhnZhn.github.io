@@ -69,6 +69,7 @@ const _useTheme = (onChangeTheme) => {
 };
 
 const PaneOptions = ({
+  isShowLabels,
   titleStyle, btStyle,
   data,
   onClose,
@@ -91,6 +92,7 @@ const PaneOptions = ({
     <div>
       <D.RowPattern
          ref={_refProxy}
+         isShowLabels={isShowLabels}
          captionStyle={titleStyle}
          caption="Proxy"
          placeholder="Local Http Proxy Server"
@@ -101,6 +103,7 @@ const PaneOptions = ({
          errorMsg="Should start with http://127.0.0.1"
       />
       <D.RowInputSelect
+         isShowLabels={isShowLabels}
          caption="UI Theme"
          captionStyle={titleStyle}
          options={UI_THEME_OPTIONS}

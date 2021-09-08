@@ -9,12 +9,13 @@ import RowButtons from './RowButtons'
 
 const MAX_KEY = 10;
 
-const S = {
-  BT_SET: {
-    marginLeft: 8,
-    marginRight: 8
-  }
+const S_PANE = {
+  paddingLeft: 4
+}, S_BT_SET = {
+  marginLeft: 8,
+  marginRight: 8
 };
+
 
 const CONF_ARR = [
   ["Alpha", "alpha-vantage", "Alpha Vantage"],
@@ -78,6 +79,7 @@ class PaneApiKey extends Component {
   render(){
     const {
       isShow, isSelected,
+      isShowLabels,
       titleStyle, btStyle,
       onClose
     } = this.props;
@@ -85,13 +87,14 @@ class PaneApiKey extends Component {
       return null;
     }
     return (
-      <div>
+      <div style={S_PANE}>
         {CONF_ARR.map((item, i) => {
           const _i = i + 1;
           return (
             <RowSecret
                key={item[0]}
                ref={this['_ref'+_i]}
+               isTitle={isShowLabels}
                titleStyle={titleStyle}
                title={`${item[0]}:`}
                name={item[1]}
@@ -107,7 +110,7 @@ class PaneApiKey extends Component {
             onClick={this._hClearAll}
           />
           <FlatButton
-            style={{...btStyle, ...S.BT_SET}}
+            style={{...btStyle, ...S_BT_SET}}
             caption="SET ALL"
             onClick={this._hSetAll}
           />
