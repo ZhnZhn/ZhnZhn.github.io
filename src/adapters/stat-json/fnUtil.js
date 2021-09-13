@@ -1,25 +1,27 @@
 
 import compose from '../../utils/compose';
 
+const _toUTC = Date.UTC;
+
 const _toDayUTC = str => {
   const _arrYear = str.split('M')
   , _arrMonth = _arrYear[1].split('D')
   , _month =  parseInt(_arrMonth[0], 10)-1;
-  return Date.UTC(_arrYear[0], _month, _arrMonth[1]);
+  return _toUTC(_arrYear[0], _month, _arrMonth[1]);
 };
 
 const _fToUTC = monthPeriod => (delimeterChart, str) => {
   const arrDate = str.split(delimeterChart)
   , _month = (parseInt(arrDate[1], 10)*monthPeriod) - 1
-  , _day = (_month === 1) ? 28 : 30;
-  return Date.UTC(arrDate[0], _month, _day);
+  , _day = _month === 1 ? 28 : 30;
+  return _toUTC(arrDate[0], _month, _day);
 }
 , _toMonthUTC = _fToUTC(1)
 , _toQuarterUTC = _fToUTC(3)
 , _toHalfYearUTC = _fToUTC(6)
 , _toYearUTC = (str, hasPerJanuary) => hasPerJanuary
-    ? Date.UTC(str, 0, 1)
-    : Date.UTC(str, 11, 31);
+    ? _toUTC(str, 0, 1)
+    : _toUTC(str, 11, 31);
 
 const _fIsInclude = str => token => str.indexOf(token) !== -1;
 
