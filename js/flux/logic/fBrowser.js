@@ -86,25 +86,23 @@ const _crBrowserDynamic = (Comp, option) => {
   });
 };
 
+const STAT_ALL_TYPES = [_Type.BrowserType.SWEDEN_STAT_ALL, _Type.BrowserType.NORWAY_STAT_ALL, _Type.BrowserType.FINLAND_STAT_ALL, _Type.BrowserType.DENMARK_STAT_ALL, _Type.BrowserType.IRELAND_STAT_ALL];
+
+const _isStatAll = browserType => STAT_ALL_TYPES.indexOf(browserType) !== -1;
+
 const fBrowser = {
   crAsyncBrowser(option) {
-    const {
-      browserType
-    } = option;
+    const bT = option.browserType;
 
-    switch (browserType) {
-      case _Type.BrowserType.WATCH_LIST:
-        return _RouterBrowser.default[_Type.BrowserType.WATCH_LIST].then(_crBrowserWatchList);
-
-      case _Type.BrowserType.SWEDEN_STAT_ALL:
-      case _Type.BrowserType.NORWAY_STAT_ALL:
-      case _Type.BrowserType.FINLAND_STAT_ALL:
-      case _Type.BrowserType.DENMARK_STAT_ALL:
-        return _RouterBrowser.default.STAT_ALL.then(Comp => _crBrowserDynamic(Comp, option));
-
-      default:
-        return Promise.resolve(_crBrowserDynamic(_RouterBrowser.default[browserType] || _RouterBrowser.default.DEFAULT, option));
+    if (bT === _Type.BrowserType.WATCH_LIST) {
+      return _RouterBrowser.default[_Type.BrowserType.WATCH_LIST].then(_crBrowserWatchList);
     }
+
+    if (_isStatAll(bT)) {
+      return _RouterBrowser.default.STAT_ALL.then(Comp => _crBrowserDynamic(Comp, option));
+    }
+
+    return Promise.resolve(_crBrowserDynamic(_RouterBrowser.default[bT] || _RouterBrowser.default.DEFAULT, option));
   }
 
 };

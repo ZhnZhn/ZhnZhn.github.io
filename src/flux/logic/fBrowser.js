@@ -67,30 +67,34 @@ const _crBrowserDynamic = (Comp, option) => {
    });
  }
 
+const STAT_ALL_TYPES = [
+  BT.SWEDEN_STAT_ALL,
+  BT.NORWAY_STAT_ALL,
+  BT.FINLAND_STAT_ALL,
+  BT.DENMARK_STAT_ALL,
+  BT.IRELAND_STAT_ALL
+];
+const _isStatAll = browserType => STAT_ALL_TYPES
+  .indexOf(browserType) !== -1;
+
 const fBrowser = {
   crAsyncBrowser(option) {
-    const { browserType } = option;
-    switch (browserType) {
-      case BT.WATCH_LIST:
-        return RouterBrowser[BT.WATCH_LIST]
-          .then(_crBrowserWatchList);
-
-      case BT.SWEDEN_STAT_ALL:
-      case BT.NORWAY_STAT_ALL:
-      case BT.FINLAND_STAT_ALL:
-      case BT.DENMARK_STAT_ALL:
-        return RouterBrowser.STAT_ALL
-          .then(Comp => _crBrowserDynamic(Comp, option));
-
-      default:
-        return Promise.resolve(
-           _crBrowserDynamic(
-             RouterBrowser[browserType] || RouterBrowser.DEFAULT,
-             option
-           )
-        );
+    const bT = option.browserType;
+    if (bT === BT.WATCH_LIST) {
+      return RouterBrowser[BT.WATCH_LIST]
+        .then(_crBrowserWatchList);
     }
+    if (_isStatAll(bT)) {
+      return RouterBrowser.STAT_ALL
+        .then(Comp => _crBrowserDynamic(Comp, option));
+    }
+    return Promise.resolve(
+       _crBrowserDynamic(
+         RouterBrowser[bT] || RouterBrowser.DEFAULT,
+         option
+       )
+    );
   }
-}
+};
 
 export default fBrowser
