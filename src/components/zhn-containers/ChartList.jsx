@@ -13,8 +13,8 @@ const ChartList = ({
   <div>
    {(configs || [])
      .map((config, index) => {
-       const { zhConfig } = config
-       , { id, zhCompType } = zhConfig || {};
+       const { zhConfig, zhCompType } = config
+       , { id } = zhConfig || {};
        return ItemFactory.crItem({
          store,
          config, index,
