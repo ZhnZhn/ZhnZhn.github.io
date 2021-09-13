@@ -11,6 +11,13 @@ const _isArr = Array.isArray;
 
 const _toFirstUpperCase = str => str.charAt(0).toUpperCase() + str.substring(1);
 
+const _crDimItem = (caption, sliceId, value) => ({
+  caption,
+  slice: {
+    [sliceId]: value
+  }
+});
+
 const _crDimOptions = ({
   values,
   valueTexts,
@@ -20,18 +27,7 @@ const _crDimOptions = ({
     return;
   }
 
-  const _arr = [];
-
-  for (let i = 0; i < valueTexts.length; i++) {
-    _arr.push({
-      caption: valueTexts[i],
-      slice: {
-        [code]: values[i]
-      }
-    });
-  }
-
-  return _arr;
+  return valueTexts.map((text, index) => _crDimItem(text, code, values[index]));
 };
 
 const _isStatDenmark = (time, text, item) => !time && text && item.id && !_isArr(item.valueTexts) && _isArr(item.values);
@@ -39,22 +35,13 @@ const _isStatDenmark = (time, text, item) => !time && text && item.id && !_isArr
 const _crSdnDimOptions = ({
   values,
   id
-}) => {
-  const _arr = [];
-
-  for (let i = 0; i < values.length; i++) {
-    _arr.push({
-      caption: values[i].text,
-      slice: {
-        [id]: values[i].id
-      }
-    });
-  }
-
-  return _arr;
-};
+}) => (values || []).map(item => _crDimItem(item.text, id, item.id));
 
 const TIME_IDS = ['Tid', 'Year', 'Month', 'Vuosi', 'Vuosineljännes'];
+
+const _isNotTimeDimension = (time, code) => !time && TIME_IDS.indexOf(code) === -1 && (code + '').indexOf('TLIST(') === -1; //'TLIST(' //'TLIST(M1)', 'TLIST(A1)' SIR
+
+
 const FREQUENCY_HM = {
   month: 'M',
   quarter: 'K'
@@ -80,7 +67,7 @@ const _crDimsConfig = json => {
         v: item.id,
         options: _crSdnDimOptions(item)
       });
-    } else if (!time && TIME_IDS.indexOf(code) === -1) {
+    } else if (_isNotTimeDimension(time, code)) {
       dims.push({
         c: _toFirstUpperCase(_text),
         v: code,
