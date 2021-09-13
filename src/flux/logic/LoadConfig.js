@@ -25,6 +25,7 @@ const LoadConfig = {
   [LT.SWS]: LoadImpl.StatSweden,
   [LT.SFL]: LoadImpl.StatFinland,
   [LT.SDN]: LoadImpl.StatDenmark,
+  [LT.SIR]: LoadImpl.StatIreland,
 
   [LT.BEA]: LoadImpl.Bea,
   [LT.BLS]: LoadImpl.Bls,

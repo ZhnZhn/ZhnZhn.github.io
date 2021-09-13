@@ -48,8 +48,9 @@ const _isArr = Array.isArray;
 const DP = [
   [Link.Quandl, '50'],
   Link.DbNomics, Link.Eurostat, Link.UnComtrade, Link.WorldBank,
-  Link.Insee, Link.ONS, Link.StatNorway,
-  Link.StatSweden, Link.StatFinland, Link.StatDenmark, [Link.Bsl, '25'],
+  Link.Insee, Link.ONS,
+  Link.StatNorway, Link.StatSweden, Link.StatFinland, Link.StatDenmark, Link.StatIreland,
+  [Link.Bsl, '25'],
   Link.CryptoCompare, Link.CoinGecko, Link.CoinMetrics,
   Link.CoinLore, Link.Coinpaprika, Link.Binance, Link.Bitstamp
 ]
@@ -92,7 +93,7 @@ const LinkList = ({ list }) => list.map((CompOrConfig, index) => {
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 28):"
+     caption="Data Providers (All 29):"
      style={ST.OC_L1}
      childStyle={ST.ROOT_CHILD}
   >

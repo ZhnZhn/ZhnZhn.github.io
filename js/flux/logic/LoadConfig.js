@@ -29,6 +29,7 @@ const LoadConfig = {
   [_Type.LoadType.SWS]: _LoadImpl.default.StatSweden,
   [_Type.LoadType.SFL]: _LoadImpl.default.StatFinland,
   [_Type.LoadType.SDN]: _LoadImpl.default.StatDenmark,
+  [_Type.LoadType.SIR]: _LoadImpl.default.StatIreland,
   [_Type.LoadType.BEA]: _LoadImpl.default.Bea,
   [_Type.LoadType.BLS]: _LoadImpl.default.Bls,
   [_Type.LoadType.EIA]: _LoadImpl.default.Eia,

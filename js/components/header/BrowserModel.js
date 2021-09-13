@@ -138,6 +138,11 @@ const crBrowserModel = () => {
       name: 'Statistics Denmark All',
       onClick: _fBD(_Type.BrowserType.DENMARK_STAT_ALL),
       isClose: true
+    }, {
+      cn: CL.ORG,
+      name: 'CSO Ireland All',
+      onClick: _fBD(_Type.BrowserType.IRELAND_STAT_ALL),
+      isClose: true
     }],
     page_03: [{
       cn: CL.BR,

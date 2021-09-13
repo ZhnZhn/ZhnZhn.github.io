@@ -35,6 +35,7 @@ const LINK_CONFIGS = [
  ["StatSweden","Statistics Sweden", "https://www.scb.se/en/"],
  ["StatFinland","Statistics Finland", "https://www.stat.fi/index_en.html"],
  ["StatDenmark","Statistics Denmark", "https://www.dst.dk/en/"],
+ ["StatIreland","CSO Ireland","https://www.cso.ie/en/"],
  ["CoinGecko", "https://www.coingecko.com/en/"],
  ["CoinMetrics","https://coinmetrics.io"],
  ["CoinLore","https://www.coinlore.com"],

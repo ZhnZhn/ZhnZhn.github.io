@@ -11,6 +11,8 @@ const {
   crItemConf
 } = AdapterFn;
 
+const _keys = Object.keys;
+
 const TITLE = {
   NST: 'Statisctics Norway: All Items',
   SWS: 'Statisctics Sweden: All Items'
@@ -34,6 +36,10 @@ const SEARCH = {
   SDN: {
     url: 'https://www.statbank.dk/statbank5a/default.asp',
     title: _crSearchTitle('Denmark')
+  },
+  SIR: {
+    url: 'https://data.cso.ie/',
+    title: "CSO Ireland Web PxStat"
   }
 };
 
@@ -66,6 +72,8 @@ const _crSearchLink = (label, option) => {
       return _crLink(SEARCH.SFL, _crSflSearchToken(option));
     case 'SDN':
       return _crLink(SEARCH.SDN);
+    case 'SIR':
+      return _crLink(SEARCH.SIR);
     default:
       return '';
   }
@@ -107,18 +115,30 @@ const _getDimensionWithouTime = (ds) => {
   const _dim = ds.Dimension("Year")
    || ds.Dimension("Vuosi")
    || ds.Dimension("Vuosineljännes")
-   || ds.Dimension("Month");
+   || ds.Dimension("Month")
   return _dim && _dim.id
     ? [_dim.id[0]]
     : ["2019"];
 };
 
-const _getTimeDimension = (ds, timeId) => {
+
+const _crTimesFromDs = (json, timeId) => {
+  const _dim = json.dimension[timeId]
+  , label = ((_dim || {}).category || {}).label;
+  return _keys(label)
+    .map(k => label[k]);
+};
+
+const _getTimeDimension = (ds, timeId, json) => {
+  // SIR
+  if (timeId && timeId.indexOf("TLIST(") !== -1) {
+    return _crTimesFromDs(json, timeId)
+  }
+
   const _dimTimeId = timeId && ds.Dimension(timeId)
   , _dim = _dimTimeId || ds.Dimension("Tid")
   , times = _dim && _dim.id
      || _getDimensionWithouTime(ds);
-
   return times;
 };
 
@@ -146,9 +166,9 @@ const fnAdapter = {
 
   crDsValuesTimes: (json, option) => {
     const mapSlice = _crAreaMapSlice(option)
-        , ds = JSONstat(json).Dataset(0)
-        , values = ds.Data(mapSlice)
-        , times = _getTimeDimension(ds, option.timeId);
+    , ds = JSONstat(json).Dataset(0)
+    , values = ds.Data(mapSlice)
+    , times = _getTimeDimension(ds, option.timeId, json);
     return [ ds, values, times ];
   },
 

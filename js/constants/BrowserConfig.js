@@ -8,85 +8,71 @@ var _Type = require("./Type");
 const BrowserConfig = {
   [_Type.BrowserType.STOCK_MARKETS]: {
     browserType: _Type.BrowserType.STOCK_MARKETS,
-    isDynamic: true,
     caption: 'Stock Markets',
     sourceMenuUrl: './data/stock-markets/source-menu.json'
   },
   [_Type.BrowserType.EUROSTAT]: {
     browserType: _Type.BrowserType.EUROSTAT,
-    isDynamic: true,
     caption: 'Eurostat Statistics',
     sourceMenuUrl: './data/eurostat/source-menu.json'
   },
   [_Type.BrowserType.FGR]: {
     browserType: _Type.BrowserType.FGR,
-    isDynamic: true,
     caption: 'Eurostat: FIGARO',
     sourceMenuUrl: './data/figaro/source-menu.json'
   },
   [_Type.BrowserType.UN_COMTRADE]: {
     browserType: _Type.BrowserType.UN_COMTRADE,
-    isDynamic: true,
     caption: 'UN Comtrade',
     sourceMenuUrl: './data/uncomtrade/source-menu.json'
   },
   [_Type.BrowserType.FAOSTAT]: {
     browserType: _Type.BrowserType.FAOSTAT,
-    isDynamic: true,
     caption: 'FAOSTAT',
     sourceMenuUrl: './data/faostat/source-menu.json'
   },
   [_Type.BrowserType.WORLD_BANK]: {
     browserType: _Type.BrowserType.WORLD_BANK,
-    isDynamic: true,
     caption: 'World Bank',
     sourceMenuUrl: './data/world-bank/source-menu.json'
   },
   [_Type.BrowserType.QUANDL]: {
     browserType: _Type.BrowserType.QUANDL,
-    isDynamic: true,
     caption: 'Quandl',
     sourceMenuUrl: './data/quandl/source-menu.json'
   },
   [_Type.BrowserType.DB_NOMICS]: {
     browserType: _Type.BrowserType.DB_NOMICS,
-    isDynamic: true,
     caption: 'DB Nomics',
     sourceMenuUrl: './data/db-nomics/source-menu.json'
   },
   [_Type.BrowserType.BLOCKCHAIN]: {
     browserType: _Type.BrowserType.BLOCKCHAIN,
-    isDynamic: true,
     caption: 'Blockchain',
     sourceMenuUrl: './data/blockchain/source-menu.json'
   },
   [_Type.BrowserType.FUTURES]: {
     browserType: _Type.BrowserType.FUTURES,
-    isDynamic: true,
     caption: 'Futures Markets',
     sourceMenuUrl: './data/futures-markets/source-menu.json'
   },
   [_Type.BrowserType.FRANCE_STATISTICS]: {
     browserType: _Type.BrowserType.FRANCE_STATISTICS,
-    isDynamic: true,
     caption: 'Insee: France Statistics',
     sourceMenuUrl: './data/statistics-france/source-menu.json'
   },
   [_Type.BrowserType.UK_STATISTICS]: {
     browserType: _Type.BrowserType.UK_STATISTICS,
-    isDynamic: true,
     caption: 'ONS: UK Statistics',
     sourceMenuUrl: './data/statistics-uk/source-menu.json'
   },
   [_Type.BrowserType.NORWAY_STATISTICS]: {
     browserType: _Type.BrowserType.NORWAY_STATISTICS,
-    isDynamic: true,
     caption: 'Statistics Norway',
     sourceMenuUrl: './data/statistics-norway/source-menu.json'
   },
   [_Type.BrowserType.NORWAY_STAT_ALL]: {
     browserType: _Type.BrowserType.NORWAY_STAT_ALL,
-    isDynamic: true,
     caption: 'Statistics Norway All',
     dfProps: {
       bT: _Type.BrowserType.NORWAY_STAT_ALL,
@@ -99,13 +85,11 @@ const BrowserConfig = {
   },
   [_Type.BrowserType.SWEDEN_STAT]: {
     browserType: _Type.BrowserType.SWEDEN_STAT,
-    isDynamic: true,
     caption: 'Statistics Sweden',
     sourceMenuUrl: './data/statistics-sweden/source-menu.json'
   },
   [_Type.BrowserType.SWEDEN_STAT_ALL]: {
     browserType: _Type.BrowserType.SWEDEN_STAT_ALL,
-    isDynamic: true,
     caption: 'Statistics Sweden All',
     dfProps: {
       bT: _Type.BrowserType.SWEDEN_STAT_ALL,
@@ -118,7 +102,6 @@ const BrowserConfig = {
   },
   [_Type.BrowserType.FINLAND_STAT_ALL]: {
     browserType: _Type.BrowserType.FINLAND_STAT_ALL,
-    isDynamic: true,
     caption: 'Statistics Finland All',
     dfProps: {
       bT: _Type.BrowserType.FINLAND_STAT_ALL,
@@ -132,7 +115,6 @@ const BrowserConfig = {
   },
   [_Type.BrowserType.DENMARK_STAT_ALL]: {
     browserType: _Type.BrowserType.DENMARK_STAT_ALL,
-    isDynamic: true,
     caption: 'Statistics Denmark All',
     dfProps: {
       bT: _Type.BrowserType.DENMARK_STAT_ALL,
@@ -146,15 +128,25 @@ const BrowserConfig = {
       dfMeta: '?lang=en'
     }
   },
+  [_Type.BrowserType.IRELAND_STAT_ALL]: {
+    browserType: _Type.BrowserType.IRELAND_STAT_ALL,
+    caption: 'CSO Ireland All',
+    dfProps: {
+      bT: _Type.BrowserType.IRELAND_STAT_ALL,
+      lT: 'SIR',
+      sP: 'CSO Ireland',
+      dU: './data/statistics-ireland/statistics-ireland.html',
+      dS: 'CSO Ireland',
+      rootUrl: 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
+    }
+  },
   [_Type.BrowserType.US_ECONOMICS]: {
     browserType: _Type.BrowserType.US_ECONOMICS,
-    isDynamic: true,
     caption: 'USA Economics',
     sourceMenuUrl: './data/usa-economy/source-menu.json'
   },
   [_Type.BrowserType.NYSE_STOCKS]: {
     browserType: _Type.BrowserType.NYSE_STOCKS,
-    isDynamic: true,
     caption: 'NYSE by Sectors',
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
     withoutItemCounter: true,
@@ -167,7 +159,6 @@ const BrowserConfig = {
   },
   [_Type.BrowserType.NASDAQ_STOCKS]: {
     browserType: _Type.BrowserType.NASDAQ_STOCKS,
-    isDynamic: true,
     caption: 'NASDAQ by Sectors',
     sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
     withoutItemCounter: true,
@@ -180,7 +171,6 @@ const BrowserConfig = {
   },
   [_Type.BrowserType.WATCH_LIST]: {
     browserType: _Type.BrowserType.WATCH_LIST,
-    //isDynamic : false,
     withoutItemCounter: true
   }
 };

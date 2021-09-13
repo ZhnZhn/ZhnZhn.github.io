@@ -1,0 +1,12 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-ireland/StatIreland.js"
+ ],
+ "file": "../../../src/adapters/stat-ireland/StatIreland.js",
+ "names": [
+  "DATA_URL",
+  "StatIreland"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,sEAAjB;AACA,MAAMC,WAAW,GAAG,+BAAiBD,QAAjB,CAApB;eAEeC,W"
+}

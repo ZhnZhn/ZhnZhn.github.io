@@ -9,6 +9,7 @@ import StatNorway from './stat-norway/StatNorway'
 import StatSweden from './stat-sweden/StatSweden'
 import StatFinland from './stat-finland/StatFinland'
 import StatDenmark from './stat-denmark/StatDenmark'
+import StatIreland from './stat-ireland/StatIreland'
 import AlphaVantage from './alpha/AlphaVantage'
 import Iex from './iex/Iex'
 import Fmp from './fmp/Fmp'
@@ -42,6 +43,7 @@ const RouterAdapter = {
   StatSweden,
   StatFinland,
   StatDenmark,
+  StatIreland,
   AlphaVantage,
   Iex,
   Fmp,

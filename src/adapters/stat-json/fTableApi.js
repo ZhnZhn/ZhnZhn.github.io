@@ -13,13 +13,16 @@ const _checkTop = (isTop, strN, arr) => {
   }
 };
 
-const _crArrQuery = (items) => {
+const _crArrQuery = (items, loadId) => {
   const arrQuery = [];
   items.forEach(item => {
      const { slice } = item || {};
      for(const propName in slice){
+       const code = loadId === "SIR"
+         ? propName.toUpperCase()
+         : propName
        arrQuery.push({
-         code: propName,
+         code,
          selection: {
            filter: 'item',
            values: [slice[propName]]
@@ -94,6 +97,72 @@ const _crOptionFetchDenm = ({ dfId, items }) => ({
   })
 });
 
+
+
+const _crIrlQuery = (option) => {
+  const _q1 = {
+    query: _crArrQuery(option.items, option.loadId),
+    response: {
+      format: "json-stat2",
+      pivot: null
+    }
+  }
+  //console.log(_q1)
+
+  /*
+  const query = {
+	"query": [
+		{
+			"code": "STATISTIC",
+			"selection": {
+				"filter": "item",
+				"values": [
+					"CPM01C01",
+					//"CPM01C01"
+				]
+			}
+		},
+		{
+			"code": "TLIST(M1)",
+			"selection": {
+				"filter": "item",
+				"values": [
+					"202107"
+				]
+			}
+		},
+		{
+			"code": "C01779V03424",
+			"selection": {
+				"filter": "item",
+				"values": [
+          "-"
+					//"10"
+				]
+			}
+		}
+	],
+	"response": {
+		"format": "json-stat2",
+		"pivot": null
+	}
+};
+*/
+  //console.log(JSON.stringify(_q1))
+  //console.log(JSON.stringify(query))
+
+  //console.log(JSON.stringify(_q1) === JSON.stringify(query))
+  return {
+    method: "POST",
+    headers: {
+     'Content-Type': "application/json",
+    },
+    body: JSON.stringify(_q1)
+    //body: JSON.stringify(query)
+  };
+  //return '?query=' + JSON.stringify(query);
+}
+
 const fTableApi = (ROOT_URL) => ({
   getRequestUrl(option){
     if (option.url) { return option.url; }
@@ -101,7 +170,11 @@ const fTableApi = (ROOT_URL) => ({
     const { proxy='', dfId } = option
     , _dfId = option.loadId === 'SDN'
         ? ''
-        : '/'+dfId;
+        : '/'+dfId
+    //, _query = option.loadId === 'SWS'
+    //    ? _crIrlQuery(option)
+    //    : ''
+
 
     return (option.url = `${proxy}${ROOT_URL}${_dfId}`);
   },
@@ -109,6 +182,9 @@ const fTableApi = (ROOT_URL) => ({
   crOptionFetch(option){
     if (option.optionFetch) {
       return option.optionFetch;
+    }
+    if (option.loadId === "SIR") {
+      return (option.optionFetch = _crIrlQuery(option));
     }
     if (option.loadId === 'SDN') {
       return (option.optionFetch = _crOptionFetchDenm(option));
