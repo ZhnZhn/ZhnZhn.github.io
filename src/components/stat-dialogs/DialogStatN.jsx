@@ -166,30 +166,32 @@ class DialogStatN extends Component {
     if (validationMessages.length === 0){
       const {
          _items,
+         _titles,
          dialogOptions,
          colorComp,
          date
         } = this
+      , { seriaColor, seriaWidth } = colorComp
+             ? colorComp.getConf()
+             : {}
       , {
+          dateDefault,
           timeId,
           chartType, selectOptions
         } = this.state
-      , { seriaColor, seriaWidth } = colorComp
-           ? colorComp.getConf()
-           : {}
-      , { dateDefault } = this.state
+      , { loadFn, onLoad } = this.props
       , _props = { ...this.props, timeId }
-      , loadOpt = this.props.loadFn(
+      , loadOpt = loadFn(
          _props, {
           dialogOptions,
           chartType, seriaColor, seriaWidth,
           date, dateDefault,
           items: _items,
-          titles: this._titles,
+          titles: _titles,
           selectOptions: selectOptions
         }
       );
-      this.props.onLoad(loadOpt)
+      onLoad(loadOpt)
    }
    this.setState({ validationMessages })
   }
@@ -235,7 +237,7 @@ class DialogStatN extends Component {
 
   _fSelect = (index) => {
     return function(item) {
-      this._items[index] = item
+      this._items[index] = {...item}
     };
   }
 
@@ -263,23 +265,28 @@ class DialogStatN extends Component {
 
   render(){
     const {
-            caption, isShow, onShow, onFront,
-          } = this.props
-        , {
-            chartType,
-            isToolbar,
-            isOptions, isToggle,
-            isShowLabels,
-            isLoading, isLoadFailed,
-            isShowChart,
-            isShowDate, dateDefault, dateOptions,
-            configs,
-            chartOptions,
-            validationMessages
-          } = this.state
-        , _spinnerStyle = !isLoadFailed
-             ? S.SPINNER_LOADING
-             : { ...S.SPINNER_LOADING, ...S.SPINNER_FAILED};
+      isShow,
+      caption,
+      onShow,
+      onFront,
+    } = this.props
+    , {
+        chartType,
+        isToolbar,
+        isOptions, isToggle,
+        isShowLabels,
+        isLoading, isLoadFailed,
+        isShowChart,
+        isShowDate, dateDefault, dateOptions,
+        configs,
+        chartOptions,
+        validationMessages
+     } = this.state
+     , _spinnerStyle = isLoading
+         ? S.SPINNER_LOADING
+         : isLoadFailed
+            ? {...S.SPINNER_LOADING, ...S.SPINNER_FAILED}
+            : void 0;
 
     return (
       <D.DraggableDialog
@@ -312,15 +319,9 @@ class DialogStatN extends Component {
            onClose={this._hideToggleWithToolbar}
          />
          {
-           (isLoading || isLoadFailed) &&
-           <SpinnerLoading
-             style={_spinnerStyle}
-           />
-         }
-         {
-           !isLoading &&
-           !isLoadFailed &&
-           this._renderSelectInputs()
+           _spinnerStyle
+             ? <SpinnerLoading style={_spinnerStyle} />
+             : this._renderSelectInputs()
          }
          <D.RowChartDate
            chartType={chartType}
