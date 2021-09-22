@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _SvgIcons = _interopRequireDefault(require("./svg/SvgIcons"));
 
@@ -51,44 +49,38 @@ var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 
 var _SvgClose = _interopRequireDefault(require("./SvgClose"));
 
-var _TabPane = _interopRequireDefault(require("./TabPane"));
-
-var _Tab = _interopRequireDefault(require("./Tab"));
-
 var _MsgRenderErr = _interopRequireDefault(require("./MsgRenderErr"));
 
 var _HighchartWrapper = _interopRequireDefault(require("./HighchartWrapper"));
 
 var _toLink = _interopRequireDefault(require("./toLink"));
 
-var A = (0, _extends2["default"])({}, _SvgIcons["default"], {
-  SpinnerLoading: _SpinnerLoading["default"],
-  ScrollPane: _ScrollPane["default"],
-  Browser: _Browser["default"],
-  BrowserCaption: _BrowserCaption["default"],
-  SvgHrzResize: _SvgHrzResize["default"],
-  ButtonCircle: _ButtonCircle["default"],
-  ButtonTab: _ButtonTab["default"],
-  DivHtml: _DivHtml["default"],
-  InfoPart: _InfoPart["default"],
-  InputText: _InputText["default"],
-  ItemList: _ItemList["default"],
-  ItemStack: _ItemStack["default"],
-  Load: _Load["default"],
-  OpenClose: _OpenClose["default"],
-  OpenClose2: _OpenClose2["default"],
-  ShowHide: _ShowHide["default"],
-  SvgCheckBox: _SvgCheckBox["default"],
-  SvgPlus: _SvgPlus["default"],
-  SvgMinus: _SvgMinus["default"],
-  SvgMore: _SvgMore["default"],
-  SvgClose: _SvgClose["default"],
-  TabPane: _TabPane["default"],
-  Tab: _Tab["default"],
-  MsgRenderErr: _MsgRenderErr["default"],
-  HighchartWrapper: _HighchartWrapper["default"],
-  toLink: _toLink["default"]
-});
+const A = { ..._SvgIcons.default,
+  SpinnerLoading: _SpinnerLoading.default,
+  ScrollPane: _ScrollPane.default,
+  Browser: _Browser.default,
+  BrowserCaption: _BrowserCaption.default,
+  SvgHrzResize: _SvgHrzResize.default,
+  ButtonCircle: _ButtonCircle.default,
+  ButtonTab: _ButtonTab.default,
+  DivHtml: _DivHtml.default,
+  InfoPart: _InfoPart.default,
+  InputText: _InputText.default,
+  ItemList: _ItemList.default,
+  ItemStack: _ItemStack.default,
+  Load: _Load.default,
+  OpenClose: _OpenClose.default,
+  OpenClose2: _OpenClose2.default,
+  ShowHide: _ShowHide.default,
+  SvgCheckBox: _SvgCheckBox.default,
+  SvgPlus: _SvgPlus.default,
+  SvgMinus: _SvgMinus.default,
+  SvgMore: _SvgMore.default,
+  SvgClose: _SvgClose.default,
+  MsgRenderErr: _MsgRenderErr.default,
+  HighchartWrapper: _HighchartWrapper.default,
+  toLink: _toLink.default
+};
 var _default = A;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=A.js.map

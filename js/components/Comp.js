@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _A = _interopRequireDefault(require("./zhn/A"));
 
@@ -15,9 +13,17 @@ var _A3 = _interopRequireDefault(require("./zhn-moleculs/A"));
 
 var _ModalSlider = _interopRequireDefault(require("./zhn-modal-slider/ModalSlider"));
 
-var Comp = (0, _extends2["default"])({}, _A["default"], _A2["default"], _A3["default"], {
-  ModalSlider: _ModalSlider["default"]
-});
+var _Tab = _interopRequireDefault(require("./zhn-tab/Tab"));
+
+var _TabPane = _interopRequireDefault(require("./zhn-tab/TabPane"));
+
+const Comp = { ..._A.default,
+  ..._A2.default,
+  ..._A3.default,
+  ModalSlider: _ModalSlider.default,
+  Tab: _Tab.default,
+  TabPane: _TabPane.default
+};
 var _default = Comp;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=Comp.js.map

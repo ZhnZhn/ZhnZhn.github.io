@@ -6,8 +6,8 @@ import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchAction
 import MsgWatch from '../../constants/MsgWatch';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import TabPane from '../zhn/TabPane';
-import Tab from '../zhn/Tab';
+import TabPane from '../zhn-tab/TabPane';
+import Tab from '../zhn-tab/Tab';
 import GroupAddPane from './GroupAddPane';
 import GroupEditPane from './GroupEditPane';
 import GroupDeletePane from './GroupDeletePane';

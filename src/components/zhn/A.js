@@ -20,8 +20,6 @@ import SvgPlus from './SvgPlus'
 import SvgMinus from './SvgMinus'
 import SvgMore from './SvgMore'
 import SvgClose from './SvgClose'
-import TabPane from './TabPane'
-import Tab from './Tab'
 import MsgRenderErr from './MsgRenderErr'
 import HighchartWrapper from './HighchartWrapper'
 
@@ -50,8 +48,6 @@ const A = {
   SvgMinus,
   SvgMore,
   SvgClose,
-  TabPane,
-  Tab,
   MsgRenderErr,
   HighchartWrapper,
   toLink

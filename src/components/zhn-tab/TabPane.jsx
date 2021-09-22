@@ -1,39 +1,34 @@
-import { cloneElement, forwardRef, useState, useCallback, useImperativeHandle } from 'react';
 //import PropTypes from "prop-types";
+import { cloneElement, forwardRef, useState, useImperativeHandle } from 'react';
 
-const S = {
-  TABS: {
-    marginTop: 5,
-    marginRight: 5,
-    marginBottom: 10,
-    marginLeft: 24
-  },
-  BLOCK: {
-    display: 'block',
-    width: "100%",
-    height: "100%"
-  },
-  NONE: {
-    display: 'none'
-  },
-  DIV: {
-    width: "100%",
-    height: "100%"
-  }
+const S_TABS = {
+  marginTop: 5,
+  marginRight: 5,
+  marginBottom: 10,
+  marginLeft: 24
+}, S_BLOCK = {
+  display: 'block',
+  width: "100%",
+  height: "100%"
+}, S_NONE = { display: 'none'}
+, S_COMPONENTS = {
+  width: "100%",
+  height: "100%"
 };
+
 
 const _renderTabs = (children, selectedTabIndex, hClickTab) => children
  .map((tab, index) => cloneElement(tab, {
     key: index,
     id: index,
-    onClick: hClickTab.bind(null, index),
+    onClick: () => hClickTab(index),
     isSelected: index === selectedTabIndex
  }));
 
  const _renderComponents = (children, selectedTabIndex) => children
   .map((tab, index) => {
      const _isSelected = (index === selectedTabIndex)
-     , _divStyle = _isSelected ? S.BLOCK : S.NONE;
+     , _divStyle = _isSelected ? S_BLOCK : S_NONE;
      return (
         <div
           key={'a'+index}
@@ -43,7 +38,6 @@ const _renderTabs = (children, selectedTabIndex, hClickTab) => children
           aria-labelledby={`tab-${index}`}
         >
            {cloneElement(tab.props.children, {
-             key: 'comp'+index,
              isSelected: _isSelected
            })}
         </div>
@@ -56,10 +50,7 @@ const TabPane = forwardRef(({
   height,
   children
 }, ref) => {
-  const [selectedTabIndex, setSelectedTabIndex] = useState(0)
-  , _hClickTab = useCallback(
-       (index)=>setSelectedTabIndex(index),
-    []);
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
   useImperativeHandle(ref, () => ({
     getSelectedTabIndex: () => selectedTabIndex
@@ -67,10 +58,10 @@ const TabPane = forwardRef(({
 
   return (
     <div style={{ width, height }}>
-      <div style={S.TABS}>
-         {_renderTabs(children, selectedTabIndex, _hClickTab)}
+      <div style={S_TABS}>
+         {_renderTabs(children, selectedTabIndex, setSelectedTabIndex)}
       </div>
-      <div style={S.DIV}>
+      <div style={S_COMPONENTS}>
          {_renderComponents(children, selectedTabIndex)}
       </div>
     </div>
