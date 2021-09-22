@@ -1,14 +1,8 @@
 //import PropTypes from "prop-types";
+import crCn from '../zhn-utils/crCn';
 
-const CL_TAB = 'tab';
-
-const S_BT = {
-  color: '#2f7ed8',
-  borderBottom : '3px solid #2f7ed8'
-},
-S_TITLE = {
-  color: '#2f7ed8'
-};
+const CL_TAB = 'tab'
+, CL_TAB_SELECTED = 'tab--selected';
 
 const Tab = ({
   id,
@@ -16,19 +10,18 @@ const Tab = ({
   isSelected,
   onClick
 }) => {
-  const [_btStyle, _titleStyle] = isSelected
-    ? [S_BT, S_TITLE] : [];
+  const _cn = crCn(CL_TAB, [isSelected, CL_TAB_SELECTED]);
+
   return (
     <button
-       className={CL_TAB}
-       style={_btStyle}
+       className={_cn}
        id={`tab-${id}`}
        role="tab"
        aria-selected={isSelected}
        aria-controls={`tabpanel-${id}`}
        onClick={onClick}
     >
-       <span style={_titleStyle}>{title}</span>
+       {title}
     </button>
   );
 }

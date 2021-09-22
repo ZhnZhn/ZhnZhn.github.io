@@ -1,19 +1,17 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports.default = void 0;
+
+var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-const CL_TAB = 'tab';
-const S_BT = {
-  color: '#2f7ed8',
-  borderBottom: '3px solid #2f7ed8'
-},
-      S_TITLE = {
-  color: '#2f7ed8'
-};
+const CL_TAB = 'tab',
+      CL_TAB_SELECTED = 'tab--selected';
 
 const Tab = ({
   id,
@@ -21,19 +19,16 @@ const Tab = ({
   isSelected,
   onClick
 }) => {
-  const [_btStyle, _titleStyle] = isSelected ? [S_BT, S_TITLE] : [];
+  const _cn = (0, _crCn.default)(CL_TAB, [isSelected, CL_TAB_SELECTED]);
+
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-    className: CL_TAB,
-    style: _btStyle,
+    className: _cn,
     id: "tab-" + id,
     role: "tab",
     "aria-selected": isSelected,
     "aria-controls": "tabpanel-" + id,
     onClick: onClick,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: _titleStyle,
-      children: title
-    })
+    children: title
   });
 };
 /*
