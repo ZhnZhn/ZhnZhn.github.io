@@ -1,6 +1,6 @@
 import crFn from '../crFn'
 
-const { crError } = crFn
+const { crHm, crError } = crFn
 
 describe('crError', ()=>{
   const fn = crError
@@ -15,5 +15,18 @@ describe('crError', ()=>{
       errCaption: '',
       message: 'No data available for request.'
     })
+  })
+})
+
+describe('crHm', ()=>{
+  it('should create object with null prototype', ()=>{
+    const hm = crHm();
+    expect(Object.getPrototypeOf(hm)).toBe(null)
+    expect(hm.toString).toBe(void 0)
+    expect(hm.valueOf).toBe(void 0)
+  })
+  it('should add props from arg', ()=>{
+    const props = { a: 'a', b: 'b'};
+    expect(crHm(props)).toEqual(props)
   })
 })

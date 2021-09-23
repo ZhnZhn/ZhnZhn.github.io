@@ -1,7 +1,7 @@
 
 const { assign, create } = Object;
 
-const _crPTag = (style) =>
+const _crPTag = style =>
  style ? `<p style="${style}">` : '<p>';
 
 const DF_ERR_MESSAGE = 'No data available for request.'
