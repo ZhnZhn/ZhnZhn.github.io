@@ -356,15 +356,17 @@
     "USAE_BLS_CPI": {
       "type": "USAE_BLS_CPI",
       "menuTitle" : "CPI-U",
-      "dialogCaption": "Consume Price Index (CPI-U)",
       "contFullCaption" : "BLS: Consume Price Index (CPI-U)",
       "addProps": "USAE_BLS",
       "dialogProps" : {
         "selectProps":[
-          ["Item","bls-cpi"]
+          ["Item","bls-cpi"],
+          ["Area", "bls-area"],
+          ["Adjust.","bls-adjust"]
         ],
         "dfProps": {
-          "dfTitle": "CPI-U"
+          "dfTitle": "CPI-U",
+          "dfCode": "CU"
         }
       }
     },

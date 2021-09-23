@@ -3,67 +3,96 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var C = {
+const C = {
   URL: 'https://api.bls.gov/publicAPI',
   TS_DATA: 'timeseries/data',
   NATIVE_URL: 'https://data.bls.gov/timeseries'
 };
 
-var _isArr = Array.isArray,
-    _assign = Object.assign,
-    crError = _fnAdapter["default"].crError,
-    crTitle = _fnAdapter["default"].crTitle,
-    getYear = _fnAdapter["default"].getYear,
-    getCurrentYear = _fnAdapter["default"].getCurrentYear,
-    _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && n - n === 0;
+const _isArr = Array.isArray,
+      _assign = Object.assign,
+      {
+  crHm,
+  crError,
+  getYear,
+  getCurrentYear
+} = _fnAdapter.default,
+      _isNumber = n => typeof n === 'number' && n - n === 0;
+
+const _crCuId = items => "CU" + items[2].v + "R" + items[1].v + items[0].v;
+
+const _hmCrId = crHm({
+  CU: _crCuId
+});
+
+const _getSeriaId = ({
+  items = [],
+  dfCode
+}) => {
+  const _crId = _hmCrId[dfCode];
+  return _crId ? _crId(items) : items[0].v;
 };
 
-var _getValue = function _getValue(_ref) {
-  var _ref$items = _ref.items,
-      items = _ref$items === void 0 ? [] : _ref$items;
-  return items[0].v;
-};
-
-var _addNativeLinkTo = function _addNativeLinkTo(option) {
-  var value = _getValue(option);
-
+const _addNativeLinkTo = (option, seriaId) => {
   _assign(option, {
     linkItem: {
       caption: 'U.S. BLS Data Link',
-      href: C.NATIVE_URL + "/" + value
+      href: C.NATIVE_URL + "/" + seriaId
     }
   });
 };
 
-var _setCaptionTo = function _setCaptionTo(option) {
-  var title = option.title;
+const _crCuCaption = (dfTitle, items) => ({
+  title: dfTitle + ", " + items[2].c,
+  subtitle: items[1].c + ": " + items[0].c
+});
+
+const _hmCrCaption = crHm({
+  CU: _crCuCaption
+});
+
+const _crCaption = ({
+  dfCode,
+  dfTitle,
+  title,
+  subtitle,
+  items
+}) => {
+  const _crC = _hmCrCaption[dfCode];
+  return _crC ? _crC(dfTitle, items) : {
+    title: dfTitle || subtitle,
+    subtitle: title
+  };
+};
+
+const _setCaptionTo = option => {
+  const {
+    title
+  } = option;
 
   _assign(option, {
     itemCaption: title,
-    title: crTitle(option),
-    subtitle: title
+    ..._crCaption(option)
   });
 };
 
-var _crQueryKey = function _crQueryKey(_ref2) {
-  var apiKey = _ref2.apiKey;
-  return apiKey ? "?registrationkey=" + apiKey : '';
-};
+const _crQueryKey = ({
+  apiKey
+}) => apiKey ? "?registrationkey=" + apiKey : '';
 
-var _crQueryPeriod = function _crQueryPeriod(queryKey, _ref3) {
-  var fromDate = _ref3.fromDate;
-
+const _crQueryPeriod = (queryKey, {
+  fromDate
+}) => {
   if (!queryKey) {
     return '';
   }
 
-  var _startyear = parseInt(getYear(fromDate), 10),
-      _endyear = parseInt(getCurrentYear(), 10);
+  const _startyear = parseInt(getYear(fromDate), 10),
+        _endyear = parseInt(getCurrentYear(), 10);
 
   if (_isNumber(_startyear) && _isNumber(_endyear) && _endyear - _startyear < 21) {
     return "&startyear=" + _startyear + "&endyear=" + _endyear;
@@ -72,27 +101,29 @@ var _crQueryPeriod = function _crQueryPeriod(queryKey, _ref3) {
   return '';
 };
 
-var BlsApi = {
-  getRequestUrl: function getRequestUrl(option) {
-    var value = _getValue(option),
-        _queryKey = _crQueryKey(option),
-        _v = _queryKey ? 'v2' : 'v1',
-        _queryPeriod = _crQueryPeriod(_queryKey, option);
+const BlsApi = {
+  getRequestUrl(option) {
+    const seriaId = _getSeriaId(option),
+          _queryKey = _crQueryKey(option),
+          _v = _queryKey ? 'v2' : 'v1',
+          _queryPeriod = _crQueryPeriod(_queryKey, option);
 
-    _addNativeLinkTo(option);
+    _addNativeLinkTo(option, seriaId);
 
     _setCaptionTo(option);
 
-    return C.URL + "/" + _v + "/" + C.TS_DATA + "/" + value + _queryKey + _queryPeriod;
+    return C.URL + "/" + _v + "/" + C.TS_DATA + "/" + seriaId + _queryKey + _queryPeriod;
   },
-  checkResponse: function checkResponse(json) {
-    var _ref4 = json || {},
-        Results = _ref4.Results,
-        _ref4$message = _ref4.message,
-        message = _ref4$message === void 0 ? [] : _ref4$message,
-        _ref5 = Results || {},
-        series = _ref5.series,
-        _s = (series || [])[0];
+
+  checkResponse(json) {
+    const {
+      Results,
+      message = []
+    } = json || {},
+          {
+      series
+    } = Results || {},
+          _s = (series || [])[0];
 
     if (_s && _isArr(_s.data)) {
       return true;
@@ -100,7 +131,8 @@ var BlsApi = {
 
     throw crError('', message[0]);
   }
+
 };
 var _default = BlsApi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=BlsApi.js.map

@@ -8,27 +8,63 @@ const C = {
 
 const _isArr = Array.isArray
 , _assign = Object.assign
-, { crError, crTitle, getYear, getCurrentYear } = fnAdapter
+, { crHm, crError, getYear, getCurrentYear } = fnAdapter
 , _isNumber = n => typeof n === 'number' && n-n === 0;
 
-const _getValue = ({ items=[] }) => items[0].v;
+const _crCuId = items =>
+  `CU${items[2].v}R${items[1].v}${items[0].v}`;
 
-const _addNativeLinkTo = (option) => {
-  const value = _getValue(option);
+const _hmCrId = crHm({
+  CU: _crCuId
+});
+
+const _getSeriaId = ({ items=[], dfCode }) => {
+  const _crId = _hmCrId[dfCode];
+  return _crId
+    ? _crId(items)
+    : items[0].v;
+};
+
+const _addNativeLinkTo = (option, seriaId) => {
   _assign(option, {
     linkItem: {
       caption: 'U.S. BLS Data Link',
-      href: `${C.NATIVE_URL}/${value}`
+      href: `${C.NATIVE_URL}/${seriaId}`
     }
   })
+};
+
+
+const _crCuCaption = (dfTitle, items) => ({
+  title: `${dfTitle}, ${items[2].c}`,
+  subtitle: `${items[1].c}: ${items[0].c}`
+});
+
+const _hmCrCaption = crHm({
+  CU: _crCuCaption
+})
+
+const _crCaption = ({
+  dfCode,
+  dfTitle,
+  title,
+  subtitle,
+  items
+}) => {
+  const _crC = _hmCrCaption[dfCode];
+  return _crC
+    ? _crC(dfTitle, items)
+    : {
+      title: dfTitle || subtitle,
+      subtitle: title
+    };
 };
 
 const _setCaptionTo = option => {
   const { title } = option;
   _assign(option, {
     itemCaption: title,
-    title: crTitle(option),
-    subtitle: title
+    ..._crCaption(option)
   })
 };
 
@@ -50,13 +86,13 @@ const _crQueryPeriod = (queryKey, {fromDate}) => {
 const BlsApi = {
 
   getRequestUrl(option){
-    const value = _getValue(option)
+    const seriaId = _getSeriaId(option)
     , _queryKey = _crQueryKey(option)
     , _v = _queryKey ? 'v2' : 'v1'
     , _queryPeriod = _crQueryPeriod(_queryKey, option);
-    _addNativeLinkTo(option)
+    _addNativeLinkTo(option, seriaId)
     _setCaptionTo(option)
-    return `${C.URL}/${_v}/${C.TS_DATA}/${value}${_queryKey}${_queryPeriod}`;
+    return `${C.URL}/${_v}/${C.TS_DATA}/${seriaId}${_queryKey}${_queryPeriod}`;
   },
 
   checkResponse(json){
