@@ -30,11 +30,8 @@ const {
   useTheme
 } = _use.default;
 const TH_ID = 'MODAL_DIALOG';
-const CL = {
-  MD: 'modal-dialog',
-  SHOWING: 'show-popup',
-  HIDING: 'hide-popup'
-};
+const CL_MD = 'modal-dialog',
+      CL_SHOWING = 'show-popup';
 const S = { ..._Dialog.default,
   ROOT_DIV_MODAL: {
     display: 'block',
@@ -135,7 +132,7 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   const _style = isShow ? S.SHOW : S.HIDE,
-        _className = (0, _crCn.default)(CL.MD, [isShow, CL.SHOWING]);
+        _className = (0, _crCn.default)(CL_MD, [isShow, CL_SHOWING]);
 
   return (
     /*#__PURE__*/

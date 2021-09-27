@@ -20,11 +20,8 @@ const {
 
 const TH_ID = 'MODAL_DIALOG';
 
-const CL = {
-  MD: 'modal-dialog',
-  SHOWING: 'show-popup',
-  HIDING: 'hide-popup'
-};
+const CL_MD = 'modal-dialog'
+, CL_SHOWING = 'show-popup';
 
 const S = {
   ...STYLE,
@@ -125,7 +122,7 @@ const ModalDialog = forwardRef(({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   const _style = isShow ? S.SHOW : S.HIDE
-  , _className = crCn(CL.MD, [isShow, CL.SHOWING]);
+  , _className = crCn(CL_MD, [isShow, CL_SHOWING]);
 
   return (
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
