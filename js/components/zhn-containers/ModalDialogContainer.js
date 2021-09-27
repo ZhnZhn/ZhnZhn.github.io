@@ -1,67 +1,27 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _jsxRuntime = require("react/jsx-runtime.js");
-
-var _react = require("react");
-
-var _useForceUpdate = _interopRequireDefault(require("../hooks/useForceUpdate"));
+var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from 'prop-types'
-var CL = {
-  INIT: 'modal-root',
-  SHOWING: 'modal-root show-modal',
-  HIDING: 'modal-root hide-modal'
-};
-var S = {
-  SHOW: {
-    display: 'block'
-  },
-  HIDE: {
-    display: 'none'
-  },
-  HIDE_BACKGROUND: {
-    backgroundColor: 'rgba(0,0,0, 0)'
-  }
+const CL_INIT = 'modal-root',
+      CL_SHOWING = 'modal-root show-modal',
+      S_SHOW = {
+  display: 'block'
+},
+      S_HIDE = {
+  display: 'none'
 };
 
-var ModalDialogContainer = function ModalDialogContainer(_ref) {
-  var isShow = _ref.isShow,
-      _ref$timeout = _ref.timeout,
-      timeout = _ref$timeout === void 0 ? 450 : _ref$timeout,
-      children = _ref.children,
-      onClose = _ref.onClose;
-
-  var _refWasClosing = (0, _react.useRef)(true),
-      forceUpdate = (0, _useForceUpdate["default"])();
-
-  (0, _react.useEffect)(function () {
-    var current = _refWasClosing.current;
-
-    if (current) {
-      setTimeout(forceUpdate, timeout);
-    }
-  });
-
-  var _className, _style;
-
-  if (_refWasClosing.current) {
-    _className = CL.INIT;
-    _style = S.HIDE;
-    _refWasClosing.current = false;
-  } else {
-    _className = isShow ? CL.SHOWING : CL.HIDING;
-    _style = isShow ? S.SHOW : S.HIDE_BACKGROUND;
-
-    if (!isShow) {
-      _refWasClosing.current = true;
-    }
-  }
-
+const ModalDialogContainer = ({
+  isShow,
+  timeout = 450,
+  children,
+  onClose
+}) => {
+  const [_className, _style] = isShow ? [CL_SHOWING, S_SHOW] : [CL_INIT, S_HIDE];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     role: "presentation",
     className: _className,
@@ -80,5 +40,5 @@ ModalDialogContainer.propTypes = {
 
 
 var _default = ModalDialogContainer;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ModalDialogContainer.js.map

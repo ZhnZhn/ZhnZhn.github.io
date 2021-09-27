@@ -1,24 +1,9 @@
-import { useRef, useEffect } from 'react';
 //import PropTypes from 'prop-types'
-import useForceUpdate from '../hooks/useForceUpdate';
 
-const CL = {
-  INIT: 'modal-root',
-  SHOWING: 'modal-root show-modal',
-  HIDING: 'modal-root hide-modal'
-};
-
-const S = {
-  SHOW: {
-    display: 'block'
-  },
-  HIDE: {
-    display: 'none'
-  },
-  HIDE_BACKGROUND: {
-    backgroundColor: 'rgba(0,0,0, 0)'
-  }
-};
+const CL_INIT = 'modal-root'
+, CL_SHOWING = 'modal-root show-modal'
+, S_SHOW = { display: 'block' }
+, S_HIDE = { display: 'none' };
 
 const ModalDialogContainer = ({
   isShow,
@@ -26,28 +11,9 @@ const ModalDialogContainer = ({
   children,
   onClose
 }) => {
-  const _refWasClosing = useRef(true)
-  , forceUpdate = useForceUpdate();
-
-  useEffect(() => {
-    const { current } = _refWasClosing;
-    if (current) {
-      setTimeout(forceUpdate, timeout)
-    }
-  })
-
-  let _className, _style;
-  if (_refWasClosing.current){
-     _className = CL.INIT;
-     _style = S.HIDE;
-     _refWasClosing.current = false;
-  } else {
-    _className = isShow ? CL.SHOWING : CL.HIDING;
-    _style = isShow ? S.SHOW : S.HIDE_BACKGROUND;
-    if (!isShow){
-      _refWasClosing.current = true;
-    }
-  }
+  const [_className, _style] = isShow
+    ? [CL_SHOWING, S_SHOW]
+    : [CL_INIT, S_HIDE];
 
   return (
     <div
