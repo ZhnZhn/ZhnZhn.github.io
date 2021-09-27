@@ -31,9 +31,7 @@ const {
   MsgRenderErr,
   HighchartWrapper
 } = _Comp.default;
-const CL = {
-  ROOT: 'chart-item'
-};
+const CL_CHART_ITEM = 'chart-item';
 const S = {
   TAB_DIV: {
     position: 'relative',
@@ -402,7 +400,7 @@ class ChartItem extends _react.Component {
           _withoutAnimation = _isNarrowWidth || withoutAnimation;
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: CL.ROOT,
+      className: CL_CHART_ITEM,
       children: [isCaption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Header.default, {
         isOpen: isOpen,
         isAdminMode: isAdminMode,
@@ -424,13 +422,16 @@ class ChartItem extends _react.Component {
         children: [isShowChart && this._crChartToolBar(config, _withoutAnimation), hasError ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
           isShow: isShowChart,
           msg: "chart"
-        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
+        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
           isShow: isShowChart,
+          withoutAnimation: _withoutAnimation,
           style: S.WRAPPER,
-          config: config,
-          isShowAbs: isShowAbs,
-          absComp: this._dataSourceEl,
-          onLoaded: this._hLoaded
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
+            config: config,
+            isShowAbs: isShowAbs,
+            absComp: this._dataSourceEl,
+            onLoaded: this._hLoaded
+          })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo.default, {
           isShow: isShowInfo,
           info: info,

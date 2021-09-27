@@ -1,26 +1,16 @@
 import { useRef, useEffect } from 'react';
 import Highcharts from 'highcharts';
 
-const S = {
-  DIV: {
-    position: 'relative',
-    zIndex: 1
-  },
-  SHOW: {
-    display: 'block',
-  },
-  HIDE: {
-    display: 'none'
-  }
+const S_DIV = {
+  position: 'relative',
+  zIndex: 1
 };
 
 const _isFn = fn => typeof fn === 'function';
 
 const HighchartWrapper = ({
-  isShow=true,
   isShowAbs=true,
   absComp=null,
-  style,
   config,
   onLoaded,
   onWillUnLoaded
@@ -55,9 +45,8 @@ const HighchartWrapper = ({
   }, [])
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  const _style = isShow ? S.SHOW : S.HIDE;
   return (
-    <div style={{...style, ...S.DIV, ..._style}}>
+    <div style={S_DIV}>
       <div ref={_refChartNode} />
       {isShowAbs && absComp}
     </div>

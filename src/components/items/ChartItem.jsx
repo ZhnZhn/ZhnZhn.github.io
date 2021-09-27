@@ -16,9 +16,8 @@ const {
   HighchartWrapper
 } = Comp;
 
-const CL = {
-  ROOT: 'chart-item'
-};
+const CL_CHART_ITEM =  'chart-item';
+
 
 const S = {
   TAB_DIV: {
@@ -344,7 +343,7 @@ class ChartItem extends Component {
     , _withoutAnimation = _isNarrowWidth || withoutAnimation;
 
     return (
-      <div className={CL.ROOT}>
+      <div className={CL_CHART_ITEM}>
          { isCaption && <Header
             isOpen={isOpen}
             isAdminMode={isAdminMode}
@@ -372,14 +371,18 @@ class ChartItem extends Component {
                  isShow={isShowChart}
                  msg="chart"
                />
-             : <HighchartWrapper
+             : <ShowHide
                  isShow={isShowChart}
+                 withoutAnimation={_withoutAnimation}
                  style={S.WRAPPER}
-                 config={config}
-                 isShowAbs={isShowAbs}
-                 absComp={this._dataSourceEl}
-                 onLoaded={this._hLoaded}
-               />
+                >
+                   <HighchartWrapper
+                     config={config}
+                     isShowAbs={isShowAbs}
+                     absComp={this._dataSourceEl}
+                     onLoaded={this._hLoaded}
+                   />
+               </ShowHide>
            }
            <PanelDataInfo
               isShow={isShowInfo}
