@@ -1,17 +1,17 @@
-import FlatButton from '../zhn-m/FlatButton'
+import FlatButton from '../zhn-m/FlatButton';
 
-const S = {
-  ROW: {
-     cursor: 'default',
-     float: 'right',
-     marginTop: 8,
-     marginBottom: 10,
-     marginRight: 4
-  }
+const S_ROW = {
+  float: 'right',
+  margin: '8px 4px 10px 0'
 };
 
-const RowButtons = ({ children, btStyle, onClose }) => (
- <div style={S.ROW}>
+
+const RowButtons = ({
+  btStyle,
+  onClose,
+  children,
+}) => (
+ <div style={S_ROW}>
    {children}
    <FlatButton
      style={btStyle}
