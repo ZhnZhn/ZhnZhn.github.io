@@ -1,6 +1,7 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 //import PropTypes from "prop-types";
 import useToggle from '../hooks/useToggle';
+import useBool from '../hooks/useBool';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
@@ -8,42 +9,33 @@ import A from '../Comp';
 import ItemHeader from './ItemHeader';
 import PanelDataInfo from './PanelDataInfo';
 
-const S = {
-  ROOT_DIV: {
-    position: 'relative',
-    marginBottom: 10,
-    marginRight: 12
-  },
-  TIME: {
-    display: 'inline-block',
-    color: '#fdb316',
-    paddingLeft: 16,
-    fontWeight: 'bold'
-  },
-  TAB_DIV: {
-    position: 'relative',
-    height: 30,
-    backgroundColor: 'transparent',
-    zIndex: 2
-  },
-  MAP_DIV: {
-    height: 400
-  },
-  SPINNER_LOADING: {
-    margin: '64px auto 0'
-  },
-  BLOCK: {
-    display: 'block'
-  },
-  NONE: {
-    display: 'none'
-  }
-};
+const S_ROOT_DIV = {
+  position: 'relative',
+  marginBottom: 10,
+  marginRight: 12
+},
+S_TIME = {
+  display: 'inline-block',
+  color: '#fdb316',
+  paddingLeft: 16,
+  fontWeight: 'bold'
+},
+S_TAB_DIV = {
+  position: 'relative',
+  height: 30,
+  backgroundColor: 'transparent',
+  zIndex: 2
+}
+, S_MAP_DIV = { height: 400 }
+, S_SPINNER_LOADING = { margin: '64px auto 0' }
+, S_BLOCK = { display: 'block' }
+, S_NONE = { display: 'none' };
+
 
 const BtTabInfo = ({ isShow, onClick }) => {
   if (!isShow) { return null; }
   return (
-    <div style={S.TAB_DIV}>
+    <div style={S_TAB_DIV}>
        <A.ButtonTab
           caption="Info"
           onClick={onClick}
@@ -62,13 +54,11 @@ const MapChartItem = ({
   const [state, setState] = useState({ isLoading: true, time: '' })
   , { isLoading, time } = state
   , [isOpen, toggleIsOpen] = useToggle(true)
-  , [isShowInfo, setIsShowInfo] = useState(false)
-  , _hClickInfo = useCallback(()=>setIsShowInfo(true), [])
-  , _hClickChart = useCallback(()=>setIsShowInfo(false), []);
+  , [isShowInfo, showInfo, hideInfo] = useBool();
 
   useEffect(()=>{
-    const { json:jsonCube, zhMapSlice, zhDialog={} } = config
-    , { time } = zhDialog;
+    const { json:jsonCube, zhMapSlice, zhDialog } = config
+    , { time } = zhDialog || {};
 
    /*eslint-disable react-hooks/exhaustive-deps */
     ChoroplethMap.draw({
@@ -86,18 +76,18 @@ const MapChartItem = ({
 
    const _mapId = _crMapId(caption)
    , { zhDialog, info } = config
-   , { itemCaption='' } = zhDialog || {}
-   , _styleMap = isShowInfo ? S.NONE : S.BLOCK;
+   , { itemCaption } = zhDialog || {}
+   , _styleMap = isShowInfo ? S_NONE : S_BLOCK;
 
    return (
-     <div style={S.ROOT_DIV}>
+     <div style={S_ROOT_DIV}>
        <ItemHeader
          isOpen={isOpen}
          caption={itemCaption}
          onClick={toggleIsOpen}
          onClose={onCloseItem}
        >
-         <span style={S.TIME}>
+         <span style={S_TIME}>
            {time}
          </span>
        </ItemHeader>
@@ -105,20 +95,20 @@ const MapChartItem = ({
        <A.ShowHide isShow={isOpen}>
           <BtTabInfo
             isShow={!isShowInfo}
-            onClick={_hClickInfo}
+            onClick={showInfo}
           />
           <div
              id={_mapId}
-             style={{...S.MAP_DIV, ..._styleMap}}
+             style={{...S_MAP_DIV, ..._styleMap}}
           >
             {
-              isLoading && <A.SpinnerLoading style={S.SPINNER_LOADING} />
+              isLoading && <A.SpinnerLoading style={S_SPINNER_LOADING} />
             }
           </div>
           <PanelDataInfo
              isShow={isShowInfo}
              info={info}
-             onClickChart={_hClickChart}
+             onClickChart={hideInfo}
           />
        </A.ShowHide>
      </div>
