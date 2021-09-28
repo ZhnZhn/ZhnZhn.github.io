@@ -5,10 +5,8 @@ exports.default = void 0;
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const S = {
-  KEY: {
-    textDecoration: 'underline'
-  }
+const S_ACCESS_KEY = {
+  textDecoration: 'underline'
 };
 
 const _crAccessKeyIndex = (accessKey, caption) => accessKey ? caption.toLowerCase().indexOf(accessKey) : -1;
@@ -28,7 +26,7 @@ const _crCaption = (accessKey, caption) => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       children: _before
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: S.KEY,
+      style: S_ACCESS_KEY,
       children: _key
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       children: _after
@@ -36,7 +34,7 @@ const _crCaption = (accessKey, caption) => {
   });
 };
 
-const CaptionInput = ({
+const BtCaption = ({
   className,
   caption,
   accessKey,
@@ -52,6 +50,6 @@ const CaptionInput = ({
   });
 };
 
-var _default = CaptionInput;
+var _default = BtCaption;
 exports.default = _default;
-//# sourceMappingURL=CaptionInput.js.map
+//# sourceMappingURL=BtCaption.js.map

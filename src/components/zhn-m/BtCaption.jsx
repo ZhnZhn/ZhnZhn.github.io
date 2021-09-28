@@ -1,8 +1,4 @@
-const S = {
-  KEY: {
-    textDecoration: 'underline'
-  }
-};
+const S_ACCESS_KEY = { textDecoration: 'underline' };
 
 const _crAccessKeyIndex = (accessKey, caption) => accessKey
   ? caption.toLowerCase().indexOf(accessKey)
@@ -18,13 +14,13 @@ const _crCaption = (accessKey, caption) => {
   return (
     <>
      <span>{_before}</span>
-     <span style={S.KEY}>{_key}</span>
+     <span style={S_ACCESS_KEY}>{_key}</span>
      <span>{_after}</span>
     </>
   );
 };
 
-const CaptionInput = ({
+const BtCaption = ({
   className,
   caption,
   accessKey,
@@ -40,4 +36,4 @@ const CaptionInput = ({
   );
 };
 
-export default CaptionInput
+export default BtCaption

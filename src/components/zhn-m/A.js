@@ -1,9 +1,7 @@
-import FlatButton from './FlatButton'
-import ModalButton from './ModalButton'
+import FlatButton from './FlatButton';
 
 const A = {
-  FlatButton,
-  ModalButton
+  FlatButton
 };
 
 export default A

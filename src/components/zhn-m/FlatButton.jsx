@@ -1,22 +1,18 @@
 import { useRef, useCallback } from 'react';
 
 import crCn from '../zhn-utils/crCn';
-import CaptionInput from './CaptionInput';
+import BtCaption from './BtCaption';
 
-const CL = {
-  BT: 'bt-flat',
-  BT_DIV: 'bt-flat__div',
-  BT_SPAN: 'bt-flat__span'
-};
-const S = {
-  PRIMARY: {
-    color: '#607d8b'
-  }
-};
+const CL_ARROW = "arrow-down"
+, CL_BT_FLAT = 'bt-flat'
+, CL_BT_FLAT_CAPTION = 'bt-flat__caption'
+, S_PRIMARY = { color: '#607d8b' };
 
 const FlatButton = ({
+  refBt,
+  isArrow,
   timeout=3000,
-  className, style, clDiv=CL.BT_DIV, isPrimary,
+  className, style, isPrimary,
   title='', caption, accessKey,
   children,
   onClick
@@ -35,31 +31,32 @@ const FlatButton = ({
       _refTimeStamp.current = timeStamp
     }
   }, [timeout, onClick])
-  , _className = crCn(CL.BT, className)
+  , _className = crCn(CL_BT_FLAT, className)
   , _style = isPrimary
-       ? {...style, ...S.PRIMARY}
-       : style  
+       ? {...style, ...S_PRIMARY}
+       : style
   , _title = accessKey
        ? `${title} [${accessKey}]`
        : title;
   return (
     <button
+      ref={refBt}
       className={_className}
       style={_style}
       accessKey={accessKey}
       title={_title}
       onClick={_hClick}
     >
-      <div className={clDiv}>
-        <CaptionInput
-          className={CL.BT_SPAN}
-          caption={caption}
-          accessKey={accessKey}
-        />
-        {children}
-      </div>
+      <BtCaption
+        className={CL_BT_FLAT_CAPTION}
+        caption={caption}
+        accessKey={accessKey}
+      >
+        {isArrow && <span className={CL_ARROW} />}
+      </BtCaption>
+      {children}
     </button>
   );
-}
+};
 
 export default FlatButton

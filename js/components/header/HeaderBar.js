@@ -2,12 +2,8 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _ComponentActions = _interopRequireWildcard(require("../../flux/actions/ComponentActions"));
 
@@ -31,24 +27,32 @@ var _LimitRemainingLabel = _interopRequireDefault(require("./LimitRemainingLabel
 
 var _BrowserModel = _interopRequireDefault(require("./BrowserModel"));
 
-var FlatButton = _Comp["default"].FlatButton,
-    ModalButton = _Comp["default"].ModalButton,
-    SvgSettings = _Comp["default"].SvgSettings,
-    SvgInfo = _Comp["default"].SvgInfo,
-    ModalSlider = _Comp["default"].ModalSlider;
-var useTheme = _use["default"].useTheme,
-    useToggle = _use["default"].useToggle,
-    useFnFocus = _use["default"].useFnFocus;
-var LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
-    CAPTION = "ERC v0.18.0";
-var ID = 'HEADER_BAR';
-var CL = {
+var _jsxRuntime = require("react/jsx-runtime");
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const {
+  FlatButton,
+  SvgSettings,
+  SvgInfo,
+  ModalSlider
+} = _Comp.default;
+const {
+  useTheme,
+  useToggle,
+  useFnFocus
+} = _use.default;
+const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
+      CAPTION = "ERC v0.18.0";
+const ID = 'HEADER_BAR';
+const CL = {
   HEADER: "header",
   ICON: "header__icon-erc",
   LABEL: "header__app-label",
   BM: "popup-menu header__panel-browser",
   TOPICS: "header__bt-topics",
-  ARROW: "arrow-down",
   QUANDL: "header__bt-quandl",
   EUROSTAT: "header__bt-eurostat",
   WATCH: "header__bt-watch",
@@ -56,81 +60,72 @@ var CL = {
   ABOUT: "header__bt-about",
   BROWSER_MENU: "popup-menu header__panel-browser"
 };
-var STYLE = {
-  SVG_BT: {
-    position: 'relative',
-    top: -1,
-    verticalAlign: 'middle',
-    marginLeft: 8,
-    marginRight: 8
-  }
+const S_SVG_BT = {
+  position: 'relative',
+  top: -1,
+  verticalAlign: 'middle',
+  margin: '0 8px'
 };
-var MODEL = (0, _BrowserModel["default"])();
+const MODEL = (0, _BrowserModel.default)();
 
-var HeaderBar = function HeaderBar(_ref) {
-  var store = _ref.store,
-      showSettings = _ref.showSettings;
-
-  var _useToggle = useToggle(false),
-      isTopics = _useToggle[0],
-      toggleTopics = _useToggle[1],
-      _useFnFocus = useFnFocus(toggleTopics),
-      refBt = _useFnFocus[0],
-      _toggleTopics = _useFnFocus[1],
-      TS = useTheme(ID);
-
+const HeaderBar = ({
+  store,
+  showSettings
+}) => {
+  const [isTopics, toggleTopics] = useToggle(false),
+        [refBt, _toggleTopics] = useFnFocus(toggleTopics),
+        TS = useTheme(ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL.HEADER,
     style: TS.ROOT,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading["default"], {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading.default, {
       store: store,
       ACTIONS: _LoadingProgressActions.T
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc["default"], {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc.default, {
       className: CL.ICON,
       title: LOGO_TITLE
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_AppLabel["default"], {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_AppLabel.default, {
       className: CL.LABEL,
       caption: CAPTION
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalButton, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       refBt: refBt,
+      isArrow: true,
+      timeout: 0,
       className: CL.TOPICS,
-      rootStyle: TS.BT,
+      style: TS.BT,
       caption: "Topics",
       title: "Click to open topics menu",
       accessKey: "t",
-      onClick: _toggleTopics,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        className: CL.ARROW
-      })
+      onClick: _toggleTopics
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       className: CL.QUANDL,
       style: TS.BT,
       caption: "Quandl",
       title: "Quandl Browser",
       accessKey: "q",
-      onClick: _BrowserActions["default"].showQuandl
+      onClick: _BrowserActions.default.showQuandl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       className: CL.EUROSTAT,
       style: TS.BT,
       caption: "Eurostat",
       title: "Eurostat Statistics Browser",
       accessKey: "u",
-      onClick: _BrowserActions["default"].showEurostat
+      onClick: _BrowserActions.default.showEurostat
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       className: CL.WATCH,
       style: TS.BT,
       caption: "Watch",
       title: "Watch List Browser",
       accessKey: "w",
-      onClick: _BrowserActions["default"].showWatch
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar["default"], {
+      onClick: _BrowserActions.default.showWatch
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
       btStyle: TS.BT_HOT,
       store: store,
       closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
-      onShowDialog: _ComponentActions["default"].showDialog
+      onShowDialog: _ComponentActions.default.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL.BTS_RIGHT,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel["default"], {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {
         store: store
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
         style: TS.BT,
@@ -140,7 +135,7 @@ var HeaderBar = function HeaderBar(_ref) {
         timeout: 500,
         onClick: showSettings,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgSettings, {
-          style: STYLE.SVG_BT
+          style: S_SVG_BT
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
         className: CL.ABOUT,
@@ -148,9 +143,9 @@ var HeaderBar = function HeaderBar(_ref) {
         title: "About Web Application ERC",
         accessKey: "a",
         timeout: 0,
-        onClick: _ComponentActions["default"].showAbout,
+        onClick: _ComponentActions.default.showAbout,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgInfo, {
-          style: STYLE.SVG_BT
+          style: S_SVG_BT
         })
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
@@ -163,5 +158,5 @@ var HeaderBar = function HeaderBar(_ref) {
 };
 
 var _default = HeaderBar;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=HeaderBar.js.map

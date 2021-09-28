@@ -13,7 +13,7 @@ import LimitRemainingLabel from './LimitRemainingLabel'
 import crBrowserModel from './BrowserModel'
 
 const {
-  FlatButton, ModalButton,
+  FlatButton,
   SvgSettings, SvgInfo,
   ModalSlider
 } = Comp;
@@ -31,7 +31,6 @@ const CL = {
   LABEL: "header__app-label",
   BM: "popup-menu header__panel-browser",
   TOPICS: "header__bt-topics",
-  ARROW: "arrow-down",
   QUANDL: "header__bt-quandl",
   EUROSTAT: "header__bt-eurostat",
   WATCH: "header__bt-watch",
@@ -41,14 +40,11 @@ const CL = {
   BROWSER_MENU: "popup-menu header__panel-browser"
 };
 
-const STYLE = {
-  SVG_BT: {
-    position: 'relative',
-    top: -1,
-    verticalAlign: 'middle',
-    marginLeft: 8,
-    marginRight: 8
-  }
+const S_SVG_BT = {
+  position: 'relative',
+  top: -1,
+  verticalAlign: 'middle',
+  margin: '0 8px'
 };
 
 const MODEL = crBrowserModel();
@@ -69,17 +65,17 @@ const HeaderBar = ({ store, showSettings }) => {
           className={CL.LABEL}
           caption={CAPTION}
        />
-       <ModalButton
-           refBt={refBt}
-           className={CL.TOPICS}
-           rootStyle={TS.BT}
-           caption="Topics"
-           title="Click to open topics menu"
-           accessKey="t"
-           onClick={_toggleTopics}
-        >
-          <span className={CL.ARROW} />
-        </ModalButton>
+       <FlatButton
+         refBt={refBt}
+         isArrow={true}
+         timeout={0}
+         className={CL.TOPICS}
+         style={TS.BT}
+         caption="Topics"
+         title="Click to open topics menu"
+         accessKey="t"
+         onClick={_toggleTopics}
+        />
         <FlatButton
           className={CL.QUANDL}
           style={TS.BT}
@@ -122,7 +118,7 @@ const HeaderBar = ({ store, showSettings }) => {
              timeout={500}
              onClick={showSettings}
            >
-             <SvgSettings style={STYLE.SVG_BT} />
+             <SvgSettings style={S_SVG_BT} />
            </FlatButton>
            <FlatButton
              className={CL.ABOUT}
@@ -132,12 +128,12 @@ const HeaderBar = ({ store, showSettings }) => {
              timeout={0}
              onClick={CA.showAbout}
            >
-             <SvgInfo style={STYLE.SVG_BT} />
+             <SvgInfo style={S_SVG_BT} />
            </FlatButton>
         </div>
          <ModalSlider
            isShow={isTopics}
-           className={CL.BROWSER_MENU}           
+           className={CL.BROWSER_MENU}
            model={MODEL}
            onClose={_toggleTopics}
          />
