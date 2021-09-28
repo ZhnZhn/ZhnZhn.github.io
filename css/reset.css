@@ -42,8 +42,11 @@ button {
 button:focus {
   outline: 0;
 }
-
 button:hover {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
+}
+button::-moz-focus-inner {
+  border: 0;
+  outline: 0;
 }
