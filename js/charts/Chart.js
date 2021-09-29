@@ -70,7 +70,6 @@ const _sanitizeOptionText = option => {
 const _crTitle = title => _isStr(title) ? {
   text: _dompurify.default.sanitize(title)
 } : _sanitizeOptionText(title),
-      _crSeriaType = seriaType => _isStr(seriaType) ? seriaType.toLowerCase() : 'area',
       _crCrosshair = (is = true) => is ? {
   color: _Color.default.CROSSHAIR,
   width: 1,
@@ -91,7 +90,11 @@ const Chart = {
   SEMIDONUT_SUBTITLE_Y: 35,
   ..._MonoColorSlice.default,
 
-  fCreditsRightBottom(option = {}) {
+  crType(seriaType, dfType) {
+    return seriaType && _isStr(seriaType) ? seriaType.toLowerCase() : dfType || 'spline';
+  },
+
+  fCreditsRightBottom(option) {
     return merge(false, {
       enabled: true,
       position: {
@@ -113,7 +116,7 @@ const Chart = {
     });
   },
 
-  fTitle(option = {}) {
+  fTitle(option) {
     _sanitizeOptionText(option);
 
     return merge(false, { ...CAPTION_CONFIG,
@@ -121,7 +124,7 @@ const Chart = {
     }, option);
   },
 
-  fSubtitle(option = {}) {
+  fSubtitle(option) {
     _sanitizeOptionText(option);
 
     return merge(false, { ...CAPTION_CONFIG,
@@ -169,7 +172,7 @@ const Chart = {
       },
       series: [{
         turboThreshold: 20000,
-        type: _crSeriaType(seriaType),
+        type: Chart.crType(seriaType, 'area'),
         color: seriaColor,
         tooltip: Chart.fTooltip(_Tooltip.default.vTdmyIf),
         lineWidth: seriaWidth,
@@ -219,7 +222,7 @@ const Chart = {
     };
   },
 
-  fXAxisOpposite(option = {}) {
+  fXAxisOpposite(option) {
     return merge(false, {
       opposite: true,
       tickLength: 0,
@@ -230,7 +233,7 @@ const Chart = {
     }, option);
   },
 
-  fYAxisOpposite(option = {}) {
+  fYAxisOpposite(option) {
     return merge(false, {
       opposite: true,
       title: {
@@ -257,15 +260,15 @@ const Chart = {
     };
   },
 
-  fPlotOptionsArea(option = {}) {
-    return merge(false, _crPlotOption(_Color.default.AREA_HOVER_LINE, _Color.default.AREA_MARKER_LINE), option);
+  fPlotOptionsArea(option) {
+    return merge(false, _crPlotOption(_Color.default.AREA_HOVER_LINE, _Color.default.AREA_MARKER_LINE), option || {});
   },
 
-  fPlotOptionsColumn(option = {}) {
+  fPlotOptionsColumn(option) {
     return merge(false, _crPlotOption(_Color.default.COLUMN_HOVER_LINE, _Color.default.COLUMN_MARKER_LINE), option);
   },
 
-  fPlotOptionsSeries(option = {}) {
+  fPlotOptionsSeries(option) {
     return merge(false, {
       states: {
         hover: {
@@ -281,7 +284,7 @@ const Chart = {
     }, option);
   },
 
-  fLegend(option = {}) {
+  fLegend(option) {
     return merge(false, {
       symbolHeight: 14,
       symbolWidth: 14,

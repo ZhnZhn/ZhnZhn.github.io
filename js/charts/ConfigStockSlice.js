@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
@@ -13,114 +13,120 @@ var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
-var fTooltip = _Chart["default"].fTooltip;
-var setSerieData = _ChartConfig["default"].setSerieData,
-    crMiniVolumeConfig = _ChartConfig["default"].crMiniVolumeConfig,
-    crMiniATHConfig = _ChartConfig["default"].crMiniATHConfig,
-    crMiniHLConfig = _ChartConfig["default"].crMiniHLConfig;
+const {
+  crType,
+  fTooltip
+} = _Chart.default;
+const {
+  setSerieData,
+  crMiniVolumeConfig,
+  crMiniATHConfig,
+  crMiniHLConfig
+} = _ChartConfig.default;
 
-var _isStr = function _isStr(str) {
-  return typeof str === 'string';
-};
+const _crSeriaOption = (color, lineWidth) => ({
+  type: 'line',
+  visible: false,
+  color,
+  lineWidth,
+  marker: {
+    radius: 3,
+    symbol: "circle"
+  }
+});
 
-var _crSeriaOption = function _crSeriaOption(color) {
-  return {
-    type: 'line',
-    visible: false,
-    color: color,
-    marker: {
-      radius: 3,
-      symbol: "circle"
-    }
-  };
-};
+const _crScatterSeria = (color, pointFormatter, data) => ({
+  type: 'scatter',
+  color,
+  data,
+  tooltip: fTooltip(pointFormatter)
+}),
+      _crDividendSeria = data => _crScatterSeria(_Color.default.EX_DIVIDEND, _Tooltip.default.exDividend, data),
+      _crSplitRatioSeria = data => _crScatterSeria(_Color.default.SPLIT_RATIO, _Tooltip.default.splitRatio, data);
 
-var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data) {
-  return {
-    type: 'scatter',
-    color: color,
-    data: data,
-    tooltip: fTooltip(pointFormatter)
-  };
-},
-    _crDividendSeria = function _crDividendSeria(data) {
-  return _crScatterSeria(_Color["default"].EX_DIVIDEND, _Tooltip["default"].exDividend, data);
-},
-    _crSplitRatioSeria = function _crSplitRatioSeria(data) {
-  return _crScatterSeria(_Color["default"].SPLIT_RATIO, _Tooltip["default"].splitRatio, data);
-};
-
-var ConfigStockSlice = {
-  setStockSerias: function setStockSerias(seriaType, d, dH, dL, dO) {
-    var config = this.config;
-    setSerieData(config, d, 0, 'Close', {
-      type: seriaType || 'area'
+const ConfigStockSlice = {
+  _setStockSerias(seriaType, lineWidth, dC, dH, dL, dO) {
+    const config = this.config,
+          type = crType(seriaType, 'area');
+    setSerieData(config, dC, 0, 'Close', {
+      type,
+      lineWidth
     });
-    setSerieData(config, dH, 1, 'High', _crSeriaOption(_Color["default"].S_HIGH));
-    setSerieData(config, dL, 2, 'Low', _crSeriaOption(_Color["default"].S_LOW));
-    setSerieData(config, dO, 3, 'Open', _crSeriaOption(_Color["default"].S_OPEN));
+    setSerieData(config, dH, 1, 'High', _crSeriaOption(_Color.default.S_HIGH, lineWidth));
+    setSerieData(config, dL, 2, 'Low', _crSeriaOption(_Color.default.S_LOW, lineWidth));
+    setSerieData(config, dO, 3, 'Open', _crSeriaOption(_Color.default.S_OPEN, lineWidth));
     return this;
   },
-  stockConfig: function stockConfig(id, option) {
-    var isNotZoomToMinMax = option.isNotZoomToMinMax,
-        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        sT = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        dC = option.dC,
-        dH = option.dH,
-        dL = option.dL,
-        dO = option.dO,
-        minClose = option.minClose,
-        maxClose = option.maxClose,
-        dVc = option.dVc,
-        dV = option.dV,
-        dATH = option.dATH,
-        seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
+
+  stockConfig(id, option) {
+    const {
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      seriaType,
+      seriaWidth,
+      dC,
+      dH,
+      dL,
+      dO,
+      minClose,
+      maxClose,
+      dVc,
+      dV,
+      dATH
+    } = option;
     return this.areaConfig({
-      spacingTop: 25,
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth
-    }).addTooltip(_Tooltip["default"].vTdmyIf).addMinMax(dC, {
+      spacingTop: 25
+    }).addTooltip(_Tooltip.default.vTdmyIf).addMinMax(dC, {
       minY: minClose,
       maxY: maxClose,
-      isNotZoomToMinMax: isNotZoomToMinMax,
-      isDrawDeltaExtrems: isDrawDeltaExtrems
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems
     }).addMiniVolume({
-      id: id,
+      id,
       dColumn: dVc,
       dVolume: dV
     }).addMiniATH({
-      id: id,
+      id,
       data: dATH
-    }).setStockSerias(seriaType, dC, dH, dL, dO);
+    })._setStockSerias(seriaType, seriaWidth, dC, dH, dL, dO);
   },
+
   //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
-  addDividend: function addDividend(data, min, max) {
-    var seria = _crDividendSeria(data);
+  addDividend(data, min, max) {
+    const seria = _crDividendSeria(data);
 
     return this._addScatterBottom(seria, 'Dividend', min, max);
   },
+
   //Used only by Quandl EOD
-  addSplitRatio: function addSplitRatio(data, min, max) {
-    var seria = _crSplitRatioSeria(data);
+  addSplitRatio(data, min, max) {
+    const seria = _crSplitRatioSeria(data);
 
     return this._addScatterBottom(seria, 'Split Ratio', min, max);
   },
-  addMiniVolume: function addMiniVolume(option) {
-    var dVolume = option.dVolume;
+
+  addMiniVolume(option) {
+    const {
+      dVolume
+    } = option;
     return this._addMini(dVolume, option, crMiniVolumeConfig);
   },
-  addMiniATH: function addMiniATH(option) {
-    var data = option.data;
+
+  addMiniATH(option) {
+    const {
+      data
+    } = option;
     return this._addMini(data, option, crMiniATHConfig);
   },
-  addMiniHL: function addMiniHL(option) {
-    var data = option.data;
+
+  addMiniHL(option) {
+    const {
+      data
+    } = option;
     return this._addMini(data, option, crMiniHLConfig);
   }
+
 };
 var _default = ConfigStockSlice;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ConfigStockSlice.js.map

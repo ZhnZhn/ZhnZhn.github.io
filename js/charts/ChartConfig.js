@@ -45,9 +45,6 @@ var _WithTreeMapConfig = _interopRequireDefault(require("./WithTreeMapConfig"));
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 const _merge = _highcharts.default.merge;
 const _assign = Object.assign;
-
-const _isStr = str => typeof str === 'string';
-
 const ChartConfig = { ..._WithIndicatorConfig.default,
   ..._WithMarkers.default,
   ..._WithPieConfig.default,
@@ -65,12 +62,17 @@ const ChartConfig = { ..._WithIndicatorConfig.default,
   },
 
   setSerieData(config, data, index, name, options) {
+    const {
+      type = 'area',
+      lineWidth = 1,
+      ...restOptions
+    } = options || {};
     config.series[index] = _assign({
-      type: 'area',
-      name: name,
-      data: data,
-      lineWidth: 1
-    }, options, {
+      type,
+      lineWidth,
+      name,
+      data
+    }, restOptions, {
       point: _Chart.default.fEventsMouseOver(_handleMouseOver.default)
     });
   },
@@ -88,8 +90,9 @@ const ChartConfig = { ..._WithIndicatorConfig.default,
       tp,
       ...restOption
     } = option,
-          type = _isStr(seriaType) ? seriaType.toLowerCase() : 'spline',
+          type = _Chart.default.crType(seriaType),
           pointFormatter = tp && _Tooltip.default[tp] || _Tooltip.default.vTdmyIf;
+
     return {
       type,
       lineWidth: seriaWidth != null ? seriaWidth : 1,

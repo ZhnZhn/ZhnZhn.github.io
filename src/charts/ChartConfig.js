@@ -27,7 +27,6 @@ import WithTreeMap from './WithTreeMapConfig';
 
 const _merge = Highcharts.merge;
 const _assign = Object.assign;
-const _isStr = str => typeof str === 'string';
 
 const ChartConfig = {
   ...WithIndicator,
@@ -47,15 +46,18 @@ const ChartConfig = {
     Highcharts.setOptions(ChartTheme);
   },
 
+
   setSerieData(config, data, index, name, options) {
+    const {
+      type='area',
+      lineWidth=1,
+      ...restOptions
+    } = options || {};
     config.series[index] = _assign({
-      type: 'area',
-      name: name,
-      data: data,
-      lineWidth: 1
-    }, options, {
+      type, lineWidth, name, data,
+    }, restOptions, {
       point: Chart.fEventsMouseOver(handleMouseOver)
-    })
+    })    
   },
 
   getColor(seriaIndex) {
@@ -69,9 +71,7 @@ const ChartConfig = {
       tp,
       ...restOption
     } = option
-    , type = _isStr(seriaType)
-        ? seriaType.toLowerCase()
-        : 'spline'
+    , type = Chart.crType(seriaType)
     , pointFormatter = tp && Tooltip[tp]
         || Tooltip.vTdmyIf;
     return {

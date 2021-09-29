@@ -4,7 +4,7 @@ import Chart from './Chart';
 import ChartConfig from './ChartConfig';
 import Tooltip from './Tooltip';
 
-const { fTooltip } = Chart;
+const { crType, fTooltip } = Chart;
 const {
   setSerieData,
   crMiniVolumeConfig,
@@ -12,10 +12,9 @@ const {
   crMiniHLConfig
 } = ChartConfig;
 
-const _isStr = str => typeof str === 'string';
-
-const _crSeriaOption = (color) => ({
-  type: 'line', visible: false, color,
+const _crSeriaOption = (color, lineWidth) => ({
+  type: 'line', visible: false,
+  color, lineWidth,
   marker: {
     radius: 3,
     symbol: "circle"
@@ -39,19 +38,20 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
 );
 
 const ConfigStockSlice = {
-  setStockSerias(seriaType, d, dH, dL, dO){
-    const config = this.config;
-    setSerieData(config, d, 0, 'Close', {
-      type: seriaType || 'area'
+  _setStockSerias(seriaType, lineWidth, dC, dH, dL, dO){
+    const config = this.config
+    , type = crType(seriaType, 'area');
+    setSerieData(config, dC, 0, 'Close', {
+      type, lineWidth
     })
     setSerieData(config, dH, 1, 'High',
-      _crSeriaOption(COLOR.S_HIGH)
+      _crSeriaOption(COLOR.S_HIGH, lineWidth)
     )
     setSerieData(config, dL, 2, 'Low',
-      _crSeriaOption(COLOR.S_LOW)
+      _crSeriaOption(COLOR.S_LOW, lineWidth)
     )
     setSerieData(config, dO, 3, 'Open',
-      _crSeriaOption(COLOR.S_OPEN)
+      _crSeriaOption(COLOR.S_OPEN, lineWidth)
     )
     return this;
   },
@@ -60,25 +60,21 @@ const ConfigStockSlice = {
     const {
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
-      seriaType:sT, seriaColor, seriaWidth,
+      seriaType, seriaWidth,
       dC, dH, dL, dO,
       minClose, maxClose,
       dVc, dV,
       dATH
-    } = option
-    , seriaType = _isStr(sT) ? sT.toLowerCase() : 'area';
-    return this.areaConfig({
-        spacingTop: 25,
-        seriaType, seriaColor, seriaWidth
-      })
+    } = option;
+    return this.areaConfig({ spacingTop: 25 })
       .addTooltip(Tooltip.vTdmyIf)
       .addMinMax(dC, {
           minY: minClose, maxY: maxClose,
           isNotZoomToMinMax, isDrawDeltaExtrems
        })
       .addMiniVolume({ id, dColumn: dVc, dVolume: dV })
-      .addMiniATH({ id, data: dATH })      
-      .setStockSerias(seriaType, dC, dH, dL, dO);
+      .addMiniATH({ id, data: dATH })
+      ._setStockSerias(seriaType, seriaWidth, dC, dH, dL, dO);
   },
 
   //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
