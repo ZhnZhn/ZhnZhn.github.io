@@ -176,7 +176,7 @@ class ChartItem extends Component {
     , mainChart = this.mainChart;
     if (isShowAbs !== prevState.isShowAbs && mainChart) {
       mainChart.update(
-        this.props.ChartFn.arMetricOption(mainChart, isShowAbs)
+        this.props.ChartFn.crMetricConfig(mainChart, isShowAbs)
       )
     }
   }

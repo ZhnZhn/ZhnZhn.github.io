@@ -21,9 +21,9 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _Type = require("../constants/Type");
 
-var _WithAreaChartFn = _interopRequireDefault(require("./WithAreaChartFn"));
-
 var _calcYAxisOffset = _interopRequireDefault(require("./calcYAxisOffset"));
+
+var _crMetricConfig = _interopRequireDefault(require("./crMetricConfig"));
 
 var _dateFormat = _interopRequireDefault(require("./dateFormat"));
 
@@ -194,11 +194,12 @@ const _crDelta = perToValue => "\xA0\xA0\u0394 " + perToValue + "%",
   bTotal
 });
 
-const ChartFn = { ..._WithAreaChartFn.default,
+const ChartFn = {
   toDmy,
   toTdmy,
   toTdmyIf,
   calcYAxisOffset: _calcYAxisOffset.default,
+  crMetricConfig: _crMetricConfig.default,
 
   addSeriaWithRenderLabel(props) {
     const {

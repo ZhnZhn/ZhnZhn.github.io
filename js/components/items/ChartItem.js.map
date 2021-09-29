@@ -150,7 +150,7 @@
   "nextState",
   "componentDidUpdate",
   "prevProps",
-  "arMetricOption",
+  "crMetricConfig",
   "getDerivedStateFromError",
   "error",
   "render",

@@ -11,8 +11,8 @@ import Chart from './Chart';
 
 import { Direction } from '../constants/Type';
 
-import WithAreaChartFn from './WithAreaChartFn';
 import calcYAxisOffset from './calcYAxisOffset';
+import crMetricConfig from './crMetricConfig';
 import dateFormat from './dateFormat';
 
 const { toDmy, toTdmy, toTdmyIf } = dateFormat;
@@ -143,9 +143,9 @@ const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
 
 
 const ChartFn = {
-  ...WithAreaChartFn,
   toDmy, toTdmy, toTdmyIf,
   calcYAxisOffset,
+  crMetricConfig,
 
   addSeriaWithRenderLabel(props){
     const {
