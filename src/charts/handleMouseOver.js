@@ -1,6 +1,6 @@
 import formatNumber from '../utils/formatNumber';
 import dateFormat from './dateFormat';
-import calcDeltaYAxis from './calcDeltaYAxis';
+import calcYAxisOffset from './calcYAxisOffset';
 
 const { formatDate } = dateFormat;
 
@@ -24,7 +24,7 @@ const C = {
   DX_CATEGORY: 40,
   DY_CATEGORY: 32,
 
-  DX_DELTA_Y_AXIS: 10
+  DX_Y_AXIS: 10
 };
 
 const _crDelta = (chart, dX=0, dY=0) => {
@@ -50,6 +50,22 @@ const _crCategoryCrossParam = (point, chart) => ({
   ..._crDelta(chart, C.DX_CATEGORY, C.DY_CATEGORY)
 });
 
+const _isCrossParam = point =>
+  !point.isCategory || point.c;
+
+const _getCrCrossParam = point => _isCrossParam(point)
+  ? _crCrossParam
+  : _crCategoryCrossParam;
+
+const _crXCrossLabelX = (chart, plotX) => {
+  const _yAxisOffset = calcYAxisOffset(chart);
+  return  _yAxisOffset
+    ? plotX + _yAxisOffset - C.DX_Y_AXIS
+    : plotX
+};
+
+const _crXCrossLabelY = (chart, dY) => chart.plotTop - dY;
+
 const _crYCrossLabelX = (chart, dX) => {
   return chart.yAxis[0].width + chart.plotLeft + dX + C.CL_DX;
 };
@@ -57,17 +73,20 @@ const _crYCrossLabelY = (chart, plotY) => {
   return plotY + chart.plotTop + C.CL_DY;
 };
 
+const _crCrossLabel = (chart, text, x, y) => chart
+ .renderer
+ .text(text, x, y)
+ .attr(C.ATTR_LABEL)
+ .css(C.CSS_LABEL)
+ .add();
+
 const handleMouserOverPoint = function(event){
-  const { isCategory, c, plotX, plotY, series } = this
+  const { plotX, plotY, series } = this
   , chart = series.chart
   , { xCrossLabel, yCrossLabel } = chart
-  , { y, date, dX, dY } = (!isCategory || c)
-      ? _crCrossParam(this, chart)
-      : _crCategoryCrossParam(this, chart)
-  , deltaYAxis = calcDeltaYAxis(chart)
-  , xLX = deltaYAxis
-      ? plotX + deltaYAxis - C.DX_DELTA_Y_AXIS
-      : plotX
+  , { y, date, dX, dY } = _getCrCrossParam(this)(this, chart)
+  , xLX = _crXCrossLabelX(chart, plotX)
+  , yLX = _crXCrossLabelY(chart, dY)
   , xLY = _crYCrossLabelX(chart, dX)
   , yLY = _crYCrossLabelY(chart, plotY);
 
@@ -75,16 +94,8 @@ const handleMouserOverPoint = function(event){
     xCrossLabel.attr({ x: xLX, text: date });
     yCrossLabel.attr({ x: xLY, y: yLY, text: y });
   } else {
-    chart.xCrossLabel = chart.renderer
-      .text(date, xLX, chart.plotTop - dY)
-      .attr(C.ATTR_LABEL)
-      .css(C.CSS_LABEL)
-      .add();
-    chart.yCrossLabel = chart.renderer
-      .text(y, xLY, yLY)
-      .attr(C.ATTR_LABEL)
-      .css(C.CSS_LABEL)
-      .add();
+    chart.xCrossLabel = _crCrossLabel(chart, date, xLX, yLX)
+    chart.yCrossLabel = _crCrossLabel(chart, y, xLY, yLY)
   }
 };
 

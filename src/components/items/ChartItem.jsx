@@ -72,7 +72,7 @@ const _reflowCharts = (mainChart, width, ChartFn) => {
 
     mainChart.setSize(width, void 0, _isAnimate)
     if (_isArr(zhDetailCharts)) {
-      const spacingLeft = ChartFn.arCalcDeltaYAxis(mainChart);
+      const spacingLeft = ChartFn.calcYAxisOffset(mainChart);
       zhDetailCharts.forEach(chart => {
         if (spacingLeft) {
           chart.update({ chart: { spacingLeft } }, false)

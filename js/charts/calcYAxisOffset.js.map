@@ -1,0 +1,26 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/charts/calcYAxisOffset.js"
+ ],
+ "file": "../../src/charts/calcYAxisOffset.js",
+ "names": [
+  "calcYAxisOffset",
+  "chart",
+  "offset",
+  "yAxis",
+  "forEach",
+  "_yAxis",
+  "opposite",
+  "max",
+  "getExtremes",
+  "_maxLen",
+  "length",
+  "_maxLabelLenght",
+  "maxLabelLength",
+  "_dx",
+  "Math",
+  "round"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,eAAe,GAAG,UAASC,KAAT,EAAgB;AACtC,MAAIC,MAAM,GAAG,CAAb;AACAD,EAAAA,KAAK,CAACE,KAAN,CAAYC,OAAZ,CAAoBC,MAAM,IAAI;AAC5B,QAAI,CAACA,MAAM,CAACC,QAAZ,EAAsB;AACpB,YAAM;AAAEC,QAAAA;AAAF,UAAUF,MAAM,CAACG,WAAP,EAAhB;AAAA,YACMC,OAAO,GAAGF,GAAG,GAAG,CAAC,KAAGA,GAAJ,EAASG,MAAZ,GAAqB,CADxC;AAAA,YAEMC,eAAe,GAAGN,MAAM,CAACO,cAF/B;AAAA,YAGMC,GAAG,GAAGX,MAAM,KAAK,CAAX,GAAe,EAAf,GAAoB,EAHhC;;AAIAA,MAAAA,MAAM,GAAGO,OAAO,KAAK,CAAZ,GACLP,MAAM,GAAGW,GAAT,GAAeC,IAAI,CAACC,KAAL,CAAWJ,eAAX,CADV,GAELT,MAFJ;AAGD;AACF,GAVD;AAWA,SAAOA,MAAP;AACD,CAdD;;eAgBeF,e"
+}
