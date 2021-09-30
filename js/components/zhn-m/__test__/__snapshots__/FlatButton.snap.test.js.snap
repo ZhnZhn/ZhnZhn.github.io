@@ -7,29 +7,25 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
   onClick={[Function]}
   title="Click to load [l]"
 >
-  <div
-    className="bt-flat__div"
+  <span
+    className="bt-flat__caption"
   >
-    <span
-      className="bt-flat__span"
-    >
-      <span>
-        
-      </span>
-      <span
-        style={
-          Object {
-            "textDecoration": "underline",
-          }
-        }
-      >
-        L
-      </span>
-      <span>
-        oad
-      </span>
+    <span>
+      
     </span>
-  </div>
+    <span
+      style={
+        Object {
+          "textDecoration": "underline",
+        }
+      }
+    >
+      L
+    </span>
+    <span>
+      oad
+    </span>
+  </span>
 </button>
 `;
 
@@ -45,28 +41,24 @@ exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
   }
   title="Click to load [l]"
 >
-  <div
-    className="bt-flat__div"
+  <span
+    className="bt-flat__caption"
   >
-    <span
-      className="bt-flat__span"
-    >
-      <span>
-        
-      </span>
-      <span
-        style={
-          Object {
-            "textDecoration": "underline",
-          }
-        }
-      >
-        L
-      </span>
-      <span>
-        oad
-      </span>
+    <span>
+      
     </span>
-  </div>
+    <span
+      style={
+        Object {
+          "textDecoration": "underline",
+        }
+      }
+    >
+      L
+    </span>
+    <span>
+      oad
+    </span>
+  </span>
 </button>
 `;
