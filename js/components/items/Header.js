@@ -3,11 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
@@ -17,19 +13,25 @@ var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _ValueMovingBadge = _interopRequireDefault(require("./ValueMovingBadge"));
 
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from "prop-types";
-var SvgMore = _Comp["default"].SvgMore,
-    ModalSlider = _Comp["default"].ModalSlider,
-    SvgCheckBox = _Comp["default"].SvgCheckBox,
-    SvgClose = _Comp["default"].SvgClose;
-var crStyle = _use["default"].crStyle,
-    useTheme = _use["default"].useTheme,
-    useToggle = _use["default"].useToggle,
-    useFnFocus = _use["default"].useFnFocus;
-var TH_ID = 'ELEMENT';
-var CL_CAPTION = 'not-selected text-clip bt-left bt',
-    CL_MORE = "popup-menu charts__menu-more";
-var S = {
+const {
+  SvgMore,
+  ModalSlider,
+  SvgCheckBox,
+  SvgClose
+} = _Comp.default;
+const {
+  crStyle,
+  useTheme,
+  useToggle,
+  useFnFocus
+} = _use.default;
+const TH_ID = 'ELEMENT';
+const CL_CAPTION = 'not-selected text-clip bt-left bt',
+      CL_MORE = "popup-menu charts__menu-more";
+const S = {
   ROOT: {
     backgroundColor: '#1b2836',
     height: 'auto',
@@ -83,24 +85,20 @@ var S = {
   }
 };
 
-var ItemTime = function ItemTime(_ref) {
-  var itemTime = _ref.itemTime;
-  return !itemTime ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-    style: S.TIME,
-    children: itemTime
-  });
-};
+const ItemTime = ({
+  itemTime
+}) => itemTime ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+  style: S.TIME,
+  children: itemTime
+}) : null;
 
-var MenuMore = function MenuMore(_ref2) {
-  var isMore = _ref2.isMore,
-      moreModel = _ref2.moreModel,
-      sliderStyle = _ref2.sliderStyle,
-      onToggle = _ref2.onToggle;
-
-  var _useFnFocus = useFnFocus(onToggle),
-      refBtSvg = _useFnFocus[0],
-      toggleFocus = _useFnFocus[1];
-
+const MenuMore = ({
+  isMore,
+  moreModel,
+  sliderStyle,
+  onToggle
+}) => {
+  const [refBtSvg, toggleFocus] = useFnFocus(onToggle);
   if (!moreModel) return null;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
@@ -119,29 +117,29 @@ var MenuMore = function MenuMore(_ref2) {
   });
 };
 
-var Header = function Header(_ref3) {
-  var isOpen = _ref3.isOpen,
-      onCheck = _ref3.onCheck,
-      onUnCheck = _ref3.onUnCheck,
-      itemCaption = _ref3.itemCaption,
-      itemTitle = _ref3.itemTitle,
-      itemTime = _ref3.itemTime,
-      onToggle = _ref3.onToggle,
-      valueMoving = _ref3.valueMoving,
-      isAdminMode = _ref3.isAdminMode,
-      crValueMoving = _ref3.crValueMoving,
-      regCompVm = _ref3.regCompVm,
-      moreModel = _ref3.moreModel,
-      onClose = _ref3.onClose;
-
-  var _useToggle = useToggle(false),
-      isMore = _useToggle[0],
-      _toggleMore = _useToggle[1],
-      TS = useTheme(TH_ID),
-      _captionStyle = crStyle([S.CAPTION_OPEN, !isOpen && S.CAPTION_CLOSE, !valueMoving && S.CAPTION_WIDTH]);
+const Header = ({
+  isOpen,
+  onCheck,
+  onUnCheck,
+  itemCaption,
+  itemTitle,
+  itemTime,
+  onToggle,
+  valueMoving,
+  isAdminMode,
+  crValueMoving,
+  refVm,
+  moreModel,
+  onClose
+}) => {
+  const [isMore, _toggleMore] = useToggle(false),
+        TS = useTheme(TH_ID),
+        _captionStyle = crStyle([S.CAPTION_OPEN, !isOpen && S.CAPTION_CLOSE, !valueMoving && S.CAPTION_WIDTH]);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: (0, _extends2["default"])({}, S.ROOT, TS.ROOT),
+    style: { ...S.ROOT,
+      ...TS.ROOT
+    },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(MenuMore, {
       isMore: isMore,
       moreModel: moreModel,
@@ -149,7 +147,7 @@ var Header = function Header(_ref3) {
       onToggle: _toggleMore
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgCheckBox, {
       style: S.CHECK_BOX,
-      color: _Color["default"].GREEN,
+      color: _Color.default.GREEN,
       checkedColor: TS.ROOT.backgroundColor,
       onCheck: onCheck,
       onUnCheck: onUnCheck
@@ -159,11 +157,11 @@ var Header = function Header(_ref3) {
       style: _captionStyle,
       onClick: onToggle,
       children: itemCaption
-    }), valueMoving ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingBadge["default"], {
-      valueMoving: valueMoving,
+    }), valueMoving ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingBadge.default, {
+      ref: refVm,
       isAdminMode: isAdminMode,
-      crValueMoving: crValueMoving,
-      regCompVm: regCompVm
+      initialVm: valueMoving,
+      crValueMoving: crValueMoving
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemTime, {
       itemType: itemTime
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgClose, {
@@ -195,5 +193,5 @@ Header.propTypes = {
 
 
 var _default = Header;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=Header.js.map

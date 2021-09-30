@@ -286,10 +286,7 @@ class ChartItem extends _react.Component {
       });
     };
 
-    this._regCompVm = comp => {
-      this._compVm = comp;
-    };
-
+    this._refVm = /*#__PURE__*/(0, _react.createRef)();
     this._hToggleOpen = _toggle.bind(null, this, 'isOpen');
     this._hClickLegend = _toggle.bind(null, this, 'isShowLegend');
     this._hToggleToolbar = _toggle.bind(null, this, 'isShowToolbar');
@@ -414,7 +411,7 @@ class ChartItem extends _react.Component {
         onToggle: this._hToggleOpen,
         onClose: onCloseItem,
         crValueMoving: this._crValueMoving,
-        regCompVm: this._regCompVm
+        refVm: this._refVm
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ShowHide, {
         isShow: isOpen,
         withoutAnimation: _withoutAnimation,
@@ -461,8 +458,12 @@ class ChartItem extends _react.Component {
   }
 
   compareTo(dateTo) {
-    if (this._compVm) {
-      return this._compVm._updateDateTo(dateTo);
+    const {
+      current
+    } = this._refVm;
+
+    if (current) {
+      return current._updateDateTo(dateTo);
     }
   }
 

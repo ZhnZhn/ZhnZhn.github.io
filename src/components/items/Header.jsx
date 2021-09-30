@@ -77,13 +77,9 @@ const S = {
   }
 };
 
-const ItemTime = ({ itemTime }) => !itemTime
-  ? null
-  : (<span style={S.TIME}>
-      {itemTime}
-     </span>
-    );
-
+const ItemTime = ({ itemTime }) => itemTime
+  ? <span style={S.TIME}>{itemTime}</span>
+  : null;
 
 const MenuMore = ({
   isMore, moreModel,
@@ -114,7 +110,7 @@ const Header = ({
   isOpen,
   onCheck, onUnCheck,
   itemCaption, itemTitle, itemTime, onToggle,
-  valueMoving, isAdminMode, crValueMoving, regCompVm,
+  valueMoving, isAdminMode, crValueMoving, refVm,
   moreModel,
   onClose
 }) => {
@@ -152,10 +148,10 @@ const Header = ({
       {
         valueMoving
           ? <ValueMovingBadge
-              valueMoving={valueMoving}
+              ref={refVm}
               isAdminMode={isAdminMode}
+              initialVm={valueMoving}
               crValueMoving={crValueMoving}
-              regCompVm={regCompVm}
             />
           : <ItemTime
               itemType={itemTime}

@@ -3,13 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -27,199 +21,140 @@ var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 
 var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
 
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from "prop-types";
-var CL_BT = 'bt';
-var S = {
-  ROOT: {
-    position: 'relative',
-    display: 'inline-block',
-    marginLeft: 10
-  },
-  DELTA: {
-    marginLeft: 5,
-    fontWeight: 'bold'
-  },
-  G5: {
-    display: 'inline-block',
-    width: 5
-  },
-  DATE: {
-    display: 'inline-block',
-    paddingTop: 4,
-    paddingBottom: 2,
-    paddingLeft: 5,
-    paddingRight: 5
-  },
-  UP: {
-    color: '#4caf50'
-  },
-  DOWN: {
-    color: '#f44336'
-  },
-  EQUAL: {
-    color: '#2f7ed8'
-  },
-  SHOW_HIDE: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 20
-  }
+const CL_BT = 'bt';
+const S_ROOT = {
+  position: 'relative',
+  display: 'inline-block',
+  marginLeft: 10
+},
+      S_SPAN = {
+  marginLeft: 5,
+  fontWeight: 'bold'
+},
+      S_W5 = {
+  display: 'inline-block',
+  width: 5
+},
+      S_DATE = {
+  display: 'inline-block',
+  padding: '4px 5px 2px 5px'
+},
+      S_UP = {
+  color: '#4caf50'
+},
+      S_DOWN = {
+  color: '#f44336'
+},
+      S_EQUAL = {
+  color: '#2f7ed8'
+};
+const _hmDirection = {
+  DF: [null],
+  [_Type.Direction.DOWN]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgDown.default, {}), S_DOWN],
+  [_Type.Direction.UP]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgUp.default, {}), S_UP],
+  [_Type.Direction.EQUAL]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgEqual.default, {}), S_EQUAL]
 };
 
-var _getDirection = function _getDirection(direction) {
-  switch (direction) {
-    case _Type.Direction.DOWN:
-      return {
-        _svgDirection: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgDown["default"], {}),
-        _dStyle: S.DOWN
-      };
+const _getDirection = direction => _hmDirection[direction] || _hmDirection.DF;
 
-    case _Type.Direction.UP:
-      return {
-        _svgDirection: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgUp["default"], {}),
-        _dStyle: S.UP
-      };
-
-    case _Type.Direction.EQUAL:
-      return {
-        _svgDirection: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgEqual["default"], {}),
-        _dStyle: S.EQUAL
-      };
-
-    default:
-      return {
-        _svgDirection: null
-      };
-  }
+const DF_VALUE_MOVING = {
+  value: 0,
+  delta: 0,
+  percent: 0,
+  direction: _Type.Direction.EQUAL,
+  date: ''
 };
+const ValueMovingBadge = /*#__PURE__*/(0, _react.forwardRef)(({
+  isAdminMode,
+  initialVm = DF_VALUE_MOVING,
+  crValueMoving
+}, ref) => {
+  const [vm, setVm] = (0, _react.useState)(initialVm),
+        [isShowModal, setIsShowModal] = (0, _react.useState)(false),
+        _toggleModal = (0, _react.useCallback)(() => setIsShowModal(is => !is), []),
+        _closeModal = (0, _react.useCallback)(() => setIsShowModal(false), [])
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _updateDateTo = (0, _react.useCallback)(dateTo => {
+    const _vm = crValueMoving(vm, dateTo);
 
-var ValueMovingBadge = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(ValueMovingBadge, _Component);
+    if (_vm) {
+      setVm(_vm);
+      return true;
+    } else {
+      return false;
+    }
+  }, [vm]); //crValueMoving
 
-  /*
-  static propTypes = {
-    valueMoving: PropTypes.shape({
-      value: PropTypes.number,
-      delta: PropTypes.number,
-      percent: PropTypes.number,
-      direction: PropTypes.oneOf(
-        'up', 'down', 'equal', 'empty'
-      ),
-      date: PropTypes.string
-    }),
-    isAdminMode: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.bool
-    ]),
-    crValueMoving: PropTypes.func,
-    regCompVm: PropTypes.func
-  }
-  */
-  function ValueMovingBadge(props) {
-    var _this;
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-    _this = _Component.call(this, props) || this;
 
-    _this._hClickBt = function () {
-      _this.setState(function (prev) {
-        return {
-          isShowModal: !prev.isShowModal
-        };
-      });
-    };
+  (0, _react.useImperativeHandle)(ref, () => ({
+    _updateDateTo
+  }), [_updateDateTo]);
 
-    _this._hCloseModal = function (event) {
-      _this.setState({
-        isShowModal: false
-      });
-    };
-
-    _this._updateDateTo = function (dateTo) {
-      var valueMoving = _this.props.crValueMoving(_this.state.valueMoving, dateTo);
-
-      if (valueMoving) {
-        _this.setState({
-          valueMoving: valueMoving
-        });
-
-        return valueMoving;
-      } else {
-        return false;
-      }
-    };
-
-    _this.state = {
-      isShowModal: false,
-      valueMoving: props.valueMoving
-    };
-    return _this;
-  }
-
-  var _proto = ValueMovingBadge.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.props.regCompVm(this);
+  const {
+    value,
+    delta,
+    percent,
+    direction,
+    date
+  } = vm,
+        [_svgDirection, _dStyle] = _getDirection(direction),
+        _spanStyle = { ...S_SPAN,
+    ..._dStyle
   };
 
-  _proto.render = function render() {
-    var isAdminMode = this.props.isAdminMode,
-        _this$state = this.state,
-        isShowModal = _this$state.isShowModal,
-        valueMoving = _this$state.valueMoving,
-        msgDateTo = _this$state.msgDateTo,
-        value = valueMoving.value,
-        delta = valueMoving.delta,
-        percent = valueMoving.percent,
-        direction = valueMoving.direction,
-        date = valueMoving.date,
-        _getDirection2 = _getDirection(direction),
-        _svgDirection = _getDirection2._svgDirection,
-        _dStyle = _getDirection2._dStyle;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+    style: S_ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanValue.default, {
+      value: value
+    }), _svgDirection, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: _spanStyle,
+      children: percent
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: _spanStyle,
+      children: delta
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: S_W5
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+      className: CL_BT,
+      onClick: _toggleModal,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate.default, {
+        style: S_DATE,
+        date: date
+      })
+    }), _svgDirection && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal.default, {
+      isShow: isShowModal,
+      isAdminMode: isAdminMode,
+      valueMoving: vm,
+      updateDateTo: _updateDateTo,
+      onClose: _closeModal
+    })]
+  });
+});
+/*
+ValueMovingBadge.propTypes = {
+  valueMoving: PropTypes.shape({
+    value: PropTypes.number,
+    delta: PropTypes.number,
+    percent: PropTypes.number,
+    direction: PropTypes.oneOf(
+      'up', 'down', 'equal', 'empty'
+    ),
+    date: PropTypes.string
+  }),
+  isAdminMode: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool
+  ]),
+  crValueMoving: PropTypes.func,
+}
+*/
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-      style: S.ROOT,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanValue["default"], {
-        value: value
-      }), _svgDirection, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        style: (0, _extends2["default"])({}, S.DELTA, _dStyle),
-        children: percent
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        style: (0, _extends2["default"])({}, S.DELTA, _dStyle),
-        children: delta
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        style: S.G5
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-        className: CL_BT,
-        onClick: this._hClickBt,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate["default"], {
-          style: S.DATE,
-          date: date
-        })
-      }), _svgDirection !== null && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal["default"], {
-        isShow: isShowModal,
-        onClose: this._hCloseModal,
-        valueMoving: valueMoving,
-        isAdminMode: isAdminMode,
-        msgDateTo: msgDateTo,
-        updateDateTo: this._updateDateTo
-      })]
-    });
-  };
-
-  return ValueMovingBadge;
-}(_react.Component);
-
-ValueMovingBadge.defaultProps = {
-  valueMoving: {
-    value: 0,
-    delta: 0,
-    percent: 0,
-    direction: _Type.Direction.EQUAL,
-    date: ''
-  },
-  regCompVm: function regCompVm() {}
-};
 var _default = ValueMovingBadge;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ValueMovingBadge.js.map

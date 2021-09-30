@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 //import PropTypes from "prop-types";
 
 import has from '../has';
@@ -114,6 +114,8 @@ class ChartItem extends Component {
 
   constructor(props){
     super(props)
+
+    this._refVm = createRef()
 
     this._hToggleOpen = _toggle.bind(null, this, 'isOpen')
     this._hClickLegend = _toggle.bind(null, this, 'isShowLegend')
@@ -357,7 +359,7 @@ class ChartItem extends Component {
             onToggle={this._hToggleOpen}
             onClose={onCloseItem}
             crValueMoving={this._crValueMoving}
-            regCompVm={this._regCompVm}
+            refVm={this._refVm}
          />
         }
         <ShowHide
@@ -416,12 +418,10 @@ class ChartItem extends Component {
     )
   }
 
-  _regCompVm = (comp) => {
-    this._compVm = comp
-  }
   compareTo(dateTo){
-    if (this._compVm) {
-      return this._compVm._updateDateTo(dateTo);
+    const { current } = this._refVm;
+    if (current) {
+      return current._updateDateTo(dateTo);
     }
   }
 
