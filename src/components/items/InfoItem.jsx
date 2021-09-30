@@ -7,29 +7,13 @@ import FlexTokens from './FlexTokens';
 
 const _isArr = Array.isArray;
 
-const S = {
-  ROOT: {
-    marginBottom: 10
-  },
-  HEADER: {
-    height: 33
-  },
-  CAPTION: {
-    width: 'auto'
-  },
-  INFO: {
-    paddingTop: 8,
-    paddingLeft: 8,
-    paddingRight: 8
-  },
-  DESCR: {
-    paddingLeft: 4,
-    paddingRight: 4,
-    lineHeight: 1.8
-  },
-  LINKS: {
-    listStyle: 'none',
-  }
+const S_ROOT = { marginBottom: 10 }
+, S_HEADER = { height: 33 }
+, S_CAPTION = { width: 'auto' }
+, S_INFO = { padding: '8px 8px 0 8px' }
+, S_DESCR = {
+  padding: '0 4px',
+  lineHeight: 1.8
 };
 
 const _crLinkItem = ({href, caption}) => (
@@ -48,7 +32,7 @@ const Descr = ({
   if (!descr) return null;
   return (
     <A.OpenClose caption={caption}>
-      <div style={{...S.DESCR, ...style}}>
+      <div style={{...S_DESCR, ...style}}>
         {descr}
       </div>
       <A.ItemList items={links} crItem={_crLinkItem} />
@@ -63,20 +47,23 @@ const _crStackItem = (item, index) => {
     : <Descr key={_key} {...item} />
 };
 
-const InfoItem = ({ config={}, onCloseItem }) => {
-  const { caption, items } = config
-  , [isOpen, toggleIsOpen] = useToggle(true);
+const InfoItem = ({
+  config,
+  onCloseItem
+}) => {
+  const [isOpen, toggleIsOpen] = useToggle(true)
+  , { caption, items } = config || {};
   return (
-    <div style={S.ROOT}>
+    <div style={S_ROOT}>
       <ItemHeader
+        rootStyle={S_HEADER}
+        captionStyle={S_CAPTION}
         isOpen={isOpen}
-        rootStyle={S.HEADER}
-        captionStyle={S.CAPTION}
         caption={caption}
         onClick={toggleIsOpen}
         onClose={onCloseItem}
       />
-      <A.ShowHide isShow={isOpen} style={S.INFO}>
+      <A.ShowHide style={S_INFO} isShow={isOpen} >
          <A.ItemStack items={items} crItem={_crStackItem} />
       </A.ShowHide>
     </div>
