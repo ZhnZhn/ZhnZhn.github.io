@@ -133,13 +133,13 @@ describe('crValueMoving', () => {
     });
     expect(r.direction).toBe(_Direction.UP);
   });
-  test('should use df Direction as {} for output', () => {
+  test('should use df Direction as Direction for output', () => {
     const r = fn({ ..._crVmInputs('200.02', '100.01'),
       ...{
         Direction: void 0
       }
     });
-    expect(r.direction).toBe(undefined);
+    expect(r.direction).toBe(_Type.Direction.UP);
   });
   test('should return correct obj for strings values with nowValue="0"', () => {
     const r = fn(_crVmInputs('0', '100'));

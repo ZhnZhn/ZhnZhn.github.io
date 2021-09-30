@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
+var _Type = require("../constants/Type");
+
 const fnEcho = value => value;
 
 const MAX_TO_ROUND = '1000000';
@@ -65,7 +67,7 @@ const mathFn = {
   crValueMoving: ({
     nowValue,
     prevValue,
-    Direction: D = {},
+    Direction: D = _Type.Direction,
     fnFormat = fnEcho,
     dfR
   }) => {

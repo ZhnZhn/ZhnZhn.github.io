@@ -9,8 +9,6 @@ import DateUtils from '../utils/DateUtils';
 
 import Chart from './Chart';
 
-import { Direction } from '../constants/Type';
-
 import calcYAxisOffset from './calcYAxisOffset';
 import crMetricConfig from './crMetricConfig';
 import dateFormat from './dateFormat';
@@ -25,13 +23,13 @@ const {
 } = mathFn;
 
 const _isFn = fn => typeof fn === 'function'
-, _isNaN = Number.isNaN
 , _isNumber = n => typeof n === 'number'
     && n-n===0
-, _isUndef = v => typeof v === 'undefined'
 , _isArr = Array.isArray
 , _assign = Object.assign
-, _fnFindIndex = fnArr.findIndexByProp('x');
+, _findIndexByX = fnArr.findIndexByProp('x')
+, INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY
+, INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY;
 
 const C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
@@ -53,13 +51,10 @@ const _initOptionsZhSeries = chart => {
   return options;
 };
 
-const _crYAxisColor = chart => {
-  switch(chart.yAxis.length){
-    case 1: return C.C1_SECOND_Y_AXIS;
-    case 2: return C.C2_SECOND_Y_AXIS;
-    default: return C.C1_SECOND_Y_AXIS;
-  }
-};
+const _crYAxisColor = chart =>
+  chart.yAxis.length === 2
+    ? C.C2_SECOND_Y_AXIS
+    : C.C1_SECOND_Y_AXIS;
 
 const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
   let _color;
@@ -96,13 +91,17 @@ const _calcXyForLabel = options => {
   , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
   return { x, y };
 };
-const _renderSeriesLabel = ({ chart, options, series, label='', color }) => {
-  const seriesText = (label.length>C.SERIA_LABEL_CHARS)
-    ? label.substring(0, C.SERIA_LABEL_CHARS)
-    : label
+
+const _getLabelText = label => (label || '').length>C.SERIA_LABEL_CHARS
+  ? label.substring(0, C.SERIA_LABEL_CHARS)
+  : label;
+
+const _renderSeriesLabel = ({ chart, options, series, label, color }) => {
+  const labelText = _getLabelText(label)
   , { x, y } = _calcXyForLabel(options);
 
-  return chart.renderer.text(seriesText, x, y)
+  return chart.renderer
+    .text(labelText, x, y)
     .css({
       color: color || options.colors[series._colorIndex],
       'font-size': '16px',
@@ -112,17 +111,23 @@ const _renderSeriesLabel = ({ chart, options, series, label='', color }) => {
 };
 
 
+const _getMinMaxFromSeries = (series, options) => {
+  const { minY, maxY } = series || {}
+  , _optionYAxis = options?.yAxis?.[0]
+  , { min, max } = _optionYAxis || {}
+  , _min = min>minY ? minY : min
+  , _max = max<maxY ? maxY : max;
+  return [
+    _isNumber(_min) ? _min : null,
+    _isNumber(_max) ? _max : null
+  ];
+}
+
 const _updateYAxisMinMax = ({ hasSecondYAxis, series, options, chart }) => {
   const _yAxis = chart?.yAxis?.[0];
   if (!hasSecondYAxis && _isFn(_yAxis?.update)) {
-    const { minY, maxY } = series || {}
-    , _optionYAxis = options?.yAxis?.[0]
-    , { min, max } = _optionYAxis || {}
-    , _min = min>minY ? minY : min
-    , _max = max<maxY ? maxY : max
-    , _minE = _isNumber(_min) ? _min : null
-    , _maxE = _isNumber(_max) ? _max : null;
-    _yAxis.setExtremes(_minE, _maxE, true)
+    const [min, max] = _getMinMaxFromSeries(series, options);
+    _yAxis.setExtremes(min, max, true)
   }
 };
 
@@ -142,6 +147,23 @@ const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
 });
 
 
+const _crBigValueOrZero = (value, initialValue) =>
+  value !== initialValue
+    ? Big(value)
+    : Big(0);
+
+const _getMinMaxFromEvent = ({
+  userMin,
+  userMax,
+  min,
+  max
+}) => [
+  userMin || min,
+  userMin ? userMax : max
+];
+
+
+
 const ChartFn = {
   toDmy, toTdmy, toTdmyIf,
   calcYAxisOffset,
@@ -159,6 +181,7 @@ const ChartFn = {
         chart, options, series, label,
         color: color || _color
       });
+
     options.zhSeries.count +=1
     options.zhSeries.titleEls.push(textEl)
 
@@ -166,12 +189,9 @@ const ChartFn = {
   },
 
   zoomIndicatorCharts(event){
-    const zhDetailCharts = this.chart.options.zhDetailCharts
-    , { userMin, userMax, min, max } = event
-    , _min = userMin || min
-    , _max = userMin ? userMax : max;
-    zhDetailCharts.forEach(chart => {
-      chart.xAxis[0].setExtremes(_min, _max, true, true);
+    const [min, max] =_getMinMaxFromEvent(event);
+    (this.chart.options.zhDetailCharts || []).forEach(chart => {
+      chart.xAxis[0].setExtremes(min, max, true, true);
     })
   },
   afterSetExtremesYAxis(event){
@@ -187,24 +207,23 @@ const ChartFn = {
   crValueMoving(chart, prev, dateTo){
     const points = chart.series[0].data
     , mlsUTC = DateUtils.dmyToUTC(dateTo)
-    , index = _isNaN(mlsUTC)
-        ? -1
-        : _fnFindIndex(points, mlsUTC)
-    , valueTo = index !== -1
-        ? points[index].y
-        : void 0;
+    , index = _isNumber(mlsUTC)
+        ? _findIndexByX(points, mlsUTC)
+        : -1
+    , valueTo = index === -1
+        ? void 0
+        : points[index].y;
 
-    return _isUndef(valueTo)
-      ? void 0
-      : _assign({}, prev,
+    return _isNumber(valueTo)
+      ? _assign({}, prev,
           crValueMoving({
             nowValue: prev.value,
             prevValue: valueTo,
-            Direction: Direction,
             fnFormat: formatAllNumber
           }),
           { valueTo, dateTo }
-        );
+        )
+     : void 0;
   },
 
   toNumberFormat: formatNumber,
@@ -214,32 +233,26 @@ const ChartFn = {
   crTpId: () => crId('TP_'),
 
   setPlotLinesMinMax: ({ plotLines, min, max }) => {
-    if ( max>Number.NEGATIVE_INFINITY ){
+    if ( max>INITIAL_MAX_NUMBER ){
       _setPlotLine(plotLines[0], max)
     }
-    if ( min<Number.POSITIVE_INFINITY ){
+    if ( min<INITIAL_MIN_NUMBER ){
       _setPlotLine(plotLines[1], min)
     }
   },
   setPlotLinesDeltas: ({ plotLines, min, max, value }) => {
-    const _bMax = max !== Number.NEGATIVE_INFINITY
-        ? Big(max)
-        : Big(0)
-    , _bMin = min !== Number.POSITIVE_INFINITY
-        ? Big(min)
-        : Big(0)
-    , _bValue = value !== null
-        ? Big(value)
-        : Big(0)
-    , perToMax = _calcPerTo(_bMax, _bValue, _bValue)
-    , perToMin = _calcPerTo(_bValue, _bMin, _bValue);
+    const _bMax = _crBigValueOrZero(max, INITIAL_MAX_NUMBER)
+    , _bMin = _crBigValueOrZero(min, INITIAL_MIN_NUMBER)
+    , _bValue = _crBigValueOrZero(value, null)
+    , _perToMax = _calcPerTo(_bMax, _bValue, _bValue)
+    , _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
 
-    _setPlotLine(plotLines[0], _crPoint(_bMax), _crDelta(perToMax))
-    _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(perToMin))
+    _setPlotLine(plotLines[0], _crPoint(_bMax), _crDelta(_perToMax))
+    _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(_perToMin))
   },
 
-  calcMinY: (min, max) => max>Number.NEGATIVE_INFINITY
-    && min<Number.POSITIVE_INFINITY
+  calcMinY: (min, max) => max>INITIAL_MAX_NUMBER
+    && min<INITIAL_MIN_NUMBER
       ? min - ((max-min)*1/6)
       : void 0,
 
@@ -247,10 +260,7 @@ const ChartFn = {
     if (y == null) {
       return;
     }
-    const max=data.length;
-    for (let i=0; i<max; i++ ){
-      data[i].y = y;
-    }
+    data.forEach(point => point.y = y)
   }
 
 };

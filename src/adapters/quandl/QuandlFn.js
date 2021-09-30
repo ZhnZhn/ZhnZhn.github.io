@@ -4,7 +4,6 @@ import formatAllNumber from '../../utils/formatAllNumber'
 import mathFn from '../../math/mathFn';
 
 import dt from '../../utils/DateUtils';
-import { Direction } from '../../constants/Type';
 
 import AdapterFn from '../AdapterFn';
 
@@ -26,7 +25,7 @@ const _isStrEqTo = (str, strTo) => _isStr(str)
 
 const QuandlFn = {
   valueMoving,
-  
+
   getData: (json) => {
     const { dataset={}, datatable={} } = json;
     return dataset.data || datatable.data || [];
@@ -112,7 +111,6 @@ const QuandlFn = {
     return mathFn.crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
-      Direction: Direction,
       fnFormat: formatAllNumber
     });
   },

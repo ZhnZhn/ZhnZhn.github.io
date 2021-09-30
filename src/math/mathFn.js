@@ -1,4 +1,6 @@
-import Big from 'big.js'
+import Big from 'big.js';
+
+import { Direction } from '../constants/Type';
 
 const fnEcho = value => value;
 
@@ -59,7 +61,7 @@ const mathFn = {
   crValueMoving: ({
     nowValue,
     prevValue,
-    Direction:D={},
+    Direction:D=Direction,
     fnFormat=fnEcho,
     dfR
   }) => {

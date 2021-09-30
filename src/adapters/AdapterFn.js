@@ -115,9 +115,8 @@ const AdapterFn = {
   }) => mathFn.crValueMoving({
     nowValue: bNowValue,
     prevValue: bPrevValue,
-    Direction: Direction,
     fnFormat: formatAllNumber,
-    dfR: dfR
+    dfR
   }),
 
 
