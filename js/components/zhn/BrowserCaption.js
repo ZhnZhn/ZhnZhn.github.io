@@ -19,21 +19,9 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
 const TH_ID = 'ELEMENT';
-const CL_GAP_RIGHT = 'gap-right',
+const CL_BR_CAPTION = 'br-caption text-clip gap-right',
       CL_NOT_SELECTED = 'not-selected';
-const S_ROOT = {
-  position: 'relative',
-  backgroundColor: '#1b2836',
-  height: 34,
-  padding: '0 42px 0 10px',
-  marginBottom: 10,
-  borderTopLeftRadius: 4,
-  borderTopRightRadius: 4,
-  overflow: 'hidden',
-  whiteSpace: 'nowrap',
-  textOverflow: 'clip'
-},
-      S_CAPTION = {
+const S_CAPTION = {
   position: 'relative',
   top: 6,
   paddingRight: 8,
@@ -67,9 +55,8 @@ const BrowserCaption = ({
 }) => {
   const TS = (0, _useTheme.default)(TH_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: CL_GAP_RIGHT,
-    style: { ...S_ROOT,
-      ...style,
+    className: CL_BR_CAPTION,
+    style: { ...style,
       ...TS.ROOT
     },
     children: [_isFn(onMore) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {

@@ -9,22 +9,10 @@ import SvgClose from './SvgClose';
 
 const TH_ID = 'ELEMENT';
 
-const CL_GAP_RIGHT = 'gap-right'
+const CL_BR_CAPTION = 'br-caption text-clip gap-right'
 , CL_NOT_SELECTED = 'not-selected';
 
-const S_ROOT = {
-  position: 'relative',
-  backgroundColor: '#1b2836',
-  height: 34,
-  padding: '0 42px 0 10px',
-  marginBottom: 10,
-  borderTopLeftRadius: 4,
-  borderTopRightRadius: 4,
-  overflow: 'hidden',
-  whiteSpace: 'nowrap',
-  textOverflow: 'clip'
-},
-S_CAPTION = {
+const S_CAPTION = {
   position: 'relative',
   top: 6,
   paddingRight: 8,
@@ -60,8 +48,8 @@ const BrowserCaption = ({
   const TS = useTheme(TH_ID);
   return (
   <div
-    className={CL_GAP_RIGHT}
-    style={{...S_ROOT, ...style, ...TS.ROOT}}
+    className={CL_BR_CAPTION}
+    style={{...style, ...TS.ROOT}}
   >
      {
        _isFn(onMore) &&
