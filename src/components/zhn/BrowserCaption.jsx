@@ -9,81 +9,71 @@ import SvgClose from './SvgClose';
 
 const TH_ID = 'ELEMENT';
 
-const CL = {
-  ROOT: 'gap-right',
-  NOT_SELECTED: 'not-selected'
+const CL_GAP_RIGHT = 'gap-right'
+, CL_NOT_SELECTED = 'not-selected';
+
+const S_ROOT = {
+  position: 'relative',
+  backgroundColor: '#1b2836',
+  height: 34,
+  padding: '0 42px 0 10px',
+  marginBottom: 10,
+  borderTopLeftRadius: 4,
+  borderTopRightRadius: 4,
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'clip'
+},
+S_CAPTION = {
+  position: 'relative',
+  top: 6,
+  paddingRight: 8,
+  fontSize: '18px',
+  fontWeight: '500'
+},
+S_BT_MORE = {
+  position: 'relative',
+  top: 3
+},
+S_CHECK_BOX = {
+  margin: '0 10px 0 6px'
+},
+S_SVG_CLOSE = {
+  position: 'absolute',
+  top: 6,
+  right: 0
 };
 
-const S = {
-  ROOT: {
-    position: 'relative',
-    backgroundColor: '#1b2836',
-    height: 34,
-    paddingLeft: 10,
-    paddingRight: 42,
-    marginBottom: 10,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'clip'
-  },
-  CAPTION: {
-    position: 'relative',
-    top: 6,
-    paddingRight: 8,
-    fontSize: '18px',
-    fontWeight: '500'
-  },
-  BT_MORE: {
-    position: 'relative',
-    top: 3
-  },
-  SVG_MORE: {
-    fill: 'inherit',
-    stroke: 'inherit'
-  },
-  CHECK_BOX: {
-    position: 'relative',
-    top: 1,
-    marginLeft: 6,
-    marginRight: 10
-  },
-  SVG_CLOSE: {
-    position: 'absolute',
-    top: 6,
-    right: 0
-  }
-};
 
 const _isFn = fn => typeof fn === 'function';
 
 const BrowserCaption = ({
   style,
-  caption, captionStyle,
+  captionStyle,
+  caption,
   children,
   onMore,
-  onCheck, onUnCheck,
+  onCheck,
+  onUnCheck,
   onClose
 }) => {
   const TS = useTheme(TH_ID);
   return (
   <div
-    className={CL.ROOT}
-    style={{...S.ROOT, ...style, ...TS.ROOT}}
+    className={CL_GAP_RIGHT}
+    style={{...S_ROOT, ...style, ...TS.ROOT}}
   >
      {
        _isFn(onMore) &&
        <SvgMore
-          style={S.BT_MORE}
-          svgStyle={S.SVG_MORE}
+          style={S_BT_MORE}
           onClick={onMore}
        />
      }
      {
         (_isFn(onCheck) && _isFn(onUnCheck)) &&
         <SvgCheckBox
-           style={S.CHECK_BOX}
+           style={S_CHECK_BOX}
            color={COLOR.GREEN}
            checkedColor={TS.ROOT.backgroundColor}
            onCheck={onCheck}
@@ -91,14 +81,14 @@ const BrowserCaption = ({
         />
      }
      <span
-        className={CL.NOT_SELECTED}
-        style={{...S.CAPTION, ...captionStyle}}
+        className={CL_NOT_SELECTED}
+        style={{...S_CAPTION, ...captionStyle}}
      >
        {caption}
     </span>
     {children}
     <SvgClose
-      style={S.SVG_CLOSE}
+      style={S_SVG_CLOSE}
       onClose={onClose}
     />
   </div>

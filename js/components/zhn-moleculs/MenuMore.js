@@ -18,10 +18,6 @@ const CL_MENU_MORE = 'popup-menu dialog__menu-more',
   position: 'absolute',
   top: 1,
   left: 2
-},
-      S_BT_MORE_SVG = {
-  stroke: 'inherit',
-  fill: 'inherit'
 };
 const MenuMore = /*#__PURE__*/(0, _react.forwardRef)(({
   isMore,
@@ -35,9 +31,8 @@ const MenuMore = /*#__PURE__*/(0, _react.forwardRef)(({
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
-      btRef: ref,
+      ref: ref,
       style: S_BT_MORE,
-      svgStyle: S_BT_MORE_SVG,
       onClick: toggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
       isShow: isMore,

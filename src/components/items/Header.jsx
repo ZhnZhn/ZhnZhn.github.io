@@ -82,17 +82,19 @@ const ItemTime = ({ itemTime }) => itemTime
   : null;
 
 const MenuMore = ({
-  isMore, moreModel,
-  sliderStyle, onToggle
+  isMore,
+  moreModel,
+  sliderStyle,
+  onToggle
 }) => {
   const [refBtSvg, toggleFocus] = useFnFocus(onToggle);
 
   if (!moreModel) return null;
   return (<>
       <SvgMore
+        ref={refBtSvg}
         style={S.BT_MORE}
         svgStyle={S.SVG_MORE}
-        btRef={refBtSvg}
         onClick={onToggle}
       />
       <ModalSlider

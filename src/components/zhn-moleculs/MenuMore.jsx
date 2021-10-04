@@ -8,9 +8,6 @@ const CL_MENU_MORE = 'popup-menu dialog__menu-more'
   position: 'absolute',
   top: 1,
   left: 2
-}, S_BT_MORE_SVG = {
-  stroke: 'inherit',
-  fill: 'inherit'
 };
 
 const MenuMore = forwardRef(({
@@ -23,9 +20,8 @@ const MenuMore = forwardRef(({
   return (
     <>
       <SvgMore
-        btRef={ref}
+        ref={ref}
         style={S_BT_MORE}
-        svgStyle={S_BT_MORE_SVG}
         onClick={toggle}
       />
       <ModalSlider

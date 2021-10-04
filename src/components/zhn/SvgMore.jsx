@@ -1,25 +1,20 @@
+import { forwardRef } from 'react';
+
 const CL_BT_MORE = 'bt-more';
 
-const S = {
-  SVG: {
-    fill: 'black',
-    stroke: 'black'
-  }
-};
-
-const SvgMore = ({
-  style, svgStyle,
-  btRef,
+const SvgMore = forwardRef(({
+  style,
+  svgStyle,
   onClick
-}) => (
+}, ref) => (
   <button
-    ref={btRef}
+    ref={ref}
     className={CL_BT_MORE}
     style={style}
     onClick={onClick}
   >
     <svg
-      style={{ ...S.SVG, ...svgStyle }}
+      style={svgStyle}
       width="6px" height="22px"
       viewBox="0 0 6 22"
       preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +24,7 @@ const SvgMore = ({
       <circle cx="3" cy="18" r="2" />
     </svg>
   </button>
-);
+));
 
 
 export default SvgMore

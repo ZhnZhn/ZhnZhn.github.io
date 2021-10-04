@@ -102,9 +102,9 @@ const MenuMore = ({
   if (!moreModel) return null;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
+      ref: refBtSvg,
       style: S.BT_MORE,
       svgStyle: S.SVG_MORE,
-      btRef: refBtSvg,
       onClick: onToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
       isShow: isMore,
