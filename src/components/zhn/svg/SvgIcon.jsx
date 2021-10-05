@@ -1,24 +1,22 @@
-const SvgIcon = ({ color, size, children, ...restProps }) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
+import Svg from './Svg';
+
+const SvgIcon = ({
+  style,
+  color='currentColor',
+  size='24',
+  children
+}) => (
+    <Svg
+      w={size}
+      style={style}
       stroke={color}
+      fill="none"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      {...restProps}
     >
       {children}
-    </svg>
+    </Svg>
 );
-
-
-SvgIcon.defaultProps = {
-  color: 'currentColor',
-  size: '24',
-};
 
 export default SvgIcon

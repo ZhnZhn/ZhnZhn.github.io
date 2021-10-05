@@ -41,10 +41,8 @@ const CL = {
 };
 
 const S_SVG_BT = {
-  position: 'relative',
-  top: -1,
   verticalAlign: 'middle',
-  margin: '0 8px'
+  margin: '0 8px 3px 8px'
 };
 
 const MODEL = crBrowserModel();

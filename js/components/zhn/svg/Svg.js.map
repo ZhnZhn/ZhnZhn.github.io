@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn/svg/Svg.js"
+ ],
+ "file": "../../../../src/components/zhn/svg/Svg.js",
+ "names": [
+  "Svg",
+  "w",
+  "h",
+  "children",
+  "restProps"
+ ],
+ "mappings": ";;;;;;;AACA,MAAMA,GAAG,GAAG,CAAC;AACXC,EAAAA,CADW;AAEXC,EAAAA,CAAC,GAACD,CAFS;AAGXE,EAAAA,QAHW;AAIX,KAAGC;AAJQ,CAAD,kBAMV;AACE,EAAA,KAAK,EAAC,4BADR;AAEE,EAAA,KAAK,EAAKH,CAAL,OAFP;AAGE,EAAA,MAAM,EAAKC,CAAL,OAHR;AAIE,EAAA,OAAO,WAASD,CAAT,SAAcC,CAJvB;AAAA,KAKME,SALN;AAAA,YAOGD;AAPH,EANF;;eAiBeH,G"
+}

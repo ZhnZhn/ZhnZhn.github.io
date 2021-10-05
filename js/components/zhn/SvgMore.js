@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports.default = void 0;
 
 var _react = require("react");
+
+var _Svg = _interopRequireDefault(require("./svg/Svg"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -17,13 +21,10 @@ const SvgMore = /*#__PURE__*/(0, _react.forwardRef)(({
   className: CL_BT_MORE,
   style: style,
   onClick: onClick,
-  children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
+  children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.default, {
+    w: "6",
+    h: "22",
     style: svgStyle,
-    width: "6px",
-    height: "22px",
-    viewBox: "0 0 6 22",
-    preserveAspectRatio: "none",
-    xmlns: "http://www.w3.org/2000/svg",
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
       cx: "3",
       cy: "4",
