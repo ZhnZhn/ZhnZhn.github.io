@@ -3,35 +3,34 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _jsxRuntime = require("react/jsx-runtime.js");
+var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 
 var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
 
-//import PropTypes from "prop-types";
-var _renderValidationMessages = function _renderValidationMessages(validationMessages) {
-  return validationMessages.map(function (msg, index) {
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        style: _DialogStyles["default"].VM_MSG_NUMBER,
-        children: index + 1
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        style: _DialogStyles["default"].VM_MSG,
-        children: msg
-      })]
-    }, msg);
-  });
-};
+var _jsxRuntime = require("react/jsx-runtime");
 
-var ValidationMessages = function ValidationMessages(_ref) {
-  var _ref$validationMessag = _ref.validationMessages,
-      validationMessages = _ref$validationMessag === void 0 ? [] : _ref$validationMessag;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: _DialogStyles["default"].VM_CONT,
-    children: _renderValidationMessages(validationMessages)
-  });
-};
+//import PropTypes from "prop-types";
+const _crItem = (msg, index) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: _DialogStyles.default.VM_MSG_NUMBER,
+    children: index + 1
+  }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: _DialogStyles.default.VM_MSG,
+    children: msg
+  })]
+}, msg);
+
+const ValidationMessages = ({
+  validationMessages
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  style: _DialogStyles.default.VM_CONT,
+  children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+    items: validationMessages,
+    crItem: _crItem
+  })
+});
 /*
 ValidationMessages.propTypes = {
   validationMessages : PropTypes.arrayOf(PropTypes.shape({
@@ -42,5 +41,5 @@ ValidationMessages.propTypes = {
 
 
 var _default = ValidationMessages;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ValidationMessages.js.map
