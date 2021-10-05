@@ -3,34 +3,23 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _jsxRuntime = require("react/jsx-runtime.js");
+var _BtSvgX = _interopRequireDefault(require("./BtSvgX"));
 
-var _SvgX = _interopRequireDefault(require("./svg/SvgX"));
+var _jsxRuntime = require("react/jsx-runtime");
 
-//import PropTypes from "prop-types";
-var CL = "bt-svg-close";
+const CL = "bt-svg-close";
 
-var SvgClose = function SvgClose(_ref) {
-  var style = _ref.style,
-      onClose = _ref.onClose;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-    tabIndex: "-1",
-    className: CL,
-    style: style,
-    onClick: onClose,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgX["default"], {})
-  });
-};
-/*
-SvgClose.propTypes = {
-  style: PropTypes.object,
-  onClose: PropTypes.func
-}
-*/
-
+const SvgClose = ({
+  style,
+  onClose
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.default, {
+  className: CL,
+  style: style,
+  onClick: onClose
+});
 
 var _default = SvgClose;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=SvgClose.js.map
