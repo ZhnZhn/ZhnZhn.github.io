@@ -4,15 +4,11 @@ import useRefInit from '../hooks/useRefInit';
 import useKeyEnter from '../hooks/useKeyEnter';
 
 import C from '../styles/Color';
+import Svg100 from './svg/Svg100';
 
-const CL_CHB = 'chb';
-const S = {
-  SVG: {
-    display: 'inline-block'
-  }
-};
-
-const C_GREY = "#777777";
+const CL_CHB = 'chb'
+, S_SVG = { display: 'inline-block' }
+, C_GREY = "#777777";
 
 const SvgChecked = ({ stroke }) => (
   <path
@@ -70,10 +66,9 @@ const SvgCheckBox = ({
        onClick={_hToggle}
        onKeyDown={_hKeyDown}
     >
-      <svg
-        viewBox="0 0 16 16" width="100%" height="100%"
-        preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
-        style={S.SVG}
+      <Svg100
+        w="16"
+        style={S_SVG}
       >
         <rect
            x="1" y="1"
@@ -86,7 +81,7 @@ const SvgCheckBox = ({
            ? <SvgChecked stroke={checkedColor} />
            : null
         }
-      </svg>
+      </Svg100>
     </div>
   );
 };
