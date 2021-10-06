@@ -1,47 +1,37 @@
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
-import A from '../Comp'
+import A from '../Comp';
 
-const CL_DESCR = 'info__descr';
-const C_DESCR_OPEN = '#1b2836';
-const S = {
-  ROOT_SHOW: {
-    position: 'relative',
-    display: 'block',
-    paddingTop: 34,
-    paddingRight: 20,
-    paddingLeft: 8
-  },
-  ROOT_HIDE: {
-    position: 'relative',
-    display: 'none'
-  },
-  BT_CAPTION: {
-    left: 286
-  },
-  TO_DATE_INFO: {
-    marginTop: 4
-  },
-  INFO_CAPTION: {
-    display: 'inline-block',
-    width: 90,
-    paddingRight: 5,
-    color: '#1b75bb',
-    textAlign: 'right',
-    fontWeight: 'bold'
-  },
-  INFO_TEXT: {
-    color: 'black',
-    fontWeight: 'bold',
-    textTransform: 'capitalize'
-  },
-  DESCR_INFO: {
-    lineHeight: 1.7
-  },
-  DESCR_TEXT: {
-    color: 'gray',
-    fontWeight: 'bold'
-  }
+const CL_DESCR = 'info__descr'
+, C_DESCR_OPEN = '#1b2836'
+, S_ROOT_SHOW = {
+  position: 'relative',
+  display: 'block',
+  padding: '34px 20px 0 8px'
+}
+, S_ROOT_HIDE = {
+  position: 'relative',
+  display: 'none'
+}
+, S_BT_CAPTION = { left: 286 }
+, S_TO_DATE_INFO = { marginTop: 4 }
+, S_INFO_CAPTION = {
+  display: 'inline-block',
+  width: 90,
+  paddingRight: 5,
+  color: '#1b75bb',
+  textAlign: 'right',
+  fontWeight: 'bold'
+}
+, S_INFO_TEXT = {
+  color: 'black',
+  fontWeight: 'bold',
+  textTransform: 'capitalize'
+}
+, S_DESCR_INFO = { lineHeight: 1.7 }
+, S_DESCR_TEXT = {
+  color: 'gray',
+  fontWeight: 'bold'
 };
 
 const _renderQuandlLink = (dbCode, dsCode) => {
@@ -56,7 +46,7 @@ const _renderNativeLink = (linkFn, item) => {
   return Comp != null
     ? <Comp item={item} />
     : null;
-}
+};
 
 const _isShortDescr = descr => descr
  && descr.length<200;
@@ -76,37 +66,37 @@ const PanelDataInfo = ({
     description
   } = info || {}
  , { item, linkFn } = zhInfo || {}
- , _style = isShow ? S.ROOT_SHOW : S.ROOT_HIDE;
+ , _style = isShow ? S_ROOT_SHOW : S_ROOT_HIDE;
 
   return (
     <div style={_style}>
       <A.ButtonTab
-        style={S.BT_CAPTION}
+        style={S_BT_CAPTION}
         caption="Chart"
         onClick={onClickChart}
       />
       <A.InfoPart
          text={name}
-         styleText={S.INFO_TEXT}
+         styleText={S_INFO_TEXT}
       />
       <A.InfoPart
          caption="From Date"
-         styleCaption={S.INFO_CAPTION}
+         captionStyle={S_INFO_CAPTION}
          text={fromDate}
-         styleText={S.INFO_TEXT}
+         textStyle={S_INFO_TEXT}
       />
       <A.InfoPart
-         style={S.TO_DATE_INFO}
+         style={S_TO_DATE_INFO}
          caption="To Date"
-         styleCaption={S.INFO_CAPTION}
+         captionStyle={S_INFO_CAPTION}
          text={toDate}
-         styleText={S.INFO_TEXT}
+         textStyle={S_INFO_TEXT}
       />
       <A.InfoPart
          caption="Frequency"
-         styleCaption={S.INFO_CAPTION}
+         captionStyle={S_INFO_CAPTION}
          text={frequency}
-         styleText={S.INFO_TEXT}
+         textStyle={S_INFO_TEXT}
       />
       {_renderQuandlLink(database_code, dataset_code)}
       { description && <A.OpenClose
@@ -115,11 +105,11 @@ const PanelDataInfo = ({
            openColor={C_DESCR_OPEN}
           >
             <A.InfoPart
-               style={S.DESCR_INFO}
+               style={S_DESCR_INFO}
                isHtml={true}
                text={description}
-               classText={CL_DESCR}
-               styleText={S.DESCR_TEXT}
+               textCn={CL_DESCR}
+               textStyle={S_DESCR_TEXT}
             />
          </A.OpenClose>
       }

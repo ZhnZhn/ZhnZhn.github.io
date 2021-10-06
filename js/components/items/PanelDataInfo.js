@@ -3,134 +3,130 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNativeLink"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
-var CL_DESCR = 'info__descr';
-var C_DESCR_OPEN = '#1b2836';
-var S = {
-  ROOT_SHOW: {
-    position: 'relative',
-    display: 'block',
-    paddingTop: 34,
-    paddingRight: 20,
-    paddingLeft: 8
-  },
-  ROOT_HIDE: {
-    position: 'relative',
-    display: 'none'
-  },
-  BT_CAPTION: {
-    left: 286
-  },
-  TO_DATE_INFO: {
-    marginTop: 4
-  },
-  INFO_CAPTION: {
-    display: 'inline-block',
-    width: 90,
-    paddingRight: 5,
-    color: '#1b75bb',
-    textAlign: 'right',
-    fontWeight: 'bold'
-  },
-  INFO_TEXT: {
-    color: 'black',
-    fontWeight: 'bold',
-    textTransform: 'capitalize'
-  },
-  DESCR_INFO: {
-    lineHeight: 1.7
-  },
-  DESCR_TEXT: {
-    color: 'gray',
-    fontWeight: 'bold'
-  }
+var _jsxRuntime = require("react/jsx-runtime");
+
+const CL_DESCR = 'info__descr',
+      C_DESCR_OPEN = '#1b2836',
+      S_ROOT_SHOW = {
+  position: 'relative',
+  display: 'block',
+  padding: '34px 20px 0 8px'
+},
+      S_ROOT_HIDE = {
+  position: 'relative',
+  display: 'none'
+},
+      S_BT_CAPTION = {
+  left: 286
+},
+      S_TO_DATE_INFO = {
+  marginTop: 4
+},
+      S_INFO_CAPTION = {
+  display: 'inline-block',
+  width: 90,
+  paddingRight: 5,
+  color: '#1b75bb',
+  textAlign: 'right',
+  fontWeight: 'bold'
+},
+      S_INFO_TEXT = {
+  color: 'black',
+  fontWeight: 'bold',
+  textTransform: 'capitalize'
+},
+      S_DESCR_INFO = {
+  lineHeight: 1.7
+},
+      S_DESCR_TEXT = {
+  color: 'gray',
+  fontWeight: 'bold'
 };
 
-var _renderQuandlLink = function _renderQuandlLink(dbCode, dsCode) {
-  var Comp = _RouterNativeLink["default"]['QUANDL'];
+const _renderQuandlLink = (dbCode, dsCode) => {
+  const Comp = _RouterNativeLink.default['QUANDL'];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
     dbCode: dbCode,
     dsCode: dsCode
   });
 };
 
-var _renderNativeLink = function _renderNativeLink(linkFn, item) {
-  var Comp = linkFn ? _RouterNativeLink["default"][linkFn] : void 0;
+const _renderNativeLink = (linkFn, item) => {
+  const Comp = linkFn ? _RouterNativeLink.default[linkFn] : void 0;
   return Comp != null ? /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
     item: item
   }) : null;
 };
 
-var _isShortDescr = function _isShortDescr(descr) {
-  return descr && descr.length < 200;
-};
+const _isShortDescr = descr => descr && descr.length < 200;
 
-var PanelDataInfo = function PanelDataInfo(_ref) {
-  var isShow = _ref.isShow,
-      info = _ref.info,
-      zhInfo = _ref.zhInfo,
-      onClickChart = _ref.onClickChart;
-
-  var _ref2 = info || {},
-      name = _ref2.name,
-      toDate = _ref2.toDate,
-      fromDate = _ref2.fromDate,
-      frequency = _ref2.frequency,
-      database_code = _ref2.database_code,
-      dataset_code = _ref2.dataset_code,
-      description = _ref2.description,
-      _ref3 = zhInfo || {},
-      item = _ref3.item,
-      linkFn = _ref3.linkFn,
-      _style = isShow ? S.ROOT_SHOW : S.ROOT_HIDE;
+const PanelDataInfo = ({
+  isShow,
+  info,
+  zhInfo,
+  onClickChart
+}) => {
+  const {
+    name,
+    toDate,
+    fromDate,
+    frequency,
+    database_code,
+    dataset_code,
+    description
+  } = info || {},
+        {
+    item,
+    linkFn
+  } = zhInfo || {},
+        _style = isShow ? S_ROOT_SHOW : S_ROOT_HIDE;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: _style,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ButtonTab, {
-      style: S.BT_CAPTION,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ButtonTab, {
+      style: S_BT_CAPTION,
       caption: "Chart",
       onClick: onClickChart
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       text: name,
-      styleText: S.INFO_TEXT
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
+      styleText: S_INFO_TEXT
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       caption: "From Date",
-      styleCaption: S.INFO_CAPTION,
+      captionStyle: S_INFO_CAPTION,
       text: fromDate,
-      styleText: S.INFO_TEXT
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
-      style: S.TO_DATE_INFO,
+      textStyle: S_INFO_TEXT
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
+      style: S_TO_DATE_INFO,
       caption: "To Date",
-      styleCaption: S.INFO_CAPTION,
+      captionStyle: S_INFO_CAPTION,
       text: toDate,
-      styleText: S.INFO_TEXT
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
+      textStyle: S_INFO_TEXT
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       caption: "Frequency",
-      styleCaption: S.INFO_CAPTION,
+      captionStyle: S_INFO_CAPTION,
       text: frequency,
-      styleText: S.INFO_TEXT
-    }), _renderQuandlLink(database_code, dataset_code), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].OpenClose, {
+      textStyle: S_INFO_TEXT
+    }), _renderQuandlLink(database_code, dataset_code), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose, {
       isClose: !_isShortDescr(description),
       caption: "Description",
       openColor: C_DESCR_OPEN,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].InfoPart, {
-        style: S.DESCR_INFO,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
+        style: S_DESCR_INFO,
         isHtml: true,
         text: description,
-        classText: CL_DESCR,
-        styleText: S.DESCR_TEXT
+        textCn: CL_DESCR,
+        textStyle: S_DESCR_TEXT
       })
     }), _renderNativeLink(linkFn, item)]
   });
 };
 
 var _default = PanelDataInfo;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=PanelDataInfo.js.map
