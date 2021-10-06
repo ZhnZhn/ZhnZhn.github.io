@@ -47,10 +47,10 @@ const BtMoreOrLess = ({
   }) : null;
 };
 
-const _crLegendItem = (onClickItem, item) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_LegendItem.default, {
+const _crLegendItem = (item, index, onClickItem) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_LegendItem.default, {
   item: item,
   onClickItem: onClickItem
-}, item.name);
+}, item.name + index);
 
 const Legend = /*#__PURE__*/(0, _react.memo)(({
   legend = [],
@@ -58,7 +58,7 @@ const Legend = /*#__PURE__*/(0, _react.memo)(({
 }) => {
   const [isMore, toggleIsMore] = (0, _useToggle.default)(false),
         _legendItems = isMore ? legend : legend.slice(0, MORE_MAX),
-        _crStackItem = (0, _react.useCallback)(item => _crLegendItem(onClickItem, item), [onClickItem]),
+        _crStackItem = (0, _react.useCallback)((item, index) => _crLegendItem(item, index, onClickItem), [onClickItem]),
         _style = isMore ? S_MORE : { ...S_MORE,
     ...S_LESS
   };

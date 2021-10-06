@@ -29,9 +29,9 @@ const BtMoreOrLess = ({ isMore, legend, onClick }) => {
       </button>) : null;
 };
 
-const _crLegendItem = (onClickItem, item) => (
+const _crLegendItem = (item, index, onClickItem) => (
   <LegendItem
-    key={item.name}
+    key={item.name + index}
     item={item}
     onClickItem={onClickItem}
  />
@@ -42,8 +42,8 @@ const Legend = memo(({ legend=[], onClickItem }) => {
   , _legendItems = isMore
        ? legend
        : legend.slice(0, MORE_MAX)
-  , _crStackItem = useCallback(item =>
-      _crLegendItem(onClickItem, item)
+  , _crStackItem = useCallback((item, index) =>
+      _crLegendItem(item, index, onClickItem)
   , [onClickItem])
   , _style = isMore
        ? S_MORE
