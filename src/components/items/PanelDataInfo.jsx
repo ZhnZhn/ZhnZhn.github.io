@@ -31,9 +31,10 @@ const CL_DESCR = 'info__descr'
   fontWeight: 'bold'
 };
 
-const _renderQuandlLink = (dbCode, dsCode) => {
+const _renderQuandlLink = (linkId) => {
+  if (!linkId) return null;
   const Comp = RouterNativeLink['QUANDL'];
-  return (<Comp dbCode={dbCode} dsCode={dsCode} />);
+  return (<Comp linkId={linkId} />);
 };
 
 const _renderNativeLink = (linkFn, item) => {
@@ -59,7 +60,7 @@ const PanelDataInfo = ({
     toDate,
     fromDate,
     frequency,
-    database_code, dataset_code,
+    linkId,
     description
   } = info || {}
  , { item, linkFn } = zhInfo || {}
@@ -95,7 +96,7 @@ const PanelDataInfo = ({
          text={frequency}
          textStyle={S_INFO_TEXT}
       />
-      {_renderQuandlLink(database_code, dataset_code)}
+      {_renderQuandlLink(linkId)}
       { description && <A.OpenClose
            isClose={!_isShortDescr(description)}
            caption="Description"

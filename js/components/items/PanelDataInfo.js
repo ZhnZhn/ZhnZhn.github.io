@@ -50,11 +50,11 @@ const CL_DESCR = 'info__descr',
   fontWeight: 'bold'
 };
 
-const _renderQuandlLink = (dbCode, dsCode) => {
+const _renderQuandlLink = linkId => {
+  if (!linkId) return null;
   const Comp = _RouterNativeLink.default['QUANDL'];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
-    dbCode: dbCode,
-    dsCode: dsCode
+    linkId: linkId
   });
 };
 
@@ -78,8 +78,7 @@ const PanelDataInfo = ({
     toDate,
     fromDate,
     frequency,
-    database_code,
-    dataset_code,
+    linkId,
     description
   } = info || {},
         {
@@ -115,7 +114,7 @@ const PanelDataInfo = ({
       captionStyle: S_INFO_CAPTION,
       text: frequency,
       textStyle: S_INFO_TEXT
-    }), _renderQuandlLink(database_code, dataset_code), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose, {
+    }), _renderQuandlLink(linkId), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose, {
       isClose: !_isShortDescr(description),
       caption: "Description",
       openColor: C_DESCR_OPEN,

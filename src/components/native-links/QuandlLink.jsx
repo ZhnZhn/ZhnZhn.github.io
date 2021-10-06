@@ -1,22 +1,20 @@
-import Link from './Link'
+import Link from './Link';
 
-const C = {
-  ROOT_URI: 'https://www.quandl.com/data/',
-  CAPTION: 'Quandl Data Link',
-  STYLE: {
-    color: '#e05927'
-  }
-};
+const ROOT_URI = 'https://www.quandl.com/data/'
+, DF_CAPTION = 'Quandl Data Link'
+, S_LINK = { color: '#e05927' };
 
-const QuandlLink = ({ dbCode, dsCode, caption=C.CAPTION }) => {
-  if (!dbCode || !dsCode){
-    return null;
-  }
+const QuandlLink = ({
+  linkId,
+  caption=DF_CAPTION
+}) => {
+  if (!linkId) return null;
+
   return (
     <Link
-      style={C.STYLE}
-      href={`${C.ROOT_URI}${dbCode}/${dsCode}`}
-      caption={`${caption} ${dbCode}/${dsCode}`}
+      style={S_LINK}
+      href={`${ROOT_URI}${linkId}`}
+      caption={`${caption} ${linkId}`}
     />)
 };
 

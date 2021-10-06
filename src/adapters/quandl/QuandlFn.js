@@ -23,6 +23,11 @@ const _crItemCaption = ({ dfItemCaption, items, itemCaption }) => _isNumber(dfIt
 const _isStrEqTo = (str, strTo) => _isStr(str)
  && str.toLowerCase() === strTo;
 
+ const _crLinkId = (database_code, dataset_code) =>
+   database_code && dataset_code
+     ? `${database_code}/${dataset_code}`
+     : void 0;
+
 const QuandlFn = {
   valueMoving,
 
@@ -55,24 +60,24 @@ const QuandlFn = {
      }
   },
 
-  createDatasetInfo(json){
-     const { dataset={} } = json
-     , {
-       name='', description='',
-       newest_available_date='',
-       oldest_available_date='',
-       frequency='',
-       database_code='',
-       dataset_code=''
-     } = dataset;
+  createDatasetInfo({ dataset }){
+     const {
+       name,
+       description,
+       newest_available_date,
+       oldest_available_date,
+       frequency,
+       database_code,
+       dataset_code
+     } = dataset || {}
+     , linkId = _crLinkId(database_code, dataset_code);
 
      return  {
        name,
        toDate: newest_available_date,
        fromDate: oldest_available_date,
        frequency,
-       database_code,
-       dataset_code,
+       linkId,
        description
     };
   },
@@ -129,8 +134,8 @@ const QuandlFn = {
          : '';
   },
 
-  setTitleToConfig(config, option={}){
-    const { title, subtitle } = option;
+  setTitleToConfig(config, option){
+    const { title, subtitle } = option || {};
     config.title.text = title || '';
     config.subtitle.text = subtitle ? `${subtitle}:` : '';
   },
