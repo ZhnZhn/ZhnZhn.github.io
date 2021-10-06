@@ -1,4 +1,5 @@
 import trJsonIfSdn from './trJsonIfSdn';
+import trJsonIfSir from './trJsonIfSir';
 
 const _isArr = Array.isArray;
 
@@ -16,6 +17,7 @@ const loadItems = (proxy='', dfProps, id) => {
     .then(json => {
       if (_isArr(json)) {
         json = trJsonIfSdn(json, id, lT)
+        json = trJsonIfSir(json, lT)
         json.sort(_compareByText)
       }
       return json;

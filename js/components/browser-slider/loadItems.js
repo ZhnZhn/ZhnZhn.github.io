@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _trJsonIfSdn = _interopRequireDefault(require("./trJsonIfSdn"));
 
+var _trJsonIfSir = _interopRequireDefault(require("./trJsonIfSir"));
+
 const _isArr = Array.isArray;
 
 const _compareByText = (a, b) => {
@@ -28,6 +30,7 @@ const loadItems = (proxy = '', dfProps, id) => {
   }).then(res => res.json()).then(json => {
     if (_isArr(json)) {
       json = (0, _trJsonIfSdn.default)(json, id, lT);
+      json = (0, _trJsonIfSir.default)(json, lT);
       json.sort(_compareByText);
     }
 
