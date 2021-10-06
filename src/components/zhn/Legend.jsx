@@ -6,23 +6,16 @@ import LegendItem from './LegendItem';
 
 const CL_SCROLL = "with-scroll"
 , CL_BT_ML = "bt-ml"
-, MORE_MAX = 12;
-
-const S = {
-  MORE: {
-    overflowY: 'auto',
-    height: 250,
-    paddingRight: 4,
-    marginLeft: -8,
-    transform: 'scaleX(-1)'
-  },
-  LESS: {
-    height: 'auto',
-  },
-  DIV: {
-    transform: 'scaleX(-1)'
-  }
-};
+, MORE_MAX = 12
+, S_MORE = {
+  overflowY: 'auto',
+  height: 250,
+  paddingRight: 4,
+  marginLeft: -8,
+  transform: 'scaleX(-1)'
+}
+, S_LESS = { height: 'auto' }
+, S_DIV = { transform: 'scaleX(-1)' };
 
 const _crBtCaption = (isMore, len) => isMore
  ? `Less: ${MORE_MAX}`
@@ -53,11 +46,11 @@ const Legend = memo(({ legend=[], onClickItem }) => {
       _crLegendItem(onClickItem, item)
   , [onClickItem])
   , _style = isMore
-       ? S.MORE
-       : {...S.MORE, ...S.LESS};
+       ? S_MORE
+       : {...S_MORE, ...S_LESS};
   return (
     <div className={CL_SCROLL} style={_style}>
-      <div style={S.DIV}>
+      <div style={S_DIV}>
         <ItemStack
            items={_legendItems}
            crItem={_crStackItem}
