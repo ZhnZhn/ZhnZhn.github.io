@@ -33,9 +33,8 @@ const _crBrowserWatchList = Comp => /*#__PURE__*/(0, _react.createElement)(Comp,
   caption: "Watch List",
   isInitShow: true,
   store: _ChartStore.default,
-  //showAction: BAT.SHOW_BROWSER,
-  showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
-  updateAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER
+  showAction: _BrowserActions.BAT_SHOW_BROWSER_DYNAMIC,
+  updateAction: _BrowserActions.BAT_UPDATE_WATCH_BROWSER
 });
 
 const _crBrowserDynamic = (Comp, option) => {
@@ -71,10 +70,10 @@ const _crBrowserDynamic = (Comp, option) => {
     ItemComp,
     descrUrl,
     onClickInfo,
-    showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
-    loadedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
-    failedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_FAILED,
-    updateAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
+    showAction: _BrowserActions.BAT_SHOW_BROWSER_DYNAMIC,
+    loadedAction: _BrowserActions.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
+    failedAction: _BrowserActions.BAT_LOAD_BROWSER_FAILED,
+    updateAction: _BrowserActions.BAT_UPDATE_BROWSER_MENU,
     //for Type
     onLoadMenu: _BrowserActions.default.loadBrowserDynamic.bind(null, {
       browserType,

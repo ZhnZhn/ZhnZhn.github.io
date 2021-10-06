@@ -1,6 +1,6 @@
 import { T as LPA } from '../actions/LoadingProgressActions'
 import { ChartActionTypes as CHAT } from '../actions/ChartActions';
-import { BrowserActionTypes as BAT } from '../actions/BrowserActions';
+import { BAT_UPDATE_BROWSER_MENU } from '../actions/BrowserActions';
 
 import ChartLogic from './chart/ChartLogic'
 
@@ -66,7 +66,7 @@ const ChartSlice = {
       }
       this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
       this.triggerLimitRemaining(limitRemaining);
-      this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+      this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   },
   onLoadStockAdded(option={}){
      this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
@@ -100,7 +100,7 @@ const ChartSlice = {
     } else {
       this.trigger(CHAT.INIT_AND_SHOW_CHART, Comp)
     }
-    this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+    this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   },
 
   resetActiveChart(id){
@@ -122,7 +122,7 @@ const ChartSlice = {
       this.minusMenuItemCounter(chartType, browserType);
 
       this.trigger(CHAT.CLOSE_CHART, chartSlice);
-      this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+      this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
     }
   },
 
@@ -151,7 +151,7 @@ const ChartSlice = {
     this.resetMenuItemCounter(chartType, browserType)
     this.uncheckActiveCheckbox()
     this.trigger(CHAT.SHOW_CHART, chartSlice);
-    this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+    this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   }
 
 };

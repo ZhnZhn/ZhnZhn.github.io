@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _LoadingProgressActions = require("../actions/LoadingProgressActions");
 
@@ -13,56 +13,67 @@ var _BrowserActions = require("../actions/BrowserActions");
 
 var _ChartLogic = _interopRequireDefault(require("./chart/ChartLogic"));
 
-var _isChartExist = _ChartLogic["default"].isChartExist,
-    loadConfig = _ChartLogic["default"].loadConfig,
-    showChart = _ChartLogic["default"].showChart,
-    removeConfig = _ChartLogic["default"].removeConfig,
-    toTop = _ChartLogic["default"].toTop,
-    updateMovingValues = _ChartLogic["default"].updateMovingValues,
-    sortBy = _ChartLogic["default"].sortBy,
-    removeAll = _ChartLogic["default"].removeAll,
-    checkBrowserChartTypes = _ChartLogic["default"].checkBrowserChartTypes,
-    scanPostAdded = _ChartLogic["default"].scanPostAdded,
-    setAlertItemIdTo = _ChartLogic["default"].setAlertItemIdTo;
-var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
+const {
+  isChartExist,
+  loadConfig,
+  showChart,
+  removeConfig,
+  toTop,
+  updateMovingValues,
+  sortBy,
+  removeAll,
+  checkBrowserChartTypes,
+  scanPostAdded,
+  setAlertItemIdTo
+} = _ChartLogic.default;
+const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 
-var _logErrorToConsole = function _logErrorToConsole(_ref) {
-  var alertCaption = _ref.alertCaption,
-      alertItemId = _ref.alertItemId,
-      alertDescr = _ref.alertDescr;
-
-  var _title = [alertCaption, alertItemId].filter(Boolean).join(": ");
+const _logErrorToConsole = function ({
+  alertCaption,
+  alertItemId,
+  alertDescr
+}) {
+  const _title = [alertCaption, alertItemId].filter(Boolean).join(": ");
 
   console.log('%c' + _title, CONSOLE_LOG_STYLE);
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 };
 
-var ChartSlice = {
+const ChartSlice = {
   charts: {},
-  getConfigs: function getConfigs(chartType) {
+
+  getConfigs(chartType) {
     return this.charts[chartType];
   },
-  isChartExist: function isChartExist(option) {
+
+  isChartExist(option) {
     checkBrowserChartTypes(this, option);
-    var chartType = option.chartType,
-        key = option.key;
-    return _isChartExist(this.charts, chartType, key);
+    const {
+      chartType,
+      key
+    } = option;
+    return isChartExist(this.charts, chartType, key);
   },
-  onLoadStock: function onLoadStock() {
+
+  onLoadStock() {
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING);
   },
-  onLoadStockCompleted: function onLoadStockCompleted(option, config) {
-    var chartType = option.chartType,
-        browserType = option.browserType,
-        dialogConf = option.dialogConf,
-        limitRemaining = option.limitRemaining;
+
+  onLoadStockCompleted(option, config) {
+    const {
+      chartType,
+      browserType,
+      dialogConf,
+      limitRemaining
+    } = option;
     this.addMenuItemCounter(chartType, browserType);
 
-    var _dialogConf = dialogConf || this.getDialogConf(void 0, chartType);
+    const _dialogConf = dialogConf || this.getDialogConf(void 0, chartType);
 
-    var _loadConfig = loadConfig(this.charts, config, option, _dialogConf, this),
-        chartSlice = _loadConfig.chartSlice,
-        Comp = _loadConfig.Comp;
+    const {
+      chartSlice,
+      Comp
+    } = loadConfig(this.charts, config, option, _dialogConf, this);
 
     if (chartSlice) {
       this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, chartSlice);
@@ -72,39 +83,41 @@ var ChartSlice = {
 
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
     this.triggerLimitRemaining(limitRemaining);
-    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+    this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
   },
-  onLoadStockAdded: function onLoadStockAdded(option) {
-    if (option === void 0) {
-      option = {};
-    }
 
+  onLoadStockAdded(option = {}) {
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
     scanPostAdded(this, option);
   },
-  onLoadStockFailed: function onLoadStockFailed(option) {
+
+  onLoadStockFailed(option) {
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_FAILED);
     setAlertItemIdTo(option);
     this.showAlertDialog(option);
 
     _logErrorToConsole(option);
   },
-  onLoadStockByQuery: function onLoadStockByQuery() {
+
+  onLoadStockByQuery() {
     this.onLoadStock();
   },
-  onLoadStockByQueryCompleted: function onLoadStockByQueryCompleted(option, config) {
+
+  onLoadStockByQueryCompleted(option, config) {
     this.onLoadStockCompleted(option, config);
   },
-  onLoadStockByQueryFailed: function onLoadStockByQueryFailed(option) {
+
+  onLoadStockByQueryFailed(option) {
     this.onLoadStockFailed(option);
   },
-  onShowChart: function onShowChart(chartType, browserType, dialogConfOr) {
-    this.setMenuItemOpen(chartType, browserType);
-    var dialogConf = this.getDialogConf(dialogConfOr, chartType);
 
-    var _showChart = showChart(this.charts, chartType, browserType, dialogConf, this),
-        chartSlice = _showChart.chartSlice,
-        Comp = _showChart.Comp;
+  onShowChart(chartType, browserType, dialogConfOr) {
+    this.setMenuItemOpen(chartType, browserType);
+    const dialogConf = this.getDialogConf(dialogConfOr, chartType);
+    const {
+      chartSlice,
+      Comp
+    } = showChart(this.charts, chartType, browserType, dialogConf, this);
 
     if (chartSlice) {
       this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
@@ -112,50 +125,60 @@ var ChartSlice = {
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, Comp);
     }
 
-    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+    this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
   },
-  resetActiveChart: function resetActiveChart(id) {
+
+  resetActiveChart(id) {
     if (this.activeChart && this.activeChart.options.zhConfig.id === id) {
       this.activeChart = null;
     }
   },
-  onCloseChart: function onCloseChart(chartType, browserType, chartId) {
-    var _removeConfig = removeConfig(this.charts, chartType, chartId),
-        chartSlice = _removeConfig.chartSlice,
-        isRemoved = _removeConfig.isRemoved;
+
+  onCloseChart(chartType, browserType, chartId) {
+    const {
+      chartSlice,
+      isRemoved
+    } = removeConfig(this.charts, chartType, chartId);
 
     if (isRemoved) {
       this.resetActiveChart(chartId);
       this.minusMenuItemCounter(chartType, browserType);
       this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartSlice);
-      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+      this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
     }
   },
-  onToTop: function onToTop(chartType, id) {
-    var chartSlice = toTop(this.charts, chartType, id);
+
+  onToTop(chartType, id) {
+    const chartSlice = toTop(this.charts, chartType, id);
     this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
   },
-  onCopy: function onCopy(chart) {
+
+  onCopy(chart) {
     this.fromChart = chart;
   },
-  getCopyFromChart: function getCopyFromChart() {
+
+  getCopyFromChart() {
     return this.fromChart;
   },
-  onUpdateMovingValues: function onUpdateMovingValues(chartType, movingValues) {
+
+  onUpdateMovingValues(chartType, movingValues) {
     updateMovingValues(this.charts, chartType, movingValues);
   },
-  onSortBy: function onSortBy(chartType, by) {
-    var chartSlice = sortBy(this.charts, chartType, by);
+
+  onSortBy(chartType, by) {
+    const chartSlice = sortBy(this.charts, chartType, by);
     this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
   },
-  onRemoveAll: function onRemoveAll(chartType, browserType) {
-    var chartSlice = removeAll(this.charts, chartType);
+
+  onRemoveAll(chartType, browserType) {
+    const chartSlice = removeAll(this.charts, chartType);
     this.resetMenuItemCounter(chartType, browserType);
     this.uncheckActiveCheckbox();
     this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
-    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+    this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
   }
+
 };
 var _default = ChartSlice;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ChartSlice.js.map

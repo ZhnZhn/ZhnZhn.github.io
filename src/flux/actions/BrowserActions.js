@@ -10,44 +10,39 @@ import RouterDialog from '../logic/RouterDialog'
 import { fetchJson } from '../../utils/fnFetch'
 import onCatch from '../logic/onCatch'
 
-export const BrowserActionTypes = {
-  SHOW_BROWSER_DYNAMIC: 'showBrowserDynamic',
-
-  INIT_BROWSER_DYNAMIC: 'initBrowserDynamic',
-  LOAD_BROWSER_DYNAMIC: 'loadBrowserDynamic',
-  LOAD_BROWSER_DYNAMIC_COMPLETED: 'loadBrowserDynamicCompleted',
-  LOAD_BROWSER_FAILED: 'loadBrowserFailed',
-
-  UPDATE_WATCH_BROWSER: 'updateWatchBrowser'
-};
-const A = BrowserActionTypes;
+export const BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic'
+export const BAT_INIT_BROWSER_DYNAMIC = 'initBrowserDynamic'
+export const BAT_LOAD_BROWSER_DYNAMIC = 'loadBrowserDynamic'
+export const BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = 'loadBrowserDynamicCompleted'
+export const BAT_LOAD_BROWSER_FAILED = 'loadBrowserFailed'
+export const BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser'
+export const BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu'
 
 const BA = Reflux.createActions({
-  [A.SHOW_BROWSER_DYNAMIC]: {
+  [BAT_SHOW_BROWSER_DYNAMIC]: {
     children: ['done', 'init', 'failed']
   },
-  [A.INIT_BROWSER_DYNAMIC] : {},
-  [A.LOAD_BROWSER_DYNAMIC] : {
+  [BAT_INIT_BROWSER_DYNAMIC] : {},
+  [BAT_LOAD_BROWSER_DYNAMIC] : {
     children : ['completed', 'failed']
   },
 
-  [A.UPDATE_WATCH_BROWSER] : {}
+  [BAT_UPDATE_WATCH_BROWSER] : {}
 });
 
 const _fnFetchSourceMenu = function({ json, option, onCompleted }){
   const { browserType } = option;
   onCompleted({ json, browserType });
 }
-const ERR = {
-  LOAD: "Failed to load browser.",
-  FOUND: "Browser hasn't found.",
-  ITEM: "Browser"
-};
+const ERR_LOAD = "Failed to load browser."
+, ERR_FOUND = "Browser hasn't found."
+, ERR_ITEM = "Browser";
+
 const _crErr = (alertDescr, alertItemId) => ({
   alertDescr, alertItemId
 });
 
-BA[A.SHOW_BROWSER_DYNAMIC].listen(function(option={}){
+BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
   const _option = typeof option === 'string'
            ? { browserType: option }
            : option
@@ -66,15 +61,15 @@ BA[A.SHOW_BROWSER_DYNAMIC].listen(function(option={}){
         this.init(elBrowser, config)
       })
       .catch(() => {
-        this.failed({..._option, ..._crErr(ERR.LOAD, config.caption)})
+        this.failed({..._option, ..._crErr(ERR_LOAD, config.caption)})
       })
     }
   } else {
-    this.failed({..._option, ..._crErr(ERR.FOUND, ERR.ITEM)})
+    this.failed({..._option, ..._crErr(ERR_FOUND, ERR_ITEM)})
   }
 })
 
-BA[A.LOAD_BROWSER_DYNAMIC].listen(function(option){
+BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function(option){
   fetchJson({
     uri: option.sourceMenuUrl,
     option: option,

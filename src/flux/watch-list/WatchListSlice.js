@@ -1,6 +1,6 @@
 import LocalForage from 'localforage';
 
-import { BrowserActionTypes as BAT } from '../actions/BrowserActions';
+import { BAT_UPDATE_WATCH_BROWSER } from '../actions/BrowserActions';
 import { WatchActionTypes as WAT } from '../actions/WatchActions';
 import DF_WATCH_LIST from '../../constants/WatchDefault';
 import { ModalDialog }  from '../../constants/Type';
@@ -23,11 +23,11 @@ const WatchListSlice = {
      .getItem(STORAGE_KEY)
      .then(value => {
        this.watchList = value || DF_WATCH_LIST;
-       this.trigger(BAT.UPDATE_WATCH_BROWSER, this.watchList);
+       this.trigger(BAT_UPDATE_WATCH_BROWSER, this.watchList);
      })
      .catch(() => {
        this.watchList = DF_WATCH_LIST;
-       this.trigger(BAT.UPDATE_WATCH_BROWSER, this.watchList);
+       this.trigger(BAT_UPDATE_WATCH_BROWSER, this.watchList);
     })
   },
   getWatchList(){
@@ -55,7 +55,7 @@ const WatchListSlice = {
 
   _triggerUpdateWL(){
     this.isWatchEdited = true;
-    this.trigger(BAT.UPDATE_WATCH_BROWSER, this.watchList);
+    this.trigger(BAT_UPDATE_WATCH_BROWSER, this.watchList);
   },
 
 

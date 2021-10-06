@@ -1,6 +1,6 @@
 
 import { ComponentActionTypes as CAT } from '../actions/ComponentActions';
-import { BrowserActionTypes as BAT } from '../actions/BrowserActions';
+import { BAT_UPDATE_BROWSER_MENU } from '../actions/BrowserActions';
 import Factory from '../logic/Factory';
 
 import { ModalDialog } from '../../constants/Type';
@@ -140,7 +140,7 @@ const ComponentSlice = {
     this.uncheckActiveCheckbox(chartType);
     if(this.isWithItemCounter(browserType)){
       this.setMenuItemClose(chartType, browserType);
-      this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+      this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
     }
   },
   onCloseChartContainer2(chartType, browserType){

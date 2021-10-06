@@ -4,7 +4,14 @@ import ChartStore from '../stores/ChartStore';
 
 import CA from '../actions/ComponentActions';
 import CHA from '../actions/ChartActions';
-import BA, { BrowserActionTypes as BAT } from '../actions/BrowserActions';
+import BA from '../actions/BrowserActions';
+import {
+  BAT_SHOW_BROWSER_DYNAMIC,
+  BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
+  BAT_LOAD_BROWSER_FAILED,
+  BAT_UPDATE_WATCH_BROWSER,
+  BAT_UPDATE_BROWSER_MENU
+} from '../actions/BrowserActions';
 import { BrowserType as BT } from '../../constants/Type';
 
 import RouterBrowser from './RouterBrowser';
@@ -19,9 +26,8 @@ const _crBrowserWatchList = (Comp) => createElement(Comp, {
    caption: "Watch List",
    isInitShow: true,
    store: ChartStore,
-   //showAction: BAT.SHOW_BROWSER,
-   showAction: BAT.SHOW_BROWSER_DYNAMIC,
-   updateAction: BAT.UPDATE_WATCH_BROWSER
+   showAction: BAT_SHOW_BROWSER_DYNAMIC,
+   updateAction: BAT_UPDATE_WATCH_BROWSER
 })
 
 const _crBrowserDynamic = (Comp, option) => {
@@ -58,10 +64,10 @@ const _crBrowserDynamic = (Comp, option) => {
      ItemComp,
      descrUrl,
      onClickInfo,
-     showAction: BAT.SHOW_BROWSER_DYNAMIC,
-     loadedAction: BAT.LOAD_BROWSER_DYNAMIC_COMPLETED,
-     failedAction: BAT.LOAD_BROWSER_FAILED,
-     updateAction: BAT.UPDATE_BROWSER_MENU, //for Type
+     showAction: BAT_SHOW_BROWSER_DYNAMIC,
+     loadedAction: BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
+     failedAction: BAT_LOAD_BROWSER_FAILED,
+     updateAction: BAT_UPDATE_BROWSER_MENU, //for Type
      onLoadMenu: BA.loadBrowserDynamic.bind(null, { browserType, caption, sourceMenuUrl }),
      onShowLoadDialog //for Type2
    });

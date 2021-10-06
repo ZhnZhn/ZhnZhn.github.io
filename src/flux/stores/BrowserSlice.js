@@ -3,13 +3,16 @@ import BrowserConfig from '../../constants/BrowserConfig';
 import { BrowserType } from '../../constants/Type';
 import DataWL from '../../constants/DataWL';
 
-import { BrowserActionTypes as BA } from '../actions/BrowserActions';
+import {
+  BAT_SHOW_BROWSER_DYNAMIC,
+  BAT_INIT_BROWSER_DYNAMIC,
+  BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
+  BAT_LOAD_BROWSER_FAILED
+} from '../actions/BrowserActions';
 
 import BrowserLogic from './browser/BrowserLogic';
 
-const C = {
-  FAILED: 'Failed'
-};
+const FAILED = 'Failed';
 
 const {
   isWithItemCounter,
@@ -58,18 +61,18 @@ const BrowserSlice = {
   },
 
   onShowBrowserDynamicDone({ browserType }){
-    this.trigger(BA.SHOW_BROWSER_DYNAMIC, browserType);
+    this.trigger(BAT_SHOW_BROWSER_DYNAMIC, browserType);
   },
   onShowBrowserDynamicInit(elBrowser, option){
     const { browserType } = option;
     if (!this.browserMenu[browserType]) {
       this.browserMenu[browserType] = [];
-      this.trigger(BA.INIT_BROWSER_DYNAMIC, elBrowser);
+      this.trigger(BAT_INIT_BROWSER_DYNAMIC, elBrowser);
     }
   },
   onShowBrowserDynamicFailed(option){
     this.showAlertDialog(option)
-    this.trigger(BA.SHOW_BROWSER_DYNAMIC + C.FAILED)
+    this.trigger(BAT_SHOW_BROWSER_DYNAMIC + FAILED)
   },
 
   onLoadBrowserDynamicCompleted(option){
@@ -77,7 +80,7 @@ const BrowserSlice = {
     , menuItems = isWithItemCounter(browserType)
         ? initBrowserMenu(this, option)
         : json;
-    this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+    this.trigger(BAT_LOAD_BROWSER_DYNAMIC_COMPLETED, {
        menuItems, browserType
     })
   },
@@ -85,7 +88,7 @@ const BrowserSlice = {
     const { alertItemId, caption, browserType } = option;
     option.alertItemId = alertItemId || caption
     this.showAlertDialog(option);
-    this.trigger(BA.LOAD_BROWSER_FAILED, browserType)    
+    this.trigger(BAT_LOAD_BROWSER_FAILED, browserType)
   }
 
 }

@@ -69,7 +69,7 @@ const AppErc = () => {
       className: CL,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
         store: _ChartStore.default,
-        initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+        initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC,
         showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
         onCloseDialog: _ComponentActions.default.closeDialog
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {

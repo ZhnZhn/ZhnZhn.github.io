@@ -7,7 +7,7 @@ import LocationSearch from '../flux/logic/LocationSearch';
 import ChartStore from '../flux/stores/ChartStore';
 
 import CA, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
-import { BrowserActionTypes as BAT } from '../flux/actions/BrowserActions';
+import { BAT_INIT_BROWSER_DYNAMIC } from '../flux/actions/BrowserActions';
 import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
 
 import HeaderBar from './header/HeaderBar';
@@ -48,7 +48,7 @@ const AppErc = () => {
       <div className={CL}>
          <BrowserContainer
             store={ChartStore}
-            initBrowserAction={BAT.INIT_BROWSER_DYNAMIC}
+            initBrowserAction={BAT_INIT_BROWSER_DYNAMIC}
             showDialogAction={CAT.SHOW_DIALOG}
             onCloseDialog={CA.closeDialog}
          />

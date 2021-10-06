@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 
@@ -15,86 +15,106 @@ var _BrowserActions = require("../actions/BrowserActions");
 
 var _BrowserLogic = _interopRequireDefault(require("./browser/BrowserLogic"));
 
-var C = {
-  FAILED: 'Failed'
-};
-var isWithItemCounter = _BrowserLogic["default"].isWithItemCounter,
-    initBrowserMenu = _BrowserLogic["default"].initBrowserMenu,
-    setIsOpen = _BrowserLogic["default"].setIsOpen,
-    plusCounter = _BrowserLogic["default"].plusCounter,
-    resetCounter = _BrowserLogic["default"].resetCounter;
+const FAILED = 'Failed';
+const {
+  isWithItemCounter,
+  initBrowserMenu,
+  setIsOpen,
+  plusCounter,
+  resetCounter
+} = _BrowserLogic.default;
 
-var _setItemOpen = setIsOpen.bind(null, true),
-    _setItemClose = setIsOpen.bind(null, false),
-    _addCounter = plusCounter.bind(null, 1),
-    _minusCounter = plusCounter.bind(null, -1);
+const _setItemOpen = setIsOpen.bind(null, true),
+      _setItemClose = setIsOpen.bind(null, false),
+      _addCounter = plusCounter.bind(null, 1),
+      _minusCounter = plusCounter.bind(null, -1);
 
-var BrowserSlice = {
+const BrowserSlice = {
   browserMenu: {},
   routeDialog: {
-    WL: _DataWL["default"]
+    WL: _DataWL.default
   },
   isWithItemCounter: isWithItemCounter,
-  getBrowserMenu: function getBrowserMenu(browserType) {
+
+  getBrowserMenu(browserType) {
     return this.browserMenu[browserType];
   },
-  setMenuItemOpen: function setMenuItemOpen(cT, bT) {
+
+  setMenuItemOpen(cT, bT) {
     _setItemOpen(this.browserMenu, bT, cT);
   },
-  setMenuItemClose: function setMenuItemClose(cT, bT) {
+
+  setMenuItemClose(cT, bT) {
     _setItemClose(this.browserMenu, bT, cT);
   },
-  addMenuItemCounter: function addMenuItemCounter(cT, bT) {
+
+  addMenuItemCounter(cT, bT) {
     _addCounter(this.browserMenu, bT, cT);
   },
-  minusMenuItemCounter: function minusMenuItemCounter(cT, bT) {
+
+  minusMenuItemCounter(cT, bT) {
     _minusCounter(this.browserMenu, bT, cT);
   },
-  resetMenuItemCounter: function resetMenuItemCounter(cT, bT) {
+
+  resetMenuItemCounter(cT, bT) {
     resetCounter(this.browserMenu, bT, cT);
   },
-  getSourceConfig: function getSourceConfig(browserId, sourceId) {
+
+  getSourceConfig(browserId, sourceId) {
     if (sourceId.indexOf(_Type.BrowserType.STOCKS_BY_SECTORS) > 0) {
-      return _BrowserConfig["default"][browserId];
+      return _BrowserConfig.default[browserId];
     }
 
-    var _r = this.routeDialog[browserId];
+    const _r = this.routeDialog[browserId];
     return _r ? _r[sourceId] : void 0;
   },
-  onShowBrowserDynamicDone: function onShowBrowserDynamicDone(_ref) {
-    var browserType = _ref.browserType;
-    this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC, browserType);
+
+  onShowBrowserDynamicDone({
+    browserType
+  }) {
+    this.trigger(_BrowserActions.BAT_SHOW_BROWSER_DYNAMIC, browserType);
   },
-  onShowBrowserDynamicInit: function onShowBrowserDynamicInit(elBrowser, option) {
-    var browserType = option.browserType;
+
+  onShowBrowserDynamicInit(elBrowser, option) {
+    const {
+      browserType
+    } = option;
 
     if (!this.browserMenu[browserType]) {
       this.browserMenu[browserType] = [];
-      this.trigger(_BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC, elBrowser);
+      this.trigger(_BrowserActions.BAT_INIT_BROWSER_DYNAMIC, elBrowser);
     }
   },
-  onShowBrowserDynamicFailed: function onShowBrowserDynamicFailed(option) {
+
+  onShowBrowserDynamicFailed(option) {
     this.showAlertDialog(option);
-    this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC + C.FAILED);
+    this.trigger(_BrowserActions.BAT_SHOW_BROWSER_DYNAMIC + FAILED);
   },
-  onLoadBrowserDynamicCompleted: function onLoadBrowserDynamicCompleted(option) {
-    var json = option.json,
-        browserType = option.browserType,
-        menuItems = isWithItemCounter(browserType) ? initBrowserMenu(this, option) : json;
-    this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-      menuItems: menuItems,
-      browserType: browserType
+
+  onLoadBrowserDynamicCompleted(option) {
+    const {
+      json,
+      browserType
+    } = option,
+          menuItems = isWithItemCounter(browserType) ? initBrowserMenu(this, option) : json;
+    this.trigger(_BrowserActions.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED, {
+      menuItems,
+      browserType
     });
   },
-  onLoadBrowserDynamicFailed: function onLoadBrowserDynamicFailed(option) {
-    var alertItemId = option.alertItemId,
-        caption = option.caption,
-        browserType = option.browserType;
+
+  onLoadBrowserDynamicFailed(option) {
+    const {
+      alertItemId,
+      caption,
+      browserType
+    } = option;
     option.alertItemId = alertItemId || caption;
     this.showAlertDialog(option);
-    this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_FAILED, browserType);
+    this.trigger(_BrowserActions.BAT_LOAD_BROWSER_FAILED, browserType);
   }
+
 };
 var _default = BrowserSlice;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=BrowserSlice.js.map
