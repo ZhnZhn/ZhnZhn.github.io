@@ -1,13 +1,26 @@
-import Link from './Link'
+import Link from './Link';
 
 const EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/'
-    , CAPTION = 'Euronext Link';
+, DF_CAPTION = 'Euronext Link';
 
-const EuronextLink = ({ item={}, caption=CAPTION }) => (
-  <Link
-    caption={`${caption} ${item.caption}`}
-    href={`${EURONEXT_BASE}${item.isin}-${item.market}`}
-  />
-);
+const _crLinkId = (isin, market) =>
+  isin && market
+    ? `${isin}-${market}`
+    : void 0;
+
+const EuronextLink = ({
+  item,
+  caption
+}) => {
+  const { c='', isin, market } = item || {}
+  , _linkId = _crLinkId(isin, market);
+
+  return _linkId ? (
+    <Link
+      caption={`${caption || DF_CAPTION} ${c}`}
+      href={`${EURONEXT_BASE}${_linkId}`}
+    />
+  ) : null;
+}
 
 export default EuronextLink
