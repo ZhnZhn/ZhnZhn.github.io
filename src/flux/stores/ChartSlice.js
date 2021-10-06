@@ -1,4 +1,8 @@
-import { T as LPA } from '../actions/LoadingProgressActions'
+import {
+  LPAT_LOADING,
+  LPAT_LOADING_COMPLETE,
+  LPAT_LOADING_FAILED
+} from '../actions/LoadingProgressActions'
 import { ChartActionTypes as CHAT } from '../actions/ChartActions';
 import { BAT_UPDATE_BROWSER_MENU } from '../actions/BrowserActions';
 
@@ -43,7 +47,7 @@ const ChartSlice = {
   },
 
   onLoadStock(){
-    this.triggerLoadingProgress(LPA.LOADING)
+    this.triggerLoadingProgress(LPAT_LOADING)
   },
   onLoadStockCompleted(option, config){
       const {
@@ -64,16 +68,16 @@ const ChartSlice = {
       } else {
         this.trigger(CHAT.INIT_AND_SHOW_CHART, Comp);
       }
-      this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
+      this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
       this.triggerLimitRemaining(limitRemaining);
       this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   },
   onLoadStockAdded(option={}){
-     this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
+     this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
      scanPostAdded(this, option)
   },
   onLoadStockFailed(option){
-    this.triggerLoadingProgress(LPA.LOADING_FAILED)
+    this.triggerLoadingProgress(LPAT_LOADING_FAILED)
     setAlertItemIdTo(option)
     this.showAlertDialog(option);
     _logErrorToConsole(option);

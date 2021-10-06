@@ -56,7 +56,7 @@ const ChartSlice = {
   },
 
   onLoadStock() {
-    this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING);
+    this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING);
   },
 
   onLoadStockCompleted(option, config) {
@@ -81,18 +81,18 @@ const ChartSlice = {
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, Comp);
     }
 
-    this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
+    this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_COMPLETE);
     this.triggerLimitRemaining(limitRemaining);
     this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
   },
 
   onLoadStockAdded(option = {}) {
-    this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
+    this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_COMPLETE);
     scanPostAdded(this, option);
   },
 
   onLoadStockFailed(option) {
-    this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_FAILED);
+    this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_FAILED);
     setAlertItemIdTo(option);
     this.showAlertDialog(option);
 

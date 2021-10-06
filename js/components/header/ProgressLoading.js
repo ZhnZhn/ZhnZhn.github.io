@@ -3,56 +3,39 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
+var _LoadingProgressActions = require("../../flux/actions/LoadingProgressActions");
+
 var _ProgressLine = _interopRequireDefault(require("../zhn/ProgressLine"));
 
-var C = {
-  LOADING: '#2f7ed8',
-  FAILED: '#ed5813'
-};
-var COMPLETE_TIMEOUT_MLS = 450;
+var _jsxRuntime = require("react/jsx-runtime");
 
-var ProgressLoading = function ProgressLoading(_ref) {
-  var store = _ref.store,
-      ACTIONS = _ref.ACTIONS;
+const COLOR_LOADING = '#2f7ed8',
+      COLOR_FAILED = '#ed5813',
+      COMPLETE_TIMEOUT_MLS = 450;
 
-  var _useState = (0, _react.useState)({
-    completed: 0,
-    color: C.LOADING
-  }),
-      _useState$ = _useState[0],
-      completed = _useState$.completed,
-      color = _useState$.color,
-      setState = _useState[1];
+const _crState = (completed, color) => [completed, color];
 
-  (0, _useListen["default"])(store, function (actionType) {
-    if (actionType === ACTIONS.LOADING) {
-      setState({
-        completed: 35,
-        color: C.LOADING
-      });
-    } else if (actionType === ACTIONS.LOADING_COMPLETE) {
-      setTimeout(function () {
-        return setState({
-          completed: 100,
-          color: C.LOADING
-        });
-      }, COMPLETE_TIMEOUT_MLS);
-    } else if (actionType === ACTIONS.LOADING_FAILED) {
-      setState({
-        completed: 100,
-        color: C.FAILED
-      });
+const ProgressLoading = ({
+  store
+}) => {
+  const [state, setState] = (0, _react.useState)(() => _crState(0, COLOR_LOADING)),
+        [completed, color] = state;
+  (0, _useListen.default)(store, actionType => {
+    if (actionType === _LoadingProgressActions.LPAT_LOADING) {
+      setState(_crState(35, COLOR_LOADING));
+    } else if (actionType === _LoadingProgressActions.LPAT_LOADING_COMPLETE) {
+      setTimeout(() => setState(_crState(100, COLOR_LOADING)), COMPLETE_TIMEOUT_MLS);
+    } else if (actionType === _LoadingProgressActions.LPAT_LOADING_FAILED) {
+      setState(_crState(100, COLOR_FAILED));
     }
   }, 'listenLoadingProgress');
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLine["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLine.default, {
     height: 3,
     color: color,
     completed: completed
@@ -62,13 +45,12 @@ var ProgressLoading = function ProgressLoading(_ref) {
 ProgressLoading.propTypes = {
   store: PropTypes.shape({
     listenLoadingProgress: PropTypes.func
-  }),
-  ACTIONS: PropTypes.arrayOf(PropTypes.string)
+  })
 }
 */
 
 
 var _default = /*#__PURE__*/(0, _react.memo)(ProgressLoading);
 
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ProgressLoading.js.map

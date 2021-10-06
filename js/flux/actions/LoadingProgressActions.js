@@ -1,11 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.T = void 0;
-var T = {
-  LOADING: 'LOADING',
-  LOADING_COMPLETE: 'LOADING_COMPLETE',
-  LOADING_FAILED: 'LOADING_FAILED'
-};
-exports.T = T;
+exports.LPAT_LOADING_FAILED = exports.LPAT_LOADING_COMPLETE = exports.LPAT_LOADING = void 0;
+const LPAT_LOADING = 'LOADING';
+exports.LPAT_LOADING = LPAT_LOADING;
+const LPAT_LOADING_COMPLETE = 'LOADING_COMPLETE';
+exports.LPAT_LOADING_COMPLETE = LPAT_LOADING_COMPLETE;
+const LPAT_LOADING_FAILED = 'LOADING_FAILED';
+exports.LPAT_LOADING_FAILED = LPAT_LOADING_FAILED;
 //# sourceMappingURL=LoadingProgressActions.js.map

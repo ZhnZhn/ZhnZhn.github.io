@@ -1,33 +1,40 @@
 import { memo, useState } from 'react';
 import useListen from '../hooks/useListen';
 
+import {
+  LPAT_LOADING,
+  LPAT_LOADING_COMPLETE,
+  LPAT_LOADING_FAILED
+} from '../../flux/actions/LoadingProgressActions';
+
 import ProgressLine from '../zhn/ProgressLine';
 
-const C = {
-  LOADING: '#2f7ed8',
-  FAILED: '#ed5813'
-};
+const COLOR_LOADING = '#2f7ed8'
+, COLOR_FAILED = '#ed5813'
+, COMPLETE_TIMEOUT_MLS = 450;
 
-const COMPLETE_TIMEOUT_MLS = 450;
+const _crState = (completed, color) => [
+  completed,
+  color
+];
 
 const ProgressLoading = ({
-  store,
-  ACTIONS
+  store
 }) => {
-  const [{ completed, color }, setState] = useState({
-    completed: 0,
-    color: C.LOADING
-  });
+  const [state, setState] = useState(
+    ()=>_crState(0, COLOR_LOADING)
+  )
+  , [completed, color] = state;
 
   useListen(store, (actionType)=>{
-    if (actionType === ACTIONS.LOADING){
-      setState({ completed: 35, color: C.LOADING })
-    } else if (actionType === ACTIONS.LOADING_COMPLETE){
+    if (actionType === LPAT_LOADING){
+      setState(_crState(35, COLOR_LOADING))
+    } else if (actionType === LPAT_LOADING_COMPLETE){
       setTimeout(
-        () => setState({ completed: 100, color: C.LOADING })
+        () => setState(_crState(100, COLOR_LOADING))
       , COMPLETE_TIMEOUT_MLS)
-    } else if (actionType === ACTIONS.LOADING_FAILED){
-      setState({ completed: 100, color: C.FAILED })
+    } else if (actionType === LPAT_LOADING_FAILED){
+      setState(_crState(100, COLOR_FAILED))
     }
   }, 'listenLoadingProgress')
 
@@ -44,8 +51,7 @@ const ProgressLoading = ({
 ProgressLoading.propTypes = {
   store: PropTypes.shape({
     listenLoadingProgress: PropTypes.func
-  }),
-  ACTIONS: PropTypes.arrayOf(PropTypes.string)
+  })
 }
 */
 

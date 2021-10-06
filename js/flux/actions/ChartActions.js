@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = exports.ChartActionTypes = void 0;
+exports.default = exports.ChartActionTypes = void 0;
 
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
@@ -21,22 +21,16 @@ var _LogicUtils = _interopRequireDefault(require("../logic/LogicUtils"));
 
 var _LoadingProgressActions = require("./LoadingProgressActions");
 
-var _Reflux$createActions;
-
-var C = {
+const C = {
   DESR_LOADER: "Loader for this item hasn't found."
 };
 
-var META = '_Meta',
-    _fnNoop = function _fnNoop() {},
-    _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-},
-    _isUndef = function _isUndef(v) {
-  return typeof v === 'undefined';
-};
+const META = '_Meta',
+      _fnNoop = () => {},
+      _isFn = fn => typeof fn === 'function',
+      _isUndef = v => typeof v === 'undefined';
 
-var ChartActionTypes = {
+const ChartActionTypes = {
   INIT_AND_SHOW_CHART: 'initAndShowChart',
   SHOW_CHART: 'showChart',
   CLOSE_CHART: 'closeChart',
@@ -54,17 +48,17 @@ var ChartActionTypes = {
   REMOVE_ALL: 'removeAll'
 };
 exports.ChartActionTypes = ChartActionTypes;
-var A = ChartActionTypes;
-var M = _Msg["default"].Alert;
+const A = ChartActionTypes;
+const M = _Msg.default.Alert;
 
-var _fnOnChangeStore = function _fnOnChangeStore(actionType, data) {
-  if (actionType === _LoadingProgressActions.T.LOADING_COMPLETE || actionType === _LoadingProgressActions.T.LOADING_FAILED) {
+const _fnOnChangeStore = function (actionType, data) {
+  if (actionType === _LoadingProgressActions.LPAT_LOADING_COMPLETE || actionType === _LoadingProgressActions.LPAT_LOADING_FAILED) {
     ChartActions[A.LOAD_STOCK].isLoading = false;
   }
 };
 
-var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
-  _Msg["default"].setAlertMsg(option, alertMsg);
+const _fnCancelLoad = function (option, alertMsg, isWithFailed) {
+  _Msg.default.setAlertMsg(option, alertMsg);
 
   this.failed(option);
   this.isShouldEmit = false;
@@ -76,50 +70,59 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
   }
 };
 
-var _addBoolOptionTo = function _addBoolOptionTo(options, propName) {
+const _addBoolOptionTo = (options, propName) => {
   if (_isUndef(options[propName])) {
-    options[propName] = _ChartStore["default"].isSetting(propName);
+    options[propName] = _ChartStore.default.isSetting(propName);
   }
 };
 
-var _addSettingsTo = function _addSettingsTo(options) {
-  var loadId = options.loadId;
-
-  for (var _len = arguments.length, restArgs = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    restArgs[_key - 1] = arguments[_key];
-  }
-
-  Object.assign.apply(Object, [options].concat(restArgs, [{
-    apiKey: _ChartStore["default"].getKey(loadId),
-    proxy: _ChartStore["default"].getProxy(loadId)
-  }]));
+const _addSettingsTo = (options, ...restArgs) => {
+  const {
+    loadId
+  } = options;
+  Object.assign(options, ...restArgs, {
+    apiKey: _ChartStore.default.getKey(loadId),
+    proxy: _ChartStore.default.getProxy(loadId)
+  });
 
   _addBoolOptionTo(options, 'isDrawDeltaExtrems');
 
   _addBoolOptionTo(options, 'isNotZoomToMinMax');
 };
 
-var ChartActions = _refluxCore["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.LOAD_STOCK] = {
-  children: ['completed', 'added', 'failed'],
-  isLoading: false,
-  idLoading: undefined,
-  isShouldEmit: true,
-  cancelLoad: _fnCancelLoad
-}, _Reflux$createActions[A.LOAD_STOCK_BY_QUERY] = {
-  children: ['completed', 'failed']
-}, _Reflux$createActions[A.SHOW_CHART] = {}, _Reflux$createActions[A.CLOSE_CHART] = {}, _Reflux$createActions[A.TO_TOP] = {}, _Reflux$createActions[A.COPY] = {}, _Reflux$createActions[A.UPDATE_MOVING_VALUES] = {}, _Reflux$createActions[A.SORT_BY] = {}, _Reflux$createActions[A.REMOVE_ALL] = {}, _Reflux$createActions));
+const ChartActions = _refluxCore.default.createActions({
+  [A.LOAD_STOCK]: {
+    children: ['completed', 'added', 'failed'],
+    isLoading: false,
+    idLoading: undefined,
+    isShouldEmit: true,
+    cancelLoad: _fnCancelLoad
+  },
+  [A.LOAD_STOCK_BY_QUERY]: {
+    children: ['completed', 'failed']
+  },
+  [A.SHOW_CHART]: {},
+  [A.CLOSE_CHART]: {},
+  [A.TO_TOP]: {},
+  [A.COPY]: {},
+  [A.UPDATE_MOVING_VALUES]: {},
+  [A.SORT_BY]: {},
+  [A.REMOVE_ALL]: {}
+});
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
-var isApiKeyRequired = _SettingSlice["default"].isApiKeyRequired,
-    isProxyRequired = _SettingSlice["default"].isProxyRequired,
-    getApiTitle = _SettingSlice["default"].getApiTitle;
+const {
+  isApiKeyRequired,
+  isProxyRequired,
+  getApiTitle
+} = _SettingSlice.default;
 
-var _checkMsgApiKey = function _checkMsgApiKey(_ref) {
-  var apiKey = _ref.apiKey,
-      loadId = _ref.loadId,
-      isKeyFeature = _ref.isKeyFeature,
-      isPremium = _ref.isPremium;
-
+const _checkMsgApiKey = ({
+  apiKey,
+  loadId,
+  isKeyFeature,
+  isPremium
+}) => {
   if (!apiKey) {
     if (isApiKeyRequired(loadId)) {
       return M.withoutApiKey(getApiTitle(loadId));
@@ -137,10 +140,10 @@ var _checkMsgApiKey = function _checkMsgApiKey(_ref) {
   return '';
 };
 
-var _checkProxy = function _checkProxy(_ref2) {
-  var proxy = _ref2.proxy,
-      loadId = _ref2.loadId;
-
+const _checkProxy = ({
+  proxy,
+  loadId
+}) => {
   if (isProxyRequired(loadId) && !proxy) {
     return M.withoutProxy(getApiTitle(loadId));
   }
@@ -148,30 +151,22 @@ var _checkProxy = function _checkProxy(_ref2) {
   return '';
 };
 
-ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
-  if (confItem === void 0) {
-    confItem = {};
-  }
-
-  if (option === void 0) {
-    option = {};
-  }
-
-  var key = _LogicUtils["default"].createKeyForConfig(option),
-      isDoublingLoad = this.isLoading && key === this.idLoading,
-      isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
+ChartActions[A.LOAD_STOCK].preEmit = function (confItem = {}, option = {}) {
+  const key = _LogicUtils.default.createKeyForConfig(option),
+        isDoublingLoad = this.isLoading && key === this.idLoading,
+        isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
 
   this.isShouldEmit = true;
 
-  var _isTs = _ChartStore["default"].isLoadToChart(); //{ chartType, browserType, dialogConf } = confItem
+  const _isTs = _ChartStore.default.isLoadToChart(); //{ chartType, browserType, dialogConf } = confItem
 
 
   _addSettingsTo(option, confItem, {
-    key: key,
-    _isTs: _isTs
+    key,
+    _isTs
   });
 
-  var _msgSetting = _checkMsgApiKey(option) || _checkProxy(option);
+  const _msgSetting = _checkMsgApiKey(option) || _checkProxy(option);
 
   if (_msgSetting) {
     this.cancelLoad(option, _msgSetting, false);
@@ -180,7 +175,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function (confItem, option) {
   } else if (isDoublLoadMeta) {
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
   } else if (!_isTs) {
-    if (_ChartStore["default"].isChartExist(option)) {
+    if (_ChartStore.default.isChartExist(option)) {
       this.cancelLoad(option, M.ALREADY_EXIST, true);
     }
   }
@@ -193,43 +188,52 @@ ChartActions[A.LOAD_STOCK].shouldEmit = function () {
 };
 
 ChartActions[A.LOAD_STOCK].listen(function (confItem, option) {
-  var key = option.key,
-      isLoadMeta = option.isLoadMeta,
-      _option$loadId = option.loadId,
-      loadId = _option$loadId === void 0 ? 'Q' : _option$loadId;
+  const {
+    key,
+    isLoadMeta,
+    loadId = 'Q'
+  } = option;
   this.isLoading = true;
   this.idLoading = isLoadMeta ? key + META : key;
 
-  _LoadConfig["default"][loadId].loadItem(option, this.completed, this.added, this.failed);
+  _LoadConfig.default[loadId].loadItem(option, this.completed, this.added, this.failed);
 });
-var SUBTITLE = 'Loaded from URL Query';
+const SUBTITLE = 'Loaded from URL Query';
 
-var _addDialogPropsTo = function _addDialogPropsTo(option) {
-  var chartType = option.chartType,
-      browserType = option.browserType,
-      _ref3 = _ChartStore["default"].getSourceConfig(browserType, chartType) || {},
-      dialogProps = _ref3.dialogProps;
-
+const _addDialogPropsTo = option => {
+  const {
+    chartType,
+    browserType
+  } = option,
+        {
+    dialogProps
+  } = _ChartStore.default.getSourceConfig(browserType, chartType) || {};
   Object.assign(option, dialogProps, dialogProps.dfProps, {
     subtitle: SUBTITLE
   });
-  var fromDate = option.fromDate,
-      nInitFromDate = option.nInitFromDate;
+  const {
+    fromDate,
+    nInitFromDate
+  } = option;
 
   if (!fromDate) {
-    option.fromDate = nInitFromDate ? _DateUtils["default"].getFromDate(nInitFromDate) : _DateUtils["default"].getFromDate(2);
+    option.fromDate = nInitFromDate ? _DateUtils.default.getFromDate(nInitFromDate) : _DateUtils.default.getFromDate(2);
   }
 };
 
 ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
   _addDialogPropsTo(option);
 
-  var loadId = option.loadId;
-  option.proxy = _ChartStore["default"].getProxy(loadId);
-  var impl = _LoadConfig["default"][loadId];
+  const {
+    loadId
+  } = option;
+  option.proxy = _ChartStore.default.getProxy(loadId);
+  const impl = _LoadConfig.default[loadId];
 
   if (impl) {
-    var addPropsTo = impl.addPropsTo;
+    const {
+      addPropsTo
+    } = impl;
 
     if (_isFn(addPropsTo)) {
       addPropsTo(option);
@@ -242,5 +246,5 @@ ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
   }
 });
 var _default = ChartActions;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ChartActions.js.map

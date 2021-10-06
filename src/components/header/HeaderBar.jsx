@@ -1,6 +1,5 @@
 import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
-import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 
 import use from '../hooks/use'
 import Comp from '../Comp'
@@ -54,7 +53,7 @@ const HeaderBar = ({ store, showSettings }) => {
 
   return (
     <div className={CL.HEADER} style={TS.ROOT} >
-       <ProgressLoading store={store} ACTIONS={LPAT} />
+       <ProgressLoading store={store} />
        <IconLogoErc
           className={CL.ICON}
           title={LOGO_TITLE}

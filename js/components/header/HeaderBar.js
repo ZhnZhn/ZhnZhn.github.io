@@ -9,8 +9,6 @@ var _ComponentActions = _interopRequireWildcard(require("../../flux/actions/Comp
 
 var _BrowserActions = _interopRequireDefault(require("../../flux/actions/BrowserActions"));
 
-var _LoadingProgressActions = require("../../flux/actions/LoadingProgressActions");
-
 var _use = _interopRequireDefault(require("../hooks/use"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
@@ -77,8 +75,7 @@ const HeaderBar = ({
     className: CL.HEADER,
     style: TS.ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading.default, {
-      store: store,
-      ACTIONS: _LoadingProgressActions.T
+      store: store
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc.default, {
       className: CL.ICON,
       title: LOGO_TITLE
