@@ -4,15 +4,12 @@ import A from '../Comp';
 
 const CL_DESCR = 'info__descr'
 , C_DESCR_OPEN = '#1b2836'
-, S_ROOT_SHOW = {
+, S_ROOT = {
   position: 'relative',
-  display: 'block',
   padding: '34px 20px 0 8px'
 }
-, S_ROOT_HIDE = {
-  position: 'relative',
-  display: 'none'
-}
+, S_SHOW = { display: 'block' }
+, S_HIDE = { display: 'none' }
 , S_BT_CAPTION = { left: 286 }
 , S_TO_DATE_INFO = { marginTop: 4 }
 , S_INFO_CAPTION = {
@@ -66,10 +63,10 @@ const PanelDataInfo = ({
     description
   } = info || {}
  , { item, linkFn } = zhInfo || {}
- , _style = isShow ? S_ROOT_SHOW : S_ROOT_HIDE;
+ , _style = isShow ? S_SHOW : S_HIDE;
 
   return (
-    <div style={_style}>
+    <div style={{...S_ROOT, ..._style}}>
       <A.ButtonTab
         style={S_BT_CAPTION}
         caption="Chart"
@@ -77,7 +74,7 @@ const PanelDataInfo = ({
       />
       <A.InfoPart
          text={name}
-         styleText={S_INFO_TEXT}
+         textStyle={S_INFO_TEXT}
       />
       <A.InfoPart
          caption="From Date"

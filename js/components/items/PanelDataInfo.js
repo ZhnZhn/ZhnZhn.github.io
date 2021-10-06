@@ -13,13 +13,14 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const CL_DESCR = 'info__descr',
       C_DESCR_OPEN = '#1b2836',
-      S_ROOT_SHOW = {
+      S_ROOT = {
   position: 'relative',
-  display: 'block',
   padding: '34px 20px 0 8px'
 },
-      S_ROOT_HIDE = {
-  position: 'relative',
+      S_SHOW = {
+  display: 'block'
+},
+      S_HIDE = {
   display: 'none'
 },
       S_BT_CAPTION = {
@@ -85,17 +86,19 @@ const PanelDataInfo = ({
     item,
     linkFn
   } = zhInfo || {},
-        _style = isShow ? S_ROOT_SHOW : S_ROOT_HIDE;
+        _style = isShow ? S_SHOW : S_HIDE;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: _style,
+    style: { ...S_ROOT,
+      ..._style
+    },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ButtonTab, {
       style: S_BT_CAPTION,
       caption: "Chart",
       onClick: onClickChart
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       text: name,
-      styleText: S_INFO_TEXT
+      textStyle: S_INFO_TEXT
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       caption: "From Date",
       captionStyle: S_INFO_CAPTION,
