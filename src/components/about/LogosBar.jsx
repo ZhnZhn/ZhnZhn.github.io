@@ -2,18 +2,18 @@ import { useContext } from 'react';
 
 import ThemeContext  from '../hoc/ThemeContext';
 
+import ItemStack from '../zhn/ItemStack';
+
 import LogoQuandl from './LogoQuandl';
 import LogoGitHub from './LogoGitHub';
 import LogoReact from './LogoReact';
 import LogoHighcharts from './LogoHighcharts';
 
-const TH_ID = 'LOGOS';
+const TH_ID = 'LOGOS'
 
-const CL = {
- ROOT: 'logo-container',
- LI: 'logo-item',
- LOGO: 'logo-item data-provider-logo'
-};
+, CL_ROOT = 'logo-container'
+, CL_LI = 'logo-item'
+, CL_LOGO = 'logo-item data-provider-logo';
 
 const LOGO_CONFS = [
   {
@@ -31,7 +31,7 @@ const LOGO_CONFS = [
 
 
 const Logo = ({
-  className=CL.LOGO,
+  className=CL_LOGO,
   title, caption,
   ...rest
 }) => (
@@ -44,22 +44,31 @@ const Logo = ({
   </a>
 );
 
+const _crLogoItem = config => (
+  <Logo key={config.caption} {...config} />
+);
+
 const LogosBar = () => {
   const theme = useContext(ThemeContext)
   , TS = theme.getStyle(TH_ID);
   return (
-    <div className={CL.ROOT} style={TS.ROOT}>
-       <LogoQuandl className={CL.LI} />
+    <div className={CL_ROOT} style={TS.ROOT}>
+       <LogoQuandl
+         className={CL_LI}
+       />
        <LogoGitHub
-         className={CL.LI}
+         className={CL_LI}
          href="https://github.com/ZhnZhn/ZhnZhn.github.io" />
-       <LogoReact className={CL.LI} />
-       <LogoHighcharts className={CL.LI} />
-       {
-         LOGO_CONFS.map(config => (
-           <Logo key={config.caption} {...config} />
-         ))
-       }
+       <LogoReact
+          className={CL_LI}
+        />
+       <LogoHighcharts
+         className={CL_LI}
+       />
+       <ItemStack
+          items={LOGO_CONFS}
+          crItem={_crLogoItem}
+        />
     </div>
   );
 };
