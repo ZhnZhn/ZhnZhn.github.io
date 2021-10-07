@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/trJsonSir.js"
+ ],
+ "file": "../../../src/components/browser-slider/trJsonSir.js",
+ "names": [
+  "trJsonSir",
+  "json",
+  "forEach",
+  "item",
+  "type",
+  "text",
+  "id"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,SAAS,GAAGC,IAAI,IAAI;AACxBA,EAAAA,IAAI,CAACC,OAAL,CAAaC,IAAI,IAAI;AACnB,QAAIA,IAAI,CAACC,IAAL,KAAc,GAAlB,EAAuB;AACrBD,MAAAA,IAAI,CAACE,IAAL,GAAeF,IAAI,CAACG,EAApB,UAA2BH,IAAI,CAACE,IAAhC;AACD;AACF,GAJD;AAKA,SAAOJ,IAAP;AACD,CAPD;;eASeD,S"
+}

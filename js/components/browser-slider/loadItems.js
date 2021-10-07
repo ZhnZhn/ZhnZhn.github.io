@@ -5,9 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _trJsonIfSdn = _interopRequireDefault(require("./trJsonIfSdn"));
+var _trJsonSdn = _interopRequireDefault(require("./trJsonSdn"));
 
-var _trJsonIfSir = _interopRequireDefault(require("./trJsonIfSir"));
+var _trJsonSir = _interopRequireDefault(require("./trJsonSir"));
 
 const _isArr = Array.isArray;
 
@@ -15,6 +15,11 @@ const _compareByText = (a, b) => {
   if (a.text < b.text) return -1;
   if (a.text > b.text) return 1;
   return 0;
+};
+
+const _hmTr = {
+  SDN: _trJsonSdn.default,
+  SIR: _trJsonSir.default
 };
 
 const loadItems = (proxy = '', dfProps, id) => {
@@ -29,8 +34,12 @@ const loadItems = (proxy = '', dfProps, id) => {
     cache: "default"
   }).then(res => res.json()).then(json => {
     if (_isArr(json)) {
-      json = (0, _trJsonIfSdn.default)(json, id, lT);
-      json = (0, _trJsonIfSir.default)(json, lT);
+      const _trJson = _hmTr[lT];
+
+      if (_trJson) {
+        json = _trJson(json, id);
+      }
+
       json.sort(_compareByText);
     }
 
