@@ -2,6 +2,7 @@ import { useRef, useState, useCallback, useEffect } from 'react'
 
 import MenuTitle from './MenuTitle'
 import Page from './Page'
+import { S_FRAME } from './Style'
 
 const FOCUS_FIRST_MLS = 1000;
 
@@ -87,7 +88,7 @@ const Frame = ({
   }, [_isFocusTitle])
 
   return (
-    <div style={style}>
+    <div style={{...S_FRAME, ...style}}>
       { _isTitle && <MenuTitle
           innerRef={_refTitle}
           title={title}

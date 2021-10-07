@@ -3,25 +3,23 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
-var _Style = _interopRequireDefault(require("./Style"));
+var _Style = require("./Style");
 
-var CL = {
-  ITEM: 'menu-item'
-};
+var _jsxRuntime = require("react/jsx-runtime");
 
-var MenuTitle = function MenuTitle(_ref) {
-  var innerRef = _ref.innerRef,
-      title = _ref.title,
-      onClick = _ref.onClick;
+const CL_MENU_ITEM = 'menu-item';
 
-  var _hKeyDown = function _hKeyDown(evt) {
-    if ((0, _isKeyEnter["default"])(evt)) {
+const MenuTitle = ({
+  innerRef,
+  title,
+  onClick
+}) => {
+  const _hKeyDown = evt => {
+    if ((0, _isKeyEnter.default)(evt)) {
       evt.preventDefault();
       onClick();
     }
@@ -29,14 +27,14 @@ var MenuTitle = function MenuTitle(_ref) {
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     ref: innerRef,
-    className: CL.ITEM,
-    style: _Style["default"].TITLE,
+    className: CL_MENU_ITEM,
+    style: _Style.S_TITLE,
     role: "menuitem",
     tabIndex: "0",
     onClick: onClick,
     onKeyDown: _hKeyDown,
     children: [title, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: _Style["default"].TITLE_ARROW,
+      style: _Style.S_TITLE_ARROW,
       children: '<'
     })]
   });
@@ -53,5 +51,5 @@ MenuTitle.propTypes = {
 
 
 var _default = MenuTitle;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=MenuTitle.js.map

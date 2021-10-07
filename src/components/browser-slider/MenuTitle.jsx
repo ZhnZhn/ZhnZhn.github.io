@@ -1,9 +1,10 @@
-import isKeyEnter from '../zhn/isKeyEnter'
-import S from './Style'
+import isKeyEnter from '../zhn/isKeyEnter';
+import {
+  S_TITLE,
+  S_TITLE_ARROW
+} from './Style';
 
-const CL = {
-  ITEM: 'menu-item'
-};
+const CL_MENU_ITEM = 'menu-item';
 
 const MenuTitle = ({ innerRef, title, onClick }) => {
   const _hKeyDown = (evt) => {
@@ -15,15 +16,15 @@ const MenuTitle = ({ innerRef, title, onClick }) => {
   return (
     <div
       ref={innerRef}
-      className={CL.ITEM}
-      style={S.TITLE}
+      className={CL_MENU_ITEM}
+      style={S_TITLE}
       role="menuitem"
       tabIndex="0"
       onClick={onClick}
       onKeyDown={_hKeyDown}
     >
       {title}
-      <span style={S.TITLE_ARROW}>
+      <span style={S_TITLE_ARROW}>
         {'<'}
       </span>
     </div>

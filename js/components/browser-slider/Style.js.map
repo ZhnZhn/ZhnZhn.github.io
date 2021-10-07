@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../../src/components/browser-slider/Style.js"],"names":["Style","MSG_ERR","paddingLeft","color","fontFamily","fontWeight","fontSize","TITLE","position","paddingTop","paddingBottom","cursor","TITLE_ARROW","top","left","ITEM_L","padding","ITEM_T"],"mappings":";;;;AACA,IAAMA,KAAK,GAAG;AACZC,EAAAA,OAAO,EAAE;AACPC,IAAAA,WAAW,EAAE,MADN;AAEPC,IAAAA,KAAK,EAAE,SAFA;AAGPC,IAAAA,UAAU,EAAE,+CAHL;AAIPC,IAAAA,UAAU,EAAE,MAJL;AAKPC,IAAAA,QAAQ,EAAE;AALH,GADG;AAQZC,EAAAA,KAAK,EAAE;AACLC,IAAAA,QAAQ,EAAE,UADL;AAELL,IAAAA,KAAK,EAAE,QAFF;AAGLD,IAAAA,WAAW,EAAE,MAHR;AAILO,IAAAA,UAAU,EAAE,KAJP;AAKLC,IAAAA,aAAa,EAAE,KALV;AAMLN,IAAAA,UAAU,EAAE,+CANP;AAOLC,IAAAA,UAAU,EAAE,MAPP;AAQLC,IAAAA,QAAQ,EAAE,MARL;AASLK,IAAAA,MAAM,EAAE;AATH,GARK;AAmBZC,EAAAA,WAAW,EAAE;AACXJ,IAAAA,QAAQ,EAAE,UADC;AAEXK,IAAAA,GAAG,EAAE,KAFM;AAGXC,IAAAA,IAAI,EAAE;AAHK,GAnBD;AAwBZC,EAAAA,MAAM,EAAE;AACN;AACAZ,IAAAA,KAAK,EAAE,SAFD;AAGNC,IAAAA,UAAU,EAAE,+CAHN;AAINC,IAAAA,UAAU,EAAE,MAJN;AAKNC,IAAAA,QAAQ,EAAE,MALJ;AAMNU,IAAAA,OAAO,EAAE,KANH;AAONd,IAAAA,WAAW,EAAE,MAPP;AAQNS,IAAAA,MAAM,EAAE;AARF,GAxBI;AAkCZM,EAAAA,MAAM,EAAE;AACNd,IAAAA,KAAK,EAAE,OADD;AAENC,IAAAA,UAAU,EAAE,+CAFN;AAGNC,IAAAA,UAAU,EAAE,MAHN;AAINC,IAAAA,QAAQ,EAAE,MAJJ;AAKNU,IAAAA,OAAO,EAAE,KALH;AAMNL,IAAAA,MAAM,EAAE;AANF;AAlCI,CAAd;eA4CeX,K","sourcesContent":["\r\nconst Style = {\r\n  MSG_ERR: {\r\n    paddingLeft: '12px',\r\n    color: '#f44336',\r\n    fontFamily: 'Roboto, \"Arial Unicode MS\", Arial, sans-serif',\r\n    fontWeight: 'bold',\r\n    fontSize: '16px'\r\n  },\r\n  TITLE: {\r\n    position: 'relative',\r\n    color: 'silver',\r\n    paddingLeft: '32px',\r\n    paddingTop: '8px',\r\n    paddingBottom: '4px',\r\n    fontFamily: 'Roboto, \"Arial Unicode MS\", Arial, sans-serif',\r\n    fontWeight: 'bold',\r\n    fontSize: '16px',\r\n    cursor: 'pointer'\r\n  },\r\n  TITLE_ARROW: {\r\n    position: 'absolute',\r\n    top: '8px',\r\n    left: '16px'\r\n  },\r\n  ITEM_L: {\r\n    //color: '#a487d4',\r\n    color: '#1b2836',\r\n    fontFamily: 'Roboto, \"Arial Unicode MS\", Arial, sans-serif',\r\n    fontWeight: 'bold',\r\n    fontSize: '16px',\r\n    padding: '8px',\r\n    paddingLeft: '12px',\r\n    cursor: 'pointer'\r\n  },\r\n  ITEM_T: {\r\n    color: 'black',\r\n    fontFamily: 'Roboto, \"Arial Unicode MS\", Arial, sans-serif',\r\n    fontWeight: 'bold',\r\n    fontSize: '16px',\r\n    padding: '8px',\r\n    cursor: 'pointer'\r\n  }\r\n}\r\n\r\nexport default Style\r\n"],"file":"Style.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/Style.js"
+ ],
+ "file": "../../../src/components/browser-slider/Style.js",
+ "names": [
+  "S_FRAME",
+  "fontWeight",
+  "fontSize",
+  "S_MSG_ERR",
+  "color",
+  "paddingLeft",
+  "S_TITLE",
+  "position",
+  "padding",
+  "cursor",
+  "S_TITLE_ARROW",
+  "top",
+  "left",
+  "S_ITEM_L",
+  "S_ITEM_T"
+ ],
+ "mappings": ";;;;AACO,MAAMA,OAAO,GAAG;AACrBC,EAAAA,UAAU,EAAE,MADS;AAErBC,EAAAA,QAAQ,EAAE;AAFW,CAAhB;;AAKA,MAAMC,SAAS,GAAG;AACvBC,EAAAA,KAAK,EAAE,SADgB;AAEvBC,EAAAA,WAAW,EAAE;AAFU,CAAlB;;AAKA,MAAMC,OAAO,GAAG;AACrBC,EAAAA,QAAQ,EAAE,UADW;AAErBH,EAAAA,KAAK,EAAE,QAFc;AAGrBI,EAAAA,OAAO,EAAE,gBAHY;AAIrBC,EAAAA,MAAM,EAAE;AAJa,CAAhB;;AAOA,MAAMC,aAAa,GAAG;AAC3BH,EAAAA,QAAQ,EAAE,UADiB;AAE3BI,EAAAA,GAAG,EAAE,CAFsB;AAG3BC,EAAAA,IAAI,EAAE;AAHqB,CAAtB;;AAMA,MAAMC,QAAQ,GAAG;AACtBT,EAAAA,KAAK,EAAE,SADe;AAEtBI,EAAAA,OAAO,EAAE,CAFa;AAGtBH,EAAAA,WAAW,EAAE,EAHS;AAItBI,EAAAA,MAAM,EAAE;AAJc,CAAjB;;AAOA,MAAMK,QAAQ,GAAG;AACtBV,EAAAA,KAAK,EAAE,OADe;AAEtBI,EAAAA,OAAO,EAAE,CAFa;AAGtBC,EAAAA,MAAM,EAAE;AAHc,CAAjB"
+}

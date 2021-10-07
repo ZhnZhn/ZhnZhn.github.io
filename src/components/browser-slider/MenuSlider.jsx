@@ -8,23 +8,19 @@ import loadItems from './loadItems'
 import Frame from './Frame'
 import PageList from './PageList'
 
-const S = {
-  ROOT: {
-    width: 300,
-    overflow: 'hidden'
-  },
-  PAGES: {
-    width: 1500,
-    overflowX: 'hidden',
-    display: 'flex',
-    flexFlow: 'row nowrap',
-    alignItems: 'flex-start',
-    transition: 'all 750ms ease-out'
-  },
-  PAGE: {
-    width: 300
-  }
-};
+const S_ROOT = {
+  width: 300,
+  overflow: 'hidden'
+}
+, S_PAGES = {
+  width: 1500,
+  overflowX: 'hidden',
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  alignItems: 'flex-start',
+  transition: 'all 750ms ease-out'
+}
+, S_PAGE = { width: 300 };
 
 const _getTranslateX = (node) => {
   const _prevStr = node
@@ -73,7 +69,7 @@ class MenuSlider extends Component {
       <Frame
         key={id}
         id={id}
-        style={S.PAGE}
+        style={S_PAGE}
         store={store}
         title={title}
         dfProps={dfProps}
@@ -118,7 +114,7 @@ class MenuSlider extends Component {
      const _prevInt = _getTranslateX(_menuNode);
      dX = this._direction === 1
        ? _prevInt-300
-       : _prevInt+300     
+       : _prevInt+300
      this._direction = 0
    } else if (this._direction === 0 && _menuNode) {
      dX = _getTranslateX(_menuNode);
@@ -131,16 +127,16 @@ class MenuSlider extends Component {
     const { dfProps, store } = this.props
     , { pages, pageCurrent } = this.state
     , _transform = this._crTransform()
-    , _pagesStyle = {...S.PAGES, ..._transform};
+    , _pagesStyle = {...S_PAGES, ..._transform};
 
     return (
-      <div style={S.ROOT}>
+      <div style={S_ROOT}>
         <div
           ref={this._refMenu}
           style={_pagesStyle}
         >
           <Frame
-            style={S.PAGE}
+            style={S_PAGE}
             title="Main Menu"
             store={store}
             dfProps={dfProps}

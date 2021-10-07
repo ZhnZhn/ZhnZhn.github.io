@@ -26,20 +26,18 @@ var _MenuSlider = _interopRequireDefault(require("./MenuSlider"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 const CL_SCROLL = 'scroll-container-y';
-const S = {
-  BROWSER: {
-    paddingRight: 0
-  },
-  BR_CAPTION: {
-    paddingLeft: 6
-  },
-  CAPTION: {
-    top: 0,
-    paddingLeft: 4
-  },
-  SCROLL_PANE: {
-    height: '92%'
-  }
+const S_BROWSER = {
+  paddingRight: 0
+},
+      S_BR_CAPTION = {
+  paddingLeft: 6
+},
+      S_CAPTION = {
+  top: 0,
+  paddingLeft: 4
+},
+      S_SCROLL_PANE = {
+  height: '92%'
 };
 const BrowserSlider = /*#__PURE__*/(0, _react.memo)(props => {
   const {
@@ -69,20 +67,20 @@ const BrowserSlider = /*#__PURE__*/(0, _react.memo)(props => {
     value: _browserContext,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.Browser, {
       isShow: isShow,
-      style: S.BROWSER,
+      style: S_BROWSER,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserMenuMore.default, {
         is: isMenuMore,
         toggleMenu: toggleMenuMore,
         toggleFilter: toggleFilterNotActive
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
-        style: S.BR_CAPTION,
+        style: S_BR_CAPTION,
         caption: caption,
-        captionStyle: S.CAPTION,
+        captionStyle: S_CAPTION,
         onMore: toggleMenuMore,
         onClose: hide
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
         className: CL_SCROLL,
-        style: S.SCROLL_PANE,
+        style: S_SCROLL_PANE,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuSlider.default, { ...props
         })
       })]

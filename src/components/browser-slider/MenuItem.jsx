@@ -1,17 +1,18 @@
-import { useCallback } from 'react'
+import { useCallback } from 'react';
 
-import isKeyEnter from '../zhn/isKeyEnter'
-import STYLE from './Style'
+import isKeyEnter from '../zhn/isKeyEnter';
+import {
+  S_ITEM_L,
+  S_ITEM_T
+} from './Style';
 
-const CL = {
-  ITEM: 'menu-item'
-};
+const CL_MENU_ITEM = 'menu-item';
 
 const MenuItem = ({ innerRef, item, onClick }) => {
   const { text, type } = item
   , _style = type === 'l'
-      ? STYLE.ITEM_L
-      : STYLE.ITEM_T
+      ? S_ITEM_L
+      : S_ITEM_T
   , _hKeyDown = useCallback((evt) => {
       if (isKeyEnter(evt)) {
         evt.preventDefault()
@@ -21,7 +22,7 @@ const MenuItem = ({ innerRef, item, onClick }) => {
   return (
     <div
       ref={innerRef}
-      className={CL.ITEM}
+      className={CL_MENU_ITEM}
       style={_style}
       tabIndex="0"
       role="menuitem"

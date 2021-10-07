@@ -11,6 +11,8 @@ var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
 var _Page = _interopRequireDefault(require("./Page"));
 
+var _Style = require("./Style");
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 const FOCUS_FIRST_MLS = 1000;
@@ -92,7 +94,9 @@ const Frame = ({
     }
   }, [_isFocusTitle]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: style,
+    style: { ..._Style.S_FRAME,
+      ...style
+    },
     children: [_isTitle && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle.default, {
       innerRef: _refTitle,
       title: title,
