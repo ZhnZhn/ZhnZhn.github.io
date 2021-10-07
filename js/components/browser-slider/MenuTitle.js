@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
+var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
 var _Style = require("./Style");
 
@@ -18,12 +18,7 @@ const MenuTitle = ({
   title,
   onClick
 }) => {
-  const _hKeyDown = evt => {
-    if ((0, _isKeyEnter.default)(evt)) {
-      evt.preventDefault();
-      onClick();
-    }
-  };
+  const _hKeyDown = (0, _useKeyEnter.default)(onClick);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     ref: innerRef,

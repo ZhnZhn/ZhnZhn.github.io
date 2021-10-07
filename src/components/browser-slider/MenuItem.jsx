@@ -1,6 +1,5 @@
-import { useCallback } from 'react';
+import useKeyEnter from '../hooks/useKeyEnter';
 
-import isKeyEnter from '../zhn/isKeyEnter';
 import {
   S_ITEM_L,
   S_ITEM_T
@@ -13,12 +12,8 @@ const MenuItem = ({ innerRef, item, onClick }) => {
   , _style = type === 'l'
       ? S_ITEM_L
       : S_ITEM_T
-  , _hKeyDown = useCallback((evt) => {
-      if (isKeyEnter(evt)) {
-        evt.preventDefault()
-        onClick()
-      }
-    }, [onClick]);
+  , _hKeyDown = useKeyEnter(onClick, [onClick]);
+
   return (
     <div
       ref={innerRef}

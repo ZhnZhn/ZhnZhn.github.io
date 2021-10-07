@@ -5,9 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
-
-var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
+var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
 var _Style = require("./Style");
 
@@ -25,12 +23,7 @@ const MenuItem = ({
     type
   } = item,
         _style = type === 'l' ? _Style.S_ITEM_L : _Style.S_ITEM_T,
-        _hKeyDown = (0, _react.useCallback)(evt => {
-    if ((0, _isKeyEnter.default)(evt)) {
-      evt.preventDefault();
-      onClick();
-    }
-  }, [onClick]);
+        _hKeyDown = (0, _useKeyEnter.default)(onClick, [onClick]);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: innerRef,

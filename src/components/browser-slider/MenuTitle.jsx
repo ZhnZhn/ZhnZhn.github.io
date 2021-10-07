@@ -1,4 +1,5 @@
-import isKeyEnter from '../zhn/isKeyEnter';
+import useKeyEnter from '../hooks/useKeyEnter';
+
 import {
   S_TITLE,
   S_TITLE_ARROW
@@ -6,13 +7,13 @@ import {
 
 const CL_MENU_ITEM = 'menu-item';
 
-const MenuTitle = ({ innerRef, title, onClick }) => {
-  const _hKeyDown = (evt) => {
-    if (isKeyEnter(evt)) {
-      evt.preventDefault()
-      onClick()
-    }
-  };
+const MenuTitle = ({
+  innerRef,
+  title,
+  onClick
+}) => {
+  const _hKeyDown = useKeyEnter(onClick);
+
   return (
     <div
       ref={innerRef}
