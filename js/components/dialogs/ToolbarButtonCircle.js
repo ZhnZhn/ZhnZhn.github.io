@@ -3,11 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
-var _react = require("react");
+exports.default = void 0;
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
@@ -15,37 +11,34 @@ var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
-var S = {
-  ROW: {
-    paddingTop: 2,
-    paddingBottom: 4
-  },
-  BUTTON_CIRCLE: {
-    marginLeft: 20
-  }
+var _jsxRuntime = require("react/jsx-runtime");
+
+const S_ROW = {
+  padding: '2px 0 4px 0'
+},
+      S_BUTTON_CIRCLE = {
+  marginLeft: 20
 };
 
-var _crButton = function _crButton(_ref, index) {
-  var caption = _ref.caption,
-      title = _ref.title,
-      onClick = _ref.onClick;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
-    style: S.BUTTON_CIRCLE,
-    caption: caption,
-    title: title,
-    onClick: onClick
-  }, caption + index);
-};
+const _crButtonItem = ({
+  caption,
+  title,
+  onClick
+}, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
+  style: S_BUTTON_CIRCLE,
+  caption: caption,
+  title: title,
+  onClick: onClick
+}, caption + index);
 
-var ToolbarButtonCircle = /*#__PURE__*/(0, _react.memo)(function (_ref2) {
-  var buttons = _ref2.buttons;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Row.Plain, {
-    style: S.ROW,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack["default"], {
-      items: buttons,
-      crItem: _crButton
-    })
-  });
+const ToolbarButtonCircle = ({
+  buttons
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Plain, {
+  style: S_ROW,
+  children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+    items: buttons,
+    crItem: _crButtonItem
+  })
 });
 /*
 ToolbarButtonCircle.propTypes = {
@@ -59,6 +52,7 @@ ToolbarButtonCircle.propTypes = {
 }
 */
 
+
 var _default = ToolbarButtonCircle;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ToolbarButtonCircle.js.map
