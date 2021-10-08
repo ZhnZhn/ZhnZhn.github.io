@@ -6,16 +6,13 @@ import InputText from '../zhn/InputText'
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
 
+import crCaption from './fns/crCaption'
+
 const CL_INPUT_COLOR = 'p-r va-b';
 const DF_COLOR = '#90ed7d';
 
-const S = {
-  ROOT: {
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingRight: 6
-  },
-  CAPTION: {
+const S_ROOT = { padding: '6px 6px 6px 0' }
+, S_CAPTION = {
     display: 'inline-block',
     color: '#1b75bb',
     textAlign: 'right',
@@ -23,20 +20,14 @@ const S = {
     paddingRight: 5,
     fontSize: 16,
     fontWeight: 'bold'
-  },
-  INPUT_TEXT: {
-    width: 80,
-    marginRight: 8,
-    marginBottom: 2,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
-};
+  , S_INPUT_TEXT = {
+    width: 80,
+    margin: '0 8px 2px 5px',
+    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+  };
 
-const _onEnter = () => {};
-
-const _crCaption = caption => caption && caption.indexOf(':') === -1
-  ? `${caption}:`
-  : caption;
+const NOOP = () => {};
 
 const RowInputColor = ({
   style,
@@ -44,7 +35,7 @@ const RowInputColor = ({
   inputStyle,
   caption,
   initValue=DF_COLOR,
-  onEnter=_onEnter
+  onEnter=NOOP
 }) => {
   const _refCellColor = useRef()
   , [value, setValue] = useState(initValue)
@@ -64,16 +55,16 @@ const RowInputColor = ({
 
   useEffect(()=>setValue(initValue), [initValue])
 
-  const _caption = _crCaption(caption);
+  const _caption = crCaption(caption);
 
   return (
-    <div style={{...S.ROOT, ...style}}>
+    <div style={{...S_ROOT, ...style}}>
       <label>
-        {_caption && <span style={{...S.CAPTION, ...captionStyle}}>
+        {_caption && <span style={{...S_CAPTION, ...captionStyle}}>
           {_caption}
         </span>}
         <InputText
-           style={{...S.INPUT_TEXT, ...inputStyle}}
+           style={{...S_INPUT_TEXT, ...inputStyle}}
            initValue={value}
            maxLength={20}
            onEnter={_hEnter}

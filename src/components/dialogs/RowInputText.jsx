@@ -1,30 +1,23 @@
-import { forwardRef } from 'react';
 //import PropTypes from "prop-types";
+import { forwardRef } from 'react';
 
-import InputText from '../zhn/InputText'
+import InputText from '../zhn/InputText';
+import crCaption from './fns/crCaption';
 
-const S = {
-  ROOT: {
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingRight: 6
-  },
-  CAPTION: {
-    display: 'inline-block',
-    color: '#1b75bb',
-    textAlign: 'right',
-    width: 100,
-    paddingRight: 5,
-    fontSize: 16,
-    fontWeight: 'bold'
-  },
-  INPUT_TEXT : {
-    width: 220,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  }
+const S_ROOT = { padding: '6px 0 6px 6px' }
+, S_CAPTION = {
+  display: 'inline-block',
+  color: '#1b75bb',
+  textAlign: 'right',
+  width: 100,
+  paddingRight: 5,
+  fontSize: 16,
+  fontWeight: 'bold'
 }
-
-const COLLON = ':';
+, S_INPUT_TEXT = {
+  width: 220,
+  boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+};
 
 const RowInputText = forwardRef((props, ref) => {
   const {
@@ -35,14 +28,12 @@ const RowInputText = forwardRef((props, ref) => {
     ...rest
   } = props
   , _rootStyle = rootStyle
-       || {...S.ROOT, ...styleRoot}
+       || {...S_ROOT, ...styleRoot}
   , _captionStyle = captionStyle
-       || {...S.CAPTION, ...styleCaption}
+       || {...S_CAPTION, ...styleCaption}
   , _inputStyle = inputStyle
-       || {...S.INPUT_TEXT, ...styleInput}
-  , _caption = caption.indexOf(COLLON) === -1
-      ? caption + COLLON
-      : caption;
+       || {...S_INPUT_TEXT, ...styleInput}
+  , _caption = crCaption(caption);
   return (
     <div style={_rootStyle}>
       <label>
