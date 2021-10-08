@@ -1,6 +1,6 @@
 import { useRef, useCallback, useMemo } from 'react';
 //import PropTypes from "prop-types";
-import memoEqual from '../hoc/memoEqual'
+import crModalDialog  from './fns/crModalDialog';
 
 import Button from './Button'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
@@ -8,51 +8,39 @@ import MathCaptcha from '../zhn-moleculs/MathCaptcha';
 
 import FactoryAction from '../../flux/actions/FactoryAction'
 
-const MSG_PREFIX = "Would you like load item";
-const MSG_SUFFIX = "from url?";
+const MSG_PREFIX = "Would you like load item"
+, MSG_SUFFIX = "from url?"
 
-const S = {
-  MODAL: {
-    position: 'static',
-    width: 400,
-    height: 205,
-    margin: '70px auto'
-  },
-  ROOT_DIV: {
-    margin: 5
-  },
-  NAME: {
-    color: '#a487d4',
-    paddingLeft: 5,
-    paddingRight: 5
-  },
-  DESCR: {
-    color: 'gray',
-    width: 400,
-    paddingLeft: 10,
-    paddingTop: 5,
-    lineHeight: 1.4,
-    fontWeight: 'bold',
-    whiteSpace: 'pre'
-  },
-  CAPTCHA: {
-    padding: 8,
-    paddingBottom: 0
-  }
-};
+, S_MODAL = {
+  position: 'static',
+  width: 400,
+  height: 205,
+  margin: '70px auto'
+}
+, S_ROOT_DIV = { margin: 5 }
+, S_NAME = {
+  color: '#a487d4',
+  padding: '0 5px'
+},
+S_DESCR = {
+  color: 'gray',
+  width: 400,
+  padding: '5px 0 0 10px',
+  lineHeight: 1.4,
+  fontWeight: 'bold',
+  whiteSpace: 'pre'
+}
+, S_CAPTCHA = { padding: '8px 8px 0 8px' };
 
 const _DF_DATA = {};
 
-const _getName = data => {  
+const _getName = data => {
   const { options } = data
   , { name, title } = options || {};
   return name || title || '';
 };
 
-const _areEqualProps = (prevProps, nextProps) =>
-  nextProps.isShow === prevProps.isShow;
-
-const AskDialog = memoEqual(({
+const AskDialog = crModalDialog(({
   isShow,
   data=_DF_DATA,
   onClose
@@ -69,12 +57,14 @@ const AskDialog = memoEqual(({
     }, [data, onClose])
  , _commandButtons = useMemo(() => [
      <Button.Flat
+       key="k1"
        caption="Yes, Load"
        //accessKey="s"
        isPrimary={true}
        onClick={_hLoad}
      />,
      <Button.Flat
+       key="k2"
        caption="No, Close"
        //accessKey="c"
        onClick={onClose}
@@ -84,27 +74,27 @@ const AskDialog = memoEqual(({
 
   return (
     <ModalDialog
-      style={S.MODAL}
+      style={S_MODAL}
       caption="Confirm Load"
       isShow={isShow}
       commandButtons={_commandButtons}
       withoutClose={true}
       onClose={onClose}
     >
-       <div style={S.ROOT_DIV}>
-          <p style={S.DESCR}>
+       <div style={S_ROOT_DIV}>
+          <p style={S_DESCR}>
              {MSG_PREFIX}
-             <span style={S.NAME}>{_name}</span>
+             <span style={S_NAME}>{_name}</span>
              {MSG_SUFFIX}
           </p>
           <MathCaptcha
             ref={_refCaptcha}
-            style={S.CAPTCHA}
+            style={S_CAPTCHA}
           />
        </div>
     </ModalDialog>
   );
-}, _areEqualProps)
+});
 
 /*
 AskDialog.propTypes = {
