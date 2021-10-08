@@ -1,6 +1,6 @@
-import { forwardRef, useState, useCallback, useImperativeHandle } from 'react'
+import { forwardRef, useState, useCallback, useImperativeHandle } from 'react';
 
-import ButtonCircle from '../zhn/ButtonCircle'
+import ButtonCircle from '../zhn/ButtonCircle';
 
 const BtCounter = forwardRef(({
   isShow,
@@ -11,12 +11,11 @@ const BtCounter = forwardRef(({
 }, ref) => {
   const [value, setValue] = useState(initialValue)
   , _onClick = useCallback(() => {
-     if (value < maxValue) {
-       setValue(v => v+1)
-     } else {
-       setValue(1)
-     }
-   }, [value, maxValue]);
+     setValue(v => v < maxValue
+        ? v + 1
+        : initialValue
+     )      
+   }, [maxValue, initialValue]);
 
   useImperativeHandle(ref, () => ({
      getValue: () => value
@@ -30,6 +29,6 @@ const BtCounter = forwardRef(({
       onClick={_onClick}
     />
   ) : null;
-})
+});
 
 export default BtCounter
