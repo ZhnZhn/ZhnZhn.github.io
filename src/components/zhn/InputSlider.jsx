@@ -5,95 +5,93 @@ import has from '../has'
 import mathFns from '../../math/mathFn'
 //import PropTypes from "prop-types";
 
-const S = {
-  ROOT: {
-    position: 'relative',
-    width: '100%',
-    height: 18,
-    marginTop: 8,
-    marginBottom: 8,
-    userSelect : 'none',
-    cursor: 'default'
-  },
-  ROOT_LINE : {
-    position: 'absolute',
-    top: 8,
-    left: 0,
-    width: '100%',
-    height: 2
-  },
-  LINE_BEFORE : {
-    position: 'absolute',
-    left: 0,
-    width: 'calc(15%)',
-    height: '100%',
-    marginRight: 6,
-    backgroundColor: 'rgb(0, 188, 212)',
-    transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-  },
-  LINE_AFTER : {
-    position: 'absolute',
-    right: 0,
-    width: 'calc(85%)',
-    height: '100%',
-    marginLeft: 6,
-    backgroundColor: 'rgb(189, 189, 189)',
-    transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
-  },
-  LINE_HOVERED : {
-    backgroundColor: 'rgb(158, 158, 158)',
-  },
-  ROOT_CIRCLE : {
-    boxSizing: 'borderBox',
-    zIndex: '1',
-    position: 'absolute',
-    top: 0,
-    left: '15%',
-    width: 12,
-    height: 12,
-    cursor: 'pointer',
-    pointerEvents: 'inherit',
-    margin: '1px 0px 0px',
-    backgroundColor: 'rgb(0, 188, 212)',
-    backgroundClip: 'padding-box',
-    border: '0px solid transparent',
-    borderRadius: '50%',
-    transform: 'translate(-50%, -50%)',
-    overflow: 'visible',
-    outline: 'none',
-    transition: 'background 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
-  },
-  CIRCLE_DRAGGED : {
-    width: 20,
-    height: 20
-  },
-  CIRCLE_INNER : {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: 12,
-    height: 12,
-    overflow: 'visible'
-  },
-  CIRCLE_INNER_EL : {
-    position: 'absolute',
-    top: -12,
-    left: -12,
-    width: '300%',
-    height: 36,
-    borderRadius: '50%',
-    //opacity: '0.16',
-    backgroundColor: 'rgba(0, 188, 212, 0.16)',
-    transform: 'scale(1)'
-  },
-  EMBER : {
-    top: -12,
-    left: -12,
-    width: '220%',
-    height: 44,
-    border: '1px solid #4caf50'
-  }
+const S_ROOT = {
+  position: 'relative',
+  width: '100%',
+  height: 18,
+  margin: '8px 0',
+  userSelect : 'none',
+  cursor: 'default'
+},
+S_ROOT_LINE = {
+  position: 'absolute',
+  top: 8,
+  left: 0,
+  width: '100%',
+  height: 2
+},
+S_LINE_BEFORE = {
+  position: 'absolute',
+  left: 0,
+  width: 'calc(15%)',
+  height: '100%',
+  marginRight: 6,
+  backgroundColor: '#00bcd4',
+  transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+},
+S_LINE_AFTER = {
+  position: 'absolute',
+  right: 0,
+  width: 'calc(85%)',
+  height: '100%',
+  marginLeft: 6,
+  backgroundColor: '#bdbdbd',
+  transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
+},
+S_LINE_HOVERED = {
+  backgroundColor: '#9e9e9e',
+},
+S_ROOT_CIRCLE = {
+  boxSizing: 'borderBox',
+  zIndex: '1',
+  position: 'absolute',
+  top: 0,
+  left: '15%',
+  width: 12,
+  height: 12,
+  cursor: 'pointer',
+  pointerEvents: 'inherit',
+  margin: '1px 0px 0px',
+  backgroundColor: '#00bcd4',
+  backgroundClip: 'padding-box',
+  border: '0px solid transparent',
+  borderRadius: '50%',
+  transform: 'translate(-50%, -50%)',
+  overflow: 'visible',
+  outline: 'none',
+  transition: 'background 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
+},
+S_CIRCLE_DRAGGED = {
+  width: 20,
+  height: 20
+},
+S_CIRCLE_INNER = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: 12,
+  height: 12,
+  overflow: 'visible'
+},
+S_CIRCLE_INNER_EL = {
+  position: 'absolute',
+  top: -12,
+  left: -12,
+  width: '300%',
+  height: 36,
+  borderRadius: '50%',
+  //opacity: '0.16',
+  backgroundColor: 'rgba(0, 188, 212, 0.16)',
+  transform: 'scale(1)'
+},
+S_EMBER = {
+  top: -12,
+  left: -12,
+  width: '220%',
+  height: 44,
+  border: '1px solid #4caf50'
 };
+
 
 const _isNaN = Number.isNaN
 , _noopFn = () => {}
@@ -191,7 +189,7 @@ const InputSlider = ({
     let v;
     v = position/positionMax * (max - min)
     v = Math.round(v / step) * step + min
-    v = mathFns.roundBy(value, 5)
+    v = mathFns.roundBy(v, 5)
 
     _updateValue(event, v)
   }
@@ -209,12 +207,12 @@ const InputSlider = ({
       onKeyDown: _hKeyDown,
       onBlur: setHoveredFalse
   }, _lineAfterStyle = hovered
-        ? {...S.LINE_AFTER, ...S.LINE_HOVERED}
-        : S.LINE_AFTER
-  , _circleStyle = dragged ? S.CIRCLE_DRAGGED : null
-  , _emberStyle = dragged ? S.EMBER : null
+        ? {...S_LINE_AFTER, ...S_LINE_HOVERED}
+        : S_LINE_AFTER
+  , _circleStyle = dragged ? S_CIRCLE_DRAGGED : null
+  , _emberStyle = dragged ? S_EMBER : null
   , _circleInnerEl = (hovered || dragged)
-        ? <div style={{ ...S.CIRCLE_INNER_EL, ..._emberStyle }} />
+        ? <div style={{ ...S_CIRCLE_INNER_EL, ..._emberStyle }} />
         : null
   , _percent = _toPercent(value, min, max)
   , _widthBeforeStyle = _crWidthStyle(_percent)
@@ -223,14 +221,14 @@ const InputSlider = ({
 
   return (
     <div
-      style={S.ROOT}
+      style={S_ROOT}
       {..._sliderHandlers}
     >
       <div
          ref={_refTrack}
-         style={S.ROOT_LINE}
+         style={S_ROOT_LINE}
       >
-        <div style={{...S.LINE_BEFORE, ..._widthBeforeStyle }} />
+        <div style={{...S_LINE_BEFORE, ..._widthBeforeStyle }} />
         <div style={{..._lineAfterStyle, ..._widthAfterStyle }} />
         <input
           type="hidden"
@@ -248,10 +246,10 @@ const InputSlider = ({
            aria-valuemax={max}
            aria-orientation="horizontal"
            aria-labelledby="discrete-slider-custom"
-           style={{...S.ROOT_CIRCLE, ..._circleStyle, ..._leftStyle }}
+           style={{...S_ROOT_CIRCLE, ..._circleStyle, ..._leftStyle }}
            {..._btHandlers}
         >
-          <div style={{ ...S.CIRCLE_INNER, ..._circleStyle}} >
+          <div style={{ ...S_CIRCLE_INNER, ..._circleStyle}} >
             {_circleInnerEl}
           </div>
         </div>
