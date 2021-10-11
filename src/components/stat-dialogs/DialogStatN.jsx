@@ -8,16 +8,13 @@ import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore, crDateConfig } = D
 
 const MAP_FREQUENCY_DF = 'M'
-    , MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.";
+, MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
+, MSG_DIMS_LOADING = "Dims is loading"
 
-const S = {
-  SPINNER_LOADING : {
-    margin: '16px auto 32px'
-  },
-  SPINNER_FAILED: {
-    borderColor: '#f44336',
-    animation: 'none'
-  }
+, S_SPINNER_LOADING = { margin: '16px auto 32px' }
+, S_SPINNER_FAILED = {
+  borderColor: '#f44336',
+  animation: 'none'
 };
 
 const {
@@ -198,26 +195,37 @@ class DialogStatN extends Component {
 
   _crValidationMessages = () => {
     const msg = []
-    , { configs, isLoadFailed, chartType={} } = this.state
+    , {
+      isLoadFailed,
+      isLoading,
+      configs,       
+      chartType
+    } = this.state
     , _isCategory = isCategory(chartType)
-    , { dim } = chartType;
-    if (!isLoadFailed) {
-      configs.forEach((config, index) => {
-         const { caption } = config;
-         if (!(_isCategory && caption === dim)) {
-           if (!this._items[index]) {
-             msg.push(this.props.msgOnNotSelected(caption))
-           }
-         }
-      })
-    } else {
+    , { dim } = chartType || {};
+    if (isLoadFailed) {
       msg.push(MSG_DIMS_NOT_LOADED)
+      return msg;
     }
+    if (isLoading) {
+      msg.push(MSG_DIMS_LOADING)
+      return msg;
+    }
+
+    configs.forEach((config, index) => {
+       const { caption } = config;
+       if (!(_isCategory && caption === dim)) {
+         if (!this._items[index]) {
+           msg.push(this.props.msgOnNotSelected(caption))
+         }
+       }
+    })
+
     return msg;
   }
 
-  _handleClose = () => {
-    this._handleWithValidationClose();
+  _hClose = () => {
+    this._handleWithValidationClose()
   }
 
   _hSelectChartType = (chartType) => {
@@ -236,27 +244,29 @@ class DialogStatN extends Component {
 
 
   _fSelect = (index) => {
-    return function(item) {
+    return (function(item) {
       this._items[index] = {...item}
-    };
+    }).bind(this);
   }
 
   _hSelectDate = (date) => {
     this.date = date;
   }
 
+  _isShowRow = id => !this.state[_crIsId(id)]
+
   _renderSelectInputs = () => {
     const { isShowLabels, configs } = this.state;
     return configs.map((conf, index) => {
       const { id, caption, options } = conf
-      , _isShow = !this.state[_crIsId(id)];
+      , _isShow = this._isShowRow(id);
       return (
         <D.ShowHide key={id} isShow={_isShow}>
           <D.RowInputSelect
             isShowLabels={isShowLabels}
             caption={caption}
             options={options}
-            onSelect={this._fSelect(index).bind(this)}
+            onSelect={this._fSelect(index)}
           />
         </D.ShowHide>
       );
@@ -283,9 +293,9 @@ class DialogStatN extends Component {
         validationMessages
      } = this.state
      , _spinnerStyle = isLoading
-         ? S.SPINNER_LOADING
+         ? S_SPINNER_LOADING
          : isLoadFailed
-            ? {...S.SPINNER_LOADING, ...S.SPINNER_FAILED}
+            ? {...S_SPINNER_LOADING, ...S_SPINNER_FAILED}
             : void 0;
 
     return (
@@ -296,7 +306,7 @@ class DialogStatN extends Component {
            commandButtons={this._commandButtons}
            onShowChart={onShow}
            onFront={onFront}
-           onClose={this._handleClose}
+           onClose={this._hClose}
        >
          <D.Toolbar
            isShow={isToolbar}

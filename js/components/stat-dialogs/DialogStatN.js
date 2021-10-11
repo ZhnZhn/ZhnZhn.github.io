@@ -25,15 +25,14 @@ const {
   crDateConfig
 } = _DialogCell.default;
 const MAP_FREQUENCY_DF = 'M',
-      MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.";
-const S = {
-  SPINNER_LOADING: {
-    margin: '16px auto 32px'
-  },
-  SPINNER_FAILED: {
-    borderColor: '#f44336',
-    animation: 'none'
-  }
+      MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
+      MSG_DIMS_LOADING = "Dims is loading",
+      S_SPINNER_LOADING = {
+  margin: '16px auto 32px'
+},
+      S_SPINNER_FAILED = {
+  borderColor: '#f44336',
+  animation: 'none'
 };
 const {
   isCategory,
@@ -182,35 +181,41 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
     this._crValidationMessages = () => {
       const msg = [],
             {
-        configs,
         isLoadFailed,
-        chartType = {}
+        isLoading,
+        configs,
+        chartType
       } = this.state,
             _isCategory = isCategory(chartType),
             {
         dim
-      } = chartType;
+      } = chartType || {};
 
-      if (!isLoadFailed) {
-        configs.forEach((config, index) => {
-          const {
-            caption
-          } = config;
-
-          if (!(_isCategory && caption === dim)) {
-            if (!this._items[index]) {
-              msg.push(this.props.msgOnNotSelected(caption));
-            }
-          }
-        });
-      } else {
+      if (isLoadFailed) {
         msg.push(MSG_DIMS_NOT_LOADED);
+        return msg;
       }
 
+      if (isLoading) {
+        msg.push(MSG_DIMS_LOADING);
+        return msg;
+      }
+
+      configs.forEach((config, index) => {
+        const {
+          caption
+        } = config;
+
+        if (!(_isCategory && caption === dim)) {
+          if (!this._items[index]) {
+            msg.push(this.props.msgOnNotSelected(caption));
+          }
+        }
+      });
       return msg;
     };
 
-    this._handleClose = () => {
+    this._hClose = () => {
       this._handleWithValidationClose();
     };
 
@@ -233,12 +238,14 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
       return function (item) {
         this._items[index] = { ...item
         };
-      };
+      }.bind(this);
     };
 
     this._hSelectDate = date => {
       this.date = date;
     };
+
+    this._isShowRow = id => !this.state[_crIsId(id)];
 
     this._renderSelectInputs = () => {
       const {
@@ -251,7 +258,7 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
           caption,
           options
         } = conf,
-              _isShow = !this.state[_crIsId(id)];
+              _isShow = this._isShowRow(id);
 
         return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
           isShow: _isShow,
@@ -259,7 +266,7 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
             isShowLabels: isShowLabels,
             caption: caption,
             options: options,
-            onSelect: this._fSelect(index).bind(this)
+            onSelect: this._fSelect(index)
           })
         }, id);
       });
@@ -341,8 +348,8 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
       chartOptions,
       validationMessages
     } = this.state,
-          _spinnerStyle = isLoading ? S.SPINNER_LOADING : isLoadFailed ? { ...S.SPINNER_LOADING,
-      ...S.SPINNER_FAILED
+          _spinnerStyle = isLoading ? S_SPINNER_LOADING : isLoadFailed ? { ...S_SPINNER_LOADING,
+      ...S_SPINNER_FAILED
     } : void 0;
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
@@ -352,7 +359,7 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
       commandButtons: this._commandButtons,
       onShowChart: onShow,
       onFront: onFront,
-      onClose: this._handleClose,
+      onClose: this._hClose,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
         isShow: isToolbar,
         buttons: this.toolbarButtons
