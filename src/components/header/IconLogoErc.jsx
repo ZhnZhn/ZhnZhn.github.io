@@ -1,15 +1,20 @@
+import Svg from '../zhn/svg/Svg';
 
-const IconLogoErc = ({ className, title }) => (
+const IconLogoErc = ({
+  className,
+  title
+}) => (
   <span
      className={className}
      title={title}
   >
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
-         fillRule="evenodd"
-         clipRule="evenodd"
-         strokeLinejoin="round"
-         strokeMiterlimit="2"
-         strokeWidth="2"
+    <Svg
+       w="32"
+       fillRule="evenodd"
+       clipRule="evenodd"
+       strokeLinejoin="round"
+       strokeMiterlimit="2"
+       strokeWidth="2"
     >
       <rect
         ry="1.8825414"
@@ -41,9 +46,8 @@ const IconLogoErc = ({ className, title }) => (
         fill="#a487d4"
         stroke="#a487d4"
       />
-    </svg>
+    </Svg>
   </span>
 );
-
 
 export default IconLogoErc
