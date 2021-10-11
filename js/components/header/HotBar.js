@@ -3,11 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -15,19 +11,21 @@ var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var _has = _interopRequireDefault(require("../has"));
 
+var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
+
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
-var S = {
-  ROOT: {
-    display: 'inline-block'
-  },
-  BT_CL: {
-    color: '#f44336'
-  }
+var _jsxRuntime = require("react/jsx-runtime");
+
+const S_ROOT = {
+  display: 'inline-block'
+},
+      S_BT_CL = {
+  color: '#f44336'
 };
 
-var _isIn = function _isIn(arr, type) {
-  for (var i = 0; i < arr.length; i++) {
+const _isIn = (arr, type) => {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i].type === type) {
       return true;
     }
@@ -36,8 +34,8 @@ var _isIn = function _isIn(arr, type) {
   return false;
 };
 
-var _calcMaxButtons = function _calcMaxButtons(maxButtons) {
-  switch (_has["default"].strWidth) {
+const _calcMaxButtons = maxButtons => {
+  switch (_has.default.strWidth) {
     case '"W600"':
       return 3;
 
@@ -52,24 +50,19 @@ var _calcMaxButtons = function _calcMaxButtons(maxButtons) {
   }
 };
 
-var CleanButton = function CleanButton(_ref) {
-  var is = _ref.is,
-      onClick = _ref.onClick;
-  return is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], {
-    timeout: 0,
-    style: S.BT_CL,
-    caption: "CL",
-    title: "Clean Hot Bar",
-    onClick: onClick
-  }, "BT_CLEAN") : null;
-};
+const CleanButton = ({
+  is,
+  onClick
+}) => is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+  timeout: 0,
+  style: S_BT_CL,
+  caption: "CL",
+  title: "Clean Hot Bar",
+  onClick: onClick
+}, "BT_CLEAN") : null;
 
-var _crBtProps = function _crBtProps(index, caption) {
-  if (caption === void 0) {
-    caption = '';
-  }
-
-  var _accessKey = _has["default"].touch ? '' : String(index + 1);
+const _crBtProps = (index, caption = '') => {
+  const _accessKey = _has.default.touch ? '' : String(index + 1);
 
   return {
     accessKey: _accessKey || void 0,
@@ -78,43 +71,35 @@ var _crBtProps = function _crBtProps(index, caption) {
   };
 };
 
-var _renderHotButtons = function _renderHotButtons(style, hotButtons, onShowDialog) {
-  return hotButtons.map(function (conf, index) {
-    var type = conf.type,
-        caption = conf.caption;
-    return /*#__PURE__*/(0, _react.createElement)(_FlatButton["default"], (0, _extends2["default"])({}, _crBtProps(index, caption), {
-      key: type,
-      timeout: 0,
-      style: style,
-      onClick: onShowDialog.bind(null, type)
-    }));
-  });
-};
+const _crHotBtItem = (conf, index, {
+  style,
+  onShowDialog
+}) => /*#__PURE__*/(0, _react.createElement)(_FlatButton.default, { ..._crBtProps(index, conf.caption),
+  key: conf.type,
+  timeout: 0,
+  style: style,
+  onClick: onShowDialog.bind(null, conf.type)
+});
 
-var HotBar = function HotBar(_ref2) {
-  var _ref2$maxButtons = _ref2.maxButtons,
-      maxButtons = _ref2$maxButtons === void 0 ? 5 : _ref2$maxButtons,
-      btStyle = _ref2.btStyle,
-      store = _ref2.store,
-      closeDialogAction = _ref2.closeDialogAction,
-      onShowDialog = _ref2.onShowDialog;
+const HotBar = ({
+  maxButtons = 5,
+  btStyle,
+  store,
+  closeDialogAction,
+  onShowDialog
+}) => {
+  const _refMaxBt = (0, _react.useRef)(_calcMaxButtons(maxButtons)),
+        [hotButtons, setHotButtons] = (0, _react.useState)([]),
+        _hClean = (0, _react.useCallback)(() => setHotButtons([]), []);
 
-  var _refMaxBt = (0, _react.useRef)(_calcMaxButtons(maxButtons)),
-      _useState = (0, _react.useState)([]),
-      hotButtons = _useState[0],
-      setHotButtons = _useState[1],
-      _hClean = (0, _react.useCallback)(function () {
-    return setHotButtons([]);
-  }, []);
-
-  (0, _useListen["default"])(store, function (actionType, conf) {
+  (0, _useListen.default)(store, (actionType, conf) => {
     if (actionType === closeDialogAction) {
-      setHotButtons(function (arr) {
+      setHotButtons(arr => {
         if (!_isIn(arr, conf.type)) {
-          var _index = arr.length % _refMaxBt.current;
+          const _index = arr.length % _refMaxBt.current;
 
           arr[_index] = conf;
-          return [].concat(arr);
+          return [...arr];
         }
 
         return arr;
@@ -122,8 +107,13 @@ var HotBar = function HotBar(_ref2) {
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: S.ROOT,
-    children: [_renderHotButtons(btStyle, hotButtons, onShowDialog), /*#__PURE__*/(0, _jsxRuntime.jsx)(CleanButton, {
+    style: S_ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+      items: hotButtons,
+      crItem: _crHotBtItem,
+      style: btStyle,
+      onShowDialog: onShowDialog
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CleanButton, {
       is: hotButtons.length !== 0,
       onClick: _hClean
     })]
@@ -131,5 +121,5 @@ var HotBar = function HotBar(_ref2) {
 };
 
 var _default = HotBar;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=HotBar.js.map

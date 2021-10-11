@@ -3,16 +3,11 @@ import { useRef, useState, useCallback } from 'react'
 import useListen from '../hooks/useListen'
 
 import has from '../has'
+import ItemStack from '../zhn/ItemStack'
 import FlatButton from '../zhn-m/FlatButton'
 
-const S = {
-  ROOT: {
-    display: 'inline-block'
-  },
-  BT_CL: {
-    color: '#f44336'
-  }
-};
+const S_ROOT = { display: 'inline-block' }
+, S_BT_CL = { color: '#f44336' };
 
 const _isIn = (arr, type) => {
   for(let i=0; i<arr.length; i++){
@@ -36,7 +31,7 @@ const CleanButton = ({ is, onClick }) => is
  ? <FlatButton
       key="BT_CLEAN"
       timeout={0}
-      style={S.BT_CL}
+      style={S_BT_CL}
       caption="CL"
       title="Clean Hot Bar"
       onClick={onClick}
@@ -54,20 +49,22 @@ const CleanButton = ({ is, onClick }) => is
    };
  };
 
- const _renderHotButtons = (style, hotButtons, onShowDialog) => {
-   return hotButtons.map((conf, index) => {
-     const { type, caption } = conf;
-     return (
-       <FlatButton
-         {..._crBtProps(index, caption)}
-         key={type}
-         timeout={0}
-         style={style}
-         onClick={onShowDialog.bind(null, type)}
-       />
-     );
-   })
- }
+
+const _crHotBtItem = (
+  conf,
+  index, {
+    style,
+    onShowDialog
+  }
+) => (
+   <FlatButton
+     {..._crBtProps(index, conf.caption)}
+     key={conf.type}
+     timeout={0}
+     style={style}
+     onClick={onShowDialog.bind(null, conf.type)}
+   />
+ );
 
 const HotBar = ({
   maxButtons=5,
@@ -93,14 +90,19 @@ const HotBar = ({
   }})
 
   return (
-    <div style={S.ROOT}>
-      {_renderHotButtons(btStyle, hotButtons, onShowDialog)}
+    <div style={S_ROOT}>
+      <ItemStack
+        items={hotButtons}
+        crItem={_crHotBtItem}
+        style={btStyle}
+        onShowDialog={onShowDialog}
+      />
       <CleanButton
          is={hotButtons.length !== 0}
          onClick={_hClean}
       />
     </div>
   );
-}
+};
 
 export default HotBar
