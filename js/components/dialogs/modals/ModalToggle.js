@@ -13,7 +13,7 @@ var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
 
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox"));
 
-var _Style = _interopRequireDefault(require("./Style"));
+var _Style = require("./Style");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -44,7 +44,7 @@ const _crCheckBoxItem = (item, index, {
   style: S_ROW,
   children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
     initValue: true,
-    style: { ..._Style.default.ROW_CHB,
+    style: { ..._Style.S_ROW_CHB,
       ...S_INLINE
     },
     checkedColor: TOGGLE_CHECKBOX_COLOR,
@@ -63,7 +63,7 @@ const _crCheckBoxItem = (item, index, {
 const ModalToggle = ({
   isShow,
   style,
-  className = _Style.default.CL,
+  className = _Style.CL_POPUP_MENU,
   selectProps,
   isFd,
   isShowFd,
@@ -87,7 +87,7 @@ const ModalToggle = ({
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
-    style: { ..._Style.default.ROOT,
+    style: { ..._Style.S_MODAL_POPUP,
       ...style
     },
     className: className,
@@ -101,19 +101,19 @@ const ModalToggle = ({
       onUnCheckCaption: onUnCheckCaption
     }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       value: isShowFd,
-      style: _Style.default.ROW_CHB,
+      style: _Style.S_ROW_CHB,
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "From Date",
       onToggle: _toggleFd
     }, "isShowFd"), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       value: isShowChart,
-      style: _Style.default.ROW_CHB,
+      style: _Style.S_ROW_CHB,
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "Chart",
       onToggle: _toggleChart
     }, "isShowChart"), !noForDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       value: isShowDate,
-      style: _Style.default.ROW_CHB,
+      style: _Style.S_ROW_CHB,
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "For Date",
       onToggle: _toggleDate

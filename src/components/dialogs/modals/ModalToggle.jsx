@@ -3,7 +3,11 @@ import { useCallback } from 'react';
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
 import RowCheckBox from '../rows/RowCheckBox';
-import STYLE from './Style';
+import {
+  CL_POPUP_MENU,
+  S_MODAL_POPUP,
+  S_ROW_CHB
+} from './Style';
 
 const TOGGLE_CHECKBOX_COLOR = '#1b75bb'
 , CAPTION_CHECKBOX_COLOR = '#a487d4'
@@ -32,7 +36,7 @@ const _crCheckBoxItem = (
   <div style={S_ROW} key={item.id}>
     <RowCheckBox
       initValue={true}
-      style={{...STYLE.ROW_CHB, ...S_INLINE}}
+      style={{...S_ROW_CHB, ...S_INLINE}}
       checkedColor={TOGGLE_CHECKBOX_COLOR}
       caption={item.caption}
       captionStyle={S_CAPTION}
@@ -49,7 +53,8 @@ const _crCheckBoxItem = (
 );
 
 const ModalToggle = ({
-  isShow, style, className=STYLE.CL,
+  isShow,
+  style, className=CL_POPUP_MENU,
   selectProps,
   isFd, isShowFd,
   isCh=true, isShowDate, isShowChart,
@@ -72,7 +77,7 @@ const ModalToggle = ({
   return (
   <ModalPopup
     isShow={isShow}
-    style={{...STYLE.ROOT, ...style}}
+    style={{...S_MODAL_POPUP, ...style}}
     className={className}
     onClose={onClose}
   >
@@ -87,7 +92,7 @@ const ModalToggle = ({
     { isFd && <RowCheckBox
         key="isShowFd"
         value={isShowFd}
-        style={STYLE.ROW_CHB}
+        style={S_ROW_CHB}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="From Date"
         onToggle={_toggleFd}
@@ -96,7 +101,7 @@ const ModalToggle = ({
     { isCh && <RowCheckBox
         key="isShowChart"
         value={isShowChart}
-        style={STYLE.ROW_CHB}
+        style={S_ROW_CHB}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="Chart"
         onToggle={_toggleChart}
@@ -105,7 +110,7 @@ const ModalToggle = ({
     { !noForDate && <RowCheckBox
         key="isForDate"
         value={isShowDate}
-        style={STYLE.ROW_CHB}
+        style={S_ROW_CHB}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="For Date"
         onToggle={_toggleDate}
