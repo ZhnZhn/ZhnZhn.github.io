@@ -1,67 +1,63 @@
 import { useCallback } from 'react';
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
+import ItemStack from '../../zhn/ItemStack';
 import RowCheckBox from '../rows/RowCheckBox';
 import STYLE from './Style';
 
-const TOGGLE_CHECKBOX_COLOR = '#1b75bb';
-const CAPTION_CHECKBOX_COLOR = '#a487d4';
+const TOGGLE_CHECKBOX_COLOR = '#1b75bb'
+, CAPTION_CHECKBOX_COLOR = '#a487d4'
 
-const S = {
-  ROW: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    paddingTop: 3
-  },
-  INLINE: {
-    display: 'inline-block'
-  },
-  CAPTION: {
-    maxWidth: 150
-  },
-  CHB_CAPTION: {
-    display: 'inline-block',
-    paddingLeft: 40
-  }
+, S_ROW = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  paddingTop: 3
+}
+, S_INLINE = { display: 'inline-block' }
+, S_CAPTION = { maxWidth: 150 }
+, S_CHB_CAPTION = {
+  display: 'inline-block',
+  paddingLeft: 40
 };
 
-const CheckBoxList = ({
-  selectProps,
-  crIsId,
-  onToggle,
-  onCheckCaption,
-  onUnCheckCaption
-}) => selectProps
- .map((item, index) => (
-    <div style={S.ROW} key={item.id}>
-      <RowCheckBox
-        initValue={true}
-        style={{ ...STYLE.ROW_CHB, ...S.INLINE}}
-        checkedColor={TOGGLE_CHECKBOX_COLOR}
-        caption={item.caption}
-        captionStyle={S.CAPTION}
-        onToggle={() => onToggle(crIsId(item.id))}
-      />
-      <RowCheckBox
-        initValue={index === 0}
-        style={S.CHB_CAPTION}
-        checkedColor={CAPTION_CHECKBOX_COLOR}
-        onCheck={() => onCheckCaption(index)}
-        onUnCheck={() => onUnCheckCaption(index)}
-      />
+const _crCheckBoxItem = (
+  item,
+  index, {
+    crIsId,
+    onToggle,
+    onCheckCaption,
+    onUnCheckCaption
+  }
+) => (
+  <div style={S_ROW} key={item.id}>
+    <RowCheckBox
+      initValue={true}
+      style={{...STYLE.ROW_CHB, ...S_INLINE}}
+      checkedColor={TOGGLE_CHECKBOX_COLOR}
+      caption={item.caption}
+      captionStyle={S_CAPTION}
+      onToggle={() => onToggle(crIsId(item.id))}
+    />
+    <RowCheckBox
+      initValue={index === 0}
+      style={S_CHB_CAPTION}
+      checkedColor={CAPTION_CHECKBOX_COLOR}
+      onCheck={() => onCheckCaption(index)}
+      onUnCheck={() => onUnCheckCaption(index)}
+    />
   </div>
-));
-
+);
 
 const ModalToggle = ({
   isShow, style, className=STYLE.CL,
-  selectProps=[],
+  selectProps,
   isFd, isShowFd,
   isCh=true, isShowDate, isShowChart,
   noForDate=false,
   crIsId,
   onToggle,
-  onCheckCaption, onUnCheckCaption,
+  onCheckCaption,
+  onUnCheckCaption,
   onClose
 }) => {
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -71,6 +67,7 @@ const ModalToggle = ({
     onToggle.bind(null, 'isShowChart'), [])
   , _toggleDate = useCallback(
     onToggle.bind(null, 'isShowDate'), []);
+    //onToggle
     /*eslint-enable react-hooks/exhaustive-deps */
   return (
   <ModalPopup
@@ -79,8 +76,9 @@ const ModalToggle = ({
     className={className}
     onClose={onClose}
   >
-    <CheckBoxList
-      selectProps={selectProps}
+    <ItemStack
+      items={selectProps}
+      crItem={_crCheckBoxItem}
       crIsId={crIsId}
       onToggle={onToggle}
       onCheckCaption={onCheckCaption}
