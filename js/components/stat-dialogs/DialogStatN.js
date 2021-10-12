@@ -9,9 +9,13 @@ var _react = require("react");
 
 var _loadConfigs = _interopRequireDefault(require("./loadConfigs"));
 
+var _has = _interopRequireDefault(require("../has"));
+
 var _ChartTypes = _interopRequireDefault(require("../dialogs/ChartTypes"));
 
 var _SpinnerLoading = _interopRequireDefault(require("../zhn/SpinnerLoading"));
+
+var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
@@ -41,16 +45,64 @@ const {
 
 const _crIsId = id => "is" + id + "Select";
 
+const _loadDims = ({
+  dims,
+  proxy,
+  baseMeta,
+  dfProps
+}, _setConfigs) => {
+  (0, _loadConfigs.default)({
+    dims,
+    proxy,
+    baseMeta,
+    ...dfProps
+  }).then(_setConfigs).catch(err => {
+    _setConfigs({
+      errMsg: err.message
+    });
+  });
+};
+
 const _isOpenAndPrevLoadFailed = (prevProps, props, state) => props !== prevProps && !prevProps.isShow && props.isShow && state.isLoadFailed;
+
+const _crSelectItem = (conf, index, {
+  isShowLabels,
+  isRow,
+  fSelect
+}) => {
+  const {
+    id,
+    caption,
+    options
+  } = conf,
+        _isShow = !isRow[_crIsId(id)];
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+    isShow: _isShow,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+      isShowLabels: isShowLabels,
+      caption: caption,
+      options: options,
+      onSelect: fSelect(index)
+    })
+  }, id);
+};
 
 let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends _react.Component {
   constructor(props) {
     super(props);
 
-    this._toggleStateBy = propName => {
-      this.setState(prevState => ({
-        [propName]: !prevState[propName]
-      }));
+    this._toggleIsRow = propName => {
+      this.setState(prevState => {
+        const {
+          isRow
+        } = prevState;
+        isRow[propName] = !isRow[propName];
+        prevState.isRow = { ...isRow
+        };
+        return { ...prevState
+        };
+      });
     };
 
     this._checkCaptionBy = index => {
@@ -93,23 +145,13 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
       }
     };
 
-    this._loadDims = () => {
+    this._setIsShowDate = (state, value) => {
       const {
-        dims,
-        proxy,
-        baseMeta,
-        dfProps
-      } = this.props;
-      (0, _loadConfigs.default)({
-        dims,
-        proxy,
-        baseMeta,
-        ...dfProps
-      }).then(this._setConfigs).catch(err => {
-        this._setConfigs({
-          errMsg: err.message
-        });
-      });
+        isRow
+      } = state;
+      isRow.isShowDate = value;
+      state.isRow = { ...isRow
+      };
     };
 
     this._updateForDate = chartType => {
@@ -124,10 +166,13 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
             _frequency = mapFrequency || MAP_FREQUENCY_DF,
             dateConfig = crDateConfig(_frequency, mapDateDf);
 
-      this.setState({
-        isShowDate: true,
-        ...dateConfig,
-        chartType
+      this.setState(prevState => {
+        this._setIsShowDate(prevState, true);
+
+        return { ...prevState,
+          ...dateConfig,
+          chartType
+        };
       });
     };
 
@@ -216,16 +261,22 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
     };
 
     this._hClose = () => {
-      this._handleWithValidationClose();
+      this.props.onClose();
+      this.setState(prevState => ({
+        validationMessages: []
+      }));
     };
 
     this._hSelectChartType = chartType => {
       if (isCategory(chartType)) {
         this._updateForDate(chartType);
       } else {
-        this.setState({
-          chartType,
-          isShowDate: false
+        this.setState(prevState => {
+          this._setIsShowDate(prevState, false);
+
+          return { ...prevState,
+            chartType
+          };
         });
       }
     };
@@ -236,40 +287,13 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
 
     this._fSelect = index => {
       return function (item) {
-        this._items[index] = { ...item
-        };
+        this._items[index] = item ? { ...item
+        } : void 0;
       }.bind(this);
     };
 
     this._hSelectDate = date => {
       this.date = date;
-    };
-
-    this._isShowRow = id => !this.state[_crIsId(id)];
-
-    this._renderSelectInputs = () => {
-      const {
-        isShowLabels,
-        configs
-      } = this.state;
-      return configs.map((conf, index) => {
-        const {
-          id,
-          caption,
-          options
-        } = conf,
-              _isShow = this._isShowRow(id);
-
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-          isShow: _isShow,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
-            isShowLabels: isShowLabels,
-            caption: caption,
-            options: options,
-            onSelect: this._fSelect(index)
-          })
-        }, id);
-      });
     };
 
     this._menuMore = crMenuMore(this, {
@@ -284,19 +308,24 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
     this._commandButtons = this._crCommandsWithLoad(this);
     this._items = [];
     this._titles = [];
-    this.state = { ...this._isWithInitialState(),
+    this.state = {
       isLoading: true,
       isLoadFailed: false,
-      isShowChart: true,
-      isShowDate: false,
+      isToolbar: true,
+      isShowLabels: _has.default.wideWidth(),
+      isRow: {
+        isShowChart: true,
+        isShowDate: false
+      },
       ...crDateConfig('EMPTY'),
-      isOptions: false,
-      isToggle: false,
+      //isToggle: false,
+      //isOptions: false,
       configs: [],
       selectOptions: [],
       mapFrequency: props.mapFrequency,
-      chartOptions: crOptions(props) //chartType
-
+      chartOptions: crOptions(props),
+      //chartType
+      validationMessages: []
     };
   }
 
@@ -311,7 +340,7 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
   }
 
   componentDidMount() {
-    this._loadDims();
+    _loadDims(this.props, this._setConfigs);
   }
 
   componentDidUpdate(prevProps) {
@@ -321,7 +350,7 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
         isLoadFailed: false
       });
 
-      this._loadDims();
+      _loadDims(this.props, this._setConfigs);
     }
   }
 
@@ -340,14 +369,17 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
       isShowLabels,
       isLoading,
       isLoadFailed,
-      isShowChart,
-      isShowDate,
       dateDefault,
       dateOptions,
+      isRow,
       configs,
       chartOptions,
       validationMessages
     } = this.state,
+          {
+      isShowChart,
+      isShowDate
+    } = isRow,
           _spinnerStyle = isLoading ? S_SPINNER_LOADING : isLoadFailed ? { ...S_SPINNER_LOADING,
       ...S_SPINNER_FAILED
     } : void 0;
@@ -373,13 +405,19 @@ let DialogStatN = (_dec = Decor.dialog, _dec(_class = class DialogStatN extends 
         isShowChart: isShowChart,
         isShowDate: isShowDate,
         crIsId: _crIsId,
-        onToggle: this._toggleStateBy,
+        onToggle: this._toggleIsRow,
         onCheckCaption: this._checkCaptionBy,
         onUnCheckCaption: this._uncheckCaption,
         onClose: this._hideToggleWithToolbar
       }), _spinnerStyle ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading.default, {
         style: _spinnerStyle
-      }) : this._renderSelectInputs(), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+      }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+        items: configs,
+        crItem: _crSelectItem,
+        isShowLabels: isShowLabels,
+        isRow: isRow,
+        fSelect: this._fSelect
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
         chartType: chartType,
         isShowLabels: isShowLabels,
         isShowChart: isShowChart,

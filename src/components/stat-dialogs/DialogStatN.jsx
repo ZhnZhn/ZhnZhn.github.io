@@ -2,8 +2,10 @@ import { Component } from 'react'
 
 import loadConfigs from './loadConfigs'
 
+import has from '../has'
 import ChartTypes from '../dialogs/ChartTypes'
 import SpinnerLoading from '../zhn/SpinnerLoading'
+import ItemStack from '../zhn/ItemStack'
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore, crDateConfig } = D
 
@@ -24,12 +26,47 @@ const {
 
 const _crIsId = id => `is${id}Select`;
 
+const _loadDims = ({
+  dims,
+  proxy,
+  baseMeta,
+  dfProps
+}, _setConfigs) => {
+  loadConfigs({ dims, proxy, baseMeta, ...dfProps })
+   .then(_setConfigs)
+   .catch(err => {
+     _setConfigs({ errMsg: err.message })
+   })
+ };
+
 const _isOpenAndPrevLoadFailed = (
   prevProps, props, state
 ) => props !== prevProps
   && !prevProps.isShow
   && props.isShow
   && state.isLoadFailed;
+
+const _crSelectItem = (
+  conf,
+  index, {
+    isShowLabels,
+    isRow,
+    fSelect
+  }
+) => {
+  const { id, caption, options } = conf
+  , _isShow = !isRow[_crIsId(id)];
+  return (
+    <D.ShowHide key={id} isShow={_isShow}>
+      <D.RowInputSelect
+        isShowLabels={isShowLabels}
+        caption={caption}
+        options={options}
+        onSelect={fSelect(index)}
+      />
+    </D.ShowHide>
+  );
+}
 
 @Decor.dialog
 class DialogStatN extends Component {
@@ -42,26 +79,32 @@ class DialogStatN extends Component {
       onAbout: this._clickInfoWithToolbar
     })
     this.toolbarButtons = this._createType2WithToolbar(props, {
-      noDate: true, isOptions: true, isToggle: true
+      noDate: true,
+      isOptions: true,
+      isToggle: true
     })
     this._commandButtons = this._crCommandsWithLoad(this)
     this._items = []
     this._titles = []
 
     this.state = {
-      ...this._isWithInitialState(),
       isLoading: true,
       isLoadFailed: false,
-      isShowChart: true,
-      isShowDate: false,
+      isToolbar: true,
+      isShowLabels: has.wideWidth(),
+      isRow: {
+        isShowChart: true,
+        isShowDate: false
+      },
       ...crDateConfig('EMPTY'),
-      isOptions: false,
-      isToggle: false,
+      //isToggle: false,
+      //isOptions: false,
       configs: [],
       selectOptions: [],
       mapFrequency: props.mapFrequency,
-      chartOptions: crOptions(props)
+      chartOptions: crOptions(props),
       //chartType
+      validationMessages: []
     }
   }
 
@@ -75,7 +118,7 @@ class DialogStatN extends Component {
   }
 
   componentDidMount() {
-    this._loadDims()
+    _loadDims(this.props, this._setConfigs)
   }
 
   componentDidUpdate(prevProps) {
@@ -86,15 +129,19 @@ class DialogStatN extends Component {
         isLoading: true,
         isLoadFailed: false
       })
-      this._loadDims()
+      _loadDims(this.props, this._setConfigs)
     }
   }
 
-  _toggleStateBy = (propName) => {
-    this.setState(prevState => ({
-      [propName]: !prevState[propName]
-    }))
+  _toggleIsRow = (propName) => {
+    this.setState(prevState => {
+      const { isRow } = prevState;
+      isRow[propName] = !isRow[propName]
+      prevState.isRow = {...isRow}
+      return {...prevState};
+    })
   }
+
   _checkCaptionBy = (index) => {
     this._titles.push(index)
   }
@@ -130,18 +177,12 @@ class DialogStatN extends Component {
    }
   }
 
- _loadDims = () => {
-    const {
-      dims, proxy, baseMeta,
-      dfProps
-    } = this.props;
-    loadConfigs({ dims, proxy, baseMeta, ...dfProps })
-      .then(this._setConfigs)
-      .catch(err => {
-        this._setConfigs({ errMsg: err.message })
-      })
-  }
 
+  _setIsShowDate = (state, value) => {
+    const { isRow } = state;
+    isRow.isShowDate = value
+    state.isRow = {...isRow}
+  }
 
   _updateForDate = (chartType) => {
     this.date = null;
@@ -151,10 +192,13 @@ class DialogStatN extends Component {
     , _frequency = mapFrequency || MAP_FREQUENCY_DF
     , dateConfig = crDateConfig(_frequency, mapDateDf);
 
-    this.setState({
-       isShowDate: true,
-       ...dateConfig,
-       chartType
+    this.setState(prevState => {
+       this._setIsShowDate(prevState, true)
+       return {
+         ...prevState,
+         ...dateConfig,
+         chartType
+       };
     });
   }
 
@@ -198,7 +242,7 @@ class DialogStatN extends Component {
     , {
       isLoadFailed,
       isLoading,
-      configs,       
+      configs,
       chartType
     } = this.state
     , _isCategory = isCategory(chartType)
@@ -225,16 +269,22 @@ class DialogStatN extends Component {
   }
 
   _hClose = () => {
-    this._handleWithValidationClose()
+    this.props.onClose()
+    this.setState(prevState => ({
+      validationMessages: []
+    }))
   }
 
   _hSelectChartType = (chartType) => {
     if (isCategory(chartType)) {
       this._updateForDate(chartType);
     } else {
-      this.setState({
-        chartType,
-        isShowDate: false
+      this.setState(prevState => {
+        this._setIsShowDate(prevState, false)
+        return {
+          ...prevState,
+          chartType
+        }
       });
     }
   }
@@ -245,32 +295,14 @@ class DialogStatN extends Component {
 
   _fSelect = (index) => {
     return (function(item) {
-      this._items[index] = {...item}
+      this._items[index] = item
+         ? {...item}
+         : void 0
     }).bind(this);
   }
 
   _hSelectDate = (date) => {
     this.date = date;
-  }
-
-  _isShowRow = id => !this.state[_crIsId(id)]
-
-  _renderSelectInputs = () => {
-    const { isShowLabels, configs } = this.state;
-    return configs.map((conf, index) => {
-      const { id, caption, options } = conf
-      , _isShow = this._isShowRow(id);
-      return (
-        <D.ShowHide key={id} isShow={_isShow}>
-          <D.RowInputSelect
-            isShowLabels={isShowLabels}
-            caption={caption}
-            options={options}
-            onSelect={this._fSelect(index)}
-          />
-        </D.ShowHide>
-      );
-    })
   }
 
   render(){
@@ -286,12 +318,16 @@ class DialogStatN extends Component {
         isOptions, isToggle,
         isShowLabels,
         isLoading, isLoadFailed,
-        isShowChart,
-        isShowDate, dateDefault, dateOptions,
+        dateDefault, dateOptions,
+        isRow,
         configs,
         chartOptions,
         validationMessages
      } = this.state
+     , {
+         isShowChart,
+         isShowDate
+       } = isRow
      , _spinnerStyle = isLoading
          ? S_SPINNER_LOADING
          : isLoadFailed
@@ -323,7 +359,7 @@ class DialogStatN extends Component {
            isShowChart={isShowChart}
            isShowDate={isShowDate}
            crIsId={_crIsId}
-           onToggle={this._toggleStateBy}
+           onToggle={this._toggleIsRow}
            onCheckCaption={this._checkCaptionBy}
            onUnCheckCaption={this._uncheckCaption}
            onClose={this._hideToggleWithToolbar}
@@ -331,7 +367,13 @@ class DialogStatN extends Component {
          {
            _spinnerStyle
              ? <SpinnerLoading style={_spinnerStyle} />
-             : this._renderSelectInputs()
+             : <ItemStack
+                  items={configs}
+                  crItem={_crSelectItem}
+                  isShowLabels={isShowLabels}
+                  isRow={isRow}
+                  fSelect={this._fSelect}
+               />
          }
          <D.RowChartDate
            chartType={chartType}
