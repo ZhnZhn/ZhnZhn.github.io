@@ -37,8 +37,8 @@ const _crBrowserDynamic = (Comp, option) => {
          modalDialogType, itemOptionType, itemType, descrUrl, dfProps
        } = option
     , ItemOptionComp = itemOptionType
-          ? RouterItemOption[itemOptionType] || RouterBrowserItem.DEFAULT
-          : RouterBrowserItem.DEFAULT
+          ? RouterItemOption[itemOptionType] || RouterBrowserItem.DF
+          : RouterBrowserItem.DF
     , ItemComp = itemType
           ? RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT
           : void 0

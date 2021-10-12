@@ -1,12 +1,11 @@
 
 import ItemOption from './ItemOption';
-import ItemTopicOption from './ItemTopicOption'
+import ItemTopicOption from './ItemTopicOption';
 
 const RouterItemOption = {
-  DEFAULT : ItemOption,
-
-  ItemOption: ItemOption,
-  ItemTopicOption: ItemTopicOption
-}
+  DF: ItemOption,
+  ItemOption,
+  ItemTopicOption
+};
 
 export default RouterItemOption

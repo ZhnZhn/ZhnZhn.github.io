@@ -1,4 +1,7 @@
-const ItemOptionDf = ({ item, propCaption }) => (
+const ItemOptionDf = ({
+  item,
+  propCaption
+}) => (
   <span>
     {item[propCaption]}
   </span>

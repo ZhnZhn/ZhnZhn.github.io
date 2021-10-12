@@ -49,7 +49,7 @@ const _crBrowserDynamic = (Comp, option) => {
     descrUrl,
     dfProps
   } = option,
-        ItemOptionComp = itemOptionType ? _RouterItemOption.default[itemOptionType] || _RouterBrowserItem.default.DEFAULT : _RouterBrowserItem.default.DEFAULT,
+        ItemOptionComp = itemOptionType ? _RouterItemOption.default[itemOptionType] || _RouterBrowserItem.default.DF : _RouterBrowserItem.default.DF,
         ItemComp = itemType ? _RouterBrowserItem.default[itemType] || _RouterBrowserItem.default.DEFAULT : void 0,
         onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions.default.showDescription : void 0 //for Type2
   ,
