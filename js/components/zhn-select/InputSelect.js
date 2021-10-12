@@ -3,13 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -29,90 +23,85 @@ var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
 
 var _CL = _interopRequireDefault(require("./CL"));
 
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from 'prop-types'
-var MAX_WITHOUT_ANIMATION = 800;
-var INPUT_PREFIX = 'From input:';
-var NO_RESULT = 'noresult';
-
-var _crInputItem = function _crInputItem(inputValue, _ref) {
-  var _ref2;
-
-  var propCaption = _ref.propCaption,
-      isWithInput = _ref.isWithInput,
-      maxInput = _ref.maxInput;
-
-  var _inputValue = inputValue.substring(0, maxInput),
-      _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : 'No results found';
-
-  return _ref2 = {}, _ref2[propCaption] = _caption, _ref2.value = NO_RESULT, _ref2.inputValue = _inputValue, _ref2;
+const MAX_WITHOUT_ANIMATION = 800,
+      INPUT_PREFIX = 'From input:',
+      NO_RESULT = 'noresult',
+      S_BLOCK = {
+  display: 'block'
+},
+      S_NONE = {
+  display: 'none'
+},
+      S_ARROW_SHOW = {
+  borderColor: '#1b75bb transparent transparent'
+},
+      S_SVG_CLEAR = {
+  position: 'absolute',
+  top: 5,
+  right: 8,
+  stroke: '#1b75bb'
 };
 
-var _crWidthStyle = function _crWidthStyle(width, style) {
-  return width ? ('' + width).indexOf('%') !== -1 ? (0, _extends2["default"])({}, style, {
-    width: width
-  }) : (0, _extends2["default"])({}, style, {
-    width: width + 'px'
-  }) : null;
-};
+const _crValue = str => str.replace(INPUT_PREFIX, '').trim();
 
-var _crFooterIndex = function _crFooterIndex(_ref3) {
-  var options = _ref3.options,
-      initialOptions = _ref3.initialOptions;
+const _crInputItem = (inputValue, {
+  propCaption,
+  isWithInput,
+  maxInput
+}) => {
+  const _inputValue = inputValue.substring(0, maxInput),
+        _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : 'No results found';
+
   return {
-    _nFiltered: options[0] && options[0].value !== NO_RESULT ? options.length : 0,
-    _nAll: initialOptions ? initialOptions.length : 0
+    [propCaption]: _caption,
+    value: NO_RESULT,
+    inputValue: _inputValue
   };
 };
 
-var S = {
-  BLOCK: {
-    display: 'block'
-  },
-  NONE: {
-    display: 'none'
-  },
-  ARROW_SHOW: {
-    borderColor: '#1b75bb transparent transparent'
-  },
-  SVG_CLEAR: {
-    position: 'absolute',
-    top: 5,
-    right: 8,
-    stroke: '#1b75bb'
-  }
+const _crWidthStyle = (width, style) => width ? ('' + width).indexOf('%') !== -1 ? { ...style,
+  width: width
+} : { ...style,
+  width: width + 'px'
+} : null;
+
+const _crFooterIndex = ({
+  options,
+  initialOptions
+}) => ({
+  _nFiltered: options[0] && options[0].value !== NO_RESULT ? options.length : 0,
+  _nAll: initialOptions ? initialOptions.length : 0
+});
+
+const _crInitialStateFromProps = ({
+  optionName,
+  optionNames,
+  options
+}) => ({
+  value: '',
+  isShowOption: false,
+  initialOptions: options,
+  options: options,
+  optionNames: optionNames || optionName || '',
+  isValidOptionListCache: false,
+  isFocused: false
+});
+
+const _filterOptions = (options, value, pnCaption) => {
+  const _value = value.toLowerCase();
+
+  return options.filter(item => item[pnCaption].toLowerCase().indexOf(_value) !== -1);
 };
 
-var _crInitialStateFromProps = function _crInitialStateFromProps(_ref4) {
-  var optionName = _ref4.optionName,
-      optionNames = _ref4.optionNames,
-      options = _ref4.options;
-  return {
-    value: '',
-    isShowOption: false,
-    initialOptions: options,
-    options: options,
-    optionNames: optionNames || optionName || '',
-    isValidOptionListCache: false,
-    isFocused: false
-  };
-};
+const _crFilterOptions = (options, token, props) => {
+  const {
+    propCaption
+  } = props;
 
-var _crValue = function _crValue(str) {
-  return str.replace(INPUT_PREFIX, '').trim();
-};
-
-var _filterOptions = function _filterOptions(options, value, pnCaption) {
-  var _value = value.toLowerCase();
-
-  return options.filter(function (item) {
-    return item[pnCaption].toLowerCase().indexOf(_value) !== -1;
-  });
-};
-
-var _crFilterOptions = function _crFilterOptions(options, token, props) {
-  var propCaption = props.propCaption;
-
-  var _arr = _filterOptions(options, token, propCaption);
+  const _arr = _filterOptions(options, token, propCaption);
 
   if (_arr.length === 0) {
     _arr.push(_crInputItem(token, props));
@@ -121,13 +110,11 @@ var _crFilterOptions = function _crFilterOptions(options, token, props) {
   return _arr;
 };
 
-var _getCurrent = function _getCurrent(ref) {
-  return ref.current;
-};
+const _getCurrent = ref => ref.current;
 
-var InputSelect = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(InputSelect, _Component);
+const _fnNoop = () => {};
 
+class InputSelect extends _react.Component {
   /*
   static propTypes = {
      propCaption: PropTypes.string,
@@ -154,185 +141,182 @@ var InputSelect = /*#__PURE__*/function (_Component) {
      onLoadOption: PropTypes.func
   }
   */
-  function InputSelect(_props) {
-    var _this;
+  constructor(_props) {
+    super(_props);
 
-    _this = _Component.call(this, _props) || this;
-
-    _this._initProperties = function () {
-      _this.optionListCache = null;
-      _this.indexActiveOption = 0;
+    this._initProperties = () => {
+      this.optionListCache = null;
+      this.indexActiveOption = 0;
     };
 
-    _this._setStateToInit = function (props) {
-      _this._initProperties();
+    this._setStateToInit = props => {
+      this._initProperties();
 
-      _this.setState(_crInitialStateFromProps(props));
+      this.setState(_crInitialStateFromProps(props));
     };
 
-    _this._getCurrentComp = function () {
-      return _this["v" + _this.indexActiveOption];
+    this._getCurrentComp = () => {
+      return this["v" + this.indexActiveOption];
     };
 
-    _this._decorateCurrentComp = function () {
-      var comp = _this._getCurrentComp();
+    this._decorateCurrentComp = () => {
+      const comp = this._getCurrentComp();
 
       if (comp) {
-        comp.classList.add(_CL["default"].OPTIONS_ROW_ACTIVE);
+        comp.classList.add(_CL.default.OPTIONS_ROW_ACTIVE);
 
-        if (_this.indexNode) {
-          _this.indexNode.textContent = _this.indexActiveOption + 1;
+        if (this.indexNode) {
+          this.indexNode.textContent = this.indexActiveOption + 1;
         }
       }
 
       return comp;
     };
 
-    _this._undecorateCurrentComp = function (comp) {
-      var _comp = comp || _this._getCurrentComp();
+    this._undecorateCurrentComp = comp => {
+      const _comp = comp || this._getCurrentComp();
 
       if (_comp) {
-        _comp.classList.remove(_CL["default"].OPTIONS_ROW_ACTIVE);
+        _comp.classList.remove(_CL.default.OPTIONS_ROW_ACTIVE);
       }
     };
 
-    _this._calcDeltaTop = function (comp) {
-      return comp && _this.optionsComp ? comp.offsetTop - _this.optionsComp.scrollTop : void 0;
+    this._calcDeltaTop = comp => {
+      return comp && this.optionsComp ? comp.offsetTop - this.optionsComp.scrollTop : void 0;
     };
 
-    _this._makeVisible = function (comp) {
+    this._makeVisible = comp => {
       if (comp) {
-        if (_this.indexActiveOption === 0) {
+        if (this.indexActiveOption === 0) {
           return;
         }
 
-        var deltaTop = _this._calcDeltaTop(comp);
+        const deltaTop = this._calcDeltaTop(comp);
 
         if (deltaTop > 70) {
-          _this.optionsComp.scrollTop += deltaTop - 70;
+          this.optionsComp.scrollTop += deltaTop - 70;
         }
 
         if (deltaTop < 0) {
-          _this.optionsComp.scrollTop = 0;
+          this.optionsComp.scrollTop = 0;
         }
       }
     };
 
-    _this._hInputChange = function (event) {
-      var _this$props = _this.props,
-          isWithInput = _this$props.isWithInput,
-          regInput = _this$props.regInput,
-          token = event.target.value,
-          tokenLn = token.length,
-          _this$state = _this.state,
-          value = _this$state.value,
-          options = _this$state.options,
-          initialOptions = _this$state.initialOptions,
-          valueLn = value.length;
+    this._hInputChange = event => {
+      const {
+        isWithInput,
+        regInput
+      } = this.props,
+            token = event.target.value,
+            tokenLn = token.length,
+            {
+        value,
+        options,
+        initialOptions
+      } = this.state,
+            valueLn = value.length;
 
       if (isWithInput && tokenLn > 0 && !regInput.test(token[tokenLn - 1])) {
         return;
       }
 
       if (tokenLn !== valueLn) {
-        _this._undecorateCurrentComp();
+        this._undecorateCurrentComp();
 
-        _this.indexActiveOption = 0;
+        this.indexActiveOption = 0;
 
-        var _options = tokenLn > valueLn ? options : initialOptions;
+        const _options = tokenLn > valueLn ? options : initialOptions;
 
-        _this.setState({
+        this.setState({
           value: token,
           isShowOption: true,
           isValidOptionListCache: false,
-          options: _crFilterOptions(_options, token, _this.props)
+          options: _crFilterOptions(_options, token, this.props)
         });
       }
     };
 
-    _this._startAfterInputAnimation = function () {
-      if (_this.state.options.length > MAX_WITHOUT_ANIMATION) {
-        _getCurrent(_this._refArrowCell).startAnimation();
+    this._startAfterInputAnimation = () => {
+      if (this.state.options.length > MAX_WITHOUT_ANIMATION) {
+        _getCurrent(this._refArrowCell).startAnimation();
       }
     };
 
-    _this._stopAfterInputAnimation = function () {
-      _getCurrent(_this._refArrowCell).stopAnimation();
+    this._stopAfterInputAnimation = () => {
+      _getCurrent(this._refArrowCell).stopAnimation();
     };
 
-    _this._setShowOptions = function () {
-      _this.setState({
+    this._setShowOptions = () => {
+      this.setState({
         isShowOption: true
-      }, _this._stopAfterInputAnimation);
+      }, this._stopAfterInputAnimation);
     };
 
-    _this._showOptions = function (ms) {
-      if (_this.props.isShowOptionAnim) {
-        _this._startAfterInputAnimation();
+    this._showOptions = ms => {
+      if (this.props.isShowOptionAnim) {
+        this._startAfterInputAnimation();
 
-        setTimeout(_this._setShowOptions, ms);
+        setTimeout(this._setShowOptions, ms);
       } else {
-        _this.setState({
+        this.setState({
           isShowOption: true
         });
       }
     };
 
-    _this._decorateByStep = function (isStepDown) {
-      var fnPredicate = isStepDown ? function (delta) {
-        return delta > 70;
-      } : function (delta) {
-        return delta < 70;
-      },
-          comp = _this._decorateCurrentComp(),
-          deltaTop = _this._calcDeltaTop(comp);
+    this._decorateByStep = isStepDown => {
+      const fnPredicate = isStepDown ? delta => delta > 70 : delta => delta < 70,
+            comp = this._decorateCurrentComp(),
+            deltaTop = this._calcDeltaTop(comp);
 
       if (fnPredicate(deltaTop)) {
-        _this.optionsComp.scrollTop += deltaTop - 70;
+        this.optionsComp.scrollTop += deltaTop - 70;
       }
     };
 
-    _this._stepDownOption = function () {
-      var prevComp = _this._getCurrentComp();
+    this._stepDownOption = () => {
+      const prevComp = this._getCurrentComp();
 
       if (prevComp) {
-        _this._undecorateCurrentComp(prevComp);
+        this._undecorateCurrentComp(prevComp);
 
-        _this.indexActiveOption += 1;
+        this.indexActiveOption += 1;
 
-        if (_this.indexActiveOption >= _this.state.options.length) {
-          _this.indexActiveOption = 0;
-          _this.optionsComp.scrollTop = 0;
+        if (this.indexActiveOption >= this.state.options.length) {
+          this.indexActiveOption = 0;
+          this.optionsComp.scrollTop = 0;
         }
 
-        _this._decorateByStep(true);
+        this._decorateByStep(true);
       }
     };
 
-    _this._stepUpOption = function () {
-      var prevComp = _this._getCurrentComp();
+    this._stepUpOption = () => {
+      const prevComp = this._getCurrentComp();
 
       if (prevComp) {
-        _this._undecorateCurrentComp(prevComp);
+        this._undecorateCurrentComp(prevComp);
 
-        _this.indexActiveOption -= 1;
+        this.indexActiveOption -= 1;
 
-        if (_this.indexActiveOption < 0) {
-          _this.indexActiveOption = _this.state.options.length - 1;
+        if (this.indexActiveOption < 0) {
+          this.indexActiveOption = this.state.options.length - 1;
 
-          var bottomComp = _this._getCurrentComp();
+          const bottomComp = this._getCurrentComp();
 
-          _this.optionsComp.scrollTop = bottomComp.offsetTop;
+          this.optionsComp.scrollTop = bottomComp.offsetTop;
         }
 
-        _this._decorateByStep();
+        this._decorateByStep();
       }
     };
 
-    _this._selectItem = function (item) {
-      var _this$props2 = _this.props,
-          onSelect = _this$props2.onSelect,
-          isWithInput = _this$props2.isWithInput;
+    this._selectItem = item => {
+      const {
+        onSelect,
+        isWithInput
+      } = this.props;
 
       if (!item) {
         onSelect();
@@ -341,7 +325,7 @@ var InputSelect = /*#__PURE__*/function (_Component) {
       } else if (!isWithInput) {
         onSelect();
       } else {
-        var _value = item.inputValue.trim();
+        const _value = item.inputValue.trim();
 
         if (!_value) {
           onSelect();
@@ -355,23 +339,25 @@ var InputSelect = /*#__PURE__*/function (_Component) {
       }
     };
 
-    _this._hInputKeyDown = function (event) {
+    this._hInputKeyDown = event => {
       switch (event.keyCode) {
         // enter
         case 13:
           {
-            var propCaption = _this.props.propCaption,
-                item = _this.state.options[_this.indexActiveOption] || {},
-                _value = item[propCaption];
+            const {
+              propCaption
+            } = this.props,
+                  item = this.state.options[this.indexActiveOption] || {},
+                  _value = item[propCaption];
 
             if (_value) {
-              _this.setState({
+              this.setState({
                 value: _crValue(_value),
                 isShowOption: false,
                 isValidOptionListCache: true
               });
 
-              _this._selectItem(item);
+              this._selectItem(item);
             }
 
             break;
@@ -383,12 +369,12 @@ var InputSelect = /*#__PURE__*/function (_Component) {
           {
             event.preventDefault();
 
-            if (_this.state.isShowOption) {
-              _this.setState({
+            if (this.state.isShowOption) {
+              this.setState({
                 isShowOption: false
               });
             } else {
-              _this.clearInput();
+              this.clearInput();
             }
 
             break;
@@ -396,22 +382,22 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
         case 40:
           //down
-          if (!_this.state.isShowOption) {
-            _this._showOptions(0);
+          if (!this.state.isShowOption) {
+            this._showOptions(0);
           } else {
             event.preventDefault();
 
-            _this._stepDownOption();
+            this._stepDownOption();
           }
 
           break;
 
         case 38:
           //up
-          if (_this.state.isShowOption) {
+          if (this.state.isShowOption) {
             event.preventDefault();
 
-            _this._stepUpOption();
+            this._stepUpOption();
           }
 
           break;
@@ -421,144 +407,146 @@ var InputSelect = /*#__PURE__*/function (_Component) {
       }
     };
 
-    _this._hToggleOptions = function () {
-      if (_this.state.isShowOption) {
-        _this.setState({
+    this._hToggleOptions = () => {
+      if (this.state.isShowOption) {
+        this.setState({
           isShowOption: false
         });
       } else {
-        _this._showOptions(1);
+        this._showOptions(1);
       }
     };
 
-    _this._hClickItem = function (item, index, propCaption) {
-      _this._undecorateCurrentComp();
+    this._hClickItem = (item, index, propCaption) => {
+      this._undecorateCurrentComp();
 
-      _this.indexActiveOption = index;
-
-      _this.setState({
+      this.indexActiveOption = index;
+      this.setState({
         value: _crValue(item[propCaption]),
         isShowOption: false
       });
 
-      _this._selectItem(item);
+      this._selectItem(item);
     };
 
-    _this._refOptionsComp = function (c) {
-      return _this.optionsComp = c;
-    };
+    this._refOptionsComp = c => this.optionsComp = c;
 
-    _this._refOptionNode = function (n, index) {
-      return _this["v" + index] = n;
-    };
+    this._refOptionNode = (n, index) => this["v" + index] = n;
 
-    _this._refIndexNode = function (n) {
-      return _this.indexNode = n;
-    };
+    this._refIndexNode = n => this.indexNode = n;
 
-    _this._crOptionListWithCache = function () {
-      var _this$props3 = _this.props,
-          propCaption = _this$props3.propCaption,
-          ItemOptionComp = _this$props3.ItemOptionComp,
-          _this$state2 = _this.state,
-          options = _this$state2.options,
-          isValidOptionListCache = _this$state2.isValidOptionListCache;
+    this._crOptionListWithCache = () => {
+      const {
+        propCaption,
+        ItemOptionComp
+      } = this.props,
+            {
+        options,
+        isValidOptionListCache
+      } = this.state;
 
       if (options && !isValidOptionListCache) {
-        _this.optionListCache = /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList["default"], {
+        this.optionListCache = /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList.default, {
           options: options,
-          refOptionNode: _this._refOptionNode,
-          className: _CL["default"].OPTIONS_ROW,
-          selectedIndex: _this.indexActiveOption,
+          refOptionNode: this._refOptionNode,
+          className: _CL.default.OPTIONS_ROW,
+          selectedIndex: this.indexActiveOption,
           propCaption: propCaption,
-          onClick: _this._hClickItem,
+          onClick: this._hClickItem,
           ItemComp: ItemOptionComp
         });
       }
 
-      return _this.optionListCache;
+      return this.optionListCache;
     };
 
-    _this.renderOptions = function () {
-      var _this$props4 = _this.props,
-          optionsStyle = _this$props4.optionsStyle,
-          width = _this$props4.width,
-          isShowOption = _this.state.isShowOption,
-          _optionListEl = _this._crOptionListWithCache(),
-          _styleOptions = isShowOption ? S.BLOCK : S.NONE,
-          _rootWidthStyle = _crWidthStyle(width, _styleOptions),
-          _crFooterIndex2 = _crFooterIndex(_this.state),
-          _nFiltered = _crFooterIndex2._nFiltered,
-          _nAll = _crFooterIndex2._nAll;
+    this.renderOptions = () => {
+      const {
+        optionsStyle,
+        width
+      } = this.props,
+            {
+        isShowOption
+      } = this.state,
+            _optionListEl = this._crOptionListWithCache(),
+            _styleOptions = isShowOption ? S_BLOCK : S_NONE,
+            _rootWidthStyle = _crWidthStyle(width, _styleOptions),
+            {
+        _nFiltered,
+        _nAll
+      } = _crFooterIndex(this.state);
 
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        className: _CL["default"].OPTIONS,
+        className: _CL.default.OPTIONS,
         style: _rootWidthStyle,
         "data-scrollable": true,
         tabIndex: "-1",
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          ref: _this._refOptionsComp,
-          className: _CL["default"].OPTIONS_DIV,
-          style: (0, _extends2["default"])({}, optionsStyle, _rootWidthStyle),
+          ref: this._refOptionsComp,
+          className: _CL.default.OPTIONS_DIV,
+          style: { ...optionsStyle,
+            ..._rootWidthStyle
+          },
           tabIndex: "-1",
           children: _optionListEl
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter["default"], {
-          ref: _this._refIndexNode,
-          indexActiveOption: _this.indexActiveOption,
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter.default, {
+          ref: this._refIndexNode,
+          indexActiveOption: this.indexActiveOption,
           nAll: _nAll,
           nFiltered: _nFiltered,
-          onStepUp: _this._stepUpOption,
-          onStepDown: _this._stepDownOption,
-          onClear: _this._hClear
+          onStepUp: this._stepUpOption,
+          onStepDown: this._stepDownOption,
+          onClear: this._hClear
         })]
       });
     };
 
-    _this._hClear = function () {
-      _this.clearInput();
-
-      _this.focusInput();
+    this._hClear = () => {
+      this.clearInput();
+      this.focusInput();
     };
 
-    _this._crAfterInputEl = function () {
-      var _this$props5 = _this.props,
-          isLoading = _this$props5.isLoading,
-          isLoadingFailed = _this$props5.isLoadingFailed,
-          placeholder = _this$props5.placeholder,
-          optionName = _this$props5.optionName,
-          onLoadOption = _this$props5.onLoadOption,
-          _this$state3 = _this.state,
-          isShowOption = _this$state3.isShowOption,
-          optionNames = _this$state3.optionNames,
-          isFocused = _this$state3.isFocused,
-          value = _this$state3.value;
+    this._crAfterInputEl = () => {
+      const {
+        isLoading,
+        isLoadingFailed,
+        placeholder,
+        optionName,
+        onLoadOption
+      } = this.props,
+            {
+        isShowOption,
+        optionNames,
+        isFocused,
+        value
+      } = this.state;
 
-      var _placeholder, _afterInputEl;
+      let _placeholder, _afterInputEl;
 
       if (!isLoading && !isLoadingFailed) {
         if (isFocused && value) {
-          _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClear["default"], {
-            style: S.SVG_CLEAR,
-            onClick: _this._hClear
+          _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClear.default, {
+            style: S_SVG_CLEAR,
+            onClick: this._hClear
           });
         } else {
           _placeholder = placeholder || "Select " + optionName + "...";
-          _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell["default"], {
-            ref: _this._refArrowCell,
-            arrowStyle: isShowOption ? S.ARROW_SHOW : void 0,
-            onClick: _this._hToggleOptions
+          _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
+            ref: this._refArrowCell,
+            arrowStyle: isShowOption ? S_ARROW_SHOW : void 0,
+            onClick: this._hToggleOptions
           });
         }
       } else if (isLoading) {
         _placeholder = "Loading " + optionNames + "...";
         _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          className: _CL["default"].SPINNER,
+          className: _CL.default.SPINNER,
           "data-loader": "circle"
         });
       } else if (isLoadingFailed) {
         _placeholder = "Loading " + optionNames + " Failed";
-        _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle["default"], {
-          className: _CL["default"].SPINNER_FAILED,
+        _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
+          className: _CL.default.SPINNER_FAILED,
           dataLoader: "circle-failed",
           onClick: onLoadOption
         });
@@ -570,58 +558,53 @@ var InputSelect = /*#__PURE__*/function (_Component) {
       };
     };
 
-    _this._hFocus = function () {
-      clearTimeout(_this._blurId);
-
-      _this.setState({
+    this._hFocus = () => {
+      clearTimeout(this._blurId);
+      this.setState({
         isFocused: true
       });
     };
 
-    _this._hBlur = function () {
-      _this._blurId = setTimeout(function () {
-        return _this.setState({
-          isFocused: false
-        });
-      }, 800);
+    this._hBlur = () => {
+      this._blurId = setTimeout(() => this.setState({
+        isFocused: false
+      }), 800);
     };
 
-    _this.clearInput = function () {
-      _this._undecorateCurrentComp();
+    this.clearInput = () => {
+      this._undecorateCurrentComp();
 
-      _this._selectItem();
+      this._selectItem();
 
-      _this._setStateToInit(_this.props);
+      this._setStateToInit(this.props);
     };
 
-    _this._touchHandlers = _has["default"].touch ? {
-      onFocus: _this._hFocus,
-      onBlur: _this._hBlur
+    this._touchHandlers = _has.default.touch ? {
+      onFocus: this._hFocus,
+      onBlur: this._hBlur
     } : void 0;
 
-    _this._initProperties();
+    this._initProperties();
 
-    _this._refInput = /*#__PURE__*/(0, _react.createRef)();
-    _this._refArrowCell = /*#__PURE__*/(0, _react.createRef)();
-    _this.state = _crInitialStateFromProps(_props);
-    return _this;
+    this._refInput = /*#__PURE__*/(0, _react.createRef)();
+    this._refArrowCell = /*#__PURE__*/(0, _react.createRef)();
+    this.state = _crInitialStateFromProps(_props);
   }
 
-  InputSelect.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props, state) {
     //Init state for new options from props
     if (props.options !== state.initialOptions) {
       return _crInitialStateFromProps(props);
     }
 
     return null;
-  };
+  }
 
-  var _proto = InputSelect.prototype;
-
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
-    var _this$state4 = this.state,
-        initialOptions = _this$state4.initialOptions,
-        isShowOption = _this$state4.isShowOption; // Init from props for new options from props
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      initialOptions,
+      isShowOption
+    } = this.state; // Init from props for new options from props
 
     if (prevState.initialOptions !== initialOptions) {
       this._initProperties();
@@ -629,36 +612,39 @@ var InputSelect = /*#__PURE__*/function (_Component) {
 
 
     if (isShowOption) {
-      var comp = this._decorateCurrentComp();
+      const comp = this._decorateCurrentComp();
 
       if (!prevState.isShowOption) {
         this._makeVisible(comp);
       }
     }
-  };
+  }
 
-  _proto.componentWillUnmount = function componentWillUnmount() {
+  componentWillUnmount() {
     clearTimeout(this._blurId);
-  };
+  }
 
-  _proto.render = function render() {
-    var _this$props6 = this.props,
-        style = _this$props6.style,
-        width = _this$props6.width,
-        _this$state5 = this.state,
-        value = _this$state5.value,
-        isShowOption = _this$state5.isShowOption,
-        _rootWidthStyle = _crWidthStyle(width, style),
-        _this$_crAfterInputEl = this._crAfterInputEl(),
-        afterInputEl = _this$_crAfterInputEl.afterInputEl,
-        placeholder = _this$_crAfterInputEl.placeholder;
+  render() {
+    const {
+      style,
+      width
+    } = this.props,
+          {
+      value,
+      isShowOption
+    } = this.state,
+          _rootWidthStyle = _crWidthStyle(width, style),
+          {
+      afterInputEl,
+      placeholder
+    } = this._crAfterInputEl();
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: _CL["default"].ROOT,
+      className: _CL.default.ROOT,
       style: _rootWidthStyle,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", (0, _extends2["default"])({
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
         ref: this._refInput,
-        className: _CL["default"].INPUT,
+        className: _CL.default.INPUT,
         type: "text",
         name: "select",
         autoComplete: "off",
@@ -668,33 +654,33 @@ var InputSelect = /*#__PURE__*/function (_Component) {
         value: value,
         placeholder: placeholder,
         onChange: this._hInputChange,
-        onKeyDown: this._hInputKeyDown
-      }, this._touchHandlers)), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
-        className: _CL["default"].INPUT_HR
+        onKeyDown: this._hInputKeyDown,
+        ...this._touchHandlers
+      }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
+        className: _CL.default.INPUT_HR
       }), isShowOption && this.renderOptions()]
     });
-  };
+  }
 
-  _proto.focusInput = function focusInput() {
+  focusInput() {
     _getCurrent(this._refInput).focus();
-  };
+  }
 
-  return InputSelect;
-}(_react.Component);
+}
 
 InputSelect.defaultProps = {
   propCaption: 'caption',
-  ItemOptionComp: _ItemOptionDf["default"],
+  ItemOptionComp: _ItemOptionDf.default,
   options: [],
   optionName: '',
   optionNames: '',
   isWithInput: false,
   maxInput: 10,
-  regInput: /[A-Za-z0-9() ]/,
+  regInput: /[A-Za-z0-9()^ ]/,
   //prefixInput: 'From Input:',
-  onSelect: function onSelect() {},
-  onLoadOption: function onLoadOption() {}
+  onSelect: _fnNoop,
+  onLoadOption: _fnNoop
 };
 var _default = InputSelect;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=InputSelect.js.map

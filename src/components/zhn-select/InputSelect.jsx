@@ -11,10 +11,24 @@ import OptionList from './OptionList'
 import OptionsFooter from './OptionsFooter'
 import CL from './CL'
 
-const MAX_WITHOUT_ANIMATION = 800;
+const MAX_WITHOUT_ANIMATION = 800
 
-const INPUT_PREFIX = 'From input:';
-const NO_RESULT = 'noresult';
+, INPUT_PREFIX = 'From input:'
+, NO_RESULT = 'noresult'
+
+, S_BLOCK = { display: 'block'}
+, S_NONE = { display: 'none' }
+, S_ARROW_SHOW = { borderColor: '#1b75bb transparent transparent' }
+, S_SVG_CLEAR = {
+  position: 'absolute',
+  top: 5,
+  right: 8,
+  stroke: '#1b75bb'
+};
+
+const _crValue = str => str
+  .replace(INPUT_PREFIX, '')
+  .trim();
 
 const _crInputItem = (inputValue, { propCaption, isWithInput, maxInput }) => {
   const _inputValue = inputValue.substring(0, maxInput)
@@ -41,24 +55,6 @@ const _crFooterIndex = ({ options, initialOptions }) => ({
   _nAll: initialOptions ? initialOptions.length : 0
 });
 
-const S = {
-  BLOCK: {
-    display: 'block'
-  },
-  NONE: {
-    display: 'none'
-  },
-  ARROW_SHOW: {
-    borderColor: '#1b75bb transparent transparent'
-  },
-  SVG_CLEAR: {
-    position: 'absolute',
-    top: 5,
-    right: 8,
-    stroke: '#1b75bb'
-  }
-};
-
 const _crInitialStateFromProps = ({ optionName, optionNames, options }) => ({
   value: '',
   isShowOption: false,
@@ -68,10 +64,6 @@ const _crInitialStateFromProps = ({ optionName, optionNames, options }) => ({
   isValidOptionListCache: false,
   isFocused: false
 });
-
-const _crValue = str => str
-  .replace(INPUT_PREFIX, '')
-  .trim();
 
 const _filterOptions = (options, value, pnCaption) => {
    const _value = value.toLowerCase();
@@ -91,6 +83,7 @@ const _crFilterOptions = (options, token, props) => {
 }
 
 const _getCurrent = ref => ref.current;
+const _fnNoop = () => {};
 
 class InputSelect extends Component {
   /*
@@ -130,10 +123,10 @@ class InputSelect extends Component {
     optionNames: '',
     isWithInput: false,
     maxInput: 10,
-    regInput: /[A-Za-z0-9() ]/,
+    regInput: /[A-Za-z0-9()^ ]/,
     //prefixInput: 'From Input:',
-    onSelect: () => {},
-    onLoadOption: () => {}
+    onSelect: _fnNoop,
+    onLoadOption: _fnNoop
   }
 
   constructor(props){
@@ -440,7 +433,7 @@ class InputSelect extends Component {
     const { optionsStyle, width } = this.props
     , { isShowOption } = this.state
     , _optionListEl = this._crOptionListWithCache()
-    , _styleOptions = isShowOption ? S.BLOCK : S.NONE
+    , _styleOptions = isShowOption ? S_BLOCK : S_NONE
     , _rootWidthStyle = _crWidthStyle(width, _styleOptions)
     , { _nFiltered, _nAll } = _crFooterIndex(this.state);
 
@@ -489,7 +482,7 @@ class InputSelect extends Component {
        if (isFocused && value) {
          _afterInputEl = (
             <SvgClear
-               style={S.SVG_CLEAR}
+               style={S_SVG_CLEAR}
                onClick={this._hClear}
             />
           )
@@ -498,7 +491,7 @@ class InputSelect extends Component {
          _afterInputEl = (
            <ArrowCell
              ref={this._refArrowCell}
-             arrowStyle={isShowOption ? S.ARROW_SHOW : void 0}
+             arrowStyle={isShowOption ? S_ARROW_SHOW : void 0}
              onClick={this._hToggleOptions}
            />
         );
