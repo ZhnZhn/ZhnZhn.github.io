@@ -128,7 +128,7 @@
       "<rootDir>/js/components/zhn-sparklines/dataProcessing",
       "<rootDir>/js/components/zhn-m",
       "<rootDir>/js/components/zhn-menu",
-            "<rootDir>/js/components/zhn-tab",
+      "<rootDir>/js/components/zhn-tab",
       "<rootDir>/js/components/zhn-table",
       "<rootDir>/js/components/zhn-utils",
       "<rootDir>/js/flux/logic/",
