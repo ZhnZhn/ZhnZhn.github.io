@@ -1,16 +1,22 @@
-import { Component } from 'react'
+import { memo, useRef, useCallback } from 'react';
 
-import loadConfigs from './loadConfigs'
+import has from '../has';
+import ChartTypes from '../dialogs/ChartTypes';
+import SpinnerLoading from '../zhn/SpinnerLoading';
+import ItemStack from '../zhn/ItemStack';
+import D from '../dialogs/DialogCell';
+import crSelectItem from './crSelectItem';
 
-import has from '../has'
-import ChartTypes from '../dialogs/ChartTypes'
-import SpinnerLoading from '../zhn/SpinnerLoading'
-import ItemStack from '../zhn/ItemStack'
-import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore, crDateConfig } = D
+import useToggle from '../hooks/useToggle';
+import useRefSet from './useRefSet';
+import useToolbar from './useToolbar';
+import useMenuMore from './useMenuMore';
+import useModalOptions from './useModalOptions';
+import useModalToggle from './useModalToggle';
+import useLoadDims from './useLoadDims';
+import useCommandButtons from './useCommandButtons';
 
-const MAP_FREQUENCY_DF = 'M'
-, MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
+const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
 , MSG_DIMS_LOADING = "Dims is loading"
 
 , S_SPINNER_LOADING = { margin: '16px auto 32px' }
@@ -19,380 +25,191 @@ const MAP_FREQUENCY_DF = 'M'
   animation: 'none'
 };
 
-const {
-  isCategory,
-  crOptions
- } = ChartTypes;
+const { isCategory } = ChartTypes
+, IS_SHOW_LABELS = has.wideWidth()
+, _arePropsEqual = (prevProps, props) =>
+  prevProps.isShow === props.isShow;
 
-const _crIsId = id => `is${id}Select`;
+const DialogStatN = memo((props) => {
+  const {
+    isShow,
+    caption,
+    onShow,
+    onFront,
 
-const _loadDims = ({
-  dims,
-  proxy,
-  baseMeta,
-  dfProps
-}, _setConfigs) => {
-  loadConfigs({ dims, proxy, baseMeta, ...dfProps })
-   .then(_setConfigs)
-   .catch(err => {
-     _setConfigs({ errMsg: err.message })
-   })
- };
+    loadFn, onLoad,
 
-const _isOpenAndPrevLoadFailed = (
-  prevProps, props, state
-) => props !== prevProps
-  && !prevProps.isShow
-  && props.isShow
-  && state.isLoadFailed;
+    //chartsType,
+    //mapFrequency:initialMf,
+    //mapDateDf,
 
-const _crSelectItem = (
-  conf,
-  index, {
-    isShowLabels,
-    isRow,
-    fSelect
-  }
-) => {
-  const { id, caption, options } = conf
-  , _isShow = !isRow[_crIsId(id)];
-  return (
-    <D.ShowHide key={id} isShow={_isShow}>
-      <D.RowInputSelect
-        isShowLabels={isShowLabels}
-        caption={caption}
-        options={options}
-        onSelect={fSelect(index)}
-      />
-    </D.ShowHide>
-  );
-}
+    msgOnNotSelected,
 
-@Decor.dialog
-class DialogStatN extends Component {
-
-  constructor(props){
-    super(props)
-
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
-    this.toolbarButtons = this._createType2WithToolbar(props, {
-      noDate: true,
-      isOptions: true,
-      isToggle: true
-    })
-    this._commandButtons = this._crCommandsWithLoad(this)
-    this._items = []
-    this._titles = []
-
-    this.state = {
-      isLoading: true,
-      isLoadFailed: false,
-      isToolbar: true,
-      isShowLabels: has.wideWidth(),
-      isRow: {
-        isShowChart: true,
-        isShowDate: false
-      },
-      ...crDateConfig('EMPTY'),
-      //isToggle: false,
-      //isOptions: false,
-      configs: [],
-      selectOptions: [],
-      mapFrequency: props.mapFrequency,
-      chartOptions: crOptions(props),
-      //chartType
-      validationMessages: []
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
-
-  componentDidMount() {
-    _loadDims(this.props, this._setConfigs)
-  }
-
-  componentDidUpdate(prevProps) {
-    if ( _isOpenAndPrevLoadFailed(
-      prevProps, this.props, this.state
-    )) {
-      this.setState({
-        isLoading: true,
-        isLoadFailed: false
-      })
-      _loadDims(this.props, this._setConfigs)
-    }
-  }
-
-  _toggleIsRow = (propName) => {
-    this.setState(prevState => {
-      const { isRow } = prevState;
-      isRow[propName] = !isRow[propName]
-      prevState.isRow = {...isRow}
-      return {...prevState};
-    })
-  }
-
-  _checkCaptionBy = (index) => {
-    this._titles.push(index)
-  }
-  _uncheckCaption = (index) => {
-     this._titles = this._titles
-       .filter(v => v !== index)
-  }
-
-  _setConfigs = ({
-    configs,
-    timeId,
-    mapFrequency:mF,
-    errMsg
-  }) => {
-    if (configs) {
-      const { chartsType, mapFrequency } = this.props;
-      this.setState({
-       isLoading: false,
-       isLoadFailed: false,
-       timeId,
-       configs,
-       mapFrequency: mF || mapFrequency,
-       selectOptions: configs
-         .map(config => config.options),
-       chartOptions: crOptions({ configs, chartsType })
-      })
-    } else {
-      this.setState({
-       isLoading: false,
-       isLoadFailed: true,
-       validationMessages: [errMsg]
-     })
-   }
-  }
-
-
-  _setIsShowDate = (state, value) => {
-    const { isRow } = state;
-    isRow.isShowDate = value
-    state.isRow = {...isRow}
-  }
-
-  _updateForDate = (chartType) => {
-    this.date = null;
-
-    const { mapDateDf } = this.props
-    , { mapFrequency } = this.state
-    , _frequency = mapFrequency || MAP_FREQUENCY_DF
-    , dateConfig = crDateConfig(_frequency, mapDateDf);
-
-    this.setState(prevState => {
-       this._setIsShowDate(prevState, true)
-       return {
-         ...prevState,
-         ...dateConfig,
-         chartType
-       };
-    });
-  }
-
-  _handleLoad = () => {
-    const validationMessages = this._crValidationMessages();
-    if (validationMessages.length === 0){
-      const {
-         _items,
-         _titles,
-         dialogOptions,
-         colorComp,
-         date
-        } = this
-      , { seriaColor, seriaWidth } = colorComp
-             ? colorComp.getConf()
-             : {}
-      , {
-          dateDefault,
-          timeId,
-          chartType, selectOptions
-        } = this.state
-      , { loadFn, onLoad } = this.props
-      , _props = { ...this.props, timeId }
-      , loadOpt = loadFn(
-         _props, {
-          dialogOptions,
-          chartType, seriaColor, seriaWidth,
-          date, dateDefault,
-          items: _items,
-          titles: _titles,
-          selectOptions: selectOptions
-        }
-      );
-      onLoad(loadOpt)
-   }
-   this.setState({ validationMessages })
-  }
-
-  _crValidationMessages = () => {
-    const msg = []
-    , {
-      isLoadFailed,
-      isLoading,
-      configs,
-      chartType
-    } = this.state
-    , _isCategory = isCategory(chartType)
-    , { dim } = chartType || {};
-    if (isLoadFailed) {
-      msg.push(MSG_DIMS_NOT_LOADED)
-      return msg;
-    }
-    if (isLoading) {
-      msg.push(MSG_DIMS_LOADING)
-      return msg;
-    }
-
-    configs.forEach((config, index) => {
-       const { caption } = config;
-       if (!(_isCategory && caption === dim)) {
-         if (!this._items[index]) {
-           msg.push(this.props.msgOnNotSelected(caption))
-         }
-       }
-    })
-
-    return msg;
-  }
-
-  _hClose = () => {
-    this.props.onClose()
-    this.setState(prevState => ({
-      validationMessages: []
-    }))
-  }
-
-  _hSelectChartType = (chartType) => {
-    if (isCategory(chartType)) {
-      this._updateForDate(chartType);
-    } else {
-      this.setState(prevState => {
-        this._setIsShowDate(prevState, false)
-        return {
-          ...prevState,
-          chartType
-        }
-      });
-    }
-  }
-  _onRegColor = (comp) => {
-    this.colorComp = comp
-  }
-
-
-  _fSelect = (index) => {
-    return (function(item) {
-      this._items[index] = item
+    onClickInfo,
+    onClose
+  } = props;
+  const _refItems = useRef([])
+  , _fSelect = useCallback(index => (item) => {
+      _refItems.current[index] = item
          ? {...item}
          : void 0
-    }).bind(this);
-  }
-
-  _hSelectDate = (date) => {
-    this.date = date;
-  }
-
-  render(){
-    const {
-      isShow,
-      caption,
-      onShow,
-      onFront,
-    } = this.props
-    , {
-        chartType,
-        isToolbar,
-        isOptions, isToggle,
-        isShowLabels,
-        isLoading, isLoadFailed,
-        dateDefault, dateOptions,
-        isRow,
-        configs,
-        chartOptions,
-        validationMessages
-     } = this.state
-     , {
-         isShowChart,
-         isShowDate
-       } = isRow
-     , _spinnerStyle = isLoading
-         ? S_SPINNER_LOADING
-         : isLoadFailed
-            ? {...S_SPINNER_LOADING, ...S_SPINNER_FAILED}
-            : void 0;
-
-    return (
-      <D.DraggableDialog
-           isShow={isShow}
-           caption={caption}
-           menuModel={this._menuMore}
-           commandButtons={this._commandButtons}
-           onShowChart={onShow}
-           onFront={onFront}
-           onClose={this._hClose}
-       >
-         <D.Toolbar
-           isShow={isToolbar}
-           buttons={this.toolbarButtons}
-         />
-         <D.ModalOptions
-           isShow={isOptions}
-           toggleOption={this._toggleOptionWithToolbar}
-           onClose={this._hideOptionsWithToolbar}
-         />
-         <D.ModalToggle
-           isShow={isToggle}
-           selectProps={configs}
-           isShowChart={isShowChart}
-           isShowDate={isShowDate}
-           crIsId={_crIsId}
-           onToggle={this._toggleIsRow}
-           onCheckCaption={this._checkCaptionBy}
-           onUnCheckCaption={this._uncheckCaption}
-           onClose={this._hideToggleWithToolbar}
-         />
-         {
-           _spinnerStyle
-             ? <SpinnerLoading style={_spinnerStyle} />
-             : <ItemStack
-                  items={configs}
-                  crItem={_crSelectItem}
-                  isShowLabels={isShowLabels}
-                  isRow={isRow}
-                  fSelect={this._fSelect}
-               />
+  }, [])
+  , [_refColorComp, _onRegColor] = useRefSet()
+  , [_refDate, _hSelectDate] = useRefSet()
+  , [
+      state,
+      isLoading,
+      isLoadFailed,
+      validationMessages,
+      setValidationMessages,
+      setState
+  ] = useLoadDims(props)
+  , {
+      configs,
+      selectOptions,
+      chartType,
+      chartOptions,
+      dateOptions,
+      dateDefault,
+      timeId,
+   } = state
+  , [isShowLabels, _toggleLabels] = useToggle(IS_SHOW_LABELS)
+  , [_modalOptionsEl, _refDialogOptions, _toggleOptions] = useModalOptions()
+  , [_modalToggleEl, _refTitles, isRow, setIsRow, _toggleInputs] = useModalToggle(configs)
+  , {isShowDate, isShowChart} = isRow
+  , [_toolbarEl, toggleToolBar] = useToolbar(
+      _toggleLabels,
+      _toggleInputs,
+      _toggleOptions,
+      onClickInfo
+   )
+   /*eslint-disable react-hooks/exhaustive-deps */
+   , _hClose = useCallback(() => {
+     onClose()
+     setValidationMessages([])
+   }, [])
+   //onClose
+   /*eslint-enable react-hooks/exhaustive-deps */
+   , _crValidationMessages = useCallback(() => {
+        const msg = []
+        , _isCategory = isCategory(chartType)
+        , { dim } = chartType || {};
+        if (isLoadFailed) {
+          msg.push(MSG_DIMS_NOT_LOADED)
+          return msg;
+        }
+        if (isLoading) {
+          msg.push(MSG_DIMS_LOADING)
+          return msg;
+        }
+        configs.forEach((config, index) => {
+           const { caption } = config;
+           if (!(_isCategory && caption === dim)) {
+             if (!_refItems.current[index]) {
+               msg.push(msgOnNotSelected(caption))
+             }
+           }
+        })
+        return msg;
+   }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
+   /*eslint-disable react-hooks/exhaustive-deps */
+   , _hSelectChartType = useCallback(chartType => {
+       let _isShowDate = false;
+       if (isCategory(chartType)) {
+         _refDate.current = null
+         _isShowDate = true
+       }
+       setIsRow(is => {
+        is.isShowDate = _isShowDate
+        return {...is};
+       })
+       setState(prevState => ({
+        ...prevState,
+        chartType
+       }))
+   }, [])
+   //setIsRow, setState
+   /*eslint-enable react-hooks/exhaustive-deps */
+   /*eslint-disable react-hooks/exhaustive-deps */
+   , _handleLoad = useCallback(() => {
+     const validationMessages = _crValidationMessages();
+     if (validationMessages.length === 0){
+       const { seriaColor, seriaWidth } = _refColorComp.current
+          ? _refColorComp.current.getConf()
+          : {}
+       , _props = { ...props, timeId }
+       , loadOpt = loadFn(
+          _props, {
+           dialogOptions: _refDialogOptions.current,
+           chartType, seriaColor, seriaWidth,
+           date: _refDate.current,
+           dateDefault,
+           items: _refItems.current,
+           titles: _refTitles.current,
+           selectOptions: selectOptions
          }
-         <D.RowChartDate
-           chartType={chartType}
-           isShowLabels={isShowLabels}
-           isShowChart={isShowChart}
-           chartOptions={chartOptions}
-           onSelectChart={this._hSelectChartType}
-           onRegColor={this._onRegColor}
-           isShowDate={isShowDate}
-           dateDefault={dateDefault}
-           dateOptions={dateOptions}
-           onSelecDate={this._hSelectDate}
-         />
-         <D.ValidationMessages
-             validationMessages={validationMessages}
-         />
-      </D.DraggableDialog>
-    );
-  }
-}
+       );
+       onLoad(loadOpt)
+    }
+    setValidationMessages(validationMessages)
+  }, [
+    _crValidationMessages,
+    dateDefault,
+    timeId,
+    chartType,
+    selectOptions
+  ])
+  //loadFn, onLoad, props
+  /*eslint-enable react-hooks/exhaustive-deps */
+  , _commandButtons = useCommandButtons(_handleLoad)
+  , _menuMore = useMenuMore(toggleToolBar, onClickInfo);
+
+  const _spinnerStyle = isLoading
+    ? S_SPINNER_LOADING
+    : isLoadFailed
+       ? {...S_SPINNER_LOADING, ...S_SPINNER_FAILED}
+       : void 0;
+  return (
+    <D.DraggableDialog
+       isShow={isShow}
+       caption={caption}
+       menuModel={_menuMore}
+       commandButtons={_commandButtons}
+       onShowChart={onShow}
+       onFront={onFront}
+       onClose={_hClose}
+    >
+       {_toolbarEl}
+       {_modalOptionsEl}
+       {_modalToggleEl}
+       {
+         _spinnerStyle
+           ? <SpinnerLoading style={_spinnerStyle} />
+           : <ItemStack
+                items={configs}
+                crItem={crSelectItem}
+                isShowLabels={isShowLabels}
+                isRow={isRow}
+                fSelect={_fSelect}
+             />
+       }
+       <D.RowChartDate
+         chartType={chartType}
+         isShowLabels={isShowLabels}
+         isShowChart={isShowChart}
+         chartOptions={chartOptions}
+         onSelectChart={_hSelectChartType}
+         onRegColor={_onRegColor}
+         isShowDate={isShowDate}
+         dateDefault={dateDefault}
+         dateOptions={dateOptions}
+         onSelecDate={_hSelectDate}
+       />
+       <D.ValidationMessages
+           validationMessages={validationMessages}
+       />
+    </D.DraggableDialog>
+  );
+}, _arePropsEqual)
 
 export default DialogStatN

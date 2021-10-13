@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/useToolbar.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/useToolbar.js",
+ "names": [
+  "_crToolbarBt",
+  "caption",
+  "title",
+  "onClick",
+  "useToolbar",
+  "_toggleLabels",
+  "_toggleInputs",
+  "_toggleOptions",
+  "onClickInfo",
+  "isToolbar",
+  "toggleToolBar",
+  "_toolbarButtons"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;;;AAEA,MAAMA,YAAY,GAAG,CACnBC,OADmB,EAEnBC,KAFmB,EAGnBC,OAHmB,MAIf;AACJF,EAAAA,OADI;AAEJC,EAAAA,KAFI;AAGJC,EAAAA;AAHI,CAJe,CAArB;;AAUA,MAAMC,UAAU,GAAG,CACjBC,aADiB,EAEjBC,aAFiB,EAGjBC,cAHiB,EAIjBC,WAJiB,KAKd;AACH,QAAM,CAACC,SAAD,EAAYC,aAAZ,IAA6B,wBAAU,IAAV;AACnC;AADA;AAAA,QAEEC,eAAe,GAAG,oBAAQ,MAAI,CAC9BX,YAAY,CAAC,GAAD,EAAM,8BAAN,EAAsCK,aAAtC,CADkB,EAE9BL,YAAY,CAAC,GAAD,EAAM,eAAN,EAAuBM,aAAvB,CAFkB,EAG9BN,YAAY,CAAC,GAAD,EAAM,eAAN,EAAuBO,cAAvB,CAHkB,EAI9BP,YAAY,CAAC,GAAD,EAAM,kBAAN,EAA0BQ,WAA1B,CAJkB,CAAZ,EAKjB,EALiB,CAFpB,CADG,CASH;;AACA;;;AACA,SAAO;AACL;AACA,sBAAQ,mBACN,qBAAC,mBAAD,CAAG,OAAH;AACE,IAAA,MAAM,EAAEC,SADV;AAEE,IAAA,OAAO,EAAEE;AAFX,IADF,EAKG,CAACF,SAAD,CALH,CAFK,CAQL;;AACA;AATK,IAUHC,aAVG,CAAP;AAYD,CA5BD;;eA8BeN,U"
+}

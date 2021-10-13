@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/useToggle2.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/useToggle2.js",
+ "names": [
+  "useToggle2",
+  "initialValue",
+  "is",
+  "setIs"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,UAAU,GAAIC,YAAD,IAAkB;AACnC,QAAM,CAACC,EAAD,EAAKC,KAAL,IAAc,qBAASF,YAAT,CAApB;AACA,SAAO,CACLC,EADK,EAEL,wBAAY,MAAMC,KAAK,CAACD,EAAE,IAAE,CAACA,EAAN,CAAvB,EAAkC,EAAlC,CAFK,EAGL,wBAAY,MAAMC,KAAK,CAAC,KAAD,CAAvB,EAAgC,EAAhC,CAHK,CAAP;AAKD,CAPD;;eASeH,U"
+}

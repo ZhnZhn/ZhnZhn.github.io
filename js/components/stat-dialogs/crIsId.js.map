@@ -1,0 +1,12 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/crIsId.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/crIsId.js",
+ "names": [
+  "crIsId",
+  "id"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,MAAM,GAAGC,EAAE,WAASA,EAAT,WAAjB;;eAEeD,M"
+}

@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/crSelectItem.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/crSelectItem.js",
+ "names": [
+  "crSelectItem",
+  "conf",
+  "index",
+  "isShowLabels",
+  "isRow",
+  "fSelect",
+  "id",
+  "caption",
+  "options",
+  "_isShow"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;;;AAEA,MAAMA,YAAY,GAAG,CACnBC,IADmB,EAEnBC,KAFmB,EAEZ;AACLC,EAAAA,YADK;AAELC,EAAAA,KAFK;AAGLC,EAAAA;AAHK,CAFY,KAOhB;AACH,QAAM;AAAEC,IAAAA,EAAF;AAAMC,IAAAA,OAAN;AAAeC,IAAAA;AAAf,MAA2BP,IAAjC;AAAA,QACEQ,OAAO,GAAG,CAACL,KAAK,CAAC,qBAAOE,EAAP,CAAD,CADlB;;AAEA,sBACE,qBAAC,mBAAD,CAAG,QAAH;AAAqB,IAAA,MAAM,EAAEG,OAA7B;AAAA,2BACE,qBAAC,mBAAD,CAAG,cAAH;AACE,MAAA,YAAY,EAAEN,YADhB;AAEE,MAAA,OAAO,EAAEI,OAFX;AAGE,MAAA,OAAO,EAAEC,OAHX;AAIE,MAAA,QAAQ,EAAEH,OAAO,CAACH,KAAD;AAJnB;AADF,KAAiBI,EAAjB,CADF;AAUD,CApBD;;eAsBeN,Y"
+}

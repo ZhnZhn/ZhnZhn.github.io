@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/useRefSet.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/useRefSet.js",
+ "names": [
+  "useRefSet",
+  "initialValue",
+  "ref",
+  "setRefValue",
+  "value",
+  "current"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,SAAS,GAAIC,YAAD,IAAkB;AAClC,QAAMC,GAAG,GAAG,mBAAOD,YAAP,CAAZ;AAAA,QACEE,WAAW,GAAG,wBAAYC,KAAK,IAAI;AACnCF,IAAAA,GAAG,CAACG,OAAJ,GAAcD,KAAd;AACD,GAFe,EAEb,EAFa,CADhB;AAIA,SAAO,CACLF,GADK,EAELC,WAFK,CAAP;AAID,CATD;;eAWeH,S"
+}

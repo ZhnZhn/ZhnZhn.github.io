@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/useModalOptions.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/useModalOptions.js",
+ "names": [
+  "useModalOptions",
+  "_refDialogOptions",
+  "isOptions",
+  "_toggleOptions",
+  "_hideOptions",
+  "_toggleDialogOption",
+  "propName",
+  "current"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;;;AAEA,MAAMA,eAAe,GAAG,MAAM;AAC5B,QAAMC,iBAAiB,GAAG,mBAAO,EAAP,CAA1B;AAAA,QACE,CAACC,SAAD,EAAYC,cAAZ,EAA4BC,YAA5B,IAA4C,wBAAW,KAAX,CAD9C;AAAA,QAEEC,mBAAmB,GAAG,wBAAYC,QAAQ,IAAI;AAC5CL,IAAAA,iBAAiB,CAACM,OAAlB,CAA0BD,QAA1B,IAAsC,CAACL,iBAAiB,CAACM,OAAlB,CAA0BD,QAA1B,CAAvC;AACH,GAFuB,EAErB,EAFqB,CAFxB;;AAKA,SAAO;AACL;AACA,sBAAQ,mBACN,qBAAC,mBAAD,CAAG,YAAH;AACE,IAAA,MAAM,EAAEJ,SADV;AAEE,IAAA,YAAY,EAAEG,mBAFhB;AAGE,IAAA,OAAO,EAAED;AAHX,IADF,EAMG,CAACF,SAAD,CANH,CAFK,CASL;;AACA;AAVK,IAWHD,iBAXG,EAYHE,cAZG,CAAP;AAcD,CApBD;;eAsBeH,e"
+}
