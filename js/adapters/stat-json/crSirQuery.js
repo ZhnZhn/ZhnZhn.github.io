@@ -5,21 +5,43 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crArrQuery = _interopRequireDefault(require("./crArrQuery"));
+var _crDfArrQuery = _interopRequireDefault(require("./crDfArrQuery"));
 
-const crSirQuery = option => ({
-  method: "POST",
-  headers: {
-    'Content-Type': "application/json"
-  },
-  body: JSON.stringify({
-    query: (0, _crArrQuery.default)(option.items, true),
-    response: {
-      format: "json-stat2",
-      pivot: null
+const _trOptionItems = option => {
+  option.items = option.items.map(item => {
+    const {
+      slice
+    } = item || {},
+          _item = {
+      slice: {}
+    };
+
+    for (const propName in slice) {
+      _item.slice[propName.toUpperCase()] = slice[propName];
     }
-  })
-});
+
+    return _item;
+  });
+};
+
+const crSirQuery = option => {
+  _trOptionItems(option);
+
+  const query = (0, _crDfArrQuery.default)(option);
+  return {
+    method: "POST",
+    headers: {
+      'Content-Type': "application/json"
+    },
+    body: JSON.stringify({
+      query,
+      response: {
+        format: "json-stat2",
+        pivot: null
+      }
+    })
+  };
+};
 
 var _default = crSirQuery;
 exports.default = _default;

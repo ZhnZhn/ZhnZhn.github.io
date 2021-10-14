@@ -1,17 +1,33 @@
-import crArrQuery from './crArrQuery';
+import crDfArrQuery from './crDfArrQuery';
 
-const crSirQuery = option => ({
-  method: "POST",
-  headers: {
-   'Content-Type': "application/json",
-  },
-  body: JSON.stringify({
-    query: crArrQuery(option.items, true),
-    response: {
-      format: "json-stat2",
-      pivot: null
-    }
-  })
-});
+const _trOptionItems = option => {
+  option.items = option.items
+    .map(item => {
+      const { slice } = item || {}
+      , _item = {slice: {}};
+      for(const propName in slice) {
+        _item.slice[propName.toUpperCase()] = slice[propName]
+      }
+      return _item;
+    })
+};
+
+const crSirQuery = option => {
+  _trOptionItems(option)
+  const query = crDfArrQuery(option);
+  return {
+    method: "POST",
+    headers: {
+     'Content-Type': "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      response: {
+        format: "json-stat2",        
+        pivot: null
+      }
+     })
+   };
+};
 
 export default crSirQuery

@@ -9,18 +9,39 @@ var _crArrQuery = _interopRequireDefault(require("./crArrQuery"));
 
 var _crQueryItem = _interopRequireDefault(require("./crQueryItem"));
 
+const _isCategory = seriaType => seriaType === "BAR_CLUSTER" || seriaType === "BAR_SET" || seriaType === "COLUMN_SET" || seriaType === "COLUMN_CLUSTER" || seriaType === "TREE_MAP" || seriaType === "TREE_MAP_CLUSTER" || seriaType === "TREE_MAP_2" || seriaType === "TREE_MAP_2_CLUSTER";
+
 const _checkTop = (isTop, strN, arr) => {
   if (isTop) {
     arr.push((0, _crQueryItem.default)('Tid', 'top', strN));
   }
 };
 
-const crDfArrQuery = ({
-  items = [],
-  isTop12,
-  isTop6
-}) => {
-  const arrQuery = (0, _crArrQuery.default)(items);
+const crDfArrQuery = option => {
+  const {
+    items = [],
+    isTop12,
+    isTop6
+  } = option,
+        arrQuery = (0, _crArrQuery.default)(items);
+  const {
+    dfC,
+    seriaType
+  } = option;
+
+  if (dfC && _isCategory(seriaType)) {
+    const {
+      time,
+      timeId = 'Tid'
+    } = option,
+          _arr = arrQuery.filter(item => item.code !== dfC);
+
+    _arr.unshift((0, _crQueryItem.default)(dfC, 'all', '*'));
+
+    _arr.unshift((0, _crQueryItem.default)(timeId, 'item', time));
+
+    return _arr;
+  }
 
   _checkTop(isTop12, '12', arrQuery);
 

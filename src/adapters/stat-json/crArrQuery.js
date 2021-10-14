@@ -1,19 +1,16 @@
 import crQueryItem from './crQueryItem';
 
-const crArrQuery = (items, isUpperCase) => {
+const crArrQuery = items => {
   const arrQuery = [];
   items.forEach(item => {
      const { slice } = item || {};
      for(const propName in slice){
-       const code = isUpperCase
-         ? propName.toUpperCase()
-         : propName;
        arrQuery.push(
          crQueryItem(
-           code,
+           propName,           
            'item',
            slice[propName]
-       ))       
+       ))
      }
   })
   return arrQuery;

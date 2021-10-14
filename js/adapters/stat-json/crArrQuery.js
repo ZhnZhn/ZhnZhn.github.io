@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _crQueryItem = _interopRequireDefault(require("./crQueryItem"));
 
-const crArrQuery = (items, isUpperCase) => {
+const crArrQuery = items => {
   const arrQuery = [];
   items.forEach(item => {
     const {
@@ -15,8 +15,7 @@ const crArrQuery = (items, isUpperCase) => {
     } = item || {};
 
     for (const propName in slice) {
-      const code = isUpperCase ? propName.toUpperCase() : propName;
-      arrQuery.push((0, _crQueryItem.default)(code, 'item', slice[propName]));
+      arrQuery.push((0, _crQueryItem.default)(propName, 'item', slice[propName]));
     }
   });
   return arrQuery;
