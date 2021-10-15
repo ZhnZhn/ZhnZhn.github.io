@@ -12,7 +12,8 @@ const RowChartDate = ({
   isShowChart, chartOptions,
   onSelectChart, onRegColor,
   isShowDate, noDate=false,
-  dateDefault, dateOptions, onSelecDate
+  dateDefault, dateOptions, onSelecDate,
+  isDim, dimOptions, onSelecDim
 }) => (
   <>
     <ShowHide isShow={isShowChart}>
@@ -26,6 +27,17 @@ const RowChartDate = ({
         onRegColor={onRegColor}
       />
     </ShowHide>
+    {
+      isDim && dimOptions &&
+      <ShowHide isShow={isShowDate}>
+        <RowInputSelect
+           isShowLabels={isShowLabels}
+           caption="Dim"           
+           options={dimOptions}
+           onSelect={onSelecDim}
+        />
+      </ShowHide>
+    }
     {
       !noDate &&
       <ShowHide isShow={isShowDate}>
