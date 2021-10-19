@@ -35,6 +35,26 @@ const _useIsLoadDims = (props, isLoadFailed) => {
     && props.isShow;
 };
 
+const _crDateOptions = (configs, _mF, mapDateDf) => {
+  const {dateOptions} = configs;
+  if (dateOptions) {
+    return [dateOptions, dateOptions[0].caption];
+  }
+  const {
+    dateOptions:dO,
+    dateDefault
+  } = crDateConfig(_mF, mapDateDf);
+  return [dO, dateDefault];
+};
+
+const _crSelectOptions = configs => configs
+  .map(config => config.options);
+const _crDimOptions = configs => configs
+  .map(config => ({
+    caption: config.caption,
+    value: config.id
+  }));
+
 const useLoadDims = (props) => {
   const {
     chartsType,
@@ -59,7 +79,11 @@ const useLoadDims = (props) => {
       errMsg
     }) => {
       if (configs) {
-        const _mF = mF || mapFrequency;
+        const _mF = mF || mapFrequency
+        , [
+          dateOptions,
+          dateDefault
+        ] = _crDateOptions(configs, _mF, mapDateDf);
         setLoad({
           isLoading: false,
           isLoadFailed: false
@@ -67,11 +91,12 @@ const useLoadDims = (props) => {
         setState({
          timeId,
          configs,
-         selectOptions: configs
-           .map(config => config.options),
+         selectOptions: _crSelectOptions(configs),
          mapFrequency: _mF,
+         dimOptions: _crDimOptions(configs),
          chartOptions: crOptions({ configs, chartsType }),
-         ...crDateConfig(_mF, mapDateDf)
+         dateOptions,
+         dateDefault
         })
       } else {
         setLoad({
