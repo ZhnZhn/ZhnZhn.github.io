@@ -10,6 +10,7 @@ var _jsonstat = _interopRequireDefault(require("jsonstat"));
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 const {
+  crError,
   isYNumber,
   numberFormat,
   crId,
@@ -163,6 +164,7 @@ const _crDataSource = ({
 }) => dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
 
 const fnAdapter = {
+  crError,
   isYNumber,
   numberFormat,
   crId,

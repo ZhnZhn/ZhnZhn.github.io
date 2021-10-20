@@ -53,6 +53,42 @@ const {
       IS_SHOW_LABELS = _has.default.wideWidth(),
       _arePropsEqual = (prevProps, props) => prevProps.isShow === props.isShow;
 
+const _crDfC = (props, dim) => {
+  const {
+    dfC
+  } = props;
+
+  if (dfC) {
+    return dfC;
+  }
+
+  return (dim || {}).value;
+};
+
+const _crDfTitle = (props, dim) => {
+  if (props.dfC || !dim) {
+    return "";
+  }
+
+  return dim.caption || "";
+};
+
+const _fAddErrMsgTo = (msg, msgOnNotSelected, configs, items) => is => {
+  configs.forEach((config, index) => {
+    const {
+      caption
+    } = config;
+
+    if (is(caption) && !items[index]) {
+      msg.push(msgOnNotSelected(caption));
+    }
+  });
+};
+
+const _crSpinnerStyle = (isLoading, isLoadFailed) => isLoading ? S_SPINNER_LOADING : isLoadFailed ? { ...S_SPINNER_LOADING,
+  ...S_SPINNER_FAILED
+} : void 0;
+
 const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
   const {
     isShow,
@@ -61,6 +97,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
     onFront,
     loadFn,
     onLoad,
+    dims,
     //chartsType,
     //mapFrequency:initialMf,
     //mapDateDf,
@@ -69,21 +106,24 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
     onClose
   } = props;
 
-  const _refItems = (0, _react.useRef)([]),
+  const _isDim = !props.dims,
+        _refItems = (0, _react.useRef)([]),
         _fSelect = (0, _react.useCallback)(index => item => {
     _refItems.current[index] = item ? { ...item
     } : void 0;
   }, []),
         [_refColorComp, _onRegColor] = (0, _useRefSet.default)(),
         [_refDate, _hSelectDate] = (0, _useRefSet.default)(),
+        [_refDim, _hSelectDim] = (0, _useRefSet.default)(),
         [state, isLoading, isLoadFailed, validationMessages, setValidationMessages, setState] = (0, _useLoadDims.default)(props),
         {
     configs,
     selectOptions,
     chartType,
     chartOptions,
+    dimOptions,
     dateOptions,
-    dateDefault,
+    dateDf = {},
     timeId
   } = state,
         [isShowLabels, _toggleLabels] = (0, _useToggle.default)(IS_SHOW_LABELS),
@@ -100,15 +140,9 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
     onClose();
     setValidationMessages([]);
   }, []) //onClose
-
-  /*eslint-enable react-hooks/exhaustive-deps */
   ,
         _crValidationMessages = (0, _react.useCallback)(() => {
-    const msg = [],
-          _isCategory = isCategory(chartType),
-          {
-      dim
-    } = chartType || {};
+    const msg = [];
 
     if (isLoadFailed) {
       msg.push(MSG_DIMS_NOT_LOADED);
@@ -120,20 +154,33 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
       return msg;
     }
 
-    configs.forEach((config, index) => {
-      const {
-        caption
-      } = config;
+    const _isCategory = isCategory(chartType),
+          {
+      dim
+    } = chartType || {},
+          _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, _refItems.current); //For dims case and not category case
 
-      if (!(_isCategory && caption === dim)) {
-        if (!_refItems.current[index]) {
-          msg.push(msgOnNotSelected(caption));
-        }
+
+    if (dims || !_isCategory) {
+      _addErrMsgTo(caption => !(_isCategory && caption === dim));
+
+      return msg;
+    } //For category case
+
+
+    if (_isCategory) {
+      const _dimItem = _refDim.current;
+
+      if (!_dimItem) {
+        msg.push("Dim isn't selected");
+        return msg;
       }
-    });
+
+      _addErrMsgTo(caption => caption !== _dimItem.caption);
+    }
+
     return msg;
-  }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
-  /*eslint-disable react-hooks/exhaustive-deps */
+  }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected]) //_refDim, dims
   ,
         _hSelectChartType = (0, _react.useCallback)(chartType => {
     let _isShowDate = false;
@@ -157,7 +204,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
 
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _handleLoad = (0, _react.useCallback)(() => {
+        _hLoad = (0, _react.useCallback)(() => {
     const validationMessages = _crValidationMessages();
 
     if (validationMessages.length === 0) {
@@ -165,34 +212,34 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
         seriaColor,
         seriaWidth
       } = _refColorComp.current ? _refColorComp.current.getConf() : {},
-            _props = { ...props,
-        timeId
-      },
-            loadOpt = loadFn(_props, {
+            dfC = _crDfC(props, _refDim.current),
+            dfTitle = _crDfTitle(props, _refDim.current),
+            loadOpt = loadFn({ ...props
+      }, {
+        timeId,
+        dfC,
+        dfTitle,
+        time: (_refDate.current || dateDf).value,
         dialogOptions: _refDialogOptions.current,
         chartType,
         seriaColor,
         seriaWidth,
-        date: _refDate.current,
-        dateDefault,
         items: _refItems.current,
         titles: _refTitles.current,
         selectOptions: selectOptions
       });
+
       onLoad(loadOpt);
     }
 
     setValidationMessages(validationMessages);
-  }, [_crValidationMessages, dateDefault, timeId, chartType, selectOptions]) //loadFn, onLoad, props
+  }, [_crValidationMessages, dateDf, timeId, chartType, configs, selectOptions]) //loadFn, onLoad, props
 
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
-        _commandButtons = (0, _useCommandButtons.default)(_handleLoad),
-        _menuMore = (0, _useMenuMore.default)(toggleToolBar, onClickInfo);
-
-  const _spinnerStyle = isLoading ? S_SPINNER_LOADING : isLoadFailed ? { ...S_SPINNER_LOADING,
-    ...S_SPINNER_FAILED
-  } : void 0;
+        _commandButtons = (0, _useCommandButtons.default)(_hLoad),
+        _menuMore = (0, _useMenuMore.default)(toggleToolBar, onClickInfo),
+        _spinnerStyle = _crSpinnerStyle(isLoading, isLoadFailed);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
@@ -218,9 +265,12 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
       onSelectChart: _hSelectChartType,
       onRegColor: _onRegColor,
       isShowDate: isShowDate,
-      dateDefault: dateDefault,
+      dateDefault: dateDf.caption,
       dateOptions: dateOptions,
-      onSelecDate: _hSelectDate
+      onSelecDate: _hSelectDate,
+      isDim: _isDim,
+      dimOptions: dimOptions,
+      onSelecDim: _hSelectDim
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages
     })]

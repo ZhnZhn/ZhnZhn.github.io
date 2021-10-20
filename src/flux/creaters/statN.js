@@ -12,29 +12,34 @@ const _toIds = ({ dfId }, items) => {
   return _arr;
 };
 
-const createLoadOptions = (props={}, options={}) => {
+const createLoadOptions = (props, options) => {
   const {
-    loadId, dataSource, dfProps={}, timeId
-  } = props
+    loadId, dataSource, dfProps={},
+  } = props || {}
   , {
+      timeId,
+      time,
+      dfC,
+      dfTitle,
       items=[], titles,
       dialogOptions,
-      chartType={},
-      seriaColor, seriaWidth,
-      date, dateDefault,
+      chartType,
+      seriaColor,
+      seriaWidth,
       selectOptions
-    } = options
-  , { value:seriaType, compType: zhCompType } = chartType
+    } = options || {}
+  , { value:seriaType, compType: zhCompType } = chartType || {}
   , { itemCaption, title, subtitle } = crCaption(items, titles)
-  , time = date ? date.value : dateDefault
   , _items = _toIds(dfProps, items)
   , _itemKey = crItemKey(_items, seriaType, time);
 
   return {
+    dfC,
+    dfTitle,
     ...dfProps,
     ...dialogOptions,
     _itemKey,
-    itemCaption,
+    itemCaption: dfTitle || itemCaption,
     loadId,
     title, subtitle,
     seriaType, seriaColor, seriaWidth,

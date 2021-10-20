@@ -30,6 +30,34 @@ const { isCategory } = ChartTypes
 , _arePropsEqual = (prevProps, props) =>
   prevProps.isShow === props.isShow;
 
+const _crDfC = (props, dim) => {
+  const { dfC } = props
+  if (dfC) { return dfC; }
+  return (dim || {}).value;
+};
+
+const _crDfTitle = (props, dim) => {
+  if (props.dfC || !dim) { return ""; }
+  return dim.caption || "";
+};
+
+const _fAddErrMsgTo = (msg, msgOnNotSelected, configs, items) =>
+ is => {
+  configs.forEach((config, index) => {
+    const { caption } = config;
+    if (is(caption) && !items[index]){
+      msg.push(msgOnNotSelected(caption))
+    }
+  })
+};
+
+const _crSpinnerStyle = (isLoading, isLoadFailed) =>
+ isLoading
+   ? S_SPINNER_LOADING
+   : isLoadFailed
+     ? {...S_SPINNER_LOADING, ...S_SPINNER_FAILED}
+     : void 0;
+
 const DialogStatN = memo((props) => {
   const {
     isShow,
@@ -39,6 +67,7 @@ const DialogStatN = memo((props) => {
 
     loadFn, onLoad,
 
+    dims,
     //chartsType,
     //mapFrequency:initialMf,
     //mapDateDf,
@@ -48,7 +77,8 @@ const DialogStatN = memo((props) => {
     onClickInfo,
     onClose
   } = props;
-  const _refItems = useRef([])
+  const _isDim = !props.dims
+  , _refItems = useRef([])
   , _fSelect = useCallback(index => (item) => {
       _refItems.current[index] = item
          ? {...item}
@@ -56,6 +86,7 @@ const DialogStatN = memo((props) => {
   }, [])
   , [_refColorComp, _onRegColor] = useRefSet()
   , [_refDate, _hSelectDate] = useRefSet()
+  , [_refDim, _hSelectDim] = useRefSet()
   , [
       state,
       isLoading,
@@ -69,8 +100,9 @@ const DialogStatN = memo((props) => {
       selectOptions,
       chartType,
       chartOptions,
+      dimOptions,
       dateOptions,
-      dateDefault,
+      dateDf={},
       timeId,
    } = state
   , [isShowLabels, _toggleLabels] = useToggle(IS_SHOW_LABELS)
@@ -89,11 +121,8 @@ const DialogStatN = memo((props) => {
      setValidationMessages([])
    }, [])
    //onClose
-   /*eslint-enable react-hooks/exhaustive-deps */
    , _crValidationMessages = useCallback(() => {
-        const msg = []
-        , _isCategory = isCategory(chartType)
-        , { dim } = chartType || {};
+        const msg = [];
         if (isLoadFailed) {
           msg.push(MSG_DIMS_NOT_LOADED)
           return msg;
@@ -102,17 +131,28 @@ const DialogStatN = memo((props) => {
           msg.push(MSG_DIMS_LOADING)
           return msg;
         }
-        configs.forEach((config, index) => {
-           const { caption } = config;
-           if (!(_isCategory && caption === dim)) {
-             if (!_refItems.current[index]) {
-               msg.push(msgOnNotSelected(caption))
-             }
-           }
-        })
+
+        const _isCategory = isCategory(chartType)
+        , { dim } = chartType || {}
+        , _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, _refItems.current);
+
+        //For dims case and not category case
+        if (dims || !_isCategory) {
+          _addErrMsgTo(caption => !(_isCategory && caption === dim))
+          return msg;
+        }
+        //For category case
+        if (_isCategory) {
+          const _dimItem = _refDim.current;
+          if (!_dimItem) {
+            msg.push("Dim isn't selected")
+            return msg;
+          }
+          _addErrMsgTo(caption => caption !== _dimItem.caption)
+        }
         return msg;
    }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
-   /*eslint-disable react-hooks/exhaustive-deps */
+   //_refDim, dims
    , _hSelectChartType = useCallback(chartType => {
        let _isShowDate = false;
        if (isCategory(chartType)) {
@@ -131,19 +171,20 @@ const DialogStatN = memo((props) => {
    //setIsRow, setState
    /*eslint-enable react-hooks/exhaustive-deps */
    /*eslint-disable react-hooks/exhaustive-deps */
-   , _handleLoad = useCallback(() => {
+   , _hLoad = useCallback(() => {
      const validationMessages = _crValidationMessages();
      if (validationMessages.length === 0){
        const { seriaColor, seriaWidth } = _refColorComp.current
           ? _refColorComp.current.getConf()
           : {}
-       , _props = { ...props, timeId }
+       , dfC = _crDfC(props, _refDim.current)
+       , dfTitle = _crDfTitle(props, _refDim.current)
        , loadOpt = loadFn(
-          _props, {
+           {...props}, {
+           timeId, dfC, dfTitle,
+           time: (_refDate.current || dateDf).value,
            dialogOptions: _refDialogOptions.current,
            chartType, seriaColor, seriaWidth,
-           date: _refDate.current,
-           dateDefault,
            items: _refItems.current,
            titles: _refTitles.current,
            selectOptions: selectOptions
@@ -154,21 +195,19 @@ const DialogStatN = memo((props) => {
     setValidationMessages(validationMessages)
   }, [
     _crValidationMessages,
-    dateDefault,
+    dateDf,
     timeId,
     chartType,
+    configs,
     selectOptions
   ])
   //loadFn, onLoad, props
   /*eslint-enable react-hooks/exhaustive-deps */
-  , _commandButtons = useCommandButtons(_handleLoad)
-  , _menuMore = useMenuMore(toggleToolBar, onClickInfo);
+  , _commandButtons = useCommandButtons(_hLoad)
+  , _menuMore = useMenuMore(toggleToolBar, onClickInfo)
 
-  const _spinnerStyle = isLoading
-    ? S_SPINNER_LOADING
-    : isLoadFailed
-       ? {...S_SPINNER_LOADING, ...S_SPINNER_FAILED}
-       : void 0;
+  , _spinnerStyle = _crSpinnerStyle(isLoading, isLoadFailed);
+
   return (
     <D.DraggableDialog
        isShow={isShow}
@@ -201,9 +240,12 @@ const DialogStatN = memo((props) => {
          onSelectChart={_hSelectChartType}
          onRegColor={_onRegColor}
          isShowDate={isShowDate}
-         dateDefault={dateDefault}
+         dateDefault={dateDf.caption}
          dateOptions={dateOptions}
          onSelecDate={_hSelectDate}
+         isDim={_isDim}
+         dimOptions={dimOptions}
+         onSelecDim={_hSelectDim}
        />
        <D.ValidationMessages
            validationMessages={validationMessages}

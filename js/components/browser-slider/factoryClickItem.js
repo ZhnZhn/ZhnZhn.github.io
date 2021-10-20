@@ -11,9 +11,10 @@ const CONF = {
   dialogConf: true,
   dialogType: "DialogStatN",
   dialogProps: {
-    chartsType: "t2a",
-    dfProps: {},
-    isProxy: true
+    //chartsType: "t2a",
+    chartsType: "t2ae",
+    dfProps: {} //isProxy: true
+
   }
 };
 const _assign = Object.assign;

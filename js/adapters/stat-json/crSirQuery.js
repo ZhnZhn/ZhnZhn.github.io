@@ -10,9 +10,11 @@ var _crDfArrQuery = _interopRequireDefault(require("./crDfArrQuery"));
 const _trOptionItems = option => {
   option.items = option.items.map(item => {
     const {
+      caption,
       slice
     } = item || {},
           _item = {
+      caption,
       slice: {}
     };
 
@@ -24,8 +26,16 @@ const _trOptionItems = option => {
   });
 };
 
+const _trOptionDfC = option => {
+  if (option.dfC) {
+    option.dfC = option.dfC.toUpperCase();
+  }
+};
+
 const crSirQuery = option => {
   _trOptionItems(option);
+
+  _trOptionDfC(option);
 
   const query = (0, _crDfArrQuery.default)(option);
   return {

@@ -13,10 +13,8 @@ const V = {
   M: 'MAP',
   C: 'COLUMN_SET',
   C_C: 'COLUMN_CLUSTER' ,
-  C_2: 'COLUMN_BY_2',
   B: 'BAR_SET',
   B_C: 'BAR_CLUSTER',
-  B_2: 'BAR_BY_2',
   B_L: 'BAR_WITH_LABELS',
   D: 'DOT_SET',
   TM: 'TREE_MAP',
@@ -27,8 +25,8 @@ const V = {
 
 const CATEGORY_TYPES = [
   V.M,
-  V.C, V.C_C, V.C_2,
-  V.B, V.B_C, V.B_2, V.B_L,
+  V.C, V.C_C,
+  V.B, V.B_C, V.B_L,
   V.D,
   V.TM, V.TM_C, V.TM_2, V.TM_2_C
 ];
@@ -94,6 +92,11 @@ const _crT3All = (oneCaption) => _crItems([
   [`Bar: By ${oneCaption}: Cluster`, V.B_C, oneCaption]
 ]);
 
+const _crT2AE = () => ([
+  ..._crT2A(),
+  ..._crT3All("Dim")
+])
+
 const _crT3 = ([oneCaption]) => ([
   _crItem(['Default: Spline', V.S]),
   ..._crT3All(oneCaption)
@@ -118,23 +121,17 @@ const _crT3A2 = ([oneCaption]) => ([
   _crItem([`TreeMap: By ${oneCaption}: Depth 2: Cluster`, V.TM_2_C, oneCaption])
 ]);
 
-const _crT4 = ([oneCaption, twoCaption]) => ([
-  ..._crT3([oneCaption]),
-  _crItem([`Column: By ${twoCaption}`, V.C_2, twoCaption]),
-  _crItem([`Bar: By ${twoCaption}`, V.B_2, twoCaption])
-]);
-
 const _r = {
   DF: _crDF,
   t1: _crT1,
   t1a: _crT1A,
   t2: _crT2,
   t2a: _crT2A,
+  t2ae: _crT2AE,
   t3: _crT3,
   t3b: _crT3B,
   t3a: _crT3A,
   t3a2: _crT3A2,
-  t4: _crT4,
   df3: _crDF3
 };
 

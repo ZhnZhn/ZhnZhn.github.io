@@ -3,11 +3,12 @@ import JSONstat from 'jsonstat';
 import AdapterFn from '../AdapterFn';
 
 const {
+  crError,
   isYNumber,
   numberFormat,
   crId,
   roundBy,
-  valueMoving,
+  valueMoving,  
   crItemConf
 } = AdapterFn;
 
@@ -149,7 +150,11 @@ const _crDataSource = ({ dataSource, dfId }) => dfId
 
 
 const fnAdapter = {
-  isYNumber, numberFormat, crId, roundBy,
+  crError,
+  isYNumber,
+  numberFormat,
+  crId,
+  roundBy,
 
   crTitle: (option) => {
     switch(option.browserType){

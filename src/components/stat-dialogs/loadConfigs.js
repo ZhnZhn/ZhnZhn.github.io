@@ -15,8 +15,14 @@ const _isDimsWithOptions = (dims) => {
   return i === _len;
 };
 
-const _crConfigs = dims => dims
- .map(({c, v, options}) => ({id:v, caption:c, options}));
+const _crConfigs = dims => {
+ const configs = dims
+   .map(({c, v, options}) => ({
+      id:v, caption:c, options
+   }));
+  configs.dateOptions = dims.dateOptions
+  return configs;
+};
 
 
  const _crUrl = ({ proxy='', baseMeta, dfId }) => {
@@ -33,7 +39,7 @@ const loadConfigs = (props) => {
     const metaUrl = _crMetaUrl(props);
     //Load from dims configuration
     if (props.dims) {
-      return loadDims({ metaUrl, ...props })
+      return loadDims({ metaUrl, ...props });
     }
     guard.start(metaUrl);
     return loadDimsWithOptions(metaUrl)

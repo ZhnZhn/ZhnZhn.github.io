@@ -4,16 +4,17 @@ const CONF = {
   dialogConf: true,
   dialogType: "DialogStatN",
   dialogProps: {
-    chartsType: "t2a",
+    //chartsType: "t2a",
+    chartsType: "t2ae",
     dfProps: { },
-    isProxy: true
+    //isProxy: true
   }
 };
 
 const _assign = Object.assign;
 
 const _crMetaUrl = ({ rootMeta, rootUrl, id, proxy='', dfMeta='' }) => {
-  return `${proxy}${rootMeta || rootUrl}/${id}${dfMeta}`;  
+  return `${proxy}${rootMeta || rootUrl}/${id}${dfMeta}`;
 };
 
 const _crTitleAndCaption = (dfProps) => {

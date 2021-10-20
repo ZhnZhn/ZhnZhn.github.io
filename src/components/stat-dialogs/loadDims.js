@@ -77,7 +77,8 @@ const _crConfigs = (json, dims, timeId) => {
 
 const guard = new LoadGuard();
 
-const loadDims = ({ metaUrl, dims=[], noTime, timeId }) => {
+const loadDims = (props) => {
+  const { metaUrl, dims=[], noTime, timeId } = props
   if (!guard.isLoading) {
     const _option = _crOption(dims, noTime);
     guard.start(metaUrl)

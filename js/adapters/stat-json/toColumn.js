@@ -53,86 +53,102 @@ const _colorItems = (data, _clusters) => {
 };
 
 const _setClusters = data => {
-  const _points = data.map((item, index) => {
-    const arr = [item.y, 0];
-    arr.id = index;
-    return arr;
-  }),
-        _clusters = _kMeans.default.crUnarySortedCluster(_points);
+  if (data.length !== 0) {
+    const _points = data.map((item, index) => {
+      const arr = [item.y, 0];
+      arr.id = index;
+      return arr;
+    }),
+          _clusters = _kMeans.default.crUnarySortedCluster(_points);
 
-  _colorItems(data, _clusters);
+    _colorItems(data, _clusters);
+  }
 };
 
-const _crCategory = (option, by) => {
+const _crCategory = option => {
   const {
     items = [],
     dfC,
     dfT,
     dfC2,
     dfT2
-  } = option;
-  let itemSlice = {},
-      i;
+  } = option,
+        _dfC = dfC || dfC2,
+        cTotal = dfT || dfT2,
+        itemSlice = {};
 
-  switch (by) {
-    case '2':
-      for (i = 0; i < items.length; i++) {
-        if (i !== 1 && items[i]) {
-          _assign(itemSlice, items[i].slice);
-        }
-      }
+  let i, _item;
 
-      return {
-        category: dfC2,
-        cTotal: dfT2,
-        itemSlice
-      };
+  for (i = 0; i < items.length; i++) {
+    _item = items[i];
 
-    default:
-      for (i = 1; i < items.length; i++) {
-        _assign(itemSlice, items[i].slice);
-      }
-
-      return {
-        category: dfC,
-        cTotal: dfT,
-        itemSlice
-      };
+    if (_item) {
+      _assign(itemSlice, _item.slice);
+    }
   }
+
+  delete itemSlice[_dfC];
+  return {
+    category: _dfC,
+    cTotal,
+    itemSlice
+  };
 };
 
 const _crData = (values, c, cTotal) => _isArr(values) ? values.map(_fCrCategoryPoint(c)).filter(_fIsCategoryPoint(cTotal)).sort(_compareByY).reverse() : [];
 
+const _crValues = (_ds, _cSlice) => {
+  const _v = _ds.Data(_cSlice);
+
+  return _v !== null ? _v : [];
+};
+
+const _crSlice = (json, timeId, time, itemSlice, dfTSlice) => ({
+  [timeId]: time,
+  ...itemSlice,
+  ...dfTSlice
+});
+
+const _crTitle = (dfTitle, option) => dfTitle ? dfTitle + ": All Items" : crTitle(option);
+
+const _crSubtitle = (items, category) => {
+  const _arr = [];
+  items.forEach(item => {
+    if (item && item.slice && !item.slice[category]) {
+      _arr.push(item.caption);
+    }
+  });
+  return _arr.filter(Boolean).join(": ");
+};
+
 const toColumn = {
-  fCrConfig: (param = {}, config = {}) => {
+  fCrConfig: (param = {}) => {
     return (json, option) => toColumn.crConfig(json, { ...option,
       ...param,
-      ..._crCategory(option, config.by)
+      ..._crCategory(option)
     });
   },
   crConfig: (json, option) => {
     const {
       category,
+      cTotal,
       itemSlice,
       time,
+      timeId = 'Tid',
+      dfTitle,
       dfTSlice,
       seriaType,
       seriaColor,
       isCluster,
-      items = [],
-      cTotal
+      items = []
     } = option,
           _ds = (0, _jsonstat.default)(json).Dataset(0),
           _dimC = _ds.Dimension(category),
           Tid = crTid(time, _ds),
-          _values = _ds.Data({
-      Tid,
-      ...itemSlice,
-      ...dfTSlice
-    }),
-          _title = crTitle(option),
-          _twoC = (items[1] || {}).caption || '',
-          _subtitle = _twoC + ": " + Tid,
+          _cSlice = _crSlice(json, timeId, time, itemSlice, dfTSlice),
+          _values = _crValues(_ds, _cSlice),
+          _title = _crTitle(dfTitle, option),
+          _subtitle = _crSubtitle(items, category),
           data = _crData(_values, _dimC, cTotal),
           _c = data.map(item => item.c),
           config = (0, _ConfigBuilder.default)().barOrColumnConfig(seriaType, _c).addCaption(_title, _subtitle).addTooltip(_Tooltip.default.category).add({

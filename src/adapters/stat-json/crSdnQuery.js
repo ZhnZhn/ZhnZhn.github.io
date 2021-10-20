@@ -1,14 +1,34 @@
+import isCategory from './isCategory';
+
+const _crVariable = (code, value) => ({
+  code,
+  values: [value]
+});
 
 const _crVariables = items => items
- .map(({ slice }) => {
-    const code = Object.keys(slice)[0];
-    return {
-      code,
-      values: [slice[code]]
-    };
- });
+  .filter(Boolean)
+  .map(({ slice }) => {
+     const code = Object.keys(slice)[0];
+     return _crVariable(code, slice[code]);
+  });
 
-const crSdnQuery = ({ dfId, items }) => ({
+const _crTimeVariable = (seriaType, time, dfC) => {
+   const _isCategory = isCategory(seriaType)
+   , _tidValue = _isCategory ? time : "*"
+   , _arr = [_crVariable('Tid', _tidValue)];
+   if (_isCategory){
+     _arr.push(_crVariable(dfC, "*"))
+   }
+   return _arr;
+};
+
+const crSdnQuery = ({
+  dfId,
+  items,
+  seriaType,
+  time,
+  dfC
+}) => ({
   method: "POST",
   headers: {
    'Content-Type': "application/json",
@@ -21,7 +41,7 @@ const crSdnQuery = ({ dfId, items }) => ({
      timeOrder: "Ascending",
      variables: [
        ..._crVariables(items),
-       { code: 'Tid', values: ["*"]}
+       ..._crTimeVariable(seriaType, time, dfC)
      ]
   })
 });

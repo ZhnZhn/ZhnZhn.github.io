@@ -8,7 +8,9 @@ const _crConfig = (json, option) => {
 
 const StatJsonAdapter = {
   toConfig(json, option) {
-     return { config: _crConfig(json, option) };
+     return {
+       config: _crConfig(json, option)
+     };
   },
 
   toSeries(json, option) {

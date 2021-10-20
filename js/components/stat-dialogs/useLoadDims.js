@@ -57,14 +57,17 @@ const _crDateOptions = (configs, _mF, mapDateDf) => {
   } = configs;
 
   if (dateOptions) {
-    return [dateOptions, dateOptions[0].caption];
+    return [dateOptions, dateOptions[0]];
   }
 
   const {
     dateOptions: dO,
     dateDefault
   } = crDateConfig(_mF, mapDateDf);
-  return [dO, dateDefault];
+  return [dO, {
+    caption: dateDefault,
+    value: dateDefault
+  }];
 };
 
 const _crSelectOptions = configs => configs.map(config => config.options);
@@ -91,7 +94,7 @@ const useLoadDims = props => {
     selectOptions: [],
     mapFrequency,
     chartOptions: crOptions(props),
-    ...crDateConfig('EMPTY')
+    dateOptions: []
   })),
         _setConfigs = (0, _react.useCallback)(({
     configs,
@@ -101,7 +104,7 @@ const useLoadDims = props => {
   }) => {
     if (configs) {
       const _mF = mF || mapFrequency,
-            [dateOptions, dateDefault] = _crDateOptions(configs, _mF, mapDateDf);
+            [dateOptions, dateDf] = _crDateOptions(configs, _mF, mapDateDf);
 
       setLoad({
         isLoading: false,
@@ -118,7 +121,7 @@ const useLoadDims = props => {
           chartsType
         }),
         dateOptions,
-        dateDefault
+        dateDf
       });
     } else {
       setLoad({

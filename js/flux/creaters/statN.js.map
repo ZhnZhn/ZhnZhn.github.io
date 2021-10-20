@@ -1,1 +1,47 @@
-{"version":3,"sources":["../../../src/flux/creaters/statN.js"],"names":["crCaption","fns","crItemKey","_toIds","items","dfId","_arr","forEach","slice","push","Object","keys","createLoadOptions","props","options","loadId","dataSource","dfProps","timeId","titles","dialogOptions","chartType","seriaColor","seriaWidth","date","dateDefault","selectOptions","seriaType","value","zhCompType","compType","itemCaption","title","subtitle","time","_items","_itemKey"],"mappings":";;;;;;;;;AAAA;;IAEQA,S,GAAyBC,sB,CAAzBD,S;IAAWE,S,GAAcD,sB,CAAdC,S;;AAEnB,IAAMC,MAAM,GAAG,SAATA,MAAS,OAAWC,KAAX,EAAqB;AAAA,MAAlBC,IAAkB,QAAlBA,IAAkB;AAClC,MAAMC,IAAI,GAAG,CAACD,IAAD,CAAb;AACAD,EAAAA,KAAK,CAACG,OAAN,CAAc,iBAAkB;AAAA,mCAAP,EAAO;AAAA,QAAfC,KAAe,SAAfA,KAAe;;AAC9B,QAAIA,KAAJ,EAAW;AACTF,MAAAA,IAAI,CAACG,IAAL,CAAUD,KAAK,CAACE,MAAM,CAACC,IAAP,CAAYH,KAAZ,EAAmB,CAAnB,CAAD,CAAf;AACD;AACF,GAJD;AAKA,SAAOF,IAAP;AACD,CARD;;AAUA,IAAMM,iBAAiB,GAAG,SAApBA,iBAAoB,CAACC,KAAD,EAAWC,OAAX,EAA0B;AAAA,MAAzBD,KAAyB;AAAzBA,IAAAA,KAAyB,GAAnB,EAAmB;AAAA;;AAAA,MAAfC,OAAe;AAAfA,IAAAA,OAAe,GAAP,EAAO;AAAA;;AAAA,eAG9CD,KAH8C;AAAA,MAEhDE,MAFgD,UAEhDA,MAFgD;AAAA,MAExCC,UAFwC,UAExCA,UAFwC;AAAA,8BAE5BC,OAF4B;AAAA,MAE5BA,OAF4B,+BAEpB,EAFoB;AAAA,MAEhBC,MAFgB,UAEhBA,MAFgB;AAAA,iBAW5CJ,OAX4C;AAAA,gCAK9CV,KAL8C;AAAA,MAK9CA,KAL8C,+BAKxC,EALwC;AAAA,MAKpCe,MALoC,YAKpCA,MALoC;AAAA,MAM9CC,aAN8C,YAM9CA,aAN8C;AAAA,oCAO9CC,SAP8C;AAAA,MAO9CA,SAP8C,mCAOpC,EAPoC;AAAA,MAQ9CC,UAR8C,YAQ9CA,UAR8C;AAAA,MAQlCC,UARkC,YAQlCA,UARkC;AAAA,MAS9CC,IAT8C,YAS9CA,IAT8C;AAAA,MASxCC,WATwC,YASxCA,WATwC;AAAA,MAU9CC,aAV8C,YAU9CA,aAV8C;AAAA,MAYxCC,SAZwC,GAYJN,SAZI,CAY9CO,KAZ8C;AAAA,MAYnBC,UAZmB,GAYJR,SAZI,CAY7BS,QAZ6B;AAAA,mBAab9B,SAAS,CAACI,KAAD,EAAQe,MAAR,CAbI;AAAA,MAa9CY,WAb8C,cAa9CA,WAb8C;AAAA,MAajCC,KAbiC,cAajCA,KAbiC;AAAA,MAa1BC,QAb0B,cAa1BA,QAb0B;AAAA,MAchDC,IAdgD,GAczCV,IAAI,GAAGA,IAAI,CAACI,KAAR,GAAgBH,WAdqB;AAAA,MAehDU,MAfgD,GAevChC,MAAM,CAACc,OAAD,EAAUb,KAAV,CAfiC;AAAA,MAgBhDgC,QAhBgD,GAgBrClC,SAAS,CAACiC,MAAD,EAASR,SAAT,EAAoBO,IAApB,CAhB4B;;AAkBlD,uCACKjB,OADL,EAEKG,aAFL;AAGEgB,IAAAA,QAAQ,EAARA,QAHF;AAIEL,IAAAA,WAAW,EAAXA,WAJF;AAKEhB,IAAAA,MAAM,EAANA,MALF;AAMEiB,IAAAA,KAAK,EAALA,KANF;AAMSC,IAAAA,QAAQ,EAARA,QANT;AAOEN,IAAAA,SAAS,EAATA,SAPF;AAOaL,IAAAA,UAAU,EAAVA,UAPb;AAOyBC,IAAAA,UAAU,EAAVA,UAPzB;AAQEM,IAAAA,UAAU,EAAVA,UARF;AASEK,IAAAA,IAAI,EAAJA,IATF;AASQhB,IAAAA,MAAM,EAANA,MATR;AAUEF,IAAAA,UAAU,EAAVA,UAVF;AAWEZ,IAAAA,KAAK,EAALA,KAXF;AAYEsB,IAAAA,aAAa,EAAbA;AAZF;AAcD,CAhCD;;eAkCed,iB","sourcesContent":["import fns from './createrFns'\r\n\r\nconst { crCaption, crItemKey } = fns;\r\n\r\nconst _toIds = ({ dfId }, items) => {\r\n  const _arr = [dfId];\r\n  items.forEach(({ slice }={}) => {\r\n    if (slice) {\r\n      _arr.push(slice[Object.keys(slice)[0]])\r\n    }\r\n  })\r\n  return _arr;\r\n};\r\n\r\nconst createLoadOptions = (props={}, options={}) => {\r\n  const {\r\n    loadId, dataSource, dfProps={}, timeId\r\n  } = props\r\n  , {\r\n      items=[], titles,\r\n      dialogOptions,\r\n      chartType={},\r\n      seriaColor, seriaWidth,\r\n      date, dateDefault,\r\n      selectOptions\r\n    } = options\r\n  , { value:seriaType, compType: zhCompType } = chartType\r\n  , { itemCaption, title, subtitle } = crCaption(items, titles)\r\n  , time = date ? date.value : dateDefault\r\n  , _items = _toIds(dfProps, items)\r\n  , _itemKey = crItemKey(_items, seriaType, time);\r\n\r\n  return {\r\n    ...dfProps,\r\n    ...dialogOptions,\r\n    _itemKey,\r\n    itemCaption,\r\n    loadId,\r\n    title, subtitle,\r\n    seriaType, seriaColor, seriaWidth,\r\n    zhCompType,\r\n    time, timeId,\r\n    dataSource,\r\n    items,\r\n    selectOptions\r\n  };\r\n};\r\n\r\nexport default createLoadOptions\r\n"],"file":"statN.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/creaters/statN.js"
+ ],
+ "file": "../../../src/flux/creaters/statN.js",
+ "names": [
+  "crCaption",
+  "crItemKey",
+  "fns",
+  "_toIds",
+  "dfId",
+  "items",
+  "_arr",
+  "forEach",
+  "slice",
+  "push",
+  "Object",
+  "keys",
+  "createLoadOptions",
+  "props",
+  "options",
+  "loadId",
+  "dataSource",
+  "dfProps",
+  "timeId",
+  "time",
+  "dfC",
+  "dfTitle",
+  "titles",
+  "dialogOptions",
+  "chartType",
+  "seriaColor",
+  "seriaWidth",
+  "selectOptions",
+  "value",
+  "seriaType",
+  "compType",
+  "zhCompType",
+  "itemCaption",
+  "title",
+  "subtitle",
+  "_items",
+  "_itemKey"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAM;AAAEA,EAAAA,SAAF;AAAaC,EAAAA;AAAb,IAA2BC,mBAAjC;;AAEA,MAAMC,MAAM,GAAG,CAAC;AAAEC,EAAAA;AAAF,CAAD,EAAWC,KAAX,KAAqB;AAClC,QAAMC,IAAI,GAAG,CAACF,IAAD,CAAb;AACAC,EAAAA,KAAK,CAACE,OAAN,CAAc,CAAC;AAAEC,IAAAA;AAAF,MAAU,EAAX,KAAkB;AAC9B,QAAIA,KAAJ,EAAW;AACTF,MAAAA,IAAI,CAACG,IAAL,CAAUD,KAAK,CAACE,MAAM,CAACC,IAAP,CAAYH,KAAZ,EAAmB,CAAnB,CAAD,CAAf;AACD;AACF,GAJD;AAKA,SAAOF,IAAP;AACD,CARD;;AAUA,MAAMM,iBAAiB,GAAG,CAACC,KAAD,EAAQC,OAAR,KAAoB;AAC5C,QAAM;AACJC,IAAAA,MADI;AACIC,IAAAA,UADJ;AACgBC,IAAAA,OAAO,GAAC;AADxB,MAEFJ,KAAK,IAAI,EAFb;AAAA,QAGE;AACEK,IAAAA,MADF;AAEEC,IAAAA,IAFF;AAGEC,IAAAA,GAHF;AAIEC,IAAAA,OAJF;AAKEhB,IAAAA,KAAK,GAAC,EALR;AAKYiB,IAAAA,MALZ;AAMEC,IAAAA,aANF;AAOEC,IAAAA,SAPF;AAQEC,IAAAA,UARF;AASEC,IAAAA,UATF;AAUEC,IAAAA;AAVF,MAWIb,OAAO,IAAI,EAdjB;AAAA,QAeE;AAAEc,IAAAA,KAAK,EAACC,SAAR;AAAmBC,IAAAA,QAAQ,EAAEC;AAA7B,MAA4CP,SAAS,IAAI,EAf3D;AAAA,QAgBE;AAAEQ,IAAAA,WAAF;AAAeC,IAAAA,KAAf;AAAsBC,IAAAA;AAAtB,MAAmClC,SAAS,CAACK,KAAD,EAAQiB,MAAR,CAhB9C;AAAA,QAiBEa,MAAM,GAAGhC,MAAM,CAACc,OAAD,EAAUZ,KAAV,CAjBjB;AAAA,QAkBE+B,QAAQ,GAAGnC,SAAS,CAACkC,MAAD,EAASN,SAAT,EAAoBV,IAApB,CAlBtB;;AAoBA,SAAO;AACLC,IAAAA,GADK;AAELC,IAAAA,OAFK;AAGL,OAAGJ,OAHE;AAIL,OAAGM,aAJE;AAKLa,IAAAA,QALK;AAMLJ,IAAAA,WAAW,EAAEX,OAAO,IAAIW,WANnB;AAOLjB,IAAAA,MAPK;AAQLkB,IAAAA,KARK;AAQEC,IAAAA,QARF;AASLL,IAAAA,SATK;AASMJ,IAAAA,UATN;AASkBC,IAAAA,UATlB;AAULK,IAAAA,UAVK;AAWLZ,IAAAA,IAXK;AAWCD,IAAAA,MAXD;AAYLF,IAAAA,UAZK;AAaLX,IAAAA,KAbK;AAcLsB,IAAAA;AAdK,GAAP;AAgBD,CArCD;;eAuCef,iB"
+}

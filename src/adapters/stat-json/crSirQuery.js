@@ -3,8 +3,8 @@ import crDfArrQuery from './crDfArrQuery';
 const _trOptionItems = option => {
   option.items = option.items
     .map(item => {
-      const { slice } = item || {}
-      , _item = {slice: {}};
+      const { caption, slice } = item || {}
+      , _item = {caption, slice: {}};
       for(const propName in slice) {
         _item.slice[propName.toUpperCase()] = slice[propName]
       }
@@ -12,8 +12,15 @@ const _trOptionItems = option => {
     })
 };
 
+const _trOptionDfC = option => {
+  if (option.dfC) {
+    option.dfC = option.dfC.toUpperCase()
+  }
+};
+
 const crSirQuery = option => {
   _trOptionItems(option)
+  _trOptionDfC(option)
   const query = crDfArrQuery(option);
   return {
     method: "POST",
@@ -23,7 +30,7 @@ const crSirQuery = option => {
     body: JSON.stringify({
       query,
       response: {
-        format: "json-stat2",        
+        format: "json-stat2",
         pivot: null
       }
      })

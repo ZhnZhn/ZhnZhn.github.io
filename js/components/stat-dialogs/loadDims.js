@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
@@ -13,8 +11,8 @@ var _LoadGuard = _interopRequireDefault(require("../../utils/LoadGuard"));
 
 var _loadJson = _interopRequireDefault(require("./loadJson"));
 
-var MSG_STILL_LOADING = "Another dims are still loading";
-var C = {
+const MSG_STILL_LOADING = "Another dims are still loading";
+const C = {
   SELECTION_ALL: {
     selection: {
       filter: 'all',
@@ -30,16 +28,15 @@ var C = {
   }
 };
 
-var _crSelectDim = function _crSelectDim(code) {
-  return (0, _extends2["default"])({
-    code: code
-  }, C.SELECTION_ALL);
+const _crSelectDim = code => {
+  return {
+    code,
+    ...C.SELECTION_ALL
+  };
 };
 
-var _crOption = function _crOption(dims, noTime) {
-  var arrQuery = dims.map(function (dim) {
-    return _crSelectDim(dim.v);
-  });
+const _crOption = (dims, noTime) => {
+  const arrQuery = dims.map(dim => _crSelectDim(dim.v));
 
   if (!noTime) {
     arrQuery.push(C.TID_DIM);
@@ -56,65 +53,60 @@ var _crOption = function _crOption(dims, noTime) {
   };
 };
 
-var _crSelectOptions = function _crSelectOptions(ds, dim) {
-  var arr = [],
-      _id = dim.v,
-      c = ds.Dimension(_id),
-      len = c.length;
-  var i = 0;
+const _crSelectOptions = (ds, dim) => {
+  const arr = [],
+        _id = dim.v,
+        c = ds.Dimension(_id),
+        len = c.length;
+  let i = 0;
 
   for (; i < len; i++) {
-    var _slice;
-
     arr.push({
       caption: c.Category(i).label,
-      slice: (_slice = {}, _slice[_id] = c.id[i], _slice)
+      slice: {
+        [_id]: c.id[i]
+      }
     });
   }
 
   return arr;
 };
 
-var _fNotTimeDimension = function _fNotTimeDimension(timeId) {
-  return function (config) {
-    return config.id !== timeId;
-  };
-};
+const _fNotTimeDimension = timeId => config => config.id !== timeId;
 
-var _crConfigs = function _crConfigs(json, dims, timeId) {
-  var _ds = (0, _jsonstat["default"])(json).Dataset(0),
-      configs = dims.map(function (dim) {
-    return {
-      id: dim.v,
-      caption: dim.c,
-      options: _crSelectOptions(_ds, dim)
-    };
-  }).filter(_fNotTimeDimension(timeId));
+const _crConfigs = (json, dims, timeId) => {
+  const _ds = (0, _jsonstat.default)(json).Dataset(0),
+        configs = dims.map(dim => ({
+    id: dim.v,
+    caption: dim.c,
+    options: _crSelectOptions(_ds, dim)
+  })).filter(_fNotTimeDimension(timeId));
 
   return configs;
 };
 
-var guard = new _LoadGuard["default"]();
+const guard = new _LoadGuard.default();
 
-var loadDims = function loadDims(_ref) {
-  var metaUrl = _ref.metaUrl,
-      _ref$dims = _ref.dims,
-      dims = _ref$dims === void 0 ? [] : _ref$dims,
-      noTime = _ref.noTime,
-      timeId = _ref.timeId;
+const loadDims = props => {
+  const {
+    metaUrl,
+    dims = [],
+    noTime,
+    timeId
+  } = props;
 
   if (!guard.isLoading) {
-    var _option = _crOption(dims, noTime);
+    const _option = _crOption(dims, noTime);
 
     guard.start(metaUrl);
-    return (0, _loadJson["default"])(metaUrl, _option).then(function (json) {
-      var configs = _crConfigs(json, dims, timeId);
+    return (0, _loadJson.default)(metaUrl, _option).then(json => {
+      const configs = _crConfigs(json, dims, timeId);
 
       guard.stop();
       return {
-        configs: configs
+        configs
       };
-    })["catch"](function (err) {
+    }).catch(err => {
       guard.stop();
       return {
         errMsg: err.message
@@ -128,5 +120,5 @@ var loadDims = function loadDims(_ref) {
 };
 
 var _default = loadDims;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=loadDims.js.map

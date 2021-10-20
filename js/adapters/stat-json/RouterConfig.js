@@ -33,16 +33,6 @@ const _r = {
     isCluster: true,
     seriaType: 'BAR'
   }),
-  COLUMN_BY_2: _toColumn.default.fCrConfig({
-    seriaType: 'COLUMN'
-  }, {
-    by: '2'
-  }),
-  BAR_BY_2: _toColumn.default.fCrConfig({
-    seriaType: 'BAR'
-  }, {
-    by: '2'
-  }),
   TREE_MAP: _toTreeMap.default.fCrConfig(),
   TREE_MAP_CLUSTER: _toTreeMap.default.fCrConfig({
     isCluster: true

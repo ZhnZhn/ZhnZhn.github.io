@@ -1,15 +1,6 @@
+import isCategory from './isCategory';
 import crArrQuery from './crArrQuery';
 import crQueryItem from './crQueryItem';
-
-const _isCategory = seriaType =>
-   seriaType === "BAR_CLUSTER"
-|| seriaType === "BAR_SET"
-|| seriaType === "COLUMN_SET"
-|| seriaType === "COLUMN_CLUSTER"
-|| seriaType === "TREE_MAP"
-|| seriaType === "TREE_MAP_CLUSTER"
-|| seriaType === "TREE_MAP_2"
-|| seriaType === "TREE_MAP_2_CLUSTER";
 
 const _checkTop = (isTop, strN, arr) => {
   if (isTop) {
@@ -26,7 +17,7 @@ const crDfArrQuery = (option) => {
   , arrQuery = crArrQuery(items);
 
   const { dfC, seriaType } = option;
-  if (dfC && _isCategory(seriaType)) {
+  if (dfC && isCategory(seriaType)) {
     const {time, timeId='Tid'} = option
     , _arr = arrQuery.filter(item => item.code !== dfC);
     _arr.unshift(crQueryItem(dfC, 'all', '*'))
