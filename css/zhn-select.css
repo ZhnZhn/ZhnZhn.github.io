@@ -13,7 +13,7 @@
   color: green;
   width: 100%;
   height: 30px;
-  padding: 0 40px 0 10px;  
+  padding: 0 40px 0 10px;
   font-size: 16px;
   font-weight: bold;
 }
@@ -111,14 +111,14 @@
 
 .zhn-select__footer {
   position: relative;
-  background-color: silver;
+  background-color: #a3a3a3;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   line-height: 1.5;
 }
 .zhn-select__footer__index {
   display: inline-block;
-  color: gray;
+  color: black;
   padding: 4px 0 4px 10px;
   font-weight: bold;
 }
