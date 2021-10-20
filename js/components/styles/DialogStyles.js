@@ -1,78 +1,73 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var S = {
-  //Dialogs, DatesFragments
-  ROW: {
-    //display: 'block',
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: 5,
-    marginTop: 5,
-    marginLeft: 5,
-    marginBottom: 5
-  },
-  ROW_OC: {
-    lineHeight: 'unset',
-    marginRight: 5,
-    marginTop: 5,
-    marginLeft: 5,
-    marginBottom: -4
-  },
-  ROW_SHORT: {
-    marginLeft: 12,
-    marginRight: 12
-  },
-  LABEL: {
-    color: '#1b75bb',
-    display: 'inline-block',
-    //verticalAlign: 'top',
-    textAlign: 'right',
-    width: 100,
-    paddingRight: 5,
-    fontSize: '16px',
-    fontWeight: 'bold',
-    userSelect: 'none'
-  },
-  NONE: {
-    display: 'none'
-  }
+exports.default = void 0;
+//Dialogs, DatesFragments
+const S_ROW = {
+  display: 'flex',
+  alignItems: 'center',
+  margin: 5
+},
+      S_ROW_SHORT = {
+  margin: '5px 12px'
+},
+      S_ROW_OC = {
+  display: 'flex',
+  alignItems: 'center',
+  margin: 5
+},
+      S_ROW_OC_SHORT = {
+  margin: '5px 12px'
+},
+      S_LABEL = {
+  color: '#1b75bb',
+  display: 'inline-block',
+  //verticalAlign: 'top',
+  textAlign: 'right',
+  width: 100,
+  paddingRight: 5,
+  fontSize: '16px',
+  fontWeight: 'bold',
+  userSelect: 'none'
+},
+      S_NONE = {
+  display: 'none'
 };
-var DialogStyles = {
+const DialogStyles = {
   //Dialogs, DatesFragments
-  ROW: (0, _extends2["default"])({}, S.ROW),
-  CAPTION: (0, _extends2["default"])({}, S.LABEL),
-  crRowCaption: function crRowCaption(caption) {
-    return caption.indexOf(':') === -1 && caption !== '' ? caption + ":" : caption;
+  ROW: { ...S_ROW
   },
-  crRowLabelStyle: function crRowLabelStyle(isShowLabels, captionStyle) {
-    if (isShowLabels === void 0) {
-      isShowLabels = true;
-    }
-
-    var rowStyle = isShowLabels ? (0, _extends2["default"])({}, S.ROW) : (0, _extends2["default"])({}, S.ROW, S.ROW_SHORT),
-        labelStyle = isShowLabels ? (0, _extends2["default"])({}, S.LABEL, captionStyle) : (0, _extends2["default"])({}, S.LABEL, S.NONE);
+  CAPTION: { ...S_LABEL
+  },
+  crRowCaption: caption => caption.indexOf(':') === -1 && caption !== '' ? caption + ":" : caption,
+  crRowLabelStyle: (isShowLabels = true, captionStyle) => {
+    const rowStyle = isShowLabels ? { ...S_ROW
+    } : { ...S_ROW,
+      ...S_ROW_SHORT
+    },
+          labelStyle = isShowLabels ? { ...S_LABEL,
+      ...captionStyle
+    } : { ...S_LABEL,
+      ...S_NONE
+    };
     return {
-      rowStyle: rowStyle,
-      labelStyle: labelStyle
+      rowStyle,
+      labelStyle
     };
   },
-  crRowOcSelectStyle: function crRowOcSelectStyle(isShowLabels, captionStyle) {
-    if (isShowLabels === void 0) {
-      isShowLabels = true;
-    }
-
-    var rowStyle = isShowLabels ? (0, _extends2["default"])({}, S.ROW_OC) : (0, _extends2["default"])({}, S.ROW_OC, S.ROW_SHORT),
-        labelStyle = isShowLabels ? (0, _extends2["default"])({}, S.LABEL, captionStyle) : (0, _extends2["default"])({}, S.LABEL, S.NONE);
+  crRowOcSelectStyle: (isShowLabels = true, captionStyle) => {
+    const rowStyle = isShowLabels ? { ...S_ROW_OC
+    } : { ...S_ROW_OC,
+      ...S_ROW_OC_SHORT
+    },
+          labelStyle = isShowLabels ? { ...S_LABEL,
+      ...captionStyle
+    } : { ...S_LABEL,
+      ...S_NONE
+    };
     return {
-      rowStyle: rowStyle,
-      labelStyle: labelStyle
+      rowStyle,
+      labelStyle
     };
   },
   //ValidationMessagesFragment
@@ -91,10 +86,10 @@ var DialogStyles = {
     marginRight: 5
   },
   VM_MSG: {
-    whiteSpace: 'pre',
+    //whiteSpace: 'pre',
     fontWeight: 'bold'
   }
 };
 var _default = DialogStyles;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=DialogStyles.js.map

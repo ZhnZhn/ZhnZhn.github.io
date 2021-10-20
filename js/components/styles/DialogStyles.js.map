@@ -1,1 +1,47 @@
-{"version":3,"sources":["../../../src/components/styles/DialogStyles.js"],"names":["S","ROW","display","alignItems","marginRight","marginTop","marginLeft","marginBottom","ROW_OC","lineHeight","ROW_SHORT","LABEL","color","textAlign","width","paddingRight","fontSize","fontWeight","userSelect","NONE","DialogStyles","CAPTION","crRowCaption","caption","indexOf","crRowLabelStyle","isShowLabels","captionStyle","rowStyle","labelStyle","crRowOcSelectStyle","VM_CONT","paddingLeft","paddingTop","VM_MSG_NUMBER","height","border","borderRadius","VM_MSG","whiteSpace"],"mappings":"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","sourcesContent":["\r\nconst S = {\r\n  //Dialogs, DatesFragments\r\n  ROW: {\r\n    //display: 'block',\r\n    display: 'flex',\r\n    alignItems: 'center',\r\n    marginRight: 5,\r\n    marginTop: 5,\r\n    marginLeft: 5,\r\n    marginBottom: 5\r\n  },\r\n  ROW_OC: {\r\n    lineHeight: 'unset',\r\n    marginRight: 5,\r\n    marginTop: 5,\r\n    marginLeft: 5,\r\n    marginBottom: -4\r\n  },\r\n  ROW_SHORT: {\r\n    marginLeft: 12,\r\n    marginRight: 12\r\n  },\r\n  LABEL: {\r\n    color: '#1b75bb',\r\n    display: 'inline-block',\r\n    //verticalAlign: 'top',\r\n    textAlign: 'right',\r\n    width: 100,\r\n    paddingRight: 5,\r\n    fontSize: '16px',\r\n    fontWeight: 'bold',\r\n    userSelect: 'none'\r\n  },\r\n  NONE: {\r\n    display: 'none'\r\n  }\r\n}\r\n\r\nconst DialogStyles = {\r\n  //Dialogs, DatesFragments\r\n  ROW: { ...S.ROW },\r\n  CAPTION: { ...S.LABEL },\r\n  \r\n  crRowCaption: (caption) => caption.indexOf(':') === -1\r\n    && caption !== ''\r\n      ? `${caption}:`\r\n      : caption,\r\n  crRowLabelStyle: (isShowLabels=true, captionStyle) => {\r\n    const rowStyle = isShowLabels\r\n             ? { ...S.ROW }\r\n             : { ...S.ROW, ...S.ROW_SHORT }\r\n         , labelStyle = isShowLabels\r\n             ? { ...S.LABEL, ...captionStyle }\r\n             : { ...S.LABEL, ...S.NONE };\r\n    return { rowStyle, labelStyle };\r\n  },\r\n\r\n  crRowOcSelectStyle: (isShowLabels=true, captionStyle) => {\r\n    const rowStyle = isShowLabels\r\n             ? { ...S.ROW_OC }\r\n             : { ...S.ROW_OC, ...S.ROW_SHORT }\r\n         , labelStyle = isShowLabels\r\n             ? { ...S.LABEL, ...captionStyle }\r\n             : { ...S.LABEL, ...S.NONE };\r\n    return { rowStyle, labelStyle };\r\n  },\r\n\r\n  //ValidationMessagesFragment\r\n  VM_CONT: {\r\n    paddingLeft: 10,\r\n    paddingTop: 5,\r\n    color: '#f44336'\r\n  },\r\n  VM_MSG_NUMBER: {\r\n    display: 'inline-block',\r\n    width: 22,\r\n    height: 22,\r\n    border: 'solid 2px #F44336',\r\n    borderRadius: '50%',\r\n    textAlign: 'center',\r\n    marginRight: 5\r\n  },\r\n  VM_MSG: {\r\n    whiteSpace: 'pre',\r\n    fontWeight: 'bold'\r\n  }\r\n\r\n}\r\n\r\nexport default DialogStyles;\r\n"],"file":"DialogStyles.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/styles/DialogStyles.js"
+ ],
+ "file": "../../../src/components/styles/DialogStyles.js",
+ "names": [
+  "S_ROW",
+  "display",
+  "alignItems",
+  "margin",
+  "S_ROW_SHORT",
+  "S_ROW_OC",
+  "S_ROW_OC_SHORT",
+  "S_LABEL",
+  "color",
+  "textAlign",
+  "width",
+  "paddingRight",
+  "fontSize",
+  "fontWeight",
+  "userSelect",
+  "S_NONE",
+  "DialogStyles",
+  "ROW",
+  "CAPTION",
+  "crRowCaption",
+  "caption",
+  "indexOf",
+  "crRowLabelStyle",
+  "isShowLabels",
+  "captionStyle",
+  "rowStyle",
+  "labelStyle",
+  "crRowOcSelectStyle",
+  "VM_CONT",
+  "paddingLeft",
+  "paddingTop",
+  "VM_MSG_NUMBER",
+  "height",
+  "border",
+  "borderRadius",
+  "marginRight",
+  "VM_MSG"
+ ],
+ "mappings": ";;;;AACA;AACA,MAAMA,KAAK,GAAG;AACZC,EAAAA,OAAO,EAAE,MADG;AAEZC,EAAAA,UAAU,EAAE,QAFA;AAGZC,EAAAA,MAAM,EAAE;AAHI,CAAd;AAAA,MAKEC,WAAW,GAAG;AAAED,EAAAA,MAAM,EAAE;AAAV,CALhB;AAAA,MAMEE,QAAQ,GAAG;AACXJ,EAAAA,OAAO,EAAE,MADE;AAEXC,EAAAA,UAAU,EAAE,QAFD;AAGXC,EAAAA,MAAM,EAAE;AAHG,CANb;AAAA,MAWEG,cAAc,GAAG;AAAEH,EAAAA,MAAM,EAAE;AAAV,CAXnB;AAAA,MAYEI,OAAO,GAAG;AACVC,EAAAA,KAAK,EAAE,SADG;AAEVP,EAAAA,OAAO,EAAE,cAFC;AAGV;AACAQ,EAAAA,SAAS,EAAE,OAJD;AAKVC,EAAAA,KAAK,EAAE,GALG;AAMVC,EAAAA,YAAY,EAAE,CANJ;AAOVC,EAAAA,QAAQ,EAAE,MAPA;AAQVC,EAAAA,UAAU,EAAE,MARF;AASVC,EAAAA,UAAU,EAAE;AATF,CAZZ;AAAA,MAuBEC,MAAM,GAAG;AAAEd,EAAAA,OAAO,EAAE;AAAX,CAvBX;AA0BA,MAAMe,YAAY,GAAG;AACnB;AACAC,EAAAA,GAAG,EAAE,EAAE,GAAGjB;AAAL,GAFc;AAGnBkB,EAAAA,OAAO,EAAE,EAAE,GAAGX;AAAL,GAHU;AAKnBY,EAAAA,YAAY,EAAGC,OAAD,IAAaA,OAAO,CAACC,OAAR,CAAgB,GAAhB,MAAyB,CAAC,CAA1B,IACtBD,OAAO,KAAK,EADU,GAElBA,OAFkB,SAGrBA,OARa;AASnBE,EAAAA,eAAe,EAAE,CAACC,YAAY,GAAC,IAAd,EAAoBC,YAApB,KAAqC;AACpD,UAAMC,QAAQ,GAAGF,YAAY,GAClB,EAAE,GAAGvB;AAAL,KADkB,GAElB,EAAE,GAAGA,KAAL;AAAY,SAAGI;AAAf,KAFX;AAAA,UAGOsB,UAAU,GAAGH,YAAY,GACrB,EAAE,GAAGhB,OAAL;AAAc,SAAGiB;AAAjB,KADqB,GAErB,EAAE,GAAGjB,OAAL;AAAc,SAAGQ;AAAjB,KALX;AAMA,WAAO;AAAEU,MAAAA,QAAF;AAAYC,MAAAA;AAAZ,KAAP;AACD,GAjBkB;AAmBnBC,EAAAA,kBAAkB,EAAE,CAACJ,YAAY,GAAC,IAAd,EAAoBC,YAApB,KAAqC;AACvD,UAAMC,QAAQ,GAAGF,YAAY,GAClB,EAAE,GAAGlB;AAAL,KADkB,GAElB,EAAE,GAAGA,QAAL;AAAe,SAAGC;AAAlB,KAFX;AAAA,UAGOoB,UAAU,GAAGH,YAAY,GACrB,EAAE,GAAGhB,OAAL;AAAc,SAAGiB;AAAjB,KADqB,GAErB,EAAE,GAAGjB,OAAL;AAAc,SAAGQ;AAAjB,KALX;AAMA,WAAO;AAAEU,MAAAA,QAAF;AAAYC,MAAAA;AAAZ,KAAP;AACD,GA3BkB;AA6BnB;AACAE,EAAAA,OAAO,EAAE;AACPC,IAAAA,WAAW,EAAE,EADN;AAEPC,IAAAA,UAAU,EAAE,CAFL;AAGPtB,IAAAA,KAAK,EAAE;AAHA,GA9BU;AAmCnBuB,EAAAA,aAAa,EAAE;AACb9B,IAAAA,OAAO,EAAE,cADI;AAEbS,IAAAA,KAAK,EAAE,EAFM;AAGbsB,IAAAA,MAAM,EAAE,EAHK;AAIbC,IAAAA,MAAM,EAAE,mBAJK;AAKbC,IAAAA,YAAY,EAAE,KALD;AAMbzB,IAAAA,SAAS,EAAE,QANE;AAOb0B,IAAAA,WAAW,EAAE;AAPA,GAnCI;AA4CnBC,EAAAA,MAAM,EAAE;AACN;AACAvB,IAAAA,UAAU,EAAE;AAFN;AA5CW,CAArB;eAmDeG,Y"
+}

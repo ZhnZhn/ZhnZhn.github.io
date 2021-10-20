@@ -1,68 +1,57 @@
 
-const S = {
-  //Dialogs, DatesFragments
-  ROW: {
-    //display: 'block',
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: 5,
-    marginTop: 5,
-    marginLeft: 5,
-    marginBottom: 5
-  },
-  ROW_OC: {
-    lineHeight: 'unset',
-    marginRight: 5,
-    marginTop: 5,
-    marginLeft: 5,
-    marginBottom: -4
-  },
-  ROW_SHORT: {
-    marginLeft: 12,
-    marginRight: 12
-  },
-  LABEL: {
-    color: '#1b75bb',
-    display: 'inline-block',
-    //verticalAlign: 'top',
-    textAlign: 'right',
-    width: 100,
-    paddingRight: 5,
-    fontSize: '16px',
-    fontWeight: 'bold',
-    userSelect: 'none'
-  },
-  NONE: {
-    display: 'none'
-  }
+//Dialogs, DatesFragments
+const S_ROW = {
+  display: 'flex',
+  alignItems: 'center',
+  margin: 5
 }
+, S_ROW_SHORT = { margin: '5px 12px' }
+, S_ROW_OC = {
+  display: 'flex',
+  alignItems: 'center',
+  margin: 5
+}
+, S_ROW_OC_SHORT = { margin: '5px 12px' }
+, S_LABEL = {
+  color: '#1b75bb',
+  display: 'inline-block',
+  //verticalAlign: 'top',
+  textAlign: 'right',
+  width: 100,
+  paddingRight: 5,
+  fontSize: '16px',
+  fontWeight: 'bold',
+  userSelect: 'none'
+}
+, S_NONE = { display: 'none' };
+
 
 const DialogStyles = {
   //Dialogs, DatesFragments
-  ROW: { ...S.ROW },
-  CAPTION: { ...S.LABEL },
-  
+  ROW: { ...S_ROW },
+  CAPTION: { ...S_LABEL },
+
   crRowCaption: (caption) => caption.indexOf(':') === -1
     && caption !== ''
       ? `${caption}:`
       : caption,
   crRowLabelStyle: (isShowLabels=true, captionStyle) => {
     const rowStyle = isShowLabels
-             ? { ...S.ROW }
-             : { ...S.ROW, ...S.ROW_SHORT }
+             ? { ...S_ROW }
+             : { ...S_ROW, ...S_ROW_SHORT }
          , labelStyle = isShowLabels
-             ? { ...S.LABEL, ...captionStyle }
-             : { ...S.LABEL, ...S.NONE };
+             ? { ...S_LABEL, ...captionStyle }
+             : { ...S_LABEL, ...S_NONE };
     return { rowStyle, labelStyle };
   },
 
   crRowOcSelectStyle: (isShowLabels=true, captionStyle) => {
     const rowStyle = isShowLabels
-             ? { ...S.ROW_OC }
-             : { ...S.ROW_OC, ...S.ROW_SHORT }
+             ? { ...S_ROW_OC }
+             : { ...S_ROW_OC, ...S_ROW_OC_SHORT }
          , labelStyle = isShowLabels
-             ? { ...S.LABEL, ...captionStyle }
-             : { ...S.LABEL, ...S.NONE };
+             ? { ...S_LABEL, ...captionStyle }
+             : { ...S_LABEL, ...S_NONE };
     return { rowStyle, labelStyle };
   },
 
@@ -82,7 +71,7 @@ const DialogStyles = {
     marginRight: 5
   },
   VM_MSG: {
-    whiteSpace: 'pre',
+    //whiteSpace: 'pre',
     fontWeight: 'bold'
   }
 

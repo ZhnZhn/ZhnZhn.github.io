@@ -1,7 +1,7 @@
-import { Component, createRef } from 'react'
+import { Component, createRef } from 'react';
 
-import CellColor from '../zhn-moleculs/CellColor'
-import BtCounter from './BtCounter'
+import CellColor from '../zhn-moleculs/CellColor';
+import BtCounter from './BtCounter';
 
 const C_TRANSPARENT = "transparent";
 const N_SHORT = 5;
@@ -16,30 +16,15 @@ const COLORS2 = [
 ];
 
 const CL_INPUT_COLOR = 'va-b'
-
-const S = {
-  ROOT: {
-    paddingTop: 6,
-    paddingBottom: 4
-  },
-  ROW2: {
-    paddingTop: 4
-  },
-  ROW2_PADDING: {
-    paddingLeft: 56,
-  },
-  BT_COUNTER: {
-    marginLeft: 14,
-    marginRight: 16
-  },
-  TO_CELL: {
-    marginLeft: 12,
-    marginRight: 12
-  },
-  CELL: {
-    marginRight: 4,
-  }
-};
+, S_ROOT = { padding: '6px 0 4px 4px' }
+, S_ROW2 = { paddingTop: 4 }
+, S_ROW2_PADDING = { paddingLeft: 56 }
+, S_BT_COUNTER = {
+  marginLeft: 14,
+  marginRight: 16
+}
+, S_TO_CELL = { margin: '0 12px' }
+, S_CELL = { marginRight: 4 };
 
 const _initColor = (props) => props.initColor || C_TRANSPARENT;
 const _hasLineWidth = (chartType) => {
@@ -88,7 +73,7 @@ class SeriaColor extends Component {
         <CellColor
           key={c}
           className={CL_INPUT_COLOR}
-          style={S.CELL}
+          style={S_CELL}
           color={c}
           onClick={this._hClick}
         />
@@ -101,15 +86,15 @@ class SeriaColor extends Component {
     , { color } = this.state
     , _isLineWidth = _hasLineWidth(chartType)
     , _rowStyle = _isLineWidth
-         ? S.ROW2
-         : {...S.ROW2, ...S.ROW2_PADDING };
+         ? S_ROW2
+         : {...S_ROW2, ...S_ROW2_PADDING };
     return (
-      <div style={S.ROOT}>
+      <div style={S_ROOT}>
         <div>
           <CellColor
             color={color}
             className={CL_INPUT_COLOR}
-            style={S.TO_CELL}
+            style={S_TO_CELL}
             onClick={this._hReset}
           />
           {this._renderColors(COLORS1, isLong)}
@@ -118,7 +103,7 @@ class SeriaColor extends Component {
            <BtCounter
               ref={this._refLineWidth}
               isShow={_isLineWidth}
-              style={S.BT_COUNTER}
+              style={S_BT_COUNTER}
               title="Line Width"
             />
           {this._renderColors(COLORS2, isLong)}
