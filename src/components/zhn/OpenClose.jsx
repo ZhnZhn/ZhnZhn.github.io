@@ -48,7 +48,7 @@ const _crConf = ({ isOpen, openColor }) => isOpen
 const OpenClose = ({
   isClose=true,
   role='button',
-  style, ocStyle,
+  style, rowStyle, ocStyle,
   caption, captionStyle,
   openColor,
   CompAfter, childStyle, children
@@ -61,7 +61,7 @@ const OpenClose = ({
    } = _crConf({ isOpen, openColor });
   return (
     <div style={{...S_ROOT_DIV, ...style}}>
-      <div className={CL_NOT_SELECTED}>
+      <div className={CL_NOT_SELECTED} style={rowStyle}>
         <div
           tabIndex="0"
           role={role}

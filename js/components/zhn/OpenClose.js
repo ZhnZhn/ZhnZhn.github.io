@@ -66,6 +66,7 @@ const OpenClose = ({
   isClose = true,
   role = 'button',
   style,
+  rowStyle,
   ocStyle,
   caption,
   captionStyle,
@@ -92,6 +93,7 @@ const OpenClose = ({
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_NOT_SELECTED,
+      style: rowStyle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         tabIndex: "0",
         role: role,
