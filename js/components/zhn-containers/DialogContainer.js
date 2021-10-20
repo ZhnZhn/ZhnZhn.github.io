@@ -3,32 +3,26 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
-var S = {
-  ROOT: {
-    zIndex: 1030,
-    position: 'absolute',
-    top: 70,
-    left: 10,
-    width: '98%'
-  }
+var _jsxRuntime = require("react/jsx-runtime");
+
+const S_ROOT = {
+  zIndex: 1030,
+  position: 'absolute',
+  top: 70,
+  left: 10 //width: '98%'
+
 };
 
-var _isUndef = function _isUndef(value) {
-  return typeof value === 'undefined';
-};
+const _isUndef = value => typeof value === 'undefined';
 
-var _findCompIndex = function _findCompIndex(arr, key) {
-  for (var i = 0; i < arr.length; i++) {
+const _findCompIndex = (arr, key) => {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i].key === key) {
       return i;
     }
@@ -37,16 +31,18 @@ var _findCompIndex = function _findCompIndex(arr, key) {
   return;
 };
 
-var _doVisible = function _doVisible(arr, keyValue) {
-  var _index = _findCompIndex(arr, keyValue) || 0;
+const _doVisible = function (arr, keyValue) {
+  const _index = _findCompIndex(arr, keyValue) || 0;
 
-  return [].concat(arr.slice(0, _index), arr.slice(_index + 1), [arr[_index]]);
+  return [...arr.slice(0, _index), ...arr.slice(_index + 1), arr[_index]];
 };
 
-var _updateVisible = function _updateVisible(state, key, maxDialog) {
-  var hmIs = state.hmIs,
-      visibleDialogs = state.visibleDialogs,
-      _keyIndex = visibleDialogs.indexOf(key);
+const _updateVisible = (state, key, maxDialog) => {
+  const {
+    hmIs,
+    visibleDialogs
+  } = state,
+        _keyIndex = visibleDialogs.indexOf(key);
 
   if (_keyIndex !== -1) {
     visibleDialogs.splice(_keyIndex, 1);
@@ -61,97 +57,96 @@ var _updateVisible = function _updateVisible(state, key, maxDialog) {
   }
 };
 
-var _findCompByKey = function _findCompByKey(comps, key) {
-  var index = _findCompIndex(comps, key);
+const _findCompByKey = (comps, key) => {
+  const index = _findCompIndex(comps, key);
 
   return _isUndef(index) ? void 0 : comps[index];
 };
 
-var _filterArrByKey = function _filterArrByKey(arr, key) {
+const _filterArrByKey = (arr, key) => {
   arr.splice(arr.indexOf(key), 1);
 };
 
-var _renderDialogs = function _renderDialogs(_ref, _hToTopLayer, _hToggleDialog) {
-  var hmIs = _ref.hmIs,
-      compDialogs = _ref.compDialogs,
-      hmData = _ref.hmData;
-  return compDialogs.map(function (Comp) {
-    var key = Comp.key;
-    return /*#__PURE__*/(0, _react.cloneElement)(Comp, {
-      key: key,
-      isShow: hmIs[key],
-      optionData: hmData[key],
-      onFront: function onFront() {
-        return _hToTopLayer(key);
-      },
-      onClose: function onClose() {
-        return _hToggleDialog(key);
-      }
-    });
+const _renderDialogs = ({
+  hmIs,
+  compDialogs,
+  hmData
+}, _hToTopLayer, _hToggleDialog) => compDialogs.map(Comp => {
+  const key = Comp.key;
+  return /*#__PURE__*/(0, _react.cloneElement)(Comp, {
+    key: key,
+    isShow: hmIs[key],
+    optionData: hmData[key],
+    onFront: () => _hToTopLayer(key),
+    onClose: () => _hToggleDialog(key)
   });
-};
+});
 
-var NOOP = function NOOP() {};
+const NOOP = () => {};
 
-var DialogContainer = function DialogContainer(_ref2) {
-  var _ref2$maxDialog = _ref2.maxDialog,
-      maxDialog = _ref2$maxDialog === void 0 ? 3 : _ref2$maxDialog,
-      store = _ref2.store,
-      showAction = _ref2.showAction,
-      _ref2$onCloseDialog = _ref2.onCloseDialog,
-      onCloseDialog = _ref2$onCloseDialog === void 0 ? NOOP : _ref2$onCloseDialog;
-
-  var _useState = (0, _react.useState)({
+const DialogContainer = ({
+  maxDialog = 3,
+  store,
+  showAction,
+  onCloseDialog = NOOP
+}) => {
+  const [state, setState] = (0, _react.useState)({
     hmIs: {},
     compDialogs: [],
     hmData: {},
     visibleDialogs: []
   }),
-      state = _useState[0],
-      setState = _useState[1],
-      hmIs = state.hmIs,
-      compDialogs = state.compDialogs,
-      visibleDialogs = state.visibleDialogs,
-      _hToTopLayer = function _hToTopLayer(key) {
+        {
+    hmIs,
+    compDialogs,
+    visibleDialogs
+  } = state,
+        _hToTopLayer = key => {
     if (visibleDialogs[visibleDialogs.length - 1] !== key) {
-      setState(function (prevState) {
+      setState(prevState => {
         prevState.compDialogs = _doVisible(prevState.compDialogs, key);
-        var visibleDialogs = prevState.visibleDialogs;
+        const visibleDialogs = prevState.visibleDialogs;
 
         _filterArrByKey(visibleDialogs, key);
 
         visibleDialogs.push(key);
-        return (0, _extends2["default"])({}, prevState);
+        return { ...prevState
+        };
       });
     }
   },
-      _hToggleDialog = function _hToggleDialog(key) {
+        _hToggleDialog = key => {
     if (hmIs[key]) {
-      var _Comp = _findCompByKey(compDialogs, key);
+      const _Comp = _findCompByKey(compDialogs, key);
 
       if (_Comp) {
         onCloseDialog(_Comp);
       }
     }
 
-    setState(function (prevState) {
-      var hmIs = prevState.hmIs;
+    setState(prevState => {
+      const {
+        hmIs
+      } = prevState;
       hmIs[key] = !hmIs[key];
 
       if (!hmIs[key]) {
         _filterArrByKey(prevState.visibleDialogs, key);
       }
 
-      return (0, _extends2["default"])({}, prevState);
+      return { ...prevState
+      };
     });
   };
 
-  (0, _useListen["default"])(store, function (actionType, option) {
+  (0, _useListen.default)(store, (actionType, option) => {
     if (actionType === showAction) {
-      setState(function (prevState) {
-        var key = option.key,
-            Comp = option.Comp,
-            data = option.data;
+      setState(prevState => {
+        const {
+          key,
+          Comp,
+          data
+        } = option;
 
         if (Comp && !_isUndef(_findCompIndex(prevState.compDialogs, key))) {
           return prevState;
@@ -166,16 +161,17 @@ var DialogContainer = function DialogContainer(_ref2) {
         }
 
         prevState.hmData[key] = data;
-        return (0, _extends2["default"])({}, prevState);
+        return { ...prevState
+        };
       });
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: S.ROOT,
+    style: S_ROOT,
     children: _renderDialogs(state, _hToTopLayer, _hToggleDialog)
   });
 };
 
 var _default = DialogContainer;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=DialogContainer.js.map

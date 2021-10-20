@@ -1,16 +1,15 @@
 import { useState, cloneElement } from 'react';
 
-import useListen from '../hooks/useListen'
+import useListen from '../hooks/useListen';
 
-const S = {
-  ROOT: {
-    zIndex: 1030,
-    position: 'absolute',
-    top: 70,
-    left: 10,
-    width: '98%'
-  }
+const S_ROOT = {
+  zIndex: 1030,
+  position: 'absolute',
+  top: 70,
+  left: 10
+  //width: '98%'
 };
+
 
 const _isUndef = value => typeof value === 'undefined';
 
@@ -134,7 +133,7 @@ const DialogContainer = ({
   })
 
   return (
-    <div style={S.ROOT}>
+    <div style={S_ROOT}>
       {_renderDialogs(state, _hToTopLayer, _hToggleDialog)}
     </div>
   );
