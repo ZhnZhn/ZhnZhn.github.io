@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/toFirstUpperCase.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/toFirstUpperCase.js",
+ "names": [
+  "toFirstUpperCase",
+  "str",
+  "charAt",
+  "toUpperCase",
+  "substring"
+ ],
+ "mappings": ";;;;;AAAA,MAAMA,gBAAgB,GAAGC,GAAG,IAAIA,GAAG,GAC/BA,GAAG,CAACC,MAAJ,CAAW,CAAX,EAAcC,WAAd,KAA8BF,GAAG,CAACG,SAAJ,CAAc,CAAd,CADC,GAE/B,EAFJ;;eAIeJ,gB"
+}

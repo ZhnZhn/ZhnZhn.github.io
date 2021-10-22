@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/dimConfigFn.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/dimConfigFn.js",
+ "names": [
+  "crDimItem",
+  "caption",
+  "sliceId",
+  "value",
+  "slice",
+  "toFirstUpperCase",
+  "str",
+  "charAt",
+  "toUpperCase",
+  "substring"
+ ],
+ "mappings": ";;;;;AACO,MAAMA,SAAS,GAAG,CAACC,OAAD,EAAUC,OAAV,EAAmBC,KAAnB,MAA8B;AACrDF,EAAAA,OADqD;AAErDG,EAAAA,KAAK,EAAE;AAAE,KAACF,OAAD,GAAWC;AAAb;AAF8C,CAA9B,CAAlB;;;;AAKA,MAAME,gBAAgB,GAAGC,GAAG,IAAIA,GAAG,GACtCA,GAAG,CAACC,MAAJ,CAAW,CAAX,EAAcC,WAAd,KAA8BF,GAAG,CAACG,SAAJ,CAAc,CAAd,CADQ,GAEtC,EAFG"
+}

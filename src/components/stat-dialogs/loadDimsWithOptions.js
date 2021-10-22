@@ -1,10 +1,8 @@
+import toFirstUpperCase from './toFirstUpperCase';
+import crEsDimConfig from './crEsDimConfig';
 import loadJson from './loadJson';
 
 const _isArr = Array.isArray;
-
-const _toFirstUpperCase = (str) => str
-  .charAt(0)
-  .toUpperCase() + str.substring(1);
 
 const _crDimItem = (caption, sliceId, value) => ({
   caption,
@@ -75,7 +73,7 @@ const _crSdnDimConfig = (variables) => {
         })).reverse()
     } else {
       dims.push({
-        c: _toFirstUpperCase(text),
+        c: toFirstUpperCase(text),
         v: id,
         options: _crSdnDimOptions(item)
       })
@@ -84,10 +82,17 @@ const _crSdnDimConfig = (variables) => {
   return { mapFrequency, dims, timeId };
 };
 
+
+const _isEs = (dimension, source) =>
+  dimension && source === 'Eurostat'
+
 const _crDimsConfig = (json) => {
   const dims = []
-  , { variables } = json;
+  , { variables, dimension, source } = json;
   let timeId, mapFrequency = 'Y';
+  if (_isEs(dimension, source)) {
+    return crEsDimConfig(dimension);
+  }
   if (!_isArr(variables)) {
     return {dims, timeId, mapFrequency};
   }
@@ -99,7 +104,7 @@ const _crDimsConfig = (json) => {
     , _text = item.text || '';
     if (_isNotTimeDimension(time, code)) {
       dims.push({
-        c: _toFirstUpperCase(_text),
+        c: toFirstUpperCase(_text),
         v: code,
         options: _crDimOptions(item)
      })

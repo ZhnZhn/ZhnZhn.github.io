@@ -5,11 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
+var _toFirstUpperCase = _interopRequireDefault(require("./toFirstUpperCase"));
+
+var _crEsDimConfig = _interopRequireDefault(require("./crEsDimConfig"));
+
 var _loadJson = _interopRequireDefault(require("./loadJson"));
 
 const _isArr = Array.isArray;
-
-const _toFirstUpperCase = str => str.charAt(0).toUpperCase() + str.substring(1);
 
 const _crDimItem = (caption, sliceId, value) => ({
   caption,
@@ -89,7 +91,7 @@ const _crSdnDimConfig = variables => {
       })).reverse();
     } else {
       dims.push({
-        c: _toFirstUpperCase(text),
+        c: (0, _toFirstUpperCase.default)(text),
         v: id,
         options: _crSdnDimOptions(item)
       });
@@ -102,13 +104,21 @@ const _crSdnDimConfig = variables => {
   };
 };
 
+const _isEs = (dimension, source) => dimension && source === 'Eurostat';
+
 const _crDimsConfig = json => {
   const dims = [],
         {
-    variables
+    variables,
+    dimension,
+    source
   } = json;
   let timeId,
       mapFrequency = 'Y';
+
+  if (_isEs(dimension, source)) {
+    return (0, _crEsDimConfig.default)(dimension);
+  }
 
   if (!_isArr(variables)) {
     return {
@@ -131,7 +141,7 @@ const _crDimsConfig = json => {
 
     if (_isNotTimeDimension(time, code)) {
       dims.push({
-        c: _toFirstUpperCase(_text),
+        c: (0, _toFirstUpperCase.default)(_text),
         v: code,
         options: _crDimOptions(item)
       });
