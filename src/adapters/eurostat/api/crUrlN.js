@@ -30,11 +30,17 @@ const _crMapSlice = (items, { dfTail }) => {
   return mapSlice;
 };
 
-const _crItems = ({ seriaType, items, time }) => isCategory(seriaType)
-  ? isMap(seriaType)
-      ? items.filter(Boolean)
-      : items.filter(Boolean).concat([{ id: 'time', value: time }])
-  : items;
+const _notEmptyOrGeo = item =>
+  Boolean(item) && item.id !== 'geo';
+const _crItems = ({ seriaType, items, time }) => {
+  if (isCategory(seriaType)) {
+    const _items = items.filter(_notEmptyOrGeo);
+    return isMap(seriaType)
+      ? _items
+      : _items.concat([{ id: 'time', value: time }])
+  }
+ return items;
+};
 
 const _crQuery = (items, dfTail) => {
   const _q = items
@@ -54,17 +60,17 @@ const _updateOptionsIf = (seriaType, items, options) => {
 const crUrlN = (options) => {
   const {
     seriaType,
-    dfTable,
+    dfTable, dfId,
     dfTail
   } = options
+  , _dfTable = dfTable || dfId
   , _items = _crItems(options)
   , _q = _crQuery(_items, dfTail);
-
   _updateOptionsIf(seriaType, _items, options)
 
   return isCategory(seriaType)
-    ? crUrl(dfTable, _q, `&${DF_TAIL}`)
-    : crUrl(dfTable, _q);
+    ? crUrl(_dfTable, _q, `&${DF_TAIL}`)
+    : crUrl(_dfTable, _q);
 };
 
 export default crUrlN

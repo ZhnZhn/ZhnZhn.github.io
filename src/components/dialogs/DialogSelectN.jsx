@@ -239,9 +239,7 @@ class DialogSelectN extends Component {
         : {}
     , date = this._getDate()
     , _isCategory = isCategory(chartType)
-    , items = _isCategory
-        ? this._items.slice(1)
-        : [...this._items]
+    , items = [...this._items]    
     , _compFd = this._refFromDate.current
     , fromDate = _compFd && _compFd.isValid()
        ? _compFd.getValue()
