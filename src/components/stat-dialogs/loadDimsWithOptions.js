@@ -1,13 +1,14 @@
-import toFirstUpperCase from './toFirstUpperCase';
+import {
+  crDimItem,
+  toFirstUpperCase
+} from './dimConfigFn';
+
 import crEsDimConfig from './crEsDimConfig';
+import crSdnDimConfig from './crSdnDimConfig';
+
 import loadJson from './loadJson';
 
 const _isArr = Array.isArray;
-
-const _crDimItem = (caption, sliceId, value) => ({
-  caption,
-  slice: { [sliceId]: value }
-});
 
 const _isNotCorrectDim = (values, valueTexts) =>
  !_isArr(values) || !_isArr(valueTexts)
@@ -18,7 +19,7 @@ const _crDimOptions = ({ values, valueTexts, code }) => {
     return;
   }
   return valueTexts.map((text, index) =>
-    _crDimItem(text, code, values[index]));
+    crDimItem(text, code, values[index]));
 };
 
 const _crDateOptions = ({ values, valueTexts }) => {
@@ -40,10 +41,6 @@ const _isSdn = item => item
   && !_isArr(item.valueTexts)
   && _isArr(item.values);
 
-const _crSdnDimOptions = ({ values, id }) =>
- (values || []).map(item =>
-    _crDimItem(item.text, id, item.id));
-
 const TIME_IDS = [
   'Tid',
   'Year','Month','Vuosi','Vuosineljännes'
@@ -57,29 +54,6 @@ const _isNotTimeDimension = (time, code) => !time &&
 const FREQUENCY_HM = {
   month: 'M',
   quarter: 'K'
-};
-
-const _crSdnDimConfig = (variables) => {
-  const dims = [];
-  let timeId, mapFrequency = 'Y';
-  variables.forEach(item => {
-    const { time, text='', id } = item
-    if (time) {
-      timeId = id
-      dims.dateOptions = item
-        .values.map(({ id, text }) => ({
-          caption: text,
-          value: id
-        })).reverse()
-    } else {
-      dims.push({
-        c: toFirstUpperCase(text),
-        v: id,
-        options: _crSdnDimOptions(item)
-      })
-    }
-  })
-  return { mapFrequency, dims, timeId };
 };
 
 
@@ -97,7 +71,7 @@ const _crDimsConfig = (json) => {
     return {dims, timeId, mapFrequency};
   }
   if (_isSdn(variables[0])) {
-    return _crSdnDimConfig(variables);
+    return crSdnDimConfig(variables);
   }
   variables.forEach(item => {
     const { code, time } = item

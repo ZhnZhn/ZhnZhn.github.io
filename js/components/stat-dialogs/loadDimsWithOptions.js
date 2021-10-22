@@ -5,20 +5,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _toFirstUpperCase = _interopRequireDefault(require("./toFirstUpperCase"));
+var _dimConfigFn = require("./dimConfigFn");
 
 var _crEsDimConfig = _interopRequireDefault(require("./crEsDimConfig"));
+
+var _crSdnDimConfig = _interopRequireDefault(require("./crSdnDimConfig"));
 
 var _loadJson = _interopRequireDefault(require("./loadJson"));
 
 const _isArr = Array.isArray;
-
-const _crDimItem = (caption, sliceId, value) => ({
-  caption,
-  slice: {
-    [sliceId]: value
-  }
-});
 
 const _isNotCorrectDim = (values, valueTexts) => !_isArr(values) || !_isArr(valueTexts) || values.length !== valueTexts.length;
 
@@ -31,7 +26,7 @@ const _crDimOptions = ({
     return;
   }
 
-  return valueTexts.map((text, index) => _crDimItem(text, code, values[index]));
+  return valueTexts.map((text, index) => (0, _dimConfigFn.crDimItem)(text, code, values[index]));
 };
 
 const _crDateOptions = ({
@@ -54,11 +49,6 @@ const _crDateOptions = ({
 
 const _isSdn = item => item && item.id && item.text && !_isArr(item.valueTexts) && _isArr(item.values);
 
-const _crSdnDimOptions = ({
-  values,
-  id
-}) => (values || []).map(item => _crDimItem(item.text, id, item.id));
-
 const TIME_IDS = ['Tid', 'Year', 'Month', 'Vuosi', 'Vuosineljännes'];
 
 const _isNotTimeDimension = (time, code) => !time && TIME_IDS.indexOf(code) === -1 && (code + '').indexOf('TLIST(') === -1; //'TLIST(' //'TLIST(M1)', 'TLIST(A1)' SIR
@@ -67,41 +57,6 @@ const _isNotTimeDimension = (time, code) => !time && TIME_IDS.indexOf(code) === 
 const FREQUENCY_HM = {
   month: 'M',
   quarter: 'K'
-};
-
-const _crSdnDimConfig = variables => {
-  const dims = [];
-  let timeId,
-      mapFrequency = 'Y';
-  variables.forEach(item => {
-    const {
-      time,
-      text = '',
-      id
-    } = item;
-
-    if (time) {
-      timeId = id;
-      dims.dateOptions = item.values.map(({
-        id,
-        text
-      }) => ({
-        caption: text,
-        value: id
-      })).reverse();
-    } else {
-      dims.push({
-        c: (0, _toFirstUpperCase.default)(text),
-        v: id,
-        options: _crSdnDimOptions(item)
-      });
-    }
-  });
-  return {
-    mapFrequency,
-    dims,
-    timeId
-  };
 };
 
 const _isEs = (dimension, source) => dimension && source === 'Eurostat';
@@ -129,7 +84,7 @@ const _crDimsConfig = json => {
   }
 
   if (_isSdn(variables[0])) {
-    return _crSdnDimConfig(variables);
+    return (0, _crSdnDimConfig.default)(variables);
   }
 
   variables.forEach(item => {
@@ -141,7 +96,7 @@ const _crDimsConfig = json => {
 
     if (_isNotTimeDimension(time, code)) {
       dims.push({
-        c: (0, _toFirstUpperCase.default)(_text),
+        c: (0, _dimConfigFn.toFirstUpperCase)(_text),
         v: code,
         options: _crDimOptions(item)
       });
