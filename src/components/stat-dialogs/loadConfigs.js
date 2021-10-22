@@ -14,25 +14,27 @@ const _isDimsWithOptions = (dims) => {
   return i === _len;
 };
 
+const _crConfigItem = (
+  id,
+  caption,
+  options
+) => ({
+  id,
+  caption,
+  options
+});
+
 const _crPropDimsConfig = (dims, propDims) => {
   const _hmDim = Object.create(null);
   dims.forEach(dim => {
     _hmDim[dim.v] = dim
   })
   return propDims
-    .map(({ v, c }) => ({
-       id: v,
-       caption: c,
-       options: _hmDim[v].options
-    }));
+    .map(({ v, c }) => _crConfigItem(v, c, _hmDim[v].options));
 };
 
 const _crDimsConfig = dims => dims
-  .map(({c, v, options}) => ({
-     id: v,
-     caption: c,
-     options
-  }));
+  .map(({c, v, options}) => _crConfigItem(v, c, options));
 
 const _crConfigs = (dims, propDims) => {
   const configs = propDims
@@ -42,8 +44,18 @@ const _crConfigs = (dims, propDims) => {
   return configs;
 };
 
-const _crUrl = ({ proxy='', baseMeta, dfId }) =>
- `${proxy}${baseMeta}/${dfId}`;
+const _crMetaTime = mapFrequency => {
+  if (mapFrequency === 'M') { return '2020M01'; }
+  return '2020';
+};
+
+const _crUrl = ({ proxy='', baseMeta, dfId, loadId, mapFrequency }) => {
+  if (loadId === "EU_STAT") {
+    return `${baseMeta}/${dfId}?time=${_crMetaTime(mapFrequency)}`;
+  }
+  return `${proxy}${baseMeta}/${dfId}`;
+};
+
 const _crMetaUrl = props => props.metaUrl
  || _crUrl(props);
 
