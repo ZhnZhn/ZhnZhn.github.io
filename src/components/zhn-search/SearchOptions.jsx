@@ -1,42 +1,35 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react';
 
-const CL = {
-  ROOT: 'zhn-search__options',
-  OPTIONS: 'zhn-search__options__div',
-  ITEM: 'zhn-search__row',
-  FOOTER: 'zhn-search__footer'
+import ShowHide from '../zhn/ShowHide';
+import ItemStack from '../zhn/ItemStack';
+
+const CL_ROOT = 'zhn-search__options'
+, CL_OPTIONS = 'zhn-search__options__div'
+, CL_ITEM = 'zhn-search__row'
+, CL_FOOTER = 'zhn-search__footer'
+, S_OPTIONS = { width: 250 }
+, S_BOLD = { fontWeight: 'bold' }
+, S_FOOTER = {
+  color: 'black',
+  width: 250,
+  height: 32,
+  padding: '4px 0 4px 10px',
+  fontWeight: 'bold'
 };
 
-const S = {
-  HIDE: {
-    display: 'none'
-  },
-  OPTIONS: {
-    width: 250
-  },
-  BOLD: {
-    fontWeight: 'bold'
-  },
-  FOOTER: {
-    width: 250,
-    height: 32,
-    color: 'gray',
-    fontWeight: 'bold',
-    paddingLeft: 10,
-    paddingTop: 4,
-    paddingBottom: 4
-  }
-};
-
-const BoldSpan = ({ text='' }) => <span style={S.BOLD}>{text}</span>;
+const BoldSpan = ({ text='' }) => <span style={S_BOLD}>{text}</span>;
 const Delimeter = () => <span>{` - `}</span>;
 const Span = ({ text='' }) => <span>{text}</span>;
 
-const Item = ({ item, onClick, onFocus }) => {
+const Item = ({
+  item,
+  onClick,
+  onFocus
+}) => {
   const { value, name, type, region, currency } = item;
   return(
   <button
-    className={CL.ITEM}
+    className={CL_ITEM}
     onClick={onClick}
     onFocus={onFocus}
   >
@@ -53,14 +46,33 @@ const Item = ({ item, onClick, onFocus }) => {
   );
 }
 
-const SearchOptions = ({ isShow, options, onClickItem }) => {
-  const refRecentItem = useRef();
-  const [itemIndex, setItemIndex] = useState('');
+const _crItem = (
+  item,
+  index, {
+    onClick,
+    onFocus
+  }
+) => (
+  <Item
+    key={item.value+index}
+    item={item}
+    onClick={onClick.bind(null, item.value)}
+    onFocus={onFocus.bind(null, index+1)}
+  />
+);
 
-  const _onFocusItem = (index, event) => {
+const SearchOptions = ({
+  isShow,
+  options,
+  onClickItem
+}) => {
+  const refRecentItem = useRef()
+  , [itemIndex, setItemIndex] = useState('')
+  , _onFocusItem = (index, event) => {
     refRecentItem.current = event.target
     setItemIndex(index)
-  }
+  };
+
   useEffect(()=>{
     refRecentItem.current = null
     setItemIndex('')
@@ -71,30 +83,29 @@ const SearchOptions = ({ isShow, options, onClickItem }) => {
     }
   }, [isShow])
 
-  const _style = isShow ? null : S.HIDE
   const _total = options.length || '';
 
   return (
-    <div
-      className={CL.ROOT}
-      style={{ ...S.OPTIONS, ..._style }}
+    <ShowHide
+      isShow={isShow}
+      className={CL_ROOT}
+      style={S_OPTIONS}
+      withoutAnimation={true}
     >
-      <div className={CL.OPTIONS} style={S.OPTIONS}>
-        {options.map((item, index) => (
-          <Item
-            key={item.value+index}
-            item={item}
-            onClick={onClickItem.bind(null, item.value)}
-            onFocus={_onFocusItem.bind(null, index+1)}
-          />
-        ))}
+      <div className={CL_OPTIONS} style={S_OPTIONS}>
+        <ItemStack
+          items={options}
+          crItem={_crItem}
+          onClick={onClickItem}
+          onFocus={_onFocusItem}
+        />
       </div>
-      <div className={CL.FOOTER} style={S.FOOTER}>
+      <div className={CL_FOOTER} style={S_FOOTER}>
         <span>{itemIndex}:</span>
         <span>{_total}</span>
       </div>
-    </div>
+    </ShowHide>
   );
-}
+};
 
 export default SearchOptions

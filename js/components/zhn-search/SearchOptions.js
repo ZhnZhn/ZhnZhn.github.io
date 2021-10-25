@@ -3,75 +3,65 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
-var CL = {
-  ROOT: 'zhn-search__options',
-  OPTIONS: 'zhn-search__options__div',
-  ITEM: 'zhn-search__row',
-  FOOTER: 'zhn-search__footer'
-};
-var S = {
-  HIDE: {
-    display: 'none'
-  },
-  OPTIONS: {
-    width: 250
-  },
-  BOLD: {
-    fontWeight: 'bold'
-  },
-  FOOTER: {
-    width: 250,
-    height: 32,
-    color: 'gray',
-    fontWeight: 'bold',
-    paddingLeft: 10,
-    paddingTop: 4,
-    paddingBottom: 4
-  }
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+
+var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
+
+var _jsxRuntime = require("react/jsx-runtime");
+
+const CL_ROOT = 'zhn-search__options',
+      CL_OPTIONS = 'zhn-search__options__div',
+      CL_ITEM = 'zhn-search__row',
+      CL_FOOTER = 'zhn-search__footer',
+      S_OPTIONS = {
+  width: 250
+},
+      S_BOLD = {
+  fontWeight: 'bold'
+},
+      S_FOOTER = {
+  color: 'black',
+  width: 250,
+  height: 32,
+  padding: '4px 0 4px 10px',
+  fontWeight: 'bold'
 };
 
-var BoldSpan = function BoldSpan(_ref) {
-  var _ref$text = _ref.text,
-      text = _ref$text === void 0 ? '' : _ref$text;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-    style: S.BOLD,
-    children: text
-  });
-};
+const BoldSpan = ({
+  text = ''
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+  style: S_BOLD,
+  children: text
+});
 
-var Delimeter = function Delimeter() {
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-    children: " - "
-  });
-};
+const Delimeter = () => /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+  children: " - "
+});
 
-var Span = function Span(_ref2) {
-  var _ref2$text = _ref2.text,
-      text = _ref2$text === void 0 ? '' : _ref2$text;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-    children: text
-  });
-};
+const Span = ({
+  text = ''
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+  children: text
+});
 
-var Item = function Item(_ref3) {
-  var item = _ref3.item,
-      onClick = _ref3.onClick,
-      onFocus = _ref3.onFocus;
-  var value = item.value,
-      name = item.name,
-      type = item.type,
-      region = item.region,
-      currency = item.currency;
+const Item = ({
+  item,
+  onClick,
+  onFocus
+}) => {
+  const {
+    value,
+    name,
+    type,
+    region,
+    currency
+  } = item;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
-    className: CL.ITEM,
+    className: CL_ITEM,
     onClick: onClick,
     onFocus: onFocus,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BoldSpan, {
@@ -88,51 +78,56 @@ var Item = function Item(_ref3) {
   });
 };
 
-var SearchOptions = function SearchOptions(_ref4) {
-  var isShow = _ref4.isShow,
-      options = _ref4.options,
-      onClickItem = _ref4.onClickItem;
-  var refRecentItem = (0, _react.useRef)();
+const _crItem = (item, index, {
+  onClick,
+  onFocus
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
+  item: item,
+  onClick: onClick.bind(null, item.value),
+  onFocus: onFocus.bind(null, index + 1)
+}, item.value + index);
 
-  var _useState = (0, _react.useState)(''),
-      itemIndex = _useState[0],
-      setItemIndex = _useState[1];
-
-  var _onFocusItem = function _onFocusItem(index, event) {
+const SearchOptions = ({
+  isShow,
+  options,
+  onClickItem
+}) => {
+  const refRecentItem = (0, _react.useRef)(),
+        [itemIndex, setItemIndex] = (0, _react.useState)(''),
+        _onFocusItem = (index, event) => {
     refRecentItem.current = event.target;
     setItemIndex(index);
   };
 
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     refRecentItem.current = null;
     setItemIndex('');
   }, [options]);
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (isShow && refRecentItem.current) {
       refRecentItem.current.focus();
     }
   }, [isShow]);
 
-  var _style = isShow ? null : S.HIDE;
+  const _total = options.length || '';
 
-  var _total = options.length || '';
-
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: CL.ROOT,
-    style: (0, _extends2["default"])({}, S.OPTIONS, _style),
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
+    isShow: isShow,
+    className: CL_ROOT,
+    style: S_OPTIONS,
+    withoutAnimation: true,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      className: CL.OPTIONS,
-      style: S.OPTIONS,
-      children: options.map(function (item, index) {
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
-          item: item,
-          onClick: onClickItem.bind(null, item.value),
-          onFocus: _onFocusItem.bind(null, index + 1)
-        }, item.value + index);
+      className: CL_OPTIONS,
+      style: S_OPTIONS,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+        items: options,
+        crItem: _crItem,
+        onClick: onClickItem,
+        onFocus: _onFocusItem
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: CL.FOOTER,
-      style: S.FOOTER,
+      className: CL_FOOTER,
+      style: S_FOOTER,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
         children: [itemIndex, ":"]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
@@ -143,5 +138,5 @@ var SearchOptions = function SearchOptions(_ref4) {
 };
 
 var _default = SearchOptions;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=SearchOptions.js.map
