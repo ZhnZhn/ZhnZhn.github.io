@@ -3,11 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -25,78 +21,68 @@ var _crAction = _interopRequireDefault(require("./flux/crAction"));
 
 var _crInputChange = _interopRequireDefault(require("./flux/crInputChange"));
 
-var CL = {
-  INPUT_HR: 'zhn-search__input__hr'
-};
-var S = {
-  ROOT: {
-    position: 'relative',
-    width: 250,
-    height: 36,
-    borderRadius: 14,
-    background: 'none 0px 0px repeat scroll rgb(225, 225, 203)'
-  },
-  ROOT_OPTIONS: {
-    borderRadius: 0,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
-  },
-  INPUT: {
-    display: 'block',
-    width: '100%',
-    height: 30,
-    paddingLeft: 10,
-    marginLeft: 0,
-    borderRadius: 15,
-    boxShadow: 'none'
-  }
+var _jsxRuntime = require("react/jsx-runtime");
+
+const CL_INPUT_HR = 'zhn-search__input__hr',
+      S_ROOT = {
+  position: 'relative',
+  width: 250,
+  height: 36,
+  borderRadius: 14,
+  background: 'none 0px 0px repeat scroll rgb(225, 225, 203)'
+},
+      S_ROOT_OPTIONS = {
+  borderRadius: 0,
+  borderTopLeftRadius: 5,
+  borderTopRightRadius: 5
+},
+      S_INPUT = {
+  display: 'block',
+  width: '100%',
+  height: 30,
+  paddingLeft: 10,
+  marginLeft: 0,
+  borderRadius: 15,
+  boxShadow: 'none'
 };
 
-var _isHideOptions = function _isHideOptions(keyCode) {
-  return keyCode === 38 || keyCode === 46 || keyCode === 27;
-};
+const _isHideOptions = keyCode => keyCode === 38 || keyCode === 46 || keyCode === 27;
 
-var _isShowOptions = function _isShowOptions(keyCode, options) {
-  return keyCode === 40 && options.length > 0;
-};
+const _isShowOptions = (keyCode, options) => keyCode === 40 && options.length > 0;
 
-var InputSearch = function InputSearch(_ref) {
-  var _ref$isSearch = _ref.isSearch,
-      isSearch = _ref$isSearch === void 0 ? true : _ref$isSearch,
-      searchApi = _ref.searchApi,
-      _ref$crInputChange = _ref.crInputChange,
-      crInputChange = _ref$crInputChange === void 0 ? _crInputChange["default"] : _ref$crInputChange;
+const InputSearch = ({
+  isSearch = true,
+  searchApi,
+  crInputChange = _crInputChange.default
+}) => {
+  const refInput = (0, _react.useRef)(),
+        [inputKey, forceUpdate] = (0, _react.useState)(0),
+        [state, dispatch] = (0, _react.useReducer)(_reducer.default, _initialState.default),
+        {
+    isLoading,
+    isLoadingFailed,
+    isOptions,
+    options,
+    ticket
+  } = state,
+        action = (0, _crAction.default)(dispatch),
+        _onInputChange = crInputChange(action, searchApi);
 
-  var refInput = (0, _react.useRef)(),
-      _useState = (0, _react.useState)(0),
-      inputKey = _useState[0],
-      forceUpdate = _useState[1],
-      _useReducer = (0, _react.useReducer)(_reducer["default"], _initialState["default"]),
-      state = _useReducer[0],
-      dispatch = _useReducer[1],
-      isLoading = state.isLoading,
-      isLoadingFailed = state.isLoadingFailed,
-      isOptions = state.isOptions,
-      options = state.options,
-      ticket = state.ticket,
-      action = (0, _crAction["default"])(dispatch),
-      _onInputChange = crInputChange(action, searchApi);
-
-  var _onEnter = function _onEnter() {
+  const _onEnter = () => {
     if (isSearch) {
       _onInputChange.cancel();
     }
   };
 
-  var _onClickItem = function _onClickItem(value) {
+  const _onClickItem = value => {
     action.setTicket(value);
-    forceUpdate(function (n) {
-      return n + 1;
-    });
+    forceUpdate(n => n + 1);
   };
 
-  var _onKeyDown = function _onKeyDown(event) {
-    var keyCode = event.keyCode;
+  const _onKeyDown = event => {
+    const {
+      keyCode
+    } = event;
 
     if (_isHideOptions(keyCode)) {
       action.hideOptions();
@@ -106,37 +92,39 @@ var InputSearch = function InputSearch(_ref) {
     }
   };
 
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (refInput.curent) {
       refInput.current.focus();
     }
   }, [inputKey]);
 
-  var onKeyDown = isSearch ? _onKeyDown : null,
-      onInputChange = isSearch ? _onInputChange : null,
-      _rootStyle = isOptions ? (0, _extends2["default"])({}, S.ROOT, S.ROOT_OPTIONS) : S.ROOT;
+  const onKeyDown = isSearch ? _onKeyDown : null,
+        onInputChange = isSearch ? _onInputChange : null,
+        _style = isOptions ? { ...S_ROOT,
+    ...S_ROOT_OPTIONS
+  } : S_ROOT;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: _rootStyle,
+    style: _style,
     tabIndex: "-1",
     role: "textbox",
     onKeyDown: onKeyDown,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText["default"], {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
       ref: refInput,
-      style: S.INPUT,
+      style: S_INPUT,
       initValue: ticket,
       onChange: onInputChange,
       onEnter: _onEnter
     }, inputKey), /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
-      className: CL.INPUT_HR
+      className: CL_INPUT_HR
     }), isSearch && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_react.Fragment, {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToggleButton["default"], {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToggleButton.default, {
         isLoading: isLoading,
         isLoadingFailed: isLoadingFailed,
         options: options,
         isOptions: isOptions,
         toggleOptions: action.toggleOptions
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SearchOptions["default"], {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SearchOptions.default, {
         isShow: isOptions,
         options: options,
         onClickItem: _onClickItem
@@ -146,5 +134,5 @@ var InputSearch = function InputSearch(_ref) {
 };
 
 var _default = InputSearch;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=InputSearch.js.map

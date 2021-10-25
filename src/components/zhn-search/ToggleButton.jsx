@@ -1,21 +1,17 @@
-import ArrowCell from './ArrowCell'
+import ArrowCell from './ArrowCell';
 
-const CL = {
-  SPINNER: 'zhn-search__spinner',
-  SPINNER_FAILED: 'zhn-select__spinner--failed'
-};
-const S = {
-  ARROW_SHOW: {
-    borderColor: '#1b75bb transparent transparent'
-  }
+const CL_SPINNER = 'zhn-search__spinner'
+, CL_SPINNER_FAILED = 'zhn-select__spinner--failed'
+, S_ARROW_SHOW = {
+  borderColor: '#1b75bb transparent transparent'
 };
 
 const _loadingEl = (<span
-  className={CL.SPINNER}
+  className={CL_SPINNER}
   data-loader="circle"
 />);
 const _loadingFailedEl = (<span
-  className={CL.SPINNER_FAILED}
+  className={CL_SPINNER_FAILED}
   data-loader="circle-failed"
 />);
 
@@ -30,13 +26,12 @@ const ToggleButton = ({
   } else if (options && options.length > 0) {
     return (
       <ArrowCell
-        arrowStyle={isOptions ? S.ARROW_SHOW : null}
+        arrowStyle={isOptions ? S_ARROW_SHOW : null}
         onClick={toggleOptions}
       />
     );
    }
    return null;
 };
-
 
 export default ToggleButton

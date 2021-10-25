@@ -1,37 +1,26 @@
 const CL_BT = 'zhn-select__bt-arrow'
+, S_ARROW_CELL = { top: 0 }
+, S_ARROW = {
+  display: 'inline-block',
+  height: 0,
+  width: 0,
+  borderColor: '#999 transparent transparent',
+  borderStyle: 'solid',
+  borderWidth: '10px 8px 4px'
+};
 
-const S = {
-  ARROW_CELL: {
-    position: 'absolute',
-    top: 10,
-    right: 0,
-    width: 35,
-    paddingRight: 5,
-    textAlign: 'center',
-    verticalAlign: 'middle',
-    cursor: 'pointer'
-  },
-  ARROW: {
-    position: 'relative',
-    top: 2,
-    display: 'inline-block',
-    height: 0,
-    width: 0,
-    borderColor: '#999 transparent transparent',
-    borderStyle: 'solid',
-    borderWidth: '10px 8px 4px'
-  }
-}
-
-const ArrowCell = ({ arrowStyle, tabIndex="-1", onClick }) => (
+const ArrowCell = ({
+  arrowStyle,
+  tabIndex="-1",
+  onClick
+}) => (
   <button
      className={CL_BT}
-     style={S.ARROW_CELL}
+     style={S_ARROW_CELL}
      tabIndex={tabIndex}
      onClick={onClick}>
-    <span style={{ ...S.ARROW, ...arrowStyle}}/>
+    <span style={{...S_ARROW, ...arrowStyle}}/>
   </button>
 );
-
 
 export default ArrowCell

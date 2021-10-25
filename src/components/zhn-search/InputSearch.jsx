@@ -9,33 +9,29 @@ import reducer from './flux/reducer'
 import crAction from './flux/crAction'
 import crInputChangeDf from './flux/crInputChange'
 
-const CL = {
-  INPUT_HR: 'zhn-search__input__hr'
+const CL_INPUT_HR = 'zhn-search__input__hr'
+, S_ROOT = {
+  position: 'relative',
+  width: 250,
+  height: 36,
+  borderRadius: 14,
+  background: 'none 0px 0px repeat scroll rgb(225, 225, 203)'
+}
+, S_ROOT_OPTIONS = {
+  borderRadius: 0,
+  borderTopLeftRadius: 5,
+  borderTopRightRadius: 5
+}
+, S_INPUT = {
+  display: 'block',
+  width: '100%',
+  height: 30,
+  paddingLeft: 10,
+  marginLeft: 0,
+  borderRadius: 15,
+  boxShadow: 'none'
 };
 
-const S = {
-  ROOT: {
-    position: 'relative',
-    width: 250,
-    height: 36,
-    borderRadius: 14,
-    background: 'none 0px 0px repeat scroll rgb(225, 225, 203)'
-  },
-  ROOT_OPTIONS: {
-    borderRadius: 0,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
-  },
-  INPUT: {
-    display: 'block',
-    width: '100%',
-    height: 30,
-    paddingLeft: 10,
-    marginLeft: 0,
-    borderRadius: 15,
-    boxShadow: 'none'
-  }
-};
 
 const _isHideOptions = keyCode => keyCode === 38
  || keyCode === 46
@@ -88,12 +84,12 @@ const InputSearch = ({
 
   const onKeyDown = isSearch ? _onKeyDown : null
   , onInputChange = isSearch ? _onInputChange: null
-  , _rootStyle = isOptions
-    ? { ...S.ROOT, ...S.ROOT_OPTIONS }
-    : S.ROOT;
+  , _style = isOptions
+    ? {...S_ROOT, ...S_ROOT_OPTIONS}
+    : S_ROOT;
 
   return (
-    <div style={_rootStyle}
+    <div style={_style}
       tabIndex={"-1"}
       role="textbox"
       onKeyDown={onKeyDown}
@@ -101,12 +97,12 @@ const InputSearch = ({
       <InputText
         ref={refInput}
         key={inputKey}
-        style={S.INPUT}
+        style={S_INPUT}
         initValue={ticket}
         onChange={onInputChange}
         onEnter={_onEnter}
       />
-      <hr className={CL.INPUT_HR} />
+      <hr className={CL_INPUT_HR} />
       { isSearch && <Fragment>
           <ToggleButton
             isLoading={isLoading}
