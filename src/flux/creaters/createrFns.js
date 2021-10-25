@@ -1,12 +1,17 @@
 
-import ut from '../../utils/ut'
+import ut from '../../utils/ut';
 
-const { getC, getV } = ut
+const { getC, getV } = ut;
 
 const _isArr = Array.isArray;
 
+const _join = arr => arr
+ .filter(Boolean)
+ .join(': ');
+
 const _crC = (title, subtitle) => ({
-  title, subtitle
+  title: title || subtitle,
+  subtitle: title ? subtitle : void 0
 });
 
 const _crItemCaption = (items, titles) => {
@@ -17,6 +22,9 @@ const _crItemCaption = (items, titles) => {
     .map(titleIndex => getC(items[titleIndex]))
     .join(': ');
 };
+
+const _crCaptionItems = items => (items || [])
+  .map(item => getC(item));
 
 const createrFns = {
   getC,
@@ -36,27 +44,33 @@ const createrFns = {
 
   crCaption: (items, titles) => {
     const itemCaption = _crItemCaption(items, titles)
-    , oneC = getC(items[0])
-    , twoC = getC(items[1])
-    , threeC = getC(items[2])
-    , fourC = getC(items[3]);
+    , _items = items.filter(getC)
+    , [item1, item2, item3, item4, ...restItems] = _items
+    , oneC = getC(item1)
+    , twoC = getC(item2)
+    , threeC = getC(item3)
+    , fourC = getC(item4);
 
-    let _caption = _crC(oneC);
+    let _title = oneC, _subtitle;
     if (fourC) {
-      _caption = _crC(`${oneC}: ${twoC}`, `${threeC}: ${fourC}`)
+      _title = _join([oneC, twoC])
+      _subtitle = _join([threeC, fourC, ..._crCaptionItems(restItems)])
     } else if (threeC) {
-      _caption = _crC(oneC, `${twoC}: ${threeC}`)
+      _subtitle = _join([twoC, threeC])
     } else if (twoC) {
-      _caption = _crC(oneC, twoC )
+      _subtitle = twoC
     }
+
     return {
       itemCaption, threeC,
-      ..._caption
+      ..._crC(_title, _subtitle)
     };
   },
 
   crAlertConf: (alertItemId, alertGeo, alertMetric) => ({
-    alertItemId, alertGeo, alertMetric
+    alertItemId,
+    alertGeo,
+    alertMetric
   })
 };
 

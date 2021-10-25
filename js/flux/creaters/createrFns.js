@@ -3,77 +3,74 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _ut = _interopRequireDefault(require("../../utils/ut"));
 
-var getC = _ut["default"].getC,
-    getV = _ut["default"].getV;
-var _isArr = Array.isArray;
+const {
+  getC,
+  getV
+} = _ut.default;
+const _isArr = Array.isArray;
 
-var _crC = function _crC(title, subtitle) {
-  return {
-    title: title,
-    subtitle: subtitle
-  };
-};
+const _join = arr => arr.filter(Boolean).join(': ');
 
-var _crItemCaption = function _crItemCaption(items, titles) {
+const _crC = (title, subtitle) => ({
+  title: title || subtitle,
+  subtitle: title ? subtitle : void 0
+});
+
+const _crItemCaption = (items, titles) => {
   if (!_isArr(titles) || titles.length === 0) {
     titles = [0];
   }
 
-  return titles.map(function (titleIndex) {
-    return getC(items[titleIndex]);
-  }).join(': ');
+  return titles.map(titleIndex => getC(items[titleIndex])).join(': ');
 };
 
-var createrFns = {
-  getC: getC,
-  getV: getV,
-  crItemKey: function crItemKey(items) {
-    var _prefix = items.filter(Boolean).map(function (item) {
-      return getV(item) || getC(item) || item;
-    }).join('_');
+const _crCaptionItems = items => (items || []).map(item => getC(item));
 
-    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
+const createrFns = {
+  getC,
+  getV,
+  crItemKey: (items, ...args) => {
+    const _prefix = items.filter(Boolean).map(item => getV(item) || getC(item) || item).join('_');
 
-    return [_prefix].concat(args).filter(Boolean).join('_');
+    return [_prefix, ...args].filter(Boolean).join('_');
   },
-  crCaption: function crCaption(items, titles) {
-    var itemCaption = _crItemCaption(items, titles),
-        oneC = getC(items[0]),
-        twoC = getC(items[1]),
-        threeC = getC(items[2]),
-        fourC = getC(items[3]);
+  crCaption: (items, titles) => {
+    const itemCaption = _crItemCaption(items, titles),
+          _items = items.filter(getC),
+          [item1, item2, item3, item4, ...restItems] = _items,
+          oneC = getC(item1),
+          twoC = getC(item2),
+          threeC = getC(item3),
+          fourC = getC(item4);
 
-    var _caption = _crC(oneC);
+    let _title = oneC,
+        _subtitle;
 
     if (fourC) {
-      _caption = _crC(oneC + ": " + twoC, threeC + ": " + fourC);
+      _title = _join([oneC, twoC]);
+      _subtitle = _join([threeC, fourC, ..._crCaptionItems(restItems)]);
     } else if (threeC) {
-      _caption = _crC(oneC, twoC + ": " + threeC);
+      _subtitle = _join([twoC, threeC]);
     } else if (twoC) {
-      _caption = _crC(oneC, twoC);
+      _subtitle = twoC;
     }
 
-    return (0, _extends2["default"])({
-      itemCaption: itemCaption,
-      threeC: threeC
-    }, _caption);
-  },
-  crAlertConf: function crAlertConf(alertItemId, alertGeo, alertMetric) {
     return {
-      alertItemId: alertItemId,
-      alertGeo: alertGeo,
-      alertMetric: alertMetric
+      itemCaption,
+      threeC,
+      ..._crC(_title, _subtitle)
     };
-  }
+  },
+  crAlertConf: (alertItemId, alertGeo, alertMetric) => ({
+    alertItemId,
+    alertGeo,
+    alertMetric
+  })
 };
 var _default = createrFns;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=createrFns.js.map
