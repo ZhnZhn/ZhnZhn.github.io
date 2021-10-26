@@ -1,7 +1,11 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports.default = void 0;
+
+var _toPlural = _interopRequireDefault(require("../../utils/toPlural"));
 
 var _Type = require("../../constants/Type");
 
@@ -25,9 +29,7 @@ const V = {
   TM_2_C: 'TREE_MAP_2_CLUSTER'
 };
 const CATEGORY_TYPES = [V.M, V.C, V.C_C, V.B, V.B_C, V.B_L, V.D, V.TM, V.TM_C, V.TM_2, V.TM_2_C];
-const C = {
-  EMPTY: ''
-};
+const EMPTY = '';
 
 const _crItem = confArr => ({
   caption: confArr[0],
@@ -40,9 +42,12 @@ const _crItems = arr => arr.map(_crItem);
 
 const _isMonthly = mapFrequency => !mapFrequency || mapFrequency === 'M';
 
-const _crDF3 = mapFrequency => _crItems([['Default: Spline', V.S], ['Line', V.L], _isMonthly(mapFrequency) && ['Yearly by Months', V.A_Y], ['Area', V.A], ['Column', V.S_C], ['Bar: All Countries', V.B], ['Bar+Labels: All Countries', V.B_L], ['Column: All Countries', V.C], ['Dots: All Countries', V.D]].filter(Boolean));
+const _crDF3 = (oneCaption, mapFrequency) => _crItems([['Default: Spline', V.S], ['Line', V.L], _isMonthly(mapFrequency) && ['Yearly by Months', V.A_Y], ['Area', V.A], ['Column', V.S_C], ["Bar: By " + oneCaption, V.B], ["Bar+Labels: By " + oneCaption, V.B_L], ["Column: By " + oneCaption, V.C], ["Dots: By " + oneCaption, V.D]].filter(Boolean));
 
-const _crDF = (captions, mapFrequency) => _crDF3(mapFrequency).concat(_crItems([['Map: All Countries', V.M, void 0, _Type.CompItemType.EUROSTAT_MAP]]));
+const _crDF = (captions, mapFrequency) => {
+  const oneCaption = (0, _toPlural.default)(captions[0]) || 'Dim';
+  return _crDF3(oneCaption, mapFrequency).concat(_crItems([["Map: By " + oneCaption, V.M, void 0, _Type.CompItemType.EUROSTAT_MAP]]));
+};
 
 const _crT1 = () => [_crItem(['Default: Spline', V.S]), _crItem(['Line', V.L]), _crItem(['Area', V.A])];
 
@@ -81,12 +86,12 @@ const _r = {
 const _crCaptions = ({
   configs,
   selectProps,
-  oneCaption = C.EMPTY,
-  twoCaption = C.EMPTY
+  oneCaption = EMPTY,
+  twoCaption = EMPTY
 }) => {
   const _arr = configs || selectProps;
 
-  return _isArr(_arr) ? _arr.map(item => item.caption || C.EMPTY) : [oneCaption, twoCaption];
+  return _isArr(_arr) ? _arr.map(item => item.caption || EMPTY) : [oneCaption, twoCaption];
 };
 
 const ChartTypes = {

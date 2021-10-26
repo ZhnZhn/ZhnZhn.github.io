@@ -1,5 +1,6 @@
 
-import { CompItemType } from '../../constants/Type'
+import toPlural from '../../utils/toPlural';
+import { CompItemType } from '../../constants/Type';
 
 
 const _isArr = Array.isArray;
@@ -31,9 +32,7 @@ const CATEGORY_TYPES = [
   V.TM, V.TM_C, V.TM_2, V.TM_2_C
 ];
 
-const C = {
-  EMPTY: ''
-};
+const EMPTY = '';
 
 const _crItem = confArr => ({
   caption: confArr[0],
@@ -46,22 +45,25 @@ const _crItems = arr => arr.map(_crItem);
 const _isMonthly = mapFrequency => !mapFrequency
   || mapFrequency === 'M';
 
-const _crDF3 = (mapFrequency) => _crItems([
+const _crDF3 = (oneCaption, mapFrequency) => _crItems([
   ['Default: Spline', V.S ],
   ['Line', V.L],
   _isMonthly(mapFrequency) && ['Yearly by Months', V.A_Y ],
   ['Area', V.A ],
   ['Column', V.S_C ],
-  ['Bar: All Countries', V.B ],
-  ['Bar+Labels: All Countries', V.B_L ],
-  ['Column: All Countries', V.C ],
-  ['Dots: All Countries', V.D ]
+  [`Bar: By ${oneCaption}`, V.B ],
+  [`Bar+Labels: By ${oneCaption}`, V.B_L ],
+  [`Column: By ${oneCaption}`, V.C ],
+  [`Dots: By ${oneCaption}`, V.D ]
 ].filter(Boolean));
 
-const _crDF = (captions, mapFrequency) => _crDF3(mapFrequency)
- .concat(_crItems([
-   ['Map: All Countries' , V.M, void 0, CompItemType.EUROSTAT_MAP ]
- ]));
+const _crDF = (captions, mapFrequency) => {
+  const oneCaption = toPlural(captions[0]) || 'Dim';
+  return _crDF3(oneCaption, mapFrequency)
+    .concat(_crItems([
+       [`Map: By ${oneCaption}` , V.M, void 0, CompItemType.EUROSTAT_MAP ]
+    ]));
+};
 
 const _crT1 = () => ([
   _crItem(['Default: Spline', V.S ]),
@@ -138,12 +140,12 @@ const _r = {
 const _crCaptions = ({
   configs,
   selectProps,
-  oneCaption=C.EMPTY,
-  twoCaption=C.EMPTY
+  oneCaption=EMPTY,
+  twoCaption=EMPTY
 }) => {
   const _arr = configs || selectProps;
   return _isArr(_arr)
-    ? _arr.map(item => item.caption || C.EMPTY)
+    ? _arr.map(item => item.caption || EMPTY)
     : [ oneCaption, twoCaption ];
 };
 
