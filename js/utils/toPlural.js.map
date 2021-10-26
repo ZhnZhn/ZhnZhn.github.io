@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/toPlural.js"
+ ],
+ "file": "../../src/utils/toPlural.js",
+ "names": [
+  "toPlural",
+  "str",
+  "_lastIndex",
+  "length",
+  "slice"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,QAAQ,GAAGC,GAAG,IAAI;AACtB,MAAI,CAACA,GAAL,EAAU,OAAOA,GAAP;;AACV,QAAMC,UAAU,GAAGD,GAAG,CAACE,MAAJ,GAAa,CAAhC;;AACA,SAAOF,GAAG,CAACC,UAAD,CAAH,KAAoB,GAApB,GACHD,GAAG,CAACG,KAAJ,CAAU,CAAV,EAAaF,UAAb,IAA2B,KADxB,GAEHD,GAAG,GAAG,GAFV;AAGD,CAND;;eAQeD,Q"
+}
