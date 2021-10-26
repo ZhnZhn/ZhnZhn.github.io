@@ -8,9 +8,10 @@ const TABLE_ID = 'table';
 const _assign = Object.assign;
 
 const _findItemTable = (items) => {
-  let tableItem, tableIndex;
+  let tableItem, tableIndex, _item;
   for (let i=0; i<items.length;i++){
-    if (items?.[i].id === TABLE_ID) {
+    _item = items[i]
+    if (_item && _item.id === TABLE_ID) {
       tableItem = items[i];
       tableIndex = i;
       break;

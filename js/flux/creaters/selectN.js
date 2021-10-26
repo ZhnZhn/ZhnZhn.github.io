@@ -3,24 +3,26 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _createrFns = _interopRequireDefault(require("./createrFns"));
 
-var crCaption = _createrFns["default"].crCaption,
-    crItemKey = _createrFns["default"].crItemKey,
-    crAlertConf = _createrFns["default"].crAlertConf;
-var TYPE = 'selectN';
-var TABLE_ID = 'table';
-var _assign = Object.assign;
+const {
+  crCaption,
+  crItemKey,
+  crAlertConf
+} = _createrFns.default;
+const TYPE = 'selectN';
+const TABLE_ID = 'table';
+const _assign = Object.assign;
 
-var _findItemTable = function _findItemTable(items) {
-  var tableItem, tableIndex;
+const _findItemTable = items => {
+  let tableItem, tableIndex, _item;
 
-  for (var i = 0; i < items.length; i++) {
-    if ((items == null ? void 0 : items[i].id) === TABLE_ID) {
+  for (let i = 0; i < items.length; i++) {
+    _item = items[i];
+
+    if (_item && _item.id === TABLE_ID) {
       tableItem = items[i];
       tableIndex = i;
       break;
@@ -28,25 +30,28 @@ var _findItemTable = function _findItemTable(items) {
   }
 
   return {
-    tableItem: tableItem,
-    tableIndex: tableIndex
+    tableItem,
+    tableIndex
   };
 };
 
-var _modifyIfItemTable = function _modifyIfItemTable(_dfProps, items) {
-  var _findItemTable2 = _findItemTable(items),
-      tableItem = _findItemTable2.tableItem,
-      tableIndex = _findItemTable2.tableIndex;
+const _modifyIfItemTable = (_dfProps, items) => {
+  const {
+    tableItem,
+    tableIndex
+  } = _findItemTable(items);
 
   if (tableItem) {
-    var dfTable = tableItem.v,
-        dfTail = tableItem.dfTail,
-        mapFrequency = tableItem.mapFrequency;
+    const {
+      v: dfTable,
+      dfTail,
+      mapFrequency
+    } = tableItem;
 
     if (dfTable) {
       _assign(_dfProps, {
-        dfTable: dfTable,
-        dfTail: dfTail
+        dfTable,
+        dfTail
       });
 
       if (mapFrequency) {
@@ -58,64 +63,60 @@ var _modifyIfItemTable = function _modifyIfItemTable(_dfProps, items) {
   }
 };
 
-var createLoadOptions = function createLoadOptions(props, options) {
-  if (props === void 0) {
-    props = {};
-  }
-
-  if (options === void 0) {
-    options = {};
-  }
-
-  var _props = props,
-      loadId = _props.loadId,
-      linkFn = _props.linkFn,
-      dataSource = _props.dataSource,
-      _props$dfProps = _props.dfProps,
-      dfProps = _props$dfProps === void 0 ? {} : _props$dfProps,
-      _options = options,
-      _options$items = _options.items,
-      items = _options$items === void 0 ? [] : _options$items,
-      titles = _options.titles,
-      dialogOptions = _options.dialogOptions,
-      _options$chartType = _options.chartType,
-      chartType = _options$chartType === void 0 ? {} : _options$chartType,
-      seriaColor = _options.seriaColor,
-      seriaWidth = _options.seriaWidth,
-      fromDate = _options.fromDate,
-      date = _options.date,
-      _crCaption = crCaption(items, titles),
-      itemCaption = _crCaption.itemCaption,
-      threeC = _crCaption.threeC,
-      title = _crCaption.title,
-      subtitle = _crCaption.subtitle,
-      seriaType = chartType.value,
-      compType = chartType.compType,
-      _itemKey = crItemKey(items, seriaType, date, fromDate),
-      _dfProps = (0, _extends2["default"])({}, dfProps);
+const createLoadOptions = (props = {}, options = {}) => {
+  const {
+    loadId,
+    linkFn,
+    dataSource,
+    dfProps = {}
+  } = props,
+        {
+    items = [],
+    titles,
+    dialogOptions,
+    chartType = {},
+    seriaColor,
+    seriaWidth,
+    fromDate,
+    date
+  } = options,
+        {
+    itemCaption,
+    threeC,
+    title,
+    subtitle
+  } = crCaption(items, titles),
+        {
+    value: seriaType,
+    compType
+  } = chartType,
+        _itemKey = crItemKey(items, seriaType, date, fromDate),
+        _dfProps = { ...dfProps
+  };
 
   _modifyIfItemTable(_dfProps, items);
 
-  return (0, _extends2["default"])({}, _dfProps, dialogOptions, {
+  return { ..._dfProps,
+    ...dialogOptions,
     _type: TYPE,
     _itemKey: _itemKey,
-    itemCaption: itemCaption,
+    itemCaption,
     zhCompType: compType,
-    fromDate: fromDate,
+    fromDate,
     time: date,
-    seriaType: seriaType,
-    seriaColor: seriaColor,
-    seriaWidth: seriaWidth,
-    items: items,
-    loadId: loadId,
-    linkFn: linkFn,
-    title: title,
-    subtitle: subtitle
-  }, crAlertConf(itemCaption + ": " + threeC, itemCaption, threeC), {
-    dataSource: dataSource
-  });
+    seriaType,
+    seriaColor,
+    seriaWidth,
+    items,
+    loadId,
+    linkFn,
+    title,
+    subtitle,
+    ...crAlertConf(itemCaption + ": " + threeC, itemCaption, threeC),
+    dataSource
+  };
 };
 
 var _default = createLoadOptions;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=selectN.js.map
