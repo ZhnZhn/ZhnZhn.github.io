@@ -114,6 +114,9 @@ const _setHeightIfBarTo = (config, seriaType, categories) => {
   }
 };
 
+const _getTableId = ({ dfId, dfTable }) =>
+  dfId || dfTable;
+
 const EuroStatFn = {
    joinBy,
    findMinY,
@@ -256,20 +259,17 @@ const EuroStatFn = {
     }
   },
 
-  crItemCaption: ({ title }) => joinBy(": ", "EU", title),
+  crItemCaption: ({ title='EU' }) => title,
 
-  crDataSource: ({ dfTable, dataSource }) => dfTable
-    ? `${dataSource} (${dfTable})`
-    : dataSource || "Eurostat",
+  crDataSource: dfProps =>
+    `Eurostat (${_getTableId(dfProps) || ''})`,
 
-  crLinkConf: ({ dfTable }) => {
-    return {
-      linkFn: 'ES',
-      item: {
-        dataset: dfTable
-      }
-    };
-  },
+  crLinkConf: dfProps => ({
+    linkFn: 'ES',
+    item: {
+      dataset: _getTableId(dfProps)
+    }
+  }),
 
   crZhConfig(option) {
     const {

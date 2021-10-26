@@ -27,12 +27,16 @@ const _loadDims = ({
   dims,
   proxy,
   baseMeta,
+  loadId,
+  mapFrequency,
   dfProps
 }, _setConfigs) => {
   (0, _loadConfigs.default)({
     dims,
     proxy,
     baseMeta,
+    loadId,
+    mapFrequency,
     ...dfProps
   }).then(_setConfigs).catch(err => {
     _setConfigs({
@@ -41,7 +45,7 @@ const _loadDims = ({
   });
 };
 
-const _crLoadState = () => ({
+const _crLoadingState = () => ({
   isLoading: true,
   isLoadFailed: false
 });
@@ -80,14 +84,16 @@ const _crDimOptions = configs => configs.map(config => ({
 const useLoadDims = props => {
   const {
     chartsType,
-    mapFrequency = MAP_FREQUENCY_DF,
-    mapDateDf
-  } = props;
-
-  const [{
+    mapFrequency,
+    mapDateDf,
+    dfProps = {}
+  } = props,
+        _mapFrequency = dfProps.mapFrequency || mapFrequency || MAP_FREQUENCY_DF,
+        _mapDateDf = dfProps.mapDateDf || mapDateDf,
+        [{
     isLoading,
     isLoadFailed
-  }, setLoad] = (0, _react.useState)(_crLoadState),
+  }, setLoad] = (0, _react.useState)(_crLoadingState),
         [validationMessages, setValidationMessages] = (0, _react.useState)([]),
         [state, setState] = (0, _react.useState)(() => ({
     configs: [],
@@ -103,8 +109,8 @@ const useLoadDims = props => {
     errMsg
   }) => {
     if (configs) {
-      const _mF = mF || mapFrequency,
-            [dateOptions, dateDf] = _crDateOptions(configs, _mF, mapDateDf);
+      const _mF = mF || _mapFrequency,
+            [dateOptions, dateDf] = _crDateOptions(configs, _mF, _mapDateDf);
 
       setLoad({
         isLoading: false,
@@ -130,7 +136,7 @@ const useLoadDims = props => {
       });
       setValidationMessages([errMsg]);
     }
-  }, [chartsType, mapFrequency, mapDateDf]),
+  }, [chartsType, _mapFrequency, _mapDateDf]),
         _isLoadDims = _useIsLoadDims(props, isLoadFailed);
   /*eslint-disable react-hooks/exhaustive-deps */
 
@@ -145,7 +151,7 @@ const useLoadDims = props => {
     if (_isLoadDims) {
       _loadDims(props, _setConfigs);
 
-      setLoad(_crLoadState);
+      setLoad(_crLoadingState);
     }
   }, [_isLoadDims, props, _setConfigs]);
   return [state, isLoading, isLoadFailed, validationMessages, setValidationMessages, setState];

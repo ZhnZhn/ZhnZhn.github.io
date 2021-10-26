@@ -35,6 +35,8 @@ var _useLoadDims = _interopRequireDefault(require("./useLoadDims"));
 
 var _useCommandButtons = _interopRequireDefault(require("./useCommandButtons"));
 
+var _EsConfig = require("./EsConfig");
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
@@ -97,7 +99,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
     onFront,
     loadFn,
     onLoad,
-    dims,
+    //dims,
     //chartsType,
     //mapFrequency:initialMf,
     //mapDateDf,
@@ -106,7 +108,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
     onClose
   } = props;
 
-  const _isDim = !props.dims,
+  const _isDim = !props.dims && !props.notDim,
         _refItems = (0, _react.useRef)([]),
         _fSelect = (0, _react.useCallback)(index => item => {
     _refItems.current[index] = item ? { ...item
@@ -161,8 +163,10 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
           _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, _refItems.current); //For dims case and not category case
 
 
-    if (dims || !_isCategory) {
-      _addErrMsgTo(caption => !(_isCategory && caption === dim));
+    if (!_isDim || !_isCategory) {
+      const _filterCaption = props.notDim ? _EsConfig.GEO_ENTITY : dim;
+
+      _addErrMsgTo(caption => !(_isCategory && caption === _filterCaption));
 
       return msg;
     } //For category case
@@ -180,7 +184,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
     }
 
     return msg;
-  }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected]) //_refDim, dims
+  }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected]) //_refDim, _isDim
   ,
         _hSelectChartType = (0, _react.useCallback)(chartType => {
     let _isShowDate = false;

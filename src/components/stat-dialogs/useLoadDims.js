@@ -14,16 +14,18 @@ const _loadDims = ({
   dims,
   proxy,
   baseMeta,
+  loadId,
+  mapFrequency,
   dfProps,
 }, _setConfigs) => {
-  loadConfigs({ dims, proxy, baseMeta, ...dfProps })
+  loadConfigs({ dims, proxy, baseMeta, loadId, mapFrequency, ...dfProps })
    .then(_setConfigs)
    .catch(err => {
      _setConfigs({ errMsg: err.message })
    })
  };
 
-const _crLoadState = () => ({
+const _crLoadingState = () => ({
   isLoading: true,
   isLoadFailed: false
 });
@@ -62,12 +64,16 @@ const _crDimOptions = configs => configs
 const useLoadDims = (props) => {
   const {
     chartsType,
-    mapFrequency=MAP_FREQUENCY_DF,
-    mapDateDf
-  } = props;
-  const  [
-    {isLoading, isLoadFailed}, setLoad
-  ] = useState(_crLoadState)
+    mapFrequency,
+    mapDateDf,
+    dfProps={}
+  } = props
+  , _mapFrequency = dfProps.mapFrequency
+     || mapFrequency
+     || MAP_FREQUENCY_DF
+  , _mapDateDf = dfProps.mapDateDf
+     || mapDateDf
+  , [{isLoading, isLoadFailed}, setLoad] = useState(_crLoadingState)
   , [validationMessages, setValidationMessages] = useState([])
   , [state, setState] = useState(()=>({
      configs: [],
@@ -83,11 +89,11 @@ const useLoadDims = (props) => {
       errMsg
     }) => {
       if (configs) {
-        const _mF = mF || mapFrequency
+        const _mF = mF || _mapFrequency
         , [
           dateOptions,
           dateDf
-        ] = _crDateOptions(configs, _mF, mapDateDf);
+        ] = _crDateOptions(configs, _mF, _mapDateDf);
         setLoad({
           isLoading: false,
           isLoadFailed: false
@@ -109,7 +115,7 @@ const useLoadDims = (props) => {
         })
         setValidationMessages([errMsg])
      }
-   }, [chartsType, mapFrequency, mapDateDf])
+   }, [chartsType, _mapFrequency, _mapDateDf])
    , _isLoadDims = _useIsLoadDims(props, isLoadFailed);
 
     /*eslint-disable react-hooks/exhaustive-deps */
@@ -121,7 +127,7 @@ const useLoadDims = (props) => {
     useEffect(()=>{
       if (_isLoadDims) {
         _loadDims(props, _setConfigs)
-        setLoad(_crLoadState)
+        setLoad(_crLoadingState)
       }
     }, [_isLoadDims, props, _setConfigs])
 

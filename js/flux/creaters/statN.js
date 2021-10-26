@@ -17,10 +17,14 @@ const _toIds = ({
 }, items) => {
   const _arr = [dfId];
   items.forEach(({
-    slice
+    slice,
+    value
   } = {}) => {
     if (slice) {
       _arr.push(slice[Object.keys(slice)[0]]);
+    } else if (value) {
+      //Eurostat case
+      _arr.push(value);
     }
   });
   return _arr;

@@ -3,9 +3,13 @@
 exports.__esModule = true;
 exports.default = void 0;
 
+var _EsConfig = require("./EsConfig");
+
 var _dimConfigFn = require("./dimConfigFn");
 
 const _keys = Object.keys;
+
+const _crC = label => (label || '').split('_').map(_dimConfigFn.toFirstUpperCase).join(' ');
 
 const _crEsOptions = (category, id) => {
   const {
@@ -19,32 +23,37 @@ const _crEsOptions = (category, id) => {
 };
 
 const crEsDimConfig = dimension => {
-  const dims = [null];
+  const dims = [null],
+        adjDims = [];
 
   _keys(dimension).forEach(k => {
-    if (k !== 'time') {
+    if (k !== _EsConfig.TIME_ID) {
       const _dim = dimension[k],
             {
         label,
         category
       } = _dim || {},
             dim = {
-        c: (0, _dimConfigFn.toFirstUpperCase)(label),
+        c: _crC(label),
         v: k,
         options: _crEsOptions(category, k)
       };
 
-      if (k !== 'geo') {
-        dims.push(dim);
-      } else {
+      if (k === _EsConfig.ADJ_ID) {
+        dim.c = _EsConfig.ADJ;
+        adjDims.push(dim);
+      } else if (k === _EsConfig.GEO_ID) {
+        dim.c = _EsConfig.GEO_ENTITY;
         dims[0] = dim;
+      } else {
+        dims.push(dim);
       }
     }
   });
 
   return {
-    dims: dims.filter(Boolean),
-    timeId: 'time'
+    dims: dims.filter(Boolean).concat(adjDims),
+    timeId: _EsConfig.TIME_ID
   };
 };
 

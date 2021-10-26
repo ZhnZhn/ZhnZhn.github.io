@@ -1,1 +1,43 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/EuroStatAdapter.js"],"names":["DF_TYPE","_rToConfig","AREA","toArea","createConfig","SPLINE","COLUMN","AREA_YEARLY","toAreaYearly","MAP","toMap","COLUMN_SET","toCategory","BAR_SET","BAR_WITH_LABELS","DOT_SET","_rToSeria","createSeria","_checkSeriaType","router","option","dfType","seriaType","EuroStatAdapter","toConfig","json","zhCompType","fnToConfig","config","toSeries","chart","fnToSeria","seria","undefined"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AACA;;AAEA,IAAMA,OAAO,GAAG,QAAhB;AACA,IAAMC,UAAU,GAAG;AACjBC,EAAAA,IAAI,EAAEC,mBAAOC,YADI;AAEjBC,EAAAA,MAAM,EAAEF,mBAAOC,YAFE;AAGjBE,EAAAA,MAAM,EAAEH,mBAAOC,YAHE;AAIjBG,EAAAA,WAAW,EAAEC,yBAAaJ,YAJT;AAKjBK,EAAAA,GAAG,EAAEC,kBAAMN,YALM;AAMjBO,EAAAA,UAAU,EAAEC,uBAAWR,YANN;AAOjBS,EAAAA,OAAO,EAAED,uBAAWR,YAPH;AAQjBU,EAAAA,eAAe,EAAEF,uBAAWR,YARX;AASjBW,EAAAA,OAAO,EAAEH,uBAAWR;AATH,CAAnB;AAYA,IAAMY,SAAS,GAAG;AAChBd,EAAAA,IAAI,EAAEC,mBAAOc,WADG;AAEhBZ,EAAAA,MAAM,EAAEF,mBAAOc,WAFC;AAGhBX,EAAAA,MAAM,EAAEH,mBAAOc,WAHC;AAIhBN,EAAAA,UAAU,EAAEC,uBAAWK,WAJP;AAKhBJ,EAAAA,OAAO,EAAED,uBAAWK,WALJ;AAMhBH,EAAAA,eAAe,EAAEF,uBAAWK,WANZ;AAOhBF,EAAAA,OAAO,EAAEH,uBAAWK;AAPJ,CAAlB;;AAUA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB,CAACC,MAAD,EAASC,MAAT,EAAiBC,MAAjB,EAAoC;AAAA,MAAnBA,MAAmB;AAAnBA,IAAAA,MAAmB,GAAZrB,OAAY;AAAA;;AAC1D,MAAI,CAACoB,MAAM,CAACE,SAAR,IAAqB,CAACH,MAAM,CAACC,MAAM,CAACE,SAAR,CAAhC,EAAoD;AAClDF,IAAAA,MAAM,CAACE,SAAP,GAAmBD,MAAnB;AACD;AACF,CAJD;;AAMA,IAAME,eAAe,GAAG;AACtBC,EAAAA,QADsB,oBACbC,IADa,EACPL,MADO,EACA;AACpBF,IAAAA,eAAe,CAACjB,UAAD,EAAamB,MAAb,CAAf;;AADoB,QAEZE,SAFY,GAEcF,MAFd,CAEZE,SAFY;AAAA,QAEDI,UAFC,GAEcN,MAFd,CAEDM,UAFC;AAAA,QAGbC,UAHa,GAGA1B,UAAU,CAACqB,SAAD,CAHV;AAAA,QAIbM,MAJa,GAIJD,UAAU,GACfA,UAAU,CAACF,IAAD,EAAOL,MAAP,CADK,GAEf,EANS;AAQpBQ,IAAAA,MAAM,CAACF,UAAP,GAAoBA,UAApB;AACA,WAAO;AAAEE,MAAAA,MAAM,EAANA;AAAF,KAAP;AACF,GAXsB;AAatBC,EAAAA,QAbsB,oBAabJ,IAba,EAaPL,MAbO,EAaCU,KAbD,EAaO;AAC3BZ,IAAAA,eAAe,CAACjB,UAAD,EAAamB,MAAb,CAAf;;AACM,QAAEE,SAAF,GAAgBF,MAAhB,CAAEE,SAAF;AAAA,QACCS,SADD,GACaf,SAAS,CAACM,SAAD,CADtB;AAAA,QAECU,KAFD,GAESD,SAAS,GACbA,SAAS,CAACN,IAAD,EAAOL,MAAP,EAAeU,KAAf,CADI,GAEbG,SAJL;AAKN,WAAOD,KAAP;AACD;AArBqB,CAAxB;eAwBeT,e","sourcesContent":["import toArea from './toArea';\r\nimport toAreaYearly from './toAreaYearly'\r\nimport toCategory from './toCategory'\r\nimport toMap from './toMap';\r\n\r\nconst DF_TYPE = 'SPLINE';\r\nconst _rToConfig = {\r\n  AREA: toArea.createConfig,\r\n  SPLINE: toArea.createConfig,\r\n  COLUMN: toArea.createConfig,\r\n  AREA_YEARLY: toAreaYearly.createConfig,\r\n  MAP: toMap.createConfig,\r\n  COLUMN_SET: toCategory.createConfig,\r\n  BAR_SET: toCategory.createConfig,\r\n  BAR_WITH_LABELS: toCategory.createConfig,\r\n  DOT_SET: toCategory.createConfig\r\n};\r\n\r\nconst _rToSeria = {\r\n  AREA: toArea.createSeria,\r\n  SPLINE: toArea.createSeria,\r\n  COLUMN: toArea.createSeria,\r\n  COLUMN_SET: toCategory.createSeria,\r\n  BAR_SET: toCategory.createSeria,\r\n  BAR_WITH_LABELS: toCategory.createSeria,\r\n  DOT_SET: toCategory.createSeria\r\n};\r\n\r\nconst _checkSeriaType = (router, option, dfType=DF_TYPE) => {\r\n  if (!option.seriaType || !router[option.seriaType]) {\r\n    option.seriaType = dfType\r\n  }\r\n};\r\n\r\nconst EuroStatAdapter = {\r\n  toConfig(json, option){\r\n    _checkSeriaType(_rToConfig, option)\r\n    const { seriaType, zhCompType } = option\r\n         , fnToConfig = _rToConfig[seriaType]\r\n         , config = fnToConfig\r\n             ? fnToConfig(json, option)\r\n             : {} ;\r\n\r\n    config.zhCompType = zhCompType\r\n    return { config };\r\n },\r\n\r\n  toSeries(json, option, chart){\r\n    _checkSeriaType(_rToConfig, option)\r\n    const { seriaType } = option\r\n         , fnToSeria = _rToSeria[seriaType]\r\n         , seria = fnToSeria\r\n             ? fnToSeria(json, option, chart)\r\n             : undefined ;\r\n    return seria;\r\n  }\r\n}\r\n\r\nexport default EuroStatAdapter\r\n"],"file":"EuroStatAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/EuroStatAdapter.js"
+ ],
+ "file": "../../../src/adapters/eurostat/EuroStatAdapter.js",
+ "names": [
+  "DF_TYPE",
+  "_rToConfig",
+  "AREA",
+  "toArea",
+  "createConfig",
+  "SPLINE",
+  "COLUMN",
+  "AREA_YEARLY",
+  "toAreaYearly",
+  "MAP",
+  "toMap",
+  "COLUMN_SET",
+  "toCategory",
+  "BAR_SET",
+  "BAR_WITH_LABELS",
+  "DOT_SET",
+  "_rToSeria",
+  "createSeria",
+  "_checkSeriaType",
+  "router",
+  "option",
+  "dfType",
+  "seriaType",
+  "EuroStatAdapter",
+  "toConfig",
+  "json",
+  "zhCompType",
+  "fnToConfig",
+  "config",
+  "toSeries",
+  "chart",
+  "fnToSeria",
+  "seria"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AAEA,MAAMA,OAAO,GAAG,QAAhB;AACA,MAAMC,UAAU,GAAG;AACjBC,EAAAA,IAAI,EAAEC,gBAAOC,YADI;AAEjBC,EAAAA,MAAM,EAAEF,gBAAOC,YAFE;AAGjBE,EAAAA,MAAM,EAAEH,gBAAOC,YAHE;AAIjBG,EAAAA,WAAW,EAAEC,sBAAaJ,YAJT;AAKjBK,EAAAA,GAAG,EAAEC,eAAMN,YALM;AAMjBO,EAAAA,UAAU,EAAEC,oBAAWR,YANN;AAOjBS,EAAAA,OAAO,EAAED,oBAAWR,YAPH;AAQjBU,EAAAA,eAAe,EAAEF,oBAAWR,YARX;AASjBW,EAAAA,OAAO,EAAEH,oBAAWR;AATH,CAAnB;AAYA,MAAMY,SAAS,GAAG;AAChBd,EAAAA,IAAI,EAAEC,gBAAOc,WADG;AAEhBZ,EAAAA,MAAM,EAAEF,gBAAOc,WAFC;AAGhBX,EAAAA,MAAM,EAAEH,gBAAOc,WAHC;AAIhBN,EAAAA,UAAU,EAAEC,oBAAWK,WAJP;AAKhBJ,EAAAA,OAAO,EAAED,oBAAWK,WALJ;AAMhBH,EAAAA,eAAe,EAAEF,oBAAWK,WANZ;AAOhBF,EAAAA,OAAO,EAAEH,oBAAWK;AAPJ,CAAlB;;AAUA,MAAMC,eAAe,GAAG,CAACC,MAAD,EAASC,MAAT,EAAiBC,MAAM,GAACrB,OAAxB,KAAoC;AAC1D,MAAI,CAACoB,MAAM,CAACE,SAAR,IAAqB,CAACH,MAAM,CAACC,MAAM,CAACE,SAAR,CAAhC,EAAoD;AAClDF,IAAAA,MAAM,CAACE,SAAP,GAAmBD,MAAnB;AACD;AACF,CAJD;;AAMA,MAAME,eAAe,GAAG;AACtBC,EAAAA,QAAQ,CAACC,IAAD,EAAOL,MAAP,EAAc;AACpBF,IAAAA,eAAe,CAACjB,UAAD,EAAamB,MAAb,CAAf;;AACA,UAAM;AAAEE,MAAAA,SAAF;AAAaI,MAAAA;AAAb,QAA4BN,MAAlC;AAAA,UACEO,UAAU,GAAG1B,UAAU,CAACqB,SAAD,CADzB;AAAA,UAEEM,MAAM,GAAGD,UAAU,GAChBA,UAAU,CAACF,IAAD,EAAOL,MAAP,CADM,GAEhB,EAJL;AAMAQ,IAAAA,MAAM,CAACF,UAAP,GAAoBA,UAApB;AACA,WAAO;AAAEE,MAAAA;AAAF,KAAP;AACF,GAXsB;;AAatBC,EAAAA,QAAQ,CAACJ,IAAD,EAAOL,MAAP,EAAeU,KAAf,EAAqB;AAC3BZ,IAAAA,eAAe,CAACjB,UAAD,EAAamB,MAAb,CAAf;;AACA,UAAM;AAAEE,MAAAA;AAAF,QAAgBF,MAAtB;AAAA,UACEW,SAAS,GAAGf,SAAS,CAACM,SAAD,CADvB;AAAA,UAEEU,KAAK,GAAGD,SAAS,GACdA,SAAS,CAACN,IAAD,EAAOL,MAAP,EAAeU,KAAf,CADK,GAEd,KAAK,CAJV;AAKA,WAAOE,KAAP;AACD;;AArBqB,CAAxB;eAwBeT,e"
+}

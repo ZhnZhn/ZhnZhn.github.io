@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/EsConfig.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/EsConfig.js",
+ "names": [
+  "TIME_ID",
+  "GEO_ID",
+  "GEO_ENTITY",
+  "ADJ",
+  "ADJ_ID"
+ ],
+ "mappings": ";;;;AACO,MAAMA,OAAO,GAAG,MAAhB;;AACA,MAAMC,MAAM,GAAG,KAAf;;AACA,MAAMC,UAAU,GAAG,YAAnB;;AACA,MAAMC,GAAG,GAAG,QAAZ;;AACA,MAAMC,MAAM,GAAG,OAAf"
+}

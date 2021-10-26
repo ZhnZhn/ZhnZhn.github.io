@@ -3,10 +3,13 @@ import fns from './createrFns'
 const { crCaption, crItemKey } = fns;
 
 const _toIds = ({ dfId }, items) => {
-  const _arr = [dfId];
-  items.forEach(({ slice }={}) => {
+  const _arr = [dfId];  
+  items.forEach(({ slice, value }={}) => {
     if (slice) {
       _arr.push(slice[Object.keys(slice)[0]])
+    } else if (value) {
+      //Eurostat case
+      _arr.push(value)
     }
   })
   return _arr;

@@ -16,6 +16,8 @@ import useModalToggle from './useModalToggle';
 import useLoadDims from './useLoadDims';
 import useCommandButtons from './useCommandButtons';
 
+import { GEO_ENTITY } from './EsConfig'
+
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
 , MSG_DIMS_LOADING = "Dims is loading"
 
@@ -67,7 +69,7 @@ const DialogStatN = memo((props) => {
 
     loadFn, onLoad,
 
-    dims,
+    //dims,
     //chartsType,
     //mapFrequency:initialMf,
     //mapDateDf,
@@ -77,7 +79,7 @@ const DialogStatN = memo((props) => {
     onClickInfo,
     onClose
   } = props;
-  const _isDim = !props.dims
+  const _isDim = !props.dims && !props.notDim
   , _refItems = useRef([])
   , _fSelect = useCallback(index => (item) => {
       _refItems.current[index] = item
@@ -137,8 +139,11 @@ const DialogStatN = memo((props) => {
         , _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, _refItems.current);
 
         //For dims case and not category case
-        if (dims || !_isCategory) {
-          _addErrMsgTo(caption => !(_isCategory && caption === dim))
+        if (!_isDim || !_isCategory) {
+          const _filterCaption = props.notDim
+            ? GEO_ENTITY
+            : dim;
+          _addErrMsgTo(caption => !(_isCategory && caption === _filterCaption))
           return msg;
         }
         //For category case
@@ -152,7 +157,7 @@ const DialogStatN = memo((props) => {
         }
         return msg;
    }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
-   //_refDim, dims
+   //_refDim, _isDim
    , _hSelectChartType = useCallback(chartType => {
        let _isShowDate = false;
        if (isCategory(chartType)) {

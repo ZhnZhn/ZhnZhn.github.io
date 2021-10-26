@@ -3,7 +3,8 @@ import LoadGuard from '../../utils/LoadGuard';
 import loadDimsWithOptions from './loadDimsWithOptions';
 
 const MSG_STILL_LOADING = "Another dialog are still loading"
-, MSG_DIMS = 'Loaded dims without options';
+, MSG_DIMS = 'Loaded dims without options'
+, ES_BASE_META = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en";
 
 const _isDimsWithOptions = (dims) => {
   const _len = dims.length;
@@ -45,13 +46,20 @@ const _crConfigs = (dims, propDims) => {
 };
 
 const _crMetaTime = mapFrequency => {
-  if (mapFrequency === 'M') { return '2020M01'; }
-  return '2020';
+  if (mapFrequency === 'M') { return '2019M01'; }
+  if (mapFrequency === 'S') { return '2019S1'; }
+  return '2019';
 };
 
-const _crUrl = ({ proxy='', baseMeta, dfId, loadId, mapFrequency }) => {
+const _crUrl = ({
+  proxy='',
+  baseMeta,
+  dfId,
+  loadId,
+  mapFrequency
+}) => {
   if (loadId === "EU_STAT") {
-    return `${baseMeta}/${dfId}?time=${_crMetaTime(mapFrequency)}`;
+    return `${ES_BASE_META}/${dfId}?time=${_crMetaTime(mapFrequency)}`;
   }
   return `${proxy}${baseMeta}/${dfId}`;
 };

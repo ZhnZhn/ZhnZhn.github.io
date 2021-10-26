@@ -36,10 +36,10 @@ const EuroStatAdapter = {
   toConfig(json, option){
     _checkSeriaType(_rToConfig, option)
     const { seriaType, zhCompType } = option
-         , fnToConfig = _rToConfig[seriaType]
-         , config = fnToConfig
-             ? fnToConfig(json, option)
-             : {} ;
+    , fnToConfig = _rToConfig[seriaType]
+    , config = fnToConfig
+       ? fnToConfig(json, option)
+       : {} ;
 
     config.zhCompType = zhCompType
     return { config };
@@ -48,10 +48,10 @@ const EuroStatAdapter = {
   toSeries(json, option, chart){
     _checkSeriaType(_rToConfig, option)
     const { seriaType } = option
-         , fnToSeria = _rToSeria[seriaType]
-         , seria = fnToSeria
-             ? fnToSeria(json, option, chart)
-             : undefined ;
+    , fnToSeria = _rToSeria[seriaType]
+    , seria = fnToSeria
+       ? fnToSeria(json, option, chart)
+       : void 0;
     return seria;
   }
 }
