@@ -43,18 +43,15 @@ const _isFn = fn => typeof fn === 'function',
       _assign = Object.assign,
       _findIndexByX = _fnArr.default.findIndexByProp('x'),
       INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY,
-      INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY;
-
-const C = {
-  C1_SECOND_Y_AXIS: '#f45b5b',
-  C2_SECOND_Y_AXIS: '#f7a35c',
-  SERIA_LABEL_CHARS: 14,
-  SERIA_LABELS_IN_ROW: 3,
-  SERIA_LABEL_X_DELTA: 120,
-  SERIA_LABEL_Y_DELTA: 95,
-  SERIA_LABEL_WIDTH: 125,
-  SERIA_LABEL_HEIGHT: 20
-};
+      INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY,
+      C1_SECOND_Y_AXIS = '#f45b5b',
+      C2_SECOND_Y_AXIS = '#f7a35c',
+      SERIA_LABEL_CHARS = 14,
+      SERIA_LABELS_IN_ROW = 3,
+      SERIA_LABEL_X_DELTA = 120,
+      SERIA_LABEL_Y_DELTA = 95,
+      SERIA_LABEL_WIDTH = 125,
+      SERIA_LABEL_HEIGHT = 20;
 
 const _initOptionsZhSeries = chart => {
   const {
@@ -67,7 +64,7 @@ const _initOptionsZhSeries = chart => {
   return options;
 };
 
-const _crYAxisColor = chart => chart.yAxis.length === 2 ? C.C2_SECOND_Y_AXIS : C.C1_SECOND_Y_AXIS;
+const _crYAxisColor = chart => chart.yAxis.length === 2 ? C2_SECOND_Y_AXIS : C1_SECOND_Y_AXIS;
 
 const _addSeries = ({
   chart,
@@ -105,36 +102,30 @@ const _addSeries = ({
 
 const _calcXyForLabel = options => {
   const seriesCount = options.zhSeries.count,
-        row = Math.floor(seriesCount / C.SERIA_LABELS_IN_ROW),
-        x = C.SERIA_LABEL_X_DELTA + C.SERIA_LABEL_WIDTH * seriesCount - row * (C.SERIA_LABEL_WIDTH * C.SERIA_LABELS_IN_ROW),
-        y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT * row;
+        row = Math.floor(seriesCount / SERIA_LABELS_IN_ROW),
+        x = SERIA_LABEL_X_DELTA + SERIA_LABEL_WIDTH * seriesCount - row * (SERIA_LABEL_WIDTH * SERIA_LABELS_IN_ROW),
+        y = SERIA_LABEL_Y_DELTA + SERIA_LABEL_HEIGHT * row;
   return {
     x,
     y
   };
 };
 
-const _getLabelText = label => (label || '').length > C.SERIA_LABEL_CHARS ? label.substring(0, C.SERIA_LABEL_CHARS) : label;
+const _getLabelText = label => (label || '').length > SERIA_LABEL_CHARS ? label.substring(0, SERIA_LABEL_CHARS) : label;
 
-const _renderSeriesLabel = ({
-  chart,
-  options,
-  series,
-  label,
-  color
-}) => {
-  const labelText = _getLabelText(label),
-        {
-    x,
-    y
-  } = _calcXyForLabel(options);
-
-  return chart.renderer.text(labelText, x, y).css({
-    color: color || options.colors[series._colorIndex],
-    'font-size': '16px',
-    'font-weight': 800
-  }).add();
+const _getRecentSeriaColor = chart => {
+  const {
+    series
+  } = chart,
+        _len = (series || []).length;
+  return _len > 0 ? series[_len - 1].color : void 0;
 };
+
+const _renderSeriesLabel = (chart, labelText, x, y, color) => chart.renderer.text(labelText, x, y).css({
+  color,
+  'font-size': '16px',
+  'font-weight': 800
+}).add();
 
 const _getMinMaxFromSeries = (series, options) => {
   var _options$yAxis;
@@ -157,9 +148,8 @@ const _getMinMaxFromSeries = (series, options) => {
 const _updateYAxisMinMax = ({
   hasSecondYAxis,
   series,
-  options,
   chart
-}) => {
+}, options) => {
   var _chart$yAxis;
 
   const _yAxis = chart == null ? void 0 : (_chart$yAxis = chart.yAxis) == null ? void 0 : _chart$yAxis[0];
@@ -204,37 +194,23 @@ const ChartFn = {
   crMetricConfig: _crMetricConfig.default,
 
   addSeriaWithRenderLabel(props) {
+    // { chart, series, label, hasSecondYAxis } = props
     const {
-      chart,
-      series,
-      label,
-      color,
-      hasSecondYAxis
-    } = props,
-          options = _initOptionsZhSeries(chart),
-          _color = _addSeries({
-      chart,
-      series,
-      label,
-      hasSecondYAxis
-    }),
-          textEl = _renderSeriesLabel({
-      chart,
-      options,
-      series,
-      label,
-      color: color || _color
-    });
-
-    options.zhSeries.count += 1;
-    options.zhSeries.titleEls.push(textEl);
-
-    _updateYAxisMinMax({
-      hasSecondYAxis,
-      series,
-      options,
       chart
-    });
+    } = props,
+          chartOptions = _initOptionsZhSeries(chart),
+          _color = _addSeries(props),
+          labelText = _getLabelText(props.label),
+          {
+      x,
+      y
+    } = _calcXyForLabel(chartOptions),
+          textEl = _renderSeriesLabel(chart, labelText, x, y, props.color || _color || _getRecentSeriaColor(chart));
+
+    chartOptions.zhSeries.count += 1;
+    chartOptions.zhSeries.titleEls.push(textEl);
+
+    _updateYAxisMinMax(props, chartOptions);
   },
 
   zoomIndicatorCharts(event) {
