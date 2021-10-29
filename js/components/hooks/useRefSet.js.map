@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/stat-dialogs/useRefSet.js"
+  "../../../src/components/hooks/useRefSet.js"
  ],
- "file": "../../../src/components/stat-dialogs/useRefSet.js",
+ "file": "../../../src/components/hooks/useRefSet.js",
  "names": [
   "useRefSet",
   "initialValue",
