@@ -1,11 +1,14 @@
-import { Component } from 'react';
+import {
+  //Component,
+  forwardRef,
+  useRef, useCallback, useImperativeHandle
+} from 'react';
 
 import ScrollPane from '../zhn/ScrollPane';
 import SeriaRow from './SeriaRow';
 
 const CL_ELL = 'ellipsis'
-
-, S_ROOT_DIV = { paddingTop: 8 }
+//, S_ROOT_DIV = { paddingTop: 8 }
 , S_TITLE = {
   paddingBottom: 4,
   margin: '0 0 8px 16px',
@@ -42,17 +45,16 @@ const _getUserMinMax = fromChart => {
 };
 
 
-const _crYAxisOption = (toChart) => {
-  const options = [{
-    caption: 'withYAxis',
-    value: void 0
-  }];
-  toChart.yAxis.forEach((yAxis, index) => {
-    options.push ({
-      caption: `toYAxis${index+1}`,
-      value: index
-    })
-  })
+const _crOptionItem = (caption, value) => ({
+  caption,
+  value
+});
+
+const _crYAxisOption = toChart => {
+  const options = (toChart.yAxis || [])
+   .map((yAxis, index) =>
+     _crOptionItem(`toYAxis${index+1}`, index));
+  options.unshift(_crOptionItem('withYAxis'))
   return options;
 };
 
@@ -69,8 +71,11 @@ const PasteToTitle = ({ chartId }) => (
 );
 
 const PasteToSeriaList = ({
-  chartId, series, options,
-  onReg, onUnReg
+  chartId,
+  series,
+  options,
+  onReg,
+  onUnReg
 }) => (
   <div>
    {(series || [])
@@ -90,52 +95,53 @@ const PasteToSeriaList = ({
  </div>
 );
 
-class SeriesPane extends Component {
+const _getRefValue = ref => ref.current;
 
-   _refSeries = []
+const SeriesPane = forwardRef(({
+  style,
+  toChart,
+  fromChart
+}, ref) => {
+  const _refSeries = useRef([])
+  , _regSeriaRow = useCallback((ref, compIndex) => {
+    _refSeries.current[compIndex] = ref
+  }, [])
+  , _unregSeriaRow = useCallback(compIndex => {
+    _refSeries.current[compIndex] = null
+  }, []);
 
-  _regSeriaRow = (ref, compIndex) => {
-     this._refSeries[compIndex] = ref
-  }
-  _unregSeriaRow = (compIndex) => {
-     this._refSeries[compIndex] = null
-  }
+  useImperativeHandle(ref, () => ({
+     getValues: () => {
+       const [userMin, userMax] = _getUserMinMax(fromChart);
+       return _getRefValue(_refSeries)
+         .filter(refRow => refRow !== null )
+         .map(refRow => refRow.current.getValue())
+         .filter(config => config.isChecked)
+         .map(config => {
+           config.userMin = userMin
+           config.userMax = userMax
+           return config;
+         });
+     }
+  }), [fromChart])
 
-  render(){
-    const { style, toChart, fromChart } = this.props
-    , _yAxisOption = _crYAxisOption(toChart)
-    , { userOptions, series } = fromChart || {}
-    , { zhConfig } = userOptions || {}
-    , { id:chartId='id' } = zhConfig || {};
+  const  _yAxisOption = _crYAxisOption(toChart)
+  , { userOptions, series } = fromChart || {}
+  , { zhConfig } = userOptions || {}
+  , { id='id' } = zhConfig || {};
 
-    return (
-      <ScrollPane style={{...style, ...S_ROOT_DIV}}>
-         <PasteToTitle chartId={chartId} />
-         <PasteToSeriaList
-            chartId={chartId}
-            series={series}
-            options={_yAxisOption}
-            onReg={this._regSeriaRow}
-            onUnReg={this._unregSeriaRow}
-         />
-      </ScrollPane>
-    );
-  }
-
-  getValues(){
-    const [
-      userMin, userMax
-    ] = _getUserMinMax(this.props.fromChart);
-    return this._refSeries
-      .filter(ref => ref !== null )
-      .map(ref => ref.current.getValue())
-      .filter(config => config.isChecked)
-      .map(config => {
-        config.userMin = userMin
-        config.userMax = userMax
-        return config;
-      });
-  }
-}
+  return (
+    <ScrollPane style={style}>
+       <PasteToTitle chartId={id} />
+       <PasteToSeriaList
+          chartId={id}
+          series={series}
+          options={_yAxisOption}
+          onReg={_regSeriaRow}
+          onUnReg={_unregSeriaRow}
+       />
+    </ScrollPane>
+  );
+});
 
 export default SeriesPane
