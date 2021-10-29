@@ -3,26 +3,18 @@ import { Component } from 'react';
 import ScrollPane from '../zhn/ScrollPane';
 import SeriaRow from './SeriaRow';
 
-const CL = {
-  ELL: 'ellipsis'
-};
+const CL_ELL = 'ellipsis'
 
-const S = {
-  ROOT_DIV: {
-    paddingTop: 8
-  },
-  TITLE: {
-    paddingBottom: 4,
-    marginLeft: 16,
-    marginBottom: 8,
-    fontWeight: 'bold',
-    borderBottom: '2px solid black'
-  },
-  CHART_ID: {
-    color: '#a487d4',
-    width: 200,
-    verticalAlign: 'bottom'
-  }
+, S_ROOT_DIV = { paddingTop: 8 }
+, S_TITLE = {
+  paddingBottom: 4,
+  margin: '0 0 8px 16px',
+  fontWeight: 'bold',
+  borderBottom: '2px solid black'
+}, S_CHART_ID = {
+  color: '#a487d4',
+  width: 200,
+  verticalAlign: 'bottom'
 };
 
 /*
@@ -65,11 +57,11 @@ const _crYAxisOption = (toChart) => {
 };
 
 const PasteToTitle = ({ chartId }) => (
-  <div style={S.TITLE}>
+  <div style={S_TITLE}>
     <span>From Chart:&nbsp;</span>
     <span
-       className={CL.ELL}
-       style={S.CHART_ID}
+       className={CL_ELL}
+       style={S_CHART_ID}
     >
       {chartId}
     </span>
@@ -98,18 +90,15 @@ const PasteToSeriaList = ({
  </div>
 );
 
-
 class SeriesPane extends Component {
 
-   compSeries = []
+   _refSeries = []
 
-  _regSeriaRow = (comp) => {
-    const compIndex = comp.props.compIndex;
-    this.compSeries[compIndex] = comp
+  _regSeriaRow = (ref, compIndex) => {
+     this._refSeries[compIndex] = ref
   }
-  _unregSeriaRow = (comp) => {
-    const compIndex = comp.props.compIndex;
-    this.compSeries[compIndex] = null
+  _unregSeriaRow = (compIndex) => {
+     this._refSeries[compIndex] = null
   }
 
   render(){
@@ -120,7 +109,7 @@ class SeriesPane extends Component {
     , { id:chartId='id' } = zhConfig || {};
 
     return (
-      <ScrollPane style={{...style, ...S.ROOT_DIV}}>
+      <ScrollPane style={{...style, ...S_ROOT_DIV}}>
          <PasteToTitle chartId={chartId} />
          <PasteToSeriaList
             chartId={chartId}
@@ -137,9 +126,9 @@ class SeriesPane extends Component {
     const [
       userMin, userMax
     ] = _getUserMinMax(this.props.fromChart);
-    return this.compSeries
-      .filter(comp => comp !== null )
-      .map(comp => comp.getValue())
+    return this._refSeries
+      .filter(ref => ref !== null )
+      .map(ref => ref.current.getValue())
       .filter(config => config.isChecked)
       .map(config => {
         config.userMin = userMin

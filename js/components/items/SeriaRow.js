@@ -3,19 +3,17 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
+var _useRefSet = _interopRequireDefault(require("../hooks/useRefSet"));
+
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
+
 var _Model = _interopRequireDefault(require("../../constants/Model"));
 
-var _HandleF = _interopRequireDefault(require("../f-handle/HandleF"));
+var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
 
 var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 
@@ -23,160 +21,150 @@ var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette
 
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _jsxRuntime = require("react/jsx-runtime");
 
-var DF = {
-  COLOR: '#7cb5ec'
-};
-var CL = {
-  ELL: 'ellipsis'
-};
-var CL_INPUT_COLOR = 'p-r va-m';
-var S = {
-  ROOT: {
-    paddingLeft: 16,
-    paddingBottom: 16
-  },
-  TITLE: {
-    color: '##1b75bb',
-    width: 100,
-    paddingLeft: 4,
-    paddingRight: 16,
-    verticalAlign: 'middle',
-    textAlign: 'right',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    userSelect: 'none'
-  },
-  ROW_CHECK_BOX: {
-    display: 'inline-block',
-    paddingLeft: 0,
-    verticalAlign: 'middle'
-  },
-  SELECT: {
-    marginLeft: 24,
-    verticalAlign: 'middle'
-  },
-  SELECT_OPTIONS: {
-    minHeight: 100
-  }
+const TH_ID = 'ROW_CHECKBOX',
+      CHECKED_COLOR = '#1b2836',
+      DF_COLOR = '#7cb5ec',
+      CL_ELL = 'ellipsis',
+      CL_INPUT_COLOR = 'p-r va-m',
+      S_ROOT = {
+  padding: '0 0 16px 16px'
+},
+      S_TITLE = {
+  color: '##1b75bb',
+  width: 100,
+  padding: '0 16px 0 4px',
+  verticalAlign: 'middle',
+  textAlign: 'right',
+  fontSize: '16px',
+  fontWeight: 'bold',
+  userSelect: 'none'
+},
+      S_CHECK_BOX = {
+  verticalAlign: 'middle'
+},
+      S_SELECT = {
+  marginLeft: 24,
+  verticalAlign: 'middle'
+},
+      S_SELECT_OPTIONS = {
+  minHeight: 100
 };
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _fnNoop = () => {};
 
-var SeriaRow = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(SeriaRow, _Component);
+const _getRefValue = ref => ref.current;
 
-  function SeriaRow(props) {
-    var _this;
-
-    _this = _Component.call(this, props) || this;
-
-    _this._getColor = function () {
-      var colorEntered = _this.state.colorEntered,
-          color = _this.props.seria.color;
-      return colorEntered || color || DF.COLOR;
-    };
-
-    _this.isChecked = false;
-    _this._hCheck = _HandleF["default"].set('isChecked', true).bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hUnCheck = _HandleF["default"].set('isChecked', false).bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hSelectYAxis = _HandleF["default"].reg('toYAxis').bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hEnterColor = _HandleF["default"].enterTo('colorEntered').bind((0, _assertThisInitialized2["default"])(_this));
-    _this._hClosePalette = _HandleF["default"].closeTo('isShowPallete').bind((0, _assertThisInitialized2["default"])(_this));
-    _this._refCellColor = /*#__PURE__*/(0, _react.createRef)();
-    _this._hClickPallete = _HandleF["default"].toggleModalBy('isShowPallete', '_refCellColor').bind((0, _assertThisInitialized2["default"])(_this));
-    _this.state = {
-      isShowPallete: false,
-      colorEntered: void 0
-    };
-    return _this;
-  }
-
-  var _proto = SeriaRow.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    var onReg = this.props.onReg;
-
-    if (_isFn(onReg)) {
-      onReg(this);
+const SeriaRow = props => {
+  const {
+    seria = {},
+    yAxisOptions,
+    compIndex,
+    onReg = _fnNoop,
+    onUnReg = _fnNoop
+  } = props,
+        {
+    color,
+    name = ''
+  } = seria,
+        ref = (0, _react.useRef)(),
+        _refIsChecked = (0, _react.useRef)(false),
+        _refCellColor = (0, _react.useRef)(),
+        [_refToYAxis, _hSelectYAxis] = (0, _useRefSet.default)(),
+        [isShowPallete, setIsShowPallete] = (0, _react.useState)(false),
+        [colorEntered, setColorEntered] = (0, _react.useState)(),
+        _hCheck = (0, _react.useCallback)(() => {
+    _refIsChecked.current = true;
+  }, []),
+        _hUnCheck = (0, _react.useCallback)(() => {
+    _refIsChecked.current = false;
+  }, []),
+        _hEnterColor = (0, _react.useCallback)(color => {
+    setColorEntered(color);
+  }, []),
+        _hClosePalette = (0, _react.useCallback)(() => {
+    setIsShowPallete(false);
+  }, []),
+        _hClickPallete = (0, _react.useCallback)((color, event) => {
+    if (event && event.target === _getRefValue(_refCellColor)) {
+      setIsShowPallete(is => !is);
     }
-  };
+  }, []),
+        TS = (0, _useTheme.default)(TH_ID),
+        _color = colorEntered || color || DF_COLOR;
+  /*eslint-disable react-hooks/exhaustive-deps */
 
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    var onUnReg = this.props.onUnReg;
 
-    if (_isFn(onUnReg)) {
-      onUnReg(this);
-    }
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      this.toYAxis = void 0;
-    }
-  };
-
-  _proto.render = function render() {
-    var isShowPallete = this.state.isShowPallete,
-        _this$props = this.props,
-        _this$props$seria = _this$props.seria,
-        seria = _this$props$seria === void 0 ? {} : _this$props$seria,
-        yAxisOptions = _this$props.yAxisOptions,
-        _seria$name = seria.name,
-        name = _seria$name === void 0 ? '' : _seria$name,
-        _color = this._getColor();
-
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: S.ROOT,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
-        style: S.ROW_CHECK_BOX,
-        onCheck: this._hCheck,
-        onUnCheck: this._hUnCheck
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        className: CL.ELL,
-        style: S.TITLE,
-        children: name
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor["default"], {
-        ref: this._refCellColor,
-        className: CL_INPUT_COLOR,
+  (0, _react.useImperativeHandle)(ref, () => ({
+    getValue: () => {
+      const {
+        userOptions
+      } = seria,
+            {
+        data,
+        name
+      } = userOptions || {};
+      return {
+        isChecked: _getRefValue(_refIsChecked),
         color: _color,
-        onClick: this._hClickPallete,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPalette["default"], {
-          isShow: isShowPallete,
-          model: _Model["default"].palette,
-          onClickCell: this._hEnterColor,
-          onClose: this._hClosePalette
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect["default"], {
-        placeholder: "withYAxis",
-        width: "150",
-        style: S.SELECT,
-        optionsStyle: S.SELECT_OPTIONS,
-        options: yAxisOptions,
-        onSelect: this._hSelectYAxis
-      })]
-    });
-  };
+        yIndex: (_getRefValue(_refToYAxis) || {}).value,
+        data,
+        name
+      };
+    }
+  }), [_color]); //seria
 
-  _proto.getValue = function getValue() {
-    var userOptions = this.props.seria.userOptions,
-        data = userOptions.data,
-        name = userOptions.name;
-    return {
-      isChecked: this.isChecked,
-      color: this._getColor(),
-      yIndex: this.toYAxis ? this.toYAxis.value : void 0,
-      data: data,
-      name: name
-    };
-  };
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  return SeriaRow;
-}(_react.Component);
+  /*eslint-disable react-hooks/exhaustive-deps */
+
+  (0, _react.useEffect)(() => {
+    onReg(ref, compIndex);
+    return () => onUnReg(compIndex);
+  }, []); //compIndex, onReg, onUnReg
+
+  (0, _react.useEffect)(() => {
+    _refToYAxis.current = void 0;
+  }, [props]); //_refToYAxis
+
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S_ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+      style: S_CHECK_BOX,
+      color: CHECKED_COLOR,
+      checkedColor: TS.CHECKED_COLOR,
+      onCheck: _hCheck,
+      onUnCheck: _hUnCheck
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      className: CL_ELL,
+      style: S_TITLE,
+      children: name
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
+      ref: _refCellColor,
+      className: CL_INPUT_COLOR,
+      color: _color,
+      onClick: _hClickPallete,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPalette.default, {
+        isShow: isShowPallete,
+        model: _Model.default.palette,
+        onClickCell: _hEnterColor,
+        onClose: _hClosePalette
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect.default, {
+      placeholder: "withYAxis",
+      width: "150",
+      style: S_SELECT,
+      optionsStyle: S_SELECT_OPTIONS,
+      options: yAxisOptions,
+      noFooterBts: true,
+      onSelect: _hSelectYAxis
+    })]
+  });
+};
 
 var _default = SeriaRow;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=SeriaRow.js.map
