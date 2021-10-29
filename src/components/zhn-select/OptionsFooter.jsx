@@ -4,6 +4,7 @@ import ButtonCircle2 from '../zhn/ButtonCircle2';
 import CL from './CL';
 
 const OptionsFooter = forwardRef(({
+  noFooterBts,
   indexActiveOption,
   nFiltered, nAll,
   onStepDown,
@@ -19,7 +20,7 @@ const OptionsFooter = forwardRef(({
          : {nFiltered}: {nAll}
       </span>
     </span>
-    <span className={CL.FOOTER_BTS}>
+    {!noFooterBts && <span className={CL.FOOTER_BTS}>
       <ButtonCircle2
          className={CL.FOOTER_BT}
          caption="Dn"
@@ -35,7 +36,7 @@ const OptionsFooter = forwardRef(({
          caption="CL"
          onClick={onClear}
       />
-    </span>
+    </span>}
   </div>
 ));
 

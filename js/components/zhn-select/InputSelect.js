@@ -137,6 +137,7 @@ class InputSelect extends _react.Component {
      prefixInput: PropTypes.string
        isLoading: PropTypes.bool,
      isLoadingFailed: PropTypes.bool,
+     noFooterBts: PropTypes.bool
        onSelect: PropTypes.func,
      onLoadOption: PropTypes.func
   }
@@ -463,7 +464,8 @@ class InputSelect extends _react.Component {
     this.renderOptions = () => {
       const {
         optionsStyle,
-        width
+        width,
+        noFooterBts
       } = this.props,
             {
         isShowOption
@@ -491,6 +493,7 @@ class InputSelect extends _react.Component {
           children: _optionListEl
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter.default, {
           ref: this._refIndexNode,
+          noFooterBts: noFooterBts,
           indexActiveOption: this.indexActiveOption,
           nAll: _nAll,
           nFiltered: _nFiltered,

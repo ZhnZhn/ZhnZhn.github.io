@@ -109,6 +109,7 @@ class InputSelect extends Component {
 
      isLoading: PropTypes.bool,
      isLoadingFailed: PropTypes.bool,
+     noFooterBts: PropTypes.bool
 
      onSelect: PropTypes.func,
      onLoadOption: PropTypes.func
@@ -430,7 +431,7 @@ class InputSelect extends Component {
   }
 
   renderOptions = () => {
-    const { optionsStyle, width } = this.props
+    const { optionsStyle, width, noFooterBts } = this.props
     , { isShowOption } = this.state
     , _optionListEl = this._crOptionListWithCache()
     , _styleOptions = isShowOption ? S_BLOCK : S_NONE
@@ -452,15 +453,16 @@ class InputSelect extends Component {
            >
             {_optionListEl}
           </div>
-          <OptionsFooter
+          {<OptionsFooter
             ref={this._refIndexNode}
+            noFooterBts={noFooterBts}
             indexActiveOption={this.indexActiveOption}
             nAll={_nAll}
             nFiltered={_nFiltered}
             onStepUp={this._stepUpOption}
             onStepDown={this._stepDownOption}
             onClear={this._hClear}
-          />
+          />}
         </div>
     );
   }
