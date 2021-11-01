@@ -3,11 +3,9 @@ import { Component } from 'react'
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
 
-const S = {
-  ROW_TEXT: {
-    paddingRight: 16
-  }
-};
+const S_DIALOG = { width: 300 }
+, S_ROW_TEXT = { paddingRight: 16 };
+
 
 @Decor.withToolbar
 @Decor.withLoad
@@ -63,6 +61,7 @@ class AlphaIndicatorDialog extends Component {
     return (
       <D.DraggableDialog
            isShow={isShow}
+           style={S_DIALOG}
            caption={caption}
            menuModel={this._menuMore}
            commandButtons={this._commandButtons}
@@ -75,7 +74,7 @@ class AlphaIndicatorDialog extends Component {
               buttons={this.toolbarButtons}
            />
            <D.Row.Text
-             styleRoot={S.ROW_TEXT}
+             styleRoot={S_ROW_TEXT}
              caption="AV:"
              text="Sector Performances"
            />
