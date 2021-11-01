@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _focusNode = _interopRequireDefault(require("../zhn-utils/focusNode"));
+var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 
 var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 
@@ -31,22 +31,18 @@ const {
   useKeyEscape,
   useTheme
 } = _use.default;
-const TH_ID = 'DRAGGABLE_DIALOG';
-const CL = {
-  ROOT: "draggable-dialog",
-  SHOWING: 'show-popup',
-  NOT_SELECTED: 'not-selected'
-};
-const S = { ..._Dialog.default,
-  ROOT_DIV_DRAG: {
-    position: 'absolute',
-    top: 30,
-    left: 50,
-    zIndex: 10
-  },
-  CHILDREN_DIV: {
-    cursor: 'default'
-  }
+const TH_ID = 'DRAGGABLE_DIALOG',
+      CL_DRAGGABLE_DIALOG = "draggable-dialog",
+      CL_SHOWING = 'show-popup',
+      CL_NOT_SELECTED = 'not-selected',
+      S_ROOT_DIV_DRAG = {
+  position: 'absolute',
+  top: 30,
+  left: 50,
+  zIndex: 10
+},
+      S_CHILDREN_DIV = {
+  cursor: 'default'
 };
 
 const _isFn = fn => typeof fn === 'function';
@@ -56,17 +52,17 @@ const CommandButtons = ({
   onShow,
   onClose
 }) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-  style: S.COMMAND_DIV,
+  style: _Dialog.default.COMMAND_DIV,
   children: [buttons, _isFn(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     timeout: 0,
-    style: S.BT,
+    style: _Dialog.default.BT,
     caption: "Show",
     title: "Show Item Container" //accessKey="s"
     ,
     onClick: onShow
   }, "show"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     timeout: 0,
-    style: S.BT,
+    style: _Dialog.default.BT,
     caption: "Close",
     title: "Close Draggable Dialog" //accessKey="c"
     ,
@@ -74,71 +70,43 @@ const CommandButtons = ({
   }, "close")]
 });
 
-const _getCurrent = ref => ref.current;
-
-const DF_ON_CLOSE = () => {};
+const FN_NOOP = () => {};
 
 const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
   isShow,
+  style,
   menuModel,
   caption,
   children,
   commandButtons,
   onShowChart,
   onFront,
-  onClose = DF_ON_CLOSE
+  onClose = FN_NOOP
 }, ref) => {
   const _refRootDiv = (0, _react.useRef)(),
         _refBtMore = (0, _react.useRef)(),
-        _refPrevFocused = (0, _react.useRef)(),
-        _refIsShow = (0, _react.useRef)(isShow),
-        _focus = (0, _react.useCallback)(() => {
-    _refPrevFocused.current = document.activeElement;
-    (0, _focusNode.default)(_getCurrent(_refBtMore) || _getCurrent(_refRootDiv));
-  }, []),
-        _focusPrev = (0, _react.useCallback)(() => {
-    (0, _focusNode.default)(_getCurrent(_refPrevFocused));
-    _refPrevFocused.current = null;
-  }, [])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hClose = (0, _react.useCallback)(() => {
-    onClose();
-
-    _focusPrev();
-  }, [onClose])
-  /* _focusPrev */
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
-        _hKeyDown = useKeyEscape(_hClose, [_hClose]),
+        [focus, focusPrev] = (0, _useDialogFocus.default)(isShow, _refBtMore, _refRootDiv),
+        _hKeyDown = useKeyEscape(onClose),
         [isMore, toggleIsMore] = useToggle(false),
         TS = useTheme(TH_ID),
-        _styleShow = isShow ? S.SHOW : S.HIDE,
-        _className = (0, _crCn.default)(CL.ROOT, [isShow, CL.SHOWING]);
+        _className = (0, _crCn.default)(CL_DRAGGABLE_DIALOG, [isShow, CL_SHOWING]),
+        _styleShow = isShow ? _Dialog.default.SHOW : _Dialog.default.HIDE;
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
   (0, _react.useEffect)(() => {
     _Interact.default.makeDragable(_refRootDiv.current);
 
-    _focus();
-  }, []);
-  (0, _react.useEffect)(() => {
-    if (isShow && !_refIsShow.current) {
-      _focus();
-    }
+    focus();
+  }, []); // focus
 
-    _refIsShow.current = isShow;
-  }, [isShow]);
-  /* _focus */
+  (0, _react.useImperativeHandle)(ref, () => ({
+    focus,
+    focusPrev
+  }), []); // focus, focusPrev
 
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  (0, _react.useImperativeHandle)(ref, () => ({
-    focus: _focus,
-    focusPrev: _focusPrev
-  }));
   return (
     /*#__PURE__*/
 
@@ -150,8 +118,9 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
       "aria-label": caption,
       "aria-hidden": !isShow,
       className: _className,
-      style: { ...S.ROOT_DIV,
-        ...S.ROOT_DIV_DRAG,
+      style: { ...style,
+        ..._Dialog.default.ROOT_DIV,
+        ...S_ROOT_DIV_DRAG,
         ..._styleShow,
         ...TS.ROOT,
         ...TS.EL_BORDER
@@ -159,7 +128,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
       onClick: onFront,
       onKeyDown: _hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: { ...S.CAPTION_DIV,
+        style: { ..._Dialog.default.CAPTION_DIV,
           ...TS.EL
         },
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
@@ -169,19 +138,19 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
           TS: TS,
           toggle: toggleIsMore
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          className: CL.NOT_SELECTED,
+          className: CL_NOT_SELECTED,
           children: caption
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
-          style: S.SVG_CLOSE,
-          onClose: _hClose
+          style: _Dialog.default.SVG_CLOSE,
+          onClose: onClose
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        style: S.CHILDREN_DIV,
+        style: S_CHILDREN_DIV,
         children: children
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
         buttons: commandButtons,
         onShow: onShowChart,
-        onClose: _hClose
+        onClose: onClose
       })]
     })
   );
