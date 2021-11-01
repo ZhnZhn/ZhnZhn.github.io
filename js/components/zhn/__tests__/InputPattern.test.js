@@ -5,125 +5,98 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
 require("@testing-library/jest-dom");
 
 var _zhnTestUtils = _interopRequireDefault(require("../../_test-utils/zhn-test-utils"));
 
 var _InputPattern = _interopRequireDefault(require("../InputPattern"));
 
-var createRef = _zhnTestUtils["default"].createRef,
-    render = _zhnTestUtils["default"].render,
-    screen = _zhnTestUtils["default"].screen,
-    act = _zhnTestUtils["default"].act,
-    fireClick = _zhnTestUtils["default"].fireClick,
-    fireChange = _zhnTestUtils["default"].fireChange,
-    fireKeyDownEnter = _zhnTestUtils["default"].fireKeyDownEnter,
-    fireKeyDownDelete = _zhnTestUtils["default"].fireKeyDownDelete;
-describe("InputPattern", function () {
-  var _findInput = function _findInput() {
-    return screen.findByRole('textbox');
-  };
+var _jsxRuntime = require("react/jsx-runtime");
 
-  var _findBtClear = function _findBtClear() {
-    return screen.findByRole('button');
-  };
+const {
+  createRef,
+  render,
+  screen,
+  act,
+  fireClick,
+  fireType,
+  fireKeyDownEnter,
+  fireKeyDownDelete
+} = _zhnTestUtils.default;
+describe("InputPattern", () => {
+  const _findInput = () => screen.findByRole('textbox');
 
-  test("should render InputPattern with event handlers and ref", /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-    var onEnter, onClear, onTest, ref, initValue, _render, rerender, input, _changeValue, btClear, _initValue;
+  const _getInput = () => screen.getByRole('textbox');
 
-    return _regenerator["default"].wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            onEnter = jest.fn(), onClear = jest.fn(), onTest = jest.fn(function (str) {
-              return str.length < 4;
-            }), ref = createRef(), initValue = "abc", _render = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern["default"], {
-              ref: ref,
-              initValue: initValue,
-              onTest: onTest,
-              onEnter: onEnter,
-              onClear: onClear
-            })), rerender = _render.rerender;
-            input = screen.getByRole('textbox');
-            expect(input).toHaveValue(initValue); //2 Test event handlers
-            //2.1 onChange
+  const _findBtClear = () => screen.findByRole('button');
 
-            _changeValue = 'abcd';
-            fireChange(input, _changeValue);
-            _context.next = 7;
-            return _findInput();
+  test("should render InputPattern with event handlers and ref", async () => {
+    const onEnter = jest.fn(),
+          onClear = jest.fn(),
+          onTest = jest.fn(str => str.length < 4),
+          ref = createRef(),
+          initValue = "abc" //1 Test render
+    ,
+          {
+      rerender
+    } = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern.default, {
+      ref: ref,
+      initValue: initValue,
+      onTest: onTest,
+      onEnter: onEnter,
+      onClear: onClear
+    }));
 
-          case 7:
-            input = _context.sent;
-            expect(input).toHaveValue(_changeValue);
-            expect(onTest).toHaveBeenCalledTimes(1);
-            expect(onTest.mock.calls[0][0]).toBe(_changeValue); //2.2 KeyDown Delete
+    let input = _getInput();
 
-            fireKeyDownDelete(input);
-            _context.next = 14;
-            return _findInput();
+    expect(input).toHaveValue(initValue); //2 Test event handlers
+    //2.1 onChange through fireType
 
-          case 14:
-            input = _context.sent;
-            expect(input).toHaveValue(initValue); //2.3 KeyDown Enter && onEnter
+    const _typedText = 'defg';
+    fireType(input, _typedText);
 
-            fireKeyDownEnter(input);
-            expect(onEnter).toHaveBeenCalledTimes(1);
-            expect(onEnter.mock.calls[0][0]).toBe(initValue); //2.4 onClick on BtClear
+    const _onTestCalledTimes = _typedText.length,
+          _recentOnTestCalledIndex = _onTestCalledTimes - 1,
+          _expectedValueAfterTyping = initValue + _typedText;
 
-            _context.next = 21;
-            return _findBtClear();
+    expect(_getInput()).toHaveValue(_expectedValueAfterTyping);
+    expect(onTest).toHaveBeenCalledTimes(_onTestCalledTimes);
+    expect(onTest.mock.calls[_recentOnTestCalledIndex][0]).toBe(_expectedValueAfterTyping); //2.2 KeyDown Delete
 
-          case 21:
-            btClear = _context.sent;
-            fireClick(btClear);
-            _context.next = 25;
-            return _findInput();
+    fireKeyDownDelete(input);
+    input = await _findInput();
+    expect(input).toHaveValue(initValue); //2.3 KeyDown Enter && onEnter
 
-          case 25:
-            input = _context.sent;
-            expect(input).toHaveValue(initValue);
-            expect(input).toHaveFocus();
-            expect(onClear).toHaveBeenCalledTimes(1); //3 Test ref implementation interface
-            //3.1
+    fireKeyDownEnter(input);
+    expect(onEnter).toHaveBeenCalledTimes(1);
+    expect(onEnter.mock.calls[0][0]).toBe(initValue); //2.4 onClick on BtClear
 
-            expect(ref.current.getValue()).toBe(initValue); //3.2
+    const btClear = await _findBtClear();
+    fireClick(btClear);
+    input = await _findInput();
+    expect(input).toHaveValue(initValue);
+    expect(input).toHaveFocus();
+    expect(onClear).toHaveBeenCalledTimes(1); //3 Test ref implementation interface
+    //3.1
 
-            expect(ref.current.isValid()).toBe(true);
-            expect(onTest).toHaveBeenCalledTimes(2);
-            expect(onTest.mock.calls[1][0]).toBe(initValue); //3.3
+    expect(ref.current.getValue()).toBe(initValue); //3.2
 
-            ref.current.focus();
-            expect(input).toHaveFocus(); //3.4
+    expect(ref.current.isValid()).toBe(true);
+    expect(onTest).toHaveBeenCalledTimes(_onTestCalledTimes + 1);
+    expect(onTest.mock.calls[_recentOnTestCalledIndex + 1][0]).toBe(initValue); //3.3
 
-            act(function () {
-              return ref.current.showErrMsg();
-            });
-            expect(ref.current.isValid()).toBe(true); //4 Test rerender with new initValue without optional handlers
+    ref.current.focus();
+    expect(input).toHaveFocus(); //3.4
 
-            _initValue = "abcde";
-            rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern["default"], {
-              initValue: _initValue
-            }));
-            _context.next = 41;
-            return _findInput();
+    act(() => ref.current.showErrMsg());
+    expect(ref.current.isValid()).toBe(true); //4 Test rerender with new initValue without optional handlers
 
-          case 41:
-            input = _context.sent;
-            expect(input).toHaveValue(_initValue);
-
-          case 43:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  })));
+    const _initValue = "abcde";
+    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern.default, {
+      initValue: _initValue
+    }));
+    input = await _findInput();
+    expect(input).toHaveValue(_initValue);
+  });
 });
 //# sourceMappingURL=InputPattern.test.js.map

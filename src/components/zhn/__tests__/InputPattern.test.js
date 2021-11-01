@@ -10,13 +10,14 @@ const {
   createRef,
   render, screen, act,
   fireClick,
-  fireChange,
+  fireType,
   fireKeyDownEnter,
   fireKeyDownDelete
 } = zhnUtils;
 
 describe("InputPattern", () => {
   const _findInput = () => screen.findByRole('textbox');
+  const _getInput = () => screen.getByRole('textbox');
   const _findBtClear = () => screen.findByRole('button');
   test("should render InputPattern with event handlers and ref", async () => {
     const onEnter = jest.fn()
@@ -32,17 +33,19 @@ describe("InputPattern", () => {
        onEnter={onEnter}
        onClear={onClear}
     />);
-    let input = screen.getByRole('textbox')
+    let input = _getInput();
     expect(input).toHaveValue(initValue)
 
     //2 Test event handlers
-    //2.1 onChange
-    const _changeValue = 'abcd'
-    fireChange(input, _changeValue)
-    input = await _findInput()
-    expect(input).toHaveValue(_changeValue)
-    expect(onTest).toHaveBeenCalledTimes(1)
-    expect(onTest.mock.calls[0][0]).toBe(_changeValue)
+    //2.1 onChange through fireType
+    const _typedText = 'defg';
+    fireType(input, _typedText)
+    const _onTestCalledTimes = _typedText.length
+    , _recentOnTestCalledIndex = _onTestCalledTimes - 1
+    , _expectedValueAfterTyping = initValue + _typedText;
+    expect(_getInput()).toHaveValue(_expectedValueAfterTyping)
+    expect(onTest).toHaveBeenCalledTimes(_onTestCalledTimes)
+    expect(onTest.mock.calls[_recentOnTestCalledIndex][0]).toBe(_expectedValueAfterTyping)
 
     //2.2 KeyDown Delete
     fireKeyDownDelete(input)
@@ -67,8 +70,8 @@ describe("InputPattern", () => {
     expect(ref.current.getValue()).toBe(initValue)
     //3.2
     expect(ref.current.isValid()).toBe(true)
-    expect(onTest).toHaveBeenCalledTimes(2)
-    expect(onTest.mock.calls[1][0]).toBe(initValue)
+    expect(onTest).toHaveBeenCalledTimes(_onTestCalledTimes+1)
+    expect(onTest.mock.calls[_recentOnTestCalledIndex+1][0]).toBe(initValue)
     //3.3
     ref.current.focus()
     expect(input).toHaveFocus()
