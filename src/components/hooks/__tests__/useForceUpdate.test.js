@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 "use strict";
-import { render, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import useForceUpdate from '../useForceUpdate'
 
 const _testRender = (renderSpy, fns, calledTimes) => {
@@ -10,11 +10,8 @@ const _testRender = (renderSpy, fns, calledTimes) => {
   expect(fns.size).toBe(1)
   expect(typeof (Array.from(fns))[0]).toBe('function')
 };
-const _testFireClick = (
-  getByTestId, fns,
-  renderSpy, calledTimes
-) => {
-  fireEvent.click(getByTestId("bt"))
+const _testRenderAfterClickBt = (renderSpy, fns, calledTimes) => {
+  fireEvent.click(screen.getByTestId("bt"))
   _testRender(renderSpy, fns, calledTimes)
 };
 
@@ -34,11 +31,10 @@ describe('useForceUpdate', ()=>{
       );
     }
 
-    const { getByTestId } = render(<Comp />)
+    render(<Comp />)
     _testRender(renderSpy, fns, 1)
 
-    const _testRerender = _testFireClick.bind(null, getByTestId, fns, renderSpy)
-    _testRerender(2)
-    _testRerender(3)
+    _testRenderAfterClickBt(renderSpy, fns, 2)
+    _testRenderAfterClickBt(renderSpy, fns, 3)
   })
 })

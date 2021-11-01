@@ -8,11 +8,18 @@ module.exports = {
   "plugins": [
      "react",
      "react-hooks",
-     "jsx-a11y"
+     "jsx-a11y",
+     "testing-library"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:jsx-a11y/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": ["plugin:testing-library/react"] 
+    }
   ],
 
   "rules": {
