@@ -21,64 +21,53 @@ const {
 const TH_ID = 'ELEMENT';
 
 const CL_CAPTION = 'not-selected text-clip bt-left bt'
-, CL_MORE = "popup-menu charts__menu-more";
+, CL_MORE = "popup-menu charts__menu-more"
 
-const S = {
-  ROOT: {
-    backgroundColor: '#1b2836',
-    height: 'auto',
-    width: '100%',
-    paddingRight: 42,
-    paddingBottom: 2,
-    borderTopRightRadius: 2,
-    borderBottomRightRadius: 2
-  },
-  BT_MORE: {
-    position: 'relative',
-    top: 3,
-    left: 2
-  },
-  SVG_MORE: {
-    stroke: '#777777',
-    fill: '#777777'
-  },
-  ROOT_MORE: {
-    display: 'inline-block'
-  },
-  CHECK_BOX: {
-    position: 'relative',
-    top: 1,
-    marginRight: 8,
-    marginLeft: 8
-  },
-  CAPTION_OPEN : {
-    color: '#a487d4',
-    width: 125,
-    paddingTop: 4,
-    paddingBottom: 2
-  },
-  CAPTION_CLOSE: {
-    color: 'gray'
-  },
-  CAPTION_WIDTH: {
-    width: void 0,
-    //maxWidth: 250,
-    maxWidth: 'calc(100% - 60px)'
-  },
-  TIME: {
-    color: '#fdb316',
-    paddingLeft: 16,
-    fontWeight: 'bold'
-  },
-  CLOSE: {
-    position: 'absolute',
-    right: 0,
-    top: 4
-  }
+, S_ROOT = {
+  backgroundColor: '#1b2836',
+  height: 'auto',
+  width: '100%',
+  padding: '0 42px 2px 0',
+  borderTopRightRadius: 2,
+  borderBottomRightRadius: 2
+}, S_BT_MORE = {
+  position: 'relative',
+  top: 3,
+  left: 2
+},
+S_SVG_MORE = {
+  stroke: '#777777',
+  fill: '#777777'
+}, S_ROOT_MORE = { display: 'inline-block' }
+, S_CHECK_BOX = {
+  position: 'relative',
+  top: 1,
+  margin: '0 8px'
+},
+S_CAPTION_OPEN = {
+  color: '#a487d4',
+  width: 125,
+  padding: '4px 0 2px 0'
+},S_CAPTION_CLOSE = { color: 'gray' }
+, S_CAPTION_WIDTH = {
+  width: void 0,
+  //maxWidth: 250,
+  maxWidth: 'calc(100% - 60px)'
+},
+S_TIME = {
+  color: '#fdb316',
+  paddingLeft: 16,
+  fontWeight: 'bold'
+},
+S_CLOSE = {
+  position: 'absolute',
+  right: 0,
+  top: 4
 };
 
+
 const ItemTime = ({ itemTime }) => itemTime
-  ? <span style={S.TIME}>{itemTime}</span>
+  ? <span style={S_TIME}>{itemTime}</span>
   : null;
 
 const MenuMore = ({
@@ -93,13 +82,13 @@ const MenuMore = ({
   return (<>
       <SvgMore
         ref={refBtSvg}
-        style={S.BT_MORE}
-        svgStyle={S.SVG_MORE}
+        style={S_BT_MORE}
+        svgStyle={S_SVG_MORE}
         onClick={onToggle}
       />
       <ModalSlider
         isShow={isMore}
-        rootStyle={S.ROOT_MORE}
+        rootStyle={S_ROOT_MORE}
         className={CL_MORE}
         style={sliderStyle}
         model={moreModel}
@@ -111,7 +100,7 @@ const MenuMore = ({
 const Header = ({
   isOpen,
   onCheck, onUnCheck,
-  itemCaption, itemTitle, itemTime, onToggle,
+  itemCaption, itemTime, onToggle,
   valueMoving, isAdminMode, crValueMoving, refVm,
   moreModel,
   onClose
@@ -119,13 +108,15 @@ const Header = ({
   const [isMore, _toggleMore] = useToggle(false)
   , TS = useTheme(TH_ID)
   , _captionStyle = crStyle([
-     S.CAPTION_OPEN,
-     !isOpen && S.CAPTION_CLOSE,
-     !valueMoving && S.CAPTION_WIDTH
-  ]);
+     S_CAPTION_OPEN,
+     !isOpen && S_CAPTION_CLOSE,
+     !valueMoving && S_CAPTION_WIDTH
+  ])
+  , _btTitle = itemCaption.length > 15
+      ? itemCaption : void 0;
 
   return (
-    <div style={{...S.ROOT, ...TS.ROOT }}>
+    <div style={{...S_ROOT, ...TS.ROOT }}>
       <MenuMore
         isMore={isMore}
         moreModel={moreModel}
@@ -133,7 +124,7 @@ const Header = ({
         onToggle={_toggleMore}
       />
       <SvgCheckBox
-         style={S.CHECK_BOX}
+         style={S_CHECK_BOX}
          color={COLOR.GREEN}
          checkedColor={TS.ROOT.backgroundColor}
          onCheck={onCheck}
@@ -141,7 +132,7 @@ const Header = ({
       />
       <button
          className={CL_CAPTION}
-         title={itemTitle}
+         title={_btTitle}
          style={_captionStyle}
          onClick={onToggle}
       >
@@ -160,7 +151,7 @@ const Header = ({
             />
       }
       <SvgClose
-        style={S.CLOSE}
+        style={S_CLOSE}
         onClose={onClose}
       />
     </div>
@@ -175,7 +166,6 @@ Header.propTypes = {
   onCheck : PropTypes.func.isRequired,
   onUnCheck : PropTypes.func.isRequired,
   itemCaption : PropTypes.string.isRequired,
-  itemTitle : PropTypes.string.isRequired,
   itemTime : PropTypes.string,
   onToggle : PropTypes.func.isRequired,
   valueMoving : PropTypes.object,

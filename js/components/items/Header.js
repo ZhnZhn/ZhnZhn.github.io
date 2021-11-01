@@ -30,65 +30,60 @@ const {
 } = _use.default;
 const TH_ID = 'ELEMENT';
 const CL_CAPTION = 'not-selected text-clip bt-left bt',
-      CL_MORE = "popup-menu charts__menu-more";
-const S = {
-  ROOT: {
-    backgroundColor: '#1b2836',
-    height: 'auto',
-    width: '100%',
-    paddingRight: 42,
-    paddingBottom: 2,
-    borderTopRightRadius: 2,
-    borderBottomRightRadius: 2
-  },
-  BT_MORE: {
-    position: 'relative',
-    top: 3,
-    left: 2
-  },
-  SVG_MORE: {
-    stroke: '#777777',
-    fill: '#777777'
-  },
-  ROOT_MORE: {
-    display: 'inline-block'
-  },
-  CHECK_BOX: {
-    position: 'relative',
-    top: 1,
-    marginRight: 8,
-    marginLeft: 8
-  },
-  CAPTION_OPEN: {
-    color: '#a487d4',
-    width: 125,
-    paddingTop: 4,
-    paddingBottom: 2
-  },
-  CAPTION_CLOSE: {
-    color: 'gray'
-  },
-  CAPTION_WIDTH: {
-    width: void 0,
-    //maxWidth: 250,
-    maxWidth: 'calc(100% - 60px)'
-  },
-  TIME: {
-    color: '#fdb316',
-    paddingLeft: 16,
-    fontWeight: 'bold'
-  },
-  CLOSE: {
-    position: 'absolute',
-    right: 0,
-    top: 4
-  }
+      CL_MORE = "popup-menu charts__menu-more",
+      S_ROOT = {
+  backgroundColor: '#1b2836',
+  height: 'auto',
+  width: '100%',
+  padding: '0 42px 2px 0',
+  borderTopRightRadius: 2,
+  borderBottomRightRadius: 2
+},
+      S_BT_MORE = {
+  position: 'relative',
+  top: 3,
+  left: 2
+},
+      S_SVG_MORE = {
+  stroke: '#777777',
+  fill: '#777777'
+},
+      S_ROOT_MORE = {
+  display: 'inline-block'
+},
+      S_CHECK_BOX = {
+  position: 'relative',
+  top: 1,
+  margin: '0 8px'
+},
+      S_CAPTION_OPEN = {
+  color: '#a487d4',
+  width: 125,
+  padding: '4px 0 2px 0'
+},
+      S_CAPTION_CLOSE = {
+  color: 'gray'
+},
+      S_CAPTION_WIDTH = {
+  width: void 0,
+  //maxWidth: 250,
+  maxWidth: 'calc(100% - 60px)'
+},
+      S_TIME = {
+  color: '#fdb316',
+  paddingLeft: 16,
+  fontWeight: 'bold'
+},
+      S_CLOSE = {
+  position: 'absolute',
+  right: 0,
+  top: 4
 };
 
 const ItemTime = ({
   itemTime
 }) => itemTime ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-  style: S.TIME,
+  style: S_TIME,
   children: itemTime
 }) : null;
 
@@ -103,12 +98,12 @@ const MenuMore = ({
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
       ref: refBtSvg,
-      style: S.BT_MORE,
-      svgStyle: S.SVG_MORE,
+      style: S_BT_MORE,
+      svgStyle: S_SVG_MORE,
       onClick: onToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
       isShow: isMore,
-      rootStyle: S.ROOT_MORE,
+      rootStyle: S_ROOT_MORE,
       className: CL_MORE,
       style: sliderStyle,
       model: moreModel,
@@ -122,7 +117,6 @@ const Header = ({
   onCheck,
   onUnCheck,
   itemCaption,
-  itemTitle,
   itemTime,
   onToggle,
   valueMoving,
@@ -134,10 +128,11 @@ const Header = ({
 }) => {
   const [isMore, _toggleMore] = useToggle(false),
         TS = useTheme(TH_ID),
-        _captionStyle = crStyle([S.CAPTION_OPEN, !isOpen && S.CAPTION_CLOSE, !valueMoving && S.CAPTION_WIDTH]);
+        _captionStyle = crStyle([S_CAPTION_OPEN, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH]),
+        _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: { ...S.ROOT,
+    style: { ...S_ROOT,
       ...TS.ROOT
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(MenuMore, {
@@ -146,14 +141,14 @@ const Header = ({
       sliderStyle: TS.BORDER,
       onToggle: _toggleMore
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgCheckBox, {
-      style: S.CHECK_BOX,
+      style: S_CHECK_BOX,
       color: _Color.default.GREEN,
       checkedColor: TS.ROOT.backgroundColor,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
       className: CL_CAPTION,
-      title: itemTitle,
+      title: _btTitle,
       style: _captionStyle,
       onClick: onToggle,
       children: itemCaption
@@ -165,7 +160,7 @@ const Header = ({
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemTime, {
       itemType: itemTime
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgClose, {
-      style: S.CLOSE,
+      style: S_CLOSE,
       onClose: onClose
     })]
   });
@@ -178,7 +173,6 @@ Header.propTypes = {
   onCheck : PropTypes.func.isRequired,
   onUnCheck : PropTypes.func.isRequired,
   itemCaption : PropTypes.string.isRequired,
-  itemTitle : PropTypes.string.isRequired,
   itemTime : PropTypes.string,
   onToggle : PropTypes.func.isRequired,
   valueMoving : PropTypes.object,

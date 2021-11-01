@@ -366,7 +366,6 @@ class ChartItem extends _react.Component {
 
   render() {
     const {
-      caption,
       config,
       onCloseItem,
       isAdminMode
@@ -402,7 +401,6 @@ class ChartItem extends _react.Component {
         isOpen: isOpen,
         isAdminMode: isAdminMode,
         itemCaption: itemCaption,
-        itemTitle: caption,
         itemTime: itemTime,
         valueMoving: valueMoving,
         moreModel: this._moreModel,

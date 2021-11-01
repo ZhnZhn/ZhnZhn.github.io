@@ -323,8 +323,9 @@ class ChartItem extends Component {
 
   render(){
     const {
-        caption, config,
-        onCloseItem, isAdminMode
+        config,
+        onCloseItem,
+        isAdminMode
       } = this.props
     , {
         valueMoving,
@@ -350,7 +351,6 @@ class ChartItem extends Component {
             isOpen={isOpen}
             isAdminMode={isAdminMode}
             itemCaption={itemCaption}
-            itemTitle={caption}
             itemTime={itemTime}
             valueMoving={valueMoving}
             moreModel={this._moreModel}
