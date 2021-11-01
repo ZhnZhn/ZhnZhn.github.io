@@ -14,21 +14,17 @@ const STYLE = {
   },
   CAPTION_DIV:{
     position: 'relative',
-    padding: 5,
-    paddingLeft: 16,
-    paddingRight: 35,
     color: '#c0c0c0',
     backgroundColor: '#1b2836',
+    padding: '5px 35px 5px 16px',
     textAlign: 'center',
     fontSize: '18px',
     fontWeight: 500,
   },
   COMMAND_DIV: {
-     cursor: 'default',
-     float: 'right',
-     marginTop: 8,
-     marginBottom: 10,
-     marginRight: 4
+    margin: '8px 4px 10px 0',
+    cursor: 'default',
+    float: 'right',
   },
   BT: {
     color: '#1b2836'

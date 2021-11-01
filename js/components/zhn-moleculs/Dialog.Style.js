@@ -1,8 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var STYLE = {
+exports.default = void 0;
+const STYLE = {
   SHOW: {
     display: 'block'
   },
@@ -17,21 +17,17 @@ var STYLE = {
   },
   CAPTION_DIV: {
     position: 'relative',
-    padding: 5,
-    paddingLeft: 16,
-    paddingRight: 35,
     color: '#c0c0c0',
     backgroundColor: '#1b2836',
+    padding: '5px 35px 5px 16px',
     textAlign: 'center',
     fontSize: '18px',
     fontWeight: 500
   },
   COMMAND_DIV: {
+    margin: '8px 4px 10px 0',
     cursor: 'default',
-    "float": 'right',
-    marginTop: 8,
-    marginBottom: 10,
-    marginRight: 4
+    float: 'right'
   },
   BT: {
     color: '#1b2836'
@@ -44,5 +40,5 @@ var STYLE = {
   }
 };
 var _default = STYLE;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=Dialog.Style.js.map
