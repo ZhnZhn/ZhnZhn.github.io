@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useRefBool.js"
+ ],
+ "file": "../../../src/components/hooks/useRefBool.js",
+ "names": [
+  "useRefBool",
+  "initialValue",
+  "ref",
+  "setTrue",
+  "current",
+  "setFalse"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,UAAU,GAAGC,YAAY,IAAI;AACjC,QAAMC,GAAG,GAAG,mBAAOD,YAAP,CAAZ;AAAA,QACEE,OAAO,GAAG,wBAAY,MAAM;AAC5BD,IAAAA,GAAG,CAACE,OAAJ,GAAc,IAAd;AACD,GAFW,EAET,EAFS,CADZ;AAAA,QAIEC,QAAQ,GAAG,wBAAY,MAAM;AAC7BH,IAAAA,GAAG,CAACE,OAAJ,GAAc,KAAd;AACD,GAFY,EAEV,EAFU,CAJb;AAOA,SAAO,CAACF,GAAD,EAAMC,OAAN,EAAeE,QAAf,CAAP;AACD,CATD;;eAWeL,U"
+}

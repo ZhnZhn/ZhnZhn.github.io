@@ -1,9 +1,11 @@
 import {
-  useRef, useState, useCallback,
+  useRef, useState,
   useEffect, useImperativeHandle
 } from 'react'
 
 import useRefSet from '../hooks/useRefSet'
+import useRefBool from '../hooks/useRefBool'
+import useBool from '../hooks/useBool'
 import useTheme from '../hooks/useTheme'
 
 import Model from '../../constants/Model'
@@ -12,7 +14,6 @@ import SvgCheckBox from '../zhn/SvgCheckBox'
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
 import InputSelect from '../zhn-select/InputSelect'
-
 
 const TH_ID = 'ROW_CHECKBOX'
 , CHECKED_COLOR = '#1b2836'
@@ -36,46 +37,26 @@ const TH_ID = 'ROW_CHECKBOX'
 , S_SELECT = {
    marginLeft: 24,
    verticalAlign: 'middle'
-}, S_SELECT_OPTIONS = { minHeight: 100 };
+}, S_SELECT_OPTIONS = { minHeight: 100 }
 
-const _fnNoop = () => {};
-
-const _getRefValue = ref => ref.current;
+, FN_NOOP = () => {}
+, _getRefValue = ref => ref.current;
 
 const SeriaRow = (props) => {
   const {
     seria={},
     yAxisOptions,
     compIndex,
-    onReg=_fnNoop,
-    onUnReg=_fnNoop
+    onReg=FN_NOOP,
+    onUnReg=FN_NOOP
   } = props
   , { color, name='' } = seria
   , ref = useRef()
-  , _refIsChecked = useRef(false)
-  , _refCellColor = useRef()
   , [_refToYAxis, _hSelectYAxis] = useRefSet()
-  , [isShowPallete, setIsShowPallete] = useState(false)
-  , [colorEntered, setColorEntered] = useState()
-  , _hCheck = useCallback(() => {
-    _refIsChecked.current = true
-  }, [])
-  , _hUnCheck = useCallback(() => {
-    _refIsChecked.current = false
-  }, [])
-  , _hEnterColor = useCallback(color => {
-    setColorEntered(color)
-  }, [])
-  , _hClosePalette = useCallback(() => {
-    setIsShowPallete(false)
-  }, [])
-  , _hClickPallete = useCallback((color, event) => {
-    if (event && event.target === _getRefValue(_refCellColor)) {
-      setIsShowPallete(is => !is)
-    }
-  }, [])
-  , TS = useTheme(TH_ID)
-  , _color = colorEntered || color || DF_COLOR;
+  , [_refIsChecked, _hCheck, _hUnCheck] = useRefBool(false)
+  , [_color, _setColor] = useState(() => color || DF_COLOR)
+  , [isShowPallete, _hOpenPallete, _hClosePalette] = useBool(false)
+  , TS = useTheme(TH_ID);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useImperativeHandle(ref, () => ({
@@ -121,15 +102,14 @@ const SeriaRow = (props) => {
         {name}
       </span>
       <CellColor
-         ref={_refCellColor}
          className={CL_INPUT_COLOR}
          color={_color}
-         onClick={_hClickPallete}
+         onClick={_hOpenPallete}
       >
         <ModalPalette
            isShow={isShowPallete}
            model={Model.palette}
-           onClickCell={_hEnterColor}
+           onClickCell={_setColor}
            onClose={_hClosePalette}
         />
       </CellColor>

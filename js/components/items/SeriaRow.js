@@ -9,6 +9,10 @@ var _react = require("react");
 
 var _useRefSet = _interopRequireDefault(require("../hooks/useRefSet"));
 
+var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
+
+var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 var _Model = _interopRequireDefault(require("../../constants/Model"));
@@ -50,51 +54,29 @@ const TH_ID = 'ROW_CHECKBOX',
 },
       S_SELECT_OPTIONS = {
   minHeight: 100
-};
-
-const _fnNoop = () => {};
-
-const _getRefValue = ref => ref.current;
+},
+      FN_NOOP = () => {},
+      _getRefValue = ref => ref.current;
 
 const SeriaRow = props => {
   const {
     seria = {},
     yAxisOptions,
     compIndex,
-    onReg = _fnNoop,
-    onUnReg = _fnNoop
+    onReg = FN_NOOP,
+    onUnReg = FN_NOOP
   } = props,
         {
     color,
     name = ''
   } = seria,
         ref = (0, _react.useRef)(),
-        _refIsChecked = (0, _react.useRef)(false),
-        _refCellColor = (0, _react.useRef)(),
         [_refToYAxis, _hSelectYAxis] = (0, _useRefSet.default)(),
-        [isShowPallete, setIsShowPallete] = (0, _react.useState)(false),
-        [colorEntered, setColorEntered] = (0, _react.useState)(),
-        _hCheck = (0, _react.useCallback)(() => {
-    _refIsChecked.current = true;
-  }, []),
-        _hUnCheck = (0, _react.useCallback)(() => {
-    _refIsChecked.current = false;
-  }, []),
-        _hEnterColor = (0, _react.useCallback)(color => {
-    setColorEntered(color);
-  }, []),
-        _hClosePalette = (0, _react.useCallback)(() => {
-    setIsShowPallete(false);
-  }, []),
-        _hClickPallete = (0, _react.useCallback)((color, event) => {
-    if (event && event.target === _getRefValue(_refCellColor)) {
-      setIsShowPallete(is => !is);
-    }
-  }, []),
-        TS = (0, _useTheme.default)(TH_ID),
-        _color = colorEntered || color || DF_COLOR;
+        [_refIsChecked, _hCheck, _hUnCheck] = (0, _useRefBool.default)(false),
+        [_color, _setColor] = (0, _react.useState)(() => color || DF_COLOR),
+        [isShowPallete, _hOpenPallete, _hClosePalette] = (0, _useBool.default)(false),
+        TS = (0, _useTheme.default)(TH_ID);
   /*eslint-disable react-hooks/exhaustive-deps */
-
 
   (0, _react.useImperativeHandle)(ref, () => ({
     getValue: () => {
@@ -143,14 +125,13 @@ const SeriaRow = props => {
       style: S_TITLE,
       children: name
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
-      ref: _refCellColor,
       className: CL_INPUT_COLOR,
       color: _color,
-      onClick: _hClickPallete,
+      onClick: _hOpenPallete,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPalette.default, {
         isShow: isShowPallete,
         model: _Model.default.palette,
-        onClickCell: _hEnterColor,
+        onClickCell: _setColor,
         onClose: _hClosePalette
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect.default, {
