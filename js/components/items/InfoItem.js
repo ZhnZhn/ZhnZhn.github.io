@@ -84,7 +84,7 @@ const InfoItem = ({
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemHeader.default, {
-      rootStyle: S_HEADER,
+      style: S_HEADER,
       captionStyle: S_CAPTION,
       isOpen: isOpen,
       caption: caption,

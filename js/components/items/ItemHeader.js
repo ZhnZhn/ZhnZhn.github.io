@@ -3,88 +3,78 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
-var _react = require("react");
-
-var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
-var TH_ID = 'ELEMENT';
-var CL_CAPTION = "not-selected text-clip bt-left bt";
-var S = {
-  ROOT: {
-    position: 'relative',
-    backgroundColor: '#1b2836',
-    height: 'auto',
-    width: '100%',
-    paddingTop: 6,
-    paddingLeft: 10,
-    paddingRight: 42,
-    paddingBottom: 6,
-    borderTopRightRadius: 2,
-    borderBottomRightRadius: 2
-  },
-  CAPTION: {
-    width: '75%',
-    paddingRight: 2,
-    paddingTop: 4,
-    paddingBottom: 2
-  },
-  OPEN: {
-    color: '#a487d4'
-  },
-  CLOSE: {
-    color: 'gray'
-  },
-  SVG_CLOSE: {
-    position: 'absolute',
-    right: 0,
-    top: 4
-  }
-};
-var MAX_LENGTH = 45;
+var _jsxRuntime = require("react/jsx-runtime");
 
-var _crTitle = function _crTitle(title, caption) {
-  return title || caption.length > MAX_LENGTH ? caption : void 0;
-};
+const TH_ID = 'ELEMENT',
+      CL_CAPTION = "not-selected text-clip bt-left bt",
+      S_ROOT = {
+  position: 'relative',
+  backgroundColor: '#1b2836',
+  height: 'auto',
+  width: '100%',
+  padding: '6px 42px 6px 10px',
+  borderTopRightRadius: 2,
+  borderBottomRightRadius: 2
+},
+      S_CAPTION = {
+  width: '75%',
+  padding: '4px 2px 2px 0'
+},
+      S_OPEN = {
+  color: '#a487d4'
+},
+      S_CLOSE = {
+  color: 'gray'
+},
+      S_SVG_CLOSE = {
+  position: 'absolute',
+  right: 0,
+  top: 4
+},
+      MAX_LENGTH = 45,
+      _crTitle = (title, caption) => title || caption.length > MAX_LENGTH ? caption : void 0;
 
-function ItemHeader(_ref) {
-  var isOpen = _ref.isOpen,
-      rootStyle = _ref.rootStyle,
-      captionStyle = _ref.captionStyle,
-      _ref$caption = _ref.caption,
-      caption = _ref$caption === void 0 ? '' : _ref$caption,
-      title = _ref.title,
-      children = _ref.children,
-      onClick = _ref.onClick,
-      onClose = _ref.onClose;
-
-  var theme = (0, _react.useContext)(_ThemeContext["default"]),
-      TS = theme.getStyle(TH_ID),
-      _title = _crTitle(title, caption),
-      _styleCaption = isOpen ? S.OPEN : S.CLOSE;
+function ItemHeader({
+  isOpen,
+  style,
+  captionStyle,
+  caption = '',
+  title,
+  children,
+  onClick,
+  onClose
+}) {
+  const TS = (0, _useTheme.default)(TH_ID),
+        _title = _crTitle(title, caption),
+        _captionStyle = isOpen ? S_OPEN : S_CLOSE;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: (0, _extends2["default"])({}, S.ROOT, rootStyle, TS.ROOT),
+    style: { ...S_ROOT,
+      ...style,
+      ...TS.ROOT
+    },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
       className: CL_CAPTION,
-      style: (0, _extends2["default"])({}, S.CAPTION, captionStyle, _styleCaption),
+      style: { ...S_CAPTION,
+        ...captionStyle,
+        ..._captionStyle
+      },
       title: _title,
       onClick: onClick,
       children: caption
-    }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].SvgClose, {
-      style: S.SVG_CLOSE,
+    }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.SvgClose, {
+      style: S_SVG_CLOSE,
       onClose: onClose
     })]
   });
 }
 
 var _default = ItemHeader;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ItemHeader.js.map

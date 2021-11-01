@@ -1,32 +1,21 @@
-import useToggle from '../hooks/useToggle'
+import useToggle from '../hooks/useToggle';
 
 import ShowHide from '../zhn/ShowHide';
-import Table from '../zhn-table/Table'
-import ItemHeader from './ItemHeader'
+import Table from '../zhn-table/Table';
+import ItemHeader from './ItemHeader';
 
-const S = {
-  ROOT: {
-    paddingBottom: 8
-  },
-  ROOT_HEADER: {
-    position: 'sticky',
-    top: -1,
-    zIndex: 1,
-    willChange: 'transform'
-  },
-  CAPTION: {
-    width: '100%'
-  },
-  SHOW_HIDE: {
-    paddingTop: 8,
-    paddingBottom: 8
-  },
-  DATA_SOURCE: {
-    paddingTop: 2,
-    paddingLeft: 12,
-    color: '#909090',
-    fontSize: '11px'
-  }
+const S_ROOT = { paddingBottom: 8 }
+, S_HEADER = {
+  position: 'sticky',
+  top: -1,
+  zIndex: 1,
+  willChange: 'transform'
+}, S_CAPTION = { width: '100%' }
+, S_SHOW_HIDE = { padding: '8px 0' }
+, S_DATA_SOURCE = {
+  padding: '2px 0 0 12px',
+  color: '#909090',
+  fontSize: '11px'
 };
 
 const TableItem = ({
@@ -43,18 +32,18 @@ const TableItem = ({
     } = config
   , _gridId = `tb_${id}`;
   return (
-    <div style={S.ROOT}>
+    <div style={S_ROOT}>
       <ItemHeader
         isOpen={isOpen}
-        rootStyle={S.ROOT_HEADER}
+        style={S_HEADER}
         caption={title}
-        captionStyle={S.CAPTION}
+        captionStyle={S_CAPTION}
         onClick={toggleIsOpen}
         onClose={onCloseItem}
       />
       <ShowHide
         isShow={isOpen}
-        style={S.SHOW_HIDE}
+        style={S_SHOW_HIDE}
       >
         <Table
           gridId={_gridId}
@@ -64,11 +53,11 @@ const TableItem = ({
           tableFn={tableFn}
         />
         {dataSource && <div
-           style={{...S.DATA_SOURCE, ...dsStyle}}>{dataSource}
+           style={{...S_DATA_SOURCE, ...dsStyle}}>{dataSource}
          </div>}
       </ShowHide>
     </div>
   );
-}
+};
 
 export default TableItem

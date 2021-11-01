@@ -56,7 +56,7 @@ const InfoItem = ({
   return (
     <div style={S_ROOT}>
       <ItemHeader
-        rootStyle={S_HEADER}
+        style={S_HEADER}
         captionStyle={S_CAPTION}
         isOpen={isOpen}
         caption={caption}

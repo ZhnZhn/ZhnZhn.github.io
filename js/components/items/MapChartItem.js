@@ -24,8 +24,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 const S_ROOT_DIV = {
   position: 'relative',
-  marginBottom: 10,
-  marginRight: 12
+  margin: '0 12px 10px 0'
 },
       S_TIME = {
   display: 'inline-block',
