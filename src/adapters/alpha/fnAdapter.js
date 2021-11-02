@@ -27,7 +27,7 @@ const _crItemConf = ({ data }, option) => {
           _itemKey,
           ...crItemConf(option),
           ...crValueConf(data),
-          items: [...items],
+          items: [...(items || [])],
           dfSubId, dfFn,
           dataSource
        }
