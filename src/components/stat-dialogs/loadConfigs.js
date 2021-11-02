@@ -1,10 +1,10 @@
 import LoadGuard from '../../utils/LoadGuard';
 
+import crEsDimUrl from './crEsDimUrl';
 import loadDimsWithOptions from './loadDimsWithOptions';
 
 const MSG_STILL_LOADING = "Another dialog are still loading"
-, MSG_DIMS = 'Loaded dims without options'
-, ES_BASE_META = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en";
+, MSG_DIMS = 'Loaded dims without options';
 
 const _isDimsWithOptions = (dims) => {
   const _len = dims.length;
@@ -45,27 +45,22 @@ const _crConfigs = (dims, propDims) => {
   return configs;
 };
 
-const _crMetaTime = mapFrequency => {
-  if (mapFrequency === 'M') { return '2019M01'; }
-  if (mapFrequency === 'S') { return '2019S1'; }
-  return '2019';
-};
-
-const _crUrl = ({
+const _crDimUrl = ({
   proxy='',
   baseMeta,
-  dfId,
-  loadId,
-  mapFrequency
-}) => {
-  if (loadId === "EU_STAT") {
-    return `${ES_BASE_META}/${dfId}?time=${_crMetaTime(mapFrequency)}`;
-  }
-  return `${proxy}${baseMeta}/${dfId}`;
+  dfId
+}) => `${proxy}${baseMeta}/${dfId}`;
+
+const _rCrDimUrl = {
+  DF: _crDimUrl,
+  EU_STAT: crEsDimUrl
 };
 
+const _crUrl = props =>
+  (_rCrDimUrl[props.loadId] || _rCrDimUrl.DF)(props);
+
 const _crMetaUrl = props => props.metaUrl
- || _crUrl(props);
+  || _crUrl(props);
 
 const guard = new LoadGuard();
 
