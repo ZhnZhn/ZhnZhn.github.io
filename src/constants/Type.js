@@ -26,6 +26,7 @@ export const BrowserType = {
 
    DB_NOMICS: 'DBN',
    FGR: 'FGR',
+   PE: 'PE',
    US_ECONOMICS: 'USAE',
 
    BLOCKCHAIN: 'BC',

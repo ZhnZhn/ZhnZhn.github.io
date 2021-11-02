@@ -1,4 +1,7 @@
-import { BrowserType as BT, ModalDialog as MD } from './Type';
+import {
+  BrowserType as BT,
+  ModalDialog as MD
+} from './Type';
 
 const BrowserConfig = {
   [BT.STOCK_MARKETS]: {
@@ -15,6 +18,11 @@ const BrowserConfig = {
     browserType: BT.FGR,
     caption: 'Eurostat: FIGARO',
     sourceMenuUrl: './data/figaro/source-menu.json'
+  },
+  [BT.PE]: {
+    browserType: BT.PE,
+    caption: 'Euro Indicators / PEEIs',
+    sourceMenuUrl: './data/peeis/source-menu.json'
   },
   [BT.UN_COMTRADE]: {
     browserType: BT.UN_COMTRADE,

@@ -23,6 +23,7 @@ const BrowserType = {
   STOCKS_BY_SECTORS: 'STOCKS_BY_SECTORS',
   DB_NOMICS: 'DBN',
   FGR: 'FGR',
+  PE: 'PE',
   US_ECONOMICS: 'USAE',
   BLOCKCHAIN: 'BC',
   FUTURES: 'FT',

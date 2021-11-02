@@ -21,6 +21,11 @@ const BrowserConfig = {
     caption: 'Eurostat: FIGARO',
     sourceMenuUrl: './data/figaro/source-menu.json'
   },
+  [_Type.BrowserType.PE]: {
+    browserType: _Type.BrowserType.PE,
+    caption: 'Euro Indicators / PEEIs',
+    sourceMenuUrl: './data/peeis/source-menu.json'
+  },
   [_Type.BrowserType.UN_COMTRADE]: {
     browserType: _Type.BrowserType.UN_COMTRADE,
     caption: 'UN Comtrade',
