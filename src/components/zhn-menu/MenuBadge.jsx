@@ -1,42 +1,35 @@
-import { useContext, useCallback } from 'react';
+import { useCallback } from 'react';
 
-import ThemeContext from '../hoc/ThemeContext'
-import ButtonCircle2 from '../zhn/ButtonCircle2'
+import useTheme from '../hooks/useTheme';
+import ButtonCircle2 from '../zhn/ButtonCircle2';
 
 const TH_ID = 'ELEMENT'
-const CL = "menu__badge";
-
-const S = {
-  BT: {
-    marginLeft: 4
-  },
-  BADGE_OPEN : {
-    color: '#a487d4'
-  }
-};
+, CL = "menu__badge"
+, S_BADGE_OPEN = { color: '#a487d4' };
 
 const MenuBadge = ({
-  isOpen, counter,
-  onClick, onBadgeClose
+  isOpen,
+  counter,
+  onClick,
+  onBadgeClose
 }) => {
-  const theme = useContext(ThemeContext)
-  , TS = theme.getStyle(TH_ID)
+  const _hClick = useCallback(event => {
+    event.stopPropagation();
+    if (!isOpen){
+      onClick();
+    } else {
+      onBadgeClose();
+    }
+  }, [isOpen, onClick, onBadgeClose])
+  , TS = useTheme(TH_ID)
   , _btStyle = isOpen
-       ? S.BADGE_OPEN
-       : null
-  , _hClick = useCallback((event) => {
-      event.stopPropagation();
-      if (!isOpen){
-        onClick();
-      } else {
-        onBadgeClose();
-      }
-    }, [isOpen, onClick, onBadgeClose]);
+        ? S_BADGE_OPEN
+        : null;
   return (
     <ButtonCircle2
       tabIndex="-1"
       className={CL}
-      style={{...S.BT, ..._btStyle, ...TS.BG}}
+      style={{..._btStyle, ...TS.BG}}
       caption={counter}
       onClick={_hClick}
     />
