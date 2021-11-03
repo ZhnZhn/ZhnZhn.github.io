@@ -29,16 +29,10 @@ const {
   useFnFocus
 } = _use.default;
 const TH_ID = 'ELEMENT';
-const CL_CAPTION = 'not-selected text-clip bt-left bt',
+const CL_ITEM_HEADER = 'item-header',
       CL_MORE = "popup-menu charts__menu-more",
-      S_ROOT = {
-  backgroundColor: '#1b2836',
-  height: 'auto',
-  width: '100%',
-  padding: '0 42px 2px 0',
-  borderTopRightRadius: 2,
-  borderBottomRightRadius: 2
-},
+      CL_CAPTION = 'not-selected text-clip bt-left bt',
+      CL_ITEM_TIME = 'item-time',
       S_BT_MORE = {
   position: 'relative',
   top: 3,
@@ -48,18 +42,18 @@ const CL_CAPTION = 'not-selected text-clip bt-left bt',
   stroke: '#777777',
   fill: '#777777'
 },
-      S_ROOT_MORE = {
+      S_MODAL_SLIDER = {
   display: 'inline-block'
 },
       S_CHECK_BOX = {
   position: 'relative',
   top: 1,
-  margin: '0 8px'
+  margin: '0 6px 0 8px'
 },
-      S_CAPTION_OPEN = {
+      S_CAPTION = {
   color: '#a487d4',
   width: 125,
-  padding: '4px 0 2px 0'
+  padding: '4px 0 2px 4px'
 },
       S_CAPTION_CLOSE = {
   color: 'gray'
@@ -68,11 +62,6 @@ const CL_CAPTION = 'not-selected text-clip bt-left bt',
   width: void 0,
   //maxWidth: 250,
   maxWidth: 'calc(100% - 60px)'
-},
-      S_TIME = {
-  color: '#fdb316',
-  paddingLeft: 16,
-  fontWeight: 'bold'
 },
       S_CLOSE = {
   position: 'absolute',
@@ -83,7 +72,7 @@ const CL_CAPTION = 'not-selected text-clip bt-left bt',
 const ItemTime = ({
   itemTime
 }) => itemTime ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-  style: S_TIME,
+  className: CL_ITEM_TIME,
   children: itemTime
 }) : null;
 
@@ -103,7 +92,7 @@ const MenuMore = ({
       onClick: onToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
       isShow: isMore,
-      rootStyle: S_ROOT_MORE,
+      rootStyle: S_MODAL_SLIDER,
       className: CL_MORE,
       style: sliderStyle,
       model: moreModel,
@@ -128,13 +117,12 @@ const Header = ({
 }) => {
   const [isMore, _toggleMore] = useToggle(false),
         TS = useTheme(TH_ID),
-        _captionStyle = crStyle([S_CAPTION_OPEN, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH]),
+        _captionStyle = crStyle([S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH]),
         _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: { ...S_ROOT,
-      ...TS.ROOT
-    },
+    className: CL_ITEM_HEADER,
+    style: TS.ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(MenuMore, {
       isMore: isMore,
       moreModel: moreModel,

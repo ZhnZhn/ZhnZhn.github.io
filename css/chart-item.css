@@ -1,13 +1,29 @@
 
- .chart-item {
-   line-height: 1.5;
-   margin-bottom: 10px;
-   position: relative;
- }
 
+.chart-item {
+  line-height: 1.5;
+  margin-bottom: 10px;
+  position: relative;
+}
 
- @media (min-width: 500px) {
-    .chart-item {
-      margin-right: 12px;
-    }
- }
+@media (min-width: 500px) {
+  .chart-item {
+    margin-right: 12px;
+  }
+}
+
+.item-header {
+  position: relative;
+  background-color: #1b2836;
+  width: 100%;
+  height: auto;
+  padding: 0 42px 2px 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.item-time {
+  color: #fdb316;
+  padding-left: 16px;
+  font-weight: bold;
+}

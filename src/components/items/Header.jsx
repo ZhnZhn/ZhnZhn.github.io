@@ -20,17 +20,12 @@ const {
 
 const TH_ID = 'ELEMENT';
 
-const CL_CAPTION = 'not-selected text-clip bt-left bt'
+const CL_ITEM_HEADER = 'item-header'
 , CL_MORE = "popup-menu charts__menu-more"
+, CL_CAPTION = 'not-selected text-clip bt-left bt'
+, CL_ITEM_TIME = 'item-time'
 
-, S_ROOT = {
-  backgroundColor: '#1b2836',
-  height: 'auto',
-  width: '100%',
-  padding: '0 42px 2px 0',
-  borderTopRightRadius: 2,
-  borderBottomRightRadius: 2
-}, S_BT_MORE = {
+, S_BT_MORE = {
   position: 'relative',
   top: 3,
   left: 2
@@ -38,28 +33,22 @@ const CL_CAPTION = 'not-selected text-clip bt-left bt'
 S_SVG_MORE = {
   stroke: '#777777',
   fill: '#777777'
-}, S_ROOT_MORE = { display: 'inline-block' }
+}, S_MODAL_SLIDER = { display: 'inline-block' }
 , S_CHECK_BOX = {
   position: 'relative',
   top: 1,
-  margin: '0 8px'
+  margin: '0 6px 0 8px'
 },
-S_CAPTION_OPEN = {
+S_CAPTION = {
   color: '#a487d4',
   width: 125,
-  padding: '4px 0 2px 0'
-},S_CAPTION_CLOSE = { color: 'gray' }
+  padding: '4px 0 2px 4px'
+}, S_CAPTION_CLOSE = { color: 'gray' }
 , S_CAPTION_WIDTH = {
   width: void 0,
   //maxWidth: 250,
   maxWidth: 'calc(100% - 60px)'
-},
-S_TIME = {
-  color: '#fdb316',
-  paddingLeft: 16,
-  fontWeight: 'bold'
-},
-S_CLOSE = {
+}, S_CLOSE = {
   position: 'absolute',
   right: 0,
   top: 4
@@ -67,7 +56,7 @@ S_CLOSE = {
 
 
 const ItemTime = ({ itemTime }) => itemTime
-  ? <span style={S_TIME}>{itemTime}</span>
+  ? <span className={CL_ITEM_TIME}>{itemTime}</span>
   : null;
 
 const MenuMore = ({
@@ -88,7 +77,7 @@ const MenuMore = ({
       />
       <ModalSlider
         isShow={isMore}
-        rootStyle={S_ROOT_MORE}
+        rootStyle={S_MODAL_SLIDER}
         className={CL_MORE}
         style={sliderStyle}
         model={moreModel}
@@ -108,7 +97,7 @@ const Header = ({
   const [isMore, _toggleMore] = useToggle(false)
   , TS = useTheme(TH_ID)
   , _captionStyle = crStyle([
-     S_CAPTION_OPEN,
+     S_CAPTION,
      !isOpen && S_CAPTION_CLOSE,
      !valueMoving && S_CAPTION_WIDTH
   ])
@@ -116,7 +105,7 @@ const Header = ({
       ? itemCaption : void 0;
 
   return (
-    <div style={{...S_ROOT, ...TS.ROOT }}>
+    <div className={CL_ITEM_HEADER} style={TS.ROOT}>
       <MenuMore
         isMore={isMore}
         moreModel={moreModel}
