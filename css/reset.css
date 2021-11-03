@@ -31,10 +31,11 @@ body {
 }
 
 button {
-  appearance: none;
   border: none;
   background-color: transparent;
   font-size: inherit;
+  font-family: inherit;
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;

@@ -8,10 +8,10 @@
   100% { background-color: rgba(0, 0, 0, 0.35); }
 }
 
-.show-popup {
-  transform-origin: 50% 0;
+.show-popup {  
+  transform-origin: top;
+  backface-visibility: hidden;  
   animation: showing-popup 400ms ease-out;
-
   /* animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); */
 }
 
