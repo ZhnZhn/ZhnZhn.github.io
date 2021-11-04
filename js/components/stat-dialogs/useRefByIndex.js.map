@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/useRefByIndex.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/useRefByIndex.js",
+ "names": [
+  "useRefByIndex",
+  "refItems",
+  "fSelect",
+  "index",
+  "item",
+  "current"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,aAAa,GAAG,MAAM;AAC1B,QAAMC,QAAQ,GAAG,mBAAO,EAAP,CAAjB;AAAA,QACEC,OAAO,GAAG,wBAAYC,KAAK,IAAKC,IAAD,IAAU;AACvCH,IAAAA,QAAQ,CAACI,OAAT,CAAiBF,KAAjB,IAA0BC,IAAI,GACzB,EAAC,GAAGA;AAAJ,KADyB,GAEzB,KAAK,CAFV;AAGH,GAJW,EAIT,EAJS,CADZ;AAMA,SAAO,CAACH,QAAD,EAAWC,OAAX,CAAP;AACD,CARD;;eAUeF,a"
+}
