@@ -19,7 +19,8 @@ const crSelectItem = (conf, index, {
   const {
     id,
     caption,
-    options
+    options,
+    placeholder
   } = conf,
         _isShow = !isRow[(0, _crIsId.default)(id)];
 
@@ -28,6 +29,7 @@ const crSelectItem = (conf, index, {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
       isShowLabels: isShowLabels,
       caption: caption,
+      placeholder: placeholder,
       options: options,
       onSelect: fSelect(index)
     })

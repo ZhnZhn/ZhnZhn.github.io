@@ -35,6 +35,8 @@ const TOGGLE_CHECKBOX_COLOR = '#1b75bb',
   paddingLeft: 40
 };
 
+const _isBool = is => typeof is === 'boolean';
+
 const _crCheckBoxItem = (item, index, {
   crIsId,
   onToggle,
@@ -43,7 +45,7 @@ const _crCheckBoxItem = (item, index, {
 }) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
   style: S_ROW,
   children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-    initValue: true,
+    initValue: _isBool(item.isRow) ? item.isRow : true,
     style: { ..._Style.S_ROW_CHB,
       ...S_INLINE
     },

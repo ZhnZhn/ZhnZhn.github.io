@@ -8,7 +8,11 @@ import usePreviousProps from './usePreviousProps';
 
 const { crOptions } = ChartTypes
 , { crDateConfig } = D
-, MAP_FREQUENCY_DF = 'M';
+, MAP_FREQUENCY_DF = 'M'
+, _crOptionItem = (caption, value) => ({
+  caption,
+  value
+});
 
 const _loadDims = ({
   dims,
@@ -47,19 +51,25 @@ const _crDateOptions = (configs, _mF, mapDateDf) => {
     dateDefault
   } = crDateConfig(_mF, mapDateDf);
   return [
-    dO, {
-      caption: dateDefault,
-      value: dateDefault
-    }];
+    dO,
+    _crOptionItem(dateDefault, dateDefault)
+  ];
 };
 
 const _crSelectOptions = configs => configs
   .map(config => config.options);
-const _crDimOptions = configs => configs
-  .map(config => ({
-    caption: config.caption,
-    value: config.id
-  }));
+
+const _crDimOptions = configs => {
+ const _dimOptions = [];
+  configs.forEach(config => {
+    if ((config.options || []).length > 1) {
+      _dimOptions.push(
+        _crOptionItem(config.caption, config.id)
+      )
+    }
+  })
+ return _dimOptions;
+};
 
 const useLoadDims = (props) => {
   const {

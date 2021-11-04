@@ -1,27 +1,16 @@
-import {useState, useRef, useCallback, useMemo} from 'react';
+import { useMemo } from 'react';
 
 import D from '../dialogs/DialogCell';
+import useRowToggle from './useRowToggle';
+import useRefList from './useRefList';
 import useToggle2 from './useToggle2';
 import crIsId from './crIsId';
 
 const useModalToggle = (configs) => {
-  const [isToggle, _toggleInputs, _hideInputs] = useToggle2(false)
-  , [isRow, setIsRow] = useState({ isShowChart: true, isShowDate: false})
-  , {isShowChart, isShowDate} = isRow
-  , _toggleIsRow = useCallback(propName => {
-      setIsRow(is => {
-        is[propName] = !is[propName]
-        return {...is};
-      })
-  }, [])
-  , _refTitles = useRef([])
-  ,  _checkCaptionBy = useCallback(index => {
-      _refTitles.current.push(index)
-  }, [])
-  , _uncheckCaption = useCallback(index => {
-     _refTitles.current = _refTitles.current
-        .filter(v => v !== index)
-  }, [])
+  const [isToggle, toggleInputs, hideInputs] = useToggle2(false)
+  , [isRow, setIsRow, toggleIsRow] = useRowToggle(configs)
+  , { isShowChart, isShowDate } = isRow
+  , [refTitles, checkCaptionBy, uncheckCaption] = useRefList();
 
   return [
     /*eslint-disable react-hooks/exhaustive-deps */
@@ -32,18 +21,18 @@ const useModalToggle = (configs) => {
         isShowChart={isShowChart}
         isShowDate={isShowDate}
         crIsId={crIsId}
-        onToggle={_toggleIsRow}
-        onCheckCaption={_checkCaptionBy}
-        onUnCheckCaption={_uncheckCaption}
-        onClose={_hideInputs}
+        onToggle={toggleIsRow}
+        onCheckCaption={checkCaptionBy}
+        onUnCheckCaption={uncheckCaption}
+        onClose={hideInputs}
       />
     ), [isToggle, configs, isShowChart, isShowDate])
-    //_toggleIsRow, _checkCaptionBy, _uncheckCaption, _hideInputs
+    //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
     /*eslint-enable react-hooks/exhaustive-deps */
-    , _refTitles
+    , refTitles
     , isRow
     , setIsRow
-    , _toggleInputs
+    , toggleInputs
   ];
 };
 

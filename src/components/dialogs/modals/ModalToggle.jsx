@@ -24,6 +24,8 @@ const TOGGLE_CHECKBOX_COLOR = '#1b75bb'
   paddingLeft: 40
 };
 
+const _isBool = is => typeof is === 'boolean'
+
 const _crCheckBoxItem = (
   item,
   index, {
@@ -35,7 +37,7 @@ const _crCheckBoxItem = (
 ) => (
   <div style={S_ROW} key={item.id}>
     <RowCheckBox
-      initValue={true}
+      initValue={_isBool(item.isRow) ? item.isRow : true}
       style={{...S_ROW_CHB, ...S_INLINE}}
       checkedColor={TOGGLE_CHECKBOX_COLOR}
       caption={item.caption}

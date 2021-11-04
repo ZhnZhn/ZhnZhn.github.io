@@ -10,13 +10,17 @@ const crSelectItem = (
     fSelect
   }
 ) => {
-  const { id, caption, options } = conf
-  , _isShow = !isRow[crIsId(id)];
+  const {
+    id, caption, options,
+    placeholder
+  } = conf
+  , _isShow = !isRow[crIsId(id)];  
   return (
     <D.ShowHide key={id} isShow={_isShow}>
       <D.RowInputSelect
         isShowLabels={isShowLabels}
         caption={caption}
+        placeholder={placeholder}
         options={options}
         onSelect={fSelect(index)}
       />

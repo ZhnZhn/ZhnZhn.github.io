@@ -23,6 +23,8 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useRefSet = _interopRequireDefault(require("../hooks/useRefSet"));
 
+var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
+
 var _useToolbar = _interopRequireDefault(require("./useToolbar"));
 
 var _useMenuMore = _interopRequireDefault(require("./useMenuMore"));
@@ -35,19 +37,16 @@ var _useLoadDims = _interopRequireDefault(require("./useLoadDims"));
 
 var _useCommandButtons = _interopRequireDefault(require("./useCommandButtons"));
 
+var _updateStateIf = _interopRequireDefault(require("./updateStateIf"));
+
+var _crSpinnerStyle = _interopRequireDefault(require("./crSpinnerStyle"));
+
 var _EsConfig = require("./EsConfig");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
-      MSG_DIMS_LOADING = "Dims is loading",
-      S_SPINNER_LOADING = {
-  margin: '16px auto 32px'
-},
-      S_SPINNER_FAILED = {
-  borderColor: '#f44336',
-  animation: 'none'
-};
+      MSG_DIMS_LOADING = "Dims is loading";
 
 const {
   isCategory
@@ -55,17 +54,7 @@ const {
       IS_SHOW_LABELS = _has.default.wideWidth(),
       _arePropsEqual = (prevProps, props) => prevProps.isShow === props.isShow;
 
-const _crDfC = (props, dim) => {
-  const {
-    dfC
-  } = props;
-
-  if (dfC) {
-    return dfC;
-  }
-
-  return (dim || {}).value;
-};
+const _crDfC = (props, dim) => props.dfC || (dim || {}).value;
 
 const _crDfTitle = (props, dim) => {
   if (props.dfC || !dim) {
@@ -87,9 +76,17 @@ const _fAddErrMsgTo = (msg, msgOnNotSelected, configs, items) => is => {
   });
 };
 
-const _crSpinnerStyle = (isLoading, isLoadFailed) => isLoading ? S_SPINNER_LOADING : isLoadFailed ? { ...S_SPINNER_LOADING,
-  ...S_SPINNER_FAILED
-} : void 0;
+const _addDfValuesFrom = (configs, fSelectItem) => {
+  configs.forEach((config, index) => {
+    const {
+      dfItem
+    } = config;
+
+    if (dfItem) {
+      fSelectItem(index)(dfItem);
+    }
+  });
+};
 
 const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
   const {
@@ -109,11 +106,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
   } = props;
 
   const _isDim = !props.dims && !props.notDim,
-        _refItems = (0, _react.useRef)([]),
-        _fSelect = (0, _react.useCallback)(index => item => {
-    _refItems.current[index] = item ? { ...item
-    } : void 0;
-  }, []),
+        [_refItems, _fSelectItem] = (0, _useRefByIndex.default)(),
         [_refColorComp, _onRegColor] = (0, _useRefSet.default)(),
         [_refDate, _hSelectDate] = (0, _useRefSet.default)(),
         [_refDim, _hSelectDim] = (0, _useRefSet.default)(),
@@ -187,21 +180,10 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
   }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected]) //_refDim, _isDim
   ,
         _hSelectChartType = (0, _react.useCallback)(chartType => {
-    let _isShowDate = false;
+    const _isShowDate = isCategory(chartType) ? (_refDate.current = null, true) : false;
 
-    if (isCategory(chartType)) {
-      _refDate.current = null;
-      _isShowDate = true;
-    }
-
-    setIsRow(is => {
-      is.isShowDate = _isShowDate;
-      return { ...is
-      };
-    });
-    setState(prevState => ({ ...prevState,
-      chartType
-    }));
+    (0, _updateStateIf.default)(setIsRow, 'isShowDate', _isShowDate);
+    (0, _updateStateIf.default)(setState, 'chartType', chartType);
   }, []) //setIsRow, setState
 
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -209,6 +191,8 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
         _hLoad = (0, _react.useCallback)(() => {
+    _addDfValuesFrom(configs, _fSelectItem);
+
     const validationMessages = _crValidationMessages();
 
     if (validationMessages.length === 0) {
@@ -243,7 +227,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
   ,
         _commandButtons = (0, _useCommandButtons.default)(_hLoad),
         _menuMore = (0, _useMenuMore.default)(toggleToolBar, onClickInfo),
-        _spinnerStyle = _crSpinnerStyle(isLoading, isLoadFailed);
+        _spinnerStyle = (0, _crSpinnerStyle.default)(isLoading, isLoadFailed);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
@@ -260,7 +244,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
       crItem: _crSelectItem.default,
       isShowLabels: isShowLabels,
       isRow: isRow,
-      fSelect: _fSelect
+      fSelect: _fSelectItem
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
       chartType: chartType,
       isShowLabels: isShowLabels,
