@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/updateStateIf.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/updateStateIf.js",
+ "names": [
+  "udpdateStateIf",
+  "setState",
+  "propName",
+  "propValue",
+  "prevState"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,cAAc,GAAG,CAACC,QAAD,EAAWC,QAAX,EAAqBC,SAArB,KAAmC;AACxDF,EAAAA,QAAQ,CAACG,SAAS,IAAI;AACpB,QAAIA,SAAS,CAACF,QAAD,CAAT,KAAwBC,SAA5B,EAAuC;AACrCC,MAAAA,SAAS,CAACF,QAAD,CAAT,GAAsBC,SAAtB;AACA,aAAO,EAAC,GAAGC;AAAJ,OAAP;AACD;;AACD,WAAOA,SAAP;AACD,GANO,CAAR;AAOD,CARD;;eAUeJ,c"
+}
