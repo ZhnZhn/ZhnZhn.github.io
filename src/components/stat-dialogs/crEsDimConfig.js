@@ -23,6 +23,13 @@ const _crEsOptions = (category, id) => {
   }));
 };
 
+const _crOptionsWithSc = dim => dim
+ .options.map(item => {
+   item.sc = item.value
+   item.caption = `${item.caption} (${item.value})`
+   return item;
+});
+
 const crEsDimConfig = dimension => {
   const dims = [null]
   , adjDims = [];
@@ -37,6 +44,7 @@ const crEsDimConfig = dimension => {
       };
       if (k === ADJ_ID) {
         dim.c = ADJ
+        dim.options = _crOptionsWithSc(dim)
         adjDims.push(dim)
       } else if (k === GEO_ID) {
         dim.c = GEO_ENTITY
