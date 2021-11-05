@@ -2,6 +2,8 @@
 import ut from '../../utils/ut';
 
 const { getC, getV } = ut;
+const _getC = item => item && item.sc
+ || getC(item);
 
 const _isArr = Array.isArray;
 
@@ -19,12 +21,12 @@ const _crItemCaption = (items, titles) => {
     titles = [0]
   }
   return titles
-    .map(titleIndex => getC(items[titleIndex]))
+    .map(titleIndex => _getC(items[titleIndex]))
     .join(': ');
 };
 
 const _crCaptionItems = items => (items || [])
-  .map(item => getC(item));
+  .map(item => _getC(item));
 
 const createrFns = {
   getC,
@@ -46,10 +48,10 @@ const createrFns = {
     const itemCaption = _crItemCaption(items, titles)
     , _items = items.filter(getC)
     , [item1, item2, item3, item4, ...restItems] = _items
-    , oneC = getC(item1)
-    , twoC = getC(item2)
-    , threeC = getC(item3)
-    , fourC = getC(item4);
+    , oneC = _getC(item1)
+    , twoC = _getC(item2)
+    , threeC = _getC(item3)
+    , fourC = _getC(item4);
 
     let _title = oneC, _subtitle;
     if (fourC) {
