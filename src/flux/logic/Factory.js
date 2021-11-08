@@ -76,13 +76,13 @@ const _crClickAbout = ({ rootUri, descr, descrUrl }) => {
     : void 0;
 };
 
-const D = {
-  SELECT_N: 'DialogSelectN',
-  STAT_N: 'DialogStatN'
-};
-const _getDialogType = (dialogType, { selectProps, dims }) =>
-  dialogType || ( _isArr(selectProps) ? D.SELECT_N : void 0)
-  || (_isArr(dims) ? D.STAT_N : void 0);
+const D_SELECT_N = 'DialogSelectN'
+, D_STAT_N = 'DialogStatN';
+
+const _getDialogType = (dialogType, { selectProps, dims, dfProps }) =>
+  dialogType
+  || (_isArr(selectProps) ? D_SELECT_N : void 0)
+  || (_isArr(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
 
 const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
   if (!loadId){

@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -31,25 +29,29 @@ var _has = _interopRequireDefault(require("../../components/has"));
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
-var getFromDate = _DateUtils["default"].getFromDate,
-    getToDate = _DateUtils["default"].getToDate,
-    isYmd = _DateUtils["default"].isYmd,
-    isYmdOrEmpty = _DateUtils["default"].isYmdOrEmpty;
-var isWideWidth = _has["default"].isWideWidth;
+const {
+  getFromDate,
+  getToDate,
+  isYmd,
+  isYmdOrEmpty
+} = _DateUtils.default;
+const {
+  isWideWidth
+} = _has.default;
 
-var _isArr = Array.isArray,
-    _assign = Object.assign,
-    _initFromDate = getFromDate(2),
-    initToDate = getToDate();
+const _isArr = Array.isArray,
+      _assign = Object.assign,
+      _initFromDate = getFromDate(2),
+      initToDate = getToDate();
 
-var _crFnValue = function _crFnValue(valueFn, valueFnPrefix) {
-  return valueFn ? valueFnPrefix ? _RouterFnValue["default"][valueFn].bind(null, valueFnPrefix) : _RouterFnValue["default"][valueFn] : void 0;
+const _crFnValue = (valueFn, valueFnPrefix) => {
+  return valueFn ? valueFnPrefix ? _RouterFnValue.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
 };
 
-var _crInitFromDate = function _crInitFromDate(_ref) {
-  var isFdw = _ref.isFdw,
-      nInitFromDate = _ref.nInitFromDate;
-
+const _crInitFromDate = ({
+  isFdw,
+  nInitFromDate
+}) => {
   if (isFdw && !isWideWidth) {
     return _initFromDate;
   }
@@ -57,131 +59,136 @@ var _crInitFromDate = function _crInitFromDate(_ref) {
   return nInitFromDate ? getFromDate(nInitFromDate) : _initFromDate;
 };
 
-var _crDateProps = function _crDateProps(dialogProps) {
-  var _props = dialogProps.isFd ? {
-    errNotYmdOrEmpty: _Msg["default"].YMD_DATE_OR_EMPTY,
-    isYmdOrEmpty: isYmdOrEmpty
+const _crDateProps = dialogProps => {
+  const _props = dialogProps.isFd ? {
+    errNotYmdOrEmpty: _Msg.default.YMD_DATE_OR_EMPTY,
+    isYmdOrEmpty
   } : void 0;
 
-  return (0, _extends2["default"])({
+  return {
     initFromDate: _crInitFromDate(dialogProps),
-    initToDate: initToDate,
-    onTestDate: isYmd
-  }, _props);
+    initToDate,
+    onTestDate: isYmd,
+    ..._props
+  };
 };
 
-var _onError = function _onError(alertDescr, alertCaption) {
-  if (alertCaption === void 0) {
-    alertCaption = 'Request Error';
-  }
-
-  _ComponentActions["default"].showAlert({
-    alertDescr: alertDescr,
-    alertCaption: alertCaption
+const _onError = (alertDescr, alertCaption = 'Request Error') => {
+  _ComponentActions.default.showAlert({
+    alertDescr,
+    alertCaption
   });
 };
 
-var _crClickAbout = function _crClickAbout(_ref2) {
-  var rootUri = _ref2.rootUri,
-      descr = _ref2.descr,
-      descrUrl = _ref2.descrUrl;
+const _crClickAbout = ({
+  rootUri,
+  descr,
+  descrUrl
+}) => {
+  const _descrUrl = descr && rootUri ? rootUri + "/" + descr + ".html" : descrUrl;
 
-  var _descrUrl = descr && rootUri ? rootUri + "/" + descr + ".html" : descrUrl;
-
-  return _descrUrl ? _ComponentActions["default"].showDescription.bind(null, {
+  return _descrUrl ? _ComponentActions.default.showDescription.bind(null, {
     descrUrl: _descrUrl
   }) : void 0;
 };
 
-var D = {
-  SELECT_N: 'DialogSelectN',
-  STAT_N: 'DialogStatN'
-};
+const D_SELECT_N = 'DialogSelectN',
+      D_STAT_N = 'DialogStatN';
 
-var _getDialogType = function _getDialogType(dialogType, _ref3) {
-  var selectProps = _ref3.selectProps,
-      dims = _ref3.dims;
-  return dialogType || (_isArr(selectProps) ? D.SELECT_N : void 0) || (_isArr(dims) ? D.STAT_N : void 0);
-};
+const _getDialogType = (dialogType, {
+  selectProps,
+  dims,
+  dfProps
+}) => dialogType || (_isArr(selectProps) ? D_SELECT_N : void 0) || (_isArr(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
 
-var _modifyDialogPropsByLoadId = function _modifyDialogPropsByLoadId(dialogProps, loadId) {
+const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
   if (!loadId) {
     dialogProps.loadId = _Type.LoadType.Q;
   }
 
   if (loadId === _Type.LoadType.EU_STAT) {
-    var dfProps = dialogProps.dfProps,
-        _ref4 = dfProps || {},
-        mapFrequency = _ref4.mapFrequency;
-
+    const {
+      dfProps
+    } = dialogProps,
+          {
+      mapFrequency
+    } = dfProps || {};
     dialogProps.dfProps = _assign({}, dfProps, {
       mapFrequency: mapFrequency || 'M'
     });
   }
 };
 
-var _crDialogComp = function _crDialogComp(browserType, dialogConf) {
-  var itemKey = dialogConf.type,
-      _dialogConf$dialogPro = dialogConf.dialogProps,
-      dialogProps = _dialogConf$dialogPro === void 0 ? {} : _dialogConf$dialogPro,
-      dialogType = dialogConf.dialogType,
-      dialogCaption = dialogConf.dialogCaption,
-      menuTitle = dialogConf.menuTitle,
-      valueFn = dialogProps.valueFn,
-      valueFnPrefix = dialogProps.valueFnPrefix,
-      loadFnType = dialogProps.loadFnType,
-      loadId = dialogProps.loadId,
-      isProxy = dialogProps.isProxy,
-      isGetKey = dialogProps.isGetKey,
-      _dialogType = _getDialogType(dialogType, dialogProps),
-      onClickInfo = _crClickAbout(dialogProps),
-      loadFn = _RouterLoadFn["default"].getFn(loadFnType, _dialogType),
-      proxy = isProxy ? _ChartStore["default"].getProxy() : void 0,
-      getKey = isGetKey && _ChartStore["default"].getKey,
-      onError = isGetKey && _onError,
-      onLoad = _ChartActions["default"].loadStock.bind(null, {
+const _crDialogComp = function (browserType, dialogConf) {
+  const {
+    type: itemKey,
+    dialogProps = {},
+    dialogType,
+    dialogCaption,
+    menuTitle
+  } = dialogConf,
+        {
+    valueFn,
+    valueFnPrefix,
+    loadFnType,
+    loadId,
+    isProxy,
+    isGetKey
+  } = dialogProps,
+        _dialogType = _getDialogType(dialogType, dialogProps),
+        onClickInfo = _crClickAbout(dialogProps),
+        loadFn = _RouterLoadFn.default.getFn(loadFnType, _dialogType),
+        proxy = isProxy ? _ChartStore.default.getProxy() : void 0,
+        getKey = isGetKey && _ChartStore.default.getKey,
+        onError = isGetKey && _onError,
+        onLoad = _ChartActions.default.loadStock.bind(null, {
     chartType: itemKey,
-    browserType: browserType,
-    dialogConf: dialogConf
+    browserType,
+    dialogConf
   }),
-      onShow = _ChartActions["default"].showChart.bind(null, itemKey, browserType, dialogConf);
+        onShow = _ChartActions.default.showChart.bind(null, itemKey, browserType, dialogConf);
 
   _modifyDialogPropsByLoadId(dialogProps, loadId);
 
-  return _RouterDialog["default"].getDialog(_dialogType).then(function (Comp) {
-    return /*#__PURE__*/(0, _react.createElement)(Comp, (0, _extends2["default"])({
+  return _RouterDialog.default.getDialog(_dialogType).then(Comp => {
+    return /*#__PURE__*/(0, _react.createElement)(Comp, {
       key: itemKey,
       caption: dialogCaption || menuTitle,
-      msgOnNotSelected: _Msg["default"].NOT_SELECTED,
-      msgOnNotValidFormat: _Msg["default"].NOT_VALID_FORMAT,
-      fnValue: _crFnValue(valueFn, valueFnPrefix)
-    }, _crDateProps(dialogProps), {
-      onLoad: onLoad,
-      onShow: onShow,
-      onClickInfo: onClickInfo,
-      loadFn: loadFn,
-      proxy: proxy,
-      getKey: getKey,
-      onError: onError
-    }, dialogProps));
+      msgOnNotSelected: _Msg.default.NOT_SELECTED,
+      msgOnNotValidFormat: _Msg.default.NOT_VALID_FORMAT,
+      fnValue: _crFnValue(valueFn, valueFnPrefix),
+      //initFromDate, initToDate, onTestDate,
+      //errNotYmdOrEmpty, isYmdOrEmpty
+      ..._crDateProps(dialogProps),
+      onLoad,
+      onShow,
+      onClickInfo,
+      loadFn,
+      proxy,
+      getKey,
+      onError,
+      ...dialogProps
+    });
   });
 };
 
-var _crOptionDialogComp = function _crOptionDialogComp(option) {
-  var dialogType = option.dialogType;
-  return _RouterDialog["default"].getDialog(dialogType).then(function (Comp) {
+const _crOptionDialogComp = function (option) {
+  const {
+    dialogType
+  } = option;
+  return _RouterDialog.default.getDialog(dialogType).then(Comp => {
     return /*#__PURE__*/(0, _react.createElement)(Comp, {
       key: dialogType
     });
   });
 };
 
-var Factory = (0, _extends2["default"])({}, _fBrowser["default"], {
+const Factory = { ..._fBrowser.default,
   //dialogType, browserType, conf
   createDialog: _crDialogComp,
   //option
   createOptionDialog: _crOptionDialogComp
-});
+};
 var _default = Factory;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=Factory.js.map
