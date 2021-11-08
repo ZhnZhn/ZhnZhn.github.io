@@ -19,14 +19,14 @@ const CONF = {
 };
 const _assign = Object.assign;
 
-const _crMetaUrl = ({
-  rootMeta,
+const _crDimUrl = ({
+  rootDimUrl,
   rootUrl,
   id,
   proxy = '',
-  dfMeta = ''
+  dfDimQuery = ''
 }) => {
-  return "" + proxy + (rootMeta || rootUrl) + "/" + id + dfMeta;
+  return "" + proxy + (rootDimUrl || rootUrl) + "/" + id + dfDimQuery;
 };
 
 const _crTitleAndCaption = dfProps => {
@@ -39,7 +39,7 @@ const _crTitleAndCaption = dfProps => {
   };
 };
 
-const _fOnClickTable = dfProps => () => {
+const factoryClickItem = dfProps => () => {
   const {
     rootUrl,
     id,
@@ -50,7 +50,7 @@ const _fOnClickTable = dfProps => () => {
     noTime,
     dS
   } = dfProps,
-        _metaUrl = _crMetaUrl(dfProps),
+        _dimUrl = _crDimUrl(dfProps),
         _conf = _assign({}, CONF, {
     type: bT + "_" + id,
     ..._crTitleAndCaption(dfProps)
@@ -61,7 +61,7 @@ const _fOnClickTable = dfProps => () => {
     descrUrl: dU,
     dataSource: dS,
     dfProps: {
-      metaUrl: _metaUrl,
+      dimUrl: _dimUrl,
       baseMeta: rootUrl,
       dfId: id,
       proxy,
@@ -72,6 +72,6 @@ const _fOnClickTable = dfProps => () => {
   _ComponentActions.default.showDialog(bT + "_" + id, bT, _conf);
 };
 
-var _default = _fOnClickTable;
+var _default = factoryClickItem;
 exports.default = _default;
 //# sourceMappingURL=factoryClickItem.js.map

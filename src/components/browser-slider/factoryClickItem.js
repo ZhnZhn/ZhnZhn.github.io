@@ -13,8 +13,14 @@ const CONF = {
 
 const _assign = Object.assign;
 
-const _crMetaUrl = ({ rootMeta, rootUrl, id, proxy='', dfMeta='' }) => {
-  return `${proxy}${rootMeta || rootUrl}/${id}${dfMeta}`;
+const _crDimUrl = ({
+  rootDimUrl,
+  rootUrl,
+  id,
+  proxy='',
+  dfDimQuery=''
+}) => {
+  return `${proxy}${rootDimUrl || rootUrl}/${id}${dfDimQuery}`;
 };
 
 const _crTitleAndCaption = (dfProps) => {
@@ -28,13 +34,13 @@ const _crTitleAndCaption = (dfProps) => {
   };
 };
 
-const _fOnClickTable = (dfProps) => () => {
+const factoryClickItem = (dfProps) => () => {
    const {
      rootUrl, id, proxy,
      bT, lT, dU,
      noTime, dS
    } = dfProps
-   , _metaUrl = _crMetaUrl(dfProps)
+   , _dimUrl = _crDimUrl(dfProps)
    , _conf = _assign({}, CONF, {
        type: `${bT}_${id}`,
        ..._crTitleAndCaption(dfProps)
@@ -44,7 +50,7 @@ const _fOnClickTable = (dfProps) => () => {
      descrUrl: dU,
      dataSource: dS,
      dfProps: {
-       metaUrl: _metaUrl,
+       dimUrl: _dimUrl,
        baseMeta: rootUrl,
        dfId: id,
        proxy,
@@ -54,4 +60,4 @@ const _fOnClickTable = (dfProps) => () => {
    ComponentActions.showDialog(`${bT}_${id}`, bT, _conf)
 };
 
-export default _fOnClickTable
+export default factoryClickItem

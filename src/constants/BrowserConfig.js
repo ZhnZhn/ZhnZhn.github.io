@@ -128,8 +128,8 @@ const BrowserConfig = {
       dS: 'Statistics Denmark',
       rootUrl: 'https://api.statbank.dk/v1/subjects',
       dfTi: '?lang=en&includeTables=true',
-      rootMeta: 'https://api.statbank.dk/v1/tableinfo',
-      dfMeta: '?lang=en'
+      rootDimUrl: 'https://api.statbank.dk/v1/tableinfo',
+      dfDimQuery: '?lang=en'
     }
   },
   [BT.IRELAND_STAT_ALL]: {
