@@ -1,8 +1,12 @@
-import D from './DialogCell';
+
 import ButtonCircle from '../zhn/ButtonCircle';
 import ItemStack from '../zhn/ItemStack';
 
-const S_ROW = { padding: '2px 0 4px 0' }
+const S_TOOLBAR = {
+  display: 'flex',
+  alignItems: 'center',
+  padding: '6px 5px'
+}
 , S_BUTTON_CIRCLE = { marginLeft: 20 };
 
 const _crButtonItem = ({
@@ -20,12 +24,12 @@ const _crButtonItem = ({
 );
 
 const ToolbarButtonCircle = ({ buttons }) => (
-  <D.Row.Plain style={S_ROW}>
-    <ItemStack 
-      items={buttons}
-      crItem={_crButtonItem}
+  <div style={S_TOOLBAR} role="toolbar">
+    <ItemStack
+       items={buttons}
+       crItem={_crButtonItem}
     />
-  </D.Row.Plain>
+  </div>
 );
 
 /*

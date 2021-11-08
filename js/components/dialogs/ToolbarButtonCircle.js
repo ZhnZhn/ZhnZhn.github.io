@@ -5,16 +5,16 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _DialogCell = _interopRequireDefault(require("./DialogCell"));
-
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const S_ROW = {
-  padding: '2px 0 4px 0'
+const S_TOOLBAR = {
+  display: 'flex',
+  alignItems: 'center',
+  padding: '6px 5px'
 },
       S_BUTTON_CIRCLE = {
   marginLeft: 20
@@ -33,8 +33,9 @@ const _crButtonItem = ({
 
 const ToolbarButtonCircle = ({
   buttons
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Plain, {
-  style: S_ROW,
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  style: S_TOOLBAR,
+  role: "toolbar",
   children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
     items: buttons,
     crItem: _crButtonItem
