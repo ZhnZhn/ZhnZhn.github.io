@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react';
 import ChartTypes from '../dialogs/ChartTypes';
 import D from '../dialogs/DialogCell';
 
-import loadConfigs from './loadConfigs';
+import loadConfigs from './dimensions/loadConfigs';
 import usePreviousProps from './usePreviousProps';
 
 const { crOptions } = ChartTypes

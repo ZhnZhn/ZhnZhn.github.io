@@ -8,15 +8,18 @@ const _crMetaTime = mapFrequency => {
   return '2019';
 };
 
-const crEsDimUrl = ({
+const crDimUrlEs = ({
   dfNonTime,
   mapFrequency,
   dfId
-}) => {
-  const _queryTail = dfNonTime
+}, queryTail) => {
+  const _queryTail = [queryTail, (dfNonTime
     ? ''
-    : `?time=${_crMetaTime(mapFrequency)}`;
-  return `${ES_BASE_META}/${dfId}${_queryTail}`;
+    : `time=${_crMetaTime(mapFrequency)}`)
+  ].filter(Boolean).join('&')
+  , _qT = _queryTail ? '?' + _queryTail : '';
+
+  return `${ES_BASE_META}/${dfId}${_qT}`;
 };
 
-export default crEsDimUrl
+export default crDimUrlEs

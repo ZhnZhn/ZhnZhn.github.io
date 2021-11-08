@@ -3,11 +3,11 @@ import {
   toFirstUpperCase
 } from './dimConfigFn';
 
-const _crSdnDimOptions = ({ values, id }) =>
+const _crSdnOptions = ({ values, id }) =>
  (values || []).map(item =>
     crDimItem(item.text, id, item.id));
 
-const crSdnDimConfig = (variables) => {
+const crDimConfigSdn = (variables) => {
   const dims = [];
   let timeId, mapFrequency = 'Y';
   variables.forEach(item => {
@@ -23,11 +23,11 @@ const crSdnDimConfig = (variables) => {
       dims.push({
         c: toFirstUpperCase(text),
         v: id,
-        options: _crSdnDimOptions(item)
+        options: _crSdnOptions(item)
       })
     }
   })
   return { mapFrequency, dims, timeId };
 };
 
-export default crSdnDimConfig
+export default crDimConfigSdn

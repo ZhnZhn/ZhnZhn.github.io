@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/stat-dialogs/crSdnDimConfig.js"
+  "../../../../src/components/stat-dialogs/dimensions/crSdnDimConfig.js"
  ],
- "file": "../../../src/components/stat-dialogs/crSdnDimConfig.js",
+ "file": "../../../../src/components/stat-dialogs/dimensions/crSdnDimConfig.js",
  "names": [
   "_crSdnDimOptions",
   "values",

@@ -30,7 +30,7 @@ const _crOptionsWithSc = dim => dim
    return item;
 });
 
-const crEsDimConfig = dimension => {
+const crDimConfigEs = dimension => {
   const dims = [null]
   , adjDims = [];
   _keys(dimension).forEach(k => {
@@ -60,4 +60,4 @@ const crEsDimConfig = dimension => {
   };
 };
 
-export default crEsDimConfig
+export default crDimConfigEs

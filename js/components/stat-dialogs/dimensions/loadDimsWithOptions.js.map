@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/stat-dialogs/loadDimsWithOptions.js"
+  "../../../../src/components/stat-dialogs/dimensions/loadDimsWithOptions.js"
  ],
- "file": "../../../src/components/stat-dialogs/loadDimsWithOptions.js",
+ "file": "../../../../src/components/stat-dialogs/dimensions/loadDimsWithOptions.js",
  "names": [
   "_isArr",
   "Array",

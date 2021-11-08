@@ -5,9 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crEsDimConfig = _interopRequireDefault(require("./crEsDimConfig"));
+var _crDimConfigEs = _interopRequireDefault(require("./crDimConfigEs"));
 
-var _crSdnDimConfig = _interopRequireDefault(require("./crSdnDimConfig"));
+var _crDimConfigSdn = _interopRequireDefault(require("./crDimConfigSdn"));
 
 var _crDimConfig = _interopRequireDefault(require("./crDimConfig"));
 
@@ -30,7 +30,7 @@ const _crDimsConfig = json => {
       mapFrequency = 'Y';
 
   if (_isEs(dimension, source)) {
-    return (0, _crEsDimConfig.default)(dimension);
+    return (0, _crDimConfigEs.default)(dimension);
   }
 
   if (!_isArr(variables)) {
@@ -42,7 +42,7 @@ const _crDimsConfig = json => {
   }
 
   if (_isSdn(variables[0])) {
-    return (0, _crSdnDimConfig.default)(variables);
+    return (0, _crDimConfigSdn.default)(variables);
   }
 
   return (0, _crDimConfig.default)(variables);

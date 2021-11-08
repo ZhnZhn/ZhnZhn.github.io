@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/stat-dialogs/crDimConfig.js"
+  "../../../../src/components/stat-dialogs/dimensions/crDimConfig.js"
  ],
- "file": "../../../src/components/stat-dialogs/crDimConfig.js",
+ "file": "../../../../src/components/stat-dialogs/dimensions/crDimConfig.js",
  "names": [
   "_isArr",
   "Array",

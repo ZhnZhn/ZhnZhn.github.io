@@ -1,0 +1,34 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/stat-dialogs/dimensions/loadConfigs.js"
+ ],
+ "file": "../../../../src/components/stat-dialogs/dimensions/loadConfigs.js",
+ "names": [
+  "MSG_STILL_LOADING",
+  "MSG_INCORRECT_CONFIG",
+  "_isArr",
+  "Array",
+  "isArray",
+  "guard",
+  "LoadGuard",
+  "_crLoadErr",
+  "errMsg",
+  "message",
+  "_getLoad",
+  "props",
+  "dfQ",
+  "loadConfigsImplA",
+  "length",
+  "loadConfigsImplB",
+  "loadConfigs",
+  "isLoading",
+  "Promise",
+  "resolve",
+  "_load",
+  "catch",
+  "finally",
+  "stop"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AAEA,MAAMA,iBAAiB,GAAG,kCAA1B;AAAA,MACEC,oBAAoB,GAAG,gCADzB;AAAA,MAEEC,MAAM,GAAGC,KAAK,CAACC,OAFjB;AAIA,MAAMC,KAAK,GAAG,IAAIC,kBAAJ,EAAd;;AAEA,MAAMC,UAAU,GAAG,CAAC;AAClBC,EAAAA,MADkB;AAElBC,EAAAA;AAFkB,CAAD,MAGZ;AACJD,EAAAA,MAAM,EAAEA,MAAM,IAAIC;AADd,CAHY,CAAnB;;AAOA,MAAMC,QAAQ,GAAGC,KAAK,IAAI;AACxB,QAAM;AAAEC,IAAAA;AAAF,MAAUD,KAAhB;AACA,SAAO,CAACT,MAAM,CAACU,GAAD,CAAP,GACHC,yBADG,GAEHD,GAAG,CAACE,MAAJ,KAAe,CAAf,GACGC,yBADH,GAEG,KAAK,CAJZ;AAKD,CAPD;;AASA,MAAMC,WAAW,GAAIL,KAAD,IAAW;AAC7B,MAAIN,KAAK,CAACY,SAAV,EAAoB;AAClB,WAAOC,OAAO,CAACC,OAAR,CAAgB;AAAEX,MAAAA,MAAM,EAAER;AAAV,KAAhB,CAAP;AACD,GAFD,MAEO;AACL,UAAMoB,KAAK,GAAGV,QAAQ,CAACC,KAAD,CAAtB;;AACA,QAAIS,KAAJ,EAAW;AACT,aAAOA,KAAK,CAACf,KAAD,EAAQM,KAAR,CAAL,CACJU,KADI,CACEd,UADF,EAEJe,OAFI,CAEI,MAAMjB,KAAK,CAACkB,IAAN,EAFV,CAAP;AAGD;;AACD,WAAOL,OAAO,CAACC,OAAR,CAAgB;AAAEX,MAAAA,MAAM,EAAEP;AAAV,KAAhB,CAAP;AACD;AACF,CAZD;;eAcee,W"
+}

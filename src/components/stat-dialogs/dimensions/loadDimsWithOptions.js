@@ -1,5 +1,5 @@
-import crEsDimConfig from './crEsDimConfig';
-import crSdnDimConfig from './crSdnDimConfig';
+import crDimConfigEs from './crDimConfigEs';
+import crDimConfigSdn from './crDimConfigSdn';
 import crDimConfig from './crDimConfig';
 
 import loadJson from './loadJson';
@@ -19,13 +19,13 @@ const _crDimsConfig = (json) => {
   , { variables, dimension, source } = json;
   let timeId, mapFrequency = 'Y';
   if (_isEs(dimension, source)) {
-    return crEsDimConfig(dimension);
+    return crDimConfigEs(dimension);
   }
   if (!_isArr(variables)) {
     return {dims, timeId, mapFrequency};
   }
   if (_isSdn(variables[0])) {
-    return crSdnDimConfig(variables);
+    return crDimConfigSdn(variables);
   }
   return crDimConfig(variables);
 };

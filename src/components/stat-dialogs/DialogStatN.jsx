@@ -21,7 +21,7 @@ import useCommandButtons from './useCommandButtons';
 import updateStateIf from './updateStateIf'
 import crSpinnerStyle from './crSpinnerStyle';
 
-import { GEO_ENTITY } from './EsConfig';
+import { GEO_ENTITY } from './dimensions/EsConfig';
 
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
 , MSG_DIMS_LOADING = "Dims is loading";

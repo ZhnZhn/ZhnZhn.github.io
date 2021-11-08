@@ -11,7 +11,7 @@ var _ChartTypes = _interopRequireDefault(require("../dialogs/ChartTypes"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _loadConfigs = _interopRequireDefault(require("./loadConfigs"));
+var _loadConfigs = _interopRequireDefault(require("./dimensions/loadConfigs"));
 
 var _usePreviousProps = _interopRequireDefault(require("./usePreviousProps"));
 

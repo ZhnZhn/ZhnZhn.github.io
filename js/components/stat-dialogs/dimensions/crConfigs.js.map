@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/stat-dialogs/crConfigs.js"
+  "../../../../src/components/stat-dialogs/dimensions/crConfigs.js"
  ],
- "file": "../../../src/components/stat-dialogs/crConfigs.js",
+ "file": "../../../../src/components/stat-dialogs/dimensions/crConfigs.js",
  "names": [
   "_crConfigItem",
   "id",

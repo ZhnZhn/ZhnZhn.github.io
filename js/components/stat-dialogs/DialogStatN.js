@@ -41,7 +41,7 @@ var _updateStateIf = _interopRequireDefault(require("./updateStateIf"));
 
 var _crSpinnerStyle = _interopRequireDefault(require("./crSpinnerStyle"));
 
-var _EsConfig = require("./EsConfig");
+var _EsConfig = require("./dimensions/EsConfig");
 
 var _jsxRuntime = require("react/jsx-runtime");
 

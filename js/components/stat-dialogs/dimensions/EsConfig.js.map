@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/stat-dialogs/EsConfig.js"
+  "../../../../src/components/stat-dialogs/dimensions/EsConfig.js"
  ],
- "file": "../../../src/components/stat-dialogs/EsConfig.js",
+ "file": "../../../../src/components/stat-dialogs/dimensions/EsConfig.js",
  "names": [
   "TIME_ID",
   "GEO_ID",

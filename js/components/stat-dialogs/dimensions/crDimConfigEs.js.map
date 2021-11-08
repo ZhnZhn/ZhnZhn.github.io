@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/stat-dialogs/crEsDimConfig.js"
+  "../../../../src/components/stat-dialogs/dimensions/crDimConfigEs.js"
  ],
- "file": "../../../src/components/stat-dialogs/crEsDimConfig.js",
+ "file": "../../../../src/components/stat-dialogs/dimensions/crDimConfigEs.js",
  "names": [
   "_keys",
   "Object",
@@ -25,7 +25,7 @@
   "options",
   "item",
   "sc",
-  "crEsDimConfig",
+  "crDimConfigEs",
   "dimension",
   "dims",
   "adjDims",

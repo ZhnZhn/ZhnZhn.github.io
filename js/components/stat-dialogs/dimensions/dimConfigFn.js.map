@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/stat-dialogs/dimConfigFn.js"
+  "../../../../src/components/stat-dialogs/dimensions/dimConfigFn.js"
  ],
- "file": "../../../src/components/stat-dialogs/dimConfigFn.js",
+ "file": "../../../../src/components/stat-dialogs/dimensions/dimConfigFn.js",
  "names": [
   "crDimItem",
   "caption",
