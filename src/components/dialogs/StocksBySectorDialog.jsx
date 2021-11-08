@@ -23,11 +23,13 @@ const S = {
     marginBottom: 10
   },
   LINK_ROOT: {
-    marginTop: 8,
-    marginBottom : 0,
+    display: 'flex',
+    alignItems: 'center',
+    margin: '8px 5px 0 5px',    
     lineHeight: 1.5,
     fontWeight: 'bold'
   },
+
   LINK_CAPTION : {
     color: '#1b75bb',
     display: 'inline-block',
@@ -219,7 +221,7 @@ class StocksBySectorDialog extends Component {
            onSelect={this._hSelectDataSource}
         />
         <D.ShowHide isShow={isShowLink} style={S.LINK_SHOW_HIDE}>
-          <D.Row.Plain style={S.LINK_ROOT}>
+          <div style={S.LINK_ROOT}>
             {
               isShowLabels && <span style={S.LINK_CAPTION}>
                 Link:
@@ -230,7 +232,7 @@ class StocksBySectorDialog extends Component {
                item={item}
                caption="NASDAQ"
              />
-          </D.Row.Plain>
+          </div>
         </D.ShowHide>
       </ModalDialog>
     );

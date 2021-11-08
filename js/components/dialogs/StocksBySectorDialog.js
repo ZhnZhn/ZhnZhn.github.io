@@ -3,13 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -21,8 +15,10 @@ var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog")
 
 var _NasdaqLink = _interopRequireDefault(require("../native-links/NasdaqLink"));
 
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from "prop-types";
-var S = {
+const S = {
   ROOT_NOT_LABELS: {
     width: 280
   },
@@ -38,8 +34,9 @@ var S = {
     marginBottom: 10
   },
   LINK_ROOT: {
-    marginTop: 8,
-    marginBottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    margin: '8px 5px 0 5px',
     lineHeight: 1.5,
     fontWeight: 'bold'
   },
@@ -58,7 +55,7 @@ var S = {
     marginLeft: 8
   }
 };
-var IEX_SOURCES = [{
+const IEX_SOURCES = [{
   a: '1 Month',
   b: '1m'
 }, {
@@ -73,19 +70,18 @@ var IEX_SOURCES = [{
 }, {
   a: '2 Years',
   b: '2y'
-}].map(function (_ref) {
-  var a = _ref.a,
-      b = _ref.b;
-  return {
-    caption: 'IEX Cloud: ' + a,
-    value: 'IEX',
-    dfProps: {
-      dfType: 'chart',
-      dfPeriod: b
-    }
-  };
-});
-var SOURCE_OPTIONS = [{
+}].map(({
+  a,
+  b
+}) => ({
+  caption: 'IEX Cloud: ' + a,
+  value: 'IEX',
+  dfProps: {
+    dfType: 'chart',
+    dfPeriod: b
+  }
+}));
+const SOURCE_OPTIONS = [{
   caption: 'Alpha Vantage: Daily (100)',
   value: 'AL',
   dfProps: {
@@ -94,27 +90,19 @@ var SOURCE_OPTIONS = [{
     interval: 'Daily',
     outputsize: 'compact'
   }
-}].concat(IEX_SOURCES);
-var DF_SOURCE = SOURCE_OPTIONS[0];
+}, ...IEX_SOURCES];
+const DF_SOURCE = SOURCE_OPTIONS[0];
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _isFn = fn => typeof fn === 'function';
 
-var _getItemId = function _getItemId(props) {
-  return ((props.data || {}).item || {}).id;
-};
+const _getItemId = props => ((props.data || {}).item || {}).id;
 
-var _createInitialState = function _createInitialState(props) {
-  return {
-    itemId: _getItemId(props),
-    isShowLink: false
-  };
-};
+const _createInitialState = props => ({
+  itemId: _getItemId(props),
+  isShowLink: false
+});
 
-var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(StocksBySectorDialog, _Component);
-
+class StocksBySectorDialog extends _react.Component {
   /*
    static propTypes = {
      isShow: PropTypes.bool,
@@ -123,63 +111,62 @@ var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
      onClose: PropTypes.func
    }
   */
-  function StocksBySectorDialog(props) {
-    var _this;
+  constructor(props) {
+    super(props);
 
-    _this = _Component.call(this, props) || this;
-
-    _this._hClickLabels = function () {
-      _this.setState(function (prevState) {
-        return {
-          isShowLabels: !prevState.isShowLabels
-        };
-      });
+    this._hClickLabels = () => {
+      this.setState(prevState => ({
+        isShowLabels: !prevState.isShowLabels
+      }));
     };
 
-    _this._hClickLink = function () {
-      _this.setState(function (prevState) {
-        return {
-          isShowLink: !prevState.isShowLink
-        };
-      });
+    this._hClickLink = () => {
+      this.setState(prevState => ({
+        isShowLink: !prevState.isShowLink
+      }));
     };
 
-    _this._hShow = function () {
-      var data = _this.props.data;
+    this._hShow = () => {
+      const {
+        data
+      } = this.props;
 
       if (data && _isFn(data.onShow)) {
         data.onShow();
       }
     };
 
-    _this._hSelectDataSource = function (item) {
-      _this._dataSource = item;
+    this._hSelectDataSource = item => {
+      this._dataSource = item;
     };
 
-    _this._getDataSource = function () {
-      return _this._dataSource || DF_SOURCE;
-    };
+    this._getDataSource = () => this._dataSource || DF_SOURCE;
 
-    _this._hLoad = function () {
-      var _this$props = _this.props,
-          data = _this$props.data,
-          onClose = _this$props.onClose,
-          item = data.item,
-          browserType = data.browserType,
-          chartContainerType = data.chartContainerType,
-          dialogProps = data.dialogProps,
-          _ref2 = item || {},
-          id = _ref2.id,
-          text = _ref2.text,
-          _this$_getDataSource = _this._getDataSource(),
-          caption = _this$_getDataSource.caption,
-          value = _this$_getDataSource.value,
-          dfProps = _this$_getDataSource.dfProps;
+    this._hLoad = () => {
+      const {
+        data,
+        onClose
+      } = this.props,
+            {
+        item,
+        browserType,
+        chartContainerType,
+        dialogProps
+      } = data,
+            {
+        id,
+        text
+      } = item || {},
+            {
+        caption,
+        value,
+        dfProps
+      } = this._getDataSource();
 
-      _ChartActions["default"].loadStock({
+      _ChartActions.default.loadStock({
         chartType: chartContainerType,
-        browserType: browserType
-      }, (0, _extends2["default"])({
+        browserType
+      }, {
         title: text,
         value: id,
         item: item,
@@ -187,89 +174,94 @@ var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
         id: id,
         _itemKey: id + "_" + value,
         linkFn: 'NASDAQ',
-        dataSource: caption
-      }, dialogProps, dfProps));
+        dataSource: caption,
+        ...dialogProps,
+        ...dfProps
+      });
 
       onClose();
     };
 
-    _this.toolbarButtons = [{
+    this.toolbarButtons = [{
       caption: 'L',
       title: 'Click to toggle labels',
-      onClick: _this._hClickLabels
+      onClick: this._hClickLabels
     }, {
       caption: 'O',
       title: 'Click to toggle options',
-      onClick: _this._hClickLink
+      onClick: this._hClickLink
     }];
-    _this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Load, {
-      onClick: _this._hLoad
-    }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Button.Show, {
-      onClick: _this._hShow
+    this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
+      onClick: this._hLoad
+    }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Show, {
+      onClick: this._hShow
     }, "show")];
-    _this.state = (0, _extends2["default"])({}, _createInitialState(props), {
+    this.state = { ..._createInitialState(props),
       isShowLabels: true
-    });
-    return _this;
+    };
   }
 
-  StocksBySectorDialog.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     if (_getItemId(nextProps) !== prevState.itemId) {
       return _createInitialState(nextProps);
     }
 
     return null;
-  };
+  }
 
-  var _proto = StocksBySectorDialog.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
     }
 
     return true;
-  };
+  }
 
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        isShow = _this$props2.isShow,
-        data = _this$props2.data,
-        onClose = _this$props2.onClose,
-        _ref3 = data || {},
-        item = _ref3.item,
-        _ref4 = item || {},
-        text = _ref4.text,
-        _this$state = this.state,
-        isShowLabels = _this$state.isShowLabels,
-        isShowLink = _this$state.isShowLink,
-        _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
-        _linkStyle = isShowLabels ? S.LINK : (0, _extends2["default"])({}, S.LINK, S.LINK_NOT_LABELS);
+  render() {
+    const {
+      isShow,
+      data,
+      onClose
+    } = this.props,
+          {
+      item
+    } = data || {},
+          {
+      text
+    } = item || {},
+          {
+      isShowLabels,
+      isShowLink
+    } = this.state,
+          _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
+          _linkStyle = isShowLabels ? S.LINK : { ...S.LINK,
+      ...S.LINK_NOT_LABELS
+    };
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog["default"], {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
       caption: text,
       style: _style,
       styleCaption: S.CAPTION_SPAN,
       isShow: isShow,
       commandButtons: this._commandButtons,
       onClose: onClose,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ToolbarButtonCircle, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ToolbarButtonCircle, {
         buttons: this.toolbarButtons
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Source",
         placeholder: DF_SOURCE.caption,
         options: SOURCE_OPTIONS,
         onSelect: this._hSelectDataSource
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
         isShow: isShowLink,
         style: S.LINK_SHOW_HIDE,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].Row.Plain, {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           style: S.LINK_ROOT,
           children: [isShowLabels && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
             style: S.LINK_CAPTION,
             children: "Link:"
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqLink["default"], {
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqLink.default, {
             style: _linkStyle,
             item: item,
             caption: "NASDAQ"
@@ -277,11 +269,10 @@ var StocksBySectorDialog = /*#__PURE__*/function (_Component) {
         })
       })]
     });
-  };
+  }
 
-  return StocksBySectorDialog;
-}(_react.Component);
+}
 
 var _default = StocksBySectorDialog;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=StocksBySectorDialog.js.map
