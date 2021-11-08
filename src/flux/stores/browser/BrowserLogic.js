@@ -10,7 +10,7 @@ const _findItemCounter = (appMenu, bT, cT) => BrowserLogic
    : void 0;
 
 const BrowserLogic = {
-  crMenu: crMenu,
+  crMenu,
 
   isWithItemCounter: (browserType) => {
     const _config = BrowserConfig[browserType];
@@ -19,11 +19,12 @@ const BrowserLogic = {
       : !_config.withoutItemCounter;
   },
 
-  initBrowserMenu: (slice, option) => {    
+  initBrowserMenu: (slice, option) => {
     const { json, browserType } = option
-        , { menu, items } = json
-        , elMenu = crMenu(menu, items, browserType);
-    addDialogPropsTo(items);
+    , { menu, items, df } = json
+    , elMenu = crMenu(menu, items, browserType);
+    
+    addDialogPropsTo(items, df);
     slice.routeDialog[browserType] = items;
     slice.browserMenu[browserType] = elMenu;
     return elMenu;

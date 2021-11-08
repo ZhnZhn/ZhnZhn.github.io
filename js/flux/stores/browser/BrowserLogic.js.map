@@ -1,1 +1,38 @@
-{"version":3,"sources":["../../../../src/flux/stores/browser/BrowserLogic.js"],"names":["_findItemCounter","appMenu","bT","cT","BrowserLogic","isWithItemCounter","crMenu","browserType","_config","BrowserConfig","withoutItemCounter","initBrowserMenu","slice","option","json","menu","items","elMenu","routeDialog","browserMenu","setIsOpen","value","item","isOpen","plusCounter","counter","resetCounter"],"mappings":";;;;;;;AAAA;;AAEA;;AACA;;AACA;;AAEA,IAAMA,gBAAgB,GAAG,SAAnBA,gBAAmB,CAACC,OAAD,EAAUC,EAAV,EAAcC,EAAd;AAAA,SAAqBC,YAAY,CACxDC,iBAD4C,CAC1BH,EAD0B,IAEzC,0BAASD,OAAO,CAACC,EAAD,CAAhB,EAAsBC,EAAtB,CAFyC,GAGzC,KAAK,CAHe;AAAA,CAAzB;;AAKA,IAAMC,YAAY,GAAG;AACnBE,EAAAA,MAAM,EAAEA,kBADW;AAGnBD,EAAAA,iBAAiB,EAAE,2BAACE,WAAD,EAAiB;AAClC,QAAMC,OAAO,GAAGC,0BAAcF,WAAd,CAAhB;AACA,WAAO,OAAOC,OAAP,KAAmB,WAAnB,GACH,KADG,GAEH,CAACA,OAAO,CAACE,kBAFb;AAGD,GARkB;AAUnBC,EAAAA,eAAe,EAAE,yBAACC,KAAD,EAAQC,MAAR,EAAmB;AAAA,QAC1BC,IAD0B,GACJD,MADI,CAC1BC,IAD0B;AAAA,QACpBP,WADoB,GACJM,MADI,CACpBN,WADoB;AAAA,QAE1BQ,IAF0B,GAEVD,IAFU,CAE1BC,IAF0B;AAAA,QAEpBC,KAFoB,GAEVF,IAFU,CAEpBE,KAFoB;AAAA,QAG5BC,MAH4B,GAGnB,wBAAOF,IAAP,EAAaC,KAAb,EAAoBT,WAApB,CAHmB;AAIlC,sCAAiBS,KAAjB;AACAJ,IAAAA,KAAK,CAACM,WAAN,CAAkBX,WAAlB,IAAiCS,KAAjC;AACAJ,IAAAA,KAAK,CAACO,WAAN,CAAkBZ,WAAlB,IAAiCU,MAAjC;AACA,WAAOA,MAAP;AACD,GAlBkB;AAoBnBG,EAAAA,SAAS,EAAE,mBAACC,KAAD,EAAQpB,OAAR,EAAiBC,EAAjB,EAAqBC,EAArB,EAA4B;AACrC,QAAIC,YAAY,CAACC,iBAAb,CAA+BH,EAA/B,CAAJ,EAAwC;AACtC,UAAMoB,IAAI,GAAG,0BAASrB,OAAO,CAACC,EAAD,CAAhB,EAAsBC,EAAtB,CAAb;;AACA,UAAImB,IAAJ,EAAU;AACRA,QAAAA,IAAI,CAACC,MAAL,GAAcF,KAAd;AACD;AACF;AACF,GA3BkB;AA4BnBG,EAAAA,WAAW,EAAE,qBAACH,KAAD,EAAQpB,OAAR,EAAiBC,EAAjB,EAAqBC,EAArB,EAA4B;AACvC,QAAMmB,IAAI,GAAGtB,gBAAgB,CAACC,OAAD,EAAUC,EAAV,EAAcC,EAAd,CAA7B;;AACA,QAAImB,IAAJ,EAAS;AACPA,MAAAA,IAAI,CAACG,OAAL,IAAgBJ,KAAhB;AACAC,MAAAA,IAAI,CAACC,MAAL,GAAc,IAAd;AACD;AACF,GAlCkB;AAmCnBG,EAAAA,YAAY,EAAE,sBAACzB,OAAD,EAAUC,EAAV,EAAcC,EAAd,EAAqB;AACjC,QAAMmB,IAAI,GAAGtB,gBAAgB,CAACC,OAAD,EAAUC,EAAV,EAAcC,EAAd,CAA7B;;AACA,QAAImB,IAAJ,EAAU;AACRA,MAAAA,IAAI,CAACG,OAAL,GAAe,CAAf;AACD;AACF;AAxCkB,CAArB;eA2CerB,Y","sourcesContent":["import BrowserConfig from '../../../constants/BrowserConfig';\r\n\r\nimport crMenu from './crMenu'\r\nimport addDialogPropsTo from './addDialogPropsTo'\r\nimport findItem from './findItem'\r\n\r\nconst _findItemCounter = (appMenu, bT, cT) => BrowserLogic\r\n .isWithItemCounter(bT)\r\n   ? findItem(appMenu[bT], cT)\r\n   : void 0;\r\n\r\nconst BrowserLogic = {\r\n  crMenu: crMenu,\r\n\r\n  isWithItemCounter: (browserType) => {\r\n    const _config = BrowserConfig[browserType];\r\n    return typeof _config === 'undefined'\r\n      ? false\r\n      : !_config.withoutItemCounter;\r\n  },\r\n\r\n  initBrowserMenu: (slice, option) => {    \r\n    const { json, browserType } = option\r\n        , { menu, items } = json\r\n        , elMenu = crMenu(menu, items, browserType);\r\n    addDialogPropsTo(items);\r\n    slice.routeDialog[browserType] = items;\r\n    slice.browserMenu[browserType] = elMenu;\r\n    return elMenu;\r\n  },\r\n\r\n  setIsOpen: (value, appMenu, bT, cT) => {\r\n    if (BrowserLogic.isWithItemCounter(bT)) {\r\n      const item = findItem(appMenu[bT], cT);\r\n      if (item) {\r\n        item.isOpen = value;\r\n      }\r\n    }\r\n  },\r\n  plusCounter: (value, appMenu, bT, cT) => {\r\n    const item = _findItemCounter(appMenu, bT, cT);\r\n    if (item){\r\n      item.counter += value;\r\n      item.isOpen = true;\r\n    }\r\n  },\r\n  resetCounter: (appMenu, bT, cT) => {\r\n    const item = _findItemCounter(appMenu, bT, cT);\r\n    if (item) {\r\n      item.counter = 0\r\n    }\r\n  }\r\n};\r\n\r\nexport default BrowserLogic\r\n"],"file":"BrowserLogic.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/browser/BrowserLogic.js"
+ ],
+ "file": "../../../../src/flux/stores/browser/BrowserLogic.js",
+ "names": [
+  "_findItemCounter",
+  "appMenu",
+  "bT",
+  "cT",
+  "BrowserLogic",
+  "isWithItemCounter",
+  "crMenu",
+  "browserType",
+  "_config",
+  "BrowserConfig",
+  "withoutItemCounter",
+  "initBrowserMenu",
+  "slice",
+  "option",
+  "json",
+  "menu",
+  "items",
+  "df",
+  "elMenu",
+  "routeDialog",
+  "browserMenu",
+  "setIsOpen",
+  "value",
+  "item",
+  "isOpen",
+  "plusCounter",
+  "counter",
+  "resetCounter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AACA;;AAEA,MAAMA,gBAAgB,GAAG,CAACC,OAAD,EAAUC,EAAV,EAAcC,EAAd,KAAqBC,YAAY,CACxDC,iBAD4C,CAC1BH,EAD0B,IAEzC,uBAASD,OAAO,CAACC,EAAD,CAAhB,EAAsBC,EAAtB,CAFyC,GAGzC,KAAK,CAHV;;AAKA,MAAMC,YAAY,GAAG;AACnBE,EAAAA,MAAM,EAANA,eADmB;AAGnBD,EAAAA,iBAAiB,EAAGE,WAAD,IAAiB;AAClC,UAAMC,OAAO,GAAGC,uBAAcF,WAAd,CAAhB;AACA,WAAO,OAAOC,OAAP,KAAmB,WAAnB,GACH,KADG,GAEH,CAACA,OAAO,CAACE,kBAFb;AAGD,GARkB;AAUnBC,EAAAA,eAAe,EAAE,CAACC,KAAD,EAAQC,MAAR,KAAmB;AAClC,UAAM;AAAEC,MAAAA,IAAF;AAAQP,MAAAA;AAAR,QAAwBM,MAA9B;AAAA,UACE;AAAEE,MAAAA,IAAF;AAAQC,MAAAA,KAAR;AAAeC,MAAAA;AAAf,QAAsBH,IADxB;AAAA,UAEEI,MAAM,GAAG,qBAAOH,IAAP,EAAaC,KAAb,EAAoBT,WAApB,CAFX;AAIA,mCAAiBS,KAAjB,EAAwBC,EAAxB;AACAL,IAAAA,KAAK,CAACO,WAAN,CAAkBZ,WAAlB,IAAiCS,KAAjC;AACAJ,IAAAA,KAAK,CAACQ,WAAN,CAAkBb,WAAlB,IAAiCW,MAAjC;AACA,WAAOA,MAAP;AACD,GAnBkB;AAqBnBG,EAAAA,SAAS,EAAE,CAACC,KAAD,EAAQrB,OAAR,EAAiBC,EAAjB,EAAqBC,EAArB,KAA4B;AACrC,QAAIC,YAAY,CAACC,iBAAb,CAA+BH,EAA/B,CAAJ,EAAwC;AACtC,YAAMqB,IAAI,GAAG,uBAAStB,OAAO,CAACC,EAAD,CAAhB,EAAsBC,EAAtB,CAAb;;AACA,UAAIoB,IAAJ,EAAU;AACRA,QAAAA,IAAI,CAACC,MAAL,GAAcF,KAAd;AACD;AACF;AACF,GA5BkB;AA6BnBG,EAAAA,WAAW,EAAE,CAACH,KAAD,EAAQrB,OAAR,EAAiBC,EAAjB,EAAqBC,EAArB,KAA4B;AACvC,UAAMoB,IAAI,GAAGvB,gBAAgB,CAACC,OAAD,EAAUC,EAAV,EAAcC,EAAd,CAA7B;;AACA,QAAIoB,IAAJ,EAAS;AACPA,MAAAA,IAAI,CAACG,OAAL,IAAgBJ,KAAhB;AACAC,MAAAA,IAAI,CAACC,MAAL,GAAc,IAAd;AACD;AACF,GAnCkB;AAoCnBG,EAAAA,YAAY,EAAE,CAAC1B,OAAD,EAAUC,EAAV,EAAcC,EAAd,KAAqB;AACjC,UAAMoB,IAAI,GAAGvB,gBAAgB,CAACC,OAAD,EAAUC,EAAV,EAAcC,EAAd,CAA7B;;AACA,QAAIoB,IAAJ,EAAU;AACRA,MAAAA,IAAI,CAACG,OAAL,GAAe,CAAf;AACD;AACF;AAzCkB,CAArB;eA4CetB,Y"
+}
