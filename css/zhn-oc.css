@@ -1,5 +1,11 @@
 
 .zhn-oc {
+  color: #1b2836;
+  fill: #1b2836;
+  stroke: #1b2836;
+  color: var(--t-c, #1b2836);
+  fill: var(--t-c, #1b2836);
+  stroke: var(--t-c, #1b2836);
   display: inline-block;
   width: 100%;
   cursor: pointer;
@@ -8,15 +14,6 @@
 .zhn-oc:active {
   outline: none;
   background-color: rgba(0, 0, 0, 0.15);
-}
-
-.zhn-oc {
-  color: #1b2836;
-  fill: #1b2836;
-  stroke: #1b2836;
-  color: var(--t-c, #1b2836);
-  fill: var(--t-c, #1b2836);
-  stroke: var(--t-c, #1b2836);
 }
 
 .zhn-oc__exp {
