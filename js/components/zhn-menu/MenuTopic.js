@@ -3,31 +3,37 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 
 var _MenuItems = _interopRequireDefault(require("./MenuItems"));
 
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from 'prop-types'
-var MenuTopic = function MenuTopic(_ref) {
-  var style = _ref.style,
-      openColor = _ref.openColor,
-      caption = _ref.caption,
-      isInitOpen = _ref.isInitOpen,
-      items = _ref.items;
+const S_OC_STYLE = {
+  paddingRight: 12,
+  whiteSpace: 'nowrap'
+};
 
-  var _isClose = isInitOpen === true ? false : true;
+const MenuTopic = ({
+  style,
+  openColor,
+  caption,
+  isInitOpen,
+  items
+}) => {
+  const _isClose = isInitOpen === true ? false : true;
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose["default"], {
-    isClose: _isClose,
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     role: "menuitem",
-    caption: caption,
+    isClose: _isClose,
     style: style,
+    ocStyle: S_OC_STYLE,
     openColor: openColor,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems["default"], {
+    caption: caption,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems.default, {
       items: items
     })
   });
@@ -54,5 +60,5 @@ MenuPart.propTypes = {
 
 
 var _default = MenuTopic;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=MenuTopic.js.map

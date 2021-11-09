@@ -1,22 +1,30 @@
 //import PropTypes from 'prop-types'
 
 import OpenClose from '../zhn/OpenClose';
-import MenuItems from './MenuItems'
+import MenuItems from './MenuItems';
+
+const S_OC_STYLE = {
+  paddingRight: 12,
+  whiteSpace: 'nowrap'
+};
 
 const MenuTopic = ({
-  style, openColor,
-  caption, isInitOpen,
+  style,
+  openColor,
+  caption,
+  isInitOpen,
   items
 }) => {
   const _isClose = isInitOpen === true
     ? false : true;
   return (
     <OpenClose
-       isClose={_isClose}
        role="menuitem"
-       caption={caption}
+       isClose={_isClose}
        style={style}
+       ocStyle={S_OC_STYLE}
        openColor={openColor}
+       caption={caption}
     >
        <MenuItems items={items} />
     </OpenClose>
