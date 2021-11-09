@@ -26,11 +26,9 @@ const {
   joinBy,
   crItemConf
 } = _AdapterFn.default;
-const COLOR = {
-  EU: "#0088ff",
-  EA: "#ff5800",
-  NOT_EU_MEMBER: '#8085e9'
-};
+const COLOR_EU = "#0088ff",
+      COLOR_EA = "#ff5800",
+      COLOR_NOT_EU_MEMBER = '#8085e9';
 const C = {
   EU_CODES: ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty"],
   EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
@@ -247,11 +245,11 @@ const EuroStatFn = {
   },
 
   colorSeries(config) {
-    _colorSeriaIn(config, C.EU_CODES, COLOR.EU);
+    _colorSeriaIn(config, C.EU_CODES, COLOR_EU);
 
-    _colorSeriaIn(config, C.EA_CODES, COLOR.EA);
+    _colorSeriaIn(config, C.EA_CODES, COLOR_EA);
 
-    _colorSeriaNotIn(config, C.EU_MEMBER, COLOR.NOT_EU_MEMBER);
+    _colorSeriaNotIn(config, C.EU_MEMBER, COLOR_NOT_EU_MEMBER);
   },
 
   addToCategoryConfig(config, {
@@ -342,7 +340,12 @@ const EuroStatFn = {
   crItemCaption: ({
     title = 'EU'
   }) => title,
-  crDataSource: dfProps => "Eurostat (" + (_getTableId(dfProps) || '') + ")",
+  crDataSource: dfProps => {
+    const _ds = dfProps.dataSource,
+          _prefix = _ds && _ds.indexOf('Eurostat') !== -1 ? _ds : 'Eurostat';
+
+    return _prefix + " (" + (_getTableId(dfProps) || '') + ")";
+  },
   crLinkConf: dfProps => ({
     linkFn: 'ES',
     item: {
