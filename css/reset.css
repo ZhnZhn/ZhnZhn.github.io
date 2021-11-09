@@ -51,3 +51,7 @@ button::-moz-focus-inner {
   border: 0;
   outline: 0;
 }
+
+input {
+  font-family: inherit;
+}
