@@ -76,7 +76,8 @@
 
 .zhn-select__options__div {
   max-height: 200px;
-  overflow: hidden auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
