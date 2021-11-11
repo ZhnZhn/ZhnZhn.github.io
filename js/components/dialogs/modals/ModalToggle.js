@@ -24,18 +24,20 @@ const TOGGLE_CHECKBOX_COLOR = '#1b75bb',
   justifyContent: 'space-between',
   paddingTop: 3
 },
-      S_INLINE = {
-  display: 'inline-block'
-},
       S_CAPTION = {
-  maxWidth: 150
+  maxWidth: 150,
+  textAlign: 'left',
+  verticalAlign: 'middle'
+},
+      S_CHB_TOGGLE = { ..._Style.S_ROW_CHB,
+  display: 'inline-block'
 },
       S_CHB_CAPTION = {
   display: 'inline-block',
   paddingLeft: 40
 };
 
-const _isBool = is => typeof is === 'boolean';
+const _crChbToggleInitValue = isRow => typeof isRow === 'boolean' ? isRow : true;
 
 const _crCheckBoxItem = (item, index, {
   crIsId,
@@ -45,10 +47,8 @@ const _crCheckBoxItem = (item, index, {
 }) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
   style: S_ROW,
   children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-    initValue: _isBool(item.isRow) ? item.isRow : true,
-    style: { ..._Style.S_ROW_CHB,
-      ...S_INLINE
-    },
+    initValue: _crChbToggleInitValue(item.isRow),
+    style: S_CHB_TOGGLE,
     checkedColor: TOGGLE_CHECKBOX_COLOR,
     caption: item.caption,
     captionStyle: S_CAPTION,
@@ -61,6 +61,13 @@ const _crCheckBoxItem = (item, index, {
     onUnCheck: () => onUnCheckCaption(index)
   })]
 }, item.id);
+/*eslint-disable react-hooks/exhaustive-deps */
+
+
+const _useToggleByPropName = (onToggle, propName) => (0, _react.useCallback)(onToggle.bind(null, propName), []); //onToggle, propName
+
+/*eslint-enable react-hooks/exhaustive-deps */
+
 
 const ModalToggle = ({
   isShow,
@@ -79,13 +86,9 @@ const ModalToggle = ({
   onUnCheckCaption,
   onClose
 }) => {
-  /*eslint-disable react-hooks/exhaustive-deps */
-  const _toggleFd = (0, _react.useCallback)(onToggle.bind(null, 'isShowFd'), []),
-        _toggleChart = (0, _react.useCallback)(onToggle.bind(null, 'isShowChart'), []),
-        _toggleDate = (0, _react.useCallback)(onToggle.bind(null, 'isShowDate'), []); //onToggle
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+  const _toggleFd = _useToggleByPropName(onToggle, 'isShowFd'),
+        _toggleChart = _useToggleByPropName(onToggle, 'isShowChart'),
+        _toggleDate = _useToggleByPropName(onToggle, 'isShowDate');
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,

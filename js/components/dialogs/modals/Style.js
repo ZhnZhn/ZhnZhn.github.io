@@ -7,12 +7,11 @@ exports.CL_POPUP_MENU = CL_POPUP_MENU;
 const S_MODAL_POPUP = {
   left: 8,
   zIndex: 100,
-  padding: '4px 12px 12px 12px'
+  padding: '4px 12px 12px'
 };
 exports.S_MODAL_POPUP = S_MODAL_POPUP;
 const S_ROW_CHB = {
-  paddingLeft: 0,
-  paddingBottom: 3
+  padding: '0 0 3px'
 };
 exports.S_ROW_CHB = S_ROW_CHB;
 //# sourceMappingURL=Style.js.map

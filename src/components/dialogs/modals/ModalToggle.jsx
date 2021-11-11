@@ -17,14 +17,22 @@ const TOGGLE_CHECKBOX_COLOR = '#1b75bb'
   justifyContent: 'space-between',
   paddingTop: 3
 }
-, S_INLINE = { display: 'inline-block' }
-, S_CAPTION = { maxWidth: 150 }
+, S_CAPTION = {
+  maxWidth: 150,
+  textAlign: 'left',
+  verticalAlign: 'middle'
+}
+, S_CHB_TOGGLE = {
+  ...S_ROW_CHB,
+  display: 'inline-block'
+}
 , S_CHB_CAPTION = {
   display: 'inline-block',
   paddingLeft: 40
 };
 
-const _isBool = is => typeof is === 'boolean'
+const _crChbToggleInitValue = isRow =>
+  typeof isRow === 'boolean' ? isRow : true;
 
 const _crCheckBoxItem = (
   item,
@@ -37,8 +45,8 @@ const _crCheckBoxItem = (
 ) => (
   <div style={S_ROW} key={item.id}>
     <RowCheckBox
-      initValue={_isBool(item.isRow) ? item.isRow : true}
-      style={{...S_ROW_CHB, ...S_INLINE}}
+      initValue={_crChbToggleInitValue(item.isRow)}
+      style={S_CHB_TOGGLE}
       checkedColor={TOGGLE_CHECKBOX_COLOR}
       caption={item.caption}
       captionStyle={S_CAPTION}
@@ -54,6 +62,17 @@ const _crCheckBoxItem = (
   </div>
 );
 
+/*eslint-disable react-hooks/exhaustive-deps */
+const _useToggleByPropName = (
+  onToggle,
+  propName
+) => useCallback(
+  onToggle.bind(null, propName)
+, []);
+//onToggle, propName
+/*eslint-enable react-hooks/exhaustive-deps */
+
+
 const ModalToggle = ({
   isShow,
   style, className=CL_POPUP_MENU,
@@ -67,15 +86,10 @@ const ModalToggle = ({
   onUnCheckCaption,
   onClose
 }) => {
-  /*eslint-disable react-hooks/exhaustive-deps */
-  const _toggleFd = useCallback(
-    onToggle.bind(null, 'isShowFd'), [])
-  , _toggleChart = useCallback(
-    onToggle.bind(null, 'isShowChart'), [])
-  , _toggleDate = useCallback(
-    onToggle.bind(null, 'isShowDate'), []);
-    //onToggle
-    /*eslint-enable react-hooks/exhaustive-deps */
+  const _toggleFd = _useToggleByPropName(onToggle, 'isShowFd')
+  , _toggleChart = _useToggleByPropName(onToggle, 'isShowChart')
+  , _toggleDate = _useToggleByPropName(onToggle, 'isShowDate');
+
   return (
   <ModalPopup
     isShow={isShow}
