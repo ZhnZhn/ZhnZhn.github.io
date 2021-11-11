@@ -3,9 +3,9 @@ import { memo, useCallback } from 'react';
 import has from '../has';
 import ChartTypes from '../dialogs/ChartTypes';
 
-import SpinnerLoading from '../zhn/SpinnerLoading';
 import ItemStack from '../zhn/ItemStack';
 import D from '../dialogs/DialogCell';
+import Spinner from './Spinner';
 import crSelectItem from './crSelectItem';
 
 import useToggle from '../hooks/useToggle';
@@ -19,12 +19,13 @@ import useLoadDims from './useLoadDims';
 import useCommandButtons from './useCommandButtons';
 
 import updateStateIf from './updateStateIf'
-import crSpinnerStyle from './crSpinnerStyle';
+import crSpinnerStatus from './crSpinnerStatus';
 
 import { GEO_ENTITY } from './dimensions/EsConfig';
 
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
-, MSG_DIMS_LOADING = "Dims is loading";
+, MSG_DIMS_LOADING = "Dims is loading"
+, S_DIV_LOADING = { height: 50, width: '100%' };
 
 const { isCategory } = ChartTypes
 , IS_SHOW_LABELS = has.wideWidth()
@@ -196,7 +197,7 @@ const DialogStatN = memo((props) => {
   /*eslint-enable react-hooks/exhaustive-deps */
   , _commandButtons = useCommandButtons(_hLoad)
   , _menuMore = useMenuMore(toggleToolBar, onClickInfo)
-  , _spinnerStyle = crSpinnerStyle(isLoading, isLoadFailed);
+  , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed);
 
   return (
     <D.DraggableDialog
@@ -211,7 +212,31 @@ const DialogStatN = memo((props) => {
        {_toolbarEl}
        {_modalOptionsEl}
        {_modalToggleEl}
+       <Spinner status={_spinnerStatus} />
        {
+         _spinnerStatus
+           ? <div style={S_DIV_LOADING} />
+           : <ItemStack
+                items={configs}
+                crItem={crSelectItem}
+                isShowLabels={isShowLabels}
+                isRow={isRow}
+                fSelect={_fSelectItem}
+             />
+       }
+       {
+         /*
+         _spinnerStatus
+           ? <Spinner status={_spinnerStatus} />
+           : <ItemStack
+                items={configs}
+                crItem={crSelectItem}
+                isShowLabels={isShowLabels}
+                isRow={isRow}
+                fSelect={_fSelectItem}
+             />
+          */
+         /*
          _spinnerStyle
            ? <SpinnerLoading style={_spinnerStyle} />
            : <ItemStack
@@ -221,6 +246,7 @@ const DialogStatN = memo((props) => {
                 isRow={isRow}
                 fSelect={_fSelectItem}
              />
+          */
        }
        <D.RowChartDate
          chartType={chartType}

@@ -1,0 +1,12 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stat-dialogs/SpinnerStatus.js"
+ ],
+ "file": "../../../src/components/stat-dialogs/SpinnerStatus.js",
+ "names": [
+  "LOADING",
+  "FAILED"
+ ],
+ "mappings": ";;;;AACO,MAAMA,OAAO,GAAG,GAAhB;;AACA,MAAMC,MAAM,GAAG,GAAf"
+}

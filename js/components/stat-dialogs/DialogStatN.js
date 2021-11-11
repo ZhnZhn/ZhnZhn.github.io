@@ -11,11 +11,11 @@ var _has = _interopRequireDefault(require("../has"));
 
 var _ChartTypes = _interopRequireDefault(require("../dialogs/ChartTypes"));
 
-var _SpinnerLoading = _interopRequireDefault(require("../zhn/SpinnerLoading"));
-
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+
+var _Spinner = _interopRequireDefault(require("./Spinner"));
 
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 
@@ -39,14 +39,18 @@ var _useCommandButtons = _interopRequireDefault(require("./useCommandButtons"));
 
 var _updateStateIf = _interopRequireDefault(require("./updateStateIf"));
 
-var _crSpinnerStyle = _interopRequireDefault(require("./crSpinnerStyle"));
+var _crSpinnerStatus = _interopRequireDefault(require("./crSpinnerStatus"));
 
 var _EsConfig = require("./dimensions/EsConfig");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
-      MSG_DIMS_LOADING = "Dims is loading";
+      MSG_DIMS_LOADING = "Dims is loading",
+      S_DIV_LOADING = {
+  height: 50,
+  width: '100%'
+};
 
 const {
   isCategory
@@ -227,7 +231,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
   ,
         _commandButtons = (0, _useCommandButtons.default)(_hLoad),
         _menuMore = (0, _useMenuMore.default)(toggleToolBar, onClickInfo),
-        _spinnerStyle = (0, _crSpinnerStyle.default)(isLoading, isLoadFailed);
+        _spinnerStatus = (0, _crSpinnerStatus.default)(isLoading, isLoadFailed);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
@@ -237,8 +241,10 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
     onShowChart: onShow,
     onFront: onFront,
     onClose: _hClose,
-    children: [_toolbarEl, _modalOptionsEl, _modalToggleEl, _spinnerStyle ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpinnerLoading.default, {
-      style: _spinnerStyle
+    children: [_toolbarEl, _modalOptionsEl, _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.default, {
+      status: _spinnerStatus
+    }), _spinnerStatus ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: S_DIV_LOADING
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
       items: configs,
       crItem: _crSelectItem.default,
