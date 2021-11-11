@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../../src/components/dialogs/rows/crRowOptions.js"],"names":["crRowOptions","isShowLabels","caption","captionStyle","width","rest","isOc","options","optionName","replace"],"mappings":";;;;;;;;;;;AACA;;AAEA,IAAMA,YAAY,GAAG,SAAfA,YAAe;AAAA,MACnBC,YADmB,QACnBA,YADmB;AAAA,0BAEnBC,OAFmB;AAAA,MAEnBA,OAFmB,6BAEX,EAFW;AAAA,MAGnBC,YAHmB,QAGnBA,YAHmB;AAAA,wBAInBC,KAJmB;AAAA,MAInBA,KAJmB,2BAIb,GAJa;AAAA,MAKhBC,IALgB;;AAAA,iCAMT,EANS;AAAA,MAMhBC,IANgB,SAMhBA,IANgB;;AAAA,uCAOhB,uBAAM;AAAEL,IAAAA,YAAY,EAAZA,YAAF;AAAgBC,IAAAA,OAAO,EAAPA,OAAhB;AAAyBC,IAAAA,YAAY,EAAZA;AAAzB,GAAN,EAA+CG,IAA/C,CAPgB;AAQnBC,IAAAA,OAAO;AACLH,MAAAA,KAAK,EAALA;AADK,OAEFC,IAFE;AAGLG,MAAAA,UAAU,EAAEP,YAAY,GACpB,EADoB,GAEpBC,OAAO,CAACO,OAAR,CAAgB,GAAhB,EAAqB,EAArB;AALC;AARY;AAAA,CAArB;;eAiBeT,Y","sourcesContent":["\r\nimport crRow from './crRow'\r\n\r\nconst crRowOptions = ({\r\n  isShowLabels,\r\n  caption='',\r\n  captionStyle,\r\n  width=250,\r\n  ...rest\r\n}, { isOc }={}) => ({\r\n  ...crRow({ isShowLabels, caption, captionStyle }, isOc),\r\n  options: {\r\n    width,\r\n    ...rest,\r\n    optionName: isShowLabels\r\n      ? ''\r\n      : caption.replace(':', '')\r\n  }\r\n});\r\n\r\nexport default crRowOptions\r\n"],"file":"crRowOptions.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/crRowOptions.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/crRowOptions.js",
+ "names": [
+  "crRowOptions",
+  "isShowLabels",
+  "captionStyle",
+  "caption",
+  "width",
+  "rest",
+  "isOc",
+  "options",
+  "optionName"
+ ],
+ "mappings": ";;;;;;;AACA;;AAEA,MAAMA,YAAY,GAAG,CAAC;AACpBC,EAAAA,YADoB;AAEpBC,EAAAA,YAFoB;AAGpBC,EAAAA,OAAO,GAAC,EAHY;AAIpBC,EAAAA,KAAK,GAAC,GAJc;AAKpB,KAAGC;AALiB,CAAD,EAMlB;AAAEC,EAAAA;AAAF,IAAS,EANS,MAMD,EAClB;AACA,KAAG,yBAAW;AAAEL,IAAAA,YAAF;AAAgBC,IAAAA;AAAhB,GAAX,EAA2CI,IAA3C,CAFe;AAGlBH,EAAAA,OAHkB;AAIlBI,EAAAA,OAAO,EAAE;AACPH,IAAAA,KADO;AAEP,OAAGC,IAFI;AAGPG,IAAAA,UAAU,EAAEP,YAAY,GAAG,EAAH,GAAQE;AAHzB;AAJS,CANC,CAArB;;eAiBeH,Y"
+}

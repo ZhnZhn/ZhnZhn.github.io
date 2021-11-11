@@ -1,20 +1,20 @@
 
-import crRow from './crRow'
+import crRowStyle from './crRowStyle';
 
 const crRowOptions = ({
-  isShowLabels,
-  caption='',
+  isShowLabels,  
   captionStyle,
+  caption='',
   width=250,
   ...rest
 }, { isOc }={}) => ({
-  ...crRow({ isShowLabels, caption, captionStyle }, isOc),
+  //rowStyle, labelStyle,
+  ...crRowStyle({ isShowLabels, captionStyle }, isOc),
+  caption,
   options: {
     width,
     ...rest,
-    optionName: isShowLabels
-      ? ''
-      : caption.replace(':', '')
+    optionName: isShowLabels ? '' : caption
   }
 });
 

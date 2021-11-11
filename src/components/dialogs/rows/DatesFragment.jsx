@@ -18,9 +18,9 @@ const _getValue = ref => ref.current.getValue()
 const DatesFragment = forwardRef(({
   isShowLabels=true,
   placeholder,
-  fromCaption='From Date:',
+  fromCaption='From Date',
   initFromDate,
-  toCaption='To Date:',
+  toCaption='To Date',
   initToDate,
   dateStyle,
   errMsg=FORMAT_ERR_MSG,

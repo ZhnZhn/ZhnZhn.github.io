@@ -18,7 +18,7 @@ const S_ROW = {
   //verticalAlign: 'top',
   textAlign: 'right',
   width: 100,
-  paddingRight: 5,
+  paddingRight: 6,
   fontSize: '16px',
   fontWeight: 'bold',
   userSelect: 'none'
@@ -30,11 +30,7 @@ const DialogStyles = {
   //Dialogs, DatesFragments
   ROW: { ...S_ROW },
   CAPTION: { ...S_LABEL },
-
-  crRowCaption: (caption) => caption.indexOf(':') === -1
-    && caption !== ''
-      ? `${caption}:`
-      : caption,
+  
   crRowLabelStyle: (isShowLabels=true, captionStyle) => {
     const rowStyle = isShowLabels
              ? { ...S_ROW }

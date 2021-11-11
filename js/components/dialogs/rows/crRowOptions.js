@@ -3,39 +3,31 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _crRowStyle = _interopRequireDefault(require("./crRowStyle"));
 
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-
-var _crRow = _interopRequireDefault(require("./crRow"));
-
-var crRowOptions = function crRowOptions(_ref, _temp) {
-  var isShowLabels = _ref.isShowLabels,
-      _ref$caption = _ref.caption,
-      caption = _ref$caption === void 0 ? '' : _ref$caption,
-      captionStyle = _ref.captionStyle,
-      _ref$width = _ref.width,
-      width = _ref$width === void 0 ? 250 : _ref$width,
-      rest = (0, _objectWithoutPropertiesLoose2["default"])(_ref, ["isShowLabels", "caption", "captionStyle", "width"]);
-
-  var _ref2 = _temp === void 0 ? {} : _temp,
-      isOc = _ref2.isOc;
-
-  return (0, _extends2["default"])({}, (0, _crRow["default"])({
-    isShowLabels: isShowLabels,
-    caption: caption,
-    captionStyle: captionStyle
-  }, isOc), {
-    options: (0, _extends2["default"])({
-      width: width
-    }, rest, {
-      optionName: isShowLabels ? '' : caption.replace(':', '')
-    })
-  });
-};
+const crRowOptions = ({
+  isShowLabels,
+  captionStyle,
+  caption = '',
+  width = 250,
+  ...rest
+}, {
+  isOc
+} = {}) => ({ //rowStyle, labelStyle,
+  ...(0, _crRowStyle.default)({
+    isShowLabels,
+    captionStyle
+  }, isOc),
+  caption,
+  options: {
+    width,
+    ...rest,
+    optionName: isShowLabels ? '' : caption
+  }
+});
 
 var _default = crRowOptions;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=crRowOptions.js.map

@@ -2,20 +2,21 @@ import { forwardRef } from 'react';
 //import PropTypes from "prop-types";
 
 import InputPattern from '../../zhn/InputPattern'
-import crRow from './crRow'
+import crRowStyle from './crRowStyle'
 
 const RowPattern = forwardRef(({
-  isShowLabels, caption, captionStyle,
+  isShowLabels,
+  captionStyle,
+  caption,
   ...rest
 }, ref) => {
     const {
       rowStyle, labelStyle,
-      caption:_caption
-    } = crRow({ isShowLabels, caption, captionStyle });
+    } = crRowStyle({ isShowLabels, captionStyle });
     return (
       <div style={rowStyle}>
         <span style={labelStyle}>
-           {_caption}
+           {caption}
         </span>
         <InputPattern
            ref={ref}
