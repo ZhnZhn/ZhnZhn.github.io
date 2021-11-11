@@ -6,32 +6,24 @@ import SvgCheckBox from '../../zhn/SvgCheckBox';
 
 const CL = "bt-chb"
 , TH_ID = 'ROW_CHECKBOX'
-, CHECKED_COLOR = '#1b2836';
+, CHECKED_COLOR = '#1b2836'
 
-const S = {
-  ROOT: {
-    paddingTop: 6,
-    paddingLeft: 16
-  },
-  CAPTION: {
-    display: 'inline-block',
-    color: 'grey',
-    paddingLeft: 12,
-    fontSize: '16px',
-    fontWeight: 'bold',
-    userSelect: 'none',
-    cursor: 'pointer'
-  },
-  CHECKED: {
-    color: CHECKED_COLOR
-  }
+, S_ROOT = { padding: '6px 0 0 16px' }
+, S_CAPTION = {
+  display: 'inline-block',
+  color: 'grey',
+  paddingLeft: 12,
+  fontSize: '16px',
+  fontWeight: 'bold',
+  userSelect: 'none',
+  cursor: 'pointer'
 };
 
 const _isFn = fn => typeof fn == 'function'
 , _isUndefined = v => typeof v === 'undefined'
-, _isBool = bool => typeof bool === 'boolean';
+, _isBool = bool => typeof bool === 'boolean'
 
-const _crCheckedStyle = color => ({ color });
+, _crCheckedStyle = color => ({ color });
 
 const RowCheckBox = ({
   style,
@@ -83,10 +75,10 @@ const RowCheckBox = ({
     : captionStyle;
 
   return (
-    <div style={{...S.ROOT, ...style}}>
+    <div style={{...S_ROOT, ...style}}>
       <SvgCheckBox
         value={_value}
-        color={checkedColor}        
+        color={checkedColor}
         checkedColor={TS.CHECKED_COLOR}
         onCheck={_hCheck}
         onUnCheck={_hUnCheck}
@@ -96,7 +88,7 @@ const RowCheckBox = ({
           <button
             className={CL}
             tabIndex="-1"
-            style={{...S.CAPTION, ..._style}}
+            style={{...S_CAPTION, ..._style}}
             onClick={_hToggle}
           >
             {caption}
