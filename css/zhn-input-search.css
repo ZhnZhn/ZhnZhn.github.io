@@ -31,8 +31,7 @@
   border-bottom-right-radius: 5px;
 }
 
-.zhn-search__options__div {
-  min-height: 160px;
+.zhn-search__options__div {  
   max-height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
