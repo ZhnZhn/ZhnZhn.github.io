@@ -11,15 +11,19 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const S_ROW = {
   float: 'right',
-  margin: '8px 4px 10px 0'
+  marginTop: 8,
+  marginBottom: 10
 };
 
 const RowButtons = ({
+  style,
   btStyle,
   onClose,
   children
 }) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-  style: S_ROW,
+  style: { ...S_ROW,
+    ...style
+  },
   children: [children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     style: btStyle,
     caption: "Close",

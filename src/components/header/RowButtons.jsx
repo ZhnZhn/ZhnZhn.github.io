@@ -2,16 +2,17 @@ import FlatButton from '../zhn-m/FlatButton';
 
 const S_ROW = {
   float: 'right',
-  margin: '8px 4px 10px 0'
+  marginTop: 8,
+  marginBottom: 10
 };
 
-
 const RowButtons = ({
+  style,
   btStyle,
   onClose,
   children,
 }) => (
- <div style={S_ROW}>
+ <div style={{...S_ROW, ...style}}>
    {children}
    <FlatButton
      style={btStyle}
@@ -19,6 +20,6 @@ const RowButtons = ({
      onClick={onClose}
    />
  </div>
-)
+);
 
 export default RowButtons
