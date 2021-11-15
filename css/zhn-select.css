@@ -70,8 +70,8 @@
   background-color: #e1e1cb;
   color: green;
   width: 160px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
 }
 
 .zhn-select__options__div {
@@ -110,11 +110,11 @@
 }
 
 .zhn-select__footer {
-  position: relative;
+  position: relative;  
   background-color: #a3a3a3;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
   line-height: 1.5;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
 }
 .zhn-select__footer__index {
   display: inline-block;
