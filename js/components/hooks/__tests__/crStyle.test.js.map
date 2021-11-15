@@ -1,1 +1,21 @@
-{"version":3,"sources":["../../../../src/components/hooks/__tests__/crStyle.test.js"],"names":["describe","fn","crStyle","it","_s1","width","_s2","height","expect","toEqual","NaN"],"mappings":";;;;;;AAAA;;AAEAA,QAAQ,CAAC,SAAD,EAAY,YAAI;AACtB,MAAMC,EAAE,GAAGC,mBAAX;AACAC,EAAAA,EAAE,CAAC,8BAAD,EAAiC,YAAI;AACrC,QAAMC,GAAG,GAAG;AAAEC,MAAAA,KAAK,EAAE;AAAT,KAAZ;AAAA,QACEC,GAAG,GAAG;AAAED,MAAAA,KAAK,EAAE,EAAT;AAAaE,MAAAA,MAAM,EAAE;AAArB,KADR;AAGAC,IAAAA,MAAM,CAACP,EAAE,CAAC,EAAD,CAAH,CAAN,CAAeQ,OAAf,CAAuB,EAAvB;AACAD,IAAAA,MAAM,CAACP,EAAE,CAAC,CAACG,GAAD,EAAME,GAAN,CAAD,CAAH,CAAN,CACGG,OADH,+BACeL,GADf,EACuBE,GADvB;AAEAE,IAAAA,MAAM,CAACP,EAAE,CAAC,CAACG,GAAD,EAAM,KAAN,EAAa,IAAb,EAAmB,KAAK,CAAxB,EAA2BM,GAA3B,EAAgC,EAAhC,EAAoCJ,GAApC,CAAD,CAAH,CAAN,CACGG,OADH,+BACeL,GADf,EACuBE,GADvB;AAED,GATC,CAAF;AAUD,CAZO,CAAR","sourcesContent":["import crStyle from '../crStyle'\r\n\r\ndescribe('crStyle', ()=>{\r\n  const fn = crStyle\r\n  it('should create style from arr', ()=>{\r\n    const _s1 = { width: 10 }\r\n    , _s2 = { width: 20, height: 20 };\r\n\r\n    expect(fn([])).toEqual({})\r\n    expect(fn([_s1, _s2]))\r\n      .toEqual({..._s1, ..._s2})\r\n    expect(fn([_s1, false, null, void 0, NaN, '', _s2]))\r\n      .toEqual({..._s1, ..._s2})\r\n  })\r\n})\r\n"],"file":"crStyle.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/hooks/__tests__/crStyle.test.js"
+ ],
+ "file": "../../../../src/components/hooks/__tests__/crStyle.test.js",
+ "names": [
+  "describe",
+  "fn",
+  "crStyle",
+  "it",
+  "_s1",
+  "width",
+  "_s2",
+  "height",
+  "expect",
+  "toEqual",
+  "NaN"
+ ],
+ "mappings": ";;;;AAAA;;AAEAA,QAAQ,CAAC,SAAD,EAAY,MAAI;AACtB,QAAMC,EAAE,GAAGC,gBAAX;AACAC,EAAAA,EAAE,CAAC,8BAAD,EAAiC,MAAI;AACrC,UAAMC,GAAG,GAAG;AAAEC,MAAAA,KAAK,EAAE;AAAT,KAAZ;AAAA,UACEC,GAAG,GAAG;AAAED,MAAAA,KAAK,EAAE,EAAT;AAAaE,MAAAA,MAAM,EAAE;AAArB,KADR;AAGAC,IAAAA,MAAM,CAACP,EAAE,EAAH,CAAN,CAAaQ,OAAb,CAAqB,EAArB;AACAD,IAAAA,MAAM,CAACP,EAAE,CAAC,EAAD,CAAH,CAAN,CAAeQ,OAAf,CAAuB,EAAvB;AACAD,IAAAA,MAAM,CAACP,EAAE,CAAC,CAACG,GAAD,EAAME,GAAN,CAAD,CAAH,CAAN,CACGG,OADH,CACW,EAAC,GAAGL,GAAJ;AAAS,SAAGE;AAAZ,KADX;AAEAE,IAAAA,MAAM,CAACP,EAAE,CAAC,CAACG,GAAD,EAAM,KAAN,EAAa,IAAb,EAAmB,KAAK,CAAxB,EAA2BM,GAA3B,EAAgC,EAAhC,EAAoCJ,GAApC,CAAD,CAAH,CAAN,CACGG,OADH,CACW,EAAC,GAAGL,GAAJ;AAAS,SAAGE;AAAZ,KADX;AAED,GAVC,CAAF;AAWD,CAbO,CAAR"
+}

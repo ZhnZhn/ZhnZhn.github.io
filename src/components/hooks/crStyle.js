@@ -1,14 +1,12 @@
 
 const _assign = Object.assign;
 
-const crStyle = (arr) => {
-  const _len = arr.length
-  , style = {};
-  for(let i=0; i<_len; i++){
-    const _style = arr[i];
-    if (_style) { _assign(style, _style) }
-  }
-  return style;
-};
+const crStyle = arr => (arr||[])
+ .reduce((style, itemStyle) => {
+   if (itemStyle) {
+     _assign(style, itemStyle)
+   }
+   return style;
+ }, {});
 
 export default crStyle

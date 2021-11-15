@@ -1,1 +1,18 @@
-{"version":3,"sources":["../../../src/components/hooks/crStyle.js"],"names":["_assign","Object","assign","crStyle","arr","_len","length","style","i","_style"],"mappings":";;;;AACA,IAAMA,OAAO,GAAGC,MAAM,CAACC,MAAvB;;AAEA,IAAMC,OAAO,GAAG,SAAVA,OAAU,CAACC,GAAD,EAAS;AACvB,MAAMC,IAAI,GAAGD,GAAG,CAACE,MAAjB;AAAA,MACEC,KAAK,GAAG,EADV;;AAEA,OAAI,IAAIC,CAAC,GAAC,CAAV,EAAaA,CAAC,GAACH,IAAf,EAAqBG,CAAC,EAAtB,EAAyB;AACvB,QAAMC,MAAM,GAAGL,GAAG,CAACI,CAAD,CAAlB;;AACA,QAAIC,MAAJ,EAAY;AAAET,MAAAA,OAAO,CAACO,KAAD,EAAQE,MAAR,CAAP;AAAwB;AACvC;;AACD,SAAOF,KAAP;AACD,CARD;;eAUeJ,O","sourcesContent":["\r\nconst _assign = Object.assign;\r\n\r\nconst crStyle = (arr) => {\r\n  const _len = arr.length\r\n  , style = {};\r\n  for(let i=0; i<_len; i++){\r\n    const _style = arr[i];\r\n    if (_style) { _assign(style, _style) }\r\n  }\r\n  return style;\r\n};\r\n\r\nexport default crStyle\r\n"],"file":"crStyle.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/crStyle.js"
+ ],
+ "file": "../../../src/components/hooks/crStyle.js",
+ "names": [
+  "_assign",
+  "Object",
+  "assign",
+  "crStyle",
+  "arr",
+  "reduce",
+  "style",
+  "itemStyle"
+ ],
+ "mappings": ";;;;AACA,MAAMA,OAAO,GAAGC,MAAM,CAACC,MAAvB;;AAEA,MAAMC,OAAO,GAAGC,GAAG,IAAI,CAACA,GAAG,IAAE,EAAN,EACrBC,MADqB,CACd,CAACC,KAAD,EAAQC,SAAR,KAAsB;AAC5B,MAAIA,SAAJ,EAAe;AACbP,IAAAA,OAAO,CAACM,KAAD,EAAQC,SAAR,CAAP;AACD;;AACD,SAAOD,KAAP;AACD,CANqB,EAMnB,EANmB,CAAvB;;eAQeH,O"
+}
