@@ -1,8 +1,7 @@
 import crAddProps from './crAddProps';
 import crSelectProps from './crSelectProps';
 
-const _assign = Object.assign
-, _keys = Object.keys;
+const _keys = Object.keys;
 
 const addDialogPropsTo = (items, df) => {
   const { dfAddProps } = df || {};
@@ -14,12 +13,15 @@ const addDialogPropsTo = (items, df) => {
       , addProps = crAddProps(items, addPropsId)
       , _selectProps = crSelectProps(addProps, dialogProps);
 
-      item.dialogProps = _assign({},
-        addProps, dialogProps, _selectProps
-      )
-      item.dialogProps.dfProps = _assign({},
-        addProps.dfProps, dialogProps.dfProps
-      )
+      item.dialogProps = {
+        ...addProps,
+        ...dialogProps,
+        ..._selectProps
+      }
+      item.dialogProps.dfProps = {
+        ...addProps.dfProps,
+        ...dialogProps.dfProps
+      }
     }
   })
 };

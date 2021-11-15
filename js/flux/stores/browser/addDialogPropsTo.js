@@ -9,8 +9,7 @@ var _crAddProps = _interopRequireDefault(require("./crAddProps"));
 
 var _crSelectProps = _interopRequireDefault(require("./crSelectProps"));
 
-const _assign = Object.assign,
-      _keys = Object.keys;
+const _keys = Object.keys;
 
 const addDialogPropsTo = (items, df) => {
   const {
@@ -28,8 +27,13 @@ const addDialogPropsTo = (items, df) => {
             addProps = (0, _crAddProps.default)(items, addPropsId),
             _selectProps = (0, _crSelectProps.default)(addProps, dialogProps);
 
-      item.dialogProps = _assign({}, addProps, dialogProps, _selectProps);
-      item.dialogProps.dfProps = _assign({}, addProps.dfProps, dialogProps.dfProps);
+      item.dialogProps = { ...addProps,
+        ...dialogProps,
+        ..._selectProps
+      };
+      item.dialogProps.dfProps = { ...addProps.dfProps,
+        ...dialogProps.dfProps
+      };
     }
   });
 };
