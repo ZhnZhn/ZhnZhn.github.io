@@ -22,10 +22,11 @@ var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from 'prop-types'
-const S = {
-  BT_PROXY: {
-    marginRight: 8
-  }
+const S_MR_4 = {
+  marginRight: 4
+},
+      S_MR_12 = {
+  marginRight: 12
 };
 const UI_THEME_OPTIONS = [{
   caption: 'Dark',
@@ -137,11 +138,12 @@ const PaneOptions = ({
       onCheck: _hSetHalo.bind(null, false),
       onUnCheck: _hSetHalo.bind(null, true)
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
+      style: S_MR_12,
       btStyle: btStyle,
       onClose: onClose,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
         style: { ...btStyle,
-          ...S.BT_PROXY
+          ...S_MR_4
         },
         caption: "SET PROXY",
         onClick: _hSetProxy

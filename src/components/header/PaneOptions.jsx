@@ -9,11 +9,8 @@ import D from '../dialogs/DialogCell'
 import FlatButton from '../zhn-m/FlatButton'
 import RowButtons from './RowButtons'
 
-const S = {
-  BT_PROXY: {
-    marginRight: 8
-  }
-};
+const S_MR_4 = { marginRight: 4 }
+, S_MR_12 = { marginRight: 12 };
 
 const UI_THEME_OPTIONS = [
   { caption: 'Dark', value: 'GREY' },
@@ -133,9 +130,9 @@ const PaneOptions = ({
         onCheck={_hSetHalo.bind(null, false)}
         onUnCheck={_hSetHalo.bind(null, true)}
      />
-     <RowButtons btStyle={btStyle} onClose={onClose}>
+     <RowButtons style={S_MR_12} btStyle={btStyle} onClose={onClose}>
        <FlatButton
-         style={{...btStyle, ...S.BT_PROXY}}
+         style={{...btStyle, ...S_MR_4}}
          caption="SET PROXY"
          onClick={_hSetProxy}
        />
