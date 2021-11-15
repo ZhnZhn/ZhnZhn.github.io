@@ -1,23 +1,27 @@
+const _isArr = Array.isArray;
 
 const _crHm = data => {
-  const hm = {};
+  const hm = Object.create(null)
+  , _cPropName = (data[0] || {}).c ? 'c' : 'category';
   data.forEach(point => {
-    hm[point.category] = point
+    hm[point[_cPropName]] = point
   })
   return hm;
 };
 
 const fCategoryCalc = calc => (d1, d2, {rc, sc}) => {
-  const hmD2 = _crHm(d2);
+  if (!_isArr(d1) || !_isArr(d2)) {
+    return [];
+  }
+  const _hmD2 = _crHm(d2);
   return d1.map(p1 => {
-    const {category, color, status} = p1
-    , value = calc(p1, hmD2[category]);
+    const {category, color, status} = p1;
     return {
-      y: value,
+      y: calc(p1, _hmD2[category]),
       id: category,
       c: category,
       color: color === sc ? rc : color,
-      status: status
+      status
     };
   });
 };

@@ -1,39 +1,45 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
+const _isArr = Array.isArray;
 
-var _crHm = function _crHm(data) {
-  var hm = {};
-  data.forEach(function (point) {
-    hm[point.category] = point;
+const _crHm = data => {
+  const hm = Object.create(null),
+        _cPropName = (data[0] || {}).c ? 'c' : 'category';
+
+  data.forEach(point => {
+    hm[point[_cPropName]] = point;
   });
   return hm;
 };
 
-var fCategoryCalc = function fCategoryCalc(calc) {
-  return function (d1, d2, _ref) {
-    var rc = _ref.rc,
-        sc = _ref.sc;
+const fCategoryCalc = calc => (d1, d2, {
+  rc,
+  sc
+}) => {
+  if (!_isArr(d1) || !_isArr(d2)) {
+    return [];
+  }
 
-    var hmD2 = _crHm(d2);
+  const _hmD2 = _crHm(d2);
 
-    return d1.map(function (p1) {
-      var category = p1.category,
-          color = p1.color,
-          status = p1.status,
-          value = calc(p1, hmD2[category]);
-      return {
-        y: value,
-        id: category,
-        c: category,
-        color: color === sc ? rc : color,
-        status: status
-      };
-    });
-  };
+  return d1.map(p1 => {
+    const {
+      category,
+      color,
+      status
+    } = p1;
+    return {
+      y: calc(p1, _hmD2[category]),
+      id: category,
+      c: category,
+      color: color === sc ? rc : color,
+      status
+    };
+  });
 };
 
 var _default = fCategoryCalc;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fCategoryCalc.js.map
