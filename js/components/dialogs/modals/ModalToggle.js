@@ -26,6 +26,7 @@ const TOGGLE_CHECKBOX_COLOR = '#1b75bb',
 },
       S_CAPTION = {
   maxWidth: 150,
+  paddingBottom: 2,
   textAlign: 'left',
   verticalAlign: 'middle'
 },
@@ -34,6 +35,7 @@ const TOGGLE_CHECKBOX_COLOR = '#1b75bb',
 },
       S_CHB_CAPTION = {
   display: 'inline-block',
+  paddingTop: 2,
   paddingLeft: 40
 };
 
