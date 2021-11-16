@@ -224,30 +224,6 @@ const DialogStatN = memo((props) => {
                 fSelect={_fSelectItem}
              />
        }
-       {
-         /*
-         _spinnerStatus
-           ? <Spinner status={_spinnerStatus} />
-           : <ItemStack
-                items={configs}
-                crItem={crSelectItem}
-                isShowLabels={isShowLabels}
-                isRow={isRow}
-                fSelect={_fSelectItem}
-             />
-          */
-         /*
-         _spinnerStyle
-           ? <SpinnerLoading style={_spinnerStyle} />
-           : <ItemStack
-                items={configs}
-                crItem={crSelectItem}
-                isShowLabels={isShowLabels}
-                isRow={isRow}
-                fSelect={_fSelectItem}
-             />
-          */
-       }
        <D.RowChartDate
          chartType={chartType}
          isShowLabels={isShowLabels}
