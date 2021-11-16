@@ -114,7 +114,7 @@ const useLoadDims = (props) => {
          selectOptions: _crSelectOptions(configs),
          mapFrequency: _mF,
          dimOptions: _crDimOptions(configs),
-         chartOptions: crOptions({ configs, chartsType }),
+         chartOptions: crOptions({ configs, chartsType, mapFrequency: _mF }),
          dateOptions,
          dateDf
         })

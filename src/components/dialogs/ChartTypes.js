@@ -65,27 +65,30 @@ const _crDF = (captions, mapFrequency) => {
     ]));
 };
 
-const _crT1 = () => ([
+const _crT1 = () => [
   _crItem(['Default: Spline', V.S ]),
   _crItem(['Line', V.L]),
   _crItem(['Area', V.A]),
-]);
-const _crT1A = () => ([
+];
+const _crT1A = () => [
   _crItem(['Default: Area', V.A]),
   _crItem(['Line', V.L]),
   _crItem(['Spline', V.S ])
-]);
+];
 
 
-const _crT2 = () => ([
+const _crT2 = () => [
   ..._crT1(),
   _crItem(['Column', V.S_C ]),
-]);
+];
 
-const _crT2A = () => ([
+const _crYearlyByMonthItem = mapFrequency =>
+  _isMonthly(mapFrequency) && _crItem(['Yearly by Months' , V.A_Y ]);
+
+const _crT2A = (_, mapFrequency) => [
   ..._crT2(),
-  _crItem(['Yearly by Months' , V.A_Y ])
-]);
+  _crYearlyByMonthItem(mapFrequency)
+].filter(Boolean);
 
 const _crT3All = (oneCaption) => _crItems([
   [`Column: By ${oneCaption}`, V.C, oneCaption],
@@ -94,34 +97,34 @@ const _crT3All = (oneCaption) => _crItems([
   [`Bar: By ${oneCaption}: Cluster`, V.B_C, oneCaption]
 ]);
 
-const _crT2AE = () => ([
-  ..._crT2A(),
+const _crT2AE = (_, mapFrequency) => [
+  ..._crT2A(_, mapFrequency),
   ..._crT3All("Dim")
-])
+];
 
-const _crT3 = ([oneCaption]) => ([
+const _crT3 = ([oneCaption]) => [
   _crItem(['Default: Spline', V.S]),
   ..._crT3All(oneCaption)
-]);
+];
 
-const _crT3B = ([oneCaption]) => ([
+const _crT3B = ([oneCaption], mapFrequency) => [
   _crItem(['Default: Spline', V.S]),
-  _crItem(['Yearly by Months', V.A_Y]),
+  _crYearlyByMonthItem(mapFrequency),
   ..._crT3All(oneCaption)
-]);
+].filter(Boolean);
 
 
-const _crT3A = ([oneCaption]) => ([
+const _crT3A = ([oneCaption]) => [
   ..._crT3([oneCaption]),
   _crItem([`TreeMap: By ${oneCaption}`, V.TM, oneCaption]),
   _crItem([`TreeMap: By ${oneCaption}: Cluster`, V.TM_C, oneCaption])
-]);
+];
 
-const _crT3A2 = ([oneCaption]) => ([
+const _crT3A2 = ([oneCaption]) => [
   ..._crT3A([oneCaption]),
   _crItem([`TreeMap: By ${oneCaption}: Depth 2`, V.TM_2, oneCaption]),
   _crItem([`TreeMap: By ${oneCaption}: Depth 2: Cluster`, V.TM_2_C, oneCaption])
-]);
+];
 
 const _r = {
   DF: _crDF,

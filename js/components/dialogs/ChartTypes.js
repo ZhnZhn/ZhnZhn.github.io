@@ -55,15 +55,17 @@ const _crT1A = () => [_crItem(['Default: Area', V.A]), _crItem(['Line', V.L]), _
 
 const _crT2 = () => [..._crT1(), _crItem(['Column', V.S_C])];
 
-const _crT2A = () => [..._crT2(), _crItem(['Yearly by Months', V.A_Y])];
+const _crYearlyByMonthItem = mapFrequency => _isMonthly(mapFrequency) && _crItem(['Yearly by Months', V.A_Y]);
+
+const _crT2A = (_, mapFrequency) => [..._crT2(), _crYearlyByMonthItem(mapFrequency)].filter(Boolean);
 
 const _crT3All = oneCaption => _crItems([["Column: By " + oneCaption, V.C, oneCaption], ["Column: By " + oneCaption + ": Cluster", V.C_C, oneCaption], ["Bar: By " + oneCaption, V.B, oneCaption], ["Bar: By " + oneCaption + ": Cluster", V.B_C, oneCaption]]);
 
-const _crT2AE = () => [..._crT2A(), ..._crT3All("Dim")];
+const _crT2AE = (_, mapFrequency) => [..._crT2A(_, mapFrequency), ..._crT3All("Dim")];
 
 const _crT3 = ([oneCaption]) => [_crItem(['Default: Spline', V.S]), ..._crT3All(oneCaption)];
 
-const _crT3B = ([oneCaption]) => [_crItem(['Default: Spline', V.S]), _crItem(['Yearly by Months', V.A_Y]), ..._crT3All(oneCaption)];
+const _crT3B = ([oneCaption], mapFrequency) => [_crItem(['Default: Spline', V.S]), _crYearlyByMonthItem(mapFrequency), ..._crT3All(oneCaption)].filter(Boolean);
 
 const _crT3A = ([oneCaption]) => [..._crT3([oneCaption]), _crItem(["TreeMap: By " + oneCaption, V.TM, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Cluster", V.TM_C, oneCaption])];
 

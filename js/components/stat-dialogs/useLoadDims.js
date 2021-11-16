@@ -130,7 +130,8 @@ const useLoadDims = props => {
         dimOptions: _crDimOptions(configs),
         chartOptions: crOptions({
           configs,
-          chartsType
+          chartsType,
+          mapFrequency: _mF
         }),
         dateOptions,
         dateDf
