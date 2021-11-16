@@ -17,7 +17,7 @@ const S_SCROLL_PANE = {
   height: 360,
   paddingRight: 10
 }
-, S_OC_CHILD = { paddingLeft: 4}
+, S_OC_CHILD = { paddingLeft: 8}
 , S_ROW_BTS = { margLeft: 0 }
 , S_BT_SET = { margin: '0 2px' };
 

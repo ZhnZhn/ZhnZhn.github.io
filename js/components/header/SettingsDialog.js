@@ -32,7 +32,7 @@ const S_MODAL = {
   width: 295
 },
       S_TITLE_API = {
-  width: 80
+  width: 82
 },
       S_TITLE_OPTION = {
   width: 110

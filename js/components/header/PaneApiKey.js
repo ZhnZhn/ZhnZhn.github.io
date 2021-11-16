@@ -31,7 +31,7 @@ const S_SCROLL_PANE = {
   paddingRight: 10
 },
       S_OC_CHILD = {
-  paddingLeft: 4
+  paddingLeft: 8
 },
       S_ROW_BTS = {
   margLeft: 0

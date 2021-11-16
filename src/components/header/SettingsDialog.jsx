@@ -18,7 +18,7 @@ const S_MODAL = {
 }, S_MODAL_SMALL = {
   width: 295
 }, S_TITLE_API = {
-  width: 80
+  width: 82
 }, S_TITLE_OPTION = {
   width: 110
 }, S_BT = {
