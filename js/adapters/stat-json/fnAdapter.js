@@ -16,7 +16,8 @@ const {
   crId,
   roundBy,
   valueMoving,
-  crItemConf
+  crItemConf,
+  toUpperCaseFirst
 } = _AdapterFn.default;
 const _keys = Object.keys;
 const TITLE = {
@@ -169,6 +170,7 @@ const fnAdapter = {
   numberFormat,
   crId,
   roundBy,
+  toUpperCaseFirst,
   crTitle: option => {
     switch (option.browserType) {
       case 'NST':

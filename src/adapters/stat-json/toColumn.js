@@ -10,7 +10,8 @@ const {
   isYNumber,
   crTitle,
   crTid,
-  crChartOption
+  crChartOption,
+  toUpperCaseFirst
 } = fnAdapter;
 
 const _assign = Object.assign
@@ -115,13 +116,12 @@ const _crTitle = (dfTitle, option) => dfTitle
 const _crSubtitle = (items, category) => {
   const _arr = [];
   items.forEach(item => {
-    if (item && item.slice && !item.slice[category]) {
-      _arr.push(item.caption)
+    const { slice, caption } = item || {};
+    if (slice && !slice[category] && caption) {
+      _arr.push(toUpperCaseFirst(caption))
     }
   })
-  return _arr
-   .filter(Boolean)
-   .join(": ");
+  return _arr.join(": ");
 };
 
 const toColumn = {

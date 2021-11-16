@@ -8,8 +8,9 @@ const {
   numberFormat,
   crId,
   roundBy,
-  valueMoving,  
-  crItemConf
+  valueMoving,
+  crItemConf,
+  toUpperCaseFirst
 } = AdapterFn;
 
 const _keys = Object.keys;
@@ -155,6 +156,7 @@ const fnAdapter = {
   numberFormat,
   crId,
   roundBy,
+  toUpperCaseFirst,
 
   crTitle: (option) => {
     switch(option.browserType){
