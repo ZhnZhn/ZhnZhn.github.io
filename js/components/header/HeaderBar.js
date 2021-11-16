@@ -43,26 +43,23 @@ const {
   useFnFocus
 } = _use.default;
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
-      CAPTION = "ERC v0.18.0";
-const ID = 'HEADER_BAR';
-const CL = {
-  HEADER: "header",
-  ICON: "header__icon-erc",
-  LABEL: "header__app-label",
-  BM: "popup-menu header__panel-browser",
-  TOPICS: "header__bt-topics",
-  QUANDL: "header__bt-quandl",
-  EUROSTAT: "header__bt-eurostat",
-  WATCH: "header__bt-watch",
-  BTS_RIGHT: "header__bts-right",
-  ABOUT: "header__bt-about",
-  BROWSER_MENU: "popup-menu header__panel-browser"
-};
-const S_SVG_BT = {
+      CAPTION = "ERC v0.18.0",
+      THEME_ID = 'HEADER_BAR',
+      CL_HEADER = "header",
+      CL_ICON = "header__icon-erc",
+      CL_LABEL = "header__app-label",
+      CL_TOPICS = "header__bt-topics",
+      CL_QUANDL = "header__bt-quandl",
+      CL_EUROSTAT = "header__bt-eurostat",
+      CL_WATCH = "header__bt-watch",
+      CL_BTS_RIGHT = "header__bts-right",
+      CL_ABOUT = "header__bt-about",
+      CL_BROWSER_MENU = "popup-menu header__panel-browser",
+      S_SVG_BT = {
   verticalAlign: 'middle',
   margin: '0 8px 3px 8px'
-};
-const MODEL = (0, _BrowserModel.default)();
+},
+      MODEL = (0, _BrowserModel.default)();
 
 const HeaderBar = ({
   store,
@@ -70,44 +67,44 @@ const HeaderBar = ({
 }) => {
   const [isTopics, toggleTopics] = useToggle(false),
         [refBt, _toggleTopics] = useFnFocus(toggleTopics),
-        TS = useTheme(ID);
+        TS = useTheme(THEME_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: CL.HEADER,
+    className: CL_HEADER,
     style: TS.ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading.default, {
       store: store
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc.default, {
-      className: CL.ICON,
+      className: CL_ICON,
       title: LOGO_TITLE
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_AppLabel.default, {
-      className: CL.LABEL,
+      className: CL_LABEL,
       caption: CAPTION
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       refBt: refBt,
       isArrow: true,
       timeout: 0,
-      className: CL.TOPICS,
+      className: CL_TOPICS,
       style: TS.BT,
       caption: "Topics",
       title: "Click to open topics menu",
       accessKey: "t",
       onClick: _toggleTopics
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
-      className: CL.QUANDL,
+      className: CL_QUANDL,
       style: TS.BT,
       caption: "Quandl",
       title: "Quandl Browser",
       accessKey: "q",
       onClick: _BrowserActions.default.showQuandl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
-      className: CL.EUROSTAT,
+      className: CL_EUROSTAT,
       style: TS.BT,
       caption: "Eurostat",
-      title: "Eurostat Statistics Browser",
+      title: "Eurostat Browser",
       accessKey: "u",
       onClick: _BrowserActions.default.showEurostat
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
-      className: CL.WATCH,
+      className: CL_WATCH,
       style: TS.BT,
       caption: "Watch",
       title: "Watch List Browser",
@@ -119,7 +116,7 @@ const HeaderBar = ({
       closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
       onShowDialog: _ComponentActions.default.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: CL.BTS_RIGHT,
+      className: CL_BTS_RIGHT,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {
         store: store
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
@@ -133,7 +130,7 @@ const HeaderBar = ({
           style: S_SVG_BT
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
-        className: CL.ABOUT,
+        className: CL_ABOUT,
         style: TS.BT,
         title: "About Web Application ERC",
         accessKey: "a",
@@ -145,7 +142,7 @@ const HeaderBar = ({
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
       isShow: isTopics,
-      className: CL.BROWSER_MENU,
+      className: CL_BROWSER_MENU,
       model: MODEL,
       onClose: _toggleTopics
     })]

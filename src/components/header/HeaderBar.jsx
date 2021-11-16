@@ -20,53 +20,52 @@ const {
 const { useTheme, useToggle, useFnFocus } = use;
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
-    , CAPTION = "ERC v0.18.0";
+, CAPTION = "ERC v0.18.0"
 
-const ID = 'HEADER_BAR';
+, THEME_ID = 'HEADER_BAR'
 
-const CL = {
-  HEADER: "header",
-  ICON: `header__icon-erc`,
-  LABEL: "header__app-label",
-  BM: "popup-menu header__panel-browser",
-  TOPICS: "header__bt-topics",
-  QUANDL: "header__bt-quandl",
-  EUROSTAT: "header__bt-eurostat",
-  WATCH: "header__bt-watch",
-  BTS_RIGHT: "header__bts-right",
-  ABOUT: "header__bt-about",
+, CL_HEADER = "header"
+, CL_ICON = "header__icon-erc"
+, CL_LABEL = "header__app-label"
+, CL_TOPICS = "header__bt-topics"
+, CL_QUANDL = "header__bt-quandl"
+, CL_EUROSTAT = "header__bt-eurostat"
+, CL_WATCH = "header__bt-watch"
+, CL_BTS_RIGHT = "header__bts-right"
+, CL_ABOUT = "header__bt-about"
+, CL_BROWSER_MENU = "popup-menu header__panel-browser"
 
-  BROWSER_MENU: "popup-menu header__panel-browser"
-};
-
-const S_SVG_BT = {
+, S_SVG_BT = {
   verticalAlign: 'middle',
   margin: '0 8px 3px 8px'
-};
+}
 
-const MODEL = crBrowserModel();
+, MODEL = crBrowserModel();
 
-const HeaderBar = ({ store, showSettings }) => {
+const HeaderBar = ({
+  store,
+  showSettings
+}) => {
   const [isTopics, toggleTopics] = useToggle(false)
   , [refBt, _toggleTopics] = useFnFocus(toggleTopics)
-  , TS = useTheme(ID);
+  , TS = useTheme(THEME_ID);
 
   return (
-    <div className={CL.HEADER} style={TS.ROOT} >
+    <div className={CL_HEADER} style={TS.ROOT} >
        <ProgressLoading store={store} />
        <IconLogoErc
-          className={CL.ICON}
+          className={CL_ICON}
           title={LOGO_TITLE}
        />
        <AppLabel
-          className={CL.LABEL}
+          className={CL_LABEL}
           caption={CAPTION}
        />
        <FlatButton
          refBt={refBt}
          isArrow={true}
          timeout={0}
-         className={CL.TOPICS}
+         className={CL_TOPICS}
          style={TS.BT}
          caption="Topics"
          title="Click to open topics menu"
@@ -74,7 +73,7 @@ const HeaderBar = ({ store, showSettings }) => {
          onClick={_toggleTopics}
         />
         <FlatButton
-          className={CL.QUANDL}
+          className={CL_QUANDL}
           style={TS.BT}
           caption="Quandl"
           title="Quandl Browser"
@@ -82,15 +81,15 @@ const HeaderBar = ({ store, showSettings }) => {
           onClick={BA.showQuandl}
         />
         <FlatButton
-          className={CL.EUROSTAT}
+          className={CL_EUROSTAT}
           style={TS.BT}
           caption="Eurostat"
-          title="Eurostat Statistics Browser"
+          title="Eurostat Browser"
           accessKey="u"
           onClick={BA.showEurostat}
         />
         <FlatButton
-           className={CL.WATCH}
+           className={CL_WATCH}
            style={TS.BT}
            caption="Watch"
            title="Watch List Browser"
@@ -103,10 +102,8 @@ const HeaderBar = ({ store, showSettings }) => {
           closeDialogAction={CAT.CLOSE_DIALOG}
           onShowDialog={CA.showDialog}
         />
-        <div className={CL.BTS_RIGHT}>
-          <LimitRemainingLabel
-             store={store}
-          />
+        <div className={CL_BTS_RIGHT}>
+          <LimitRemainingLabel store={store} />
           <FlatButton
              style={TS.BT}
              isPrimary={true}
@@ -118,7 +115,7 @@ const HeaderBar = ({ store, showSettings }) => {
              <SvgSettings style={S_SVG_BT} />
            </FlatButton>
            <FlatButton
-             className={CL.ABOUT}
+             className={CL_ABOUT}
              style={TS.BT}
              title="About Web Application ERC"
              accessKey="a"
@@ -130,12 +127,12 @@ const HeaderBar = ({ store, showSettings }) => {
         </div>
          <ModalSlider
            isShow={isTopics}
-           className={CL.BROWSER_MENU}
+           className={CL_BROWSER_MENU}
            model={MODEL}
            onClose={_toggleTopics}
          />
     </div>
   );
-}
+};
 
 export default HeaderBar
