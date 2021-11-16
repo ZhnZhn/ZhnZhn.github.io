@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = require("react");
 
+var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var _has = _interopRequireDefault(require("../has"));
@@ -88,7 +90,7 @@ const HotBar = ({
   closeDialogAction,
   onShowDialog
 }) => {
-  const _refMaxBt = (0, _react.useRef)(_calcMaxButtons(maxButtons)),
+  const _maxNumberOfBts = (0, _useRefInit.default)(() => _calcMaxButtons(maxButtons)),
         [hotButtons, setHotButtons] = (0, _react.useState)([]),
         _hClean = (0, _react.useCallback)(() => setHotButtons([]), []);
 
@@ -96,7 +98,7 @@ const HotBar = ({
     if (actionType === closeDialogAction) {
       setHotButtons(arr => {
         if (!_isIn(arr, conf.type)) {
-          const _index = arr.length % _refMaxBt.current;
+          const _index = arr.length % _maxNumberOfBts;
 
           arr[_index] = conf;
           return [...arr];

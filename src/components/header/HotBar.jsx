@@ -1,5 +1,6 @@
-import { useRef, useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 
+import useRefInit from '../hooks/useRefInit'
 import useListen from '../hooks/useListen'
 
 import has from '../has'
@@ -73,7 +74,7 @@ const HotBar = ({
   closeDialogAction,
   onShowDialog
 }) => {
-  const _refMaxBt = useRef(_calcMaxButtons(maxButtons))
+  const _maxNumberOfBts = useRefInit(() => _calcMaxButtons(maxButtons))
   , [hotButtons, setHotButtons] = useState([])
   , _hClean = useCallback(() => setHotButtons([]), []);
 
@@ -81,7 +82,7 @@ const HotBar = ({
     if (actionType === closeDialogAction ) {
       setHotButtons(arr => {
         if (!_isIn(arr, conf.type)) {
-          const _index = arr.length % _refMaxBt.current
+          const _index = arr.length % _maxNumberOfBts
           arr[_index] = conf
           return [...arr];
         }
