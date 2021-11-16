@@ -3,6 +3,7 @@ import Big from 'big.js'
 
 import dateFormat from '../charts/dateFormat'
 import ut from '../utils/ut'
+import toUpperCaseFirst from '../utils/toUpperCaseFirst'
 
 import mathFn from '../math/mathFn'
 import seriaFn from '../math/seriaFn'
@@ -169,11 +170,7 @@ const AdapterFn = {
    .filter(Boolean)
    .join(delimeter),
 
-  toUpperCaseFirst: (str) => typeof str === 'string'
-    && str.length > 0
-      ? str[0].toUpperCase() + str.substring(1)
-      : EMPTY
-  ,
+  toUpperCaseFirst,
 
   findMinY,
   findMaxY,

@@ -11,6 +11,8 @@ var _dateFormat = _interopRequireDefault(require("../charts/dateFormat"));
 
 var _ut = _interopRequireDefault(require("../utils/ut"));
 
+var _toUpperCaseFirst = _interopRequireDefault(require("../utils/toUpperCaseFirst"));
+
 var _mathFn = _interopRequireDefault(require("../math/mathFn"));
 
 var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
@@ -159,7 +161,7 @@ const AdapterFn = { ..._crFn.default,
     };
   },
   joinBy: (delimeter, ...restItems) => restItems.filter(Boolean).join(delimeter),
-  toUpperCaseFirst: str => typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substring(1) : EMPTY,
+  toUpperCaseFirst: _toUpperCaseFirst.default,
   findMinY,
   findMaxY,
   filterTrimZero,

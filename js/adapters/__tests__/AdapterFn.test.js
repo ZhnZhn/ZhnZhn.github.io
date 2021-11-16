@@ -1,37 +1,36 @@
 /**
  * @jest-environment jsdom
  */
-//Highcharts dateFormat from AdapterFn require jsdom   
+//Highcharts dateFormat from AdapterFn require jsdom
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _Type = require("../../constants/Type");
 
-var crError = _AdapterFn["default"].crError,
-    crId = _AdapterFn["default"].crId,
-    crItemLink = _AdapterFn["default"].crItemLink,
-    crVolumePoint = _AdapterFn["default"].crVolumePoint,
-    crAthPoint = _AdapterFn["default"].crAthPoint,
-    legendItem = _AdapterFn["default"].legendItem,
-    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
-    isYNumber = _AdapterFn["default"].isYNumber,
-    isNumberOrNull = _AdapterFn["default"].isNumberOrNull,
-    toFloatOrEmpty = _AdapterFn["default"].toFloatOrEmpty,
-    findMinY = _AdapterFn["default"].findMinY,
-    findMaxY = _AdapterFn["default"].findMaxY,
-    joinBy = _AdapterFn["default"].joinBy,
-    valueMoving = _AdapterFn["default"].valueMoving,
-    crItemConf = _AdapterFn["default"].crItemConf,
-    crValueConf = _AdapterFn["default"].crValueConf;
-describe('added fns', function () {
-  it('should have next fns', function () {
+const {
+  crError,
+  crId,
+  crItemLink,
+  crVolumePoint,
+  crAthPoint,
+  legendItem,
+  stockSeriesLegend,
+  ymdToUTC,
+  isYNumber,
+  isNumberOrNull,
+  toFloatOrEmpty,
+  findMinY,
+  findMaxY,
+  joinBy,
+  valueMoving,
+  crItemConf,
+  crValueConf
+} = _AdapterFn.default;
+describe('added fns', () => {
+  it('should have next fns', () => {
     expect(typeof crError).toBe('function');
     expect(typeof crId).toBe('function');
     expect(typeof crItemLink).toBe('function');
@@ -41,126 +40,99 @@ describe('added fns', function () {
     expect(typeof stockSeriesLegend).toBe('function');
   });
 });
-var Y = [{
-  "in": '2017',
+const Y = [{
+  in: '2017',
   r: 1514678400000,
   d: '31-12-2017'
 }, {
-  "in": '2016',
+  in: '2016',
   r: 1483142400000,
   d: '31-12-2016'
 }, {
-  "in": '2015',
+  in: '2015',
   r: 1451520000000,
   d: '31-12-2015'
 }, {
-  "in": '2000',
+  in: '2000',
   r: 978220800000,
   d: '31-12-2000'
 }]; //Date.UTC(y, m-1, d)
 
-var YM = [{
-  "in": '2017-12',
+const YM = [{
+  in: '2017-12',
   r: 1514678400000,
   d: '31-12-2017'
 }, {
-  "in": '2017-11',
+  in: '2017-11',
   r: 1512000000000,
   d: '30-11-2017'
 }, {
-  "in": '2017-10',
+  in: '2017-10',
   r: 1509408000000,
   d: '31-10-2017'
 }, {
-  "in": '2017-9',
+  in: '2017-9',
   r: 1506729600000,
   d: '30-09-2017'
 }, {
-  "in": '2017-09',
+  in: '2017-09',
   r: 1506729600000,
   d: '30-09-2017'
 }, {
-  "in": '2017-8',
+  in: '2017-8',
   r: 1504137600000,
   d: '31-08-2017'
 }, {
-  "in": '2017-08',
+  in: '2017-08',
   r: 1504137600000,
   d: '31-08-2017'
 }, {
-  "in": '2017-1',
+  in: '2017-1',
   r: 1485820800000,
   d: '31-01-2017'
 }, {
-  "in": '2017-01',
+  in: '2017-01',
   r: 1485820800000,
   d: '31-01-2017'
 }];
-var YMD = [{
-  "in": '2018-01-01',
+const YMD = [{
+  in: '2018-01-01',
   r: 1514764800000,
   d: '01-01-2018'
 }, {
-  "in": '2018-1-01',
+  in: '2018-1-01',
   r: 1514764800000,
   d: '01-01-2018'
 }, {
-  "in": '2018-1-1',
+  in: '2018-1-1',
   r: 1514764800000,
   d: '01-01-2018'
 }, {
-  "in": '2018-01-01',
+  in: '2018-01-01',
   r: 1514764800000,
   d: '01-01-2018'
 }];
-describe('ymdToUTC', function () {
-  var fn = ymdToUTC;
-  test('should return UTC msc of 31, December of year from YYYY', function () {
-    Y.forEach(function (d) {
-      expect(fn(d["in"])).toBe(d.r);
+describe('ymdToUTC', () => {
+  const fn = ymdToUTC;
+  test('should return UTC msc of 31, December of year from YYYY', () => {
+    Y.forEach(d => {
+      expect(fn(d.in)).toBe(d.r);
     });
   });
-  test('should return UTC msc of last day of month from YYYY-MM', function () {
-    YM.forEach(function (d) {
-      expect(fn(d["in"])).toBe(d.r);
+  test('should return UTC msc of last day of month from YYYY-MM', () => {
+    YM.forEach(d => {
+      expect(fn(d.in)).toBe(d.r);
     });
   });
-  test('should return UTC msc of day (00:00:00 UTC) from YYYY-MM-DD', function () {
-    YMD.forEach(function (d) {
-      expect(fn(d["in"])).toBe(d.r);
+  test('should return UTC msc of day (00:00:00 UTC) from YYYY-MM-DD', () => {
+    YMD.forEach(d => {
+      expect(fn(d.in)).toBe(d.r);
     });
   });
 });
-describe('toUpperCaseFirst', function () {
-  var fn = toUpperCaseFirst;
-  var EMPTY = '';
-  test('should return string with first upper case letter for string or String input', function () {
-    expect(fn('abc')).toBe('Abc');
-    expect(fn('aBc')).toBe('ABc');
-    expect(fn('aBC')).toBe('ABC');
-  });
-  test('should retunr empty string for instance of String', function () {
-    expect(fn(new String('abc'))).toBe('');
-    expect(fn(new String('aBc'))).toBe('');
-    expect(fn(new String('aBC'))).toBe('');
-  });
-  test('should return empty string in edge case', function () {
-    expect(fn('')).toBe(EMPTY);
-    expect(fn(undefined)).toBe(EMPTY);
-    expect(fn(null)).toBe(EMPTY);
-    expect(fn({})).toBe(EMPTY);
-    expect(fn([])).toBe(EMPTY);
-    expect(fn({
-      str: 'abc'
-    })).toBe(EMPTY);
-    expect(fn(function () {})).toBe(EMPTY);
-    expect(fn(/\s/)).toBe(EMPTY);
-    expect(fn(Date.now())).toBe(EMPTY);
-  });
-});
-describe('isYNumber', function () {
-  var fn = isYNumber;
-  test('should return true for object with property y number', function () {
+describe('isYNumber', () => {
+  const fn = isYNumber;
+  test('should return true for object with property y number', () => {
     expect(fn({
       y: 10
     })).toBe(true);
@@ -174,7 +146,7 @@ describe('isYNumber', function () {
       y: -1
     })).toBe(true);
   });
-  test('should return false for object with property y not number', function () {
+  test('should return false for object with property y not number', () => {
     expect(fn({
       y: null
     })).toBe(false);
@@ -206,13 +178,13 @@ describe('isYNumber', function () {
       y: {}
     })).toBe(false);
     expect(fn({
-      y: function y() {}
+      y: () => {}
     })).toBe(false);
   });
 });
-describe('isNumberOrNull', function () {
-  var fn = isNumberOrNull;
-  it('should return true for number and null or false', function () {
+describe('isNumberOrNull', () => {
+  const fn = isNumberOrNull;
+  it('should return true for number and null or false', () => {
     expect(fn(123)).toBe(true);
     expect(fn(12.3)).toBe(true);
     expect(fn(1.23)).toBe(true);
@@ -222,16 +194,16 @@ describe('isNumberOrNull', function () {
     expect(fn(NaN)).toBe(false);
   });
 });
-describe('toFloatOrEmpty', function () {
-  var fn = toFloatOrEmpty;
-  it('should convert input to float or return empty str', function () {
+describe('toFloatOrEmpty', () => {
+  const fn = toFloatOrEmpty;
+  it('should convert input to float or return empty str', () => {
     expect(fn('1.23')).toBe(1.23);
     expect(fn('')).toBe('');
     expect(fn('str')).toBe('');
   });
 });
-var DATA_ARR = [[0, 0.3], [0, 0.31], [0, 0.29]];
-var DATA_POINT = [{
+const DATA_ARR = [[0, 0.3], [0, 0.31], [0, 0.29]];
+const DATA_POINT = [{
   x: 0,
   y: 0.3
 }, {
@@ -241,15 +213,15 @@ var DATA_POINT = [{
   x: 0,
   y: 0.29
 }];
-describe('findMinY', function () {
-  var fn = findMinY;
-  test('should return minY for points arrays', function () {
+describe('findMinY', () => {
+  const fn = findMinY;
+  test('should return minY for points arrays', () => {
     expect(fn(DATA_ARR)).toBe(0.29);
   });
-  test('should return minY for points object', function () {
+  test('should return minY for points object', () => {
     expect(fn(DATA_POINT)).toBe(0.29);
   });
-  test('should return undefined in edge case', function () {
+  test('should return undefined in edge case', () => {
     expect(fn()).toBe(undefined);
     expect(fn([])).toBe(undefined);
     expect(fn([[0]])).toBe(undefined);
@@ -258,15 +230,15 @@ describe('findMinY', function () {
     }])).toBe(undefined);
   });
 });
-describe('findMaxY', function () {
-  var fn = findMaxY;
-  test('should return maxY for points arrays', function () {
+describe('findMaxY', () => {
+  const fn = findMaxY;
+  test('should return maxY for points arrays', () => {
     expect(fn(DATA_ARR)).toBe(0.31);
   });
-  test('should return maxY for points object', function () {
+  test('should return maxY for points object', () => {
     expect(fn(DATA_POINT)).toBe(0.31);
   });
-  test('should return undefined in edge case', function () {
+  test('should return undefined in edge case', () => {
     expect(fn()).toBe(undefined);
     expect(fn([])).toBe(undefined);
     expect(fn([[0]])).toBe(undefined);
@@ -275,41 +247,46 @@ describe('findMaxY', function () {
     }])).toBe(undefined);
   });
 });
-describe('joinBy', function () {
-  test('should join by delimeter', function () {
+describe('joinBy', () => {
+  test('should join by delimeter', () => {
     expect(joinBy('.')).toBe('');
     expect(joinBy('.', 'a')).toBe('a');
     expect(joinBy('.', 'a', 'b')).toBe('a.b');
   });
-  test('should filter falsy values', function () {
+  test('should filter falsy values', () => {
     expect(joinBy('.', '', 'b', 'c')).toBe('b.c');
     expect(joinBy('.', null, 'b', 'c')).toBe('b.c');
     expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c');
   });
 });
-describe('valueMoving', function () {
-  var fn = valueMoving;
-  it('should return echo data and direction empty for !arr input', function () {
-    var direction = {
+describe('valueMoving', () => {
+  const fn = valueMoving;
+  it('should return echo data and direction empty for !arr input', () => {
+    const direction = {
       direction: _Type.Direction.EMPTY
     };
-    expect(fn('')).toEqual((0, _extends2["default"])({
-      date: ''
-    }, direction));
-    expect(fn(null)).toEqual((0, _extends2["default"])({
-      date: null
-    }, direction));
-    expect(fn()).toEqual((0, _extends2["default"])({
-      date: void 0
-    }, direction));
-    expect(fn({})).toEqual((0, _extends2["default"])({
-      date: {}
-    }, direction));
-    expect(fn('str')).toEqual((0, _extends2["default"])({
-      date: 'str'
-    }, direction));
+    expect(fn('')).toEqual({
+      date: '',
+      ...direction
+    });
+    expect(fn(null)).toEqual({
+      date: null,
+      ...direction
+    });
+    expect(fn()).toEqual({
+      date: void 0,
+      ...direction
+    });
+    expect(fn({})).toEqual({
+      date: {},
+      ...direction
+    });
+    expect(fn('str')).toEqual({
+      date: 'str',
+      ...direction
+    });
   });
-  it('should return valueMoving obj for arr input', function () {
+  it('should return valueMoving obj for arr input', () => {
     expect(fn([[Date.UTC(2018, 11, 31), 10000], [Date.UTC(2019, 11, 31), 20000]])).toEqual({
       value: '20 000',
       _value: '20000',
@@ -323,7 +300,7 @@ describe('valueMoving', function () {
       dateTo: '31-12-2018'
     });
   });
-  it('should return valueMoving obj for arr input with 1 point', function () {
+  it('should return valueMoving obj for arr input with 1 point', () => {
     expect(fn([[Date.UTC(2019, 11, 31), 20000]])).toEqual({
       value: '20 000',
       _value: '20000',
@@ -337,7 +314,7 @@ describe('valueMoving', function () {
       dateTo: '31-12-2019'
     });
   });
-  it('should return valueMoving obj for empty arr', function () {
+  it('should return valueMoving obj for empty arr', () => {
     expect(fn([])).toEqual({
       value: '0',
       _value: '0',
@@ -352,9 +329,9 @@ describe('valueMoving', function () {
     });
   });
 });
-describe('crItemConf', function () {
-  var fn = crItemConf;
-  it('should create obj with item conf', function () {
+describe('crItemConf', () => {
+  const fn = crItemConf;
+  it('should create obj with item conf', () => {
     expect(fn({
       title: 'title',
       subtitle: null,
@@ -364,9 +341,9 @@ describe('crItemConf', function () {
     });
   });
 });
-describe('crValueConf', function () {
-  var fn = crValueConf;
-  it('should return {x, y} recent point from data', function () {
+describe('crValueConf', () => {
+  const fn = crValueConf;
+  it('should return {x, y} recent point from data', () => {
     expect(fn([[3, 3], [1, 2]])).toEqual({
       x: 1,
       y: 2
@@ -382,7 +359,7 @@ describe('crValueConf', function () {
       y: 2
     });
   });
-  it('should use str 0.0 for y not number', function () {
+  it('should use str 0.0 for y not number', () => {
     expect(fn([[3, 3], [1, null]])).toEqual({
       x: 1,
       y: '0.0'
