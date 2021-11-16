@@ -1,9 +1,11 @@
 
 import ut from '../../utils/ut';
+import toUpperCaseFirst from '../../utils/toUpperCaseFirst';
 
 const { getC, getV } = ut;
-const _getC = item => item && item.sc
- || getC(item);
+const _getC = item => toUpperCaseFirst(
+  item && item.sc || getC(item)
+);
 
 const _isArr = Array.isArray;
 

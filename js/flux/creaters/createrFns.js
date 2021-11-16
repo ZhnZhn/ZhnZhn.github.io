@@ -7,12 +7,14 @@ exports.default = void 0;
 
 var _ut = _interopRequireDefault(require("../../utils/ut"));
 
+var _toUpperCaseFirst = _interopRequireDefault(require("../../utils/toUpperCaseFirst"));
+
 const {
   getC,
   getV
 } = _ut.default;
 
-const _getC = item => item && item.sc || getC(item);
+const _getC = item => (0, _toUpperCaseFirst.default)(item && item.sc || getC(item));
 
 const _isArr = Array.isArray;
 
