@@ -1,18 +1,16 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import useListen from '../hooks/useListen'
+import useListen from '../hooks/useListen';
 
-const S = {
-  LABEL: {
-    display: 'inline-block',
-    color: '#2f7ed8',
-    paddingRight: 8,
-    fontSize: '16px',
-    fontWeight: 'bold'
-  }
+const S_LABEL = {
+  display: 'inline-block',
+  color: '#2f7ed8',
+  paddingRight: 8,
+  fontSize: '16px',
+  fontWeight: 'bold'
 };
 
-const LimitRemainingLabel = ({ store, style }) => {
+const LimitRemainingLabel = ({ store }) => {
   const [value, setValue] = useState('');
 
   useListen(store, (v) => {
@@ -22,10 +20,10 @@ const LimitRemainingLabel = ({ store, style }) => {
   }, 'listenLimitRemaining')
 
   return (
-    <span style={{...S.LABEL, ...style}}>
+    <span style={S_LABEL}>
       {value}
     </span>
   );
-}
+};
 
 export default LimitRemainingLabel
