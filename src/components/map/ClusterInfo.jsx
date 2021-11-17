@@ -2,17 +2,17 @@ import { useRef } from 'react'
 //import PropTypes from 'prop-types'
 
 import ShowHide from '../zhn/ShowHide'
-import {
-  Sparklines,
-  SparklinesLine,
-  //SparklinesSpots,
-  SparklinesSpot,
-  SparklinesMaxLabel,
-  SparklinesMinLabel
-} from '../zhn-sparklines/Sparklines'
+import Sparklines from '../zhn-sparklines/Sparklines'
 
 import use from '../hooks/use'
 
+const {
+  SparkView,
+  Line,
+  Spot,
+  MaxLabel,
+  MinLabel
+} = Sparklines;
 const { useToggle, useKeyEnter } = use
 
 const COLOR_MAX = "#8bc34a";
@@ -96,10 +96,10 @@ const ClusterItem = ({ point, color, index, isShowRange }) => {
   , [isShowChart, toggleIsShowChart] = useToggle(index < 3)
 
   const _maxLabel = isShowRange
-          ? <SparklinesMaxLabel color={COLOR_MAX} fontSize={14} />
+          ? <MaxLabel color={COLOR_MAX} fontSize={14} />
           : <span/>
       , _minLabel = isShowRange
-          ? <SparklinesMinLabel color={COLOR_MIN} fontSize={14} />
+          ? <MinLabel color={COLOR_MIN} fontSize={14} />
           : <span/>;
   return (
       <div>
@@ -110,7 +110,7 @@ const ClusterItem = ({ point, color, index, isShowRange }) => {
           onClick={toggleIsShowChart}
         />
         <ShowHide isShow={isShowChart}>
-          <Sparklines
+          <SparkView
             height={32}
             width={140}
             svgHeight={32}
@@ -121,14 +121,13 @@ const ClusterItem = ({ point, color, index, isShowRange }) => {
           >
              {_maxLabel}
              {_minLabel}
-             <SparklinesLine color={color} />
-             {/*<SparklinesSpots />*/}
-             <SparklinesSpot
+             <Line color={color} />
+             <Spot
                  pointIndex={_refPointIndex.current}
                  size={3}
                  spotColors={SPOT_COLORS}
              />
-          </Sparklines>
+          </SparkView>
       </ShowHide>
      </div>
   );

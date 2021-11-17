@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-sparklines/Label.js"
+ ],
+ "file": "../../../src/components/zhn-sparklines/Label.js",
+ "names": [
+  "Label",
+  "title",
+  "rest"
+ ],
+ "mappings": ";;;;;;;AAAA,MAAMA,KAAK,GAAG,CAAC;AAAEC,EAAAA,KAAF;AAAS,KAAGC;AAAZ,CAAD,kBACZ,kCAAUA,IAAV;AAAA,YACGD;AADH,EADF;;eAMeD,K"
+}

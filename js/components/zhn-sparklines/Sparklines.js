@@ -3,102 +3,78 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.Sparklines = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
-var _SparklinesLine = _interopRequireDefault(require("./SparklinesLine"));
+var _Line = _interopRequireDefault(require("./Line"));
 
-exports.SparklinesLine = _SparklinesLine["default"];
+var _Bars = _interopRequireDefault(require("./Bars"));
 
-var _SparklinesSpots = _interopRequireDefault(require("./SparklinesSpots"));
+var _Spots = _interopRequireDefault(require("./Spots"));
 
-exports.SparklinesSpots = _SparklinesSpots["default"];
+var _Spot = _interopRequireDefault(require("./Spot"));
 
-var _SparklinesSpot = _interopRequireDefault(require("./SparklinesSpot"));
+var _ReferenceLine = _interopRequireDefault(require("./ReferenceLine"));
 
-exports.SparklinesSpot = _SparklinesSpot["default"];
+var _MinLabel = _interopRequireDefault(require("./MinLabel"));
 
-var _SparklinesBars = _interopRequireDefault(require("./SparklinesBars"));
-
-exports.SparklinesBars = _SparklinesBars["default"];
-
-var _SparklinesReferenceLine = _interopRequireDefault(require("./SparklinesReferenceLine"));
-
-exports.SparklinesReferenceLine = _SparklinesReferenceLine["default"];
-
-var _SparklinesMinLabel = _interopRequireDefault(require("./SparklinesMinLabel"));
-
-exports.SparklinesMinLabel = _SparklinesMinLabel["default"];
-
-var _SparklinesMaxLabel = _interopRequireDefault(require("./SparklinesMaxLabel"));
-
-exports.SparklinesMaxLabel = _SparklinesMaxLabel["default"];
+var _MaxLabel = _interopRequireDefault(require("./MaxLabel"));
 
 var _dataToPoints = _interopRequireDefault(require("./dataProcessing/dataToPoints"));
 
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from 'prop-types';
 //fork https://github.com/borisyankov/react-sparklines
-var _isArr = Array.isArray;
-var DF = {
-  WIDTH: 240,
-  HEIGHT: 60,
-  RATIO: 'none',
-  MARGIN: 2
-};
-var Sparklines = /*#__PURE__*/(0, _react.memo)(function (_ref) {
-  var data = _ref.data,
-      limit = _ref.limit,
-      style = _ref.style,
-      _ref$preserveAspectRa = _ref.preserveAspectRatio,
-      preserveAspectRatio = _ref$preserveAspectRa === void 0 ? DF.RATIO : _ref$preserveAspectRa,
-      _ref$width = _ref.width,
-      width = _ref$width === void 0 ? DF.WIDTH : _ref$width,
-      _ref$height = _ref.height,
-      height = _ref$height === void 0 ? DF.HEIGHT : _ref$height,
-      svgWidth = _ref.svgWidth,
-      svgHeight = _ref.svgHeight,
-      _ref$margin = _ref.margin,
-      margin = _ref$margin === void 0 ? DF.MARGIN : _ref$margin,
-      min = _ref.min,
-      max = _ref.max,
-      children = _ref.children;
-
+const _isArr = Array.isArray;
+const DF_WIDTH = 240,
+      DF_HEIGHT = 60,
+      DF_RATIO = 'none',
+      DF_MARGIN = 2;
+const SparkView = /*#__PURE__*/(0, _react.memo)(({
+  data,
+  limit,
+  style,
+  preserveAspectRatio = DF_RATIO,
+  width = DF_WIDTH,
+  height = DF_HEIGHT,
+  svgWidth,
+  svgHeight,
+  margin = DF_MARGIN,
+  min,
+  max,
+  children
+}) => {
   if (!_isArr(data) || data.length === 0) {
     return null;
   }
 
-  var points = (0, _dataToPoints["default"])({
-    data: data,
-    limit: limit,
-    width: width,
-    height: height,
-    margin: margin,
-    max: max,
-    min: min
+  const points = (0, _dataToPoints.default)({
+    data,
+    limit,
+    width,
+    height,
+    margin,
+    max,
+    min
   }),
-      svgOpts = {
-    style: style,
-    preserveAspectRatio: preserveAspectRatio,
+        svgOpts = {
+    style,
+    preserveAspectRatio,
     viewBox: "0 0 " + width + " " + height,
     width: svgWidth > 0 ? svgWidth : void 0,
     height: svgHeight > 0 ? svgHeight : void 0
   };
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", (0, _extends2["default"])({}, svgOpts, {
-    children: _react.Children.map(children, function (child) {
-      return /*#__PURE__*/(0, _react.cloneElement)(child, {
-        data: data,
-        points: points,
-        width: width,
-        height: height,
-        margin: margin
-      });
-    })
-  }));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", { ...svgOpts,
+    children: _react.Children.map(children, child => /*#__PURE__*/(0, _react.cloneElement)(child, {
+      data,
+      points,
+      width,
+      height,
+      margin
+    }))
+  });
 });
 /*
 static propTypes = {
@@ -116,5 +92,15 @@ static propTypes = {
 }
 */
 
-exports.Sparklines = Sparklines;
+var _default = {
+  SparkView,
+  Line: _Line.default,
+  Bars: _Bars.default,
+  Spots: _Spots.default,
+  Spot: _Spot.default,
+  ReferenceLine: _ReferenceLine.default,
+  MinLabel: _MinLabel.default,
+  MaxLabel: _MaxLabel.default
+};
+exports.default = _default;
 //# sourceMappingURL=Sparklines.js.map

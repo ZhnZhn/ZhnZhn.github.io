@@ -1,6 +1,6 @@
 //import PropTypes from 'prop-types';
 
-const SparklinesLine = ({
+const Line = ({
   points=[],
   height,
   margin,
@@ -39,7 +39,7 @@ const SparklinesLine = ({
 }
 
 /*
-SparklinesLine.propTypes = {
+Line.propTypes = {
   points: PropTypes.arrayOf(PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number
@@ -51,4 +51,4 @@ SparklinesLine.propTypes = {
 };
 */
 
-export default SparklinesLine
+export default Line

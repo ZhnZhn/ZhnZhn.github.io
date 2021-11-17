@@ -1,7 +1,7 @@
 import max from './dataProcessing/max'
-import SparklinesLabel from './SparklinesLabel'
+import Label from './Label'
 
-const SparklinesMaxLabel = ({
+const MaxLabel = ({
   data,
   dy=4,
   color="#8bc34a",
@@ -10,7 +10,7 @@ const SparklinesMaxLabel = ({
   const _max = max(data)
   , _y = fontSize - dy;
   return (
-    <SparklinesLabel
+    <Label
        title={_max}
        x={0} y={_y}
        stroke="none" fill={color} fontSize={fontSize}
@@ -18,4 +18,4 @@ const SparklinesMaxLabel = ({
   );
 };
 
-export default SparklinesMaxLabel
+export default MaxLabel

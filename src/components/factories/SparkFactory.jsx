@@ -1,13 +1,15 @@
 import C from '../styles/Color';
 
-import {
-  Sparklines,
-  SparklinesLine,
-  SparklinesSpots,
-  SparklinesSpot,
-  SparklinesReferenceLine,
-  SparklinesBars
-} from '../zhn-sparklines/Sparklines';
+import Sparklines from '../zhn-sparklines/Sparklines';
+
+const {
+  SparkView,
+  Line,
+  Spots,
+  Spot,
+  ReferenceLine,
+  Bars
+} = Sparklines
 
 const C_YELLOW = C.YELLOW;
 
@@ -28,26 +30,26 @@ const S = {
 const SparkFactory = {
   createSparklines(data, pointIndex){
      return (
-       <Sparklines
+       <SparkView
           height={45}
           width={100}
           svgHeight={45}
           svgWidth={100}
           data={data}
        >
-          <SparklinesLine color={C_YELLOW} />
-          <SparklinesReferenceLine
+          <Line color={C_YELLOW} />
+          <ReferenceLine
              style={S.REF_LINE}
              type="avg"
           />
-          <SparklinesSpots />
-          <SparklinesSpot pointIndex={pointIndex} />
-       </Sparklines>
-     )
+          <Spots />
+          <Spot pointIndex={pointIndex} />
+       </SparkView>
+     );
   },
   createSparkbars(data, pointIndex){
     return (
-      <Sparklines
+      <SparkView
          height={45}
          width={100}
          svgHeight={45}
@@ -56,13 +58,13 @@ const SparkFactory = {
          min={0}
          max={100}
       >
-         <SparklinesBars
+         <Bars
             style={S.BARS}
             pointIndex={pointIndex}
          />
-      </Sparklines>
-    )
+      </SparkView>
+    );
   }
-}
+};
 
 export default SparkFactory

@@ -1,15 +1,13 @@
 import { memo, Children, cloneElement } from 'react';
 //import PropTypes from 'prop-types';
-import SparklinesLine from './SparklinesLine';
+import Line from './Line';
+import Bars from './Bars';
+import Spots from './Spots';
+import Spot from './Spot';
+import ReferenceLine from './ReferenceLine';
 
-import SparklinesSpots from './SparklinesSpots';
-import SparklinesSpot from './SparklinesSpot';
-import SparklinesBars from './SparklinesBars';
-
-import SparklinesReferenceLine from './SparklinesReferenceLine';
-
-import SparklinesMinLabel from './SparklinesMinLabel';
-import SparklinesMaxLabel from './SparklinesMaxLabel';
+import MinLabel from './MinLabel';
+import MaxLabel from './MaxLabel';
 
 import dataToPoints from './dataProcessing/dataToPoints';
 
@@ -17,23 +15,21 @@ import dataToPoints from './dataProcessing/dataToPoints';
 
 const _isArr = Array.isArray;
 
-const DF = {
-  WIDTH: 240,
-  HEIGHT: 60,
-  RATIO: 'none',
-  MARGIN: 2
-};
+const DF_WIDTH = 240
+, DF_HEIGHT = 60
+, DF_RATIO = 'none'
+, DF_MARGIN = 2
 
-const Sparklines = memo(({
+const SparkView = memo(({
   data,
   limit,
   style,
-  preserveAspectRatio=DF.RATIO,
-  width=DF.WIDTH,
-  height=DF.HEIGHT,
+  preserveAspectRatio=DF_RATIO,
+  width=DF_WIDTH,
+  height=DF_HEIGHT,
   svgWidth,
   svgHeight,
-  margin=DF.MARGIN,
+  margin=DF_MARGIN,
   min,
   max,
   children
@@ -76,9 +72,10 @@ static propTypes = {
 }
 */
 
-export {
-  Sparklines, SparklinesLine,
-  SparklinesSpots, SparklinesSpot, SparklinesBars,
-  SparklinesReferenceLine,
-  SparklinesMinLabel, SparklinesMaxLabel
+export default {
+  SparkView,
+  Line, Bars,
+  Spots, Spot,
+  ReferenceLine,
+  MinLabel, MaxLabel
 }

@@ -1,7 +1,7 @@
 import min from './dataProcessing/min'
-import SparklinesLabel from './SparklinesLabel'
+import Label from './Label'
 
-const SparklinesMinLabel = ({ 
+const MinLabel = ({
   data,
   height=0,
   dy=3,
@@ -11,7 +11,7 @@ const SparklinesMinLabel = ({
   const _min = min(data)
   , _y = height - dy;
   return (
-    <SparklinesLabel
+    <Label
        title={_min}
        x={0} y={_y}
        stroke="none" fill={color} fontSize={fontSize}
@@ -19,4 +19,4 @@ const SparklinesMinLabel = ({
   );
 };
 
-export default SparklinesMinLabel
+export default MinLabel

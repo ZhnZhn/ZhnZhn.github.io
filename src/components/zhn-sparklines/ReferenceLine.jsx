@@ -7,7 +7,7 @@ const DF_STYLE = {
   strokeDasharray: '2, 2'
 };
 
-const SparklinesReferenceLine = ({
+const ReferenceLine = ({
   points,
   margin,
   type="mean",
@@ -29,11 +29,11 @@ const SparklinesReferenceLine = ({
 }
 
 /*
-SparklinesReferenceLine.propTypes = {
+ReferenceLine.propTypes = {
   type: PropTypes.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
   value: PropTypes.number,
   style: PropTypes.object
 };
 */
 
-export default SparklinesReferenceLine
+export default ReferenceLine

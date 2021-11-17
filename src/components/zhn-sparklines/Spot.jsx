@@ -3,7 +3,7 @@
 import calcDirection from './dataProcessing/calcDirection';
 import STYLE from './style'
 
-const SparklinesSpot = ({
+const Spot = ({
   points,
   size=2,
   style,
@@ -22,7 +22,7 @@ const SparklinesSpot = ({
 
 
 /*
-SparklinesSpot.propTypes = {
+Spot.propTypes = {
     size: PropTypes.number,
     style: PropTypes.object,
     spotColors: PropTypes.object,
@@ -30,4 +30,4 @@ SparklinesSpot.propTypes = {
 };
 */
 
-export default SparklinesSpot
+export default Spot

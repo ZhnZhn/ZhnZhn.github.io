@@ -8,7 +8,7 @@ const _crWidth = (points, strokeWidth) => points
   ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth))
   : 0;
 
-const SparklinesBars = ({
+const Bars = ({
   points=[],
   height,
   style=STYLE.BARS,
@@ -45,7 +45,7 @@ const SparklinesBars = ({
 }
 
 /*
-SparklinesBars.propTypes = {
+Bars.propTypes = {
     points: PropTypes.arrayOf(PropTypes.shape({
       x: PropTypes.number,
       y: PropTypes.number
@@ -58,4 +58,4 @@ SparklinesBars.propTypes = {
 };
 */
 
-export default SparklinesBars
+export default Bars

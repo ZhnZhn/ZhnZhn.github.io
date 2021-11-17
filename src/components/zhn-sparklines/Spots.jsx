@@ -11,7 +11,7 @@ const calcEndSpotDirection = function(points) {
     : Math.sign(points[points.length - 2].y - points[points.length - 1].y);
 }
 
-const SparklinesSpots = ({
+const Spots = ({
   points,
   size=2,
   style,
@@ -43,11 +43,11 @@ const SparklinesSpots = ({
 }
 
 /*
-SparklinesSpots.propTypes = {
+Spots.propTypes = {
     size: PropTypes.number,
     style: PropTypes.object,
     spotColors: PropTypes.object
 };
 */
 
-export default SparklinesSpots
+export default Spots
