@@ -9,7 +9,9 @@ const _crHm = data => {
         _cPropName = (data[0] || {}).c ? 'c' : 'category';
 
   data.forEach(point => {
-    hm[point[_cPropName]] = point;
+    if (!point.isNull) {
+      hm[point[_cPropName]] = point;
+    }
   });
   return hm;
 };
