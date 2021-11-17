@@ -9,23 +9,19 @@ const _isArr = Array.isArray;
 
 let hmIdCountry = {};
 let isHmFetched = false;
-const _fnFetchHmIdCountry = () => {
-   return (!isHmFetched)
-      ? fetch(URL_ID_COUNTRY)
-          .then(res => res.json())
-          .then(json => {
-             hmIdCountry = json.hm;
-             isHmFetched = true;
-             return hmIdCountry;
-          })
-          .catch((err) => { return hmIdCountry; })
-     : Promise.resolve(hmIdCountry);
-}
+const _fetchHmIdCountry = () => !isHmFetched
+  ? fetch(URL_ID_COUNTRY)
+      .then(res => res.json())
+      .then(json => {
+         hmIdCountry = json.hm;
+         isHmFetched = true;
+         return hmIdCountry;
+      })
+      .catch((err) => { return hmIdCountry; })
+  : Promise.resolve(hmIdCountry);
 
-const _fnIdToCountry = (id) => {
-   const name = hmIdCountry[id];
-   return name ? name : id;
-}
+const _getCountryById = id => hmIdCountry[id] || id;
+
 
 const _combineToArr = (dGeo, sGeo, status={}) => {
   const arr = [];
@@ -46,9 +42,14 @@ const _splitForConfig = (arr) => {
      , min = Number.POSITIVE_INFINITY;
    arr.forEach((item) => {
      const { id, value, status } = item
-         , country = _fnIdToCountry(id);
+     , country = _getCountryById(id);
      categories.push(country);
-     data.push({ y: value, c: country, id: country, status })
+     data.push({
+       y: value,
+       c: country,
+       id: country,
+       status
+     })
      if (value>=max) { max = value; }
      if (value<=min) { min = value; }
     })
@@ -60,30 +61,19 @@ const _splitForConfig = (arr) => {
 const _combineToHm = (ids, sGeo) => {
   const hm = {};
   ids.forEach((id, index) => {
-    if (sGeo[index] != null && sGeo[index].value != null){
-      hm[_fnIdToCountry(id)] = sGeo[index].value;
+    const { value } = sGeo[index] || {};
+    if (value != null){
+      hm[_getCountryById(id)] = value;
     }
   })
   return hm;
-}
-const _trHmToData = (hm, categories) => {
-  const data = []
-  categories.forEach((id) => {
-    if (hm[id] != null){
-      data.push(hm[id]);
-      //data.push({ y: hm[id], c: id });
-    }
-    else {
-      //data.push({ y: 0, c: id });
-      data.push(0);
-    }
-  })
-  return data;
-}
+};
+const _trHmToData = (hm, categories) => categories
+  .map(id => ({ y: hm[id] || null, c: id }));
 
-const _isEmptyGeoSlice = (_sGeo) => {
-  if (!_isArr(_sGeo)) { return true; }
-  return _sGeo
+const _isGeoSliceEmpty = sGeo => {
+  if (!_isArr(sGeo)) { return true; }
+  return sGeo
    .filter(({ value }) => Boolean(value))
    .length === 0
       ? true
@@ -99,13 +89,13 @@ const JsonStatFn = {
     , _sGeo = ds.Data(configSlice);
 
     // 2) Try create _sGeo with configSlice and dfTime from dialog
-    if (dfTime && _isEmptyGeoSlice(_sGeo)) {
+    if (dfTime && _isGeoSliceEmpty(_sGeo)) {
       _sGeo = ds.Data({ ...configSlice, ...{time: dfTime}})
       time = dfTime
     }
 
     // 3) Try create _sGeo with maxIndex time available in ds
-    if (_isEmptyGeoSlice(_sGeo)){
+    if (_isGeoSliceEmpty(_sGeo)){
       const maxIndex = (ds.Dimension("time").id || []).length;
       if (maxIndex>0) {
         time = ds.Dimension("time").id[maxIndex-1];
@@ -133,8 +123,8 @@ const JsonStatFn = {
 
   trJsonToCategory : (json, configSlice) => {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
-    return _fnFetchHmIdCountry().then(() => {
-       return Box( _combineToArr(dGeo.id, sGeo, json.status) )
+    return _fetchHmIdCountry().then(() => {
+       return Box(_combineToArr(dGeo.id, sGeo, json.status))
          .map(arr => arr.sort(AdapterFn.compareByValueId))
          .fold(_splitForConfig);
        });
@@ -142,8 +132,8 @@ const JsonStatFn = {
   trJsonToSeria : (json, configSlice, categories) => {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
     return Box(_combineToHm(dGeo.id, sGeo))
-      .fold((hm) => _trHmToData(hm, categories));
+      .fold(hm => _trHmToData(hm, categories));
   }
-}
+};
 
 export default JsonStatFn

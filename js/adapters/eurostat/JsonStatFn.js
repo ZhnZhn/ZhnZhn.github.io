@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
@@ -13,38 +11,27 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
 var _Box = _interopRequireDefault(require("../../utils/Box"));
 
-var URL_ID_COUNTRY = './data/eurostat/id-country.json';
-var _isArr = Array.isArray;
-var hmIdCountry = {};
-var isHmFetched = false;
+const URL_ID_COUNTRY = './data/eurostat/id-country.json';
+const _isArr = Array.isArray;
+let hmIdCountry = {};
+let isHmFetched = false;
 
-var _fnFetchHmIdCountry = function _fnFetchHmIdCountry() {
-  return !isHmFetched ? fetch(URL_ID_COUNTRY).then(function (res) {
-    return res.json();
-  }).then(function (json) {
-    hmIdCountry = json.hm;
-    isHmFetched = true;
-    return hmIdCountry;
-  })["catch"](function (err) {
-    return hmIdCountry;
-  }) : Promise.resolve(hmIdCountry);
-};
+const _fetchHmIdCountry = () => !isHmFetched ? fetch(URL_ID_COUNTRY).then(res => res.json()).then(json => {
+  hmIdCountry = json.hm;
+  isHmFetched = true;
+  return hmIdCountry;
+}).catch(err => {
+  return hmIdCountry;
+}) : Promise.resolve(hmIdCountry);
 
-var _fnIdToCountry = function _fnIdToCountry(id) {
-  var name = hmIdCountry[id];
-  return name ? name : id;
-};
+const _getCountryById = id => hmIdCountry[id] || id;
 
-var _combineToArr = function _combineToArr(dGeo, sGeo, status) {
-  if (status === void 0) {
-    status = {};
-  }
-
-  var arr = [];
-  dGeo.forEach(function (id, index) {
+const _combineToArr = (dGeo, sGeo, status = {}) => {
+  const arr = [];
+  dGeo.forEach((id, index) => {
     if (sGeo[index] != null && sGeo[index].value != null) {
       arr.push({
-        id: id,
+        id,
         value: sGeo[index].value,
         status: status[index]
       });
@@ -53,23 +40,25 @@ var _combineToArr = function _combineToArr(dGeo, sGeo, status) {
   return arr;
 };
 
-var _splitForConfig = function _splitForConfig(arr) {
-  var categories = [],
-      data = [];
-  var max = Number.NEGATIVE_INFINITY,
+const _splitForConfig = arr => {
+  const categories = [],
+        data = [];
+  let max = Number.NEGATIVE_INFINITY,
       min = Number.POSITIVE_INFINITY;
-  arr.forEach(function (item) {
-    var id = item.id,
-        value = item.value,
-        status = item.status,
-        country = _fnIdToCountry(id);
+  arr.forEach(item => {
+    const {
+      id,
+      value,
+      status
+    } = item,
+          country = _getCountryById(id);
 
     categories.push(country);
     data.push({
       y: value,
       c: country,
       id: country,
-      status: status
+      status
     });
 
     if (value >= max) {
@@ -81,77 +70,72 @@ var _splitForConfig = function _splitForConfig(arr) {
     }
   });
   return {
-    categories: categories,
-    data: data,
-    min: min,
-    max: max
+    categories,
+    data,
+    min,
+    max
   };
 };
 /***********************/
 
 
-var _combineToHm = function _combineToHm(ids, sGeo) {
-  var hm = {};
-  ids.forEach(function (id, index) {
-    if (sGeo[index] != null && sGeo[index].value != null) {
-      hm[_fnIdToCountry(id)] = sGeo[index].value;
+const _combineToHm = (ids, sGeo) => {
+  const hm = {};
+  ids.forEach((id, index) => {
+    const {
+      value
+    } = sGeo[index] || {};
+
+    if (value != null) {
+      hm[_getCountryById(id)] = value;
     }
   });
   return hm;
 };
 
-var _trHmToData = function _trHmToData(hm, categories) {
-  var data = [];
-  categories.forEach(function (id) {
-    if (hm[id] != null) {
-      data.push(hm[id]); //data.push({ y: hm[id], c: id });
-    } else {
-      //data.push({ y: 0, c: id });
-      data.push(0);
-    }
-  });
-  return data;
-};
+const _trHmToData = (hm, categories) => categories.map(id => ({
+  y: hm[id] || null,
+  c: id
+}));
 
-var _isEmptyGeoSlice = function _isEmptyGeoSlice(_sGeo) {
-  if (!_isArr(_sGeo)) {
+const _isGeoSliceEmpty = sGeo => {
+  if (!_isArr(sGeo)) {
     return true;
   }
 
-  return _sGeo.filter(function (_ref) {
-    var value = _ref.value;
-    return Boolean(value);
-  }).length === 0 ? true : false;
+  return sGeo.filter(({
+    value
+  }) => Boolean(value)).length === 0 ? true : false;
 };
 
-var JsonStatFn = {
-  createGeoSlice: function createGeoSlice(json, configSlice, dfTime) {
-    if (configSlice === void 0) {
-      configSlice = {};
-    }
+const JsonStatFn = {
+  createGeoSlice: (json, configSlice = {}, dfTime) => {
+    const ds = (0, _jsonstat.default)(json).Dataset(0); // 1) Try create _sGeo with configSlice
 
-    var ds = (0, _jsonstat["default"])(json).Dataset(0); // 1) Try create _sGeo with configSlice
-
-    var time = configSlice.time,
+    let time = configSlice.time,
         _sGeo = ds.Data(configSlice); // 2) Try create _sGeo with configSlice and dfTime from dialog
 
 
-    if (dfTime && _isEmptyGeoSlice(_sGeo)) {
-      _sGeo = ds.Data((0, _extends2["default"])({}, configSlice, {
-        time: dfTime
-      }));
+    if (dfTime && _isGeoSliceEmpty(_sGeo)) {
+      _sGeo = ds.Data({ ...configSlice,
+        ...{
+          time: dfTime
+        }
+      });
       time = dfTime;
     } // 3) Try create _sGeo with maxIndex time available in ds
 
 
-    if (_isEmptyGeoSlice(_sGeo)) {
-      var maxIndex = (ds.Dimension("time").id || []).length;
+    if (_isGeoSliceEmpty(_sGeo)) {
+      const maxIndex = (ds.Dimension("time").id || []).length;
 
       if (maxIndex > 0) {
         time = ds.Dimension("time").id[maxIndex - 1];
-        _sGeo = ds.Data((0, _extends2["default"])({}, configSlice, {
-          time: time
-        }));
+        _sGeo = ds.Data({ ...configSlice,
+          ...{
+            time
+          }
+        });
       }
     }
 
@@ -160,42 +144,34 @@ var JsonStatFn = {
         id: []
       },
       sGeo: _sGeo || [],
-      time: time
+      time
     };
   },
-  crGeoSeria: function crGeoSeria(json, configSlice) {
-    var ds = (0, _jsonstat["default"])(json).Dataset(0) || {},
-        data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(function (obj) {
-      return obj.value;
-    }).filter(function (value) {
-      return value !== null;
-    });
+  crGeoSeria: (json, configSlice) => {
+    const ds = (0, _jsonstat.default)(json).Dataset(0) || {},
+          data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(obj => obj.value).filter(value => value !== null);
     return {
       date: (ds.Dimension == null ? void 0 : ds.Dimension("time")) || {},
-      data: data
+      data
     };
   },
-  trJsonToCategory: function trJsonToCategory(json, configSlice) {
-    var _JsonStatFn$createGeo = JsonStatFn.createGeoSlice(json, configSlice),
-        dGeo = _JsonStatFn$createGeo.dGeo,
-        sGeo = _JsonStatFn$createGeo.sGeo;
-
-    return _fnFetchHmIdCountry().then(function () {
-      return (0, _Box["default"])(_combineToArr(dGeo.id, sGeo, json.status)).map(function (arr) {
-        return arr.sort(_AdapterFn["default"].compareByValueId);
-      }).fold(_splitForConfig);
+  trJsonToCategory: (json, configSlice) => {
+    const {
+      dGeo,
+      sGeo
+    } = JsonStatFn.createGeoSlice(json, configSlice);
+    return _fetchHmIdCountry().then(() => {
+      return (0, _Box.default)(_combineToArr(dGeo.id, sGeo, json.status)).map(arr => arr.sort(_AdapterFn.default.compareByValueId)).fold(_splitForConfig);
     });
   },
-  trJsonToSeria: function trJsonToSeria(json, configSlice, categories) {
-    var _JsonStatFn$createGeo2 = JsonStatFn.createGeoSlice(json, configSlice),
-        dGeo = _JsonStatFn$createGeo2.dGeo,
-        sGeo = _JsonStatFn$createGeo2.sGeo;
-
-    return (0, _Box["default"])(_combineToHm(dGeo.id, sGeo)).fold(function (hm) {
-      return _trHmToData(hm, categories);
-    });
+  trJsonToSeria: (json, configSlice, categories) => {
+    const {
+      dGeo,
+      sGeo
+    } = JsonStatFn.createGeoSlice(json, configSlice);
+    return (0, _Box.default)(_combineToHm(dGeo.id, sGeo)).fold(hm => _trHmToData(hm, categories));
   }
 };
 var _default = JsonStatFn;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=JsonStatFn.js.map
