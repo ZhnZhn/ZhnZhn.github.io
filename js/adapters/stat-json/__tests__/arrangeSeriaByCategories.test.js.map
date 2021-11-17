@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/adapters/stat-json/__tests__/arrangeSeriaByCategories.test.js"
+ ],
+ "file": "../../../../src/adapters/stat-json/__tests__/arrangeSeriaByCategories.test.js",
+ "names": [
+  "describe",
+  "fn",
+  "arrangeSeriaByCategories",
+  "test",
+  "categories",
+  "seria",
+  "data",
+  "c",
+  "expect",
+  "toEqual"
+ ],
+ "mappings": ";;;;AAAA;;AAEAA,QAAQ,CAAC,0BAAD,EAA6B,MAAK;AACxC,QAAMC,EAAE,GAAGC,iCAAX;AACAC,EAAAA,IAAI,CAAC,yCAAD,EAA4C,MAAI;AAClD,UAAMC,UAAU,GAAG,CAAC,IAAD,EAAM,IAAN,EAAW,IAAX,CAAnB;AAAA,UACEC,KAAK,GAAG;AAAEC,MAAAA,IAAI,EAAE,CAChB;AAAC,aAAK;AAAN,OADgB,EACH;AAACC,QAAAA,CAAC,EAAE;AAAJ,OADG,EACQ;AAACA,QAAAA,CAAC,EAAE;AAAJ,OADR;AAAR,KADV;AAIAC,IAAAA,MAAM,CAACP,EAAE,CAACI,KAAD,EAAQD,UAAR,CAAH,CAAN,CAA8BK,OAA9B,CAAsC;AACpCH,MAAAA,IAAI,EAAE,CACJ;AAACC,QAAAA,CAAC,EAAE;AAAJ,OADI,EACO,IADP,EACa;AAACA,QAAAA,CAAC,EAAE;AAAJ,OADb;AAD8B,KAAtC;AAKD,GAVG,CAAJ;AAWD,CAbO,CAAR"
+}
