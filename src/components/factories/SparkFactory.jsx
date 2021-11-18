@@ -1,6 +1,6 @@
 import C from '../styles/Color';
 
-import Sparklines from '../zhn-sparklines/Sparklines';
+import SparklinesLazy from '../zhn-lazy/SparklinesLazy';
 
 const {
   SparkView,
@@ -9,22 +9,20 @@ const {
   Spot,
   ReferenceLine,
   Bars
-} = Sparklines
+} = SparklinesLazy;
 
 const C_YELLOW = C.YELLOW;
 
-const S = {
-  REF_LINE: {
-    stroke: 'red',
-    strokeOpacity: .75,
-    strokeDasharray: '5, 3'
-  },
-  BARS: {
-    stroke: "black",
-    strokeWidth: "1",
-    fill: C_YELLOW,
-    fillOpacity: "0.9"
-  }
+const S_REF_LINE = {
+  stroke: 'red',
+  strokeOpacity: .75,
+  strokeDasharray: '5, 3'
+},
+S_BARS = {
+  stroke: "black",
+  strokeWidth: "1",
+  fill: C_YELLOW,
+  fillOpacity: "0.9"
 };
 
 const SparkFactory = {
@@ -39,7 +37,7 @@ const SparkFactory = {
        >
           <Line color={C_YELLOW} />
           <ReferenceLine
-             style={S.REF_LINE}
+             style={S_REF_LINE}
              type="avg"
           />
           <Spots />
@@ -59,7 +57,7 @@ const SparkFactory = {
          max={100}
       >
          <Bars
-            style={S.BARS}
+            style={S_BARS}
             pointIndex={pointIndex}
          />
       </SparkView>

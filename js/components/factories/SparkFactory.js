@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
-var _Sparklines = _interopRequireDefault(require("../zhn-sparklines/Sparklines"));
+var _SparklinesLazy = _interopRequireDefault(require("../zhn-lazy/SparklinesLazy"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -18,20 +18,18 @@ const {
   Spot,
   ReferenceLine,
   Bars
-} = _Sparklines.default;
+} = _SparklinesLazy.default;
 const C_YELLOW = _Color.default.YELLOW;
-const S = {
-  REF_LINE: {
-    stroke: 'red',
-    strokeOpacity: .75,
-    strokeDasharray: '5, 3'
-  },
-  BARS: {
-    stroke: "black",
-    strokeWidth: "1",
-    fill: C_YELLOW,
-    fillOpacity: "0.9"
-  }
+const S_REF_LINE = {
+  stroke: 'red',
+  strokeOpacity: .75,
+  strokeDasharray: '5, 3'
+},
+      S_BARS = {
+  stroke: "black",
+  strokeWidth: "1",
+  fill: C_YELLOW,
+  fillOpacity: "0.9"
 };
 const SparkFactory = {
   createSparklines(data, pointIndex) {
@@ -44,7 +42,7 @@ const SparkFactory = {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Line, {
         color: C_YELLOW
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ReferenceLine, {
-        style: S.REF_LINE,
+        style: S_REF_LINE,
         type: "avg"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Spots, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(Spot, {
         pointIndex: pointIndex
@@ -62,7 +60,7 @@ const SparkFactory = {
       min: 0,
       max: 100,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(Bars, {
-        style: S.BARS,
+        style: S_BARS,
         pointIndex: pointIndex
       })
     });

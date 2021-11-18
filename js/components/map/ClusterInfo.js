@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
-var _Sparklines = _interopRequireDefault(require("../zhn-sparklines/Sparklines"));
+var _SparklinesLazy = _interopRequireDefault(require("../zhn-lazy/SparklinesLazy"));
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
@@ -22,7 +22,7 @@ const {
   Spot,
   MaxLabel,
   MinLabel
-} = _Sparklines.default;
+} = _SparklinesLazy.default;
 const {
   useToggle,
   useKeyEnter
@@ -35,34 +35,32 @@ const SPOT_COLORS = {
   '0': COLOR_EQUAL,
   '1': COLOR_MAX
 };
-const S = {
-  CAPTION: {
-    position: 'relative',
-    padding: 3,
-    marginBottom: 5,
-    lineHeight: 1.8,
-    opacity: 0.7
-  },
-  CAPTION_BT: {
-    position: 'absolute',
-    top: 4,
-    right: 8,
-    fontSize: '18px',
-    fontWeight: 'bold',
-    cursor: 'pointer'
-  },
-  ITEM_ROOT: {
-    padding: 3,
-    cursor: 'pointer'
-  },
-  ITEM_TITLE: {
-    display: 'inline-block',
-    width: 30
-  },
-  ITEM_VALUE: {
-    display: 'inline-block',
-    float: 'right'
-  }
+const S_CAPTION = {
+  position: 'relative',
+  padding: 3,
+  marginBottom: 5,
+  lineHeight: 1.8,
+  opacity: 0.7
+},
+      S_CAPTION_BT = {
+  position: 'absolute',
+  top: 4,
+  right: 8,
+  fontSize: '18px',
+  fontWeight: 'bold',
+  cursor: 'pointer'
+},
+      S_ITEM = {
+  padding: 3,
+  cursor: 'pointer'
+},
+      S_ITEM_TITLE = {
+  display: 'inline-block',
+  width: 30
+},
+      S_ITEM_VALUE = {
+  display: 'inline-block',
+  float: 'right'
 };
 
 const Caption = ({
@@ -74,7 +72,7 @@ const Caption = ({
   const _hKeyDown = useKeyEnter(onClick);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-    style: { ...S.CAPTION,
+    style: { ...S_CAPTION,
       ...{
         background: color
       }
@@ -84,7 +82,7 @@ const Caption = ({
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       tabIndex: "0",
       role: "button",
-      style: S.CAPTION_BT,
+      style: S_CAPTION_BT,
       onClick: onClick,
       onKeyDown: _hKeyDown,
       children: "*"
@@ -104,14 +102,14 @@ const Item = ({
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     tabIndex: "0",
     role: "button",
-    style: S.ITEM_ROOT,
+    style: S_ITEM,
     onClick: onClick,
     onKeyDown: _hKeyDown,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: S.ITEM_TITLE,
+      style: S_ITEM_TITLE,
       children: title
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: S.ITEM_VALUE,
+      style: S_ITEM_VALUE,
       children: _value
     })]
   });
@@ -126,15 +124,6 @@ const ClusterItem = ({
   const _refData = (0, _react.useRef)(point.seria.data || []),
         _refPointIndex = (0, _react.useRef)(_refData.current.length - 1),
         [isShowChart, toggleIsShowChart] = useToggle(index < 3);
-
-  const _maxLabel = isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MaxLabel, {
-    color: COLOR_MAX,
-    fontSize: 14
-  }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {}),
-        _minLabel = isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinLabel, {
-    color: COLOR_MIN,
-    fontSize: 14
-  }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {});
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
@@ -152,7 +141,13 @@ const ClusterItem = ({
         data: _refData.current,
         margin: 3 //marginLeft={20}
         ,
-        children: [_maxLabel, _minLabel, /*#__PURE__*/(0, _jsxRuntime.jsx)(Line, {
+        children: [isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MaxLabel, {
+          color: COLOR_MAX,
+          fontSize: 14
+        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {}), isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinLabel, {
+          color: COLOR_MIN,
+          fontSize: 14
+        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(Line, {
           color: color
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Spot, {
           pointIndex: _refPointIndex.current,

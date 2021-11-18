@@ -2,7 +2,7 @@ import { useRef } from 'react'
 //import PropTypes from 'prop-types'
 
 import ShowHide from '../zhn/ShowHide'
-import Sparklines from '../zhn-sparklines/Sparklines'
+import SparklinesLazy from '../zhn-lazy/SparklinesLazy'
 
 import use from '../hooks/use'
 
@@ -12,7 +12,8 @@ const {
   Spot,
   MaxLabel,
   MinLabel
-} = Sparklines;
+} = SparklinesLazy;
+
 const { useToggle, useKeyEnter } = use
 
 const COLOR_MAX = "#8bc34a";
@@ -20,46 +21,50 @@ const COLOR_MIN = "#f44336";
 const COLOR_EQUAL = 'black';
 const SPOT_COLORS = {'-1': COLOR_MIN, '0': COLOR_EQUAL, '1': COLOR_MAX };
 
-const S = {
-  CAPTION: {
-    position: 'relative',
-    padding: 3,
-    marginBottom: 5,
-    lineHeight: 1.8,
-    opacity: 0.7
-  },
-  CAPTION_BT: {
-    position: 'absolute',
-    top: 4,
-    right: 8,
-    fontSize: '18px',
-    fontWeight: 'bold',
-    cursor: 'pointer'
-  },
-  ITEM_ROOT: {
-    padding: 3,
-    cursor: 'pointer'
-  },
-  ITEM_TITLE: {
-    display: 'inline-block',
-    width: 30,
-  },
-  ITEM_VALUE: {
-    display: 'inline-block',
-    float: 'right'
-  }
-}
+const S_CAPTION = {
+  position: 'relative',
+  padding: 3,
+  marginBottom: 5,
+  lineHeight: 1.8,
+  opacity: 0.7
+},
+S_CAPTION_BT = {
+  position: 'absolute',
+  top: 4,
+  right: 8,
+  fontSize: '18px',
+  fontWeight: 'bold',
+  cursor: 'pointer'
+},
+S_ITEM = {
+  padding: 3,
+  cursor: 'pointer'
+},
+S_ITEM_TITLE = {
+  display: 'inline-block',
+  width: 30,
+},
+S_ITEM_VALUE = {
+  display: 'inline-block',
+  float: 'right'
+};
 
 
-const Caption = ({ color, from, to, onClick }) => {
+
+const Caption = ({
+  color,
+  from,
+  to,
+  onClick
+}) => {
   const _hKeyDown = useKeyEnter(onClick);
   return (
-    <p style={{ ...S.CAPTION, ...{ background: color } }}>
+    <p style={{ ...S_CAPTION, ...{ background: color } }}>
       <span>{from}&nbsp;&ndash;&nbsp;{to}</span>
       <span
         tabIndex="0"
         role="button"
-        style={S.CAPTION_BT}
+        style={S_CAPTION_BT}
         onClick={onClick}
         onKeyDown={_hKeyDown}
       >*</span>
@@ -67,7 +72,12 @@ const Caption = ({ color, from, to, onClick }) => {
   );
 }
 
-const Item = ({ title, value, status, onClick }) => {
+const Item = ({
+  title,
+  value,
+  status,
+  onClick
+}) => {
   const _hKeyDown = useKeyEnter(onClick)
   , _value = status
     ? `${value} (${status})`
@@ -76,31 +86,30 @@ const Item = ({ title, value, status, onClick }) => {
     <div
       tabIndex="0"
       role="button"
-      style={S.ITEM_ROOT}
+      style={S_ITEM}
       onClick={onClick}
       onKeyDown={_hKeyDown}
     >
-      <span style={S.ITEM_TITLE}>
+      <span style={S_ITEM_TITLE}>
          {title}
       </span>
-      <span style={S.ITEM_VALUE}>
+      <span style={S_ITEM_VALUE}>
         {_value}
       </span>
     </div>
   );
 }
 
-const ClusterItem = ({ point, color, index, isShowRange }) => {
+const ClusterItem = ({
+  point,
+  color,
+  index,
+  isShowRange
+}) => {
   const _refData = useRef(point.seria.data || [])
   , _refPointIndex = useRef(_refData.current.length-1)
   , [isShowChart, toggleIsShowChart] = useToggle(index < 3)
 
-  const _maxLabel = isShowRange
-          ? <MaxLabel color={COLOR_MAX} fontSize={14} />
-          : <span/>
-      , _minLabel = isShowRange
-          ? <MinLabel color={COLOR_MIN} fontSize={14} />
-          : <span/>;
   return (
       <div>
         <Item
@@ -110,6 +119,7 @@ const ClusterItem = ({ point, color, index, isShowRange }) => {
           onClick={toggleIsShowChart}
         />
         <ShowHide isShow={isShowChart}>
+
           <SparkView
             height={32}
             width={140}
@@ -119,8 +129,14 @@ const ClusterItem = ({ point, color, index, isShowRange }) => {
             margin={3}
             //marginLeft={20}
           >
-             {_maxLabel}
-             {_minLabel}
+            {isShowRange
+              ? <MaxLabel color={COLOR_MAX} fontSize={14} />
+              : <span/>
+            }
+            {isShowRange
+              ? <MinLabel color={COLOR_MIN} fontSize={14} />
+              : <span/>
+            }
              <Line color={color} />
              <Spot
                  pointIndex={_refPointIndex.current}
@@ -128,6 +144,7 @@ const ClusterItem = ({ point, color, index, isShowRange }) => {
                  spotColors={SPOT_COLORS}
              />
           </SparkView>
+
       </ShowHide>
      </div>
   );
@@ -150,7 +167,11 @@ const ClusterItem = ({ point, color, index, isShowRange }) => {
 }
 */
 
-const Cluster = ({ cluster, color, isShowRange }) => {
+const Cluster = ({
+  cluster,
+  color,
+  isShowRange
+}) => {
   const points = cluster.points || [];
   return (
     <div>
@@ -177,7 +198,12 @@ Cluster.propTypes = {
 }
 */
 
-const ClusterInfo = ({ cluster, color, from, to }) => {
+const ClusterInfo = ({
+  cluster,
+  color,
+  from,
+  to
+}) => {
   const [isShowRange, onClick] = useToggle(false);
   return  (
     <div>
