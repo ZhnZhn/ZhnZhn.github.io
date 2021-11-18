@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _style = _interopRequireDefault(require("./style"));
+var _Colors = _interopRequireDefault(require("./Colors"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -24,7 +24,7 @@ const Spots = ({
   points,
   size = 2,
   style,
-  spotColors = _style.default.COLORS
+  spotColors = _Colors.default
 }) => {
   const startSpot = /*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
     cx: points[0].x,

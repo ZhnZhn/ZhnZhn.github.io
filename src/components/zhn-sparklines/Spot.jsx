@@ -1,24 +1,32 @@
 //import PropTypes from 'prop-types';
 
 import calcDirection from './dataProcessing/calcDirection';
-import STYLE from './style'
+import COLORS from './Colors'
 
 const Spot = ({
   points,
   size=2,
   style,
-  spotColors=STYLE.COLORS,
+  spotColors=COLORS,
   pointIndex
-}) => (
-  <g>
-    <circle
-       cx={points[pointIndex].x}
-       cy={points[pointIndex].y}
-       r={size}
-       style={style || { fill: spotColors[calcDirection(points, pointIndex)] }}
-    />
-  </g>
-);
+}) => {
+  const _point = points[pointIndex]
+  , { x, y } = _point || {};
+
+  if ( x == null || y == null ) {
+    return null;
+  }
+  return (
+    <g>
+      <circle
+         cx={x}
+         cy={y}
+         r={size}
+         style={style || { fill: spotColors[calcDirection(points, pointIndex)] }}
+      />
+    </g>
+  );
+}
 
 
 /*

@@ -1,4 +1,4 @@
-import STYLE from './style'
+import COLORS  from './Colors'
 //import PropTypes from 'prop-types'
 
 if (!Math.sign) {
@@ -15,7 +15,7 @@ const Spots = ({
   points,
   size=2,
   style,
-  spotColors=STYLE.COLORS
+  spotColors=COLORS
 }) => {
   const startSpot = (
                <circle

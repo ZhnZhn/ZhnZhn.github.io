@@ -1,23 +1,28 @@
 //import PropTypes from 'prop-types';
 
 import calcDirection from './dataProcessing/calcDirection';
-import STYLE from './style';
+import COLORS  from './Colors';
 
-const _crWidth = (points, strokeWidth) => points
-&& points.length > 1
-  ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth))
-  : 0;
+const S_BARS = {fill: 'slategray'};
+
+const _ceil = Math.ceil
+, _max = Math.max;
+
+const _crWidth = (points, strokeWidth) =>
+ points && points.length > 1
+   ? _ceil(_max(0, points[1].x - points[0].x - parseInt(strokeWidth, 10)))
+   : 0;
 
 const Bars = ({
   points=[],
   height,
-  style=STYLE.BARS,
+  style=S_BARS,
   barWidth,
   pointIndex=-1,
-  barStrokeColors=STYLE.COLORS
+  barStrokeColors=COLORS
 }) => {
   const { strokeWidth=0 } = style
-  , _width = barWidth || _crWidth(points);
+  , _width = barWidth || _crWidth(points, strokeWidth);
 
   return (
       <g>
@@ -31,10 +36,10 @@ const Bars = ({
               return (
                 <rect
                    key={i}
-                   x={Math.ceil(x - strokeWidth * i)}
-                   y={Math.ceil(y)}
-                   width={Math.ceil(_width)}
-                   height={Math.ceil(Math.max(0, height - y))}
+                   x={_ceil(x - strokeWidth * i)}
+                   y={_ceil(y)}
+                   width={_ceil(_width)}
+                   height={_ceil(_max(0, height - y))}
                    style={_style}
                 />
               );

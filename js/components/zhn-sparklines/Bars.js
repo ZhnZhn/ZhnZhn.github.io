@@ -7,25 +7,31 @@ exports.default = void 0;
 
 var _calcDirection = _interopRequireDefault(require("./dataProcessing/calcDirection"));
 
-var _style2 = _interopRequireDefault(require("./style"));
+var _Colors = _interopRequireDefault(require("./Colors"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from 'prop-types';
-const _crWidth = (points, strokeWidth) => points && points.length > 1 ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth)) : 0;
+const S_BARS = {
+  fill: 'slategray'
+};
+const _ceil = Math.ceil,
+      _max = Math.max;
+
+const _crWidth = (points, strokeWidth) => points && points.length > 1 ? _ceil(_max(0, points[1].x - points[0].x - parseInt(strokeWidth, 10))) : 0;
 
 const Bars = ({
   points = [],
   height,
-  style = _style2.default.BARS,
+  style = S_BARS,
   barWidth,
   pointIndex = -1,
-  barStrokeColors = _style2.default.COLORS
+  barStrokeColors = _Colors.default
 }) => {
   const {
     strokeWidth = 0
   } = style,
-        _width = barWidth || _crWidth(points);
+        _width = barWidth || _crWidth(points, strokeWidth);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
     children: points.map((p, i) => {
@@ -40,10 +46,10 @@ const Bars = ({
       } : style;
 
       return /*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
-        x: Math.ceil(x - strokeWidth * i),
-        y: Math.ceil(y),
-        width: Math.ceil(_width),
-        height: Math.ceil(Math.max(0, height - y)),
+        x: _ceil(x - strokeWidth * i),
+        y: _ceil(y),
+        width: _ceil(_width),
+        height: _ceil(_max(0, height - y)),
         style: _style
       }, i);
     })

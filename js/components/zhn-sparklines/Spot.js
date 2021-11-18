@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _calcDirection = _interopRequireDefault(require("./dataProcessing/calcDirection"));
 
-var _style = _interopRequireDefault(require("./style"));
+var _Colors = _interopRequireDefault(require("./Colors"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -16,18 +16,30 @@ const Spot = ({
   points,
   size = 2,
   style,
-  spotColors = _style.default.COLORS,
+  spotColors = _Colors.default,
   pointIndex
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
-  children: /*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
-    cx: points[pointIndex].x,
-    cy: points[pointIndex].y,
-    r: size,
-    style: style || {
-      fill: spotColors[(0, _calcDirection.default)(points, pointIndex)]
-    }
-  })
-});
+}) => {
+  const _point = points[pointIndex],
+        {
+    x,
+    y
+  } = _point || {};
+
+  if (x == null || y == null) {
+    return null;
+  }
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
+      cx: x,
+      cy: y,
+      r: size,
+      style: style || {
+        fill: spotColors[(0, _calcDirection.default)(points, pointIndex)]
+      }
+    })
+  });
+};
 /*
 Spot.propTypes = {
     size: PropTypes.number,
