@@ -2,14 +2,14 @@ import DOMPurify from 'dompurify'
 import DateUtils from '../../utils/DateUtils'
 
 const _toOptions = params => {
-  const _options = {};
+  const _options = Object.create(null);
   params.forEach((value, key) => {
     _options[key] = DOMPurify.sanitize(value)
   })
   return _options;
 };
 
-const _crOptions = (params) => {
+const crOptions = (params) => {
   const _options = _toOptions(params)
   , { v, bT, cT, cN, fD, tD } = _options;
   return {
@@ -25,8 +25,6 @@ const _crOptions = (params) => {
   };
 };
 
-const LocationQuery = {
-  toOptions: _crOptions
-};
+const LocationQuery = { crOptions };
 
 export default LocationQuery

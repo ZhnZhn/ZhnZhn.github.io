@@ -1,6 +1,8 @@
 
-import CA from '../actions/ComponentActions'
-import LocationQuery from './LocationQuery'
+import CA from '../actions/ComponentActions';
+import LocationQuery from './LocationQuery';
+
+const { crOptions } = LocationQuery;
 
 const ARR_B = [ 'UN', 'QE', 'FAO' ];
 const ARR_C = [
@@ -10,16 +12,19 @@ const ARR_C = [
   'BC_HD'
 ];
 
-const _isQuery = (obj) => obj && obj.v &&
-  ARR_C.indexOf(obj.cT) !== -1 ||
-  ARR_B.indexOf(obj.bT) !== -1;
+const _isArrInclude = (arr, value) => arr
+  .indexOf(value) !== -1;
+
+const _isQuery = (obj) => obj && obj.v
+ && _isArrInclude(ARR_C, obj.cT)
+ || _isArrInclude(ARR_B, obj.bT)
 
 const _trSearchToOptions = () => {
   const search = window?.location?.search;
-  if (!search || search.length > 120 ){
-    return void 0;
+  if (!search || search.length > 120){
+    return;
   }
-  const options = LocationQuery.toOptions(new URLSearchParams(search));
+  const options = crOptions(new URLSearchParams(search));
   return _isQuery(options)
     ? options
     : void 0;
@@ -32,6 +37,6 @@ const LocationSearch = {
       CA.showAsk({ options })
     }
   }
-}
+};
 
 export default LocationSearch
