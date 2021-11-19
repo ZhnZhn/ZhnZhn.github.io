@@ -1,6 +1,10 @@
 import { Component, createRef } from 'react';
 
-import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
+import {
+  CHAT_SHOW,
+  CHAT_LOAD_COMPLETED,
+  CHAT_CLOSE
+} from '../../flux/actions/ChartActions';
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 
 import withTheme from '../hoc/withTheme';
@@ -13,42 +17,33 @@ import ChartList from './ChartList';
 
 const TH_ID = 'CHART_CONTAINER';
 
-const CL = {
-  ROOT: "item-container",
-  SCROLL: 'scroll-container-y scroll-items',
-  SHOW: "show-popup",
+const CL_ROOT = "item-container"
+, CL_SCROLL = 'scroll-container-y scroll-items'
+, CL_SHOW = "show-popup"
+, CL_MENU_MORE = "popup-menu charts__menu-more"
 
-  MENU_MORE: "popup-menu charts__menu-more"
-};
+, CHILD_MARGIN = 36
+, INITIAL_WIDTH = 635
+, MIN_WIDTH_WITH_TAB_MINI = 470
+, MIN_WIDTH = 365
+, MAX_WIDTH = 1200
+, STEP = 10
 
-const CHILD_MARGIN = 36
-    , INITIAL_WIDTH = 635
-    , MIN_WIDTH_WITH_TAB_MINI = 470
-    , MIN_WIDTH = 365
-    , MAX_WIDTH = 1200
-    , STEP = 10;
-
-const S = {
-  BR_CAPTION: {
-    paddingTop: 2,
-    paddingLeft: 2
-  },
-  CAPTION: {
-    position: 'relative',
-    top: -1
-  },
-  INLINE: {
-    display: 'inline-block'
-  },
-  NONE: {
-    display: 'none'
-  }
-};
+, S_BR_CAPTION = {
+  paddingTop: 2,
+  paddingLeft: 2
+}
+, S_CAPTION = {
+  position: 'relative',
+  top: -1
+}
+, S_INLINE = { display: 'inline-block' }
+, S_NONE = { display: 'none' };
 
 const COMP_ACTIONS = [
-  CHAT.SHOW_CHART,
-  CHAT.LOAD_STOCK_COMPLETED,
-  CHAT.CLOSE_CHART
+  CHAT_SHOW,
+  CHAT_LOAD_COMPLETED,
+  CHAT_CLOSE
 ];
 
 const _isFn = fn => typeof fn === "function";
@@ -140,7 +135,7 @@ class ChartContainer extends Component {
   _onStore = (actionType, data) => {
      if ( this._isDataForContainer(data) ) {
        if (_isInArray(COMP_ACTIONS, actionType)) {
-         if (actionType !== CHAT.CLOSE_CHART) {
+         if (actionType !== CHAT_CLOSE) {
            this._refSpComp.current.scrollTop = 0
            //this.spComp.scrollTop()
          }
@@ -247,8 +242,8 @@ class ChartContainer extends Component {
      , _isAdminMode = store.isAdminMode?.() || false
      , _modelMore = crModelMore(_isAdminMode, this._HANDLERS)
      , { isShow, isMore, isCompareTo, configs } = this.state
-     , _style = isShow ? S.INLINE : S.NONE
-     , _className = crCn(CL.ROOT, [isShow, CL.SHOW]);
+     , _style = isShow ? S_INLINE : S_NONE
+     , _className = crCn(CL_ROOT, [isShow, CL_SHOW]);
 
      return(
         <div
@@ -262,7 +257,7 @@ class ChartContainer extends Component {
         >
           <A.ModalSlider
             isShow={isMore}
-            className={CL.MENU_MORE}
+            className={CL_MENU_MORE}
             style={TS.EL_BORDER}
             model={_modelMore}
             onClose={this._hToggleMore}
@@ -274,12 +269,12 @@ class ChartContainer extends Component {
             />
           }
           <A.BrowserCaption
-             style={S.BR_CAPTION}
+             style={S_BR_CAPTION}
              onMore={this._showMore}
              onCheck={this._hSetActive}
              onUnCheck={this._hSetNotActive}
              caption={caption}
-             captionStyle={S.CAPTION}
+             captionStyle={S_CAPTION}
              onClose={this._hHide}
           >
              <A.SvgHrzResize
@@ -293,8 +288,8 @@ class ChartContainer extends Component {
              />
           </A.BrowserCaption>
           <A.ScrollPane
-             ref={this._refSpComp}             
-             className={CL.SCROLL}
+             ref={this._refSpComp}
+             className={CL_SCROLL}
           >
             <ChartList
                refChartFn={this._refChart}

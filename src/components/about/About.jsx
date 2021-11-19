@@ -1,9 +1,12 @@
 import use from '../hooks/use';
 
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
-import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
+import {
+  CHAT_INIT_AND_SHOW,
+  CHAT_SHOW
+} from '../../flux/actions/ChartActions';
 
-import has from '../has'
+import has from '../has';
 
 import A from '../Comp';
 import TwitterLink from './TwitterLink';
@@ -37,8 +40,9 @@ const About = ({
   useListen(store, actionType => {
     if (actionType === CAT.SHOW_ABOUT){
       show()
-    } else if (actionType === CHAT.INIT_AND_SHOW_CHART ||
-      actionType === CHAT.SHOW_CHART){
+    } else if (actionType === CHAT_INIT_AND_SHOW
+      || actionType === CHAT_SHOW
+    ) {
       hide()
     }
   })
@@ -140,20 +144,6 @@ const About = ({
       </A.ScrollPane>
    </A.ShowHide>
   );
-}
-
-/*
-<div
-  className={_cn}
-  style={{..._style, ...TS.ROOT}}
- >
-  */
-
-/*
-About.propsTypes = {
-  isInitShow: PropTypes.bool,
-  store: PropTypes.object
-}
-*/
+};
 
 export default About

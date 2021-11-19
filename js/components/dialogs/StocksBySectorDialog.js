@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _ChartActions = _interopRequireDefault(require("../../flux/actions/ChartActions"));
+var _ChartActions = _interopRequireWildcard(require("../../flux/actions/ChartActions"));
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
@@ -17,43 +17,41 @@ var _NasdaqLink = _interopRequireDefault(require("../native-links/NasdaqLink"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 //import PropTypes from "prop-types";
-const S = {
-  ROOT_NOT_LABELS: {
-    width: 280
-  },
-  CAPTION_SPAN: {
-    display: 'inline-block',
-    maxWidth: 295
-  },
-  SOURCE_ROOT: {
-    lineHeight: 1.5,
-    marginBottom: 0
-  },
-  LINK_SHOW_HIDE: {
-    marginBottom: 10
-  },
-  LINK_ROOT: {
-    display: 'flex',
-    alignItems: 'center',
-    margin: '8px 5px 0 5px',
-    lineHeight: 1.5,
-    fontWeight: 'bold'
-  },
-  LINK_CAPTION: {
-    color: '#1b75bb',
-    display: 'inline-block',
-    textAlign: 'right',
-    width: 100,
-    paddingRight: 5,
-    fontSize: '16px'
-  },
-  LINK: {
-    paddingTop: 0
-  },
-  LINK_NOT_LABELS: {
-    marginLeft: 8
-  }
+const S_ROOT_NOT_LABELS = {
+  width: 280
+},
+      S_CAPTION = {
+  display: 'inline-block',
+  maxWidth: 295
+},
+      S_LINK_SHOW_HIDE = {
+  marginBottom: 10
+},
+      S_LINK_ROOT = {
+  display: 'flex',
+  alignItems: 'center',
+  margin: '8px 5px 0 5px',
+  lineHeight: 1.5,
+  fontWeight: 'bold'
+},
+      S_LINK_CAPTION = {
+  color: '#1b75bb',
+  display: 'inline-block',
+  width: 100,
+  paddingRight: 5,
+  textAlign: 'right',
+  fontSize: '16px'
+},
+      S_LINK = {
+  paddingTop: 0
+},
+      S_LINK_NOT_LABELS = {
+  marginLeft: 8
 };
 const IEX_SOURCES = [{
   a: '1 Month',
@@ -163,7 +161,7 @@ class StocksBySectorDialog extends _react.Component {
         dfProps
       } = this._getDataSource();
 
-      _ChartActions.default.loadStock({
+      _ChartActions.default[_ChartActions.CHAT_LOAD]({
         chartType: chartContainerType,
         browserType
       }, {
@@ -233,15 +231,15 @@ class StocksBySectorDialog extends _react.Component {
       isShowLabels,
       isShowLink
     } = this.state,
-          _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
-          _linkStyle = isShowLabels ? S.LINK : { ...S.LINK,
-      ...S.LINK_NOT_LABELS
+          _style = isShowLabels ? null : S_ROOT_NOT_LABELS,
+          _linkStyle = isShowLabels ? S_LINK : { ...S_LINK,
+      ...S_LINK_NOT_LABELS
     };
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
       caption: text,
       style: _style,
-      styleCaption: S.CAPTION_SPAN,
+      styleCaption: S_CAPTION,
       isShow: isShow,
       commandButtons: this._commandButtons,
       onClose: onClose,
@@ -255,11 +253,11 @@ class StocksBySectorDialog extends _react.Component {
         onSelect: this._hSelectDataSource
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
         isShow: isShowLink,
-        style: S.LINK_SHOW_HIDE,
+        style: S_LINK_SHOW_HIDE,
         children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          style: S.LINK_ROOT,
+          style: S_LINK_ROOT,
           children: [isShowLabels && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: S.LINK_CAPTION,
+            style: S_LINK_CAPTION,
             children: "Link:"
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqLink.default, {
             style: _linkStyle,

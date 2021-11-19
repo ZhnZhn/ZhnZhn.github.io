@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
@@ -29,14 +27,24 @@ var _WithLimitRemaining = _interopRequireDefault(require("./WithLimitRemaining")
 
 var _WithLoadingProgress = _interopRequireDefault(require("./WithLoadingProgress"));
 
-var ChartStore = _refluxCore["default"].createStore((0, _extends2["default"])({
-  listenables: [].concat(_Actions["default"]),
-  init: function init() {
+const ChartStore = _refluxCore.default.createStore({
+  listenables: [..._Actions.default],
+
+  init() {
     this.initWatchList();
-    this.listenLoadingProgress(_ChartActions["default"].fnOnChangeStore);
-  }
-}, _ChartSlice["default"], _BrowserSlice["default"], _ComponentSlice["default"], _DialogSlice["default"], _SettingSlice["default"], _WatchListSlice["default"], _WithLimitRemaining["default"], _WithLoadingProgress["default"]));
+    this.listenLoadingProgress(_ChartActions.default.onChangeStore);
+  },
+
+  ..._ChartSlice.default,
+  ..._BrowserSlice.default,
+  ..._ComponentSlice.default,
+  ..._DialogSlice.default,
+  ..._SettingSlice.default,
+  ..._WatchListSlice.default,
+  ..._WithLimitRemaining.default,
+  ..._WithLoadingProgress.default
+});
 
 var _default = ChartStore;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ChartStore.js.map

@@ -51,7 +51,7 @@ const About = ({
   useListen(store, actionType => {
     if (actionType === _ComponentActions.ComponentActionTypes.SHOW_ABOUT) {
       show();
-    } else if (actionType === _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART || actionType === _ChartActions.ChartActionTypes.SHOW_CHART) {
+    } else if (actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW) {
       hide();
     }
   });
@@ -199,20 +199,6 @@ const About = ({
     })]
   });
 };
-/*
-<div
-  className={_cn}
-  style={{..._style, ...TS.ROOT}}
- >
-  */
-
-/*
-About.propsTypes = {
-  isInitShow: PropTypes.bool,
-  store: PropTypes.object
-}
-*/
-
 
 var _default = About;
 exports.default = _default;

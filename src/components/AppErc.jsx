@@ -8,7 +8,7 @@ import ChartStore from '../flux/stores/ChartStore';
 
 import CA, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
 import { BAT_INIT_BROWSER_DYNAMIC } from '../flux/actions/BrowserActions';
-import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
+import { CHAT_INIT_AND_SHOW } from '../flux/actions/ChartActions';
 
 import HeaderBar from './header/HeaderBar';
 import BrowserContainer from './browser-container/BrowserContainer';
@@ -55,7 +55,7 @@ const AppErc = () => {
          <About store={ChartStore} isInitShow={true} />
          <CompContainer
            store={ChartStore}
-           addAction={CHAT.INIT_AND_SHOW_CHART}
+           addAction={CHAT_INIT_AND_SHOW}
          />
      </div>
      <DialogContainer store={ChartStore} />

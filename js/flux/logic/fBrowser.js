@@ -11,7 +11,7 @@ var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
 var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
 
-var _ChartActions = _interopRequireDefault(require("../actions/ChartActions"));
+var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
 
 var _BrowserActions = _interopRequireWildcard(require("../actions/BrowserActions"));
 
@@ -57,7 +57,7 @@ const _crBrowserDynamic = (Comp, option) => {
     item,
     browserType,
     chartContainerType,
-    onShow: _ChartActions.default.showChart.bind(null, chartContainerType, browserType)
+    onShow: _ChartActions.default[_ChartActions.CHAT_SHOW].bind(null, chartContainerType, browserType)
   }) : void 0;
   return /*#__PURE__*/(0, _react.createElement)(Comp, {
     dfProps,

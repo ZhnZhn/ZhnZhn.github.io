@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = exports.ChartActionTypes = void 0;
+exports.default = exports.CHAT_REMOVE_ALL = exports.CHAT_SORT_BY = exports.CHAT_UPDATE_MOVING_VALUES = exports.CHAT_COPY = exports.CHAT_TO_TOP = exports.CHAT_LOAD_BY_QUERY = exports.CHAT_LOAD_FAILED = exports.CHAT_LOAD_COMPLETED = exports.CHAT_LOAD_ADDED = exports.CHAT_LOAD = exports.CHAT_CLOSE = exports.CHAT_SHOW = exports.CHAT_INIT_AND_SHOW = void 0;
 
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
@@ -21,43 +21,41 @@ var _LogicUtils = _interopRequireDefault(require("../logic/LogicUtils"));
 
 var _LoadingProgressActions = require("./LoadingProgressActions");
 
-const C = {
-  DESR_LOADER: "Loader for this item hasn't found."
-};
-
-const META = '_Meta',
+const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found.",
+      META = '_Meta',
       _fnNoop = () => {},
       _isFn = fn => typeof fn === 'function',
       _isUndef = v => typeof v === 'undefined';
 
-const ChartActionTypes = {
-  INIT_AND_SHOW_CHART: 'initAndShowChart',
-  SHOW_CHART: 'showChart',
-  CLOSE_CHART: 'closeChart',
-  LOAD_STOCK: 'loadStock',
-  LOAD_STOCK_COMPLETED: 'loadStockCompleted',
-  LOAD_STOCK_ADDED: 'loadStockAdded',
-  LOAD_STOCK_FAILED: 'loadStockFailed',
-  LOAD_STOCK_BY_QUERY: 'loadStockByQuery',
-  LOAD_STOCK_BY_QUERY_C: 'loadStockByQueryC',
-  LOAD_STOCK_BY_QUERY_F: 'loadStockByQueryF',
-  TO_TOP: 'toTop',
-  COPY: 'copy',
-  UPDATE_MOVING_VALUES: 'updateMovingValues',
-  SORT_BY: 'sortBy',
-  REMOVE_ALL: 'removeAll'
-};
-exports.ChartActionTypes = ChartActionTypes;
-const A = ChartActionTypes;
+const CHAT_INIT_AND_SHOW = 'initAndShowChart';
+exports.CHAT_INIT_AND_SHOW = CHAT_INIT_AND_SHOW;
+const CHAT_SHOW = 'showChart';
+exports.CHAT_SHOW = CHAT_SHOW;
+const CHAT_CLOSE = 'closeChart';
+exports.CHAT_CLOSE = CHAT_CLOSE;
+const CHAT_LOAD = 'loadItem';
+exports.CHAT_LOAD = CHAT_LOAD;
+const CHAT_LOAD_ADDED = 'loadItemAdded';
+exports.CHAT_LOAD_ADDED = CHAT_LOAD_ADDED;
+const CHAT_LOAD_COMPLETED = 'loadItemCompleted';
+exports.CHAT_LOAD_COMPLETED = CHAT_LOAD_COMPLETED;
+const CHAT_LOAD_FAILED = 'loadItemFailed';
+exports.CHAT_LOAD_FAILED = CHAT_LOAD_FAILED;
+const CHAT_LOAD_BY_QUERY = 'loadItemByQuery';
+exports.CHAT_LOAD_BY_QUERY = CHAT_LOAD_BY_QUERY;
+const CHAT_TO_TOP = 'toTop';
+exports.CHAT_TO_TOP = CHAT_TO_TOP;
+const CHAT_COPY = 'copy';
+exports.CHAT_COPY = CHAT_COPY;
+const CHAT_UPDATE_MOVING_VALUES = 'updateMovingValues';
+exports.CHAT_UPDATE_MOVING_VALUES = CHAT_UPDATE_MOVING_VALUES;
+const CHAT_SORT_BY = 'sortBy';
+exports.CHAT_SORT_BY = CHAT_SORT_BY;
+const CHAT_REMOVE_ALL = 'removeAll';
+exports.CHAT_REMOVE_ALL = CHAT_REMOVE_ALL;
 const M = _Msg.default.Alert;
 
-const _fnOnChangeStore = function (actionType, data) {
-  if (actionType === _LoadingProgressActions.LPAT_LOADING_COMPLETE || actionType === _LoadingProgressActions.LPAT_LOADING_FAILED) {
-    ChartActions[A.LOAD_STOCK].isLoading = false;
-  }
-};
-
-const _fnCancelLoad = function (option, alertMsg, isWithFailed) {
+const _cancelLoad = function (option, alertMsg, isWithFailed) {
   _Msg.default.setAlertMsg(option, alertMsg);
 
   this.failed(option);
@@ -91,26 +89,34 @@ const _addSettingsTo = (options, ...restArgs) => {
 };
 
 const ChartActions = _refluxCore.default.createActions({
-  [A.LOAD_STOCK]: {
+  [CHAT_LOAD]: {
     children: ['completed', 'added', 'failed'],
     isLoading: false,
-    idLoading: undefined,
+    idLoading: void 0,
     isShouldEmit: true,
-    cancelLoad: _fnCancelLoad
+    cancelLoad: _cancelLoad
   },
-  [A.LOAD_STOCK_BY_QUERY]: {
+  [CHAT_LOAD_BY_QUERY]: {
     children: ['completed', 'failed']
   },
-  [A.SHOW_CHART]: {},
-  [A.CLOSE_CHART]: {},
-  [A.TO_TOP]: {},
-  [A.COPY]: {},
-  [A.UPDATE_MOVING_VALUES]: {},
-  [A.SORT_BY]: {},
-  [A.REMOVE_ALL]: {}
+  [CHAT_SHOW]: {},
+  [CHAT_CLOSE]: {},
+  [CHAT_TO_TOP]: {},
+  [CHAT_COPY]: {},
+  [CHAT_UPDATE_MOVING_VALUES]: {},
+  [CHAT_SORT_BY]: {},
+  [CHAT_REMOVE_ALL]: {}
 });
 
-ChartActions.fnOnChangeStore = _fnOnChangeStore;
+const _isItemLoaded = actionType => actionType === _LoadingProgressActions.LPAT_LOADING_COMPLETE || actionType === _LoadingProgressActions.LPAT_LOADING_FAILED;
+
+const _onChangeStore = actionType => {
+  if (_isItemLoaded(actionType)) {
+    ChartActions[CHAT_LOAD].isLoading = false;
+  }
+};
+
+ChartActions.onChangeStore = _onChangeStore;
 const {
   isApiKeyRequired,
   isProxyRequired,
@@ -151,7 +157,7 @@ const _checkProxy = ({
   return '';
 };
 
-ChartActions[A.LOAD_STOCK].preEmit = function (confItem = {}, option = {}) {
+ChartActions[CHAT_LOAD].preEmit = function (confItem = {}, option = {}) {
   const key = _LogicUtils.default.createKeyForConfig(option),
         isDoublingLoad = this.isLoading && key === this.idLoading,
         isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
@@ -183,11 +189,11 @@ ChartActions[A.LOAD_STOCK].preEmit = function (confItem = {}, option = {}) {
   return;
 };
 
-ChartActions[A.LOAD_STOCK].shouldEmit = function () {
+ChartActions[CHAT_LOAD].shouldEmit = function () {
   return this.isShouldEmit;
 };
 
-ChartActions[A.LOAD_STOCK].listen(function (confItem, option) {
+ChartActions[CHAT_LOAD].listen(function (confItem, option) {
   const {
     key,
     isLoadMeta,
@@ -207,8 +213,11 @@ const _addDialogPropsTo = option => {
   } = option,
         {
     dialogProps
-  } = _ChartStore.default.getSourceConfig(browserType, chartType) || {};
-  Object.assign(option, dialogProps, dialogProps.dfProps, {
+  } = _ChartStore.default.getSourceConfig(browserType, chartType) || {},
+        {
+    dfProps
+  } = dialogProps || {};
+  Object.assign(option, dialogProps, dfProps, {
     subtitle: SUBTITLE
   });
   const {
@@ -221,7 +230,7 @@ const _addDialogPropsTo = option => {
   }
 };
 
-ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
+ChartActions[CHAT_LOAD_BY_QUERY].listen(function (option) {
   _addDialogPropsTo(option);
 
   const {
@@ -241,7 +250,7 @@ ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
 
     impl.loadItem(option, this.completed, _fnNoop, this.failed);
   } else {
-    option.alertDescr = C.DESCR_LOADER;
+    option.alertDescr = ALERT_DESCR_BY_QUERY;
     this.failed(option);
   }
 });

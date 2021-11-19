@@ -2,9 +2,16 @@ import {
   LPAT_LOADING,
   LPAT_LOADING_COMPLETE,
   LPAT_LOADING_FAILED
-} from '../actions/LoadingProgressActions'
-import { ChartActionTypes as CHAT } from '../actions/ChartActions';
-import { BAT_UPDATE_BROWSER_MENU } from '../actions/BrowserActions';
+} from '../actions/LoadingProgressActions';
+import {
+  CHAT_LOAD_COMPLETED,
+  CHAT_INIT_AND_SHOW,
+  CHAT_SHOW,
+  CHAT_CLOSE
+} from '../actions/ChartActions';
+import {
+  BAT_UPDATE_BROWSER_MENU
+} from '../actions/BrowserActions';
 
 import ChartLogic from './chart/ChartLogic'
 
@@ -46,10 +53,10 @@ const ChartSlice = {
     return isChartExist(this.charts, chartType, key);
   },
 
-  onLoadStock(){
+  onLoadItem(){
     this.triggerLoadingProgress(LPAT_LOADING)
   },
-  onLoadStockCompleted(option, config){
+  onLoadItemCompleted(option, config){
       const {
         chartType, browserType,
         dialogConf,
@@ -64,33 +71,33 @@ const ChartSlice = {
         chartSlice, Comp
       } = loadConfig(this.charts, config, option, _dialogConf, this);
       if (chartSlice){
-        this.trigger(CHAT.LOAD_STOCK_COMPLETED, chartSlice);
+        this.trigger(CHAT_LOAD_COMPLETED, chartSlice);
       } else {
-        this.trigger(CHAT.INIT_AND_SHOW_CHART, Comp);
+        this.trigger(CHAT_INIT_AND_SHOW, Comp);
       }
       this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
       this.triggerLimitRemaining(limitRemaining);
       this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   },
-  onLoadStockAdded(option={}){
+  onLoadItemAdded(option={}){
      this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
      scanPostAdded(this, option)
   },
-  onLoadStockFailed(option){
+  onLoadItemFailed(option){
     this.triggerLoadingProgress(LPAT_LOADING_FAILED)
     setAlertItemIdTo(option)
     this.showAlertDialog(option);
     _logErrorToConsole(option);
   },
 
-  onLoadStockByQuery(){
-    this.onLoadStock()
+  onLoadItemByQuery(){
+    this.onLoadItem()
   },
-  onLoadStockByQueryCompleted(option, config){
-    this.onLoadStockCompleted(option, config)
+  onLoadItemByQueryCompleted(option, config){
+    this.onLoadItemCompleted(option, config)
   },
-  onLoadStockByQueryFailed(option){
-    this.onLoadStockFailed(option)
+  onLoadItemByQueryFailed(option){
+    this.onLoadItemFailed(option)
   },
 
   onShowChart(chartType, browserType, dialogConfOr){
@@ -100,9 +107,9 @@ const ChartSlice = {
       chartSlice, Comp
      } = showChart(this.charts, chartType, browserType, dialogConf, this);
     if (chartSlice){
-      this.trigger(CHAT.SHOW_CHART, chartSlice);
+      this.trigger(CHAT_SHOW, chartSlice);
     } else {
-      this.trigger(CHAT.INIT_AND_SHOW_CHART, Comp)
+      this.trigger(CHAT_INIT_AND_SHOW, Comp)
     }
     this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   },
@@ -125,14 +132,14 @@ const ChartSlice = {
       this.resetActiveChart(chartId)
       this.minusMenuItemCounter(chartType, browserType);
 
-      this.trigger(CHAT.CLOSE_CHART, chartSlice);
+      this.trigger(CHAT_CLOSE, chartSlice);
       this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
     }
   },
 
   onToTop(chartType, id){
     const chartSlice = toTop(this.charts, chartType, id)
-    this.trigger(CHAT.SHOW_CHART, chartSlice);
+    this.trigger(CHAT_SHOW, chartSlice);
   },
 
   onCopy(chart){
@@ -148,13 +155,13 @@ const ChartSlice = {
 
   onSortBy(chartType, by){
     const chartSlice = sortBy(this.charts, chartType, by);
-    this.trigger(CHAT.SHOW_CHART, chartSlice);
+    this.trigger(CHAT_SHOW, chartSlice);
   },
   onRemoveAll(chartType, browserType){
     const chartSlice = removeAll(this.charts, chartType);
     this.resetMenuItemCounter(chartType, browserType)
     this.uncheckActiveCheckbox()
-    this.trigger(CHAT.SHOW_CHART, chartSlice);
+    this.trigger(CHAT_SHOW, chartSlice);
     this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   }
 

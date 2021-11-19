@@ -1,50 +1,36 @@
 import { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import ChartActions from '../../flux/actions/ChartActions';
+import ChartActions, { CHAT_LOAD } from '../../flux/actions/ChartActions';
 
-import D from './DialogCell'
+import D from './DialogCell';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import NasdaqLink from '../native-links/NasdaqLink';
 
-const S = {
-  ROOT_NOT_LABELS: {
-    width: 280
-  },
-  CAPTION_SPAN : {
-    display: 'inline-block',
-    maxWidth: 295
-  },
-  SOURCE_ROOT : {
-    lineHeight: 1.5,
-    marginBottom: 0
-  },
-  LINK_SHOW_HIDE : {
-    marginBottom: 10
-  },
-  LINK_ROOT: {
-    display: 'flex',
-    alignItems: 'center',
-    margin: '8px 5px 0 5px',    
-    lineHeight: 1.5,
-    fontWeight: 'bold'
-  },
+const S_ROOT_NOT_LABELS = { width: 280 }
+, S_CAPTION = {
+  display: 'inline-block',
+  maxWidth: 295
+}
+, S_LINK_SHOW_HIDE = { marginBottom: 10 }
+, S_LINK_ROOT = {
+  display: 'flex',
+  alignItems: 'center',
+  margin: '8px 5px 0 5px',
+  lineHeight: 1.5,
+  fontWeight: 'bold'
+}
+, S_LINK_CAPTION = {
+  color: '#1b75bb',
+  display: 'inline-block',
+  width: 100,
+  paddingRight: 5,
+  textAlign: 'right',
+  fontSize: '16px'
+}
+, S_LINK = { paddingTop: 0 }
+, S_LINK_NOT_LABELS = { marginLeft: 8 };
 
-  LINK_CAPTION : {
-    color: '#1b75bb',
-    display: 'inline-block',
-    textAlign: 'right',
-    width: 100,
-    paddingRight: 5,
-    fontSize: '16px'
-  },
-  LINK: {
-    paddingTop: 0
-  },
-  LINK_NOT_LABELS: {
-    marginLeft: 8
-  }
-};
 
 const IEX_SOURCES = [
   { a: '1 Month', b: '1m'},
@@ -167,7 +153,7 @@ class StocksBySectorDialog extends Component {
     , { id, text } = item || {}
     , { caption, value, dfProps } = this._getDataSource();
 
-    ChartActions.loadStock(
+    ChartActions[CHAT_LOAD](
       {
         chartType: chartContainerType, browserType
       },{
@@ -196,16 +182,16 @@ class StocksBySectorDialog extends Component {
       } = this.state
     , _style = isShowLabels
          ? null
-         : S.ROOT_NOT_LABELS
+         : S_ROOT_NOT_LABELS
     , _linkStyle = isShowLabels
-         ? S.LINK
-         : { ...S.LINK, ...S.LINK_NOT_LABELS };
+         ? S_LINK
+         : {...S_LINK, ...S_LINK_NOT_LABELS};
 
     return (
       <ModalDialog
          caption={text}
          style={_style}
-         styleCaption={S.CAPTION_SPAN}
+         styleCaption={S_CAPTION}
          isShow={isShow}
          commandButtons={this._commandButtons}
          onClose={onClose}
@@ -220,10 +206,10 @@ class StocksBySectorDialog extends Component {
            options={SOURCE_OPTIONS}
            onSelect={this._hSelectDataSource}
         />
-        <D.ShowHide isShow={isShowLink} style={S.LINK_SHOW_HIDE}>
-          <div style={S.LINK_ROOT}>
+        <D.ShowHide isShow={isShowLink} style={S_LINK_SHOW_HIDE}>
+          <div style={S_LINK_ROOT}>
             {
-              isShowLabels && <span style={S.LINK_CAPTION}>
+              isShowLabels && <span style={S_LINK_CAPTION}>
                 Link:
               </span>
             }

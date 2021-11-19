@@ -4,7 +4,7 @@ import { Component } from 'react';
 import DateUtils from '../../utils/DateUtils'
 import formatNumber from '../../utils/formatNumber'
 
-import ChartActions from '../../flux/actions/ChartActions'
+import ChartActions, {CHAT_LOAD} from '../../flux/actions/ChartActions'
 import { BrowserType as BT, LoadType as LT } from '../../constants/Type'
 import CHT from '../../constants/ChartType'
 
@@ -21,22 +21,17 @@ const {
   mlsToDmy
 } = DateUtils;
 
-const S = {
-  DIALOG: {
-    width: 365,
-  },
-  DIALOG_SHORT: {
-    width: 265
-  },
-  ITEM_TEXT: {
-    display: 'inline-block',
-    maxWidth: 250,
-    height: 32,
-    verticalAlign: 'middle',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
-  }
+const S_DIALOG = { width: 365 }
+, S_DIALOG_SHORT = { width: 265 }
+, S_ITEM_TEXT = {
+  display: 'inline-block',
+  maxWidth: 250,
+  height: 32,
+  verticalAlign: 'middle',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden'
 };
+
 
 const _crValue = (x='', y='') => (`${formatNumber(y)} ${mlsToDmy(x)}`).trim();
 
@@ -123,7 +118,7 @@ class LoadItemDialog extends Component {
              loadId: itemConf.loadId || LT.WL,
              ...itemConf
            };
-      ChartActions.loadStock({
+      ChartActions[CHAT_LOAD]({
         chartType: CHT.WATCH_LIST,
         browserType: BT.WATCH_LIST
       }, option);
@@ -156,7 +151,7 @@ class LoadItemDialog extends Component {
         initFromDate, initToDate,
         onTestDate, validationMessages
       } = this.state
-    , _style = isShowLabels ? S.DIALOG : S.DIALOG_SHORT
+    , _style = isShowLabels ? S_DIALOG : S_DIALOG_SHORT
     , _value = _crValue(x, y);
 
     return (
@@ -173,14 +168,14 @@ class LoadItemDialog extends Component {
         />
         <D.Row.Text
           isShowLabels={isShowLabels}
-          styleText={S.ITEM_TEXT}
+          styleText={S_ITEM_TEXT}
           caption="Item:"
           text={caption}
         />
         <D.ShowHide isShow={isValue}>
           <D.Row.Text
             isShowLabels={isShowLabels}
-            styleText={S.ITEM_TEXT}
+            styleText={S_ITEM_TEXT}
             caption="Value:"
             text={_value}
           />
@@ -196,7 +191,7 @@ class LoadItemDialog extends Component {
         </D.ShowHide>
         <D.Row.Text
           isShowLabels={isShowLabels}
-          styleText={S.ITEM_TEXT}
+          styleText={S_ITEM_TEXT}
           caption="Source:"
           text={dataSource}
         />

@@ -77,7 +77,7 @@ const AppErc = () => {
         isInitShow: true
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
         store: _ChartStore.default,
-        addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
+        addAction: _ChartActions.CHAT_INIT_AND_SHOW
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
       store: _ChartStore.default

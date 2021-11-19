@@ -4,7 +4,12 @@ import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import BrowserConfig from '../../constants/BrowserConfig';
 
 import CA from '../actions/ComponentActions';
-import CHA from '../actions/ChartActions';
+import ChartActions, {
+  CHAT_SORT_BY,
+  CHAT_UPDATE_MOVING_VALUES,
+  CHAT_CLOSE,
+  CHAT_REMOVE_ALL
+} from '../actions/ChartActions';
 
 const _isStr = str => typeof str === 'string';
 
@@ -45,10 +50,10 @@ const fItemContainer = {
       onSetActive: CA.setActiveContainer,
       onCloseContainer: CA.closeChartContainer
         .bind(null, _type, browserType),
-      onSortBy: CHA.sortBy.bind(null, _type),
-      updateMovingValues: CHA.updateMovingValues.bind(null, _type),
-      onCloseItem: CHA.closeChart,
-      onRemoveAll: CHA.removeAll.bind(null, _type, browserType)
+      onSortBy: ChartActions[CHAT_SORT_BY].bind(null, _type),
+      updateMovingValues: ChartActions[CHAT_UPDATE_MOVING_VALUES].bind(null, _type),
+      onCloseItem: ChartActions[CHAT_CLOSE],
+      onRemoveAll: ChartActions[CHAT_REMOVE_ALL].bind(null, _type, browserType)
     });
   }
 };

@@ -11,7 +11,10 @@ import Msg from '../../constants/Msg';
 import {  LoadType } from '../../constants/Type';
 
 import CA from '../actions/ComponentActions';
-import CHA from '../actions/ChartActions';
+import ChartActions, { 
+  CHAT_LOAD,
+  CHAT_SHOW
+} from '../actions/ChartActions';
 
 import DateUtils from '../../utils/DateUtils';
 import has from '../../components/has';
@@ -119,12 +122,12 @@ const _crDialogComp = function (browserType, dialogConf){
        , getKey = isGetKey && ChartStore.getKey
        , onError = isGetKey && _onError
 
-       , onLoad = CHA.loadStock
+       , onLoad = ChartActions[CHAT_LOAD]
           .bind(null, {
              chartType: itemKey,
              browserType, dialogConf
           })
-       , onShow = CHA.showChart
+       , onShow = ChartActions[CHAT_SHOW]
            .bind(null, itemKey, browserType, dialogConf);
 
       _modifyDialogPropsByLoadId(dialogProps, loadId)

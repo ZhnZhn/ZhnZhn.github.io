@@ -1,7 +1,10 @@
 import ChartFn from '../../charts/ChartFn';
 
 import CA from '../../flux/actions/ComponentActions';
-import CHA from '../../flux/actions/ChartActions';
+import ChartActions, {
+  CHAT_TO_TOP,
+  CHAT_COPY
+} from '../../flux/actions/ChartActions';
 import { CompItemType as CIT } from '../../constants/Type';
 
 import Item from '../items/Items';
@@ -32,8 +35,8 @@ const _crAreaChart = function({
        onAddToWatch={CA.showAddToWatch}
        {...props}
        crValueMoving={crValueMoving}
-       onToTop={CHA.toTop.bind(null, chartType, id)}
-       onCopy={CHA.copy}
+       onToTop={ChartActions[CHAT_TO_TOP].bind(null, chartType, id)}
+       onCopy={ChartActions[CHAT_COPY]}
        onPasteToDialog={CA.showPasteTo}
        onZoom={CA.zoom}
        getCopyFromChart={store.getCopyFromChart.bind(store)}

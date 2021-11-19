@@ -1,8 +1,11 @@
 
-import SeqActions from './SeqActions'
+import SeqActions from './SeqActions';
 
-import BrowserActions from './BrowserActions'
-import ChartActions from './ChartActions'
+import BrowserActions from './BrowserActions';
+import ChartActions, {
+  CHAT_LOAD_BY_QUERY,
+  CHAT_LOAD_COMPLETED
+} from './ChartActions';
 
 const _crLoadQueryDynamic = option => {
   const { browserType } = option || {};
@@ -11,17 +14,17 @@ const _crLoadQueryDynamic = option => {
       action: BrowserActions.showBrowserDynamic,
       type: 'loadBrowserDynamicCompleted',
       typeFail: 'showBrowserDynamicFailed',
-      args: [ browserType ]
+      args: [browserType]
     },{
-      action: ChartActions.loadStockByQuery,
-      type: 'loadStockCompleted',
-      args: [ option ]
+      action: ChartActions[CHAT_LOAD_BY_QUERY],
+      type: CHAT_LOAD_COMPLETED,
+      args: [option]
     }
   ]);
 };
 
 const FactoryAction = {
-  crLoadQuery: _crLoadQueryDynamic   
+  crLoadQuery: _crLoadQueryDynamic
 };
 
 export default FactoryAction

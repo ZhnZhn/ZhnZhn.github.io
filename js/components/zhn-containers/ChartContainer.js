@@ -28,35 +28,31 @@ var _ChartList = _interopRequireDefault(require("./ChartList"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 const TH_ID = 'CHART_CONTAINER';
-const CL = {
-  ROOT: "item-container",
-  SCROLL: 'scroll-container-y scroll-items',
-  SHOW: "show-popup",
-  MENU_MORE: "popup-menu charts__menu-more"
-};
-const CHILD_MARGIN = 36,
+const CL_ROOT = "item-container",
+      CL_SCROLL = 'scroll-container-y scroll-items',
+      CL_SHOW = "show-popup",
+      CL_MENU_MORE = "popup-menu charts__menu-more",
+      CHILD_MARGIN = 36,
       INITIAL_WIDTH = 635,
       MIN_WIDTH_WITH_TAB_MINI = 470,
       MIN_WIDTH = 365,
       MAX_WIDTH = 1200,
-      STEP = 10;
-const S = {
-  BR_CAPTION: {
-    paddingTop: 2,
-    paddingLeft: 2
-  },
-  CAPTION: {
-    position: 'relative',
-    top: -1
-  },
-  INLINE: {
-    display: 'inline-block'
-  },
-  NONE: {
-    display: 'none'
-  }
+      STEP = 10,
+      S_BR_CAPTION = {
+  paddingTop: 2,
+  paddingLeft: 2
+},
+      S_CAPTION = {
+  position: 'relative',
+  top: -1
+},
+      S_INLINE = {
+  display: 'inline-block'
+},
+      S_NONE = {
+  display: 'none'
 };
-const COMP_ACTIONS = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, _ChartActions.ChartActionTypes.CLOSE_CHART];
+const COMP_ACTIONS = [_ChartActions.CHAT_SHOW, _ChartActions.CHAT_LOAD_COMPLETED, _ChartActions.CHAT_CLOSE];
 
 const _isFn = fn => typeof fn === "function";
 
@@ -118,7 +114,7 @@ class ChartContainer extends _react.Component {
     this._onStore = (actionType, data) => {
       if (this._isDataForContainer(data)) {
         if (_isInArray(COMP_ACTIONS, actionType)) {
-          if (actionType !== _ChartActions.ChartActionTypes.CLOSE_CHART) {
+          if (actionType !== _ChartActions.CHAT_CLOSE) {
             this._refSpComp.current.scrollTop = 0; //this.spComp.scrollTop()
           }
 
@@ -301,8 +297,8 @@ class ChartContainer extends _react.Component {
       isCompareTo,
       configs
     } = this.state,
-          _style = isShow ? S.INLINE : S.NONE,
-          _className = (0, _crCn.default)(CL.ROOT, [isShow, CL.SHOW]);
+          _style = isShow ? S_INLINE : S_NONE,
+          _className = (0, _crCn.default)(CL_ROOT, [isShow, CL_SHOW]);
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       ref: this._refRootNode,
@@ -313,7 +309,7 @@ class ChartContainer extends _react.Component {
       },
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalSlider, {
         isShow: isMore,
-        className: CL.MENU_MORE,
+        className: CL_MENU_MORE,
         style: TS.EL_BORDER,
         model: _modelMore,
         onClose: this._hToggleMore
@@ -322,12 +318,12 @@ class ChartContainer extends _react.Component {
         onClose: this._closeCompareTo,
         onCompareTo: this._compareTo
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
-        style: S.BR_CAPTION,
+        style: S_BR_CAPTION,
         onMore: this._showMore,
         onCheck: this._hSetActive,
         onUnCheck: this._hSetNotActive,
         caption: caption,
-        captionStyle: S.CAPTION,
+        captionStyle: S_CAPTION,
         onClose: this._hHide,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.SvgHrzResize, {
           ref: this._refResize,
@@ -340,7 +336,7 @@ class ChartContainer extends _react.Component {
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
         ref: this._refSpComp,
-        className: CL.SCROLL,
+        className: CL_SCROLL,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartList.default, {
           refChartFn: this._refChart,
           isAdminMode: _isAdminModeFn,

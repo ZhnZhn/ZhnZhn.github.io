@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../../src/flux/actions/FactoryAction.js"],"names":["_crLoadQueryDynamic","option","browserType","SeqActions","action","BrowserActions","showBrowserDynamic","type","typeFail","args","ChartActions","loadStockByQuery","FactoryAction","crLoadQuery"],"mappings":";;;;;;;AACA;;AAEA;;AACA;;AAEA,IAAMA,mBAAmB,GAAG,SAAtBA,mBAAsB,CAAAC,MAAM,EAAI;AAAA,aACZA,MAAM,IAAI,EADE;AAAA,MAC5BC,WAD4B,QAC5BA,WAD4B;;AAEpC,SAAO,IAAIC,sBAAJ,CAAe,CACpB;AACEC,IAAAA,MAAM,EAAEC,2BAAeC,kBADzB;AAEEC,IAAAA,IAAI,EAAE,6BAFR;AAGEC,IAAAA,QAAQ,EAAE,0BAHZ;AAIEC,IAAAA,IAAI,EAAE,CAAEP,WAAF;AAJR,GADoB,EAMlB;AACAE,IAAAA,MAAM,EAAEM,yBAAaC,gBADrB;AAEAJ,IAAAA,IAAI,EAAE,oBAFN;AAGAE,IAAAA,IAAI,EAAE,CAAER,MAAF;AAHN,GANkB,CAAf,CAAP;AAYD,CAdD;;AAgBA,IAAMW,aAAa,GAAG;AACpBC,EAAAA,WAAW,EAAEb;AADO,CAAtB;eAIeY,a","sourcesContent":["\r\nimport SeqActions from './SeqActions'\r\n\r\nimport BrowserActions from './BrowserActions'\r\nimport ChartActions from './ChartActions'\r\n\r\nconst _crLoadQueryDynamic = option => {\r\n  const { browserType } = option || {};\r\n  return new SeqActions([\r\n    {\r\n      action: BrowserActions.showBrowserDynamic,\r\n      type: 'loadBrowserDynamicCompleted',\r\n      typeFail: 'showBrowserDynamicFailed',\r\n      args: [ browserType ]\r\n    },{\r\n      action: ChartActions.loadStockByQuery,\r\n      type: 'loadStockCompleted',\r\n      args: [ option ]\r\n    }\r\n  ]);\r\n};\r\n\r\nconst FactoryAction = {\r\n  crLoadQuery: _crLoadQueryDynamic   \r\n};\r\n\r\nexport default FactoryAction\r\n"],"file":"FactoryAction.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/actions/FactoryAction.js"
+ ],
+ "file": "../../../src/flux/actions/FactoryAction.js",
+ "names": [
+  "_crLoadQueryDynamic",
+  "option",
+  "browserType",
+  "SeqActions",
+  "action",
+  "BrowserActions",
+  "showBrowserDynamic",
+  "type",
+  "typeFail",
+  "args",
+  "ChartActions",
+  "CHAT_LOAD_BY_QUERY",
+  "CHAT_LOAD_COMPLETED",
+  "FactoryAction",
+  "crLoadQuery"
+ ],
+ "mappings": ";;;;;;;AACA;;AAEA;;AACA;;;;;;AAKA,MAAMA,mBAAmB,GAAGC,MAAM,IAAI;AACpC,QAAM;AAAEC,IAAAA;AAAF,MAAkBD,MAAM,IAAI,EAAlC;AACA,SAAO,IAAIE,mBAAJ,CAAe,CACpB;AACEC,IAAAA,MAAM,EAAEC,wBAAeC,kBADzB;AAEEC,IAAAA,IAAI,EAAE,6BAFR;AAGEC,IAAAA,QAAQ,EAAE,0BAHZ;AAIEC,IAAAA,IAAI,EAAE,CAACP,WAAD;AAJR,GADoB,EAMlB;AACAE,IAAAA,MAAM,EAAEM,sBAAaC,gCAAb,CADR;AAEAJ,IAAAA,IAAI,EAAEK,iCAFN;AAGAH,IAAAA,IAAI,EAAE,CAACR,MAAD;AAHN,GANkB,CAAf,CAAP;AAYD,CAdD;;AAgBA,MAAMY,aAAa,GAAG;AACpBC,EAAAA,WAAW,EAAEd;AADO,CAAtB;eAIea,a"
+}

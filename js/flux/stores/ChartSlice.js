@@ -55,11 +55,11 @@ const ChartSlice = {
     return isChartExist(this.charts, chartType, key);
   },
 
-  onLoadStock() {
+  onLoadItem() {
     this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING);
   },
 
-  onLoadStockCompleted(option, config) {
+  onLoadItemCompleted(option, config) {
     const {
       chartType,
       browserType,
@@ -76,9 +76,9 @@ const ChartSlice = {
     } = loadConfig(this.charts, config, option, _dialogConf, this);
 
     if (chartSlice) {
-      this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, chartSlice);
+      this.trigger(_ChartActions.CHAT_LOAD_COMPLETED, chartSlice);
     } else {
-      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, Comp);
+      this.trigger(_ChartActions.CHAT_INIT_AND_SHOW, Comp);
     }
 
     this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_COMPLETE);
@@ -86,12 +86,12 @@ const ChartSlice = {
     this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
   },
 
-  onLoadStockAdded(option = {}) {
+  onLoadItemAdded(option = {}) {
     this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_COMPLETE);
     scanPostAdded(this, option);
   },
 
-  onLoadStockFailed(option) {
+  onLoadItemFailed(option) {
     this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_FAILED);
     setAlertItemIdTo(option);
     this.showAlertDialog(option);
@@ -99,16 +99,16 @@ const ChartSlice = {
     _logErrorToConsole(option);
   },
 
-  onLoadStockByQuery() {
-    this.onLoadStock();
+  onLoadItemByQuery() {
+    this.onLoadItem();
   },
 
-  onLoadStockByQueryCompleted(option, config) {
-    this.onLoadStockCompleted(option, config);
+  onLoadItemByQueryCompleted(option, config) {
+    this.onLoadItemCompleted(option, config);
   },
 
-  onLoadStockByQueryFailed(option) {
-    this.onLoadStockFailed(option);
+  onLoadItemByQueryFailed(option) {
+    this.onLoadItemFailed(option);
   },
 
   onShowChart(chartType, browserType, dialogConfOr) {
@@ -120,9 +120,9 @@ const ChartSlice = {
     } = showChart(this.charts, chartType, browserType, dialogConf, this);
 
     if (chartSlice) {
-      this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
+      this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
     } else {
-      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, Comp);
+      this.trigger(_ChartActions.CHAT_INIT_AND_SHOW, Comp);
     }
 
     this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
@@ -143,14 +143,14 @@ const ChartSlice = {
     if (isRemoved) {
       this.resetActiveChart(chartId);
       this.minusMenuItemCounter(chartType, browserType);
-      this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartSlice);
+      this.trigger(_ChartActions.CHAT_CLOSE, chartSlice);
       this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
     }
   },
 
   onToTop(chartType, id) {
     const chartSlice = toTop(this.charts, chartType, id);
-    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
+    this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
   },
 
   onCopy(chart) {
@@ -167,14 +167,14 @@ const ChartSlice = {
 
   onSortBy(chartType, by) {
     const chartSlice = sortBy(this.charts, chartType, by);
-    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
+    this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
   },
 
   onRemoveAll(chartType, browserType) {
     const chartSlice = removeAll(this.charts, chartType);
     this.resetMenuItemCounter(chartType, browserType);
     this.uncheckActiveCheckbox();
-    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
+    this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
     this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
   }
 

@@ -12,50 +12,34 @@ import {
   LPAT_LOADING_FAILED
 } from './LoadingProgressActions'
 
-const C = {
-  DESR_LOADER: "Loader for this item hasn't found."
-};
-
-const META = '_Meta'
+const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found."
+, META = '_Meta'
 , _fnNoop = () => {}
 , _isFn = fn => typeof fn === 'function'
 , _isUndef = v => typeof v === 'undefined';
 
+export const CHAT_INIT_AND_SHOW = 'initAndShowChart'
+export const CHAT_SHOW = 'showChart'
+export const CHAT_CLOSE = 'closeChart'
 
-export const ChartActionTypes = {
-  INIT_AND_SHOW_CHART: 'initAndShowChart',
-  SHOW_CHART: 'showChart',
-  CLOSE_CHART: 'closeChart',
+export const CHAT_LOAD = 'loadItem'
+export const CHAT_LOAD_ADDED = 'loadItemAdded'
+export const CHAT_LOAD_COMPLETED = 'loadItemCompleted'
+export const CHAT_LOAD_FAILED = 'loadItemFailed'
 
-  LOAD_STOCK: 'loadStock',
-  LOAD_STOCK_COMPLETED: 'loadStockCompleted',
-  LOAD_STOCK_ADDED: 'loadStockAdded',
-  LOAD_STOCK_FAILED: 'loadStockFailed',
+export const CHAT_LOAD_BY_QUERY = 'loadItemByQuery'
 
-  LOAD_STOCK_BY_QUERY: 'loadStockByQuery',
-  LOAD_STOCK_BY_QUERY_C: 'loadStockByQueryC',
-  LOAD_STOCK_BY_QUERY_F: 'loadStockByQueryF',
+export const CHAT_TO_TOP = 'toTop'
 
-  TO_TOP: 'toTop',
+export const CHAT_COPY = 'copy'
 
-  COPY: 'copy',
+export const CHAT_UPDATE_MOVING_VALUES = 'updateMovingValues'
+export const CHAT_SORT_BY = 'sortBy'
+export const CHAT_REMOVE_ALL = 'removeAll'
 
-  UPDATE_MOVING_VALUES: 'updateMovingValues',
-  SORT_BY: 'sortBy',
-  REMOVE_ALL:'removeAll'
-};
-const A = ChartActionTypes;
 const M = Msg.Alert;
 
-const _fnOnChangeStore = function(actionType, data){
-  if (actionType === LPAT_LOADING_COMPLETE ||
-      actionType === LPAT_LOADING_FAILED
-  ) {
-    ChartActions[A.LOAD_STOCK].isLoading = false;
-  }
-};
-
-const _fnCancelLoad = function(option, alertMsg, isWithFailed){
+const _cancelLoad = function(option, alertMsg, isWithFailed){
   Msg.setAlertMsg(option, alertMsg);
   this.failed(option);
   this.isShouldEmit = false;
@@ -83,29 +67,38 @@ const _addSettingsTo = (options, ...restArgs) => {
   _addBoolOptionTo(options, 'isNotZoomToMinMax')
 };
 
-
 const ChartActions =  Reflux.createActions({
-      [A.LOAD_STOCK] : {
-         children : ['completed', 'added', 'failed'],
-         isLoading : false,
-         idLoading : undefined,
-         isShouldEmit : true,
-         cancelLoad : _fnCancelLoad
-       },
-      [A.LOAD_STOCK_BY_QUERY]: {
-        children: [ 'completed', 'failed']
-      },
-      [A.SHOW_CHART] : {},
-      [A.CLOSE_CHART] : {},
+  [CHAT_LOAD]: {
+     children: ['completed', 'added', 'failed'],
+     isLoading: false,
+     idLoading: void 0,
+     isShouldEmit: true,
+     cancelLoad: _cancelLoad
+   },
+  [CHAT_LOAD_BY_QUERY]: {
+    children: ['completed', 'failed']
+  },
+  [CHAT_SHOW]: {},
+  [CHAT_CLOSE]: {},
 
-      [A.TO_TOP]: {},
-      [A.COPY]: {},
-      [A.UPDATE_MOVING_VALUES]: {},
-      [A.SORT_BY]: {},
-      [A.REMOVE_ALL]: {}
+  [CHAT_TO_TOP]: {},
+  [CHAT_COPY]: {},
+  [CHAT_UPDATE_MOVING_VALUES]: {},
+  [CHAT_SORT_BY]: {},
+  [CHAT_REMOVE_ALL]: {}
 });
 
-ChartActions.fnOnChangeStore = _fnOnChangeStore
+const _isItemLoaded = actionType =>
+  actionType === LPAT_LOADING_COMPLETE
+  || actionType === LPAT_LOADING_FAILED;
+
+const _onChangeStore = actionType => {
+  if (_isItemLoaded(actionType)) {
+    ChartActions[CHAT_LOAD].isLoading = false;
+  }
+};
+
+ChartActions.onChangeStore = _onChangeStore
 
 const {
   isApiKeyRequired,
@@ -139,7 +132,7 @@ const _checkProxy = ({ proxy, loadId }) => {
   return '';
 };
 
-ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
+ChartActions[CHAT_LOAD].preEmit = function(confItem={}, option={}) {
   const key = LogicUtils.createKeyForConfig(option)
   , isDoublingLoad = this.isLoading && key === this.idLoading
   , isDoublLoadMeta = option.isLoadMeta
@@ -167,10 +160,10 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
   return;
 }
 
-ChartActions[A.LOAD_STOCK].shouldEmit = function(){
+ChartActions[CHAT_LOAD].shouldEmit = function(){
   return this.isShouldEmit;
 }
-ChartActions[A.LOAD_STOCK].listen(function(confItem, option){
+ChartActions[CHAT_LOAD].listen(function(confItem, option){
   const { key, isLoadMeta, loadId='Q' } = option;
   this.isLoading = true;
   this.idLoading = isLoadMeta ? key + META : key;
@@ -182,12 +175,12 @@ ChartActions[A.LOAD_STOCK].listen(function(confItem, option){
 const SUBTITLE = 'Loaded from URL Query';
 const _addDialogPropsTo = option => {
   const { chartType, browserType } = option
-      , { dialogProps } = ChartStore
-            .getSourceConfig(browserType, chartType) || {};
+  , { dialogProps } = ChartStore
+        .getSourceConfig(browserType, chartType) || {}
+  , { dfProps } = dialogProps || {};
 
   Object.assign(option,
-    dialogProps,
-    dialogProps.dfProps, {
+    dialogProps, dfProps, {
       subtitle: SUBTITLE
     }
   )
@@ -200,7 +193,7 @@ const _addDialogPropsTo = option => {
   }
 };
 
-ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function(option){
+ChartActions[CHAT_LOAD_BY_QUERY].listen(function(option){
   _addDialogPropsTo(option)
   const { loadId } = option;
   option.proxy = ChartStore.getProxy(loadId)
@@ -213,7 +206,7 @@ ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function(option){
     }
     impl.loadItem(option, this.completed, _fnNoop, this.failed)
   } else {
-    option.alertDescr = C.DESCR_LOADER
+    option.alertDescr = ALERT_DESCR_BY_QUERY
     this.failed(option)
   }
 })

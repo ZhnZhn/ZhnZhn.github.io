@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -13,61 +13,65 @@ var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConf
 
 var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
 
-var _ChartActions = _interopRequireDefault(require("../actions/ChartActions"));
+var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
 
-var _isStr = function _isStr(str) {
-  return typeof str === 'string';
-};
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-var _crCaption = function _crCaption(dialogConf, browserType) {
-  var _caption = dialogConf.contFullCaption || _BrowserConfig["default"][browserType].contFullCaption;
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const _isStr = str => typeof str === 'string';
+
+const _crCaption = (dialogConf, browserType) => {
+  let _caption = dialogConf.contFullCaption || _BrowserConfig.default[browserType].contFullCaption;
 
   if (_caption) {
     return _caption;
   }
 
-  var contCaption = dialogConf.contCaption,
-      dialogCaption = dialogConf.dialogCaption,
-      menuTitle = dialogConf.menuTitle,
-      dialogProps = dialogConf.dialogProps,
-      _ref = dialogProps || {},
-      _ref$dataSource = _ref.dataSource,
-      dataSource = _ref$dataSource === void 0 ? '' : _ref$dataSource;
-
+  const {
+    contCaption,
+    dialogCaption,
+    menuTitle,
+    dialogProps
+  } = dialogConf,
+        {
+    dataSource = ''
+  } = dialogProps || {};
   _caption = _isStr(contCaption) ? contCaption : dialogCaption || menuTitle || 'Item Container';
   return [dataSource, _caption].filter(Boolean).join(': ');
 };
 
-var fItemContainer = {
-  crItemContainerEl: function crItemContainerEl(_ref2) {
-    var browserType = _ref2.browserType,
-        dialogConf = _ref2.dialogConf,
-        store = _ref2.store;
-
-    var _ref3 = dialogConf || {},
-        type = _ref3.type,
-        chartContainerComp = _ref3.chartContainerComp,
-        contWidth = _ref3.contWidth,
-        Comp = chartContainerComp || _ChartContainer["default"],
-        _type = type || _BrowserConfig["default"][browserType].chartContainerType,
-        _caption = _crCaption(dialogConf, browserType);
+const fItemContainer = {
+  crItemContainerEl: ({
+    browserType,
+    dialogConf,
+    store
+  }) => {
+    const {
+      type,
+      chartContainerComp,
+      contWidth
+    } = dialogConf || {},
+          Comp = chartContainerComp || _ChartContainer.default,
+          _type = type || _BrowserConfig.default[browserType].chartContainerType,
+          _caption = _crCaption(dialogConf, browserType);
 
     return /*#__PURE__*/(0, _react.createElement)(Comp, {
       key: _type,
       store: store,
       caption: _caption,
       chartType: _type,
-      browserType: browserType,
-      contWidth: contWidth,
-      onSetActive: _ComponentActions["default"].setActiveContainer,
-      onCloseContainer: _ComponentActions["default"].closeChartContainer.bind(null, _type, browserType),
-      onSortBy: _ChartActions["default"].sortBy.bind(null, _type),
-      updateMovingValues: _ChartActions["default"].updateMovingValues.bind(null, _type),
-      onCloseItem: _ChartActions["default"].closeChart,
-      onRemoveAll: _ChartActions["default"].removeAll.bind(null, _type, browserType)
+      browserType,
+      contWidth,
+      onSetActive: _ComponentActions.default.setActiveContainer,
+      onCloseContainer: _ComponentActions.default.closeChartContainer.bind(null, _type, browserType),
+      onSortBy: _ChartActions.default[_ChartActions.CHAT_SORT_BY].bind(null, _type),
+      updateMovingValues: _ChartActions.default[_ChartActions.CHAT_UPDATE_MOVING_VALUES].bind(null, _type),
+      onCloseItem: _ChartActions.default[_ChartActions.CHAT_CLOSE],
+      onRemoveAll: _ChartActions.default[_ChartActions.CHAT_REMOVE_ALL].bind(null, _type, browserType)
     });
   }
 };
 var _default = fItemContainer;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fItemContainer.js.map

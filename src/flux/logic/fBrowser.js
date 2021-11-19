@@ -3,7 +3,7 @@ import { createElement } from 'react'
 import ChartStore from '../stores/ChartStore';
 
 import CA from '../actions/ComponentActions';
-import CHA from '../actions/ChartActions';
+import ChartActions, { CHAT_SHOW } from '../actions/ChartActions';
 import BA from '../actions/BrowserActions';
 import {
   BAT_SHOW_BROWSER_DYNAMIC,
@@ -49,7 +49,7 @@ const _crBrowserDynamic = (Comp, option) => {
     , onShowLoadDialog = chartContainerType
          ? item => CA.showModalDialog(modalDialogType, {
              item, browserType, chartContainerType,
-             onShow: CHA.showChart.bind(null, chartContainerType, browserType)
+             onShow: ChartActions[CHAT_SHOW].bind(null, chartContainerType, browserType)
            })
         : void 0;
 

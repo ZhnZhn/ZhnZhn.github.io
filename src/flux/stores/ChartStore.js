@@ -13,11 +13,11 @@ import WithLimitRemaining from './WithLimitRemaining';
 import WithLoadingProgress from './WithLoadingProgress'
 
 const ChartStore = Reflux.createStore({
-  listenables: [ ...Actions ],
+  listenables: [...Actions],
 
   init(){
     this.initWatchList();
-    this.listenLoadingProgress(ChartActions.fnOnChangeStore);
+    this.listenLoadingProgress(ChartActions.onChangeStore);
   },
 
  ...ChartSlice,
@@ -29,7 +29,6 @@ const ChartStore = Reflux.createStore({
 
  ...WithLimitRemaining,
  ...WithLoadingProgress
-
 })
 
 export default ChartStore

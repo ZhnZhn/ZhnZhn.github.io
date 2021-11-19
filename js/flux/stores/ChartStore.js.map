@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/flux/stores/ChartStore.js"],"names":["ChartStore","Reflux","createStore","listenables","Actions","init","initWatchList","listenLoadingProgress","ChartActions","fnOnChangeStore","ChartSlice","BrowserSlice","ComponentSlice","DialogSlice","SettingSlice","WatchListSlice","WithLimitRemaining","WithLoadingProgress"],"mappings":";;;;;;;;;AAAA;;AAEA;;AACA;;AAEA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,IAAMA,UAAU,GAAGC,uBAAOC,WAAP;AACjBC,EAAAA,WAAW,YAAOC,mBAAP,CADM;AAGjBC,EAAAA,IAHiB,kBAGX;AACJ,SAAKC,aAAL;AACA,SAAKC,qBAAL,CAA2BC,yBAAaC,eAAxC;AACD;AANgB,GAQfC,sBARe,EASfC,wBATe,EAUfC,0BAVe,EAWfC,uBAXe,EAYfC,wBAZe,EAafC,0BAbe,EAefC,8BAfe,EAgBfC,+BAhBe,EAAnB;;eAoBejB,U","sourcesContent":["import Reflux from 'reflux-core';\r\n\r\nimport Actions from '../actions/Actions'\r\nimport ChartActions from '../actions/ChartActions';\r\n\r\nimport ChartSlice from './ChartSlice';\r\nimport BrowserSlice from './BrowserSlice';\r\nimport ComponentSlice from './ComponentSlice';\r\nimport DialogSlice from './DialogSlice';\r\nimport SettingSlice from './SettingSlice';\r\nimport WatchListSlice from '../watch-list/WatchListSlice';\r\nimport WithLimitRemaining from './WithLimitRemaining';\r\nimport WithLoadingProgress from './WithLoadingProgress'\r\n\r\nconst ChartStore = Reflux.createStore({\r\n  listenables: [ ...Actions ],\r\n\r\n  init(){\r\n    this.initWatchList();\r\n    this.listenLoadingProgress(ChartActions.fnOnChangeStore);\r\n  },\r\n\r\n ...ChartSlice,\r\n ...BrowserSlice,\r\n ...ComponentSlice,\r\n ...DialogSlice,\r\n ...SettingSlice,\r\n ...WatchListSlice,\r\n\r\n ...WithLimitRemaining,\r\n ...WithLoadingProgress\r\n\r\n})\r\n\r\nexport default ChartStore\r\n"],"file":"ChartStore.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/stores/ChartStore.js"
+ ],
+ "file": "../../../src/flux/stores/ChartStore.js",
+ "names": [
+  "ChartStore",
+  "Reflux",
+  "createStore",
+  "listenables",
+  "Actions",
+  "init",
+  "initWatchList",
+  "listenLoadingProgress",
+  "ChartActions",
+  "onChangeStore",
+  "ChartSlice",
+  "BrowserSlice",
+  "ComponentSlice",
+  "DialogSlice",
+  "SettingSlice",
+  "WatchListSlice",
+  "WithLimitRemaining",
+  "WithLoadingProgress"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AAEA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AAEA,MAAMA,UAAU,GAAGC,oBAAOC,WAAP,CAAmB;AACpCC,EAAAA,WAAW,EAAE,CAAC,GAAGC,gBAAJ,CADuB;;AAGpCC,EAAAA,IAAI,GAAE;AACJ,SAAKC,aAAL;AACA,SAAKC,qBAAL,CAA2BC,sBAAaC,aAAxC;AACD,GANmC;;AAQrC,KAAGC,mBARkC;AASrC,KAAGC,qBATkC;AAUrC,KAAGC,uBAVkC;AAWrC,KAAGC,oBAXkC;AAYrC,KAAGC,qBAZkC;AAarC,KAAGC,uBAbkC;AAerC,KAAGC,2BAfkC;AAgBrC,KAAGC;AAhBkC,CAAnB,CAAnB;;eAmBejB,U"
+}
