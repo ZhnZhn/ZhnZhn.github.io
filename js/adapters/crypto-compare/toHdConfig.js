@@ -3,92 +3,102 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crData = _fnAdapter["default"].crData,
-    crConfOption = _fnAdapter["default"].crConfOption,
-    _assign = Object.assign;
-var V_ON_TIME = 'Values on 00:00 GMT';
+const {
+  crData,
+  crConfOption,
+  getValue
+} = _fnAdapter.default,
+      _assign = Object.assign;
 
-var _crTitle = function _crTitle(title) {
-  return title + ": " + V_ON_TIME;
+const _crTitle = (title, items) => {
+  const _time = getValue(items[2]) === 'histoday' ? '00:00 GMT+0' : 'GMT+0';
+
+  return title + ": Values on " + _time;
 };
 
-var _getConversionType = function _getConversionType(_ref) {
-  var ConversionType = _ref.ConversionType;
-  return ConversionType || {};
-};
-
-var _getTsym = function _getTsym(json, option) {
-  var _getConversionType2 = _getConversionType(json),
-      conversionSymbol = _getConversionType2.conversionSymbol,
-      _getConversionType2$t = _getConversionType2.type,
-      type = _getConversionType2$t === void 0 ? '' : _getConversionType2$t;
-
+const _getTsym = (json, option) => {
+  const {
+    ConversionType
+  } = json,
+        {
+    conversionSymbol,
+    type = ''
+  } = ConversionType || {};
   return {
     tsym: conversionSymbol || option.tsym,
-    type: type
+    type
   };
 };
 
-var _crSubtitle = function _crSubtitle(json, option) {
-  var value = option.value,
-      exchange = option.exchange,
-      _getTsym2 = _getTsym(json, option),
-      tsym = _getTsym2.tsym,
-      type = _getTsym2.type;
+const _crSubtitle = (json, option) => {
+  const {
+    value,
+    exchange
+  } = option,
+        {
+    tsym,
+    type
+  } = _getTsym(json, option);
 
   return exchange + ": " + value + "/" + tsym + " " + type;
 };
 
-var _crBtTitleTo = function _crBtTitleTo(json, option) {
-  var _getTsym3 = _getTsym(json, option),
-      tsym = _getTsym3.tsym;
+const _crBtTitleTo = (json, option) => {
+  const {
+    tsym
+  } = _getTsym(json, option);
 
   return tsym;
 };
 
-var _crMiniVolume = function _crMiniVolume(title, dColumn, dVolume) {
-  return {
-    btTitle: "Volume " + title,
-    dColumn: dColumn,
-    dVolume: dVolume
-  };
-};
+const _crMiniVolume = (title, dColumn, dVolume) => ({
+  btTitle: "Volume " + title,
+  dColumn,
+  dVolume
+});
 
-var trOption = function trOption(option, json) {
-  var title = option.title;
+const trOption = (option, json) => {
+  const {
+    title,
+    items
+  } = option;
 
   _assign(option, {
     itemCaption: title,
-    title: _crTitle(title),
+    title: _crTitle(title, items),
     subtitle: _crSubtitle(json, option)
   });
 };
 
-var addConfig = function addConfig(builder, json, option, data) {
-  var _btTitleTo = _crBtTitleTo(json, option),
-      value = option.value,
-      dVolume = data.dVolume,
-      dColumn = data.dColumn,
-      dToVolume = data.dToVolume,
-      dHL = data.dHL;
+const addConfig = (builder, json, option, data) => {
+  const _btTitleTo = _crBtTitleTo(json, option),
+        {
+    value
+  } = option,
+        {
+    dVolume,
+    dColumn,
+    dToVolume,
+    dHL
+  } = data;
 
   return builder.addMiniVolume(_crMiniVolume(value, dColumn, dVolume)).addMiniVolume(_crMiniVolume(_btTitleTo, [], dToVolume)).addMiniHL({
     data: dHL
   });
 };
 
-var toHdConfig = (0, _crAdapterType["default"])({
-  crData: crData,
-  crConfOption: crConfOption,
-  trOption: trOption,
-  addConfig: addConfig
+const toHdConfig = (0, _crAdapterType.default)({
+  crData,
+  crConfOption,
+  trOption,
+  addConfig
 });
 var _default = toHdConfig;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toHdConfig.js.map

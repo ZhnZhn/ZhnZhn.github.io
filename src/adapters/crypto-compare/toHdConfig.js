@@ -1,22 +1,26 @@
 import crAdapterType1 from '../crAdapterType1'
 import fnAdapter from './fnAdapter'
 
-
-const { crData, crConfOption } = fnAdapter
+const {
+  crData,
+  crConfOption,
+  getValue
+} = fnAdapter
 , _assign = Object.assign;
 
-const V_ON_TIME = 'Values on 00:00 GMT';
-
-const _crTitle = (title) => `${title}: ${V_ON_TIME}`;
-
-const _getConversionType = ({ ConversionType }) =>
-  ConversionType || {};
+const _crTitle = (title, items) => {
+ const _time = getValue(items[2]) === 'histoday'
+   ? '00:00 GMT+0'
+   : 'GMT+0';
+ return `${title}: Values on ${_time}`;
+};
 
 const _getTsym = (json, option) => {
-  const {
+  const { ConversionType } = json
+  , {
     conversionSymbol,
     type=''
-  } = _getConversionType(json);
+  } = ConversionType || {};
   return {
     tsym: conversionSymbol || option.tsym,
     type
@@ -25,7 +29,7 @@ const _getTsym = (json, option) => {
 
 const _crSubtitle = (json, option) => {
   const { value, exchange } = option
-  , { tsym, type } = _getTsym(json, option);  
+  , { tsym, type } = _getTsym(json, option);
   return `${exchange}: ${value}/${tsym} ${type}`;
 };
 
@@ -40,10 +44,10 @@ const _crMiniVolume = (title, dColumn, dVolume) => ({
 });
 
 const trOption = (option, json) => {
-  const { title } = option
+  const { title, items } = option;
   _assign(option, {
     itemCaption: title,
-    title: _crTitle(title),
+    title: _crTitle(title, items),
     subtitle: _crSubtitle(json, option)
   })
 };
