@@ -64,16 +64,21 @@ const ChartSlice = {
       chartType,
       browserType,
       dialogConf,
-      limitRemaining
+      limitRemaining,
+      key
     } = option;
-    this.addMenuItemCounter(chartType, browserType);
 
-    const _dialogConf = dialogConf || this.getDialogConf(void 0, chartType);
+    if (isChartExist(this.charts, chartType, key)) {
+      return;
+    }
 
-    const {
+    const _dialogConf = dialogConf || this.getDialogConf(void 0, chartType),
+          {
       chartSlice,
       Comp
     } = loadConfig(this.charts, config, option, _dialogConf, this);
+
+    this.addMenuItemCounter(chartType, browserType);
 
     if (chartSlice) {
       this.trigger(_ChartActions.CHAT_LOAD_COMPLETED, chartSlice);

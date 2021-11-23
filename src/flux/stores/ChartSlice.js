@@ -58,18 +58,25 @@ const ChartSlice = {
   },
   onLoadItemCompleted(option, config){
       const {
-        chartType, browserType,
+        chartType,
+        browserType,
         dialogConf,
-        limitRemaining
+        limitRemaining,
+        key
       } = option;
 
-      this.addMenuItemCounter(chartType, browserType);
+      if (isChartExist(this.charts, chartType, key)) {
+        return;
+      }
 
       const _dialogConf = dialogConf
-        || this.getDialogConf(void 0, chartType);
-      const {
-        chartSlice, Comp
+        || this.getDialogConf(void 0, chartType)
+      , {
+        chartSlice,
+        Comp
       } = loadConfig(this.charts, config, option, _dialogConf, this);
+
+      this.addMenuItemCounter(chartType, browserType);
       if (chartSlice){
         this.trigger(CHAT_LOAD_COMPLETED, chartSlice);
       } else {
