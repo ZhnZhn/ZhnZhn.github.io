@@ -1,7 +1,7 @@
-import { forwardRef, useRef, useCallback, useEffect, useImperativeHandle } from 'react';
+import { forwardRef, useCallback } from 'react';
 //import PropTypes from "prop-types";
 import use from '../hooks/use';
-import useRefFocusPrev from './useRefFocusPrev'
+import useDialogFocus from './useDialogFocus'
 
 import crCn from '../zhn-utils/crCn';
 
@@ -67,38 +67,16 @@ const ModalDialog = forwardRef(({
   timeout=450,
   onClose=DF_ON_CLOSE
 }, ref) => {
-  const [refRoot, focus, focusPrev] = useRefFocusPrev()
-  , _refIsShow = useRef(isShow)
+  const [
+    refRoot, refBtMore
+  ] = useDialogFocus(ref, isShow)
   , _hClick = useCallback(event => {
      event.stopPropagation()
   }, [])
-   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hClose = useCallback(() => {
-      onClose()
-      focusPrev()
-  }, [onClose])
-  /* focusPrev */
-  /*eslint-enable react-hooks/exhaustive-deps */
-  , _hKeyDown = useKeyEscape(_hClose, [_hClose])
+  , _hKeyDown = useKeyEscape(onClose)
   , [isMore, toggleIsMore] = useToggle(false)
-  , TS = useTheme(TH_ID);
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    if (!_refIsShow.current && isShow) {
-      focus()
-    }
-    _refIsShow.current = isShow
-  })
-  /* focus */
-  useImperativeHandle(ref, () => ({
-    focus,
-    focusPrev
-  }), [])
-  /* focus, focusPrev */
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  const _style = isShow ? STYLE.SHOW : STYLE.HIDE
+  , TS = useTheme(TH_ID)
+  , _style = isShow ? STYLE.SHOW : STYLE.HIDE
   , _className = crCn(CL_MD, [isShow, CL_SHOWING]);
 
   return (
@@ -121,6 +99,7 @@ const ModalDialog = forwardRef(({
      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
          <div style={{...STYLE.CAPTION_DIV, ...TS.EL}}>
            <MenuMore
+             ref={refBtMore}
              isMore={isMore}
              menuModel={menuModel}
              TS={TS}
@@ -131,7 +110,7 @@ const ModalDialog = forwardRef(({
             </span>
             <SvgClose
               style={STYLE.SVG_CLOSE}
-              onClose={_hClose}
+              onClose={onClose}
             />
          </div>
          <div>
@@ -140,7 +119,7 @@ const ModalDialog = forwardRef(({
          {isWithButton && <CommandButtons
             commandButtons={commandButtons}
             withoutClose={withoutClose}
-            onClose={_hClose}
+            onClose={onClose}
          />}
     </div>
   );

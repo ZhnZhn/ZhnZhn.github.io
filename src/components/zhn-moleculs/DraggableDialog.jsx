@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react';
+import { forwardRef, useEffect } from 'react';
 //import PropTypes from "prop-types";
 import use from '../hooks/use';
 import useDialogFocus from './useDialogFocus';
@@ -78,9 +78,9 @@ const DraggableDialog = forwardRef(({
   onFront,
   onClose=FN_NOOP
 }, ref) => {
-  const _refRootDiv = useRef()
-  , _refBtMore = useRef()
-  , [focus, focusPrev] = useDialogFocus(isShow, _refBtMore, _refRootDiv)
+  const [
+    refRoot, refBtMore
+  ] = useDialogFocus(ref, isShow)
   , _hKeyDown = useKeyEscape(onClose)
   , [isMore, toggleIsMore] = useToggle(false)
   , TS = useTheme(TH_ID)
@@ -89,23 +89,15 @@ const DraggableDialog = forwardRef(({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
-    Interact.makeDragable(_refRootDiv.current);
-    focus()
+    Interact.makeDragable(refRoot.current);
   }, [])
-  // focus
-
-  useImperativeHandle(ref, () => ({
-    focus,
-    focusPrev
-  }), [])
-  // focus, focusPrev
+  // refRoot
   /*eslint-enable react-hooks/exhaustive-deps */
-
 
   return (
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
     <div
-      ref={_refRootDiv}
+      ref={refRoot}
       role="dialog"
       tabIndex="-1"
       aria-label={caption}
@@ -123,7 +115,7 @@ const DraggableDialog = forwardRef(({
     {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
       <div style={{...STYLE.CAPTION_DIV, ...TS.EL}}>
         <MenuMore
-          ref={_refBtMore}
+          ref={refBtMore}
           isMore={isMore}
           menuModel={menuModel}
           TS={TS}

@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _useRefFocusPrev = _interopRequireDefault(require("./useRefFocusPrev"));
+var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 
 var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 
@@ -71,45 +71,14 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
   timeout = 450,
   onClose = DF_ON_CLOSE
 }, ref) => {
-  const [refRoot, focus, focusPrev] = (0, _useRefFocusPrev.default)(),
-        _refIsShow = (0, _react.useRef)(isShow),
+  const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
         _hClick = (0, _react.useCallback)(event => {
     event.stopPropagation();
-  }, [])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hClose = (0, _react.useCallback)(() => {
-    onClose();
-    focusPrev();
-  }, [onClose])
-  /* focusPrev */
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
-        _hKeyDown = useKeyEscape(_hClose, [_hClose]),
+  }, []),
+        _hKeyDown = useKeyEscape(onClose),
         [isMore, toggleIsMore] = useToggle(false),
-        TS = useTheme(TH_ID);
-  /*eslint-disable react-hooks/exhaustive-deps */
-
-
-  (0, _react.useEffect)(() => {
-    if (!_refIsShow.current && isShow) {
-      focus();
-    }
-
-    _refIsShow.current = isShow;
-  });
-  /* focus */
-
-  (0, _react.useImperativeHandle)(ref, () => ({
-    focus,
-    focusPrev
-  }), []);
-  /* focus, focusPrev */
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  const _style = isShow ? _Dialog.default.SHOW : _Dialog.default.HIDE,
+        TS = useTheme(TH_ID),
+        _style = isShow ? _Dialog.default.SHOW : _Dialog.default.HIDE,
         _className = (0, _crCn.default)(CL_MD, [isShow, CL_SHOWING]);
 
   return (
@@ -137,6 +106,7 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
           ...TS.EL
         },
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
+          ref: refBtMore,
           isMore: isMore,
           menuModel: menuModel,
           TS: TS,
@@ -146,14 +116,14 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
           children: caption
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
           style: _Dialog.default.SVG_CLOSE,
-          onClose: _hClose
+          onClose: onClose
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         children: children
       }), isWithButton && /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
         commandButtons: commandButtons,
         withoutClose: withoutClose,
-        onClose: _hClose
+        onClose: onClose
       })]
     })
   );

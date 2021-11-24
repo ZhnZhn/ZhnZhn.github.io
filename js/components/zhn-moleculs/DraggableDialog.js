@@ -83,9 +83,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
   onFront,
   onClose = FN_NOOP
 }, ref) => {
-  const _refRootDiv = (0, _react.useRef)(),
-        _refBtMore = (0, _react.useRef)(),
-        [focus, focusPrev] = (0, _useDialogFocus.default)(isShow, _refBtMore, _refRootDiv),
+  const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
         _hKeyDown = useKeyEscape(onClose),
         [isMore, toggleIsMore] = useToggle(false),
         TS = useTheme(TH_ID),
@@ -95,15 +93,8 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
 
 
   (0, _react.useEffect)(() => {
-    _Interact.default.makeDragable(_refRootDiv.current);
-
-    focus();
-  }, []); // focus
-
-  (0, _react.useImperativeHandle)(ref, () => ({
-    focus,
-    focusPrev
-  }), []); // focus, focusPrev
+    _Interact.default.makeDragable(refRoot.current);
+  }, []); // refRoot
 
   /*eslint-enable react-hooks/exhaustive-deps */
 
@@ -112,7 +103,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
 
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
     (0, _jsxRuntime.jsxs)("div", {
-      ref: _refRootDiv,
+      ref: refRoot,
       role: "dialog",
       tabIndex: "-1",
       "aria-label": caption,
@@ -132,7 +123,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
           ...TS.EL
         },
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
-          ref: _refBtMore,
+          ref: refBtMore,
           isMore: isMore,
           menuModel: menuModel,
           TS: TS,
