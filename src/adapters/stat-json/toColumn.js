@@ -38,7 +38,8 @@ const _fIsCategoryPoint = (dfT) => (p) => {
   }
   return isYNumber(p) && p.y !== 0;
 };
-const _compareByY = (a, b) => a.y - b.y;
+
+const _compareByY = (a, b) => b.y - a.y;
 
 const _colorItems = (data, _clusters) => {
   _clusters.forEach((cluster, colorIndex) => {
@@ -84,13 +85,29 @@ const _crCategory = (option) => {
   };
 };
 
-const _crData = (values, c, cTotal) => _isArr(values)
-  ? values
-     .map(_fCrCategoryPoint(c))
-     .filter(_fIsCategoryPoint(cTotal))
-     .sort(_compareByY)
-     .reverse()
-  : [];
+const _crData = (values, c, cTotal) => {
+  const _hm = Object.create(null);
+  return _isArr(values)
+    ? values
+        .map(_fCrCategoryPoint(c))
+        .filter(_fIsCategoryPoint(cTotal))
+        .sort(_compareByY)
+        .reduce((data, p) => {
+          const _c = p.c
+          , _suffixIndex = _hm[_c];
+          if (!_suffixIndex) {
+            _hm[_c] = 2
+          } else {
+            const _c2 = `${_c} (${_suffixIndex})`;
+            _hm[_c] += 1
+            p.c = _c2
+            p.name = _c2
+          }
+          data.push(p)
+          return data;
+        }, [])
+    : [];
+};
 
 const _crValues = (_ds, _cSlice) => {
   const _v = _ds.Data(_cSlice);
