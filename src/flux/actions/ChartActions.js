@@ -13,7 +13,7 @@ import {
 } from './LoadingProgressActions'
 
 const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found."
-, META = '_Meta'
+, META_SUFFIX = '_Meta'
 , _fnNoop = () => {}
 , _isFn = fn => typeof fn === 'function'
 , _isUndef = v => typeof v === 'undefined';
@@ -39,14 +39,15 @@ export const CHAT_REMOVE_ALL = 'removeAll'
 
 const M = Msg.Alert;
 
-const _cancelLoad = function(option, alertMsg, isWithFailed){
+const _assign = Object.assign;
+
+const _cancelLoad = function(option, alertMsg){
   Msg.setAlertMsg(option, alertMsg);
   this.failed(option);
-  this.isShouldEmit = false;
 
   if (_isFn(option.onCancel)) {
     option.onCancel();
-  } else if (isWithFailed && _isFn(option.onFailed)) {
+  } else if (alertMsg === M.ALREADY_EXIST && _isFn(option.onFailed)) {
     option.onFailed();
   }
 };
@@ -57,9 +58,9 @@ const _addBoolOptionTo = (options, propName) => {
   }
 };
 
-const _addSettingsTo = (options, ...restArgs) => {
+const _addSettingsTo = (options, confItem, itemProps) => {
   const { loadId } = options;
-  Object.assign(options, ...restArgs, {
+  _assign(options, confItem, itemProps, {
     apiKey: ChartStore.getKey(loadId),
     proxy: ChartStore.getProxy(loadId)
   })
@@ -72,7 +73,6 @@ const ChartActions =  Reflux.createActions({
      children: ['completed', 'added', 'failed'],
      isLoading: false,
      idLoading: void 0,
-     isShouldEmit: true,
      cancelLoad: _cancelLoad
    },
   [CHAT_LOAD_BY_QUERY]: {
@@ -111,20 +111,17 @@ const _checkMsgApiKey = ({
   loadId,
   isKeyFeature,
   isPremium
-}) => {
-  if (!apiKey){
-    if (isApiKeyRequired(loadId)) {
-      return M.withoutApiKey(getApiTitle(loadId));
-    }
-    if (isKeyFeature) {
-      return M.FEATURE_WITHOUT_KEY;
-    }
-    if (isPremium) {
-      return M.PREMIUM_WITHOUT_KEY;
-    }
-  }
-  return '';
-};
+}) => apiKey
+  ? ''
+  : isApiKeyRequired(loadId)
+    ? M.withoutApiKey(getApiTitle(loadId))
+    : isKeyFeature
+       ? M.FEATURE_WITHOUT_KEY
+       : isPremium
+          ? M.PREMIUM_WITHOUT_KEY
+          : '';
+
+
 const _checkProxy = ({ proxy, loadId }) => {
   if (isProxyRequired(loadId) && !proxy) {
     return M.withoutProxy(getApiTitle(loadId));
@@ -132,41 +129,39 @@ const _checkProxy = ({ proxy, loadId }) => {
   return '';
 };
 
-ChartActions[CHAT_LOAD].preEmit = function(confItem={}, option={}) {
-  const key = LogicUtils.createKeyForConfig(option)
-  , isDoublingLoad = this.isLoading && key === this.idLoading
-  , isDoublLoadMeta = option.isLoadMeta
-      ? (key + META === this.idLoading)
-      : false;
+const _crMsgSetting = option =>
+  _checkMsgApiKey(option) || _checkProxy(option);
 
-  this.isShouldEmit = true;
-  const _isTs = ChartStore.isLoadToChart();
+const _crMetaDataKey = key => key + META_SUFFIX;
+
+ChartActions[CHAT_LOAD].shouldEmit = function(confItem={}, option={}){
+  const _key = LogicUtils.createKeyForConfig(option)
+  , { isLoadMeta } = option
+  , key = isLoadMeta ? _crMetaDataKey(_key) : _key
+  , _isDoublingLoad = this.isLoading && key === this.idLoading
+  , _isTs = ChartStore.isLoadToChart();
+
   //{ chartType, browserType, dialogConf } = confItem
   _addSettingsTo(option, confItem, { key, _isTs })
 
-  const _msgSetting = _checkMsgApiKey(option)
-    || _checkProxy(option);
-  if (_msgSetting) {
-    this.cancelLoad(option, _msgSetting, false);
-  } else if (isDoublingLoad){
-    this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
-  } else if (isDoublLoadMeta){
-    this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
-  } else if (!_isTs){
-    if (ChartStore.isChartExist(option)){
-      this.cancelLoad(option, M.ALREADY_EXIST, true);
-    }
-  }
-  return;
+  const _alertMsg = _crMsgSetting(option)
+   || (isLoadMeta && _isDoublingLoad
+        ? M.DOUBLE_LOAD_META
+        : _isDoublingLoad
+           ? M.LOADING_IN_PROGRES
+           : !_isTs && ChartStore.isChartExist(option)
+               ? M.ALREADY_EXIST
+               : '');
+
+  return _alertMsg
+    ? (this.cancelLoad(option, _alertMsg), false)
+    : true;
 }
 
-ChartActions[CHAT_LOAD].shouldEmit = function(){
-  return this.isShouldEmit;
-}
 ChartActions[CHAT_LOAD].listen(function(confItem, option){
-  const { key, isLoadMeta, loadId='Q' } = option;
+  const { key, loadId='Q' } = option;
   this.isLoading = true;
-  this.idLoading = isLoadMeta ? key + META : key;
+  this.idLoading = key
   LoadConfig[loadId].loadItem(
     option, this.completed, this.added, this.failed
   );
@@ -179,8 +174,7 @@ const _addDialogPropsTo = option => {
         .getSourceConfig(browserType, chartType) || {}
   , { dfProps } = dialogProps || {};
 
-  Object.assign(option,
-    dialogProps, dfProps, {
+  _assign(option, dialogProps, dfProps, {
       subtitle: SUBTITLE
     }
   )
