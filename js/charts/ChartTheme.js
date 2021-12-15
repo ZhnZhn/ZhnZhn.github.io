@@ -41,6 +41,10 @@ const ChartTheme = {
     panning: true,
     panKey: 'shift',
     zoomType: 'x',
+    style: {
+      fontFamily: "Roboto, Arial, Lato, sans-serif",
+      fontSize: "15px"
+    },
     resetZoomButton: {
       position: {
         align: 'right',

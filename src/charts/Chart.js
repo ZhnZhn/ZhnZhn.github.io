@@ -10,7 +10,6 @@ const merge = Highcharts.merge;
 const _isStr = str => typeof str === 'string';
 
 const FONT_STYLE = {
-  fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
   fontSize: '16px',
   fontWeight: 'bold',
 }, CAPTION_CONFIG = {
