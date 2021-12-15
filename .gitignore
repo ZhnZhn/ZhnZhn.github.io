@@ -17,5 +17,6 @@ dev
 webpack.dev.js
 webpack.dev.dll.js
 webpack.dev.dll-jsx.js
+template/index-dev.ejs
 app/*_dev_*.js
 data/quandl-sample/*.*
