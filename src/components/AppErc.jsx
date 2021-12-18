@@ -21,7 +21,7 @@ import ThemeContext from './hoc/ThemeContext'
 
 import checkBuild from './checkBuild'
 
-const BUILD_DATE = '15-12-2021';
+const BUILD_DATE = '18-12-2021';
 const CL = "component-container"
 
 const showSettings = CA.showSettings
