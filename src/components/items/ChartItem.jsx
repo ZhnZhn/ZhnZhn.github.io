@@ -19,27 +19,21 @@ const {
 const CL_CHART_ITEM =  'chart-item';
 
 
-const S = {
-  TAB_DIV: {
-    position: 'relative',
-    backgroundColor: 'transparent',
-    zIndex: 2,
-    height: 30
-  },
-  SHOW_HIDE: {
-    marginLeft: 8
-  },
-  WRAPPER: {
-    marginTop: 6
-  },
-  DATA_SOURCE: {
-    position: 'absolute',
-    left: 5,
-    bottom: 0,
-    color: '#909090',
-    fontSize: '11px'
-  }
+const S_TAB_DIV = {
+  position: 'relative',
+  backgroundColor: 'transparent',
+  height: 30
+}
+, S_SHOW_HIDE = { marginLeft: 8 }
+, S_WRAPPER = { marginTop: 6 }
+, S_DATA_SOURCE = {
+  position: 'absolute',
+  left: 5,
+  bottom: 0,
+  color: '#909090',
+  fontSize: '11px'
 };
+
 
 const _isFn = fn => typeof fn === 'function'
 , _isArr = Array.isArray
@@ -142,7 +136,7 @@ class ChartItem extends Component {
     , _itemCaption = itemCaption || caption || '';
 
     this._dataSourceEl = (
-       <div style={S.DATA_SOURCE}>
+       <div style={S_DATA_SOURCE}>
          {dataSource || ''}
        </div>
     )
@@ -189,7 +183,7 @@ class ChartItem extends Component {
   }
   setDataSource = (strDataSource) => {
     this._dataSourceEl = (
-       <div style={S.DATA_SOURCE}>
+       <div style={S_DATA_SOURCE}>
          {strDataSource}
        </div>
     )
@@ -292,16 +286,16 @@ class ChartItem extends Component {
    this.setState({ miniTitles, isShowAbs })
  }
 
- _crChartToolBar = (config, withoutAnimation) => {
+ _crChartToolBar = (config) => {
    const { hasError, isShowToolbar } = this.state;
    return (
          <ShowHide
             isShow={isShowToolbar}
-            withoutAnimation={withoutAnimation}
+            withoutAnimation={true}
          >
            <ChartToolBar
              hasError={hasError}
-             style={S.TAB_DIV}
+             style={S_TAB_DIV}
              config={config}
              onMiniChart={this._hMiniChart}
              getChart={this.getMainChart}
@@ -332,7 +326,10 @@ class ChartItem extends Component {
         info,
         zhConfig, zhMiniConfigs
       } = config || {}
-    , { itemTime, legend, withoutAnimation } = zhConfig || {}
+    , {
+        itemTime,
+        legend
+      } = zhConfig || {}
     , {
         hasError,
         isOpen, isShowChart, isShowInfo,
@@ -342,8 +339,7 @@ class ChartItem extends Component {
         itemCaption,
         mfiConfigs,
         miniTitles
-    } = this.state
-    , _withoutAnimation = _isNarrowWidth || withoutAnimation;
+    } = this.state;
 
     return (
       <div className={CL_CHART_ITEM}>
@@ -364,10 +360,10 @@ class ChartItem extends Component {
         }
         <ShowHide
            isShow={isOpen}
-           withoutAnimation={_withoutAnimation}
-           style={S.SHOW_HIDE}
+           withoutAnimation={true}
+           style={S_SHOW_HIDE}
         >
-           {isShowChart && this._crChartToolBar(config, _withoutAnimation)}
+           {isShowChart && this._crChartToolBar(config)}
            {hasError
              ? <MsgRenderErr
                  isShow={isShowChart}
@@ -375,8 +371,8 @@ class ChartItem extends Component {
                />
              : <ShowHide
                  isShow={isShowChart}
-                 withoutAnimation={_withoutAnimation}
-                 style={S.WRAPPER}
+                 withoutAnimation={true}
+                 style={S_WRAPPER}
                 >
                    <HighchartWrapper
                      config={config}
@@ -398,14 +394,14 @@ class ChartItem extends Component {
              onClickItem={this._hToggleSeria}
            />
            <MiniCharts
-              withoutAnimation={_withoutAnimation}
+              withoutAnimation={true}
               configs={mfiConfigs}
               absComp={this._dataSourceEl}
               onLoaded={this._hLoadedMiniChart}
               onWillUnLoaded={this._hUnLoadedMiniChart}
            />
            <MiniCharts
-              withoutAnimation={_withoutAnimation}
+              withoutAnimation={true}
               configs={zhMiniConfigs}
               idPropName="btTitle"
               ids={miniTitles}

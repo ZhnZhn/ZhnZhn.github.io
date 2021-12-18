@@ -32,26 +32,23 @@ const {
   HighchartWrapper
 } = _Comp.default;
 const CL_CHART_ITEM = 'chart-item';
-const S = {
-  TAB_DIV: {
-    position: 'relative',
-    backgroundColor: 'transparent',
-    zIndex: 2,
-    height: 30
-  },
-  SHOW_HIDE: {
-    marginLeft: 8
-  },
-  WRAPPER: {
-    marginTop: 6
-  },
-  DATA_SOURCE: {
-    position: 'absolute',
-    left: 5,
-    bottom: 0,
-    color: '#909090',
-    fontSize: '11px'
-  }
+const S_TAB_DIV = {
+  position: 'relative',
+  backgroundColor: 'transparent',
+  height: 30
+},
+      S_SHOW_HIDE = {
+  marginLeft: 8
+},
+      S_WRAPPER = {
+  marginTop: 6
+},
+      S_DATA_SOURCE = {
+  position: 'absolute',
+  left: 5,
+  bottom: 0,
+  color: '#909090',
+  fontSize: '11px'
 };
 
 const _isFn = fn => typeof fn === 'function',
@@ -139,7 +136,7 @@ class ChartItem extends _react.Component {
 
     this.setDataSource = strDataSource => {
       this._dataSourceEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        style: S.DATA_SOURCE,
+        style: S_DATA_SOURCE,
         children: strDataSource
       });
       this.forceUpdate();
@@ -257,17 +254,17 @@ class ChartItem extends _react.Component {
       });
     };
 
-    this._crChartToolBar = (config, withoutAnimation) => {
+    this._crChartToolBar = config => {
       const {
         hasError,
         isShowToolbar
       } = this.state;
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
         isShow: isShowToolbar,
-        withoutAnimation: withoutAnimation,
+        withoutAnimation: true,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar.default, {
           hasError: hasError,
-          style: S.TAB_DIV,
+          style: S_TAB_DIV,
           config: config,
           onMiniChart: this._hMiniChart,
           getChart: this.getMainChart,
@@ -316,7 +313,7 @@ class ChartItem extends _react.Component {
           _itemCaption = itemCaption || _caption || '';
 
     this._dataSourceEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: S.DATA_SOURCE,
+      style: S_DATA_SOURCE,
       children: dataSource || ''
     });
     this.state = {
@@ -378,8 +375,7 @@ class ChartItem extends _react.Component {
     } = config || {},
           {
       itemTime,
-      legend,
-      withoutAnimation
+      legend
     } = zhConfig || {},
           {
       hasError,
@@ -392,9 +388,7 @@ class ChartItem extends _react.Component {
       itemCaption,
       mfiConfigs,
       miniTitles
-    } = this.state,
-          _withoutAnimation = _isNarrowWidth || withoutAnimation;
-
+    } = this.state;
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_CHART_ITEM,
       children: [isCaption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Header.default, {
@@ -412,15 +406,15 @@ class ChartItem extends _react.Component {
         refVm: this._refVm
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ShowHide, {
         isShow: isOpen,
-        withoutAnimation: _withoutAnimation,
-        style: S.SHOW_HIDE,
-        children: [isShowChart && this._crChartToolBar(config, _withoutAnimation), hasError ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
+        withoutAnimation: true,
+        style: S_SHOW_HIDE,
+        children: [isShowChart && this._crChartToolBar(config), hasError ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
           isShow: isShowChart,
           msg: "chart"
         }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
           isShow: isShowChart,
-          withoutAnimation: _withoutAnimation,
-          style: S.WRAPPER,
+          withoutAnimation: true,
+          style: S_WRAPPER,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
             config: config,
             isShowAbs: isShowAbs,
@@ -437,13 +431,13 @@ class ChartItem extends _react.Component {
           legend: legend,
           onClickItem: this._hToggleSeria
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts.default, {
-          withoutAnimation: _withoutAnimation,
+          withoutAnimation: true,
           configs: mfiConfigs,
           absComp: this._dataSourceEl,
           onLoaded: this._hLoadedMiniChart,
           onWillUnLoaded: this._hUnLoadedMiniChart
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts.default, {
-          withoutAnimation: _withoutAnimation,
+          withoutAnimation: true,
           configs: zhMiniConfigs,
           idPropName: "btTitle",
           ids: miniTitles,
