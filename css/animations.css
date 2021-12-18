@@ -26,3 +26,17 @@
     transform: scaleY(1);
   }
 }
+
+.show-cont {
+  animation: showing-cont 400ms ease-out;
+}
+
+@keyframes showing-cont {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -19,7 +19,7 @@ const TH_ID = 'CHART_CONTAINER';
 
 const CL_ROOT = "item-container"
 , CL_SCROLL = 'scroll-container-y scroll-items'
-, CL_SHOW = "show-popup"
+, CL_SHOW_CONT = "show-cont"
 , CL_MENU_MORE = "popup-menu charts__menu-more"
 
 , CHILD_MARGIN = 36
@@ -243,7 +243,7 @@ class ChartContainer extends Component {
      , _modelMore = crModelMore(_isAdminMode, this._HANDLERS)
      , { isShow, isMore, isCompareTo, configs } = this.state
      , _style = isShow ? S_INLINE : S_NONE
-     , _className = crCn(CL_ROOT, [isShow, CL_SHOW]);
+     , _className = crCn(CL_ROOT, [isShow, CL_SHOW_CONT]);
 
      return(
         <div
