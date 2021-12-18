@@ -20,12 +20,13 @@ const CL_SHOW_POPUP = 'show-popup',
 
 const ShowHide = ({
   isShow,
-  withoutAnimation,
   className,
   style,
+  withoutAnimation,
+  animationClass = CL_SHOW_POPUP,
   children
 }) => {
-  const _cn = (0, _crCn.default)(className, [isShow && !withoutAnimation, CL_SHOW_POPUP]),
+  const _cn = (0, _crCn.default)(className, [isShow && !withoutAnimation, animationClass]),
         _styleShow = isShow ? S_SHOW : S_HIDE;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -39,10 +40,11 @@ const ShowHide = ({
 };
 /*
 ShowHide.propTypes = {
-  isShow: PropTypes.bool,
-  withoutAnimation: PropTypes.bool,
+  isShow: PropTypes.bool,  
   className: PropTypes.string,
   style: PropTypes.object,
+  withoutAnimation: PropTypes.bool,
+  animationClass: PropTypes.string,
   children: PropTypes.oneOfType[
     (PropTypes.arrayOf(PropTypes.node), PropTypes.node)
   ]
