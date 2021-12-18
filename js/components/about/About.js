@@ -36,6 +36,7 @@ const {
 } = _use.default;
 const TH_ID = 'ABOUT',
       CL_ABOUT = 'about-container',
+      CL_SHOW_CONT = 'show-cont',
       CL_SCROLL = 'scroll-container-y',
       STEP_T1 = "Please, choose a data source Browser from Topics [t]",
       STEP_T2 = "Next, choose a dataset menu item in the the opended up Browser",
@@ -60,6 +61,7 @@ const About = ({
     className: CL_ABOUT,
     style: TS.ROOT,
     isShow: isShow,
+    animationClass: CL_SHOW_CONT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
       caption: "About",
       onClose: hide,

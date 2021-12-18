@@ -22,6 +22,7 @@ const { useBool, useListen, useTheme } = use;
 const TH_ID = 'ABOUT'
 
 , CL_ABOUT = 'about-container'
+, CL_SHOW_CONT = 'show-cont'
 , CL_SCROLL = 'scroll-container-y'
 
 , STEP_T1 = "Please, choose a data source Browser from Topics [t]"
@@ -54,6 +55,7 @@ const About = ({
       className={CL_ABOUT}
       style={TS.ROOT}
       isShow={isShow}
+      animationClass={CL_SHOW_CONT}
     >
        <A.BrowserCaption
           caption="About"
