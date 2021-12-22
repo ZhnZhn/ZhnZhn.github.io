@@ -1,15 +1,16 @@
-const S_RENDER_ERR = {
-  color: '#f44336',
-  fontWeight: 'bold'
-};
+const CL_ERR_MSG = "err-msg";
 
-const MsgRenderErr = ({ 
+const _crMsgErr = msg => [
+  'Error occured during rendering', msg
+].filter(Boolean).join(' ') + '.';
+
+const MsgRenderErr = ({
   isShow,
   style,
-  msg=''
+  msg
 }) => isShow
- ? <div style={{...S_RENDER_ERR, ...style}}>
-      {`Error occured during rendering ${msg}`.trim() + '.'}
+ ? <div className={CL_ERR_MSG} style={style}>
+     {_crMsgErr(msg)}
    </div>
  : null;
 
