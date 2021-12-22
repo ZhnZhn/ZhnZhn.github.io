@@ -28,7 +28,16 @@ S_TAB_DIV = {
 , S_MAP_DIV = { height: 400 }
 , S_SPINNER_LOADING = { margin: '64px auto 0' }
 , S_BLOCK = { display: 'block' }
-, S_NONE = { display: 'none' };
+, S_NONE = { display: 'none' }
+, S_ERR_MSG = { paddingLeft: 12 }
+, CL_ERR_MSG = "err-msg"
+, ERR_MSG = "Error during loading map.";
+
+const ErrMsg = () => (
+  <span className={CL_ERR_MSG} style={S_ERR_MSG}>
+    {ERR_MSG}
+  </span>
+);
 
 
 const BtTabInfo = ({ isShow, onClick }) => {
@@ -51,7 +60,7 @@ const MapChartItem = ({
   onCloseItem
  }) => {
   const [state, setState] = useState({ isLoading: true, time: '' })
-  , { isLoading, time } = state
+  , { isLoading, time, isErr } = state
   , [isOpen, toggleIsOpen] = useToggle(true)
   , [isShowInfo, showInfo, hideInfo] = useBool();
 
@@ -67,7 +76,7 @@ const MapChartItem = ({
          setState({ isLoading: false, time })
        })
        .catch(err => {
-         setState({ isLoading: false })
+         setState({ isLoading: false, isErr: true })
        });
    }, [])
    // config, caption
@@ -100,9 +109,8 @@ const MapChartItem = ({
              id={_mapId}
              style={{...S_MAP_DIV, ..._styleMap}}
           >
-            {
-              isLoading && <A.SpinnerLoading style={S_SPINNER_LOADING} />
-            }
+            { isLoading && <A.SpinnerLoading style={S_SPINNER_LOADING} /> }
+            { isErr && <ErrMsg /> }
           </div>
           <PanelDataInfo
              isShow={isShowInfo}
