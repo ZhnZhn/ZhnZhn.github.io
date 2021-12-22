@@ -18,6 +18,10 @@ const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json'
   ];
 
 const _isArr = Array.isArray
+, _assign = Object.assign
+, _crElement = tag => document.createElement(tag)
+, _getElementById = id => document.getElementById(id)
+, _crPromise = value => Promise.resolve(value);
 
 const _findFeature = function(features, id){
   if (!_isArr(features)) {
@@ -94,7 +98,7 @@ const _crStyle = (feature) => ({
 });
 
 const _crEl = function(tag, className='', cssText='', id){
-  const el = document.createElement(tag)
+  const el = _crElement(tag)
   el.className = className
   el.style.cssText = cssText
   if (id) {
@@ -103,7 +107,7 @@ const _crEl = function(tag, className='', cssText='', id){
   return el;
 };
 
-const _crInfoControl = (L, mapId) => Object.assign(L.control(), {
+const _crInfoControl = (L, mapId) => _assign(L.control(), {
   onAdd(map){
     this.idEl = mapId + '_info-control'
     this.divEl = _crEl('div', 'control-info', '', this.idEl)
@@ -112,13 +116,13 @@ const _crInfoControl = (L, mapId) => Object.assign(L.control(), {
   update(props){
     if (props){
       const elInfo = MapFactory.crInfo(props);
-      render(elInfo, document.getElementById(this.idEl))
+      render(elInfo, _getElementById(this.idEl))
     }
   },
   updateCluster(cluster, color, from, to){
     if (cluster){
       const elClusterInfo = MapFactory.crClusterInfo({ cluster, color, from, to });
-      render(elClusterInfo, document.getElementById(this.idEl))
+      render(elClusterInfo, _getElementById(this.idEl))
     }
   }
 });
@@ -256,7 +260,7 @@ const ChoroplethMap = {
 
   getLeaflet(){
     if (this.L){
-      return Promise.resolve(this.L);
+      return _crPromise(this.L);
     } else {
       return import(
         /* webpackChunkName: "leaflet" */
@@ -271,7 +275,7 @@ const ChoroplethMap = {
   getGeoJson(url){
      const geoJson = this.hmUrlGeoJson[url];
      if (geoJson){
-       return Promise.resolve(_crGeoJson(geoJson));
+       return _crPromise(_crGeoJson(geoJson));
      } else {
        return fetch(url)
          .then(response => response.json())
@@ -279,7 +283,36 @@ const ChoroplethMap = {
      }
   },
 
-  draw({ id, jsonCube, zhMapSlice, time }){
+
+  draw(options){
+    return this._loadCss()
+      .then(() => this._draw(options));
+  },
+
+  _loadCss(){
+    return this._isCss
+      ? _crPromise()
+      : new Promise((resolve, reject) => {
+          const _linkEl = _assign(_crElement("link"), {
+            rel: "stylesheet",
+            href: "css/leaflet.css",
+            onload: () => {
+              this._isCss = true
+              resolve()
+            },
+            onerror: () => {
+              _linkEl.remove()
+              reject()
+            }
+          })
+          // Insert it at the end of the head in a legacy-friendly manner
+          const { head } = document
+          , { childNodes } = head;
+          head.insertBefore(_linkEl, childNodes[childNodes.length - 1].nextSibling);
+      })
+  },
+
+  _draw({ id, jsonCube, zhMapSlice, time }){
     return this.getLeaflet()
        .then( (L) => {
           const map = L.map(id, this.mapOption)
@@ -309,7 +342,7 @@ const ChoroplethMap = {
               return option;
            });
        })
-       .then(option => Promise.resolve(
+       .then(option => _crPromise(
          _crChoroplethMap(option)
        ));
   }

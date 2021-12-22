@@ -26,7 +26,7 @@ gulp.task('clean', function(){
 })
 
 gulp.task('styles', gulp.series(['clean'], function(){
-  return gulp.src(['./css/*.css', '!./css/*.min.css'])
+  return gulp.src(['./css/*.css', '!./css/*.min.css', '!./css/leaflet.css'])
     .pipe(concat('app.min.css'))
     .pipe(cleanCss())
     .pipe(rev())
