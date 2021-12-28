@@ -3,45 +3,32 @@ import C from '../styles/Color'
 import OpenClose from '../zhn/OpenClose'
 import Link from '../links/ProviderLinks'
 
-import S from './About.Style'
-
-const CL = {
-  BR: "provider__note__br"
-};
-
-const OPEN_COLOR_L2 = C.GREEN;
-const ST = {
-  ROOT_CHILD: {
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 2,
-    marginLeft: -5,
-    paddingLeft: 8
-  },
-  OC_L1: {
-    ...S.LINE_HEIGHT,
-    ...S.P_BOTTOM
-  },
-  OC_L2: {
-    paddingTop: 6,
-    lineHeight: 1.8
-  },
-  CHILD_STYLE: {
-    paddingLeft: 4
-  },
-  P4: {
-    paddingTop: 4
-  },
-  NOTE: {
-    padding: '8px 4px 4px 6px',
-    lineHeight: 1.4
-  },
-  MAX_WIDTH: {
-    maxWidth: 450
-  },
-  SETTINGS: {
-    color: '#607d8b'
-  }
-};
+const CL_NOTE_BR = "provider__note__br"
+, OPEN_COLOR_L2 = C.GREEN
+, S_ROOT_CHILD = {
+  borderLeftStyle: 'solid',
+  borderLeftWidth: 2,
+  marginLeft: -5,
+  paddingLeft: 8
+}
+, S_OC_L2 = {
+  paddingTop: 6,
+  lineHeight: 1.8
+}
+, S_CHILD_STYLE = { paddingLeft: 4 }
+, S_PT_4 = { paddingTop: 4 }
+, S_PROVIDER = {
+  display: 'inline-block',
+  padding: '0 8px'
+}
+, S_PR_4 = { paddingRight: 4 }
+, S_NOTE = {
+  padding: '8px 4px 4px 6px',
+  lineHeight: 1.4
+}
+, S_MAX_WIDTH = { maxWidth: 450 }
+, S_SETTINGS = { color: '#607d8b' }
+, S_BLACK = { color: 'black' };
 
 const _isArr = Array.isArray;
 
@@ -68,7 +55,7 @@ const DP = [
 const LinkPer = ({ Comp, per }) => (
   <>
     <Comp />
-    <span style={S.BLACK}>
+    <span style={S_BLACK}>
        &nbsp;({per})
     </span>
   </>
@@ -81,8 +68,8 @@ const LinkList = ({ list }) => list.map((CompOrConfig, index) => {
       ? <LinkPer Comp={CompOrConfig[0]} per={CompOrConfig[1]} />
       : <CompOrConfig />
   , style = _isConfig
-      ? {...S.PROVIDER, ...S.PR_4 }
-      : S.PROVIDER
+      ? {...S_PROVIDER, ...S_PR_4}
+      : S_PROVIDER
   return (
     <span style={style} key={index}>
       {_linkComp}
@@ -94,8 +81,7 @@ const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
      caption="Data Providers (All 29):"
-     style={ST.OC_L1}
-     childStyle={ST.ROOT_CHILD}
+     childStyle={S_ROOT_CHILD}
   >
     <div>
       <p>
@@ -103,24 +89,24 @@ const DataProviders = ({ isClose }) => (
       </p>
       <OpenClose
         caption="(9) Required API Key:"
-        style={ST.OC_L2}
+        style={S_OC_L2}
         openColor={OPEN_COLOR_L2}
-        childStyle={ST.CHILD_STYLE}
+        childStyle={S_CHILD_STYLE}
       >
-      <p style={ST.P4}>
+      <p style={S_PT_4}>
         <LinkList list={DP_KEY} />
       </p>
-      <div style={ST.NOTE}>
+      <div style={S_NOTE}>
         <p>
-          <span style={S.BLACK}>Note:&nbsp;</span>
+          <span style={S_BLACK}>Note:&nbsp;</span>
           User API key from data provider required for request.&nbsp;
-          <br className={CL.BR} />
-          Can be set in <span style={ST.SETTINGS}>SETTINGS&nbsp;[s]</span>.
+          <br className={CL_NOTE_BR} />
+          Can be set in <span style={S_SETTINGS}>SETTINGS&nbsp;[s]</span>.
         </p>
       </div>
-      <div style={ST.NOTE}>
-        <p style={ST.MAX_WIDTH}>
-          <span style={S.BLACK}>Note:&nbsp;</span>
+      <div style={S_NOTE}>
+        <p style={S_MAX_WIDTH}>
+          <span style={S_BLACK}>Note:&nbsp;</span>
           This product uses the Bureau of Economic Analysis (BEA)
           Data API but is not endorsed or certified by BEA.
         </p>
@@ -128,19 +114,19 @@ const DataProviders = ({ isClose }) => (
       </OpenClose>
       <OpenClose
         caption="(2) Required Local Http Proxy:"
-        style={ST.OC_L2}
+        style={S_OC_L2}
         openColor={OPEN_COLOR_L2}
-        childStyle={ST.CHILD_STYLE}
+        childStyle={S_CHILD_STYLE}
       >
-        <p style={ST.P4}>
+        <p style={S_PT_4}>
           <LinkList list={DP_PR} />
         </p>
-        <div style={ST.NOTE}>
+        <div style={S_NOTE}>
           <p>
-            <span style={S.BLACK}>Note:&nbsp;</span>
+            <span style={S_BLACK}>Note:&nbsp;</span>
             Local Http Proxy is required for CORS Http API services.&nbsp;
-            <br className={CL.BR} />
-            Could be set in <span style={ST.SETTINGS}>SETTINGS&nbsp;[s]</span>.
+            <br className={CL_NOTE_BR} />
+            Could be set in <span style={S_SETTINGS}>SETTINGS&nbsp;[s]</span>.
           </p>
         </div>
       </OpenClose>
