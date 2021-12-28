@@ -11,40 +11,29 @@ import WatchItem from './WatchItem';
 
 import withWatchDnD from './decorators/withWatchDnD';
 
-const CL = {
-  SCROLL: 'scroll-container-y scroll-watch',
-  WATCH_ITEM: 'row__type2-topic not-selected'
-};
+const CL_SCROLL = 'scroll-container-y scroll-watch'
+, CL_WATCH_ITEM = 'row__type2-topic not-selected'
 
-//const C_GROUP_OPEN = '#1b2836';
-const C_GROUP_OPEN = '#1b75bb'
-const C_LIST_OPEN = '#80c040';
-const S = {
-  BROWSER: {
-    paddingRight: 0
-  },
-  BT_CIRCLE: {
-    position: 'relative',
-    top: 3,
-    marginLeft: 20
-  },
-  GROUP_DIV: {
-    lineHeight: 2
-  },
-  LIST_DIV: {
-    marginLeft: 8,
-    //paddingLeft: 12,
-    paddingLeft: 2,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 2,
-    borderLeftColor: 'inherit',
-    //borderLeft: `2px solid ${C_GROUP_OPEN}`,
-    lineHeight: 2
-  },
-  ITEM_NOT_SELECTED: {
-    marginRight: 10
-  }
-};
+, C_GROUP_OPEN = '#1b75bb'
+, C_LIST_OPEN = '#80c040'
+
+, S_BROWSER = { paddingRight: 0 }
+, S_BT_CIRCLE = {
+  position: 'relative',
+  top: 4,
+  marginLeft: 20
+}
+, S_GROUP_DIV = { lineHeight: 2 }
+, S_LIST_DIV = {
+  marginLeft: 8,
+  paddingLeft: 2,
+  borderLeftStyle: 'solid',
+  borderLeftWidth: 2,
+  borderLeftColor: 'inherit',
+  lineHeight: 2
+}
+, S_MR_10 = { marginRight: 10 };
+
 
 const DRAG = {
   GROUP: 'GROUP',
@@ -114,7 +103,7 @@ class WatchBrowser extends Component {
        return (
                <A.OpenClose2
                   key={index}
-                  style={S.GROUP_DIV}
+                  style={S_GROUP_DIV}
                   //openColor={C_GROUP_OPEN}
                   caption={caption}
                   isDraggable={isModeEdit}
@@ -138,8 +127,8 @@ class WatchBrowser extends Component {
       return (
         <A.OpenClose2
            key={index}
-           style={S.LIST_DIV}
-           notSelectedStyle={S.ITEM_NOT_SELECTED}
+           style={S_LIST_DIV}
+           notSelectedStyle={S_MR_10}
            openColor={C_LIST_OPEN}
            caption={caption}
            isDraggable={isModeEdit}
@@ -171,7 +160,7 @@ class WatchBrowser extends Component {
         return (
             <WatchItem
                key={id}
-               className={CL.WATCH_ITEM}
+               className={CL_WATCH_ITEM}
                isModeEdit={isModeEdit}
                item={item}
                option={{ groupCaption, listCaption, caption }}
@@ -192,7 +181,7 @@ class WatchBrowser extends Component {
         , { isShow, isModeEdit, watchList } = this.state
         , _captionEV = isModeEdit ? 'V' : 'E';
     return (
-       <A.Browser isShow={isShow} style={S.BROWSER}>
+       <A.Browser isShow={isShow} style={S_BROWSER}>
           <A.BrowserCaption
             caption={caption}
             onClose={this._handlerHide}
@@ -200,13 +189,13 @@ class WatchBrowser extends Component {
            <A.ButtonCircle
              caption="S"
              title="Save to LocalStorage"
-             style={S.BT_CIRCLE}
+             style={S_BT_CIRCLE}
              onClick={this._handlerSaveWatch}
            />
            <A.ButtonCircle
               caption={_captionEV}
               title="Toggle Edit Mode: E/V"
-              style={S.BT_CIRCLE}
+              style={S_BT_CIRCLE}
               onClick={this._handlerToggleEditMode}
            />
          </A.BrowserCaption>
@@ -215,7 +204,7 @@ class WatchBrowser extends Component {
             onClickGroup={this._handlerEditGroup}
             onClickList={this._handlerEditList}
          />
-         <A.ScrollPane className={CL.SCROLL}>
+         <A.ScrollPane className={CL_SCROLL}>
            {watchList && this._renderWatchList(watchList)}
          </A.ScrollPane>
       </A.Browser>

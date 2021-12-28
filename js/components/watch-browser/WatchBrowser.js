@@ -3,11 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
 
 var _react = require("react");
 
@@ -25,40 +23,35 @@ var _WatchItem = _interopRequireDefault(require("./WatchItem"));
 
 var _withWatchDnD = _interopRequireDefault(require("./decorators/withWatchDnD"));
 
-var _class, _temp;
+var _jsxRuntime = require("react/jsx-runtime");
 
-var CL = {
-  SCROLL: 'scroll-container-y scroll-watch',
-  WATCH_ITEM: 'row__type2-topic not-selected'
-}; //const C_GROUP_OPEN = '#1b2836';
+var _class;
 
-var C_GROUP_OPEN = '#1b75bb';
-var C_LIST_OPEN = '#80c040';
-var S = {
-  BROWSER: {
-    paddingRight: 0
-  },
-  BT_CIRCLE: {
-    position: 'relative',
-    top: 3,
-    marginLeft: 20
-  },
-  GROUP_DIV: {
-    lineHeight: 2
-  },
-  LIST_DIV: {
-    marginLeft: 8,
-    //paddingLeft: 12,
-    paddingLeft: 2,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 2,
-    borderLeftColor: 'inherit',
-    //borderLeft: `2px solid ${C_GROUP_OPEN}`,
-    lineHeight: 2
-  },
-  ITEM_NOT_SELECTED: {
-    marginRight: 10
-  }
+var CL_SCROLL = 'scroll-container-y scroll-watch',
+    CL_WATCH_ITEM = 'row__type2-topic not-selected',
+    C_GROUP_OPEN = '#1b75bb',
+    C_LIST_OPEN = '#80c040',
+    S_BROWSER = {
+  paddingRight: 0
+},
+    S_BT_CIRCLE = {
+  position: 'relative',
+  top: 4,
+  marginLeft: 20
+},
+    S_GROUP_DIV = {
+  lineHeight: 2
+},
+    S_LIST_DIV = {
+  marginLeft: 8,
+  paddingLeft: 2,
+  borderLeftStyle: 'solid',
+  borderLeftWidth: 2,
+  borderLeftColor: 'inherit',
+  lineHeight: 2
+},
+    S_MR_10 = {
+  marginRight: 10
 };
 var DRAG = {
   GROUP: 'GROUP',
@@ -68,8 +61,8 @@ var DRAG = {
   ITEM: 'ITEM'
 };
 
-var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(WatchBrowser, _Component);
+var WatchBrowser = (0, _withWatchDnD.default)(_class = /*#__PURE__*/function (_Component) {
+  (0, _inheritsLoose2.default)(WatchBrowser, _Component);
 
   function WatchBrowser(props) {
     var _this;
@@ -114,8 +107,8 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
       return watchList.groups.map(function (group, index) {
         var caption = group.caption,
             lists = group.lists;
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].OpenClose2, {
-          style: S.GROUP_DIV //openColor={C_GROUP_OPEN}
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose2, {
+          style: S_GROUP_DIV //openColor={C_GROUP_OPEN}
           ,
           caption: caption,
           isDraggable: isModeEdit,
@@ -137,9 +130,9 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
       return lists.map(function (list, index) {
         var caption = list.caption,
             items = list.items;
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].OpenClose2, {
-          style: S.LIST_DIV,
-          notSelectedStyle: S.ITEM_NOT_SELECTED,
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose2, {
+          style: S_LIST_DIV,
+          notSelectedStyle: S_MR_10,
           openColor: C_LIST_OPEN,
           caption: caption,
           isDraggable: isModeEdit,
@@ -162,8 +155,8 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
       return items.map(function (item, index) {
         var id = item.id,
             caption = item.caption;
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchItem["default"], {
-          className: CL.WATCH_ITEM,
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchItem.default, {
+          className: CL_WATCH_ITEM,
           isModeEdit: isModeEdit,
           item: item,
           option: {
@@ -182,11 +175,11 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
       });
     };
 
-    _this._bindDnDGroup(DRAG, _WatchActions["default"]);
+    _this._bindDnDGroup(DRAG, _WatchActions.default);
 
-    _this._bindDnDList(DRAG, _WatchActions["default"]);
+    _this._bindDnDList(DRAG, _WatchActions.default);
 
-    _this._bindDnDItem(DRAG, _WatchActions["default"]);
+    _this._bindDnDItem(DRAG, _WatchActions.default);
 
     _this.state = {
       isShow: !!props.isInitShow,
@@ -207,25 +200,25 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
   };
 
   _proto._handlerSaveWatch = function _handlerSaveWatch() {
-    _WatchActions["default"].saveWatch();
+    _WatchActions.default.saveWatch();
   };
 
   _proto._handlerEditGroup = function _handlerEditGroup() {
-    _ComponentActions["default"].showModalDialog(_Type.ModalDialog.EDIT_WATCH_GROUP);
+    _ComponentActions.default.showModalDialog(_Type.ModalDialog.EDIT_WATCH_GROUP);
   };
 
   _proto._handlerEditList = function _handlerEditList() {
-    _ComponentActions["default"].showModalDialog(_Type.ModalDialog.EDIT_WATCH_LIST);
+    _ComponentActions.default.showModalDialog(_Type.ModalDialog.EDIT_WATCH_LIST);
   };
 
   _proto._handlerClickItem = function _handlerClickItem(item) {
-    _ComponentActions["default"].showModalDialog(_Type.ModalDialog.LOAD_ITEM, item);
+    _ComponentActions.default.showModalDialog(_Type.ModalDialog.LOAD_ITEM, item);
   };
 
   _proto._handlerRemoveItem = function _handlerRemoveItem(option, event) {
     event.stopPropagation();
 
-    _WatchActions["default"].removeItem(option);
+    _WatchActions.default.removeItem(option);
   };
 
   _proto.render = function render() {
@@ -236,37 +229,37 @@ var WatchBrowser = (0, _withWatchDnD["default"])(_class = (_temp = /*#__PURE__*/
         watchList = _this$state.watchList,
         _captionEV = isModeEdit ? 'V' : 'E';
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].Browser, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.Browser, {
       isShow: isShow,
-      style: S.BROWSER,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp["default"].BrowserCaption, {
+      style: S_BROWSER,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.BrowserCaption, {
         caption: caption,
         onClose: this._handlerHide,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ButtonCircle, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ButtonCircle, {
           caption: "S",
           title: "Save to LocalStorage",
-          style: S.BT_CIRCLE,
+          style: S_BT_CIRCLE,
           onClick: this._handlerSaveWatch
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ButtonCircle, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ButtonCircle, {
           caption: _captionEV,
           title: "Toggle Edit Mode: E/V",
-          style: S.BT_CIRCLE,
+          style: S_BT_CIRCLE,
           onClick: this._handlerToggleEditMode
         })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EditBar["default"], {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EditBar.default, {
         isShow: isModeEdit,
         onClickGroup: this._handlerEditGroup,
         onClickList: this._handlerEditList
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp["default"].ScrollPane, {
-        className: CL.SCROLL,
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
+        className: CL_SCROLL,
         children: watchList && this._renderWatchList(watchList)
       })]
     });
   };
 
   return WatchBrowser;
-}(_react.Component), _temp)) || _class;
+}(_react.Component)) || _class;
 
 var _default = WatchBrowser;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=WatchBrowser.js.map
