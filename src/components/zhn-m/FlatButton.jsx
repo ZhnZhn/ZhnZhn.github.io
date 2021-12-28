@@ -1,5 +1,4 @@
-import { useRef, useCallback } from 'react';
-
+import useThrottleClick from '../hooks/useThrottleClick';
 
 import crCn from '../zhn-utils/crCn';
 import has from '../has'
@@ -15,25 +14,16 @@ const FlatButton = ({
   refBt,
   isArrow,
   timeout=3000,
-  className, style, isPrimary,
-  title='', caption, accessKey,
+  className,
+  style,
+  isPrimary,
+  title='',
+  caption,
+  accessKey,
   children,
   onClick
 }) => {
-  const _refTimeStamp = useRef(null)
-  , _hClick = useCallback((event) => {
-    if (timeout === 0) {
-      onClick(event)
-      return;
-    }
-    const _timeStampPrev = _refTimeStamp.current
-    , { timeStamp } = event;
-    if (_timeStampPrev == null
-        || timeStamp - _timeStampPrev > timeout) {
-      onClick(event)
-      _refTimeStamp.current = timeStamp
-    }
-  }, [timeout, onClick])
+  const _hClick = useThrottleClick(timeout, onClick)
   , _className = crCn(CL_BT_FLAT, className)
   , _style = isPrimary
        ? {...style, ...S_PRIMARY}

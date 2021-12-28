@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _useThrottleClick = _interopRequireDefault(require("../hooks/useThrottleClick"));
 
 var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 
@@ -38,21 +38,7 @@ var FlatButton = function FlatButton(_ref) {
       children = _ref.children,
       onClick = _ref.onClick;
 
-  var _refTimeStamp = (0, _react.useRef)(null),
-      _hClick = (0, _react.useCallback)(function (event) {
-    if (timeout === 0) {
-      onClick(event);
-      return;
-    }
-
-    var _timeStampPrev = _refTimeStamp.current,
-        timeStamp = event.timeStamp;
-
-    if (_timeStampPrev == null || timeStamp - _timeStampPrev > timeout) {
-      onClick(event);
-      _refTimeStamp.current = timeStamp;
-    }
-  }, [timeout, onClick]),
+  var _hClick = (0, _useThrottleClick.default)(timeout, onClick),
       _className = (0, _crCn.default)(CL_BT_FLAT, className),
       _style = isPrimary ? Object.assign({}, style, S_PRIMARY) : style,
       _accessKey = HAS_TOUCH ? '' : accessKey,

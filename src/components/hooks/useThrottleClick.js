@@ -6,7 +6,7 @@ const useThrottleClick = (
   timeout=0,
   onClick=FN_NOOP
 ) => {
-  const _refTimeStamp = useRef(null)
+  const _refTimeStamp = useRef(null);
   return useCallback((event) => {
     if (timeout === 0) {
       onClick(event)
