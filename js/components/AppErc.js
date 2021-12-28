@@ -37,25 +37,27 @@ var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const BUILD_DATE = '18-12-2021';
-const CL = "component-container";
+var BUILD_DATE = '28-12-2021';
+var CL = "component-container";
 
-const showSettings = _ComponentActions.default.showSettings.bind(null, _ChartStore.default.exportSettingFn());
+var showSettings = _ComponentActions.default.showSettings.bind(null, _ChartStore.default.exportSettingFn());
 
-const AppErc = () => {
-  const [theme, setTheme] = (0, _react.useState)(_uiTheme.default);
-  (0, _useListen.default)(_ChartStore.default, (actionType, themeName) => {
+var AppErc = function AppErc() {
+  var _useState = (0, _react.useState)(_uiTheme.default),
+      theme = _useState[0],
+      setTheme = _useState[1];
+
+  (0, _useListen.default)(_ChartStore.default, function (actionType, themeName) {
     if (actionType === _ComponentActions.ComponentActionTypes.CHANGE_THEME) {
       theme.setThemeName(themeName);
-      setTheme({ ...theme
-      });
+      setTheme(Object.assign({}, theme));
     }
   });
-  (0, _react.useEffect)(() => {
+  (0, _react.useEffect)(function () {
     _LocationSearch.default.load();
 
     (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.default.showReload);
