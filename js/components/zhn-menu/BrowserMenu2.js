@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -21,34 +19,29 @@ var _WrapperInputSearch = _interopRequireDefault(require("../zhn-select/WrapperI
 
 var _MenuItems = _interopRequireDefault(require("./MenuItems2"));
 
-var useBool = _use["default"].useBool,
-    useToggle = _use["default"].useToggle,
-    useListen = _use["default"].useListen,
-    Browser = _Comp["default"].Browser,
-    BrowserCaption = _Comp["default"].BrowserCaption,
-    ShowHide = _Comp["default"].ShowHide,
-    ScrollPane = _Comp["default"].ScrollPane,
-    SpinnerLoading = _Comp["default"].SpinnerLoading;
+var _jsxRuntime = require("react/jsx-runtime");
+
+var useBool = _use.default.useBool,
+    useToggle = _use.default.useToggle,
+    useListen = _use.default.useListen,
+    Browser = _Comp.default.Browser,
+    BrowserCaption = _Comp.default.BrowserCaption,
+    ShowHide = _Comp.default.ShowHide,
+    ScrollPane = _Comp.default.ScrollPane,
+    SpinnerLoading = _Comp.default.SpinnerLoading;
 var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
-var CL = {
-  BROWSER: "scroll-browser-by",
-  BROWSER_WITH_SEARCH: "scroll-browser-by--search",
-  ROW_ITEM: 'row__type2-topic not-selected'
-};
-var STYLE = {
-  BROWSER: {
-    paddingRight: 0,
-    paddingBottom: 4,
-    minWidth: 300
-  },
-  CAPTION: {
-    top: 9
-  },
-  WRAPPER_SEARCH: {
-    width: '100%',
-    paddingBottom: 8,
-    paddingRight: 24
-  }
+var CL_BROWSER = "scroll-browser-by",
+    CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search",
+    CL_ROW_ITEM = 'row__type2-topic not-selected',
+    S_BROWSER = {
+  paddingRight: 0,
+  paddingBottom: 4,
+  minWidth: 300
+},
+    S_WRAPPER_SEARCH = {
+  width: '100%',
+  paddingBottom: 8,
+  paddingRight: 24
 };
 
 var _useToolbarButtons = function _useToolbarButtons(toggleSearch, onClickInfo, descrUrl) {
@@ -97,7 +90,7 @@ var BrowserMenu2 = function BrowserMenu2(_ref) {
       isShowSearch = _useToggle[0],
       toggleSearch = _useToggle[1],
       _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
-      _useLoadMenu = (0, _useLoadMenu2["default"])(),
+      _useLoadMenu = (0, _useLoadMenu2.default)(),
       isLoading = _useLoadMenu[0],
       isLoaded = _useLoadMenu[1],
       menu = _useLoadMenu[2],
@@ -126,21 +119,20 @@ var BrowserMenu2 = function BrowserMenu2(_ref) {
   }, [isLoaded, isShow]);
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  var _scrollClass = isShowSearch ? CL.BROWSER_WITH_SEARCH : CL.BROWSER;
+  var _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
-    style: STYLE.BROWSER,
+    style: S_BROWSER,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BrowserCaption, {
       caption: caption,
-      captionStyle: STYLE.CAPTION,
       onClose: hideBrowser
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle["default"], {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.default, {
       buttons: _toolbarButtons
     }), !isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
       isShow: isShowSearch,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WrapperInputSearch["default"], {
-        style: STYLE.WRAPPER_SEARCH,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WrapperInputSearch.default, {
+        style: S_WRAPPER_SEARCH,
         placeholder: SEARCH_PLACEHOLDER,
         data: menu,
         ItemOptionComp: ItemOptionComp,
@@ -148,10 +140,10 @@ var BrowserMenu2 = function BrowserMenu2(_ref) {
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
       className: _scrollClass,
-      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems["default"], {
+      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems.default, {
         model: menu,
         ItemComp: ItemComp,
-        itemClassName: CL.ROW_ITEM,
+        itemClassName: CL_ROW_ITEM,
         onClickItem: onShowLoadDialog
       }), children]
     })]
@@ -159,5 +151,5 @@ var BrowserMenu2 = function BrowserMenu2(_ref) {
 };
 
 var _default = BrowserMenu2;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=BrowserMenu2.js.map

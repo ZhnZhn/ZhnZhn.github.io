@@ -7,9 +7,9 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBool2 = _interopRequireDefault(require("../hooks/useBool"));
 
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle3 = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -25,40 +25,50 @@ var _MenuSlider = _interopRequireDefault(require("./MenuSlider"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const CL_SCROLL = 'scroll-container-y';
-const S_BROWSER = {
+var CL_SCROLL = 'scroll-container-y';
+var S_BROWSER = {
   paddingRight: 0
 },
-      S_BR_CAPTION = {
+    S_BR_CAPTION = {
   paddingLeft: 6
 },
-      S_CAPTION = {
-  top: 0,
+    S_SVG_MORE = {
+  position: 'relative',
+  top: -4
+},
+    S_CAPTION = {
+  position: 'relative',
+  top: -6,
   paddingLeft: 4
 },
-      S_SCROLL_PANE = {
+    S_SCROLL_PANE = {
   height: '92%'
 };
-const BrowserSlider = /*#__PURE__*/(0, _react.memo)(props => {
-  const {
-    isInitShow,
-    caption,
-    store,
-    browserType,
-    showAction
-  } = props;
+var BrowserSlider = /*#__PURE__*/(0, _react.memo)(function (props) {
+  var isInitShow = props.isInitShow,
+      caption = props.caption,
+      store = props.store,
+      browserType = props.browserType,
+      showAction = props.showAction;
 
-  const [isShow, show, hide] = (0, _useBool.default)(isInitShow),
-        [isMenuMore, toggleMenuMore] = (0, _useToggle.default)(),
-        [isFilterNotActive, toggleFilterNotActive] = (0, _useToggle.default)()
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _browserContext = (0, _react.useMemo)(() => (0, _fFilterNotActive.default)(isFilterNotActive, props.dfProps.lT), [isFilterNotActive]); //props.dfProps.lT
+  var _useBool = (0, _useBool2.default)(isInitShow),
+      isShow = _useBool[0],
+      show = _useBool[1],
+      hide = _useBool[2],
+      _useToggle = (0, _useToggle3.default)(),
+      isMenuMore = _useToggle[0],
+      toggleMenuMore = _useToggle[1],
+      _useToggle2 = (0, _useToggle3.default)(),
+      isFilterNotActive = _useToggle2[0],
+      toggleFilterNotActive = _useToggle2[1],
+      _browserContext = (0, _react.useMemo)(function () {
+    return (0, _fFilterNotActive.default)(isFilterNotActive, props.dfProps.lT);
+  }, [isFilterNotActive]); //props.dfProps.lT
 
   /*eslint-enable react-hooks/exhaustive-deps */
 
 
-  (0, _useListen.default)(store, (actionType, data) => {
+  (0, _useListen.default)(store, function (actionType, data) {
     if (actionType === showAction && data === browserType) {
       show();
     }
@@ -76,13 +86,13 @@ const BrowserSlider = /*#__PURE__*/(0, _react.memo)(props => {
         style: S_BR_CAPTION,
         caption: caption,
         captionStyle: S_CAPTION,
+        svgMoreStyle: S_SVG_MORE,
         onMore: toggleMenuMore,
         onClose: hide
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
         className: CL_SCROLL,
         style: S_SCROLL_PANE,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuSlider.default, { ...props
-        })
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuSlider.default, Object.assign({}, props))
       })]
     })
   });

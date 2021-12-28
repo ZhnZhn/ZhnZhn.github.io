@@ -5,12 +5,12 @@ exports.default = void 0;
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const COLOR = '#faebd7',
-      TWITTER_URL = 'https://twitter.com',
-      S_LINK = {
+var COLOR = '#faebd7',
+    TWITTER_URL = 'https://twitter.com',
+    S_LINK = {
   display: 'inline-block',
   position: 'relative',
-  top: 2,
+  top: -2,
   height: 28,
   borderRadius: 4,
   padding: '1px 10px 1px 9px',
@@ -20,7 +20,7 @@ const COLOR = '#faebd7',
   userSelect: 'none',
   cursor: 'pointer'
 },
-      S_ICON = {
+    S_ICON = {
   display: 'inline-block',
   position: 'relative',
   top: 4,
@@ -31,30 +31,27 @@ const COLOR = '#faebd7',
   marginRight: 8
 };
 
-const TwitterLink = ({
-  style,
-  iconStyle,
-  account = '',
-  title
-}) => {
+var TwitterLink = function TwitterLink(_ref) {
+  var style = _ref.style,
+      iconStyle = _ref.iconStyle,
+      _ref$account = _ref.account,
+      account = _ref$account === void 0 ? '' : _ref$account,
+      title = _ref.title;
+
   if (!account) {
     return null;
   }
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
     className: "bt-twitter",
-    style: { ...S_LINK,
-      ...style
-    },
+    style: Object.assign({}, S_LINK, style),
     target: "_blank",
     href: TWITTER_URL + "/" + account,
     title: title,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
       viewBox: "0 0 72 72",
       xmlns: "http://www.w3.org/2000/svg",
-      style: { ...S_ICON,
-        ...iconStyle
-      },
+      style: Object.assign({}, S_ICON, iconStyle),
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("title", {
         children: "Twitter Logo"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {

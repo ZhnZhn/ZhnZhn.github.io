@@ -18,49 +18,43 @@ var _SvgClose = _interopRequireDefault(require("./SvgClose"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-const TH_ID = 'ELEMENT';
-const CL_BR_CAPTION = 'br-caption text-clip gap-right',
-      CL_NOT_SELECTED = 'not-selected';
-const S_CAPTION = {
-  position: 'relative',
-  top: 6,
+var TH_ID = 'ELEMENT';
+var CL_BR_CAPTION = 'br-caption text-clip gap-right',
+    CL_NOT_SELECTED = 'not-selected';
+var S_CAPTION = {
   paddingRight: 8,
   fontSize: '18px',
   fontWeight: '500'
 },
-      S_BT_MORE = {
-  position: 'relative',
-  top: 3
-},
-      S_CHECK_BOX = {
+    S_CHECK_BOX = {
   margin: '0 10px 0 6px'
 },
-      S_SVG_CLOSE = {
+    S_SVG_CLOSE = {
   position: 'absolute',
   top: 6,
   right: 0
 };
 
-const _isFn = fn => typeof fn === 'function';
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
 
-const BrowserCaption = ({
-  style,
-  captionStyle,
-  caption,
-  children,
-  onMore,
-  onCheck,
-  onUnCheck,
-  onClose
-}) => {
-  const TS = (0, _useTheme.default)(TH_ID);
+var BrowserCaption = function BrowserCaption(_ref) {
+  var style = _ref.style,
+      captionStyle = _ref.captionStyle,
+      caption = _ref.caption,
+      svgMoreStyle = _ref.svgMoreStyle,
+      children = _ref.children,
+      onMore = _ref.onMore,
+      onCheck = _ref.onCheck,
+      onUnCheck = _ref.onUnCheck,
+      onClose = _ref.onClose;
+  var TS = (0, _useTheme.default)(TH_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_BR_CAPTION,
-    style: { ...style,
-      ...TS.ROOT
-    },
+    style: Object.assign({}, style, TS.ROOT),
     children: [_isFn(onMore) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
-      style: S_BT_MORE,
+      style: svgMoreStyle,
       onClick: onMore
     }), _isFn(onCheck) && _isFn(onUnCheck) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       style: S_CHECK_BOX,
@@ -70,9 +64,7 @@ const BrowserCaption = ({
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       className: CL_NOT_SELECTED,
-      style: { ...S_CAPTION,
-        ...captionStyle
-      },
+      style: Object.assign({}, S_CAPTION, captionStyle),
       children: caption
     }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
       style: S_SVG_CLOSE,

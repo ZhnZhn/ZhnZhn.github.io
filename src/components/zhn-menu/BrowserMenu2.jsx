@@ -17,27 +17,21 @@ const { useBool, useToggle, useListen } = use
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 
-const CL = {
-  BROWSER : "scroll-browser-by",
-  BROWSER_WITH_SEARCH : "scroll-browser-by--search",
-  ROW_ITEM: 'row__type2-topic not-selected'
+const CL_BROWSER = "scroll-browser-by"
+, CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search"
+, CL_ROW_ITEM = 'row__type2-topic not-selected'
+
+, S_BROWSER = {
+  paddingRight: 0,
+  paddingBottom: 4,
+  minWidth: 300
+}
+, S_WRAPPER_SEARCH = {
+  width: '100%',
+  paddingBottom: 8,
+  paddingRight: 24
 };
 
-const STYLE = {
-  BROWSER : {
-    paddingRight: 0,
-    paddingBottom: 4,
-    minWidth: 300
-  },
-  CAPTION: {
-    top: 9
-  },
-  WRAPPER_SEARCH : {
-     width: '100%',
-     paddingBottom: 8,
-     paddingRight: 24
-  }
-};
 
 const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -93,14 +87,13 @@ const BrowserMenu2 = ({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   const _scrollClass = isShowSearch
-    ? CL.BROWSER_WITH_SEARCH
-    : CL.BROWSER;
+    ? CL_BROWSER_WITH_SEARCH
+    : CL_BROWSER;
 
   return (
-    <Browser isShow={isShow} style={STYLE.BROWSER}>
+    <Browser isShow={isShow} style={S_BROWSER}>
         <BrowserCaption
            caption={caption}
-           captionStyle={STYLE.CAPTION}
            onClose={hideBrowser}
         />
        <ToolbarButtonCircle
@@ -108,7 +101,7 @@ const BrowserMenu2 = ({
        />
        {!isLoading && <ShowHide isShow={isShowSearch}>
            <WrapperInputSearch
-             style={STYLE.WRAPPER_SEARCH}
+             style={S_WRAPPER_SEARCH}
              placeholder={SEARCH_PLACEHOLDER}
              data={menu}
              ItemOptionComp={ItemOptionComp}
@@ -121,7 +114,7 @@ const BrowserMenu2 = ({
          <MenuItems2
             model={menu}
             ItemComp={ItemComp}
-            itemClassName={CL.ROW_ITEM}
+            itemClassName={CL_ROW_ITEM}
             onClickItem={onShowLoadDialog}
          />
          {children}

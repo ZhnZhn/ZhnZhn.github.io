@@ -20,7 +20,7 @@ const CL_SCROLL = 'scroll-container-y scroll-watch'
 , S_BROWSER = { paddingRight: 0 }
 , S_BT_CIRCLE = {
   position: 'relative',
-  top: 4,
+  top: -4,
   marginLeft: 20
 }
 , S_GROUP_DIV = { lineHeight: 2 }

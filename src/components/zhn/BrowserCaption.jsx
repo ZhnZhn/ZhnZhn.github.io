@@ -13,15 +13,9 @@ const CL_BR_CAPTION = 'br-caption text-clip gap-right'
 , CL_NOT_SELECTED = 'not-selected';
 
 const S_CAPTION = {
-  position: 'relative',
-  top: 6,
   paddingRight: 8,
   fontSize: '18px',
   fontWeight: '500'
-},
-S_BT_MORE = {
-  position: 'relative',
-  top: 3
 },
 S_CHECK_BOX = {
   margin: '0 10px 0 6px'
@@ -39,6 +33,7 @@ const BrowserCaption = ({
   style,
   captionStyle,
   caption,
+  svgMoreStyle,
   children,
   onMore,
   onCheck,
@@ -54,7 +49,7 @@ const BrowserCaption = ({
      {
        _isFn(onMore) &&
        <SvgMore
-          style={S_BT_MORE}
+          style={svgMoreStyle}
           onClick={onMore}
        />
      }

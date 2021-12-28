@@ -15,8 +15,13 @@ const CL_SCROLL = 'scroll-container-y';
 
 const S_BROWSER = { paddingRight: 0 }
 , S_BR_CAPTION = { paddingLeft: 6 }
+, S_SVG_MORE = {
+  position: 'relative',
+  top: -4
+}
 , S_CAPTION = {
-    top: 0,
+    position: 'relative',
+    top: -6,
     paddingLeft: 4
   }
 , S_SCROLL_PANE = { height: '92%' };
@@ -54,6 +59,7 @@ const BrowserSlider = memo((props) => {
            style={S_BR_CAPTION}
            caption={caption}
            captionStyle={S_CAPTION}
+           svgMoreStyle={S_SVG_MORE}             
            onMore={toggleMenuMore}
            onClose={hide}
         />

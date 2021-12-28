@@ -33,6 +33,10 @@ const CL_ROOT = "item-container"
   paddingTop: 2,
   paddingLeft: 2
 }
+, S_SVG_MORE = {
+  position: 'relative',
+  top: 2
+}
 , S_CAPTION = {
   position: 'relative',
   top: -1
@@ -275,6 +279,7 @@ class ChartContainer extends Component {
              onUnCheck={this._hSetNotActive}
              caption={caption}
              captionStyle={S_CAPTION}
+             svgMoreStyle={S_SVG_MORE}
              onClose={this._hHide}
           >
              <A.SvgHrzResize

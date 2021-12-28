@@ -13,15 +13,10 @@ const { useBool, useListen } = use
   SpinnerLoading
 } = Comp;
 
-const S = {
-  CL_SCROLL: 'scroll-container-y scroll-menu',
-  BROWSER: {
-    paddingRight: 0
-  },
-  CAPTION: {
-    top: 9
-  }
-};
+const CL_SCROLL = 'scroll-container-y scroll-menu'
+, S_BROWSER = { paddingRight: 0 };
+
+
 
 /*
 const LOADING = 'a'
@@ -96,13 +91,12 @@ const BrowserMenu = ({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <Browser isShow={isShow} style={S.BROWSER}>
+    <Browser isShow={isShow} style={S_BROWSER}>
       <BrowserCaption
          caption={caption}
-         captionStyle={S.CAPTION}
          onClose={hideBrowser}
       />
-       <ScrollPane className={S.CL_SCROLL}>
+       <ScrollPane className={CL_SCROLL}>
          {isLoading && <SpinnerLoading />}
          {menu.map((menuTopic, index) => (
             <MenuTopic key={index} {...menuTopic} />)

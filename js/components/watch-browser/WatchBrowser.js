@@ -36,7 +36,7 @@ var CL_SCROLL = 'scroll-container-y scroll-watch',
 },
     S_BT_CIRCLE = {
   position: 'relative',
-  top: 4,
+  top: -4,
   marginLeft: 20
 },
     S_GROUP_DIV = {

@@ -3,11 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -19,20 +15,17 @@ var _Comp = _interopRequireDefault(require("../Comp"));
 
 var _MenuTopic = _interopRequireDefault(require("./MenuTopic"));
 
-var useBool = _use["default"].useBool,
-    useListen = _use["default"].useListen,
-    Browser = _Comp["default"].Browser,
-    BrowserCaption = _Comp["default"].BrowserCaption,
-    ScrollPane = _Comp["default"].ScrollPane,
-    SpinnerLoading = _Comp["default"].SpinnerLoading;
-var S = {
-  CL_SCROLL: 'scroll-container-y scroll-menu',
-  BROWSER: {
-    paddingRight: 0
-  },
-  CAPTION: {
-    top: 9
-  }
+var _jsxRuntime = require("react/jsx-runtime");
+
+var useBool = _use.default.useBool,
+    useListen = _use.default.useListen,
+    Browser = _Comp.default.Browser,
+    BrowserCaption = _Comp.default.BrowserCaption,
+    ScrollPane = _Comp.default.ScrollPane,
+    SpinnerLoading = _Comp.default.SpinnerLoading;
+var CL_SCROLL = 'scroll-container-y scroll-menu',
+    S_BROWSER = {
+  paddingRight: 0
 };
 /*
 const LOADING = 'a'
@@ -77,7 +70,7 @@ var BrowserMenu = function BrowserMenu(_ref) {
       isShow = _useBool[0],
       showBrowser = _useBool[1],
       hideBrowser = _useBool[2],
-      _useLoadMenu = (0, _useLoadMenu2["default"])(),
+      _useLoadMenu = (0, _useLoadMenu2.default)(),
       isLoading = _useLoadMenu[0],
       isLoaded = _useLoadMenu[1],
       menu = _useLoadMenu[2],
@@ -112,20 +105,19 @@ var BrowserMenu = function BrowserMenu(_ref) {
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
-    style: S.BROWSER,
+    style: S_BROWSER,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BrowserCaption, {
       caption: caption,
-      captionStyle: S.CAPTION,
       onClose: hideBrowser
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
-      className: S.CL_SCROLL,
+      className: CL_SCROLL,
       children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), menu.map(function (menuTopic, index) {
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopic["default"], (0, _extends2["default"])({}, menuTopic), index);
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopic.default, Object.assign({}, menuTopic), index);
       }), children]
     })]
   });
 };
 
 var _default = BrowserMenu;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=BrowserMenu.js.map

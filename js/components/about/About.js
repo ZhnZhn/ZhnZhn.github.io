@@ -34,6 +34,9 @@ var TH_ID = 'ABOUT',
     CL_ABOUT = 'about-container',
     CL_SHOW_CONT = 'show-cont',
     CL_SCROLL = 'scroll-container-y',
+    S_BROWSER_CAPTION = {
+  paddingTop: 6
+},
     S_SCROLL_DIV = {
   height: '94%'
 },
@@ -106,6 +109,7 @@ var About = function About(_ref) {
     isShow: isShow,
     animationClass: CL_SHOW_CONT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
+      style: S_BROWSER_CAPTION,
       caption: "About",
       onClose: hide,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TwitterLink.default, {
