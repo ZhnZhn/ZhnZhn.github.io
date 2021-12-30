@@ -5,7 +5,7 @@ const _crDfProps = (option) => ({
   isPrimary: true,
   caption: "Load",
   title: "Click to load",
-  accessKey: "l",
+  hotKey: "l",
   onClick: jest.fn(),
   ...option
 });

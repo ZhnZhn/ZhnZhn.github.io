@@ -5,29 +5,15 @@ import fn from '../../charts/seriaFns'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import D from './DialogCell'
 
-const S = {
-  TEXT: {
-    paddingTop: 16,
-    paddingLeft: 16,
-    fontWeight: 600
-  },
-  ROW: {
-    paddingLeft: 8,
-  },
-  INLINE: {
-    display: 'inline-block'
-  },
-  CAPTION_1: {
-    width: 60
-  },
-  CAPTION_2: {
-    width: 100
-  },
-  INPUT: {
-    width: 40
-  }
-};
-
+const S_TEXT = {
+  padding: '16px 0 0 16px',  
+  fontWeight: 600
+}
+, S_ROW = { paddingLeft: 8 }
+, S_INLINE = { display: 'inline-block' }
+, S_CAPTION_1 = { width: 60 }
+, S_CAPTION_2 = { width: 100 }
+, S_INPUT = { width: 40 };
 
 const INIT = {
   POIN_WIDTH: 1,
@@ -76,7 +62,6 @@ class ColumnRangeDialog extends Component {
       <D.Button.Flat
          key="yes"
          caption="Yes, Connect"
-         //accessKey="y"
          isPrimary={true}
          onClick={this._hAdd}
       />
@@ -152,22 +137,22 @@ class ColumnRangeDialog extends Component {
         commandButtons={this._commandButtons}
         onClose={onClose}
       >
-        <div style={S.TEXT}>
+        <div style={S_TEXT}>
           Connect dots series by column range?
         </div>
-        <div style={S.ROW}>
+        <div style={S_ROW}>
           <D.RowInputColor
-            style={S.INLINE}
-            captionStyle={S.CAPTION_1}
+            style={S_INLINE}
+            captionStyle={S_CAPTION_1}
             caption="Color"
             initValue={c1}
-            onEnter={this._heColor}            
+            onEnter={this._heColor}
           />
           <D.RowInputText
              ref={this._refW}
-             styleRoot={S.INLINE}
-             styleCaption={S.CAPTION_1}
-             styleInput={S.INPUT}
+             styleRoot={S_INLINE}
+             styleCaption={S_CAPTION_1}
+             styleInput={S_INPUT}
              caption="Width"
              initValue={INIT.POIN_WIDTH}
              maxLength={2}
@@ -177,12 +162,12 @@ class ColumnRangeDialog extends Component {
              step={1}
           />
         </div>
-        <div style={S.ROW}>
+        <div style={S_ROW}>
           <D.RowInputText
              ref={this._refR1}
-             styleRoot={S.INLINE}
-             styleCaption={{ ...S.CAPTION_2, ...{ color: c1 }}}
-             styleInput={S.INPUT}
+             styleRoot={S_INLINE}
+             styleCaption={{...S_CAPTION_2, ...{ color: c1 }}}
+             styleInput={S_INPUT}
              caption={`R ${n1}`}
              initValue={INIT.R1}
              type="number"
@@ -190,9 +175,9 @@ class ColumnRangeDialog extends Component {
           />
           <D.RowInputText
              ref={this._refR2}
-             styleRoot={S.INLINE}
-             styleCaption={{ ...S.CAPTION_2, ...{ color: c2 }}}
-             styleInput={S.INPUT}
+             styleRoot={S_INLINE}
+             styleCaption={{...S_CAPTION_2, ...{ color: c2 }}}
+             styleInput={S_INPUT}
              caption={`R ${n2}`}
              initValue={INIT.R2}
              type="number"

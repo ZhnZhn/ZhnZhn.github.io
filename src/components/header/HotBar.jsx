@@ -40,12 +40,12 @@ const CleanButton = ({ is, onClick }) => is
  : null;
 
  const _crBtProps = (index, caption='') => {
-   const _accessKey = has.touch
+   const _hotKey = has.touch
      ? ''
      : String(index+1);
    return {
-     accessKey: _accessKey || void 0,
-     caption: _accessKey + caption.substring(0, 3),
+     hotKey: _hotKey || void 0,
+     caption: _hotKey + caption.substring(0, 3),
      title: caption
    };
  };

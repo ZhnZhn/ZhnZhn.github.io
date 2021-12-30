@@ -34,7 +34,7 @@ const FlatButton = _ref => {
     isPrimary,
     title = '',
     caption,
-    accessKey,
+    hotKey,
     children,
     onClick
   } = _ref;
@@ -44,7 +44,7 @@ const FlatButton = _ref => {
         _style = isPrimary ? { ...style,
     ...S_PRIMARY
   } : style,
-        [_hotKey, _refBt] = (0, _useHotKey.default)(accessKey, _hClick, refBt),
+        [_hotKey, _refBt] = (0, _useHotKey.default)(hotKey, _hClick, refBt),
         _title = _crTitle(title, _hotKey);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {

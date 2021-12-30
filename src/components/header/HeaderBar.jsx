@@ -1,6 +1,15 @@
 import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
 
+import {
+  HK_TOPICS,
+  HK_QUANDL_BROWSER,
+  HK_EUROSTAT_BROWSER,
+  HK_WATCHLIST_BROWSER,
+  HK_SETTINGS,
+  HK_ABOUT
+} from '../hotkeys/hotkeys'
+
 import use from '../hooks/use'
 import Comp from '../Comp'
 
@@ -69,7 +78,7 @@ const HeaderBar = ({
          style={TS.BT}
          caption="Topics"
          title="Click to open topics menu"
-         accessKey="t"
+         hotKey={HK_TOPICS}
          onClick={_toggleTopics}
         />
         <FlatButton
@@ -77,7 +86,7 @@ const HeaderBar = ({
           style={TS.BT}
           caption="Quandl"
           title="Quandl Browser"
-          accessKey="q"
+          hotKey={HK_QUANDL_BROWSER}
           onClick={BA.showQuandl}
         />
         <FlatButton
@@ -85,7 +94,7 @@ const HeaderBar = ({
           style={TS.BT}
           caption="Eurostat"
           title="Eurostat Browser"
-          accessKey="u"
+          hotKey={HK_EUROSTAT_BROWSER}
           onClick={BA.showEurostat}
         />
         <FlatButton
@@ -93,7 +102,7 @@ const HeaderBar = ({
            style={TS.BT}
            caption="Watch"
            title="Watch List Browser"
-           accessKey="w"
+           hotKey={HK_WATCHLIST_BROWSER}
            onClick={BA.showWatch}
         />
         <HotBar
@@ -108,7 +117,7 @@ const HeaderBar = ({
              style={TS.BT}
              isPrimary={true}
              title="User Settings Dialog"
-             accessKey="s"
+             hotKey={HK_SETTINGS}
              timeout={500}
              onClick={showSettings}
            >
@@ -118,7 +127,7 @@ const HeaderBar = ({
              className={CL_ABOUT}
              style={TS.BT}
              title="About Web Application ERC"
-             accessKey="a"
+             hotKey={HK_ABOUT}
              timeout={0}
              onClick={CA.showAbout}
            >

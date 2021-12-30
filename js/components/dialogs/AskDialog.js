@@ -59,11 +59,13 @@ const _getName = data => {
   return name || title || '';
 };
 
-const AskDialog = (0, _crModalDialog.default)(({
-  isShow,
-  data = _DF_DATA,
-  onClose
-}) => {
+const AskDialog = (0, _crModalDialog.default)(_ref => {
+  let {
+    isShow,
+    data = _DF_DATA,
+    onClose
+  } = _ref;
+
   const _refCaptcha = (0, _react.useRef)(),
         _hLoad = (0, _react.useCallback)(() => {
     if (_refCaptcha.current.isOk()) {
@@ -77,13 +79,11 @@ const AskDialog = (0, _crModalDialog.default)(({
     }
   }, [data, onClose]),
         _commandButtons = (0, _react.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Flat, {
-    caption: "Yes, Load" //accessKey="s"
-    ,
+    caption: "Yes, Load",
     isPrimary: true,
     onClick: _hLoad
   }, "k1"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Flat, {
-    caption: "No, Close" //accessKey="c"
-    ,
+    caption: "No, Close",
     onClick: onClose
   }, "k2")], [_hLoad, onClose]),
         _name = _getName(data);

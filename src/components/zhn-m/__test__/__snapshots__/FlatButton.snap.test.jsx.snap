@@ -2,7 +2,7 @@
 
 exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
 <button
-  accessKey="l"
+  hotKey="l"
   className="bt-flat"
   onClick={[Function]}
   tabIndex={0}
@@ -16,7 +16,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
       className="bt-flat__span"
     >
       <span>
-        
+
       </span>
       <span
         style={
@@ -37,7 +37,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
 
 exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
 <button
-  accessKey="l"
+  hotKey="l"
   className="bt-flat"
   onClick={[Function]}
   style={
@@ -56,7 +56,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
       className="bt-flat__span"
     >
       <span>
-        
+
       </span>
       <span
         style={

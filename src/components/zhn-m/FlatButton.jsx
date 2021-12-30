@@ -22,7 +22,7 @@ const FlatButton = ({
   isPrimary,
   title='',
   caption,
-  accessKey,
+  hotKey,
   children,
   onClick
 }) => {
@@ -31,7 +31,7 @@ const FlatButton = ({
   , _style = isPrimary
        ? {...style, ...S_PRIMARY}
        : style
-  , [_hotKey, _refBt] = useHotKey(accessKey, _hClick, refBt)
+  , [_hotKey, _refBt] = useHotKey(hotKey, _hClick, refBt)
   , _title = _crTitle(title, _hotKey);
   return (
     <button

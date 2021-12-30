@@ -52,44 +52,56 @@ const _calcMaxButtons = maxButtons => {
   }
 };
 
-const CleanButton = ({
-  is,
-  onClick
-}) => is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-  timeout: 0,
-  style: S_BT_CL,
-  caption: "CL",
-  title: "Clean Hot Bar",
-  onClick: onClick
-}, "BT_CLEAN") : null;
+const CleanButton = _ref => {
+  let {
+    is,
+    onClick
+  } = _ref;
+  return is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    timeout: 0,
+    style: S_BT_CL,
+    caption: "CL",
+    title: "Clean Hot Bar",
+    onClick: onClick
+  }, "BT_CLEAN") : null;
+};
 
-const _crBtProps = (index, caption = '') => {
-  const _accessKey = _has.default.touch ? '' : String(index + 1);
+const _crBtProps = function (index, caption) {
+  if (caption === void 0) {
+    caption = '';
+  }
+
+  const _hotKey = _has.default.touch ? '' : String(index + 1);
 
   return {
-    accessKey: _accessKey || void 0,
-    caption: _accessKey + caption.substring(0, 3),
+    hotKey: _hotKey || void 0,
+    caption: _hotKey + caption.substring(0, 3),
     title: caption
   };
 };
 
-const _crHotBtItem = (conf, index, {
-  style,
-  onShowDialog
-}) => /*#__PURE__*/(0, _react.createElement)(_FlatButton.default, { ..._crBtProps(index, conf.caption),
-  key: conf.type,
-  timeout: 0,
-  style: style,
-  onClick: onShowDialog.bind(null, conf.type)
-});
+const _crHotBtItem = (conf, index, _ref2) => {
+  let {
+    style,
+    onShowDialog
+  } = _ref2;
+  return /*#__PURE__*/(0, _react.createElement)(_FlatButton.default, { ..._crBtProps(index, conf.caption),
+    key: conf.type,
+    timeout: 0,
+    style: style,
+    onClick: onShowDialog.bind(null, conf.type)
+  });
+};
 
-const HotBar = ({
-  maxButtons = 5,
-  btStyle,
-  store,
-  closeDialogAction,
-  onShowDialog
-}) => {
+const HotBar = _ref3 => {
+  let {
+    maxButtons = 5,
+    btStyle,
+    store,
+    closeDialogAction,
+    onShowDialog
+  } = _ref3;
+
   const _maxNumberOfBts = (0, _useRefInit.default)(() => _calcMaxButtons(maxButtons)),
         [hotButtons, setHotButtons] = (0, _react.useState)([]),
         _hClean = (0, _react.useCallback)(() => setHotButtons([]), []);

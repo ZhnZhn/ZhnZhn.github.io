@@ -11,44 +11,37 @@ import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
 import InputSelect from '../zhn-select/InputSelect';
 
-const _S = {
-  LABEL: {
-    display: 'inline-block',
-    color: '#1b75bb',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  }
+const _S_LABEL = {
+  display: 'inline-block',
+  color: '#1b75bb',
+  fontSize: '16px',
+  fontWeight: 'bold'
+}
+
+, S_GAP_BETWEEN_GROUP = { marginTop: 10 }
+, S_LABEL = {
+  ..._S_LABEL,
+  width: 100,
+  paddingRight: 5,
+  textAlign: 'right'
+}
+, S_LABEL_WIDTH = {
+  ..._S_LABEL,  
+  paddingRight: 5,
+  paddingLeft: 3
+}
+, S_LABEL_HEIGHT = { paddingLeft: 6 }
+, S_INPUT_NUMBER = {
+  width: 60,
+  height: 30,
+  marginLeft: 0,
+}
+, S_INPUT_TEXT = {
+  width: 250,
+  height: 30,
+  marginLeft: 0
 };
 
-const S = {
-  GAP_BETWEEN_GROUP: {
-    marginTop: 10
-  },
-  LABEL: {
-    ..._S.LABEL,
-    width: 100,
-    paddingRight: 5,
-    textAlign: 'right'
-  },
-  LABEL_WIDTH : {
-    ..._S.LABEL,
-    paddingRight: 5,
-    paddingLeft: 3
-  },
-  LABEL_HEIGHT: {
-    paddingLeft: 6,
-  },
-  INPUT_NUMBER: {
-    width: 60,
-    height: 30,
-    marginLeft: 0,
-  },
-  INPUT_TEXT: {
-    width: 250,
-    height: 30,
-    marginLeft: 0
-  }
-};
 
 const C = {
   APP_HTML: 'Web app ERC https://zhnzhn.github.io',
@@ -91,7 +84,6 @@ class CustomizeExportDialog extends Component {
          <Button.Flat
             key="export"
             caption="Export"
-            //accessKey="x"
             isPrimary={true}
             onClick={this._hExport}
          />
@@ -202,50 +194,50 @@ class CustomizeExportDialog extends Component {
          />
          <ShowHide isShow={isShowDimension}>
            <div style={STYLE.ROW}>
-              <span style={S.LABEL}>Dimension:</span>
-              <span style={S.LABEL_WIDTH}>Width:</span>
+              <span style={S_LABEL}>Dimension:</span>
+              <span style={S_LABEL_WIDTH}>Width:</span>
               <InputText
                 ref={this._refInputWidth}
                 type="number"
                 placeholder={chartWidth}
                 initValue={chartWidth}
-                style={S.INPUT_NUMBER}
+                style={S_INPUT_NUMBER}
                 min={C.W_MIN}
                 max={C.W_MAX}
               />
-              <span style={{ ...S.LABEL_WIDTH, ...S.LABEL_HEIGHT}}>Height:</span>
+              <span style={{...S_LABEL_WIDTH, ...S_LABEL_HEIGHT}}>Height:</span>
               <InputText
                 ref={this._refInputHeight}
                 type="number"
                 placeholder={chartHeight}
                 initValue={chartHeight}
-                style={S.INPUT_NUMBER}
+                style={S_INPUT_NUMBER}
                 min={C.H_MIN}
                 max={C.H_MAX}
               />
            </div>
          </ShowHide>
          <ShowHide isShow={isShowTitle}>
-           <div style={{ ...STYLE.ROW, ...S.GAP_BETWEEN_GROUP }}>
-             <span style={S.LABEL}>Title:</span>
+           <div style={{ ...STYLE.ROW, ...S_GAP_BETWEEN_GROUP }}>
+             <span style={S_LABEL}>Title:</span>
              <InputText
                ref={this._refInputTitle}
                initValue={title}
-               style={S.INPUT_TEXT}
+               style={S_INPUT_TEXT}
              />
            </div>
            <div style={STYLE.ROW}>
-             <span style={S.LABEL}>Subtitle:</span>
+             <span style={S_LABEL}>Subtitle:</span>
              <InputText
                ref={this._refInputSubtitle}
                initValue={subtitle}
-               style={S.INPUT_TEXT}
+               style={S_INPUT_TEXT}
              />
            </div>
          </ShowHide>
          <ShowHide isShow={isShowStyle}>
-           <div style={{ ...STYLE.ROW, ...S.GAP_BETWEEN_GROUP}}>
-             <span style={S.LABEL}>Style:</span>
+           <div style={{...STYLE.ROW, ...S_GAP_BETWEEN_GROUP}}>
+             <span style={S_LABEL}>Style:</span>
              <InputSelect
                width="250"
                options={this.optionStyles}

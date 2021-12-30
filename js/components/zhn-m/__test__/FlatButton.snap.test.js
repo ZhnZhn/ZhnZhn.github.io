@@ -2,36 +2,35 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
 var _reactTestRenderer = _interopRequireDefault(require("react-test-renderer"));
 
 var _FlatButton = _interopRequireDefault(require("../FlatButton"));
 
-var _crDfProps = function _crDfProps(option) {
-  return (0, _extends2["default"])({
-    isPrimary: true,
-    caption: "Load",
-    title: "Click to load",
-    accessKey: "l",
-    onClick: jest.fn()
-  }, option);
-};
+var _jsxRuntime = require("react/jsx-runtime");
 
-describe('FlatButton Snap', function () {
-  test('should renders correctly with isPrimary true', function () {
-    var tree = _reactTestRenderer["default"].create( /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], (0, _extends2["default"])({}, _crDfProps({
-      isPrimary: true
-    })))).toJSON();
+const _crDfProps = option => ({
+  isPrimary: true,
+  caption: "Load",
+  title: "Click to load",
+  hotKey: "l",
+  onClick: jest.fn(),
+  ...option
+});
+
+describe('FlatButton Snap', () => {
+  test('should renders correctly with isPrimary true', () => {
+    const tree = _reactTestRenderer.default.create( /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, { ..._crDfProps({
+        isPrimary: true
+      })
+    })).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
-  test('should renders correctly with isPrimary false', function () {
-    var tree = _reactTestRenderer["default"].create( /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton["default"], (0, _extends2["default"])({}, _crDfProps({
-      isPrimary: false
-    })))).toJSON();
+  test('should renders correctly with isPrimary false', () => {
+    const tree = _reactTestRenderer.default.create( /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, { ..._crDfProps({
+        isPrimary: false
+      })
+    })).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

@@ -49,7 +49,6 @@ const CommandButtons = ({
         style={STYLE.BT}
         caption="Show"
         title="Show Item Container"
-        //accessKey="s"
         onClick={onShow}
       />
     }
@@ -58,8 +57,7 @@ const CommandButtons = ({
       timeout={0}
       style={STYLE.BT}
       caption="Close"
-      title="Close Draggable Dialog"
-      //accessKey="c"
+      title="Close Draggable Dialog"      
       onClick={onClose}
     />
   </div>

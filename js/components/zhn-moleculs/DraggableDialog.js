@@ -47,42 +47,45 @@ const TH_ID = 'DRAGGABLE_DIALOG',
 
 const _isFn = fn => typeof fn === 'function';
 
-const CommandButtons = ({
-  buttons,
-  onShow,
-  onClose
-}) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-  style: _Dialog.default.COMMAND_DIV,
-  children: [buttons, _isFn(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-    timeout: 0,
-    style: _Dialog.default.BT,
-    caption: "Show",
-    title: "Show Item Container" //accessKey="s"
-    ,
-    onClick: onShow
-  }, "show"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-    timeout: 0,
-    style: _Dialog.default.BT,
-    caption: "Close",
-    title: "Close Draggable Dialog" //accessKey="c"
-    ,
-    onClick: onClose
-  }, "close")]
-});
+const CommandButtons = _ref => {
+  let {
+    buttons,
+    onShow,
+    onClose
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: _Dialog.default.COMMAND_DIV,
+    children: [buttons, _isFn(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      timeout: 0,
+      style: _Dialog.default.BT,
+      caption: "Show",
+      title: "Show Item Container",
+      onClick: onShow
+    }, "show"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      timeout: 0,
+      style: _Dialog.default.BT,
+      caption: "Close",
+      title: "Close Draggable Dialog",
+      onClick: onClose
+    }, "close")]
+  });
+};
 
 const FN_NOOP = () => {};
 
-const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)(({
-  isShow,
-  style,
-  menuModel,
-  caption,
-  children,
-  commandButtons,
-  onShowChart,
-  onFront,
-  onClose = FN_NOOP
-}, ref) => {
+const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
+  let {
+    isShow,
+    style,
+    menuModel,
+    caption,
+    children,
+    commandButtons,
+    onShowChart,
+    onFront,
+    onClose = FN_NOOP
+  } = _ref2;
+
   const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
         _hKeyDown = useKeyEscape(onClose),
         [isMore, toggleIsMore] = useToggle(false),

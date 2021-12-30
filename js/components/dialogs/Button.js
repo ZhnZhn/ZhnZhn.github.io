@@ -16,25 +16,29 @@ const S_LOAD = {
   color: '#232f3b'
 };
 
-const Load = ({
-  onClick
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-  style: S_LOAD,
-  caption: "Load",
-  title: "Load Item to Container" //accessKey="l"
-  ,
-  onClick: onClick
-});
+const Load = _ref => {
+  let {
+    onClick
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    style: S_LOAD,
+    caption: "Load",
+    title: "Load Item to Container",
+    onClick: onClick
+  });
+};
 
-const Show = ({
-  onClick
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-  style: S_SHOW,
-  caption: "Show",
-  title: "Show Item Container" //accessKey="s"
-  ,
-  onClick: onClick
-});
+const Show = _ref2 => {
+  let {
+    onClick
+  } = _ref2;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    style: S_SHOW,
+    caption: "Show",
+    title: "Show Item Container",
+    onClick: onClick
+  });
+};
 
 var _default = {
   Load,

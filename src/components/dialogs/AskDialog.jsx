@@ -59,14 +59,12 @@ const AskDialog = crModalDialog(({
      <Button.Flat
        key="k1"
        caption="Yes, Load"
-       //accessKey="s"
        isPrimary={true}
        onClick={_hLoad}
      />,
      <Button.Flat
        key="k2"
        caption="No, Close"
-       //accessKey="c"
        onClick={onClose}
      />
  ], [_hLoad, onClose])

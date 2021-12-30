@@ -74,7 +74,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
 
     //edit jsx-a11y rules
-    "jsx-a11y/no-access-key": 0,
+    //"jsx-a11y/no-access-key": 0,
     "jsx-a11y/label-has-for": 0
   }
 }

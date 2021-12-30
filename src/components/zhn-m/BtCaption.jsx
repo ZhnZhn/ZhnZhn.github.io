@@ -1,11 +1,11 @@
 const S_ACCESS_KEY = { textDecoration: 'underline' };
 
-const _crAccessKeyIndex = (hotKey, caption) => hotKey
+const _crHotKeyIndex = (hotKey, caption) => hotKey
   ? caption.toLowerCase().indexOf(hotKey)
   : -1;
 
 const _crCaption = (hotKey, caption) => {
-  const index = _crAccessKeyIndex(hotKey, caption);
+  const index = _crHotKeyIndex(hotKey, caption);
   if (index === -1) { return caption; }
 
   const _before = caption.substring(0, index)

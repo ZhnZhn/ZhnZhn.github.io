@@ -9,6 +9,8 @@ var _ComponentActions = _interopRequireWildcard(require("../../flux/actions/Comp
 
 var _BrowserActions = _interopRequireDefault(require("../../flux/actions/BrowserActions"));
 
+var _hotkeys = require("../hotkeys/hotkeys");
+
 var _use = _interopRequireDefault(require("../hooks/use"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
@@ -61,10 +63,11 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
 },
       MODEL = (0, _BrowserModel.default)();
 
-const HeaderBar = ({
-  store,
-  showSettings
-}) => {
+const HeaderBar = _ref => {
+  let {
+    store,
+    showSettings
+  } = _ref;
   const [isTopics, toggleTopics] = useToggle(false),
         [refBt, _toggleTopics] = useFnFocus(toggleTopics),
         TS = useTheme(THEME_ID);
@@ -87,28 +90,28 @@ const HeaderBar = ({
       style: TS.BT,
       caption: "Topics",
       title: "Click to open topics menu",
-      accessKey: "t",
+      hotKey: _hotkeys.HK_TOPICS,
       onClick: _toggleTopics
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       className: CL_QUANDL,
       style: TS.BT,
       caption: "Quandl",
       title: "Quandl Browser",
-      accessKey: "q",
+      hotKey: _hotkeys.HK_QUANDL_BROWSER,
       onClick: _BrowserActions.default.showQuandl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       className: CL_EUROSTAT,
       style: TS.BT,
       caption: "Eurostat",
       title: "Eurostat Browser",
-      accessKey: "u",
+      hotKey: _hotkeys.HK_EUROSTAT_BROWSER,
       onClick: _BrowserActions.default.showEurostat
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       className: CL_WATCH,
       style: TS.BT,
       caption: "Watch",
       title: "Watch List Browser",
-      accessKey: "w",
+      hotKey: _hotkeys.HK_WATCHLIST_BROWSER,
       onClick: _BrowserActions.default.showWatch
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
       btStyle: TS.BT_HOT,
@@ -123,7 +126,7 @@ const HeaderBar = ({
         style: TS.BT,
         isPrimary: true,
         title: "User Settings Dialog",
-        accessKey: "s",
+        hotKey: _hotkeys.HK_SETTINGS,
         timeout: 500,
         onClick: showSettings,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgSettings, {
@@ -133,7 +136,7 @@ const HeaderBar = ({
         className: CL_ABOUT,
         style: TS.BT,
         title: "About Web Application ERC",
-        accessKey: "a",
+        hotKey: _hotkeys.HK_ABOUT,
         timeout: 0,
         onClick: _ComponentActions.default.showAbout,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgInfo, {

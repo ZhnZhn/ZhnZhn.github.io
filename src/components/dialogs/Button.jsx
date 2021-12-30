@@ -8,7 +8,6 @@ const Load = ({ onClick }) => (
     style={S_LOAD}
     caption="Load"
     title="Load Item to Container"
-    //accessKey="l"
     onClick={onClick}
   />
 );
@@ -18,7 +17,6 @@ const Show = ({ onClick }) => (
     style={S_SHOW}
     caption="Show"
     title="Show Item Container"
-    //accessKey="s"
     onClick={onClick}
   />
 );
