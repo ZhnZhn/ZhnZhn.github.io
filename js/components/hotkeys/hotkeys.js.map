@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hotkeys/hotkeys.js"
+ ],
+ "file": "../../../src/components/hotkeys/hotkeys.js",
+ "names": [
+  "HK_TOPICS",
+  "HK_QUANDL_BROWSER",
+  "HK_EUROSTAT_BROWSER",
+  "HK_WATCHLIST_BROWSER",
+  "HK_SETTINGS",
+  "HK_ABOUT"
+ ],
+ "mappings": ";;;;AACO,MAAMA,SAAS,GAAG,GAAlB;;AACA,MAAMC,iBAAiB,GAAG,GAA1B;;AACA,MAAMC,mBAAmB,GAAG,GAA5B;;AACA,MAAMC,oBAAoB,GAAG,GAA7B;;AAEA,MAAMC,WAAW,GAAG,GAApB;;AACA,MAAMC,QAAQ,GAAG,GAAjB"
+}

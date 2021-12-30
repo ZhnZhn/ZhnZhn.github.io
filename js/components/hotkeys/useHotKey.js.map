@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hotkeys/useHotKey.js"
+ ],
+ "file": "../../../src/components/hotkeys/useHotKey.js",
+ "names": [
+  "HAS_TOUCH",
+  "has",
+  "touch",
+  "useHotKey",
+  "hotKey",
+  "onKeyDown",
+  "refBt",
+  "hmHotKeys",
+  "HotKeysContext",
+  "ref"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA;;AAEA,MAAMA,SAAS,GAAGC,aAAIC,KAAtB;;AAEA,MAAMC,SAAS,GAAG,CAACC,MAAD,EAASC,SAAT,EAAoBC,KAApB,KAA8B;AAC9C,QAAMC,SAAS,GAAG,uBAAWC,uBAAX,CAAlB;AAAA,QACEC,GAAG,GAAG,mBAAO,IAAP,CADR;AAGA;;AACA,wBAAU,MAAM;AACd,QAAI,CAACT,SAAD,IAAcI,MAAlB,EAA0B;AACxBG,MAAAA,SAAS,CAACH,MAAD,CAAT,GAAoB,CAACE,KAAK,IAAIG,GAAV,EAAeJ,SAAf,CAApB;AACA,aAAO,MAAME,SAAS,CAACH,MAAD,CAAT,GAAoB,KAAK,CAAtC;AACD;AACF,GALD,EAKG,CAACA,MAAD,EAASC,SAAT,CALH,EAL8C,CAW9C;;AACA;;AAEA,SAAO,CACL,CAACL,SAAD,IAAcI,MAAd,GAAuBA,MAAvB,GAAgC,EAD3B,EAELE,KAAK,IAAIG,GAFJ,CAAP;AAID,CAlBD;;eAoBeN,S"
+}

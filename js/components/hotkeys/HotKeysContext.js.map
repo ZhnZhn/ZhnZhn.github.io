@@ -1,0 +1,11 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hotkeys/HotKeysContext.js"
+ ],
+ "file": "../../../src/components/hotkeys/HotKeysContext.js",
+ "names": [
+  "HotKeysContext"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,cAAc,gBAAG,0BAAc,EAAd,CAAvB;eAEeA,c"
+}
