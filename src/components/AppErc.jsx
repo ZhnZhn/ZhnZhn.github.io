@@ -23,7 +23,7 @@ import HotKeysProvider from './hotkeys/HotKeysProvider';
 
 import checkBuild from './checkBuild'
 
-const BUILD_DATE = '28-12-2021'
+const BUILD_DATE = '30-12-2021'
 , CL = "component-container"
 , ENABLE_HOT_KEYS = !has.touch;
 

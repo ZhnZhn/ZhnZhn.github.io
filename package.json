@@ -95,6 +95,7 @@
     "webpack-dev-server": "^4.6.0"
   },
   "jest": {
+    "testEnvironment": "jsdom", 
     "roots": [
       "<rootDir>/js/charts",
       "<rootDir>/js/charts/plugin",
