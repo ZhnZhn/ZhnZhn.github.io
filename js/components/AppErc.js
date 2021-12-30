@@ -33,57 +33,63 @@ var _uiTheme = _interopRequireDefault(require("./styles/uiTheme"));
 
 var _ThemeContext = _interopRequireDefault(require("./hoc/ThemeContext"));
 
+var _has = _interopRequireDefault(require("./has"));
+
+var _HotKeysProvider = _interopRequireDefault(require("./hotkeys/HotKeysProvider"));
+
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var BUILD_DATE = '28-12-2021';
-var CL = "component-container";
+const BUILD_DATE = '28-12-2021',
+      CL = "component-container",
+      ENABLE_HOT_KEYS = !_has.default.touch;
 
-var showSettings = _ComponentActions.default.showSettings.bind(null, _ChartStore.default.exportSettingFn());
+const showSettings = _ComponentActions.default.showSettings.bind(null, _ChartStore.default.exportSettingFn());
 
-var AppErc = function AppErc() {
-  var _useState = (0, _react.useState)(_uiTheme.default),
-      theme = _useState[0],
-      setTheme = _useState[1];
-
-  (0, _useListen.default)(_ChartStore.default, function (actionType, themeName) {
+const AppErc = () => {
+  const [theme, setTheme] = (0, _react.useState)(_uiTheme.default);
+  (0, _useListen.default)(_ChartStore.default, (actionType, themeName) => {
     if (actionType === _ComponentActions.ComponentActionTypes.CHANGE_THEME) {
       theme.setThemeName(themeName);
-      setTheme(Object.assign({}, theme));
+      setTheme({ ...theme
+      });
     }
   });
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     _LocationSearch.default.load();
 
     (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.default.showReload);
   }, []);
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ThemeContext.default.Provider, {
-    value: theme,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
-      store: _ChartStore.default,
-      showSettings: showSettings
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: CL,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotKeysProvider.default, {
+    is: ENABLE_HOT_KEYS,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ThemeContext.default.Provider, {
+      value: theme,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
         store: _ChartStore.default,
-        initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC,
-        showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
-        onCloseDialog: _ComponentActions.default.closeDialog
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {
-        store: _ChartStore.default,
-        isInitShow: true
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
-        store: _ChartStore.default,
-        addAction: _ChartActions.CHAT_INIT_AND_SHOW
+        showSettings: showSettings
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: CL,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
+          store: _ChartStore.default,
+          initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC,
+          showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+          onCloseDialog: _ComponentActions.default.closeDialog
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {
+          store: _ChartStore.default,
+          isInitShow: true
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
+          store: _ChartStore.default,
+          addAction: _ChartActions.CHAT_INIT_AND_SHOW
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
+        store: _ChartStore.default
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
-      store: _ChartStore.default
-    })]
+    })
   });
 };
 

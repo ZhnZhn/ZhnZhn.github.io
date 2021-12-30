@@ -18,11 +18,14 @@ import DialogContainer from './dialogs/DialogContainer';
 
 import initialTheme from './styles/uiTheme'
 import ThemeContext from './hoc/ThemeContext'
+import has from './has'
+import HotKeysProvider from './hotkeys/HotKeysProvider';
 
 import checkBuild from './checkBuild'
 
-const BUILD_DATE = '28-12-2021';
-const CL = "component-container"
+const BUILD_DATE = '28-12-2021'
+, CL = "component-container"
+, ENABLE_HOT_KEYS = !has.touch;
 
 const showSettings = CA.showSettings
  .bind(null, ChartStore.exportSettingFn())
@@ -43,23 +46,25 @@ const AppErc = () => {
   }, [])
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <HeaderBar store={ChartStore} showSettings={showSettings} />
-      <div className={CL}>
-         <BrowserContainer
-            store={ChartStore}
-            initBrowserAction={BAT_INIT_BROWSER_DYNAMIC}
-            showDialogAction={CAT.SHOW_DIALOG}
-            onCloseDialog={CA.closeDialog}
-         />
-         <About store={ChartStore} isInitShow={true} />
-         <CompContainer
-           store={ChartStore}
-           addAction={CHAT_INIT_AND_SHOW}
-         />
-     </div>
-     <DialogContainer store={ChartStore} />
-   </ThemeContext.Provider>
+    <HotKeysProvider is={ENABLE_HOT_KEYS}>
+      <ThemeContext.Provider value={theme}>
+        <HeaderBar store={ChartStore} showSettings={showSettings} />
+        <div className={CL}>
+           <BrowserContainer
+              store={ChartStore}
+              initBrowserAction={BAT_INIT_BROWSER_DYNAMIC}
+              showDialogAction={CAT.SHOW_DIALOG}
+              onCloseDialog={CA.closeDialog}
+           />
+           <About store={ChartStore} isInitShow={true} />
+           <CompContainer
+             store={ChartStore}
+             addAction={CHAT_INIT_AND_SHOW}
+           />
+       </div>
+       <DialogContainer store={ChartStore} />
+     </ThemeContext.Provider>
+   </HotKeysProvider>
   );
 }
 
