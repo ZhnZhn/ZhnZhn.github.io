@@ -9,10 +9,10 @@ const S_ACCESS_KEY = {
   textDecoration: 'underline'
 };
 
-const _crAccessKeyIndex = (accessKey, caption) => accessKey ? caption.toLowerCase().indexOf(accessKey) : -1;
+const _crAccessKeyIndex = (hotKey, caption) => hotKey ? caption.toLowerCase().indexOf(hotKey) : -1;
 
-const _crCaption = (accessKey, caption) => {
-  const index = _crAccessKeyIndex(accessKey, caption);
+const _crCaption = (hotKey, caption) => {
+  const index = _crAccessKeyIndex(hotKey, caption);
 
   if (index === -1) {
     return caption;
@@ -34,19 +34,21 @@ const _crCaption = (accessKey, caption) => {
   });
 };
 
-const BtCaption = ({
-  className,
-  caption,
-  accessKey,
-  children
-}) => {
+const BtCaption = _ref => {
+  let {
+    className,
+    caption,
+    hotKey,
+    children
+  } = _ref;
+
   if (!caption) {
     return null;
   }
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
     className: className,
-    children: [_crCaption(accessKey, caption), children]
+    children: [_crCaption(hotKey, caption), children]
   });
 };
 

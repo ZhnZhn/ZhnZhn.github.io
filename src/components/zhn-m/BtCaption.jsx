@@ -1,11 +1,11 @@
 const S_ACCESS_KEY = { textDecoration: 'underline' };
 
-const _crAccessKeyIndex = (accessKey, caption) => accessKey
-  ? caption.toLowerCase().indexOf(accessKey)
+const _crAccessKeyIndex = (hotKey, caption) => hotKey
+  ? caption.toLowerCase().indexOf(hotKey)
   : -1;
 
-const _crCaption = (accessKey, caption) => {
-  const index = _crAccessKeyIndex(accessKey, caption);
+const _crCaption = (hotKey, caption) => {
+  const index = _crAccessKeyIndex(hotKey, caption);
   if (index === -1) { return caption; }
 
   const _before = caption.substring(0, index)
@@ -23,14 +23,14 @@ const _crCaption = (accessKey, caption) => {
 const BtCaption = ({
   className,
   caption,
-  accessKey,
+  hotKey,
   children
 }) => {
   if (!caption) { return null; }
 
   return (
     <span className={className}>
-      {_crCaption(accessKey, caption)}
+      {_crCaption(hotKey, caption)}
       {children}
     </span>
   );
