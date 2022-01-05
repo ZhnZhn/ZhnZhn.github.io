@@ -27,82 +27,82 @@ var _LogosBar = _interopRequireDefault(require("./LogosBar"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var useBool = _use.default.useBool,
-    useListen = _use.default.useListen,
-    useTheme = _use.default.useTheme;
-var TH_ID = 'ABOUT',
-    CL_ABOUT = 'about-container',
-    CL_SHOW_CONT = 'show-cont',
-    CL_SCROLL = 'scroll-container-y',
-    S_BROWSER_CAPTION = {
+const {
+  useBool,
+  useListen,
+  useTheme
+} = _use.default;
+const TH_ID = 'ABOUT',
+      CL_ABOUT = 'about-container',
+      CL_SHOW_CONT = 'show-cont',
+      CL_SCROLL = 'scroll-container-y',
+      S_BROWSER_CAPTION = {
   paddingTop: 6
 },
-    S_SCROLL_DIV = {
+      S_SCROLL_DIV = {
   height: '94%'
 },
-    S_DIV_WRAPPER = {
+      S_DIV_WRAPPER = {
   paddingLeft: 12,
   paddingRight: 5,
   lineHeight: 1.4,
   color: 'gray',
   fontWeight: 'bold'
 },
-    S_LH_18 = {
+      S_LH_18 = {
   lineHeight: 1.8
 },
-    S_LH_14 = {
+      S_LH_14 = {
   lineHeight: 1.4
 },
-    S_MB_8EM = {
+      S_MB_8EM = {
   marginBottom: '0.8em'
 },
-    S_MB_6EM = {
+      S_MB_6EM = {
   marginBottom: '0.6em'
 },
-    S_MB_4 = {
+      S_MB_4 = {
   marginBottom: 4
 },
-    S_MT_4 = {
+      S_MT_4 = {
   marginTop: 4
 },
-    S_BT_TWITTER = {
+      S_BT_TWITTER = {
   marginLeft: 12
 },
-    S_GREEN = {
+      S_GREEN = {
   color: '#80c040'
 },
-    S_BLACK = {
+      S_BLACK = {
   color: 'black'
 },
-    S_BLUE_DARK = {
+      S_BLUE_DARK = {
   color: '#2f7ed8'
 },
-    S_RED = {
+      S_RED = {
   color: '#f44336'
 },
-    STEP_T1 = "Please, choose a data source Browser from Topics [t]",
-    STEP_T2 = "Next, choose a dataset menu item in the the opended up Browser",
-    STEP_T3 = "Select params and enter query date in the opened up draggable Dialog",
-    STEP_T4 = "Click a button Load",
-    IS_CLOSE_PROVIDERS = !_has.default.isWideWidth;
+      STEP_T1 = "Please, choose a data source Browser from Topics [t]",
+      STEP_T2 = "Next, choose a dataset menu item in the the opended up Browser",
+      STEP_T3 = "Select params and enter query date in the opened up draggable Dialog",
+      STEP_T4 = "Click a button Load",
+      IS_CLOSE_PROVIDERS = !_has.default.isWideWidth;
 
-var About = function About(_ref) {
-  var store = _ref.store,
-      isInitShow = _ref.isInitShow;
+const _isHide = actionType => actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW;
 
-  var _useBool = useBool(isInitShow),
-      isShow = _useBool[0],
-      show = _useBool[1],
-      hide = _useBool[2];
-
-  useListen(store, function (actionType) {
+const About = _ref => {
+  let {
+    store
+  } = _ref;
+  const [isShow, show, hide] = useBool(true),
+        TS = useTheme(TH_ID);
+  useListen(store, actionType => {
     if (actionType === _ComponentActions.ComponentActionTypes.SHOW_ABOUT) {
       show();
-    } else if (actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW) {
+    } else if (_isHide(actionType)) {
       hide();
     }
   });
-  var TS = useTheme(TH_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.ShowHide, {
     className: CL_ABOUT,
     style: TS.ROOT,

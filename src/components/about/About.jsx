@@ -52,23 +52,21 @@ const TH_ID = 'ABOUT'
 
 , IS_CLOSE_PROVIDERS = !has.isWideWidth;
 
-const About = ({
-  store,
-  isInitShow
-}) => {
-  const [isShow, show, hide] = useBool(isInitShow);
+const _isHide = actionType =>
+  actionType === CHAT_INIT_AND_SHOW
+  || actionType === CHAT_SHOW;
+
+const About = ({ store }) => {
+  const [isShow, show, hide] = useBool(true)
+  , TS = useTheme(TH_ID);
 
   useListen(store, actionType => {
     if (actionType === CAT.SHOW_ABOUT){
       show()
-    } else if (actionType === CHAT_INIT_AND_SHOW
-      || actionType === CHAT_SHOW
-    ) {
+    } else if (_isHide(actionType)) {
       hide()
     }
   })
-
-  const TS = useTheme(TH_ID);
 
   return (
     <A.ShowHide

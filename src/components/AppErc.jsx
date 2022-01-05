@@ -40,7 +40,7 @@ const AppErc = () => {
             showDialogAction={CAT.SHOW_DIALOG}
             onCloseDialog={CA.closeDialog}
          />
-         <About store={ChartStore} isInitShow={true} />
+         <About store={ChartStore} />
          <CompContainer
            store={ChartStore}
            addAction={CHAT_INIT_AND_SHOW}

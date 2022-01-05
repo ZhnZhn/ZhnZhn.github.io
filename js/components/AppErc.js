@@ -61,8 +61,7 @@ const AppErc = () => {
         showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
         onCloseDialog: _ComponentActions.default.closeDialog
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {
-        store: _ChartStore.default,
-        isInitShow: true
+        store: _ChartStore.default
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
         store: _ChartStore.default,
         addAction: _ChartActions.CHAT_INIT_AND_SHOW
