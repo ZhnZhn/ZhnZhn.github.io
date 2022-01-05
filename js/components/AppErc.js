@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _useListen = _interopRequireDefault(require("./hooks/useListen"));
-
 var _LocationSearch = _interopRequireDefault(require("../flux/logic/LocationSearch"));
 
 var _ChartStore = _interopRequireDefault(require("../flux/stores/ChartStore"));
@@ -29,13 +27,11 @@ var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContai
 
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 
-var _uiTheme = _interopRequireDefault(require("./styles/uiTheme"));
-
-var _ThemeContext = _interopRequireDefault(require("./hoc/ThemeContext"));
-
 var _has = _interopRequireDefault(require("./has"));
 
 var _HotKeysProvider = _interopRequireDefault(require("./hotkeys/HotKeysProvider"));
+
+var _ThemeProvider = _interopRequireDefault(require("./styles/ThemeProvider"));
 
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
@@ -52,14 +48,6 @@ const BUILD_DATE = '30-12-2021',
 const showSettings = _ComponentActions.default.showSettings.bind(null, _ChartStore.default.exportSettingFn());
 
 const AppErc = () => {
-  const [theme, setTheme] = (0, _react.useState)(_uiTheme.default);
-  (0, _useListen.default)(_ChartStore.default, (actionType, themeName) => {
-    if (actionType === _ComponentActions.ComponentActionTypes.CHANGE_THEME) {
-      theme.setThemeName(themeName);
-      setTheme({ ...theme
-      });
-    }
-  });
   (0, _react.useEffect)(() => {
     _LocationSearch.default.load();
 
@@ -67,8 +55,9 @@ const AppErc = () => {
   }, []);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotKeysProvider.default, {
     is: ENABLE_HOT_KEYS,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ThemeContext.default.Provider, {
-      value: theme,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ThemeProvider.default, {
+      store: _ChartStore.default,
+      actionChangeTheme: _ComponentActions.ComponentActionTypes.CHANGE_THEME,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
         store: _ChartStore.default,
         showSettings: showSettings

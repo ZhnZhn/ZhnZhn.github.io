@@ -1,7 +1,5 @@
 
-import { useState, useEffect } from 'react';
-
-import useListen from './hooks/useListen'
+import { useEffect } from 'react';
 
 import LocationSearch from '../flux/logic/LocationSearch';
 import ChartStore from '../flux/stores/ChartStore';
@@ -16,10 +14,9 @@ import About from './about/About';
 import CompContainer from './zhn-containers/CompContainer';
 import DialogContainer from './dialogs/DialogContainer';
 
-import initialTheme from './styles/uiTheme'
-import ThemeContext from './hoc/ThemeContext'
 import has from './has'
 import HotKeysProvider from './hotkeys/HotKeysProvider';
+import ThemeProvider from './styles/ThemeProvider';
 
 import checkBuild from './checkBuild'
 
@@ -30,16 +27,8 @@ const BUILD_DATE = '30-12-2021'
 const showSettings = CA.showSettings
  .bind(null, ChartStore.exportSettingFn())
 
-
 const AppErc = () => {
-  const [theme, setTheme] = useState(initialTheme);
 
-  useListen(ChartStore, (actionType, themeName) => {
-    if (actionType === CAT.CHANGE_THEME) {
-      theme.setThemeName(themeName)
-      setTheme({...theme})
-    }
-  })
   useEffect(()=>{
     LocationSearch.load();
     checkBuild(BUILD_DATE, CA.showReload)
@@ -47,7 +36,10 @@ const AppErc = () => {
 
   return (
     <HotKeysProvider is={ENABLE_HOT_KEYS}>
-      <ThemeContext.Provider value={theme}>
+      <ThemeProvider
+         store={ChartStore}
+         actionChangeTheme={CAT.CHANGE_THEME}
+      >
         <HeaderBar store={ChartStore} showSettings={showSettings} />
         <div className={CL}>
            <BrowserContainer
@@ -63,9 +55,9 @@ const AppErc = () => {
            />
        </div>
        <DialogContainer store={ChartStore} />
-     </ThemeContext.Provider>
+     </ThemeProvider>
    </HotKeysProvider>
   );
-}
+};
 
 export default AppErc
