@@ -17,6 +17,8 @@ var _BrowserActions = require("../flux/actions/BrowserActions");
 
 var _ChartActions = require("../flux/actions/ChartActions");
 
+var _AppProvider = _interopRequireDefault(require("./AppProvider"));
+
 var _HeaderBar = _interopRequireDefault(require("./header/HeaderBar"));
 
 var _BrowserContainer = _interopRequireDefault(require("./browser-container/BrowserContainer"));
@@ -27,12 +29,6 @@ var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContai
 
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 
-var _has = _interopRequireDefault(require("./has"));
-
-var _HotKeysProvider = _interopRequireDefault(require("./hotkeys/HotKeysProvider"));
-
-var _ThemeProvider = _interopRequireDefault(require("./styles/ThemeProvider"));
-
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
 var _jsxRuntime = require("react/jsx-runtime");
@@ -42,8 +38,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const BUILD_DATE = '30-12-2021',
-      CL = "component-container",
-      ENABLE_HOT_KEYS = !_has.default.touch;
+      CL_COMP_CONTAINER = "component-container";
 
 const showSettings = _ComponentActions.default.showSettings.bind(null, _ChartStore.default.exportSettingFn());
 
@@ -53,32 +48,28 @@ const AppErc = () => {
 
     (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.default.showReload);
   }, []);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotKeysProvider.default, {
-    is: ENABLE_HOT_KEYS,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ThemeProvider.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_AppProvider.default, {
+    store: _ChartStore.default,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
       store: _ChartStore.default,
-      actionChangeTheme: _ComponentActions.ComponentActionTypes.CHANGE_THEME,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
+      showSettings: showSettings
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: CL_COMP_CONTAINER,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
         store: _ChartStore.default,
-        showSettings: showSettings
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        className: CL,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
-          store: _ChartStore.default,
-          initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC,
-          showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
-          onCloseDialog: _ComponentActions.default.closeDialog
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {
-          store: _ChartStore.default,
-          isInitShow: true
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
-          store: _ChartStore.default,
-          addAction: _ChartActions.CHAT_INIT_AND_SHOW
-        })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
-        store: _ChartStore.default
+        initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC,
+        showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+        onCloseDialog: _ComponentActions.default.closeDialog
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {
+        store: _ChartStore.default,
+        isInitShow: true
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
+        store: _ChartStore.default,
+        addAction: _ChartActions.CHAT_INIT_AND_SHOW
       })]
-    })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
+      store: _ChartStore.default
+    })]
   });
 };
 

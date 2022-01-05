@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/AppProvider.js"
+ ],
+ "file": "../../src/components/AppProvider.js",
+ "names": [
+  "ENABLE_HOT_KEYS",
+  "has",
+  "touch",
+  "AppProvider",
+  "store",
+  "children",
+  "CAT",
+  "CHANGE_THEME"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;AAEA;;AACA;;;;AAEA,MAAMA,eAAe,GAAG,CAACC,aAAIC,KAA7B;;AAEA,MAAMC,WAAW,GAAG;AAAA,MAAC;AACnBC,IAAAA,KADmB;AAEnBC,IAAAA;AAFmB,GAAD;AAAA,sBAIlB,qBAAC,wBAAD;AAAiB,IAAA,EAAE,EAAEL,eAArB;AAAA,2BACE,qBAAC,sBAAD;AACG,MAAA,KAAK,EAAEI,KADV;AAEG,MAAA,iBAAiB,EAAEE,uCAAIC,YAF1B;AAAA,gBAIGF;AAJH;AADF,IAJkB;AAAA,CAApB;;eAceF,W"
+}
