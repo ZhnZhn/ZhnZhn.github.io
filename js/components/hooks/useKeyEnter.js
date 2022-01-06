@@ -3,23 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _react = require("react");
+var _fUseKey = _interopRequireDefault(require("./fUseKey"));
 
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
-/*eslint-disable react-hooks/exhaustive-deps */
-var useKeyEnter = function useKeyEnter(fn, deps) {
-  return (0, _react.useCallback)(function (event) {
-    if ((0, _isKeyEnter["default"])(event)) {
-      fn(event);
-    }
-  }, deps || []);
-};
-/*eslint-enable react-hooks/exhaustive-deps */
-
-
+const useKeyEnter = (0, _fUseKey.default)(_isKeyEnter.default);
 var _default = useKeyEnter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=useKeyEnter.js.map

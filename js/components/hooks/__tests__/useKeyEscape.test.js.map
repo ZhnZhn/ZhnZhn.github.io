@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../../src/components/hooks/__tests__/useKeyEscape.test.js"],"names":["describe","test","onEscape","jest","fn","initialProps","result","rerender","_onKeyEscape","current","expect","toBe","toHaveBeenCalledTimes","_eventEscape","keyCode","preventDefault","stopPropagation","toEqual","mock","calls","_eventNotEscape","onEnter","not","useKeyEscape"],"mappings":";;;;AAAA;;AACA;;AAEA;;AAEAA,QAAQ,CAAC,cAAD,EAAiB,YAAI;AAC3BC,EAAAA,IAAI,CAAC,EAAD,EAAK,YAAI;AACL,QAAAC,QAAQ,GAAGC,IAAI,CAACC,EAAL,EAAX;AAAA,sBAKF,4BAAW;AAAA,UAAGF,QAAH,QAAGA,QAAH;AAAA,aAAgB,8BAAaA,QAAb,EAAuB,CAACA,QAAD,CAAvB,CAAhB;AAAA,KAAX,EAA+D;AACjEG,MAAAA,YAAY,EAAE;AAAEH,QAAAA,QAAQ,EAARA;AAAF;AADmD,KAA/D,CALE;AAAA,QAGJI,MAHI,eAGJA,MAHI;AAAA,QAIJC,QAJI,eAIJA,QAJI,CADK,CAEX;;;AAQA,QAAMC,YAAY,GAAGF,MAAM,CAACG,OAA5B;AACAC,IAAAA,MAAM,CAAC,OAAOF,YAAR,CAAN,CAA4BG,IAA5B,CAAiC,UAAjC;AACAD,IAAAA,MAAM,CAACR,QAAD,CAAN,CAAiBU,qBAAjB,CAAuC,CAAvC,EAZW,CAcX;AACA;;AACA,QAAMC,YAAY,GAAG;AACnBC,MAAAA,OAAO,EAAE,EADU;AAEnBC,MAAAA,cAAc,EAAEZ,IAAI,CAACC,EAAL,EAFG;AAGnBY,MAAAA,eAAe,EAAEb,IAAI,CAACC,EAAL;AAHE,KAArB;AAKA,yBAAI;AAAA,aAAMI,YAAY,CAACK,YAAD,CAAlB;AAAA,KAAJ;AACAH,IAAAA,MAAM,CAACJ,MAAM,CAACG,OAAR,CAAN,CAAuBQ,OAAvB,CAA+BT,YAA/B;AACAE,IAAAA,MAAM,CAACG,YAAY,CAACE,cAAd,CAAN,CAAoCH,qBAApC,CAA0D,CAA1D;AACAF,IAAAA,MAAM,CAACG,YAAY,CAACG,eAAd,CAAN,CAAqCJ,qBAArC,CAA2D,CAA3D;AACAF,IAAAA,MAAM,CAACR,QAAD,CAAN,CAAiBU,qBAAjB,CAAuC,CAAvC;AACAF,IAAAA,MAAM,CAACR,QAAQ,CAACgB,IAAT,CAAcC,KAAd,CAAoB,CAApB,EAAuB,CAAvB,CAAD,CAAN,CAAkCR,IAAlC,CAAuC,KAAK,CAA5C,EA1BW,CA4BX;;AACA,QAAMS,eAAe,GAAG;AAACN,MAAAA,OAAO,EAAE;AAAV,KAAxB;AACA,yBAAK;AAAA,aAAMN,YAAY,CAACY,eAAD,CAAlB;AAAA,KAAL;AACAV,IAAAA,MAAM,CAACR,QAAD,CAAN,CAAiBU,qBAAjB,CAAuC,CAAvC,EA/BW,CAiCX;AACA;;AACAL,IAAAA,QAAQ,CAAC;AAAEL,MAAAA,QAAQ,EAARA;AAAF,KAAD,CAAR;AACAQ,IAAAA,MAAM,CAACF,YAAD,CAAN,CAAqBS,OAArB,CAA6BX,MAAM,CAACG,OAApC,EApCW,CAqCX;;AACAF,IAAAA,QAAQ,CAAC;AAAEc,MAAAA,OAAO,EAAElB,IAAI,CAACC,EAAL;AAAX,KAAD,CAAR;AACAM,IAAAA,MAAM,CAACF,YAAD,CAAN,CAAqBc,GAArB,CAAyBL,OAAzB,CAAiCX,MAAM,CAACG,OAAxC;AACD,GAxCG,CAAJ;AA0CAR,EAAAA,IAAI,CAAC,6CAAD,EACF,2CAA0BsB,wBAA1B,CADE,CAAJ;AAED,CA7CO,CAAR","sourcesContent":["import {renderHook, act} from '@testing-library/react-hooks'\r\nimport useKeyEscape from '../useKeyEscape'\r\n\r\nimport factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps'\r\n\r\ndescribe('useKeyEscape', ()=>{\r\n  test('', ()=>{\r\n    const onEscape = jest.fn()\r\n    //1 Test return type\r\n    , {\r\n      result,\r\n      rerender\r\n    } = renderHook(({ onEscape })=>useKeyEscape(onEscape, [onEscape]), {\r\n      initialProps: { onEscape }\r\n    })\r\n\r\n    const _onKeyEscape = result.current;\r\n    expect(typeof _onKeyEscape).toBe('function')\r\n    expect(onEscape).toHaveBeenCalledTimes(0)\r\n\r\n    //2 Test KeyDown\r\n    //2.1 KeyDown Escape\r\n    const _eventEscape = {\r\n      keyCode: 27,\r\n      preventDefault: jest.fn(),\r\n      stopPropagation: jest.fn()\r\n    }\r\n    act(() => _onKeyEscape(_eventEscape))\r\n    expect(result.current).toEqual(_onKeyEscape)\r\n    expect(_eventEscape.preventDefault).toHaveBeenCalledTimes(1)\r\n    expect(_eventEscape.stopPropagation).toHaveBeenCalledTimes(1)\r\n    expect(onEscape).toHaveBeenCalledTimes(1)\r\n    expect(onEscape.mock.calls[0][0]).toBe(void 0)\r\n\r\n    //2.2 KeyDown not Escape\r\n    const _eventNotEscape = {keyCode: 20}\r\n    act( () => _onKeyEscape(_eventNotEscape))\r\n    expect(onEscape).toHaveBeenCalledTimes(1)\r\n\r\n    //3 Test rerender for return instance depended on deps\r\n    //3.1 With same onEscape\r\n    rerender({ onEscape })\r\n    expect(_onKeyEscape).toEqual(result.current)\r\n    //3.2 With new onEnter\r\n    rerender({ onEnter: jest.fn() })\r\n    expect(_onKeyEscape).not.toEqual(result.current)\r\n  })\r\n\r\n  test('should return same fn in case of empty deps', \r\n    factorySameFnForEmptyDeps(useKeyEscape))\r\n})\r\n"],"file":"useKeyEscape.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/hooks/__tests__/useKeyEscape.test.js"
+ ],
+ "file": "../../../../src/components/hooks/__tests__/useKeyEscape.test.js",
+ "names": [
+  "describe",
+  "test",
+  "onEscape",
+  "jest",
+  "fn",
+  "result",
+  "rerender",
+  "initialProps",
+  "_onKeyEscape",
+  "current",
+  "expect",
+  "toBe",
+  "toHaveBeenCalledTimes",
+  "_eventEscape",
+  "keyCode",
+  "preventDefault",
+  "stopPropagation",
+  "toEqual",
+  "mock",
+  "calls",
+  "_eventNotEscape",
+  "onEnter",
+  "not",
+  "useKeyEscape"
+ ],
+ "mappings": ";;;;AAAA;;AACA;;AAEA;;AAEAA,QAAQ,CAAC,cAAD,EAAiB,MAAI;AAC3BC,EAAAA,IAAI,CAAC,EAAD,EAAK,MAAI;AACX,UAAMC,QAAQ,GAAGC,IAAI,CAACC,EAAL,EAAjB,CACA;AADA;AAAA,UAEE;AACAC,MAAAA,MADA;AAEAC,MAAAA;AAFA,QAGE,4BAAW;AAAA,UAAC;AAAEJ,QAAAA;AAAF,OAAD;AAAA,aAAgB,2BAAaA,QAAb,EAAuB,CAACA,QAAD,CAAvB,CAAhB;AAAA,KAAX,EAA+D;AACjEK,MAAAA,YAAY,EAAE;AAAEL,QAAAA;AAAF;AADmD,KAA/D,CALJ;AASA,UAAMM,YAAY,GAAGH,MAAM,CAACI,OAA5B;AACAC,IAAAA,MAAM,CAAC,OAAOF,YAAR,CAAN,CAA4BG,IAA5B,CAAiC,UAAjC;AACAD,IAAAA,MAAM,CAACR,QAAD,CAAN,CAAiBU,qBAAjB,CAAuC,CAAvC,EAZW,CAcX;AACA;;AACA,UAAMC,YAAY,GAAG;AACnBC,MAAAA,OAAO,EAAE,EADU;AAEnBC,MAAAA,cAAc,EAAEZ,IAAI,CAACC,EAAL,EAFG;AAGnBY,MAAAA,eAAe,EAAEb,IAAI,CAACC,EAAL;AAHE,KAArB;AAKA,yBAAI,MAAMI,YAAY,CAACK,YAAD,CAAtB;AACAH,IAAAA,MAAM,CAACL,MAAM,CAACI,OAAR,CAAN,CAAuBQ,OAAvB,CAA+BT,YAA/B;AACAE,IAAAA,MAAM,CAACG,YAAY,CAACE,cAAd,CAAN,CAAoCH,qBAApC,CAA0D,CAA1D;AACAF,IAAAA,MAAM,CAACG,YAAY,CAACG,eAAd,CAAN,CAAqCJ,qBAArC,CAA2D,CAA3D;AACAF,IAAAA,MAAM,CAACR,QAAD,CAAN,CAAiBU,qBAAjB,CAAuC,CAAvC;AACAF,IAAAA,MAAM,CAACR,QAAQ,CAACgB,IAAT,CAAcC,KAAd,CAAoB,CAApB,EAAuB,CAAvB,CAAD,CAAN,CAAkCR,IAAlC,CAAuCE,YAAvC,EA1BW,CA4BX;;AACA,UAAMO,eAAe,GAAG;AAACN,MAAAA,OAAO,EAAE;AAAV,KAAxB;AACA,yBAAK,MAAMN,YAAY,CAACY,eAAD,CAAvB;AACAV,IAAAA,MAAM,CAACR,QAAD,CAAN,CAAiBU,qBAAjB,CAAuC,CAAvC,EA/BW,CAiCX;AACA;;AACAN,IAAAA,QAAQ,CAAC;AAAEJ,MAAAA;AAAF,KAAD,CAAR;AACAQ,IAAAA,MAAM,CAACF,YAAD,CAAN,CAAqBS,OAArB,CAA6BZ,MAAM,CAACI,OAApC,EApCW,CAqCX;;AACAH,IAAAA,QAAQ,CAAC;AAAEe,MAAAA,OAAO,EAAElB,IAAI,CAACC,EAAL;AAAX,KAAD,CAAR;AACAM,IAAAA,MAAM,CAACF,YAAD,CAAN,CAAqBc,GAArB,CAAyBL,OAAzB,CAAiCZ,MAAM,CAACI,OAAxC;AACD,GAxCG,CAAJ;AA0CAR,EAAAA,IAAI,CAAC,6CAAD,EACF,wCAA0BsB,qBAA1B,CADE,CAAJ;AAED,CA7CO,CAAR"
+}

@@ -1,1 +1,35 @@
-{"version":3,"sources":["../../../../src/components/hooks/__tests__/useKeyEnter.test.js"],"names":["describe","test","onEnter","jest","fn","initialProps","result","rerender","_onKeyEnter","current","expect","toBe","toHaveBeenCalledTimes","_eventEnter","keyCode","toEqual","mock","calls","_eventBlank","_eventNotEnter","not","useKeyEnter"],"mappings":";;;;AAAA;;AACA;;AAEA;;AAEAA,QAAQ,CAAC,aAAD,EAAgB,YAAI;AAC1BC,EAAAA,IAAI,CAAC,8CAAD,EAAiD,YAAI;AACjD,QAAAC,OAAO,GAAGC,IAAI,CAACC,EAAL,EAAV;AAAA,sBAKF,4BAAW;AAAA,UAAGF,OAAH,QAAGA,OAAH;AAAA,aAAe,6BAAYA,OAAZ,EAAqB,CAACA,OAAD,CAArB,CAAf;AAAA,KAAX,EAA2D;AAC7DG,MAAAA,YAAY,EAAE;AAAEH,QAAAA,OAAO,EAAPA;AAAF;AAD+C,KAA3D,CALE;AAAA,QAGJI,MAHI,eAGJA,MAHI;AAAA,QAIJC,QAJI,eAIJA,QAJI,CADiD,CAEvD;;;AAQA,QAAMC,WAAW,GAAGF,MAAM,CAACG,OAA3B;AACAC,IAAAA,MAAM,CAAC,OAAOF,WAAR,CAAN,CAA2BG,IAA3B,CAAgC,UAAhC;AACAD,IAAAA,MAAM,CAACR,OAAD,CAAN,CAAgBU,qBAAhB,CAAsC,CAAtC,EAZuD,CAcvD;AACA;;AACA,QAAMC,WAAW,GAAG;AAACC,MAAAA,OAAO,EAAE;AAAV,KAApB;AACA,yBAAI;AAAA,aAAMN,WAAW,CAACK,WAAD,CAAjB;AAAA,KAAJ;AACAH,IAAAA,MAAM,CAACJ,MAAM,CAACG,OAAR,CAAN,CAAuBM,OAAvB,CAA+BP,WAA/B;AACAE,IAAAA,MAAM,CAACR,OAAD,CAAN,CAAgBU,qBAAhB,CAAsC,CAAtC;AACAF,IAAAA,MAAM,CAACR,OAAO,CAACc,IAAR,CAAaC,KAAb,CAAmB,CAAnB,EAAsB,CAAtB,CAAD,CAAN,CAAiCN,IAAjC,CAAsCE,WAAtC,EApBuD,CAsBvD;;AACA,QAAMK,WAAW,GAAG;AAACJ,MAAAA,OAAO,EAAE;AAAV,KAApB;AACA,yBAAI;AAAA,aAAMN,WAAW,CAACU,WAAD,CAAjB;AAAA,KAAJ;AACAR,IAAAA,MAAM,CAACJ,MAAM,CAACG,OAAR,CAAN,CAAuBM,OAAvB,CAA+BP,WAA/B;AACAE,IAAAA,MAAM,CAACR,OAAD,CAAN,CAAgBU,qBAAhB,CAAsC,CAAtC;AACAF,IAAAA,MAAM,CAACR,OAAO,CAACc,IAAR,CAAaC,KAAb,CAAmB,CAAnB,EAAsB,CAAtB,CAAD,CAAN,CAAiCN,IAAjC,CAAsCO,WAAtC,EA3BuD,CA6BvD;;AACA,QAAMC,cAAc,GAAG;AAACL,MAAAA,OAAO,EAAE;AAAV,KAAvB;AACA,yBAAK;AAAA,aAAMN,WAAW,CAACW,cAAD,CAAjB;AAAA,KAAL;AACAT,IAAAA,MAAM,CAACR,OAAD,CAAN,CAAgBU,qBAAhB,CAAsC,CAAtC,EAhCuD,CAkCvD;AACA;;AACAL,IAAAA,QAAQ,CAAC;AAAEL,MAAAA,OAAO,EAAPA;AAAF,KAAD,CAAR;AACAQ,IAAAA,MAAM,CAACF,WAAD,CAAN,CAAoBO,OAApB,CAA4BT,MAAM,CAACG,OAAnC,EArCuD,CAsCvD;;AACAF,IAAAA,QAAQ,CAAC;AAAEL,MAAAA,OAAO,EAAEC,IAAI,CAACC,EAAL;AAAX,KAAD,CAAR;AACAM,IAAAA,MAAM,CAACF,WAAD,CAAN,CAAoBY,GAApB,CAAwBL,OAAxB,CAAgCT,MAAM,CAACG,OAAvC;AACD,GAzCG,CAAJ;AA2CAR,EAAAA,IAAI,CAAC,6CAAD,EACF,2CAA0BoB,uBAA1B,CADE,CAAJ;AAED,CA9CO,CAAR","sourcesContent":["import {renderHook, act} from '@testing-library/react-hooks'\r\nimport useKeyEnter from '../useKeyEnter'\r\n\r\nimport factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps'\r\n\r\ndescribe('useKeyEnter', ()=>{\r\n  test('should return fn onKeyEnter depended of deps', ()=>{\r\n    const onEnter = jest.fn()\r\n    //1 Test return type\r\n    , {\r\n      result,\r\n      rerender\r\n    } = renderHook(({ onEnter })=>useKeyEnter(onEnter, [onEnter]), {\r\n      initialProps: { onEnter }\r\n    })\r\n\r\n    const _onKeyEnter = result.current;\r\n    expect(typeof _onKeyEnter).toBe('function')\r\n    expect(onEnter).toHaveBeenCalledTimes(0)\r\n\r\n    //2 Test KeyDown\r\n    //2.1 KeyDown Enter\r\n    const _eventEnter = {keyCode: 13}\r\n    act(() => _onKeyEnter(_eventEnter))\r\n    expect(result.current).toEqual(_onKeyEnter)\r\n    expect(onEnter).toHaveBeenCalledTimes(1)\r\n    expect(onEnter.mock.calls[0][0]).toBe(_eventEnter)\r\n\r\n    //2.2 KeyDown Blank\r\n    const _eventBlank = {keyCode: 32}\r\n    act(() => _onKeyEnter(_eventBlank))\r\n    expect(result.current).toEqual(_onKeyEnter)\r\n    expect(onEnter).toHaveBeenCalledTimes(2)\r\n    expect(onEnter.mock.calls[1][0]).toBe(_eventBlank)\r\n\r\n    //2.2 KeyDown not onEnter\r\n    const _eventNotEnter = {keyCode: 20}\r\n    act( () => _onKeyEnter(_eventNotEnter))\r\n    expect(onEnter).toHaveBeenCalledTimes(2)\r\n\r\n    //3 Test rerender for return instance depended on deps\r\n    //3.1 With same onEnter\r\n    rerender({ onEnter })\r\n    expect(_onKeyEnter).toEqual(result.current)\r\n    //3.2 With new onEnter\r\n    rerender({ onEnter: jest.fn() })\r\n    expect(_onKeyEnter).not.toEqual(result.current)\r\n  })\r\n\r\n  test('should return same fn in case of empty deps',\r\n    factorySameFnForEmptyDeps(useKeyEnter))\r\n})\r\n"],"file":"useKeyEnter.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/hooks/__tests__/useKeyEnter.test.js"
+ ],
+ "file": "../../../../src/components/hooks/__tests__/useKeyEnter.test.js",
+ "names": [
+  "_crKeyEvent",
+  "keyCode",
+  "preventDefault",
+  "jest",
+  "fn",
+  "stopPropagation",
+  "describe",
+  "test",
+  "onEnter",
+  "result",
+  "rerender",
+  "initialProps",
+  "_onKeyEnter",
+  "current",
+  "expect",
+  "toBe",
+  "toHaveBeenCalledTimes",
+  "_eventEnter",
+  "toEqual",
+  "mock",
+  "calls",
+  "_eventBlank",
+  "_eventNotEnter",
+  "not",
+  "useKeyEnter"
+ ],
+ "mappings": "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"
+}

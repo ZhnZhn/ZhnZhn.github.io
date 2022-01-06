@@ -1,11 +1,6 @@
-import { useCallback } from 'react'
+import fUseKey from './fUseKey';
+import isKeyEnter from '../zhn/isKeyEnter';
 
-import isKeyEnter from '../zhn/isKeyEnter'
-
-/*eslint-disable react-hooks/exhaustive-deps */
-const useKeyEnter = (fn, deps) => useCallback(event => {
-  if (isKeyEnter(event)) { fn(event) }
-}, deps || []);
-/*eslint-enable react-hooks/exhaustive-deps */
+const useKeyEnter = fUseKey(isKeyEnter);
 
 export default useKeyEnter

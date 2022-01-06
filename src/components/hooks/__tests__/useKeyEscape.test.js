@@ -30,7 +30,7 @@ describe('useKeyEscape', ()=>{
     expect(_eventEscape.preventDefault).toHaveBeenCalledTimes(1)
     expect(_eventEscape.stopPropagation).toHaveBeenCalledTimes(1)
     expect(onEscape).toHaveBeenCalledTimes(1)
-    expect(onEscape.mock.calls[0][0]).toBe(void 0)
+    expect(onEscape.mock.calls[0][0]).toBe(_eventEscape)
 
     //2.2 KeyDown not Escape
     const _eventNotEscape = {keyCode: 20}
@@ -46,6 +46,6 @@ describe('useKeyEscape', ()=>{
     expect(_onKeyEscape).not.toEqual(result.current)
   })
 
-  test('should return same fn in case of empty deps', 
+  test('should return same fn in case of empty deps',
     factorySameFnForEmptyDeps(useKeyEscape))
 })

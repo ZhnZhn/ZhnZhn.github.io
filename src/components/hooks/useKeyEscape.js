@@ -1,15 +1,6 @@
-import { useCallback } from 'react'
+import fUseKey from './fUseKey';
+import isKeyEscape from '../zhn/isKeyEscape';
 
-import isKeyEscape from '../zhn/isKeyEscape'
-
-/*eslint-disable react-hooks/exhaustive-deps */
-const useKeyEscape = (fn, deps) => useCallback(event => {
-  if (isKeyEscape(event)) {
-    event.preventDefault()
-    event.stopPropagation()
-    fn() 
-  }
-}, deps || []);
-/*eslint-enable react-hooks/exhaustive-deps */
+const useKeyEscape = fUseKey(isKeyEscape);
 
 export default useKeyEscape
