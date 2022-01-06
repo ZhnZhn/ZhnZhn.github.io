@@ -22,7 +22,7 @@ const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
 }
 
 const GroupAddPane = ({
-  store,
+  //store,
   actionCompleted, actionFailed, forActionType,
   onCreate, msgOnIsEmptyName,
   onClose
@@ -35,7 +35,7 @@ const GroupAddPane = ({
       setState([])
   };
 
-  useListen(store, (actionType, data) => {
+  useListen((actionType, data) => {
     if (actionType === actionCompleted && data.forActionType === forActionType){
        _hClear()
     } else if (actionType === actionFailed && data.forActionType === forActionType){

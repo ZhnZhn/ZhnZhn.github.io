@@ -74,8 +74,8 @@ const _renderDialogs = (
 const NOOP = () => {};
 
 const DialogContainer = ({
-  maxDialog=3,
-  store, showAction,
+  maxDialog=3,  
+  showAction,
   onCloseDialog=NOOP
 }) => {
   const [state, setState] = useState({
@@ -113,7 +113,7 @@ const DialogContainer = ({
      })
   };
 
-  useListen(store, (actionType, option) => {
+  useListen((actionType, option) => {
      if (actionType === showAction){
         setState(prevState => {
           const { key, Comp, data } = option;

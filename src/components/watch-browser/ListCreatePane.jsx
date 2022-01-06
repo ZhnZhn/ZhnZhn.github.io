@@ -40,7 +40,7 @@ const ListCreatePane = ({
   ), [_hCreate]);
 
 
-  useListen(store, (actionType, data)=>{
+  useListen((actionType, data) => {
     if (actionType === actionCompleted){
       if (data.forActionType === forActionType){
         _hClear()

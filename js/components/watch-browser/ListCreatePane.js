@@ -3,56 +3,50 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
-var _useSelectItem2 = _interopRequireDefault(require("./hooks/useSelectItem"));
+var _useSelectItem = _interopRequireDefault(require("./hooks/useSelectItem"));
 
-var _useInputText2 = _interopRequireDefault(require("./hooks/useInputText"));
+var _useInputText = _interopRequireDefault(require("./hooks/useInputText"));
 
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
-//import PropTypes from "prop-types";
-var ListCreatePane = function ListCreatePane(_ref) {
-  var store = _ref.store,
-      onCreate = _ref.onCreate,
-      msgOnNotSelect = _ref.msgOnNotSelect,
-      msgOnIsEmptyName = _ref.msgOnIsEmptyName,
-      actionCompleted = _ref.actionCompleted,
-      actionFailed = _ref.actionFailed,
-      forActionType = _ref.forActionType,
-      onClose = _ref.onClose;
+var _jsxRuntime = require("react/jsx-runtime");
 
-  var _useState = (0, _react.useState)(function () {
-    return store.getWatchGroups();
-  }),
-      groupOptions = _useState[0],
-      setGroupOptions = _useState[1],
-      _useState2 = (0, _react.useState)([]),
-      validationMessages = _useState2[0],
-      setValidationMessages = _useState2[1],
-      _useInputText = (0, _useInputText2["default"])(setValidationMessages),
-      _refInputText = _useInputText[0],
-      _hClear = _useInputText[1],
-      _useSelectItem = (0, _useSelectItem2["default"])(),
-      _refCaptionGroup = _useSelectItem[0],
-      _hSelectGroup = _useSelectItem[1],
-      _hCreate = (0, _react.useCallback)(function () {
-    var captionList = _refInputText.current.getValue(),
-        captionGroup = _refCaptionGroup.current;
+//import PropTypes from "prop-types";
+const ListCreatePane = _ref => {
+  let {
+    store,
+    onCreate,
+    msgOnNotSelect,
+    msgOnIsEmptyName,
+    actionCompleted,
+    actionFailed,
+    forActionType,
+    onClose
+  } = _ref;
+
+  const [groupOptions, setGroupOptions] = (0, _react.useState)(() => store.getWatchGroups()),
+        [validationMessages, setValidationMessages] = (0, _react.useState)([]),
+        [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages),
+        [_refCaptionGroup, _hSelectGroup] = (0, _useSelectItem.default)()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hCreate = (0, _react.useCallback)(() => {
+    const captionList = _refInputText.current.getValue(),
+          captionGroup = _refCaptionGroup.current;
 
     if (captionGroup && captionList) {
       onCreate({
-        captionGroup: captionGroup,
-        captionList: captionList
+        captionGroup,
+        captionList
       });
     } else {
-      var msg = [];
+      const msg = [];
 
       if (!captionGroup) {
         msg.push(msgOnNotSelect('In Group'));
@@ -64,16 +58,17 @@ var ListCreatePane = function ListCreatePane(_ref) {
 
       setValidationMessages(msg);
     }
-  }, []),
-      _primaryBt = (0, _react.useMemo)(function () {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
-      caption: "Create",
-      title: "Create New List",
-      onClick: _hCreate
-    });
-  }, [_hCreate]);
+  }, []) //onCreate, msgOnNotSelect, msgOnIsEmptyName
 
-  (0, _useListen["default"])(store, function (actionType, data) {
+  /*eslint-enable react-hooks/exhaustive-deps */
+  ,
+        _primaryBt = (0, _react.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
+    caption: "Create",
+    title: "Create New List",
+    onClick: _hCreate
+  }), [_hCreate]);
+
+  (0, _useListen.default)((actionType, data) => {
     if (actionType === actionCompleted) {
       if (data.forActionType === forActionType) {
         _hClear();
@@ -85,16 +80,16 @@ var ListCreatePane = function ListCreatePane(_ref) {
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputSelect, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputSelect, {
       caption: "In Group:",
       options: groupOptions,
       onSelect: _hSelectGroup
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputText, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputText, {
       ref: _refInputText,
       caption: "List:"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       Primary: _primaryBt,
       onClear: _hClear,
       onClose: onClose
@@ -121,5 +116,5 @@ ListCreatePane.propTypes = {
 
 
 var _default = ListCreatePane;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ListCreatePane.js.map

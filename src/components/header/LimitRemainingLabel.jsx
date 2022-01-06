@@ -10,10 +10,10 @@ const S_LABEL = {
   fontWeight: 'bold'
 };
 
-const LimitRemainingLabel = ({ store }) => {
+const LimitRemainingLabel = () => {
   const [value, setValue] = useState('');
 
-  useListen(store, (v) => {
+  useListen(v => {
     if (v != null) {
       setValue(v)
     }

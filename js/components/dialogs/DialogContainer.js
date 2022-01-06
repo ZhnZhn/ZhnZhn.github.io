@@ -3,11 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -19,22 +15,28 @@ var _ComponentActions = require("../../flux/actions/ComponentActions");
 
 var _RouterModalDialog = _interopRequireDefault(require("./RouterModalDialog"));
 
-//import PropTypes from "prop-types";
-var _setTypeTo = function _setTypeTo(prevState, type, option) {
+var _jsxRuntime = require("react/jsx-runtime");
+
+const _setTypeTo = (prevState, type, option) => {
   prevState.shows[type] = true;
   prevState.data[type] = option;
   prevState.isShow = true;
   prevState.currentDialog = type;
-  return (0, _extends2["default"])({}, prevState);
+  return { ...prevState
+  };
 };
 
-var _renderDialogs = function _renderDialogs(store, _ref, _handleClose) {
-  var shows = _ref.shows,
-      data = _ref.data,
-      dialogs = _ref.dialogs;
-  return dialogs.map(function (_ref2) {
-    var type = _ref2.type,
-        comp = _ref2.comp;
+const _renderDialogs = (store, _ref, _handleClose) => {
+  let {
+    shows,
+    data,
+    dialogs
+  } = _ref;
+  return dialogs.map(_ref2 => {
+    let {
+      type,
+      comp
+    } = _ref2;
     return /*#__PURE__*/(0, _react.createElement)(comp, {
       key: type,
       isShow: shows[type],
@@ -45,10 +47,8 @@ var _renderDialogs = function _renderDialogs(store, _ref, _handleClose) {
   });
 };
 
-var DialogContainer = function DialogContainer(_ref3) {
-  var store = _ref3.store;
-
-  var _useState = (0, _react.useState)({
+const DialogContainer = () => {
+  const [state, setState] = (0, _react.useState)({
     isShow: false,
     inits: {},
     shows: {},
@@ -56,59 +56,50 @@ var DialogContainer = function DialogContainer(_ref3) {
     dialogs: [],
     currentDialog: null
   }),
-      state = _useState[0],
-      setState = _useState[1],
-      _hClose = (0, _react.useCallback)(function (type) {
-    setState(function (prevState) {
+        {
+    isShow,
+    currentDialog
+  } = state,
+        _hClose = (0, _react.useCallback)(type => {
+    setState(prevState => {
       prevState.shows[type] = false;
       prevState.isShow = false;
       prevState.currentDialog = null;
-      return (0, _extends2["default"])({}, prevState);
+      return { ...prevState
+      };
     });
-  }, []);
-
-  (0, _useListen["default"])(store, function (actionType, option) {
+  }, []),
+        store = (0, _useListen.default)((actionType, option) => {
     if (actionType === _ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG) {
-      var type = option.modalDialogType,
-          inits = state.inits;
+      const type = option.modalDialogType,
+            {
+        inits
+      } = state;
 
       if (inits[type]) {
-        Promise.resolve().then(function (_) {
-          setState(function (prevState) {
-            return _setTypeTo(prevState, type, option);
-          });
+        Promise.resolve().then(_ => {
+          setState(prevState => _setTypeTo(prevState, type, option));
         });
       } else {
-        _RouterModalDialog["default"].getDialog(type).then(function (comp) {
-          return setState(function (prevState) {
-            prevState.dialogs.push({
-              type: type,
-              comp: comp
-            });
-            prevState.inits[type] = true;
-            return _setTypeTo(prevState, type, option);
+        _RouterModalDialog.default.getDialog(type).then(comp => setState(prevState => {
+          prevState.dialogs.push({
+            type,
+            comp
           });
-        });
+          prevState.inits[type] = true;
+          return _setTypeTo(prevState, type, option);
+        }));
       }
     }
   });
-  var isShow = state.isShow,
-      currentDialog = state.currentDialog;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer["default"], {
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer.default, {
     isShow: isShow,
     onClose: _hClose.bind(null, currentDialog),
     children: _renderDialogs(store, state, _hClose)
   });
 };
-/*
-DialogContainer.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func
-  })
-}
-*/
-
 
 var _default = DialogContainer;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=DialogContainer.js.map

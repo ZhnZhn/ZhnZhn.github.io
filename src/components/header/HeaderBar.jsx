@@ -51,17 +51,14 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 
 , MODEL = crBrowserModel();
 
-const HeaderBar = ({
-  store,
-  showSettings
-}) => {
+const HeaderBar = ({ showSettings }) => {
   const [isTopics, toggleTopics] = useToggle(false)
   , [refBt, _toggleTopics] = useFnFocus(toggleTopics)
   , TS = useTheme(THEME_ID);
 
   return (
     <div className={CL_HEADER} style={TS.ROOT} >
-       <ProgressLoading store={store} />
+       <ProgressLoading />
        <IconLogoErc
           className={CL_ICON}
           title={LOGO_TITLE}
@@ -107,12 +104,11 @@ const HeaderBar = ({
         />
         <HotBar
           btStyle={TS.BT_HOT}
-          store={store}
           closeDialogAction={CAT.CLOSE_DIALOG}
           onShowDialog={CA.showDialog}
         />
         <div className={CL_BTS_RIGHT}>
-          <LimitRemainingLabel store={store} />
+          <LimitRemainingLabel />
           <FlatButton
              style={TS.BT}
              isPrimary={true}

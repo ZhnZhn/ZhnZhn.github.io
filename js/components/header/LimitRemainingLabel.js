@@ -19,11 +19,9 @@ const S_LABEL = {
   fontWeight: 'bold'
 };
 
-const LimitRemainingLabel = ({
-  store
-}) => {
+const LimitRemainingLabel = () => {
   const [value, setValue] = (0, _react.useState)('');
-  (0, _useListen.default)(store, v => {
+  (0, _useListen.default)(v => {
     if (v != null) {
       setValue(v);
     }

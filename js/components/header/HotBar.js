@@ -97,7 +97,6 @@ const HotBar = _ref3 => {
   let {
     maxButtons = 5,
     btStyle,
-    store,
     closeDialogAction,
     onShowDialog
   } = _ref3;
@@ -106,7 +105,7 @@ const HotBar = _ref3 => {
         [hotButtons, setHotButtons] = (0, _react.useState)([]),
         _hClean = (0, _react.useCallback)(() => setHotButtons([]), []);
 
-  (0, _useListen.default)(store, (actionType, conf) => {
+  (0, _useListen.default)((actionType, conf) => {
     if (actionType === closeDialogAction) {
       setHotButtons(arr => {
         if (!_isIn(arr, conf.type)) {

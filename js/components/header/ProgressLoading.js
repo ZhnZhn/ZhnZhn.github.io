@@ -21,12 +21,10 @@ const COLOR_LOADING = '#2f7ed8',
 
 const _crState = (completed, color) => [completed, color];
 
-const ProgressLoading = ({
-  store
-}) => {
+const ProgressLoading = () => {
   const [state, setState] = (0, _react.useState)(() => _crState(0, COLOR_LOADING)),
         [completed, color] = state;
-  (0, _useListen.default)(store, actionType => {
+  (0, _useListen.default)(actionType => {
     if (actionType === _LoadingProgressActions.LPAT_LOADING) {
       setState(_crState(35, COLOR_LOADING));
     } else if (actionType === _LoadingProgressActions.LPAT_LOADING_COMPLETE) {
@@ -41,14 +39,6 @@ const ProgressLoading = ({
     completed: completed
   });
 };
-/*
-ProgressLoading.propTypes = {
-  store: PropTypes.shape({
-    listenLoadingProgress: PropTypes.func
-  })
-}
-*/
-
 
 var _default = /*#__PURE__*/(0, _react.memo)(ProgressLoading);
 

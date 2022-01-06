@@ -18,15 +18,13 @@ const _crState = (completed, color) => [
   color
 ];
 
-const ProgressLoading = ({
-  store
-}) => {
+const ProgressLoading = () => {
   const [state, setState] = useState(
     ()=>_crState(0, COLOR_LOADING)
   )
   , [completed, color] = state;
 
-  useListen(store, (actionType)=>{
+  useListen(actionType => {
     if (actionType === LPAT_LOADING){
       setState(_crState(35, COLOR_LOADING))
     } else if (actionType === LPAT_LOADING_COMPLETE){
@@ -46,13 +44,5 @@ const ProgressLoading = ({
     />
   );
 };
-
-/*
-ProgressLoading.propTypes = {
-  store: PropTypes.shape({
-    listenLoadingProgress: PropTypes.func
-  })
-}
-*/
 
 export default memo(ProgressLoading)

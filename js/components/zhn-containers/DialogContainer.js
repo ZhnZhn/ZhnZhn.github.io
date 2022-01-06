@@ -67,29 +67,33 @@ const _filterArrByKey = (arr, key) => {
   arr.splice(arr.indexOf(key), 1);
 };
 
-const _renderDialogs = ({
-  hmIs,
-  compDialogs,
-  hmData
-}, _hToTopLayer, _hToggleDialog) => compDialogs.map(Comp => {
-  const key = Comp.key;
-  return /*#__PURE__*/(0, _react.cloneElement)(Comp, {
-    key: key,
-    isShow: hmIs[key],
-    optionData: hmData[key],
-    onFront: () => _hToTopLayer(key),
-    onClose: () => _hToggleDialog(key)
+const _renderDialogs = (_ref, _hToTopLayer, _hToggleDialog) => {
+  let {
+    hmIs,
+    compDialogs,
+    hmData
+  } = _ref;
+  return compDialogs.map(Comp => {
+    const key = Comp.key;
+    return /*#__PURE__*/(0, _react.cloneElement)(Comp, {
+      key: key,
+      isShow: hmIs[key],
+      optionData: hmData[key],
+      onFront: () => _hToTopLayer(key),
+      onClose: () => _hToggleDialog(key)
+    });
   });
-});
+};
 
 const NOOP = () => {};
 
-const DialogContainer = ({
-  maxDialog = 3,
-  store,
-  showAction,
-  onCloseDialog = NOOP
-}) => {
+const DialogContainer = _ref2 => {
+  let {
+    maxDialog = 3,
+    showAction,
+    onCloseDialog = NOOP
+  } = _ref2;
+
   const [state, setState] = (0, _react.useState)({
     hmIs: {},
     compDialogs: [],
@@ -139,7 +143,7 @@ const DialogContainer = ({
     });
   };
 
-  (0, _useListen.default)(store, (actionType, option) => {
+  (0, _useListen.default)((actionType, option) => {
     if (actionType === showAction) {
       setState(prevState => {
         const {

@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _useLoadMenu2 = _interopRequireDefault(require("./useLoadMenu"));
+var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -17,88 +17,55 @@ var _MenuTopic = _interopRequireDefault(require("./MenuTopic"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var useBool = _use.default.useBool,
-    useListen = _use.default.useListen,
-    Browser = _Comp.default.Browser,
-    BrowserCaption = _Comp.default.BrowserCaption,
-    ScrollPane = _Comp.default.ScrollPane,
-    SpinnerLoading = _Comp.default.SpinnerLoading;
-var CL_SCROLL = 'scroll-container-y scroll-menu',
-    S_BROWSER = {
+const {
+  useBool,
+  useListen
+} = _use.default,
+      {
+  Browser,
+  BrowserCaption,
+  ScrollPane,
+  SpinnerLoading
+} = _Comp.default;
+const CL_SCROLL = 'scroll-container-y scroll-menu',
+      S_BROWSER = {
   paddingRight: 0
 };
-/*
-const LOADING = 'a'
-, LOADED = 'b'
-, FAILED = 'c'
-, UPDATE = 'd'
-, _crAction = (type, menu) => ({ type, menu })
-, initialState = {
-  isLoaded: false,
-  isLoading: false,
-  menu: [],
-};
 
-const _reducer = (state, {type, menu}) => {
-  switch(type){
-    case LOADING: return { ...state, isLoading: true };
-    case LOADED: return {
-      isLoading: false,
-      isLoaded: true,
-      menu
-    };
-    case FAILED: return { ...initialState };
-    case UPDATE: return { ...state, menu };
-    default: return state;
-  }
-};
-*/
-
-var BrowserMenu = function BrowserMenu(_ref) {
-  var isInitShow = _ref.isInitShow,
-      caption = _ref.caption,
-      store = _ref.store,
-      browserType = _ref.browserType,
-      showAction = _ref.showAction,
-      updateAction = _ref.updateAction,
-      loadedAction = _ref.loadedAction,
-      failedAction = _ref.failedAction,
-      onLoadMenu = _ref.onLoadMenu,
-      children = _ref.children;
-
-  var _useBool = useBool(isInitShow),
-      isShow = _useBool[0],
-      showBrowser = _useBool[1],
-      hideBrowser = _useBool[2],
-      _useLoadMenu = (0, _useLoadMenu2.default)(),
-      isLoading = _useLoadMenu[0],
-      isLoaded = _useLoadMenu[1],
-      menu = _useLoadMenu[2],
-      setLoading = _useLoadMenu[3],
-      setLoaded = _useLoadMenu[4],
-      setFailed = _useLoadMenu[5],
-      updateMenu = _useLoadMenu[6]; //, [{isLoading, isLoaded, menu}, dispatch] = useReducer(_reducer, initialState)
-
-
-  useListen(store, function (actionType, data) {
+const BrowserMenu = _ref => {
+  let {
+    isInitShow,
+    caption,
+    store,
+    browserType,
+    showAction,
+    updateAction,
+    loadedAction,
+    failedAction,
+    onLoadMenu,
+    children
+  } = _ref;
+  const [isShow, showBrowser, hideBrowser] = useBool(isInitShow),
+        [isLoading, isLoaded, menu, setLoading, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)();
+  useListen((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
         showBrowser();
       } else if (actionType === updateAction) {
-        updateMenu(store.getBrowserMenu(browserType)); //dispatch(_crAction(UPDATE, store.getBrowserMenu(browserType)))
+        updateMenu(store.getBrowserMenu(browserType));
       } else if (actionType === failedAction) {
-        setFailed(); //dispatch(_crAction(FAILED))
+        setFailed();
       }
     } else if ((data == null ? void 0 : data.browserType) === browserType && actionType === loadedAction) {
-      setLoaded(data.menuItems); //dispatch(_crAction(LOADED, data.menuItems))
+      setLoaded(data.menuItems);
     }
   });
   /*eslint-disable react-hooks/exhaustive-deps */
 
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (!isLoaded && isShow) {
       onLoadMenu();
-      setLoading(); //dispatch(_crAction(LOADING))
+      setLoading();
     }
   }, [isLoaded, isShow]);
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -111,9 +78,8 @@ var BrowserMenu = function BrowserMenu(_ref) {
       onClose: hideBrowser
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
       className: CL_SCROLL,
-      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), menu.map(function (menuTopic, index) {
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopic.default, Object.assign({}, menuTopic), index);
-      }), children]
+      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), menu.map((menuTopic, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopic.default, { ...menuTopic
+      }, index)), children]
     })]
   });
 };

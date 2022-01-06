@@ -63,7 +63,7 @@ const GroupDeletePane = ({
      _refCaption.current= (item && item.caption) || null;
   };
 
-  useListen(store, (actionType, data) => {
+  useListen((actionType, data) => {
     if (actionType === actionCompleted) {
       updateGroups(store.getWatchGroups())
     }

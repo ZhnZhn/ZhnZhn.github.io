@@ -90,13 +90,10 @@ const TH_ID = 'ABOUT',
 
 const _isHide = actionType => actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW;
 
-const About = _ref => {
-  let {
-    store
-  } = _ref;
+const About = () => {
   const [isShow, show, hide] = useBool(true),
         TS = useTheme(TH_ID);
-  useListen(store, actionType => {
+  useListen(actionType => {
     if (actionType === _ComponentActions.ComponentActionTypes.SHOW_ABOUT) {
       show();
     } else if (_isHide(actionType)) {

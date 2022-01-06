@@ -56,11 +56,11 @@ const _isHide = actionType =>
   actionType === CHAT_INIT_AND_SHOW
   || actionType === CHAT_SHOW;
 
-const About = ({ store }) => {
+const About = () => {
   const [isShow, show, hide] = useBool(true)
   , TS = useTheme(TH_ID);
 
-  useListen(store, actionType => {
+  useListen(actionType => {
     if (actionType === CAT.SHOW_ABOUT){
       show()
     } else if (_isHide(actionType)) {

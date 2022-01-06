@@ -19,13 +19,11 @@ const ENABLE_HOT_KEYS = !_has.default.touch;
 
 const AppProvider = _ref => {
   let {
-    store,
     children
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotKeysProvider.default, {
     is: ENABLE_HOT_KEYS,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ThemeProvider.default, {
-      store: store,
       actionChangeTheme: _ComponentActions.ComponentActionTypes.CHANGE_THEME,
       children: children
     })

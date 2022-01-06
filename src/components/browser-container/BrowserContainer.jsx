@@ -7,14 +7,13 @@ import DialogContainer from '../zhn-containers/DialogContainer';
 const CL_ROOT = "hrz-container";
 
 const BrowserContainer = ({
-  store,
   initBrowserAction,
   showDialogAction,
   onCloseDialog
 }) => {
   const [elBrowsers, setElBrowsers] = useState([]);
 
-  useListen(store, (actionType, elBrowser) => {
+  useListen((actionType, elBrowser) => {
     if (actionType === initBrowserAction){
       setElBrowsers(arrEl => [elBrowser, ...arrEl])
     }
@@ -24,7 +23,6 @@ const BrowserContainer = ({
        {elBrowsers}
        <DialogContainer
           maxDialog={3}
-          store={store}
           showAction={showDialogAction}
           onCloseDialog={onCloseDialog}
        />

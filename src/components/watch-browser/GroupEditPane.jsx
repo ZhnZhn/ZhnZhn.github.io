@@ -44,7 +44,7 @@ const GroupEditPane = ({
   ), [_hRename]);
 
 
-  useListen(store, (actionType, data)=>{
+  useListen((actionType, data)=>{
     if (actionType === actionCompleted){
       if (data.forActionType === forActionType){
         _hClear()

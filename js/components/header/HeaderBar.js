@@ -65,7 +65,6 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
 
 const HeaderBar = _ref => {
   let {
-    store,
     showSettings
   } = _ref;
   const [isTopics, toggleTopics] = useToggle(false),
@@ -74,9 +73,7 @@ const HeaderBar = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_HEADER,
     style: TS.ROOT,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading.default, {
-      store: store
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc.default, {
       className: CL_ICON,
       title: LOGO_TITLE
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_AppLabel.default, {
@@ -115,14 +112,11 @@ const HeaderBar = _ref => {
       onClick: _BrowserActions.default.showWatch
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
       btStyle: TS.BT_HOT,
-      store: store,
       closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
       onShowDialog: _ComponentActions.default.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_BTS_RIGHT,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {
-        store: store
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
         style: TS.BT,
         isPrimary: true,
         title: "User Settings Dialog",

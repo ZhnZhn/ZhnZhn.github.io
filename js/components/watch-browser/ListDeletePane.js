@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -13,39 +11,38 @@ var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
-//import PropTypes from "prop-types";
-var ListDeletePane = function ListDeletePane(_ref) {
-  var store = _ref.store,
-      actionCompleted = _ref.actionCompleted,
-      forActionType = _ref.forActionType,
-      onDelete = _ref.onDelete,
-      msgOnNotSelect = _ref.msgOnNotSelect,
-      onClose = _ref.onClose;
+var _jsxRuntime = require("react/jsx-runtime");
 
-  var _useState = (0, _react.useState)(function () {
-    return store.getWatchGroups();
-  }),
-      groupOptions = _useState[0],
-      setGroupOptions = _useState[1],
-      _useState2 = (0, _react.useState)([]),
-      validationMessages = _useState2[0],
-      setValidationMessages = _useState2[1],
-      _refSelectGroupList = (0, _react.useRef)(),
-      _hClear = (0, _react.useCallback)(function () {
-    return setValidationMessages([]);
-  }, []),
-      _hDelete = (0, _react.useCallback)(function () {
-    var _refSelectGroupList$c = _refSelectGroupList.current.getValue(),
-        captionGroup = _refSelectGroupList$c.captionGroup,
-        captionList = _refSelectGroupList$c.captionList;
+//import PropTypes from "prop-types";
+const ListDeletePane = _ref => {
+  let {
+    store,
+    actionCompleted,
+    forActionType,
+    onDelete,
+    msgOnNotSelect,
+    onClose
+  } = _ref;
+
+  const [groupOptions, setGroupOptions] = (0, _react.useState)(() => store.getWatchGroups()),
+        [validationMessages, setValidationMessages] = (0, _react.useState)([]),
+        _refSelectGroupList = (0, _react.useRef)(),
+        _hClear = (0, _react.useCallback)(() => setValidationMessages([]), [])
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hDelete = (0, _react.useCallback)(() => {
+    const {
+      captionGroup,
+      captionList
+    } = _refSelectGroupList.current.getValue();
 
     if (captionGroup && captionList) {
       onDelete({
-        captionGroup: captionGroup,
-        captionList: captionList
+        captionGroup,
+        captionList
       });
     } else {
-      var msg = [];
+      const msg = [];
 
       if (!captionGroup) {
         msg.push(msgOnNotSelect('Group'));
@@ -57,16 +54,17 @@ var ListDeletePane = function ListDeletePane(_ref) {
 
       setValidationMessages(msg);
     }
-  }, []),
-      _primaryBt = (0, _react.useMemo)(function () {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
-      caption: "Delete",
-      title: "Delete List",
-      onClick: _hDelete
-    });
-  }, [_hDelete]);
+  }, []) //onDelete. msgOnNotSelect
 
-  (0, _useListen["default"])(store, function (actionType, data) {
+  /*eslint-enable react-hooks/exhaustive-deps */
+  ,
+        _primaryBt = (0, _react.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
+    caption: "Delete",
+    title: "Delete List",
+    onClick: _hDelete
+  }), [_hDelete]);
+
+  (0, _useListen.default)((actionType, data) => {
     if (actionType === actionCompleted) {
       if (data.forActionType === forActionType) {
         _hClear();
@@ -76,15 +74,15 @@ var ListDeletePane = function ListDeletePane(_ref) {
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].SelectGroupList, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.SelectGroupList, {
       ref: _refSelectGroupList,
       store: store,
       groupCaption: "In Group:",
       groupOptions: groupOptions,
       listCaption: "List:"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       Primary: _primaryBt,
       onClear: _hClear,
       onClose: onClose
@@ -107,5 +105,5 @@ ListDeletePane.propTypes = {
 
 
 var _default = ListDeletePane;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ListDeletePane.js.map

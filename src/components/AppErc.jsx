@@ -31,22 +31,18 @@ const AppErc = () => {
   }, [])
 
   return (
-    <AppProvider store={ChartStore}>
-      <HeaderBar store={ChartStore} showSettings={showSettings} />
+    <AppProvider>
+      <HeaderBar showSettings={showSettings} />
       <div className={CL_COMP_CONTAINER}>
          <BrowserContainer
-            store={ChartStore}
             initBrowserAction={BAT_INIT_BROWSER_DYNAMIC}
             showDialogAction={CAT.SHOW_DIALOG}
             onCloseDialog={CA.closeDialog}
          />
-         <About store={ChartStore} />
-         <CompContainer
-           store={ChartStore}
-           addAction={CHAT_INIT_AND_SHOW}
-         />
+         <About />
+         <CompContainer addAction={CHAT_INIT_AND_SHOW} />
        </div>
-       <DialogContainer store={ChartStore} />
+       <DialogContainer />
     </AppProvider>
   );
 };

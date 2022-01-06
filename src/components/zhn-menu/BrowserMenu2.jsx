@@ -48,7 +48,7 @@ const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
 
 const BrowserMenu2 = ({
   isInitShow,
-  store,
+  //store,
   browserType,
   showAction, loadedAction, failedAction,
   caption,
@@ -65,7 +65,7 @@ const BrowserMenu2 = ({
       setLoading, setLoaded, setFailed
     ] = useLoadMenu();
 
-  useListen(store, (actionType, data) => {
+  useListen((actionType, data) => {
     if (data === browserType){
       if (actionType === showAction) {
         showBrowser();

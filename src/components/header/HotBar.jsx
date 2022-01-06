@@ -69,8 +69,7 @@ const _crHotBtItem = (
 
 const HotBar = ({
   maxButtons=5,
-  btStyle,
-  store,
+  btStyle,  
   closeDialogAction,
   onShowDialog
 }) => {
@@ -78,7 +77,7 @@ const HotBar = ({
   , [hotButtons, setHotButtons] = useState([])
   , _hClean = useCallback(() => setHotButtons([]), []);
 
-  useListen(store, (actionType, conf) => {
+  useListen((actionType, conf) => {
     if (actionType === closeDialogAction ) {
       setHotButtons(arr => {
         if (!_isIn(arr, conf.type)) {

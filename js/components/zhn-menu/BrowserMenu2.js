@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _useLoadMenu2 = _interopRequireDefault(require("./useLoadMenu"));
+var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -21,84 +21,77 @@ var _MenuItems = _interopRequireDefault(require("./MenuItems2"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var useBool = _use.default.useBool,
-    useToggle = _use.default.useToggle,
-    useListen = _use.default.useListen,
-    Browser = _Comp.default.Browser,
-    BrowserCaption = _Comp.default.BrowserCaption,
-    ShowHide = _Comp.default.ShowHide,
-    ScrollPane = _Comp.default.ScrollPane,
-    SpinnerLoading = _Comp.default.SpinnerLoading;
-var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
-var CL_BROWSER = "scroll-browser-by",
-    CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search",
-    CL_ROW_ITEM = 'row__type2-topic not-selected',
-    S_BROWSER = {
+const {
+  useBool,
+  useToggle,
+  useListen
+} = _use.default,
+      {
+  Browser,
+  BrowserCaption,
+  ShowHide,
+  ScrollPane,
+  SpinnerLoading
+} = _Comp.default;
+const SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
+const CL_BROWSER = "scroll-browser-by",
+      CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search",
+      CL_ROW_ITEM = 'row__type2-topic not-selected',
+      S_BROWSER = {
   paddingRight: 0,
   paddingBottom: 4,
   minWidth: 300
 },
-    S_WRAPPER_SEARCH = {
+      S_WRAPPER_SEARCH = {
   width: '100%',
   paddingBottom: 8,
   paddingRight: 24
 };
 
-var _useToolbarButtons = function _useToolbarButtons(toggleSearch, onClickInfo, descrUrl) {
+const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
   /*eslint-disable react-hooks/exhaustive-deps */
-  var _hClickInfo = (0, _react.useCallback)(function () {
+  const _hClickInfo = (0, _react.useCallback)(() => {
     onClickInfo({
-      descrUrl: descrUrl
+      descrUrl
     });
   }, []);
 
-  return (0, _react.useMemo)(function () {
-    return [{
-      caption: 'S',
-      title: 'Click to toggle input search',
-      onClick: toggleSearch
-    }, {
-      caption: 'A',
-      title: 'About Datasources',
-      onClick: _hClickInfo
-    }];
-  }, [_hClickInfo]);
+  return (0, _react.useMemo)(() => [{
+    caption: 'S',
+    title: 'Click to toggle input search',
+    onClick: toggleSearch
+  }, {
+    caption: 'A',
+    title: 'About Datasources',
+    onClick: _hClickInfo
+  }], [_hClickInfo]);
   /*eslint-enable react-hooks/exhaustive-deps */
 };
 
-var BrowserMenu2 = function BrowserMenu2(_ref) {
-  var isInitShow = _ref.isInitShow,
-      store = _ref.store,
-      browserType = _ref.browserType,
-      showAction = _ref.showAction,
-      loadedAction = _ref.loadedAction,
-      failedAction = _ref.failedAction,
-      caption = _ref.caption,
-      onLoadMenu = _ref.onLoadMenu,
-      descrUrl = _ref.descrUrl,
-      onClickInfo = _ref.onClickInfo,
-      onShowLoadDialog = _ref.onShowLoadDialog,
-      ItemOptionComp = _ref.ItemOptionComp,
-      ItemComp = _ref.ItemComp,
-      children = _ref.children;
+const BrowserMenu2 = _ref => {
+  let {
+    isInitShow,
+    //store,
+    browserType,
+    showAction,
+    loadedAction,
+    failedAction,
+    caption,
+    onLoadMenu,
+    descrUrl,
+    onClickInfo,
+    onShowLoadDialog,
+    ItemOptionComp,
+    ItemComp,
+    children
+  } = _ref;
 
-  var _useBool = useBool(isInitShow),
-      isShow = _useBool[0],
-      showBrowser = _useBool[1],
-      hideBrowser = _useBool[2],
-      _useToggle = useToggle(),
-      isShowSearch = _useToggle[0],
-      toggleSearch = _useToggle[1],
-      _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
-      _useLoadMenu = (0, _useLoadMenu2.default)(),
-      isLoading = _useLoadMenu[0],
-      isLoaded = _useLoadMenu[1],
-      menu = _useLoadMenu[2],
-      setLoading = _useLoadMenu[3],
-      setLoaded = _useLoadMenu[4],
-      setFailed = _useLoadMenu[5];
+  const [isShow, showBrowser, hideBrowser] = useBool(isInitShow),
+        [isShowSearch, toggleSearch] = useToggle(),
+        _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
+        [isLoading, isLoaded, menu, setLoading, setLoaded, setFailed] = (0, _useLoadMenu.default)();
 
-  useListen(store, function (actionType, data) {
+  useListen((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
         showBrowser();
@@ -111,7 +104,7 @@ var BrowserMenu2 = function BrowserMenu2(_ref) {
   });
   /*eslint-disable react-hooks/exhaustive-deps */
 
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (!isLoaded && isShow) {
       onLoadMenu();
       setLoading();
@@ -119,7 +112,7 @@ var BrowserMenu2 = function BrowserMenu2(_ref) {
   }, [isLoaded, isShow]);
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  var _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
+  const _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,

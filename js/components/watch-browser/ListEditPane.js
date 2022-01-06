@@ -3,55 +3,52 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
-var _useInputText2 = _interopRequireDefault(require("./hooks/useInputText"));
+var _useInputText = _interopRequireDefault(require("./hooks/useInputText"));
 
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 
-//import PropTypes from "prop-types";
-var ListEditPane = function ListEditPane(_ref) {
-  var store = _ref.store,
-      onRename = _ref.onRename,
-      msgOnIsEmptyName = _ref.msgOnIsEmptyName,
-      msgOnNotSelect = _ref.msgOnNotSelect,
-      actionCompleted = _ref.actionCompleted,
-      actionFailed = _ref.actionFailed,
-      forActionType = _ref.forActionType,
-      onClose = _ref.onClose;
+var _jsxRuntime = require("react/jsx-runtime");
 
-  var _useState = (0, _react.useState)(function () {
-    return store.getWatchGroups();
-  }),
-      groupOptions = _useState[0],
-      setGroupOptions = _useState[1],
-      _useState2 = (0, _react.useState)([]),
-      validationMessages = _useState2[0],
-      setValidationMessages = _useState2[1],
-      _refSelectGroupList = (0, _react.useRef)(),
-      _useInputText = (0, _useInputText2["default"])(setValidationMessages),
-      _refInputText = _useInputText[0],
-      _hClear = _useInputText[1],
-      _hRename = (0, _react.useCallback)(function () {
-    var _refSelectGroupList$c = _refSelectGroupList.current.getValue(),
-        captionGroup = _refSelectGroupList$c.captionGroup,
-        captionList = _refSelectGroupList$c.captionList,
-        captionListTo = _refInputText.current.getValue();
+//import PropTypes from "prop-types";
+const ListEditPane = _ref => {
+  let {
+    store,
+    onRename,
+    msgOnIsEmptyName,
+    msgOnNotSelect,
+    actionCompleted,
+    actionFailed,
+    forActionType,
+    onClose
+  } = _ref;
+
+  const [groupOptions, setGroupOptions] = (0, _react.useState)(() => store.getWatchGroups()),
+        [validationMessages, setValidationMessages] = (0, _react.useState)([]),
+        _refSelectGroupList = (0, _react.useRef)(),
+        [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hRename = (0, _react.useCallback)(() => {
+    const {
+      captionGroup,
+      captionList
+    } = _refSelectGroupList.current.getValue(),
+          captionListTo = _refInputText.current.getValue();
 
     if (captionGroup && captionList && captionListTo) {
       onRename({
-        captionGroup: captionGroup,
+        captionGroup,
         captionListFrom: captionList,
-        captionListTo: captionListTo
+        captionListTo
       });
     } else {
-      var msg = [];
+      const msg = [];
 
       if (!captionGroup) {
         msg.push(msgOnNotSelect('Group'));
@@ -67,16 +64,17 @@ var ListEditPane = function ListEditPane(_ref) {
 
       setValidationMessages(msg);
     }
-  }, []),
-      _primaryBt = (0, _react.useMemo)(function () {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].Button.Primary, {
-      caption: "Edit",
-      title: "Edit List Name",
-      onClick: _hRename
-    });
-  }, [_hRename]);
+  }, []) //onRename, msgOnNotSelect, msgOnIsEmptyName
 
-  (0, _useListen["default"])(store, function (actionType, data) {
+  /*eslint-enable react-hooks/exhaustive-deps */
+  ,
+        _primaryBt = (0, _react.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
+    caption: "Edit",
+    title: "Edit List Name",
+    onClick: _hRename
+  }), [_hRename]);
+
+  (0, _useListen.default)((actionType, data) => {
     if (actionType === actionCompleted) {
       if (data.forActionType === forActionType) {
         _hClear();
@@ -88,18 +86,18 @@ var ListEditPane = function ListEditPane(_ref) {
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].SelectGroupList, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.SelectGroupList, {
       ref: _refSelectGroupList,
       store: store,
       groupCaption: "In Group:",
       groupOptions: groupOptions,
       listCaption: "List From:"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowInputText, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputText, {
       ref: _refInputText,
       caption: "List To:"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].ValidationMessages, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms["default"].RowButtons, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       Primary: _primaryBt,
       onClear: _hClear,
       onClose: onClose
@@ -126,5 +124,5 @@ ListEditPane.propTypes = {
 
 
 var _default = ListEditPane;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ListEditPane.js.map

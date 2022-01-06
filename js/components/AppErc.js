@@ -49,26 +49,18 @@ const AppErc = () => {
     (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.default.showReload);
   }, []);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_AppProvider.default, {
-    store: _ChartStore.default,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
-      store: _ChartStore.default,
       showSettings: showSettings
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_COMP_CONTAINER,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
-        store: _ChartStore.default,
         initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC,
         showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
         onCloseDialog: _ComponentActions.default.closeDialog
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {
-        store: _ChartStore.default
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
-        store: _ChartStore.default,
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
         addAction: _ChartActions.CHAT_INIT_AND_SHOW
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
-      store: _ChartStore.default
-    })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {})]
   });
 };
 

@@ -1,7 +1,6 @@
 import { useState, useCallback, createElement } from 'react';
-//import PropTypes from "prop-types";
 
-import useListen from '../hooks/useListen'
+import useListen from '../hooks/useListen';
 
 import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
@@ -30,9 +29,7 @@ const _renderDialogs = (
 }));
 
 
-const DialogContainer = ({
-  store
-}) => {
+const DialogContainer = () => {
   const [state, setState] = useState({
     isShow: false,
     inits: {},
@@ -41,6 +38,7 @@ const DialogContainer = ({
     dialogs: [],
     currentDialog: null
   })
+  , { isShow, currentDialog } = state
   , _hClose = useCallback(type => {
      setState(prevState => {
        prevState.shows[type] = false
@@ -49,8 +47,7 @@ const DialogContainer = ({
        return {...prevState};
      })
   }, [])
-
-  useListen(store, (actionType, option) => {
+  , store = useListen((actionType, option) => {
     if (actionType === CAT.SHOW_MODAL_DIALOG){
       const type = option.modalDialogType
       , { inits } = state;
@@ -74,9 +71,7 @@ const DialogContainer = ({
           )
       }
     }
-  })
-
-  const { isShow, currentDialog } = state;
+  });
 
   return (
     <ModalDialogContainer
@@ -86,14 +81,6 @@ const DialogContainer = ({
        {_renderDialogs(store, state, _hClose)}
    </ModalDialogContainer>
   );
-}
-
-/*
-DialogContainer.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func
-  })
-}
-*/
+};
 
 export default DialogContainer

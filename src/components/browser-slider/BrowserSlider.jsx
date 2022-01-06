@@ -29,7 +29,7 @@ const S_BROWSER = { paddingRight: 0 }
 const BrowserSlider = memo((props) => {
   const {
     isInitShow, caption,
-    store, browserType, showAction
+    browserType, showAction
   } = props
   const [isShow, show, hide] = useBool(isInitShow)
   , [isMenuMore, toggleMenuMore] = useToggle()
@@ -41,7 +41,7 @@ const BrowserSlider = memo((props) => {
   //props.dfProps.lT
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  useListen(store, (actionType, data) => {
+  useListen((actionType, data) => {
     if (actionType === showAction && data === browserType){
       show()
     }
@@ -59,7 +59,7 @@ const BrowserSlider = memo((props) => {
            style={S_BR_CAPTION}
            caption={caption}
            captionStyle={S_CAPTION}
-           svgMoreStyle={S_SVG_MORE}             
+           svgMoreStyle={S_SVG_MORE}
            onMore={toggleMenuMore}
            onClose={hide}
         />
