@@ -68,7 +68,6 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.5.0",
-    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
     "del": "^6.0.0",
     "eslint": "^7.32.0",
@@ -95,7 +94,7 @@
     "webpack-dev-server": "^4.6.0"
   },
   "jest": {
-    "testEnvironment": "jsdom", 
+    "testEnvironment": "jsdom",
     "roots": [
       "<rootDir>/js/charts",
       "<rootDir>/js/charts/plugin",
