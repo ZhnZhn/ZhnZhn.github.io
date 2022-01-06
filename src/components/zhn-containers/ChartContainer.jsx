@@ -166,45 +166,46 @@ class ChartContainer extends Component {
       this.setState({ isShow: false });
    }
 
-   _getItemMax = () => this.state.configs.length
-
-   _hResizeAfter = (parentWidth) => {
-     const max = this._getItemMax();
+   _forEachItem = (onItem) => {
+     const max = this.state.configs.length
      let i=0, _refItem;
      for (; i<max; i++) {
         _refItem = this[_crItemRefPropName(i)]
-        if (_refItem && _isFn(_refItem.reflowChart)){
-          _refItem.reflowChart(parentWidth - this.childMargin)
+        if (_refItem){
+          onItem(_refItem)
         }
      }
+     return max;
+   }
+
+   _hResizeAfter = (parentWidth) => {
+     this._forEachItem(refItem => {
+       if (_isFn(refItem.reflowChart)){
+         refItem.reflowChart(parentWidth - this.childMargin)
+       }
+     })
    }
 
    _compareTo = (dateTo) => {
      const _arrR = []
-     , max = this._getItemMax();
-     let i=0, _refItem;
-     for (; i<max; i++) {
-        _refItem = this[_crItemRefPropName(i)]
-        if (_refItem && _isFn(_refItem.compareTo)){
-          _arrR.push(_refItem.compareTo(dateTo))
-        }
-     }
-     const _r = max - _arrR.filter(Boolean).length;
-     if (max > 0 && _r === 0) {
+     , itemLength = this._forEachItem(refItem => {
+       if (_isFn(refItem.compareTo)){
+         _arrR.push(refItem.compareTo(dateTo))
+       }
+     })
+     const _r = itemLength - _arrR.filter(Boolean).length;
+     if (itemLength > 0 && _r === 0) {
        this.props.updateMovingValues(_arrR)
      }
      return _r;
    }
 
-   _onShowCaptions = (parentWidth) => {
-     const max = this._getItemMax()
-     let i=0, _refItem;
-     for (; i<max; i++) {
-        _refItem = this[_crItemRefPropName(i)]
-        if (_refItem && _isFn(_refItem.showCaption)){
-          _refItem.showCaption()
-        }
-     }
+   _onShowCaptions = () => {
+     this._forEachItem(refItem => {
+       if (_isFn(refItem.showCaption)){
+         refItem.showCaption()
+       }
+     })
    }
 
    _showMore = () => {
