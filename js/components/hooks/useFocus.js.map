@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useFocus.js"
+ ],
+ "file": "../../../src/components/hooks/useFocus.js",
+ "names": [
+  "useFocus",
+  "isShow",
+  "ref",
+  "current",
+  "focus"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAIC,MAAD,IAAY;AAC3B,QAAMC,GAAG,GAAG,oBAAZ;AACA,wBAAU,MAAM;AACd,QAAID,MAAM,IAAIC,GAAG,CAACC,OAAlB,EAA2B;AACzBD,MAAAA,GAAG,CAACC,OAAJ,CAAYC,KAAZ;AACD;AACF,GAJD,EAIG,CAACH,MAAD,CAJH;AAKA,SAAOC,GAAP;AACD,CARD;;eAUeF,Q"
+}
