@@ -1,1 +1,27 @@
-{"version":3,"sources":["../../../src/charts/tp/tpTreeMap.js"],"names":["crHeader","fn","crRow","toNumberFormatAll","_crTreeMap","id","point","title","label","value","percent","_percent","_value","color","C","YEAR_C","tpTreeMap","fnTemplate"],"mappings":";;;;;;;AAAA;;AACA;;IAGEA,Q,GAEEC,gB,CAFFD,Q;IAAUE,K,GAERD,gB,CAFQC,K;IACVC,iB,GACEF,gB,CADFE,iB;;AAGF,IAAMC,UAAU,GAAG,SAAbA,UAAa,OAAuB;AAAA,MAAZC,EAAY,QAAZA,EAAY;AAAA,MAARC,KAAQ,QAARA,KAAQ;;AAAA,MAChCC,KADgC,GACID,KADJ,CAChCC,KADgC;AAAA,MACzBC,KADyB,GACIF,KADJ,CACzBE,KADyB;AAAA,MAClBC,KADkB,GACIH,KADJ,CAClBG,KADkB;AAAA,uBACIH,KADJ,CACXI,OADW;AAAA,MACXA,OADW,+BACH,EADG;AAAA,MAEtCC,QAFsC,GAE3BD,OAAO,SAAOA,OAAP,UAAqB,EAFD;AAAA,MAGtCE,MAHsC,GAG1BT,iBAAiB,CAACM,KAAD,CAHS,SAGEE,QAHF;;AAIxC,SAAUX,QAAQ,CAACO,KAAD,EAAQF,EAAR,CAAlB,yCAEIH,KAAK,CAAC,EAAD,EAAKM,KAAL,CAFT,cAGIN,KAAK,CAAC,EAAD,EAAKU,MAAL,EAAa;AAAEC,IAAAA,KAAK,EAAEC,qBAAEC;AAAX,GAAb,CAHT;AAMD,CAVD;;AAYA,IAAMC,SAAS,GAAG;AAChBP,EAAAA,KAAK,EAAE;AACLQ,IAAAA,UAAU,EAAEb;AADP;AADS,CAAlB;eAMeY,S","sourcesContent":["import fn from './tpFn'\r\nimport C from './tpConfig'\r\n\r\nconst {\r\n  crHeader, crRow,\r\n  toNumberFormatAll\r\n} = fn;\r\n\r\nconst _crTreeMap = function({ id, point }){\r\n  const { title, label, value, percent='' } = point\r\n  , _percent = percent ? `(${percent}%)` : ''\r\n  , _value = `${toNumberFormatAll(value)} ${_percent}`;\r\n  return `${crHeader(title, id)}\r\n  <div class=\"tp_body\">\r\n    ${crRow('', label)}\r\n    ${crRow('', _value, { color: C.YEAR_C })}\r\n  </div>\r\n  `;\r\n}\r\n\r\nconst tpTreeMap = {\r\n  value: {\r\n    fnTemplate: _crTreeMap\r\n  }\r\n};\r\n\r\nexport default tpTreeMap\r\n"],"file":"tpTreeMap.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/tp/tpTreeMap.js"
+ ],
+ "file": "../../../src/charts/tp/tpTreeMap.js",
+ "names": [
+  "crHeader",
+  "crRow",
+  "toNumberFormatAll",
+  "fn",
+  "_crTreeMap",
+  "id",
+  "point",
+  "title",
+  "label",
+  "value",
+  "percent",
+  "_percent",
+  "_value",
+  "color",
+  "YEAR_COLOR",
+  "tpTreeMap",
+  "fnTemplate"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAM;AACJA,EAAAA,QADI;AACMC,EAAAA,KADN;AAEJC,EAAAA;AAFI,IAGFC,aAHJ;;AAKA,MAAMC,UAAU,GAAG,gBAAuB;AAAA,MAAd;AAAEC,IAAAA,EAAF;AAAMC,IAAAA;AAAN,GAAc;;AACxC,QAAM;AAAEC,IAAAA,KAAF;AAASC,IAAAA,KAAT;AAAgBC,IAAAA,KAAhB;AAAuBC,IAAAA,OAAO,GAAC;AAA/B,MAAsCJ,KAA5C;AAAA,QACEK,QAAQ,GAAGD,OAAO,SAAOA,OAAP,UAAqB,EADzC;AAAA,QAEEE,MAAM,GAAMV,iBAAiB,CAACO,KAAD,CAAvB,SAAkCE,QAF1C;;AAGA,SAAUX,QAAQ,CAACO,KAAD,EAAQF,EAAR,CAAlB,yCAEIJ,KAAK,CAAC,EAAD,EAAKO,KAAL,CAFT,cAGIP,KAAK,CAAC,EAAD,EAAKW,MAAL,EAAa;AAAEC,IAAAA,KAAK,EAAEC;AAAT,GAAb,CAHT;AAMD,CAVD;;AAYA,MAAMC,SAAS,GAAG;AAChBN,EAAAA,KAAK,EAAE;AACLO,IAAAA,UAAU,EAAEZ;AADP;AADS,CAAlB;eAMeW,S"
+}

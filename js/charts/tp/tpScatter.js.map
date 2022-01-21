@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/charts/tp/tpScatter.js"],"names":["crHeader","fn","crRow","crSpan","FONT_STYLE","_crExDividend","date","id","valueText","value","point","exValue","price","color","_crSplitRatio","splitRatio","_crExValue","_crEps","announceTime","fiscalPeriod","fiscalEndDate","actualEPS","estimatedEPS","numberOfEstimates","EPSSurpriseDollar","C","YEAR_C","tpScatter","exDividend","fnTemplate","eps"],"mappings":"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","sourcesContent":["import fn from './tpFn'\r\nimport C from './tpConfig'\r\n\r\nconst { crHeader, crRow, crSpan } = fn;\r\n\r\nconst FONT_STYLE = 'font-size:16px;font-weight:bold';\r\n\r\nconst _crExDividend = function({date, id, valueText, value, point}){\r\n  const { exValue, price } = point;\r\n  return `${crHeader(date, id)}\r\n  <div class=\"tp__body\">\r\n    ${crRow('Ex-Dividend', exValue, { color: '#90ed7d'})}\r\n    ${crRow('Close', price)}\r\n  </div>`;\r\n};\r\n\r\nconst _crSplitRatio = function({date, id, valueText, value, point}){\r\n  const { splitRatio, price } = point\r\n  return `${crHeader(date, id)}\r\n  <div class=\"tp__body\">\r\n    ${crRow('Split Ratio', splitRatio, { color: '#ED5813'})}\r\n    ${crRow('Close', price)}\r\n  </div>`;\r\n};\r\n\r\nconst _crExValue = function({ date, id, point }){\r\n  const { exValue } = point;\r\n  return `${crHeader(date, id)}\r\n  <div class=\"tp__body\">\r\n    ${crRow('Value', exValue)}\r\n  </div>`;\r\n};\r\n\r\nconst _crEps = function({ date, id, point }){\r\n  const {\r\n          announceTime, fiscalPeriod, fiscalEndDate,\r\n          actualEPS, estimatedEPS,\r\n          numberOfEstimates, EPSSurpriseDollar\r\n        } = point;\r\n  return `${crHeader(date, id)}\r\n  <div class=\"tp_body\">\r\n    <div>\r\n      ${crSpan('', announceTime, { color: C.YEAR_C })}\r\n      ${crSpan('', fiscalPeriod)}\r\n      ${crSpan('', fiscalEndDate)}\r\n    </div>\r\n    <div style=${FONT_STYLE}>\r\n      ${crSpan('EPS', actualEPS)}\r\n      ${crSpan('Est.', estimatedEPS)}\r\n    </div>\r\n    <div style=${FONT_STYLE}>\r\n      ${crSpan('Supr.', EPSSurpriseDollar)}\r\n      ${crSpan('NumbEst.', numberOfEstimates)}\r\n    </div>\r\n  </div>`;\r\n};\r\n\r\nconst tpScatter = {\r\n  exDividend: {\r\n    fnTemplate: _crExDividend\r\n  },\r\n  splitRatio: {\r\n    fnTemplate: _crSplitRatio\r\n  },\r\n  exValue: {\r\n    fnTemplate: _crExValue\r\n  },\r\n  eps: {\r\n    fnTemplate: _crEps\r\n  }\r\n};\r\n\r\nexport default tpScatter\r\n"],"file":"tpScatter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/tp/tpScatter.js"
+ ],
+ "file": "../../../src/charts/tp/tpScatter.js",
+ "names": [
+  "crHeader",
+  "crRow",
+  "crSpan",
+  "fn",
+  "FONT_STYLE",
+  "_crExDividend",
+  "date",
+  "id",
+  "valueText",
+  "value",
+  "point",
+  "exValue",
+  "price",
+  "color",
+  "EX_DIVIDEND_COLOR",
+  "_crSplitRatio",
+  "splitRatio",
+  "SPLIT_RATIO_COLOR",
+  "_crExValue",
+  "_crEps",
+  "announceTime",
+  "fiscalPeriod",
+  "fiscalEndDate",
+  "actualEPS",
+  "estimatedEPS",
+  "numberOfEstimates",
+  "EPSSurpriseDollar",
+  "YEAR_COLOR",
+  "tpScatter",
+  "exDividend",
+  "fnTemplate",
+  "eps"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAMA,MAAM;AAAEA,EAAAA,QAAF;AAAYC,EAAAA,KAAZ;AAAmBC,EAAAA;AAAnB,IAA8BC,aAApC;AAEA,MAAMC,UAAU,GAAG,iCAAnB;;AAEA,MAAMC,aAAa,GAAG,gBAA6C;AAAA,MAApC;AAACC,IAAAA,IAAD;AAAOC,IAAAA,EAAP;AAAWC,IAAAA,SAAX;AAAsBC,IAAAA,KAAtB;AAA6BC,IAAAA;AAA7B,GAAoC;AACjE,QAAM;AAAEC,IAAAA,OAAF;AAAWC,IAAAA;AAAX,MAAqBF,KAA3B;AACA,SAAUV,QAAQ,CAACM,IAAD,EAAOC,EAAP,CAAlB,0CAEIN,KAAK,CAAC,aAAD,EAAgBU,OAAhB,EAAyB;AAAEE,IAAAA,KAAK,EAAEC;AAAT,GAAzB,CAFT,cAGIb,KAAK,CAAC,OAAD,EAAUW,KAAV,CAHT;AAKD,CAPD;;AASA,MAAMG,aAAa,GAAG,iBAA6C;AAAA,MAApC;AAACT,IAAAA,IAAD;AAAOC,IAAAA,EAAP;AAAWC,IAAAA,SAAX;AAAsBC,IAAAA,KAAtB;AAA6BC,IAAAA;AAA7B,GAAoC;AACjE,QAAM;AAAEM,IAAAA,UAAF;AAAcJ,IAAAA;AAAd,MAAwBF,KAA9B;AACA,SAAUV,QAAQ,CAACM,IAAD,EAAOC,EAAP,CAAlB,0CAEIN,KAAK,CAAC,aAAD,EAAgBe,UAAhB,EAA4B;AAAEH,IAAAA,KAAK,EAAEI;AAAT,GAA5B,CAFT,cAGIhB,KAAK,CAAC,OAAD,EAAUW,KAAV,CAHT;AAKD,CAPD;;AASA,MAAMM,UAAU,GAAG,iBAA6B;AAAA,MAApB;AAAEZ,IAAAA,IAAF;AAAQC,IAAAA,EAAR;AAAYG,IAAAA;AAAZ,GAAoB;AAC9C,QAAM;AAAEC,IAAAA;AAAF,MAAcD,KAApB;AACA,SAAUV,QAAQ,CAACM,IAAD,EAAOC,EAAP,CAAlB,0CAEIN,KAAK,CAAC,OAAD,EAAUU,OAAV,CAFT;AAID,CAND;;AAQA,MAAMQ,MAAM,GAAG,iBAA6B;AAAA,MAApB;AAAEb,IAAAA,IAAF;AAAQC,IAAAA,EAAR;AAAYG,IAAAA;AAAZ,GAAoB;AAC1C,QAAM;AACJU,IAAAA,YADI;AACUC,IAAAA,YADV;AACwBC,IAAAA,aADxB;AAEJC,IAAAA,SAFI;AAEOC,IAAAA,YAFP;AAGJC,IAAAA,iBAHI;AAGeC,IAAAA;AAHf,MAIFhB,KAJJ;AAKA,SAAUV,QAAQ,CAACM,IAAD,EAAOC,EAAP,CAAlB,sDAGML,MAAM,CAAC,EAAD,EAAKkB,YAAL,EAAmB;AAAEP,IAAAA,KAAK,EAAEc;AAAT,GAAnB,CAHZ,gBAIMzB,MAAM,CAAC,EAAD,EAAKmB,YAAL,CAJZ,gBAKMnB,MAAM,CAAC,EAAD,EAAKoB,aAAL,CALZ,qCAOelB,UAPf,iBAQMF,MAAM,CAAC,KAAD,EAAQqB,SAAR,CARZ,gBASMrB,MAAM,CAAC,MAAD,EAASsB,YAAT,CATZ,qCAWepB,UAXf,iBAYMF,MAAM,CAAC,OAAD,EAAUwB,iBAAV,CAZZ,gBAaMxB,MAAM,CAAC,UAAD,EAAauB,iBAAb,CAbZ;AAgBD,CAtBD;;AAwBA,MAAMG,SAAS,GAAG;AAChBC,EAAAA,UAAU,EAAE;AACVC,IAAAA,UAAU,EAAEzB;AADF,GADI;AAIhBW,EAAAA,UAAU,EAAE;AACVc,IAAAA,UAAU,EAAEf;AADF,GAJI;AAOhBJ,EAAAA,OAAO,EAAE;AACPmB,IAAAA,UAAU,EAAEZ;AADL,GAPO;AAUhBa,EAAAA,GAAG,EAAE;AACHD,IAAAA,UAAU,EAAEX;AADT;AAVW,CAAlB;eAeeS,S"
+}

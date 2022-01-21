@@ -1,4 +1,4 @@
-import fn from './tpFn'
+import fn from './tpFn';
 
 const {
   crHeader, crRow,
@@ -7,27 +7,30 @@ const {
   toTdmyIf
 } = fn;
 
-const _crVolume = function({ date, id, value, point }){
-  const { _open='NoData', _close='', _low='', _high='' } = point;
+const CL_TP_BODY = "tp__body"
+, CL_TP_ROW = "tp__row";
+
+const _crVolume = ({date, id, value, point}) => {
+  const {_open, _close, _low, _high} = point;
   return `${crHeader(date, id)}
-  <div class="tp__body">
+  <div class="${CL_TP_BODY}">
     ${crRow('Volume', value)}
-    <div>
+    <div class="${CL_TP_ROW}">
       ${crNotEmptySpan('Open', _open)}
       ${crNotEmptySpan('Close', _close)}
     </div>
-    <div>
+    <div class="${CL_TP_ROW}">
       ${crNotEmptySpan('Low', _low)}
       ${crNotEmptySpan('High', _high)}
     </div>
   </div>`;
 };
 
-const _crAtn = function({date, id, value, point}){
-  const { color, y, close, open } = point
-   return `${crHeader(date, id)}
-    <div class="tp__body">
-      ${crRow('ATH', y+'%', { color })}
+const _crAtn = ({date, id, value, point}) => {
+  const {color, y, close, open} = point;
+  return `${crHeader(date, id)}
+    <div class="${CL_TP_BODY}">
+      ${crRow('ATH', y+'%', {color})}
       ${crRow('Prev Close', close)}
       ${crRow('Next Open', open)}
     </div>`;

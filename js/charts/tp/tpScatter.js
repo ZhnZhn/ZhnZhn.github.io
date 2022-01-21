@@ -3,68 +3,86 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _tpFn = _interopRequireDefault(require("./tpFn"));
 
-var _tpConfig = _interopRequireDefault(require("./tpConfig"));
+var _Colors = require("./Colors");
 
-var crHeader = _tpFn["default"].crHeader,
-    crRow = _tpFn["default"].crRow,
-    crSpan = _tpFn["default"].crSpan;
-var FONT_STYLE = 'font-size:16px;font-weight:bold';
+const {
+  crHeader,
+  crRow,
+  crSpan
+} = _tpFn.default;
+const FONT_STYLE = 'font-size:16px;font-weight:bold';
 
-var _crExDividend = function _crExDividend(_ref) {
-  var date = _ref.date,
-      id = _ref.id,
-      valueText = _ref.valueText,
-      value = _ref.value,
-      point = _ref.point;
-  var exValue = point.exValue,
-      price = point.price;
+const _crExDividend = function (_ref) {
+  let {
+    date,
+    id,
+    valueText,
+    value,
+    point
+  } = _ref;
+  const {
+    exValue,
+    price
+  } = point;
   return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Ex-Dividend', exValue, {
-    color: '#90ed7d'
+    color: _Colors.EX_DIVIDEND_COLOR
   }) + "\n    " + crRow('Close', price) + "\n  </div>";
 };
 
-var _crSplitRatio = function _crSplitRatio(_ref2) {
-  var date = _ref2.date,
-      id = _ref2.id,
-      valueText = _ref2.valueText,
-      value = _ref2.value,
-      point = _ref2.point;
-  var splitRatio = point.splitRatio,
-      price = point.price;
+const _crSplitRatio = function (_ref2) {
+  let {
+    date,
+    id,
+    valueText,
+    value,
+    point
+  } = _ref2;
+  const {
+    splitRatio,
+    price
+  } = point;
   return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Split Ratio', splitRatio, {
-    color: '#ED5813'
+    color: _Colors.SPLIT_RATIO_COLOR
   }) + "\n    " + crRow('Close', price) + "\n  </div>";
 };
 
-var _crExValue = function _crExValue(_ref3) {
-  var date = _ref3.date,
-      id = _ref3.id,
-      point = _ref3.point;
-  var exValue = point.exValue;
+const _crExValue = function (_ref3) {
+  let {
+    date,
+    id,
+    point
+  } = _ref3;
+  const {
+    exValue
+  } = point;
   return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Value', exValue) + "\n  </div>";
 };
 
-var _crEps = function _crEps(_ref4) {
-  var date = _ref4.date,
-      id = _ref4.id,
-      point = _ref4.point;
-  var announceTime = point.announceTime,
-      fiscalPeriod = point.fiscalPeriod,
-      fiscalEndDate = point.fiscalEndDate,
-      actualEPS = point.actualEPS,
-      estimatedEPS = point.estimatedEPS,
-      numberOfEstimates = point.numberOfEstimates,
-      EPSSurpriseDollar = point.EPSSurpriseDollar;
+const _crEps = function (_ref4) {
+  let {
+    date,
+    id,
+    point
+  } = _ref4;
+  const {
+    announceTime,
+    fiscalPeriod,
+    fiscalEndDate,
+    actualEPS,
+    estimatedEPS,
+    numberOfEstimates,
+    EPSSurpriseDollar
+  } = point;
   return crHeader(date, id) + "\n  <div class=\"tp_body\">\n    <div>\n      " + crSpan('', announceTime, {
-    color: _tpConfig["default"].YEAR_C
+    color: _Colors.YEAR_COLOR
   }) + "\n      " + crSpan('', fiscalPeriod) + "\n      " + crSpan('', fiscalEndDate) + "\n    </div>\n    <div style=" + FONT_STYLE + ">\n      " + crSpan('EPS', actualEPS) + "\n      " + crSpan('Est.', estimatedEPS) + "\n    </div>\n    <div style=" + FONT_STYLE + ">\n      " + crSpan('Supr.', EPSSurpriseDollar) + "\n      " + crSpan('NumbEst.', numberOfEstimates) + "\n    </div>\n  </div>";
 };
 
-var tpScatter = {
+const tpScatter = {
   exDividend: {
     fnTemplate: _crExDividend
   },
@@ -79,5 +97,5 @@ var tpScatter = {
   }
 };
 var _default = tpScatter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=tpScatter.js.map

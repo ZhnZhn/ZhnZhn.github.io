@@ -1,10 +1,8 @@
 
 .tp__header {
   position: relative;
-  padding-top: 1px;
-  padding-left: 5px;
-  padding-right: 25px;
   height: 26px;
+  padding: 4px 25px 0 5px;
   font-size: 16px;
   font-weight: bold;
   pointer-events: visible;
@@ -18,9 +16,6 @@
   display: inline-block;
   color: #fdb316;
   max-width: 400px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: clip;
 }
 
 .tp__header__close {
@@ -47,12 +42,14 @@
   padding-bottom: 5px;
 }
 
+.tp__row {
+  padding: 2px 0;
+}
+
 .tp__bt {
   display: inline-block;
   color: #4caf50;
-  margin-left: -3px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 2px 4px;
   border-radius: 2px;
   cursor: pointer;
   pointer-events: visible;

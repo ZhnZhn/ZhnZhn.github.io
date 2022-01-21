@@ -14,22 +14,24 @@ const {
   addHideHandler
 } = _tpFn.default;
 
-const _crSimple = function ({
-  id,
-  point
-}) {
+const _crSimple = function (_ref) {
+  let {
+    id,
+    point
+  } = _ref;
+
   const {
     y,
     status,
     d,
     category,
     c,
-    series = {}
+    series
   } = point,
         {
     name,
     color
-  } = series,
+  } = series || {},
         _c = category || c,
         _date = d ? _c + "-" + d : _c;
 
@@ -40,10 +42,11 @@ const _crSimple = function ({
   }) + "\n   </div>";
 };
 
-const _crRemove = function ({
-  id,
-  point
-}) {
+const _crRemove = function (_ref2) {
+  let {
+    id,
+    point
+  } = _ref2;
   const {
     y,
     c,

@@ -3,7 +3,8 @@ import { render } from 'react-dom';
 import SparkFactory from '../../components/factories/SparkFactory';
 
 import fn from './tpFn'
-import C from './tpConfig'
+import { YEAR_COLOR } from './Colors'
+
 
 const {
   crHeader, crRow,
@@ -33,7 +34,7 @@ const _fnTooltipSparkType4 = function({
   return `<div class="tp__body">
   <div class="tp__body__part1" style="width:${fullWidth}px;" >
     <div ${_style}>
-      ${crRow('Year', year, { color: C.YEAR_C })}
+      ${crRow('Year', year, { color: YEAR_COLOR })}
       ${crRow('Value', value)}
     </div>
     <div id="${id}_${SPARKLINES_SUFFIX_ID}" class="tp__body__sparklines">

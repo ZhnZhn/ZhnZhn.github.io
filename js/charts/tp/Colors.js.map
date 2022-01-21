@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/tp/Colors.js"
+ ],
+ "file": "../../../src/charts/tp/Colors.js",
+ "names": [
+  "TITLE_COLOR",
+  "VALUE_COLOR",
+  "YEAR_COLOR",
+  "EX_DIVIDEND_COLOR",
+  "SPLIT_RATIO_COLOR"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,WAAW,GAAG,SAApB;;AACA,MAAMC,WAAW,GAAG,SAApB;;AACA,MAAMC,UAAU,GAAG,SAAnB;;AAEA,MAAMC,iBAAiB,GAAG,SAA1B;;AACA,MAAMC,iBAAiB,GAAG,SAA1B"
+}

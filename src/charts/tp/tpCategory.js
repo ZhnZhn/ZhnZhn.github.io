@@ -10,9 +10,9 @@ const _crSimple = function({ id, point }){
    const {
      y, status, d,
      category, c,
-     series={}
+     series
    } = point
-   , { name, color } = series
+   , { name, color } = series || {}
    , _c = category || c
    , _date = d ? `${_c}-${d}` : _c
    return `${crHeader(_date, id)}

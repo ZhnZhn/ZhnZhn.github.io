@@ -1,5 +1,5 @@
-import fn from './tpFn'
-import C from './tpConfig'
+import fn from './tpFn';
+import { YEAR_COLOR } from './Colors';
 
 const {
   crHeader, crRow,
@@ -13,7 +13,7 @@ const _crTreeMap = function({ id, point }){
   return `${crHeader(title, id)}
   <div class="tp_body">
     ${crRow('', label)}
-    ${crRow('', _value, { color: C.YEAR_C })}
+    ${crRow('', _value, { color: YEAR_COLOR })}
   </div>
   `;
 }

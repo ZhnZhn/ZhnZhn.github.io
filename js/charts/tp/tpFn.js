@@ -9,6 +9,8 @@ var _isSupportOptions = _interopRequireDefault(require("../../utils/isSupportOpt
 
 var _ChartFn = _interopRequireDefault(require("../ChartFn"));
 
+var _Colors = require("./Colors");
+
 const {
   crTpId,
   toNumberFormat,
@@ -17,27 +19,31 @@ const {
   toTdmy,
   toTdmyIf
 } = _ChartFn.default;
-const C = {
-  TITLE_C: '#a487d4',
-  YEAR_C: '#fdb316',
-  VALUE_C: '#2f7ed8',
-  EX_DIVIDEND_C: 'green'
-};
-const TITLE_STYLE = "style=\"color:" + C.TITLE_C + ";\"";
-const FONT_STYLE = 'font-size:16px;font-weight:bold;';
-const VALUE_STYLE = 'padding-right:5px;';
-const STATUS_STYLE = 'padding-left:4px;';
+const CL_TP_HEADER = "tp__header not-selected",
+      CL_TP_CAPTION = "tp__header__caption text-clip",
+      CL_TP_BT_CLOSE = "tp__header__close",
+      CL_TP_ROW = "tp__row",
+      TITLE_STYLE = "style=\"color:" + _Colors.TITLE_COLOR + ";\"",
+      FONT_STYLE = 'font-size:16px;font-weight:bold;',
+      VALUE_STYLE = 'padding-right:5px;',
+      STATUS_STYLE = 'padding-left:4px;';
 
 const _isFn = fn => typeof fn === 'function';
 
-const _fHideTooltip = (point = {}, fn) => () => {
-  if (point.series) {
-    point.series.chart.zhTooltip.hide();
+const _fHideTooltip = function (point, fn) {
+  if (point === void 0) {
+    point = {};
   }
 
-  if (_isFn(fn)) {
-    fn(point);
-  }
+  return () => {
+    if (point.series) {
+      point.series.chart.zhTooltip.hide();
+    }
+
+    if (_isFn(fn)) {
+      fn(point);
+    }
+  };
 };
 
 const _addClickOnceById = (id, listener) => {
@@ -52,13 +58,25 @@ const _addClickOnceById = (id, listener) => {
 
 const _isValueEmpty = v => v === 'NoData' || v === '' || v == null;
 
-const _crSpanStyle = (color, tailStyle = '') => "style=\"color:" + color + ";" + FONT_STYLE + tailStyle + "\"";
+const _crSpanStyle = function (color, tailStyle) {
+  if (tailStyle === void 0) {
+    tailStyle = '';
+  }
+
+  return "style=\"color:" + color + ";" + FONT_STYLE + tailStyle + "\"";
+};
 
 const tpFn = {
-  crSpan: (t = '', v = '', {
-    color = C.VALUE_C,
-    status
-  } = {}) => {
+  crSpan: function (t, v, _temp) {
+    if (v === void 0) {
+      v = '';
+    }
+
+    let {
+      color = _Colors.VALUE_COLOR,
+      status
+    } = _temp === void 0 ? {} : _temp;
+
     const _vStyle = _crSpanStyle(color, VALUE_STYLE),
           _t = t ? t + ": " : '',
           _v = v !== null ? v : '',
@@ -66,12 +84,28 @@ const tpFn = {
 
     return "\n    <span " + TITLE_STYLE + ">" + _t + "</span>\n    <span " + _vStyle + ">" + _v + "</span>" + _statusSpan;
   },
-  crNotEmptySpan: (title, v) => _isValueEmpty(v) ? '' : tpFn.crSpan(title, v),
-  crRow: (t = '', v = '', option) => {
-    return "<div>" + tpFn.crSpan(t, v, option) + "</div>";
+  crNotEmptySpan: (title, v) => _isValueEmpty(v) ? '' : tpFn.crSpan(title, toNumberFormatAll(v)),
+  crRow: function (t, v, option) {
+    if (t === void 0) {
+      t = '';
+    }
+
+    if (v === void 0) {
+      v = '';
+    }
+
+    return "<div class=\"" + CL_TP_ROW + "\">" + tpFn.crSpan(t, v, option) + "</div>";
   },
-  crHeader: (date = '&nbsp;', id, cssClass = '') => {
-    return "<div id=\"" + id + "\" class=\"tp__header not-selected " + cssClass + "\">\n      <span class=\"tp__header__caption\">" + date + "</span>\n      <span class=\"tp__header__close\">X</span>\n    </div>";
+  crHeader: function (date, id, cssClass) {
+    if (date === void 0) {
+      date = '&nbsp;';
+    }
+
+    if (cssClass === void 0) {
+      cssClass = '';
+    }
+
+    return "<div id=\"" + id + "\" class=\"" + CL_TP_HEADER + " " + cssClass + "\">\n      <span class=\"" + CL_TP_CAPTION + "\">" + date + "</span>\n      <span class=\"" + CL_TP_BT_CLOSE + "\">X</span>\n    </div>";
   },
   crTpId,
   toNumberFormat,
@@ -85,15 +119,15 @@ const tpFn = {
   getStatus: point => {
     const {
       index,
-      series = {}
+      series
     } = point,
           {
-      userOptions = {}
-    } = series,
+      userOptions
+    } = series || {},
           {
-      data = []
-    } = userOptions,
-          _p = data[index] || [],
+      data
+    } = userOptions || {},
+          _p = (data || [])[index] || [],
           _status = _p[2];
 
     return _status && _status !== ':' ? _status : void 0;
