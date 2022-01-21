@@ -11,31 +11,27 @@ import DivCompareTo from './DivCompareTo'
 
 const { isDmy } = DateUtils;
 
-const S = {
-  ROOT: {
-    position: 'absolute',
-    top: 25,
-    left: 0,
-    zIndex : 10,
-    width: 'auto',
-    backgroundColor: 'inherit',
-    padding: 10,
-    paddingTop: 5,
-    paddingBottom: 10,
-    border: '2px solid #1b2836',
-    borderRadius: 5,
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-    cursor: 'auto'
-  },
-  ROW: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  DATE: {
-    display: 'inline-block',
-    paddingLeft: 16,
-    whiteSpace: 'nowrap'
-  }
+const S_MODAL_POPUP = {
+  position: 'absolute',
+  top: 25,
+  left: 0,
+  zIndex: 20,
+  width: 'auto',
+  backgroundColor: 'inherit',
+  padding: '5px 10px 10px 10px',
+  border: '2px solid #1b2836',
+  borderRadius: 5,
+  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
+  cursor: 'auto'
+}
+, S_ROW = {
+  display: 'flex',
+  justifyContent: 'space-between'
+}
+, S_DATE = {
+  display: 'inline-block',
+  paddingLeft: 16,
+  whiteSpace: 'nowrap'
 };
 
 const _isNotAdminMode = (isAdminMode, isDenyToChange) => {
@@ -48,17 +44,19 @@ const _isNotAdminMode = (isAdminMode, isDenyToChange) => {
 };
 
 const RowValueDate = ({ value, date }) => (
-  <div style={S.ROW}>
+  <div style={S_ROW}>
     <SpanValue value={formatAllNumber(value)} />
-    <SpanDate date={date} style={S.DATE} />
+    <SpanDate date={date} style={S_DATE} />
   </div>
 );
 
-
 const ValueMovingModal = (props) => {
   const {
-    isShow, updateDateTo,
-    valueMoving, isAdminMode, onClose
+    isShow,
+    updateDateTo,
+    valueMoving,
+    isAdminMode,
+    onClose
   } = props
   , [msgDateTo, setMsgDateTo] = useState('')
   , _refInput = useRef()
@@ -86,15 +84,17 @@ const ValueMovingModal = (props) => {
   }, [props])
 
   const {
-    value, date,
-    valueTo, dateTo,
+    value,
+    date,
+    valueTo,
+    dateTo,
     isDenyToChange
   } = valueMoving;
 
   return (
     <ModalPopup
       isShow={isShow}
-      style={S.ROOT}
+      style={S_MODAL_POPUP}
       onClose={onClose}
     >
       <RowValueDate value={value} date={date} />

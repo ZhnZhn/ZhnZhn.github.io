@@ -10,32 +10,22 @@ const {
 } = Comp;
 
 const CL = 'twit'
-
-const S = {
-  ROOT: {
-    marginBottom: 8
-  },
-  SHOW_HIDE: {
-    paddingTop: 8,
-    paddingRight: 10
-  },
-  PL_16: {
-    paddingLeft: 16
-  },
-  ROW_TITLE: {
-    position: 'relative',
-    color: 'gray',
-    lineHeight: 1.8,
-    paddingLeft: 16
-  },
-  BT_CLOSE: {
-    position: 'absolute',
-    right: 0
-  },
-  ROW: {
-    color: 'gray',
-    paddingLeft: 16
-  }
+, S_TW_LIST = { marginBottom: 8 }
+, S_SHOW_HIDE = { padding: '8px 10px 0 0' }
+, S_PL_16 = { paddingLeft: 16 }
+, S_ROW_TITLE = {
+  position: 'relative',
+  color: 'gray',
+  paddingLeft: 16,
+  lineHeight: 1.8,
+}
+, S_BT_CLOSE = {
+  position: 'absolute',
+  right: 0
+}
+, S_ROW = {
+  color: 'gray',
+  paddingLeft: 16
 };
 
 const Twit = ({ item }) => {
@@ -50,15 +40,15 @@ const Twit = ({ item }) => {
   , _link = toLink(link);
   return (
     <div className={CL} href={_link}>
-      <div style={S.ROW_TITLE}>
+      <div style={S_ROW_TITLE}>
         <span>{`${user} `}</span>
         <span>{date}</span>
-        <SvgClose style={S.BT_CLOSE} onClose={toggleIsShow} />
+        <SvgClose style={S_BT_CLOSE} onClose={toggleIsShow} />
       </div>
       <a href={_link}>
-        <div style={S.PL_16}>{text}</div>
+        <div style={S_PL_16}>{text}</div>
       </a>
-      <div style={S.ROW}>
+      <div style={S_ROW}>
         <span>{`Retweets ${retweet} `}</span>
         <span>{`Likes ${like}`}</span>
       </div>
@@ -72,14 +62,14 @@ const TwList = ({ config, onCloseItem }) => {
   const { title, items } = config
   , [isOpen, toggleIsOpen] = useToggle(true);
   return (
-    <div style={S.ROOT}>
+    <div style={S_TW_LIST}>
       <ItemHeader
         isOpen={isOpen}
         caption={title}
         onClick={toggleIsOpen}
         onClose={onCloseItem}
       />
-      <ShowHide isShow={isOpen} style={S.SHOW_HIDE}>
+      <ShowHide isShow={isOpen} style={S_SHOW_HIDE}>
         <ItemStack items={items} crItem={_crTwItem} />
       </ShowHide>
     </div>

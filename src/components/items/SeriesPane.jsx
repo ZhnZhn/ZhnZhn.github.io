@@ -1,5 +1,4 @@
 import {
-  //Component,
   forwardRef,
   useRef, useCallback, useImperativeHandle
 } from 'react';
@@ -8,7 +7,6 @@ import ScrollPane from '../zhn/ScrollPane';
 import SeriaRow from './SeriaRow';
 
 const CL_ELL = 'ellipsis'
-//, S_ROOT_DIV = { paddingTop: 8 }
 , S_TITLE = {
   paddingBottom: 4,
   margin: '0 0 8px 16px',

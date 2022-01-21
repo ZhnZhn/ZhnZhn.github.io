@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
@@ -21,66 +19,70 @@ var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 
 var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from "prop-types";
-var isDmy = _DateUtils["default"].isDmy;
-var S = {
-  ROOT: {
-    position: 'absolute',
-    top: 25,
-    left: 0,
-    zIndex: 10,
-    width: 'auto',
-    backgroundColor: 'inherit',
-    padding: 10,
-    paddingTop: 5,
-    paddingBottom: 10,
-    border: '2px solid #1b2836',
-    borderRadius: 5,
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-    cursor: 'auto'
-  },
-  ROW: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  DATE: {
-    display: 'inline-block',
-    paddingLeft: 16,
-    whiteSpace: 'nowrap'
-  }
+const {
+  isDmy
+} = _DateUtils.default;
+const S_MODAL_POPUP = {
+  position: 'absolute',
+  top: 25,
+  left: 0,
+  zIndex: 20,
+  width: 'auto',
+  backgroundColor: 'inherit',
+  padding: '5px 10px 10px 10px',
+  border: '2px solid #1b2836',
+  borderRadius: 5,
+  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
+  cursor: 'auto'
+},
+      S_ROW = {
+  display: 'flex',
+  justifyContent: 'space-between'
+},
+      S_DATE = {
+  display: 'inline-block',
+  paddingLeft: 16,
+  whiteSpace: 'nowrap'
 };
 
-var _isNotAdminMode = function _isNotAdminMode(isAdminMode, isDenyToChange) {
-  var _isAdminMode = typeof isAdminMode == 'function' ? isAdminMode() : typeof isAdminMode == 'boolean' ? isAdminMode : false;
+const _isNotAdminMode = (isAdminMode, isDenyToChange) => {
+  const _isAdminMode = typeof isAdminMode == 'function' ? isAdminMode() : typeof isAdminMode == 'boolean' ? isAdminMode : false;
 
   return !_isAdminMode || isDenyToChange;
 };
 
-var RowValueDate = function RowValueDate(_ref) {
-  var value = _ref.value,
-      date = _ref.date;
+const RowValueDate = _ref => {
+  let {
+    value,
+    date
+  } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: S.ROW,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanValue["default"], {
-      value: (0, _formatAllNumber["default"])(value)
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate["default"], {
+    style: S_ROW,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanValue.default, {
+      value: (0, _formatAllNumber.default)(value)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate.default, {
       date: date,
-      style: S.DATE
+      style: S_DATE
     })]
   });
 };
 
-var ValueMovingModal = function ValueMovingModal(props) {
-  var isShow = props.isShow,
-      updateDateTo = props.updateDateTo,
-      valueMoving = props.valueMoving,
-      isAdminMode = props.isAdminMode,
-      onClose = props.onClose,
-      _useState = (0, _react.useState)(''),
-      msgDateTo = _useState[0],
-      setMsgDateTo = _useState[1],
-      _refInput = (0, _react.useRef)(),
-      _hEnterDate = (0, _react.useCallback)(function (dateTo) {
+const ValueMovingModal = props => {
+  const {
+    isShow,
+    updateDateTo,
+    valueMoving,
+    isAdminMode,
+    onClose
+  } = props,
+        [msgDateTo, setMsgDateTo] = (0, _react.useState)(''),
+        _refInput = (0, _react.useRef)()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hEnterDate = (0, _react.useCallback)(dateTo => {
     if (isDmy(dateTo)) {
       if (updateDateTo(dateTo)) {
         setMsgDateTo('');
@@ -92,7 +94,7 @@ var ValueMovingModal = function ValueMovingModal(props) {
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (isShow) {
       if (_refInput.current) {
         _refInput.current.focus();
@@ -103,14 +105,16 @@ var ValueMovingModal = function ValueMovingModal(props) {
       }
     }
   }, [props]);
-  var value = valueMoving.value,
-      date = valueMoving.date,
-      valueTo = valueMoving.valueTo,
-      dateTo = valueMoving.dateTo,
-      isDenyToChange = valueMoving.isDenyToChange;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup["default"], {
+  const {
+    value,
+    date,
+    valueTo,
+    dateTo,
+    isDenyToChange
+  } = valueMoving;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
-    style: S.ROOT,
+    style: S_MODAL_POPUP,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(RowValueDate, {
       value: value,
@@ -118,7 +122,7 @@ var ValueMovingModal = function ValueMovingModal(props) {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(RowValueDate, {
       value: valueTo,
       date: dateTo
-    }), !_isNotAdminMode(isAdminMode, isDenyToChange) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo["default"], {
+    }), !_isNotAdminMode(isAdminMode, isDenyToChange) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo.default, {
       ref: _refInput,
       initialValue: dateTo,
       msgErr: msgDateTo,
@@ -148,5 +152,5 @@ ModalValueMoving.propTypes = {
 
 
 var _default = ValueMovingModal;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ValueMovingModal.js.map

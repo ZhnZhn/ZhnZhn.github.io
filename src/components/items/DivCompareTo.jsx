@@ -3,24 +3,20 @@ import { forwardRef } from 'react'
 import SpanLabel from '../zhn-span/SpanLabel'
 import DateField from '../zhn/DateField'
 
-const S = {
-  ROW_INPUT : {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: 8
-  },
-  DATE_FIELD: {
-    width: 120,
-    marginLeft: 8,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  },
-  DIV_MSG: {
-    marginTop: 6
-  },
-  MSG: {
-    color: '#f44336',
-    fontWeight: 'bold'
-  }
+const S_ROW_INPUT = {
+  display: 'flex',
+  alignItems: 'center',
+  marginTop: 8
+}
+, S_DATE_FIELD = {
+   width: 120,
+   marginLeft: 8,
+   boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+}
+, S_DIV_MSG = { marginTop: 6 }
+, S_MSG = {
+   color: '#f44336',
+   fontWeight: 'bold'
 };
 
 const DivCompareTo = forwardRef(({
@@ -31,11 +27,11 @@ const DivCompareTo = forwardRef(({
 }, ref) => (
   <div>
    {/* eslint-disable jsx-a11y/label-has-associated-control */ }
-   <label style={S.ROW_INPUT} >
+   <label style={S_ROW_INPUT} >
      <SpanLabel label="CompareTo:" />
      <DateField
        ref={ref}
-       style={S.DATE_FIELD}
+       style={S_DATE_FIELD}
        initialValue={initialValue}
        placeholder="DD-MM-YYYY"
        errorMsg="DD-MM-YYYY"
@@ -44,8 +40,8 @@ const DivCompareTo = forwardRef(({
      />
    </label>
    {/* eslint-enable jsx-a11y/label-has-associated-control */ }
-   {msgErr && <div style={S.DIV_MSG}>
-       <span style={S.MSG}>
+   {msgErr && <div style={S_DIV_MSG}>
+       <span style={S_MSG}>
          {msgErr}
        </span>
      </div>

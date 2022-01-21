@@ -13,8 +13,7 @@ var _SeriaRow = _interopRequireDefault(require("./SeriaRow"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const CL_ELL = 'ellipsis' //, S_ROOT_DIV = { paddingTop: 8 }
-,
+const CL_ELL = 'ellipsis',
       S_TITLE = {
   paddingBottom: 4,
   margin: '0 0 8px 16px',
@@ -62,44 +61,52 @@ const _crYAxisOption = toChart => {
   return options;
 };
 
-const PasteToTitle = ({
-  chartId
-}) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-  style: S_TITLE,
-  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-    children: "From Chart:\xA0"
-  }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-    className: CL_ELL,
-    style: S_CHART_ID,
-    children: chartId
-  })]
-});
+const PasteToTitle = _ref => {
+  let {
+    chartId
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S_TITLE,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      children: "From Chart:\xA0"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      className: CL_ELL,
+      style: S_CHART_ID,
+      children: chartId
+    })]
+  });
+};
 
-const PasteToSeriaList = ({
-  chartId,
-  series,
-  options,
-  onReg,
-  onUnReg
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-  children: (series || []).filter(seria => seria.visible).map((seria, index) => {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaRow.default, {
-      seria: seria,
-      compIndex: index,
-      yAxisOptions: options,
-      onReg: onReg,
-      onUnReg: onUnReg
-    }, chartId + "_" + (seria.name || '') + "_" + index);
-  })
-});
+const PasteToSeriaList = _ref2 => {
+  let {
+    chartId,
+    series,
+    options,
+    onReg,
+    onUnReg
+  } = _ref2;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    children: (series || []).filter(seria => seria.visible).map((seria, index) => {
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaRow.default, {
+        seria: seria,
+        compIndex: index,
+        yAxisOptions: options,
+        onReg: onReg,
+        onUnReg: onUnReg
+      }, chartId + "_" + (seria.name || '') + "_" + index);
+    })
+  });
+};
 
 const _getRefValue = ref => ref.current;
 
-const SeriesPane = /*#__PURE__*/(0, _react.forwardRef)(({
-  style,
-  toChart,
-  fromChart
-}, ref) => {
+const SeriesPane = /*#__PURE__*/(0, _react.forwardRef)((_ref3, ref) => {
+  let {
+    style,
+    toChart,
+    fromChart
+  } = _ref3;
+
   const _refSeries = (0, _react.useRef)([]),
         _regSeriaRow = (0, _react.useCallback)((ref, compIndex) => {
     _refSeries.current[compIndex] = ref;
