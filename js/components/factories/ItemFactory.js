@@ -37,13 +37,22 @@ const _getIdKey = (config, index) => {
   return [id || "Id:" + index, key || id || crId()];
 };
 
-const _crAreaChart = function ({
-  config,
-  index,
-  chartType,
-  props,
-  store
-}) {
+const _fOnPasteToDialog = store => {
+  return toChart => _ComponentActions.default.showPasteTo({
+    toChart,
+    fromChart: store.getCopyFromChart()
+  });
+};
+
+const _crAreaChart = function (_ref) {
+  let {
+    config,
+    index,
+    chartType,
+    props,
+    store
+  } = _ref;
+
   const [id, key] = _getIdKey(config, index);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.default.AreaChart, {
@@ -57,19 +66,20 @@ const _crAreaChart = function ({
     crValueMoving: crValueMoving,
     onToTop: _ChartActions.default[_ChartActions.CHAT_TO_TOP].bind(null, chartType, id),
     onCopy: _ChartActions.default[_ChartActions.CHAT_COPY],
-    onPasteToDialog: _ComponentActions.default.showPasteTo,
+    onPasteTo: _fOnPasteToDialog(store),
     onZoom: _ComponentActions.default.zoom,
-    getCopyFromChart: store.getCopyFromChart.bind(store),
     ChartFn: _ChartFn.default
   }, key);
 };
 
-const _crMapChart = function ({
-  config,
-  index,
-  chartType,
-  props
-}) {
+const _crMapChart = function (_ref2) {
+  let {
+    config,
+    index,
+    chartType,
+    props
+  } = _ref2;
+
   const [id, key] = _getIdKey(config, index);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.default.MapChart, {
@@ -80,13 +90,16 @@ const _crMapChart = function ({
   }, key);
 };
 
-const _fItem = Comp => ({
-  config = {},
-  props
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
-  config: config,
-  ...props
-}, config.id);
+const _fItem = Comp => _ref3 => {
+  let {
+    config = {},
+    props
+  } = _ref3;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
+    config: config,
+    ...props
+  }, config.id);
+};
 
 const _rCrItem = {
   DF: _crAreaChart,

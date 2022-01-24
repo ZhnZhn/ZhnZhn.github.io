@@ -16,10 +16,8 @@ const {
   HighchartWrapper
 } = Comp;
 
-const CL_CHART_ITEM =  'chart-item';
-
-
-const S_TAB_DIV = {
+const CL_CHART_ITEM =  'chart-item'
+, S_TAB_DIV = {
   position: 'relative',
   backgroundColor: 'transparent',
   height: 30
@@ -34,9 +32,7 @@ const S_TAB_DIV = {
   fontSize: '11px'
 };
 
-
-const _isFn = fn => typeof fn === 'function'
-, _isArr = Array.isArray
+const _isArr = Array.isArray
 , _isNarrowWidth = !has.wideWidth();
 
 const _crMiniTitles = (miniTitles, btTitle) => {
@@ -44,7 +40,6 @@ const _crMiniTitles = (miniTitles, btTitle) => {
     ? [btTitle, ...miniTitles]
     : miniTitles.filter(t => t !== btTitle);
 };
-
 
 const _toggle = (comp, propName) => {
   comp.setState(prevState => ({
@@ -95,7 +90,6 @@ class ChartItem extends Component {
     }),
     onAddToWatch: PropTypes.func,
     onSetActive: PropTypes.func,
-    onShowConfigDialog: PropTypes.func,
     onCloseItem: PropTypes.func,
     isAdminMode: PropTypes.oneOfType([
       PropTypes.func,
@@ -120,9 +114,6 @@ class ChartItem extends Component {
       onToTop: props.onToTop,
       onHideCaption: this.hideCaption
     })
-
-    this._hClick2H = _callChartMethod.bind(null, this, 'zhToggle2H')
-    this._toggleMinMax = _callChartMethod.bind(null, this, 'zhToggleMinMaxLines')
 
     this._hLoadedMiniChart = _callChartMethod.bind(null, this, 'zhAddDetailChart')
     this._hUnLoadedMiniChart = _callChartMethod.bind(null, this, 'zhRemoveDetailChart')
@@ -208,26 +199,10 @@ class ChartItem extends Component {
     this.mainChart.zhToggleSeria(item.index)
   }
 
-  _hZoom = () => {
-    const { onZoom } = this.props;
-    if (_isFn(onZoom)) {
-      onZoom({ chart: this.mainChart })
-    }
-  }
 
   _hAddToWatch = () => {
     const { caption, config, onAddToWatch } = this.props;
     onAddToWatch( {caption, config} )
-  }
-
-  _hCopy = () => {
-    this.props.onCopy(this.mainChart)
-  }
-  _hPasteTo = () => {
-    this.props.onPasteToDialog({
-      toChart: this.mainChart,
-      fromChart: this.props.getCopyFromChart()
-    })
   }
 
   _hClickInfo = () => {
@@ -287,29 +262,28 @@ class ChartItem extends Component {
  }
 
  _crChartToolBar = (config) => {
-   const { hasError, isShowToolbar } = this.state;
+   const { onZoom, onCopy, onPasteTo } = this.props
+   , { hasError, isShowToolbar } = this.state;
    return (
          <ShowHide
             isShow={isShowToolbar}
             withoutAnimation={true}
          >
            <ChartToolBar
-             hasError={hasError}
              style={S_TAB_DIV}
+             hasError={hasError}
              config={config}
-             onMiniChart={this._hMiniChart}
              getChart={this.getMainChart}
+             onMiniChart={this._hMiniChart}
              onAddMfi={this._addMfi}
              onRemoveMfi={this._removeMfi}
              onClickLegend={this._hClickLegend}
-             onClick2H={this._hClick2H}
              onAddToWatch={this._hAddToWatch}
              onClickInfo={this._hClickInfo}
              onClickConfig={this._hClickConfig}
-             onCopy={this._hCopy}
-             onPasteTo={this._hPasteTo}
-             onMinMax={this._toggleMinMax}
-             onZoom={this._hZoom}
+             onCopy={onCopy}
+             onPasteTo={onPasteTo}
+             onZoom={onZoom}
             />
          </ShowHide>
       );
@@ -324,7 +298,8 @@ class ChartItem extends Component {
     , {
         valueMoving,
         info,
-        zhConfig, zhMiniConfigs
+        zhConfig,
+        zhMiniConfigs
       } = config || {}
     , {
         itemTime,
@@ -332,7 +307,9 @@ class ChartItem extends Component {
       } = zhConfig || {}
     , {
         hasError,
-        isOpen, isShowChart, isShowInfo,
+        isOpen,
+        isShowChart,
+        isShowInfo,
         isShowLegend,
         isShowAbs,
         isCaption,

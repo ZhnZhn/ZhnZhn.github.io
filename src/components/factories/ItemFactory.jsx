@@ -20,8 +20,19 @@ const _getIdKey = (config, index) => {
   return [id || `Id:${index}`, key || id || crId()];
 };
 
+const _fOnPasteToDialog = store => {
+  return toChart => CA.showPasteTo({
+    toChart,
+    fromChart: store.getCopyFromChart()
+  });
+};
+
 const _crAreaChart = function({
-  config, index, chartType, props, store
+  config,
+  index,
+  chartType,
+  props,
+  store
 }) {
   const [id, key] = _getIdKey(config, index);
   return (
@@ -37,9 +48,8 @@ const _crAreaChart = function({
        crValueMoving={crValueMoving}
        onToTop={ChartActions[CHAT_TO_TOP].bind(null, chartType, id)}
        onCopy={ChartActions[CHAT_COPY]}
-       onPasteToDialog={CA.showPasteTo}
+       onPasteTo={_fOnPasteToDialog(store)}
        onZoom={CA.zoom}
-       getCopyFromChart={store.getCopyFromChart.bind(store)}
        ChartFn={ChartFn}
     />
   );

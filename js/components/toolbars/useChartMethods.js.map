@@ -1,0 +1,25 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/useChartMethods.js"
+ ],
+ "file": "../../../src/components/toolbars/useChartMethods.js",
+ "names": [
+  "_isFn",
+  "fn",
+  "useChartMethods",
+  "getChart",
+  "onZoom",
+  "onCopy",
+  "onPasteTo",
+  "onClick2H",
+  "zhToggle2H",
+  "onMinMax",
+  "zhToggleMinMaxLines",
+  "onZoomChart",
+  "chart",
+  "onCopyChart",
+  "onPasteToChart"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,KAAK,GAAGC,EAAE,IAAI,OAAOA,EAAP,KAAc,UAAlC;;AAEA,MAAMC,eAAe,GAAG,CACtBC,QADsB,EAEtBC,MAFsB,EAGtBC,MAHsB,EAItBC,SAJsB,KAMtB,yBAAW,OAAO;AAChBC,EAAAA,SAAS,EAAE,MAAMJ,QAAQ,GAAGK,UAAX,EADD;AAEhBC,EAAAA,QAAQ,EAAE,MAAMN,QAAQ,GAAGO,mBAAX,EAFA;AAGhBC,EAAAA,WAAW,EAAE,MAAM;AACjB,QAAIX,KAAK,CAACI,MAAD,CAAT,EAAmB;AACjBA,MAAAA,MAAM,CAAC;AAAEQ,QAAAA,KAAK,EAAET,QAAQ;AAAjB,OAAD,CAAN;AACD;AACF,GAPe;AAQhBU,EAAAA,WAAW,EAAE,MAAMR,MAAM,CAACF,QAAQ,EAAT,CART;AAShBW,EAAAA,cAAc,EAAE,MAAMR,SAAS,CAACH,QAAQ,EAAT;AATf,CAAP,CAAX,CANF;;eAkBeD,e"
+}

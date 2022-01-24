@@ -1,7 +1,8 @@
 import { useRef, useCallback } from 'react';
 //import PropTypes from "prop-types";
 
-import useToggle from '../hooks/useToggle'
+import useToggle from '../hooks/useToggle';
+import useChartMethods from './useChartMethods';
 
 import ButtonTab from '../zhn/ButtonTab'
 import ModalMenuIndicator from './ModalMenuIndicator'
@@ -9,47 +10,32 @@ import ModalMenuInd2 from './ModalMenuInd2'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
-const CL = {
-  SCROLL: "with-scroll-x",
-  BT_R: "with-scroll-x__bt-r"
-};
+const CL_SCROLL = "with-scroll-x"
+, CL_BT_R = "with-scroll-x__bt-r"
 
-const S = {
-  BT_IND: {
-    left: 8
-  },
-  M_IND: {
-    top: 60,
-    left: 5
-  },
-  BT_LEGEND: {
-    left: 115
-  },
-  BT_FN: {
-    left: 190
-  },
-  M_FN: {
-    top: 60,
-    left: 150
-  },
-  BT_ADD: {
-    left: 250
-  },
-  BT_MINI: {
-    left: 350,
-    width: 68
-  },
-  M_MINI: {
-    top: 60,
-    left: 290
-  },
-   BT_CONF: {
-    left: 430
-  },
-  BT_R: {
-    left: 440,
-    width: 36
-  }
+, S_BT_IND = { left: 8 }
+, S_M_IND = {
+  top: 60,
+  left: 5
+}
+, S_BT_LEGEND = { left: 115 }
+, S_BT_FN = { left: 190 }
+, S_M_FN = {
+  top: 60,
+  left: 150
+}
+, S_BT_ADD = { left: 250 }
+, S_BT_MINI = {
+  left: 350,
+  width: 68
+}
+, S_M_MINI = {
+  top: 60,
+  left: 290
+}
+, S_BT_R = {
+  left: 440,
+  width: 36
 };
 
 const _isFn = fn => typeof fn === 'function';
@@ -61,7 +47,7 @@ const _isHrzScrollable = node  => node
 
 const _scrollNodeToLeft = (ref, left) => {
   const node = ref.current;
-  if ( _isHrzScrollable(node) ) {
+  if (_isHrzScrollable(node)) {
    if (_isFn(node.scroll)) {
      node.scroll({ left, behavior: 'smooth'})
    } else {
@@ -91,20 +77,29 @@ const _crModalMenuStyle = (ref, left) => {
 
 const ChartToolbar = ({
   hasError,
-  style, config={},
+  style,
+  config={},
   onMiniChart,
   getChart,
-  onAddMfi, onRemoveMfi,
+  onAddMfi,
+  onRemoveMfi,
   onClickLegend,
-  onClick2H,
   onAddToWatch,
   onCopy,
   onPasteTo,
-  onMinMax,
   onZoom,
   onClickInfo
 }) => {
   const _refToolbar = useRef()
+  , {
+      onClick2H,
+      onMinMax,
+      onZoomChart,
+      onCopyChart,
+      onPasteToChart
+    } = useChartMethods(getChart,
+      onZoom, onCopy, onPasteTo
+    )
   , [isShowInd, toggleInd] = useToggle(false)
   , [isShowFn, toggleFn] = useToggle(false)
   , [isShowMini, toggleMini] = useToggle(false)
@@ -112,8 +107,8 @@ const ChartToolbar = ({
       _scrollNodeToLeft(_refToolbar, 0)
     }, []);
 
-  const { zhConfig={}, info, zhMiniConfigs } = config
-  , { isWithoutIndicator, itemConf, legend } = zhConfig
+  const { zhConfig, info, zhMiniConfigs } = config
+  , { isWithoutIndicator, itemConf, legend } = zhConfig || {}
   , _modalMenuArr = [];
 
   const _btInfo = (<ButtonTab
@@ -126,7 +121,7 @@ const ChartToolbar = ({
     return (
       <div
          ref={_refToolbar}
-         className={CL.SCROLL}
+         className={CL_SCROLL}
          style={style}
       >
         {_btInfo}
@@ -142,7 +137,7 @@ const ChartToolbar = ({
       _modalMenuArr.push(<ModalMenuInd2
         key="menu_ind"
         isShow={isShowInd}
-        style={S.M_IND}
+        style={S_M_IND}
         config={config}
         getChart={getChart}
         onClose={toggleInd}
@@ -151,7 +146,7 @@ const ChartToolbar = ({
      _modalMenuArr.push(<ModalMenuIndicator
         key="menu_ind"
         isShow={isShowInd}
-        style={S.M_IND}
+        style={S_M_IND}
         config={config}
         getChart={getChart}
         onAddMfi={onAddMfi}
@@ -160,7 +155,7 @@ const ChartToolbar = ({
      />)
     }
     _btTabIndicator = (<ButtonTab
-       style= {S.BT_IND}
+       style= {S_BT_IND}
        caption={_tabIndCaption}
        isShow={isShowInd}
        isMenu={true}
@@ -170,14 +165,14 @@ const ChartToolbar = ({
 
   const _btLegend = (<ButtonTab
     is={!!legend}
-    style={S.BT_LEGEND}
+    style={S_BT_LEGEND}
     caption="Legend"
     onClick={onClickLegend}
   />)
 
   const _btAdd = (<ButtonTab
     is={!!itemConf}
-    style={S.BT_ADD}
+    style={S_BT_ADD}
     caption="Add"
     onClick={onAddToWatch}
   />);
@@ -185,19 +180,19 @@ const ChartToolbar = ({
   let _btTabMini = null;
   if (zhMiniConfigs && zhMiniConfigs.length) {
     _btTabMini = (<ButtonTab
-       style= {S.BT_MINI}
+       style= {S_BT_MINI}
        caption="Mini"
        isShow={isShowMini}
        isMenu={true}
        onClick={toggleMini}
     />)
     const _miniStyle = isShowMini
-      ? _crModalMenuStyle(_refToolbar, S.M_MINI.left)
+      ? _crModalMenuStyle(_refToolbar, S_M_MINI.left)
       : void 0;
    _modalMenuArr.push(<ModalMenuMini
       key="menu_mini"
       isShow={isShowMini}
-      style={{...S.M_MINI, ..._miniStyle}}
+      style={{...S_M_MINI, ..._miniStyle}}
       configs={zhMiniConfigs}
       onClickItem={onMiniChart}
       onClose={toggleMini}
@@ -205,33 +200,33 @@ const ChartToolbar = ({
   }
 
   const _fnStyle = isShowFn
-    ? _crModalMenuStyle(_refToolbar, S.BT_FN.left)
+    ? _crModalMenuStyle(_refToolbar, S_BT_FN.left)
     : void 0;
 
   return (
     <>
       <ModalMenuFn
         isShow={isShowFn}
-        style={{...S.M_FN, ..._fnStyle}}
+        style={{...S_M_FN, ..._fnStyle}}
         config={config}
         getChart={getChart}
         onX2H={onClick2H}
         onMinMax={onMinMax}
-        onZoom={onZoom}
-        onCopy={onCopy}
-        onPasteTo={onPasteTo}
+        onZoom={onZoomChart}
+        onCopy={onCopyChart}
+        onPasteTo={onPasteToChart}
         onClose={toggleFn}
       />
       {_modalMenuArr}
       <div
          ref={_refToolbar}
-         className={CL.SCROLL}
+         className={CL_SCROLL}
          style={style}
       >
          {_btTabIndicator}
          {_btLegend}
          <ButtonTab
-           style={S.BT_FN}
+           style={S_BT_FN}
            caption="Fn"
            isShow={isShowFn}
            isMenu={true}
@@ -242,15 +237,15 @@ const ChartToolbar = ({
          {_btTabMini}
          <ButtonTab
             is={!!_btTabMini}
-            className={CL.BT_R}
-            style={S.BT_R}
+            className={CL_BT_R}
+            style={S_BT_R}
             caption=">"
             onClick={_hClickR}
           />
       </div>
     </>
   );
-}
+};
 
 /*
 ChartToolbar.propTypes = {
@@ -265,11 +260,9 @@ ChartToolbar.propTypes = {
   onAddMfi: PropTypes.func,
   onRemoveMfi: PropTypes.func,
   onClickLegend: PropTypes.func,
-  onClick2H: PropTypes.func,
   onAddToWatch: PropTypes.func,
   onCopy: PropTypes.func,
   onPasteTo: PropTypes.func,
-  onMinMax: PropTypes.func,
   onZoom: PropTypes.func,
   onClickInfo: PropTypes.func
 }
