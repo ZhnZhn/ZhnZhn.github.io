@@ -199,12 +199,6 @@ class ChartItem extends Component {
     this.mainChart.zhToggleSeria(item.index)
   }
 
-
-  _hAddToWatch = () => {
-    const { caption, config, onAddToWatch } = this.props;
-    onAddToWatch( {caption, config} )
-  }
-
   _hClickInfo = () => {
     this.setState({
       isShowInfo: true,
@@ -262,7 +256,10 @@ class ChartItem extends Component {
  }
 
  _crChartToolBar = (config) => {
-   const { onZoom, onCopy, onPasteTo } = this.props
+   const {
+     onAddToWatch,
+     onZoom, onCopy, onPasteTo
+   } = this.props
    , { hasError, isShowToolbar } = this.state;
    return (
          <ShowHide
@@ -277,8 +274,8 @@ class ChartItem extends Component {
              onMiniChart={this._hMiniChart}
              onAddMfi={this._addMfi}
              onRemoveMfi={this._removeMfi}
-             onClickLegend={this._hClickLegend}
-             onAddToWatch={this._hAddToWatch}
+             onClickLegend={this._hClickLegend}             
+             onAddToWatch={onAddToWatch}
              onClickInfo={this._hClickInfo}
              onClickConfig={this._hClickConfig}
              onCopy={onCopy}

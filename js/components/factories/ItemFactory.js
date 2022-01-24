@@ -37,6 +37,11 @@ const _getIdKey = (config, index) => {
   return [id || "Id:" + index, key || id || crId()];
 };
 
+const _fAddToWatch = (caption, config) => () => _ComponentActions.default.showAddToWatch({
+  caption,
+  config
+});
+
 const _fOnPasteToDialog = store => {
   return toChart => _ComponentActions.default.showPasteTo({
     toChart,
@@ -61,7 +66,7 @@ const _crAreaChart = function (_ref) {
     config: config,
     onSetActive: _ComponentActions.default.setActiveCheckbox,
     onShowConfigDialog: _ComponentActions.default.showConfigChart,
-    onAddToWatch: _ComponentActions.default.showAddToWatch,
+    onAddToWatch: _fAddToWatch(id, config),
     ...props,
     crValueMoving: crValueMoving,
     onToTop: _ChartActions.default[_ChartActions.CHAT_TO_TOP].bind(null, chartType, id),

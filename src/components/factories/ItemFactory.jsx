@@ -20,6 +20,12 @@ const _getIdKey = (config, index) => {
   return [id || `Id:${index}`, key || id || crId()];
 };
 
+
+const _fAddToWatch = (
+  caption,
+  config
+) => () => CA.showAddToWatch({ caption, config });
+
 const _fOnPasteToDialog = store => {
   return toChart => CA.showPasteTo({
     toChart,
@@ -43,7 +49,7 @@ const _crAreaChart = function({
        config={config}
        onSetActive={CA.setActiveCheckbox}
        onShowConfigDialog={CA.showConfigChart}
-       onAddToWatch={CA.showAddToWatch}
+       onAddToWatch={_fAddToWatch(id, config)}
        {...props}
        crValueMoving={crValueMoving}
        onToTop={ChartActions[CHAT_TO_TOP].bind(null, chartType, id)}
