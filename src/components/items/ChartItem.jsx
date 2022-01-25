@@ -12,6 +12,7 @@ import PanelDataInfo from './PanelDataInfo';
 
 const {
   ShowHide,
+  ErrorBoundary,
   MsgRenderErr,
   HighchartWrapper
 } = Comp;
@@ -47,7 +48,7 @@ const _arrangeConfigsBy = (
   configIds,
   idPropName
 ) => {
-  const _hmConfigs = configs.reduce((hm, config) => {
+  const _hmConfigs = (configs || []).reduce((hm, config) => {
     hm[config[idPropName]] = config
     return hm;
   }, {});
@@ -186,6 +187,9 @@ class ChartItem extends Component {
     }
   }
 
+  _hError = () => {
+    this.setState({ hasError: true })
+  }
 
   setItemCaption = (str) => {
     this.setState({ itemCaption: str })
@@ -199,19 +203,8 @@ class ChartItem extends Component {
     this.forceUpdate()
   }
 
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  /*
-  componentDidCatch(error, errMsg){
-  }
-  */
-
   _hLoaded = (chart) => this.mainChart = chart
   getMainChart = () => this.mainChart
-
 
   _hToggleSeria = (item) => {
     this.mainChart.zhToggleSeria(item.index)
@@ -273,42 +266,15 @@ class ChartItem extends Component {
    this.setState({ miniTitles, isShowAbs })
  }
 
- _crChartToolBar = (config) => {
-   const {
-     onAddToWatch,
-     onZoom, onCopy, onPasteTo
-   } = this.props
-   , { hasError, isShowToolbar } = this.state;
-   return (
-         <ShowHide
-            isShow={isShowToolbar}
-            withoutAnimation={true}
-         >
-           <ChartToolBar
-             style={S_TAB_DIV}
-             hasError={hasError}
-             config={config}
-             getChart={this.getMainChart}
-             onMiniChart={this._hMiniChart}
-             onAddMfi={this._addMfi}
-             onRemoveMfi={this._removeMfi}
-             onClickLegend={this._hClickLegend}
-             onAddToWatch={onAddToWatch}
-             onClickInfo={this._hClickInfo}
-             onClickConfig={this._hClickConfig}
-             onCopy={onCopy}
-             onPasteTo={onPasteTo}
-             onZoom={onZoom}
-            />
-         </ShowHide>
-      );
-   }
-
   render(){
     const {
         config,
         onCloseItem,
-        isAdminMode
+        isAdminMode,
+        onAddToWatch,
+        onZoom,
+        onCopy,
+        onPasteTo
       } = this.props
     , {
         valueMoving,
@@ -321,7 +287,6 @@ class ChartItem extends Component {
         legend
       } = zhConfig || {}
     , {
-        hasError,
         isOpen,
         isShowChart,
         isShowInfo,
@@ -330,7 +295,9 @@ class ChartItem extends Component {
         isCaption,
         itemCaption,
         mfiConfigs,
-        miniTitles
+        miniTitles,
+        hasError,
+        isShowToolbar
     } = this.state
     , _zhMiniConfigs = _arrangeConfigsBy(
          zhMiniConfigs,
@@ -360,25 +327,48 @@ class ChartItem extends Component {
            withoutAnimation={true}
            style={S_SHOW_HIDE}
         >
-           {isShowChart && this._crChartToolBar(config)}
-           {hasError
-             ? <MsgRenderErr
+           {isShowChart && <ShowHide
+                isShow={isShowToolbar}
+                withoutAnimation={true}
+             >
+               <ChartToolBar
+                 style={S_TAB_DIV}
+                 hasError={hasError}
+                 config={config}
+                 getChart={this.getMainChart}
+                 onMiniChart={this._hMiniChart}
+                 onAddMfi={this._addMfi}
+                 onRemoveMfi={this._removeMfi}
+                 onClickLegend={this._hClickLegend}
+                 onAddToWatch={onAddToWatch}
+                 onClickInfo={this._hClickInfo}
+                 onClickConfig={this._hClickConfig}
+                 onCopy={onCopy}
+                 onPasteTo={onPasteTo}
+                 onZoom={onZoom}
+                />
+             </ShowHide>
+           }
+           <ErrorBoundary
+              FallbackComp={<MsgRenderErr
                  isShow={isShowChart}
                  msg="chart"
-               />
-             : <ShowHide
-                 isShow={isShowChart}
-                 withoutAnimation={true}
-                 style={S_WRAPPER}
-                >
-                   <HighchartWrapper
-                     config={config}
-                     isShowAbs={isShowAbs}
-                     absComp={this._dataSourceEl}
-                     onLoaded={this._hLoaded}
-                   />
-               </ShowHide>
-           }
+              />}
+              onError={this._hError}
+           >
+              <ShowHide
+                isShow={isShowChart}
+                withoutAnimation={true}
+                style={S_WRAPPER}
+              >
+                 <HighchartWrapper
+                   config={config}
+                   isShowAbs={isShowAbs}
+                   absComp={this._dataSourceEl}
+                   onLoaded={this._hLoaded}
+                 />
+              </ShowHide>
+           </ErrorBoundary>
            <PanelDataInfo
               isShow={isShowInfo}
               info={info}
@@ -407,7 +397,7 @@ class ChartItem extends Component {
            />
         </ShowHide>
       </div>
-    )
+    );
   }
 
   compareTo(dateTo){

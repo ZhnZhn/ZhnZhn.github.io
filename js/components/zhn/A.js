@@ -53,6 +53,8 @@ var _MsgRenderErr = _interopRequireDefault(require("./MsgRenderErr"));
 
 var _HighchartWrapper = _interopRequireDefault(require("./HighchartWrapper"));
 
+var _ErrorBoundary = _interopRequireDefault(require("./ErrorBoundary"));
+
 var _toLink = _interopRequireDefault(require("./toLink"));
 
 const A = { ..._SvgIcons.default,
@@ -79,6 +81,7 @@ const A = { ..._SvgIcons.default,
   SvgClose: _SvgClose.default,
   MsgRenderErr: _MsgRenderErr.default,
   HighchartWrapper: _HighchartWrapper.default,
+  ErrorBoundary: _ErrorBoundary.default,
   toLink: _toLink.default
 };
 var _default = A;

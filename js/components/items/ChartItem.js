@@ -28,6 +28,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 const {
   ShowHide,
+  ErrorBoundary,
   MsgRenderErr,
   HighchartWrapper
 } = _Comp.default;
@@ -60,7 +61,7 @@ const _crMiniTitles = (miniTitles, btTitle) => {
 };
 
 const _arrangeConfigsBy = (configs, configIds, idPropName) => {
-  const _hmConfigs = configs.reduce((hm, config) => {
+  const _hmConfigs = (configs || []).reduce((hm, config) => {
     hm[config[idPropName]] = config;
     return hm;
   }, {});
@@ -142,6 +143,12 @@ class ChartItem extends _react.Component {
   */
   constructor(props) {
     super(props);
+
+    this._hError = () => {
+      this.setState({
+        hasError: true
+      });
+    };
 
     this.setItemCaption = str => {
       this.setState({
@@ -234,39 +241,6 @@ class ChartItem extends _react.Component {
       });
     };
 
-    this._crChartToolBar = config => {
-      const {
-        onAddToWatch,
-        onZoom,
-        onCopy,
-        onPasteTo
-      } = this.props,
-            {
-        hasError,
-        isShowToolbar
-      } = this.state;
-      return /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
-        isShow: isShowToolbar,
-        withoutAnimation: true,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar.default, {
-          style: S_TAB_DIV,
-          hasError: hasError,
-          config: config,
-          getChart: this.getMainChart,
-          onMiniChart: this._hMiniChart,
-          onAddMfi: this._addMfi,
-          onRemoveMfi: this._removeMfi,
-          onClickLegend: this._hClickLegend,
-          onAddToWatch: onAddToWatch,
-          onClickInfo: this._hClickInfo,
-          onClickConfig: this._hClickConfig,
-          onCopy: onCopy,
-          onPasteTo: onPasteTo,
-          onZoom: onZoom
-        })
-      });
-    };
-
     this._refVm = /*#__PURE__*/(0, _react.createRef)();
     this._hToggleOpen = _toggle.bind(null, this, 'isOpen');
     this._hClickLegend = _toggle.bind(null, this, 'isShowLegend');
@@ -332,22 +306,15 @@ class ChartItem extends _react.Component {
     }
   }
 
-  static getDerivedStateFromError(error) {
-    return {
-      hasError: true
-    };
-  }
-  /*
-  componentDidCatch(error, errMsg){
-  }
-  */
-
-
   render() {
     const {
       config,
       onCloseItem,
-      isAdminMode
+      isAdminMode,
+      onAddToWatch,
+      onZoom,
+      onCopy,
+      onPasteTo
     } = this.props,
           {
       valueMoving,
@@ -360,7 +327,6 @@ class ChartItem extends _react.Component {
       legend
     } = zhConfig || {},
           {
-      hasError,
       isOpen,
       isShowChart,
       isShowInfo,
@@ -369,7 +335,9 @@ class ChartItem extends _react.Component {
       isCaption,
       itemCaption,
       mfiConfigs,
-      miniTitles
+      miniTitles,
+      hasError,
+      isShowToolbar
     } = this.state,
           _zhMiniConfigs = _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN);
 
@@ -392,18 +360,41 @@ class ChartItem extends _react.Component {
         isShow: isOpen,
         withoutAnimation: true,
         style: S_SHOW_HIDE,
-        children: [isShowChart && this._crChartToolBar(config), hasError ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
-          isShow: isShowChart,
-          msg: "chart"
-        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
-          isShow: isShowChart,
+        children: [isShowChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
+          isShow: isShowToolbar,
           withoutAnimation: true,
-          style: S_WRAPPER,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar.default, {
+            style: S_TAB_DIV,
+            hasError: hasError,
             config: config,
-            isShowAbs: isShowAbs,
-            absComp: this._dataSourceEl,
-            onLoaded: this._hLoaded
+            getChart: this.getMainChart,
+            onMiniChart: this._hMiniChart,
+            onAddMfi: this._addMfi,
+            onRemoveMfi: this._removeMfi,
+            onClickLegend: this._hClickLegend,
+            onAddToWatch: onAddToWatch,
+            onClickInfo: this._hClickInfo,
+            onClickConfig: this._hClickConfig,
+            onCopy: onCopy,
+            onPasteTo: onPasteTo,
+            onZoom: onZoom
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrorBoundary, {
+          FallbackComp: /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
+            isShow: isShowChart,
+            msg: "chart"
+          }),
+          onError: this._hError,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
+            isShow: isShowChart,
+            withoutAnimation: true,
+            style: S_WRAPPER,
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
+              config: config,
+              isShowAbs: isShowAbs,
+              absComp: this._dataSourceEl,
+              onLoaded: this._hLoaded
+            })
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo.default, {
           isShow: isShowInfo,

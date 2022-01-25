@@ -22,6 +22,7 @@ import SvgMore from './SvgMore'
 import SvgClose from './SvgClose'
 import MsgRenderErr from './MsgRenderErr'
 import HighchartWrapper from './HighchartWrapper'
+import ErrorBoundary from './ErrorBoundary'
 
 import toLink from './toLink'
 
@@ -50,6 +51,7 @@ const A = {
   SvgClose,
   MsgRenderErr,
   HighchartWrapper,
+  ErrorBoundary,
   toLink
 };
 
