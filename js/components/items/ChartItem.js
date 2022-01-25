@@ -52,10 +52,23 @@ const CL_CHART_ITEM = 'chart-item',
 };
 
 const _isArr = Array.isArray,
-      _isNarrowWidth = !_has.default.wideWidth();
+      _isNarrowWidth = !_has.default.wideWidth(),
+      MINI_CONFIGS_ID_PN = "btTitle";
 
 const _crMiniTitles = (miniTitles, btTitle) => {
   return miniTitles.indexOf(btTitle) === -1 ? [btTitle, ...miniTitles] : miniTitles.filter(t => t !== btTitle);
+};
+
+const _arrangeConfigsBy = (configs, configIds, idPropName) => {
+  const _hmConfigs = configs.reduce((hm, config) => {
+    hm[config[idPropName]] = config;
+    return hm;
+  }, {});
+
+  return configIds.reduce((arrangedConfigs, id) => {
+    arrangedConfigs.push(_hmConfigs[id]);
+    return arrangedConfigs;
+  }, []);
 };
 
 const _toggle = (comp, propName) => {
@@ -357,7 +370,9 @@ class ChartItem extends _react.Component {
       itemCaption,
       mfiConfigs,
       miniTitles
-    } = this.state;
+    } = this.state,
+          _zhMiniConfigs = _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN);
+
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_CHART_ITEM,
       children: [isCaption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Header.default, {
@@ -407,9 +422,8 @@ class ChartItem extends _react.Component {
           onWillUnLoaded: this._hUnLoadedMiniChart
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts.default, {
           withoutAnimation: true,
-          configs: zhMiniConfigs,
-          idPropName: "btTitle",
-          ids: miniTitles,
+          configs: _zhMiniConfigs,
+          idPropName: MINI_CONFIGS_ID_PN,
           absComp: this._dataSourceEl,
           onLoaded: this._hLoadedMiniChart,
           onWillUnLoaded: this._hUnLoadedMiniChart

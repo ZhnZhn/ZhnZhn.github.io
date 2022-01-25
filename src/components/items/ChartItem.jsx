@@ -33,12 +33,28 @@ const CL_CHART_ITEM =  'chart-item'
 };
 
 const _isArr = Array.isArray
-, _isNarrowWidth = !has.wideWidth();
+, _isNarrowWidth = !has.wideWidth()
+, MINI_CONFIGS_ID_PN = "btTitle";
 
 const _crMiniTitles = (miniTitles, btTitle) => {
   return miniTitles.indexOf(btTitle) === -1
     ? [btTitle, ...miniTitles]
     : miniTitles.filter(t => t !== btTitle);
+};
+
+const _arrangeConfigsBy = (
+  configs,
+  configIds,
+  idPropName
+) => {
+  const _hmConfigs = configs.reduce((hm, config) => {
+    hm[config[idPropName]] = config
+    return hm;
+  }, {});
+  return configIds.reduce((arrangedConfigs, id) => {
+    arrangedConfigs.push(_hmConfigs[id])
+    return arrangedConfigs
+  }, []);
 };
 
 const _toggle = (comp, propName) => {
@@ -71,6 +87,8 @@ const _reflowCharts = (mainChart, width, ChartFn) => {
     }
   }
 };
+
+
 
 class ChartItem extends Component {
   /*
@@ -274,7 +292,7 @@ class ChartItem extends Component {
              onMiniChart={this._hMiniChart}
              onAddMfi={this._addMfi}
              onRemoveMfi={this._removeMfi}
-             onClickLegend={this._hClickLegend}             
+             onClickLegend={this._hClickLegend}
              onAddToWatch={onAddToWatch}
              onClickInfo={this._hClickInfo}
              onClickConfig={this._hClickConfig}
@@ -313,7 +331,12 @@ class ChartItem extends Component {
         itemCaption,
         mfiConfigs,
         miniTitles
-    } = this.state;
+    } = this.state
+    , _zhMiniConfigs = _arrangeConfigsBy(
+         zhMiniConfigs,
+         miniTitles,
+         MINI_CONFIGS_ID_PN
+      );
 
     return (
       <div className={CL_CHART_ITEM}>
@@ -376,9 +399,8 @@ class ChartItem extends Component {
            />
            <MiniCharts
               withoutAnimation={true}
-              configs={zhMiniConfigs}
-              idPropName="btTitle"
-              ids={miniTitles}
+              configs={_zhMiniConfigs}
+              idPropName={MINI_CONFIGS_ID_PN}
               absComp={this._dataSourceEl}
               onLoaded={this._hLoadedMiniChart}
               onWillUnLoaded={this._hUnLoadedMiniChart}
