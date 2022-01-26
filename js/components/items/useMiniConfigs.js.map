@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/useMiniConfigs.js"
+ ],
+ "file": "../../../src/components/items/useMiniConfigs.js",
+ "names": [
+  "useMiniConfigs",
+  "miniConfigs",
+  "setMiniConfigs",
+  "addConfig",
+  "config",
+  "id",
+  "prevState",
+  "push",
+  "removeConfig",
+  "filter",
+  "c"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,cAAc,GAAG,MAAM;AAC3B,QAAM,CAACC,WAAD,EAAcC,cAAd,IAAgC,qBAAS,EAAT,CAAtC;AAAA,QACEC,SAAS,GAAG,wBAAY,CAACC,MAAD,EAASC,EAAT,KAAgB;AACtCH,IAAAA,cAAc,CAACI,SAAS,IAAI;AAC1BA,MAAAA,SAAS,CAACC,IAAV,CAAe;AAAEH,QAAAA,MAAF;AAAUC,QAAAA;AAAV,OAAf;AACA,aAAO,CAAC,GAAGC,SAAJ,CAAP;AACD,KAHa,CAAd;AAID,GALW,EAKT,EALS,CADd;AAAA,QAOEE,YAAY,GAAG,wBAAaH,EAAD,IAAQ;AACjCH,IAAAA,cAAc,CAACI,SAAS,IAAIA,SAAS,CACnCG,MAD0B,CACnBC,CAAC,IAAIA,CAAC,CAACL,EAAF,KAASA,EADK,CAAd,CAAd;AAED,GAHc,EAGZ,EAHY,CAPjB;AAWA,SAAO,CAACJ,WAAD,EAAcE,SAAd,EAAyBK,YAAzB,CAAP;AACD,CAbD;;eAeeR,c"
+}

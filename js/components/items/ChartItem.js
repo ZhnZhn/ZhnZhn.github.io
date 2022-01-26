@@ -7,6 +7,26 @@ exports.default = void 0;
 
 var _react = require("react");
 
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+
+var _useVm = _interopRequireDefault(require("./useVm"));
+
+var _useLoadChart = _interopRequireDefault(require("./useLoadChart"));
+
+var _useSetCheckBox = _interopRequireDefault(require("./useSetCheckBox"));
+
+var _useCaption = _interopRequireDefault(require("./useCaption"));
+
+var _useMiniConfigs = _interopRequireDefault(require("./useMiniConfigs"));
+
+var _useMiniTitles = _interopRequireDefault(require("./useMiniTitles"));
+
+var _useMiniHandles = _interopRequireDefault(require("./useMiniHandles"));
+
+var _useDataSourceEl = _interopRequireDefault(require("./useDataSourceEl"));
+
 var _has = _interopRequireDefault(require("../has"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
@@ -43,22 +63,11 @@ const CL_CHART_ITEM = 'chart-item',
 },
       S_WRAPPER = {
   marginTop: 6
-},
-      S_DATA_SOURCE = {
-  position: 'absolute',
-  left: 5,
-  bottom: 0,
-  color: '#909090',
-  fontSize: '11px'
 };
 
 const _isArr = Array.isArray,
       _isNarrowWidth = !_has.default.wideWidth(),
       MINI_CONFIGS_ID_PN = "btTitle";
-
-const _crMiniTitles = (miniTitles, btTitle) => {
-  return miniTitles.indexOf(btTitle) === -1 ? [btTitle, ...miniTitles] : miniTitles.filter(t => t !== btTitle);
-};
 
 const _arrangeConfigsBy = (configs, configIds, idPropName) => {
   const _hmConfigs = (configs || []).reduce((hm, config) => {
@@ -70,24 +79,6 @@ const _arrangeConfigsBy = (configs, configIds, idPropName) => {
     arrangedConfigs.push(_hmConfigs[id]);
     return arrangedConfigs;
   }, []);
-};
-
-const _toggle = (comp, propName) => {
-  comp.setState(prevState => ({
-    [propName]: !prevState[propName]
-  }));
-};
-
-const _callChartMethod = function (comp, methodName) {
-  const _chart = comp.getMainChart();
-
-  if (_chart) {
-    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      args[_key - 2] = arguments[_key];
-    }
-
-    _chart[methodName](...args);
-  }
 };
 
 const _reflowCharts = (mainChart, width, ChartFn) => {
@@ -114,356 +105,218 @@ const _reflowCharts = (mainChart, width, ChartFn) => {
   }
 };
 
-class ChartItem extends _react.Component {
-  /*
-  static propTypes = {
-    caption: PropTypes.string,
-    chartType: PropTypes.string,
-    config: PropTypes.shape({
-      zhConfig: PropTypes.shape({
-        dataSource: PropTypes.string,
-        itemCaption: PropTypes.string
-      }),
-      zhMiniConfigs: PropTypes.arrayOf(
-        PropTypes.shape({
-          btTitle: PropTypes.string,
-          config: PropTypes.object
-      }))
-    }),
-    onAddToWatch: PropTypes.func,
-    onSetActive: PropTypes.func,
-    onCloseItem: PropTypes.func,
-    isAdminMode: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.bool
-    ]),
-    crValueMoving: PropTypes.func,
-    onZoom: PropTypes.func
-  }
-  */
-  constructor(props) {
-    super(props);
+const _isNotShouldUpdate = () => true;
 
-    this._hError = () => {
-      this.setState({
-        hasError: true
-      });
-    };
+const ChartItem = /*#__PURE__*/(0, _react.memo)( /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+  let {
+    caption,
+    config,
+    onCloseItem,
+    isAdminMode,
+    onAddToWatch,
+    onZoom,
+    onCopy,
+    onPasteTo,
+    chartType,
+    onSetActive,
+    onShowConfigDialog,
+    crValueMoving,
+    ChartFn,
+    onToTop
+  } = _ref;
+  const [_refVm, compareTo] = (0, _useVm.default)(),
+        [_hLoaded, getMainChart] = (0, _useLoadChart.default)(),
+        [hasError, _hError] = (0, _useBool.default)(false),
+        [isOpen, toggleOpen] = (0, _useToggle.default)(true),
+        [isShowLegend, toggleLegend] = (0, _useToggle.default)(false),
+        [isShowToolbar, toggleToolbar] = (0, _useToggle.default)(true),
+        [onCheckItem, onUnCheckItem] = (0, _useSetCheckBox.default)(getMainChart, chartType, onSetActive),
+        [loadMiniChart, unloadMiniChart] = (0, _useMiniHandles.default)(getMainChart);
 
-    this.setItemCaption = str => {
-      this.setState({
-        itemCaption: str
-      });
-    };
+  const {
+    zhConfig,
+    valueMoving,
+    info,
+    zhMiniConfigs
+  } = config || {},
+        {
+    dataSource,
+    itemCaption: _itemCaption,
+    itemTime,
+    legend
+  } = zhConfig || {},
+        [_dataSourceEl] = (0, _useDataSourceEl.default)(dataSource),
+        [itemCaption] = (0, _react.useState)(() => _itemCaption || caption || ''),
+        _hToggleSeria = (0, _react.useCallback)(item => {
+    getMainChart().zhToggleSeria(item.index);
+  }, [getMainChart]),
+        [isShowChart, showChart, hideChart] = (0, _useBool.default)(true),
+        isShowInfo = !isShowChart
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hClickInfo = (0, _react.useCallback)(() => {
+    hideChart();
+    toggleLegend(false);
+  }, []) // hideChart, toggleLegend
 
-    this.setDataSource = strDataSource => {
-      this._dataSourceEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        style: S_DATA_SOURCE,
-        children: strDataSource
-      });
-      this.forceUpdate();
-    };
+  /*eslint-enable react-hooks/exhaustive-deps */
+  ,
+        [mfiConfigs, _addMfi, _removeMfi] = (0, _useMiniConfigs.default)(),
+        [miniTitles, _hMiniChart] = (0, _useMiniTitles.default)(),
+        isShowAbs = miniTitles.length === 0
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _crValueMoving = (0, _react.useCallback)((prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo), []) // getMainChart, crValueMoving
 
-    this._hLoaded = chart => this.mainChart = chart;
+  /*eslint-enable react-hooks/exhaustive-deps */
+  ,
+        [isCaption, showCaption, hideCaption] = (0, _useCaption.default)(getMainChart, toggleToolbar),
+        _zhMiniConfigs = (0, _react.useMemo)(() => _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN), [zhMiniConfigs, miniTitles])
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _moreModel = (0, _react.useMemo)(() => (0, _ChartItemMore.default)(toggleToolbar, onToTop, hideCaption), []); // toggleToolbar, onToTop, hideCaption
 
-    this.getMainChart = () => this.mainChart;
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-    this._hToggleSeria = item => {
-      this.mainChart.zhToggleSeria(item.index);
-    };
+  /*eslint-disable react-hooks/exhaustive-deps */
 
-    this._hClickInfo = () => {
-      this.setState({
-        isShowInfo: true,
-        isShowChart: false,
-        isShowLegend: false
-      });
-    };
 
-    this._hClickChart = () => {
-      this.setState({
-        isShowChart: true,
-        isShowInfo: false
-      });
-    };
+  (0, _react.useEffect)(() => {
+    const mainChart = getMainChart();
 
-    this._hCheckBox = (isCheck, checkBox) => {
-      const {
-        chartType,
-        onSetActive
-      } = this.props;
-      checkBox.chartType = chartType;
-      onSetActive(isCheck, checkBox, this.mainChart);
-    };
-
-    this._addMfi = (config, id) => {
-      this.setState(prevState => {
-        prevState.mfiConfigs.push({
-          config,
-          id
-        });
-        return prevState;
-      });
-    };
-
-    this._removeMfi = id => {
-      this.setState(prevState => {
-        prevState.mfiConfigs = prevState.mfiConfigs.filter(c => c.id !== id);
-        return prevState;
-      });
-    };
-
-    this._hClickConfig = () => {
-      const {
-        caption,
-        onShowConfigDialog
-      } = this.props;
-      onShowConfigDialog({
-        caption,
-        chart: this.mainChart,
-        setItemCaption: this.setItemCaption,
-        setDataSource: this.setDataSource,
-        onToggleToolbar: this._hToggleToolbar
-      });
-    };
-
-    this._crValueMoving = (prev, dateTo) => {
-      return this.props.crValueMoving(this.mainChart, prev, dateTo);
-    };
-
-    this._hMiniChart = btTitle => {
-      const miniTitles = _crMiniTitles(this.state.miniTitles, btTitle),
-            isShowAbs = miniTitles.length === 0 ? true : false;
-
-      this.setState({
-        miniTitles,
-        isShowAbs
-      });
-    };
-
-    this._refVm = /*#__PURE__*/(0, _react.createRef)();
-    this._hToggleOpen = _toggle.bind(null, this, 'isOpen');
-    this._hClickLegend = _toggle.bind(null, this, 'isShowLegend');
-    this._hToggleToolbar = _toggle.bind(null, this, 'isShowToolbar');
-    this._moreModel = (0, _ChartItemMore.default)(this, {
-      onToggle: this._hToggleToolbar,
-      onToTop: props.onToTop,
-      onHideCaption: this.hideCaption
-    });
-    this._hLoadedMiniChart = _callChartMethod.bind(null, this, 'zhAddDetailChart');
-    this._hUnLoadedMiniChart = _callChartMethod.bind(null, this, 'zhRemoveDetailChart');
-    this._fnOnCheck = this._hCheckBox.bind(this, true);
-    this._fnOnUnCheck = this._hCheckBox.bind(this, false);
-
-    const {
-      config: _config,
-      caption: _caption
-    } = props,
-          {
-      zhConfig
-    } = _config || {},
-          {
-      dataSource,
-      itemCaption
-    } = zhConfig || {},
-          _itemCaption = itemCaption || _caption || '';
-
-    this._dataSourceEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: S_DATA_SOURCE,
-      children: dataSource || ''
-    });
-    this.state = {
-      hasError: false,
-      isOpen: true,
-      isShowToolbar: true,
-      isShowLegend: false,
-      isShowChart: true,
-      isShowInfo: false,
-      itemCaption: _itemCaption,
-      mfiConfigs: [],
-      isShowAbs: true,
-      miniTitles: [],
-      isCaption: true
-    };
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps) {
-      return false;
+    if (mainChart) {
+      mainChart.update(ChartFn.crMetricConfig(mainChart, isShowAbs));
     }
+  }, [isShowAbs]); // getMainChart, ChartFn
 
-    return true;
-  }
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  componentDidUpdate(prevProps, prevState) {
-    const {
-      isShowAbs
-    } = this.state,
-          mainChart = this.mainChart;
+  /*eslint-disable react-hooks/exhaustive-deps */
 
-    if (isShowAbs !== prevState.isShowAbs && mainChart) {
-      mainChart.update(this.props.ChartFn.crMetricConfig(mainChart, isShowAbs));
+  (0, _react.useImperativeHandle)(ref, () => ({
+    compareTo,
+    hideCaption,
+    showCaption,
+    reflowChart: width => {
+      _reflowCharts(getMainChart(), width, ChartFn);
     }
-  }
+  }), []); // compareTo, hideCaption, showCaption, getMainChart, ChartFn
 
-  render() {
-    const {
-      config,
-      onCloseItem,
-      isAdminMode,
-      onAddToWatch,
-      onZoom,
-      onCopy,
-      onPasteTo
-    } = this.props,
-          {
-      valueMoving,
-      info,
-      zhConfig,
-      zhMiniConfigs
-    } = config || {},
-          {
-      itemTime,
-      legend
-    } = zhConfig || {},
-          {
-      isOpen,
-      isShowChart,
-      isShowInfo,
-      isShowLegend,
-      isShowAbs,
-      isCaption,
-      itemCaption,
-      mfiConfigs,
-      miniTitles,
-      hasError,
-      isShowToolbar
-    } = this.state,
-          _zhMiniConfigs = _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN);
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: CL_CHART_ITEM,
-      children: [isCaption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Header.default, {
-        isOpen: isOpen,
-        isAdminMode: isAdminMode,
-        itemCaption: itemCaption,
-        itemTime: itemTime,
-        valueMoving: valueMoving,
-        moreModel: this._moreModel,
-        onCheck: this._fnOnCheck,
-        onUnCheck: this._fnOnUnCheck,
-        onToggle: this._hToggleOpen,
-        onClose: onCloseItem,
-        crValueMoving: this._crValueMoving,
-        refVm: this._refVm
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ShowHide, {
-        isShow: isOpen,
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: CL_CHART_ITEM,
+    children: [isCaption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Header.default, {
+      isOpen: isOpen,
+      isAdminMode: isAdminMode,
+      itemCaption: itemCaption,
+      itemTime: itemTime,
+      valueMoving: valueMoving,
+      moreModel: _moreModel,
+      onCheck: onCheckItem,
+      onUnCheck: onUnCheckItem,
+      onToggle: toggleOpen,
+      onClose: onCloseItem,
+      crValueMoving: _crValueMoving,
+      refVm: _refVm
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ShowHide, {
+      isShow: isOpen,
+      withoutAnimation: true,
+      style: S_SHOW_HIDE,
+      children: [isShowChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
+        isShow: isShowToolbar,
         withoutAnimation: true,
-        style: S_SHOW_HIDE,
-        children: [isShowChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
-          isShow: isShowToolbar,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar.default, {
+          style: S_TAB_DIV,
+          hasError: hasError,
+          config: config,
+          getChart: getMainChart,
+          onMiniChart: _hMiniChart,
+          onAddMfi: _addMfi,
+          onRemoveMfi: _removeMfi,
+          onClickLegend: toggleLegend,
+          onAddToWatch: onAddToWatch,
+          onClickInfo: _hClickInfo,
+          onCopy: onCopy,
+          onPasteTo: onPasteTo,
+          onZoom: onZoom
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrorBoundary, {
+        FallbackComp: /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
+          isShow: isShowChart,
+          msg: "chart"
+        }),
+        onError: _hError,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
+          isShow: isShowChart,
           withoutAnimation: true,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar.default, {
-            style: S_TAB_DIV,
-            hasError: hasError,
+          style: S_WRAPPER,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
             config: config,
-            getChart: this.getMainChart,
-            onMiniChart: this._hMiniChart,
-            onAddMfi: this._addMfi,
-            onRemoveMfi: this._removeMfi,
-            onClickLegend: this._hClickLegend,
-            onAddToWatch: onAddToWatch,
-            onClickInfo: this._hClickInfo,
-            onClickConfig: this._hClickConfig,
-            onCopy: onCopy,
-            onPasteTo: onPasteTo,
-            onZoom: onZoom
+            isShowAbs: isShowAbs,
+            absComp: _dataSourceEl,
+            onLoaded: _hLoaded
           })
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrorBoundary, {
-          FallbackComp: /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
-            isShow: isShowChart,
-            msg: "chart"
-          }),
-          onError: this._hError,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
-            isShow: isShowChart,
-            withoutAnimation: true,
-            style: S_WRAPPER,
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
-              config: config,
-              isShowAbs: isShowAbs,
-              absComp: this._dataSourceEl,
-              onLoaded: this._hLoaded
-            })
-          })
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo.default, {
-          isShow: isShowInfo,
-          info: info,
-          zhInfo: zhConfig,
-          onClickChart: this._hClickChart
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartLegend.default, {
-          isShow: isShowLegend,
-          legend: legend,
-          onClickItem: this._hToggleSeria
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts.default, {
-          withoutAnimation: true,
-          configs: mfiConfigs,
-          absComp: this._dataSourceEl,
-          onLoaded: this._hLoadedMiniChart,
-          onWillUnLoaded: this._hUnLoadedMiniChart
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts.default, {
-          withoutAnimation: true,
-          configs: _zhMiniConfigs,
-          idPropName: MINI_CONFIGS_ID_PN,
-          absComp: this._dataSourceEl,
-          onLoaded: this._hLoadedMiniChart,
-          onWillUnLoaded: this._hUnLoadedMiniChart
-        })]
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo.default, {
+        isShow: isShowInfo,
+        info: info,
+        zhInfo: zhConfig,
+        onClickChart: showChart
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartLegend.default, {
+        isShow: isShowLegend,
+        legend: legend,
+        onClickItem: _hToggleSeria
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts.default, {
+        withoutAnimation: true,
+        configs: mfiConfigs,
+        absComp: _dataSourceEl,
+        onLoaded: loadMiniChart,
+        onWillUnLoaded: unloadMiniChart
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MiniCharts.default, {
+        withoutAnimation: true,
+        configs: _zhMiniConfigs,
+        idPropName: MINI_CONFIGS_ID_PN,
+        absComp: _dataSourceEl,
+        onLoaded: loadMiniChart,
+        onWillUnLoaded: unloadMiniChart
       })]
-    });
-  }
-
-  compareTo(dateTo) {
-    const {
-      current
-    } = this._refVm;
-
-    if (current) {
-      return current._updateDateTo(dateTo);
-    }
-  }
-
-  hideCaption() {
-    const _chart = this.mainChart;
-
-    if (_chart) {
-      _chart.zhHideCaption();
-
-      this.setState({
-        isShowToolbar: false,
-        isCaption: false
-      });
-    }
-  }
-
-  showCaption() {
-    const _chart = this.mainChart;
-
-    if (!this.state.isCaption && _chart) {
-      _chart.zhShowCaption();
-
-      this.setState({
-        isShowToolbar: true,
-        isCaption: true
-      });
-    }
-  }
-
-  reflowChart(width) {
-    _reflowCharts(this.mainChart, width, this.props.ChartFn);
-  }
-
+    })]
+  });
+}), _isNotShouldUpdate);
+/*
+static propTypes = {
+  caption: PropTypes.string,
+  chartType: PropTypes.string,
+  config: PropTypes.shape({
+    zhConfig: PropTypes.shape({
+      dataSource: PropTypes.string,
+      itemCaption: PropTypes.string
+    }),
+    zhMiniConfigs: PropTypes.arrayOf(
+      PropTypes.shape({
+        btTitle: PropTypes.string,
+        config: PropTypes.object
+    }))
+  }),
+  onAddToWatch: PropTypes.func,
+  onSetActive: PropTypes.func,
+  onCloseItem: PropTypes.func,
+  isAdminMode: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool
+  ]),
+  crValueMoving: PropTypes.func,
+  onZoom: PropTypes.func,
+  onCopy: PropTypes.func,
+  onPasteTo: PropTypes.func,
+  onToTop: PropTypes.func,
+  ChartFn: PropTypes.shape({
+    crMetricConfig: PropTypes.func,
+    calcYAxisOffset: PropTypes.func
+  })
 }
+*/
 
 var _default = ChartItem;
 exports.default = _default;

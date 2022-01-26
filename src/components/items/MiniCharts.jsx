@@ -31,6 +31,7 @@ const MiniCharts = ({
    );
 
 
+
 /*
 MiniCharts.propTypes = {
   withoutAnimation: PropTypes.bool,

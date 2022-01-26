@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/useSetCheckBox.js"
+ ],
+ "file": "../../../src/components/items/useSetCheckBox.js",
+ "names": [
+  "useSetCheckBox",
+  "getMainChart",
+  "chartType",
+  "onSetActive",
+  "onCheck",
+  "checkBox",
+  "onUnCheck"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,cAAc,GAAG,CACrBC,YADqB,EAErBC,SAFqB,EAGrBC,WAHqB,KAIlB;AACH;AACA,QAAMC,OAAO,GAAG,wBAAaC,QAAD,IAAc;AACxCA,IAAAA,QAAQ,CAACH,SAAT,GAAqBA,SAArB;AACAC,IAAAA,WAAW,CAAC,IAAD,EAAOE,QAAP,EAAiBJ,YAAY,EAA7B,CAAX;AACD,GAHe,EAGb,EAHa,CAAhB;AAAA,QAIEK,SAAS,GAAG,wBAAaD,QAAD,IAAc;AACtCA,IAAAA,QAAQ,CAACH,SAAT,GAAqBA,SAArB;AACAC,IAAAA,WAAW,CAAC,KAAD,EAAQE,QAAR,EAAkBJ,YAAY,EAA9B,CAAX;AACD,GAHa,EAGX,EAHW,CAJd,CAFG,CAUH;;AACA;;AACA,SAAO,CAACG,OAAD,EAAUE,SAAV,CAAP;AACD,CAjBD;;eAmBeN,c"
+}
