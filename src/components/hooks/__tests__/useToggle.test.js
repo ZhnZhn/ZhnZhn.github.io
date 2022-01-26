@@ -38,6 +38,20 @@ describe('useToggle', ()=>{
     _actToggleTest()
     _actToggleTest()
   })
+  test('should use boolean parameter for toggle', ()=>{
+    const [result, toggle] = _renderInitialTest(false, false)
+    act(() => toggle(false))
+    expect(_getState(result)).toBe(false)
+    act(() => toggle(true))
+    expect(_getState(result)).toBe(true)
+  })
+  test('should toggle in case toggle parameter not boolean', ()=>{
+    const [result, toggle] = _renderInitialTest(false, false)
+    act(() => toggle(''))
+    expect(_getState(result)).toBe(true)
+    act(() => toggle(0))
+    expect(_getState(result)).toBe(false)
+  })
   test('should convert to bool initialValue', ()=>{
     _renderInitialTest(null, false)
     _renderInitialTest(void 0, false)

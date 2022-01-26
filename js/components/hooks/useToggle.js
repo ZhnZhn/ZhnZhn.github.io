@@ -1,24 +1,23 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _react = require("react");
 
-var useToggle = function useToggle(initialValue) {
-  var _useState = (0, _react.useState)(function () {
-    return !!initialValue;
-  }),
-      is = _useState[0],
-      setIs = _useState[1];
+const _isBool = v => typeof v === 'boolean';
 
-  return [is, (0, _react.useCallback)(function () {
-    return setIs(function (is) {
-      return !is;
-    });
+const useToggle = initialValue => {
+  const [is, setIs] = (0, _react.useState)(() => !!initialValue);
+  return [is, (0, _react.useCallback)(v => {
+    if (_isBool(v)) {
+      setIs(v);
+    } else {
+      setIs(is => !is);
+    }
   }, [])];
 };
 
 var _default = useToggle;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=useToggle.js.map

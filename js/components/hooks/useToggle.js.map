@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/components/hooks/useToggle.js"],"names":["useToggle","initialValue","is","setIs"],"mappings":";;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAACC,YAAD,EAAkB;AAAA,kBACf,qBAAS;AAAA,WAAM,CAAC,CAACA,YAAR;AAAA,GAAT,CADe;AAAA,MAC5BC,EAD4B;AAAA,MACxBC,KADwB;;AAEnC,SAAO,CACLD,EADK,EAEL,wBAAY;AAAA,WAAMC,KAAK,CAAC,UAAAD,EAAE;AAAA,aAAI,CAACA,EAAL;AAAA,KAAH,CAAX;AAAA,GAAZ,EAAoC,EAApC,CAFK,CAAP;AAIA,CAND;;eAQeF,S","sourcesContent":["import { useState, useCallback } from 'react'\r\n\r\nconst useToggle = (initialValue) => {\r\n const [is, setIs] = useState(() => !!initialValue);\r\n return [\r\n   is,\r\n   useCallback(() => setIs(is => !is), [])\r\n ];\r\n};\r\n\r\nexport default useToggle\r\n"],"file":"useToggle.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useToggle.js"
+ ],
+ "file": "../../../src/components/hooks/useToggle.js",
+ "names": [
+  "_isBool",
+  "v",
+  "useToggle",
+  "initialValue",
+  "is",
+  "setIs"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,OAAO,GAAGC,CAAC,IAAI,OAAOA,CAAP,KAAa,SAAlC;;AAEA,MAAMC,SAAS,GAAIC,YAAD,IAAkB;AACnC,QAAM,CAACC,EAAD,EAAKC,KAAL,IAAc,qBAAS,MAAM,CAAC,CAACF,YAAjB,CAApB;AACA,SAAO,CACLC,EADK,EAEL,wBAAaH,CAAD,IAAO;AACjB,QAAID,OAAO,CAACC,CAAD,CAAX,EAAgB;AACdI,MAAAA,KAAK,CAACJ,CAAD,CAAL;AACD,KAFD,MAEO;AACLI,MAAAA,KAAK,CAACD,EAAE,IAAI,CAACA,EAAR,CAAL;AACD;AACF,GAND,EAMG,EANH,CAFK,CAAP;AAUA,CAZD;;eAceF,S"
+}
