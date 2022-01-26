@@ -42,9 +42,7 @@ const CL_CHART_ITEM =  'chart-item'
 , S_SHOW_HIDE = { marginLeft: 8 }
 , S_WRAPPER = { marginTop: 6 };
 
-
-const _isArr = Array.isArray
-, _isNarrowWidth = !has.wideWidth()
+const _isAnimateReflow = has.wideWidth()
 , MINI_CONFIGS_ID_PN = "btTitle";
 
 const _arrangeConfigsBy = (
@@ -60,24 +58,6 @@ const _arrangeConfigsBy = (
     arrangedConfigs.push(_hmConfigs[id])
     return arrangedConfigs
   }, []);
-};
-
-const _reflowCharts = (mainChart, width, ChartFn) => {
-  if (mainChart) {
-    const _isAnimate = !_isNarrowWidth && mainChart.zhIsAnimation()
-    , zhDetailCharts = mainChart.zhGetDetailCharts();
-
-    mainChart.setSize(width, void 0, _isAnimate)
-    if (_isArr(zhDetailCharts)) {
-      const spacingLeft = ChartFn.calcYAxisOffset(mainChart);
-      zhDetailCharts.forEach(chart => {
-        if (spacingLeft) {
-          chart.update({ chart: { spacingLeft } }, false)
-        }
-        chart.setSize(width, void 0, _isAnimate)
-      })
-    }
-  }
 };
 
 const _isNotShouldUpdate = () => true;
@@ -181,10 +161,13 @@ const ChartItem = memo(forwardRef(({
     hideCaption,
     showCaption,
     reflowChart: (width) => {
-      _reflowCharts(getMainChart(), width, ChartFn)
+      const mainChart = getMainChart();
+      if (mainChart) {
+        mainChart.zhReflowCharts(_isAnimateReflow, width)
+      }
     }
   }), [])
-  // compareTo, hideCaption, showCaption, getMainChart, ChartFn
+  // compareTo, hideCaption, showCaption, getMainChart
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
@@ -309,8 +292,7 @@ static propTypes = {
   onPasteTo: PropTypes.func,
   onToTop: PropTypes.func,
   ChartFn: PropTypes.shape({
-    crMetricConfig: PropTypes.func,
-    calcYAxisOffset: PropTypes.func
+    crMetricConfig: PropTypes.func    
   })
 }
 */

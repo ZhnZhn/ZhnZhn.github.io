@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _wrapExportChartLocal = _interopRequireDefault(require("./wrapExportChartLocal"));
 
@@ -31,23 +29,31 @@ var _zhGet = _interopRequireDefault(require("./zhGet"));
 
 var _zhDetailCharts = _interopRequireDefault(require("./zhDetailCharts"));
 
-var HighchartsZhn = function HighchartsZhn(Highcharts) {
-  var wrap = Highcharts.wrap,
-      Chart = Highcharts.Chart;
-  (0, _wrapExportChartLocal["default"])(wrap, Chart);
-  (0, _zhCaption["default"])(Chart);
-  (0, _zhTogglePlotLines["default"])(Chart);
-  Object.assign(Chart.prototype, (0, _extends2["default"])({
-    zhAddSeriaToYAxis: _zhAddSeriaToYAxis["default"],
-    zhDetailCharts: _zhDetailCharts["default"],
-    zhEnableDataLabels: _zhEnableDataLabels["default"],
-    zhToggleSeria: _zhToggleSeria["default"],
-    zhToggle2H: _zhToggle2H["default"],
-    zhRemoveCategory: _zhRemoveCategory["default"],
-    zhZoomX: _zhZoomX["default"]
-  }, _zhIs["default"], _zhGet["default"], _zhDetailCharts["default"]));
+var _zhReflowCharts = _interopRequireDefault(require("./zhReflowCharts"));
+
+const HighchartsZhn = Highcharts => {
+  const {
+    wrap,
+    Chart
+  } = Highcharts;
+  (0, _wrapExportChartLocal.default)(wrap, Chart);
+  (0, _zhCaption.default)(Chart);
+  (0, _zhTogglePlotLines.default)(Chart);
+  Object.assign(Chart.prototype, {
+    zhAddSeriaToYAxis: _zhAddSeriaToYAxis.default,
+    zhDetailCharts: _zhDetailCharts.default,
+    zhReflowCharts: _zhReflowCharts.default,
+    zhEnableDataLabels: _zhEnableDataLabels.default,
+    zhToggleSeria: _zhToggleSeria.default,
+    zhToggle2H: _zhToggle2H.default,
+    zhRemoveCategory: _zhRemoveCategory.default,
+    zhZoomX: _zhZoomX.default,
+    ..._zhIs.default,
+    ..._zhGet.default,
+    ..._zhDetailCharts.default
+  });
 };
 
 var _default = HighchartsZhn;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=zhn-highcharts.js.map

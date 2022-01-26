@@ -10,6 +10,7 @@ import zhZoomX from './zhZoomX'
 import zhIs from './zhIs'
 import zhGet from './zhGet'
 import zhDetailCharts from './zhDetailCharts'
+import zhReflowCharts from './zhReflowCharts'
 
 const HighchartsZhn = (Highcharts) => {
   const { wrap, Chart } = Highcharts;
@@ -19,6 +20,7 @@ const HighchartsZhn = (Highcharts) => {
   Object.assign(Chart.prototype, {
     zhAddSeriaToYAxis,
     zhDetailCharts,
+    zhReflowCharts,
     zhEnableDataLabels,
     zhToggleSeria,
     zhToggle2H,

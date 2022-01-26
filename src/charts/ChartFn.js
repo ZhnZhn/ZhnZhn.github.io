@@ -9,7 +9,6 @@ import DateUtils from '../utils/DateUtils';
 
 import Chart from './Chart';
 
-import calcYAxisOffset from './calcYAxisOffset';
 import crMetricConfig from './crMetricConfig';
 import dateFormat from './dateFormat';
 
@@ -173,7 +172,6 @@ const _getMinMaxFromEvent = ({
 
 const ChartFn = {
   toDmy, toTdmy, toTdmyIf,
-  calcYAxisOffset,
   crMetricConfig,
 
   addSeriaWithRenderLabel(props){

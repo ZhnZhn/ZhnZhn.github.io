@@ -19,8 +19,6 @@ var _DateUtils = _interopRequireDefault(require("../utils/DateUtils"));
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _calcYAxisOffset = _interopRequireDefault(require("./calcYAxisOffset"));
-
 var _crMetricConfig = _interopRequireDefault(require("./crMetricConfig"));
 
 var _dateFormat = _interopRequireDefault(require("./dateFormat"));
@@ -66,12 +64,14 @@ const _initOptionsZhSeries = chart => {
 
 const _crYAxisColor = chart => chart.yAxis.length === 2 ? C2_SECOND_Y_AXIS : C1_SECOND_Y_AXIS;
 
-const _addSeries = ({
-  chart,
-  series,
-  label,
-  hasSecondYAxis
-}) => {
+const _addSeries = _ref => {
+  let {
+    chart,
+    series,
+    label,
+    hasSecondYAxis
+  } = _ref;
+
   let _color;
 
   if (hasSecondYAxis) {
@@ -145,12 +145,14 @@ const _getMinMaxFromSeries = (series, options) => {
   return [_isNumber(_min) ? _min : null, _isNumber(_max) ? _max : null];
 };
 
-const _updateYAxisMinMax = ({
-  hasSecondYAxis,
-  series,
-  chart
-}, options) => {
+const _updateYAxisMinMax = (_ref2, options) => {
   var _chart$yAxis;
+
+  let {
+    hasSecondYAxis,
+    series,
+    chart
+  } = _ref2;
 
   const _yAxis = chart == null ? void 0 : (_chart$yAxis = chart.yAxis) == null ? void 0 : _chart$yAxis[0];
 
@@ -163,7 +165,11 @@ const _updateYAxisMinMax = ({
 
 const _formatNumber = n => (0, _formatAllNumber.default)(toFixedNumber(n));
 
-const _setPlotLine = (plotLine, value, delta = '') => {
+const _setPlotLine = function (plotLine, value, delta) {
+  if (delta === void 0) {
+    delta = '';
+  }
+
   if (plotLine) {
     plotLine.value = value;
     plotLine.label.text = "" + _formatNumber(value) + delta;
@@ -179,18 +185,20 @@ const _crDelta = perToValue => "\xA0\xA0\u0394 " + perToValue + "%",
 
 const _crBigValueOrZero = (value, initialValue) => value !== initialValue ? (0, _big.default)(value) : (0, _big.default)(0);
 
-const _getMinMaxFromEvent = ({
-  userMin,
-  userMax,
-  min,
-  max
-}) => [userMin || min, userMin ? userMax : max];
+const _getMinMaxFromEvent = _ref3 => {
+  let {
+    userMin,
+    userMax,
+    min,
+    max
+  } = _ref3;
+  return [userMin || min, userMin ? userMax : max];
+};
 
 const ChartFn = {
   toDmy,
   toTdmy,
   toTdmyIf,
-  calcYAxisOffset: _calcYAxisOffset.default,
   crMetricConfig: _crMetricConfig.default,
 
   addSeriaWithRenderLabel(props) {
@@ -253,11 +261,13 @@ const ChartFn = {
   toNumberFormatAll: _formatAllNumber.default,
   crId,
   crTpId: () => crId('TP_'),
-  setPlotLinesMinMax: ({
-    plotLines,
-    min,
-    max
-  }) => {
+  setPlotLinesMinMax: _ref4 => {
+    let {
+      plotLines,
+      min,
+      max
+    } = _ref4;
+
     if (max > INITIAL_MAX_NUMBER) {
       _setPlotLine(plotLines[0], max);
     }
@@ -266,12 +276,14 @@ const ChartFn = {
       _setPlotLine(plotLines[1], min);
     }
   },
-  setPlotLinesDeltas: ({
-    plotLines,
-    min,
-    max,
-    value
-  }) => {
+  setPlotLinesDeltas: _ref5 => {
+    let {
+      plotLines,
+      min,
+      max,
+      value
+    } = _ref5;
+
     const _bMax = _crBigValueOrZero(max, INITIAL_MAX_NUMBER),
           _bMin = _crBigValueOrZero(min, INITIAL_MIN_NUMBER),
           _bValue = _crBigValueOrZero(value, null),
