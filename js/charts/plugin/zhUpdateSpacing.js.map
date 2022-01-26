@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhUpdateSpacing.js"
+ ],
+ "file": "../../../src/charts/plugin/zhUpdateSpacing.js",
+ "names": [
+  "zhUpdateSpacing",
+  "isShow",
+  "update"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA,SAASA,eAAT,CAAyBC,MAAzB,EAAiC;AAC/B,OAAKC,MAAL,CAAY,8BAAgB,IAAhB,EAAsBD,MAAtB,CAAZ;AACD;;eAEcD,e"
+}

@@ -19,8 +19,6 @@ var _DateUtils = _interopRequireDefault(require("../utils/DateUtils"));
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _crMetricConfig = _interopRequireDefault(require("./crMetricConfig"));
-
 var _dateFormat = _interopRequireDefault(require("./dateFormat"));
 
 const {
@@ -199,7 +197,6 @@ const ChartFn = {
   toDmy,
   toTdmy,
   toTdmyIf,
-  crMetricConfig: _crMetricConfig.default,
 
   addSeriaWithRenderLabel(props) {
     // { chart, series, label, hasSecondYAxis } = props

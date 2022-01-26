@@ -8,8 +8,6 @@ import fnArr from '../utils/fnArr';
 import DateUtils from '../utils/DateUtils';
 
 import Chart from './Chart';
-
-import crMetricConfig from './crMetricConfig';
 import dateFormat from './dateFormat';
 
 const { toDmy, toTdmy, toTdmyIf } = dateFormat;
@@ -171,8 +169,9 @@ const _getMinMaxFromEvent = ({
 
 
 const ChartFn = {
-  toDmy, toTdmy, toTdmyIf,
-  crMetricConfig,
+  toDmy,
+  toTdmy,
+  toTdmyIf,  
 
   addSeriaWithRenderLabel(props){
     // { chart, series, label, hasSecondYAxis } = props

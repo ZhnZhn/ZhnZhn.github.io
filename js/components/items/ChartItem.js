@@ -96,7 +96,6 @@ const ChartItem = /*#__PURE__*/(0, _react.memo)( /*#__PURE__*/(0, _react.forward
     onSetActive,
     onShowConfigDialog,
     crValueMoving,
-    ChartFn,
     onToTop
   } = _ref;
   const [_refVm, compareTo] = (0, _useVm.default)(),
@@ -160,9 +159,9 @@ const ChartItem = /*#__PURE__*/(0, _react.memo)( /*#__PURE__*/(0, _react.forward
     const mainChart = getMainChart();
 
     if (mainChart) {
-      mainChart.update(ChartFn.crMetricConfig(mainChart, isShowAbs));
+      mainChart.zhUpdateSpacing(isShowAbs);
     }
-  }, [isShowAbs]); // getMainChart, ChartFn
+  }, [isShowAbs]); // getMainChart
 
   /*eslint-enable react-hooks/exhaustive-deps */
 
@@ -289,10 +288,7 @@ static propTypes = {
   onZoom: PropTypes.func,
   onCopy: PropTypes.func,
   onPasteTo: PropTypes.func,
-  onToTop: PropTypes.func,
-  ChartFn: PropTypes.shape({
-    crMetricConfig: PropTypes.func    
-  })
+  onToTop: PropTypes.func  
 }
 */
 

@@ -78,7 +78,6 @@ const ChartItem = memo(forwardRef(({
 
   onShowConfigDialog,
   crValueMoving,
-  ChartFn,
   onToTop
 }, ref) => {
   const [_refVm, compareTo] = useVm()
@@ -147,12 +146,10 @@ const ChartItem = memo(forwardRef(({
   useEffect(() => {
      const mainChart = getMainChart();
      if (mainChart) {
-       mainChart.update(
-        ChartFn.crMetricConfig(mainChart, isShowAbs)
-       )
+       mainChart.zhUpdateSpacing(isShowAbs)
      }
   }, [isShowAbs])
-  // getMainChart, ChartFn
+  // getMainChart
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -290,10 +287,7 @@ static propTypes = {
   onZoom: PropTypes.func,
   onCopy: PropTypes.func,
   onPasteTo: PropTypes.func,
-  onToTop: PropTypes.func,
-  ChartFn: PropTypes.shape({
-    crMetricConfig: PropTypes.func    
-  })
+  onToTop: PropTypes.func  
 }
 */
 

@@ -31,6 +31,8 @@ var _zhDetailCharts = _interopRequireDefault(require("./zhDetailCharts"));
 
 var _zhReflowCharts = _interopRequireDefault(require("./zhReflowCharts"));
 
+var _zhUpdateSpacing = _interopRequireDefault(require("./zhUpdateSpacing"));
+
 const HighchartsZhn = Highcharts => {
   const {
     wrap,
@@ -41,8 +43,9 @@ const HighchartsZhn = Highcharts => {
   (0, _zhTogglePlotLines.default)(Chart);
   Object.assign(Chart.prototype, {
     zhAddSeriaToYAxis: _zhAddSeriaToYAxis.default,
-    zhDetailCharts: _zhDetailCharts.default,
+    //zhDetailCharts,
     zhReflowCharts: _zhReflowCharts.default,
+    zhUpdateSpacing: _zhUpdateSpacing.default,
     zhEnableDataLabels: _zhEnableDataLabels.default,
     zhToggleSeria: _zhToggleSeria.default,
     zhToggle2H: _zhToggle2H.default,

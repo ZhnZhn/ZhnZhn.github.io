@@ -11,6 +11,7 @@ import zhIs from './zhIs'
 import zhGet from './zhGet'
 import zhDetailCharts from './zhDetailCharts'
 import zhReflowCharts from './zhReflowCharts'
+import zhUpdateSpacing from './zhUpdateSpacing'
 
 const HighchartsZhn = (Highcharts) => {
   const { wrap, Chart } = Highcharts;
@@ -19,8 +20,9 @@ const HighchartsZhn = (Highcharts) => {
   zhTogglePlotLines(Chart)
   Object.assign(Chart.prototype, {
     zhAddSeriaToYAxis,
-    zhDetailCharts,
+    //zhDetailCharts,
     zhReflowCharts,
+    zhUpdateSpacing,
     zhEnableDataLabels,
     zhToggleSeria,
     zhToggle2H,

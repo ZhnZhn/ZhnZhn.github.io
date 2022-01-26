@@ -41,12 +41,12 @@ const _crShortFormConfig = marginBottom => ({
   }
 });
 
-const crMetricConfig = (chart, isShow) => {
+const crSpacingConfig = (chart, isShow) => {
   const _isScatter = _checkIsWithScatter(chart);
 
   return isShow ? _crLongFormConfig(_isScatter ? SCATTER_LF_MB : LF_MB) : _crShortFormConfig(_isScatter ? SCATTER_SF_MB : 0);
 };
 
-var _default = crMetricConfig;
+var _default = crSpacingConfig;
 exports.default = _default;
-//# sourceMappingURL=crMetricConfig.js.map
+//# sourceMappingURL=crSpacingConfig.js.map

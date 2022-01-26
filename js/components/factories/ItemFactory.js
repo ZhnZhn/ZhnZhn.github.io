@@ -65,15 +65,13 @@ const _crAreaChart = function (_ref) {
     caption: id,
     config: config,
     onSetActive: _ComponentActions.default.setActiveCheckbox,
-    onShowConfigDialog: _ComponentActions.default.showConfigChart,
     onAddToWatch: _fAddToWatch(id, config),
     ...props,
     crValueMoving: crValueMoving,
     onToTop: _ChartActions.default[_ChartActions.CHAT_TO_TOP].bind(null, chartType, id),
     onCopy: _ChartActions.default[_ChartActions.CHAT_COPY],
     onPasteTo: _fOnPasteToDialog(store),
-    onZoom: _ComponentActions.default.zoom,
-    ChartFn: _ChartFn.default
+    onZoom: _ComponentActions.default.zoom
   }, key);
 };
 

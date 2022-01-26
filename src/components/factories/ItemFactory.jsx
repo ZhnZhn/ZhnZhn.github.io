@@ -48,7 +48,6 @@ const _crAreaChart = function({
        caption={id}
        config={config}
        onSetActive={CA.setActiveCheckbox}
-       onShowConfigDialog={CA.showConfigChart}
        onAddToWatch={_fAddToWatch(id, config)}
        {...props}
        crValueMoving={crValueMoving}
@@ -56,7 +55,6 @@ const _crAreaChart = function({
        onCopy={ChartActions[CHAT_COPY]}
        onPasteTo={_fOnPasteToDialog(store)}
        onZoom={CA.zoom}
-       ChartFn={ChartFn}
     />
   );
 };
