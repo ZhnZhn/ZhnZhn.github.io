@@ -3,7 +3,7 @@ import useRefInit from '../hooks/useRefInit'
 import IndicatorBuilder from '../../charts/IndicatorBuilder'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
-import STYLE from './ModalMenu.Style'
+import { S_MODAL_MENU } from './ModalMenu.Style'
 
 import RowTypeA from './RowTypeA'
 import RowTypeB from './RowTypeB'
@@ -15,23 +15,21 @@ const {
   powerBy10
 } = IndicatorBuilder;
 
-const DF_POWER_BY_10 = 0;
+const DF_POWER_BY_10 = 0
+, S_PANE = { margin: '6px 10px 6px 6px' }
 
-const S = {
-  PANE: {
-    margin: '6px 10px 6px 6px'
-  }
-};
+, _isNumber = n => typeof n === 'number'
+    && n-n === 0
 
-const _isNumber = n => typeof n === 'number'
- && n-n === 0;
-
-const _isPowerBy = config => !config
-  ?.plotOptions?.bar?.dataLabels?.enabled;
+, _isPowerBy = config => !config
+    ?.plotOptions?.bar?.dataLabels?.enabled;
 
 const ModalMenuInd2 = ({
-  style, isShow, onClose,
-  getChart, config
+  style,
+  isShow,
+  onClose,
+  getChart,
+  config
 }) => {
   const _hasPowerBy10 = useRefInit(() => _isPowerBy(config))
   , _refPowerBy10 = useRef(DF_POWER_BY_10)
@@ -45,11 +43,11 @@ const ModalMenuInd2 = ({
 
   return (
     <ModalPopup
-      style={{...STYLE.ROOT, ...style}}
+      style={{...S_MODAL_MENU, ...style}}
       isShow={isShow}
       onClose={onClose}
     >
-      <div style={S.PANE}>
+      <div style={S_PANE}>
         <RowTypeA
            caption="Rate (S1/S2)"
            mathFn={addCategoryRateTo}
@@ -78,6 +76,6 @@ const ModalMenuInd2 = ({
       </div>
     </ModalPopup>
   );
-}
+};
 
 export default ModalMenuInd2

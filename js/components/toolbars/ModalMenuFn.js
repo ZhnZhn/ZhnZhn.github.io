@@ -3,11 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
 
@@ -15,73 +11,85 @@ var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
 var _SubMenuItem = _interopRequireDefault(require("./SubMenuItem"));
 
-var _ModalMenu = _interopRequireDefault(require("./ModalMenu.Style"));
+var _ModalMenu = require("./ModalMenu.Style");
 
-var mlsToDmy = _DateUtils["default"].mlsToDmy;
+var _jsxRuntime = require("react/jsx-runtime");
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
+const {
+  mlsToDmy
+} = _DateUtils.default;
+
+const _isFn = fn => typeof fn === 'function';
+
+const _isMinMax = config => {
+  const {
+    yAxis
+  } = config,
+        {
+    plotLines
+  } = yAxis || {};
+  return (plotLines || {}).length > 0;
 };
 
-var _isMinMax = function _isMinMax(config) {
-  return config.yAxis && config.yAxis.plotLines && config.yAxis.plotLines.length > 0 ? true : false;
-};
+const EPOCH_DMY = '01-01-1970';
 
-var EPOCH_DMY = '01-01-1970';
-
-var _isZoom = function _isZoom(getChart) {
+const _isZoom = getChart => {
   if (!_isFn(getChart)) {
     return false;
   }
 
-  var chart = getChart();
+  const chart = getChart();
 
   if (!chart || !_isFn(chart.zhGetFromToDates)) {
     return false;
   }
 
-  var _chart$zhGetFromToDat = chart.zhGetFromToDates({
+  const {
+    from,
+    to
+  } = chart.zhGetFromToDates({
     format: mlsToDmy
-  }),
-      from = _chart$zhGetFromToDat.from,
-      to = _chart$zhGetFromToDat.to;
-
+  });
   return from === to && to === EPOCH_DMY ? false : true;
 };
 
-var ModalMenuFn = function ModalMenuFn(_ref) {
-  var style = _ref.style,
-      isShow = _ref.isShow,
-      onClose = _ref.onClose,
-      config = _ref.config,
-      getChart = _ref.getChart,
-      onX2H = _ref.onX2H,
-      onMinMax = _ref.onMinMax,
-      onZoom = _ref.onZoom,
-      onCopy = _ref.onCopy,
-      onPasteTo = _ref.onPasteTo;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup["default"], {
+const ModalMenuFn = _ref => {
+  let {
+    style,
+    isShow,
+    onClose,
+    config,
+    getChart,
+    onX2H,
+    onMinMax,
+    onZoom,
+    onCopy,
+    onPasteTo
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
     isShow: isShow,
-    style: (0, _extends2["default"])({}, _ModalMenu["default"].ROOT, style),
+    style: { ..._ModalMenu.S_MODAL_MENU,
+      ...style
+    },
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: _ModalMenu["default"].PANE,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+      style: _ModalMenu.S_MODAL_MENU_PANE,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
         caption: "x2H",
         onClick: onX2H
-      }), _isMinMax(config) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+      }), _isMinMax(config) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
         caption: "MinMax",
         initialIsActive: true,
         onClick: onMinMax
-      }), _isZoom(getChart) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+      }), _isZoom(getChart) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
         caption: "Zoom",
         onClick: onZoom,
         onClose: onClose
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
         caption: "Copy",
         onClick: onCopy,
         onClose: onClose
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem["default"], {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
         caption: "PasteTo",
         onClick: onPasteTo,
         onClose: onClose
@@ -91,5 +99,5 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
 };
 
 var _default = ModalMenuFn;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ModalMenuFn.js.map

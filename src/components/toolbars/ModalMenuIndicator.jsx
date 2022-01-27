@@ -11,7 +11,7 @@ import RowPlusMinus from './RowPlusMinus'
 import RowSma from './RowSma'
 import RowMfi from './RowMfi'
 
-import S from './ModalMenu.Style'
+import { S_MODAL_MENU } from './ModalMenu.Style'
 
 const {
   growthRate,
@@ -19,36 +19,14 @@ const {
   normalize
  } = seriaFn;
 
-const {
-  crMomAthConfig
-} = IndicatorBuilder;
+const { crMomAthConfig } = IndicatorBuilder;
 
-const C_GROW = '#90ed7d';
-
-const STYLE = {
-  PANE: {
-    width: 265,
-    margin: 8
-  },
-  CAPTION: {
-    display: 'inline-block',
-    color: 'black',
-    width: 48,
-    fontWeight: 'bold'
-  },
-  ROW_MOM_ATH: {
-    paddingRight: 10
-  },
-  ROW: {
-    paddingTop: 5
-  },
-  N2: {
-    width: 48
-  }
+const C_GROW = '#90ed7d'
+, MOM_ATH = 'MOM_ATH'
+, S_PANE = {
+   width: 265,
+   margin: 8
 };
-
-const MOM_ATH = 'MOM_ATH';
-
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -205,11 +183,11 @@ class ModalMenuIndicator extends Component {
     } = this.state;
     return (
       <ModalPopup
-        style={{...S.ROOT, ...style}}
+        style={{...S_MODAL_MENU, ...style}}
         isShow={isShow}
         onClose={onClose}
       >
-        <div style={STYLE.PANE}>
+        <div style={S_PANE}>
           <RowType1
             is={isChanges}
             caption="Changes Between"
@@ -242,7 +220,6 @@ class ModalMenuIndicator extends Component {
           }
           {this._isMomAth && <RowPlusMinus
              is={isMomAth}
-             styleCaption={S.ROW_MOM_ATH}
              caption="MOM(1) & ATH"
              onPlus={this._handleAddMomAth}
              onMinus={this._handleRemoveMomAth}

@@ -3,17 +3,20 @@ import dt from '../../utils/DateUtils'
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SubMenuItem from './SubMenuItem'
 
-import STYLE from './ModalMenu.Style'
+import {
+  S_MODAL_MENU,
+  S_MODAL_MENU_PANE
+} from './ModalMenu.Style'
 
 const { mlsToDmy } = dt;
 
 const _isFn = fn => typeof fn === 'function';
 
-const _isMinMax = config => config.yAxis
- && config.yAxis.plotLines
- && config.yAxis.plotLines.length > 0
-   ? true
-   : false;
+const _isMinMax = config => {
+  const { yAxis } = config
+  , { plotLines } = yAxis || {}
+  return (plotLines || {}).length > 0;
+};
 
 const EPOCH_DMY = '01-01-1970';
 const _isZoom = (getChart) => {
@@ -32,20 +35,24 @@ const _isZoom = (getChart) => {
     : true;
 };
 
-
 const ModalMenuFn = ({
-  style, isShow, onClose,
+  style,
+  isShow,
+  onClose,
   config,
   getChart,
-  onX2H, onMinMax, onZoom,
-  onCopy, onPasteTo
+  onX2H,
+  onMinMax,
+  onZoom,
+  onCopy,
+  onPasteTo
 }) => (
   <ModalPopup
     isShow={isShow}
-    style={{ ...STYLE.ROOT, ...style}}
+    style={{...S_MODAL_MENU, ...style}}
     onClose={onClose}
   >
-    <div style={STYLE.PANE}>
+    <div style={S_MODAL_MENU_PANE}>
       <SubMenuItem
         caption="x2H"
         onClick={onX2H}
