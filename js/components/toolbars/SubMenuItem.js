@@ -3,37 +3,30 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 
-var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
-//import PropTypes from "prop-types";
-var CL = "bt-sub-item";
-var S = {
-  ACTIVE: {
-    fontWeight: 'bold'
-  }
-};
+var _jsxRuntime = require("react/jsx-runtime");
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const CL = "bt-sub-item",
+      S_ACTIVE = {
+  fontWeight: 'bold'
+},
+      _isFn = fn => typeof fn === 'function';
 
-var SubMenuItem = (0, _memoEqual["default"])(function (_ref) {
-  var caption = _ref.caption,
-      _ref$initialIsActive = _ref.initialIsActive,
-      initialIsActive = _ref$initialIsActive === void 0 ? false : _ref$initialIsActive,
-      onClick = _ref.onClick,
-      onClose = _ref.onClose;
+const SubMenuItem = (0, _memoEqual.default)(_ref => {
+  let {
+    caption,
+    initialIsActive = false,
+    onClick,
+    onClose
+  } = _ref;
 
-  var _useToggle = (0, _useToggle2["default"])(initialIsActive),
-      isActive = _useToggle[0],
-      toggleIsAcive = _useToggle[1],
-      _hClick = function _hClick() {
+  const [isActive, toggleIsAcive] = (0, _useToggle.default)(initialIsActive),
+        _hClick = () => {
     onClick();
 
     if (_isFn(onClose)) {
@@ -47,7 +40,7 @@ var SubMenuItem = (0, _memoEqual["default"])(function (_ref) {
     return null;
   }
 
-  var _style = isActive ? S.ACTIVE : null;
+  const _style = isActive ? S_ACTIVE : null;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     className: CL,
@@ -56,15 +49,6 @@ var SubMenuItem = (0, _memoEqual["default"])(function (_ref) {
     children: caption
   });
 });
-/*
-SubMenuItem.propTypes = {
-  caption: PropTypes.string,
-  initialIsActive: PropTypes.bool,
-  onClick: PropTypes.func,
-  onClose: PropTypes.func
-}
-*/
-
 var _default = SubMenuItem;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=SubMenuItem.js.map

@@ -1,17 +1,15 @@
-import { useState } from 'react'
-import A from '../zhn/A'
+import { useState } from 'react';
+import A from '../zhn/A';
 
-const S = {
-  CAPTION: {
-    display: 'inline-block',
-    color: 'black',
-    width: 120,
-    fontWeight : 'bold',
-  },
-  INPUT_TEXT: {
-    width: 46,
-    marginRight: 12
-  }
+const S_CAPTION = {
+  display: 'inline-block',
+  color: 'black',
+  width: 120,
+  fontWeight: 'bold',
+}
+, S_INPUT_TEXT = {
+  width: 46,
+  marginRight: 12
 };
 
 const RowTypeB = ({
@@ -27,13 +25,13 @@ const RowTypeB = ({
   } : void 0;
   return (
     <div>
-      <span style={S.CAPTION}>
+      <span style={S_CAPTION}>
         {caption}
       </span>
       <A.InputText
          ref={forwardRef}
          type="number"
-         style={S.INPUT_TEXT}
+         style={S_INPUT_TEXT}
          initValue={initValue}
          maxLength={maxLength}
          min={min}

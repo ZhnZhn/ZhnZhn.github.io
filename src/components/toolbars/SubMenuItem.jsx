@@ -1,17 +1,9 @@
-//import PropTypes from "prop-types";
+import memoEqual from '../hoc/memoEqual';
+import useToggle from '../hooks/useToggle';
 
-import memoEqual from '../hoc/memoEqual'
-import useToggle from '../hooks/useToggle'
-
-const CL = "bt-sub-item";
-
-const S = {
-  ACTIVE: {
-    fontWeight: 'bold'
-  }
-};
-
-const _isFn = fn => typeof fn === 'function';
+const CL = "bt-sub-item"
+, S_ACTIVE = { fontWeight: 'bold' }
+, _isFn = fn => typeof fn === 'function';
 
 const SubMenuItem = memoEqual(({
   caption,
@@ -32,7 +24,7 @@ const SubMenuItem = memoEqual(({
   if (!_isFn(onClick)){
     return null;
   }
-  const _style = isActive ? S.ACTIVE : null;
+  const _style = isActive ? S_ACTIVE : null;
 
   return (
     <button
@@ -43,15 +35,6 @@ const SubMenuItem = memoEqual(({
       {caption}
     </button>
   );
-})
-
-/*
-SubMenuItem.propTypes = {
-  caption: PropTypes.string,
-  initialIsActive: PropTypes.bool,
-  onClick: PropTypes.func,
-  onClose: PropTypes.func
-}
-*/
+});
 
 export default SubMenuItem

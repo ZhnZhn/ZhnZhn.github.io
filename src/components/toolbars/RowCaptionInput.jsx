@@ -1,30 +1,29 @@
-import A from '../zhn/A'
+import A from '../zhn/A';
 
-const S = {
-  CAPTION: {
-    display: 'inline-block',
-    color: 'black',
-    width: 48,
-    fontWeight : 'bold',
-  },
-  INPUT_TEXT: {
-    width: 56,
-    marginRight: 12
-  }
+const S_CAPTION = {
+  display: 'inline-block',
+  color: 'black',
+  width: 48,
+  fontWeight: 'bold',
+},
+S_INPUT_TEXT = {
+  width: 56,
+  marginRight: 12
 };
 
 const RowCaptionInput = ({
   caption,
-  forwardRef, initValue,
+  forwardRef,
+  initValue,
   maxLength=3,
   onAdd
 }) => (
   <div>
-    <span style={S.CAPTION}>{caption}</span>
+    <span style={S_CAPTION}>{caption}</span>
     <A.InputText
        ref={forwardRef}
        type="number"
-       style={S.INPUT_TEXT}
+       style={S_INPUT_TEXT}
        initValue={initValue}
        maxLength={maxLength}
        onEnter={onAdd}

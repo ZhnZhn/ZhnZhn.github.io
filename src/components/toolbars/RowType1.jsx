@@ -1,91 +1,69 @@
 import { useRef } from 'react';
 
 import D from '../dialogs/DialogCell';
-import A from '../zhn/A'
+import A from '../zhn/A';
 
-const DF_COLOR = '#2b908f';
-const OC_COLOR = 'black';
-const DF_PERIOD = 1;
-const DF_SERIA = 1;
+const DF_COLOR = '#2b908f'
+, OC_COLOR = 'black'
+, DF_PERIOD = 1
+, DF_SERIA = 1
 
-const S = {
-  ROOT_OC: {
-    lineHeight: 'unset',
-    paddingBottom: 4,
-    marginLeft: -8
-  },
-  OC: {
-    display: 'inline-block',
-    height: 32,
-    paddingTop: 4,
-    width: 'auto',
-    paddingRight: 8
-  },
-  CAPTION: {
-    color: OC_COLOR
-  },
-  PERIOD_INPUT: {
-    width: 56,
-    marginRight: 12
-  },
-  CAPTION_SERIA_INPUT: {
-    display: 'inline-block',
-    width: 85,
-    paddingLeft: 5,
-    color: 'black',
-    fontWeight: 'bold'
-  },
-  SERIA_INPUT: {
-    width: 36,
-  },
-  ROW_2: {
-    paddingBottom: 6
-  },
-  VA_M: {
-    verticalAlign: 'middle'
-  },
-  PL_6: {
-    paddingLeft: 6
-  },
-  PL_8: {
-    paddingLeft: 8
-  },
-  PL_10: {
-    paddingLeft: 10
-  },
-  TEXT: {
-    display: 'inline-block',
-    color: 'grey',
-    paddingLeft: 4,
-    fontWeight: 'bold'
-  },
-  INLINE: {
-    display: 'inline-block'
-  },
-  fnSpan: color => ({
-    color,
-    paddingLeft: 8,
-    fontWeight: 'bold'
-  })
+, S_ROOT_OC = {
+  lineHeight: 'unset',
+  paddingBottom: 4,
+  marginLeft: -8
+}
+, S_OC = {
+  display: 'inline-block',
+  height: 32,
+  paddingTop: 4,
+  width: 'auto',
+  paddingRight: 8
+}
+, S_CAPTION = { color: OC_COLOR }
+, S_PERIOD_INPUT = {
+  width: 56,
+  marginRight: 12
+}
+, S_CAPTION_SERIA_INPUT = {
+  display: 'inline-block',
+  width: 85,
+  paddingLeft: 5,
+  color: 'black',
+  fontWeight: 'bold'
+}
+, S_SERIA_INPUT = { width: 36 }
+, S_ROW_2 = { paddingBottom: 6 }
+, S_VA_M = { verticalAlign: 'middle' }
+, S_PL_6 = { paddingLeft: 6 }
+, S_PL_8 = { paddingLeft: 8 }
+, S_PL_10 = { paddingLeft: 10 }
+, S_INLINE = { display: 'inline-block' }
+, crSpanStyle = color => ({
+  color,
+  paddingLeft: 8,
+  fontWeight: 'bold'
+})
+, S1_COLUMN = {
+   ...S_INLINE,
+   ...S_VA_M,
+   ...S_PL_10
+}
+, S1_ON_TOP = {
+   ...S_INLINE,
+   ...S_VA_M,
+   ...S_PL_10
 };
 
-const S1 = {
-  COLUMN: {
-    ...S.INLINE,
-    ...S.VA_M,
-    ...S.PL_10
-  },
-  ON_TOP: {
-    ...S.INLINE,
-    ...S.VA_M,
-    ...S.PL_10
-  }
-}
 
-const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
+const InputPlus = ({
+  initValue,
+  onChangePeriod,
+  onPlus
+}) => (
   <>
     <A.InputText
-      style={S.PERIOD_INPUT}
+      style={S_PERIOD_INPUT}
       type="number"
       initValue={initValue}
       min={1}
@@ -94,16 +72,24 @@ const InputPlus = ({ initValue, onChangePeriod, onPlus }) => (
       onChange={onChangePeriod}
       onEnter={onPlus}
     />
-    <A.SvgPlus style={S.INLINE} onClick={onPlus} />
+    <A.SvgPlus
+      style={S_INLINE}
+      onClick={onPlus}
+    />
   </>
 );
-const MinusPeriod = ({ color, period, onMinus }) => (
+
+const MinusPeriod = ({
+  color,
+  period,
+  onMinus
+}) => (
   <>
     <A.SvgMinus
-       style={S.INLINE}
+       style={S_INLINE}
        onClick={onMinus}
     />
-    <span style={S.fnSpan(color)}>
+    <span style={crSpanStyle(color)}>
       {period}
     </span>
   </>
@@ -148,9 +134,9 @@ const RowType1 = ({
   return (
   <A.OpenClose
     caption={caption}
-    style={S.ROOT_OC}
-    ocStyle={S.OC}
-    captionStyle={S.CAPTION}
+    style={S_ROOT_OC}
+    ocStyle={S_OC}
+    captionStyle={S_CAPTION}
     openColor={OC_COLOR}
     CompAfter={
       is ? <MinusPeriod
@@ -165,26 +151,26 @@ const RowType1 = ({
            />
     }
   >
-    <div style={S.PL_8}>
+    <div style={S_PL_8}>
       <D.RowInputColor
-        style={S.INLINE}
+        style={S_INLINE}
         initValue={DF_COLOR}
         onEnter={_onColor}
       />
       <D.RowCheckBox
         caption="Column"
-        style={S1.COLUMN}
-        captionStyle={S.PL_6}
+        style={S1_COLUMN}
+        captionStyle={S_PL_6}
         checkedColor={OC_COLOR}
         initValue={true}
         onToggle={_onToggleColumn}
       />
-      <div style={S.ROW_2}>
+      <div style={S_ROW_2}>
         <D.RowInputText
-          rootStyle={S.INLINE}
+          rootStyle={S_INLINE}
           caption="For Seria"
-          captionStyle={S.CAPTION_SERIA_INPUT}
-          style={S.SERIA_INPUT}
+          captionStyle={S_CAPTION_SERIA_INPUT}
+          style={S_SERIA_INPUT}
           type="number"
           initValue={1}
           min={1}
@@ -195,8 +181,8 @@ const RowType1 = ({
         />
         <D.RowCheckBox
           caption="OnTop"
-          style={S1.ON_TOP}
-          captionStyle={S.PL_6}
+          style={S1_ON_TOP}
+          captionStyle={S_PL_6}
           checkedColor={OC_COLOR}
           initValue={false}
           onToggle={_onToggleTop}
@@ -206,7 +192,7 @@ const RowType1 = ({
     </div>
   </A.OpenClose>
   );
-}
+};
 
 
 export default RowType1

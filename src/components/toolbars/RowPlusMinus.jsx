@@ -1,18 +1,21 @@
 import A from '../zhn/A';
 
-const S = {
-  CAPTION: {
-    display: 'inline-block',
-    color: 'black',
-    paddingRight: 8,
-    paddingBottom: 6,
-    fontWeight: 'bold'
-  }
+const S_CAPTION = {
+  display: 'inline-block',
+  color: 'black',
+  padding: '0 8px 6px 0',
+  fontWeight: 'bold'
 };
 
-const RowPlusMinus = ({ is, styleCaption, caption, onMinus, onPlus }) => (
+const RowPlusMinus = ({
+  is,
+  styleCaption,
+  caption,
+  onMinus,
+  onPlus
+}) => (
   <div>
-    <span style={{...S.CAPTION, ...styleCaption }}>
+    <span style={{...S_CAPTION, ...styleCaption}}>
        {caption}
     </span>
     {
