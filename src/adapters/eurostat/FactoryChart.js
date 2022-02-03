@@ -4,8 +4,9 @@ const _assign = Object.assign;
 
 const BAR_CHART = {
   type: 'bar',
+  height: 600,
   marginTop: 75,
-  height: 600
+  marginBottom: 20
 };
 const DATA_LABELS = {
   enabled: true,
@@ -28,7 +29,8 @@ const _crColumnConfig = ({ seriaColor=DF_COLOR }) => ({
   chart: {
     type: 'column',
     marginTop: 60,
-    panKey: undefined,
+    marginBottom: 90,
+    panKey: void 0,
     panning: false
   },
   title: {
@@ -102,7 +104,7 @@ const _crDotConfig = (option) => {
   const { seriaColor } = option;
   const config = _crColumnConfig(option);
   _assign(config.chart, SCATTER_CHART)
-  config.legend.y = 28  
+  config.legend.y = 28
   _assign(config.series[0], {
     color: seriaColor,
     marker: {

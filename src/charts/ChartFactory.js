@@ -10,7 +10,8 @@ const ChartFactory = {
       chart: {
         type: "column",
         marginTop: 60,
-        panKey: undefined,
+        marginBottom: 100,
+        panKey: void 0,
         panning: false,
       },
       title: {
@@ -74,10 +75,10 @@ const ChartFactory = {
     const config = ChartFactory.crColumnConfig(option);
     _assign(config.chart, {
       type: 'bar',
+      height: 450,
       marginTop: 50,
-      height: 450
+      marginBottom: 35
     })
-    //config.yAxis.labels = { x: 0, y: -7 }
     _assign(config.yAxis, {
       labels: { x: 0, y: 14 },
       opposite: false,

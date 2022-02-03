@@ -35,7 +35,11 @@ const _rToSeria = {
   DOT_SET: _toCategory.default.createSeria
 };
 
-const _checkSeriaType = (router, option, dfType = DF_TYPE) => {
+const _checkSeriaType = function (router, option, dfType) {
+  if (dfType === void 0) {
+    dfType = DF_TYPE;
+  }
+
   if (!option.seriaType || !router[option.seriaType]) {
     option.seriaType = dfType;
   }

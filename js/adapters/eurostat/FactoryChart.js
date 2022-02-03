@@ -6,8 +6,9 @@ const DF_COLOR = '#7cb5ec';
 const _assign = Object.assign;
 const BAR_CHART = {
   type: 'bar',
+  height: 600,
   marginTop: 75,
-  height: 600
+  marginBottom: 20
 };
 const DATA_LABELS = {
   enabled: true,
@@ -26,75 +27,79 @@ const SCATTER_CHART = {
   height: 600
 };
 
-const _crColumnConfig = ({
-  seriaColor = DF_COLOR
-}) => ({
-  chart: {
-    type: 'column',
-    marginTop: 60,
-    panKey: undefined,
-    panning: false
-  },
-  title: {
-    text: ''
-  },
-  subtitle: {
-    text: ''
-  },
-  xAxis: {
-    categories: [],
-    type: "category",
-    crosshair: true,
-    gridLineWidth: 0
-  },
-  yAxis: {
-    min: 0,
-    opposite: true,
-    lineWidth: 0,
-    tickLength: 0,
-    labels: {
-      x: 3
+const _crColumnConfig = _ref => {
+  let {
+    seriaColor = DF_COLOR
+  } = _ref;
+  return {
+    chart: {
+      type: 'column',
+      marginTop: 60,
+      marginBottom: 90,
+      panKey: void 0,
+      panning: false
     },
     title: {
       text: ''
     },
-    gridLineDashStyle: 'Solid',
-    gridLineWidth: 0.2
-  },
-  legend: {
-    enabled: true,
-    align: 'right',
-    verticalAlign: 'top',
-    layout: 'horizontal',
-    x: 0,
-    //y: 12
-    y: 10
-  },
-  plotOptions: {
-    column: {
-      color: seriaColor,
-      minPointLength: 5,
-      pointPlacement: 0,
-      pointWidth: 6,
-      pointPadding: 0,
-      borderWidth: 0,
-      groupPadding: 0.2,
-      shadow: false
+    subtitle: {
+      text: ''
     },
-    bar: {
-      color: seriaColor,
-      minPointLength: 5,
-      pointWidth: 4,
-      pointPadding: 0,
-      borderWidth: 0,
-      groupPadding: 0.2,
-      shadow: false
-    }
-  },
-  series: [{
-    name: 'Column'
-  }]
-});
+    xAxis: {
+      categories: [],
+      type: "category",
+      crosshair: true,
+      gridLineWidth: 0
+    },
+    yAxis: {
+      min: 0,
+      opposite: true,
+      lineWidth: 0,
+      tickLength: 0,
+      labels: {
+        x: 3
+      },
+      title: {
+        text: ''
+      },
+      gridLineDashStyle: 'Solid',
+      gridLineWidth: 0.2
+    },
+    legend: {
+      enabled: true,
+      align: 'right',
+      verticalAlign: 'top',
+      layout: 'horizontal',
+      x: 0,
+      //y: 12
+      y: 10
+    },
+    plotOptions: {
+      column: {
+        color: seriaColor,
+        minPointLength: 5,
+        pointPlacement: 0,
+        pointWidth: 6,
+        pointPadding: 0,
+        borderWidth: 0,
+        groupPadding: 0.2,
+        shadow: false
+      },
+      bar: {
+        color: seriaColor,
+        minPointLength: 5,
+        pointWidth: 4,
+        pointPadding: 0,
+        borderWidth: 0,
+        groupPadding: 0.2,
+        shadow: false
+      }
+    },
+    series: [{
+      name: 'Column'
+    }]
+  };
+};
 
 const _crBarConfig = option => {
   const config = _crColumnConfig(option);
@@ -140,7 +145,11 @@ const _r = {
   DOT_SET: _crDotConfig
 };
 const FactoryChart = {
-  createConfig: (option = {}) => {
+  createConfig: function (option) {
+    if (option === void 0) {
+      option = {};
+    }
+
     const _crConfig = _r[option.seriaType];
     return _crConfig ? _crConfig(option) : {};
   }

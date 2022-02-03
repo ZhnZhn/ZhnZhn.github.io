@@ -49,16 +49,19 @@ const _crDescr = extension => {
   return (_d + " " + _id + " " + _sub).trim();
 };
 
-const _crDatasetInfo = ({
-  label,
-  updated,
-  extension
-}) => ({
-  name: label,
-  description: _crDescr(extension),
-  toDate: updated,
-  fromDate: '1996-01-30'
-});
+const _crDatasetInfo = _ref => {
+  let {
+    label,
+    updated,
+    extension
+  } = _ref;
+  return {
+    name: label,
+    description: _crDescr(extension),
+    toDate: updated,
+    fromDate: '1996-01-30'
+  };
+};
 
 const _colorSeriaIn = (config, codes, color) => {
   const data = config.series[0].data;
@@ -124,19 +127,23 @@ const _setHeightIfBarTo = (config, seriaType, categories) => {
   }
 };
 
-const _getTableId = ({
-  dfId,
-  dfTable
-}) => dfId || dfTable;
+const _getTableId = _ref2 => {
+  let {
+    dfId,
+    dfTable
+  } = _ref2;
+  return dfId || dfTable;
+};
 
 const EuroStatFn = {
   joinBy,
   findMinY,
 
-  crData(json, {
-    mapFrequency,
-    isFilterZero
-  } = {}) {
+  crData(json, _temp) {
+    let {
+      mapFrequency,
+      isFilterZero
+    } = _temp === void 0 ? {} : _temp;
     const {
       timeIndex,
       value,
@@ -188,12 +195,13 @@ const EuroStatFn = {
     return data;
   },
 
-  setDataAndInfo({
-    config,
-    data,
-    json,
-    option
-  }) {
+  setDataAndInfo(_ref3) {
+    let {
+      config,
+      data,
+      json,
+      option
+    } = _ref3;
     const {
       title,
       subtitle,
@@ -212,21 +220,23 @@ const EuroStatFn = {
     config.series[0].data = data;
   },
 
-  setInfo({
-    config,
-    json,
-    option
-  }) {
+  setInfo(_ref4) {
+    let {
+      config,
+      json,
+      option
+    } = _ref4;
     config.info = _crDatasetInfo(json);
   },
 
-  setCategories({
-    config,
-    categories,
-    min,
-    tooltip = _Tooltip.default.category,
-    option
-  }) {
+  setCategories(_ref5) {
+    let {
+      config,
+      categories,
+      min,
+      tooltip = _Tooltip.default.category,
+      option
+    } = _ref5;
     const {
       time,
       isNotZoomToMinMax,
@@ -252,13 +262,15 @@ const EuroStatFn = {
     _colorSeriaNotIn(config, C.EU_MEMBER, COLOR_NOT_EU_MEMBER);
   },
 
-  addToCategoryConfig(config, {
-    json,
-    option,
-    data,
-    categories,
-    min
-  }) {
+  addToCategoryConfig(config, _ref6) {
+    let {
+      json,
+      option,
+      data,
+      categories,
+      min
+    } = _ref6;
+
     if (option.isFilterZero) {
       const _r = _filterZeroCategories(data, categories);
 
@@ -281,10 +293,11 @@ const EuroStatFn = {
     EuroStatFn.colorSeries(config);
   },
 
-  setTooltip({
-    config,
-    tooltip
-  }) {
+  setTooltip(_ref7) {
+    let {
+      config,
+      tooltip
+    } = _ref7;
     config.tooltip = _Chart.default.fTooltip(tooltip);
   },
 
@@ -319,12 +332,13 @@ const EuroStatFn = {
     return parseInt(str, 10) > 1970 ? Date.UTC(str, 11, 31) : Date.UTC(1970, 11, 31);
   },
 
-  setLineExtrems({
-    config,
-    max,
-    min,
-    isNotZoomToMinMax
-  }) {
+  setLineExtrems(_ref8) {
+    let {
+      config,
+      max,
+      min,
+      isNotZoomToMinMax
+    } = _ref8;
     const plotLines = config.yAxis.plotLines;
     setPlotLinesMinMax({
       plotLines,
@@ -337,9 +351,12 @@ const EuroStatFn = {
     }
   },
 
-  crItemCaption: ({
-    title = 'EU'
-  }) => title,
+  crItemCaption: _ref9 => {
+    let {
+      title = 'EU'
+    } = _ref9;
+    return title;
+  },
   crDataSource: dfProps => {
     const _ds = dfProps.dataSource,
           _prefix = _ds && _ds.indexOf('Eurostat') !== -1 ? _ds : 'Eurostat';

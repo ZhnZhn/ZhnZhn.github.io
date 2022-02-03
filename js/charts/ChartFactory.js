@@ -5,16 +5,19 @@ exports.default = void 0;
 const DF_COLOR = '#8085e9';
 const _assign = Object.assign;
 const ChartFactory = {
-  crColumnConfig({
-    seriaColor
-  } = {}) {
+  crColumnConfig(_temp) {
+    let {
+      seriaColor
+    } = _temp === void 0 ? {} : _temp;
+
     const _color = seriaColor || DF_COLOR;
 
     return {
       chart: {
         type: "column",
         marginTop: 60,
-        panKey: undefined,
+        marginBottom: 100,
+        panKey: void 0,
         panning: false
       },
       title: {
@@ -81,10 +84,10 @@ const ChartFactory = {
 
     _assign(config.chart, {
       type: 'bar',
+      height: 450,
       marginTop: 50,
-      height: 450
-    }); //config.yAxis.labels = { x: 0, y: -7 }
-
+      marginBottom: 35
+    });
 
     _assign(config.yAxis, {
       labels: {

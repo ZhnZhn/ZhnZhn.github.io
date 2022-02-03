@@ -1,13 +1,16 @@
-//scatter_short_form_margin_bottom
-const SCATTER_SF_MB = 24
+//scatter_long_form_margin_bottom
+const SCATTER_LF_MB = 40
+, SCATTER_SF_MB = 24
 , LF_MB = 20
-, SCATTER_LF_MB = 40;
+, SF_MB = 0;
 
-const _checkIsWithScatter = chart => {
-  for (let i=0; i<chart.series.length; i++) {
-    const seria = chart.series[i]
+const _checkIsWithScatter = chartIns => {
+  const { series } = chartIns;
+  for (let i=0; i<series.length; i++) {
+    const seria = series[i]
     , { options } = seria;
     if (seria.visible
+        && options
         && options.type === 'scatter'
         && options.data
         && options.data.length > 0
@@ -37,12 +40,17 @@ const _crShortFormConfig = marginBottom => ({
   }
 });
 
+const _crLongFormMb = chartIns => {
+  const { chart } = chartIns.userOptions
+  , { marginBottom } = chart || {};
+  return marginBottom || LF_MB;
+};
 
-const  crSpacingConfig = (chart, isShow) => {
-  const _isScatter = _checkIsWithScatter(chart);
+const  crSpacingConfig = (chartIns, isShow) => {
+  const _isScatter = _checkIsWithScatter(chartIns);
   return isShow
-    ? _crLongFormConfig(_isScatter ? SCATTER_LF_MB : LF_MB)
-    : _crShortFormConfig(_isScatter ? SCATTER_SF_MB : 0);
+    ? _crLongFormConfig(_isScatter ? SCATTER_LF_MB : _crLongFormMb(chartIns))
+    : _crShortFormConfig(_isScatter ? SCATTER_SF_MB : SF_MB);
 };
 
 export default crSpacingConfig
