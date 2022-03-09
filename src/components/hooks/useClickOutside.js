@@ -1,28 +1,42 @@
-import { useRef, useCallback, useEffect } from 'react';
+import {
+  useRef,
+  useCallback,
+  useEffect
+} from 'react';
 
-const _removeClickListener = (listener, ref) => {
-  if (ref.current) {
-   document.removeEventListener('click', listener, true);
-   ref.current = null
+const _getRefValue = ref => ref.current;
+
+const _removeClickListener = (
+  listener,
+  ref
+) => {
+  if (_getRefValue(ref)) {
+    document.removeEventListener('click', listener, true);
+    ref.current = null
   }
 };
 
-/*eslint-disable react-hooks/exhaustive-deps */
-const useClickOutside = (isShow, onClickOutside) => {
+const useClickOutside = (
+  isShow,
+  onClickOutside
+) => {
   const _ref = useRef(null)
   , _refIs = useRef(null)
+  /*eslint-disable react-hooks/exhaustive-deps */
   , _hClickOutside = useCallback(event => {
-      if ( _ref?.current?.contains
-        && !_ref.current.contains(event.target)
+      const _el = _getRefValue(_ref);
+      if ( _el && _el.contains
+        && !_el.contains(event.target)
       ){
         event.stopPropagation()
         onClickOutside(event)
       }
   }, [])
   // onClickOutside
+  /*eslint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
-    if (isShow && !_refIs.current) {
+    if (isShow && !_getRefValue(_refIs)) {
       document.addEventListener('click', _hClickOutside, true)
       _refIs.current = true
     } else if (!isShow) {
@@ -30,13 +44,14 @@ const useClickOutside = (isShow, onClickOutside) => {
     }
   })
 
+  /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    return () => _removeClickListener(_hClickOutside, _refIs)
+    return () => _removeClickListener(_hClickOutside, _refIs);
   }, [])
   // _hClickOutside
+  /*eslint-enable react-hooks/exhaustive-deps */
 
   return _ref;
 };
-/*eslint-enable react-hooks/exhaustive-deps */
 
 export default useClickOutside
