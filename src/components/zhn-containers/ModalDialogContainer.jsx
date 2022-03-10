@@ -1,5 +1,3 @@
-//import PropTypes from 'prop-types'
-
 const CL_INIT = 'modal-root'
 , CL_SHOWING = 'modal-root show-modal'
 , S_SHOW = { display: 'block' }
@@ -7,9 +5,8 @@ const CL_INIT = 'modal-root'
 
 const ModalDialogContainer = ({
   isShow,
-  timeout=450,
-  children,
-  onClose
+  onClose,
+  children
 }) => {
   const [_className, _style] = isShow
     ? [CL_SHOWING, S_SHOW]
@@ -25,14 +22,6 @@ const ModalDialogContainer = ({
       {children}
     </div>
   );
-}
-
-/*
-ModalDialogContainer.propTypes = {
-  isShow  : PropTypes.bool,
-  timeout : PropTypes.number,
-  onClose : PropTypes.func
-}
-*/
+};
 
 export default ModalDialogContainer
