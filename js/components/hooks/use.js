@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _crStyle = _interopRequireDefault(require("./crStyle"));
 
@@ -19,27 +19,24 @@ var _useToggle = _interopRequireDefault(require("./useToggle"));
 
 var _useBool = _interopRequireDefault(require("./useBool"));
 
-var _useForceUpdate = _interopRequireDefault(require("./useForceUpdate"));
-
 var _useKeyEnter = _interopRequireDefault(require("./useKeyEnter"));
 
 var _useKeyEscape = _interopRequireDefault(require("./useKeyEscape"));
 
 var _useHasNotEqual = _interopRequireDefault(require("./useHasNotEqual"));
 
-var use = {
-  crStyle: _crStyle["default"],
-  useFnFocus: _useFnFocus["default"],
-  useListen: _useListen["default"],
-  useRefInit: _useRefInit["default"],
-  useTheme: _useTheme["default"],
-  useToggle: _useToggle["default"],
-  useBool: _useBool["default"],
-  useForceUpdate: _useForceUpdate["default"],
-  useKeyEnter: _useKeyEnter["default"],
-  useKeyEscape: _useKeyEscape["default"],
-  useHasNotEqual: _useHasNotEqual["default"]
+const use = {
+  crStyle: _crStyle.default,
+  useFnFocus: _useFnFocus.default,
+  useListen: _useListen.default,
+  useRefInit: _useRefInit.default,
+  useTheme: _useTheme.default,
+  useToggle: _useToggle.default,
+  useBool: _useBool.default,
+  useKeyEnter: _useKeyEnter.default,
+  useKeyEscape: _useKeyEscape.default,
+  useHasNotEqual: _useHasNotEqual.default
 };
 var _default = use;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=use.js.map

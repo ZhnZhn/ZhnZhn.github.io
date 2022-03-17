@@ -1,55 +1,60 @@
-import { useRef, useEffect } from 'react'
+import {
+  useRef,
+  useEffect
+} from 'react';
 
-import useForceUpdate from '../hooks/useForceUpdate'
+import useRerender from '../hooks/useRerender';
 
 const CL = "progress-line"
+, DF_COLOR = '#2f7ed8'
 , TM_PERIOD = 800
-, T = {
-  WIDTH: 'width 350ms linear',
-  OPACITY: 'opacity 250ms linear'
-};
-
-const _crStyle = (backgroundColor, opacity, width, transition) => ({
+, T_WIDTH = 'width 350ms linear'
+, T_OPACITY = 'opacity 250ms linear'
+, _crStyle = (
+  backgroundColor,
+  opacity,
+  width,
+  transition
+) => ({
    backgroundColor,
    width,
    opacity,
    transition
-});
-
-const _getCurrent = ref => ref.current;
+})
+, _getRefValue = ref => ref.current;
 
 const ProgressLine = ({
-  color='#2f7ed8',
+  color=DF_COLOR,
   completed
 }) => {
-  const forceUpdate = useForceUpdate()
+  const _rerender = useRerender()
   , _refWasCompleted = useRef(false)
   , _refIdCompleted = useRef(null)
   , _refWasOpacied = useRef(false)
   , _refIdOpacied = useRef(null);
 
   useEffect(()=>{
-    if (_getCurrent(_refWasCompleted)){
-      _refIdCompleted.current = setTimeout(forceUpdate, TM_PERIOD)
-    } else if (_getCurrent(_refWasOpacied)){
-      _refIdOpacied.current = setTimeout(forceUpdate, TM_PERIOD)
+    if (_getRefValue(_refWasCompleted)){
+      _refIdCompleted.current = setTimeout(_rerender, TM_PERIOD)
+    } else if (_getRefValue(_refWasOpacied)){
+      _refIdOpacied.current = setTimeout(_rerender, TM_PERIOD)
     }
   })
 
   useEffect(()=>{
     return () => {
-      clearTimeout(_getCurrent(_refIdCompleted))
-      clearTimeout(_getCurrent(_refIdOpacied))
+      clearTimeout(_getRefValue(_refIdCompleted))
+      clearTimeout(_getRefValue(_refIdOpacied))
     }
   }, [])
 
   let _style;
 
-  if (_getCurrent(_refWasOpacied)) {
+  if (_getRefValue(_refWasOpacied)) {
     _style = _crStyle(color, 1, 0)
     _refWasOpacied.current = false;
-  } else if (_getCurrent(_refWasCompleted)) {
-    _style = _crStyle(color, 0, '100%', T.OPACITY)
+  } else if (_getRefValue(_refWasCompleted)) {
+    _style = _crStyle(color, 0, '100%', T_OPACITY)
     _refWasCompleted.current = false;
     _refWasOpacied.current = true;
   } else {
@@ -59,10 +64,12 @@ const ProgressLine = ({
        completed = 100;
        _refWasCompleted.current = true
      }
-     _style = _crStyle(color, 1, completed+'%', T.WIDTH)
+     _style = _crStyle(color, 1, completed+'%', T_WIDTH)
   }
 
-  return (<div className={CL} style={_style} />);
+  return (
+    <div className={CL} style={_style} />
+  );
 }
 
 /*

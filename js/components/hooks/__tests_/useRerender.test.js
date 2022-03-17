@@ -7,7 +7,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _react = require("@testing-library/react");
 
-var _useForceUpdate = _interopRequireDefault(require("../useForceUpdate"));
+var _useRerender = _interopRequireDefault(require("../useRerender"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -29,12 +29,16 @@ describe('useForceUpdate', () => {
           renderSpy = jest.fn();
 
     function Comp() {
-      const forceUpdate = (0, _useForceUpdate.default)();
-      fns.add(forceUpdate);
+      /*eslint-disable testing-library/render-result-naming-convention*/
+      const _rerender = (0, _useRerender.default)();
+      /*eslint-enable testing-library/render-result-naming-convention*/
+
+
+      fns.add(_rerender);
       renderSpy();
       return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
         "data-testid": "bt",
-        onClick: forceUpdate,
+        onClick: _rerender,
         children: "Rerender"
       });
     }
@@ -48,4 +52,4 @@ describe('useForceUpdate', () => {
     _testRenderAfterClickBt(renderSpy, fns, 3);
   });
 });
-//# sourceMappingURL=useForceUpdate.test.js.map
+//# sourceMappingURL=useRerender.test.js.map
