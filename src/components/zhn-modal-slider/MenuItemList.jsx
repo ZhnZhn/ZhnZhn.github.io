@@ -1,52 +1,54 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import MenuAriaItem from './MenuAriaItem'
+import MenuAriaItem from './MenuAriaItem';
 
-const SUB_MENU = 'sub';
-
-const S = {
-  ITEM: {
-    position: 'relative'
-  },
-  NEXT_PAGE: {
-    display: 'inline-block',
-    position: 'absolute',
-    top: 0,
-    right: 4,
-    color: 'inherit',
-    padding: '1px 16px 1px 0px',
-    fontWeight: 'bold'
-  }
+const SUB_MENU = 'sub'
+, S_ITEM = { position: 'relative' }
+, S_NEXT_PAGE = {
+  display: 'inline-block',
+  position: 'absolute',
+  top: 0,
+  right: 4,
+  color: 'inherit',
+  padding: '1px 16px 1px 0px',
+  fontWeight: 'bold'
 };
 
-const _fClick = ({ isClose, onClick, onClose }) => {
-  return typeof onClick === 'function'
-    ? isClose
-        ? () => { onClick(); onClose() }
-        : onClick
-    : void 0;
-}
+const _fClick = ({
+  isClose,
+  onClick,
+  onClose
+}) => typeof onClick === 'function'
+  ? isClose
+      ? () => { onClick(); onClose() }
+      : onClick
+  : void 0;
 
-const NextPageArrow = ({ type }) => {
-  if (type !== SUB_MENU) return null;
-
-  return (
-    <span style={S.NEXT_PAGE}>
+const NextPageArrow = ({ type }) =>
+  type === SUB_MENU ? (
+    <span style={S_NEXT_PAGE}>
         >
     </span>
-  );
-}
-
+  ) : null;
 
 const MenuItemList = forwardRef(({
-  items, itemCl,
-  pageNumber, onNextPage,
+  items,
+  itemCl,
+  pageNumber,
+  onNextPage,
   onClose
 }, ref) => {
   return (
     <>
      {items.map((item, index) => {
-       const { cn, name, type, id, isClose, onClick } = item
+       const {
+         cn,
+         name,
+         type,
+         id,
+         isClose,
+         onClick
+       } = item
        , _onClick = type === SUB_MENU
             ? onNextPage.bind(null, id, name, pageNumber)
             : _fClick({ isClose, onClick, onClose })
@@ -56,7 +58,7 @@ const MenuItemList = forwardRef(({
            key={name}
            ref={_ref}
            className={cn || itemCl}
-           style={S.ITEM}
+           style={S_ITEM}
            onClick={_onClick}
          >
            <span>{name}</span>

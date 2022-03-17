@@ -1,7 +1,11 @@
-import { useRef, useCallback, useEffect } from 'react'
+import { 
+  useRef,
+  useCallback,
+  useEffect
+} from 'react';
 
-import MenuTitle from './MenuTitle'
-import MenuItemList from './MenuItemList'
+import MenuTitle from './MenuTitle';
+import MenuItemList from './MenuItemList';
 
 const _fFocus = ref => () => {
   if (ref && ref.current) {
@@ -9,20 +13,21 @@ const _fFocus = ref => () => {
   }
 };
 
-//const _getCurrent = ({ current }) => current;
+const DF_ITEMS = [];
 
 const MenuPage = ({
   isShow,
-  items=[],
   style,
   title,
-  titleCl, itemCl,
+  titleCl,
+  itemCl,
   pageCurrent,
   pageNumber,
-  onClose,
-  children,
+  items=DF_ITEMS,
   onNextPage,
-  onPrevPage
+  onPrevPage,
+  onClose,
+  children
 }) => {
   const _refTitle = useRef()
   , _refFirst = useRef()
@@ -65,13 +70,19 @@ const MenuPage = ({
 /*
 MenuPage.propTypes = {
   isShow: PropTypes.bool,
+  style: PropTypes.object,
   title: PropTypes.string,
+  titleCl: PropTypes.string,
+  itemCl: PropTypes.string,
+  pageCurrent: PropTypes.number,
   pageNumber: PropTypes.number,
   items: PropTypes.arrayOf(
      PropTypes.shapeOf({
+        cn: PropTypes.string,
         name: PropTypes.string,
         type: PropTypes.string,
         id: PropTypes.string,
+        isClose: PropTypes.bool,
         onClick: PropTypes.func
      })
   ),

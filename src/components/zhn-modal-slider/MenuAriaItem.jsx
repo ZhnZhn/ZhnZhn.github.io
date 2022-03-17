@@ -1,8 +1,13 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import useKeyEnter from '../hooks/useKeyEnter'
+import useKeyEnter from '../hooks/useKeyEnter';
 
-const MenuAriaItem = forwardRef(({ children, onClick, onReg, ...rest }, ref) => {
+const MenuAriaItem = forwardRef(({
+  children,
+  onClick,
+  onReg,
+  ...rest
+}, ref) => {
   const _hKeyDown = useKeyEnter(onClick);
 
   return (
@@ -18,11 +23,5 @@ const MenuAriaItem = forwardRef(({ children, onClick, onReg, ...rest }, ref) => 
     </div>
   );
 })
-
-/*
-MenuAriaItem.propTypes = {
-  onClick: PropTypes.func
-}
-*/
 
 export default MenuAriaItem
