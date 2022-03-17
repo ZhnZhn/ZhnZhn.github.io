@@ -1,45 +1,31 @@
-import { useState, useCallback, useEffect } from 'react'
-import useHasMounted from '../hooks/useHasMounted'
+import {
+  useState,
+  useCallback
+} from 'react';
+import useDidUpdate from '../hooks/useDidUpdate';
 
-import throttleOnce from '../../utils/throttleOnce'
+import throttleOnce from '../../utils/throttleOnce';
 
-import ModalPane from '../zhn-moleculs/ModalPane'
-import ShowHide from '../zhn/ShowHide'
+import ModalPane from '../zhn-moleculs/ModalPane';
+import ShowHide from '../zhn/ShowHide';
 
-import MenuPage from './MenuPage'
-import MenuPages from './MenuPages'
+import MenuPage from './MenuPage';
+import MenuPages from './MenuPages';
 
-const S = {
-  SHOW_HIDE: {
-    position: 'absolute',
-    overflow: 'hidden'
-  },
-  PAGES: {
-    display: 'flex',
-    flexFlow: 'row nowrap',
-    alignItems: 'flex-start',
-    overflowX: 'hidden',
-    transition: 'all 750ms ease-out'
-  }
-};
-
-/*
-static propTypes = {
-  rootStyle: PropTypes.object,
-  className: PropTypes.string,
-  style: PropTypes.object,
-
-  pageWidth: PropTypes.number,
-  maxPages: PropTypes.number,
-  model: PropTypes.object,
-
-  onClose: PropTypes.func
+const S_SHOW_HIDE = {
+  position: 'absolute',
+  overflow: 'hidden'
 }
-*/
+, S_PAGES = {
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  alignItems: 'flex-start',
+  overflowX: 'hidden',
+  transition: 'all 750ms ease-out'
+}
 
-
-const DF_INIT_ID = 'p0'
-const DF_MODEL = {
+, DF_INIT_ID = 'p0'
+, DF_MODEL = {
   pageWidth: 100,
   maxPages: 2,
   initId: DF_INIT_ID,
@@ -69,10 +55,14 @@ const _initState = model => {
       />
     ]
   };
-}
+};
 
-
-const _addPage = (pages, id, title, model) => {
+const _addPage = (
+  pages,
+  id,
+  title,
+  model
+) => {
   pages.push((
     <MenuPage
       key={id}
@@ -82,23 +72,36 @@ const _addPage = (pages, id, title, model) => {
       itemCl={model.itemCl}
     />
   ))
-}
+};
 
-const _crTransform = (pageWidth, pageCurrent) => {
+const _crTransform = (
+  pageWidth,
+  pageCurrent
+) => {
   const _dX = -1*pageWidth*(pageCurrent - 1)+0;
-  return { transform: `translateX(${_dX}px)` };
+  return {
+    transform: `translateX(${_dX}px)`
+  };
 };
 
 const ModalSlider = ({
   model=DF_MODEL,
-  isShow, className,
-  rootStyle, style,
+  isShow,
+  className,
+  rootStyle,
+  style,
   onClose
 }) => {
-  const [state, setState] = useState(() => _initState(model))
+  const [
+    state,
+    setState
+  ] = useState(() => _initState(model))
   , {
-     pageWidth, pagesStyle, pageStyle,
-     pageCurrent, pages
+     pageWidth,
+     pagesStyle,
+     pageStyle,
+     pageCurrent,
+     pages
    } = state
    /*eslint-disable react-hooks/exhaustive-deps */
   , hPrevPage = useCallback(throttleOnce((pageNumber) => {
@@ -111,48 +114,41 @@ const ModalSlider = ({
   , hNextPage = useCallback(throttleOnce((id, title, pageNumber)=>{
      setState(prevState => {
        const { pages } = prevState
-          , _max = pages.length-1;
+       , _max = pages.length-1;
 
-      if ( (_max+1) > pageNumber) {
-        if (pages[pageNumber] && pages[pageNumber].key !== id) {
+       if ( (_max+1) > pageNumber) {
+         if (pages[pageNumber] && pages[pageNumber].key !== id) {
            if (pageNumber>0) {
              prevState.pages.splice(pageNumber)
            } else {
              prevState.pages = []
            }
            _addPage(prevState.pages, id, title, model)
-        }
-      } else {
-        _addPage(pages, id, title, model)
-      }
+         }
+       } else {
+         _addPage(pages, id, title, model)
+       }
 
-      prevState.pageCurrent = pageNumber + 1
-      return {...prevState};
+       prevState.pageCurrent = pageNumber + 1
+       return {...prevState};
      })
   }), [model])
   /*eslint-enable react-hooks/exhaustive-deps */
-  , _hasMounted = useHasMounted();
 
-  /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    if (!_hasMounted) {
-      setState(_initState(model))
-    }
-  }, [model])
-  // _hasMounted
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+  useDidUpdate(
+    () => setState(_initState(model)),
+    [model]
+  )
 
   const _showHideStyle = {
     ...style,
-    ...S.SHOW_HIDE,
+    ...S_SHOW_HIDE,
     ...pageStyle
   }, _divStyle = {
-    ...S.PAGES,
+    ...S_PAGES,
     ...pagesStyle,
     ..._crTransform(pageWidth, pageCurrent)
   };
-
 
   return (
       <ModalPane
@@ -179,6 +175,6 @@ const ModalSlider = ({
         </ShowHide>
       </ModalPane>
   );
-}
+};
 
 export default ModalSlider
