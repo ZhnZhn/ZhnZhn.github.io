@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import use from '../hooks/use'
 import useLoadMenu from './useLoadMenu'
 import Comp from '../Comp'
@@ -21,17 +19,25 @@ const BrowserMenu = ({
   caption,
   store,
   browserType,
-  showAction, updateAction,
-  loadedAction, failedAction,
+  showAction,
+  updateAction,
+  loadedAction,
+  failedAction,
   onLoadMenu,
   children
 }) => {
-  const [isShow, showBrowser, hideBrowser] = useBool(isInitShow)
+  const [
+    isShow,
+    showBrowser,
+    hideBrowser
+  ] = useBool(isInitShow)
   , [
-      isLoading, isLoaded, menu,
-      setLoading, setLoaded, setFailed,
-      updateMenu
-    ] = useLoadMenu();
+    isLoading,
+    menu,
+    setLoaded,
+    setFailed,
+    updateMenu
+  ] = useLoadMenu(isShow, onLoadMenu);
 
   useListen((actionType, data) => {
     if (data === browserType) {
@@ -47,14 +53,6 @@ const BrowserMenu = ({
         setLoaded(data.menuItems)
     }
   })
-  /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(()=>{
-    if (!isLoaded && isShow) {
-      onLoadMenu()
-      setLoading()
-    }
-  }, [isLoaded, isShow])
-  /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <Browser
@@ -74,4 +72,4 @@ const BrowserMenu = ({
   );
 };
 
-export default BrowserMenu;
+export default BrowserMenu

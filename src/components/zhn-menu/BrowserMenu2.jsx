@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 
 import use from '../hooks/use'
 import useLoadMenu from './useLoadMenu'
@@ -16,8 +16,7 @@ const { useBool, useToggle, useListen } = use
 } = Comp;
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
-
-const CL_BROWSER = "scroll-browser-by"
+, CL_BROWSER = "scroll-browser-by"
 , CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search"
 , CL_ROW_ITEM = 'row__type2-topic not-selected'
 
@@ -32,16 +31,21 @@ const CL_BROWSER = "scroll-browser-by"
   paddingRight: 24
 };
 
-
-const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
+const _useToolbarButtons = (
+  toggleSearch,
+  onClickInfo,
+  descrUrl
+) => {
   /*eslint-disable react-hooks/exhaustive-deps */
-  const _hClickInfo = useCallback(() => {
+  const _hClickInfo = useMemo(() => () => {
      onClickInfo({ descrUrl })
   }, []);
+  // onClickInfo, descrUrl
   return useMemo(() => [
      { caption: 'S', title: 'Click to toggle input search', onClick: toggleSearch },
      { caption: 'A', title: 'About Datasources', onClick: _hClickInfo }
   ], [_hClickInfo])
+  // toggleSearch
   /*eslint-enable react-hooks/exhaustive-deps */
 };
 
@@ -50,20 +54,37 @@ const BrowserMenu2 = ({
   isInitShow,
   //store,
   browserType,
-  showAction, loadedAction, failedAction,
+  showAction,
+  loadedAction,
+  failedAction,
   caption,
   onLoadMenu,
-  descrUrl, onClickInfo,
+  descrUrl,
+  onClickInfo,
   onShowLoadDialog,
-  ItemOptionComp, ItemComp, children
+  ItemOptionComp,
+  ItemComp,
+  children
 }) => {
-  const [isShow, showBrowser, hideBrowser] = useBool(isInitShow)
-  , [isShowSearch, toggleSearch] = useToggle()
+  const [
+    isShow,
+    showBrowser,
+    hideBrowser
+  ] = useBool(isInitShow)
+  , [
+    isShowSearch,
+    toggleSearch
+  ] = useToggle()
   , _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl)
   , [
-      isLoading, isLoaded, menu,
-      setLoading, setLoaded, setFailed
-    ] = useLoadMenu();
+    isLoading,
+    menu,
+    setLoaded,
+    setFailed
+  ] = useLoadMenu(isShow, onLoadMenu)
+  , _scrollClass = isShowSearch
+     ? CL_BROWSER_WITH_SEARCH
+     : CL_BROWSER;
 
   useListen((actionType, data) => {
     if (data === browserType){
@@ -76,19 +97,6 @@ const BrowserMenu2 = ({
       setLoaded(data.menuItems)
     }
   })
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(()=>{
-    if (!isLoaded && isShow) {
-      onLoadMenu()
-      setLoading()
-    }
-  }, [isLoaded, isShow])
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  const _scrollClass = isShowSearch
-    ? CL_BROWSER_WITH_SEARCH
-    : CL_BROWSER;
 
   return (
     <Browser isShow={isShow} style={S_BROWSER}>

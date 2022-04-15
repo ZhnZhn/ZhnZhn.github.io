@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useEffect } from 'react';
 
 const LOADING = 'a'
 , LOADED = 'b'
@@ -25,15 +25,28 @@ const _reducer = (state, {type, menu}) => {
   }
 };
 
-const useLoadMenu = () => {
+const useLoadMenu = (isShow, onLoadMenu) => {
    const [{isLoading, isLoaded, menu}, dispatch] = useReducer(_reducer, initialState)
    , setLoading = () => dispatch(_crAction(LOADING))
    , setFailed = () => dispatch(_crAction(FAILED))
    , setLoaded = menu => dispatch(_crAction(LOADED, menu))
    , updateMenu = menu => dispatch(_crAction(UPDATE, menu));
+
+   /*eslint-disable react-hooks/exhaustive-deps */
+   useEffect(()=>{
+     if (!isLoaded && isShow) {
+       onLoadMenu()
+       setLoading()
+     }
+   }, [isLoaded, isShow])
+   // onLoadMenu
+   /*eslint-enable react-hooks/exhaustive-deps */
+
    return [
-     isLoading, isLoaded, menu,
-     setLoading, setLoaded, setFailed,
+     isLoading,
+     menu,
+     setLoaded,
+     setFailed,
      updateMenu
    ];
 };
