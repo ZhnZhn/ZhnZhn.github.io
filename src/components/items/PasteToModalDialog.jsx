@@ -1,4 +1,5 @@
-import { memo, useRef, useCallback, useMemo } from 'react'
+import { useRef, useCallback, useMemo } from 'react'
+import memoIsShow from '../hoc/memoIsShow'
 import useProperty from '../hooks/useProperty'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
@@ -18,9 +19,6 @@ const S_MODAL = {
 };
 
 const DF_DATA = {};
-
-const _areEqual = (prevProps, {isShow}) =>
-   prevProps.isShow === isShow;
 
 const _usePasteTo = (data, onClose) => {
   const [setToChart, getToChart] = useProperty();
@@ -52,7 +50,7 @@ const _usePasteTo = (data, onClose) => {
   return [getToChart(), _refCompSeries, _commandButtons];
 };
 
-const PasteToModalDialog = memo(({
+const PasteToModalDialog = memoIsShow(({
   isShow,
   data=DF_DATA,
   onClose
@@ -78,6 +76,6 @@ const PasteToModalDialog = memo(({
       />
     </ModalDialog>
   );
-}, _areEqual)
+})
 
 export default PasteToModalDialog

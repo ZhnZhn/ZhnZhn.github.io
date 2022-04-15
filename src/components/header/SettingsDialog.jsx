@@ -1,6 +1,7 @@
-import { memo, useRef, useCallback, useMemo } from 'react';
+import { useRef, useCallback, useMemo } from 'react';
 //import PropTypes from 'prop-types'
 
+import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 
 import Actions from '../../flux/actions/ComponentActions';
@@ -48,10 +49,7 @@ const useMenuMore = () => {
   return [isShowLabels, menuModel];
 };
 
-const _isNotShouldRerender = (prevProps, nextProps) =>
-  prevProps.isShow === nextProps.isShow;
-
-const SettingsDialog = memo(({
+const SettingsDialog = memoIsShow(({
   isShow,
   data,
   onClose
@@ -106,7 +104,7 @@ const SettingsDialog = memo(({
       </A.TabPane>
     </A.ModalDialog>
   );
-}, _isNotShouldRerender);
+});
 
 /*
 SettingsDialog.propTypes = {
