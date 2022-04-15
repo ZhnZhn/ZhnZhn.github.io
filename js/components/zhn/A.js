@@ -15,8 +15,6 @@ var _Browser = _interopRequireDefault(require("./Browser"));
 
 var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
 
-var _SvgHrzResize = _interopRequireDefault(require("./SvgHrzResize"));
-
 var _ButtonCircle = _interopRequireDefault(require("./ButtonCircle"));
 
 var _ButtonTab = _interopRequireDefault(require("./ButtonTab"));
@@ -62,7 +60,6 @@ const A = { ..._SvgIcons.default,
   ScrollPane: _ScrollPane.default,
   Browser: _Browser.default,
   BrowserCaption: _BrowserCaption.default,
-  SvgHrzResize: _SvgHrzResize.default,
   ButtonCircle: _ButtonCircle.default,
   ButtonTab: _ButtonTab.default,
   DivHtml: _DivHtml.default,
