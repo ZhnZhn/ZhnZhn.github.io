@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import use from '../hooks/use'
 import useLoadMenu from './useLoadMenu'
 import Comp from '../Comp'
-import MenuTopic from './MenuTopic'
+import MenuTopicList from './MenuTopicList'
 
 const { useBool, useListen } = use
 , {
@@ -57,18 +57,19 @@ const BrowserMenu = ({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <Browser isShow={isShow} style={S_BROWSER}>
+    <Browser
+       isShow={isShow}
+       style={S_BROWSER}
+    >
       <BrowserCaption
          caption={caption}
          onClose={hideBrowser}
       />
-       <ScrollPane className={CL_SCROLL}>
+      <ScrollPane className={CL_SCROLL}>
          {isLoading && <SpinnerLoading />}
-         {menu.map((menuTopic, index) => (
-            <MenuTopic key={index} {...menuTopic} />)
-         )}
+         <MenuTopicList menu={menu} />
          {children}
-       </ScrollPane>
+      </ScrollPane>
     </Browser>
   );
 };
