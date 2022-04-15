@@ -1,4 +1,4 @@
-import memoEqual from '../hoc/memoEqual'
+import { memo } from 'react';
 import C from '../styles/Color'
 import Comp from '../Comp'
 
@@ -13,25 +13,19 @@ const MODEL_PROP = {
   ITEMS : 'items'
 }
 
-const S = {
-  GROUP_DIV: {
-    lineHeight: 2
-  },
-  LIST_DIV: {
-    marginLeft: 8,
-    paddingLeft: 12,
-    lineHeight: 2,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 2,
-    borderLeftColor: 'inherit',
-  }
+const S_GROUP_DIV = { lineHeight: 2 }
+, S_LIST_DIV = {
+  marginLeft: 8,
+  paddingLeft: 12,
+  lineHeight: 2,
+  borderLeftStyle: 'solid',
+  borderLeftWidth: 2,
+  borderLeftColor: 'inherit',
 };
 
-
-
-const _renderLevel3 = (items=[], captionProp, props) => {
+const _renderLevel3 = (items, captionProp, props) => {
   const { itemClassName, ItemComp, onClickItem } = props;
-  return items.map((item, index) => {
+  return (items || []).map((item, index) => {
     const caption = item[captionProp];
     return (
       <ItemComp
@@ -45,14 +39,14 @@ const _renderLevel3 = (items=[], captionProp, props) => {
   })
 }
 
-const _renderLevel2 = (lists=[], captionProp, itemsProp, props) => {
-  return lists.map((list, index) => {
+const _renderLevel2 = (lists, captionProp, itemsProp, props) => {
+  return (lists || []).map((list, index) => {
     const caption  = list[captionProp]
-        , items = list[itemsProp];
+    , items = list[itemsProp];
     return (
       <OpenClose2
          key={index}
-         style={S.LIST_DIV}
+         style={S_LIST_DIV}
          openColor={LIST_OPEN_COLOR}
          caption={caption}
       >
@@ -63,9 +57,9 @@ const _renderLevel2 = (lists=[], captionProp, itemsProp, props) => {
 };
 
 const _renderLevel1 = (props) => {
-   const { model={} } = props
-   , { meta={} } = model
-   , { caption, level1, level2, level3 } = meta
+   const { model } = props
+   , { meta } = model || {}
+   , { caption, level1, level2, level3 } = meta || {}
    , _captionProp = caption || MODEL_PROP.CAPTION
    , _groupsProp = level1 || MODEL_PROP.GROUPS
    , _listsProp = level2 || MODEL_PROP.LISTS
@@ -78,7 +72,7 @@ const _renderLevel1 = (props) => {
       return (
         <OpenClose2
            key={index}
-           style={S.GROUP_DIV}
+           style={S_GROUP_DIV}
            caption={caption}
         >
           {_renderLevel2(lists, _captionProp, _itemsProp, props)}
@@ -87,8 +81,9 @@ const _renderLevel1 = (props) => {
    })
 };
 
-const _areEqual = (prevProps, nextProps) => prevProps.model === nextProps.model;
-const MenuItems2 = memoEqual(props => (
+const _areEqual = (prevProps, nextProps) =>
+  prevProps.model === nextProps.model;
+const MenuItems2 = memo(props => (
   <div>
      {_renderLevel1(props)}
   </div>
