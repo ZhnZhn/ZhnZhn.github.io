@@ -3,7 +3,6 @@ import SpinnerLoading from './SpinnerLoading'
 import ScrollPane from './ScrollPane'
 import Browser from './Browser'
 import BrowserCaption from './BrowserCaption'
-import SvgHrzResize from './SvgHrzResize'
 import ButtonCircle from './ButtonCircle'
 import ButtonTab from './ButtonTab'
 import DivHtml from './DivHtml'
@@ -32,7 +31,6 @@ const A = {
   ScrollPane,
   Browser,
   BrowserCaption,
-  SvgHrzResize,
   ButtonCircle,
   ButtonTab,
   DivHtml,

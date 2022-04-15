@@ -74,7 +74,7 @@ class ChartContainer extends Component {
   constructor(props){
     super(props);
 
-    this._refRootNode = createRef()
+    this._refRootElement = createRef()
     this._refSpComp = createRef()
     this._refResize = createRef()
 
@@ -220,7 +220,7 @@ class ChartContainer extends Component {
    _refChart = (index, comp) => this[_crItemRefPropName(index)] = comp
 
    _fitToWidth = () => {
-     const { style } = this._refRootNode.current || {}
+     const { style } = this._refRootElement.current || {}
      , { width } = style || {};
      if (width) {
        this._hResizeAfter(parseInt(width, 10))
@@ -252,7 +252,7 @@ class ChartContainer extends Component {
 
      return(
         <div
-           ref={this._refRootNode}
+           ref={this._refRootElement}
            className={_className}
            style={{
              ...this._initialWidthStyle,
@@ -289,7 +289,7 @@ class ChartContainer extends Component {
                minWidth={this._MIN_WIDTH}
                maxWidth={MAX_WIDTH}
                step={STEP}
-               nodeRef={this._refRootNode}
+               elementRef={this._refRootElement}
                onResizeAfter={this._hResizeAfter}
              />
           </A.BrowserCaption>
