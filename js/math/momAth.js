@@ -3,24 +3,25 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _DateUtils = _interopRequireDefault(require("../utils/DateUtils"));
+var _DateUtils = require("../utils/DateUtils");
 
 var _mathFn = _interopRequireDefault(require("./mathFn"));
 
-var ymdToUTC = _DateUtils["default"].ymdToUTC;
-var roundBy = _mathFn["default"].roundBy;
-var C = {
+const {
+  roundBy
+} = _mathFn.default;
+const C = {
   ATH_UP: 'rgba(76, 175, 80, 0.75)',
   ATH_DOWN: 'rgba(244, 67, 54, 0.75)'
 };
 
-var momAth = function momAth(data) {
-  var dataMom = [],
-      dataAth = [],
-      dataSum = [];
-  var i = 1,
+const momAth = data => {
+  const dataMom = [],
+        dataAth = [],
+        dataSum = [];
+  let i = 1,
       max = data.length,
       point,
       prevPoint,
@@ -32,7 +33,7 @@ var momAth = function momAth(data) {
   for (; i < max; i++) {
     prevPoint = data[i - 1];
     point = data[i];
-    x = ymdToUTC(point[0]);
+    x = (0, _DateUtils.ymdToUTC)(point[0]);
     mom = point[4] - prevPoint[4];
     dataMom.push({
       x: x,
@@ -52,12 +53,12 @@ var momAth = function momAth(data) {
   }
 
   return {
-    dataMom: dataMom,
-    dataAth: dataAth,
-    dataSum: dataSum
+    dataMom,
+    dataAth,
+    dataSum
   };
 };
 
 var _default = momAth;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=momAth.js.map

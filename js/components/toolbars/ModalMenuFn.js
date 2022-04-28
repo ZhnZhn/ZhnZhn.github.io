@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
@@ -14,10 +14,6 @@ var _SubMenuItem = _interopRequireDefault(require("./SubMenuItem"));
 var _ModalMenu = require("./ModalMenu.Style");
 
 var _jsxRuntime = require("react/jsx-runtime");
-
-const {
-  mlsToDmy
-} = _DateUtils.default;
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -48,7 +44,7 @@ const _isZoom = getChart => {
     from,
     to
   } = chart.zhGetFromToDates({
-    format: mlsToDmy
+    format: _DateUtils.mlsToDmy
   });
   return from === to && to === EPOCH_DMY ? false : true;
 };

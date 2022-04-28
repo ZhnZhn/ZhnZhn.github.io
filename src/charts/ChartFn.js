@@ -5,7 +5,7 @@ import formatNumber from '../utils/formatNumber';
 import formatAllNumber from '../utils/formatAllNumber';
 
 import fnArr from '../utils/fnArr';
-import DateUtils from '../utils/DateUtils';
+import { dmyToUTC } from '../utils/DateUtils';
 
 import Chart from './Chart';
 import dateFormat from './dateFormat';
@@ -171,7 +171,7 @@ const _getMinMaxFromEvent = ({
 const ChartFn = {
   toDmy,
   toTdmy,
-  toTdmyIf,  
+  toTdmyIf,
 
   addSeriaWithRenderLabel(props){
     // { chart, series, label, hasSecondYAxis } = props
@@ -210,7 +210,7 @@ const ChartFn = {
 
   crValueMoving(chart, prev, dateTo){
     const points = chart.series[0].data
-    , mlsUTC = DateUtils.dmyToUTC(dateTo)
+    , mlsUTC = dmyToUTC(dateTo)
     , index = _isNumber(mlsUTC)
         ? _findIndexByX(points, mlsUTC)
         : -1

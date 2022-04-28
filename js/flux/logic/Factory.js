@@ -23,7 +23,7 @@ var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActi
 
 var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
 var _has = _interopRequireDefault(require("../../components/has"));
 
@@ -34,61 +34,62 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const {
-  getFromDate,
-  getToDate,
-  isYmd,
-  isYmdOrEmpty
-} = _DateUtils.default;
-const {
   isWideWidth
-} = _has.default;
-
-const _isArr = Array.isArray,
+} = _has.default,
+      _isArr = Array.isArray,
       _assign = Object.assign,
-      _initFromDate = getFromDate(2),
-      initToDate = getToDate();
+      _initFromDate = (0, _DateUtils.getFromDate)(2),
+      initToDate = (0, _DateUtils.getToDate)();
 
 const _crFnValue = (valueFn, valueFnPrefix) => {
   return valueFn ? valueFnPrefix ? _RouterFnValue.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
 };
 
-const _crInitFromDate = ({
-  isFdw,
-  nInitFromDate
-}) => {
+const _crInitFromDate = _ref => {
+  let {
+    isFdw,
+    nInitFromDate
+  } = _ref;
+
   if (isFdw && !isWideWidth) {
     return _initFromDate;
   }
 
-  return nInitFromDate ? getFromDate(nInitFromDate) : _initFromDate;
+  return nInitFromDate ? (0, _DateUtils.getFromDate)(nInitFromDate) : _initFromDate;
 };
 
 const _crDateProps = dialogProps => {
   const _props = dialogProps.isFd ? {
     errNotYmdOrEmpty: _Msg.default.YMD_DATE_OR_EMPTY,
-    isYmdOrEmpty
+    isYmdOrEmpty: _DateUtils.isYmdOrEmpty
   } : void 0;
 
   return {
     initFromDate: _crInitFromDate(dialogProps),
     initToDate,
-    onTestDate: isYmd,
+    onTestDate: _DateUtils.isYmd,
     ..._props
   };
 };
 
-const _onError = (alertDescr, alertCaption = 'Request Error') => {
+const _onError = function (alertDescr, alertCaption) {
+  if (alertCaption === void 0) {
+    alertCaption = 'Request Error';
+  }
+
   _ComponentActions.default.showAlert({
     alertDescr,
     alertCaption
   });
 };
 
-const _crClickAbout = ({
-  rootUri,
-  descr,
-  descrUrl
-}) => {
+const _crClickAbout = _ref2 => {
+  let {
+    rootUri,
+    descr,
+    descrUrl
+  } = _ref2;
+
   const _descrUrl = descr && rootUri ? rootUri + "/" + descr + ".html" : descrUrl;
 
   return _descrUrl ? _ComponentActions.default.showDescription.bind(null, {
@@ -99,11 +100,14 @@ const _crClickAbout = ({
 const D_SELECT_N = 'DialogSelectN',
       D_STAT_N = 'DialogStatN';
 
-const _getDialogType = (dialogType, {
-  selectProps,
-  dims,
-  dfProps
-}) => dialogType || (_isArr(selectProps) ? D_SELECT_N : void 0) || (_isArr(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
+const _getDialogType = (dialogType, _ref3) => {
+  let {
+    selectProps,
+    dims,
+    dfProps
+  } = _ref3;
+  return dialogType || (_isArr(selectProps) ? D_SELECT_N : void 0) || (_isArr(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
+};
 
 const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
   if (!loadId) {

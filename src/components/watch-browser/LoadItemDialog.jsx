@@ -1,7 +1,12 @@
 import { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import DateUtils from '../../utils/DateUtils'
+import {
+  getFromDate,
+  getToDate,
+  isYmd,
+  mlsToDmy
+} from '../../utils/DateUtils';
 import formatNumber from '../../utils/formatNumber'
 
 import ChartActions, {CHAT_LOAD} from '../../flux/actions/ChartActions'
@@ -13,13 +18,6 @@ import D from '../dialogs/DialogCell'
 import ValidationMessages from '../zhn/ValidationMessages'
 
 import Decor from '../dialogs/decorators/Decorators'
-
-const {
-  getFromDate,
-  getToDate,
-  isYmd,
-  mlsToDmy
-} = DateUtils;
 
 const S_DIALOG = { width: 365 }
 , S_DIALOG_SHORT = { width: 265 }

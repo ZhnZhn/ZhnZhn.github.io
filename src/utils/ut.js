@@ -1,5 +1,4 @@
 import isInArrStr from './isInArrStr'
-import dt from './DateUtils'
 
 import fCompareBy from './fCompareBy'
 import fCompareByTwoProps from './fCompareByTwoProps'
@@ -11,7 +10,6 @@ import formatAllNumber from './formatAllNumber'
 
 const ut = {
   isInArrStr,
-  dt,
   fCompareBy,
   fCompareByTwoProps,
   getC,

@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 
@@ -22,9 +22,6 @@ var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-const {
-  isDmy
-} = _DateUtils.default;
 const S_MODAL_POPUP = {
   position: 'absolute',
   top: 25,
@@ -83,7 +80,7 @@ const ValueMovingModal = props => {
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
         _hEnterDate = (0, _react.useCallback)(dateTo => {
-    if (isDmy(dateTo)) {
+    if ((0, _DateUtils.isDmy)(dateTo)) {
       if (updateDateTo(dateTo)) {
         setMsgDateTo('');
       } else {
@@ -126,7 +123,7 @@ const ValueMovingModal = props => {
       ref: _refInput,
       initialValue: dateTo,
       msgErr: msgDateTo,
-      onTest: isDmy,
+      onTest: _DateUtils.isDmy,
       onEnter: _hEnterDate
     })]
   });

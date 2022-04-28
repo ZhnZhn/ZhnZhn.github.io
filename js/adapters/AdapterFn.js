@@ -11,6 +11,8 @@ var _dateFormat = _interopRequireDefault(require("../charts/dateFormat"));
 
 var _ut = _interopRequireDefault(require("../utils/ut"));
 
+var _DateUtils = require("../utils/DateUtils");
+
 var _toUpperCaseFirst = _interopRequireDefault(require("../utils/toUpperCaseFirst"));
 
 var _mathFn = _interopRequireDefault(require("../math/mathFn"));
@@ -30,7 +32,6 @@ const {
 } = _dateFormat.default;
 const {
   isInArrStr,
-  dt,
   fCompareBy,
   fCompareByTwoProps,
   getC,
@@ -42,16 +43,6 @@ const {
   findMaxY,
   filterTrimZero
 } = _seriaFn.default;
-const {
-  ymdToUTC,
-  ymdhmsToUTC,
-  mlsToDmy,
-  getFromDate,
-  getYmdhmUTC,
-  getYear,
-  getCurrentYear,
-  monthIndex
-} = dt;
 const EMPTY = '';
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 
@@ -69,7 +60,7 @@ const _getValue = point => _isArr(point) ? _isNumber(point[1]) ? point[1] : '0.0
 
 const _crBigValueFrom = point => (0, _big.default)(_getValue(point));
 
-const _crDmyFrom = point => mlsToDmy(_getDate(point));
+const _crDmyFrom = point => (0, _DateUtils.mlsToDmy)(_getDate(point));
 
 const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
@@ -81,13 +72,13 @@ const AdapterFn = { ..._crFn.default,
   ..._pointFn.default,
   ..._legendFn.default,
   toTd: mls => _isNumber(mls) ? toTd(mls) : '',
-  ymdToUTC,
-  ymdhmsToUTC,
-  getFromDate,
-  getYmdhmUTC,
-  getYear,
-  getCurrentYear,
-  monthIndex,
+  ymdToUTC: _DateUtils.ymdToUTC,
+  ymdhmsToUTC: _DateUtils.ymdhmsToUTC,
+  getFromDate: _DateUtils.getFromDate,
+  getYmdhmUTC: _DateUtils.getYmdhmUTC,
+  getYear: _DateUtils.getYear,
+  getCurrentYear: _DateUtils.getCurrentYear,
+  monthIndex: _DateUtils.monthIndex,
   getCaption: getC,
   getValue: getV,
   isInArrStr,
@@ -100,16 +91,19 @@ const AdapterFn = { ..._crFn.default,
   compareByY: fCompareBy('y'),
   compareByValue: fCompareBy('value'),
   compareByValueId: fCompareByTwoProps('value', 'id'),
-  crValueMoving: ({
-    bNowValue = (0, _big.default)('0.0'),
-    bPrevValue = (0, _big.default)('0.0'),
-    dfR
-  }) => _mathFn.default.crValueMoving({
-    nowValue: bNowValue,
-    prevValue: bPrevValue,
-    fnFormat: formatAllNumber,
-    dfR
-  }),
+  crValueMoving: _ref => {
+    let {
+      bNowValue = (0, _big.default)('0.0'),
+      bPrevValue = (0, _big.default)('0.0'),
+      dfR
+    } = _ref;
+    return _mathFn.default.crValueMoving({
+      nowValue: bNowValue,
+      prevValue: bPrevValue,
+      fnFormat: formatAllNumber,
+      dfR
+    });
+  },
 
   valueMoving(data, dfR) {
     if (!_isArr(data)) {
@@ -160,7 +154,13 @@ const AdapterFn = { ..._crFn.default,
       y: _getValue(_p)
     };
   },
-  joinBy: (delimeter, ...restItems) => restItems.filter(Boolean).join(delimeter),
+  joinBy: function (delimeter) {
+    for (var _len = arguments.length, restItems = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      restItems[_key - 1] = arguments[_key];
+    }
+
+    return restItems.filter(Boolean).join(delimeter);
+  },
   toUpperCaseFirst: _toUpperCaseFirst.default,
   findMinY,
   findMaxY,
@@ -174,16 +174,19 @@ const AdapterFn = { ..._crFn.default,
     });
     return _items;
   },
-  crZhConfig: ({
-    _itemKey,
-    itemCaption,
-    dataSource
-  }) => ({
-    id: _itemKey,
-    key: _itemKey,
-    itemCaption,
-    dataSource
-  })
+  crZhConfig: _ref2 => {
+    let {
+      _itemKey,
+      itemCaption,
+      dataSource
+    } = _ref2;
+    return {
+      id: _itemKey,
+      key: _itemKey,
+      itemCaption,
+      dataSource
+    };
+  }
 };
 var _default = AdapterFn;
 exports.default = _default;

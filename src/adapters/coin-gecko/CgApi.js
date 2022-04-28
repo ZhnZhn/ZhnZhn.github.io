@@ -1,4 +1,4 @@
-import dt from '../../utils/DateUtils'
+import { getDaysFromYmd } from '../../utils/DateUtils';
 import fnAdapter from './fnAdapter'
 
 const C = {
@@ -14,7 +14,7 @@ const _assign = Object.assign
 , { crError, crPageConfig } = fnAdapter
 
 const _crDays = ({ fromDate }) => {
-  const _d = dt.getDaysFromYmd(fromDate);
+  const _d = getDaysFromYmd(fromDate);
   return _d > 90 ? _d : 91;
 };
 

@@ -1,8 +1,4 @@
-import DateUtils from '../DateUtils'
-
-import DateUtilsWithMock from './DateUtilsWithMock'
-
-const {
+import {
   isYmd,
   isYmdOrEmpty,
   isDmyPeriod,
@@ -17,7 +13,9 @@ const {
   getYear,
   monthIndex,
   getYmdhmUTC
-} = DateUtils;
+} from '../DateUtils';
+
+import DateUtilsWithMock from './DateUtilsWithMock'
 
 // DateUtils configuration consts
 const MIN_YEAR = 1990;

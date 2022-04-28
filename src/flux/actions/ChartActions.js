@@ -1,6 +1,6 @@
 import Reflux from 'reflux-core';
 
-import DU from '../../utils/DateUtils';
+import { getFromDate } from '../../utils/DateUtils';
 import Msg from '../../constants/Msg';
 import ChartStore from '../stores/ChartStore';
 import SettingSlice from '../stores/SettingSlice';
@@ -182,8 +182,8 @@ const _addDialogPropsTo = option => {
   const { fromDate, nInitFromDate } = option;
   if (!fromDate) {
     option.fromDate = nInitFromDate
-       ? DU.getFromDate(nInitFromDate)
-       : DU.getFromDate(2)
+       ? getFromDate(nInitFromDate)
+       : getFromDate(2)
   }
 };
 

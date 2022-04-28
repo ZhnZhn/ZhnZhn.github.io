@@ -1,10 +1,5 @@
 import Big from 'big.js';
-
-import dt from '../utils/DateUtils';
-
-const { ymdToUTC } = dt;
-
-
+import { ymdToUTC } from '../utils/DateUtils';
 
 const _getPriceAndFlow = (point) => {
   const close = point[4]

@@ -1,5 +1,5 @@
-import DOMPurify from 'dompurify'
-import DateUtils from '../../utils/DateUtils'
+import DOMPurify from 'dompurify';
+import { getToDate } from '../../utils/DateUtils';
 
 const _toOptions = params => {
   const _options = Object.create(null);
@@ -21,7 +21,7 @@ const crOptions = (params) => {
     chartType: cT,
     columnName: cN,
     fromDate: fD,
-    toDate: tD || DateUtils.getToDate()
+    toDate: tD || getToDate()
   };
 };
 

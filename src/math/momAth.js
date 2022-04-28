@@ -1,8 +1,6 @@
-
-import dt from '../utils/DateUtils'
+import { ymdToUTC } from '../utils/DateUtils';
 import mathFns from './mathFn'
 
-const { ymdToUTC } = dt;
 const { roundBy }  = mathFns;
 
 const C = {

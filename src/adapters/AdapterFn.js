@@ -3,6 +3,16 @@ import Big from 'big.js'
 
 import dateFormat from '../charts/dateFormat'
 import ut from '../utils/ut'
+import {
+  ymdToUTC,
+  ymdhmsToUTC,
+  mlsToDmy,
+  getFromDate,
+  getYmdhmUTC,
+  getYear,
+  getCurrentYear,
+  monthIndex
+} from '../utils/DateUtils';
 import toUpperCaseFirst from '../utils/toUpperCaseFirst'
 
 import mathFn from '../math/mathFn'
@@ -17,24 +27,12 @@ import legendFn from './legendFn'
 const { toTd } = dateFormat
 const {
   isInArrStr,
-  dt,
   fCompareBy,
   fCompareByTwoProps,
   getC, getV,
   formatAllNumber
 } = ut
 , { findMinY, findMaxY, filterTrimZero } = seriaFn;
-
-const {
-  ymdToUTC,
-  ymdhmsToUTC,
-  mlsToDmy,
-  getFromDate,
-  getYmdhmUTC,
-  getYear,
-  getCurrentYear,
-  monthIndex
-} = dt;
 
 const EMPTY = '';
 

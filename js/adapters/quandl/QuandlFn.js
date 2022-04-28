@@ -11,13 +11,10 @@ var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumb
 
 var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-const {
-  mlsToDmy
-} = _DateUtils.default;
 const {
   valueMoving
 } = _AdapterFn.default;
@@ -27,11 +24,14 @@ const _isStr = str => typeof str === 'string';
 
 const _isNumber = n => typeof n === 'number' && n - n === 0;
 
-const _crItemCaption = ({
-  dfItemCaption,
-  items,
-  itemCaption
-}) => _isNumber(dfItemCaption) && _isArr(items) && items[dfItemCaption - 1] ? items[dfItemCaption - 1].caption || itemCaption : itemCaption;
+const _crItemCaption = _ref => {
+  let {
+    dfItemCaption,
+    items,
+    itemCaption
+  } = _ref;
+  return _isNumber(dfItemCaption) && _isArr(items) && items[dfItemCaption - 1] ? items[dfItemCaption - 1].caption || itemCaption : itemCaption;
+};
 
 const _isStrEqTo = (str, strTo) => _isStr(str) && str.toLowerCase() === strTo;
 
@@ -79,9 +79,11 @@ const QuandlFn = {
     }
   },
 
-  createDatasetInfo({
-    dataset
-  }) {
+  createDatasetInfo(_ref2) {
+    let {
+      dataset
+    } = _ref2;
+
     const {
       name,
       description,
@@ -139,20 +141,22 @@ const QuandlFn = {
     };
   },
 
-  createPercent({
-    bValue = (0, _big.default)('0.0'),
-    bTotal = (0, _big.default)('0.0')
-  }) {
+  createPercent(_ref3) {
+    let {
+      bValue = (0, _big.default)('0.0'),
+      bTotal = (0, _big.default)('0.0')
+    } = _ref3;
     return _mathFn.default.calcPercent({
       bValue,
       bTotal
     });
   },
 
-  createValueMoving({
-    bNowValue = (0, _big.default)('0.0'),
-    bPrevValue = (0, _big.default)('0.0')
-  }) {
+  createValueMoving(_ref4) {
+    let {
+      bNowValue = (0, _big.default)('0.0'),
+      bPrevValue = (0, _big.default)('0.0')
+    } = _ref4;
     return _mathFn.default.crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
@@ -160,7 +164,11 @@ const QuandlFn = {
     });
   },
 
-  getRecentDate(seria = [], json) {
+  getRecentDate(seria, json) {
+    if (seria === void 0) {
+      seria = [];
+    }
+
     const len = seria.length,
           {
       dataset = {}
@@ -169,7 +177,7 @@ const QuandlFn = {
       frequency = ''
     } = dataset,
           mlsUTC = len > 0 && seria[len - 1][0] && _isNumber(seria[len - 1][0]) ? seria[len - 1][0] : '';
-    return mlsUTC ? frequency.toLowerCase() === 'annual' ? new Date(mlsUTC).getUTCFullYear() : mlsToDmy(mlsUTC) : '';
+    return mlsUTC ? frequency.toLowerCase() === 'annual' ? new Date(mlsUTC).getUTCFullYear() : (0, _DateUtils.mlsToDmy)(mlsUTC) : '';
   },
 
   setTitleToConfig(config, option) {
@@ -181,7 +189,11 @@ const QuandlFn = {
     config.subtitle.text = subtitle ? subtitle + ":" : '';
   },
 
-  findColumnIndex(obj, columnName = '') {
+  findColumnIndex(obj, columnName) {
+    if (columnName === void 0) {
+      columnName = '';
+    }
+
     const column_names = _isArr(obj) ? obj : QuandlFn.getColumnNames(obj),
           _columnName = columnName.toLowerCase();
 

@@ -1,4 +1,4 @@
-import dt from '../../utils/DateUtils'
+import { mlsToDmy } from '../../utils/DateUtils';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SubMenuItem from './SubMenuItem'
@@ -7,8 +7,6 @@ import {
   S_MODAL_MENU,
   S_MODAL_MENU_PANE
 } from './ModalMenu.Style'
-
-const { mlsToDmy } = dt;
 
 const _isFn = fn => typeof fn === 'function';
 

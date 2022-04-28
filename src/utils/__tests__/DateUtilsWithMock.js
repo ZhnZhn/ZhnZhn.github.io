@@ -1,12 +1,10 @@
-import DateUtils from '../DateUtils'
-
-import mockDateBeforeAll from './mockDateBeforeAll'
-
-const {
+import {
   getFromDate,
   getToDate,
   getDaysFromYmd
-} = DateUtils;
+} from '../DateUtils';
+
+import mockDateBeforeAll from './mockDateBeforeAll'
 
 describe('DateUtilsWithMock', ()=>{
   test('', ()=>expect('').toBe(''))

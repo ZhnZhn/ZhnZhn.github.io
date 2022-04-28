@@ -1,15 +1,13 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 //import PropTypes from "prop-types";
 
-import DateUtils from '../../utils/DateUtils'
+import { isDmy } from '../../utils/DateUtils';
 import formatAllNumber from '../../utils/formatAllNumber'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
 import DivCompareTo from './DivCompareTo'
-
-const { isDmy } = DateUtils;
 
 const S_MODAL_POPUP = {
   position: 'absolute',

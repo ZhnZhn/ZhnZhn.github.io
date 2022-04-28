@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _useFocus = _interopRequireDefault(require("../hooks/useFocus"));
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
@@ -17,9 +17,6 @@ var _DivCompareTo = _interopRequireDefault(require("../items/DivCompareTo"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const {
-  isDmy
-} = _DateUtils.default;
 const S_MODAL_POPUP = {
   position: 'absolute',
   top: 38,
@@ -44,7 +41,7 @@ const ModalCompareTo = _ref => {
   const _refInput = (0, _useFocus.default)(isShow),
         [msgErr, setMsgErr] = (0, _react.useState)(''),
         _onEnterDateTo = (0, _react.useCallback)(dateTo => {
-    if (isDmy(dateTo)) {
+    if ((0, _DateUtils.isDmy)(dateTo)) {
       const _r = onCompareTo(dateTo),
             _msgErr = _r !== 0 ? "No " + _r + " data for " + dateTo : '';
 
@@ -59,7 +56,7 @@ const ModalCompareTo = _ref => {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo.default, {
       ref: _refInput,
       msgErr: msgErr,
-      onTest: isDmy,
+      onTest: _DateUtils.isDmy,
       onEnter: _onEnterDateTo
     })
   });

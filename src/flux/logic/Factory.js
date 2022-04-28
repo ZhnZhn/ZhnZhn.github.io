@@ -11,25 +11,22 @@ import Msg from '../../constants/Msg';
 import {  LoadType } from '../../constants/Type';
 
 import CA from '../actions/ComponentActions';
-import ChartActions, { 
+import ChartActions, {
   CHAT_LOAD,
   CHAT_SHOW
 } from '../actions/ChartActions';
 
-import DateUtils from '../../utils/DateUtils';
-import has from '../../components/has';
-import ChartStore from '../stores/ChartStore';
-
-const {
+import {
   getFromDate,
   getToDate,
   isYmd,
   isYmdOrEmpty
-} = DateUtils;
+} from '../../utils/DateUtils';
+import has from '../../components/has';
+import ChartStore from '../stores/ChartStore';
 
 const { isWideWidth } = has
-
-const _isArr = Array.isArray
+, _isArr = Array.isArray
 , _assign = Object.assign
 , _initFromDate = getFromDate(2)
 , initToDate = getToDate();

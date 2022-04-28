@@ -1,29 +1,23 @@
 import { Component } from 'react'
 
-import dt from '../../utils/DateUtils'
-
-import ModalDialog from '../zhn-moleculs/ModalDialog';
-import D from './DialogCell';
-import ZoomDailyRow from './ZoomDailyRow'
-
-const S = {
-  DIALOG: {
-    width: 244,
-    marginLeft: -122
-  },
-  DATE: {
-    width: 120
-  }
-};
-
-const {
+import {
   isDmy,
   dmyToUTC,
   isDmyPeriod,
   mlsToDmy,
   addToDmy,
   getYTDfromDmy
-} = dt;
+} from '../../utils/DateUtils';
+
+import ModalDialog from '../zhn-moleculs/ModalDialog';
+import D from './DialogCell';
+import ZoomDailyRow from './ZoomDailyRow'
+
+const S_DIALOG = {
+  width: 244,
+  marginLeft: -122
+}
+, S_DATE = { width: 120 };
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -139,7 +133,7 @@ class ZoomDialog extends Component {
     return (
       <ModalDialog
         caption="Zoom Chart"
-        style={S.DIALOG}
+        style={S_DIALOG}
         isShow={isShow}
         commandButtons={this._commandButtons}
         onClose={onClose}
@@ -147,7 +141,7 @@ class ZoomDialog extends Component {
         <D.DatesFragment
            key={id}
            ref={this._refDates}
-           dateStyle={S.DATE}
+           dateStyle={S_DATE}
            placeholder="DD-MM-YYYY"
            initFromDate={from}
            initToDate={to}

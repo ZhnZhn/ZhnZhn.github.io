@@ -3,11 +3,10 @@ import Big from 'big.js';
 import formatAllNumber from '../../utils/formatAllNumber'
 import mathFn from '../../math/mathFn';
 
-import dt from '../../utils/DateUtils';
+import { mlsToDmy } from '../../utils/DateUtils';
 
 import AdapterFn from '../AdapterFn';
 
-const { mlsToDmy } = dt;
 const { valueMoving } = AdapterFn;
 
 const _isArr = Array.isArray;

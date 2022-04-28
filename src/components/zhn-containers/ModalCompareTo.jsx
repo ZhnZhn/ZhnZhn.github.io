@@ -1,12 +1,10 @@
 import { useState, useCallback } from 'react';
 
 import useFocus from '../hooks/useFocus';
-import DateUtils from '../../utils/DateUtils';
+import { isDmy } from '../../utils/DateUtils';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import DivCompareTo from '../items/DivCompareTo';
-
-const { isDmy } = DateUtils;
 
 const S_MODAL_POPUP = {
   position: 'absolute',
