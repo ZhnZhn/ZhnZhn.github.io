@@ -27,7 +27,7 @@ const MathCaptcha = forwardRef(({ style }, ref) => {
   , n2  = _useRandomNumber()
   , [{isOk, resultSum}, setState] = useState({isOk: false, resultSum: ''})
   /* eslint-disable react-hooks/exhaustive-deps */
-  , _hChangeSlider = useCallback((evt, value) => setState({
+  , _hChangeSlider = useCallback(value => setState({
         isOk: n1+n2 === value,
         resultSum: value
     }), []);

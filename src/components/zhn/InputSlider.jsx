@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import useBool from '../hooks/useBool'
 import has from '../has'
 import mathFns from '../../math/mathFn'
+
+import CircleInner from './CircleInner';
 //import PropTypes from "prop-types";
 
 const S_ROOT = {
@@ -38,11 +40,12 @@ S_LINE_AFTER = {
   backgroundColor: '#bdbdbd',
   transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
 },
-S_LINE_HOVERED = {
+S_LINE_AFTER_HOVERED = {
+  ...S_LINE_AFTER,
   backgroundColor: '#9e9e9e',
 },
 S_ROOT_CIRCLE = {
-  boxSizing: 'borderBox',
+  boxSizing: 'border-box',
   zIndex: '1',
   position: 'absolute',
   top: 0,
@@ -65,25 +68,6 @@ S_CIRCLE_DRAGGED = {
   width: 20,
   height: 20
 },
-S_CIRCLE_INNER = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: 12,
-  height: 12,
-  overflow: 'visible'
-},
-S_CIRCLE_INNER_EL = {
-  position: 'absolute',
-  top: -12,
-  left: -12,
-  width: '300%',
-  height: 36,
-  borderRadius: '50%',
-  //opacity: '0.16',
-  backgroundColor: 'rgba(0, 188, 212, 0.16)',
-  transform: 'scale(1)'
-},
 S_EMBER = {
   top: -12,
   left: -12,
@@ -96,8 +80,9 @@ S_EMBER = {
 const _isNaN = Number.isNaN
 , _noopFn = () => {}
 , hasTouch = has.touch
-, EVENT_NAME_MOVE = hasTouch ? 'touchmove' : 'mousemove'
-, EVENT_NAME_UP = hasTouch ? 'touchend' : 'mouseup'
+, [EVENT_NAME_MOVE, EVENT_NAME_UP] = hasTouch
+    ? ['touchmove','touchend']
+    : ['mousemove','mouseup']
 , _checkValueInMinMax = (min, max, value) => value > max
     ? max
     : value < min ? min : value
@@ -116,15 +101,17 @@ const _isNaN = Number.isNaN
   : evt => evt.clientX
 , _isUp = keyCode => keyCode === 39 || keyCode === 38
 , _isDown = keyCode => keyCode === 37 || keyCode === 40
-, _calcNewValueByKeyCode = (value, step, keyCode) => _isUp(keyCode)
+, _calcValueByKeyCode = (value, step, keyCode) => _isUp(keyCode)
     ? value + step
-    : _isDown(keyCode) ? value - step : void 0;
+    : _isDown(keyCode) ? value - step : void 0
+, _isNumber = n => typeof n === 'number' && n-n === 0
+, _getRefValue = ref => ref.current;
 
 const _useMouseDown = (setValueFromPosition) => {
-  const [dragged, setDraggedTrue, setDraggedFalse] = useBool(false)
+  const [isDragged, setDraggedTrue, setDraggedFalse] = useBool(false)
   , _refDragRunning = useRef(false)
   , _hDragMouseMove = (event) => {
-    if (_refDragRunning.current) {
+    if (_getRefValue(_refDragRunning)) {
       return;
     }
     _refDragRunning.current = true;
@@ -147,73 +134,76 @@ const _useMouseDown = (setValueFromPosition) => {
     document.addEventListener(EVENT_NAME_UP, _hDragMouseUp)
     setDraggedTrue()
   };
-  return [dragged, _hMouseDown];
+  return [isDragged, _hMouseDown];
 };
 
 const InputSlider = ({
+  initialValue=4,
   step=1,
   min=0,
   max=20,
   onChange=_noopFn
 }) => {
   const _refTrack = useRef()
-  , [hovered, setHoveredTrue, setHoveredFalse] = useBool(false)
-  , [value, setValue] = useState(4)
+  , [isHovered, setHoveredTrue, setHoveredFalse] = useBool(false)
+  , [value, setValue] = useState(initialValue)
 
-  , _updateValue = (event, newValue) => {
-    const _newValue = _checkValueInMinMax(min, max, newValue);
-    setValue(_newValue)
-    onChange(event, _newValue)
+  , _updateValue = (value) => {
+    const _value = _checkValueInMinMax(min, max, value);
+    setValue(_value)
+    onChange(_value)
   }
   , _hKeyDown = (evt) => {
     const { keyCode } = evt
-    , _newValue = _calcNewValueByKeyCode(value, step, keyCode);
-    if (_newValue != null) {
+    , _value = _calcValueByKeyCode(value, step, keyCode);
+    if (_value != null) {
       evt.preventDefault()
-      _updateValue(event, _newValue)
+      _updateValue(_value)
     }
   }
-  , _calcPositionFromEvent = (event) => {
-    const _trackOffset = _refTrack.current.getBoundingClientRect()['left']
-    return _getClienX(event) - _trackOffset;
+  , _calcPositionFromEvent = (evt) => {
+    const _trackOffset = _getRefValue(_refTrack).getBoundingClientRect()['left']
+    return _isNumber(_trackOffset)
+      ? _getClienX(evt) - _trackOffset
+      : NaN;
   }
-  , _setValueFromPosition = (event) => {
-    const positionMax = _refTrack.current.clientWidth;
-    let position = _calcPositionFromEvent(event);
-    if (position < 0) {
-      position = 0;
-    } else if (position > positionMax) {
-      position = positionMax
+  , _setValueFromPosition = (evt) => {
+    const positionMax = _getRefValue(_refTrack).clientWidth;
+    let position = _calcPositionFromEvent(evt);
+    if (_isNumber(position) && _isNumber(positionMax)) {
+      if (position < 0) {
+        position = 0;
+      } else if (position > positionMax) {
+        position = positionMax
+      }
+
+      let v;
+      v = position/positionMax * (max - min)
+      v = Math.round(v / step) * step + min
+      v = mathFns.roundBy(v, 5)
+
+      _updateValue(v)
     }
-
-    let v;
-    v = position/positionMax * (max - min)
-    v = Math.round(v / step) * step + min
-    v = mathFns.roundBy(v, 5)
-
-    _updateValue(event, v)
   }
-  , [dragged, _hMouseDown] = _useMouseDown(_setValueFromPosition);
+  , [isDragged, _hMouseDown] = _useMouseDown(_setValueFromPosition);
 
-
-  const _sliderHandlers = hasTouch ? {
-     onTouchStart: _hMouseDown
-  } : {
-    onMouseDown: _hMouseDown,
-    onMouseEnter: setHoveredTrue,
-    onMouseLeave: setHoveredFalse
-  }, _btHandlers = hasTouch ? void 0 : {
-      onFocus: setHoveredTrue,
-      onKeyDown: _hKeyDown,
-      onBlur: setHoveredFalse
-  }, _lineAfterStyle = hovered
-        ? {...S_LINE_AFTER, ...S_LINE_HOVERED}
-        : S_LINE_AFTER
-  , _circleStyle = dragged ? S_CIRCLE_DRAGGED : null
-  , _emberStyle = dragged ? S_EMBER : null
-  , _circleInnerEl = (hovered || dragged)
-        ? <div style={{ ...S_CIRCLE_INNER_EL, ..._emberStyle }} />
-        : null
+  const [_sliderHandlers, _btHandlers] = hasTouch
+     ? [{onTouchStart: _hMouseDown}, void 0]
+     : [{
+         onMouseDown: _hMouseDown,
+         onMouseEnter: setHoveredTrue,
+         onMouseLeave: setHoveredFalse
+        },{
+         onFocus: setHoveredTrue,
+         onKeyDown: _hKeyDown,
+         onBlur: setHoveredFalse
+       }]
+  , _lineAfterStyle = isHovered
+      ? S_LINE_AFTER_HOVERED
+      : S_LINE_AFTER
+  , [_circleStyle, _emberStyle] = isDragged
+      ? [S_CIRCLE_DRAGGED, S_EMBER]
+      : []
   , _percent = _toPercent(value, min, max)
   , _widthBeforeStyle = _crWidthStyle(_percent)
   , _widthAfterStyle = _crWidthStyle(100 - _percent)
@@ -249,9 +239,11 @@ const InputSlider = ({
            style={{...S_ROOT_CIRCLE, ..._circleStyle, ..._leftStyle }}
            {..._btHandlers}
         >
-          <div style={{ ...S_CIRCLE_INNER, ..._circleStyle}} >
-            {_circleInnerEl}
-          </div>
+          <CircleInner
+             is={isHovered || isDragged}
+             circleStyle={_circleStyle}
+             emberStyle={_emberStyle}
+          />
         </div>
       </div>
     </div>
@@ -260,6 +252,7 @@ const InputSlider = ({
 
 /*
 static propTypes = {
+  initialValue : PropTypes.number,
   step : PropTypes.number,
   min : PropTypes.number,
   max : PropTypes.number,
