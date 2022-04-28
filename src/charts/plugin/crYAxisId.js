@@ -1,3 +1,4 @@
+import mathFn from '../../math/mathFn';
 
 const _isUndef = v => typeof v === 'undefined';
 const _isStrNotEmpty = str => typeof str === 'string'
@@ -5,10 +6,7 @@ const _isStrNotEmpty = str => typeof str === 'string'
 const _isNumber = n => typeof n === 'number'
  && n-n === 0;
 
-const _crId = () => (
-  Date.now().toString(36) + Math.random().toString(36).substr(2, 4)
-).toUpperCase();
-
+const _crId = () => mathFn.crId().toUpperCase();
 //toChart.yAxis[].userOptions.id
 
 const _getAxisId = yAxis => {

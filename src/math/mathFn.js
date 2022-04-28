@@ -1,6 +1,7 @@
 import Big from 'big.js';
 
 import { Direction } from '../constants/Type';
+import crId from './crId';
 
 const fnEcho = value => value;
 
@@ -108,11 +109,7 @@ const mathFn = {
     }
   },
 
-  crId: (prefix) => (
-    (prefix || '') +
-    Date.now().toString(36) +
-    Math.random().toString(36).substring(2, 9)
-   )
+  crId
 }
 
 export default mathFn
