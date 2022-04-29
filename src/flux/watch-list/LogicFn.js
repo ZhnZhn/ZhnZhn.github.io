@@ -2,6 +2,13 @@ import MsgWatch from '../../constants/MsgWatch';
 
 import ut from '../../utils/fnUtil';
 
+import {
+  imArrPush,
+  imArrFactoryFilterByProp,
+  imArrFactoryEditByProp,
+  imArrInsertItem
+} from '../../utils/imArrFn';
+
 const  {
   notFoundItem,
   groupExisted,
@@ -59,13 +66,13 @@ const LogicFn = {
  },
  /* for DragDrop */
 
-  filter : ut.imArr.filterByPropFn(CAPTION),
-  getArrayWithObj : ut.imArr.push,
+  filter : imArrFactoryFilterByProp(CAPTION),
+  getArrayWithObj : imArrPush,
 
-  getArrayWithRename: ut.imArr.editByPropFn(CAPTION),
+  getArrayWithRename: imArrFactoryEditByProp(CAPTION),
 
   /* for DragDrop */
-  insertItemInArray : ut.imArr.insertItem,
+  insertItemInArray : imArrInsertItem,
   /* for DragDrop */
 
   findGroup : ut.obj.findInPropArrayByProp(GROUPS, CAPTION),
