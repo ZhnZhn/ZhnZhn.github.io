@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _MsgWatch = _interopRequireDefault(require("../../constants/MsgWatch"));
 
-var _fnUtil = _interopRequireDefault(require("../../utils/fnUtil"));
+var _fnArr = _interopRequireDefault(require("../../utils/fnArr"));
 
 var _imArrFn = require("../../utils/imArrFn");
 
@@ -81,8 +81,8 @@ const LogicFn = {
   /* for DragDrop */
   findGroup: (0, _factoryFindInPropArrayByProp.default)(GROUPS, CAPTION),
   findList: (0, _factoryFindInPropArrayByProp.default)(LISTS, CAPTION),
-  findIndex: _fnUtil.default.arr.findIndexByProp('caption'),
-  isInArraySameCaption: _fnUtil.default.arr.isSameByProp(CAPTION)
+  findIndex: _fnArr.default.findIndexByProp('caption'),
+  isInArraySameCaption: _fnArr.default.isSameByProp(CAPTION)
 };
 var _default = LogicFn;
 exports.default = _default;
