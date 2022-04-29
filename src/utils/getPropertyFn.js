@@ -1,5 +1,9 @@
+export const getC = item => {
+  const { caption, c } = item ?? {};
+  return '' + (caption ?? c ?? '');
+};
 
-const getV = (
+export const getV = (
   item,
   { isUpper, dfValue='' }={}
 ) => {
@@ -12,5 +16,3 @@ const getV = (
     ? _value.toUpperCase()
     : _value;
 }
-
-export default getV

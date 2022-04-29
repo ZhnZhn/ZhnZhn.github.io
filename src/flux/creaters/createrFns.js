@@ -1,5 +1,7 @@
-import getC from '../../utils/getC';
-import getV from '../../utils/getV';
+import {
+  getC,
+  getV
+} from '../../utils/getPropertyFn';
 import toUpperCaseFirst from '../../utils/toUpperCaseFirst';
 
 const _getC = item => toUpperCaseFirst(

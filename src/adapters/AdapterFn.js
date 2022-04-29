@@ -1,4 +1,3 @@
-
 import Big from 'big.js'
 
 import dateFormat from '../charts/dateFormat'
@@ -7,8 +6,10 @@ import { isInArrStr } from '../utils/arrFn';
 import fCompareBy from '../utils/fCompareBy';
 import fCompareByTwoProps from '../utils/fCompareByTwoProps';
 import formatAllNumber from '../utils/formatAllNumber';
-import getC from '../utils/getC';
-import getV from '../utils/getV';
+import {
+  getC,
+  getV
+} from '../utils/getPropertyFn';
 
 import {
   ymdToUTC,

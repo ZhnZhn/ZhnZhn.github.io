@@ -17,9 +17,7 @@ var _fCompareByTwoProps = _interopRequireDefault(require("../utils/fCompareByTwo
 
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 
-var _getC = _interopRequireDefault(require("../utils/getC"));
-
-var _getV = _interopRequireDefault(require("../utils/getV"));
+var _getPropertyFn = require("../utils/getPropertyFn");
 
 var _DateUtils = require("../utils/DateUtils");
 
@@ -81,8 +79,8 @@ const AdapterFn = { ..._crFn.default,
   getYear: _DateUtils.getYear,
   getCurrentYear: _DateUtils.getCurrentYear,
   monthIndex: _DateUtils.monthIndex,
-  getCaption: _getC.default,
-  getValue: _getV.default,
+  getCaption: _getPropertyFn.getC,
+  getValue: _getPropertyFn.getV,
   isInArrStr: _arrFn.isInArrStr,
   roundBy: _mathFn.default.roundBy,
   numberFormat: _formatAllNumber.default,

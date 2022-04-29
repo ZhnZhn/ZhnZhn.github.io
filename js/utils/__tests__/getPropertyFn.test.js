@@ -1,12 +1,38 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _getPropertyFn = require("../getPropertyFn");
 
-var _getV = _interopRequireDefault(require("../getV"));
-
-describe('getV', function () {
-  var fn = _getV["default"];
-  test('should return string item value', function () {
+describe('getC', () => {
+  const fn = _getPropertyFn.getC;
+  test('should return string item caption', () => {
+    expect(fn({
+      caption: 'Abc'
+    })).toBe('Abc');
+    expect(fn({
+      caption: '0'
+    })).toBe('0');
+    expect(fn({
+      caption: 0
+    })).toBe('0');
+    expect(fn({})).toBe('');
+    expect(fn()).toBe('');
+    expect(fn(null)).toBe('');
+  });
+  test('should return string item caption by item short prop name c', () => {
+    expect(fn({
+      c: 'Abc'
+    })).toBe('Abc');
+    expect(fn({
+      c: '0'
+    })).toBe('0');
+    expect(fn({
+      c: 0
+    })).toBe('0');
+  });
+});
+describe('getV', () => {
+  const fn = _getPropertyFn.getV;
+  test('should return string item value', () => {
     expect(fn({
       value: 'Abc'
     })).toBe('Abc');
@@ -17,7 +43,7 @@ describe('getV', function () {
       value: 0
     })).toBe('0');
   });
-  test('should return string item value by item short prop name v', function () {
+  test('should return string item value by item short prop name v', () => {
     expect(fn({
       v: 'Abc'
     })).toBe('Abc');
@@ -28,8 +54,8 @@ describe('getV', function () {
       v: 0
     })).toBe('0');
   });
-  test('should return string upperCase in case isUpper option', function () {
-    var option = {
+  test('should return string upperCase in case isUpper option', () => {
+    const option = {
       isUpper: true
     };
     expect(fn({
@@ -42,8 +68,8 @@ describe('getV', function () {
       value: 0
     }, option)).toBe('0');
   });
-  test('should return option dfValue or empty str in case value null or undefined', function () {
-    var option = {
+  test('should return option dfValue or empty str in case value null or undefined', () => {
+    const option = {
       dfValue: 'dfValue'
     };
     expect(fn({
@@ -71,8 +97,8 @@ describe('getV', function () {
       v: null
     })).toBe('');
   });
-  test('should retun empty string for edge case', function () {
-    var option = {
+  test('should retun empty string for edge case', () => {
+    const option = {
       isUpper: true
     };
     expect(fn({})).toBe('');
@@ -83,4 +109,4 @@ describe('getV', function () {
     expect(fn(null, option)).toBe('');
   });
 });
-//# sourceMappingURL=getV.test.js.map
+//# sourceMappingURL=getPropertyFn.test.js.map
