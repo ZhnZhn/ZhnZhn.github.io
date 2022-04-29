@@ -3,18 +3,9 @@ import { memo } from 'react'
 import CellColor from './CellColor'
 
 const CL_INPUT_COLOR = "va-b"
-
-const S = {
-  PANE: {
-    margin: 10
-  },
-  ROW: {
-    width: 120
-  },
-  COLOR: {
-    margin: 4
-  }
-}
+, S_PANE = { margin: 10 }
+, S_ROW = { width: 120 }
+, S_COLOR = { margin: 4 };
 
 const CellColorPane = memo(({ model, onClickCell }) => {
 
@@ -31,7 +22,7 @@ const CellColorPane = memo(({ model, onClickCell }) => {
          <CellColor
            key={_color}
            className={CL_INPUT_COLOR}
-           style={S.COLOR}
+           style={S_COLOR}
            color={_color}
            onClick={onClickCell.bind(null, _color)}
          />
@@ -40,7 +31,7 @@ const CellColorPane = memo(({ model, onClickCell }) => {
      _elRows.push((
        <div
          key={_idPrefix + r}
-         style={S.ROW}
+         style={S_ROW}
        >
          {_elCells}
        </div>
@@ -48,7 +39,7 @@ const CellColorPane = memo(({ model, onClickCell }) => {
    }
 
    return (
-    <div style={S.PANE}>
+    <div style={S_PANE}>
       {_elRows}
     </div>
   );
