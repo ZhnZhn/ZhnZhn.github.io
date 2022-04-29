@@ -1,14 +1,14 @@
 import isKeyEnter from '../zhn/isKeyEnter'
 import SvgMore from '../zhn/SvgMore'
 
+import { crAppearance } from './tableFn';
 import {
   S_THEAD,
   S_TH,
   S_BT_SVG_MORE,
   S_SVG_MORE,
   S_TH_MORE_SPAN
-} from './Style'
-import FN from './tableFn'
+} from './Style';
 
 const C = {
   UP: 'UP',
@@ -44,7 +44,7 @@ const _renderHeader = (props, _hThKeyDown) => {
     , {
         style,
         ariaSort, ariaLabel
-      } = FN.crAppearance({
+      } = crAppearance({
         C, pn, name, sortBy, sortTo
       })
     , _nameOrEl = hIndex === 0

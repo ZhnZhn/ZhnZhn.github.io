@@ -1,5 +1,8 @@
 import toLink from '../zhn/toLink'
-import FN from './tableFn'
+import {
+  crTdStyle,
+  toFormatValue
+} from './tableFn';
 import {
   CL_LINK,
   S_TD
@@ -25,7 +28,7 @@ const _crLinkEl = (id, title, fn) => {
 const _crTdStyle = (r, h) => {
   const { pn, style, isR } = h
   , v = r[pn]
-  , _tdStyle = FN.crTdStyle({ v, isR })
+  , _tdStyle = crTdStyle({ v, isR })
   ,  tdStyle  = (r.style || {})[pn];
 
   return {...style, ..._tdStyle, ...tdStyle};
@@ -33,7 +36,7 @@ const _crTdStyle = (r, h) => {
 const _crTdElOrTitle = (r, h, numberFormat, valueToHref) => {
   const { pn, isHref } = h
   , v = r[pn]
-  , _v = FN.toFormatValue({ h, v, fn: numberFormat })
+  , _v = toFormatValue({ h, v, fn: numberFormat })
   return  isHref
     ? _crLinkEl(r.id, _v, valueToHref)
     : _v;

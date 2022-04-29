@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _toLink = _interopRequireDefault(require("../zhn/toLink"));
 
-var _tableFn = _interopRequireDefault(require("./tableFn"));
+var _tableFn = require("./tableFn");
 
 var _Style = require("./Style");
 
@@ -32,7 +32,7 @@ const _crTdStyle = (r, h) => {
     isR
   } = h,
         v = r[pn],
-        _tdStyle = _tableFn.default.crTdStyle({
+        _tdStyle = (0, _tableFn.crTdStyle)({
     v,
     isR
   }),
@@ -50,7 +50,7 @@ const _crTdElOrTitle = (r, h, numberFormat, valueToHref) => {
     isHref
   } = h,
         v = r[pn],
-        _v = _tableFn.default.toFormatValue({
+        _v = (0, _tableFn.toFormatValue)({
     h,
     v,
     fn: numberFormat

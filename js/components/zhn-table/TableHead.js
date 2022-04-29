@@ -9,9 +9,9 @@ var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
 
-var _Style = require("./Style");
+var _tableFn = require("./tableFn");
 
-var _tableFn = _interopRequireDefault(require("./tableFn"));
+var _Style = require("./Style");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -62,7 +62,7 @@ const _renderHeader = (props, _hThKeyDown) => {
       style,
       ariaSort,
       ariaLabel
-    } = _tableFn.default.crAppearance({
+    } = (0, _tableFn.crAppearance)({
       C,
       pn,
       name,
