@@ -1,9 +1,6 @@
+import AdapterFn from '../../AdapterFn';
 
-import fnArr from '../../../utils/fnArr';
-import AdapterFn from '../../AdapterFn'
-
-const { getValue } = AdapterFn
-const { isInArrStr } = fnArr;
+const { isInArrStr, getValue } = AdapterFn;
 
 const C = {
   URL: "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/",

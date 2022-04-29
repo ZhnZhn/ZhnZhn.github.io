@@ -3,11 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _isInArrStr = _interopRequireDefault(require("./isInArrStr"));
-
-var _DateUtils = _interopRequireDefault(require("./DateUtils"));
+var _arrFn = require("./arrFn");
 
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
 
@@ -19,15 +17,14 @@ var _getV = _interopRequireDefault(require("./getV"));
 
 var _formatAllNumber = _interopRequireDefault(require("./formatAllNumber"));
 
-var ut = {
-  isInArrStr: _isInArrStr["default"],
-  dt: _DateUtils["default"],
-  fCompareBy: _fCompareBy["default"],
-  fCompareByTwoProps: _fCompareByTwoProps["default"],
-  getC: _getC["default"],
-  getV: _getV["default"],
-  formatAllNumber: _formatAllNumber["default"]
+const ut = {
+  isInArrStr: _arrFn.isInArrStr,
+  fCompareBy: _fCompareBy.default,
+  fCompareByTwoProps: _fCompareByTwoProps.default,
+  getC: _getC.default,
+  getV: _getV.default,
+  formatAllNumber: _formatAllNumber.default
 };
 var _default = ut;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ut.js.map

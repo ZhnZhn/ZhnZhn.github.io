@@ -1,4 +1,4 @@
-import isInArrStr from './isInArrStr'
+import { isInArrStr } from './arrFn';
 
 import fCompareBy from './fCompareBy'
 import fCompareByTwoProps from './fCompareByTwoProps'

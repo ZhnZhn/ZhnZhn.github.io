@@ -4,7 +4,7 @@ import mathFn from '../math/mathFn';
 import formatNumber from '../utils/formatNumber';
 import formatAllNumber from '../utils/formatAllNumber';
 
-import fnArr from '../utils/fnArr';
+import { arrFactoryFindIndexByProp } from '../utils/arrFn';
 import { dmyToUTC } from '../utils/DateUtils';
 
 import Chart from './Chart';
@@ -24,7 +24,7 @@ const _isFn = fn => typeof fn === 'function'
     && n-n===0
 , _isArr = Array.isArray
 , _assign = Object.assign
-, _findIndexByX = fnArr.findIndexByProp('x')
+, _findIndexByX = arrFactoryFindIndexByProp('x')
 
 , INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY
 , INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY

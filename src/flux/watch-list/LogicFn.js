@@ -1,6 +1,9 @@
 import MsgWatch from '../../constants/MsgWatch';
 
-import fnArr from '../../utils/fnArr';
+import {
+  arrFactoryFindIndexByProp,
+  arrFactoryIsSameByProp
+} from '../../utils/arrFn';
 
 import {
   imArrPush,
@@ -80,8 +83,8 @@ const LogicFn = {
   findGroup : factoryFindInPropArrayByProp(GROUPS, CAPTION),
   findList : factoryFindInPropArrayByProp(LISTS, CAPTION),
 
-  findIndex : fnArr.findIndexByProp('caption'),
-  isInArraySameCaption : fnArr.isSameByProp(CAPTION)
+  findIndex : arrFactoryFindIndexByProp('caption'),
+  isInArraySameCaption : arrFactoryIsSameByProp(CAPTION)
 
 };
 

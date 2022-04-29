@@ -13,9 +13,9 @@ var _formatNumber2 = _interopRequireDefault(require("../utils/formatNumber"));
 
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 
-var _fnArr = _interopRequireDefault(require("../utils/fnArr"));
+var _arrFn = require("../utils/arrFn");
 
-var _DateUtils = _interopRequireDefault(require("../utils/DateUtils"));
+var _DateUtils = require("../utils/DateUtils");
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
@@ -37,7 +37,7 @@ const _isFn = fn => typeof fn === 'function',
       _isNumber = n => typeof n === 'number' && n - n === 0,
       _isArr = Array.isArray,
       _assign = Object.assign,
-      _findIndexByX = _fnArr.default.findIndexByProp('x'),
+      _findIndexByX = (0, _arrFn.arrFactoryFindIndexByProp)('x'),
       INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY,
       INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY,
       C1_SECOND_Y_AXIS = '#f45b5b',
@@ -240,10 +240,9 @@ const ChartFn = {
 
   crValueMoving(chart, prev, dateTo) {
     const points = chart.series[0].data,
-          mlsUTC = _DateUtils.default.dmyToUTC(dateTo),
+          mlsUTC = (0, _DateUtils.dmyToUTC)(dateTo),
           index = _isNumber(mlsUTC) ? _findIndexByX(points, mlsUTC) : -1,
           valueTo = index === -1 ? void 0 : points[index].y;
-
     return _isNumber(valueTo) ? _assign({}, prev, crValueMoving({
       nowValue: prev.value,
       prevValue: valueTo,
