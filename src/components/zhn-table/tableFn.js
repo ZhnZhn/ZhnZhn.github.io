@@ -1,5 +1,11 @@
-
-import S from './Style'
+import {
+  TOKEN_NAN,
+  S_UP,
+  S_DOWN,
+  S_NAN,
+  S_TH_UP,
+  S_TH_DOWN
+} from './Style';
 
 const _isNotNumber = v => Number.isNaN(v) || v == null;
 
@@ -8,13 +14,13 @@ const _crThAriaLabel = (name, order) => {
 };
 
 const tableFn = {
-  crTdStyle: ({ S, v, isR }) => {
+  crTdStyle: ({ v, isR }) => {
     let style;
     if (isR) {
       if (_isNotNumber(v)) {
-        style = S.NAN
+        style = S_NAN
       } else {
-        style = v > 0 ? S.UP : S.DOWN;
+        style = v > 0 ? S_UP : S_DOWN;
       }
     }
     return style;
@@ -22,7 +28,7 @@ const tableFn = {
 
   toFormatValue: ({ h, v, fn }) => {
     if (h.isR && _isNotNumber(v)) {
-      return S.TOKEN_NAN;
+      return TOKEN_NAN;
     }
     if (h.isF && typeof fn === 'function') {
       return fn(v);
@@ -31,15 +37,15 @@ const tableFn = {
   },
 
 
-  crAppearance: ({ S, C, pn, name, sortBy, sortTo }) => {
+  crAppearance: ({ C, pn, name, sortBy, sortTo }) => {
     let style, ariaSort, ariaLabel;
     if (pn === sortBy) {
       if (sortTo === C.UP) {
-       style = S.TH_UP
+       style = S_TH_UP
        ariaSort = C.DESC
        ariaLabel = _crThAriaLabel(name, C.ASC)
       } else {
-        style = S.TH_DOWN
+        style = S_TH_DOWN
         ariaSort = C.ASC
         ariaLabel = _crThAriaLabel(name, C.DESC)
       }
@@ -48,8 +54,6 @@ const tableFn = {
     }
     return { style, ariaSort, ariaLabel };
   }
-
-
 };
 
 export default tableFn

@@ -1,44 +1,43 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _Style = _interopRequireDefault(require("./Style"));
+var _Style = require("./Style");
 
-var _isNotNumber = function _isNotNumber(v) {
-  return Number.isNaN(v) || v == null;
-};
+const _isNotNumber = v => Number.isNaN(v) || v == null;
 
-var _crThAriaLabel = function _crThAriaLabel(name, order) {
+const _crThAriaLabel = (name, order) => {
   return name + ": activate to sort column " + order;
 };
 
-var tableFn = {
-  crTdStyle: function crTdStyle(_ref) {
-    var S = _ref.S,
-        v = _ref.v,
-        isR = _ref.isR;
-    var style;
+const tableFn = {
+  crTdStyle: _ref => {
+    let {
+      v,
+      isR
+    } = _ref;
+    let style;
 
     if (isR) {
       if (_isNotNumber(v)) {
-        style = S.NAN;
+        style = _Style.S_NAN;
       } else {
-        style = v > 0 ? S.UP : S.DOWN;
+        style = v > 0 ? _Style.S_UP : _Style.S_DOWN;
       }
     }
 
     return style;
   },
-  toFormatValue: function toFormatValue(_ref2) {
-    var h = _ref2.h,
-        v = _ref2.v,
-        fn = _ref2.fn;
+  toFormatValue: _ref2 => {
+    let {
+      h,
+      v,
+      fn
+    } = _ref2;
 
     if (h.isR && _isNotNumber(v)) {
-      return _Style["default"].TOKEN_NAN;
+      return _Style.TOKEN_NAN;
     }
 
     if (h.isF && typeof fn === 'function') {
@@ -47,22 +46,23 @@ var tableFn = {
 
     return v;
   },
-  crAppearance: function crAppearance(_ref3) {
-    var S = _ref3.S,
-        C = _ref3.C,
-        pn = _ref3.pn,
-        name = _ref3.name,
-        sortBy = _ref3.sortBy,
-        sortTo = _ref3.sortTo;
-    var style, ariaSort, ariaLabel;
+  crAppearance: _ref3 => {
+    let {
+      C,
+      pn,
+      name,
+      sortBy,
+      sortTo
+    } = _ref3;
+    let style, ariaSort, ariaLabel;
 
     if (pn === sortBy) {
       if (sortTo === C.UP) {
-        style = S.TH_UP;
+        style = _Style.S_TH_UP;
         ariaSort = C.DESC;
         ariaLabel = _crThAriaLabel(name, C.ASC);
       } else {
-        style = S.TH_DOWN;
+        style = _Style.S_TH_DOWN;
         ariaSort = C.ASC;
         ariaLabel = _crThAriaLabel(name, C.DESC);
       }
@@ -71,12 +71,12 @@ var tableFn = {
     }
 
     return {
-      style: style,
-      ariaSort: ariaSort,
-      ariaLabel: ariaLabel
+      style,
+      ariaSort,
+      ariaLabel
     };
   }
 };
 var _default = tableFn;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=tableFn.js.map

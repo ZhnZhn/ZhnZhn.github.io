@@ -1,10 +1,8 @@
 import {renderHook, act} from '@testing-library/react-hooks';
-import useTable from '../useTable';
-
-const {
+import {
   useColumn,
   useSort
-} = useTable;
+} from '../useTable';
 
 const _getHookState = result => result.current[0];
 const _getHookFn = result => result.current[1];

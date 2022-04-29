@@ -1,6 +1,10 @@
 //import PropTypes from "prop-types";
 import useToggle from '../hooks/useToggle';
-import useTable from './useTable';
+import {
+  useMenu,
+  useColumn,
+  useSort
+} from './useTable';
 
 import crCn from '../zhn-utils/crCn';
 
@@ -8,13 +12,12 @@ import ModalMenu from './ModalMenu';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
 
-import S from './Style';
-
-const {
-  useMenu,
-  useColumn,
-  useSort
-} = useTable;
+import {
+  CL_GRID,
+  S_TABLE,
+  S_MENU_MORE,
+  S_WRAPPER_DIV
+} from './Style';
 
 const Table = ({
   className,
@@ -28,12 +31,12 @@ const Table = ({
   , [isMenuMore, toggleMenuMore] = useMenu()
   , [_headers, toggleColumn] = useColumn(headers)
   , [{_rows, sortBy, sortTo}, sortByPn] = useSort(rows)
-  , _tableCn = crCn([isGridLine, S.CL_GRID], className);
+  , _tableCn = crCn([isGridLine, CL_GRID], className);
 
   return (
-    <div style={S.WRAPPER_DIV}>
+    <div style={S_WRAPPER_DIV}>
       <ModalMenu
-        style={S.STYLE_MORE}
+        style={S_MENU_MORE}
         isShow={isMenuMore}
         onClose={toggleMenuMore}
         isGridLine={isGridLine}
@@ -45,7 +48,7 @@ const Table = ({
         role="grid"
         id={gridId}
         className={_tableCn}
-        style={S.TABLE}
+        style={S_TABLE}
       >
         <TableHead
           gridId={gridId}

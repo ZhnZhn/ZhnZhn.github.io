@@ -1,7 +1,13 @@
 import isKeyEnter from '../zhn/isKeyEnter'
 import SvgMore from '../zhn/SvgMore'
 
-import S from './Style'
+import {
+  S_THEAD,
+  S_TH,
+  S_BT_SVG_MORE,
+  S_SVG_MORE,
+  S_TH_MORE_SPAN
+} from './Style'
 import FN from './tableFn'
 
 const C = {
@@ -15,11 +21,11 @@ const C = {
 const ThMore = ({ name, onMenuMore }) => (
   <>
     <SvgMore
-       style={S.BT_SVG_MORE}
-       svgStyle={S.SVG_MORE}
+       style={S_BT_SVG_MORE}
+       svgStyle={S_SVG_MORE}
        onClick={onMenuMore}
     />
-    <span style={S.TH_MORE_SPAN}>
+    <span style={S_TH_MORE_SPAN}>
       {name}
     </span>
   </>
@@ -39,7 +45,7 @@ const _renderHeader = (props, _hThKeyDown) => {
         style,
         ariaSort, ariaLabel
       } = FN.crAppearance({
-        S, C, pn, name, sortBy, sortTo
+        C, pn, name, sortBy, sortTo
       })
     , _nameOrEl = hIndex === 0
         ? (<ThMore
@@ -53,7 +59,7 @@ const _renderHeader = (props, _hThKeyDown) => {
     return (
       <th
         key={h.name}
-        style={{...S.TH, ..._thStyle}}
+        style={{...S_TH, ..._thStyle}}
         rowSpan="1"
         colSpan="1"
         tabIndex="0"
@@ -76,7 +82,7 @@ const TableHead = (props) => {
     }
   }
   return (
-    <thead style={S.THEAD}>
+    <thead style={S_THEAD}>
        <tr>
          {_renderHeader(props, _hThKeyEnter)}
        </tr>

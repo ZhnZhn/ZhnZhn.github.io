@@ -3,13 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _jsxRuntime = require("react/jsx-runtime.js");
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
-var _useToggle2 = _interopRequireDefault(require("../hooks/useToggle"));
-
-var _useTable = _interopRequireDefault(require("./useTable"));
+var _useTable = require("./useTable");
 
 var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 
@@ -19,42 +17,35 @@ var _TableHead = _interopRequireDefault(require("./TableHead"));
 
 var _TableBody = _interopRequireDefault(require("./TableBody"));
 
-var _Style = _interopRequireDefault(require("./Style"));
+var _Style = require("./Style");
+
+var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-var useMenu = _useTable["default"].useMenu,
-    useColumn = _useTable["default"].useColumn,
-    useSort = _useTable["default"].useSort;
+const Table = _ref => {
+  let {
+    className,
+    gridId,
+    thMoreStyle,
+    rows,
+    headers,
+    tableFn
+  } = _ref;
 
-var Table = function Table(_ref) {
-  var className = _ref.className,
-      gridId = _ref.gridId,
-      thMoreStyle = _ref.thMoreStyle,
-      rows = _ref.rows,
-      headers = _ref.headers,
-      tableFn = _ref.tableFn;
-
-  var _useToggle = (0, _useToggle2["default"])(true),
-      isGridLine = _useToggle[0],
-      toogleGridLine = _useToggle[1],
-      _useMenu = useMenu(),
-      isMenuMore = _useMenu[0],
-      toggleMenuMore = _useMenu[1],
-      _useColumn = useColumn(headers),
-      _headers = _useColumn[0],
-      toggleColumn = _useColumn[1],
-      _useSort = useSort(rows),
-      _useSort$ = _useSort[0],
-      _rows = _useSort$._rows,
-      sortBy = _useSort$.sortBy,
-      sortTo = _useSort$.sortTo,
-      sortByPn = _useSort[1],
-      _tableCn = (0, _crCn["default"])([isGridLine, _Style["default"].CL_GRID], className);
+  const [isGridLine, toogleGridLine] = (0, _useToggle.default)(true),
+        [isMenuMore, toggleMenuMore] = (0, _useTable.useMenu)(),
+        [_headers, toggleColumn] = (0, _useTable.useColumn)(headers),
+        [{
+    _rows,
+    sortBy,
+    sortTo
+  }, sortByPn] = (0, _useTable.useSort)(rows),
+        _tableCn = (0, _crCn.default)([isGridLine, _Style.CL_GRID], className);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: _Style["default"].WRAPPER_DIV,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenu["default"], {
-      style: _Style["default"].STYLE_MORE,
+    style: _Style.S_WRAPPER_DIV,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenu.default, {
+      style: _Style.S_MENU_MORE,
       isShow: isMenuMore,
       onClose: toggleMenuMore,
       isGridLine: isGridLine,
@@ -65,8 +56,8 @@ var Table = function Table(_ref) {
       role: "grid",
       id: gridId,
       className: _tableCn,
-      style: _Style["default"].TABLE,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_TableHead["default"], {
+      style: _Style.S_TABLE,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_TableHead.default, {
         gridId: gridId,
         thMoreStyle: thMoreStyle,
         headers: _headers,
@@ -74,7 +65,7 @@ var Table = function Table(_ref) {
         sortTo: sortTo,
         onSort: sortByPn,
         onMenuMore: toggleMenuMore
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_TableBody["default"], {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_TableBody.default, {
         headers: _headers,
         rows: _rows,
         tableFn: tableFn
@@ -112,5 +103,5 @@ Table.propTypes = {
 
 
 var _default = Table;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=Table.js.map

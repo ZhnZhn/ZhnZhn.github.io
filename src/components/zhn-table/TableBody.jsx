@@ -1,6 +1,9 @@
 import toLink from '../zhn/toLink'
 import FN from './tableFn'
-import S from './Style'
+import {
+  CL_LINK,
+  S_TD
+} from './Style'
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -10,7 +13,7 @@ const _crLinkEl = (id, title, fn) => {
     : void 0;
   return (
     <a
-      className={S.CL_LINK}
+      className={CL_LINK}
       href={toLink(_href)}
     >
       {title}
@@ -22,7 +25,7 @@ const _crLinkEl = (id, title, fn) => {
 const _crTdStyle = (r, h) => {
   const { pn, style, isR } = h
   , v = r[pn]
-  , _tdStyle = FN.crTdStyle({ S, v, isR })
+  , _tdStyle = FN.crTdStyle({ v, isR })
   ,  tdStyle  = (r.style || {})[pn];
 
   return {...style, ..._tdStyle, ...tdStyle};
@@ -56,7 +59,7 @@ const _renderRows = (props) => {
         <td
           key={_key}
           role="cell"
-          style={{...S.TD, ..._style}}
+          style={{...S_TD, ..._style}}
         >
           {_elOrTitle}
         </td>
