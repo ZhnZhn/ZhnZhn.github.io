@@ -9,6 +9,8 @@ import {
   imArrInsertItem
 } from '../../utils/imArrFn';
 
+import factoryFindInPropArrayByProp from '../../utils/factoryFindInPropArrayByProp';
+
 const  {
   notFoundItem,
   groupExisted,
@@ -75,8 +77,8 @@ const LogicFn = {
   insertItemInArray : imArrInsertItem,
   /* for DragDrop */
 
-  findGroup : ut.obj.findInPropArrayByProp(GROUPS, CAPTION),
-  findList : ut.obj.findInPropArrayByProp(LISTS, CAPTION),
+  findGroup : factoryFindInPropArrayByProp(GROUPS, CAPTION),
+  findList : factoryFindInPropArrayByProp(LISTS, CAPTION),
 
   findIndex : ut.arr.findIndexByProp('caption'),
   isInArraySameCaption : ut.arr.isSameByProp(CAPTION)

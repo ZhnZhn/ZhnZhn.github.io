@@ -1,8 +1,7 @@
 import arr from './fnArr'
-import obj from './fnObj'
 
 const fnUtil = {
-  arr, obj
+  arr
 };
 
 export default fnUtil

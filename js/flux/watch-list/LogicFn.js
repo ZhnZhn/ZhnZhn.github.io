@@ -11,6 +11,8 @@ var _fnUtil = _interopRequireDefault(require("../../utils/fnUtil"));
 
 var _imArrFn = require("../../utils/imArrFn");
 
+var _factoryFindInPropArrayByProp = _interopRequireDefault(require("../../utils/factoryFindInPropArrayByProp"));
+
 const {
   notFoundItem,
   groupExisted,
@@ -77,8 +79,8 @@ const LogicFn = {
   insertItemInArray: _imArrFn.imArrInsertItem,
 
   /* for DragDrop */
-  findGroup: _fnUtil.default.obj.findInPropArrayByProp(GROUPS, CAPTION),
-  findList: _fnUtil.default.obj.findInPropArrayByProp(LISTS, CAPTION),
+  findGroup: (0, _factoryFindInPropArrayByProp.default)(GROUPS, CAPTION),
+  findList: (0, _factoryFindInPropArrayByProp.default)(LISTS, CAPTION),
   findIndex: _fnUtil.default.arr.findIndexByProp('caption'),
   isInArraySameCaption: _fnUtil.default.arr.isSameByProp(CAPTION)
 };

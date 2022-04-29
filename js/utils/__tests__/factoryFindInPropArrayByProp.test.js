@@ -2,12 +2,11 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _fnObj = _interopRequireDefault(require("../fnObj"));
+var _factoryFindInPropArrayByProp = _interopRequireDefault(require("../factoryFindInPropArrayByProp"));
 
-var findInPropArrayByProp = _fnObj["default"].findInPropArrayByProp;
-describe('findInPropArrayByProp', function () {
-  test('should return obj', function () {
-    var obj = {
+describe('factoryFindInPropArrayByProp', () => {
+  test('should return obj', () => {
+    const obj = {
       lists: [{
         a: 1
       }, {
@@ -16,7 +15,7 @@ describe('findInPropArrayByProp', function () {
         a: 3
       }]
     },
-        fn = findInPropArrayByProp('lists', 'a');
+          fn = (0, _factoryFindInPropArrayByProp.default)('lists', 'a');
     expect(typeof fn).toBe('function');
     expect(fn(obj, 1)).toEqual({
       a: 1
@@ -29,4 +28,4 @@ describe('findInPropArrayByProp', function () {
     });
   });
 });
-//# sourceMappingURL=fnObj.test.js.map
+//# sourceMappingURL=factoryFindInPropArrayByProp.test.js.map
