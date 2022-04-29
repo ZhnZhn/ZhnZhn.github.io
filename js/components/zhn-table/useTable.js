@@ -3,79 +3,73 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.useSort = exports.useMenu = exports.useColumn = void 0;
 
 var _react = require("react");
 
 var _compFactory = _interopRequireDefault(require("./compFactory"));
 
-var _Style = _interopRequireDefault(require("./Style"));
+var _Style = require("./Style");
 
-var C = {
-  UP: 'UP',
-  DOWN: 'DOWN'
+const SORT_TO_UP = 'UP',
+      SORT_TO_DOWN = 'DOWN';
+
+const useMenu = () => {
+  const [isMenuMore, _setIsMenuMore] = (0, _react.useState)(false),
+        toggleMenuMore = (0, _react.useCallback)(evt => {
+    evt.stopPropagation();
+
+    _setIsMenuMore(is => !is);
+  }, []);
+  return [isMenuMore, toggleMenuMore];
 };
-var useTable = {
-  useMenu: function useMenu() {
-    var _useState = (0, _react.useState)(false),
-        isMenuMore = _useState[0],
-        _setIsMenuMore = _useState[1],
-        toggleMenuMore = (0, _react.useCallback)(function (evt) {
-      evt.stopPropagation();
 
-      _setIsMenuMore(function (is) {
-        return !is;
-      });
-    }, []);
+exports.useMenu = useMenu;
 
-    return [isMenuMore, toggleMenuMore];
-  },
-  useColumn: function useColumn(initialArr) {
-    var _useState2 = (0, _react.useState)(initialArr || []),
-        arr = _useState2[0],
-        _setArr = _useState2[1],
-        hToggleBy = (0, _react.useCallback)(function (index) {
-      _setArr(function (arr) {
-        arr[index].isHide = !arr[index].isHide;
-        return [].concat(arr);
-      });
-    }, []);
-
-    return [arr, hToggleBy];
-  },
-  useSort: function useSort(initialRows) {
-    var _useState3 = (0, _react.useState)({
-      _rows: initialRows || []
-    }),
-        state = _useState3[0],
-        _setRows = _useState3[1],
-        sortByPn = (0, _react.useCallback)(function (pn) {
-      _setRows(function (_ref) {
-        var _rows = _ref._rows,
-            sortBy = _ref.sortBy,
-            sortTo = _ref.sortTo;
-
-        var _compBy = _compFactory["default"].compBy(_Style["default"].TOKEN_NAN, pn);
-
-        if (pn === sortBy && sortTo === C.UP) {
-          _rows = _rows.sort(_compFactory["default"].opCompBy(pn, _compBy));
-          sortTo = C.DOWN;
-        } else {
-          _rows = _rows.sort(_compBy);
-          sortTo = C.UP;
-        }
-
-        return {
-          _rows: _rows,
-          sortTo: sortTo,
-          sortBy: pn
-        };
-      });
-    }, []);
-
-    return [state, sortByPn];
-  }
+const useColumn = initialArr => {
+  const [arr, _setArr] = (0, _react.useState)(initialArr || []),
+        hToggleBy = (0, _react.useCallback)(index => {
+    _setArr(arr => {
+      arr[index].isHide = !arr[index].isHide;
+      return [...arr];
+    });
+  }, []);
+  return [arr, hToggleBy];
 };
-var _default = useTable;
-exports["default"] = _default;
+
+exports.useColumn = useColumn;
+
+const useSort = initialRows => {
+  const [state, _setRows] = (0, _react.useState)({
+    _rows: initialRows || []
+  }),
+        sortByPn = (0, _react.useCallback)(pn => {
+    _setRows(_ref => {
+      let {
+        _rows,
+        sortBy,
+        sortTo
+      } = _ref;
+
+      const _compBy = _compFactory.default.compBy(_Style.TOKEN_NAN, pn);
+
+      if (pn === sortBy && sortTo === SORT_TO_UP) {
+        _rows = _rows.sort(_compFactory.default.opCompBy(pn, _compBy));
+        sortTo = SORT_TO_DOWN;
+      } else {
+        _rows = _rows.sort(_compBy);
+        sortTo = SORT_TO_UP;
+      }
+
+      return {
+        _rows,
+        sortTo,
+        sortBy: pn
+      };
+    });
+  }, []);
+  return [state, sortByPn];
+};
+
+exports.useSort = useSort;
 //# sourceMappingURL=useTable.js.map
