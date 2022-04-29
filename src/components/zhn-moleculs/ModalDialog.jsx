@@ -7,10 +7,17 @@ import crCn from '../zhn-utils/crCn';
 
 import SvgClose from '../zhn/SvgClose';
 import FlatButton from '../zhn-m/FlatButton';
-
 import MenuMore from './MenuMore';
 
-import STYLE from './Dialog.Style';
+import {
+  S_SHOW,
+  S_HIDE,
+  S_ROOT_DIV,
+  S_CAPTION_DIV,
+  S_SVG_CLOSE,
+  S_COMMAND_DIV,
+  S_BT
+} from './Dialog.Style';
 
 const {
   useKeyEscape,
@@ -38,12 +45,12 @@ const CommandButtons = ({
   withoutClose,
   onClose
 }) => (
-  <div style={STYLE.COMMAND_DIV}>
+  <div style={S_COMMAND_DIV}>
     {commandButtons}
     { !withoutClose &&
         <FlatButton
           key="close"
-          style={STYLE.BT}
+          style={S_BT}
           caption="Close"
           title="Close Modal Dialog"
           onClick={onClose}
@@ -76,7 +83,7 @@ const ModalDialog = forwardRef(({
   , _hKeyDown = useKeyEscape(onClose)
   , [isMore, toggleIsMore] = useToggle(false)
   , TS = useTheme(TH_ID)
-  , _style = isShow ? STYLE.SHOW : STYLE.HIDE
+  , _style = isShow ? S_SHOW : S_HIDE
   , _className = crCn(CL_MD, [isShow, CL_SHOWING]);
 
   return (
@@ -89,7 +96,7 @@ const ModalDialog = forwardRef(({
         aria-hidden={!isShow}
         className={_className}
         style={{
-          ...STYLE.ROOT_DIV, ...S_ROOT_DIV_MODAL,
+          ...S_ROOT_DIV, ...S_ROOT_DIV_MODAL,
           ...style, ..._style,
           ...TS.ROOT, ...TS.EL_BORDER
         }}
@@ -97,7 +104,7 @@ const ModalDialog = forwardRef(({
         onKeyDown={_hKeyDown}
      >
      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
-         <div style={{...STYLE.CAPTION_DIV, ...TS.EL}}>
+         <div style={{...S_CAPTION_DIV, ...TS.EL}}>
            <MenuMore
              ref={refBtMore}
              isMore={isMore}
@@ -109,7 +116,7 @@ const ModalDialog = forwardRef(({
               {caption}
             </span>
             <SvgClose
-              style={STYLE.SVG_CLOSE}
+              style={S_SVG_CLOSE}
               onClose={onClose}
             />
          </div>

@@ -12,7 +12,15 @@ import MenuMore from './MenuMore';
 
 import Interact from '../../utils/Interact';
 
-import STYLE from './Dialog.Style';
+import {
+  S_SHOW,
+  S_HIDE,
+  S_ROOT_DIV,
+  S_CAPTION_DIV,
+  S_COMMAND_DIV,
+  S_BT,
+  S_SVG_CLOSE
+} from './Dialog.Style';
 
 const {
   useToggle,
@@ -40,13 +48,13 @@ const CommandButtons = ({
   onShow,
   onClose
 }) => (
-  <div style={STYLE.COMMAND_DIV}>
+  <div style={S_COMMAND_DIV}>
     {buttons}
     {
       _isFn(onShow) && <FlatButton
         key="show"
         timeout={0}
-        style={STYLE.BT}
+        style={S_BT}
         caption="Show"
         title="Show Item Container"
         onClick={onShow}
@@ -55,9 +63,9 @@ const CommandButtons = ({
     <FlatButton
       key="close"
       timeout={0}
-      style={STYLE.BT}
+      style={S_BT}
       caption="Close"
-      title="Close Draggable Dialog"      
+      title="Close Draggable Dialog"
       onClick={onClose}
     />
   </div>
@@ -83,7 +91,7 @@ const DraggableDialog = forwardRef(({
   , [isMore, toggleIsMore] = useToggle(false)
   , TS = useTheme(TH_ID)
   , _className = crCn(CL_DRAGGABLE_DIALOG, [isShow, CL_SHOWING])
-  , _styleShow = isShow ? STYLE.SHOW : STYLE.HIDE;
+  , _styleShow = isShow ? S_SHOW : S_HIDE;
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
@@ -103,7 +111,7 @@ const DraggableDialog = forwardRef(({
       className={_className}
       style={{
         ...style,
-        ...STYLE.ROOT_DIV, ...S_ROOT_DIV_DRAG,
+        ...S_ROOT_DIV, ...S_ROOT_DIV_DRAG,
         ..._styleShow,
         ...TS.ROOT, ...TS.EL_BORDER
       }}
@@ -111,7 +119,7 @@ const DraggableDialog = forwardRef(({
       onKeyDown={_hKeyDown}
      >
     {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
-      <div style={{...STYLE.CAPTION_DIV, ...TS.EL}}>
+      <div style={{...S_CAPTION_DIV, ...TS.EL}}>
         <MenuMore
           ref={refBtMore}
           isMore={isMore}
@@ -123,7 +131,7 @@ const DraggableDialog = forwardRef(({
           {caption}
         </span>
         <SvgClose
-           style={STYLE.SVG_CLOSE}
+           style={S_SVG_CLOSE}
            onClose={onClose}
         />
       </div>
