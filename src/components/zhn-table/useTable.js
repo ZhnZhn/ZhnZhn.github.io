@@ -1,6 +1,9 @@
 import { useState, useCallback } from 'react';
 
-import F from './compFactory';
+import {
+  factoryCompareBy,
+  factoryOpCompareBy
+} from './compareFactory';
 import { TOKEN_NAN } from './Style';
 
 const SORT_TO_UP = 'UP'
@@ -30,9 +33,9 @@ export const useSort = (initialRows) => {
   const [state, _setRows] = useState({_rows: initialRows || []})
   , sortByPn = useCallback((pn) => {
       _setRows(({ _rows, sortBy, sortTo }) => {
-        const _compBy = F.compBy(TOKEN_NAN, pn)
+        const _compBy = factoryCompareBy(TOKEN_NAN, pn)
         if (pn === sortBy && sortTo === SORT_TO_UP) {
-          _rows = _rows.sort(F.opCompBy(pn, _compBy))
+          _rows = _rows.sort(factoryOpCompareBy(pn, _compBy))
           sortTo = SORT_TO_DOWN
         } else {
           _rows = _rows.sort(_compBy)

@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.useSort = exports.useMenu = exports.useColumn = void 0;
 
 var _react = require("react");
 
-var _compFactory = _interopRequireDefault(require("./compFactory"));
+var _compareFactory = require("./compareFactory");
 
 var _Style = require("./Style");
 
@@ -51,10 +49,10 @@ const useSort = initialRows => {
         sortTo
       } = _ref;
 
-      const _compBy = _compFactory.default.compBy(_Style.TOKEN_NAN, pn);
+      const _compBy = (0, _compareFactory.factoryCompareBy)(_Style.TOKEN_NAN, pn);
 
       if (pn === sortBy && sortTo === SORT_TO_UP) {
-        _rows = _rows.sort(_compFactory.default.opCompBy(pn, _compBy));
+        _rows = _rows.sort((0, _compareFactory.factoryOpCompareBy)(pn, _compBy));
         sortTo = SORT_TO_DOWN;
       } else {
         _rows = _rows.sort(_compBy);
