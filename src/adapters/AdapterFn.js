@@ -2,7 +2,14 @@
 import Big from 'big.js'
 
 import dateFormat from '../charts/dateFormat'
-import ut from '../utils/ut'
+
+import { isInArrStr } from '../utils/arrFn';
+import fCompareBy from '../utils/fCompareBy';
+import fCompareByTwoProps from '../utils/fCompareByTwoProps';
+import formatAllNumber from '../utils/formatAllNumber';
+import getC from '../utils/getC';
+import getV from '../utils/getV';
+
 import {
   ymdToUTC,
   ymdhmsToUTC,
@@ -25,13 +32,6 @@ import pointFn from './pointFn'
 import legendFn from './legendFn'
 
 const { toTd } = dateFormat
-const {
-  isInArrStr,
-  fCompareBy,
-  fCompareByTwoProps,
-  getC, getV,
-  formatAllNumber
-} = ut
 , { findMinY, findMaxY, filterTrimZero } = seriaFn;
 
 const EMPTY = '';

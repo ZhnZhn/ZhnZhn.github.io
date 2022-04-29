@@ -9,7 +9,17 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _dateFormat = _interopRequireDefault(require("../charts/dateFormat"));
 
-var _ut = _interopRequireDefault(require("../utils/ut"));
+var _arrFn = require("../utils/arrFn");
+
+var _fCompareBy = _interopRequireDefault(require("../utils/fCompareBy"));
+
+var _fCompareByTwoProps = _interopRequireDefault(require("../utils/fCompareByTwoProps"));
+
+var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
+
+var _getC = _interopRequireDefault(require("../utils/getC"));
+
+var _getV = _interopRequireDefault(require("../utils/getV"));
 
 var _DateUtils = require("../utils/DateUtils");
 
@@ -29,15 +39,7 @@ var _legendFn = _interopRequireDefault(require("./legendFn"));
 
 const {
   toTd
-} = _dateFormat.default;
-const {
-  isInArrStr,
-  fCompareBy,
-  fCompareByTwoProps,
-  getC,
-  getV,
-  formatAllNumber
-} = _ut.default,
+} = _dateFormat.default,
       {
   findMinY,
   findMaxY,
@@ -79,18 +81,18 @@ const AdapterFn = { ..._crFn.default,
   getYear: _DateUtils.getYear,
   getCurrentYear: _DateUtils.getCurrentYear,
   monthIndex: _DateUtils.monthIndex,
-  getCaption: getC,
-  getValue: getV,
-  isInArrStr,
+  getCaption: _getC.default,
+  getValue: _getV.default,
+  isInArrStr: _arrFn.isInArrStr,
   roundBy: _mathFn.default.roundBy,
-  numberFormat: formatAllNumber,
+  numberFormat: _formatAllNumber.default,
   isNumberOrNull: v => _isNumber(v) || v === null,
   isYNumber: _fIsNumber('y'),
   toFloatOrEmpty: _fToFloatOr(''),
-  compareByDate: fCompareBy(0),
-  compareByY: fCompareBy('y'),
-  compareByValue: fCompareBy('value'),
-  compareByValueId: fCompareByTwoProps('value', 'id'),
+  compareByDate: (0, _fCompareBy.default)(0),
+  compareByY: (0, _fCompareBy.default)('y'),
+  compareByValue: (0, _fCompareBy.default)('value'),
+  compareByValueId: (0, _fCompareByTwoProps.default)('value', 'id'),
   crValueMoving: _ref => {
     let {
       bNowValue = (0, _big.default)('0.0'),
@@ -100,7 +102,7 @@ const AdapterFn = { ..._crFn.default,
     return _mathFn.default.crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
-      fnFormat: formatAllNumber,
+      fnFormat: _formatAllNumber.default,
       dfR
     });
   },
@@ -126,7 +128,7 @@ const AdapterFn = { ..._crFn.default,
         bPrevValue,
         dfR
       }),
-      valueTo: formatAllNumber(bPrevValue),
+      valueTo: (0, _formatAllNumber.default)(bPrevValue),
       date,
       dateTo
     };

@@ -1,8 +1,7 @@
-
-import ut from '../../utils/ut';
+import getC from '../../utils/getC';
+import getV from '../../utils/getV';
 import toUpperCaseFirst from '../../utils/toUpperCaseFirst';
 
-const { getC, getV } = ut;
 const _getC = item => toUpperCaseFirst(
   item && item.sc || getC(item)
 );
