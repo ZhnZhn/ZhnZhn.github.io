@@ -1,18 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../src/math/tsIndicators.js"
- ],
- "file": "../../src/math/tsIndicators.js",
- "names": [
-  "tsIndicators",
-  "sma",
-  "mfi",
-  "momAth",
-  "categoryRate",
-  "categoryDiff",
-  "categoryRoc",
-  "pby10"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AAEA;;AACA;;AACA;;AACA;;AAEA,IAAMA,YAAY,GAAG;AACnBC,EAAAA,GAAG,EAAHA,eADmB;AACdC,EAAAA,GAAG,EAAHA,eADc;AACTC,EAAAA,MAAM,EAANA,kBADS;AAEnBC,EAAAA,YAAY,EAAZA,wBAFmB;AAELC,EAAAA,YAAY,EAAZA,wBAFK;AAESC,EAAAA,WAAW,EAAXA,uBAFT;AAGnBC,EAAAA,KAAK,EAALA;AAHmB,CAArB;eAMeP,Y"
-}
+{"version":3,"sources":["../../src/math/tsIndicators.js"],"names":["tsIndicators","sma","mfi","momAth","categoryRate","categoryDiff","categoryRoc","pby10"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AAEA;;AAKA;;AAEA,MAAMA,YAAY,GAAG;AACnBC,EAAAA,GAAG,EAAHA,YADmB;AAEnBC,EAAAA,GAAG,EAAHA,YAFmB;AAGnBC,EAAAA,MAAM,EAANA,eAHmB;AAInBC,EAAAA,YAAY,EAAZA,wBAJmB;AAKnBC,EAAAA,YAAY,EAAZA,wBALmB;AAMnBC,EAAAA,WAAW,EAAXA,uBANmB;AAOnBC,EAAAA,KAAK,EAALA;AAPmB,CAArB;eAUeP,Y","sourcesContent":["import sma from './sma';\r\nimport mfi from './mfi';\r\nimport momAth from './momAth';\r\n\r\nimport {\r\n  categoryDiff,\r\n  categoryRate,\r\n  categoryRoc\r\n} from './categoryFn';\r\nimport pby10 from './pby10';\r\n\r\nconst tsIndicators = {\r\n  sma,\r\n  mfi,\r\n  momAth,\r\n  categoryRate,\r\n  categoryDiff,\r\n  categoryRoc,\r\n  pby10\r\n};\r\n\r\nexport default tsIndicators\r\n"],"file":"tsIndicators.js"}

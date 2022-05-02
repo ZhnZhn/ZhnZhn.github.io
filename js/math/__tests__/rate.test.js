@@ -1,0 +1,22 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _rate = _interopRequireDefault(require("../rate"));
+
+describe("rate", () => {
+  const calc = _rate.default;
+  test("should calc rate", () => {
+    expect(calc(100, 10)).toBe(10);
+    expect(() => calc(100, 0)).toThrowError('[big.js] Division by zero');
+  });
+  test("should fixed calc rate by 2", () => {
+    //3.3333...
+    expect(calc(100, 30)).toBe(3.33); //3.44827...
+
+    expect(calc(100, 29)).toBe(3.45); //4.5454...
+
+    expect(calc(100, 22)).toBe(4.55);
+  });
+});
+//# sourceMappingURL=rate.test.js.map

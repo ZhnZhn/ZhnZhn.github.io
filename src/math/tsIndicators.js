@@ -1,15 +1,21 @@
-import sma from './sma'
-import mfi from './mfi'
-import momAth from './momAth'
+import sma from './sma';
+import mfi from './mfi';
+import momAth from './momAth';
 
-import categoryRate from './categoryRate'
-import categoryDiff from './categoryDiff'
-import categoryRoc from './categoryRoc'
-import pby10 from './pby10'
+import {
+  categoryDiff,
+  categoryRate,
+  categoryRoc
+} from './categoryFn';
+import pby10 from './pby10';
 
 const tsIndicators = {
-  sma, mfi, momAth,
-  categoryRate, categoryDiff, categoryRoc,
+  sma,
+  mfi,
+  momAth,
+  categoryRate,
+  categoryDiff,
+  categoryRoc,
   pby10
 };
 
