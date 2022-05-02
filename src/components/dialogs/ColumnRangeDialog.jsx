@@ -1,12 +1,12 @@
 import { Component, createRef } from 'react'
 
-import fn from '../../charts/seriaFns'
+import { columnRange } from '../../charts/seriaFns';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import D from './DialogCell'
 
 const S_TEXT = {
-  padding: '16px 0 0 16px',  
+  padding: '16px 0 0 16px',
   fontWeight: 600
 }
 , S_ROW = { paddingLeft: 8 }
@@ -93,7 +93,7 @@ class ColumnRangeDialog extends Component {
      , _series = chart.series
      , _s1 = _series[_fromIndex]
      , _s2 = _series[_toIndex]
-     , _d = fn.columnRange(_s1.data, _s2.data);
+     , _d = columnRange(_s1.data, _s2.data);
 
      this._heWidth(this._refW.current.getValue())
      this._heRadius1(this._refR1.current.getValue())
