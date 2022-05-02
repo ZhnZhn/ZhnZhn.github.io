@@ -1,12 +1,10 @@
 import Big from 'big.js';
 
-import fns from './seriaHelperFn'
-
-const {
+import {
   isNotEmptyArr,
   isNumber,
   crPointGetter
-} = fns;
+} from './seriaHelperFn';
 
 const sma = (data, period=1) => {
   const dataSma = []

@@ -1,11 +1,8 @@
-import fns from './seriaHelperFn'
-
-const {
+import {
   isNotEmptyArr,
   isNumber,
   crPointGetter
-} = fns;
-
+} from './seriaHelperFn';
 
 const _crIndicatorData = (d, rt, calc) => {
   const _d = []

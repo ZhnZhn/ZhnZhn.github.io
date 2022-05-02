@@ -1,101 +1,94 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.isNumber = exports.isNotEmptyArr = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.fGetY = exports.crPointGetter = void 0;
 
-var _isArr = Array.isArray,
-    _isNumber = function _isNumber(n) {
-  return typeof n === "number" && n - n === 0;
-},
-    _isUndef = function _isUndef(v) {
-  return typeof v === "undefined";
-},
-    _isObj = function _isObj(obj) {
-  return typeof obj === "object" && obj !== null;
-};
+const _isArr = Array.isArray,
+      _isNumber = n => typeof n === "number" && n - n === 0,
+      _isUndef = v => typeof v === "undefined",
+      _isObj = obj => typeof obj === "object" && obj !== null;
 
-var seriaHelperFn = {
-  isNotEmptyArr: function isNotEmptyArr(arr) {
-    if (!_isArr(arr)) {
-      return false;
-    }
-
-    for (var i = 0; i < arr.length; i++) {
-      if (_isObj(arr[i])) {
-        return true;
-      }
-    }
-
+const isNotEmptyArr = arr => {
+  if (!_isArr(arr)) {
     return false;
-  },
-  isNumber: _isNumber,
-  crPointGetter: function crPointGetter(data) {
-    var getX = _isUndef(data[0].x) ? function (p) {
-      return p[0];
-    } : function (p) {
-      return p.x;
-    },
-        getY = _isUndef(data[0].y) ? function (p) {
-      return p[1];
-    } : function (p) {
-      return p.y;
-    };
-    return {
-      getX: getX,
-      getY: getY
-    };
-  },
-  fGetY: function fGetY(point) {
-    if (!point) {
-      return;
-    }
-
-    if (_isArr(point)) {
-      return function (p) {
-        return p[1];
-      };
-    }
-
-    if (_isNumber(point.y)) {
-      return function (p) {
-        return p.y;
-      };
-    }
-
-    return;
-  },
-  getZeroCountFromStart: function getZeroCountFromStart(arr, getY) {
-    var _toIndex = -1,
-        i = 0;
-
-    for (; i < arr.length; i++) {
-      var _y = getY(arr[i]);
-
-      if (_y === 0 || _y === null) {
-        _toIndex = i;
-      } else {
-        break;
-      }
-    }
-
-    return _toIndex + 1;
-  },
-  getZeroIndexFromEnd: function getZeroIndexFromEnd(arr, getY) {
-    var _zeroIndex = 0;
-
-    for (var i = arr.length - 1; i > -1; i--) {
-      var _y = getY(arr[i]);
-
-      if (_y === 0 || _y === null) {
-        _zeroIndex = i;
-      } else {
-        break;
-      }
-    }
-
-    return _zeroIndex;
   }
+
+  for (let i = 0; i < arr.length; i++) {
+    if (_isObj(arr[i])) {
+      return true;
+    }
+  }
+
+  return false;
 };
-var _default = seriaHelperFn;
-exports["default"] = _default;
+
+exports.isNotEmptyArr = isNotEmptyArr;
+const isNumber = _isNumber;
+exports.isNumber = isNumber;
+
+const crPointGetter = data => {
+  const getX = _isUndef(data[0].x) ? p => p[0] : p => p.x,
+        getY = _isUndef(data[0].y) ? p => p[1] : p => p.y;
+  return {
+    getX,
+    getY
+  };
+};
+
+exports.crPointGetter = crPointGetter;
+
+const fGetY = point => {
+  if (!point) {
+    return;
+  }
+
+  if (_isArr(point)) {
+    return p => p[1];
+  }
+
+  if (_isNumber(point.y)) {
+    return p => p.y;
+  }
+
+  return;
+};
+
+exports.fGetY = fGetY;
+
+const getZeroCountFromStart = (arr, getY) => {
+  let _toIndex = -1,
+      i = 0;
+
+  for (; i < arr.length; i++) {
+    const _y = getY(arr[i]);
+
+    if (_y === 0 || _y === null) {
+      _toIndex = i;
+    } else {
+      break;
+    }
+  }
+
+  return _toIndex + 1;
+};
+
+exports.getZeroCountFromStart = getZeroCountFromStart;
+
+const getZeroIndexFromEnd = (arr, getY) => {
+  let _zeroIndex = 0;
+
+  for (let i = arr.length - 1; i > -1; i--) {
+    const _y = getY(arr[i]);
+
+    if (_y === 0 || _y === null) {
+      _zeroIndex = i;
+    } else {
+      break;
+    }
+  }
+
+  return _zeroIndex;
+};
+
+exports.getZeroIndexFromEnd = getZeroIndexFromEnd;
 //# sourceMappingURL=seriaHelperFn.js.map

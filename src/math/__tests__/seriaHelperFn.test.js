@@ -1,13 +1,11 @@
-import fns from '../seriaHelperFn'
-
-const {
+import {
   isNotEmptyArr,
   isNumber,
   crPointGetter,
   fGetY,
   getZeroCountFromStart,
   getZeroIndexFromEnd
-} = fns
+} from '../seriaHelperFn';
 
 describe("isNotEmptyArr", ()=>{
   const fn= isNotEmptyArr;

@@ -3,16 +3,14 @@ import Big from 'big.js'
 import mathFn from './mathFn'
 import fIndicatorCalc from './fIndicatorCalc'
 import roc from './roc'
-import fns from './seriaHelperFn'
-
-const {
+import {
   isNotEmptyArr,
   isNumber,
   crPointGetter,
   fGetY,
   getZeroCountFromStart,
   getZeroIndexFromEnd
-} = fns
+} from './seriaHelperFn';
 
 const _isArr = Array.isArray
 , _isNaN = Number.isNaN;
