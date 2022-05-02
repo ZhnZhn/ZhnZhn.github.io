@@ -5,19 +5,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _tsIndicators = _interopRequireDefault(require("../math/tsIndicators"));
+var _tsIndicators = require("../math/tsIndicators");
 
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
-const {
-  categoryRate,
-  categoryDiff,
-  categoryRoc,
-  pby10,
-  sma,
-  mfi,
-  momAth
-} = _tsIndicators.default;
 const {
   crMfiConfig,
   crMomAthConfig
@@ -104,13 +95,13 @@ const IndicatorBuilder = {
 
     return false;
   },
-  addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
-  addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2'),
-  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S1 from S2'),
+  addCategoryRateTo: _fCategoryCalc(_tsIndicators.categoryRate, 'Rate S1/S2'),
+  addCategoryDiffTo: _fCategoryCalc(_tsIndicators.categoryDiff, 'Diff S1-S2'),
+  addCategoryRocTo: _fCategoryCalc(_tsIndicators.categoryRoc, 'ROC S1 from S2'),
   powerBy10: (chart, power) => {
     const seria = chart.series[0],
           name = seria.getName(),
-          [dataP, by] = pby10(seria.data, power);
+          [dataP, by] = (0, _tsIndicators.pby10)(seria.data, power);
     seria.update({
       data: dataP,
       name: name + "*" + by
@@ -122,7 +113,7 @@ const IndicatorBuilder = {
       period
     } = option,
           data = chart.series[0].data,
-          dataSma = sma(data, period);
+          dataSma = (0, _tsIndicators.sma)(data, period);
 
     if (dataSma.length > 0) {
       return _addToChartSeria(chart, {
@@ -138,13 +129,13 @@ const IndicatorBuilder = {
   },
   crMfiConfig: (chart, period, id) => {
     const data = chart.options.zhPoints,
-          [dataMfi, nNotFullPoint] = mfi(data, period),
+          [dataMfi, nNotFullPoint] = (0, _tsIndicators.mfi)(data, period),
           titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
     return crMfiConfig(id, id + titleNotFullPoint, dataMfi);
   },
   crMomAthConfig: chart => {
     const data = chart.options.zhPoints;
-    return crMomAthConfig(momAth(data));
+    return crMomAthConfig((0, _tsIndicators.momAth)(data));
   }
 };
 var _default = IndicatorBuilder;

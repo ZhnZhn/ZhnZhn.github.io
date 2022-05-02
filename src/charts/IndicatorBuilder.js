@@ -1,11 +1,14 @@
-import tsIndicators from '../math/tsIndicators'
+import {  
+  categoryDiff,
+  categoryRate,
+  categoryRoc,
+  sma,
+  mfi,
+  momAth,
+  pby10
+} from '../math/tsIndicators';
 import ChartConfig from './ChartConfig';
 
-const {
-  categoryRate, categoryDiff, categoryRoc,
-  pby10,
-  sma, mfi, momAth
-} = tsIndicators;
 const {
   crMfiConfig,
   crMomAthConfig
@@ -52,7 +55,7 @@ const _fCategoryCalc = (calc, name) => (chart, rc) => {
 const _addToChartSeria = (chart, option) => {
   const seria = ChartConfig.crSeria(option)
   , _seriaIns = chart.addSeries(seria, true, true);
-  return (_seriaIns || {}).color;  
+  return (_seriaIns || {}).color;
 };
 
 const IndicatorBuilder = {

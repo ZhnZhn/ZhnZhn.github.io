@@ -1,22 +1,15 @@
-import sma from './sma';
-import mfi from './mfi';
-import momAth from './momAth';
+import _sma from './sma';
+import _mfi from './mfi';
+import _momAth from './momAth';
+import _pby10 from './pby10';
 
-import {
+export {
   categoryDiff,
   categoryRate,
   categoryRoc
 } from './categoryFn';
-import pby10 from './pby10';
 
-const tsIndicators = {
-  sma,
-  mfi,
-  momAth,
-  categoryRate,
-  categoryDiff,
-  categoryRoc,
-  pby10
-};
-
-export default tsIndicators
+export const sma = _sma
+export const mfi = _mfi
+export const momAth = _momAth
+export const pby10 = _pby10
