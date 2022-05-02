@@ -11,6 +11,8 @@ var _mathFn = _interopRequireDefault(require("./mathFn"));
 
 var _fIndicatorCalc = _interopRequireDefault(require("./fIndicatorCalc"));
 
+var _diff = _interopRequireDefault(require("./diff"));
+
 var _roc = _interopRequireDefault(require("./roc"));
 
 var _seriaHelperFn = require("./seriaHelperFn");
@@ -23,7 +25,7 @@ const _calcChanges = (yPrev, yNext) => {
     return null;
   }
 
-  return parseFloat((0, _big.default)(yNext).minus(yPrev).toString());
+  return (0, _diff.default)(yNext, yPrev);
 };
 
 const _fFindY = (initialValue, findY) => data => {

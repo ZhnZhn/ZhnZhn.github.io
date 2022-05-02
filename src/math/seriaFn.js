@@ -2,6 +2,7 @@ import Big from 'big.js'
 
 import mathFn from './mathFn'
 import fIndicatorCalc from './fIndicatorCalc'
+import diff from './diff'
 import roc from './roc'
 import {
   isNotEmptyArr,
@@ -19,7 +20,7 @@ const _calcChanges = (yPrev, yNext) => {
   if (!isNumber(yPrev) || !isNumber(yNext)) {
     return null;
   }
-  return parseFloat(Big(yNext).minus(yPrev).toString());
+  return diff(yNext, yPrev);
 };
 
 
