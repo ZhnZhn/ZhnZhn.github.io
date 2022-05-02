@@ -1,13 +1,11 @@
 import DOMPurify from 'dompurify'
 import Tooltip from './Tooltip'
 import Chart from './Chart'
-import seriaFn from '../math/seriaFn'
+import { median, mean } from '../math/seriaFn'
 
 import handleMouseOver from './handleMouseOver'
 
 import COLOR from '../constants/Color'
-
-const { median, mean } = seriaFn;
 
 const C = {
   MFI: "#90ed7d",

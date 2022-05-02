@@ -5,15 +5,12 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
+var _seriaFn = require("../math/seriaFn");
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
-const {
-  findMinY
-} = _seriaFn.default;
 const C = {
   SERIA: {
     //type: 'spline',
@@ -55,17 +52,20 @@ const _isArr = Array.isArray,
       _assign = Object.assign,
       _isObj = obj => obj && typeof obj === 'object';
 
-const _crLegendItem = ({
-  index,
-  color,
-  name = '',
-  is = false
-}) => ({
-  index,
-  color,
-  name,
-  isVisible: is
-});
+const _crLegendItem = _ref => {
+  let {
+    index,
+    color,
+    name = '',
+    is = false
+  } = _ref;
+  return {
+    index,
+    color,
+    name,
+    isVisible: is
+  };
+};
 
 const _addSeriesImpl = (to, series) => {
   const _legend = [];
@@ -120,7 +120,7 @@ const SeriaBuilder = {
 
   stockSeria(id, data) {
     return this.initSeria({
-      minY: findMinY(data)
+      minY: (0, _seriaFn.findMinY)(data)
     }).addPoints(id, data);
   },
 
@@ -139,9 +139,10 @@ const SeriaBuilder = {
     return this;
   },
 
-  _addSeriaPoints(points, {
-    maxVisible = 6
-  } = {}) {
+  _addSeriaPoints(points, _temp) {
+    let {
+      maxVisible = 6
+    } = _temp === void 0 ? {} : _temp;
     const _legend = [];
     points.forEach((data, index) => {
       const is = index < maxVisible ? true : false,
@@ -197,7 +198,11 @@ const SeriaBuilder = {
     return this;
   },
 
-  addSeries(series, isWithoutLegend = false) {
+  addSeries(series, isWithoutLegend) {
+    if (isWithoutLegend === void 0) {
+      isWithoutLegend = false;
+    }
+
     const _to = _isArr(this.config.series) ? this.config.series : this.config.series = [];
 
     if (_isArr(series)) {

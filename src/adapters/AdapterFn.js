@@ -24,7 +24,11 @@ import {
 import toUpperCaseFirst from '../utils/toUpperCaseFirst'
 
 import mathFn from '../math/mathFn'
-import seriaFn from '../math/seriaFn'
+import {
+  findMinY,
+  findMaxY,
+  filterTrimZero
+} from '../math/seriaFn'
 
 import { Direction } from '../constants/Type'
 
@@ -33,7 +37,6 @@ import pointFn from './pointFn'
 import legendFn from './legendFn'
 
 const { toTd } = dateFormat
-, { findMinY, findMaxY, filterTrimZero } = seriaFn;
 
 const EMPTY = '';
 

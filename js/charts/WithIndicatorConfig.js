@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _dompurify = _interopRequireDefault(require("dompurify"));
 
@@ -13,15 +11,13 @@ var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
+var _seriaFn = require("../math/seriaFn");
 
 var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var median = _seriaFn["default"].median,
-    mean = _seriaFn["default"].mean;
-var C = {
+const C = {
   MFI: "#90ed7d",
   MOM: '#f7a35c',
   CLOSE_OPEN: 'rgba(144, 237, 125, 0.75)',
@@ -34,18 +30,19 @@ var C = {
     yDeltaCrossLabel: -10
   }
 };
-var _assign = Object.assign;
+const _assign = Object.assign;
 
-var _crHighLowData = function _crHighLowData(data) {
-  var highData = [],
-      lowData = [];
-  var i = 0;
+const _crHighLowData = data => {
+  const highData = [],
+        lowData = [];
+  let i = 0;
 
   for (i; i < data.length; i++) {
-    var _data$i = data[i],
-        x = _data$i.x,
-        high = _data$i.high,
-        low = _data$i.low;
+    const {
+      x,
+      high,
+      low
+    } = data[i];
     highData.push([x, high]);
     lowData.push([x, low]);
   }
@@ -53,15 +50,15 @@ var _crHighLowData = function _crHighLowData(data) {
   return [highData, lowData];
 };
 
-var _crTitle = function _crTitle(text) {
+const _crTitle = function (text) {
   if (text === void 0) {
     text = '';
   }
 
   return {
-    text: _dompurify["default"].sanitize(text || ''),
+    text: _dompurify.default.sanitize(text || ''),
     style: {
-      color: _Color["default"].METRIC_TITLE,
+      color: _Color.default.METRIC_TITLE,
       fontSize: '16px',
       fontWeight: 'bold'
     },
@@ -73,12 +70,12 @@ var _crTitle = function _crTitle(text) {
   };
 };
 
-var _crLegendVolume = function _crLegendVolume(titleOrX) {
+const _crLegendVolume = function (titleOrX) {
   if (titleOrX === void 0) {
     titleOrX = C.DF_LEGEND_VOLUME_X;
   }
 
-  var _x = typeof titleOrX === 'number' ? titleOrX : titleOrX.length * 10 + 8;
+  const _x = typeof titleOrX === 'number' ? titleOrX : titleOrX.length * 10 + 8;
 
   return {
     enabled: true,
@@ -91,40 +88,36 @@ var _crLegendVolume = function _crLegendVolume(titleOrX) {
     symbolWidth: 12,
     symbolRadius: 6,
     itemStyle: {
-      color: _Color["default"].CHART_TITLE,
+      color: _Color.default.CHART_TITLE,
       fontSize: '16px'
     },
     itemHoverStyle: {
-      color: _Color["default"].LEGEND_ITEM_HOVER
+      color: _Color.default.LEGEND_ITEM_HOVER
     },
     itemHiddenStyle: {
-      color: _Color["default"].LEGEND_ITEM_HIDDEN
+      color: _Color.default.LEGEND_ITEM_HIDDEN
     }
   };
 };
 
-var _crLineSeria = function _crLineSeria(name, color, data) {
-  return {
-    zhValueText: name,
-    type: "line",
-    color: color,
-    lineWidth: 2,
-    data: data,
-    name: name,
-    visible: false,
-    marker: {
-      enabled: false
-    }
-  };
-};
+const _crLineSeria = (name, color, data) => ({
+  zhValueText: name,
+  type: "line",
+  color: color,
+  lineWidth: 2,
+  data: data,
+  name: name,
+  visible: false,
+  marker: {
+    enabled: false
+  }
+});
 
-var _crColumnSeria = function _crColumnSeria(option) {
-  return _assign({
-    type: "column",
-    visible: true,
-    tooltip: _Chart["default"].fTooltip(_Tooltip["default"].vDmy)
-  }, option);
-};
+const _crColumnSeria = option => _assign({
+  type: "column",
+  visible: true,
+  tooltip: _Chart.default.fTooltip(_Tooltip.default.vDmy)
+}, option);
 
 function _Builder(config) {
   if (!(this instanceof _Builder)) {
@@ -135,13 +128,14 @@ function _Builder(config) {
 }
 
 _Builder.prototype = _assign(_Builder.prototype, {
-  assign: function assign(option) {
+  assign(option) {
     _assign(this.config, option);
 
     return this;
   },
-  assignTo: function assignTo(propName, option) {
-    var _to = this.config[propName];
+
+  assignTo(propName, option) {
+    const _to = this.config[propName];
 
     if (!_to) {
       this.config[propName] = option;
@@ -151,14 +145,20 @@ _Builder.prototype = _assign(_Builder.prototype, {
 
     return this;
   },
-  assignToSeries: function assignToSeries(index, option) {
+
+  assignToSeries(index, option) {
     this.config.series[index] = _assign({}, this.config.series[index], option);
     return this;
   },
-  addColumnSeria: function addColumnSeria(option) {
-    var config = this.config,
-        series = config.series,
-        _seria = _crColumnSeria(option);
+
+  addColumnSeria(option) {
+    const {
+      config
+    } = this,
+          {
+      series
+    } = config,
+          _seria = _crColumnSeria(option);
 
     if (!series[0].data) {
       _assign(series[0], _seria);
@@ -168,19 +168,20 @@ _Builder.prototype = _assign(_Builder.prototype, {
 
     return this;
   },
-  toConfig: function toConfig() {
+
+  toConfig() {
     return this.config;
   }
+
 });
 
-var _crConfig = function _crConfig(_temp) {
-  var _ref = _temp === void 0 ? {} : _temp,
-      title = _ref.title,
-      _ref$chartOption = _ref.chartOption,
-      chartOption = _ref$chartOption === void 0 ? {} : _ref$chartOption;
-
-  return _Builder(_Chart["default"].crAreaConfig({
-    title: title
+const _crConfig = function (_temp) {
+  let {
+    title,
+    chartOption = {}
+  } = _temp === void 0 ? {} : _temp;
+  return _Builder(_Chart.default.crAreaConfig({
+    title
   })).assignTo('navigation', {
     buttonOptions: {
       y: 20
@@ -190,11 +191,12 @@ var _crConfig = function _crConfig(_temp) {
       top: '-24px',
       left: '28px'
     }
-  }).assignTo('chart', (0, _extends2["default"])({
+  }).assignTo('chart', {
     height: 160,
     spacingTop: 8,
-    spacingBottom: 10
-  }, chartOption)).assignTo('yAxis', {
+    spacingBottom: 10,
+    ...chartOption
+  }).assignTo('yAxis', {
     startOnTick: true,
     endOnTick: true,
     tickPixelInterval: 60,
@@ -208,8 +210,8 @@ var _crConfig = function _crConfig(_temp) {
   }).toConfig();
 };
 
-var WithIndicatorConfig = {
-  crMfiConfig: function crMfiConfig(id, title, data) {
+const WithIndicatorConfig = {
+  crMfiConfig(id, title, data) {
     return _Builder(_crConfig({
       title: _crTitle(title),
       chartOption: C.CROSS_LABEL
@@ -219,21 +221,22 @@ var WithIndicatorConfig = {
       name: "MFI",
       type: "spline",
       color: C.MFI,
-      point: _Chart["default"].fEventsMouseOver(_handleMouseOver["default"])
+      point: _Chart.default.fEventsMouseOver(_handleMouseOver.default)
     }).toConfig();
   },
-  crMiniVolumeConfig: function crMiniVolumeConfig(_ref2) {
-    var _ref2$btTitle = _ref2.btTitle,
-        btTitle = _ref2$btTitle === void 0 ? 'Volume' : _ref2$btTitle,
-        title = _ref2.title,
-        _ref2$dColumn = _ref2.dColumn,
-        dColumn = _ref2$dColumn === void 0 ? [] : _ref2$dColumn,
-        dVolume = _ref2.dVolume,
-        tooltipColumn = _ref2.tooltipColumn;
 
-    var _title = title || btTitle,
-        _hasColumn = dColumn.length !== 0,
-        config = _Builder(_crConfig({
+  crMiniVolumeConfig(_ref) {
+    let {
+      btTitle = 'Volume',
+      title,
+      dColumn = [],
+      dVolume,
+      tooltipColumn
+    } = _ref;
+
+    const _title = title || btTitle,
+          _hasColumn = dColumn.length !== 0,
+          config = _Builder(_crConfig({
       chartOption: C.CROSS_LABEL
     })).assign({
       title: _crTitle(_title),
@@ -243,9 +246,11 @@ var WithIndicatorConfig = {
       data: dVolume,
       visible: !_hasColumn,
       name: "Spline",
-      point: _Chart["default"].fEventsMouseOver(_handleMouseOver["default"])
+      point: _Chart.default.fEventsMouseOver(_handleMouseOver.default)
     }).toConfig(),
-        series = config.series;
+          {
+      series
+    } = config;
 
     if (_hasColumn) {
       series.push({
@@ -263,23 +268,25 @@ var WithIndicatorConfig = {
             brightness: 0.07
           }
         },
-        tooltip: tooltipColumn || _Chart["default"].fTooltip(_Tooltip["default"].volumeTdmyIf)
+        tooltip: tooltipColumn || _Chart.default.fTooltip(_Tooltip.default.volumeTdmyIf)
       });
-      series.push(_crLineSeria('Median', C.MEDIAN, median(dVolume)));
-      series.push(_crLineSeria('Mean', C.MEAN, mean(dVolume)));
+      series.push(_crLineSeria('Median', C.MEDIAN, (0, _seriaFn.median)(dVolume)));
+      series.push(_crLineSeria('Mean', C.MEAN, (0, _seriaFn.mean)(dVolume)));
     }
 
     return {
-      btTitle: btTitle,
-      config: config
+      btTitle,
+      config
     };
   },
-  crMiniATHConfig: function crMiniATHConfig(_ref3) {
-    var _ref3$btTitle = _ref3.btTitle,
-        btTitle = _ref3$btTitle === void 0 ? "ATH" : _ref3$btTitle,
-        data = _ref3.data;
 
-    var config = _Builder(_crConfig({
+  crMiniATHConfig(_ref2) {
+    let {
+      btTitle = "ATH",
+      data
+    } = _ref2;
+
+    const config = _Builder(_crConfig({
       title: _crTitle('ATH')
     })).addColumnSeria({
       name: "ATH",
@@ -288,18 +295,21 @@ var WithIndicatorConfig = {
       minPointLength: 4,
       groupPadding: 0.1,
       data: data,
-      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].ath)
+      tooltip: _Chart.default.fTooltip(_Tooltip.default.ath)
     }).toConfig();
 
     return {
-      btTitle: btTitle,
-      config: config
+      btTitle,
+      config
     };
   },
-  crMomAthConfig: function crMomAthConfig(_ref4) {
-    var dataMom = _ref4.dataMom,
-        dataAth = _ref4.dataAth,
-        dataSum = _ref4.dataSum;
+
+  crMomAthConfig(_ref3) {
+    let {
+      dataMom,
+      dataAth,
+      dataSum
+    } = _ref3;
     return _Builder(_crConfig()).assign({
       title: _crTitle(),
       legend: _crLegendVolume(),
@@ -312,7 +322,7 @@ var WithIndicatorConfig = {
           pointPadding: 0,
           groupPadding: 0,
           turboThreshold: 20000,
-          tooltip: _Chart["default"].fTooltip(_Tooltip["default"].vDmy)
+          tooltip: _Chart.default.fTooltip(_Tooltip.default.vDmy)
         }
       }
     }).assignTo('yAxis', {
@@ -335,15 +345,15 @@ var WithIndicatorConfig = {
       data: dataSum
     }).toConfig();
   },
-  crMiniHLConfig: function crMiniHLConfig(_ref5) {
-    var _ref5$btTitle = _ref5.btTitle,
-        btTitle = _ref5$btTitle === void 0 ? "Daily HighLow" : _ref5$btTitle,
-        data = _ref5.data;
 
-    var _crHighLowData2 = _crHighLowData(data),
-        highData = _crHighLowData2[0],
-        lowData = _crHighLowData2[1],
-        config = _Builder(_crConfig({
+  crMiniHLConfig(_ref4) {
+    let {
+      btTitle = "Daily HighLow",
+      data
+    } = _ref4;
+
+    const [highData, lowData] = _crHighLowData(data),
+          config = _Builder(_crConfig({
       title: _crTitle('HighLow')
     })).assignToSeries(0, {
       name: "H",
@@ -359,15 +369,16 @@ var WithIndicatorConfig = {
       color: C.HIGH_LOW,
       fillColor: C.HIGH_LOW,
       data: lowData,
-      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].vTdmyIf)
+      tooltip: _Chart.default.fTooltip(_Tooltip.default.vTdmyIf)
     }).toConfig();
 
     return {
-      btTitle: btTitle,
-      config: config
+      btTitle,
+      config
     };
   }
+
 };
 var _default = WithIndicatorConfig;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=WithIndicatorConfig.js.map

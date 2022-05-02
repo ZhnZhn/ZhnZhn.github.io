@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _seriaFn = _interopRequireDefault(require("../../math/seriaFn"));
+var _seriaFn = require("../../math/seriaFn");
 
 var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
 
@@ -27,11 +27,6 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
 const {
-  growthRate,
-  changesBetween,
-  normalize
-} = _seriaFn.default;
-const {
   crMomAthConfig
 } = _IndicatorBuilder.default;
 const C_GROW = '#90ed7d',
@@ -46,9 +41,9 @@ const _isFn = fn => typeof fn === 'function';
 const _isSeriaInst = s => s && _isFn(s.setVisible);
 
 const FNS = {
-  GR: ['ROC', 'isGrowthRate', C_GROW, growthRate, true],
-  CH: ['DIFF', 'isChanges', C_GROW, changesBetween, true],
-  NORM: ['NORM', 'isNormalize', C_GROW, normalize, false]
+  GR: ['ROC', 'isGrowthRate', C_GROW, _seriaFn.growthRate, true],
+  CH: ['DIFF', 'isChanges', C_GROW, _seriaFn.changesBetween, true],
+  NORM: ['NORM', 'isNormalize', C_GROW, _seriaFn.normalize, false]
 };
 /*
 const DEF_GROWTH_RATE = (

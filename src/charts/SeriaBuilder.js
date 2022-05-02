@@ -1,9 +1,7 @@
-import seriaFns from '../math/seriaFn';
+import { findMinY } from '../math/seriaFn';
 
 import Chart from './Chart';
 import ChartConfig from './ChartConfig';
-
-const { findMinY } = seriaFns;
 
 const C = {
   SERIA: {
@@ -12,7 +10,7 @@ const C = {
      marker: {
        symbol: 'circle'
      }
-  },  
+  },
   TREE_MAP: {
         type : 'treemap',
         layoutAlgorithm: 'squarified',

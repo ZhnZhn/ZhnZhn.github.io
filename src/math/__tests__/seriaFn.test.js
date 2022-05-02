@@ -1,6 +1,4 @@
-import seriaFn from '../seriaFn'
-
-const {
+import {
   growthRate,
   changesBetween,
   normalize,
@@ -9,7 +7,7 @@ const {
   filterTrimZero,
   mean,
   median
-} = seriaFn;
+} from '../seriaFn';
 
 const _crInArrOfObj = (arr) => arr
   .map((v, i) => ({ x: i+1, y: v }));

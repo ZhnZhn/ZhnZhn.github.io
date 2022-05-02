@@ -25,7 +25,7 @@ var _toUpperCaseFirst = _interopRequireDefault(require("../utils/toUpperCaseFirs
 
 var _mathFn = _interopRequireDefault(require("../math/mathFn"));
 
-var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
+var _seriaFn = require("../math/seriaFn");
 
 var _Type = require("../constants/Type");
 
@@ -37,12 +37,7 @@ var _legendFn = _interopRequireDefault(require("./legendFn"));
 
 const {
   toTd
-} = _dateFormat.default,
-      {
-  findMinY,
-  findMaxY,
-  filterTrimZero
-} = _seriaFn.default;
+} = _dateFormat.default;
 const EMPTY = '';
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 
@@ -162,9 +157,9 @@ const AdapterFn = { ..._crFn.default,
     return restItems.filter(Boolean).join(delimeter);
   },
   toUpperCaseFirst: _toUpperCaseFirst.default,
-  findMinY,
-  findMaxY,
-  filterTrimZero,
+  findMinY: _seriaFn.findMinY,
+  findMaxY: _seriaFn.findMaxY,
+  filterTrimZero: _seriaFn.filterTrimZero,
   mapIf: (arr, crItem, is) => {
     const _items = [];
     (arr || []).forEach(v => {

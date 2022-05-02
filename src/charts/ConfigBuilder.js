@@ -1,4 +1,8 @@
-import seriaFns from '../math/seriaFn';
+import {  
+  findMinY,
+  findMaxY,
+  filterTrimZero
+} from '../math/seriaFn';
 
 import Chart from './Chart';
 import ChartFn from './ChartFn';
@@ -8,11 +12,6 @@ import Factory from './ChartFactory';
 import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
 
-const {
-  findMinY,
-  findMaxY,
-  filterTrimZero
-} = seriaFns;
 const {
   fTitle,
   fSubtitle,

@@ -1,7 +1,11 @@
 import { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import seriaFn from '../../math/seriaFn'
+import {
+  growthRate,
+  changesBetween,
+  normalize
+} from '../../math/seriaFn';
 import IndicatorBuilder from '../../charts/IndicatorBuilder'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
@@ -12,12 +16,6 @@ import RowSma from './RowSma'
 import RowMfi from './RowMfi'
 
 import { S_MODAL_MENU } from './ModalMenu.Style'
-
-const {
-  growthRate,
-  changesBetween,
-  normalize
- } = seriaFn;
 
 const { crMomAthConfig } = IndicatorBuilder;
 

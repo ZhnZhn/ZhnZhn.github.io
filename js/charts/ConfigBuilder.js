@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _seriaFn = _interopRequireDefault(require("../math/seriaFn"));
+var _seriaFn = require("../math/seriaFn");
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
@@ -19,11 +19,6 @@ var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 
 var _ConfigStockSlice = _interopRequireDefault(require("./ConfigStockSlice"));
 
-const {
-  findMinY,
-  findMaxY,
-  filterTrimZero
-} = _seriaFn.default;
 const {
   fTitle,
   fSubtitle,
@@ -87,13 +82,17 @@ const _getData = obj => {
   return ((_obj$config = obj.config) == null ? void 0 : (_obj$config$series = _obj$config.series) == null ? void 0 : _obj$config$series[0].data) || [];
 };
 
-const _findMinY = (minY, data) => _isNumber(minY) ? minY : findMinY(data);
+const _findMinY = (minY, data) => _isNumber(minY) ? minY : (0, _seriaFn.findMinY)(data);
 
-const _findMaxY = (maxY, data) => _isNumber(maxY) ? maxY : findMaxY(data);
+const _findMaxY = (maxY, data) => _isNumber(maxY) ? maxY : (0, _seriaFn.findMaxY)(data);
 
 const _calcYAxisMin = (min, max, noZoom) => noZoom && min > 0 ? 0 : calcMinY(min, max);
 
-const ConfigBuilder = function (config = {}) {
+const ConfigBuilder = function (config) {
+  if (config === void 0) {
+    config = {};
+  }
+
   if (!(this instanceof ConfigBuilder)) {
     return new ConfigBuilder(config);
   }
@@ -101,17 +100,18 @@ const ConfigBuilder = function (config = {}) {
   this.config = config;
 };
 
-ConfigBuilder.crSeria = ({
-  adapter,
-  json,
-  option,
-  type
-}) => {
+ConfigBuilder.crSeria = _ref => {
+  let {
+    adapter,
+    json,
+    option,
+    type
+  } = _ref;
   const {
     config
   } = adapter.toConfig(json, option),
         _seria = config.series[0];
-  _seria.minY = findMinY(_seria.data);
+  _seria.minY = (0, _seriaFn.findMinY)(_seria.data);
 
   if (type) {
     _seria.type = type;
@@ -123,7 +123,11 @@ ConfigBuilder.crSeria = ({
 ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.default,
   ..._ConfigStockSlice.default,
 
-  init(config = {}) {
+  init(config) {
+    if (config === void 0) {
+      config = {};
+    }
+
     this.config = config;
     return this;
   },
@@ -139,7 +143,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
     }).addCaption(title, subtitle).add('series', []);
   },
 
-  categoryConfig(categories = []) {
+  categoryConfig(categories) {
+    if (categories === void 0) {
+      categories = [];
+    }
+
     this.config = crAreaConfig({
       spacingTop: 25
     });
@@ -151,7 +159,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
     return this.add('xAxis', xAxis).add('yAxis', C.CATEGORIES_Y_AXIS);
   },
 
-  barOrColumnConfig(type, categories = [], option) {
+  barOrColumnConfig(type, categories, option) {
+    if (categories === void 0) {
+      categories = [];
+    }
+
     const _crConfig = type === 'BAR' ? _ChartFactory.default.crBarConfig : _ChartFactory.default.crColumnConfig;
 
     this.config = _crConfig(option);
@@ -220,7 +232,15 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
     return data && data.length > 0 ? this.addZhMiniConfig(crConfig(option)) : this;
   },
 
-  addZhPointsIf(data, propName = 'zhIsMfi', is = true) {
+  addZhPointsIf(data, propName, is) {
+    if (propName === void 0) {
+      propName = 'zhIsMfi';
+    }
+
+    if (is === void 0) {
+      is = true;
+    }
+
     return is ? this.add({
       zhPoints: data,
       [propName]: true
@@ -241,7 +261,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
       minY,
       maxY
     } = option,
-          _data = isFilterZero ? filterTrimZero(data) : data,
+          _data = isFilterZero ? (0, _seriaFn.filterTrimZero)(data) : data,
           min = _findMinY(minY, _data),
           max = _findMaxY(maxY, _data);
 
