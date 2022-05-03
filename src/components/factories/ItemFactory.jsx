@@ -5,7 +5,13 @@ import ChartActions, {
   CHAT_TO_TOP,
   CHAT_COPY
 } from '../../flux/actions/ChartActions';
-import { CompItemType as CIT } from '../../constants/Type';
+import { 
+  CIT_EUROSTAT_MAP,
+  CIT_TABLE,
+  CIT_ALPHA_PERF,
+  CIT_INFO_ITEM,
+  CIT_TW_LIST
+} from '../../constants/Type';
 
 import Item from '../items/Items';
 
@@ -84,11 +90,11 @@ const _fItem = (Comp) => ({ config={}, props }) => (
 
 const _rCrItem = {
   DF: _crAreaChart,
-  [CIT.EUROSTAT_MAP]: _crMapChart,
-  [CIT.TABLE]: _fItem(Item.Table),
-  [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf),
-  [CIT.INFO_ITEM]: _fItem(Item.InfoItem),
-  [CIT.TW_LIST]: _fItem(Item.TwList)
+  [CIT_EUROSTAT_MAP]: _crMapChart,
+  [CIT_TABLE]: _fItem(Item.Table),
+  [CIT_ALPHA_PERF]: _fItem(Item.AlphaPerf),
+  [CIT_INFO_ITEM]: _fItem(Item.InfoItem),
+  [CIT_TW_LIST]: _fItem(Item.TwList)
 };
 
 const ItemFactory = {

@@ -1,69 +1,59 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _Type = require("../../constants/Type");
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _isFn = fn => typeof fn === 'function';
 
-var _crNoop = function _crNoop() {};
+const _crNoop = () => {};
 
-var _crEmptyDescr = function _crEmptyDescr() {
-  return '';
-};
+const _crEmptyDescr = () => '';
 
-var _getId = function _getId(_ref) {
-  var _itemKey = _ref._itemKey;
+const _getId = _ref => {
+  let {
+    _itemKey
+  } = _ref;
   return _itemKey;
 };
 
-var _crToken = function _crToken(json, fnOrPropName) {
-  return _isFn(fnOrPropName) ? fnOrPropName(json) : json[fnOrPropName];
-};
+const _crToken = (json, fnOrPropName) => _isFn(fnOrPropName) ? fnOrPropName(json) : json[fnOrPropName];
 
-var _crTokens = function _crTokens(CONFIGS, json) {
-  return CONFIGS.map(function (config) {
-    return _crToken(json, config);
-  }).filter(Boolean);
-};
+const _crTokens = (CONFIGS, json) => CONFIGS.map(config => _crToken(json, config)).filter(Boolean);
 
-var TemplateTokens = function TemplateTokens(impl) {
+const TemplateTokens = function (impl) {
   if (!(this instanceof TemplateTokens)) {
     return new TemplateTokens(impl);
   }
 
-  this.impl = (0, _extends2["default"])({
+  this.impl = {
     getId: _getId,
     crTokensName: _crNoop,
     crDescr: _crEmptyDescr,
     crDescrName: _crNoop,
-    crDescrStyle: _crNoop
-  }, impl);
+    crDescrStyle: _crNoop,
+    ...impl
+  };
 };
 
 Object.assign(TemplateTokens.prototype, {
-  toConfig: function toConfig(json, option) {
-    var _this$impl = this.impl,
-        getId = _this$impl.getId,
-        crCaption = _this$impl.crCaption,
-        crTokensName = _this$impl.crTokensName,
-        crDescr = _this$impl.crDescr,
-        crDescrName = _this$impl.crDescrName,
-        crDescrStyle = _this$impl.crDescrStyle,
-        CONFIGS = _this$impl.CONFIGS,
-        _id = getId(option),
-        _tokens = _crTokens(CONFIGS, json);
+  toConfig(json, option) {
+    const {
+      getId,
+      crCaption,
+      crTokensName,
+      crDescr,
+      crDescrName,
+      crDescrStyle,
+      CONFIGS
+    } = this.impl,
+          _id = getId(option),
+          _tokens = _crTokens(CONFIGS, json);
 
     return {
       config: {
-        zhCompType: _Type.CompItemType.INFO_ITEM,
+        zhCompType: _Type.CIT_INFO_ITEM,
         id: _id,
         caption: crCaption(json, option),
         items: [{
@@ -81,7 +71,8 @@ Object.assign(TemplateTokens.prototype, {
       }
     };
   }
+
 });
 var _default = TemplateTokens;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=TemplateTokens.js.map

@@ -1,7 +1,5 @@
-
 import toPlural from '../../utils/toPlural';
-import { CompItemType } from '../../constants/Type';
-
+import { CIT_EUROSTAT_MAP } from '../../constants/Type';
 
 const _isArr = Array.isArray;
 
@@ -61,7 +59,7 @@ const _crDF = (captions, mapFrequency) => {
   const oneCaption = toPlural(captions[0]) || 'Dim';
   return _crDF3(oneCaption, mapFrequency)
     .concat(_crItems([
-       [`Map: By ${oneCaption}` , V.M, void 0, CompItemType.EUROSTAT_MAP ]
+       [`Map: By ${oneCaption}` , V.M, void 0, CIT_EUROSTAT_MAP ]
     ]));
 };
 

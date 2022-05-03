@@ -46,7 +46,7 @@ const _crDF3 = (oneCaption, mapFrequency) => _crItems([['Default: Spline', V.S],
 
 const _crDF = (captions, mapFrequency) => {
   const oneCaption = (0, _toPlural.default)(captions[0]) || 'Dim';
-  return _crDF3(oneCaption, mapFrequency).concat(_crItems([["Map: By " + oneCaption, V.M, void 0, _Type.CompItemType.EUROSTAT_MAP]]));
+  return _crDF3(oneCaption, mapFrequency).concat(_crItems([["Map: By " + oneCaption, V.M, void 0, _Type.CIT_EUROSTAT_MAP]]));
 };
 
 const _crT1 = () => [_crItem(['Default: Spline', V.S]), _crItem(['Line', V.L]), _crItem(['Area', V.A])];
@@ -63,13 +63,25 @@ const _crT3All = oneCaption => _crItems([["Column: By " + oneCaption, V.C, oneCa
 
 const _crT2AE = (_, mapFrequency) => [..._crT2A(_, mapFrequency), ..._crT3All("Dim")];
 
-const _crT3 = ([oneCaption]) => [_crItem(['Default: Spline', V.S]), ..._crT3All(oneCaption)];
+const _crT3 = _ref => {
+  let [oneCaption] = _ref;
+  return [_crItem(['Default: Spline', V.S]), ..._crT3All(oneCaption)];
+};
 
-const _crT3B = ([oneCaption], mapFrequency) => [_crItem(['Default: Spline', V.S]), _crYearlyByMonthItem(mapFrequency), ..._crT3All(oneCaption)].filter(Boolean);
+const _crT3B = (_ref2, mapFrequency) => {
+  let [oneCaption] = _ref2;
+  return [_crItem(['Default: Spline', V.S]), _crYearlyByMonthItem(mapFrequency), ..._crT3All(oneCaption)].filter(Boolean);
+};
 
-const _crT3A = ([oneCaption]) => [..._crT3([oneCaption]), _crItem(["TreeMap: By " + oneCaption, V.TM, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Cluster", V.TM_C, oneCaption])];
+const _crT3A = _ref3 => {
+  let [oneCaption] = _ref3;
+  return [..._crT3([oneCaption]), _crItem(["TreeMap: By " + oneCaption, V.TM, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Cluster", V.TM_C, oneCaption])];
+};
 
-const _crT3A2 = ([oneCaption]) => [..._crT3A([oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2", V.TM_2, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2: Cluster", V.TM_2_C, oneCaption])];
+const _crT3A2 = _ref4 => {
+  let [oneCaption] = _ref4;
+  return [..._crT3A([oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2", V.TM_2, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2: Cluster", V.TM_2_C, oneCaption])];
+};
 
 const _r = {
   DF: _crDF,
@@ -85,21 +97,25 @@ const _r = {
   df3: _crDF3
 };
 
-const _crCaptions = ({
-  configs,
-  selectProps,
-  oneCaption = EMPTY,
-  twoCaption = EMPTY
-}) => {
+const _crCaptions = _ref5 => {
+  let {
+    configs,
+    selectProps,
+    oneCaption = EMPTY,
+    twoCaption = EMPTY
+  } = _ref5;
+
   const _arr = configs || selectProps;
 
   return _isArr(_arr) ? _arr.map(item => item.caption || EMPTY) : [oneCaption, twoCaption];
 };
 
 const ChartTypes = {
-  crOptions(dialogOption, {
-    mapFrequency
-  } = {}) {
+  crOptions(dialogOption, _temp) {
+    let {
+      mapFrequency
+    } = _temp === void 0 ? {} : _temp;
+
     const {
       chartsType,
       mapFrequency: mF,

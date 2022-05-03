@@ -1,4 +1,4 @@
-import { CompItemType as CIT } from '../../constants/Type';
+import { CIT_INFO_ITEM } from '../../constants/Type';
 
 const _isFn = fn => typeof fn === 'function';
 const _crNoop = () => {};
@@ -38,7 +38,7 @@ Object.assign(TemplateTokens.prototype, {
     , _tokens = _crTokens(CONFIGS, json);
     return {
       config: {
-        zhCompType: CIT.INFO_ITEM,
+        zhCompType: CIT_INFO_ITEM,
         id: _id,
         caption: crCaption(json, option),
         items: [
