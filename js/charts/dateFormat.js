@@ -3,23 +3,24 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.toTdmyIf = exports.toTdmy = exports.toTd = exports.toDmy = exports.formatDate = void 0;
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var format = _highcharts["default"].dateFormat,
-    DMY_FORMAT = '%A, %b %d, %Y',
-    TDMY_FORMAT = '%H:%M, %A, %b %d, %Y',
-    TD_FORMAT = '%H:%M:%S %d-%m-%Y';
-var dateFormat = {
-  formatDate: format,
-  toDmy: format.bind(null, DMY_FORMAT),
-  toTdmy: format.bind(null, TDMY_FORMAT),
-  toTdmyIf: function toTdmyIf(mls) {
-    return format('%H:%M', mls) === '00:00' ? dateFormat.toDmy(mls) : dateFormat.toTdmy(mls);
-  },
-  toTd: format.bind(null, TD_FORMAT)
-};
-var _default = dateFormat;
-exports["default"] = _default;
+const format = _highcharts.default.dateFormat,
+      DMY_FORMAT = '%A, %b %d, %Y',
+      TDMY_FORMAT = '%H:%M, %A, %b %d, %Y',
+      TD_FORMAT = '%H:%M:%S %d-%m-%Y';
+const formatDate = format;
+exports.formatDate = formatDate;
+const toDmy = format.bind(null, DMY_FORMAT);
+exports.toDmy = toDmy;
+const toTdmy = format.bind(null, TDMY_FORMAT);
+exports.toTdmy = toTdmy;
+
+const toTdmyIf = mls => format('%H:%M', mls) === '00:00' ? toDmy(mls) : toTdmy(mls);
+
+exports.toTdmyIf = toTdmyIf;
+const toTd = format.bind(null, TD_FORMAT);
+exports.toTd = toTd;
 //# sourceMappingURL=dateFormat.js.map

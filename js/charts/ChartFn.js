@@ -19,14 +19,9 @@ var _DateUtils = require("../utils/DateUtils");
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _dateFormat = _interopRequireDefault(require("./dateFormat"));
+var _dateFormat = require("./dateFormat");
 
-const {
-  toDmy,
-  toTdmy,
-  toTdmyIf
-} = _dateFormat.default,
-      _isFn = fn => typeof fn === 'function',
+const _isFn = fn => typeof fn === 'function',
       _isNumber = n => typeof n === 'number' && n - n === 0,
       _isArr = Array.isArray,
       _assign = Object.assign,
@@ -187,9 +182,9 @@ const _getMinMaxFromEvent = _ref3 => {
 };
 
 const ChartFn = {
-  toDmy,
-  toTdmy,
-  toTdmyIf,
+  toDmy: _dateFormat.toDmy,
+  toTdmy: _dateFormat.toTdmy,
+  toTdmyIf: _dateFormat.toTdmyIf,
 
   addSeriaWithRenderLabel(props) {
     // { chart, series, label, hasSecondYAxis } = props

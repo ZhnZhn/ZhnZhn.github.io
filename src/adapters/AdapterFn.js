@@ -1,6 +1,6 @@
-import Big from 'big.js'
+import Big from 'big.js';
 
-import dateFormat from '../charts/dateFormat'
+import { toTd } from '../charts/dateFormat';
 
 import { isInArrStr } from '../utils/arrFn';
 import fCompareBy from '../utils/fCompareBy';
@@ -38,8 +38,6 @@ import { Direction } from '../constants/Type'
 import crFn from './crFn'
 import pointFn from './pointFn'
 import legendFn from './legendFn'
-
-const { toTd } = dateFormat
 
 const EMPTY = '';
 

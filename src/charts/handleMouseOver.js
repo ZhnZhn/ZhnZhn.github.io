@@ -1,8 +1,6 @@
 import formatNumber from '../utils/formatNumber';
-import dateFormat from './dateFormat';
+import { formatDate } from './dateFormat';
 import calcYAxisOffset from './calcYAxisOffset';
-
-const { formatDate } = dateFormat;
 
 const C = {
   DATE_PATTERN : '%d-%m-%Y',

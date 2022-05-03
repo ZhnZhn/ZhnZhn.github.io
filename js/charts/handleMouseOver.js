@@ -7,13 +7,10 @@ exports.default = void 0;
 
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
 
-var _dateFormat = _interopRequireDefault(require("./dateFormat"));
+var _dateFormat = require("./dateFormat");
 
 var _calcYAxisOffset = _interopRequireDefault(require("./calcYAxisOffset"));
 
-const {
-  formatDate
-} = _dateFormat.default;
 const C = {
   DATE_PATTERN: '%d-%m-%Y',
   DATE_EMPTY: '01-01-1970',
@@ -33,7 +30,15 @@ const C = {
   DX_Y_AXIS: 10
 };
 
-const _crDelta = (chart, dX = 0, dY = 0) => {
+const _crDelta = function (chart, dX, dY) {
+  if (dX === void 0) {
+    dX = 0;
+  }
+
+  if (dY === void 0) {
+    dY = 0;
+  }
+
   const {
     xDeltaCrossLabel = 0,
     yDeltaCrossLabel = 0
@@ -45,7 +50,7 @@ const _crDelta = (chart, dX = 0, dY = 0) => {
 };
 
 const _crCrossParam = (point, chart) => {
-  const _d = formatDate(C.DATE_PATTERN, point.x);
+  const _d = (0, _dateFormat.formatDate)(C.DATE_PATTERN, point.x);
 
   return {
     y: point.y,

@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _dateFormat = _interopRequireDefault(require("../charts/dateFormat"));
+var _dateFormat = require("../charts/dateFormat");
 
 var _arrFn = require("../utils/arrFn");
 
@@ -35,9 +35,6 @@ var _pointFn = _interopRequireDefault(require("./pointFn"));
 
 var _legendFn = _interopRequireDefault(require("./legendFn"));
 
-const {
-  toTd
-} = _dateFormat.default;
 const EMPTY = '';
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 
@@ -66,7 +63,7 @@ const _fToFloatOr = dfValue => str => {
 const AdapterFn = { ..._crFn.default,
   ..._pointFn.default,
   ..._legendFn.default,
-  toTd: mls => _isNumber(mls) ? toTd(mls) : '',
+  toTd: mls => _isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '',
   ymdToUTC: _DateUtils.ymdToUTC,
   ymdhmsToUTC: _DateUtils.ymdhmsToUTC,
   getFromDate: _DateUtils.getFromDate,

@@ -13,10 +13,13 @@ import { arrFactoryFindIndexByProp } from '../utils/arrFn';
 import { dmyToUTC } from '../utils/DateUtils';
 
 import Chart from './Chart';
-import dateFormat from './dateFormat';
+import {
+  toDmy,
+  toTdmy,
+  toTdmyIf
+} from './dateFormat';
 
-const { toDmy, toTdmy, toTdmyIf } = dateFormat
-, _isFn = fn => typeof fn === 'function'
+const _isFn = fn => typeof fn === 'function'
 , _isNumber = n => typeof n === 'number'
     && n-n===0
 , _isArr = Array.isArray
