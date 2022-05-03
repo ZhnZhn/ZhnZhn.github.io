@@ -3,25 +3,22 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _RouterAdapter = _interopRequireDefault(require("../../adapters/RouterAdapter"));
 
 var _loadItem = _interopRequireDefault(require("./loadItem"));
 
-var LoadImpl = function () {
-  var _conf = {},
-      _hasOwnProperty = Object.prototype.hasOwnProperty.bind(_RouterAdapter["default"]);
+const LoadImpl = (() => {
+  const _conf = {};
 
-  for (var key in _RouterAdapter["default"]) {
-    if (_hasOwnProperty(key)) {
-      _conf[key] = (0, _loadItem["default"])(_RouterAdapter["default"][key]);
-    }
+  for (let key in _RouterAdapter.default) {
+    _conf[key] = (0, _loadItem.default)(_RouterAdapter.default[key]);
   }
 
   return _conf;
-}();
+})();
 
 var _default = LoadImpl;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=LoadImpl.js.map
