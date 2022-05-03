@@ -1,12 +1,11 @@
 import Builder from '../charts/ConfigBuilder'
 import AdapterFn from './AdapterFn'
-import AdapterStockFn from './AdapterStockFn'
+import { toStockSeriesData } from './AdapterStockFn'
 
 const {
   valueMoving,
   stockSeriesLegend
-} = AdapterFn
-const { toSeriesData } = AdapterStockFn
+} = AdapterFn;
 
 const _crCaptionDf = ({ title, subtitle }) => ({ title, subtitle })
 , _crIdDf = ({ _itemKey }) => _itemKey
@@ -24,7 +23,7 @@ const crAdapterOHLCV = ({
   toConfig(json, option){
     const { title, subtitle } = crCaption(option, json)
     , id = crId(option)
-    , dataOption = toSeriesData({
+    , dataOption = toStockSeriesData({
         arr: getArr(json, option),
         toDate,
         seriaOption, option
@@ -49,7 +48,7 @@ const crAdapterOHLCV = ({
 
   toSeries(json, option){
     const id = crId(option)
-    , { data } = toSeriesData({
+    , { data } = toStockSeriesData({
        arr: getArr(json, option),
        toDate,
        seriaOption: { ...seriaOption, isAllSeries: false },

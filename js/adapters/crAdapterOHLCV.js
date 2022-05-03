@@ -3,97 +3,100 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _ConfigBuilder = _interopRequireDefault(require("../charts/ConfigBuilder"));
 
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
-var _AdapterStockFn = _interopRequireDefault(require("./AdapterStockFn"));
+var _AdapterStockFn = require("./AdapterStockFn");
 
-var valueMoving = _AdapterFn["default"].valueMoving,
-    stockSeriesLegend = _AdapterFn["default"].stockSeriesLegend;
-var toSeriesData = _AdapterStockFn["default"].toSeriesData;
+const {
+  valueMoving,
+  stockSeriesLegend
+} = _AdapterFn.default;
 
-var _crCaptionDf = function _crCaptionDf(_ref) {
-  var title = _ref.title,
-      subtitle = _ref.subtitle;
+const _crCaptionDf = _ref => {
+  let {
+    title,
+    subtitle
+  } = _ref;
   return {
-    title: title,
-    subtitle: subtitle
+    title,
+    subtitle
   };
 },
-    _crIdDf = function _crIdDf(_ref2) {
-  var _itemKey = _ref2._itemKey;
+      _crIdDf = _ref2 => {
+  let {
+    _itemKey
+  } = _ref2;
   return _itemKey;
 },
-    _getArrDf = function _getArrDf(json) {
-  return json;
-},
-    _crAddConfigDf = function _crAddConfigDf() {};
+      _getArrDf = json => json,
+      _crAddConfigDf = () => {};
 
-var crAdapterOHLCV = function crAdapterOHLCV(_ref3) {
-  var _ref3$seriaOption = _ref3.seriaOption,
-      seriaOption = _ref3$seriaOption === void 0 ? {} : _ref3$seriaOption,
-      _ref3$crCaption = _ref3.crCaption,
-      crCaption = _ref3$crCaption === void 0 ? _crCaptionDf : _ref3$crCaption,
-      _ref3$crId = _ref3.crId,
-      crId = _ref3$crId === void 0 ? _crIdDf : _ref3$crId,
-      _ref3$getArr = _ref3.getArr,
-      getArr = _ref3$getArr === void 0 ? _getArrDf : _ref3$getArr,
-      _ref3$crAddConfig = _ref3.crAddConfig,
-      crAddConfig = _ref3$crAddConfig === void 0 ? _crAddConfigDf : _ref3$crAddConfig,
-      toDate = _ref3.toDate;
+const crAdapterOHLCV = _ref3 => {
+  let {
+    seriaOption = {},
+    crCaption = _crCaptionDf,
+    crId = _crIdDf,
+    getArr = _getArrDf,
+    crAddConfig = _crAddConfigDf,
+    toDate
+  } = _ref3;
   return {
-    toConfig: function toConfig(json, option) {
-      var _crCaption = crCaption(option, json),
-          title = _crCaption.title,
-          subtitle = _crCaption.subtitle,
-          id = crId(option),
-          dataOption = toSeriesData({
+    toConfig(json, option) {
+      const {
+        title,
+        subtitle
+      } = crCaption(option, json),
+            id = crId(option),
+            dataOption = (0, _AdapterStockFn.toStockSeriesData)({
         arr: getArr(json, option),
-        toDate: toDate,
-        seriaOption: seriaOption,
-        option: option
+        toDate,
+        seriaOption,
+        option
       }),
-          dC = dataOption.dC,
-          dMfi = dataOption.dMfi,
-          config = (0, _ConfigBuilder["default"])().stockConfig(id, dataOption).addCaption(title, subtitle).add((0, _extends2["default"])({
-        valueMoving: valueMoving(dC)
-      }, crAddConfig({
-        json: json,
-        option: option,
-        data: dC,
-        id: id,
-        title: title,
-        subtitle: subtitle
-      }))).add('zhConfig', {
+            {
+        dC,
+        dMfi
+      } = dataOption,
+            config = (0, _ConfigBuilder.default)().stockConfig(id, dataOption).addCaption(title, subtitle).add({
+        valueMoving: valueMoving(dC),
+        ...crAddConfig({
+          json,
+          option,
+          data: dC,
+          id,
+          title,
+          subtitle
+        })
+      }).add('zhConfig', {
         legend: stockSeriesLegend()
       }).addZhPointsIf(dMfi).toConfig();
-
       return {
-        config: config
+        config
       };
     },
-    toSeries: function toSeries(json, option) {
-      var id = crId(option),
-          _toSeriesData = toSeriesData({
-        arr: getArr(json, option),
-        toDate: toDate,
-        seriaOption: (0, _extends2["default"])({}, seriaOption, {
-          isAllSeries: false
-        }),
-        option: option
-      }),
-          data = _toSeriesData.data;
 
-      return (0, _ConfigBuilder["default"])().stockSeria(id, data).toSeria();
+    toSeries(json, option) {
+      const id = crId(option),
+            {
+        data
+      } = (0, _AdapterStockFn.toStockSeriesData)({
+        arr: getArr(json, option),
+        toDate,
+        seriaOption: { ...seriaOption,
+          isAllSeries: false
+        },
+        option
+      });
+      return (0, _ConfigBuilder.default)().stockSeria(id, data).toSeria();
     }
+
   };
 };
 
 var _default = crAdapterOHLCV;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=crAdapterOHLCV.js.map
