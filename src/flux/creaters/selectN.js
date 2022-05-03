@@ -1,6 +1,8 @@
-import fns from './createrFns'
-
-const { crCaption, crItemKey, crAlertConf } = fns;
+import {
+  crCaption,
+  crItemKey,
+  crAlertConf
+} from './createrFns';
 
 const TYPE = 'selectN';
 const TABLE_ID = 'table';
@@ -34,22 +36,33 @@ const _modifyIfItemTable = (_dfProps, items) => {
   }
 };
 
-const createLoadOptions = (props={}, options={}) => {
-  const { loadId, linkFn, dataSource, dfProps={} } = props
+const createLoadOptions = (
+  props,
+  options
+) => {
+  const {
+    loadId,
+    linkFn,
+    dataSource,
+    dfProps
+  } = props || {}
   , {
-      items=[], titles,
+      items=[],
+      titles,
       dialogOptions,
-      chartType={},
+      chartType,
       seriaColor,
       seriaWidth,
       fromDate,
       date
-    } = options
+    } = options || {}
   , {
-      itemCaption, threeC,
-      title, subtitle
+      itemCaption,
+      threeC,
+      title,
+      subtitle
     } = crCaption(items, titles)
-  , { value:seriaType, compType } = chartType
+  , { value:seriaType, compType } = chartType || {}
   , _itemKey = crItemKey(items, seriaType, date, fromDate)
   , _dfProps = {...dfProps};
 
@@ -64,9 +77,14 @@ const createLoadOptions = (props={}, options={}) => {
     zhCompType: compType,
     fromDate,
     time: date,
-    seriaType, seriaColor, seriaWidth,
-    items, loadId, linkFn,
-    title, subtitle,
+    seriaType,
+    seriaColor,
+    seriaWidth,
+    items,
+    loadId,
+    linkFn,
+    title,
+    subtitle,
     ...crAlertConf(`${itemCaption}: ${threeC}`, itemCaption, threeC),
     dataSource
   }

@@ -1,25 +1,21 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _createrFns = _interopRequireDefault(require("./createrFns"));
+var _createrFns = require("./createrFns");
 
-const {
-  crCaption,
-  crItemKey
-} = _createrFns.default;
-
-const _toIds = ({
-  dfId
-}, items) => {
+const _toIds = (_ref, items) => {
+  let {
+    dfId
+  } = _ref;
   const _arr = [dfId];
-  items.forEach(({
-    slice,
-    value
-  } = {}) => {
+  items.forEach(function (_temp) {
+    let {
+      slice,
+      value
+    } = _temp === void 0 ? {} : _temp;
+
     if (slice) {
       _arr.push(slice[Object.keys(slice)[0]]);
     } else if (value) {
@@ -57,9 +53,9 @@ const createLoadOptions = (props, options) => {
     itemCaption,
     title,
     subtitle
-  } = crCaption(items, titles),
+  } = (0, _createrFns.crCaption)(items, titles),
         _items = _toIds(dfProps, items),
-        _itemKey = crItemKey(_items, seriaType, time);
+        _itemKey = (0, _createrFns.crItemKey)(_items, seriaType, time);
 
   return {
     dfC,

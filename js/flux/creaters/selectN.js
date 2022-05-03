@@ -1,17 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _createrFns = _interopRequireDefault(require("./createrFns"));
+var _createrFns = require("./createrFns");
 
-const {
-  crCaption,
-  crItemKey,
-  crAlertConf
-} = _createrFns.default;
 const TYPE = 'selectN';
 const TABLE_ID = 'table';
 const _assign = Object.assign;
@@ -63,34 +56,34 @@ const _modifyIfItemTable = (_dfProps, items) => {
   }
 };
 
-const createLoadOptions = (props = {}, options = {}) => {
+const createLoadOptions = (props, options) => {
   const {
     loadId,
     linkFn,
     dataSource,
-    dfProps = {}
-  } = props,
+    dfProps
+  } = props || {},
         {
     items = [],
     titles,
     dialogOptions,
-    chartType = {},
+    chartType,
     seriaColor,
     seriaWidth,
     fromDate,
     date
-  } = options,
+  } = options || {},
         {
     itemCaption,
     threeC,
     title,
     subtitle
-  } = crCaption(items, titles),
+  } = (0, _createrFns.crCaption)(items, titles),
         {
     value: seriaType,
     compType
-  } = chartType,
-        _itemKey = crItemKey(items, seriaType, date, fromDate),
+  } = chartType || {},
+        _itemKey = (0, _createrFns.crItemKey)(items, seriaType, date, fromDate),
         _dfProps = { ...dfProps
   };
 
@@ -112,7 +105,7 @@ const createLoadOptions = (props = {}, options = {}) => {
     linkFn,
     title,
     subtitle,
-    ...crAlertConf(itemCaption + ": " + threeC, itemCaption, threeC),
+    ...(0, _createrFns.crAlertConf)(itemCaption + ": " + threeC, itemCaption, threeC),
     dataSource
   };
 };

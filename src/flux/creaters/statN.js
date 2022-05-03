@@ -1,9 +1,10 @@
-import fns from './createrFns'
-
-const { crCaption, crItemKey } = fns;
+import {
+  crCaption,
+  crItemKey
+} from './createrFns';
 
 const _toIds = ({ dfId }, items) => {
-  const _arr = [dfId];  
+  const _arr = [dfId];
   items.forEach(({ slice, value }={}) => {
     if (slice) {
       _arr.push(slice[Object.keys(slice)[0]])
@@ -15,16 +16,22 @@ const _toIds = ({ dfId }, items) => {
   return _arr;
 };
 
-const createLoadOptions = (props, options) => {
+const createLoadOptions = (
+  props,
+  options
+) => {
   const {
-    loadId, dataSource, dfProps={},
+    loadId,
+    dataSource,
+    dfProps={}
   } = props || {}
   , {
       timeId,
       time,
       dfC,
       dfTitle,
-      items=[], titles,
+      items=[],
+      titles,
       dialogOptions,
       chartType,
       seriaColor,

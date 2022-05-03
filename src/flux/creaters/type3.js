@@ -1,58 +1,66 @@
+import {
+  isFn,
+  getC,
+  getV
+} from './createrFns';
 
-import fns from './createrFns'
-
-const { getC, getV } = fns;
-
-const _isFn = fn => typeof fn === 'function';
-
-const createLoadOptions = (props={}, options={}) => {
+const createLoadOptions = (
+  props,
+  options
+) => {
   const {
-          columnName, dataColumn, seriaColumnNames, loadId,
-          fnValue, fnItemCaption,
-          linkFn, dataSource,
-          dfProps
-        } = props
-      , {
-        one,
-        fromDate, toDate,
-        transform,
-        chartType={},
-        seriaColor,
-        seriaWidth,
-      } = options
-      , {  value:seriaType } = chartType
-      , value = getV(one)
-      , caption = getC(one)
-      , _value = _isFn(fnValue)
-            ? fnValue(value)
-            : value
-      , _itemCaption = _isFn(fnItemCaption)
-            ? fnItemCaption(value)
-            : void 0
-      , _transform = transform
-            ? transform.value
-            : void 0
-      , _subtitle = transform
-            ? transform.caption
-            : void 0;
+    columnName,
+    dataColumn,
+    seriaColumnNames,
+    loadId,
+    fnValue,
+    fnItemCaption,
+    linkFn,
+    dataSource,
+    dfProps
+  } = props || {}
+  , {
+    one,
+    fromDate,
+    toDate,
+    transform,
+    chartType,
+    seriaColor,
+    seriaWidth,
+  } = options || {}
+  , { value:seriaType } = chartType || {}
+  , value = getV(one)
+  , caption = getC(one)
+  , _value = isFn(fnValue)
+      ? fnValue(value)
+      : value
+  , _itemCaption = isFn(fnItemCaption)
+      ? fnItemCaption(value)
+      : void 0
+  , [_transform, _subtitle] = transform
+      ? [transform.value, transform.caption]
+      : [];
   return {
-    value : _value,
+    value: _value,
     transform: _transform,
     title: caption,
     subtitle: _subtitle,
     item: one,
     oneCaption: caption,
-    fromDate: fromDate,
-    toDate: toDate,
-    columnName : columnName,
-    dataColumn : dataColumn,
-    itemCaption : _itemCaption,
-    loadId : loadId,
-    linkFn : linkFn,
-    seriaType, seriaColor, seriaWidth,
-    seriaColumnNames, dataSource,
+    itemCaption: _itemCaption,
+    fromDate,
+    toDate,
+    columnName,
+    dataColumn,
+    loadId,
+    linkFn,
+    seriaType,
+    seriaColor,
+    seriaWidth,
+    seriaColumnNames,
+    dataSource,
     ...dfProps
-  }
-}
+  };
+};
 
 export default createLoadOptions
