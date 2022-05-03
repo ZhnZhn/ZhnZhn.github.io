@@ -1,15 +1,13 @@
-import Big from 'big.js'
-import mathFn from '../mathFn'
-import { Direction } from '../../constants/Type'
-
-const {
+import Big from 'big.js';
+import {
   roundBy,
   calcPercent,
   crValueMoving,
   toFixed,
   toFixedNumber,
   crId
-} = mathFn;
+} from '../mathFn';
+import { Direction } from '../../constants/Type';
 
 const PERCENT_0 = '0.00%';
 const PERCENT_100 = '100.00%';

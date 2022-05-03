@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _mathFn = _interopRequireDefault(require("../math/mathFn"));
+var _mathFn = require("../math/mathFn");
 
 var _formatNumber2 = _interopRequireDefault(require("../utils/formatNumber"));
 
@@ -25,15 +25,8 @@ const {
   toDmy,
   toTdmy,
   toTdmyIf
-} = _dateFormat.default;
-const {
-  crValueMoving,
-  toFixedNumber,
-  calcPercent,
-  crId
-} = _mathFn.default;
-
-const _isFn = fn => typeof fn === 'function',
+} = _dateFormat.default,
+      _isFn = fn => typeof fn === 'function',
       _isNumber = n => typeof n === 'number' && n - n === 0,
       _isArr = Array.isArray,
       _assign = Object.assign,
@@ -161,7 +154,7 @@ const _updateYAxisMinMax = (_ref2, options) => {
   }
 };
 
-const _formatNumber = n => (0, _formatAllNumber.default)(toFixedNumber(n));
+const _formatNumber = n => (0, _formatAllNumber.default)((0, _mathFn.toFixedNumber)(n));
 
 const _setPlotLine = function (plotLine, value, delta) {
   if (delta === void 0) {
@@ -176,7 +169,7 @@ const _setPlotLine = function (plotLine, value, delta) {
 
 const _crDelta = perToValue => "\xA0\xA0\u0394 " + perToValue + "%",
       _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10),
-      _calcPerTo = (bFrom, bValue, bTotal) => calcPercent({
+      _calcPerTo = (bFrom, bValue, bTotal) => (0, _mathFn.calcPercent)({
   bValue: bFrom.minus(bValue),
   bTotal
 });
@@ -243,7 +236,7 @@ const ChartFn = {
           mlsUTC = (0, _DateUtils.dmyToUTC)(dateTo),
           index = _isNumber(mlsUTC) ? _findIndexByX(points, mlsUTC) : -1,
           valueTo = index === -1 ? void 0 : points[index].y;
-    return _isNumber(valueTo) ? _assign({}, prev, crValueMoving({
+    return _isNumber(valueTo) ? _assign({}, prev, (0, _mathFn.crValueMoving)({
       nowValue: prev.value,
       prevValue: valueTo,
       fnFormat: _formatAllNumber.default
@@ -255,8 +248,8 @@ const ChartFn = {
 
   toNumberFormat: _formatNumber2.default,
   toNumberFormatAll: _formatAllNumber.default,
-  crId,
-  crTpId: () => crId('TP_'),
+  crId: _mathFn.crId,
+  crTpId: () => (0, _mathFn.crId)('TP_'),
   setPlotLinesMinMax: _ref4 => {
     let {
       plotLines,

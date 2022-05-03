@@ -1,6 +1,11 @@
 import Big from 'big.js';
 
-import mathFn from '../math/mathFn';
+import {
+  crValueMoving,
+  toFixedNumber,
+  calcPercent,
+  crId
+} from '../math/mathFn';
 import formatNumber from '../utils/formatNumber';
 import formatAllNumber from '../utils/formatAllNumber';
 
@@ -10,16 +15,8 @@ import { dmyToUTC } from '../utils/DateUtils';
 import Chart from './Chart';
 import dateFormat from './dateFormat';
 
-const { toDmy, toTdmy, toTdmyIf } = dateFormat;
-
-const {
-  crValueMoving,
-  toFixedNumber,
-  calcPercent,
-  crId
-} = mathFn;
-
-const _isFn = fn => typeof fn === 'function'
+const { toDmy, toTdmy, toTdmyIf } = dateFormat
+, _isFn = fn => typeof fn === 'function'
 , _isNumber = n => typeof n === 'number'
     && n-n===0
 , _isArr = Array.isArray

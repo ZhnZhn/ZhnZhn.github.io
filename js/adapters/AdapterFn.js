@@ -23,7 +23,7 @@ var _DateUtils = require("../utils/DateUtils");
 
 var _toUpperCaseFirst = _interopRequireDefault(require("../utils/toUpperCaseFirst"));
 
-var _mathFn = _interopRequireDefault(require("../math/mathFn"));
+var _mathFn = require("../math/mathFn");
 
 var _seriaFn = require("../math/seriaFn");
 
@@ -77,7 +77,7 @@ const AdapterFn = { ..._crFn.default,
   getCaption: _getPropertyFn.getC,
   getValue: _getPropertyFn.getV,
   isInArrStr: _arrFn.isInArrStr,
-  roundBy: _mathFn.default.roundBy,
+  roundBy: _mathFn.roundBy,
   numberFormat: _formatAllNumber.default,
   isNumberOrNull: v => _isNumber(v) || v === null,
   isYNumber: _fIsNumber('y'),
@@ -92,7 +92,7 @@ const AdapterFn = { ..._crFn.default,
       bPrevValue = (0, _big.default)('0.0'),
       dfR
     } = _ref;
-    return _mathFn.default.crValueMoving({
+    return (0, _mathFn.crValueMoving)({
       nowValue: bNowValue,
       prevValue: bPrevValue,
       fnFormat: _formatAllNumber.default,

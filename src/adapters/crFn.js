@@ -1,4 +1,4 @@
-import mathFn from '../math/mathFn';
+import { crId } from '../math/mathFn';
 const { assign, create } = Object;
 
 const _crPTag = style =>
@@ -13,7 +13,7 @@ const crFn = {
     message
   }),
 
-  crId: () => mathFn.crId().toUpperCase(),
+  crId: () => crId().toUpperCase(),
 
   crItemLink: (caption, itemUrl, style) => `${_crPTag(style)}<a href="${itemUrl}">${caption}</a></p>`
 };

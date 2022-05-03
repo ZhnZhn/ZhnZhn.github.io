@@ -4,18 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _mathFn = _interopRequireDefault(require("../mathFn"));
+var _mathFn = require("../mathFn");
 
 var _Type = require("../../constants/Type");
 
-const {
-  roundBy,
-  calcPercent,
-  crValueMoving,
-  toFixed,
-  toFixedNumber,
-  crId
-} = _mathFn.default;
 const PERCENT_0 = '0.00%';
 const PERCENT_100 = '100.00%';
 
@@ -26,7 +18,7 @@ const _crVmInputs = (nowValue, prevValue) => ({
 });
 
 describe('roundBy', () => {
-  const fn = roundBy;
+  const fn = _mathFn.roundBy;
   test('should return rounded number from string or number by', () => {
     expect(fn(1.554, 2)).toBe(1.55);
     expect(fn(1.555, 2)).toBe(1.56);
@@ -51,7 +43,7 @@ describe('roundBy', () => {
   });
 });
 describe('calcPercent', () => {
-  const fn = calcPercent;
+  const fn = _mathFn.calcPercent;
   test('should return str percent with Fixed 2 from Big values', () => {
     const r = fn({
       bValue: (0, _big.default)(10),
@@ -87,7 +79,7 @@ describe('calcPercent', () => {
   });
 });
 describe('crValueMoving', () => {
-  const fn = crValueMoving;
+  const fn = _mathFn.crValueMoving;
   test('should return correct obj for Big values', () => {
     const r = fn(_crVmInputs((0, _big.default)('200.02'), (0, _big.default)('100.01')));
     expect(r.value).toBe('200.02');
@@ -187,7 +179,7 @@ describe('crValueMoving', () => {
   });
 });
 describe('toFixed', () => {
-  const fn = toFixed;
+  const fn = _mathFn.toFixed;
   test('should return fixed by 0 number for values > 10', () => {
     expect(fn(102.34)).toBe(102);
     expect(fn('102.34')).toBe(102);
@@ -204,7 +196,7 @@ describe('toFixed', () => {
   });
 });
 describe('toFixedNumber', () => {
-  const fn = toFixedNumber;
+  const fn = _mathFn.toFixedNumber;
   test('should return number rounded depend of value', () => {
     expect(fn(9.00005)).toBe(9.0001);
     expect(fn(9000.005)).toBe(9000.01);
@@ -217,7 +209,7 @@ describe('toFixedNumber', () => {
   });
 });
 describe('crId', () => {
-  const fn = crId;
+  const fn = _mathFn.crId;
   test('should return str with 15 length for empty prefix', () => {
     const id = fn();
     expect(typeof id).toBe('string');

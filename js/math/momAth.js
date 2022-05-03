@@ -1,21 +1,14 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
 var _DateUtils = require("../utils/DateUtils");
 
-var _mathFn = _interopRequireDefault(require("./mathFn"));
+var _mathFn = require("./mathFn");
 
-const {
-  roundBy
-} = _mathFn.default;
-const C = {
-  ATH_UP: 'rgba(76, 175, 80, 0.75)',
-  ATH_DOWN: 'rgba(244, 67, 54, 0.75)'
-};
+const COLOR_ATH_UP = 'rgba(76, 175, 80, 0.75)',
+      COLOR_ATH_DOWN = 'rgba(244, 67, 54, 0.75)';
 
 const momAth = data => {
   const dataMom = [],
@@ -39,13 +32,13 @@ const momAth = data => {
       x: x,
       y: mom
     });
-    ath = roundBy(point[1] - prevPoint[4], 4);
+    ath = (0, _mathFn.roundBy)(point[1] - prevPoint[4], 4);
     dataAth.push({
       x: x,
       y: ath,
-      color: ath > 0 ? C.ATH_UP : C.ATH_DOWN
+      color: ath > 0 ? COLOR_ATH_UP : COLOR_ATH_DOWN
     });
-    co = roundBy(point[4] - point[1], 4);
+    co = (0, _mathFn.roundBy)(point[4] - point[1], 4);
     dataSum.push({
       x: x,
       y: co

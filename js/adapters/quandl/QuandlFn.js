@@ -9,7 +9,7 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 
-var _mathFn = _interopRequireDefault(require("../../math/mathFn"));
+var _mathFn = require("../../math/mathFn");
 
 var _DateUtils = require("../../utils/DateUtils");
 
@@ -141,23 +141,14 @@ const QuandlFn = {
     };
   },
 
-  createPercent(_ref3) {
-    let {
-      bValue = (0, _big.default)('0.0'),
-      bTotal = (0, _big.default)('0.0')
-    } = _ref3;
-    return _mathFn.default.calcPercent({
-      bValue,
-      bTotal
-    });
-  },
+  createPercent: _mathFn.calcPercent,
 
-  createValueMoving(_ref4) {
+  createValueMoving(_ref3) {
     let {
       bNowValue = (0, _big.default)('0.0'),
       bPrevValue = (0, _big.default)('0.0')
-    } = _ref4;
-    return _mathFn.default.crValueMoving({
+    } = _ref3;
+    return (0, _mathFn.crValueMoving)({
       nowValue: bNowValue,
       prevValue: bPrevValue,
       fnFormat: _formatAllNumber.default

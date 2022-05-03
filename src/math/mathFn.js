@@ -1,7 +1,7 @@
 import Big from 'big.js';
 
 import { Direction } from '../constants/Type';
-import crId from './crId';
+import _crId from './crId';
 
 const fnEcho = value => value;
 
@@ -48,68 +48,69 @@ const _roundBy = (nOrStr, by=2) => {
   return parseFloat(Big(nOrStr).toFixed(by));
 };
 
-const mathFn = {
-  roundBy: _roundBy,
 
-  calcPercent: ({ bValue=Big(0), bTotal=Big(0) }) => {
-    bValue = _toBig(bValue)
-    bTotal = _toBig(bTotal)
-    return !bTotal.eq(Big(0))
-      ? bValue.times(100).div(bTotal).abs().toFixed(2)
-      : Big(0).toFixed(2);
-  },
+export const roundBy = _roundBy
 
-  crValueMoving: ({
-    nowValue,
-    prevValue,
-    Direction:D=Direction,
-    fnFormat=fnEcho,
-    dfR
-  }) => {
-    const bNowValue = _formatedToBig(nowValue, dfR)
-    , bPrevValue = _formatedToBig(prevValue, dfR)
-    , _bDelta = bPrevValue.minus(bNowValue)
-    , _direction = _bDelta.gt(0.0)
-         ? D.DOWN
-         : _bDelta.lt(0.0) ? D.UP : D.EQUAL
-    , _bPercent = mathFn.calcPercent({
-      bValue:_bDelta, bTotal: bPrevValue
-    })
-    , _bNowValue = _roundBig(bNowValue)
-    , _bDeltaAbs = _roundBig(_bDelta.abs());
-
-    return {
-      value: fnFormat(_bNowValue).toString(),
-      _value: _bNowValue.toString(),
-      delta: fnFormat(_bDeltaAbs).toString(),
-      _deltaAbs: _bDeltaAbs.toString(),
-      percent: _bPercent.toString() + '%',
-      _percentAbs: _bPercent.toString(),
-      direction: _direction
-    };
-  },
-
-  toFixed: (value) => {
-    const bValue = Big(value);
-    return bValue.gt('10')
-      ? parseInt(bValue.toFixed(0), 10)
-      : parseFloat(bValue.toFixed(2));
-  },
-
-  toFixedNumber: (value) => {
-    if ( !_isNumber(value) ) {
-      return value;
-    }
-    if ( value<10 ) {
-      return _roundBy(value, 4);
-    } else if ( value<10000 ) {
-      return _roundBy(value, 2);
-    } else {
-      return _roundBy(value, 0);
-    }
-  },
-
-  crId
+export const calcPercent = ({
+  bValue=Big(0),
+  bTotal=Big(0)
+}) => {
+  bValue = _toBig(bValue)
+  bTotal = _toBig(bTotal)
+  return !bTotal.eq(Big(0))
+    ? bValue.times(100).div(bTotal).abs().toFixed(2)
+    : Big(0).toFixed(2);
 }
 
-export default mathFn
+export const crValueMoving = ({
+  nowValue,
+  prevValue,
+  Direction:D=Direction,
+  fnFormat=fnEcho,
+  dfR
+}) => {
+  const bNowValue = _formatedToBig(nowValue, dfR)
+  , bPrevValue = _formatedToBig(prevValue, dfR)
+  , _bDelta = bPrevValue.minus(bNowValue)
+  , _direction = _bDelta.gt(0.0)
+       ? D.DOWN
+       : _bDelta.lt(0.0) ? D.UP : D.EQUAL
+  , _bPercent = calcPercent({
+       bValue:_bDelta,
+       bTotal: bPrevValue
+  })
+  , _bNowValue = _roundBig(bNowValue)
+  , _bDeltaAbs = _roundBig(_bDelta.abs());
+
+  return {
+    value: fnFormat(_bNowValue).toString(),
+    _value: _bNowValue.toString(),
+    delta: fnFormat(_bDeltaAbs).toString(),
+    _deltaAbs: _bDeltaAbs.toString(),
+    percent: _bPercent.toString() + '%',
+    _percentAbs: _bPercent.toString(),
+    direction: _direction
+  };
+}
+
+export const toFixed = (value) => {
+  const bValue = Big(value);
+  return bValue.gt('10')
+    ? parseInt(bValue.toFixed(0), 10)
+    : parseFloat(bValue.toFixed(2));
+}
+
+export const toFixedNumber = (value) => {
+  if ( !_isNumber(value) ) {
+    return value;
+  }
+  if ( value<10 ) {
+    return _roundBy(value, 4);
+  } else if ( value<10000 ) {
+    return _roundBy(value, 2);
+  } else {
+    return _roundBy(value, 0);
+  }
+}
+
+export const crId = _crId

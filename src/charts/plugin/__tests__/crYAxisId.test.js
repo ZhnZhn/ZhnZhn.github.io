@@ -6,7 +6,7 @@ const _testResult = (r, expectedArr) => {
 
 const _testResultId = r => {
   expect(r[0]).toBe(true)
-  expect(r[1].length).toBe(12)
+  expect(r[1].length).toBe(15)
 }
 
 describe('crYAxisId', () => {

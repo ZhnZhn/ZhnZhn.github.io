@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import useBool from '../hooks/useBool'
 import has from '../has'
-import mathFns from '../../math/mathFn'
+import { roundBy } from '../../math/mathFn';
 
 import CircleInner from './CircleInner';
 //import PropTypes from "prop-types";
@@ -180,7 +180,7 @@ const InputSlider = ({
       let v;
       v = position/positionMax * (max - min)
       v = Math.round(v / step) * step + min
-      v = mathFns.roundBy(v, 5)
+      v = roundBy(v, 5)
 
       _updateValue(v)
     }

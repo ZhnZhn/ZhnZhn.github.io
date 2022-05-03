@@ -23,7 +23,10 @@ import {
 } from '../utils/DateUtils';
 import toUpperCaseFirst from '../utils/toUpperCaseFirst'
 
-import mathFn from '../math/mathFn'
+import {
+  roundBy,
+  crValueMoving
+} from '../math/mathFn'
 import {
   findMinY,
   findMaxY,
@@ -98,7 +101,7 @@ const AdapterFn = {
   getValue: getV,
   isInArrStr,
 
-  roundBy: mathFn.roundBy,
+  roundBy,
   numberFormat: formatAllNumber,
 
   isNumberOrNull: v => _isNumber(v) || v === null,
@@ -115,7 +118,7 @@ const AdapterFn = {
     bNowValue=Big('0.0'),
     bPrevValue=Big('0.0'),
     dfR
-  }) => mathFn.crValueMoving({
+  }) => crValueMoving({
     nowValue: bNowValue,
     prevValue: bPrevValue,
     fnFormat: formatAllNumber,

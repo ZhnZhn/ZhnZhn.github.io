@@ -1,18 +1,13 @@
 import { ymdToUTC } from '../utils/DateUtils';
-import mathFns from './mathFn'
+import { roundBy } from './mathFn';
 
-const { roundBy }  = mathFns;
-
-const C = {
-  ATH_UP: 'rgba(76, 175, 80, 0.75)',
-  ATH_DOWN: 'rgba(244, 67, 54, 0.75)'
-};
-
+const COLOR_ATH_UP = 'rgba(76, 175, 80, 0.75)'
+, COLOR_ATH_DOWN = 'rgba(244, 67, 54, 0.75)';
 
 const momAth = (data) => {
   const dataMom = []
-      , dataAth = []
-      , dataSum = [];
+  , dataAth = []
+  , dataSum = [];
   let i = 1, max=data.length
   , point, prevPoint
   , x , mom, ath, co;
@@ -25,8 +20,9 @@ const momAth = (data) => {
     dataMom.push({ x: x, y: mom })
     ath = roundBy(point[1] - prevPoint[4], 4)
     dataAth.push({
-      x: x, y: ath,
-      color: ath > 0 ? C.ATH_UP : C.ATH_DOWN
+      x: x,
+      y: ath,
+      color: ath > 0 ? COLOR_ATH_UP : COLOR_ATH_DOWN
     })
     co = roundBy(point[4] - point[1], 4)
     dataSum.push({ x: x, y: co })

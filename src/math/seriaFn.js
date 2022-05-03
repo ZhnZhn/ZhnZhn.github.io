@@ -1,9 +1,9 @@
-import Big from 'big.js'
+import Big from 'big.js';
 
-import mathFn from './mathFn'
-import fIndicatorCalc from './fIndicatorCalc'
-import diff from './diff'
-import roc from './roc'
+import { toFixedNumber } from './mathFn';
+import fIndicatorCalc from './fIndicatorCalc';
+import diff from './diff';
+import roc from './roc';
 import {
   isNotEmptyArr,
   isNumber,
@@ -39,7 +39,7 @@ const _fFindY = (initialValue, findY) => (data) => {
     resultY = _fn(data[i], resultY)
   }
   return resultY !== initialValue
-    ? mathFn.toFixedNumber(resultY)
+    ? toFixedNumber(resultY)
     : void 0;
 };
 const _findMinY = (y, min) => isNumber(y) && y<min

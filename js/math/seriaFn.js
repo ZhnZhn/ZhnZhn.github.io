@@ -7,7 +7,7 @@ exports.normalize = exports.median = exports.mean = exports.growthRate = exports
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _mathFn = _interopRequireDefault(require("./mathFn"));
+var _mathFn = require("./mathFn");
 
 var _fIndicatorCalc = _interopRequireDefault(require("./fIndicatorCalc"));
 
@@ -49,7 +49,7 @@ const _fFindY = (initialValue, findY) => data => {
     resultY = _fn(data[i], resultY);
   }
 
-  return resultY !== initialValue ? _mathFn.default.toFixedNumber(resultY) : void 0;
+  return resultY !== initialValue ? (0, _mathFn.toFixedNumber)(resultY) : void 0;
 };
 
 const _findMinY = (y, min) => (0, _seriaHelperFn.isNumber)(y) && y < min ? y : min;

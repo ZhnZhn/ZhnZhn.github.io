@@ -1,7 +1,10 @@
 import Big from 'big.js';
 
 import formatAllNumber from '../../utils/formatAllNumber'
-import mathFn from '../../math/mathFn';
+import {
+  calcPercent,
+  crValueMoving
+} from '../../math/mathFn';
 
 import { mlsToDmy } from '../../utils/DateUtils';
 
@@ -107,12 +110,10 @@ const QuandlFn = {
     };
   },
 
-  createPercent({ bValue=Big('0.0'), bTotal=Big('0.0') }){
-    return mathFn.calcPercent({ bValue, bTotal });
-  },
+  createPercent: calcPercent,
 
   createValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0') }){
-    return mathFn.crValueMoving({
+    return crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
       fnFormat: formatAllNumber

@@ -2,7 +2,7 @@ import { render } from 'react-dom'
 
 import JsonStatFn from './JsonStatFn'
 import clusterMaker from '../../math/k-means'
-import mathFn from '../../math/mathFn'
+import { toFixed } from '../../math/mathFn'
 import merge from '../../utils/merge'
 
 import MapFactory from '../../components/factories/MapFactory'
@@ -165,9 +165,9 @@ const _crGradeControl = function(minValue, maxValue, clusters, L, wg){
       const _div = _crEl('div', 'control-grade');
 
       let _upperPrev, _upperNext;
-      _upperPrev = mathFn.toFixed(minValue)
+      _upperPrev = toFixed(minValue)
       clusters.forEach((cluster, index) => {
-        _upperNext = mathFn.toFixed(_calcUpper(clusters, index, maxValue))
+        _upperNext = toFixed(_calcUpper(clusters, index, maxValue))
         _div.appendChild( _crRowEl(
             COLORS[index], _upperPrev, _upperNext, cluster, wg
         ))
