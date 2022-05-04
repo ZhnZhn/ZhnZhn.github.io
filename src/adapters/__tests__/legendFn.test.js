@@ -1,7 +1,8 @@
-import legendFn from '../legendFn'
+import {
+  legendItem,
+  stockSeriesLegend
+} from '../legendFn';
 import C from '../../constants/Color'
-
-const { legendItem, stockSeriesLegend } = legendFn
 
 describe('legendItem', ()=>{
   const fn = legendItem

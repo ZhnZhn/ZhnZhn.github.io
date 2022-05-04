@@ -37,7 +37,6 @@ import { Direction } from '../constants/Type'
 
 import crFn from './crFn'
 import pointFn from './pointFn'
-import legendFn from './legendFn'
 
 const EMPTY = '';
 
@@ -80,8 +79,6 @@ const _fToFloatOr = dfValue => str => {
 const AdapterFn = {
   ...crFn,
   ...pointFn,
-  ...legendFn,
-
 
   toTd: (mls) => _isNumber(mls)
     ? toTd(mls)

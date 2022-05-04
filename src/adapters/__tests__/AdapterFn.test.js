@@ -13,12 +13,9 @@ const {
   crItemLink,
 
   crVolumePoint,
-  crAthPoint,
+  crAthPoint,  
 
-  legendItem,
-  stockSeriesLegend,
-
-  ymdToUTC,  
+  ymdToUTC,
   isYNumber,
   isNumberOrNull,
   toFloatOrEmpty,
@@ -38,9 +35,6 @@ describe('added fns', ()=>{
 
     expect(typeof crVolumePoint).toBe('function')
     expect(typeof crAthPoint).toBe('function')
-
-    expect(typeof legendItem).toBe('function')
-    expect(typeof stockSeriesLegend).toBe('function')
   })
 })
 

@@ -1,10 +1,10 @@
 import Builder from '../charts/ConfigBuilder'
 import AdapterFn from './AdapterFn'
+import { stockSeriesLegend } from './legendFn';
 import { toStockSeriesData } from './AdapterStockFn'
 
 const {
-  valueMoving,
-  stockSeriesLegend
+  valueMoving
 } = AdapterFn;
 
 const _crCaptionDf = ({ title, subtitle }) => ({ title, subtitle })

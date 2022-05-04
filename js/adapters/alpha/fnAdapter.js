@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
+var _legendFn = require("../legendFn");
+
 const {
   crError,
   getValue,
@@ -14,16 +16,16 @@ const {
   joinBy,
   crItemConf,
   crValueConf,
-  stockSeriesLegend,
   valueMoving,
   ymdToUTC,
   compareByDate,
   roundBy
 } = _AdapterFn.default;
 
-const _crItemConf = ({
-  data
-}, option) => {
+const _crItemConf = (_ref, option) => {
+  let {
+    data
+  } = _ref;
   const {
     _itemKey,
     dfFn,
@@ -59,7 +61,7 @@ const _crZhConfig = (config, option) => {
     key: _id,
     itemCaption,
     itemConf,
-    legend: stockSeriesLegend(),
+    legend: (0, _legendFn.stockSeriesLegend)(),
     dataSource: dataSource || "Alpha Vantage"
   };
 };

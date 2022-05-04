@@ -3,6 +3,7 @@ import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
 import AdapterFn from '../AdapterFn'
+import { legendItem } from '../legendFn'
 
 import fnDescr from './fnDescr'
 import fnHm from './fnHm'
@@ -34,7 +35,7 @@ const fnAdapter = {
       symbol: 'circle'
     };
   },
-  
+
   crZhConfig(option) {
     const { dataSource } = option
         , _id = this.crChartId(option);
@@ -67,7 +68,7 @@ const fnAdapter = {
       config, hm[name], i, name, _seriaOption
     )
     legend.push(
-       AdapterFn.legendItem(i, _color, name, isShow)
+       legendItem(i, _color, name, isShow)
     )
   },
 

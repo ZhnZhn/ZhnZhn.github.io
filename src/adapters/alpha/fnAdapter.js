@@ -1,5 +1,5 @@
-
 import AdapterFn from '../AdapterFn'
+import { stockSeriesLegend } from '../legendFn'
 
 const {
   crError,
@@ -8,7 +8,6 @@ const {
   joinBy,
   crItemConf,
   crValueConf,
-  stockSeriesLegend,
   valueMoving,
   ymdToUTC,
   compareByDate,

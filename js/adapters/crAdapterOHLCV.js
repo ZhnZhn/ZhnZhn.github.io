@@ -9,11 +9,12 @@ var _ConfigBuilder = _interopRequireDefault(require("../charts/ConfigBuilder"));
 
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
+var _legendFn = require("./legendFn");
+
 var _AdapterStockFn = require("./AdapterStockFn");
 
 const {
-  valueMoving,
-  stockSeriesLegend
+  valueMoving
 } = _AdapterFn.default;
 
 const _crCaptionDf = _ref => {
@@ -72,7 +73,7 @@ const crAdapterOHLCV = _ref3 => {
           subtitle
         })
       }).add('zhConfig', {
-        legend: stockSeriesLegend()
+        legend: (0, _legendFn.stockSeriesLegend)()
       }).addZhPointsIf(dMfi).toConfig();
       return {
         config
