@@ -7,11 +7,8 @@ exports.default = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _toTableFn = _interopRequireDefault(require("./toTableFn"));
+var _toTableFn = require("./toTableFn");
 
-const {
-  crRows
-} = _toTableFn.default;
 const S = {
   TO_LEFT: {
     to: 'to left',
@@ -122,7 +119,7 @@ const crOrderBookRows = (json, limit) => {
 
   const _headers = _crTableHeaders(_isOrderNumber);
 
-  return [_headers, crRows(_headers, rows)];
+  return [_headers, (0, _toTableFn.crTableRows)(_headers, rows)];
 };
 
 var _default = crOrderBookRows;

@@ -1,10 +1,9 @@
-import toTableFn from '../toTableFn'
+import {
+  crTableRows,
+  crTableConfig
+} from '../toTableFn';
 import fnAdapter from './fnAdapter'
 
-const {
-  crRows,
-  crTableConfig
-} = toTableFn;
 const { crPageConfig } = fnAdapter;
 
 const _crPriceChangeItem = (name, pnSuffix, options) => ({
@@ -81,7 +80,7 @@ const toMarketCapList = {
     const { key, title } = option
     , _json = _transformDate(json)
     , headers = _getTableHeaders()
-    , rows = crRows(headers, _json)
+    , rows = crTableRows(headers, _json)
     , config = crTableConfig({
       id: key, title,
       headers, rows,

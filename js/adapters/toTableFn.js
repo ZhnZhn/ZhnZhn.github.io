@@ -3,18 +3,17 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.crTableRows = exports.crTableConfig = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
-var _crTableConfig = _interopRequireDefault(require("./crTableConfig"));
+const {
+  numberFormat,
+  roundBy
+} = _AdapterFn.default;
 
-var roundBy = _AdapterFn["default"].roundBy;
-
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number';
-},
-    _replaceNaN = function _replaceNaN(n, str) {
+const _isNumber = n => typeof n === 'number',
+      _replaceNaN = function (n, str) {
   if (str === void 0) {
     str = '';
   }
@@ -22,40 +21,68 @@ var _isNumber = function _isNumber(n) {
   return n - n === 0 ? n : str;
 };
 
-var _getCellValue = function _getCellValue(r, h) {
-  var pn = h.pn,
-      toN = h.toN,
-      _isToNumber = !!toN,
-      _toFixedBy = _isToNumber && toN[0],
-      _strV = r[pn];
+const _getCellValue = (r, h) => {
+  const {
+    pn,
+    toN
+  } = h,
+        _isToNumber = !!toN,
+        _toFixedBy = _isToNumber && toN[0],
+        _strV = r[pn];
 
   return _isToNumber ? _isNumber(_toFixedBy) ? roundBy(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
 };
 
-var toTableFn = {
-  crTableConfig: _crTableConfig["default"],
-  crRows: function crRows(headers, rows, idPropName) {
-    if (headers === void 0) {
-      headers = [];
+const crTableConfig = _ref => {
+  let {
+    id,
+    title,
+    headers,
+    rows,
+    dataSource,
+    fns
+  } = _ref;
+  return {
+    id,
+    title,
+    headers,
+    tableFn: {
+      numberFormat,
+      ...fns
+    },
+    rows,
+    dataSource,
+    zhCompType: 'TABLE',
+    zhConfig: {
+      id: id,
+      key: id
     }
-
-    if (rows === void 0) {
-      rows = [];
-    }
-
-    if (idPropName === void 0) {
-      idPropName = 'id';
-    }
-
-    return rows.map(function (r, rIndex) {
-      headers.forEach(function (h) {
-        r[h.pn] = _getCellValue(r, h);
-      });
-      r.id = r[idPropName] || "id" + rIndex;
-      return r;
-    });
-  }
+  };
 };
-var _default = toTableFn;
-exports["default"] = _default;
+
+exports.crTableConfig = crTableConfig;
+
+const crTableRows = function (headers, rows, idPropName) {
+  if (headers === void 0) {
+    headers = [];
+  }
+
+  if (rows === void 0) {
+    rows = [];
+  }
+
+  if (idPropName === void 0) {
+    idPropName = 'id';
+  }
+
+  return rows.map((r, rIndex) => {
+    headers.forEach(h => {
+      r[h.pn] = _getCellValue(r, h);
+    });
+    r.id = r[idPropName] || "id" + rIndex;
+    return r;
+  });
+};
+
+exports.crTableRows = crTableRows;
 //# sourceMappingURL=toTableFn.js.map

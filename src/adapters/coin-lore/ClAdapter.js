@@ -1,5 +1,8 @@
 import AdapterFn from '../AdapterFn';
-import toTableFn from '../toTableFn';
+import {
+  crTableConfig,
+  crTableRows
+} from '../toTableFn';
 
 const { toTd } = AdapterFn;
 
@@ -41,15 +44,14 @@ const HEADERS = [{
 },{
   isHide: true,
   name: 'Time',
-  pn: 'time'  
+  pn: 'time'
 },{
   isHide: true,
   name: 'Date',
   pn: 'date'
 }];
 
-const { crTableConfig, crRows } = toTableFn
-, _crTimeDate = (time) => toTd(time*1000).split(' ')
+const _crTimeDate = (time) => toTd(time*1000).split(' ')
 // base = null or quote = null or volume = 0
 , _isNotEmptyPair = ({ base, quote, volume }) => base && quote && volume !== 0
 , _crRows = (json) => {
@@ -70,7 +72,7 @@ const { crTableConfig, crRows } = toTableFn
     }
   }
   return {
-    rows: crRows(HEADERS, _rows),
+    rows: crTableRows(HEADERS, _rows),
     tMin, tMax
   };
 },

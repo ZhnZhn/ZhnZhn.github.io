@@ -1,7 +1,5 @@
-import toTableFn from './toTableFn';
+import { crTableConfig } from './toTableFn';
 import crOrderBookRows from './crOrderBookRows';
-
-const { crTableConfig } = toTableFn;
 
 const fnNoop = () => {};
 const fnIdentity = json => json;

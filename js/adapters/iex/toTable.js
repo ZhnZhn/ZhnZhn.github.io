@@ -1,15 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _toTableFn = _interopRequireDefault(require("../toTableFn"));
+var _toTableFn = require("../toTableFn");
 
-var crRows = _toTableFn["default"].crRows;
-var ID_PROP_NAME = 'symbol';
-var HEADERS = [{
+const ID_PROP_NAME = 'symbol';
+const HEADERS = [{
   name: 'Symbol',
   pn: 'symbol',
   style: {
@@ -45,13 +42,13 @@ var HEADERS = [{
   pn: 'primaryExchange'
 }];
 
-var _crTitle = function _crTitle(title, json) {
-  var _suffix = '';
-  var _item = json[0];
+const _crTitle = (title, json) => {
+  let _suffix = '';
+  const _item = json[0];
 
   if (_item) {
-    var _t = _item.latestTime || '',
-        _s = _item.latestSource || '';
+    const _t = _item.latestTime || '',
+          _s = _item.latestSource || '';
 
     _suffix = (_t + ' ' + _s).trim();
   }
@@ -59,30 +56,29 @@ var _crTitle = function _crTitle(title, json) {
   return title + " " + _suffix;
 };
 
-var toTable = {
-  crKey: function crKey(option) {
+const toTable = {
+  crKey(option) {
     option.key = option.value;
     return option.key;
   },
-  toConfig: function toConfig(json, option) {
-    var title = option.title,
-        key = option.key;
+
+  toConfig(json, option) {
+    const {
+      title,
+      key
+    } = option;
     return {
-      config: {
+      config: (0, _toTableFn.crTableConfig)({
         id: key,
         title: _crTitle(title, json),
         headers: HEADERS,
-        rows: crRows(HEADERS, json, ID_PROP_NAME),
-        dataSource: 'IEX Cloud',
-        zhCompType: 'TABLE',
-        zhConfig: {
-          id: key,
-          key: key
-        }
-      }
+        rows: (0, _toTableFn.crTableRows)(HEADERS, json, ID_PROP_NAME),
+        dataSource: 'IEX Cloud'
+      })
     };
   }
+
 };
 var _default = toTable;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toTable.js.map

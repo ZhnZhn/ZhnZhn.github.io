@@ -3,17 +3,17 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _toTableFn = _interopRequireDefault(require("../toTableFn"));
+var _toTableFn = require("../toTableFn");
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var crRows = _toTableFn["default"].crRows,
-    crTableConfig = _toTableFn["default"].crTableConfig,
-    crPageConfig = _fnAdapter["default"].crPageConfig,
-    getYmdhmUTC = _fnAdapter["default"].getYmdhmUTC;
-var HEADERS = [{
+const {
+  crPageConfig,
+  getYmdhmUTC
+} = _fnAdapter.default;
+const HEADERS = [{
   name: 'Trust Rank',
   pn: 'trust_score_rank',
   toN: [],
@@ -63,33 +63,35 @@ var HEADERS = [{
   pn: 'url',
   isHref: true
 }];
-var toExchangeList = {
-  crKey: function crKey(option) {
+const toExchangeList = {
+  crKey(option) {
     option.key = crPageConfig(option).join('_');
     return option.key;
   },
-  toConfig: function toConfig(json, option) {
-    var key = option.key,
-        title = option.title,
-        _rows = crRows(HEADERS, json),
-        config = crTableConfig({
+
+  toConfig(json, option) {
+    const {
+      key,
+      title
+    } = option,
+          _rows = (0, _toTableFn.crTableRows)(HEADERS, json),
+          config = (0, _toTableFn.crTableConfig)({
       id: key,
-      title: title,
+      title,
       headers: HEADERS,
       rows: _rows,
       dataSource: "CoinGecko " + getYmdhmUTC(),
       fns: {
-        valueToHref: function valueToHref(id, v) {
-          return v;
-        }
+        valueToHref: (id, v) => v
       }
     });
 
     return {
-      config: config
+      config
     };
   }
+
 };
 var _default = toExchangeList;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toExchangeList.js.map

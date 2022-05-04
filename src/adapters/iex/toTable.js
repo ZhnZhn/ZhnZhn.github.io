@@ -1,6 +1,8 @@
-import toTableFn from '../toTableFn'
+import {
+  crTableRows,
+  crTableConfig
+} from '../toTableFn';
 
-const { crRows } = toTableFn;
 const ID_PROP_NAME = 'symbol'
 const HEADERS = [{
   name: 'Symbol',
@@ -56,17 +58,13 @@ const toTable = {
   toConfig(json, option){
     const {title, key} = option;
     return {
-      config: {
+      config: crTableConfig({
         id: key,
         title: _crTitle(title, json),
         headers: HEADERS,
-        rows: crRows(HEADERS, json, ID_PROP_NAME),
-        dataSource: 'IEX Cloud',
-        zhCompType: 'TABLE',
-        zhConfig: {
-          id: key, key
-        }
-      }
+        rows: crTableRows(HEADERS, json, ID_PROP_NAME),
+        dataSource: 'IEX Cloud'
+      })
     };
   }
 };

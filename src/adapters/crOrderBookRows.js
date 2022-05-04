@@ -1,7 +1,5 @@
 import Big from 'big.js';
-import toTableFn from './toTableFn';
-
-const { crRows } = toTableFn;
+import { crTableRows } from './toTableFn';
 
 const S = {
   TO_LEFT: {
@@ -103,7 +101,7 @@ const crOrderBookRows = (json, limit) => {
   rows.push(_totalRow)
 
   const _headers = _crTableHeaders(_isOrderNumber);
-  return  [_headers, crRows(_headers, rows)];
+  return  [_headers, crTableRows(_headers, rows)];
 };
 
 export default crOrderBookRows

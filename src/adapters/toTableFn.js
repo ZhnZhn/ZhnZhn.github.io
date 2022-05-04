@@ -1,7 +1,6 @@
 import AdapterFn from './AdapterFn'
-import crTableConfig from './crTableConfig'
 
-const { roundBy } = AdapterFn;
+const { numberFormat, roundBy } = AdapterFn;
 
 const _isNumber = n => typeof n === 'number'
 , _replaceNaN = (n, str='') => n - n === 0
@@ -19,17 +18,38 @@ const _getCellValue = (r, h) => {
     : _strV;
 };
 
-const toTableFn = {
-  crTableConfig,
-  crRows: (headers=[], rows=[], idPropName='id') => {
-    return rows.map((r, rIndex) => {
-      headers.forEach(h => {
-        r[h.pn] = _getCellValue(r, h);
-      })
-      r.id = r[idPropName] || `id${rIndex}`
-      return r;
-    });
+export const crTableConfig = ({
+  id,
+  title,
+  headers,
+  rows,
+  dataSource,
+  fns
+}) => ({
+  id,
+  title,
+  headers,
+  tableFn: {
+    numberFormat,
+    ...fns
+  },
+  rows,
+  dataSource,
+  zhCompType: 'TABLE',
+  zhConfig: {
+    id: id, key: id
   }
-};
+})
 
-export default toTableFn
+export const crTableRows = (
+  headers=[],
+  rows=[],
+  idPropName='id'
+) => rows
+  .map((r, rIndex) => {
+     headers.forEach(h => {
+       r[h.pn] = _getCellValue(r, h);
+     })
+     r.id = r[idPropName] || `id${rIndex}`
+     return r;
+  });

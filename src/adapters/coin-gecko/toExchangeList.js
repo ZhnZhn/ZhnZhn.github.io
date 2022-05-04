@@ -1,14 +1,13 @@
-import toTableFn from '../toTableFn'
+import {
+  crTableRows,
+  crTableConfig
+} from '../toTableFn';
 import fnAdapter from './fnAdapter'
 
 const {
-  crRows,
-  crTableConfig
-} = toTableFn
-, {
-    crPageConfig,
-    getYmdhmUTC
-  } = fnAdapter;
+  crPageConfig,
+  getYmdhmUTC
+} = fnAdapter;
 
 const HEADERS = [{
   name: 'Trust Rank',
@@ -63,7 +62,7 @@ const toExchangeList = {
 
   toConfig(json, option){
     const { key, title } = option
-    , _rows = crRows(HEADERS, json)
+    , _rows = crTableRows(HEADERS, json)
     , config = crTableConfig({
       id: key, title,
       headers: HEADERS,
