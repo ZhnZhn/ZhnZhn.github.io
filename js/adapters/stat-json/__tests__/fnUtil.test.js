@@ -1,15 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _fnUtil = require("../fnUtil");
 
-var _fnUtil = _interopRequireDefault(require("../fnUtil"));
-
-const {
-  toUTC,
-  toYMD
-} = _fnUtil.default;
 describe('toUTC', () => {
-  const fn = toUTC;
+  const fn = _fnUtil.toUTC;
   test('should convert str in format 2010M01D01 to mls UTC-0', () => {
     expect(fn('2010M01D01')).toBe(Date.UTC(2010, 0, 1)); //2010-01-01
 
@@ -54,7 +48,7 @@ describe('toUTC', () => {
   });
 });
 describe('toYMD', () => {
-  const fn = toYMD;
+  const fn = _fnUtil.toYMD;
   test('should convert str in toUTC formats to str YYYY-MM-DD', () => {
     expect(fn('2010M01D01')).toBe('2010-01-01');
     expect(fn('2010M02')).toBe('2010-02-28');

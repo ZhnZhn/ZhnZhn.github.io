@@ -7,15 +7,11 @@ exports.default = void 0;
 
 var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
-var _fnUtil = _interopRequireDefault(require("./fnUtil"));
+var _fnUtil = require("./fnUtil");
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 const {
-  toUTC,
-  compose
-} = _fnUtil.default,
-      {
   crDsValuesTimes,
   crConfOption
 } = _fnAdapter.default;
@@ -48,13 +44,13 @@ const _fCrDataPoint = (values, hasPerJanuary) => (time, i) => {
   const _pIndex = time.length - 1,
         isP = time[_pIndex] === '*',
         _time = isP ? time.slice(0, _pIndex) : time,
-        x = toUTC(_time, hasPerJanuary),
+        x = (0, _fnUtil.toUTC)(_time, hasPerJanuary),
         y = values[i] ? values[i].value : null;
 
   return isP ? [x, y, 'p'] : [x, y];
 };
 
-const _postProcessData = compose(_filterLeadingNulls, _checkOrder);
+const _postProcessData = (0, _fnUtil.compose)(_filterLeadingNulls, _checkOrder);
 
 const _toData = (values, times, hasPerJanuary) => {
   const _values = _isArr(values) ? values : [values],

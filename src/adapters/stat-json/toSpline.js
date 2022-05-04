@@ -1,10 +1,9 @@
 import crConfigType1 from '../../charts/crConfigType1';
 
-import fnUtil from './fnUtil';
+import { toUTC, compose } from './fnUtil';
 import fnAdapter from './fnAdapter';
 
-const { toUTC, compose } = fnUtil
-, {
+const {
   crDsValuesTimes,
   crConfOption
 } = fnAdapter;

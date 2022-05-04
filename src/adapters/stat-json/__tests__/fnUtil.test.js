@@ -1,9 +1,7 @@
-import fnUtil from '../fnUtil';
-
-const {
+import {
   toUTC,
   toYMD
-} = fnUtil;
+} from '../fnUtil';
 
 describe('toUTC', ()=>{
   const fn = toUTC;

@@ -1,5 +1,5 @@
 
-import compose from '../../utils/compose';
+import _compose from '../../utils/compose';
 
 const _toUTC = Date.UTC;
 
@@ -21,39 +21,39 @@ const _fToUTC = monthPeriod => (delimeterChart, str) => {
 , _toHalfYearUTC = _fToUTC(6)
 , _toYearUTC = (str, hasPerJanuary) => hasPerJanuary
     ? _toUTC(str, 0, 1)
-    : _toUTC(str, 11, 31);
+    : _toUTC(str, 11, 31)
+, _fIsInclude = str =>
+     token => str.indexOf(token) !== -1;
 
-const _fIsInclude = str => token => str.indexOf(token) !== -1;
+export const compose = _compose
 
-const fnUtil = {
-  compose,
-  toUTC: (str, hasPerJanuary) => {
-    str = str.toUpperCase()
-    const _isInclude = _fIsInclude(str);
-    if (_isInclude('M')) {
-      return _isInclude('D')
-        ? _toDayUTC(str)
-        : _toMonthUTC('M', str);
-    }
-    if (_isInclude('Q')) {
-      return _toQuarterUTC('Q', str);
-    }
-    if (_isInclude('K')) {
-      return _toQuarterUTC('K', str);
-    }
-    if (_isInclude('H')) {
-      return _toHalfYearUTC('H', str);
-    }
-    return _toYearUTC(str, hasPerJanuary);
-  },
-
-  toYMD: (str) => {
-    const ms = fnUtil.toUTC(str)
-    , d = new Date(ms);
-    return d.getUTCFullYear()
-      + "-" + ("0" + (d.getUTCMonth() + 1) ).slice(-2)
-      + "-" + ("0" + d.getUTCDate()).slice(-2);
+export const toUTC = (
+  str,
+  hasPerJanuary
+) => {
+  str = str.toUpperCase()
+  const _isInclude = _fIsInclude(str);
+  if (_isInclude('M')) {
+    return _isInclude('D')
+      ? _toDayUTC(str)
+      : _toMonthUTC('M', str);
   }
-};
+  if (_isInclude('Q')) {
+    return _toQuarterUTC('Q', str);
+  }
+  if (_isInclude('K')) {
+    return _toQuarterUTC('K', str);
+  }
+  if (_isInclude('H')) {
+    return _toHalfYearUTC('H', str);
+  }
+  return _toYearUTC(str, hasPerJanuary);
+}
 
-export default fnUtil
+export const toYMD = (str) => {
+  const ms = toUTC(str)
+  , d = new Date(ms);
+  return d.getUTCFullYear()
+    + "-" + ("0" + (d.getUTCMonth() + 1) ).slice(-2)
+    + "-" + ("0" + d.getUTCDate()).slice(-2);
+}

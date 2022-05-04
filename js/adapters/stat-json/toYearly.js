@@ -11,21 +11,19 @@ var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var _fnUtil = _interopRequireDefault(require("./fnUtil"));
+var _fnUtil = require("./fnUtil");
 
-const {
-  toYMD
-} = _fnUtil.default;
-const {
+const _isArr = Array.isArray,
+      {
   crDsValuesTimes,
   crInfo,
   crZhConfig
 } = _fnAdapter.default;
 
 const _toData = (values, times) => {
-  const _values = Array.isArray(values) ? values : [values];
+  const _values = _isArr(values) ? values : [values];
 
-  const data = times.map((time, i) => [toYMD(time), _values[i].value]);
+  const data = times.map((time, i) => [(0, _fnUtil.toYMD)(time), _values[i].value]);
   return data.reverse();
 };
 
