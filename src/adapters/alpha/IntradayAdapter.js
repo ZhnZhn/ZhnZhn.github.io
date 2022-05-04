@@ -1,6 +1,7 @@
 import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
 import AdapterFn from '../AdapterFn'
+import { crVolumePoint } from '../pointFn'
 import {
   crMarkerColor,
   crDataDaily
@@ -9,8 +10,7 @@ import {
 import fnAdapter from './fnAdapter'
 
 const {
-   ymdhmsToUTC,
-   crVolumePoint
+   ymdhmsToUTC
 } = AdapterFn
 , { crIntradayConfigOption } = fnAdapter;
 

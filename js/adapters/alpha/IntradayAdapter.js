@@ -11,13 +11,14 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
+var _pointFn = require("../pointFn");
+
 var _IntradayFns = require("../IntradayFns");
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 const {
-  ymdhmsToUTC,
-  crVolumePoint
+  ymdhmsToUTC
 } = _AdapterFn.default,
       {
   crIntradayConfigOption
@@ -124,7 +125,7 @@ const _crSeriaData = (json, option, dfT) => {
       dL.push([_dateMs, _low]);
       dO.push([_dateMs, _open]);
       dV.push([_dateMs, _volume]);
-      dVc.push(crVolumePoint({
+      dVc.push((0, _pointFn.crVolumePoint)({
         open: _open,
         close: _closeV,
         volume: _volume,

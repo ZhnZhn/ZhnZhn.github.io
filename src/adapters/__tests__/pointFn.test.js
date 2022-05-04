@@ -1,11 +1,8 @@
-import crPoint from '../pointFn'
-
-import C from '../../constants/Color'
-
-const {
+import {
   crVolumePoint,
   crAthPoint
-} = crPoint
+} from '../pointFn';
+import C from '../../constants/Color'
 
 describe('crVolumePoint', ()=>{
   const fn = crVolumePoint

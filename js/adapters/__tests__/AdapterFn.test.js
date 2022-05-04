@@ -14,8 +14,6 @@ const {
   crError,
   crId,
   crItemLink,
-  crVolumePoint,
-  crAthPoint,
   ymdToUTC,
   isYNumber,
   isNumberOrNull,
@@ -32,8 +30,6 @@ describe('added fns', () => {
     expect(typeof crError).toBe('function');
     expect(typeof crId).toBe('function');
     expect(typeof crItemLink).toBe('function');
-    expect(typeof crVolumePoint).toBe('function');
-    expect(typeof crAthPoint).toBe('function');
   });
 });
 const Y = [{

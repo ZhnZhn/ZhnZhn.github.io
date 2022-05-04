@@ -1,9 +1,9 @@
 import AdapterFn from '../AdapterFn'
+import { crVolumePoint } from '../pointFn';
 
 const {
   crError,
   ymdToUTC,
-  crVolumePoint,
   getValue,
   joinBy,
   toUpperCaseFirst,

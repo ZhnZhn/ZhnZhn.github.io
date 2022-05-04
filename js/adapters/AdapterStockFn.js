@@ -7,10 +7,10 @@ exports.toStockSeriesData = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
 
+var _pointFn = require("./pointFn");
+
 const {
-  ymdhmsToUTC,
-  crVolumePoint,
-  crAthPoint
+  ymdhmsToUTC
 } = _AdapterFn.default;
 
 const _isUndef = v => typeof v === 'undefined';
@@ -72,7 +72,7 @@ const toStockSeriesData = _ref => {
       dH.push([_date, high]);
       dL.push([_date, low]);
       dV.push([_date, volume]);
-      dVc.push(crVolumePoint({
+      dVc.push((0, _pointFn.crVolumePoint)({
         open,
         close,
         volume,
@@ -83,11 +83,11 @@ const toStockSeriesData = _ref => {
         }
       }));
       dMfi.push([date, close, high, low, close, volume]);
-      dATH.push(!_isUndef(_prevClose) ? crAthPoint({
+      dATH.push(!_isUndef(_prevClose) ? (0, _pointFn.crAthPoint)({
         date: _date,
         close: _prevClose,
         open
-      }) : crAthPoint({
+      }) : (0, _pointFn.crAthPoint)({
         date: _date,
         close: close,
         open: close

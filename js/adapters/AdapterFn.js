@@ -31,10 +31,6 @@ var _Type = require("../constants/Type");
 
 var _crFn = _interopRequireDefault(require("./crFn"));
 
-var _pointFn = _interopRequireDefault(require("./pointFn"));
-
-var _legendFn = _interopRequireDefault(require("./legendFn"));
-
 const EMPTY = '';
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 
@@ -61,8 +57,6 @@ const _fToFloatOr = dfValue => str => {
 };
 
 const AdapterFn = { ..._crFn.default,
-  ..._pointFn.default,
-  ..._legendFn.default,
   toTd: mls => _isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '',
   ymdToUTC: _DateUtils.ymdToUTC,
   ymdhmsToUTC: _DateUtils.ymdhmsToUTC,

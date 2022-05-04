@@ -5,6 +5,10 @@ import ChartConfig from '../../charts/ChartConfig';
 import ChartLegend from '../../charts/ChartLegend';
 
 import AdapterFn from '../AdapterFn';
+import {
+  crVolumePoint,
+  crAthPoint
+} from '../pointFn';
 import QuandlFn from './QuandlFn';
 import C from './C';
 
@@ -12,9 +16,7 @@ const { crLegendConfig } = ChartLegend;
 
 const {
   compareByDate,
-  roundBy,
-  crVolumePoint,
-  crAthPoint
+  roundBy
 } = AdapterFn;
 
 const {

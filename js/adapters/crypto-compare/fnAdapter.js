@@ -3,56 +3,59 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var crError = _AdapterFn["default"].crError,
-    getValue = _AdapterFn["default"].getValue,
-    crVolumePoint = _AdapterFn["default"].crVolumePoint,
-    roundBy = _AdapterFn["default"].roundBy;
+var _pointFn = require("../pointFn");
 
-var _crZhConfig = function _crZhConfig(_ref) {
-  var itemCaption = _ref.itemCaption,
-      dataSource = _ref.dataSource,
-      _itemKey = _ref._itemKey,
-      value = _ref.value,
-      linkFn = _ref.linkFn;
+const {
+  crError,
+  getValue,
+  roundBy
+} = _AdapterFn.default;
+
+const _crZhConfig = _ref => {
+  let {
+    itemCaption,
+    dataSource,
+    _itemKey,
+    value,
+    linkFn
+  } = _ref;
   return {
     id: _itemKey,
     key: _itemKey,
-    itemCaption: itemCaption,
-    linkFn: linkFn,
+    itemCaption,
+    linkFn,
     item: value,
-    dataSource: dataSource
+    dataSource
   };
 };
 
-var _crInfo = function _crInfo(_ref2) {
-  var itemCaption = _ref2.itemCaption;
+const _crInfo = _ref2 => {
+  let {
+    itemCaption
+  } = _ref2;
   return {
     name: itemCaption
   };
 };
 
-var _isNumber = function _isNumber(v) {
-  return typeof v === 'number';
-};
+const _isNumber = v => typeof v === 'number';
 
-var _isHLOC = function _isHLOC(p) {
-  return _isNumber(p.open) && _isNumber(p.high) && _isNumber(p.low) && _isNumber(p.close);
-};
+const _isHLOC = p => _isNumber(p.open) && _isNumber(p.high) && _isNumber(p.low) && _isNumber(p.close);
 
-var _addPointTo = function _addPointTo(arr, d, value) {
+const _addPointTo = (arr, d, value) => {
   if (_isNumber(value)) {
     //arr.push({ x: d, y: value })
     arr.push([d, value]);
   }
 };
 
-var _addColumnPointTo = function _addColumnPointTo(arr, d, p, volume) {
+const _addColumnPointTo = (arr, d, p, volume) => {
   if (_isNumber(volume)) {
-    arr.push(crVolumePoint({
+    arr.push((0, _pointFn.crVolumePoint)({
       date: d,
       open: p.open,
       close: p.close,
@@ -65,7 +68,7 @@ var _addColumnPointTo = function _addColumnPointTo(arr, d, p, volume) {
   }
 };
 
-var _addHLPointTo = function _addHLPointTo(arr, d, p) {
+const _addHLPointTo = (arr, d, p) => {
   arr.push({
     x: d,
     high: roundBy(p.high - p.close, 2),
@@ -77,18 +80,18 @@ var _addHLPointTo = function _addHLPointTo(arr, d, p) {
   });
 };
 
-var fnAdapter = {
-  crError: crError,
-  getValue: getValue,
-  crData: function crData(json) {
-    var data = [],
-        dVolume = [],
-        dColumn = [],
-        dToVolume = [],
-        dHL = [];
-    json.Data.forEach(function (p) {
+const fnAdapter = {
+  crError,
+  getValue,
+  crData: json => {
+    const data = [],
+          dVolume = [],
+          dColumn = [],
+          dToVolume = [],
+          dHL = [];
+    json.Data.forEach(p => {
       if (_isNumber(p.time)) {
-        var _date = p.time * 1000;
+        const _date = p.time * 1000;
 
         _addPointTo(data, _date, p.close);
 
@@ -104,20 +107,18 @@ var fnAdapter = {
       }
     });
     return {
-      data: data,
-      dVolume: dVolume,
-      dColumn: dColumn,
-      dToVolume: dToVolume,
-      dHL: dHL
+      data,
+      dVolume,
+      dColumn,
+      dToVolume,
+      dHL
     };
   },
-  crConfOption: function crConfOption(option) {
-    return {
-      zhConfig: _crZhConfig(option),
-      info: _crInfo(option)
-    };
-  }
+  crConfOption: option => ({
+    zhConfig: _crZhConfig(option),
+    info: _crInfo(option)
+  })
 };
 var _default = fnAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fnAdapter.js.map

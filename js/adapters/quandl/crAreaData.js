@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
@@ -15,44 +15,46 @@ var _ChartLegend = _interopRequireDefault(require("../../charts/ChartLegend"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
+var _pointFn = require("../pointFn");
+
 var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
 
 var _C = _interopRequireDefault(require("./C"));
 
-var crLegendConfig = _ChartLegend["default"].crLegendConfig;
-var compareByDate = _AdapterFn["default"].compareByDate,
-    roundBy = _AdapterFn["default"].roundBy,
-    crVolumePoint = _AdapterFn["default"].crVolumePoint,
-    crAthPoint = _AdapterFn["default"].crAthPoint;
-var getData = _QuandlFn["default"].getData,
-    getColumnNames = _QuandlFn["default"].getColumnNames,
-    getDataColumnIndex = _QuandlFn["default"].getDataColumnIndex,
-    findColumnIndex = _QuandlFn["default"].findColumnIndex;
+const {
+  crLegendConfig
+} = _ChartLegend.default;
+const {
+  compareByDate,
+  roundBy
+} = _AdapterFn.default;
+const {
+  getData,
+  getColumnNames,
+  getDataColumnIndex,
+  findColumnIndex
+} = _QuandlFn.default;
 
-var _assign = Object.assign,
-    _isUndef = function _isUndef(v) {
-  return typeof v === 'undefined';
-},
-    _notNull2 = function _notNull2(a, b) {
-  return a !== null && b !== null;
-},
-    _isNumber = function _isNumber(n) {
-  return typeof n === 'number' && n - n === 0;
-};
+const _assign = Object.assign,
+      _isUndef = v => typeof v === 'undefined',
+      _notNull2 = (a, b) => a !== null && b !== null,
+      _isNumber = n => typeof n === 'number' && n - n === 0;
 
-var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
-  var arrDate = point[0].split('-');
+const _fnConvertToUTC = function (point, result) {
+  const arrDate = point[0].split('-');
   result.dateUTC = Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]);
   result.point = point;
   return result;
 };
 
-var _fnCheckExtrems = function _fnCheckExtrems(result) {
-  var point = result.point,
-      yPointIndex = result.yPointIndex,
-      maxY = result.maxY,
-      minY = result.minY,
-      value = point[yPointIndex];
+const _fnCheckExtrems = function (result) {
+  const {
+    point,
+    yPointIndex,
+    maxY,
+    minY
+  } = result,
+        value = point[yPointIndex];
 
   if (_isNumber(value)) {
     if (value > maxY) {
@@ -67,52 +69,58 @@ var _fnCheckExtrems = function _fnCheckExtrems(result) {
   return result;
 };
 
-var _fnAddToSeria = function _fnAddToSeria(result) {
-  var seria = result.seria,
-      dateUTC = result.dateUTC,
-      point = result.point,
-      yPointIndex = result.yPointIndex;
+const _fnAddToSeria = function (result) {
+  const {
+    seria,
+    dateUTC,
+    point,
+    yPointIndex
+  } = result;
   seria.push([dateUTC, point[yPointIndex]]);
   return result;
 };
 
-var _fnAddSplitRatio = function _fnAddSplitRatio(splitRationIndex, result) {
-  var point = result.point,
-      dateUTC = result.dateUTC,
-      yPointIndex = result.yPointIndex,
-      dataSplitRatio = result.dataSplitRatio;
+const _fnAddSplitRatio = function (splitRationIndex, result) {
+  const {
+    point,
+    dateUTC,
+    yPointIndex,
+    dataSplitRatio
+  } = result;
 
   if (point[splitRationIndex] !== 1) {
-    var x = dateUTC,
-        splitRatio = roundBy(point[splitRationIndex]),
-        price = point[yPointIndex];
-    dataSplitRatio.push(_assign(_ChartConfig["default"].crMarkerSplitRatio(), {
-      x: x,
-      splitRatio: splitRatio,
-      price: price
+    const x = dateUTC,
+          splitRatio = roundBy(point[splitRationIndex]),
+          price = point[yPointIndex];
+    dataSplitRatio.push(_assign(_ChartConfig.default.crMarkerSplitRatio(), {
+      x,
+      splitRatio,
+      price
     }));
   }
 
   return result;
 };
 
-var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
-  var point = result.point,
-      dateUTC = result.dateUTC,
-      yPointIndex = result.yPointIndex,
-      dataExDividend = result.dataExDividend;
+const _fnAddExDividend = function (exDividendIndex, result) {
+  const {
+    point,
+    dateUTC,
+    yPointIndex,
+    dataExDividend
+  } = result;
 
   if (point[exDividendIndex] !== 0) {
-    var x = dateUTC,
-        exValue = point[exDividendIndex],
-        price = point[yPointIndex],
-        marker = _assign(_ChartConfig["default"].crMarkerExDividend(), {
-      x: x,
-      exValue: exValue,
-      price: price
+    const x = dateUTC,
+          exValue = point[exDividendIndex],
+          price = point[yPointIndex],
+          marker = _assign(_ChartConfig.default.crMarkerExDividend(), {
+      x,
+      exValue,
+      price
     });
 
-    if (!_QuandlFn["default"].isPrevDateAfter(dataExDividend, x, 14)) {
+    if (!_QuandlFn.default.isPrevDateAfter(dataExDividend, x, 14)) {
       marker.dataLabels.y = 0;
     }
 
@@ -122,23 +130,24 @@ var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
   return result;
 };
 
-var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
-  var volume = optionIndex.volume,
-      open = optionIndex.open,
-      _optionIndex$close = optionIndex.close,
-      close = _optionIndex$close === void 0 ? 4 : _optionIndex$close,
-      _optionIndex$low = optionIndex.low,
-      low = _optionIndex$low === void 0 ? 3 : _optionIndex$low,
-      _optionIndex$high = optionIndex.high,
-      high = _optionIndex$high === void 0 ? 2 : _optionIndex$high,
-      point = result.point,
-      dateUTC = result.dateUTC,
-      dataVolume = result.dataVolume,
-      dataVolumeColumn = result.dataVolumeColumn,
-      _open = open ? point[open] : void 0;
+const _fnAddVolume = function (optionIndex, result) {
+  const {
+    volume,
+    open,
+    close = 4,
+    low = 3,
+    high = 2
+  } = optionIndex,
+        {
+    point,
+    dateUTC,
+    dataVolume,
+    dataVolumeColumn
+  } = result,
+        _open = open ? point[open] : void 0;
 
   dataVolume.push([dateUTC, point[volume]]);
-  dataVolumeColumn.push(crVolumePoint({
+  dataVolumeColumn.push((0, _pointFn.crVolumePoint)({
     open: _open,
     close: point[close],
     date: dateUTC,
@@ -151,18 +160,21 @@ var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
   return result;
 };
 
-var _fnAddATH = function _fnAddATH(optionIndex, result) {
-  var _optionIndex$open = optionIndex.open,
-      open = _optionIndex$open === void 0 ? 1 : _optionIndex$open,
-      dateUTC = result.dateUTC,
-      point = result.point,
-      seria = result.seria,
-      dataATH = result.dataATH,
-      len = seria.length;
+const _fnAddATH = function (optionIndex, result) {
+  const {
+    open = 1
+  } = optionIndex,
+        {
+    dateUTC,
+    point,
+    seria,
+    dataATH
+  } = result,
+        len = seria.length;
 
   if (len > 1) {
-    var _prevPoint = seria[len - 2];
-    dataATH.push(crAthPoint({
+    const _prevPoint = seria[len - 2];
+    dataATH.push((0, _pointFn.crAthPoint)({
       date: dateUTC,
       close: _prevPoint[1],
       open: point[open]
@@ -172,27 +184,26 @@ var _fnAddATH = function _fnAddATH(optionIndex, result) {
   return result;
 };
 
-var _crBigDiff = function _crBigDiff(value, closeValue) {
-  return _notNull2(value, closeValue) ? (0, _big["default"])(value).minus(closeValue) : (0, _big["default"])('0.0');
-};
+const _crBigDiff = (value, closeValue) => _notNull2(value, closeValue) ? (0, _big.default)(value).minus(closeValue) : (0, _big.default)('0.0');
 
-var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
-  var _optionIndex$open2 = optionIndex.open,
-      open = _optionIndex$open2 === void 0 ? 1 : _optionIndex$open2,
-      _optionIndex$high2 = optionIndex.high,
-      high = _optionIndex$high2 === void 0 ? 2 : _optionIndex$high2,
-      _optionIndex$low2 = optionIndex.low,
-      low = _optionIndex$low2 === void 0 ? 3 : _optionIndex$low2,
-      dateUTC = result.dateUTC,
-      yPointIndex = result.yPointIndex,
-      point = result.point,
-      dataHighLow = result.dataHighLow,
-      _closeValue = point[yPointIndex],
-      _openValue = _notNull2(point[open], _closeValue) ? point[open] : _C["default"].UNKNOWN,
-      _bHigh = _crBigDiff(point[high], _closeValue),
-      _bLow = _crBigDiff(point[low], _closeValue),
-      _dayHigh = point[high] || _C["default"].UNKNOWN,
-      _dayLow = point[low] || _C["default"].UNKNOWN;
+const _fnAddHighLow = function (optionIndex, result) {
+  const {
+    open = 1,
+    high = 2,
+    low = 3
+  } = optionIndex,
+        {
+    dateUTC,
+    yPointIndex,
+    point,
+    dataHighLow
+  } = result,
+        _closeValue = point[yPointIndex],
+        _openValue = _notNull2(point[open], _closeValue) ? point[open] : _C.default.UNKNOWN,
+        _bHigh = _crBigDiff(point[high], _closeValue),
+        _bLow = _crBigDiff(point[low], _closeValue),
+        _dayHigh = point[high] || _C.default.UNKNOWN,
+        _dayLow = point[low] || _C.default.UNKNOWN;
 
   dataHighLow.push({
     x: dateUTC,
@@ -206,11 +217,13 @@ var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
   return result;
 };
 
-var _fnAddCustomSeries = function _fnAddCustomSeries(columns, result) {
-  var dateUTC = result.dateUTC,
-      point = result.point,
-      legendSeries = result.legendSeries;
-  var i = 0,
+const _fnAddCustomSeries = function (columns, result) {
+  const {
+    dateUTC,
+    point,
+    legendSeries
+  } = result;
+  let i = 0,
       max = columns.length;
 
   for (; i < max; i++) {
@@ -218,12 +231,12 @@ var _fnAddCustomSeries = function _fnAddCustomSeries(columns, result) {
   }
 };
 
-var _crLegendConfig = function _crLegendConfig(seriaColumnNames, columnNames) {
-  var legendSeries = [],
-      columns = [];
+const _crLegendConfig = function (seriaColumnNames, columnNames) {
+  const legendSeries = [],
+        columns = [];
 
   if (seriaColumnNames[0] === 'All') {
-    var j = 1,
+    let j = 1,
         _len = columnNames.length;
 
     for (j; j < _len; j++) {
@@ -231,12 +244,12 @@ var _crLegendConfig = function _crLegendConfig(seriaColumnNames, columnNames) {
       columns.push(j);
     }
   } else {
-    var i = 0,
+    let i = 0,
         max = seriaColumnNames.length;
 
     for (; i < max; i++) {
-      var columnName = seriaColumnNames[i],
-          columnIndex = findColumnIndex(columnNames, columnName);
+      const columnName = seriaColumnNames[i],
+            columnIndex = findColumnIndex(columnNames, columnName);
 
       if (columnIndex) {
         legendSeries.push(crLegendConfig(columnName));
@@ -246,34 +259,35 @@ var _crLegendConfig = function _crLegendConfig(seriaColumnNames, columnNames) {
   }
 
   return {
-    legendSeries: legendSeries,
-    columns: columns
+    legendSeries,
+    columns
   };
 };
 
-var _isTransform = function _isTransform(_ref) {
-  var dataset = _ref.dataset;
-
-  var _ref2 = dataset || {},
-      transform = _ref2.transform;
-
+const _isTransform = _ref => {
+  let {
+    dataset
+  } = _ref;
+  const {
+    transform
+  } = dataset || {};
   return !!(transform && transform !== 'none');
 };
 
-var _crPointFlow = function _crPointFlow(json, option) {
-  var yPointIndex = getDataColumnIndex(json, option),
-      fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
-      columnNames = getColumnNames(json),
-      open = findColumnIndex(columnNames, _C["default"].OPEN),
-      _closeIndex = findColumnIndex(columnNames, _C["default"].CLOSE),
-      close = !_isUndef(_closeIndex) ? _closeIndex : findColumnIndex(columnNames, _C["default"].PRICE),
-      low = findColumnIndex(columnNames, _C["default"].LOW),
-      high = findColumnIndex(columnNames, _C["default"].HIGH),
-      volume = findColumnIndex(columnNames, _C["default"].VOLUME),
-      exDividend = findColumnIndex(columnNames, _C["default"].EX_DIVIDEND),
-      splitRatio = findColumnIndex(columnNames, _C["default"].SPLIT_RATIO),
-      result = {
-    yPointIndex: yPointIndex,
+const _crPointFlow = function (json, option) {
+  const yPointIndex = getDataColumnIndex(json, option),
+        fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
+        columnNames = getColumnNames(json),
+        open = findColumnIndex(columnNames, _C.default.OPEN),
+        _closeIndex = findColumnIndex(columnNames, _C.default.CLOSE),
+        close = !_isUndef(_closeIndex) ? _closeIndex : findColumnIndex(columnNames, _C.default.PRICE),
+        low = findColumnIndex(columnNames, _C.default.LOW),
+        high = findColumnIndex(columnNames, _C.default.HIGH),
+        volume = findColumnIndex(columnNames, _C.default.VOLUME),
+        exDividend = findColumnIndex(columnNames, _C.default.EX_DIVIDEND),
+        splitRatio = findColumnIndex(columnNames, _C.default.SPLIT_RATIO),
+        result = {
+    yPointIndex,
     minY: Number.POSITIVE_INFINITY,
     maxY: Number.NEGATIVE_INFINITY,
     seria: [],
@@ -287,15 +301,15 @@ var _crPointFlow = function _crPointFlow(json, option) {
 
   if (volume) {
     fnStep.push(_fnAddVolume.bind(null, {
-      volume: volume,
-      open: open,
-      close: close,
-      low: low,
-      high: high
+      volume,
+      open,
+      close,
+      low,
+      high
     }));
   }
 
-  var _hasNotTransform = !_isTransform(json);
+  const _hasNotTransform = !_isTransform(json);
 
   if (exDividend && _hasNotTransform) {
     fnStep.push(_fnAddExDividend.bind(null, exDividend));
@@ -307,24 +321,27 @@ var _crPointFlow = function _crPointFlow(json, option) {
 
   if (open) {
     fnStep.push(_fnAddATH.bind(null, {
-      open: open
+      open
     }));
   }
 
   if (high && low) {
     fnStep.push(_fnAddHighLow.bind(null, {
-      open: open,
-      high: high,
-      low: low
+      open,
+      high,
+      low
     }));
   }
 
-  var seriaColumnNames = option.seriaColumnNames;
+  const {
+    seriaColumnNames
+  } = option;
 
   if (seriaColumnNames) {
-    var _crLegendConfig2 = _crLegendConfig(seriaColumnNames, columnNames),
-        legendSeries = _crLegendConfig2.legendSeries,
-        columns = _crLegendConfig2.columns;
+    const {
+      legendSeries,
+      columns
+    } = _crLegendConfig(seriaColumnNames, columnNames);
 
     if (legendSeries.length !== 0) {
       result.legendSeries = legendSeries;
@@ -332,16 +349,14 @@ var _crPointFlow = function _crPointFlow(json, option) {
     }
   }
 
-  return [_pipe["default"].apply(void 0, fnStep), result];
+  return [(0, _pipe.default)(...fnStep), result];
 };
 
-var crAreaData = function crAreaData(json, option) {
-  var _crPointFlow2 = _crPointFlow(json, option),
-      callPointFlow = _crPointFlow2[0],
-      result = _crPointFlow2[1],
-      points = getData(json).sort(compareByDate);
+const crAreaData = function (json, option) {
+  const [callPointFlow, result] = _crPointFlow(json, option),
+        points = getData(json).sort(compareByDate);
 
-  var i = 0,
+  let i = 0,
       _max = points.length;
 
   for (; i < _max; i++) {
@@ -356,5 +371,5 @@ var crAreaData = function crAreaData(json, option) {
 };
 
 var _default = crAreaData;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=crAreaData.js.map
