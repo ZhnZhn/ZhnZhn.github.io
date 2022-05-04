@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
@@ -13,23 +11,27 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var _IntradayFns = _interopRequireDefault(require("../IntradayFns"));
+var _IntradayFns = require("../IntradayFns");
 
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
-var ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
-    crVolumePoint = _AdapterFn["default"].crVolumePoint,
-    crMarkerColor = _IntradayFns["default"].crMarkerColor,
-    crDataDaily = _IntradayFns["default"].crDataDaily,
-    crIntradayConfigOption = _fnAdapter["default"].crIntradayConfigOption;
-var INTRADAY = 'INTRADAY';
-var DAILY_ADJUSTED = 'DAILY_ADJUSTED';
-var _getKeys = Object.keys;
+const {
+  ymdhmsToUTC,
+  crVolumePoint
+} = _AdapterFn.default,
+      {
+  crIntradayConfigOption
+} = _fnAdapter.default;
+const INTRADAY = 'INTRADAY';
+const DAILY_ADJUSTED = 'DAILY_ADJUSTED';
+const _getKeys = Object.keys;
 
-var _crSeriaOptions = function _crSeriaOptions(_ref, dfT) {
-  var isFilterZero = _ref.isFilterZero;
+const _crSeriaOptions = (_ref, dfT) => {
+  let {
+    isFilterZero
+  } = _ref;
 
-  var _isAdjusted = dfT === DAILY_ADJUSTED;
+  const _isAdjusted = dfT === DAILY_ADJUSTED;
 
   return {
     notFilterZero: !isFilterZero,
@@ -40,51 +42,54 @@ var _crSeriaOptions = function _crSeriaOptions(_ref, dfT) {
   };
 };
 
-var PN_DIVIDENT = '7. dividend amount';
-var PN_ADJ_CLOSE = '5. adjusted close';
+const PN_DIVIDENT = '7. dividend amount';
+const PN_ADJ_CLOSE = '5. adjusted close';
 
-var _addDividendPointTo = function _addDividendPointTo(arr, dateMs, p) {
-  var _strDivident = p[PN_DIVIDENT],
-      _exValue = _strDivident && parseFloat(_strDivident);
+const _addDividendPointTo = (arr, dateMs, p) => {
+  const _strDivident = p[PN_DIVIDENT],
+        _exValue = _strDivident && parseFloat(_strDivident);
 
   if (_exValue) {
-    arr.push((0, _extends2["default"])({}, _ChartConfig["default"].crMarkerExDividend(), {
-      x: dateMs,
-      exValue: _exValue,
-      price: parseFloat(p[PN_ADJ_CLOSE])
-    }));
+    arr.push({ ..._ChartConfig.default.crMarkerExDividend(),
+      ...{
+        x: dateMs,
+        exValue: _exValue,
+        price: parseFloat(p[PN_ADJ_CLOSE])
+      }
+    });
   }
 };
 
-var _notZeros = function _notZeros(v1, v2) {
-  return v1 !== 0 && v2 !== 0;
-};
+const _notZeros = (v1, v2) => v1 !== 0 && v2 !== 0;
 
-var _getObjValues = function _getObjValues(json, option) {
-  var interval = option.interval,
-      _propName = "Time Series (" + interval + ")";
+const _getObjValues = (json, option) => {
+  const {
+    interval
+  } = option,
+        _propName = "Time Series (" + interval + ")";
 
   return json[_propName];
 };
 
-var _crSeriaData = function _crSeriaData(json, option, dfT) {
-  var _objValues = _getObjValues(json, option),
-      _dateKeys = _objValues ? _getKeys(_objValues).sort() : [],
-      dC = [],
-      dH = [],
-      dL = [],
-      dO = [],
-      dDividend = [],
-      dVc = [],
-      dV = [],
-      _crSeriaOptions2 = _crSeriaOptions(option, dfT),
-      notFilterZero = _crSeriaOptions2.notFilterZero,
-      isDividend = _crSeriaOptions2.isDividend,
-      toUTC = _crSeriaOptions2.toUTC,
-      pnClose = _crSeriaOptions2.pnClose,
-      pnVolume = _crSeriaOptions2.pnVolume;
+const _crSeriaData = (json, option, dfT) => {
+  const _objValues = _getObjValues(json, option),
+        _dateKeys = _objValues ? _getKeys(_objValues).sort() : [],
+        dC = [],
+        dH = [],
+        dL = [],
+        dO = [],
+        dDividend = [],
+        dVc = [],
+        dV = [],
+        {
+    notFilterZero,
+    isDividend,
+    toUTC,
+    pnClose,
+    pnVolume
+  } = _crSeriaOptions(option, dfT);
 
-  var i = 0,
+  let i = 0,
       _max = _dateKeys.length,
       minClose = Number.POSITIVE_INFINITY,
       maxClose = Number.NEGATIVE_INFINITY,
@@ -110,10 +115,11 @@ var _crSeriaData = function _crSeriaData(json, option, dfT) {
       _low = parseFloat(_point['3. low']);
       _volume = parseFloat(_point[pnVolume]);
       _dateMs = toUTC(_date);
-      dC.push((0, _extends2["default"])({
+      dC.push({
         x: _dateMs,
-        y: _close
-      }, crMarkerColor(_date)));
+        y: _close,
+        ...(0, _IntradayFns.crMarkerColor)(_date)
+      });
       dH.push([_dateMs, _high]);
       dL.push([_dateMs, _low]);
       dO.push([_dateMs, _open]);
@@ -144,82 +150,88 @@ var _crSeriaData = function _crSeriaData(json, option, dfT) {
   }
 
   return {
-    dC: dC,
-    dH: dH,
-    dL: dL,
-    dO: dO,
-    dDividend: dDividend,
-    minClose: minClose,
-    maxClose: maxClose,
-    dVc: dVc,
-    dV: dV
+    dC,
+    dH,
+    dL,
+    dO,
+    dDividend,
+    minClose,
+    maxClose,
+    dVc,
+    dV
   };
 };
 
-var _crDataDaily = function _crDataDaily(dfT, data) {
-  return dfT === INTRADAY ? crDataDaily(data) : data;
-};
+const _crDataDaily = (dfT, data) => dfT === INTRADAY ? (0, _IntradayFns.crDataDaily)(data) : data;
 
-var IntradayAdapter = {
-  crKey: function crKey(_ref2) {
-    var _itemKey = _ref2._itemKey;
+const IntradayAdapter = {
+  crKey: _ref2 => {
+    let {
+      _itemKey
+    } = _ref2;
     return _itemKey;
   },
-  toConfig: function toConfig(json, option) {
-    var _itemKey = option._itemKey,
-        title = option.title,
-        dfFn = option.dfFn,
-        dataSource = option.dataSource,
-        isNotZoomToMinMax = option.isNotZoomToMinMax,
-        isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-        seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        dfT = dfFn.replace('TIME_SERIES_', ''),
-        _crSeriaData2 = _crSeriaData(json, option, dfT),
-        dC = _crSeriaData2.dC,
-        dH = _crSeriaData2.dH,
-        dL = _crSeriaData2.dL,
-        dO = _crSeriaData2.dO,
-        minClose = _crSeriaData2.minClose,
-        maxClose = _crSeriaData2.maxClose,
-        dDividend = _crSeriaData2.dDividend,
-        dVc = _crSeriaData2.dVc,
-        dV = _crSeriaData2.dV,
-        dataDaily = _crDataDaily(dfT, dC);
 
-    var config = (0, _ConfigBuilder["default"])().stockConfig(_itemKey, {
-      dC: dC,
-      dO: dO,
-      dH: dH,
-      dL: dL,
-      minClose: minClose,
-      maxClose: maxClose,
-      dVc: dVc,
-      dV: dV,
-      isNotZoomToMinMax: isNotZoomToMinMax,
-      isDrawDeltaExtrems: isDrawDeltaExtrems,
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth
+  toConfig(json, option) {
+    const {
+      _itemKey,
+      title,
+      dfFn,
+      dataSource,
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      seriaType,
+      seriaColor,
+      seriaWidth
+    } = option,
+          dfT = dfFn.replace('TIME_SERIES_', ''),
+          {
+      dC,
+      dH,
+      dL,
+      dO,
+      minClose,
+      maxClose,
+      dDividend,
+      dVc,
+      dV
+    } = _crSeriaData(json, option, dfT),
+          dataDaily = _crDataDaily(dfT, dC);
+
+    const config = (0, _ConfigBuilder.default)().stockConfig(_itemKey, {
+      dC,
+      dO,
+      dH,
+      dL,
+      minClose,
+      maxClose,
+      dVc,
+      dV,
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      seriaType,
+      seriaColor,
+      seriaWidth
     }).addCaption(title).add(crIntradayConfigOption({
       id: _itemKey,
       data: dataDaily,
-      dataSource: dataSource
+      dataSource
     }, option)).addDividend(dDividend, minClose, maxClose).toConfig();
     return {
-      config: config
+      config
     };
   },
-  toSeries: function toSeries(json, option) {
-    return _ConfigBuilder["default"].crSeria({
+
+  toSeries(json, option) {
+    return _ConfigBuilder.default.crSeria({
       adapter: IntradayAdapter,
-      json: json,
-      option: option,
+      json,
+      option,
       type: 'line'
     });
   }
+
 };
 var _default = IntradayAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=IntradayAdapter.js.map
