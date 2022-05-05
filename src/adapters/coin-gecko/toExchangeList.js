@@ -2,12 +2,10 @@ import {
   crTableRows,
   crTableConfig
 } from '../toTableFn';
-import fnAdapter from './fnAdapter'
-
-const {
+import {
   crPageConfig,
   getYmdhmUTC
-} = fnAdapter;
+} from './fnAdapter';
 
 const HEADERS = [{
   name: 'Trust Rank',

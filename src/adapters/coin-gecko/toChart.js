@@ -1,5 +1,5 @@
-import crAdapterType1 from '../crAdapterType1'
-import { crItemLink } from '../crFn';
+import crAdapterType1 from '../crAdapterType1';
+import { crItemLink } from './fnAdapter';
 
 const _crDescription = crItemLink
   .bind(null, 'Coin Gecko');

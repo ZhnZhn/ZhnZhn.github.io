@@ -1,17 +1,10 @@
 import { getDaysFromYmd } from '../../utils/DateUtils';
-import fnAdapter from './fnAdapter'
+import { crError, crPageConfig } from './fnAdapter';
 
-const C = {
-  API_URL: 'https://api.coingecko.com/api/v3',
-  PAGE_URL: 'https://www.coingecko.com/en/coins',
-  DF_PAGE: 1,
-  DF_PER_PAGE: 10,
-  DF_CURRENCY: 'USD'
-};
-
-const _assign = Object.assign
-, _isArr = Array.isArray
-, { crError, crPageConfig } = fnAdapter
+const API_URL = 'https://api.coingecko.com/api/v3'
+, PAGE_URL = 'https://www.coingecko.com/en/coins'
+, _assign = Object.assign
+, _isArr = Array.isArray;
 
 const _crDays = ({ fromDate }) => {
   const _d = getDaysFromYmd(fromDate);
@@ -31,21 +24,21 @@ const _assignDf = option => {
     title: c,
     subtitle: 'Values on 00:00 GMT',
     _currency: _currency,
-    _nativeUrl: `${C.PAGE_URL}/${value}`,
-    _itemUrl: `${C.API_URL}/coins/${value}/market_chart?vs_currency=${_currency}&days=${_days}`
+    _nativeUrl: `${PAGE_URL}/${value}`,
+    _itemUrl: `${API_URL}/coins/${value}/market_chart?vs_currency=${_currency}&days=${_days}`
   })
 }
 
-
-
 const _assignMcl = option => {
   const [
-    page, perPage, currency
+    page,
+    perPage,
+    currency
   ] = crPageConfig(option);
 
   _assign(option, {
     title: `By Market Cap Page: ${page} (${perPage})`,
-    _itemUrl: `${C.API_URL}/coins/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d,30d,1y`
+    _itemUrl: `${API_URL}/coins/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d,30d,1y`
   })
 }
 
@@ -56,7 +49,7 @@ const _assignEl = option => {
 
   _assign(option, {
     title: `By Exchages Page: ${page} (${perPage})`,
-    _itemUrl: `${C.API_URL}/exchanges?page=${page}&per_page=${perPage}`
+    _itemUrl: `${API_URL}/exchanges?page=${page}&per_page=${perPage}`
   })
 }
 

@@ -7,9 +7,9 @@ exports.default = void 0;
 
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
-var _crFn = require("../crFn");
+var _fnAdapter = require("./fnAdapter");
 
-const _crDescription = _crFn.crItemLink.bind(null, 'Coin Gecko');
+const _crDescription = _fnAdapter.crItemLink.bind(null, 'Coin Gecko');
 
 const _crInfo = _ref => {
   let {

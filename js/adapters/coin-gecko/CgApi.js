@@ -1,94 +1,92 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-var C = {
-  API_URL: 'https://api.coingecko.com/api/v3',
-  PAGE_URL: 'https://www.coingecko.com/en/coins',
-  DF_PAGE: 1,
-  DF_PER_PAGE: 10,
-  DF_CURRENCY: 'USD'
-};
-var _assign = Object.assign,
-    _isArr = Array.isArray,
-    crError = _fnAdapter["default"].crError,
-    crPageConfig = _fnAdapter["default"].crPageConfig;
+const API_URL = 'https://api.coingecko.com/api/v3',
+      PAGE_URL = 'https://www.coingecko.com/en/coins',
+      _assign = Object.assign,
+      _isArr = Array.isArray;
 
-var _crDays = function _crDays(_ref) {
-  var fromDate = _ref.fromDate;
+const _crDays = _ref => {
+  let {
+    fromDate
+  } = _ref;
 
-  var _d = _DateUtils["default"].getDaysFromYmd(fromDate);
+  const _d = (0, _DateUtils.getDaysFromYmd)(fromDate);
 
   return _d > 90 ? _d : 91;
 };
 
-var _assignDf = function _assignDf(option) {
-  var items = option.items,
-      it1 = items[0],
-      it2 = items[1],
-      c = it1.c,
-      value = it1.v,
-      s = it1.s,
-      _currency = it2.v,
-      _vs = s + "/" + _currency,
-      _days = _crDays(option);
+const _assignDf = option => {
+  const {
+    items
+  } = option,
+        [it1, it2] = items,
+        {
+    c,
+    v: value,
+    s
+  } = it1,
+        {
+    v: _currency
+  } = it2,
+        _vs = s + "/" + _currency,
+        _days = _crDays(option);
 
   _assign(option, {
     itemCaption: _vs,
     title: c,
     subtitle: 'Values on 00:00 GMT',
     _currency: _currency,
-    _nativeUrl: C.PAGE_URL + "/" + value,
-    _itemUrl: C.API_URL + "/coins/" + value + "/market_chart?vs_currency=" + _currency + "&days=" + _days
+    _nativeUrl: PAGE_URL + "/" + value,
+    _itemUrl: API_URL + "/coins/" + value + "/market_chart?vs_currency=" + _currency + "&days=" + _days
   });
 };
 
-var _assignMcl = function _assignMcl(option) {
-  var _crPageConfig = crPageConfig(option),
-      page = _crPageConfig[0],
-      perPage = _crPageConfig[1],
-      currency = _crPageConfig[2];
+const _assignMcl = option => {
+  const [page, perPage, currency] = (0, _fnAdapter.crPageConfig)(option);
 
   _assign(option, {
     title: "By Market Cap Page: " + page + " (" + perPage + ")",
-    _itemUrl: C.API_URL + "/coins/markets?order=market_cap_desc&page=" + page + "&per_page=" + perPage + "&vs_currency=" + currency + "&price_change_percentage=1h,7d,30d,1y"
+    _itemUrl: API_URL + "/coins/markets?order=market_cap_desc&page=" + page + "&per_page=" + perPage + "&vs_currency=" + currency + "&price_change_percentage=1h,7d,30d,1y"
   });
 };
 
-var _assignEl = function _assignEl(option) {
-  var _crPageConfig2 = crPageConfig(option),
-      page = _crPageConfig2[0],
-      perPage = _crPageConfig2[1];
+const _assignEl = option => {
+  const [page, perPage] = (0, _fnAdapter.crPageConfig)(option);
 
   _assign(option, {
     title: "By Exchages Page: " + page + " (" + perPage + ")",
-    _itemUrl: C.API_URL + "/exchanges?page=" + page + "&per_page=" + perPage
+    _itemUrl: API_URL + "/exchanges?page=" + page + "&per_page=" + perPage
   });
 };
 
-var _rAssign = {
+const _rAssign = {
   DF: _assignDf,
   MCL: _assignMcl,
   EL: _assignEl
 };
-var CgApi = {
-  getRequestUrl: function getRequestUrl(option) {
-    var dfSubId = option.dfSubId,
-        _assignTo = _rAssign[dfSubId] || _rAssign.DF;
+const CgApi = {
+  getRequestUrl(option) {
+    const {
+      dfSubId
+    } = option,
+          _assignTo = _rAssign[dfSubId] || _rAssign.DF;
 
     _assignTo(option);
 
     return option._itemUrl;
   },
-  checkResponse: function checkResponse(json, option) {
-    var dfSubId = option.dfSubId;
+
+  checkResponse(json, option) {
+    const {
+      dfSubId
+    } = option;
 
     if ((dfSubId === 'MCL' || dfSubId === 'EL') && _isArr(json) && json.length > 1) {
       return true;
@@ -98,9 +96,10 @@ var CgApi = {
       return true;
     }
 
-    throw crError();
+    throw (0, _fnAdapter.crError)();
   }
+
 };
 var _default = CgApi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=CgApi.js.map

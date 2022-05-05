@@ -1,18 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
 var _toTableFn = require("../toTableFn");
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-const {
-  crPageConfig,
-  getYmdhmUTC
-} = _fnAdapter.default;
 const HEADERS = [{
   name: 'Trust Rank',
   pn: 'trust_score_rank',
@@ -65,7 +59,7 @@ const HEADERS = [{
 }];
 const toExchangeList = {
   crKey(option) {
-    option.key = crPageConfig(option).join('_');
+    option.key = (0, _fnAdapter.crPageConfig)(option).join('_');
     return option.key;
   },
 
@@ -80,7 +74,7 @@ const toExchangeList = {
       title,
       headers: HEADERS,
       rows: _rows,
-      dataSource: "CoinGecko " + getYmdhmUTC(),
+      dataSource: "CoinGecko " + (0, _fnAdapter.getYmdhmUTC)(),
       fns: {
         valueToHref: (id, v) => v
       }

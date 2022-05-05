@@ -2,11 +2,13 @@ import {
   crTableRows,
   crTableConfig
 } from '../toTableFn';
-import fnAdapter from './fnAdapter'
+import { crPageConfig } from './fnAdapter';
 
-const { crPageConfig } = fnAdapter;
-
-const _crPriceChangeItem = (name, pnSuffix, options) => ({
+const _crPriceChangeItem = (
+  name,
+  pnSuffix,
+  options
+) => ({
   name,
   pn: `price_change_percentage_${pnSuffix}`,
   toN: [3],
