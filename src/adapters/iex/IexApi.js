@@ -1,8 +1,6 @@
-import AdapterFn from '../AdapterFn'
+import { getValue } from '../AdapterFn'
 import { crError } from '../crFn';
 import IT from './ItemTypes'
-
-const { getValue } = AdapterFn;
 
 const C = {
   BASE_URL: 'https://cloud.iexapis.com/stable/stock',

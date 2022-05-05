@@ -1,9 +1,7 @@
-import AdapterFn from '../AdapterFn'
-
-const {
+import {
   isNumberOrNull,
   ymdToUTC,
-} = AdapterFn;
+} from '../AdapterFn';
 
 const FRED = 'FRED';
 

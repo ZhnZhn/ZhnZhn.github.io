@@ -2,7 +2,7 @@
 import {ChartType} from '../../constants/Type';
 import ChartConfig from '../../charts/ChartConfig';
 
-import AdapterFn from '../AdapterFn';
+import { ymdToUTC, findMinY } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import QuandlFn from './QuandlFn';
 
@@ -44,7 +44,7 @@ const _rToConfig = {
 
 const _crSeriaData = (data, yIndex) => {
   return data
-    .map(p => [ AdapterFn.ymdToUTC(p[0]), p[yIndex] ])
+    .map(p => [ ymdToUTC(p[0]), p[yIndex] ])
     .sort(compareByDate);
 };
 
@@ -55,7 +55,7 @@ const _toSeria = (json, option) => {
   return ChartConfig.crSeria({
       name : chartId.substring(0,12),
       data : data,
-      minY : AdapterFn.findMinY(data)
+      minY : findMinY(data)
   });
 };
 

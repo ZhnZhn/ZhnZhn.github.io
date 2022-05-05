@@ -1,19 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _crFn = require("../crFn");
-
-const {
-  ymdhmsToUTC,
-  crItemConf,
-  crValueConf
-} = _AdapterFn.default;
 
 const _crZhConfig = (option, data) => {
   const {
@@ -28,8 +20,8 @@ const _crZhConfig = (option, data) => {
     dataSource,
     itemConf: {
       _itemKey,
-      ...crItemConf(option),
-      ...crValueConf(data),
+      ...(0, _crFn.crItemConf)(option),
+      ...(0, _crFn.crValueConf)(data),
       dataSource
     }
   };
@@ -44,7 +36,7 @@ const fnAdapter = {
         time,
         values
       } = _ref;
-      return [ymdhmsToUTC((time || '').replace('Z', ''), 'T'), parseFloat((values || [])[0])];
+      return [(0, _AdapterFn.ymdhmsToUTC)((time || '').replace('Z', ''), 'T'), parseFloat((values || [])[0])];
     });
   },
   crConfOption: (option, json, data) => ({

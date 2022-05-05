@@ -1,11 +1,9 @@
-import AdapterFn from '../AdapterFn'
-import { crError } from '../crFn';
-
-const {
+import {
   getValue,
   crZhConfig,
   joinBy
-} = AdapterFn;
+} from '../AdapterFn';
+import { crError } from '../crFn';
 
 const _joinBy = joinBy.bind(null, ': ');
 

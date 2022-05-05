@@ -11,7 +11,9 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
+
+var _compareByFn = require("../compareByFn");
 
 var _legendFn = require("../legendFn");
 
@@ -31,7 +33,7 @@ const _crInfo = (json, option) => ({
 });
 
 const fnAdapter = {
-  roundBy: _AdapterFn.default.roundBy,
+  roundBy: _AdapterFn.roundBy,
   crChartId: option => {
     const {
       value,
@@ -102,7 +104,7 @@ const fnAdapter = {
     } = _ref2;
     let i = fromIndex;
 
-    _fnHm.default.toSeriaNames(hm, _AdapterFn.default.compareByValue).forEach(item => {
+    _fnHm.default.toSeriaNames(hm, _compareByFn.compareByValue).forEach(item => {
       const name = item.name,
             _isShow = i < _conf.default.MAX_SHOW ? true : false;
 

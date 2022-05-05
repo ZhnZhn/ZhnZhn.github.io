@@ -1,8 +1,7 @@
 import crAdapterOrderBook from '../crAdapterOrderBook';
-import AdapterFn from '../AdapterFn';
+import { toTd } from '../AdapterFn';
 
-const { toTd } = AdapterFn
-, crTitle = ({ items }, { timestamp }) => {
+const crTitle = ({ items }, { timestamp }) => {
   const strDate = toTd(parseInt(timestamp, 10)*1000);
   return `${items[0].c} ${strDate}`;
 }

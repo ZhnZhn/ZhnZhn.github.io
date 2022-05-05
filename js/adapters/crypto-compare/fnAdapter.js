@@ -1,19 +1,13 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
+
+var _crFn = require("../crFn");
 
 var _pointFn = require("../pointFn");
-
-const {
-  crError,
-  getValue,
-  roundBy
-} = _AdapterFn.default;
 
 const _crZhConfig = _ref => {
   let {
@@ -71,8 +65,8 @@ const _addColumnPointTo = (arr, d, p, volume) => {
 const _addHLPointTo = (arr, d, p) => {
   arr.push({
     x: d,
-    high: roundBy(p.high - p.close, 2),
-    low: roundBy(p.low - p.close, 2),
+    high: (0, _AdapterFn.roundBy)(p.high - p.close, 2),
+    low: (0, _AdapterFn.roundBy)(p.low - p.close, 2),
     open: p.open,
     dayHigh: p.high,
     dayLow: p.low,
@@ -81,8 +75,8 @@ const _addHLPointTo = (arr, d, p) => {
 };
 
 const fnAdapter = {
-  crError,
-  getValue,
+  crError: _crFn.crError,
+  getValue: _AdapterFn.getValue,
   crData: json => {
     const data = [],
           dVolume = [],

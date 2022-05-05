@@ -1,9 +1,4 @@
-import AdapterFn from '../AdapterFn';
-import { crError } from '../crFn';
-
-import fnDescr from './fnDescr';
-
-const {
+import {
   isYNumber,
   getValue,
   toUpperCaseFirst,
@@ -12,7 +7,9 @@ const {
   valueMoving,
   findMinY,
   mapIf
-} = AdapterFn;
+} from '../AdapterFn';
+import { crError } from '../crFn';
+import fnDescr from './fnDescr';
 
 const _isArr = Array.isArray;
 const C = {

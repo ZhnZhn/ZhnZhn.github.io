@@ -3,11 +3,7 @@
  */
 //Highcharts dateFormat from AdapterFn require jsdom
 "use strict";
-import AdapterFn from '../AdapterFn'
-
-import { Direction } from '../../constants/Type'
-
-const {
+import {
   ymdToUTC,
   isYNumber,
   isNumberOrNull,
@@ -16,7 +12,8 @@ const {
   findMaxY,
   joinBy,
   valueMoving
-} = AdapterFn;
+} from '../AdapterFn';
+import { Direction } from '../../constants/Type'
 
 const Y = [
   { in: '2017', r: 1514678400000, d: '31-12-2017' },

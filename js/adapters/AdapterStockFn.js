@@ -1,24 +1,18 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.toStockSeriesData = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
+var _AdapterFn = require("./AdapterFn");
 
 var _pointFn = require("./pointFn");
-
-const {
-  ymdhmsToUTC
-} = _AdapterFn.default;
 
 const _isUndef = v => typeof v === 'undefined';
 
 const toStockSeriesData = _ref => {
   let {
     arr = [],
-    toDate = ymdhmsToUTC,
+    toDate = _AdapterFn.ymdhmsToUTC,
     seriaOption,
     option
   } = _ref;

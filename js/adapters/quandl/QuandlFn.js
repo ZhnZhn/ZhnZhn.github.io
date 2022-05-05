@@ -13,11 +13,8 @@ var _mathFn = require("../../math/mathFn");
 
 var _DateUtils = require("../../utils/DateUtils");
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
-const {
-  valueMoving
-} = _AdapterFn.default;
 const _isArr = Array.isArray;
 
 const _isStr = str => typeof str === 'string';
@@ -38,7 +35,7 @@ const _isStrEqTo = (str, strTo) => _isStr(str) && str.toLowerCase() === strTo;
 const _crLinkId = (database_code, dataset_code) => database_code && dataset_code ? database_code + "/" + dataset_code : void 0;
 
 const QuandlFn = {
-  valueMoving,
+  valueMoving: _AdapterFn.valueMoving,
   getData: json => {
     const {
       dataset = {},

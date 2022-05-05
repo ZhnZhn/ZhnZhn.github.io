@@ -1,17 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _toTableFn = require("../toTableFn");
 
-const {
-  toTd
-} = _AdapterFn.default;
 const HEADERS = [{
   name: 'Rank',
   pn: 'id',
@@ -59,7 +54,7 @@ const HEADERS = [{
   pn: 'date'
 }];
 
-const _crTimeDate = time => toTd(time * 1000).split(' ') // base = null or quote = null or volume = 0
+const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(' ') // base = null or quote = null or volume = 0
 ,
       _isNotEmptyPair = _ref => {
   let {
@@ -107,8 +102,8 @@ const _crTimeDate = time => toTd(time * 1000).split(' ') // base = null or quote
   };
 },
       _crTimePeriod = (tMin, tMax) => {
-  const tdMin = toTd(tMin * 1000),
-        tdMax = toTd(tMax * 1000),
+  const tdMin = (0, _AdapterFn.toTd)(tMin * 1000),
+        tdMax = (0, _AdapterFn.toTd)(tMax * 1000),
         minArr = tdMin.split(' '),
         maxArr = tdMax.split(' '),
         dmy = minArr[1] === maxArr[1] ? minArr[1] : void 0;

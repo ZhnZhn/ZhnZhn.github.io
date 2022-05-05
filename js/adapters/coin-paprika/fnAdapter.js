@@ -1,29 +1,21 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
+
+var _crFn = require("../crFn");
 
 var _pointFn = require("../pointFn");
 
-const {
-  crError,
-  ymdToUTC,
-  getValue,
-  joinBy,
-  toUpperCaseFirst,
-  crItemLink
-} = _AdapterFn.default;
 const DF_ID = 'btc-bitcoin';
 
 const getCoinId = _ref => {
   let {
     items = []
   } = _ref;
-  return getValue(items[0], {
+  return (0, _AdapterFn.getValue)(items[0], {
     dfValue: DF_ID
   });
 };
@@ -32,14 +24,14 @@ const COIN_URL = 'https://coinpaprika.com/coin',
       _crCoinUrl = option => COIN_URL + "/" + getCoinId(option) + "/",
       _crInfo = option => ({
   name: option.title || '',
-  description: crItemLink('Coinpaprika', _crCoinUrl(option))
+  description: (0, _crFn.crItemLink)('Coinpaprika', _crCoinUrl(option))
 });
 
 const fnAdapter = {
-  crError,
-  getValue,
-  joinBy,
-  toUpperCaseFirst,
+  crError: _crFn.crError,
+  getValue: _AdapterFn.getValue,
+  joinBy: _AdapterFn.joinBy,
+  toUpperCaseFirst: _AdapterFn.toUpperCaseFirst,
   getCoinId,
   crData: arr => {
     const data = [],
@@ -56,7 +48,7 @@ const fnAdapter = {
         volume,
         market_cap
       } = item,
-            _date = time_close ? ymdToUTC(time_close.split('T')[0]) : void 0;
+            _date = time_close ? (0, _AdapterFn.ymdToUTC)(time_close.split('T')[0]) : void 0;
 
       if (_date) {
         data.push([_date, close]);

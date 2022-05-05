@@ -3,25 +3,16 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _AdapterFn = require("../AdapterFn");
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _crFn = require("../crFn");
 
 var _fnDescr = _interopRequireDefault(require("./fnDescr"));
 
-var crError = _AdapterFn["default"].crError,
-    isYNumber = _AdapterFn["default"].isYNumber,
-    getValue = _AdapterFn["default"].getValue,
-    toUpperCaseFirst = _AdapterFn["default"].toUpperCaseFirst,
-    monthIndex = _AdapterFn["default"].monthIndex,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    valueMoving = _AdapterFn["default"].valueMoving,
-    findMinY = _AdapterFn["default"].findMinY,
-    mapIf = _AdapterFn["default"].mapIf;
-var _isArr = Array.isArray;
-var C = {
+const _isArr = Array.isArray;
+const C = {
   DATASET_EMPTY: 'Dataset is empty',
   ENPTY: '',
   BLANK: ' ',
@@ -29,30 +20,34 @@ var C = {
   DF_TITLE: 'More about data on tab Info in Description'
 };
 
-var _crUnit = function _crUnit(json) {
-  var data = json.data,
-      item = data[data.length - 1] || {},
-      _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit || C.BLANK;
+const _crUnit = json => {
+  const {
+    data
+  } = json,
+        item = data[data.length - 1] || {},
+        _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit || C.BLANK;
 
-  return toUpperCaseFirst(_unit);
+  return (0, _AdapterFn.toUpperCaseFirst)(_unit);
 };
 
-var _crPoint = function _crPoint(_ref) {
-  var Year = _ref.Year,
-      Months = _ref.Months,
-      Value = _ref.Value;
-  var m = Months ? monthIndex(Months) + 1 : 0,
-      Tail = m !== 0 ? "-" + m : C.MM_DD;
+const _crPoint = _ref => {
+  let {
+    Year,
+    Months,
+    Value
+  } = _ref;
+  const m = Months ? (0, _AdapterFn.monthIndex)(Months) + 1 : 0,
+        Tail = m !== 0 ? "-" + m : C.MM_DD;
   return {
-    x: ymdToUTC('' + Year + Tail),
+    x: (0, _AdapterFn.ymdToUTC)('' + Year + Tail),
     y: Value
   };
 };
 
-var _crHm = function _crHm(json, prName) {
-  var hm = Object.create(null);
-  json.data.forEach(function (item) {
-    var _itemKey = item[prName];
+const _crHm = (json, prName) => {
+  const hm = Object.create(null);
+  json.data.forEach(item => {
+    const _itemKey = item[prName];
 
     if (!hm[_itemKey]) {
       hm[_itemKey] = [];
@@ -73,57 +68,47 @@ var _crHm = function _crHm(json, prName) {
   return hm;
 };
 
-var _compareByY = function _compareByY(a, b) {
-  return b.y - a.y;
-};
+const _compareByY = (a, b) => b.y - a.y;
 
-var _crRefLegend = function _crRefLegend(hm) {
-  var legend = [];
-  var propName;
+const _crRefLegend = hm => {
+  const legend = [];
+  let propName;
 
   for (propName in hm) {
-    var _arr = hm[propName];
-    legend.push((0, _extends2["default"])({}, _arr[_arr.length - 1], {
+    const _arr = hm[propName];
+    legend.push({ ..._arr[_arr.length - 1],
       //Area: propName
       listPn: propName
-    }));
+    });
   }
 
-  return legend.filter(isYNumber).sort(_compareByY);
+  return legend.filter(_AdapterFn.isYNumber).sort(_compareByY);
 };
 
-var _hmToPoints = function _hmToPoints(hm, arr) {
-  return arr.map(function (item) {
-    return hm[item.listPn];
-  });
-}; //.map(item => hm[item.Area]);
+const _hmToPoints = (hm, arr) => arr.map(item => hm[item.listPn]); //.map(item => hm[item.Area]);
 
 
-var _crSeriesData = function _crSeriesData(json, prName) {
-  var _hm = _crHm(json, prName),
-      _legend = _crRefLegend(_hm);
+const _crSeriesData = (json, prName) => {
+  const _hm = _crHm(json, prName),
+        _legend = _crRefLegend(_hm);
 
   return _hmToPoints(_hm, _legend);
 };
 
-var _isValueNumber = function _isValueNumber(item) {
-  return typeof item.Value === 'number';
+const _isValueNumber = item => typeof item.Value === 'number';
+
+const _compareByX = (a, b) => a.x - b.x;
+
+const _crSeriaData = (json, option) => {
+  return (0, _AdapterFn.mapIf)(json.data, _crPoint, _isValueNumber).sort(_compareByX);
 };
 
-var _compareByX = function _compareByX(a, b) {
-  return a.x - b.x;
-};
+const _isItemList = item => (0, _AdapterFn.getValue)(item).indexOf('>') !== -1;
 
-var _crSeriaData = function _crSeriaData(json, option) {
-  return mapIf(json.data, _crPoint, _isValueNumber).sort(_compareByX);
-};
-
-var _isItemList = function _isItemList(item) {
-  return getValue(item).indexOf('>') !== -1;
-};
-
-var _getSeriesPropName = function _getSeriesPropName(_ref2) {
-  var items = _ref2.items;
+const _getSeriesPropName = _ref2 => {
+  let {
+    items
+  } = _ref2;
 
   if (_isItemList(items[0])) {
     return 'Area';
@@ -134,24 +119,30 @@ var _getSeriesPropName = function _getSeriesPropName(_ref2) {
   }
 };
 
-var _isListForList = function _isListForList(_ref3) {
-  var items = _ref3.items;
+const _isListForList = _ref3 => {
+  let {
+    items
+  } = _ref3;
   return _isItemList(items[0]) && _isItemList(items[1]);
 };
 
-var fnAdapter = {
-  crError: crError,
-  getValue: getValue,
-  findMinY: findMinY,
-  crId: function crId(_ref4) {
-    var _itemKey = _ref4._itemKey;
+const fnAdapter = {
+  crError: _crFn.crError,
+  getValue: _AdapterFn.getValue,
+  findMinY: _AdapterFn.findMinY,
+  crId: _ref4 => {
+    let {
+      _itemKey
+    } = _ref4;
     return _itemKey;
   },
-  crTitle: function crTitle(json, option) {
-    var title = option.title,
-        dfTitle = option.dfTitle,
-        dfSubtitle = option.dfSubtitle,
-        subtitle = option.subtitle;
+  crTitle: (json, option) => {
+    const {
+      title,
+      dfTitle,
+      dfSubtitle,
+      subtitle
+    } = option;
 
     if (dfSubtitle) {
       return subtitle + " " + _crUnit(json) + ": " + title;
@@ -161,36 +152,41 @@ var fnAdapter = {
       return dfTitle ? dfTitle + ": " + title : title;
     }
 
-    var data = json.data,
-        p = data[data.length - 1];
+    const {
+      data
+    } = json,
+          p = data[data.length - 1];
 
     if (p && typeof p === 'object') {
-      var _p$Area = p.Area,
-          Area = _p$Area === void 0 ? '' : _p$Area,
-          _p$Item = p.Item,
-          Item = _p$Item === void 0 ? '' : _p$Item,
-          _p$Element = p.Element,
-          Element = _p$Element === void 0 ? '' : _p$Element;
+      const {
+        Area = '',
+        Item = '',
+        Element = ''
+      } = p;
       return Area + " " + Item + " " + Element;
     } else {
       return C.DF_TITLE;
     }
   },
-  crSubtitle: function crSubtitle(json, option) {
-    var dfSubtitle = option.dfSubtitle,
-        subtitle = option.subtitle;
+  crSubtitle: (json, option) => {
+    const {
+      dfSubtitle,
+      subtitle
+    } = option;
     return dfSubtitle ? dfSubtitle : subtitle + ": " + _crUnit(json);
   },
   crSeriaData: _crSeriaData,
-  toDataPoints: function toDataPoints(json, option) {
-    var _prName = _getSeriesPropName(option);
+  toDataPoints: (json, option) => {
+    const _prName = _getSeriesPropName(option);
 
     return _prName ? _crSeriesData(json, _prName) : _crSeriaData(json, option);
   },
-  toInfo: _fnDescr["default"].toInfo,
-  crZhConfig: function crZhConfig(id, _ref5) {
-    var dfDomain = _ref5.dfDomain,
-        itemCaption = _ref5.itemCaption;
+  toInfo: _fnDescr.default.toInfo,
+  crZhConfig: (id, _ref5) => {
+    let {
+      dfDomain,
+      itemCaption
+    } = _ref5;
     return {
       id: id,
       key: id,
@@ -201,12 +197,12 @@ var fnAdapter = {
       itemCaption: itemCaption
     };
   },
-  crValueMoving: function crValueMoving(points) {
-    return _isArr(points) && !_isArr(points[0]) ? valueMoving(points) : void 0;
+  crValueMoving: points => {
+    return _isArr(points) && !_isArr(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
   },
   isSeriesReq: _getSeriesPropName,
   isQueryAllowed: _isListForList
 };
 var _default = fnAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fnAdapter.js.map

@@ -1,95 +1,90 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _AdapterFn = require("../AdapterFn");
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _compareByFn = require("../compareByFn");
 
-var crError = _AdapterFn["default"].crError,
-    crZhConfig = _AdapterFn["default"].crZhConfig,
-    getFromDate = _AdapterFn["default"].getFromDate,
-    getCaption = _AdapterFn["default"].getCaption,
-    getValue = _AdapterFn["default"].getValue,
-    joinBy = _AdapterFn["default"].joinBy,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    compareByDate = _AdapterFn["default"].compareByDate,
-    crItemConf = _AdapterFn["default"].crItemConf,
-    crValueConf = _AdapterFn["default"].crValueConf;
-var _isNaN = Number.isNaN;
+var _crFn = require("../crFn");
 
-var _crHistoricalItemConf = function _crHistoricalItemConf(data, option) {
-  var itemCaption = option.itemCaption,
-      dataSource = option.dataSource,
-      items = option.items,
-      dfT = option.dfT,
-      dfPn = option.dfPn;
-  return (0, _extends2["default"])({}, crItemConf(option), crValueConf(data), {
+const _isNaN = Number.isNaN;
+
+const _crHistoricalItemConf = (data, option) => {
+  const {
+    itemCaption,
+    dataSource,
+    items,
+    dfT,
+    dfPn
+  } = option;
+  return { ...(0, _crFn.crItemConf)(option),
+    ...(0, _crFn.crValueConf)(data),
     _itemKey: 'FMP/' + itemCaption,
-    dataSource: dataSource,
-    items: items,
-    dfT: dfT,
-    dfPn: dfPn
-  });
+    dataSource,
+    items,
+    dfT,
+    dfPn
+  };
 };
 
-var _crHistZhConfig = function _crHistZhConfig(data, option) {
-  return (0, _extends2["default"])({}, crZhConfig(option), {
-    itemConf: _crHistoricalItemConf(data, option)
-  });
-};
+const _crHistZhConfig = (data, option) => ({ ...(0, _AdapterFn.crZhConfig)(option),
+  itemConf: _crHistoricalItemConf(data, option)
+});
 
-var _crName = function _crName(items) {
-  return items.map(getCaption).join(': ');
-};
+const _crName = items => items.map(_AdapterFn.getCaption).join(': ');
 
-var _crInfo = function _crInfo(_ref) {
-  var items = _ref.items,
-      _itemUrl = _ref._itemUrl;
+const _crInfo = _ref => {
+  let {
+    items,
+    _itemUrl
+  } = _ref;
   return {
     name: _crName(items)
   };
 };
 
-var fnAdapter = {
-  crError: crError,
-  getFromDate: getFromDate,
-  getCaption: getCaption,
-  getValue: getValue,
-  crData: function crData(json, option) {
-    var dfPn = option.dfPn,
-        _propName = option._propName,
-        _metrics = dfPn ? json[dfPn] : json,
-        _data = [];
+const fnAdapter = {
+  crError: _crFn.crError,
+  getFromDate: _AdapterFn.getFromDate,
+  getCaption: _AdapterFn.getCaption,
+  getValue: _AdapterFn.getValue,
+  crData: (json, option) => {
+    const {
+      dfPn,
+      _propName
+    } = option,
+          _metrics = dfPn ? json[dfPn] : json,
+          _data = [];
 
-    _metrics.forEach(function (item) {
-      var _v = parseFloat(item[_propName]);
+    _metrics.forEach(item => {
+      const _v = parseFloat(item[_propName]);
 
       if (!_isNaN(_v)) {
-        _data.push([ymdToUTC(item.date), _v]);
+        _data.push([(0, _AdapterFn.ymdToUTC)(item.date), _v]);
       }
     });
 
-    return _data.reverse().sort(compareByDate);
+    return _data.reverse().sort(_compareByFn.compareByDate);
   },
-  crCaption: function crCaption(_ref2) {
-    var items = _ref2.items;
+  crCaption: _ref2 => {
+    let {
+      items
+    } = _ref2;
     return {
-      title: getCaption(items[0]),
-      subtitle: joinBy(': ', getCaption(items[1]), getCaption(items[2]))
+      title: (0, _AdapterFn.getCaption)(items[0]),
+      subtitle: (0, _AdapterFn.joinBy)(': ', (0, _AdapterFn.getCaption)(items[1]), (0, _AdapterFn.getCaption)(items[2]))
     };
   },
-  addConfOption: function addConfOption(option) {
-    return {
-      info: _crInfo(option)
-    };
-  },
-  crHistOption: function crHistOption(_ref3) {
-    var option = _ref3.option,
-        data = _ref3.data;
+  addConfOption: option => ({
+    info: _crInfo(option)
+  }),
+  crHistOption: _ref3 => {
+    let {
+      option,
+      data
+    } = _ref3;
     return {
       info: _crInfo(option),
       zhConfig: _crHistZhConfig(data, option)
@@ -97,5 +92,5 @@ var fnAdapter = {
   }
 };
 var _default = fnAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fnAdapter.js.map

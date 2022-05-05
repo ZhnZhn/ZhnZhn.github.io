@@ -1,14 +1,13 @@
 
 import crConfigType1 from '../../charts/crConfigType1'
-import AdapterFn from '../AdapterFn'
+import {
+  ymdToUTC,
+  findMinY
+} from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import fnDescr from './fnDescr'
 
 const { Builder } = crConfigType1
-, {
-  ymdToUTC,
-  findMinY
-} = AdapterFn
 , _parser = new window.DOMParser()
 , _isNaN = Number.isNaN;
 

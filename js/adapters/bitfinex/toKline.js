@@ -5,20 +5,18 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
-const {
-  crZhConfig,
-  roundBy
-} = _AdapterFn.default;
-
-const _crAddConfig = ({
-  option
-}) => ({
-  zhConfig: crZhConfig(option)
-});
+const _crAddConfig = _ref => {
+  let {
+    option
+  } = _ref;
+  return {
+    zhConfig: (0, _AdapterFn.crZhConfig)(option)
+  };
+};
 
 const _isNumber = n => typeof n === 'number',
       _compareByDate = (a, b) => a.date - b.date,
@@ -27,7 +25,7 @@ const _isNumber = n => typeof n === 'number',
     return n;
   }
 
-  return roundBy(n, 2);
+  return (0, _AdapterFn.roundBy)(n, 2);
 };
 /*
 From Bitfinex Documentation

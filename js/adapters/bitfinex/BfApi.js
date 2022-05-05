@@ -1,57 +1,70 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _crFn = require("../crFn");
 
-var C = {
+const C = {
   URL: "https://api-pub.bitfinex.com/v2"
 };
-var _isArr = Array.isArray,
-    crError = _AdapterFn["default"].crError;
+const _isArr = Array.isArray;
 
-var _crDfUrl = function _crDfUrl(option) {
-  var proxy = option.proxy,
-      _option$items = option.items,
-      items = _option$items === void 0 ? [] : _option$items,
-      pair = items[0].v,
-      timeframe = items[1].v,
-      limit = items[2].v;
+const _crDfUrl = option => {
+  const {
+    proxy,
+    items = []
+  } = option,
+        {
+    v: pair
+  } = items[0],
+        {
+    v: timeframe
+  } = items[1],
+        {
+    v: limit
+  } = items[2];
   option.timeframe = timeframe;
   return "" + proxy + C.URL + "/candles/trade:" + timeframe + ":t" + pair + "/hist?limit=" + limit;
 };
 
-var _crObUrl = function _crObUrl(option) {
-  var proxy = option.proxy,
-      _option$items2 = option.items,
-      items = _option$items2 === void 0 ? [] : _option$items2,
-      pair = items[0].v,
-      len = items[1].v;
+const _crObUrl = option => {
+  const {
+    proxy,
+    items = []
+  } = option,
+        {
+    v: pair
+  } = items[0],
+        {
+    v: len
+  } = items[1];
   return "" + proxy + C.URL + "/book/t" + pair + "/P0?len=" + len;
 };
 
-var _rCrUrl = {
+const _rCrUrl = {
   DF: _crDfUrl,
   OB: _crObUrl
 };
-var BfApi = {
-  getRequestUrl: function getRequestUrl(option) {
-    var dfSubId = option.dfSubId,
-        _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
+const BfApi = {
+  getRequestUrl(option) {
+    const {
+      dfSubId
+    } = option,
+          _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
 
     return _crUrl(option);
   },
-  checkResponse: function checkResponse(json, option) {
+
+  checkResponse(json, option) {
     if (!_isArr(json)) {
-      throw crError();
+      throw (0, _crFn.crError)();
     }
 
     return true;
   }
+
 };
 var _default = BfApi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=BfApi.js.map

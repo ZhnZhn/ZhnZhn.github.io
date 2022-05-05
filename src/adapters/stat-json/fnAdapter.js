@@ -1,22 +1,18 @@
 import JSONstat from 'jsonstat';
-
-import AdapterFn from '../AdapterFn';
+import {
+  isYNumber,
+  numberFormat,
+  roundBy,
+  valueMoving,
+  toUpperCaseFirst
+} from '../AdapterFn';
 import {
   crError,
   crId,
   crItemConf
 } from '../crFn';
 
-const {
-  isYNumber,
-  numberFormat,
-  roundBy,
-  valueMoving,
-  toUpperCaseFirst
-} = AdapterFn;
-
 const _keys = Object.keys;
-
 const TITLE = {
   NST: 'Statisctics Norway: All Items',
   SWS: 'Statisctics Sweden: All Items'

@@ -1,16 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.crTableRows = exports.crTableConfig = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
-
-const {
-  numberFormat,
-  roundBy
-} = _AdapterFn.default;
+var _AdapterFn = require("./AdapterFn");
 
 const _isNumber = n => typeof n === 'number',
       _replaceNaN = function (n, str) {
@@ -30,7 +23,7 @@ const _getCellValue = (r, h) => {
         _toFixedBy = _isToNumber && toN[0],
         _strV = r[pn];
 
-  return _isToNumber ? _isNumber(_toFixedBy) ? roundBy(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
+  return _isToNumber ? _isNumber(_toFixedBy) ? (0, _AdapterFn.roundBy)(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
 };
 
 const crTableConfig = _ref => {
@@ -47,7 +40,7 @@ const crTableConfig = _ref => {
     title,
     headers,
     tableFn: {
-      numberFormat,
+      numberFormat: _AdapterFn.numberFormat,
       ...fns
     },
     rows,

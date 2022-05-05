@@ -1,13 +1,14 @@
-import AdapterFn from '../AdapterFn'
-import { crError, crItemLink } from '../crFn';
-import { crVolumePoint } from '../pointFn';
-
-const {
+import {
   ymdToUTC,
   getValue,
   joinBy,
   toUpperCaseFirst
-} = AdapterFn;
+} from '../AdapterFn';
+import {
+  crError,
+  crItemLink
+} from '../crFn';
+import { crVolumePoint } from '../pointFn';
 
 const DF_ID = 'btc-bitcoin';
 const getCoinId = ({ items=[] }) =>

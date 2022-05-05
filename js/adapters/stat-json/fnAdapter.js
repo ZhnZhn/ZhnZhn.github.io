@@ -7,18 +7,10 @@ exports.default = void 0;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _crFn = require("../crFn");
 
-const {
-  isYNumber,
-  numberFormat,
-  roundBy,
-  valueMoving,
-  crItemConf,
-  toUpperCaseFirst
-} = _AdapterFn.default;
 const _keys = Object.keys;
 const TITLE = {
   NST: 'Statisctics Norway: All Items',
@@ -180,11 +172,11 @@ const _crDataSource = _ref4 => {
 
 const fnAdapter = {
   crError: _crFn.crError,
-  isYNumber,
-  numberFormat,
+  isYNumber: _AdapterFn.isYNumber,
+  numberFormat: _AdapterFn.numberFormat,
   crId: _crFn.crId,
-  roundBy,
-  toUpperCaseFirst,
+  roundBy: _AdapterFn.roundBy,
+  toUpperCaseFirst: _AdapterFn.toUpperCaseFirst,
   crTitle: option => {
     switch (option.browserType) {
       case 'NST':
@@ -234,7 +226,7 @@ const fnAdapter = {
           itemCaption = option.itemCaption || _crItemCaption(option),
           itemConf = url ? {
       _itemKey: key,
-      ...crItemConf(option),
+      ...(0, _crFn.crItemConf)(option),
       optionFetch,
       items,
       dataSource,
@@ -256,7 +248,7 @@ const fnAdapter = {
     zhConfig: fnAdapter.crZhConfig(option)
   }),
   crChartOption: (ds, data, option) => ({
-    valueMoving: valueMoving(data),
+    valueMoving: (0, _AdapterFn.valueMoving)(data),
     ...fnAdapter.crConfOption(ds, option)
   })
 };

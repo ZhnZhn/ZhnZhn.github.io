@@ -1,20 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _crFn = require("../crFn");
-
-const {
-  ymdToUTC,
-  getYear,
-  getCurrentYear,
-  joinBy
-} = _AdapterFn.default;
 
 const _crZhConfig = _ref => {
   let {
@@ -31,7 +22,7 @@ const _crZhConfig = _ref => {
     },
     linkFn: 'DF',
     itemCaption,
-    dataSource: joinBy(": ", dataSource, dfTitle)
+    dataSource: (0, _AdapterFn.joinBy)(": ", dataSource, dfTitle)
   };
 };
 
@@ -47,8 +38,8 @@ const _crInfo = _ref2 => {
 const fnAdapter = {
   crHm: _crFn.crHm,
   crError: _crFn.crError,
-  getYear,
-  getCurrentYear,
+  getYear: _AdapterFn.getYear,
+  getCurrentYear: _AdapterFn.getCurrentYear,
   crData: json => {
     const data = json.Results.series[0].data,
           _data = [];
@@ -62,7 +53,7 @@ const fnAdapter = {
 
       if (typeof _m === 'number' && _m > 0 && _m < 13) {
         _data.push({
-          x: ymdToUTC(year + "-" + _m),
+          x: (0, _AdapterFn.ymdToUTC)(year + "-" + _m),
           y: parseFloat(value)
         });
       }

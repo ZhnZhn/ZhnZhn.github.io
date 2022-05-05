@@ -3,19 +3,18 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
-var crZhConfig = _AdapterFn["default"].crZhConfig,
-    isInArrStr = _AdapterFn["default"].isInArrStr;
-
-var _crAddConfig = function _crAddConfig(_ref) {
-  var option = _ref.option;
+const _crAddConfig = _ref => {
+  let {
+    option
+  } = _ref;
   return {
-    zhConfig: crZhConfig(option)
+    zhConfig: (0, _AdapterFn.crZhConfig)(option)
   };
 };
 /*
@@ -31,50 +30,44 @@ From Bitstamp API Documentation
 */
 
 
-var _isDailyTimeframe = isInArrStr(["86400", "259200"]),
-    _isHourlyTimeframe = isInArrStr(["3600", "7200", "14400", "21600", "43200"]);
+const _isDailyTimeframe = (0, _AdapterFn.isInArrStr)(["86400", "259200"]),
+      _isHourlyTimeframe = (0, _AdapterFn.isInArrStr)(["3600", "7200", "14400", "21600", "43200"]);
 
-var DAILY_TIME_DELTA = 86394000; //1000*60*60*24 - 1000*60
+const DAILY_TIME_DELTA = 86394000; //1000*60*60*24 - 1000*60
 
-var HOURLY_TIME_DELTA = 3540000; //1000*60*59
+const HOURLY_TIME_DELTA = 3540000; //1000*60*59
 
-var _toMls = function _toMls(timestamp) {
-  return parseFloat(timestamp) * 1000;
-},
-    _fToMls = function _fToMls(delta) {
-  return function (timestamp, isRecent) {
-    return isRecent ? Date.now() - 6000 //1000*60
-    : _toMls(timestamp) + delta;
-  };
-},
-    _toDailyMls = _fToMls(DAILY_TIME_DELTA),
-    _toHourlyMls = _fToMls(HOURLY_TIME_DELTA);
+const _toMls = timestamp => parseFloat(timestamp) * 1000,
+      _fToMls = delta => (timestamp, isRecent) => isRecent ? Date.now() - 6000 //1000*60
+: _toMls(timestamp) + delta,
+      _toDailyMls = _fToMls(DAILY_TIME_DELTA),
+      _toHourlyMls = _fToMls(HOURLY_TIME_DELTA);
 
-var _crDataOHLCV = function _crDataOHLCV(json, option) {
-  var ohlc = json.data.ohlc,
-      _recentIndex = ohlc.length - 1,
-      timeframe = option.timeframe,
-      _toDate = _isDailyTimeframe(timeframe) ? _toDailyMls : _isHourlyTimeframe(timeframe) ? _toHourlyMls : _toMls;
+const _crDataOHLCV = (json, option) => {
+  const {
+    ohlc
+  } = json.data,
+        _recentIndex = ohlc.length - 1,
+        {
+    timeframe
+  } = option,
+        _toDate = _isDailyTimeframe(timeframe) ? _toDailyMls : _isHourlyTimeframe(timeframe) ? _toHourlyMls : _toMls;
 
-  return ohlc.map(function (item, index) {
-    return {
-      date: _toDate(item.timestamp, index === _recentIndex),
-      open: parseFloat(item.open),
-      high: parseFloat(item.high),
-      low: parseFloat(item.low),
-      close: parseFloat(item.close),
-      volume: parseFloat(item.volume)
-    };
-  });
+  return ohlc.map((item, index) => ({
+    date: _toDate(item.timestamp, index === _recentIndex),
+    open: parseFloat(item.open),
+    high: parseFloat(item.high),
+    low: parseFloat(item.low),
+    close: parseFloat(item.close),
+    volume: parseFloat(item.volume)
+  }));
 };
 
-var toKline = (0, _crAdapterOHLCV["default"])({
+const toKline = (0, _crAdapterOHLCV.default)({
   getArr: _crDataOHLCV,
-  toDate: function toDate(date) {
-    return date;
-  },
+  toDate: date => date,
   crAddConfig: _crAddConfig
 });
 var _default = toKline;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toKline.js.map

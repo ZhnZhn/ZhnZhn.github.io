@@ -1,7 +1,8 @@
-import AdapterFn from '../AdapterFn'
+import { 
+  crZhConfig,
+  isInArrStr
+} from '../AdapterFn';
 import crAdapterOHLCV from '../crAdapterOHLCV'
-
-const { crZhConfig, isInArrStr } = AdapterFn;
 
 const _crAddConfig = ({ option }) => ({
   zhConfig: crZhConfig(option)

@@ -2,7 +2,7 @@ import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
-import AdapterFn from '../AdapterFn'
+import { roundBy } from '../AdapterFn';
 import { compareByValue } from '../compareByFn';
 import { legendItem } from '../legendFn'
 
@@ -20,7 +20,7 @@ const _crInfo = (json, option) => ({
 });
 
 const fnAdapter = {
-   roundBy: AdapterFn.roundBy,
+   roundBy,
 
   crChartId: option => {
     const { value, rg=2, measure="A" } = option;

@@ -1,12 +1,8 @@
-import AdapterFn from './AdapterFn'
+import { ymdhmsToUTC } from './AdapterFn';
 import {
   crVolumePoint,
   crAthPoint
 } from './pointFn';
-
-const {
-  ymdhmsToUTC  
-} = AdapterFn;
 
 const _isUndef = v => typeof v === 'undefined';
 

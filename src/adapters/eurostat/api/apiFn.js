@@ -1,6 +1,7 @@
-import AdapterFn from '../../AdapterFn';
-
-const { isInArrStr, getValue } = AdapterFn;
+import {
+  isInArrStr,
+  getValue
+} from '../../AdapterFn';
 
 const C = {
   URL: "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/",

@@ -7,15 +7,11 @@ exports.default = void 0;
 
 var _ConfigBuilder = _interopRequireDefault(require("../charts/ConfigBuilder"));
 
-var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
+var _AdapterFn = require("./AdapterFn");
 
 var _legendFn = require("./legendFn");
 
 var _AdapterStockFn = require("./AdapterStockFn");
-
-const {
-  valueMoving
-} = _AdapterFn.default;
 
 const _crCaptionDf = _ref => {
   let {
@@ -63,7 +59,7 @@ const crAdapterOHLCV = _ref3 => {
         dMfi
       } = dataOption,
             config = (0, _ConfigBuilder.default)().stockConfig(id, dataOption).addCaption(title, subtitle).add({
-        valueMoving: valueMoving(dC),
+        valueMoving: (0, _AdapterFn.valueMoving)(dC),
         ...crAddConfig({
           json,
           option,

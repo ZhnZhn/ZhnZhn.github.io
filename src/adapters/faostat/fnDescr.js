@@ -1,8 +1,4 @@
-import AdapterFn from '../AdapterFn';
-
-const {
-  toUpperCaseFirst
-} = AdapterFn;
+import { toUpperCaseFirst } from '../AdapterFn';
 
 const DATASET_EMPTY = "Dataset is empty";
 

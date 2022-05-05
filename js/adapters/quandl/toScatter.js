@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _Type = require("../../constants/Type");
 
@@ -15,70 +13,77 @@ var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
-var C = {
+var _crFn = require("../crFn");
+
+const C = {
   COLOR_PLUS: '#4caf50',
   COLOR_MINUS: '#f44336'
 };
 
-var _crZhConfig = function _crZhConfig(option) {
-  var dataSource = option.dataSource,
-      id = _AdapterFn["default"].crId();
-
+const _crZhConfig = option => {
+  const {
+    dataSource
+  } = option,
+        id = (0, _crFn.crId)();
   return {
-    id: id,
+    id,
     key: id,
-    dataSource: dataSource
+    dataSource
   };
 };
 
-var _calcScatterY = function _calcScatterY(option, chart) {
-  var _option$seriaType = option.seriaType,
-      seriaType = _option$seriaType === void 0 ? _Type.ChartType.SCATTER_UP : _option$seriaType,
-      _chart$yAxis$ = chart.yAxis[0],
-      max = _chart$yAxis$.max,
-      min = _chart$yAxis$.min,
-      onePercent = (max - min) / 100;
+const _calcScatterY = (option, chart) => {
+  const {
+    seriaType = _Type.ChartType.SCATTER_UP
+  } = option,
+        {
+    max,
+    min
+  } = chart.yAxis[0],
+        onePercent = (max - min) / 100;
   return seriaType === _Type.ChartType.SCATTER_DOWN ? min + 4 * onePercent : max - 7 * onePercent;
 };
 
-var _updateLabelY = function _updateLabelY(p, seriaType) {
+const _updateLabelY = (p, seriaType) => {
   if (seriaType === _Type.ChartType.SCATTER_UP) {
     p.dataLabels.y = 0;
   }
 };
 
-var _crSeria = function _crSeria(arr, option) {
-  var _option$seriaType2 = option.seriaType,
-      seriaType = _option$seriaType2 === void 0 ? _Type.ChartType.SCATTER_UP : _option$seriaType2;
-  var data = arr.map(function (p) {
-    var date = p[0],
-        v = p[1],
-        _color = v >= 0 ? C.COLOR_PLUS : C.COLOR_MINUS,
-        _p = _ChartConfig["default"].crMarkerExDividend(_color);
+const _crSeria = (arr, option) => {
+  const {
+    seriaType = _Type.ChartType.SCATTER_UP
+  } = option;
+  const data = arr.map(p => {
+    const date = p[0],
+          v = p[1],
+          _color = v >= 0 ? C.COLOR_PLUS : C.COLOR_MINUS,
+          _p = _ChartConfig.default.crMarkerExDividend(_color);
 
     _updateLabelY(_p, seriaType);
 
-    return Object.assign(_p, (0, _extends2["default"])({
-      x: _AdapterFn["default"].ymdToUTC(date),
-      exValue: v
-    }, p));
+    return Object.assign(_p, {
+      x: (0, _AdapterFn.ymdToUTC)(date),
+      exValue: v,
+      ...p
+    });
   });
   return {
     type: 'scatter',
     tooltip: {
-      pointFormatter: _Tooltip["default"].exValue,
+      pointFormatter: _Tooltip.default.exValue,
       headerFormat: ''
     },
     data: data
   };
 };
 
-var _getSeriaFrom = function _getSeriaFrom(config, option, chart) {
-  var y = _calcScatterY(option, chart),
-      seria = config.series[0],
-      _d = seria.data.map(function (p) {
+const _getSeriaFrom = (config, option, chart) => {
+  const y = _calcScatterY(option, chart),
+        seria = config.series[0],
+        _d = seria.data.map(p => {
     p.y = y;
     return p;
   });
@@ -87,23 +92,23 @@ var _getSeriaFrom = function _getSeriaFrom(config, option, chart) {
   return seria;
 };
 
-var toScatter = {
-  toConfig: function toConfig(data, option) {
-    var seria = _crSeria(data, option),
-        config = (0, _ConfigBuilder["default"])().areaConfig().add({
+const toScatter = {
+  toConfig: (data, option) => {
+    const seria = _crSeria(data, option),
+          config = (0, _ConfigBuilder.default)().areaConfig().add({
       zhConfig: _crZhConfig(option)
     }).toConfig();
 
     config.series[0] = seria;
     return config;
   },
-  toSeria: function toSeria(data, option, chart) {
-    var config = toScatter.toConfig(data, option),
-        seria = _getSeriaFrom(config, option, chart);
+  toSeria: (data, option, chart) => {
+    const config = toScatter.toConfig(data, option),
+          seria = _getSeriaFrom(config, option, chart);
 
     return seria;
   }
 };
 var _default = toScatter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toScatter.js.map

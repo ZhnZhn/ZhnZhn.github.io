@@ -9,7 +9,7 @@ var _ConfigBuilder = _interopRequireDefault(require("../charts/ConfigBuilder"));
 
 var _Tooltip = _interopRequireDefault(require("../charts/Tooltip"));
 
-var _AdapterFn = _interopRequireDefault(require("./AdapterFn"));
+var _AdapterFn = require("./AdapterFn");
 
 const CATEGORIES = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const C = {
@@ -35,39 +35,40 @@ const C = {
     color: '#008b8b'
   }
 };
-const {
-  crValueMoving,
-  roundBy,
-  numberFormat
-} = _AdapterFn.default;
 
 const _getYear = str => str.split("-")[0];
 
 const _getMonth = str => str.split("-")[1];
 
-const _crSeria = (name, {
-  type = 'spline',
-  data,
-  color,
-  isVisible = true
-}) => ({
-  type,
-  name,
-  data,
-  color,
-  visible: isVisible
-});
+const _crSeria = (name, _ref) => {
+  let {
+    type = 'spline',
+    data,
+    color,
+    isVisible = true
+  } = _ref;
+  return {
+    type,
+    name,
+    data,
+    color,
+    visible: isVisible
+  };
+};
 
-const _crItem = (name, {
-  index,
-  color,
-  isVisible = true
-}) => ({
-  name,
-  index,
-  color,
-  isVisible
-});
+const _crItem = (name, _ref2) => {
+  let {
+    index,
+    color,
+    isVisible = true
+  } = _ref2;
+  return {
+    name,
+    index,
+    color,
+    isVisible
+  };
+};
 
 const _crPoint = item => ({
   c: _getMonth(item[0]),
@@ -118,7 +119,7 @@ const _crHighLowPoint = (key, arr) => ({
 
 const _calcAvg = arr => {
   const sum = arr.reduce((acc, a) => acc + a, 0);
-  return arr.length !== 0 ? roundBy(sum / arr.length, 4) : 0;
+  return arr.length !== 0 ? (0, _AdapterFn.roundBy)(sum / arr.length, 4) : 0;
 };
 
 const _crAvgPoint = (key, arr) => ({
@@ -126,7 +127,11 @@ const _crAvgPoint = (key, arr) => ({
   c: key
 });
 
-const _crSeriaData = (data, i, year, crPoint = _crPoint) => {
+const _crSeriaData = function (data, i, year, crPoint) {
+  if (crPoint === void 0) {
+    crPoint = _crPoint;
+  }
+
   const arr = [],
         max = data.length;
 
@@ -184,7 +189,11 @@ const _crBaseHm = () => CATEGORIES.reduce((hm, key) => {
   return hm;
 }, Object.create(null));
 
-const _crMonthHm = (i, data, stopYear, crPoint = _crValuePoint) => {
+const _crMonthHm = function (i, data, stopYear, crPoint) {
+  if (crPoint === void 0) {
+    crPoint = _crValuePoint;
+  }
+
   const hm = _crBaseHm(),
         max = data.length;
 
@@ -225,13 +234,15 @@ const _crRangeSeries = data => {
   const _minData = [],
         _maxData = [];
 
-  _data.forEach(({
-    c,
-    high,
-    yHigh,
-    low,
-    yLow
-  }) => {
+  _data.forEach(_ref3 => {
+    let {
+      c,
+      high,
+      yHigh,
+      low,
+      yLow
+    } = _ref3;
+
     _minData.push({
       c,
       y: low,
@@ -291,9 +302,11 @@ const _crAvgSeria = data => {
   }), _crItem(name, C.AVG)];
 };
 
-const _crZhConfig = (option, {
-  legend
-}) => {
+const _crZhConfig = (option, _ref4) => {
+  let {
+    legend
+  } = _ref4;
+
   const {
     value,
     itemCaption,
@@ -343,7 +356,7 @@ const _crValueMoving = (nowSeria, prevSeria) => {
     value: bPrevValue,
     date: dateTo
   } = _crValueAndDate(prevSeria, max),
-        moving = crValueMoving({
+        moving = (0, _AdapterFn.crValueMoving)({
     bNowValue,
     bPrevValue
   });
@@ -351,7 +364,7 @@ const _crValueMoving = (nowSeria, prevSeria) => {
   return { ...moving,
     date,
     dateTo,
-    valueTo: numberFormat(bPrevValue),
+    valueTo: (0, _AdapterFn.numberFormat)(bPrevValue),
     isDenyToChange: true
   };
 };

@@ -9,7 +9,7 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _pointFn = require("../pointFn");
 
@@ -18,9 +18,6 @@ var _IntradayFns = require("../IntradayFns");
 var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
 
 const {
-  ymdhmsToUTC
-} = _AdapterFn.default,
-      {
   crIntradayConfigOption
 } = _fnAdapter.default;
 const INTRADAY = 'INTRADAY';
@@ -37,7 +34,7 @@ const _crSeriaOptions = (_ref, dfT) => {
   return {
     notFilterZero: !isFilterZero,
     isDividend: _isAdjusted,
-    toUTC: ymdhmsToUTC,
+    toUTC: _AdapterFn.ymdhmsToUTC,
     pnClose: _isAdjusted ? '5. adjusted close' : '4. close',
     pnVolume: _isAdjusted ? '6. volume' : '5. volume'
   };

@@ -8,9 +8,7 @@ import {
 
 import { mlsToDmy } from '../../utils/DateUtils';
 
-import AdapterFn from '../AdapterFn';
-
-const { valueMoving } = AdapterFn;
+import { valueMoving } from '../AdapterFn';
 
 const _isArr = Array.isArray;
 const _isStr = str => typeof str === 'string';

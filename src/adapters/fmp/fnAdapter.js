@@ -1,19 +1,17 @@
-import AdapterFn from '../AdapterFn'
-import { compareByDate } from '../compareByFn';
 import {
-  crError,
-  crItemConf,
-  crValueConf
-} from '../crFn';
-
-const {
   crZhConfig,
   getFromDate,
   getCaption,
   getValue,
   joinBy,
   ymdToUTC
-} = AdapterFn;
+} from '../AdapterFn';
+import { compareByDate } from '../compareByFn';
+import {
+  crError,
+  crItemConf,
+  crValueConf
+} from '../crFn';
 
 const _isNaN = Number.isNaN;
 

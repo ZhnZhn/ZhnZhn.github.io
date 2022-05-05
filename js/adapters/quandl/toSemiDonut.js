@@ -3,11 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _compareByFn = require("../compareByFn");
 
 var _Type = require("../../constants/Type");
 
@@ -21,49 +21,53 @@ var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
 
 var _fnStacked = _interopRequireDefault(require("./fnStacked"));
 
-var crValueMoving = _fnStacked["default"].crValueMoving,
-    crZhConfig = _fnStacked["default"].crZhConfig;
-var _assign = Object.assign,
-    setTitleToConfig = _QuandlFn["default"].setTitleToConfig,
-    createDatasetInfo = _QuandlFn["default"].createDatasetInfo,
-    createPercent = _QuandlFn["default"].createPercent,
-    crPieConfig = _ChartConfig["default"].crPieConfig,
-    crInnerPieSeria = _ChartConfig["default"].crInnerPieSeria,
-    crOuterPieSeria = _ChartConfig["default"].crOuterPieSeria,
-    compareByY = _AdapterFn["default"].compareByY,
-    HEIGHT = _Chart["default"].HEIGHT,
-    LEGEND_ROW_HEIGHT = _Chart["default"].LEGEND_ROW_HEIGHT;
+const {
+  crValueMoving,
+  crZhConfig
+} = _fnStacked.default;
+const _assign = Object.assign,
+      {
+  setTitleToConfig,
+  createDatasetInfo,
+  createPercent
+} = _QuandlFn.default,
+      {
+  crPieConfig,
+  crInnerPieSeria,
+  crOuterPieSeria
+} = _ChartConfig.default,
+      {
+  HEIGHT,
+  LEGEND_ROW_HEIGHT
+} = _Chart.default;
 
-var _calcLegendHeight = function _calcLegendHeight(length) {
-  return length !== 0 ? HEIGHT + LEGEND_ROW_HEIGHT * (Math.ceil(length / 4) - 1) : HEIGHT;
-};
+const _calcLegendHeight = length => length !== 0 ? HEIGHT + LEGEND_ROW_HEIGHT * (Math.ceil(length / 4) - 1) : HEIGHT;
 
-var _addPercentToItem = function _addPercentToItem(item, bTotal) {
-  var _bPercent = createPercent({
-    bValue: (0, _big["default"])(item.y),
+const _addPercentToItem = (item, bTotal) => {
+  const _bPercent = createPercent({
+    bValue: (0, _big.default)(item.y),
     bTotal: bTotal
   });
 
   item.name += ' ' + _bPercent;
 };
 
-var _createTopDonutData = function _createTopDonutData(_ref) {
-  var _ref$isPercent = _ref.isPercent,
-      isPercent = _ref$isPercent === void 0 ? false : _ref$isPercent,
-      _ref$data = _ref.data,
-      data = _ref$data === void 0 ? [] : _ref$data,
-      _ref$bTotal = _ref.bTotal,
-      bTotal = _ref$bTotal === void 0 ? (0, _big["default"])('0.0') : _ref$bTotal;
+const _createTopDonutData = _ref => {
+  let {
+    isPercent = false,
+    data = [],
+    bTotal = (0, _big.default)('0.0')
+  } = _ref;
 
-  var arr = [],
-      _bTotal90 = bTotal.times(0.9);
+  const arr = [],
+        _bTotal90 = bTotal.times(0.9);
 
-  var bArrTotal = (0, _big["default"])('0.0'),
+  let bArrTotal = (0, _big.default)('0.0'),
       i = 0,
       _max = data.length;
 
   for (; i < _max; i++) {
-    var item = data[i];
+    const item = data[i];
 
     if (i === 0 || !bArrTotal.gte(_bTotal90) || i === _max - 1) {
       if (isPercent) {
@@ -94,38 +98,36 @@ var _createTopDonutData = function _createTopDonutData(_ref) {
   return arr;
 };
 
-var _crYear = function _crYear(yearStr) {
-  return yearStr ? yearStr.split('-')[0] : '';
-};
+const _crYear = yearStr => yearStr ? yearStr.split('-')[0] : '';
 
-var _sortData = function _sortData(data) {
-  return data.sort(compareByY).reverse();
-};
+const _sortData = data => data.sort(_compareByFn.compareByY).reverse();
 
-var toSemiDonut = function toSemiDonut(json, option) {
-  var config = crPieConfig(),
-      _option$sliceItems = option.sliceItems,
-      items = _option$sliceItems === void 0 ? [] : _option$sliceItems,
-      _option$value = option.value,
-      value = _option$value === void 0 ? '' : _option$value,
-      id = value + "_" + _Type.ChartType.SEMI_DONUT,
-      jsonData = json.dataset.data,
-      jsonData1 = jsonData[0],
-      jsonData2 = jsonData[1],
-      _year1 = _crYear(jsonData1[0]),
-      _year2 = _crYear(jsonData2[0]),
-      _data1 = [],
-      _data2 = [];
+const toSemiDonut = function (json, option) {
+  const config = crPieConfig(),
+        {
+    sliceItems: items = [],
+    value = ''
+  } = option,
+        id = value + "_" + _Type.ChartType.SEMI_DONUT,
+        jsonData = json.dataset.data,
+        jsonData1 = jsonData[0],
+        jsonData2 = jsonData[1],
+        _year1 = _crYear(jsonData1[0]),
+        _year2 = _crYear(jsonData2[0]),
+        _data1 = [],
+        _data2 = [];
 
-  var _bTotal1 = (0, _big["default"])('0.0');
+  let _bTotal1 = (0, _big.default)('0.0');
 
-  var _bTotal2 = (0, _big["default"])('0.0');
+  let _bTotal2 = (0, _big.default)('0.0');
 
-  items.forEach(function (item) {
-    var value = item.value,
-        caption = item.caption,
-        y1 = jsonData1[value],
-        y2 = jsonData2[value];
+  items.forEach(item => {
+    const {
+      value,
+      caption
+    } = item,
+          y1 = jsonData1[value],
+          y2 = jsonData2[value];
 
     if (y1) {
       _data1.push({
@@ -147,13 +149,13 @@ var toSemiDonut = function toSemiDonut(json, option) {
     }
   });
 
-  var _dataTop1 = _createTopDonutData({
+  const _dataTop1 = _createTopDonutData({
     isPercent: true,
     data: _sortData(_data1),
     bTotal: _bTotal1
   });
 
-  var _dataTop2 = _createTopDonutData({
+  const _dataTop2 = _createTopDonutData({
     data: _sortData(_data2),
     bTotal: _bTotal2
   });
@@ -161,7 +163,7 @@ var toSemiDonut = function toSemiDonut(json, option) {
   config.series = [crInnerPieSeria({
     center: ['20%', '80%'],
     year: _year1,
-    bTotal: (0, _formatAllNumber["default"])(_bTotal1)
+    bTotal: (0, _formatAllNumber.default)(_bTotal1)
   }), crOuterPieSeria({
     center: ['20%', '80%'],
     data: _dataTop1,
@@ -169,7 +171,7 @@ var toSemiDonut = function toSemiDonut(json, option) {
   }), crInnerPieSeria({
     center: ['70%', '80%'],
     year: _year2,
-    bTotal: (0, _formatAllNumber["default"])(_bTotal2)
+    bTotal: (0, _formatAllNumber.default)(_bTotal2)
   }), crOuterPieSeria({
     center: ['70%', '80%'],
     data: _dataTop2
@@ -186,10 +188,10 @@ var toSemiDonut = function toSemiDonut(json, option) {
   });
 
   return {
-    config: config
+    config
   };
 };
 
 var _default = toSemiDonut;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toSemiDonut.js.map

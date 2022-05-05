@@ -1,42 +1,40 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
-var getValue = _AdapterFn["default"].getValue,
-    crError = _AdapterFn["default"].crError,
-    crZhConfig = _AdapterFn["default"].crZhConfig,
-    joinBy = _AdapterFn["default"].joinBy;
+var _crFn = require("../crFn");
 
-var _joinBy = joinBy.bind(null, ': ');
+const _joinBy = _AdapterFn.joinBy.bind(null, ': ');
 
-var fnAdapter = {
-  getValue: getValue,
-  crError: crError,
-  crCaption: function crCaption(option, _ref) {
-    var meta = _ref.meta;
-
-    var _ref2 = meta || {},
-        exchange = _ref2.exchange,
-        symbol = _ref2.symbol,
-        type = _ref2.type,
-        currency = _ref2.currency;
-
+const fnAdapter = {
+  getValue: _AdapterFn.getValue,
+  crError: _crFn.crError,
+  crCaption: (option, _ref) => {
+    let {
+      meta
+    } = _ref;
+    const {
+      exchange,
+      symbol,
+      type,
+      currency
+    } = meta || {};
     return {
       title: _joinBy(exchange, symbol, type, currency)
     };
   },
-  crAddConfig: function crAddConfig(_ref3) {
-    var option = _ref3.option;
+  crAddConfig: _ref2 => {
+    let {
+      option
+    } = _ref2;
     return {
-      zhConfig: crZhConfig(option)
+      zhConfig: (0, _AdapterFn.crZhConfig)(option)
     };
   }
 };
 var _default = fnAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fnAdapter.js.map

@@ -1,20 +1,13 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
+
+var _compareByFn = require("../compareByFn");
 
 var _crFn = require("../crFn");
-
-const {
-  getValue,
-  ymdToUTC,
-  compareByDate,
-  joinBy
-} = _AdapterFn.default;
 
 const _crItemLink = _crFn.crItemLink.bind(null, 'ONS Dataset Metadata');
 
@@ -48,7 +41,7 @@ const _mmmYyToMls = str => {
         _yStr = _arr[1].trim(),
         _yPrefix = _yStr < '30' ? '20' : '19';
 
-  return ymdToUTC("" + _yPrefix + _yStr + "-" + _m);
+  return (0, _AdapterFn.ymdToUTC)("" + _yPrefix + _yStr + "-" + _m);
 }; //2010-q1
 
 
@@ -56,7 +49,7 @@ const _yyyyQqToMls = str => {
   const [_yyyy, _q = ''] = str && str.split('-') || [],
         _mm = QUARTER_HM[_q.trim().toLowerCase()];
 
-  return _yyyy && _mm ? ymdToUTC(_yyyy + "-" + _mm) : NaN;
+  return _yyyy && _mm ? (0, _AdapterFn.ymdToUTC)(_yyyy + "-" + _mm) : NaN;
 };
 
 const _fCrToMls = observations => {
@@ -78,7 +71,7 @@ const _crName = (_ref, _ref2) => {
     title,
     subtitle
   } = _ref2;
-  return joinBy(': ', subtitle, title, unit_of_measure);
+  return (0, _AdapterFn.joinBy)(': ', subtitle, title, unit_of_measure);
 };
 
 const _crDescr = _ref3 => {
@@ -97,7 +90,7 @@ const _crInfo = (json, option) => ({
 });
 
 const fnAdapter = {
-  getValue,
+  getValue: _AdapterFn.getValue,
   crError: _crFn.crError,
   crData: json => {
     const _data = [],
@@ -125,7 +118,7 @@ const fnAdapter = {
       }
     }
 
-    return _data.sort(compareByDate);
+    return _data.sort(_compareByFn.compareByDate);
   },
   addConfOption: (option, json) => ({
     info: _crInfo(json, option)

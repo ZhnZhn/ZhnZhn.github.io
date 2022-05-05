@@ -1,13 +1,12 @@
 import Builder from '../charts/ConfigBuilder'
-import AdapterFn from './AdapterFn'
+import { valueMoving } from './AdapterFn'
 import { stockSeriesLegend } from './legendFn';
 import { toStockSeriesData } from './AdapterStockFn'
 
-const {
-  valueMoving
-} = AdapterFn;
-
-const _crCaptionDf = ({ title, subtitle }) => ({ title, subtitle })
+const _crCaptionDf = ({
+  title,
+  subtitle
+}) => ({ title, subtitle })
 , _crIdDf = ({ _itemKey }) => _itemKey
 , _getArrDf = json => json
 , _crAddConfigDf = () => {};

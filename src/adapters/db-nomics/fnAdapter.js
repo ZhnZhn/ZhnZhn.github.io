@@ -1,4 +1,8 @@
-import AdapterFn from '../AdapterFn'
+import {
+  joinBy,
+  ymdToUTC,
+  getValue
+} from '../AdapterFn';
 import {
   crError,
   crItemLink,
@@ -6,11 +10,6 @@ import {
 } from '../crFn';
 import fnSelector from './fnSelector'
 
-const {  
-  joinBy,
-  ymdToUTC,
-  getValue
-} = AdapterFn;
 const {
   getPeriodAndValue,
   getTitle,

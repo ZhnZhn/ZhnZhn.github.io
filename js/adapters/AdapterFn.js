@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.mapIf = exports.joinBy = exports.isYNumber = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
@@ -11,19 +11,37 @@ var _dateFormat = require("../charts/dateFormat");
 
 var _arrFn = require("../utils/arrFn");
 
+exports.isInArrStr = _arrFn.isInArrStr;
+
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 
 var _getPropertyFn = require("../utils/getPropertyFn");
 
 var _DateUtils = require("../utils/DateUtils");
 
-var _toUpperCaseFirst = _interopRequireDefault(require("../utils/toUpperCaseFirst"));
+exports.ymdToUTC = _DateUtils.ymdToUTC;
+exports.ymdhmsToUTC = _DateUtils.ymdhmsToUTC;
+exports.getFromDate = _DateUtils.getFromDate;
+exports.getYmdhmUTC = _DateUtils.getYmdhmUTC;
+exports.getYear = _DateUtils.getYear;
+exports.getCurrentYear = _DateUtils.getCurrentYear;
+exports.monthIndex = _DateUtils.monthIndex;
+
+var _toUpperCaseFirst2 = _interopRequireDefault(require("../utils/toUpperCaseFirst"));
 
 var _mathFn = require("../math/mathFn");
 
+exports.roundBy = _mathFn.roundBy;
+
 var _seriaFn = require("../math/seriaFn");
 
+exports.findMinY = _seriaFn.findMinY;
+exports.findMaxY = _seriaFn.findMaxY;
+exports.filterTrimZero = _seriaFn.filterTrimZero;
+
 var _Type = require("../constants/Type");
+
+var _getterPointFn = require("./getterPointFn");
 
 const EMPTY = '';
 
@@ -35,13 +53,9 @@ const _fIsNumber = pn => p => {
   return typeof p[pn] === 'number' && isFinite(p[pn]);
 };
 
-const _getDate = point => _isArr(point) ? point[0] : (point || {}).x;
+const _crBigValueFrom = point => (0, _big.default)((0, _getterPointFn.getPointValue)(point));
 
-const _getValue = point => _isArr(point) ? _isNumber(point[1]) ? point[1] : '0.0' : point && _isNumber(point.y) ? point.y : '0.0';
-
-const _crBigValueFrom = point => (0, _big.default)(_getValue(point));
-
-const _crDmyFrom = point => (0, _DateUtils.mlsToDmy)(_getDate(point));
+const _crDmyFrom = point => (0, _DateUtils.mlsToDmy)((0, _getterPointFn.getPointDate)(point));
 
 const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
@@ -49,105 +63,110 @@ const _fToFloatOr = dfValue => str => {
   return _isNaN(_v) ? dfValue : _v;
 };
 
-const AdapterFn = {
-  toTd: mls => _isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '',
-  ymdToUTC: _DateUtils.ymdToUTC,
-  ymdhmsToUTC: _DateUtils.ymdhmsToUTC,
-  getFromDate: _DateUtils.getFromDate,
-  getYmdhmUTC: _DateUtils.getYmdhmUTC,
-  getYear: _DateUtils.getYear,
-  getCurrentYear: _DateUtils.getCurrentYear,
-  monthIndex: _DateUtils.monthIndex,
-  getCaption: _getPropertyFn.getC,
-  getValue: _getPropertyFn.getV,
-  isInArrStr: _arrFn.isInArrStr,
-  roundBy: _mathFn.roundBy,
-  numberFormat: _formatAllNumber.default,
-  isNumberOrNull: v => _isNumber(v) || v === null,
-  isYNumber: _fIsNumber('y'),
-  toFloatOrEmpty: _fToFloatOr(''),
-  crValueMoving: _ref => {
-    let {
-      bNowValue = (0, _big.default)('0.0'),
-      bPrevValue = (0, _big.default)('0.0'),
-      dfR
-    } = _ref;
-    return (0, _mathFn.crValueMoving)({
-      nowValue: bNowValue,
-      prevValue: bPrevValue,
-      fnFormat: _formatAllNumber.default,
-      dfR
-    });
-  },
+const toTd = mls => _isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '';
 
-  valueMoving(data, dfR) {
-    if (!_isArr(data)) {
-      return {
-        date: data,
-        direction: _Type.Direction.EMPTY
-      };
-    }
+exports.toTd = toTd;
+const getCaption = _getPropertyFn.getC;
+exports.getCaption = getCaption;
+const getValue = _getPropertyFn.getV;
+exports.getValue = getValue;
+const numberFormat = _formatAllNumber.default;
+exports.numberFormat = numberFormat;
 
-    const len = data.length,
-          _pointNow = data[len - 1] || [EMPTY, 0],
-          bNowValue = _crBigValueFrom(_pointNow),
-          _pointPrev = data[len - 2] || _pointNow,
-          bPrevValue = _crBigValueFrom(_pointPrev),
-          date = _crDmyFrom(_pointNow),
-          dateTo = _crDmyFrom(_pointPrev);
+const isNumberOrNull = v => _isNumber(v) || v === null;
 
-    return { ...AdapterFn.crValueMoving({
-        bNowValue,
-        bPrevValue,
-        dfR
-      }),
-      valueTo: (0, _formatAllNumber.default)(bPrevValue),
-      date,
-      dateTo
-    };
-  },
+exports.isNumberOrNull = isNumberOrNull;
 
-  crValueConf: data => {
-    const _p = data[data.length - 1];
+const isYNumber = _fIsNumber('y');
+
+exports.isYNumber = isYNumber;
+
+const toFloatOrEmpty = _fToFloatOr('');
+
+exports.toFloatOrEmpty = toFloatOrEmpty;
+
+const crValueMoving = _ref => {
+  let {
+    bNowValue = (0, _big.default)('0.0'),
+    bPrevValue = (0, _big.default)('0.0'),
+    dfR
+  } = _ref;
+  return (0, _mathFn.crValueMoving)({
+    nowValue: bNowValue,
+    prevValue: bPrevValue,
+    fnFormat: _formatAllNumber.default,
+    dfR
+  });
+};
+
+exports.crValueMoving = crValueMoving;
+
+const valueMoving = (data, dfR) => {
+  if (!_isArr(data)) {
     return {
-      x: _getDate(_p),
-      y: _getValue(_p)
-    };
-  },
-  joinBy: function (delimeter) {
-    for (var _len = arguments.length, restItems = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      restItems[_key - 1] = arguments[_key];
-    }
-
-    return restItems.filter(Boolean).join(delimeter);
-  },
-  toUpperCaseFirst: _toUpperCaseFirst.default,
-  findMinY: _seriaFn.findMinY,
-  findMaxY: _seriaFn.findMaxY,
-  filterTrimZero: _seriaFn.filterTrimZero,
-  mapIf: (arr, crItem, is) => {
-    const _items = [];
-    (arr || []).forEach(v => {
-      if (is(v)) {
-        _items.push(crItem(v));
-      }
-    });
-    return _items;
-  },
-  crZhConfig: _ref2 => {
-    let {
-      _itemKey,
-      itemCaption,
-      dataSource
-    } = _ref2;
-    return {
-      id: _itemKey,
-      key: _itemKey,
-      itemCaption,
-      dataSource
+      date: data,
+      direction: _Type.Direction.EMPTY
     };
   }
+
+  const len = data.length,
+        _pointNow = data[len - 1] || [EMPTY, 0],
+        bNowValue = _crBigValueFrom(_pointNow),
+        _pointPrev = data[len - 2] || _pointNow,
+        bPrevValue = _crBigValueFrom(_pointPrev),
+        date = _crDmyFrom(_pointNow),
+        dateTo = _crDmyFrom(_pointPrev);
+
+  return { ...crValueMoving({
+      bNowValue,
+      bPrevValue,
+      dfR
+    }),
+    valueTo: (0, _formatAllNumber.default)(bPrevValue),
+    date,
+    dateTo
+  };
 };
-var _default = AdapterFn;
-exports.default = _default;
+
+exports.valueMoving = valueMoving;
+
+const joinBy = function (delimeter) {
+  for (var _len = arguments.length, restItems = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    restItems[_key - 1] = arguments[_key];
+  }
+
+  return restItems.filter(Boolean).join(delimeter);
+};
+
+exports.joinBy = joinBy;
+const toUpperCaseFirst = _toUpperCaseFirst2.default;
+exports.toUpperCaseFirst = toUpperCaseFirst;
+
+const mapIf = (arr, crItem, is) => {
+  const _items = [];
+  (arr || []).forEach(v => {
+    if (is(v)) {
+      _items.push(crItem(v));
+    }
+  });
+  return _items;
+};
+
+exports.mapIf = mapIf;
+
+const crZhConfig = _ref2 => {
+  let {
+    _itemKey,
+    itemCaption,
+    dataSource
+  } = _ref2;
+  return {
+    id: _itemKey,
+    key: _itemKey,
+    itemCaption,
+    dataSource
+  };
+};
+
+exports.crZhConfig = crZhConfig;
 //# sourceMappingURL=AdapterFn.js.map

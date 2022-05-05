@@ -4,7 +4,7 @@ import pipe from '../../utils/pipe';
 import ChartConfig from '../../charts/ChartConfig';
 import ChartLegend from '../../charts/ChartLegend';
 
-import AdapterFn from '../AdapterFn';
+import { roundBy } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import {
   crVolumePoint,
@@ -14,9 +14,6 @@ import QuandlFn from './QuandlFn';
 import C from './C';
 
 const { crLegendConfig } = ChartLegend;
-
-const { roundBy } = AdapterFn;
-
 const {
   getData,
   getColumnNames,

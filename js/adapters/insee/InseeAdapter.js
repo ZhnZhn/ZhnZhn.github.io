@@ -3,37 +3,36 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
+
+var _compareByFn = require("../compareByFn");
 
 var _fnDescr = _interopRequireDefault(require("./fnDescr"));
 
-var Builder = _crConfigType["default"].Builder,
-    ymdToUTC = _AdapterFn["default"].ymdToUTC,
-    compareByDate = _AdapterFn["default"].compareByDate,
-    findMinY = _AdapterFn["default"].findMinY,
-    _parser = new window.DOMParser(),
-    _isNaN = Number.isNaN; //€
+const {
+  Builder
+} = _crConfigType.default,
+      _parser = new window.DOMParser(),
+      _isNaN = Number.isNaN; //€
 
 
-var _crZhConfig = function _crZhConfig(id) {
-  return {
-    id: id,
-    key: id,
-    dataSource: "INSEE"
-  };
-};
+const _crZhConfig = id => ({
+  id: id,
+  key: id,
+  dataSource: "INSEE"
+});
 
-var _toData = function _toData(str) {
-  var xml = _parser.parseFromString(str, 'text/xml'),
-      series = xml.getElementsByTagName('Series'),
-      data = [],
-      info = [];
+const _toData = str => {
+  const xml = _parser.parseFromString(str, 'text/xml'),
+        series = xml.getElementsByTagName('Series'),
+        data = [],
+        info = [];
 
-  var i = 0,
+  let i = 0,
       max = series.length,
       _seria,
       _getAttr,
@@ -51,58 +50,66 @@ var _toData = function _toData(str) {
       unitMult: _getAttr('UNIT_MULT')
     });
 
-    _seria.childNodes.forEach(function (node) {
+    _seria.childNodes.forEach(node => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
 
       if (!_isNaN(_v)) {
-        data.push([ymdToUTC(node.getAttribute('TIME_PERIOD')), _v]);
+        data.push([(0, _AdapterFn.ymdToUTC)(node.getAttribute('TIME_PERIOD')), _v]);
       }
     });
   }
 
   return {
-    data: data.sort(compareByDate),
+    data: data.sort(_compareByFn.compareByDate),
     info: info
   };
 };
 
-var _crConfigOption = function _crConfigOption(_ref, info) {
-  var value = _ref.value,
-      title = _ref.title;
+const _crConfigOption = (_ref, info) => {
+  let {
+    value,
+    title
+  } = _ref;
   return {
-    info: _fnDescr["default"].toInfo(info, title),
+    info: _fnDescr.default.toInfo(info, title),
     zhConfig: _crZhConfig(value)
   };
 };
 
-var InseeAdapter = {
-  toConfig: function toConfig(str, option) {
-    var _toData2 = _toData(str),
-        data = _toData2.data,
-        info = _toData2.info,
-        confOption = _crConfigOption(option, info);
+const InseeAdapter = {
+  toConfig(str, option) {
+    const {
+      data,
+      info
+    } = _toData(str),
+          confOption = _crConfigOption(option, info);
 
     return {
-      config: (0, _crConfigType["default"])({
-        option: option,
-        data: data,
-        confOption: confOption
+      config: (0, _crConfigType.default)({
+        option,
+        data,
+        confOption
       })
     };
   },
-  toSeries: function toSeries(str, option) {
-    var value = option.value,
-        title = option.title,
-        subtitle = option.subtitle,
-        _text = subtitle ? subtitle : title,
-        _toData3 = _toData(str),
-        data = _toData3.data;
+
+  toSeries(str, option) {
+    const {
+      value,
+      title,
+      subtitle
+    } = option,
+          _text = subtitle ? subtitle : title,
+          {
+      data
+    } = _toData(str);
 
     return Builder().initSeria({
-      minY: findMinY
+      minY: _AdapterFn.findMinY
     }).addPoints(value, data, _text).toSeria();
   }
+
 };
 var _default = InseeAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=InseeAdapter.js.map

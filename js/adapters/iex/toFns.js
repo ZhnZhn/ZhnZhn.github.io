@@ -3,63 +3,61 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _ItemTypes = _interopRequireDefault(require("./ItemTypes"));
 
-var getValue = _AdapterFn["default"].getValue;
-var _LOCALE = (navigator || {}).language;
+const _LOCALE = (navigator || {}).language;
 
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number';
-};
+const _isNumber = n => typeof n === 'number';
 
-var _assign = Object.assign;
+const _assign = Object.assign;
 
-var _calcScatterY = function _calcScatterY(chart, isMin) {
-  var _chart$yAxis$ = chart.yAxis[0],
-      max = _chart$yAxis$.max,
-      min = _chart$yAxis$.min,
-      all = max - min,
-      one = all / 100;
+const _calcScatterY = (chart, isMin) => {
+  const {
+    max,
+    min
+  } = chart.yAxis[0],
+        all = max - min,
+        one = all / 100;
   return isMin ? min + one : max - 7 * one;
 };
 
-var toFns = {
-  getValue: getValue,
-  toStr: function toStr(n) {
-    return _isNumber(n) ? n.toLocaleString(_LOCALE) : '';
-  },
-  toPerc: function toPerc(n) {
-    return _isNumber(n) ? n.toLocaleString(_LOCALE, {
-      style: 'percent',
-      minimumFractionDigits: 2
-    }) : '';
-  },
-  crZhConfig: function crZhConfig(_ref) {
-    var key = _ref.key,
-        value = _ref.value,
-        dataSource = _ref.dataSource;
+const toFns = {
+  getValue: _AdapterFn.getValue,
+  toStr: n => _isNumber(n) ? n.toLocaleString(_LOCALE) : '',
+  toPerc: n => _isNumber(n) ? n.toLocaleString(_LOCALE, {
+    style: 'percent',
+    minimumFractionDigits: 2
+  }) : '',
+  crZhConfig: _ref => {
+    let {
+      key,
+      value,
+      dataSource
+    } = _ref;
     return {
-      key: key,
+      key,
       id: key,
       itemCaption: value || key,
-      dataSource: dataSource
+      dataSource
     };
   },
-  crToSeria: function crToSeria(_ref2) {
-    var chart = _ref2.chart,
-        seria = _ref2.seria,
-        caption = _ref2.caption,
-        color = _ref2.color,
-        option = _ref2.option;
-    var dfType = option.dfType;
-    var y = dfType === _ItemTypes["default"].ERN ? _calcScatterY(chart) : _calcScatterY(chart, true);
-    seria.data.forEach(function (p) {
-      return p.y = y;
-    });
+  crToSeria: _ref2 => {
+    let {
+      chart,
+      seria,
+      caption,
+      color,
+      option
+    } = _ref2;
+    const {
+      dfType
+    } = option;
+    const y = dfType === _ItemTypes.default.ERN ? _calcScatterY(chart) : _calcScatterY(chart, true);
+    seria.data.forEach(p => p.y = y);
 
     _assign(seria, {
       name: caption,
@@ -71,5 +69,5 @@ var toFns = {
   }
 };
 var _default = toFns;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toFns.js.map

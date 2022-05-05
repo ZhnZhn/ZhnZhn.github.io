@@ -1,8 +1,10 @@
-
-import Builder from '../charts/ConfigBuilder'
-import Tooltip from '../charts/Tooltip'
-
-import fns from './AdapterFn'
+import Builder from '../charts/ConfigBuilder';
+import Tooltip from '../charts/Tooltip';
+import {
+  crValueMoving,
+  roundBy,
+  numberFormat
+} from './AdapterFn';
 
 const CATEGORIES = [
   '01', '02', '03', '04', '05', '06',
@@ -32,12 +34,6 @@ const C = {
     color: '#008b8b'
   }
 };
-
-const {
-  crValueMoving,
-  roundBy,
-  numberFormat
-} = fns;
 
 const _getYear = str => str.split("-")[0];
 const _getMonth = str => str.split("-")[1];

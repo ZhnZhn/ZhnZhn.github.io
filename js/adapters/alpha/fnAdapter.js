@@ -1,26 +1,15 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
+
+var _compareByFn = require("../compareByFn");
+
+var _crFn = require("../crFn");
 
 var _legendFn = require("../legendFn");
-
-const {
-  crError,
-  getValue,
-  getCaption,
-  joinBy,
-  crItemConf,
-  crValueConf,
-  valueMoving,
-  ymdToUTC,
-  compareByDate,
-  roundBy
-} = _AdapterFn.default;
 
 const _crItemConf = (_ref, option) => {
   let {
@@ -35,8 +24,8 @@ const _crItemConf = (_ref, option) => {
   } = option;
   return dfFn === 'TIME_SERIES_DAILY' ? {
     _itemKey,
-    ...crItemConf(option),
-    ...crValueConf(data),
+    ...(0, _crFn.crItemConf)(option),
+    ...(0, _crFn.crValueConf)(data),
     items: [...(items || [])],
     dfSubId,
     dfFn,
@@ -67,17 +56,17 @@ const _crZhConfig = (config, option) => {
 };
 
 const fnAdapter = {
-  crError,
-  getValue,
-  getCaption,
-  joinBy,
-  valueMoving,
-  ymdToUTC,
-  compareByDate,
-  roundBy,
+  crError: _crFn.crError,
+  getValue: _AdapterFn.getValue,
+  getCaption: _AdapterFn.getCaption,
+  joinBy: _AdapterFn.joinBy,
+  valueMoving: _AdapterFn.valueMoving,
+  ymdToUTC: _AdapterFn.ymdToUTC,
+  compareByDate: _compareByFn.compareByDate,
+  roundBy: _AdapterFn.roundBy,
   crIntradayConfigOption: (config, option) => ({
     zhConfig: _crZhConfig(config, option),
-    valueMoving: valueMoving(config.data)
+    valueMoving: (0, _AdapterFn.valueMoving)(config.data)
   })
 };
 var _default = fnAdapter;

@@ -1,10 +1,8 @@
-import AdapterFn from '../AdapterFn'
-import { crError } from '../crFn';
-
-const {
+import {
   getValue,
   getYmdhmUTC
-} = AdapterFn
+} from '../AdapterFn';
+import { crError } from '../crFn';
 
 const C = {
   DF_PAGE: 1,

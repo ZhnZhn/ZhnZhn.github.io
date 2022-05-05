@@ -5,18 +5,12 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _crFn = require("../crFn");
 
 var _fnSelector = _interopRequireDefault(require("./fnSelector"));
 
-const {
-  crItemConf,
-  joinBy,
-  ymdToUTC,
-  getValue
-} = _AdapterFn.default;
 const {
   getPeriodAndValue,
   getTitle,
@@ -34,7 +28,7 @@ const _crId = _ref => {
     dfCode,
     seriaId
   } = _ref;
-  return joinBy('/', dfProvider, dfCode, seriaId);
+  return (0, _AdapterFn.joinBy)('/', dfProvider, dfCode, seriaId);
 };
 
 const _crItemLink = _crFn.crItemLink.bind(null, 'DB Nomics Chart');
@@ -67,7 +61,7 @@ const _crZhConfig = option => {
     dataSource,
     itemConf: {
       _itemKey: _id,
-      ...crItemConf(option),
+      ...(0, _crFn.crItemConf)(option),
       dataSource,
       dfProvider,
       dfCode,
@@ -87,13 +81,13 @@ const _isQuarter = str => ("" + str).indexOf("Q") !== -1;
 
 const _isAnnualQuarter = period => !_isQuarter(period[0]) && _isQuarter(period[1]);
 
-const _crPoint = (date, y) => [ymdToUTC(date), y];
+const _crPoint = (date, y) => [(0, _AdapterFn.ymdToUTC)(date), y];
 
 const _crAqPoint = (date, y) => _isQuarter(date) ? _crPoint(date, y) : [];
 
 const fnAdapter = {
   crError: _crFn.crError,
-  getValue,
+  getValue: _AdapterFn.getValue,
   crTitle: (_ref2, json) => {
     let {
       title,
@@ -101,7 +95,7 @@ const fnAdapter = {
     } = _ref2;
 
     const _ = getSubtitle(json),
-          _subtitle = _.length > C.SUBT_MAX ? joinBy(': ', title, subtitle) : _;
+          _subtitle = _.length > C.SUBT_MAX ? (0, _AdapterFn.joinBy)(': ', title, subtitle) : _;
 
     return {
       title: getTitle(json),
@@ -113,7 +107,7 @@ const fnAdapter = {
       fromDate
     } = option,
           data = [],
-          _xFrom = fromDate ? ymdToUTC(fromDate) : 0,
+          _xFrom = fromDate ? (0, _AdapterFn.ymdToUTC)(fromDate) : 0,
           {
       period,
       value

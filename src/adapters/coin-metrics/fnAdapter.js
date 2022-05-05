@@ -1,13 +1,9 @@
-import AdapterFn from '../AdapterFn'
+import { ymdhmsToUTC } from '../AdapterFn';
 import {
   crError,
   crItemConf,
   crValueConf
 } from '../crFn';
-
-const {
-  ymdhmsToUTC
-} = AdapterFn;
 
 const _crZhConfig = (option, data) => {
   const {

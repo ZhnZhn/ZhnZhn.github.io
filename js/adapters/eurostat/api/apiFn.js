@@ -1,16 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../../AdapterFn"));
+var _AdapterFn = require("../../AdapterFn");
 
-const {
-  isInArrStr,
-  getValue
-} = _AdapterFn.default;
 const C = {
   URL: "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/",
   QUERY_TAIL: "&precision=1&sinceTimePeriod=1996M01",
@@ -18,8 +12,8 @@ const C = {
 };
 const CATEGORY_TYPES = ['MAP', 'COLUMN_SET', 'BAR_SET', 'BAR_WITH_LABELS', 'DOT_SET'];
 const apiFn = { ...C,
-  getValue,
-  isCategory: isInArrStr(CATEGORY_TYPES),
+  getValue: _AdapterFn.getValue,
+  isCategory: (0, _AdapterFn.isInArrStr)(CATEGORY_TYPES),
   isMap: seriaType => seriaType === 'MAP',
   crUrl: function (table, q, tail) {
     if (tail === void 0) {

@@ -3,18 +3,15 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _rSeries2;
-
-var ymdToUTC = _AdapterFn["default"].ymdToUTC;
-var C = {
+const C = {
   TWO_YEARS_DAYS: 501,
   TA: 'Technical Analysis:',
   MACD: 'MACD',
@@ -41,18 +38,16 @@ var C = {
     color: '#4caf50'
   }
 };
-var _assign = Object.assign;
+const _assign = Object.assign;
 
-var _crZhConfig = function _crZhConfig(id) {
-  return {
-    id: id,
-    key: id,
-    itemCaption: id,
-    dataSource: "Alpha Vantage"
-  };
-};
+const _crZhConfig = id => ({
+  id: id,
+  key: id,
+  itemCaption: id,
+  dataSource: "Alpha Vantage"
+});
 
-var _crValuePropName = function _crValuePropName(indicator) {
+const _crValuePropName = indicator => {
   switch (indicator) {
     case 'AD':
       return 'Chaikin A/D';
@@ -62,32 +57,35 @@ var _crValuePropName = function _crValuePropName(indicator) {
   }
 };
 
-var _crValue = function _crValue(json, option) {
-  var indicator = option.indicator,
-      _option$forDays = option.forDays,
-      forDays = _option$forDays === void 0 ? C.TWO_YEARS_DAYS : _option$forDays,
-      _indicator = _crValuePropName(indicator),
-      value = json[C.TA + " " + _indicator],
-      dateKeys = value ? Object.keys(value).sort().reverse() : [],
-      _len = dateKeys.length,
-      max = _len < forDays ? _len - 1 : forDays;
+const _crValue = (json, option) => {
+  const {
+    indicator,
+    forDays = C.TWO_YEARS_DAYS
+  } = option,
+        _indicator = _crValuePropName(indicator),
+        value = json[C.TA + " " + _indicator],
+        dateKeys = value ? Object.keys(value).sort().reverse() : [],
+        _len = dateKeys.length,
+        max = _len < forDays ? _len - 1 : forDays;
 
   return {
-    value: value,
-    dateKeys: dateKeys,
-    max: max
+    value,
+    dateKeys,
+    max
   };
 };
 
-var _toDataArrs = function _toDataArrs(_ref, arrProp) {
-  var dateKeys = _ref.dateKeys,
-      value = _ref.value,
-      max = _ref.max;
+const _toDataArrs = (_ref, arrProp) => {
+  let {
+    dateKeys,
+    value,
+    max
+  } = _ref;
 
-  var i, j, _date, _x, _v;
+  let i, j, _date, _x, _v;
 
-  var result = [],
-      _maxProp = arrProp.length;
+  const result = [],
+        _maxProp = arrProp.length;
 
   for (j = 0; j < _maxProp; j++) {
     result.push([]);
@@ -95,7 +93,7 @@ var _toDataArrs = function _toDataArrs(_ref, arrProp) {
 
   for (i = max; i > -1; i--) {
     _date = dateKeys[i];
-    _x = ymdToUTC(_date);
+    _x = (0, _AdapterFn.ymdToUTC)(_date);
     _v = value[_date];
 
     for (j = 0; j < _maxProp; j++) {
@@ -106,12 +104,14 @@ var _toDataArrs = function _toDataArrs(_ref, arrProp) {
   return result;
 };
 
-var _crSplineSeria = function _crSplineSeria(_ref2, option) {
-  var data = _ref2.data,
-      name = _ref2.name;
-  return _assign(_ChartConfig["default"].crSeria(), {
-    data: data,
-    name: name,
+const _crSplineSeria = (_ref2, option) => {
+  let {
+    data,
+    name
+  } = _ref2;
+  return _assign(_ChartConfig.default.crSeria(), {
+    data,
+    name,
     type: 'spline',
     visible: true,
     marker: {
@@ -120,16 +120,19 @@ var _crSplineSeria = function _crSplineSeria(_ref2, option) {
   }, option);
 };
 
-var _crSeriaData = function _crSeriaData(json, option) {
-  var indicator = option.indicator,
-      _indicator = _crValuePropName(indicator),
-      _crValue2 = _crValue(json, option),
-      value = _crValue2.value,
-      dateKeys = _crValue2.dateKeys,
-      max = _crValue2.max,
-      _data = [];
+const _crSeriaData = (json, option) => {
+  const {
+    indicator
+  } = option,
+        _indicator = _crValuePropName(indicator),
+        {
+    value,
+    dateKeys,
+    max
+  } = _crValue(json, option),
+        _data = [];
 
-  var i = max,
+  let i = max,
       _date,
       _v;
 
@@ -137,15 +140,17 @@ var _crSeriaData = function _crSeriaData(json, option) {
     _date = dateKeys[i];
     _v = parseFloat(value[_date][_indicator]);
 
-    _data.push([ymdToUTC(_date), _v]);
+    _data.push([(0, _AdapterFn.ymdToUTC)(_date), _v]);
   }
 
   return _data;
 };
 
-var _crDfSeria = function _crDfSeria(json, option) {
-  var indicator = option.indicator,
-      _data = _crSeriaData(json, option);
+const _crDfSeria = (json, option) => {
+  const {
+    indicator
+  } = option,
+        _data = _crSeriaData(json, option);
 
   return _crSplineSeria({
     data: _data,
@@ -153,17 +158,17 @@ var _crDfSeria = function _crDfSeria(json, option) {
   });
 };
 
-var _crMacdSeries = function _crMacdSeries(json, option) {
-  var _arrs = _toDataArrs(_crValue(json, option), [C.MACD, C.MACD_S, C.MACD_H]),
-      sMcad = _crSplineSeria({
+const _crMacdSeries = (json, option) => {
+  const _arrs = _toDataArrs(_crValue(json, option), [C.MACD, C.MACD_S, C.MACD_H]),
+        sMcad = _crSplineSeria({
     data: _arrs[0],
     name: C.MACD
   }, C.BLACK),
-      sSignal = _crSplineSeria({
+        sSignal = _crSplineSeria({
     data: _arrs[1],
     name: C.MACD_S
   }, C.RED),
-      sHist = _assign(_ChartConfig["default"].crSeria(), {
+        sHist = _assign(_ChartConfig.default.crSeria(), {
     color: C.COLOR_BLUE_A,
     data: _arrs[2],
     name: C.MACD_H,
@@ -180,13 +185,13 @@ var _crMacdSeries = function _crMacdSeries(json, option) {
   return [sHist, sSignal, sMcad];
 };
 
-var _crStochSeries = function _crStochSeries(json, option) {
-  var _arrs = _toDataArrs(_crValue(json, option), [C.SLOW_K, C.SLOW_D]),
-      sSlowK = _crSplineSeria({
+const _crStochSeries = (json, option) => {
+  const _arrs = _toDataArrs(_crValue(json, option), [C.SLOW_K, C.SLOW_D]),
+        sSlowK = _crSplineSeria({
     data: _arrs[0],
     name: C.SLOW_K
   }, C.BLUE),
-      sSlowD = _crSplineSeria({
+        sSlowD = _crSplineSeria({
     data: _arrs[1],
     name: C.SLOW_D
   }, C.RED);
@@ -194,17 +199,17 @@ var _crStochSeries = function _crStochSeries(json, option) {
   return [sSlowK, sSlowD];
 };
 
-var _crBbandsSeries = function _crBbandsSeries(json, option) {
-  var _arrs = _toDataArrs(_crValue(json, option), [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]),
-      sMiddle = _crSplineSeria({
+const _crBbandsSeries = (json, option) => {
+  const _arrs = _toDataArrs(_crValue(json, option), [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]),
+        sMiddle = _crSplineSeria({
     data: _arrs[0],
     name: C.BBANDS_M
   }, C.BLUE),
-      sUpper = _crSplineSeria({
+        sUpper = _crSplineSeria({
     data: _arrs[1],
     name: C.BBANDS_U
   }, C.GREEN),
-      sLow = _crSplineSeria({
+        sLow = _crSplineSeria({
     data: _arrs[2],
     name: C.BBANDS_L
   }, C.RED);
@@ -212,40 +217,50 @@ var _crBbandsSeries = function _crBbandsSeries(json, option) {
   return [sMiddle, sUpper, sLow];
 };
 
-var _rSeries = (_rSeries2 = {
-  DF: _crDfSeria
-}, _rSeries2[C.MACD] = _crMacdSeries, _rSeries2[C.STOCH] = _crStochSeries, _rSeries2[C.BBANDS] = _crBbandsSeries, _rSeries2);
+const _rSeries = {
+  DF: _crDfSeria,
+  [C.MACD]: _crMacdSeries,
+  [C.STOCH]: _crStochSeries,
+  [C.BBANDS]: _crBbandsSeries
+};
 
-var _toSeries = function _toSeries(json, option) {
-  var _crSeries = _rSeries[option.indicator] || _rSeries.DF;
+const _toSeries = (json, option) => {
+  const _crSeries = _rSeries[option.indicator] || _rSeries.DF;
 
   return _crSeries(json, option);
 };
 
-var IndicatorAdapter = {
-  crKey: function crKey(option) {
-    var ticket = option.ticket,
-        value = option.value;
+const IndicatorAdapter = {
+  crKey(option) {
+    const {
+      ticket,
+      value
+    } = option;
     return option.chartId = ticket + "-" + value;
   },
-  toConfig: function toConfig(json, option) {
-    var ticket = option.ticket,
-        value = option.value,
-        chartId = option.chartId,
-        _title = ticket + ": " + value,
-        _series = _toSeries(json, option),
-        config = (0, _ConfigBuilder["default"])().area2Config(_title).addSeries(_series).add({
+
+  toConfig(json, option) {
+    const {
+      ticket,
+      value,
+      chartId
+    } = option //, _chartId = `${ticket}-${value}`
+    ,
+          _title = ticket + ": " + value,
+          _series = _toSeries(json, option),
+          config = (0, _ConfigBuilder.default)().area2Config(_title).addSeries(_series).add({
       zhConfig: _crZhConfig(chartId)
     }).toConfig();
 
     return {
-      config: config,
+      config,
       isDrawDeltaExtrems: false,
       isNotZoomToMinMax: false
     };
   },
+
   toSeries: _toSeries
 };
 var _default = IndicatorAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=IndicatorAdapter.js.map

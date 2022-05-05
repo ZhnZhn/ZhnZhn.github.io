@@ -1,22 +1,23 @@
-import AdapterFn from '../AdapterFn'
-import { compareByDate } from '../compareByFn';
 import {
-  crError,
-  crItemConf,
-  crValueConf
-} from '../crFn';
-import { stockSeriesLegend } from '../legendFn'
-
-const {
   getValue,
   getCaption,
   joinBy,
   valueMoving,
   ymdToUTC,
   roundBy
-} = AdapterFn;
+} from '../AdapterFn';
+import { compareByDate } from '../compareByFn';
+import {
+  crError,
+  crItemConf,
+  crValueConf
+} from '../crFn';
+import { stockSeriesLegend } from '../legendFn';
 
-const _crItemConf = ({ data }, option) => {
+const _crItemConf = (
+  { data },
+  option
+) => {
   const {
     _itemKey,
     dfFn, dfSubId,

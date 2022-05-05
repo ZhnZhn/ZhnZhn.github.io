@@ -1,11 +1,9 @@
-import AdapterFn from '../AdapterFn'
-import { crError } from '../crFn';
-import { crVolumePoint } from '../pointFn';
-
-const {
+import {
   getValue,
   roundBy
-} = AdapterFn;
+} from '../AdapterFn';
+import { crError } from '../crFn';
+import { crVolumePoint } from '../pointFn';
 
 const _crZhConfig = ({
   itemCaption,

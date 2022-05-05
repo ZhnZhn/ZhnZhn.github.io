@@ -1,10 +1,8 @@
-import AdapterFn from '../AdapterFn';
+import { toTd } from '../AdapterFn';
 import {
   crTableConfig,
   crTableRows
 } from '../toTableFn';
-
-const { toTd } = AdapterFn;
 
 const HEADERS = [{
   name: 'Rank',

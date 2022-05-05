@@ -1,6 +1,6 @@
 import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
-import AdapterFn from '../AdapterFn'
+import { ymdhmsToUTC } from '../AdapterFn'
 import { crVolumePoint } from '../pointFn'
 import {
   crMarkerColor,
@@ -9,10 +9,7 @@ import {
 
 import fnAdapter from './fnAdapter'
 
-const {
-   ymdhmsToUTC
-} = AdapterFn
-, { crIntradayConfigOption } = fnAdapter;
+const { crIntradayConfigOption } = fnAdapter;
 
 const INTRADAY = 'INTRADAY';
 const DAILY_ADJUSTED = 'DAILY_ADJUSTED';

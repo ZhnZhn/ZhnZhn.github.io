@@ -11,21 +11,16 @@ var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
 
 var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
+
+var _compareByFn = require("../compareByFn");
+
+var _crFn = require("../crFn");
 
 const {
   calcMinY,
   setPlotLinesMinMax
 } = _ChartFn.default;
-const {
-  compareByDate,
-  valueMoving,
-  findMinY,
-  findMaxY,
-  filterTrimZero,
-  joinBy,
-  crItemConf
-} = _AdapterFn.default;
 const COLOR_EU = "#0088ff",
       COLOR_EA = "#ff5800",
       COLOR_NOT_EU_MEMBER = '#8085e9';
@@ -136,8 +131,8 @@ const _getTableId = _ref2 => {
 };
 
 const EuroStatFn = {
-  joinBy,
-  findMinY,
+  joinBy: _AdapterFn.joinBy,
+  findMinY: _AdapterFn.findMinY,
 
   crData(json, _temp) {
     let {
@@ -162,16 +157,16 @@ const EuroStatFn = {
       }
     });
 
-    data.sort(compareByDate);
+    data.sort(_compareByFn.compareByDate);
 
     if (isFilterZero) {
-      data = filterTrimZero(data);
+      data = (0, _AdapterFn.filterTrimZero)(data);
     }
 
     return {
       data,
-      max: findMaxY(data),
-      min: findMinY(data)
+      max: (0, _AdapterFn.findMaxY)(data),
+      min: (0, _AdapterFn.findMinY)(data)
     };
   },
 
@@ -214,7 +209,7 @@ const EuroStatFn = {
     config.info = _crDatasetInfo(json);
 
     if (_isLineSeria(seriaType)) {
-      config.valueMoving = valueMoving(data);
+      config.valueMoving = (0, _AdapterFn.valueMoving)(data);
     }
 
     config.series[0].data = data;
@@ -379,7 +374,7 @@ const EuroStatFn = {
           dataSource = EuroStatFn.crDataSource(option),
           itemConf = url ? {
       _itemKey: key,
-      ...crItemConf(option),
+      ...(0, _crFn.crItemConf)(option),
       dataSource
     } : void 0;
     return {

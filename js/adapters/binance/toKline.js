@@ -5,15 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _crFn = require("../crFn");
 
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
-
-const {
-  crZhConfig
-} = _AdapterFn.default;
 
 const _crResearchLink = _crFn.crItemLink.bind(null, 'Binance Research');
 
@@ -37,7 +33,7 @@ const _crAddConfig = _ref2 => {
     option
   } = _ref2;
   return {
-    zhConfig: crZhConfig(option),
+    zhConfig: (0, _AdapterFn.crZhConfig)(option),
     info: _crInfo(option)
   };
 };

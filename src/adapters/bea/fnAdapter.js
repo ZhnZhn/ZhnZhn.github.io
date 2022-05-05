@@ -1,7 +1,4 @@
-
-import AdapterFn from '../AdapterFn'
-
-const { ymdToUTC } = AdapterFn;
+import { ymdToUTC } from '../AdapterFn';
 
 const _isArr = Array.isArray
 , _isNaN = Number.isNaN;

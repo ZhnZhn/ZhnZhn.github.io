@@ -1,6 +1,7 @@
-import AdapterFn from './AdapterFn'
-
-const { numberFormat, roundBy } = AdapterFn;
+import {
+  numberFormat,
+  roundBy
+} from './AdapterFn';
 
 const _isNumber = n => typeof n === 'number'
 , _replaceNaN = (n, str='') => n - n === 0

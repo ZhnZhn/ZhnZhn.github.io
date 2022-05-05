@@ -13,7 +13,9 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _ChartLegend = _interopRequireDefault(require("../../charts/ChartLegend"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
+
+var _compareByFn = require("../compareByFn");
 
 var _pointFn = require("../pointFn");
 
@@ -24,10 +26,6 @@ var _C = _interopRequireDefault(require("./C"));
 const {
   crLegendConfig
 } = _ChartLegend.default;
-const {
-  compareByDate,
-  roundBy
-} = _AdapterFn.default;
 const {
   getData,
   getColumnNames,
@@ -90,7 +88,7 @@ const _fnAddSplitRatio = function (splitRationIndex, result) {
 
   if (point[splitRationIndex] !== 1) {
     const x = dateUTC,
-          splitRatio = roundBy(point[splitRationIndex]),
+          splitRatio = (0, _AdapterFn.roundBy)(point[splitRationIndex]),
           price = point[yPointIndex];
     dataSplitRatio.push(_assign(_ChartConfig.default.crMarkerSplitRatio(), {
       x,
@@ -354,7 +352,7 @@ const _crPointFlow = function (json, option) {
 
 const crAreaData = function (json, option) {
   const [callPointFlow, result] = _crPointFlow(json, option),
-        points = getData(json).sort(compareByDate);
+        points = getData(json).sort(_compareByFn.compareByDate);
 
   let i = 0,
       _max = points.length;

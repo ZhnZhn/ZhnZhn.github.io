@@ -1,8 +1,7 @@
-import AdapterFn from '../AdapterFn'
+import { ymdToUTC } from '../AdapterFn';
 import { crError } from '../crFn';
 
-const { ymdToUTC } = AdapterFn
-, _isArr = Array.isArray;
+const _isArr = Array.isArray;
 
 const _crInfo = ({ title, subtitle, items }) => ({
   name: `${title}: ${subtitle} (${items[1].c || ''})`

@@ -4,23 +4,10 @@
 //Highcharts dateFormat from AdapterFn require jsdom
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _AdapterFn = require("../AdapterFn");
 
 var _Type = require("../../constants/Type");
 
-const {
-  ymdToUTC,
-  isYNumber,
-  isNumberOrNull,
-  toFloatOrEmpty,
-  findMinY,
-  findMaxY,
-  joinBy,
-  valueMoving,
-  crValueConf
-} = _AdapterFn.default;
 const Y = [{
   in: '2017',
   r: 1514678400000,
@@ -94,7 +81,7 @@ const YMD = [{
   d: '01-01-2018'
 }];
 describe('ymdToUTC', () => {
-  const fn = ymdToUTC;
+  const fn = _AdapterFn.ymdToUTC;
   test('should return UTC msc of 31, December of year from YYYY', () => {
     Y.forEach(d => {
       expect(fn(d.in)).toBe(d.r);
@@ -112,7 +99,7 @@ describe('ymdToUTC', () => {
   });
 });
 describe('isYNumber', () => {
-  const fn = isYNumber;
+  const fn = _AdapterFn.isYNumber;
   test('should return true for object with property y number', () => {
     expect(fn({
       y: 10
@@ -164,7 +151,7 @@ describe('isYNumber', () => {
   });
 });
 describe('isNumberOrNull', () => {
-  const fn = isNumberOrNull;
+  const fn = _AdapterFn.isNumberOrNull;
   it('should return true for number and null or false', () => {
     expect(fn(123)).toBe(true);
     expect(fn(12.3)).toBe(true);
@@ -176,7 +163,7 @@ describe('isNumberOrNull', () => {
   });
 });
 describe('toFloatOrEmpty', () => {
-  const fn = toFloatOrEmpty;
+  const fn = _AdapterFn.toFloatOrEmpty;
   it('should convert input to float or return empty str', () => {
     expect(fn('1.23')).toBe(1.23);
     expect(fn('')).toBe('');
@@ -195,7 +182,7 @@ const DATA_POINT = [{
   y: 0.29
 }];
 describe('findMinY', () => {
-  const fn = findMinY;
+  const fn = _AdapterFn.findMinY;
   test('should return minY for points arrays', () => {
     expect(fn(DATA_ARR)).toBe(0.29);
   });
@@ -212,7 +199,7 @@ describe('findMinY', () => {
   });
 });
 describe('findMaxY', () => {
-  const fn = findMaxY;
+  const fn = _AdapterFn.findMaxY;
   test('should return maxY for points arrays', () => {
     expect(fn(DATA_ARR)).toBe(0.31);
   });
@@ -230,18 +217,18 @@ describe('findMaxY', () => {
 });
 describe('joinBy', () => {
   test('should join by delimeter', () => {
-    expect(joinBy('.')).toBe('');
-    expect(joinBy('.', 'a')).toBe('a');
-    expect(joinBy('.', 'a', 'b')).toBe('a.b');
+    expect((0, _AdapterFn.joinBy)('.')).toBe('');
+    expect((0, _AdapterFn.joinBy)('.', 'a')).toBe('a');
+    expect((0, _AdapterFn.joinBy)('.', 'a', 'b')).toBe('a.b');
   });
   test('should filter falsy values', () => {
-    expect(joinBy('.', '', 'b', 'c')).toBe('b.c');
-    expect(joinBy('.', null, 'b', 'c')).toBe('b.c');
-    expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c');
+    expect((0, _AdapterFn.joinBy)('.', '', 'b', 'c')).toBe('b.c');
+    expect((0, _AdapterFn.joinBy)('.', null, 'b', 'c')).toBe('b.c');
+    expect((0, _AdapterFn.joinBy)('.', void 0, 'b', 'c')).toBe('b.c');
   });
 });
 describe('valueMoving', () => {
-  const fn = valueMoving;
+  const fn = _AdapterFn.valueMoving;
   it('should return echo data and direction empty for !arr input', () => {
     const direction = {
       direction: _Type.Direction.EMPTY
@@ -307,41 +294,6 @@ describe('valueMoving', () => {
       valueTo: '0',
       date: '',
       dateTo: ''
-    });
-  });
-});
-describe('crValueConf', () => {
-  const fn = crValueConf;
-  it('should return {x, y} recent point from data', () => {
-    expect(fn([[3, 3], [1, 2]])).toEqual({
-      x: 1,
-      y: 2
-    });
-    expect(fn([{
-      x: 3,
-      y: 3
-    }, {
-      x: 1,
-      y: 2
-    }])).toEqual({
-      x: 1,
-      y: 2
-    });
-  });
-  it('should use str 0.0 for y not number', () => {
-    expect(fn([[3, 3], [1, null]])).toEqual({
-      x: 1,
-      y: '0.0'
-    });
-    expect(fn([{
-      x: 3,
-      y: 3
-    }, {
-      x: 1,
-      y: NaN
-    }])).toEqual({
-      x: 1,
-      y: '0.0'
     });
   });
 });

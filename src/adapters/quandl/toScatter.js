@@ -5,7 +5,7 @@ import ChartConfig from '../../charts/ChartConfig'
 import Tooltip from '../../charts/Tooltip'
 import Builder from '../../charts/ConfigBuilder'
 
-import AdapterFn from '../AdapterFn'
+import { ymdToUTC } from '../AdapterFn';
 import { crId } from '../crFn';
 
 const C = {
@@ -48,7 +48,7 @@ const _crSeria = (arr, option) => {
 
     _updateLabelY(_p, seriaType)
     return Object.assign(_p, {
-         x: AdapterFn.ymdToUTC(date),
+         x: ymdToUTC(date),
          exValue: v,
          ...p
       });

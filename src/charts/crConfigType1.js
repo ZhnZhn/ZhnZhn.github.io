@@ -1,7 +1,5 @@
-import AdapterFn from '../adapters/AdapterFn'
-import Builder from './ConfigBuilder'
-
-const { valueMoving } = AdapterFn
+import { valueMoving } from '../adapters/AdapterFn';
+import Builder from './ConfigBuilder';
 
 const crConfigType1 = ({
   option,

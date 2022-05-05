@@ -1,9 +1,6 @@
-
-import AdapterFn from '../AdapterFn'
-import ChartConfig from '../../charts/ChartConfig'
-import Builder from '../../charts/ConfigBuilder'
-
-const { ymdToUTC } = AdapterFn
+import { ymdToUTC } from '../AdapterFn';
+import ChartConfig from '../../charts/ChartConfig';
+import Builder from '../../charts/ConfigBuilder';
 
 const C = {
   TWO_YEARS_DAYS: 501,

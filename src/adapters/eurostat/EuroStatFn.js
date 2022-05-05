@@ -2,7 +2,13 @@ import Chart from '../../charts/Chart';
 import ChartFn from '../../charts/ChartFn';
 import Tooltip from '../../charts/Tooltip';
 
-import AdapterFn from '../AdapterFn'
+import {
+  valueMoving,
+  findMinY,
+  findMaxY,
+  filterTrimZero,
+  joinBy
+} from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { crItemConf } from '../crFn';
 
@@ -10,14 +16,6 @@ const {
   calcMinY,
   setPlotLinesMinMax
 } = ChartFn;
-
-const {
-  valueMoving,
-  findMinY,
-  findMaxY,
-  filterTrimZero,
-  joinBy
-} = AdapterFn;
 
 const COLOR_EU = "#0088ff"
 , COLOR_EA = "#ff5800"

@@ -1,15 +1,15 @@
 import ChartConfig from '../../charts/ChartConfig'
 import Tooltip from '../../charts/Tooltip'
 import Builder from '../../charts/ConfigBuilder'
-
-import AdapterFn from '../AdapterFn'
+import {
+  ymdToUTC,
+  toFloatOrEmpty
+} from '../AdapterFn';
 
 const C = {
   CAPTION: 'Dividends',
   COLOR: '#4caf50'
 };
-
-const { ymdToUTC, toFloatOrEmpty } = AdapterFn
 
 const _isArr = Array.isArray
 , _assign = Object.assign;

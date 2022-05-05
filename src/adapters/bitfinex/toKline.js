@@ -1,7 +1,8 @@
-import AdapterFn from '../AdapterFn';
+import {
+  crZhConfig,
+  roundBy
+} from '../AdapterFn';
 import crAdapterOHLCV from '../crAdapterOHLCV';
-
-const { crZhConfig, roundBy } = AdapterFn;
 
 const _crAddConfig = ({ option }) => ({
   zhConfig: crZhConfig(option)
