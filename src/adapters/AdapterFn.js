@@ -35,10 +35,11 @@ import {
   getPointValue
 } from './getterPointFn';
 
+export const _isNaN = Number.isNaN
+
 const EMPTY = '';
 
-const _isNaN = Number.isNaN
-, _isArr = Array.isArray
+const _isArr = Array.isArray
 , _isNumber = n => typeof n === 'number'
     && (n - n) === 0;
 const _fIsNumber = (pn) => (p) => {
@@ -53,7 +54,6 @@ const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
   return _isNaN(_v) ? dfValue : _v;
 };
-
 
 export const toTd = (mls) => _isNumber(mls)
   ? _toTd(mls)

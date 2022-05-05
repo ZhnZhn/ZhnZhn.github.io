@@ -5,6 +5,7 @@ exports.ymdhmsToUTC = exports.ymdToUTC = exports.roundBy = exports.joinBy = expo
 
 var _AdapterFn = require("../AdapterFn");
 
+exports._isNaN = _AdapterFn._isNaN;
 exports.getValue = _AdapterFn.getValue;
 exports.getCaption = _AdapterFn.getCaption;
 exports.joinBy = _AdapterFn.joinBy;
@@ -73,6 +74,4 @@ const crIntradayConfigOption = (config, option) => ({
 });
 
 exports.crIntradayConfigOption = crIntradayConfigOption;
-const _isNaN = Number.isNaN;
-exports._isNaN = _isNaN;
 //# sourceMappingURL=fnAdapter.js.map

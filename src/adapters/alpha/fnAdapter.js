@@ -1,4 +1,5 @@
 export {
+  _isNaN,
   getValue,
   getCaption,
   joinBy,
@@ -60,5 +61,3 @@ export const crIntradayConfigOption = (
   zhConfig: _crZhConfig(config, option),
   valueMoving: valueMoving(config.data)
 })
-
-export const _isNaN = Number.isNaN

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.mapIf = exports.joinBy = exports.isYNumber = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.mapIf = exports.joinBy = exports.isYNumber = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports._isNaN = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
@@ -43,10 +43,11 @@ var _Type = require("../constants/Type");
 
 var _getterPointFn = require("./getterPointFn");
 
+const _isNaN = Number.isNaN;
+exports._isNaN = _isNaN;
 const EMPTY = '';
 
-const _isNaN = Number.isNaN,
-      _isArr = Array.isArray,
+const _isArr = Array.isArray,
       _isNumber = n => typeof n === 'number' && n - n === 0;
 
 const _fIsNumber = pn => p => {
