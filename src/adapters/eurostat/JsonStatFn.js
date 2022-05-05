@@ -1,6 +1,6 @@
 import JSONstat from 'jsonstat';
 
-import AdapterFn from '../AdapterFn'
+import { compareByValueId } from '../compareByFn';
 import Box from '../../utils/Box'
 
 const URL_ID_COUNTRY = './data/eurostat/id-country.json';
@@ -125,7 +125,7 @@ const JsonStatFn = {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
     return _fetchHmIdCountry().then(() => {
        return Box(_combineToArr(dGeo.id, sGeo, json.status))
-         .map(arr => arr.sort(AdapterFn.compareByValueId))
+         .map(arr => arr.sort(compareByValueId))
          .fold(_splitForConfig);
        });
   },

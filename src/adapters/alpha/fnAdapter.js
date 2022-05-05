@@ -1,4 +1,5 @@
 import AdapterFn from '../AdapterFn'
+import { compareByDate } from '../compareByFn';
 import { crError } from '../crFn';
 import { stockSeriesLegend } from '../legendFn'
 
@@ -10,7 +11,6 @@ const {
   crValueConf,
   valueMoving,
   ymdToUTC,
-  compareByDate,
   roundBy
 } = AdapterFn;
 

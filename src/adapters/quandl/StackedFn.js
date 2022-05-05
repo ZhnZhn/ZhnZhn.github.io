@@ -1,6 +1,6 @@
 import Big from 'big.js';
 
-import AdapterFn from '../AdapterFn'
+import { compareByY } from '../compareByFn';
 
 import {ChartType} from '../../constants/Type';
 import Chart from '../../charts/Chart';
@@ -53,7 +53,7 @@ const _fnCreateReferenceDataAndTotal = function(jsonData, items){
     }
   });
 
-  _data.sort(AdapterFn.compareByY).reverse()
+  _data.sort(compareByY).reverse()
 
   return { referenceData : _data, bTotal : _bTotal };
 }

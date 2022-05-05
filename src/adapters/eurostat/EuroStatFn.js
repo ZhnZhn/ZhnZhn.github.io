@@ -2,7 +2,8 @@ import Chart from '../../charts/Chart';
 import ChartFn from '../../charts/ChartFn';
 import Tooltip from '../../charts/Tooltip';
 
-import AdapterFn from '../AdapterFn';
+import AdapterFn from '../AdapterFn'
+import { compareByDate } from '../compareByFn';
 
 const {
   calcMinY,
@@ -10,7 +11,6 @@ const {
 } = ChartFn;
 
 const {
-  compareByDate,
   valueMoving,
   findMinY,
   findMaxY,

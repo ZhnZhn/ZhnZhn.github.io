@@ -1,4 +1,5 @@
 import AdapterFn from '../AdapterFn'
+import { compareByDate } from '../compareByFn';
 import { crError } from '../crFn';
 
 const {
@@ -8,7 +9,6 @@ const {
   getValue,
   joinBy,
   ymdToUTC,
-  compareByDate,
   crItemConf,
   crValueConf
 } = AdapterFn;

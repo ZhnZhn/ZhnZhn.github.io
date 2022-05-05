@@ -1,7 +1,8 @@
 
 import Big from 'big.js';
 
-import AdapterFn from '../AdapterFn';
+import { compareByY } from '../compareByFn';
+
 import { ChartType } from '../../constants/Type';
 import formatAllNumber from '../../utils/formatAllNumber';
 import Chart from '../../charts/Chart';
@@ -23,7 +24,6 @@ const _assign = Object.assign
     crInnerPieSeria,
     crOuterPieSeria
   } = ChartConfig
-, { compareByY } = AdapterFn
 , { HEIGHT, LEGEND_ROW_HEIGHT } = Chart;
 
 const _calcLegendHeight = (length) => length !== 0

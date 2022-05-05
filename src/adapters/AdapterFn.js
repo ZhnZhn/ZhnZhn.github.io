@@ -3,8 +3,8 @@ import Big from 'big.js';
 import { toTd } from '../charts/dateFormat';
 
 import { isInArrStr } from '../utils/arrFn';
-import fCompareBy from '../utils/fCompareBy';
-import fCompareByTwoProps from '../utils/fCompareByTwoProps';
+
+
 import formatAllNumber from '../utils/formatAllNumber';
 import {
   getC,
@@ -98,11 +98,6 @@ const AdapterFn = {
 
   isYNumber: _fIsNumber('y'),
   toFloatOrEmpty: _fToFloatOr(''),
-
-  compareByDate: fCompareBy(0),
-  compareByY: fCompareBy('y'),
-  compareByValue: fCompareBy('value'),
-  compareByValueId: fCompareByTwoProps('value', 'id'),
 
   crValueMoving: ({
     bNowValue=Big('0.0'),

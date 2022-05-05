@@ -3,6 +3,7 @@ import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
 import AdapterFn from '../AdapterFn'
+import { compareByValue } from '../compareByFn';
 import { legendItem } from '../legendFn'
 
 import fnDescr from './fnDescr'
@@ -75,7 +76,7 @@ const fnAdapter = {
   addSeriesFromHmTo({ config, hm, fromIndex }) {
     let i=fromIndex;
 
-    fnHm.toSeriaNames(hm, AdapterFn.compareByValue)
+    fnHm.toSeriaNames(hm, compareByValue)
       .forEach(item => {
          const name = item.name
              , _isShow = i<C.MAX_SHOW ? true : false ;

@@ -1,10 +1,10 @@
 import AdapterFn from '../AdapterFn'
+import { compareByDate } from '../compareByFn';
 import { crError, crItemLink } from '../crFn';
 
 const {
   getValue,
   ymdToUTC,
-  compareByDate,
   joinBy
 } = AdapterFn
 

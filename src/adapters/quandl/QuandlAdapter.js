@@ -3,6 +3,7 @@ import {ChartType} from '../../constants/Type';
 import ChartConfig from '../../charts/ChartConfig';
 
 import AdapterFn from '../AdapterFn';
+import { compareByDate } from '../compareByFn';
 import QuandlFn from './QuandlFn';
 
 import toArea from './toArea';
@@ -44,7 +45,7 @@ const _rToConfig = {
 const _crSeriaData = (data, yIndex) => {
   return data
     .map(p => [ AdapterFn.ymdToUTC(p[0]), p[yIndex] ])
-    .sort(AdapterFn.compareByDate);
+    .sort(compareByDate);
 };
 
 const _toSeria = (json, option) => {

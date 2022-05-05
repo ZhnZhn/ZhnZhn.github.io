@@ -11,10 +11,6 @@ var _dateFormat = require("../charts/dateFormat");
 
 var _arrFn = require("../utils/arrFn");
 
-var _fCompareBy = _interopRequireDefault(require("../utils/fCompareBy"));
-
-var _fCompareByTwoProps = _interopRequireDefault(require("../utils/fCompareByTwoProps"));
-
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 
 var _getPropertyFn = require("../utils/getPropertyFn");
@@ -71,10 +67,6 @@ const AdapterFn = {
   isNumberOrNull: v => _isNumber(v) || v === null,
   isYNumber: _fIsNumber('y'),
   toFloatOrEmpty: _fToFloatOr(''),
-  compareByDate: (0, _fCompareBy.default)(0),
-  compareByY: (0, _fCompareBy.default)('y'),
-  compareByValue: (0, _fCompareBy.default)('value'),
-  compareByValueId: (0, _fCompareByTwoProps.default)('value', 'id'),
   crValueMoving: _ref => {
     let {
       bNowValue = (0, _big.default)('0.0'),

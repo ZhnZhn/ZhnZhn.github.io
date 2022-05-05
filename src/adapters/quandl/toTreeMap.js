@@ -1,6 +1,6 @@
 import Big from 'big.js';
 
-import AdapterFn from '../AdapterFn'
+import { compareByValue } from '../compareByFn';
 
 import { ChartType } from '../../constants/Type';
 import Chart from '../../charts/Chart';
@@ -15,7 +15,6 @@ import fnStacked from './fnStacked'
 
 const _assign = Object.assign
 , { crValueMoving, crZhConfig } = fnStacked
-, { compareByValue } = AdapterFn
 , {
     createPercent,
     setTitleToConfig,
@@ -24,7 +23,7 @@ const _assign = Object.assign
 , {
    COLOR_PERIOD,
    COLOR_BASE1,
-   COLOR_BASE2,   
+   COLOR_BASE2,
    crMonoColor,
    getMonoColor
  } = Chart
