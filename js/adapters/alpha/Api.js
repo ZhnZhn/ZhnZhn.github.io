@@ -3,105 +3,101 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _isEmpty = _interopRequireDefault(require("../../utils/isEmpty"));
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-var crError = _fnAdapter["default"].crError,
-    getValue = _fnAdapter["default"].getValue,
-    getCaption = _fnAdapter["default"].getCaption,
-    joinBy = _fnAdapter["default"].joinBy;
-var C = {
-  ROOT: 'https://www.alphavantage.co/query',
-  DF_TICKET: 'MSFT',
-  DF_SIZE: 'compact',
-  DF_PERIOD: '50',
-  ERR_PROP: 'Error Message',
-  REQ_ERROR: 'Request Error'
-};
-var _assign = Object.assign,
-    _isArr = Array.isArray;
+const ROOT = 'https://www.alphavantage.co/query',
+      DF_TICKET = 'MSFT',
+      DF_SIZE = 'compact',
+      DF_PERIOD = '50',
+      ERR_PROP = 'Error Message',
+      REQ_ERROR = 'Request Error',
+      _assign = Object.assign,
+      _isArr = Array.isArray;
 
-var _getOneTwo = function _getOneTwo(_ref) {
-  var value = _ref.value,
-      outputsize = _ref.outputsize,
-      items = _ref.items;
-  return _isArr(items) ? [getValue(items[0]), getValue(items[1])] //Stocks by Sectors case
-  : [value || C.DF_TICKET, outputsize || C.DF_SIZE];
+const _getOneTwo = _ref => {
+  let {
+    value,
+    outputsize,
+    items
+  } = _ref;
+  return _isArr(items) ? [(0, _fnAdapter.getValue)(items[0]), (0, _fnAdapter.getValue)(items[1])] //Stocks by Sectors case
+  : [value || DF_TICKET, outputsize || DF_SIZE];
 };
 
-var _crSectorQuery = function _crSectorQuery() {};
+const _crSectorQuery = () => {};
 
-var _crIntradayQuery = function _crIntradayQuery(option) {
-  var _getOneTwo2 = _getOneTwo(option),
-      ticket = _getOneTwo2[0],
-      interval = _getOneTwo2[1],
-      title = ticket + " (" + interval + ")";
+const _crIntradayQuery = option => {
+  const [ticket, interval] = _getOneTwo(option),
+        title = ticket + " (" + interval + ")";
 
   _assign(option, {
-    ticket: ticket,
-    interval: interval,
-    title: title,
+    ticket,
+    interval,
+    title,
     itemCaption: title
   });
 
   return "interval=" + interval + "&symbol=" + ticket;
 };
 
-var _crDailyQuery = function _crDailyQuery(option) {
-  var _getOneTwo3 = _getOneTwo(option),
-      ticket = _getOneTwo3[0],
-      outputsize = _getOneTwo3[1],
-      title = ticket + " (Daily)";
+const _crDailyQuery = option => {
+  const [ticket, outputsize] = _getOneTwo(option),
+        title = ticket + " (Daily)";
 
   _assign(option, {
-    ticket: ticket,
-    outputsize: outputsize,
+    ticket,
+    outputsize,
     interval: "Daily",
-    title: title,
+    title,
     itemCaption: title
   });
 
   return "outputsize=" + outputsize + "&symbol=" + ticket;
 };
 
-var _crIncomeQuery = function _crIncomeQuery(option) {
-  var items = option.items,
-      itemCaption = option.itemCaption,
-      _symbol = getValue(items[0]);
+const _crIncomeQuery = option => {
+  const {
+    items,
+    itemCaption
+  } = option,
+        _symbol = (0, _fnAdapter.getValue)(items[0]);
 
   _assign(option, {
-    itemCaption: itemCaption.replace(getCaption(items[0]), _symbol),
-    dfItem: getValue(items[1]),
-    dfPeriod: getValue(items[2])
+    itemCaption: itemCaption.replace((0, _fnAdapter.getCaption)(items[0]), _symbol),
+    dfItem: (0, _fnAdapter.getValue)(items[1]),
+    dfPeriod: (0, _fnAdapter.getValue)(items[2])
   });
 
   return "symbol=" + _symbol;
 };
 
-var _crEarningQuery = function _crEarningQuery(option) {
-  var items = option.items,
-      _symbol = getValue(items[0]);
+const _crEarningQuery = option => {
+  const {
+    items
+  } = option,
+        _symbol = (0, _fnAdapter.getValue)(items[0]);
 
   _assign(option, {
     itemCaption: _symbol,
-    dfPeriod: getValue(items[1])
+    dfPeriod: (0, _fnAdapter.getValue)(items[1])
   });
 
   return "symbol=" + _symbol;
 };
 
-var _crDfQuery = function _crDfQuery(_ref2) {
-  var _ref2$ticket = _ref2.ticket,
-      ticket = _ref2$ticket === void 0 ? C.DF_TICKET : _ref2$ticket,
-      _ref2$period = _ref2.period,
-      period = _ref2$period === void 0 ? C.DF_PERIOD : _ref2$period;
+const _crDfQuery = _ref2 => {
+  let {
+    ticket = DF_TICKET,
+    period = DF_PERIOD
+  } = _ref2;
   return "symbol=" + ticket + "&interval=daily&time_period=" + period + "&series_type=close";
 };
 
-var _routerQuery = {
+const _routerQuery = {
   DF: _crDfQuery,
   SECTOR: _crSectorQuery,
   TIME_SERIES_INTRADAY: _crIntradayQuery,
@@ -112,30 +108,32 @@ var _routerQuery = {
   CASH_FLOW: _crIncomeQuery,
   EARNINGS: _crEarningQuery
 };
-var AlphaApi = {
-  getRequestUrl: function getRequestUrl(option) {
-    var _option$indicator = option.indicator,
-        indicator = _option$indicator === void 0 ? 'SMA' : _option$indicator,
-        _option$dfFn = option.dfFn,
-        dfFn = _option$dfFn === void 0 ? indicator : _option$dfFn,
-        apiKey = option.apiKey,
-        _crQuery = _routerQuery[dfFn] || _routerQuery.DF,
-        _queryParam = joinBy('&', "function=" + dfFn, _crQuery(option), "apikey=" + apiKey);
+const AlphaApi = {
+  getRequestUrl(option) {
+    const {
+      indicator = 'SMA',
+      dfFn = indicator,
+      apiKey
+    } = option,
+          _crQuery = _routerQuery[dfFn] || _routerQuery.DF,
+          _queryParam = (0, _fnAdapter.joinBy)('&', "function=" + dfFn, _crQuery(option), "apikey=" + apiKey);
 
-    return C.ROOT + "?" + _queryParam;
+    return ROOT + "?" + _queryParam;
   },
-  checkResponse: function checkResponse(json) {
-    if ((0, _isEmpty["default"])(json)) {
-      throw crError();
+
+  checkResponse(json) {
+    if ((0, _isEmpty.default)(json)) {
+      throw (0, _fnAdapter.crError)();
     }
 
-    if (json[C.ERR_PROP]) {
-      throw crError(C.REQ_ERROR, json[C.ERR_PROP]);
+    if (json[ERR_PROP]) {
+      throw (0, _fnAdapter.crError)(REQ_ERROR, json[ERR_PROP]);
     }
 
     return true;
   }
+
 };
 var _default = AlphaApi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=Api.js.map

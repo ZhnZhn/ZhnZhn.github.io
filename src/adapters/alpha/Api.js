@@ -1,25 +1,19 @@
 import isEmpty from '../../utils/isEmpty';
-import fnAdapter from './fnAdapter';
-
-const {
+import {
   crError,
   getValue,
   getCaption,
   joinBy
-} = fnAdapter;
+} from './fnAdapter';
 
-const C = {
-  ROOT: 'https://www.alphavantage.co/query',
+const ROOT = 'https://www.alphavantage.co/query'
+, DF_TICKET = 'MSFT'
+, DF_SIZE = 'compact'
+, DF_PERIOD = '50'
+, ERR_PROP = 'Error Message'
+, REQ_ERROR = 'Request Error'
 
-  DF_TICKET: 'MSFT',
-  DF_SIZE: 'compact',
-  DF_PERIOD: '50',
-
-  ERR_PROP: 'Error Message',
-  REQ_ERROR: 'Request Error'  
-};
-
-const _assign = Object.assign
+, _assign = Object.assign
 , _isArr = Array.isArray;
 
 
@@ -27,7 +21,7 @@ const _getOneTwo = ({ value, outputsize, items }) => {
   return _isArr(items)
     ? [getValue(items[0]), getValue(items[1])]
     //Stocks by Sectors case
-    : [value || C.DF_TICKET, outputsize || C.DF_SIZE];
+    : [value || DF_TICKET, outputsize || DF_SIZE];
 };
 
 const _crSectorQuery = () => {};
@@ -69,8 +63,8 @@ const _crEarningQuery = option => {
   return `symbol=${_symbol}`;
 };
 const _crDfQuery = ({
-  ticket=C.DF_TICKET,
-  period=C.DF_PERIOD
+  ticket=DF_TICKET,
+  period=DF_PERIOD
 }) => `symbol=${ticket}&interval=daily&time_period=${period}&series_type=close`;
 
 const _routerQuery = {
@@ -97,15 +91,15 @@ const AlphaApi = {
         _crQuery(option),
         `apikey=${apiKey}`
     );
-    return `${C.ROOT}?${_queryParam}`;
+    return `${ROOT}?${_queryParam}`;
   },
 
   checkResponse(json){
     if (isEmpty(json)) {
       throw crError();
     }
-    if (json[C.ERR_PROP]) {
-      throw crError(C.REQ_ERROR, json[C.ERR_PROP]);
+    if (json[ERR_PROP]) {
+      throw crError(REQ_ERROR, json[ERR_PROP]);
     }
     return true;
   }

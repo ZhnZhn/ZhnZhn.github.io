@@ -9,17 +9,12 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _AdapterFn = require("../AdapterFn");
-
 var _pointFn = require("../pointFn");
 
 var _IntradayFns = require("../IntradayFns");
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-const {
-  crIntradayConfigOption
-} = _fnAdapter.default;
 const INTRADAY = 'INTRADAY';
 const DAILY_ADJUSTED = 'DAILY_ADJUSTED';
 const _getKeys = Object.keys;
@@ -34,7 +29,7 @@ const _crSeriaOptions = (_ref, dfT) => {
   return {
     notFilterZero: !isFilterZero,
     isDividend: _isAdjusted,
-    toUTC: _AdapterFn.ymdhmsToUTC,
+    toUTC: _fnAdapter.ymdhmsToUTC,
     pnClose: _isAdjusted ? '5. adjusted close' : '4. close',
     pnVolume: _isAdjusted ? '6. volume' : '5. volume'
   };
@@ -210,7 +205,7 @@ const IntradayAdapter = {
       seriaType,
       seriaColor,
       seriaWidth
-    }).addCaption(title).add(crIntradayConfigOption({
+    }).addCaption(title).add((0, _fnAdapter.crIntradayConfigOption)({
       id: _itemKey,
       data: dataDaily,
       dataSource

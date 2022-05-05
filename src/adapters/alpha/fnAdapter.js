@@ -1,14 +1,17 @@
-import {
+export {
   getValue,
   getCaption,
   joinBy,
   valueMoving,
   ymdToUTC,
+  ymdhmsToUTC,
   roundBy
 } from '../AdapterFn';
-import { compareByDate } from '../compareByFn';
+export { compareByDate } from '../compareByFn';
+export { crError } from '../crFn';
+
+import { valueMoving } from '../AdapterFn';
 import {
-  crError,
   crItemConf,
   crValueConf
 } from '../crFn';
@@ -50,19 +53,12 @@ const _crZhConfig = (config, option) => {
   }
 };
 
-const fnAdapter = {
-  crError,
-  getValue,
-  getCaption,
-  joinBy,
-  valueMoving,
-  ymdToUTC,
-  compareByDate,
-  roundBy,
-  crIntradayConfigOption: (config, option) => ({
-    zhConfig: _crZhConfig(config, option),
-    valueMoving: valueMoving(config.data)
-  })
-}
+export const crIntradayConfigOption = (
+  config,
+  option
+) => ({
+  zhConfig: _crZhConfig(config, option),
+  valueMoving: valueMoving(config.data)
+})
 
-export default fnAdapter
+export const _isNaN = Number.isNaN

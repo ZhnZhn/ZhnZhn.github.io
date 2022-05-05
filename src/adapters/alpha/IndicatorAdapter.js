@@ -1,32 +1,29 @@
-import { ymdToUTC } from '../AdapterFn';
 import ChartConfig from '../../charts/ChartConfig';
 import Builder from '../../charts/ConfigBuilder';
+import { ymdToUTC } from './fnAdapter';
 
-const C = {
-  TWO_YEARS_DAYS: 501,
-  TA: 'Technical Analysis:',
+const TWO_YEARS_DAYS = 501
+, TA = 'Technical Analysis:'
+, MACD = 'MACD'
+, MACD_S = 'MACD_Signal'
+, MACD_H = 'MACD_Hist'
 
-  MACD: 'MACD',
-  MACD_S: 'MACD_Signal',
-  MACD_H: 'MACD_Hist',
+, STOCH = 'STOCH'
+, SLOW_K = 'SlowK'
+, SLOW_D = 'SlowD'
 
-  STOCH: 'STOCH',
-  SLOW_K: 'SlowK',
-  SLOW_D: 'SlowD',
+, BBANDS = 'BBANDS'
+, BBANDS_U = 'Real Upper Band'
+, BBANDS_M = 'Real Middle Band'
+, BBANDS_L = 'Real Lower Band'
 
-  BBANDS: 'BBANDS',
-  BBANDS_U: 'Real Upper Band',
-  BBANDS_M: 'Real Middle Band',
-  BBANDS_L: 'Real Lower Band',
+, S_BLACK = { color: 'black' }
+, S_RED = { color: '#f44336' }
+, S_BLUE = { color: 'rgb(47, 126, 216)' }
+, COLOR_BLUE_A = 'rgba(47, 126, 216, 0.75)'
+, S_GREEN = { color: '#4caf50' }
 
-  BLACK: { color: 'black' },
-  RED: { color: '#f44336' },
-  BLUE: { color: 'rgb(47, 126, 216)' },
-  COLOR_BLUE_A: 'rgba(47, 126, 216, 0.75)',
-  GREEN: { color: '#4caf50' }
-}
-
-const _assign = Object.assign
+, _assign = Object.assign;
 
 const _crZhConfig = (id) => ({
   id: id,
@@ -45,10 +42,10 @@ const _crValuePropName = (indicator) => {
 const _crValue = ( json, option ) => {
   const {
           indicator,
-          forDays=C.TWO_YEARS_DAYS
+          forDays=TWO_YEARS_DAYS
         } = option
       , _indicator = _crValuePropName(indicator)
-      , value = json[`${C.TA} ${_indicator}`]
+      , value = json[`${TA} ${_indicator}`]
       , dateKeys = value
            ? Object.keys(value).sort().reverse()
            : []
@@ -118,18 +115,20 @@ const _crDfSeria = (json, option ) => {
 const _crMacdSeries = (json, option) => {
   const _arrs = _toDataArrs(
      _crValue(json, option),
-     [C.MACD, C.MACD_S, C.MACD_H]
+     [MACD, MACD_S, MACD_H]
   )
   , sMcad = _crSplineSeria({
-       data: _arrs[0], name: C.MACD
-    }, C.BLACK)
+       data: _arrs[0],
+       name: MACD
+    }, S_BLACK)
   , sSignal = _crSplineSeria({
-       data: _arrs[1], name: C.MACD_S
-    }, C.RED)
+       data: _arrs[1],
+       name: MACD_S
+    }, S_RED)
   , sHist = _assign(ChartConfig.crSeria(), {
-       color: C.COLOR_BLUE_A,
+       color: COLOR_BLUE_A,
        data: _arrs[2],
-       name: C.MACD_H,
+       name: MACD_H,
        type: 'column',
        visible: false,
        shadow: false,
@@ -145,14 +144,16 @@ const _crMacdSeries = (json, option) => {
 
 const _crStochSeries = (json, option) => {
   const _arrs = _toDataArrs(
-    _crValue(json, option), [C.SLOW_K, C.SLOW_D]
+    _crValue(json, option), [SLOW_K, SLOW_D]
   )
   , sSlowK = _crSplineSeria({
-      data: _arrs[0], name: C.SLOW_K
-    }, C.BLUE)
+      data: _arrs[0],
+      name: SLOW_K
+    }, S_BLUE)
  , sSlowD = _crSplineSeria({
-      data: _arrs[1], name: C.SLOW_D
-   }, C.RED);
+      data: _arrs[1],
+      name: SLOW_D
+   }, S_RED);
 
   return [sSlowK, sSlowD];
 }
@@ -160,26 +161,29 @@ const _crStochSeries = (json, option) => {
 const _crBbandsSeries = (json, option) => {
   const _arrs = _toDataArrs(
       _crValue(json, option),
-      [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]
+      [BBANDS_M, BBANDS_U, BBANDS_L]
     )
     , sMiddle = _crSplineSeria({
-        data: _arrs[0], name: C.BBANDS_M
-      }, C.BLUE)
+        data: _arrs[0],
+        name: BBANDS_M
+      }, S_BLUE)
    , sUpper = _crSplineSeria({
-        data: _arrs[1], name: C.BBANDS_U
-     }, C.GREEN)
+        data: _arrs[1],
+        name: BBANDS_U
+     }, S_GREEN)
    , sLow = _crSplineSeria({
-          data: _arrs[2], name: C.BBANDS_L
-     }, C.RED);
+          data: _arrs[2],
+          name: BBANDS_L
+     }, S_RED);
 
     return [sMiddle, sUpper, sLow];
 }
 
 const _rSeries = {
   DF: _crDfSeria,
-  [C.MACD]: _crMacdSeries,
-  [C.STOCH]: _crStochSeries,
-  [C.BBANDS]: _crBbandsSeries,
+  [MACD]: _crMacdSeries,
+  [STOCH]: _crStochSeries,
+  [BBANDS]: _crBbandsSeries,
 }
 
 const _toSeries = (json, option) => {

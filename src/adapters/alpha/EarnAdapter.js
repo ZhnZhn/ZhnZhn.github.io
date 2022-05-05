@@ -1,12 +1,10 @@
-import crAdapterType1 from '../crAdapterType1'
-import fnAdapter from './fnAdapter'
-
-const {
+import crAdapterType1 from '../crAdapterType1';
+import {
   ymdToUTC,
   compareByDate,
-  roundBy
-} = fnAdapter
-, _isNan = Number.isNaN;
+  roundBy,
+  _isNaN
+} from './fnAdapter';
 
 const crData = (json, option) => {
   const { dfPeriod } = option
@@ -17,7 +15,7 @@ const crData = (json, option) => {
   , _data = [];
   _reports.forEach(({ reportedEPS, fiscalDateEnding }) => {
     const _y = roundBy(reportedEPS)
-    if (!_isNan(_y)) {
+    if (!_isNaN(_y)) {
       _data.push([ymdToUTC(fiscalDateEnding), _y])
     }
   })

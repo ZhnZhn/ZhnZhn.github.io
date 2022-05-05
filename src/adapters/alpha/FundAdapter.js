@@ -1,11 +1,9 @@
-import crAdapterType1 from '../crAdapterType1'
-import fnAdapter from './fnAdapter'
-
-const {
+import crAdapterType1 from '../crAdapterType1';
+import {
   ymdToUTC,
-  compareByDate
-} = fnAdapter
-, _isNan = Number.isNaN;
+  compareByDate,
+  _isNaN
+} from './fnAdapter';
 
 const crData = (json, option) => {
   const { dfItem, dfPeriod } = option
@@ -17,7 +15,7 @@ const crData = (json, option) => {
 
   _reports.forEach(item => {
     const _y = parseInt(item[dfItem], 10)
-    if (!_isNan(_y)) {
+    if (!_isNaN(_y)) {
       _data.push([ymdToUTC(item.fiscalDateEnding), _y])
     }
   })
