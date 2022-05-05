@@ -3,15 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crFn = require("../crFn");
+var _fnAdapter = require("./fnAdapter");
 
-const C = {
-  URL: 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
-};
+const URL = 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID';
 const _isArr = Array.isArray,
       _assign = Object.assign;
-
-const _crSubtitle = (title, subtitle) => subtitle ? title + ": " + subtitle : title;
 
 const _setCaptionTo = option => {
   const {
@@ -23,7 +19,7 @@ const _setCaptionTo = option => {
   _assign(option, {
     itemCaption: title,
     title: dfTitle,
-    subtitle: _crSubtitle(title, subtitle)
+    subtitle: (0, _fnAdapter.joinBy)(':', title, subtitle)
   });
 };
 
@@ -42,7 +38,7 @@ const BeaApi = {
 
     _setCaptionTo(option);
 
-    return C.URL + "=" + apiKey + "&TableID=" + TableID + "&DataSetName=" + DataSetName + "&Frequency=" + _Frequncy + "&" + ValueName + "=" + value;
+    return URL + "=" + apiKey + "&TableID=" + TableID + "&DataSetName=" + DataSetName + "&Frequency=" + _Frequncy + "&" + ValueName + "=" + value;
   },
 
   checkResponse(json) {
@@ -58,11 +54,11 @@ const BeaApi = {
       const {
         ErrorDetail
       } = ResError;
-      throw (0, _crFn.crError)(ResError.APIErrorCode, ErrorDetail.Description || ResError.APIErrorDescription);
+      throw (0, _fnAdapter.crError)(ResError.APIErrorCode, ErrorDetail.Description || ResError.APIErrorDescription);
     }
 
     if (Results.Error || !_isArr(Results.Data)) {
-      return (0, _crFn.crError)();
+      return (0, _fnAdapter.crError)();
     }
 
     return true;

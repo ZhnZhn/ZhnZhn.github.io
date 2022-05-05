@@ -1,9 +1,13 @@
-import { ymdToUTC } from '../AdapterFn';
+export { joinBy } from '../AdapterFn';
+export { crError } from '../crFn';
+
+import {
+  _isNaN,
+  ymdToUTC
+} from '../AdapterFn';
 
 const _isArr = Array.isArray
-, _isNaN = Number.isNaN;
-
-const _getResults = json => json.BEAAPI.Results
+, _getResults = json => json.BEAAPI.Results
 , _getData = Results => _isArr(Results)
     ? Results[0].Data
     : Results.Data
@@ -57,36 +61,39 @@ const _crUTC = (item) => {
   return ymdToUTC(Year + md);
 };
 
-const fnAdapter = {
-  crData: (json, option) => {
-    const Results = _getResults(json)
-    , { dfFilterName, items } = option
-    , two = (items[1] || {}).value
-    , d = []
-    , isFilter = dfFilterName ? true : false
-    , data = _getData(Results) || [];
 
-    data.forEach(item => {
-      const v = parseFloat(item.DataValue)
-          , y = _isNaN(v) ? null : v;
-      if ( !(isFilter && item[dfFilterName] !== two) ) {
-        d.push({
-          x: _crUTC(item),
-          y: y
-        })
-      }
-    })
+export const crData = (
+  json,
+  option
+) => {
+  const Results = _getResults(json)
+  , { dfFilterName, items } = option
+  , two = (items[1] || {}).value
+  , d = []
+  , isFilter = dfFilterName ? true : false
+  , data = _getData(Results) || [];
 
-    return d;
-  },
+  data.forEach(item => {
+    const v = parseFloat(item.DataValue)
+        , y = _isNaN(v) ? null : v;
+    if ( !(isFilter && item[dfFilterName] !== two) ) {
+      d.push({
+        x: _crUTC(item),
+        y: y
+      })
+    }
+  })
 
-  crConfOption: (option, json) => {
-    const Results = _getResults(json);
-    return {
-      zhConfig: _crZhConfig(option),
-      info: _crInfo(Results)
-    };
-  }
-};
+  return d;
+}
 
-export default fnAdapter
+export const crConfOption = (
+  option,
+  json
+) => {
+  const Results = _getResults(json);
+  return {
+    zhConfig: _crZhConfig(option),
+    info: _crInfo(Results)
+  };
+}

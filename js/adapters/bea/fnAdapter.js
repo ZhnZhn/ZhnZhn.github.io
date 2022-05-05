@@ -1,14 +1,18 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.joinBy = exports.crError = exports.crData = exports.crConfOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
-const _isArr = Array.isArray,
-      _isNaN = Number.isNaN;
+exports.joinBy = _AdapterFn.joinBy;
 
-const _getResults = json => json.BEAAPI.Results,
+var _crFn = require("../crFn");
+
+exports.crError = _crFn.crError;
+
+const _isArr = Array.isArray,
+      _getResults = json => json.BEAAPI.Results,
       _getData = Results => _isArr(Results) ? Results[0].Data : Results.Data,
       _getInfo = Results => _isArr(Results) ? Results[0] : Results;
 
@@ -75,40 +79,41 @@ const _crUTC = item => {
   return (0, _AdapterFn.ymdToUTC)(Year + md);
 };
 
-const fnAdapter = {
-  crData: (json, option) => {
-    const Results = _getResults(json),
-          {
-      dfFilterName,
-      items
-    } = option,
-          two = (items[1] || {}).value,
-          d = [],
-          isFilter = dfFilterName ? true : false,
-          data = _getData(Results) || [];
+const crData = (json, option) => {
+  const Results = _getResults(json),
+        {
+    dfFilterName,
+    items
+  } = option,
+        two = (items[1] || {}).value,
+        d = [],
+        isFilter = dfFilterName ? true : false,
+        data = _getData(Results) || [];
 
-    data.forEach(item => {
-      const v = parseFloat(item.DataValue),
-            y = _isNaN(v) ? null : v;
+  data.forEach(item => {
+    const v = parseFloat(item.DataValue),
+          y = (0, _AdapterFn._isNaN)(v) ? null : v;
 
-      if (!(isFilter && item[dfFilterName] !== two)) {
-        d.push({
-          x: _crUTC(item),
-          y: y
-        });
-      }
-    });
-    return d;
-  },
-  crConfOption: (option, json) => {
-    const Results = _getResults(json);
-
-    return {
-      zhConfig: _crZhConfig(option),
-      info: _crInfo(Results)
-    };
-  }
+    if (!(isFilter && item[dfFilterName] !== two)) {
+      d.push({
+        x: _crUTC(item),
+        y: y
+      });
+    }
+  });
+  return d;
 };
-var _default = fnAdapter;
-exports.default = _default;
+
+exports.crData = crData;
+
+const crConfOption = (option, json) => {
+  const Results = _getResults(json);
+
+  return {
+    zhConfig: _crZhConfig(option),
+    info: _crInfo(Results)
+  };
+};
+
+exports.crConfOption = crConfOption;
 //# sourceMappingURL=fnAdapter.js.map

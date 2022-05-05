@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/bea/BeaAdapter.js"
- ],
- "file": "../../../src/adapters/bea/BeaAdapter.js",
- "names": [
-  "crData",
-  "fnAdapter",
-  "crConfOption",
-  "BeaAdapter"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;IAEQA,M,GAAyBC,qB,CAAzBD,M;IAAQE,Y,GAAiBD,qB,CAAjBC,Y;AAEhB,IAAMC,UAAU,GAAG,+BAAe;AAC/BH,EAAAA,MAAM,EAANA,MAD+B;AACvBE,EAAAA,YAAY,EAAZA;AADuB,CAAf,CAAnB;eAIeC,U"
-}
+{"version":3,"sources":["../../../src/adapters/bea/BeaAdapter.js"],"names":["BeaAdapter","crData","crConfOption"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,UAAU,GAAG,4BAAe;AAC/BC,EAAAA,MAAM,EAANA,iBAD+B;AAE/BC,EAAAA,YAAY,EAAZA;AAF+B,CAAf,CAAnB;eAKeF,U","sourcesContent":["import crAdapterType1 from '../crAdapterType1';\r\nimport { crData, crConfOption } from './fnAdapter';\r\n\r\nconst BeaAdapter = crAdapterType1({\r\n   crData,\r\n   crConfOption\r\n});\r\n\r\nexport default BeaAdapter\r\n"],"file":"BeaAdapter.js"}
