@@ -8,10 +8,6 @@ import AdapterFn from '../AdapterFn'
 import { Direction } from '../../constants/Type'
 
 const {
-  crError,
-  crId,
-  crItemLink,
-
   ymdToUTC,
   isYNumber,
   isNumberOrNull,
@@ -23,14 +19,6 @@ const {
   crItemConf,
   crValueConf
 } = AdapterFn;
-
-describe('added fns', ()=>{
-  it('should have next fns', ()=>{
-    expect(typeof crError).toBe('function')
-    expect(typeof crId).toBe('function')
-    expect(typeof crItemLink).toBe('function')    
-  })
-})
 
 const Y = [
   { in: '2017', r: 1514678400000, d: '31-12-2017' },

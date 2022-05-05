@@ -35,9 +35,6 @@ import {
 
 import { Direction } from '../constants/Type'
 
-import crFn from './crFn'
-
-
 const EMPTY = '';
 
 const ITEM_CONF_PROP_NAMES = [
@@ -77,7 +74,6 @@ const _fToFloatOr = dfValue => str => {
 };
 
 const AdapterFn = {
-  ...crFn,  
 
   toTd: (mls) => _isNumber(mls)
     ? toTd(mls)

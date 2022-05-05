@@ -1,11 +1,10 @@
-import AdapterFn from '../AdapterFn';
+import { crError } from '../crFn';
 
 const C = {
  URL: "https://www.bitstamp.net/api/v2"
 };
 
-const _isArr = Array.isArray
-, { crError } = AdapterFn;
+const _isArr = Array.isArray;
 
 const _crDfUrl = option => {
   const { items=[] } = option

@@ -1,7 +1,8 @@
 import AdapterFn from '../AdapterFn'
+import { crItemLink } from '../crFn';
 import crAdapterOHLCV from '../crAdapterOHLCV'
 
-const { crZhConfig, crItemLink } = AdapterFn
+const { crZhConfig } = AdapterFn
 
 const _crResearchLink = crItemLink
     .bind(null, 'Binance Research');

@@ -7,40 +7,46 @@ exports.default = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
+var _crFn = require("../crFn");
+
 const {
   ymdToUTC,
   getYear,
   getCurrentYear,
-  joinBy,
-  crHm,
-  crError
+  joinBy
 } = _AdapterFn.default;
 
-const _crZhConfig = ({
-  _itemKey,
-  itemCaption,
-  dataSource,
-  dfTitle,
-  linkItem
-}) => ({
-  id: _itemKey,
-  key: _itemKey,
-  item: { ...linkItem
-  },
-  linkFn: 'DF',
-  itemCaption,
-  dataSource: joinBy(": ", dataSource, dfTitle)
-});
+const _crZhConfig = _ref => {
+  let {
+    _itemKey,
+    itemCaption,
+    dataSource,
+    dfTitle,
+    linkItem
+  } = _ref;
+  return {
+    id: _itemKey,
+    key: _itemKey,
+    item: { ...linkItem
+    },
+    linkFn: 'DF',
+    itemCaption,
+    dataSource: joinBy(": ", dataSource, dfTitle)
+  };
+};
 
-const _crInfo = ({
-  itemCaption
-}) => ({
-  name: itemCaption
-});
+const _crInfo = _ref2 => {
+  let {
+    itemCaption
+  } = _ref2;
+  return {
+    name: itemCaption
+  };
+};
 
 const fnAdapter = {
-  crHm,
-  crError,
+  crHm: _crFn.crHm,
+  crError: _crFn.crError,
   getYear,
   getCurrentYear,
   crData: json => {

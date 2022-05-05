@@ -1,8 +1,8 @@
 import AdapterFn from '../AdapterFn'
+import { crError } from '../crFn';
 
 const {
   getValue,
-  crError,
   crZhConfig,
   joinBy
 } = AdapterFn;

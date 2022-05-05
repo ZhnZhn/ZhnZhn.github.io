@@ -1,4 +1,4 @@
-import AdapterFn from '../AdapterFn';
+import { crError } from '../crFn';
 
 const C = {
   ROOT_URL: "https://www.quandl.com/api/v3/datasets/",
@@ -6,9 +6,6 @@ const C = {
 
   LIMIT_REMAINING: 'X-RateLimit-Remaining'
 };
-
-const { crError } = AdapterFn
-
 
 const _addTo = (q, pN, pV) => {
   if (!pV) {

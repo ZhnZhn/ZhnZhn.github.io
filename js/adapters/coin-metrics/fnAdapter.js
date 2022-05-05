@@ -3,50 +3,54 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
-var crError = _AdapterFn["default"].crError,
-    ymdhmsToUTC = _AdapterFn["default"].ymdhmsToUTC,
-    crItemConf = _AdapterFn["default"].crItemConf,
-    crValueConf = _AdapterFn["default"].crValueConf;
+var _crFn = require("../crFn");
 
-var _crZhConfig = function _crZhConfig(option, data) {
-  var _itemKey = option._itemKey,
-      dataSource = option.dataSource,
-      itemCaption = option.itemCaption;
+const {
+  ymdhmsToUTC,
+  crItemConf,
+  crValueConf
+} = _AdapterFn.default;
+
+const _crZhConfig = (option, data) => {
+  const {
+    _itemKey,
+    dataSource,
+    itemCaption
+  } = option;
   return {
     id: _itemKey,
     key: _itemKey,
-    itemCaption: itemCaption,
-    dataSource: dataSource,
-    itemConf: (0, _extends2["default"])({
-      _itemKey: _itemKey
-    }, crItemConf(option), crValueConf(data), {
-      dataSource: dataSource
-    })
+    itemCaption,
+    dataSource,
+    itemConf: {
+      _itemKey,
+      ...crItemConf(option),
+      ...crValueConf(data),
+      dataSource
+    }
   };
 };
 
-var fnAdapter = {
-  crError: crError.bind(null, "Server Response"),
-  crData: function crData(json) {
-    var arr = json.metricData.series;
-    return arr.map(function (_ref) {
-      var time = _ref.time,
-          values = _ref.values;
+const fnAdapter = {
+  crError: _crFn.crError.bind(null, "Server Response"),
+  crData: json => {
+    const arr = json.metricData.series;
+    return arr.map(_ref => {
+      let {
+        time,
+        values
+      } = _ref;
       return [ymdhmsToUTC((time || '').replace('Z', ''), 'T'), parseFloat((values || [])[0])];
     });
   },
-  crConfOption: function crConfOption(option, json, data) {
-    return {
-      zhConfig: _crZhConfig(option, data)
-    };
-  }
+  crConfOption: (option, json, data) => ({
+    zhConfig: _crZhConfig(option, data)
+  })
 };
 var _default = fnAdapter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fnAdapter.js.map

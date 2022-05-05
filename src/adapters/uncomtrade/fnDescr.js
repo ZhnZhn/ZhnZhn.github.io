@@ -1,7 +1,5 @@
-import AdapterFn from '../AdapterFn';
+import { crItemLink } from '../crFn';
 import C from './conf';
-
-const { crItemLink } = AdapterFn;
 
 const _isArr = Array.isArray
 , _crWebsiteLink = crItemLink.bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;")

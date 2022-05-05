@@ -1,9 +1,9 @@
 import AdapterFn from '../AdapterFn';
+import { crError } from '../crFn';
 
 import fnDescr from './fnDescr';
 
 const {
-  crError,
   isYNumber,
   getValue,
   toUpperCaseFirst,

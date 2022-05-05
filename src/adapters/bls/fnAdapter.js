@@ -1,13 +1,11 @@
-
 import AdapterFn from '../AdapterFn'
+import { crHm, crError } from '../crFn';
 
 const {
   ymdToUTC,
   getYear,
   getCurrentYear,
-  joinBy,
-  crHm,
-  crError
+  joinBy
 } = AdapterFn;
 
 const _crZhConfig = ({

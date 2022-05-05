@@ -1,8 +1,8 @@
 import AdapterFn from '../AdapterFn'
+import { crError } from '../crFn';
 import { stockSeriesLegend } from '../legendFn'
 
 const {
-  crError,
   getValue,
   getCaption,
   joinBy,

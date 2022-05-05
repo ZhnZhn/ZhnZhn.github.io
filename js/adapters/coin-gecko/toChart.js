@@ -3,54 +3,56 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _crFn = require("../crFn");
 
-var crItemLink = _AdapterFn["default"].crItemLink;
+const _crDescription = _crFn.crItemLink.bind(null, 'Coin Gecko');
 
-var _crDescription = crItemLink.bind(null, 'Coin Gecko');
-
-var _crInfo = function _crInfo(_ref) {
-  var title = _ref.title,
-      _nativeUrl = _ref._nativeUrl;
+const _crInfo = _ref => {
+  let {
+    title,
+    _nativeUrl
+  } = _ref;
   return {
     name: title,
     description: _crDescription(_nativeUrl)
   };
 };
 
-var _crMvOption = function _crMvOption(btTitle, currency, dVolume) {
-  return {
-    btTitle: btTitle,
-    title: btTitle + " " + currency,
-    dVolume: dVolume
-  };
-};
+const _crMvOption = (btTitle, currency, dVolume) => ({
+  btTitle,
+  title: btTitle + " " + currency,
+  dVolume
+});
 
-var crData = function crData(_ref2) {
-  var prices = _ref2.prices;
+const crData = _ref2 => {
+  let {
+    prices
+  } = _ref2;
   return prices;
 },
-    addConfOption = function addConfOption(option) {
-  return {
-    info: _crInfo(option)
-  };
-},
-    addConfig = function addConfig(builder, json, option) {
-  var total_volumes = json.total_volumes,
-      market_caps = json.market_caps,
-      _currency = option._currency;
+      addConfOption = option => ({
+  info: _crInfo(option)
+}),
+      addConfig = (builder, json, option) => {
+  const {
+    total_volumes,
+    market_caps
+  } = json,
+        {
+    _currency
+  } = option;
   return builder.addMiniVolume(_crMvOption('Volume', _currency, total_volumes)).addMiniVolume(_crMvOption('Market Cap', _currency, market_caps));
 };
 
-var toChart = (0, _crAdapterType["default"])({
-  crData: crData,
-  addConfOption: addConfOption,
-  addConfig: addConfig
+const toChart = (0, _crAdapterType.default)({
+  crData,
+  addConfOption,
+  addConfig
 });
 var _default = toChart;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toChart.js.map

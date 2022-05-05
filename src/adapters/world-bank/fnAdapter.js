@@ -1,6 +1,7 @@
 import AdapterFn from '../AdapterFn'
+import { crError } from '../crFn';
 
-const { crError, ymdToUTC } = AdapterFn
+const { ymdToUTC } = AdapterFn
 , _isArr = Array.isArray;
 
 const _crInfo = ({ title, subtitle, items }) => ({

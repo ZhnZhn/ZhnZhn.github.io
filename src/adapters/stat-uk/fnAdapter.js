@@ -1,12 +1,11 @@
 import AdapterFn from '../AdapterFn'
+import { crError, crItemLink } from '../crFn';
 
 const {
   getValue,
-  crError,
   ymdToUTC,
   compareByDate,
-  joinBy,
-  crItemLink
+  joinBy
 } = AdapterFn
 
 const _crItemLink = crItemLink.bind(null, 'ONS Dataset Metadata');

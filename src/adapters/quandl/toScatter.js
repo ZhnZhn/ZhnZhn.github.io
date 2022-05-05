@@ -6,6 +6,7 @@ import Tooltip from '../../charts/Tooltip'
 import Builder from '../../charts/ConfigBuilder'
 
 import AdapterFn from '../AdapterFn'
+import { crId } from '../crFn';
 
 const C = {
   COLOR_PLUS: '#4caf50',
@@ -14,7 +15,7 @@ const C = {
 
 const _crZhConfig = (option) => {
   const { dataSource } = option
-      , id = AdapterFn.crId();
+      , id = crId();
   return {
     id, key: id,
     dataSource

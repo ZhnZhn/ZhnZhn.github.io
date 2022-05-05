@@ -1,4 +1,4 @@
-import AdapterFn from '../AdapterFn'
+import { crError } from '../crFn';
 
 const C = {
   URL: 'https://api.binance.com/api/v3',
@@ -7,8 +7,7 @@ const C = {
 };
 
 const _isArr = Array.isArray
-, REG_BLANKS = /\s/g
-, { crError } = AdapterFn;
+, REG_BLANKS = /\s/g;
 
 const _setLinks = (option, c, s='') => {
   const _toIndex = c.indexOf('(')

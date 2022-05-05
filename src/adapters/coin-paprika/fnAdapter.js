@@ -1,13 +1,12 @@
 import AdapterFn from '../AdapterFn'
+import { crError, crItemLink } from '../crFn';
 import { crVolumePoint } from '../pointFn';
 
 const {
-  crError,
   ymdToUTC,
   getValue,
   joinBy,
-  toUpperCaseFirst,
-  crItemLink
+  toUpperCaseFirst
 } = AdapterFn;
 
 const DF_ID = 'btc-bitcoin';

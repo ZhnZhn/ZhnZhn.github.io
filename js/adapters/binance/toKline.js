@@ -3,34 +3,39 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
+var _crFn = require("../crFn");
+
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
-var crZhConfig = _AdapterFn["default"].crZhConfig,
-    crItemLink = _AdapterFn["default"].crItemLink;
+const {
+  crZhConfig
+} = _AdapterFn.default;
 
-var _crResearchLink = crItemLink.bind(null, 'Binance Research');
+const _crResearchLink = _crFn.crItemLink.bind(null, 'Binance Research');
 
-var _crTradeLink = crItemLink.bind(null, 'Binance Trade Chart');
+const _crTradeLink = _crFn.crItemLink.bind(null, 'Binance Trade Chart');
 
-var _crDescription = function _crDescription(_ref) {
-  var _researchLink = _ref._researchLink,
-      _tradeLink = _ref._tradeLink;
+const _crDescription = _ref => {
+  let {
+    _researchLink,
+    _tradeLink
+  } = _ref;
   return _crResearchLink(_researchLink, "padding-bottom: 8px;") + _crTradeLink(_tradeLink);
 };
 
-var _crInfo = function _crInfo(option) {
-  return {
-    name: option.title,
-    description: _crDescription(option)
-  };
-};
+const _crInfo = option => ({
+  name: option.title,
+  description: _crDescription(option)
+});
 
-var _crAddConfig = function _crAddConfig(_ref2) {
-  var option = _ref2.option;
+const _crAddConfig = _ref2 => {
+  let {
+    option
+  } = _ref2;
   return {
     zhConfig: crZhConfig(option),
     info: _crInfo(option)
@@ -55,26 +60,20 @@ From Binance API Documentation
 */
 
 
-var _crDataOHLCV = function _crDataOHLCV(json) {
-  return json.map(function (item) {
-    return {
-      date: item[6],
-      open: parseFloat(item[1]),
-      high: parseFloat(item[2]),
-      low: parseFloat(item[3]),
-      close: parseFloat(item[4]),
-      volume: parseFloat(item[5])
-    };
-  });
-};
+const _crDataOHLCV = json => json.map(item => ({
+  date: item[6],
+  open: parseFloat(item[1]),
+  high: parseFloat(item[2]),
+  low: parseFloat(item[3]),
+  close: parseFloat(item[4]),
+  volume: parseFloat(item[5])
+}));
 
-var toKline = (0, _crAdapterOHLCV["default"])({
+const toKline = (0, _crAdapterOHLCV.default)({
   getArr: _crDataOHLCV,
-  toDate: function toDate(date) {
-    return date;
-  },
+  toDate: date => date,
   crAddConfig: _crAddConfig
 });
 var _default = toKline;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toKline.js.map

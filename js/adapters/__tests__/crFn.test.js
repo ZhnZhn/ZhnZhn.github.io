@@ -1,15 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _crFn = require("../crFn");
 
-var _crFn = _interopRequireDefault(require("../crFn"));
-
-const {
-  crHm,
-  crError
-} = _crFn.default;
 describe('crError', () => {
-  const fn = crError;
+  const fn = _crFn.crError;
   it('should create err obj', () => {
     expect(fn('caption', 'msg')).toEqual({
       errCaption: 'caption',
@@ -25,7 +19,7 @@ describe('crError', () => {
 });
 describe('crHm', () => {
   it('should create object with null prototype', () => {
-    const hm = crHm();
+    const hm = (0, _crFn.crHm)();
     expect(Object.getPrototypeOf(hm)).toBe(null);
     expect(hm.toString).toBe(void 0);
     expect(hm.valueOf).toBe(void 0);
@@ -35,7 +29,7 @@ describe('crHm', () => {
       a: 'a',
       b: 'b'
     };
-    expect(crHm(props)).toEqual(props);
+    expect((0, _crFn.crHm)(props)).toEqual(props);
   });
 });
 //# sourceMappingURL=crFn.test.js.map

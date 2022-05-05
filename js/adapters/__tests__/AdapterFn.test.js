@@ -11,9 +11,6 @@ var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 var _Type = require("../../constants/Type");
 
 const {
-  crError,
-  crId,
-  crItemLink,
   ymdToUTC,
   isYNumber,
   isNumberOrNull,
@@ -25,13 +22,6 @@ const {
   crItemConf,
   crValueConf
 } = _AdapterFn.default;
-describe('added fns', () => {
-  it('should have next fns', () => {
-    expect(typeof crError).toBe('function');
-    expect(typeof crId).toBe('function');
-    expect(typeof crItemLink).toBe('function');
-  });
-});
 const Y = [{
   in: '2017',
   r: 1514678400000,

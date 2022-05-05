@@ -1,12 +1,11 @@
-import AdapterFn from '../AdapterFn';
+import { crError } from '../crFn';
 
 const C = {
   URL: 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
 };
 
 const _isArr = Array.isArray
-, _assign = Object.assign
-, { crError } = AdapterFn;
+, _assign = Object.assign;
 
 const _crSubtitle = (title, subtitle) => subtitle
  ? `${title}: ${subtitle}`

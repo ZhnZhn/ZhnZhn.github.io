@@ -1,9 +1,8 @@
-
 import AdapterFn from '../AdapterFn'
+import { crError } from '../crFn';
 import { crVolumePoint } from '../pointFn';
 
 const {
-  crError,
   getValue,
   roundBy
 } = AdapterFn;

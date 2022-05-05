@@ -29,8 +29,6 @@ var _seriaFn = require("../math/seriaFn");
 
 var _Type = require("../constants/Type");
 
-var _crFn = _interopRequireDefault(require("./crFn"));
-
 const EMPTY = '';
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 
@@ -56,7 +54,7 @@ const _fToFloatOr = dfValue => str => {
   return _isNaN(_v) ? dfValue : _v;
 };
 
-const AdapterFn = { ..._crFn.default,
+const AdapterFn = {
   toTd: mls => _isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '',
   ymdToUTC: _DateUtils.ymdToUTC,
   ymdhmsToUTC: _DateUtils.ymdhmsToUTC,

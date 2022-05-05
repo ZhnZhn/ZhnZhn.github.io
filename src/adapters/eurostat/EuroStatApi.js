@@ -1,10 +1,9 @@
-import AdapterFn from '../AdapterFn';
+import { crError } from '../crFn';
 import api from './api/api';
 
 const RES_ERR_STATUS = [400]
 , MSG_400 = '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably not valid.\nMaybe try to request this data set with older date or another country.'
 
-, { crError } = AdapterFn
 , _crDetailMsg = errLabel =>
     `${errLabel}\n\nIf you use For Date input field in Dialog\ntry to use more late date.`
 , _addPropTo = option => {

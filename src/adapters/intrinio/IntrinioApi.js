@@ -1,6 +1,4 @@
-import AdapterFn from '../AdapterFn';
-
-const { crError } = AdapterFn;
+import { crError } from '../crFn';
 
 const C = {
   URL: 'https://api.intrinio.com/historical_data',

@@ -1,6 +1,4 @@
-import crFn from '../crFn'
-
-const { crHm, crError } = crFn
+import { crHm, crError } from '../crFn';
 
 describe('crError', ()=>{
   const fn = crError

@@ -1,4 +1,4 @@
-import AdapterFn from '../AdapterFn';
+import { crError } from '../crFn';
 
 const C = {
   URL: "https://api.eia.gov/category/",
@@ -9,8 +9,6 @@ const MSG = {
   ERR: 'invalid series_id.',
   NOT_EXIST: 'Data for enetered parameters is not existed.'
 };
-
-const { crError } = AdapterFn;
 
 const _getValue = (obj) => {
   return obj && obj.value

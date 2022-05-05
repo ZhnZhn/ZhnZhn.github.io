@@ -1,9 +1,8 @@
 import AdapterFn from '../AdapterFn'
+import { crError, crItemLink } from '../crFn';
 import fnSelector from './fnSelector'
 
 const {
-  crError,
-  crItemLink,
   crItemConf,
   joinBy,
   ymdToUTC,

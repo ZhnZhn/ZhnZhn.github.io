@@ -1,7 +1,7 @@
 import AdapterFn from '../AdapterFn'
+import { crError } from '../crFn';
 
 const {
-  crError,
   crZhConfig,
   getFromDate,
   getCaption,

@@ -9,11 +9,11 @@ var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
 var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
 
+var _crFn = require("../crFn");
+
 const {
-  crError,
   isYNumber,
   numberFormat,
-  crId,
   roundBy,
   valueMoving,
   crItemConf,
@@ -58,14 +58,23 @@ const _crSearchToken = label => {
   return _arr[0] || '';
 };
 
-const _crLink = ({
-  url,
-  title
-}, token = '') => "<a class=\"native-link\" href=\"" + url + token + "\">" + title + "</a>";
+const _crLink = function (_ref, token) {
+  let {
+    url,
+    title
+  } = _ref;
 
-const _crSflSearchToken = ({
-  dfId
-}) => {
+  if (token === void 0) {
+    token = '';
+  }
+
+  return "<a class=\"native-link\" href=\"" + url + token + "\">" + title + "</a>";
+};
+
+const _crSflSearchToken = _ref2 => {
+  let {
+    dfId
+  } = _ref2;
   const arr = ('' + dfId).split('/'),
         id = arr.pop(),
         prefix = arr.join('__');
@@ -97,11 +106,13 @@ const _crSearchLink = (label, option) => {
   }
 };
 
-const _crDescr = ({
-  updated,
-  source,
-  label
-}, option) => {
+const _crDescr = (_ref3, option) => {
+  let {
+    updated,
+    source,
+    label
+  } = _ref3;
+
   const _date = (updated || '').replace('T', ' ').replace('Z', ''),
         {
     dfId
@@ -159,16 +170,19 @@ const _getTimeDimension = (ds, timeId, json) => {
   return times;
 };
 
-const _crDataSource = ({
-  dataSource,
-  dfId
-}) => dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
+const _crDataSource = _ref4 => {
+  let {
+    dataSource,
+    dfId
+  } = _ref4;
+  return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
+};
 
 const fnAdapter = {
-  crError,
+  crError: _crFn.crError,
   isYNumber,
   numberFormat,
-  crId,
+  crId: _crFn.crId,
   roundBy,
   toUpperCaseFirst,
   crTitle: option => {
@@ -216,7 +230,7 @@ const fnAdapter = {
       dfId,
       timeId
     } = option,
-          key = _itemKey || crId(),
+          key = _itemKey || (0, _crFn.crId)(),
           itemCaption = option.itemCaption || _crItemCaption(option),
           itemConf = url ? {
       _itemKey: key,
