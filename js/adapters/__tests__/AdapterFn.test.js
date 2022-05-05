@@ -19,7 +19,6 @@ const {
   findMaxY,
   joinBy,
   valueMoving,
-  crItemConf,
   crValueConf
 } = _AdapterFn.default;
 const Y = [{
@@ -308,18 +307,6 @@ describe('valueMoving', () => {
       valueTo: '0',
       date: '',
       dateTo: ''
-    });
-  });
-});
-describe('crItemConf', () => {
-  const fn = crItemConf;
-  it('should create obj with item conf', () => {
-    expect(fn({
-      title: 'title',
-      subtitle: null,
-      itemCaption: void 0
-    })).toEqual({
-      title: 'title'
     });
   });
 });

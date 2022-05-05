@@ -1,11 +1,5 @@
-
-import AdapterFn from '../AdapterFn'
+import { crItemConf, crValueConf } from '../crFn';
 import crAdapterOHLCV from '../crAdapterOHLCV'
-
-const {
-  crItemConf,
-  crValueConf
-} = AdapterFn;
 
 const _crZhConfig = (id, option, data) => {
   const { symbol, period, dataSource } = option;
@@ -31,7 +25,7 @@ const _crInfo = (title) => ({
   frequency: "Daily",
 });
 
-const toChart = crAdapterOHLCV({  
+const toChart = crAdapterOHLCV({
   crAddConfig: ({ title, option, id, data }) => ({
     info: _crInfo(title),
     zhConfig: _crZhConfig(id, option, data)

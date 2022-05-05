@@ -1,14 +1,17 @@
 import JSONstat from 'jsonstat';
 
 import AdapterFn from '../AdapterFn';
-import { crError, crId } from '../crFn';
+import {
+  crError,
+  crId,
+  crItemConf
+} from '../crFn';
 
 const {
   isYNumber,
   numberFormat,
   roundBy,
   valueMoving,
-  crItemConf,
   toUpperCaseFirst
 } = AdapterFn;
 

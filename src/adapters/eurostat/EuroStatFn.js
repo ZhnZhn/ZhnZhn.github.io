@@ -4,6 +4,7 @@ import Tooltip from '../../charts/Tooltip';
 
 import AdapterFn from '../AdapterFn'
 import { compareByDate } from '../compareByFn';
+import { crItemConf } from '../crFn';
 
 const {
   calcMinY,
@@ -15,8 +16,7 @@ const {
   findMinY,
   findMaxY,
   filterTrimZero,
-  joinBy,
-  crItemConf
+  joinBy
 } = AdapterFn;
 
 const COLOR_EU = "#0088ff"

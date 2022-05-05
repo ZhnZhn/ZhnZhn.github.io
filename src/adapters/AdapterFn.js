@@ -1,10 +1,7 @@
 import Big from 'big.js';
 
 import { toTd } from '../charts/dateFormat';
-
 import { isInArrStr } from '../utils/arrFn';
-
-
 import formatAllNumber from '../utils/formatAllNumber';
 import {
   getC,
@@ -22,7 +19,6 @@ import {
   monthIndex
 } from '../utils/DateUtils';
 import toUpperCaseFirst from '../utils/toUpperCaseFirst'
-
 import {
   roundBy,
   crValueMoving
@@ -34,15 +30,12 @@ import {
 } from '../math/seriaFn'
 
 import { Direction } from '../constants/Type'
+import {
+  getPointDate,
+  getPointValue
+} from './getterPointFn';
 
 const EMPTY = '';
-
-const ITEM_CONF_PROP_NAMES = [
- 'url', 'loadId',
- 'title', 'subtitle', 'itemCaption',
- 'seriaType',
- 'items'
-];
 
 const _isNaN = Number.isNaN
 , _isArr = Array.isArray
@@ -53,20 +46,8 @@ const _fIsNumber = (pn) => (p) => {
     && isFinite(p[pn]);
 }
 
-const _getDate = point =>_isArr(point)
-  ? point[0]
-  : (point || {}).x;
-
-const _getValue = (point) => _isArr(point)
-  ? _isNumber(point[1])
-       ? point[1]
-       : '0.0'
-  : point && _isNumber(point.y)
-      ? point.y
-      : '0.0';
-
-const _crBigValueFrom = point => Big(_getValue(point));
-const _crDmyFrom = point => mlsToDmy(_getDate(point));
+      const _crBigValueFrom = point => Big(getPointValue(point));
+const _crDmyFrom = point => mlsToDmy(getPointDate(point));
 
 const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
@@ -133,29 +114,7 @@ const AdapterFn = {
         date, dateTo
       };
   },
-
-  crItemConf: (option) => {
-    const _itemConf = {};
-    let _value;
-    ITEM_CONF_PROP_NAMES.forEach(k => {
-      _value = option[k]
-      if (_value != null) {
-        _itemConf[k] = _isArr(_value)
-           ? _value.map(obj => ({...obj}))
-           : _value
-      }
-     })
-     return _itemConf;
-  },
-
-  crValueConf: data => {
-    const _p = data[data.length-1];
-    return {
-      x: _getDate(_p),
-      y: _getValue(_p)
-    };
-  },
-
+  
   joinBy: (delimeter, ...restItems) => restItems
    .filter(Boolean)
    .join(delimeter),

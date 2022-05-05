@@ -32,4 +32,16 @@ describe('crHm', () => {
     expect((0, _crFn.crHm)(props)).toEqual(props);
   });
 });
+describe('crItemConf', () => {
+  const fn = _crFn.crItemConf;
+  it('should create obj with item conf', () => {
+    expect(fn({
+      title: 'title',
+      subtitle: null,
+      itemCaption: void 0
+    })).toEqual({
+      title: 'title'
+    });
+  });
+});
 //# sourceMappingURL=crFn.test.js.map

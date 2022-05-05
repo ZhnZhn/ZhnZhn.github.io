@@ -26,7 +26,6 @@ var _seriaFn = require("../math/seriaFn");
 var _Type = require("../constants/Type");
 
 const EMPTY = '';
-const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 
 const _isNaN = Number.isNaN,
       _isArr = Array.isArray,
@@ -108,21 +107,6 @@ const AdapterFn = {
     };
   },
 
-  crItemConf: option => {
-    const _itemConf = {};
-
-    let _value;
-
-    ITEM_CONF_PROP_NAMES.forEach(k => {
-      _value = option[k];
-
-      if (_value != null) {
-        _itemConf[k] = _isArr(_value) ? _value.map(obj => ({ ...obj
-        })) : _value;
-      }
-    });
-    return _itemConf;
-  },
   crValueConf: data => {
     const _p = data[data.length - 1];
     return {
