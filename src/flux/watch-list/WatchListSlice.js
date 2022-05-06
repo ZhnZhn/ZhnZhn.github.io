@@ -9,12 +9,26 @@ import {
   WATCH_PREV
 } from '../../constants/MsgWatch';
 
-import Logic from './Logic';
+import { findGroup } from './LogicFn';
 import {
   dragDropItem,
   dragDropList,
   dragDropGroup
 } from './WithLogicDnD';
+import {
+  addGroup,
+  renameGroup,
+  deleteGroup
+} from './WithLogicGroup';
+import {
+  createList,
+  renameList,
+  deleteList
+} from './WithLogicList';
+import {
+  addItem,
+  removeItem
+} from './WithLogicItem';
 
 const STORAGE_KEY = 'WATCH_LIST_ERC'
 , DIALOG_CAPTION ='Watch List:';
@@ -43,19 +57,19 @@ const WatchListSlice = {
     return this.watchList.groups;
   },
   getWatchListsByGroup(groupCaption){
-    const group = Logic.findGroup(this.watchList, groupCaption);
+    const group = findGroup(this.watchList, groupCaption);
     if (!group) { return []; }
     return group.lists;
   },
 
   onAddItem(item){
     this._onEditWatch(
-      Logic.addItem(this.watchList, item),
+      addItem(this.watchList, item),
       WAT.ADD_ITEM
     );
   },
   onRemoveItem(option){
-    Logic.removeItem(this.watchList, option);
+    removeItem(this.watchList, option);
     this._triggerUpdateWL()
   },
 
@@ -119,38 +133,38 @@ const WatchListSlice = {
   },
   onAddGroup(option){
     this._onEditWatch(
-      Logic.addGroup(this.watchList, option),
+      addGroup(this.watchList, option),
       WAT.ADD_GROUP
     );
   },
   onRenameGroup(option){
     this._onEditWatch(
-      Logic.renameGroup(this.watchList, option),
+      renameGroup(this.watchList, option),
       WAT.RENAME_GROUP
     );
   },
   onDeleteGroup(option){
     this._onEditWatch(
-      Logic.deleteGroup(this.watchList, option),
+      deleteGroup(this.watchList, option),
       WAT.DELETE_GROUP
     );
   },
 
   onCreateList(option){
     this._onEditWatch(
-      Logic.createList(this.watchList, option),
+      createList(this.watchList, option),
       WAT.CREATE_LIST
     );
   },
   onRenameList(option){
     this._onEditWatch(
-      Logic.renameList(this.watchList, option),
+      renameList(this.watchList, option),
       WAT.RENAME_LIST
     );
   },
   onDeleteList(option){
     this._onEditWatch(
-      Logic.deleteList(this.watchList, option),
+      deleteList(this.watchList, option),
       WAT.DELETE_LIST
     );
   }
