@@ -1,41 +1,40 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-var getValue = _fnAdapter["default"].getValue,
-    crError = _fnAdapter["default"].crError;
-var C = {
-  URL: 'https://api.twelvedata.com',
-  QUERY_TAIL: 'dp=2&order=ASC&timezone=UTC'
-};
-var _isArr = Array.isArray;
-var TwApi = {
-  getRequestUrl: function getRequestUrl(option) {
-    var apiKey = option.apiKey,
-        items = option.items,
-        symbol = getValue(items[0], {
+const URL = 'https://api.twelvedata.com',
+      QUERY_TAIL = 'dp=2&order=ASC&timezone=UTC';
+const _isArr = Array.isArray;
+const TwApi = {
+  getRequestUrl(option) {
+    const {
+      apiKey,
+      items
+    } = option,
+          symbol = (0, _fnAdapter.getValue)(items[0], {
       isUpper: true
     }),
-        interval = getValue(items[1]),
-        outputsize = getValue(items[2]);
-    return C.URL + "/time_series?symbol=" + symbol + "&apikey=" + apiKey + "&interval=" + interval + "&outputsize=" + outputsize + "&" + C.QUERY_TAIL;
+          interval = (0, _fnAdapter.getValue)(items[1]),
+          outputsize = (0, _fnAdapter.getValue)(items[2]);
+    return URL + "/time_series?symbol=" + symbol + "&apikey=" + apiKey + "&interval=" + interval + "&outputsize=" + outputsize + "&" + QUERY_TAIL;
   },
-  checkResponse: function checkResponse(json, option) {
-    var _ref = json || {},
-        values = _ref.values;
+
+  checkResponse(json, option) {
+    const {
+      values
+    } = json || {};
 
     if (_isArr(values)) {
       return true;
     }
 
-    throw crError('', json.message);
+    throw (0, _fnAdapter.crError)('', json.message);
   }
+
 };
 var _default = TwApi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=TwApi.js.map

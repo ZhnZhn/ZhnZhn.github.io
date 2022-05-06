@@ -1,15 +1,10 @@
-
-import fnAdapter from './fnAdapter'
-
-const {
+import {
   getValue,
   crError
-} = fnAdapter;
+} from './fnAdapter';
 
-const C = {
-  URL: 'https://api.twelvedata.com',
-  QUERY_TAIL: 'dp=2&order=ASC&timezone=UTC'  
-};
+const URL = 'https://api.twelvedata.com'
+, QUERY_TAIL = 'dp=2&order=ASC&timezone=UTC';
 
 const _isArr = Array.isArray;
 
@@ -19,8 +14,7 @@ const TwApi = {
     , symbol = getValue(items[0], {isUpper: true})
     , interval = getValue(items[1])
     , outputsize = getValue(items[2]);
-
-    return `${C.URL}/time_series?symbol=${symbol}&apikey=${apiKey}&interval=${interval}&outputsize=${outputsize}&${C.QUERY_TAIL}`;
+    return `${URL}/time_series?symbol=${symbol}&apikey=${apiKey}&interval=${interval}&outputsize=${outputsize}&${QUERY_TAIL}`;
   },
   checkResponse(json, option){
     const { values } = json || {};

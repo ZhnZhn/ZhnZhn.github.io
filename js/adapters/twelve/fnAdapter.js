@@ -1,40 +1,43 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.getValue = exports.crError = exports.crCaption = exports.crAddConfig = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
+exports.getValue = _AdapterFn.getValue;
+
 var _crFn = require("../crFn");
+
+exports.crError = _crFn.crError;
 
 const _joinBy = _AdapterFn.joinBy.bind(null, ': ');
 
-const fnAdapter = {
-  getValue: _AdapterFn.getValue,
-  crError: _crFn.crError,
-  crCaption: (option, _ref) => {
-    let {
-      meta
-    } = _ref;
-    const {
-      exchange,
-      symbol,
-      type,
-      currency
-    } = meta || {};
-    return {
-      title: _joinBy(exchange, symbol, type, currency)
-    };
-  },
-  crAddConfig: _ref2 => {
-    let {
-      option
-    } = _ref2;
-    return {
-      zhConfig: (0, _AdapterFn.crZhConfig)(option)
-    };
-  }
+const crCaption = (option, _ref) => {
+  let {
+    meta
+  } = _ref;
+  const {
+    exchange,
+    symbol,
+    type,
+    currency
+  } = meta || {};
+  return {
+    title: _joinBy(exchange, symbol, type, currency)
+  };
 };
-var _default = fnAdapter;
-exports.default = _default;
+
+exports.crCaption = crCaption;
+
+const crAddConfig = _ref2 => {
+  let {
+    option
+  } = _ref2;
+  return {
+    zhConfig: (0, _AdapterFn.crZhConfig)(option)
+  };
+};
+
+exports.crAddConfig = crAddConfig;
 //# sourceMappingURL=fnAdapter.js.map

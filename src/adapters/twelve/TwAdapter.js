@@ -1,10 +1,8 @@
 import crAdapterOHLCV  from '../crAdapterOHLCV';
-import fnAdapter from './fnAdapter'
-
-const {
+import {
   crAddConfig,
   crCaption
-} = fnAdapter;
+} from './fnAdapter';
 
 const _getData = ({ values }) => values
   .map(({ datetime, volume, low, high, close, open }) => ({
@@ -19,7 +17,7 @@ const _getData = ({ values }) => values
 const TwAdapter = crAdapterOHLCV({
   crCaption,
   getArr: _getData,
-  crAddConfig  
+  crAddConfig
 });
 
 export default TwAdapter
