@@ -9,26 +9,30 @@ import {
   filter
 } from './LogicFn';
 
-const WithLogicGroup = {
+export const addGroup = (
+  watchList,
+  { caption }
+) => {
+  const groups = watchList.groups;
 
-  addGroup(watchList, { caption }){
-    const groups = watchList.groups;
+  if ( isInArraySameCaption(groups, caption)){
+    return crMsgGroupExisted(caption);
+  }
 
-    if ( isInArraySameCaption(groups, caption)){
-      return crMsgGroupExisted(caption);
-    }
+  const _captionObj = caption
+    ? { caption }
+    : { caption: "Default" };
 
-    const _captionObj = (caption)
-             ? { caption }
-             : { caption: "Default" };
+  watchList.groups = getArrayWithObj(groups, _captionObj);
+  return { isDone: true};
+}
 
-    watchList.groups = getArrayWithObj(groups, _captionObj);
-    return { isDone: true};
-  },
-
-  renameGroup(watchList, {captionFrom, captionTo}){
+export const renameGroup = (
+  watchList,
+  {captionFrom, captionTo}
+) => {
     const groups = watchList.groups
-        , groupIndex = findIndex(groups, captionFrom);
+    , groupIndex = findIndex(groups, captionFrom);
 
     if (groupIndex === -1){
       return crMsgNotFound('group', captionFrom);
@@ -39,13 +43,12 @@ const WithLogicGroup = {
 
     watchList.groups = getArrayWithRename(groups, groupIndex, captionTo)
     return { isDone: true };
-  },
+}
 
-  deleteGroup(watchList, {caption}){
-    watchList.groups = filter(watchList.groups, caption);
-    return { isDone: true };
-  }
-
-};
-
-export default WithLogicGroup
+export const deleteGroup = (
+  watchList,
+  {caption}
+) => {
+  watchList.groups = filter(watchList.groups, caption);
+  return { isDone: true };
+}
