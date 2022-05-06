@@ -1,71 +1,64 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-var crError = _fnAdapter["default"].crError,
-    getValue = _fnAdapter["default"].getValue;
-var C = {
-  URL: 'https://min-api.cryptocompare.com',
-  //HD: 'data/histoday',
-  QUERY_TAIL: 'extraParams=webapperc',
-  DF_ID: 'BTC',
-  DF_E: 'CCCAGG',
-  DF_INTERVAL: 'histoday'
-};
+const URL = 'https://min-api.cryptocompare.com' //, HD: 'data/histoday'
+,
+      QUERY_TAIL = 'extraParams=webapperc',
+      DF_ID = 'BTC',
+      DF_E = 'CCCAGG',
+      DF_INTERVAL = 'histoday';
 
-var _assign = Object.assign,
-    _fGetParam = function _fGetParam(index, dfValue) {
-  return function (items) {
-    return getValue(items[index], {
-      dfValue: dfValue
-    });
-  };
-},
-    _getFsym = _fGetParam(0, C.DF_ID),
-    _getE = _fGetParam(1, C.DF_E),
-    _getInterval = _fGetParam(2, C.DF_INTERVAL);
+const _fGetParam = (index, dfValue) => items => (0, _fnAdapter.getValue)(items[index], {
+  dfValue
+}),
+      _getFsym = _fGetParam(0, DF_ID),
+      _getE = _fGetParam(1, DF_E),
+      _getInterval = _fGetParam(2, DF_INTERVAL);
 
-var _hdUrl = function _hdUrl(option) {
-  var _option$items = option.items,
-      items = _option$items === void 0 ? [] : _option$items,
-      value = _getFsym(items),
-      exchange = _getE(items),
-      interval = _getInterval(items),
-      tsym = exchange === 'Binance' ? 'USDT' : 'USD';
+const _hdUrl = option => {
+  const {
+    items = []
+  } = option,
+        value = _getFsym(items),
+        exchange = _getE(items),
+        interval = _getInterval(items),
+        tsym = exchange === 'Binance' ? 'USDT' : 'USD';
 
-  _assign(option, {
-    value: value,
-    exchange: exchange,
-    tsym: tsym
+  (0, _fnAdapter._assign)(option, {
+    value,
+    exchange,
+    tsym
   });
-
-  return C.URL + "/data/" + interval + "?fsym=" + value + "&e=" + exchange + "&tsym=" + tsym + "&limit=600&" + C.QUERY_TAIL;
+  return URL + "/data/" + interval + "?fsym=" + value + "&e=" + exchange + "&tsym=" + tsym + "&limit=600&" + QUERY_TAIL;
 };
 
-var _rUrl = {
+const _rUrl = {
   DF: _hdUrl,
   HD: _hdUrl
 };
-var CrcApi = {
-  getRequestUrl: function getRequestUrl(option) {
-    var dfSubId = option.dfSubId,
-        _crUrl = _rUrl[dfSubId] || _rUrl.DF;
+const CrcApi = {
+  getRequestUrl(option) {
+    const {
+      dfSubId
+    } = option,
+          _crUrl = _rUrl[dfSubId] || _rUrl.DF;
 
     return _crUrl(option);
   },
-  checkResponse: function checkResponse(json) {
+
+  checkResponse(json) {
     if (!json || json.Response === 'Error') {
-      throw crError('', json && json.Message);
+      throw (0, _fnAdapter.crError)('', json && json.Message);
     }
 
     return true;
   }
+
 };
 var _default = CrcApi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=CrcApi.js.map

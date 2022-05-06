@@ -1,25 +1,25 @@
+export { getValue } from '../AdapterFn';
+export { crError } from '../crFn';
+
 import {
-  getValue,
-  roundBy
+  roundBy,
+  crZhConfig
 } from '../AdapterFn';
-import { crError } from '../crFn';
 import { crVolumePoint } from '../pointFn';
 
-const _crZhConfig = ({
-  itemCaption,
-  dataSource,
-  _itemKey,
-  value,
-  linkFn
-}) => ({
-  id: _itemKey, key: _itemKey,
-  itemCaption,
-  linkFn,
-  item: value,
-  dataSource
-});
+export const _assign = Object.assign
 
-const _crInfo = ({ itemCaption }) => ({
+const _crZhConfig = (option) => {
+  const { linkFn, value } = option;
+  return _assign(crZhConfig(option), {
+    linkFn,
+    item: value
+  });
+}
+
+const _crInfo = ({
+  itemCaption
+}) => ({
   name: itemCaption
 });
 
@@ -36,11 +36,16 @@ const _addPointTo = (arr, d, value) => {
     arr.push([d, value ])
   }
 };
-const _addColumnPointTo = (arr, d, p, volume) => {
+const _addColumnPointTo = (
+  arr,
+  date,
+  p,
+  volume
+) => {
   if (_isNumber(volume)){
     arr.push(
       crVolumePoint({
-         date: d,
+         date: date,
          open: p.open,
          close: p.close,
          volume: volume,
@@ -52,9 +57,14 @@ const _addColumnPointTo = (arr, d, p, volume) => {
     )
   }
 };
-const _addHLPointTo = (arr, d, p) => {
+
+const _addHLPointTo = (
+  arr,
+  date,
+  p
+) => {
     arr.push({
-      x: d,
+      x: date,
       high: roundBy(p.high - p.close, 2),
       low: roundBy(p.low - p.close, 2),
       open: p.open,
@@ -64,43 +74,41 @@ const _addHLPointTo = (arr, d, p) => {
     })
 };
 
-const fnAdapter = {
-  crError,
-  getValue,
+export const crData = (
+  json
+) => {
+  const data = []
+  , dVolume = []
+  , dColumn = []
+  , dToVolume = []
+  , dHL = [];
+  json.Data.forEach(p => {
+    if (_isNumber(p.time)) {
+      const _date = p.time*1000;
+      _addPointTo(data, _date, p.close)
+      _addPointTo(dVolume, _date, p.volumefrom)
+      _addPointTo(dToVolume, _date, p.volumeto)
 
-  crData: (json) => {
-    const data = []
-        , dVolume = []
-        , dColumn = []
-        , dToVolume = []
-        , dHL = [];
-    json.Data.forEach(p => {
-      if (_isNumber(p.time)) {
-        const _date = p.time*1000;
-        _addPointTo(data, _date, p.close)
-        _addPointTo(dVolume, _date, p.volumefrom)
-        _addPointTo(dToVolume, _date, p.volumeto)
-
-        if (_isHLOC(p)) {
-          _addColumnPointTo(dColumn,
-            _date, p, p.volumefrom
-          )
-          _addHLPointTo(dHL, _date, p)
-        }
+      if (_isHLOC(p)) {
+        _addColumnPointTo(dColumn,
+          _date, p, p.volumefrom
+        )
+        _addHLPointTo(dHL, _date, p)
       }
-    })
-    return {
-      data,
-      dVolume, dColumn,
-      dToVolume,
-      dHL
-    };
-  },
-
-  crConfOption: (option) => ({
-    zhConfig: _crZhConfig(option),
-    info: _crInfo(option)
+    }
   })
-};
+  return {
+    data,
+    dVolume,
+    dColumn,
+    dToVolume,
+    dHL
+  };
+}
 
-export default fnAdapter
+export const crConfOption = (
+  option
+) => ({
+  zhConfig: _crZhConfig(option),
+  info: _crInfo(option)
+})

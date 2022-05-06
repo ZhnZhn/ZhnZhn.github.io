@@ -7,17 +7,10 @@ exports.default = void 0;
 
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
-
-const {
-  crData,
-  crConfOption,
-  getValue
-} = _fnAdapter.default,
-      _assign = Object.assign;
+var _fnAdapter = require("./fnAdapter");
 
 const _crTitle = (title, items) => {
-  const _time = getValue(items[2]) === 'histoday' ? '00:00 GMT+0' : 'GMT+0';
+  const _time = (0, _fnAdapter.getValue)(items[2]) === 'histoday' ? '00:00 GMT+0' : 'GMT+0';
 
   return title + ": Values on " + _time;
 };
@@ -68,8 +61,7 @@ const trOption = (option, json) => {
     title,
     items
   } = option;
-
-  _assign(option, {
+  (0, _fnAdapter._assign)(option, {
     itemCaption: title,
     title: _crTitle(title, items),
     subtitle: _crSubtitle(json, option)
@@ -94,8 +86,8 @@ const addConfig = (builder, json, option, data) => {
 };
 
 const toHdConfig = (0, _crAdapterType.default)({
-  crData,
-  crConfOption,
+  crData: _fnAdapter.crData,
+  crConfOption: _fnAdapter.crConfOption,
   trOption,
   addConfig
 });

@@ -1,21 +1,20 @@
-import fnAdapter from './fnAdapter'
+import {
+  _assign,
+  crError,
+  getValue
+} from './fnAdapter';
 
-const { crError, getValue } = fnAdapter;
+const URL = 'https://min-api.cryptocompare.com'
+//, HD: 'data/histoday'
+, QUERY_TAIL = 'extraParams=webapperc'
+, DF_ID = 'BTC'
+, DF_E = 'CCCAGG'
+, DF_INTERVAL = 'histoday';
 
-const C = {
-  URL: 'https://min-api.cryptocompare.com',
-  //HD: 'data/histoday',
-  QUERY_TAIL: 'extraParams=webapperc',
-  DF_ID: 'BTC',
-  DF_E: 'CCCAGG',
-  DF_INTERVAL: 'histoday'
-};
-
-const _assign = Object.assign
-, _fGetParam = (index, dfValue) => items => getValue(items[index], { dfValue })
-, _getFsym = _fGetParam(0, C.DF_ID)
-, _getE = _fGetParam(1, C.DF_E)
-, _getInterval = _fGetParam(2, C.DF_INTERVAL)
+const _fGetParam = (index, dfValue) => items => getValue(items[index], { dfValue })
+, _getFsym = _fGetParam(0, DF_ID)
+, _getE = _fGetParam(1, DF_E)
+, _getInterval = _fGetParam(2, DF_INTERVAL)
 
 const _hdUrl = (option) => {
   const { items=[] } = option
@@ -24,7 +23,7 @@ const _hdUrl = (option) => {
   , interval = _getInterval(items)
   , tsym = exchange === 'Binance' ? 'USDT' : 'USD';
   _assign(option, { value, exchange, tsym })
-  return `${C.URL}/data/${interval}?fsym=${value}&e=${exchange}&tsym=${tsym}&limit=600&${C.QUERY_TAIL}`;
+  return `${URL}/data/${interval}?fsym=${value}&e=${exchange}&tsym=${tsym}&limit=600&${QUERY_TAIL}`;
 };
 
 
@@ -43,7 +42,7 @@ const CrcApi = {
     if (!json || json.Response === 'Error') {
       throw crError('', json && json.Message);
     }
-    return true;              
+    return true;
   }
 };
 

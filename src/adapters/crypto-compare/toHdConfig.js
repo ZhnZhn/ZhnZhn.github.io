@@ -1,12 +1,10 @@
-import crAdapterType1 from '../crAdapterType1'
-import fnAdapter from './fnAdapter'
-
-const {
+import crAdapterType1 from '../crAdapterType1';
+import {
+  _assign,
   crData,
   crConfOption,
   getValue
-} = fnAdapter
-, _assign = Object.assign;
+} from './fnAdapter';
 
 const _crTitle = (title, items) => {
  const _time = getValue(items[2]) === 'histoday'
