@@ -4,14 +4,15 @@ import { BAT_UPDATE_WATCH_BROWSER } from '../actions/BrowserActions';
 import { WatchActionTypes as WAT } from '../actions/WatchActions';
 import DF_WATCH_LIST from '../../constants/WatchDefault';
 import { ModalDialog }  from '../../constants/Type';
-import Msg from '../../constants/MsgWatch';
+import {
+  WATCH_SAVED,
+  WATCH_PREV
+} from '../../constants/MsgWatch';
 
 import Logic from './Logic';
 
-const { WATCH_SAVED, WATCH_PREV } = Msg;
-
 const STORAGE_KEY = 'WATCH_LIST_ERC'
-    , DIALOG_CAPTION ='Watch List:';
+, DIALOG_CAPTION ='Watch List:';
 
 const WatchListSlice = {
 

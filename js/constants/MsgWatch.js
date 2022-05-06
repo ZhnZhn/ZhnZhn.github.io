@@ -1,37 +1,47 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var MsgWatch = {
-  WATCH_SAVED: 'Watch List has been saved.',
-  WATCH_PREV: 'Watch List has not been edited\nfrom previous save.',
-  notFoundItem: function notFoundItem(itemType, captionGroup) {
-    return "The " + itemType + " witn name " + captionGroup + " not found.";
-  },
-  groupExisted: function groupExisted(caption) {
-    return "Group with name " + caption + " is already existed.";
-  },
-  listExisted: function listExisted(captionList, captionGroup) {
-    return "List with name " + captionList + "\n      In Group " + captionGroup + " is already existed.";
-  },
-  itemExisted: function itemExisted(caption, captionList) {
-    return "Item with name " + caption + "\n      In List " + captionList + " is already existed.";
-  },
-  emptyName: function emptyName(item) {
-    return item + " name can not be empty.";
-  },
-  notSelected: function notSelected(item) {
-    return item + " is not selected.";
-  },
-  ALERT_DND_ITEM: {
-    alertCaption: 'Drag Drop Item',
-    alertDescr: 'Item in List already has been existed.'
-  },
-  ALERT_DND_LIST: {
-    alertCaption: 'Drag Drop List',
-    alertDescr: 'List in Group already has been existed.'
-  }
-};
-var _default = MsgWatch;
-exports["default"] = _default;
+exports.notSelected = exports.notFoundItem = exports.listExisted = exports.itemExisted = exports.groupExisted = exports.emptyName = exports.WATCH_SAVED = exports.WATCH_PREV = exports.ALERT_DND_LIST = exports.ALERT_DND_ITEM = void 0;
+const WATCH_SAVED = 'Watch List has been saved.';
+exports.WATCH_SAVED = WATCH_SAVED;
+const WATCH_PREV = 'Watch List has not been edited\nfrom previous save.';
+exports.WATCH_PREV = WATCH_PREV;
+const _IS_ALREADY_EXISTED_ = 'is already existed.';
+
+const notFoundItem = (itemType, captionGroup) => "The " + itemType + " witn name " + captionGroup + " not found.";
+
+exports.notFoundItem = notFoundItem;
+
+const groupExisted = caption => "Group with name " + caption + " " + _IS_ALREADY_EXISTED_;
+
+exports.groupExisted = groupExisted;
+
+const listExisted = (captionList, captionGroup) => "List with name " + captionList + " in Group " + captionGroup + " " + _IS_ALREADY_EXISTED_;
+
+exports.listExisted = listExisted;
+
+const itemExisted = (caption, captionList) => "Item with name " + caption + " in List " + captionList + " " + _IS_ALREADY_EXISTED_;
+
+exports.itemExisted = itemExisted;
+
+const emptyName = item => item + " name can not be empty.";
+
+exports.emptyName = emptyName;
+
+const notSelected = item => item + " is not selected.";
+
+exports.notSelected = notSelected;
+
+const _crDnDAlertConfig = (caption, descr) => ({
+  alertCaption: "Drag Drop " + caption,
+  alertDescr: descr + " " + _IS_ALREADY_EXISTED_
+});
+
+const ALERT_DND_ITEM = _crDnDAlertConfig('Item', 'Item in List');
+
+exports.ALERT_DND_ITEM = ALERT_DND_ITEM;
+
+const ALERT_DND_LIST = _crDnDAlertConfig('List', 'List in Group');
+
+exports.ALERT_DND_LIST = ALERT_DND_LIST;
 //# sourceMappingURL=MsgWatch.js.map

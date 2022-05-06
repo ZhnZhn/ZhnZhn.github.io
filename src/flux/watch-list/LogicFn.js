@@ -1,4 +1,11 @@
-import MsgWatch from '../../constants/MsgWatch';
+import {
+  notFoundItem,
+  groupExisted,
+  listExisted,
+  itemExisted,
+  ALERT_DND_LIST,
+  ALERT_DND_ITEM
+} from '../../constants/MsgWatch';
 
 import {
   arrFactoryFindIndexByProp,
@@ -14,18 +21,9 @@ import {
 
 import factoryFindInPropArrayByProp from '../../utils/factoryFindInPropArrayByProp';
 
-const  {
-  notFoundItem,
-  groupExisted,
-  listExisted,
-  itemExisted,
-  ALERT_DND_LIST,
-  ALERT_DND_ITEM
-} = MsgWatch;
-
 const CAPTION = 'caption'
-    , GROUPS = 'groups'
-    , LISTS = 'lists' ;
+, GROUPS = 'groups'
+, LISTS = 'lists' ;
 
 const LogicFn = {
 

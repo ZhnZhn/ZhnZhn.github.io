@@ -2,7 +2,9 @@ import { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
-import Msg from '../../constants/MsgWatch';
+import {
+  notSelected
+} from '../../constants/MsgWatch';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import Button from './Button';
@@ -11,25 +13,13 @@ import D from '../dialogs/DialogCell'
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad';
 
-const { addItem } = Actions;
-const actionCompleted = WAT.EDIT_WATCH_COMPLETED
-    , actionFailed =  WAT.EDIT_WATCH_FAILED
-    , forActionType = WAT.ADD_ITEM;
-const { notSelected } = Msg;
-
-const S = {
-  DIALOG: {
-    width: 300
-  },
-  ITEM_CAPTION: {
-    width: 100
-  },
-  CAPTION: {
-    width: 70
-  }
-};
-
-const SELECT_WIDTH = "216";
+const { addItem } = Actions
+, actionCompleted = WAT.EDIT_WATCH_COMPLETED
+, actionFailed =  WAT.EDIT_WATCH_FAILED
+, forActionType = WAT.ADD_ITEM
+, S_DIALOG = { width: 300 }
+, S_CAPTION = { width: 70 }
+, SELECT_WIDTH = "216";
 
 @withValidationLoad
 class AddToWatchDialog extends Component {
@@ -163,27 +153,27 @@ class AddToWatchDialog extends Component {
 
     return (
       <ModalDialog
-         style={S.DIALOG}
+         style={S_DIALOG}
          caption="Add To Watch List"
          isShow={isShow}
          commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
         <D.Row.Text
-          styleCaption={S.CAPTION}
+          styleCaption={S_CAPTION}
           caption="Item:"
           text={caption}
         />
         <D.RowInputSelect
           caption="Group"
-          captionStyle={S.CAPTION}
+          captionStyle={S_CAPTION}
           width={SELECT_WIDTH}
           options={groupOptions}
           onSelect={this._handleSelectGroup}
         />
         <D.RowInputSelect
           caption="List"
-          captionStyle={S.CAPTION}
+          captionStyle={S_CAPTION}
           width={SELECT_WIDTH}
           onSelect={this._handleSelectList}
           options={listOptions}

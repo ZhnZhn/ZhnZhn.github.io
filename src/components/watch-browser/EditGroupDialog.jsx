@@ -3,7 +3,10 @@ import { memo } from 'react';
 
 import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
 
-import MsgWatch from '../../constants/MsgWatch';
+import {
+  notSelected,
+  emptyName
+} from '../../constants/MsgWatch';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import TabPane from '../zhn-tab/TabPane';
@@ -17,7 +20,6 @@ const {
   EDIT_WATCH_COMPLETED, EDIT_WATCH_FAILED,
   ADD_GROUP, RENAME_GROUP, DELETE_GROUP
 } = WAT;
-const { notSelected, emptyName } = MsgWatch;
 
 const _areEqual = (prevProps, nextProps) => prevProps
   .isShow === nextProps.isShow;

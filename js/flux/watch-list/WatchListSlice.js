@@ -15,14 +15,10 @@ var _WatchDefault = _interopRequireDefault(require("../../constants/WatchDefault
 
 var _Type = require("../../constants/Type");
 
-var _MsgWatch = _interopRequireDefault(require("../../constants/MsgWatch"));
+var _MsgWatch = require("../../constants/MsgWatch");
 
 var _Logic = _interopRequireDefault(require("./Logic"));
 
-const {
-  WATCH_SAVED,
-  WATCH_PREV
-} = _MsgWatch.default;
 const STORAGE_KEY = 'WATCH_LIST_ERC',
       DIALOG_CAPTION = 'Watch List:';
 const WatchListSlice = {
@@ -98,7 +94,7 @@ const WatchListSlice = {
         this.isWatchEdited = false;
         this.onShowModalDialog(_Type.ModalDialog.INFO, {
           caption: DIALOG_CAPTION,
-          descr: WATCH_SAVED
+          descr: _MsgWatch.WATCH_SAVED
         });
       }).catch(error => {
         console.log(error);
@@ -106,7 +102,7 @@ const WatchListSlice = {
     } else {
       this.onShowModalDialog(_Type.ModalDialog.INFO, {
         caption: DIALOG_CAPTION,
-        descr: WATCH_PREV
+        descr: _MsgWatch.WATCH_PREV
       });
     }
   },

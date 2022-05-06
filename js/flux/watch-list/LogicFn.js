@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _MsgWatch = _interopRequireDefault(require("../../constants/MsgWatch"));
+var _MsgWatch = require("../../constants/MsgWatch");
 
 var _arrFn = require("../../utils/arrFn");
 
@@ -13,14 +13,6 @@ var _imArrFn = require("../../utils/imArrFn");
 
 var _factoryFindInPropArrayByProp = _interopRequireDefault(require("../../utils/factoryFindInPropArrayByProp"));
 
-const {
-  notFoundItem,
-  groupExisted,
-  listExisted,
-  itemExisted,
-  ALERT_DND_LIST,
-  ALERT_DND_ITEM
-} = _MsgWatch.default;
 const CAPTION = 'caption',
       GROUPS = 'groups',
       LISTS = 'lists';
@@ -28,28 +20,28 @@ const LogicFn = {
   crMsgNotFound(itemType, name) {
     return {
       isDone: false,
-      message: notFoundItem(itemType, name)
+      message: (0, _MsgWatch.notFoundItem)(itemType, name)
     };
   },
 
   crMsgGroupExisted(caption) {
     return {
       isDone: false,
-      message: groupExisted(caption)
+      message: (0, _MsgWatch.groupExisted)(caption)
     };
   },
 
   crMsgListExisted(captionList, captionGroup) {
     return {
       isDone: false,
-      message: listExisted(captionList, captionGroup)
+      message: (0, _MsgWatch.listExisted)(captionList, captionGroup)
     };
   },
 
   crMsgItemExisted(caption, captionList) {
     return {
       isDone: false,
-      message: itemExisted(caption, captionList)
+      message: (0, _MsgWatch.itemExisted)(caption, captionList)
     };
   },
 
@@ -58,7 +50,7 @@ const LogicFn = {
     return {
       isDone: false,
       alertItemId: dropId + ":" + dragId,
-      ...ALERT_DND_ITEM
+      ..._MsgWatch.ALERT_DND_ITEM
     };
   },
 
@@ -66,7 +58,7 @@ const LogicFn = {
     return {
       isDone: false,
       alertItemId: dropGroupCaption + ":" + dragListCaption,
-      ...ALERT_DND_LIST
+      ..._MsgWatch.ALERT_DND_LIST
     };
   },
 

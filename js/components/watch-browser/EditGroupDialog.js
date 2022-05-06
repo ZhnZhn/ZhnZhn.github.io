@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _WatchActions = _interopRequireWildcard(require("../../flux/actions/WatchActions"));
 
-var _MsgWatch = _interopRequireDefault(require("../../constants/MsgWatch"));
+var _MsgWatch = require("../../constants/MsgWatch");
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -42,60 +42,59 @@ const {
   RENAME_GROUP,
   DELETE_GROUP
 } = _WatchActions.WatchActionTypes;
-const {
-  notSelected,
-  emptyName
-} = _MsgWatch.default;
 
 const _areEqual = (prevProps, nextProps) => prevProps.isShow === nextProps.isShow;
 
-const EditGroupDialog = /*#__PURE__*/(0, _react.memo)(({
-  isShow,
-  store,
-  onClose
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
-  caption: "Watch Groups Edit",
-  isShow: isShow,
-  isWithButton: false,
-  onClose: onClose,
-  children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
-    width: 380,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
-      title: "Create",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupAddPane.default, {
-        store: store,
-        actionCompleted: EDIT_WATCH_COMPLETED,
-        actionFailed: EDIT_WATCH_FAILED,
-        forActionType: ADD_GROUP,
-        msgOnIsEmptyName: emptyName,
-        onCreate: addGroup,
-        onClose: onClose
-      })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
-      title: "Rename",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupEditPane.default, {
-        store: store,
-        actionCompleted: EDIT_WATCH_COMPLETED,
-        actionFailed: EDIT_WATCH_FAILED,
-        forActionType: RENAME_GROUP,
-        msgOnNotSelect: notSelected,
-        msgOnIsEmptyName: emptyName,
-        onRename: renameGroup,
-        onClose: onClose
-      })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
-      title: "Delete",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupDeletePane.default, {
-        store: store,
-        actionCompleted: EDIT_WATCH_COMPLETED,
-        forActionType: DELETE_GROUP,
-        msgOnNotSelect: notSelected,
-        onDelete: deleteGroup,
-        onClose: onClose
-      })
-    })]
-  })
-}), _areEqual);
+const EditGroupDialog = /*#__PURE__*/(0, _react.memo)(_ref => {
+  let {
+    isShow,
+    store,
+    onClose
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
+    caption: "Watch Groups Edit",
+    isShow: isShow,
+    isWithButton: false,
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+      width: 380,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
+        title: "Create",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupAddPane.default, {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          actionFailed: EDIT_WATCH_FAILED,
+          forActionType: ADD_GROUP,
+          msgOnIsEmptyName: _MsgWatch.emptyName,
+          onCreate: addGroup,
+          onClose: onClose
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
+        title: "Rename",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupEditPane.default, {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          actionFailed: EDIT_WATCH_FAILED,
+          forActionType: RENAME_GROUP,
+          msgOnNotSelect: _MsgWatch.notSelected,
+          msgOnIsEmptyName: _MsgWatch.emptyName,
+          onRename: renameGroup,
+          onClose: onClose
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
+        title: "Delete",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupDeletePane.default, {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          forActionType: DELETE_GROUP,
+          msgOnNotSelect: _MsgWatch.notSelected,
+          onDelete: deleteGroup,
+          onClose: onClose
+        })
+      })]
+    })
+  });
+}, _areEqual);
 /*
 EditGroupDialog.propTypes = {
   isShow: PropTypes.bool,

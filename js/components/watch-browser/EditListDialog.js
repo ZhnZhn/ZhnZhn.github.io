@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _WatchActions = _interopRequireWildcard(require("../../flux/actions/WatchActions"));
 
-var _MsgWatch = _interopRequireDefault(require("../../constants/MsgWatch"));
+var _MsgWatch = require("../../constants/MsgWatch");
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -42,62 +42,61 @@ const {
   RENAME_LIST,
   DELETE_LIST
 } = _WatchActions.WatchActionTypes;
-const {
-  notSelected,
-  emptyName
-} = _MsgWatch.default;
 
 const _areEqual = (prevProps, nextProps) => prevProps.isShow === nextProps.isShow;
 
-const EditListDialog = /*#__PURE__*/(0, _react.memo)(({
-  isShow,
-  store,
-  onClose
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
-  caption: "Watch Lists Edit",
-  isShow: isShow,
-  isWithButton: false,
-  onClose: onClose,
-  children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
-    width: 380,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
-      title: "Create",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListCreatePane.default, {
-        store: store,
-        actionCompleted: EDIT_WATCH_COMPLETED,
-        actionFailed: EDIT_WATCH_FAILED,
-        forActionType: CREATE_LIST,
-        msgOnNotSelect: notSelected,
-        msgOnIsEmptyName: emptyName,
-        onCreate: createList,
-        onClose: onClose
-      })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
-      title: "Rename",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListEditPane.default, {
-        store: store,
-        actionCompleted: EDIT_WATCH_COMPLETED,
-        actionFailed: EDIT_WATCH_FAILED,
-        forActionType: RENAME_LIST,
-        msgOnNotSelect: notSelected,
-        msgOnIsEmptyName: emptyName,
-        onRename: renameList,
-        onClose: onClose
-      })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
-      title: "Delete",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListDeletePane.default, {
-        store: store,
-        actionCompleted: EDIT_WATCH_COMPLETED,
-        actionFailed: EDIT_WATCH_FAILED,
-        forActionType: DELETE_LIST,
-        msgOnNotSelect: notSelected,
-        onDelete: deleteList,
-        onClose: onClose
-      })
-    })]
-  })
-}), _areEqual);
+const EditListDialog = /*#__PURE__*/(0, _react.memo)(_ref => {
+  let {
+    isShow,
+    store,
+    onClose
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
+    caption: "Watch Lists Edit",
+    isShow: isShow,
+    isWithButton: false,
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+      width: 380,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
+        title: "Create",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListCreatePane.default, {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          actionFailed: EDIT_WATCH_FAILED,
+          forActionType: CREATE_LIST,
+          msgOnNotSelect: _MsgWatch.notSelected,
+          msgOnIsEmptyName: _MsgWatch.emptyName,
+          onCreate: createList,
+          onClose: onClose
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
+        title: "Rename",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListEditPane.default, {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          actionFailed: EDIT_WATCH_FAILED,
+          forActionType: RENAME_LIST,
+          msgOnNotSelect: _MsgWatch.notSelected,
+          msgOnIsEmptyName: _MsgWatch.emptyName,
+          onRename: renameList,
+          onClose: onClose
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
+        title: "Delete",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListDeletePane.default, {
+          store: store,
+          actionCompleted: EDIT_WATCH_COMPLETED,
+          actionFailed: EDIT_WATCH_FAILED,
+          forActionType: DELETE_LIST,
+          msgOnNotSelect: _MsgWatch.notSelected,
+          onDelete: deleteList,
+          onClose: onClose
+        })
+      })]
+    })
+  });
+}, _areEqual);
 /*
 EditListDialog.propTypes = {
   isShow : PropTypes.bool,
