@@ -1,17 +1,14 @@
-
-const P = {
-  HIGH : '#4CAF50',
-  LOW : '#F44336',
-  GREE: '#4da54c',
-  ORANGE: '#e77f32',
-  PURPLE: '#9f588e',
-  YELLOW: '#f1d600'
-};
+const P_HIGH = '#4caf50'
+, P_LOW = '#f44336'
+, P_GREEN = '#4da54c'
+, P_ORANGE = '#e77f32'
+, P_PURPLE = '#9f588e'
+, P_YELLOW = '#f1d600';
 
 const COLOR = {
-  BLUE : "#2f7ed8", // #7cb5ec
+  BLUE : "#2f7ed8",
   GREEN : "#80c040",
-  RED : "#F44336",
+  RED : "#f44336",
   WHITE : "white",
   GRAY : '#607d8b',
 
@@ -27,8 +24,7 @@ const COLOR = {
   TITLE_SHOW : '#a487d4',
   ITEM : 'black',
   BG_ITEM_HOVER : '#4572a5',
-  HOVER: P.YELLOW,
-
+  HOVER: P_YELLOW,
 
   CHART : '#4d4d4d',
   PLOT : '#4d4d4d',
@@ -38,8 +34,6 @@ const COLOR = {
   //bottomcollor for area chart fill light ui theme
   PLOT_G3 : "rgba(254, 256, 256, 0)",
 
-
-  //CHART_TITLE : '#a487d4',
   CHART_TITLE : 'black',
   CHART_SUBTITLE : 'black',
   METRIC_TITLE : '#a487d4',
@@ -55,28 +49,22 @@ const COLOR = {
 
   TOOLTIP : 'rgba(0,0,0, 0.5)',
 
+  HIGH : P_HIGH,
+  LOW : P_LOW,
 
-  //HIGH : '#4caf50',
-  HIGH : P.HIGH,
-  //LOW  : '#ed5813',
-  //LOW : '#f44336',
-  LOW : P.LOW,
-
-  //EX_DIVIDEND : '#4caf50',
-  EX_DIVIDEND : P.HIGH,
+  EX_DIVIDEND : P_HIGH,
   SPLIT_RATIO : '#f7a35c',
 
   MONO_BASE1 : '#7cb5ec',
   MONO_BASE2 : '#90ed7d',
 
-  MARKER_HOVER : P.YELLOW,
-  CROSSHAIR : P.YELLOW,
-  HALO_BASE : P.YELLOW,
+  MARKER_HOVER : P_YELLOW,
+  CROSSHAIR : P_YELLOW,
+  HALO_BASE : P_YELLOW,
 
-
-  AREA_HOVER_LINE : P.YELLOW,
+  AREA_HOVER_LINE : P_YELLOW,
   AREA_MARKER_LINE : '#a487d4',
-  COLUMN_HOVER_LINE : P.YELLOW,
+  COLUMN_HOVER_LINE : P_YELLOW,
   COLUMN_MARKER_LINE : '#a487d4',
 
   LEGEND_ITEM : 'black',
@@ -87,24 +75,19 @@ const COLOR = {
   MARKER_HOVER_LINE : '#ff0',
 
   S_OPEN : '#90ed7d',
-  //S_HIGH : '#4caf50',
-  S_HIGH : P.HIGH,
-  //S_LOW  : '#ed5813',
-  //S_LOW : '#f44336',
-  S_LOW : P.LOW,
+  S_HIGH : P_HIGH,
+  S_LOW : P_LOW,
   S_VOLUME : '#f7a35c',
   S_ADJ_CLOSE : '#f15c80',
   S_OPEN_INTEREST : '#8085e9',
   S_TURNOVER : '#6b8f4b',
   S_PRE_SETTLE : '#e77f32',
   S_CLOSE : 'black',
-  //S_STOCK_CLOSE: '#2f7ed8',
   S_STOCK_CLOSE: '#7cb5ec',
   S_TRADES : 'black',
-  S_BALANCE : P.PURPLE,
-  S_IMPORTS : P.GREEN,
-  S_EXPORTS : P.ORANGE
-
+  S_BALANCE : P_PURPLE,
+  S_IMPORTS : P_GREEN,
+  S_EXPORTS : P_ORANGE
 };
 
 export default COLOR
