@@ -3,21 +3,20 @@ import JSONstat from 'jsonstat';
 import Chart from '../../charts/Chart';
 import Builder from '../../charts/ConfigBuilder';
 import Tooltip from '../../charts/Tooltip';
-
-import fnAdapter from './fnAdapter';
-
-const {
+import {
   crTitle,
-  crTid, crChartOption,
-  numberFormat, roundBy
-} = fnAdapter;
+  crTid,
+  crChartOption,
+  numberFormat,
+  roundBy
+} from './fnAdapter';
 
 const NUMBER_STYLE = 'style="color:#333;"';
+const _isArr = Array.isArray;
 const _crPointName = (label, value) => {
   return `${label} <br/>
   <span ${NUMBER_STYLE}>${numberFormat(value)}</span>`;
 };
-const _isArr = Array.isArray;
 
 const _fCrTreeMapPoint = (c, title) => {
   return (v, i) => {

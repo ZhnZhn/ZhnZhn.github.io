@@ -13,15 +13,8 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-const {
-  isYNumber,
-  crTitle,
-  crTid,
-  crChartOption,
-  toUpperCaseFirst
-} = _fnAdapter.default;
 const _assign = Object.assign,
       _isArr = Array.isArray;
 const COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
@@ -40,7 +33,7 @@ const _fIsCategoryPoint = dfT => p => {
     return false;
   }
 
-  return isYNumber(p) && p.y !== 0;
+  return (0, _fnAdapter.isYNumber)(p) && p.y !== 0;
 };
 
 const _compareByY = (a, b) => b.y - a.y;
@@ -130,7 +123,7 @@ const _crSlice = (json, timeId, time, itemSlice, dfTSlice) => ({
   ...dfTSlice
 });
 
-const _crTitle = (dfTitle, option) => dfTitle ? dfTitle + ": All Items" : crTitle(option);
+const _crTitle = (dfTitle, option) => dfTitle ? dfTitle + ": All Items" : (0, _fnAdapter.crTitle)(option);
 
 const _crSubtitle = (items, category) => {
   const _arr = [];
@@ -141,14 +134,18 @@ const _crSubtitle = (items, category) => {
     } = item || {};
 
     if (slice && !slice[category] && caption) {
-      _arr.push(toUpperCaseFirst(caption));
+      _arr.push((0, _fnAdapter.toUpperCaseFirst)(caption));
     }
   });
   return _arr.join(": ");
 };
 
 const toColumn = {
-  fCrConfig: (param = {}) => {
+  fCrConfig: function (param) {
+    if (param === void 0) {
+      param = {};
+    }
+
     return (json, option) => toColumn.crConfig(json, { ...option,
       ...param,
       ..._crCategory(option)
@@ -170,7 +167,7 @@ const toColumn = {
     } = option,
           _ds = (0, _jsonstat.default)(json).Dataset(0),
           _dimC = _ds.Dimension(category),
-          Tid = crTid(time, _ds),
+          Tid = (0, _fnAdapter.crTid)(time, _ds),
           _cSlice = _crSlice(json, timeId, time, itemSlice, dfTSlice),
           _values = _crValues(_ds, _cSlice),
           _title = _crTitle(dfTitle, option),
@@ -181,7 +178,7 @@ const toColumn = {
       chart: {
         spacingTop: 25
       },
-      ...crChartOption(_ds, Tid, option)
+      ...(0, _fnAdapter.crChartOption)(_ds, Tid, option)
     }).toConfig();
 
     if (isCluster) {

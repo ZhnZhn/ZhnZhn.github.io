@@ -1,11 +1,10 @@
-import fnAdapter from './fnAdapter';
+import { crError } from './fnAdapter';
 
 import crDfQuery from './crDfQuery';
 import crSdnQuery from './crSdnQuery';
 import crSirQuery from './crSirQuery';
 
-const { crError } = fnAdapter
-, _crErr = crError.bind(null, '');
+const _crErr = crError.bind(null, '');
 
 const _hmCrQuery = {
   DF: crDfQuery,

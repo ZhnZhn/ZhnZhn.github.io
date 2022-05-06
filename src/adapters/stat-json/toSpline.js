@@ -1,12 +1,12 @@
 import crConfigType1 from '../../charts/crConfigType1';
-
-import { toUTC, compose } from './fnUtil';
-import fnAdapter from './fnAdapter';
-
-const {
+import {
+  toUTC,
+  compose
+} from './fnUtil';
+import {
   crDsValuesTimes,
   crConfOption
-} = fnAdapter;
+} from './fnAdapter';
 
 const _isArr = Array.isArray;
 

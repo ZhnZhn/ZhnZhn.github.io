@@ -9,16 +9,11 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
 var _fnUtil = require("./fnUtil");
 
-const _isArr = Array.isArray,
-      {
-  crDsValuesTimes,
-  crInfo,
-  crZhConfig
-} = _fnAdapter.default;
+const _isArr = Array.isArray;
 
 const _toData = (values, times) => {
   const _values = _isArr(values) ? values : [values];
@@ -33,11 +28,11 @@ const toYearly = {
       title = '',
       subtitle
     } = option,
-          [ds, values, times] = crDsValuesTimes(json, option),
+          [ds, values, times] = (0, _fnAdapter.crDsValuesTimes)(json, option),
           data = _toData(values, times),
           config = (0, _ConfigBuilder.default)().init(_toYearsByMonths.default.toConfig(data, option)).add('chart', {
       spacingTop: 25
-    }).addCaption(title, subtitle).add('info', crInfo(ds, option)).add('zhConfig', crZhConfig(option)).toConfig();
+    }).addCaption(title, subtitle).add('info', (0, _fnAdapter.crInfo)(ds, option)).add('zhConfig', (0, _fnAdapter.crZhConfig)(option)).toConfig();
 
     return config;
   }

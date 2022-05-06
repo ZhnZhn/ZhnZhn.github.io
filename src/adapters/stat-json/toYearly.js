@@ -1,16 +1,18 @@
 import ConfigBuilder from '../../charts/ConfigBuilder';
 import Yearly from '../toYearsByMonths';
-import fnAdapter from './fnAdapter';
-import { toYMD } from './fnUtil';
-
-const _isArr = Array.isArray
-, {
+import {
   crDsValuesTimes,
   crInfo,
   crZhConfig,
-} = fnAdapter;
+} from './fnAdapter';
+import { toYMD } from './fnUtil';
 
-const _toData = (values, times) => {
+const _isArr = Array.isArray;
+
+const _toData = (
+  values,
+  times
+) => {
   const _values = _isArr(values)
     ? values
     : [values];

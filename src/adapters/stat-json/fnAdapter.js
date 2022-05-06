@@ -1,46 +1,48 @@
-import JSONstat from 'jsonstat';
-import {
+export {
   isYNumber,
   numberFormat,
   roundBy,
-  valueMoving,
   toUpperCaseFirst
 } from '../AdapterFn';
-import {
+export {
   crError,
+  crId
+} from '../crFn';
+
+import JSONstat from 'jsonstat';
+import {
+  valueMoving
+} from '../AdapterFn';
+import {
   crId,
   crItemConf
 } from '../crFn';
 
-const _keys = Object.keys;
-const TITLE = {
-  NST: 'Statisctics Norway: All Items',
-  SWS: 'Statisctics Sweden: All Items'
-};
+const _keys = Object.keys
+, _crTitle = country => `Statisctics ${country}: All Items`
+, TITLE_NST = _crTitle('Norway')
+, TITLE_SWS = _crTitle('Sweden')
 
 const _crSearchTitle = country => `Statistics ${country} Search`
-
-const SEARCH = {
-  NST: {
-    url: 'https://www.ssb.no/en/sok?sok=',
-    title: _crSearchTitle('Norway')
-  },
-  SWS: {
-    url: 'https://www.scb.se/en/finding-statistics/search/?query=',
-    title: _crSearchTitle('Sweden')
-  },
-  SFL: {
-    url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
-    title: "Statistics Finland's PX-Web"
-  },
-  SDN: {
-    url: 'https://www.statbank.dk/statbank5a/default.asp',
-    title: _crSearchTitle('Denmark')
-  },
-  SIR: {
-    url: 'https://data.cso.ie/',
-    title: "CSO Ireland Web PxStat"
-  }
+const SEARCH_NST = {
+  url: 'https://www.ssb.no/en/sok?sok=',
+  title: _crSearchTitle('Norway')
+}
+, SEARCH_SWS = {
+  url: 'https://www.scb.se/en/finding-statistics/search/?query=',
+  title: _crSearchTitle('Sweden')
+}
+, SEARCH_SFL = {
+  url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
+  title: "Statistics Finland's PX-Web"
+}
+, SEARCH_SDN = {
+  url: 'https://www.statbank.dk/statbank5a/default.asp',
+  title: _crSearchTitle('Denmark')
+}
+, SEARCH_SIR = {
+  url: 'https://data.cso.ie/',
+  title: "CSO Ireland Web PxStat"
 };
 
 const MAX_SOURCE_ID_LENGTH = 9;
@@ -65,15 +67,15 @@ const _crSearchLink = (label, option) => {
   const  _token = _crSearchToken(label);
   switch(option.loadId){
     case 'NST': case 'NST_2':
-      return _crLink(SEARCH.NST, _token);
+      return _crLink(SEARCH_NST, _token);
     case 'SWS':
-      return _crLink(SEARCH.SWS, _token);
+      return _crLink(SEARCH_SWS, _token);
     case 'SFL':
-      return _crLink(SEARCH.SFL, _crSflSearchToken(option));
+      return _crLink(SEARCH_SFL, _crSflSearchToken(option));
     case 'SDN':
-      return _crLink(SEARCH.SDN);
+      return _crLink(SEARCH_SDN);
     case 'SIR':
-      return _crLink(SEARCH.SIR);
+      return _crLink(SEARCH_SIR);
     default:
       return '';
   }
@@ -148,83 +150,77 @@ const _crDataSource = ({ dataSource, dfId }) => dfId
    : dataSource;
 
 
-const fnAdapter = {
-  crError,
-  isYNumber,
-  numberFormat,
-  crId,
-  roundBy,
-  toUpperCaseFirst,
+export const crTitle = (option) => {
+  switch(option.browserType){
+    case 'NST':
+    case 'NST_ALL':
+      return TITLE_NST;
+    case 'SWS':
+    case 'SWS_ALL':
+      return TITLE_SWS;
+    default:
+      return '';
+  }
+}
 
-  crTitle: (option) => {
-    switch(option.browserType){
-      case 'NST':
-      case 'NST_ALL':
-        return TITLE.NST;
-      case 'SWS':
-      case 'SWS_ALL':
-        return TITLE.SWS;
-      default:
-        return '';
-    }
-  },
+export const crDsValuesTimes = (json, option) => {
+  const mapSlice = _crAreaMapSlice(option)
+  , ds = JSONstat(json).Dataset(0)
+  , values = ds.Data(mapSlice)
+  , times = _getTimeDimension(ds, option.timeId, json);
+  return [ds, values, times];
+}
 
-  crDsValuesTimes: (json, option) => {
-    const mapSlice = _crAreaMapSlice(option)
-    , ds = JSONstat(json).Dataset(0)
-    , values = ds.Data(mapSlice)
-    , times = _getTimeDimension(ds, option.timeId, json);
-    return [ ds, values, times ];
-  },
+export const  crTid = (time, ds) => {
+  if (time) {
+    return time;
+  }
+  const tidIds = _getTimeDimension(ds);
+  return tidIds[tidIds.length-1];
+}
 
-  crTid: (time, ds) => {
-    if (time) {
-      return time;
-    }
-    const tidIds = _getTimeDimension(ds);
-    return tidIds[tidIds.length-1];
-  },
+export const crInfo = (ds, option) => ({
+  name: ds.label || '',
+  description: _crDescr(ds, option)
+})
 
-  crInfo: (ds, option) => ({
-    name: ds.label || '',
-    description: _crDescr(ds, option)
-  }),
+export const crZhConfig = (option) => {
+  const {
+    _itemKey,
+    url,
+    optionFetch,
+    items,
+    dataSource,
+    dfId,
+    timeId
+  } = option
+  , key = _itemKey || crId()
+  , itemCaption = option.itemCaption || _crItemCaption(option)
+  , itemConf = url
+     ? {
+       _itemKey: key,
+       ...crItemConf(option),
+       optionFetch, items,
+       dataSource,
+       //sfl
+       dfId, timeId
+      }
+    : void 0;
+  return {
+    id: key,
+    key,
+    itemCaption,
+    itemConf,
+    dataSource: _crDataSource(option)
+  };
+}
 
-  crZhConfig: (option) => {
-    const {
-      _itemKey, url,
-      optionFetch, items,
-      dataSource, dfId, timeId
-    } = option
-    , key = _itemKey || crId()
-    , itemCaption = option.itemCaption || _crItemCaption(option)
-    , itemConf = url
-       ? {
-         _itemKey: key,
-         ...crItemConf(option),
-         optionFetch, items,
-         dataSource,
-         //sfl
-         dfId, timeId
-        }
-      : void 0;
-    return {
-      id: key, key,
-      itemCaption,
-      itemConf,
-      dataSource: _crDataSource(option)
-    };
-  },
+export const crConfOption = (ds, option) => ({
+  info: crInfo(ds, option),
+  zhConfig: crZhConfig(option)
+})
 
-  crConfOption: (ds, option) => ({
-    info: fnAdapter.crInfo(ds, option),
-    zhConfig: fnAdapter.crZhConfig(option)
-  }),
-
-  crChartOption: (ds, data, option) => ({
-    valueMoving: valueMoving(data),
-    ...fnAdapter.crConfOption(ds, option)
-  })
-};
-
-export default fnAdapter
+export const crChartOption = (ds, data, option) => ({
+  valueMoving: valueMoving(data),
+  ...crConfOption(ds, option)
+})

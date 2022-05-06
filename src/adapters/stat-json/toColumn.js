@@ -3,16 +3,13 @@ import clusterMaker from '../../math/k-means';
 
 import Builder from '../../charts/ConfigBuilder';
 import Tooltip from '../../charts/Tooltip';
-
-import fnAdapter from './fnAdapter';
-
-const {
+import {
   isYNumber,
   crTitle,
   crTid,
   crChartOption,
   toUpperCaseFirst
-} = fnAdapter;
+} from './fnAdapter';
 
 const _assign = Object.assign
 , _isArr = Array.isArray;

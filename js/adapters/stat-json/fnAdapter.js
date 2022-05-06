@@ -3,43 +3,48 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
-
-var _jsonstat = _interopRequireDefault(require("jsonstat"));
+exports.toUpperCaseFirst = exports.roundBy = exports.numberFormat = exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crTid = exports.crInfo = exports.crError = exports.crDsValuesTimes = exports.crConfOption = exports.crChartOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
+exports.isYNumber = _AdapterFn.isYNumber;
+exports.numberFormat = _AdapterFn.numberFormat;
+exports.roundBy = _AdapterFn.roundBy;
+exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
+
 var _crFn = require("../crFn");
 
-const _keys = Object.keys;
-const TITLE = {
-  NST: 'Statisctics Norway: All Items',
-  SWS: 'Statisctics Sweden: All Items'
-};
+exports.crError = _crFn.crError;
+exports.crId = _crFn.crId;
+
+var _jsonstat = _interopRequireDefault(require("jsonstat"));
+
+const _keys = Object.keys,
+      _crTitle = country => "Statisctics " + country + ": All Items",
+      TITLE_NST = _crTitle('Norway'),
+      TITLE_SWS = _crTitle('Sweden');
 
 const _crSearchTitle = country => "Statistics " + country + " Search";
 
-const SEARCH = {
-  NST: {
-    url: 'https://www.ssb.no/en/sok?sok=',
-    title: _crSearchTitle('Norway')
-  },
-  SWS: {
-    url: 'https://www.scb.se/en/finding-statistics/search/?query=',
-    title: _crSearchTitle('Sweden')
-  },
-  SFL: {
-    url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
-    title: "Statistics Finland's PX-Web"
-  },
-  SDN: {
-    url: 'https://www.statbank.dk/statbank5a/default.asp',
-    title: _crSearchTitle('Denmark')
-  },
-  SIR: {
-    url: 'https://data.cso.ie/',
-    title: "CSO Ireland Web PxStat"
-  }
+const SEARCH_NST = {
+  url: 'https://www.ssb.no/en/sok?sok=',
+  title: _crSearchTitle('Norway')
+},
+      SEARCH_SWS = {
+  url: 'https://www.scb.se/en/finding-statistics/search/?query=',
+  title: _crSearchTitle('Sweden')
+},
+      SEARCH_SFL = {
+  url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
+  title: "Statistics Finland's PX-Web"
+},
+      SEARCH_SDN = {
+  url: 'https://www.statbank.dk/statbank5a/default.asp',
+  title: _crSearchTitle('Denmark')
+},
+      SEARCH_SIR = {
+  url: 'https://data.cso.ie/',
+  title: "CSO Ireland Web PxStat"
 };
 const MAX_SOURCE_ID_LENGTH = 9;
 const _assign = Object.assign;
@@ -79,19 +84,19 @@ const _crSearchLink = (label, option) => {
   switch (option.loadId) {
     case 'NST':
     case 'NST_2':
-      return _crLink(SEARCH.NST, _token);
+      return _crLink(SEARCH_NST, _token);
 
     case 'SWS':
-      return _crLink(SEARCH.SWS, _token);
+      return _crLink(SEARCH_SWS, _token);
 
     case 'SFL':
-      return _crLink(SEARCH.SFL, _crSflSearchToken(option));
+      return _crLink(SEARCH_SFL, _crSflSearchToken(option));
 
     case 'SDN':
-      return _crLink(SEARCH.SDN);
+      return _crLink(SEARCH_SDN);
 
     case 'SIR':
-      return _crLink(SEARCH.SIR);
+      return _crLink(SEARCH_SIR);
 
     default:
       return '';
@@ -170,88 +175,98 @@ const _crDataSource = _ref4 => {
   return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
 };
 
-const fnAdapter = {
-  crError: _crFn.crError,
-  isYNumber: _AdapterFn.isYNumber,
-  numberFormat: _AdapterFn.numberFormat,
-  crId: _crFn.crId,
-  roundBy: _AdapterFn.roundBy,
-  toUpperCaseFirst: _AdapterFn.toUpperCaseFirst,
-  crTitle: option => {
-    switch (option.browserType) {
-      case 'NST':
-      case 'NST_ALL':
-        return TITLE.NST;
+const crTitle = option => {
+  switch (option.browserType) {
+    case 'NST':
+    case 'NST_ALL':
+      return TITLE_NST;
 
-      case 'SWS':
-      case 'SWS_ALL':
-        return TITLE.SWS;
+    case 'SWS':
+    case 'SWS_ALL':
+      return TITLE_SWS;
 
-      default:
-        return '';
-    }
-  },
-  crDsValuesTimes: (json, option) => {
-    const mapSlice = _crAreaMapSlice(option),
-          ds = (0, _jsonstat.default)(json).Dataset(0),
-          values = ds.Data(mapSlice),
-          times = _getTimeDimension(ds, option.timeId, json);
-
-    return [ds, values, times];
-  },
-  crTid: (time, ds) => {
-    if (time) {
-      return time;
-    }
-
-    const tidIds = _getTimeDimension(ds);
-
-    return tidIds[tidIds.length - 1];
-  },
-  crInfo: (ds, option) => ({
-    name: ds.label || '',
-    description: _crDescr(ds, option)
-  }),
-  crZhConfig: option => {
-    const {
-      _itemKey,
-      url,
-      optionFetch,
-      items,
-      dataSource,
-      dfId,
-      timeId
-    } = option,
-          key = _itemKey || (0, _crFn.crId)(),
-          itemCaption = option.itemCaption || _crItemCaption(option),
-          itemConf = url ? {
-      _itemKey: key,
-      ...(0, _crFn.crItemConf)(option),
-      optionFetch,
-      items,
-      dataSource,
-      //sfl
-      dfId,
-      timeId
-    } : void 0;
-
-    return {
-      id: key,
-      key,
-      itemCaption,
-      itemConf,
-      dataSource: _crDataSource(option)
-    };
-  },
-  crConfOption: (ds, option) => ({
-    info: fnAdapter.crInfo(ds, option),
-    zhConfig: fnAdapter.crZhConfig(option)
-  }),
-  crChartOption: (ds, data, option) => ({
-    valueMoving: (0, _AdapterFn.valueMoving)(data),
-    ...fnAdapter.crConfOption(ds, option)
-  })
+    default:
+      return '';
+  }
 };
-var _default = fnAdapter;
-exports.default = _default;
+
+exports.crTitle = crTitle;
+
+const crDsValuesTimes = (json, option) => {
+  const mapSlice = _crAreaMapSlice(option),
+        ds = (0, _jsonstat.default)(json).Dataset(0),
+        values = ds.Data(mapSlice),
+        times = _getTimeDimension(ds, option.timeId, json);
+
+  return [ds, values, times];
+};
+
+exports.crDsValuesTimes = crDsValuesTimes;
+
+const crTid = (time, ds) => {
+  if (time) {
+    return time;
+  }
+
+  const tidIds = _getTimeDimension(ds);
+
+  return tidIds[tidIds.length - 1];
+};
+
+exports.crTid = crTid;
+
+const crInfo = (ds, option) => ({
+  name: ds.label || '',
+  description: _crDescr(ds, option)
+});
+
+exports.crInfo = crInfo;
+
+const crZhConfig = option => {
+  const {
+    _itemKey,
+    url,
+    optionFetch,
+    items,
+    dataSource,
+    dfId,
+    timeId
+  } = option,
+        key = _itemKey || (0, _crFn.crId)(),
+        itemCaption = option.itemCaption || _crItemCaption(option),
+        itemConf = url ? {
+    _itemKey: key,
+    ...(0, _crFn.crItemConf)(option),
+    optionFetch,
+    items,
+    dataSource,
+    //sfl
+    dfId,
+    timeId
+  } : void 0;
+
+  return {
+    id: key,
+    key,
+    itemCaption,
+    itemConf,
+    dataSource: _crDataSource(option)
+  };
+};
+
+exports.crZhConfig = crZhConfig;
+
+const crConfOption = (ds, option) => ({
+  info: crInfo(ds, option),
+  zhConfig: crZhConfig(option)
+});
+
+exports.crConfOption = crConfOption;
+
+const crChartOption = (ds, data, option) => ({
+  valueMoving: (0, _AdapterFn.valueMoving)(data),
+  ...crConfOption(ds, option)
+});
+
+exports.crChartOption = crChartOption;
 //# sourceMappingURL=fnAdapter.js.map

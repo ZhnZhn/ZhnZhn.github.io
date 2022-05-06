@@ -13,22 +13,14 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-const {
-  crTitle,
-  crTid,
-  crChartOption,
-  numberFormat,
-  roundBy
-} = _fnAdapter.default;
 const NUMBER_STYLE = 'style="color:#333;"';
+const _isArr = Array.isArray;
 
 const _crPointName = (label, value) => {
-  return label + " <br/>\n  <span " + NUMBER_STYLE + ">" + numberFormat(value) + "</span>";
+  return label + " <br/>\n  <span " + NUMBER_STYLE + ">" + (0, _fnAdapter.numberFormat)(value) + "</span>";
 };
-
-const _isArr = Array.isArray;
 
 const _fCrTreeMapPoint = (c, title) => {
   return (v, i) => {
@@ -150,7 +142,7 @@ const _addPercent = data => {
         _onePercent = _total / 100;
 
   return data.map(p => ({ ...p,
-    percent: roundBy(p.value / _onePercent)
+    percent: (0, _fnAdapter.roundBy)(p.value / _onePercent)
   }));
 };
 
@@ -202,8 +194,8 @@ const toTreeMap = {
     } = option,
           ds = (0, _jsonstat.default)(json).Dataset(0),
           categories = ds.Dimension(category),
-          Tid = crTid(time, ds),
-          _title = crTitle(option),
+          Tid = (0, _fnAdapter.crTid)(time, ds),
+          _title = (0, _fnAdapter.crTitle)(option),
           _subtitle = (items[1].caption || '') + ": " + Tid,
           values = ds.Data({
       Tid,
@@ -226,10 +218,18 @@ const toTreeMap = {
       data
     }).toSeria();
 
-    const config = (0, _ConfigBuilder.default)().treeMapConfig(_c, seriaType).addCaption(_title, _subtitle).addSeries(_seria).add(crChartOption(ds, Tid, option)).toConfig();
+    const config = (0, _ConfigBuilder.default)().treeMapConfig(_c, seriaType).addCaption(_title, _subtitle).addSeries(_seria).add((0, _fnAdapter.crChartOption)(ds, Tid, option)).toConfig();
     return config;
   },
-  fCrConfig: (param = {}, config = {}) => {
+  fCrConfig: function (param, config) {
+    if (param === void 0) {
+      param = {};
+    }
+
+    if (config === void 0) {
+      config = {};
+    }
+
     return (json, option) => toTreeMap.crConfig(json, { ...option,
       ...param,
       ..._crCategory(option, config.by, config.depth)

@@ -9,12 +9,8 @@ var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1")
 
 var _fnUtil = require("./fnUtil");
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-const {
-  crDsValuesTimes,
-  crConfOption
-} = _fnAdapter.default;
 const _isArr = Array.isArray;
 
 const _filterLeadingNulls = data => {
@@ -61,10 +57,10 @@ const _toData = (values, times, hasPerJanuary) => {
 
 const toArea = {
   crConfig: (json, option) => {
-    const [ds, values, times] = crDsValuesTimes(json, option),
+    const [ds, values, times] = (0, _fnAdapter.crDsValuesTimes)(json, option),
           _hasPerJanuary = _isPerJanuary(ds.label),
           data = _toData(values, times, _hasPerJanuary),
-          confOption = crConfOption(ds, option);
+          confOption = (0, _fnAdapter.crConfOption)(ds, option);
 
     return (0, _crConfigType.default)({
       option,

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
 var _crDfQuery = _interopRequireDefault(require("./crDfQuery"));
 
@@ -13,10 +13,7 @@ var _crSdnQuery = _interopRequireDefault(require("./crSdnQuery"));
 
 var _crSirQuery = _interopRequireDefault(require("./crSirQuery"));
 
-const {
-  crError
-} = _fnAdapter.default,
-      _crErr = crError.bind(null, '');
+const _crErr = _fnAdapter.crError.bind(null, '');
 
 const _hmCrQuery = {
   DF: _crDfQuery.default,
