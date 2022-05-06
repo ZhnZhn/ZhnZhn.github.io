@@ -1,41 +1,45 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-var crError = _fnAdapter["default"].crError;
-var C = {
-  URL: 'https://community-api.coinmetrics.io/v2'
-};
-var _isArr = Array.isArray;
-var CmApi = {
-  getRequestUrl: function getRequestUrl(option) {
-    var _option$items = option.items,
-        items = _option$items === void 0 ? [] : _option$items,
-        fromDate = option.fromDate,
-        assets = items[0].v,
-        metric = items[1].v,
-        _start = fromDate ? "&start=" + fromDate : '';
+const URL = 'https://community-api.coinmetrics.io/v2';
+const _isArr = Array.isArray;
+const CmApi = {
+  getRequestUrl(option) {
+    const {
+      items = [],
+      fromDate
+    } = option,
+          {
+      v: assets
+    } = items[0],
+          {
+      v: metric
+    } = items[1],
+          _start = fromDate ? "&start=" + fromDate : '';
 
-    return C.URL + "/assets/" + assets.toLowerCase() + "/metricdata?metrics=" + metric + _start;
+    return URL + "/assets/" + assets.toLowerCase() + "/metricdata?metrics=" + metric + _start;
   },
-  checkResponse: function checkResponse(json) {
-    var _ref = json || {},
-        metricData = _ref.metricData,
-        _ref2 = metricData || {},
-        series = _ref2.series;
+
+  checkResponse(json) {
+    const {
+      metricData
+    } = json || {},
+          {
+      series
+    } = metricData || {};
 
     if (!_isArr(series)) {
-      throw crError();
+      throw (0, _fnAdapter.crError)();
     }
 
     return true;
   }
+
 };
 var _default = CmApi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=CmApi.js.map

@@ -1,43 +1,46 @@
-import { ymdhmsToUTC } from '../AdapterFn';
 import {
-  crError,
+  ymdhmsToUTC,
+  crZhConfig
+} from '../AdapterFn';
+import {
+  crError as _crError,
   crItemConf,
   crValueConf
 } from '../crFn';
 
-const _crZhConfig = (option, data) => {
+const _crZhConfig = (
+  option,
+  data
+) => {
   const {
     _itemKey,
-    dataSource,
-    itemCaption
-  } = option;
-  return {
-    id: _itemKey, key: _itemKey,
-    itemCaption,
-    dataSource,
-    itemConf: {
-      _itemKey,
-      ...crItemConf(option),
-      ...crValueConf(data),
-      dataSource
-    }
-  };
+    dataSource
+  } = option
+  , _config = crZhConfig(option)
+  _config.itemConf = {
+    _itemKey,
+    ...crItemConf(option),
+    ...crValueConf(data),
+    dataSource
+  }
+  return _config;
 };
 
-const fnAdapter = {
-    crError: crError.bind(null, "Server Response"),
 
-    crData: json => {
-      const arr = json.metricData.series;
-      return arr.map(({ time, values }) => [
-        ymdhmsToUTC((time || '').replace('Z', ''), 'T'),
-        parseFloat((values || [])[0])
-      ]);
-    },
+export const crError = _crError.bind(null, "Server Response")
 
-    crConfOption: (option, json, data) => ({
-      zhConfig: _crZhConfig(option, data)
-    })
-};
+export const crData = (
+  json
+) => json.metricData.series
+  .map(({ time, values }) => [
+     ymdhmsToUTC((time || '').replace('Z', ''), 'T'),
+     parseFloat((values || [])[0])
+  ]);
 
-export default fnAdapter
+export const crConfOption = (
+  option,
+  json,
+  data
+) => ({
+  zhConfig: _crZhConfig(option, data)
+})

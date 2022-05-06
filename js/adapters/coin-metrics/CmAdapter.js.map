@@ -1,14 +1,1 @@
-{
- "version": 3,
- "sources": [
-  "../../../src/adapters/coin-metrics/CmAdapter.js"
- ],
- "file": "../../../src/adapters/coin-metrics/CmAdapter.js",
- "names": [
-  "crData",
-  "fnAdapter",
-  "crConfOption",
-  "CmAdapter"
- ],
- "mappings": ";;;;;;;AAAA;;AACA;;IAEQA,M,GAAyBC,qB,CAAzBD,M;IAAQE,Y,GAAiBD,qB,CAAjBC,Y;AAEhB,IAAMC,SAAS,GAAG,+BAAe;AAC/BH,EAAAA,MAAM,EAANA,MAD+B;AACvBE,EAAAA,YAAY,EAAZA;AADuB,CAAf,CAAlB;eAIeC,S"
-}
+{"version":3,"sources":["../../../src/adapters/coin-metrics/CmAdapter.js"],"names":["CmAdapter","crData","crConfOption"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,SAAS,GAAG,4BAAe;AAC/BC,EAAAA,MAAM,EAANA,iBAD+B;AAE/BC,EAAAA,YAAY,EAAZA;AAF+B,CAAf,CAAlB;eAKeF,S","sourcesContent":["import crAdapterType1 from '../crAdapterType1';\r\nimport { crData, crConfOption } from './fnAdapter';\r\n\r\nconst CmAdapter = crAdapterType1({\r\n  crData,\r\n  crConfOption\r\n});\r\n\r\nexport default CmAdapter\r\n"],"file":"CmAdapter.js"}

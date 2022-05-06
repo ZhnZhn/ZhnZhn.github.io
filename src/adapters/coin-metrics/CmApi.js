@@ -1,11 +1,6 @@
-import fnAdapter from './fnAdapter';
+import { crError } from './fnAdapter';
 
-const { crError } = fnAdapter;
-
-const C = {
-  URL: 'https://community-api.coinmetrics.io/v2'  
-};
-
+const URL = 'https://community-api.coinmetrics.io/v2';
 const _isArr = Array.isArray;
 
 const CmApi = {
@@ -14,7 +9,7 @@ const CmApi = {
     , { v:assets } = items[0]
     , { v:metric } = items[1]
     , _start = fromDate ? `&start=${fromDate}` : '';
-    return `${C.URL}/assets/${assets.toLowerCase()}/metricdata?metrics=${metric}${_start}`
+    return `${URL}/assets/${assets.toLowerCase()}/metricdata?metrics=${metric}${_start}`
   },
 
   checkResponse(json){
