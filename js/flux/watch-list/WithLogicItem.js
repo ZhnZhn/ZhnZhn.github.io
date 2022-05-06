@@ -1,42 +1,40 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _LogicFn = _interopRequireDefault(require("./LogicFn"));
+var _LogicFn = require("./LogicFn");
 
-var crMsgItemExisted = _LogicFn["default"].crMsgItemExisted,
-    findGroup = _LogicFn["default"].findGroup,
-    findList = _LogicFn["default"].findList,
-    isInArraySameCaption = _LogicFn["default"].isInArraySameCaption,
-    filter = _LogicFn["default"].filter;
-var WithLogicItem = {
-  addItem: function addItem(watchList, item) {
-    var caption = item.caption,
-        groupCaption = item.groupCaption,
-        listCaption = item.listCaption,
-        config = item.config,
-        zhConfig = config.zhConfig,
-        id = zhConfig.id,
-        title = zhConfig.title,
-        subtitle = zhConfig.subtitle,
-        _zhConfig$itemConf = zhConfig.itemConf,
-        itemConf = _zhConfig$itemConf === void 0 ? {} : _zhConfig$itemConf,
-        toGroup = findGroup(watchList, groupCaption),
-        toList = findList(toGroup, listCaption);
+const WithLogicItem = {
+  addItem(watchList, item) {
+    const {
+      caption,
+      groupCaption,
+      listCaption,
+      config
+    } = item,
+          {
+      zhConfig
+    } = config,
+          {
+      id,
+      title,
+      subtitle,
+      itemConf = {}
+    } = zhConfig,
+          toGroup = (0, _LogicFn.findGroup)(watchList, groupCaption),
+          toList = (0, _LogicFn.findList)(toGroup, listCaption);
 
-    if (isInArraySameCaption(toList.items, caption)) {
-      return crMsgItemExisted(caption, listCaption);
+    if ((0, _LogicFn.isInArraySameCaption)(toList.items, caption)) {
+      return (0, _LogicFn.crMsgItemExisted)(caption, listCaption);
     }
 
-    var _item = {
-      id: id,
-      title: title,
-      subtitle: subtitle,
-      caption: caption,
-      itemConf: itemConf
+    const _item = {
+      id,
+      title,
+      subtitle,
+      caption,
+      itemConf
     };
 
     if (toList.items) {
@@ -49,15 +47,19 @@ var WithLogicItem = {
       isDone: true
     };
   },
-  removeItem: function removeItem(watchList, _ref) {
-    var groupCaption = _ref.groupCaption,
-        listCaption = _ref.listCaption,
-        caption = _ref.caption;
-    var groupFrom = findGroup(watchList, groupCaption),
-        listFrom = findList(groupFrom, listCaption);
-    listFrom.items = filter(listFrom.items, caption);
+
+  removeItem(watchList, _ref) {
+    let {
+      groupCaption,
+      listCaption,
+      caption
+    } = _ref;
+    const groupFrom = (0, _LogicFn.findGroup)(watchList, groupCaption),
+          listFrom = (0, _LogicFn.findList)(groupFrom, listCaption);
+    listFrom.items = (0, _LogicFn.filter)(listFrom.items, caption);
   }
+
 };
 var _default = WithLogicItem;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=WithLogicItem.js.map

@@ -25,65 +25,56 @@ const CAPTION = 'caption'
 , GROUPS = 'groups'
 , LISTS = 'lists' ;
 
-const LogicFn = {
+const _crMsgIsNotDone = (message) => ({
+  isDone: false,
+  message
+})
 
-  crMsgNotFound(itemType, name){
-    return {
-      isDone: false,
-      message: notFoundItem(itemType, name)
-    };
-  },
-  crMsgGroupExisted(caption){
-    return {
-      isDone: false,
-      message: groupExisted(caption)
-    };
-  },
-  crMsgListExisted(captionList, captionGroup){
-    return {
-      isDone: false,
-      message: listExisted(captionList, captionGroup)
-    };
-  },
-  crMsgItemExisted(caption, captionList){
-    return {
-      isDone: false,
-      message: itemExisted(caption, captionList)
-    };
-  },
+export const crMsgNotFound = (
+  itemType,
+  name
+) => _crMsgIsNotDone(notFoundItem(itemType, name))
 
+export const crMsgGroupExisted = (
+  caption
+) => _crMsgIsNotDone(groupExisted(caption))
+
+export const crMsgListExisted = (
+  captionList,
+  captionGroup
+) => _crMsgIsNotDone(listExisted(captionList, captionGroup))
+
+export const crMsgItemExisted = (
+  caption,
+  captionList
+) => _crMsgIsNotDone(itemExisted(caption, captionList))
+
+
+const _crAlert = (alertItemId, alertConfig) => ({
+  isDone: false,
+  alertItemId,
+  ...alertConfig
+})
   /* for DragDrop */
-  crAlertItemExisted(dropId, dragId){
-    return {
-      isDone : false,
-      alertItemId : `${dropId}:${dragId}`,
-      ...ALERT_DND_ITEM
-   };
- },
- crAlertListExisted(dropGroupCaption, dragListCaption){
-   return {
-      isDone : false,
-      alertItemId : `${dropGroupCaption}:${dragListCaption}`,
-      ...ALERT_DND_LIST
-   }
- },
- /* for DragDrop */
+export const crAlertItemExisted = (
+  dropId,
+  dragId
+) => _crAlert(`${dropId}:${dragId}`, ALERT_DND_ITEM)
 
-  filter : imArrFactoryFilterByProp(CAPTION),
-  getArrayWithObj : imArrPush,
+export const crAlertListExisted = (
+  dropGroupCaption,
+  dragListCaption
+) => _crAlert(`${dropGroupCaption}:${dragListCaption}`, ALERT_DND_LIST)
+/* for DragDrop */
+export const filter = imArrFactoryFilterByProp(CAPTION)
+export const getArrayWithObj = imArrPush
+export const getArrayWithRename = imArrFactoryEditByProp(CAPTION)
 
-  getArrayWithRename: imArrFactoryEditByProp(CAPTION),
+/* for DragDrop */
+export const insertItemInArray = imArrInsertItem
 
-  /* for DragDrop */
-  insertItemInArray : imArrInsertItem,
-  /* for DragDrop */
-
-  findGroup : factoryFindInPropArrayByProp(GROUPS, CAPTION),
-  findList : factoryFindInPropArrayByProp(LISTS, CAPTION),
-
-  findIndex : arrFactoryFindIndexByProp('caption'),
-  isInArraySameCaption : arrFactoryIsSameByProp(CAPTION)
-
-};
-
-export default LogicFn
+/* for DragDrop */
+export const findGroup = factoryFindInPropArrayByProp(GROUPS, CAPTION)
+export const findList = factoryFindInPropArrayByProp(LISTS, CAPTION)
+export const findIndex = arrFactoryFindIndexByProp('caption')
+export const isInArraySameCaption = arrFactoryIsSameByProp(CAPTION)

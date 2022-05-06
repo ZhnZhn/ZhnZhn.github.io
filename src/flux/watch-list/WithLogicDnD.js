@@ -1,6 +1,4 @@
-import LogicFn from './LogicFn';
-
-const {
+import {
   crAlertItemExisted,
   crAlertListExisted,
 
@@ -11,7 +9,7 @@ const {
   isInArraySameCaption,
   filter,
   insertItemInArray
-} = LogicFn;
+} from './LogicFn';
 
 const WithLogicDnD = {
 

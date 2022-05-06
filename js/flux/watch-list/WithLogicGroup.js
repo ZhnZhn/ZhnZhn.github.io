@@ -1,66 +1,66 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _LogicFn = _interopRequireDefault(require("./LogicFn"));
+var _LogicFn = require("./LogicFn");
 
-var crMsgGroupExisted = _LogicFn["default"].crMsgGroupExisted,
-    crMsgNotFound = _LogicFn["default"].crMsgNotFound,
-    isInArraySameCaption = _LogicFn["default"].isInArraySameCaption,
-    getArrayWithObj = _LogicFn["default"].getArrayWithObj,
-    findIndex = _LogicFn["default"].findIndex,
-    getArrayWithRename = _LogicFn["default"].getArrayWithRename,
-    filter = _LogicFn["default"].filter;
-var WithLogicGroup = {
-  addGroup: function addGroup(watchList, _ref) {
-    var caption = _ref.caption;
-    var groups = watchList.groups;
+const WithLogicGroup = {
+  addGroup(watchList, _ref) {
+    let {
+      caption
+    } = _ref;
+    const groups = watchList.groups;
 
-    if (isInArraySameCaption(groups, caption)) {
-      return crMsgGroupExisted(caption);
+    if ((0, _LogicFn.isInArraySameCaption)(groups, caption)) {
+      return (0, _LogicFn.crMsgGroupExisted)(caption);
     }
 
-    var _captionObj = caption ? {
-      caption: caption
+    const _captionObj = caption ? {
+      caption
     } : {
       caption: "Default"
     };
 
-    watchList.groups = getArrayWithObj(groups, _captionObj);
+    watchList.groups = (0, _LogicFn.getArrayWithObj)(groups, _captionObj);
     return {
       isDone: true
     };
   },
-  renameGroup: function renameGroup(watchList, _ref2) {
-    var captionFrom = _ref2.captionFrom,
-        captionTo = _ref2.captionTo;
-    var groups = watchList.groups,
-        groupIndex = findIndex(groups, captionFrom);
+
+  renameGroup(watchList, _ref2) {
+    let {
+      captionFrom,
+      captionTo
+    } = _ref2;
+    const groups = watchList.groups,
+          groupIndex = (0, _LogicFn.findIndex)(groups, captionFrom);
 
     if (groupIndex === -1) {
-      return crMsgNotFound('group', captionFrom);
+      return (0, _LogicFn.crMsgNotFound)('group', captionFrom);
     }
 
-    if (isInArraySameCaption(groups, captionTo)) {
-      return crMsgGroupExisted(captionTo);
+    if ((0, _LogicFn.isInArraySameCaption)(groups, captionTo)) {
+      return (0, _LogicFn.crMsgGroupExisted)(captionTo);
     }
 
-    watchList.groups = getArrayWithRename(groups, groupIndex, captionTo);
+    watchList.groups = (0, _LogicFn.getArrayWithRename)(groups, groupIndex, captionTo);
     return {
       isDone: true
     };
   },
-  deleteGroup: function deleteGroup(watchList, _ref3) {
-    var caption = _ref3.caption;
-    watchList.groups = filter(watchList.groups, caption);
+
+  deleteGroup(watchList, _ref3) {
+    let {
+      caption
+    } = _ref3;
+    watchList.groups = (0, _LogicFn.filter)(watchList.groups, caption);
     return {
       isDone: true
     };
   }
+
 };
 var _default = WithLogicGroup;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=WithLogicGroup.js.map

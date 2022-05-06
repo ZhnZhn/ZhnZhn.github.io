@@ -1,12 +1,10 @@
-import LogicFn from './LogicFn';
-
-const {
+import {
   crMsgItemExisted,
   findGroup,
   findList,
   isInArraySameCaption,
   filter
-} = LogicFn;
+} from './LogicFn';
 
 const WithLogicItem = {
 

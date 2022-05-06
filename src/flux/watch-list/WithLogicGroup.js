@@ -1,6 +1,4 @@
-import LogicFn from './LogicFn'
-
-const {
+import {
   crMsgGroupExisted,
   crMsgNotFound,
 
@@ -9,7 +7,7 @@ const {
   findIndex,
   getArrayWithRename,
   filter
-} = LogicFn;
+} from './LogicFn';
 
 const WithLogicGroup = {
 
