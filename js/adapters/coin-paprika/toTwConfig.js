@@ -1,27 +1,24 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-var getValue = _fnAdapter["default"].getValue;
-
-var _crItems = function _crItems(json) {
-  var items = [];
-  var i;
+const _crItems = json => {
+  const items = [];
+  let i;
 
   for (i = 0; i < json.length; i++) {
-    var _json$i = json[i],
-        user_name = _json$i.user_name,
-        date = _json$i.date,
-        status_id = _json$i.status_id,
-        status_link = _json$i.status_link,
-        status = _json$i.status,
-        retweet_count = _json$i.retweet_count,
-        like_count = _json$i.like_count;
+    const {
+      user_name,
+      date,
+      status_id,
+      status_link,
+      status,
+      retweet_count,
+      like_count
+    } = json[i];
 
     if (date && status_id) {
       items.push({
@@ -39,16 +36,20 @@ var _crItems = function _crItems(json) {
   return items;
 };
 
-var toTwConfig = {
-  crKey: function crKey(option) {
-    var _option$items = option.items,
-        items = _option$items === void 0 ? [] : _option$items;
-    return option._itemKey = getValue(items[0]);
+const toTwConfig = {
+  crKey(option) {
+    const {
+      items = []
+    } = option;
+    return option._itemKey = (0, _fnAdapter.getValue)(items[0]);
   },
-  toConfig: function toConfig(json, option) {
-    var _itemKey = option._itemKey,
-        title = option.title,
-        config = {
+
+  toConfig(json, option) {
+    const {
+      _itemKey,
+      title
+    } = option,
+          config = {
       id: _itemKey,
       title: title,
       items: _crItems(json),
@@ -59,10 +60,11 @@ var toTwConfig = {
       }
     };
     return {
-      config: config
+      config
     };
   }
+
 };
 var _default = toTwConfig;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toTwConfig.js.map

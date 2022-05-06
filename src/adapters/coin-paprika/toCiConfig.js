@@ -1,10 +1,8 @@
-import fnAdapter from './fnAdapter'
-
-const {
+import {
   getValue,
   joinBy,
   toUpperCaseFirst
-} = fnAdapter;
+} from './fnAdapter';
 
 const _crCaption = ({ name='', symbol='', rank='' }) =>
   `${name} (${symbol}) (${rank})`;

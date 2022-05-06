@@ -1,6 +1,4 @@
-import fnAdapter from './fnAdapter'
-
-const { getValue } = fnAdapter
+import { getValue } from './fnAdapter';
 
 const _crItems = json => {
   const items = [];

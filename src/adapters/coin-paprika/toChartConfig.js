@@ -1,17 +1,25 @@
-import crAdapterType1 from '../crAdapterType1'
-import fnAdapter from './fnAdapter'
+import crAdapterType1 from '../crAdapterType1';
+import { crData, addConfOption } from './fnAdapter';
 
-const { crData, addConfOption } = fnAdapter;
-
-const _crMvOption = (btTitle, dVolume, dColumn) => ({
+const _crMvOption = (
+  btTitle,
+  dVolume,
+  dColumn
+) => ({
   btTitle,
   title: `${btTitle} USD`,
   dVolume, dColumn
 });
 
-const addConfig = (builder, json, option, data) => {
+const addConfig = (
+  builder,
+  json,
+  option,
+  data
+) => {
   const {
-    dVolume, dColumn,
+    dVolume,
+    dColumn,
     dMarketCap
   } = data;
   return builder
