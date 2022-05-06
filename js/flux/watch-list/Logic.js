@@ -18,7 +18,7 @@ var _WithLogicDnD = _interopRequireDefault(require("./WithLogicDnD"));
 const Logic = { ..._WithLogicGroup.default,
   ..._WithLogicList.default,
   ..._WithLogicItem.default,
-  ..._WithLogicDnD.default,
+  //...WithLogicDnD,
   findGroup: _LogicFn.findGroup
 };
 var _default = Logic;

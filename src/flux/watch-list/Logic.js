@@ -9,7 +9,7 @@ const Logic = {
   ...WithLogicGroup,
   ...WithLogicList,
   ...WithLogicItem,
-  ...WithLogicDnD,
+  //...WithLogicDnD,
   findGroup
 };
 

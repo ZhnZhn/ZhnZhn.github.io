@@ -10,6 +10,11 @@ import {
 } from '../../constants/MsgWatch';
 
 import Logic from './Logic';
+import {
+  dragDropItem,
+  dragDropList,
+  dragDropGroup
+} from './WithLogicDnD';
 
 const STORAGE_KEY = 'WATCH_LIST_ERC'
 , DIALOG_CAPTION ='Watch List:';
@@ -70,13 +75,13 @@ const WatchListSlice = {
 
 
   onDragDropItem(option){
-    this._onDragDrop(Logic.dragDropItem(this.watchList, option) );
+    this._onDragDrop(dragDropItem(this.watchList, option) );
   },
   onDragDropList(option){
-    this._onDragDrop(Logic.dragDropList(this.watchList, option) );
+    this._onDragDrop(dragDropList(this.watchList, option) );
   },
   onDragDropGroup(option){
-    this._onDragDrop(Logic.dragDropGroup(this.watchList, option));
+    this._onDragDrop(dragDropGroup(this.watchList, option));
   },
 
 

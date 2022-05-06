@@ -19,6 +19,8 @@ var _MsgWatch = require("../../constants/MsgWatch");
 
 var _Logic = _interopRequireDefault(require("./Logic"));
 
+var _WithLogicDnD = require("./WithLogicDnD");
+
 const STORAGE_KEY = 'WATCH_LIST_ERC',
       DIALOG_CAPTION = 'Watch List:';
 const WatchListSlice = {
@@ -77,15 +79,15 @@ const WatchListSlice = {
   },
 
   onDragDropItem(option) {
-    this._onDragDrop(_Logic.default.dragDropItem(this.watchList, option));
+    this._onDragDrop((0, _WithLogicDnD.dragDropItem)(this.watchList, option));
   },
 
   onDragDropList(option) {
-    this._onDragDrop(_Logic.default.dragDropList(this.watchList, option));
+    this._onDragDrop((0, _WithLogicDnD.dragDropList)(this.watchList, option));
   },
 
   onDragDropGroup(option) {
-    this._onDragDrop(_Logic.default.dragDropGroup(this.watchList, option));
+    this._onDragDrop((0, _WithLogicDnD.dragDropGroup)(this.watchList, option));
   },
 
   onSaveWatch() {
