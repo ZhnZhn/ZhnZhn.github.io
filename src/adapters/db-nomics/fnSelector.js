@@ -7,15 +7,11 @@ const _getByPropName = (json, propName) =>
 const _fGetByPropName = propName =>
   json => _getByPropName(json, propName);
 
-const fnSelector = {
-  getPeriodAndValue: json => ({
-    period: _getByPropName(json, 'period') || [],
-    value: _getByPropName(json, 'value')
-  }),
 
-  getTitle: _fGetByPropName('dataset_name'),
-  getSubtitle: _fGetByPropName('series_name'),
-  getIndexedAt: _fGetByPropName('indexed_at')
-};
-
-export default fnSelector
+export const getPeriodAndValue = json => ({
+  period: _getByPropName(json, 'period') || [],
+  value: _getByPropName(json, 'value')
+})
+export const getTitle = _fGetByPropName('dataset_name')
+export const getSubtitle = _fGetByPropName('series_name')
+export const getIndexedAt = _fGetByPropName('indexed_at')

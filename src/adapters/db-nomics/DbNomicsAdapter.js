@@ -1,18 +1,22 @@
-import crAdapterType1 from '../crAdapterType1'
-import fnAdapter from './fnAdapter'
-
-const {
+import crAdapterType1 from '../crAdapterType1';
+import {
+  _assign,
   crData,
   crTitle,
   crConfOption
-} = fnAdapter
-, _assign = Object.assign
-, trOption = (option, json) => {
+} from './fnAdapter';
+
+const trOption = (
+  option,
+  json
+) => {
    _assign(option, crTitle(option, json))
 };
 
 const DbNomicsAdapter = crAdapterType1({
-  crData, crConfOption, trOption
+  crData,
+  crConfOption,
+  trOption
 });
 
 export default DbNomicsAdapter

@@ -1,26 +1,23 @@
-import fnAdapter from './fnAdapter'
-
-const {
+import {
+  _assign,
   crError,
   getValue
-} = fnAdapter;
+} from './fnAdapter';
 
-const C = {
-  URL: 'https://api.db.nomics.world/v22/series',
-  TAIL: 'observations=1&format=json&metadata=false',
-  DF_ID: 'ECB/EXR/A.USD.EUR.SP00.A'  
-};
+const URL = 'https://api.db.nomics.world/v22/series'
+, TAIL = 'observations=1&format=json&metadata=false'
+, DF_ID = 'ECB/EXR/A.USD.EUR.SP00.A';
 
 const _isArr = Array.isArray
-, _assign = Object.assign
 , _crErr = crError.bind(null, '');
 
-const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
- if (!dfProvider || !dfCode || !seriaId) {
-   return `${C.URL}?series_ids=${C.DF_ID}&${C.TAIL}`;
- }
- return `${C.URL}?series_ids=${dfProvider}/${dfCode}/${seriaId}&${C.TAIL}`;
-};
+const _crUrlImpl = (
+  dfProvider,
+  dfCode,
+  seriaId
+) => (!dfProvider || !dfCode || !seriaId)
+  ? `${URL}?series_ids=${DF_ID}&${TAIL}`
+  : `${URL}?series_ids=${dfProvider}/${dfCode}/${seriaId}&${TAIL}`;
 
 const _crUrl = (seriaId, option) => {
   const { dfProvider, dfCode } = option;

@@ -1,33 +1,30 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.getTitle = exports.getSubtitle = exports.getPeriodAndValue = exports.getIndexedAt = void 0;
 
-var _getDocs = function _getDocs(json) {
-  return ((json || {}).series || {}).docs || {};
-};
+const _getDocs = json => ((json || {}).series || {}).docs || {};
 
-var _getByPropName = function _getByPropName(json, propName) {
-  return _getDocs(json)[0][propName] || '';
-};
+const _getByPropName = (json, propName) => _getDocs(json)[0][propName] || '';
 
-var _fGetByPropName = function _fGetByPropName(propName) {
-  return function (json) {
-    return _getByPropName(json, propName);
-  };
-};
+const _fGetByPropName = propName => json => _getByPropName(json, propName);
 
-var fnSelector = {
-  getPeriodAndValue: function getPeriodAndValue(json) {
-    return {
-      period: _getByPropName(json, 'period') || [],
-      value: _getByPropName(json, 'value')
-    };
-  },
-  getTitle: _fGetByPropName('dataset_name'),
-  getSubtitle: _fGetByPropName('series_name'),
-  getIndexedAt: _fGetByPropName('indexed_at')
-};
-var _default = fnSelector;
-exports["default"] = _default;
+const getPeriodAndValue = json => ({
+  period: _getByPropName(json, 'period') || [],
+  value: _getByPropName(json, 'value')
+});
+
+exports.getPeriodAndValue = getPeriodAndValue;
+
+const getTitle = _fGetByPropName('dataset_name');
+
+exports.getTitle = getTitle;
+
+const getSubtitle = _fGetByPropName('series_name');
+
+exports.getSubtitle = getSubtitle;
+
+const getIndexedAt = _fGetByPropName('indexed_at');
+
+exports.getIndexedAt = getIndexedAt;
 //# sourceMappingURL=fnSelector.js.map

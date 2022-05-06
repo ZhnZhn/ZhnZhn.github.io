@@ -1,29 +1,35 @@
+export {
+  getValue
+} from '../AdapterFn';
+export {
+  crError
+} from '../crFn';
+
 import {
   joinBy,
   ymdToUTC,
-  getValue
 } from '../AdapterFn';
 import {
-  crError,
   crItemLink,
   crItemConf
 } from '../crFn';
-import fnSelector from './fnSelector'
-
-const {
+import {
   getPeriodAndValue,
   getTitle,
   getSubtitle,
   getIndexedAt
- } = fnSelector;
+} from './fnSelector';
 
-const C = {
-  CHART_URL: 'https://db.nomics.world',
-  SUBT_MAX: 60
-};
+export const _assign = Object.assign
 
-const _crId = ({ dfProvider, dfCode, seriaId }) =>
-  joinBy('/', dfProvider, dfCode, seriaId);
+const CHART_URL = 'https://db.nomics.world'
+, SUBT_MAX = 60;
+
+const _crId = ({
+  dfProvider,
+  dfCode,
+  seriaId
+}) =>  joinBy('/', dfProvider, dfCode, seriaId);
 
 const _crItemLink = crItemLink
   .bind(null, 'DB Nomics Chart');
@@ -37,13 +43,16 @@ const _crDescr = (json, option) => {
   const _id = _crId(option);
   return`<p>SeriaId: ${_id}</p>
    ${_crUpdatedDate(json)}
-   ${_crItemLink(C.CHART_URL+'/'+_id)}`;
+   ${_crItemLink(CHART_URL+'/'+_id)}`;
 };
 
 const _crZhConfig = (option) => {
   const {
-    dataSource, _itemKey,
-    dfProvider, dfCode, seriaId,
+    dataSource,
+    _itemKey,
+    dfProvider,
+    dfCode,
+    seriaId,
     title
   } = option
   , _id = _itemKey;
@@ -78,43 +87,44 @@ const _crAqPoint = (date, y) => _isQuarter(date)
   ? _crPoint(date, y)
   : [];
 
-const fnAdapter = {
-  crError,
-  getValue,
-  crTitle: ({ title, subtitle }, json) => {
-    const _ = getSubtitle(json)
-    , _subtitle = _.length > C.SUBT_MAX
-         ? joinBy(': ', title, subtitle)
-         : _;
-    return {
-      title: getTitle(json),
-      subtitle: _subtitle
-    };
-  },
 
-  crData: (json, option) => {
-    const { fromDate } = option
-    , data = []
-    , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
-    , { period, value } = getPeriodAndValue(json)
-    , crPoint = _isAnnualQuarter(period)
-       ? _crAqPoint
-       : _crPoint
-    , _len = period.length;
-    let _arrPoint;
-    for (let i=0; i<_len; i++){
-      _arrPoint = crPoint(period[i], value[i]);
-      if (_arrPoint[0] > _xFrom && _isNumber(_arrPoint[1])) {
-        data.push(_arrPoint)
-      }
+export const crTitle = (
+  { title, subtitle },
+  json
+) => {
+  const _ = getSubtitle(json)
+  , _subtitle = _.length > SUBT_MAX
+       ? joinBy(': ', title, subtitle)
+       : _;
+  return {
+    title: getTitle(json),
+    subtitle: _subtitle
+  };
+}
+
+export const crData = (json, option) => {
+  const { fromDate } = option
+  , data = []
+  , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
+  , { period, value } = getPeriodAndValue(json)
+  , crPoint = _isAnnualQuarter(period)
+     ? _crAqPoint
+     : _crPoint
+  , _len = period.length;
+  let _arrPoint;
+  for (let i=0; i<_len; i++){
+    _arrPoint = crPoint(period[i], value[i]);
+    if (_arrPoint[0] > _xFrom && _isNumber(_arrPoint[1])) {
+      data.push(_arrPoint)
     }
-    return data;
-  },
+  }
+  return data;
+}
 
-  crConfOption: (option, json) => ({
-    zhConfig: _crZhConfig(option),
-    info: _crInfo(json, option)
-  })
-};
-
-export default fnAdapter
+export const crConfOption = (
+  option,
+  json
+) => ({
+  zhConfig: _crZhConfig(option),
+  info: _crInfo(json, option)
+})
