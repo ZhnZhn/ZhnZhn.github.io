@@ -3,25 +3,24 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
-var crCaption = _fnAdapter["default"].crCaption,
-    crHistOption = _fnAdapter["default"].crHistOption;
-
-var _getData = function _getData(json, option) {
-  var dfPn = option.dfPn;
+const _getData = (json, _ref) => {
+  let {
+    dfPn
+  } = _ref;
   return (json[dfPn] || json).reverse();
 };
 
-var toChart = (0, _crAdapterOHLCV["default"])({
-  crCaption: crCaption,
+const toChart = (0, _crAdapterOHLCV.default)({
+  crCaption: _fnAdapter.crCaption,
   getArr: _getData,
-  crAddConfig: crHistOption
+  crAddConfig: _fnAdapter.crHistOption
 });
 var _default = toChart;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toHistorical.js.map

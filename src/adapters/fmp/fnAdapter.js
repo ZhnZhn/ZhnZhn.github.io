@@ -1,24 +1,37 @@
-import {
-  crZhConfig,
+export {
   getFromDate,
   getCaption,
   getValue,
+} from '../AdapterFn';
+export {
+  crError
+} from '../crFn';
+
+import {
+  _isNaN,
+  crZhConfig,
+  getCaption,
   joinBy,
   ymdToUTC
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import {
-  crError,
   crItemConf,
   crValueConf
 } from '../crFn';
 
-const _isNaN = Number.isNaN;
+export const _assign = Object.assign;
 
-const _crHistoricalItemConf = (data, option) => {
+const _crHistoricalItemConf = (
+  data,
+  option
+) => {
   const {
-    itemCaption, dataSource,
-    items, dfT, dfPn
+    itemCaption,
+    dataSource,
+    items,
+    dfT,
+    dfPn
   } = option;
   return {
     ...crItemConf(option),
@@ -29,7 +42,10 @@ const _crHistoricalItemConf = (data, option) => {
   };
 }
 
-const _crHistZhConfig = (data, option) => ({
+const _crHistZhConfig = (
+  data,
+  option
+) => ({
   ...crZhConfig(option),
   itemConf: _crHistoricalItemConf(data, option)
 });
@@ -38,43 +54,45 @@ const _crName = items => items
   .map(getCaption)
   .join(': ');
 
-const _crInfo = ({ items, _itemUrl }) => ({
+const _crInfo = ({
+  items,
+  _itemUrl
+}) => ({
   name: _crName(items)
 });
 
-const fnAdapter = {
-  crError,
-  getFromDate,
-  getCaption,
-  getValue,
-
-  crData: (json, option) => {
-    const { dfPn, _propName } = option
-    , _metrics = dfPn ? json[dfPn] : json
-    , _data = [];
-    _metrics.forEach(item => {
-      const _v = parseFloat(item[_propName]);
-      if (!_isNaN(_v)) {
-        _data.push([ymdToUTC(item.date), _v])
-      }
-    })
-    return _data.reverse().sort(compareByDate);
-  },
-
-  crCaption: ({ items }) => ({
-    title: getCaption(items[0]),
-    subtitle: joinBy(': ',
-       getCaption(items[1]),
-       getCaption(items[2])
-    )
-  }),
-  addConfOption: (option) => ({
-    info: _crInfo(option)
-  }),
-  crHistOption: ({ option, data }) => ({
-    info: _crInfo(option),
-    zhConfig: _crHistZhConfig(data, option),
+export const crData = (
+  json,
+  option
+) => {
+  const { dfPn, _propName } = option
+  , _metrics = dfPn ? json[dfPn] : json
+  , _data = [];
+  _metrics.forEach(item => {
+    const _v = parseFloat(item[_propName]);
+    if (!_isNaN(_v)) {
+      _data.push([ymdToUTC(item.date), _v])
+    }
   })
-};
+  return _data.reverse().sort(compareByDate);
+}
 
-export default fnAdapter
+export const crCaption = ({ items }) => ({
+  title: getCaption(items[0]),
+  subtitle: joinBy(': ',
+     getCaption(items[1]),
+     getCaption(items[2])
+  )
+})
+
+export const addConfOption = (option) => ({
+  info: _crInfo(option)
+})
+
+export const crHistOption = ({
+  option,
+  data
+}) => ({
+  info: _crInfo(option),
+  zhConfig: _crHistZhConfig(data, option),
+})

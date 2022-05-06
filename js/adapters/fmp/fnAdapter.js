@@ -1,15 +1,22 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.getValue = exports.getFromDate = exports.crHistOption = exports.crError = exports.crData = exports.crCaption = exports.addConfOption = exports._assign = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
-var _compareByFn = require("../compareByFn");
+exports.getFromDate = _AdapterFn.getFromDate;
+exports.getCaption = _AdapterFn.getCaption;
+exports.getValue = _AdapterFn.getValue;
 
 var _crFn = require("../crFn");
 
-const _isNaN = Number.isNaN;
+exports.crError = _crFn.crError;
+
+var _compareByFn = require("../compareByFn");
+
+const _assign = Object.assign;
+exports._assign = _assign;
 
 const _crHistoricalItemConf = (data, option) => {
   const {
@@ -45,52 +52,55 @@ const _crInfo = _ref => {
   };
 };
 
-const fnAdapter = {
-  crError: _crFn.crError,
-  getFromDate: _AdapterFn.getFromDate,
-  getCaption: _AdapterFn.getCaption,
-  getValue: _AdapterFn.getValue,
-  crData: (json, option) => {
-    const {
-      dfPn,
-      _propName
-    } = option,
-          _metrics = dfPn ? json[dfPn] : json,
-          _data = [];
+const crData = (json, option) => {
+  const {
+    dfPn,
+    _propName
+  } = option,
+        _metrics = dfPn ? json[dfPn] : json,
+        _data = [];
 
-    _metrics.forEach(item => {
-      const _v = parseFloat(item[_propName]);
+  _metrics.forEach(item => {
+    const _v = parseFloat(item[_propName]);
 
-      if (!_isNaN(_v)) {
-        _data.push([(0, _AdapterFn.ymdToUTC)(item.date), _v]);
-      }
-    });
+    if (!(0, _AdapterFn._isNaN)(_v)) {
+      _data.push([(0, _AdapterFn.ymdToUTC)(item.date), _v]);
+    }
+  });
 
-    return _data.reverse().sort(_compareByFn.compareByDate);
-  },
-  crCaption: _ref2 => {
-    let {
-      items
-    } = _ref2;
-    return {
-      title: (0, _AdapterFn.getCaption)(items[0]),
-      subtitle: (0, _AdapterFn.joinBy)(': ', (0, _AdapterFn.getCaption)(items[1]), (0, _AdapterFn.getCaption)(items[2]))
-    };
-  },
-  addConfOption: option => ({
-    info: _crInfo(option)
-  }),
-  crHistOption: _ref3 => {
-    let {
-      option,
-      data
-    } = _ref3;
-    return {
-      info: _crInfo(option),
-      zhConfig: _crHistZhConfig(data, option)
-    };
-  }
+  return _data.reverse().sort(_compareByFn.compareByDate);
 };
-var _default = fnAdapter;
-exports.default = _default;
+
+exports.crData = crData;
+
+const crCaption = _ref2 => {
+  let {
+    items
+  } = _ref2;
+  return {
+    title: (0, _AdapterFn.getCaption)(items[0]),
+    subtitle: (0, _AdapterFn.joinBy)(': ', (0, _AdapterFn.getCaption)(items[1]), (0, _AdapterFn.getCaption)(items[2]))
+  };
+};
+
+exports.crCaption = crCaption;
+
+const addConfOption = option => ({
+  info: _crInfo(option)
+});
+
+exports.addConfOption = addConfOption;
+
+const crHistOption = _ref3 => {
+  let {
+    option,
+    data
+  } = _ref3;
+  return {
+    info: _crInfo(option),
+    zhConfig: _crHistZhConfig(data, option)
+  };
+};
+
+exports.crHistOption = crHistOption;
 //# sourceMappingURL=fnAdapter.js.map

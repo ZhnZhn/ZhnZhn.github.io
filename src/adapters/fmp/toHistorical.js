@@ -1,12 +1,10 @@
-import fnAdapter from './fnAdapter'
-import crAdapterOHLCV  from '../crAdapterOHLCV'
+import { crCaption, crHistOption } from './fnAdapter';
+import crAdapterOHLCV  from '../crAdapterOHLCV';
 
-const { crCaption, crHistOption } = fnAdapter
-
-const _getData = (json, option) => {
-  const { dfPn } = option;  
-  return (json[dfPn] || json).reverse();
-};
+const _getData = (
+  json,
+  { dfPn }
+) => (json[dfPn] || json).reverse();
 
 const toChart = crAdapterOHLCV({
   crCaption,

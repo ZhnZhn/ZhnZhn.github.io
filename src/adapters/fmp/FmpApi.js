@@ -1,21 +1,19 @@
-import fnAdapter from './fnAdapter'
-
-const {
+import {
+  _assign,
   getCaption,
   getValue,
   crError,
   getFromDate
-} = fnAdapter;
+} from './fnAdapter';
 
-const C = {
-  URI: 'https://financialmodelingprep.com/api/v3'  
-};
-
+const URI = 'https://financialmodelingprep.com/api/v3';
 const _isArr = Array.isArray
-const _assign = Object.assign;
 
-const _crDataSource = ({ dataSource, dialogConf={} }) =>
-  dataSource || dialogConf.contFullCaption || '';
+const _crDataSource = ({
+  dataSource,
+  dialogConf
+}) => dataSource
+ || (dialogConf || {}).contFullCaption || '';
 
 const REG_BLANKS = /\s/g;
 const _toLowerCamelCase = str => str[0].toLowerCase()
@@ -37,7 +35,7 @@ const _assignDf = option => {
   , _query = _period
       ? `period=${_period}`
       : ''
-  , _itemUrl = `${C.URI}/${dfT}/${_symbol}?${_query}`;
+  , _itemUrl = `${URI}/${dfT}/${_symbol}?${_query}`;
 
   _assign(option, {
     _symbol,
@@ -55,7 +53,7 @@ const _assignHp = option => {
   , _fromDate = fromDate || getFromDate(3)
   , _symbol = getValue(items[0], {isUpper: true})
   //, _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
-  , _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}`;
+  , _itemUrl = `${URI}/${dfT}/${_symbol}?from=${_fromDate}`;
 
   _assign(option, {
     _symbol,
@@ -72,7 +70,7 @@ const _assignCp = option => {
   } = option
   , _symbol = getValue(items[0], {isUpper: true})
   , _interval = getValue(items[1])
-  , _itemUrl = `${C.URI}/${dfT}/${_interval}/${_symbol}`;
+  , _itemUrl = `${URI}/${dfT}/${_interval}/${_symbol}`;
 
   _assign(option, {
     _symbol,
