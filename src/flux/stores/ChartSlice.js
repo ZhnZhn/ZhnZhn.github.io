@@ -13,20 +13,20 @@ import {
   BAT_UPDATE_BROWSER_MENU
 } from '../actions/BrowserActions';
 
-import ChartLogic from './chart/ChartLogic'
-
-const {
+import {
   isChartExist,
-  loadConfig, showChart,
   removeConfig,
   toTop,
-  updateMovingValues,
-  sortBy,
   removeAll,
+  updateMovingValues,
+  loadConfig,
+  showChart,
+  sortBy,
   checkBrowserChartTypes,
   scanPostAdded,
   setAlertItemIdTo
-} = ChartLogic;
+} from './chart/ChartLogic';
+
 
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 const _logErrorToConsole = function({

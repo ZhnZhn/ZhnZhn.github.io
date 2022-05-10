@@ -1,12 +1,10 @@
-import ChartLogicFn from '../ChartLogicFn'
-
-const {
+import {
   isChartExist,
   removeConfig,
   toTop,
   removeAll,
   updateMovingValues
-} = ChartLogicFn;
+} from '../ChartLogicFn';
 
 const CHART_TYPE = "AA_BB";
 const _crChartsConfig = (chartType=CHART_TYPE) => ({

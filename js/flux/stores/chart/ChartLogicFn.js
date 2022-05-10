@@ -3,87 +3,92 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.updateMovingValues = exports.toTop = exports.removeConfig = exports.removeAll = exports.isChartExist = void 0;
 
-var _getSlice5 = _interopRequireDefault(require("./getSlice"));
+var _getSlice = _interopRequireDefault(require("./getSlice"));
 
-var _notConfById = function _notConfById(id) {
-  return function (c) {
-    return c.zhConfig.id !== id;
-  };
-};
+const _notConfById = id => c => c.zhConfig.id !== id;
 
-var _confById = function _confById(id) {
-  return function (c) {
-    return c.zhConfig.id === id;
-  };
-};
+const _confById = id => c => c.zhConfig.id === id;
 
-var fns = {
-  isChartExist: function isChartExist(slice, chartType, key) {
-    var _getSlice = (0, _getSlice5["default"])(slice, chartType),
-        chartSlice = _getSlice.chartSlice,
-        configs = _getSlice.configs;
+const isChartExist = (slice, chartType, key) => {
+  const {
+    chartSlice,
+    configs
+  } = (0, _getSlice.default)(slice, chartType);
 
-    if (!chartSlice) {
-      return false;
-    }
-
-    var _max = configs.length;
-    var i = 0;
-
-    for (; i < _max; i++) {
-      if (configs[i].zhConfig.key === key) {
-        return true;
-      }
-    }
-
+  if (!chartSlice) {
     return false;
-  },
-  removeConfig: function removeConfig(slice, chartType, id) {
-    var _getSlice2 = (0, _getSlice5["default"])(slice, chartType),
-        chartSlice = _getSlice2.chartSlice,
-        configs = _getSlice2.configs;
+  }
 
-    chartSlice.configs = configs.filter(_notConfById(id));
-    return {
-      chartSlice: chartSlice,
-      isRemoved: configs.length > chartSlice.configs.length
-    };
-  },
-  toTop: function toTop(slice, chartType, id) {
-    var _getSlice3 = (0, _getSlice5["default"])(slice, chartType),
-        chartSlice = _getSlice3.chartSlice,
-        configs = _getSlice3.configs,
+  const _max = configs.length;
+  let i = 0;
+
+  for (; i < _max; i++) {
+    if (configs[i].zhConfig.key === key) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+exports.isChartExist = isChartExist;
+
+const removeConfig = (slice, chartType, id) => {
+  const {
+    chartSlice,
+    configs
+  } = (0, _getSlice.default)(slice, chartType);
+  chartSlice.configs = configs.filter(_notConfById(id));
+  return {
+    chartSlice,
+    isRemoved: configs.length > chartSlice.configs.length
+  };
+};
+
+exports.removeConfig = removeConfig;
+
+const toTop = (slice, chartType, id) => {
+  const {
+    chartSlice,
+    configs
+  } = (0, _getSlice.default)(slice, chartType),
         _conf = configs.find(_confById(id));
 
-    if (_conf) {
-      var arrWithout = configs.filter(_notConfById(id));
-      chartSlice.configs = [_conf].concat(arrWithout);
-    }
+  if (_conf) {
+    const arrWithout = configs.filter(_notConfById(id));
+    chartSlice.configs = [_conf, ...arrWithout];
+  }
 
-    return chartSlice;
-  },
-  removeAll: function removeAll(slice, chartType) {
-    var _slice = slice[chartType] || {};
+  return chartSlice;
+};
 
-    _slice.configs = [];
-    return _slice;
-  },
-  updateMovingValues: function updateMovingValues(slice, chartType, movingValues) {
-    var _getSlice4 = (0, _getSlice5["default"])(slice, chartType),
-        configs = _getSlice4.configs,
+exports.toTop = toTop;
+
+const removeAll = (slice, chartType) => {
+  const _slice = slice[chartType] || {};
+
+  _slice.configs = [];
+  return _slice;
+};
+
+exports.removeAll = removeAll;
+
+const updateMovingValues = (slice, chartType, movingValues) => {
+  const {
+    configs
+  } = (0, _getSlice.default)(slice, chartType),
         _maxConfigs = configs.length;
 
-    if (_maxConfigs === movingValues.length) {
-      var i = 0;
+  if (_maxConfigs === movingValues.length) {
+    let i = 0;
 
-      for (; i < _maxConfigs; i++) {
-        configs[i].valueMoving = movingValues[i];
-      }
+    for (; i < _maxConfigs; i++) {
+      configs[i].valueMoving = movingValues[i];
     }
   }
 };
-var _default = fns;
-exports["default"] = _default;
+
+exports.updateMovingValues = updateMovingValues;
 //# sourceMappingURL=ChartLogicFn.js.map

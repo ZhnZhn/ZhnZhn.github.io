@@ -3,9 +3,15 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.updateMovingValues = exports.toTop = exports.sortBy = exports.showChart = exports.setAlertItemIdTo = exports.scanPostAdded = exports.removeConfig = exports.removeAll = exports.loadConfig = exports.isChartExist = exports.checkBrowserChartTypes = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _ChartLogicFn = require("./ChartLogicFn");
+
+exports.isChartExist = _ChartLogicFn.isChartExist;
+exports.removeConfig = _ChartLogicFn.removeConfig;
+exports.toTop = _ChartLogicFn.toTop;
+exports.removeAll = _ChartLogicFn.removeAll;
+exports.updateMovingValues = _ChartLogicFn.updateMovingValues;
 
 var _Type = require("../../../constants/Type");
 
@@ -13,117 +19,140 @@ var _ComponentActions = require("../../actions/ComponentActions");
 
 var _fItemContainer = _interopRequireDefault(require("../../logic/fItemContainer"));
 
-var _getSlice5 = _interopRequireDefault(require("./getSlice"));
+var _getSlice = _interopRequireDefault(require("./getSlice"));
 
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
 
-var _ChartLogicFn = _interopRequireDefault(require("./ChartLogicFn"));
+const {
+  crItemContainerEl
+} = _fItemContainer.default;
+const _isArr = Array.isArray;
 
-var crItemContainerEl = _fItemContainer["default"].crItemContainerEl;
-var _isArr = Array.isArray;
+const _isStr = str => typeof str === 'string';
 
-var _isStr = function _isStr(str) {
-  return typeof str === 'string';
-};
-
-var _isSecondDotCase = function _isSecondDotCase(series, _ref) {
-  var seriaType = _ref.seriaType;
+const _isSecondDotCase = (series, _ref) => {
+  let {
+    seriaType
+  } = _ref;
   return seriaType === 'DOT_SET' && _isArr(series) && series[0].type === 'scatter' && series.length === 2;
 };
 
-var ChartLogic = (0, _extends2["default"])({}, _ChartLogicFn["default"], {
-  _initChartSlice: function _initChartSlice(slice, chartType, config) {
-    if (!slice[chartType]) {
-      slice[chartType] = {
-        chartType: chartType,
-        configs: config ? [config] : [],
-        isShow: true
-      };
-    }
-  },
-  loadConfig: function loadConfig(slice, config, option, dialogConf, store) {
-    var chartType = option.chartType,
-        browserType = option.browserType,
-        _getSlice2 = (0, _getSlice5["default"])(slice, chartType),
-        chartSlice = _getSlice2.chartSlice,
-        configs = _getSlice2.configs;
-
-    if (chartSlice) {
-      configs.unshift(config);
-      chartSlice.isShow = true;
-      return {
-        chartSlice: chartSlice
-      };
-    } else {
-      ChartLogic._initChartSlice(slice, chartType, config);
-
-      return {
-        Comp: crItemContainerEl({
-          browserType: browserType,
-          dialogConf: dialogConf,
-          store: store
-        })
-      };
-    }
-  },
-  showChart: function showChart(slice, chartType, browserType, dialogConf, store) {
-    var _getSlice3 = (0, _getSlice5["default"])(slice, chartType),
-        chartSlice = _getSlice3.chartSlice;
-
-    if (chartSlice) {
-      chartSlice.isShow = true;
-      return {
-        chartSlice: chartSlice
-      };
-    } else {
-      ChartLogic._initChartSlice(slice, chartType);
-
-      return {
-        Comp: crItemContainerEl({
-          browserType: browserType,
-          dialogConf: dialogConf,
-          store: store
-        })
-      };
-    }
-  },
-  sortBy: function sortBy(slice, chartType, by) {
-    var _getSlice4 = (0, _getSlice5["default"])(slice, chartType),
-        chartSlice = _getSlice4.chartSlice,
-        configs = _getSlice4.configs;
-
-    if (by) {
-      configs.sort((0, _fCompareBy["default"])(by));
-    } else {
-      configs.reverse();
-    }
-
-    return chartSlice;
-  },
-  checkBrowserChartTypes: function checkBrowserChartTypes(slice, option) {
-    var chb = slice.activeContChb;
-
-    if (chb) {
-      option.chartType = chb.chartType;
-      option.browserType = chb.browserType;
-    }
-  },
-  scanPostAdded: function scanPostAdded(store, option) {
-    var chart = store.getActiveChart();
-
-    if (chart && _isSecondDotCase(chart.series, option)) {
-      store.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
-        modalDialogType: _Type.ModalDialog.COLUMN_RANGE,
-        chart: chart
-      });
-    }
-  },
-  setAlertItemIdTo: function setAlertItemIdTo(option) {
-    var alertItemId = option.alertItemId,
-        value = option.value;
-    option.alertItemId = _isStr(alertItemId) ? alertItemId : _isStr(value) ? value : void 0;
+const _initChartSlice = (slice, chartType, config) => {
+  if (!slice[chartType]) {
+    slice[chartType] = {
+      chartType,
+      configs: config ? [config] : [],
+      isShow: true
+    };
   }
-});
-var _default = ChartLogic;
-exports["default"] = _default;
+};
+
+const loadConfig = (slice, config, option, dialogConf, store) => {
+  const {
+    chartType,
+    browserType
+  } = option,
+        {
+    chartSlice,
+    configs
+  } = (0, _getSlice.default)(slice, chartType);
+
+  if (chartSlice) {
+    configs.unshift(config);
+    chartSlice.isShow = true;
+    return {
+      chartSlice
+    };
+  } else {
+    _initChartSlice(slice, chartType, config);
+
+    return {
+      Comp: crItemContainerEl({
+        browserType,
+        dialogConf,
+        store
+      })
+    };
+  }
+};
+
+exports.loadConfig = loadConfig;
+
+const showChart = (slice, chartType, browserType, dialogConf, store) => {
+  const {
+    chartSlice
+  } = (0, _getSlice.default)(slice, chartType);
+
+  if (chartSlice) {
+    chartSlice.isShow = true;
+    return {
+      chartSlice
+    };
+  } else {
+    _initChartSlice(slice, chartType);
+
+    return {
+      Comp: crItemContainerEl({
+        browserType,
+        dialogConf,
+        store
+      })
+    };
+  }
+};
+
+exports.showChart = showChart;
+
+const sortBy = (slice, chartType, by) => {
+  const {
+    chartSlice,
+    configs
+  } = (0, _getSlice.default)(slice, chartType);
+
+  if (by) {
+    configs.sort((0, _fCompareBy.default)(by));
+  } else {
+    configs.reverse();
+  }
+
+  return chartSlice;
+};
+
+exports.sortBy = sortBy;
+
+const checkBrowserChartTypes = (slice, option) => {
+  const {
+    activeContChb: chb
+  } = slice;
+
+  if (chb) {
+    option.chartType = chb.chartType;
+    option.browserType = chb.browserType;
+  }
+};
+
+exports.checkBrowserChartTypes = checkBrowserChartTypes;
+
+const scanPostAdded = (store, option) => {
+  const chart = store.getActiveChart();
+
+  if (chart && _isSecondDotCase(chart.series, option)) {
+    store.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
+      modalDialogType: _Type.ModalDialog.COLUMN_RANGE,
+      chart
+    });
+  }
+};
+
+exports.scanPostAdded = scanPostAdded;
+
+const setAlertItemIdTo = option => {
+  const {
+    alertItemId,
+    value
+  } = option;
+  option.alertItemId = _isStr(alertItemId) ? alertItemId : _isStr(value) ? value : void 0;
+};
+
+exports.setAlertItemIdTo = setAlertItemIdTo;
 //# sourceMappingURL=ChartLogic.js.map

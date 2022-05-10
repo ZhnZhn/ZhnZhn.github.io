@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
@@ -11,28 +9,17 @@ var _ChartActions = require("../actions/ChartActions");
 
 var _BrowserActions = require("../actions/BrowserActions");
 
-var _ChartLogic = _interopRequireDefault(require("./chart/ChartLogic"));
+var _ChartLogic = require("./chart/ChartLogic");
 
-const {
-  isChartExist,
-  loadConfig,
-  showChart,
-  removeConfig,
-  toTop,
-  updateMovingValues,
-  sortBy,
-  removeAll,
-  checkBrowserChartTypes,
-  scanPostAdded,
-  setAlertItemIdTo
-} = _ChartLogic.default;
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 
-const _logErrorToConsole = function ({
-  alertCaption,
-  alertItemId,
-  alertDescr
-}) {
+const _logErrorToConsole = function (_ref) {
+  let {
+    alertCaption,
+    alertItemId,
+    alertDescr
+  } = _ref;
+
   const _title = [alertCaption, alertItemId].filter(Boolean).join(": ");
 
   console.log('%c' + _title, CONSOLE_LOG_STYLE);
@@ -47,12 +34,12 @@ const ChartSlice = {
   },
 
   isChartExist(option) {
-    checkBrowserChartTypes(this, option);
+    (0, _ChartLogic.checkBrowserChartTypes)(this, option);
     const {
       chartType,
       key
     } = option;
-    return isChartExist(this.charts, chartType, key);
+    return (0, _ChartLogic.isChartExist)(this.charts, chartType, key);
   },
 
   onLoadItem() {
@@ -68,7 +55,7 @@ const ChartSlice = {
       key
     } = option;
 
-    if (isChartExist(this.charts, chartType, key)) {
+    if ((0, _ChartLogic.isChartExist)(this.charts, chartType, key)) {
       return;
     }
 
@@ -76,7 +63,7 @@ const ChartSlice = {
           {
       chartSlice,
       Comp
-    } = loadConfig(this.charts, config, option, _dialogConf, this);
+    } = (0, _ChartLogic.loadConfig)(this.charts, config, option, _dialogConf, this);
 
     this.addMenuItemCounter(chartType, browserType);
 
@@ -91,14 +78,18 @@ const ChartSlice = {
     this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
   },
 
-  onLoadItemAdded(option = {}) {
+  onLoadItemAdded(option) {
+    if (option === void 0) {
+      option = {};
+    }
+
     this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_COMPLETE);
-    scanPostAdded(this, option);
+    (0, _ChartLogic.scanPostAdded)(this, option);
   },
 
   onLoadItemFailed(option) {
     this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_FAILED);
-    setAlertItemIdTo(option);
+    (0, _ChartLogic.setAlertItemIdTo)(option);
     this.showAlertDialog(option);
 
     _logErrorToConsole(option);
@@ -122,7 +113,7 @@ const ChartSlice = {
     const {
       chartSlice,
       Comp
-    } = showChart(this.charts, chartType, browserType, dialogConf, this);
+    } = (0, _ChartLogic.showChart)(this.charts, chartType, browserType, dialogConf, this);
 
     if (chartSlice) {
       this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
@@ -143,7 +134,7 @@ const ChartSlice = {
     const {
       chartSlice,
       isRemoved
-    } = removeConfig(this.charts, chartType, chartId);
+    } = (0, _ChartLogic.removeConfig)(this.charts, chartType, chartId);
 
     if (isRemoved) {
       this.resetActiveChart(chartId);
@@ -154,7 +145,7 @@ const ChartSlice = {
   },
 
   onToTop(chartType, id) {
-    const chartSlice = toTop(this.charts, chartType, id);
+    const chartSlice = (0, _ChartLogic.toTop)(this.charts, chartType, id);
     this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
   },
 
@@ -167,16 +158,16 @@ const ChartSlice = {
   },
 
   onUpdateMovingValues(chartType, movingValues) {
-    updateMovingValues(this.charts, chartType, movingValues);
+    (0, _ChartLogic.updateMovingValues)(this.charts, chartType, movingValues);
   },
 
   onSortBy(chartType, by) {
-    const chartSlice = sortBy(this.charts, chartType, by);
+    const chartSlice = (0, _ChartLogic.sortBy)(this.charts, chartType, by);
     this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
   },
 
   onRemoveAll(chartType, browserType) {
-    const chartSlice = removeAll(this.charts, chartType);
+    const chartSlice = (0, _ChartLogic.removeAll)(this.charts, chartType);
     this.resetMenuItemCounter(chartType, browserType);
     this.uncheckActiveCheckbox();
     this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
