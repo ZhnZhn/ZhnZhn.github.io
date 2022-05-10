@@ -1,4 +1,3 @@
-
 import BrowserConfig from '../../constants/BrowserConfig';
 import { BrowserType } from '../../constants/Type';
 import DataWL from '../../constants/DataWL';
@@ -10,17 +9,15 @@ import {
   BAT_LOAD_BROWSER_FAILED
 } from '../actions/BrowserActions';
 
-import BrowserLogic from './browser/BrowserLogic';
-
-const FAILED = 'Failed';
-
-const {
+import {
   isWithItemCounter,
   initBrowserMenu,
   setIsOpen,
   plusCounter,
   resetCounter
-} = BrowserLogic;
+} from './browser/BrowserLogic';
+
+const FAILED = 'Failed';
 
 const _setItemOpen = setIsOpen.bind(null, true)
 , _setItemClose = setIsOpen.bind(null, false)

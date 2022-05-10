@@ -1,56 +1,74 @@
 import BrowserConfig from '../../../constants/BrowserConfig';
 
-import crMenu from './crMenu'
-import addDialogPropsTo from './addDialogPropsTo'
-import findItem from './findItem'
+import crMenu from './crMenu';
+import addDialogPropsTo from './addDialogPropsTo';
+import findItem from './findItem';
 
-const _findItemCounter = (appMenu, bT, cT) => BrowserLogic
- .isWithItemCounter(bT)
-   ? findItem(appMenu[bT], cT)
-   : void 0;
+export const isWithItemCounter = (
+  browserType
+) => {
+  const _config = BrowserConfig[browserType];
+  return typeof _config === 'undefined'
+    ? false
+    : !_config.withoutItemCounter;
+}
 
-const BrowserLogic = {
-  crMenu,
+export const initBrowserMenu = (
+  slice,
+  option
+) => {
+  const { json, browserType } = option
+  , { menu, items, df } = json
+  , elMenu = crMenu(menu, items, browserType);
 
-  isWithItemCounter: (browserType) => {
-    const _config = BrowserConfig[browserType];
-    return typeof _config === 'undefined'
-      ? false
-      : !_config.withoutItemCounter;
-  },
+  addDialogPropsTo(items, df);
+  slice.routeDialog[browserType] = items;
+  slice.browserMenu[browserType] = elMenu;
+  return elMenu;
+}
 
-  initBrowserMenu: (slice, option) => {
-    const { json, browserType } = option
-    , { menu, items, df } = json
-    , elMenu = crMenu(menu, items, browserType);
-    
-    addDialogPropsTo(items, df);
-    slice.routeDialog[browserType] = items;
-    slice.browserMenu[browserType] = elMenu;
-    return elMenu;
-  },
-
-  setIsOpen: (value, appMenu, bT, cT) => {
-    if (BrowserLogic.isWithItemCounter(bT)) {
-      const item = findItem(appMenu[bT], cT);
-      if (item) {
-        item.isOpen = value;
-      }
-    }
-  },
-  plusCounter: (value, appMenu, bT, cT) => {
-    const item = _findItemCounter(appMenu, bT, cT);
-    if (item){
-      item.counter += value;
-      item.isOpen = true;
-    }
-  },
-  resetCounter: (appMenu, bT, cT) => {
-    const item = _findItemCounter(appMenu, bT, cT);
+export const setIsOpen = (
+  value,
+  appMenu,
+  bT,
+  cT
+) => {
+  if (isWithItemCounter(bT)) {
+    const item = findItem(appMenu[bT], cT);
     if (item) {
-      item.counter = 0
+      item.isOpen = value;
     }
   }
-};
+}
 
-export default BrowserLogic
+const _findItemCounter = (
+  appMenu,
+  bT,
+  cT
+) => isWithItemCounter(bT)
+  ? findItem(appMenu[bT], cT)
+  : void 0;
+
+export const plusCounter = (
+  value,
+  appMenu,
+  bT,
+  cT
+) => {
+  const item = _findItemCounter(appMenu, bT, cT);
+  if (item){
+    item.counter += value;
+    item.isOpen = true;
+  }
+}
+
+export const resetCounter = (
+  appMenu,
+  bT,
+  cT
+) => {
+  const item = _findItemCounter(appMenu, bT, cT);
+  if (item) {
+    item.counter = 0
+  }
+}
