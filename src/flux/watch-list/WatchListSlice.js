@@ -1,7 +1,17 @@
 import LocalForage from 'localforage';
 
 import { BAT_UPDATE_WATCH_BROWSER } from '../actions/BrowserActions';
-import { WatchActionTypes as WAT } from '../actions/WatchActions';
+import {
+  WAT_ADD_ITEM,
+  WAT_EDIT_WATCH_COMPLETED,
+  WAT_EDIT_WATCH_FAILED,
+  WAT_ADD_GROUP,
+  WAT_RENAME_GROUP,
+  WAT_DELETE_GROUP,
+  WAT_CREATE_LIST,
+  WAT_RENAME_LIST,
+  WAT_DELETE_LIST
+} from '../actions/WatchActions';
 import DF_WATCH_LIST from '../../constants/WatchDefault';
 import { ModalDialog }  from '../../constants/Type';
 import {
@@ -65,7 +75,7 @@ const WatchListSlice = {
   onAddItem(item){
     this._onEditWatch(
       addItem(this.watchList, item),
-      WAT.ADD_ITEM
+      WAT_ADD_ITEM
     );
   },
   onRemoveItem(option){
@@ -123,9 +133,9 @@ const WatchListSlice = {
   _onEditWatch(result, forActionType){
     if (result.isDone){
       this._triggerUpdateWL()
-      this.trigger(WAT.EDIT_WATCH_COMPLETED, { forActionType });
+      this.trigger(WAT_EDIT_WATCH_COMPLETED, { forActionType });
     } else {
-      this.trigger(WAT.EDIT_WATCH_FAILED, {
+      this.trigger(WAT_EDIT_WATCH_FAILED, {
           messages:[result.message],
           forActionType
       });
@@ -134,38 +144,38 @@ const WatchListSlice = {
   onAddGroup(option){
     this._onEditWatch(
       addGroup(this.watchList, option),
-      WAT.ADD_GROUP
+      WAT_ADD_GROUP
     );
   },
   onRenameGroup(option){
     this._onEditWatch(
       renameGroup(this.watchList, option),
-      WAT.RENAME_GROUP
+      WAT_RENAME_GROUP
     );
   },
   onDeleteGroup(option){
     this._onEditWatch(
       deleteGroup(this.watchList, option),
-      WAT.DELETE_GROUP
+      WAT_DELETE_GROUP
     );
   },
 
   onCreateList(option){
     this._onEditWatch(
       createList(this.watchList, option),
-      WAT.CREATE_LIST
+      WAT_CREATE_LIST
     );
   },
   onRenameList(option){
     this._onEditWatch(
       renameList(this.watchList, option),
-      WAT.RENAME_LIST
+      WAT_RENAME_LIST
     );
   },
   onDeleteList(option){
     this._onEditWatch(
       deleteList(this.watchList, option),
-      WAT.DELETE_LIST
+      WAT_DELETE_LIST
     );
   }
 

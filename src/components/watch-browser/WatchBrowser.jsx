@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 import { ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
-import WatchActions from '../../flux/actions/WatchActions';
+import { WatchActions } from '../../flux/actions/WatchActions';
 
 import A from '../Comp'
 

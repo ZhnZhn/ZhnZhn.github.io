@@ -1,7 +1,12 @@
 import { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
+import {
+  WAT_EDIT_WATCH_COMPLETED,
+  WAT_EDIT_WATCH_FAILED,
+  WAT_ADD_ITEM,
+  WatchActions
+} from '../../flux/actions/WatchActions';
 import {
   notSelected
 } from '../../constants/MsgWatch';
@@ -13,10 +18,7 @@ import D from '../dialogs/DialogCell'
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad';
 
-const { addItem } = Actions
-, actionCompleted = WAT.EDIT_WATCH_COMPLETED
-, actionFailed =  WAT.EDIT_WATCH_FAILED
-, forActionType = WAT.ADD_ITEM
+const addItem = WatchActions[WAT_ADD_ITEM]
 , S_DIALOG = { width: 300 }
 , S_CAPTION = { width: 70 }
 , SELECT_WIDTH = "216";
@@ -63,12 +65,12 @@ class AddToWatchDialog extends Component {
     this.unsubscribe()
   }
   _onStore = (actionType, data) => {
-    if (actionType === actionCompleted && data.forActionType === forActionType){
+    if (actionType === WAT_EDIT_WATCH_COMPLETED && data.forActionType === WAT_ADD_ITEM){
        if (this.state.validationMessages.length>0){
          this.setState({ validationMessages:[] })
        }
        this.props.onClose()
-    } else if (actionType === actionFailed && data.forActionType === forActionType){
+    } else if (actionType === WAT_EDIT_WATCH_FAILED && data.forActionType === WAT_ADD_ITEM){
        this.setState({ validationMessages:data.messages });
     }
   }

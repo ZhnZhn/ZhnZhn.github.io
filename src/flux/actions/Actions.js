@@ -1,12 +1,14 @@
-import Chart from './ChartActions';
-import Component from './ComponentActions';
-import Browser from './BrowserActions';
+import ChartActions from './ChartActions';
+import ComponentActions from './ComponentActions';
+import BrowserActions from './BrowserActions';
 
-import Watch from './WatchActions';
+import { WatchActions } from './WatchActions';
 
 const Actions = [
-  Chart, Component, Browser,
-  Watch
+  ChartActions,
+  ComponentActions,
+  BrowserActions,
+  WatchActions
 ];
 
 export default Actions

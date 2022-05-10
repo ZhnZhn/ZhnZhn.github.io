@@ -1,7 +1,14 @@
 import { memo } from 'react';
 //import PropTypes from "prop-types";
 
-import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
+import {
+  WAT_EDIT_WATCH_COMPLETED,
+  WAT_EDIT_WATCH_FAILED,
+  WAT_CREATE_LIST,
+  WAT_RENAME_LIST,
+  WAT_DELETE_LIST,
+  WatchActions
+} from '../../flux/actions/WatchActions';
 
 import {
   notSelected,
@@ -15,11 +22,9 @@ import ListCreatePane from './ListCreatePane';
 import ListEditPane from './ListEditPane';
 import ListDeletePane from './ListDeletePane';
 
-const { createList, renameList, deleteList } = Actions;
-const {
-  EDIT_WATCH_COMPLETED, EDIT_WATCH_FAILED,
-  CREATE_LIST, RENAME_LIST, DELETE_LIST
-} = WAT;
+const createList = WatchActions[WAT_CREATE_LIST]
+, renameList = WatchActions[WAT_RENAME_LIST]
+, deleteList = WatchActions[WAT_DELETE_LIST];
 
 const _areEqual = (prevProps, nextProps) => prevProps
   .isShow === nextProps.isShow;
@@ -39,9 +44,9 @@ const EditListDialog = memo(({
        <Tab title="Create">
          <ListCreatePane
             store={store}
-            actionCompleted={EDIT_WATCH_COMPLETED}
-            actionFailed={EDIT_WATCH_FAILED}
-            forActionType={CREATE_LIST}
+            actionCompleted={WAT_EDIT_WATCH_COMPLETED}
+            actionFailed={WAT_EDIT_WATCH_FAILED}
+            forActionType={WAT_CREATE_LIST}
             msgOnNotSelect={notSelected}
             msgOnIsEmptyName={emptyName}
             onCreate={createList}
@@ -51,9 +56,9 @@ const EditListDialog = memo(({
        <Tab title="Rename">
          <ListEditPane
             store={store}
-            actionCompleted={EDIT_WATCH_COMPLETED}
-            actionFailed={EDIT_WATCH_FAILED}
-            forActionType={RENAME_LIST}
+            actionCompleted={WAT_EDIT_WATCH_COMPLETED}
+            actionFailed={WAT_EDIT_WATCH_FAILED}
+            forActionType={WAT_RENAME_LIST}
             msgOnNotSelect={notSelected}
             msgOnIsEmptyName={emptyName}
             onRename={renameList}
@@ -63,9 +68,9 @@ const EditListDialog = memo(({
        <Tab title="Delete">
          <ListDeletePane
             store={store}
-            actionCompleted={EDIT_WATCH_COMPLETED}
-            actionFailed={EDIT_WATCH_FAILED}
-            forActionType={DELETE_LIST}
+            actionCompleted={WAT_EDIT_WATCH_COMPLETED}
+            actionFailed={WAT_EDIT_WATCH_FAILED}
+            forActionType={WAT_DELETE_LIST}
             msgOnNotSelect={notSelected}
             onDelete={deleteList}
             onClose={onClose}
