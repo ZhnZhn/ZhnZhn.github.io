@@ -1,7 +1,16 @@
 import Reflux from 'reflux-core';
 
 import { getFromDate } from '../../utils/DateUtils';
-import Msg from '../../constants/Msg';
+import {
+  setAlertMsg,
+  ERR_ALREADY_EXIST,
+  ERR_FEATURE_WITHOUT_KEY,
+  ERR_PREMIUM_WITHOUT_KEY,
+  ERR_DOUBLE_LOAD_META,
+  ERR_LOADING_IN_PROGRESS,
+  withoutApiKey,
+  withoutProxy
+} from '../../constants/Msg';
 import ChartStore from '../stores/ChartStore';
 import SettingSlice from '../stores/SettingSlice';
 import LoadConfig from '../logic/LoadConfig';
@@ -37,17 +46,16 @@ export const CHAT_UPDATE_MOVING_VALUES = 'updateMovingValues'
 export const CHAT_SORT_BY = 'sortBy'
 export const CHAT_REMOVE_ALL = 'removeAll'
 
-const M = Msg.Alert;
 
 const _assign = Object.assign;
 
 const _cancelLoad = function(option, alertMsg){
-  Msg.setAlertMsg(option, alertMsg);
+  setAlertMsg(option, alertMsg);
   this.failed(option);
 
   if (_isFn(option.onCancel)) {
     option.onCancel();
-  } else if (alertMsg === M.ALREADY_EXIST && _isFn(option.onFailed)) {
+  } else if (alertMsg === ERR_ALREADY_EXIST && _isFn(option.onFailed)) {
     option.onFailed();
   }
 };
@@ -114,17 +122,17 @@ const _checkMsgApiKey = ({
 }) => apiKey
   ? ''
   : isApiKeyRequired(loadId)
-    ? M.withoutApiKey(getApiTitle(loadId))
+    ? withoutApiKey(getApiTitle(loadId))
     : isKeyFeature
-       ? M.FEATURE_WITHOUT_KEY
+       ? ERR_FEATURE_WITHOUT_KEY
        : isPremium
-          ? M.PREMIUM_WITHOUT_KEY
+          ? ERR_PREMIUM_WITHOUT_KEY
           : '';
 
 
 const _checkProxy = ({ proxy, loadId }) => {
   if (isProxyRequired(loadId) && !proxy) {
-    return M.withoutProxy(getApiTitle(loadId));
+    return withoutProxy(getApiTitle(loadId));
   }
   return '';
 };
@@ -146,11 +154,11 @@ ChartActions[CHAT_LOAD].shouldEmit = function(confItem={}, option={}){
 
   const _alertMsg = _crMsgSetting(option)
    || (isLoadMeta && _isDoublingLoad
-        ? M.DOUBLE_LOAD_META
+        ? ERR_DOUBLE_LOAD_META
         : _isDoublingLoad
-           ? M.LOADING_IN_PROGRES
+           ? ERR_LOADING_IN_PROGRESS
            : !_isTs && ChartStore.isChartExist(option)
-               ? M.ALREADY_EXIST
+               ? ERR_ALREADY_EXIST
                : '');
 
   return _alertMsg

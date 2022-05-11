@@ -15,7 +15,7 @@ var _RouterFnValue = _interopRequireDefault(require("./RouterFnValue"));
 
 var _fBrowser = _interopRequireDefault(require("./fBrowser"));
 
-var _Msg = _interopRequireDefault(require("../../constants/Msg"));
+var _Msg = require("../../constants/Msg");
 
 var _Type = require("../../constants/Type");
 
@@ -60,7 +60,7 @@ const _crInitFromDate = _ref => {
 
 const _crDateProps = dialogProps => {
   const _props = dialogProps.isFd ? {
-    errNotYmdOrEmpty: _Msg.default.YMD_DATE_OR_EMPTY,
+    errNotYmdOrEmpty: _Msg.YMD_DATE_OR_EMPTY,
     isYmdOrEmpty: _DateUtils.isYmdOrEmpty
   } : void 0;
 
@@ -162,8 +162,8 @@ const _crDialogComp = function (browserType, dialogConf) {
     return /*#__PURE__*/(0, _react.createElement)(Comp, {
       key: itemKey,
       caption: dialogCaption || menuTitle,
-      msgOnNotSelected: _Msg.default.NOT_SELECTED,
-      msgOnNotValidFormat: _Msg.default.NOT_VALID_FORMAT,
+      msgOnNotSelected: _Msg.NOT_SELECTED,
+      msgOnNotValidFormat: _Msg.NOT_VALID_FORMAT,
       fnValue: _crFnValue(valueFn, valueFnPrefix),
       //initFromDate, initToDate, onTestDate,
       //errNotYmdOrEmpty, isYmdOrEmpty

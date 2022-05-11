@@ -4,38 +4,38 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _onCatch = _interopRequireDefault(require("../onCatch"));
 
-var _Msg = _interopRequireDefault(require("../../../constants/Msg"));
+var _Msg = require("../../../constants/Msg");
 
-var M = _Msg["default"].Alert;
-
-var _crAlertDescrFrom = function _crAlertDescrFrom(_ref) {
-  var caption = _ref.caption,
-      descr = _ref.descr;
+const _crAlertDescrFrom = _ref => {
+  let {
+    caption,
+    descr
+  } = _ref;
   return {
     alertCaption: caption,
     alertDescr: descr
   };
 };
 
-describe('onCatch', function () {
-  test('should call onFailed with option with alertDesr', function () {
-    var onFailed = jest.fn(),
-        _callWithAndTestFor = function _callWithAndTestFor(error, errDescr) {
-      (0, _onCatch["default"])({
-        error: error,
+describe('onCatch', () => {
+  test('should call onFailed with option with alertDesr', () => {
+    const onFailed = jest.fn(),
+          _callWithAndTestFor = (error, errDescr) => {
+      (0, _onCatch.default)({
+        error,
         option: {},
-        onFailed: onFailed
+        onFailed
       });
       expect(onFailed).toBeCalledWith(_crAlertDescrFrom(errDescr));
     };
 
-    _callWithAndTestFor(new TypeError('fetch'), M.NETWORK_ERROR);
+    _callWithAndTestFor(new TypeError('fetch'), _Msg.ERR_NETWORK);
 
-    _callWithAndTestFor(new TypeError('429'), M.TOO_MANY_REQUEST);
+    _callWithAndTestFor(new TypeError('429'), _Msg.ERR_TOO_MANY_REQUEST);
 
     _callWithAndTestFor({
-      message: M.ERR_10.token
-    }, M.ERR_10);
+      message: _Msg.ERR_10.token
+    }, _Msg.ERR_10);
 
     _callWithAndTestFor({
       errCaption: 'Some Err',
@@ -45,7 +45,7 @@ describe('onCatch', function () {
       descr: 'msg'
     });
 
-    var ERR_DESCR_MSG = {
+    const ERR_DESCR_MSG = {
       caption: 'ERROR',
       descr: 'msg'
     };
@@ -59,7 +59,7 @@ describe('onCatch', function () {
       message: 'msg'
     }, ERR_DESCR_MSG);
 
-    var DF_ERR_DESCR = {
+    const DF_ERR_DESCR = {
       caption: 'ERROR',
       descr: ''
     };
@@ -70,13 +70,11 @@ describe('onCatch', function () {
 
     _callWithAndTestFor(null, DF_ERR_DESCR);
   });
-  test('should does not throw in case onFailed is not function', function () {
-    expect(function () {
-      return (0, _onCatch["default"])({
-        option: {},
-        error: {}
-      });
-    }).not.toThrow();
+  test('should does not throw in case onFailed is not function', () => {
+    expect(() => (0, _onCatch.default)({
+      option: {},
+      error: {}
+    })).not.toThrow();
   });
 });
 //# sourceMappingURL=onCatch.test.js.map

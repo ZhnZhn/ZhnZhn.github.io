@@ -1,12 +1,12 @@
-import Msg from '../../constants/Msg';
+import {
+  ERR_10,
+  ERR_TOO_MANY_REQUEST,
+  ERR_NETWORK
+} from '../../constants/Msg';
 
-const M = Msg.Alert;
-
-const C = {
-  FETCH: 'fetch',
-  CODE_429: '429',
-  ERR: 'ERROR'
-};
+const FETCH = 'fetch'
+, CODE_429 = '429'
+, ERROR = 'ERROR';
 
 const _assign = Object.assign;
 
@@ -20,9 +20,9 @@ const _addErrDescrTo = (option, msg) => {
 
 const _crDfErrDescr = (error)  => {
   const { errCaption, message='' } = error || {}
-  , caption = errCaption || C.ERR;
-  return message.indexOf(M.ERR_10.token) !== -1
-    ? M.ERR_10
+  , caption = errCaption || ERROR;
+  return message.indexOf(ERR_10.token) !== -1
+    ? ERR_10
     : { caption, descr: message };
 };
 
@@ -31,10 +31,10 @@ const _isMsgByCode = (err, code) => err
 
 const _crErrDescr = (error) => {
   if (error instanceof TypeError){
-    if (_isMsgByCode(error, C.CODE_429)) {
-      return M.TOO_MANY_REQUEST;
-    } else if (_isMsgByCode(error, C.FETCH)) {
-      return M.NETWORK_ERROR;
+    if (_isMsgByCode(error, CODE_429)) {
+      return ERR_TOO_MANY_REQUEST;
+    } else if (_isMsgByCode(error, FETCH)) {
+      return ERR_NETWORK;
     }
   }
   return _crDfErrDescr(error);

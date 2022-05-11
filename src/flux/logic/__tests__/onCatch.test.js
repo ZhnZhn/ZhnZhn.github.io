@@ -1,9 +1,14 @@
 import onCatch from '../onCatch'
-import Msg from '../../../constants/Msg';
+import {
+  ERR_10,
+  ERR_TOO_MANY_REQUEST,
+  ERR_NETWORK
+} from '../../../constants/Msg';
 
-const M = Msg.Alert;
-
-const _crAlertDescrFrom = ({ caption, descr }) => ({
+const _crAlertDescrFrom = ({
+  caption,
+  descr
+}) => ({
   alertCaption: caption,
   alertDescr: descr
 });
@@ -17,10 +22,10 @@ describe('onCatch', ()=>{
           .toBeCalledWith(_crAlertDescrFrom(errDescr))
     };
 
-    _callWithAndTestFor((new TypeError('fetch')), M.NETWORK_ERROR)
-    _callWithAndTestFor((new TypeError('429')), M.TOO_MANY_REQUEST)
+    _callWithAndTestFor((new TypeError('fetch')), ERR_NETWORK)
+    _callWithAndTestFor((new TypeError('429')), ERR_TOO_MANY_REQUEST)
 
-    _callWithAndTestFor({ message: M.ERR_10.token }, M.ERR_10)
+    _callWithAndTestFor({ message: ERR_10.token }, ERR_10)
 
     _callWithAndTestFor(
       { errCaption: 'Some Err', message: 'msg' },

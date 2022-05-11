@@ -3,57 +3,55 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _react = require("react");
 
 var _useHasNotEqual = _interopRequireDefault(require("../../hooks/useHasNotEqual"));
 
-var _Msg = _interopRequireDefault(require("../../../constants/Msg"));
+var _Msg = require("../../../constants/Msg");
 
 var _ComponentActions = _interopRequireDefault(require("../../../flux/actions/ComponentActions"));
 
-var _crOptions2 = _interopRequireDefault(require("../decorators/crOptions"));
+var _crOptions = _interopRequireDefault(require("../decorators/crOptions"));
 
-var NETWORK_ERROR = _Msg["default"].Alert.NETWORK_ERROR;
-
-var _showMsgErr = function _showMsgErr(alertCaption, alertDescr) {
-  _ComponentActions["default"].showAlert({
-    alertCaption: alertCaption,
-    alertDescr: alertDescr
+const _showMsgErr = (alertCaption, alertDescr) => {
+  _ComponentActions.default.showAlert({
+    alertCaption,
+    alertDescr
   });
 };
 /*eslint-disable react-hooks/exhaustive-deps */
 
 
-var _useLoadingFailed = function _useLoadingFailed(setState) {
-  return (0, _react.useCallback)(function (errCaption, errDescription) {
-    if (errCaption && errDescription) {
-      _showMsgErr(errCaption, errDescription);
-    }
+const _useLoadingFailed = setState => (0, _react.useCallback)((errCaption, errDescription) => {
+  if (errCaption && errDescription) {
+    _showMsgErr(errCaption, errDescription);
+  }
 
-    setState({
-      isLoading: false,
-      isLoadingFailed: true
-    });
-  }, []);
-}; //setState
+  setState({
+    isLoading: false,
+    isLoadingFailed: true
+  });
+}, []); //setState
 
 /*eslint-enable react-hooks/exhaustive-deps */
 
 
-var _useLoad = function _useLoad(refLoadId, setLoadingFailed, setState) {
+const _useLoad = (refLoadId, setLoadingFailed, setState) => {
   /*eslint-disable react-hooks/exhaustive-deps */
-  var loadOptions = (0, _react.useCallback)(function (option) {
-    var uri = option.uri,
-        jsonProp = option.jsonProp,
-        _option$retryServer = option.retryServer,
-        retryServer = _option$retryServer === void 0 ? 0 : _option$retryServer,
-        _option$retryNetwork = option.retryNetwork,
-        retryNetwork = _option$retryNetwork === void 0 ? 1 : _option$retryNetwork;
-    fetch(uri).then(function (response) {
-      var status = response.status,
-          statusText = response.statusText;
+  const loadOptions = (0, _react.useCallback)(option => {
+    const {
+      uri,
+      jsonProp,
+      retryServer = 0,
+      retryNetwork = 1
+    } = option;
+    fetch(uri).then(response => {
+      const {
+        status,
+        statusText
+      } = response;
 
       if (status >= 200 && status < 400) {
         return response.json();
@@ -70,25 +68,22 @@ var _useLoad = function _useLoad(refLoadId, setLoadingFailed, setState) {
 
         return null;
       }
-    }).then(function (json) {
+    }).then(json => {
       if (json) {
-        var _crOptions = (0, _crOptions2["default"])(json, jsonProp),
-            items = _crOptions.items,
-            propCaption = _crOptions.propCaption;
-
+        const {
+          items,
+          propCaption
+        } = (0, _crOptions.default)(json, jsonProp);
         setState({
           isLoading: false,
           isLoadingFailed: false,
-          propCaption: propCaption,
+          propCaption,
           options: items
         });
       }
-    })["catch"](function (error) {
+    }).catch(error => {
       if (retryNetwork === 0) {
-        var _ref = error instanceof TypeError ? [NETWORK_ERROR.caption, NETWORK_ERROR.descr] : [],
-            errCaption = _ref[0],
-            errDescription = _ref[1];
-
+        const [errCaption, errDescription] = error instanceof TypeError ? [_Msg.ERR_NETWORK.caption, _Msg.ERR_NETWORK.descr] : [];
         setLoadingFailed(errCaption, errDescription);
       } else {
         option.retryNetwork = retryNetwork - 1;
@@ -102,41 +97,43 @@ var _useLoad = function _useLoad(refLoadId, setLoadingFailed, setState) {
   return loadOptions;
 };
 
-var _useIsReload = function _useIsReload(isShow, isLoadingFailed) {
-  var _hasToggled = (0, _useHasNotEqual["default"])(isShow);
+const _useIsReload = (isShow, isLoadingFailed) => {
+  const _hasToggled = (0, _useHasNotEqual.default)(isShow);
 
   return isShow && isLoadingFailed && _hasToggled;
 };
 
-var useLoadOptions = function useLoadOptions(isShow, uri, jsonProp) {
-  var _useState = (0, _react.useState)({
+const useLoadOptions = (isShow, uri, jsonProp) => {
+  const [state, setState] = (0, _react.useState)({
     options: [],
     isLoading: true,
     isLoadingFailed: false
   }),
-      state = _useState[0],
-      setState = _useState[1],
-      isLoadingFailed = state.isLoadingFailed,
-      refLoadId = (0, _react.useRef)(null),
-      _isReloadFailedOption = _useIsReload(isShow, isLoadingFailed),
-      _setLoadingFailed = _useLoadingFailed(setState),
-      _load = _useLoad(refLoadId, _setLoadingFailed, setState),
-      loadOptions = (0, _react.useCallback)(function () {
-    return _load({
-      uri: uri,
-      jsonProp: jsonProp
-    });
-  }, []); //load, uri, jsonProp
+        {
+    isLoadingFailed
+  } = state,
+        refLoadId = (0, _react.useRef)(null),
+        _isReloadFailedOption = _useIsReload(isShow, isLoadingFailed),
+        _setLoadingFailed = _useLoadingFailed(setState),
+        _load = _useLoad(refLoadId, _setLoadingFailed, setState)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        loadOptions = (0, _react.useCallback)(() => _load({
+    uri,
+    jsonProp
+  }), []); //load, uri, jsonProp
 
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     loadOptions();
-    return function () {
-      var id = refLoadId.current;
+    return () => {
+      const {
+        current: id
+      } = refLoadId;
       clearTimeout(id);
     };
   }, []); // loadOptions
@@ -145,7 +142,7 @@ var useLoadOptions = function useLoadOptions(isShow, uri, jsonProp) {
 
   /*eslint-disable react-hooks/exhaustive-deps */
 
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (_isReloadFailedOption) {
       loadOptions();
     }
@@ -157,5 +154,5 @@ var useLoadOptions = function useLoadOptions(isShow, uri, jsonProp) {
 };
 
 var _default = useLoadOptions;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=useLoadOptions.js.map

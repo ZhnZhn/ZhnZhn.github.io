@@ -1,4 +1,3 @@
-
 import { createElement } from 'react';
 
 import RouterDialog from './RouterDialog';
@@ -7,7 +6,11 @@ import RouterFnValue from './RouterFnValue';
 
 import fBrowser from './fBrowser'
 
-import Msg from '../../constants/Msg';
+import {
+  YMD_DATE_OR_EMPTY,
+  NOT_SELECTED,
+  NOT_VALID_FORMAT
+} from '../../constants/Msg';
 import {  LoadType } from '../../constants/Type';
 
 import CA from '../actions/ComponentActions';
@@ -51,7 +54,7 @@ const _crInitFromDate = ({ isFdw, nInitFromDate }) => {
 const _crDateProps = (dialogProps) => {
   const _props = dialogProps.isFd
     ? {
-        errNotYmdOrEmpty: Msg.YMD_DATE_OR_EMPTY,
+        errNotYmdOrEmpty: YMD_DATE_OR_EMPTY,
         isYmdOrEmpty
       }
     : void 0;
@@ -134,8 +137,8 @@ const _crDialogComp = function (browserType, dialogConf){
             return createElement(Comp, {
               key : itemKey,
               caption : dialogCaption || menuTitle,
-              msgOnNotSelected : Msg.NOT_SELECTED,
-              msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
+              msgOnNotSelected : NOT_SELECTED,
+              msgOnNotValidFormat : NOT_VALID_FORMAT,
               fnValue : _crFnValue(valueFn, valueFnPrefix),
               //initFromDate, initToDate, onTestDate,
               //errNotYmdOrEmpty, isYmdOrEmpty

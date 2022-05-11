@@ -3,13 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = exports.CHAT_REMOVE_ALL = exports.CHAT_SORT_BY = exports.CHAT_UPDATE_MOVING_VALUES = exports.CHAT_COPY = exports.CHAT_TO_TOP = exports.CHAT_LOAD_BY_QUERY = exports.CHAT_LOAD_FAILED = exports.CHAT_LOAD_COMPLETED = exports.CHAT_LOAD_ADDED = exports.CHAT_LOAD = exports.CHAT_CLOSE = exports.CHAT_SHOW = exports.CHAT_INIT_AND_SHOW = void 0;
+exports.default = exports.CHAT_UPDATE_MOVING_VALUES = exports.CHAT_TO_TOP = exports.CHAT_SORT_BY = exports.CHAT_SHOW = exports.CHAT_REMOVE_ALL = exports.CHAT_LOAD_FAILED = exports.CHAT_LOAD_COMPLETED = exports.CHAT_LOAD_BY_QUERY = exports.CHAT_LOAD_ADDED = exports.CHAT_LOAD = exports.CHAT_INIT_AND_SHOW = exports.CHAT_COPY = exports.CHAT_CLOSE = void 0;
 
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
-var _Msg = _interopRequireDefault(require("../../constants/Msg"));
+var _Msg = require("../../constants/Msg");
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
@@ -53,17 +53,15 @@ const CHAT_SORT_BY = 'sortBy';
 exports.CHAT_SORT_BY = CHAT_SORT_BY;
 const CHAT_REMOVE_ALL = 'removeAll';
 exports.CHAT_REMOVE_ALL = CHAT_REMOVE_ALL;
-const M = _Msg.default.Alert;
 const _assign = Object.assign;
 
 const _cancelLoad = function (option, alertMsg) {
-  _Msg.default.setAlertMsg(option, alertMsg);
-
+  (0, _Msg.setAlertMsg)(option, alertMsg);
   this.failed(option);
 
   if (_isFn(option.onCancel)) {
     option.onCancel();
-  } else if (alertMsg === M.ALREADY_EXIST && _isFn(option.onFailed)) {
+  } else if (alertMsg === _Msg.ERR_ALREADY_EXIST && _isFn(option.onFailed)) {
     option.onFailed();
   }
 };
@@ -123,19 +121,24 @@ const {
   getApiTitle
 } = _SettingSlice.default;
 
-const _checkMsgApiKey = ({
-  apiKey,
-  loadId,
-  isKeyFeature,
-  isPremium
-}) => apiKey ? '' : isApiKeyRequired(loadId) ? M.withoutApiKey(getApiTitle(loadId)) : isKeyFeature ? M.FEATURE_WITHOUT_KEY : isPremium ? M.PREMIUM_WITHOUT_KEY : '';
+const _checkMsgApiKey = _ref => {
+  let {
+    apiKey,
+    loadId,
+    isKeyFeature,
+    isPremium
+  } = _ref;
+  return apiKey ? '' : isApiKeyRequired(loadId) ? (0, _Msg.withoutApiKey)(getApiTitle(loadId)) : isKeyFeature ? _Msg.ERR_FEATURE_WITHOUT_KEY : isPremium ? _Msg.ERR_PREMIUM_WITHOUT_KEY : '';
+};
 
-const _checkProxy = ({
-  proxy,
-  loadId
-}) => {
+const _checkProxy = _ref2 => {
+  let {
+    proxy,
+    loadId
+  } = _ref2;
+
   if (isProxyRequired(loadId) && !proxy) {
-    return M.withoutProxy(getApiTitle(loadId));
+    return (0, _Msg.withoutProxy)(getApiTitle(loadId));
   }
 
   return '';
@@ -145,7 +148,15 @@ const _crMsgSetting = option => _checkMsgApiKey(option) || _checkProxy(option);
 
 const _crMetaDataKey = key => key + META_SUFFIX;
 
-ChartActions[CHAT_LOAD].shouldEmit = function (confItem = {}, option = {}) {
+ChartActions[CHAT_LOAD].shouldEmit = function (confItem, option) {
+  if (confItem === void 0) {
+    confItem = {};
+  }
+
+  if (option === void 0) {
+    option = {};
+  }
+
   const _key = _LogicUtils.default.createKeyForConfig(option),
         {
     isLoadMeta
@@ -160,7 +171,7 @@ ChartActions[CHAT_LOAD].shouldEmit = function (confItem = {}, option = {}) {
     _isTs
   });
 
-  const _alertMsg = _crMsgSetting(option) || (isLoadMeta && _isDoublingLoad ? M.DOUBLE_LOAD_META : _isDoublingLoad ? M.LOADING_IN_PROGRES : !_isTs && _ChartStore.default.isChartExist(option) ? M.ALREADY_EXIST : '');
+  const _alertMsg = _crMsgSetting(option) || (isLoadMeta && _isDoublingLoad ? _Msg.ERR_DOUBLE_LOAD_META : _isDoublingLoad ? _Msg.ERR_LOADING_IN_PROGRESS : !_isTs && _ChartStore.default.isChartExist(option) ? _Msg.ERR_ALREADY_EXIST : '');
 
   return _alertMsg ? (this.cancelLoad(option, _alertMsg), false) : true;
 };
@@ -199,7 +210,7 @@ const _addDialogPropsTo = option => {
   } = option;
 
   if (!fromDate) {
-    option.fromDate = nInitFromDate ? _DateUtils.default.getFromDate(nInitFromDate) : _DateUtils.default.getFromDate(2);
+    option.fromDate = nInitFromDate ? (0, _DateUtils.getFromDate)(nInitFromDate) : (0, _DateUtils.getFromDate)(2);
   }
 };
 

@@ -1,14 +1,15 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import useHasNotEqual from '../../hooks/useHasNotEqual'
 
-import Msg from '../../../constants/Msg';
+import { ERR_NETWORK } from '../../../constants/Msg';
 import CA from '../../../flux/actions/ComponentActions';
 
 import crOptions from '../decorators/crOptions'
 
-const NETWORK_ERROR = Msg.Alert.NETWORK_ERROR;
-
-const _showMsgErr = function(alertCaption, alertDescr){
+const _showMsgErr = (
+  alertCaption,
+  alertDescr
+) => {
   CA.showAlert({ alertCaption, alertDescr })
 };
 
@@ -65,7 +66,7 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
       .catch((error) => {
         if (retryNetwork === 0){
           const [errCaption, errDescription] = error instanceof TypeError
-            ? [NETWORK_ERROR.caption,  NETWORK_ERROR.descr]
+            ? [ERR_NETWORK.caption,  ERR_NETWORK.descr]
             : [];
           setLoadingFailed(errCaption, errDescription)
         } else {
