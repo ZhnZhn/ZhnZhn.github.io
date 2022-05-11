@@ -3,15 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = exports.ComponentActionTypes = void 0;
+exports.default = exports.ComponentActionTypes = void 0;
 
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
-var _Type = require("../../constants/Type");
+var _ModalDialogType = require("../../constants/ModalDialogType");
 
-var _Reflux$createActions;
-
-var ComponentActionTypes = {
+const ComponentActionTypes = {
   SHOW_ABOUT: 'showAbout',
   SHOW_DIALOG: 'showDialog',
   CLOSE_DIALOG: 'closeDialog',
@@ -24,22 +22,33 @@ var ComponentActionTypes = {
   CHANGE_THEME: 'changeTheme'
 };
 exports.ComponentActionTypes = ComponentActionTypes;
-var A = ComponentActionTypes;
+const A = ComponentActionTypes;
 
-var CA = _refluxCore["default"].createActions((_Reflux$createActions = {}, _Reflux$createActions[A.SHOW_ABOUT] = {}, _Reflux$createActions[A.SHOW_DIALOG] = {}, _Reflux$createActions[A.CLOSE_DIALOG] = {}, _Reflux$createActions[A.SHOW_OPTION_DIALOG] = {}, _Reflux$createActions[A.CLOSE_CHART_CONTAINER] = {}, _Reflux$createActions[A.CLOSE_CHART_CONTAINER_2] = {}, _Reflux$createActions[A.SET_ACTIVE_CONTAINER] = {}, _Reflux$createActions[A.SET_ACTIVE_CHECKBOX] = {}, _Reflux$createActions[A.SHOW_MODAL_DIALOG] = {}, _Reflux$createActions[A.CHANGE_THEME] = {}, _Reflux$createActions));
+const CA = _refluxCore.default.createActions({
+  [A.SHOW_ABOUT]: {},
+  [A.SHOW_DIALOG]: {},
+  [A.CLOSE_DIALOG]: {},
+  [A.SHOW_OPTION_DIALOG]: {},
+  [A.CLOSE_CHART_CONTAINER]: {},
+  [A.CLOSE_CHART_CONTAINER_2]: {},
+  [A.SET_ACTIVE_CONTAINER]: {},
+  [A.SET_ACTIVE_CHECKBOX]: {},
+  [A.SHOW_MODAL_DIALOG]: {},
+  [A.CHANGE_THEME]: {}
+});
 
-var _showMd = CA.showModalDialog;
-CA.showDescription = _showMd.bind(null, _Type.ModalDialog.DESCRIPTION);
-CA.showSettings = _showMd.bind(null, _Type.ModalDialog.SETTINGS);
-CA.showPasteTo = _showMd.bind(null, _Type.ModalDialog.PASTE_TO);
-CA.zoom = _showMd.bind(null, _Type.ModalDialog.ZOOM);
-CA.showReload = _showMd.bind(null, _Type.ModalDialog.RELOAD);
-CA.showAlert = _showMd.bind(null, _Type.ModalDialog.ALERT);
-CA.showAsk = _showMd.bind(null, _Type.ModalDialog.ASK);
-CA.showCustomizeExport = _showMd.bind(null, _Type.ModalDialog.CUSTOMIZE_EXPORT);
-CA.showAddToWatch = _showMd.bind(null, _Type.ModalDialog.ADD_TO_WATCH);
-var _showOd = CA.showOptionDialog;
+const _showMd = CA.showModalDialog;
+CA.showDescription = _showMd.bind(null, _ModalDialogType.MDT_DESCRIPTION);
+CA.showSettings = _showMd.bind(null, _ModalDialogType.MDT_SETTINGS);
+CA.showPasteTo = _showMd.bind(null, _ModalDialogType.MDT_PASTE_TO);
+CA.zoom = _showMd.bind(null, _ModalDialogType.MDT_ZOOM);
+CA.showReload = _showMd.bind(null, _ModalDialogType.MDT_RELOAD);
+CA.showAlert = _showMd.bind(null, _ModalDialogType.MDT_ALERT);
+CA.showAsk = _showMd.bind(null, _ModalDialogType.MDT_ASK);
+CA.showCustomizeExport = _showMd.bind(null, _ModalDialogType.MDT_CUSTOMIZE_EXPORT);
+CA.showAddToWatch = _showMd.bind(null, _ModalDialogType.MDT_ADD_TO_WATCH);
+const _showOd = CA.showOptionDialog;
 CA.showConfigChart = _showOd.bind(null, 'ChartConfigDialog');
 var _default = CA;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ComponentActions.js.map

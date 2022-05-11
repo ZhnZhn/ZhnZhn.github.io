@@ -5,15 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
 var _react = require("react");
 
-var _Type = require("../../constants/Type");
+var _ModalDialogType = require("../../constants/ModalDialogType");
 
 var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
-var _WatchActions = _interopRequireDefault(require("../../flux/actions/WatchActions"));
+var _WatchActions = require("../../flux/actions/WatchActions");
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -27,22 +25,22 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 var _class;
 
-var CL_SCROLL = 'scroll-container-y scroll-watch',
-    CL_WATCH_ITEM = 'row__type2-topic not-selected',
-    C_GROUP_OPEN = '#1b75bb',
-    C_LIST_OPEN = '#80c040',
-    S_BROWSER = {
+const CL_SCROLL = 'scroll-container-y scroll-watch',
+      CL_WATCH_ITEM = 'row__type2-topic not-selected',
+      C_GROUP_OPEN = '#1b75bb',
+      C_LIST_OPEN = '#80c040',
+      S_BROWSER = {
   paddingRight: 0
 },
-    S_BT_CIRCLE = {
+      S_BT_CIRCLE = {
   position: 'relative',
   top: -4,
   marginLeft: 20
 },
-    S_GROUP_DIV = {
+      S_GROUP_DIV = {
   lineHeight: 2
 },
-    S_LIST_DIV = {
+      S_LIST_DIV = {
   marginLeft: 8,
   paddingLeft: 2,
   borderLeftStyle: 'solid',
@@ -50,10 +48,10 @@ var CL_SCROLL = 'scroll-container-y scroll-watch',
   borderLeftColor: 'inherit',
   lineHeight: 2
 },
-    S_MR_10 = {
+      S_MR_10 = {
   marginRight: 10
 };
-var DRAG = {
+const DRAG = {
   GROUP: 'GROUP',
   C_GROUP_ENTER: C_GROUP_OPEN,
   LIST: 'LIST',
@@ -61,75 +59,80 @@ var DRAG = {
   ITEM: 'ITEM'
 };
 
-var WatchBrowser = (0, _withWatchDnD.default)(_class = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2.default)(WatchBrowser, _Component);
+let WatchBrowser = (0, _withWatchDnD.default)(_class = class WatchBrowser extends _react.Component {
+  constructor(props) {
+    super(props);
 
-  function WatchBrowser(props) {
-    var _this;
-
-    _this = _Component.call(this, props) || this;
-
-    _this._onStore = function (actionType, data) {
-      var _this$props = _this.props,
-          browserType = _this$props.browserType,
-          showAction = _this$props.showAction,
-          updateAction = _this$props.updateAction;
+    this._onStore = (actionType, data) => {
+      const {
+        browserType,
+        showAction,
+        updateAction
+      } = this.props;
 
       if (actionType === showAction && data === browserType) {
-        _this._handlerShow();
+        this._handlerShow();
       } else if (actionType === updateAction) {
-        _this.setState({
+        this.setState({
           watchList: data
         });
       }
     };
 
-    _this._handlerHide = function () {
-      _this.setState({
+    this._handlerHide = () => {
+      this.setState({
         isShow: false
       });
     };
 
-    _this._handlerShow = function () {
-      _this.setState({
+    this._handlerShow = () => {
+      this.setState({
         isShow: true
       });
     };
 
-    _this._handlerToggleEditMode = function () {
-      _this.setState({
-        isModeEdit: !_this.state.isModeEdit
+    this._handlerToggleEditMode = () => {
+      this.setState({
+        isModeEdit: !this.state.isModeEdit
       });
     };
 
-    _this._renderWatchList = function (watchList) {
-      var isModeEdit = _this.state.isModeEdit;
-      return watchList.groups.map(function (group, index) {
-        var caption = group.caption,
-            lists = group.lists;
+    this._renderWatchList = watchList => {
+      const {
+        isModeEdit
+      } = this.state;
+      return watchList.groups.map((group, index) => {
+        const {
+          caption,
+          lists
+        } = group;
         return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose2, {
           style: S_GROUP_DIV //openColor={C_GROUP_OPEN}
           ,
           caption: caption,
           isDraggable: isModeEdit,
           option: {
-            caption: caption
+            caption
           },
-          onDragStart: _this._hDragStartGroup,
-          onDragEnter: _this._hDragEnterGroup,
-          onDragOver: _this._hDragOverGroup,
-          onDragLeave: _this._hDragLeaveGroup,
-          onDrop: _this._hDropGroup,
-          children: lists && _this._renderLists(lists, caption)
+          onDragStart: this._hDragStartGroup,
+          onDragEnter: this._hDragEnterGroup,
+          onDragOver: this._hDragOverGroup,
+          onDragLeave: this._hDragLeaveGroup,
+          onDrop: this._hDropGroup,
+          children: lists && this._renderLists(lists, caption)
         }, index);
       });
     };
 
-    _this._renderLists = function (lists, groupCaption) {
-      var isModeEdit = _this.state.isModeEdit;
-      return lists.map(function (list, index) {
-        var caption = list.caption,
-            items = list.items;
+    this._renderLists = (lists, groupCaption) => {
+      const {
+        isModeEdit
+      } = this.state;
+      return lists.map((list, index) => {
+        const {
+          caption,
+          items
+        } = list;
         return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose2, {
           style: S_LIST_DIV,
           notSelectedStyle: S_MR_10,
@@ -137,97 +140,101 @@ var WatchBrowser = (0, _withWatchDnD.default)(_class = /*#__PURE__*/function (_C
           caption: caption,
           isDraggable: isModeEdit,
           option: {
-            groupCaption: groupCaption,
-            caption: caption
+            groupCaption,
+            caption
           },
-          onDragStart: _this._hDragStartList,
-          onDragEnter: _this._hDragEnterList,
-          onDragOver: _this._hDragOverList,
-          onDragLeave: _this._hDragLeaveList,
-          onDrop: _this._hDropList,
-          children: items && _this._renderItems(items, groupCaption, caption)
+          onDragStart: this._hDragStartList,
+          onDragEnter: this._hDragEnterList,
+          onDragOver: this._hDragOverList,
+          onDragLeave: this._hDragLeaveList,
+          onDrop: this._hDropList,
+          children: items && this._renderItems(items, groupCaption, caption)
         }, index);
       });
     };
 
-    _this._renderItems = function (items, groupCaption, listCaption) {
-      var isModeEdit = _this.state.isModeEdit;
-      return items.map(function (item, index) {
-        var id = item.id,
-            caption = item.caption;
+    this._renderItems = (items, groupCaption, listCaption) => {
+      const {
+        isModeEdit
+      } = this.state;
+      return items.map((item, index) => {
+        const {
+          id,
+          caption
+        } = item;
         return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchItem.default, {
           className: CL_WATCH_ITEM,
           isModeEdit: isModeEdit,
           item: item,
           option: {
-            groupCaption: groupCaption,
-            listCaption: listCaption,
-            caption: caption
+            groupCaption,
+            listCaption,
+            caption
           },
-          onClick: _this._handlerClickItem,
-          onClose: _this._handlerRemoveItem,
-          onDragStart: _this._hDragStartItem,
-          onDragOver: _this._hDragOverItem,
-          onDragEnter: _this._hDragEnterItem,
-          onDragLeave: _this._hDragLeaveItem,
-          onDrop: _this._hDropItem
+          onClick: this._handlerClickItem,
+          onClose: this._handlerRemoveItem,
+          onDragStart: this._hDragStartItem,
+          onDragOver: this._hDragOverItem,
+          onDragEnter: this._hDragEnterItem,
+          onDragLeave: this._hDragLeaveItem,
+          onDrop: this._hDropItem
         }, id);
       });
     };
 
-    _this._bindDnDGroup(DRAG, _WatchActions.default);
+    this._bindDnDGroup(DRAG, _WatchActions.WatchActions);
 
-    _this._bindDnDList(DRAG, _WatchActions.default);
+    this._bindDnDList(DRAG, _WatchActions.WatchActions);
 
-    _this._bindDnDItem(DRAG, _WatchActions.default);
+    this._bindDnDItem(DRAG, _WatchActions.WatchActions);
 
-    _this.state = {
+    this.state = {
       isShow: !!props.isInitShow,
       isModeEdit: false,
       watchList: props.store.getWatchList()
     };
-    return _this;
   }
 
-  var _proto = WatchBrowser.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
+  componentDidMount() {
     this.unsubscribe = this.props.store.listen(this._onStore);
-  };
+  }
 
-  _proto.componentWillUnmount = function componentWillUnmount() {
+  componentWillUnmount() {
     this.unsubscribe();
-  };
+  }
 
-  _proto._handlerSaveWatch = function _handlerSaveWatch() {
-    _WatchActions.default.saveWatch();
-  };
+  _handlerSaveWatch() {
+    _WatchActions.WatchActions.saveWatch();
+  }
 
-  _proto._handlerEditGroup = function _handlerEditGroup() {
-    _ComponentActions.default.showModalDialog(_Type.ModalDialog.EDIT_WATCH_GROUP);
-  };
+  _handlerEditGroup() {
+    _ComponentActions.default.showModalDialog(_ModalDialogType.MDT_EDIT_WATCH_GROUP);
+  }
 
-  _proto._handlerEditList = function _handlerEditList() {
-    _ComponentActions.default.showModalDialog(_Type.ModalDialog.EDIT_WATCH_LIST);
-  };
+  _handlerEditList() {
+    _ComponentActions.default.showModalDialog(_ModalDialogType.MDT_EDIT_WATCH_LIST);
+  }
 
-  _proto._handlerClickItem = function _handlerClickItem(item) {
-    _ComponentActions.default.showModalDialog(_Type.ModalDialog.LOAD_ITEM, item);
-  };
+  _handlerClickItem(item) {
+    _ComponentActions.default.showModalDialog(_ModalDialogType.MDT_LOAD_ITEM, item);
+  }
 
-  _proto._handlerRemoveItem = function _handlerRemoveItem(option, event) {
+  _handlerRemoveItem(option, event) {
     event.stopPropagation();
 
-    _WatchActions.default.removeItem(option);
-  };
+    _WatchActions.WatchActions.removeItem(option);
+  }
 
-  _proto.render = function render() {
-    var caption = this.props.caption,
-        _this$state = this.state,
-        isShow = _this$state.isShow,
-        isModeEdit = _this$state.isModeEdit,
-        watchList = _this$state.watchList,
-        _captionEV = isModeEdit ? 'V' : 'E';
+  render() {
+    const {
+      caption
+    } = this.props,
+          {
+      isShow,
+      isModeEdit,
+      watchList
+    } = this.state,
+          _captionEV = isModeEdit ? 'V' : 'E';
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.Browser, {
       isShow: isShow,
@@ -255,10 +262,9 @@ var WatchBrowser = (0, _withWatchDnD.default)(_class = /*#__PURE__*/function (_C
         children: watchList && this._renderWatchList(watchList)
       })]
     });
-  };
+  }
 
-  return WatchBrowser;
-}(_react.Component)) || _class;
+}) || _class;
 
 var _default = WatchBrowser;
 exports.default = _default;

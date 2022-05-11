@@ -3,7 +3,9 @@ import { ComponentActionTypes as CAT } from '../actions/ComponentActions';
 import { BAT_UPDATE_BROWSER_MENU } from '../actions/BrowserActions';
 import Factory from '../logic/Factory';
 
-import { ModalDialog } from '../../constants/Type';
+import {
+  MDT_ALERT
+} from '../../constants/ModalDialogType';
 
 const ItemDialogLogic = {
 
@@ -97,7 +99,7 @@ const ComponentSlice = {
   dialogInit : {},
 
   showAlertDialog(option={}){
-    option.modalDialogType = ModalDialog.ALERT;
+    option.modalDialogType = MDT_ALERT;
     this.trigger(CAT.SHOW_MODAL_DIALOG, option);
   },
 

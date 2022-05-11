@@ -42,24 +42,6 @@ export const Direction = {
   EMPTY: 'empty'
 }
 
-export const ModalDialog = {
-  ASK: 'ASK',
-  RELOAD: 'RELOAD',
-  INFO: 'info',
-  ALERT: 'alert',
-  DESCRIPTION: 'DESCRIPTION',
-  SETTINGS: 'settings',
-  CUSTOMIZE_EXPORT: 'CUSTOMIZE_EXPORT',
-  COLUMN_RANGE: 'COLUMN_RANGE',
-  ADD_TO_WATCH: 'addToWatch',
-  LOAD_ITEM: 'loadItem',
-  STOCKS_BY_SECTOR: 'STOCKS_BY_SECTOR',
-  EDIT_WATCH_GROUP: 'editWatchGroup',
-  EDIT_WATCH_LIST: 'editWatchList',
-  PASTE_TO: 'pasteTo',
-  ZOOM: 'zoom'
-}
-
 export const ChartType = {
   AREA: 'AREA',
   SEMI_DONUT: 'SEMI_DONUT',

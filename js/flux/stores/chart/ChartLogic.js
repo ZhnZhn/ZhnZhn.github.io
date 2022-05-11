@@ -13,7 +13,7 @@ exports.toTop = _ChartLogicFn.toTop;
 exports.removeAll = _ChartLogicFn.removeAll;
 exports.updateMovingValues = _ChartLogicFn.updateMovingValues;
 
-var _Type = require("../../../constants/Type");
+var _ModalDialogType = require("../../../constants/ModalDialogType");
 
 var _ComponentActions = require("../../actions/ComponentActions");
 
@@ -138,7 +138,7 @@ const scanPostAdded = (store, option) => {
 
   if (chart && _isSecondDotCase(chart.series, option)) {
     store.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
-      modalDialogType: _Type.ModalDialog.COLUMN_RANGE,
+      modalDialogType: _ModalDialogType.MDT_COLUMN_RANGE,
       chart
     });
   }

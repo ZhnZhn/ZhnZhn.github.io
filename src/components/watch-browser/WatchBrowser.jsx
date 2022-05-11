@@ -1,6 +1,10 @@
 import { Component } from 'react';
 
-import { ModalDialog } from '../../constants/Type';
+import {
+  MDT_EDIT_WATCH_GROUP,
+  MDT_EDIT_WATCH_LIST,
+  MDT_LOAD_ITEM
+} from '../../constants/ModalDialogType';
 import ComponentActions from '../../flux/actions/ComponentActions';
 import { WatchActions } from '../../flux/actions/WatchActions';
 
@@ -90,10 +94,10 @@ class WatchBrowser extends Component {
   }
 
   _handlerEditGroup() {
-    ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_GROUP)
+    ComponentActions.showModalDialog(MDT_EDIT_WATCH_GROUP)
   }
   _handlerEditList() {
-    ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_LIST)
+    ComponentActions.showModalDialog(MDT_EDIT_WATCH_LIST)
   }
 
   _renderWatchList = (watchList) => {
@@ -146,7 +150,7 @@ class WatchBrowser extends Component {
   }
 
   _handlerClickItem(item) {
-    ComponentActions.showModalDialog(ModalDialog.LOAD_ITEM, item)
+    ComponentActions.showModalDialog(MDT_LOAD_ITEM, item)
   }
   _handlerRemoveItem(option, event) {
     event.stopPropagation()

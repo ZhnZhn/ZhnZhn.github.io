@@ -13,7 +13,7 @@ import {
   WAT_DELETE_LIST
 } from '../actions/WatchActions';
 import DF_WATCH_LIST from '../../constants/WatchDefault';
-import { ModalDialog }  from '../../constants/Type';
+import { MDT_INFO }  from '../../constants/ModalDialogType';
 import {
   WATCH_SAVED,
   WATCH_PREV
@@ -114,7 +114,7 @@ const WatchListSlice = {
        LocalForage.setItem(STORAGE_KEY , this.watchList)
           .then(()=>{
              this.isWatchEdited = false;
-             this.onShowModalDialog(ModalDialog.INFO, {
+             this.onShowModalDialog(MDT_INFO, {
                 caption: DIALOG_CAPTION,
                 descr: WATCH_SAVED
              })
@@ -123,7 +123,7 @@ const WatchListSlice = {
              console.log(error);
           })
     } else {
-       this.onShowModalDialog(ModalDialog.INFO, {
+       this.onShowModalDialog(MDT_INFO, {
           caption: DIALOG_CAPTION,
           descr: WATCH_PREV
        })

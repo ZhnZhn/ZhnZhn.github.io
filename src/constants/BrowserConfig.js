@@ -1,7 +1,9 @@
 import {
-  BrowserType as BT,
-  ModalDialog as MD
+  BrowserType as BT
 } from './Type';
+import {
+  MDT_STOCKS_BY_SECTOR
+} from './ModalDialogType';
 
 const BrowserConfig = {
   [BT.STOCK_MARKETS]: {
@@ -154,7 +156,7 @@ const BrowserConfig = {
     caption: 'NYSE by Sectors',
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
     withoutItemCounter: true,
-    modalDialogType: MD.STOCKS_BY_SECTOR,
+    modalDialogType: MDT_STOCKS_BY_SECTOR,
     chartContainerType: BT.NYSE_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
     contFullCaption: 'NYSE by Sectors',
     itemOptionType: 'ItemTopicOption',
@@ -166,7 +168,7 @@ const BrowserConfig = {
     caption: 'NASDAQ by Sectors',
     sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
     withoutItemCounter: true,
-    modalDialogType: MD.STOCKS_BY_SECTOR,
+    modalDialogType: MDT_STOCKS_BY_SECTOR,
     chartContainerType: BT.NASDAQ_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
     contFullCaption: 'NASDAQ by Sectors',
     itemOptionType: 'ItemTopicOption',

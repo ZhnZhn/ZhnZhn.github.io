@@ -11,7 +11,7 @@ var _BrowserActions = require("../actions/BrowserActions");
 
 var _Factory = _interopRequireDefault(require("../logic/Factory"));
 
-var _Type = require("../../constants/Type");
+var _ModalDialogType = require("../../constants/ModalDialogType");
 
 const ItemDialogLogic = {
   showItemDialog(slice, menuItemConf, store) {
@@ -112,10 +112,12 @@ const ChbContLogic = {
     slice.activeContChb = null;
   },
 
-  toggle(slice, {
-    isCheck,
-    checkBox
-  }) {
+  toggle(slice, _ref) {
+    let {
+      isCheck,
+      checkBox
+    } = _ref;
+
     if (isCheck) {
       ChbContLogic._check(slice, checkBox);
     } else {
@@ -137,8 +139,12 @@ const ChbContLogic = {
 const ComponentSlice = {
   dialogInit: {},
 
-  showAlertDialog(option = {}) {
-    option.modalDialogType = _Type.ModalDialog.ALERT;
+  showAlertDialog(option) {
+    if (option === void 0) {
+      option = {};
+    }
+
+    option.modalDialogType = _ModalDialogType.MDT_ALERT;
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
   },
 
@@ -227,7 +233,11 @@ const ComponentSlice = {
     CheckBoxChartLogic.uncheckActive(this, chartType);
   },
 
-  onShowModalDialog(modalDialogType, option = {}) {
+  onShowModalDialog(modalDialogType, option) {
+    if (option === void 0) {
+      option = {};
+    }
+
     option.modalDialogType = modalDialogType;
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
   },

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ModalDialog = exports.LoadType = exports.Direction = exports.ChartType = exports.CIT_TW_LIST = exports.CIT_TABLE = exports.CIT_INFO_ITEM = exports.CIT_EUROSTAT_MAP = exports.CIT_CHART_AREA = exports.CIT_ALPHA_PERF = exports.BrowserType = void 0;
+exports.LoadType = exports.Direction = exports.ChartType = exports.CIT_TW_LIST = exports.CIT_TABLE = exports.CIT_INFO_ITEM = exports.CIT_EUROSTAT_MAP = exports.CIT_CHART_AREA = exports.CIT_ALPHA_PERF = exports.BrowserType = void 0;
 const BrowserType = {
   STOCK_MARKETS: 'SM',
   EUROSTAT: 'ES',
@@ -37,24 +37,6 @@ const Direction = {
   EMPTY: 'empty'
 };
 exports.Direction = Direction;
-const ModalDialog = {
-  ASK: 'ASK',
-  RELOAD: 'RELOAD',
-  INFO: 'info',
-  ALERT: 'alert',
-  DESCRIPTION: 'DESCRIPTION',
-  SETTINGS: 'settings',
-  CUSTOMIZE_EXPORT: 'CUSTOMIZE_EXPORT',
-  COLUMN_RANGE: 'COLUMN_RANGE',
-  ADD_TO_WATCH: 'addToWatch',
-  LOAD_ITEM: 'loadItem',
-  STOCKS_BY_SECTOR: 'STOCKS_BY_SECTOR',
-  EDIT_WATCH_GROUP: 'editWatchGroup',
-  EDIT_WATCH_LIST: 'editWatchList',
-  PASTE_TO: 'pasteTo',
-  ZOOM: 'zoom'
-};
-exports.ModalDialog = ModalDialog;
 const ChartType = {
   AREA: 'AREA',
   SEMI_DONUT: 'SEMI_DONUT',

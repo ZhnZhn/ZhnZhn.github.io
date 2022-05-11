@@ -1,0 +1,17 @@
+export const MDT_ASK = 'ASK'
+export const MDT_RELOAD = 'RELOAD'
+export const MDT_INFO = 'info'
+export const MDT_ALERT = 'alert'
+export const MDT_DESCRIPTION = 'DESCRIPTION'
+export const MDT_SETTINGS = 'settings'
+export const MDT_CUSTOMIZE_EXPORT = 'CUSTOMIZE_EXPORT'
+export const MDT_COLUMN_RANGE = 'COLUMN_RANGE'
+export const MDT_ADD_TO_WATCH = 'addToWatch'
+export const MDT_LOAD_ITEM = 'loadItem'
+export const MDT_STOCKS_BY_SECTOR = 'STOCKS_BY_SECTOR'
+
+export const MDT_EDIT_WATCH_GROUP = 'editWatchGroup'
+export const MDT_EDIT_WATCH_LIST = 'editWatchList'
+
+export const MDT_PASTE_TO = 'pasteTo'
+export const MDT_ZOOM = 'zoom'

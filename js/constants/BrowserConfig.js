@@ -5,6 +5,8 @@ exports.default = void 0;
 
 var _Type = require("./Type");
 
+var _ModalDialogType = require("./ModalDialogType");
+
 const BrowserConfig = {
   [_Type.BrowserType.STOCK_MARKETS]: {
     browserType: _Type.BrowserType.STOCK_MARKETS,
@@ -155,7 +157,7 @@ const BrowserConfig = {
     caption: 'NYSE by Sectors',
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
     withoutItemCounter: true,
-    modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
+    modalDialogType: _ModalDialogType.MDT_STOCKS_BY_SECTOR,
     chartContainerType: _Type.BrowserType.NYSE_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
     contFullCaption: 'NYSE by Sectors',
     itemOptionType: 'ItemTopicOption',
@@ -167,7 +169,7 @@ const BrowserConfig = {
     caption: 'NASDAQ by Sectors',
     sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
     withoutItemCounter: true,
-    modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
+    modalDialogType: _ModalDialogType.MDT_STOCKS_BY_SECTOR,
     chartContainerType: _Type.BrowserType.NASDAQ_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
     contFullCaption: 'NASDAQ by Sectors',
     itemOptionType: 'ItemTopicOption',

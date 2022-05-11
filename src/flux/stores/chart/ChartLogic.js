@@ -6,7 +6,9 @@ export {
   updateMovingValues
 } from './ChartLogicFn';
 
-import { ModalDialog as MD } from '../../../constants/Type'
+import {
+  MDT_COLUMN_RANGE
+} from '../../../constants/ModalDialogType';
 
 import { ComponentActionTypes as CAT } from '../../actions/ComponentActions';
 import fItemContainer from '../../logic/fItemContainer';
@@ -119,7 +121,7 @@ export const scanPostAdded = (
   const chart = store.getActiveChart();
   if (chart && _isSecondDotCase(chart.series, option)) {
     store.trigger(CAT.SHOW_MODAL_DIALOG, {
-      modalDialogType: MD.COLUMN_RANGE,
+      modalDialogType: MDT_COLUMN_RANGE,
       chart
     });
   }

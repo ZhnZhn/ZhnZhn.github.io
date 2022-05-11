@@ -1,8 +1,24 @@
-
 import {
-  ModalDialog as M,
   BrowserType as BT
 } from '../../constants/Type';
+import {
+  MDT_ASK,
+  MDT_RELOAD,
+  MDT_INFO,
+  MDT_ALERT,
+  MDT_DESCRIPTION,
+  MDT_CUSTOMIZE_EXPORT,
+  MDT_COLUMN_RANGE,
+  MDT_ZOOM,
+  MDT_SETTINGS,
+  MDT_ADD_TO_WATCH,
+  MDT_STOCKS_BY_SECTOR,
+  MDT_PASTE_TO,
+
+  MDT_LOAD_ITEM,
+  MDT_EDIT_WATCH_GROUP,
+  MDT_EDIT_WATCH_LIST
+} from '../../constants/ModalDialogType';
 
 import AskDialog from './AskDialog';
 import ReloadDialog from './ReloadDialog';
@@ -21,18 +37,18 @@ import PasteToModalDialog from '../items/PasteToModalDialog'
 const MSG_OFFLINE = 'It seems you are offline';
 
 const _router = {
-  [M.ASK]: AskDialog,
-  [M.RELOAD]: ReloadDialog,
-  [M.INFO]: InfoDialog,
-  [M.ALERT]: AlertDialog,
-  [M.DESCRIPTION]: DescriptionDialog,
-  [M.CUSTOMIZE_EXPORT]: CustomizeExportDialog,
-  [M.COLUMN_RANGE]: ColumnRangeDialog,
-  [M.ZOOM]: ZoomDialog,
-  [M.SETTINGS]: SettingsDialog,
-  [M.ADD_TO_WATCH]: AddToWatchDialog,
-  [M.STOCKS_BY_SECTOR]: StocksBySectorDialog,
-  [M.PASTE_TO]: PasteToModalDialog,
+  [MDT_ASK]: AskDialog,
+  [MDT_RELOAD]: ReloadDialog,
+  [MDT_INFO]: InfoDialog,
+  [MDT_ALERT]: AlertDialog,
+  [MDT_DESCRIPTION]: DescriptionDialog,
+  [MDT_CUSTOMIZE_EXPORT]: CustomizeExportDialog,
+  [MDT_COLUMN_RANGE]: ColumnRangeDialog,
+  [MDT_ZOOM]: ZoomDialog,
+  [MDT_SETTINGS]: SettingsDialog,
+  [MDT_ADD_TO_WATCH]: AddToWatchDialog,
+  [MDT_STOCKS_BY_SECTOR]: StocksBySectorDialog,
+  [MDT_PASTE_TO]: PasteToModalDialog,
 
   _loadWL(){
     /*eslint-disable no-undef */
@@ -51,13 +67,13 @@ const _router = {
        .catch(err => console.log(MSG_OFFLINE))
      }
   },
-  get [M.LOAD_ITEM]() {
+  get [MDT_LOAD_ITEM]() {
     return this.WL.then(D => D.LoadItem);
   },
-  get [M.EDIT_WATCH_GROUP]() {
+  get [MDT_EDIT_WATCH_GROUP]() {
     return this.WL.then(D => D.EditGroup);
   },
-  get [M.EDIT_WATCH_LIST]() {
+  get [MDT_EDIT_WATCH_LIST]() {
     return this.WL.then(D => D.EditList)
   },
 
@@ -65,7 +81,7 @@ const _router = {
   loadDialogs(id){
     switch (id) {
       case BT.WATCH_LIST: this._loadWL(); break;
-      default: return undefined
+      default: return;
     }
   }
 }
