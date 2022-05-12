@@ -1,4 +1,29 @@
-import { BrowserType as BT } from '../../constants/Type'
+import {
+  BT_FUTURES,
+  BT_BLOCKCHAIN,
+  BT_WATCH_LIST,
+  BT_DB_NOMICS,
+  BT_FGR,
+  BT_PE,
+  BT_QUANDL,
+  BT_US_ECONOMICS,
+  BT_EUROSTAT,
+  BT_FRANCE_STATISTICS,
+  BT_UK_STATISTICS,
+  BT_NORWAY_STATISTICS,
+  BT_NORWAY_STAT_ALL,
+  BT_SWEDEN_STAT,
+  BT_SWEDEN_STAT_ALL,
+  BT_FINLAND_STAT_ALL,
+  BT_DENMARK_STAT_ALL,
+  BT_IRELAND_STAT_ALL,
+  BT_STOCK_MARKETS,
+  BT_NYSE_STOCKS,
+  BT_NASDAQ_STOCKS,
+  BT_FAOSTAT,
+  BT_UN_COMTRADE,
+  BT_WORLD_BANK
+} from '../../constants/BrowserType';
 
 import CA from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
@@ -15,6 +40,61 @@ const _fBD = id => () => {
   BA.showBrowserDynamic(id)
 };
 
+const _crSubMenuItem = (
+  id,
+  name
+) => ({
+  id,
+  name,
+  type: 'sub',
+  cn: CL_BR
+})
+
+const _crMenuItem = (
+  cn,
+  name,
+  id
+) => ({
+  cn,
+  name,
+  onClick: _fBD(id),
+  isClose: true
+})
+
+const _crMenuItems = (configs) => configs
+  .map(([cn, name, id]) => _crMenuItem(cn, name, id))
+
+const PAGE_CONFIGS_01 = [
+  [CL_DBN, 'DB Nomics', BT_DB_NOMICS],
+  [CL_ORG, 'EU: FIGARO', BT_FGR],
+  [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
+  [CL_Q, 'Quandl', BT_QUANDL],
+  [CL_BR, 'USA Economics', BT_US_ECONOMICS]
+]
+, PAGE_CONFIGS_02 = [
+  [CL_ORG, 'Eurostat', BT_EUROSTAT],
+  [CL_ORG, 'Insee: France Statistics', BT_FRANCE_STATISTICS],
+  [CL_ORG, 'ONS: UK Statistics', BT_UK_STATISTICS],
+  [CL_ORG, 'Statistics Norway', BT_NORWAY_STATISTICS],
+  [CL_ORG, 'Statistics Norway All', BT_NORWAY_STAT_ALL],
+  [CL_ORG, 'Statistics Sweden', BT_SWEDEN_STAT],
+  [CL_ORG, 'Statistics Sweden All', BT_SWEDEN_STAT_ALL],
+  [CL_ORG, 'Statistics Finland All', BT_FINLAND_STAT_ALL],
+  [CL_ORG, 'Statistics Denmark All', BT_DENMARK_STAT_ALL],
+  [CL_ORG, 'CSO Ireland All', BT_IRELAND_STAT_ALL]
+]
+, PAGE_CONFIGS_03 = [
+  [CL_BR, 'Stock Markets', BT_STOCK_MARKETS],
+  [CL_BR, 'NYSE by Sectors', BT_NYSE_STOCKS],
+  [CL_BR, 'NASDAQ by Sectors', BT_NASDAQ_STOCKS]
+]
+, PAGE_CONFIGS_04 = [
+  [CL_ORG, 'FAOSTAT', BT_FAOSTAT],
+  [CL_ORG, 'UN Comtrade', BT_UN_COMTRADE],
+  [CL_ORG, 'World Bank', BT_WORLD_BANK]
+];
+
+
 const crBrowserModel = () => {
   return {
     titleCl: CL_BR,
@@ -22,165 +102,24 @@ const crBrowserModel = () => {
     maxPages: 2,
     initId: 'page_0',
     page_0: [
+      _crSubMenuItem('page_01', 'Economics'),
+      _crSubMenuItem('page_02', 'Statistics Agencies'),
+      _crSubMenuItem('page_03', 'Stock Markets'),
+      _crSubMenuItem('page_04', 'World Organizations'),
+      _crMenuItem(CL_BR, 'Futures Markets', BT_FUTURES),
+      _crMenuItem(CL_BR, 'Blockchain', BT_BLOCKCHAIN),
+      _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
       {
-        id: 'page_01',
-        type: 'sub',
-        cn: CL_BR,
-        name: 'Economics'
-      },{
-        id: 'page_02',
-        type: 'sub',
-        cn: CL_BR,
-        name: 'Statistics Agencies'
-      },{
-        id: 'page_03',
-        type: 'sub',
-        cn: CL_BR,
-        name: 'Stock Markets'
-      },{
-        id: 'page_04',
-        type: 'sub',
-        cn: CL_BR,
-        name: 'World Organizations'
-      },{
-         cn: CL_BR,
-         name: 'Futures Markets',
-         onClick: _fBD(BT.FUTURES),
-         isClose: true
-      },{
-        cn: CL_BR,
-        name: 'Blockchain',
-        onClick: _fBD(BT.BLOCKCHAIN),
-        isClose: true
-      },{
-        cn: CL_W,
-        name: 'Watch List',
-        onClick: _fBD(BT.WATCH_LIST),
-        isClose: true
-      },{
         cn: CL_AB,
         name: 'About',
         onClick: CA.showAbout,
         isClose: true
       }
     ],
-    page_01: [
-      {
-        cn: CL_DBN,
-        name: 'DB Nomics',
-        onClick: _fBD(BT.DB_NOMICS),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'EU: FIGARO',
-        onClick: _fBD(BT.FGR),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'Euro Indicators / PEEIs',
-        onClick: _fBD(BT.PE),
-        isClose: true
-      },{
-        cn: CL_Q,
-        name: 'Quandl',
-        onClick: _fBD(BT.QUANDL),
-        isClose: true
-      },{
-        cn: CL_BR,
-        name: 'USA Economics',
-        onClick: _fBD(BT.US_ECONOMICS),
-        isClose: true
-      }
-    ],
-    page_02: [
-      {
-        cn: CL_ORG,
-        name: 'Eurostat',
-        onClick: _fBD(BT.EUROSTAT),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'Insee: France Statistics',
-        onClick: _fBD(BT.FRANCE_STATISTICS),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'ONS: UK Statistics',
-        onClick: _fBD(BT.UK_STATISTICS),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'Statistics Norway',
-        onClick: _fBD(BT.NORWAY_STATISTICS),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'Statistics Norway All',
-        onClick: _fBD(BT.NORWAY_STAT_ALL),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'Statistics Sweden',
-        onClick: _fBD(BT.SWEDEN_STAT),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'Statistics Sweden All',
-        onClick: _fBD(BT.SWEDEN_STAT_ALL),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'Statistics Finland All',
-        onClick: _fBD(BT.FINLAND_STAT_ALL),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'Statistics Denmark All',
-        onClick: _fBD(BT.DENMARK_STAT_ALL),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'CSO Ireland All',
-        onClick: _fBD(BT.IRELAND_STAT_ALL),
-        isClose: true
-      }
-    ],
-    page_03: [
-      {
-         cn: CL_BR,
-         name: 'Stock Markets',
-         onClick: _fBD(BT.STOCK_MARKETS),
-         isClose: true
-      },{
-        cn: CL_BR,
-        name: 'NYSE by Sectors',
-        onClick: _fBD(BT.NYSE_STOCKS),
-        isClose: true
-      },{
-        cn: CL_BR,
-        name: 'NASDAQ by Sectors',
-        onClick: _fBD(BT.NASDAQ_STOCKS),
-        isClose: true
-      }
-    ],
-    page_04: [
-      {
-        cn: CL_ORG,
-        name: 'FAOSTAT',
-        onClick: _fBD(BT.FAOSTAT),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'UN Comtrade',
-        onClick: _fBD(BT.UN_COMTRADE),
-        isClose: true
-      },{
-        cn: CL_ORG,
-        name: 'World Bank',
-        onClick: _fBD(BT.WORLD_BANK),
-        isClose: true
-      }
-    ]
+    page_01: _crMenuItems(PAGE_CONFIGS_01),
+    page_02: _crMenuItems(PAGE_CONFIGS_02),
+    page_03: _crMenuItems(PAGE_CONFIGS_03),
+    page_04: _crMenuItems(PAGE_CONFIGS_04)
   };
 }
 

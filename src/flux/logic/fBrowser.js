@@ -12,7 +12,14 @@ import {
   BAT_UPDATE_WATCH_BROWSER,
   BAT_UPDATE_BROWSER_MENU
 } from '../actions/BrowserActions';
-import { BrowserType as BT } from '../../constants/Type';
+import {
+  BT_WATCH_LIST,
+  BT_SWEDEN_STAT_ALL,
+  BT_NORWAY_STAT_ALL,
+  BT_FINLAND_STAT_ALL,
+  BT_DENMARK_STAT_ALL,
+  BT_IRELAND_STAT_ALL
+} from '../../constants/BrowserType';
 
 import RouterBrowser from './RouterBrowser';
 
@@ -21,8 +28,8 @@ import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem'
 
 
 const _crBrowserWatchList = (Comp) => createElement(Comp, {
-   key: BT.WATCH_LIST,
-   browserType: BT.WATCH_LIST,
+   key: BT_WATCH_LIST,
+   browserType: BT_WATCH_LIST,
    caption: "Watch List",
    isInitShow: true,
    store: ChartStore,
@@ -74,11 +81,11 @@ const _crBrowserDynamic = (Comp, option) => {
  }
 
 const STAT_ALL_TYPES = [
-  BT.SWEDEN_STAT_ALL,
-  BT.NORWAY_STAT_ALL,
-  BT.FINLAND_STAT_ALL,
-  BT.DENMARK_STAT_ALL,
-  BT.IRELAND_STAT_ALL
+  BT_SWEDEN_STAT_ALL,
+  BT_NORWAY_STAT_ALL,
+  BT_FINLAND_STAT_ALL,
+  BT_DENMARK_STAT_ALL,
+  BT_IRELAND_STAT_ALL
 ];
 const _isStatAll = browserType => STAT_ALL_TYPES
   .indexOf(browserType) !== -1;
@@ -86,8 +93,8 @@ const _isStatAll = browserType => STAT_ALL_TYPES
 const fBrowser = {
   crAsyncBrowser(option) {
     const bT = option.browserType;
-    if (bT === BT.WATCH_LIST) {
-      return RouterBrowser[BT.WATCH_LIST]
+    if (bT === BT_WATCH_LIST) {
+      return RouterBrowser[BT_WATCH_LIST]
         .then(_crBrowserWatchList);
     }
     if (_isStatAll(bT)) {

@@ -1,5 +1,10 @@
-
-import { BrowserType as BT } from '../../constants/Type';
+import {
+  BT_STOCK_MARKETS,
+  BT_NORWAY_STATISTICS,
+  BT_SWEDEN_STAT,
+  BT_QUANDL,
+  BT_UN_COMTRADE
+} from '../../constants/BrowserType';
 
 import D from '../../components/dialogs/Dialogs';
 
@@ -109,7 +114,7 @@ const _router = {
   },
   get AlphaSearchDialog() {
     return this.getSM().then(D => D.Search);
-  },  
+  },
 
   _loadSD() {
      /*eslint-disable no-undef */
@@ -192,14 +197,14 @@ const _router = {
 
   loadDialogs(browserType) {
     switch(browserType){
-      case BT.STOCK_MARKETS:
+      case BT_STOCK_MARKETS:
         this._loadSM(); break;
-      case BT.NORWAY_STATISTICS:
-      case BT.SWEDEN_STAT:
+      case BT_NORWAY_STATISTICS:
+      case BT_SWEDEN_STAT:
          this._loadSD(); break;
-      case BT.QUANDL:
+      case BT_QUANDL:
          this._loadQE(); break;
-      case BT.UN_COMTRADE:
+      case BT_UN_COMTRADE:
         this._loadUN(); break;
       default: return;
     }

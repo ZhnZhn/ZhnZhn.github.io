@@ -1,6 +1,6 @@
 import {
-  BrowserType as BT
-} from '../../constants/Type';
+  BT_WATCH_LIST
+} from '../../constants/BrowserType';
 import {
   MDT_ASK,
   MDT_RELOAD,
@@ -80,7 +80,7 @@ const _router = {
 
   loadDialogs(id){
     switch (id) {
-      case BT.WATCH_LIST: this._loadWL(); break;
+      case BT_WATCH_LIST: this._loadWL(); break;
       default: return;
     }
   }

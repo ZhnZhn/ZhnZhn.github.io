@@ -3,7 +3,11 @@ import Reflux from 'reflux-core';
 import Store from '../stores/ChartStore'
 import Factory from '../logic/Factory'
 import BrowserConfig from '../../constants/BrowserConfig'
-import { BrowserType as BT } from '../../constants/Type'
+import {
+  BT_QUANDL,
+  BT_EUROSTAT,
+  BT_WATCH_LIST
+} from '../../constants/BrowserType';
 import RouterModalDialog from '../../components/dialogs/RouterModalDialog'
 import RouterDialog from '../logic/RouterDialog'
 
@@ -81,9 +85,9 @@ BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function(option){
 })
 
 const _show = BA.showBrowserDynamic;
-BA.showQuandl = _show.bind(null, BT.QUANDL)
-BA.showEurostat = _show.bind(null, BT.EUROSTAT)
-BA.showWatch = _show.bind(null, BT.WATCH_LIST)
+BA.showQuandl = _show.bind(null, BT_QUANDL)
+BA.showEurostat = _show.bind(null, BT_EUROSTAT)
+BA.showWatch = _show.bind(null, BT_WATCH_LIST)
 
 
 export default BA

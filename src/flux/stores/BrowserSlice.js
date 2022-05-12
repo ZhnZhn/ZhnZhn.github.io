@@ -1,5 +1,5 @@
 import BrowserConfig from '../../constants/BrowserConfig';
-import { BrowserType } from '../../constants/Type';
+import { BT_STOCKS_BY_SECTORS } from '../../constants/BrowserType';
 import DataWL from '../../constants/DataWL';
 
 import {
@@ -50,7 +50,7 @@ const BrowserSlice = {
     resetCounter(this.browserMenu, bT, cT)
   },
   getSourceConfig(browserId, sourceId){
-    if (sourceId.indexOf(BrowserType.STOCKS_BY_SECTORS) > 0){
+    if (sourceId.indexOf(BT_STOCKS_BY_SECTORS) > 0){
       return BrowserConfig[browserId];
     }
     const _r = this.routeDialog[browserId];

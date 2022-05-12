@@ -1,17 +1,19 @@
-import { BrowserType as BT } from '../../constants/Type';
+import {
+  BT_NYSE_STOCKS,
+  BT_NASDAQ_STOCKS,
+  BT_WATCH_LIST
+} from '../../constants/BrowserType';
 
 import SourceBrowserDynamic from '../../components/browser-container/SourceBrowserDynamic';
 import SourceBrowserDynamic2 from '../../components/browser-container/SourceBrowserDynamic2';
 
 const RouterBrowser = {
-  DEFAULT : SourceBrowserDynamic,
+  DEFAULT: SourceBrowserDynamic,
 
-  [BT.US_STOCKS] : SourceBrowserDynamic2,
-  [BT.NYSE_STOCKS] : SourceBrowserDynamic2,
-  [BT.NASDAQ_STOCKS] : SourceBrowserDynamic2,
-  [BT.LONDON_STOCKS] : SourceBrowserDynamic2,
+  [BT_NYSE_STOCKS]: SourceBrowserDynamic2,
+  [BT_NASDAQ_STOCKS]: SourceBrowserDynamic2,
 
-  get [BT.WATCH_LIST]() {
+  get [BT_WATCH_LIST]() {
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === '_development') {
       return import("js/components/watch-browser/WatchBrowser.js")
