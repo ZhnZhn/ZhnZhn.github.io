@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = exports.BAT_UPDATE_BROWSER_MENU = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_LOAD_BROWSER_FAILED = exports.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = exports.BAT_LOAD_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = exports.BAT_SHOW_BROWSER_DYNAMIC = void 0;
+exports.default = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_BROWSER_MENU = exports.BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_LOAD_BROWSER_FAILED = exports.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = exports.BAT_LOAD_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = void 0;
 
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
@@ -13,7 +13,7 @@ var _Factory = _interopRequireDefault(require("../logic/Factory"));
 
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 
-var _Type = require("../../constants/Type");
+var _BrowserType = require("../../constants/BrowserType");
 
 var _RouterModalDialog = _interopRequireDefault(require("../../components/dialogs/RouterModalDialog"));
 
@@ -49,11 +49,12 @@ const BA = _refluxCore.default.createActions({
   [BAT_UPDATE_WATCH_BROWSER]: {}
 });
 
-const _fnFetchSourceMenu = function ({
-  json,
-  option,
-  onCompleted
-}) {
+const _fnFetchSourceMenu = function (_ref) {
+  let {
+    json,
+    option,
+    onCompleted
+  } = _ref;
   const {
     browserType
   } = option;
@@ -72,7 +73,11 @@ const _crErr = (alertDescr, alertItemId) => ({
   alertItemId
 });
 
-BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function (option = {}) {
+BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function (option) {
+  if (option === void 0) {
+    option = {};
+  }
+
   const _option = typeof option === 'string' ? {
     browserType: option
   } : option,
@@ -110,9 +115,9 @@ BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function (option) {
   });
 });
 const _show = BA.showBrowserDynamic;
-BA.showQuandl = _show.bind(null, _Type.BrowserType.QUANDL);
-BA.showEurostat = _show.bind(null, _Type.BrowserType.EUROSTAT);
-BA.showWatch = _show.bind(null, _Type.BrowserType.WATCH_LIST);
+BA.showQuandl = _show.bind(null, _BrowserType.BT_QUANDL);
+BA.showEurostat = _show.bind(null, _BrowserType.BT_EUROSTAT);
+BA.showWatch = _show.bind(null, _BrowserType.BT_WATCH_LIST);
 var _default = BA;
 exports.default = _default;
 //# sourceMappingURL=BrowserActions.js.map

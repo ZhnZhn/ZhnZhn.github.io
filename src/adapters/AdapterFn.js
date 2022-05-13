@@ -29,7 +29,8 @@ export {
   filterTrimZero
 } from '../math/seriaFn'
 
-import { Direction } from '../constants/Type'
+//import { Direction } from '../constants/Type'
+import { DT_EMPTY } from '../constants/DirectionType'
 import {
   getPointDate,
   getPointValue
@@ -82,7 +83,7 @@ export const valueMoving = (data, dfR) => {
   if (!_isArr(data)) {
     return {
       date: data,
-      direction: Direction.EMPTY
+      direction: DT_EMPTY
     };
  }
 

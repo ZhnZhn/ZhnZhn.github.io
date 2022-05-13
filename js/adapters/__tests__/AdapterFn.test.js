@@ -6,8 +6,9 @@
 
 var _AdapterFn = require("../AdapterFn");
 
-var _Type = require("../../constants/Type");
+var _DirectionType = require("../../constants/DirectionType");
 
+//import { Direction } from '../../constants/Type'
 const Y = [{
   in: '2017',
   r: 1514678400000,
@@ -231,7 +232,7 @@ describe('valueMoving', () => {
   const fn = _AdapterFn.valueMoving;
   it('should return echo data and direction empty for !arr input', () => {
     const direction = {
-      direction: _Type.Direction.EMPTY
+      direction: _DirectionType.DT_EMPTY
     };
     expect(fn('')).toEqual({
       date: '',
@@ -262,7 +263,7 @@ describe('valueMoving', () => {
       _deltaAbs: '10000',
       percent: '100.00%',
       _percentAbs: '100.00',
-      direction: _Type.Direction.UP,
+      direction: _DirectionType.DT_UP,
       valueTo: '10 000',
       date: '31-12-2019',
       dateTo: '31-12-2018'
@@ -276,7 +277,7 @@ describe('valueMoving', () => {
       _deltaAbs: '0',
       percent: '0.00%',
       _percentAbs: '0.00',
-      direction: _Type.Direction.EQUAL,
+      direction: _DirectionType.DT_EQUAL,
       valueTo: '20 000',
       date: '31-12-2019',
       dateTo: '31-12-2019'
@@ -290,7 +291,7 @@ describe('valueMoving', () => {
       _deltaAbs: '0',
       percent: '0.00%',
       _percentAbs: '0.00',
-      direction: _Type.Direction.EQUAL,
+      direction: _DirectionType.DT_EQUAL,
       valueTo: '0',
       date: '',
       dateTo: ''

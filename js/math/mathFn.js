@@ -7,7 +7,7 @@ exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.crValueMovin
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _Type = require("../constants/Type");
+var _DirectionType = require("../constants/DirectionType");
 
 var _crId2 = _interopRequireDefault(require("./crId"));
 
@@ -79,19 +79,18 @@ const calcPercent = _ref => {
 
 exports.calcPercent = calcPercent;
 
-const crValueMoving = _ref2 => {
+const crValueMoving = function (_temp) {
   let {
     nowValue,
     prevValue,
-    Direction: D = _Type.Direction,
     fnFormat = fnEcho,
     dfR
-  } = _ref2;
+  } = _temp === void 0 ? {} : _temp;
 
   const bNowValue = _formatedToBig(nowValue, dfR),
         bPrevValue = _formatedToBig(prevValue, dfR),
         _bDelta = bPrevValue.minus(bNowValue),
-        _direction = _bDelta.gt(0.0) ? D.DOWN : _bDelta.lt(0.0) ? D.UP : D.EQUAL,
+        _direction = _bDelta.gt(0.0) ? _DirectionType.DT_DOWN : _bDelta.lt(0.0) ? _DirectionType.DT_UP : _DirectionType.DT_EQUAL,
         _bPercent = calcPercent({
     bValue: _bDelta,
     bTotal: bPrevValue

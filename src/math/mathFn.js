@@ -1,6 +1,10 @@
 import Big from 'big.js';
 
-import { Direction } from '../constants/Type';
+import {
+  DT_UP,
+  DT_DOWN,
+  DT_EQUAL
+} from '../constants/DirectionType';
 import _crId from './crId';
 
 const fnEcho = value => value;
@@ -65,16 +69,15 @@ export const calcPercent = ({
 export const crValueMoving = ({
   nowValue,
   prevValue,
-  Direction:D=Direction,
   fnFormat=fnEcho,
   dfR
-}) => {
+}={}) => {
   const bNowValue = _formatedToBig(nowValue, dfR)
   , bPrevValue = _formatedToBig(prevValue, dfR)
   , _bDelta = bPrevValue.minus(bNowValue)
   , _direction = _bDelta.gt(0.0)
-       ? D.DOWN
-       : _bDelta.lt(0.0) ? D.UP : D.EQUAL
+       ? DT_DOWN
+       : _bDelta.lt(0.0) ? DT_UP : DT_EQUAL
   , _bPercent = calcPercent({
        bValue:_bDelta,
        bTotal: bPrevValue

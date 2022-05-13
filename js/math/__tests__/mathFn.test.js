@@ -6,15 +6,14 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _mathFn = require("../mathFn");
 
-var _Type = require("../../constants/Type");
+var _DirectionType = require("../../constants/DirectionType");
 
 const PERCENT_0 = '0.00%';
 const PERCENT_100 = '100.00%';
 
 const _crVmInputs = (nowValue, prevValue) => ({
   nowValue,
-  prevValue,
-  Direction: _Type.Direction
+  prevValue
 });
 
 describe('roundBy', () => {
@@ -85,14 +84,14 @@ describe('crValueMoving', () => {
     expect(r.value).toBe('200.02');
     expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100.01');
-    expect(r.direction).toBe(_Type.Direction.UP);
+    expect(r.direction).toBe(_DirectionType.DT_UP);
   });
   test('should return correct obj for strings values with radix', () => {
     const r = fn(_crVmInputs('200.02', '100.01'));
     expect(r.value).toBe('200.02');
     expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100.01');
-    expect(r.direction).toBe(_Type.Direction.UP);
+    expect(r.direction).toBe(_DirectionType.DT_UP);
   });
   test('should use dfR for rounding', () => {
     const r = fn({ ..._crVmInputs('200.023333', '100.01333'),
@@ -103,7 +102,7 @@ describe('crValueMoving', () => {
     expect(r.value).toBe('200.02');
     expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100.01');
-    expect(r.direction).toBe(_Type.Direction.UP);
+    expect(r.direction).toBe(_DirectionType.DT_UP);
   });
   test('should use fnFormat for output', () => {
     const r = fn({ ..._crVmInputs('200.02', '100.01'),
@@ -114,68 +113,47 @@ describe('crValueMoving', () => {
     expect(r.value).toBe('200.02;');
     expect(r.delta).toBe('100.01;');
   });
-  test('should use Direction for output', () => {
-    const _Direction = {
-      UP: 'UPPP'
-    };
-    const r = fn({ ..._crVmInputs('200.02', '100.01'),
-      ...{
-        Direction: _Direction
-      }
-    });
-    expect(r.direction).toBe(_Direction.UP);
-  });
-  test('should use df Direction as Direction for output', () => {
-    const r = fn({ ..._crVmInputs('200.02', '100.01'),
-      ...{
-        Direction: void 0
-      }
-    });
-    expect(r.direction).toBe(_Type.Direction.UP);
-  });
   test('should return correct obj for strings values with nowValue="0"', () => {
     const r = fn(_crVmInputs('0', '100'));
     expect(r.value).toBe('0');
     expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100');
-    expect(r.direction).toBe(_Type.Direction.DOWN);
+    expect(r.direction).toBe(_DirectionType.DT_DOWN);
   });
   test('should return correct obj for equal strings values', () => {
     const r = fn(_crVmInputs('100', '100'));
     expect(r.value).toBe('100');
     expect(r.percent).toBe(PERCENT_0);
     expect(r.delta).toBe('0');
-    expect(r.direction).toBe(_Type.Direction.EQUAL);
+    expect(r.direction).toBe(_DirectionType.DT_EQUAL);
   });
   test('should replace blanks in string values', () => {
     const r = fn(_crVmInputs('200 000 000', '100 000 000'));
     expect(r.value).toBe('200000000');
     expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100000000');
-    expect(r.direction).toBe(_Type.Direction.UP);
+    expect(r.direction).toBe(_DirectionType.DT_UP);
   });
   test('should replace several blanks in string values', () => {
     const r = fn(_crVmInputs('200  000  000', '100  000  000'));
     expect(r.value).toBe('200000000');
     expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100000000');
-    expect(r.direction).toBe(_Type.Direction.UP);
+    expect(r.direction).toBe(_DirectionType.DT_UP);
   });
   test('should to fixed to radix 0 value and round delta in case value or delta bigger 1 000 000', () => {
     const r = fn(_crVmInputs('200 000 000.02', '100 000 000.01'));
     expect(r.value).toBe('200000000');
     expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100000000');
-    expect(r.direction).toBe(_Type.Direction.UP);
+    expect(r.direction).toBe(_DirectionType.DT_UP);
   });
   test('should use 0 values in edge cases', () => {
-    const r = fn({
-      Direction: _Type.Direction
-    });
+    const r = fn();
     expect(r.value).toBe('0');
     expect(r.percent).toBe(PERCENT_0);
     expect(r.delta).toBe('0');
-    expect(r.direction).toBe(_Type.Direction.EQUAL);
+    expect(r.direction).toBe(_DirectionType.DT_EQUAL);
   });
 });
 describe('toFixed', () => {

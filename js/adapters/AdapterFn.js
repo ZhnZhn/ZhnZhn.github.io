@@ -39,10 +39,11 @@ exports.findMinY = _seriaFn.findMinY;
 exports.findMaxY = _seriaFn.findMaxY;
 exports.filterTrimZero = _seriaFn.filterTrimZero;
 
-var _Type = require("../constants/Type");
+var _DirectionType = require("../constants/DirectionType");
 
 var _getterPointFn = require("./getterPointFn");
 
+//import { Direction } from '../constants/Type'
 const _isNaN = Number.isNaN;
 exports._isNaN = _isNaN;
 const EMPTY = '';
@@ -106,7 +107,7 @@ const valueMoving = (data, dfR) => {
   if (!_isArr(data)) {
     return {
       date: data,
-      direction: _Type.Direction.EMPTY
+      direction: _DirectionType.DT_EMPTY
     };
   }
 

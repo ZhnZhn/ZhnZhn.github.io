@@ -15,7 +15,7 @@ var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
 
 var _BrowserActions = _interopRequireWildcard(require("../actions/BrowserActions"));
 
-var _Type = require("../../constants/Type");
+var _BrowserType = require("../../constants/BrowserType");
 
 var _RouterBrowser = _interopRequireDefault(require("./RouterBrowser"));
 
@@ -28,8 +28,8 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const _crBrowserWatchList = Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
-  key: _Type.BrowserType.WATCH_LIST,
-  browserType: _Type.BrowserType.WATCH_LIST,
+  key: _BrowserType.BT_WATCH_LIST,
+  browserType: _BrowserType.BT_WATCH_LIST,
   caption: "Watch List",
   isInitShow: true,
   store: _ChartStore.default,
@@ -85,7 +85,7 @@ const _crBrowserDynamic = (Comp, option) => {
   });
 };
 
-const STAT_ALL_TYPES = [_Type.BrowserType.SWEDEN_STAT_ALL, _Type.BrowserType.NORWAY_STAT_ALL, _Type.BrowserType.FINLAND_STAT_ALL, _Type.BrowserType.DENMARK_STAT_ALL, _Type.BrowserType.IRELAND_STAT_ALL];
+const STAT_ALL_TYPES = [_BrowserType.BT_SWEDEN_STAT_ALL, _BrowserType.BT_NORWAY_STAT_ALL, _BrowserType.BT_FINLAND_STAT_ALL, _BrowserType.BT_DENMARK_STAT_ALL, _BrowserType.BT_IRELAND_STAT_ALL];
 
 const _isStatAll = browserType => STAT_ALL_TYPES.indexOf(browserType) !== -1;
 
@@ -93,8 +93,8 @@ const fBrowser = {
   crAsyncBrowser(option) {
     const bT = option.browserType;
 
-    if (bT === _Type.BrowserType.WATCH_LIST) {
-      return _RouterBrowser.default[_Type.BrowserType.WATCH_LIST].then(_crBrowserWatchList);
+    if (bT === _BrowserType.BT_WATCH_LIST) {
+      return _RouterBrowser.default[_BrowserType.BT_WATCH_LIST].then(_crBrowserWatchList);
     }
 
     if (_isStatAll(bT)) {

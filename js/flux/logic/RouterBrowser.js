@@ -3,59 +3,50 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _defineEnumerableProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/defineEnumerableProperties"));
-
-var _interopRequireWildcard2 = _interopRequireDefault(require("@babel/runtime/helpers/interopRequireWildcard"));
-
-var _Type = require("../../constants/Type");
+var _BrowserType = require("../../constants/BrowserType");
 
 var _SourceBrowserDynamic = _interopRequireDefault(require("../../components/browser-container/SourceBrowserDynamic"));
 
 var _SourceBrowserDynamic2 = _interopRequireDefault(require("../../components/browser-container/SourceBrowserDynamic2"));
 
-var _BT$WATCH_LIST, _BrowserSlider, _STAT_ALL, _RouterBrowser, _mutatorMap;
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-var RouterBrowser = (_RouterBrowser = {
-  DEFAULT: _SourceBrowserDynamic["default"]
-}, _RouterBrowser[_Type.BrowserType.US_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.NYSE_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.NASDAQ_STOCKS] = _SourceBrowserDynamic2["default"], _RouterBrowser[_Type.BrowserType.LONDON_STOCKS] = _SourceBrowserDynamic2["default"], _BT$WATCH_LIST = _Type.BrowserType.WATCH_LIST, _mutatorMap = {}, _mutatorMap[_BT$WATCH_LIST] = _mutatorMap[_BT$WATCH_LIST] || {}, _mutatorMap[_BT$WATCH_LIST].get = function () {
-  /*eslint-disable no-undef */
-  if (process.env.NODE_ENV === '_development') {
-    return Promise.resolve().then(function () {
-      return (0, _interopRequireWildcard2["default"])(require("js/components/watch-browser/WatchBrowser.js"));
-    }).then(function (module) {
-      return module["default"];
-    });
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const RouterBrowser = {
+  DEFAULT: _SourceBrowserDynamic.default,
+  [_BrowserType.BT_NYSE_STOCKS]: _SourceBrowserDynamic2.default,
+  [_BrowserType.BT_NASDAQ_STOCKS]: _SourceBrowserDynamic2.default,
+
+  get [_BrowserType.BT_WATCH_LIST]() {
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === '_development') {
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/watch-browser/WatchBrowser.js"))).then(module => module.default);
+    }
+    /*eslint-enable no-undef */
+
+
+    return Promise.resolve().then(() => _interopRequireWildcard(require("../../components/watch-browser/WatchBrowser"))).then(module => module.default);
+  },
+
+  get _BrowserSlider() {
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === '_development') {
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/browser-slider/BrowserSlider.js"))).then(module => module.default);
+    }
+    /*eslint-enable no-undef */
+
+
+    return Promise.resolve().then(() => _interopRequireWildcard(require("../../components/browser-slider/BrowserSlider"))).then(module => module.default);
+  },
+
+  get STAT_ALL() {
+    return this._BrowserSlider;
   }
-  /*eslint-enable no-undef */
 
-
-  return Promise.resolve().then(function () {
-    return (0, _interopRequireWildcard2["default"])(require("../../components/watch-browser/WatchBrowser"));
-  }).then(function (module) {
-    return module["default"];
-  });
-}, _BrowserSlider = "_BrowserSlider", _mutatorMap[_BrowserSlider] = _mutatorMap[_BrowserSlider] || {}, _mutatorMap[_BrowserSlider].get = function () {
-  /*eslint-disable no-undef */
-  if (process.env.NODE_ENV === '_development') {
-    return Promise.resolve().then(function () {
-      return (0, _interopRequireWildcard2["default"])(require("js/components/browser-slider/BrowserSlider.js"));
-    }).then(function (module) {
-      return module["default"];
-    });
-  }
-  /*eslint-enable no-undef */
-
-
-  return Promise.resolve().then(function () {
-    return (0, _interopRequireWildcard2["default"])(require("../../components/browser-slider/BrowserSlider"));
-  }).then(function (module) {
-    return module["default"];
-  });
-}, _STAT_ALL = "STAT_ALL", _mutatorMap[_STAT_ALL] = _mutatorMap[_STAT_ALL] || {}, _mutatorMap[_STAT_ALL].get = function () {
-  return this._BrowserSlider;
-}, (0, _defineEnumerableProperties2["default"])(_RouterBrowser, _mutatorMap), _RouterBrowser);
+};
 var _default = RouterBrowser;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=RouterBrowser.js.map

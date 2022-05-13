@@ -13,7 +13,12 @@ import {
   joinBy,
   valueMoving
 } from '../AdapterFn';
-import { Direction } from '../../constants/Type'
+//import { Direction } from '../../constants/Type'
+import {
+  DT_EMPTY,
+  DT_UP,
+  DT_EQUAL
+} from '../../constants/DirectionType';
 
 const Y = [
   { in: '2017', r: 1514678400000, d: '31-12-2017' },
@@ -163,7 +168,7 @@ describe('joinBy', () => {
 describe('valueMoving', ()=>{
   const fn = valueMoving
   it('should return echo data and direction empty for !arr input', ()=>{
-    const direction = { direction: Direction.EMPTY }
+    const direction = { direction: DT_EMPTY }
     expect(fn('')).toEqual({ date: '', ...direction })
     expect(fn(null)).toEqual({ date: null, ...direction })
     expect(fn()).toEqual({ date: void 0, ...direction })
@@ -180,7 +185,7 @@ describe('valueMoving', ()=>{
       _deltaAbs: '10000',
       percent: '100.00%',
       _percentAbs: '100.00',
-      direction: Direction.UP,
+      direction: DT_UP,
 
       valueTo: '10 000',
       date: '31-12-2019',
@@ -197,7 +202,7 @@ describe('valueMoving', ()=>{
       _deltaAbs: '0',
       percent: '0.00%',
       _percentAbs: '0.00',
-      direction: Direction.EQUAL,
+      direction: DT_EQUAL,
 
       valueTo: '20 000',
       date: '31-12-2019',
@@ -212,7 +217,7 @@ describe('valueMoving', ()=>{
       _deltaAbs: '0',
       percent: '0.00%',
       _percentAbs: '0.00',
-      direction: Direction.EQUAL,
+      direction: DT_EQUAL,
 
       valueTo: '0',
       date: '',

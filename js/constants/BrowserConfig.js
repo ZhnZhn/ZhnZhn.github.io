@@ -3,86 +3,86 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Type = require("./Type");
+var _BrowserType = require("./BrowserType");
 
 var _ModalDialogType = require("./ModalDialogType");
 
 const BrowserConfig = {
-  [_Type.BrowserType.STOCK_MARKETS]: {
-    browserType: _Type.BrowserType.STOCK_MARKETS,
+  [_BrowserType.BT_STOCK_MARKETS]: {
+    browserType: _BrowserType.BT_STOCK_MARKETS,
     caption: 'Stock Markets',
     sourceMenuUrl: './data/stock-markets/source-menu.json'
   },
-  [_Type.BrowserType.EUROSTAT]: {
-    browserType: _Type.BrowserType.EUROSTAT,
+  [_BrowserType.BT_EUROSTAT]: {
+    browserType: _BrowserType.BT_EUROSTAT,
     caption: 'Eurostat Statistics',
     sourceMenuUrl: './data/eurostat/source-menu.json'
   },
-  [_Type.BrowserType.FGR]: {
-    browserType: _Type.BrowserType.FGR,
+  [_BrowserType.BT_FGR]: {
+    browserType: _BrowserType.BT_FGR,
     caption: 'Eurostat: FIGARO',
     sourceMenuUrl: './data/figaro/source-menu.json'
   },
-  [_Type.BrowserType.PE]: {
-    browserType: _Type.BrowserType.PE,
+  [_BrowserType.BT_PE]: {
+    browserType: _BrowserType.BT_PE,
     caption: 'Euro Indicators / PEEIs',
     sourceMenuUrl: './data/peeis/source-menu.json'
   },
-  [_Type.BrowserType.UN_COMTRADE]: {
-    browserType: _Type.BrowserType.UN_COMTRADE,
+  [_BrowserType.BT_UN_COMTRADE]: {
+    browserType: _BrowserType.BT_UN_COMTRADE,
     caption: 'UN Comtrade',
     sourceMenuUrl: './data/uncomtrade/source-menu.json'
   },
-  [_Type.BrowserType.FAOSTAT]: {
-    browserType: _Type.BrowserType.FAOSTAT,
+  [_BrowserType.BT_FAOSTAT]: {
+    browserType: _BrowserType.BT_FAOSTAT,
     caption: 'FAOSTAT',
     sourceMenuUrl: './data/faostat/source-menu.json'
   },
-  [_Type.BrowserType.WORLD_BANK]: {
-    browserType: _Type.BrowserType.WORLD_BANK,
+  [_BrowserType.BT_WORLD_BANK]: {
+    browserType: _BrowserType.BT_WORLD_BANK,
     caption: 'World Bank',
     sourceMenuUrl: './data/world-bank/source-menu.json'
   },
-  [_Type.BrowserType.QUANDL]: {
-    browserType: _Type.BrowserType.QUANDL,
+  [_BrowserType.BT_QUANDL]: {
+    browserType: _BrowserType.BT_QUANDL,
     caption: 'Quandl',
     sourceMenuUrl: './data/quandl/source-menu.json'
   },
-  [_Type.BrowserType.DB_NOMICS]: {
-    browserType: _Type.BrowserType.DB_NOMICS,
+  [_BrowserType.BT_DB_NOMICS]: {
+    browserType: _BrowserType.BT_DB_NOMICS,
     caption: 'DB Nomics',
     sourceMenuUrl: './data/db-nomics/source-menu.json'
   },
-  [_Type.BrowserType.BLOCKCHAIN]: {
-    browserType: _Type.BrowserType.BLOCKCHAIN,
+  [_BrowserType.BT_BLOCKCHAIN]: {
+    browserType: _BrowserType.BT_BLOCKCHAIN,
     caption: 'Blockchain',
     sourceMenuUrl: './data/blockchain/source-menu.json'
   },
-  [_Type.BrowserType.FUTURES]: {
-    browserType: _Type.BrowserType.FUTURES,
+  [_BrowserType.BT_FUTURES]: {
+    browserType: _BrowserType.BT_FUTURES,
     caption: 'Futures Markets',
     sourceMenuUrl: './data/futures-markets/source-menu.json'
   },
-  [_Type.BrowserType.FRANCE_STATISTICS]: {
-    browserType: _Type.BrowserType.FRANCE_STATISTICS,
+  [_BrowserType.BT_FRANCE_STATISTICS]: {
+    browserType: _BrowserType.BT_FRANCE_STATISTICS,
     caption: 'Insee: France Statistics',
     sourceMenuUrl: './data/statistics-france/source-menu.json'
   },
-  [_Type.BrowserType.UK_STATISTICS]: {
-    browserType: _Type.BrowserType.UK_STATISTICS,
+  [_BrowserType.BT_UK_STATISTICS]: {
+    browserType: _BrowserType.BT_UK_STATISTICS,
     caption: 'ONS: UK Statistics',
     sourceMenuUrl: './data/statistics-uk/source-menu.json'
   },
-  [_Type.BrowserType.NORWAY_STATISTICS]: {
-    browserType: _Type.BrowserType.NORWAY_STATISTICS,
+  [_BrowserType.BT_NORWAY_STATISTICS]: {
+    browserType: _BrowserType.BT_NORWAY_STATISTICS,
     caption: 'Statistics Norway',
     sourceMenuUrl: './data/statistics-norway/source-menu.json'
   },
-  [_Type.BrowserType.NORWAY_STAT_ALL]: {
-    browserType: _Type.BrowserType.NORWAY_STAT_ALL,
+  [_BrowserType.BT_NORWAY_STAT_ALL]: {
+    browserType: _BrowserType.BT_NORWAY_STAT_ALL,
     caption: 'Statistics Norway All',
     dfProps: {
-      bT: _Type.BrowserType.NORWAY_STAT_ALL,
+      bT: _BrowserType.BT_NORWAY_STAT_ALL,
       lT: 'NST_2',
       sP: 'Stat. Norway',
       dU: './data/statistics-norway/statistics-norway.html',
@@ -90,16 +90,16 @@ const BrowserConfig = {
       rootUrl: 'https://data.ssb.no/api/v0/en/table'
     }
   },
-  [_Type.BrowserType.SWEDEN_STAT]: {
-    browserType: _Type.BrowserType.SWEDEN_STAT,
+  [_BrowserType.BT_SWEDEN_STAT]: {
+    browserType: _BrowserType.BT_SWEDEN_STAT,
     caption: 'Statistics Sweden',
     sourceMenuUrl: './data/statistics-sweden/source-menu.json'
   },
-  [_Type.BrowserType.SWEDEN_STAT_ALL]: {
-    browserType: _Type.BrowserType.SWEDEN_STAT_ALL,
+  [_BrowserType.BT_SWEDEN_STAT_ALL]: {
+    browserType: _BrowserType.BT_SWEDEN_STAT_ALL,
     caption: 'Statistics Sweden All',
     dfProps: {
-      bT: _Type.BrowserType.SWEDEN_STAT_ALL,
+      bT: _BrowserType.BT_SWEDEN_STAT_ALL,
       lT: 'SWS',
       sP: 'Stat. Sweden',
       dU: './data/statistics-sweden/statistics-sweden.html',
@@ -107,11 +107,11 @@ const BrowserConfig = {
       rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
     }
   },
-  [_Type.BrowserType.FINLAND_STAT_ALL]: {
-    browserType: _Type.BrowserType.FINLAND_STAT_ALL,
+  [_BrowserType.BT_FINLAND_STAT_ALL]: {
+    browserType: _BrowserType.BT_FINLAND_STAT_ALL,
     caption: 'Statistics Finland All',
     dfProps: {
-      bT: _Type.BrowserType.FINLAND_STAT_ALL,
+      bT: _BrowserType.BT_FINLAND_STAT_ALL,
       lT: 'SFL',
       sP: 'Stat. Finland',
       dU: './data/statistics-finland/statistics-finland.html',
@@ -120,11 +120,11 @@ const BrowserConfig = {
       rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
     }
   },
-  [_Type.BrowserType.DENMARK_STAT_ALL]: {
-    browserType: _Type.BrowserType.DENMARK_STAT_ALL,
+  [_BrowserType.BT_DENMARK_STAT_ALL]: {
+    browserType: _BrowserType.BT_DENMARK_STAT_ALL,
     caption: 'Statistics Denmark All',
     dfProps: {
-      bT: _Type.BrowserType.DENMARK_STAT_ALL,
+      bT: _BrowserType.BT_DENMARK_STAT_ALL,
       lT: 'SDN',
       sP: 'Stat. Denmark',
       dU: './data/statistics-denmark/statistics-denmark.html',
@@ -135,11 +135,11 @@ const BrowserConfig = {
       dfDimQuery: '?lang=en'
     }
   },
-  [_Type.BrowserType.IRELAND_STAT_ALL]: {
-    browserType: _Type.BrowserType.IRELAND_STAT_ALL,
+  [_BrowserType.BT_IRELAND_STAT_ALL]: {
+    browserType: _BrowserType.BT_IRELAND_STAT_ALL,
     caption: 'CSO Ireland All',
     dfProps: {
-      bT: _Type.BrowserType.IRELAND_STAT_ALL,
+      bT: _BrowserType.BT_IRELAND_STAT_ALL,
       lT: 'SIR',
       sP: 'CSO Ireland',
       dU: './data/statistics-ireland/statistics-ireland.html',
@@ -147,37 +147,37 @@ const BrowserConfig = {
       rootUrl: 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
     }
   },
-  [_Type.BrowserType.US_ECONOMICS]: {
-    browserType: _Type.BrowserType.US_ECONOMICS,
+  [_BrowserType.BT_US_ECONOMICS]: {
+    browserType: _BrowserType.BT_US_ECONOMICS,
     caption: 'USA Economics',
     sourceMenuUrl: './data/usa-economy/source-menu.json'
   },
-  [_Type.BrowserType.NYSE_STOCKS]: {
-    browserType: _Type.BrowserType.NYSE_STOCKS,
+  [_BrowserType.BT_NYSE_STOCKS]: {
+    browserType: _BrowserType.BT_NYSE_STOCKS,
     caption: 'NYSE by Sectors',
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
     withoutItemCounter: true,
     modalDialogType: _ModalDialogType.MDT_STOCKS_BY_SECTOR,
-    chartContainerType: _Type.BrowserType.NYSE_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
+    chartContainerType: _BrowserType.BT_NYSE_STOCKS + '_' + _BrowserType.BT_STOCKS_BY_SECTORS,
     contFullCaption: 'NYSE by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
     descrUrl: './data/nyse-stocks/nyse-stocks.html'
   },
-  [_Type.BrowserType.NASDAQ_STOCKS]: {
-    browserType: _Type.BrowserType.NASDAQ_STOCKS,
+  [_BrowserType.BT_NASDAQ_STOCKS]: {
+    browserType: _BrowserType.BT_NASDAQ_STOCKS,
     caption: 'NASDAQ by Sectors',
     sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
     withoutItemCounter: true,
     modalDialogType: _ModalDialogType.MDT_STOCKS_BY_SECTOR,
-    chartContainerType: _Type.BrowserType.NASDAQ_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
+    chartContainerType: _BrowserType.BT_NASDAQ_STOCKS + '_' + _BrowserType.BT_STOCKS_BY_SECTORS,
     contFullCaption: 'NASDAQ by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
     descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
   },
-  [_Type.BrowserType.WATCH_LIST]: {
-    browserType: _Type.BrowserType.WATCH_LIST,
+  [_BrowserType.BT_WATCH_LIST]: {
+    browserType: _BrowserType.BT_WATCH_LIST,
     withoutItemCounter: true
   }
 };

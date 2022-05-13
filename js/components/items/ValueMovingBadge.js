@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _Type = require("../../constants/Type");
+var _DirectionType = require("../../constants/DirectionType");
 
 var _SvgDown = _interopRequireDefault(require("../zhn/SvgDown"));
 
@@ -53,9 +53,9 @@ const S_ROOT = {
 };
 const _hmDirection = {
   DF: [null],
-  [_Type.Direction.DOWN]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgDown.default, {}), S_DOWN],
-  [_Type.Direction.UP]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgUp.default, {}), S_UP],
-  [_Type.Direction.EQUAL]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgEqual.default, {}), S_EQUAL]
+  [_DirectionType.DT_DOWN]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgDown.default, {}), S_DOWN],
+  [_DirectionType.DT_UP]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgUp.default, {}), S_UP],
+  [_DirectionType.DT_EQUAL]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgEqual.default, {}), S_EQUAL]
 };
 
 const _getDirection = direction => _hmDirection[direction] || _hmDirection.DF;
@@ -64,14 +64,16 @@ const DF_VALUE_MOVING = {
   value: 0,
   delta: 0,
   percent: 0,
-  direction: _Type.Direction.EQUAL,
+  direction: _DirectionType.DT_EQUAL,
   date: ''
 };
-const ValueMovingBadge = /*#__PURE__*/(0, _react.forwardRef)(({
-  isAdminMode,
-  initialVm = DF_VALUE_MOVING,
-  crValueMoving
-}, ref) => {
+const ValueMovingBadge = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+  let {
+    isAdminMode,
+    initialVm = DF_VALUE_MOVING,
+    crValueMoving
+  } = _ref;
+
   const [vm, setVm] = (0, _react.useState)(initialVm),
         [isShowModal, setIsShowModal] = (0, _react.useState)(false),
         _toggleModal = (0, _react.useCallback)(() => setIsShowModal(is => !is), []),

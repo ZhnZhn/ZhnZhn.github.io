@@ -1,6 +1,8 @@
 import Big from 'big.js'
 
-import { Direction as D } from '../../../constants/Type'
+import {
+  DT_DOWN
+} from '../../../constants/DirectionType';
 
 const MIN_STR = String(Number.MIN_SAFE_INTEGER);
 const ABS_PROP = 'Abs';
@@ -14,7 +16,7 @@ const _crBigForValue = (item, propName) =>
 const _crBigForAbsValue = (item, propName) => {
   const _b = _crBigForValue(item, propName)
   , { direction } = _getValueMoving(item);
-  return direction === D.DOWN
+  return direction === DT_DOWN
     ? _b.times(-1)
     : _b;
 };

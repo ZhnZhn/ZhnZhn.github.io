@@ -1,7 +1,15 @@
-import { forwardRef, useState, useCallback, useImperativeHandle } from 'react';
+import {
+  forwardRef,
+  useState,
+  useCallback,
+  useImperativeHandle
+} from 'react';
 //import PropTypes from "prop-types";
-
-import { Direction as D } from '../../constants/Type'
+import {
+  DT_UP,
+  DT_DOWN,
+  DT_EQUAL
+} from '../../constants/DirectionType';
 
 import SvgDown from '../zhn/SvgDown'
 import SvgUp from '../zhn/SvgUp'
@@ -42,9 +50,9 @@ S_EQUAL = {
 
 const _hmDirection = {
   DF: [null],
-  [D.DOWN]: [<SvgDown />, S_DOWN],
-  [D.UP]: [<SvgUp />, S_UP],
-  [D.EQUAL]: [<SvgEqual />, S_EQUAL]
+  [DT_DOWN]: [<SvgDown />, S_DOWN],
+  [DT_UP]: [<SvgUp />, S_UP],
+  [DT_EQUAL]: [<SvgEqual />, S_EQUAL]
 };
 
 const _getDirection = direction => _hmDirection[direction]
@@ -55,7 +63,7 @@ const DF_VALUE_MOVING = {
   value: 0,
   delta: 0,
   percent: 0,
-  direction: D.EQUAL,
+  direction: DT_EQUAL,
   date: ''
 };
 

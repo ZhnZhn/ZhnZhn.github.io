@@ -1,10 +1,3 @@
-export const Direction = {
-  UP : 'up',
-  DOWN : 'down',
-  EQUAL : 'equal',
-  EMPTY: 'empty'
-}
-
 export const ChartType = {
   AREA: 'AREA',
   SEMI_DONUT: 'SEMI_DONUT',

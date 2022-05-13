@@ -1,42 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.LoadType = exports.Direction = exports.ChartType = exports.CIT_TW_LIST = exports.CIT_TABLE = exports.CIT_INFO_ITEM = exports.CIT_EUROSTAT_MAP = exports.CIT_CHART_AREA = exports.CIT_ALPHA_PERF = exports.BrowserType = void 0;
-const BrowserType = {
-  STOCK_MARKETS: 'SM',
-  EUROSTAT: 'ES',
-  UN_COMTRADE: 'UN',
-  FAOSTAT: 'FAO',
-  WORLD_BANK: 'WB',
-  FRANCE_STATISTICS: 'FS',
-  UK_STATISTICS: 'UKS',
-  NORWAY_STATISTICS: 'NST',
-  NORWAY_STAT_ALL: 'NST_ALL',
-  SWEDEN_STAT: 'SWS',
-  SWEDEN_STAT_ALL: 'SWS_ALL',
-  FINLAND_STAT_ALL: 'SFL',
-  DENMARK_STAT_ALL: 'SDN',
-  IRELAND_STAT_ALL: 'SIR',
-  QUANDL: 'QE',
-  NYSE_STOCKS: 'NS',
-  NASDAQ_STOCKS: 'NQS',
-  STOCKS_BY_SECTORS: 'STOCKS_BY_SECTORS',
-  DB_NOMICS: 'DBN',
-  FGR: 'FGR',
-  PE: 'PE',
-  US_ECONOMICS: 'USAE',
-  BLOCKCHAIN: 'BC',
-  FUTURES: 'FT',
-  WATCH_LIST: 'WL'
-};
-exports.BrowserType = BrowserType;
-const Direction = {
-  UP: 'up',
-  DOWN: 'down',
-  EQUAL: 'equal',
-  EMPTY: 'empty'
-};
-exports.Direction = Direction;
+exports.LoadType = exports.ChartType = exports.CIT_TW_LIST = exports.CIT_TABLE = exports.CIT_INFO_ITEM = exports.CIT_EUROSTAT_MAP = exports.CIT_CHART_AREA = exports.CIT_ALPHA_PERF = void 0;
 const ChartType = {
   AREA: 'AREA',
   SEMI_DONUT: 'SEMI_DONUT',
@@ -83,7 +48,8 @@ const LoadType = {
   BN: 'BN',
   BF: 'BF',
   BT: 'BT',
-  WL: 'WL'
+  WL: 'WL',
+  WATCH_LIST: 'WL_WATCH_LIST'
 }; //CompItemType
 
 exports.LoadType = LoadType;
