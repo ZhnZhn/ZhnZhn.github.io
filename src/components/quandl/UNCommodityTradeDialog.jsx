@@ -13,34 +13,31 @@ import {
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
 
-const S = {
-  BT_ROOT: {
-     color: 'rgb(35, 47, 59)'
-  }
-};
+const S_BT_ROOT = { color: 'rgb(35, 47, 59)' }
 
-const Placeholder = {
-  TRADE : {
-    INIT : 'First Load Meta',
-    SELECT : 'Select...'
-  }
-};
-const Filter = {
-  DEFAULT : 'Default Empty',
-  IMPORT : 'Import - Trade (USD)',
-  EXPORT : 'Export - Trade (USD)',
-  REIMPORT : 'Re-Import - Trade (USD)',
-  REEXPORT : 'Re-Export - Trade (USD)'
-};
 
-const TRADE_FILTER_OPTIONS = [
-  { caption: 'Default : Empty Filter', value: Filter.DEFAULT },
-  { caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)' },
-  { caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)' },
-  { caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)' },
-  { caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)' },
-  { caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)' },
-  { caption: 'Re-Export - Trade (USD)', value: 'Re-Export - Trade (USD)' }
+const PLACEHOLDER_INITIAL = 'First Load Meta'
+, PLACEHOLDER_SELECT = 'Select...'
+
+, FILTER_DEFAULT = 'Default Empty'
+, FILTER_IMPORT = 'Import - Trade (USD)'
+, FILTER_EXPORT = 'Export - Trade (USD)'
+, FILTER_REIMPORT = 'Re-Import - Trade (USD)'
+, FILTER_REEXPORT = 'Re-Export - Trade (USD)'
+
+, _crFilterItem = caption => ({
+  caption,
+  value: caption
+})
+
+, TRADE_FILTER_OPTIONS = [
+  { caption: 'Default : Empty Filter', value: FILTER_DEFAULT },
+  _crFilterItem(FILTER_IMPORT),
+  _crFilterItem('Import - Weight (Kg)'),
+  _crFilterItem(FILTER_EXPORT),
+  _crFilterItem('Export - Weight (Kg)'),
+  _crFilterItem(FILTER_REIMPORT),
+  _crFilterItem(FILTER_REEXPORT)
 ]
 
 const CHART_TYPE_OPTIONS = [
@@ -91,7 +88,7 @@ class UNCommodityTradeDialog extends Component {
     this._commandButtons = [
       <D.Button.Flat
         key="meta"
-        rootStyle={S.BT_ROOT}
+        rootStyle={S_BT_ROOT}
         caption="Load Meta"
         title="First Load Meta, then Load Item"
         onClick={this._handlerLoadMeta}
@@ -108,7 +105,7 @@ class UNCommodityTradeDialog extends Component {
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
       optionTrades: [],
-      placeholderTrade: Placeholder.TRADE.INIT,
+      placeholderTrade: PLACEHOLDER_INITIAL,
     }
   }
 
@@ -126,7 +123,7 @@ class UNCommodityTradeDialog extends Component {
     this.optionTrades = void 0
     this.setState({
       optionTrades: [],
-      placeholderTrade: Placeholder.TRADE.INIT,
+      placeholderTrade: PLACEHOLDER_INITIAL,
       isLoadingTradeFailed : false
     })
   }
@@ -135,18 +132,18 @@ class UNCommodityTradeDialog extends Component {
     let options;
     if (this.tradeFilter && this.optionTrades){
       const filterValue = this.tradeFilter.value;
-      if (filterValue !== Filter.DEFAULT){
+      if (filterValue !== FILTER_DEFAULT){
         options = this.optionTrades.filter((item,index)=>{
            return item.caption.indexOf(filterValue) !== -1;
         })
-        if (filterValue === Filter.IMPORT){
+        if (filterValue === FILTER_IMPORT){
            options = options.filter((item,index)=>{
-              return item.caption.indexOf(Filter.REIMPORT) === -1;
+              return item.caption.indexOf(FILTER_REIMPORT) === -1;
            })
         }
-        if (filterValue === Filter.EXPORT){
+        if (filterValue === FILTER_EXPORT){
            options = options.filter((item,index)=>{
-             return item.caption.indexOf(Filter.REEXPORT) === -1;
+             return item.caption.indexOf(FILTER_REEXPORT) === -1;
            })
         }
       } else {
@@ -159,8 +156,13 @@ class UNCommodityTradeDialog extends Component {
   }
 
   _handlerClickAll = () => {
-    const { isShowFilter, isShowDate, isShowChartType } = this.state
-        , _isShow = (isShowFilter || isShowDate || isShowChartType) ? false : true;
+    const {
+      isShowFilter,
+      isShowDate,
+      isShowChartType
+    } = this.state
+    , _isShow = isShowFilter || isShowDate || isShowChartType
+        ? false : true;
     this.setState({
         isShowFilter : _isShow,
         isShowDate : _isShow,
@@ -235,14 +237,14 @@ class UNCommodityTradeDialog extends Component {
       optionTrades: this._filterTrade(),
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
-      placeholderTrade: Placeholder.TRADE.SELECT
+      placeholderTrade: PLACEHOLDER_SELECT
     })
   }
   _loadMetaOptionCancel = () => {
     this.setState({
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
-      placeholderTrade: Placeholder.TRADE.SELECT
+      placeholderTrade: PLACEHOLDER_SELECT
     })
   }
   _loadMetaOptionFailed = () => {
@@ -265,8 +267,8 @@ class UNCommodityTradeDialog extends Component {
        }
      } else {
        const { placeholderTrade } = this.state;
-       if (placeholderTrade === Placeholder.TRADE.INIT){
-         msg.push(Placeholder.TRADE.INIT);
+       if (placeholderTrade === PLACEHOLDER_INITIAL){
+         msg.push(PLACEHOLDER_INITIAL);
        }
        if (!this.tradeFilter) {
          msg.push(this.props.msgOnNotSelected('Trade Filter'));
@@ -319,18 +321,30 @@ class UNCommodityTradeDialog extends Component {
 
   render(){
     const {
-           isShow, onShow, onFront,
-           countryURI, countryJsonProp,
-           commodityURI, commodityJsonProp,
-           initFromDate, initToDate, msgOnNotValidFormat, onTestDate
-          } = this.props
-        , {
-           isToolbar,
-           isShowLabels,
-           isShowFilter, isShowDate, isShowChartType,
-           isLoadingTrade, isLoadingTradeFailed, optionTrades, placeholderTrade,
-           validationMessages
-         } = this.state;
+       isShow,
+       onShow,
+       onFront,
+       countryURI,
+       countryJsonProp,
+       commodityURI,
+       commodityJsonProp,
+       initFromDate,
+       initToDate,
+       msgOnNotValidFormat,
+       onTestDate
+      } = this.props
+    , {
+       isToolbar,
+       isShowLabels,
+       isShowFilter,
+       isShowDate,
+       isShowChartType,
+       isLoadingTrade,
+       isLoadingTradeFailed,
+       optionTrades,
+       placeholderTrade,
+       validationMessages
+     } = this.state;
 
     return(
         <D.DraggableDialog
