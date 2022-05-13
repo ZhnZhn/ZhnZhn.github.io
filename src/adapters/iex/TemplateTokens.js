@@ -1,4 +1,4 @@
-import { CIT_INFO_ITEM } from '../../constants/Type';
+import { CIT_INFO_ITEM } from '../../constants/CompItemType';
 
 const _isFn = fn => typeof fn === 'function';
 const _crNoop = () => {};

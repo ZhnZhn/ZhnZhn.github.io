@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Type = require("../../constants/Type");
+var _CompItemType = require("../../constants/CompItemType");
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -53,7 +53,7 @@ Object.assign(TemplateTokens.prototype, {
 
     return {
       config: {
-        zhCompType: _Type.CIT_INFO_ITEM,
+        zhCompType: _CompItemType.CIT_INFO_ITEM,
         id: _id,
         caption: crCaption(json, option),
         items: [{

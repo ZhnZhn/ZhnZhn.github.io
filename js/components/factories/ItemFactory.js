@@ -11,7 +11,7 @@ var _ComponentActions = _interopRequireDefault(require("../../flux/actions/Compo
 
 var _ChartActions = _interopRequireWildcard(require("../../flux/actions/ChartActions"));
 
-var _Type = require("../../constants/Type");
+var _CompItemType = require("../../constants/CompItemType");
 
 var _Items = _interopRequireDefault(require("../items/Items"));
 
@@ -106,11 +106,11 @@ const _fItem = Comp => _ref3 => {
 
 const _rCrItem = {
   DF: _crAreaChart,
-  [_Type.CIT_EUROSTAT_MAP]: _crMapChart,
-  [_Type.CIT_TABLE]: _fItem(_Items.default.Table),
-  [_Type.CIT_ALPHA_PERF]: _fItem(_Items.default.AlphaPerf),
-  [_Type.CIT_INFO_ITEM]: _fItem(_Items.default.InfoItem),
-  [_Type.CIT_TW_LIST]: _fItem(_Items.default.TwList)
+  [_CompItemType.CIT_EUROSTAT_MAP]: _crMapChart,
+  [_CompItemType.CIT_TABLE]: _fItem(_Items.default.Table),
+  [_CompItemType.CIT_ALPHA_PERF]: _fItem(_Items.default.AlphaPerf),
+  [_CompItemType.CIT_INFO_ITEM]: _fItem(_Items.default.InfoItem),
+  [_CompItemType.CIT_TW_LIST]: _fItem(_Items.default.TwList)
 };
 const ItemFactory = {
   /* { config, index, chartType, props, store } */

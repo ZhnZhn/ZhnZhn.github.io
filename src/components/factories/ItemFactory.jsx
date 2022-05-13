@@ -5,13 +5,13 @@ import ChartActions, {
   CHAT_TO_TOP,
   CHAT_COPY
 } from '../../flux/actions/ChartActions';
-import { 
+import {
   CIT_EUROSTAT_MAP,
   CIT_TABLE,
   CIT_ALPHA_PERF,
   CIT_INFO_ITEM,
   CIT_TW_LIST
-} from '../../constants/Type';
+} from '../../constants/CompItemType';
 
 import Item from '../items/Items';
 

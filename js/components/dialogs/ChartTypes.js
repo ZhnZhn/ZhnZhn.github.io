@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _toPlural = _interopRequireDefault(require("../../utils/toPlural"));
 
-var _Type = require("../../constants/Type");
+var _CompItemType = require("../../constants/CompItemType");
 
 const _isArr = Array.isArray;
 const V = {
@@ -46,7 +46,7 @@ const _crDF3 = (oneCaption, mapFrequency) => _crItems([['Default: Spline', V.S],
 
 const _crDF = (captions, mapFrequency) => {
   const oneCaption = (0, _toPlural.default)(captions[0]) || 'Dim';
-  return _crDF3(oneCaption, mapFrequency).concat(_crItems([["Map: By " + oneCaption, V.M, void 0, _Type.CIT_EUROSTAT_MAP]]));
+  return _crDF3(oneCaption, mapFrequency).concat(_crItems([["Map: By " + oneCaption, V.M, void 0, _CompItemType.CIT_EUROSTAT_MAP]]));
 };
 
 const _crT1 = () => [_crItem(['Default: Spline', V.S]), _crItem(['Line', V.L]), _crItem(['Area', V.A])];

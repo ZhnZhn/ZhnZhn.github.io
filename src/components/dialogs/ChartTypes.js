@@ -1,5 +1,5 @@
 import toPlural from '../../utils/toPlural';
-import { CIT_EUROSTAT_MAP } from '../../constants/Type';
+import { CIT_EUROSTAT_MAP } from '../../constants/CompItemType';
 
 const _isArr = Array.isArray;
 

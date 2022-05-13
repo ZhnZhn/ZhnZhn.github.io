@@ -1,0 +1,6 @@
+export const CIT_CHART_AREA = 'CHART_AREA'
+export const CIT_EUROSTAT_MAP = 'EUROSTAT_MAP'
+export const CIT_TABLE = 'TABLE'
+export const CIT_ALPHA_PERF = 'ALPHA_PERF'
+export const CIT_INFO_ITEM = 'INFO_ITEM'
+export const CIT_TW_LIST = 'TW_LIST'
