@@ -12,7 +12,6 @@ import formatNumber from '../../utils/formatNumber'
 import ChartActions, {CHAT_LOAD} from '../../flux/actions/ChartActions'
 import { LoadType as LT } from '../../constants/Type'
 import { BT_WATCH_LIST } from '../../constants/BrowserType';
-import CHT from '../../constants/ChartType'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import D from '../dialogs/DialogCell'
@@ -118,7 +117,7 @@ class LoadItemDialog extends Component {
              ...itemConf
            };
       ChartActions[CHAT_LOAD]({
-        chartType: CHT.WATCH_LIST,
+        chartType: LT.WATCH_LIST,
         browserType: BT_WATCH_LIST
       }, option);
       onClose()

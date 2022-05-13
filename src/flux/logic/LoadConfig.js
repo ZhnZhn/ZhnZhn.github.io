@@ -1,10 +1,6 @@
-
-import ChartType from '../../constants/ChartType';
 import { LoadType as LT } from '../../constants/Type';
-
 import { loadQuandlCommodityTrade } from './loadQuandlCommodityTrade';
-
-import LoadImpl from './LoadImpl'
+import LoadImpl from './LoadImpl';
 
 const LoadConfig = {
   [LT.Q]: LoadImpl.Quandl,
@@ -45,7 +41,8 @@ const LoadConfig = {
   [LT.UN]: LoadImpl.UnComtrade,
   [LT.FAO]: LoadImpl.FaoStat,
   [LT.WB]: LoadImpl.WorldBank,
-  [ChartType.WATCH_LIST]: LoadImpl.Quandl,
+
+  [LT.WATCH_LIST]: LoadImpl.Quandl,
   [LT.WL]: LoadImpl.Quandl
 };
 

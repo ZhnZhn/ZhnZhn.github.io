@@ -5,8 +5,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ChartType = _interopRequireDefault(require("../../constants/ChartType"));
-
 var _Type = require("../../constants/Type");
 
 var _loadQuandlCommodityTrade = require("./loadQuandlCommodityTrade");
@@ -46,7 +44,7 @@ const LoadConfig = {
   [_Type.LoadType.UN]: _LoadImpl.default.UnComtrade,
   [_Type.LoadType.FAO]: _LoadImpl.default.FaoStat,
   [_Type.LoadType.WB]: _LoadImpl.default.WorldBank,
-  [_ChartType.default.WATCH_LIST]: _LoadImpl.default.Quandl,
+  [_Type.LoadType.WATCH_LIST]: _LoadImpl.default.Quandl,
   [_Type.LoadType.WL]: _LoadImpl.default.Quandl
 };
 var _default = LoadConfig;

@@ -51,7 +51,8 @@ export const LoadType = {
   BN: 'BN',
   BF: 'BF',
   BT: 'BT',
-  WL: 'WL'
+  WL: 'WL',
+  WATCH_LIST: 'WL_WATCH_LIST'
 }
 
 //CompItemType
