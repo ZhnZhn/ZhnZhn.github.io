@@ -9,7 +9,7 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _compareByFn = require("../compareByFn");
 
-var _Type = require("../../constants/Type");
+var _ChartType = require("../../constants/ChartType");
 
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
@@ -156,7 +156,7 @@ const toTreeMap = function (json, option) {
     sliceItems: items100 = [],
     value = ''
   } = option,
-        id = value + "_" + _Type.ChartType.TREE_MAP,
+        id = value + "_" + _ChartType.CHT_TREE_MAP,
         jsonData = json.dataset.data,
         bYearTotals = _crYearTotals(jsonData, items100),
         {

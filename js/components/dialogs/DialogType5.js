@@ -3,72 +3,68 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
-var _Type = require("../../constants/Type");
+var _ChartType = require("../../constants/ChartType");
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
-var _dec, _class, _temp;
+var _jsxRuntime = require("react/jsx-runtime");
 
-var Decor = _DialogCell["default"].Decor,
-    crMenuMore = _DialogCell["default"].crMenuMore;
-var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
-var CHART_TYPE_OPTIONS = [{
+var _dec, _class;
+
+const {
+  Decor,
+  crMenuMore
+} = _DialogCell.default;
+const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+const CHART_TYPE_OPTIONS = [{
   caption: 'Default: Area',
-  value: _Type.ChartType.AREA
+  value: _ChartType.CHT_AREA
 }, {
   caption: 'Scatter: Label Up',
-  value: _Type.ChartType.SCATTER_UP
+  value: _ChartType.CHT_SCATTER_UP
 }, {
   caption: 'Scatter: Label Down',
-  value: _Type.ChartType.SCATTER_DOWN
+  value: _ChartType.CHT_SCATTER_DOWN
 }];
-var DialogType5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(DialogType5, _Component);
+let DialogType5 = (_dec = Decor.dialog, _dec(_class = class DialogType5 extends _react.Component {
+  constructor(props) {
+    super(props);
 
-  function DialogType5(props) {
-    var _this;
-
-    _this = _Component.call(this, props) || this;
-
-    _this._handleSelectOne = function (one) {
-      _this.one = one;
+    this._handleSelectOne = one => {
+      this.one = one;
     };
 
-    _this._handleLoad = function () {
-      _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
+    this._handleLoad = () => {
+      this._handleWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
     };
 
-    _this._createValidationMessages = function () {
-      var oneCaption = _this.props.oneCaption;
-      var msg = [];
+    this._createValidationMessages = () => {
+      const {
+        oneCaption
+      } = this.props;
+      let msg = [];
 
-      if (!_this.one) {
-        msg.push(_this.props.msgOnNotSelected(oneCaption));
+      if (!this.one) {
+        msg.push(this.props.msgOnNotSelected(oneCaption));
       }
 
-      var _this$twoThree$getVal = _this.twoThree.getValidation(),
-          isValid1 = _this$twoThree$getVal.isValid,
-          msg1 = _this$twoThree$getVal.msg;
+      const {
+        isValid: isValid1,
+        msg: msg1
+      } = this.twoThree.getValidation();
 
       if (!isValid1) {
         msg = msg.concat(msg1);
       }
 
-      var _this$datesFragment$g = _this.datesFragment.getValidation(),
-          isValid = _this$datesFragment$g.isValid,
-          datesMsg = _this$datesFragment$g.datesMsg;
+      const {
+        isValid,
+        datesMsg
+      } = this.datesFragment.getValidation();
 
       if (!isValid) {
         msg = msg.concat(datesMsg);
@@ -78,68 +74,62 @@ var DialogType5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
       return msg;
     };
 
-    _this._createLoadOption = function () {
-      var _this$twoThree$getVal2 = _this.twoThree.getValues(),
-          two = _this$twoThree$getVal2.one,
-          three = _this$twoThree$getVal2.two,
-          _this$datesFragment$g2 = _this.datesFragment.getValues(),
-          fromDate = _this$datesFragment$g2.fromDate,
-          toDate = _this$datesFragment$g2.toDate,
-          seriaType = _this.chartType ? _this.chartType.value : undefined;
-
-      return _this.props.loadFn(_this.props, {
-        one: _this.one,
-        two: two,
-        three: three,
-        fromDate: fromDate,
-        toDate: toDate,
-        hasSecondYAxis: _this[HAS_SECOND_Y_AXIS],
-        seriaType: seriaType
+    this._createLoadOption = () => {
+      const {
+        one: two,
+        two: three
+      } = this.twoThree.getValues(),
+            {
+        fromDate,
+        toDate
+      } = this.datesFragment.getValues(),
+            seriaType = this.chartType ? this.chartType.value : undefined;
+      return this.props.loadFn(this.props, {
+        one: this.one,
+        two,
+        three,
+        fromDate,
+        toDate,
+        hasSecondYAxis: this[HAS_SECOND_Y_AXIS],
+        seriaType
       });
     };
 
-    _this._handleClose = function () {
-      _this._handleWithValidationClose();
+    this._handleClose = () => {
+      this._handleWithValidationClose();
     };
 
-    _this._hCheckSecondYAxis = function () {
-      _this[HAS_SECOND_Y_AXIS] = true;
+    this._hCheckSecondYAxis = () => {
+      this[HAS_SECOND_Y_AXIS] = true;
     };
 
-    _this._hUnCheckSecondYAxis = function () {
-      _this[HAS_SECOND_Y_AXIS] = false;
+    this._hUnCheckSecondYAxis = () => {
+      this[HAS_SECOND_Y_AXIS] = false;
     };
 
-    _this._handlerSelectChartType = function (item) {
-      _this.chartType = item;
+    this._handlerSelectChartType = item => {
+      this.chartType = item;
     };
 
-    _this._refTwoThree = function (c) {
-      return _this.twoThree = c;
-    };
+    this._refTwoThree = c => this.twoThree = c;
 
-    _this._refDates = function (c) {
-      return _this.datesFragment = c;
-    };
+    this._refDates = c => this.datesFragment = c;
 
-    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
-      toggleToolBar: _this._toggleWithToolbar,
-      onAbout: _this._clickInfoWithToolbar
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
     });
-    _this.toolbarButtons = _this._createType2WithToolbar(props, {
+    this.toolbarButtons = this._createType2WithToolbar(props, {
       isShowOptions: true
     });
-    _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
-    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
+    this._commandButtons = this._crCommandsWithLoad(this);
+    this.state = { ...this._isWithInitialState(),
       isShowDate: false,
       isShowOptions: false
-    });
-    return _this;
+    };
   }
 
-  var _proto = DialogType5.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
       if (this.props.isShow === nextProps.isShow) {
         return false;
@@ -147,34 +137,36 @@ var DialogType5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
     }
 
     return true;
-  };
+  }
 
-  _proto.render = function render() {
-    var _this$props = this.props,
-        caption = _this$props.caption,
-        isShow = _this$props.isShow,
-        onShow = _this$props.onShow,
-        onFront = _this$props.onFront,
-        oneCaption = _this$props.oneCaption,
-        oneURI = _this$props.oneURI,
-        oneJsonProp = _this$props.oneJsonProp,
-        twoCaption = _this$props.twoCaption,
-        twoURI = _this$props.twoURI,
-        twoJsonProp = _this$props.twoJsonProp,
-        threeCaption = _this$props.threeCaption,
-        msgOnNotSelected = _this$props.msgOnNotSelected,
-        initFromDate = _this$props.initFromDate,
-        initToDate = _this$props.initToDate,
-        msgOnNotValidFormat = _this$props.msgOnNotValidFormat,
-        onTestDate = _this$props.onTestDate,
-        isChartType = _this$props.isChartType,
-        _this$state = this.state,
-        isToolbar = _this$state.isToolbar,
-        isShowLabels = _this$state.isShowLabels,
-        isShowDate = _this$state.isShowDate,
-        isShowOptions = _this$state.isShowOptions,
-        validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
+  render() {
+    const {
+      caption,
+      isShow,
+      onShow,
+      onFront,
+      oneCaption,
+      oneURI,
+      oneJsonProp,
+      twoCaption,
+      twoURI,
+      twoJsonProp,
+      threeCaption,
+      msgOnNotSelected,
+      initFromDate,
+      initToDate,
+      msgOnNotValidFormat,
+      onTestDate,
+      isChartType
+    } = this.props,
+          {
+      isToolbar,
+      isShowLabels,
+      isShowDate,
+      isShowOptions,
+      validationMessages
+    } = this.state;
+    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
@@ -182,10 +174,10 @@ var DialogType5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._handleClose,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
         isShow: isToolbar,
         buttons: this.toolbarButtons
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
         isShow: isShow,
         isShowLabels: isShowLabels,
         uri: oneURI,
@@ -193,7 +185,7 @@ var DialogType5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
         caption: oneCaption,
         optionNames: "Items",
         onSelect: this._handleSelectOne
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectOneTwo, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectOneTwo, {
         ref: this._refTwoThree,
         isShow: isShow,
         isShowLabels: isShowLabels,
@@ -202,9 +194,9 @@ var DialogType5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
         oneJsonProp: twoJsonProp,
         twoCaption: threeCaption,
         msgOnNotSelected: msgOnNotSelected
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
         isShow: isShowDate,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
           ref: this._refDates,
           isShowLabels: isShowLabels,
           initFromDate: initFromDate,
@@ -212,27 +204,26 @@ var DialogType5 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/func
           msgOnNotValidFormat: msgOnNotValidFormat,
           onTestDate: onTestDate
         })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].ShowHide, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
         isShow: isShowOptions,
-        children: [isChartType && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowInputSelect, {
+        children: [isChartType && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
           isShowLabels: isShowLabels,
           caption: "Chart Type:",
           options: CHART_TYPE_OPTIONS,
           onSelect: this._handlerSelectChartType
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox, {
           initValue: false,
           caption: "Add Seria with Second YAxis",
           onCheck: this._hCheckSecondYAxis,
           onUnCheck: this._hUnCheckSecondYAxis
         })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
         validationMessages: validationMessages
       })]
     });
-  };
+  }
 
-  return DialogType5;
-}(_react.Component), _temp)) || _class);
+}) || _class);
 var _default = DialogType5;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=DialogType5.js.map

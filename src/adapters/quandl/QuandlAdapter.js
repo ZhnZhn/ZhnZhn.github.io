@@ -1,5 +1,16 @@
-
-import {ChartType} from '../../constants/Type';
+import {
+  CHT_AREA,
+  CHT_SEMI_DONUT,
+  CHT_STACKED_AREA,
+  CHT_STACKED_AREA_PERCENT,
+  CHT_STACKED_COLUMN,
+  CHT_STACKED_COLUMN_PERCENT,
+  CHT_TREE_MAP,
+  CHT_YEARLY,
+  CHT_SCATTER,
+  CHT_SCATTER_UP,
+  CHT_SCATTER_DOWN
+} from '../../constants/ChartType';
 import ChartConfig from '../../charts/ChartConfig';
 
 import { ymdToUTC, findMinY } from '../AdapterFn';
@@ -29,17 +40,17 @@ const _fToSeria = builder => (json, option, chart) => {
 };
 
 const _rToConfig = {
-  [ChartType.AREA]: toArea,
-  [ChartType.SEMI_DONUT]: toSemiDonut,
-  [ChartType.STACKED_AREA]: toStackedArea,
-  [ChartType.STACKED_AREA_PERCENT]: toStackedArea,
-  [ChartType.STACKED_COLUMN]: toStackedColumn,
-  [ChartType.STACKED_COLUMN_PERCENT]: toStackedColumn,
-  [ChartType.TREE_MAP]: toTreeMap,
-  [ChartType.YEARLY]: _fToConfig(toYearly),
-  [ChartType.SCATTER]: _fToConfig(toScatter),
-  [ChartType.SCATTER_UP]: _fToConfig(toScatter),
-  [ChartType.SCATTER_DOWN]: _fToConfig(toScatter)
+  [CHT_AREA]: toArea,
+  [CHT_SEMI_DONUT]: toSemiDonut,
+  [CHT_STACKED_AREA]: toStackedArea,
+  [CHT_STACKED_AREA_PERCENT]: toStackedArea,
+  [CHT_STACKED_COLUMN]: toStackedColumn,
+  [CHT_STACKED_COLUMN_PERCENT]: toStackedColumn,
+  [CHT_TREE_MAP]: toTreeMap,
+  [CHT_YEARLY]: _fToConfig(toYearly),
+  [CHT_SCATTER]: _fToConfig(toScatter),
+  [CHT_SCATTER_UP]: _fToConfig(toScatter),
+  [CHT_SCATTER_DOWN]: _fToConfig(toScatter)
 };
 
 const _crSeriaData = (data, yIndex) => {
@@ -61,14 +72,14 @@ const _toSeria = (json, option) => {
 
 const _rToSeria = {
   DF: _toSeria,
-  [ChartType.SCATTER]: _fToSeria(toScatter),
-  [ChartType.SCATTER_UP]: _fToSeria(toScatter),
-  [ChartType.SCATTER_DOWN]: _fToSeria(toScatter)
+  [CHT_SCATTER]: _fToSeria(toScatter),
+  [CHT_SCATTER_UP]: _fToSeria(toScatter),
+  [CHT_SCATTER_DOWN]: _fToSeria(toScatter)
 };
 
 const QuandlAdapter = {
   toConfig(json, option){
-     const { seriaType=ChartType.AREA } = option;
+     const { seriaType=CHT_AREA } = option;
      return _rToConfig[seriaType](json, option);
   },
 

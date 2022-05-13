@@ -1,6 +1,14 @@
 import { Component } from 'react';
 
-import { ChartType } from '../../constants/Type';
+import {
+  CHT_AREA,
+  CHT_SEMI_DONUT,
+  CHT_STACKED_AREA,
+  CHT_STACKED_AREA_PERCENT,
+  CHT_STACKED_COLUMN,
+  CHT_STACKED_COLUMN_PERCENT,
+  CHT_TREE_MAP
+} from '../../constants/ChartType';
 
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
@@ -36,13 +44,13 @@ const TRADE_FILTER_OPTIONS = [
 ]
 
 const CHART_TYPE_OPTIONS = [
-  { caption : 'Default : Area', value: ChartType.AREA },
-  { caption : 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: ChartType.SEMI_DONUT },
-  { caption : 'Stacked Area : Total Top90, On Recent Year', value: ChartType.STACKED_AREA },
-  { caption : 'Stacked Area Percent : Total Top90, On Recent Year', value: ChartType.STACKED_AREA_PERCENT },
-  { caption : 'Stacked Column : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN },
-  { caption : 'Stacked Column Percent : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN_PERCENT },
-  { caption : 'Tree Map : On Recent Year', value: ChartType.TREE_MAP }
+  { caption : 'Default : Area', value: CHT_AREA },
+  { caption : 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: CHT_SEMI_DONUT },
+  { caption : 'Stacked Area : Total Top90, On Recent Year', value: CHT_STACKED_AREA },
+  { caption : 'Stacked Area Percent : Total Top90, On Recent Year', value: CHT_STACKED_AREA_PERCENT },
+  { caption : 'Stacked Column : Total Top90, On Recent Year', value: CHT_STACKED_COLUMN },
+  { caption : 'Stacked Column Percent : Total Top90, On Recent Year', value: CHT_STACKED_COLUMN_PERCENT },
+  { caption : 'Tree Map : On Recent Year', value: CHT_TREE_MAP }
 ]
 
 @Decor.withToolbar
@@ -251,7 +259,7 @@ class UNCommodityTradeDialog extends Component {
   }
   _createDataValidationMessages = () => {
      let msg = [];
-     if ( !this.chartType || this.chartType.value === ChartType.AREA){
+     if ( !this.chartType || this.chartType.value === CHT_AREA){
        if (!this.subheading)  {
          msg.push(this.props.msgOnNotSelected('Subheading'));
        }
@@ -275,11 +283,11 @@ class UNCommodityTradeDialog extends Component {
         , { loadId, fnValue, dataSource } = this.props
         , _chartType = this.chartType
              ? this.chartType.value
-             : ChartType.AREA
+             : CHT_AREA
         , _title = this.tradeFilter
              ? `${this.country.caption}:${this.tradeFilter.caption}`
              : `${this.country.caption}`
-        , _sliceItems = ( !(!this.chartType || this.chartType.value === ChartType.AREA) )
+        , _sliceItems = ( !(!this.chartType || this.chartType.value === CHT_AREA) )
               ? this._createSpliceItems()
               : void 0;
     return {

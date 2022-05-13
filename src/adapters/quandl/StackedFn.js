@@ -1,8 +1,13 @@
 import Big from 'big.js';
 
 import { compareByY } from '../compareByFn';
+import {
+  CHT_STACKED_AREA,
+  CHT_STACKED_AREA_PERCENT,
+  CHT_STACKED_COLUMN,
+  CHT_STACKED_COLUMN_PERCENT
+} from '../../constants/ChartType';
 
-import {ChartType} from '../../constants/Type';
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
@@ -14,10 +19,10 @@ const {
 } = ChartConfig
 
 const _rFactorySeria = {
-  [ChartType.STACKED_AREA]: crStackedAreaSeria,
-  [ChartType.STACKED_AREA_PERCENT]: crStackedAreaSeria,
-  [ChartType.STACKED_COLUMN]: crStackedColumnSeria,
-  [ChartType.STACKED_COLUMN_PERCENT]: crStackedColumnSeria
+  [CHT_STACKED_AREA]: crStackedAreaSeria,
+  [CHT_STACKED_AREA_PERCENT]: crStackedAreaSeria,
+  [CHT_STACKED_COLUMN]: crStackedColumnSeria,
+  [CHT_STACKED_COLUMN_PERCENT]: crStackedColumnSeria
 }
 
 export const fnCalcTotal = function(jsonData=[], items=[]){
@@ -151,7 +156,10 @@ const _fnCreateStackedSeries = function({
 }
 
 export const fnCreateStackedConfig = function({
-   jsonData, items100, chartType=ChartType.STACKED_AREA, stacking='normal'
+   jsonData,
+   items100,
+   chartType=CHT_STACKED_AREA,
+   stacking='normal'
  }){
   const {referenceData , bTotal} = _fnCreateReferenceDataAndTotal(jsonData[0], items100)
       , items90 = _fnCreateDataTopPercent(referenceData, bTotal, 0.9)

@@ -2,7 +2,7 @@ import Big from 'big.js';
 
 import { compareByValue } from '../compareByFn';
 
-import { ChartType } from '../../constants/Type';
+import { CHT_TREE_MAP } from '../../constants/ChartType';
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
@@ -122,7 +122,7 @@ const _setColorToPoint = (data, level60, level90) => {
 const toTreeMap = function(json, option){
   const config = crTreeMapConfig()
   ,  { sliceItems:items100=[], value='' } = option
-  ,  id = `${value}_${ChartType.TREE_MAP}`
+  ,  id = `${value}_${CHT_TREE_MAP}`
   ,  jsonData = json.dataset.data
   ,  bYearTotals = _crYearTotals(jsonData, items100)
   , { data, bTotal } = _crDataAndTotal(jsonData, items100, bYearTotals)

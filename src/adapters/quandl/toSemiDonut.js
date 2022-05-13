@@ -3,7 +3,7 @@ import Big from 'big.js';
 
 import { compareByY } from '../compareByFn';
 
-import { ChartType } from '../../constants/Type';
+import { CHT_SEMI_DONUT } from '../../constants/ChartType';
 import formatAllNumber from '../../utils/formatAllNumber';
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
@@ -82,7 +82,7 @@ const _sortData = data => data
 const toSemiDonut = function(json, option){
    const config = crPieConfig()
    , {sliceItems:items=[], value=''} = option
-   , id = `${value}_${ChartType.SEMI_DONUT}`
+   , id = `${value}_${CHT_SEMI_DONUT}`
    , jsonData = json.dataset.data
    , jsonData1 = jsonData[0]
    , jsonData2 = jsonData[1]

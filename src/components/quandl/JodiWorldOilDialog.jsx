@@ -1,5 +1,9 @@
 import { Component } from 'react';
 
+import {
+  CHT_AREA,
+  CHT_YEARLY
+} from '../../constants/ChartType';
 import D from '../dialogs/DialogCell'
 const { Decor, crMenuMore } = D
 
@@ -12,8 +16,8 @@ const unitOptions = [
 ];
 
 const chartOptions = [
-  { caption: "AreaSpline", value: "AREA" },
-  { caption: "Yearly by Month", value: "YEARLY" }
+  { caption: "AreaSpline", value: CHT_AREA },
+  { caption: "Yearly by Month", value: CHT_YEARLY }
 ];
 
 @Decor.dialog

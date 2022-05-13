@@ -3,39 +3,47 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _Type = require("../../constants/Type");
 
+var _ChartType = require("../../constants/ChartType");
+
 var _LoadConfig = _interopRequireDefault(require("./LoadConfig"));
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
+const _isFn = fn => typeof fn === 'function';
+
+const _crQuandlKey = function (option) {
+  const {
+    loadId,
+    isLoadMeta,
+    value,
+    dataColumn,
+    seriaType,
+    viewKey
+  } = option;
+  return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _ChartType.CHT_AREA ? value + "_" + _ChartType.CHT_AREA + "_" + dataColumn : value + "_" + seriaType : viewKey || value;
 };
 
-var _crQuandlKey = function _crQuandlKey(option) {
-  var loadId = option.loadId,
-      isLoadMeta = option.isLoadMeta,
-      value = option.value,
-      dataColumn = option.dataColumn,
-      seriaType = option.seriaType,
-      viewKey = option.viewKey;
-  return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _Type.ChartType.AREA ? value + "_" + _Type.ChartType.AREA + "_" + dataColumn : value + "_" + seriaType : viewKey || value;
-};
-
-var _crKey = function _crKey(option) {
-  var loadId = option.loadId,
-      value = option.value,
-      _itemKey = option._itemKey,
-      loadConfig = _LoadConfig["default"][loadId] || {},
-      crKey = loadConfig.crKey;
+const _crKey = option => {
+  const {
+    loadId,
+    value,
+    _itemKey
+  } = option,
+        loadConfig = _LoadConfig.default[loadId] || {},
+        {
+    crKey
+  } = loadConfig;
   return _isFn(crKey) ? crKey(option) : _itemKey || value || 'key';
 };
 
-var LogicUtils = {
-  createKeyForConfig: function createKeyForConfig(option) {
-    var loadId = option.loadId,
-        _itemKey = option._itemKey;
+const LogicUtils = {
+  createKeyForConfig(option) {
+    const {
+      loadId,
+      _itemKey
+    } = option;
 
     switch (loadId) {
       case _Type.LoadType.Q:
@@ -51,7 +59,8 @@ var LogicUtils = {
         return _crKey(option);
     }
   }
+
 };
 var _default = LogicUtils;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=LogicUtils.js.map

@@ -1,5 +1,7 @@
-
-import { ChartType as CT } from '../../constants/Type'
+import {
+  CHT_SCATTER_UP,
+  CHT_SCATTER_DOWN
+} from '../../constants/ChartType';
 
 import ChartConfig from '../../charts/ChartConfig'
 import Tooltip from '../../charts/Tooltip'
@@ -23,23 +25,23 @@ const _crZhConfig = (option) => {
 }
 
 const _calcScatterY = (option, chart) => {
-  const { seriaType=CT.SCATTER_UP } = option
+  const { seriaType=CHT_SCATTER_UP } = option
   , { max, min } = chart.yAxis[0]
   , onePercent = (max - min)/100;
-  return seriaType === CT.SCATTER_DOWN
+  return seriaType === CHT_SCATTER_DOWN
     ? min + 4*onePercent
     : max - 7*onePercent;
 }
 
 
 const _updateLabelY = (p, seriaType) => {
-  if (seriaType === CT.SCATTER_UP) {
+  if (seriaType === CHT_SCATTER_UP) {
      p.dataLabels.y = 0
   }
 }
 
 const _crSeria = (arr, option) => {
-  const { seriaType=CT.SCATTER_UP } = option;
+  const { seriaType=CHT_SCATTER_UP } = option;
   const data = arr.map(p => {
     const date = p[0]
         , v = p[1]

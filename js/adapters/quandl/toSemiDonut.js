@@ -9,7 +9,7 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _compareByFn = require("../compareByFn");
 
-var _Type = require("../../constants/Type");
+var _ChartType = require("../../constants/ChartType");
 
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 
@@ -108,7 +108,7 @@ const toSemiDonut = function (json, option) {
     sliceItems: items = [],
     value = ''
   } = option,
-        id = value + "_" + _Type.ChartType.SEMI_DONUT,
+        id = value + "_" + _ChartType.CHT_SEMI_DONUT,
         jsonData = json.dataset.data,
         jsonData1 = jsonData[0],
         jsonData2 = jsonData[1],

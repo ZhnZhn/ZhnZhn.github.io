@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Type = require("../../constants/Type");
+var _ChartType = require("../../constants/ChartType");
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
@@ -36,25 +36,25 @@ const _crZhConfig = option => {
 
 const _calcScatterY = (option, chart) => {
   const {
-    seriaType = _Type.ChartType.SCATTER_UP
+    seriaType = _ChartType.CHT_SCATTER_UP
   } = option,
         {
     max,
     min
   } = chart.yAxis[0],
         onePercent = (max - min) / 100;
-  return seriaType === _Type.ChartType.SCATTER_DOWN ? min + 4 * onePercent : max - 7 * onePercent;
+  return seriaType === _ChartType.CHT_SCATTER_DOWN ? min + 4 * onePercent : max - 7 * onePercent;
 };
 
 const _updateLabelY = (p, seriaType) => {
-  if (seriaType === _Type.ChartType.SCATTER_UP) {
+  if (seriaType === _ChartType.CHT_SCATTER_UP) {
     p.dataLabels.y = 0;
   }
 };
 
 const _crSeria = (arr, option) => {
   const {
-    seriaType = _Type.ChartType.SCATTER_UP
+    seriaType = _ChartType.CHT_SCATTER_UP
   } = option;
   const data = arr.map(p => {
     const date = p[0],

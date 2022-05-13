@@ -1,5 +1,5 @@
-
-import { ChartType as CHT, LoadType as LT } from '../../constants/Type';
+import { LoadType as LT } from '../../constants/Type';
+import { CHT_AREA } from '../../constants/ChartType';
 
 import LoadConfig from './LoadConfig'
 
@@ -12,8 +12,8 @@ const _crQuandlKey = function(option){
           viewKey
         } = option;
   return (loadId === LT.QCT && !isLoadMeta)
-    ? seriaType === CHT.AREA
-        ? `${value}_${CHT.AREA}_${dataColumn}`
+    ? seriaType === CHT_AREA
+        ? `${value}_${CHT_AREA}_${dataColumn}`
         : `${value}_${seriaType}`
     : viewKey || value;
 };

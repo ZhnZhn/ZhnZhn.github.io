@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Type = require("../../constants/Type");
+var _ChartType = require("../../constants/ChartType");
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
@@ -47,17 +47,17 @@ const _fToSeria = builder => (json, option, chart) => {
 };
 
 const _rToConfig = {
-  [_Type.ChartType.AREA]: _toArea.default,
-  [_Type.ChartType.SEMI_DONUT]: _toSemiDonut.default,
-  [_Type.ChartType.STACKED_AREA]: _toStackedArea.default,
-  [_Type.ChartType.STACKED_AREA_PERCENT]: _toStackedArea.default,
-  [_Type.ChartType.STACKED_COLUMN]: _toStackedColumn.default,
-  [_Type.ChartType.STACKED_COLUMN_PERCENT]: _toStackedColumn.default,
-  [_Type.ChartType.TREE_MAP]: _toTreeMap.default,
-  [_Type.ChartType.YEARLY]: _fToConfig(_toYearsByMonths.default),
-  [_Type.ChartType.SCATTER]: _fToConfig(_toScatter.default),
-  [_Type.ChartType.SCATTER_UP]: _fToConfig(_toScatter.default),
-  [_Type.ChartType.SCATTER_DOWN]: _fToConfig(_toScatter.default)
+  [_ChartType.CHT_AREA]: _toArea.default,
+  [_ChartType.CHT_SEMI_DONUT]: _toSemiDonut.default,
+  [_ChartType.CHT_STACKED_AREA]: _toStackedArea.default,
+  [_ChartType.CHT_STACKED_AREA_PERCENT]: _toStackedArea.default,
+  [_ChartType.CHT_STACKED_COLUMN]: _toStackedColumn.default,
+  [_ChartType.CHT_STACKED_COLUMN_PERCENT]: _toStackedColumn.default,
+  [_ChartType.CHT_TREE_MAP]: _toTreeMap.default,
+  [_ChartType.CHT_YEARLY]: _fToConfig(_toYearsByMonths.default),
+  [_ChartType.CHT_SCATTER]: _fToConfig(_toScatter.default),
+  [_ChartType.CHT_SCATTER_UP]: _fToConfig(_toScatter.default),
+  [_ChartType.CHT_SCATTER_DOWN]: _fToConfig(_toScatter.default)
 };
 
 const _crSeriaData = (data, yIndex) => {
@@ -80,14 +80,14 @@ const _toSeria = (json, option) => {
 
 const _rToSeria = {
   DF: _toSeria,
-  [_Type.ChartType.SCATTER]: _fToSeria(_toScatter.default),
-  [_Type.ChartType.SCATTER_UP]: _fToSeria(_toScatter.default),
-  [_Type.ChartType.SCATTER_DOWN]: _fToSeria(_toScatter.default)
+  [_ChartType.CHT_SCATTER]: _fToSeria(_toScatter.default),
+  [_ChartType.CHT_SCATTER_UP]: _fToSeria(_toScatter.default),
+  [_ChartType.CHT_SCATTER_DOWN]: _fToSeria(_toScatter.default)
 };
 const QuandlAdapter = {
   toConfig(json, option) {
     const {
-      seriaType = _Type.ChartType.AREA
+      seriaType = _ChartType.CHT_AREA
     } = option;
     return _rToConfig[seriaType](json, option);
   },

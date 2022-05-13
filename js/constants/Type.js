@@ -1,21 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.LoadType = exports.ChartType = void 0;
-const ChartType = {
-  AREA: 'AREA',
-  SEMI_DONUT: 'SEMI_DONUT',
-  STACKED_AREA: 'STACKED_AREA',
-  STACKED_AREA_PERCENT: 'STACKED_AREA_PERCENT',
-  STACKED_COLUMN: 'STACKED_COLUMN',
-  STACKED_COLUMN_PERCENT: 'STACKED_COLUMN_PERCENT',
-  TREE_MAP: 'TREE_MAP',
-  YEARLY: 'YEARLY',
-  SCATTER: 'SCATTER',
-  SCATTER_UP: 'SCATTER_UP',
-  SCATTER_DOWN: 'SCATTER_DOWN'
-};
-exports.ChartType = ChartType;
+exports.LoadType = void 0;
 const LoadType = {
   Q: 'Q',
   AL: 'AL',

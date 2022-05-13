@@ -3,22 +3,22 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _Type = require("../../constants/Type");
+var _ChartType = require("../../constants/ChartType");
 
 var _fnStacked = _interopRequireDefault(require("./fnStacked"));
 
-var crConfig = _fnStacked["default"].crConfig;
+const {
+  crConfig
+} = _fnStacked.default;
 
-var toStackedArea = function toStackedArea(json, option) {
-  return crConfig({
-    percentType: _Type.ChartType.STACKED_AREA_PERCENT,
-    json: json,
-    option: option
-  });
-};
+const toStackedArea = (json, option) => crConfig({
+  percentType: _ChartType.CHT_STACKED_AREA_PERCENT,
+  json,
+  option
+});
 
 var _default = toStackedArea;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toStackedArea.js.map

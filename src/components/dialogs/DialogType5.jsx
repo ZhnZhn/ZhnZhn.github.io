@@ -1,6 +1,10 @@
 import { Component } from 'react'
 
-import { ChartType as CH } from '../../constants/Type';
+import {
+  CHT_AREA,
+  CHT_SCATTER_UP,
+  CHT_SCATTER_DOWN
+} from '../../constants/ChartType';
 
 import D from './DialogCell'
 const { Decor, crMenuMore } = D
@@ -8,9 +12,9 @@ const { Decor, crMenuMore } = D
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 const CHART_TYPE_OPTIONS = [
-  { caption: 'Default: Area', value: CH.AREA },
-  { caption: 'Scatter: Label Up', value: CH.SCATTER_UP },
-  { caption: 'Scatter: Label Down', value: CH.SCATTER_DOWN }
+  { caption: 'Default: Area', value: CHT_AREA },
+  { caption: 'Scatter: Label Up', value: CHT_SCATTER_UP },
+  { caption: 'Scatter: Label Down', value: CHT_SCATTER_DOWN }
 ];
 
 @Decor.dialog
