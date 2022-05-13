@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Type = require("../../constants/Type");
+var _LoadType = require("../../constants/LoadType");
 
 var _ChartType = require("../../constants/ChartType");
 
@@ -22,7 +22,7 @@ const _crQuandlKey = function (option) {
     seriaType,
     viewKey
   } = option;
-  return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _ChartType.CHT_AREA ? value + "_" + _ChartType.CHT_AREA + "_" + dataColumn : value + "_" + seriaType : viewKey || value;
+  return loadId === _LoadType.LT_QCT && !isLoadMeta ? seriaType === _ChartType.CHT_AREA ? value + "_" + _ChartType.CHT_AREA + "_" + dataColumn : value + "_" + seriaType : viewKey || value;
 };
 
 const _crKey = option => {
@@ -46,13 +46,13 @@ const LogicUtils = {
     } = option;
 
     switch (loadId) {
-      case _Type.LoadType.Q:
-      case _Type.LoadType.QCT:
+      case _LoadType.LT_Q:
+      case _LoadType.LT_QCT:
         return _itemKey || _crQuandlKey(option);
 
-      case _Type.LoadType.EU_STAT:
-      case _Type.LoadType.EIA:
-      case _Type.LoadType.WL:
+      case _LoadType.LT_EU_STAT:
+      case _LoadType.LT_EIA:
+      case _LoadType.LT_WL:
         return _itemKey || option.id;
 
       default:

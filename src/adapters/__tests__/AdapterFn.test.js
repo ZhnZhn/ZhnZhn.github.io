@@ -13,7 +13,6 @@ import {
   joinBy,
   valueMoving
 } from '../AdapterFn';
-//import { Direction } from '../../constants/Type'
 import {
   DT_EMPTY,
   DT_UP,

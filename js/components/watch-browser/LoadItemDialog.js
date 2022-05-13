@@ -7,15 +7,15 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 
 var _ChartActions = _interopRequireWildcard(require("../../flux/actions/ChartActions"));
 
-var _Type = require("../../constants/Type");
+var _LoadType = require("../../constants/LoadType");
 
-var _ChartType = _interopRequireDefault(require("../../constants/ChartType"));
+var _BrowserType = require("../../constants/BrowserType");
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -33,12 +33,6 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const {
-  getFromDate,
-  getToDate,
-  isYmd,
-  mlsToDmy
-} = _DateUtils.default;
 const S_DIALOG = {
   width: 365
 },
@@ -54,7 +48,17 @@ const S_DIALOG = {
   overflow: 'hidden'
 };
 
-const _crValue = (x = '', y = '') => ((0, _formatNumber.default)(y) + " " + mlsToDmy(x)).trim();
+const _crValue = function (x, y) {
+  if (x === void 0) {
+    x = '';
+  }
+
+  if (y === void 0) {
+    y = '';
+  }
+
+  return ((0, _formatNumber.default)(y) + " " + (0, _DateUtils.mlsToDmy)(x)).trim();
+};
 
 let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = _class2 = class LoadItemDialog extends _react.Component {
   /*
@@ -112,13 +116,13 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
           columnName,
           dataColumn,
           seriaColumnNames,
-          loadId: itemConf.loadId || _Type.LoadType.WL,
+          loadId: itemConf.loadId || _LoadType.LT_WL,
           ...itemConf
         };
 
         _ChartActions.default[_ChartActions.CHAT_LOAD]({
-          chartType: _ChartType.default.WATCH_LIST,
-          browserType: _Type.BrowserType.WATCH_LIST
+          chartType: _LoadType.LT_WATCH_LIST,
+          browserType: _BrowserType.BT_WATCH_LIST
         }, option);
 
         onClose();
@@ -166,9 +170,9 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
     this.state = { ...this._isWithInitialState(),
       isShowDate: false,
       isValue,
-      initFromDate: _fromDate || getFromDate(2),
-      initToDate: initToDate || getToDate(),
-      onTestDate: onTestDate || isYmd
+      initFromDate: _fromDate || (0, _DateUtils.getFromDate)(2),
+      initToDate: initToDate || (0, _DateUtils.getToDate)(),
+      onTestDate: onTestDate || _DateUtils.isYmd
     };
   }
 

@@ -1,25 +1,39 @@
-import { LoadType as LT } from '../../constants/Type';
+import {
+  LT_Q,
+  LT_AL,
+  LT_IEX,
+  LT_FMP,
+  LT_INTR,
+  LT_TW,
+  LT_BEA,
+  LT_EIA,
+  LT_FAO,
+  LT_BF,
+  LT_CRC,
+  LT_BLS,
+  LT_WL
+} from '../../constants/LoadType';
 
 const _settings = {};
 const _withApiKey = [
-  LT.AL, LT.IEX, LT.FMP, LT.INTR, LT.TW,
-  LT.BEA, LT.EIA
+  LT_AL, LT_IEX, LT_FMP, LT_INTR, LT_TW,
+  LT_BEA, LT_EIA
 ];
 const _withProxy = [
-  LT.FAO, LT.BF
+  LT_FAO, LT_BF
 ];
 const _apiTitle = {
   DF: '',
-  [LT.AL]: 'Alpha Vantage',
-  [LT.IEX]: 'IEX Cloud',
-  [LT.BEA]: 'BEA',
-  [LT.EIA]: 'EIA',
-  [LT.FMP]: 'FMP',
-  [LT.INTR]: 'Intrinio',
-  [LT.TW]: 'Twelve Data',
+  [LT_AL]: 'Alpha Vantage',
+  [LT_IEX]: 'IEX Cloud',
+  [LT_BEA]: 'BEA',
+  [LT_EIA]: 'EIA',
+  [LT_FMP]: 'FMP',
+  [LT_INTR]: 'Intrinio',
+  [LT_TW]: 'Twelve Data',
 
-  [LT.FAO]: 'FAOSTAT',
-  [LT.CRC]: 'CryptoCompare Information'
+  [LT_FAO]: 'FAOSTAT',
+  [LT_CRC]: 'CryptoCompare Information'
 };
 
 
@@ -35,17 +49,17 @@ const SettingSlice = {
 
   exportSettingFn(){
     return {
-      key1: this.fSetKey(LT.Q),
-      key2: this.fSetKey(LT.BEA),
-      key3: this.fSetKey(LT.BLS),
-      key4: this.fSetKey(LT.EIA),
-      key5: this.fSetKey(LT.AL),
-      key6: this.fSetKey(LT.FMP),
-      key7: this.fSetKey(LT.IEX),
-      key8: this.fSetKey(LT.INTR),
-      key9: this.fSetKey(LT.TW),
+      key1: this.fSetKey(LT_Q),
+      key2: this.fSetKey(LT_BEA),
+      key3: this.fSetKey(LT_BLS),
+      key4: this.fSetKey(LT_EIA),
+      key5: this.fSetKey(LT_AL),
+      key6: this.fSetKey(LT_FMP),
+      key7: this.fSetKey(LT_IEX),
+      key8: this.fSetKey(LT_INTR),
+      key9: this.fSetKey(LT_TW),
       setProxy: this.setProxy.bind(this),
-      getProxy: this.getProxy.bind(this, LT.FAO),
+      getProxy: this.getProxy.bind(this, LT_FAO),
       isAdminMode: this.isAdminMode.bind(this),
       isDrawDeltaExtrems: this.isSetting.bind(this, 'isDrawDeltaExtrems'),
       isNotZoomToMinMax: this.isSetting.bind(this, 'isNotZoomToMinMax')
@@ -58,8 +72,8 @@ const SettingSlice = {
 
   getKey(id){
     switch(id){
-      case LT.WL: case LT.Q_T:
-         return _settings[LT.Q];
+      case LT_WL:
+         return _settings[LT_Q];
       default:
          return _settings[id];
     }

@@ -29,8 +29,7 @@ export {
   filterTrimZero
 } from '../math/seriaFn'
 
-//import { Direction } from '../constants/Type'
-import { DT_EMPTY } from '../constants/DirectionType'
+import { DT_EMPTY } from '../constants/DirectionType';
 import {
   getPointDate,
   getPointValue

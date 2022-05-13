@@ -1,11 +1,11 @@
-import { LoadType as LT } from '../../constants/Type'
-import { fetchJson } from '../../utils/fnFetch'
-import onCatch from './onCatch'
+import { LT_Q } from '../../constants/LoadType';
+import { fetchJson } from '../../utils/fnFetch';
+import onCatch from './onCatch';
 import ChartStore from '../stores/ChartStore';
 
 import QuandlApi from '../../adapters/quandl/QuandlApi';
 
-import LoadImpl from './LoadImpl'
+import LoadImpl from './LoadImpl';
 
 const _compareByCaption = (a, b) => {
   if (a.caption < b.caption ) return -1;
@@ -72,7 +72,7 @@ const _loadToChart = function(option, onAdded, onFailed){
 const loadQuandlCommodityTrade = {
   loadItem(option, onCompleted, onAdded, onFailed){
     const parentId = ChartStore.isLoadToChart();
-    option.apiKey = ChartStore.getKey(LT.Q)
+    option.apiKey = ChartStore.getKey(LT_Q)
 
     if (!parentId){
       _loadToChartComp(option, onCompleted, onFailed);

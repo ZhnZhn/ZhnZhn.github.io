@@ -5,47 +5,46 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Type = require("../../constants/Type");
+var _LoadType = require("../../constants/LoadType");
 
 var _loadQuandlCommodityTrade = require("./loadQuandlCommodityTrade");
 
 var _LoadImpl = _interopRequireDefault(require("./LoadImpl"));
 
 const LoadConfig = {
-  [_Type.LoadType.Q]: _LoadImpl.default.Quandl,
-  [_Type.LoadType.QCT]: _loadQuandlCommodityTrade.loadQuandlCommodityTrade,
-  [_Type.LoadType.DBN]: _LoadImpl.default.DbNomics,
-  [_Type.LoadType.AL]: _LoadImpl.default.AlphaVantage,
-  [_Type.LoadType.IEX]: _LoadImpl.default.Iex,
-  [_Type.LoadType.FMP]: _LoadImpl.default.Fmp,
-  [_Type.LoadType.TW]: _LoadImpl.default.Tw,
-  [_Type.LoadType.EU_STAT]: _LoadImpl.default.EuroStat,
-  [_Type.LoadType.FS]: _LoadImpl.default.Insee,
-  [_Type.LoadType.UKS]: _LoadImpl.default.StatUk,
-  [_Type.LoadType.NST]: _LoadImpl.default.StatNorway,
-  [_Type.LoadType.NST_2]: _LoadImpl.default.StatNorway2,
-  [_Type.LoadType.SWS]: _LoadImpl.default.StatSweden,
-  [_Type.LoadType.SFL]: _LoadImpl.default.StatFinland,
-  [_Type.LoadType.SDN]: _LoadImpl.default.StatDenmark,
-  [_Type.LoadType.SIR]: _LoadImpl.default.StatIreland,
-  [_Type.LoadType.BEA]: _LoadImpl.default.Bea,
-  [_Type.LoadType.BLS]: _LoadImpl.default.Bls,
-  [_Type.LoadType.EIA]: _LoadImpl.default.Eia,
-  [_Type.LoadType.INTR]: _LoadImpl.default.Intrinio,
-  [_Type.LoadType.CRC]: _LoadImpl.default.Crc,
-  [_Type.LoadType.CG]: _LoadImpl.default.Cg,
-  [_Type.LoadType.CM]: _LoadImpl.default.Cm,
-  [_Type.LoadType.CP]: _LoadImpl.default.Cp,
-  [_Type.LoadType.CL]: _LoadImpl.default.Cl,
-  [_Type.LoadType.BN]: _LoadImpl.default.Bn,
-  [_Type.LoadType.BF]: _LoadImpl.default.Bf,
-  [_Type.LoadType.BT]: _LoadImpl.default.Bt,
-  [_Type.LoadType.FS]: _LoadImpl.default.Insee,
-  [_Type.LoadType.UN]: _LoadImpl.default.UnComtrade,
-  [_Type.LoadType.FAO]: _LoadImpl.default.FaoStat,
-  [_Type.LoadType.WB]: _LoadImpl.default.WorldBank,
-  [_Type.LoadType.WATCH_LIST]: _LoadImpl.default.Quandl,
-  [_Type.LoadType.WL]: _LoadImpl.default.Quandl
+  [_LoadType.LT_Q]: _LoadImpl.default.Quandl,
+  [_LoadType.LT_QCT]: _loadQuandlCommodityTrade.loadQuandlCommodityTrade,
+  [_LoadType.LT_DBN]: _LoadImpl.default.DbNomics,
+  [_LoadType.LT_AL]: _LoadImpl.default.AlphaVantage,
+  [_LoadType.LT_IEX]: _LoadImpl.default.Iex,
+  [_LoadType.LT_FMP]: _LoadImpl.default.Fmp,
+  [_LoadType.LT_TW]: _LoadImpl.default.Tw,
+  [_LoadType.LT_EU_STAT]: _LoadImpl.default.EuroStat,
+  [_LoadType.LT_FS]: _LoadImpl.default.Insee,
+  [_LoadType.LT_UKS]: _LoadImpl.default.StatUk,
+  [_LoadType.LT_NST]: _LoadImpl.default.StatNorway,
+  [_LoadType.LT_NST_2]: _LoadImpl.default.StatNorway2,
+  [_LoadType.LT_SWS]: _LoadImpl.default.StatSweden,
+  [_LoadType.LT_SFL]: _LoadImpl.default.StatFinland,
+  [_LoadType.LT_SDN]: _LoadImpl.default.StatDenmark,
+  [_LoadType.LT_SIR]: _LoadImpl.default.StatIreland,
+  [_LoadType.LT_BEA]: _LoadImpl.default.Bea,
+  [_LoadType.LT_BLS]: _LoadImpl.default.Bls,
+  [_LoadType.LT_EIA]: _LoadImpl.default.Eia,
+  [_LoadType.LT_INTR]: _LoadImpl.default.Intrinio,
+  [_LoadType.LT_CRC]: _LoadImpl.default.Crc,
+  [_LoadType.LT_CG]: _LoadImpl.default.Cg,
+  [_LoadType.LT_CM]: _LoadImpl.default.Cm,
+  [_LoadType.LT_CP]: _LoadImpl.default.Cp,
+  [_LoadType.LT_CL]: _LoadImpl.default.Cl,
+  [_LoadType.LT_BN]: _LoadImpl.default.Bn,
+  [_LoadType.LT_BF]: _LoadImpl.default.Bf,
+  [_LoadType.LT_BT]: _LoadImpl.default.Bt,
+  [_LoadType.LT_UN]: _LoadImpl.default.UnComtrade,
+  [_LoadType.LT_FAO]: _LoadImpl.default.FaoStat,
+  [_LoadType.LT_WB]: _LoadImpl.default.WorldBank,
+  [_LoadType.LT_WATCH_LIST]: _LoadImpl.default.Quandl,
+  [_LoadType.LT_WL]: _LoadImpl.default.Quandl
 };
 var _default = LoadConfig;
 exports.default = _default;

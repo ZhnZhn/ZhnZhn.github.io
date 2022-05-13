@@ -3,22 +3,22 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Type = require("../../constants/Type");
+var _LoadType = require("../../constants/LoadType");
 
 const _settings = {};
-const _withApiKey = [_Type.LoadType.AL, _Type.LoadType.IEX, _Type.LoadType.FMP, _Type.LoadType.INTR, _Type.LoadType.TW, _Type.LoadType.BEA, _Type.LoadType.EIA];
-const _withProxy = [_Type.LoadType.FAO, _Type.LoadType.BF];
+const _withApiKey = [_LoadType.LT_AL, _LoadType.LT_IEX, _LoadType.LT_FMP, _LoadType.LT_INTR, _LoadType.LT_TW, _LoadType.LT_BEA, _LoadType.LT_EIA];
+const _withProxy = [_LoadType.LT_FAO, _LoadType.LT_BF];
 const _apiTitle = {
   DF: '',
-  [_Type.LoadType.AL]: 'Alpha Vantage',
-  [_Type.LoadType.IEX]: 'IEX Cloud',
-  [_Type.LoadType.BEA]: 'BEA',
-  [_Type.LoadType.EIA]: 'EIA',
-  [_Type.LoadType.FMP]: 'FMP',
-  [_Type.LoadType.INTR]: 'Intrinio',
-  [_Type.LoadType.TW]: 'Twelve Data',
-  [_Type.LoadType.FAO]: 'FAOSTAT',
-  [_Type.LoadType.CRC]: 'CryptoCompare Information'
+  [_LoadType.LT_AL]: 'Alpha Vantage',
+  [_LoadType.LT_IEX]: 'IEX Cloud',
+  [_LoadType.LT_BEA]: 'BEA',
+  [_LoadType.LT_EIA]: 'EIA',
+  [_LoadType.LT_FMP]: 'FMP',
+  [_LoadType.LT_INTR]: 'Intrinio',
+  [_LoadType.LT_TW]: 'Twelve Data',
+  [_LoadType.LT_FAO]: 'FAOSTAT',
+  [_LoadType.LT_CRC]: 'CryptoCompare Information'
 };
 
 const _isUndef = value => typeof value === 'undefined';
@@ -33,17 +33,17 @@ const SettingSlice = {
 
   exportSettingFn() {
     return {
-      key1: this.fSetKey(_Type.LoadType.Q),
-      key2: this.fSetKey(_Type.LoadType.BEA),
-      key3: this.fSetKey(_Type.LoadType.BLS),
-      key4: this.fSetKey(_Type.LoadType.EIA),
-      key5: this.fSetKey(_Type.LoadType.AL),
-      key6: this.fSetKey(_Type.LoadType.FMP),
-      key7: this.fSetKey(_Type.LoadType.IEX),
-      key8: this.fSetKey(_Type.LoadType.INTR),
-      key9: this.fSetKey(_Type.LoadType.TW),
+      key1: this.fSetKey(_LoadType.LT_Q),
+      key2: this.fSetKey(_LoadType.LT_BEA),
+      key3: this.fSetKey(_LoadType.LT_BLS),
+      key4: this.fSetKey(_LoadType.LT_EIA),
+      key5: this.fSetKey(_LoadType.LT_AL),
+      key6: this.fSetKey(_LoadType.LT_FMP),
+      key7: this.fSetKey(_LoadType.LT_IEX),
+      key8: this.fSetKey(_LoadType.LT_INTR),
+      key9: this.fSetKey(_LoadType.LT_TW),
       setProxy: this.setProxy.bind(this),
-      getProxy: this.getProxy.bind(this, _Type.LoadType.FAO),
+      getProxy: this.getProxy.bind(this, _LoadType.LT_FAO),
       isAdminMode: this.isAdminMode.bind(this),
       isDrawDeltaExtrems: this.isSetting.bind(this, 'isDrawDeltaExtrems'),
       isNotZoomToMinMax: this.isSetting.bind(this, 'isNotZoomToMinMax')
@@ -56,9 +56,8 @@ const SettingSlice = {
 
   getKey(id) {
     switch (id) {
-      case _Type.LoadType.WL:
-      case _Type.LoadType.Q_T:
-        return _settings[_Type.LoadType.Q];
+      case _LoadType.LT_WL:
+        return _settings[_LoadType.LT_Q];
 
       default:
         return _settings[id];

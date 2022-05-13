@@ -17,7 +17,7 @@ var _fBrowser = _interopRequireDefault(require("./fBrowser"));
 
 var _Msg = require("../../constants/Msg");
 
-var _Type = require("../../constants/Type");
+var _LoadType = require("../../constants/LoadType");
 
 var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
 
@@ -111,10 +111,10 @@ const _getDialogType = (dialogType, _ref3) => {
 
 const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
   if (!loadId) {
-    dialogProps.loadId = _Type.LoadType.Q;
+    dialogProps.loadId = _LoadType.LT_Q;
   }
 
-  if (loadId === _Type.LoadType.EU_STAT) {
+  if (loadId === _LoadType.LT_EU_STAT) {
     const {
       dfProps
     } = dialogProps,

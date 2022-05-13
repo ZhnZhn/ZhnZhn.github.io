@@ -7,34 +7,27 @@ exports.default = void 0;
 
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 
-var _Type = require("../../constants/Type");
+var _BrowserType = require("../../constants/BrowserType");
 
 var _DataWL = _interopRequireDefault(require("../../constants/DataWL"));
 
 var _BrowserActions = require("../actions/BrowserActions");
 
-var _BrowserLogic = _interopRequireDefault(require("./browser/BrowserLogic"));
+var _BrowserLogic = require("./browser/BrowserLogic");
 
 const FAILED = 'Failed';
-const {
-  isWithItemCounter,
-  initBrowserMenu,
-  setIsOpen,
-  plusCounter,
-  resetCounter
-} = _BrowserLogic.default;
 
-const _setItemOpen = setIsOpen.bind(null, true),
-      _setItemClose = setIsOpen.bind(null, false),
-      _addCounter = plusCounter.bind(null, 1),
-      _minusCounter = plusCounter.bind(null, -1);
+const _setItemOpen = _BrowserLogic.setIsOpen.bind(null, true),
+      _setItemClose = _BrowserLogic.setIsOpen.bind(null, false),
+      _addCounter = _BrowserLogic.plusCounter.bind(null, 1),
+      _minusCounter = _BrowserLogic.plusCounter.bind(null, -1);
 
 const BrowserSlice = {
   browserMenu: {},
   routeDialog: {
     WL: _DataWL.default
   },
-  isWithItemCounter: isWithItemCounter,
+  isWithItemCounter: _BrowserLogic.isWithItemCounter,
 
   getBrowserMenu(browserType) {
     return this.browserMenu[browserType];
@@ -57,11 +50,11 @@ const BrowserSlice = {
   },
 
   resetMenuItemCounter(cT, bT) {
-    resetCounter(this.browserMenu, bT, cT);
+    (0, _BrowserLogic.resetCounter)(this.browserMenu, bT, cT);
   },
 
   getSourceConfig(browserId, sourceId) {
-    if (sourceId.indexOf(_Type.BrowserType.STOCKS_BY_SECTORS) > 0) {
+    if (sourceId.indexOf(_BrowserType.BT_STOCKS_BY_SECTORS) > 0) {
       return _BrowserConfig.default[browserId];
     }
 
@@ -69,9 +62,10 @@ const BrowserSlice = {
     return _r ? _r[sourceId] : void 0;
   },
 
-  onShowBrowserDynamicDone({
-    browserType
-  }) {
+  onShowBrowserDynamicDone(_ref) {
+    let {
+      browserType
+    } = _ref;
     this.trigger(_BrowserActions.BAT_SHOW_BROWSER_DYNAMIC, browserType);
   },
 
@@ -96,7 +90,7 @@ const BrowserSlice = {
       json,
       browserType
     } = option,
-          menuItems = isWithItemCounter(browserType) ? initBrowserMenu(this, option) : json;
+          menuItems = (0, _BrowserLogic.isWithItemCounter)(browserType) ? (0, _BrowserLogic.initBrowserMenu)(this, option) : json;
     this.trigger(_BrowserActions.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED, {
       menuItems,
       browserType

@@ -10,7 +10,10 @@ import {
 import formatNumber from '../../utils/formatNumber'
 
 import ChartActions, {CHAT_LOAD} from '../../flux/actions/ChartActions'
-import { LoadType as LT } from '../../constants/Type'
+import {
+  LT_WL,
+  LT_WATCH_LIST
+ } from '../../constants/LoadType'
 import { BT_WATCH_LIST } from '../../constants/BrowserType';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
@@ -113,11 +116,11 @@ class LoadItemDialog extends Component {
              item: caption,
              fromDate, toDate,
              columnName, dataColumn, seriaColumnNames,
-             loadId: itemConf.loadId || LT.WL,
+             loadId: itemConf.loadId || LT_WL,
              ...itemConf
            };
       ChartActions[CHAT_LOAD]({
-        chartType: LT.WATCH_LIST,
+        chartType: LT_WATCH_LIST,
         browserType: BT_WATCH_LIST
       }, option);
       onClose()

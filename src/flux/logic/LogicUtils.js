@@ -1,4 +1,10 @@
-import { LoadType as LT } from '../../constants/Type';
+import {
+  LT_Q,
+  LT_QCT,
+  LT_EU_STAT,
+  LT_EIA,
+  LT_WL
+} from '../../constants/LoadType';
 import { CHT_AREA } from '../../constants/ChartType';
 
 import LoadConfig from './LoadConfig'
@@ -11,7 +17,7 @@ const _crQuandlKey = function(option){
           value, dataColumn, seriaType,
           viewKey
         } = option;
-  return (loadId === LT.QCT && !isLoadMeta)
+  return (loadId === LT_QCT && !isLoadMeta)
     ? seriaType === CHT_AREA
         ? `${value}_${CHT_AREA}_${dataColumn}`
         : `${value}_${seriaType}`
@@ -31,9 +37,9 @@ const LogicUtils = {
   createKeyForConfig(option){
     const { loadId, _itemKey } = option;
     switch (loadId) {
-      case LT.Q: case LT.QCT:
+      case LT_Q: case LT_QCT:
         return _itemKey || _crQuandlKey(option);
-      case LT.EU_STAT: case LT.EIA: case LT.WL:
+      case LT_EU_STAT: case LT_EIA: case LT_WL:
         return _itemKey || option.id;
       default:
         return _crKey(option);

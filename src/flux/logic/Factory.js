@@ -11,7 +11,10 @@ import {
   NOT_SELECTED,
   NOT_VALID_FORMAT
 } from '../../constants/Msg';
-import {  LoadType } from '../../constants/Type';
+import {
+  LT_Q,
+  LT_EU_STAT
+} from '../../constants/LoadType';
 
 import CA from '../actions/ComponentActions';
 import ChartActions, {
@@ -89,9 +92,9 @@ const _getDialogType = (dialogType, { selectProps, dims, dfProps }) =>
 
 const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
   if (!loadId){
-    dialogProps.loadId = LoadType.Q;
+    dialogProps.loadId = LT_Q;
   }
-  if (loadId === LoadType.EU_STAT) {
+  if (loadId === LT_EU_STAT) {
     const { dfProps } = dialogProps
     , { mapFrequency } = dfProps || {};
     dialogProps.dfProps = _assign({}, dfProps, {

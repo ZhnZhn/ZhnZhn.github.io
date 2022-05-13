@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Type = require("../../constants/Type");
+var _BrowserType = require("../../constants/BrowserType");
 
 var _ModalDialogType = require("../../constants/ModalDialogType");
 
@@ -76,7 +76,7 @@ const _router = {
 
   loadDialogs(id) {
     switch (id) {
-      case _Type.BrowserType.WATCH_LIST:
+      case _BrowserType.BT_WATCH_LIST:
         this._loadWL();
 
         break;
