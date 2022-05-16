@@ -1,22 +1,18 @@
 import { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import ChartTypes from './ChartTypes'
+import { crDialogChartOptions } from './ChartOptionsFn';
 import D from './DialogCell'
 
-const { crOptions } = ChartTypes;
 const { Decor, crMenuMore } = D
 
-const ERR_MSG = 'Empty or Id format is not valid';
-
-const S = {
-  ID_CAPTION: { width: 85 },
-  ID_ROOT: { width: 270 }
-};
+const ERR_MSG = 'Empty or Id format is not valid'
+, S_ID_CAPTION = { width: 85 }
+, S_ID_ROOT = { width: 270 };
 
 const _isStrNotBlank = str => typeof str === 'string'
   && str.trim();
-  
+
 const _testId = (value) => _isStrNotBlank(value)
   && _isStrNotBlank(value.split('/')[2])
   ? true : false;
@@ -35,7 +31,7 @@ class DialogQuery extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
        props, { noDate, isOptions: true }
     )
-    this._chartOptions = crOptions({ chartsType: 't2' })
+    this._chartOptions = crDialogChartOptions({ chartsType: 't2' })
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
@@ -123,8 +119,8 @@ class DialogQuery extends Component {
           ref={this._refIdInput}
           isShow={isShow}
           isShowLabels={isShowLabels}
-          captionStyle={S.ID_CAPTION}
-          rootStyle={S.ID_ROOT}
+          captionStyle={S_ID_CAPTION}
+          rootStyle={S_ID_ROOT}
           placeholder={onePlaceholder}
           caption={oneCaption}
           onTest={_testId}
@@ -134,8 +130,8 @@ class DialogQuery extends Component {
             chartType={chartType}
             isShowLabels={isShowLabels}
             isShowChart={true}
-            labelStyle={S.ID_CAPTION}
-            selectWidth={S.ID_ROOT.width}
+            labelStyle={S_ID_CAPTION}
+            selectWidth={S_ID_ROOT.width}
             chartOptions={this._chartOptions}
             onSelectChart={this._hSelectChartType}
             onRegColor={this._onRegColor}

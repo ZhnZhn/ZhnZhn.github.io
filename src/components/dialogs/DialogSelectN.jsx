@@ -2,7 +2,10 @@
 import { Component, createRef } from 'react';
 import memoizeOne from 'memoize-one'
 
-import ChartTypes from './ChartTypes'
+import {
+  crChartOptions,
+  isCategoryItem
+} from './ChartOptionsFn';
 import D from './DialogCell'
 import SelectList from './SelectList'
 const { Decor, crMenuMore, crDateConfig } = D
@@ -10,11 +13,6 @@ const { Decor, crMenuMore, crDateConfig } = D
 const DF_INIT_FROM_DATE = '2010-01-01'
 const DF_MAP_FREQUENCY = 'EMPTY';
 const TABLE_ID = 'table';
-
-const {
-  crChartOptions,
-  isCategory
-} = ChartTypes;
 
 const _isRequireChartOptionsUpdate = (
   prevMapFrequency,
@@ -186,7 +184,7 @@ class DialogSelectN extends Component {
 
 
   _hSelectChartType = (chartType) => {
-    const _nextState = isCategory(chartType)
+    const _nextState = isCategoryItem(chartType)
       ? { isShowDate: true, isShowFd: false }
       : { isShowDate: false };
     this.setState({ ..._nextState, chartType })
@@ -217,7 +215,7 @@ class DialogSelectN extends Component {
     , _max = selectProps.length
     , msg = [];
 
-    let i = isCategory(chartType) ? 1 : 0;
+    let i = isCategoryItem(chartType) ? 1 : 0;
     for( ; i<_max; i++) {
       if (!this._items[i]) {
         msg.push(msgOnNotSelected(selectProps[i].caption))
@@ -238,8 +236,8 @@ class DialogSelectN extends Component {
         ? colorComp.getConf()
         : {}
     , date = this._getDate()
-    , _isCategory = isCategory(chartType)
-    , items = [...this._items]    
+    , _isCategory = isCategoryItem(chartType)
+    , items = [...this._items]
     , _compFd = this._refFromDate.current
     , fromDate = _compFd && _compFd.isValid()
        ? _compFd.getValue()
@@ -302,7 +300,7 @@ class DialogSelectN extends Component {
     } = this.state
     , _chartOptions = this._crChartOptionsMem(selectProps, chartsType, mapFrequency)
     , { dateDefault, dateOptions } = this._crDateConfig()
-    , _isCategory = isCategory(chartType)
+    , _isCategory = isCategoryItem(chartType)
     , _isRowFd = isFd && !_isCategory
     , _noForDate = noForDate || !_isCategory;
 

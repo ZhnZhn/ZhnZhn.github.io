@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react';
 
 import has from '../has';
-import ChartTypes from '../dialogs/ChartTypes';
+import { isCategoryItem } from '../dialogs/ChartOptionsFn';
 
 import ItemStack from '../zhn/ItemStack';
 import D from '../dialogs/DialogCell';
@@ -27,8 +27,7 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
 , MSG_DIMS_LOADING = "Dims is loading"
 , S_DIV_LOADING = { height: 50, width: '100%' };
 
-const { isCategory } = ChartTypes
-, IS_SHOW_LABELS = has.wideWidth()
+const IS_SHOW_LABELS = has.wideWidth()
 , _arePropsEqual = (prevProps, props) =>
   prevProps.isShow === props.isShow;
 
@@ -128,7 +127,7 @@ const DialogStatN = memo((props) => {
           return msg;
         }
 
-        const _isCategory = isCategory(chartType)
+        const _isCategory = isCategoryItem(chartType)
         , { dim } = chartType || {}
         , _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, _refItems.current);
 
@@ -153,7 +152,7 @@ const DialogStatN = memo((props) => {
    }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
    //_refDim, _isDim
    , _hSelectChartType = useCallback(chartType => {
-       const _isShowDate = isCategory(chartType)
+       const _isShowDate = isCategoryItem(chartType)
          ? (_refDate.current = null, true)
          : false;
        updateStateIf(setIsRow, 'isShowDate', _isShowDate)

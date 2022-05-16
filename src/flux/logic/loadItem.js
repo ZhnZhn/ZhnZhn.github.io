@@ -2,15 +2,13 @@ import { fetchJson } from '../../utils/fnFetch'
 
 import ChartStore from '../stores/ChartStore'
 import ChartFn from '../../charts/ChartFn'
-import ChartTypes from '../../components/dialogs/ChartTypes'
+import { isCategoryItem } from '../../components/dialogs/ChartOptionsFn';
 
 import onCatch from './onCatch'
 
-const ALERT = {
-  CATEGORY_TO_SPLINE: {
-    alertCaption: 'Series Error',
-    alertDescr: "Adding category seria to not category isn't allowed."
-  }
+const ALERT_CATEGORY_TO_SPLINE = {
+  alertCaption: 'Series Error',
+  alertDescr: "Adding category seria to not category isn't allowed."
 };
 
 const _isArr = Array.isArray;
@@ -95,7 +93,7 @@ const _fetchToChart = function(objImpl, { json, option, onCompleted }){
 const _isAddCategoryToSpline = ({ seriaType }) => {
   const chart = ChartStore.getActiveChart();
   return seriaType
-    && ChartTypes.isCategory({ value: seriaType })
+    && isCategoryItem({ value: seriaType })
     && chart && _isArr(chart.xAxis)
     && !_isArr(chart.xAxis[0].categories);
 };
@@ -117,7 +115,7 @@ const _loadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
         })
       })
     } else if (_isAddCategoryToSpline(option)) {
-      _runAsync(() => onFailed(ALERT.CATEGORY_TO_SPLINE))
+      _runAsync(() => onFailed(ALERT_CATEGORY_TO_SPLINE))
     } else {
       option.parentId = parentId;
       _loadToChart(objImpl, option, onAdded, onFailed);

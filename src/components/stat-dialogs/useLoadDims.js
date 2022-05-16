@@ -1,13 +1,16 @@
-import { useState, useCallback, useEffect } from 'react';
+import {
+  useState,
+  useCallback,
+  useEffect
+} from 'react';
 
-import ChartTypes from '../dialogs/ChartTypes';
+import { crDialogChartOptions } from '../dialogs/ChartOptionsFn';
 import D from '../dialogs/DialogCell';
 
 import loadConfigs from './dimensions/loadConfigs';
 import usePreviousProps from './usePreviousProps';
 
-const { crOptions } = ChartTypes
-, { crDateConfig } = D
+const { crDateConfig } = D
 , MAP_FREQUENCY_DF = 'M'
 , _crOptionItem = (caption, value) => ({
   caption,
@@ -89,7 +92,7 @@ const useLoadDims = (props) => {
      configs: [],
      selectOptions: [],
      mapFrequency,
-     chartOptions: crOptions(props),
+     chartOptions: crDialogChartOptions(props),
      dateOptions: []
   }))
   , _setConfigs = useCallback(({
@@ -114,7 +117,7 @@ const useLoadDims = (props) => {
          selectOptions: _crSelectOptions(configs),
          mapFrequency: _mF,
          dimOptions: _crDimOptions(configs),
-         chartOptions: crOptions({ configs, chartsType, mapFrequency: _mF }),
+         chartOptions: crDialogChartOptions({ configs, chartsType, mapFrequency: _mF }),
          dateOptions,
          dateDf
         })

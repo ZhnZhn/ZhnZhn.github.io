@@ -3,9 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+exports.default = void 0;
 
 var _fnFetch = require("../../utils/fnFetch");
 
@@ -13,123 +11,140 @@ var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
 var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
 
-var _ChartTypes = _interopRequireDefault(require("../../components/dialogs/ChartTypes"));
+var _ChartOptionsFn = require("../../components/dialogs/ChartOptionsFn");
 
 var _onCatch = _interopRequireDefault(require("./onCatch"));
 
-var ALERT = {
-  CATEGORY_TO_SPLINE: {
-    alertCaption: 'Series Error',
-    alertDescr: "Adding category seria to not category isn't allowed."
-  }
+const ALERT_CATEGORY_TO_SPLINE = {
+  alertCaption: 'Series Error',
+  alertDescr: "Adding category seria to not category isn't allowed."
 };
-var _isArr = Array.isArray;
+const _isArr = Array.isArray;
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _isFn = fn => typeof fn === 'function';
 
-var _crOptionFetch = function _crOptionFetch(_ref, option) {
-  var optionFetch = _ref.optionFetch;
+const _crOptionFetch = (_ref, option) => {
+  let {
+    optionFetch
+  } = _ref;
   return _isFn(optionFetch) ? optionFetch(option) : optionFetch;
 };
 
-var _fetchToChartComp = function _fetchToChartComp(objImpl, _ref2) {
-  var json = _ref2.json,
-      option = _ref2.option,
-      onCompleted = _ref2.onCompleted;
-
-  var adapter = objImpl.adapter,
-      _adapter$toConfig = adapter.toConfig(json, option),
-      config = _adapter$toConfig.config;
+const _fetchToChartComp = function (objImpl, _ref2) {
+  let {
+    json,
+    option,
+    onCompleted
+  } = _ref2;
+  const {
+    adapter
+  } = objImpl,
+        {
+    config
+  } = adapter.toConfig(json, option);
 
   if (!_isFn(config.then)) {
     onCompleted(option, config);
   } else {
-    config.then(function (config) {
+    config.then(config => {
       onCompleted(option, config);
       return;
     });
   }
 };
 
-var _crRequestUrl = function _crRequestUrl(api, option, onFailed) {
+const _crRequestUrl = (api, option, onFailed) => {
   try {
     return api.getRequestUrl(option);
   } catch (error) {
-    (0, _onCatch["default"])({
-      error: error,
-      option: option,
-      onFailed: onFailed
+    (0, _onCatch.default)({
+      error,
+      option,
+      onFailed
     });
   }
 };
 
-var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, onFailed) {
-  var fnFetch = objImpl.fnFetch,
-      api = objImpl.api,
-      _ref3 = api || {},
-      getLimitRemaiming = _ref3.getLimitRemaiming,
-      optionFetch = _crOptionFetch(objImpl, option);
+const _loadToChartComp = function (objImpl, option, onCompleted, onFailed) {
+  const {
+    fnFetch,
+    api
+  } = objImpl,
+        {
+    getLimitRemaiming
+  } = api || {},
+        optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri: _crRequestUrl(api, option, onFailed),
-    option: option,
-    optionFetch: optionFetch,
-    getLimitRemaiming: getLimitRemaiming,
+    option,
+    optionFetch,
+    getLimitRemaiming,
     onCheckResponse: api.checkResponse,
     onFetch: _fetchToChartComp.bind(null, objImpl),
     onCompleted: onCompleted,
-    onCatch: _onCatch["default"],
-    onFailed: onFailed
+    onCatch: _onCatch.default,
+    onFailed
   });
 };
 
-var _isNotAllowToAdd = function _isNotAllowToAdd(_ref4, option) {
-  var toSeries = _ref4.toSeries,
-      isAdd = _ref4.isAdd;
+const _isNotAllowToAdd = (_ref3, option) => {
+  let {
+    toSeries,
+    isAdd
+  } = _ref3;
   return !_isFn(toSeries) || _isFn(isAdd) && !isAdd(option);
 };
 
-var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
-  var fnFetch = objImpl.fnFetch,
-      api = objImpl.api,
-      _ref5 = api || {},
-      getLimitRemaiming = _ref5.getLimitRemaiming,
-      optionFetch = _crOptionFetch(objImpl, option);
+const _loadToChart = function (objImpl, option, onAdded, onFailed) {
+  const {
+    fnFetch,
+    api
+  } = objImpl,
+        {
+    getLimitRemaiming
+  } = api || {},
+        optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri: _crRequestUrl(api, option, onFailed),
-    option: option,
-    optionFetch: optionFetch,
-    getLimitRemaiming: getLimitRemaiming,
+    option,
+    optionFetch,
+    getLimitRemaiming,
     onCheckResponse: api.checkResponse,
     onFetch: _fetchToChart.bind(null, objImpl),
     onCompleted: onAdded,
-    onCatch: _onCatch["default"],
-    onFailed: onFailed
+    onCatch: _onCatch.default,
+    onFailed
   });
 };
 
-var _fetchToChart = function _fetchToChart(objImpl, _ref6) {
-  var json = _ref6.json,
-      option = _ref6.option,
-      onCompleted = _ref6.onCompleted;
+const _fetchToChart = function (objImpl, _ref4) {
+  let {
+    json,
+    option,
+    onCompleted
+  } = _ref4;
 
-  var adapter = objImpl.adapter,
-      label = option.itemCaption,
-      value = option.value,
-      hasSecondYAxis = option.hasSecondYAxis,
-      chart = _ChartStore["default"].getActiveChart(),
-      series = adapter.toSeries(json, option, chart),
-      _ref7 = series || {},
-      itemCaption = _ref7.itemCaption,
-      color = _ref7.color,
-      zhColor = _ref7.zhColor;
+  const {
+    adapter
+  } = objImpl,
+        {
+    itemCaption: label,
+    value,
+    hasSecondYAxis
+  } = option,
+        chart = _ChartStore.default.getActiveChart(),
+        series = adapter.toSeries(json, option, chart),
+        {
+    itemCaption,
+    color,
+    zhColor
+  } = series || {};
 
-  _ChartFn["default"].addSeriaWithRenderLabel({
-    chart: chart,
-    series: series,
+  _ChartFn.default.addSeriaWithRenderLabel({
+    chart,
+    series,
     label: itemCaption || label || value,
     color: color || zhColor,
     hasSecondYAxis: !!hasSecondYAxis
@@ -138,17 +153,19 @@ var _fetchToChart = function _fetchToChart(objImpl, _ref6) {
   onCompleted(option);
 };
 
-var _isAddCategoryToSpline = function _isAddCategoryToSpline(_ref8) {
-  var seriaType = _ref8.seriaType;
+const _isAddCategoryToSpline = _ref5 => {
+  let {
+    seriaType
+  } = _ref5;
 
-  var chart = _ChartStore["default"].getActiveChart();
+  const chart = _ChartStore.default.getActiveChart();
 
-  return seriaType && _ChartTypes["default"].isCategory({
+  return seriaType && (0, _ChartOptionsFn.isCategoryItem)({
     value: seriaType
   }) && chart && _isArr(chart.xAxis) && !_isArr(chart.xAxis[0].categories);
 };
 
-var _runAsync = function _runAsync(fn, mls) {
+const _runAsync = function (fn, mls) {
   if (mls === void 0) {
     mls = 500;
   }
@@ -156,24 +173,22 @@ var _runAsync = function _runAsync(fn, mls) {
   setTimeout(fn, mls);
 };
 
-var _loadItem = function _loadItem(objImpl, option, onCompleted, onAdded, onFailed) {
-  var parentId = _ChartStore["default"].isLoadToChart();
+const _loadItem = function (objImpl, option, onCompleted, onAdded, onFailed) {
+  const parentId = _ChartStore.default.isLoadToChart();
 
   if (!parentId) {
     _loadToChartComp(objImpl, option, onCompleted, onFailed);
   } else {
     if (_isNotAllowToAdd(objImpl.adapter, option)) {
-      _runAsync(function () {
-        (0, _onCatch["default"])({
+      _runAsync(() => {
+        (0, _onCatch.default)({
           error: new Error("ERR_10"),
-          option: option,
-          onFailed: onFailed
+          option,
+          onFailed
         });
       });
     } else if (_isAddCategoryToSpline(option)) {
-      _runAsync(function () {
-        return onFailed(ALERT.CATEGORY_TO_SPLINE);
-      });
+      _runAsync(() => onFailed(ALERT_CATEGORY_TO_SPLINE));
     } else {
       option.parentId = parentId;
 
@@ -182,28 +197,28 @@ var _loadItem = function _loadItem(objImpl, option, onCompleted, onAdded, onFail
   }
 };
 
-var _crLoadFns = function _crLoadFns(objImpl) {
-  return objImpl.id === 'Q' ? {
-    fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
-    fnFetchToChart: _fetchToChart.bind(null, objImpl)
-  } : void 0;
-};
+const _crLoadFns = objImpl => objImpl.id === 'Q' ? {
+  fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
+  fnFetchToChart: _fetchToChart.bind(null, objImpl)
+} : void 0;
 
-var fLoadItem = function fLoadItem(objImpl) {
-  var _objImpl$fnFetch = objImpl.fnFetch,
-      fnFetch = _objImpl$fnFetch === void 0 ? _fnFetch.fetchJson : _objImpl$fnFetch,
-      api = objImpl.api,
-      adapter = objImpl.adapter,
-      _loadFns = _crLoadFns(objImpl);
+const fLoadItem = objImpl => {
+  const {
+    fnFetch = _fnFetch.fetchJson,
+    api,
+    adapter
+  } = objImpl,
+        _loadFns = _crLoadFns(objImpl);
 
   objImpl.fnFetch = fnFetch;
-  return (0, _extends2["default"])({
+  return {
     loadItem: _loadItem.bind(null, objImpl),
     addPropsTo: api.addPropsTo,
-    crKey: adapter.crKey
-  }, _loadFns);
+    crKey: adapter.crKey,
+    ..._loadFns
+  };
 };
 
 var _default = fLoadItem;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=loadItem.js.map

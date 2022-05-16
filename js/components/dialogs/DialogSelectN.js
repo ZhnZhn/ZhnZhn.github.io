@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _memoizeOne = _interopRequireDefault(require("memoize-one"));
 
-var _ChartTypes = _interopRequireDefault(require("./ChartTypes"));
+var _ChartOptionsFn = require("./ChartOptionsFn");
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
@@ -27,10 +27,6 @@ const {
 const DF_INIT_FROM_DATE = '2010-01-01';
 const DF_MAP_FREQUENCY = 'EMPTY';
 const TABLE_ID = 'table';
-const {
-  crChartOptions,
-  isCategory
-} = _ChartTypes.default;
 
 const _isRequireChartOptionsUpdate = (prevMapFrequency, nextMapFrequency) => prevMapFrequency !== nextMapFrequency && (prevMapFrequency === 'M' || nextMapFrequency === 'M');
 
@@ -152,7 +148,7 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
     };
 
     this._hSelectChartType = chartType => {
-      const _nextState = isCategory(chartType) ? {
+      const _nextState = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? {
         isShowDate: true,
         isShowFd: false
       } : {
@@ -188,7 +184,7 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
       } = this.state,
             _max = selectProps.length,
             msg = [];
-      let i = isCategory(chartType) ? 1 : 0;
+      let i = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? 1 : 0;
 
       for (; i < _max; i++) {
         if (!this._items[i]) {
@@ -213,7 +209,7 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
         seriaWidth
       } = colorComp ? colorComp.getConf() : {},
             date = this._getDate(),
-            _isCategory = isCategory(chartType),
+            _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
             items = [...this._items],
             _compFd = this._refFromDate.current,
             fromDate = _compFd && _compFd.isValid() ? _compFd.getValue() : '';
@@ -280,7 +276,7 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
     });
     this._refFromDate = /*#__PURE__*/(0, _react.createRef)();
     this._commandButtons = this._crCommandsWithLoad(this);
-    this._crChartOptionsMem = (0, _memoizeOne.default)(crChartOptions, _isEqualChartOptions);
+    this._crChartOptionsMem = (0, _memoizeOne.default)(_ChartOptionsFn.crChartOptions, _isEqualChartOptions);
     this._crDateConfigMem = (0, _memoizeOne.default)(crDateConfig);
     this.state = { ...this._isWithInitialState(),
       isOptions: false,
@@ -346,7 +342,7 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
       dateDefault,
       dateOptions
     } = this._crDateConfig(),
-          _isCategory = isCategory(chartType),
+          _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
           _isRowFd = isFd && !_isCategory,
           _noForDate = noForDate || !_isCategory;
 

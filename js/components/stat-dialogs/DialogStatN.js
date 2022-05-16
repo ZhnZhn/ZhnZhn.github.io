@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _has = _interopRequireDefault(require("../has"));
 
-var _ChartTypes = _interopRequireDefault(require("../dialogs/ChartTypes"));
+var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
 
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
@@ -52,10 +52,7 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
   width: '100%'
 };
 
-const {
-  isCategory
-} = _ChartTypes.default,
-      IS_SHOW_LABELS = _has.default.wideWidth(),
+const IS_SHOW_LABELS = _has.default.wideWidth(),
       _arePropsEqual = (prevProps, props) => prevProps.isShow === props.isShow;
 
 const _crDfC = (props, dim) => props.dfC || (dim || {}).value;
@@ -153,7 +150,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
       return msg;
     }
 
-    const _isCategory = isCategory(chartType),
+    const _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
           {
       dim
     } = chartType || {},
@@ -184,7 +181,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
   }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected]) //_refDim, _isDim
   ,
         _hSelectChartType = (0, _react.useCallback)(chartType => {
-    const _isShowDate = isCategory(chartType) ? (_refDate.current = null, true) : false;
+    const _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? (_refDate.current = null, true) : false;
 
     (0, _updateStateIf.default)(setIsRow, 'isShowDate', _isShowDate);
     (0, _updateStateIf.default)(setState, 'chartType', chartType);

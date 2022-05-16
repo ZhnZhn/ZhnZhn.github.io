@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _ChartTypes = _interopRequireDefault(require("../dialogs/ChartTypes"));
+var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
@@ -16,9 +16,6 @@ var _loadConfigs = _interopRequireDefault(require("./dimensions/loadConfigs"));
 var _usePreviousProps = _interopRequireDefault(require("./usePreviousProps"));
 
 const {
-  crOptions
-} = _ChartTypes.default,
-      {
   crDateConfig
 } = _DialogCell.default,
       MAP_FREQUENCY_DF = 'M',
@@ -27,14 +24,15 @@ const {
   value
 });
 
-const _loadDims = ({
-  dims,
-  proxy,
-  baseMeta,
-  loadId,
-  mapFrequency,
-  dfProps
-}, _setConfigs) => {
+const _loadDims = (_ref, _setConfigs) => {
+  let {
+    dims,
+    proxy,
+    baseMeta,
+    loadId,
+    mapFrequency,
+    dfProps
+  } = _ref;
   (0, _loadConfigs.default)({
     dims,
     proxy,
@@ -105,15 +103,17 @@ const useLoadDims = props => {
     configs: [],
     selectOptions: [],
     mapFrequency,
-    chartOptions: crOptions(props),
+    chartOptions: (0, _ChartOptionsFn.crDialogChartOptions)(props),
     dateOptions: []
   })),
-        _setConfigs = (0, _react.useCallback)(({
-    configs,
-    timeId,
-    mapFrequency: mF,
-    errMsg
-  }) => {
+        _setConfigs = (0, _react.useCallback)(_ref2 => {
+    let {
+      configs,
+      timeId,
+      mapFrequency: mF,
+      errMsg
+    } = _ref2;
+
     if (configs) {
       const _mF = mF || _mapFrequency,
             [dateOptions, dateDf] = _crDateOptions(configs, _mF, _mapDateDf);
@@ -128,7 +128,7 @@ const useLoadDims = props => {
         selectOptions: _crSelectOptions(configs),
         mapFrequency: _mF,
         dimOptions: _crDimOptions(configs),
-        chartOptions: crOptions({
+        chartOptions: (0, _ChartOptionsFn.crDialogChartOptions)({
           configs,
           chartsType,
           mapFrequency: _mF
