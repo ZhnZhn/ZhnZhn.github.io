@@ -8,17 +8,24 @@ import {
   crDatasetInfo
 } from './QuandlFn';
 
-import C from './C';
+import {
+  OPEN,
+  CLOSE,
+  LOW,
+  HIGH,
+  VOLUME,
+  COLOR_BLUE
+} from './C';
 import crAreaData from './crAreaData';
 
 const _assign = Object.assign;
-const _isMfi = names => names[2] === C.HIGH
-  && names[3] === C.LOW
-  && names[4] === C.CLOSE
-  && names[5] === C.VOLUME;
+const _isMfi = names => names[2] === HIGH
+  && names[3] === LOW
+  && names[4] === CLOSE
+  && names[5] === VOLUME;
 
-const _isMomAth = names => names[1] === C.OPEN
-  && names[4] === C.CLOSE;
+const _isMomAth = names => names[1] === OPEN
+  && names[4] === CLOSE;
 
 const _addSeriesTo = (
   config,
@@ -32,7 +39,7 @@ const _addSeriesTo = (
      legend.push({
         name: config.series[0].name,
         index: 0,
-        color: C.COLOR_BLUE,
+        color: COLOR_BLUE,
         isVisible : true
     });
   }

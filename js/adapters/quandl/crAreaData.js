@@ -21,7 +21,7 @@ var _pointFn = require("../pointFn");
 
 var _QuandlFn = require("./QuandlFn");
 
-var _C = _interopRequireDefault(require("./C"));
+var _C = require("./C");
 
 const {
   crLegendConfig
@@ -190,11 +190,11 @@ const _fnAddHighLow = function (optionIndex, result) {
     dataHighLow
   } = result,
         _closeValue = point[yPointIndex],
-        _openValue = _notNull2(point[open], _closeValue) ? point[open] : _C.default.UNKNOWN,
+        _openValue = _notNull2(point[open], _closeValue) ? point[open] : _C.UNKNOWN,
         _bHigh = _crBigDiff(point[high], _closeValue),
         _bLow = _crBigDiff(point[low], _closeValue),
-        _dayHigh = point[high] || _C.default.UNKNOWN,
-        _dayLow = point[low] || _C.default.UNKNOWN;
+        _dayHigh = point[high] || _C.UNKNOWN,
+        _dayLow = point[low] || _C.UNKNOWN;
 
   dataHighLow.push({
     x: dateUTC,
@@ -269,14 +269,14 @@ const _crPointFlow = function (json, option) {
   const yPointIndex = (0, _QuandlFn.getDataColumnIndex)(json, option),
         fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
         columnNames = (0, _QuandlFn.getColumnNames)(json),
-        open = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.OPEN),
-        _closeIndex = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.CLOSE),
-        close = !_isUndef(_closeIndex) ? _closeIndex : (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.PRICE),
-        low = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.LOW),
-        high = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.HIGH),
-        volume = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.VOLUME),
-        exDividend = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.EX_DIVIDEND),
-        splitRatio = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.SPLIT_RATIO),
+        open = (0, _QuandlFn.findColumnIndex)(columnNames, _C.OPEN),
+        _closeIndex = (0, _QuandlFn.findColumnIndex)(columnNames, _C.CLOSE),
+        close = !_isUndef(_closeIndex) ? _closeIndex : (0, _QuandlFn.findColumnIndex)(columnNames, _C.PRICE),
+        low = (0, _QuandlFn.findColumnIndex)(columnNames, _C.LOW),
+        high = (0, _QuandlFn.findColumnIndex)(columnNames, _C.HIGH),
+        volume = (0, _QuandlFn.findColumnIndex)(columnNames, _C.VOLUME),
+        exDividend = (0, _QuandlFn.findColumnIndex)(columnNames, _C.EX_DIVIDEND),
+        splitRatio = (0, _QuandlFn.findColumnIndex)(columnNames, _C.SPLIT_RATIO),
         result = {
     yPointIndex,
     minY: Number.POSITIVE_INFINITY,

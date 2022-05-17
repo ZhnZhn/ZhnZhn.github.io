@@ -13,15 +13,15 @@ var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"
 
 var _QuandlFn = require("./QuandlFn");
 
-var _C = _interopRequireDefault(require("./C"));
+var _C = require("./C");
 
 var _crAreaData = _interopRequireDefault(require("./crAreaData"));
 
 const _assign = Object.assign;
 
-const _isMfi = names => names[2] === _C.default.HIGH && names[3] === _C.default.LOW && names[4] === _C.default.CLOSE && names[5] === _C.default.VOLUME;
+const _isMfi = names => names[2] === _C.HIGH && names[3] === _C.LOW && names[4] === _C.CLOSE && names[5] === _C.VOLUME;
 
-const _isMomAth = names => names[1] === _C.default.OPEN && names[4] === _C.default.CLOSE;
+const _isMomAth = names => names[1] === _C.OPEN && names[4] === _C.CLOSE;
 
 const _addSeriesTo = (config, legendSeries) => {
   if (!legendSeries) {
@@ -34,7 +34,7 @@ const _addSeriesTo = (config, legendSeries) => {
     legend.push({
       name: config.series[0].name,
       index: 0,
-      color: _C.default.COLOR_BLUE,
+      color: _C.COLOR_BLUE,
       isVisible: true
     });
   }

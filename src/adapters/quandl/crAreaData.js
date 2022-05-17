@@ -17,7 +17,17 @@ import {
   getDataColumnIndex,
   findColumnIndex
 } from './QuandlFn';
-import C from './C';
+import {
+  OPEN,
+  HIGH,
+  LOW,
+  CLOSE,
+  PRICE,
+  VOLUME,
+  EX_DIVIDEND,
+  SPLIT_RATIO,
+  UNKNOWN
+} from './C';
 
 const { crLegendConfig } = ChartLegend
 , _assign = Object.assign
@@ -126,11 +136,11 @@ const _fnAddHighLow = function(optionIndex, result){
   , _closeValue = point[yPointIndex]
   , _openValue = _notNull2(point[open], _closeValue)
        ? point[open]
-       : C.UNKNOWN
+       : UNKNOWN
   , _bHigh = _crBigDiff(point[high], _closeValue)
   , _bLow = _crBigDiff(point[low], _closeValue)
-  , _dayHigh = point[high] || C.UNKNOWN
-  , _dayLow = point[low] || C.UNKNOWN;
+  , _dayHigh = point[high] || UNKNOWN
+  , _dayLow = point[low] || UNKNOWN;
 
   dataHighLow.push({
     x : dateUTC,
@@ -188,16 +198,16 @@ const _crPointFlow = function(json, option){
   , fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria]
   , columnNames = getColumnNames(json)
 
-  , open = findColumnIndex(columnNames, C.OPEN)
-  , _closeIndex = findColumnIndex(columnNames, C.CLOSE)
+  , open = findColumnIndex(columnNames, OPEN)
+  , _closeIndex = findColumnIndex(columnNames, CLOSE)
   , close = !_isUndef(_closeIndex)
       ? _closeIndex
-      : findColumnIndex(columnNames, C.PRICE)
-  , low = findColumnIndex(columnNames, C.LOW)
-  , high = findColumnIndex(columnNames, C.HIGH)
-  , volume = findColumnIndex(columnNames, C.VOLUME)
-  , exDividend = findColumnIndex(columnNames, C.EX_DIVIDEND)
-  , splitRatio = findColumnIndex(columnNames, C.SPLIT_RATIO)
+      : findColumnIndex(columnNames, PRICE)
+  , low = findColumnIndex(columnNames, LOW)
+  , high = findColumnIndex(columnNames, HIGH)
+  , volume = findColumnIndex(columnNames, VOLUME)
+  , exDividend = findColumnIndex(columnNames, EX_DIVIDEND)
+  , splitRatio = findColumnIndex(columnNames, SPLIT_RATIO)
 
   , result = {
      yPointIndex,
