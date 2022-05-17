@@ -1,4 +1,3 @@
-
 import Big from 'big.js';
 
 import { compareByY } from '../compareByFn';
@@ -8,17 +7,16 @@ import formatAllNumber from '../../utils/formatAllNumber';
 import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
-import QuandlFn from './QuandlFn';
+import {
+  setTitleToConfig,
+  crDatasetInfo,
+  crPercent
+} from './QuandlFn';
 import fnStacked from './fnStacked';
 
 const { crValueMoving, crZhConfig } = fnStacked;
 
 const _assign = Object.assign
-, {
-   setTitleToConfig,
-   createDatasetInfo,
-   createPercent
-  }  = QuandlFn
 , {
     crPieConfig,
     crInnerPieSeria,
@@ -26,12 +24,17 @@ const _assign = Object.assign
   } = ChartConfig
 , { HEIGHT, LEGEND_ROW_HEIGHT } = Chart;
 
-const _calcLegendHeight = (length) => length !== 0
+const _calcLegendHeight = (
+  length
+) => length !== 0
   ? HEIGHT + LEGEND_ROW_HEIGHT*(Math.ceil(length / 4) - 1)
   : HEIGHT;
 
-const _addPercentToItem = (item, bTotal) => {
-  const _bPercent = createPercent({
+const _addPercentToItem = (
+  item,
+  bTotal
+) => {
+  const _bPercent = crPercent({
     bValue: Big(item.y),
     bTotal: bTotal
   });
@@ -64,7 +67,7 @@ const _createTopDonutData = ({
   if (!bArrTotal.eq(bTotal)) {
     bArrTotal = bTotal.minus(bArrTotal);
     arr.push({
-      name: 'Other ' + createPercent({ bValue: bArrTotal, bTotal: bTotal}),
+      name: 'Other ' + crPercent({ bValue: bArrTotal, bTotal: bTotal}),
       nameFull: 'Other',
       color: 'gray',
       y: parseFloat(bArrTotal)
@@ -79,13 +82,11 @@ const _crYear = yearStr =>  yearStr
 const _sortData = data => data
  .sort(compareByY).reverse();
 
-const toSemiDonut = function(json, option){
+const toSemiDonut = (json, option) => {
    const config = crPieConfig()
    , {sliceItems:items=[], value=''} = option
    , id = `${value}_${CHT_SEMI_DONUT}`
-   , jsonData = json.dataset.data
-   , jsonData1 = jsonData[0]
-   , jsonData2 = jsonData[1]
+   , [jsonData1, jsonData2] = json.dataset.data
    , _year1 = _crYear(jsonData1[0])
    , _year2 = _crYear(jsonData2[0])
    , _data1 = []
@@ -151,7 +152,7 @@ const toSemiDonut = function(json, option){
      },
      valueMoving: crValueMoving(_bTotal1, _year1, _bTotal2, _year2),
      zhConfig: crZhConfig(option, id),
-     info: createDatasetInfo(json)
+     info: crDatasetInfo(json)
    })
 
    return { config };

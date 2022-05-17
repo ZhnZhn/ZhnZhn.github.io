@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 
@@ -11,77 +11,77 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _StackedFn = require("./StackedFn");
 
-var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
+var _QuandlFn = require("./QuandlFn");
 
-var _assign = Object.assign,
-    crStackedAreaConfig = _ChartConfig["default"].crStackedAreaConfig,
-    crStackedColumnConfig = _ChartConfig["default"].crStackedColumnConfig,
-    setTitleToConfig = _QuandlFn["default"].setTitleToConfig,
-    createZhConfig = _QuandlFn["default"].createZhConfig,
-    createValueMoving = _QuandlFn["default"].createValueMoving,
-    createDatasetInfo = _QuandlFn["default"].createDatasetInfo;
+const _assign = Object.assign,
+      {
+  crStackedAreaConfig,
+  crStackedColumnConfig
+} = _ChartConfig.default;
 
-var _setCaption = function _setCaption(config, option, stacking) {
-  var PERCENT = stacking === 'percent' ? ':PERCENT' : '';
+const _setCaption = (config, option, stacking) => {
+  const PERCENT = stacking === 'percent' ? ':PERCENT' : '';
   option.title = "" + option.title + PERCENT;
-  setTitleToConfig(config, option);
+  (0, _QuandlFn.setTitleToConfig)(config, option);
 };
 
-var fnStacked = {
-  crZhConfig: function crZhConfig(option, id) {
-    return _assign(createZhConfig(option), {
-      id: id,
-      isWithoutIndicator: true
-    });
-  },
-  crValueMoving: function crValueMoving(bNowTotal, date, bPrevTotal, dateTo) {
-    return _assign(createValueMoving({
-      bNowValue: bNowTotal,
-      bPrevValue: bPrevTotal
-    }), {
-      date: date,
-      dateTo: dateTo.split('-')[0],
-      valueTo: (0, _formatAllNumber["default"])(bPrevTotal),
-      isDenyToChange: true
-    });
-  },
-  crConfigOption: function crConfigOption(_ref, json, option) {
-    var bNowTotal = _ref.bNowTotal,
-        date = _ref.date,
-        bPrevTotal = _ref.bPrevTotal,
-        dateTo = _ref.dateTo,
-        series = _ref.series;
-    var _option$value = option.value,
-        value = _option$value === void 0 ? '' : _option$value,
-        seriaType = option.seriaType,
-        id = value + "_" + seriaType;
+const fnStacked = {
+  crZhConfig: (option, id) => _assign((0, _QuandlFn.crZhConfig)(option), {
+    id,
+    isWithoutIndicator: true
+  }),
+  crValueMoving: (bNowTotal, date, bPrevTotal, dateTo) => _assign((0, _QuandlFn.crValueMoving)({
+    bNowValue: bNowTotal,
+    bPrevValue: bPrevTotal
+  }), {
+    date: date,
+    dateTo: dateTo.split('-')[0],
+    valueTo: (0, _formatAllNumber.default)(bPrevTotal),
+    isDenyToChange: true
+  }),
+  crConfigOption: (_ref, json, option) => {
+    let {
+      bNowTotal,
+      date,
+      bPrevTotal,
+      dateTo,
+      series
+    } = _ref;
+    const {
+      value = '',
+      seriaType
+    } = option,
+          id = value + "_" + seriaType;
     return {
       series: series,
       valueMoving: fnStacked.crValueMoving(bNowTotal, date, bPrevTotal, dateTo),
       zhConfig: fnStacked.crZhConfig(option, id),
-      info: createDatasetInfo(json)
+      info: (0, _QuandlFn.crDatasetInfo)(json)
     };
   },
-  crConfig: function crConfig(_ref2) {
-    var type = _ref2.type,
-        percentType = _ref2.percentType,
-        json = _ref2.json,
-        option = _ref2.option;
-    var jsonData = json.dataset.data,
-        _option$sliceItems = option.sliceItems,
-        items100 = _option$sliceItems === void 0 ? [] : _option$sliceItems,
-        chartType = option.seriaType,
-        stacking = chartType === percentType ? 'percent' : 'normal',
-        stackedOption = (0, _StackedFn.fnCreateStackedConfig)({
-      jsonData: jsonData,
-      items100: items100,
-      chartType: chartType,
-      stacking: stacking
+  crConfig: _ref2 => {
+    let {
+      type,
+      percentType,
+      json,
+      option
+    } = _ref2;
+    const jsonData = json.dataset.data,
+          {
+      sliceItems: items100 = [],
+      seriaType: chartType
+    } = option,
+          stacking = chartType === percentType ? 'percent' : 'normal',
+          stackedOption = (0, _StackedFn.crStackedConfig)({
+      jsonData,
+      items100,
+      chartType,
+      stacking
     }),
-        crConfig = type === 'column' ? crStackedColumnConfig : crStackedAreaConfig,
-        config = crConfig({
+          crConfig = type === 'column' ? crStackedColumnConfig : crStackedAreaConfig,
+          config = crConfig({
       categories: stackedOption.categories,
-      stacking: stacking
+      stacking
     });
 
     _setCaption(config, option, stacking);
@@ -89,10 +89,10 @@ var fnStacked = {
     _assign(config, fnStacked.crConfigOption(stackedOption, json, option));
 
     return {
-      config: config
+      config
     };
   }
 };
 var _default = fnStacked;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fnStacked.js.map

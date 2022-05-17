@@ -10,18 +10,17 @@ import {
   crVolumePoint,
   crAthPoint
 } from '../pointFn';
-import QuandlFn from './QuandlFn';
-import C from './C';
-
-const { crLegendConfig } = ChartLegend;
-const {
+import {
+  isPrevDateAfter,
   getData,
   getColumnNames,
   getDataColumnIndex,
   findColumnIndex
-} = QuandlFn;
+} from './QuandlFn';
+import C from './C';
 
-const _assign = Object.assign
+const { crLegendConfig } = ChartLegend
+, _assign = Object.assign
 , _isUndef = v => typeof v === 'undefined'
 , _notNull2 = (a, b) => a !== null && b !== null
 , _isNumber = n => typeof n === 'number' && n-n === 0;
@@ -73,7 +72,7 @@ const _fnAddExDividend = function(exDividendIndex, result){
                 ChartConfig.crMarkerExDividend(),
                 { x, exValue, price }
              );
-       if (!QuandlFn.isPrevDateAfter(dataExDividend, x , 14)) {
+       if (!isPrevDateAfter(dataExDividend, x , 14)) {
          marker.dataLabels.y = 0;
        }
        dataExDividend.push(marker);

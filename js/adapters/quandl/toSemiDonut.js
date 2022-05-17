@@ -17,7 +17,7 @@ var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
+var _QuandlFn = require("./QuandlFn");
 
 var _fnStacked = _interopRequireDefault(require("./fnStacked"));
 
@@ -26,11 +26,6 @@ const {
   crZhConfig
 } = _fnStacked.default;
 const _assign = Object.assign,
-      {
-  setTitleToConfig,
-  createDatasetInfo,
-  createPercent
-} = _QuandlFn.default,
       {
   crPieConfig,
   crInnerPieSeria,
@@ -44,7 +39,7 @@ const _assign = Object.assign,
 const _calcLegendHeight = length => length !== 0 ? HEIGHT + LEGEND_ROW_HEIGHT * (Math.ceil(length / 4) - 1) : HEIGHT;
 
 const _addPercentToItem = (item, bTotal) => {
-  const _bPercent = createPercent({
+  const _bPercent = (0, _QuandlFn.crPercent)({
     bValue: (0, _big.default)(item.y),
     bTotal: bTotal
   });
@@ -85,7 +80,7 @@ const _createTopDonutData = _ref => {
   if (!bArrTotal.eq(bTotal)) {
     bArrTotal = bTotal.minus(bArrTotal);
     arr.push({
-      name: 'Other ' + createPercent({
+      name: 'Other ' + (0, _QuandlFn.crPercent)({
         bValue: bArrTotal,
         bTotal: bTotal
       }),
@@ -102,16 +97,14 @@ const _crYear = yearStr => yearStr ? yearStr.split('-')[0] : '';
 
 const _sortData = data => data.sort(_compareByFn.compareByY).reverse();
 
-const toSemiDonut = function (json, option) {
+const toSemiDonut = (json, option) => {
   const config = crPieConfig(),
         {
     sliceItems: items = [],
     value = ''
   } = option,
         id = value + "_" + _ChartType.CHT_SEMI_DONUT,
-        jsonData = json.dataset.data,
-        jsonData1 = jsonData[0],
-        jsonData2 = jsonData[1],
+        [jsonData1, jsonData2] = json.dataset.data,
         _year1 = _crYear(jsonData1[0]),
         _year2 = _crYear(jsonData2[0]),
         _data1 = [],
@@ -176,7 +169,7 @@ const toSemiDonut = function (json, option) {
     center: ['70%', '80%'],
     data: _dataTop2
   })];
-  setTitleToConfig(config, option);
+  (0, _QuandlFn.setTitleToConfig)(config, option);
 
   _assign(config, {
     chart: {
@@ -184,7 +177,7 @@ const toSemiDonut = function (json, option) {
     },
     valueMoving: crValueMoving(_bTotal1, _year1, _bTotal2, _year2),
     zhConfig: crZhConfig(option, id),
-    info: createDatasetInfo(json)
+    info: (0, _QuandlFn.crDatasetInfo)(json)
   });
 
   return {

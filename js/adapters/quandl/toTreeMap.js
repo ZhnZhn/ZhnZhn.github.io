@@ -17,7 +17,7 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _StackedFn = require("./StackedFn");
 
-var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
+var _QuandlFn = require("./QuandlFn");
 
 var _fnStacked = _interopRequireDefault(require("./fnStacked"));
 
@@ -26,11 +26,6 @@ const _assign = Object.assign,
   crValueMoving,
   crZhConfig
 } = _fnStacked.default,
-      {
-  createPercent,
-  setTitleToConfig,
-  createDatasetInfo
-} = _QuandlFn.default,
       {
   COLOR_PERIOD,
   COLOR_BASE1,
@@ -43,7 +38,7 @@ const _assign = Object.assign,
   crTreeMapSeria
 } = _ChartConfig.default;
 
-const _crYearTotals = (jsonData, items) => jsonData.map(year => (0, _StackedFn.fnCalcTotal)(year, items));
+const _crYearTotals = (jsonData, items) => jsonData.map(year => (0, _StackedFn.calcTotal)(year, items));
 
 const _crDataAndTotal = function (jsonData, items, bYearTotals) {
   if (jsonData === void 0) {
@@ -74,7 +69,7 @@ const _crDataAndTotal = function (jsonData, items, bYearTotals) {
       const {
         sparkvalues,
         sparkpercent
-      } = (0, _StackedFn.fnCreateSparkData)(jsonData, value, bYearTotals);
+      } = (0, _StackedFn.crSparkData)(jsonData, value, bYearTotals);
       data.push({
         sparkvalues: sparkvalues.reverse(),
         sparkpercent: sparkpercent.reverse(),
@@ -102,7 +97,7 @@ const _calcLevelAndSetPercent = (data, bTotal) => {
       value,
       name
     } = point,
-          percent = createPercent({
+          percent = (0, _QuandlFn.crPercent)({
       bValue: (0, _big.default)(value),
       bTotal: bTotal
     }).toString();
@@ -150,7 +145,7 @@ const _setColorToPoint = (data, level60, level90) => {
   });
 };
 
-const toTreeMap = function (json, option) {
+const toTreeMap = (json, option) => {
   const config = crTreeMapConfig(),
         {
     sliceItems: items100 = [],
@@ -167,20 +162,20 @@ const toTreeMap = function (json, option) {
     level60,
     level90
   } = _calcLevelAndSetPercent(data, bTotal),
-        bPrevTotal = (0, _StackedFn.fnCalcTotal)(jsonData[1], items100),
+        bPrevTotal = (0, _StackedFn.calcTotal)(jsonData[1], items100),
         dateTo = jsonData[1][0] ? jsonData[1][0] : '';
 
   _setColorToPoint(data, level60, level90);
 
   const yearTitle = jsonData[0] && jsonData[0][0] ? jsonData[0][0].split('-')[0] : '';
   option.title = yearTitle + ":" + option.title;
-  setTitleToConfig(config, option);
+  (0, _QuandlFn.setTitleToConfig)(config, option);
 
   _assign(config, {
     series: [crTreeMapSeria(data)],
     valueMoving: crValueMoving(bTotal, yearTitle, bPrevTotal, dateTo),
     zhConfig: crZhConfig(option, id),
-    info: createDatasetInfo(json)
+    info: (0, _QuandlFn.crDatasetInfo)(json)
   });
 
   return {

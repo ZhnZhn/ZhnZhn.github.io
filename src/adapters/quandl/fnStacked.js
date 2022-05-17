@@ -1,22 +1,26 @@
 import formatAllNumber from '../../utils/formatAllNumber';
 import ChartConfig from '../../charts/ChartConfig';
 
-import { fnCreateStackedConfig } from './StackedFn';
-import QuandlFn from './QuandlFn';
+import { crStackedConfig } from './StackedFn';
+import {
+  setTitleToConfig,
+  crZhConfig,
+  crValueMoving,
+  crDatasetInfo
+} from './QuandlFn';
 
 const _assign = Object.assign
 , {
-    crStackedAreaConfig,
-    crStackedColumnConfig
-  } = ChartConfig
-, {
-  setTitleToConfig,
-  createZhConfig,
-  createValueMoving,
-  createDatasetInfo
-} = QuandlFn
+  crStackedAreaConfig,
+  crStackedColumnConfig
+} = ChartConfig;
 
-const _setCaption = (config, option, stacking) => {
+
+const _setCaption = (
+  config,
+  option,
+  stacking
+) => {
   const PERCENT = stacking === 'percent'
      ? ':PERCENT' : ''
   option.title = `${option.title}${PERCENT}`
@@ -25,12 +29,12 @@ const _setCaption = (config, option, stacking) => {
 
 const fnStacked = {
   crZhConfig: (option, id) => _assign(
-    createZhConfig(option), {
+    crZhConfig(option), {
        id, isWithoutIndicator: true
     }
   ),
   crValueMoving: (bNowTotal, date, bPrevTotal, dateTo) => _assign(
-    createValueMoving({
+    crValueMoving({
       bNowValue: bNowTotal,
       bPrevValue: bPrevTotal
     }),{
@@ -50,7 +54,7 @@ const fnStacked = {
         series: series,
         valueMoving: fnStacked.crValueMoving(bNowTotal, date, bPrevTotal, dateTo),
         zhConfig: fnStacked.crZhConfig(option, id),
-        info: createDatasetInfo(json)
+        info: crDatasetInfo(json)
     };
   },
 
@@ -59,7 +63,7 @@ const fnStacked = {
     , { sliceItems:items100=[], seriaType:chartType } = option
     , stacking = chartType === percentType
         ? 'percent' : 'normal'
-    , stackedOption = fnCreateStackedConfig({ jsonData, items100, chartType, stacking })
+    , stackedOption = crStackedConfig({ jsonData, items100, chartType, stacking })
     , crConfig = type === 'column'
          ? crStackedColumnConfig
          : crStackedAreaConfig

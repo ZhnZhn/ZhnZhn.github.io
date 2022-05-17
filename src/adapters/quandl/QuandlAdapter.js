@@ -15,7 +15,10 @@ import ChartConfig from '../../charts/ChartConfig';
 
 import { ymdToUTC, findMinY } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
-import QuandlFn from './QuandlFn';
+import {
+    getData,
+    getDataColumnIndex
+} from './QuandlFn';
 
 import toArea from './toArea';
 import toSemiDonut from './toSemiDonut';
@@ -24,11 +27,6 @@ import toStackedColumn from './toStackedColumn';
 import toTreeMap from './toTreeMap';
 import toYearly from '../toYearsByMonths';
 import toScatter from './toScatter';
-
-const {
-  getData,
-  getDataColumnIndex
-} = QuandlFn;
 
 const _fToConfig = builder => (json, option) => {
   const data = getData(json);

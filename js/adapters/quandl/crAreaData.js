@@ -19,21 +19,14 @@ var _compareByFn = require("../compareByFn");
 
 var _pointFn = require("../pointFn");
 
-var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
+var _QuandlFn = require("./QuandlFn");
 
 var _C = _interopRequireDefault(require("./C"));
 
 const {
   crLegendConfig
-} = _ChartLegend.default;
-const {
-  getData,
-  getColumnNames,
-  getDataColumnIndex,
-  findColumnIndex
-} = _QuandlFn.default;
-
-const _assign = Object.assign,
+} = _ChartLegend.default,
+      _assign = Object.assign,
       _isUndef = v => typeof v === 'undefined',
       _notNull2 = (a, b) => a !== null && b !== null,
       _isNumber = n => typeof n === 'number' && n - n === 0;
@@ -118,7 +111,7 @@ const _fnAddExDividend = function (exDividendIndex, result) {
       price
     });
 
-    if (!_QuandlFn.default.isPrevDateAfter(dataExDividend, x, 14)) {
+    if (!(0, _QuandlFn.isPrevDateAfter)(dataExDividend, x, 14)) {
       marker.dataLabels.y = 0;
     }
 
@@ -247,7 +240,7 @@ const _crLegendConfig = function (seriaColumnNames, columnNames) {
 
     for (; i < max; i++) {
       const columnName = seriaColumnNames[i],
-            columnIndex = findColumnIndex(columnNames, columnName);
+            columnIndex = (0, _QuandlFn.findColumnIndex)(columnNames, columnName);
 
       if (columnIndex) {
         legendSeries.push(crLegendConfig(columnName));
@@ -273,17 +266,17 @@ const _isTransform = _ref => {
 };
 
 const _crPointFlow = function (json, option) {
-  const yPointIndex = getDataColumnIndex(json, option),
+  const yPointIndex = (0, _QuandlFn.getDataColumnIndex)(json, option),
         fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
-        columnNames = getColumnNames(json),
-        open = findColumnIndex(columnNames, _C.default.OPEN),
-        _closeIndex = findColumnIndex(columnNames, _C.default.CLOSE),
-        close = !_isUndef(_closeIndex) ? _closeIndex : findColumnIndex(columnNames, _C.default.PRICE),
-        low = findColumnIndex(columnNames, _C.default.LOW),
-        high = findColumnIndex(columnNames, _C.default.HIGH),
-        volume = findColumnIndex(columnNames, _C.default.VOLUME),
-        exDividend = findColumnIndex(columnNames, _C.default.EX_DIVIDEND),
-        splitRatio = findColumnIndex(columnNames, _C.default.SPLIT_RATIO),
+        columnNames = (0, _QuandlFn.getColumnNames)(json),
+        open = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.OPEN),
+        _closeIndex = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.CLOSE),
+        close = !_isUndef(_closeIndex) ? _closeIndex : (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.PRICE),
+        low = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.LOW),
+        high = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.HIGH),
+        volume = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.VOLUME),
+        exDividend = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.EX_DIVIDEND),
+        splitRatio = (0, _QuandlFn.findColumnIndex)(columnNames, _C.default.SPLIT_RATIO),
         result = {
     yPointIndex,
     minY: Number.POSITIVE_INFINITY,
@@ -352,7 +345,7 @@ const _crPointFlow = function (json, option) {
 
 const crAreaData = function (json, option) {
   const [callPointFlow, result] = _crPointFlow(json, option),
-        points = getData(json).sort(_compareByFn.compareByDate);
+        points = (0, _QuandlFn.getData)(json).sort(_compareByFn.compareByDate);
 
   let i = 0,
       _max = points.length;

@@ -13,7 +13,7 @@ var _AdapterFn = require("../AdapterFn");
 
 var _compareByFn = require("../compareByFn");
 
-var _QuandlFn = _interopRequireDefault(require("./QuandlFn"));
+var _QuandlFn = require("./QuandlFn");
 
 var _toArea = _interopRequireDefault(require("./toArea"));
 
@@ -29,20 +29,15 @@ var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 
 var _toScatter = _interopRequireDefault(require("./toScatter"));
 
-const {
-  getData,
-  getDataColumnIndex
-} = _QuandlFn.default;
-
 const _fToConfig = builder => (json, option) => {
-  const data = getData(json);
+  const data = (0, _QuandlFn.getData)(json);
   return {
     config: builder.toConfig(data, option)
   };
 };
 
 const _fToSeria = builder => (json, option, chart) => {
-  const data = getData(json);
+  const data = (0, _QuandlFn.getData)(json);
   return builder.toSeria(data, option, chart);
 };
 
@@ -68,8 +63,8 @@ const _toSeria = (json, option) => {
   const {
     value: chartId
   } = option,
-        yPointIndex = getDataColumnIndex(json, option),
-        data = _crSeriaData(getData(json), yPointIndex);
+        yPointIndex = (0, _QuandlFn.getDataColumnIndex)(json, option),
+        data = _crSeriaData((0, _QuandlFn.getData)(json), yPointIndex);
 
   return _ChartConfig.default.crSeria({
     name: chartId.substring(0, 12),

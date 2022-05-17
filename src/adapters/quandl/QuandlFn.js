@@ -1,14 +1,14 @@
+export { valueMoving } from '../AdapterFn';
+
 import Big from 'big.js';
 
 import formatAllNumber from '../../utils/formatAllNumber'
 import {
   calcPercent,
-  crValueMoving
+  crValueMoving as crVm
 } from '../../math/mathFn';
 
 import { mlsToDmy } from '../../utils/DateUtils';
-
-import { valueMoving } from '../AdapterFn';
 
 const _isArr = Array.isArray;
 const _isStr = str => typeof str === 'string';
@@ -28,138 +28,155 @@ const _isStrEqTo = (str, strTo) => _isStr(str)
      ? `${database_code}/${dataset_code}`
      : void 0;
 
-const QuandlFn = {
-  valueMoving,
+export const getData = ({
+  dataset,
+  datatable
+}) => (dataset || {}).data
+  || (datatable || {}).data
+  || [];
 
-  getData: (json) => {
-    const { dataset={}, datatable={} } = json;
-    return dataset.data || datatable.data || [];
-  },
+export const getColumnNames = ({
+  dataset,
+  datatable
+}) => dataset
+ ? dataset.column_names || []
+ : datatable && _isArr(datatable.columns)
+     ? datatable.columns.map(c => c.name)
+     : []
 
-  getColumnNames: (json) => {
-    const { dataset, datatable } = json;
-    if (dataset) {
-      return dataset.column_names || [];
-    }
-    if (datatable && _isArr(datatable.columns)) {
-      return datatable.columns.map(c => c.name);
-    }
-    return [];
-  },
-
-  isPrevDateAfter(arr, checkedDate, predicate){
-     const length = arr.length;
-     if (length === 0){
-       return true;
-     }
-     const prevDate = arr[length-1].x;
-     if (Math.abs((checkedDate.valueOf()-prevDate.valueOf())/(24*60*60*1000)) < predicate){
-       return false;
-     } else {
-       return true;
-     }
-  },
-
-  createDatasetInfo({ dataset }){
-     const {
-       name,
-       description,
-       newest_available_date,
-       oldest_available_date,
-       frequency,
-       database_code,
-       dataset_code
-     } = dataset || {}
-     , linkId = _crLinkId(database_code, dataset_code);
-
-     return  {
-       name,
-       toDate: newest_available_date,
-       fromDate: oldest_available_date,
-       frequency,
-       linkId,
-       description
-    };
-  },
-
-  createZhConfig(option){
-    const {
-            item, title, subtitle='',
-            value:id, key, columnName, dataColumn,
-            fromDate, seriaColumnNames,
-            linkFn, dataSource
-          } = option
-        , _dataSource = dataSource
-             ? `Quandl: ${dataSource}`
-             : 'Quandl'
-        , _itemCaption = _crItemCaption(option);
-    return {
-      item,
-      title, subtitle,
-      id, key,
-      linkFn,
-      itemConf: {
-        _itemKey: id,
-        columnName, dataColumn,
-        fromDate, seriaColumnNames
-      },
-      itemCaption: _itemCaption,
-      dataSource: _dataSource
-    };
-  },
-
-  createPercent: calcPercent,
-
-  createValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0') }){
-    return crValueMoving({
-      nowValue: bNowValue,
-      prevValue: bPrevValue,
-      fnFormat: formatAllNumber
-    });
-  },
-
-  getRecentDate(seria=[], json){
-     const len = seria.length
-         , { dataset={} } = json
-         , { frequency='' } = dataset
-         , mlsUTC = (len>0 && seria[len-1][0] && _isNumber(seria[len-1][0]) )
-              ? seria[len-1][0]
-              : '';
-      return mlsUTC
-         ? frequency.toLowerCase() === 'annual'
-              ? new Date(mlsUTC).getUTCFullYear()
-              : mlsToDmy(mlsUTC)
-         : '';
-  },
-
-  setTitleToConfig(config, option){
-    const { title, subtitle } = option || {};
-    config.title.text = title || '';
-    config.subtitle.text = subtitle ? `${subtitle}:` : '';
-  },
-
-  findColumnIndex(obj, columnName=''){
-     const column_names = _isArr(obj)
-       ? obj
-       : QuandlFn.getColumnNames(obj)
-     , _columnName = columnName.toLowerCase();
-
-     if ( _columnName && column_names ) {
-      for (let i=0, max=column_names.length; i<max; i++){
-       if ( _isStrEqTo(column_names[i], _columnName) ) {
-         return i;
-       }
-      }
-     }
-     return void 0;
-  },
-
-  getDataColumnIndex(json, option){
-    const { columnName, dataColumn } = option
-    , _dataColumn = QuandlFn.findColumnIndex(json, columnName);
-    return _dataColumn || dataColumn || 1;
+export const isPrevDateAfter = (
+  arr,
+  checkedDate,
+  predicate
+) => {
+  const length = arr.length;
+  if (length === 0){
+   return true;
   }
+  const prevDate = arr[length-1].x;
+  return !(Math.abs((checkedDate.valueOf()-prevDate.valueOf())/(24*60*60*1000)) < predicate)
+}
 
-};
+export const crDatasetInfo = ({
+  dataset
+}) => {
+    const {
+     name,
+     description,
+     newest_available_date,
+     oldest_available_date,
+     frequency,
+     database_code,
+     dataset_code
+    } = dataset || {}
+    , linkId = _crLinkId(database_code, dataset_code);
 
-export default QuandlFn
+    return {
+     name,
+     toDate: newest_available_date,
+     fromDate: oldest_available_date,
+     frequency,
+     linkId,
+     description
+  };
+}
+
+export const crZhConfig = (option) => {
+  const {
+    item,
+    title,
+    subtitle='',
+    value:id,
+    key,
+    columnName,
+    dataColumn,
+    fromDate,
+    seriaColumnNames,
+    linkFn,
+    dataSource
+  } = option
+  , _dataSource = dataSource
+       ? `Quandl: ${dataSource}`
+       : 'Quandl'
+  , _itemCaption = _crItemCaption(option);
+  return {
+    item,
+    title,
+    subtitle,
+    id,
+    key,
+    linkFn,
+    itemConf: {
+      _itemKey: id,
+      columnName, dataColumn,
+      fromDate, seriaColumnNames
+    },
+    itemCaption: _itemCaption,
+    dataSource: _dataSource
+  };
+}
+
+export const crPercent = calcPercent
+
+export const crValueMoving = ({
+   bNowValue=Big('0.0'),
+   bPrevValue=Big('0.0')
+ }) => crVm({
+  nowValue: bNowValue,
+  prevValue: bPrevValue,
+  fnFormat: formatAllNumber
+})
+
+export const getRecentDate = (
+  seria=[],
+  json
+) => {
+  const len = seria.length
+  , { dataset={} } = json
+  , { frequency='' } = dataset
+  , mlsUTC = (len>0 && seria[len-1][0] && _isNumber(seria[len-1][0]) )
+      ? seria[len-1][0]
+      : '';
+  return mlsUTC
+    ? frequency.toLowerCase() === 'annual'
+        ? new Date(mlsUTC).getUTCFullYear()
+        : mlsToDmy(mlsUTC)
+    : '';
+}
+
+export const setTitleToConfig = (
+  config,
+  option
+) => {
+  const { title, subtitle } = option || {};
+  config.title.text = title || '';
+  config.subtitle.text = subtitle ? `${subtitle}:` : '';
+}
+
+export const findColumnIndex = (
+  obj,
+  columnName=''
+) => {
+  const column_names = _isArr(obj)
+    ? obj
+    : getColumnNames(obj)
+  , _columnName = columnName.toLowerCase();
+
+  if (_columnName && column_names) {
+    for (let i=0, max=column_names.length; i<max; i++){
+      if (_isStrEqTo(column_names[i], _columnName)) {
+        return i;
+      }
+    }
+  }
+  return;
+}
+
+export const getDataColumnIndex = (
+  json,
+  option
+) => {
+  const { columnName, dataColumn } = option
+  , _dataColumn = findColumnIndex(json, columnName);
+  return _dataColumn || dataColumn || 1;
+}

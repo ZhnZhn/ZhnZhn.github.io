@@ -1,20 +1,17 @@
 import ChartConfig from '../../charts/ChartConfig';
 import Chart from '../../charts/Chart';
 import ConfigBuilder from '../../charts/ConfigBuilder';
-
-import QuandlFn from './QuandlFn';
+import {
+  valueMoving,
+  getColumnNames,
+  crZhConfig,
+  crDatasetInfo
+} from './QuandlFn';
 
 import C from './C';
 import crAreaData from './crAreaData';
 
-const {
-  valueMoving,
-  getColumnNames,
-  createZhConfig,
-  createDatasetInfo
-} = QuandlFn
-, _assign = Object.assign;
-
+const _assign = Object.assign;
 const _isMfi = names => names[2] === C.HIGH
   && names[3] === C.LOW
   && names[4] === C.CLOSE
@@ -23,7 +20,10 @@ const _isMfi = names => names[2] === C.HIGH
 const _isMomAth = names => names[1] === C.OPEN
   && names[4] === C.CLOSE;
 
-const _addSeriesTo = function(config, legendSeries){
+const _addSeriesTo = (
+  config,
+  legendSeries
+) => {
   if (!legendSeries) { return; }
 
   const legend = [];
@@ -39,24 +39,30 @@ const _addSeriesTo = function(config, legendSeries){
 
   let i=0, max=legendSeries.length;
   for (i; i<max; i++){
-    const { data, name, color, symbol, isSecondAxes } = legendSeries[i]
-        , seria = ChartConfig.crSeria({
-             name : name,
-             data : data,
-             visible : false,
-             color: color,
-             marker : Chart.fSeriaMarker({ color, symbol })
-          });
+    const {
+      data,
+      name,
+      color,
+      symbol,
+      isSecondAxes
+    } = legendSeries[i]
+    , seria = ChartConfig.crSeria({
+       name,
+       data,
+       color,
+       visible: false,
+       marker: Chart.fSeriaMarker({ color, symbol })
+    });
 
-     if (!isSecondAxes){
-        config.series.push(seria);
-        legend.push({
-          name : name,
-          index : config.series.length - 1,
-          color : color,
-          isVisible : false
-        });
-     } /*else {
+    if (!isSecondAxes){
+      config.series.push(seria);
+      legend.push({
+        name,
+        color,
+        index: config.series.length - 1,
+        isVisible: false
+      });
+    } /*else {
        legend.push({
           name : name,
           color : color,
@@ -70,7 +76,7 @@ const _addSeriesTo = function(config, legendSeries){
   return legend;
 };
 
-const toArea = function(json, option){
+const toArea = (json, option) => {
    const columnNames = getColumnNames(json)
    , {
      columnName,
@@ -78,14 +84,19 @@ const toArea = function(json, option){
      isDrawDeltaExtrems, isNotZoomToMinMax,
      dfR,
      title, subtitle
-   } = option;
-
-   const {
-     seria, minY, maxY,
-     dataExDividend, dataSplitRatio,
-     dataVolume, dataVolumeColumn,
-     dataATH, dataHighLow,
-     legendSeries, zhPoints
+   } = option
+   , {
+     seria,
+     minY,
+     maxY,
+     dataExDividend,
+     dataSplitRatio,
+     dataVolume,
+     dataVolumeColumn,
+     dataATH,
+     dataHighLow,
+     legendSeries,
+     zhPoints
    } = crAreaData(json, option);
 
    let config = ChartConfig.crAreaConfig({ spacingTop: 25 })
@@ -99,12 +110,15 @@ const toArea = function(json, option){
    config = ConfigBuilder(config)
      .addCaption(title, subtitle)
      .addMinMax(seria, {
-        minY, maxY, isNotZoomToMinMax, isDrawDeltaExtrems
-      })          
+        minY,
+        maxY,
+        isNotZoomToMinMax,
+        isDrawDeltaExtrems
+      })
      .add({
        valueMoving: valueMoving(seria, dfR),
-       zhConfig: createZhConfig(option),
-       info: createDatasetInfo(json)
+       zhConfig: crZhConfig(option),
+       info: crDatasetInfo(json)
      })
      .addZhPointsIf(zhPoints, 'zhIsMfi', _isMfi(columnNames))
      .addZhPointsIf(zhPoints, 'zhIsMomAth', _isMomAth(columnNames))

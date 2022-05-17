@@ -7,19 +7,18 @@ import Chart from '../../charts/Chart';
 import ChartConfig from '../../charts/ChartConfig';
 
 import {
-  fnCalcTotal,
-  fnCreateSparkData
+  calcTotal,
+  crSparkData
 } from './StackedFn';
-import QuandlFn from './QuandlFn';
+import {
+  crPercent,
+  crDatasetInfo,
+  setTitleToConfig
+} from './QuandlFn';
 import fnStacked from './fnStacked'
 
 const _assign = Object.assign
 , { crValueMoving, crZhConfig } = fnStacked
-, {
-    createPercent,
-    setTitleToConfig,
-    createDatasetInfo
-  } = QuandlFn
 , {
    COLOR_PERIOD,
    COLOR_BASE1,
@@ -32,11 +31,18 @@ const _assign = Object.assign
    crTreeMapSeria
  } = ChartConfig;
 
-const _crYearTotals = (jsonData, items) => jsonData
-  .map(year => fnCalcTotal(year, items))
+const _crYearTotals = (
+  jsonData,
+  items
+) => jsonData
+  .map(year => calcTotal(year, items))
 
 
-const _crDataAndTotal = (jsonData=[], items=[], bYearTotals=[]) => {
+const _crDataAndTotal = (
+  jsonData=[],
+  items=[],
+  bYearTotals=[]
+) => {
   const yearData = jsonData[0]
   , _year = yearData[0]
       ? yearData[0].split('-')[0]
@@ -50,7 +56,7 @@ const _crDataAndTotal = (jsonData=[], items=[], bYearTotals=[]) => {
     const { value, caption } = item
         , _value = yearData[value];
     if (_value){
-       const { sparkvalues, sparkpercent } = fnCreateSparkData(jsonData, value, bYearTotals);
+       const { sparkvalues, sparkpercent } = crSparkData(jsonData, value, bYearTotals);
        data.push({
           sparkvalues: sparkvalues.reverse(),
           sparkpercent: sparkpercent.reverse(),
@@ -67,14 +73,17 @@ const _crDataAndTotal = (jsonData=[], items=[], bYearTotals=[]) => {
   return { data, bTotal };
 }
 
-const _calcLevelAndSetPercent = (data, bTotal) => {
+const _calcLevelAndSetPercent = (
+  data,
+  bTotal
+) => {
   let _bLevel = Big('0.0')
   , level60 = 0
   , level90 = 0;
 
    data.forEach(point => {
       const { value, name } = point
-      , percent = createPercent({
+      , percent = crPercent({
           bValue: Big(value),
           bTotal: bTotal
         }).toString();
@@ -100,7 +109,11 @@ const _calcLevelAndSetPercent = (data, bTotal) => {
     return { level60, level90 };
 }
 
-const _setColorToPoint = (data, level60, level90) => {
+const _setColorToPoint = (
+  data,
+  level60,
+  level90
+) => {
   const period = COLOR_PERIOD
   , base1 = COLOR_BASE1
   , base2 = COLOR_BASE2;
@@ -119,7 +132,10 @@ const _setColorToPoint = (data, level60, level90) => {
    })
 }
 
-const toTreeMap = function(json, option){
+const toTreeMap = (
+  json,
+  option
+) => {
   const config = crTreeMapConfig()
   ,  { sliceItems:items100=[], value='' } = option
   ,  id = `${value}_${CHT_TREE_MAP}`
@@ -127,7 +143,7 @@ const toTreeMap = function(json, option){
   ,  bYearTotals = _crYearTotals(jsonData, items100)
   , { data, bTotal } = _crDataAndTotal(jsonData, items100, bYearTotals)
   , { level60, level90 } = _calcLevelAndSetPercent(data, bTotal)
-  , bPrevTotal = fnCalcTotal(jsonData[1], items100)
+  , bPrevTotal = calcTotal(jsonData[1], items100)
   , dateTo = jsonData[1][0] ? jsonData[1][0] : '';
 
    _setColorToPoint(data, level60, level90);
@@ -142,7 +158,7 @@ const toTreeMap = function(json, option){
     series: [crTreeMapSeria(data)],
     valueMoving: crValueMoving(bTotal, yearTitle, bPrevTotal, dateTo),
     zhConfig: crZhConfig(option, id),
-    info: createDatasetInfo(json)
+    info: crDatasetInfo(json)
   })
 
   return { config };
