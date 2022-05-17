@@ -21,7 +21,7 @@ var _fnHm = require("./fnHm");
 
 var _fnLegend = require("./fnLegend");
 
-var _conf = _interopRequireDefault(require("./conf"));
+var _conf = require("./conf");
 
 const _assign = Object.assign;
 
@@ -71,9 +71,9 @@ const _addSeriaTo = _ref => {
     color: _color,
     marker: _crMarker(_color)
   },
-        _seriaOption = seriaOption !== null ? isShow ? { ..._conf.default.SPLINE,
+        _seriaOption = seriaOption !== null ? isShow ? { ..._conf.SPLINE,
     ..._seriaColor
-  } : { ..._conf.default.SPLINE_NOT_VISIBLE,
+  } : { ..._conf.SPLINE_NOT_VISIBLE,
     ..._seriaColor
   } : null;
 
@@ -90,15 +90,14 @@ const _addSeriesFromHmTo = _ref2 => {
   } = _ref2;
   let i = fromIndex;
   (0, _fnHm.toSeriaNames)(hm, _compareByFn.compareByValue).forEach(item => {
-    const name = item.name,
-          _isShow = i < _conf.default.MAX_SHOW ? true : false;
+    const name = item.name;
 
     _addSeriaTo({
       config,
       hm,
       name,
       i,
-      isShow: _isShow
+      isShow: i < _conf.MAX_SHOW
     });
 
     i++;
@@ -113,7 +112,7 @@ const _addSeriasTo = (config, json, option) => {
         {
     dataset = []
   } = json,
-        pnCountry = one === _conf.default.ALL ? 'rtTitle' : void 0,
+        pnCountry = one === _conf.ALL ? 'rtTitle' : void 0,
         {
     hm,
     categories
@@ -123,13 +122,13 @@ const _addSeriasTo = (config, json, option) => {
     pnCountry
   });
 
-  if (hm[_conf.default.WORLD] && one !== _conf.default.ALL) {
+  if (hm[_conf.WORLD] && one !== _conf.ALL) {
     _addSeriaTo({
       config,
       hm,
       i: 0,
-      name: _conf.default.WORLD,
-      color: _conf.default.WORLD_COLOR,
+      name: _conf.WORLD,
+      color: _conf.WORLD_COLOR,
       seriaOption: null,
       isShow: true
     });
@@ -148,7 +147,7 @@ const _addSeriasTo = (config, json, option) => {
   }
 
   const legend = config.zhConfig.legend;
-  config.zhConfig.legend = one === _conf.default.ALL ? (0, _fnLegend.toAllLegend)(legend, hm, measure) : (0, _fnLegend.toWorldLegend)(legend, hm);
+  config.zhConfig.legend = one === _conf.ALL ? (0, _fnLegend.toAllLegend)(legend, hm, measure) : (0, _fnLegend.toWorldLegend)(legend, hm);
 
   _assign(config.xAxis, {
     categories
@@ -160,7 +159,7 @@ const _crBaseConfig = (json, option) => {
     title,
     subtitle
   } = option;
-  return (0, _ConfigBuilder.default)().areaConfig().add('chart', _conf.default.CHART).addCaption(title, subtitle).add('xAxis', _conf.default.X_AXIS).add('yAxis', _conf.default.Y_AXIS).addTooltip(_Tooltip.default.categorySimple).add('info', _crInfo(json, option)).add('zhConfig', _crZhConfig(option)).toConfig();
+  return (0, _ConfigBuilder.default)().areaConfig().add('chart', _conf.S_CHART).addCaption(title, subtitle).add('xAxis', _conf.X_AXIS).add('yAxis', _conf.Y_AXIS).addTooltip(_Tooltip.default.categorySimple).add('info', _crInfo(json, option)).add('zhConfig', _crZhConfig(option)).toConfig();
 };
 
 const crChartId = _ref3 => {

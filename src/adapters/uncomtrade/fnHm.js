@@ -1,8 +1,11 @@
 import { roundBy } from '../AdapterFn';
-import C from './conf';
-
-const NET_WEIGHT = 'NetWeight';
-const QUANTITY = 'TradeQuantity';
+import {
+  WORLD,
+  NET_WEIGHT,
+  QUANTITY,
+  AVG_PER_Q,
+  AVG_PER_W
+} from './conf';
 
 const _crHm = () => Object.create(null);
 
@@ -49,10 +52,10 @@ const _crAvgValuePerQuantity = _fCrAvgPoint.bind(null, QUANTITY)
 
 const _rCrPoint = {
   fDf: _fCrValuePoint,
-  [C.NET_WEIGHT]: _crNetWeightPoint,
-  [C.QUANTITY]: _crQuantityPoint,
-  [C.AVG_PER_W]: _crAvgValuePerWeight,
-  [C.AVG_PER_Q]: _crAvgValuePerQuantity
+  [NET_WEIGHT]: _crNetWeightPoint,
+  [QUANTITY]: _crQuantityPoint,
+  [AVG_PER_W]: _crAvgValuePerWeight,
+  [AVG_PER_Q]: _crAvgValuePerQuantity
 };
 
 const _fPoint = pnValue => {
@@ -78,7 +81,7 @@ export const toSeriaNames = (
 ) => {
   const arr = [];
   for (let propName in hm){
-    if (propName !== C.WORLD) {
+    if (propName !== WORLD) {
       const points = hm[propName];
       arr.push({
         value: _getRecentValueForSort(points),

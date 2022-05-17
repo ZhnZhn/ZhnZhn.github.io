@@ -15,7 +15,17 @@ import {
   toAllLegend
 } from './fnLegend';
 
-import C from './conf'
+import {
+  MAX_SHOW,
+  ALL,
+  WORLD,
+  WORLD_COLOR,
+  SPLINE,
+  SPLINE_NOT_VISIBLE,
+  S_CHART,
+  X_AXIS,
+  Y_AXIS
+} from './conf';
 
 const _assign = Object.assign;
 
@@ -65,8 +75,8 @@ const _addSeriaTo = ({
       }
     , _seriaOption = (seriaOption !== null)
          ? isShow
-           ? { ...C.SPLINE, ..._seriaColor }
-           : { ...C.SPLINE_NOT_VISIBLE, ..._seriaColor }
+           ? {...SPLINE, ..._seriaColor}
+           : {...SPLINE_NOT_VISIBLE, ..._seriaColor}
          : null;
 
     ChartConfig.setSerieData(
@@ -87,8 +97,12 @@ const _addSeriesFromHmTo = ({
     toSeriaNames(hm, compareByValue)
       .forEach(item => {
          const name = item.name
-             , _isShow = i<C.MAX_SHOW ? true : false ;
-         _addSeriaTo({ config, hm, name, i, isShow: _isShow })
+         _addSeriaTo({
+            config,
+            hm,
+            name, i,
+            isShow: i<MAX_SHOW
+          })
          i++
       })
 }
@@ -100,7 +114,7 @@ const _addSeriasTo = (
 ) => {
   const { one, measure } = option
   , { dataset=[] } = json
-  , pnCountry = (one === C.ALL)
+  , pnCountry = (one === ALL)
      ? 'rtTitle'
      : void 0
   , { hm, categories } = toHmCategories({
@@ -109,10 +123,10 @@ const _addSeriasTo = (
       pnCountry
   });
 
-  if (hm[C.WORLD] && one !== C.ALL) {
+  if (hm[WORLD] && one !== ALL) {
     _addSeriaTo({
        config, hm,
-       i: 0, name: C.WORLD, color: C.WORLD_COLOR,
+       i: 0, name: WORLD, color: WORLD_COLOR,
        seriaOption: null, isShow: true
     })
     _addSeriesFromHmTo({ config, hm, fromIndex: 1 });
@@ -121,7 +135,7 @@ const _addSeriasTo = (
   }
 
   const legend = config.zhConfig.legend;
-  config.zhConfig.legend = (one === C.ALL)
+  config.zhConfig.legend = (one === ALL)
      ? toAllLegend(legend, hm, measure)
      : toWorldLegend(legend, hm)
 
@@ -136,10 +150,10 @@ const _crBaseConfig = (
     const { title, subtitle } = option;
     return Builder()
       .areaConfig()
-      .add('chart', C.CHART)
+      .add('chart', S_CHART)
       .addCaption(title, subtitle)
-      .add('xAxis', C.X_AXIS)
-      .add('yAxis', C.Y_AXIS)
+      .add('xAxis', X_AXIS)
+      .add('yAxis', Y_AXIS)
       .addTooltip(Tooltip.categorySimple)
       .add('info', _crInfo(json, option))
       .add('zhConfig', _crZhConfig(option))

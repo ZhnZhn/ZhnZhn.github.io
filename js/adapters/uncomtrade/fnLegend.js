@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.toWorldLegend = exports.toAllLegend = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
-var _conf = _interopRequireDefault(require("./conf"));
+var _conf = require("./conf");
 
 const _fItemWithRatio = (hm, sum) => item => {
   const {
@@ -29,7 +27,7 @@ const _calcRecentSum = hm => {
       sum = 0;
 
   for (key in hm) {
-    if (_hasNotToken(key, ', nes') && _hasNotToken(key, _conf.default.WORLD)) {
+    if (_hasNotToken(key, ', nes') && _hasNotToken(key, _conf.WORLD)) {
       const points = hm[key];
       sum += points[points.length - 1].y;
     }
@@ -42,13 +40,13 @@ const toAllLegend = (arr, hm, measure) => {
   const sum = _calcRecentSum(hm),
         crItemWithRatio = _fItemWithRatio(hm, sum);
 
-  return sum !== 0 && measure !== _conf.default.AVG_PER_W && measure !== _conf.default.AVG_PER_Q ? arr.map(crItemWithRatio) : arr;
+  return sum !== 0 && measure !== _conf.AVG_PER_W && measure !== _conf.AVG_PER_Q ? arr.map(crItemWithRatio) : arr;
 };
 
 exports.toAllLegend = toAllLegend;
 
 const toWorldLegend = (arr, hm) => {
-  const world = hm[_conf.default.WORLD],
+  const world = hm[_conf.WORLD],
         sum = world ? world[world.length - 1].y : _calcRecentSum(hm),
         crItemWithRatio = _fItemWithRatio(hm, sum);
 

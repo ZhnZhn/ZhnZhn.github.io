@@ -1,57 +1,66 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var C = {
-  MAX_SHOW: 6,
-  WORLD: 'World',
-  ALL: 'all',
-  NET_WEIGHT: 'NetWeight',
-  QUANTITY: 'TradeQuantity',
-  AVG_PER_W: 'avgPerWeight',
-  AVG_PER_Q: 'avgPerQuantity',
-  DESCR_EMPTY: 'Dataset is empty.',
-  MM_DD: '-12-31',
-  WORLD_COLOR: '#7cb5ec',
-  CHART: {
-    spacingTop: 24,
-    marginTop: 42,
-    marginBottom: 38
+exports.Y_AXIS = exports.X_AXIS = exports.WORLD_COLOR = exports.WORLD = exports.S_CHART = exports.SPLINE_NOT_VISIBLE = exports.SPLINE = exports.QUANTITY = exports.NET_WEIGHT = exports.MAX_SHOW = exports.DESCR_EMPTY = exports.AVG_PER_W = exports.AVG_PER_Q = exports.ALL = void 0;
+const MAX_SHOW = 6;
+exports.MAX_SHOW = MAX_SHOW;
+const WORLD = 'World';
+exports.WORLD = WORLD;
+const ALL = 'all';
+exports.ALL = ALL;
+const NET_WEIGHT = 'NetWeight';
+exports.NET_WEIGHT = NET_WEIGHT;
+const QUANTITY = 'TradeQuantity';
+exports.QUANTITY = QUANTITY;
+const AVG_PER_W = 'avgPerWeight';
+exports.AVG_PER_W = AVG_PER_W;
+const AVG_PER_Q = 'avgPerQuantity';
+exports.AVG_PER_Q = AVG_PER_Q;
+const DESCR_EMPTY = 'Dataset is empty.';
+exports.DESCR_EMPTY = DESCR_EMPTY;
+const WORLD_COLOR = '#7cb5ec';
+exports.WORLD_COLOR = WORLD_COLOR;
+const S_CHART = {
+  spacingTop: 24,
+  marginTop: 42,
+  marginBottom: 38
+};
+exports.S_CHART = S_CHART;
+const SPLINE = {
+  type: 'spline'
+};
+exports.SPLINE = SPLINE;
+const SPLINE_NOT_VISIBLE = {
+  type: 'spline',
+  visible: false
+};
+exports.SPLINE_NOT_VISIBLE = SPLINE_NOT_VISIBLE;
+const X_AXIS = {
+  type: 'category',
+  opposite: false,
+  labels: {
+    y: 18
   },
-  SPLINE: {
-    type: 'spline'
-  },
-  SPLINE_NOT_VISIBLE: {
-    type: 'spline',
-    visible: false
-  },
-  X_AXIS: {
-    type: 'category',
-    opposite: false,
-    labels: {
-      y: 18
-    },
-    crosshair: null,
-    tickColor: 'gray',
-    tickWidth: 3,
-    tickLength: 7,
-    tickPosition: 'outside',
-    //tickPosition: 'inside',
-    gridLineWidth: 0
-  },
-  Y_AXIS: {
-    lineWidth: 0,
-    tickLength: 0,
-    startOnTick: true,
-    endOnTick: true,
-    minPadding: 0.05,
-    maxPadding: 0.05,
-    plotLines: null,
-    labels: {
-      x: 3
-    }
+  crosshair: null,
+  tickColor: 'gray',
+  tickWidth: 3,
+  tickLength: 7,
+  tickPosition: 'outside',
+  //tickPosition: 'inside',
+  gridLineWidth: 0
+};
+exports.X_AXIS = X_AXIS;
+const Y_AXIS = {
+  lineWidth: 0,
+  tickLength: 0,
+  startOnTick: true,
+  endOnTick: true,
+  minPadding: 0.05,
+  maxPadding: 0.05,
+  plotLines: null,
+  labels: {
+    x: 3
   }
 };
-var _default = C;
-exports["default"] = _default;
+exports.Y_AXIS = Y_AXIS;
 //# sourceMappingURL=conf.js.map

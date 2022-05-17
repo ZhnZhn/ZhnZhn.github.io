@@ -1,16 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.toSeriaNames = exports.toHmCategories = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
-var _conf = _interopRequireDefault(require("./conf"));
-
-const NET_WEIGHT = 'NetWeight';
-const QUANTITY = 'TradeQuantity';
+var _conf = require("./conf");
 
 const _crHm = () => Object.create(null);
 
@@ -38,9 +33,9 @@ const _fCrPoint = (pn, item) => {
   return _crPoint(_y);
 };
 
-const _crNetWeightPoint = _fCrPoint.bind(null, NET_WEIGHT);
+const _crNetWeightPoint = _fCrPoint.bind(null, _conf.NET_WEIGHT);
 
-const _crQuantityPoint = _fCrPoint.bind(null, QUANTITY);
+const _crQuantityPoint = _fCrPoint.bind(null, _conf.QUANTITY);
 
 const _fCrAvgPoint = (pn, item) => {
   const {
@@ -52,16 +47,16 @@ const _fCrAvgPoint = (pn, item) => {
   return _crPoint(_y, _v);
 };
 
-const _crAvgValuePerWeight = _fCrAvgPoint.bind(null, NET_WEIGHT);
+const _crAvgValuePerWeight = _fCrAvgPoint.bind(null, _conf.NET_WEIGHT);
 
-const _crAvgValuePerQuantity = _fCrAvgPoint.bind(null, QUANTITY);
+const _crAvgValuePerQuantity = _fCrAvgPoint.bind(null, _conf.QUANTITY);
 
 const _rCrPoint = {
   fDf: _fCrValuePoint,
-  [_conf.default.NET_WEIGHT]: _crNetWeightPoint,
-  [_conf.default.QUANTITY]: _crQuantityPoint,
-  [_conf.default.AVG_PER_W]: _crAvgValuePerWeight,
-  [_conf.default.AVG_PER_Q]: _crAvgValuePerQuantity
+  [_conf.NET_WEIGHT]: _crNetWeightPoint,
+  [_conf.QUANTITY]: _crQuantityPoint,
+  [_conf.AVG_PER_W]: _crAvgValuePerWeight,
+  [_conf.AVG_PER_Q]: _crAvgValuePerQuantity
 };
 
 const _fPoint = pnValue => {
@@ -83,7 +78,7 @@ const toSeriaNames = (hm, compareBy) => {
   const arr = [];
 
   for (let propName in hm) {
-    if (propName !== _conf.default.WORLD) {
+    if (propName !== _conf.WORLD) {
       const points = hm[propName];
       arr.push({
         value: _getRecentValueForSort(points),

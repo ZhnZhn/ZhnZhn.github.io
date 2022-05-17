@@ -1,5 +1,5 @@
 import { crItemLink } from '../crFn';
-import C from './conf';
+import { DESCR_EMPTY } from './conf';
 
 const _isArr = Array.isArray
 , _crWebsiteLink = crItemLink.bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;")
@@ -20,9 +20,9 @@ const _crDescr = json => {
     }
     return _firtsItem.cmdDescE
        ? _crDescrText(_firtsItem)
-       : C.DESCR_EMPTY;
+       : DESCR_EMPTY;
   }
-  return C.DESCR_EMPTY;
+  return DESCR_EMPTY;
 };
 
 export const toDescr = (

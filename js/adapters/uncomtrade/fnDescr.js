@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.toDescr = void 0;
 
 var _crFn = require("../crFn");
 
-var _conf = _interopRequireDefault(require("./conf"));
+var _conf = require("./conf");
 
 const _isArr = Array.isArray,
       _crWebsiteLink = _crFn.crItemLink.bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;"),
@@ -38,10 +36,10 @@ const _crDescr = json => {
       }
     }
 
-    return _firtsItem.cmdDescE ? _crDescrText(_firtsItem) : _conf.default.DESCR_EMPTY;
+    return _firtsItem.cmdDescE ? _crDescrText(_firtsItem) : _conf.DESCR_EMPTY;
   }
 
-  return _conf.default.DESCR_EMPTY;
+  return _conf.DESCR_EMPTY;
 };
 
 const toDescr = (json, option) => _crDescr(json) + _crWebsiteLink() + _crDatasetLink(option.nativeHref);

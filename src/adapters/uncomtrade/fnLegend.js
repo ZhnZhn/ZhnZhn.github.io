@@ -1,5 +1,9 @@
 import { roundBy } from '../AdapterFn';
-import C from './conf';
+import {
+  WORLD,
+  AVG_PER_Q,
+  AVG_PER_W
+} from './conf';
 
 const _fItemWithRatio = (
   hm,
@@ -27,7 +31,7 @@ const _calcRecentSum = (
 ) => {
   let key, sum = 0;
   for (key in hm) {
-    if (_hasNotToken(key, ', nes') && _hasNotToken(key, C.WORLD)) {
+    if (_hasNotToken(key, ', nes') && _hasNotToken(key, WORLD)) {
       const points = hm[key];
       sum += points[points.length-1].y
     }
@@ -44,8 +48,8 @@ export const toAllLegend = (
   , crItemWithRatio = _fItemWithRatio(hm, sum);
 
   return sum !== 0
-   && measure !== C.AVG_PER_W
-   && measure !== C.AVG_PER_Q
+   && measure !== AVG_PER_W
+   && measure !== AVG_PER_Q
      ? arr.map(crItemWithRatio)
      : arr;
 }
@@ -54,7 +58,7 @@ export const toWorldLegend = (
   arr,
   hm
 ) => {
-  const world = hm[C.WORLD]
+  const world = hm[WORLD]
   , sum = world
       ? world[world.length-1].y
       : _calcRecentSum(hm)
