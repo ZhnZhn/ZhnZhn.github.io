@@ -1,11 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
-
-var _AdapterFn = require("../AdapterFn");
+exports.getCi = exports.crError = exports.crData = exports.crConfOption = void 0;
 
 var _crFn = require("../crFn");
+
+exports.crError = _crFn.crError;
+
+var _AdapterFn = require("../AdapterFn");
 
 const _isArr = Array.isArray;
 
@@ -30,48 +32,50 @@ const _getCountryIndicator = _ref2 => {
   };
 };
 
-const fnAdapter = {
-  crError: _crFn.crError,
-  getCi: _getCountryIndicator,
-  crData: json => {
-    const arrIn = json[1];
+const getCi = _getCountryIndicator;
+exports.getCi = getCi;
 
-    if (!_isArr(arrIn)) {
-      return [];
-    }
+const crData = json => {
+  const arrIn = json[1];
 
-    const d = [];
-    arrIn.forEach(p => {
-      if (p && p.value != null && p.date) {
-        d.push({
-          x: (0, _AdapterFn.ymdToUTC)(p.date),
-          y: p.value
-        });
-      }
-    });
-    return d.reverse();
-  },
-  crConfOption: option => {
-    const {
-      _itemKey,
-      title,
-      linkItem,
-      dataSource
-    } = option;
-    return {
-      info: _crInfo(option),
-      zhConfig: {
-        key: _itemKey,
-        id: _itemKey,
-        itemCaption: title,
-        linkFn: 'DF',
-        item: { ...linkItem
-        },
-        dataSource
-      }
-    };
+  if (!_isArr(arrIn)) {
+    return [];
   }
+
+  const d = [];
+  arrIn.forEach(p => {
+    if (p && p.value != null && p.date) {
+      d.push({
+        x: (0, _AdapterFn.ymdToUTC)(p.date),
+        y: p.value
+      });
+    }
+  });
+  return d.reverse();
 };
-var _default = fnAdapter;
-exports.default = _default;
+
+exports.crData = crData;
+
+const crConfOption = option => {
+  const {
+    _itemKey,
+    title,
+    linkItem,
+    dataSource
+  } = option;
+  return {
+    info: _crInfo(option),
+    zhConfig: {
+      key: _itemKey,
+      id: _itemKey,
+      itemCaption: title,
+      linkFn: 'DF',
+      item: { ...linkItem
+      },
+      dataSource
+    }
+  };
+};
+
+exports.crConfOption = crConfOption;
 //# sourceMappingURL=fnAdapter.js.map

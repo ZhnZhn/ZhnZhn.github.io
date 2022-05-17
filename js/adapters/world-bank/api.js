@@ -1,52 +1,50 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _fnAdapter = require("./fnAdapter");
 
-var crError = _fnAdapter["default"].crError,
-    getCi = _fnAdapter["default"].getCi;
-var C = {
-  URL: 'https://api.worldbank.org/v2',
-  NATIVE_URL: 'https://data.worldbank.org/indicator'
-};
-var _assign = Object.assign,
-    _isArr = Array.isArray;
+const URL = 'https://api.worldbank.org/v2',
+      NATIVE_URL = 'https://data.worldbank.org/indicator';
+const _assign = Object.assign,
+      _isArr = Array.isArray;
 
-var _addNativeLinkTo = function _addNativeLinkTo(option) {
-  var _getCi = getCi(option),
-      country = _getCi.country,
-      indicator = _getCi.indicator;
+const _addNativeLinkTo = option => {
+  const {
+    country,
+    indicator
+  } = (0, _fnAdapter.getCi)(option);
 
   _assign(option, {
     linkItem: {
       caption: 'World Bank',
-      href: C.NATIVE_URL + "/" + indicator + "?locations=" + country
+      href: NATIVE_URL + "/" + indicator + "?locations=" + country
     }
   });
 };
 
-var api = {
-  getRequestUrl: function getRequestUrl(option) {
-    var _getCi2 = getCi(option),
-        country = _getCi2.country,
-        indicator = _getCi2.indicator;
+const api = {
+  getRequestUrl(option) {
+    const {
+      country,
+      indicator
+    } = (0, _fnAdapter.getCi)(option);
 
     _addNativeLinkTo(option);
 
-    return C.URL + "/countries/" + country + "/indicators/" + indicator + "?date=1990:2020&format=json";
+    return URL + "/countries/" + country + "/indicators/" + indicator + "?date=1990:2020&format=json";
   },
-  checkResponse: function checkResponse(json) {
+
+  checkResponse(json) {
     if (_isArr(json)) {
       return true;
     }
 
-    throw crError();
+    throw (0, _fnAdapter.crError)();
   }
+
 };
 var _default = api;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=api.js.map

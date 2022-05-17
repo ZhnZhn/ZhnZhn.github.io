@@ -5,10 +5,9 @@
  ],
  "file": "../../../src/adapters/world-bank/adapter.js",
  "names": [
+  "adapter",
   "crData",
-  "fnAdapter",
-  "crConfOption",
-  "adapter"
+  "crConfOption"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;IAEQA,M,GAAyBC,qB,CAAzBD,M;IAAQE,Y,GAAiBD,qB,CAAjBC,Y;IACdC,O,GAAU,+BAAe;AACxBH,EAAAA,MAAM,EAANA,MADwB;AAChBE,EAAAA,YAAY,EAAZA;AADgB,CAAf,C;eAIGC,O"
+ "mappings": ";;;;;;;AAAA;;AACA;;AAKA,MAAMA,OAAO,GAAG,4BAAe;AAC5BC,EAAAA,MAAM,EAANA,iBAD4B;AAE5BC,EAAAA,YAAY,EAAZA;AAF4B,CAAf,CAAhB;eAKeF,O"
 }
