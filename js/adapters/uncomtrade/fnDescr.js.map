@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/adapters/uncomtrade/fnDescr.js"],"names":["_isArr","Array","isArray","_crWebsiteLink","crItemLink","bind","_crDatasetLink","_crDescrText","cmdDescE","qtDesc","_crDescr","json","dataset","_firtsItem","i","max","length","_item","TradeQuantity","C","DESCR_EMPTY","fnDescr","toDescr","option","nativeHref"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,MAAM,GAAGC,KAAK,CAACC,OAArB;AAAA,MACEC,cAAc,GAAGC,iBAAWC,IAAX,CAAgB,IAAhB,EAAsB,0BAAtB,EAAkD,+BAAlD,EAAmF,sBAAnF,CADnB;AAAA,MAEEC,cAAc,GAAGF,iBAAWC,IAAX,CAAgB,IAAhB,EAAsB,0BAAtB,CAFnB;AAAA,MAIEE,YAAY,GAAG;AAAA,MAAC;AAAEC,IAAAA,QAAF;AAAYC,IAAAA;AAAZ,GAAD;AAAA,SAA0BD,QAAQ,GAAG,IAAX,GAAkBC,MAAlB,GAA2B,GAArD;AAAA,CAJjB;;AAMA,MAAMC,QAAQ,GAAGC,IAAI,IAAI;AACvB,QAAM;AAAEC,IAAAA;AAAF,MAAcD,IAApB;AAAA,QACEE,UAAU,GAAGD,OAAO,CAAC,CAAD,CADtB;;AAEA,MAAIZ,MAAM,CAACY,OAAD,CAAN,IAAmBC,UAAvB,EAAkC;AAChC,QAAIC,CAAC,GAAC,CAAN;AAAA,QAASC,GAAG,GAACH,OAAO,CAACI,MAArB;;AACA,WAAOF,CAAC,GAACC,GAAT,EAAcD,CAAC,EAAf,EAAmB;AACjB,YAAMG,KAAK,GAAGL,OAAO,CAACE,CAAD,CAArB;;AACA,UAAIG,KAAK,CAACC,aAAV,EAAyB;AACvB,eAAOX,YAAY,CAACU,KAAD,CAAnB;AACD;AACF;;AACD,WAAOJ,UAAU,CAACL,QAAX,GACFD,YAAY,CAACM,UAAD,CADV,GAEFM,cAAEC,WAFP;AAGD;;AACD,SAAOD,cAAEC,WAAT;AACD,CAhBD;;AAkBA,MAAMC,OAAO,GAAG;AAEdC,EAAAA,OAAO,EAAE,CAACX,IAAD,EAAOY,MAAP,KAAkB;AACzB,WAAOb,QAAQ,CAACC,IAAD,CAAR,GACHR,cAAc,EADX,GAEHG,cAAc,CAACiB,MAAM,CAACC,UAAR,CAFlB;AAGD;AANa,CAAhB;eAUeH,O","sourcesContent":["import { crItemLink } from '../crFn';\r\nimport C from './conf';\r\n\r\nconst _isArr = Array.isArray\r\n, _crWebsiteLink = crItemLink.bind(null, \"Website UN Comtrade Data\", \"https://comtrade.un.org/data/\", \"padding-bottom: 8px;\")\r\n, _crDatasetLink = crItemLink.bind(null, \"UN Comtrade Dataset Link\")\r\n\r\n, _crDescrText = ({ cmdDescE, qtDesc }) => cmdDescE + ', ' + qtDesc + '.';\r\n\r\nconst _crDescr = json => {\r\n  const { dataset } = json\r\n  , _firtsItem = dataset[0];\r\n  if (_isArr(dataset) && _firtsItem){\r\n    let i=0, max=dataset.length;\r\n    for (; i<max; i++) {\r\n      const _item = dataset[i];\r\n      if (_item.TradeQuantity) {\r\n        return _crDescrText(_item);\r\n      }\r\n    }\r\n    return _firtsItem.cmdDescE\r\n       ? _crDescrText(_firtsItem)\r\n       : C.DESCR_EMPTY;\r\n  }\r\n  return C.DESCR_EMPTY;\r\n};\r\n\r\nconst fnDescr = {\r\n\r\n  toDescr: (json, option) => {\r\n    return _crDescr(json)\r\n      + _crWebsiteLink()\r\n      + _crDatasetLink(option.nativeHref);\r\n  }\r\n\r\n}\r\n\r\nexport default fnDescr\r\n"],"file":"fnDescr.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/uncomtrade/fnDescr.js"
+ ],
+ "file": "../../../src/adapters/uncomtrade/fnDescr.js",
+ "names": [
+  "_isArr",
+  "Array",
+  "isArray",
+  "_crWebsiteLink",
+  "crItemLink",
+  "bind",
+  "_crDatasetLink",
+  "_crDescrText",
+  "cmdDescE",
+  "qtDesc",
+  "_crDescr",
+  "json",
+  "dataset",
+  "_firtsItem",
+  "i",
+  "max",
+  "length",
+  "_item",
+  "TradeQuantity",
+  "C",
+  "DESCR_EMPTY",
+  "toDescr",
+  "option",
+  "nativeHref"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,MAAM,GAAGC,KAAK,CAACC,OAArB;AAAA,MACEC,cAAc,GAAGC,iBAAWC,IAAX,CAAgB,IAAhB,EAAsB,0BAAtB,EAAkD,+BAAlD,EAAmF,sBAAnF,CADnB;AAAA,MAEEC,cAAc,GAAGF,iBAAWC,IAAX,CAAgB,IAAhB,EAAsB,0BAAtB,CAFnB;AAAA,MAIEE,YAAY,GAAG;AAAA,MAAC;AAAEC,IAAAA,QAAF;AAAYC,IAAAA;AAAZ,GAAD;AAAA,SAA0BD,QAAQ,GAAG,IAAX,GAAkBC,MAAlB,GAA2B,GAArD;AAAA,CAJjB;;AAMA,MAAMC,QAAQ,GAAGC,IAAI,IAAI;AACvB,QAAM;AAAEC,IAAAA;AAAF,MAAcD,IAApB;AAAA,QACEE,UAAU,GAAGD,OAAO,CAAC,CAAD,CADtB;;AAEA,MAAIZ,MAAM,CAACY,OAAD,CAAN,IAAmBC,UAAvB,EAAkC;AAChC,QAAIC,CAAC,GAAC,CAAN;AAAA,QAASC,GAAG,GAACH,OAAO,CAACI,MAArB;;AACA,WAAOF,CAAC,GAACC,GAAT,EAAcD,CAAC,EAAf,EAAmB;AACjB,YAAMG,KAAK,GAAGL,OAAO,CAACE,CAAD,CAArB;;AACA,UAAIG,KAAK,CAACC,aAAV,EAAyB;AACvB,eAAOX,YAAY,CAACU,KAAD,CAAnB;AACD;AACF;;AACD,WAAOJ,UAAU,CAACL,QAAX,GACFD,YAAY,CAACM,UAAD,CADV,GAEFM,cAAEC,WAFP;AAGD;;AACD,SAAOD,cAAEC,WAAT;AACD,CAhBD;;AAkBO,MAAMC,OAAO,GAAG,CACrBV,IADqB,EAErBW,MAFqB,KAGlBZ,QAAQ,CAACC,IAAD,CAAR,GACDR,cAAc,EADb,GAEDG,cAAc,CAACgB,MAAM,CAACC,UAAR,CALX"
+}

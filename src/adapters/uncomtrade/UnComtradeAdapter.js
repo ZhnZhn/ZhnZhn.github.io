@@ -1,13 +1,14 @@
-
-import fnAdapter from './fnAdapter'
+import {
+  crChartId,
+  toConfig
+} from './fnAdapter';
 
 const UnComtradeAdapter = {
-  crKey: fnAdapter.crChartId,
+  crKey: crChartId,
 
   toConfig(json, option){
-    const config = fnAdapter.toConfig(json, option);
     return {
-       config
+       config: toConfig(json, option)
        //isDrawDeltaExtrems: false,
        //isNotZoomToMinMax: false
     };

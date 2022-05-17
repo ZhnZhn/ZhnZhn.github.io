@@ -1,1 +1,13 @@
-{"version":3,"sources":["../../../src/adapters/uncomtrade/UnComtrade.js"],"names":["UnComtrade","api","adapter"],"mappings":";;;;;;;AACA;;AACA;;AAEA,IAAMA,UAAU,GAAG;AAAEC,EAAAA,GAAG,EAAHA,eAAF;AAAOC,EAAAA,OAAO,EAAPA;AAAP,CAAnB;eAEeF,U","sourcesContent":["\r\nimport api from './Api'\r\nimport adapter from './UnComtradeAdapter'\r\n\r\nconst UnComtrade = { api, adapter };\r\n\r\nexport default UnComtrade\r\n"],"file":"UnComtrade.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/uncomtrade/UnComtrade.js"
+ ],
+ "file": "../../../src/adapters/uncomtrade/UnComtrade.js",
+ "names": [
+  "UnComtrade",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,UAAU,GAAG;AAAEC,EAAAA,GAAG,EAAHA,YAAF;AAAOC,EAAAA,OAAO,EAAPA;AAAP,CAAnB;eAEeF,U"
+}

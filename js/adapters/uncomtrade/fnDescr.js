@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.toDescr = void 0;
 
 var _crFn = require("../crFn");
 
@@ -44,11 +44,7 @@ const _crDescr = json => {
   return _conf.default.DESCR_EMPTY;
 };
 
-const fnDescr = {
-  toDescr: (json, option) => {
-    return _crDescr(json) + _crWebsiteLink() + _crDatasetLink(option.nativeHref);
-  }
-};
-var _default = fnDescr;
-exports.default = _default;
+const toDescr = (json, option) => _crDescr(json) + _crWebsiteLink() + _crDatasetLink(option.nativeHref);
+
+exports.toDescr = toDescr;
 //# sourceMappingURL=fnDescr.js.map

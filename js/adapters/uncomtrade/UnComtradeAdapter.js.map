@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/adapters/uncomtrade/UnComtradeAdapter.js"],"names":["UnComtradeAdapter","crKey","fnAdapter","crChartId","toConfig","json","option","config"],"mappings":";;;;;;;AACA;;AAEA,IAAMA,iBAAiB,GAAG;AACxBC,EAAAA,KAAK,EAAEC,sBAAUC,SADO;AAGxBC,EAAAA,QAHwB,oBAGfC,IAHe,EAGTC,MAHS,EAGF;AACpB,QAAMC,MAAM,GAAGL,sBAAUE,QAAV,CAAmBC,IAAnB,EAAyBC,MAAzB,CAAf;;AACA,WAAO;AACJC,MAAAA,MAAM,EAANA,MADI,CAEJ;AACA;;AAHI,KAAP;AAKD;AAVuB,CAA1B;eAceP,iB","sourcesContent":["\r\nimport fnAdapter from './fnAdapter'\r\n\r\nconst UnComtradeAdapter = {\r\n  crKey: fnAdapter.crChartId,\r\n\r\n  toConfig(json, option){\r\n    const config = fnAdapter.toConfig(json, option);\r\n    return {\r\n       config\r\n       //isDrawDeltaExtrems: false,\r\n       //isNotZoomToMinMax: false\r\n    };\r\n  }\r\n\r\n};\r\n\r\nexport default UnComtradeAdapter\r\n"],"file":"UnComtradeAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/uncomtrade/UnComtradeAdapter.js"
+ ],
+ "file": "../../../src/adapters/uncomtrade/UnComtradeAdapter.js",
+ "names": [
+  "UnComtradeAdapter",
+  "crKey",
+  "crChartId",
+  "toConfig",
+  "json",
+  "option",
+  "config"
+ ],
+ "mappings": ";;;;;AAAA;;AAKA,MAAMA,iBAAiB,GAAG;AACxBC,EAAAA,KAAK,EAAEC,oBADiB;;AAGxBC,EAAAA,QAAQ,CAACC,IAAD,EAAOC,MAAP,EAAc;AACpB,WAAO;AACJC,MAAAA,MAAM,EAAE,yBAASF,IAAT,EAAeC,MAAf,CADJ,CAEJ;AACA;;AAHI,KAAP;AAKD;;AATuB,CAA1B;eAaeL,iB"
+}

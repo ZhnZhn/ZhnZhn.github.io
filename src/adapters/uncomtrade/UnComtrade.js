@@ -1,6 +1,5 @@
-
-import api from './Api'
-import adapter from './UnComtradeAdapter'
+import api from './Api';
+import adapter from './UnComtradeAdapter';
 
 const UnComtrade = { api, adapter };
 

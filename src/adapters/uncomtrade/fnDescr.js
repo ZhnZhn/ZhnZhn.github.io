@@ -25,14 +25,9 @@ const _crDescr = json => {
   return C.DESCR_EMPTY;
 };
 
-const fnDescr = {
-
-  toDescr: (json, option) => {
-    return _crDescr(json)
-      + _crWebsiteLink()
-      + _crDatasetLink(option.nativeHref);
-  }
-
-}
-
-export default fnDescr
+export const toDescr = (
+  json,
+  option
+) => _crDescr(json)
+  + _crWebsiteLink()
+  + _crDatasetLink(option.nativeHref)
