@@ -19,12 +19,8 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _QuandlFn = require("./QuandlFn");
 
-var _fnStacked = _interopRequireDefault(require("./fnStacked"));
+var _fnStacked = require("./fnStacked");
 
-const {
-  crValueMoving,
-  crZhConfig
-} = _fnStacked.default;
 const _assign = Object.assign,
       {
   crPieConfig,
@@ -175,8 +171,8 @@ const toSemiDonut = (json, option) => {
     chart: {
       height: _calcLegendHeight(_dataTop1.length)
     },
-    valueMoving: crValueMoving(_bTotal1, _year1, _bTotal2, _year2),
-    zhConfig: crZhConfig(option, id),
+    valueMoving: (0, _fnStacked.crValueMoving)(_bTotal1, _year1, _bTotal2, _year2),
+    zhConfig: (0, _fnStacked.crZhConfig)(option, id),
     info: (0, _QuandlFn.crDatasetInfo)(json)
   });
 

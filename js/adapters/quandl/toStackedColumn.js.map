@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/adapters/quandl/toStackedColumn.js"],"names":["crConfig","fnStacked","toStackedColumn","json","option","type","percentType","CHT_STACKED_COLUMN_PERCENT"],"mappings":";;;;;;;AAAA;;AAGA;;AAEA,MAAM;AAAEA,EAAAA;AAAF,IAAgBC,kBAAtB;;AAEA,MAAMC,eAAe,GAAG,CAACC,IAAD,EAAOC,MAAP,KAAkBJ,QAAQ,CAAC;AAChDK,EAAAA,IAAI,EAAE,QAD0C;AAEhDC,EAAAA,WAAW,EAAEC,qCAFmC;AAGhDJ,EAAAA,IAHgD;AAG1CC,EAAAA;AAH0C,CAAD,CAAlD;;eAMeF,e","sourcesContent":["import {\r\n  CHT_STACKED_COLUMN_PERCENT\r\n} from '../../constants/ChartType';\r\nimport fnStacked from './fnStacked'\r\n\r\nconst { crConfig  } = fnStacked;\r\n\r\nconst toStackedColumn = (json, option) => crConfig({\r\n   type: 'column',\r\n   percentType: CHT_STACKED_COLUMN_PERCENT,\r\n   json, option\r\n});\r\n\r\nexport default toStackedColumn\r\n"],"file":"toStackedColumn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/quandl/toStackedColumn.js"
+ ],
+ "file": "../../../src/adapters/quandl/toStackedColumn.js",
+ "names": [
+  "toStackedColumn",
+  "json",
+  "option",
+  "type",
+  "percentType",
+  "CHT_STACKED_COLUMN_PERCENT"
+ ],
+ "mappings": ";;;;;AAAA;;AAGA;;AAGA,MAAMA,eAAe,GAAG,CACtBC,IADsB,EAEtBC,MAFsB,KAGnB,yBAAS;AACXC,EAAAA,IAAI,EAAE,QADK;AAEXC,EAAAA,WAAW,EAAEC,qCAFF;AAGXJ,EAAAA,IAHW;AAIXC,EAAAA;AAJW,CAAT,CAHL;;eAUeF,e"
+}

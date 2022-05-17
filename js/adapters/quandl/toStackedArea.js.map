@@ -1,1 +1,15 @@
-{"version":3,"sources":["../../../src/adapters/quandl/toStackedArea.js"],"names":["crConfig","fnStacked","toStackedArea","json","option","percentType","CHT_STACKED_AREA_PERCENT"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAM;AAAEA,EAAAA;AAAF,IAAeC,kBAArB;;AAEA,MAAMC,aAAa,GAAG,CAACC,IAAD,EAAOC,MAAP,KAAkBJ,QAAQ,CAAC;AAC/CK,EAAAA,WAAW,EAAEC,mCADkC;AAE/CH,EAAAA,IAF+C;AAEzCC,EAAAA;AAFyC,CAAD,CAAhD;;eAKeF,a","sourcesContent":["import { CHT_STACKED_AREA_PERCENT } from '../../constants/ChartType';\r\nimport fnStacked from './fnStacked'\r\n\r\nconst { crConfig } = fnStacked;\r\n\r\nconst toStackedArea = (json, option) => crConfig({\r\n  percentType: CHT_STACKED_AREA_PERCENT,\r\n  json, option\r\n});\r\n\r\nexport default toStackedArea\r\n"],"file":"toStackedArea.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/quandl/toStackedArea.js"
+ ],
+ "file": "../../../src/adapters/quandl/toStackedArea.js",
+ "names": [
+  "toStackedArea",
+  "json",
+  "option",
+  "percentType",
+  "CHT_STACKED_AREA_PERCENT"
+ ],
+ "mappings": ";;;;;AAAA;;AACA;;AAEA,MAAMA,aAAa,GAAG,CACpBC,IADoB,EAEpBC,MAFoB,KAGjB,yBAAS;AACZC,EAAAA,WAAW,EAAEC,mCADD;AAEZH,EAAAA,IAFY;AAGZC,EAAAA;AAHY,CAAT,CAHL;;eASeF,a"
+}

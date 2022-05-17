@@ -19,13 +19,9 @@ var _StackedFn = require("./StackedFn");
 
 var _QuandlFn = require("./QuandlFn");
 
-var _fnStacked = _interopRequireDefault(require("./fnStacked"));
+var _fnStacked = require("./fnStacked");
 
 const _assign = Object.assign,
-      {
-  crValueMoving,
-  crZhConfig
-} = _fnStacked.default,
       {
   COLOR_PERIOD,
   COLOR_BASE1,
@@ -173,8 +169,8 @@ const toTreeMap = (json, option) => {
 
   _assign(config, {
     series: [crTreeMapSeria(data)],
-    valueMoving: crValueMoving(bTotal, yearTitle, bPrevTotal, dateTo),
-    zhConfig: crZhConfig(option, id),
+    valueMoving: (0, _fnStacked.crValueMoving)(bTotal, yearTitle, bPrevTotal, dateTo),
+    zhConfig: (0, _fnStacked.crZhConfig)(option, id),
     info: (0, _QuandlFn.crDatasetInfo)(json)
   });
 

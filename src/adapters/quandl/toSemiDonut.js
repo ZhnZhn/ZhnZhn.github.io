@@ -12,9 +12,10 @@ import {
   crDatasetInfo,
   crPercent
 } from './QuandlFn';
-import fnStacked from './fnStacked';
-
-const { crValueMoving, crZhConfig } = fnStacked;
+import {
+  crValueMoving,
+  crZhConfig
+} from './fnStacked';
 
 const _assign = Object.assign
 , {

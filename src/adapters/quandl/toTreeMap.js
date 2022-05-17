@@ -15,10 +15,12 @@ import {
   crDatasetInfo,
   setTitleToConfig
 } from './QuandlFn';
-import fnStacked from './fnStacked'
+import {
+  crValueMoving,
+  crZhConfig
+} from './fnStacked';
 
 const _assign = Object.assign
-, { crValueMoving, crZhConfig } = fnStacked
 , {
    COLOR_PERIOD,
    COLOR_BASE1,
