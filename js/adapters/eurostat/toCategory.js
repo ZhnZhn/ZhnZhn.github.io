@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _FactoryChart = _interopRequireDefault(require("./FactoryChart"));
 
-var _JsonStatFn = _interopRequireDefault(require("./JsonStatFn"));
+var _JsonStatFn = require("./JsonStatFn");
 
 var _EuroStatFn = require("./EuroStatFn");
 
@@ -27,7 +27,7 @@ const toCategory = {
     const {
       zhMapSlice: configSlice
     } = option;
-    return _JsonStatFn.default.trJsonToCategory(json, configSlice).then(_ref => {
+    return (0, _JsonStatFn.trJsonToCategory)(json, configSlice).then(_ref => {
       let {
         categories,
         data,
@@ -56,7 +56,7 @@ const toCategory = {
       seriaColor,
       seriaType
     } = option,
-          data = _JsonStatFn.default.trJsonToSeria(json, configSlice, categories),
+          data = (0, _JsonStatFn.trJsonToSeria)(json, configSlice, categories),
           _data = _filterZeroIf(data, isFilterZero),
           _seriaProps = seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
 

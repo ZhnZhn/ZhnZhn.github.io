@@ -3,11 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.trJsonToSeria = exports.trJsonToCategory = exports.createGeoSlice = exports.crGeoSeria = void 0;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
-var _AdapterFn = _interopRequireDefault(require("../AdapterFn"));
+var _compareByFn = require("../compareByFn");
 
 var _Box = _interopRequireDefault(require("../../utils/Box"));
 
@@ -26,7 +26,11 @@ const _fetchHmIdCountry = () => !isHmFetched ? fetch(URL_ID_COUNTRY).then(res =>
 
 const _getCountryById = id => hmIdCountry[id] || id;
 
-const _combineToArr = (dGeo, sGeo, status = {}) => {
+const _combineToArr = function (dGeo, sGeo, status) {
+  if (status === void 0) {
+    status = {};
+  }
+
   const arr = [];
   dGeo.forEach((id, index) => {
     if (sGeo[index] != null && sGeo[index].value != null) {
@@ -103,75 +107,89 @@ const _isGeoSliceEmpty = sGeo => {
     return true;
   }
 
-  return sGeo.filter(({
-    value
-  }) => Boolean(value)).length === 0 ? true : false;
+  return sGeo.filter(_ref => {
+    let {
+      value
+    } = _ref;
+    return Boolean(value);
+  }).length === 0 ? true : false;
 };
 
-const JsonStatFn = {
-  createGeoSlice: (json, configSlice = {}, dfTime) => {
-    const ds = (0, _jsonstat.default)(json).Dataset(0); // 1) Try create _sGeo with configSlice
+const createGeoSlice = function (json, configSlice, dfTime) {
+  if (configSlice === void 0) {
+    configSlice = {};
+  }
 
-    let time = configSlice.time,
-        _sGeo = ds.Data(configSlice); // 2) Try create _sGeo with configSlice and dfTime from dialog
+  const ds = (0, _jsonstat.default)(json).Dataset(0); // 1) Try create _sGeo with configSlice
+
+  let time = configSlice.time,
+      _sGeo = ds.Data(configSlice); // 2) Try create _sGeo with configSlice and dfTime from dialog
 
 
-    if (dfTime && _isGeoSliceEmpty(_sGeo)) {
+  if (dfTime && _isGeoSliceEmpty(_sGeo)) {
+    _sGeo = ds.Data({ ...configSlice,
+      ...{
+        time: dfTime
+      }
+    });
+    time = dfTime;
+  } // 3) Try create _sGeo with maxIndex time available in ds
+
+
+  if (_isGeoSliceEmpty(_sGeo)) {
+    const maxIndex = (ds.Dimension("time").id || []).length;
+
+    if (maxIndex > 0) {
+      time = ds.Dimension("time").id[maxIndex - 1];
       _sGeo = ds.Data({ ...configSlice,
         ...{
-          time: dfTime
+          time
         }
       });
-      time = dfTime;
-    } // 3) Try create _sGeo with maxIndex time available in ds
-
-
-    if (_isGeoSliceEmpty(_sGeo)) {
-      const maxIndex = (ds.Dimension("time").id || []).length;
-
-      if (maxIndex > 0) {
-        time = ds.Dimension("time").id[maxIndex - 1];
-        _sGeo = ds.Data({ ...configSlice,
-          ...{
-            time
-          }
-        });
-      }
     }
-
-    return {
-      dGeo: ds.Dimension("geo") || {
-        id: []
-      },
-      sGeo: _sGeo || [],
-      time
-    };
-  },
-  crGeoSeria: (json, configSlice) => {
-    const ds = (0, _jsonstat.default)(json).Dataset(0) || {},
-          data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(obj => obj.value).filter(value => value !== null);
-    return {
-      date: (ds.Dimension == null ? void 0 : ds.Dimension("time")) || {},
-      data
-    };
-  },
-  trJsonToCategory: (json, configSlice) => {
-    const {
-      dGeo,
-      sGeo
-    } = JsonStatFn.createGeoSlice(json, configSlice);
-    return _fetchHmIdCountry().then(() => {
-      return (0, _Box.default)(_combineToArr(dGeo.id, sGeo, json.status)).map(arr => arr.sort(_AdapterFn.default.compareByValueId)).fold(_splitForConfig);
-    });
-  },
-  trJsonToSeria: (json, configSlice, categories) => {
-    const {
-      dGeo,
-      sGeo
-    } = JsonStatFn.createGeoSlice(json, configSlice);
-    return (0, _Box.default)(_combineToHm(dGeo.id, sGeo)).fold(hm => _trHmToData(hm, categories));
   }
+
+  return {
+    dGeo: ds.Dimension("geo") || {
+      id: []
+    },
+    sGeo: _sGeo || [],
+    time
+  };
 };
-var _default = JsonStatFn;
-exports.default = _default;
+
+exports.createGeoSlice = createGeoSlice;
+
+const crGeoSeria = (json, configSlice) => {
+  const ds = (0, _jsonstat.default)(json).Dataset(0) || {},
+        data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(obj => obj.value).filter(value => value !== null);
+  return {
+    date: (ds.Dimension == null ? void 0 : ds.Dimension("time")) || {},
+    data
+  };
+};
+
+exports.crGeoSeria = crGeoSeria;
+
+const trJsonToCategory = (json, configSlice) => {
+  const {
+    dGeo,
+    sGeo
+  } = createGeoSlice(json, configSlice);
+  return _fetchHmIdCountry().then(() => {
+    return (0, _Box.default)(_combineToArr(dGeo.id, sGeo, json.status)).map(arr => arr.sort(_compareByFn.compareByValueId)).fold(_splitForConfig);
+  });
+};
+
+exports.trJsonToCategory = trJsonToCategory;
+
+const trJsonToSeria = (json, configSlice, categories) => {
+  const {
+    dGeo,
+    sGeo
+  } = createGeoSlice(json, configSlice);
+  return (0, _Box.default)(_combineToHm(dGeo.id, sGeo)).fold(hm => _trHmToData(hm, categories));
+};
+
+exports.trJsonToSeria = trJsonToSeria;
 //# sourceMappingURL=JsonStatFn.js.map

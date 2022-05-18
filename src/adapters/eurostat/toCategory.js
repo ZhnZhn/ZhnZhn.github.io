@@ -1,5 +1,8 @@
 import FactoryChart from './FactoryChart';
-import JsonStatFn from './JsonStatFn';
+import {
+  trJsonToCategory,
+  trJsonToSeria
+} from './JsonStatFn';
 import {
   addToCategoryConfig,
   findMinY,
@@ -22,7 +25,7 @@ const _crScatterProps = (seriaColor)  => ({
 const toCategory = {
   createConfig: (json, option) => {
     const { zhMapSlice:configSlice } = option;
-    return JsonStatFn.trJsonToCategory(json, configSlice)
+    return trJsonToCategory(json, configSlice)
        .then(({ categories, data, min }) => {
           const config = FactoryChart.createConfig(option)
           addToCategoryConfig(config, {
@@ -41,7 +44,7 @@ const toCategory = {
         seriaColor,
         seriaType
       } = option
-    , data = JsonStatFn.trJsonToSeria(json, configSlice, categories)
+    , data = trJsonToSeria(json, configSlice, categories)
     , _data = _filterZeroIf(data, isFilterZero)
     , _seriaProps = seriaType === 'DOT_SET'
         ? _crScatterProps(seriaColor)
