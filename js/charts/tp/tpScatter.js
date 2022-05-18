@@ -1,22 +1,15 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _tpFn = _interopRequireDefault(require("./tpFn"));
+var _tpFn = require("./tpFn");
 
 var _Colors = require("./Colors");
 
-const {
-  crHeader,
-  crRow,
-  crSpan
-} = _tpFn.default;
 const FONT_STYLE = 'font-size:16px;font-weight:bold';
 
-const _crExDividend = function (_ref) {
+const _crExDividend = _ref => {
   let {
     date,
     id,
@@ -28,12 +21,12 @@ const _crExDividend = function (_ref) {
     exValue,
     price
   } = point;
-  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Ex-Dividend', exValue, {
+  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Ex-Dividend', exValue, {
     color: _Colors.EX_DIVIDEND_COLOR
-  }) + "\n    " + crRow('Close', price) + "\n  </div>";
+  }) + "\n    " + (0, _tpFn.crRow)('Close', price) + "\n  </div>";
 };
 
-const _crSplitRatio = function (_ref2) {
+const _crSplitRatio = _ref2 => {
   let {
     date,
     id,
@@ -45,12 +38,12 @@ const _crSplitRatio = function (_ref2) {
     splitRatio,
     price
   } = point;
-  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Split Ratio', splitRatio, {
+  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Split Ratio', splitRatio, {
     color: _Colors.SPLIT_RATIO_COLOR
-  }) + "\n    " + crRow('Close', price) + "\n  </div>";
+  }) + "\n    " + (0, _tpFn.crRow)('Close', price) + "\n  </div>";
 };
 
-const _crExValue = function (_ref3) {
+const _crExValue = _ref3 => {
   let {
     date,
     id,
@@ -59,10 +52,10 @@ const _crExValue = function (_ref3) {
   const {
     exValue
   } = point;
-  return crHeader(date, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Value', exValue) + "\n  </div>";
+  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Value', exValue) + "\n  </div>";
 };
 
-const _crEps = function (_ref4) {
+const _crEps = _ref4 => {
   let {
     date,
     id,
@@ -77,9 +70,9 @@ const _crEps = function (_ref4) {
     numberOfEstimates,
     EPSSurpriseDollar
   } = point;
-  return crHeader(date, id) + "\n  <div class=\"tp_body\">\n    <div>\n      " + crSpan('', announceTime, {
+  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp_body\">\n    <div>\n      " + (0, _tpFn.crSpan)('', announceTime, {
     color: _Colors.YEAR_COLOR
-  }) + "\n      " + crSpan('', fiscalPeriod) + "\n      " + crSpan('', fiscalEndDate) + "\n    </div>\n    <div style=" + FONT_STYLE + ">\n      " + crSpan('EPS', actualEPS) + "\n      " + crSpan('Est.', estimatedEPS) + "\n    </div>\n    <div style=" + FONT_STYLE + ">\n      " + crSpan('Supr.', EPSSurpriseDollar) + "\n      " + crSpan('NumbEst.', numberOfEstimates) + "\n    </div>\n  </div>";
+  }) + "\n      " + (0, _tpFn.crSpan)('', fiscalPeriod) + "\n      " + (0, _tpFn.crSpan)('', fiscalEndDate) + "\n    </div>\n    <div style=" + FONT_STYLE + ">\n      " + (0, _tpFn.crSpan)('EPS', actualEPS) + "\n      " + (0, _tpFn.crSpan)('Est.', estimatedEPS) + "\n    </div>\n    <div style=" + FONT_STYLE + ">\n      " + (0, _tpFn.crSpan)('Supr.', EPSSurpriseDollar) + "\n      " + (0, _tpFn.crSpan)('NumbEst.', numberOfEstimates) + "\n    </div>\n  </div>";
 };
 
 const tpScatter = {

@@ -9,16 +9,10 @@ var _reactDom = require("react-dom");
 
 var _SparkFactory = _interopRequireDefault(require("../../components/factories/SparkFactory"));
 
-var _tpFn = _interopRequireDefault(require("./tpFn"));
+var _tpFn = require("./tpFn");
 
 var _Colors = require("./Colors");
 
-const {
-  crHeader,
-  crRow,
-  toNumberFormat,
-  addHideHandler
-} = _tpFn.default;
 const SPARKLINES_SUFFIX_ID = 'sparklines',
       SPARKLINES_BAR_SUFFIX_ID = 'sparklines_bar',
       WIDTH_CHAR = 10,
@@ -26,7 +20,7 @@ const SPARKLINES_SUFFIX_ID = 'sparklines',
       WIDTH_TOTAL = 50,
       WIDTH_SPARK = 20 + 80 + 16;
 
-const _fnCalcWidthSparkType4 = function (value, total) {
+const _fnCalcWidthSparkType4 = (value, total) => {
   const _width1 = WIDTH_VALUE + value.length * WIDTH_CHAR,
         _width2 = WIDTH_TOTAL + total.length * WIDTH_CHAR,
         width = _width1 > _width2 ? _width1 : _width2,
@@ -38,7 +32,7 @@ const _fnCalcWidthSparkType4 = function (value, total) {
   };
 };
 
-const _fnTooltipSparkType4 = function (_ref) {
+const _fnTooltipSparkType4 = _ref => {
   let {
     fullWidth,
     width,
@@ -51,9 +45,9 @@ const _fnTooltipSparkType4 = function (_ref) {
 
   const _style = "style=\"float:left;padding-right:10px;width:" + width + "px;\"";
 
-  return "<div class=\"tp__body\">\n  <div class=\"tp__body__part1\" style=\"width:" + fullWidth + "px;\" >\n    <div " + _style + ">\n      " + crRow('Year', year, {
+  return "<div class=\"tp__body\">\n  <div class=\"tp__body__part1\" style=\"width:" + fullWidth + "px;\" >\n    <div " + _style + ">\n      " + (0, _tpFn.crRow)('Year', year, {
     color: _Colors.YEAR_COLOR
-  }) + "\n      " + crRow('Value', value) + "\n    </div>\n    <div id=\"" + id + "_" + SPARKLINES_SUFFIX_ID + "\" class=\"tp__body__sparklines\">\n    </div>\n  </div>\n  <div class=\"tp__body__part1\" style=\"width:" + fullWidth + "px;\" >\n    <div " + _style + ">\n      " + crRow('Total', total) + "\n      " + crRow('Percent', percent) + "\n    </div>\n    <div id=\"" + id + "_" + SPARKLINES_BAR_SUFFIX_ID + "\" class=\"tp__body__sparklines\">\n    </div>\n  </div>";
+  }) + "\n      " + (0, _tpFn.crRow)('Value', value) + "\n    </div>\n    <div id=\"" + id + "_" + SPARKLINES_SUFFIX_ID + "\" class=\"tp__body__sparklines\">\n    </div>\n  </div>\n  <div class=\"tp__body__part1\" style=\"width:" + fullWidth + "px;\" >\n    <div " + _style + ">\n      " + (0, _tpFn.crRow)('Total', total) + "\n      " + (0, _tpFn.crRow)('Percent', percent) + "\n    </div>\n    <div id=\"" + id + "_" + SPARKLINES_BAR_SUFFIX_ID + "\" class=\"tp__body__sparklines\">\n    </div>\n  </div>";
 };
 
 const _crSparkData = point => {
@@ -87,7 +81,7 @@ const _crSparkData = point => {
 
 const _onAfterRender = function (id, point) {
   setTimeout(function () {
-    addHideHandler(id, point);
+    (0, _tpFn.addHideHandler)(id, point);
 
     const {
       sparkLinesData,
@@ -102,7 +96,7 @@ const _onAfterRender = function (id, point) {
   }, 1);
 };
 
-const _crStackedArea = function (_ref2) {
+const _crStackedArea = _ref2 => {
   let {
     id,
     value,
@@ -115,13 +109,13 @@ const _crStackedArea = function (_ref2) {
     percent = '0.0',
     total = 0
   } = point,
-        _total = toNumberFormat(total),
+        _total = (0, _tpFn.toNumberFormat)(total),
         {
     fullWidth,
     width
   } = _fnCalcWidthSparkType4(value, _total);
 
-  return crHeader(nameFull, id) + _fnTooltipSparkType4({
+  return (0, _tpFn.crHeader)(nameFull, id) + _fnTooltipSparkType4({
     fullWidth,
     width,
     year: category,
@@ -132,7 +126,7 @@ const _crStackedArea = function (_ref2) {
   });
 };
 
-const _crTreeMap = function (_ref3) {
+const _crTreeMap = _ref3 => {
   let {
     id,
     point
@@ -145,14 +139,14 @@ const _crTreeMap = function (_ref3) {
     percent = '0.0',
     total = 0
   } = point,
-        _value = toNumberFormat(value),
-        _total = toNumberFormat(total),
+        _value = (0, _tpFn.toNumberFormat)(value),
+        _total = (0, _tpFn.toNumberFormat)(total),
         {
     fullWidth,
     width
   } = _fnCalcWidthSparkType4(_value, _total);
 
-  return crHeader(nameFull, id) + _fnTooltipSparkType4({
+  return (0, _tpFn.crHeader)(nameFull, id) + _fnTooltipSparkType4({
     fullWidth,
     width,
     year,

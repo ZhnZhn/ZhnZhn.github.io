@@ -1,21 +1,13 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _tpFn = _interopRequireDefault(require("./tpFn"));
+var _tpFn = require("./tpFn");
 
 var _Colors = require("./Colors");
 
-const {
-  crHeader,
-  crRow,
-  toNumberFormatAll
-} = _tpFn.default;
-
-const _crTreeMap = function (_ref) {
+const _crTreeMap = _ref => {
   let {
     id,
     point
@@ -28,9 +20,9 @@ const _crTreeMap = function (_ref) {
     percent = ''
   } = point,
         _percent = percent ? "(" + percent + "%)" : '',
-        _value = toNumberFormatAll(value) + " " + _percent;
+        _value = (0, _tpFn.toNumberFormatAll)(value) + " " + _percent;
 
-  return crHeader(title, id) + "\n  <div class=\"tp_body\">\n    " + crRow('', label) + "\n    " + crRow('', _value, {
+  return (0, _tpFn.crHeader)(title, id) + "\n  <div class=\"tp_body\">\n    " + (0, _tpFn.crRow)('', label) + "\n    " + (0, _tpFn.crRow)('', _value, {
     color: _Colors.YEAR_COLOR
   }) + "\n  </div>\n  ";
 };

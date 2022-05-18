@@ -1,16 +1,20 @@
-import fn from './tpFn';
-
-const {
-  crHeader, crRow,
+import {
+  crHeader,
+  crRow,
   crNotEmptySpan,
   toTdmy,
   toTdmyIf
-} = fn;
+} from './tpFn';
 
 const CL_TP_BODY = "tp__body"
 , CL_TP_ROW = "tp__row";
 
-const _crVolume = ({date, id, value, point}) => {
+const _crVolume = ({
+  date,
+  id,
+  value,
+  point
+}) => {
   const {_open, _close, _low, _high} = point;
   return `${crHeader(date, id)}
   <div class="${CL_TP_BODY}">
@@ -26,7 +30,12 @@ const _crVolume = ({date, id, value, point}) => {
   </div>`;
 };
 
-const _crAtn = ({date, id, value, point}) => {
+const _crAtn = ({
+  date,
+  id,
+  value,
+  point
+}) => {
   const {color, y, close, open} = point;
   return `${crHeader(date, id)}
     <div class="${CL_TP_BODY}">

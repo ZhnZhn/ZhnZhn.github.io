@@ -3,11 +3,18 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
-
-var _isSupportOptions = _interopRequireDefault(require("../../utils/isSupportOptions"));
+exports.toTdmyIf = exports.toTdmy = exports.toNumberFormat = exports.toDmy = exports.getStatus = exports.crTpId = exports.crSpan = exports.crRow = exports.crNotEmptySpan = exports.crHeader = exports.addHideHandler = void 0;
 
 var _ChartFn = require("../ChartFn");
+
+exports.crTpId = _ChartFn.crTpId;
+exports.toNumberFormat = _ChartFn.toNumberFormat;
+exports.toNumberFormatAll = _ChartFn.toNumberFormatAll;
+exports.toDmy = _ChartFn.toDmy;
+exports.toTdmy = _ChartFn.toTdmy;
+exports.toTdmyIf = _ChartFn.toTdmyIf;
+
+var _isSupportOptions = _interopRequireDefault(require("../../utils/isSupportOptions"));
 
 var _Colors = require("./Colors");
 
@@ -58,73 +65,80 @@ const _crSpanStyle = function (color, tailStyle) {
   return "style=\"color:" + color + ";" + FONT_STYLE + tailStyle + "\"";
 };
 
-const tpFn = {
-  crSpan: function (t, v, _temp) {
-    if (v === void 0) {
-      v = '';
-    }
-
-    let {
-      color = _Colors.VALUE_COLOR,
-      status
-    } = _temp === void 0 ? {} : _temp;
-
-    const _vStyle = _crSpanStyle(color, VALUE_STYLE),
-          _t = t ? t + ": " : '',
-          _v = v !== null ? v : '',
-          _statusSpan = status ? "<span " + _crSpanStyle(color, STATUS_STYLE) + ">(" + status + ")</span>" : '';
-
-    return "\n    <span " + TITLE_STYLE + ">" + _t + "</span>\n    <span " + _vStyle + ">" + _v + "</span>" + _statusSpan;
-  },
-  crNotEmptySpan: (title, v) => _isValueEmpty(v) ? '' : tpFn.crSpan(title, (0, _ChartFn.toNumberFormatAll)(v)),
-  crRow: function (t, v, option) {
-    if (t === void 0) {
-      t = '';
-    }
-
-    if (v === void 0) {
-      v = '';
-    }
-
-    return "<div class=\"" + CL_TP_ROW + "\">" + tpFn.crSpan(t, v, option) + "</div>";
-  },
-  crHeader: function (date, id, cssClass) {
-    if (date === void 0) {
-      date = '&nbsp;';
-    }
-
-    if (cssClass === void 0) {
-      cssClass = '';
-    }
-
-    return "<div id=\"" + id + "\" class=\"" + CL_TP_HEADER + " " + cssClass + "\">\n      <span class=\"" + CL_TP_CAPTION + "\">" + date + "</span>\n      <span class=\"" + CL_TP_BT_CLOSE + "\">X</span>\n    </div>";
-  },
-  crTpId: _ChartFn.crTpId,
-  toNumberFormat: _ChartFn.toNumberFormat,
-  toNumberFormatAll: _ChartFn.toNumberFormatAll,
-  toDmy: _ChartFn.toDmy,
-  toTdmy: _ChartFn.toTdmy,
-  toTdmyIf: _ChartFn.toTdmyIf,
-  addHideHandler: (id, point, fn) => {
-    _addClickOnceById(id, _fHideTooltip(point, fn));
-  },
-  getStatus: point => {
-    const {
-      index,
-      series
-    } = point,
-          {
-      userOptions
-    } = series || {},
-          {
-      data
-    } = userOptions || {},
-          _p = (data || [])[index] || [],
-          _status = _p[2];
-
-    return _status && _status !== ':' ? _status : void 0;
+const crSpan = function (t, v, _temp) {
+  if (v === void 0) {
+    v = '';
   }
+
+  let {
+    color = _Colors.VALUE_COLOR,
+    status
+  } = _temp === void 0 ? {} : _temp;
+
+  const _vStyle = _crSpanStyle(color, VALUE_STYLE),
+        _t = t ? t + ": " : '',
+        _v = v !== null ? v : '',
+        _statusSpan = status ? "<span " + _crSpanStyle(color, STATUS_STYLE) + ">(" + status + ")</span>" : '';
+
+  return "\n  <span " + TITLE_STYLE + ">" + _t + "</span>\n  <span " + _vStyle + ">" + _v + "</span>" + _statusSpan;
 };
-var _default = tpFn;
-exports.default = _default;
+
+exports.crSpan = crSpan;
+
+const crNotEmptySpan = (title, v) => _isValueEmpty(v) ? '' : crSpan(title, (0, _ChartFn.toNumberFormatAll)(v));
+
+exports.crNotEmptySpan = crNotEmptySpan;
+
+const crRow = function (t, v, option) {
+  if (t === void 0) {
+    t = '';
+  }
+
+  if (v === void 0) {
+    v = '';
+  }
+
+  return "<div class=\"" + CL_TP_ROW + "\">" + crSpan(t, v, option) + "</div>";
+};
+
+exports.crRow = crRow;
+
+const crHeader = function (date, id, cssClass) {
+  if (date === void 0) {
+    date = '&nbsp;';
+  }
+
+  if (cssClass === void 0) {
+    cssClass = '';
+  }
+
+  return "<div id=\"" + id + "\" class=\"" + CL_TP_HEADER + " " + cssClass + "\">\n      <span class=\"" + CL_TP_CAPTION + "\">" + date + "</span>\n      <span class=\"" + CL_TP_BT_CLOSE + "\">X</span>\n    </div>";
+};
+
+exports.crHeader = crHeader;
+
+const addHideHandler = (id, point, fn) => {
+  _addClickOnceById(id, _fHideTooltip(point, fn));
+};
+
+exports.addHideHandler = addHideHandler;
+
+const getStatus = point => {
+  const {
+    index,
+    series
+  } = point,
+        {
+    userOptions
+  } = series || {},
+        {
+    data
+  } = userOptions || {},
+        _p = (data || [])[index] || [],
+        _status = _p[2];
+
+  return _status && _status !== ':' ? _status : void 0;
+};
+
+exports.getStatus = getStatus;
 //# sourceMappingURL=tpFn.js.map

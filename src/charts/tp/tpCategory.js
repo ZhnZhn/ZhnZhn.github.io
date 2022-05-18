@@ -1,15 +1,20 @@
-import fns from './tpFn';
-
-const {
-   crHeader, crRow,
+import {
+   crHeader,
+   crRow,
    toNumberFormatAll,
    addHideHandler
- } = fns;
+ } from './tpFn';
 
-const _crSimple = function({ id, point }){
+const _crSimple = ({
+  id,
+  point
+}) => {
    const {
-     y, status, d,
-     category, c,
+     y,
+     status,
+     d,
+     category,
+     c,
      series
    } = point
    , { name, color } = series || {}
@@ -22,7 +27,10 @@ const _crSimple = function({ id, point }){
    </div>`;
  };
 
-const _crRemove = function({ id, point }){
+const _crRemove = ({
+  id,
+  point
+}) => {
   const { y, c, category, status } = point;
   return `${crHeader(c || category, id)}
   <div class="tp__body">

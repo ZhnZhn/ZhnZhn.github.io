@@ -6,14 +6,12 @@ import tpSpark from './tp/tpSpark'
 import tpTreeMap from './tp/tpTreeMap'
 import tpDonut from './tp/tpDonut'
 
-import fns from './tp/tpFn'
-
-const {
+import {
   crTpId,
   toNumberFormat,
   toDmy,
   addHideHandler
-} = fns;
+} from './tp/tpFn';
 
 const _fnAddHandlerClose = function(id, point){
   setTimeout(() => addHideHandler(id, point), 1);
@@ -58,7 +56,7 @@ const Tooltip = {
   vTdmy: _fFormatter({...tpSpline.vTdmy}),
 
   categorySimple: _fFormatter({...tpCategory.simple}),
-  category: _fFormatter({...tpCategory.remove}),  
+  category: _fFormatter({...tpCategory.remove}),
 
   exDividend: _fFormatter({...tpScatter.exDividend}),
   splitRatio: _fFormatter({...tpScatter.splitRatio}),

@@ -1,13 +1,16 @@
-import fn from './tpFn'
+import {
+  crHeader,
+  crRow
+} from './tpFn';
 
-const { crHeader, crRow } = fn;
-
-const _crDonut = function({ id, value, point }){
-  return `${crHeader(point.nameFull, id)}
-  <div class="tp__body">
-    ${crRow('Value', value)}
-  </div>`;
-}
+const _crDonut = ({
+   id,
+   value,
+   point
+ }) => `${crHeader(point.nameFull, id)}
+<div class="tp__body">
+  ${crRow('Value', value)}
+</div>`
 
 const tpDonut = {
   value: {

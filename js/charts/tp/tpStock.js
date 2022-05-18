@@ -1,19 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _tpFn = _interopRequireDefault(require("./tpFn"));
+var _tpFn = require("./tpFn");
 
-const {
-  crHeader,
-  crRow,
-  crNotEmptySpan,
-  toTdmy,
-  toTdmyIf
-} = _tpFn.default;
 const CL_TP_BODY = "tp__body",
       CL_TP_ROW = "tp__row";
 
@@ -30,7 +21,7 @@ const _crVolume = _ref => {
     _low,
     _high
   } = point;
-  return crHeader(date, id) + "\n  <div class=\"" + CL_TP_BODY + "\">\n    " + crRow('Volume', value) + "\n    <div class=\"" + CL_TP_ROW + "\">\n      " + crNotEmptySpan('Open', _open) + "\n      " + crNotEmptySpan('Close', _close) + "\n    </div>\n    <div class=\"" + CL_TP_ROW + "\">\n      " + crNotEmptySpan('Low', _low) + "\n      " + crNotEmptySpan('High', _high) + "\n    </div>\n  </div>";
+  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"" + CL_TP_BODY + "\">\n    " + (0, _tpFn.crRow)('Volume', value) + "\n    <div class=\"" + CL_TP_ROW + "\">\n      " + (0, _tpFn.crNotEmptySpan)('Open', _open) + "\n      " + (0, _tpFn.crNotEmptySpan)('Close', _close) + "\n    </div>\n    <div class=\"" + CL_TP_ROW + "\">\n      " + (0, _tpFn.crNotEmptySpan)('Low', _low) + "\n      " + (0, _tpFn.crNotEmptySpan)('High', _high) + "\n    </div>\n  </div>";
 };
 
 const _crAtn = _ref2 => {
@@ -46,9 +37,9 @@ const _crAtn = _ref2 => {
     close,
     open
   } = point;
-  return crHeader(date, id) + "\n    <div class=\"" + CL_TP_BODY + "\">\n      " + crRow('ATH', y + '%', {
+  return (0, _tpFn.crHeader)(date, id) + "\n    <div class=\"" + CL_TP_BODY + "\">\n      " + (0, _tpFn.crRow)('ATH', y + '%', {
     color
-  }) + "\n      " + crRow('Prev Close', close) + "\n      " + crRow('Next Open', open) + "\n    </div>";
+  }) + "\n      " + (0, _tpFn.crRow)('Prev Close', close) + "\n      " + (0, _tpFn.crRow)('Next Open', open) + "\n    </div>";
 };
 
 const tpStock = {
@@ -58,12 +49,12 @@ const tpStock = {
   },
   volumeTdmy: {
     fnTemplate: _crVolume,
-    fnDateFormat: toTdmy,
+    fnDateFormat: _tpFn.toTdmy,
     isWithValue: true
   },
   volumeTdmyIf: {
     fnTemplate: _crVolume,
-    fnDateFormat: toTdmyIf,
+    fnDateFormat: _tpFn.toTdmyIf,
     isWithValue: true
   },
   ath: {

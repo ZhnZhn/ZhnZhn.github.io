@@ -1,13 +1,20 @@
-import fn from './tpFn';
+import {
+  crHeader,
+  crRow,
+  toNumberFormatAll
+} from './tpFn';
 import { YEAR_COLOR } from './Colors';
 
-const {
-  crHeader, crRow,
-  toNumberFormatAll
-} = fn;
-
-const _crTreeMap = function({ id, point }){
-  const { title, label, value, percent='' } = point
+const _crTreeMap = ({
+  id,
+  point
+}) => {
+  const {
+    title,
+    label,
+    value,
+    percent=''
+  } = point
   , _percent = percent ? `(${percent}%)` : ''
   , _value = `${toNumberFormatAll(value)} ${_percent}`;
   return `${crHeader(title, id)}

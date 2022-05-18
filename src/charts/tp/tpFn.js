@@ -1,5 +1,4 @@
-import isSupportOptions from '../../utils/isSupportOptions';
-import {
+export {
   crTpId,
   toNumberFormat,
   toNumberFormatAll,
@@ -7,6 +6,10 @@ import {
   toTdmy,
   toTdmyIf
 } from '../ChartFn';
+
+import isSupportOptions from '../../utils/isSupportOptions';
+import { toNumberFormatAll } from '../ChartFn';
+
 import {
   TITLE_COLOR,
   VALUE_COLOR
@@ -45,56 +48,64 @@ const _isValueEmpty = v => v === 'NoData'
  || v === ''
  || v == null;
 
-const _crSpanStyle = (color, tailStyle='') => `style="color:${color};${FONT_STYLE}${tailStyle}"`;
+const _crSpanStyle = (
+  color,
+  tailStyle=''
+) => `style="color:${color};${FONT_STYLE}${tailStyle}"`;
 
-const tpFn = {
-  crSpan: (t, v='', {color=VALUE_COLOR, status}={}) => {
-    const _vStyle = _crSpanStyle(color, VALUE_STYLE)
-    , _t = t ? `${t}: `: ''
-    , _v = v !== null ? v: ''
-    , _statusSpan = status
-         ? `<span ${_crSpanStyle(color, STATUS_STYLE)}>(${status})</span>`
-         : '';
-    return `
-    <span ${TITLE_STYLE}>${_t}</span>
-    <span ${_vStyle}>${_v}</span>${_statusSpan}`;
-  },
-  crNotEmptySpan: (title, v) => _isValueEmpty(v)
-    ? ''
-    : tpFn.crSpan(title, toNumberFormatAll(v)),
-  crRow: (t='', v='', option) => {
-    return `<div class="${CL_TP_ROW}">${tpFn.crSpan(t, v, option)}</div>`;
-  },
+export const crSpan = (
+  t,
+  v='',
+  {color=VALUE_COLOR, status}={}
+) => {
+  const _vStyle = _crSpanStyle(color, VALUE_STYLE)
+  , _t = t ? `${t}: `: ''
+  , _v = v !== null ? v: ''
+  , _statusSpan = status
+       ? `<span ${_crSpanStyle(color, STATUS_STYLE)}>(${status})</span>`
+       : '';
+  return `
+  <span ${TITLE_STYLE}>${_t}</span>
+  <span ${_vStyle}>${_v}</span>${_statusSpan}`;
+}
 
-  crHeader: (date='&nbsp;', id, cssClass='') => {
-    return `<div id="${id}" class="${CL_TP_HEADER} ${cssClass}">
+export const crNotEmptySpan = (
+  title,
+  v
+) => _isValueEmpty(v)
+  ? ''
+  : crSpan(title, toNumberFormatAll(v))
+
+export const crRow = (
+  t='',
+  v='',
+  option
+) => `<div class="${CL_TP_ROW}">${crSpan(t, v, option)}</div>`
+
+export const crHeader = (
+  date='&nbsp;',
+  id,
+  cssClass=''
+) => `<div id="${id}" class="${CL_TP_HEADER} ${cssClass}">
       <span class="${CL_TP_CAPTION}">${date}</span>
       <span class="${CL_TP_BT_CLOSE}">X</span>
-    </div>`;
-  },
+    </div>`
 
-  crTpId,
-  toNumberFormat,
-  toNumberFormatAll,
-  toDmy,
-  toTdmy,
-  toTdmyIf,
+export const addHideHandler = (
+  id,
+  point,
+  fn
+) => {
+  _addClickOnceById(id, _fHideTooltip(point, fn))
+}
 
-  addHideHandler: (id, point, fn) => {
-    _addClickOnceById(id, _fHideTooltip(point, fn))
-  },
-
-  getStatus: point => {
-    const { index, series } = point
-    , { userOptions } = series || {}
-    , { data } = userOptions || {}
-    , _p = (data || [])[index] || []
-    , _status = _p[2];
-    return _status && _status !== ':'
-      ? _status
-      : void 0;
-  }
-
-};
-
-export default tpFn
+export const getStatus = point => {
+  const { index, series } = point
+  , { userOptions } = series || {}
+  , { data } = userOptions || {}
+  , _p = (data || [])[index] || []
+  , _status = _p[2];
+  return _status && _status !== ':'
+    ? _status
+    : void 0;
+}

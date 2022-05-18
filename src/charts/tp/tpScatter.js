@@ -1,15 +1,23 @@
-import fn from './tpFn';
+import {
+  crHeader,
+  crRow,
+  crSpan
+} from './tpFn';
 import {
   YEAR_COLOR,
   EX_DIVIDEND_COLOR,
   SPLIT_RATIO_COLOR
 } from './Colors';
 
-const { crHeader, crRow, crSpan } = fn;
-
 const FONT_STYLE = 'font-size:16px;font-weight:bold';
 
-const _crExDividend = function({date, id, valueText, value, point}){
+const _crExDividend = ({
+  date,
+  id,
+  valueText,
+  value,
+  point
+}) => {
   const { exValue, price } = point;
   return `${crHeader(date, id)}
   <div class="tp__body">
@@ -18,7 +26,13 @@ const _crExDividend = function({date, id, valueText, value, point}){
   </div>`;
 };
 
-const _crSplitRatio = function({date, id, valueText, value, point}){
+const _crSplitRatio = ({
+  date,
+  id,
+  valueText,
+  value,
+  point
+}) => {
   const { splitRatio, price } = point
   return `${crHeader(date, id)}
   <div class="tp__body">
@@ -27,7 +41,11 @@ const _crSplitRatio = function({date, id, valueText, value, point}){
   </div>`;
 };
 
-const _crExValue = function({ date, id, point }){
+const _crExValue = ({
+  date,
+  id,
+  point
+}) => {
   const { exValue } = point;
   return `${crHeader(date, id)}
   <div class="tp__body">
@@ -35,11 +53,19 @@ const _crExValue = function({ date, id, point }){
   </div>`;
 };
 
-const _crEps = function({ date, id, point }){
+const _crEps = ({
+  date,
+  id,
+  point
+}) => {
   const {
-    announceTime, fiscalPeriod, fiscalEndDate,
-    actualEPS, estimatedEPS,
-    numberOfEstimates, EPSSurpriseDollar
+    announceTime,
+    fiscalPeriod,
+    fiscalEndDate,
+    actualEPS,
+    estimatedEPS,
+    numberOfEstimates,
+    EPSSurpriseDollar
   } = point;
   return `${crHeader(date, id)}
   <div class="tp_body">

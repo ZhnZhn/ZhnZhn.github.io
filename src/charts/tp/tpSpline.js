@@ -1,13 +1,19 @@
-import fn from './tpFn'
-
-const {
-  crHeader, crRow,
+import {
+  crHeader,
+  crRow,
   toTdmy,
   toTdmyIf,
   getStatus
- } = fn;
+ } from './tpFn'
 
-const _crValue = function({date, id, color, valueText='Value', value, point}){
+const _crValue = ({
+  date,
+  id,
+  color,
+  valueText='Value',
+  value,
+  point
+}) => {
   const status = getStatus(point);
   return `${crHeader(date, id)}
   <div class="tp__body">
@@ -32,7 +38,6 @@ const tpSpline = {
     ..._splineOptions,
     fnDateFormat: toTdmyIf
   }
-
 };
 
 export default tpSpline

@@ -1,20 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _tpFn = _interopRequireDefault(require("./tpFn"));
+var _tpFn = require("./tpFn");
 
-const {
-  crHeader,
-  crRow,
-  toNumberFormatAll,
-  addHideHandler
-} = _tpFn.default;
-
-const _crSimple = function (_ref) {
+const _crSimple = _ref => {
   let {
     id,
     point
@@ -35,14 +26,14 @@ const _crSimple = function (_ref) {
         _c = category || c,
         _date = d ? _c + "-" + d : _c;
 
-  return crHeader(_date, id) + "\n   <div class=\"tp__body\">\n     " + crRow('Value', toNumberFormatAll(y), {
+  return (0, _tpFn.crHeader)(_date, id) + "\n   <div class=\"tp__body\">\n     " + (0, _tpFn.crRow)('Value', (0, _tpFn.toNumberFormatAll)(y), {
     status
-  }) + "\n     " + crRow('Seria', name, {
+  }) + "\n     " + (0, _tpFn.crRow)('Seria', name, {
     color
   }) + "\n   </div>";
 };
 
-const _crRemove = function (_ref2) {
+const _crRemove = _ref2 => {
   let {
     id,
     point
@@ -53,14 +44,14 @@ const _crRemove = function (_ref2) {
     category,
     status
   } = point;
-  return crHeader(c || category, id) + "\n  <div class=\"tp__body\">\n    " + crRow('Value', toNumberFormatAll(y), {
+  return (0, _tpFn.crHeader)(c || category, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Value', (0, _tpFn.toNumberFormatAll)(y), {
     status
   }) + "\n    <div class='tp__bt' id=" + (id + '_R') + ">\n         Remove\n    </div>\n  </div>";
 };
 
 const _addCategoryHandlersImpl = (id, point) => {
-  addHideHandler(id, point);
-  addHideHandler(id + '_R', point, _point => _point.series.chart.zhRemoveCategory(point.category));
+  (0, _tpFn.addHideHandler)(id, point);
+  (0, _tpFn.addHideHandler)(id + '_R', point, _point => _point.series.chart.zhRemoveCategory(point.category));
 };
 
 const _addCategoryHandlers = (id, point) => {

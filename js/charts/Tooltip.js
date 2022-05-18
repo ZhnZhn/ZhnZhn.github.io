@@ -19,24 +19,17 @@ var _tpTreeMap = _interopRequireDefault(require("./tp/tpTreeMap"));
 
 var _tpDonut = _interopRequireDefault(require("./tp/tpDonut"));
 
-var _tpFn = _interopRequireDefault(require("./tp/tpFn"));
-
-const {
-  crTpId,
-  toNumberFormat,
-  toDmy,
-  addHideHandler
-} = _tpFn.default;
+var _tpFn = require("./tp/tpFn");
 
 const _fnAddHandlerClose = function (id, point) {
-  setTimeout(() => addHideHandler(id, point), 1);
+  setTimeout(() => (0, _tpFn.addHideHandler)(id, point), 1);
 };
 
 const _fFormatter = option => function () {
   const {
     fnTemplate,
     onAfterRender = _fnAddHandlerClose,
-    fnDateFormat = toDmy,
+    fnDateFormat = _tpFn.toDmy,
     isWithColor,
     isWithValueText,
     isWithValue
@@ -49,9 +42,9 @@ const _fFormatter = option => function () {
     zhValueText,
     name = 'Value'
   } = series.userOptions,
-        _id = crTpId(),
+        _id = (0, _tpFn.crTpId)(),
         valueText = isWithValueText ? zhValueText || name : 'Value',
-        value = isWithValue ? toNumberFormat(point.y) : null;
+        value = isWithValue ? (0, _tpFn.toNumberFormat)(point.y) : null;
 
   onAfterRender(_id, point);
   return fnTemplate({

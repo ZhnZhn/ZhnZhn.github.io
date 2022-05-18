@@ -2,15 +2,15 @@ import { render } from 'react-dom';
 
 import SparkFactory from '../../components/factories/SparkFactory';
 
-import fn from './tpFn'
-import { YEAR_COLOR } from './Colors'
-
-
-const {
-  crHeader, crRow,
+import {
+  crHeader,
+  crRow,
   toNumberFormat,
   addHideHandler
-} = fn;
+} from './tpFn';
+
+import { YEAR_COLOR } from './Colors';
+
 
 const SPARKLINES_SUFFIX_ID = 'sparklines'
     , SPARKLINES_BAR_SUFFIX_ID = 'sparklines_bar'
@@ -19,17 +19,29 @@ const SPARKLINES_SUFFIX_ID = 'sparklines'
     , WIDTH_TOTAL = 50
     , WIDTH_SPARK = 20 + 80 + 16;
 
-const _fnCalcWidthSparkType4 = function(value, total){
+const _fnCalcWidthSparkType4 = (
+  value,
+  total
+) => {
   const _width1 = WIDTH_VALUE + value.length*WIDTH_CHAR
-      , _width2 = WIDTH_TOTAL + total.length*WIDTH_CHAR
-      , width = (_width1>_width2) ? _width1 : _width2
-      , fullWidth = width + WIDTH_SPARK;
-  return { fullWidth, width };
+  , _width2 = WIDTH_TOTAL + total.length*WIDTH_CHAR
+  , width = (_width1>_width2) ? _width1 : _width2
+  , fullWidth = width + WIDTH_SPARK;
+  return {
+    fullWidth,
+    width
+  };
 }
 
-const _fnTooltipSparkType4 = function({
-  fullWidth, width, year, value, total, percent, id
-}){
+const _fnTooltipSparkType4 = ({
+  fullWidth,
+  width,
+  year,
+  value,
+  total,
+  percent,
+  id
+}) => {
   const _style = `style="float:left;padding-right:10px;width:${width}px;"`;
   return `<div class="tp__body">
   <div class="tp__body__part1" style="width:${fullWidth}px;" >
@@ -53,15 +65,15 @@ const _fnTooltipSparkType4 = function({
 const _crSparkData = (point) => {
   const { sparkvalues, sparkpercent } = point;
   let  sparkLinesData = []
-     , sparkBarsData = []
-     , pointIndex;
+  , sparkBarsData = []
+  , pointIndex;
 
   if (sparkvalues) {
     sparkLinesData = sparkvalues;
     sparkBarsData = sparkpercent;
     pointIndex = (sparkvalues.length !== 0)
-           ? sparkvalues.length - 1
-           : 0 ;
+       ? sparkvalues.length - 1
+       : 0 ;
   } else {
     const seriesData = point.series.data;
     seriesData.forEach((item, itemIndex) => {
@@ -70,7 +82,11 @@ const _crSparkData = (point) => {
     })
     pointIndex = point.index
   }
-  return { sparkLinesData, sparkBarsData, pointIndex };
+  return {
+    sparkLinesData,
+    sparkBarsData,
+    pointIndex
+  };
 };
 
 const _onAfterRender = function(id, point){
@@ -87,21 +103,39 @@ const _onAfterRender = function(id, point){
   }, 1);
 }
 
-const _crStackedArea = function({id, value, point}){
-  const {nameFull, category, percent='0.0', total=0} = point
-      , _total = toNumberFormat(total)
-      , { fullWidth, width } = _fnCalcWidthSparkType4(value, _total);
+const _crStackedArea = ({
+  id,
+  value,
+  point
+}) => {
+  const {
+    nameFull,
+    category,
+    percent='0.0',
+    total=0
+  } = point
+  , _total = toNumberFormat(total)
+  , { fullWidth, width } = _fnCalcWidthSparkType4(value, _total);
 
   return crHeader(nameFull, id) + _fnTooltipSparkType4({
     fullWidth, width, year: category, value, total: _total, percent, id
   });
 }
 
-const _crTreeMap = function({id, point}){
-  const {nameFull, year, value='0.0', percent='0.0', total=0} = point
-      , _value = toNumberFormat(value)
-      , _total = toNumberFormat(total)
-      , { fullWidth, width } = _fnCalcWidthSparkType4(_value, _total);
+const _crTreeMap = ({
+  id,
+  point
+}) => {
+  const {
+    nameFull,
+    year,
+    value='0.0',
+    percent='0.0',
+    total=0
+  } = point
+  , _value = toNumberFormat(value)
+  , _total = toNumberFormat(total)
+  , { fullWidth, width } = _fnCalcWidthSparkType4(_value, _total);
 
   return crHeader(nameFull, id) + _fnTooltipSparkType4({
     fullWidth, width, year, value: _value, total: _total, percent, id

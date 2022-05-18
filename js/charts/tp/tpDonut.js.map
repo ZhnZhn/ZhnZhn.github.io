@@ -1,1 +1,18 @@
-{"version":3,"sources":["../../../src/charts/tp/tpDonut.js"],"names":["crHeader","fn","crRow","_crDonut","id","value","point","nameFull","tpDonut","fnTemplate","isWithValue"],"mappings":";;;;;;;AAAA;;IAEQA,Q,GAAoBC,gB,CAApBD,Q;IAAUE,K,GAAUD,gB,CAAVC,K;;AAElB,IAAMC,QAAQ,GAAG,SAAXA,QAAW,OAA8B;AAAA,MAAnBC,EAAmB,QAAnBA,EAAmB;AAAA,MAAfC,KAAe,QAAfA,KAAe;AAAA,MAARC,KAAQ,QAARA,KAAQ;AAC7C,SAAUN,QAAQ,CAACM,KAAK,CAACC,QAAP,EAAiBH,EAAjB,CAAlB,0CAEIF,KAAK,CAAC,OAAD,EAAUG,KAAV,CAFT;AAID,CALD;;AAOA,IAAMG,OAAO,GAAG;AACdH,EAAAA,KAAK,EAAE;AACLI,IAAAA,UAAU,EAAEN,QADP;AAELO,IAAAA,WAAW,EAAE;AAFR;AADO,CAAhB;eAOeF,O","sourcesContent":["import fn from './tpFn'\r\n\r\nconst { crHeader, crRow } = fn;\r\n\r\nconst _crDonut = function({ id, value, point }){\r\n  return `${crHeader(point.nameFull, id)}\r\n  <div class=\"tp__body\">\r\n    ${crRow('Value', value)}\r\n  </div>`;\r\n}\r\n\r\nconst tpDonut = {\r\n  value: {\r\n    fnTemplate: _crDonut,\r\n    isWithValue: true\r\n  }\r\n};\r\n\r\nexport default tpDonut\r\n"],"file":"tpDonut.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/tp/tpDonut.js"
+ ],
+ "file": "../../../src/charts/tp/tpDonut.js",
+ "names": [
+  "_crDonut",
+  "id",
+  "value",
+  "point",
+  "nameFull",
+  "tpDonut",
+  "fnTemplate",
+  "isWithValue"
+ ],
+ "mappings": ";;;;;AAAA;;AAKA,MAAMA,QAAQ,GAAG;AAAA,MAAC;AACfC,IAAAA,EADe;AAEfC,IAAAA,KAFe;AAGfC,IAAAA;AAHe,GAAD;AAAA,SAIP,oBAASA,KAAK,CAACC,QAAf,EAAyBH,EAAzB,CAJO,sCAMb,iBAAM,OAAN,EAAeC,KAAf,CANa;AAAA,CAAjB;;AASA,MAAMG,OAAO,GAAG;AACdH,EAAAA,KAAK,EAAE;AACLI,IAAAA,UAAU,EAAEN,QADP;AAELO,IAAAA,WAAW,EAAE;AAFR;AADO,CAAhB;eAOeF,O"
+}
