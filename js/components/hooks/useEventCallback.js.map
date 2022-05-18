@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useEventCallback.js"
+ ],
+ "file": "../../../src/components/hooks/useEventCallback.js",
+ "names": [
+  "useEventCallback",
+  "handler",
+  "ref",
+  "current",
+  "fn"
+ ],
+ "mappings": ";;;;;AAAA;;AAMA,MAAMA,gBAAgB,GAAGC,OAAO,IAAI;AAClC,QAAMC,GAAG,GAAG,mBAAO,IAAP,CAAZ;AACA,8BAAgB,MAAM;AACpBA,IAAAA,GAAG,CAACC,OAAJ,GAAcF,OAAd;AACD,GAFD;AAGA,SAAO,wBAAY,YAAa;AAC9B,UAAMG,EAAE,GAAGF,GAAG,CAACC,OAAf;AACA,WAAOC,EAAE,CAAC,YAAD,CAAT;AACD,GAHM,EAGJ,EAHI,CAAP;AAID,CATD;;eAWeJ,gB"
+}
