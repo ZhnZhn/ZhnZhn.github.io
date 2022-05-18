@@ -15,15 +15,14 @@ const _crAreaPlotOptions = (topColor, bottomColor) => ({
   }
 });
 
-const ChartUiTheme = {
-  setTheme: (isLighTheme) => {
-    const bottomColor = isLighTheme
-      ? COLOR.PLOT_G3
-      : COLOR.PLOT_G2;
-    Highcharts.setOptions(
-      _crAreaPlotOptions(COLOR.PLOT_G1, bottomColor)
-    )
-  }
-};
 
-export default ChartUiTheme
+export const setChartTheme = (
+  isLighTheme
+) => {
+  const bottomColor = isLighTheme
+    ? COLOR.PLOT_G3
+    : COLOR.PLOT_G2;
+  Highcharts.setOptions(
+    _crAreaPlotOptions(COLOR.PLOT_G1, bottomColor)
+  )
+}

@@ -1,4 +1,4 @@
-import ChartUiTheme from '../../charts/ChartUiTheme';
+import { setChartTheme } from '../../charts/ChartUiTheme';
 import routerConfig from './RouterConfig';
 
 const DF_T_C = '#1b2836';
@@ -144,7 +144,7 @@ const uiTheme = {
       ? themeId
       : DF_THEME_ID
     _setTheme(this.themeName)
-    ChartUiTheme.setTheme(themeId !== DF_THEME_ID)
+    setChartTheme(themeId !== DF_THEME_ID)
   },
   getStyle(id){
     const config = routerConfig[id] || routerConfig.DF;
