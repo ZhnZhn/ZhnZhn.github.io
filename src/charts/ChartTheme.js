@@ -3,7 +3,15 @@ import Highcharts from 'highcharts'
 import handleMouseOver from './handleMouseOver'
 
 import COLOR from '../constants/Color';
-import C from './conf';
+import {
+  HEIGHT,
+  THEME_SPACING_TOP,
+  SPACING_BOTTOM,
+  MARGIN_RIGHT,
+  CREDITS_URL,
+  CREDITS_COLOR,
+  fMonoPieColors
+} from './conf';
 
 const ChartTheme = {
   credits: {
@@ -16,17 +24,17 @@ const ChartTheme = {
     },
     style : {
       fontSize: '11px',
-      color: C.CREDITS_COLOR,
-      fill: C.CREDITS_COLOR,
+      color: CREDITS_COLOR,
+      fill: CREDITS_COLOR,
       textDecoration: 'underline'
     }
   },
   chart : {
     alignTicks: false,
-    height: C.HEIGHT,
-    spacingTop: C.THEME_SPACING_TOP,
-    spacingBottom: C.SPACING_BOTTOM,
-    marginRight: C.MARGIN_RIGHT,
+    height: HEIGHT,
+    spacingTop: THEME_SPACING_TOP,
+    spacingBottom: SPACING_BOTTOM,
+    marginRight: MARGIN_RIGHT,
     plotBackgroundColor: 'transparent',
     backgroundColor: 'transparent',
     reflow: false,
@@ -69,7 +77,7 @@ const ChartTheme = {
       load : function(){
         this.zhTooltip = new Highcharts.Tooltip(this, this.options.tooltip);
         this.credits.element.onclick = function() {
-           window.open(C.CREDITS_URL, '_blank');
+           window.open(CREDITS_URL, '_blank');
         }
       }
     }
@@ -95,7 +103,7 @@ const ChartTheme = {
     chartOptions : {
       chart : {
         plotBackgroundColor: COLOR.PLOT_PRINT,
-        backgroundColor : COLOR.CHART_PRINT
+        backgroundColor: COLOR.CHART_PRINT
       },
       title : {
         x: 0,
@@ -119,19 +127,6 @@ const ChartTheme = {
         lineWidth: 2,
         lineColor: COLOR.LINE_PRINT,
         gridLineColor: COLOR.GRID_LINE_PRINT
-      },
-      labels : {
-        items : [
-          {
-            html : 'Web app ERC https://zhnzhn.github.io',
-            style : {
-              left : '0px',
-              top : '-70px',
-              color: COLOR.LABEL_LINK,
-              'font-size': '9px'
-            }
-          }
-        ]
       }
     }
   },
@@ -242,7 +237,7 @@ const ChartTheme = {
       }
     },
     pie : {
-      colors: C.fMonoPieColors()
+      colors: fMonoPieColors()
     }
   },
   tooltip: {

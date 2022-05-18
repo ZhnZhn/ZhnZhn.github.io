@@ -11,7 +11,7 @@ var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var _conf = _interopRequireDefault(require("./conf"));
+var _conf = require("./conf");
 
 const ChartTheme = {
   credits: {
@@ -24,17 +24,17 @@ const ChartTheme = {
     },
     style: {
       fontSize: '11px',
-      color: _conf.default.CREDITS_COLOR,
-      fill: _conf.default.CREDITS_COLOR,
+      color: _conf.CREDITS_COLOR,
+      fill: _conf.CREDITS_COLOR,
       textDecoration: 'underline'
     }
   },
   chart: {
     alignTicks: false,
-    height: _conf.default.HEIGHT,
-    spacingTop: _conf.default.THEME_SPACING_TOP,
-    spacingBottom: _conf.default.SPACING_BOTTOM,
-    marginRight: _conf.default.MARGIN_RIGHT,
+    height: _conf.HEIGHT,
+    spacingTop: _conf.THEME_SPACING_TOP,
+    spacingBottom: _conf.SPACING_BOTTOM,
+    marginRight: _conf.MARGIN_RIGHT,
     plotBackgroundColor: 'transparent',
     backgroundColor: 'transparent',
     reflow: false,
@@ -77,7 +77,7 @@ const ChartTheme = {
         this.zhTooltip = new _highcharts.default.Tooltip(this, this.options.tooltip);
 
         this.credits.element.onclick = function () {
-          window.open(_conf.default.CREDITS_URL, '_blank');
+          window.open(_conf.CREDITS_URL, '_blank');
         };
       }
     }
@@ -122,17 +122,6 @@ const ChartTheme = {
         lineWidth: 2,
         lineColor: _Color.default.LINE_PRINT,
         gridLineColor: _Color.default.GRID_LINE_PRINT
-      },
-      labels: {
-        items: [{
-          html: 'Web app ERC https://zhnzhn.github.io',
-          style: {
-            left: '0px',
-            top: '-70px',
-            color: _Color.default.LABEL_LINK,
-            'font-size': '9px'
-          }
-        }]
       }
     }
   },
@@ -239,7 +228,7 @@ const ChartTheme = {
       }
     },
     pie: {
-      colors: _conf.default.fMonoPieColors()
+      colors: (0, _conf.fMonoPieColors)()
     }
   },
   tooltip: {

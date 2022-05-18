@@ -1,1 +1,31 @@
-{"version":3,"sources":["../../src/charts/conf.js"],"names":["_addMonoColorsTo","colors","base","i","push","Highcharts","Color","brighten","get","C","HEIGHT","THEME_SPACING_TOP","SPACING_BOTTOM","MARGIN_RIGHT","CREDITS_COLOR","CREDITS_URL","fMonoPieColors","base1","COLOR","MONO_BASE1","base2","MONO_BASE2"],"mappings":";;;;;;;AACA;;AAEA;;AAEA,IAAMA,gBAAgB,GAAG,SAAnBA,gBAAmB,CAACC,MAAD,EAAYC,IAAZ,EAAqB;AAAA,MAApBD,MAAoB;AAApBA,IAAAA,MAAoB,GAAb,EAAa;AAAA;;AAC5C,MAAIE,CAAJ,CAD4C,CAE5C;AACA;;AACA,OAAKA,CAAC,GAAC,CAAP,EAAUA,CAAC,GAAC,CAAZ,EAAeA,CAAC,EAAhB,EAAoB;AAClBF,IAAAA,MAAM,CAACG,IAAP,CACGC,uBAAWC,KAAX,CAAiBJ,IAAjB,EACCK,QADD,CACU,CAACJ,CAAC,GAAG,CAAL,IAAU,CADpB,EAECK,GAFD,EADH;AAKD;AACF,CAXD;;AAcA,IAAMC,CAAC,GAAG;AACRC,EAAAA,MAAM,EAAE,GADA;AAERC,EAAAA,iBAAiB,EAAE,CAFX;AAGRC,EAAAA,cAAc,EAAE,EAHR;AAIRC,EAAAA,YAAY,EAAE,EAJN;AAMRC,EAAAA,aAAa,EAAE,SANP;AAORC,EAAAA,WAAW,EAAE,wBAPL;AASRC,EAAAA,cAAc,EAAE,+BAA2D;AAAA,kCAAP,EAAO;AAAA,yBAAxDC,KAAwD;AAAA,QAAxDA,KAAwD,0BAAlDC,kBAAMC,UAA4C;AAAA,0BAAhCC,KAAgC;AAAA,QAAhCA,KAAgC,2BAA1BF,kBAAMG,UAAoB;;AACzE,QAAMpB,MAAM,GAAG,EAAf;;AACAD,IAAAA,gBAAgB,CAACC,MAAD,EAASgB,KAAT,CAAhB;;AACAjB,IAAAA,gBAAgB,CAACC,MAAD,EAASmB,KAAT,CAAhB;;AACA,WAAOnB,MAAP;AACD;AAdO,CAAV;eAiBeQ,C","sourcesContent":["\r\nimport Highcharts from 'highcharts';\r\n\r\nimport COLOR from '../constants/Color';\r\n\r\nconst _addMonoColorsTo = (colors=[], base) => {\r\n  let i;\r\n  // Start out with a darkened base color (negative brighten), and end\r\n  // up with a much brighter color\r\n  for (i=0; i<4; i++) {\r\n    colors.push(\r\n       Highcharts.Color(base)\r\n       .brighten((i - 3) / 7)\r\n       .get()\r\n     );\r\n  }\r\n}\r\n\r\n\r\nconst C = {\r\n  HEIGHT: 300,\r\n  THEME_SPACING_TOP: 5,\r\n  SPACING_BOTTOM: 20,\r\n  MARGIN_RIGHT: 50,\r\n\r\n  CREDITS_COLOR: '#909090',\r\n  CREDITS_URL: 'https://highcharts.com',\r\n\r\n  fMonoPieColors: ({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}) => {\r\n    const colors = [];\r\n    _addMonoColorsTo(colors, base1)\r\n    _addMonoColorsTo(colors, base2)\r\n    return colors;\r\n  }\r\n}\r\n\r\nexport default C\r\n"],"file":"conf.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/charts/conf.js"
+ ],
+ "file": "../../src/charts/conf.js",
+ "names": [
+  "_addMonoColorsTo",
+  "colors",
+  "base",
+  "i",
+  "push",
+  "Highcharts",
+  "Color",
+  "brighten",
+  "get",
+  "HEIGHT",
+  "THEME_SPACING_TOP",
+  "SPACING_BOTTOM",
+  "MARGIN_RIGHT",
+  "CREDITS_COLOR",
+  "CREDITS_URL",
+  "fMonoPieColors",
+  "base1",
+  "COLOR",
+  "MONO_BASE1",
+  "base2",
+  "MONO_BASE2"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,MAAMA,gBAAgB,GAAG,UAACC,MAAD,EAAYC,IAAZ,EAAqB;AAAA,MAApBD,MAAoB;AAApBA,IAAAA,MAAoB,GAAb,EAAa;AAAA;;AAC5C,MAAIE,CAAJ,CAD4C,CAE5C;AACA;;AACA,OAAKA,CAAC,GAAC,CAAP,EAAUA,CAAC,GAAC,CAAZ,EAAeA,CAAC,EAAhB,EAAoB;AAClBF,IAAAA,MAAM,CAACG,IAAP,CACGC,oBAAWC,KAAX,CAAiBJ,IAAjB,EACEK,QADF,CACW,CAACJ,CAAC,GAAG,CAAL,IAAU,CADrB,EAEEK,GAFF,EADH;AAKD;AACF,CAXD;;AAaO,MAAMC,MAAM,GAAG,GAAf;;AACA,MAAMC,iBAAiB,GAAG,CAA1B;;AACA,MAAMC,cAAc,GAAG,EAAvB;;AACA,MAAMC,YAAY,GAAG,EAArB;;AAEA,MAAMC,aAAa,GAAG,SAAtB;;AACA,MAAMC,WAAW,GAAG,wBAApB;;;AAEA,MAAMC,cAAc,GAAG,iBAGrB;AAAA,MAHsB;AAC7BC,IAAAA,KAAK,GAACC,eAAMC,UADiB;AAE7BC,IAAAA,KAAK,GAACF,eAAMG;AAFiB,GAGtB,sBAAP,EAAO;AACP,QAAMnB,MAAM,GAAG,EAAf;;AACAD,EAAAA,gBAAgB,CAACC,MAAD,EAASe,KAAT,CAAhB;;AACAhB,EAAAA,gBAAgB,CAACC,MAAD,EAASkB,KAAT,CAAhB;;AACA,SAAOlB,MAAP;AACD,CARM"
+}
