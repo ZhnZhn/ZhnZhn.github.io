@@ -1,6 +1,13 @@
-import { Component } from 'react';
+import { useRef, useMemo } from 'react';
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useRefInit from '../hooks/useRefInit';
+import useEventCallback from '../hooks/useEventCallback';
 
-import ChartExportConfig from '../../charts/ChartExportConfig';
+import {
+  merge,
+  crExportStyleOptions
+} from '../../charts/ChartExportConfig';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import STYLE from '../styles/DialogStyles';
@@ -17,8 +24,10 @@ const _S_LABEL = {
   fontSize: '16px',
   fontWeight: 'bold'
 }
-
-, S_GAP_BETWEEN_GROUP = { marginTop: 10 }
+, S_ROW_WITH_TOP_GAP = {
+  ...STYLE.ROW,
+  ...{ marginTop: 10 }
+}
 , S_LABEL = {
   ..._S_LABEL,
   width: 100,
@@ -26,11 +35,13 @@ const _S_LABEL = {
   textAlign: 'right'
 }
 , S_LABEL_WIDTH = {
-  ..._S_LABEL,  
-  paddingRight: 5,
-  paddingLeft: 3
+  ..._S_LABEL,
+  padding: '0 5px 0 3px'
 }
-, S_LABEL_HEIGHT = { paddingLeft: 6 }
+, S_LABEL_HEIGHT = {
+  ...S_LABEL_WIDTH,
+  paddingLeft: 6
+}
 , S_INPUT_NUMBER = {
   width: 60,
   height: 30,
@@ -42,21 +53,36 @@ const _S_LABEL = {
   marginLeft: 0
 };
 
+const APP_HTML = 'Web app ERC https://zhnzhn.github.io'
+, DS_TOP_PADDING = 90
+, DS_FONT_SIZE = '10px'
+, W_MIN = 351
+, W_MAX = 2001
+, H_MIN = 251
+, H_MAX = 1001;
 
-const C = {
-  APP_HTML: 'Web app ERC https://zhnzhn.github.io',
-  DS_TOP_PADDING: 90,
-  DS_FONT_SIZE: '10px',
-  W_MIN: 351,
-  W_MAX: 2001,
-  H_MIN: 251,
-  H_MAX: 1001
-};
+const _getRefValue = ref => ref.current
+, _getValue = ref => _getRefValue(ref).getValue()
+, _inRange = (v, min, max) => v>min && v<max
+, _getDimension = (
+  { chartWidth, chartHeight },
+  width,
+  height
+) => [
+  _inRange(width, W_MIN, W_MAX)
+     ? width
+     : chartWidth,
+  _inRange(height, H_MIN, H_MAX)
+     ? height
+     : chartHeight
+];
 
-const _inRange = (v, min, max) => v>min && v<max;
-
-const _crItemLabel = (html, top=-70, fontSize='9px') => ({
-  html: html,
+const _crItemLabel = (
+  html,
+  top=-70,
+  fontSize='9px'
+) => ({
+  html,
   style: {
     left: 0,
     top: top,
@@ -65,190 +91,145 @@ const _crItemLabel = (html, top=-70, fontSize='9px') => ({
   }
 });
 
-class CustomizeExportDialog extends Component {
+const DF_DATA = {}
 
-  static defaultProps = {
-    data: {}
-  }
+const CustomizeExportDialog = memoIsShow(({
+  isShow,
+  data=DF_DATA,
+  onClose
+}) => {
+  const [isShowDimension, toggleDimension] = useToggle(true)
+  , [isShowTitle, toggleTitle] = useToggle(true)
+  , [isShowStyle, toggleStyle] = useToggle(true)
+  , _refExportStyle = useRef({})
+  , _refToolbarButtons = useRef([
+    { caption: 'D', onClick: toggleDimension },
+    { caption: 'T', onClick: toggleTitle },
+    { caption: 'S', onClick: toggleStyle }
+  ])
+  , _optionStyles = useRefInit(() => crExportStyleOptions())
+  , _refInputWidth = useRef()
+  , _refInputHeight = useRef()
+  , _refInputTitle = useRef()
+  , _refInputSubtitle = useRef()
 
-  constructor(props){
-    super(props)
-    this.exportStyle = {}
-    this.toolbarButtons = [
-      { caption: 'D', onClick: this._hClickDimension },
-      { caption: 'T', onClick: this._hClickTitle },
-      { caption: 'S', onClick: this._hClickStyle }
-    ]
-    this.optionStyles = ChartExportConfig.createOptionStyles()
-    this._commandButtons = [
-         <Button.Flat
-            key="export"
-            caption="Export"
-            isPrimary={true}
-            onClick={this._hExport}
-         />
-    ];
-    this.state = {
-      isShowDimension: true,
-      isShowTitle: true,
-      isShowStyle: true
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props
-        && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  }
-
-  _hClickDimension = () => {
-    this.setState(prevState => ({
-      isShowDimension: !prevState.isShowDimension
-    }))
-  }
-  _hClickTitle = () => {
-    this.setState(prevState => ({
-      isShowTitle: !prevState.isShowTitle
-    }))
-  }
-  _hClickStyle = () => {
-    this.setState(prevState => ({
-      isShowStyle: !prevState.isShowStyle
-    }))
-  }
-
-  _hSelectStyle = (item) => {
-    this.exportStyle = item
-      && item.value || {};
-  }
-
-  _getDimension = (chart) => {
-    const { chartWidth, chartHeight } = chart
-    , _width = this.inputWidth.getValue()
-    , _height = this.inputHeight.getValue();
-    return {
-      width: _inRange(_width, C.W_MIN, C.W_MAX)
-        ? _width
-        : chartWidth,
-      height: _inRange(_height, C.H_MIN, C.H_MAX)
-        ? _height
-        : chartHeight
-    };
-  }
-
-  _hExport = () => {
-    const { data, onClose } = this.props
-    , { chart, fn } = data
-    , { width, height } = this._getDimension(chart)
-    , _customOption = ChartExportConfig.merge(
+  , _hSelectStyle = useMemo(() => (item) => {
+    _refExportStyle.current = item
+       && item.value || {};
+  }, [])
+  , { chart, fn } = data
+  , _hExport = useEventCallback(() => {
+    const [width, height] = _getDimension(
+      chart,
+      _getValue(_refInputWidth),
+      _getValue(_refInputHeight)
+    )
+    , _customOption = merge(
         true, {
           chart: { width, height },
           title: {
-            text: this.inputTitle.getValue()
+            text: _getValue(_refInputTitle)
           },
           subtitle: {
-            text: this.inputSubtitle.getValue()
+            text: _getValue(_refInputSubtitle)
           },
           labels: {
             items: [
-              _crItemLabel(C.APP_HTML),
+              _crItemLabel(APP_HTML),
               _crItemLabel(
                 `DataSource: ${chart.userOptions.zhConfig?.dataSource ?? ''}`,
-                height - C.DS_TOP_PADDING, C.DS_FONT_SIZE
+                height - DS_TOP_PADDING, DS_FONT_SIZE
               )
             ]
           }
-        }, this.exportStyle
-      );
+        }, _getRefValue(_refExportStyle));
 
       fn.apply(chart, [null, _customOption]);
       onClose();
-  }
+  })
+  , _refCommandButtons = useRef([
+       <Button.Flat
+          key="export"
+          caption="Export"
+          isPrimary={true}
+          onClick={_hExport}
+       />
+  ]);
 
-  _refInputWidth = c => this.inputWidth = c
-  _refInputHeight = c => this.inputHeight = c
-  _refInputTitle = c => this.inputTitle = c
-  _refInputSubtitle = c => this.inputSubtitle = c
+  const {
+    chartWidth,
+    chartHeight,
+    options
+  } = chart
+  , title = options.title.text
+  , subtitle = options.subtitle.text;
 
-  render(){
-    const {isShow, data, onClose} = this.props
-    , { chart } = data
-    , { chartWidth, chartHeight, options } = chart
-    , title = options.title.text
-    , subtitle = options.subtitle.text
-    , {
-        isShowDimension, isShowTitle, isShowStyle
-      } = this.state;
-
-    return (
-      <ModalDialog
-        caption="Customize Export Chart"
-        isShow={isShow}
-        commandButtons={this._commandButtons}
-        onClose={onClose}
-      >
-         <ToolbarButtonCircle
-           buttons={this.toolbarButtons}
-         />
-         <ShowHide isShow={isShowDimension}>
-           <div style={STYLE.ROW}>
-              <span style={S_LABEL}>Dimension:</span>
-              <span style={S_LABEL_WIDTH}>Width:</span>
-              <InputText
-                ref={this._refInputWidth}
-                type="number"
-                placeholder={chartWidth}
-                initValue={chartWidth}
-                style={S_INPUT_NUMBER}
-                min={C.W_MIN}
-                max={C.W_MAX}
-              />
-              <span style={{...S_LABEL_WIDTH, ...S_LABEL_HEIGHT}}>Height:</span>
-              <InputText
-                ref={this._refInputHeight}
-                type="number"
-                placeholder={chartHeight}
-                initValue={chartHeight}
-                style={S_INPUT_NUMBER}
-                min={C.H_MIN}
-                max={C.H_MAX}
-              />
-           </div>
-         </ShowHide>
-         <ShowHide isShow={isShowTitle}>
-           <div style={{ ...STYLE.ROW, ...S_GAP_BETWEEN_GROUP }}>
-             <span style={S_LABEL}>Title:</span>
-             <InputText
-               ref={this._refInputTitle}
-               initValue={title}
-               style={S_INPUT_TEXT}
-             />
-           </div>
-           <div style={STYLE.ROW}>
-             <span style={S_LABEL}>Subtitle:</span>
-             <InputText
-               ref={this._refInputSubtitle}
-               initValue={subtitle}
-               style={S_INPUT_TEXT}
-             />
-           </div>
-         </ShowHide>
-         <ShowHide isShow={isShowStyle}>
-           <div style={{...STYLE.ROW, ...S_GAP_BETWEEN_GROUP}}>
-             <span style={S_LABEL}>Style:</span>
-             <InputSelect
-               width="250"
-               options={this.optionStyles}
-               placeholder="Default"
-               onSelect={this._hSelectStyle}
-             />
-           </div>
-         </ShowHide>
-      </ModalDialog>
-    );
-  }
-}
+  return (
+    <ModalDialog
+      caption="Customize Export Chart"
+      isShow={isShow}
+      commandButtons={_getRefValue(_refCommandButtons)}
+      onClose={onClose}
+    >
+       <ToolbarButtonCircle
+         buttons={_getRefValue(_refToolbarButtons)}
+       />
+       <ShowHide isShow={isShowDimension}>
+         <div style={STYLE.ROW}>
+            <span style={S_LABEL}>Dimension:</span>
+            <span style={S_LABEL_WIDTH}>Width:</span>
+            <InputText
+              ref={_refInputWidth}
+              type="number"
+              placeholder={chartWidth}
+              initValue={chartWidth}
+              style={S_INPUT_NUMBER}
+              min={W_MIN}
+              max={W_MAX}
+            />
+            <span style={S_LABEL_HEIGHT}>Height:</span>
+            <InputText
+              ref={_refInputHeight}
+              type="number"
+              placeholder={chartHeight}
+              initValue={chartHeight}
+              style={S_INPUT_NUMBER}
+              min={H_MIN}
+              max={H_MAX}
+            />
+         </div>
+       </ShowHide>
+       <ShowHide isShow={isShowTitle}>
+         <div style={S_ROW_WITH_TOP_GAP}>
+           <span style={S_LABEL}>Title:</span>
+           <InputText
+             ref={_refInputTitle}
+             initValue={title}
+             style={S_INPUT_TEXT}
+           />
+         </div>
+         <div style={STYLE.ROW}>
+           <span style={S_LABEL}>Subtitle:</span>
+           <InputText
+             ref={_refInputSubtitle}
+             initValue={subtitle}
+             style={S_INPUT_TEXT}
+           />
+         </div>
+       </ShowHide>
+       <ShowHide isShow={isShowStyle}>
+         <div style={S_ROW_WITH_TOP_GAP}>
+           <span style={S_LABEL}>Style:</span>
+           <InputSelect
+             width="250"
+             options={_optionStyles}
+             placeholder="Default"
+             onSelect={_hSelectStyle}
+           />
+         </div>
+       </ShowHide>
+    </ModalDialog>
+  );
+});
 
 export default CustomizeExportDialog
