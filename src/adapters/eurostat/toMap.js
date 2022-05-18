@@ -1,25 +1,29 @@
 import ChartConfig from '../../charts/ChartConfig';
-
-import EuroStatFn from './EuroStatFn';
-
-const {
+import {
   crData,
   setDataAndInfo
-} = EuroStatFn
+} from './EuroStatFn';
 
-const _addItemCaptionTo = (option) => {
-  const { itemCaption, subtitle } = option;
+const _assign = Object.assign
+
+const _addItemCaptionTo = (
+  option
+) => {
+  const {
+    itemCaption,
+    subtitle
+  } = option;
   option.itemCaption = itemCaption || subtitle
 };
 
 const toMap = {
-  createConfig : (json, option) => {
+  createConfig: (json, option) => {
     const { data } = crData(json)
     , config = ChartConfig.crAreaConfig();
 
      _addItemCaptionTo(option)
      setDataAndInfo({ config, data, json, option });
-     Object.assign(config, {
+     _assign(config, {
        zhDialog: option,
        json: json,
        zhMapSlice: option.zhMapSlice

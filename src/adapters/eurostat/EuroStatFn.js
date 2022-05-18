@@ -1,3 +1,5 @@
+export { findMinY } from '../AdapterFn';
+
 import Chart from '../../charts/Chart';
 import {
   calcMinY,
@@ -10,7 +12,6 @@ import {
   findMinY,
   findMaxY,
   filterTrimZero,
-  joinBy
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { crItemConf } from '../crFn';
@@ -54,7 +55,11 @@ const _crDatasetInfo = ({
   fromDate: '1996-01-30'
 });
 
-const _colorSeriaIn = (config, codes, color) => {
+const _colorSeriaIn = (
+  config,
+  codes,
+  color
+) => {
   const data = config.series[0].data;
   data.forEach(p => {
      if (codes.indexOf(p.c) !== -1 && !p.color) {
@@ -62,7 +67,12 @@ const _colorSeriaIn = (config, codes, color) => {
      }
   })
 };
-const _colorSeriaNotIn = (config, codes, color) => {
+
+const _colorSeriaNotIn = (
+  config,
+  codes,
+  color
+) => {
   const data = config.series[0].data;
   data.forEach(p => {
      if (codes.indexOf(p.c) === -1 && !p.color) {
@@ -71,11 +81,13 @@ const _colorSeriaNotIn = (config, codes, color) => {
   })
 };
 
-
 const _isLineSeria = type => type
   && (type === 'AREA' || type === 'SPLINE');
 
-const _filterZeroCategories = (data, categories) => {
+const _filterZeroCategories = (
+  data,
+  categories
+) => {
   const _data = [], _arrC = [];
   data.forEach(p => {
     if (p.y !== 0) { _data.push(p) }
@@ -88,7 +100,10 @@ const _filterZeroCategories = (data, categories) => {
   return { data: _data, categories };
 };
 
-const _isYearOrMapFrequencyKey = (key, mapFrequency) => !mapFrequency
+const _isYearOrMapFrequencyKey = (
+  key,
+  mapFrequency
+) => !mapFrequency
   || mapFrequency === "Y"
   || key.indexOf(mapFrequency) !== -1;
 
@@ -97,14 +112,22 @@ const _crPoint = (x, y, status) => status
    ? [ x, y, status ]
    : [ x, y ];
 
-const _setZoomMinMaxTo = (config, isNotZoomToMinMax, min) => {
+const _setZoomMinMaxTo = (
+  config,
+  isNotZoomToMinMax,
+  min
+) => {
   if (isNotZoomToMinMax) {
     config.yAxis.zhNotZoomToMinMax = true
   } else {
     config.yAxis.min = min
   }
 }
-const _setHeightIfBarTo = (config, seriaType, categories) => {
+const _setHeightIfBarTo = (
+  config,
+  seriaType,
+  categories
+) => {
   if (seriaType === 'BAR_SET' || seriaType === 'BAR_WITH_LABELS'){
     const { height } = config.chart
     , _height = 100 + 17*categories.length;
@@ -116,194 +139,215 @@ const _setHeightIfBarTo = (config, seriaType, categories) => {
 const _getTableId = ({ dfId, dfTable }) =>
   dfId || dfTable;
 
-const EuroStatFn = {
-   joinBy,
-   findMinY,
+const _crTimeIndexAndValue = (json) => {
+  const { dimension, value=[], status={} } = json
+  , { time } = dimension || {}
+  , { category } = time || {}
+  , { index:timeIndex=0 } = category || {};
+  return { timeIndex, value, status };
+}
 
-  crData(json, {mapFrequency, isFilterZero}={}) {
-    const { timeIndex, value, status } = EuroStatFn.crTimeIndexAndValue(json)
-    let data = [];
-    _getKeys(timeIndex).forEach(key => {
-       if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
-         const _valueIndex = timeIndex[key]
-         , y = value[_valueIndex];
-         if (y != null){
-           data.push(_crPoint(
-             EuroStatFn.convertToUTC(key),
-             y, status[_valueIndex]
-           ));
-         }
-       }
-    })
-    data.sort(compareByDate)
-    if (isFilterZero) {
-      data = filterTrimZero(data)
-    }
-    return {
-      data,
-      max: findMaxY(data),
-      min: findMinY(data)
-    };
-  },
+const _convertToUTC = (str) => {
+  const _period = (str && str[4] || '').toUpperCase();
+  if (_period === 'M') {
+    const arrDate = str.split('M')
+    , _month = parseInt(arrDate[1], 10)-1
+    , _day = (_month === 1) ? 28 : 30;
+    return Date.UTC(arrDate[0], _month, _day);
+  }
+  if (_period === 'Q'){
+    const arrDate = str.split('Q')
+    , _month = (parseInt(arrDate[1], 10)*3) - 1;
+    return Date.UTC(arrDate[0], _month, 30);
+  }
+  if (_period === 'S') {
+    const _arrS = str.split('S');
+    return _arrS[1] === '1'
+      ? Date.UTC(_arrS[0], 5, 30)
+      : Date.UTC(_arrS[0], 11, 31);
+  }
+  return parseInt(str, 10) > 1970
+    ? Date.UTC(str, 11, 31)
+    : Date.UTC(1970, 11, 31);
+}
 
-  toPointArr(json){
-    const { timeIndex, value, status } = EuroStatFn.crTimeIndexAndValue(json)
-    , data = [];
-    _getKeys(timeIndex).map((key) => {
+export const crData = (
+  json,
+  {mapFrequency, isFilterZero}={}
+) => {
+  const {
+    timeIndex,
+    value,
+    status
+  } = _crTimeIndexAndValue(json)
+  let data = [];
+  _getKeys(timeIndex).forEach(key => {
+     if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
        const _valueIndex = timeIndex[key]
        , y = value[_valueIndex];
-       if ( y != null ){
+       if (y != null){
          data.push(_crPoint(
-           key.replace('M', '-'),
+           _convertToUTC(key),
            y, status[_valueIndex]
          ));
        }
-    })
+     }
+  })
+  data.sort(compareByDate)
+  if (isFilterZero) {
+    data = filterTrimZero(data)
+  }
+  return {
+    data,
+    max: findMaxY(data),
+    min: findMinY(data)
+  };
+}
 
-    return data;
-  },
+export const toPointArr = (
+  json
+) => {
+  const {
+    timeIndex,
+    value,
+    status
+  } = _crTimeIndexAndValue(json)
+  , data = [];
+  _getKeys(timeIndex).map((key) => {
+     const _valueIndex = timeIndex[key]
+     , y = value[_valueIndex];
+     if ( y != null ){
+       data.push(_crPoint(
+         key.replace('M', '-'),
+         y, status[_valueIndex]
+       ));
+     }
+  })
+  return data;
+}
 
-  setDataAndInfo({ config, data, json, option }){
-    const { title, subtitle, seriaType } = option;
-    Chart.setDefaultTitle(config, title, subtitle);
+const _crZhConfig = (option) => {
+  const {
+    key,
+    itemCaption,
+    url
+  } = option
+  , dataSource = crDataSource(option)
+  , itemConf = url
+      ? {
+          _itemKey: key,
+          ...crItemConf(option),
+          dataSource
+        }
+      : void 0;
 
-    config.zhConfig = EuroStatFn.crZhConfig(option);
-    config.info = _crDatasetInfo(json);
+  return {
+    id: key,
+    key,
+    itemCaption,
+    itemConf,
+    dataSource,
+    ...crLinkConf(option)
+  };
+}
 
-    if (_isLineSeria(seriaType)){
-      config.valueMoving = valueMoving(data)
-    }
+export const setDataAndInfo = ({
+  config,
+  data,
+  json,
+  option
+}) => {
+  const { title, subtitle, seriaType } = option;
+  Chart.setDefaultTitle(config, title, subtitle);
 
-    config.series[0].data = data;
-  },
+  config.zhConfig = _crZhConfig(option);
+  config.info = _crDatasetInfo(json);
 
-  setInfo({ config, json, option }){
-    config.info = _crDatasetInfo(json);
-  },
+  if (_isLineSeria(seriaType)){
+    config.valueMoving = valueMoving(data)
+  }
 
-  setCategories({
-    config, categories, min,
-    tooltip=Tooltip.category,
-    option
-  }){
-    const { time, isNotZoomToMinMax, seriaType } = option;
-    config.xAxis.categories = categories
-    _setZoomMinMaxTo(config, isNotZoomToMinMax, min)
+  config.series[0].data = data;
+}
 
-    config.series[0].name = time
-    config.tooltip = Chart.fTooltip(tooltip)
+export const setInfo = ({
+  config,
+  json,
+  option
+}) => {
+  config.info = _crDatasetInfo(json);
+}
 
-    config.zhConfig.itemCaption = EuroStatFn.crItemCaption(option)
-    config.zhConfig.itemTime = time
+const _crItemCaption = ({ title='EU' }) => title
 
-    _setHeightIfBarTo(config, seriaType, categories)
-  },
+const _setCategories = ({
+  config,
+  categories,
+  min,
+  tooltip=Tooltip.category,
+  option
+}) => {
+   const { time, isNotZoomToMinMax, seriaType } = option;
+   config.xAxis.categories = categories
+   _setZoomMinMaxTo(config, isNotZoomToMinMax, min)
 
-  colorSeries(config){
-    _colorSeriaIn(config, C.EU_CODES, COLOR_EU)
-    _colorSeriaIn(config, C.EA_CODES, COLOR_EA)
-    _colorSeriaNotIn(config, C.EU_MEMBER, COLOR_NOT_EU_MEMBER)
-  },
+   config.series[0].name = time
+   config.tooltip = Chart.fTooltip(tooltip)
 
-  addToCategoryConfig(config, { json, option, data, categories, min }){
+   config.zhConfig.itemCaption = _crItemCaption(option)
+   config.zhConfig.itemTime = time
+
+   _setHeightIfBarTo(config, seriaType, categories)
+}
+
+const _colorSeries = (config) => {
+  _colorSeriaIn(config, C.EU_CODES, COLOR_EU)
+  _colorSeriaIn(config, C.EA_CODES, COLOR_EA)
+  _colorSeriaNotIn(config, C.EU_MEMBER, COLOR_NOT_EU_MEMBER)
+}
+
+export const addToCategoryConfig = (
+  config,
+  { json, option, data, categories, min }
+) => {
     if (option.isFilterZero) {
       const _r = _filterZeroCategories(data, categories);
       data = _r.data
       categories = _r.categories
     }
-    EuroStatFn.setDataAndInfo({ config, data, json, option })
-    EuroStatFn.setCategories({ config, categories, min, option })
-    EuroStatFn.colorSeries(config)
-  },
+    setDataAndInfo({ config, data, json, option })
+    _setCategories({ config, categories, min, option })
+    _colorSeries(config)
+}
 
-  setTooltip({ config, tooltip }) {
-    config.tooltip = Chart.fTooltip(tooltip)
-  },
+export const crCategoryTooltip = () => Chart
+  .fTooltip(Tooltip.categorySimple)
 
-  crCategoryTooltip: () => {
-    return Chart.fTooltip(Tooltip.categorySimple);
-  },
+export const setLineExtrems = ({
+  config,
+  max,
+  min,
+  isNotZoomToMinMax
+}) => {
+  const plotLines = config.yAxis.plotLines;
+  setPlotLinesMinMax({ plotLines, min, max })
 
-
-  convertToUTC(str){
-    const _period = (str && str[4] || '').toUpperCase();
-    if (_period === 'M') {
-      const arrDate = str.split('M')
-      , _month = parseInt(arrDate[1], 10)-1
-      , _day = (_month === 1) ? 28 : 30;
-      return Date.UTC(arrDate[0], _month, _day);
-    }
-    if (_period === 'Q'){
-      const arrDate = str.split('Q')
-      , _month = (parseInt(arrDate[1], 10)*3) - 1;
-      return Date.UTC(arrDate[0], _month, 30);
-    }
-    if (_period === 'S') {
-      const _arrS = str.split('S');
-      return _arrS[1] === '1'
-        ? Date.UTC(_arrS[0], 5, 30)
-        : Date.UTC(_arrS[0], 11, 31);
-    }
-    return parseInt(str, 10) > 1970
-      ? Date.UTC(str, 11, 31)
-      : Date.UTC(1970, 11, 31);
-  },
-
-  setLineExtrems({ config, max, min, isNotZoomToMinMax }){
-    const plotLines = config.yAxis.plotLines;
-    setPlotLinesMinMax({ plotLines, min, max })
-
-    if (!isNotZoomToMinMax){
-      config.yAxis.min = calcMinY(min, max);
-    }
-  },
-
-  crItemCaption: ({ title='EU' }) => title,
-
-  crDataSource: dfProps => {
-    const _ds = dfProps.dataSource
-    , _prefix = _ds && _ds.indexOf('Eurostat') !== -1
-       ? _ds
-       : 'Eurostat'
-    return `${_prefix} (${_getTableId(dfProps) || ''})`;
-  },
-
-  crLinkConf: dfProps => ({
-    linkFn: 'ES',
-    item: {
-      dataset: _getTableId(dfProps)
-    }
-  }),
-
-  crZhConfig(option) {
-    const {
-      key, itemCaption,
-      url
-    } = option
-    , dataSource = EuroStatFn.crDataSource(option)
-    , itemConf = url
-        ? {
-            _itemKey: key,
-            ...crItemConf(option),
-            dataSource
-          }
-        : void 0;
-
-    return {
-      id: key, key, itemCaption,
-      itemConf,
-      dataSource,
-      ...EuroStatFn.crLinkConf(option)
-    };
-  },
-
-  crTimeIndexAndValue: (json) => {
-    const { dimension, value=[], status={} } = json
-    , { time } = dimension || {}
-    , { category } = time || {}
-    , { index:timeIndex=0 } = category || {};
-    return { timeIndex, value, status };
+  if (!isNotZoomToMinMax){
+    config.yAxis.min = calcMinY(min, max);
   }
 }
 
-export default EuroStatFn
+export const crDataSource = dfProps => {
+  const _ds = dfProps.dataSource
+  , _prefix = _ds && _ds.indexOf('Eurostat') !== -1
+     ? _ds
+     : 'Eurostat';
+  return `${_prefix} (${_getTableId(dfProps) || ''})`;
+}
+
+export const crLinkConf = dfProps => ({
+  linkFn: 'ES',
+  item: {
+    dataset: _getTableId(dfProps)
+  }
+})

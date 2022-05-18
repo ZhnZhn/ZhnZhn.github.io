@@ -1,13 +1,11 @@
-import ChartConfig from '../../charts/ChartConfig'
-import EuroStatFn from './EuroStatFn';
-import toYearly from '../toYearsByMonths'
-
-const {
+import ChartConfig from '../../charts/ChartConfig';
+import {
   toPointArr,
   crDataSource,
   crLinkConf,
   setInfo
-} = EuroStatFn
+} from './EuroStatFn';
+import toYearly from '../toYearsByMonths';
 
 const toAreaYearly = {
    createConfig: (json, option) => {
@@ -25,12 +23,8 @@ const toAreaYearly = {
       return config;
    },
 
-   createSeria: (json, option) => {
-     return ChartConfig.crSeria({
-       name: 'Empty Seria'
-     });
-   }
-
+   createSeria: (json, option) => ChartConfig
+     .crSeria({ name: 'Empty Seria' })
 };
 
 export default toAreaYearly

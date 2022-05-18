@@ -1,13 +1,10 @@
-
 import FactoryChart from './FactoryChart';
 import JsonStatFn from './JsonStatFn';
-import EuroStatFn from './EuroStatFn';
-
-const {
+import {
   addToCategoryConfig,
   findMinY,
   crCategoryTooltip
-} = EuroStatFn
+} from './EuroStatFn';
 
 const _filterZeroIf = (data, is) => is
   ? data.map(value => value === 0 ? null : value)
@@ -49,7 +46,7 @@ const toCategory = {
     , _seriaProps = seriaType === 'DOT_SET'
         ? _crScatterProps(seriaColor)
         : void 0;
-    return {      
+    return {
       minY: findMinY(data),
       name: configSlice.time || time,
       color: seriaColor,

@@ -1,19 +1,18 @@
 import ChartConfig from '../../charts/ChartConfig';
-
-import EuroStatFn from './EuroStatFn';
-
-const {
+import {
   crData,
   setDataAndInfo,
   setLineExtrems,
   findMinY
-} = EuroStatFn
+} from './EuroStatFn';
 
 const toArea = {
    createConfig: (json, option) => {
      const {
        isNotZoomToMinMax,
-       seriaType, seriaColor, seriaWidth
+       seriaType,
+       seriaColor,
+       seriaWidth
      } = option
      , { data, max, min } = crData(json, option)
      , _type = (seriaType || '').toLowerCase() || 'spline'
@@ -29,10 +28,17 @@ const toArea = {
 
    createSeria: (json, option) => {
      const { data } = crData(json)
-     , { itemCaption, seriaType, seriaColor, seriaWidth } = option;
+     , {
+       itemCaption,
+       seriaType,
+       seriaColor,
+       seriaWidth
+     } = option;
 
      return ChartConfig.crSeria({
-       seriaType, seriaColor, seriaWidth,
+       seriaType,
+       seriaColor,
+       seriaWidth,
        data,
        minY: findMinY(data),
        name: itemCaption

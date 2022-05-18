@@ -3,65 +3,66 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _EuroStatFn = _interopRequireDefault(require("./EuroStatFn"));
+var _EuroStatFn = require("./EuroStatFn");
 
-var crData = _EuroStatFn["default"].crData,
-    setDataAndInfo = _EuroStatFn["default"].setDataAndInfo,
-    setLineExtrems = _EuroStatFn["default"].setLineExtrems,
-    findMinY = _EuroStatFn["default"].findMinY;
-var toArea = {
-  createConfig: function createConfig(json, option) {
-    var isNotZoomToMinMax = option.isNotZoomToMinMax,
-        seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth,
-        _crData = crData(json, option),
-        data = _crData.data,
-        max = _crData.max,
-        min = _crData.min,
-        _type = (seriaType || '').toLowerCase() || 'spline',
-        config = _ChartConfig["default"].crAreaConfig({
+const toArea = {
+  createConfig: (json, option) => {
+    const {
+      isNotZoomToMinMax,
+      seriaType,
+      seriaColor,
+      seriaWidth
+    } = option,
+          {
+      data,
+      max,
+      min
+    } = (0, _EuroStatFn.crData)(json, option),
+          _type = (seriaType || '').toLowerCase() || 'spline',
+          config = _ChartConfig.default.crAreaConfig({
       seriaType: _type,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth
+      seriaColor,
+      seriaWidth
     });
 
-    setDataAndInfo({
-      config: config,
-      data: data,
-      json: json,
-      option: option
+    (0, _EuroStatFn.setDataAndInfo)({
+      config,
+      data,
+      json,
+      option
     });
-    setLineExtrems({
-      config: config,
-      max: max,
-      min: min,
-      isNotZoomToMinMax: isNotZoomToMinMax
+    (0, _EuroStatFn.setLineExtrems)({
+      config,
+      max,
+      min,
+      isNotZoomToMinMax
     });
     return config;
   },
-  createSeria: function createSeria(json, option) {
-    var _crData2 = crData(json),
-        data = _crData2.data,
-        itemCaption = option.itemCaption,
-        seriaType = option.seriaType,
-        seriaColor = option.seriaColor,
-        seriaWidth = option.seriaWidth;
-
-    return _ChartConfig["default"].crSeria({
-      seriaType: seriaType,
-      seriaColor: seriaColor,
-      seriaWidth: seriaWidth,
-      data: data,
-      minY: findMinY(data),
+  createSeria: (json, option) => {
+    const {
+      data
+    } = (0, _EuroStatFn.crData)(json),
+          {
+      itemCaption,
+      seriaType,
+      seriaColor,
+      seriaWidth
+    } = option;
+    return _ChartConfig.default.crSeria({
+      seriaType,
+      seriaColor,
+      seriaWidth,
+      data,
+      minY: (0, _EuroStatFn.findMinY)(data),
       name: itemCaption
     });
   }
 };
 var _default = toArea;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toArea.js.map
