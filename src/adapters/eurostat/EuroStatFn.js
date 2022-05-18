@@ -1,5 +1,8 @@
 import Chart from '../../charts/Chart';
-import ChartFn from '../../charts/ChartFn';
+import {
+  calcMinY,
+  setPlotLinesMinMax
+} from '../../charts/ChartFn';
 import Tooltip from '../../charts/Tooltip';
 
 import {
@@ -11,11 +14,6 @@ import {
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { crItemConf } from '../crFn';
-
-const {
-  calcMinY,
-  setPlotLinesMinMax
-} = ChartFn;
 
 const COLOR_EU = "#0088ff"
 , COLOR_EA = "#ff5800"

@@ -1,4 +1,7 @@
-import ChartFn from '../../charts/ChartFn';
+import {
+  crValueMoving,
+  crId
+} from '../../charts/ChartFn';
 
 import CA from '../../flux/actions/ComponentActions';
 import ChartActions, {
@@ -14,11 +17,6 @@ import {
 } from '../../constants/CompItemType';
 
 import Item from '../items/Items';
-
-const {
-  crValueMoving,
-  crId
-} = ChartFn;
 
 const _getIdKey = (config, index) => {
   const { zhConfig } = config

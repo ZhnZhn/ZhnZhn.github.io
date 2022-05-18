@@ -3,11 +3,19 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.zoomIndicatorCharts = exports.toTdmyIf = exports.toTdmy = exports.toNumberFormatAll = exports.toNumberFormat = exports.toDmy = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
 
-var _big = _interopRequireDefault(require("big.js"));
+var _dateFormat = require("./dateFormat");
+
+exports.toDmy = _dateFormat.toDmy;
+exports.toTdmy = _dateFormat.toTdmy;
+exports.toTdmyIf = _dateFormat.toTdmyIf;
 
 var _mathFn = require("../math/mathFn");
+
+exports.crId = _mathFn.crId;
+
+var _big = _interopRequireDefault(require("big.js"));
 
 var _formatNumber2 = _interopRequireDefault(require("../utils/formatNumber"));
 
@@ -18,8 +26,6 @@ var _arrFn = require("../utils/arrFn");
 var _DateUtils = require("../utils/DateUtils");
 
 var _Chart = _interopRequireDefault(require("./Chart"));
-
-var _dateFormat = require("./dateFormat");
 
 const _isFn = fn => typeof fn === 'function',
       _isNumber = n => typeof n === 'number' && n - n === 0,
@@ -181,112 +187,127 @@ const _getMinMaxFromEvent = _ref3 => {
   return [userMin || min, userMin ? userMax : max];
 };
 
-const ChartFn = {
-  toDmy: _dateFormat.toDmy,
-  toTdmy: _dateFormat.toTdmy,
-  toTdmyIf: _dateFormat.toTdmyIf,
+const addSeriaWithRenderLabel = props => {
+  // { chart, series, label, hasSecondYAxis } = props
+  const {
+    chart
+  } = props,
+        chartOptions = _initOptionsZhSeries(chart),
+        _color = _addSeries(props),
+        labelText = _getLabelText(props.label),
+        {
+    x,
+    y
+  } = _calcXyForLabel(chartOptions),
+        textEl = _renderSeriesLabel(chart, labelText, x, y, props.color || _color || _getRecentSeriaColor(chart));
 
-  addSeriaWithRenderLabel(props) {
-    // { chart, series, label, hasSecondYAxis } = props
-    const {
-      chart
-    } = props,
-          chartOptions = _initOptionsZhSeries(chart),
-          _color = _addSeries(props),
-          labelText = _getLabelText(props.label),
-          {
-      x,
-      y
-    } = _calcXyForLabel(chartOptions),
-          textEl = _renderSeriesLabel(chart, labelText, x, y, props.color || _color || _getRecentSeriaColor(chart));
+  chartOptions.zhSeries.count += 1;
+  chartOptions.zhSeries.titleEls.push(textEl);
 
-    chartOptions.zhSeries.count += 1;
-    chartOptions.zhSeries.titleEls.push(textEl);
+  _updateYAxisMinMax(props, chartOptions);
+};
 
-    _updateYAxisMinMax(props, chartOptions);
-  },
+exports.addSeriaWithRenderLabel = addSeriaWithRenderLabel;
 
-  zoomIndicatorCharts(event) {
-    const [min, max] = _getMinMaxFromEvent(event);
+const zoomIndicatorCharts = function (event) {
+  const [min, max] = _getMinMaxFromEvent(event);
 
-    (this.chart.options.zhDetailCharts || []).forEach(chart => {
-      chart.xAxis[0].setExtremes(min, max, true, true);
-    });
-  },
+  (this.chart.options.zhDetailCharts || []).forEach(chart => {
+    chart.xAxis[0].setExtremes(min, max, true, true);
+  });
+};
 
-  afterSetExtremesYAxis(event) {
-    const {
-      trigger,
-      userMax,
-      userMin
-    } = event;
+exports.zoomIndicatorCharts = zoomIndicatorCharts;
 
-    if (trigger === 'zoom' && userMax) {
-      this.setExtremes(userMin, userMax + (userMax - userMin) * 0.05, true, true);
-    }
-  },
+const afterSetExtremesYAxis = function (event) {
+  const {
+    trigger,
+    userMax,
+    userMin
+  } = event;
 
-  crValueMoving(chart, prev, dateTo) {
-    const points = chart.series[0].data,
-          mlsUTC = (0, _DateUtils.dmyToUTC)(dateTo),
-          index = _isNumber(mlsUTC) ? _findIndexByX(points, mlsUTC) : -1,
-          valueTo = index === -1 ? void 0 : points[index].y;
-    return _isNumber(valueTo) ? _assign({}, prev, (0, _mathFn.crValueMoving)({
-      nowValue: prev.value,
-      prevValue: valueTo,
-      fnFormat: _formatAllNumber.default
-    }), {
-      valueTo,
-      dateTo
-    }) : void 0;
-  },
-
-  toNumberFormat: _formatNumber2.default,
-  toNumberFormatAll: _formatAllNumber.default,
-  crId: _mathFn.crId,
-  crTpId: () => (0, _mathFn.crId)('TP_'),
-  setPlotLinesMinMax: _ref4 => {
-    let {
-      plotLines,
-      min,
-      max
-    } = _ref4;
-
-    if (max > INITIAL_MAX_NUMBER) {
-      _setPlotLine(plotLines[0], max);
-    }
-
-    if (min < INITIAL_MIN_NUMBER) {
-      _setPlotLine(plotLines[1], min);
-    }
-  },
-  setPlotLinesDeltas: _ref5 => {
-    let {
-      plotLines,
-      min,
-      max,
-      value
-    } = _ref5;
-
-    const _bMax = _crBigValueOrZero(max, INITIAL_MAX_NUMBER),
-          _bMin = _crBigValueOrZero(min, INITIAL_MIN_NUMBER),
-          _bValue = _crBigValueOrZero(value, null),
-          _perToMax = _calcPerTo(_bMax, _bValue, _bValue),
-          _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
-
-    _setPlotLine(plotLines[0], _crPoint(_bMax), _crDelta(_perToMax));
-
-    _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(_perToMin));
-  },
-  calcMinY: (min, max) => max > INITIAL_MAX_NUMBER && min < INITIAL_MIN_NUMBER ? min - (max - min) * 1 / 6 : void 0,
-  setYToPoints: (data, y) => {
-    if (y == null) {
-      return;
-    }
-
-    data.forEach(point => point.y = y);
+  if (trigger === 'zoom' && userMax) {
+    this.setExtremes(userMin, userMax + (userMax - userMin) * 0.05, true, true);
   }
 };
-var _default = ChartFn;
-exports.default = _default;
+
+exports.afterSetExtremesYAxis = afterSetExtremesYAxis;
+
+const crValueMoving = (chart, prev, dateTo) => {
+  const points = chart.series[0].data,
+        mlsUTC = (0, _DateUtils.dmyToUTC)(dateTo),
+        index = _isNumber(mlsUTC) ? _findIndexByX(points, mlsUTC) : -1,
+        valueTo = index === -1 ? void 0 : points[index].y;
+  return _isNumber(valueTo) ? _assign({}, prev, (0, _mathFn.crValueMoving)({
+    nowValue: prev.value,
+    prevValue: valueTo,
+    fnFormat: _formatAllNumber.default
+  }), {
+    valueTo,
+    dateTo
+  }) : void 0;
+};
+
+exports.crValueMoving = crValueMoving;
+const toNumberFormat = _formatNumber2.default;
+exports.toNumberFormat = toNumberFormat;
+const toNumberFormatAll = _formatAllNumber.default;
+exports.toNumberFormatAll = toNumberFormatAll;
+
+const crTpId = () => (0, _mathFn.crId)('TP_');
+
+exports.crTpId = crTpId;
+
+const setPlotLinesMinMax = _ref4 => {
+  let {
+    plotLines,
+    min,
+    max
+  } = _ref4;
+
+  if (max > INITIAL_MAX_NUMBER) {
+    _setPlotLine(plotLines[0], max);
+  }
+
+  if (min < INITIAL_MIN_NUMBER) {
+    _setPlotLine(plotLines[1], min);
+  }
+};
+
+exports.setPlotLinesMinMax = setPlotLinesMinMax;
+
+const setPlotLinesDeltas = _ref5 => {
+  let {
+    plotLines,
+    min,
+    max,
+    value
+  } = _ref5;
+
+  const _bMax = _crBigValueOrZero(max, INITIAL_MAX_NUMBER),
+        _bMin = _crBigValueOrZero(min, INITIAL_MIN_NUMBER),
+        _bValue = _crBigValueOrZero(value, null),
+        _perToMax = _calcPerTo(_bMax, _bValue, _bValue),
+        _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
+
+  _setPlotLine(plotLines[0], _crPoint(_bMax), _crDelta(_perToMax));
+
+  _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(_perToMin));
+};
+
+exports.setPlotLinesDeltas = setPlotLinesDeltas;
+
+const calcMinY = (min, max) => max > INITIAL_MAX_NUMBER && min < INITIAL_MIN_NUMBER ? min - (max - min) * 1 / 6 : void 0;
+
+exports.calcMinY = calcMinY;
+
+const setYToPoints = (data, y) => {
+  if (y == null) {
+    return;
+  }
+
+  data.forEach(point => point.y = y);
+};
+
+exports.setYToPoints = setYToPoints;
 //# sourceMappingURL=ChartFn.js.map

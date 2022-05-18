@@ -7,18 +7,10 @@ exports.default = void 0;
 
 var _isSupportOptions = _interopRequireDefault(require("../../utils/isSupportOptions"));
 
-var _ChartFn = _interopRequireDefault(require("../ChartFn"));
+var _ChartFn = require("../ChartFn");
 
 var _Colors = require("./Colors");
 
-const {
-  crTpId,
-  toNumberFormat,
-  toNumberFormatAll,
-  toDmy,
-  toTdmy,
-  toTdmyIf
-} = _ChartFn.default;
 const CL_TP_HEADER = "tp__header not-selected",
       CL_TP_CAPTION = "tp__header__caption text-clip",
       CL_TP_BT_CLOSE = "tp__header__close",
@@ -84,7 +76,7 @@ const tpFn = {
 
     return "\n    <span " + TITLE_STYLE + ">" + _t + "</span>\n    <span " + _vStyle + ">" + _v + "</span>" + _statusSpan;
   },
-  crNotEmptySpan: (title, v) => _isValueEmpty(v) ? '' : tpFn.crSpan(title, toNumberFormatAll(v)),
+  crNotEmptySpan: (title, v) => _isValueEmpty(v) ? '' : tpFn.crSpan(title, (0, _ChartFn.toNumberFormatAll)(v)),
   crRow: function (t, v, option) {
     if (t === void 0) {
       t = '';
@@ -107,12 +99,12 @@ const tpFn = {
 
     return "<div id=\"" + id + "\" class=\"" + CL_TP_HEADER + " " + cssClass + "\">\n      <span class=\"" + CL_TP_CAPTION + "\">" + date + "</span>\n      <span class=\"" + CL_TP_BT_CLOSE + "\">X</span>\n    </div>";
   },
-  crTpId,
-  toNumberFormat,
-  toNumberFormatAll,
-  toDmy,
-  toTdmy,
-  toTdmyIf,
+  crTpId: _ChartFn.crTpId,
+  toNumberFormat: _ChartFn.toNumberFormat,
+  toNumberFormatAll: _ChartFn.toNumberFormatAll,
+  toDmy: _ChartFn.toDmy,
+  toTdmy: _ChartFn.toTdmy,
+  toTdmyIf: _ChartFn.toTdmyIf,
   addHideHandler: (id, point, fn) => {
     _addClickOnceById(id, _fHideTooltip(point, fn));
   },

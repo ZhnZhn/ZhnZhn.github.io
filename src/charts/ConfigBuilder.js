@@ -5,7 +5,12 @@ import {
 } from '../math/seriaFn';
 
 import Chart from './Chart';
-import ChartFn from './ChartFn';
+import {
+  setPlotLinesMinMax,
+  setPlotLinesDeltas,
+  calcMinY,
+  setYToPoints
+} from './ChartFn';
 import ChartConfig from './ChartConfig';
 import Factory from './ChartFactory';
 
@@ -17,12 +22,6 @@ const {
   fSubtitle,
   fTooltip
 } = Chart;
-const {
-  setPlotLinesMinMax,
-  setPlotLinesDeltas,
-  calcMinY,
-  setYToPoints
-} = ChartFn;
 const {
   crAreaConfig,
   crTreeMapConfig

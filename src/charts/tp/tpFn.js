@@ -1,19 +1,16 @@
-
-import isSupportOptions from '../../utils/isSupportOptions'
-import ChartFn from '../ChartFn'
+import isSupportOptions from '../../utils/isSupportOptions';
 import {
-  TITLE_COLOR,
-  VALUE_COLOR
-} from './Colors';
-
-const {
   crTpId,
   toNumberFormat,
   toNumberFormatAll,
   toDmy,
   toTdmy,
   toTdmyIf
-} = ChartFn;
+} from '../ChartFn';
+import {
+  TITLE_COLOR,
+  VALUE_COLOR
+} from './Colors';
 
 const CL_TP_HEADER = "tp__header not-selected"
 , CL_TP_CAPTION = "tp__header__caption text-clip"

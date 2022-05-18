@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
+var _ChartFn = require("../../charts/ChartFn");
 
 var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
 
@@ -21,11 +21,6 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const {
-  crValueMoving,
-  crId
-} = _ChartFn.default;
-
 const _getIdKey = (config, index) => {
   const {
     zhConfig
@@ -34,7 +29,7 @@ const _getIdKey = (config, index) => {
     id,
     key
   } = zhConfig || {};
-  return [id || "Id:" + index, key || id || crId()];
+  return [id || "Id:" + index, key || id || (0, _ChartFn.crId)()];
 };
 
 const _fAddToWatch = (caption, config) => () => _ComponentActions.default.showAddToWatch({
@@ -67,7 +62,7 @@ const _crAreaChart = function (_ref) {
     onSetActive: _ComponentActions.default.setActiveCheckbox,
     onAddToWatch: _fAddToWatch(id, config),
     ...props,
-    crValueMoving: crValueMoving,
+    crValueMoving: _ChartFn.crValueMoving,
     onToTop: _ChartActions.default[_ChartActions.CHAT_TO_TOP].bind(null, chartType, id),
     onCopy: _ChartActions.default[_ChartActions.CHAT_COPY],
     onPasteTo: _fOnPasteToDialog(store),

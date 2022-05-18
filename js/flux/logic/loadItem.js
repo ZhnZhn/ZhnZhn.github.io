@@ -9,7 +9,7 @@ var _fnFetch = require("../../utils/fnFetch");
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
-var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
+var _ChartFn = require("../../charts/ChartFn");
 
 var _ChartOptionsFn = require("../../components/dialogs/ChartOptionsFn");
 
@@ -142,14 +142,13 @@ const _fetchToChart = function (objImpl, _ref4) {
     zhColor
   } = series || {};
 
-  _ChartFn.default.addSeriaWithRenderLabel({
+  (0, _ChartFn.addSeriaWithRenderLabel)({
     chart,
     series,
     label: itemCaption || label || value,
     color: color || zhColor,
     hasSecondYAxis: !!hasSecondYAxis
   });
-
   onCompleted(option);
 };
 

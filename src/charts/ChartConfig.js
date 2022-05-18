@@ -12,7 +12,10 @@ import HighchartsZhn from './plugin/zhn-highcharts'
 
 import COLOR from '../constants/Color';
 import Chart from './Chart';
-import ChartFn from './ChartFn';
+import {
+  zoomIndicatorCharts,
+  afterSetExtremesYAxis
+} from './ChartFn';
 import Tooltip from './Tooltip';
 
 import ChartTheme from './ChartTheme'
@@ -57,7 +60,7 @@ const ChartConfig = {
       type, lineWidth, name, data,
     }, restOptions, {
       point: Chart.fEventsMouseOver(handleMouseOver)
-    })    
+    })
   },
 
   getColor(seriaIndex) {
@@ -96,7 +99,7 @@ const ChartConfig = {
 
     config.xAxis = _assign( Chart.fXAxisOpposite(config.xAxis), {
       events: {
-        afterSetExtremes : ChartFn.zoomIndicatorCharts
+        afterSetExtremes : zoomIndicatorCharts
       }
     })
     config.yAxis = _assign(config.yAxis, {
@@ -108,7 +111,7 @@ const ChartConfig = {
         y: 5
       },
       events: {
-        afterSetExtremes: ChartFn.afterSetExtremesYAxis
+        afterSetExtremes: afterSetExtremesYAxis
       }
     })
 

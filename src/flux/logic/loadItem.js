@@ -1,10 +1,14 @@
-import { fetchJson } from '../../utils/fnFetch'
+import { fetchJson } from '../../utils/fnFetch';
 
-import ChartStore from '../stores/ChartStore'
-import ChartFn from '../../charts/ChartFn'
-import { isCategoryItem } from '../../components/dialogs/ChartOptionsFn';
+import ChartStore from '../stores/ChartStore';
+import {
+  addSeriaWithRenderLabel
+} from '../../charts/ChartFn';
+import {
+  isCategoryItem
+} from '../../components/dialogs/ChartOptionsFn';
 
-import onCatch from './onCatch'
+import onCatch from './onCatch';
 
 const ALERT_CATEGORY_TO_SPLINE = {
   alertCaption: 'Series Error',
@@ -81,7 +85,7 @@ const _fetchToChart = function(objImpl, { json, option, onCompleted }){
       , series = adapter.toSeries(json, option, chart)
       , { itemCaption, color, zhColor } = series || {};
 
-  ChartFn.addSeriaWithRenderLabel({
+  addSeriaWithRenderLabel({
     chart, series,
     label: itemCaption || label || value,
     color: color || zhColor,

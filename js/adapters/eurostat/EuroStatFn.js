@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
-var _ChartFn = _interopRequireDefault(require("../../charts/ChartFn"));
+var _ChartFn = require("../../charts/ChartFn");
 
 var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
 
@@ -17,10 +17,6 @@ var _compareByFn = require("../compareByFn");
 
 var _crFn = require("../crFn");
 
-const {
-  calcMinY,
-  setPlotLinesMinMax
-} = _ChartFn.default;
 const COLOR_EU = "#0088ff",
       COLOR_EA = "#ff5800",
       COLOR_NOT_EU_MEMBER = '#8085e9';
@@ -335,14 +331,14 @@ const EuroStatFn = {
       isNotZoomToMinMax
     } = _ref8;
     const plotLines = config.yAxis.plotLines;
-    setPlotLinesMinMax({
+    (0, _ChartFn.setPlotLinesMinMax)({
       plotLines,
       min,
       max
     });
 
     if (!isNotZoomToMinMax) {
-      config.yAxis.min = calcMinY(min, max);
+      config.yAxis.min = (0, _ChartFn.calcMinY)(min, max);
     }
   },
 

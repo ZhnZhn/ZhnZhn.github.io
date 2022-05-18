@@ -19,7 +19,7 @@ var _Color = _interopRequireDefault(require("../constants/Color"));
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _ChartFn = _interopRequireDefault(require("./ChartFn"));
+var _ChartFn = require("./ChartFn");
 
 var _Tooltip = _interopRequireDefault(require("./Tooltip"));
 
@@ -82,7 +82,11 @@ const ChartConfig = { ..._WithIndicatorConfig.default,
     return colors[seriaIndex % colors.length];
   },
 
-  crSeria: (option = {}) => {
+  crSeria: function (option) {
+    if (option === void 0) {
+      option = {};
+    }
+
     const {
       seriaType,
       seriaWidth,
@@ -113,7 +117,7 @@ const ChartConfig = { ..._WithIndicatorConfig.default,
 
     config.xAxis = _assign(_Chart.default.fXAxisOpposite(config.xAxis), {
       events: {
-        afterSetExtremes: _ChartFn.default.zoomIndicatorCharts
+        afterSetExtremes: _ChartFn.zoomIndicatorCharts
       }
     });
     config.yAxis = _assign(config.yAxis, {
@@ -125,7 +129,7 @@ const ChartConfig = { ..._WithIndicatorConfig.default,
         y: 5
       },
       events: {
-        afterSetExtremes: _ChartFn.default.afterSetExtremesYAxis
+        afterSetExtremes: _ChartFn.afterSetExtremesYAxis
       }
     });
     config.yAxis.plotLines = [_Chart.default.fPlotLine(_Color.default.HIGH, 'max'), _Chart.default.fPlotLine(_Color.default.LOW, 'min')];

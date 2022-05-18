@@ -9,7 +9,7 @@ var _seriaFn = require("../math/seriaFn");
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _ChartFn = _interopRequireDefault(require("./ChartFn"));
+var _ChartFn = require("./ChartFn");
 
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
@@ -24,12 +24,6 @@ const {
   fSubtitle,
   fTooltip
 } = _Chart.default;
-const {
-  setPlotLinesMinMax,
-  setPlotLinesDeltas,
-  calcMinY,
-  setYToPoints
-} = _ChartFn.default;
 const {
   crAreaConfig,
   crTreeMapConfig
@@ -86,7 +80,7 @@ const _findMinY = (minY, data) => _isNumber(minY) ? minY : (0, _seriaFn.findMinY
 
 const _findMaxY = (maxY, data) => _isNumber(maxY) ? maxY : (0, _seriaFn.findMaxY)(data);
 
-const _calcYAxisMin = (min, max, noZoom) => noZoom && min > 0 ? 0 : calcMinY(min, max);
+const _calcYAxisMin = (min, max, noZoom) => noZoom && min > 0 ? 0 : (0, _ChartFn.calcMinY)(min, max);
 
 const ConfigBuilder = function (config) {
   if (config === void 0) {
@@ -273,7 +267,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
       const _recentIndex = data.length - 1;
 
       if (_recentIndex > 0) {
-        setPlotLinesDeltas({
+        (0, _ChartFn.setPlotLinesDeltas)({
           plotLines: this.config.yAxis.plotLines,
           min,
           max,
@@ -286,7 +280,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
   },
 
   _setMinMax(min, max, noZoom) {
-    setPlotLinesMinMax({
+    (0, _ChartFn.setPlotLinesMinMax)({
       plotLines: this.config.yAxis.plotLines,
       min,
       max
@@ -311,7 +305,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
         chart,
         zhConfig
       } = this.config;
-      setYToPoints(data, calcMinY(min, max));
+      (0, _ChartFn.setYToPoints)(data, (0, _ChartFn.calcMinY)(min, max));
       seria.visible = false;
       series.push(seria);
       chart.spacingBottom = 40;
