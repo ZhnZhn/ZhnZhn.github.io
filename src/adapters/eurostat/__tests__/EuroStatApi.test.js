@@ -1,12 +1,14 @@
 /**
  * @jest-environment jsdom
  */
-//Highcharts dateFormat from AdapterFn require jsdom  
+//Highcharts dateFormat from AdapterFn require jsdom
 "use strict";
 import api from '../EuroStatApi'
-import apiFn from '../api/apiFn'
-
-const { URL, QUERY_TAIL, DF_TAIL } = apiFn;
+import {
+  URL,
+  QUERY_TAIL,
+  DF_TAIL
+} from '../api/apiFn';
 
 const TYPE = 'selectN';
 

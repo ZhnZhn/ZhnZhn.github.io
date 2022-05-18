@@ -1,19 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _apiFn = _interopRequireDefault(require("./apiFn"));
-
-const {
-  DF_TAIL,
-  isCategory,
-  isMap,
-  crUrl,
-  getValue
-} = _apiFn.default;
+var _apiFn = require("./apiFn");
 
 const _isNotEmptyStr = str => str && typeof str === 'string';
 
@@ -27,12 +17,13 @@ const _addDfTailTo = (mapSlice, dfTail) => {
   });
 };
 
-const _crMapSlice = (items, {
-  dfTail
-}) => {
+const _crMapSlice = (items, _ref) => {
+  let {
+    dfTail
+  } = _ref;
   const mapSlice = {};
   items.forEach(item => {
-    mapSlice[item.id] = getValue(item);
+    mapSlice[item.id] = (0, _apiFn.getValue)(item);
   });
 
   if (_isNotEmptyStr(dfTail)) {
@@ -44,15 +35,17 @@ const _crMapSlice = (items, {
 
 const _notEmptyOrGeo = item => Boolean(item) && item.id !== 'geo';
 
-const _crItems = ({
-  seriaType,
-  items,
-  time
-}) => {
-  if (isCategory(seriaType)) {
+const _crItems = _ref2 => {
+  let {
+    seriaType,
+    items,
+    time
+  } = _ref2;
+
+  if ((0, _apiFn.isCategory)(seriaType)) {
     const _items = items.filter(_notEmptyOrGeo);
 
-    return isMap(seriaType) ? _items : _items.concat([{
+    return (0, _apiFn.isMap)(seriaType) ? _items : _items.concat([{
       id: 'time',
       value: time
     }]);
@@ -62,13 +55,13 @@ const _crItems = ({
 };
 
 const _crQuery = (items, dfTail) => {
-  const _q = items.map(item => item.id + "=" + getValue(item)).join('&');
+  const _q = items.map(item => item.id + "=" + (0, _apiFn.getValue)(item)).join('&');
 
   return dfTail ? _q + "&" + dfTail : _q;
 };
 
 const _updateOptionsIf = (seriaType, items, options) => {
-  if (isCategory(seriaType)) {
+  if ((0, _apiFn.isCategory)(seriaType)) {
     options.zhMapSlice = _crMapSlice(items, options);
   }
 };
@@ -86,7 +79,7 @@ const crUrlN = options => {
 
   _updateOptionsIf(seriaType, _items, options);
 
-  return isCategory(seriaType) ? crUrl(_dfTable, _q, "&" + DF_TAIL) : crUrl(_dfTable, _q);
+  return (0, _apiFn.isCategory)(seriaType) ? (0, _apiFn.crUrl)(_dfTable, _q, "&" + _apiFn.DF_TAIL) : (0, _apiFn.crUrl)(_dfTable, _q);
 };
 
 var _default = crUrlN;

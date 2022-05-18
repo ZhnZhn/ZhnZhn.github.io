@@ -1,16 +1,18 @@
-import apiFn from './apiFn'
-
-const {
+import {
   DF_TAIL,
-  isCategory, isMap,
+  isCategory,
+  isMap,
   crUrl,
   getValue
-} = apiFn;
+} from './apiFn';
 
 const _isNotEmptyStr = str => str &&
   typeof str === 'string';
 
-const _addDfTailTo = (mapSlice, dfTail) => {
+const _addDfTailTo = (
+  mapSlice,
+  dfTail
+) => {
   dfTail.split('&').forEach(param => {
     const _arr = param.split('=');
     if (_arr[0] && _arr[1]) {
@@ -19,7 +21,10 @@ const _addDfTailTo = (mapSlice, dfTail) => {
   })
 };
 
-const _crMapSlice = (items, { dfTail }) => {
+const _crMapSlice = (
+  items,
+  { dfTail }
+) => {
   const mapSlice = {};
   items.forEach(item => {
     mapSlice[item.id] = getValue(item)
@@ -32,7 +37,11 @@ const _crMapSlice = (items, { dfTail }) => {
 
 const _notEmptyOrGeo = item =>
   Boolean(item) && item.id !== 'geo';
-const _crItems = ({ seriaType, items, time }) => {
+const _crItems = ({
+  seriaType,
+  items,
+  time
+}) => {
   if (isCategory(seriaType)) {
     const _items = items.filter(_notEmptyOrGeo);
     return isMap(seriaType)
@@ -42,7 +51,10 @@ const _crItems = ({ seriaType, items, time }) => {
  return items;
 };
 
-const _crQuery = (items, dfTail) => {
+const _crQuery = (
+  items,
+  dfTail
+) => {
   const _q = items
     .map(item => `${item.id}=${getValue(item)}`)
     .join('&');
@@ -51,7 +63,11 @@ const _crQuery = (items, dfTail) => {
     : _q;
 };
 
-const _updateOptionsIf = (seriaType, items, options) => {
+const _updateOptionsIf = (
+  seriaType,
+  items,
+  options
+) => {
   if (isCategory(seriaType)) {
     options.zhMapSlice = _crMapSlice(items, options)
   }
@@ -60,7 +76,8 @@ const _updateOptionsIf = (seriaType, items, options) => {
 const crUrlN = (options) => {
   const {
     seriaType,
-    dfTable, dfId,
+    dfTable,
+    dfId,
     dfTail
   } = options
   , _dfTable = dfTable || dfId

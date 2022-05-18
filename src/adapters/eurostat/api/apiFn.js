@@ -1,27 +1,22 @@
-import {
-  isInArrStr,
-  getValue
-} from '../../AdapterFn';
-
-const C = {
-  URL: "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/",
-  QUERY_TAIL: "&precision=1&sinceTimePeriod=1996M01",
-  DF_TAIL: "precision=1"
-};
+export { getValue } from '../../AdapterFn';
+import { isInArrStr } from '../../AdapterFn';
 
 const CATEGORY_TYPES = [
   'MAP',
   'COLUMN_SET',
-  'BAR_SET', 'BAR_WITH_LABELS',
+  'BAR_SET',
+  'BAR_WITH_LABELS',
   'DOT_SET'
 ];
 
-const apiFn = {
-  ...C,
-  getValue,
-  isCategory: isInArrStr(CATEGORY_TYPES),
-  isMap: seriaType => seriaType === 'MAP',
-  crUrl: (table, q, tail=C.QUERY_TAIL) => `${C.URL}${table}?${q}${tail}`
-};
+export const URL = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
+export const QUERY_TAIL = "&precision=1&sinceTimePeriod=1996M01"
+export const DF_TAIL = "precision=1"
 
-export default apiFn
+export const isCategory = isInArrStr(CATEGORY_TYPES)
+export const isMap = seriaType => seriaType === 'MAP'
+export const crUrl = (
+  table,
+  q,
+  tail=QUERY_TAIL
+) => `${URL}${table}?${q}${tail}`

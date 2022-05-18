@@ -1,1 +1,21 @@
-{"version":3,"sources":["../../../../src/adapters/eurostat/api/apiFn.js"],"names":["C","URL","QUERY_TAIL","DF_TAIL","CATEGORY_TYPES","apiFn","getValue","isCategory","isMap","seriaType","crUrl","table","q","tail"],"mappings":";;;;;AAAA;;AAKA,MAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE,4DADG;AAERC,EAAAA,UAAU,EAAE,sCAFJ;AAGRC,EAAAA,OAAO,EAAE;AAHD,CAAV;AAMA,MAAMC,cAAc,GAAG,CACrB,KADqB,EAErB,YAFqB,EAGrB,SAHqB,EAGV,iBAHU,EAIrB,SAJqB,CAAvB;AAOA,MAAMC,KAAK,GAAG,EACZ,GAAGL,CADS;AAEZM,EAAAA,QAAQ,EAARA,mBAFY;AAGZC,EAAAA,UAAU,EAAE,2BAAWH,cAAX,CAHA;AAIZI,EAAAA,KAAK,EAAEC,SAAS,IAAIA,SAAS,KAAK,KAJtB;AAKZC,EAAAA,KAAK,EAAE,UAACC,KAAD,EAAQC,CAAR,EAAWC,IAAX;AAAA,QAAWA,IAAX;AAAWA,MAAAA,IAAX,GAAgBb,CAAC,CAACE,UAAlB;AAAA;;AAAA,gBAAoCF,CAAC,CAACC,GAAtC,GAA4CU,KAA5C,SAAqDC,CAArD,GAAyDC,IAAzD;AAAA;AALK,CAAd;eAQeR,K","sourcesContent":["import {\r\n  isInArrStr,\r\n  getValue\r\n} from '../../AdapterFn';\r\n\r\nconst C = {\r\n  URL: \"https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/\",\r\n  QUERY_TAIL: \"&precision=1&sinceTimePeriod=1996M01\",\r\n  DF_TAIL: \"precision=1\"\r\n};\r\n\r\nconst CATEGORY_TYPES = [\r\n  'MAP',\r\n  'COLUMN_SET',\r\n  'BAR_SET', 'BAR_WITH_LABELS',\r\n  'DOT_SET'\r\n];\r\n\r\nconst apiFn = {\r\n  ...C,\r\n  getValue,\r\n  isCategory: isInArrStr(CATEGORY_TYPES),\r\n  isMap: seriaType => seriaType === 'MAP',\r\n  crUrl: (table, q, tail=C.QUERY_TAIL) => `${C.URL}${table}?${q}${tail}`\r\n};\r\n\r\nexport default apiFn\r\n"],"file":"apiFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/adapters/eurostat/api/apiFn.js"
+ ],
+ "file": "../../../../src/adapters/eurostat/api/apiFn.js",
+ "names": [
+  "CATEGORY_TYPES",
+  "URL",
+  "QUERY_TAIL",
+  "DF_TAIL",
+  "isCategory",
+  "isMap",
+  "seriaType",
+  "crUrl",
+  "table",
+  "q",
+  "tail"
+ ],
+ "mappings": ";;;;;AAAA;;;AAGA,MAAMA,cAAc,GAAG,CACrB,KADqB,EAErB,YAFqB,EAGrB,SAHqB,EAIrB,iBAJqB,EAKrB,SALqB,CAAvB;AAQO,MAAMC,GAAG,GAAG,4DAAZ;;AACA,MAAMC,UAAU,GAAG,sCAAnB;;AACA,MAAMC,OAAO,GAAG,aAAhB;;AAEA,MAAMC,UAAU,GAAG,2BAAWJ,cAAX,CAAnB;;;AACA,MAAMK,KAAK,GAAGC,SAAS,IAAIA,SAAS,KAAK,KAAzC;;;;AACA,MAAMC,KAAK,GAAG,UACnBC,KADmB,EAEnBC,CAFmB,EAGnBC,IAHmB;AAAA,MAGnBA,IAHmB;AAGnBA,IAAAA,IAHmB,GAGdR,UAHc;AAAA;;AAAA,cAIbD,GAJa,GAIPO,KAJO,SAIEC,CAJF,GAIMC,IAJN;AAAA,CAAd"
+}
