@@ -1,58 +1,26 @@
 import Highcharts from 'highcharts';
 
-const merge = Highcharts.merge;
-
-const ChartExportConfig = {
-
-  DEFAULT : {
-    chart : {
-      plotBackgroundColor: 'white',
-      backgroundColor : 'white'
-    },
-    plotOptions: {
-      area: {
-        fillColor: 'white'
-      }      
-    },
-    xAxis : {
-      lineWidth: 2,
-      lineColor: 'black',
-      gridLineColor: 'gray'
-    },
-    yAxis : {
-      lineWidth: 2,
-      lineColor: 'black',
-      gridLineColor: 'gray'
-    }
-  },
-
-  BLACK_AXIS : {
-    xAxis: {
-       labels: {
-         style: {
-          color: 'black'
-         }
-      }
+const _merge = Highcharts.merge;
+const _STYLE_COLOR_BLACK = {
+  style: {
+    color: 'black'
+  }
+};
+const BLACK_AXIS = {
+   xAxis: {
+     labels: _STYLE_COLOR_BLACK
    },
    yAxis: {
-      tickColor: 'black',
-      labels: {
-        style: {
-          color: 'black'
-        }
-     }
+     tickColor: 'black',
+     labels: _STYLE_COLOR_BLACK
    }
- },
+ };
 
- BLACK_TITLE : {
-   title : {
-     style : {
-       color : 'black'
-     }
-   }
- },
+ const BLACK_TITLE = {
+   title: _STYLE_COLOR_BLACK
+ };
 
- BLACK_SERIES : {
+ const BLACK_SERIES = {
    plotOptions: {
      area: {
        color: 'black'
@@ -64,49 +32,35 @@ const ChartExportConfig = {
        color: 'black'
      }
    }
- },
+ };
 
- merge: merge,
+const _crStyleBlackAxis = () => _merge(false, {},
+  BLACK_AXIS
+)
+, _crStyleBlackAxisTitle = () => _merge(false, {},
+  BLACK_AXIS,
+  BLACK_TITLE
+)
+, _crStyleBlackAll = () => _merge(false, {},
+  BLACK_AXIS,
+  BLACK_TITLE,
+  BLACK_SERIES
+);
 
- fDefault(){
-   return this.DEFAULT;
- },
+export const merge = _merge
 
- fBlackAxis(){
-   return merge(false, {},
-     this.BLACK_AXIS
-   );
- },
-
- fBlackAxisTitle(){
-   return merge(false, {},
-     this.BLACK_AXIS,
-     this.BLACK_TITLE
-   );
- },
-
- fBlackAll(){
-   return merge(false, {},
-     this.BLACK_AXIS,
-     this.BLACK_TITLE,
-     this.BLACK_SERIES
-   );
- },
-
- createOptionStyles(){
-   return [
-     { caption: 'Default' , value : {} },
-     {
-        caption: 'Default + Black Axis' ,
-        value : this.fBlackAxis() },
-     {
-        caption: 'Default + Black Axis + Black Title',
-        value : this.fBlackAxisTitle()
-     },
-     { caption: 'All Black' , value: this.fBlackAll() }
-   ];
- }
-
-};
-
-export default ChartExportConfig
+export const crExportStyleOptions = () => [
+  {
+    caption: 'Default',
+    value : {}
+  },{
+    caption: 'Default + Black Axis',
+    value : _crStyleBlackAxis()
+  },{
+    caption: 'Default + Black Axis + Black Title',
+    value : _crStyleBlackAxisTitle()
+  },{
+    caption: 'All Black',
+    value: _crStyleBlackAll()
+  }
+]

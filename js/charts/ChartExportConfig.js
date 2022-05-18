@@ -3,105 +3,62 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.merge = exports.crExportStyleOptions = void 0;
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
-const merge = _highcharts.default.merge;
-const ChartExportConfig = {
-  DEFAULT: {
-    chart: {
-      plotBackgroundColor: 'white',
-      backgroundColor: 'white'
-    },
-    plotOptions: {
-      area: {
-        fillColor: 'white'
-      }
-    },
-    xAxis: {
-      lineWidth: 2,
-      lineColor: 'black',
-      gridLineColor: 'gray'
-    },
-    yAxis: {
-      lineWidth: 2,
-      lineColor: 'black',
-      gridLineColor: 'gray'
-    }
-  },
-  BLACK_AXIS: {
-    xAxis: {
-      labels: {
-        style: {
-          color: 'black'
-        }
-      }
-    },
-    yAxis: {
-      tickColor: 'black',
-      labels: {
-        style: {
-          color: 'black'
-        }
-      }
-    }
-  },
-  BLACK_TITLE: {
-    title: {
-      style: {
-        color: 'black'
-      }
-    }
-  },
-  BLACK_SERIES: {
-    plotOptions: {
-      area: {
-        color: 'black'
-      },
-      spline: {
-        color: 'black'
-      },
-      line: {
-        color: 'black'
-      }
-    }
-  },
-  merge: merge,
-
-  fDefault() {
-    return this.DEFAULT;
-  },
-
-  fBlackAxis() {
-    return merge(false, {}, this.BLACK_AXIS);
-  },
-
-  fBlackAxisTitle() {
-    return merge(false, {}, this.BLACK_AXIS, this.BLACK_TITLE);
-  },
-
-  fBlackAll() {
-    return merge(false, {}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);
-  },
-
-  createOptionStyles() {
-    return [{
-      caption: 'Default',
-      value: {}
-    }, {
-      caption: 'Default + Black Axis',
-      value: this.fBlackAxis()
-    }, {
-      caption: 'Default + Black Axis + Black Title',
-      value: this.fBlackAxisTitle()
-    }, {
-      caption: 'All Black',
-      value: this.fBlackAll()
-    }];
+const _merge = _highcharts.default.merge;
+const _STYLE_COLOR_BLACK = {
+  style: {
+    color: 'black'
   }
-
 };
-var _default = ChartExportConfig;
-exports.default = _default;
+const BLACK_AXIS = {
+  xAxis: {
+    labels: _STYLE_COLOR_BLACK
+  },
+  yAxis: {
+    tickColor: 'black',
+    labels: _STYLE_COLOR_BLACK
+  }
+};
+const BLACK_TITLE = {
+  title: _STYLE_COLOR_BLACK
+};
+const BLACK_SERIES = {
+  plotOptions: {
+    area: {
+      color: 'black'
+    },
+    spline: {
+      color: 'black'
+    },
+    line: {
+      color: 'black'
+    }
+  }
+};
+
+const _crStyleBlackAxis = () => _merge(false, {}, BLACK_AXIS),
+      _crStyleBlackAxisTitle = () => _merge(false, {}, BLACK_AXIS, BLACK_TITLE),
+      _crStyleBlackAll = () => _merge(false, {}, BLACK_AXIS, BLACK_TITLE, BLACK_SERIES);
+
+const merge = _merge;
+exports.merge = merge;
+
+const crExportStyleOptions = () => [{
+  caption: 'Default',
+  value: {}
+}, {
+  caption: 'Default + Black Axis',
+  value: _crStyleBlackAxis()
+}, {
+  caption: 'Default + Black Axis + Black Title',
+  value: _crStyleBlackAxisTitle()
+}, {
+  caption: 'All Black',
+  value: _crStyleBlackAll()
+}];
+
+exports.crExportStyleOptions = crExportStyleOptions;
 //# sourceMappingURL=ChartExportConfig.js.map
