@@ -2,7 +2,7 @@ import Big from 'big.js';
 
 import pipe from '../../utils/pipe';
 import ChartConfig from '../../charts/ChartConfig';
-import ChartLegend from '../../charts/ChartLegend';
+import { crLegendConfig } from '../../charts/ChartLegend';
 
 import { roundBy } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
@@ -29,20 +29,24 @@ import {
   UNKNOWN
 } from './C';
 
-const { crLegendConfig } = ChartLegend
-, _assign = Object.assign
+const _assign = Object.assign
 , _isUndef = v => typeof v === 'undefined'
 , _notNull2 = (a, b) => a !== null && b !== null
 , _isNumber = n => typeof n === 'number' && n-n === 0;
 
-const _fnConvertToUTC = function(point, result){
+const _convertToUTC = (
+  point,
+  result
+) => {
    const arrDate = point[0].split('-');
    result.dateUTC = Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]);
    result.point = point;
    return result;
 };
 
-const _fnCheckExtrems = function(result){
+const _checkExtrems = (
+  result
+) => {
   const {point, yPointIndex, maxY, minY} = result
   , value = point[yPointIndex];
   if (_isNumber(value)){
@@ -52,14 +56,17 @@ const _fnCheckExtrems = function(result){
   return result;
 };
 
-const _fnAddToSeria = function(result){
+const _addToSeria = (result) => {
    const {seria, dateUTC, point, yPointIndex} = result;
    seria.push([dateUTC, point[yPointIndex]]);
 
    return result;
 };
 
-const _fnAddSplitRatio = function(splitRationIndex, result){
+const _addSplitRatio = (
+  splitRationIndex,
+  result
+) => {
   const { point, dateUTC, yPointIndex, dataSplitRatio } = result;
   if (point[splitRationIndex] !== 1){
     const x = dateUTC
@@ -71,8 +78,16 @@ const _fnAddSplitRatio = function(splitRationIndex, result){
   return result;
 };
 
-const _fnAddExDividend = function(exDividendIndex, result){
-     const { point, dateUTC, yPointIndex, dataExDividend } = result;
+const _addExDividend = (
+  exDividendIndex,
+  result
+) => {
+     const {
+       point,
+       dateUTC,
+       yPointIndex,
+       dataExDividend
+     } = result;
 
      if (point[exDividendIndex] !== 0){
        const x = dateUTC
@@ -91,7 +106,10 @@ const _fnAddExDividend = function(exDividendIndex, result){
     return result;
 };
 
-const _fnAddVolume = function(optionIndex, result){
+const _addVolume = (
+  optionIndex,
+  result
+) => {
   const { volume, open, close=4, low=3, high=2 } = optionIndex
   , { point, dateUTC, dataVolume, dataVolumeColumn } = result
   , _open = open ? point[open] : void 0;
@@ -108,10 +126,13 @@ const _fnAddVolume = function(optionIndex, result){
   return result;
 };
 
-const _fnAddATH = function(optionIndex, result){
+const _addATH = (
+  optionIndex,
+  result
+) => {
   const { open=1 } = optionIndex
-      , { dateUTC, point, seria, dataATH } = result
-      , len = seria.length;
+  , { dateUTC, point, seria, dataATH } = result
+  , len = seria.length;
 
   if (len>1) {
     const _prevPoint = seria[len-2];
@@ -125,12 +146,17 @@ const _fnAddATH = function(optionIndex, result){
   return result;
 };
 
-const _crBigDiff = (value, closeValue) =>
-  _notNull2(value, closeValue)
-     ? Big(value).minus(closeValue)
-     : Big('0.0');
+const _crBigDiff = (
+  value,
+  closeValue
+) => _notNull2(value, closeValue)
+  ? Big(value).minus(closeValue)
+  : Big('0.0');
 
-const _fnAddHighLow = function(optionIndex, result){
+const _addHighLow = (
+  optionIndex,
+  result
+) => {
   const { open=1, high=2, low=3 } = optionIndex
   , { dateUTC, yPointIndex, point, dataHighLow } = result
   , _closeValue = point[yPointIndex]
@@ -155,7 +181,10 @@ const _fnAddHighLow = function(optionIndex, result){
   return result;
 };
 
-const _fnAddCustomSeries = function(columns, result){
+const _addCustomSeries = (
+  columns,
+  result
+) => {
    const { dateUTC, point, legendSeries } = result;
    let i=0, max=columns.length;
    for (; i<max; i++ ){
@@ -163,9 +192,12 @@ const _fnAddCustomSeries = function(columns, result){
    }
 };
 
-const _crLegendConfig = function(seriaColumnNames, columnNames){
+const _crLegendConfig = (
+  seriaColumnNames,
+  columnNames
+) => {
   const legendSeries = []
-      , columns = [];
+  , columns = [];
 
   if (seriaColumnNames[0] === 'All'){
     let j=1, _len = columnNames.length;
@@ -188,14 +220,19 @@ const _crLegendConfig = function(seriaColumnNames, columnNames){
   return { legendSeries, columns };
 };
 
-const _isTransform = ({ dataset }) => {
+const _isTransform = ({
+  dataset
+}) => {
   const { transform } = dataset || {};
   return !!(transform && transform !== 'none');
 };
 
-const _crPointFlow = function(json, option){
+const _crPointFlow = (
+  json,
+  option
+) => {
   const yPointIndex = getDataColumnIndex(json, option)
-  , fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria]
+  , fnStep = [_convertToUTC, _checkExtrems, _addToSeria]
   , columnNames = getColumnNames(json)
 
   , open = findColumnIndex(columnNames, OPEN)
@@ -221,26 +258,26 @@ const _crPointFlow = function(json, option){
 
 
   if (volume){
-    fnStep.push(_fnAddVolume.bind(null, {
+    fnStep.push(_addVolume.bind(null, {
       volume, open, close, low, high
     }));
   }
 
   const _hasNotTransform = !_isTransform(json);
   if (exDividend && _hasNotTransform) {
-    fnStep.push(_fnAddExDividend.bind(null, exDividend));
+    fnStep.push(_addExDividend.bind(null, exDividend));
   }
 
   if (splitRatio && _hasNotTransform){
-    fnStep.push(_fnAddSplitRatio.bind(null, splitRatio));
+    fnStep.push(_addSplitRatio.bind(null, splitRatio));
   }
 
   if (open){
-    fnStep.push(_fnAddATH.bind(null, { open }));
+    fnStep.push(_addATH.bind(null, { open }));
   }
 
   if (high && low ){
-    fnStep.push(_fnAddHighLow.bind(null, { open, high, low }));
+    fnStep.push(_addHighLow.bind(null, { open, high, low }));
   }
 
   const { seriaColumnNames } = option;
@@ -249,17 +286,20 @@ const _crPointFlow = function(json, option){
 
     if (legendSeries.length !== 0){
       result.legendSeries = legendSeries
-      fnStep.push(_fnAddCustomSeries.bind(null, columns))
+      fnStep.push(_addCustomSeries.bind(null, columns))
     }
   }
 
   return [pipe(...fnStep), result];
 };
 
-
-const crAreaData = function(json, option){
+const crAreaData = (
+  json,
+  option
+) => {
   const [
-    callPointFlow, result
+    callPointFlow,
+    result
   ] = _crPointFlow(json, option)
   , points = getData(json).sort(compareByDate);
 
