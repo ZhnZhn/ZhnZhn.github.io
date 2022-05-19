@@ -1,5 +1,4 @@
-import { memo } from 'react';
-//import PropTypes from "prop-types";
+import memoIsShow from '../hoc/memoIsShow';
 
 import {
   WAT_EDIT_WATCH_COMPLETED,
@@ -26,10 +25,7 @@ const createList = WatchActions[WAT_CREATE_LIST]
 , renameList = WatchActions[WAT_RENAME_LIST]
 , deleteList = WatchActions[WAT_DELETE_LIST];
 
-const _areEqual = (prevProps, nextProps) => prevProps
-  .isShow === nextProps.isShow;
-
-const EditListDialog = memo(({
+const EditListDialog = memoIsShow(({
   isShow,
   store,
   onClose
@@ -78,14 +74,6 @@ const EditListDialog = memo(({
        </Tab>
     </TabPane>
   </ModalDialog>
-), _areEqual)
-
-/*
-EditListDialog.propTypes = {
-  isShow : PropTypes.bool,
-  store : PropTypes.object,
-  onClose : PropTypes.func
-}
-*/
+));
 
 export default EditListDialog

@@ -5,9 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
-var _WatchActions = _interopRequireWildcard(require("../../flux/actions/WatchActions"));
+var _WatchActions = require("../../flux/actions/WatchActions");
 
 var _MsgWatch = require("../../constants/MsgWatch");
 
@@ -25,27 +25,10 @@ var _GroupDeletePane = _interopRequireDefault(require("./GroupDeletePane"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-//import PropTypes from "prop-types";
-const {
-  addGroup,
-  renameGroup,
-  deleteGroup
-} = _WatchActions.default;
-const {
-  EDIT_WATCH_COMPLETED,
-  EDIT_WATCH_FAILED,
-  ADD_GROUP,
-  RENAME_GROUP,
-  DELETE_GROUP
-} = _WatchActions.WatchActionTypes;
-
-const _areEqual = (prevProps, nextProps) => prevProps.isShow === nextProps.isShow;
-
-const EditGroupDialog = /*#__PURE__*/(0, _react.memo)(_ref => {
+const addGroup = _WatchActions.WatchActions[_WatchActions.WAT_ADD_GROUP],
+      renameGroup = _WatchActions.WatchActions[_WatchActions.WAT_RENAME_GROUP],
+      deleteGroup = _WatchActions.WatchActions[_WatchActions.WAT_DELETE_GROUP];
+const EditGroupDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
     store,
@@ -62,9 +45,9 @@ const EditGroupDialog = /*#__PURE__*/(0, _react.memo)(_ref => {
         title: "Create",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupAddPane.default, {
           store: store,
-          actionCompleted: EDIT_WATCH_COMPLETED,
-          actionFailed: EDIT_WATCH_FAILED,
-          forActionType: ADD_GROUP,
+          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
+          actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
+          forActionType: _WatchActions.WAT_ADD_GROUP,
           msgOnIsEmptyName: _MsgWatch.emptyName,
           onCreate: addGroup,
           onClose: onClose
@@ -73,9 +56,9 @@ const EditGroupDialog = /*#__PURE__*/(0, _react.memo)(_ref => {
         title: "Rename",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupEditPane.default, {
           store: store,
-          actionCompleted: EDIT_WATCH_COMPLETED,
-          actionFailed: EDIT_WATCH_FAILED,
-          forActionType: RENAME_GROUP,
+          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
+          actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
+          forActionType: _WatchActions.WAT_RENAME_GROUP,
           msgOnNotSelect: _MsgWatch.notSelected,
           msgOnIsEmptyName: _MsgWatch.emptyName,
           onRename: renameGroup,
@@ -85,8 +68,8 @@ const EditGroupDialog = /*#__PURE__*/(0, _react.memo)(_ref => {
         title: "Delete",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupDeletePane.default, {
           store: store,
-          actionCompleted: EDIT_WATCH_COMPLETED,
-          forActionType: DELETE_GROUP,
+          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
+          forActionType: _WatchActions.WAT_DELETE_GROUP,
           msgOnNotSelect: _MsgWatch.notSelected,
           onDelete: deleteGroup,
           onClose: onClose
@@ -94,15 +77,7 @@ const EditGroupDialog = /*#__PURE__*/(0, _react.memo)(_ref => {
       })]
     })
   });
-}, _areEqual);
-/*
-EditGroupDialog.propTypes = {
-  isShow: PropTypes.bool,
-  store: PropTypes.object,
-  onClose: PropTypes.func
-}
-*/
-
+});
 var _default = EditGroupDialog;
 exports.default = _default;
 //# sourceMappingURL=EditGroupDialog.js.map
