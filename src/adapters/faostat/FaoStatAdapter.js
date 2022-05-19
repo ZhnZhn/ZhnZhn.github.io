@@ -1,16 +1,17 @@
-
 import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
-import fnAdapter from './fnAdapter'
-
-const {
-  crId, crSubtitle, crTitle,
+import {
+  crId,
+  crSubtitle,
+  crTitle,
   toDataPoints,
-  crZhConfig, toInfo, crValueMoving,
+  crZhConfig,
+  toInfo,
+  crValueMoving,
   crSeriaData,
   findMinY
-} = fnAdapter;
+} from './fnAdapter';
 
 const FaoStatAdapter = {
   crKey: crId,

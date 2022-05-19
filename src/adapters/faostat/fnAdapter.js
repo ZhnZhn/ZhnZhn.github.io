@@ -1,3 +1,10 @@
+export { crError } from '../crFn';
+export { toInfo } from './fnDescr';
+export {
+  getValue,
+  findMinY
+} from '../AdapterFn';
+
 import {
   isYNumber,
   getValue,
@@ -5,38 +12,36 @@ import {
   monthIndex,
   ymdToUTC,
   valueMoving,
-  findMinY,
   mapIf
 } from '../AdapterFn';
-import { crError } from '../crFn';
-import fnDescr from './fnDescr';
+import { DATASET_EMPTY } from './fnDescr';
 
-const _isArr = Array.isArray;
-const C = {
-  DATASET_EMPTY: 'Dataset is empty',
-  ENPTY: '',
-  BLANK: ' ',
-  MM_DD: '-12-31',
-  DF_TITLE: 'More about data on tab Info in Description'
-};
+const _isArr = Array.isArray
+, BLANK = ' '
+, MM_DD = '-12-31'
+, DF_TITLE = 'More about data on tab Info in Description';
 
 const _crUnit = (json) => {
   const { data } = json
   , item = data[data.length-1] || {}
-  , _unit = item.Unit === undefined
-       ? C.DATASET_EMPTY
-       : item.Unit || C.BLANK;
+  , _unit = item.Unit === void 0
+       ? DATASET_EMPTY
+       : item.Unit || BLANK;
 
   return toUpperCaseFirst(_unit);
 };
 
-const _crPoint = ({ Year, Months, Value }) => {
+const _crPoint = ({
+  Year,
+  Months,
+  Value
+}) => {
   const m = Months
      ? monthIndex(Months) + 1
      : 0
   , Tail = m !== 0
      ? `-${m}`
-     : C.MM_DD;
+     : MM_DD;
   return {
     x: ymdToUTC('' + Year + Tail),
     y: Value
@@ -44,7 +49,10 @@ const _crPoint = ({ Year, Months, Value }) => {
 };
 
 
-const _crHm = (json, prName) => {
+const _crHm = (
+  json,
+  prName
+) => {
   const hm = Object.create(null);
   json.data.forEach(item => {
     const _itemKey = item[prName];
@@ -88,7 +96,10 @@ const _hmToPoints = (hm, arr) => arr
   //.map(item => hm[item.Area]);
 
 
-const _crSeriesData = (json, prName) => {
+const _crSeriesData = (
+  json,
+  prName
+) => {
   const _hm = _crHm(json, prName)
   , _legend = _crRefLegend(_hm);
 
@@ -98,10 +109,12 @@ const _crSeriesData = (json, prName) => {
 const _isValueNumber = item => typeof item.Value === 'number';
 const _compareByX = (a, b) => a.x - b.x;
 
-const _crSeriaData = (json, option) => {
-  return mapIf(json.data, _crPoint, _isValueNumber)
-    .sort(_compareByX);
-};
+const _crSeriaData = (
+  json,
+  option
+) => mapIf(json.data, _crPoint, _isValueNumber)
+  .sort(_compareByX);
+
 
 const _isItemList = item => getValue(item)
   .indexOf('>') !== -1;
@@ -115,69 +128,80 @@ const _getSeriesPropName = ({ items }) => {
   }
 };
 
-const _isListForList = ({ items }) => {
-  return _isItemList(items[0])
-    && _isItemList(items[1]);
-};
+const _isListForList = ({
+  items
+}) => _isItemList(items[0])
+   && _isItemList(items[1]);
 
-const fnAdapter = {
-  crError,
-  getValue,
-  findMinY,
+export const crId = ({ _itemKey }) => _itemKey
 
-  crId: ({ _itemKey }) => _itemKey,
-  crTitle: (json, option) => {
-     const {
-       title, dfTitle,
-       dfSubtitle, subtitle
-     } = option;
-     if (dfSubtitle) {
-       return `${subtitle} ${_crUnit(json)}: ${title}`;
-     }
-     if (title) {
-       return dfTitle
-         ? `${dfTitle}: ${title}`
-         : title;
-     }
-     const { data } = json
-         , p = data[data.length-1];
-     if (p && typeof p === 'object') {
-       const { Area='', Item='', Element='' } = p;
-       return `${Area} ${Item} ${Element}`;
-     } else {
-       return C.DF_TITLE;
-     }
-  },
-  crSubtitle: (json, option) => {
-    const { dfSubtitle, subtitle } = option;
-    return dfSubtitle
-      ? dfSubtitle
-      : `${subtitle}: ${_crUnit(json)}`;
-  },
-  crSeriaData: _crSeriaData,
-  toDataPoints: (json, option) => {
-    const _prName = _getSeriesPropName(option);
-    return _prName
-      ? _crSeriesData(json, _prName)
-      : _crSeriaData(json, option);
-  },
-  toInfo: fnDescr.toInfo,
-  crZhConfig: (id, { dfDomain, itemCaption }) => ({
-    id: id,
-    key: id,
-    isWithoutSma: true,
-    dataSource: "FAOSTAT",
-    linkFn: "FAO_STAT",
-    item: dfDomain,
-    itemCaption: itemCaption
-  }),
-  crValueMoving: (points) => {
-    return _isArr(points) && !_isArr(points[0])
-      ? valueMoving(points)
-      : void 0;
-  },
-  isSeriesReq: _getSeriesPropName,
-  isQueryAllowed: _isListForList
-};
+export const crTitle = (
+  json,
+  option
+) => {
+  const {
+    title,
+    dfTitle,
+    dfSubtitle,
+    subtitle
+  } = option;
+  if (dfSubtitle) {
+    return `${subtitle} ${_crUnit(json)}: ${title}`;
+  }
+  if (title) {
+    return dfTitle
+      ? `${dfTitle}: ${title}`
+      : title;
+  }
+  const { data } = json
+  , p = data[data.length-1];
+  if (p && typeof p === 'object') {
+    const {
+      Area='',
+      Item='',
+      Element=''
+    } = p;
+    return `${Area} ${Item} ${Element}`;
+  } else {
+    return DF_TITLE;
+  }
+}
 
-export default fnAdapter
+export const crSubtitle = (
+  json,
+  option
+) => option.dfSubtitle
+  || `${option.subtitle}: ${_crUnit(json)}`;
+
+export const crSeriaData = _crSeriaData
+export const toDataPoints = (
+  json,
+  option
+) => {
+  const _prName = _getSeriesPropName(option);
+  return _prName
+    ? _crSeriesData(json, _prName)
+    : _crSeriaData(json, option);
+}
+
+export const crZhConfig = (
+  id,
+  { dfDomain, itemCaption }
+) => ({
+  id: id,
+  key: id,
+  isWithoutSma: true,
+  dataSource: "FAOSTAT",
+  linkFn: "FAO_STAT",
+  item: dfDomain,
+  itemCaption: itemCaption
+})
+
+export const crValueMoving = (
+  points
+) => _isArr(points) && !_isArr(points[0])
+  ? valueMoving(points)
+  : void 0;
+
+export const isSeriesReq = _getSeriesPropName
+export const isQueryAllowed = _isListForList

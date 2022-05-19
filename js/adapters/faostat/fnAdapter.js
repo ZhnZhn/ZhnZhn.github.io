@@ -1,31 +1,31 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports.default = void 0;
-
-var _AdapterFn = require("../AdapterFn");
+exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.findMinY = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crSeriaData = exports.crId = exports.crError = void 0;
 
 var _crFn = require("../crFn");
 
-var _fnDescr = _interopRequireDefault(require("./fnDescr"));
+exports.crError = _crFn.crError;
 
-const _isArr = Array.isArray;
-const C = {
-  DATASET_EMPTY: 'Dataset is empty',
-  ENPTY: '',
-  BLANK: ' ',
-  MM_DD: '-12-31',
-  DF_TITLE: 'More about data on tab Info in Description'
-};
+var _fnDescr = require("./fnDescr");
+
+exports.toInfo = _fnDescr.toInfo;
+
+var _AdapterFn = require("../AdapterFn");
+
+exports.getValue = _AdapterFn.getValue;
+exports.findMinY = _AdapterFn.findMinY;
+const _isArr = Array.isArray,
+      BLANK = ' ',
+      MM_DD = '-12-31',
+      DF_TITLE = 'More about data on tab Info in Description';
 
 const _crUnit = json => {
   const {
     data
   } = json,
         item = data[data.length - 1] || {},
-        _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit || C.BLANK;
+        _unit = item.Unit === void 0 ? _fnDescr.DATASET_EMPTY : item.Unit || BLANK;
 
   return (0, _AdapterFn.toUpperCaseFirst)(_unit);
 };
@@ -37,7 +37,7 @@ const _crPoint = _ref => {
     Value
   } = _ref;
   const m = Months ? (0, _AdapterFn.monthIndex)(Months) + 1 : 0,
-        Tail = m !== 0 ? "-" + m : C.MM_DD;
+        Tail = m !== 0 ? "-" + m : MM_DD;
   return {
     x: (0, _AdapterFn.ymdToUTC)('' + Year + Tail),
     y: Value
@@ -99,9 +99,7 @@ const _isValueNumber = item => typeof item.Value === 'number';
 
 const _compareByX = (a, b) => a.x - b.x;
 
-const _crSeriaData = (json, option) => {
-  return (0, _AdapterFn.mapIf)(json.data, _crPoint, _isValueNumber).sort(_compareByX);
-};
+const _crSeriaData = (json, option) => (0, _AdapterFn.mapIf)(json.data, _crPoint, _isValueNumber).sort(_compareByX);
 
 const _isItemList = item => (0, _AdapterFn.getValue)(item).indexOf('>') !== -1;
 
@@ -126,83 +124,87 @@ const _isListForList = _ref3 => {
   return _isItemList(items[0]) && _isItemList(items[1]);
 };
 
-const fnAdapter = {
-  crError: _crFn.crError,
-  getValue: _AdapterFn.getValue,
-  findMinY: _AdapterFn.findMinY,
-  crId: _ref4 => {
-    let {
-      _itemKey
-    } = _ref4;
-    return _itemKey;
-  },
-  crTitle: (json, option) => {
-    const {
-      title,
-      dfTitle,
-      dfSubtitle,
-      subtitle
-    } = option;
-
-    if (dfSubtitle) {
-      return subtitle + " " + _crUnit(json) + ": " + title;
-    }
-
-    if (title) {
-      return dfTitle ? dfTitle + ": " + title : title;
-    }
-
-    const {
-      data
-    } = json,
-          p = data[data.length - 1];
-
-    if (p && typeof p === 'object') {
-      const {
-        Area = '',
-        Item = '',
-        Element = ''
-      } = p;
-      return Area + " " + Item + " " + Element;
-    } else {
-      return C.DF_TITLE;
-    }
-  },
-  crSubtitle: (json, option) => {
-    const {
-      dfSubtitle,
-      subtitle
-    } = option;
-    return dfSubtitle ? dfSubtitle : subtitle + ": " + _crUnit(json);
-  },
-  crSeriaData: _crSeriaData,
-  toDataPoints: (json, option) => {
-    const _prName = _getSeriesPropName(option);
-
-    return _prName ? _crSeriesData(json, _prName) : _crSeriaData(json, option);
-  },
-  toInfo: _fnDescr.default.toInfo,
-  crZhConfig: (id, _ref5) => {
-    let {
-      dfDomain,
-      itemCaption
-    } = _ref5;
-    return {
-      id: id,
-      key: id,
-      isWithoutSma: true,
-      dataSource: "FAOSTAT",
-      linkFn: "FAO_STAT",
-      item: dfDomain,
-      itemCaption: itemCaption
-    };
-  },
-  crValueMoving: points => {
-    return _isArr(points) && !_isArr(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
-  },
-  isSeriesReq: _getSeriesPropName,
-  isQueryAllowed: _isListForList
+const crId = _ref4 => {
+  let {
+    _itemKey
+  } = _ref4;
+  return _itemKey;
 };
-var _default = fnAdapter;
-exports.default = _default;
+
+exports.crId = crId;
+
+const crTitle = (json, option) => {
+  const {
+    title,
+    dfTitle,
+    dfSubtitle,
+    subtitle
+  } = option;
+
+  if (dfSubtitle) {
+    return subtitle + " " + _crUnit(json) + ": " + title;
+  }
+
+  if (title) {
+    return dfTitle ? dfTitle + ": " + title : title;
+  }
+
+  const {
+    data
+  } = json,
+        p = data[data.length - 1];
+
+  if (p && typeof p === 'object') {
+    const {
+      Area = '',
+      Item = '',
+      Element = ''
+    } = p;
+    return Area + " " + Item + " " + Element;
+  } else {
+    return DF_TITLE;
+  }
+};
+
+exports.crTitle = crTitle;
+
+const crSubtitle = (json, option) => option.dfSubtitle || option.subtitle + ": " + _crUnit(json);
+
+exports.crSubtitle = crSubtitle;
+const crSeriaData = _crSeriaData;
+exports.crSeriaData = crSeriaData;
+
+const toDataPoints = (json, option) => {
+  const _prName = _getSeriesPropName(option);
+
+  return _prName ? _crSeriesData(json, _prName) : _crSeriaData(json, option);
+};
+
+exports.toDataPoints = toDataPoints;
+
+const crZhConfig = (id, _ref5) => {
+  let {
+    dfDomain,
+    itemCaption
+  } = _ref5;
+  return {
+    id: id,
+    key: id,
+    isWithoutSma: true,
+    dataSource: "FAOSTAT",
+    linkFn: "FAO_STAT",
+    item: dfDomain,
+    itemCaption: itemCaption
+  };
+};
+
+exports.crZhConfig = crZhConfig;
+
+const crValueMoving = points => _isArr(points) && !_isArr(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
+
+exports.crValueMoving = crValueMoving;
+const isSeriesReq = _getSeriesPropName;
+exports.isSeriesReq = isSeriesReq;
+const isQueryAllowed = _isListForList;
+exports.isQueryAllowed = isQueryAllowed;
 //# sourceMappingURL=fnAdapter.js.map

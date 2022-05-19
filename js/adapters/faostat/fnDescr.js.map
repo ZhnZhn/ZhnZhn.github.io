@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../src/adapters/faostat/fnDescr.js"],"names":["DATASET_EMPTY","_crBlackSpan","text","_crWrSpan","_crDescrRow","title","value","code","_codeText","_toDescr","item","_isList","indexOf","Area","Domain","Item","Element","Unit","_areaDescrRow","_Unit","fnDescr","toInfo","json","subtitle","data","_itemNewest","length","_itemOldest","_dateNewest","Year","_dateOldest","_descr","description","frequency","name","toDate","fromDate"],"mappings":";;;;;AAAA;;AAEA,MAAMA,aAAa,GAAG,kBAAtB;;AAEA,MAAMC,YAAY,GAAGC,IAAI,IAAIA,IAAI,mCAAiCA,IAAjC,eAAgD,EAAjF;;AACA,MAAMC,SAAS,GAAGD,IAAI,IAAIA,IAAI,wEAAsEA,IAAtE,eAAqF,EAAnH;;AAEA,MAAME,WAAW,GAAG,UAACC,KAAD,EAAQC,KAAR,EAAeC,IAAf,EAA2B;AAAA,MAAZA,IAAY;AAAZA,IAAAA,IAAY,GAAP,EAAO;AAAA;;AAC7C,QAAMC,SAAS,GAAGD,IAAI,gBAAcA,IAAd,SAAwB,EAA9C;;AACA,SAAOD,KAAK,aACAH,SAAS,CAACE,KAAK,GAAC,GAAP,CADT,SACwBJ,YAAY,CAACK,KAAD,CADpC,GAC8CE,SAD9C,cAER,EAFJ;AAGD,CALD;;AAQA,MAAMC,QAAQ,GAAG,CAACC,IAAD,EAAOL,KAAP,KAAiB;AAChC,QAAMM,OAAO,GAAGN,KAAK,CAACO,OAAN,CAAc,UAAd,MAA8B,CAAC,CAA/C;AAAA,QACE;AAAEC,IAAAA,IAAI,GAAC,EAAP;AAAWC,IAAAA,MAAM,GAAC,EAAlB;AAAsBC,IAAAA,IAAI,GAAC,EAA3B;AAA+BC,IAAAA,OAAO,GAAC,EAAvC;AAA2CC,IAAAA;AAA3C,MAAoDP,IADtD;AAAA,QAEEQ,aAAa,GAAGP,OAAO,GAAG,EAAH,GAAQP,WAAW,CAAC,MAAD,EAASS,IAAT,EAAeH,IAAI,CAAC,WAAD,CAAnB,CAF5C;AAAA,QAGES,KAAK,GAAG,iCAAiBF,IAAjB,CAHV;;AAIA,yBACIC,aADJ,cAEId,WAAW,CAAC,QAAD,EAAWU,MAAX,EAAmBJ,IAAI,CAAC,aAAD,CAAvB,CAFf,cAGIN,WAAW,CAAC,MAAD,EAASW,IAAT,EAAeL,IAAI,CAAC,WAAD,CAAnB,CAHf,cAIIN,WAAW,CAAC,SAAD,EAAYY,OAAZ,EAAqBN,IAAI,CAAC,cAAD,CAAzB,CAJf,cAKIN,WAAW,CAAC,MAAD,EAASe,KAAT,CALf,oBAMST,IAAI,CAAC,kBAAD,CAAJ,IAA4BV,aANrC;AAQD,CAbD;;AAeA,MAAMoB,OAAO,GAAG;AACdC,EAAAA,MAAM,CAACC,IAAD,EAAOjB,KAAP,EAAckB,QAAd,EAAwB;AAC5B,UAAM;AAAEC,MAAAA;AAAF,QAAWF,IAAjB;AAAA,UACEG,WAAW,GAAGD,IAAI,CAACA,IAAI,CAACE,MAAL,GAAY,CAAb,CAAJ,IAAuB,EADvC;AAAA,UAEEC,WAAW,GAAGH,IAAI,CAAC,CAAD,CAAJ,IAAW,EAF3B;AAAA,UAGEI,WAAW,GAAGH,WAAW,CAACI,IAAZ,IAAoB,EAHpC;AAAA,UAIEC,WAAW,GAAGH,WAAW,CAACE,IAAZ,IAAoB,EAJpC;AAAA,UAKEE,MAAM,GAAGtB,QAAQ,CAACgB,WAAD,EAAcpB,KAAd,CALnB;;AAMA,WAAO;AACL2B,MAAAA,WAAW,EAAED,MADR;AAELE,MAAAA,SAAS,EAAE,QAFN;AAGLC,MAAAA,IAAI,EAAE7B,KAAK,GAAG,IAAR,GAAekB,QAHhB;AAILY,MAAAA,MAAM,EAAEP,WAJH;AAKLQ,MAAAA,QAAQ,EAAEN;AALL,KAAP;AAOA;;AAfY,CAAhB;eAkBeV,O","sourcesContent":["import { toUpperCaseFirst } from '../AdapterFn';\r\n\r\nconst DATASET_EMPTY = \"Dataset is empty\";\r\n\r\nconst _crBlackSpan = text => text ? `<span style='color:black;'>${text}</span>`: '';\r\nconst _crWrSpan = text => text ? `<span style='display:inline-block;width:75px;text-align:right;'>${text}</span>`: '';\r\n\r\nconst _crDescrRow = (title, value, code='') => {\r\n  const _codeText = code ? ` (Code: ${code})` : '';\r\n  return value\r\n    ? `<div>${_crWrSpan(title+':')} ${_crBlackSpan(value)}${_codeText}</div>`\r\n    : '';\r\n};\r\n\r\n\r\nconst _toDescr = (item, title) => {\r\n  const _isList = title.indexOf('> (List)') !== -1\r\n  , { Area='', Domain='', Item='', Element='', Unit } = item\r\n  , _areaDescrRow = _isList ? '' : _crDescrRow('Area', Area, item['Area Code'])\r\n  , _Unit = toUpperCaseFirst(Unit);\r\n  return `<div>\r\n    ${_areaDescrRow}\r\n    ${_crDescrRow('Domain', Domain, item['Domain Code'])}\r\n    ${_crDescrRow('Item', Item, item['Item Code'])}\r\n    ${_crDescrRow('Element', Element, item['Element Code'])}\r\n    ${_crDescrRow('Unit', _Unit)}\r\n    <div>${item['Flag Description'] || DATASET_EMPTY}</div>\r\n  </div>`;\r\n};\r\n\r\nconst fnDescr = {\r\n  toInfo(json, title, subtitle) {\r\n    const { data } = json\r\n    , _itemNewest = data[data.length-1] || {}\r\n    , _itemOldest = data[0] || {}\r\n    , _dateNewest = _itemNewest.Year || ''\r\n    , _dateOldest = _itemOldest.Year || ''\r\n    , _descr = _toDescr(_itemNewest, title);\r\n    return {\r\n      description: _descr,\r\n      frequency: \"Annual\",\r\n      name: title + ': ' + subtitle,\r\n      toDate: _dateNewest,\r\n      fromDate: _dateOldest\r\n    };\r\n   }\r\n};\r\n\r\nexport default fnDescr\r\n"],"file":"fnDescr.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/faostat/fnDescr.js"
+ ],
+ "file": "../../../src/adapters/faostat/fnDescr.js",
+ "names": [
+  "DATASET_EMPTY",
+  "_crBlackSpan",
+  "text",
+  "_crWrSpan",
+  "_crDescrRow",
+  "title",
+  "value",
+  "code",
+  "_codeText",
+  "_toDescr",
+  "item",
+  "_isList",
+  "indexOf",
+  "Area",
+  "Domain",
+  "Item",
+  "Element",
+  "Unit",
+  "_areaDescrRow",
+  "_Unit",
+  "toInfo",
+  "json",
+  "subtitle",
+  "data",
+  "_itemNewest",
+  "length",
+  "_itemOldest",
+  "_dateNewest",
+  "Year",
+  "_dateOldest",
+  "_descr",
+  "description",
+  "frequency",
+  "name",
+  "toDate",
+  "fromDate"
+ ],
+ "mappings": ";;;;;AAAA;;AAEO,MAAMA,aAAa,GAAG,kBAAtB;;;AAEP,MAAMC,YAAY,GAAGC,IAAI,IAAIA,IAAI,mCACCA,IADD,eAE7B,EAFJ;;AAGA,MAAMC,SAAS,GAAGD,IAAI,IAAIA,IAAI,wEACyCA,IADzC,eAE1B,EAFJ;;AAIA,MAAME,WAAW,GAAG,UAClBC,KADkB,EAElBC,KAFkB,EAGlBC,IAHkB,EAIf;AAAA,MADHA,IACG;AADHA,IAAAA,IACG,GADE,EACF;AAAA;;AACH,QAAMC,SAAS,GAAGD,IAAI,gBACPA,IADO,SAElB,EAFJ;;AAGA,SAAOD,KAAK,aACAH,SAAS,CAACE,KAAK,GAAC,GAAP,CADT,SACwBJ,YAAY,CAACK,KAAD,CADpC,GAC8CE,SAD9C,cAER,EAFJ;AAGD,CAXD;;AAaA,MAAMC,QAAQ,GAAG,CACfC,IADe,EAEfL,KAFe,KAGZ;AACH,QAAMM,OAAO,GAAGN,KAAK,CAACO,OAAN,CAAc,UAAd,MAA8B,CAAC,CAA/C;AAAA,QACE;AACAC,IAAAA,IAAI,GAAC,EADL;AAEAC,IAAAA,MAAM,GAAC,EAFP;AAGAC,IAAAA,IAAI,GAAC,EAHL;AAIAC,IAAAA,OAAO,GAAC,EAJR;AAKAC,IAAAA;AALA,MAMEP,IAPJ;AAAA,QAQEQ,aAAa,GAAGP,OAAO,GACpB,EADoB,GAEpBP,WAAW,CAAC,MAAD,EAASS,IAAT,EAAeH,IAAI,CAAC,WAAD,CAAnB,CAVhB;AAAA,QAWES,KAAK,GAAG,iCAAiBF,IAAjB,CAXV;;AAYA,yBACIC,aADJ,cAEId,WAAW,CAAC,QAAD,EAAWU,MAAX,EAAmBJ,IAAI,CAAC,aAAD,CAAvB,CAFf,cAGIN,WAAW,CAAC,MAAD,EAASW,IAAT,EAAeL,IAAI,CAAC,WAAD,CAAnB,CAHf,cAIIN,WAAW,CAAC,SAAD,EAAYY,OAAZ,EAAqBN,IAAI,CAAC,cAAD,CAAzB,CAJf,cAKIN,WAAW,CAAC,MAAD,EAASe,KAAT,CALf,oBAMST,IAAI,CAAC,kBAAD,CAAJ,IAA4BV,aANrC;AAQD,CAxBD;;AA0BO,MAAMoB,MAAM,GAAG,CACpBC,IADoB,EAEpBhB,KAFoB,EAGpBiB,QAHoB,KAIjB;AACH,QAAM;AAAEC,IAAAA;AAAF,MAAWF,IAAjB;AAAA,QACEG,WAAW,GAAGD,IAAI,CAACA,IAAI,CAACE,MAAL,GAAY,CAAb,CAAJ,IAAuB,EADvC;AAAA,QAEEC,WAAW,GAAGH,IAAI,CAAC,CAAD,CAAJ,IAAW,EAF3B;AAAA,QAGEI,WAAW,GAAGH,WAAW,CAACI,IAAZ,IAAoB,EAHpC;AAAA,QAIEC,WAAW,GAAGH,WAAW,CAACE,IAAZ,IAAoB,EAJpC;AAAA,QAKEE,MAAM,GAAGrB,QAAQ,CAACe,WAAD,EAAcnB,KAAd,CALnB;;AAMA,SAAO;AACL0B,IAAAA,WAAW,EAAED,MADR;AAELE,IAAAA,SAAS,EAAE,QAFN;AAGLC,IAAAA,IAAI,EAAE5B,KAAK,GAAG,IAAR,GAAeiB,QAHhB;AAILY,IAAAA,MAAM,EAAEP,WAJH;AAKLQ,IAAAA,QAAQ,EAAEN;AALL,GAAP;AAOD,CAlBM"
+}

@@ -1,35 +1,34 @@
-import fnAdapter from './fnAdapter'
-
-const C = {
-  BASE: 'http://fenixservices.fao.org/faostat/api/v1/en/data',
-  TAIL: 'area_cs=FAO&item_cs=FAO&show_codes=true&show_unit=true&show_flags=true&null_values=false&output_type=json',
-  MEM_YEAR: void 0
-};
-
-const {
+import {
   crError,
   isSeriesReq,
   isQueryAllowed,
   getValue
-} = fnAdapter
-, _isArr = Array.isArray
-, _assign = Object.assign;
+} from './fnAdapter';
 
-const _crMemYear = () => {
+const API_URL = 'http://fenixservices.fao.org/faostat/api/v1/en/data'
+, TAIL = 'area_cs=FAO&item_cs=FAO&show_codes=true&show_unit=true&show_flags=true&null_values=false&output_type=json'
+let _mem_year;
+
+
+const _isArr = Array.isArray
+, _assign = Object.assign
+
+, _crMemYear = () => {
   const year = (new Date()).getUTCFullYear()
-      , arr = [];
+  , arr = [];
   let i = 1980;
-  for(;i<year;i++){ arr.push(i) }
-  return C.MEM_YEAR = arr.join(',');
-};
-const _getMemYear = () => {
-  return C.MEM_YEAR || _crMemYear();
-};
+  for(;i<year;i++){
+    arr.push(i)
+  }
+  return _mem_year = arr.join(',');
+}
+, _getMemYear = () => _mem_year || _crMemYear();
 
-const _isTitle = (qT) => {
-  return qT.indexOf('World') !== -1
-     && qT.length < 22;
-};
+
+const _isTitle = (
+  qT
+) => qT.indexOf('World') !== -1
+  && qT.length < 22;
 
 const _checkReq = (option) => {
   if (option._isTs && isSeriesReq(option)) {
@@ -56,7 +55,7 @@ const FaoStatApi = {
     , _element = _three || dfElement
     , _year = _getMemYear();
 
-    return `${proxy}${C.BASE}/${dfDomain}?element=${_element}&area=${_one}&${dfItemName}=${_two}&year=${_year}&${C.TAIL}`;
+    return `${proxy}${API_URL}/${dfDomain}?element=${_element}&area=${_one}&${dfItemName}=${_two}&year=${_year}&${TAIL}`;
   },
 
   checkResponse(json){
