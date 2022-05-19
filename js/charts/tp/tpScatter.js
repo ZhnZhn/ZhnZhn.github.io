@@ -1,13 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.scatterSplitRatio = exports.scatterExValue = exports.scatterExDividend = void 0;
 
 var _tpFn = require("./tpFn");
 
 var _Colors = require("./Colors");
-
-const FONT_STYLE = 'font-size:16px;font-weight:bold';
 
 const _crExDividend = _ref => {
   let {
@@ -55,40 +53,16 @@ const _crExValue = _ref3 => {
   return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Value', exValue) + "\n  </div>";
 };
 
-const _crEps = _ref4 => {
-  let {
-    date,
-    id,
-    point
-  } = _ref4;
-  const {
-    announceTime,
-    fiscalPeriod,
-    fiscalEndDate,
-    actualEPS,
-    estimatedEPS,
-    numberOfEstimates,
-    EPSSurpriseDollar
-  } = point;
-  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp_body\">\n    <div>\n      " + (0, _tpFn.crSpan)('', announceTime, {
-    color: _Colors.YEAR_COLOR
-  }) + "\n      " + (0, _tpFn.crSpan)('', fiscalPeriod) + "\n      " + (0, _tpFn.crSpan)('', fiscalEndDate) + "\n    </div>\n    <div style=" + FONT_STYLE + ">\n      " + (0, _tpFn.crSpan)('EPS', actualEPS) + "\n      " + (0, _tpFn.crSpan)('Est.', estimatedEPS) + "\n    </div>\n    <div style=" + FONT_STYLE + ">\n      " + (0, _tpFn.crSpan)('Supr.', EPSSurpriseDollar) + "\n      " + (0, _tpFn.crSpan)('NumbEst.', numberOfEstimates) + "\n    </div>\n  </div>";
+const scatterExDividend = {
+  fnTemplate: _crExDividend
 };
-
-const tpScatter = {
-  exDividend: {
-    fnTemplate: _crExDividend
-  },
-  splitRatio: {
-    fnTemplate: _crSplitRatio
-  },
-  exValue: {
-    fnTemplate: _crExValue
-  },
-  eps: {
-    fnTemplate: _crEps
-  }
+exports.scatterExDividend = scatterExDividend;
+const scatterSplitRatio = {
+  fnTemplate: _crSplitRatio
 };
-var _default = tpScatter;
-exports.default = _default;
+exports.scatterSplitRatio = scatterSplitRatio;
+const scatterExValue = {
+  fnTemplate: _crExValue
+};
+exports.scatterExValue = scatterExValue;
 //# sourceMappingURL=tpScatter.js.map

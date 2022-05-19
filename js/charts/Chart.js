@@ -11,7 +11,7 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var _Tooltip = _interopRequireDefault(require("./Tooltip"));
+var _Tooltip = require("./Tooltip");
 
 var _MonoColorSlice = _interopRequireDefault(require("./MonoColorSlice"));
 
@@ -69,11 +69,17 @@ const _sanitizeOptionText = option => {
 const _crTitle = title => _isStr(title) ? {
   text: _dompurify.default.sanitize(title)
 } : _sanitizeOptionText(title),
-      _crCrosshair = (is = true) => is ? {
-  color: _Color.default.CROSSHAIR,
-  width: 1,
-  zIndex: 2
-} : void 0;
+      _crCrosshair = function (is) {
+  if (is === void 0) {
+    is = true;
+  }
+
+  return is ? {
+    color: _Color.default.CROSSHAIR,
+    width: 1,
+    zIndex: 2
+  } : void 0;
+};
 
 const Chart = {
   HEIGHT: 300,
@@ -139,14 +145,15 @@ const Chart = {
     };
   },
 
-  crAreaConfig({
-    title = '',
-    seriaType,
-    seriaColor,
-    seriaWidth = 1,
-    spacingTop,
-    isCrosshair
-  } = {}) {
+  crAreaConfig(_temp) {
+    let {
+      title = '',
+      seriaType,
+      seriaColor,
+      seriaWidth = 1,
+      spacingTop,
+      isCrosshair
+    } = _temp === void 0 ? {} : _temp;
     return {
       zhSeries: {
         count: 0
@@ -173,7 +180,7 @@ const Chart = {
         turboThreshold: 20000,
         type: Chart.crType(seriaType, 'area'),
         color: seriaColor,
-        tooltip: Chart.fTooltip(_Tooltip.default.vTdmyIf),
+        tooltip: Chart.fTooltip(_Tooltip.tooltipValueTdmyIf),
         lineWidth: seriaWidth,
         states: {
           hover: {
@@ -297,10 +304,11 @@ const Chart = {
     }, option);
   },
 
-  fSeriaMarker({
-    color,
-    symbol
-  }) {
+  fSeriaMarker(_ref) {
+    let {
+      color,
+      symbol
+    } = _ref;
     return {
       radius: 4,
       symbol: symbol,

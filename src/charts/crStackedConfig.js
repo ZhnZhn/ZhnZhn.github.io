@@ -1,7 +1,10 @@
 import Chart from './Chart';
-import Tooltip from './Tooltip';
+import { tooltipSparkStackedArea } from './Tooltip';
 
-const _crPlotOption = (type, stacking) => type === 'column'
+const _crPlotOption = (
+  type,
+  stacking
+) => type === 'column'
   ? { column: Chart.fPlotOptionsColumn({ stacking }) }
   : { area: Chart.fPlotOptionsArea({ stacking }) };
 
@@ -25,7 +28,7 @@ const crStackedConfig = ({
   },
   title: Chart.fTitle(),
   subtitle: Chart.fSubtitle(),
-  tooltip: Chart.fTooltip(Tooltip.sparkStackedArea),
+  tooltip: Chart.fTooltip(tooltipSparkStackedArea),
 
   xAxis: Chart.fXAxisOpposite({
     type: "category",

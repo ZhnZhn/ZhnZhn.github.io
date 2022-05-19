@@ -1,5 +1,7 @@
-import Builder from '../../charts/ConfigBuilder'
-import Tooltip from '../../charts/Tooltip'
+import Builder from '../../charts/ConfigBuilder';
+import {
+  tooltipValueDmy
+} from '../../charts/Tooltip';
 
 import {
   crId,
@@ -26,7 +28,7 @@ const FaoStatAdapter = {
        .addCaption(_title, _subtitle)
        .addPoints(_id, _points)
        .addMinMax(_points, option)
-       .addTooltip(Tooltip.vDmy)
+       .addTooltip(tooltipValueDmy)
        .add({
          info: toInfo(json, _title, _subtitle),
          valueMoving: crValueMoving(_points),

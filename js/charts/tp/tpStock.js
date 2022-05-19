@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.stockVolumeTdmyIf = exports.stockAth = void 0;
 
 var _tpFn = require("./tpFn");
 
@@ -42,25 +42,14 @@ const _crAtn = _ref2 => {
   }) + "\n      " + (0, _tpFn.crRow)('Prev Close', close) + "\n      " + (0, _tpFn.crRow)('Next Open', open) + "\n    </div>";
 };
 
-const tpStock = {
-  volume: {
-    fnTemplate: _crVolume,
-    isWithValue: true
-  },
-  volumeTdmy: {
-    fnTemplate: _crVolume,
-    fnDateFormat: _tpFn.toTdmy,
-    isWithValue: true
-  },
-  volumeTdmyIf: {
-    fnTemplate: _crVolume,
-    fnDateFormat: _tpFn.toTdmyIf,
-    isWithValue: true
-  },
-  ath: {
-    fnTemplate: _crAtn
-  }
+const stockVolumeTdmyIf = {
+  fnTemplate: _crVolume,
+  fnDateFormat: _tpFn.toTdmyIf,
+  isWithValue: true
 };
-var _default = tpStock;
-exports.default = _default;
+exports.stockVolumeTdmyIf = stockVolumeTdmyIf;
+const stockAth = {
+  fnTemplate: _crAtn
+};
+exports.stockAth = stockAth;
 //# sourceMappingURL=tpStock.js.map

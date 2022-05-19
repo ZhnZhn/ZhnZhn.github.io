@@ -11,7 +11,7 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
-var _Tooltip = _interopRequireDefault(require("./Tooltip"));
+var _Tooltip = require("./Tooltip");
 
 const {
   crType,
@@ -41,8 +41,8 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
   data,
   tooltip: fTooltip(pointFormatter)
 }),
-      _crDividendSeria = data => _crScatterSeria(_Color.default.EX_DIVIDEND, _Tooltip.default.exDividend, data),
-      _crSplitRatioSeria = data => _crScatterSeria(_Color.default.SPLIT_RATIO, _Tooltip.default.splitRatio, data);
+      _crDividendSeria = data => _crScatterSeria(_Color.default.EX_DIVIDEND, _Tooltip.tooltipExDividend, data),
+      _crSplitRatioSeria = data => _crScatterSeria(_Color.default.SPLIT_RATIO, _Tooltip.tooltipSplitRatio, data);
 
 const ConfigStockSlice = {
   _setStockSerias(seriaType, lineWidth, dC, dH, dL, dO) {
@@ -76,7 +76,7 @@ const ConfigStockSlice = {
     } = option;
     return this.areaConfig({
       spacingTop: 25
-    }).addTooltip(_Tooltip.default.vTdmyIf).addMinMax(dC, {
+    }).addTooltip(_Tooltip.tooltipValueTdmyIf).addMinMax(dC, {
       minY: minClose,
       maxY: maxClose,
       isNotZoomToMinMax,

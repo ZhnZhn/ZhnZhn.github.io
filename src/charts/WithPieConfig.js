@@ -1,5 +1,5 @@
 import Chart from './Chart';
-import Tooltip from './Tooltip';
+import { tooltipDonut } from './Tooltip';
 
 const WithPieConfig = {
 
@@ -64,7 +64,7 @@ crInnerPieSeria: ({center, year, bTotal}) => ({
      distance: -5
    },
 
-   tooltip: Chart.fTooltip(Tooltip.donut)
+   tooltip: Chart.fTooltip(tooltipDonut)
  })
 }
 

@@ -21,7 +21,7 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartFn = require("./ChartFn");
 
-var _Tooltip = _interopRequireDefault(require("./Tooltip"));
+var _Tooltip = require("./Tooltip");
 
 var _ChartTheme = _interopRequireDefault(require("./ChartTheme"));
 
@@ -91,11 +91,16 @@ const ChartConfig = { ..._WithIndicatorConfig.default,
       seriaType,
       seriaWidth,
       seriaColor,
-      tp,
+      //tp,
       ...restOption
     } = option,
           type = _Chart.default.crType(seriaType),
-          pointFormatter = tp && _Tooltip.default[tp] || _Tooltip.default.vTdmyIf;
+          pointFormatter = _Tooltip.tooltipValueTdmyIf;
+    /*
+    , pointFormatter = tp && Tooltip[tp]
+        || tooltipValueTdmyIf;
+    */
+
 
     return {
       type,

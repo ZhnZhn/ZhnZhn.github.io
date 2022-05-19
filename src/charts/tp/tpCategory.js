@@ -51,14 +51,11 @@ const _addCategoryHandlers = (id, point) => {
   setTimeout(() => _addCategoryHandlersImpl(id, point), 1)
 }
 
-const tpCategory = {
-  simple: {
-    fnTemplate: _crSimple,
-  },
-  remove: {
-    fnTemplate: _crRemove,
-    onAfterRender: _addCategoryHandlers
-  }
-};
 
-export default tpCategory
+export const categorySimple = {
+  fnTemplate: _crSimple,
+}
+export const categoryRemove = {
+  fnTemplate: _crRemove,
+  onAfterRender: _addCategoryHandlers
+}

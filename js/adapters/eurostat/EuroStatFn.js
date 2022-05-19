@@ -13,7 +13,7 @@ var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
 var _ChartFn = require("../../charts/ChartFn");
 
-var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
+var _Tooltip = require("../../charts/Tooltip");
 
 var _compareByFn = require("../compareByFn");
 
@@ -311,7 +311,7 @@ const _setCategories = _ref6 => {
     config,
     categories,
     min,
-    tooltip = _Tooltip.default.category,
+    tooltip = _Tooltip.tooltipCategory,
     option
   } = _ref6;
   const {
@@ -374,7 +374,7 @@ const addToCategoryConfig = (config, _ref7) => {
 
 exports.addToCategoryConfig = addToCategoryConfig;
 
-const crCategoryTooltip = () => _Chart.default.fTooltip(_Tooltip.default.categorySimple);
+const crCategoryTooltip = () => _Chart.default.fTooltip(_Tooltip.tooltipCategorySimple);
 
 exports.crCategoryTooltip = crCategoryTooltip;
 

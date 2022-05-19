@@ -1,6 +1,8 @@
 import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
-import Tooltip from '../../charts/Tooltip'
+import {
+  tooltipCategorySimple
+} from '../../charts/Tooltip'
 
 import { compareByValue } from '../compareByFn';
 import { legendItem } from '../legendFn'
@@ -125,9 +127,13 @@ const _addSeriasTo = (
 
   if (hm[WORLD] && one !== ALL) {
     _addSeriaTo({
-       config, hm,
-       i: 0, name: WORLD, color: WORLD_COLOR,
-       seriaOption: null, isShow: true
+       config,
+       hm,
+       i: 0,
+       name: WORLD,
+       color: WORLD_COLOR,
+       seriaOption: null,
+       isShow: true
     })
     _addSeriesFromHmTo({ config, hm, fromIndex: 1 });
   } else {
@@ -154,7 +160,7 @@ const _crBaseConfig = (
       .addCaption(title, subtitle)
       .add('xAxis', X_AXIS)
       .add('yAxis', Y_AXIS)
-      .addTooltip(Tooltip.categorySimple)
+      .addTooltip(tooltipCategorySimple)
       .add('info', _crInfo(json, option))
       .add('zhConfig', _crZhConfig(option))
       .toConfig();

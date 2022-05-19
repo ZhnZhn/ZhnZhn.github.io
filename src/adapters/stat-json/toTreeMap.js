@@ -2,7 +2,7 @@ import JSONstat from 'jsonstat';
 
 import Chart from '../../charts/Chart';
 import Builder from '../../charts/ConfigBuilder';
-import Tooltip from '../../charts/Tooltip';
+import { tooltipTreeMap } from '../../charts/Tooltip';
 import {
   crTitle,
   crTid,
@@ -11,22 +11,23 @@ import {
   roundBy
 } from './fnAdapter';
 
-const NUMBER_STYLE = 'style="color:#333;"';
-const _isArr = Array.isArray;
-const _crPointName = (label, value) => {
-  return `${label} <br/>
+const NUMBER_STYLE = 'style="color:#333;"'
+, _isArr = Array.isArray
+, _crPointName = (label, value) => `${label} <br/>
   <span ${NUMBER_STYLE}>${numberFormat(value)}</span>`;
-};
 
-const _fCrTreeMapPoint = (c, title) => {
-  return (v, i) => {
-    const label = c.Category(i).label
-       ,  value = v.value;
-    return {
-      name: _crPointName(label, value),
-      value, label, title
-    };
-  };
+const _fCrTreeMapPoint = (
+  c,
+  title
+) => (v, i) => {
+   const label = c.Category(i).label
+   , { value } = v;
+   return {
+     name: _crPointName(label, value),
+     value,
+     label,
+     title
+   };
 };
 
 const _toHm = (arr) => {
@@ -37,19 +38,27 @@ const _toHm = (arr) => {
   return hm;
 };
 
-const _fIsPoint = (dfT, hm, depth) => {
-  return p => {
-    if (dfT && p.label === dfT) {
-      return false;
-    }
-    if ( hm[p.label].d !== depth) {
-      return false;
-    }
-    return p.y !== null && p.y !== 0;
-  };
+const _fIsPoint = (
+  dfT,
+  hm,
+  depth
+) => p => {
+   if (dfT && p.label === dfT) {
+     return false;
+   }
+   if ( hm[p.label].d !== depth) {
+     return false;
+   }
+   return p.y !== null && p.y !== 0;
 };
 
-const _findLevelBy = (data, from, sum, stopSum) => {
+
+const _findLevelBy = (
+  data,
+  from,
+  sum,
+  stopSum
+) => {
   const _maxIndex = data.length;
   if ( from >= _maxIndex ){
     return { index: _maxIndex, sum };
@@ -67,28 +76,40 @@ const _findLevelBy = (data, from, sum, stopSum) => {
   if (index < _maxIndex ){
     index += 1
   }
-  return { index, sum };
+  return [index, sum];
 };
 
-const _findLevelIndex = (data, level1, level2) => {
+const _findLevelIndex = (
+  data,
+  level1,
+  level2
+) => {
   const _t = data.reduce((acc, p) => acc + p.value, 0)
-      , _v1 = (_t/100)*level1
-      , _v2 = (_t/100)*level2
-      , {
-          index:index1,
-          sum: sum1
-        } = _findLevelBy(data, 0, 0, _v1)
-      , {
-          index:index2
-        } = _findLevelBy(data, index1, sum1, _v2);
+  , _v1 = (_t/100)*level1
+  , _v2 = (_t/100)*level2
+  , [index1, sum1] = _findLevelBy(data, 0, 0, _v1)
+  , [index2] = _findLevelBy(data, index1, sum1, _v2);
 
-  return { index1, index2 };
+  return [
+    index1,
+    index2
+  ];
 };
 
 const _compareByValue = (a, b) => a.value - b.value;
 
-const _crCategory = (option, by, depth) => {
-  const { items=[], dfC, dfT, dfC2, dfT2 } = option;
+const _crCategory = (
+  option,
+  by,
+  depth
+) => {
+  const {
+    items=[],
+    dfC,
+    dfT,
+    dfC2,
+    dfT2
+  } = option;
   switch(by){
     case '2':
       return {
@@ -107,19 +128,26 @@ const _crCategory = (option, by, depth) => {
   }
 };
 
-const _addPercent = (data) => {
-  const _total = data.reduce((acc, item) => acc + item.value, 0)
-     , _onePercent = _total/100;
+const _addPercent = (
+  data
+) => {
+  const _total = data
+    .reduce((acc, item) => acc + item.value, 0)
+  , _onePercent = _total/100;
   return data.map(p => ({
     ...p,
     percent: roundBy(p.value/_onePercent)
   }));
 };
 
-const _addColor = function(data, level60, level90){
+const _addColor = (
+  data,
+  level60,
+  level90
+) => {
   const period = Chart.COLOR_PERIOD
-      , base1 = Chart.COLOR_BASE1
-      , base2 = Chart.COLOR_BASE2;
+  , base1 = Chart.COLOR_BASE1
+  , base2 = Chart.COLOR_BASE2;
 
   const _level90 = level90 - level60;
   let deltaColor;
@@ -136,9 +164,17 @@ const _addColor = function(data, level60, level90){
    })
 };
 
-
-const _crData = (values, categories, Tid, option) => {
-  const { selectOptions, depth, cTotal } = option;
+const _crData = (
+  values,
+  categories,
+  Tid,
+  option
+) => {
+  const {
+    selectOptions,
+    depth,
+    cTotal
+  } = option;
   if (!_isArr(values)) {
     return [];
   }
@@ -152,8 +188,13 @@ const _crData = (values, categories, Tid, option) => {
 const toTreeMap = {
   crConfig: (json, option) => {
     const  {
-       category, itemSlice, time, dfTSlice,
-       seriaType, isCluster, items=[]
+       category,
+       itemSlice,
+       time,
+       dfTSlice,
+       seriaType,
+       isCluster,
+       items=[]
     } = option
     , ds = JSONstat(json).Dataset(0)
     , categories = ds.Dimension(category)
@@ -164,14 +205,14 @@ const toTreeMap = {
     , _d1 = _crData(values, categories, Tid, option )
     , _c = _d1.map(item => item.c)
     , data = _addPercent(_d1)
-    , { index1, index2 } = _findLevelIndex(data, 60, 90);
+    , [index1, index2] = _findLevelIndex(data, 60, 90);
 
     if (isCluster) {
       _addColor(data, index1, index2)
     }
 
     const _seria = Builder()
-       .treeMapSeria(Tooltip.treeMap, { data })
+       .treeMapSeria(tooltipTreeMap, { data })
        .toSeria();
     const config = Builder()
        .treeMapConfig(_c, seriaType)
@@ -185,7 +226,8 @@ const toTreeMap = {
 
   fCrConfig: (param={}, config={}) => {
     return (json, option) => toTreeMap.crConfig(json, {
-      ...option, ...param,
+      ...option,
+      ...param,
       ..._crCategory(option, config.by, config.depth)
     });
   }

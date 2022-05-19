@@ -2,7 +2,7 @@ import JSONstat from 'jsonstat';
 import clusterMaker from '../../math/k-means';
 
 import Builder from '../../charts/ConfigBuilder';
-import Tooltip from '../../charts/Tooltip';
+import { tooltipCategory } from '../../charts/Tooltip';
 import {
   isYNumber,
   crTitle,
@@ -172,7 +172,7 @@ const toColumn = {
     , config = Builder()
        .barOrColumnConfig(seriaType, _c)
        .addCaption(_title, _subtitle)
-       .addTooltip(Tooltip.category)
+       .addTooltip(tooltipCategory)
        .add({
          chart: { spacingTop: 25 },
          ...crChartOption(_ds, Tid, option)

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.splineValueTdmyIf = exports.splineValueDmy = void 0;
 
 var _tpFn = require("./tpFn");
 
@@ -27,15 +27,10 @@ const _splineOptions = {
   isWithValueText: true,
   isWithValue: true
 };
-const tpSpline = {
-  vDmy: _splineOptions,
-  vTdmy: { ..._splineOptions,
-    fnDateFormat: _tpFn.toTdmy
-  },
-  vTdmyIf: { ..._splineOptions,
-    fnDateFormat: _tpFn.toTdmyIf
-  }
+const splineValueDmy = _splineOptions;
+exports.splineValueDmy = splineValueDmy;
+const splineValueTdmyIf = { ..._splineOptions,
+  fnDateFormat: _tpFn.toTdmyIf
 };
-var _default = tpSpline;
-exports.default = _default;
+exports.splineValueTdmyIf = splineValueTdmyIf;
 //# sourceMappingURL=tpSpline.js.map

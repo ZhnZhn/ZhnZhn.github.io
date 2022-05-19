@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
+var _Tooltip = require("../../charts/Tooltip");
 
 var _fnAdapter = require("./fnAdapter");
 
@@ -21,7 +21,7 @@ const FaoStatAdapter = {
           _points = (0, _fnAdapter.toDataPoints)(json, option),
           config = (0, _ConfigBuilder.default)().areaConfig({
       spacingTop: 25
-    }).addCaption(_title, _subtitle).addPoints(_id, _points).addMinMax(_points, option).addTooltip(_Tooltip.default.vDmy).add({
+    }).addCaption(_title, _subtitle).addPoints(_id, _points).addMinMax(_points, option).addTooltip(_Tooltip.tooltipValueDmy).add({
       info: (0, _fnAdapter.toInfo)(json, _title, _subtitle),
       valueMoving: (0, _fnAdapter.crValueMoving)(_points),
       zhConfig: (0, _fnAdapter.crZhConfig)(_id, option)

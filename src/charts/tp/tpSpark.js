@@ -142,17 +142,13 @@ const _crTreeMap = ({
   })
 }
 
-const tpSpark = {
-  stackedArea: {
-    fnTemplate: _crStackedArea,
-    onAfterRender: _onAfterRender,
-    isWithValue: true
-  },
-  treeMap: {
-    fnTemplate: _crTreeMap,
-    onAfterRender: _onAfterRender,
-    isWithValue: true
-  }
-};
-
-export default tpSpark
+export const sparkStackedArea = {
+  fnTemplate: _crStackedArea,
+  onAfterRender: _onAfterRender,
+  isWithValue: true
+}
+export const sparkTreeMap = {
+  fnTemplate: _crTreeMap,
+  onAfterRender: _onAfterRender,
+  isWithValue: true
+}

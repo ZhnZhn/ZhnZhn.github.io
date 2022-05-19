@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.sparkTreeMap = exports.sparkStackedArea = void 0;
 
 var _reactDom = require("react-dom");
 
@@ -157,18 +157,16 @@ const _crTreeMap = _ref3 => {
   });
 };
 
-const tpSpark = {
-  stackedArea: {
-    fnTemplate: _crStackedArea,
-    onAfterRender: _onAfterRender,
-    isWithValue: true
-  },
-  treeMap: {
-    fnTemplate: _crTreeMap,
-    onAfterRender: _onAfterRender,
-    isWithValue: true
-  }
+const sparkStackedArea = {
+  fnTemplate: _crStackedArea,
+  onAfterRender: _onAfterRender,
+  isWithValue: true
 };
-var _default = tpSpark;
-exports.default = _default;
+exports.sparkStackedArea = sparkStackedArea;
+const sparkTreeMap = {
+  fnTemplate: _crTreeMap,
+  onAfterRender: _onAfterRender,
+  isWithValue: true
+};
+exports.sparkTreeMap = sparkTreeMap;
 //# sourceMappingURL=tpSpark.js.map

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.categorySimple = exports.categoryRemove = void 0;
 
 var _tpFn = require("./tpFn");
 
@@ -58,15 +58,13 @@ const _addCategoryHandlers = (id, point) => {
   setTimeout(() => _addCategoryHandlersImpl(id, point), 1);
 };
 
-const tpCategory = {
-  simple: {
-    fnTemplate: _crSimple
-  },
-  remove: {
-    fnTemplate: _crRemove,
-    onAfterRender: _addCategoryHandlers
-  }
+const categorySimple = {
+  fnTemplate: _crSimple
 };
-var _default = tpCategory;
-exports.default = _default;
+exports.categorySimple = categorySimple;
+const categoryRemove = {
+  fnTemplate: _crRemove,
+  onAfterRender: _addCategoryHandlers
+};
+exports.categoryRemove = categoryRemove;
 //# sourceMappingURL=tpCategory.js.map

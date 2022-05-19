@@ -12,11 +12,7 @@ const _crDonut = ({
   ${crRow('Value', value)}
 </div>`
 
-const tpDonut = {
-  value: {
-    fnTemplate: _crDonut,
-    isWithValue: true
-  }
-};
-
-export default tpDonut
+export const donutValue = {
+  fnTemplate: _crDonut,
+  isWithValue: true
+}

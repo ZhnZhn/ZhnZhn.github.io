@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.treeMapValue = void 0;
 
 var _tpFn = require("./tpFn");
 
@@ -27,11 +27,8 @@ const _crTreeMap = _ref => {
   }) + "\n  </div>\n  ";
 };
 
-const tpTreeMap = {
-  value: {
-    fnTemplate: _crTreeMap
-  }
+const treeMapValue = {
+  fnTemplate: _crTreeMap
 };
-var _default = tpTreeMap;
-exports.default = _default;
+exports.treeMapValue = treeMapValue;
 //# sourceMappingURL=tpTreeMap.js.map

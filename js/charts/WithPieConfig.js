@@ -3,34 +3,34 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _Tooltip = _interopRequireDefault(require("./Tooltip"));
+var _Tooltip = require("./Tooltip");
 
-var WithPieConfig = {
-  crPieConfig: function crPieConfig() {
-    return {
-      zhSeries: {
-        count: 0
-      },
-      zhDetailCharts: [],
-      credits: _Chart["default"].fCreditsRightBottom(),
-      title: _Chart["default"].fTitle({
-        y: _Chart["default"].SEMIDONUT_TITLE_Y
-      }),
-      subtitle: _Chart["default"].fSubtitle({
-        y: _Chart["default"].SEMIDONUT_SUBTITLE_Y
-      }),
-      legend: _Chart["default"].fLegend(),
-      navigation: _Chart["default"].fNavigation()
-    };
-  },
-  crInnerPieSeria: function crInnerPieSeria(_ref) {
-    var center = _ref.center,
-        year = _ref.year,
-        bTotal = _ref.bTotal;
+const WithPieConfig = {
+  crPieConfig: () => ({
+    zhSeries: {
+      count: 0
+    },
+    zhDetailCharts: [],
+    credits: _Chart.default.fCreditsRightBottom(),
+    title: _Chart.default.fTitle({
+      y: _Chart.default.SEMIDONUT_TITLE_Y
+    }),
+    subtitle: _Chart.default.fSubtitle({
+      y: _Chart.default.SEMIDONUT_SUBTITLE_Y
+    }),
+    legend: _Chart.default.fLegend(),
+    navigation: _Chart.default.fNavigation()
+  }),
+  crInnerPieSeria: _ref => {
+    let {
+      center,
+      year,
+      bTotal
+    } = _ref;
     return {
       type: 'pie',
       borderColor: 'transparent',
@@ -56,13 +56,13 @@ var WithPieConfig = {
       }
     };
   },
-  crOuterPieSeria: function crOuterPieSeria(_ref2) {
-    var center = _ref2.center,
-        data = _ref2.data,
-        _ref2$isDataLabels = _ref2.isDataLabels,
-        isDataLabels = _ref2$isDataLabels === void 0 ? false : _ref2$isDataLabels,
-        _ref2$isShowInLegend = _ref2.isShowInLegend,
-        isShowInLegend = _ref2$isShowInLegend === void 0 ? false : _ref2$isShowInLegend;
+  crOuterPieSeria: _ref2 => {
+    let {
+      center,
+      data,
+      isDataLabels = false,
+      isShowInLegend = false
+    } = _ref2;
     return {
       type: 'pie',
       colorByPoint: true,
@@ -81,10 +81,10 @@ var WithPieConfig = {
         enabled: isDataLabels,
         distance: -5
       },
-      tooltip: _Chart["default"].fTooltip(_Tooltip["default"].donut)
+      tooltip: _Chart.default.fTooltip(_Tooltip.tooltipDonut)
     };
   }
 };
 var _default = WithPieConfig;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=WithPieConfig.js.map

@@ -11,27 +11,24 @@ var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
+var _Tooltip = require("../../charts/Tooltip");
 
 var _fnAdapter = require("./fnAdapter");
 
-const NUMBER_STYLE = 'style="color:#333;"';
-const _isArr = Array.isArray;
+const NUMBER_STYLE = 'style="color:#333;"',
+      _isArr = Array.isArray,
+      _crPointName = (label, value) => label + " <br/>\n  <span " + NUMBER_STYLE + ">" + (0, _fnAdapter.numberFormat)(value) + "</span>";
 
-const _crPointName = (label, value) => {
-  return label + " <br/>\n  <span " + NUMBER_STYLE + ">" + (0, _fnAdapter.numberFormat)(value) + "</span>";
-};
-
-const _fCrTreeMapPoint = (c, title) => {
-  return (v, i) => {
-    const label = c.Category(i).label,
-          value = v.value;
-    return {
-      name: _crPointName(label, value),
-      value,
-      label,
-      title
-    };
+const _fCrTreeMapPoint = (c, title) => (v, i) => {
+  const label = c.Category(i).label,
+        {
+    value
+  } = v;
+  return {
+    name: _crPointName(label, value),
+    value,
+    label,
+    title
   };
 };
 
@@ -43,18 +40,16 @@ const _toHm = arr => {
   return hm;
 };
 
-const _fIsPoint = (dfT, hm, depth) => {
-  return p => {
-    if (dfT && p.label === dfT) {
-      return false;
-    }
+const _fIsPoint = (dfT, hm, depth) => p => {
+  if (dfT && p.label === dfT) {
+    return false;
+  }
 
-    if (hm[p.label].d !== depth) {
-      return false;
-    }
+  if (hm[p.label].d !== depth) {
+    return false;
+  }
 
-    return p.y !== null && p.y !== 0;
-  };
+  return p.y !== null && p.y !== 0;
 };
 
 const _findLevelBy = (data, from, sum, stopSum) => {
@@ -83,28 +78,17 @@ const _findLevelBy = (data, from, sum, stopSum) => {
     index += 1;
   }
 
-  return {
-    index,
-    sum
-  };
+  return [index, sum];
 };
 
 const _findLevelIndex = (data, level1, level2) => {
   const _t = data.reduce((acc, p) => acc + p.value, 0),
         _v1 = _t / 100 * level1,
         _v2 = _t / 100 * level2,
-        {
-    index: index1,
-    sum: sum1
-  } = _findLevelBy(data, 0, 0, _v1),
-        {
-    index: index2
-  } = _findLevelBy(data, index1, sum1, _v2);
+        [index1, sum1] = _findLevelBy(data, 0, 0, _v1),
+        [index2] = _findLevelBy(data, index1, sum1, _v2);
 
-  return {
-    index1,
-    index2
-  };
+  return [index1, index2];
 };
 
 const _compareByValue = (a, b) => a.value - b.value;
@@ -146,7 +130,7 @@ const _addPercent = data => {
   }));
 };
 
-const _addColor = function (data, level60, level90) {
+const _addColor = (data, level60, level90) => {
   const period = _Chart.default.COLOR_PERIOD,
         base1 = _Chart.default.COLOR_BASE1,
         base2 = _Chart.default.COLOR_BASE2;
@@ -205,16 +189,13 @@ const toTreeMap = {
           _d1 = _crData(values, categories, Tid, option),
           _c = _d1.map(item => item.c),
           data = _addPercent(_d1),
-          {
-      index1,
-      index2
-    } = _findLevelIndex(data, 60, 90);
+          [index1, index2] = _findLevelIndex(data, 60, 90);
 
     if (isCluster) {
       _addColor(data, index1, index2);
     }
 
-    const _seria = (0, _ConfigBuilder.default)().treeMapSeria(_Tooltip.default.treeMap, {
+    const _seria = (0, _ConfigBuilder.default)().treeMapSeria(_Tooltip.tooltipTreeMap, {
       data
     }).toSeria();
 

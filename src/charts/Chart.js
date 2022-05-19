@@ -1,9 +1,8 @@
-
 import Highcharts from 'highcharts';
-import DOMPurify from 'dompurify'
+import DOMPurify from 'dompurify';
 
 import COLOR from '../constants/Color';
-import Tooltip from './Tooltip';
+import { tooltipValueTdmyIf } from './Tooltip';
 import MonoColorSlice from './MonoColorSlice';
 
 const merge = Highcharts.merge;
@@ -159,7 +158,7 @@ crAreaConfig({
       turboThreshold: 20000,
       type: Chart.crType(seriaType, 'area'),
       color: seriaColor,
-      tooltip: Chart.fTooltip(Tooltip.vTdmyIf),
+      tooltip: Chart.fTooltip(tooltipValueTdmyIf),
       lineWidth: seriaWidth,
       states: {
         hover: {

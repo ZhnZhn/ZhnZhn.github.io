@@ -7,33 +7,31 @@ exports.default = void 0;
 
 var _ConfigBuilder = _interopRequireDefault(require("../charts/ConfigBuilder"));
 
-var _Tooltip = _interopRequireDefault(require("../charts/Tooltip"));
+var _Tooltip = require("../charts/Tooltip");
 
 var _AdapterFn = require("./AdapterFn");
 
 const CATEGORIES = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-const C = {
-  NOW: {
-    index: 3,
-    color: '#7cb5ec'
-  },
-  PREV: {
-    index: 2,
-    color: '#f45b5b'
-  },
-  AVG: {
-    index: 4,
-    color: 'black',
-    isVisible: false
-  },
-  MIN: {
-    index: 0,
-    color: '#008b8b'
-  },
-  MAX: {
-    index: 1,
-    color: '#008b8b'
-  }
+const CONFIG_NOW = {
+  index: 3,
+  color: '#7cb5ec'
+},
+      CONFIG_PREV = {
+  index: 2,
+  color: '#f45b5b'
+},
+      CONFIG_AVG = {
+  index: 4,
+  color: 'black',
+  isVisible: false
+},
+      CONFIG_MIN = {
+  index: 0,
+  color: '#008b8b'
+},
+      CONFIG_MAX = {
+  index: 1,
+  color: '#008b8b'
 };
 
 const _getYear = str => str.split("-")[0];
@@ -167,18 +165,18 @@ const _crSeries = (data, seriaColor) => {
   return {
     nowSeria: _crSeria(_yearNow, {
       color: seriaColor,
-      ...C.NOW,
+      ...CONFIG_NOW,
       ...{
         data: _dNow
       }
     }),
-    nowItem: _crItem(_yearNow, C.NOW),
-    prevSeria: _crSeria(_yearPrev, { ...C.PREV,
+    nowItem: _crItem(_yearNow, CONFIG_NOW),
+    prevSeria: _crSeria(_yearPrev, { ...CONFIG_PREV,
       ...{
         data: _dPrev
       }
     }),
-    prevItem: _crItem(_yearPrev, C.PREV)
+    prevItem: _crItem(_yearPrev, CONFIG_PREV)
   };
 };
 
@@ -261,7 +259,7 @@ const _crRangeSeries = data => {
     data: _minData,
     color: '#008b8b',
     seriaWidth: 2,
-    tooltip: _Tooltip.default.categorySimple
+    tooltip: _Tooltip.tooltipCategorySimple
   }).toSeria(), _crSeria("Max " + _range, {
     data: _maxData,
     color: '#008b8b'
@@ -295,11 +293,11 @@ const _crAvgSeria = data => {
         _data = _hmToSeriaData(hm, _crAvgPoint),
         name = "Avg " + _stopYear + ":" + fromYear;
 
-  return [_crSeria(name, { ...C.AVG,
+  return [_crSeria(name, { ...CONFIG_AVG,
     ...{
       data: _data
     }
-  }), _crItem(name, C.AVG)];
+  }), _crItem(name, CONFIG_AVG)];
 };
 
 const _crZhConfig = (option, _ref4) => {
@@ -397,8 +395,8 @@ const toMonthly = {
     } = _crSeries(data, seriaColor),
           [minSeria, maxSeria] = _crRangeSeries(data),
           [avgSeria, avgItem] = _crAvgSeria(data),
-          legend = [_crItem('MIN', C.MIN), _crItem('MAX', C.MAX), prevItem, nowItem, avgItem],
-          config = (0, _ConfigBuilder.default)().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, minSeria).addSeriaBy(1, maxSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addSeriaBy(4, avgSeria).addTooltip(_Tooltip.default.categorySimple).add({
+          legend = [_crItem('MIN', CONFIG_MIN), _crItem('MAX', CONFIG_MAX), prevItem, nowItem, avgItem],
+          config = (0, _ConfigBuilder.default)().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, minSeria).addSeriaBy(1, maxSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addSeriaBy(4, avgSeria).addTooltip(_Tooltip.tooltipCategorySimple).add({
       chart: {
         marginTop: 45
       },

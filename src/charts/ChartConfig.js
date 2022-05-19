@@ -16,7 +16,7 @@ import {
   zoomIndicatorCharts,
   afterSetExtremesYAxis
 } from './ChartFn';
-import Tooltip from './Tooltip';
+import { tooltipValueTdmyIf } from './Tooltip';
 
 import ChartTheme from './ChartTheme'
 import handleMouseOver from './handleMouseOver'
@@ -70,13 +70,18 @@ const ChartConfig = {
 
   crSeria: (option={}) => {
     const {
-      seriaType, seriaWidth, seriaColor,
-      tp,
+      seriaType,
+      seriaWidth,
+      seriaColor,
+      //tp,
       ...restOption
     } = option
     , type = Chart.crType(seriaType)
+    , pointFormatter = tooltipValueTdmyIf
+    /*
     , pointFormatter = tp && Tooltip[tp]
-        || Tooltip.vTdmyIf;
+        || tooltipValueTdmyIf;
+    */
     return {
       type,
       lineWidth: seriaWidth ?? 1,

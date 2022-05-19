@@ -5,7 +5,10 @@ import {
   calcMinY,
   setPlotLinesMinMax
 } from '../../charts/ChartFn';
-import Tooltip from '../../charts/Tooltip';
+import {
+  tooltipCategorySimple,
+  tooltipCategory
+} from '../../charts/Tooltip';
 
 import {
   valueMoving,
@@ -284,7 +287,7 @@ const _setCategories = ({
   config,
   categories,
   min,
-  tooltip=Tooltip.category,
+  tooltip=tooltipCategory,
   option
 }) => {
    const { time, isNotZoomToMinMax, seriaType } = option;
@@ -321,7 +324,7 @@ export const addToCategoryConfig = (
 }
 
 export const crCategoryTooltip = () => Chart
-  .fTooltip(Tooltip.categorySimple)
+  .fTooltip(tooltipCategorySimple)
 
 export const setLineExtrems = ({
   config,

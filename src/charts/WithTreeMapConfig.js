@@ -1,5 +1,5 @@
 import Chart from './Chart';
-import Tooltip from './Tooltip';
+import { tooltipSparkTreeMap } from './Tooltip';
 
 const WithTreeMapConfig = {
    crTreeMapConfig: () => ({
@@ -13,7 +13,7 @@ const WithTreeMapConfig = {
        },
        title: Chart.fTitle(),
        subtitle: Chart.fSubtitle(),
-       tooltip: Chart.fTooltip(Tooltip.sparkTreeMap),
+       tooltip: Chart.fTooltip(tooltipSparkTreeMap),
        zhSeries: { count: 0 },
        zhDetailCharts: [],
    }),

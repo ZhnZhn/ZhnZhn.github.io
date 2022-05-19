@@ -3,7 +3,6 @@ export {
   toNumberFormat,
   toNumberFormatAll,
   toDmy,
-  toTdmy,
   toTdmyIf
 } from '../ChartFn';
 

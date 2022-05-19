@@ -1,10 +1,9 @@
 import {
   crHeader,
   crRow,
-  toTdmy,
   toTdmyIf,
   getStatus
- } from './tpFn'
+} from './tpFn';
 
 const _crValue = ({
   date,
@@ -26,18 +25,12 @@ const _splineOptions = {
   isWithColor: true,
   isWithValueText: true,
   isWithValue: true
-}
-
-const tpSpline = {
-  vDmy: _splineOptions,
-  vTdmy: {
-    ..._splineOptions,
-    fnDateFormat: toTdmy,
-  },
-  vTdmyIf: {
-    ..._splineOptions,
-    fnDateFormat: toTdmyIf
-  }
 };
 
-export default tpSpline
+
+export const splineValueDmy = _splineOptions
+
+export const splineValueTdmyIf = {
+  ..._splineOptions,
+  fnDateFormat: toTdmyIf
+}

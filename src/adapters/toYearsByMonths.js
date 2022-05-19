@@ -1,5 +1,7 @@
 import Builder from '../charts/ConfigBuilder';
-import Tooltip from '../charts/Tooltip';
+import {
+  tooltipCategorySimple
+} from '../charts/Tooltip';
 import {
   crValueMoving,
   roundBy,
@@ -11,42 +13,50 @@ const CATEGORIES = [
   '07', '08', '09', '10', '11', '12'
 ];
 
-const C = {
-  NOW: {
-    index: 3,
-    color: '#7cb5ec'
-  },
-  PREV: {
-    index: 2,
-    color: '#f45b5b'
-  },
-  AVG: {
-    index: 4,
-    color: 'black',
-    isVisible: false
-  },
-  MIN: {
-    index: 0,
-    color: '#008b8b'
-  },
-  MAX: {
-    index: 1,
-    color: '#008b8b'
-  }
+const CONFIG_NOW = {
+  index: 3,
+  color: '#7cb5ec'
+}
+, CONFIG_PREV = {
+  index: 2,
+  color: '#f45b5b'
+}
+, CONFIG_AVG = {
+  index: 4,
+  color: 'black',
+  isVisible: false
+}
+, CONFIG_MIN = {
+  index: 0,
+  color: '#008b8b'
+}
+, CONFIG_MAX = {
+  index: 1,
+  color: '#008b8b'
 };
+
 
 const _getYear = str => str.split("-")[0];
 const _getMonth = str => str.split("-")[1];
 
 const _crSeria = (
-  name, { type='spline', data, color, isVisible=true }
+  name,
+  {type='spline', data, color, isVisible=true}
 ) => ({
-  type, name, data, color, visible: isVisible
+  type,
+  name,
+  data,
+  color,
+  visible: isVisible
 });
 const _crItem = (
-  name, { index, color, isVisible=true }
+  name,
+  {index, color, isVisible=true}
 ) => ({
-   name, index, color, isVisible
+   name,
+   index,
+   color,
+   isVisible
 });
 
 const _crPoint = item => ({
@@ -72,8 +82,12 @@ const _findHighLow = (arr) => {
     }
   })
   return {
-    high: h.v, yHigh: h.y, yHs: h.status,
-    low: l.v, yLow: l.y, yLs: l.status
+    high: h.v,
+    yHigh: h.y,
+    yHs: h.status,
+    low: l.v,
+    yLow: l.y,
+    yLs: l.status
   };
 };
 const _crHighLowPoint = (key, arr) => ({
@@ -91,7 +105,12 @@ const _crAvgPoint = (key, arr) => ({
   c: key
 });
 
-const _crSeriaData = (data, i, year, crPoint=_crPoint) => {
+const _crSeriaData = (
+  data,
+  i,
+  year,
+  crPoint=_crPoint
+) => {
   const arr=[], max=data.length;
   for (; i<max; i++){
     const item = data[i]
@@ -103,7 +122,10 @@ const _crSeriaData = (data, i, year, crPoint=_crPoint) => {
   return { i, arr: arr.reverse() };
 }
 
-const _crSeries = (data, seriaColor) => {
+const _crSeries = (
+  data,
+  seriaColor
+) => {
   const firtsItem = data[0][0]
   , _yearNow = _getYear(firtsItem)
   , { i, arr:_dNow } = _crSeriaData(data, 0, _yearNow)
@@ -112,15 +134,18 @@ const _crSeries = (data, seriaColor) => {
   , { arr:_dPrev } = _crSeriaData(data, i, _yearPrev);
 
   return {
-    nowSeria: _crSeria(_yearNow, { color: seriaColor, ...C.NOW, ...{data: _dNow} } ),
-    nowItem: _crItem(_yearNow, C.NOW),
-    prevSeria: _crSeria(_yearPrev, { ...C.PREV, ...{data: _dPrev} }),
-    prevItem: _crItem(_yearPrev, C.PREV)
+    nowSeria: _crSeria(_yearNow, { color: seriaColor, ...CONFIG_NOW, ...{data: _dNow} } ),
+    nowItem: _crItem(_yearNow, CONFIG_NOW),
+    prevSeria: _crSeria(_yearPrev, { ...CONFIG_PREV, ...{data: _dPrev} }),
+    prevItem: _crItem(_yearPrev, CONFIG_PREV)
   };
 }
 
 
-const _hmToSeriaData = (hm, crPoint) => CATEGORIES
+const _hmToSeriaData = (
+  hm,
+  crPoint
+) => CATEGORIES
   .map(key => crPoint(key, hm[key]));
 
 const _crBaseHm = () => CATEGORIES
@@ -130,9 +155,14 @@ const _crBaseHm = () => CATEGORIES
   }, Object.create(null));
 
 
-const _crMonthHm = (i, data, stopYear, crPoint=_crValuePoint) => {
+const _crMonthHm = (
+  i,
+  data,
+  stopYear,
+  crPoint=_crValuePoint
+) => {
   const hm = _crBaseHm()
-      , max = data.length;
+  , max = data.length;
   let isBreaked = false;
   for (;i<max;i++){
     const _item = data[i]
@@ -145,22 +175,25 @@ const _crMonthHm = (i, data, stopYear, crPoint=_crValuePoint) => {
     hm[_m].push(crPoint(_item))
   }
 
-  return { hm, isBreaked };
+  return {
+    hm,
+    isBreaked
+  };
 }
 
 
 const _crRangeSeries = (data) => {
   const refYear = parseFloat(_getYear(data[0][0]))
-      , stopYear = '' + (refYear - 5)
-      , { hm, isBreaked } = _crMonthHm(
-            0, data, stopYear, _crValueYearPoint
-        )
-      , max = data.length
-      , _stopYear = isBreaked
-           ? stopYear
-           : _getYear(data[max-1][0])
-      , _range = `${_stopYear}:${refYear}`
-      , _data = _hmToSeriaData(hm, _crHighLowPoint);
+  , stopYear = '' + (refYear - 5)
+  , { hm, isBreaked } = _crMonthHm(
+       0, data, stopYear, _crValueYearPoint
+    )
+  , max = data.length
+  , _stopYear = isBreaked
+       ? stopYear
+       : _getYear(data[max-1][0])
+  , _range = `${_stopYear}:${refYear}`
+  , _data = _hmToSeriaData(hm, _crHighLowPoint);
 
   const _minData = []
   , _maxData = [];
@@ -170,12 +203,26 @@ const _crRangeSeries = (data) => {
    })
 
   return [
-    Builder().splineSeria({ name: `Min ${_range}`,  data: _minData, color: '#008b8b', seriaWidth: 2, tooltip: Tooltip.categorySimple }).toSeria(),
-    _crSeria(`Max ${_range}`, { data: _maxData, color: '#008b8b' })
+    Builder()
+      .splineSeria({
+         name: `Min ${_range}`,
+         data: _minData,
+         color: '#008b8b',
+         seriaWidth: 2,
+         tooltip: tooltipCategorySimple
+       })
+       .toSeria(),
+    _crSeria(`Max ${_range}`, {
+      data: _maxData,
+      color: '#008b8b'
+    })
   ];
 }
 
-const _findStartYearIndex = (data, yearStop) => {
+const _findStartYearIndex = (
+  data,
+  yearStop
+) => {
   const max = data.length;
   let i = 0;
   for(;i<max;i++){
@@ -188,27 +235,33 @@ const _findStartYearIndex = (data, yearStop) => {
 
 const _crAvgSeria = (data) => {
   const yearNow = _getYear(data[0][0])
-      , fromYear = parseFloat(yearNow) - 1
-      , stopYear = '' + (parseFloat(yearNow) - 5)
-      , max = data.length
-      , startIndex = _findStartYearIndex(data, yearNow)
-      , { hm, isBreaked } = _crMonthHm(startIndex, data, stopYear)
-      , _stopYear = isBreaked
-           ? stopYear
-           : _getYear(data[max-1][0])
-      , _data = _hmToSeriaData(hm, _crAvgPoint)
-      , name = `Avg ${_stopYear}:${fromYear}`;
+  , fromYear = parseFloat(yearNow) - 1
+  , stopYear = '' + (parseFloat(yearNow) - 5)
+  , max = data.length
+  , startIndex = _findStartYearIndex(data, yearNow)
+  , { hm, isBreaked } = _crMonthHm(startIndex, data, stopYear)
+  , _stopYear = isBreaked
+       ? stopYear
+       : _getYear(data[max-1][0])
+  , _data = _hmToSeriaData(hm, _crAvgPoint)
+  , name = `Avg ${_stopYear}:${fromYear}`;
 
   return [
-    _crSeria(name, {...C.AVG, ...{data: _data}}),
-    _crItem(name, C.AVG),
+    _crSeria(name, {...CONFIG_AVG, ...{data: _data}}),
+    _crItem(name, CONFIG_AVG),
   ];
 }
 
-const _crZhConfig = (option, { legend }) => {
+const _crZhConfig = (
+  option,
+  { legend }
+) => {
   const {
-    value, itemCaption,
-    dataSource, linkFn, item,
+    value,
+    itemCaption,
+    dataSource,
+    linkFn,
+    item,
   } = option
   , _id = value + '_' + 'YEARLY';
   return {
@@ -216,37 +269,47 @@ const _crZhConfig = (option, { legend }) => {
     key: _id,
     itemCaption,
     isWithoutIndicator: true,
-    legend, dataSource, linkFn, item
+    legend,
+    dataSource,
+    linkFn,
+    item
   };
 }
 
-
-const _crValueAndDate = (seria, index) => {
+const _crValueAndDate = (
+  seria,
+  index
+) => {
   const { data=[], name } = seria
-      , { y:value, c } = data[index];
+  , { y:value, c } = data[index];
   return {
     value,
     date: `${c}-${name}`
   };
 }
-const _crValueMoving = (nowSeria, prevSeria) => {
+const _crValueMoving = (
+  nowSeria,
+  prevSeria
+) => {
   const { data=[] } = nowSeria
-      , max = data.length - 1
-      , {
-          value:bNowValue,
-          date
-        } = _crValueAndDate(nowSeria, max)
-      , {
-          value:bPrevValue,
-          date:dateTo
-        } = _crValueAndDate(prevSeria, max)
-      , moving = crValueMoving({
-            bNowValue,
-            bPrevValue
-        });
+  , max = data.length - 1
+  , {
+      value:bNowValue,
+      date
+  } = _crValueAndDate(nowSeria, max)
+  , {
+      value:bPrevValue,
+      date:dateTo
+  } = _crValueAndDate(prevSeria, max)
+  , moving = crValueMoving({
+      bNowValue,
+      bPrevValue
+  });
 
   return {
-    ...moving, date, dateTo,
+    ...moving,
+    date,
+    dateTo,
     valueTo: numberFormat(bPrevValue),
     isDenyToChange: true
   };
@@ -265,14 +328,26 @@ const _checkIfEnoughData = data => {
 const toMonthly = {
   toConfig(data, option) {
     _checkIfEnoughData(data)
-    const { title, subtitle, seriaColor } = option
+    const {
+      title,
+      subtitle,
+      seriaColor
+    } = option
     , {
-        nowSeria, nowItem,
-        prevSeria, prevItem
-      } = _crSeries(data, seriaColor)
-    , [ minSeria, maxSeria ] = _crRangeSeries(data)
-    , [ avgSeria, avgItem ] = _crAvgSeria(data)
-    , legend = [ _crItem('MIN', C.MIN), _crItem('MAX', C.MAX), prevItem, nowItem, avgItem ]
+      nowSeria,
+      nowItem,
+      prevSeria,
+      prevItem
+    } = _crSeries(data, seriaColor)
+    , [minSeria, maxSeria] = _crRangeSeries(data)
+    , [avgSeria, avgItem] = _crAvgSeria(data)
+    , legend = [
+       _crItem('MIN', CONFIG_MIN),
+       _crItem('MAX', CONFIG_MAX),
+       prevItem,
+       nowItem,
+       avgItem
+    ]
     , config = Builder()
        .categoryConfig(CATEGORIES)
        .addCaption(title, subtitle)
@@ -281,7 +356,7 @@ const toMonthly = {
        .addSeriaBy(2, prevSeria)
        .addSeriaBy(3, nowSeria)
        .addSeriaBy(4, avgSeria)
-       .addTooltip(Tooltip.categorySimple)
+       .addTooltip(tooltipCategorySimple)
        .add({
          chart: { marginTop: 45 },
          zhConfig: _crZhConfig(option, { legend }),

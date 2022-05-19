@@ -11,7 +11,7 @@ var _kMeans = _interopRequireDefault(require("../../math/k-means"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
+var _Tooltip = require("../../charts/Tooltip");
 
 var _fnAdapter = require("./fnAdapter");
 
@@ -174,7 +174,7 @@ const toColumn = {
           _subtitle = _crSubtitle(items, category),
           data = _crData(_values, _dimC, cTotal),
           _c = data.map(item => item.c),
-          config = (0, _ConfigBuilder.default)().barOrColumnConfig(seriaType, _c).addCaption(_title, _subtitle).addTooltip(_Tooltip.default.category).add({
+          config = (0, _ConfigBuilder.default)().barOrColumnConfig(seriaType, _c).addCaption(_title, _subtitle).addTooltip(_Tooltip.tooltipCategory).add({
       chart: {
         spacingTop: 25
       },

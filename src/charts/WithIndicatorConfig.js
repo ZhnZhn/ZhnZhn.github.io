@@ -1,30 +1,27 @@
 import DOMPurify from 'dompurify'
-import Tooltip from './Tooltip'
-import Chart from './Chart'
-import { median, mean } from '../math/seriaFn'
+import {
+  tooltipValueDmy,
+  tooltipValueTdmyIf,
+  tooltipVolumeTdmyIf,
+  tooltipAth
+} from './Tooltip';
+import Chart from './Chart';
+import { median, mean } from '../math/seriaFn';
+import handleMouseOver from './handleMouseOver';
+import COLOR from '../constants/Color';
 
-import handleMouseOver from './handleMouseOver'
-
-import COLOR from '../constants/Color'
-
-const C = {
-  MFI: "#90ed7d",
-
-  MOM: '#f7a35c',
-  CLOSE_OPEN: 'rgba(144, 237, 125, 0.75)',
-
-  HIGH_LOW: '#2D7474',
-
-  MEDIAN: 'darkcyan',
-  MEAN: '#f7a35c',
-
-  DF_LEGEND_VOLUME_X: 84,
-
-  CROSS_LABEL: {
-    xDeltaCrossLabel: 4,
-    yDeltaCrossLabel: -10
-  }
+const COLOR_MFI = "#90ed7d"
+, COLOR_MOM = '#f7a35c'
+, COLOR_CLOSE_OPEN = 'rgba(144, 237, 125, 0.75)'
+, COLOR_HIGH_LOW = '#2d7474'
+, COLOR_MEDIAN = 'darkcyan'
+, COLOR_MEAN = '#f7a35c'
+, DF_LEGEND_VOLUME_X = 84
+, CROSS_LABEL = {
+  xDeltaCrossLabel: 4,
+  yDeltaCrossLabel: -10
 }
+
 
 const _assign = Object.assign;
 
@@ -55,7 +52,9 @@ const _crTitle = (text='') => ({
 })
 
 
-const _crLegendVolume = (titleOrX=C.DF_LEGEND_VOLUME_X) => {
+const _crLegendVolume = (
+  titleOrX=DF_LEGEND_VOLUME_X
+) => {
   const _x = typeof titleOrX === 'number'
      ? titleOrX
      : titleOrX.length*10 + 8;
@@ -100,7 +99,7 @@ const _crLineSeria = (name, color, data) => ({
 const _crColumnSeria = option => _assign({
    type: "column",
    visible: true,
-   tooltip: Chart.fTooltip(Tooltip.vDmy)
+   tooltip: Chart.fTooltip(tooltipValueDmy)
  }, option);
 
 function _Builder(config) {
@@ -183,14 +182,14 @@ const WithIndicatorConfig = {
   crMfiConfig(id, title, data){
     return _Builder(_crConfig({
         title: _crTitle(title),
-        chartOption: C.CROSS_LABEL
+        chartOption: CROSS_LABEL
       }))
       .assignToSeries(0, {
         zhValueText: id,
         data: data,
         name: "MFI",
         type: "spline",
-        color: C.MFI,
+        color: COLOR_MFI,
         point: Chart.fEventsMouseOver(
            handleMouseOver
          )
@@ -207,7 +206,7 @@ const WithIndicatorConfig = {
     const _title = title || btTitle
     , _hasColumn = dColumn.length !== 0
     , config = _Builder(_crConfig({
-         chartOption: C.CROSS_LABEL
+         chartOption: CROSS_LABEL
        }))
        .assign({
          title: _crTitle(_title),
@@ -241,13 +240,13 @@ const WithIndicatorConfig = {
             brightness: 0.07
           }
         },
-        tooltip: tooltipColumn || Chart.fTooltip(Tooltip.volumeTdmyIf)
+        tooltip: tooltipColumn || Chart.fTooltip(tooltipVolumeTdmyIf)
       });
       series.push(_crLineSeria(
-        'Median', C.MEDIAN, median(dVolume)
+        'Median', COLOR_MEDIAN, median(dVolume)
       ))
       series.push(_crLineSeria(
-        'Mean', C.MEAN, mean(dVolume)
+        'Mean', COLOR_MEAN, mean(dVolume)
       ))
     }
 
@@ -267,7 +266,7 @@ const WithIndicatorConfig = {
          minPointLength: 4,
          groupPadding: 0.1,
          data: data,
-         tooltip: Chart.fTooltip(Tooltip.ath)
+         tooltip: Chart.fTooltip(tooltipAth)
       })
       .toConfig();
     return { btTitle, config };
@@ -287,7 +286,7 @@ const WithIndicatorConfig = {
             pointPadding: 0,
             groupPadding: 0,
             turboThreshold: 20000,
-            tooltip: Chart.fTooltip(Tooltip.vDmy)
+            tooltip: Chart.fTooltip(tooltipValueDmy)
           }
         }
       })
@@ -299,7 +298,7 @@ const WithIndicatorConfig = {
       .addColumnSeria({
         zhValueText: "MOM(1)",
         name: "MOM(1)",
-        color: C.MOM,
+        color: COLOR_MOM,
         pointPadding: 0.3,
         data: dataMom
       })
@@ -309,7 +308,7 @@ const WithIndicatorConfig = {
       })
       .addColumnSeria({
         name: "Close-Open",
-        color: C.CLOSE_OPEN,
+        color: COLOR_CLOSE_OPEN,
         visible: false,
         data: dataSum
       })
@@ -325,18 +324,18 @@ const WithIndicatorConfig = {
         name: "H",
         visible: true,
         type: "area",
-        color: C.HIGH_LOW,
-        fillColor: C.HIGH_LOW,
+        color: COLOR_HIGH_LOW,
+        fillColor: COLOR_HIGH_LOW,
         data: highData,
       })
       .assignToSeries(1, {
         name: "L",
         visible: true,
         type: "area",
-        color: C.HIGH_LOW,
-        fillColor: C.HIGH_LOW,
+        color: COLOR_HIGH_LOW,
+        fillColor: COLOR_HIGH_LOW,
         data: lowData,
-        tooltip: Chart.fTooltip(Tooltip.vTdmyIf)
+        tooltip: Chart.fTooltip(tooltipValueTdmyIf)
       })
       .toConfig();
 

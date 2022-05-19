@@ -25,10 +25,6 @@ const _crTreeMap = ({
   `;
 }
 
-const tpTreeMap = {
-  value: {
-    fnTemplate: _crTreeMap
-  }
-};
-
-export default tpTreeMap
+export const treeMapValue = {
+  fnTemplate: _crTreeMap
+}

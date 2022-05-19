@@ -1,15 +1,12 @@
 import {
   crHeader,
   crRow,
-  crSpan
 } from './tpFn';
 import {
-  YEAR_COLOR,
   EX_DIVIDEND_COLOR,
   SPLIT_RATIO_COLOR
 } from './Colors';
 
-const FONT_STYLE = 'font-size:16px;font-weight:bold';
 
 const _crExDividend = ({
   date,
@@ -53,51 +50,13 @@ const _crExValue = ({
   </div>`;
 };
 
-const _crEps = ({
-  date,
-  id,
-  point
-}) => {
-  const {
-    announceTime,
-    fiscalPeriod,
-    fiscalEndDate,
-    actualEPS,
-    estimatedEPS,
-    numberOfEstimates,
-    EPSSurpriseDollar
-  } = point;
-  return `${crHeader(date, id)}
-  <div class="tp_body">
-    <div>
-      ${crSpan('', announceTime, { color: YEAR_COLOR })}
-      ${crSpan('', fiscalPeriod)}
-      ${crSpan('', fiscalEndDate)}
-    </div>
-    <div style=${FONT_STYLE}>
-      ${crSpan('EPS', actualEPS)}
-      ${crSpan('Est.', estimatedEPS)}
-    </div>
-    <div style=${FONT_STYLE}>
-      ${crSpan('Supr.', EPSSurpriseDollar)}
-      ${crSpan('NumbEst.', numberOfEstimates)}
-    </div>
-  </div>`;
-};
 
-const tpScatter = {
-  exDividend: {
-    fnTemplate: _crExDividend
-  },
-  splitRatio: {
-    fnTemplate: _crSplitRatio
-  },
-  exValue: {
-    fnTemplate: _crExValue
-  },
-  eps: {
-    fnTemplate: _crEps
-  }
-};
-
-export default tpScatter
+export const scatterExDividend = {
+  fnTemplate: _crExDividend
+}
+export const scatterSplitRatio = {
+  fnTemplate: _crSplitRatio
+}
+export const scatterExValue = {
+  fnTemplate: _crExValue
+}

@@ -2,7 +2,11 @@ import COLOR from '../constants/Color';
 
 import Chart from './Chart';
 import ChartConfig from './ChartConfig';
-import Tooltip from './Tooltip';
+import {
+  tooltipExDividend,
+  tooltipSplitRatio,
+  tooltipValueTdmyIf
+} from './Tooltip';
 
 const { crType, fTooltip } = Chart;
 const {
@@ -12,28 +16,37 @@ const {
   crMiniHLConfig
 } = ChartConfig;
 
-const _crSeriaOption = (color, lineWidth) => ({
-  type: 'line', visible: false,
-  color, lineWidth,
+const _crSeriaOption = (
+  color,
+  lineWidth
+) => ({
+  type: 'line',
+  visible: false,
+  color,
+  lineWidth,
   marker: {
     radius: 3,
     symbol: "circle"
   }
 });
 
-const _crScatterSeria = (color, pointFormatter, data) => ({
+const _crScatterSeria = (
+  color,
+  pointFormatter,
+  data
+) => ({
   type: 'scatter',
   color, data,
   tooltip: fTooltip(pointFormatter),
 })
 , _crDividendSeria = (data) => _crScatterSeria(
   COLOR.EX_DIVIDEND,
-  Tooltip.exDividend,
+  tooltipExDividend,
   data
 )
 , _crSplitRatioSeria = (data) => _crScatterSeria(
   COLOR.SPLIT_RATIO,
-  Tooltip.splitRatio,
+  tooltipSplitRatio,
   data
 );
 
@@ -60,14 +73,16 @@ const ConfigStockSlice = {
     const {
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
-      seriaType, seriaWidth,
+      seriaType,
+      seriaWidth,
       dC, dH, dL, dO,
-      minClose, maxClose,
+      minClose,
+      maxClose,
       dVc, dV,
       dATH
     } = option;
     return this.areaConfig({ spacingTop: 25 })
-      .addTooltip(Tooltip.vTdmyIf)
+      .addTooltip(tooltipValueTdmyIf)
       .addMinMax(dC, {
           minY: minClose, maxY: maxClose,
           isNotZoomToMinMax, isDrawDeltaExtrems

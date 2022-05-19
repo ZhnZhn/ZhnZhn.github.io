@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.toTdmyIf = exports.toTdmy = exports.toNumberFormat = exports.toDmy = exports.getStatus = exports.crTpId = exports.crSpan = exports.crRow = exports.crNotEmptySpan = exports.crHeader = exports.addHideHandler = void 0;
+exports.toTdmyIf = exports.toNumberFormat = exports.toDmy = exports.getStatus = exports.crTpId = exports.crSpan = exports.crRow = exports.crNotEmptySpan = exports.crHeader = exports.addHideHandler = void 0;
 
 var _ChartFn = require("../ChartFn");
 
@@ -11,7 +11,6 @@ exports.crTpId = _ChartFn.crTpId;
 exports.toNumberFormat = _ChartFn.toNumberFormat;
 exports.toNumberFormatAll = _ChartFn.toNumberFormatAll;
 exports.toDmy = _ChartFn.toDmy;
-exports.toTdmy = _ChartFn.toTdmy;
 exports.toTdmyIf = _ChartFn.toTdmyIf;
 
 var _isSupportOptions = _interopRequireDefault(require("../../utils/isSupportOptions"));

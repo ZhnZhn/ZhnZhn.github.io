@@ -9,7 +9,7 @@ var _ChartType = require("../../constants/ChartType");
 
 var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
-var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
+var _Tooltip = require("../../charts/Tooltip");
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
@@ -17,16 +17,15 @@ var _AdapterFn = require("../AdapterFn");
 
 var _crFn = require("../crFn");
 
-const C = {
-  COLOR_PLUS: '#4caf50',
-  COLOR_MINUS: '#f44336'
-};
+const COLOR_PLUS = '#4caf50',
+      COLOR_MINUS = '#f44336',
+      _assign = Object.assign;
 
-const _crZhConfig = option => {
-  const {
+const _crZhConfig = _ref => {
+  let {
     dataSource
-  } = option,
-        id = (0, _crFn.crId)();
+  } = _ref;
+  const id = (0, _crFn.crId)();
   return {
     id,
     key: id,
@@ -55,16 +54,16 @@ const _updateLabelY = (p, seriaType) => {
 const _crSeria = (arr, option) => {
   const {
     seriaType = _ChartType.CHT_SCATTER_UP
-  } = option;
-  const data = arr.map(p => {
+  } = option,
+        data = arr.map(p => {
     const date = p[0],
           v = p[1],
-          _color = v >= 0 ? C.COLOR_PLUS : C.COLOR_MINUS,
+          _color = v >= 0 ? COLOR_PLUS : COLOR_MINUS,
           _p = _ChartConfig.default.crMarkerExDividend(_color);
 
     _updateLabelY(_p, seriaType);
 
-    return Object.assign(_p, {
+    return _assign(_p, {
       x: (0, _AdapterFn.ymdToUTC)(date),
       exValue: v,
       ...p
@@ -73,7 +72,7 @@ const _crSeria = (arr, option) => {
   return {
     type: 'scatter',
     tooltip: {
-      pointFormatter: _Tooltip.default.exValue,
+      pointFormatter: _Tooltip.tooltipExValue,
       headerFormat: ''
     },
     data: data
@@ -103,10 +102,8 @@ const toScatter = {
     return config;
   },
   toSeria: (data, option, chart) => {
-    const config = toScatter.toConfig(data, option),
-          seria = _getSeriaFrom(config, option, chart);
-
-    return seria;
+    const config = toScatter.toConfig(data, option);
+    return _getSeriaFrom(config, option, chart);
   }
 };
 var _default = toScatter;

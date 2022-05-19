@@ -9,7 +9,7 @@ var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _Tooltip = _interopRequireDefault(require("../../charts/Tooltip"));
+var _Tooltip = require("../../charts/Tooltip");
 
 var _compareByFn = require("../compareByFn");
 
@@ -159,7 +159,7 @@ const _crBaseConfig = (json, option) => {
     title,
     subtitle
   } = option;
-  return (0, _ConfigBuilder.default)().areaConfig().add('chart', _conf.S_CHART).addCaption(title, subtitle).add('xAxis', _conf.X_AXIS).add('yAxis', _conf.Y_AXIS).addTooltip(_Tooltip.default.categorySimple).add('info', _crInfo(json, option)).add('zhConfig', _crZhConfig(option)).toConfig();
+  return (0, _ConfigBuilder.default)().areaConfig().add('chart', _conf.S_CHART).addCaption(title, subtitle).add('xAxis', _conf.X_AXIS).add('yAxis', _conf.Y_AXIS).addTooltip(_Tooltip.tooltipCategorySimple).add('info', _crInfo(json, option)).add('zhConfig', _crZhConfig(option)).toConfig();
 };
 
 const crChartId = _ref3 => {

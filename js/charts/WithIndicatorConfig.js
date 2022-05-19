@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _dompurify = _interopRequireDefault(require("dompurify"));
 
-var _Tooltip = _interopRequireDefault(require("./Tooltip"));
+var _Tooltip = require("./Tooltip");
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
@@ -17,18 +17,16 @@ var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
-const C = {
-  MFI: "#90ed7d",
-  MOM: '#f7a35c',
-  CLOSE_OPEN: 'rgba(144, 237, 125, 0.75)',
-  HIGH_LOW: '#2D7474',
-  MEDIAN: 'darkcyan',
-  MEAN: '#f7a35c',
-  DF_LEGEND_VOLUME_X: 84,
-  CROSS_LABEL: {
-    xDeltaCrossLabel: 4,
-    yDeltaCrossLabel: -10
-  }
+const COLOR_MFI = "#90ed7d",
+      COLOR_MOM = '#f7a35c',
+      COLOR_CLOSE_OPEN = 'rgba(144, 237, 125, 0.75)',
+      COLOR_HIGH_LOW = '#2d7474',
+      COLOR_MEDIAN = 'darkcyan',
+      COLOR_MEAN = '#f7a35c',
+      DF_LEGEND_VOLUME_X = 84,
+      CROSS_LABEL = {
+  xDeltaCrossLabel: 4,
+  yDeltaCrossLabel: -10
 };
 const _assign = Object.assign;
 
@@ -72,7 +70,7 @@ const _crTitle = function (text) {
 
 const _crLegendVolume = function (titleOrX) {
   if (titleOrX === void 0) {
-    titleOrX = C.DF_LEGEND_VOLUME_X;
+    titleOrX = DF_LEGEND_VOLUME_X;
   }
 
   const _x = typeof titleOrX === 'number' ? titleOrX : titleOrX.length * 10 + 8;
@@ -116,7 +114,7 @@ const _crLineSeria = (name, color, data) => ({
 const _crColumnSeria = option => _assign({
   type: "column",
   visible: true,
-  tooltip: _Chart.default.fTooltip(_Tooltip.default.vDmy)
+  tooltip: _Chart.default.fTooltip(_Tooltip.tooltipValueDmy)
 }, option);
 
 function _Builder(config) {
@@ -214,13 +212,13 @@ const WithIndicatorConfig = {
   crMfiConfig(id, title, data) {
     return _Builder(_crConfig({
       title: _crTitle(title),
-      chartOption: C.CROSS_LABEL
+      chartOption: CROSS_LABEL
     })).assignToSeries(0, {
       zhValueText: id,
       data: data,
       name: "MFI",
       type: "spline",
-      color: C.MFI,
+      color: COLOR_MFI,
       point: _Chart.default.fEventsMouseOver(_handleMouseOver.default)
     }).toConfig();
   },
@@ -237,7 +235,7 @@ const WithIndicatorConfig = {
     const _title = title || btTitle,
           _hasColumn = dColumn.length !== 0,
           config = _Builder(_crConfig({
-      chartOption: C.CROSS_LABEL
+      chartOption: CROSS_LABEL
     })).assign({
       title: _crTitle(_title),
       legend: _crLegendVolume(_title)
@@ -268,10 +266,10 @@ const WithIndicatorConfig = {
             brightness: 0.07
           }
         },
-        tooltip: tooltipColumn || _Chart.default.fTooltip(_Tooltip.default.volumeTdmyIf)
+        tooltip: tooltipColumn || _Chart.default.fTooltip(_Tooltip.tooltipVolumeTdmyIf)
       });
-      series.push(_crLineSeria('Median', C.MEDIAN, (0, _seriaFn.median)(dVolume)));
-      series.push(_crLineSeria('Mean', C.MEAN, (0, _seriaFn.mean)(dVolume)));
+      series.push(_crLineSeria('Median', COLOR_MEDIAN, (0, _seriaFn.median)(dVolume)));
+      series.push(_crLineSeria('Mean', COLOR_MEAN, (0, _seriaFn.mean)(dVolume)));
     }
 
     return {
@@ -295,7 +293,7 @@ const WithIndicatorConfig = {
       minPointLength: 4,
       groupPadding: 0.1,
       data: data,
-      tooltip: _Chart.default.fTooltip(_Tooltip.default.ath)
+      tooltip: _Chart.default.fTooltip(_Tooltip.tooltipAth)
     }).toConfig();
 
     return {
@@ -322,7 +320,7 @@ const WithIndicatorConfig = {
           pointPadding: 0,
           groupPadding: 0,
           turboThreshold: 20000,
-          tooltip: _Chart.default.fTooltip(_Tooltip.default.vDmy)
+          tooltip: _Chart.default.fTooltip(_Tooltip.tooltipValueDmy)
         }
       }
     }).assignTo('yAxis', {
@@ -332,7 +330,7 @@ const WithIndicatorConfig = {
     }).addColumnSeria({
       zhValueText: "MOM(1)",
       name: "MOM(1)",
-      color: C.MOM,
+      color: COLOR_MOM,
       pointPadding: 0.3,
       data: dataMom
     }).addColumnSeria({
@@ -340,7 +338,7 @@ const WithIndicatorConfig = {
       data: dataAth
     }).addColumnSeria({
       name: "Close-Open",
-      color: C.CLOSE_OPEN,
+      color: COLOR_CLOSE_OPEN,
       visible: false,
       data: dataSum
     }).toConfig();
@@ -359,17 +357,17 @@ const WithIndicatorConfig = {
       name: "H",
       visible: true,
       type: "area",
-      color: C.HIGH_LOW,
-      fillColor: C.HIGH_LOW,
+      color: COLOR_HIGH_LOW,
+      fillColor: COLOR_HIGH_LOW,
       data: highData
     }).assignToSeries(1, {
       name: "L",
       visible: true,
       type: "area",
-      color: C.HIGH_LOW,
-      fillColor: C.HIGH_LOW,
+      color: COLOR_HIGH_LOW,
+      fillColor: COLOR_HIGH_LOW,
       data: lowData,
-      tooltip: _Chart.default.fTooltip(_Tooltip.default.vTdmyIf)
+      tooltip: _Chart.default.fTooltip(_Tooltip.tooltipValueTdmyIf)
     }).toConfig();
 
     return {

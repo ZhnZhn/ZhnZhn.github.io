@@ -2,7 +2,6 @@ import {
   crHeader,
   crRow,
   crNotEmptySpan,
-  toTdmy,
   toTdmyIf
 } from './tpFn';
 
@@ -45,24 +44,12 @@ const _crAtn = ({
     </div>`;
 };
 
-const tpStock = {
-  volume: {
-    fnTemplate: _crVolume,
-    isWithValue: true
-  },
-  volumeTdmy: {
-    fnTemplate: _crVolume,
-    fnDateFormat: toTdmy,
-    isWithValue: true
-  },
-  volumeTdmyIf: {
-    fnTemplate: _crVolume,
-    fnDateFormat: toTdmyIf,
-    isWithValue: true
-  },
-  ath: {
-    fnTemplate: _crAtn
-  }
-};
+export const stockVolumeTdmyIf = {
+  fnTemplate: _crVolume,
+  fnDateFormat: toTdmyIf,
+  isWithValue: true
+}
 
-export default tpStock
+export const stockAth = {
+  fnTemplate: _crAtn
+}
